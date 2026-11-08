@@ -44,10 +44,21 @@ func _ready() -> void:
     if _mdl:
         Gear.strip_props(_mdl)
         refresh()
-    # the town's own adventurers are townsfolk to look at: no gold, no ring
-    if npc:
-        return
     add_to_group("viewer_heroes")
+    # the town's own adventurers: a silver name (viewers' heroes are gold), no ring
+    if npc:
+        for c in get_children():
+            if c is Label3D and c != _shout:
+                var lb: Label3D = c
+                lb.visibility_range_end = 0.0
+                lb.visible = true
+                lb.modulate = Color(0.84, 0.86, 0.92)
+                lb.font_size = 60
+                lb.pixel_size = 0.010
+                lb.position.y = 2.6
+                var hh := roster.get_hero(user_id)
+                lb.text = "%s\n%s" % [person_name, String(hh.get("class", "")).capitalize()]
+        return
     # viewers' heroes are what the stream watches: a gold name always shown,
     # their class under it, and a soft ring of light at their feet
     for c in get_children():
@@ -119,7 +130,7 @@ var _crowded := false
 var _compact := false
 
 func _process(delta: float) -> void:
-    if npc or not visible:
+    if not visible:
         return
     _crowd_t -= delta
     if _crowd_t > 0.0:
@@ -143,12 +154,12 @@ func _process(delta: float) -> void:
         return ka < kb if not is_equal_approx(ka, kb) else (a as Node).get_instance_id() < (b as Node).get_instance_id())
     var rank := group.find(self)
     for c in get_children():
-        if c is Label3D:
+        if c is Label3D and c != _shout:
             var lb: Label3D = c
-            var base_y := 2.3 if _compact else 2.7
+            var base_y := 2.3 if _compact else (2.6 if npc else 2.7)
             lb.position.y = base_y + (float(rank % 3) * 0.5 if crowded else 0.0)
             if not _compact:
-                lb.font_size = 56 if crowded else 72
+                lb.font_size = (48 if crowded else 60) if npc else (56 if crowded else 72)
             if crowded != _crowded:
                 var h := roster.get_hero(user_id) if roster else {}
                 if crowded or _compact or h.is_empty():

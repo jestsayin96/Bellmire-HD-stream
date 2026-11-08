@@ -8,8 +8,12 @@
 |---|---|
 | WASD or arrows | pan (hold Shift to go fast) |
 | mouse wheel | zoom in / out |
-| right-drag | rotate and tilt; Q / E turn, R / F tilt |
+| right-drag | rotate and tilt; Q / E turn, R / T tilt |
 | middle-drag | pan |
+| left-click | select anyone - townsfolk, a hero, the band, a monster: green ring + a unit frame (HP, class, level, gear, potions, oil, gold, kills, where they are) |
+| F | follow the selected one - into the scar and back out; with nothing selected, follow your own hero |
+| Esc | clear the selection / stop following |
+| N | every townsfolk name on / off (heroes always show theirs: viewers gold, the town's band silver) |
 | 1 2 3 4 5 6 7 | jump: square, scar mouth, west gate, tavern, smithy, armourer, apothecary |
 | Tab | jump into a delve that is running below (again for the next one, then back to the square) |
 | Space | pause / resume |
@@ -35,6 +39,7 @@ display_name, message)`; the test tools use a fake feed. Nothing is ever posted 
 | Command | What happens |
 |---|---|
 | `!enlist <class>` | raise a hero (knight, mage, ranger, barbarian, cleric, rogue, sage, duelist); they appear on the square |
+| `!inventory` (`!inv`, `!bag`) | what the hero carries: weapon, armour, potions, oil, gold, catches and the best one |
 | `!hero` | the hero's sheet: class, rank, level, AC, HP, to-hit, stats, saves, gear, potions, oil, gold, record |
 | `!delve` | walk to the scar mouth; the party goes in together once nobody queued is still on the road (or 45 s after the first arrival) |
 | `!fish` | walk to a dock and fish (junk to rare catches) |

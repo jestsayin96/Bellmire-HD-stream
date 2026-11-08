@@ -267,12 +267,46 @@ func _bfs(a: Vector2i, b: Vector2i) -> Array:
         cur = prev[cur]
     return out
 
-## move n toward `to` along the grid; true when within `stop` of it
+## nearest floor cell to c (rings outward), or c itself if it is floor
+func _snap_cell(c: Vector2i) -> Vector2i:
+    var cells: Dictionary = dun.info["cells"]
+    if cells.has(c):
+        return c
+    for r in range(1, 12):
+        var best := Vector2i(-9999, -9999)
+        var bd := 1e9
+        for dx in range(-r, r + 1):
+            for dz in range(-r, r + 1):
+                if absi(dx) != r and absi(dz) != r:
+                    continue
+                var n := c + Vector2i(dx, dz)
+                if cells.has(n):
+                    var dd := float(dx * dx + dz * dz)
+                    if dd < bd:
+                        bd = dd
+                        best = n
+        if best.x != -9999:
+            return best
+    return c
+
+## move n toward `to` along the grid; true when within `stop` of it. Bodies
+## only ever walk floor cells: a goal off the floor (a ring slot behind a wall,
+## a point in the void between rooms) is moved to the nearest floor cell, and
+## nobody takes a straight line across anything that is not floor.
 func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
+    var cells: Dictionary = dun.info["cells"]
+    var cb_raw := _cell_of(to)
+    var cb := _snap_cell(cb_raw)
+    if cb != cb_raw:
+        to = Vector3(_cell_world(cb).x, to.y, _cell_world(cb).z)
     if _flat(n.global_position, to) <= stop:
         return true
-    var ca := _cell_of(n.global_position)
-    var cb := _cell_of(to)
+    var ca_raw := _cell_of(n.global_position)
+    var ca := _snap_cell(ca_raw)
+    if ca != ca_raw:
+        # somehow off the floor: step straight back onto the nearest cell
+        _step(n, _cell_world(ca), spd, delta)
+        return false
     if ca == cb:
         _step(n, to, spd, delta)
         return false
@@ -282,8 +316,7 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
         _paths[n] = e
     var pts: Array = e[0]
     if pts.is_empty():
-        _step(n, to, spd, delta)
-        return false
+        return false          # no way through: wait rather than walk a wall
     var nxt: Vector3 = pts[0]
     nxt.y = n.global_position.y
     if _step(n, nxt, spd, delta) or _flat(n.global_position, nxt) < 0.4:

@@ -31,6 +31,27 @@ var delve_queue: Array = []
 ## where a hero is while the town has them on the scar road or below it; an
 ## errand command is refused rather than dragging them off (set by the town)
 var away := {}
+## the town hands chat the fishing log: name -> [{name, rarity, value}]
+var catches_of: Callable
+
+## what a hero has on them: steel, armour, potions, oil, gold, and the fish
+func inventory(user_id: String) -> String:
+    var h := roster.get_hero(user_id)
+    if h.is_empty():
+        return "No hero yet - type !enlist to join the valley."
+    var armour := String(Roster.ARMOUR[int(h["armour"])]["name"])
+    var line := "%s carries %s and wears %s  |  %d potions, %d oil, %d gold" % [
+        h["name"], roster.weapon_name(h), armour, int(h.get("potions", 0)), int(h.get("oil", 0)), int(h.get("gold", 0))]
+    if catches_of.is_valid():
+        var cs: Array = catches_of.call(String(h["name"]))
+        if not cs.is_empty():
+            var best: Dictionary = cs[0]
+            var order := ["junk", "common", "uncommon", "rare", "epic", "legendary"]
+            for x in cs:
+                if order.find(String(x.get("rarity", ""))) > order.find(String(best.get("rarity", ""))):
+                    best = x
+            line += "  |  %d catch%s, best: %s (%s)" % [cs.size(), "" if cs.size() == 1 else "es", best.get("name"), best.get("rarity")]
+    return line
 var _last := {}                # user_id -> msec of last accepted command
 var _seen_names := {}
 
@@ -64,6 +85,8 @@ func handle(user_id: String, display: String, msg: String) -> String:
     match verb:
         "enlist":   out = _enlist(user_id, display, arg)
         "hero":     out = _needs(user_id, func(): return roster.describe(user_id))
+        "inventory", "inv", "bag", "items":
+                    out = _needs(user_id, func(): return inventory(user_id))
         "delve":    out = _delve(user_id)
         "fish":     out = _needs(user_id, func():
                         wants_fish.emit(user_id)
@@ -88,7 +111,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
-        "valley":   out = "Commands: !enlist !hero !delve !fish !forge !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
+        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
         _:          return ""
 
     _last[user_id] = now

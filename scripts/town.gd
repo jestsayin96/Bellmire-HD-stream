@@ -3835,6 +3835,12 @@ func _start_guild() -> void:
     chat.wants_delve.connect(_on_delve)
     chat.wants_fish.connect(_on_fish)
     chat.wants_shop.connect(_on_shop)
+    chat.catches_of = func(who: String) -> Array:
+        var out: Array = []
+        for e in fishing_log:
+            if String(e.get("who", "")) == who:
+                out.append(e)
+        return out
 
 ## the one entry point for chat - a fake feed in tests, Twitch IRC in play
 func chat_line(user_id: String, display: String, msg: String) -> String:

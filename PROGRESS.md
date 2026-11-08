@@ -211,3 +211,18 @@
   chat as "MrE", H help. Added by town only when played (never under test tools).
 - tools/_eye_test.gd drives it with real input events: pans, zooms, jumps, chat (!enlist knight) - works.
 - `Play Jests HD.bat` in the project folder: double-click to play.
+
+
+## Cycle 44 - from Mr. E playing it (2026-11-08)
+- Wall-walking in the scar FIXED: a hero closing on a monster aimed for a ring slot (5 m out for casters
+  and archers); when that slot fell off the floor the path search found nothing and the old fallback walked
+  them straight there - through walls, over the void. Delve._go now snaps any goal to the nearest floor
+  cell and never walks a straight line across non-floor. tools/_offfloor.gd: 8 heroes, 4 floors, 0 of 378
+  samples off the floor.
+- Names: the town's band now wears silver name tags (viewers gold); N toggles every townsfolk name.
+- Select / follow (RTS camera): left-click anyone -> green ring + unit frame (WoW/RTS style, bottom
+  centre: name, class/role, level, rank, where, HP bar, gear, potions, oil, gold, kills, catches); F follows
+  (through a delve and back - the camera cuts when the body changes), F with nothing selected follows your
+  own hero, Esc clears. Tilt moved to R / T.
+- Chat: !inventory / !inv / !bag - weapon, armour, potions, oil, gold, catches (best catch by rarity).
+- Tests: tools/_select_test.gd (real input), tools/_inv_test.gd. Renders: renders/cycles/20261108_1232_select.

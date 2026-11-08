@@ -226,3 +226,15 @@
   own hero, Esc clears. Tilt moved to R / T.
 - Chat: !inventory / !inv / !bag - weapon, armour, potions, oil, gold, catches (best catch by rarity).
 - Tests: tools/_select_test.gd (real input), tools/_inv_test.gd. Renders: renders/cycles/20261108_1232_select.
+
+
+## Cycle 45 - moved to Godot 4.7.2 (2026-11-08)
+- Saved the last 4.6.1 state as git tag `godot-4.6.1-stable` (pushed); worked on branch `godot-4.7`.
+- Full re-import under 4.7.2 (old cache kept as .godot_46_backup/): 53 s, 0 errors, 0 warnings. 522 .import
+  files gained 4.7's new default options (mesh_library/use_node_names_as_mesh_names, array_mesh/
+  deduplicate_surfaces, gltf/texture_map_mode) - additive only. No script changes needed.
+- Checks on 4.7.2, all pass, 0 script errors: delve (normal + dark), off-floor 0/396, raids driven off,
+  !inventory, roster save/load identical, 10-day soak (52 souls, level 4, band delving).
+- FPS 1920x1080, dusk through night with a raid: min 136, avg 168 (4.6.1: min 136, avg 146).
+- Renders (noon/dusk/night, select/follow) look the same as 4.6.1: renders/cycles/20261108_1257_godot47.
+- Play Jests HD.bat and RUNNING.md now point at D:\1game\Godot_v4.7.2-stable_win64.exe.

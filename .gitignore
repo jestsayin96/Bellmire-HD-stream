@@ -9,3 +9,4 @@ renders/*.log
 *.tmp
 Thumbs.db
 desktop.ini
+.godot_46_backup/

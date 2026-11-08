@@ -21,7 +21,7 @@
 | Enter | type a chat command as yourself ("MrE"), e.g. `!enlist knight`, `!delve`, `!fish`; Esc closes |
 | H | hide / show the key help |
 
-1. Godot 4.6.1 lives at `C:\Users\morta\village_assets\godot\Godot_v4.6.1-stable_win64.exe`
+1. Godot **4.7.2** lives at `D:\1game\Godot_v4.7.2-stable_win64.exe`
    (the `_console.exe` beside it prints the log to a console window).
 2. In Godot: **Import** -> pick `C:\hd adventure\jests-hd-medieval-adventure\project.godot` -> **Edit**.
    The first open imports every asset; give it a minute.
@@ -29,7 +29,7 @@
 
 From a terminal, without the editor:
 ```
-"C:\Users\morta\village_assets\godot\Godot_v4.6.1-stable_win64_console.exe" --path "C:\hd adventure\jests-hd-medieval-adventure"
+"D:\1game\Godot_v4.7.2-stable_win64_console.exe" --path "C:\hd adventure\jests-hd-medieval-adventure"
 ```
 
 ## Chat
@@ -76,7 +76,7 @@ Delete the file to start the valley's roll fresh.
 ## Test tools (`tools/*.gd`)
 Run any of them with the console exe:
 ```
-"C:\Users\morta\village_assets\godot\Godot_v4.6.1-stable_win64_console.exe" --path "C:\hd adventure\jests-hd-medieval-adventure" --script res://tools/<name>.gd
+"D:\1game\Godot_v4.7.2-stable_win64_console.exe" --path "C:\hd adventure\jests-hd-medieval-adventure" --script res://tools/<name>.gd
 ```
 Add `--headless --fixed-fps 60` for the checks that need no window. Pictures land in
 `%APPDATA%\Godot\app_userdata\Jests HD Medieval Adventure\`; finished renders are filed in `renders\cycles\`.
@@ -111,3 +111,8 @@ Logs: `PROGRESS.md` (every cycle), `PLAN.md` (roadmap), `docs/ASSETS.md` (every 
 Stable. The full 10-day soak (`_stream_soak.gd`) runs with no script errors: viewers enlist, fish, forge
 and delve; the town band delves; raids, caravans, settlers, the clock, saves. Picks up Thursday.
 Next up when work restarts: the new RTS/WoW-style interface (see docs/PLAN.md).
+
+## Godot version
+Since 2026-11-08 the project runs on **Godot 4.7.2** (`D:\1game`). The last 4.6.1 version is saved on GitHub
+as the tag `godot-4.6.1-stable` - to go back: `git checkout godot-4.6.1-stable` and open it in 4.6.1.
+The old 4.6.1 import cache was kept as `.godot_46_backup/` (not in git) and can be deleted once you are happy.

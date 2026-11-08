@@ -314,9 +314,17 @@ func _ready() -> void:
     _collect_road_segs()
     if _north_from != Vector3.ZERO:
         _road_segs.append([_north_from, _scar, 3.6])
+    # HD: the scar road and gate lanes are only known now - last sweep so no
+    # house is left standing on any of them
+    # (the south road to the bridge is laid later, in _build: count it now)
+    _road_segs.append([Vector3(0, 0, 60.0), Vector3(0, 0, river_z_fast(0.0)), 3.4])
+    plots = plots.filter(func(pl) -> bool: return pl.has("landmark") or not _rect_on_road(_rect(pl)))
+    _road_segs.pop_back()
     _pick_shops()
     _pick_towers()
     _build()
+    if OS.get_environment("JESTS_NO_NAV") != "1":     # test hook: old street routing
+        _bake_nav()
     _spawn_people()
     _spawn_animals()
     _start_guild()
@@ -807,6 +815,8 @@ func _build() -> void:
     gsm.set_shader_parameter("grass_nrm", load(T + "T_Meadow_Normal.jpg"))
     gsm.set_shader_parameter("scar_c", _scar)
     gsm.set_shader_parameter("scar_r", SCAR_R)
+    gsm.set_shader_parameter("town_mask", _town_mask())
+    gsm.set_shader_parameter("mask_half", MASK_HALF)
     gnd.material_override = gsm
     add_child(gnd)
 
@@ -903,6 +913,7 @@ func _build() -> void:
     _build_outworks()
     _build_docks()
     _dress_shops()
+    _dress_doors()
     _build_towers()
     _street_furniture()
     _dress_streets()
@@ -930,7 +941,73 @@ func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,
     if scale_f != 1.0:
         n.scale = Vector3.ONE * scale_f
     add_child(n)
+    _solid_of(n)
     return true
+
+## ---- HD walking: every solid piece of furniture leaves a footprint that the
+## navigation mesh carves out, so nobody walks through tables, stalls, benches
+var _solid_rects: Array = []
+var _wall_solid: Array = []
+var nav: TownNav = null
+
+func _solid_of(n: Node3D) -> void:
+    var box := AABB()
+    var first := true
+    var inv := n.global_transform.affine_inverse()
+    var st: Array = [n]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var ab: AABB = (inv * (c as MeshInstance3D).global_transform) * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            st.append(g)
+    if first:
+        return
+    var sc := n.scale.x
+    var he := Vector2(box.size.x, box.size.z) * 0.5 * sc
+    if box.size.y * sc < 0.35 or maxf(he.x, he.y) < 0.2:
+        return                  # rugs, mugs and flat things are walked over
+    var yaw := n.rotation.y
+    var ax := Vector2(cos(yaw), -sin(yaw))
+    var az := Vector2(sin(yaw), cos(yaw))
+    var cen := box.get_center() * sc
+    var c2 := Vector2(n.position.x, n.position.z) + ax * cen.x + az * cen.z
+    _solid_rects.append([c2, ax, az, he + Vector2(0.1, 0.1)])
+
+func _bake_nav() -> void:
+    var rects: Array = _solid_rects.duplicate()
+    for plot in plots:
+        var sh: String = String(plot.get("shape", "a"))
+        if not _house_box.has(sh):
+            continue
+        var he: Vector2 = (_house_box[sh][0] as Vector2) * 1.04 + Vector2(0.15, 0.15)
+        var off: Vector2 = _house_box[sh][1]
+        var yaw: float = float(plot["yaw"])
+        var ax := Vector2(cos(yaw), -sin(yaw))
+        var az := Vector2(sin(yaw), cos(yaw))
+        var pp: Vector3 = plot["pos"]
+        rects.append([Vector2(pp.x, pp.z) + ax * off.x + az * off.y, ax, az, he])
+    var solids: Array = []
+    for o in _objs:
+        if float(o[1]) <= 2.65:
+            solids.append([o[0], float(o[1]) * 0.75])
+    var extent := maxf(260.0, Vector2(_scar.x, _scar.z).length() + 40.0)
+    var band: Array = []
+    var x := -extent
+    while x < extent:
+        var x2 := x + 3.0
+        if absf(x) > 6.0 and absf(x2) > 6.0:         # the bridge stays open
+            band.append([Vector3(x, 0, river_z_fast(x)), Vector3(x2, 0, river_z_fast(x2)), RIVER_W + 0.5])
+        x = x2
+    nav = TownNav.new()
+    add_child(nav)
+    nav.setup(self, extent, solids, rects, _wall_solid, band)
+
+## river centreline z at x, straight from the meander formula (river_z searches)
+func river_z_fast(x: float) -> float:
+    return 125.0 + 9.0 * sin(x * 0.017) + 5.0 * sin(x * 0.045 + 1.3)
 
 ## The square is LAID OUT, not scattered: a well in the middle, stalls on a
 ## ring facing it, set between the streets that run into the square so no
@@ -1234,6 +1311,10 @@ func _build_wall() -> void:
                     break
         pts.append(p)
         kind.append(k)
+    for i in range(n):
+        if kind[i] == 0:
+            var tg := Vector3(-ax * sin(TAU * float(i) / float(n)), 0.0, az * cos(TAU * float(i) / float(n))).normalized()
+            _wall_solid.append([pts[i], tg])
     var stone := _stone()
     var blocks := MultiMesh.new()
     blocks.transform_format = MultiMesh.TRANSFORM_3D
@@ -1429,9 +1510,18 @@ func _resolve_overlaps() -> void:
     var kept: Array = []
     var rects: Array = []
     var dropped := 0
+    # HD: a terrace runs ALONG its street and a back rank sits behind it, but
+    # the hex streets zig-zag, so either could land on ANOTHER street - houses
+    # standing in the road. Test every house footprint against the paving.
+    _road_segs.clear()
+    _collect_road_segs()
     for plot in order:
         var r := _rect(plot)
         var hit := false
+        if not plot.has("landmark") and _rect_on_road(r):
+            dropped += 1
+            _road_dropped += 1
+            continue
         for o in rects:
             if _rects_overlap(r, o):
                 hit = true
@@ -1443,6 +1533,22 @@ func _resolve_overlaps() -> void:
         rects.append(r)
     plots = kept
     _overlap_dropped = dropped
+    _road_segs.clear()      # rebuilt for real once the gate lanes are cut
+
+var _road_dropped := 0
+
+## any part of a footprint (5x5 samples over the rect) on or within 0.4 m of a road
+func _rect_on_road(r: Array) -> bool:
+    var c: Vector2 = r[0]
+    var ax: Vector2 = r[1]
+    var az: Vector2 = r[2]
+    var he: Vector2 = r[3]
+    for i in range(5):
+        for j in range(5):
+            var q := c + ax * he.x * (float(i) / 2.0 - 1.0) + az * he.y * (float(j) / 2.0 - 1.0)
+            if road_dist(Vector3(q.x, 0.0, q.y)) < 0.4:
+                return true
+    return false
 
 ## ---------------------------------------------------------------- landmarks
 func _depth_of(shape: String) -> float:
@@ -3126,6 +3232,7 @@ func _yard(nm: String, y: Vector3, side: Vector3, f: Vector3, x: float, z: float
     if dir == MKPROPS:
         _dress(n, "red")
     _props_made += 1
+    _solid_of(n)
     return n
 
 ## top of a placed model, so things can sit ON a table instead of in it
@@ -3893,6 +4000,9 @@ func _on_fish(uid: String) -> void:
         b.position = Vector3(end.x + 1.0, DOCK_Y + 0.12, end.z - fw.z * 1.5)
         b.face_yaw = atan2(fw.x, fw.z)
         b.rotation.y = b.face_yaw
+        for old in b.get_children():
+            if old is Angler:
+                old.queue_free()          # one rod per hero
         var ang := Angler.new()
         ang.who = b.person_name
         ang.water_y = WATER_Y
@@ -3994,6 +4104,16 @@ func _nearest_road(p: Vector3) -> Vector2i:
 ## (breadth-first over road hexes), off the road to the destination. Walkers
 ## keep to the right of the centreline so two-way traffic does not collide.
 func route(from: Vector3, to: Vector3) -> Array:
+    if nav and nav.ready_ok:
+        var pp := nav.path(from, to)
+        if pp.size() > 0:
+            var out: Array = []
+            for i in range(1, pp.size()):
+                out.append(pp[i])
+            # only finish on the exact spot if it is walkable ground
+            if nav.closest(to).distance_to(Vector3(to.x, 0, to.z)) < 0.6:
+                out.append(to)
+            return out
     var a := _nearest_road(from)
     var b := _nearest_road(to)
     if a.x < 0 or b.x < 0:
@@ -4235,3 +4355,78 @@ func bury(v: Townsfolk, line: String) -> void:
 
 func npc_name() -> String:
     return "%s %s" % [FIRST[randi() % FIRST.size()], LAST[randi() % LAST.size()]]
+
+## ---- HD: trodden ground only where feet go. The whole town used to be one
+## dark dirt disc, so every block read as a void with houses dropped on it.
+## This mask (red = trodden) is painted from the streets and the house plots:
+## the street verges and each house's own footprint and doorstep are dirt,
+## the middle of every block is grass - kitchen gardens and greens.
+const MASK_HALF := 200.0
+const MASK_N := 400
+func _town_mask() -> ImageTexture:
+    var img := Image.create(MASK_N, MASK_N, false, Image.FORMAT_L8)
+    img.fill(Color(0, 0, 0))
+    var px := float(MASK_N) / (MASK_HALF * 2.0)
+    var paint := func(cx: float, cz: float, rad: float, d: Callable) -> void:
+        var i0 := clampi(int((cx - rad + MASK_HALF) * px), 0, MASK_N - 1)
+        var i1 := clampi(int((cx + rad + MASK_HALF) * px), 0, MASK_N - 1)
+        var j0 := clampi(int((cz - rad + MASK_HALF) * px), 0, MASK_N - 1)
+        var j1 := clampi(int((cz + rad + MASK_HALF) * px), 0, MASK_N - 1)
+        for j in range(j0, j1 + 1):
+            for i in range(i0, i1 + 1):
+                var w := Vector3((float(i) + 0.5) / px - MASK_HALF, 0, (float(j) + 0.5) / px - MASK_HALF)
+                var v: float = d.call(w)
+                if v > img.get_pixel(i, j).r:
+                    img.set_pixel(i, j, Color(v, v, v))
+    for sg in _road_segs:
+        var a: Vector3 = sg[0]
+        var b2: Vector3 = sg[1]
+        var hw: float = float(sg[2])
+        var fall := 4.5
+        paint.call((a.x + b2.x) * 0.5, (a.z + b2.z) * 0.5, a.distance_to(b2) * 0.5 + hw + fall,
+            func(w: Vector3) -> float:
+                return 1.0 - clampf((_seg_dist(w, a, b2) - hw) / fall, 0.0, 1.0))
+    for plot in plots:
+        var r: Array = _rect(plot)
+        var c: Vector2 = r[0]
+        var ax: Vector2 = r[1]
+        var az: Vector2 = r[2]
+        var he: Vector2 = r[3]
+        paint.call(c.x, c.y, he.length() + 3.0,
+            func(w: Vector3) -> float:
+                var d := Vector2(w.x, w.z) - c
+                var ox := maxf(absf(d.dot(ax)) - he.x, 0.0)
+                var oz := maxf(absf(d.dot(az)) - he.y, 0.0)
+                return 1.0 - clampf(Vector2(ox, oz).length() / 2.5, 0.0, 1.0))
+    if _market_pos != Vector3.ZERO:
+        paint.call(_market_pos.x, _market_pos.z, 26.0,
+            func(w: Vector3) -> float:
+                return 1.0 - clampf((Vector2(w.x - _market_pos.x, w.z - _market_pos.z).length() - 20.0) / 5.0, 0.0, 1.0))
+    return ImageTexture.create_from_image(img)
+
+## ---- HD: lived-in doorways (Fantasy Props MegaKit). A lantern on the wall
+## beside every street door, and most houses keep something by the step - a
+## barrel, a bucket, a crate of apples, a bench to sit on of an evening. All
+## of it is solid: the navmesh walks people round it.
+const DOOR_BITS := ["Barrel", "Bucket_Wooden_1", "FarmCrate_Apple", "FarmCrate_Carrot",
+    "Crate_Wooden", "Bench", "Pot_1", "Barrel_Apples", "Bucket_Metal", "FarmCrate_Empty"]
+var _doors_dressed := 0
+func _dress_doors() -> void:
+    for plot in plots:
+        if plot.has("landmark") or plot.has("shop") or not plot.has("door"):
+            continue
+        var d: Vector3 = plot["door"]
+        var f := _fwd(plot)
+        var side := Vector3(f.z, 0.0, -f.x)
+        var rng := RandomNumberGenerator.new()
+        rng.seed = hash("door:%d:%d" % [int(d.x * 10.0), int(d.z * 10.0)])
+        var hand := 1.0 if rng.randf() < 0.5 else -1.0
+        var lan := _yard("Lantern_Wall", d, side, f, 1.15 * hand, -0.45, PI)
+        if lan:
+            lan.position.y += 2.15
+        if rng.randf() < 0.75:
+            var nm: String = DOOR_BITS[rng.randi() % DOOR_BITS.size()]
+            var yo := 0.0 if nm == "Bench" else rng.randf_range(-0.6, 0.6)
+            _yard(nm, d, side, f, -1.9 * hand, 0.15, yo + (PI * 0.5 if nm == "Bench" else 0.0))
+        _doors_dressed += 1
+

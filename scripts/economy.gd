@@ -335,6 +335,7 @@ func _hunger() -> void:
     var v: Townsfolk = pool[randi() % pool.size()]
     var hp := float(v.get_meta("hp", 28.0)) - 14.0
     v.set_meta("hp", hp)
+    HealthBar3D.on(v, 2.05, false).set_hp(hp, 28.0, false)
     if hp <= 0.0:
         renown = max(0, renown - 2)
         town.call("bury", v, "%s has starved." % v.person_name)

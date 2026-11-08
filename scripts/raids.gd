@@ -189,6 +189,13 @@ func _process(delta: float) -> void:
         _slow = 0.5
         _targets(defs)
         _flee()
+    # health bars on everyone in the fight
+    for rr in raiders:
+        var rn: Node3D = rr["node"]
+        HealthBar3D.on(rn, (rn as Monster)._height() + 0.25 if rn is Monster else 2.05, true).set_hp(float(rr["hp"]), float(rr["max"]), rr["target"] != null)
+    for dd in defs:
+        var st0: Dictionary = _fighters[dd]
+        HealthBar3D.on(dd, 2.05, false).set_hp(float(st0["hp"]), float(st0["max"]), st0["target"] != null)
     # defenders
     for d in defs:
         var st: Dictionary = _fighters[d]
@@ -305,6 +312,7 @@ func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
     (n as Townsfolk).stay = true
     var who := (n as Townsfolk).person_name
     if n is HeroBody:
+        (n as HeroBody).fallen = true
         var r2: Roster = (n as HeroBody).roster
         var line := r2.kill((n as HeroBody).user_id, killer, 0, 0)
         if line != "":

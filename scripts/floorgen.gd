@@ -26,7 +26,7 @@ const THEMES := {
     "barracks": {
         "name": "a barrack room",
         "floors": ["floor_tile_large", "floor_tile_large", "floor_wood_large"],
-        "accents": ["floor_tile_small_broken_A", "floor_tile_small_decorated"],
+        "accents": ["floor_tile_small_broken_A", "floor_tile_small_broken_B"],
         "light": Color(1.0, 0.60, 0.26),
         "banners": ["banner_patternA_red", "banner_patternB_red", "banner_shield_red"],
         "clusters": ["bunk", "armsrack", "footlocker", "mess_small"],
@@ -34,7 +34,7 @@ const THEMES := {
     "mess": {
         "name": "a mess hall",
         "floors": ["floor_wood_large", "floor_wood_large", "floor_tile_large"],
-        "accents": ["floor_wood_large_dark", "floor_tile_small_decorated"],
+        "accents": ["floor_wood_large_dark", "floor_wood_small_dark"],
         "light": Color(1.0, 0.68, 0.34),
         "banners": ["banner_patternC_yellow", "banner_triple_yellow", "banner_brown"],
         "clusters": ["feast", "feast", "kegs", "shelf_stock"],
@@ -58,15 +58,15 @@ const THEMES := {
     },
     "treasury": {
         "name": "a treasury",
-        "floors": ["floor_tile_large", "floor_tile_small_decorated", "floor_tile_large"],
-        "accents": ["floor_tile_small_decorated"],
+        "floors": ["floor_tile_large", "floor_tile_large", "floor_tile_small"],
+        "accents": ["floor_tile_small_broken_A"],
         "light": Color(1.0, 0.82, 0.42),
         "banners": ["banner_patternA_yellow", "banner_triple_yellow", "banner_shield_yellow"],
         "clusters": ["hoard", "hoard", "strongbox", "shelf_stock"],
     },
     "shrine": {
         "name": "a shrine",
-        "floors": ["floor_tile_small_decorated", "floor_tile_large", "floor_tile_large"],
+        "floors": ["floor_tile_large", "floor_tile_large", "floor_tile_small"],
         "accents": ["floor_tile_small_weeds_B", "floor_tile_small_broken_B"],
         "light": Color(0.96, 0.86, 0.62),
         "banners": ["banner_patternC_white", "banner_triple_white", "banner_white"],
@@ -169,21 +169,21 @@ const BIOMES := {
     },
     "confection": {
         "name": "the confection",
-        "floors": ["floor_tile_large", "floor_tile_large", "floor_tile_small_decorated"],
-        "accents": ["floor_tile_small_decorated", "floor_tile_small"],
+        "floors": ["floor_tile_large", "floor_tile_large", "floor_tile_small"],
+        "accents": ["floor_tile_small", "floor_tile_small_broken_A"],
         "light": Color(1.0, 0.82, 0.92),
         "floor_tint": Color(1.0, 0.76, 0.86),
         "wall_tint": Color(0.86, 0.94, 1.0),
         "banners": ["banner_patternC_white", "banner_patternA_white"],
         "clusters": ["feast", "feast", "kegs"],
-        "scatter": [["hex:decoration/nature/trees_A_small", 0.12, 0.6, 1.0],
-                    ["barrel_small", 0.10, 0.8, 1.2]],
+        "scatter": [["barrel_small", 0.10, 0.8, 1.2],
+                    ["box_small", 0.06, 0.8, 1.1]],
         "prop_tint": Color(1.0, 0.72, 0.84),
     },
     "keep": {
         "name": "the inner keep",
         "floors": ["floor_tile_large", "floor_tile_large", "floor_wood_large"],
-        "accents": ["floor_tile_small_decorated", "floor_tile_small_corner"],
+        "accents": ["floor_tile_small_broken_B", "floor_tile_small_corner"],
         "light": Color(1.0, 0.80, 0.46),
         "floor_tint": Color(0.94, 0.92, 0.88),
         "wall_tint": Color(0.96, 0.94, 0.90),
@@ -292,9 +292,23 @@ static func _put(parent: Node3D, asset: String, pos: Vector3, rz := 0.0,
         Rig.tint(n, tint)
     return n
 
+## ---- HD: everything that stands on the floor is an OBSTACLE the party and
+## the creatures walk around (they used to walk straight through tables).
+## [floor-local position, radius]; returned with the floor as info.obstacles.
+static var _obs: Array = []
+const CLUSTER_R := {"lampstand": 0.9, "hoard": 1.5, "strongbox": 1.3, "cell": 2.0, "feast": 1.9,
+                    "collapse": 1.8, "overgrowth": 1.8, "bunk": 1.6, "workbench": 1.8}
+
+static func _free_at(at: Vector3, r: float) -> bool:
+    for o in _obs:
+        if Vector2(at.x - (o[0] as Vector3).x, at.z - (o[0] as Vector3).z).length() < r + float(o[1]) + 0.4:
+            return false
+    return true
+
 static func _cluster(root: Node3D, key: String, at: Vector3, facing: float) -> void:
     if not CLUSTERS.has(key):
         return
+    _obs.append([at, float(CLUSTER_R.get(key, 1.5))])
     var c := cos(deg_to_rad(facing))
     var s := sin(deg_to_rad(facing))
     for item: Array in CLUSTERS[key]:
@@ -674,6 +688,15 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                 continue
             if absi(c.x - int(w / 2)) <= 1 and absi(c.y - int(h / 2)) <= 1:
                 continue
+            # HD: only deep inside a room - a pool in a corridor walled the
+            # passage shut, and one by a doorway pinched it to nothing
+            var interior := true
+            for dx in range(-1, 2):
+                for dy in range(-1, 2):
+                    if not cells.has(c + Vector2i(dx, dy)) or pool_cells.has(c + Vector2i(dx, dy)):
+                        interior = false
+            if not interior:
+                continue
             pool_cells[c] = true
             made += 1
 
@@ -691,7 +714,14 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             tile = second
         elif layout == 1 and c.y < int(h / 3):
             tile = second
-        _put(root, tile, pos, float(rng.randi() % 4) * 90.0, 1.0, floor_tint)
+        if tile.contains("_small"):
+            # HD: a "small" tile is a quarter of a cell - lay four, or three
+            # quarters of the floor is bare ground (the old patchy look)
+            for qx in [-1.0, 1.0]:
+                for qz in [-1.0, 1.0]:
+                    _put(root, tile, pos + Vector3(qx * G * 0.25, 0, qz * G * 0.25), float(rng.randi() % 4) * 90.0, 1.0, floor_tint)
+        else:
+            _put(root, tile, pos, float(rng.randi() % 4) * 90.0, 1.0, floor_tint)
         if rng.randf() < 0.16 and acc.size() > 0 and tile == main:
             _put(root, String(acc[rng.randi() % acc.size()]),
                  pos + Vector3(rng.randf_range(-1.1, 1.1), 0.02, rng.randf_range(-1.1, 1.1)),
@@ -703,16 +733,10 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     # occupied cells at the biome's own density.
     var scatter: Array = T.get("scatter", [])
     var prop_tint: Color = T.get("prop_tint", Color(1, 1, 1))
-    if not scatter.is_empty():
-        for c: Vector2i in cells:
-            for spec: Array in scatter:
-                if rng.randf() >= float(spec[1]):
-                    continue
-                var at2: Vector3 = cell_pos.call(c.x, c.y) + Vector3(
-                    rng.randf_range(-1.3, 1.3), 0.0, rng.randf_range(-1.3, 1.3))
-                _put(root, String(spec[0]), at2,
-                     rng.randf_range(0.0, 360.0),
-                     rng.randf_range(float(spec[2]), float(spec[3])), prop_tint)
+    # HD: the growth is placed LAST (below, before the floor is returned) and
+    # only against room walls - never in corridors, the middle of a room, the
+    # stairs or on top of furniture, which is where it used to land.
+    _obs.clear()
 
     # ---- walls follow the SHAPE, not a rectangle: a wall goes wherever an
     # occupied cell meets empty space, so an L-room or a cross walls itself
@@ -720,7 +744,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var wall_bag := ["wall", "wall", "wall", "wall_pillar", "wall_cracked",
                      "wall_shelves", "wall_window_closed"]
     if floor_no >= 5:
-        wall_bag.append("wall_broken")
+        wall_bag.append("wall_cracked")   # HD: wall_broken opened a see-through hole onto the void
         wall_bag.append("wall_archedwindow_gated")
     if theme_key == "prison":
         wall_bag.append("wall_gated")
@@ -850,10 +874,11 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             pm.size = Vector2(G * 1.02, G * 1.02)
             mi.mesh = pm
             var sm := ShaderMaterial.new()
-            sm.shader = load("res://lava.gdshader")
+            sm.shader = load("res://assets/shaders/lava.gdshader")   # HD: the old root path loaded nothing - a black square where a lava pit should be
             mi.material_override = sm
             mi.position = at + Vector3(0, -0.38, 0)
             root.add_child(mi)
+            _obs.append([at, G * 0.5])      # nobody strolls across molten rock
             var gl := OmniLight3D.new()
             gl.light_color = Color(1.0, 0.42, 0.12)
             gl.light_energy = 4.2
@@ -934,10 +959,24 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     # look untried however good the individual clusters were.
     var n_clusters: int = mini(edge_cells.size(),
         clampi(int(float(cells.size()) / 6.5), 5, 15) + (2 if boss else 0))
-    for i in range(n_clusters):
-        var at: Vector3 = cell_pos.call(edge_cells[i].x, edge_cells[i].y)
+    var placed := 0
+    for i in range(edge_cells.size()):
+        if placed >= n_clusters:
+            break
+        var ec: Vector2i = edge_cells[i]
+        if _is_corridor(cells, ec):
+            continue
+        var at: Vector3 = cell_pos.call(ec.x, ec.y)
+        # pull the cluster toward its wall so the room's middle stays open
+        for sd3: Array in sides:
+            if not cells.has(ec + (sd3[0] as Vector2i)):
+                at += (sd3[2] as Vector3).normalized() * G * 0.18
+        var key := String(cl[rng.randi() % cl.size()])
+        if not _free_at(at, float(CLUSTER_R.get(key, 1.5))) or at.distance_to(entry) < G * 1.2 or at.distance_to(exit_p) < G * 1.2:
+            continue
         var facing := rad_to_deg(atan2(-at.x, -at.z)) + rng.randf_range(-25.0, 25.0)
-        _cluster(root, String(cl[rng.randi() % cl.size()]), at, facing)
+        _cluster(root, key, at, facing)
+        placed += 1
 
     # A few loose things away from the walls so the middle is not bare floor.
     # Kept sparse and off-centre: the party still needs room to fight.
@@ -957,11 +996,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     for i in range(n_loose):
         var ip: Vector3 = cell_pos.call(inner[i].x, inner[i].y)
         _put(root, String(ac[rng.randi() % ac.size()]), ip)
-        if rng.randf() < 0.45:
-            _cluster(root, String(cl[rng.randi() % cl.size()]),
-                     ip + Vector3(rng.randf_range(-1.2, 1.2), 0,
-                                  rng.randf_range(-1.2, 1.2)),
-                     rng.randf_range(0.0, 360.0))
+        # (HD: no furniture clusters dropped in the middle - the party fights there)
 
     # banners near the far end
     var bn: Array = T["banners"]
@@ -1014,7 +1049,30 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     if not spawns.is_empty() and not boss:
         spawns[0] = lamp + Vector3(G * 0.35, 0, G * 0.2)
 
-    return {"root": root, "entry": origin + entry, "exit": origin + exit_p,
+    # ---- the biome's growth, against the walls of rooms only
+    if not scatter.is_empty():
+        for c: Vector2i in cells:
+            if _is_corridor(cells, c):
+                continue
+            var wall_dir := Vector3.ZERO
+            for sd4: Array in sides:
+                if not cells.has(c + (sd4[0] as Vector2i)):
+                    wall_dir += (sd4[2] as Vector3).normalized()
+            if wall_dir == Vector3.ZERO:
+                continue                      # an inner cell: leave it open
+            for spec: Array in scatter:
+                if rng.randf() >= float(spec[1]) * 0.6:
+                    continue
+                var sc2 := rng.randf_range(float(spec[2]), float(spec[3]))
+                var at2: Vector3 = cell_pos.call(c.x, c.y) + wall_dir.normalized() * G * 0.3 + Vector3(
+                    rng.randf_range(-0.5, 0.5), 0.0, rng.randf_range(-0.5, 0.5))
+                var r2 := 0.75 * sc2
+                if not _free_at(at2, r2) or at2.distance_to(entry) < G or at2.distance_to(exit_p) < G or at2.distance_to(lamp) < G:
+                    continue
+                _put(root, String(spec[0]), at2, rng.randf_range(0.0, 360.0), sc2, prop_tint)
+                _obs.append([at2, r2])
+
+    return {"root": root, "entry": origin + entry, "exit": origin + exit_p, "obstacles": _obs.duplicate(),
             "spawns": spawns, "origin": origin, "boss": boss,
             "theme": theme_key, "theme_name": String(T["name"]), "shape": shape,
             # The occupancy grid goes home with the floor so the party can be
@@ -1027,3 +1085,15 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             "origin_key": origin_key,
             "origin_name": String(ORIGINS[origin_key]["of"]),
             "origin_tell": String(ORIGINS[origin_key]["tell"])}
+
+## a corridor cell: open on exactly two OPPOSITE sides (or a dead end)
+static func _is_corridor(cells: Dictionary, c: Vector2i) -> bool:
+    var n := 0
+    for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+        if cells.has(c + d):
+            n += 1
+    if n <= 1:
+        return true
+    if n == 2:
+        return (cells.has(c + Vector2i(1, 0)) and cells.has(c + Vector2i(-1, 0))) or (cells.has(c + Vector2i(0, 1)) and cells.has(c + Vector2i(0, -1)))
+    return false

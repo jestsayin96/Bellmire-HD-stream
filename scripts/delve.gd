@@ -186,6 +186,27 @@ func _check_lamp() -> void:
         _light_check()
         return
 
+## health bars: everyone in a fight, and anyone not at full health
+func _bars(foes: Array) -> void:
+    for m in party:
+        var b = m["body"]
+        if not is_instance_valid(b):
+            continue
+        var near := false
+        for f in foes:
+            if _flat((f as Node3D).global_position, (b as Node3D).global_position) < 10.0:
+                near = true
+                break
+        HealthBar3D.on(b, 2.05, false).set_hp(float(m["hp"]), float(m["max"]), near)
+    for f in foes:
+        var mo: Monster = f
+        var near2 := false
+        for m2 in _alive():
+            if _flat((m2["body"] as Node3D).global_position, mo.global_position) < 10.0:
+                near2 = true
+                break
+        HealthBar3D.on(mo, mo._height() + 0.25, true).set_hp(mo.hp, mo.max_hp, near2)
+
 ## the dark is shown, not just rolled: the floor's own lights sink to embers
 func _apply_light() -> void:
     if dun == null:
@@ -319,7 +340,12 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
         return false          # no way through: wait rather than walk a wall
     var nxt: Vector3 = pts[0]
     nxt.y = n.global_position.y
-    if _step(n, nxt, spd, delta) or _flat(n.global_position, nxt) < 0.4:
+    var before := _flat(n.global_position, nxt)
+    var arrived := _step(n, nxt, spd, delta)
+    var after := _flat(n.global_position, nxt)
+    # a waypoint inside a table can never be reached: count it as reached
+    # once the body can get no closer (it is pressed against the furniture)
+    if arrived or after < 0.4 or (after < 3.0 and before - after < spd * delta * 0.2):
         pts.remove_at(0)
     return false
 
@@ -327,15 +353,45 @@ func _flat(a: Vector3, b: Vector3) -> float:
     return Vector2(a.x - b.x, a.z - b.z).length()
 
 func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
-    var d := to - n.global_position
-    d.y = 0.0
+    var d := Vector3(to.x - n.global_position.x, 0, to.z - n.global_position.z)
     if d.length() < 0.05:
         return true
-    var p := n.global_position + d.normalized() * minf(d.length(), spd * delta)
+    var p := n.global_position + d.normalized() * minf(spd * delta, d.length())
+    # bodies go AROUND what stands on the floor: pushed out of every table,
+    # barrel, pillar and tree they would walk into - so they slide past it
+    if dun and dun.info.has("obstacles"):
+        var o0 := dun.global_position
+        var cells: Dictionary = dun.info["cells"]
+        var step_len := minf(spd * delta, d.length())
+        for o in dun.info["obstacles"]:
+            var c: Vector3 = (o[0] as Vector3) + o0
+            var need := float(o[1]) + 0.45
+            var dd := Vector2(p.x - c.x, p.z - c.z)
+            if dd.length() >= need:
+                continue
+            var dir := dd.normalized() if dd.length() > 0.01 else Vector2(d.z, -d.x).normalized()
+            var pushed := Vector3(c.x + dir.x * need, p.y, c.z + dir.y * need)
+            if cells.has(_cell_of(pushed)):
+                p = pushed
+                continue
+            # pushing out would cross a wall: slide round the obstacle on the
+            # floor side instead (whichever way round heads toward the goal)
+            var tan := Vector2(-dir.y, dir.x)
+            if tan.dot(Vector2(d.x, d.z)) < 0.0:
+                tan = -tan
+            var slide := n.global_position + Vector3(tan.x, 0, tan.y) * step_len
+            if cells.has(_cell_of(slide)):
+                p = slide
+            else:
+                p = n.global_position       # hold rather than go through stone
     p.y = n.global_position.y
+    # last guard: a step that would end beyond the walls is not taken
+    if dun and dun.info.has("cells") and not (dun.info["cells"] as Dictionary).has(_cell_of(p)) \
+            and (dun.info["cells"] as Dictionary).has(_cell_of(n.global_position)):
+        return false
     n.global_position = p
     n.rotation.y = atan2(d.x, d.z)
-    return false
+    return _flat(p, to) < 0.05
 
 func _process(delta: float) -> void:
     if dun == null or not is_instance_valid(dun):
@@ -360,6 +416,7 @@ func _process(delta: float) -> void:
 func _fight(delta: float) -> void:
     _check_lamp()
     var foes := _foes()
+    _bars(foes)
     var alive := _alive()
     if alive.is_empty():
         _say("The scar keeps them all. No one comes home from floor %d." % floor_no)
@@ -535,6 +592,7 @@ func _hero_hit(m: Dictionary) -> void:
             _say("%s should be dead - and stands back up." % m["h"]["name"])
             return
     Rig.play(b._anim, "Death_A")
+    b.fallen = true
     var line := roster.kill(String(m["uid"]), "the dark below", floor_no, 0)
     _say(line)
 

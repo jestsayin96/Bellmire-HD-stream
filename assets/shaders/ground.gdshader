@@ -11,6 +11,9 @@ uniform float grass_scale = 0.16;
 // the town is wide, not round - an ellipse fits its footprint
 uniform vec2 town_r = vec2(172.0, 104.0);
 uniform float town_fade = 0.22;
+// HD: where feet go (red = trodden), painted by town.gd from streets and plots
+uniform sampler2D town_mask : filter_linear, repeat_disable;
+uniform float mask_half = 200.0;
 varying vec3 wpos;
 varying vec3 wnrm;
 // the valley is ringed by mountains: steep ground is bare rock, high ground snow
@@ -37,6 +40,13 @@ void fragment() {
     float r = length(wpos.xz / town_r);
     float n = vnoise(wpos.xz * 0.05) * 0.6 + vnoise(wpos.xz * 0.21) * 0.4;
     float g = smoothstep(1.0, 1.0 + town_fade, r + (n - 0.5) * 0.25);
+    vec2 muv = wpos.xz / (mask_half * 2.0) + 0.5;
+    if (muv.x > 0.0 && muv.x < 1.0 && muv.y > 0.0 && muv.y < 1.0) {
+        float trod = texture(town_mask, muv).r;
+        // ragged edges, not ruled lines
+        trod = smoothstep(0.25, 0.75, trod + (n - 0.5) * 0.35);
+        g = max(g, 1.0 - trod);
+    }
     vec3 dc = texture(dirt_tex, uvd).rgb * vec3(0.72, 0.66, 0.52);
     vec3 gc = texture(grass_tex, uvg).rgb * grass_tint;
     // large-scale variation so the meadow does not read as one tiled carpet

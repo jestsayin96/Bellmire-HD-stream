@@ -38,6 +38,7 @@ func _adv(f: String) -> String:
     return f if f.begins_with("res://") else Gear.ADV + f
 
 var npc := false            # a town adventurer, not a viewer's hero
+var fallen := false         # this body died; a re-rolled hero gets a new one
 
 func _ready() -> void:
     super._ready()
@@ -132,6 +133,8 @@ var _compact := false
 func _process(delta: float) -> void:
     if not visible:
         return
+    if is_inside_tree():
+        HeroBody._layout_names(get_tree(), get_viewport().get_camera_3d())
     _crowd_t -= delta
     if _crowd_t > 0.0:
         return
@@ -144,26 +147,92 @@ func _process(delta: float) -> void:
         if d < 3.5:
             near.append(o)
     var crowded := not near.is_empty()
-    # my place along the group (side by side on the ground); neighbours then
-    # step through three rows, so adjacent names never collide
-    var group: Array = near.duplicate()
-    group.append(self)
-    group.sort_custom(func(a, b) -> bool:
-        var ka := (a as Node3D).global_position.x + (a as Node3D).global_position.z * 0.37
-        var kb := (b as Node3D).global_position.x + (b as Node3D).global_position.z * 0.37
-        return ka < kb if not is_equal_approx(ka, kb) else (a as Node).get_instance_id() < (b as Node).get_instance_id())
-    var rank := group.find(self)
+    var h := roster.get_hero(user_id) if roster else {}
+    if fallen or (not h.is_empty() and not bool(h.get("alive", true))):
+        # the fallen keep no name tag - the next hero they raise gets it
+        for c in get_children():
+            if c is Label3D:
+                (c as Label3D).visible = false
+        remove_from_group("viewer_heroes")
+        return
     for c in get_children():
         if c is Label3D and c != _shout:
             var lb: Label3D = c
-            var base_y := 2.3 if _compact else (2.6 if npc else 2.7)
-            lb.position.y = base_y + (float(rank % 3) * 0.5 if crowded else 0.0)
+            lb.position.y = 2.3 if _compact else (2.6 if npc else 2.7)
+            lb.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+            lb.no_depth_test = true          # a name is never lost behind a wall
+            lb.render_priority = 11
             if not _compact:
                 lb.font_size = (48 if crowded else 60) if npc else (56 if crowded else 72)
-            if crowded != _crowded:
-                var h := roster.get_hero(user_id) if roster else {}
-                if crowded or _compact or h.is_empty():
-                    lb.text = person_name
-                else:
-                    lb.text = "%s\n%s" % [person_name, String(h["class"]).capitalize()]
+            # a crowd, or underground: the name alone, one line each
+            var want := person_name if (crowded or _compact or h.is_empty()) else "%s\n%s" % [person_name, String(h["class"]).capitalize()]
+            if lb.text != want:
+                lb.text = want
     _crowded = crowded
+
+func _name_label() -> Label3D:
+    for c in get_children():
+        if c is Label3D and c != _shout:
+            return c
+    return null
+
+static var _laid_frame := -1
+
+## HD: every hero's name laid out ON SCREEN in one pass: lowest on screen
+## first, each lifted just enough to clear the names already placed. Done per
+## frame for all heroes together so neighbours never disagree.
+static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
+    var fr := Engine.get_process_frames()
+    if fr == _laid_frame or cam == null:
+        return
+    _laid_frame = fr
+    var items: Array = []
+    for o in tree.get_nodes_in_group("viewer_heroes"):
+        var hb := o as HeroBody
+        if hb == null or not hb.visible or not hb.is_inside_tree():
+            continue
+        var lb := hb._name_label()
+        if lb == null or not lb.visible:
+            continue
+        var anchor := hb.global_position + Vector3(0, lb.position.y, 0)
+        if cam.is_position_behind(anchor):
+            lb.offset.y = 0.0
+            continue
+        # HD: up close a name grew to fill the screen; shrink it with nearness
+        # (unchanged from 22 m out, down to 40% when the camera is on top of it)
+        if not lb.has_meta("px0"):
+            lb.set_meta("px0", lb.pixel_size)
+        var cd := cam.global_position.distance_to(anchor)
+        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 22.0, 0.4, 1.0)
+        var sp := cam.unproject_position(anchor)
+        var line_w := float(lb.font_size) * lb.pixel_size * 1.15
+        var up := cam.unproject_position(anchor + cam.global_transform.basis.y * line_w)
+        var lh := maxf(absf(sp.y - up.y), 4.0)
+        var lines := lb.text.count("\n") + 1
+        var longest := 0
+        for part in lb.text.split("\n"):
+            longest = maxi(longest, part.length())
+        items.append([sp, lh, float(longest) * lh * 0.56 + lh * 0.4, float(lines) * lh, lb])
+    items.sort_custom(func(a, b) -> bool: return (a[0] as Vector2).y > (b[0] as Vector2).y)
+    var placed: Array = []          # [x centre, half w, top y, bottom y]
+    for it in items:
+        var sp: Vector2 = it[0]
+        var lh: float = it[1]
+        var hw: float = float(it[2]) * 0.5
+        var bh: float = it[3]
+        var lift := 0.0
+        var tries := 0
+        while tries < 40:
+            var bot := sp.y - lift
+            var top := bot - bh
+            var hit := -1.0
+            for q in placed:
+                if absf(float(q[0]) - sp.x) < hw + float(q[1]) and top < float(q[3]) and bot > float(q[2]):
+                    hit = maxf(hit, bot - float(q[2]))      # how far to rise to clear it
+            if hit < 0.0:
+                break
+            lift += hit + lh * 0.12
+            tries += 1
+        placed.append([sp.x, hw, sp.y - lift - bh, sp.y - lift])
+        var lbl: Label3D = it[4]
+        lbl.offset.y = lift / lh * float(lbl.font_size) * 1.15

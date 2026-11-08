@@ -238,3 +238,52 @@
 - FPS 1920x1080, dusk through night with a raid: min 136, avg 168 (4.6.1: min 136, avg 146).
 - Renders (noon/dusk/night, select/follow) look the same as 4.6.1: renders/cycles/20261108_1257_godot47.
 - Play Jests HD.bat and RUNNING.md now point at D:\1game\Godot_v4.7.2-stable_win64.exe.
+
+
+## Cycle 46 - "the dungeons are a hot mess", "the town isn't alive" (2026-11-08)
+Dungeon
+- Health bars (HealthBar3D, shader billboard): everyone in a fight, heroes and monsters, plus anyone not at
+  full HP; raiders/defenders in raids; starving townsfolk. tools/_bars_test.gd: 189 hero / 18 monster samples.
+- Nothing stands in anything: FloorGen now returns `obstacles` (every furniture cluster, debris, cell,
+  portcullis, scar-glass, lava pool); heroes and monsters push out of them and slide along, spawns move to
+  clear floor. tools/_offfloor.gd: 0 off-floor, 0 inside a prop (1129 samples).
+- Clutter: no clusters in corridors or on the stairs, furniture pulled to the walls, biome growth only on
+  room edges. Trees removed from the confection (the pink hall); boxes and barrels instead.
+- The candle carpet on shrine floors was the `floor_tile_small_decorated` tile (it has candles and rubble
+  modelled in) used as the MAIN floor; now a rare accent nowhere / plain tiles. Small tiles laid 4 per cell.
+- The black holes: `wall_broken` opened a see-through hole onto the void (replaced by `wall_cracked`), and
+  the lava pools loaded `res://lava.gdshader`, a path that does not exist - a black square instead of a
+  pit. Fixed path; pools only deep inside rooms (a corridor pool walled the passage shut) and are obstacles.
+- Party names no longer pile up: laid out on screen, all heroes at once, each lifted until clear.
+Town
+- Houses in the road: the hex streets zig-zag, so a terrace or back rank could land on another street.
+  Every house footprint is now tested against all paving (incl. the scar road and the bridge road).
+  0 houses on roads; 67 plots.
+- Walking: scripts/town_nav.gd (TownNav) bakes a Godot navmesh over the valley with every solid thing
+  carved out - house footprints, every prop's own footprint (stalls, tables, benches, wells, lamps,
+  trees), the town wall (gates open), the river (bridge open). route() asks the NavigationServer. People
+  leave a house from its door, not through the back wall. Bake 0.2 s. tools/_townwalk.gd: walkers inside a
+  house or prop 2.65% (old street routing) -> under 1% (the rest are doorsteps/tight inn yards).
+- Ground: the town was one dark dirt disc. A mask painted from streets and plots: dirt where feet go,
+  grass greens in the middle of every block.
+- Posted people (guards, stallholders) are not statues: they look about, gesture, pace a step and back.
+- Test hook: JESTS_NO_NAV=1 uses the old street routing for comparison.
+- Renders: renders/cycles/20261108_dungeon_fix3, 20261108_town_walk2. renders/.gdignore added.
+
+
+## Cycle 47 - from Mr. E's recordings (2026-11-08)
+- Watched his 7 OBS clips (9.5 min, no audio) as contact sheets. Fixed what they showed:
+- The white thread across the town: a hero's fishing rod stayed on the body after they walked off the dock,
+  drawing its line from wherever they were back to the water. The rod is now packed away beyond 14 m, and a
+  hero only ever carries one.
+- Nights were near black on stream. Moon brighter (0.38 -> 0.7) and at night the ambient comes from a cool
+  moonlit colour instead of the black sky. Square at 22:00 now reads clearly (renders/cycles/20261108_night).
+- Huge names up close: name tags shrink with nearness (unchanged from 22 m out, down to 40%).
+- Two "MrE" tags after a death: the fallen body kept its tag while the re-rolled hero got a new one. A
+  body that dies (raid or delve) drops its tag and leaves the name layout.
+- The grey window / 75 errors when he pressed Play: the camera read its chat box before the town finished
+  building, and Godot's debugger pauses the game on any error. Camera now waits for setup.
+- Quaternius Fantasy Props MegaKit (CC0) downloaded: 49 new props into assets/props (+ licence). Not yet
+  placed.
+- Lesson: a parse error in a class_name script makes the --script tools hang instead of failing; run
+  `--headless --quit-after` first after edits.

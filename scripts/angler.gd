@@ -148,6 +148,13 @@ func _play(nm: String) -> void:
 func _process(delta: float) -> void:
     if target == Vector3.ZERO:
         return
+    # HD: a hero who walks off (to the scar, to the smithy) packs the rod away.
+    # The angler stayed on the body and drew its line from wherever they were
+    # back to the dock - a white thread across the whole town.
+    var holder := get_parent() as Node3D
+    if holder and Vector2(holder.global_position.x - target.x, holder.global_position.z - target.z).length() > 14.0:
+        queue_free()
+        return
     _t += delta
     var tip := _rod_tip.global_position
     match state:

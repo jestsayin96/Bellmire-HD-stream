@@ -80,13 +80,18 @@ func _process(_dt: float) -> void:
         # the moon: low, cold, faint
         sun.rotation = Vector3(deg_to_rad(-34.0), deg_to_rad(150.0), 0.0)
         sun.light_color = Color(0.62, 0.70, 0.95)
-        sun.light_energy = lerpf(0.0, 0.38, nt)
+        sun.light_energy = lerpf(0.0, 0.7, nt)       # HD: a moon you can see by - the stream was near black at night
     else:
         sun.rotation = Vector3(deg_to_rad(-maxf(elev, 4.0)), deg_to_rad(az), 0.0)
         sun.light_color = Color(1, 1, 1).lerp(Color(1.0, 0.62, 0.36), gd)
         sun.light_energy = lerpf(1.5, 0.7, gd) * (1.0 - nt)
     if env:
-        env.ambient_light_energy = lerpf(0.85, 0.30, nt)   # a stream must stay watchable at night
+        # a stream must stay watchable at night: the night sky is near black,
+        # so at night the ambient comes mostly from a cool moonlit colour
+        env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+        env.ambient_light_color = Color(0.42, 0.50, 0.74)
+        env.ambient_light_sky_contribution = lerpf(1.0, 0.3, nt)
+        env.ambient_light_energy = lerpf(0.85, 0.8, nt)
         env.fog_light_color = Color(0.70, 0.77, 0.84).lerp(Color(0.86, 0.60, 0.45), gd * (1.0 - nt)).lerp(Color(0.10, 0.12, 0.20), nt)
     if sky and not _sky_day.is_empty():
         var night_top := Color(0.02, 0.03, 0.09)

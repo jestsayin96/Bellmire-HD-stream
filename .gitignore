@@ -10,3 +10,5 @@ renders/*.log
 Thumbs.db
 desktop.ini
 .godot_46_backup/
+
+renders/obs_review/

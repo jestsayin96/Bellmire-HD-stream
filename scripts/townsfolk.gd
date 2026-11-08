@@ -180,6 +180,7 @@ func _next_trip() -> Vector3:
     return s[0]
 
 var _linger := -1.0
+var _door_out := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
     if town != null:
@@ -192,16 +193,24 @@ func _physics_process(delta: float) -> void:
     if leader != null and town != null:
         _follow(delta)
         return
-    if stay or town == null:
+    if town == null:
+        return
+    if stay:
+        _posted(delta)
         return
     if _route.is_empty():
         _wait -= delta
         if _wait <= 0.0:
             if inside:
-                # step back out through the door
+                # step back out through the door - FROM the door: the inside
+                # point sits within the walls, and a path from there cut
+                # straight through the house to the nearest open ground
                 inside = false
                 visible = true
+                if _door_out != Vector3.ZERO:
+                    global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
             var dest: Vector3 = _next_trip()
+            _door_out = dest if _enter_at != Vector3.ZERO else Vector3.ZERO
             _route = town.call("route", global_position, dest)
             if _enter_at != Vector3.ZERO:
                 _route.append(_enter_at)
@@ -231,3 +240,68 @@ func _physics_process(delta: float) -> void:
     global_position = p
     rotation.y = atan2(dir.x, dir.z)
     Rig.play(_anim, "Walking_A")
+
+## ---- HD: somebody at a post is not a statue. Guards shift their weight,
+## look up and down the street and pace a step or two; stallholders reach for
+## their wares and turn to passers-by. All of it stays on their own spot and
+## off anything solid (the town's navmesh says where a step may land).
+const POST_GESTURES := ["Interact", "Use_Item", "PickUp", "Idle_B", "Interact", "Cheer"]
+var _post_at := Vector3.INF
+var _post_t := randf_range(2.0, 9.0)
+var _gest_t := 0.0
+var _pace: Array = []
+var _look := 0.0
+
+func _posted(delta: float) -> void:
+    if inside or not visible:
+        return
+    # only in Bellmire itself: underground (and in raids) the fight owns the body
+    if town.get("nav") == null or (town.get("raids") != null and bool(town.get("raids").get("_live"))):
+        return
+    if _post_at == Vector3.INF:
+        _post_at = global_position
+        _look = face_yaw
+    if not _pace.is_empty():
+        var tgt: Vector3 = _pace[0]
+        var to := tgt - global_position
+        to.y = 0.0
+        if to.length() < 0.12:
+            _pace.remove_at(0)
+            if _pace.is_empty():
+                Rig.play(_anim, "Idle")
+            return
+        var p := global_position + to.normalized() * minf(to.length(), speed * pace * 0.55 * delta)
+        p.y = float(town.call("height_at", p.x, p.z))
+        global_position = p
+        rotation.y = lerp_angle(rotation.y, atan2(to.x, to.z), minf(delta * 8.0, 1.0))
+        Rig.play(_anim, "Walking_A")
+        return
+    rotation.y = lerp_angle(rotation.y, _look, minf(delta * 2.5, 1.0))
+    if _gest_t > 0.0:
+        _gest_t -= delta
+        if _gest_t <= 0.0:
+            Rig.play(_anim, "Idle")
+        return
+    _post_t -= delta
+    if _post_t > 0.0:
+        return
+    _post_t = randf_range(5.0, 13.0)
+    var roll := randf()
+    if roll < 0.35:
+        # a step or two along the post and back
+        var side := Vector3(cos(face_yaw), 0.0, -sin(face_yaw)) * randf_range(-1.6, 1.6)
+        var tgt := _post_at + side
+        var nv = town.get("nav")
+        if nv == null or (nv.closest(tgt) as Vector3).distance_to(Vector3(tgt.x, 0, tgt.z)) < 0.25:
+            _pace = [tgt, _post_at]
+            _look = face_yaw
+            return
+    if roll < 0.7:
+        # look along the street, or at whoever is passing
+        _look = face_yaw + randf_range(-1.1, 1.1)
+        return
+    var g: String = POST_GESTURES[randi() % POST_GESTURES.size()]
+    if _anim and _anim.has_animation(g):
+        Rig.play(_anim, g)
+        _gest_t = minf(_anim.get_animation(g).length, 3.5)
+

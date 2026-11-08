@@ -87,7 +87,12 @@ func _process(_dt: float) -> bool:
         var near := 1e9
         for f in _d._foes():
             near = minf(near, _d._flat((f as Node3D).global_position, c))
-        if (near < 3.0 and _f > 90) or _f > 1500:
+        var bar_up := false   # BARGATE: wait for the first blows so the bars are up
+        for m in _d._alive():
+            var hb = (m["body"] as Node).get_node_or_null("hpbar")
+            if hb and hb.visible and float(m["hp"]) < float(m["max"]):
+                bar_up = true
+        if (near < 3.0 and _f > 90 and bar_up) or _f > 2500:
             _phase = 1
             _f = 1000
     elif _phase == 1:

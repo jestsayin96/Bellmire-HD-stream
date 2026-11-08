@@ -5,6 +5,7 @@ var _d: Delve
 var _r: Roster
 var _f := 0
 var _off := 0
+var _inprop := 0
 var _n := 0
 func _initialize() -> void:
     _r = Roster.new()
@@ -26,15 +27,23 @@ func _process(_dt: float) -> bool:
     _f += 1
     if _d.dun and _f % 30 == 0:
         var cells: Dictionary = _d.dun.info["cells"]
+        var o0: Vector3 = _d.dun.global_position
         for m in _d._alive():
+            var bp: Vector3 = (m["body"] as Node3D).global_position
+            for o in _d.dun.info.get("obstacles", []):
+                if Vector2(bp.x - (o[0] as Vector3).x - o0.x, bp.z - (o[0] as Vector3).z - o0.z).length() < float(o[1]) - 0.05:
+                    _inprop += 1
+                    break
             _n += 1
             if not cells.has(_d._cell_of((m["body"] as Node3D).global_position)):
                 _off += 1
+                print("OFF hero state=", _d.state)
         for mo in _d._foes():
             _n += 1
             if not cells.has(_d._cell_of((mo as Node3D).global_position)):
                 _off += 1
+                print("OFF monster ", (mo as Monster).def.get("name"), " state=", _d.state)
     if _d.state == "home" or _f > 60 * 200:
-        print("OFFFLOOR ", _off, " of ", _n, " samples; floor reached ", _d.floor_no)
+        print("OFFFLOOR ", _off, " of ", _n, " samples; INPROP ", _inprop, "; floor reached ", _d.floor_no, " frames ", _f, " obstacles ", _d.dun.info.get("obstacles", []).size())
         return true
     return false

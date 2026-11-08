@@ -47,6 +47,40 @@ func _open_cells() -> Array:
     out.shuffle()
     return out
 
+## a spawn point clear of furniture AND on the floor: the nearest floor cell
+## centre that no prop covers (a push out of a table must not cross a wall)
+func _out_of_props(at: Vector3) -> Vector3:
+    if _clear_of_props(at, 0.6) and _on_floor(at):
+        return at
+    var best := at
+    var bd := 1e9
+    for c in info["cells"]:
+        var cp := _cell_pos(c)
+        if not _clear_of_props(cp, 0.6):
+            continue
+        var dd := cp.distance_to(at)
+        if dd < bd:
+            bd = dd
+            best = cp
+    return best
+
+func _on_floor(at: Vector3) -> bool:
+    var G: float = info["grid"]
+    var hw: float = (float(info["w"]) - 1.0) * G * 0.5
+    var hh: float = (float(info["h"]) - 1.0) * G * 0.5
+    return (info["cells"] as Dictionary).has(Vector2i(int(round((at.x + hw) / G)), int(round((at.z + hh) / G))))
+
+func _clear_of_props(at: Vector3, r: float) -> bool:
+    for o in info.get("obstacles", []):
+        if Vector2(at.x - (o[0] as Vector3).x, at.z - (o[0] as Vector3).z).length() < r + float(o[1]):
+            return false
+    return true
+
+## pieces that stand up block the way; traps and plates are walked over
+func _place_solid(node: Node3D, c: Vector2i, r: float, yaw := 0.0) -> void:
+    _place(node, c, yaw)
+    (info["obstacles"] as Array).append([_cell_pos(c), r])
+
 func _place(node: Node3D, c: Vector2i, yaw := 0.0) -> void:
     node.position = _cell_pos(c) + Vector3(0, 0.05, 0)
     node.rotation.y = yaw
@@ -59,7 +93,7 @@ func _dress() -> void:
     var take := func() -> Vector2i:
         for c in spots:
             var cv: Vector2i = c
-            if not used.has(cv):
+            if not used.has(cv) and _clear_of_props(_cell_pos(cv), 2.2):
                 for dx in range(-1, 2):
                     for dy in range(-1, 2):
                         used[cv + Vector2i(dx, dy)] = true
@@ -74,24 +108,24 @@ func _dress() -> void:
     for i in range(1 + _rng.randi() % 3):
         var c: Vector2i = take.call()
         if c.x > -999:
-            _place(DungeonParts.debris(_rng.randi()), c, _rng.randf() * TAU)
+            _place_solid(DungeonParts.debris(_rng.randi()), c, 1.0, _rng.randf() * TAU)
     # theme pieces
     match theme:
         "prison":
             for i in range(3):
                 var c: Vector2i = take.call()
                 if c.x > -999:
-                    _place(DungeonParts.cell(3.0, 3.0, 2.8, i == 0), c, float(_rng.randi() % 4) * PI * 0.5)
+                    _place_solid(DungeonParts.cell(3.0, 3.0, 2.8, i == 0), c, 1.9, float(_rng.randi() % 4) * PI * 0.5)
         "crypt", "shrine", "treasury":
             var c: Vector2i = take.call()
             if c.x > -999:
-                _place(DungeonParts.portcullis(), c)
+                _place_solid(DungeonParts.portcullis(), c, 1.2)
     # wild-magic scarring deepens with depth: scar-glass breaks through the floor
     var scars := 0 if floor_no < 3 else mini((floor_no - 1) / 2, 5)
     for i in range(scars):
         var c: Vector2i = take.call()
         if c.x > -999:
-            _place(DungeonParts.scar_glass(_rng.randi(), 5 + _rng.randi() % 6), c)
+            _place_solid(DungeonParts.scar_glass(_rng.randi(), 5 + _rng.randi() % 6), c, 1.0)
 
 func _people() -> void:
     var spawns: Array = info.get("spawns", [])
@@ -109,7 +143,7 @@ func _people() -> void:
             break
         pts.append(_cell_pos(c))
     for i in range(mini(count, pts.size())):
-        var p: Vector3 = pts[i]
+        var p: Vector3 = _out_of_props(pts[i])
         var m := Monster.new()
         m.def = Bestiary.pick(floor_no)
         m.state = Monster.S.PATROL

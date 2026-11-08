@@ -1,0 +1,51 @@
+{
+  "_source": "NOTES.md, Nine classes",
+  "classes": [
+    {
+      "id": "knight",
+      "stat": "STR"
+    },
+    {
+      "id": "warden",
+      "stat": "STR"
+    },
+    {
+      "id": "barbarian",
+      "stat": "STR"
+    },
+    {
+      "id": "rogue",
+      "stat": "DEX"
+    },
+    {
+      "id": "duelist",
+      "stat": "DEX"
+    },
+    {
+      "id": "ranger",
+      "stat": "DEX"
+    },
+    {
+      "id": "mage",
+      "stat": "INT"
+    },
+    {
+      "id": "sage",
+      "stat": "WIS",
+      "role": "dedicated healer",
+      "heal_power": "11 + WIS mod * 2.5"
+    },
+    {
+      "id": "cleric",
+      "stat": "WIS",
+      "role": "tankier healer, carries a shield",
+      "heal_power": "7 base"
+    }
+  ],
+  "healing": {
+    "mend_interval_s": 3,
+    "mend": "Any party member with heal_power > 0 tops up whoever is worst off.",
+    "quaff": "A hero below 34% hp drinks a potion for 45% of max.",
+    "voice": "A medic healing themselves reads as 'binds their own wounds', never 'X mends X in the dark'."
+  }
+}

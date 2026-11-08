@@ -1,0 +1,17 @@
+{
+  "_source": "NOTES.md, GUILD ROLL",
+  "ranks": [
+    "Unproven",
+    "Novice",
+    "Delver",
+    "Journeyman",
+    "Veteran",
+    "Master",
+    "Grandmaster"
+  ],
+  "standing": "deepest*6 + kills*2 + (level-1)*8",
+  "rule": "Gold is deliberately NOT in standing. Gold buys gear; it does not buy rank.",
+  "promotion_line": "X is raised to {rank} of the Bellmire Guild.",
+  "dead": "Dead heroes keep their place, marked with a dagger.",
+  "one_roll": "Viewers and the town's own adventurers share ONE roll, so a viewer can watch themselves pass the locals."
+}

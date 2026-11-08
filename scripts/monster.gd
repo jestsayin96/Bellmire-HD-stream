@@ -1,0 +1,442 @@
+class_name Monster
+extends Node3D
+## A creature of the dungeon, built from a Bestiary def. Loads the body,
+## normalises its size, maps its animations, arms it (Gear), tints it for its
+## strain (with a glow when the strain has one), and - for the eight lords -
+## adds the boss trappings: a ground aura that breathes, a crown of light, a
+## title over its head. States: IDLE, PATROL (wanders an area), ATTACK (faces a
+## target; casters throw Spells, the rest swing/bite), DEAD.
+
+enum S { IDLE, PATROL, ATTACK, DEAD }
+var def: Dictionary = {}
+var state: int = S.PATROL
+var home := Vector3.ZERO
+var roam := 6.0
+var target: Node3D = null
+var ground_fn: Callable            # (x, z) -> y; flat 0 when unset
+var _ap: AnimationPlayer
+var _body: Node3D
+var _goal := Vector3.ZERO
+var _t := 0.0
+var _swing := 1.0
+var _rng := RandomNumberGenerator.new()
+var _aura: MeshInstance3D
+
+func _ready() -> void:
+    _rng.randomize()
+    home = global_position if home == Vector3.ZERO else home
+    var ps: PackedScene = load(String(def.get("path", "")))
+    if ps == null:
+        return
+    _body = ps.instantiate()
+    add_child(_body)
+    # scale to a real height from the body's own bounds, measured in body space
+    var hb := _local_bounds(_body)
+    if def.has("h") and hb.size.y > 0.01:
+        _body.scale = Vector3.ONE * (float(def["h"]) / hb.size.y)
+    elif def.has("scale"):
+        _body.scale = Vector3.ONE * float(def["scale"])
+    if bool((def.get("anims", {}) as Dictionary).get("ual", false)):
+        _graft_ual()
+    var st: Array = [_body]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is AnimationPlayer and _ap == null:
+            _ap = c
+        for g in c.get_children():
+            st.append(g)
+    if _ap:
+        Rig.prep(_ap)
+        for a in _ap.get_animation_list():
+            var s := String(a)
+            if s.contains("Idle") or s.contains("Walk") or s.contains("Run") or s.contains("Flying"):
+                _ap.get_animation(a).loop_mode = Animation.LOOP_LINEAR
+        _play("idle")
+        _ap.seek(_rng.randf() * 1.5, true)
+    if String(def.get("path", "")).contains("kaykit"):
+        Gear.strip_props(_body)
+    var tint: Color = def.get("tint", Color(1, 1, 1))
+    var glow: Color = def.get("glow", Color(0, 0, 0))
+    if tint != Color(1, 1, 1) or glow != Color(0, 0, 0):
+        _tint(_body, tint, glow)
+    if String(def.get("hand", "")) != "":
+        Gear.equip(_body, String(def["hand"]), "handslot.r", "weapon", float(def.get("wscale", 1.0)), float(def.get("wglow", 0.0)))
+    if String(def.get("off", "")) != "":
+        Gear.equip(_body, String(def["off"]), "handslot.l", "offhand", float(def.get("wscale", 1.0)), float(def.get("wglow", 0.0)))
+    max_hp = float(def.get("boss_hp", float(def.get("hp", 1.0)) * 30.0))
+    hp = max_hp
+    if bool(def.get("boss", false)):
+        _trappings()
+    _label()
+
+static var _ual: Array = []
+
+## bounds of every visible mesh, in the space of `top` (node transforms only;
+## does not depend on the tree having resolved globals yet)
+func _local_bounds(top: Node3D) -> AABB:
+    var box := AABB()
+    var first := true
+    var st: Array = [[top, Transform3D.IDENTITY]]
+    while not st.is_empty():
+        var e: Array = st.pop_back()
+        var c: Node = e[0]
+        var xf: Transform3D = e[1]
+        if c is MeshInstance3D and (c as MeshInstance3D).visible and (c as MeshInstance3D).mesh:
+            var ab: AABB = xf * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            var gx := xf * (g as Node3D).transform if g is Node3D else xf
+            st.append([g, gx])
+    return box
+
+func _graft_ual() -> void:
+    if _ual.is_empty():
+        for p in ["res://assets/monsters/UAL1.glb", "res://assets/monsters/UAL2.glb"]:
+            if not ResourceLoader.exists(p):
+                continue
+            var n: Node = (load(p) as PackedScene).instantiate()
+            var st: Array = [n]
+            while not st.is_empty():
+                var c: Node = st.pop_back()
+                if c is AnimationPlayer:
+                    for ln in (c as AnimationPlayer).get_animation_library_list():
+                        _ual.append((c as AnimationPlayer).get_animation_library(ln))
+                for g in c.get_children():
+                    st.append(g)
+            n.free()
+    var ap := AnimationPlayer.new()
+    _body.add_child(ap)
+    ap.root_node = NodePath("..")
+    for i in range(_ual.size()):
+        ap.add_animation_library("ual%d" % i if i > 0 else "", _ual[i])
+    _ap = ap
+
+func _tint(n: Node, col: Color, glow: Color) -> void:
+    if n is MeshInstance3D and not String(n.name).begins_with("eq_"):
+        var mi: MeshInstance3D = n
+        if mi.mesh:
+            for i in range(mi.mesh.get_surface_count()):
+                var src: Material = mi.get_active_material(i)
+                var d: StandardMaterial3D = (src as StandardMaterial3D).duplicate() if src is StandardMaterial3D else StandardMaterial3D.new()
+                d.albedo_color = d.albedo_color * col
+                if glow != Color(0, 0, 0):
+                    d.emission_enabled = true
+                    d.emission = glow
+                    d.emission_energy_multiplier = 0.18
+                mi.set_surface_override_material(i, d)
+    for c in n.get_children():
+        if not String(c.name).begins_with("eq_"):
+            _tint(c, col, glow)
+
+func _height() -> float:
+    if _body:
+        var lb := _local_bounds(self)
+        if lb.size.y > 0.01:
+            return lb.end.y
+    var box := AABB()
+    var first := true
+    var st: Array = [_body]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and (c as MeshInstance3D).visible:
+            var ab: AABB = (c as MeshInstance3D).global_transform * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            st.append(g)
+    return box.end.y - global_position.y if not first else 2.0
+
+func _label() -> void:
+    var boss := bool(def.get("boss", false))
+    var lb := Label3D.new()
+    lb.text = String(def.get("name", "?"))
+    if boss and String(def.get("note", "")) != "":
+        lb.text += "\n" + String(def["note"])
+    lb.font_size = 72 if boss else 40
+    lb.pixel_size = 0.009 if boss else 0.005
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.outline_size = 18
+    lb.outline_modulate = Color(0, 0, 0, 0.9)
+    lb.modulate = (def.get("aura", Color(1, 0.8, 0.4)) as Color).lightened(0.3) if boss else Color(1.0, 0.55, 0.45)
+    lb.visibility_range_end = 70.0 if boss else 26.0
+    add_child(lb)
+    lb.position = Vector3(0, _height() + 0.5, 0)
+
+func _trappings() -> void:
+    var col: Color = def.get("aura", Color(1, 0.8, 0.4))
+    var sc := float(def.get("scale", 1.0))
+    var r := clampf(_height() * 0.5, 1.6, 6.0)
+    _aura = MeshInstance3D.new()
+    var cm := CylinderMesh.new()
+    cm.top_radius = r
+    cm.bottom_radius = r
+    cm.height = 0.02
+    _aura.mesh = cm
+    var m := StandardMaterial3D.new()
+    m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    m.albedo_color = Color(col.r, col.g, col.b, 0.35)
+    _aura.material_override = m
+    _aura.position = Vector3(0, 0.04, 0)
+    add_child(_aura)
+    var ring := MeshInstance3D.new()
+    var tm := TorusMesh.new()
+    tm.inner_radius = r * 0.96
+    tm.outer_radius = r * 1.04
+    ring.mesh = tm
+    var rm := StandardMaterial3D.new()
+    rm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    rm.albedo_color = col
+    rm.emission_enabled = true
+    rm.emission = col
+    rm.emission_energy_multiplier = 2.5
+    ring.material_override = rm
+    ring.position = Vector3(0, 0.06, 0)
+    add_child(ring)
+    # a crown of light: points of flame circling the head
+    var crown := Node3D.new()
+    crown.name = "crown"
+    crown.position = Vector3(0, _height() + 0.15, 0)        # _height already includes lift
+    add_child(crown)
+    for i in range(7):
+        var a := TAU * float(i) / 7.0
+        var spike := MeshInstance3D.new()
+        var pm := PrismMesh.new()
+        pm.size = Vector3(0.22, 0.45, 0.1)
+        spike.mesh = pm
+        spike.material_override = rm
+        spike.position = Vector3(cos(a) * 0.55, 0, sin(a) * 0.55) * clampf(sc * 0.35, 0.8, 2.0)
+        spike.rotation.y = -a
+        crown.add_child(spike)
+    var l := OmniLight3D.new()
+    l.light_color = col
+    l.light_energy = 2.5
+    l.omni_range = r * 3.0
+    l.position = Vector3(0, _height() * 0.6, 0)
+    add_child(l)
+    var motes := GPUParticles3D.new()
+    motes.amount = 60
+    motes.lifetime = 3.0
+    var pmat := ParticleProcessMaterial.new()
+    pmat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_RING
+    pmat.emission_ring_radius = r
+    pmat.emission_ring_inner_radius = r * 0.8
+    pmat.emission_ring_height = 0.1
+    pmat.emission_ring_axis = Vector3(0, 1, 0)
+    pmat.direction = Vector3(0, 1, 0)
+    pmat.spread = 10.0
+    pmat.initial_velocity_min = 0.6
+    pmat.initial_velocity_max = 1.6
+    pmat.gravity = Vector3.ZERO
+    pmat.scale_min = 0.6
+    pmat.scale_max = 1.2
+    pmat.color = col
+    motes.process_material = pmat
+    var sm := SphereMesh.new()
+    sm.radius = 0.06
+    sm.height = 0.12
+    sm.material = rm
+    motes.draw_pass_1 = sm
+    add_child(motes)
+
+func _play(key: String) -> void:
+    if _ap == null:
+        return
+    var an: Dictionary = def.get("anims", {})
+    var nm := String(an.get(key, ""))
+    if nm != "" and _ap.has_animation(nm) and _ap.current_animation != nm:
+        _ap.play(nm, 0.2)
+
+func _entering() -> bool:
+    return _body.position.y < -0.05
+
+func _gy(x: float, z: float) -> float:
+    return float(ground_fn.call(x, z)) if ground_fn.is_valid() else 0.0
+
+func _process(delta: float) -> void:
+    _t += delta
+    _tick_flash(delta)
+    if _body == null or state == S.DEAD:
+        return
+    var lift := float(def.get("lift", 0.0))
+    if _body.position.y < lift - 0.05 and get_tree() and _entering():
+        return
+    # unrigged bodies (imp, puglin) and every flyer get a bob
+    var bob := 0.0
+    if lift > 0.0:
+        bob = sin(_t * 2.2) * 0.25
+    if not _entering():
+        _body.position.y = lift + bob
+
+    var crown := get_node_or_null("crown")
+    if crown:
+        crown.rotation.y += delta * 0.8
+    if _aura:
+        var k := 0.85 + sin(_t * 1.6) * 0.15
+        _aura.scale = Vector3(k, 1, k)
+    match state:
+        S.IDLE:
+            _play("idle")
+        S.PATROL:
+            if _goal == Vector3.ZERO or global_position.distance_to(_goal) < 0.8:
+                _goal = home + Vector3(_rng.randf_range(-roam, roam), 0, _rng.randf_range(-roam, roam))
+            var to := _goal - global_position
+            to.y = 0.0
+            var d := to.normalized()
+            var p := global_position + d * float(def.get("spd", 3.0)) * 0.35 * delta
+            p.y = _gy(p.x, p.z)
+            global_position = p
+            rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * 5.0)
+            _play("walk")
+        S.ATTACK:
+            if target == null or not is_instance_valid(target):
+                state = S.PATROL
+                return
+            var to2 := target.global_position - global_position
+            to2.y = 0.0
+            rotation.y = lerp_angle(rotation.y, atan2(to2.x, to2.z), delta * 6.0)
+            _swing -= delta
+            if _swing <= 0.0:
+                _swing = 1.6
+                if bool(def.get("casts", false)):
+                    Spells.cast("bolt", self, target.global_position, false)
+                    _play("cast")
+                else:
+                    _play("attack")
+                    if _ap:
+                        _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+
+## ---------------------------------------------------------------- combat polish
+var hp := 10.0
+var max_hp := 10.0
+var _flash_t := 0.0
+var _flash_mats: Array = []
+
+## take a hit: white flash, hit animation, a number that floats up, death at 0
+func hurt(amount: float, crit := false) -> void:
+    if state == S.DEAD:
+        return
+    hp -= amount
+    _number(amount, crit)
+    _flash()
+    if hp <= 0.0:
+        die()
+    else:
+        _play("hit")
+        if _ap:
+            _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+
+func _number(amount: float, crit: bool) -> void:
+    var lb := Label3D.new()
+    lb.text = ("%d!" if crit else "%d") % int(round(amount))
+    lb.font_size = 96 if crit else 64
+    lb.pixel_size = 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 20
+    lb.outline_modulate = Color(0, 0, 0, 0.9)
+    lb.modulate = Color(1.0, 0.85, 0.2) if crit else Color(1.0, 0.95, 0.9)
+    lb.top_level = true
+    add_child(lb)
+    var p := global_position + Vector3(randf_range(-0.4, 0.4), _height() * 0.8 + 0.3, randf_range(-0.4, 0.4))
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.4, 0), 0.9).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 0.9).set_delay(0.3)
+    tw.chain().tween_callback(lb.queue_free)
+
+func _flash() -> void:
+    if _flash_mats.is_empty():
+        var st: Array = [_body]
+        while not st.is_empty():
+            var c: Node = st.pop_back()
+            if c is MeshInstance3D and (c as MeshInstance3D).visible and not String(c.name).begins_with("eq_"):
+                var mi: MeshInstance3D = c
+                for i in range(mi.mesh.get_surface_count()):
+                    var src: Material = mi.get_active_material(i)
+                    if src is StandardMaterial3D:
+                        var d: StandardMaterial3D = src.duplicate()
+                        mi.set_surface_override_material(i, d)
+                        _flash_mats.append(d)
+            for g in c.get_children():
+                if not String(g.name).begins_with("eq_"):
+                    st.append(g)
+    for d in _flash_mats:
+        var mm: StandardMaterial3D = d
+        mm.emission_enabled = true
+        mm.emission = Color(1, 1, 1)
+        mm.emission_energy_multiplier = 1.6
+    _flash_t = 0.12
+
+func _tick_flash(delta: float) -> void:
+    if _flash_t <= 0.0:
+        return
+    _flash_t -= delta
+    if _flash_t <= 0.0:
+        var glow: Color = def.get("glow", Color(0, 0, 0))
+        for d in _flash_mats:
+            var mm: StandardMaterial3D = d
+            mm.emission = glow
+            mm.emission_enabled = glow != Color(0, 0, 0)
+            mm.emission_energy_multiplier = 0.18
+
+## death: the death animation, then sink into the floor and go
+func die() -> void:
+    state = S.DEAD
+    _play("die")
+    if _aura:
+        _aura.visible = false
+    var tw := create_tween()
+    tw.tween_interval(1.8)
+    tw.tween_property(self, "position:y", position.y - _height() * 0.6 - 0.5, 1.4)
+    tw.tween_callback(queue_free)
+
+## A LORD RISES. Out of the ground in a burst of its own colour, its title and
+## canon note spelled out over it, a shock ring when it is fully up.
+func entrance() -> void:
+    var col: Color = def.get("aura", Color(1, 0.8, 0.4))
+    var h := _height()
+    _body.position.y = -h - 0.5
+    var lb := get_node_or_null("title")
+    var tw := create_tween()
+    tw.tween_property(_body, "position:y", float(def.get("lift", 0.0)), 2.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    var dust := GPUParticles3D.new()
+    dust.amount = 160
+    dust.lifetime = 1.8
+    dust.one_shot = true
+    dust.explosiveness = 0.3
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_RING
+    pm.emission_ring_radius = clampf(h * 0.5, 1.5, 6.0)
+    pm.emission_ring_inner_radius = 0.2
+    pm.emission_ring_height = 0.1
+    pm.emission_ring_axis = Vector3(0, 1, 0)
+    pm.direction = Vector3(0, 1, 0)
+    pm.spread = 35.0
+    pm.initial_velocity_min = 2.0
+    pm.initial_velocity_max = 6.0
+    pm.gravity = Vector3(0, -5, 0)
+    pm.scale_min = 0.8
+    pm.scale_max = 2.0
+    pm.color = col
+    dust.process_material = pm
+    var sm := SphereMesh.new()
+    sm.radius = 0.1
+    sm.height = 0.2
+    var mm := StandardMaterial3D.new()
+    mm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    mm.albedo_color = col
+    mm.emission_enabled = true
+    mm.emission = col
+    mm.emission_energy_multiplier = 3.0
+    sm.material = mm
+    dust.draw_pass_1 = sm
+    dust.emitting = true
+    add_child(dust)
+    tw.tween_callback(func() -> void:
+        Spells._burst(root, global_position + Vector3(0, 0.3, 0), col)
+        dust.queue_free())
+    _play("idle")

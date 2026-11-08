@@ -1,0 +1,21 @@
+{
+  "_source": "NOTES.md, BIOMES - 14 worlds",
+  "biomes": [
+    "mess hall",
+    "sunken meadow",
+    "the confection",
+    "flooded gallery",
+    "barracks",
+    "the firepits",
+    "workshop",
+    "treasury",
+    "shrine",
+    "a buried wood",
+    "prison",
+    "the grey halls",
+    "crypt",
+    "the inner keep"
+  ],
+  "technique": "Tint turns one kit into many worlds: floor_tint / wall_tint recolour the architecture, scatter lays free-standing growth, prop_tint recolours it.",
+  "measured": "The grey halls LOOK darker but measure identical (mean luminance 35.0-38.5 vs 34.8-39.0). A cold desaturated palette just reads darker. Do not 'fix' it."
+}

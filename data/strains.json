@@ -1,0 +1,44 @@
+{
+  "_source": "NOTES.md, creature strains",
+  "idea": "Rename, recolour and re-weight a body. Each strain is a distinct tactical shape, not a palette swap.",
+  "strains": [
+    {
+      "id": "hollowed",
+      "hp": 0.75,
+      "atk": 0.95,
+      "spd": 1.1,
+      "shape": "fodder, quick and brittle"
+    },
+    {
+      "id": "drowned",
+      "hp": 1.35,
+      "atk": 0.9,
+      "spd": 0.8,
+      "shape": "a wall"
+    },
+    {
+      "id": "emberbound",
+      "hp": 0.9,
+      "atk": 1.4,
+      "spd": 1.15,
+      "shape": "glass cannon"
+    },
+    {
+      "id": "gorged",
+      "hp": 1.6,
+      "atk": 1.1,
+      "spd": 0.75,
+      "scale": 1.35,
+      "shape": "brute"
+    },
+    {
+      "id": "wraithtouched",
+      "hp": 0.85,
+      "atk": 1.25,
+      "spd": 1.3,
+      "shape": "skirmisher"
+    }
+  ],
+  "gating": "Floors 1-2 are 85% plain so a new hero meets something readable; depth 10+ is only 15% plain.",
+  "measured": "Strains IMPROVED survival (83% vs 63%) and soul retention. Do not soften them."
+}

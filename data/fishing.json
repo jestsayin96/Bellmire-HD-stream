@@ -1,0 +1,315 @@
+{
+  "_source": "Fishing loot for Bellmire's river. Minecraft-style: a cast rolls a CATEGORY (fish/junk/treasure, shifted by luck), then an item by weight inside it. Names follow canon: the river runs down from the mountain, and the mountain's foot is the dungeon's scar.",
+  "categories": {
+    "fish": 85.0,
+    "junk": 10.0,
+    "treasure": 5.0
+  },
+  "luck_per_level": {
+    "junk": -2.5,
+    "treasure": 2.1
+  },
+  "bite_seconds": [
+    5.0,
+    30.0
+  ],
+  "lure_seconds_per_level": 5.0,
+  "bite_window": 1.1,
+  "scar_touched_chance": 0.03,
+  "rarities": [
+    "common",
+    "uncommon",
+    "rare",
+    "epic",
+    "legendary"
+  ],
+  "items": [
+    {
+      "id": "mud_carp",
+      "name": "Mud Carp",
+      "cat": "fish",
+      "rarity": "common",
+      "weight": 40,
+      "value": 2,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 1.4,
+      "text": "Tastes of the riverbed. Feeds a family anyway.",
+      "tint": [
+        0.55,
+        0.5,
+        0.36
+      ]
+    },
+    {
+      "id": "river_perch",
+      "name": "River Perch",
+      "cat": "fish",
+      "rarity": "common",
+      "weight": 30,
+      "value": 3,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 1.2,
+      "text": "Striped, stubborn, everywhere.",
+      "tint": [
+        0.62,
+        0.7,
+        0.4
+      ]
+    },
+    {
+      "id": "bellmire_trout",
+      "name": "Bellmire Trout",
+      "cat": "fish",
+      "rarity": "uncommon",
+      "weight": 16,
+      "value": 6,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 1.6,
+      "text": "The market's favourite. The fishmonger weighs it twice.",
+      "tint": [
+        0.72,
+        0.62,
+        0.66
+      ]
+    },
+    {
+      "id": "silver_pike",
+      "name": "Silver Pike",
+      "cat": "fish",
+      "rarity": "uncommon",
+      "weight": 9,
+      "value": 9,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 2.0,
+      "text": "All teeth and grudges.",
+      "tint": [
+        0.86,
+        0.88,
+        0.92
+      ]
+    },
+    {
+      "id": "mountain_char",
+      "name": "Mountain Char",
+      "cat": "fish",
+      "rarity": "rare",
+      "weight": 3.5,
+      "value": 18,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 1.7,
+      "text": "Only comes down from the high water when the snow melts.",
+      "tint": [
+        0.95,
+        0.45,
+        0.3
+      ]
+    },
+    {
+      "id": "glowfin_eel",
+      "name": "Glowfin Eel",
+      "cat": "fish",
+      "rarity": "epic",
+      "weight": 1.2,
+      "value": 40,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 2.4,
+      "text": "Swam too near the scar. It never stopped glowing.",
+      "tint": [
+        0.3,
+        0.95,
+        0.8
+      ],
+      "glow": true
+    },
+    {
+      "id": "grinning_carp",
+      "name": "The Grinning Carp",
+      "cat": "fish",
+      "rarity": "legendary",
+      "weight": 0.3,
+      "value": 120,
+      "model": "res://assets/fishing/fish.glb",
+      "scale": 2.8,
+      "text": "Its mouth curls up at the corners. Nobody agrees whether it's laughing at you or with you.",
+      "tint": [
+        0.95,
+        0.8,
+        0.25
+      ],
+      "glow": true
+    },
+    {
+      "id": "old_boot",
+      "name": "Old Boot",
+      "cat": "junk",
+      "rarity": "common",
+      "weight": 22,
+      "value": 0,
+      "model": "",
+      "scale": 1.0,
+      "text": "Left foot. Someone is still looking for the right.",
+      "tint": [
+        0.25,
+        0.18,
+        0.12
+      ],
+      "shape": "boot"
+    },
+    {
+      "id": "tangled_line",
+      "name": "Tangled Line",
+      "cat": "junk",
+      "rarity": "common",
+      "weight": 18,
+      "value": 0,
+      "model": "res://assets/fishing/Rope_1.gltf",
+      "scale": 1.0,
+      "text": "Mostly knot."
+    },
+    {
+      "id": "fish_bones",
+      "name": "Fish Bones",
+      "cat": "junk",
+      "rarity": "common",
+      "weight": 16,
+      "value": 0,
+      "model": "res://assets/fishing/fishBones.glb",
+      "scale": 1.4,
+      "text": "Something got here first."
+    },
+    {
+      "id": "broken_bucket",
+      "name": "Leaky Bucket",
+      "cat": "junk",
+      "rarity": "common",
+      "weight": 12,
+      "value": 1,
+      "model": "res://assets/fishing/Bucket_Wooden_1.gltf",
+      "scale": 0.8,
+      "text": "Holds water for almost a second."
+    },
+    {
+      "id": "lily_pad",
+      "name": "Lily Pad",
+      "cat": "junk",
+      "rarity": "common",
+      "weight": 14,
+      "value": 0,
+      "model": "res://assets/fishing/waterlily_A.gltf",
+      "scale": 1.0,
+      "text": "Green, flat, disappointing."
+    },
+    {
+      "id": "old_bone",
+      "name": "Old Bone",
+      "cat": "junk",
+      "rarity": "uncommon",
+      "weight": 8,
+      "value": 1,
+      "model": "res://assets/fishing/bone_A.gltf",
+      "scale": 1.0,
+      "text": "Not a fish bone."
+    },
+    {
+      "id": "drowned_skull",
+      "name": "Drowned Skull",
+      "cat": "junk",
+      "rarity": "rare",
+      "weight": 2,
+      "value": 4,
+      "model": "res://assets/fishing/skull.gltf",
+      "scale": 1.0,
+      "text": "The guild asks that these be reported, not kept."
+    },
+    {
+      "id": "coin_pouch",
+      "name": "Coin Pouch",
+      "cat": "treasure",
+      "rarity": "uncommon",
+      "weight": 30,
+      "value": 25,
+      "model": "res://assets/fishing/Pouch_Large.gltf",
+      "scale": 1.0,
+      "text": "Still heavy. Someone's bad day."
+    },
+    {
+      "id": "rusted_key",
+      "name": "Rusted Key",
+      "cat": "treasure",
+      "rarity": "uncommon",
+      "weight": 20,
+      "value": 10,
+      "model": "res://assets/fishing/Key_Metal.gltf",
+      "scale": 1.6,
+      "text": "Opens something, somewhere."
+    },
+    {
+      "id": "sealed_bottle",
+      "name": "Sealed Bottle",
+      "cat": "treasure",
+      "rarity": "rare",
+      "weight": 18,
+      "value": 15,
+      "model": "res://assets/fishing/Bottle_1.gltf",
+      "scale": 1.0,
+      "text": "There's a note inside."
+    },
+    {
+      "id": "silver_chalice",
+      "name": "Silver Chalice",
+      "cat": "treasure",
+      "rarity": "rare",
+      "weight": 10,
+      "value": 45,
+      "model": "res://assets/fishing/Chalice.gltf",
+      "scale": 1.0,
+      "text": "Chapel silver. The healers will want it back."
+    },
+    {
+      "id": "gold_key",
+      "name": "Gilded Key",
+      "cat": "treasure",
+      "rarity": "epic",
+      "weight": 5,
+      "value": 60,
+      "model": "res://assets/fishing/Key_Gold.gltf",
+      "scale": 1.6,
+      "text": "Too fine for a door in Bellmire."
+    },
+    {
+      "id": "sunken_chest",
+      "name": "Sunken Chest",
+      "cat": "treasure",
+      "rarity": "epic",
+      "weight": 4,
+      "value": 90,
+      "model": "res://assets/fishing/Chest_Wood.gltf",
+      "scale": 0.7,
+      "text": "Barnacled shut. Worth the hernia."
+    },
+    {
+      "id": "scar_glass",
+      "name": "Scar-Glass Shard",
+      "cat": "treasure",
+      "rarity": "legendary",
+      "weight": 1.5,
+      "value": 150,
+      "model": "res://assets/fishing/detail_crystal.glb",
+      "scale": 0.6,
+      "text": "Broke off the scar upriver. Spells cast near it go wrong in turn.",
+      "tint": [
+        0.55,
+        0.3,
+        1.0
+      ],
+      "glow": true
+    }
+  ],
+  "bottle_notes": [
+    "MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR.",
+    "If you find this, the dungeon is still being built.",
+    "Tell my sister the boat is hers. Tell her not to take it upriver.",
+    "Third floor. Or fourth. They kept changing.",
+    "Whoever cast first, cast wrong."
+  ]
+}

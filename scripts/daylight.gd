@@ -1,0 +1,105 @@
+extends Node
+class_name Daylight
+## The old day clock made visible (economy.clock, 90 s days; old sim.is_night:
+## night before 6:00 and after 18:30). The sun climbs from 6:00 and sets at
+## 18:30; dawn and dusk run warm; at night a low blue moon, a dark sky, the
+## street lamps and yard fires burn brighter and the windows glow.
+
+var town: Node3D
+var economy: Economy
+var sun: DirectionalLight3D
+var env: Environment
+var sky: ProceduralSkyMaterial
+var _lights: Array = []          # [OmniLight3D, base energy]
+var _glass: Array = []           # window materials
+var _sky_day := {}
+var override_hour := -1.0        # test hook
+
+const DAWN := 6.0
+const DUSK := 18.5
+
+func setup(t: Node3D) -> void:
+    town = t
+    economy = t.get("economy")
+    for c in t.get_children():
+        if c is DirectionalLight3D and sun == null:
+            sun = c
+        elif c is WorldEnvironment and env == null:
+            env = (c as WorldEnvironment).environment
+    if env and env.sky:
+        sky = env.sky.sky_material as ProceduralSkyMaterial
+        _sky_day = {"top": sky.sky_top_color, "hor": sky.sky_horizon_color,
+                    "gb": sky.ground_bottom_color, "gh": sky.ground_horizon_color}
+    # every town light that exists at founding: lamps, yard fires, beacons
+    for n in t.find_children("*", "OmniLight3D", true, false):
+        _lights.append([n, (n as OmniLight3D).light_energy])
+    # window glass, wherever a building uses it
+    var seen := {}
+    for mi in t.find_children("*", "MeshInstance3D", true, false):
+        var m: MeshInstance3D = mi
+        if m.mesh == null:
+            continue
+        for s in m.mesh.get_surface_count():
+            var mat := m.get_active_material(s)
+            if mat is StandardMaterial3D and String(mat.resource_name).begins_with("MI_WindowGlass") and not seen.has(mat):
+                seen[mat] = true
+                _glass.append(mat)
+    for g in _glass:
+        (g as StandardMaterial3D).emission_enabled = true
+        (g as StandardMaterial3D).emission = Color(1.0, 0.68, 0.32)
+
+func hour() -> float:
+    return override_hour if override_hour >= 0.0 else economy.hour()
+
+## 0 at full day, 1 at full night, smooth across an hour either side of dawn/dusk
+func nightness(h: float) -> float:
+    if h >= DAWN + 1.0 and h <= DUSK - 1.0:
+        return 0.0
+    if h < DAWN - 0.5 or h > DUSK + 0.5:
+        return 1.0
+    if h < 12.0:
+        return clampf((DAWN + 1.0 - h) / 1.5, 0.0, 1.0)
+    return clampf((h - (DUSK - 1.0)) / 1.5, 0.0, 1.0)
+
+## warm light around the horizon crossings
+func goldness(h: float) -> float:
+    var d := minf(absf(h - DAWN), absf(h - DUSK))
+    return clampf(1.0 - d / 1.6, 0.0, 1.0)
+
+func _process(_dt: float) -> void:
+    if economy == null or sun == null:
+        return
+    var h := hour()
+    var nt := nightness(h)
+    var gd := goldness(h)
+    # sun along its arc: up at dawn, highest at mid-day, down at dusk
+    var day_t := clampf((h - DAWN) / (DUSK - DAWN), 0.0, 1.0)
+    var elev := sin(day_t * PI) * 58.0
+    var az := lerpf(-70.0, 110.0, day_t)
+    if nt >= 1.0 or h < DAWN or h > DUSK:
+        # the moon: low, cold, faint
+        sun.rotation = Vector3(deg_to_rad(-34.0), deg_to_rad(150.0), 0.0)
+        sun.light_color = Color(0.62, 0.70, 0.95)
+        sun.light_energy = lerpf(0.0, 0.38, nt)
+    else:
+        sun.rotation = Vector3(deg_to_rad(-maxf(elev, 4.0)), deg_to_rad(az), 0.0)
+        sun.light_color = Color(1, 1, 1).lerp(Color(1.0, 0.62, 0.36), gd)
+        sun.light_energy = lerpf(1.5, 0.7, gd) * (1.0 - nt)
+    if env:
+        env.ambient_light_energy = lerpf(0.85, 0.30, nt)   # a stream must stay watchable at night
+        env.fog_light_color = Color(0.70, 0.77, 0.84).lerp(Color(0.86, 0.60, 0.45), gd * (1.0 - nt)).lerp(Color(0.10, 0.12, 0.20), nt)
+    if sky and not _sky_day.is_empty():
+        var night_top := Color(0.02, 0.03, 0.09)
+        var night_hor := Color(0.07, 0.08, 0.16)
+        var gold_hor := Color(0.98, 0.58, 0.32)
+        sky.sky_top_color = (_sky_day["top"] as Color).lerp(Color(0.32, 0.30, 0.52), gd * 0.6).lerp(night_top, nt)
+        sky.sky_horizon_color = (_sky_day["hor"] as Color).lerp(gold_hor, gd).lerp(night_hor, nt)
+        sky.ground_horizon_color = (_sky_day["gh"] as Color).lerp(Color(0.5, 0.4, 0.35), gd).lerp(night_hor, nt)
+        sky.ground_bottom_color = (_sky_day["gb"] as Color).lerp(Color(0.03, 0.03, 0.05), nt)
+    # lamps burn low by day (they are lit, it is just bright out), full at night
+    var k := lerpf(0.35, 1.6, maxf(nt, gd * 0.6))
+    for l in _lights:
+        if is_instance_valid(l[0]):
+            (l[0] as OmniLight3D).light_energy = float(l[1]) * k
+    for g in _glass:
+        (g as StandardMaterial3D).emission_energy_multiplier = lerpf(0.0, 2.4, nt)

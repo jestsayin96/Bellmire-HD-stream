@@ -1,0 +1,42 @@
+{
+  "_source": "NOTES.md, Rotating bosses",
+  "draw": "Two bags. Every boss appears before any repeats; the order differs each cycle.",
+  "boss_floors": "every 5th floor",
+  "lesser": [
+    {
+      "name": "Hollow King"
+    },
+    {
+      "name": "Grubmother",
+      "hp": 230,
+      "speed": 1.8,
+      "shape": "a wall"
+    },
+    {
+      "name": "Rattling Host"
+    },
+    {
+      "name": "Nightwing",
+      "hp": 110,
+      "speed": 6.6,
+      "shape": "fast and fragile"
+    }
+  ],
+  "greater": [
+    {
+      "name": "Gravewyrm"
+    },
+    {
+      "name": "Ossuary Lord"
+    },
+    {
+      "name": "Pale Duchess",
+      "attack": 27,
+      "shape": "hits hardest"
+    },
+    {
+      "name": "Mourncoil"
+    }
+  ],
+  "rule": "Bosses are deliberately different SHAPES, not bigger numbers. Each carries a note that prints when it rises."
+}

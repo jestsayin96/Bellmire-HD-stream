@@ -1,0 +1,18 @@
+{
+  "_source": "NOTES.md, ORIGINS",
+  "origins": [
+    "tomb",
+    "worked seam",
+    "fallen hold",
+    "temple",
+    "lair",
+    "prison",
+    "workshop",
+    "buried town"
+  ],
+  "causality": "Inverted on purpose. shape_for picks the SHAPE first (guaranteeing all six shapes inside every six floors), then origin_for draws from the origins that could plausibly have made that shape. A cavern is always a lair or a buried town; a cross is always a fortress or a tomb.",
+  "chronicle_line": "Floor 2  —  a workshop, remade as a sunken meadow:  3 slimes.",
+  "word_order": "Origin first, biome second. 'a sunken meadow, once a workshop' reads like a mistake.",
+  "casing": "Godot's String.capitalize() title-cases EVERY word, so the text after the em dash stays lowercase.",
+  "budget": "One 'tell' line per delve, on floor 1 only."
+}

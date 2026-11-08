@@ -1,0 +1,61 @@
+{
+  "_source": "Ported from the old project's NOTES.md. Canon, not invented.",
+  "town": {
+    "name": "Bellmire",
+    "kind": "valley market town",
+    "guild": "the Bellmire Guild",
+    "inscription_over_the_chiefs_hall": "MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR."
+  },
+  "districts": [
+    {
+      "id": "keep",
+      "livery": "blue"
+    },
+    {
+      "id": "market",
+      "livery": "red"
+    },
+    {
+      "id": "craft",
+      "livery": "yellow"
+    },
+    {
+      "id": "temple",
+      "livery": "yellow"
+    },
+    {
+      "id": "homes_s",
+      "livery": "green"
+    },
+    {
+      "id": "homes_w",
+      "livery": "green"
+    },
+    {
+      "id": "garrison",
+      "livery": "blue"
+    },
+    {
+      "id": "mill",
+      "livery": "green"
+    }
+  ],
+  "district_rules": [
+    "Each district has a centre hex; its landmark is planted first, its own trades nearest that heart, then filler in its own character and density.",
+    "Hexes belong to the nearest district centre, which gives irregular organic borders rather than radial sectors.",
+    "Roof colour is the district signal. Only four liveries exist for eight districts, so they are assigned by ADJACENCY: no two neighbouring districts share one."
+  ],
+  "scar": {
+    "name": "wild-magic scarring",
+    "rule": "A botched casting scars the ground. Inside a scar, every spell misfires in turn.",
+    "reading": "The dungeon is one enormous scar. That is why a meadow sits under a mountain.",
+    "jests": [
+      "the accident - trapped inside his own expanding mistake",
+      "the deliberate - a wound that makes more of itself is an engine that never needs winding"
+    ],
+    "handling": "Keep both readings alive. Never resolve which one is true on screen."
+  },
+  "canon_silences": [
+    "No floor count is ever stated. The absence is canon: the dungeon is still being built."
+  ]
+}

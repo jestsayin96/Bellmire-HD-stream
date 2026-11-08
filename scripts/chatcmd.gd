@@ -1,0 +1,208 @@
+## PORTED VERBATIM from the old game (trial-and-error, read only). Pure data + rules, no Twitch connection.
+class_name ChatCmd
+extends Node
+
+# Parses viewer chat into actions on the Roster.
+#
+# NOTE ON REPLIES: anonymous IRC is read-only. Without a token the game cannot
+# post back into Twitch chat, so every response here is returned as a line for
+# the ON-SCREEN event feed. That is the right place for a stream overlay
+# anyway - viewers are watching the stream, not the chat scrollback.
+#
+# Verbs deliberately avoid fightoverlay's (!join !shop !buy !points
+# !leaderboard !avatar !duel !give !slots !boss !royale) so both can run on the
+# same channel without every command firing twice.
+
+signal say(line: String, colour: Color)
+signal wants_delve(user_id: String)
+signal wants_fish(user_id: String)
+signal wants_shop(user_id: String, kind: String)
+
+const COOLDOWN := 1.5          # seconds per viewer, anti-spam
+const QUEUE_MAX := 6
+
+const C_OK := Color(0.72, 0.95, 0.76)
+const C_INFO := Color(0.80, 0.88, 1.00)
+const C_WARN := Color(1.00, 0.72, 0.42)
+const C_DEAD := Color(1.00, 0.45, 0.38)
+
+var roster: Roster
+var delve_queue: Array = []
+## where a hero is while the town has them on the scar road or below it; an
+## errand command is refused rather than dragging them off (set by the town)
+var away := {}
+var _last := {}                # user_id -> msec of last accepted command
+var _seen_names := {}
+
+func _init(r: Roster = null) -> void:
+    roster = r
+
+func handle(user_id: String, display: String, msg: String) -> String:
+    if roster == null:
+        return ""
+    msg = msg.strip_edges()
+    if not msg.begins_with("!"):
+        return ""
+    var now := Time.get_ticks_msec()
+    if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
+        return ""
+    var parts := msg.substr(1).split(" ", false)
+    if parts.is_empty():
+        return ""
+    var verb := String(parts[0]).to_lower()
+    var arg := String(parts[1]).to_lower() if parts.size() > 1 else ""
+
+    # viewers rename themselves; keep the display name current
+    var h := roster.get_hero(user_id)
+    if not h.is_empty() and display != "" and h["name"] != display:
+        h["name"] = display
+
+    var out := ""
+    if verb in ["fish", "forge", "armoury", "armory", "brew"] and away.has(user_id) and not h.is_empty():
+        _last[user_id] = now
+        return "%s is %s." % [h["name"], away[user_id]]
+    match verb:
+        "enlist":   out = _enlist(user_id, display, arg)
+        "hero":     out = _needs(user_id, func(): return roster.describe(user_id))
+        "delve":    out = _delve(user_id)
+        "fish":     out = _needs(user_id, func():
+                        wants_fish.emit(user_id)
+                        return "%s heads for the docks with a rod." % roster.get_hero(user_id)["name"])
+        "forge":    out = _needs(user_id, func():
+                        wants_shop.emit(user_id, "blacksmith")
+                        return roster.buy_weapon(user_id))
+        "armoury", "armory":
+                    out = _needs(user_id, func():
+                        wants_shop.emit(user_id, "armorer")
+                        return roster.buy_armour(user_id))
+        "brew":     out = _brew(user_id, arg)
+        "oil", "lamp", "torch":
+                    out = _oil(user_id, arg)
+        "reroll":   out = _reroll(user_id, display)
+        "respec":   out = _needs(user_id, func(): return roster.respec(user_id, arg))
+        "memorial": out = _memorial()
+        "deepest":  out = _board("deepest")
+        "richest":  out = _board("gold")
+        "guild", "roll", "ranks":
+                    out = _board("standing")
+        "deadliest": out = _board("kills")
+        "patrons", "benefactors":
+                    out = _patrons()
+        "valley":   out = "Commands: !enlist !hero !delve !fish !forge !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
+        _:          return ""
+
+    _last[user_id] = now
+    if out != "":
+        say.emit(out, _tone(out))
+    return out
+
+# a command that requires a living hero
+func _needs(user_id: String, fn: Callable) -> String:
+    if roster.get_hero(user_id).is_empty():
+        return "No hero yet - type !enlist to join the valley."
+    if not roster.is_alive(user_id):
+        return "%s is dead. !reroll to raise a new hero." % roster.get_hero(user_id)["name"]
+    return String(fn.call())
+
+func _enlist(user_id: String, display: String, cls: String) -> String:
+    var h := roster.get_hero(user_id)
+    if not h.is_empty() and roster.is_alive(user_id):
+        return roster.describe(user_id)
+    if not h.is_empty():
+        return "%s lies in the memorial. !reroll to raise a new hero." % h["name"]
+    if display == "":
+        display = "Stranger"
+    var nh := roster.fresh(user_id, display, cls)
+    return "%s takes the oath as a %s. %s" % [nh["name"], nh["class"],
+        Roster.CLASSES[nh["class"]]["blurb"]]
+
+func _delve(user_id: String) -> String:
+    var gate := _needs(user_id, func(): return "ok")
+    if gate != "ok":
+        return gate
+    if user_id in delve_queue:
+        return "%s is already waiting at the dungeon mouth." % roster.get_hero(user_id)["name"]
+    if delve_queue.size() >= QUEUE_MAX:
+        return "The muster is full - %s waits for the next party." \
+            % roster.get_hero(user_id)["name"]
+    delve_queue.append(user_id)
+    wants_delve.emit(user_id)
+    return "%s sets out for the dungeon mouth. (%d in the party)" \
+        % [roster.get_hero(user_id)["name"], delve_queue.size()]
+
+# Oil is the cheapest thing on the board and the one most worth buying. A
+# viewer who keeps three flasks in the satchel will out-live a better-armed
+# hero who descends with none.
+func _oil(user_id: String, arg: String) -> String:
+    var n := 1
+    if arg != "" and arg.is_valid_int():
+        n = clampi(int(arg), 1, 10)
+    return _needs(user_id, func(): return roster.buy_oil(user_id, n))
+
+func _brew(user_id: String, arg: String) -> String:
+    var n := 1
+    if arg != "" and arg.is_valid_int():
+        n = clampi(int(arg), 1, 10)
+    return _needs(user_id, func(): return roster.buy_potion(user_id, n))
+
+# !reroll does double duty: raise a new hero if dead, reroll stats if alive
+func _reroll(user_id: String, display: String) -> String:
+    var h := roster.get_hero(user_id)
+    if h.is_empty():
+        return "No hero yet - type !enlist to join the valley."
+    if not roster.is_alive(user_id):
+        roster.heroes.erase(user_id)
+        var nh := roster.fresh(user_id, display if display != "" else String(h["name"]))
+        return "%s rises as a %s. The valley remembers the last one." \
+            % [nh["name"], nh["class"]]
+    return roster.reroll(user_id)
+
+func _memorial() -> String:
+    if roster.fallen.is_empty():
+        return "Nobody has died yet. Give it time."
+    var bits := []
+    for f: Dictionary in roster.fallen.slice(0, 5):
+        bits.append("%s (lv%d, floor %d)" % [f["name"], int(f["level"]), int(f["deepest"])])
+    return "The fallen: " + "  -  ".join(bits)
+
+# A thank-you board, deliberately separate from the achievement boards.
+func _patrons() -> String:
+    var rows := roster.patron_board(5)
+    if rows.is_empty():
+        return "Nobody has given to the valley yet."
+    var bits := []
+    var i := 0
+    for row: Dictionary in rows:
+        i += 1
+        bits.append("%d. %s" % [i, row["name"]])
+    return "Bellmire thanks:  " + "   ".join(bits)
+
+func _board(kind: String) -> String:
+    var rows := roster.leaderboard(kind, 5)
+    if rows.is_empty():
+        return "Nobody has enlisted yet."
+    var bits := []
+    var i := 0
+    for row: Dictionary in rows:
+        i += 1
+        # The roll reads as a roll: rank first, then whatever was asked for.
+        # A dagger marks the dead, who keep their place on it.
+        var v: int = int(row.get(kind, row.get("standing", 0)))
+        bits.append("%d. %s the %s (%d)%s"
+            % [i, row["name"], String(row.get("rank", "Unproven")), v,
+               "" if bool(row["alive"]) else " +"])
+    var heads := {"deepest": "Deepest delvers", "gold": "Richest",
+                  "kills": "Deadliest", "level": "Highest level",
+                  "standing": "The guild roll"}
+    var head: String = String(heads.get(kind, "The guild roll"))
+    return head + ": " + "   ".join(bits)
+
+func _tone(line: String) -> Color:
+    var l := line.to_lower()
+    if l.contains("dead") or l.contains("falls") or l.contains("memorial") or l.contains("fallen"):
+        return C_DEAD
+    if l.contains("needs") or l.contains("no hero") or l.contains("full") or l.contains("unkind"):
+        return C_WARN
+    if l.contains("takes") or l.contains("rises") or l.contains("fitted") or l.contains("sets out"):
+        return C_OK
+    return C_INFO

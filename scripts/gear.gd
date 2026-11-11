@@ -304,7 +304,7 @@ static func dress_hero(model_root: Node, family: String, tier: int, offhand := "
 ## whole prop set as extra meshes (Knight: 2 swords + 4 shields) and every one
 ## showed at once - in the old game too. Hide everything that is not the body,
 ## so the gear above is the only thing in the hands.
-const BODY_PARTS := ["Leg", "Head", "Body", "Arm", "Cape", "Helmet", "Hat"]
+const BODY_PARTS := ["Leg", "Head", "Body", "Arm", "Cape", "Helmet", "Hat", "Mask"]
 
 static func strip_props(model_root: Node) -> void:
     ## the kit's own props ALSO arrive under BoneAttachment3D nodes, so ours are
@@ -430,7 +430,8 @@ static func _cape_tint(model_root: Node, col: Color) -> void:
     var st: Array = [model_root]
     while not st.is_empty():
         var c: Node = st.pop_back()
-        if c is MeshInstance3D and (c as MeshInstance3D).visible and (String(c.name).contains("Hat") or String(c.name).contains("Hood")):
+        # a separate hat mesh only: on the 2.0 hooded rogue the hood IS the head mesh (face and all)
+        if c is MeshInstance3D and (c as MeshInstance3D).visible and String(c.name).ends_with("Hat"):
             ms.append(c)
         for g in c.get_children():
             st.append(g)

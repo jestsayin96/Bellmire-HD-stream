@@ -808,6 +808,14 @@ func _loot(alive: Array) -> void:
         haul["gear"] += 1.0
     if _rng.randf() < 0.4:
         haul["potion"] += 1.0
+    # L3: deep floors give up gear - one roll a floor, for whoever was searching
+    var finder: Dictionary = alive[_rng.randi() % alive.size()]
+    var found_line := roster.find_gear(String(finder["uid"]), floor_no, _rng.randf(), boss and not uniq)
+    if found_line != "":
+        _say(found_line)
+        var fb: HeroBody = finder["body"]
+        if is_instance_valid(fb):
+            fb.refresh()
     # clearing a floor is the unit of progress: everyone standing learns from it
     for m in alive:
         roster.award(String(m["uid"]), 0, floor_no * 5, 0, floor_no)

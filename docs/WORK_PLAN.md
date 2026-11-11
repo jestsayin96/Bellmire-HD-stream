@@ -48,9 +48,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L2. More bosses: a set of floor lords and rare uniques (from the lore), each with a mechanic
       (summons, enrage, area attack), a name card and the boss bar; never two of the same in a row.
       DONE (Cycle 59): a mechanic for each of the eight lords, five rare uniques (one from the memorial); L2_TEST OK.
-- [ ] L3. More weapons and armour: more tiers and kinds (axes, spears, maces, bows, staves, shields,
+- [x] L3. More weapons and armour: more tiers and kinds (axes, spears, maces, bows, staves, shields,
       helms, chest, boots) using KayKit/Quaternius CC0 meshes; visible on the hero; priced in the shops;
       !forge / !armoury pick from them; drops on deep floors.
+      DONE (Cycle 60): 10 weapon kinds x 5 tiers, worn armour, found-only tier 5, !forge <kind>, deep finds; L3_TEST OK.
 - [ ] L4. More classes: from the lore first (it has knight, mage, ranger, barbarian, cleric, rogue, sage,
       duelist); add more (e.g. paladin, necromancer, monk, druid, warlock, bard) with 5e-style saves,
       a weapon, a spell or ability, and !enlist support.

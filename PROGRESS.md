@@ -527,3 +527,31 @@ Town
   reads "Lord of floor 7". A one-line change there could say "on floor N" when lord.def.unique is true.
 - Checks: parse 0 script errors, _delve_test (DELVE_OIL=1) ENDED all four home, _offfloor 0 of 444-587 in
   four runs (after the entry fix), TWITCH_PARSE OK, L1_TEST OK.
+
+
+## Cycle 60 - L3, weapons and armour (laptop, 2026-11-11)
+- Weapon KINDS (Gear.KINDS): blade - sword, greatsword, dagger, spear; axe - axe, mace; arcane - staff,
+  wand; ranged - crossbow, bow. Each has its own mesh at every tier from the CC0 kits already here (KayKit
+  Adventurers, the KayKit weapon bits in assets/gear scaled x0.62 for the hand, the KayKit skeleton pack's
+  grave-steel for tier 5). A kind is look and name only - every tier's numbers are unchanged, so the
+  measured balance holds. A hero with no kind chosen keeps the old family progression and looks as before.
+- !forge <kind> buys the next tier in that kind ("Ashe takes up a plain steel spear"); at the forge's best
+  the smith reworks it into the new kind for a quarter of the tier price; !forge list names the kinds and
+  the next price. Wrong kind for the class is refused with the list. Prices are the old tier prices.
+- Tier 5, found only below: scarforged steel (atk 34, smoulders the scar's violet) and scarwoven mail
+  (hp 110, AC 8). No smith sells them (the rack and town tiers are untouched: 1-4).
+- Deep floors give up gear (Roster.find_gear, one roll per cleared floor for whoever searched): from
+  floor 6, 5% + 1%/floor (+20% for a lord), one tier above what they carry up to the forge's best; from
+  floor 10 someone already at the top can find tier 5. "Cass prises a scarforged mace from the dead on
+  floor 12." The hero's body is re-dressed at once.
+- Armour is worn (Gear.dress_armour on the KayKit bones): leather boots; chainmail adds pauldrons;
+  plate adds a crested kettle-hat helm (only on heads with no helmet, hat or hood of their own - so the
+  plain rogue/duelist); warded plate glows faintly blue; scarwoven is deep violet. Hooked through
+  Roster.offhand_bone -> Gear.rank_trim, the two calls HeroBody.refresh already makes (hero_body.gd is on
+  neither list, so it is not touched; a direct Gear.dress_armour call there would be cleaner).
+- tools/_l3_test.gd (headless, new): every kind has a mesh at every tier; tier tables agree; the forge
+  (kind buy, keep kind, wrong kind refused, rework at the top, tier 5 never sold, no gold = no change);
+  finds by depth; tier 5 in the numbers; chat !forge bow / !forge list; pieces worn per tier and through
+  rank_trim. L3_TEST OK. tools/_l3_shot.gd: renders/cycles/20261111_l3 - looked at: first pass the helm
+  sat high like a bowl and the violet blew out; helm lowered with a brim, glows toned down; second pass reads.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 483, TWITCH_PARSE OK, L1_TEST OK.

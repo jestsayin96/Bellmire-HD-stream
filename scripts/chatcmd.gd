@@ -92,8 +92,10 @@ func handle(user_id: String, display: String, msg: String) -> String:
                         wants_fish.emit(user_id)
                         return "%s heads for the docks with a rod." % roster.get_hero(user_id)["name"])
         "forge":    out = _needs(user_id, func():
+                        if arg in ["list", "kinds", "?", "menu"]:
+                            return roster.forge_menu(user_id)
                         wants_shop.emit(user_id, "blacksmith")
-                        return roster.buy_weapon(user_id))
+                        return roster.buy_weapon(user_id, arg))
         "armoury", "armory":
                     out = _needs(user_id, func():
                         wants_shop.emit(user_id, "armorer")
@@ -111,7 +113,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
-        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
+        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge [kind|list] !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
         _:          return ""
 
     _last[user_id] = now

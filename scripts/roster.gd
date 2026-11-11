@@ -81,6 +81,8 @@ const WEAPONS := [
     {"name": "fine steel",  "cost": 160, "atk": 9,  "scale": 1.05, "glow": 0.0},
     {"name": "runed",       "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5},
     {"name": "dragontooth", "cost": 1100,"atk": 26, "scale": 1.25, "glow": 1.0},
+    # L3: found only below (Gear.WEAPONS carries the same row) - no smith makes it
+    {"name": "scarforged",  "cost": 0,   "atk": 34, "scale": 1.3, "glow": 1.3, "found": true},
 ]
 # "ac" is the 5E armour bonus on top of 10 + DEX. Armour used to give hit
 # points only, which is not how D&D works: better armour should make you
@@ -91,7 +93,15 @@ const ARMOUR := [
     {"name": "chainmail", "cost": 150, "hp": 26, "ac": 3},
     {"name": "plate", "cost": 400, "hp": 48, "ac": 5},
     {"name": "warded plate", "cost": 1000, "hp": 80, "ac": 7},
+    {"name": "scarwoven mail", "cost": 0, "hp": 110, "ac": 8, "found": true},
 ]
+## the forge's best: the found-only tiers above are never sold
+static func forged_max(list: Array) -> int:
+    var top := 0
+    for i in range(list.size()):
+        if not bool((list[i] as Dictionary).get("found", false)):
+            top = i
+    return top
 # WHAT THE TOWN CAN MAKE. His design: levelling the town "unlocks more gear
 # and stuff potions". A hamlet's smith does not forge warded plate - the top
 # tiers are gated behind Bellmire itself growing, which gives the valley's
@@ -258,24 +268,46 @@ func spend(h: Dictionary, cost: int) -> bool:
     Sfx.play("coin", -6.0)
     return true
 
-func buy_weapon(user_id: String) -> String:
+func buy_weapon(user_id: String, kind := "") -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
+    # L3: !forge <kind> - a kind of this hero's family (sword, spear, mace, bow...)
+    if kind != "":
+        var fam := String(CLASSES[h["class"]]["family"])
+        if not Gear.KINDS.has(kind) or String(Gear.KINDS[kind]["family"]) != fam:
+            return "The smith does not make a %s for a %s. Ask for: %s." % [kind, h["class"], ", ".join(Gear.kinds_of(fam))]
+        var top := mini(forged_max(WEAPONS), town_tier)
+        if int(h["weapon"]) >= top and int(h["weapon"]) > 0:
+            # nothing better to buy: the smith reworks what they carry into the new kind
+            if String(h.get("wkind", "")) == kind:
+                return "%s already carries %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
+            if bool(WEAPONS[int(h["weapon"])].get("found", false)):
+                return "No smith in Bellmire will put a hammer to scarforged steel."
+            var rework := cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4))
+            if not spend(h, rework):
+                return "%s needs %d gold to have it reworked into a %s (has %d)." % [h["name"], rework, kind, int(h["gold"])]
+            h["wkind"] = kind
+            changed.emit(user_id)
+            return "The smith reworks %s's steel into %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
     var nxt: int = int(h["weapon"]) + 1
-    if nxt >= WEAPONS.size():
-        return "%s already carries a %s - nothing better is forged here." \
-            % [h["name"], WEAPONS[-1]["name"]]
+    if nxt >= WEAPONS.size() or bool(WEAPONS[nxt].get("found", false)):
+        return "%s already carries %s %s - nothing better is forged here." \
+            % [h["name"], _an(weapon_name(h)), weapon_name(h)]
     if nxt > town_tier:
         return "%s wants %s, but no smith in Bellmire can forge it yet." \
             % [h["name"], WEAPONS[nxt]["name"]]
     var w: Dictionary = WEAPONS[nxt]
     var peek := h.duplicate(true)
     peek["weapon"] = nxt
+    if kind != "":
+        peek["wkind"] = kind
     var label := weapon_name(peek)
     if not spend(h, cost_for(h, int(w["cost"]))):
         return "%s needs %d gold for %s %s (has %d)." \
             % [h["name"], cost_for(h, int(w["cost"])), _an(label), label, int(h["gold"])]
     h["weapon"] = nxt
+    if kind != "":
+        h["wkind"] = kind
     changed.emit(user_id)
     return "%s takes up %s %s. (+%d atk)" % [h["name"], _an(label), label, int(w["atk"])]
 
@@ -286,8 +318,8 @@ func buy_armour(user_id: String) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
     var nxt: int = int(h["armour"]) + 1
-    if nxt >= ARMOUR.size():
-        return "%s is already in %s." % [h["name"], ARMOUR[-1]["name"]]
+    if nxt >= ARMOUR.size() or bool(ARMOUR[nxt].get("found", false)):
+        return "%s is already in %s - nothing better is made here." % [h["name"], ARMOUR[int(h["armour"])]["name"]]
     if nxt > town_tier:
         return "%s wants %s, but Bellmire has no one who can make it yet." \
             % [h["name"], ARMOUR[nxt]["name"]]
@@ -480,6 +512,10 @@ func weapon_mesh(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
     if t <= 0:
         return ""
+    # L3: a chosen kind (!forge <kind>) has its own mesh per tier
+    var kind := String(h.get("wkind", ""))
+    if Gear.KINDS.has(kind):
+        return Gear.kind_path(kind, t)
     var fam: String = String(CLASSES[h["class"]]["family"])
     var list: Array = FAMILIES[fam]
     return String(list[clampi(t - 1, 0, list.size() - 1)])
@@ -489,11 +525,14 @@ func offhand_mesh(h: Dictionary) -> String:
 
 # most offhands are held; a quiver is worn
 func offhand_bone(h: Dictionary) -> String:
+    # L3: HeroBody.refresh asks this just before Gear.rank_trim - the armour goes on there
+    Gear._dressing = h
     return String(CLASSES[h["class"]].get("offhand_bone", "handslot.l"))
 
 func weapon_look(h: Dictionary) -> Dictionary:
-    var w: Dictionary = WEAPONS[int(h["weapon"])]
-    return {"scale": float(w["scale"]), "glow": float(w["glow"])}
+    var w: Dictionary = WEAPONS[clampi(int(h["weapon"]), 0, WEAPONS.size() - 1)]
+    var path := weapon_mesh(h)
+    return {"scale": float(w["scale"]) * Gear.hand_scale(path), "glow": float(w["glow"])}
 
 # the full name a viewer sees: tier adjective + family noun
 const FAMILY_NOUN := {"blade": "blade", "axe": "axe", "arcane": "focus", "ranged": "bow"}
@@ -502,8 +541,49 @@ func weapon_name(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
     if t <= 0:
         return "bare hands"
-    return "%s %s" % [WEAPONS[t]["name"],
-        FAMILY_NOUN.get(String(CLASSES[h["class"]]["family"]), "weapon")]
+    var kind := String(h.get("wkind", ""))
+    var noun: String = String(Gear.KINDS[kind]["noun"]) if Gear.KINDS.has(kind) else String(FAMILY_NOUN.get(String(CLASSES[h["class"]]["family"]), "weapon"))
+    return "%s %s" % [WEAPONS[clampi(t, 0, WEAPONS.size() - 1)]["name"], noun]
+
+## ---- L3: what the forge offers this hero: their family's kinds and the next tier
+func forge_menu(user_id: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var fam := String(CLASSES[h["class"]]["family"])
+    var nxt := int(h["weapon"]) + 1
+    var top := mini(forged_max(WEAPONS), town_tier)
+    var next := "nothing better is forged here" if nxt > top else "next: %s, %d gold" % [WEAPONS[nxt]["name"], cost_for(h, int(WEAPONS[nxt]["cost"]))]
+    return "The smith works %s for a %s: %s (!forge <kind>)  |  %s." % [
+        "steel", h["class"], ", ".join(Gear.kinds_of(fam)), next]
+
+## a deep floor gives up gear: one tier above what the finder carries (the
+## forge's best at most), and from floor 10 scarforged steel or scarwoven mail
+## for one already at the top. Returns the Chronicle line, or "".
+func find_gear(user_id: String, floor_no: int, roll: float, lord := false) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty() or floor_no < 6:
+        return ""
+    var chance := 0.05 + 0.01 * float(floor_no) + (0.2 if lord else 0.0)
+    if roll >= chance:
+        return ""
+    var arm := int(h["armour"]) < int(h["weapon"])
+    var key := "armour" if arm else "weapon"
+    var list: Array = ARMOUR if arm else WEAPONS
+    var cur := int(h[key])
+    var top := forged_max(list)
+    var nxt := cur + 1
+    if cur >= top:
+        if floor_no < 10 or nxt >= list.size():
+            return ""
+    h[key] = nxt
+    if not arm:
+        var kinds := Gear.kinds_of(String(CLASSES[h["class"]]["family"]))
+        if not kinds.is_empty():
+            h["wkind"] = kinds[randi() % kinds.size()]
+    changed.emit(user_id)
+    var what := weapon_name(h) if not arm else String(ARMOUR[nxt]["name"])
+    return "%s prises %s %s from the dead on floor %d." % [h["name"], _an(what), what, floor_no] if not arm \
+        else "%s strips a set of %s off the dead on floor %d." % [h["name"], what, floor_no]
 
 func _stat_line(s: Dictionary) -> String:
     var parts := []

@@ -4147,8 +4147,12 @@ func route(from: Vector3, to: Vector3) -> Array:
             var out: Array = []
             for i in range(1, pp.size()):
                 out.append(pp[i])
-            # only finish on the exact spot if it is walkable ground
-            if nav.closest(to).distance_to(Vector3(to.x, 0, to.z)) < 0.6:
+            # only finish on the exact spot if it is walkable ground - or a
+            # step or two beyond it with nothing solid between (a door spot
+            # sits closer to its house than the navmesh's half-metre margin)
+            var last: Vector3 = pp[pp.size() - 1]
+            var gap := Vector2(to.x - last.x, to.z - last.z).length()
+            if gap < 0.6 or (gap < 2.6 and _clear_line(last, to)):
                 out.append(to)
             return out
     var a := _nearest_road(from)
@@ -4200,6 +4204,139 @@ func route(from: Vector3, to: Vector3) -> Array:
                 pts.append(gbest + out * 10.0)
     pts.append(to)
     return pts
+
+## ---- D1: people give each other room. A coarse 2 m grid of everyone out on
+## the streets, rebuilt once a physics frame; crowd_push(v) is the shove away
+## from whoever stands closer than CROWD_R (posted folk count as obstacles).
+const CROWD_R := 0.75
+var _crowd_f := -1
+var _crowd: Dictionary = {}
+
+func crowd_push(v: Node3D) -> Vector3:
+    var f := Engine.get_physics_frames()
+    if f != _crowd_f:
+        _crowd_f = f
+        _crowd.clear()
+        for o in people:
+            if not is_instance_valid(o) or not (o as Node3D).visible or bool(o.get("inside")):
+                continue
+            var op: Vector3 = (o as Node3D).global_position
+            var key := Vector2i(floori(op.x * 0.5), floori(op.z * 0.5))
+            if not _crowd.has(key):
+                _crowd[key] = []
+            (_crowd[key] as Array).append(o)
+    var p := v.global_position
+    var kx := floori(p.x * 0.5)
+    var kz := floori(p.z * 0.5)
+    var push := Vector3.ZERO
+    for dx in range(-1, 2):
+        for dz in range(-1, 2):
+            var cell = _crowd.get(Vector2i(kx + dx, kz + dz))
+            if cell == null:
+                continue
+            for o in cell:
+                if o == v:
+                    continue
+                var op: Vector3 = (o as Node3D).global_position
+                var d := Vector3(p.x - op.x, 0.0, p.z - op.z)
+                var L := d.length()
+                if L < CROWD_R:
+                    if L < 0.01:
+                        d = Vector3(cos(float(v.get_instance_id() % 628) * 0.01), 0.0, sin(float(v.get_instance_id() % 628) * 0.01))
+                        L = 0.01
+                    push += d / L * (CROWD_R - L) / CROWD_R
+    return push
+
+## nothing solid on the straight line a -> b (feet only, no margin)
+func _clear_line(a: Vector3, b: Vector3) -> bool:
+    var n := maxi(int(Vector2(b.x - a.x, b.z - a.z).length() / 0.25), 1)
+    for i in range(n + 1):
+        if not solid_at(a.lerp(b, float(i) / float(n)), 0.05).is_empty():
+            return false
+    return true
+
+## where a walker may put its foot: pushed back out of any house, stall,
+## table or wall section it stepped into (height from the ground). A 4 m grid
+## of the solid footprints - nav.closest() is a scan of every polygon (0.3 ms)
+## and far too dear for every walker every frame.
+const SOLID_CELL := 4.0
+const FOOT_R := 0.15
+var _sgrid: Dictionary = {}
+var _sgrid_key := ""
+var _sgrid_f := -100000
+
+func _solid_footprints() -> Array:
+    var rects: Array = _solid_rects.duplicate()
+    for plot in plots:
+        var sh: String = String(plot.get("shape", "a"))
+        if not _house_box.has(sh):
+            continue
+        var he: Vector2 = (_house_box[sh][0] as Vector2) * 1.04 + Vector2(0.15, 0.15)
+        var off: Vector2 = _house_box[sh][1]
+        var yaw: float = float(plot["yaw"])
+        var ax := Vector2(cos(yaw), -sin(yaw))
+        var az := Vector2(sin(yaw), cos(yaw))
+        var pp: Vector3 = plot["pos"]
+        rects.append([Vector2(pp.x, pp.z) + ax * off.x + az * off.y, ax, az, he])
+    for w in _wall_solid:
+        var wp: Vector3 = w[0]
+        var tg: Vector3 = w[1]
+        rects.append([Vector2(wp.x, wp.z), Vector2(tg.x, tg.z), Vector2(-tg.z, tg.x), Vector2(1.9, 1.1)])
+    return rects
+
+func _solid_grid() -> Dictionary:
+    var f := Engine.get_physics_frames()
+    if f - _sgrid_f < 600:
+        return _sgrid
+    _sgrid_f = f
+    var key := "%d/%d/%d" % [_solid_rects.size(), plots.size(), _wall_solid.size()]
+    if key == _sgrid_key:
+        return _sgrid
+    _sgrid_key = key
+    _sgrid = {}
+    for r in _solid_footprints():
+        var c: Vector2 = r[0]
+        var he: Vector2 = r[3]
+        var ext: float = (r[1] as Vector2).abs().x * he.x + (r[2] as Vector2).abs().x * he.y
+        var ezt: float = (r[1] as Vector2).abs().y * he.x + (r[2] as Vector2).abs().y * he.y
+        for gx in range(floori((c.x - ext - FOOT_R) / SOLID_CELL), floori((c.x + ext + FOOT_R) / SOLID_CELL) + 1):
+            for gz in range(floori((c.y - ezt - FOOT_R) / SOLID_CELL), floori((c.y + ezt + FOOT_R) / SOLID_CELL) + 1):
+                var k := Vector2i(gx, gz)
+                if not _sgrid.has(k):
+                    _sgrid[k] = []
+                (_sgrid[k] as Array).append(r)
+    return _sgrid
+
+## the solid footprint p stands in (with margin m), or [] if none
+func solid_at(p: Vector3, m := 0.0) -> Array:
+    var cell = _solid_grid().get(Vector2i(floori(p.x / SOLID_CELL), floori(p.z / SOLID_CELL)))
+    if cell == null:
+        return []
+    for r in cell:
+        var d := Vector2(p.x, p.z) - (r[0] as Vector2)
+        var he: Vector2 = r[3]
+        if absf(d.dot(r[1])) < he.x + m and absf(d.dot(r[2])) < he.y + m:
+            return r
+    return []
+
+func keep_walkable(p: Vector3) -> Vector3:
+    for i in range(3):
+        var r := solid_at(p, FOOT_R)
+        if r.is_empty():
+            break
+        var ax: Vector2 = r[1]
+        var az: Vector2 = r[2]
+        var he: Vector2 = r[3]
+        var d := Vector2(p.x, p.z) - (r[0] as Vector2)
+        var lx := d.dot(ax)
+        var lz := d.dot(az)
+        var gx := he.x + FOOT_R + 0.02 - absf(lx)
+        var gz := he.y + FOOT_R + 0.02 - absf(lz)
+        var mv := ax * signf(lx if lx != 0.0 else 1.0) * gx if gx < gz else az * signf(lz if lz != 0.0 else 1.0) * gz
+        p.x += mv.x
+        p.z += mv.y
+    p.y = height_at(p.x, p.z)
+    return p
 
 func _count_inside() -> int:
     var n := 0

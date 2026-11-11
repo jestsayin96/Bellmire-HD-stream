@@ -30,7 +30,9 @@ func setup(t: Node3D, extent: float, solids: Array, rects: Array, wall: Array,
     nm.agent_max_climb = 0.5
     nm.agent_max_slope = 60.0
     nm.region_min_size = 4.0
-    nm.edge_max_error = 1.6
+    # 1.6 let the simplified outline cut up to a metre and a half into a
+    # house corner; keep the edges close to the carved footprints
+    nm.edge_max_error = 0.4
     nm.geometry_parsed_geometry_type = NavigationMesh.PARSED_GEOMETRY_MESH_INSTANCES
     nm.filter_baking_aabb = AABB(Vector3(-extent, -5.0, -extent), Vector3(extent * 2.0, 10.0, extent * 2.0))
     var src := NavigationMeshSourceGeometryData3D.new()
@@ -73,19 +75,24 @@ func _circle(src: NavigationMeshSourceGeometryData3D, c: Vector3, r: float) -> v
     for i in range(8):
         var a := TAU * float(i) / 8.0
         pts.append(Vector3(c.x + cos(a) * r, 0.0, c.z + sin(a) * r))
-    src.add_projected_obstruction(pts, -2.0, 8.0, true)
+    # D1: carve=false. A CARVED obstruction skips the agent-radius margin, so
+    # paths ran along the very walls and the cell rounding put feet inside
+    src.add_projected_obstruction(pts, -2.0, 8.0, false)
     n_obstructions += 1
 
 func _rect(src: NavigationMeshSourceGeometryData3D, r: Array) -> void:
     var c: Vector2 = r[0]
     var ax: Vector2 = r[1]
     var az: Vector2 = r[2]
-    var he: Vector2 = r[3]
+    # a fence or bench thinner than a cell slipped between the cell centres
+    var he: Vector2 = (r[3] as Vector2).max(Vector2(0.3, 0.3))
     var pts := PackedVector3Array()
     for k in [Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)]:
         var q: Vector2 = c + ax * he.x * k.x + az * he.y * k.y
         pts.append(Vector3(q.x, 0.0, q.y))
-    src.add_projected_obstruction(pts, -2.0, 8.0, true)
+    # D1: carve=false. A CARVED obstruction skips the agent-radius margin, so
+    # paths ran along the very walls and the cell rounding put feet inside
+    src.add_projected_obstruction(pts, -2.0, 8.0, false)
     n_obstructions += 1
 
 ## a walkable path from a to b (flat; y is filled in by the walker), or [] if
@@ -101,4 +108,7 @@ func path(a: Vector3, b: Vector3) -> PackedVector3Array:
 func closest(p: Vector3) -> Vector3:
     if not ready_ok:
         return p
-    return NavigationServer3D.map_get_closest_point(get_navigation_map(), Vector3(p.x, 0, p.z))
+    var map := get_navigation_map()
+    if NavigationServer3D.map_get_iteration_id(map) == 0:
+        return Vector3(p.x, 0, p.z)       # not synced yet: no opinion
+    return NavigationServer3D.map_get_closest_point(map, Vector3(p.x, 0, p.z))

@@ -462,6 +462,125 @@ Town
 - Checks: parse 0 errors, _offfloor 0/904 off-floor, _twitch_parse OK, _delve_test progressing (floor 2).
 
 
+## Cycle 58 - L1, more monsters (laptop, 2026-11-11)
+- Lore read first (old bestiary.gd, NOTES.md bestiary/strains/biomes, data/*.json): the old game's creatures
+  are undead, ooze, beasts, fiends and the wyrm; strains rename and recolour; 14 themes. Everything new
+  keeps to those families and that plain voice; no lord was added (the eight are canon).
+- New creatures, all from CC0 bodies already in the project (no new download - see note):
+  bone bowman (KayKit Skeleton_Minion + the skeleton pack's own crossbow; keeps 8.5 m off and shoots a bone
+  bolt), bone sentinel (Skeleton_Warrior, blade, large shield; +3 to be hit), gravecaller (Skeleton_Mage +
+  staff; casts from 7 m and raises up to 2 "risen dead" that climb out of the floor with the KayKit awaken),
+  lost delver (KayKit Knight / Barbarian / Rogue_Hooded, pale and cold-glowing - the guild's own dead; goes
+  for the weakest delver), grave-whelp (the Quaternius dragon at 2.3 m; its breath splashes everyone within
+  2.8 m of its mark at half), slimeling (what a slime divides into when it dies).
+- Ways for the old creatures (Bestiary.WAYS): slimes split, spiders/snakes/adders/wasps leave venom that
+  keeps hurting, rats/wasps/bats/puglins come in packs, the skeleton mage and imp shoot from range, the
+  skeleton rogue holds a grudge. Delve reads them; numbers per hit are unchanged.
+- Home themes (Bestiary.HOMES / NEW_TYPES homes): a creature at home on the floor's FloorGen theme is three
+  times as likely there (pool_for). Depth bands widened: bowmen from floor 3, sentinels 5, gravecallers 6,
+  lost delvers 8, whelps 10. Nothing new on floors 1-2.
+- Two strains: scarborn (from floor 8 half the plain roll; its glow wanders the hue wheel like the scar's
+  motes), mossbacked (the drowned of meadow and wood floors). The old strain bands are unchanged.
+- tools/_l1_test.gd (headless, new): all 21 bodies load, every mapped animation exists, weapons on, heights
+  right; strains appear where they should; home weighting; a real floor-4 delve sees an ooze divide, a
+  gravecaller raise the dead, a bowman shoot, a whelp breathe, venom. L1_TEST OK.
+  Renders renders/cycles/20261111_l1 (new_creatures, new_strains, ways_shot_breath) - looked at: first pass the
+  lost delvers were flat blue silhouettes and the whelp was hidden by its own breath; tints lightened, whelp
+  scaled up, breath puffs smaller and from the mouth - second pass all read.
+- Note: Quaternius "Ultimate Monsters" (CC0: orc, ghost, yeti, mushroom king, demon...) is on Google Drive,
+  which refused every download today ("quota exceeded"). Worth a retry; they would slot in as more bodies.
+- Checks: parse 0 script errors (the 3 old 'material is null' lines), _delve_test (DELVE_OIL=1) ENDED all
+  four home, _offfloor 0 of 434, TWITCH_PARSE OK.
+
+
+## Cycle 59 - L2, lords with mechanics and rare uniques (laptop, 2026-11-11)
+- Lore: the eight lords stay canon (names, titles, notes, floors ending 5 / every 10th, the two bags). Each
+  now fights the way its own note says (Bestiary.LORD_WAYS, read by Delve like any creature's ways):
+  The Hollow King, "wreathed in cold fire" - casts from 6 m and rolls a ring of cold fire (6 m, DEX save
+  halves). The Grubmother, "vast, slow, and patient" - broods slimelings, up to 4. The Rattling Host, "a
+  hundred dead men in one harness" - drops two dead men at 2/3 and at 1/3 of its hp. Nightwing, "too fast to
+  see coming" - swoops across the room onto the weakest (x1.6) and calls bats. The Gravewyrm - breath that
+  splashes 4 m, enraged under 30%. The Ossuary Lord, "it does not hurry" - calls its bones up out of the
+  floor and takes half damage while any stand. The Pale Duchess, "she opens throats" - bleeding cuts, goes
+  for the weakest, enraged under 35%. Mourncoil, "frost comes off it in sheets" - breath, and sheets of frost
+  that slow the delvers' swings to half for 3 s. Mechanics start when a delver is within 16 m.
+- Enraged: aura, ring, crown and light go red, the body swells a tenth, a Chronicle line and a red card.
+- Never two of the same lord in a row: a fresh bag never opens with the lord that closed the last.
+- Rare uniques (Bestiary.UNIQUES): on an ordinary floor from floor 2, 12% of the time, from a bag, never the
+  same twice running. Each gets the name card ("A rare thing on floor N."), the boss bar and the director,
+  a mechanic, two-thirds of a lord's hoard and +3 renown. Gnawbone (the rats' queen; calls rats), Mother
+  Silk (venom, calls spiders), The Weeping Bowman (volleys at everyone in reach), Cinderjack (an imp the
+  firepits let out; a fire ring), and "<name>, Kept by the Scar": a hero from the memorial who fell below,
+  in their class's body, with a grudge and an enrage. Only once someone has fallen down there.
+- Fixes found on the way: a creature with a grudge measured its 16 m mechanic range to its far-off mark
+  instead of the nearest delver (mechanics stalled); a called slimeling had no ways entry (script error);
+  the 7th and 8th heroes of a big party were set down past the wall at a new floor's entry (the off-floor
+  samples since L1) - they now land on the floor.
+- tools/_l2_test.gd (headless, new): 60 lord draws never repeat back to back, all eight drawn, each has a
+  mechanic; uniques never on a lord floor, never twice running, all five turn up, the memorial names the
+  kept one; then all 13 fought in real delves - each one holds its floor, the boss bar sees it, and every
+  mechanic fires (summon, nova, shed, swoop, enrage, ward, breath, volley). L2_TEST OK.
+  tools/_l2_shot.gd (windowed, new; L2_WHO=<lord or unique>): renders/cycles/20261111_l2 - looked at the
+  Hollow King's card and his cold-fire ring with the bar, the Grubmother's brood line in the Chronicle,
+  Wren Kept by the Scar with its card line and bar.
+- For whoever owns boss_bar.gd (on neither list): its subtitle is hardcoded "Lord of floor N", so a unique
+  reads "Lord of floor 7". A one-line change there could say "on floor N" when lord.def.unique is true.
+- Checks: parse 0 script errors, _delve_test (DELVE_OIL=1) ENDED all four home, _offfloor 0 of 444-587 in
+  four runs (after the entry fix), TWITCH_PARSE OK, L1_TEST OK.
+
+
+## Cycle 60 - L3, weapons and armour (laptop, 2026-11-11)
+- Weapon KINDS (Gear.KINDS): blade - sword, greatsword, dagger, spear; axe - axe, mace; arcane - staff,
+  wand; ranged - crossbow, bow. Each has its own mesh at every tier from the CC0 kits already here (KayKit
+  Adventurers, the KayKit weapon bits in assets/gear scaled x0.62 for the hand, the KayKit skeleton pack's
+  grave-steel for tier 5). A kind is look and name only - every tier's numbers are unchanged, so the
+  measured balance holds. A hero with no kind chosen keeps the old family progression and looks as before.
+- !forge <kind> buys the next tier in that kind ("Ashe takes up a plain steel spear"); at the forge's best
+  the smith reworks it into the new kind for a quarter of the tier price; !forge list names the kinds and
+  the next price. Wrong kind for the class is refused with the list. Prices are the old tier prices.
+- Tier 5, found only below: scarforged steel (atk 34, smoulders the scar's violet) and scarwoven mail
+  (hp 110, AC 8). No smith sells them (the rack and town tiers are untouched: 1-4).
+- Deep floors give up gear (Roster.find_gear, one roll per cleared floor for whoever searched): from
+  floor 6, 5% + 1%/floor (+20% for a lord), one tier above what they carry up to the forge's best; from
+  floor 10 someone already at the top can find tier 5. "Cass prises a scarforged mace from the dead on
+  floor 12." The hero's body is re-dressed at once.
+- Armour is worn (Gear.dress_armour on the KayKit bones): leather boots; chainmail adds pauldrons;
+  plate adds a crested kettle-hat helm (only on heads with no helmet, hat or hood of their own - so the
+  plain rogue/duelist); warded plate glows faintly blue; scarwoven is deep violet. Hooked through
+  Roster.offhand_bone -> Gear.rank_trim, the two calls HeroBody.refresh already makes (hero_body.gd is on
+  neither list, so it is not touched; a direct Gear.dress_armour call there would be cleaner).
+- tools/_l3_test.gd (headless, new): every kind has a mesh at every tier; tier tables agree; the forge
+  (kind buy, keep kind, wrong kind refused, rework at the top, tier 5 never sold, no gold = no change);
+  finds by depth; tier 5 in the numbers; chat !forge bow / !forge list; pieces worn per tier and through
+  rank_trim. L3_TEST OK. tools/_l3_shot.gd: renders/cycles/20261111_l3 - looked at: first pass the helm
+  sat high like a bowl and the violet blew out; helm lowered with a brim, glows toned down; second pass reads.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 483, TWITCH_PARSE OK, L1_TEST OK.
+
+
+## Cycle 61 - L4, six more callings (laptop, 2026-11-11)
+- Lore first: the old game's nine callings (knight, warden, barbarian, rogue, duelist, ranger, mage, sage,
+  cleric) stay as they are. Six more, built the old way - a KayKit body + a weapon family + an offhand +
+  a stat profile - each with 5e saves, a default weapon kind, one ability Delve reads, and a cloak colour:
+  paladin (Knight, sword + badge shield, STR, saves WIS/CHA; lays on hands when someone is near falling,
+  smites the dead and the lost x2), necromancer (Mage, staff + closed book, INT, INT/WIS; drinks back 30%
+  of what its bolts do), monk (Rogue, quarterstaff or bare wraps - a new "open" family, DEX, STR/DEX;
+  flurry: swings 0.6x the interval for 0.7x the hit; unarmoured defence adds WIS in leather or less),
+  druid (Mage, staff, WIS, INT/WIS; thorns: its bolt hits whatever stands within 2.5 m of the mark at
+  half), warlock (Rogue_Hooded, wand + book, CHA, WIS/CHA; hex: everyone's blows land 25% harder on its
+  mark for 6 s), bard (Rogue, dagger, CHA, DEX/CHA; the whole party +1 to hit while the bard stands).
+- Roster.CASTERS: necromancer, druid and warlock throw bolts from range like the mage, sage and cleric.
+- The calling's colour goes on the cloak AND the hat or hood (the KayKit texture is dropped there so the
+  colour shows true), so two Mage bodies (necromancer, druid) differ face-on.
+- !enlist takes them all (the class list was already data); "Kept by the Scar" now uses each calling's
+  own body. RUNNING.md: the new callings and !forge [kind|list].
+- tools/_l4_test.gd (headless, new): each enlists by chat, two saves, primary rolls best, a weapon of its
+  family, an ability and a cloak; lay on hands, unarmoured defence, smite on the dead only, flurry, hex in
+  the numbers; a party of all six delves 3 floors (home, 13 kills). L4_TEST OK.
+  tools/_l4_shot.gd: renders/cycles/20261111_l4 - looked at: first pass the cloaks came out in the kit's
+  own colours and the staves were tiny; texture dropped on cloak/hat, KayKit staff for tiers 1-3; the
+  back view now reads paladin pale, necromancer black, monk saffron, druid green, warlock violet, bard red.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 427, TWITCH_PARSE OK,
+  L1_TEST OK, L3_TEST OK.
 ## Cycle 58 - D1: nobody walks through houses (2026-11-11, desktop)
 - The cause: the navmesh CARVED every footprint (add_projected_obstruction carve=true), and a carved
   obstruction skips the agent-radius margin - paths ran along the very walls, the 0.5 m cells and the
@@ -491,6 +610,33 @@ Town
   _fps_window min 149 avg 172 at 139 people.
 
 
+
+## Cycle 62 - L5, the peoples of the valley (laptop, 2026-11-11)
+(Cycle numbers: the desktop's D1 entry is also "Cycle 58"; the laptop cycles run 58-62 today.)
+- Lore: the old game names no races - its folk (Garm of the Ford, Tove Ashwood...) read as valley humans.
+  So the peoples are new, kept in its plain voice and tied to its places: human ("valley-born, like most
+  of Bellmire"), elf ("out of the old woods past the fields"), dwarf ("down from the hill mines"), halfling
+  ("from the field-farms"), orc ("came over the west road and stayed"), and one only this world has - the
+  scarkin, "born too near the scar; its light in the eyes".
+- Roster.SPECIES: 5e-style bonuses (human +1 all; elf +2 DEX +1 INT; dwarf +2 CON +1 WIS; halfling +2 DEX
+  +1 CHA; orc +2 STR +1 CON; scarkin +2 CHA +1 INT; capped at 20) and one trait: darkvision (elf, dwarf,
+  orc, scarkin - no disadvantage when the oil is gone) or lucky (halfling - a natural 1 is rolled again).
+  Rerolls keep the people; a hero saved before today reads as human. The sheet says "dwarf knight".
+- !enlist <class> <species> in either order; an unknown people is refused with the list; no people given
+  draws one by weight (human most often, scarkin least).
+- The look (Gear.species_look, through the same dressing hook): body proportions (dwarf broad and short,
+  halfling small, orc big, elf slender and tall), skin of head and arms tinted from the mesh's own material
+  (orc green, scarkin violet), and parts on the head bone: elven ears, a dwarf's beard, an orc's tusks, a
+  glowing scar-shard on a scarkin brow. Set, never multiplied, so re-dressing does not compound.
+- Fix on the way (L3): a respec drops a weapon kind that is not of the new calling's family.
+- tools/_l5_test.gd (headless, new): both enlist orders, unknown refused, a drawn people, every people
+  drawn, bonuses, traits, old saves, the sheet, reroll keeps the people, respec drops the kind, each look's
+  scale and parts and no compounding. L5_TEST OK. _l4_test's "primary rolls best" now allows a species +2.
+  tools/_l5_shot.gd: renders/cycles/20261111_l5 - looked at: first pass the orc's tusks hung like fangs
+  and the beard read as a mask; tusks now rise from the jaw, beard lowered.
+- Merged origin/main (desktop D1) before the item; PROGRESS.md append conflict resolved keeping both.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 438, TWITCH_PARSE OK,
+  L1_TEST OK, L3_TEST OK, L4_TEST OK.
 ## Cycle 59 - D2: spells at the chest, not the sky; battle spells in raids (2026-11-11, desktop)
 - The "4th of July": HealthBar3D is a MeshInstance3D child of its owner, and Monster._height() measures
   every visible mesh under the monster - the bar included. delve.gd and raids.gd asked for the bar at
@@ -523,3 +669,24 @@ Town
 - Checks: parse 0 script errors (3 old 'material is null' lines), _offfloor 1 of 1001 on the first run (a
   hero in a delve fight - delve code, untouched), then 0/903 and 0/1018 on two reruns; TWITCH_PARSE OK;
   TOWNWALK in_solid 0/6965 raid 0/3867 PASS; _delve_test ENDED 4 survivors, 0 script errors.
+
+
+## Cycle 63 - D2's laptop half: monster bars, spells below (laptop, 2026-11-11)
+- Merged origin/main (desktop D2 spells); PROGRESS.md append conflict resolved keeping both.
+- monster.gd: _local_bounds() and the _height() fallback skip HealthBar3D. Delve placed each bar at
+  _height() + 0.25 and _height() measured the bar - it climbed every frame (D2's cause, in the dungeon).
+- delve.gd: casters fight with the D2 spells the way raids.gd does. Books: mage bolt-bolt-chain-fire,
+  sage frost-bolt, cleric smite-bolt, necromancer bolt-chain, druid frost-bolt, warlock bolt-fire. Menders
+  lay their own spell on the lowest delver: sage renew (heal over Spells.RENEW_T), cleric ward (half a heal
+  now, then soaks 35% of max for 8 s), paladin heal. Spells.cast(kind, caster, target BODY, false, more)
+  and the damage lands after Spells.flight(): chain leaps to two more within 5 m at x0.65 each, fire
+  catches all within 2.6 m at x0.8, frost x0.7 and the creature moves and swings at half pace 4 s, smite
+  x1.5 on the dead and the lost. The L4 abilities (drain, hex, thorns) ride on the landing. Ward soaks
+  every way a creature hurts a delver (blow, breath, nova, swoop, volley). In-scar misfire stays off below
+  as before (Spells' in_scar = false) - a call for the desktop/lore if the dungeon should misfire too.
+- tools/_d2_delve_test.gd (headless, new): a party of all six casters and a knight; the delve casts bolt,
+  chain, fire, frost, smite, renew, ward; renew and ward land on delvers; frost slows; bars hold (worst rise
+  0.00 m over 15 bars); kills. D2_DELVE OK (twice). tools/_d2_delve_shot.gd: renders/cycles/20261111_d2_delve
+  - looked at: the Rattling Host with a fire burst at its feet, bolts flat from the casters, bar steady.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L1, L4,
+  L5 OK.

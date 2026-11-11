@@ -52,12 +52,12 @@ Not yet: follows, subs, bits and channel points (needs a Twitch token - a later 
 
 | Command | What happens |
 |---|---|
-| `!enlist <class>` | raise a hero (knight, mage, ranger, barbarian, cleric, rogue, sage, duelist); they appear on the square |
+| `!enlist <class>` | raise a hero (knight, warden, mage, ranger, barbarian, cleric, rogue, sage, duelist, paladin, necromancer, monk, druid, warlock, bard); add a people: `!enlist knight dwarf` (human, elf, dwarf, halfling, orc, scarkin; either order); they appear on the square |
 | `!inventory` (`!inv`, `!bag`) | what the hero carries: weapon, armour, potions, oil, gold, catches and the best one |
 | `!hero` | the hero's sheet: class, rank, level, AC, HP, to-hit, stats, saves, gear, potions, oil, gold, record |
 | `!delve` | walk to the scar mouth; the party goes in together once nobody queued is still on the road (or 45 s after the first arrival) |
 | `!fish` | walk to a dock and fish (junk to rare catches) |
-| `!forge` / `!armoury` | buy the next weapon / armour tier; the hero walks to the smith / armourer |
+| `!forge [kind]` / `!armoury` | buy the next weapon / armour tier (`!forge spear`, `!forge mace`, `!forge bow`... a kind of the class's family; `!forge list` shows them); the hero walks to the smith / armourer |
 | `!brew`, `!oil` (`!lamp`, `!torch`) | potions, lamp oil |
 | `!reroll`, `!respec` | a new hero after a death (costs gold), reassign stats |
 | `!guild` `!memorial` `!deepest` `!deadliest` `!richest` `!patrons` | standings, the fallen, leaderboards |

@@ -32,6 +32,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       + ward in raid combat (mage/sage/cleric cast at 8 m). _d2_spells D2_SPELLS OK; renders/cycles/20261111_d2.
       FOR THE LAPTOP: monster.gd _local_bounds() should skip HealthBar3D; delve.gd casters can call the new
       kinds: Spells.cast(kind, caster, target_body, in_scar, more_bodies) + Spells.flight() for the landing.
+      LAPTOP HALF DONE (Cycle 63): bars skip in Monster bounds; delve casters use the books + menders; D2_DELVE OK.
 - [ ] D3. Buildings that level up: each town level/tier visibly changes Bellmire - plots fill in, houses
       upgrade (bigger/stone storeys, signs, gardens), new buildings unlock (guild hall, market hall,
       stables, bathhouse, mage tower, keep walls in stone...). Render levels 1, 3, 5, 7 side by side.
@@ -48,18 +49,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
-- [ ] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
+- [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
       each with stats, behaviour and a home biome/theme from the lore's bestiary; new strains.
-- [ ] L2. More bosses: a set of floor lords and rare uniques (from the lore), each with a mechanic
+      DONE (Cycle 58): 6 creatures from owned CC0 bodies, ways in a fight, home themes, 2 strains; L1_TEST OK.
+- [x] L2. More bosses: a set of floor lords and rare uniques (from the lore), each with a mechanic
       (summons, enrage, area attack), a name card and the boss bar; never two of the same in a row.
-- [ ] L3. More weapons and armour: more tiers and kinds (axes, spears, maces, bows, staves, shields,
+      DONE (Cycle 59): a mechanic for each of the eight lords, five rare uniques (one from the memorial); L2_TEST OK.
+- [x] L3. More weapons and armour: more tiers and kinds (axes, spears, maces, bows, staves, shields,
       helms, chest, boots) using KayKit/Quaternius CC0 meshes; visible on the hero; priced in the shops;
       !forge / !armoury pick from them; drops on deep floors.
-- [ ] L4. More classes: from the lore first (it has knight, mage, ranger, barbarian, cleric, rogue, sage,
+      DONE (Cycle 60): 10 weapon kinds x 5 tiers, worn armour, found-only tier 5, !forge <kind>, deep finds; L3_TEST OK.
+- [x] L4. More classes: from the lore first (it has knight, mage, ranger, barbarian, cleric, rogue, sage,
       duelist); add more (e.g. paladin, necromancer, monk, druid, warlock, bard) with 5e-style saves,
       a weapon, a spell or ability, and !enlist support.
-- [ ] L5. Character species: !enlist <class> <species> (human, elf, dwarf, halfling, orc, ... from the lore)
+      DONE (Cycle 61): paladin, necromancer, monk, druid, warlock, bard - saves, weapon kind, ability, cloak; L4_TEST OK.
+- [x] L5. Character species: !enlist <class> <species> (human, elf, dwarf, halfling, orc, ... from the lore)
       with stat bonuses and a visible look (KayKit/Quaternius CC0 bodies, scale, skin tint).
+      DONE (Cycle 62): human, elf, dwarf, halfling, orc + the scarkin; bonuses, traits, proportions, skin, parts; L5_TEST OK.
 - [ ] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
 - [ ] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 

@@ -24,6 +24,8 @@ const WEAPONS := [
     {"name": "fine steel", "cost": 160, "atk": 9, "scale": 1.05, "glow": 0.0},
     {"name": "runed", "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5},
     {"name": "dragontooth", "cost": 1100, "atk": 26, "scale": 1.25, "glow": 1.0},
+    # L3: never forged in Bellmire - only ever found below, grown in the scar's wild magic
+    {"name": "scarforged", "cost": 0, "atk": 34, "scale": 1.3, "glow": 1.3, "found": true},
 ]
 const ARMOUR := [
     {"name": "rags", "cost": 0, "hp": 0, "ac": 0},
@@ -31,6 +33,7 @@ const ARMOUR := [
     {"name": "chainmail", "cost": 150, "hp": 26, "ac": 3},
     {"name": "plate", "cost": 400, "hp": 48, "ac": 5},
     {"name": "warded plate", "cost": 1000, "hp": 80, "ac": 7},
+    {"name": "scarwoven mail", "cost": 0, "hp": 110, "ac": 8, "found": true},
 ]
 ## the trades: [right hand, left hand, left bone]
 const ROLE_GEAR := {
@@ -114,6 +117,9 @@ static func ignite(n: Node, amount: float) -> void:
                         var d: StandardMaterial3D = src.duplicate()
                         d.emission_enabled = true
                         d.emission = Color(1.0, 0.62, 0.22).lerp(Color(0.65, 0.85, 1.0), clampf(amount - 0.5, 0.0, 1.0) * 0.7)
+                        if amount >= 1.25:      # scarforged: the scar's violet, a smoulder not a lamp
+                            d.emission = Color(0.78, 0.36, 1.0)
+                            d.emission_energy_multiplier = 0.16
                         d.emission_energy_multiplier = amount * 0.30
                         mi.set_surface_override_material(i, d)
         for g in c.get_children():
@@ -141,6 +147,151 @@ static func weapon_path(family: String, tier: int) -> String:
         return ""
     var f: Array = FAMILIES.get(family, FAMILIES["blade"])
     return String(f[clampi(tier - 1, 0, f.size() - 1)])
+
+## ---------------------------------------------------------------- L3 kinds
+## Within a family a hero may carry another KIND of weapon (!forge <kind>). The
+## numbers are the tier's, whatever the kind - the old balance is untouched; a
+## kind is its look and its name. The family's own kind (blade, axe, arcane,
+## ranged) is the old progression, so every existing hero looks as before.
+## Meshes per tier 1..5: KayKit Adventurers, the KayKit weapon bits in
+## assets/gear (modelled bigger: x0.62 in a KayKit hand) and the KayKit
+## skeleton pack's own grave-steel for the found-only tier.
+const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
+const KINDS := {
+    "sword":      {"family": "blade", "noun": "sword", "kit": [ADV + "sword_1handed.gltf", KIT + "sword_A.gltf", KIT + "sword_B.gltf", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
+    "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", SKA + "Skeleton_Blade.gltf"]},
+    "dagger":     {"family": "blade", "noun": "dagger", "kit": [ADV + "dagger.gltf", ADV + "dagger.gltf", KIT + "knife.gltf", ADV + "dagger.gltf", ADV + "dagger.gltf"]},
+    "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
+    "axe":        {"family": "axe", "noun": "axe", "kit": [ADV + "axe_1handed.gltf", KIT + "axe_A.gltf", ADV + "axe_2handed.gltf", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
+    "mace":       {"family": "axe", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
+    "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    "wand":       {"family": "arcane", "noun": "wand", "kit": [ADV + "wand.gltf", KIT + "wand_A.gltf", ADV + "wand.gltf", KIT + "wand_A.gltf", KIT + "wand_A.gltf"]},
+    "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [ADV + "crossbow_1handed.gltf", ADV + "crossbow_1handed.gltf", ADV + "crossbow_2handed.gltf", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
+    "bow":        {"family": "ranged", "noun": "bow", "kit": [KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf"]},
+    # L4: the monk's open hand - a quarterstaff, or bare wrapped fists (no mesh)
+    "quarterstaff": {"family": "open", "noun": "quarterstaff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    "wraps":      {"family": "open", "noun": "hand wraps", "bare": true, "kit": ["", "", "", "", ""]},
+}
+
+static func kinds_of(family: String) -> Array:
+    var out: Array = []
+    for k in KINDS:
+        if String(KINDS[k]["family"]) == family:
+            out.append(k)
+    return out
+
+## the mesh for a kind at a tier ("" for bare hands)
+static func kind_path(kind: String, tier: int) -> String:
+    if tier <= 0 or not KINDS.has(kind):
+        return ""
+    var l: Array = KINDS[kind]["kit"]
+    return String(l[clampi(tier - 1, 0, l.size() - 1)])
+
+## the KayKit weapon bits are modelled ~1.6x a KayKit hand
+static func hand_scale(path: String) -> float:
+    return 0.62 if path.begins_with(KIT) else 1.0
+
+## ---------------------------------------------------------------- L3 armour, worn
+## Armour shows on the body: boots from leather, pauldrons from chainmail, a
+## helm from plate (only on a head with no helmet or hat of its own), warded
+## plate glows faintly, scarwoven mail wears the scar's violet. Simple shapes on
+## the KayKit bones, coloured per tier. Hero bodies are dressed through
+## Roster.offhand_bone -> rank_trim (both called by HeroBody.refresh).
+const ARMOUR_LOOK := [
+    {},
+    {"col": Color(0.42, 0.28, 0.17), "metal": 0.0, "boots": true},
+    {"col": Color(0.58, 0.60, 0.62), "metal": 0.7, "boots": true, "pauldrons": true},
+    {"col": Color(0.78, 0.80, 0.84), "metal": 0.9, "boots": true, "pauldrons": true, "helm": true},
+    {"col": Color(0.80, 0.84, 0.92), "metal": 0.9, "boots": true, "pauldrons": true, "helm": true, "glow": Color(0.45, 0.65, 1.0), "e": 0.12},
+    {"col": Color(0.24, 0.16, 0.30), "metal": 0.7, "boots": true, "pauldrons": true, "helm": true, "glow": Color(0.70, 0.30, 1.0), "e": 0.18},
+]
+static var _dressing: Dictionary = {}
+
+static func dress_armour(model_root: Node, tier: int) -> void:
+    var sk := skeleton(model_root)
+    if sk == null:
+        return
+    for slot in ["eq_boot_l", "eq_boot_r", "eq_pauldron_l", "eq_pauldron_r", "eq_helm"]:
+        var old := sk.get_node_or_null(NodePath(slot))
+        if old:
+            old.free()
+    var look: Dictionary = ARMOUR_LOOK[clampi(tier, 0, ARMOUR_LOOK.size() - 1)]
+    if look.is_empty():
+        return
+    var m := StandardMaterial3D.new()
+    m.albedo_color = look["col"]
+    m.metallic = float(look["metal"])
+    m.roughness = 0.45 if float(look["metal"]) > 0.0 else 0.85
+    if look.has("glow"):
+        m.emission_enabled = true
+        m.emission = look["glow"]
+        m.emission_energy_multiplier = float(look.get("e", 0.15))
+    if bool(look.get("boots", false)):
+        for s in ["l", "r"]:
+            var b := _piece(sk, "foot." + s, "eq_boot_" + s, m)
+            if b:
+                var bm := BoxMesh.new()
+                bm.size = Vector3(0.36, 0.26, 0.46)
+                b.mesh = bm
+                b.position = Vector3(0, 0.06, 0.04)
+    if bool(look.get("pauldrons", false)):
+        for s in ["l", "r"]:
+            var p := _piece(sk, "upperarm." + s, "eq_pauldron_" + s, m)
+            if p:
+                var sm := SphereMesh.new()
+                sm.radius = 0.26
+                sm.height = 0.30
+                sm.is_hemisphere = true
+                p.mesh = sm
+                p.position = Vector3(0, 0.08, 0)
+    if bool(look.get("helm", false)) and not _has_headwear(model_root):
+        var hm := _piece(sk, "head", "eq_helm", m)
+        if hm:
+            var cm := SphereMesh.new()
+            cm.radius = 0.66
+            cm.height = 0.66
+            cm.is_hemisphere = true
+            hm.mesh = cm
+            hm.position = Vector3(0, 0.36, 0)
+            hm.scale = Vector3(1.0, 0.85, 1.0)
+            var brim := MeshInstance3D.new()
+            var tor := TorusMesh.new()
+            tor.inner_radius = 0.6
+            tor.outer_radius = 0.74
+            brim.mesh = tor
+            brim.material_override = m
+            brim.position = Vector3(0, 0.02, 0)
+            brim.scale = Vector3(1.0, 0.5, 1.0)
+            hm.add_child(brim)
+            var crest := MeshInstance3D.new()
+            var pm := BoxMesh.new()
+            pm.size = Vector3(0.10, 0.22, 0.95)
+            crest.mesh = pm
+            crest.material_override = m
+            crest.position = Vector3(0, 0.64, 0)
+            hm.add_child(crest)
+
+static func _piece(sk: Skeleton3D, bone: String, slot: String, m: Material) -> MeshInstance3D:
+    if sk.find_bone(bone) < 0:
+        return null
+    var att := BoneAttachment3D.new()
+    att.name = slot
+    att.bone_name = bone
+    sk.add_child(att)
+    var mi := MeshInstance3D.new()
+    mi.material_override = m
+    att.add_child(mi)
+    return mi
+
+static func _has_headwear(model_root: Node) -> bool:
+    var st: Array = [model_root]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and (c as MeshInstance3D).visible and (String(c.name).contains("Helmet") or String(c.name).contains("Hat") or String(c.name).contains("Hood")):
+            return true
+        for g in c.get_children():
+            st.append(g)
+    return false
 
 static func dress_hero(model_root: Node, family: String, tier: int, offhand := "", off_bone := "handslot.l") -> void:
     var w: Dictionary = WEAPONS[clampi(tier, 0, WEAPONS.size() - 1)]
@@ -184,6 +335,114 @@ const ROLE_CAPE := {
     "washer": Color(0.55, 0.62, 0.70),
 }
 
+## ---- L5: a people's look. Body proportions (set, never multiplied, so a
+## re-dress is idempotent), the skin of head and arms tinted from the mesh's own
+## material, and a few small parts on the head bone: elven ears, a dwarf's
+## beard, an orc's tusks, the scar's shard on a scarkin brow.
+static func species_look(model_root: Node, species: String) -> void:
+    var sp: Dictionary = Roster.SPECIES.get(species, {})
+    if model_root is Node3D:
+        (model_root as Node3D).scale = sp.get("scale", Vector3.ONE)
+    var skin: Color = sp.get("skin", Color(1, 1, 1))
+    var st: Array = [model_root]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and not String(c.name).begins_with("eq_"):
+            var nm := String(c.name)
+            if nm.ends_with("_Head") or nm.contains("Arm"):
+                var mi: MeshInstance3D = c
+                for i in range(mi.mesh.get_surface_count()):
+                    var base: Material = mi.mesh.surface_get_material(i)
+                    if base is StandardMaterial3D:
+                        var d: StandardMaterial3D = (base as StandardMaterial3D).duplicate()
+                        d.albedo_color = d.albedo_color * skin
+                        mi.set_surface_override_material(i, d)
+        for g in c.get_children():
+            if not String(g.name).begins_with("eq_"):
+                st.append(g)
+    var sk := skeleton(model_root)
+    if sk == null:
+        return
+    var old := sk.get_node_or_null("eq_species")
+    if old:
+        old.free()
+    var parts: Array = sp.get("parts", [])
+    if parts.is_empty() or sk.find_bone("head") < 0:
+        return
+    var att := BoneAttachment3D.new()
+    att.name = "eq_species"
+    att.bone_name = "head"
+    sk.add_child(att)
+    var flesh := StandardMaterial3D.new()
+    flesh.albedo_color = Color(0.93, 0.74, 0.62) * skin
+    for p in parts:
+        match String(p):
+            "ears":
+                for s in [-1.0, 1.0]:
+                    var e := MeshInstance3D.new()
+                    var pm := PrismMesh.new()
+                    pm.size = Vector3(0.16, 0.42, 0.08)
+                    e.mesh = pm
+                    e.material_override = flesh
+                    e.position = Vector3(0.56 * s, 0.50, -0.02)
+                    e.rotation = Vector3(0, 0, -0.95 * s)
+                    att.add_child(e)
+            "beard":
+                var bm := StandardMaterial3D.new()
+                bm.albedo_color = Color(0.48, 0.30, 0.17)
+                var b := MeshInstance3D.new()
+                var pr := PrismMesh.new()
+                pr.size = Vector3(0.60, 0.42, 0.22)
+                b.mesh = pr
+                b.material_override = bm
+                b.position = Vector3(0, 0.0, 0.40)
+                b.rotation = Vector3(PI, 0, 0)
+                att.add_child(b)
+            "tusks":
+                var tm := StandardMaterial3D.new()
+                tm.albedo_color = Color(0.95, 0.92, 0.82)
+                for s in [-1.0, 1.0]:
+                    var t := MeshInstance3D.new()
+                    var tp := PrismMesh.new()
+                    tp.size = Vector3(0.08, 0.16, 0.06)
+                    t.mesh = tp
+                    t.material_override = tm
+                    t.position = Vector3(0.15 * s, 0.10, 0.47)
+                    att.add_child(t)
+            "shard":
+                var gm := StandardMaterial3D.new()
+                gm.albedo_color = Color(0.70, 0.40, 1.0)
+                gm.emission_enabled = true
+                gm.emission = Color(0.75, 0.40, 1.0)
+                gm.emission_energy_multiplier = 1.2
+                var g := MeshInstance3D.new()
+                var pm2 := PrismMesh.new()
+                pm2.size = Vector3(0.12, 0.22, 0.08)
+                g.mesh = pm2
+                g.material_override = gm
+                g.position = Vector3(0, 0.82, 0.44)
+                att.add_child(g)
+
+## L4: a calling's own cloak colour
+static func _cape_tint(model_root: Node, col: Color) -> void:
+    var ms := _cape_meshes(model_root)
+    # the hat or hood too, so a calling reads from the front
+    var st: Array = [model_root]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and (c as MeshInstance3D).visible and (String(c.name).contains("Hat") or String(c.name).contains("Hood")):
+            ms.append(c)
+        for g in c.get_children():
+            st.append(g)
+    for m in ms:
+        var mi: MeshInstance3D = m
+        for i in range(mi.mesh.get_surface_count()):
+            var src: Material = mi.get_active_material(i)
+            var d: StandardMaterial3D = (src as StandardMaterial3D).duplicate() if src is StandardMaterial3D else StandardMaterial3D.new()
+            d.albedo_color = col
+            d.albedo_texture = null       # the atlas would tint it back to the kit colour
+            mi.set_surface_override_material(i, d)
+
 static func _cape_meshes(model_root: Node) -> Array:
     var out: Array = []
     var st: Array = [model_root]
@@ -218,6 +477,14 @@ const RANK_COLOURS := [Color(0, 0, 0, 0), Color(0.55, 0.40, 0.25), Color(0.62, 0
     Color(0.35, 0.60, 0.85), Color(0.85, 0.85, 0.90), Color(0.95, 0.75, 0.25), Color(0.70, 0.40, 1.0)]
 
 static func rank_trim(model_root: Node, rank: int) -> void:
+    # L3: a hero being dressed (stashed by Roster.offhand_bone) gets their armour on
+    if not _dressing.is_empty():
+        dress_armour(model_root, int(_dressing.get("armour", 0)))
+        species_look(model_root, Roster.species_of(_dressing))
+        var cls: Dictionary = Roster.CLASSES.get(String(_dressing.get("class", "")), {})
+        if cls.has("cape"):
+            _cape_tint(model_root, cls["cape"])
+        _dressing = {}
     var sk := skeleton(model_root)
     if sk == null or rank <= 0:
         return

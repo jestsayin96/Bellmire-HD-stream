@@ -51,6 +51,11 @@ func _ready() -> void:
             var s := String(a)
             if s.contains("Idle") or s.contains("Walk") or s.contains("Run") or s.contains("Flying"):
                 _ap.get_animation(a).loop_mode = Animation.LOOP_LINEAR
+        # a creature's own idle / walk always loops (an aiming bowman, a sentinel behind its shield)
+        for k in ["idle", "walk", "run"]:
+            var nm := String((def.get("anims", {}) as Dictionary).get(k, ""))
+            if nm != "" and _ap.has_animation(nm):
+                _ap.get_animation(nm).loop_mode = Animation.LOOP_LINEAR
         _play("idle")
         _ap.seek(_rng.randf() * 1.5, true)
     if String(def.get("path", "")).contains("kaykit"):
@@ -86,6 +91,8 @@ func _local_bounds(top: Node3D) -> AABB:
             box = ab if first else box.merge(ab)
             first = false
         for g in c.get_children():
+            if g is HealthBar3D:
+                continue      # the bar sits above the height: measuring it made it climb every frame
             var gx := xf * (g as Node3D).transform if g is Node3D else xf
             st.append([g, gx])
     return box
@@ -144,7 +151,8 @@ func _height() -> float:
             box = ab if first else box.merge(ab)
             first = false
         for g in c.get_children():
-            st.append(g)
+            if not g is HealthBar3D:
+                st.append(g)
     return box.end.y - global_position.y if not first else 2.0
 
 func _label() -> void:
@@ -259,6 +267,7 @@ func _process(delta: float) -> void:
     _tick_flash(delta)
     if _body == null or state == S.DEAD:
         return
+    _tick_wild()
     var lift := float(def.get("lift", 0.0))
     if _body.position.y < lift - 0.05 and get_tree() and _entering():
         return
@@ -306,6 +315,168 @@ func _process(delta: float) -> void:
                     _play("attack")
                     if _ap:
                         _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+
+## ---------------------------------------------------------------- ways (L1)
+## a shot at `to`: casters throw the Spells bolt, a bowman looses a bone bolt
+## that flies flat from the bow to the mark
+var shots := 0
+func shoot(to: Vector3) -> void:
+    shots += 1
+    var ways: Dictionary = def.get("ways", {})
+    _play("attack" if not bool(def.get("casts", false)) else "cast")
+    if _ap:
+        _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+    var from := global_position + Vector3(0, _height() * 0.62, 0) + global_transform.basis.z * 0.4
+    if bool(def.get("casts", false)):
+        Spells.cast("bolt", self, to, false)
+        return
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    var bolt := MeshInstance3D.new()
+    var bm := BoxMesh.new()
+    bm.size = Vector3(0.05, 0.05, 0.75)
+    bolt.mesh = bm
+    var m := StandardMaterial3D.new()
+    m.albedo_color = Color(0.92, 0.88, 0.78)
+    m.emission_enabled = true
+    m.emission = Color(0.9, 0.85, 0.6) if String(ways.get("shot", "")) == "bolt_bone" else Color(1, 1, 1)
+    m.emission_energy_multiplier = 0.6
+    bolt.material_override = m
+    bolt.top_level = true
+    root.add_child(bolt)
+    bolt.global_position = from
+    if from.distance_to(to) > 0.1:
+        bolt.look_at_from_position(from, to, Vector3.UP)
+    var tw := bolt.create_tween()
+    tw.tween_property(bolt, "global_position", to, clampf(from.distance_to(to) / 26.0, 0.08, 0.45))
+    tw.tween_callback(bolt.queue_free)
+
+## a grave-whelp's breath: a short stream of pale grave-fire at the mark
+func breathe(to: Vector3) -> void:
+    shots += 1
+    _play("attack")
+    if _ap:
+        _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    var from := global_position + Vector3(0, _height() * 0.55, 0) + global_transform.basis.z * (_height() * 0.45)
+    var col := Color(0.55, 1.0, 0.6)
+    for i in range(7):
+        var s := MeshInstance3D.new()
+        var sm := SphereMesh.new()
+        sm.radius = 0.08 + 0.05 * float(i)
+        sm.height = sm.radius * 2.0
+        s.mesh = sm
+        var mm := StandardMaterial3D.new()
+        mm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        mm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+        mm.albedo_color = Color(col.r, col.g, col.b, 0.55)
+        s.material_override = mm
+        s.top_level = true
+        root.add_child(s)
+        s.global_position = from
+        var tw := s.create_tween()
+        tw.tween_interval(0.05 * float(i))
+        tw.tween_property(s, "global_position", to + Vector3(randf_range(-0.6, 0.6), 0.3, randf_range(-0.6, 0.6)), 0.35)
+        tw.parallel().tween_property(mm, "albedo_color:a", 0.0, 0.5)
+        tw.tween_callback(s.queue_free)
+    Spells._burst(root, to + Vector3(0, 0.3, 0), col)
+
+## a raised dead: starts in the floor and climbs out (the KayKit awaken)
+func rise() -> void:
+    _play("rise")
+    if _ap:
+        _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    Spells._burst(root, global_position + Vector3(0, 0.2, 0), Color(0.3, 0.9, 0.45))
+
+## ---- L2 lord mechanics, the visible half (Delve does the numbers)
+## a ring of the lord's own colour that rolls out to `r` along the floor
+func nova(r: float) -> void:
+    var col: Color = def.get("aura", Color(1, 0.8, 0.4))
+    _play("cast" if (def.get("anims", {}) as Dictionary).has("cast") else "attack")
+    if _ap:
+        _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    var ring := MeshInstance3D.new()
+    var tm := TorusMesh.new()
+    tm.inner_radius = 0.85
+    tm.outer_radius = 1.0
+    ring.mesh = tm
+    var m := StandardMaterial3D.new()
+    m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    m.albedo_color = Color(col.r, col.g, col.b, 0.85)
+    m.emission_enabled = true
+    m.emission = col
+    m.emission_energy_multiplier = 3.0
+    ring.material_override = m
+    ring.top_level = true
+    root.add_child(ring)
+    ring.global_position = global_position + Vector3(0, 0.25, 0)
+    ring.scale = Vector3(0.5, 1.0, 0.5)
+    var tw := ring.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(ring, "scale", Vector3(r, 2.5, r), 0.6).set_ease(Tween.EASE_OUT)
+    tw.tween_property(m, "albedo_color:a", 0.0, 0.7)
+    tw.chain().tween_callback(ring.queue_free)
+    Spells._burst(root, global_position + Vector3(0, 0.5, 0), col)
+    nova_count += 1
+var nova_count := 0
+
+## crosses the room in one beat onto `to` (Nightwing: too fast to see coming)
+func swoop(to: Vector3) -> void:
+    var dest := to + (global_position - to).normalized() * 1.4
+    dest.y = global_position.y
+    var tw := create_tween()
+    tw.tween_property(self, "global_position", dest, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+    _play("attack")
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    Spells._burst(root, global_position + Vector3(0, 1.0, 0), def.get("aura", Color(0.5, 0.3, 0.9)))
+
+## enraged: the aura and crown burn red and the body swells a little
+var enraged := false
+func enrage() -> void:
+    if enraged:
+        return
+    enraged = true
+    var red := Color(1.0, 0.18, 0.12)
+    def["aura"] = red
+    for c in get_children():
+        if c is MeshInstance3D and (c as MeshInstance3D).material_override is StandardMaterial3D:
+            var mm: StandardMaterial3D = (c as MeshInstance3D).material_override
+            var a := mm.albedo_color.a
+            mm.albedo_color = Color(red.r, red.g, red.b, a)
+            if mm.emission_enabled:
+                mm.emission = red
+        if c is OmniLight3D:
+            (c as OmniLight3D).light_color = red
+    if _body:
+        var tw := create_tween()
+        tw.tween_property(_body, "scale", _body.scale * 1.1, 0.4)
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    Spells._burst(root, global_position + Vector3(0, _height() * 0.5, 0), red)
+
+## the scarborn glow never settles: it wanders the hue wheel like the scar's motes
+var _wild_mats: Array = []
+func _tick_wild() -> void:
+    if not bool(def.get("wild", false)) or _flash_t > 0.0:
+        return
+    if _wild_mats.is_empty():
+        var st: Array = [_body]
+        while not st.is_empty():
+            var c: Node = st.pop_back()
+            if c is MeshInstance3D and not String(c.name).begins_with("eq_"):
+                var mi: MeshInstance3D = c
+                for i in range(mi.mesh.get_surface_count() if mi.mesh else 0):
+                    var mat := mi.get_surface_override_material(i)
+                    if mat is StandardMaterial3D:
+                        _wild_mats.append(mat)
+            for g in c.get_children():
+                if not String(g.name).begins_with("eq_"):
+                    st.append(g)
+    var col := Color.from_hsv(fposmod(_t * 0.12 + float(get_instance_id() % 97) / 97.0, 1.0), 0.75, 1.0)
+    for m in _wild_mats:
+        (m as StandardMaterial3D).emission = col
+        (m as StandardMaterial3D).emission_energy_multiplier = 0.35
 
 ## ---------------------------------------------------------------- combat polish
 var hp := 10.0

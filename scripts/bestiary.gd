@@ -51,6 +51,74 @@ const TYPES := {
     "imp":     {"name": "imp", "path": MON + "Imp.glb", "anims": A_UAL, "hp": 0.7, "atk": 1.3, "spd": 5.0, "h": 1.3, "lift": 0.6, "casts": true, "family": "fiend"},
     "puglin":  {"name": "puglin", "path": MON + "Puglin.glb", "anims": A_UAL, "hp": 0.9, "atk": 0.9, "spd": 4.4, "h": 0.9, "lift": 0.0, "family": "fiend"},
 }
+## ---- Work plan 2, L1: new creatures from CC0 bodies already owned (KayKit
+## Skeletons + its own weapon set, KayKit Adventurers, the Quaternius dragon and
+## slime). Nothing here is a lord; each is named in the old game's plain voice
+## and fits the scar: the guild's own dead, the bone garrison, the wyrm's brood.
+const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
+const ADVC := "res://addons/kaykit_character_pack_adventures/Characters/gltf/"
+const A_SKL := {"idle": "Idle", "walk": "Walking_D_Skeletons", "run": "Running_A", "attack": "1H_Melee_Attack_Chop",
+                "cast": "Spellcast_Shoot", "die": "Death_C_Skeletons", "hit": "Hit_A", "rise": "Skeletons_Awaken_Floor",
+                "summon": "Spellcast_Summon"}
+const A_BOW := {"idle": "2H_Ranged_Aiming", "walk": "Walking_D_Skeletons", "run": "Running_A", "attack": "2H_Ranged_Shoot",
+                "die": "Death_C_Skeletons", "hit": "Hit_A", "rise": "Skeletons_Awaken_Floor"}
+const A_GUARD := {"idle": "Blocking", "walk": "Walking_D_Skeletons", "run": "Running_A", "attack": "Block_Attack",
+                  "die": "Death_C_Skeletons", "hit": "Block_Hit", "rise": "Skeletons_Awaken_Floor"}
+const NEW_TYPES := {
+    "bowman":     {"name": "bone bowman", "path": SKL + "Skeleton_Minion.glb", "anims": A_BOW, "hp": 0.7, "atk": 1.0, "spd": 3.8, "h": 1.6, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Crossbow.gltf", "off": "", "family": "undead",
+                   "ways": {"ranged": 8.5, "shot": "bolt_bone"}, "homes": ["barracks", "keep", "prison"]},
+    "sentinel":   {"name": "bone sentinel", "path": SKL + "Skeleton_Warrior.glb", "anims": A_GUARD, "hp": 1.3, "atk": 0.9, "spd": 3.2, "h": 1.9, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Blade.gltf", "off": SKA + "Skeleton_Shield_Large_A.gltf", "family": "undead",
+                   "ways": {"guard": 3}, "homes": ["keep", "treasury", "barracks"]},
+    "gravecaller":{"name": "gravecaller", "path": SKL + "Skeleton_Mage.glb", "anims": A_SKL, "hp": 0.9, "atk": 1.2, "spd": 3.4, "h": 1.85, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Staff.gltf", "off": "", "casts": true, "family": "undead", "tint": Color(0.80, 0.90, 0.76), "glow": Color(0.12, 0.50, 0.25),
+                   "ways": {"ranged": 7.0, "raise": 2}, "homes": ["crypt", "shrine", "tomb"]},
+    "lost":       {"name": "lost delver", "paths": [ADVC + "Knight.glb", ADVC + "Barbarian.glb", ADVC + "Rogue_Hooded.glb"], "path": ADVC + "Knight.glb",
+                   "anims": A_KAY, "hp": 1.1, "atk": 1.2, "spd": 4.2, "h": 1.75, "lift": 0.0,
+                   "hand": ADV + "sword_1handed.gltf", "off": "", "family": "the fallen", "tint": Color(0.80, 0.86, 0.94), "glow": Color(0.12, 0.20, 0.32),
+                   "ways": {"grudge": true}, "homes": ["prison", "fogbound", "keep"]},
+    "whelp":      {"name": "grave-whelp", "path": QUAT + "Dragon.glb", "anims": A_DRAGON, "hp": 1.0, "atk": 1.3, "spd": 4.6, "h": 2.3, "lift": 1.0,
+                   "family": "wyrm", "tint": Color(0.86, 1.0, 0.86),
+                   "ways": {"breath": 2.8}, "homes": ["firepit", "crypt", "keep"]},
+    "slimeling":  {"name": "slimeling", "path": QUAT + "Slime.glb", "anims": A_SLIME, "hp": 0.35, "atk": 0.5, "spd": 3.6, "h": 0.5, "lift": 0.0,
+                   "family": "ooze", "homes": []},
+}
+## what the old creatures do and where they are at home (L1). `ways` are the
+## creature's habits in a fight (Delve reads them): ranged = keeps this far
+## off and shoots; splits = an ooze divides into two slimelings when it dies;
+## venom = a bite that keeps hurting; pack = comes with this many of its kind;
+## guard = harder to hit; raise = calls up to N dead; breath = splashes the
+## heroes beside its mark; grudge = goes for the weakest delver.
+const WAYS := {
+    "minion": {}, "warrior": {}, "cutpurse": {"grudge": true}, "warlock": {"ranged": 7.0},
+    "slime": {"splits": 2}, "bat": {"pack": 1}, "bones": {}, "rat": {"pack": 2},
+    "spider": {"venom": 4.0}, "frog": {}, "snake": {"venom": 3.0}, "adder": {"venom": 5.0},
+    "wasp": {"venom": 2.0, "pack": 2}, "imp": {"ranged": 6.5}, "puglin": {"pack": 1},
+}
+## homes are FloorGen theme keys: a creature is three times as likely on a floor
+## dressed as one of its homes
+const HOMES := {
+    "minion": ["barracks", "crypt", "prison"], "warrior": ["barracks", "keep"], "cutpurse": ["treasury", "prison"],
+    "warlock": ["shrine", "crypt"], "slime": ["flooded", "mess", "confection"], "bat": ["fogbound", "wood"],
+    "bones": ["crypt", "keep"], "rat": ["mess", "prison", "workshop"], "spider": ["wood", "fogbound"],
+    "frog": ["flooded", "grassland"], "snake": ["grassland", "wood"], "adder": ["firepit"],
+    "wasp": ["grassland", "confection"], "imp": ["firepit", "shrine"], "puglin": ["workshop", "confection"],
+}
+
+static func def_of(k: String) -> Dictionary:
+    if TYPES.has(k):
+        var d: Dictionary = (TYPES[k] as Dictionary).duplicate(true)
+        d["ways"] = (WAYS.get(k, {}) as Dictionary).duplicate()
+        d["homes"] = HOMES.get(k, [])
+        return d
+    return (NEW_TYPES[k] as Dictionary).duplicate(true)
+
+static func all_keys() -> Array:
+    var out: Array = TYPES.keys()
+    out.append_array(NEW_TYPES.keys())
+    return out
+
 const DRAGON := {"name": "gravewyrm", "path": QUAT + "Dragon.glb", "anims": A_DRAGON, "hp": 1.0, "atk": 1.0, "spd": 3.0, "h": 3.0, "lift": 2.2, "family": "wyrm"}
 
 ## Strains (old game, numbers unchanged). Measured: they IMPROVED survival
@@ -63,8 +131,25 @@ const STRAINS := {
     "emberbound":   {"label": "emberbound", "hp": 0.90, "atk": 1.40, "spd": 1.15, "scale": 1.00, "tint": Color(1.00, 0.58, 0.32), "glow": Color(1.0, 0.4, 0.1)},
     "gorged":       {"label": "gorged", "hp": 1.60, "atk": 1.10, "spd": 0.75, "scale": 1.35, "tint": Color(0.86, 0.84, 0.46), "glow": Color(0, 0, 0)},
     "wraithtouched":{"label": "wraithtouched", "hp": 0.85, "atk": 1.25, "spd": 1.30, "scale": 0.98, "tint": Color(0.68, 0.55, 0.95), "glow": Color(0.6, 0.4, 1.0)},
+    # L1: two strains the scar itself would make. Scarborn: grown too near the
+    # wild magic - its glow wanders through every colour, as the scar's motes do.
+    # Mossbacked: the drowned of the buried meadows and woods, grown over.
+    "scarborn":     {"label": "scarborn", "hp": 0.95, "atk": 1.20, "spd": 1.10, "scale": 1.02, "tint": Color(0.92, 0.80, 1.00), "glow": Color(0.9, 0.3, 0.8), "wild": true},
+    "mossbacked":   {"label": "mossbacked", "hp": 1.30, "atk": 0.95, "spd": 0.85, "scale": 1.08, "tint": Color(0.62, 0.82, 0.50), "glow": Color(0, 0, 0)},
 }
 static var no_strains := false
+
+## the old bands, unchanged, then the scar's own strains: on a meadow or wood
+## floor the drowned come up mossbacked; from floor 8 half the plain are scarborn
+static func strain_for_theme(floor_no: int, theme: String) -> String:
+    var s := strain_for(floor_no)
+    if no_strains:
+        return s
+    if s == "drowned" and theme in ["grassland", "wood"]:
+        return "mossbacked"
+    if s == "plain" and floor_no >= 8 and randi() % 2 == 0:
+        return "scarborn"
+    return s
 
 static func strain_for(floor_no: int) -> String:
     if no_strains:
@@ -122,8 +207,12 @@ static func next_boss(floor_no: int) -> Dictionary:
         for k in pool_k:
             _spent.erase(k)
         fresh = pool_k.duplicate()
+        # a fresh bag never opens with the lord that closed the last one
+        if fresh.size() > 1:
+            fresh.erase(_last_lord)
     var pick_k: String = fresh[randi() % fresh.size()]
     _spent.append(pick_k)
+    _last_lord = pick_k
     var out: Dictionary = (BOSS_DEFS[pick_k] as Dictionary).duplicate()
     out["id"] = pick_k
     if pending_title != "":
@@ -131,22 +220,130 @@ static func next_boss(floor_no: int) -> Dictionary:
         out["note"] = "named by the crowd above"
         pending_title = ""
     return out
+static var _last_lord := ""
 
 static func boss_body(b: Dictionary) -> Dictionary:
     var body := String(b.get("body", "warrior"))
     if body == "dragon":
         return DRAGON
+    if NEW_TYPES.has(body):
+        return NEW_TYPES[body]
     return TYPES[body]
+
+## ---- L2: each lord fights the way its canon note says it does. Delve reads
+## these like any creature's ways. nova = a ring of its power on everyone near
+## (slow = the heroes swing at half pace for that long); summon = calls its kind,
+## up to `most`; shed = drops dead men from the harness as its hp falls past each
+## mark; swoop = crosses the room onto the weakest and hits harder; enrage = below
+## `at` of its hp it swings faster and harder; ward = takes that share of damage
+## while anything it called still stands.
+const LORD_WAYS := {
+    "hollow_king":  {"ranged": 6.0, "nova": {"every": 9.0, "r": 6.0, "dmg": 0.6, "line": "Cold fire rolls off the Hollow King."}},
+    "grubmother":   {"summon": {"type": "slimeling", "every": 9.0, "most": 4, "line": "The Grubmother's brood spills out of her."}},
+    "rattling_host":{"shed": {"at": [0.66, 0.33], "type": "bones", "n": 2, "line": "Dead men drop out of the harness."}},
+    "nightwing":    {"swoop": {"every": 7.0, "mult": 1.6}, "summon": {"type": "bat", "every": 14.0, "most": 2, "line": "Bats pour out of the dark around Nightwing."}},
+    "gravewyrm":    {"breath": 4.0, "enrage": {"at": 0.3, "swing": 0.6, "atk": 1.3}},
+    "ossuary_lord": {"summon": {"type": "bones", "every": 12.0, "most": 2, "rise": true, "line": "The Ossuary Lord calls its bones up out of the floor."}, "ward": 0.5},
+    "pale_duchess": {"venom": 4.0, "grudge": true, "enrage": {"at": 0.35, "swing": 0.55, "atk": 1.25}},
+    "mourncoil":    {"breath": 3.0, "nova": {"every": 8.0, "r": 7.0, "dmg": 0.5, "slow": 3.0, "line": "Frost comes off Mourncoil in sheets."}},
+}
+
+## ---- L2: rare uniques. Not lords and never on a lord's floor: a named thing
+## that turns up now and then (UNIQUE_CHANCE of an ordinary floor from floor 2),
+## from a bag, never the same one twice running. Each has a name card, the boss
+## bar and a mechanic. The last is the scar's own: a delver from the memorial,
+## kept below (only once someone has fallen there).
+const UNIQUE_CHANCE := 0.12
+const UNIQUES := {
+    "gnawbone":   {"title": "Gnawbone", "body": "rat", "h": 1.5, "min": 2, "hp": 4.0, "atk": 1.3, "tint": Color(0.78, 0.70, 0.58), "aura": Color(0.85, 0.65, 0.35),
+                   "note": "the rats' queen, fat on what the delvers dropped",
+                   "ways": {"summon": {"type": "rat", "every": 8.0, "most": 4, "line": "Gnawbone's children come squealing."}}},
+    "mother_silk":{"title": "Mother Silk", "body": "spider", "h": 1.6, "min": 3, "hp": 4.0, "atk": 1.3, "tint": Color(0.86, 0.86, 0.92), "aura": Color(0.80, 0.85, 1.0),
+                   "note": "every thread in the dark is hers",
+                   "ways": {"venom": 6.0, "summon": {"type": "spider", "every": 11.0, "most": 3, "line": "Spiders drop from Mother Silk's threads."}}},
+    "weeping_bowman":{"title": "The Weeping Bowman", "body": "bowman", "h": 2.3, "min": 4, "hp": 3.5, "atk": 1.2, "tint": Color(0.62, 0.80, 0.86), "aura": Color(0.45, 0.75, 0.90),
+                   "hand": SKA + "Skeleton_Crossbow.gltf", "note": "it never stops drawing",
+                   "ways": {"ranged": 11.0, "shot": "bolt_bone", "volley": true}},
+    "cinderjack": {"title": "Cinderjack", "body": "imp", "h": 1.9, "min": 6, "hp": 3.5, "atk": 1.4, "tint": Color(1.0, 0.62, 0.38), "aura": Color(1.0, 0.45, 0.15),
+                   "note": "the firepits let him out",
+                   "ways": {"ranged": 7.0, "nova": {"every": 7.5, "r": 5.0, "dmg": 0.55, "line": "Cinderjack goes up like a struck match."}}},
+    "kept":       {"title": "%s, Kept by the Scar", "body": "lost", "h": 2.0, "min": 3, "hp": 4.5, "atk": 1.4, "tint": Color(0.80, 0.86, 0.96), "aura": Color(0.55, 0.70, 1.0),
+                   "hand": ADV + "sword_1handed.gltf", "note": "fell below, and the scar did not let go",
+                   "ways": {"grudge": true, "enrage": {"at": 0.4, "swing": 0.6, "atk": 1.3}}},
+}
+## the memorial (Roster.fallen), set by Delve before each floor is built
+static var memorial: Array = []
+static var _last_unique := ""
+## test hook: only this unique may be drawn
+static var only_unique := ""
+
+static func unique_for(floor_no: int, roll: float) -> Dictionary:
+    if is_boss_floor(floor_no) or floor_no < 2 or roll >= UNIQUE_CHANCE:
+        return {}
+    var below: Array = []
+    for f in memorial:
+        if String((f as Dictionary).get("killed_by", "")) == "the dark below":
+            below.append(f)
+    var keys: Array = []
+    for k in UNIQUES:
+        if only_unique != "" and k != only_unique:
+            continue
+        if floor_no >= int(UNIQUES[k]["min"]) and (k != _last_unique or only_unique != "") and (k != "kept" or not below.is_empty()):
+            keys.append(k)
+    if keys.is_empty():
+        return {}
+    var k: String = keys[randi() % keys.size()]
+    _last_unique = k
+    var u: Dictionary = (UNIQUES[k] as Dictionary).duplicate(true)
+    u["id"] = k
+    if k == "kept":
+        var f: Dictionary = below[randi() % below.size()]
+        u["title"] = String(u["title"]) % String(f["name"])
+        u["note"] = "a %s of the guild who fell below, and the scar did not let go" % String(f.get("class", "delver"))
+        var cls := String(f.get("class", "knight"))
+        var body := "Knight"
+        if cls in ["barbarian", "warden"]:
+            body = "Barbarian"
+        elif cls in ["rogue", "duelist", "ranger"]:
+            body = "Rogue_Hooded"
+        elif cls in ["mage", "sage", "cleric"]:
+            body = "Mage"
+        u["path"] = ADVC + body + ".glb"
+        if Roster.CLASSES.has(cls):
+            u["path"] = ADVC + String(Roster.CLASSES[cls]["model"])
+    return u
+
+## a unique as a spawnable def: like a lord, scaled to this floor
+static func unique_def(u: Dictionary, floor_no: int) -> Dictionary:
+    var out: Dictionary = make(String(u["body"]), "plain")
+    out["name"] = u["title"]
+    out["h"] = float(u["h"])
+    out["lift"] = float(out.get("lift", 0.0)) * float(u["h"]) / maxf(0.1, float(def_of(String(u["body"]))["h"]))
+    out["tint"] = u["tint"]
+    out["glow"] = Color(0, 0, 0)
+    out["boss"] = true
+    out["unique"] = true
+    out["id"] = u["id"]
+    out["note"] = u["note"]
+    out["aura"] = u["aura"]
+    if u.has("hand"):
+        out["hand"] = u["hand"]
+    if u.has("path"):
+        out["path"] = u["path"]
+    out["ways"] = (u["ways"] as Dictionary).duplicate(true)
+    out["boss_hp"] = (14.0 + float(floor_no) * 6.0) * float(u["hp"])
+    out["boss_atk"] = (6.0 + float(floor_no) * 2.2) * float(u["atk"])
+    return out
 
 ## which creatures live at which depth (old bands, the new creatures woven in
 ## where they fit: vermin up top, venom in the middle, fiends deep)
 const DEPTHS := [
     [1, 2,  ["slime", "bat", "minion", "rat", "frog"]],
-    [3, 4,  ["minion", "bones", "bat", "slime", "rat", "spider", "puglin"]],
-    [5, 5,  ["warrior", "bones", "warlock", "spider"]],
-    [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin"]],
-    [8, 9,  ["warrior", "warlock", "bones", "bat", "adder", "imp"]],
-    [10, 99,["warrior", "warlock", "cutpurse", "bones", "adder", "imp", "wasp"]],
+    [3, 4,  ["minion", "bones", "bat", "slime", "rat", "spider", "puglin", "bowman"]],
+    [5, 5,  ["warrior", "bones", "warlock", "spider", "bowman", "sentinel"]],
+    [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin", "bowman", "sentinel", "gravecaller"]],
+    [8, 9,  ["warrior", "warlock", "bones", "bat", "adder", "imp", "sentinel", "gravecaller", "lost"]],
+    [10, 99,["warrior", "warlock", "cutpurse", "bones", "adder", "imp", "wasp", "bowman", "sentinel", "gravecaller", "lost", "whelp"]],
 ]
 
 static func pool(floor_no: int) -> Array:
@@ -155,8 +352,22 @@ static func pool(floor_no: int) -> Array:
             return band[2]
     return ["warrior", "bones"]
 
+## the depth's pool, with every creature at home on this theme counted thrice
+static func pool_for(floor_no: int, theme := "") -> Array:
+    var out: Array = pool(floor_no).duplicate()
+    if theme == "":
+        return out
+    for k in pool(floor_no):
+        if (def_of(String(k)).get("homes", []) as Array).has(theme):
+            out.append(k)
+            out.append(k)
+    return out
+
 static func make(type_key: String, strain_key := "plain") -> Dictionary:
-    var out: Dictionary = (TYPES[type_key] as Dictionary).duplicate(true)
+    var out: Dictionary = def_of(type_key)
+    if out.has("paths"):
+        var ps: Array = out["paths"]
+        out["path"] = ps[randi() % ps.size()]
     var st: Dictionary = STRAINS[strain_key]
     out["type"] = type_key
     out["strain"] = strain_key
@@ -167,13 +378,19 @@ static func make(type_key: String, strain_key := "plain") -> Dictionary:
     out["atk"] = float(out["atk"]) * float(st["atk"])
     out["spd"] = float(out["spd"]) * float(st["spd"])
     out["h"] = float(out["h"]) * float(st["scale"])
-    out["tint"] = st["tint"]
-    out["glow"] = st["glow"]
+    # a creature with a look of its own keeps it on a plain strain
+    if strain_key != "plain" or not out.has("tint"):
+        out["tint"] = st["tint"]
+    if strain_key != "plain" or not out.has("glow"):
+        out["glow"] = st["glow"]
+    out["wild"] = bool(st.get("wild", false))
+    if not out.has("ways"):
+        out["ways"] = {}
     return out
 
-static func pick(floor_no: int) -> Dictionary:
-    var p := pool(floor_no)
-    return make(String(p[randi() % p.size()]), strain_for(floor_no))
+static func pick(floor_no: int, theme := "") -> Dictionary:
+    var p := pool_for(floor_no, theme)
+    return make(String(p[randi() % p.size()]), strain_for_theme(floor_no, theme))
 
 ## a boss as a spawnable def: its body, scaled up, armed, haloed, named
 static func boss_def(b: Dictionary) -> Dictionary:
@@ -192,4 +409,6 @@ static func boss_def(b: Dictionary) -> Dictionary:
         out["wglow"] = b.get("glow", 0.0)
     out["boss_hp"] = b["hp"]
     out["boss_atk"] = b["atk"]
+    out["id"] = b.get("id", "")
+    out["ways"] = (LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true)
     return out

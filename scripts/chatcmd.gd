@@ -72,6 +72,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         return ""
     var verb := String(parts[0]).to_lower()
     var arg := String(parts[1]).to_lower() if parts.size() > 1 else ""
+    var arg2 := String(parts[2]).to_lower() if parts.size() > 2 else ""
 
     # viewers rename themselves; keep the display name current
     var h := roster.get_hero(user_id)
@@ -83,7 +84,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         _last[user_id] = now
         return "%s is %s." % [h["name"], away[user_id]]
     match verb:
-        "enlist":   out = _enlist(user_id, display, arg)
+        "enlist":   out = _enlist(user_id, display, arg, arg2)
         "hero":     out = _needs(user_id, func(): return roster.describe(user_id))
         "inventory", "inv", "bag", "items":
                     out = _needs(user_id, func(): return inventory(user_id))
@@ -92,8 +93,10 @@ func handle(user_id: String, display: String, msg: String) -> String:
                         wants_fish.emit(user_id)
                         return "%s heads for the docks with a rod." % roster.get_hero(user_id)["name"])
         "forge":    out = _needs(user_id, func():
+                        if arg in ["list", "kinds", "?", "menu"]:
+                            return roster.forge_menu(user_id)
                         wants_shop.emit(user_id, "blacksmith")
-                        return roster.buy_weapon(user_id))
+                        return roster.buy_weapon(user_id, arg))
         "armoury", "armory":
                     out = _needs(user_id, func():
                         wants_shop.emit(user_id, "armorer")
@@ -111,7 +114,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
-        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
+        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge [kind|list] !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
         _:          return ""
 
     _last[user_id] = now
@@ -127,7 +130,14 @@ func _needs(user_id: String, fn: Callable) -> String:
         return "%s is dead. !reroll to raise a new hero." % roster.get_hero(user_id)["name"]
     return String(fn.call())
 
-func _enlist(user_id: String, display: String, cls: String) -> String:
+func _enlist(user_id: String, display: String, cls: String, species := "") -> String:
+    # L5: !enlist <class> <species>, either way round ("!enlist dwarf knight" too)
+    if Roster.SPECIES.has(cls) and (species == "" or Roster.CLASSES.has(species)):
+        var t := cls
+        cls = species
+        species = t
+    if species != "" and not Roster.SPECIES.has(species):
+        return "No such people in the valley. Try: %s." % ", ".join(Roster.SPECIES.keys())
     var h := roster.get_hero(user_id)
     if not h.is_empty() and roster.is_alive(user_id):
         return roster.describe(user_id)
@@ -135,9 +145,10 @@ func _enlist(user_id: String, display: String, cls: String) -> String:
         return "%s lies in the memorial. !reroll to raise a new hero." % h["name"]
     if display == "":
         display = "Stranger"
-    var nh := roster.fresh(user_id, display, cls)
-    return "%s takes the oath as a %s. %s" % [nh["name"], nh["class"],
-        Roster.CLASSES[nh["class"]]["blurb"]]
+    var nh := roster.fresh(user_id, display, cls, species)
+    var sp := Roster.species_of(nh)
+    return "%s takes the oath as %s %s %s (%s). %s" % [nh["name"], "an" if sp in ["elf", "orc"] else "a", sp,
+        nh["class"], Roster.SPECIES[sp]["blurb"], Roster.CLASSES[nh["class"]]["blurb"]]
 
 func _delve(user_id: String) -> String:
     var gate := _needs(user_id, func(): return "ok")

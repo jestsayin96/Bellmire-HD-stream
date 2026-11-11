@@ -11,6 +11,8 @@ var info: Dictionary = {}
 var monsters: Array = []
 var lord: Monster = null
 var _rng := RandomNumberGenerator.new()
+## test hook: a roll below Bestiary.UNIQUE_CHANCE forces a unique (negative = roll)
+static var force_unique := -1.0
 
 ## HD: Fantasy Props MegaKit pieces by theme, [asset, obstacle radius]. Each
 ## stands on its own open cell and is registered as an obstacle like the rest.
@@ -193,20 +195,35 @@ func _people() -> void:
         if pts.size() >= count:
             break
         pts.append(_cell_pos(c))
-    for i in range(mini(count, pts.size())):
+    # creatures at home in this floor's theme are likelier (Bestiary.pool_for);
+    # a pack animal brings its kind along, and the pack counts toward the floor
+    var theme := String(info.get("theme", ""))
+    var placed := 0
+    var i := 0
+    while placed < count and i < pts.size():
         var p: Vector3 = _out_of_props(pts[i])
-        var m := Monster.new()
-        m.def = Bestiary.pick(floor_no)
-        m.state = Monster.S.PATROL
-        m.roam = 3.0
-        m.position = Vector3(p.x, 0.0, p.z)
-        root.add_child(m)
-        monsters.append(m)
-    if bool(info.get("boss", false)):
-        var b := Bestiary.next_boss(floor_no)
-        if not b.is_empty():
+        i += 1
+        var d := Bestiary.pick(floor_no, theme)
+        var n := 1 + mini(int((d.get("ways", {}) as Dictionary).get("pack", 0)), count - placed - 1)
+        for k in range(n):
+            var m := Monster.new()
+            m.def = d if k == 0 else Bestiary.make(String(d["type"]), String(d["strain"]))
+            m.state = Monster.S.PATROL
+            m.roam = 3.0
+            var off := Vector3.ZERO if k == 0 else Vector3(cos(float(k) * 2.1), 0, sin(float(k) * 2.1)) * 1.1
+            var q: Vector3 = p if k == 0 else _out_of_props(p + off)
+            m.position = Vector3(q.x, 0.0, q.z)
+            root.add_child(m)
+            monsters.append(m)
+            placed += 1
+    # L2: now and then a rare unique holds an ordinary floor the way a lord holds
+    # its own (Bestiary.unique_for; never two of the same running)
+    var u := {} if bool(info.get("boss", false)) else Bestiary.unique_for(floor_no, force_unique if force_unique >= 0.0 else randf())
+    if bool(info.get("boss", false)) or not u.is_empty():
+        var b := Bestiary.next_boss(floor_no) if u.is_empty() else {}
+        if not b.is_empty() or not u.is_empty():
             lord = Monster.new()
-            lord.def = Bestiary.boss_def(b)
+            lord.def = Bestiary.boss_def(b) if u.is_empty() else Bestiary.unique_def(u, floor_no)
             lord.state = Monster.S.IDLE
             # the lord holds the open interior cell farthest from where the party
             # comes in - never the stairs, never a corridor

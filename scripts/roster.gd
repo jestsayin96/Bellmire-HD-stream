@@ -62,7 +62,84 @@ const CLASSES := {
     "cleric":    {"hp": 60, "atk": 12, "spd": 4.1, "model": "Mage.glb",
                   "family": "arcane", "offhand": "shield_round.gltf",
                   "primary": "wis", "blurb": "Keeps the party upright longer than it deserves."},
+    # ---- L4: six more callings, built the old way (a body + a family + an
+    # offhand + a stat profile), each with one thing it does in a fight
+    # (Delve reads "ability") and a cloak colour so it reads at stream distance.
+    "paladin":   {"hp": 70, "atk": 11, "spd": 4.1, "model": "Knight.glb",
+                  "family": "blade", "offhand": "shield_badge_color.gltf", "kind": "sword",
+                  "primary": "str", "ability": "smite", "cape": Color(0.92, 0.86, 0.62),
+                  "blurb": "Lays hands on the fallen, and hits the dead twice as hard."},
+    "necromancer": {"hp": 44, "atk": 17, "spd": 4.0, "model": "Mage.glb",
+                  "family": "arcane", "offhand": "spellbook_closed.gltf", "kind": "staff",
+                  "primary": "int", "ability": "drain", "cape": Color(0.10, 0.16, 0.12),
+                  "blurb": "Reads the scar's own grammar. Drinks back what it spends."},
+    "monk":      {"hp": 58, "atk": 13, "spd": 5.6, "model": "Rogue.glb",
+                  "family": "open", "offhand": "", "kind": "quarterstaff",
+                  "primary": "dex", "ability": "flurry", "cape": Color(0.90, 0.55, 0.18),
+                  "blurb": "Fast hands, no armour, no fear of the dark."},
+    "druid":     {"hp": 54, "atk": 12, "spd": 4.1, "model": "Mage.glb",
+                  "family": "arcane", "offhand": "", "kind": "staff",
+                  "primary": "wis", "ability": "thorns", "cape": Color(0.22, 0.48, 0.20),
+                  "blurb": "Brought the meadow down with them. Thorns take the crowd."},
+    "warlock":   {"hp": 46, "atk": 17, "spd": 4.3, "model": "Rogue_Hooded.glb",
+                  "family": "arcane", "offhand": "spellbook_closed.gltf", "kind": "wand",
+                  "primary": "cha", "ability": "hex", "cape": Color(0.36, 0.14, 0.46),
+                  "blurb": "Struck a bargain with something below. Marks a thing for everyone."},
+    "bard":      {"hp": 52, "atk": 12, "spd": 4.8, "model": "Rogue.glb",
+                  "family": "blade", "offhand": "", "kind": "dagger",
+                  "primary": "cha", "ability": "inspire", "cape": Color(0.70, 0.12, 0.16),
+                  "blurb": "Sings the party steady. Everyone swings truer while they stand."},
 }
+## ---- L5: the peoples of the valley. The old game names none (its folk read
+## as valley humans), so these are new: the common five, plus one only this
+## world has - the scarkin, born too near the scar. 5e-style ability bonuses
+## (capped at 20), one trait each that Delve reads, and a look (Gear dresses it).
+## darkvision: no disadvantage when the oil is gone. lucky: a natural 1 is rolled again.
+const SPECIES := {
+    "human":    {"bonus": {"str": 1, "dex": 1, "con": 1, "int": 1, "wis": 1, "cha": 1}, "trait": "",
+                 "weight": 34, "blurb": "valley-born, like most of Bellmire"},
+    "elf":      {"bonus": {"dex": 2, "int": 1}, "trait": "darkvision", "weight": 12,
+                 "scale": Vector3(0.96, 1.05, 0.96), "skin": Color(1.0, 0.96, 0.92), "parts": ["ears"],
+                 "blurb": "out of the old woods past the fields; sees in the dark"},
+    "dwarf":    {"bonus": {"con": 2, "wis": 1}, "trait": "darkvision", "weight": 14,
+                 "scale": Vector3(1.12, 0.86, 1.12), "skin": Color(1.0, 0.86, 0.78), "parts": ["beard"],
+                 "blurb": "down from the hill mines; sees in the dark"},
+    "halfling": {"bonus": {"dex": 2, "cha": 1}, "trait": "lucky", "weight": 12,
+                 "scale": Vector3(0.80, 0.78, 0.80), "skin": Color(1.0, 0.94, 0.88), "parts": [],
+                 "blurb": "from the field-farms; a natural 1 is rolled again"},
+    "orc":      {"bonus": {"str": 2, "con": 1}, "trait": "darkvision", "weight": 14,
+                 "scale": Vector3(1.10, 1.06, 1.10), "skin": Color(0.62, 0.80, 0.54), "parts": ["tusks"],
+                 "blurb": "came over the west road and stayed; sees in the dark"},
+    "scarkin":  {"bonus": {"cha": 2, "int": 1}, "trait": "darkvision", "weight": 8,
+                 "scale": Vector3(1.0, 1.0, 1.0), "skin": Color(0.84, 0.74, 0.98), "parts": ["shard"],
+                 "blurb": "born too near the scar; its light in the eyes, its dark no bother"},
+}
+
+func _any_species() -> String:
+    var total := 0
+    for k in SPECIES:
+        total += int(SPECIES[k]["weight"])
+    var r := rng.randi() % total
+    for k in SPECIES:
+        r -= int(SPECIES[k]["weight"])
+        if r < 0:
+            return k
+    return "human"
+
+func _with_species(stats: Dictionary, species: String) -> Dictionary:
+    var b: Dictionary = SPECIES.get(species, {}).get("bonus", {})
+    for k in b:
+        stats[k] = mini(20, int(stats.get(k, 10)) + int(b[k]))
+    return stats
+
+static func species_of(h: Dictionary) -> String:
+    return String(h.get("species", "human"))
+
+static func has_trait(h: Dictionary, t: String) -> bool:
+    return String(SPECIES.get(species_of(h), {}).get("trait", "")) == t
+
+## L4: the casters throw bolts from range; the healers mend
+const CASTERS := ["mage", "sage", "cleric", "necromancer", "druid", "warlock"]
 
 # Only four weapon meshes per family exist, so the top tiers reuse a mesh and
 # separate themselves by SIZE and GLOW instead. A dragontooth blade is the same
@@ -81,6 +158,8 @@ const WEAPONS := [
     {"name": "fine steel",  "cost": 160, "atk": 9,  "scale": 1.05, "glow": 0.0},
     {"name": "runed",       "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5},
     {"name": "dragontooth", "cost": 1100,"atk": 26, "scale": 1.25, "glow": 1.0},
+    # L3: found only below (Gear.WEAPONS carries the same row) - no smith makes it
+    {"name": "scarforged",  "cost": 0,   "atk": 34, "scale": 1.3, "glow": 1.3, "found": true},
 ]
 # "ac" is the 5E armour bonus on top of 10 + DEX. Armour used to give hit
 # points only, which is not how D&D works: better armour should make you
@@ -91,7 +170,15 @@ const ARMOUR := [
     {"name": "chainmail", "cost": 150, "hp": 26, "ac": 3},
     {"name": "plate", "cost": 400, "hp": 48, "ac": 5},
     {"name": "warded plate", "cost": 1000, "hp": 80, "ac": 7},
+    {"name": "scarwoven mail", "cost": 0, "hp": 110, "ac": 8, "found": true},
 ]
+## the forge's best: the found-only tiers above are never sold
+static func forged_max(list: Array) -> int:
+    var top := 0
+    for i in range(list.size()):
+        if not bool((list[i] as Dictionary).get("found", false)):
+            top = i
+    return top
 # WHAT THE TOWN CAN MAKE. His design: levelling the town "unlocks more gear
 # and stuff potions". A hamlet's smith does not forge warded plate - the top
 # tiers are gated behind Bellmire itself growing, which gives the valley's
@@ -124,12 +211,14 @@ func _init() -> void:
     rng.randomize()
 
 # ----------------------------------------------------------------- lifecycle
-func fresh(user_id: String, display: String, cls := "") -> Dictionary:
+func fresh(user_id: String, display: String, cls := "", species := "") -> Dictionary:
     if cls == "" or not CLASSES.has(cls):
         cls = CLASSES.keys()[rng.randi() % CLASSES.size()]
+    if not SPECIES.has(species):
+        species = _any_species()
     var h := {
-        "id": user_id, "name": display, "class": cls,
-        "stats": roll_stats(cls), "weapon": 0, "armour": 0, "potions": 1,
+        "id": user_id, "name": display, "class": cls, "species": species,
+        "stats": _with_species(roll_stats(cls), species), "weapon": 0, "armour": 0, "potions": 1,
         "oil": 2,
         "gold": 40, "level": 1, "xp": 0,
         "delves": 0, "kills": 0, "deepest": 0, "alive": true,
@@ -185,6 +274,9 @@ const SAVES := {
     "barbarian": ["str", "con"], "rogue": ["dex", "int"],
     "duelist": ["dex", "cha"], "ranger": ["dex", "str"],
     "mage": ["int", "wis"], "sage": ["wis", "cha"], "cleric": ["wis", "cha"],
+    # L4, as the 5e sheets have them
+    "paladin": ["wis", "cha"], "necromancer": ["int", "wis"], "monk": ["str", "dex"],
+    "druid": ["int", "wis"], "warlock": ["wis", "cha"], "bard": ["dex", "cha"],
 }
 
 # 5E proficiency: +2 at level 1, +1 every four levels after.
@@ -197,6 +289,9 @@ func armour_class(h: Dictionary) -> int:
     var off := String(CLASSES[String(h["class"])].get("offhand", ""))
     if off.begins_with("shield"):
         ac += 2
+    # L4: a monk in no more than leather adds WIS (unarmoured defence)
+    if String(h["class"]) == "monk" and int(h.get("armour", 0)) <= 1:
+        ac += maxi(0, mod(h, "wis"))
     return ac
 
 # d20 + proficiency + the class's own ability, as the attack line on the sheet.
@@ -234,6 +329,9 @@ func speed(h: Dictionary) -> float:
 # WIS drives mending; sages mend harder than clerics
 func heal_power(h: Dictionary) -> float:
     var cls: String = String(h["class"])
+    if cls == "paladin":
+        # L4: lay on hands - a smaller well, drawn on CHA
+        return 5.0 + float(maxi(0, mod(h, "cha"))) * 2.0
     if cls not in ["sage", "cleric"]:
         return 0.0
     var base: float = 11.0 if cls == "sage" else 7.0
@@ -258,24 +356,46 @@ func spend(h: Dictionary, cost: int) -> bool:
     Sfx.play("coin", -6.0)
     return true
 
-func buy_weapon(user_id: String) -> String:
+func buy_weapon(user_id: String, kind := "") -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
+    # L3: !forge <kind> - a kind of this hero's family (sword, spear, mace, bow...)
+    if kind != "":
+        var fam := String(CLASSES[h["class"]]["family"])
+        if not Gear.KINDS.has(kind) or String(Gear.KINDS[kind]["family"]) != fam:
+            return "The smith does not make a %s for a %s. Ask for: %s." % [kind, h["class"], ", ".join(Gear.kinds_of(fam))]
+        var top := mini(forged_max(WEAPONS), town_tier)
+        if int(h["weapon"]) >= top and int(h["weapon"]) > 0:
+            # nothing better to buy: the smith reworks what they carry into the new kind
+            if String(h.get("wkind", "")) == kind:
+                return "%s already carries %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
+            if bool(WEAPONS[int(h["weapon"])].get("found", false)):
+                return "No smith in Bellmire will put a hammer to scarforged steel."
+            var rework := cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4))
+            if not spend(h, rework):
+                return "%s needs %d gold to have it reworked into a %s (has %d)." % [h["name"], rework, kind, int(h["gold"])]
+            h["wkind"] = kind
+            changed.emit(user_id)
+            return "The smith reworks %s's steel into %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
     var nxt: int = int(h["weapon"]) + 1
-    if nxt >= WEAPONS.size():
-        return "%s already carries a %s - nothing better is forged here." \
-            % [h["name"], WEAPONS[-1]["name"]]
+    if nxt >= WEAPONS.size() or bool(WEAPONS[nxt].get("found", false)):
+        return "%s already carries %s %s - nothing better is forged here." \
+            % [h["name"], _an(weapon_name(h)), weapon_name(h)]
     if nxt > town_tier:
         return "%s wants %s, but no smith in Bellmire can forge it yet." \
             % [h["name"], WEAPONS[nxt]["name"]]
     var w: Dictionary = WEAPONS[nxt]
     var peek := h.duplicate(true)
     peek["weapon"] = nxt
+    if kind != "":
+        peek["wkind"] = kind
     var label := weapon_name(peek)
     if not spend(h, cost_for(h, int(w["cost"]))):
         return "%s needs %d gold for %s %s (has %d)." \
             % [h["name"], cost_for(h, int(w["cost"])), _an(label), label, int(h["gold"])]
     h["weapon"] = nxt
+    if kind != "":
+        h["wkind"] = kind
     changed.emit(user_id)
     return "%s takes up %s %s. (+%d atk)" % [h["name"], _an(label), label, int(w["atk"])]
 
@@ -286,8 +406,8 @@ func buy_armour(user_id: String) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
     var nxt: int = int(h["armour"]) + 1
-    if nxt >= ARMOUR.size():
-        return "%s is already in %s." % [h["name"], ARMOUR[-1]["name"]]
+    if nxt >= ARMOUR.size() or bool(ARMOUR[nxt].get("found", false)):
+        return "%s is already in %s - nothing better is made here." % [h["name"], ARMOUR[int(h["armour"])]["name"]]
     if nxt > town_tier:
         return "%s wants %s, but Bellmire has no one who can make it yet." \
             % [h["name"], ARMOUR[nxt]["name"]]
@@ -332,8 +452,8 @@ func reroll(user_id: String, prepaid := false) -> String:
         return "%s needs %d gold to reroll (has %d)." \
             % [h["name"], REROLL_COST, int(h["gold"])]
     var before: Dictionary = h["stats"].duplicate()
-    var a := roll_stats(String(h["class"]))
-    var b := roll_stats(String(h["class"]))
+    var a := _with_species(roll_stats(String(h["class"])), species_of(h))
+    var b := _with_species(roll_stats(String(h["class"])), species_of(h))
     var best: Dictionary = a if _total(a) >= _total(b) else b
     # You gamble the GOLD, never the character. A paid reroll that leaves a
     # viewer strictly worse off is a refund request, not a highlight - so a
@@ -365,6 +485,9 @@ func respec(user_id: String, cls: String, prepaid := false) -> String:
             % [h["name"], RESPEC_COST, int(h["gold"])]
     var was: String = h["class"]
     h["class"] = cls
+    # a weapon kind of the old calling's family does not carry over (L3 kinds)
+    if h.has("wkind") and not Gear.kinds_of(String(CLASSES[cls]["family"])).has(String(h["wkind"])):
+        h.erase("wkind")
     changed.emit(user_id)
     return "%s abandons the %s's path and takes up the %s. %s" \
         % [h["name"], was, cls, CLASSES[cls]["blurb"]]
@@ -480,6 +603,10 @@ func weapon_mesh(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
     if t <= 0:
         return ""
+    # L3: a chosen kind (!forge <kind>) has its own mesh per tier
+    var kind := String(h.get("wkind", CLASSES[h["class"]].get("kind", "")))
+    if Gear.KINDS.has(kind):
+        return Gear.kind_path(kind, t)
     var fam: String = String(CLASSES[h["class"]]["family"])
     var list: Array = FAMILIES[fam]
     return String(list[clampi(t - 1, 0, list.size() - 1)])
@@ -489,11 +616,14 @@ func offhand_mesh(h: Dictionary) -> String:
 
 # most offhands are held; a quiver is worn
 func offhand_bone(h: Dictionary) -> String:
+    # L3: HeroBody.refresh asks this just before Gear.rank_trim - the armour goes on there
+    Gear._dressing = h
     return String(CLASSES[h["class"]].get("offhand_bone", "handslot.l"))
 
 func weapon_look(h: Dictionary) -> Dictionary:
-    var w: Dictionary = WEAPONS[int(h["weapon"])]
-    return {"scale": float(w["scale"]), "glow": float(w["glow"])}
+    var w: Dictionary = WEAPONS[clampi(int(h["weapon"]), 0, WEAPONS.size() - 1)]
+    var path := weapon_mesh(h)
+    return {"scale": float(w["scale"]) * Gear.hand_scale(path), "glow": float(w["glow"])}
 
 # the full name a viewer sees: tier adjective + family noun
 const FAMILY_NOUN := {"blade": "blade", "axe": "axe", "arcane": "focus", "ranged": "bow"}
@@ -502,8 +632,49 @@ func weapon_name(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
     if t <= 0:
         return "bare hands"
-    return "%s %s" % [WEAPONS[t]["name"],
-        FAMILY_NOUN.get(String(CLASSES[h["class"]]["family"]), "weapon")]
+    var kind := String(h.get("wkind", CLASSES[h["class"]].get("kind", "")))
+    var noun: String = String(Gear.KINDS[kind]["noun"]) if Gear.KINDS.has(kind) else String(FAMILY_NOUN.get(String(CLASSES[h["class"]]["family"]), "weapon"))
+    return "%s %s" % [WEAPONS[clampi(t, 0, WEAPONS.size() - 1)]["name"], noun]
+
+## ---- L3: what the forge offers this hero: their family's kinds and the next tier
+func forge_menu(user_id: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var fam := String(CLASSES[h["class"]]["family"])
+    var nxt := int(h["weapon"]) + 1
+    var top := mini(forged_max(WEAPONS), town_tier)
+    var next := "nothing better is forged here" if nxt > top else "next: %s, %d gold" % [WEAPONS[nxt]["name"], cost_for(h, int(WEAPONS[nxt]["cost"]))]
+    return "The smith works %s for a %s: %s (!forge <kind>)  |  %s." % [
+        "steel", h["class"], ", ".join(Gear.kinds_of(fam)), next]
+
+## a deep floor gives up gear: one tier above what the finder carries (the
+## forge's best at most), and from floor 10 scarforged steel or scarwoven mail
+## for one already at the top. Returns the Chronicle line, or "".
+func find_gear(user_id: String, floor_no: int, roll: float, lord := false) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty() or floor_no < 6:
+        return ""
+    var chance := 0.05 + 0.01 * float(floor_no) + (0.2 if lord else 0.0)
+    if roll >= chance:
+        return ""
+    var arm := int(h["armour"]) < int(h["weapon"])
+    var key := "armour" if arm else "weapon"
+    var list: Array = ARMOUR if arm else WEAPONS
+    var cur := int(h[key])
+    var top := forged_max(list)
+    var nxt := cur + 1
+    if cur >= top:
+        if floor_no < 10 or nxt >= list.size():
+            return ""
+    h[key] = nxt
+    if not arm:
+        var kinds := Gear.kinds_of(String(CLASSES[h["class"]]["family"]))
+        if not kinds.is_empty():
+            h["wkind"] = kinds[randi() % kinds.size()]
+    changed.emit(user_id)
+    var what := weapon_name(h) if not arm else String(ARMOUR[nxt]["name"])
+    return "%s prises %s %s from the dead on floor %d." % [h["name"], _an(what), what, floor_no] if not arm \
+        else "%s strips a set of %s off the dead on floor %d." % [h["name"], what, floor_no]
 
 func _stat_line(s: Dictionary) -> String:
     var parts := []
@@ -522,7 +693,7 @@ func describe(user_id: String) -> String:
     return ("%s the %s, %s, level %d  |  AC %d  HP %d  prof %s  to-hit %s  |  %s" +
             "  |  saves %s  |  %s, %s  |  %d potions, %d oil, %d gold" +
             "  |  deepest floor %d, %d kills") \
-        % [h["name"], h["class"], rank_of(h), int(h["level"]),
+        % [h["name"], "%s %s" % [species_of(h), h["class"]], rank_of(h), int(h["level"]),
            armour_class(h), int(max_hp(h)), sign_str(prof(h)),
            sign_str(attack_bonus(h)), _stat_line(h["stats"]), save_line(h),
            weapon_name(h), ARMOUR[int(h["armour"])]["name"],

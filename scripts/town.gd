@@ -1629,6 +1629,15 @@ func _dress_landmarks() -> void:
         var front := p + f * (_depth_of(key) * 0.5)
         _objs.append([p, maxf(_depth_of(key), _width_of(key)) * 0.55])
         var lv: String = String(livery_of.get(plot["district"], "red"))
+        # standing banners (Fantasy Props MegaKit) flank every landmark's front
+        if key != "lm_windmill":
+            for sgn in [-1.0, 1.0]:
+                # as far out as the forecourt allows, but never on the road
+                for out in [1.6, 0.9, 0.5]:
+                    var bp: Vector3 = front + f * float(out) + side * (float(sgn) * (_width_of(key) * 0.5 - 0.6))
+                    if road_dist(bp) > 0.8:
+                        _yard("Banner_1" if sgn < 0.0 else "Banner_2", bp, side, f, 0.0, 0.0)
+                        break
         match key:
             "lm_hall":
                 # the inscription over the Chief's Hall, word for word from canon
@@ -1649,6 +1658,13 @@ func _dress_landmarks() -> void:
                 _flagpole(p + side * (-_width_of(key) * 0.5 - 2.5) + f * 2.0, lv, 13.0, wood)
             "lm_chapel":
                 _glow(front + f * 2.6 + Vector3(0, g + 2.6, 0), Color(1.0, 0.85, 0.6), 1.0, 8.0)
+                # the reading stand at the door with its candle, a candle-stand either side
+                var bs := _yard("BookStand", front + f * 3.4, side, f, 2.0, 0.0, PI)
+                _on_top("Candle_1", bs, 0.25, 0.0)
+                for sgn in [-1.0, 1.0]:
+                    var cs := _yard("CandleStick_Stand", front + f * 2.4, side, f, float(sgn) * 3.0, 0.0)
+                    if cs:
+                        _glow(cs.position + Vector3(0, 1.9, 0), Color(1.0, 0.75, 0.45), 0.5, 4.0)
                 # a bell hanging in the tower top (the tower stands in front of the nave)
                 var tp := p + f * (_depth_of(key) * 0.5 - 2.0)
                 var bell := MeshInstance3D.new()
@@ -3395,6 +3411,9 @@ func _dress_shops() -> void:
                     _on_top("Mug", tt, 0.4, 0.1, 1.0)
                     _yard("Stool", y, side, f, -2.2, float(tz))
                     _yard("Stool", y, side, f, 1.0, float(tz))
+                # two chairs drawn up at the table ends (Fantasy Props MegaKit)
+                _yard("Chair_1", y, side, f, -0.6, 2.9, PI)
+                _yard("Chair_1", y, side, f, -0.6, -3.1)
                 _yard("Barrel_Holder", y, side, f, 2.9, -2.6)
                 _yard("Barrel", y, side, f, 3.0, 0.4)
                 _yard("Barrel", y, side, f, 3.0, 1.6, 0.6)

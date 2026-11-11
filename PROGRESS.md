@@ -361,3 +361,22 @@ Town
   TWITCH_PARSE OK. Parse check: 0 script errors (the 3 'material is null' engine lines are old).
 - The Sfx node first left 8 objects / 4 resources alive at exit (players still holding streams); it now
   stops and drops them in _exit_tree.
+
+
+## Cycle 53 - Fantasy Props MegaKit placed (2026-11-11)
+- Town (town.gd): the doors already had Lantern_Wall + barrels/crates/buckets and the square its stalls;
+  added two Chair_1 at the tavern table ends, a BookStand with a Candle_1 on it and two lit
+  CandleStick_Stand at the chapel door, and standing Banner_1 / Banner_2 flanking every landmark front
+  except the windmill (stepped in from the road when the forecourt is tight). All solid (navmesh carves them).
+- Dungeon (dungeon_hd.gd THEME_PROPS): prison Chain_Coil + Cage_Small, crypt CandleStick_Stand (lit) +
+  Cage_Small, shrine stands + BookStand, keep/treasury/workshop/mess Bookcase_2 (+ chain / stand),
+  barracks Chain_Coil. Each on its own cell, registered in info.obstacles; on a crowded floor (a prison's
+  cells) it falls back to any clear cell, edge cells included, never by the stairs.
+- tools/_props_test.gd (new, windowed): counts every placement in the town and on six themed floors and
+  checks each dungeon piece sits on an obstacle: PROPS_TEST OK. Renders renders/cycles/20261111_props
+  (+ contact_sheet.png). The crypt shot's camera ended up inside a wall - the prop is counted, the
+  picture is not useful.
+- _townwalk in_solid 63/7425 = 0.85% (HEAD before the change: 86/7168 = 1.20%), houses on road 1 (same).
+  _offfloor 0 of 1126, _delve_test (DELVE_OIL=1) ENDED, TWITCH_PARSE OK, parse check 0 script errors.
+- Note: _delve_test without DELVE_OIL hits its 150 s cap on floor 3 both before and after this change
+  (no ENDED); with DELVE_OIL=1 (the documented short run) it ends.

@@ -22,7 +22,7 @@ Scheduled build runs work through this list top to bottom. Each run:
         OpenGameArt CC0 medieval loops). Download to assets/audio with a LICENSE note. A small Sfx autoload/
         node: sword hits, spell cast, death sting, raid horn, coin, bell at dawn/dusk, splash for fishing;
         day / night / raid music with crossfade; ambience in town. Volume sane for stream (music -14 dB).
-- [ ] 4. Place the 49 Quaternius Fantasy Props MegaKit props (assets/props): town (Lantern_Wall by doors,
+- [x] 4. (DONE Nov 11, cycle 53: tavern chairs, chapel stand/candles, landmark banners, themed dungeon props as obstacles; tools/_props_test.gd PROPS_TEST OK; _offfloor 0, _townwalk in_solid 0.85% (was 1.20%); renders/cycles/20261111_props) Place the 49 Quaternius Fantasy Props MegaKit props (assets/props): town (Lantern_Wall by doors,
         barrels/crates by houses, Chair_1 + Table_Large outside the tavern, BookStand/Candle at the chapel,
         Banner_* on landmarks) and dungeons (Chain_Coil, Cage_Small, CandleStick_Stand, Bookcase in themed
         rooms, registered as obstacles). Re-run tools/_offfloor.gd and tools/_townwalk.gd: no clipping regressions.

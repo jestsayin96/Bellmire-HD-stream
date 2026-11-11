@@ -12,6 +12,36 @@ var monsters: Array = []
 var lord: Monster = null
 var _rng := RandomNumberGenerator.new()
 
+## HD: Fantasy Props MegaKit pieces by theme, [asset, obstacle radius]. Each
+## stands on its own open cell and is registered as an obstacle like the rest.
+const MKPROPS := "res://assets/props/"
+const MK_SCALE := 1.45
+const THEME_PROPS := {
+    "prison":   [["Chain_Coil", 0.6], ["Cage_Small", 0.9], ["Chain_Coil", 0.6]],
+    "crypt":    [["CandleStick_Stand", 0.5], ["CandleStick_Stand", 0.5], ["Cage_Small", 0.9]],
+    "shrine":   [["CandleStick_Stand", 0.5], ["CandleStick_Stand", 0.5], ["BookStand", 0.6]],
+    "keep":     [["Bookcase_2", 1.1], ["CandleStick_Stand", 0.5]],
+    "treasury": [["Bookcase_2", 1.1], ["Chain_Coil", 0.6]],
+    "workshop": [["Bookcase_2", 1.1], ["Chain_Coil", 0.6]],
+    "barracks": [["Chain_Coil", 0.6], ["CandleStick_Stand", 0.5]],
+    "mess":     [["Bookcase_2", 1.1], ["CandleStick_Stand", 0.5]],
+}
+
+func _mk(nm: String) -> Node3D:
+    var path := MKPROPS + nm + ".gltf"
+    if not ResourceLoader.exists(path):
+        return null
+    var n: Node3D = (load(path) as PackedScene).instantiate()
+    n.scale = Vector3.ONE * MK_SCALE
+    if nm == "CandleStick_Stand":
+        var l := OmniLight3D.new()
+        l.light_color = Color(1.0, 0.72, 0.42)
+        l.light_energy = 0.7
+        l.omni_range = 4.5
+        l.position = Vector3(0, 1.3, 0)
+        n.add_child(l)
+    return n
+
 func _ready() -> void:
     if info.is_empty():
         build(floor_no)
@@ -120,6 +150,27 @@ func _dress() -> void:
             var c: Vector2i = take.call()
             if c.x > -999:
                 _place_solid(DungeonParts.portcullis(), c, 1.2)
+    for spec in THEME_PROPS.get(theme, []):
+        var c: Vector2i = take.call()
+        if c.x <= -999:
+            # crowded floor (a prison's cells): any open cell with room for it
+            # (edge cells too - a stand against a wall is no stranger), never on the stairs
+            var all_cells: Array = spots + (info["cells"] as Dictionary).keys()
+            for sc in all_cells:
+                var sv: Vector2i = sc
+                var sp := _cell_pos(sv)
+                if used.has(sv) or not _clear_of_props(sp, float(spec[1]) + 0.4):
+                    continue
+                if sp.distance_to(info["entry"]) < 3.0 or sp.distance_to(info["exit"]) < 3.0:
+                    continue
+                used[sv] = true
+                c = sv
+                break
+        if c.x <= -999:
+            continue
+        var pn := _mk(String(spec[0]))
+        if pn:
+            _place_solid(pn, c, float(spec[1]), float(_rng.randi() % 4) * PI * 0.5)
     # wild-magic scarring deepens with depth: scar-glass breaks through the floor
     var scars := 0 if floor_no < 3 else mini((floor_no - 1) / 2, 5)
     for i in range(scars):

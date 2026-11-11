@@ -106,7 +106,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
 - [ ] L8. (Mr. E's decision, Nov 11) Wild magic below: every spell in the dungeon is a check against the scar - d20 + casting mod (INT mage/sage/necromancer, WIS cleric/druid/monk, CHA warlock/bard/paladin) + proficiency vs DC 10 + floor/2 (cap 20); fail = misfire as on the scar's surface (Spells.cast in_scar=true); nat 1 always, nat 20 never. Monsters unaffected. Test the misfire rates (strong vs weak caster, shallow vs deep).
 - [ ] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
-- [ ] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
+- [x] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:

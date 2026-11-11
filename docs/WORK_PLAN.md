@@ -14,6 +14,9 @@ _offfloor, _twitch_parse, _townwalk), tick it here with one line, PROGRESS.md cy
 LORE RULE: before adding monsters, bosses, classes, species, spells or NPC types, read the original game
 (read only) — its bestiary, classes, races and lore files — and use what it already has first. Anything new
 must fit its world and be named in its voice. Never state a dungeon floor count.
+THE ORIGINAL lives at C:\Users\morta\OneDrive\MortalScorpion\OneDrive\Public\Documents\trial-and-error
+(NOT C:\Users\morta\OneDrive\Public, which is an empty stub). Its spells: player.gd fire (38 dmg, 24 m/s,
+orange) + frost (24 dmg, 32 m/s, blue), cast from +1.1 m, 1 m ahead; NOTES.md LORE BIBLE: scar misfire rule.
 ASSETS: free CC0 only (Quaternius, KayKit, Kenney), downloaded into assets/<kind>/ with a LICENSE note.
 Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 

@@ -690,3 +690,5 @@ Town
   - looked at: the Rattling Host with a fire burst at its feet, bolts flat from the casters, bar steady.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L1, L4,
   L5 OK.
+- Cycle 59 follow-up: the original was found (path now in WORK_PLAN LORE RULE). It has fire + frost as its
+  spells and the scar misfire rule - D2's fire/frost match it; the other D2 spells come from the plan's list.

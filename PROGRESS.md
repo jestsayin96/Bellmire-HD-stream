@@ -690,6 +690,77 @@ Town
   - looked at: the Rattling Host with a fire burst at its feet, bolts flat from the casters, bar steady.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L1, L4,
   L5 OK.
+- Cycle 59 follow-up: the original was found (path now in WORK_PLAN LORE RULE). It has fire + frost as its
+  spells and the scar misfire rule - D2's fire/frost match it; the other D2 spells come from the plan's list.
+
+
+## Cycle 64 - D3: buildings that level up (desktop, 2026-11-11)
+- Lore: the town ladder is the original sim.gd's six levels (a hamlet, a village, a market town, a walled town,
+  a free city, the seat of the valley) - six, so the renders are levels 1, 3, 5 and 6 (the plan said 7).
+  "A walled town" is level 4, so that is where the stone wall comes; below it the wall is a timber palisade.
+  The original's named places are the Chief's Hall, Chapel, Tavern, Market Row and the towers; the new halls
+  are the plan's list named plainly in that voice (the Delvers' Guild after the Delvers' Road).
+- scripts/growth.gd (new, no class_name, preloaded by town.gd): built ONCE at the founding, then only shown or
+  hidden, so a level change is free and the navmesh never moves (every new building stands inside a house
+  plot's own footprint). House plots (not landmarks/shops) fill nearest the market first, front rank before
+  back: 23/31/39/45/51/56 of 56 at levels 1-6; the rest are staked lots (cleared earth, pegs, line, a timber
+  stack, a crate). Upgrades hang off each house node: planters at the door (2), a hanging sign in the
+  district colour + door lamp (3), stone plinth + chimney (4), a storey more (5, scale.y x1.2), ridge pennant (6).
+  New buildings, each on a house plot: Market Hall (3, open hall on stone pillars, stalls), Town Stables (4,
+  open-fronted barn, horses in the stalls - for D4), Delvers' Guild (5, the house raised, banners, notice
+  board), Bathhouse (5, stone, copper dome, steam), Mage Tower (6, stone drum, MegaKit round tiled cap,
+  violet windows, turning crystal + light). Feed lines on each rise ("8 new houses go up in Bellmire." ...).
+  Falling back hides them again.
+- town.gd (backup .bak_d3): wall_parts (wall blocks, merlons, towers, gate arches) for the palisade/stone
+  swap; growth set up at the end of _build at level 1 (quiet); show_level(lv, quiet); _home_for skips lots
+  and raised halls. economy.gd (.bak_d3): check_town_level calls town.show_level (quiet at the founding).
+  raids.gd (.bak_d3): raiders never "burn" a staked lot or a hall.
+- tools/_d3_test.gd (headless): levels 1..6 up, houses only ever increase, specials exactly as planned per
+  level, every house's visibility right, wall palisade < 4 <= stone, 18 news lines, falling back to 2 closes
+  the halls and brings lots back. D3_TEST OK (twice).
+- tools/_d3_shot.gd (windowed) -> renders/cycles/20261111_d3: overview_level1/3/5/6 + levels_1_3_5_6.png,
+  each new building, house_level1/3/4/6, lot, wall_level3/4, montages new_buildings.png, house_and_wall.png.
+  Looked at: lots on the hamlet's outer streets fill with houses by level 6, the palisade is brown timber at 3
+  and stone at 4, the Market Hall reads (pillars, tiled roof, stalls, sign), the Stables show horses in open
+  stalls (moved forward + prism roofs tiled world-triplanar after the first look), Guild banners/sign/board,
+  Bathhouse dome, Mage Tower with its cap. Weak spot: on a single house the plinth/sign changes are small from
+  a street-level eye; the chimneys and pennants read best from above.
+- Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 934, TWITCH_PARSE OK, TOWNWALK
+  in_solid 5/6482 (0.077%) raid 0/4102 PASS, _delve_test ran with 0 script errors.
+
+
+## Cycle 65 - D4: more guards and the mounted watch (desktop, 2026-11-11)
+- Lore: the original town.gd _chief_spends grows the standing garrison with the danger ("3 + raids/2" guards,
+  each "%s is sworn into the watch."). Bellmire HD grows it with the town level instead. Horsemen are the plan's
+  ask (town guards only); named "the mounted watch". (D3's box in WORK_PLAN was left unticked last run - ticked.)
+- town.gd (.bak_d4) _spawn_garrison() after _spawn_animals, own rng (seed 4404) so the old townsfolk are unchanged:
+  every gate/scar post manned (8 posts, was 5 guards); a second crossbowman on each of the 3 watchtowers; four
+  more watch pairs on new beats - inside the curtain wall (from level 1), the market ring + tavern (1), market ->
+  bridge -> far bank (3), the wall the other way (5): watch walkers 12/12/14/14/16/16 at levels 1-6.
+  Riders: 2 at level 4 (the Town Stables open), 3 at 5, 4 at 6; they wait in the stable yard, then ride every gate
+  (in, out 18 m, back), the market and the bridge; odd riders the other way round. town.show_level ->
+  _show_garrison shows/hides them (hidden ones stop processing) with feed lines. Trader/innkeeper market spots are
+  now snapped to open ground.
+- scripts/cavalry.gd (new, class_name Cavalry extends Townsfolk): the Quaternius CC0 Horse (assets/animals, now with
+  a LICENSE.txt) under a Knight in garrison livery, seated (Sit_Chair_Idle) at 0.6 of the horse's height; the
+  horse's gait (Idle/Walk/Run + speed scale) comes from how fast the pair really moves; walking uses Townsfolk's
+  navmesh routes. raids.gd (.bak_d4): riders fight as guards (hp 80, atk 13, AC 13, +4, speed 9), the rider only
+  swings the sword (no running legs on a horse), "The mounted watch rides out to meet them - N riders."
+  Tower archers: every ~2.4 s each lookout looses a bolt at the nearest raider within 42 m; the bolt flies and
+  the d20 (+3, 9 dmg) is rolled on landing.
+- tools/_d4_test.gd (headless): posts manned, 2 per tower, watch grows, riders 0/0/0/2/3/4, news, riders seated,
+  3000 frames of riding (270-350 m each, 0/600 samples inside a building after moving the stable stop off the
+  barn's footprint - first runs had 4-13/600 from riders waiting at the door), a west-road raid: all 4 riders
+  engage, archers loose 4-5 bolts, the raid is driven off. D4_TEST OK.
+- tools/_d4_shot.gd -> renders/cycles/20261111_d4: rider_front/side/road, patrol_above, tower_archers, gate_post,
+  raid_start/ride/fight/fight2. Looked at: the riders sit astride and gallop in file at the raid, two crossbowmen
+  on the tower top, gate post. Weak spots: the first rider shots caught them still in the stable yard (the shot
+  waits only 300 frames); the chibi Knight is big for the horse - reads as mounted, but a smaller rider body
+  (L6 models) would look better.
+- Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 1042, TWITCH_PARSE OK, TOWNWALK
+  PASS (0.095%, 0.102%, final 0.081% raid 0%; one run before the fixes was 0.288% FAIL - the same trader/innkeeper
+  pressing into a house by the market, a D1 leftover, not the new walkers), _delve_test ran with 0 script errors.
+
 
 
 ## Cycle 64 - L7, the soak with the new content (laptop, 2026-11-11)

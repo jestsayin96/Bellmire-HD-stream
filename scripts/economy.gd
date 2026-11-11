@@ -87,6 +87,9 @@ func check_town_level(founding := false) -> int:
     Roster.town_tier = Roster.tier_for_town(town_level)
     if town.has_method("show_tiers"):
         town.call("show_tiers", Roster.town_tier)
+    # D3: Bellmire's buildings follow its level (scripts/growth.gd)
+    if town.has_method("show_level"):
+        town.call("show_level", town_level, founding)
     var feed: Array = town.get("feed")
     if founding:
         feed.append("%d souls live here." % population())

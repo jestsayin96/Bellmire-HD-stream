@@ -100,6 +100,12 @@ func raid(source := "") -> void:
         _say("%d creatures boil out of the dungeon!" % n)
     else:
         _say("%d bandits are riding on the west road!" % n)
+    var riders := 0
+    for p in town.get("people"):
+        if is_instance_valid(p) and p is Cavalry and (p as Node3D).visible:
+            riders += 1
+    if riders > 0:
+        _say("The mounted watch rides out to meet them - %d riders." % riders)
 
 ## ------------------------------------------------------------- defenders
 func _defenders() -> Array:
@@ -123,6 +129,9 @@ func _defenders() -> Array:
                           "to_hit": r.attack_bonus(h), "speed": r.speed(h)})
                 st["green"] = int(h.get("level", 1)) < GREEN_BELOW
                 st["cls"] = String(h.get("class", ""))
+            elif p is Cavalry:
+                # D4: the mounted watch - horsed, harder to bring down, rides at them
+                st.merge({"hp": 80.0, "max": 80.0, "atk": 13.0, "ac": 13, "to_hit": 4, "speed": 9.0})
             elif role == "guard":
                 st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4})
             else:
@@ -175,7 +184,9 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> void:
     n.rotation.y = atan2(d.x, d.z)
 
 func _anim(n: Node3D, key: String) -> void:
-    if n is Monster:
+    if n is Cavalry:
+        (n as Cavalry).mounted(key)
+    elif n is Monster:
         (n as Monster)._play({"walk": "walk", "run": "walk", "attack": "attack", "idle": "idle", "die": "die"}[key])
     elif n is Townsfolk:
         var ap: AnimationPlayer = (n as Townsfolk)._anim
@@ -207,6 +218,7 @@ func _process(delta: float) -> void:
     _live = true
     var defs := _defenders()
     _tick_blessings(delta)
+    _volley(delta)
     var centre: Vector3 = town.get("_market_pos")
     # breach: raiders inside the walls wreck the town
     var inside := 0
@@ -656,7 +668,8 @@ const RUBBLE := "res://addons/kaykit_dungeon_remastered/Assets/gltf/"
 func _wreck_a_building() -> void:
     var pool: Array = []
     for plot in town.get("plots"):
-        if plot.get("ruined", false) or not plot.has("node") or plot.has("landmark"):
+        if plot.get("ruined", false) or not plot.has("node") or plot.has("landmark") \
+                or plot.get("unbuilt", false) or plot.has("special"):
             continue
         if is_instance_valid(plot["node"]) and _inside_walls(plot["pos"]):
             pool.append(plot)
@@ -826,3 +839,99 @@ func _rebuild_pass() -> void:
         (plot["ruin"] as Node).queue_free()
     plot.erase("ruin")
     _say("The townsfolk raise the ruin again.")
+
+## ------------------------------------------------------- tower archers (D4)
+## The watchtower crossbowmen keep their towers (they never join the melee) but
+## no longer only watch: every BOW_SWING s each looses a bolt at the nearest
+## raider within BOW_REACH. The bolt flies (ARROW_V m/s, a shallow arc) and the
+## d20 is rolled when it lands, like the casters' spells.
+const BOW_REACH := 42.0
+const BOW_SWING := 2.4
+const BOW_ATK := 9.0
+const BOW_TO_HIT := 3
+const ARROW_V := 40.0
+var _bows := {}
+var arrows_loosed := 0
+var arrows_hit := 0
+var _bolt_mat: StandardMaterial3D
+
+func _volley(delta: float) -> void:
+    for p in town.get("people"):
+        if not is_instance_valid(p) or not (p is Townsfolk) or not (p as Node3D).visible:
+            continue
+        if String((p as Townsfolk).gear_role) != "lookout":
+            continue
+        var t := float(_bows.get(p, randf_range(0.2, BOW_SWING))) - delta
+        _bows[p] = t
+        if t > 0.0:
+            continue
+        var me: Vector3 = (p as Node3D).global_position
+        var best = null
+        var bd := BOW_REACH
+        for r in raiders:
+            var d := _flat((r["node"] as Node3D).global_position, me)
+            if d < bd and d > 1.0:
+                bd = d
+                best = r
+        if best == null:
+            _bows[p] = 0.5
+            continue
+        _bows[p] = BOW_SWING + randf_range(-0.3, 0.3)
+        _loose(p, best)
+
+func _loose(archer: Townsfolk, r: Dictionary) -> void:
+    var tn: Node3D = r["node"]
+    var from: Vector3 = archer.global_position + Vector3(0, 1.35, 0)
+    var to: Vector3 = tn.global_position + Vector3(0, (Spells.body_height(tn) * 0.6) if tn is Monster else 1.2, 0)
+    archer.rotation.y = atan2(to.x - from.x, to.z - from.z)
+    Rig.play(archer._anim, "2H_Ranged_Shoot", 0.1)
+    arrows_loosed += 1
+    if _bolt_mat == null:
+        _bolt_mat = StandardMaterial3D.new()
+        _bolt_mat.albedo_color = Color(0.36, 0.24, 0.12)
+    var bolt := MeshInstance3D.new()
+    var cm := CylinderMesh.new()
+    cm.top_radius = 0.03
+    cm.bottom_radius = 0.03
+    cm.height = 0.85
+    cm.radial_segments = 6
+    bolt.mesh = cm
+    bolt.material_override = _bolt_mat
+    town.add_child(bolt)
+    var dist := from.distance_to(to)
+    var fl := maxf(dist / ARROW_V, 0.12)
+    var arc := dist * 0.05
+    var fly := func(k: float) -> void:
+        if not is_instance_valid(bolt):
+            return
+        var a := from.lerp(to, k) + Vector3.UP * sin(k * PI) * arc
+        var b := from.lerp(to, minf(k + 0.05, 1.0)) + Vector3.UP * sin(minf(k + 0.05, 1.0) * PI) * arc
+        bolt.global_position = a
+        if a.distance_to(b) > 0.001 and absf((b - a).normalized().y) < 0.98:
+            bolt.look_at(b, Vector3.UP)
+            bolt.rotate_object_local(Vector3.RIGHT, PI * 0.5)
+    fly.call(0.0)
+    Sfx.at("swing", from, -8.0)
+    var tw := town.create_tween()
+    tw.tween_method(fly, 0.0, 1.0, fl)
+    tw.tween_callback(func() -> void:
+        if is_instance_valid(bolt):
+            bolt.queue_free()
+        _bolt_lands(r, archer.person_name if is_instance_valid(archer) else "a tower archer"))
+
+func _bolt_lands(r: Dictionary, who: String) -> void:
+    if not raiders.has(r):
+        return
+    var tn: Node3D = r["node"]
+    var dmg := _strike(BOW_ATK, BOW_TO_HIT, int(r["ac"]))
+    if dmg <= 0.0:
+        return
+    arrows_hit += 1
+    Sfx.at("hit", tn.global_position, -3.0)
+    r["hp"] = float(r["hp"]) - dmg
+    if tn is Monster:
+        (tn as Monster).hp = float(r["hp"])
+        (tn as Monster)._number(dmg, dmg > BOW_ATK)
+        (tn as Monster)._flash()
+    if float(r["hp"]) <= 0.0:
+        _raider_falls(r, who)

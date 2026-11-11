@@ -255,6 +255,7 @@ func spend(h: Dictionary, cost: int) -> bool:
     if int(h["gold"]) < cost:
         return false
     h["gold"] = int(h["gold"]) - cost
+    Sfx.play("coin", -6.0)
     return true
 
 func buy_weapon(user_id: String) -> String:
@@ -400,6 +401,7 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
     if h.is_empty() or not bool(h["alive"]):
         return ""
     h["alive"] = false
+    Sfx.sting()
     fallen.push_front({
         "name": h["name"], "class": h["class"], "level": int(h["level"]),
         "deepest": max(int(h["deepest"]), floor_no), "kills": int(h["kills"]),

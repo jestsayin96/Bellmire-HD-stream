@@ -318,6 +318,7 @@ func hurt(amount: float, crit := false) -> void:
     if state == S.DEAD:
         return
     hp -= amount
+    Sfx.at("hit", global_position, 2.0 if crit else 0.0)
     _number(amount, crit)
     _flash()
     if hp <= 0.0:

@@ -25,6 +25,7 @@ static func cast(kind: String, caster: Node3D, target: Vector3, in_scar := false
     var root := caster.get_tree().current_scene if caster.get_tree().current_scene else caster.get_parent()
     var hand := caster.global_position + Vector3(0, 1.35, 0) + caster.global_transform.basis.z * 0.6
     _flash(root, hand, col, 0.4)
+    Sfx.at("spell", hand)
     match actual:
         "bolt": _bolt(root, hand, target + Vector3(0, 1.0, 0), col)
         "heal": _heal(root, target, col)

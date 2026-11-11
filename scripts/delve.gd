@@ -537,6 +537,7 @@ func _fight(delta: float) -> void:
 func _loot(alive: Array) -> void:
     var boss := dun.lord != null
     var found := int(float(floor_no) * 11.0 * (3.0 if boss else 1.0) * _rng.randf_range(0.85, 1.35))
+    Sfx.play("coin", -4.0)
     if boss:
         var share := int(float(found) / float(alive.size()))
         var took: Array = []
@@ -581,6 +582,7 @@ func _haul_line() -> String:
 func _hero_hit(m: Dictionary) -> void:
     var b: HeroBody = m["body"]
     Rig.play(b._anim, "Hit_A")
+    Sfx.at("hit", b.global_position)
     if float(m["hp"]) > 0.0:
         return
     # one death save per delve (old rule): claw back to 1 hp on a DC 10 CON save

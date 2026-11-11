@@ -265,7 +265,9 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
     var ts: Dictionary = tg if defending else _fighters[tg]
     var dmg := _strike(float(st["atk"]), int(st["to_hit"]), int(ts["ac"]))
     if dmg <= 0.0:
+        Sfx.at("swing", tn.global_position, -4.0)
         return
+    Sfx.at("hit", tn.global_position)
     ts["hp"] = float(ts["hp"]) - dmg
     if tn is Monster:
         (tn as Monster).hp = float(ts["hp"])

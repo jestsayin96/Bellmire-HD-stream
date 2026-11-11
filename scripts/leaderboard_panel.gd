@@ -48,6 +48,7 @@ func _ready() -> void:
 func _unhandled_input(ev: InputEvent) -> void:
     if ev is InputEventKey and ev.pressed and not ev.echo and ev.keycode == KEY_L:
         visible = not visible
+        Sfx.play("ui", -8.0)
         get_viewport().set_input_as_handled()
 
 func _process(delta: float) -> void:

@@ -286,6 +286,13 @@ func _ready() -> void:
     daylight = Daylight.new()
     add_child(daylight)
     daylight.call_deferred("setup", self)
+    # sound and music (assets/audio, CC0): world sounds, day/night/raid music, the bell
+    # (test hook: JESTS_NO_SFX=1 leaves it out)
+    if OS.get_environment("JESTS_NO_SFX") == "":
+        var sfx := Sfx.new()
+        sfx.name = "Sfx"
+        add_child(sfx)
+        sfx.setup(self)
     # the player's own eye (only when the game is played, not under a test tool)
     if not OS.get_cmdline_args().has("--script"):
         var eye := RtsCamera.new()

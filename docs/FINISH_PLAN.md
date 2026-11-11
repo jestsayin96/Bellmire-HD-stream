@@ -18,7 +18,7 @@ Scheduled build runs work through this list top to bottom. Each run:
         Hook it in town.gd next to TwitchChat (Play runs only). Test tool + render.
 - [x] 2. (DONE Nov 11, cycle 51: scripts/party_frames.gd in the RtsCamera layer, floor + oil header, HP bars; tools/_party_test.gd OK; render renders/cycles/20261111_party) Party frames: while any delve runs, a compact WoW-style column (left edge, above the Chronicle):
         each delver's name, HP bar, and the party's oil. Viewer heroes gold. Part of the RtsCamera layer.
-- [ ] 3. Sound + music: CC0 only (Kenney audio packs: RPG Audio, Impact Sounds, UI Audio; music CC0 e.g.
+- [x] 3. (DONE Nov 11, cycle 52: scripts/sfx.gd (Sfx) + assets/audio (Kenney CC0 sfx, RandomMind CC0 music, LICENSE.txt); day/night/raid crossfade, bell, horn, sting; tools/_sfx_test.gd SFX_TEST OK) Sound + music: CC0 only (Kenney audio packs: RPG Audio, Impact Sounds, UI Audio; music CC0 e.g.
         OpenGameArt CC0 medieval loops). Download to assets/audio with a LICENSE note. A small Sfx autoload/
         node: sword hits, spell cast, death sting, raid horn, coin, bell at dawn/dusk, splash for fishing;
         day / night / raid music with crossfade; ambience in town. Volume sane for stream (music -14 dB).

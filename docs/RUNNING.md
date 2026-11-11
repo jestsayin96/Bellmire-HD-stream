@@ -22,6 +22,9 @@
 | H | hide / show the key help |
 | (while a delve runs) | party frames on the left: each delver's HP, the floor, the party's oil |
 
+Sound: music on its own bus at -14 dB (day / night / raid, crossfaded), world sounds at -6 dB, town wind
+at -20 dB. Change them in OBS or in scripts/sfx.gd (BUS_DB). All audio is CC0: assets/audio/LICENSE.txt.
+
 1. Godot **4.7.2** lives at `D:\1game\Godot_v4.7.2-stable_win64.exe`
    (the `_console.exe` beside it prints the log to a console window).
 2. In Godot: **Import** -> pick `C:\hd adventure\jests-hd-medieval-adventure\project.godot` -> **Edit**.

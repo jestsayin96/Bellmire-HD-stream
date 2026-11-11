@@ -338,3 +338,26 @@ Town
   row per delver with oil and floor: PARTY_TEST OK. Renders renders/cycles/20261111_party.
 - Note: 12 'Parameter "material" is null' engine errors during the delve render (not script errors,
   not from this change) - worth a look.
+
+
+## Cycle 52 - sound and music (2026-11-11)
+- assets/audio (all CC0, LICENSE.txt lists every file and its page): Kenney RPG Audio / Impact Sounds /
+  UI Audio (hits, coins, bell, chimes for spells, clicks); RandomMind (OpenGameArt) medieval loops -
+  day: The Old Tower Inn, Minstrel Dance; night: The Bard's Tale, Exploration; raid: Battle; the death
+  sting is the first 6 s of his Defeat Theme. Made here with ffmpeg: the raid horn, the fishing splash,
+  a 40 s town wind loop. WAVs converted to OGG (~8 MB in all).
+- scripts/sfx.gd (Sfx), made by town.gd for every run (JESTS_NO_SFX=1 leaves it out). Static helpers
+  Sfx.at(kind, pos) / Sfx.play(kind) / Sfx.sting() do nothing when no Sfx is live.
+  Buses Music -14 dB, Sfx -6 dB, Ambience -20 dB. World sounds are 3D (a pool of 16), pitch varied, and
+  rate-limited per kind so a raid does not machine-gun.
+- Music follows the town: raid while raiders are about (the horn blows once as it starts), else night
+  (economy.is_night) or day; 3 s crossfade in real seconds at any game speed; a hero's death ducks the
+  music 10 dB for 5 s under the sting; the wind drops under raid music. The bell tolls 3 times at dawn
+  and at dusk.
+- Hooks: Monster.hurt and raid swings (hit / miss swish), a delver struck, Spells.cast, Roster.kill
+  (sting), Roster.spend and floor loot (coins), Angler._splash, the L key (click).
+- tools/_sfx_test.gd: 15/15 pass, SFX_TEST OK (render renders/cycles/20261111_sfx/town_raid.png and
+  waves.png - the waveforms of the music, horn, sting and wind). _delve_test ENDED, _offfloor 0 of 980,
+  TWITCH_PARSE OK. Parse check: 0 script errors (the 3 'material is null' engine lines are old).
+- The Sfx node first left 8 objects / 4 resources alive at exit (players still holding streams); it now
+  stops and drops them in _exit_tree.

@@ -248,6 +248,7 @@ func _draw_line(tip: Vector3) -> void:
     _imm.surface_end()
 
 func _splash(strength: float) -> void:
+    Sfx.at("splash", Vector3(target.x, water_y, target.z), linear_to_db(clampf(strength, 0.2, 1.0)))
     _ring.global_position = Vector3(target.x, water_y + 0.02, target.z)
     _ring.scale = Vector3.ONE * 0.4
     _ring.set_meta("life", 0.9 * strength)

@@ -149,8 +149,7 @@ func _follow(delta: float) -> void:
     to.y = 0.0
     if to.length() > 0.35:
         var p := global_position + to.normalized() * minf(to.length(), speed * pace * 1.15 * delta)
-        p.y = float(town.call("height_at", p.x, p.z))
-        global_position = p
+        global_position = town.call("keep_walkable", p)
         rotation.y = leader.rotation.y
         Rig.play(_anim, "Walking_A")
     else:
@@ -183,6 +182,7 @@ func _next_trip() -> Vector3:
 
 var _linger := -1.0
 var _door_out := Vector3.ZERO
+var _stuck_t := 0.0
 
 func _physics_process(delta: float) -> void:
     if town != null:
@@ -215,14 +215,25 @@ func _physics_process(delta: float) -> void:
             _door_out = dest if _enter_at != Vector3.ZERO else Vector3.ZERO
             _route = town.call("route", global_position, dest)
             if _enter_at != Vector3.ZERO:
-                _route.append(_enter_at)
+                # D1: in only through the door - if the street does not reach
+                # it, wait outside rather than walk through the walls
+                var end: Vector3 = _route.back() if not _route.is_empty() else global_position
+                if Vector2(end.x - dest.x, end.z - dest.z).length() > 1.0:
+                    _enter_at = Vector3.ZERO
+                    _door_out = Vector3.ZERO
+                else:
+                    _route.append(_enter_at)
             if _route.is_empty():
                 _wait = 3.0
         return
     var tgt: Vector3 = _route[0]
     var to: Vector3 = tgt - global_position
     to.y = 0.0
-    if to.length() < 0.9:
+    # D1: the last leg, door -> just inside, is the only one off the walkable
+    # ground; corners are taken tight (0.9 m cut through house corners)
+    var door_leg: bool = _route.size() == 1 and _enter_at != Vector3.ZERO
+    if to.length() < (0.9 if _route.size() == 1 else 0.45):
+        _stuck_t = 0.0
         _route.remove_at(0)
         if _route.is_empty():
             Rig.play(_anim, "Idle")
@@ -236,12 +247,31 @@ func _physics_process(delta: float) -> void:
         return
     var dir: Vector3 = to.normalized()
     _wobble += delta * 1.7
-    dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * 0.08).normalized()
+    dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * 0.04).normalized()
+    var was := global_position
     var p: Vector3 = global_position + dir * speed * pace * delta
-    p.y = float(town.call("height_at", p.x, p.z))
+    if door_leg:
+        p.y = float(town.call("height_at", p.x, p.z))
+    else:
+        # room for each other, and never a foot inside anything solid
+        p += (town.call("crowd_push", self) as Vector3) * 1.4 * delta
+        p = town.call("keep_walkable", p)
     global_position = p
     rotation.y = atan2(dir.x, dir.z)
     Rig.play(_anim, "Walking_A")
+    # a waypoint that cannot be reached (off the ground, behind a crowd):
+    # after a moment give it up and take the next
+    if Vector2(p.x - was.x, p.z - was.z).length() < speed * pace * delta * 0.3:
+        _stuck_t += delta
+        # a corner the walls will not let a foot onto: close enough is there
+        if to.length() < 1.2 and _route.size() > 1:
+            _stuck_t = 0.0
+            _route.remove_at(0)
+        elif _stuck_t > 1.2:
+            _stuck_t = 0.0
+            _route.remove_at(0)
+    else:
+        _stuck_t = maxf(_stuck_t - delta, 0.0)
 
 ## ---- HD: somebody at a post is not a statue. Guards shift their weight,
 ## look up and down the street and pace a step or two; stallholders reach for

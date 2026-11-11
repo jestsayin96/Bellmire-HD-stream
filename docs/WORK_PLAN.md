@@ -18,10 +18,11 @@ ASSETS: free CC0 only (Quaternius, KayKit, Kenney), downloaded into assets/<kind
 Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 
 ## DESKTOP (town, people, magic) — files: town.gd, townsfolk.gd, town_nav.gd, spells.gd, raids.gd, daylight.gd, sfx.gd
-- [ ] D1. Phasing through buildings, for good: find every way people still walk through houses (routes
+- [x] D1. Phasing through buildings, for good: find every way people still walk through houses (routes
       that skip the navmesh, spawn/exit inside footprints, heroes' own movement, raiders, settlers, the
       town band). Every walker uses the navmesh; doors on the street side; local avoidance between people.
       tools/_townwalk.gd must report in_solid under 0.2% and a render must show it.
+      DONE cycle 58: in_solid 0/6999 (was 64/7194 = 0.89%), raiders+defenders 0/4911, doors 67/67 reachable; renders/cycles/20261111_d1.
 - [ ] D2. Spells aimed at the sky: bolts fly up at the ceiling/sky and still hit (the "4th of July").
       Fix the aim (source at the caster's hands, target the foe's chest, flat arc), give each spell a
       readable travel + impact. Then NEW spells from the lore for the caster classes (heal over time, ward,

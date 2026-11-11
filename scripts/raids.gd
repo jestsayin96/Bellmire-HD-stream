@@ -145,13 +145,32 @@ func _strike(atk: float, to_hit: int, ac: int) -> float:
 func _flat(a: Vector3, b: Vector3) -> float:
     return Vector2(a.x - b.x, a.z - b.z).length()
 
+## D1: raiders and defenders walked a straight line at their mark - through
+## houses, stalls and the wall. Now they follow the town's navmesh (re-asked
+## when the mark moves or every 0.7 s) and never step off walkable ground:
+## raiders come in by the gates.
+var _paths := {}
+
 func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> void:
-    var d := Vector3(to.x - n.global_position.x, 0, to.z - n.global_position.z)
+    var goal := to
+    var nv = town.get("nav")
+    if nv != null and nv.ready_ok:
+        var k := n.get_instance_id()
+        var now := Time.get_ticks_msec()
+        var c: Dictionary = _paths.get(k, {})
+        if c.is_empty() or _flat(c["to"], to) > 1.0 or now - int(c["t"]) > 700:
+            c = {"to": to, "t": now, "pts": town.call("route", n.global_position, to)}
+            _paths[k] = c
+        var pts: Array = c["pts"]
+        while pts.size() > 1 and _flat(pts[0], n.global_position) < 0.45:
+            pts.remove_at(0)
+        if not pts.is_empty():
+            goal = pts[0]
+    var d := Vector3(goal.x - n.global_position.x, 0, goal.z - n.global_position.z)
     if d.length() < 0.05:
         return
     var p := n.global_position + d.normalized() * minf(spd * delta, d.length())
-    p.y = float(town.call("height_at", p.x, p.z))
-    n.global_position = p
+    n.global_position = town.call("keep_walkable", p)
     n.rotation.y = atan2(d.x, d.z)
 
 func _anim(n: Node3D, key: String) -> void:
@@ -181,6 +200,8 @@ func _process(delta: float) -> void:
             breached = false
             _say("The attack is driven off. The gates hold.")
         _stand_down(delta)
+        if _paths.size() > 400:
+            _paths.clear()
         return
     _live = true
     var defs := _defenders()
@@ -411,7 +432,8 @@ func _flee() -> void:
             var hp: Vector3 = (r["node"] as Node3D).global_position
             if _flat(hp, f.global_position) < 13.0:
                 var away := Vector3(f.global_position.x - hp.x, 0, f.global_position.z - hp.z).normalized()
-                f._route = [f.global_position + away * 16.0]
+                f._route = town.call("route", f.global_position, f.global_position + away * 16.0)
+                f._enter_at = Vector3.ZERO
                 f._wait = 3.0
                 break
 

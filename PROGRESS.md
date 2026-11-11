@@ -581,3 +581,31 @@ Town
   back view now reads paladin pale, necromancer black, monk saffron, druid green, warlock violet, bard red.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 427, TWITCH_PARSE OK,
   L1_TEST OK, L3_TEST OK.
+## Cycle 58 - D1: nobody walks through houses (2026-11-11, desktop)
+- The cause: the navmesh CARVED every footprint (add_projected_obstruction carve=true), and a carved
+  obstruction skips the agent-radius margin - paths ran along the very walls, the 0.5 m cells and the
+  1.6 m edge simplification put feet inside houses, stalls and fences; thin fences (0.32 m) slipped
+  between cell centres altogether. town_nav.gd (backup .bak_d1): carve=false (0.5 m margin), edge error
+  0.4, footprints at least 0.6 m across. Bake 176 -> ~700 ms, once at start.
+- town.gd (backup .bak_d1): keep_walkable(p) pushes a foot back out of any house, stall, table or wall
+  section on a 4 m grid of footprints (nav.closest() scans all 13k polygons, 0.35 ms a call - too dear
+  per walker per frame); crowd_push(v): people give each other 0.75 m (2 m grid rebuilt once a physics
+  frame, posted folk count as obstacles); route() finishes on a door spot that sits inside the navmesh
+  margin when nothing solid is between.
+- townsfolk.gd (backup .bak_d1): corners taken at 0.45 m (0.9 cut house corners), wobble halved, every
+  step through keep_walkable + the crowd shove except the last door -> inside leg; in only through a door
+  the street reaches (else wait outside); an unreachable corner is given up; the watch's second man too.
+- raids.gd (backup .bak_d1): raiders and defenders walked a straight line at their mark - now they follow
+  the navmesh (re-asked when the mark moves 1 m or every 0.7 s) and come in by the gates; fleeing folk
+  route away instead of running 16 m through whatever is behind them.
+- tools/_townwalk.gd: also starts a raid and samples raiders + defenders, checks every door, counts
+  walkers stuck on a route, prints TOWNWALK ... PASS/FAIL. Result: in_solid 0/6999 (before 64/7194 =
+  0.89%), raid 0/4911, doors 67 (0 off the street, 0 legs through another house), stuck 0-3 of 139.
+- tools/_walk_shot.gd (new, windowed): renders/cycles/20261111_d1 market_above, street (looked at: the
+  crowd walks between the stalls and benches, nobody on a stall or a roof; folk on the street side of
+  the houses). The raid was driven off before reaching the gate, so raid_gate/raid_inside show the street
+  at dusk, not the gate. tools/_d1_diag.gd (new): uncarved footprints, door distances, closest() cost.
+- Checks: parse 0 script errors (the 3 old 'material is null' lines remain), _offfloor 0 of 978,
+  TWITCH_PARSE OK, _delve_test ENDED (4 survivors, 0 script errors), _perf 6.9 ms (145 fps headless),
+  _fps_window min 149 avg 172 at 139 people.
+

@@ -797,3 +797,27 @@ Town
 - Townsfolk still wear the 1.0 bodies (townsfolk.gd is the desktop's): the same scenes are ready for it.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 528, TWITCH_PARSE OK, L3, L4, L5,
   D2_DELVE OK.
+
+
+## Cycle 66 - L8, wild magic below (laptop, 2026-11-11)
+- Merged origin/main (desktop D3; Mr. E's DnD RULE, L8, L9). WORK_PLAN conflict: kept L6 ticked (done in
+  Cycle 65 - the pack is in assets/characters/kaykit_adv2) and the new L8/L9. A --headless --import was needed
+  for the desktop's new Cavalry class before the parse check was clean.
+- Delve._scar_check: every spell a delver casts below is a check against the scar - d20 + casting mod +
+  proficiency vs DC 10 + floor/2 (cap 20). Casting mod per Mr. E: INT mage/sage/necromancer, WIS
+  cleric/druid/monk, CHA warlock/bard/paladin. A fail calls Spells.cast(..., in_scar = true): the next spell in
+  the order goes off, with the scar's crackle. A natural 1 always misfires, a natural 20 never. Monsters' spells
+  are not checked. What the misfire does: a blow turned into a mending mends the creature (half the caster's
+  attack); a mending turned into a blow (renew -> bolt) hurts the friend it was meant for (half the heal).
+  One Chronicle line per caster per floor: "MossyMage's bolt goes wrong - the scar answers (12 vs DC 15)."
+  Note: the sage's own sheet uses WIS (to-hit, healing); for this check it is INT, as written in the plan.
+- tools/_l8_test.gd (headless, new): 12000 checks per case against the exact 5e odds - floor 1/6/14/30 (DC 10/13/
+  17/20), a strong caster (+9) and a weak one (+1): every rate within 1% (e.g. weak at DC 10: 0.402 vs 0.400,
+  strong at DC 20: 0.500 vs 0.500); the DC caps at 20; an unbeatable caster still misfires ~5% (nat 1), a hopeless
+  one at DC 20 still lands ~5% (nat 20); each calling checks its own ability; a real floor-6 delve checks and
+  misfires. L8_TEST OK. (First run used an unseeded RNG and one rate came out 4 sigma low; seeded, all match.)
+  tools/_l8_shot.gd: renders/cycles/20261111_l8 - looked at: Mourncoil on floor 10, two misfire lines in the
+  Chronicle beside its frost line.
+- _d2_delve_test's "every spell seen" checks are now chance-dependent (misfires swap kinds); it failed once in
+  three runs, passed twice. Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 459,
+  TWITCH_PARSE OK, L4 OK.

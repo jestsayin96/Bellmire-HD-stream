@@ -506,9 +506,15 @@ func _fight(delta: float) -> void:
             if low != null and float(m["swing"]) <= 0.0:
                 m["swing"] = 2.4
                 # D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
-                var got := Spells.cast(String(MENDERS.get(String(h["class"]), "heal")), b, low["body"], false)
+                var mk := String(MENDERS.get(String(h["class"]), "heal"))
+                var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
                 Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
-                _bless(low, got, hp_pow)
+                if Spells.HARM.has(got):
+                    # L8: the scar turned the mending into a blow - it lands on the friend
+                    low["hp"] = float(low["hp"]) - hp_pow * 0.5
+                    _hero_hit(low)
+                else:
+                    _bless(low, got, hp_pow)
                 continue
         var tgt: Monster = null
         var bd := 1e9
@@ -960,9 +966,12 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
             hit.append(nx)
             more.append(nx)
             at = nx.global_position
-    var actual := Spells.cast(kind, b, tgt, false, more)
+    var actual := Spells.cast(kind, b, tgt, _scar_check(m, kind), more)
     Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
     if not Spells.HARM.has(actual):
+        # L8: the scar turned the blow into a mending - wild magic mends the creature
+        if actual in ["heal", "renew", "mend"] and is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
+            tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * 0.5)
         return
     if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
         return
@@ -1041,3 +1050,35 @@ func _soak(o: Dictionary, dmg: float) -> float:
 ## a frosted creature moves and swings at half pace
 func _mon_pace(mon: Monster) -> float:
     return 0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0
+
+## ---- L8 (Mr. E, Nov 11): wild magic below. The dungeon is one enormous scar,
+## so every spell cast down here is a check against it: d20 + casting ability
+## mod + proficiency vs DC 10 + floor/2 (cap 20). A fail misfires the way it does
+## on the scar's surface (Spells.cast in_scar: the next spell in the order goes
+## off instead). A natural 1 always misfires, a natural 20 never. Monsters'
+## spells are not checked.
+const CAST_STAT := {"mage": "int", "sage": "int", "necromancer": "int",
+                    "cleric": "wis", "druid": "wis", "monk": "wis",
+                    "warlock": "cha", "bard": "cha", "paladin": "cha"}
+var scar_casts := 0
+var scar_misfires := 0
+var _misfire_said := {}
+
+static func scar_dc(floor_no: int) -> int:
+    return mini(20, 10 + floor_no / 2)
+
+func _scar_check(m: Dictionary, kind: String) -> bool:
+    var h: Dictionary = m["h"]
+    var stat := String(CAST_STAT.get(String(h["class"]), String(Roster.CLASSES[String(h["class"])].get("primary", "int"))))
+    var d := _rng.randi_range(1, 20)
+    var total := d + roster.mod(h, stat) + roster.prof(h)
+    var miss := d == 1 or (d != 20 and total < scar_dc(floor_no))
+    scar_casts += 1
+    if miss:
+        scar_misfires += 1
+        # one Chronicle line per caster per floor, so the feed is not all sparks
+        var key := "%s:%d" % [m["uid"], floor_no]
+        if not _misfire_said.has(key):
+            _misfire_said[key] = true
+            _say("%s's %s goes wrong - the scar answers (%d vs DC %d)." % [h["name"], kind, total if d != 1 else 1, scar_dc(floor_no)])
+    return miss

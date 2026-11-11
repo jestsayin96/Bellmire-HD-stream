@@ -11,6 +11,13 @@ check (0 SCRIPT ERROR / Parse Error), the item's test + render + LOOK, the stand
 _offfloor, _twitch_parse, _townwalk), tick it here with one line, PROGRESS.md cycle, commit + push
 (desktop -> main, laptop -> laptop), lock IDLE.
 
+DnD RULE (Mr. E, Nov 11): the game is D&D at heart - almost every action is decided by a ROLL, not a
+flat chance or a fixed number. Attacks: d20 + to-hit vs AC; damage: weapon dice + mod; saves: d20 + save
+vs DC; skills (fishing, haggling, tracking, picking a lock, spotting a trap, sneaking, calming a horse,
+the town's work) as ability checks d20 + mod (+ proficiency if trained) vs a DC; spells as checks/saves;
+initiative; advantage/disadvantage where it fits; nat 20 / nat 1. Use the character's real stats (roster.mod,
+roster.prof, save_bonus). Big rolls can show in the Chronicle ("BigAxe rolls a 20!").
+
 LORE RULE: before adding monsters, bosses, classes, species, spells or NPC types, read the original game
 (read only) — its bestiary, classes, races and lore files — and use what it already has first. Anything new
 must fit its world and be named in its voice. Never state a dungeon floor count.
@@ -36,23 +43,28 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       FOR THE LAPTOP: monster.gd _local_bounds() should skip HealthBar3D; delve.gd casters can call the new
       kinds: Spells.cast(kind, caster, target_body, in_scar, more_bodies) + Spells.flight() for the landing.
       LAPTOP HALF DONE (Cycle 63): bars skip in Monster bounds; delve casters use the books + menders; D2_DELVE OK.
-- [ ] D3. Buildings that level up: each town level/tier visibly changes Bellmire - plots fill in, houses
+- [x] D3. Buildings that level up: each town level/tier visibly changes Bellmire - plots fill in, houses
       upgrade (bigger/stone storeys, signs, gardens), new buildings unlock (guild hall, market hall,
       stables, bathhouse, mage tower, keep walls in stone...). Render levels 1, 3, 5, 7 side by side.
       DONE cycle 64: scripts/growth.gd - 56 house plots fill 23/31/39/45/51/56 over the lore's 6 levels (staked
       lots till then); gardens/signs+lamps/stone plinth+chimney/+1 storey/pennants; palisade -> stone wall at 4;
       Market Hall 3, Town Stables 4, Delvers' Guild + Bathhouse 5, Mage Tower 6. D3_TEST OK; renders/cycles/20261111_d3
       (the lore has 6 levels, not 7: rendered 1, 3, 5, 6).
-- [ ] D4. More guards and the cavalry: more watch with patrol routes, gate guards, tower archers; mounted
+- [x] D4. More guards and the cavalry: more watch with patrol routes, gate guards, tower archers; mounted
       town guards (horses + riders, TOWN GUARDS ONLY) patrolling the roads and riding out at raids.
       Horses: CC0 (Quaternius animals) or a simple rig. Stables building from D3.
+      DONE cycle 65: all 8 gate posts manned, 2 crossbowmen per watchtower who shoot raiders (bolts fly, d20 on
+      landing), watch 12/14/16 walkers on wall/market/bridge beats by level ("sworn into the watch"); scripts/
+      cavalry.gd - Knight on the Quaternius CC0 horse, 2/3/4 riders at levels 4/5/6 ride a gate loop from the
+      Town Stables, ride out at raids (hp 80). D4_TEST OK; renders/cycles/20261111_d4.
 - [ ] D5. More animals: horses in paddocks, cows, sheep, pigs, chickens, dogs, cats, birds over the
       fields, ducks; herded and penned, never on rooftops.
 - [ ] D6. Unique NPCs: named characters with jobs and daily routines from the lore (the chief, the smith,
       the healer, the innkeeper, the priest, a bard, a town crier who reads the Chronicle aloud, merchants
       with carts, children playing, beggars, a drunk at night). Each with a distinct look and a line in
       the Chronicle now and then.
-- [ ] D7. Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
+- [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
+- [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
@@ -74,6 +86,8 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       with stat bonuses and a visible look (KayKit/Quaternius CC0 bodies, scale, skin tint).
       DONE (Cycle 62): human, elf, dwarf, halfling, orc + the scarkin; bonuses, traits, proportions, skin, parts; L5_TEST OK.
 - [ ] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
+- [ ] L8. (Mr. E's decision, Nov 11) Wild magic below: every spell in the dungeon is a check against the scar - d20 + casting mod (INT mage/sage/necromancer, WIS cleric/druid/monk, CHA warlock/bard/paladin) + proficiency vs DC 10 + floor/2 (cap 20); fail = misfire as on the scar's surface (Spells.cast in_scar=true); nat 1 always, nat 20 never. Monsters unaffected. Test the misfire rates (strong vs weak caster, shallow vs deep).
+- [ ] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
 - [ ] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 
 ## Needs Mr. E (not for the runs)

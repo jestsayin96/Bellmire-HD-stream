@@ -727,3 +727,37 @@ Town
   a street-level eye; the chimneys and pennants read best from above.
 - Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 934, TWITCH_PARSE OK, TOWNWALK
   in_solid 5/6482 (0.077%) raid 0/4102 PASS, _delve_test ran with 0 script errors.
+
+
+## Cycle 65 - D4: more guards and the mounted watch (desktop, 2026-11-11)
+- Lore: the original town.gd _chief_spends grows the standing garrison with the danger ("3 + raids/2" guards,
+  each "%s is sworn into the watch."). Bellmire HD grows it with the town level instead. Horsemen are the plan's
+  ask (town guards only); named "the mounted watch". (D3's box in WORK_PLAN was left unticked last run - ticked.)
+- town.gd (.bak_d4) _spawn_garrison() after _spawn_animals, own rng (seed 4404) so the old townsfolk are unchanged:
+  every gate/scar post manned (8 posts, was 5 guards); a second crossbowman on each of the 3 watchtowers; four
+  more watch pairs on new beats - inside the curtain wall (from level 1), the market ring + tavern (1), market ->
+  bridge -> far bank (3), the wall the other way (5): watch walkers 12/12/14/14/16/16 at levels 1-6.
+  Riders: 2 at level 4 (the Town Stables open), 3 at 5, 4 at 6; they wait in the stable yard, then ride every gate
+  (in, out 18 m, back), the market and the bridge; odd riders the other way round. town.show_level ->
+  _show_garrison shows/hides them (hidden ones stop processing) with feed lines. Trader/innkeeper market spots are
+  now snapped to open ground.
+- scripts/cavalry.gd (new, class_name Cavalry extends Townsfolk): the Quaternius CC0 Horse (assets/animals, now with
+  a LICENSE.txt) under a Knight in garrison livery, seated (Sit_Chair_Idle) at 0.6 of the horse's height; the
+  horse's gait (Idle/Walk/Run + speed scale) comes from how fast the pair really moves; walking uses Townsfolk's
+  navmesh routes. raids.gd (.bak_d4): riders fight as guards (hp 80, atk 13, AC 13, +4, speed 9), the rider only
+  swings the sword (no running legs on a horse), "The mounted watch rides out to meet them - N riders."
+  Tower archers: every ~2.4 s each lookout looses a bolt at the nearest raider within 42 m; the bolt flies and
+  the d20 (+3, 9 dmg) is rolled on landing.
+- tools/_d4_test.gd (headless): posts manned, 2 per tower, watch grows, riders 0/0/0/2/3/4, news, riders seated,
+  3000 frames of riding (270-350 m each, 0/600 samples inside a building after moving the stable stop off the
+  barn's footprint - first runs had 4-13/600 from riders waiting at the door), a west-road raid: all 4 riders
+  engage, archers loose 4-5 bolts, the raid is driven off. D4_TEST OK.
+- tools/_d4_shot.gd -> renders/cycles/20261111_d4: rider_front/side/road, patrol_above, tower_archers, gate_post,
+  raid_start/ride/fight/fight2. Looked at: the riders sit astride and gallop in file at the raid, two crossbowmen
+  on the tower top, gate post. Weak spots: the first rider shots caught them still in the stable yard (the shot
+  waits only 300 frames); the chibi Knight is big for the horse - reads as mounted, but a smaller rider body
+  (L6 models) would look better.
+- Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 1042, TWITCH_PARSE OK, TOWNWALK
+  PASS (0.095%, 0.102%, final 0.081% raid 0%; one run before the fixes was 0.288% FAIL - the same trader/innkeeper
+  pressing into a house by the market, a D1 leftover, not the new walkers), _delve_test ran with 0 script errors.
+

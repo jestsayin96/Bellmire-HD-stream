@@ -1,0 +1,14 @@
+assets/animals - licence notes (written cycle 65, D4)
+
+Cow.glb, Horse.glb, Pig.glb, Sheep.glb, Llama.glb (Pug.glb came in the same A4 batch;
+  check docs/PLAN.md for its pack)
+  Quaternius - Farm Animals (Animated). CC0 1.0 Universal (public domain).
+  https://quaternius.com - converted from the pack's .blend files, every action kept.
+  Horse.glb is the mount of the mounted watch (scripts/cavalry.gd) and the
+  horses in the Town Stables (scripts/growth.gd).
+
+Duck.glb, Corgi.glb, Red.glb (+ their _0.png textures)
+  GobKit animals, as listed in docs/PLAN.md (itch_gobkit_animals) when they were
+  brought in (cycle A4). See that entry for the source page.
+
+No Quaternius "Bestiary" / QAL-licensed content is used here.

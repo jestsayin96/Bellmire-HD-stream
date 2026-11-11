@@ -344,6 +344,7 @@ func _ready() -> void:
         _bake_nav()
     _spawn_people()
     _spawn_animals()
+    _spawn_garrison()
     _start_guild()
 
 func _districts() -> Array:
@@ -950,6 +951,7 @@ func _build() -> void:
 func show_level(lv: int, quiet := false) -> void:
     if growth != null:
         growth.show_level(lv, quiet)
+    _show_garrison(lv, quiet)
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,
@@ -3733,7 +3735,8 @@ func _spawn_people() -> void:
                 v.gear_role = "gateguard"
                 start = gp[0]
             elif role == "trader" or role == "innkeeper":
-                v.work = _market_pos + Vector3(rng.randf_range(-7.0, 7.0), 0.0, rng.randf_range(-7.0, 7.0))
+                # D4: on open ground - a spot inside a stall left them pressing into it
+                v.work = _snap(_market_pos + Vector3(rng.randf_range(-7.0, 7.0), 0.0, rng.randf_range(-7.0, 7.0)))
             start.y = height_at(start.x, start.z)
             v.position = start
             add_child(v)
@@ -3966,6 +3969,190 @@ func _more_folk(rng: RandomNumberGenerator) -> void:
         _put_folk(v, at)
         var w := _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(at.x, height_at(at.x, at.z), at.z - 2.6), PI * 0.5, 0.8)
         v.cart = w
+
+## ---------------------------------------------------------------- D4 the garrison
+## Lore (the original town.gd _chief_spends): "standing garrison scales with how
+## dangerous the valley has become" and each new man "is sworn into the watch."
+## Bellmire HD grows its garrison with the town: every gate post is manned from
+## the founding, each watchtower carries two crossbowmen (raids.gd: they shoot),
+## more watch pairs walk more beats as the town rises, and once the Town Stables
+## stand (level 4, D3) the MOUNTED WATCH rides the roads from them (Cavalry).
+## Riders are town guards only - nobody else in Bellmire goes horsed.
+const WATCH_BEATS_FROM := {"wall": 1, "market": 1, "bridge": 3, "wall_back": 5}
+const RIDERS_FROM := [4, 4, 5, 6]
+var garrison: Array = []       # [Townsfolk, level it appears at]
+var cavalry: Array = []
+
+func _guard_posts() -> Array:
+    var posts: Array = []
+    for g in _wall_info.get("gates", []):
+        var gv: Vector3 = g
+        var out := Vector3(gv.x, 0.0, gv.z).normalized()
+        var side := Vector3(-out.z, 0.0, out.x)
+        for sgn in [-1.0, 1.0]:
+            posts.append([gv + out * 4.0 + side * (4.2 * float(sgn)), atan2(out.x, out.z)])
+    if _scar_info.has("post"):
+        var sp: Vector3 = _scar_info["post"]
+        var sf: Vector3 = _scar_info["fwd"]
+        var ss := Vector3(-sf.z, 0, sf.x)
+        for sgn in [-1.0, 1.0]:
+            posts.append([sp + ss * (3.6 * float(sgn)) - sf * 1.0, atan2(sf.x, sf.z)])
+    return posts
+
+## the nearest point a foot (or a hoof) may stand on
+func _snap(p: Vector3) -> Vector3:
+    if nav != null and nav.ready_ok:
+        var q: Vector3 = nav.closest(Vector3(p.x, 0.0, p.z))
+        return Vector3(q.x, 0.0, q.z)
+    return keep_walkable(p)
+
+func _beat(kind: String) -> Array:
+    var beat: Array = []
+    var ax := float(_wall_info.get("ax", 0.0))
+    var az := float(_wall_info.get("az", 0.0))
+    match kind:
+        "wall", "wall_back":
+            # inside the curtain wall, all the way round
+            if ax > 30.0 and az > 30.0:
+                for i in range(10):
+                    var a := TAU * float(i) / 10.0
+                    beat.append([_snap(Vector3(cos(a) * (ax - 15.0), 0.0, sin(a) * (az - 15.0))), Vector3.ZERO, 2.5])
+            if kind == "wall_back":
+                beat.reverse()
+        "market":
+            for i in range(6):
+                var a := TAU * float(i) / 6.0 + 0.3
+                beat.append([_snap(_market_pos + Vector3(cos(a), 0.0, sin(a)) * 17.0), Vector3.ZERO, 3.0])
+            beat.insert(3, [_snap((_shop_door("tavern")[0] as Vector3)), Vector3.ZERO, 5.0])
+        "bridge":
+            beat.append([_snap(_market_pos + Vector3(0, 0, 14.0)), Vector3.ZERO, 3.0])
+            beat.append([_snap(Vector3(0.0, 0.0, _bridge_z - (RIVER_W + RIVER_BANK + 5.0))), Vector3.ZERO, 6.0])
+            beat.append([_snap(Vector3(0.0, 0.0, _bridge_z + RIVER_W + RIVER_BANK + 5.0)), Vector3.ZERO, 4.0])
+            beat.append([_snap(Vector3(0.0, 0.0, _bridge_z - (RIVER_W + RIVER_BANK + 5.0))), Vector3.ZERO, 2.0])
+    if beat.is_empty():
+        beat.append([_snap(_market_pos + Vector3(10, 0, 0)), Vector3.ZERO, 4.0])
+    return beat
+
+func _spawn_garrison() -> void:
+    var rng := RandomNumberGenerator.new()
+    rng.seed = 4404
+    var blue: Color = LIVERY_BANNER.get(livery_of.get("garrison", "blue"), Color(0.16, 0.26, 0.62))
+    # 1. every gate post manned (the old roster's five guards fill the first five)
+    var posts := _guard_posts()
+    var manned := 0
+    for p in people:
+        if is_instance_valid(p) and String((p as Townsfolk).gear_role) == "gateguard":
+            manned += 1
+    for i in range(manned, posts.size()):
+        var gp: Array = posts[i]
+        var g := _folk("guard", "Knight.glb", Color(0.74, 0.82, 1.00), rng)
+        g.stay = true
+        g.face_yaw = float(gp[1])
+        g.gear_role = "gateguard"
+        g.livery = blue
+        _put_folk(g, gp[0])
+        garrison.append([g, 1])
+    # 2. a second crossbowman on every watchtower, at the parapet's far corner
+    for t in towers:
+        var tv: Vector3 = t
+        var lk := _folk("guard", "Knight.glb", Color(0.74, 0.82, 1.00), rng)
+        lk.stay = true
+        lk.gear_role = "lookout"
+        lk.livery = blue
+        var at := tv + Vector3(-1.7, 0.0, 1.7)
+        lk.face_yaw = atan2(at.x, at.z)
+        lk.position = Vector3(at.x, height_at(tv.x, tv.z) + TOWER_H + 0.7, at.z)
+        add_child(lk)
+        people.append(lk)
+        garrison.append([lk, 1])
+    # 3. more watch pairs, more beats, as the town rises
+    for kind in WATCH_BEATS_FROM:
+        var beat := _beat(kind)
+        var a := _folk("watch", "Knight.glb", Color(0.74, 0.82, 1.0), rng)
+        a.gear_role = "watch"
+        a.stops = beat
+        a._stop_i = rng.randi() % beat.size()
+        a.livery = blue
+        _put_folk(a, (beat[a._stop_i] as Array)[0])
+        var b := _folk("watch", "Knight.glb", Color(0.74, 0.82, 1.0), rng)
+        b.gear_role = "watch"
+        b.leader = a
+        b.livery = blue
+        _put_folk(b, (beat[a._stop_i] as Array)[0] + Vector3(1.3, 0, 0))
+        garrison.append([a, int(WATCH_BEATS_FROM[kind])])
+        garrison.append([b, int(WATCH_BEATS_FROM[kind])])
+    # 4. the mounted watch: out of the Town Stables, round every gate and back
+    var stable := _lm_door("lm_barracks")[0] as Vector3
+    if growth != null and growth.specials.has("stables"):
+        var sp: Dictionary = growth.specials["stables"]["plot"]
+        # the yard in front of the open stalls, clear of the barn's footprint
+        stable = _door(sp) + _fwd(sp) * 3.0
+    stable = _snap(stable)
+    var gates: Array = (_wall_info.get("gates", []) as Array).duplicate()
+    gates.sort_custom(func(p: Vector3, q: Vector3) -> bool: return atan2(p.z, p.x) < atan2(q.z, q.x))
+    var ride: Array = [[stable, Vector3.ZERO, 8.0]]
+    for g in gates:
+        var gv: Vector3 = g
+        var out := Vector3(gv.x, 0.0, gv.z).normalized()
+        ride.append([_snap(gv - out * 10.0), Vector3.ZERO, 0.5])
+        ride.append([_snap(gv + out * 18.0), Vector3.ZERO, 3.0])
+        ride.append([_snap(gv - out * 10.0), Vector3.ZERO, 0.5])
+    ride.append([_snap(_market_pos + Vector3(0, 0, 15.0)), Vector3.ZERO, 2.0])
+    ride.append([_snap(Vector3(0.0, 0.0, _bridge_z - (RIVER_W + RIVER_BANK + 5.0))), Vector3.ZERO, 3.0])
+    for k in range(RIDERS_FROM.size()):
+        var c := Cavalry.new()
+        c.role = "guard"
+        c.model = "Knight.glb"
+        c.tint = Color(0.74, 0.82, 1.00)
+        c.person_name = "%s %s" % [FIRST[rng.randi() % FIRST.size()], LAST[rng.randi() % LAST.size()]]
+        c.town = self
+        c.gear_role = "guard"
+        c.gear_seed = rng.randi() % 5
+        c.livery = blue
+        c.speed = 7.5
+        var loop: Array = ride.duplicate()
+        if k % 2 == 1:
+            loop.reverse()
+        c.stops = loop
+        c._stop_i = (k * 3) % loop.size()
+        c.name = "Rider%d" % k
+        _put_folk(c, stable + Vector3(float(k) * 1.8 - 2.7, 0.0, 0.0))
+        cavalry.append(c)
+        garrison.append([c, int(RIDERS_FROM[k])])
+    _show_garrison(int(growth.level) if growth != null and int(growth.level) > 0 else 1, true)
+
+## who of the garrison stands in Bellmire at this level; the rest wait unseen
+func _show_garrison(lv: int, quiet := false) -> void:
+    var sworn: Array = []
+    var riders := 0
+    for e in garrison:
+        var v: Townsfolk = e[0]
+        if not is_instance_valid(v):
+            continue
+        var on: bool = lv >= int(e[1])
+        var was: bool = bool(v.get_meta("on_duty", true))
+        v.set_meta("on_duty", on)
+        if on == was and v.has_meta("placed"):
+            continue
+        v.set_meta("placed", true)
+        v.visible = on
+        v.inside = false
+        v.process_mode = Node.PROCESS_MODE_INHERIT if on else Node.PROCESS_MODE_DISABLED
+        if not on:
+            v._route = []
+        elif not was:
+            if v is Cavalry:
+                riders += 1
+            elif v.leader == null:
+                sworn.append(v.person_name)
+    if quiet:
+        return
+    for nm in sworn:
+        feed.append("%s is sworn into the watch." % nm)
+    if riders == 1:
+        feed.append("Another rider joins the mounted watch on Bellmire's roads.")
+    elif riders > 1:
+        feed.append("The mounted watch rides out of the Town Stables: %d riders on Bellmire's roads." % riders)
 
 ## ---------------------------------------------------------------- the guild
 ## Viewers' heroes. Roster + ChatCmd are the old game's, ported verbatim (pure

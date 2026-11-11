@@ -422,3 +422,27 @@ Town
   (hold_square, breach_fight, knocked_out) - looked at: heroes on the square, Chronicle lines readable.
 - _delve_test (DELVE_OIL=1) ENDED, _offfloor 0 of 969, TWITCH_PARSE OK, parse check 0 script errors
   (the 3 old 'material is null' engine lines remain).
+
+
+## Cycle 56 - camera and bar fixes (2026-11-11)
+- rts_camera.gd (backup .bak_c56): the follow camera (F, and the director, which follows too) can no
+  longer sit inside a wall. No physics bodies in this game, so the "raycast" marches the line from the
+  followed one's head out to the camera through what is solid: every house box up to its roof in town
+  (town.gd _house_box now carries the roof top as [2]; backup town.gd.bak_c56), and anything off the
+  floor cells below wall top (4.6 m) in a dungeon. First hit: the camera snaps in front of it; when the
+  view clears it eases back out. A followed one standing in a doorway: the march starts where the line
+  leaves that footprint. Only houses whose footprint circle touches the line are tested (cheap).
+- A soft cool fill light (OmniLight 0.9, range 7 m, no shadows) rides above and toward the camera from
+  the followed one at night in town; fades in/out with the clock. Not underground: the dungeon's dark is
+  the lore's dark (oil, the lamp).
+- health_bar_3d.gd (backup .bak_c56): bars whose owners stand within 0.9 m of each other step up 0.21 m
+  one above the next (by instance id, up to 4 steps), re-checked every 0.25 s; a lone bar stays put.
+- tools/_camfix_test.gd (new, windowed): town follow orbiting low - camera in a house 38 frames with the
+  pull-in off, 0 of 305 with it on; dungeon follow orbiting low - in a wall 266 frames off, 0 of 355 on;
+  night fill 0.90 on, gone by day; four tight bars at 2.05/2.26/2.47/2.68, a lone bar 2.05. CAMFIX_TEST
+  OK, 0 script errors. Renders renders/cycles/20261111_camfix (town_follow_low, night_follow,
+  tight_bars, dungeon_pull_off, dungeon_pull_on) - looked at: town and night views clear of the houses
+  (the night one pulled in tight between two houses), the dungeon one pulled in close behind the hero at
+  that very low test pitch (at the normal -48 pitch the camera is above the walls anyway).
+- _delve_test (DELVE_OIL=1) ENDED, _offfloor 0 of 1000, TWITCH_PARSE OK, _director_test (windowed) 0
+  script errors, parse check 0 script errors (the 3 old 'material is null' engine lines remain).

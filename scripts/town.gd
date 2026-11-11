@@ -1482,7 +1482,7 @@ func _measure_houses() -> void:
         remove_child(n)
         n.free()
         var cen := box.get_center()
-        _house_box[k] = [Vector2(box.size.x * 0.5, box.size.z * 0.5), Vector2(cen.x, cen.z)]
+        _house_box[k] = [Vector2(box.size.x * 0.5, box.size.z * 0.5), Vector2(cen.x, cen.z), box.end.y]   # [2]: roof top (camera pull-in)
 
 func _rect(plot: Dictionary) -> Array:
     var sh: String = String(plot.get("shape", "a"))

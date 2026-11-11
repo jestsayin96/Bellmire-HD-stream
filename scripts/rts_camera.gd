@@ -126,6 +126,12 @@ func _process(delta: float) -> void:
 	var gy := _ground(cam.global_position) + 1.5
 	if cam.global_position.y < gy:
 		cam.global_position.y = gy
+	# a followed one: never inside a wall or a house - pull in along the line
+	if _following and selected != null and pull_in:
+		_pull_in(real)
+	else:
+		_pull_d = 1.0e9
+	_fill_light(real)
 	cam.look_at(focus + Vector3(0, 1.0, 0), Vector3.UP)
 
 func _unhandled_input(ev: InputEvent) -> void:
@@ -495,3 +501,144 @@ func _toggle_names() -> void:
 				(c as Label3D).visible = Townsfolk.show_names
 				(c as Label3D).visibility_range_end = 60.0 if Townsfolk.show_names else 9.0
 	_say_local("Names %s." % ("shown" if Townsfolk.show_names else "hidden"))
+
+## ================================================= follow camera fixes
+## No physics bodies in this game, so the "raycast" marches the line from the
+## followed one's head out to the camera through what IS solid: house boxes in
+## town (up to their roof), and anything off the floor cells below wall top in
+## a dungeon. The first solid sample pulls the camera in front of it at once;
+## when the view clears it eases back out.
+const DUN_WALL_TOP := 4.6       # KayKit walls are one 4 m grid tall
+var pull_in := true
+var _pull_d := 1.0e9
+var _houses: Array = []         # [centre xz, ax, az, half extents, top y, radius]
+var _near: Array = []           # this frame's houses near the line
+var _cam_delve: Delve = null
+
+func _house_rects() -> Array:
+	if not _houses.is_empty():
+		return _houses
+	var hb: Dictionary = town.get("_house_box")
+	for plot in town.get("plots"):
+		var sh := String(plot.get("shape", "a"))
+		if not hb.has(sh):
+			continue
+		var he: Vector2 = (hb[sh][0] as Vector2) * 1.04
+		var off: Vector2 = hb[sh][1]
+		var top: float = float(hb[sh][2]) * 1.1 if (hb[sh] as Array).size() > 2 else 9.0
+		var yaw := float(plot["yaw"])
+		var ax := Vector2(cos(yaw), -sin(yaw))
+		var az := Vector2(sin(yaw), cos(yaw))
+		var pp: Vector3 = plot["pos"]
+		_houses.append([Vector2(pp.x, pp.z) + ax * off.x + az * off.y, ax, az, he, pp.y + top, he.length()])
+	return _houses
+
+func _delve_at(p: Vector3) -> Delve:
+	var best: Delve = null
+	var bd := 1.0e9
+	for c in town.get_children():
+		if c is Delve and (c as Delve).dun != null and is_instance_valid((c as Delve).dun):
+			var d := Vector2(p.x, p.z).distance_to(Vector2((c as Delve).dun.global_position.x, (c as Delve).dun.global_position.z))
+			if d < bd:
+				bd = d
+				best = c
+	return best
+
+func _solid_at(p: Vector3) -> bool:
+	if _cam_delve != null:
+		var dn: DungeonHD = _cam_delve.dun
+		if p.y > dn.global_position.y + DUN_WALL_TOP:
+			return false
+		return not (dn.info["cells"] as Dictionary).has(_cam_delve._cell_of(p))
+	var q := Vector2(p.x, p.z)
+	for r in _near:
+		if p.y > float(r[4]):
+			continue
+		var d := q - (r[0] as Vector2)
+		var he: Vector2 = r[3]
+		if absf(d.dot(r[1])) < he.x and absf(d.dot(r[2])) < he.y:
+			return true
+	return false
+
+func _pull_in(real: float) -> void:
+	var pivot := focus + Vector3(0, 1.0, 0)
+	var seg := cam.global_position - pivot
+	var L := seg.length()
+	if L < 1.0:
+		return
+	var dir := seg / L
+	_cam_delve = null
+	_near.clear()
+	if pivot.y < Delve.DELVE_Y * 0.5:
+		_cam_delve = _delve_at(pivot)
+		if _cam_delve == null:
+			return
+	else:
+		# only the houses whose footprint circle touches the line (xz)
+		var a := Vector2(pivot.x, pivot.z)
+		var b := Vector2(cam.global_position.x, cam.global_position.z)
+		for r in _house_rects():
+			var c: Vector2 = r[0]
+			if Geometry2D.get_closest_point_to_segment(c, a, b).distance_to(c) < float(r[5]):
+				_near.append(r)
+	# standing in a doorway (inside a footprint): start where the line leaves it
+	var s0 := 0.0
+	while s0 < minf(L, 4.0) and _solid_at(pivot + dir * s0):
+		s0 += 0.2
+	if s0 >= L:
+		return
+	var free_d := L
+	var s := s0 + 0.6
+	while s <= L:
+		if _solid_at(pivot + dir * s):
+			free_d = maxf(s - 0.7, s0 + 0.3)
+			break
+		s += 0.4
+	if free_d < _pull_d:
+		_pull_d = free_d                                    # snap in
+	else:
+		_pull_d = minf(free_d, lerpf(_pull_d, free_d, clampf(real * 2.5, 0.0, 1.0)))   # ease out
+	if _pull_d < L:
+		cam.global_position = pivot + dir * _pull_d
+
+## camera_solid(): is the camera itself inside something solid right now (tests)
+func camera_solid() -> bool:
+	var keep := _near.duplicate()
+	var kd := _cam_delve
+	_near = _house_rects()
+	_cam_delve = _delve_at(cam.global_position) if cam.global_position.y < Delve.DELVE_Y * 0.5 else null
+	var hit := _solid_at(cam.global_position)
+	_near = keep
+	_cam_delve = kd
+	return hit
+
+## a soft fill light on the followed one at night, so a hero is not a
+## silhouette in the dark (town only: a dungeon's dark is the lore's dark)
+const FILL_ENERGY := 0.9
+var fill: OmniLight3D
+
+func _fill_light(real: float) -> void:
+	var want := 0.0
+	var eco = town.get("economy")
+	if _following and selected != null and selected.is_visible_in_tree() \
+			and selected.global_position.y > Delve.DELVE_Y * 0.5 and eco and eco.is_night():
+		want = FILL_ENERGY
+	if fill == null:
+		if want <= 0.0:
+			return
+		fill = OmniLight3D.new()
+		fill.name = "follow_fill"
+		fill.top_level = true
+		fill.light_color = Color(0.86, 0.88, 1.0)
+		fill.light_energy = 0.0
+		fill.light_specular = 0.15
+		fill.omni_range = 7.0
+		fill.omni_attenuation = 1.4
+		fill.shadow_enabled = false
+		add_child(fill)
+	fill.light_energy = move_toward(fill.light_energy, want, real * 1.5)
+	fill.visible = fill.light_energy > 0.01
+	if fill.visible and selected != null:
+		var to_cam := cam.global_position - selected.global_position
+		to_cam.y = 0.0
+		fill.global_position = selected.global_position + Vector3(0, 2.6, 0) + to_cam.normalized() * 1.8

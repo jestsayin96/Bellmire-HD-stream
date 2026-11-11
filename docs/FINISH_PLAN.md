@@ -30,7 +30,7 @@ Scheduled build runs work through this list top to bottom. Each run:
         lord, a name card in the Chronicle, a boss bar at the top while the fight lasts, the director at 100.
 - [x] 6. (DONE Nov 11, cycle 55: raids.gd green heroes (<L3) hold the market square until breached, one-time knock-out grace; tools/_raid_balance_test.gd RAIDBAL_TEST OK; renders/cycles/20261111_raidbal) Raid balance: heroes under level 3 hang back (guard the square) unless the town is breached;
         first death of a fresh hero gets a grace (knocked out, not killed) once.
-- [ ] 7. Fixes: follow camera never inside walls (raycast pull-in); soft fill light on the followed hero at night;
+- [x] 7. (DONE Nov 11, cycle 56: follow camera marches the line through house boxes / off-floor cells and pulls in; town-night fill light on the followed one; tight-party bars stagger 0.21 m; tools/_camfix_test.gd CAMFIX_TEST OK; renders/cycles/20261111_camfix) Fixes: follow camera never inside walls (raycast pull-in); soft fill light on the followed hero at night;
         offset health bars in tight parties.
 - [ ] 8. Soak: 30 min (4x speed) with the director on, 6 fake viewers enlisting/delving; no script errors;
         FPS logged; fix what breaks.

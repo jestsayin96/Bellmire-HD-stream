@@ -66,9 +66,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L5. Character species: !enlist <class> <species> (human, elf, dwarf, halfling, orc, ... from the lore)
       with stat bonuses and a visible look (KayKit/Quaternius CC0 bodies, scale, skin tint).
       DONE (Cycle 62): human, elf, dwarf, halfling, orc + the scarkin; bonuses, traits, proportions, skin, parts; L5_TEST OK.
-- [ ] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
-      BLOCKED (laptop, 2026-11-11): no new CC0 bodies reachable - KayKit GitHub has only the five owned; Adventurers 2.0
-      is itch.io only; Quaternius Drive refuses downloads (quota). Needs a pack dropped into assets/ by hand.
+- [x] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
+      DONE (Cycle 65): heroes on KayKit Adventurers 2.0 (+ the new Ranger body), baked hero_*.tscn with one shared
+      animation library; townsfolk can load the same scenes (FOR THE DESKTOP: townsfolk.gd model = see ASSETS.md).
 - [x] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
       DONE (Cycle 64): 30 wall min, 0 script errors, memory flat; the new callings, peoples, kinds, lords, uniques all live.
 

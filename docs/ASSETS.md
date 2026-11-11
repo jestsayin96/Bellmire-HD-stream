@@ -108,3 +108,11 @@ errands), town.gd chat_line()/feed. Fake-chat test: tools/_heroes.gd.
 - tools/_delve_pace.gd, tools/_clock_shot.gd - delve pace probe / noon-dusk-night render
 - tools/_stream_soak.gd, tools/_viewer_dbg.gd, tools/_fps_window.gd, tools/_soak_shots.gd - full soak / viewer trace / FPS / night raid + dawn renders (Cycle 41)
 - tools/_lamp_shot.gd, tools/_rack_shot.gd - wizard's lamp-stand lit / shop rack before-after a tier unlock (Cycle 43)
+
+## Characters, 2.0 (L6, laptop 2026-11-11)
+assets/characters/kaykit_adv2: KayKit Adventurers 2.0 FREE (CC0, Kay Lousberg; LICENSE.txt + SOURCE.txt) - Knight,
+Barbarian, Mage, Ranger (new), Rogue, Rogue_Hooded on Rig_Medium, plus its free animations (General, MovementBasic).
+tools/_bake_adv2.gd bakes adv2_anims.res (76 animations of the 1.0 set re-pathed Rig -> Rig_Medium, same bones and
+rest poses, with 2.0's own idle/walk/run/hit/death/jump laid over) and hero_<Name>.tscn = the body + an
+AnimationPlayer on that library. Load like any KayKit body: from the 1.0 folder the path is
+"../../../../assets/characters/kaykit_adv2/hero_<Name>.tscn" (Roster.ADV2). Heroes use them now; townsfolk could too.

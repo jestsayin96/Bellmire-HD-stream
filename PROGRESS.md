@@ -707,3 +707,22 @@ Town
   1.46 s vs now 1.43-1.69 s), so it predates this work (likely a floor being built in one frame). Only 3
   fishing trips were ordered in 30 min and no catch line reached the Chronicle.
 - L6 stays open: no new CC0 character bodies are reachable from here (see WORK_PLAN).
+
+
+## Cycle 65 - L6, new character bodies (laptop, 2026-11-11)
+- Mr. E asked for the pack to be fetched: KayKit Adventurers 2.0 FREE (CC0, licence checked) from Kay's own itch.io
+  page through its free-download flow, 13 MB; kept Characters + the Rig_Medium animations + the licence in
+  assets/characters/kaykit_adv2 (SOURCE.txt records where it came from).
+- The 2.0 bodies ship with no animations and the free tier has no attacks or casts - but Rig_Medium has the same
+  bones and rest poses as the 1.0 rig. tools/_bake_adv2.gd re-paths all 76 1.0 animations onto it (IK-only tracks
+  dropped), lays 2.0's own idle/walk/run/hit/death/jump over them (Idle_A plays as "Idle"), saves one shared
+  adv2_anims.res and six hero_<Name>.tscn scenes. Nothing outside the laptop's files changed: Roster.CLASSES
+  model points at them through the 1.0 folder HeroBody already prefixes (Roster.ADV2).
+- Every calling now wears a 2.0 body; the ranger gets the new Ranger body (scarf, own look). Gear: the hooded
+  rogue's hood is part of its 2.0 head mesh, so only separate "...Hat" meshes take a calling's colour (the warlock's
+  face had gone solid violet); the 2.0 RogueHooded_Mask is kept as body, not stripped as a prop.
+- Renders renders/cycles/20261111_l6 (callings front/close/back, a Hollow King fight) - looked at: 2.0 detail
+  reads, weapons in the hands, species parts and armour sit right, attacks and casts play in the delve.
+- Townsfolk still wear the 1.0 bodies (townsfolk.gd is the desktop's): the same scenes are ready for it.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 528, TWITCH_PARSE OK, L3, L4, L5,
+  D2_DELVE OK.

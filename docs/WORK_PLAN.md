@@ -108,7 +108,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       animation library; townsfolk can load the same scenes (FOR THE DESKTOP: townsfolk.gd model = see ASSETS.md).
 - [x] L8. (Mr. E's decision, Nov 11) Wild magic below: every spell in the dungeon is a check against the scar - d20 + casting mod (INT mage/sage/necromancer, WIS cleric/druid/monk, CHA warlock/bard/paladin) + proficiency vs DC 10 + floor/2 (cap 20); fail = misfire as on the scar's surface (Spells.cast in_scar=true); nat 1 always, nat 20 never. Monsters unaffected. Test the misfire rates (strong vs weak caster, shallow vs deep).
       DONE (Cycle 66): d20 + casting mod + prof vs DC 10+floor/2 (cap 20), nat 1/20; misfire rates match the odds; L8_TEST OK.
-- [ ] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
+- [x] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
+      DONE (Cycle 67): damage dice (same means), creature nat 1/20 + 2d6, initiative, traps (Perception/DEX), Investigation,
+      death-save 1/20, CHA haggling, spell saves, big 20s in the Chronicle; sage scar check on WIS; L9_TEST OK.
 - [x] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)

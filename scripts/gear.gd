@@ -19,13 +19,13 @@ const FAMILIES := {
 ## tiered goods (old roster WEAPONS / ARMOUR, numbers unchanged). Top tiers
 ## reuse geometry and separate themselves by SIZE and GLOW.
 const WEAPONS := [
-    {"name": "bare hands", "cost": 0, "atk": 0, "scale": 0.0, "glow": 0.0},
-    {"name": "plain steel", "cost": 60, "atk": 4, "scale": 1.0, "glow": 0.0},
-    {"name": "fine steel", "cost": 160, "atk": 9, "scale": 1.05, "glow": 0.0},
-    {"name": "runed", "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5},
-    {"name": "dragontooth", "cost": 1100, "atk": 26, "scale": 1.25, "glow": 1.0},
+    {"name": "bare hands", "cost": 0, "atk": 0, "scale": 0.0, "glow": 0.0, "dice": [1, 4]},
+    {"name": "plain steel", "cost": 60, "atk": 4, "scale": 1.0, "glow": 0.0, "dice": [1, 6]},
+    {"name": "fine steel", "cost": 160, "atk": 9, "scale": 1.05, "glow": 0.0, "dice": [1, 8]},
+    {"name": "runed", "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5, "dice": [1, 10]},
+    {"name": "dragontooth", "cost": 1100, "atk": 26, "scale": 1.25, "glow": 1.0, "dice": [1, 12]},
     # L3: never forged in Bellmire - only ever found below, grown in the scar's wild magic
-    {"name": "scarforged", "cost": 0, "atk": 34, "scale": 1.3, "glow": 1.3, "found": true},
+    {"name": "scarforged", "cost": 0, "atk": 34, "scale": 1.3, "glow": 1.3, "found": true, "dice": [2, 8]},
 ]
 const ARMOUR := [
     {"name": "rags", "cost": 0, "hp": 0, "ac": 0},

@@ -821,3 +821,37 @@ Town
 - _d2_delve_test's "every spell seen" checks are now chance-dependent (misfires swap kinds); it failed once in
   three runs, passed twice. Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 459,
   TWITCH_PARSE OK, L4 OK.
+
+
+## Cycle 67 - L9, the roll audit, dungeon side (laptop, 2026-11-11)
+Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll on the hero's real numbers.
+- Damage dice: each weapon tier has dice (bare 1d4, plain 1d6, fine 1d8, runed 1d10, dragontooth 1d12,
+  scarforged 2d8; Roster/Gear WEAPONS "dice"). A blow = the dice + the ability mod + a flat part that keeps the
+  average exactly where it was (0.75 x Roster.attack + kit), so the measured balance holds; a crit rolls the
+  dice twice (5e). Creatures hit on 2d6 of their base (same mean 0.8). The hero sheet shows the dice.
+- Creature attacks: d20 + to-hit vs the delver's AC, a natural 1 always misses, a natural 20 always hits and
+  doubles. Spell saves: fire burst DEX save for half, frost CON save against the slow, both vs the caster's
+  spell DC (8 + prof + casting mod); creature save d20 + floor/3 (+2 a lord), nat 1/20.
+- Initiative each floor: d20 + DEX for delvers, d20 + 1 creatures; the high roll swings first.
+- Traps are live: dungeon_hd records them (info["traps"]); the first delver to step within 0.9 m rolls
+  Perception (d20 + WIS, + prof for rogue/ranger/monk, disadvantage in the dark without darkvision) vs DC 10 +
+  floor/2 - spotted, stepped round; missed, it goes off: a DEX save halves 2d6 + floor (spikes), 2d8 + floor
+  (fire), 1d10 + floor (pressure plate's stone). Each a Chronicle line.
+- Loot: the party's sharpest eye makes an Investigation check (d20 + INT, + prof for rogue/ranger/mage/sage/
+  necromancer) vs DC 10 + floor/2 - it sets the gold (fail x0.8, beat it up to x1.35, nat 20 x1.6, nat 1 x0.6),
+  the salvage and potions, and whether deep gear turns up (nat 20, or a total of 25 - floor/2, -5 for a lord).
+- Death save: still one per delve (old rule), DC 10 CON; a natural 20 stands them up with a quarter of their
+  life, a natural 1 is death.
+- Shops: CHA no longer cuts every price flat. Each purchase is a Persuasion check at the counter (d20 + CHA,
+  + prof for bard/warlock/paladin/rogue) vs DC 12: 10% off +1% a point over (max 20%); nat 20 a quarter off;
+  nat 1 a tenth over; the line says so ("Haggled 11% off (13)."). The guild-rank discount stays on the list price.
+- Big rolls in the Chronicle, once per delver per floor: a natural 20 that kills ("rolls a 20 - and the drowned
+  skeleton mage is gone.") or lands on a lord ("BigAxe rolls a 20 - Gnawbone reels."), 20s on initiative,
+  searching and death saves. (First pass announced every 20: four lines a floor - cut to kills and lords.)
+- Mr. E: the sage's scar check (L8) uses WIS, its own sheet - Delve.CAST_STAT changed; L8_TEST OK with it.
+- tools/_l9_test.gd (headless, new): every tier's mean equals the old (e.g. runed 25.05 vs 25.05) with the dice's
+  exact spread; crits; creature 2d6 mean; haggling odds for CHA +0 (5/5/40/50%); spell save odds (0.493 vs 0.500);
+  the sheet; a real delve: initiative swings, every trap on a floor rolled for, traps across the run. L9_TEST OK.
+  tools/_l9_shot.gd: renders/cycles/20261111_l9 - looked at: Gnawbone with the misfire, the brood and the 20 lines.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 453, TWITCH_PARSE OK, L1, L3, L4,
+  L5, L8 OK. (The town side - fishing, the town's work - is the desktop's part of the rule.)

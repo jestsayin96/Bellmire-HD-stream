@@ -609,3 +609,31 @@ Town
   TWITCH_PARSE OK, _delve_test ENDED (4 survivors, 0 script errors), _perf 6.9 ms (145 fps headless),
   _fps_window min 149 avg 172 at 139 people.
 
+
+
+## Cycle 62 - L5, the peoples of the valley (laptop, 2026-11-11)
+(Cycle numbers: the desktop's D1 entry is also "Cycle 58"; the laptop cycles run 58-62 today.)
+- Lore: the old game names no races - its folk (Garm of the Ford, Tove Ashwood...) read as valley humans.
+  So the peoples are new, kept in its plain voice and tied to its places: human ("valley-born, like most
+  of Bellmire"), elf ("out of the old woods past the fields"), dwarf ("down from the hill mines"), halfling
+  ("from the field-farms"), orc ("came over the west road and stayed"), and one only this world has - the
+  scarkin, "born too near the scar; its light in the eyes".
+- Roster.SPECIES: 5e-style bonuses (human +1 all; elf +2 DEX +1 INT; dwarf +2 CON +1 WIS; halfling +2 DEX
+  +1 CHA; orc +2 STR +1 CON; scarkin +2 CHA +1 INT; capped at 20) and one trait: darkvision (elf, dwarf,
+  orc, scarkin - no disadvantage when the oil is gone) or lucky (halfling - a natural 1 is rolled again).
+  Rerolls keep the people; a hero saved before today reads as human. The sheet says "dwarf knight".
+- !enlist <class> <species> in either order; an unknown people is refused with the list; no people given
+  draws one by weight (human most often, scarkin least).
+- The look (Gear.species_look, through the same dressing hook): body proportions (dwarf broad and short,
+  halfling small, orc big, elf slender and tall), skin of head and arms tinted from the mesh's own material
+  (orc green, scarkin violet), and parts on the head bone: elven ears, a dwarf's beard, an orc's tusks, a
+  glowing scar-shard on a scarkin brow. Set, never multiplied, so re-dressing does not compound.
+- Fix on the way (L3): a respec drops a weapon kind that is not of the new calling's family.
+- tools/_l5_test.gd (headless, new): both enlist orders, unknown refused, a drawn people, every people
+  drawn, bonuses, traits, old saves, the sheet, reroll keeps the people, respec drops the kind, each look's
+  scale and parts and no compounding. L5_TEST OK. _l4_test's "primary rolls best" now allows a species +2.
+  tools/_l5_shot.gd: renders/cycles/20261111_l5 - looked at: first pass the orc's tusks hung like fangs
+  and the beard read as a mask; tusks now rise from the jaw, beard lowered.
+- Merged origin/main (desktop D1) before the item; PROGRESS.md append conflict resolved keeping both.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 438, TWITCH_PARSE OK,
+  L1_TEST OK, L3_TEST OK, L4_TEST OK.

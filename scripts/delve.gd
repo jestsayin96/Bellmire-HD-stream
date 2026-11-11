@@ -528,7 +528,10 @@ func _fight(delta: float) -> void:
             continue
         m["swing"] = (1.3 + _rng.randf() * 0.4) * (0.6 if ability == "flurry" else 1.0)
         # 5e: d20 + attack bonus vs the creature's AC (10 + depth band)
-        var roll := _d20(-1 if dark else 0)
+        # L5: darkvision shrugs off the dark; a lucky halfling rolls a natural 1 again
+        var roll := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
+        if roll == 1 and Roster.has_trait(h, "lucky"):
+            roll = _d20(-1 if dark else 0)
         var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0) + int((tgt.def.get("ways", {}) as Dictionary).get("guard", 0))
         if caster:
             Spells.cast("bolt", b, tgt.global_position + Vector3(0, tgt._height() * 0.5, 0), false)

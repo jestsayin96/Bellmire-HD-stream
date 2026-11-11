@@ -335,6 +335,94 @@ const ROLE_CAPE := {
     "washer": Color(0.55, 0.62, 0.70),
 }
 
+## ---- L5: a people's look. Body proportions (set, never multiplied, so a
+## re-dress is idempotent), the skin of head and arms tinted from the mesh's own
+## material, and a few small parts on the head bone: elven ears, a dwarf's
+## beard, an orc's tusks, the scar's shard on a scarkin brow.
+static func species_look(model_root: Node, species: String) -> void:
+    var sp: Dictionary = Roster.SPECIES.get(species, {})
+    if model_root is Node3D:
+        (model_root as Node3D).scale = sp.get("scale", Vector3.ONE)
+    var skin: Color = sp.get("skin", Color(1, 1, 1))
+    var st: Array = [model_root]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and not String(c.name).begins_with("eq_"):
+            var nm := String(c.name)
+            if nm.ends_with("_Head") or nm.contains("Arm"):
+                var mi: MeshInstance3D = c
+                for i in range(mi.mesh.get_surface_count()):
+                    var base: Material = mi.mesh.surface_get_material(i)
+                    if base is StandardMaterial3D:
+                        var d: StandardMaterial3D = (base as StandardMaterial3D).duplicate()
+                        d.albedo_color = d.albedo_color * skin
+                        mi.set_surface_override_material(i, d)
+        for g in c.get_children():
+            if not String(g.name).begins_with("eq_"):
+                st.append(g)
+    var sk := skeleton(model_root)
+    if sk == null:
+        return
+    var old := sk.get_node_or_null("eq_species")
+    if old:
+        old.free()
+    var parts: Array = sp.get("parts", [])
+    if parts.is_empty() or sk.find_bone("head") < 0:
+        return
+    var att := BoneAttachment3D.new()
+    att.name = "eq_species"
+    att.bone_name = "head"
+    sk.add_child(att)
+    var flesh := StandardMaterial3D.new()
+    flesh.albedo_color = Color(0.93, 0.74, 0.62) * skin
+    for p in parts:
+        match String(p):
+            "ears":
+                for s in [-1.0, 1.0]:
+                    var e := MeshInstance3D.new()
+                    var pm := PrismMesh.new()
+                    pm.size = Vector3(0.16, 0.42, 0.08)
+                    e.mesh = pm
+                    e.material_override = flesh
+                    e.position = Vector3(0.56 * s, 0.50, -0.02)
+                    e.rotation = Vector3(0, 0, -0.95 * s)
+                    att.add_child(e)
+            "beard":
+                var bm := StandardMaterial3D.new()
+                bm.albedo_color = Color(0.48, 0.30, 0.17)
+                var b := MeshInstance3D.new()
+                var pr := PrismMesh.new()
+                pr.size = Vector3(0.60, 0.42, 0.22)
+                b.mesh = pr
+                b.material_override = bm
+                b.position = Vector3(0, 0.0, 0.40)
+                b.rotation = Vector3(PI, 0, 0)
+                att.add_child(b)
+            "tusks":
+                var tm := StandardMaterial3D.new()
+                tm.albedo_color = Color(0.95, 0.92, 0.82)
+                for s in [-1.0, 1.0]:
+                    var t := MeshInstance3D.new()
+                    var tp := PrismMesh.new()
+                    tp.size = Vector3(0.08, 0.16, 0.06)
+                    t.mesh = tp
+                    t.material_override = tm
+                    t.position = Vector3(0.15 * s, 0.10, 0.47)
+                    att.add_child(t)
+            "shard":
+                var gm := StandardMaterial3D.new()
+                gm.albedo_color = Color(0.70, 0.40, 1.0)
+                gm.emission_enabled = true
+                gm.emission = Color(0.75, 0.40, 1.0)
+                gm.emission_energy_multiplier = 1.2
+                var g := MeshInstance3D.new()
+                var pm2 := PrismMesh.new()
+                pm2.size = Vector3(0.12, 0.22, 0.08)
+                g.mesh = pm2
+                g.material_override = gm
+                g.position = Vector3(0, 0.82, 0.44)
+                att.add_child(g)
+
 ## L4: a calling's own cloak colour
 static func _cape_tint(model_root: Node, col: Color) -> void:
     var ms := _cape_meshes(model_root)
@@ -392,6 +480,7 @@ static func rank_trim(model_root: Node, rank: int) -> void:
     # L3: a hero being dressed (stashed by Roster.offhand_bone) gets their armour on
     if not _dressing.is_empty():
         dress_armour(model_root, int(_dressing.get("armour", 0)))
+        species_look(model_root, Roster.species_of(_dressing))
         var cls: Dictionary = Roster.CLASSES.get(String(_dressing.get("class", "")), {})
         if cls.has("cape"):
             _cape_tint(model_root, cls["cape"])

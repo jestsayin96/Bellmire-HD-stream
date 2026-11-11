@@ -52,7 +52,7 @@ Not yet: follows, subs, bits and channel points (needs a Twitch token - a later 
 
 | Command | What happens |
 |---|---|
-| `!enlist <class>` | raise a hero (knight, warden, mage, ranger, barbarian, cleric, rogue, sage, duelist, paladin, necromancer, monk, druid, warlock, bard); they appear on the square |
+| `!enlist <class>` | raise a hero (knight, warden, mage, ranger, barbarian, cleric, rogue, sage, duelist, paladin, necromancer, monk, druid, warlock, bard); add a people: `!enlist knight dwarf` (human, elf, dwarf, halfling, orc, scarkin; either order); they appear on the square |
 | `!inventory` (`!inv`, `!bag`) | what the hero carries: weapon, armour, potions, oil, gold, catches and the best one |
 | `!hero` | the hero's sheet: class, rank, level, AC, HP, to-hit, stats, saves, gear, potions, oil, gold, record |
 | `!delve` | walk to the scar mouth; the party goes in together once nobody queued is still on the road (or 45 s after the first arrival) |

@@ -57,8 +57,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       duelist); add more (e.g. paladin, necromancer, monk, druid, warlock, bard) with 5e-style saves,
       a weapon, a spell or ability, and !enlist support.
       DONE (Cycle 61): paladin, necromancer, monk, druid, warlock, bard - saves, weapon kind, ability, cloak; L4_TEST OK.
-- [ ] L5. Character species: !enlist <class> <species> (human, elf, dwarf, halfling, orc, ... from the lore)
+- [x] L5. Character species: !enlist <class> <species> (human, elf, dwarf, halfling, orc, ... from the lore)
       with stat bonuses and a visible look (KayKit/Quaternius CC0 bodies, scale, skin tint).
+      DONE (Cycle 62): human, elf, dwarf, halfling, orc + the scarkin; bonuses, traits, proportions, skin, parts; L5_TEST OK.
 - [ ] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
 - [ ] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 

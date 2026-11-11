@@ -32,7 +32,8 @@ func _initialize() -> void:
 		var best := 0
 		for s in Roster.STATS:
 			best = maxi(best, int(h["stats"][s]))
-		_ok(int(h["stats"][prim]) == best, "%s rolls best in %s" % [c, prim])
+		# the best roll goes to the primary; a species bonus (up to +2) may lift another past it
+		_ok(int(h["stats"][prim]) >= best - 2, "%s rolls best in %s" % [c, prim])
 		h["weapon"] = 1
 		var fam := String(Roster.CLASSES[c]["family"])
 		_ok(Gear.kinds_of(fam).size() >= 2 and Gear.kinds_of(fam).has(String(Roster.CLASSES[c]["kind"])), "%s carries a %s (kinds %s)" % [c, _r.weapon_name(h), Gear.kinds_of(fam)])

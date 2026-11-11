@@ -90,6 +90,54 @@ const CLASSES := {
                   "primary": "cha", "ability": "inspire", "cape": Color(0.70, 0.12, 0.16),
                   "blurb": "Sings the party steady. Everyone swings truer while they stand."},
 }
+## ---- L5: the peoples of the valley. The old game names none (its folk read
+## as valley humans), so these are new: the common five, plus one only this
+## world has - the scarkin, born too near the scar. 5e-style ability bonuses
+## (capped at 20), one trait each that Delve reads, and a look (Gear dresses it).
+## darkvision: no disadvantage when the oil is gone. lucky: a natural 1 is rolled again.
+const SPECIES := {
+    "human":    {"bonus": {"str": 1, "dex": 1, "con": 1, "int": 1, "wis": 1, "cha": 1}, "trait": "",
+                 "weight": 34, "blurb": "valley-born, like most of Bellmire"},
+    "elf":      {"bonus": {"dex": 2, "int": 1}, "trait": "darkvision", "weight": 12,
+                 "scale": Vector3(0.96, 1.05, 0.96), "skin": Color(1.0, 0.96, 0.92), "parts": ["ears"],
+                 "blurb": "out of the old woods past the fields; sees in the dark"},
+    "dwarf":    {"bonus": {"con": 2, "wis": 1}, "trait": "darkvision", "weight": 14,
+                 "scale": Vector3(1.12, 0.86, 1.12), "skin": Color(1.0, 0.86, 0.78), "parts": ["beard"],
+                 "blurb": "down from the hill mines; sees in the dark"},
+    "halfling": {"bonus": {"dex": 2, "cha": 1}, "trait": "lucky", "weight": 12,
+                 "scale": Vector3(0.80, 0.78, 0.80), "skin": Color(1.0, 0.94, 0.88), "parts": [],
+                 "blurb": "from the field-farms; a natural 1 is rolled again"},
+    "orc":      {"bonus": {"str": 2, "con": 1}, "trait": "darkvision", "weight": 14,
+                 "scale": Vector3(1.10, 1.06, 1.10), "skin": Color(0.62, 0.80, 0.54), "parts": ["tusks"],
+                 "blurb": "came over the west road and stayed; sees in the dark"},
+    "scarkin":  {"bonus": {"cha": 2, "int": 1}, "trait": "darkvision", "weight": 8,
+                 "scale": Vector3(1.0, 1.0, 1.0), "skin": Color(0.84, 0.74, 0.98), "parts": ["shard"],
+                 "blurb": "born too near the scar; its light in the eyes, its dark no bother"},
+}
+
+func _any_species() -> String:
+    var total := 0
+    for k in SPECIES:
+        total += int(SPECIES[k]["weight"])
+    var r := rng.randi() % total
+    for k in SPECIES:
+        r -= int(SPECIES[k]["weight"])
+        if r < 0:
+            return k
+    return "human"
+
+func _with_species(stats: Dictionary, species: String) -> Dictionary:
+    var b: Dictionary = SPECIES.get(species, {}).get("bonus", {})
+    for k in b:
+        stats[k] = mini(20, int(stats.get(k, 10)) + int(b[k]))
+    return stats
+
+static func species_of(h: Dictionary) -> String:
+    return String(h.get("species", "human"))
+
+static func has_trait(h: Dictionary, t: String) -> bool:
+    return String(SPECIES.get(species_of(h), {}).get("trait", "")) == t
+
 ## L4: the casters throw bolts from range; the healers mend
 const CASTERS := ["mage", "sage", "cleric", "necromancer", "druid", "warlock"]
 
@@ -163,12 +211,14 @@ func _init() -> void:
     rng.randomize()
 
 # ----------------------------------------------------------------- lifecycle
-func fresh(user_id: String, display: String, cls := "") -> Dictionary:
+func fresh(user_id: String, display: String, cls := "", species := "") -> Dictionary:
     if cls == "" or not CLASSES.has(cls):
         cls = CLASSES.keys()[rng.randi() % CLASSES.size()]
+    if not SPECIES.has(species):
+        species = _any_species()
     var h := {
-        "id": user_id, "name": display, "class": cls,
-        "stats": roll_stats(cls), "weapon": 0, "armour": 0, "potions": 1,
+        "id": user_id, "name": display, "class": cls, "species": species,
+        "stats": _with_species(roll_stats(cls), species), "weapon": 0, "armour": 0, "potions": 1,
         "oil": 2,
         "gold": 40, "level": 1, "xp": 0,
         "delves": 0, "kills": 0, "deepest": 0, "alive": true,
@@ -402,8 +452,8 @@ func reroll(user_id: String, prepaid := false) -> String:
         return "%s needs %d gold to reroll (has %d)." \
             % [h["name"], REROLL_COST, int(h["gold"])]
     var before: Dictionary = h["stats"].duplicate()
-    var a := roll_stats(String(h["class"]))
-    var b := roll_stats(String(h["class"]))
+    var a := _with_species(roll_stats(String(h["class"])), species_of(h))
+    var b := _with_species(roll_stats(String(h["class"])), species_of(h))
     var best: Dictionary = a if _total(a) >= _total(b) else b
     # You gamble the GOLD, never the character. A paid reroll that leaves a
     # viewer strictly worse off is a refund request, not a highlight - so a
@@ -435,6 +485,9 @@ func respec(user_id: String, cls: String, prepaid := false) -> String:
             % [h["name"], RESPEC_COST, int(h["gold"])]
     var was: String = h["class"]
     h["class"] = cls
+    # a weapon kind of the old calling's family does not carry over (L3 kinds)
+    if h.has("wkind") and not Gear.kinds_of(String(CLASSES[cls]["family"])).has(String(h["wkind"])):
+        h.erase("wkind")
     changed.emit(user_id)
     return "%s abandons the %s's path and takes up the %s. %s" \
         % [h["name"], was, cls, CLASSES[cls]["blurb"]]
@@ -640,7 +693,7 @@ func describe(user_id: String) -> String:
     return ("%s the %s, %s, level %d  |  AC %d  HP %d  prof %s  to-hit %s  |  %s" +
             "  |  saves %s  |  %s, %s  |  %d potions, %d oil, %d gold" +
             "  |  deepest floor %d, %d kills") \
-        % [h["name"], h["class"], rank_of(h), int(h["level"]),
+        % [h["name"], "%s %s" % [species_of(h), h["class"]], rank_of(h), int(h["level"]),
            armour_class(h), int(max_hp(h)), sign_str(prof(h)),
            sign_str(attack_bonus(h)), _stat_line(h["stats"]), save_line(h),
            weapon_name(h), ARMOUR[int(h["armour"])]["name"],

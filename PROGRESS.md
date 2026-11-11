@@ -555,3 +555,29 @@ Town
   rank_trim. L3_TEST OK. tools/_l3_shot.gd: renders/cycles/20261111_l3 - looked at: first pass the helm
   sat high like a bowl and the violet blew out; helm lowered with a brim, glows toned down; second pass reads.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 483, TWITCH_PARSE OK, L1_TEST OK.
+
+
+## Cycle 61 - L4, six more callings (laptop, 2026-11-11)
+- Lore first: the old game's nine callings (knight, warden, barbarian, rogue, duelist, ranger, mage, sage,
+  cleric) stay as they are. Six more, built the old way - a KayKit body + a weapon family + an offhand +
+  a stat profile - each with 5e saves, a default weapon kind, one ability Delve reads, and a cloak colour:
+  paladin (Knight, sword + badge shield, STR, saves WIS/CHA; lays on hands when someone is near falling,
+  smites the dead and the lost x2), necromancer (Mage, staff + closed book, INT, INT/WIS; drinks back 30%
+  of what its bolts do), monk (Rogue, quarterstaff or bare wraps - a new "open" family, DEX, STR/DEX;
+  flurry: swings 0.6x the interval for 0.7x the hit; unarmoured defence adds WIS in leather or less),
+  druid (Mage, staff, WIS, INT/WIS; thorns: its bolt hits whatever stands within 2.5 m of the mark at
+  half), warlock (Rogue_Hooded, wand + book, CHA, WIS/CHA; hex: everyone's blows land 25% harder on its
+  mark for 6 s), bard (Rogue, dagger, CHA, DEX/CHA; the whole party +1 to hit while the bard stands).
+- Roster.CASTERS: necromancer, druid and warlock throw bolts from range like the mage, sage and cleric.
+- The calling's colour goes on the cloak AND the hat or hood (the KayKit texture is dropped there so the
+  colour shows true), so two Mage bodies (necromancer, druid) differ face-on.
+- !enlist takes them all (the class list was already data); "Kept by the Scar" now uses each calling's
+  own body. RUNNING.md: the new callings and !forge [kind|list].
+- tools/_l4_test.gd (headless, new): each enlists by chat, two saves, primary rolls best, a weapon of its
+  family, an ability and a cloak; lay on hands, unarmoured defence, smite on the dead only, flurry, hex in
+  the numbers; a party of all six delves 3 floors (home, 13 kills). L4_TEST OK.
+  tools/_l4_shot.gd: renders/cycles/20261111_l4 - looked at: first pass the cloaks came out in the kit's
+  own colours and the staves were tiny; texture dropped on cloak/hat, KayKit staff for tiers 1-3; the
+  back view now reads paladin pale, necromancer black, monk saffron, druid green, warlock violet, bard red.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 427, TWITCH_PARSE OK,
+  L1_TEST OK, L3_TEST OK.

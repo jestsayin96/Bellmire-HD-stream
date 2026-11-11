@@ -52,9 +52,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       helms, chest, boots) using KayKit/Quaternius CC0 meshes; visible on the hero; priced in the shops;
       !forge / !armoury pick from them; drops on deep floors.
       DONE (Cycle 60): 10 weapon kinds x 5 tiers, worn armour, found-only tier 5, !forge <kind>, deep finds; L3_TEST OK.
-- [ ] L4. More classes: from the lore first (it has knight, mage, ranger, barbarian, cleric, rogue, sage,
+- [x] L4. More classes: from the lore first (it has knight, mage, ranger, barbarian, cleric, rogue, sage,
       duelist); add more (e.g. paladin, necromancer, monk, druid, warlock, bard) with 5e-style saves,
       a weapon, a spell or ability, and !enlist support.
+      DONE (Cycle 61): paladin, necromancer, monk, druid, warlock, bard - saves, weapon kind, ability, cloak; L4_TEST OK.
 - [ ] L5. Character species: !enlist <class> <species> (human, elf, dwarf, halfling, orc, ... from the lore)
       with stat bonuses and a visible look (KayKit/Quaternius CC0 bodies, scale, skin tint).
 - [ ] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).

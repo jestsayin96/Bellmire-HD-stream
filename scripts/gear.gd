@@ -164,10 +164,13 @@ const KINDS := {
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
     "axe":        {"family": "axe", "noun": "axe", "kit": [ADV + "axe_1handed.gltf", KIT + "axe_A.gltf", ADV + "axe_2handed.gltf", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
     "mace":       {"family": "axe", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
-    "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", KIT + "staff_A.gltf", KIT + "staff_A.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
     "wand":       {"family": "arcane", "noun": "wand", "kit": [ADV + "wand.gltf", KIT + "wand_A.gltf", ADV + "wand.gltf", KIT + "wand_A.gltf", KIT + "wand_A.gltf"]},
     "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [ADV + "crossbow_1handed.gltf", ADV + "crossbow_1handed.gltf", ADV + "crossbow_2handed.gltf", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
     "bow":        {"family": "ranged", "noun": "bow", "kit": [KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf"]},
+    # L4: the monk's open hand - a quarterstaff, or bare wrapped fists (no mesh)
+    "quarterstaff": {"family": "open", "noun": "quarterstaff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    "wraps":      {"family": "open", "noun": "hand wraps", "bare": true, "kit": ["", "", "", "", ""]},
 }
 
 static func kinds_of(family: String) -> Array:
@@ -332,6 +335,26 @@ const ROLE_CAPE := {
     "washer": Color(0.55, 0.62, 0.70),
 }
 
+## L4: a calling's own cloak colour
+static func _cape_tint(model_root: Node, col: Color) -> void:
+    var ms := _cape_meshes(model_root)
+    # the hat or hood too, so a calling reads from the front
+    var st: Array = [model_root]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and (c as MeshInstance3D).visible and (String(c.name).contains("Hat") or String(c.name).contains("Hood")):
+            ms.append(c)
+        for g in c.get_children():
+            st.append(g)
+    for m in ms:
+        var mi: MeshInstance3D = m
+        for i in range(mi.mesh.get_surface_count()):
+            var src: Material = mi.get_active_material(i)
+            var d: StandardMaterial3D = (src as StandardMaterial3D).duplicate() if src is StandardMaterial3D else StandardMaterial3D.new()
+            d.albedo_color = col
+            d.albedo_texture = null       # the atlas would tint it back to the kit colour
+            mi.set_surface_override_material(i, d)
+
 static func _cape_meshes(model_root: Node) -> Array:
     var out: Array = []
     var st: Array = [model_root]
@@ -369,6 +392,9 @@ static func rank_trim(model_root: Node, rank: int) -> void:
     # L3: a hero being dressed (stashed by Roster.offhand_bone) gets their armour on
     if not _dressing.is_empty():
         dress_armour(model_root, int(_dressing.get("armour", 0)))
+        var cls: Dictionary = Roster.CLASSES.get(String(_dressing.get("class", "")), {})
+        if cls.has("cape"):
+            _cape_tint(model_root, cls["cape"])
         _dressing = {}
     var sk := skeleton(model_root)
     if sk == null or rank <= 0:

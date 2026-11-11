@@ -309,6 +309,8 @@ static func unique_for(floor_no: int, roll: float) -> Dictionary:
         elif cls in ["mage", "sage", "cleric"]:
             body = "Mage"
         u["path"] = ADVC + body + ".glb"
+        if Roster.CLASSES.has(cls):
+            u["path"] = ADVC + String(Roster.CLASSES[cls]["model"])
     return u
 
 ## a unique as a spawnable def: like a lord, scaled to this floor

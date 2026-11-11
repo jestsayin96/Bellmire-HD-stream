@@ -491,8 +491,10 @@ func _fight(delta: float) -> void:
         var hp_pow := roster.heal_power(h)
         if hp_pow > 0.0:
             var low = null
+            # a paladin lays on hands only when someone is close to falling
+            var mark := 0.35 if String(h["class"]) == "paladin" else 0.55
             for o in alive:
-                if float(o["hp"]) < float(o["max"]) * 0.55 and (low == null or float(o["hp"]) < float(low["hp"])):
+                if float(o["hp"]) < float(o["max"]) * mark and (low == null or float(o["hp"]) < float(low["hp"])):
                     low = o
             m["swing"] = float(m["swing"]) - delta * _pace(m)
             if low != null and float(m["swing"]) <= 0.0:
@@ -509,7 +511,8 @@ func _fight(delta: float) -> void:
                 tgt = f
         if tgt == null:
             continue
-        var caster := String(h["class"]) in ["mage", "sage", "cleric"]
+        var caster := String(h["class"]) in Roster.CASTERS
+        var ability := String(Roster.CLASSES[String(h["class"])].get("ability", ""))
         var ranged := caster or String(h["class"]) == "ranger"
         var reach := 9.0 if ranged else REACH + tgt._height() * 0.15
         if bd > reach:
@@ -523,7 +526,7 @@ func _fight(delta: float) -> void:
         m["swing"] = float(m["swing"]) - delta * _pace(m)
         if float(m["swing"]) > 0.0:
             continue
-        m["swing"] = 1.3 + _rng.randf() * 0.4
+        m["swing"] = (1.3 + _rng.randf() * 0.4) * (0.6 if ability == "flurry" else 1.0)
         # 5e: d20 + attack bonus vs the creature's AC (10 + depth band)
         var roll := _d20(-1 if dark else 0)
         var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0) + int((tgt.def.get("ways", {}) as Dictionary).get("guard", 0))
@@ -532,9 +535,10 @@ func _fight(delta: float) -> void:
             Rig.play(b._anim, "Spellcast_Shoot")
         else:
             Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
-        if roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) >= ac):
+        if roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac):
             var dmg := (roster.attack(h) * _rng.randf_range(0.55, 0.95) + kit_bonus) * (2.0 if roll == 20 else 1.0)
-            dmg *= _ward(tgt)
+            dmg *= _ward(tgt) * _ability_mult(ability, tgt)
+            _ability_hit(ability, m, tgt, dmg, foes)
             var was_dead := tgt.state == Monster.S.DEAD
             tgt.hurt(dmg, roll == 20)
             if not was_dead and tgt.state == Monster.S.DEAD:
@@ -866,3 +870,43 @@ func _finish() -> void:
         if town and town.has_method("receive_haul"):
             town.receive_haul(haul)
     ended.emit(out)
+
+## ---- L4: what the newer callings do in a fight
+## a bard standing anywhere in the party: everyone swings truer (+1 to hit)
+func _inspired() -> int:
+    for o in _alive():
+        if String(o["h"]["class"]) == "bard":
+            return 1
+    return 0
+
+func _ability_mult(ability: String, tgt: Monster) -> float:
+    var k := 1.0
+    match ability:
+        "smite":    # a paladin hits the dead twice as hard
+            if String(tgt.def.get("family", "")) in ["undead", "the fallen"]:
+                k = 2.0
+        "flurry":   # a monk hits often and light
+            k = 0.7
+    # a warlock's hex: everyone's blows land harder on the marked thing
+    if float(tgt.get_meta("hex_t", -1.0)) > _t:
+        k *= 1.25
+    return k
+
+func _ability_hit(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
+    match ability:
+        "drain":    # the necromancer drinks back a share of what it spends
+            m["hp"] = minf(float(m["max"]), float(m["hp"]) + dmg * 0.3)
+        "hex":
+            if float(tgt.get_meta("hex_t", -1.0)) <= _t:
+                Spells._burst(tgt.get_parent(), tgt.global_position + Vector3(0, tgt._height() * 0.6, 0), Color(0.6, 0.2, 0.9))
+            tgt.set_meta("hex_t", _t + 6.0)
+        "thorns":   # thorns take whatever stands beside the mark
+            for f in foes:
+                var o: Monster = f
+                if o != tgt and is_instance_valid(o) and o.state != Monster.S.DEAD and _flat(o.global_position, tgt.global_position) < 2.5:
+                    var was := o.state == Monster.S.DEAD
+                    o.hurt(dmg * 0.5)
+                    if not was and o.state == Monster.S.DEAD:
+                        _kills += 1
+                        _on_kill(o)
+                        roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)

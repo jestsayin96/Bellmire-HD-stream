@@ -11,6 +11,8 @@ func _ok(c: bool, what: String) -> void:
 func _initialize() -> void:
 	print("A: every kind has a mesh at every tier, every class has kinds")
 	for k in Gear.KINDS:
+		if bool(Gear.KINDS[k].get("bare", false)):
+			continue
 		for t in range(1, 6):
 			var p := Gear.kind_path(k, t)
 			_ok(ResourceLoader.exists(p), "%s tier %d: %s" % [k, t, p.get_file()])

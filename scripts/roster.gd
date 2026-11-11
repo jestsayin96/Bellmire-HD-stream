@@ -62,7 +62,36 @@ const CLASSES := {
     "cleric":    {"hp": 60, "atk": 12, "spd": 4.1, "model": "Mage.glb",
                   "family": "arcane", "offhand": "shield_round.gltf",
                   "primary": "wis", "blurb": "Keeps the party upright longer than it deserves."},
+    # ---- L4: six more callings, built the old way (a body + a family + an
+    # offhand + a stat profile), each with one thing it does in a fight
+    # (Delve reads "ability") and a cloak colour so it reads at stream distance.
+    "paladin":   {"hp": 70, "atk": 11, "spd": 4.1, "model": "Knight.glb",
+                  "family": "blade", "offhand": "shield_badge_color.gltf", "kind": "sword",
+                  "primary": "str", "ability": "smite", "cape": Color(0.92, 0.86, 0.62),
+                  "blurb": "Lays hands on the fallen, and hits the dead twice as hard."},
+    "necromancer": {"hp": 44, "atk": 17, "spd": 4.0, "model": "Mage.glb",
+                  "family": "arcane", "offhand": "spellbook_closed.gltf", "kind": "staff",
+                  "primary": "int", "ability": "drain", "cape": Color(0.10, 0.16, 0.12),
+                  "blurb": "Reads the scar's own grammar. Drinks back what it spends."},
+    "monk":      {"hp": 58, "atk": 13, "spd": 5.6, "model": "Rogue.glb",
+                  "family": "open", "offhand": "", "kind": "quarterstaff",
+                  "primary": "dex", "ability": "flurry", "cape": Color(0.90, 0.55, 0.18),
+                  "blurb": "Fast hands, no armour, no fear of the dark."},
+    "druid":     {"hp": 54, "atk": 12, "spd": 4.1, "model": "Mage.glb",
+                  "family": "arcane", "offhand": "", "kind": "staff",
+                  "primary": "wis", "ability": "thorns", "cape": Color(0.22, 0.48, 0.20),
+                  "blurb": "Brought the meadow down with them. Thorns take the crowd."},
+    "warlock":   {"hp": 46, "atk": 17, "spd": 4.3, "model": "Rogue_Hooded.glb",
+                  "family": "arcane", "offhand": "spellbook_closed.gltf", "kind": "wand",
+                  "primary": "cha", "ability": "hex", "cape": Color(0.36, 0.14, 0.46),
+                  "blurb": "Struck a bargain with something below. Marks a thing for everyone."},
+    "bard":      {"hp": 52, "atk": 12, "spd": 4.8, "model": "Rogue.glb",
+                  "family": "blade", "offhand": "", "kind": "dagger",
+                  "primary": "cha", "ability": "inspire", "cape": Color(0.70, 0.12, 0.16),
+                  "blurb": "Sings the party steady. Everyone swings truer while they stand."},
 }
+## L4: the casters throw bolts from range; the healers mend
+const CASTERS := ["mage", "sage", "cleric", "necromancer", "druid", "warlock"]
 
 # Only four weapon meshes per family exist, so the top tiers reuse a mesh and
 # separate themselves by SIZE and GLOW instead. A dragontooth blade is the same
@@ -195,6 +224,9 @@ const SAVES := {
     "barbarian": ["str", "con"], "rogue": ["dex", "int"],
     "duelist": ["dex", "cha"], "ranger": ["dex", "str"],
     "mage": ["int", "wis"], "sage": ["wis", "cha"], "cleric": ["wis", "cha"],
+    # L4, as the 5e sheets have them
+    "paladin": ["wis", "cha"], "necromancer": ["int", "wis"], "monk": ["str", "dex"],
+    "druid": ["int", "wis"], "warlock": ["wis", "cha"], "bard": ["dex", "cha"],
 }
 
 # 5E proficiency: +2 at level 1, +1 every four levels after.
@@ -207,6 +239,9 @@ func armour_class(h: Dictionary) -> int:
     var off := String(CLASSES[String(h["class"])].get("offhand", ""))
     if off.begins_with("shield"):
         ac += 2
+    # L4: a monk in no more than leather adds WIS (unarmoured defence)
+    if String(h["class"]) == "monk" and int(h.get("armour", 0)) <= 1:
+        ac += maxi(0, mod(h, "wis"))
     return ac
 
 # d20 + proficiency + the class's own ability, as the attack line on the sheet.
@@ -244,6 +279,9 @@ func speed(h: Dictionary) -> float:
 # WIS drives mending; sages mend harder than clerics
 func heal_power(h: Dictionary) -> float:
     var cls: String = String(h["class"])
+    if cls == "paladin":
+        # L4: lay on hands - a smaller well, drawn on CHA
+        return 5.0 + float(maxi(0, mod(h, "cha"))) * 2.0
     if cls not in ["sage", "cleric"]:
         return 0.0
     var base: float = 11.0 if cls == "sage" else 7.0
@@ -513,7 +551,7 @@ func weapon_mesh(h: Dictionary) -> String:
     if t <= 0:
         return ""
     # L3: a chosen kind (!forge <kind>) has its own mesh per tier
-    var kind := String(h.get("wkind", ""))
+    var kind := String(h.get("wkind", CLASSES[h["class"]].get("kind", "")))
     if Gear.KINDS.has(kind):
         return Gear.kind_path(kind, t)
     var fam: String = String(CLASSES[h["class"]]["family"])
@@ -541,7 +579,7 @@ func weapon_name(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
     if t <= 0:
         return "bare hands"
-    var kind := String(h.get("wkind", ""))
+    var kind := String(h.get("wkind", CLASSES[h["class"]].get("kind", "")))
     var noun: String = String(Gear.KINDS[kind]["noun"]) if Gear.KINDS.has(kind) else String(FAMILY_NOUN.get(String(CLASSES[h["class"]]["family"]), "weapon"))
     return "%s %s" % [WEAPONS[clampi(t, 0, WEAPONS.size() - 1)]["name"], noun]
 

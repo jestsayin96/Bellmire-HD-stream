@@ -385,6 +385,73 @@ func rise() -> void:
     var root := get_tree().current_scene if get_tree().current_scene else get_parent()
     Spells._burst(root, global_position + Vector3(0, 0.2, 0), Color(0.3, 0.9, 0.45))
 
+## ---- L2 lord mechanics, the visible half (Delve does the numbers)
+## a ring of the lord's own colour that rolls out to `r` along the floor
+func nova(r: float) -> void:
+    var col: Color = def.get("aura", Color(1, 0.8, 0.4))
+    _play("cast" if (def.get("anims", {}) as Dictionary).has("cast") else "attack")
+    if _ap:
+        _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    var ring := MeshInstance3D.new()
+    var tm := TorusMesh.new()
+    tm.inner_radius = 0.85
+    tm.outer_radius = 1.0
+    ring.mesh = tm
+    var m := StandardMaterial3D.new()
+    m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    m.albedo_color = Color(col.r, col.g, col.b, 0.85)
+    m.emission_enabled = true
+    m.emission = col
+    m.emission_energy_multiplier = 3.0
+    ring.material_override = m
+    ring.top_level = true
+    root.add_child(ring)
+    ring.global_position = global_position + Vector3(0, 0.25, 0)
+    ring.scale = Vector3(0.5, 1.0, 0.5)
+    var tw := ring.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(ring, "scale", Vector3(r, 2.5, r), 0.6).set_ease(Tween.EASE_OUT)
+    tw.tween_property(m, "albedo_color:a", 0.0, 0.7)
+    tw.chain().tween_callback(ring.queue_free)
+    Spells._burst(root, global_position + Vector3(0, 0.5, 0), col)
+    nova_count += 1
+var nova_count := 0
+
+## crosses the room in one beat onto `to` (Nightwing: too fast to see coming)
+func swoop(to: Vector3) -> void:
+    var dest := to + (global_position - to).normalized() * 1.4
+    dest.y = global_position.y
+    var tw := create_tween()
+    tw.tween_property(self, "global_position", dest, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+    _play("attack")
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    Spells._burst(root, global_position + Vector3(0, 1.0, 0), def.get("aura", Color(0.5, 0.3, 0.9)))
+
+## enraged: the aura and crown burn red and the body swells a little
+var enraged := false
+func enrage() -> void:
+    if enraged:
+        return
+    enraged = true
+    var red := Color(1.0, 0.18, 0.12)
+    def["aura"] = red
+    for c in get_children():
+        if c is MeshInstance3D and (c as MeshInstance3D).material_override is StandardMaterial3D:
+            var mm: StandardMaterial3D = (c as MeshInstance3D).material_override
+            var a := mm.albedo_color.a
+            mm.albedo_color = Color(red.r, red.g, red.b, a)
+            if mm.emission_enabled:
+                mm.emission = red
+        if c is OmniLight3D:
+            (c as OmniLight3D).light_color = red
+    if _body:
+        var tw := create_tween()
+        tw.tween_property(_body, "scale", _body.scale * 1.1, 0.4)
+    var root := get_tree().current_scene if get_tree().current_scene else get_parent()
+    Spells._burst(root, global_position + Vector3(0, _height() * 0.5, 0), red)
+
 ## the scarborn glow never settles: it wanders the hue wheel like the scar's motes
 var _wild_mats: Array = []
 func _tick_wild() -> void:

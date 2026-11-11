@@ -45,8 +45,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
       each with stats, behaviour and a home biome/theme from the lore's bestiary; new strains.
       DONE (Cycle 58): 6 creatures from owned CC0 bodies, ways in a fight, home themes, 2 strains; L1_TEST OK.
-- [ ] L2. More bosses: a set of floor lords and rare uniques (from the lore), each with a mechanic
+- [x] L2. More bosses: a set of floor lords and rare uniques (from the lore), each with a mechanic
       (summons, enrage, area attack), a name card and the boss bar; never two of the same in a row.
+      DONE (Cycle 59): a mechanic for each of the eight lords, five rare uniques (one from the memorial); L2_TEST OK.
 - [ ] L3. More weapons and armour: more tiers and kinds (axes, spears, maces, bows, staves, shields,
       helms, chest, boots) using KayKit/Quaternius CC0 meshes; visible on the hero; priced in the shops;
       !forge / !armoury pick from them; drops on deep floors.

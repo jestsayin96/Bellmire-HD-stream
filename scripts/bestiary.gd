@@ -207,8 +207,12 @@ static func next_boss(floor_no: int) -> Dictionary:
         for k in pool_k:
             _spent.erase(k)
         fresh = pool_k.duplicate()
+        # a fresh bag never opens with the lord that closed the last one
+        if fresh.size() > 1:
+            fresh.erase(_last_lord)
     var pick_k: String = fresh[randi() % fresh.size()]
     _spent.append(pick_k)
+    _last_lord = pick_k
     var out: Dictionary = (BOSS_DEFS[pick_k] as Dictionary).duplicate()
     out["id"] = pick_k
     if pending_title != "":
@@ -216,12 +220,118 @@ static func next_boss(floor_no: int) -> Dictionary:
         out["note"] = "named by the crowd above"
         pending_title = ""
     return out
+static var _last_lord := ""
 
 static func boss_body(b: Dictionary) -> Dictionary:
     var body := String(b.get("body", "warrior"))
     if body == "dragon":
         return DRAGON
+    if NEW_TYPES.has(body):
+        return NEW_TYPES[body]
     return TYPES[body]
+
+## ---- L2: each lord fights the way its canon note says it does. Delve reads
+## these like any creature's ways. nova = a ring of its power on everyone near
+## (slow = the heroes swing at half pace for that long); summon = calls its kind,
+## up to `most`; shed = drops dead men from the harness as its hp falls past each
+## mark; swoop = crosses the room onto the weakest and hits harder; enrage = below
+## `at` of its hp it swings faster and harder; ward = takes that share of damage
+## while anything it called still stands.
+const LORD_WAYS := {
+    "hollow_king":  {"ranged": 6.0, "nova": {"every": 9.0, "r": 6.0, "dmg": 0.6, "line": "Cold fire rolls off the Hollow King."}},
+    "grubmother":   {"summon": {"type": "slimeling", "every": 9.0, "most": 4, "line": "The Grubmother's brood spills out of her."}},
+    "rattling_host":{"shed": {"at": [0.66, 0.33], "type": "bones", "n": 2, "line": "Dead men drop out of the harness."}},
+    "nightwing":    {"swoop": {"every": 7.0, "mult": 1.6}, "summon": {"type": "bat", "every": 14.0, "most": 2, "line": "Bats pour out of the dark around Nightwing."}},
+    "gravewyrm":    {"breath": 4.0, "enrage": {"at": 0.3, "swing": 0.6, "atk": 1.3}},
+    "ossuary_lord": {"summon": {"type": "bones", "every": 12.0, "most": 2, "rise": true, "line": "The Ossuary Lord calls its bones up out of the floor."}, "ward": 0.5},
+    "pale_duchess": {"venom": 4.0, "grudge": true, "enrage": {"at": 0.35, "swing": 0.55, "atk": 1.25}},
+    "mourncoil":    {"breath": 3.0, "nova": {"every": 8.0, "r": 7.0, "dmg": 0.5, "slow": 3.0, "line": "Frost comes off Mourncoil in sheets."}},
+}
+
+## ---- L2: rare uniques. Not lords and never on a lord's floor: a named thing
+## that turns up now and then (UNIQUE_CHANCE of an ordinary floor from floor 2),
+## from a bag, never the same one twice running. Each has a name card, the boss
+## bar and a mechanic. The last is the scar's own: a delver from the memorial,
+## kept below (only once someone has fallen there).
+const UNIQUE_CHANCE := 0.12
+const UNIQUES := {
+    "gnawbone":   {"title": "Gnawbone", "body": "rat", "h": 1.5, "min": 2, "hp": 4.0, "atk": 1.3, "tint": Color(0.78, 0.70, 0.58), "aura": Color(0.85, 0.65, 0.35),
+                   "note": "the rats' queen, fat on what the delvers dropped",
+                   "ways": {"summon": {"type": "rat", "every": 8.0, "most": 4, "line": "Gnawbone's children come squealing."}}},
+    "mother_silk":{"title": "Mother Silk", "body": "spider", "h": 1.6, "min": 3, "hp": 4.0, "atk": 1.3, "tint": Color(0.86, 0.86, 0.92), "aura": Color(0.80, 0.85, 1.0),
+                   "note": "every thread in the dark is hers",
+                   "ways": {"venom": 6.0, "summon": {"type": "spider", "every": 11.0, "most": 3, "line": "Spiders drop from Mother Silk's threads."}}},
+    "weeping_bowman":{"title": "The Weeping Bowman", "body": "bowman", "h": 2.3, "min": 4, "hp": 3.5, "atk": 1.2, "tint": Color(0.62, 0.80, 0.86), "aura": Color(0.45, 0.75, 0.90),
+                   "hand": SKA + "Skeleton_Crossbow.gltf", "note": "it never stops drawing",
+                   "ways": {"ranged": 11.0, "shot": "bolt_bone", "volley": true}},
+    "cinderjack": {"title": "Cinderjack", "body": "imp", "h": 1.9, "min": 6, "hp": 3.5, "atk": 1.4, "tint": Color(1.0, 0.62, 0.38), "aura": Color(1.0, 0.45, 0.15),
+                   "note": "the firepits let him out",
+                   "ways": {"ranged": 7.0, "nova": {"every": 7.5, "r": 5.0, "dmg": 0.55, "line": "Cinderjack goes up like a struck match."}}},
+    "kept":       {"title": "%s, Kept by the Scar", "body": "lost", "h": 2.0, "min": 3, "hp": 4.5, "atk": 1.4, "tint": Color(0.80, 0.86, 0.96), "aura": Color(0.55, 0.70, 1.0),
+                   "hand": ADV + "sword_1handed.gltf", "note": "fell below, and the scar did not let go",
+                   "ways": {"grudge": true, "enrage": {"at": 0.4, "swing": 0.6, "atk": 1.3}}},
+}
+## the memorial (Roster.fallen), set by Delve before each floor is built
+static var memorial: Array = []
+static var _last_unique := ""
+## test hook: only this unique may be drawn
+static var only_unique := ""
+
+static func unique_for(floor_no: int, roll: float) -> Dictionary:
+    if is_boss_floor(floor_no) or floor_no < 2 or roll >= UNIQUE_CHANCE:
+        return {}
+    var below: Array = []
+    for f in memorial:
+        if String((f as Dictionary).get("killed_by", "")) == "the dark below":
+            below.append(f)
+    var keys: Array = []
+    for k in UNIQUES:
+        if only_unique != "" and k != only_unique:
+            continue
+        if floor_no >= int(UNIQUES[k]["min"]) and (k != _last_unique or only_unique != "") and (k != "kept" or not below.is_empty()):
+            keys.append(k)
+    if keys.is_empty():
+        return {}
+    var k: String = keys[randi() % keys.size()]
+    _last_unique = k
+    var u: Dictionary = (UNIQUES[k] as Dictionary).duplicate(true)
+    u["id"] = k
+    if k == "kept":
+        var f: Dictionary = below[randi() % below.size()]
+        u["title"] = String(u["title"]) % String(f["name"])
+        u["note"] = "a %s of the guild who fell below, and the scar did not let go" % String(f.get("class", "delver"))
+        var cls := String(f.get("class", "knight"))
+        var body := "Knight"
+        if cls in ["barbarian", "warden"]:
+            body = "Barbarian"
+        elif cls in ["rogue", "duelist", "ranger"]:
+            body = "Rogue_Hooded"
+        elif cls in ["mage", "sage", "cleric"]:
+            body = "Mage"
+        u["path"] = ADVC + body + ".glb"
+    return u
+
+## a unique as a spawnable def: like a lord, scaled to this floor
+static func unique_def(u: Dictionary, floor_no: int) -> Dictionary:
+    var out: Dictionary = make(String(u["body"]), "plain")
+    out["name"] = u["title"]
+    out["h"] = float(u["h"])
+    out["lift"] = float(out.get("lift", 0.0)) * float(u["h"]) / maxf(0.1, float(def_of(String(u["body"]))["h"]))
+    out["tint"] = u["tint"]
+    out["glow"] = Color(0, 0, 0)
+    out["boss"] = true
+    out["unique"] = true
+    out["id"] = u["id"]
+    out["note"] = u["note"]
+    out["aura"] = u["aura"]
+    if u.has("hand"):
+        out["hand"] = u["hand"]
+    if u.has("path"):
+        out["path"] = u["path"]
+    out["ways"] = (u["ways"] as Dictionary).duplicate(true)
+    out["boss_hp"] = (14.0 + float(floor_no) * 6.0) * float(u["hp"])
+    out["boss_atk"] = (6.0 + float(floor_no) * 2.2) * float(u["atk"])
+    return out
 
 ## which creatures live at which depth (old bands, the new creatures woven in
 ## where they fit: vermin up top, venom in the middle, fiends deep)
@@ -272,6 +382,8 @@ static func make(type_key: String, strain_key := "plain") -> Dictionary:
     if strain_key != "plain" or not out.has("glow"):
         out["glow"] = st["glow"]
     out["wild"] = bool(st.get("wild", false))
+    if not out.has("ways"):
+        out["ways"] = {}
     return out
 
 static func pick(floor_no: int, theme := "") -> Dictionary:
@@ -295,4 +407,6 @@ static func boss_def(b: Dictionary) -> Dictionary:
         out["wglow"] = b.get("glow", 0.0)
     out["boss_hp"] = b["hp"]
     out["boss_atk"] = b["atk"]
+    out["id"] = b.get("id", "")
+    out["ways"] = (LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true)
     return out

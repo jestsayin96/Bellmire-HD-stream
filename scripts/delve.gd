@@ -101,6 +101,7 @@ func _next_floor() -> void:
         dun.queue_free()
     dun = DungeonHD.new()
     dun.floor_no = floor_no
+    Bestiary.memorial = roster.fallen if roster else []
     dun.position = Vector3(float(lane) * 700.0, DELVE_Y, 0)
     add_child(dun)
     if dun.info.is_empty():
@@ -110,7 +111,13 @@ func _next_floor() -> void:
     var i := 0
     for m in _alive():
         var b: HeroBody = m["body"]
-        b.global_position = entry + Vector3(float(i % 3) - 1.0, 0, float(i / 3)) * 1.4
+        var at := entry + Vector3(float(i % 3) - 1.0, 0, float(i / 3)) * 1.4
+        # a big party's back rows can land past the wall by the stairs: on the floor or at the entry
+        if not (dun.info["cells"] as Dictionary).has(_cell_of(at)):
+            at = entry + Vector3(float(i % 3) - 1.0, 0, 0) * 0.5
+        if not (dun.info["cells"] as Dictionary).has(_cell_of(at)):
+            at = entry
+        b.global_position = at
         i += 1
     # monster numbers scale with depth (Bestiary multipliers on a floor base)
     for mon in dun.monsters:
@@ -133,9 +140,10 @@ func _next_floor() -> void:
         var note := String(dun.lord.def.get("note", ""))
         if note != "":
             note = note.substr(0, 1).to_upper() + note.substr(1) + "."
-        _say("%s rises. %s" % [dun.lord.def.get("name", "A lord"), note])
+        var uniq := bool(dun.lord.def.get("unique", false))
+        _say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
         FeedHUD.card_on(town, String(dun.lord.def.get("name", "A lord")),
-            ("Lord of floor %d. %s" % [floor_no, note]).strip_edges(), dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
+            (("A rare thing on floor %d. %s" if uniq else "Lord of floor %d. %s") % [floor_no, note]).strip_edges(), dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
     if not dark and not _warned_low and oil > 0.0 and oil <= float(alive_now):
         _warned_low = true
         _say("The oil is running low.")
@@ -474,6 +482,9 @@ func _fight(delta: float) -> void:
     if alive.is_empty():
         return
     for m in alive:
+        if float(m.get("slow", 0.0)) > 0.0:
+            m["slow"] = float(m["slow"]) - delta
+    for m in alive:
         var b: HeroBody = m["body"]
         var h: Dictionary = m["h"]
         # healers mend whoever is lowest first
@@ -483,7 +494,7 @@ func _fight(delta: float) -> void:
             for o in alive:
                 if float(o["hp"]) < float(o["max"]) * 0.55 and (low == null or float(o["hp"]) < float(low["hp"])):
                     low = o
-            m["swing"] = float(m["swing"]) - delta
+            m["swing"] = float(m["swing"]) - delta * _pace(m)
             if low != null and float(m["swing"]) <= 0.0:
                 m["swing"] = 2.4
                 low["hp"] = minf(float(low["max"]), float(low["hp"]) + hp_pow)
@@ -509,7 +520,7 @@ func _fight(delta: float) -> void:
             Rig.play(b._anim, "Running_A")
             continue
         b.rotation.y = atan2(tgt.global_position.x - b.global_position.x, tgt.global_position.z - b.global_position.z)
-        m["swing"] = float(m["swing"]) - delta
+        m["swing"] = float(m["swing"]) - delta * _pace(m)
         if float(m["swing"]) > 0.0:
             continue
         m["swing"] = 1.3 + _rng.randf() * 0.4
@@ -523,6 +534,7 @@ func _fight(delta: float) -> void:
             Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
         if roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) >= ac):
             var dmg := (roster.attack(h) * _rng.randf_range(0.55, 0.95) + kit_bonus) * (2.0 if roll == 20 else 1.0)
+            dmg *= _ward(tgt)
             var was_dead := tgt.state == Monster.S.DEAD
             tgt.hurt(dmg, roll == 20)
             if not was_dead and tgt.state == Monster.S.DEAD:
@@ -546,6 +558,7 @@ func _fight(delta: float) -> void:
         if near == null:
             continue
         var ways: Dictionary = mon.def.get("ways", {})
+        var nearest := nd
         # a grudge goes for the weakest delver standing, not the nearest
         if ways.has("grudge"):
             for m in alive:
@@ -557,8 +570,10 @@ func _fight(delta: float) -> void:
         if shots > 0.0:
             r = shots
         mon.state = Monster.S.IDLE
-        if ways.has("raise") and nd < 14.0:
+        if ways.has("raise") and nearest < 14.0:
             _raise_tick(mon, int(ways["raise"]), delta)
+        if nearest < 16.0:
+            _lord_tick(mon, ways, alive, near, delta)
         if nd > r:
             _go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7, delta)
             mon._play("walk")
@@ -569,6 +584,11 @@ func _fight(delta: float) -> void:
         if mon._swing > 0.0:
             continue
         mon._swing = 1.8 if not mon.def.get("boss", false) else 1.4
+        var fury := 1.0
+        if mon.enraged:
+            var en: Dictionary = ways.get("enrage", {})
+            mon._swing *= float(en.get("swing", 0.6))
+            fury = float(en.get("atk", 1.3))
         var chest := nb.global_position + Vector3(0, 1.1, 0)
         if ways.has("breath"):
             mon._swing = 2.6
@@ -576,12 +596,14 @@ func _fight(delta: float) -> void:
         elif shots > 0.0:
             mon._swing = 2.2
             mon.shoot(chest)
+            if ways.has("volley"):
+                _volley(mon, alive, near, shots)
         else:
             mon._play("attack")
         var hit := _d20(1 if dark else 0) + 2 + floor_no / 2
         if hit >= roster.armour_class(near["h"]):
             var base := float(mon.def.get("boss_atk", (6.0 + float(floor_no) * 2.2) * float(mon.def.get("atk", 1.0))))
-            var dmg := base * _rng.randf_range(0.6, 1.0)
+            var dmg := base * _rng.randf_range(0.6, 1.0) * fury
             near["hp"] = float(near["hp"]) - dmg
             _hero_hit(near)
             if ways.has("venom") and float(near["hp"]) > 0.0:
@@ -623,39 +645,140 @@ func _on_kill(tgt: Monster) -> void:
             _say("The %s divides." % String(tgt.def.get("name", "ooze")))
 
 func _raise_tick(mon: Monster, most: int, delta: float) -> void:
+    _call_tick(mon, {"type": "minion", "strain": "hollowed", "name": "risen dead", "every": 9.0, "most": most,
+        "rise": true, "line": "A gravecaller raises the dead on floor %d." % floor_no}, delta)
+
+## anything that calls its kind: a gravecaller's dead, the Grubmother's brood,
+## Nightwing's bats, Gnawbone's children. Never more than `most` standing at once.
+func _live_called(mon: Monster) -> Array:
+    var live: Array = []
+    for r in mon.get_meta("risen", []):
+        if is_instance_valid(r) and (r as Monster).state != Monster.S.DEAD:
+            live.append(r)
+    return live
+
+func _call_tick(mon: Monster, spec: Dictionary, delta: float) -> void:
     var t := float(mon.get_meta("raise_t", 4.0)) - delta
     if t > 0.0:
         mon.set_meta("raise_t", t)
         return
-    mon.set_meta("raise_t", 9.0)
-    var risen: Array = mon.get_meta("risen", [])
-    var live: Array = []
-    for r in risen:
-        if is_instance_valid(r) and (r as Monster).state != Monster.S.DEAD:
-            live.append(r)
-    if live.size() >= most:
+    mon.set_meta("raise_t", float(spec.get("every", 9.0)))
+    var live := _live_called(mon)
+    if live.size() >= int(spec.get("most", 2)):
         mon.set_meta("risen", live)
         return
-    mon._play("summon")
+    mon._play("summon" if (mon.def.get("anims", {}) as Dictionary).has("summon") else "attack")
     var a := _rng.randf() * TAU
-    var d := Bestiary.make("minion", "hollowed")
-    d["name"] = "risen dead"
-    d["anims"] = Bestiary.A_SKL
-    d["raised"] = true
-    var m := _spawn_on_floor(d, mon.global_position + Vector3(cos(a), 0, sin(a)) * 1.6)
-    m.call_deferred("rise")
+    var m := _call_one(mon, spec, mon.global_position + Vector3(cos(a), 0, sin(a)) * (1.6 + mon._height() * 0.2))
     live.append(m)
     mon.set_meta("risen", live)
-    if not bool(mon.get_meta("said", false)):
+    if not bool(mon.get_meta("said", false)) and String(spec.get("line", "")) != "":
         mon.set_meta("said", true)
-        _say("A gravecaller raises the dead on floor %d." % floor_no)
+        _say(String(spec["line"]))
+
+func _call_one(mon: Monster, spec: Dictionary, at: Vector3) -> Monster:
+    var d := Bestiary.make(String(spec["type"]), String(spec.get("strain", "plain")))
+    if spec.has("name"):
+        d["name"] = spec["name"]
+    if bool(spec.get("rise", false)):
+        d["anims"] = Bestiary.A_SKL if String(d["path"]).contains("kaykit") else d["anims"]
+    d["raised"] = true
+    (d["ways"] as Dictionary).erase("splits")    # a called thing does not multiply again
+    var m := _spawn_on_floor(d, at)
+    if bool(spec.get("rise", false)):
+        m.call_deferred("rise")
+    return m
+
+## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
+func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:
+    if ways.has("summon"):
+        _call_tick(mon, ways["summon"], delta)
+    if ways.has("nova"):
+        var nv: Dictionary = ways["nova"]
+        var t := float(mon.get_meta("nova_t", float(nv.get("every", 9.0)) * 0.6)) - delta
+        mon.set_meta("nova_t", t)
+        if t <= 0.0:
+            mon.set_meta("nova_t", float(nv.get("every", 9.0)))
+            var rr := float(nv.get("r", 6.0))
+            mon.nova(rr)
+            if not bool(mon.get_meta("nova_said", false)) and String(nv.get("line", "")) != "":
+                mon.set_meta("nova_said", true)
+                _say(String(nv["line"]))
+            var base := float(mon.def.get("boss_atk", 10.0)) * float(nv.get("dmg", 0.5))
+            for o in alive:
+                if float(o["hp"]) > 0.0 and _flat((o["body"] as Node3D).global_position, mon.global_position) < rr:
+                    # a DEX save halves it (5e area rule)
+                    var save := _rng.randi_range(1, 20) + roster.save_bonus(o["h"], "dex")
+                    o["hp"] = float(o["hp"]) - base * (0.5 if save >= 12 + floor_no / 4 else 1.0)
+                    if nv.has("slow"):
+                        o["slow"] = float(nv["slow"])
+                    _hero_hit(o)
+    if ways.has("shed"):
+        var sh: Dictionary = ways["shed"]
+        var marks: Array = sh["at"]
+        var done := int(mon.get_meta("shed_n", 0))
+        if done < marks.size() and mon.hp / maxf(1.0, mon.max_hp) <= float(marks[done]):
+            mon.set_meta("shed_n", done + 1)
+            for k in range(int(sh.get("n", 2))):
+                var a := _rng.randf() * TAU
+                var m := _call_one(mon, {"type": String(sh["type"]), "rise": true},
+                    mon.global_position + Vector3(cos(a), 0, sin(a)) * (1.8 + mon._height() * 0.2))
+                var live := _live_called(mon)
+                live.append(m)
+                mon.set_meta("risen", live)
+            _say(String(sh.get("line", "")))
+    if ways.has("swoop"):
+        var sw: Dictionary = ways["swoop"]
+        var t := float(mon.get_meta("swoop_t", float(sw.get("every", 7.0)))) - delta
+        mon.set_meta("swoop_t", t)
+        if t <= 0.0:
+            mon.set_meta("swoop_t", float(sw.get("every", 7.0)))
+            var weak: Dictionary = near
+            for o in alive:
+                if float(o["hp"]) > 0.0 and float(o["hp"]) / float(o["max"]) < float(weak["hp"]) / float(weak["max"]):
+                    weak = o
+            mon.swoop((weak["body"] as Node3D).global_position)
+            if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(weak["h"]):
+                weak["hp"] = float(weak["hp"]) - float(mon.def.get("boss_atk", 10.0)) * float(sw.get("mult", 1.5)) * _rng.randf_range(0.7, 1.0)
+                _hero_hit(weak)
+    if ways.has("enrage") and not mon.enraged:
+        if mon.hp / maxf(1.0, mon.max_hp) <= float((ways["enrage"] as Dictionary).get("at", 0.3)):
+            mon.enrage()
+            _say("%s is enraged." % String(mon.def.get("name", "It")))
+            FeedHUD.card_on(town, String(mon.def.get("name", "It")), "Enraged.", Color(1.0, 0.25, 0.15))
+
+## a lord warded by what it called takes only that share while any of it stands
+func _ward(tgt: Monster) -> float:
+    var ways: Dictionary = tgt.def.get("ways", {})
+    if ways.has("ward") and not _live_called(tgt).is_empty():
+        return float(ways["ward"])
+    return 1.0
+
+## frost and the like: a slowed hero swings at half pace
+func _pace(m: Dictionary) -> float:
+    return 0.5 if float(m.get("slow", 0.0)) > 0.0 else 1.0
+
+## the Weeping Bowman looses at everyone in reach, not only its mark
+func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void:
+    var base := float(mon.def.get("boss_atk", 10.0)) * 0.55
+    for o in alive:
+        if o == near or float(o["hp"]) <= 0.0:
+            continue
+        var ob: Node3D = o["body"]
+        if _flat(ob.global_position, mon.global_position) > reach:
+            continue
+        mon.shoot(ob.global_position + Vector3(0, 1.1, 0))
+        if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(o["h"]):
+            o["hp"] = float(o["hp"]) - base * _rng.randf_range(0.6, 1.0)
+            _hero_hit(o)
 
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
 ## brought it down; anything else found belongs to whoever prised it open, and
 ## searching costs half a flask. Materials go home to the town.
 func _loot(alive: Array) -> void:
     var boss := dun.lord != null
-    var found := int(float(floor_no) * 11.0 * (3.0 if boss else 1.0) * _rng.randf_range(0.85, 1.35))
+    var uniq := boss and bool(dun.lord.def.get("unique", false))
+    var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * _rng.randf_range(0.85, 1.35))
     Sfx.play("coin", -4.0)
     if boss:
         var share := int(float(found) / float(alive.size()))
@@ -678,7 +801,7 @@ func _loot(alive: Array) -> void:
     # renown (old rule): a floor cleared +1, a lord slain +6
     var eco = town.get("economy") if town else null
     if eco:
-        eco.renown += 6 if boss else 1
+        eco.renown += (3 if uniq else 6) if boss else 1
     haul["ore"] += floor_no * 0.6
     haul["stone"] += floor_no * 0.45
     if _rng.randf() < 0.32 + floor_no * 0.03:

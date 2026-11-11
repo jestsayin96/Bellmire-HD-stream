@@ -491,3 +491,39 @@ Town
   which refused every download today ("quota exceeded"). Worth a retry; they would slot in as more bodies.
 - Checks: parse 0 script errors (the 3 old 'material is null' lines), _delve_test (DELVE_OIL=1) ENDED all
   four home, _offfloor 0 of 434, TWITCH_PARSE OK.
+
+
+## Cycle 59 - L2, lords with mechanics and rare uniques (laptop, 2026-11-11)
+- Lore: the eight lords stay canon (names, titles, notes, floors ending 5 / every 10th, the two bags). Each
+  now fights the way its own note says (Bestiary.LORD_WAYS, read by Delve like any creature's ways):
+  The Hollow King, "wreathed in cold fire" - casts from 6 m and rolls a ring of cold fire (6 m, DEX save
+  halves). The Grubmother, "vast, slow, and patient" - broods slimelings, up to 4. The Rattling Host, "a
+  hundred dead men in one harness" - drops two dead men at 2/3 and at 1/3 of its hp. Nightwing, "too fast to
+  see coming" - swoops across the room onto the weakest (x1.6) and calls bats. The Gravewyrm - breath that
+  splashes 4 m, enraged under 30%. The Ossuary Lord, "it does not hurry" - calls its bones up out of the
+  floor and takes half damage while any stand. The Pale Duchess, "she opens throats" - bleeding cuts, goes
+  for the weakest, enraged under 35%. Mourncoil, "frost comes off it in sheets" - breath, and sheets of frost
+  that slow the delvers' swings to half for 3 s. Mechanics start when a delver is within 16 m.
+- Enraged: aura, ring, crown and light go red, the body swells a tenth, a Chronicle line and a red card.
+- Never two of the same lord in a row: a fresh bag never opens with the lord that closed the last.
+- Rare uniques (Bestiary.UNIQUES): on an ordinary floor from floor 2, 12% of the time, from a bag, never the
+  same twice running. Each gets the name card ("A rare thing on floor N."), the boss bar and the director,
+  a mechanic, two-thirds of a lord's hoard and +3 renown. Gnawbone (the rats' queen; calls rats), Mother
+  Silk (venom, calls spiders), The Weeping Bowman (volleys at everyone in reach), Cinderjack (an imp the
+  firepits let out; a fire ring), and "<name>, Kept by the Scar": a hero from the memorial who fell below,
+  in their class's body, with a grudge and an enrage. Only once someone has fallen down there.
+- Fixes found on the way: a creature with a grudge measured its 16 m mechanic range to its far-off mark
+  instead of the nearest delver (mechanics stalled); a called slimeling had no ways entry (script error);
+  the 7th and 8th heroes of a big party were set down past the wall at a new floor's entry (the off-floor
+  samples since L1) - they now land on the floor.
+- tools/_l2_test.gd (headless, new): 60 lord draws never repeat back to back, all eight drawn, each has a
+  mechanic; uniques never on a lord floor, never twice running, all five turn up, the memorial names the
+  kept one; then all 13 fought in real delves - each one holds its floor, the boss bar sees it, and every
+  mechanic fires (summon, nova, shed, swoop, enrage, ward, breath, volley). L2_TEST OK.
+  tools/_l2_shot.gd (windowed, new; L2_WHO=<lord or unique>): renders/cycles/20261111_l2 - looked at the
+  Hollow King's card and his cold-fire ring with the bar, the Grubmother's brood line in the Chronicle,
+  Wren Kept by the Scar with its card line and bar.
+- For whoever owns boss_bar.gd (on neither list): its subtitle is hardcoded "Lord of floor N", so a unique
+  reads "Lord of floor 7". A one-line change there could say "on floor N" when lord.def.unique is true.
+- Checks: parse 0 script errors, _delve_test (DELVE_OIL=1) ENDED all four home, _offfloor 0 of 444-587 in
+  four runs (after the entry fix), TWITCH_PARSE OK, L1_TEST OK.

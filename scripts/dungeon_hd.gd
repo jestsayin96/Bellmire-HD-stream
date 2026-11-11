@@ -11,6 +11,8 @@ var info: Dictionary = {}
 var monsters: Array = []
 var lord: Monster = null
 var _rng := RandomNumberGenerator.new()
+## test hook: a roll below Bestiary.UNIQUE_CHANCE forces a unique (negative = roll)
+static var force_unique := -1.0
 
 ## HD: Fantasy Props MegaKit pieces by theme, [asset, obstacle radius]. Each
 ## stands on its own open cell and is registered as an obstacle like the rest.
@@ -214,11 +216,14 @@ func _people() -> void:
             root.add_child(m)
             monsters.append(m)
             placed += 1
-    if bool(info.get("boss", false)):
-        var b := Bestiary.next_boss(floor_no)
-        if not b.is_empty():
+    # L2: now and then a rare unique holds an ordinary floor the way a lord holds
+    # its own (Bestiary.unique_for; never two of the same running)
+    var u := {} if bool(info.get("boss", false)) else Bestiary.unique_for(floor_no, force_unique if force_unique >= 0.0 else randf())
+    if bool(info.get("boss", false)) or not u.is_empty():
+        var b := Bestiary.next_boss(floor_no) if u.is_empty() else {}
+        if not b.is_empty() or not u.is_empty():
             lord = Monster.new()
-            lord.def = Bestiary.boss_def(b)
+            lord.def = Bestiary.boss_def(b) if u.is_empty() else Bestiary.unique_def(u, floor_no)
             lord.state = Monster.S.IDLE
             # the lord holds the open interior cell farthest from where the party
             # comes in - never the stairs, never a corridor

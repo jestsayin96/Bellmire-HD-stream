@@ -38,7 +38,7 @@ func _unhandled_input(ev: InputEvent) -> void:
             if eye and eye._layer:
                 eye._layer.visible = not eye._layer.visible
             for c in town.get_children():
-                if c is FeedHUD:
+                if c is FeedHUD or c is LeaderboardPanel:
                     (c as CanvasLayer).visible = not (c as CanvasLayer).visible
             get_viewport().set_input_as_handled()
             return

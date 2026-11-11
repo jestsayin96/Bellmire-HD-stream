@@ -31,6 +31,7 @@ var _help: Label
 var _speed_lb: Label
 var _chat: LineEdit
 var _layer: CanvasLayer
+var party_frames: PartyFrames
 
 func setup(t: Node3D) -> void:
 	town = t
@@ -75,6 +76,10 @@ func setup(t: Node3D) -> void:
 	_chat.text_submitted.connect(_send_chat)
 	_layer.add_child(_chat)
 	_update_speed_label()
+	# party frames: a compact column, left edge, while any delve runs
+	party_frames = PartyFrames.new()
+	_layer.add_child(party_frames)
+	party_frames.setup(t)
 
 	director = AutoDirector.new()
 	add_child(director)

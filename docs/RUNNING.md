@@ -20,6 +20,7 @@
 | [ and ] | game speed 1x, 2x, 4x, 8x |
 | Enter | type a chat command as yourself ("MrE"), e.g. `!enlist knight`, `!delve`, `!fish`; Esc closes |
 | H | hide / show the key help |
+| (while a delve runs) | party frames on the left: each delver's HP, the floor, the party's oil |
 
 1. Godot **4.7.2** lives at `D:\1game\Godot_v4.7.2-stable_win64.exe`
    (the `_console.exe` beside it prints the log to a console window).

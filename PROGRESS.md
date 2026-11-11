@@ -317,3 +317,24 @@ Town
   quiet shots move on after 22 s. While on: no selection ring, no unit frame.
 - tools/_director_test.gd: real town, 3 viewer knights, director at 4x: cuts hero -> catch -> hero ->
   catch, frames in renders/cycles/20261111_director. 0 script errors.
+
+
+## Cycle 50 - the Guild Roll panel (2026-11-11)
+- scripts/leaderboard_panel.gd (LeaderboardPanel): parchment panel top-right, the roster's standing
+  board (top 10, top three in gold, the dead marked +) and the last three of the fallen. Refreshes every
+  5 s; L toggles; the director's F10 hides it with the rest. Started next to TwitchChat (Play runs only).
+- tools/_board_test.gd: renders/cycles/20261111_board. 0 script errors.
+- docs/FINISH_PLAN.md + docs/RUN_LOCK.txt: the deadline checklist the scheduled build runs work through.
+
+
+## Cycle 51 - party frames (2026-11-11)
+- scripts/party_frames.gd (PartyFrames): WoW-style column on the left edge, above the Chronicle, shown
+  only while a delve runs. One dark gold-edged block per delve: "Delvers / The town's band · floor N"
+  and the party's oil (amber when low, red "no oil - dark"); one HP bar per delver (green/amber/red),
+  name gold for viewers' heroes, silver for the town's band, greyed "+ name / fallen" for the dead;
+  up to 8 rows then "+N more". Refreshes every 0.4 s real time. Lives in the RtsCamera layer, so
+  F10 hides it with the rest.
+- tools/_party_test.gd: real town, 3 viewer knights + the band; frames hidden with no delve, then one
+  row per delver with oil and floor: PARTY_TEST OK. Renders renders/cycles/20261111_party.
+- Note: 12 'Parameter "material" is null' engine errors during the delve render (not script errors,
+  not from this change) - worth a look.

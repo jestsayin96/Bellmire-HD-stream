@@ -296,6 +296,9 @@ func _ready() -> void:
         tw.name = "TwitchChat"
         add_child(tw)
         tw.call_deferred("setup", self)
+        var board := LeaderboardPanel.new()
+        add_child(board)
+        board.call_deferred("setup", roster)
     call_deferred("_stock_piles")
     roster.load_all() if roster and roster.has_method("load_all") else null
     var hud := FeedHUD.new()

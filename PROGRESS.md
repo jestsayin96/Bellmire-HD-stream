@@ -690,3 +690,20 @@ Town
   - looked at: the Rattling Host with a fire burst at its feet, bolts flat from the casters, bar steady.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L1, L4,
   L5 OK.
+
+
+## Cycle 64 - L7, the soak with the new content (laptop, 2026-11-11)
+- tools/_soak_l7.gd (new, from _soak.gd): six fake viewers on the new callings and peoples - dwarf paladin,
+  scarkin necromancer, halfling monk, elf druid, orc warlock, human bard - forging their own kinds (spear,
+  wand, wraps, staff, staff, sword); also counts finds, uniques, lords and enrages. Window, director on, 4x.
+- Run 1 got a window close request at 7.75 min (not from the tool); run 2, after the D2 laptop fix, ran the
+  full 30 wall minutes = 68 valley days: 0 script errors; memory flat 470-527 MB; 24 delves in, 23 home, 0
+  wipes; 31 lords risen (5 enraged), 14 rare uniques, 10 deep-floor gear finds; 7 viewer deaths, 6 rerolls;
+  39 raids driven off; the director cut to lords 45 times, fights 56, raids 45. Frames
+  renders/cycles/20261111_l7_soak - looked at: the band splitting the Rattling Host's hoard below; the Pale
+  Duchess's red "Enraged." card while the camera follows a viewer on the square; nothing broken.
+- Not mine, for the record: FPS here (this laptop's GPU) slid 35 -> 26 as settlers grew the town 148 -> 214
+  (the D7 issue). Every minute has one ~1.5 s frame - the same before L1 (measured headless, old scripts
+  1.46 s vs now 1.43-1.69 s), so it predates this work (likely a floor being built in one frame). Only 3
+  fishing trips were ordered in 30 min and no catch line reached the Chronicle.
+- L6 stays open: no new CC0 character bodies are reachable from here (see WORK_PLAN).

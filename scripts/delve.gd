@@ -413,6 +413,25 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
                 p = slide
             else:
                 p = n.global_position       # hold rather than go through stone
+    # a creature has a body, not a point: it keeps its own half-width off any
+    # wall (big lords and wide beasts were walking half into the stone)
+    if n is Monster and dun and dun.info.has("cells"):
+        var rad := float(n.get_meta("rad", -1.0))
+        if rad < 0.0:
+            rad = clampf((n as Monster)._height() * 0.2, 0.3, 1.8)
+            n.set_meta("rad", rad)
+        var G: float = dun.info["grid"]
+        var cl: Dictionary = dun.info["cells"]
+        var cc := _cell_of(p)
+        if cl.has(cc):
+            var ctr := _cell_world(cc)
+            for dir: Vector3 in [Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)]:
+                if cl.has(cc + Vector2i(int(dir.x), int(dir.z))):
+                    continue
+                var wall: float = (ctr + dir * G * 0.5).dot(dir)
+                var over: float = (p + dir * minf(rad, G * 0.5 - 0.05)).dot(dir) - wall
+                if over > 0.0:
+                    p -= dir * over
     p.y = n.global_position.y
     # last guard: a step that would end beyond the walls is not taken
     if dun and dun.info.has("cells") and not (dun.info["cells"] as Dictionary).has(_cell_of(p)) \
@@ -604,6 +623,9 @@ func _fight(delta: float) -> void:
         if nearest < 16.0:
             _lord_tick(mon, ways, alive, near, delta)
         if nd > r:
+            # a creature mid-swing, mid-rise or reeling from a hit stands until it is done - no gliding
+            if mon.busy():
+                continue
             _go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon), delta)
             mon._play("walk")
             continue
@@ -768,7 +790,12 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
             for o in alive:
                 if float(o["hp"]) > 0.0 and float(o["hp"]) / float(o["max"]) < float(weak["hp"]) / float(weak["max"]):
                     weak = o
-            mon.swoop((weak["body"] as Node3D).global_position)
+            # the swoop lands on the floor beside its mark, never in the wall behind it
+            var wp: Vector3 = (weak["body"] as Node3D).global_position
+            var land := wp + (mon.global_position - wp).normalized() * 1.4
+            if not (dun.info["cells"] as Dictionary).has(_cell_of(land)):
+                land = wp
+            mon.swoop(land, true)
             if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(weak["h"]):
                 weak["hp"] = float(weak["hp"]) - _soak(weak, _mdice(float(mon.def.get("boss_atk", 10.0)) * float(sw.get("mult", 1.5)), false))
                 _hero_hit(weak)

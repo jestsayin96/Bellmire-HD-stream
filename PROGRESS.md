@@ -855,3 +855,29 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   tools/_l9_shot.gd: renders/cycles/20261111_l9 - looked at: Gnawbone with the misfire, the brood and the 20 lines.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 453, TWITCH_PARSE OK, L1, L3, L4,
   L5, L8 OK. (The town side - fishing, the town's work - is the desktop's part of the rule.)
+
+
+## Cycle 68 - monsters walk and swing again (laptop, 2026-11-11, urgent from the live stream)
+- Mr. E saw it live: creatures and lords glided along the floor and never swung. tools/_mon_anims.gd (new) spawns
+  every def - all 21 creatures, the eight lords, the five uniques - and reports model, AnimationPlayer, its list,
+  and which of idle/walk/run/attack/cast/hit/die/rise exist. Every def HAD its names (34 of 34 idle+walk+attack).
+  Then it watches a real fight: walking skeletons showed their walk on 0 of 821 moving frames, and nothing was
+  ever seen swinging. The cause was in Monster, not the assets: Delve drives each creature (state IDLE, then
+  _play("walk") / _play("attack")), but Monster._process replayed "idle" every frame in state IDLE - so every
+  walk and swing was undone the next frame and the body slid along in a frozen blend.
+- monster.gd: outside calls go through _play (stamps the time); the body's own idle only plays when nobody has
+  driven it for 0.3 s; a one-shot (attack, cast, hit, summon, rise) owns the body until it ends (only death
+  cuts it short), so a swing finishes. busy() says so, and Delve no longer walks a creature mid-swing, mid-rise
+  or reeling (the raised dead slid while climbing out of the floor).
+- Walls and props: creature centres were never in a prop or off the floor (MON_INPROP 0 of 315 in three runs
+  before the fix), but a creature was moved as a point - a lord's or a wide beast's body hung half into the wall
+  beside it. Delve._step now keeps a creature its own half-width (height x 0.2, 0.3-1.8 m) off any wall cell.
+  Nightwing's swoop lands on the floor beside its mark, never in the wall behind it.
+- tools/_offfloor.gd also counts monsters inside props (MON_INPROP) now.
+- Checks: _mon_anims MON_ANIMS OK on floor 5 and floor 8 (every def idle+walk+attack; every moving creature plays
+  its walk, e.g. risen bones 1373 of 1373 frames; every creature seen swinging); _offfloor 0 of 486, INPROP 0,
+  MON_INPROP 0 of 110; _delve_test ENDED all home; TWITCH_PARSE OK; L1 (twice), L2, L8, L9, D2_DELVE OK.
+- Render renders/cycles/20261111_monanims (tools/_mon_fight_shot.gd, new): the real town's light, floor 5, the
+  Rattling Host with a bone bowman, a sentinel and a spider called beside it; frames taken only while the lord
+  is playing its attack - looked at: the Host's axe raised high over the knight, the bowman and sentinel by it.
+- Mr. E's other note (the sage's scar check on WIS) was already done in Cycle 67.

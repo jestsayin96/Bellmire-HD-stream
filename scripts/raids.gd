@@ -18,8 +18,17 @@ class_name Raids
 ##    ("A building is burning!"); townsfolk raise the first ruin again every
 ##    22 s for 12 wood + 8 stone;
 ##  - "The attack is driven off. The gates hold." when the last one falls.
+## Bellmire HD balance (cycle 55):
+##  - a green hero (under GREEN_BELOW) does not charge the raiders: they hold
+##    the market square with the townsfolk behind them and only fight what
+##    comes within arm's reach - until raiders are inside the walls (the town
+##    is breached), then everyone fights;
+##  - a hero's first fall in a raid while still green is a grace, once ever:
+##    knocked senseless, out of the fight, up again when the raid is over.
 
 const RAIDS_FROM_LEVEL := 3
+const GREEN_BELOW := 3           # heroes under this level hang back
+const HOLD_REACH := 9.0          # a hanging-back hero fights only this close
 const SKELETONS := ["warrior", "cutpurse", "minion"]
 var town: Node3D
 var economy: Economy
@@ -33,6 +42,7 @@ var _fighters := {}              # defender node -> {hp, max, atk, ac, to_hit, s
 var ruins: Array = []            # {node, pos, debris}
 var _slow := 0.0
 var force_level := -1            # test hook
+var breached := false            # raiders are inside the walls
 
 func _level() -> int:
     return force_level if force_level > 0 else economy.town_level
@@ -111,6 +121,7 @@ func _defenders() -> Array:
                 var h: Dictionary = r.get_hero((p as HeroBody).user_id)
                 st.merge({"hp": r.max_hp(h), "max": r.max_hp(h), "atk": r.attack(h), "ac": r.armour_class(h),
                           "to_hit": r.attack_bonus(h), "speed": r.speed(h)})
+                st["green"] = int(h.get("level", 1)) < GREEN_BELOW
             elif role == "guard":
                 st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4})
             else:
@@ -167,6 +178,7 @@ func _process(delta: float) -> void:
         if _live:
             _live = false
             _breach = 0.0
+            breached = false
             _say("The attack is driven off. The gates hold.")
         _stand_down(delta)
         return
@@ -178,6 +190,7 @@ func _process(delta: float) -> void:
     for r in raiders:
         if _inside_walls((r["node"] as Node3D).global_position):
             inside += 1
+    breached = inside > 0
     if inside > 0:
         _breach -= delta
         if _breach <= 0.0:
@@ -197,11 +210,17 @@ func _process(delta: float) -> void:
         var st0: Dictionary = _fighters[dd]
         HealthBar3D.on(dd, 2.05, false).set_hp(float(st0["hp"]), float(st0["max"]), st0["target"] != null)
     # defenders
+    var hold_i := 0
     for d in defs:
         var st: Dictionary = _fighters[d]
+        if st.get("ko", false):
+            continue
         var tg = st["target"]
         if tg == null or not raiders.has(tg):
             st["target"] = null
+            if _hangs_back(st):
+                _hold_square(d, st, centre, hold_i, delta)
+                hold_i += 1
             continue
         (d as Townsfolk).stay = true
         _engage(d, st, tg, delta, true)
@@ -222,6 +241,23 @@ func _process(delta: float) -> void:
 func _targets(defs: Array) -> void:
     for d in defs:
         var st: Dictionary = _fighters[d]
+        if st.get("ko", false):
+            st["target"] = null
+            continue
+        if _hangs_back(st):
+            # a green hero keeps the square: only what comes to them
+            var near = st["target"] if raiders.has(st["target"]) else null
+            if near != null and _flat((near["node"] as Node3D).global_position, (d as Node3D).global_position) > HOLD_REACH * 1.5:
+                near = null
+            if near == null:
+                var nd := HOLD_REACH
+                for r in raiders:
+                    var dd := _flat((r["node"] as Node3D).global_position, (d as Node3D).global_position)
+                    if dd < nd:
+                        nd = dd
+                        near = r
+            st["target"] = near
+            continue
         if st["target"] == null or not raiders.has(st["target"]):
             # The old 70 m reached every guard in the little hex town (they
             # mustered at one barracks). Bellmire HD posts its guards at gates
@@ -241,11 +277,30 @@ func _targets(defs: Array) -> void:
             var best2 = null
             var bd2 := 26.0
             for d in defs:
+                if _fighters[d].get("ko", false):
+                    continue
                 var dist2 := _flat((d as Node3D).global_position, (r["node"] as Node3D).global_position)
                 if dist2 < bd2:
                     bd2 = dist2
                     best2 = d
             r["target"] = best2
+
+## a green hero hangs back unless the town is breached
+func _hangs_back(st: Dictionary) -> bool:
+    return bool(st.get("green", false)) and not breached
+
+## a green hero's place: a ring on the market square, facing out
+func _hold_square(d: Node3D, st: Dictionary, centre: Vector3, i: int, delta: float) -> void:
+    (d as Townsfolk).stay = true
+    var a := float(i) * 1.3 + 0.4
+    var spot := centre + Vector3(sin(a), 0, cos(a)) * (5.0 + float(i % 3) * 1.6)
+    if _flat(d.global_position, spot) > 0.8:
+        _step(d, spot, float(st["speed"]), delta)
+        _anim(d, "run")
+        return
+    var out := spot - centre
+    d.rotation.y = atan2(out.x, out.z)
+    _anim(d, "idle")
 
 ## a fight between `me` (stats `st`) and `tg` - a raider dict (for a defender)
 ## or a defender node (for a raider)
@@ -308,6 +363,20 @@ func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
             _say("%s goes down and claws back up. (CON save %d)" % [(n as Townsfolk).person_name, roll])
             return
         _say("%s fails the save. (CON %d)" % [(n as Townsfolk).person_name, roll])
+    # the grace: a green hero's first fall is a knock-out, once ever
+    if n is HeroBody:
+        var rg: Roster = (n as HeroBody).roster
+        var hg := rg.get_hero((n as HeroBody).user_id)
+        if int(hg.get("level", 1)) < GREEN_BELOW and not bool(hg.get("graced", false)):
+            hg["graced"] = true
+            st["ko"] = true
+            st["hp"] = 0.0
+            st["target"] = null
+            (n as Townsfolk).stay = true
+            _anim(n, "die")
+            rg.changed.emit((n as HeroBody).user_id)
+            _say("%s is knocked senseless, but lives. The guild's grace - once." % (n as Townsfolk).person_name)
+            return
     _fighters.erase(n)
     _anim(n, "die")
     (town.get("people") as Array).erase(n)
@@ -353,6 +422,10 @@ func _stand_down(delta: float) -> void:
             _fighters.erase(d)
             continue
         var st: Dictionary = _fighters[d]
+        if st.get("ko", false):
+            st.erase("ko")
+            st["hp"] = 1.0
+            _say("%s comes round." % (d as Townsfolk).person_name)
         var post: Vector3 = st["post"]
         if _flat((d as Node3D).global_position, post) > 0.6:
             _step(d, post, float(st["speed"]), delta)

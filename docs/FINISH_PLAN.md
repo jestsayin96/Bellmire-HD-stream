@@ -28,7 +28,7 @@ Scheduled build runs work through this list top to bottom. Each run:
         rooms, registered as obstacles). Re-run tools/_offfloor.gd and tools/_townwalk.gd: no clipping regressions.
 - [x] 5. (DONE Nov 11, cycle 54: lords 1.2x taller, Chronicle name card on rise and fall, scripts/boss_bar.gd top centre, director cuts to the lord at 100; tools/_boss_test.gd BOSS_TEST OK; renders/cycles/20261111_boss) Bosses: from the original's lore (bestiary/floor lords) — make lord floors feel like events: bigger
         lord, a name card in the Chronicle, a boss bar at the top while the fight lasts, the director at 100.
-- [ ] 6. Raid balance: heroes under level 3 hang back (guard the square) unless the town is breached;
+- [x] 6. (DONE Nov 11, cycle 55: raids.gd green heroes (<L3) hold the market square until breached, one-time knock-out grace; tools/_raid_balance_test.gd RAIDBAL_TEST OK; renders/cycles/20261111_raidbal) Raid balance: heroes under level 3 hang back (guard the square) unless the town is breached;
         first death of a fresh hero gets a grace (knocked out, not killed) once.
 - [ ] 7. Fixes: follow camera never inside walls (raycast pull-in); soft fill light on the followed hero at night;
         offset health bars in tight parties.

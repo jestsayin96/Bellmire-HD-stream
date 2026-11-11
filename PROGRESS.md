@@ -404,3 +404,21 @@ Town
   bar clear of the help, camera on the lord with the selection ring.
 - _delve_test (DELVE_OIL=1) ENDED, _offfloor 0 of 1174, TWITCH_PARSE OK, PARTY_TEST OK, parse check
   0 script errors (the 3 old 'material is null' engine lines remain).
+
+
+## Cycle 55 - raid balance (2026-11-11)
+- raids.gd (backup raids.gd.bak_c55): GREEN_BELOW 3. A hero under level 3 no longer charges the raiders
+  across the valley: while no raider is inside the walls they hold the market square (a ring 5-8 m out,
+  facing outward) and only take a raider within HOLD_REACH 9 m. Once any raider is inside the walls
+  (Raids.breached) they fight like everyone else. Guards, the chief and veterans are unchanged.
+- The grace: a green hero's first fall in a raid (after the CON save, if that fails) is a knock-out -
+  down, out of the fight, raiders leave them be, "X is knocked senseless, but lives. The guild's grace -
+  once."; "X comes round." when the raid is over. Stored on the hero (graced) so it is once ever.
+  Delve deaths are untouched (the item is about raids).
+- tools/_raid_balance_test.gd (windowed, new): 3 fresh knights + a level 5 knight, a scar raid: green
+  heroes 0 far chases before the breach, 312 samples on the square, the veteran goes out; a second raid
+  dropped inside the walls: green heroes fight; first fall = knock-out (alive, graced), second = death,
+  a level 5 hero gets no grace. RAIDBAL_TEST OK, 0 script errors. Renders renders/cycles/20261111_raidbal
+  (hold_square, breach_fight, knocked_out) - looked at: heroes on the square, Chronicle lines readable.
+- _delve_test (DELVE_OIL=1) ENDED, _offfloor 0 of 969, TWITCH_PARSE OK, parse check 0 script errors
+  (the 3 old 'material is null' engine lines remain).

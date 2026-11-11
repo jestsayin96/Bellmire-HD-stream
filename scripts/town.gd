@@ -4116,6 +4116,9 @@ func _begin_delve() -> void:
                     hb.go(home, "home", func() -> void:
                         hb.stay = true)
                 else:
+                    # out of people too, or every walker of the list (economy,
+                    # casters) meets a freed hero there
+                    people.erase(hb)
                     hb.queue_free()
                     heroes.erase(uid)
         _at_mouth.clear()

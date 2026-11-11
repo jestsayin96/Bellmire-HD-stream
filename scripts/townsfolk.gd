@@ -104,6 +104,8 @@ func _try_cast(delta: float) -> void:
     var tgt := global_position + global_transform.basis.z * 3.0
     var best := 9.0
     for v in town.get("people"):
+        if not is_instance_valid(v):
+            continue
         var d: float = (v as Node3D).global_position.distance_to(global_position)
         if v != self and d < best and not v.inside:
             best = d
@@ -255,6 +257,10 @@ var _look := 0.0
 func _posted(delta: float) -> void:
     if inside or not visible:
         return
+    # a fisher on a dock stays put: a pace there walked them off the planks
+    for c in get_children():
+        if c is Angler:
+            return
     # only in Bellmire itself: underground (and in raids) the fight owns the body
     if town.get("nav") == null or (town.get("raids") != null and bool(town.get("raids").get("_live"))):
         return

@@ -446,3 +446,17 @@ Town
   that very low test pitch (at the normal -48 pitch the camera is above the walls anyway).
 - _delve_test (DELVE_OIL=1) ENDED, _offfloor 0 of 1000, TWITCH_PARSE OK, _director_test (windowed) 0
   script errors, parse check 0 script errors (the 3 old 'material is null' engine lines remain).
+
+
+## Cycle 57 - the soak, the docs; the finish list is done (2026-11-11)
+- Soak (tools/_soak.gd, real window, director on, 4x, six fake viewers): ran 22 wall minutes = 56 valley
+  days before the window was closed. 0 script errors. Memory flat (443 -> 485 MB). 34 raids driven off,
+  21 delves home, 0 wipes, 9 viewer deaths and 8 rerolls; the director cut between raids, fights, lords,
+  catches. FPS avg fell 150 -> 82 while settlers grew the town from 148 to 211 people - watch this on long
+  streams (a population cap or cheaper far-away townsfolk is the next lever).
+- Frame soak_02: the follow camera sat inside the scenery underground. When the followed hero stood on a
+  cell the grid calls solid, the doorway rule parked the camera 4 m off their head. Underground it now
+  skips the pull-in in that case (the camera is high above the walls there anyway).
+- Fishers with a rod no longer fidget (a pace walked them off the dock).
+- RUNNING.md: V director, F10 clean screen, L guild roll, the live Twitch section and twitch.cfg.
+- Checks: parse 0 errors, _offfloor 0/904 off-floor, _twitch_parse OK, _delve_test progressing (floor 2).

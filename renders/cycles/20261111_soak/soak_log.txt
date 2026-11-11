@@ -1,0 +1,1568 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+SOAK start minutes=30
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Grass.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Dirt_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Grass.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Dirt_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+WARNING: res://assets/kit/materials/MI_Grass.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Dirt_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:756)
+       [1] _ready (res://scripts/town.gd:317)
+FEED JestFan takes the oath as a knight. Stout, shielded. Hard to kill, slow to finish a fight.
+DIRECTOR cut hero_1001 pri 32.2915636003017
+FEED MossyMage takes the oath as a mage. Hits hardest. Dies hardest.
+FEED QuietArrow takes the oath as a ranger. Kills things before they arrive.
+FEED BigAxe takes the oath as a barbarian. The most meat. Swings heavy, guards nothing.
+FEED DawnCleric takes the oath as a cleric. Keeps the party upright longer than it deserves.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Stabbity takes the oath as a rogue. Fast and sharp, but folds under a real hit.
+FEED JestFan sets out for the dungeon mouth. (1 in the party)
+FEED MossyMage sets out for the dungeon mouth. (2 in the party)
+FEED QuietArrow sets out for the dungeon mouth. (3 in the party)
+FEED Wren Ashwood settles in Bellmire, looking for work.
+FEED BigAxe sets out for the dungeon mouth. (4 in the party)
+FEED DawnCleric sets out for the dungeon mouth. (5 in the party)
+FEED Stabbity sets out for the dungeon mouth. (6 in the party)
+SOAK shot soak_00 cut=fish_393106963674
+FEED Dunn Hollow settles in Bellmire, looking for work.
+FEED JestFan stands at the mouth of the scar.
+FEED QuietArrow stands at the mouth of the scar.
+FEED MossyMage stands at the mouth of the scar.
+FEED 3 creatures boil out of the dungeon!
+FEED The attack is driven off. The gates hold.
+FEED Nessa Quarryman and 7 others descend into the scar.
+FEED They carry 24 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 2 skeleton minions.
+FEED Rolf Stonehand turns up 11 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave bats, 2 giant rats.
+FEED JestFan and 2 others descend into the scar.
+FEED They carry 6 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 hollowed slime, 1 bog frog.
+FEED Ingrid Thatcher turns up 22 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Ysolde Quarryman settles in Bellmire, looking for work.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed skeleton minion, 1 cave spider, 1 drowned cave bat, 1 drowned slime.
+FEED MossyMage turns up 12 gold on floor 1.
+FEED Floor 1 cleared.
+DIRECTOR cut fight_1311525327395 pri 75.0
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 skeleton minion, 1 hollowed bog frog, 1 bog frog.
+FEED The oil is running low.
+FEED Rask Ashwood turns up 41 gold on floor 3.
+FEED Floor 3 cleared.
+FEED JestFan turns up 22 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 1 hollowed cave bat, 2 risen bones, 1 drowned slime.
+FEED The oil is running low.
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 cave spider, 1 puglin, 1 skeleton minion.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR cut fight_1897285048329 pri 85.0
+SOAK min=1 fps_min=30 fps_avg=110.9 day=3 hour=19.9 people=148 viewers_alive=6 in=2 home=0 wiped=0 viewer_dead=0 rerolls=0 catches=0 raids=1 cut=fight_1897285048329 nodes=15423 mem_mb=443
+FEED Stabbity stands at the mouth of the scar.
+FEED Ysolde Hollow turns up 58 gold on floor 4.
+FEED Floor 4 cleared.
+FEED QuietArrow turns up 28 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Out of oil, the party feels its way back up from floor 3.
+FEED JestFan and 2 others come home to Bellmire with 62 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 1 potion. 11 kills between them.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 cave spider, 1 skeleton warrior, 1 drowned skeleton mage, 1 drowned cave spider, 1 risen bones.
+FEED The Hollow King rises. Wreathed in cold fire.
+DIRECTOR cut fight_1311525327395 pri 75.7432562441604
+DIRECTOR cut lord_1311525327395 pri 100.0
+FEED BigAxe stands at the mouth of the scar.
+FEED DawnCleric stands at the mouth of the scar.
+FEED Maela Ashwood settles in Bellmire, looking for work.
+FEED BigAxe, DawnCleric descend into the scar.
+FEED They carry 4 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 1 cave bat, 1 slime.
+FEED BigAxe turns up 12 gold on floor 1.
+FEED Floor 1 cleared.
+FEED The Hollow King falls to Ingrid Thatcher.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 8 ways - 20 gold each to Nessa Quarryman, Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 skeleton minions, 1 cave bat, 1 giant rat.
+FEED The oil is running low.
+DIRECTOR cut fight_3575325413701 pri 85.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 emberbound blood wasp, 2 skeleton warriors, 1 gorged skeleton warrior, 1 puglin, 1 wraithtouched risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED DawnCleric turns up 19 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Ingrid Thatcher sets the wizard's lamp burning. The dark pulls back from floor 6.
+FEED Floor 3 - a tomb, remade as the confection: 2 drowned cave bats, 1 cave spider, 1 slime.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Rolf Stonehand turns up 80 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Out of oil, the party feels its way back up from floor 6.
+FEED Nessa Quarryman and 7 others come home to Bellmire with 372 gold, 12 ore, 9 stone, 2 pieces of salvaged gear and 3 potions. 28 kills between them.
+FEED Maela Bramble settles in Bellmire, looking for work.
+FEED 6 creatures boil out of the dungeon!
+FEED BigAxe turns up 29 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Out of oil, the party feels its way back up from floor 3.
+FEED BigAxe, DawnCleric come home to Bellmire with 60 gold, 3 ore, 2 stone and 1 potion. 11 kills between them.
+DIRECTOR cut raid pri 95.0
+FEED Nessa Quarryman fails the save. (CON 8)
+FEED Nessa Quarryman the sage is cut down defending Bellmire by skeleton rogue. Level 3, 6 kills. !reroll to rise again.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 22 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 skeleton minion, 1 giant rat.
+FEED Ysolde Hollow turns up 14 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 2 bog frogs, 1 hollowed cave bat.
+DIRECTOR cut fight_5067088355898 pri 75.0
+FEED Tove Hollow settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 24 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned cave bat, 1 hollowed risen bones, 1 giant rat, 1 slime.
+FEED Maela Hollow settles in Bellmire, looking for work.
+FEED Osric Ashwood turns up 41 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 risen bones, 3 cave spiders, 1 drowned skeleton minion.
+FEED The oil is running low.
+SOAK min=2 fps_min=38 fps_avg=141.9 day=6 hour=7.9 people=150 viewers_alive=6 in=4 home=3 wiped=0 viewer_dead=1 rerolls=0 catches=0 raids=2 cut=fight_5067088355898 nodes=14508 mem_mb=449
+FEED JestFan heads for the docks with a rod.
+FEED QuietArrow takes up a plain steel bow. (+4 atk)
+FEED Rolf Stonehand turns up 56 gold on floor 4.
+FEED Floor 4 cleared.
+DIRECTOR cut delve_5067088355898 pri 45.0
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton mage, 1 risen bones, 2 skeleton mages, 1 skeleton warrior.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Osric Ashwood sets the wizard's lamp burning. The dark pulls back from floor 5.
+DIRECTOR cut lord_5067088355898 pri 100.0
+FEED Rolf the Younger settles in Bellmire, looking for work.
+FEED 7 bandits are riding on the west road!
+FEED The Rattling Host falls to Rask Ashwood.
+FEED The Rattling Host is slain on floor 5!
+FEED The hoard is split 7 ways - 21 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Osric Ashwood and 6 others come home to Bellmire with 282 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 2 potions. 22 kills between them.
+DIRECTOR cut raid pri 95.0
+FEED Sable Bramble is killed by a bandit.
+FEED Talen Coalfoot is killed by a bandit.
+FEED A building is burning!
+FEED A building is burning!
+FEED The townsfolk raise the ruin again.
+FEED Ysolde Quarryman is killed by a bandit.
+FEED A building is burning!
+DIRECTOR cut raid pri 95.0
+FEED Wren the Younger settles in Bellmire, looking for work.
+FEED The attack is driven off. The gates hold.
+FEED The townsfolk raise the ruin again.
+DIRECTOR cut hero_1005 pri 30.5853257700801
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 27 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 2 slimes.
+FEED The townsfolk raise the ruin again.
+DIRECTOR cut fight_7640662960183 pri 75.0
+FEED Rolf Stonehand turns up 10 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 bog frog, 1 hollowed slime, 1 slime.
+FEED Aldric Bramble settles in Bellmire, looking for work.
+FEED Rolf Stonehand turns up 20 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned risen bones, 1 drowned puglin, 1 hollowed puglin, 1 slime.
+FEED Ysolde Hollow turns up 36 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 1 hollowed cave bat, 1 hollowed puglin, 1 drowned giant rat, 1 giant rat.
+FEED Osric Rivers turns up 57 gold on floor 4.
+FEED Floor 4 cleared.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Floor 5 - a buried town, remade as a barrack room: 2 drowned skeleton warriors, 2 hollowed cave spiders, 1 risen bones.
+FEED Nightwing rises. Too fast to see coming.
+FEED The oil is running low.
+DIRECTOR cut lord_7640662960183 pri 100.0
+FEED 8 creatures boil out of the dungeon!
+FEED BigAxe goes down and claws back up. (CON save 12)
+FEED Dunn Bramble settles in Bellmire, looking for work.
+FEED BigAxe is knocked senseless, but lives. The guild's grace - once.
+SOAK min=3 fps_min=51 fps_avg=150.9 day=8 hour=21.0 people=151 viewers_alive=6 in=5 home=4 wiped=0 viewer_dead=1 rerolls=0 catches=0 raids=4 cut=lord_7640662960183 nodes=14850 mem_mb=460
+FEED DawnCleric fails the save. (CON 4)
+FEED DawnCleric is knocked senseless, but lives. The guild's grace - once.
+FEED Nightwing falls to Wren of the Ford.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 7 ways - 29 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut raid pri 95.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned skeleton rogue, 1 gorged risen bones, 1 skeleton warrior, 2 risen bones, 1 wraithtouched pit viper.
+FEED The attack is driven off. The gates hold.
+FEED BigAxe comes round.
+FEED DawnCleric comes round.
+DIRECTOR cut fight_7640662960183 pri 77.191176631788
+FEED Wren of the Ford turns up 73 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Out of oil, the party feels its way back up from floor 6.
+FEED Osric Ashwood and 6 others come home to Bellmire with 399 gold, 12 ore, 9 stone, 3 pieces of salvaged gear and 1 potion. 28 kills between them.
+DIRECTOR cut hero_1002 pri 33.0666002631187
+FEED Rask Quarryman settles in Bellmire, looking for work.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 28 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 skeleton minion, 1 bog frog.
+FEED Ysolde Hollow turns up 10 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 hollowed slimes, 1 giant rat, 1 bog frog.
+DIRECTOR cut fight_9937497379705 pri 75.0
+FEED Rask Ashwood turns up 29 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned cave bat, 2 skeleton minions, 1 slime.
+FEED Corvin Quarryman settles in Bellmire, looking for work.
+FEED Ingrid Thatcher turns up 37 gold on floor 3.
+FEED Floor 3 cleared.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed skeleton minion, 2 slimes, 1 drowned risen bones, 1 drowned slime.
+FEED DawnCleric goes down and claws back up. (CON save 21)
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fight_9937497379705 pri 75.0
+FEED Rask Ashwood turns up 42 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton mages, 1 hollowed risen bones, 1 drowned skeleton warrior, 1 hollowed cave spider.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The oil is running low.
+DIRECTOR cut lord_9937497379705 pri 100.0
+FEED Nessa Thatcher settles in Bellmire, looking for work.
+FEED The Grubmother falls to Ingrid Thatcher.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 7 ways - 29 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 skeleton warrior, 1 emberbound skeleton warrior, 1 emberbound puglin, 1 emberbound blood wasp, 1 pit viper, 1 blood wasp.
+FEED Rolf Stonehand turns up 75 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 1 wraithtouched risen bones, 1 drowned pit viper, 1 emberbound pit viper, 1 puglin, 1 drowned risen bones, 1 risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR cut fight_9937497379705 pri 77.0630688840064
+FEED Bran Coalfoot settles in Bellmire, looking for work.
+SOAK min=4 fps_min=35 fps_avg=129.4 day=11 hour=9.5 people=155 viewers_alive=6 in=6 home=5 wiped=0 viewer_dead=1 rerolls=0 catches=0 raids=5 cut=fight_9937497379705 nodes=14902 mem_mb=450
+FEED 8 creatures boil out of the dungeon!
+FEED BigAxe goes down and claws back up. (CON save 18)
+FEED BigAxe the barbarian is cut down defending Bellmire by skeleton warrior. Level 2, 4 kills. !reroll to rise again.
+FEED DawnCleric fails the save. (CON 7)
+FEED DawnCleric the cleric is cut down defending Bellmire by skeleton minion. Level 2, 7 kills. !reroll to rise again.
+DIRECTOR cut raid pri 95.0
+FEED Ysolde Hollow turns up 89 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Out of oil, the party feels its way back up from floor 7.
+FEED Osric Ashwood and 6 others come home to Bellmire with 485 gold, 16 ore, 12 stone, 2 pieces of salvaged gear and 4 potions. 34 kills between them.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut hero_1002 pri 31.7117838561535
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 31 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 2 bog frogs.
+FEED Osric Ashwood turns up 14 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Aldric of the Ford settles in Bellmire, looking for work.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 2 bog frogs, 1 slime.
+DIRECTOR cut fight_12689799663700 pri 75.0
+FEED Ysolde Hollow turns up 23 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned skeleton minion, 1 cave spider, 1 hollowed slime, 1 hollowed puglin.
+FEED Ingrid Thatcher turns up 34 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned risen bones, 1 drowned puglin, 1 skeleton minion, 1 puglin, 1 hollowed slime.
+FEED Corvin Thatcher settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 50 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 2 cave spiders, 1 risen bones, 1 hollowed skeleton warrior, 1 skeleton warrior.
+FEED Nightwing rises. Too fast to see coming.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+DIRECTOR cut lord_12689799663700 pri 100.0
+FEED Hilda Bramble settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+FEED Nightwing falls to Osric Ashwood.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 7 ways - 20 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut raid pri 95.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned puglin, 1 gorged risen bones, 1 emberbound pit viper, 1 wraithtouched skeleton rogue, 1 drowned skeleton rogue, 1 skeleton warrior.
+FEED The oil is running low.
+FEED Petra Ashwood is killed by skeleton warrior.
+FEED Aldric Bramble is killed by skeleton warrior.
+FEED Aldric of the Ford is killed by skeleton warrior.
+FEED Osric Rivers turns up 58 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Talen Fenwick is sworn into the watch.
+FEED Floor 7 - a workshop, remade as a workshop: 1 gorged skeleton warrior, 1 gorged puglin, 2 skeleton warriors, 1 risen bones, 1 drowned blood wasp.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+SOAK min=5 fps_min=41 fps_avg=133.5 day=13 hour=21.8 people=154 viewers_alive=4 in=7 home=6 wiped=0 viewer_dead=3 rerolls=0 catches=0 raids=7 cut=raid nodes=15147 mem_mb=469
+FEED BigAxe rises as a ranger. The valley remembers the last one.
+FEED Tove Ashwood is killed by skeleton minion.
+DIRECTOR cut raid pri 95.0
+FEED A building is burning!
+FEED DawnCleric rises as a sage. The valley remembers the last one.
+FEED The townsfolk raise the ruin again.
+FEED Rolf Hollow, the chief of Bellmire, is killed by skeleton warrior.
+FEED A building is burning!
+DIRECTOR cut raid pri 95.0
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fight_12689799663700 pri 81.8723276139272
+FEED Sable Coalfoot settles in Bellmire, looking for work.
+FEED The townsfolk raise the ruin again.
+FEED Nessa Stonehand is sworn into the watch.
+FEED Rask Ashwood turns up 89 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Out of oil, the party feels its way back up from floor 7.
+FEED Osric Ashwood and 6 others come home to Bellmire with 408 gold, 16 ore, 12 stone, 4 pieces of salvaged gear and 4 potions. 34 kills between them.
+DIRECTOR cut hero_1002 pri 30.5687357485294
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 34 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 skeleton minion, 1 hollowed skeleton minion.
+FEED Ysolde Hollow turns up 11 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Mira Fenwick is sworn into the watch.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 2 skeleton minions, 1 cave bat.
+FEED Rolf Stonehand turns up 20 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Cort Hollow settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed puglin, 1 drowned cave spider, 1 hollowed cave bat, 1 risen bones.
+FEED Sable of the Ford is sworn into the watch.
+FEED Rask Ashwood turns up 31 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Nessa Stonehand is killed by skeleton rogue.
+FEED Talen Fenwick is killed by skeleton minion.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned skeleton minion, 2 drowned cave spiders, 1 cave spider, 1 hollowed cave bat.
+FEED A building is burning!
+FEED Mira Fenwick is killed by skeleton rogue.
+FEED Ingrid Thatcher turns up 57 gold on floor 4.
+FEED Floor 4 cleared.
+FEED QuietArrow fails the save. (CON 6)
+FEED QuietArrow is knocked senseless, but lives. The guild's grace - once.
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton warrior, 3 cave spiders, 1 skeleton warrior.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The attack is driven off. The gates hold.
+FEED QuietArrow comes round.
+DIRECTOR cut lord_15599623234743 pri 100.0
+FEED Cort Fenwick is sworn into the watch.
+FEED The townsfolk raise the ruin again.
+FEED Nessa Quarryman settles in Bellmire, looking for work.
+FEED The Grubmother falls to Osric Rivers.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 7 ways - 20 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 emberbound risen bones, 1 emberbound skeleton rogue, 1 emberbound blood wasp, 1 risen bones, 1 skeleton warrior, 1 emberbound pit viper.
+DIRECTOR cut fight_15599623234743 pri 76.653136592749
+FEED Osric of the Ford is sworn into the watch.
+FEED Ingrid Thatcher turns up 63 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 1 puglin, 1 drowned puglin, 1 drowned risen bones, 1 emberbound blood wasp, 1 emberbound pit viper, 1 wraithtouched pit viper.
+FEED The oil is running low.
+FEED Cort Ashwood settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+SOAK min=6 fps_min=23 fps_avg=125.6 day=16 hour=10.5 people=160 viewers_alive=6 in=8 home=7 wiped=0 viewer_dead=3 rerolls=2 catches=0 raids=9 cut=raid nodes=15198 mem_mb=469
+FEED BigAxe sets out for the dungeon mouth. (1 in the party)
+FEED Rask Ashwood turns up 95 gold on floor 7.
+FEED Floor 7 cleared.
+FEED DawnCleric needs 60 gold for a plain steel focus (has 40).
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 drowned cave bat, 2 imps, 1 emberbound cave bat, 1 risen bones, 1 wraithtouched cave bat, 1 drowned imp.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Osric Ashwood sets the wizard's lamp burning. The dark pulls back from floor 8.
+FEED Cort Fenwick is killed by skeleton minion.
+FEED Nessa Quarryman is killed by skeleton rogue.
+FEED Sable of the Ford is killed by skeleton rogue.
+FEED Osric Rivers turns up 104 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Out of oil, the party feels its way back up from floor 8.
+FEED Osric Ashwood and 6 others come home to Bellmire with 521 gold, 21 ore, 16 stone, 5 pieces of salvaged gear and 3 potions. 41 kills between them.
+FEED Osric of the Ford is killed by skeleton minion.
+FEED Maela Fenwick settles in Bellmire, looking for work.
+FEED A building is burning!
+FEED The townsfolk raise the ruin again.
+FEED Tove Thatcher is sworn into the watch.
+FEED QuietArrow goes down and claws back up. (CON save 16)
+FEED QuietArrow the ranger is cut down defending Bellmire by skeleton rogue. Level 2, 6 kills. !reroll to rise again.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut hero_1002 pri 34.4495168328285
+FEED The townsfolk raise the ruin again.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 35 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 hollowed cave bat, 1 cave bat.
+FEED Ingrid Ashwood is sworn into the watch.
+FEED Ingrid Thatcher turns up 10 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 hollowed slime, 1 hollowed giant rat, 1 giant rat.
+DIRECTOR cut fight_18658227139634 pri 75.7157511002309
+FEED Rolf Stonehand turns up 21 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Osric Ashwood settles in Bellmire, looking for work.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed cave spider, 1 skeleton minion, 1 slime, 1 drowned puglin.
+FEED Osric of the Ford is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Osric Ashwood turns up 28 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 risen bones, 1 drowned skeleton minion, 1 hollowed risen bones, 1 drowned cave bat, 1 hollowed skeleton minion.
+FEED Ysolde Hollow turns up 57 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Tove Thatcher is killed by skeleton warrior.
+FEED Cort Hollow is sworn into the watch.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton warrior, 1 hollowed skeleton mage, 2 risen bones, 1 skeleton mage.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED Ingrid Ashwood is killed by skeleton rogue.
+DIRECTOR cut lord_18658227139634 pri 100.0
+FEED A building is burning!
+FEED Nessa Rivers settles in Bellmire, looking for work.
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+FEED BigAxe fails the save. (CON 8)
+FEED BigAxe is knocked senseless, but lives. The guild's grace - once.
+FEED DawnCleric fails the save. (CON 5)
+FEED DawnCleric is knocked senseless, but lives. The guild's grace - once.
+FEED The Hollow King falls to Ingrid Thatcher.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 7 ways - 22 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED The attack is driven off. The gates hold.
+FEED BigAxe comes round.
+FEED DawnCleric comes round.
+DIRECTOR cut delve_18658227139634 pri 45.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 gorged skeleton rogue, 1 wraithtouched pit viper, 1 emberbound skeleton rogue, 1 drowned blood wasp, 1 puglin, 1 skeleton warrior.
+FEED The townsfolk raise the ruin again.
+DIRECTOR cut fight_18658227139634 pri 75.0
+FEED Mira Thatcher is sworn into the watch.
+FEED Rolf Stonehand turns up 79 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 1 skeleton rogue, 2 wraithtouched pit vipers, 1 gorged risen bones, 1 emberbound risen bones, 1 emberbound blood wasp.
+FEED The oil is running low.
+SOAK min=7 fps_min=32 fps_avg=126.9 day=18 hour=22.8 people=161 viewers_alive=5 in=9 home=8 wiped=0 viewer_dead=4 rerolls=2 catches=0 raids=10 cut=fight_18658227139634 nodes=15069 mem_mb=457
+FEED QuietArrow rises as a cleric. The valley remembers the last one.
+FEED Bran Rivers is sworn into the watch.
+FEED Osric Rivers turns up 77 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Nessa Hollow settles in Bellmire, looking for work.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 scar adder, 1 gorged risen bones, 1 emberbound cave bat, 1 drowned cave bat, 1 emberbound risen bones, 1 emberbound skeleton mage, 1 wraithtouched risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Osric Ashwood sets the wizard's lamp burning. The dark pulls back from floor 8.
+FEED Rask Ashwood should be dead - and stands back up.
+FEED Wren of the Ford turns up 98 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Out of oil, the party feels its way back up from floor 8.
+FEED Osric Ashwood and 6 others come home to Bellmire with 524 gold, 21 ore, 16 stone, 4 pieces of salvaged gear and 4 potions. 41 kills between them.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Ingrid Rivers is sworn into the watch.
+FEED 8 bandits are riding on the west road!
+DIRECTOR cut raid pri 95.0
+FEED Ingrid Rivers is killed by a bandit.
+FEED A building is burning!
+FEED Bran Rivers is killed by a bandit.
+FEED A building is burning!
+FEED Osric of the Ford is killed by a bandit.
+FEED Hilda Fenwick settles in Bellmire, looking for work.
+FEED Mira Thatcher is killed by a bandit.
+FEED A building is burning!
+DIRECTOR cut raid pri 95.0
+FEED Cort Hollow is killed by a bandit.
+FEED Tove Bramble is sworn into the watch.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED The townsfolk raise the ruin again.
+DIRECTOR cut hero_1005 pri 32.8640511631966
+FEED Hilda of the Ford is sworn into the watch.
+FEED Petra the Younger settles in Bellmire, looking for work.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 35 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 bog frog, 1 hollowed giant rat.
+FEED Rolf Stonehand turns up 9 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Garm of the Ford is sworn into the watch.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 cave bat, 1 skeleton minion.
+DIRECTOR cut fight_22156947776958 pri 75.0
+FEED Ysolde Thatcher settles in Bellmire, looking for work.
+FEED Osric Rivers turns up 19 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed skeleton minion, 1 cave spider, 1 drowned cave spider, 1 puglin.
+FEED Rolf Bramble is sworn into the watch.
+SOAK min=8 fps_min=19 fps_avg=130.4 day=21 hour=12.6 people=167 viewers_alive=6 in=10 home=9 wiped=0 viewer_dead=4 rerolls=3 catches=0 raids=11 cut=fight_22156947776958 nodes=15168 mem_mb=459
+FEED QuietArrow sets out for the dungeon mouth. (2 in the party)
+FEED Osric Ashwood turns up 38 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned cave bat, 1 risen bones, 1 drowned risen bones, 1 drowned slime, 1 cave spider.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Osric Rivers turns up 46 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Harl Ashwood is sworn into the watch.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton mage, 3 cave spiders, 1 drowned skeleton warrior.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+DIRECTOR cut lord_22156947776958 pri 100.0
+FEED Petra Bramble settles in Bellmire, looking for work.
+FEED Petra the Younger is killed by skeleton minion.
+FEED Garm of the Ford is killed by skeleton rogue.
+FEED Hilda of the Ford is killed by skeleton rogue.
+FEED The Rattling Host falls to Osric Rivers.
+FEED The Rattling Host is slain on floor 5!
+FEED The hoard is split 7 ways - 20 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Rolf Bramble is killed by skeleton rogue.
+FEED A building is burning!
+DIRECTOR cut raid pri 95.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned puglin, 1 gorged skeleton rogue, 1 wraithtouched skeleton rogue, 1 gorged blood wasp, 1 wraithtouched skeleton warrior, 1 skeleton warrior.
+FEED Tove Bramble is killed by skeleton warrior.
+FEED A building is burning!
+FEED Harl of the Ford is sworn into the watch.
+FEED The attack is driven off. The gates hold.
+FEED Osric Rivers turns up 79 gold on floor 6.
+FEED Floor 6 cleared.
+DIRECTOR cut delve_22156947776958 pri 45.0
+FEED Floor 7 - a workshop, remade as a workshop: 1 skeleton rogue, 1 gorged pit viper, 1 emberbound skeleton rogue, 1 wraithtouched skeleton rogue, 1 wraithtouched blood wasp, 1 pit viper.
+FEED The oil is running low.
+DIRECTOR cut fight_22156947776958 pri 76.8234644854752
+FEED Garm Ashwood settles in Bellmire, looking for work.
+FEED Maela Thatcher is sworn into the watch.
+FEED Rask Ashwood turns up 74 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 imp, 1 emberbound cave bat, 1 emberbound risen bones, 1 emberbound skeleton mage, 1 wraithtouched scar adder, 2 gorged skeleton warriors.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Osric Rivers sets the wizard's lamp burning. The dark pulls back from floor 8.
+FEED Rolf Stonehand turns up 114 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Out of oil, the party feels its way back up from floor 8.
+FEED Osric Ashwood and 6 others come home to Bellmire with 519 gold, 21 ore, 16 stone, 4 pieces of salvaged gear and 4 potions. 41 kills between them.
+DIRECTOR cut hero_1002 pri 32.4789030849934
+FEED Garm the Younger is sworn into the watch.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 34 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 skeleton minion, 1 bog frog.
+FEED Nessa Quarryman settles in Bellmire, looking for work.
+FEED Ysolde Hollow turns up 13 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 2 cave bats, 1 bog frog.
+DIRECTOR cut fight_25025885262535 pri 75.0
+FEED Maela Quarryman is sworn into the watch.
+FEED 8 bandits are riding on the west road!
+DIRECTOR cut raid pri 95.0
+FEED Ysolde Hollow turns up 23 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Maela Quarryman is killed by a bandit.
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 1 giant rat, 1 puglin, 1 hollowed skeleton minion.
+FEED A building is burning!
+FEED Garm the Younger is killed by a bandit.
+FEED A building is burning!
+FEED Harl Ashwood is killed by a bandit.
+FEED Harl of the Ford is killed by a bandit.
+FEED Rolf Stonehand turns up 43 gold on floor 3.
+FEED Floor 3 cleared.
+FEED A building is burning!
+SOAK min=9 fps_min=32 fps_avg=119.7 day=23 hour=0.8 people=166 viewers_alive=6 in=11 home=10 wiped=0 viewer_dead=4 rerolls=3 catches=0 raids=13 cut=raid nodes=15461 mem_mb=458
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned slime, 1 cave spider, 1 risen bones, 1 drowned skeleton minion, 1 hollowed puglin.
+FEED Talen the Younger is sworn into the watch.
+FEED A building is burning!
+FEED JestFan fails the save. (CON 5)
+FEED JestFan is knocked senseless, but lives. The guild's grace - once.
+FEED The attack is driven off. The gates hold.
+FEED JestFan comes round.
+FEED Mira Hollow settles in Bellmire, looking for work.
+FEED Rolf Stonehand turns up 45 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 3 skeleton mages, 1 hollowed skeleton mage, 1 skeleton warrior.
+FEED The Grubmother rises. Vast, slow, and patient.
+DIRECTOR cut lord_25025885262535 pri 100.0
+FEED Nessa of the Ford is sworn into the watch.
+FEED The Grubmother falls to Rask Ashwood.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 7 ways - 28 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut delve_25025885262535 pri 45.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 puglin, 1 pit viper, 1 wraithtouched skeleton rogue, 2 skeleton warriors, 1 gorged skeleton warrior.
+DIRECTOR cut fight_25025885262535 pri 76.2529954065879
+FEED Ingrid Thatcher turns up 71 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Ingrid Hollow settles in Bellmire, looking for work.
+FEED Floor 7 - a workshop, remade as a workshop: 1 pit viper, 2 skeleton rogues, 1 drowned risen bones, 1 drowned blood wasp, 1 emberbound skeleton rogue.
+FEED The oil is running low.
+FEED Wren Fenwick is sworn into the watch.
+FEED Osric Rivers turns up 95 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 imp, 1 gorged cave bat, 1 gorged imp, 1 drowned skeleton mage, 1 emberbound scar adder, 1 scar adder, 1 gorged scar adder.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Osric Ashwood sets the wizard's lamp burning. The dark pulls back from floor 8.
+FEED Wren Quarryman is sworn into the watch.
+FEED Wren of the Ford turns up 77 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Out of oil, the party feels its way back up from floor 8.
+FEED Osric Ashwood and 6 others come home to Bellmire with 563 gold, 21 ore, 16 stone and 2 potions. 41 kills between them.
+DIRECTOR cut hero_1005 pri 32.3292510211468
+FEED 8 creatures boil out of the dungeon!
+FEED Edda Ashwood settles in Bellmire, looking for work.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 36 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 hollowed giant rat, 1 skeleton minion.
+FEED Talen Hollow is sworn into the watch.
+FEED Ysolde Hollow turns up 12 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 slimes, 1 skeleton minion.
+DIRECTOR cut fight_27868079872449 pri 75.0
+FEED Rolf Stonehand turns up 22 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed slime, 1 drowned cave spider, 1 puglin, 1 drowned slime.
+FEED Bran Rivers settles in Bellmire, looking for work.
+FEED Petra Fenwick is sworn into the watch.
+SOAK min=10 fps_min=19 fps_avg=116.4 day=26 hour=12.5 people=176 viewers_alive=6 in=12 home=11 wiped=0 viewer_dead=4 rerolls=3 catches=0 raids=14 cut=fight_27868079872449 nodes=15533 mem_mb=458
+SOAK shot soak_01 cut=fight_27868079872449
+FEED Rask Ashwood turns up 38 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 2 cave spiders, 1 drowned cave spider, 1 skeleton minion.
+FEED Osric Rivers turns up 46 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 3 cave spiders, 1 drowned skeleton mage.
+FEED The Hollow King rises. Wreathed in cold fire.
+DIRECTOR cut lord_27868079872449 pri 100.0
+FEED Maela Quarryman settles in Bellmire, looking for work.
+FEED The Hollow King falls to Ingrid Thatcher.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 7 ways - 21 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 wraithtouched risen bones, 2 puglins, 1 gorged puglin, 1 gorged risen bones, 1 emberbound blood wasp.
+DIRECTOR cut fight_27868079872449 pri 75.0
+FEED 8 bandits are riding on the west road!
+DIRECTOR cut raid pri 95.0
+FEED A building is burning!
+FEED Maela Thatcher is killed by a bandit.
+FEED Rask Ashwood turns up 84 gold on floor 6.
+FEED Floor 6 cleared.
+FEED A building is burning!
+FEED Wren Fenwick is killed by a bandit.
+FEED Floor 7 - a workshop, remade as a workshop: 1 skeleton rogue, 1 emberbound risen bones, 1 emberbound skeleton warrior, 2 wraithtouched blood wasps, 1 puglin.
+FEED The oil is running low.
+FEED Petra Fenwick is killed by a bandit.
+FEED Nessa of the Ford is killed by a bandit.
+FEED A building is burning!
+FEED Mira of the Ford is sworn into the watch.
+FEED Dunn of the Ford settles in Bellmire, looking for work.
+FEED Talen Hollow is killed by a bandit.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED Ysolde Hollow turns up 92 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 wraithtouched risen bones, 1 skeleton warrior, 2 wraithtouched scar adders, 1 gorged risen bones, 1 drowned skeleton warrior, 1 skeleton mage.
+DIRECTOR cut fight_27868079872449 pri 79.2653669729681
+FEED Bran Quarryman is sworn into the watch.
+FEED Osric Ashwood turns up 98 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Out of oil, the party feels its way back up from floor 8.
+FEED Osric Ashwood and 6 others come home to Bellmire with 539 gold, 21 ore, 16 stone, 4 pieces of salvaged gear and 1 potion. 41 kills between them.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Mira Quarryman settles in Bellmire, looking for work.
+FEED Rask Quarryman is sworn into the watch.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 38 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 2 skeleton minions.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Ysolde Hollow turns up 11 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed skeleton minion, 1 hollowed giant rat, 2 slimes.
+FEED Petra Bramble is sworn into the watch.
+FEED Ingrid Thatcher turns up 25 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Dunn of the Ford is killed by skeleton minion.
+SOAK min=11 fps_min=28 fps_avg=114.5 day=28 hour=1.1 people=177 viewers_alive=6 in=13 home=12 wiped=0 viewer_dead=4 rerolls=3 catches=0 raids=16 cut=raid nodes=16490 mem_mb=482
+FEED Floor 3 - a tomb, remade as the confection: 1 cave spider, 1 drowned cave bat, 1 risen bones, 1 hollowed giant rat.
+FEED Wren Quarryman is killed by skeleton minion.
+FEED Talen the Younger is killed by skeleton rogue.
+FEED Mira of the Ford is killed by skeleton minion.
+FEED Sable of the Ford settles in Bellmire, looking for work.
+FEED Bran Quarryman is killed by skeleton minion.
+FEED Ingrid Thatcher turns up 32 gold on floor 3.
+FEED Floor 3 cleared.
+DIRECTOR cut raid pri 95.0
+FEED Rask Quarryman is killed by skeleton rogue.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed skeleton minion, 1 drowned puglin, 1 puglin, 2 risen bones.
+FEED A building is burning!
+FEED Ingrid of the Ford is sworn into the watch.
+FEED The attack is driven off. The gates hold.
+FEED Osric Ashwood turns up 56 gold on floor 4.
+FEED Floor 4 cleared.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 1 cave spider, 1 drowned risen bones, 1 drowned skeleton warrior, 1 hollowed risen bones.
+FEED Nightwing rises. Too fast to see coming.
+DIRECTOR cut lord_30846270596423 pri 100.0
+FEED Nightwing falls to Osric Rivers.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 7 ways - 31 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Corvin the Younger settles in Bellmire, looking for work.
+DIRECTOR cut delve_30846270596423 pri 45.0
+FEED Edda the Younger is sworn into the watch.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 risen bones, 1 gorged skeleton warrior, 1 emberbound blood wasp, 1 drowned puglin, 1 drowned pit viper, 1 skeleton warrior.
+DIRECTOR cut fight_30846270596423 pri 75.0
+FEED Wren of the Ford turns up 83 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 1 pit viper, 1 wraithtouched puglin, 1 emberbound blood wasp, 1 blood wasp, 1 drowned skeleton warrior, 1 drowned skeleton rogue.
+FEED Nessa Rivers is sworn into the watch.
+FEED Rask Ashwood turns up 98 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 drowned skeleton warrior, 1 drowned cave bat, 1 drowned risen bones, 1 gorged cave bat, 1 wraithtouched scar adder, 1 skeleton mage, 1 emberbound scar adder.
+FEED The oil is running low.
+FEED 8 bandits are riding on the west road!
+DIRECTOR cut raid pri 95.0
+FEED Garm Hollow settles in Bellmire, looking for work.
+FEED Nessa Rivers is killed by a bandit.
+FEED Petra Bramble is killed by a bandit.
+FEED A building is burning!
+FEED Rask Ashwood turns up 76 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Bran Thatcher is sworn into the watch.
+FEED Edda the Younger is killed by a bandit.
+FEED Floor 9 - a temple, remade as a shrine: 1 cave bat, 1 drowned risen bones, 1 gorged skeleton mage, 1 skeleton mage, 1 wraithtouched imp, 1 skeleton warrior, 1 emberbound risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED A building is burning!
+FEED Ingrid of the Ford is killed by a bandit.
+FEED Bran Thatcher is killed by a bandit.
+FEED A building is burning!
+FEED Ysolde Hollow turns up 103 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 701 gold, 27 ore, 20 stone, 4 pieces of salvaged gear and 4 potions. 48 kills between them.
+FEED The attack is driven off. The gates hold.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 39 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 2 bog frogs.
+FEED Rask Hollow settles in Bellmire, looking for work.
+DIRECTOR cut fight_33835819487361 pri 75.0
+FEED Garm Bramble is sworn into the watch.
+FEED Osric Ashwood turns up 13 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed slime, 1 cave bat, 1 skeleton minion, 1 giant rat.
+FEED Ysolde Hollow turns up 23 gold on floor 2.
+FEED Floor 2 cleared.
+SOAK min=12 fps_min=34 fps_avg=115.7 day=31 hour=12.7 people=176 viewers_alive=6 in=14 home=13 wiped=0 viewer_dead=4 rerolls=3 catches=0 raids=17 cut=fight_33835819487361 nodes=16263 mem_mb=463
+FEED Floor 3 - a tomb, remade as the confection: 1 risen bones, 2 hollowed slimes, 1 cave bat.
+FEED Garm Quarryman is sworn into the watch.
+FEED Ingrid Thatcher turns up 34 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Maela Bramble settles in Bellmire, looking for work.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 1 puglin, 1 drowned skeleton minion, 1 hollowed skeleton minion, 1 giant rat.
+FEED Ysolde Hollow turns up 49 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Corvin Hollow is sworn into the watch.
+FEED Floor 5 - a buried town, remade as a barrack room: 2 cave spiders, 1 skeleton mage, 1 hollowed cave spider, 1 drowned skeleton warrior.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+DIRECTOR cut lord_33835819487361 pri 100.0
+FEED The Rattling Host falls to Osric Ashwood.
+DIRECTOR cut fight_33835819487361 pri 78.6083483813331
+FEED Ingrid Thatcher turns up 53 gold on floor 5.
+FEED Floor 5 cleared.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 skeleton warrior, 1 emberbound skeleton rogue, 1 risen bones, 1 emberbound skeleton warrior, 1 blood wasp, 1 emberbound pit viper.
+FEED Bran Quarryman is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED Wren Hollow settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 76 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 2 wraithtouched blood wasps, 1 skeleton rogue, 2 blood wasps, 1 gorged skeleton rogue.
+DIRECTOR cut raid pri 95.0
+FEED Garm Bramble is killed by skeleton rogue.
+FEED Ingrid Bramble is sworn into the watch.
+FEED Corvin Hollow is killed by skeleton rogue.
+FEED Osric Rivers turns up 98 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Garm Quarryman is killed by skeleton rogue.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 drowned cave bat, 1 emberbound skeleton warrior, 1 imp, 2 gorged imps, 1 cave bat, 1 gorged cave bat.
+FEED The oil is running low.
+FEED A building is burning!
+FEED Bran Quarryman is killed by skeleton rogue.
+FEED A building is burning!
+FEED BigAxe goes down and claws back up. (CON save 17)
+FEED BigAxe the ranger is cut down defending Bellmire by skeleton warrior. Level 1, 0 kills. !reroll to rise again.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fight_33835819487361 pri 79.1978209842741
+FEED Osric Ashwood turns up 97 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Wren Bramble is sworn into the watch.
+FEED Floor 9 - a temple, remade as a shrine: 2 cave bats, 1 emberbound scar adder, 2 drowned scar adders, 1 emberbound cave bat, 1 emberbound risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Garm Fenwick settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 124 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 567 gold, 27 ore, 20 stone, 2 pieces of salvaged gear and 3 potions. 48 kills between them.
+DIRECTOR cut hero_1003 pri 33.9895620942116
+FEED Dunn Rivers is sworn into the watch.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+SOAK min=13 fps_min=48 fps_avg=122.6 day=33 hour=1.9 people=180 viewers_alive=5 in=14 home=14 wiped=0 viewer_dead=5 rerolls=3 catches=0 raids=19 cut=raid nodes=14663 mem_mb=468
+FEED BigAxe rises as a rogue. The valley remembers the last one.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut hero_1002 pri 34.3310481309891
+FEED Garm Hollow settles in Bellmire, looking for work.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Edda of the Ford is sworn into the watch.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 39 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 giant rat, 1 slime.
+FEED Ysolde Hollow turns up 11 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 cave bat, 1 slime, 1 skeleton minion.
+DIRECTOR cut fight_37248020013230 pri 75.0
+FEED Osric Ashwood turns up 23 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Osric Ashwood is sworn into the watch.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed puglin, 1 puglin, 1 cave spider, 1 risen bones.
+FEED Aldric Stonehand settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 36 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed cave spider, 1 skeleton minion, 1 giant rat, 1 cave spider, 1 puglin.
+FEED Dunn Rivers is sworn into the watch.
+FEED Ingrid Thatcher turns up 58 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton mage, 1 hollowed skeleton warrior, 1 drowned risen bones, 1 skeleton warrior, 1 drowned cave spider.
+FEED Nightwing rises. Too fast to see coming.
+DIRECTOR cut lord_37248020013230 pri 100.0
+FEED 8 creatures boil out of the dungeon!
+FEED Nightwing falls to Ysolde Hollow.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 7 ways - 31 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut raid pri 95.0
+FEED Dunn Rivers is killed by skeleton minion.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 gorged puglin, 1 emberbound blood wasp, 1 skeleton rogue, 2 gorged skeleton warriors, 1 wraithtouched skeleton warrior.
+FEED Petra Quarryman is sworn into the watch.
+FEED Ingrid Bramble is killed by skeleton warrior.
+FEED Edda of the Ford is killed by skeleton warrior.
+FEED Wren Bramble is killed by skeleton warrior.
+FEED Osric Ashwood is killed by skeleton rogue.
+FEED Ingrid Thatcher turns up 57 gold on floor 6.
+FEED Floor 6 cleared.
+FEED A building is burning!
+FEED Harl Hollow settles in Bellmire, looking for work.
+FEED Floor 7 - a workshop, remade as a workshop: 1 emberbound skeleton warrior, 1 wraithtouched skeleton rogue, 1 wraithtouched blood wasp, 1 puglin, 1 gorged skeleton rogue, 1 pit viper.
+FEED Dunn Rivers is killed by skeleton rogue.
+FEED A building is burning!
+FEED BigAxe fails the save. (CON 6)
+FEED BigAxe is knocked senseless, but lives. The guild's grace - once.
+FEED The attack is driven off. The gates hold.
+FEED BigAxe comes round.
+DIRECTOR cut fight_37248020013230 pri 77.6784494752931
+FEED Dunn Coalfoot is sworn into the watch.
+FEED Wren of the Ford turns up 75 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 emberbound cave bat, 1 skeleton warrior, 1 wraithtouched cave bat, 1 gorged scar adder, 1 wraithtouched imp, 1 drowned skeleton mage, 1 imp.
+FEED The oil is running low.
+FEED Bran Rivers settles in Bellmire, looking for work.
+FEED Corvin Thatcher is sworn into the watch.
+SOAK min=14 fps_min=30 fps_avg=109.0 day=36 hour=13.5 people=185 viewers_alive=6 in=15 home=14 wiped=0 viewer_dead=5 rerolls=4 catches=0 raids=20 cut=fight_37248020013230 nodes=16029 mem_mb=461
+FEED BigAxe is already waiting at the dungeon mouth.
+FEED Wren of the Ford turns up 108 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Floor 9 - a temple, remade as a shrine: 1 wraithtouched cave bat, 2 scar adders, 1 cave bat, 1 gorged scar adder, 1 risen bones, 1 skeleton mage.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Ingrid Thatcher sets the wizard's lamp burning. The dark pulls back from floor 9.
+FEED Osric Rivers turns up 115 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 700 gold, 27 ore, 20 stone, 4 pieces of salvaged gear and 5 potions. 48 kills between them.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Nessa of the Ford is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED Dunn Bramble settles in Bellmire, looking for work.
+DIRECTOR cut raid pri 95.0
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut hero_1001 pri 30.3979812562466
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Ysolde Stonehand is sworn into the watch.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 39 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed skeleton minion, 1 slime, 1 cave bat.
+FEED Hilda Stonehand settles in Bellmire, looking for work.
+FEED Rask Ashwood turns up 11 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 giant rat, 1 skeleton minion, 1 cave bat.
+DIRECTOR cut fight_40495988367224 pri 75.0
+FEED Harl Rivers is sworn into the watch.
+FEED Wren of the Ford turns up 25 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed cave bat, 1 slime, 1 giant rat, 1 cave bat.
+FEED Osric Ashwood turns up 36 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned slimes, 1 cave bat, 1 drowned skeleton minion, 1 drowned puglin.
+FEED Bran Rivers is sworn into the watch.
+FEED Edda Ashwood settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 56 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned cave spider, 2 hollowed skeleton warriors, 1 drowned skeleton warrior, 1 drowned skeleton mage.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+DIRECTOR cut lord_40495988367224 pri 100.0
+FEED The Rattling Host falls to Ingrid Thatcher.
+FEED Mira Stonehand is sworn into the watch.
+FEED Rolf Stonehand turns up 62 gold on floor 5.
+FEED Floor 5 cleared.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED 8 creatures boil out of the dungeon!
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned risen bones, 1 emberbound puglin, 1 drowned skeleton rogue, 1 emberbound risen bones, 1 skeleton warrior, 1 risen bones.
+DIRECTOR cut raid pri 95.0
+FEED Ingrid Stonehand settles in Bellmire, looking for work.
+FEED Ysolde Hollow turns up 76 gold on floor 6.
+FEED Floor 6 cleared.
+SOAK min=15 fps_min=19 fps_avg=102.3 day=38 hour=2.1 people=194 viewers_alive=6 in=16 home=15 wiped=0 viewer_dead=5 rerolls=4 catches=0 raids=22 cut=raid nodes=16447 mem_mb=487
+FEED BigAxe is already waiting at the dungeon mouth.
+FEED Floor 7 - a workshop, remade as a workshop: 1 drowned skeleton warrior, 1 puglin, 1 gorged pit viper, 1 skeleton warrior, 1 skeleton rogue, 1 gorged risen bones.
+FEED Corvin Hollow is sworn into the watch.
+FEED Nessa of the Ford is killed by skeleton minion.
+FEED Ysolde Stonehand is killed by skeleton rogue.
+FEED Dunn Coalfoot is killed by skeleton rogue.
+FEED Bran Rivers is killed by skeleton warrior.
+FEED Corvin Thatcher is killed by skeleton minion.
+FEED Harl Rivers is killed by skeleton rogue.
+FEED A building is burning!
+FEED Mira Stonehand is killed by skeleton warrior.
+FEED Wren of the Ford turns up 65 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Harl Hollow is killed by skeleton warrior.
+FEED Floor 8 - a fallen hold, remade as a treasury: 2 skeleton warriors, 1 scar adder, 1 emberbound scar adder, 1 skeleton mage, 2 drowned skeleton warriors.
+FEED The oil is running low.
+FEED A building is burning!
+FEED Petra Quarryman is killed by skeleton rogue.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fight_40495988367224 pri 76.627159076398
+FEED Corvin Rivers is sworn into the watch.
+FEED Rolf Stonehand turns up 83 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Floor 9 - a temple, remade as a shrine: 1 gorged imp, 2 imps, 1 drowned imp, 1 skeleton mage, 1 wraithtouched scar adder, 1 wraithtouched cave bat.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Talen Thatcher settles in Bellmire, looking for work.
+FEED Rask Ashwood sets the wizard's lamp burning. The dark pulls back from floor 9.
+FEED Wren of the Ford turns up 84 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 498 gold, 27 ore, 20 stone, 4 pieces of salvaged gear and 4 potions. 48 kills between them.
+DIRECTOR cut hero_1002 pri 31.5784879028797
+FEED Hilda Coalfoot is sworn into the watch.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Wren Fenwick settles in Bellmire, looking for work.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 40 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave bat, 1 slime.
+DIRECTOR cut fight_43605158814584 pri 75.0
+FEED Tove Rivers is sworn into the watch.
+FEED Rolf Stonehand turns up 9 gold on floor 1.
+FEED Floor 1 cleared.
+FEED 8 creatures boil out of the dungeon!
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 cave bat, 2 skeleton minions.
+DIRECTOR cut raid pri 95.0
+FEED Osric Rivers turns up 29 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 hollowed puglin, 1 giant rat, 1 hollowed skeleton minion.
+FEED Maela the Younger settles in Bellmire, looking for work.
+FEED Talen Thatcher is sworn into the watch.
+FEED Corvin Hollow is killed by skeleton minion.
+FEED Hilda Coalfoot is killed by skeleton rogue.
+FEED A building is burning!
+FEED Rask Ashwood turns up 35 gold on floor 3.
+FEED Floor 3 cleared.
+FEED DawnCleric fails the save. (CON 4)
+FEED DawnCleric the sage is cut down defending Bellmire by skeleton warrior. Level 1, 0 kills. !reroll to rise again.
+FEED A building is burning!
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 3 hollowed cave bats, 1 cave spider, 1 drowned cave spider.
+FEED QuietArrow fails the save. (CON 5)
+FEED QuietArrow is knocked senseless, but lives. The guild's grace - once.
+FEED The attack is driven off. The gates hold.
+FEED QuietArrow comes round.
+DIRECTOR cut fight_43605158814584 pri 75.0
+FEED Ingrid Thatcher turns up 55 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton mage, 1 cave spider, 1 skeleton warrior, 1 drowned risen bones, 1 drowned cave spider.
+FEED The Hollow King rises. Wreathed in cold fire.
+DIRECTOR cut lord_43605158814584 pri 100.0
+FEED Wren Bramble is sworn into the watch.
+SOAK min=16 fps_min=38 fps_avg=106.4 day=41 hour=14.3 people=191 viewers_alive=5 in=17 home=16 wiped=0 viewer_dead=6 rerolls=4 catches=0 raids=23 cut=lord_43605158814584 nodes=16092 mem_mb=476
+FEED BigAxe is already waiting at the dungeon mouth.
+FEED The Hollow King falls to Ingrid Thatcher.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 7 ways - 30 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED DawnCleric rises as a cleric. The valley remembers the last one.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned skeleton warrior, 1 emberbound skeleton rogue, 2 emberbound blood wasps, 1 blood wasp, 1 drowned puglin.
+DIRECTOR cut fight_43605158814584 pri 75.0
+FEED Edda Stonehand settles in Bellmire, looking for work.
+FEED Rask Ashwood turns up 84 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Rask Rivers is sworn into the watch.
+FEED Floor 7 - a workshop, remade as a workshop: 1 wraithtouched skeleton rogue, 1 gorged pit viper, 1 risen bones, 1 gorged skeleton rogue, 1 wraithtouched skeleton warrior, 1 blood wasp.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Wren of the Ford turns up 77 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Corvin Rivers is killed by skeleton minion.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 emberbound cave bat, 1 scar adder, 2 wraithtouched risen bones, 1 gorged scar adder, 1 risen bones, 1 drowned cave bat.
+FEED The oil is running low.
+FEED Dunn Fenwick is sworn into the watch.
+FEED Wren Bramble is killed by skeleton rogue.
+FEED Wren Fenwick settles in Bellmire, looking for work.
+FEED Talen Thatcher is killed by skeleton rogue.
+FEED Tove Rivers is killed by skeleton rogue.
+FEED Rask Rivers is killed by skeleton rogue.
+FEED Ingrid Thatcher turns up 112 gold on floor 8.
+FEED Floor 8 cleared.
+FEED A building is burning!
+FEED Floor 9 - a temple, remade as a shrine: 2 emberbound cave bats, 1 wraithtouched imp, 1 skeleton warrior, 1 emberbound imp, 1 wraithtouched risen bones, 1 gorged risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED BigAxe goes down and claws back up. (CON save 10)
+FEED BigAxe the rogue is cut down defending Bellmire by skeleton rogue. Level 1, 0 kills. !reroll to rise again.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fight_43605158814584 pri 76.6967130098012
+FEED Harl Bramble is sworn into the watch.
+FEED Wren of the Ford sets the wizard's lamp burning. The dark pulls back from floor 9.
+FEED Osric Ashwood turns up 84 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 695 gold, 27 ore, 20 stone, 1 piece of salvaged gear and 3 potions. 48 kills between them.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Wren the Younger settles in Bellmire, looking for work.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 40 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 bog frog.
+FEED Edda Fenwick is sworn into the watch.
+DIRECTOR cut fight_46606468536560 pri 75.0
+FEED 8 bandits are riding on the west road!
+FEED Edda Fenwick is killed by a bandit.
+DIRECTOR cut raid pri 95.0
+FEED Dunn Fenwick is killed by a bandit.
+FEED Wren of the Ford turns up 13 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 giant rats, 1 slime, 1 hollowed skeleton minion.
+FEED Harl Bramble is killed by a bandit.
+FEED A building is burning!
+FEED A building is burning!
+FEED Osric Rivers turns up 22 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 drowned risen bones, 1 drowned skeleton minion, 1 hollowed skeleton minion.
+FEED Harl Thatcher is sworn into the watch.
+FEED A building is burning!
+FEED JestFan goes down and claws back up. (CON save 16)
+FEED JestFan the knight is cut down defending Bellmire by a bandit. Level 1, 2 kills. !reroll to rise again.
+FEED A building is burning!
+FEED DawnCleric fails the save. (CON 7)
+FEED DawnCleric is knocked senseless, but lives. The guild's grace - once.
+FEED The attack is driven off. The gates hold.
+FEED DawnCleric comes round.
+FEED Ingrid Thatcher turns up 37 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned skeleton minion, 1 risen bones, 1 slime, 1 hollowed giant rat, 1 drowned slime.
+FEED Hilda Bramble settles in Bellmire, looking for work.
+FEED Rask Ashwood turns up 52 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Edda Fenwick is sworn into the watch.
+DIRECTOR cut fish_391613791391 pri 60.0
+SOAK min=17 fps_min=36 fps_avg=103.6 day=43 hour=2.6 people=192 viewers_alive=4 in=18 home=17 wiped=0 viewer_dead=8 rerolls=5 catches=0 raids=25 cut=fish_391613791391 nodes=15947 mem_mb=463
+FEED JestFan rises as a cleric. The valley remembers the last one.
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 drowned skeleton warrior, 1 drowned skeleton mage, 1 skeleton mage.
+FEED The Grubmother rises. Vast, slow, and patient.
+DIRECTOR cut lord_46606468536560 pri 100.0
+FEED BigAxe rises as a sage. The valley remembers the last one.
+FEED DawnCleric needs 63 gold for a plain steel focus (has 40).
+FEED The Grubmother falls to Rask Ashwood.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 7 ways - 31 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED Dunn Coalfoot is sworn into the watch.
+FEED Floor 6 - a worked seam, remade as the firepits: 1 emberbound blood wasp, 1 emberbound skeleton warrior, 1 pit viper, 1 wraithtouched pit viper, 2 skeleton warriors.
+FEED Rolf the Younger settles in Bellmire, looking for work.
+FEED Rolf Stonehand turns up 70 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 1 emberbound blood wasp, 1 emberbound pit viper, 1 gorged skeleton rogue, 1 wraithtouched skeleton warrior, 1 skeleton warrior, 1 pit viper.
+FEED A building is burning!
+FEED Harl Thatcher is killed by skeleton rogue.
+FEED Edda Fenwick is killed by skeleton warrior.
+FEED Petra Quarryman is sworn into the watch.
+FEED DawnCleric goes down and claws back up. (CON save 21)
+FEED DawnCleric the cleric is cut down defending Bellmire by skeleton minion. Level 1, 0 kills. !reroll to rise again.
+FEED A building is burning!
+DIRECTOR cut raid pri 95.0
+FEED The attack is driven off. The gates hold.
+FEED Wren of the Ford turns up 83 gold on floor 7.
+FEED Floor 7 cleared.
+DIRECTOR cut delve_46606468536560 pri 45.0
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 gorged skeleton warrior, 1 scar adder, 1 wraithtouched scar adder, 1 drowned risen bones, 1 wraithtouched imp, 1 gorged scar adder, 1 gorged imp.
+FEED The oil is running low.
+DIRECTOR cut fight_46606468536560 pri 75.0
+FEED Ingrid Stonehand settles in Bellmire, looking for work.
+FEED Osric Rivers turns up 111 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Garm Stonehand is sworn into the watch.
+FEED Floor 9 - a temple, remade as a shrine: 2 wraithtouched scar adders, 1 drowned risen bones, 1 skeleton mage, 1 wraithtouched imp, 1 drowned skeleton mage, 1 emberbound skeleton warrior.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Wren of the Ford sets the wizard's lamp burning. The dark pulls back from floor 9.
+FEED Osric Rivers turns up 130 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 735 gold, 27 ore, 20 stone, 6 pieces of salvaged gear and 4 potions. 48 kills between them.
+DIRECTOR cut hero_1004 pri 33.1431359052658
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Petra Quarryman is sworn into the watch.
+FEED Maela the Younger settles in Bellmire, looking for work.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 41 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 cave bat, 1 hollowed skeleton minion.
+DIRECTOR cut fight_49687570705109 pri 75.0
+FEED Osric Rivers turns up 12 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 slime, 1 skeleton minion.
+FEED Tove Stonehand is sworn into the watch.
+FEED Ysolde Hollow turns up 23 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed cave spider, 1 puglin, 2 risen bones.
+FEED 8 bandits are riding on the west road!
+DIRECTOR cut raid pri 95.0
+SOAK min=18 fps_min=28 fps_avg=104.8 day=46 hour=14.6 people=199 viewers_alive=5 in=19 home=18 wiped=0 viewer_dead=9 rerolls=7 catches=0 raids=27 cut=raid nodes=16632 mem_mb=472
+FEED JestFan sets out for the dungeon mouth. (3 in the party)
+FEED Wren Coalfoot settles in Bellmire, looking for work.
+FEED Tove Stonehand is killed by a bandit.
+FEED Wren Coalfoot is killed by a bandit.
+FEED A building is burning!
+FEED Ysolde Hollow turns up 29 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Talen Hollow is sworn into the watch.
+FEED DawnCleric rises as a rogue. The valley remembers the last one.
+FEED Petra Quarryman is killed by a bandit.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned giant rats, 1 drowned cave spider, 1 puglin, 1 cave bat.
+FEED A building is burning!
+FEED Garm Stonehand is killed by a bandit.
+FEED Dunn Coalfoot is killed by a bandit.
+FEED Ingrid Stonehand is killed by a bandit.
+FEED A building is burning!
+FEED Rask Ashwood turns up 56 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Petra Quarryman is killed by a bandit.
+FEED A building is burning!
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned cave spider, 1 cave spider, 1 drowned risen bones, 1 skeleton mage, 1 hollowed risen bones.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED Talen Hollow is killed by a bandit.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut lord_49687570705109 pri 100.0
+FEED Cort Hollow is sworn into the watch.
+FEED Nessa Rivers settles in Bellmire, looking for work.
+FEED The Hollow King falls to Wren of the Ford.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 7 ways - 29 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut delve_49687570705109 pri 45.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 gorged puglin, 1 wraithtouched risen bones, 1 skeleton warrior, 1 drowned risen bones, 1 wraithtouched puglin, 1 risen bones.
+DIRECTOR cut fight_49687570705109 pri 76.2924902309152
+FEED Osric Rivers turns up 69 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Nessa Bramble is sworn into the watch.
+FEED Floor 7 - a workshop, remade as a workshop: 1 wraithtouched pit viper, 1 wraithtouched puglin, 1 risen bones, 1 wraithtouched blood wasp, 1 gorged skeleton rogue, 1 drowned blood wasp.
+FEED 8 bandits are riding on the west road!
+DIRECTOR cut raid pri 95.0
+FEED Osric Rivers turns up 99 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Nessa Bramble is killed by a bandit.
+FEED A building is burning!
+FEED Cort the Younger settles in Bellmire, looking for work.
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 emberbound skeleton mage, 1 emberbound risen bones, 1 cave bat, 1 drowned scar adder, 1 drowned skeleton warrior, 1 scar adder, 1 drowned risen bones.
+FEED The oil is running low.
+FEED Rolf Bramble is sworn into the watch.
+FEED A building is burning!
+FEED Cort Hollow is killed by a bandit.
+FEED A building is burning!
+FEED Ingrid Thatcher turns up 94 gold on floor 8.
+FEED Floor 8 cleared.
+FEED DawnCleric goes down and claws back up. (CON save 15)
+FEED DawnCleric is knocked senseless, but lives. The guild's grace - once.
+FEED Rolf Bramble is killed by a bandit.
+FEED A building is burning!
+FEED Floor 9 - a temple, remade as a shrine: 1 drowned risen bones, 1 emberbound scar adder, 1 wraithtouched skeleton warrior, 1 wraithtouched cave bat, 1 drowned skeleton warrior, 1 scar adder, 1 drowned imp.
+FEED BigAxe fails the save. (CON 6)
+FEED BigAxe is knocked senseless, but lives. The guild's grace - once.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED BigAxe comes round.
+FEED DawnCleric comes round.
+FEED Ysolde Hollow turns up 96 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Harl Hollow is sworn into the watch.
+FEED Floor 10 - a prison, remade as a buried wood: 1 wraithtouched skeleton rogue, 1 gorged scar adder, 1 gorged risen bones, 1 gorged skeleton rogue, 1 wraithtouched risen bones, 1 skeleton rogue, 1 scar adder, 1 skeleton mage.
+FEED Mourncoil rises. Frost comes off it in sheets.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR cut lord_49687570705109 pri 100.0
+FEED Aldric the Younger settles in Bellmire, looking for work.
+FEED Mourncoil falls to Osric Rivers.
+FEED Mourncoil is slain on floor 10!
+FEED The hoard is split 7 ways - 50 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+FEED Out of oil, the party feels its way back up from floor 10.
+FEED Osric Ashwood and 6 others come home to Bellmire with 1031 gold, 33 ore, 24 stone, 4 pieces of salvaged gear and 7 potions. 57 kills between them.
+DIRECTOR cut hero_1002 pri 34.7266793251038
+FEED Bran Ashwood is sworn into the watch.
+DIRECTOR cut fish_391613791391 pri 60.0
+SOAK min=19 fps_min=30 fps_avg=105.4 day=48 hour=3.1 people=199 viewers_alive=6 in=19 home=19 wiped=0 viewer_dead=9 rerolls=8 catches=0 raids=28 cut=fish_391613791391 nodes=15291 mem_mb=459
+FEED Bran Thatcher settles in Bellmire, looking for work.
+FEED DawnCleric sets out for the dungeon mouth. (4 in the party)
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut hero_1005 pri 31.4326745271683
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Nessa Bramble is sworn into the watch.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 40 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 hollowed skeleton minion, 1 slime.
+FEED Ingrid Thatcher turns up 10 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 3 cave bats.
+DIRECTOR cut fight_53241740024663 pri 75.0
+FEED Edda Bramble settles in Bellmire, looking for work.
+FEED Wren of the Ford turns up 21 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Garm Hollow is sworn into the watch.
+FEED Floor 3 - a tomb, remade as the confection: 2 cave spiders, 1 drowned giant rat, 1 hollowed skeleton minion.
+FEED Osric Rivers turns up 36 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 giant rat, 1 hollowed skeleton minion, 1 drowned slime, 1 hollowed cave spider, 1 hollowed slime.
+FEED Harl Quarryman is sworn into the watch.
+FEED Mira Ashwood settles in Bellmire, looking for work.
+FEED Ingrid Thatcher turns up 39 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton mage, 2 skeleton warriors, 1 skeleton mage, 1 hollowed cave spider.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+DIRECTOR cut lord_53241740024663 pri 100.0
+FEED Rolf Quarryman is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED The Rattling Host falls to Rolf Stonehand.
+FEED The Rattling Host is slain on floor 5!
+FEED The hoard is split 7 ways - 22 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut raid pri 95.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 pit viper, 1 wraithtouched puglin, 1 emberbound blood wasp, 1 gorged puglin, 1 drowned skeleton rogue, 1 drowned blood wasp.
+FEED Corvin Fenwick settles in Bellmire, looking for work.
+FEED Bran Ashwood is killed by skeleton rogue.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Osric Rivers turns up 71 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Floor 7 - a workshop, remade as a workshop: 1 blood wasp, 1 gorged blood wasp, 2 skeleton warriors, 1 puglin, 1 pit viper.
+FEED Garm Fenwick is sworn into the watch.
+FEED Nessa Bramble is killed by skeleton minion.
+FEED Edda Bramble is killed by skeleton minion.
+FEED Harl Quarryman is killed by skeleton minion.
+FEED A building is burning!
+FEED Garm Hollow is killed by skeleton warrior.
+FEED Rolf Quarryman is killed by skeleton warrior.
+FEED A building is burning!
+DIRECTOR cut raid pri 95.0
+FEED Ingrid Thatcher turns up 80 gold on floor 7.
+FEED Floor 7 cleared.
+FEED The attack is driven off. The gates hold.
+FEED Floor 8 - a fallen hold, remade as a treasury: 2 skeleton mages, 1 emberbound skeleton warrior, 1 cave bat, 1 drowned risen bones, 1 emberbound imp, 1 scar adder.
+FEED The oil is running low.
+DIRECTOR cut fight_53241740024663 pri 75.0
+SOAK min=20 fps_min=19 fps_avg=96.1 day=51 hour=15.1 people=202 viewers_alive=6 in=20 home=19 wiped=0 viewer_dead=9 rerolls=8 catches=0 raids=30 cut=fight_53241740024663 nodes=16968 mem_mb=485
+SOAK shot soak_02 cut=fight_53241740024663
+FEED BigAxe is already waiting at the dungeon mouth.
+FEED Talen Rivers is sworn into the watch.
+FEED Rask Ashwood turns up 86 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Floor 9 - a temple, remade as a shrine: 2 emberbound scar adders, 1 wraithtouched skeleton warrior, 1 wraithtouched cave bat, 1 cave bat, 1 emberbound skeleton mage, 1 emberbound risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Petra Bramble settles in Bellmire, looking for work.
+FEED Ingrid Thatcher turns up 90 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 587 gold, 27 ore, 20 stone, 2 pieces of salvaged gear and 5 potions. 48 kills between them.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Petra Thatcher is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED The attack is driven off. The gates hold.
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 41 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 slime, 1 skeleton minion.
+FEED Rolf Stonehand turns up 13 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 giant rat, 1 slime, 1 hollowed cave bat.
+DIRECTOR cut fight_56157620167317 pri 75.0
+FEED Wren Rivers is sworn into the watch.
+FEED Rolf Stonehand turns up 27 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 giant rat, 1 drowned puglin, 1 cave bat, 1 hollowed risen bones.
+FEED Harl Bramble settles in Bellmire, looking for work.
+FEED Osric Ashwood turns up 44 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Sable Thatcher is sworn into the watch.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed cave bat, 1 hollowed puglin, 1 hollowed slime, 1 cave bat, 1 slime.
+FEED Wren of the Ford turns up 55 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Floor 5 - a buried town, remade as a barrack room: 2 cave spiders, 1 risen bones, 1 drowned skeleton warrior, 1 skeleton warrior.
+FEED The Grubmother rises. Vast, slow, and patient.
+DIRECTOR cut lord_56157620167317 pri 100.0
+FEED The Grubmother falls to Ingrid Thatcher.
+FEED Corvin Hollow is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED Rolf Stonehand turns up 67 gold on floor 5.
+FEED Floor 5 cleared.
+DIRECTOR cut raid pri 95.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned risen bones, 2 drowned pit vipers, 1 emberbound puglin, 1 emberbound skeleton rogue, 1 pit viper.
+FEED Osric Rivers settles in Bellmire, looking for work.
+FEED Osric Ashwood turns up 72 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Petra Thatcher is killed by skeleton rogue.
+FEED Petra Bramble is killed by skeleton warrior.
+FEED Floor 7 - a workshop, remade as a workshop: 2 emberbound pit vipers, 1 risen bones, 1 blood wasp, 1 skeleton warrior, 1 emberbound skeleton rogue.
+FEED Talen Rivers is killed by skeleton warrior.
+FEED Sable Thatcher is killed by skeleton warrior.
+FEED Garm the Younger is sworn into the watch.
+FEED Garm Fenwick is killed by skeleton minion.
+FEED Corvin Fenwick is killed by skeleton warrior.
+DIRECTOR cut raid pri 95.0
+FEED Wren Rivers is killed by skeleton warrior.
+FEED The attack is driven off. The gates hold.
+DIRECTOR cut fight_56157620167317 pri 75.0
+FEED Osric Rivers turns up 79 gold on floor 7.
+FEED Floor 7 cleared.
+SOAK min=21 fps_min=33 fps_avg=93.4 day=53 hour=3.2 people=204 viewers_alive=6 in=21 home=20 wiped=0 viewer_dead=9 rerolls=8 catches=0 raids=32 cut=fight_56157620167317 nodes=16878 mem_mb=472
+FEED BigAxe is already waiting at the dungeon mouth.
+FEED Floor 8 - a fallen hold, remade as a treasury: 2 imps, 1 skeleton mage, 1 gorged imp, 1 wraithtouched skeleton mage, 1 wraithtouched imp, 1 emberbound imp.
+FEED The oil is running low.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Cort Ashwood is sworn into the watch.
+FEED Ingrid Bramble settles in Bellmire, looking for work.
+FEED Osric Ashwood turns up 89 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Floor 9 - a temple, remade as a shrine: 1 cave bat, 1 drowned scar adder, 1 wraithtouched skeleton warrior, 1 wraithtouched scar adder, 1 emberbound skeleton mage, 1 risen bones, 1 skeleton mage.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Rolf Stonehand turns up 133 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Out of oil, the party feels its way back up from floor 9.
+FEED Osric Ashwood and 6 others come home to Bellmire with 579 gold, 27 ore, 20 stone, 3 pieces of salvaged gear and 5 potions. 48 kills between them.
+FEED 8 creatures boil out of the dungeon!
+DIRECTOR cut raid pri 95.0
+FEED The attack is driven off. The gates hold.
+FEED Wren Coalfoot is sworn into the watch.
+DIRECTOR cut hero_1005 pri 33.6069425940514
+FEED Osric Ashwood and 6 others descend into the scar.
+FEED They carry 41 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave bat, 1 bog frog.
+FEED Rask Ashwood turns up 10 gold on floor 1.
+FEED Floor 1 cleared.
+DIRECTOR cut fish_393106963674 pri 60.0
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 giant rats, 1 slime, 1 hollowed giant rat.
+FEED Rask Ashwood turns up 28 gold on floor 2.
+FEED Floor 2 cleared.
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 2 drowned slimes, 1 risen bones.
+FEED Cort of the Ford is sworn into the watch.
+DIRECTOR cut fight_58960203768328 pri 75.0
+FEED Sable Ashwood settles in Bellmire, looking for work.
+FEED Osric Rivers turns up 42 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed giant rat, 1 skeleton minion, 1 risen bones, 1 drowned puglin, 1 drowned cave bat.
+FEED Ysolde Hollow turns up 52 gold on floor 4.
+FEED Floor 4 cleared.
+FEED Maela of the Ford is sworn into the watch.
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 1 skeleton mage, 1 drowned risen bones, 1 skeleton warrior, 1 cave spider.
+FEED Nightwing rises. Too fast to see coming.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+DIRECTOR cut lord_58960203768328 pri 100.0
+FEED Nightwing falls to Osric Rivers.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 7 ways - 24 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Ysolde Hollow, Wren of the Ford, Ingrid Thatcher.
+DIRECTOR cut fish_391613791391 pri 60.0
+FEED Floor 6 - a worked seam, remade as the firepits: 1 gorged skeleton rogue, 1 puglin, 2 wraithtouched pit vipers, 1 drowned skeleton rogue, 1 drowned risen bones.
+FEED Petra of the Ford settles in Bellmire, looking for work.
+FEED Ingrid Thatcher turns up 83 gold on floor 6.
+FEED Floor 6 cleared.
+FEED Rask Ashwood is sworn into the watch.
+FEED Floor 7 - a workshop, remade as a workshop: 1 drowned pit viper, 1 skeleton rogue, 2 risen bones, 1 drowned blood wasp, 1 skeleton warrior.
+DIRECTOR cut fight_58960203768328 pri 76.2268707608818
+FEED 8 bandits are riding on the west road!
+FEED Rask Ashwood is killed by a bandit.
+FEED Ysolde Hollow turns up 94 gold on floor 7.
+FEED Floor 7 cleared.
+FEED Cort Ashwood is killed by a bandit.
+FEED A building is burning!
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 emberbound scar adder, 1 gorged scar adder, 1 drowned skeleton mage, 1 emberbound risen bones, 1 skeleton mage, 1 drowned imp, 1 gorged risen bones.
+FEED The oil is running low.
+FEED Maela of the Ford is killed by a bandit.
+FEED Edda Bramble is sworn into the watch.
+FEED A building is burning!
+FEED Edda Ashwood settles in Bellmire, looking for work.
+SOAK min=22 fps_min=20 fps_avg=82.4 day=56 hour=14.2 people=211 viewers_alive=6 in=22 home=21 wiped=0 viewer_dead=9 rerolls=8 catches=0 raids=34 cut=fight_58960203768328 nodes=17422 mem_mb=485
+DIRECTOR cut raid pri 95.0
+FEED BigAxe is already waiting at the dungeon mouth.
+FEED Cort of the Ford is killed by a bandit.
+FEED Corvin Hollow is killed by a bandit.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED Rask Ashwood turns up 112 gold on floor 8.
+FEED Floor 8 cleared.
+FEED Floor 9 - a temple, remade as a shrine: 1 emberbound cave bat, 1 risen bones, 2 skeleton mages, 1 wraithtouched scar adder, 1 cave bat, 1 drowned scar adder.
+DIRECTOR cut fight_58960203768328 pri 75.0
+FEED Maela Thatcher is sworn into the watch.
+FEED Rask Ashwood turns up 110 gold on floor 9.
+FEED Floor 9 cleared.
+FEED Floor 10 - a prison, remade as a buried wood: 1 emberbound blood wasp, 1 emberbound imp, 1 wraithtouched skeleton mage, 1 wraithtouched blood wasp, 2 emberbound skeleton mages, 1 gorged risen bones, 1 emberbound scar adder.
+FEED The Gravewyrm rises. The thing the dungeon was built to hold.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR cut lord_58960203768328 pri 100.0
+FEED Maela the Younger settles in Bellmire, looking for work.
+FEED Ysolde Hollow the sage falls on floor 10 to the dark below. Level 19, 138 kills. !reroll to rise again.
+FEED Ingrid the Younger is sworn into the watch.
+FEED The Gravewyrm falls to Osric Rivers.
+FEED The Gravewyrm is slain on floor 10!
+FEED The hoard is split 6 ways - 60 gold each to Osric Ashwood, Osric Rivers, Rolf Stonehand, Rask Ashwood, Wren of the Ford, Ingrid Thatcher.
+FEED Out of oil, the party feels its way back up from floor 10.
+FEED Osric Ashwood and 5 others come home to Bellmire with 1059 gold, 33 ore, 24 stone, 3 pieces of salvaged gear and 3 potions. 57 kills between them.
+DIRECTOR cut hero_1001 pri 33.533827662468
+FEED Osric Ashwood and 5 others descend into the scar.
+FEED They carry 35 flasks of oil between them.
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed bog frog, 1 cave bat, 1 bog frog.
+FEED Petra Stonehand is sworn into the watch.
+DIRECTOR cut fight_62091352362999 pri 75.0
+FEED Wren of the Ford turns up 13 gold on floor 1.
+FEED Floor 1 cleared.
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 2 bog frogs, 1 slime.
+SOAK window close requested at 1354 s
+SOAK finalize at 1355 s

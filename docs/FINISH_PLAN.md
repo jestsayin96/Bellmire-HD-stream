@@ -32,6 +32,6 @@ Scheduled build runs work through this list top to bottom. Each run:
         first death of a fresh hero gets a grace (knocked out, not killed) once.
 - [x] 7. (DONE Nov 11, cycle 56: follow camera marches the line through house boxes / off-floor cells and pulls in; town-night fill light on the followed one; tight-party bars stagger 0.21 m; tools/_camfix_test.gd CAMFIX_TEST OK; renders/cycles/20261111_camfix) Fixes: follow camera never inside walls (raycast pull-in); soft fill light on the followed hero at night;
         offset health bars in tight parties.
-- [ ] 8. Soak: 30 min (4x speed) with the director on, 6 fake viewers enlisting/delving; no script errors;
+- [x] 8. (DONE Nov 11, cycle 57: 22 min wall = 56 valley days, 0 script errors, memory flat 443-485 MB, FPS avg 150 -> 82 as the town grew 148 -> 211 people; camera-in-scenery fix underground) Soak: 30 min (4x speed) with the director on, 6 fake viewers enlisting/delving; no script errors;
         FPS logged; fix what breaks.
-- [ ] 9. Docs: RUNNING.md (keys V, F10, L; Twitch config), PROGRESS.md, this list all ticked.
+- [x] 9. (DONE Nov 11, cycle 57: RUNNING.md has V, F10, L and the live Twitch section) Docs: RUNNING.md (keys V, F10, L; Twitch config), PROGRESS.md, this list all ticked.

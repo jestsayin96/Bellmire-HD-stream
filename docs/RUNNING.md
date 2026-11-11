@@ -19,6 +19,9 @@
 | Space | pause / resume |
 | [ and ] | game speed 1x, 2x, 4x, 8x |
 | Enter | type a chat command as yourself ("MrE"), e.g. `!enlist knight`, `!delve`, `!fish`; Esc closes |
+| V | **director** (stream mode): the camera runs itself - raids, fights, floor lords, catches, heroes, a slow tour. Touching the camera pauses it 20 s |
+| F10 | hide / show the whole interface (clean picture for OBS) |
+| L | the Guild Roll panel (top right) on / off |
 | H | hide / show the key help |
 | (while a delve runs) | party frames on the left: each delver's HP, the floor, the party's oil |
 | (when a floor lord fights) | its name card in the Chronicle, a boss bar at the top centre; the director (V) cuts to it first |
@@ -38,8 +41,14 @@ From a terminal, without the editor:
 ```
 
 ## Chat
-There is **no Twitch connection** in this build. Chat commands come in through `town.chat_line(user_id,
-display_name, message)`; the test tools use a fake feed. Nothing is ever posted anywhere.
+**Live Twitch chat (read-only).** On Play the game joins `#jestsayin96` anonymously and prints
+`TWITCH joined #jestsayin96` in the console. Anyone's `!` command in your Twitch chat goes into the game as
+their own hero (keyed by their Twitch user id). Nothing is ever posted back to Twitch; StreamElements,
+Nightbot and other bots are ignored; 3 s per-viewer cooldown; at most 4 commands a frame.
+Settings: `%APPDATA%\Godot\app_userdata\Jests HD Medieval Adventure\twitch.cfg` (written on first run):
+`channel`, `enabled` (false = no Twitch), `ignore` (bot names). You can still type commands yourself with
+Enter (that hero is "MrE", a different hero from your Twitch account).
+Not yet: follows, subs, bits and channel points (needs a Twitch token - a later phase).
 
 | Command | What happens |
 |---|---|

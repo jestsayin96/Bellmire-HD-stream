@@ -159,9 +159,9 @@ func _process(delta: float) -> void:
         return
     var any := false
     for p in town.get("people"):
-        var f: Townsfolk = p
-        if not is_instance_valid(f):
+        if not is_instance_valid(p):
             continue
+        var f: Townsfolk = p
         var t: float = float(_beat.get(f, randf_range(0.0, 6.5))) - delta
         if t <= 0.0:
             t = randf_range(3.5, 6.5)

@@ -573,6 +573,13 @@ func _pull_in(real: float) -> void:
 		_cam_delve = _delve_at(pivot)
 		if _cam_delve == null:
 			return
+		# the followed hero stands on a cell the grid calls solid (a doorway, a prop's
+		# square): the doorway rule below then parked the camera 4 m off their head,
+		# inside the scenery (soak frame 02). Underground the camera sits high above
+		# the walls anyway - leave it there.
+		if _solid_at(pivot):
+			_pull_d = 1.0e9
+			return
 	else:
 		# only the houses whose footprint circle touches the line (xz)
 		var a := Vector2(pivot.x, pivot.z)

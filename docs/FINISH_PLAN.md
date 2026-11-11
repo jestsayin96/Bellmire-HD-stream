@@ -26,7 +26,7 @@ Scheduled build runs work through this list top to bottom. Each run:
         barrels/crates by houses, Chair_1 + Table_Large outside the tavern, BookStand/Candle at the chapel,
         Banner_* on landmarks) and dungeons (Chain_Coil, Cage_Small, CandleStick_Stand, Bookcase in themed
         rooms, registered as obstacles). Re-run tools/_offfloor.gd and tools/_townwalk.gd: no clipping regressions.
-- [ ] 5. Bosses: from the original's lore (bestiary/floor lords) — make lord floors feel like events: bigger
+- [x] 5. (DONE Nov 11, cycle 54: lords 1.2x taller, Chronicle name card on rise and fall, scripts/boss_bar.gd top centre, director cuts to the lord at 100; tools/_boss_test.gd BOSS_TEST OK; renders/cycles/20261111_boss) Bosses: from the original's lore (bestiary/floor lords) — make lord floors feel like events: bigger
         lord, a name card in the Chronicle, a boss bar at the top while the fight lasts, the director at 100.
 - [ ] 6. Raid balance: heroes under level 3 hang back (guard the square) unless the town is breached;
         first death of a fresh hero gets a grace (knocked out, not killed) once.

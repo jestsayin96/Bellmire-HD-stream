@@ -21,6 +21,7 @@
 | Enter | type a chat command as yourself ("MrE"), e.g. `!enlist knight`, `!delve`, `!fish`; Esc closes |
 | H | hide / show the key help |
 | (while a delve runs) | party frames on the left: each delver's HP, the floor, the party's oil |
+| (when a floor lord fights) | its name card in the Chronicle, a boss bar at the top centre; the director (V) cuts to it first |
 
 Sound: music on its own bus at -14 dB (day / night / raid, crossfaded), world sounds at -6 dB, town wind
 at -20 dB. Change them in OBS or in scripts/sfx.gd (BUS_DB). All audio is CC0: assets/audio/LICENSE.txt.

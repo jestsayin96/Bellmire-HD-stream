@@ -2,7 +2,7 @@ class_name AutoDirector
 extends Node
 ## Stream mode: the camera directs itself so Bellmire can run unattended.
 ## Every second it scores what is happening and cuts to the best shot:
-##   raid on the town  >  a fight below  >  a catch being landed  >  a party
+##   a floor's lord fighting (100)  >  raid on the town  >  a fight below  >  a catch being landed  >  a party
 ##   walking a floor   >  a viewer's hero out in town  >  a slow tour of the town.
 ## A shot is held at least HOLD_MIN s; anything 20+ points hotter cuts in early;
 ## after HOLD_MAX s a quiet shot moves on to something else.
@@ -85,6 +85,8 @@ func _process(delta: float) -> void:
         cut = true
     elif best["key"] == _cur["key"]:
         _cur["pri"] = best["pri"]               # same story, keep watching
+    elif String(best["key"]).begins_with("lord_") and not String(_cur["key"]).begins_with("lord_"):
+        cut = true                              # a lord has risen: go now
     elif float(best["pri"]) >= cur_pri + 20.0 and _held >= 2.0:
         cut = true                              # something much hotter
     elif _held >= HOLD_MIN and float(best["pri"]) > cur_pri:
@@ -147,6 +149,12 @@ func _best(avoid: String = "") -> Dictionary:
         if st == "home":
             continue
         var viewers := 0.0 if (d as Delve).npc_party else 10.0
+        var lord: Monster = (d as Delve).lord_fighting()
+        if lord:
+            # a lord on its floor is the event of the night: nothing outranks it
+            var lh := float(lord.def.get("h", 5.0))
+            c.append({"key": "lord_%d" % d.get_instance_id(), "pri": 100.0 + viewers * 0.1,
+                      "node": lord, "dist": clampf(12.0 + lh * 2.2, 20.0, 42.0), "pitch": -55.0})
         if st == "fight":
             c.append({"key": "fight_%d" % d.get_instance_id(), "pri": 75.0 + viewers + hurt * 10.0,
                       "node": body, "dist": 20.0, "pitch": -60.0})

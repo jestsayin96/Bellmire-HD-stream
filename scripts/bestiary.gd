@@ -102,6 +102,8 @@ const BOSS_DEFS := {
 }
 const LESSER := ["hollow_king", "grubmother", "rattling_host", "nightwing"]
 const GREATER := ["gravewyrm", "ossuary_lord", "pale_duchess", "mourncoil"]
+## a lord stands this much taller than its canon height: a floor lord is an event
+const LORD_SCALE := 1.2
 static var _spent: Array = []
 static var pending_title := ""
 
@@ -177,12 +179,12 @@ static func pick(floor_no: int) -> Dictionary:
 static func boss_def(b: Dictionary) -> Dictionary:
     var out: Dictionary = (boss_body(b) as Dictionary).duplicate(true)
     out["name"] = b["title"]
-    out["h"] = float(b["h"])
+    out["h"] = float(b["h"]) * LORD_SCALE
     out["tint"] = b["tint"]
     out["boss"] = true
     out["note"] = b.get("note", "")
     out["aura"] = b.get("aura", Color(1, 0.8, 0.4))
-    out["lift"] = float(out.get("lift", 0.0)) * float(b["h"]) / float(boss_body(b)["h"]) * 0.5
+    out["lift"] = float(out.get("lift", 0.0)) * float(out["h"]) / float(boss_body(b)["h"]) * 0.5
     if b.has("hand"):
         out["hand"] = b["hand"]
         out["off"] = b.get("off", "")

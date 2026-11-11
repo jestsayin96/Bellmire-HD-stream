@@ -134,6 +134,8 @@ func _next_floor() -> void:
         if note != "":
             note = note.substr(0, 1).to_upper() + note.substr(1) + "."
         _say("%s rises. %s" % [dun.lord.def.get("name", "A lord"), note])
+        FeedHUD.card_on(town, String(dun.lord.def.get("name", "A lord")),
+            ("Lord of floor %d. %s" % [floor_no, note]).strip_edges(), dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
     if not dark and not _warned_low and oil > 0.0 and oil <= float(alive_now):
         _warned_low = true
         _say("The oil is running low.")
@@ -236,6 +238,24 @@ func _census() -> String:
         var nm := String(k)
         parts.append("%d %s" % [counts[k], nm if int(counts[k]) == 1 or nm.ends_with("s") else nm + "s"])
     return ", ".join(parts) if not parts.is_empty() else "nothing stirring"
+
+func _party_uids(ms: Array) -> Array:
+    var out: Array = []
+    for m in ms:
+        out.append(m["uid"])
+    return out
+
+## the floor's lord while it is up and fighting (risen, alive), else null:
+## the boss bar and the director watch this
+func lord_fighting() -> Monster:
+    if state != "fight" or dun == null or not is_instance_valid(dun) or _alive().is_empty():
+        return null
+    if dun.lord == null or not is_instance_valid(dun.lord):
+        return null
+    var l: Monster = dun.lord
+    if l.state == Monster.S.DEAD or l._entering():
+        return null
+    return l
 
 func _foes() -> Array:
     var out: Array = []
@@ -546,6 +566,8 @@ func _loot(alive: Array) -> void:
             took.append(String(m["h"]["name"]))
         _gold += share * alive.size()
         _say("%s is slain on floor %d!" % [dun.lord.def.get("name", "The lord"), floor_no])
+        FeedHUD.card_on(town, String(dun.lord.def.get("name", "The lord")),
+            "Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
         _say("The hoard is split %d ways - %d gold each to %s." % [took.size(), share, ", ".join(took)])
     else:
         var f: Dictionary = alive[_rng.randi() % alive.size()]

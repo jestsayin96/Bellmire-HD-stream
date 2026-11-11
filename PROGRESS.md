@@ -380,3 +380,27 @@ Town
   _offfloor 0 of 1126, _delve_test (DELVE_OIL=1) ENDED, TWITCH_PARSE OK, parse check 0 script errors.
 - Note: _delve_test without DELVE_OIL hits its 150 s cap on floor 3 both before and after this change
   (no ENDED); with DELVE_OIL=1 (the documented short run) it ends.
+
+
+## Cycle 54 - floor lords as events (2026-11-11)
+- Bestiary.LORD_SCALE 1.2: every lord stands a fifth taller than its canon height (lift scaled with it).
+  Canon untouched: the eight lords, their titles and notes, the floors ending in 5 / every 10th.
+- FeedHUD.card(title, sub, colour) / FeedHUD.card_on(town, ...): a dark gold-edged name card at the head
+  of the Chronicle, in the lord's own colour - "The Grubmother / Lord of floor 5. Vast, slow, and
+  patient." when it rises, "Slain on floor N by ..." when it falls. Held 14 real seconds; the Chronicle
+  shows 4 lines instead of 6 while it is up so it stays clear of the party frames.
+- scripts/boss_bar.gd (BossBar, tabs): top centre under the key help, in the RtsCamera layer (F10 hides
+  it). Lord's name in its colour, a blood-red HP bar with numbers, "Lord of floor N · against the delvers
+  (4 standing)". Shown only while Delve.lord_fighting() (risen, alive, the party in a fight); a viewers'
+  party's lord before the town's band's.
+- AutoDirector: a fighting lord is shot "lord_<id>" at pri 100 (+0.1 for viewers), above the raid (95),
+  and cuts in at once, framed 20-42 m out by the lord's height.
+- Fix found on the way (rts_camera._track): a freed selection (a slain lord / raider the director was
+  following) compares equal to null, so the old null test let `selected is HeroBody` error every frame
+  (145 SCRIPT ERRORs in _director_test). Now tests validity; _director_test 0 errors.
+- tools/_boss_test.gd (windowed, new): floor 5 straight away; 8/8 checks, BOSS_TEST OK (lord 5.3 m vs
+  canon 4.4; card; bar; director on the lord 8 ms after it rose; bar gone when the lord is down).
+  Renders renders/cycles/20261111_boss (card.png, fight_0.png, fight_1.png) - looked at: card readable,
+  bar clear of the help, camera on the lord with the selection ring.
+- _delve_test (DELVE_OIL=1) ENDED, _offfloor 0 of 1174, TWITCH_PARSE OK, PARTY_TEST OK, parse check
+  0 script errors (the 3 old 'material is null' engine lines remain).

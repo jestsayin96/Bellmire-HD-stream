@@ -11,6 +11,21 @@ var _seen := 0
 var _box: VBoxContainer
 var _panel: PanelContainer
 var _ages: Array = []
+## the lord's name card: a dark gold-edged block at the head of the Chronicle
+## when a lord rises (and again when one falls); held CARD_SECS real seconds
+const CARD_SECS := 14.0
+var _card: PanelContainer
+var _card_title: Label
+var _card_sub: Label
+var _card_t := 0.0
+
+## put a name card up in the town's Chronicle (no-op without a FeedHUD)
+static func card_on(town: Node, title: String, sub: String, col: Color) -> void:
+    if town == null:
+        return
+    for c in town.get_children():
+        if c is FeedHUD:
+            (c as FeedHUD).card(title, sub, col)
 
 func _ready() -> void:
     layer = 20
@@ -43,12 +58,60 @@ func _ready() -> void:
     title.add_theme_font_size_override("font_size", 15)
     title.add_theme_color_override("font_color", Color(0.48, 0.20, 0.12))
     v.add_child(title)
+    _card = PanelContainer.new()
+    var cs := StyleBoxFlat.new()
+    cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
+    cs.border_color = Color(0.78, 0.62, 0.30)
+    cs.set_border_width_all(2)
+    cs.set_corner_radius_all(5)
+    cs.content_margin_left = 12
+    cs.content_margin_right = 12
+    cs.content_margin_top = 6
+    cs.content_margin_bottom = 8
+    _card.add_theme_stylebox_override("panel", cs)
+    var cv := VBoxContainer.new()
+    cv.add_theme_constant_override("separation", 0)
+    _card.add_child(cv)
+    _card_title = Label.new()
+    _card_title.add_theme_font_size_override("font_size", 28)
+    _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+    _card_title.add_theme_constant_override("outline_size", 6)
+    cv.add_child(_card_title)
+    _card_sub = Label.new()
+    _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+    _card_sub.custom_minimum_size = Vector2(500, 0)
+    _card_sub.add_theme_font_size_override("font_size", 15)
+    _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
+    cv.add_child(_card_sub)
+    _card.visible = false
+    v.add_child(_card)
     _box = VBoxContainer.new()
     _box.add_theme_constant_override("separation", 1)
     v.add_child(_box)
     _panel.visible = false
 
+func card(title: String, sub: String, col: Color) -> void:
+    if _card == null:
+        return
+    _card_title.text = title
+    _card_title.add_theme_color_override("font_color", col.lightened(0.35))
+    _card_sub.text = sub
+    var cs := _card.get_theme_stylebox("panel") as StyleBoxFlat
+    if cs:
+        cs.border_color = col.lerp(Color(0.78, 0.62, 0.30), 0.4)
+    _card.visible = true
+    _card_t = CARD_SECS
+    _rebuild()
+
+func card_showing() -> bool:
+    return _card != null and _card.visible
+
 func _process(delta: float) -> void:
+    if _card_t > 0.0:
+        _card_t -= delta / maxf(Engine.time_scale, 0.001)    # real seconds at any speed
+        if _card_t <= 0.0:
+            _card.visible = false
+            _rebuild()
     if source.size() != _seen:
         _seen = source.size()
         _rebuild()
@@ -56,12 +119,13 @@ func _process(delta: float) -> void:
         _ages[i] = float(_ages[i]) + delta
     # the panel itself fades when the town has been quiet a while
     var newest: float = _ages.back() if not _ages.is_empty() else 999.0
-    _panel.modulate.a = clampf(1.0 - (newest - 40.0) / 8.0, 0.0, 1.0)
+    _panel.modulate.a = 1.0 if _card_t > 0.0 else clampf(1.0 - (newest - 40.0) / 8.0, 0.0, 1.0)
 
 func _rebuild() -> void:
     for c in _box.get_children():
         c.queue_free()
-    var lines := source.slice(maxi(0, source.size() - SHOW))
+    # with a card up, fewer lines, so the Chronicle does not climb into the party frames
+    var lines := source.slice(maxi(0, source.size() - (SHOW - 2 if card_showing() else SHOW)))
     while _ages.size() < source.size():
         _ages.append(0.0)
     for i in lines.size():
@@ -74,4 +138,4 @@ func _rebuild() -> void:
         var k := float(i + 1) / float(lines.size())
         lb.add_theme_color_override("font_color", Color(0.20, 0.13, 0.08).lerp(Color(0.55, 0.45, 0.33), 1.0 - k))
         _box.add_child(lb)
-    _panel.visible = not lines.is_empty()
+    _panel.visible = not lines.is_empty() or card_showing()

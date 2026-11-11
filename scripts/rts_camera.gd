@@ -32,6 +32,7 @@ var _speed_lb: Label
 var _chat: LineEdit
 var _layer: CanvasLayer
 var party_frames: PartyFrames
+var boss_bar: BossBar
 
 func setup(t: Node3D) -> void:
 	town = t
@@ -80,6 +81,10 @@ func setup(t: Node3D) -> void:
 	party_frames = PartyFrames.new()
 	_layer.add_child(party_frames)
 	party_frames.setup(t)
+	# the lord's bar: top centre, only while a floor lord fights
+	boss_bar = BossBar.new()
+	_layer.add_child(boss_bar)
+	boss_bar.setup(t)
 
 	director = AutoDirector.new()
 	add_child(director)
@@ -340,8 +345,12 @@ func _hero_body(uid: String, roster: Roster) -> Node3D:
 	return null
 
 func _track(real: float) -> void:
-	if selected != null and not is_instance_valid(selected):
-		_select(null)
+	# a freed selection (a slain lord, a raider gone) compares equal to null, so
+	# test validity, not null-ness, and drop the ring and frame with it
+	if not is_instance_valid(selected):
+		if _ring != null and _ring.visible:
+			_select(null)
+		selected = null
 	# a followed hero who goes down the scar (or comes back up) changes bodies
 	if selected is HeroBody and (not selected.is_visible_in_tree() or not selected.is_inside_tree()):
 		var hb: HeroBody = selected

@@ -31,8 +31,12 @@ static func on(owner_node: Node3D, height: float, hostile := false) -> HealthBar
         owner_node.add_child(hb)
         hb.set_instance_shader_parameter("hostile", 1.0 if hostile else 0.0)
         hb.visible = false
-    hb.base_h = height
-    hb.position = Vector3(0, height + hb.lift, 0)
+    # never higher than the first height asked for: an owner whose height is
+    # measured from its meshes counts this bar too - asking for height + 0.25
+    # every frame walked the bar (and anything aimed at it) up into the sky
+    hb.base_h = minf(hb.base_h, height) if hb.has_meta("hb_set") else height
+    hb.set_meta("hb_set", true)
+    hb.position = Vector3(0, hb.base_h + hb.lift, 0)
     return hb
 
 func _exit_tree() -> void:

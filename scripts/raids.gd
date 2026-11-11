@@ -122,6 +122,7 @@ func _defenders() -> Array:
                 st.merge({"hp": r.max_hp(h), "max": r.max_hp(h), "atk": r.attack(h), "ac": r.armour_class(h),
                           "to_hit": r.attack_bonus(h), "speed": r.speed(h)})
                 st["green"] = int(h.get("level", 1)) < GREEN_BELOW
+                st["cls"] = String(h.get("class", ""))
             elif role == "guard":
                 st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4})
             else:
@@ -205,6 +206,7 @@ func _process(delta: float) -> void:
         return
     _live = true
     var defs := _defenders()
+    _tick_blessings(delta)
     var centre: Vector3 = town.get("_market_pos")
     # breach: raiders inside the walls wreck the town
     var inside := 0
@@ -226,7 +228,7 @@ func _process(delta: float) -> void:
     # health bars on everyone in the fight
     for rr in raiders:
         var rn: Node3D = rr["node"]
-        HealthBar3D.on(rn, (rn as Monster)._height() + 0.25 if rn is Monster else 2.05, true).set_hp(float(rr["hp"]), float(rr["max"]), rr["target"] != null)
+        HealthBar3D.on(rn, Spells.body_height(rn) + 0.25 if rn is Monster else 2.05, true).set_hp(float(rr["hp"]), float(rr["max"]), rr["target"] != null)
     for dd in defs:
         var st0: Dictionary = _fighters[dd]
         HealthBar3D.on(dd, 2.05, false).set_hp(float(st0["hp"]), float(st0["max"]), st0["target"] != null)
@@ -254,7 +256,7 @@ func _process(delta: float) -> void:
             tg = null
         if tg == null:
             if _flat(n.global_position, centre) > 3.0:
-                _step(n, centre, float(r["speed"]), delta)
+                _step(n, centre, _speed(r), delta)
                 _anim(n, "walk")
             continue
         _engage(n, r, tg, delta, false)
@@ -326,10 +328,13 @@ func _hold_square(d: Node3D, st: Dictionary, centre: Vector3, i: int, delta: flo
 ## a fight between `me` (stats `st`) and `tg` - a raider dict (for a defender)
 ## or a defender node (for a raider)
 func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> void:
+    if defending and BOOKS.has(String(st.get("cls", ""))):
+        _cast_engage(me, st, tg, delta)
+        return
     var tn: Node3D = (tg["node"] as Node3D) if defending else (tg as Node3D)
     st["swing"] = float(st["swing"]) - delta
     if _flat(me.global_position, tn.global_position) > 2.2:
-        _step(me, tn.global_position, float(st["speed"]) * 1.15, delta)
+        _step(me, tn.global_position, _speed(st) * 1.15, delta)
         _anim(me, "run")
         return
     var to := tn.global_position - me.global_position
@@ -340,6 +345,8 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
     _anim(me, "attack")
     var ts: Dictionary = tg if defending else _fighters[tg]
     var dmg := _strike(float(st["atk"]), int(st["to_hit"]), int(ts["ac"]))
+    if dmg > 0.0 and not defending:
+        dmg = _ward_soaks(ts, dmg)
     if dmg <= 0.0:
         Sfx.at("swing", tn.global_position, -4.0)
         return
@@ -355,6 +362,181 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
             _raider_falls(tg, killer)
         else:
             _defender_falls(tn, ts, killer)
+
+## ------------------------------------------------------------ spells (D2)
+## The arcane callings (mage, sage, cleric) fight a raid with spells from
+## SPELL_REACH, not a staff to the face. A mage works through its book (bolt,
+## bolt, chain, fire); a sage first lays RENEW on the most hurt defender near
+## it, else slows a raider with frost; a cleric first WARDS the most hurt,
+## else SMITES (the scar's dead take it hardest). Damage lands when the spell
+## does, after its flight. In a scar the cast misfires in turn (Spells).
+const SPELL_REACH := 8.0
+const SPELL_SWING := 1.6
+const BOOKS := {"mage": ["bolt", "bolt", "chain", "fire"], "sage": ["frost", "bolt"], "cleric": ["smite", "bolt"]}
+const MENDERS := {"sage": "renew", "cleric": "ward"}
+const CHAIN_R := 5.0             # the chain leaps to a raider this near the last
+const FIRE_R := 2.6              # the fire burst catches every raider this near its mark
+const FROST_SLOW := 4.0          # s a frosted raider goes at half pace
+const SMITE_DEAD := 1.5          # smite on the scar's dead
+const RENEW_HEAL := 0.30         # of the target's max, over Spells.RENEW_T
+const WARD_SOAK := 0.35          # of the target's max, soaked for WARD_T s
+const WARD_T := 8.0
+
+func _speed(st: Dictionary) -> float:
+    return float(st["speed"]) * (0.5 if float(st.get("slow_t", 0.0)) > 0.0 else 1.0)
+
+func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> void:
+    var tn: Node3D = tg["node"]
+    st["swing"] = float(st["swing"]) - delta
+    if _flat(me.global_position, tn.global_position) > SPELL_REACH:
+        _step(me, tn.global_position, _speed(st) * 1.15, delta)
+        _anim(me, "run")
+        return
+    var to := tn.global_position - me.global_position
+    me.rotation.y = atan2(to.x, to.z)
+    if float(st["swing"]) > 0.0:
+        return
+    st["swing"] = SPELL_SWING
+    var cls := String(st["cls"])
+    var in_scar: bool = town.call("in_scar", me.global_position)
+    var who := _name_of(me, st)
+    if MENDERS.has(cls):
+        var hurt = _most_hurt(me, SPELL_REACH)
+        if hurt != null:
+            var mk := Spells.cast(String(MENDERS[cls]), me, hurt, in_scar)
+            Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(mk, "Spellcasting"))
+            _bless(hurt, mk)
+            return
+    var book: Array = BOOKS[cls]
+    var kind: String = book[int(st.get("spell_i", 0)) % book.size()]
+    st["spell_i"] = int(st.get("spell_i", 0)) + 1
+    var hit: Array = [tg]
+    var more: Array = []
+    if kind == "chain":
+        var at := tn.global_position
+        for _k in range(2):
+            var nx = null
+            var nd := CHAIN_R
+            for r in raiders:
+                if hit.has(r):
+                    continue
+                var d := _flat((r["node"] as Node3D).global_position, at)
+                if d < nd:
+                    nd = d
+                    nx = r
+            if nx == null:
+                break
+            hit.append(nx)
+            more.append(nx["node"])
+            at = (nx["node"] as Node3D).global_position
+    var actual := Spells.cast(kind, me, tn, in_scar, more)
+    Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
+    if not Spells.HARM.has(actual):
+        # a misfire into a mending spell mends the raider - wild magic
+        if actual == "heal" or actual == "renew" or actual == "mend":
+            tg["hp"] = minf(float(tg["max"]), float(tg["hp"]) + float(st["atk"]) * 0.5)
+        return
+    var t := Spells.flight(actual, me, tn)
+    get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, hit, tn.global_position,
+        float(st["atk"]), int(st["to_hit"]), who))
+
+func _spell_lands(kind: String, hit: Array, at: Vector3, atk: float, to_hit: int, who: String) -> void:
+    var first: Dictionary = hit[0]
+    if kind == "fire":
+        var p := at
+        if raiders.has(first) and is_instance_valid(first["node"]):
+            p = (first["node"] as Node3D).global_position
+        for r in raiders.duplicate():
+            if _flat((r["node"] as Node3D).global_position, p) <= FIRE_R:
+                _spell_hurt(r, _strike(atk * 0.8, to_hit, int(r["ac"])), atk, who)
+        return
+    if kind == "chain":
+        var k := 1.0
+        for r in hit:
+            if raiders.has(r):
+                _spell_hurt(r, _strike(atk * k, to_hit, int(r["ac"])), atk, who)
+            k *= 0.65
+        return
+    if not raiders.has(first):
+        return
+    var mult := 1.0
+    if kind == "frost":
+        mult = 0.7
+    elif kind == "smite" and String(first.get("kind", "")) == "monster":
+        mult = SMITE_DEAD
+    var dmg := _strike(atk * mult, to_hit, int(first["ac"]))
+    if kind == "frost" and dmg > 0.0:
+        first["slow_t"] = FROST_SLOW
+    _spell_hurt(first, dmg, atk, who)
+
+func _spell_hurt(r: Dictionary, dmg: float, atk: float, who: String) -> void:
+    var n: Node3D = r["node"]
+    if dmg <= 0.0 or not raiders.has(r) or not is_instance_valid(n):
+        return
+    Sfx.at("hit", n.global_position)
+    r["hp"] = float(r["hp"]) - dmg
+    if n is Monster:
+        (n as Monster).hp = float(r["hp"])
+        (n as Monster)._number(dmg, dmg > atk)
+        (n as Monster)._flash()
+    if float(r["hp"]) <= 0.0:
+        _raider_falls(r, who)
+
+## the defender within reach worst off (under 60%), not already blessed
+func _most_hurt(me: Node3D, reach: float):
+    var best = null
+    var bf := 0.6
+    for d in _fighters.keys():
+        if not is_instance_valid(d):
+            continue
+        var s: Dictionary = _fighters[d]
+        if s.get("ko", false) or float(s["hp"]) <= 0.0 or float(s.get("blessed_t", 0.0)) > 0.0:
+            continue
+        if _flat((d as Node3D).global_position, me.global_position) > reach:
+            continue
+        var f := float(s["hp"]) / maxf(float(s["max"]), 1.0)
+        if f < bf:
+            bf = f
+            best = d
+    return best
+
+func _bless(d: Node3D, kind: String) -> void:
+    var s: Dictionary = _fighters.get(d, {})
+    if s.is_empty():
+        return
+    s["blessed_t"] = Spells.RENEW_T
+    match kind:
+        "renew":
+            s["hot_t"] = Spells.RENEW_T
+            s["hot_rate"] = float(s["max"]) * RENEW_HEAL / Spells.RENEW_T
+        "ward":
+            s["ward"] = float(s["max"]) * WARD_SOAK
+            s["ward_t"] = WARD_T
+        "heal", "mend":
+            s["hp"] = minf(float(s["max"]), float(s["hp"]) + float(s["max"]) * 0.25)
+        _:
+            pass         # a misfire into a harming spell fizzles on a friend
+
+func _ward_soaks(ts: Dictionary, dmg: float) -> float:
+    if float(ts.get("ward_t", 0.0)) <= 0.0 or float(ts.get("ward", 0.0)) <= 0.0:
+        return dmg
+    var soak := minf(float(ts["ward"]), dmg)
+    ts["ward"] = float(ts["ward"]) - soak
+    return dmg - soak
+
+## renew mends a little every frame; wards, blessings and frost wear off
+func _tick_blessings(delta: float) -> void:
+    for d in _fighters.keys():
+        var s: Dictionary = _fighters[d]
+        for key in ["blessed_t", "ward_t"]:
+            if float(s.get(key, 0.0)) > 0.0:
+                s[key] = float(s[key]) - delta
+        if float(s.get("hot_t", 0.0)) > 0.0 and not s.get("ko", false) and float(s["hp"]) > 0.0:
+            s["hot_t"] = float(s["hot_t"]) - delta
+            s["hp"] = minf(float(s["max"]), float(s["hp"]) + float(s["hot_rate"]) * delta)
+    for r in raiders:
+        if float(r.get("slow_t", 0.0)) > 0.0:
+            r["slow_t"] = float(r["slow_t"]) - delta
 
 func _name_of(n: Node3D, st: Dictionary) -> String:
     if st.has("name"):

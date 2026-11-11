@@ -656,7 +656,8 @@ const RUBBLE := "res://addons/kaykit_dungeon_remastered/Assets/gltf/"
 func _wreck_a_building() -> void:
     var pool: Array = []
     for plot in town.get("plots"):
-        if plot.get("ruined", false) or not plot.has("node") or plot.has("landmark"):
+        if plot.get("ruined", false) or not plot.has("node") or plot.has("landmark") \
+                or plot.get("unbuilt", false) or plot.has("special"):
             continue
         if is_instance_valid(plot["node"]) and _inside_walls(plot["pos"]):
             pool.append(plot)

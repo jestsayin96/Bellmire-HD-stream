@@ -122,6 +122,8 @@ var _nature_made := 0
 var _rejected := 0
 var _overlap_dropped := 0
 var _wall_info := {}
+var wall_parts: Array = []     # wall blocks, merlons, towers, gate arches (D3: palisade -> stone)
+var growth = null              # scripts/growth.gd - what the town level shows (D3)
 var _scar := Vector3.ZERO      # centre of the wild-magic scar (dungeon mouth beyond it)
 var _north_from := Vector3.ZERO  # where the Delvers' Road leaves the ring
 var _scar_info := {}
@@ -938,6 +940,16 @@ func _build() -> void:
     _build_farms()
     _scatter_country()
     _meadow()
+    # D3: the town grows with its level - lots, upgrades, new buildings, the wall
+    growth = preload("res://scripts/growth.gd").new()
+    add_child(growth)
+    growth.setup(self)
+    growth.show_level(1, true)
+
+## D3: economy.check_town_level calls this; quiet at the founding
+func show_level(lv: int, quiet := false) -> void:
+    if growth != null:
+        growth.show_level(lv, quiet)
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,
@@ -1372,6 +1384,7 @@ func _build_wall() -> void:
         mmi.multimesh = mm
         mmi.material_override = stone
         add_child(mmi)
+        wall_parts.append(mmi)
     # towers: at both ends of every gap, plus every ~45 m along the wall
     var gates: Array = []
     var since := 0
@@ -1408,6 +1421,7 @@ func _tower(p: Vector3, gate: bool) -> void:
     t.material_override = _stone()
     t.position = Vector3(p.x, g - 1.0 + (h + 1.0) * 0.5, p.z)
     add_child(t)
+    wall_parts.append(t)
     var r := MeshInstance3D.new()
     var rm := CylinderMesh.new()
     rm.top_radius = 0.05
@@ -1426,8 +1440,8 @@ func _gatehouse(a: Vector3, b: Vector3) -> Vector3:
     var w := d.length()
     var g := maxf(height_at(a.x, a.z), height_at(b.x, b.z))
     if w < 26.0:
-        _box(Vector3(w, 2.6, WALL_T + 0.6), Vector3(mid.x, g + WALL_H + 1.6, mid.z),
-             _stone(), atan2(-d.z, d.x))
+        wall_parts.append(_box(Vector3(w, 2.6, WALL_T + 0.6), Vector3(mid.x, g + WALL_H + 1.6, mid.z),
+             _stone(), atan2(-d.z, d.x)))
     var out := Vector3(mid.x, 0.0, mid.z).normalized()
     if absf(out.z) > 0.9 and out.z > 0.0:
         return Vector3(snappedf(mid.x, 0.1), 0.0, snappedf(mid.z, 0.1))   # bridge road already runs south
@@ -3644,7 +3658,9 @@ const ROLE_LANDMARK := {"chief": "lm_hall", "healer": "lm_chapel", "fletcher": "
 func _home_for(rng: RandomNumberGenerator) -> Dictionary:
     for i in range(40):
         var pl: Dictionary = plots[rng.randi() % plots.size()]
-        if not pl.has("back") and not pl.has("shop") and not pl.has("landmark") and pl.has("door"):
+        # D3: nobody is housed on a staked lot or in a hall the town has raised
+        if not pl.has("back") and not pl.has("shop") and not pl.has("landmark") and pl.has("door") \
+                and not pl.get("unbuilt", false) and not pl.has("special"):
             return pl
     return plots[rng.randi() % plots.size()]
 

@@ -39,6 +39,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] D3. Buildings that level up: each town level/tier visibly changes Bellmire - plots fill in, houses
       upgrade (bigger/stone storeys, signs, gardens), new buildings unlock (guild hall, market hall,
       stables, bathhouse, mage tower, keep walls in stone...). Render levels 1, 3, 5, 7 side by side.
+      DONE cycle 64: scripts/growth.gd - 56 house plots fill 23/31/39/45/51/56 over the lore's 6 levels (staked
+      lots till then); gardens/signs+lamps/stone plinth+chimney/+1 storey/pennants; palisade -> stone wall at 4;
+      Market Hall 3, Town Stables 4, Delvers' Guild + Bathhouse 5, Mage Tower 6. D3_TEST OK; renders/cycles/20261111_d3
+      (the lore has 6 levels, not 7: rendered 1, 3, 5, 6).
 - [ ] D4. More guards and the cavalry: more watch with patrol routes, gate guards, tower archers; mounted
       town guards (horses + riders, TOWN GUARDS ONLY) patrolling the roads and riding out at raids.
       Horses: CC0 (Quaternius animals) or a simple rig. Stables building from D3.

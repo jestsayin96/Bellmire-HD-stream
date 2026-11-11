@@ -692,3 +692,38 @@ Town
   L5 OK.
 - Cycle 59 follow-up: the original was found (path now in WORK_PLAN LORE RULE). It has fire + frost as its
   spells and the scar misfire rule - D2's fire/frost match it; the other D2 spells come from the plan's list.
+
+
+## Cycle 64 - D3: buildings that level up (desktop, 2026-11-11)
+- Lore: the town ladder is the original sim.gd's six levels (a hamlet, a village, a market town, a walled town,
+  a free city, the seat of the valley) - six, so the renders are levels 1, 3, 5 and 6 (the plan said 7).
+  "A walled town" is level 4, so that is where the stone wall comes; below it the wall is a timber palisade.
+  The original's named places are the Chief's Hall, Chapel, Tavern, Market Row and the towers; the new halls
+  are the plan's list named plainly in that voice (the Delvers' Guild after the Delvers' Road).
+- scripts/growth.gd (new, no class_name, preloaded by town.gd): built ONCE at the founding, then only shown or
+  hidden, so a level change is free and the navmesh never moves (every new building stands inside a house
+  plot's own footprint). House plots (not landmarks/shops) fill nearest the market first, front rank before
+  back: 23/31/39/45/51/56 of 56 at levels 1-6; the rest are staked lots (cleared earth, pegs, line, a timber
+  stack, a crate). Upgrades hang off each house node: planters at the door (2), a hanging sign in the
+  district colour + door lamp (3), stone plinth + chimney (4), a storey more (5, scale.y x1.2), ridge pennant (6).
+  New buildings, each on a house plot: Market Hall (3, open hall on stone pillars, stalls), Town Stables (4,
+  open-fronted barn, horses in the stalls - for D4), Delvers' Guild (5, the house raised, banners, notice
+  board), Bathhouse (5, stone, copper dome, steam), Mage Tower (6, stone drum, MegaKit round tiled cap,
+  violet windows, turning crystal + light). Feed lines on each rise ("8 new houses go up in Bellmire." ...).
+  Falling back hides them again.
+- town.gd (backup .bak_d3): wall_parts (wall blocks, merlons, towers, gate arches) for the palisade/stone
+  swap; growth set up at the end of _build at level 1 (quiet); show_level(lv, quiet); _home_for skips lots
+  and raised halls. economy.gd (.bak_d3): check_town_level calls town.show_level (quiet at the founding).
+  raids.gd (.bak_d3): raiders never "burn" a staked lot or a hall.
+- tools/_d3_test.gd (headless): levels 1..6 up, houses only ever increase, specials exactly as planned per
+  level, every house's visibility right, wall palisade < 4 <= stone, 18 news lines, falling back to 2 closes
+  the halls and brings lots back. D3_TEST OK (twice).
+- tools/_d3_shot.gd (windowed) -> renders/cycles/20261111_d3: overview_level1/3/5/6 + levels_1_3_5_6.png,
+  each new building, house_level1/3/4/6, lot, wall_level3/4, montages new_buildings.png, house_and_wall.png.
+  Looked at: lots on the hamlet's outer streets fill with houses by level 6, the palisade is brown timber at 3
+  and stone at 4, the Market Hall reads (pillars, tiled roof, stalls, sign), the Stables show horses in open
+  stalls (moved forward + prism roofs tiled world-triplanar after the first look), Guild banners/sign/board,
+  Bathhouse dome, Mage Tower with its cap. Weak spot: on a single house the plinth/sign changes are small from
+  a street-level eye; the chimneys and pennants read best from above.
+- Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 934, TWITCH_PARSE OK, TOWNWALK
+  in_solid 5/6482 (0.077%) raid 0/4102 PASS, _delve_test ran with 0 script errors.

@@ -65,6 +65,24 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       the Chronicle now and then.
 - [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
 - [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
+- [ ] D10. Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
+      FIXED LANES in a 2x2 grid, each with its own queue and colour-coded frame:
+        top-left     = the director (always, the main view)
+        top-right    = BITS / cheers lane (gold frame) - any cheer 15 s, 50+ bits 20 s, 100+ bits 30 s
+        bottom-left  = SUBSCRIBERS lane (purple frame) - new sub / resub / gift 30 s, gift bomb: each gifter 30 s
+        bottom-right = CHANNEL POINTS lane (teal frame) - 15 s; free !look 10 s when it is otherwise empty
+      Only lanes with someone in them open: no spotlights = full-screen director; one lane busy = director +
+      that pane side by side; more = the 2x2 (an empty lane shows the director's wide view of the town).
+      Each pane: a SubViewport + Camera3D following that hero (into the scar too), half resolution, the
+      viewer's name + class + "cheered 500 bits" / "subscribed" / "redeemed <reward>" across the top, a thin
+      timer bar. API: town.spotlight(uid, lane, seconds, reason). Test with local commands (!look, and
+      test-only !testbits <n> / !testsub / !testpoints) and a tool that fills all lanes and renders the grid.
+      F10 hides pane labels. Watch FPS.
+      FREE CHAT (no pane, the main view instead): the director's hero shots favour the most recently active
+      chatters (ahead of random heroes, behind raids/lords/fights); a small "Now watching: <name> the <species>
+      <class>" banner in the main view; their name glows above their hero for ~5 s after any command; free
+      !look borrows the channel-points lane for 10 s only when it is empty.
+- [ ] D11. Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
@@ -89,6 +107,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] L8. (Mr. E's decision, Nov 11) Wild magic below: every spell in the dungeon is a check against the scar - d20 + casting mod (INT mage/sage/necromancer, WIS cleric/druid/monk, CHA warlock/bard/paladin) + proficiency vs DC 10 + floor/2 (cap 20); fail = misfire as on the scar's surface (Spells.cast in_scar=true); nat 1 always, nat 20 never. Monsters unaffected. Test the misfire rates (strong vs weak caster, shallow vs deep).
 - [ ] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
 - [ ] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
+
+## Twitch phase 2 (main chat, needs Mr. E's Client ID)
+- [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:
+      bits (channel.cheer), channel points (channel.channel_points_custom_reward_redemption.add), follows,
+      subs -> town.spotlight(uid, lane bits|subs|points, seconds, reason) + in-game effects. Chat replies: !stats / !hero / !inventory answered in
+      Twitch chat as "@name ..." (Send Chat Message API), rate-limited.
 
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.

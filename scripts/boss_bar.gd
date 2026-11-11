@@ -110,4 +110,6 @@ func refresh() -> void:
 	_bar.value = clampf(lord.hp, 0.0, lord.max_hp)
 	_num.text = "%d / %d" % [int(ceil(maxf(lord.hp, 0.0))), int(lord.max_hp)]
 	var who := "the town's band" if delve.npc_party else "the delvers"
-	_sub.text = "Lord of floor %d  ·  against %s (%d standing)" % [delve.floor_no, who, delve._alive().size()]
+	var rare := bool(lord.def.get("unique", false)) or bool(lord.def.get("rare", false)) or String(lord.def.get("kind", "")) == "unique"
+	var what := "A rare one, met on floor %d" % delve.floor_no if rare else "Lord of floor %d" % delve.floor_no
+	_sub.text = "%s  ·  against %s (%d standing)" % [what, who, delve._alive().size()]

@@ -193,15 +193,27 @@ func _people() -> void:
         if pts.size() >= count:
             break
         pts.append(_cell_pos(c))
-    for i in range(mini(count, pts.size())):
+    # creatures at home in this floor's theme are likelier (Bestiary.pool_for);
+    # a pack animal brings its kind along, and the pack counts toward the floor
+    var theme := String(info.get("theme", ""))
+    var placed := 0
+    var i := 0
+    while placed < count and i < pts.size():
         var p: Vector3 = _out_of_props(pts[i])
-        var m := Monster.new()
-        m.def = Bestiary.pick(floor_no)
-        m.state = Monster.S.PATROL
-        m.roam = 3.0
-        m.position = Vector3(p.x, 0.0, p.z)
-        root.add_child(m)
-        monsters.append(m)
+        i += 1
+        var d := Bestiary.pick(floor_no, theme)
+        var n := 1 + mini(int((d.get("ways", {}) as Dictionary).get("pack", 0)), count - placed - 1)
+        for k in range(n):
+            var m := Monster.new()
+            m.def = d if k == 0 else Bestiary.make(String(d["type"]), String(d["strain"]))
+            m.state = Monster.S.PATROL
+            m.roam = 3.0
+            var off := Vector3.ZERO if k == 0 else Vector3(cos(float(k) * 2.1), 0, sin(float(k) * 2.1)) * 1.1
+            var q: Vector3 = p if k == 0 else _out_of_props(p + off)
+            m.position = Vector3(q.x, 0.0, q.z)
+            root.add_child(m)
+            monsters.append(m)
+            placed += 1
     if bool(info.get("boss", false)):
         var b := Bestiary.next_boss(floor_no)
         if not b.is_empty():

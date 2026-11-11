@@ -462,6 +462,17 @@ func _fight(delta: float) -> void:
             state = "descend"
             _t = 0.0
         return
+    # venom keeps working after the bite (spider, snake, adder, wasp)
+    for m in alive:
+        if float(m.get("venom", 0.0)) > 0.0:
+            m["venom"] = float(m["venom"]) - delta
+            m["hp"] = float(m["hp"]) - float(m.get("venom_dps", 0.0)) * delta
+            if float(m["hp"]) <= 0.0:
+                m["venom"] = 0.0
+                _hero_hit(m)
+    alive = _alive()
+    if alive.is_empty():
+        return
     for m in alive:
         var b: HeroBody = m["body"]
         var h: Dictionary = m["h"]
@@ -504,7 +515,7 @@ func _fight(delta: float) -> void:
         m["swing"] = 1.3 + _rng.randf() * 0.4
         # 5e: d20 + attack bonus vs the creature's AC (10 + depth band)
         var roll := _d20(-1 if dark else 0)
-        var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0)
+        var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0) + int((tgt.def.get("ways", {}) as Dictionary).get("guard", 0))
         if caster:
             Spells.cast("bolt", b, tgt.global_position + Vector3(0, tgt._height() * 0.5, 0), false)
             Rig.play(b._anim, "Spellcast_Shoot")
@@ -516,6 +527,7 @@ func _fight(delta: float) -> void:
             tgt.hurt(dmg, roll == 20)
             if not was_dead and tgt.state == Monster.S.DEAD:
                 _kills += 1
+                _on_kill(tgt)
                 roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
                 if tgt.def.get("boss", false):
                     _say("%s falls to %s." % [tgt.def.get("name"), h["name"]])
@@ -533,23 +545,110 @@ func _fight(delta: float) -> void:
                 near = m
         if near == null:
             continue
+        var ways: Dictionary = mon.def.get("ways", {})
+        # a grudge goes for the weakest delver standing, not the nearest
+        if ways.has("grudge"):
+            for m in alive:
+                if float(m["hp"]) / float(m["max"]) < float(near["hp"]) / float(near["max"]):
+                    near = m
+            nd = _flat((near["body"] as Node3D).global_position, mon.global_position)
         var r := REACH + mon._height() * 0.2
+        var shots := float(ways.get("ranged", 0.0))
+        if shots > 0.0:
+            r = shots
         mon.state = Monster.S.IDLE
+        if ways.has("raise") and nd < 14.0:
+            _raise_tick(mon, int(ways["raise"]), delta)
         if nd > r:
             _go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7, delta)
             mon._play("walk")
             continue
-        mon.rotation.y = atan2((near["body"] as Node3D).global_position.x - mon.global_position.x, (near["body"] as Node3D).global_position.z - mon.global_position.z)
+        var nb: Node3D = near["body"]
+        mon.rotation.y = atan2(nb.global_position.x - mon.global_position.x, nb.global_position.z - mon.global_position.z)
         mon._swing -= delta
         if mon._swing > 0.0:
             continue
         mon._swing = 1.8 if not mon.def.get("boss", false) else 1.4
-        mon._play("attack")
+        var chest := nb.global_position + Vector3(0, 1.1, 0)
+        if ways.has("breath"):
+            mon._swing = 2.6
+            mon.breathe(chest)
+        elif shots > 0.0:
+            mon._swing = 2.2
+            mon.shoot(chest)
+        else:
+            mon._play("attack")
         var hit := _d20(1 if dark else 0) + 2 + floor_no / 2
         if hit >= roster.armour_class(near["h"]):
             var base := float(mon.def.get("boss_atk", (6.0 + float(floor_no) * 2.2) * float(mon.def.get("atk", 1.0))))
-            near["hp"] = float(near["hp"]) - base * _rng.randf_range(0.6, 1.0)
+            var dmg := base * _rng.randf_range(0.6, 1.0)
+            near["hp"] = float(near["hp"]) - dmg
             _hero_hit(near)
+            if ways.has("venom") and float(near["hp"]) > 0.0:
+                near["venom"] = float(ways["venom"])
+                near["venom_dps"] = base * 0.12
+            # the breath splashes whoever stands beside the mark
+            if ways.has("breath"):
+                for o in alive:
+                    if o != near and float(o["hp"]) > 0.0 and _flat((o["body"] as Node3D).global_position, nb.global_position) < float(ways["breath"]):
+                        o["hp"] = float(o["hp"]) - dmg * 0.5
+                        _hero_hit(o)
+
+## ---- ways (L1). A slain ooze divides; a gravecaller calls up the dead.
+func _spawn_on_floor(d: Dictionary, at: Vector3) -> Monster:
+    var root: Node3D = dun.info["root"]
+    var m := Monster.new()
+    m.def = d
+    m.state = Monster.S.IDLE
+    m.roam = 2.0
+    var q: Vector3 = dun._out_of_props(at - root.global_position)
+    m.position = Vector3(q.x, 0.0, q.z)
+    root.add_child(m)
+    m.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
+    m.hp = m.max_hp
+    dun.monsters.append(m)
+    return m
+
+var _split_said := -1
+func _on_kill(tgt: Monster) -> void:
+    var ways: Dictionary = tgt.def.get("ways", {})
+    if ways.has("splits"):
+        var n := int(ways["splits"])
+        for k in range(n):
+            var a := float(k) * TAU / float(n)
+            _spawn_on_floor(Bestiary.make("slimeling", String(tgt.def.get("strain", "plain"))),
+                tgt.global_position + Vector3(cos(a), 0, sin(a)) * 0.9)
+        if _split_said != floor_no:
+            _split_said = floor_no
+            _say("The %s divides." % String(tgt.def.get("name", "ooze")))
+
+func _raise_tick(mon: Monster, most: int, delta: float) -> void:
+    var t := float(mon.get_meta("raise_t", 4.0)) - delta
+    if t > 0.0:
+        mon.set_meta("raise_t", t)
+        return
+    mon.set_meta("raise_t", 9.0)
+    var risen: Array = mon.get_meta("risen", [])
+    var live: Array = []
+    for r in risen:
+        if is_instance_valid(r) and (r as Monster).state != Monster.S.DEAD:
+            live.append(r)
+    if live.size() >= most:
+        mon.set_meta("risen", live)
+        return
+    mon._play("summon")
+    var a := _rng.randf() * TAU
+    var d := Bestiary.make("minion", "hollowed")
+    d["name"] = "risen dead"
+    d["anims"] = Bestiary.A_SKL
+    d["raised"] = true
+    var m := _spawn_on_floor(d, mon.global_position + Vector3(cos(a), 0, sin(a)) * 1.6)
+    m.call_deferred("rise")
+    live.append(m)
+    mon.set_meta("risen", live)
+    if not bool(mon.get_meta("said", false)):
+        mon.set_meta("said", true)
+        _say("A gravecaller raises the dead on floor %d." % floor_no)
 
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
 ## brought it down; anything else found belongs to whoever prised it open, and

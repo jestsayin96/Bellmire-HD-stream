@@ -460,3 +460,34 @@ Town
 - Fishers with a rod no longer fidget (a pace walked them off the dock).
 - RUNNING.md: V director, F10 clean screen, L guild roll, the live Twitch section and twitch.cfg.
 - Checks: parse 0 errors, _offfloor 0/904 off-floor, _twitch_parse OK, _delve_test progressing (floor 2).
+
+
+## Cycle 58 - L1, more monsters (laptop, 2026-11-11)
+- Lore read first (old bestiary.gd, NOTES.md bestiary/strains/biomes, data/*.json): the old game's creatures
+  are undead, ooze, beasts, fiends and the wyrm; strains rename and recolour; 14 themes. Everything new
+  keeps to those families and that plain voice; no lord was added (the eight are canon).
+- New creatures, all from CC0 bodies already in the project (no new download - see note):
+  bone bowman (KayKit Skeleton_Minion + the skeleton pack's own crossbow; keeps 8.5 m off and shoots a bone
+  bolt), bone sentinel (Skeleton_Warrior, blade, large shield; +3 to be hit), gravecaller (Skeleton_Mage +
+  staff; casts from 7 m and raises up to 2 "risen dead" that climb out of the floor with the KayKit awaken),
+  lost delver (KayKit Knight / Barbarian / Rogue_Hooded, pale and cold-glowing - the guild's own dead; goes
+  for the weakest delver), grave-whelp (the Quaternius dragon at 2.3 m; its breath splashes everyone within
+  2.8 m of its mark at half), slimeling (what a slime divides into when it dies).
+- Ways for the old creatures (Bestiary.WAYS): slimes split, spiders/snakes/adders/wasps leave venom that
+  keeps hurting, rats/wasps/bats/puglins come in packs, the skeleton mage and imp shoot from range, the
+  skeleton rogue holds a grudge. Delve reads them; numbers per hit are unchanged.
+- Home themes (Bestiary.HOMES / NEW_TYPES homes): a creature at home on the floor's FloorGen theme is three
+  times as likely there (pool_for). Depth bands widened: bowmen from floor 3, sentinels 5, gravecallers 6,
+  lost delvers 8, whelps 10. Nothing new on floors 1-2.
+- Two strains: scarborn (from floor 8 half the plain roll; its glow wanders the hue wheel like the scar's
+  motes), mossbacked (the drowned of meadow and wood floors). The old strain bands are unchanged.
+- tools/_l1_test.gd (headless, new): all 21 bodies load, every mapped animation exists, weapons on, heights
+  right; strains appear where they should; home weighting; a real floor-4 delve sees an ooze divide, a
+  gravecaller raise the dead, a bowman shoot, a whelp breathe, venom. L1_TEST OK.
+  Renders renders/cycles/20261111_l1 (new_creatures, new_strains, ways_shot_breath) - looked at: first pass the
+  lost delvers were flat blue silhouettes and the whelp was hidden by its own breath; tints lightened, whelp
+  scaled up, breath puffs smaller and from the mouth - second pass all read.
+- Note: Quaternius "Ultimate Monsters" (CC0: orc, ghost, yeti, mushroom king, demon...) is on Google Drive,
+  which refused every download today ("quota exceeded"). Worth a retry; they would slot in as more bodies.
+- Checks: parse 0 script errors (the 3 old 'material is null' lines), _delve_test (DELVE_OIL=1) ENDED all
+  four home, _offfloor 0 of 434, TWITCH_PARSE OK.

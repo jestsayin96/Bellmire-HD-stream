@@ -42,8 +42,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
-- [ ] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
+- [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
       each with stats, behaviour and a home biome/theme from the lore's bestiary; new strains.
+      DONE (Cycle 58): 6 creatures from owned CC0 bodies, ways in a fight, home themes, 2 strains; L1_TEST OK.
 - [ ] L2. More bosses: a set of floor lords and rare uniques (from the lore), each with a mechanic
       (summons, enrage, area attack), a name card and the boss bar; never two of the same in a row.
 - [ ] L3. More weapons and armour: more tiers and kinds (axes, spears, maces, bows, staves, shields,

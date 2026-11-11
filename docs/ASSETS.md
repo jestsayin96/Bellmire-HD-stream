@@ -70,10 +70,13 @@ gear.gd strip_props (hide KayKit built-in prop meshes), clothe (livery/role cape
 scripts/spells.gd - bolt / heal / ward / mend FX + wild-magic misfire rule; reusable by any caster, hero or monster.
 
 ## Monsters
-scripts/bestiary.gd (15 creatures, 6 strains, 8 canon lords, depth bands, boss bag), scripts/monster.gd (any creature or
+scripts/bestiary.gd (21 creatures, 8 strains, 8 canon lords, depth bands, home themes, ways in a fight, boss bag), scripts/monster.gd (any creature or
 lord: real-height scaling, anim maps, UAL graft for unanimated Quaternius-rig bodies, arms, strain tint, boss trappings).
 Models: addons/kaykit_character_pack_skeletons, addons/quaternius_monsters (Slime, Bat, Skeleton, Dragon),
 assets/monsters (Rat, Spider, Frog, Snake, Snake_Angry, Wasp, Imp, Puglin, UAL1/UAL2 animation libraries).
+L1 creatures reuse owned CC0 bodies: bone bowman (Skeleton_Minion + KayKit Skeleton_Crossbow), bone sentinel
+(Skeleton_Warrior + Skeleton_Blade + Skeleton_Shield_Large_A), gravecaller (Skeleton_Mage + Skeleton_Staff), lost delver
+(KayKit Knight / Barbarian / Rogue_Hooded, pale), grave-whelp (Quaternius Dragon, small), slimeling (Quaternius Slime, small).
 Library copies: village_assets/library/monsters.
 
 ## Dungeon

@@ -32,6 +32,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       + ward in raid combat (mage/sage/cleric cast at 8 m). _d2_spells D2_SPELLS OK; renders/cycles/20261111_d2.
       FOR THE LAPTOP: monster.gd _local_bounds() should skip HealthBar3D; delve.gd casters can call the new
       kinds: Spells.cast(kind, caster, target_body, in_scar, more_bodies) + Spells.flight() for the landing.
+      LAPTOP HALF DONE (Cycle 63): bars skip in Monster bounds; delve casters use the books + menders; D2_DELVE OK.
 - [ ] D3. Buildings that level up: each town level/tier visibly changes Bellmire - plots fill in, houses
       upgrade (bigger/stone storeys, signs, gardens), new buildings unlock (guild hall, market hall,
       stables, bathhouse, mage tower, keep walls in stone...). Render levels 1, 3, 5, 7 side by side.

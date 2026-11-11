@@ -484,6 +484,12 @@ func _fight(delta: float) -> void:
     for m in alive:
         if float(m.get("slow", 0.0)) > 0.0:
             m["slow"] = float(m["slow"]) - delta
+        # D2 spells: renew mends over time, a ward fades
+        if float(m.get("hot_t", 0.0)) > 0.0:
+            m["hot_t"] = float(m["hot_t"]) - delta
+            m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m.get("hot_rate", 0.0)) * delta)
+        if float(m.get("ward_t", 0.0)) > 0.0:
+            m["ward_t"] = float(m["ward_t"]) - delta
     for m in alive:
         var b: HeroBody = m["body"]
         var h: Dictionary = m["h"]
@@ -499,8 +505,10 @@ func _fight(delta: float) -> void:
             m["swing"] = float(m["swing"]) - delta * _pace(m)
             if low != null and float(m["swing"]) <= 0.0:
                 m["swing"] = 2.4
-                low["hp"] = minf(float(low["max"]), float(low["hp"]) + hp_pow)
-                Spells.cast("heal", b, (low["body"] as Node3D).global_position, false)
+                # D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
+                var got := Spells.cast(String(MENDERS.get(String(h["class"]), "heal")), b, low["body"], false)
+                Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
+                _bless(low, got, hp_pow)
                 continue
         var tgt: Monster = null
         var bd := 1e9
@@ -534,8 +542,8 @@ func _fight(delta: float) -> void:
             roll = _d20(-1 if dark else 0)
         var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0) + int((tgt.def.get("ways", {}) as Dictionary).get("guard", 0))
         if caster:
-            Spells.cast("bolt", b, tgt.global_position + Vector3(0, tgt._height() * 0.5, 0), false)
-            Rig.play(b._anim, "Spellcast_Shoot")
+            _cast_at(m, tgt, roll, ac, ability)
+            continue
         else:
             Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
         if roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac):
@@ -582,12 +590,12 @@ func _fight(delta: float) -> void:
         if nearest < 16.0:
             _lord_tick(mon, ways, alive, near, delta)
         if nd > r:
-            _go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7, delta)
+            _go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon), delta)
             mon._play("walk")
             continue
         var nb: Node3D = near["body"]
         mon.rotation.y = atan2(nb.global_position.x - mon.global_position.x, nb.global_position.z - mon.global_position.z)
-        mon._swing -= delta
+        mon._swing -= delta * _mon_pace(mon)
         if mon._swing > 0.0:
             continue
         mon._swing = 1.8 if not mon.def.get("boss", false) else 1.4
@@ -611,7 +619,7 @@ func _fight(delta: float) -> void:
         if hit >= roster.armour_class(near["h"]):
             var base := float(mon.def.get("boss_atk", (6.0 + float(floor_no) * 2.2) * float(mon.def.get("atk", 1.0))))
             var dmg := base * _rng.randf_range(0.6, 1.0) * fury
-            near["hp"] = float(near["hp"]) - dmg
+            near["hp"] = float(near["hp"]) - _soak(near, dmg)
             _hero_hit(near)
             if ways.has("venom") and float(near["hp"]) > 0.0:
                 near["venom"] = float(ways["venom"])
@@ -620,7 +628,7 @@ func _fight(delta: float) -> void:
             if ways.has("breath"):
                 for o in alive:
                     if o != near and float(o["hp"]) > 0.0 and _flat((o["body"] as Node3D).global_position, nb.global_position) < float(ways["breath"]):
-                        o["hp"] = float(o["hp"]) - dmg * 0.5
+                        o["hp"] = float(o["hp"]) - _soak(o, dmg * 0.5)
                         _hero_hit(o)
 
 ## ---- ways (L1). A slain ooze divides; a gravecaller calls up the dead.
@@ -716,7 +724,7 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
                 if float(o["hp"]) > 0.0 and _flat((o["body"] as Node3D).global_position, mon.global_position) < rr:
                     # a DEX save halves it (5e area rule)
                     var save := _rng.randi_range(1, 20) + roster.save_bonus(o["h"], "dex")
-                    o["hp"] = float(o["hp"]) - base * (0.5 if save >= 12 + floor_no / 4 else 1.0)
+                    o["hp"] = float(o["hp"]) - _soak(o, base * (0.5 if save >= 12 + floor_no / 4 else 1.0))
                     if nv.has("slow"):
                         o["slow"] = float(nv["slow"])
                     _hero_hit(o)
@@ -746,7 +754,7 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
                     weak = o
             mon.swoop((weak["body"] as Node3D).global_position)
             if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(weak["h"]):
-                weak["hp"] = float(weak["hp"]) - float(mon.def.get("boss_atk", 10.0)) * float(sw.get("mult", 1.5)) * _rng.randf_range(0.7, 1.0)
+                weak["hp"] = float(weak["hp"]) - _soak(weak, float(mon.def.get("boss_atk", 10.0)) * float(sw.get("mult", 1.5)) * _rng.randf_range(0.7, 1.0))
                 _hero_hit(weak)
     if ways.has("enrage") and not mon.enraged:
         if mon.hp / maxf(1.0, mon.max_hp) <= float((ways["enrage"] as Dictionary).get("at", 0.3)):
@@ -776,7 +784,7 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
             continue
         mon.shoot(ob.global_position + Vector3(0, 1.1, 0))
         if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(o["h"]):
-            o["hp"] = float(o["hp"]) - base * _rng.randf_range(0.6, 1.0)
+            o["hp"] = float(o["hp"]) - _soak(o, base * _rng.randf_range(0.6, 1.0))
             _hero_hit(o)
 
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
@@ -913,3 +921,123 @@ func _ability_hit(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes
                         _kills += 1
                         _on_kill(o)
                         roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
+
+## ---- D2 spells below (the desktop's Spells, used the way raids.gd uses them).
+## Each caster works through its book; a mending calling lays its own spell on
+## whoever is lowest. Damage lands when the spell does, after its flight.
+const BOOKS := {"mage": ["bolt", "bolt", "chain", "fire"], "sage": ["frost", "bolt"], "cleric": ["smite", "bolt"],
+                "necromancer": ["bolt", "chain"], "druid": ["frost", "bolt"], "warlock": ["bolt", "fire"]}
+const MENDERS := {"sage": "renew", "cleric": "ward", "paladin": "heal"}
+const CHAIN_R := 5.0        # the chain leaps to a creature this near the last
+const FIRE_R := 2.6         # the fire burst catches everything this near its mark
+const FROST_SLOW := 4.0     # s a frosted creature moves and swings at half pace
+const SMITE_DEAD := 1.5     # smite on the dead and the lost
+const WARD_SOAK := 0.35     # of the warded delver's max, soaked for WARD_T s
+const WARD_T := 8.0
+
+func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) -> void:
+    var b: HeroBody = m["body"]
+    var h: Dictionary = m["h"]
+    var book: Array = BOOKS.get(String(h["class"]), ["bolt"])
+    var kind := String(book[int(m.get("spell_i", 0)) % book.size()])
+    m["spell_i"] = int(m.get("spell_i", 0)) + 1
+    var hit: Array = [tgt]
+    var more: Array = []
+    if kind == "chain":
+        var at := tgt.global_position
+        for _k in range(2):
+            var nx: Monster = null
+            var nd := CHAIN_R
+            for f in _foes():
+                if hit.has(f):
+                    continue
+                var d := _flat((f as Node3D).global_position, at)
+                if d < nd:
+                    nd = d
+                    nx = f
+            if nx == null:
+                break
+            hit.append(nx)
+            more.append(nx)
+            at = nx.global_position
+    var actual := Spells.cast(kind, b, tgt, false, more)
+    Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
+    if not Spells.HARM.has(actual):
+        return
+    if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
+        return
+    var dmg := (roster.attack(h) * _rng.randf_range(0.55, 0.95) + kit_bonus) * (2.0 if roll == 20 else 1.0)
+    dmg *= _ability_mult(ability, tgt)
+    var t := Spells.flight(actual, b, tgt)
+    get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, m, hit, dmg, roll == 20, ability))
+
+func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: bool, ability: String) -> void:
+    if state != "fight" or dun == null or not is_instance_valid(dun):
+        return
+    var first: Monster = hit[0] if is_instance_valid(hit[0]) else null
+    match kind:
+        "fire":
+            if first == null:
+                return
+            var p := first.global_position
+            for f in _foes():
+                if _flat((f as Node3D).global_position, p) <= FIRE_R:
+                    _strike(m, f, dmg * 0.8, crit)
+        "chain":
+            var k := 1.0
+            for r in hit:
+                if is_instance_valid(r):
+                    _strike(m, r, dmg * k, crit)
+                k *= 0.65
+        "frost":
+            if first == null:
+                return
+            _strike(m, first, dmg * 0.7, crit)
+            first.set_meta("slow_t", _t + FROST_SLOW)
+        "smite":
+            if first == null:
+                return
+            var dead := String(first.def.get("family", "")) in ["undead", "the fallen"]
+            _strike(m, first, dmg * (SMITE_DEAD if dead else 1.0), crit)
+        _:
+            if first == null:
+                return
+            _strike(m, first, dmg, crit)
+    if first != null and is_instance_valid(first):
+        _ability_hit(ability, m, first, dmg, _foes())
+
+## one blow from a delver to a creature, with the kill's bookkeeping
+func _strike(m: Dictionary, tgt: Monster, dmg: float, crit: bool) -> void:
+    if tgt == null or not is_instance_valid(tgt) or tgt.state == Monster.S.DEAD or tgt._entering():
+        return
+    tgt.hurt(dmg * _ward(tgt), crit)
+    if tgt.state == Monster.S.DEAD:
+        _kills += 1
+        _on_kill(tgt)
+        roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
+        if tgt.def.get("boss", false):
+            _say("%s falls to %s." % [tgt.def.get("name"), m["h"]["name"]])
+
+## renew mends over Spells.RENEW_T; a ward soaks blows for WARD_T; heal is at once
+func _bless(o: Dictionary, kind: String, pow: float) -> void:
+    match kind:
+        "renew":
+            o["hot_t"] = Spells.RENEW_T
+            o["hot_rate"] = pow * 1.3 / Spells.RENEW_T
+        "ward":
+            o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow * 0.5)
+            o["ward"] = float(o["max"]) * WARD_SOAK
+            o["ward_t"] = WARD_T
+        "heal", "mend":
+            o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow)
+
+func _soak(o: Dictionary, dmg: float) -> float:
+    if float(o.get("ward_t", 0.0)) <= 0.0 or float(o.get("ward", 0.0)) <= 0.0:
+        return dmg
+    var s := minf(float(o["ward"]), dmg)
+    o["ward"] = float(o["ward"]) - s
+    return dmg - s
+
+## a frosted creature moves and swings at half pace
+func _mon_pace(mon: Monster) -> float:
+    return 0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0

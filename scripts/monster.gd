@@ -91,6 +91,8 @@ func _local_bounds(top: Node3D) -> AABB:
             box = ab if first else box.merge(ab)
             first = false
         for g in c.get_children():
+            if g is HealthBar3D:
+                continue      # the bar sits above the height: measuring it made it climb every frame
             var gx := xf * (g as Node3D).transform if g is Node3D else xf
             st.append([g, gx])
     return box
@@ -149,7 +151,8 @@ func _height() -> float:
             box = ab if first else box.merge(ab)
             first = false
         for g in c.get_children():
-            st.append(g)
+            if not g is HealthBar3D:
+                st.append(g)
     return box.end.y - global_position.y if not first else 2.0
 
 func _label() -> void:

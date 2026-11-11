@@ -669,3 +669,24 @@ Town
 - Checks: parse 0 script errors (3 old 'material is null' lines), _offfloor 1 of 1001 on the first run (a
   hero in a delve fight - delve code, untouched), then 0/903 and 0/1018 on two reruns; TWITCH_PARSE OK;
   TOWNWALK in_solid 0/6965 raid 0/3867 PASS; _delve_test ENDED 4 survivors, 0 script errors.
+
+
+## Cycle 63 - D2's laptop half: monster bars, spells below (laptop, 2026-11-11)
+- Merged origin/main (desktop D2 spells); PROGRESS.md append conflict resolved keeping both.
+- monster.gd: _local_bounds() and the _height() fallback skip HealthBar3D. Delve placed each bar at
+  _height() + 0.25 and _height() measured the bar - it climbed every frame (D2's cause, in the dungeon).
+- delve.gd: casters fight with the D2 spells the way raids.gd does. Books: mage bolt-bolt-chain-fire,
+  sage frost-bolt, cleric smite-bolt, necromancer bolt-chain, druid frost-bolt, warlock bolt-fire. Menders
+  lay their own spell on the lowest delver: sage renew (heal over Spells.RENEW_T), cleric ward (half a heal
+  now, then soaks 35% of max for 8 s), paladin heal. Spells.cast(kind, caster, target BODY, false, more)
+  and the damage lands after Spells.flight(): chain leaps to two more within 5 m at x0.65 each, fire
+  catches all within 2.6 m at x0.8, frost x0.7 and the creature moves and swings at half pace 4 s, smite
+  x1.5 on the dead and the lost. The L4 abilities (drain, hex, thorns) ride on the landing. Ward soaks
+  every way a creature hurts a delver (blow, breath, nova, swoop, volley). In-scar misfire stays off below
+  as before (Spells' in_scar = false) - a call for the desktop/lore if the dungeon should misfire too.
+- tools/_d2_delve_test.gd (headless, new): a party of all six casters and a knight; the delve casts bolt,
+  chain, fire, frost, smite, renew, ward; renew and ward land on delvers; frost slows; bars hold (worst rise
+  0.00 m over 15 bars); kills. D2_DELVE OK (twice). tools/_d2_delve_shot.gd: renders/cycles/20261111_d2_delve
+  - looked at: the Rattling Host with a fire burst at its feet, bolts flat from the casters, bar steady.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L1, L4,
+  L5 OK.

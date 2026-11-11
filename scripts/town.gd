@@ -291,6 +291,11 @@ func _ready() -> void:
         var eye := RtsCamera.new()
         add_child(eye)
         eye.call_deferred("setup", self)
+        # live Twitch chat, read only (user://twitch.cfg: channel, enabled, ignore)
+        var tw := TwitchChat.new()
+        tw.name = "TwitchChat"
+        add_child(tw)
+        tw.call_deferred("setup", self)
     call_deferred("_stock_piles")
     roster.load_all() if roster and roster.has_method("load_all") else null
     var hud := FeedHUD.new()

@@ -287,3 +287,33 @@ Town
   placed.
 - Lesson: a parse error in a class_name script makes the --script tools hang instead of failing; run
   `--headless --quit-after` first after edits.
+
+
+## Cycle 48 - live Twitch chat, phase 1 (2026-11-08)
+- scripts/twitch_chat.gd (class TwitchChat): read-only, anonymous (justinfan) Twitch IRC over
+  WebSocketPeer; login sent only once the socket is OPEN; PING/PONG; RECONNECT and drops retry with
+  backoff 2-60 s; half lines buffered across packets; only "!" commands; bots ignored by login;
+  3 s per-user cooldown; at most 4 commands a frame into town.chat_line(uid, display, text).
+  Viewer uid = Twitch user-id. Config: user://twitch.cfg (channel, enabled, ignore), written on first run.
+- town.gd starts it next to the RTS camera (Play runs only, never under --script tools).
+- tools/_twitch_parse.gd: 8/8 PASS offline. Live: "TWITCH joined #jestsayin96".
+- The local model's first draft did not run (Godot 3 connect syntax, read_packet() treated as a String,
+  login sent before the socket opened, PRIVMSG never matched because lines start with tags) and it pasted
+  a duplicate road block into town.gd that broke the build. Draft kept as scripts/twitch_chat.gd.bak_local;
+  town.gd restored from git and only the 5-line hook re-added.
+
+
+## Cycle 48b - Twitch chat restored on the desktop (2026-11-11)
+- twitch_chat.gd, tools/_twitch_parse.gd and the town.gd hook had been deleted (local model); restored.
+  Parse test 8/8, live "TWITCH joined #jestsayin96", and Mr. E's own "!enlist knight" from Twitch worked.
+  Broken local draft (twitch_chat.gd.bak_local) deleted.
+
+## Cycle 49 - the auto-director (stream mode) (2026-11-11)
+- scripts/auto_director.gd (AutoDirector), owned by the RTS camera. V toggles it, F10 hides/shows the
+  whole interface for a clean OBS layout. Touching the camera pauses it 20 s, then it resumes.
+- Every second it scores shots and cuts: raid 95 > fight below 75-95 (viewer parties +10, more hurt =
+  hotter) > a catch being landed 60 > a party walking a floor 45-55 > a viewer's hero in town 30 >
+  a slow tour (square, scar mouth, whole valley) 10. Holds 8 s minimum, 20+ hotter cuts early,
+  quiet shots move on after 22 s. While on: no selection ring, no unit frame.
+- tools/_director_test.gd: real town, 3 viewer knights, director at 4x: cuts hero -> catch -> hero ->
+  catch, frames in renders/cycles/20261111_director. 0 script errors.

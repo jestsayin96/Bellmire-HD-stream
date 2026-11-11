@@ -12,6 +12,8 @@ class_name RtsCamera
 ##   Tab             cycle through delves running below (and back to town)
 ##   Space           pause / resume            [ / ]         slower / faster (1x 2x 4x 8x)
 ##   Enter           type a chat command as yourself (no Twitch: local only)
+##   V               director: the camera runs itself (stream mode)
+##   F10             hide / show the whole interface
 ##   H               show / hide this help
 var town: Node3D
 var cam: Camera3D
@@ -73,6 +75,10 @@ func setup(t: Node3D) -> void:
 	_chat.text_submitted.connect(_send_chat)
 	_layer.add_child(_chat)
 	_update_speed_label()
+
+	director = AutoDirector.new()
+	add_child(director)
+	director.setup(self, t)
 
 func _ground(p: Vector3) -> float:
 	if p.y < Delve.DELVE_Y * 0.5:
@@ -245,6 +251,8 @@ var _f_hp: ProgressBar
 var _f_hp_lb: Label
 var _f_body: Label
 var _frame_t := 0.0
+var quiet := false          # stream mode: no selection ring, no unit frame
+var director: AutoDirector
 
 func _candidates() -> Array:
 	var out: Array = []
@@ -345,7 +353,9 @@ func _track(real: float) -> void:
 			focus = focus.lerp(selected.global_position, clampf(real * 6.0, 0.0, 1.0))
 	if _ring:
 		_ring.global_position = selected.global_position + Vector3(0, 0.08, 0)
-		_ring.visible = selected.is_visible_in_tree()
+		_ring.visible = selected.is_visible_in_tree() and not quiet
+	if _frame and quiet:
+		_frame.visible = false
 	_frame_t -= real
 	if _frame_t <= 0.0:
 		_frame_t = 0.2

@@ -23,10 +23,15 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       town band). Every walker uses the navmesh; doors on the street side; local avoidance between people.
       tools/_townwalk.gd must report in_solid under 0.2% and a render must show it.
       DONE cycle 58: in_solid 0/6999 (was 64/7194 = 0.89%), raiders+defenders 0/4911, doors 67/67 reachable; renders/cycles/20261111_d1.
-- [ ] D2. Spells aimed at the sky: bolts fly up at the ceiling/sky and still hit (the "4th of July").
+- [x] D2. Spells aimed at the sky: bolts fly up at the ceiling/sky and still hit (the "4th of July").
       Fix the aim (source at the caster's hands, target the foe's chest, flat arc), give each spell a
       readable travel + impact. Then NEW spells from the lore for the caster classes (heal over time, ward,
       chain bolt, fire burst, frost slow, smite) wired into delve and raid combat. Render a fight and look.
+      DONE cycle 59: cause = health bars counted in Monster._height(), so bar and bolt aim climbed every frame;
+      HealthBar3D holds its height, Spells aims hands->chest (cap 2.4 m), flat arc; chain/fire/frost/smite/renew
+      + ward in raid combat (mage/sage/cleric cast at 8 m). _d2_spells D2_SPELLS OK; renders/cycles/20261111_d2.
+      FOR THE LAPTOP: monster.gd _local_bounds() should skip HealthBar3D; delve.gd casters can call the new
+      kinds: Spells.cast(kind, caster, target_body, in_scar, more_bodies) + Spells.flight() for the landing.
 - [ ] D3. Buildings that level up: each town level/tier visibly changes Bellmire - plots fill in, houses
       upgrade (bigger/stone storeys, signs, gardens), new buildings unlock (guild hall, market hall,
       stables, bathhouse, mage tower, keep walls in stone...). Render levels 1, 3, 5, 7 side by side.

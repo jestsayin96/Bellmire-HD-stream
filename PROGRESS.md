@@ -490,3 +490,36 @@ Town
   TWITCH_PARSE OK, _delve_test ENDED (4 survivors, 0 script errors), _perf 6.9 ms (145 fps headless),
   _fps_window min 149 avg 172 at 139 people.
 
+
+## Cycle 59 - D2: spells at the chest, not the sky; battle spells in raids (2026-11-11, desktop)
+- The "4th of July": HealthBar3D is a MeshInstance3D child of its owner, and Monster._height() measures
+  every visible mesh under the monster - the bar included. delve.gd and raids.gd asked for the bar at
+  _height() + 0.25 EVERY FRAME, so the bar climbed ~0.25 m a frame and the bolt aim (_height() * 0.5, then
+  Spells added another +1.0) went up with it into the ceiling / sky.
+- health_bar_3d.gd (backup .bak_d2): a bar never goes higher than the first height asked for. Test: 120
+  asks with _height() + 0.25 -> bar stays at 1.75 m.
+- spells.gd (backup .bak_d2): aim from the caster's HANDS (half its height, 0.45 m toward the mark) at the
+  foe's CHEST (0.62 of its height, measured from its own meshes, health bars left out, cached); a point
+  target on the ground is lifted 1.1 m; nothing is aimed more than 2.4 m over the caster's feet; thrown
+  spells fly a flat arc (<= 0.45 m rise) at 16 m/s. Spells.cast takes a body or a point (old callers
+  unchanged) and the chain's further bodies. New kinds: CHAIN (bolt + jagged leaps), FIRE (ember, flame
+  burst, scorch ring), FROST (ice shard, rime ring, snow), SMITE (a shaft of light drops on the mark),
+  RENEW (motes cling to the body for 5 s). They join the scar's misfire order. Spells.flight() = landing time.
+- raids.gd (backup .bak_d2): heroes of the arcane callings (mage, sage, cleric) fight at 8 m with spells:
+  mage bolt/bolt/chain/fire (chain leaps to 2 more raiders within 5 m at 65%/42%, fire hits every raider
+  within 2.6 m at 80%); sage lays RENEW on the worst-hurt defender (30% of max over 5 s) else FROST (70%,
+  half pace for 4 s); cleric WARDS the worst-hurt (soaks 35% of max for 8 s) else SMITE (x1.5 on the scar's
+  dead). Damage lands after the flight; a misfire into a mending spell mends the raider. Raider health bars
+  use the measured height (no climb). Delve casting is delve.gd (laptop) - noted in WORK_PLAN for it.
+- Lore: the original trial-and-error folder could not be found on this PC this run (OneDrive Public is
+  empty / not synced); the spells follow the canon already ported in spells.gd (the four spells, the scar
+  misfire rule) and the classes in roster.gd.
+- tools/_d2_spells.gd (new, windowed): bar holds; 36 aim checks (9 spells x body/feet/sky) all within
+  +0.5..+2.4 m, 0.000 m off target; mage 4 casts 90 -> 24 hp; ward 22.4 soaks 10 -> 0; smite; renew
+  12 -> 16.7; frost slow 4.0 -> 2.0 speed; scar misfire bolt -> heal. D2_SPELLS OK.
+  Renders renders/cycles/20261111_d2 (raid_bolt, chain, fire, smite, ward, frost, renew) - looked at: the
+  bursts sit at the skeletons' chests on the meadow, the smite shaft and ward shell on the guard, nothing
+  streaks upward. The chain and fire frames caught the end of the effect (faint); worth a closer shot later.
+- Checks: parse 0 script errors (3 old 'material is null' lines), _offfloor 1 of 1001 on the first run (a
+  hero in a delve fight - delve code, untouched), then 0/903 and 0/1018 on two reruns; TWITCH_PARSE OK;
+  TOWNWALK in_solid 0/6965 raid 0/3867 PASS; _delve_test ENDED 4 survivors, 0 script errors.

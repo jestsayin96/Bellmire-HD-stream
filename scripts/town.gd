@@ -105,6 +105,11 @@ const RIVER_W := 7.0           # half-width of open water
 const RIVER_BANK := 9.0        # extra width over which the bank slopes in
 const RIVER_BED := -2.6
 const WATER_Y := -0.9
+## D12: the ford west of the bridge (valley.gd) - a gravel bar just above the water
+const FORD_X := -150.0
+const FORD_Y := -0.75
+var ford_x := FORD_X
+var valley = null              # D12: Valley - the country beyond the wall
 var river_pts: PackedVector3Array = PackedVector3Array()
 var _bridge_z := 0.0
 
@@ -602,6 +607,10 @@ func height_at(x: float, z: float) -> float:
             # 1 in the channel, easing to 0 across the bank
             var k := 1.0 - smoothstep(RIVER_W * 0.6, RIVER_W + RIVER_BANK, d)
             h = lerpf(h, RIVER_BED, k)
+            # D12: the ford - a gravel bar across the channel, just above the water
+            var fd := absf(x - FORD_X)
+            if fd < 7.5:
+                h = lerpf(h, maxf(h, FORD_Y), 1.0 - smoothstep(4.0, 7.5, fd))
     return h
 
 func _ground_mesh(extent: float, steps: int) -> ArrayMesh:
@@ -941,6 +950,10 @@ func _build() -> void:
     _build_scar()
     _build_fields()
     _build_farms()
+    # D12: the valley beyond the wall - steadings, the Ashwood, the ford, the Old Footing
+    valley = preload("res://scripts/valley.gd").new()
+    add_child(valley)
+    valley.setup(self)
     _scatter_country()
     _meadow()
     # D3: the town grows with its level - lots, upgrades, new buildings, the wall
@@ -1029,7 +1042,8 @@ func _bake_nav() -> void:
     var x := -extent
     while x < extent:
         var x2 := x + 3.0
-        if absf(x) > 6.0 and absf(x2) > 6.0:         # the bridge stays open
+        # the bridge and (D12) the ford stay open
+        if absf(x) > 6.0 and absf(x2) > 6.0 and absf((x + x2) * 0.5 - FORD_X) > 3.0:
             band.append([Vector3(x, 0, river_z_fast(x)), Vector3(x2, 0, river_z_fast(x2)), RIVER_W + 0.5])
         x = x2
     nav = TownNav.new()
@@ -1811,73 +1825,82 @@ func _build_watermill() -> void:
     if not ResourceLoader.exists(path) or river_pts.size() < 2:
         return
     for xx in [-48.0, 52.0, -70.0, 75.0]:
-        var x: float = float(xx)
-        # river centre z at this x
-        var rz := 0.0
-        var best := 1e9
-        var z := 60.0
-        while z < 220.0:
-            var d := river_dist(x, z)
-            if d < best:
-                best = d
-                rz = z
-            z += 0.5
-        var dep := _depth_of("lm_watermill")
-        var pos := Vector3(x, 0.0, rz + RIVER_W - 0.5 + dep * 0.5)
-        if road_dist(pos) < dep:
-            continue
-        var h: Node3D = (load(path) as PackedScene).instantiate()
-        h.position = Vector3(pos.x, 0.15, pos.z)
-        add_child(h)
-        _dress(h, "green")
-        # stone plinth: the bank falls away under the back of the mill
-        _box(Vector3(_width_of("lm_watermill") + 0.6, 3.2, dep + 0.6), Vector3(pos.x, -1.45, pos.z), _stone())
-        # the wheel, axle along X, dipping into the water on the river side
-        var wheel := Node3D.new()
-        # wheel on the river side of the house, axle into the back wall
-        wheel.position = Vector3(pos.x, 0.5, pos.z - dep * 0.5 - 2.9)
-        ## wheel plane must hold the river's flow (along X): axle along Z
-        wheel.rotation.y = PI * 0.5
-        add_child(wheel)
-        var wood: StandardMaterial3D = (_mat.get("MI_WoodTrim") as StandardMaterial3D).duplicate()
-        wood.uv1_triplanar = true
-        wood.albedo_color = Color(0.5, 0.38, 0.28)
-        var spin := Node3D.new()
-        wheel.add_child(spin)
-        for i in range(12):
-            var a := float(i) * TAU / 12.0
-            var paddle := MeshInstance3D.new()
-            var pm := BoxMesh.new()
-            pm.size = Vector3(1.2, 0.9, 0.12)
-            paddle.mesh = pm
-            paddle.material_override = wood
-            paddle.position = Vector3(0, sin(a) * 2.5, cos(a) * 2.5)
-            paddle.rotation.x = -a
-            spin.add_child(paddle)
-        for sx in [-0.55, 0.55]:
-            var rim := MeshInstance3D.new()
-            var tm := TorusMesh.new()
-            tm.inner_radius = 2.3
-            tm.outer_radius = 2.55
-            rim.mesh = tm
-            rim.material_override = wood
-            rim.rotation.z = PI * 0.5
-            rim.position = Vector3(float(sx), 0, 0)
-            spin.add_child(rim)
-        var axle := MeshInstance3D.new()
-        var am := CylinderMesh.new()
-        am.top_radius = 0.18
-        am.bottom_radius = 0.18
-        am.height = 3.2
-        axle.mesh = am
-        axle.material_override = wood
-        axle.rotation.z = PI * 0.5
-        axle.position = Vector3(-1.6, 0, 0)
-        wheel.add_child(axle)
-        _spinners.append([spin, Vector3(1, 0, 0), -0.6])
-        _objs.append([pos, maxf(dep, _width_of("lm_watermill")) * 0.6 + 2.0])
-        landmarks["lm_watermill"] = [pos, Vector3(0, 0, 1)]
-        return
+        var pos := _watermill_at(float(xx))
+        if pos != Vector3.ZERO:
+            landmarks["lm_watermill"] = [pos, Vector3(0, 0, 1)]
+            return
+
+## a watermill on the far (south) bank at x: house, plinth, turning wheel.
+## Returns where it stands, or ZERO if a road is in the way. (D12: the Ford
+## Mill uses it too.)
+func _watermill_at(x: float) -> Vector3:
+    var path := "res://assets/buildings/lm_watermill.glb"
+    # river centre z at this x
+    var rz := 0.0
+    var best := 1e9
+    var z := 60.0
+    while z < 220.0:
+        var d := river_dist(x, z)
+        if d < best:
+            best = d
+            rz = z
+        z += 0.5
+    var dep := _depth_of("lm_watermill")
+    var pos := Vector3(x, 0.0, rz + RIVER_W - 0.5 + dep * 0.5)
+    if road_dist(pos) < dep:
+        return Vector3.ZERO
+    var h: Node3D = (load(path) as PackedScene).instantiate()
+    h.position = Vector3(pos.x, 0.15, pos.z)
+    add_child(h)
+    _solid_of(h)            # D12: the mill is solid ground for the navmesh
+    _dress(h, "green")
+    # stone plinth: the bank falls away under the back of the mill
+    _box(Vector3(_width_of("lm_watermill") + 0.6, 3.2, dep + 0.6), Vector3(pos.x, -1.45, pos.z), _stone())
+    # the wheel, axle along X, dipping into the water on the river side
+    var wheel := Node3D.new()
+    # wheel on the river side of the house, axle into the back wall
+    wheel.position = Vector3(pos.x, 0.5, pos.z - dep * 0.5 - 2.9)
+    ## wheel plane must hold the river's flow (along X): axle along Z
+    wheel.rotation.y = PI * 0.5
+    add_child(wheel)
+    var wood: StandardMaterial3D = (_mat.get("MI_WoodTrim") as StandardMaterial3D).duplicate()
+    wood.uv1_triplanar = true
+    wood.albedo_color = Color(0.5, 0.38, 0.28)
+    var spin := Node3D.new()
+    wheel.add_child(spin)
+    for i in range(12):
+        var a := float(i) * TAU / 12.0
+        var paddle := MeshInstance3D.new()
+        var pm := BoxMesh.new()
+        pm.size = Vector3(1.2, 0.9, 0.12)
+        paddle.mesh = pm
+        paddle.material_override = wood
+        paddle.position = Vector3(0, sin(a) * 2.5, cos(a) * 2.5)
+        paddle.rotation.x = -a
+        spin.add_child(paddle)
+    for sx in [-0.55, 0.55]:
+        var rim := MeshInstance3D.new()
+        var tm := TorusMesh.new()
+        tm.inner_radius = 2.3
+        tm.outer_radius = 2.55
+        rim.mesh = tm
+        rim.material_override = wood
+        rim.rotation.z = PI * 0.5
+        rim.position = Vector3(float(sx), 0, 0)
+        spin.add_child(rim)
+    var axle := MeshInstance3D.new()
+    var am := CylinderMesh.new()
+    am.top_radius = 0.18
+    am.bottom_radius = 0.18
+    am.height = 3.2
+    axle.mesh = am
+    axle.material_override = wood
+    axle.rotation.z = PI * 0.5
+    axle.position = Vector3(-1.6, 0, 0)
+    wheel.add_child(axle)
+    _spinners.append([spin, Vector3(1, 0, 0), -0.6])
+    _objs.append([pos, maxf(dep, _width_of("lm_watermill")) * 0.6 + 2.0])
+    return pos
 
 ## ---------------------------------------------------------------- outworks
 ## Workplaces outside the wall from the old roster: the Lumber Mill in the

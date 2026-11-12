@@ -95,6 +95,14 @@ func _rect(src: NavigationMeshSourceGeometryData3D, r: Array) -> void:
     src.add_projected_obstruction(pts, -2.0, 8.0, false)
     n_obstructions += 1
 
+## D12: map_get_path searches at most 4096 polygons. This 0.5 m mesh, carved
+## round every stall and tree, holds ~25000; a walk from the market out to the
+## valley's steadings (250 m) crosses more than 4096 and came back cut short,
+## stopping its walker 30-50 m from the door. One query with room to search.
+const SEARCH_MAX := 60000
+var _qp: NavigationPathQueryParameters3D
+var _qr: NavigationPathQueryResult3D
+
 ## a walkable path from a to b (flat; y is filled in by the walker), or [] if
 ## the map is not ready. The last point is the reachable point nearest b.
 func path(a: Vector3, b: Vector3) -> PackedVector3Array:
@@ -102,8 +110,15 @@ func path(a: Vector3, b: Vector3) -> PackedVector3Array:
         return PackedVector3Array()
     if not synced():
         return PackedVector3Array()
-    var map := get_navigation_map()
-    return NavigationServer3D.map_get_path(map, Vector3(a.x, 0, a.z), Vector3(b.x, 0, b.z), true)
+    if _qp == null:
+        _qp = NavigationPathQueryParameters3D.new()
+        _qr = NavigationPathQueryResult3D.new()
+        _qp.path_search_max_polygons = SEARCH_MAX
+    _qp.map = get_navigation_map()
+    _qp.start_position = Vector3(a.x, 0, a.z)
+    _qp.target_position = Vector3(b.x, 0, b.z)
+    NavigationServer3D.query_path(_qp, _qr)
+    return _qr.path
 
 ## D6b: true once the server's map really holds this region's polygons. The
 ## map's iteration id goes above 0 a while before the region is in it, and until

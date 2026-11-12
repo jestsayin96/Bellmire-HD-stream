@@ -179,6 +179,11 @@ func tour_stops() -> Array:
     if si.has("mouth"):
         tour.append([si["mouth"], 45.0, -35.0])
     tour.append([Vector3.ZERO, 120.0, -50.0])
+    # D12: the valley beyond the wall - steadings, the Ashwood, the ford, the Old Footing
+    var vl = town.get("valley")
+    if vl != null:
+        for vt in vl.tour:
+            tour.append(vt)
     var out: Array = []
     for i in tour.size():
         out.append({"key": "tour_%d" % i, "pri": 10.0, "pos": tour[i][0], "dist": tour[i][1], "pitch": tour[i][2], "tour": true})

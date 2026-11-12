@@ -1198,6 +1198,61 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _offfloor 0 of 1063 (monsters 0 of 231), TWITCH_PARSE OK, _townwalk PASS (in_solid
   1/8099, raid 0/6520; stuck_on_route 1-3 = D14), _delve_test ENDED all four home, 0 SCRIPT ERROR.
 
+## Cycle 79 - D12, the valley beyond the walls (desktop, 2026-11-12)
+- scripts/valley.gd (new, class_name Valley), built in town._build after the farms and BEFORE the navmesh bake. From the
+  original game (read only): "Outlying farmsteads: a cottage and a well where a highway leaves the wall", woods "belong
+  OUTSIDE the wall", the lumbermill "against the treeline"; names from the lore's own surnames (Coalfoot, Bramble,
+  Ashwood, of the Ford). Nothing states a floor count; the ruin never says who built it.
+  - Coalfoot Steading (south of the river, off the new South Road from the bridge) and Bramble End (by the east road):
+    3 cottages each on a lane, a well, barrels and crates at the doors, a signpost, two folk at their doors.
+  - the Ashwood: 150 pines and oaks (trunks are nav circles, never on a road) round a woodcutters' camp - hut, three log
+    stacks, stumps, the axe block, a camp fire with a little light, three woodcutters at work.
+  - the ford: town.height_at raises a gravel bar across the channel at FORD_X = -150 (-0.75, the water is -0.9);
+    town._bake_nav leaves that stretch of the river band open; stepping stones and a dirt track over it. The Ford Mill
+    beside it (town._build_watermill split into _watermill_at(x); mills are now solid on the navmesh too).
+  - the Old Footing: a ring of broken mossy wall (doorway toward the Delvers' Road, two falls), a tower stump, columns
+    standing and fallen, flagstones, rubble, twisted and dead trees. "Someone built here first, and stopped all at once."
+  - roads: the South Road (bridge -> fork -> the Ashwood), fork -> Coalfoot -> the ford -> up to the west road, the mill
+    path, Bramble End -> east road, a track off the Delvers' Road to the Footing (the scar road was already there).
+  - travellers: every 16-32 s (max 4 out) one of 8 trips - carts (Coalfoot -> market, Ashwood -> sawmill, Coalfoot ->
+    Ford Mill, Ford Mill -> market) and walkers - out, a while there, home, gone (the caravan's pattern). A Chronicle
+    line at most every 90 s ("A timber cart leaves the Ashwood for the sawmill.").
+  - auto_director.gd: the slow tour now also visits the five places (town.valley.tour).
+- BUG FOUND + FIXED (town_nav.gd): NavigationServer3D.map_get_path searches at most 4096 polygons; the 0.5 m town mesh
+  has ~24700, so any route over ~250 m (market -> Coalfoot, the ford, the Ford Mill) stopped 27-53 m short. TownNav.path
+  now uses query_path with path_search_max_polygons = 60000. All six places route from the market to 0.0 m.
+- tools/_d12_test.gd (new): 6 sites, 7 cottages, 154 trees, 9 wall pieces, 7 folk all clear of solids; the ford bar
+  -0.75 vs -2.6 beside it; over the ford in 32 m (the bridge is 150 m away); every place reachable from the market;
+  all 8 trips routed and came home in 507 s of game time, 4628 m walked, in_solid 0 of 6962. D12_TEST OK.
+- Render renders/cycles/20261112_d12 (coalfoot_steading, the_ashwood, the_ford, the_old_footing, bramble_end,
+  overview_0/1). Looked: cottages on the lane with the well; the camp in its clearing among the pines; the gravel ford
+  with stones and the mill wheel turning; the ruin ring and stump; the Chronicle shows the Coalfoot cart line.
+- Checks: parse 0 script errors, _offfloor 0 of 978, TWITCH_PARSE OK, _townwalk PASS (in_solid 0/8025, raid 0/5682,
+  stuck_on_route 1-3 = D14), _delve_test ran 150 s with 0 SCRIPT ERROR (two "Lambda capture freed" engine errors in the
+  delve, laptop side, not new here). Laptop files untouched.
+
+## Cycle 80 - D14, walkers pinned on props (desktop, 2026-11-12)
+- Cause (scripts/townsfolk.gd): a walker stepping into a prop (a stool, a bench, a fence end, a stall corner) was pushed
+  back by town.keep_walkable to nearly where it stood, but the push-out plus the step still counted as "the feet
+  moved", so the 1.2 s give-up never fired and it stood there all stream. Some were in a pocket off the navmesh (the
+  fenced yard with benches and stools east of the market, navoff up to 3.5 m): every new route began at the nearest
+  walkable point - across the fence.
+- Fix, all in townsfolk.gd (no laptop files touched):
+  - a prop case for the push-out: when keep_walkable moves the foot, _slide_round tries the first free step round
+    the prop (34-130 deg off the heading, on the side chosen last time, so no dithering).
+  - progress, not motion: no 0.2 m nearer the waypoint in 2.5 s (or the old 1.2 s "feet did not move") -> re-route
+    once, then skip the waypoint.
+  - _escape_route: off the navmesh or no straight line to it -> a small flood (0.35 m steps, a foot's width clear of
+    every solid) out to walkable ground, then the normal route. Wedged tighter than that (fence + rotated stool),
+    the same flood with a 2 cm margin, walked brushing the prop edges for that short stretch only.
+- tools/_d14_test.gd (new): 120 s, every 10 s count routed walkers that moved < 0.3 m; "pinned" = caught twice running.
+  Before (old townsfolk.gd): pinned 25, stuck max 4. After: pinned 0, stuck max 1, 8 re-routes, 2571 prop slides;
+  feet touching any solid with no margin 0.91% (0.77% before - door legs and stall edges, not houses). D14_TEST OK.
+- Render renders/cycles/20261112_d14 (yard_40s/80s, stall_40s/80s). Looked: the yard has a sitter at the table and
+  walkers outside the fence, nobody pressed on it; the stall corner by the square has folk passing the house.
+- Checks: parse 0 script errors, _offfloor 0 of 983 (MON_INPROP 0), TWITCH_PARSE OK, _townwalk PASS (in_solid
+  0/8365, raid 0/4237, stuck_on_route 0-1), _delve_test 150 s with 0 SCRIPT ERROR.
+
 ## Cycle 79 - L20, director camera clearance (laptop, 2026-11-11) - done
 - First, measured (no code changed, on an origin/main checkout): i7-9750H 6c/12t, 32 GB, RTX 2060 Laptop 6 GB, on mains. _d7_fps: LOD on 35.0 fps, off 27.2 (215 people). A 10-minute hold: 40 fps in minute 1, 29 in minute 10, 1% low 14, a 1.8-3.2 s freeze in every minute from minute 3 (the D7 freeze, longer than noted). GPU 64-66 C at a steady 1.2-1.4 GHz, 35-55% busy, never thermal-throttled; CPU at a steady ~4.05 GHz turbo, main-thread bound. Thermally fit for 24/7; not playable 24/7 until D7's freeze and script cost are fixed.
 - The D13 frame was _d6b_shot.gd's own fixed camera (supervisor agreed; D13 moved here as L20).

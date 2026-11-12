@@ -282,3 +282,33 @@ phase 1. H4's remaining pieces were the explicit sort affordance and the town-st
   A field present as 0 shows 0 (an honest "none repelled"); an absent field shows nothing. This
   is the same pattern as the hp_max / xp_next contract notes above - one line on the desktop
   side flips it on, and it is the desktop's call whether that number is worth publishing.
+
+---
+
+## H1 verification pass (Nov 12, 2026) - 3 widths, the overlay, and the hostile name
+
+H1's DONE line asks for "before/after at 3 widths; security invariants + hostile-name
+test pass." This run rendered the BUILT page headlessly (Chromium) with the Supabase row
+stubbed to a fixed payload and ?mock=crowd - which plants the attacker name
+`<img src=x onerror=alert(1)>` as both a hero name and a chronicle line - at four viewports:
+
+- 320 px  (a Twitch panel is ~318 px): single column, no horizontal scroll (scrollWidth == clientWidth).
+- 768 px  (tablet): the duo, boards and chronicle resolve to two columns cleanly.
+- 1280 px (desktop): the full grimoire - illuminated heads, gold corner ticks, tier
+  medallions (SSS/SS/S/A/B), the featured leader row, value bars, class-crest hero sheets
+  (HP/XP bars, stat block, gear cards, dye swatch), the 3D d20, the icon-badged chronicle.
+- overlay (?overlay=1, 440x1080 OBS source): transparent ground, slim masthead, town strip,
+  top-five board and the live feed; the interactive furniture is hidden.
+
+Security + hostile-name test, EVERY viewport (320 / 768 / 1280 / overlay / ?open=1 / reduced-motion):
+- No dialog fired - the onerror never executed.
+- Zero <img> elements on the page: no snapshot value ever became an element, an src or an href.
+- The hostile string rendered as LITERAL TEXT in the hero card, the board row and the chronicle
+  line (textContent via el(), brackets intact).
+- No page errors, no console errors. ?state=empty and ?state=fail show their honest messages.
+
+Conclusion: H1 meets its DONE criteria. No code change was made - the look is already complete
+and correct, and spending more ornament would break the anti-kitsch rule above. This note is the
+evidence for the supervisor's review gate. (Verified with fallback display metrics where the
+self-hosted Gloock woff2 was present; the live checks ?state=empty/fail/stale, ?mock=chronicle/crowd
+and ?open=1 all pass.)

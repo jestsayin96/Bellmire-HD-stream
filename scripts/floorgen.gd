@@ -309,9 +309,119 @@ static func _put(parent: Node3D, asset: String, pos: Vector3, rz := 0.0,
         _boxes.append(_box_of(n, asset))
     # Tint is what turns one kit into many worlds - the same trick that made
     # five creature strains out of eight models.
-    if tint != Color(1, 1, 1):
-        Rig.tint(n, tint)
+    # L28a: dungeon-kit pieces get the shared kit surface (tint included); the hex kit keeps
+    # its own materials and the plain tint
+    if asset.begins_with("hex:") or not kit_look:
+        if tint != Color(1, 1, 1):
+            Rig.tint(n, tint)
+    else:
+        _skin(n, asset, tint)
     return n
+
+## ---------------------------------------------------------------- L28a: the kit surface
+## How a theme's surfaces behave: roughness scale (wet / glazed / dry), detail relief,
+## how much the slow world-space variation breaks the tiling, and standing water on floors.
+const LOOK := {
+    "_":          {"rough": 1.0,  "relief": 0.6,  "vary": 0.18, "wet": 0.0},
+    "barracks":   {"rough": 1.0,  "relief": 0.6,  "vary": 0.20, "wet": 0.0},
+    "mess":       {"rough": 0.95, "relief": 0.5,  "vary": 0.16, "wet": 0.0},
+    "crypt":      {"rough": 1.05, "relief": 0.75, "vary": 0.26, "wet": 0.15},
+    "prison":     {"rough": 1.0,  "relief": 0.7,  "vary": 0.28, "wet": 0.25},
+    "treasury":   {"rough": 0.8,  "relief": 0.45, "vary": 0.12, "wet": 0.0},
+    "shrine":     {"rough": 0.85, "relief": 0.5,  "vary": 0.14, "wet": 0.0},
+    "workshop":   {"rough": 1.0,  "relief": 0.65, "vary": 0.24, "wet": 0.0},
+    "flooded":    {"rough": 0.7,  "relief": 0.7,  "vary": 0.30, "wet": 0.85},
+    "grassland":  {"rough": 1.1,  "relief": 0.55, "vary": 0.30, "wet": 0.1},
+    "wood":       {"rough": 1.1,  "relief": 0.65, "vary": 0.30, "wet": 0.2},
+    "firepit":    {"rough": 1.1,  "relief": 0.8,  "vary": 0.32, "wet": 0.0},
+    "fogbound":   {"rough": 0.9,  "relief": 0.55, "vary": 0.14, "wet": 0.35},
+    "confection": {"rough": 0.45, "relief": 0.3,  "vary": 0.10, "wet": 0.0},
+    "keep":       {"rough": 0.8,  "relief": 0.5,  "vary": 0.12, "wet": 0.0},
+}
+## the 8x4 swatch atlas, per swatch [roughness, metalness, detail: 0 none / .5 stone / 1 wood]
+## (measured: walls/stairs/columns r0c1+r0c0, tile + dirt floors r0c5, wood r0c4/r0c2,
+## gold chests + coins r2c7, rubble r0c7)
+const SWATCH := [
+    [[0.86, 0.0, 0.5], [0.84, 0.0, 0.5], [0.72, 0.0, 1.0], [0.50, 0.55, 0.0],
+     [0.74, 0.0, 1.0], [0.88, 0.0, 0.5], [0.90, 0.0, 0.0], [0.90, 0.0, 0.5]],
+    [[0.70, 0.0, 0.0], [0.78, 0.0, 1.0], [0.60, 0.30, 0.5], [0.85, 0.0, 0.0],
+     [0.85, 0.0, 0.0], [0.85, 0.0, 0.0], [0.88, 0.0, 0.0], [0.85, 0.0, 0.0]],
+    [[0.95, 0.0, 0.5], [0.90, 0.0, 0.0], [0.85, 0.0, 0.0], [0.90, 0.0, 0.0],
+     [0.80, 0.0, 0.0], [0.35, 0.85, 0.0], [0.80, 0.0, 0.0], [0.30, 0.90, 0.0]],
+    [[0.60, 0.0, 0.0], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5],
+     [0.86, 0.0, 0.5], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5]],
+]
+## pieces whose greys are steel, not stone (blades, keys, torch brackets, plates, chests)
+const STEEL := ["sword_", "key", "torch", "coin", "chest", "plate", "candle_triple"]
+const KIT_ATLAS := "res://addons/kaykit_dungeon_remastered/Assets/texture/dungeon_texture.png"
+const MK_TEX := "res://assets/kit/textures/"
+static var _look_theme := "_"
+static var kit_look := true          # shot tools switch it off for "before"
+static var _kit_mats := {}
+static var _pbr := {}
+
+static func _pbr_map(steel: bool) -> ImageTexture:
+    if _pbr.has(steel):
+        return _pbr[steel]
+    var img := Image.create(8, 4, false, Image.FORMAT_RGB8)
+    for r in 4:
+        for c in 8:
+            var s: Array = SWATCH[r][c]
+            if steel and r == 0 and c in [1, 7]:
+                s = [0.40, 0.70, 0.0]
+            img.set_pixel(c, r, Color(float(s[0]), float(s[1]), float(s[2])))
+    var t := ImageTexture.create_from_image(img)
+    _pbr[steel] = t
+    return t
+
+static func _kit_mat(tint: Color, steel: bool) -> ShaderMaterial:
+    var key := "%s|%s|%s" % [_look_theme, tint.to_html(), steel]
+    if _kit_mats.has(key):
+        return _kit_mats[key]
+    var L: Dictionary = LOOK.get(_look_theme, LOOK["_"])
+    var m := ShaderMaterial.new()
+    m.shader = load("res://assets/shaders/dungeon_kit.gdshader")
+    m.set_shader_parameter("albedo_tex", load(KIT_ATLAS))
+    m.set_shader_parameter("tint", tint)
+    m.set_shader_parameter("pbr_map", _pbr_map(steel))
+    m.set_shader_parameter("stone_n", load(MK_TEX + "T_Plaster_Normal.png"))
+    m.set_shader_parameter("stone_r", load(MK_TEX + "T_Plaster_ORM.png"))
+    m.set_shader_parameter("wood_n", load(MK_TEX + "T_WoodTrim_Normal.png"))
+    m.set_shader_parameter("wood_r", load(MK_TEX + "T_WoodTrim_Roughness.png"))
+    m.set_shader_parameter("vary_tex", load(MK_TEX + "T_Noise_Terrain.png"))
+    m.set_shader_parameter("rough_mult", float(L["rough"]))
+    m.set_shader_parameter("normal_strength", float(L["relief"]))
+    m.set_shader_parameter("vary", float(L["vary"]))
+    m.set_shader_parameter("wet", float(L["wet"]))
+    _kit_mats[key] = m
+    return m
+
+## every kit surface on n gets the shared kit material for this theme / tint (one material
+## per combination, not a copy per piece as the old tint made)
+static func _skin(n: Node, asset: String, tint: Color) -> void:
+    var steel := false
+    for p in STEEL:
+        if asset.begins_with(p):
+            steel = true
+            break
+    var mat := _kit_mat(tint, steel)
+    var st: Array = [n]
+    while st.size() > 0:
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var mi: MeshInstance3D = c
+            if mi.mesh:
+                for i in range(mi.mesh.get_surface_count()):
+                    var src: Material = mi.get_active_material(i)
+                    if src is StandardMaterial3D and (src as StandardMaterial3D).albedo_texture \
+                            and String((src as StandardMaterial3D).albedo_texture.resource_path).contains("kaykit_dungeon_remastered"):
+                        mi.set_surface_override_material(i, mat)
+                    elif src is StandardMaterial3D and tint != Color(1, 1, 1):
+                        var d: StandardMaterial3D = src.duplicate()
+                        d.albedo_color = tint
+                        mi.set_surface_override_material(i, d)
+        for g in c.get_children():
+            st.append(g)
 
 ## ---- HD: everything that stands on the floor is an OBSTACLE the party and
 ## the creatures walk around (they used to walk straight through tables).
@@ -656,6 +766,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var theme_key := theme_for(floor_no)
     var origin_key := origin_for(floor_no)
     var T: Dictionary = all_themes()[theme_key]
+    _look_theme = theme_key       # L28a: the kit surface follows the theme
     var floor_tint: Color = T.get("floor_tint", Color(1, 1, 1))
     var wall_tint: Color = T.get("wall_tint", Color(1, 1, 1))
 

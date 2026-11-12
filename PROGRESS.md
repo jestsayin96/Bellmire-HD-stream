@@ -1558,3 +1558,26 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Renders tools/_d17d_shot.gd -> renders/cycles/20261112_d17d/sheet_d17d.png: a farmer buried mid-walk, frames 0/0.3/1/2/5/10 s - old row up again from 1 s (Idle, PickUp), new row stays down in Death_A_Pose (the 2 s frame is blocked by a passer-by).
 - Standard checks: parse 0 SCRIPT ERROR / Parse Error (3 known headless material-null), _offfloor 0 of 1039, TWITCH_PARSE OK, _townwalk in_solid 0/20222 raid 0/1822 PASS STUCK_ON_ROUTE_TOTAL 0, _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR to floor 2, _d17a_test --short empty 0 PASS, _d17b_test --short moonwalk 0.12% PASS (0.49% with the first cut of the turn ease - walkers now keep face_fix).
 - Note (laptop): delve.gd's Rig.play(Death_A) now also locks a fallen delve hero down; delve deaths are permanent so nothing changes - if a revive is ever added underground, call Rig.revive(b._anim).
+
+## L-cycle 111 - L28a dungeon materials + spawn pockets (laptop jestai, 2026-11-12) - L28a DONE
+- Spawns (dungeon_hd.gd): monsters and the lord are set only on cells reachable from the entry stairs over cells no
+  obstacle covers (Delve's blocked-cell rule). L25_TEST OK with 0 watchdog nudges in 10 floors (was 1-5).
+- Measured first: every KayKit Dungeon Remastered piece has ONE StandardMaterial3D, roughness 0.45, metal 0, no normal
+  map - stone, wood and gold were the same semi-gloss plastic. All 203 per-piece atlas PNGs are byte-identical copies of
+  Assets/texture/dungeon_texture.png (8x4 gradient swatches). Swatch use measured from UVs: walls/stairs/columns r0c1+r0c0,
+  tile + dirt floors r0c5, wood r0c4/r0c2, gold chests + coins r2c7, rubble r0c7.
+- assets/shaders/dungeon_kit.gdshader + FloorGen._skin/_kit_mat: atlas colour x tint; an 8x4 per-swatch map (made in
+  code) gives roughness / metalness / detail set, so gold is metal and wood is matte; blades, keys, torch brackets,
+  plates and chests read their greys as steel; world-space triplanar normal + roughness detail from the CC0 MegaKit
+  textures (plaster grain for stone - the RockTrim set striped the walls and turned tile floors into brick, swapped;
+  wood grain for wood); a slow world-space albedo variation against tiling; per-theme roughness / relief / variation /
+  standing water on floors (FloorGen.LOOK - the flooded gallery shines, the confection is glazed, the firepits dry).
+  The old Rig.tint duplicated a material per tinted piece: distinct materials on a floor 689 -> 44 (grassland),
+  59 -> 31 (barracks), 59 -> 34 (shrine). Hex-kit scatter keeps its own materials + tint.
+- material-null: 0 in every dungeon-side run (_delve_test, _l25_test, _offfloor, windowed floor renders). The 3
+  'Parameter "material" is null' lines left come from a bare headless start of the TOWN scene (dummy renderer,
+  material_get_instance_shader_parameters) - not the dungeon, not a laptop file; not touched. For the desktop / D18c.
+- Shots (windowed 1920x1080, tools/_l28_shot.gd, the town's environment as delves see it today):
+  renders/cycles/20261112_l28/a_sheet.png - crypt / flooded / treasury, before | after, room + close views.
+- Tests: parse 0 script errors; _offfloor 0 of 969, INPROP 0, MON_INPROP 0; _delve_test 0 script errors, 0 null;
+  L25_TEST OK 13/13, 0 stuck, 0 nudges. tools/_l28_matcount.gd prints the material counts.

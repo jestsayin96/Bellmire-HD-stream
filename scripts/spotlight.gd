@@ -208,6 +208,8 @@ func _frame_box(k: String) -> StyleBoxFlat:
 func _make_pane(k: String) -> Dictionary:
 	var box := Control.new()
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.name = "Pane_" + k
+	HudDock.mark(box, k)                 # L21: a pane and everything on it lives in that pane
 	box.visible = false
 	add_child(box)
 	var svc := SubViewportContainer.new()

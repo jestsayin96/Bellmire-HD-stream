@@ -17,6 +17,11 @@ signal say(line: String, colour: Color)
 signal wants_delve(user_id: String)
 signal wants_fish(user_id: String)
 signal wants_shop(user_id: String, kind: String)
+## T1 contract (supervisor, Nov 12): every answer a viewer's command produces, PLAIN - no "@name ",
+## no rate limit, no sending. The desktop's twitch_eventsub.gd connects here and owns the queue,
+## the rate limit, the prefix and the API call. Not emitted for Mr. E's local keyboard (local_*).
+## Do not change this signature without telling the desktop.
+signal twitch_reply(user_login: String, text: String)
 
 const COOLDOWN := 1.5          # seconds per viewer, anti-spam
 const QUEUE_MAX := 6
@@ -71,7 +76,9 @@ var _seen_names := {}
 func _init(r: Roster = null) -> void:
     roster = r
 
-func handle(user_id: String, display: String, msg: String) -> String:
+## `login` is the viewer's Twitch login for twitch_reply; left out, the display name lowercased
+## stands in (the same for every plain-letters name - pass the login for the rest)
+func handle(user_id: String, display: String, msg: String, login := "") -> String:
     if roster == null:
         return ""
     msg = msg.strip_edges()
@@ -97,7 +104,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
     if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
         last_cmd[user_id] = now
-        return "%s is %s." % [h["name"], away[user_id]]
+        return _reply(user_id, display, login, "%s is %s." % [h["name"], away[user_id]])
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
         "hero":     out = _needs(user_id, func(): return roster.describe(user_id))
@@ -150,6 +157,12 @@ func handle(user_id: String, display: String, msg: String) -> String:
     last_cmd[user_id] = now
     if out != "":
         say.emit(out, _tone(out))
+    return _reply(user_id, display, login, out)
+
+## T1: hand a command's answer to Twitch chat (via the desktop's twitch_eventsub.gd)
+func _reply(user_id: String, display: String, login: String, out: String) -> String:
+    if out != "" and not user_id.begins_with("local_"):
+        twitch_reply.emit(login if login != "" else display.to_lower(), out)
     return out
 
 # a command that requires a living hero

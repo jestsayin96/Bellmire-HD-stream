@@ -40,6 +40,7 @@ func _build() -> void:
     _panel.offset_top = UiTheme.px(290)      # L15: below the boss bar's band at every scale
     _panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
     _panel.custom_minimum_size = Vector2(UiTheme.px(500), 0)
+    HudDock.mark(_panel, "none")        # L21: the Guild Roll steps aside while the spotlight panes are up
     add_child(_panel)
     _list = VBoxContainer.new()
     _list.add_theme_constant_override("separation", 1)

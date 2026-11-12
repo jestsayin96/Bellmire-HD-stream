@@ -25,6 +25,10 @@ var _shots := not DisplayServer.get_name().to_lower().contains("headless")
 const OUT := "res://renders/cycles/20261112_l21"
 
 func _initialize() -> void:
+	# a known screen: headless Godot gives a 100x100 window where nothing can be judged (that is
+	# what failed 8 checks on the supervisor's headless run). Windowed keeps --resolution.
+	if not _shots:
+		root.size = Vector2i(1920, 1080)
 	_t = (load("res://Town.tscn") as PackedScene).instantiate()
 	root.add_child(_t)
 	if _shots:
@@ -52,6 +56,8 @@ func _save(tag: String) -> void:
 
 func _process(_dt: float) -> bool:
 	_f += 1
+	if not _shots and root.size != Vector2i(1920, 1080):
+		root.size = Vector2i(1920, 1080)      # headless: held at the stream size (the town resets it)
 	match _stage:
 		"boot":
 			if _f == 20:
@@ -187,52 +193,65 @@ func _cam_in(cam: Camera3D, d: Delve) -> bool:
 func _check(tag: String) -> void:
 	var reg := _regions()
 	var s := Spotlight.of(_t)
+	_ok(root.size.x >= 1280 and root.size.y >= 700, "%s: a stream-sized screen to judge (%s) - windowed --resolution 1920x1080, or headless (pinned)" % [tag, root.size])
 	_ok((reg["panes"] as Dictionary).size() >= 2, "%s: %d panes up" % [tag, (reg["panes"] as Dictionary).size()])
 	_ok((reg["chrome"] as Rect2).size.y >= root.size.y * 0.10, "%s: a chrome bar outside the panes (%s)" % [tag, reg["chrome"]])
-	# 1. THE RULE: every drawn control is inside one pane or inside the chrome bar
+	# 1. THE RULE, DEFAULT-DENY: every drawn control needs a home it was GIVEN (HudDock.mark on
+	# it or an ancestor) - a pane or the chrome bar - and must lie inside that home. Sitting
+	# inside some pane by luck is not enough; a panel nobody gave a home fails here.
 	var drawn: Array = []
 	_drawn(root, drawn)
 	var free: Array = []
+	var homeless: Array = []
 	for c: Control in drawn:
-		if _home(c.get_global_rect(), reg) == "":
-			free.append("%s %s" % [_short(c), c.get_global_rect()])
-	_ok(free.is_empty(), "%s: no HUD control over a seam or two regions (%d float free: %s)" % [tag, free.size(), free.slice(0, 6)])
-	# 2. the Chronicle: in the chrome bar, at the L15 size
-	for c in _t.get_children():
-		if c is FeedHUD:
-			var p: Control = (c as FeedHUD)._panel
-			if p and p.is_visible_in_tree():
-				_ok(_home(p.get_global_rect(), reg) == "chrome", "%s: the Chronicle sits in the chrome bar (%s)" % [tag, p.get_global_rect()])
-				var big := 0
-				for lb in (c as FeedHUD)._box.get_children():
-					if lb is Label:
-						big = maxi(big, (lb as Label).get_theme_font_size("font_size"))
-				_ok(big >= UiTheme.px(28) - 1, "%s: Chronicle lines at the L15 size (%d px)" % [tag, big])
-				var lines := 0
-				for lb in (c as FeedHUD)._box.get_children():
-					if lb is Label and lb.is_visible_in_tree():
+		var home := HudDock.region_of(c)
+		var box: Rect2 = reg["chrome"] if home == "chrome" else (reg["panes"] as Dictionary).get(home, Rect2())
+		if home == "" or home == "none":
+			homeless.append("%s (home '%s')" % [_short(c), home])
+		elif not _inside(c.get_global_rect(), box):
+			free.append("%s in '%s' %s" % [_short(c), home, c.get_global_rect()])
+	_ok(homeless.is_empty(), "%s: every drawn HUD control has a home (%d without: %s)" % [tag, homeless.size(), homeless.slice(0, 6)])
+	_ok(free.is_empty(), "%s: every HUD control inside its own home, none over a seam (%d out: %s)" % [tag, free.size(), free.slice(0, 6)])
+	var denied: Array = []
+	for id in HudDock._denied:
+		var o = instance_from_id(id)
+		denied.append(str((o as Node).get_path()) if o != null else "?")
+	_ok(denied.is_empty(), "%s: the guard hid no panel that had no home (%s)" % [tag, denied])
+	# 2. the Chronicle - found by group + name, never by place or type: in the chrome bar, L15 size
+	var chron := get_nodes_in_group("hud_chronicle").filter(func(n): return is_instance_valid(n) and not (n as Node).is_queued_for_deletion())
+	_ok(chron.size() == 1 and String((chron[0] as Node).name) == "Chronicle", "%s: exactly one Chronicle, by group + name (%d)" % [tag, chron.size()])
+	for p: Control in chron:
+		var c := p.get_parent() as FeedHUD
+		if c and p.is_visible_in_tree():
+			_ok(HudDock.region_of(p) == "chrome" and _inside(p.get_global_rect(), reg["chrome"]), "%s: the Chronicle sits in the chrome bar (%s)" % [tag, p.get_global_rect()])
+			var big := 0
+			var lines := 0
+			for lb in c._box.get_children():
+				if lb is Label:
+					big = maxi(big, (lb as Label).get_theme_font_size("font_size"))
+					if lb.is_visible_in_tree():
 						lines += 1
-				_ok(lines >= 2, "%s: the Chronicle shows %d lines" % [tag, lines])
-	# 3. the boss card: inside a pane whose camera is in the lord's delve
-	var bb := _eye.boss_bar
-	if bb.is_visible_in_tree() and bb.delve:
+			_ok(big >= UiTheme.px(28) - 1, "%s: Chronicle lines at the L15 size (%d px)" % [tag, big])
+			_ok(lines >= 2, "%s: the Chronicle shows %d lines" % [tag, lines])
+	# 3. the boss card - by group + name: in the pane the pane lookup names, whose camera is in the fight
+	var bbs := get_nodes_in_group("hud_boss")
+	_ok(bbs.size() == 1 and String((bbs[0] as Node).name) == "BossCard", "%s: exactly one boss card, by group + name (%d)" % [tag, bbs.size()])
+	var bb: BossBar = bbs[0] if bbs.size() == 1 else null
+	if bb and bb.is_visible_in_tree() and bb.delve:
+		var want := HudDock.pane_for_delve(_t, bb.delve)
+		_ok(want != "", "%s: the pane lookup finds a pane showing the fight ('%s')" % [tag, want])
 		var h := _home(bb.get_global_rect(), reg)
-		_ok(h != "" and h != "chrome" and _cam_in(s._panes[h]["cam"], bb.delve), "%s: the boss card is in the pane showing the fight (in '%s', %s)" % [tag, h, bb.get_global_rect()])
+		_ok(want != "" and h == want and HudDock.region_of(bb) == want and _cam_in(s._panes[h]["cam"], bb.delve), "%s: the boss card is in the pane showing the fight (want '%s', in '%s', %s)" % [tag, want, h, bb.get_global_rect()])
 	else:
 		_ok(false, "%s: the boss card is up" % tag)
-	# 4. party blocks: inside a pane whose camera follows that party
-	var heads := 0
-	for c: Control in drawn:
-		if c is Label and ((c as Label).text.begins_with("Delvers ·") or (c as Label).text.begins_with("The town's band ·")):
-			heads += 1
-			var h := _home(c.get_global_rect(), reg)
-			var ok := h != "" and h != "chrome"
-			if ok:
-				ok = false
-				for d in _t.get_children():
-					if d is Delve and (c as Label).text.ends_with("floor %d" % (d as Delve).floor_no) and _cam_in(s._panes[h]["cam"], d):
-						ok = true
-			_ok(ok, "%s: '%s' docks in the pane following that party (in '%s')" % [tag, (c as Label).text, h])
+	# 4. party blocks - by group, each carrying its delve: in the pane following that party
+	var blocks := get_nodes_in_group("hud_party").filter(func(n): return is_instance_valid(n) and not (n as Node).is_queued_for_deletion() and (n as Control).is_visible_in_tree())
+	_ok(not blocks.is_empty(), "%s: a party block is up (by group)" % tag)
+	for b: Control in blocks:
+		var d: Delve = b.get_meta("delve")
+		var want := HudDock.pane_for_delve(_t, d)
+		var h := _home(b.get_global_rect(), reg)
+		_ok(want != "" and h == want and _cam_in(s._panes[h]["cam"], d), "%s: floor %d's party block docks in the pane following it (want '%s', in '%s')" % [tag, d.floor_no, want, h])
 	# 5. floating combat text: none in panes under half the screen, kept in bigger panes
 	var floats := _labels3d(true)
 	_ok(not floats.is_empty(), "%s: floating text exists to test (%d)" % [tag, floats.size()])

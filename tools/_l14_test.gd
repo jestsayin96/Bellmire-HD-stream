@@ -66,6 +66,20 @@ func _initialize() -> void:
 	cc._last.clear()
 	var rk := cc.handle("u1", "Ash", "!ranks")
 	_ok(rk != "" and not rk.contains("did you mean"), "!ranks still answers the Guild Roll: %s" % rk.substr(0, 60))
+	# T1 contract: twitch_reply carries the plain answer for the desktop to send; never for local_*
+	var tw: Array = []
+	cc.twitch_reply.connect(func(lg: String, tx: String) -> void: tw.append([lg, tx]))
+	cc._last.clear()
+	var hr := cc.handle("u1", "Ash", "!hero")
+	_ok(tw.size() == 1 and tw[0][0] == "ash" and tw[0][1] == hr and not String(tw[0][1]).begins_with("@"), "twitch_reply: the plain !hero answer for ash (%s)" % [tw])
+	cc._last.clear()
+	cc.handle("u1", "Ash", "!inventory", "ash_login")
+	_ok(tw.size() == 2 and tw[1][0] == "ash_login", "twitch_reply: the login when one is given")
+	cc._last.clear()
+	cc.handle("local_mre", "MrE", "!help")
+	cc._last.clear()
+	cc.handle("u1", "Ash", "!hug")
+	_ok(tw.size() == 2, "twitch_reply: nothing for the local keyboard or for fightoverlay's words (%d)" % tw.size())
 	var clash: Array = []
 	for k in cs:
 		for n in [k] + Array(cs[k].get("aliases", [])):

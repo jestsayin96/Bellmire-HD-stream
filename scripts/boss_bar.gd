@@ -22,6 +22,8 @@ var _v: VBoxContainer
 
 func setup(t: Node3D) -> void:
 	town = t
+	name = "BossCard"
+	add_to_group("hud_boss")
 	UiTheme.watch(self)
 	var w := _place_full()
 	# L16: on a parchment plate like every other panel; the lord's own colour is its edge
@@ -104,8 +106,10 @@ func _dock() -> void:
 	if k == "":
 		visible = false
 		_docked = "none"
+		HudDock.mark(self, "none")
 		return
 	_docked = k
+	HudDock.mark(self, k)
 	HudDock.put(self, HudDock.pane(town, k), HudDock.pane_k(town, k), "tc", float(UiTheme.px(54)) if k != "director" else 0.0)
 
 ## L15: F11 changed the UI scale - build again

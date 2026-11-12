@@ -40,6 +40,8 @@ func restyle() -> void:
     var keep_title := _card_title.text if _card_title else ""
     var keep_sub := _card_sub.text if _card_sub else ""
     if _panel:
+        remove_child(_panel)            # out of the tree NOW, so the new one keeps the name "Chronicle"
+        _panel.remove_from_group("hud_chronicle")
         _panel.queue_free()
     _build()
     if keep_t > 0.0:
@@ -62,6 +64,9 @@ func _build_chrome() -> void:
     _panel.add_theme_stylebox_override("panel", sb)
     _panel.clip_contents = true
     _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _panel.name = "Chronicle"
+    _panel.add_to_group("hud_chronicle")
+    HudDock.mark(_panel, "chrome")
     add_child(_panel)
     var h := HBoxContainer.new()
     h.add_theme_constant_override("separation", UiTheme.px(16))
@@ -137,6 +142,9 @@ func _build() -> void:
     _panel.offset_bottom = -UiTheme.px(18)
     _panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
     _panel.custom_minimum_size = Vector2(UiTheme.px(WIDTH), 0)
+    _panel.name = "Chronicle"
+    _panel.add_to_group("hud_chronicle")
+    HudDock.mark(_panel, "chrome")      # L21: with the panes up it is rebuilt in the chrome bar
     add_child(_panel)
     var v := VBoxContainer.new()
     v.add_theme_constant_override("separation", 2)

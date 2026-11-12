@@ -86,6 +86,7 @@ func _banner_tick() -> void:
         _banner.anchor_right = 0.5
         _banner.grow_horizontal = Control.GROW_DIRECTION_BOTH
         _banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+        HudDock.mark(_banner, "none")        # L21: hides while the spotlight panes are up
         eye._layer.add_child(_banner)
         restyle()
     var t := ""

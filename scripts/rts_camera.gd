@@ -98,6 +98,12 @@ func setup(t: Node3D) -> void:
 	spotlight = Spotlight.of(t)
 	# L21: the world's text on render layers, so each pane draws only what is its own
 	HudDock.install(get_tree(), t)
+	# L21 default-deny: every piece of the eye's HUD has a home while the panes are up
+	HudDock.mark(_help, "none")
+	HudDock.mark(_speed_lb, "chrome")
+	HudDock.mark(_chat, "chrome")
+	HudDock.mark(party_frames, "none")
+	HudDock.mark(boss_bar, "none")
 	cam.cull_mask = HudDock.ALL & ~HudDock.LANES_MASK
 
 ## ---- L21: the spotlight panes up -> the eye's own HUD leaves the seams. The clock chip
@@ -114,6 +120,7 @@ func _dock_hud() -> void:
 			_place_full_hud()
 			restyle()                      # the unit frame is built again in its full-screen place
 	if not sp:
+		HudDock.guard(town)          # shows again anything it hid while split
 		return
 	_help.visible = false
 	var bar := HudDock.chrome(town)
@@ -136,7 +143,9 @@ func _dock_hud() -> void:
 		right = s.x + m
 	HudDock.reserve_right = right
 	if _frame and _frame.visible:
+		HudDock.mark(_frame, "director")
 		HudDock.put(_frame, HudDock.pane(town, "director"), HudDock.pane_k(town, "director"), "br")
+	HudDock.guard(town)              # default-deny: anything with no home hides while split
 
 func _place_full_hud() -> void:
 	_speed_lb.visible = true

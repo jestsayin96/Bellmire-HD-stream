@@ -165,3 +165,65 @@ static func put(c: Control, r: Rect2, k: float, at: String, top_pad := 0.0) -> v
 ## undo put(): anchors are set again by the owner's own full-screen placement
 static func unput(c: Control) -> void:
 	c.scale = Vector2.ONE
+
+## ---------------------------------------------------------------- default-deny
+## Every HUD control states where it lives while the panes are up: a pane's name, "chrome",
+## or "none" (it hides while split). A control inherits its nearest marked ancestor's home.
+## Anything NOT marked - a panel added later by either machine - is hidden by guard() while
+## the panes are up (and shown again after), and tools/_l21_test.gd fails on it. So a new
+## panel can never silently float over a pane: it has to be given a home first.
+const META := "hud_dock"
+
+static func mark(c: Node, region: String) -> void:
+	if c:
+		c.set_meta(META, region)
+
+## the home a control was given ("" = none given - denied)
+static func region_of(n: Node) -> String:
+	while n and not (n is CanvasLayer) and not (n is Viewport):
+		if n.has_meta(META):
+			return String(n.get_meta(META))
+		n = n.get_parent()
+	return ""
+
+static var _denied := {}           # instance id -> the control guard() hid
+static var _warned := {}
+
+## hide every visible top-level HUD control with no home (or homed "none") while split;
+## show them again at full screen. Returns the paths it hid this pass.
+static func guard(t: Node) -> Array:
+	var hid: Array = []
+	if not split(t):
+		for id in _denied:
+			var c = instance_from_id(id)
+			if c != null and is_instance_valid(c):
+				(c as Control).visible = true
+		_denied.clear()
+		return hid
+	var ml := Engine.get_main_loop()
+	if not (ml is SceneTree):
+		return hid
+	# the HUD's layers, looked up again every 2 s (a native search; the guard itself is cheap)
+	var now := Time.get_ticks_msec()
+	if now - _layers_at > 2000:
+		_layers_at = now
+		_layers = (ml as SceneTree).root.find_children("*", "CanvasLayer", true, false)
+	for cl in _layers:
+		if not is_instance_valid(cl):
+			continue
+		for k in (cl as Node).get_children():
+			if k is Control and (k as Control).visible:
+				var r := region_of(k)
+				if r == "" or r == "none":
+					(k as Control).visible = false
+					if r == "":
+						_denied[k.get_instance_id()] = true     # a stranger: shown again at full screen
+					# ("none": its owner hides / shows it itself)
+					hid.append(str(k.get_path()))
+					if r == "" and not _warned.has(str(k.get_path())):
+						_warned[str(k.get_path())] = true
+						push_warning("HudDock: %s has no home (HudDock.mark) - hidden while the spotlight panes are up" % k.get_path())
+	return hid
+
+static var _layers: Array = []
+static var _layers_at := -100000

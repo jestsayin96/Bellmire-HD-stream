@@ -60,6 +60,9 @@ var _extra := {}           # pane -> VBoxContainer (the columns after the first)
 var _first := ""           # the pane this column itself sits in
 
 func _dock() -> void:
+	HudDock.mark(self, _first if _first != "" else "none")
+	for k in _extra:
+		HudDock.mark(_extra[k], k)
 	if _first != "":
 		HudDock.put(self, HudDock.pane(town, _first), HudDock.pane_k(town, _first), "bl")
 	for k in _extra:
@@ -135,6 +138,8 @@ func _block(d: Delve) -> PanelContainer:
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	p.add_child(v)
 	# header: which floor, and the oil they carry (it is their light)
+	p.add_to_group("hud_party")          # L21: the test finds each party block by group + its delve
+	p.set_meta("delve", d)
 	var who := "The town's band" if d.npc_party else "Delvers"
 	v.add_child(UiTheme.title("%s · floor %d" % [who, d.floor_no], 24))
 	var oil_col := UiTheme.INK_RED if d.dark or d.oil < 1.0 else (Color(0.62, 0.38, 0.05) if d.oil <= float(d._alive().size()) else UiTheme.INK_SOFT)

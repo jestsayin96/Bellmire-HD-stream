@@ -182,6 +182,11 @@ func _best(avoid: String = "") -> Dictionary:
     if si.has("mouth"):
         tour.append([si["mouth"], 45.0, -35.0])
     tour.append([Vector3.ZERO, 120.0, -50.0])
+    # D12: the valley beyond the wall - steadings, the Ashwood, the ford, the Old Footing
+    var vl = town.get("valley")
+    if vl != null:
+        for vt in vl.tour:
+            tour.append(vt)
     var stp: Array = tour[_tour_i % tour.size()]
     c.append({"key": "tour_%d" % (_tour_i % tour.size()), "pri": 10.0, "pos": stp[0],
               "dist": stp[1], "pitch": stp[2], "tour": true})

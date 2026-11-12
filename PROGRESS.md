@@ -1172,3 +1172,36 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   the Chronicle reads "Initiative: the raiders 9, the watch 22 - the watch is ready for them."; a burning ruin. Looked.
 - Checks: parse 0 script errors, _offfloor 0 of 1063 (monsters 0 of 231), TWITCH_PARSE OK, _townwalk PASS (in_solid
   1/8099, raid 0/6520; stuck_on_route 1-3 = D14), _delve_test ENDED all four home, 0 SCRIPT ERROR.
+
+## Cycle 79 - D12, the valley beyond the walls (desktop, 2026-11-12)
+- scripts/valley.gd (new, class_name Valley), built in town._build after the farms and BEFORE the navmesh bake. From the
+  original game (read only): "Outlying farmsteads: a cottage and a well where a highway leaves the wall", woods "belong
+  OUTSIDE the wall", the lumbermill "against the treeline"; names from the lore's own surnames (Coalfoot, Bramble,
+  Ashwood, of the Ford). Nothing states a floor count; the ruin never says who built it.
+  - Coalfoot Steading (south of the river, off the new South Road from the bridge) and Bramble End (by the east road):
+    3 cottages each on a lane, a well, barrels and crates at the doors, a signpost, two folk at their doors.
+  - the Ashwood: 150 pines and oaks (trunks are nav circles, never on a road) round a woodcutters' camp - hut, three log
+    stacks, stumps, the axe block, a camp fire with a little light, three woodcutters at work.
+  - the ford: town.height_at raises a gravel bar across the channel at FORD_X = -150 (-0.75, the water is -0.9);
+    town._bake_nav leaves that stretch of the river band open; stepping stones and a dirt track over it. The Ford Mill
+    beside it (town._build_watermill split into _watermill_at(x); mills are now solid on the navmesh too).
+  - the Old Footing: a ring of broken mossy wall (doorway toward the Delvers' Road, two falls), a tower stump, columns
+    standing and fallen, flagstones, rubble, twisted and dead trees. "Someone built here first, and stopped all at once."
+  - roads: the South Road (bridge -> fork -> the Ashwood), fork -> Coalfoot -> the ford -> up to the west road, the mill
+    path, Bramble End -> east road, a track off the Delvers' Road to the Footing (the scar road was already there).
+  - travellers: every 16-32 s (max 4 out) one of 8 trips - carts (Coalfoot -> market, Ashwood -> sawmill, Coalfoot ->
+    Ford Mill, Ford Mill -> market) and walkers - out, a while there, home, gone (the caravan's pattern). A Chronicle
+    line at most every 90 s ("A timber cart leaves the Ashwood for the sawmill.").
+  - auto_director.gd: the slow tour now also visits the five places (town.valley.tour).
+- BUG FOUND + FIXED (town_nav.gd): NavigationServer3D.map_get_path searches at most 4096 polygons; the 0.5 m town mesh
+  has ~24700, so any route over ~250 m (market -> Coalfoot, the ford, the Ford Mill) stopped 27-53 m short. TownNav.path
+  now uses query_path with path_search_max_polygons = 60000. All six places route from the market to 0.0 m.
+- tools/_d12_test.gd (new): 6 sites, 7 cottages, 154 trees, 9 wall pieces, 7 folk all clear of solids; the ford bar
+  -0.75 vs -2.6 beside it; over the ford in 32 m (the bridge is 150 m away); every place reachable from the market;
+  all 8 trips routed and came home in 507 s of game time, 4628 m walked, in_solid 0 of 6962. D12_TEST OK.
+- Render renders/cycles/20261112_d12 (coalfoot_steading, the_ashwood, the_ford, the_old_footing, bramble_end,
+  overview_0/1). Looked: cottages on the lane with the well; the camp in its clearing among the pines; the gravel ford
+  with stones and the mill wheel turning; the ruin ring and stump; the Chronicle shows the Coalfoot cart line.
+- Checks: parse 0 script errors, _offfloor 0 of 978, TWITCH_PARSE OK, _townwalk PASS (in_solid 0/8025, raid 0/5682,
+  stuck_on_route 1-3 = D14), _delve_test ran 150 s with 0 SCRIPT ERROR (two "Lambda capture freed" engine errors in the
+  delve, laptop side, not new here). Laptop files untouched.

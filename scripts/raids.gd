@@ -110,6 +110,9 @@ func raid(source := "") -> void:
                         "dice": [1, 6], "dmod": 2, "dex": 1, "con": 1,
                         "speed": 4.0, "name": nm, "target": null, "swing": _first_swing(true),
                         "kind": "monster" if from_dungeon else "bandit"})
+    # S1: they announce themselves - a roar by kind at the spawn, a second voice
+    # behind it (far from the camera Sfx.at keeps it quiet)
+    _arrival_cry(spawn)
     if from_dungeon:
         _say("%d creatures boil out of the dungeon!" % n)
     else:
@@ -122,6 +125,34 @@ func raid(source := "") -> void:
             riders += 1
     if riders > 0:
         _say("The mounted watch rides out to meet them - %d riders." % riders)
+
+## S1: the war cry of a raider by kind - goblins screech, orcs and trolls roar,
+## the scar's dead rattle, the west road's bandits yell
+static func cry_of(r: Dictionary) -> String:
+    var n := String(r.get("name", "")).to_lower()
+    if String(r.get("kind", "")) == "bandit":
+        return "male_attack_yell"
+    for k in [["goblin", "goblin_screech"], ["orc", "orc_roar"], ["troll", "troll_roar"], ["skelet", "skeleton_rattle"],
+              ["bone", "skeleton_rattle"], ["zombie", "zombie_moan"], ["ghost", "ghost_wail"], ["wraith", "wraith_whisper"]]:
+        if n.contains(String(k[0])):
+            return String(k[1])
+    return "troll_roar"
+var arrival_cries: Array = []    # S1 test telemetry: the kinds cried at each raid
+
+func _arrival_cry(spawn: Vector3) -> void:
+    if raiders.is_empty():
+        return
+    var kinds: Array = []
+    for r in raiders:
+        var c := cry_of(r)
+        if not kinds.has(c):
+            kinds.append(c)
+    arrival_cries.append(kinds)
+    Sfx.at(String(kinds[0]), spawn + Vector3(0, 1.6, 0), 2.0)
+    var second := String(kinds[kinds.size() - 1])
+    var at2 := spawn + Vector3(randf_range(-4, 4), 1.6, randf_range(-4, 4))
+    get_tree().create_timer(1.3, false).timeout.connect(func() -> void:
+        Sfx.at(second, at2, 0.0))
 
 ## ------------------------------------------------------------- defenders
 func _defenders() -> Array:
@@ -411,7 +442,9 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
     if dmg <= 0.0:
         Sfx.at("swing", tn.global_position, -4.0)
         return
-    Sfx.at("hit", tn.global_position)
+    # S1: steel on steel when a blade meets the watch or a bandit; a dull blow on
+    # the scar's dead; every 20 lands hard
+    Sfx.at("hit_impact" if (crit or tn is Monster) else "sword_clash", tn.global_position + Vector3(0, 1.1, 0), 2.0 if crit else -1.0)
     ts["hp"] = float(ts["hp"]) - dmg
     if tn is Monster:
         (tn as Monster).hp = float(ts["hp"])
@@ -1050,7 +1083,7 @@ func _bolt_lands(r: Dictionary, who: String) -> void:
     if dmg <= 0.0:
         return
     arrows_hit += 1
-    Sfx.at("hit", tn.global_position, -3.0)
+    Sfx.at("hit_impact", tn.global_position + Vector3(0, 1.1, 0), -4.0)   # S1: a crossbow bolt strikes
     r["hp"] = float(r["hp"]) - dmg
     if tn is Monster:
         (tn as Monster).hp = float(r["hp"])

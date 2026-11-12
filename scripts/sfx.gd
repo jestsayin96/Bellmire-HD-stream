@@ -124,7 +124,8 @@ const AMBIENCE := "amb/town_wind.ogg"
 const BUS_DB := {"Music": -14.0, "Sfx": -6.0, "Ambience": -20.0}
 const FADE := 3.0
 const SILENT := -60.0
-const GAP := {"hit": 0.06, "swing": 0.06, "spell": 0.1, "coin": 0.15, "splash": 0.2}
+const GAP := {"hit": 0.06, "swing": 0.06, "spell": 0.1, "coin": 0.15, "splash": 0.2,
+             "sword_clash": 0.08, "hit_impact": 0.08, "mana_charge": 0.12}   # S1: raid blows + every cast
 
 static var _i: Sfx = null
 

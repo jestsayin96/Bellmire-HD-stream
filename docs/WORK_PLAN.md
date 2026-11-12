@@ -276,7 +276,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       that fails at random teaches everyone to ignore it, which is worse than no test.
       DONE (Cycle 83): a lord floor + the director deciding at once when the story is live (its own _best / _cut); timing samples best of 3; L20_TEST OK x3 in a row.
 
-- [ ] S1. SOUND WIRING - DESKTOP (town side). The RPG sound library is already on main (commit 00cf0ef):
+- [x] S1. SOUND WIRING - DESKTOP (town side). The RPG sound library is already on main (commit 00cf0ef):
       86 ids registered as Sfx kinds, played with Sfx.at(id, pos) (3D, in the world) or Sfx.play(id)
       (flat). Do NOT edit sfx.gd except to add a GAP throttle for a kind that fires often. Wire the
       kinds that belong to the town, in the desktop-owned files only:
@@ -295,6 +295,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       (Sfx.at already attenuates by distance). Add a tools/_s1_test.gd that asserts each wired event calls
       Sfx with a kind that exists in SETS. Render/soak a minute and listen in your head via the play counts
       (Sfx.plays) - 0 SCRIPT ERROR, no kind played that isn't registered.
+      DONE cycle 88: townsfolk voices by sex (lore first names, else the body), sampled - 45-120 s each, LOD 0 only, one per 3.5 s town-wide; crier yells;
+      spells.SOUND (bolt/chain lightning, fire, frost, heal/renew, mend buff, ward shield, smite summon, + mana_charge, scar curse); raid cries by kind
+      + sword_clash/hit_impact; daylight pens + birds/owl/crickets every 5-11 s at -12/-14 dB; level_up + quest_complete going up. S1_TEST OK.
 - [ ] S2. SOUND WIRING - LAPTOP (dungeon + heroes + UI). Same library on main (00cf0ef), same API, same
       rule: do not edit sfx.gd except to add a GAP. Pull main into the laptop branch first. Wire the
       laptop-owned files only:

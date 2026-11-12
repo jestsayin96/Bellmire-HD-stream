@@ -38,6 +38,10 @@ const HARM := ["bolt", "chain", "fire", "frost", "smite"]
 const SPEED := 16.0              # m/s, every thrown spell
 const AIM_TOP := 2.4             # never aim higher than this over the caster's feet
 const CHAIN_HOP := 0.12          # s between the chain's leaps
+## S1: what each spell sounds like at the caster's hands (the RPG library). Every
+## cast gathers with a soft mana_charge under it; a scar misfire adds a curse.
+const SOUND := {"bolt": "lightning", "chain": "lightning", "fire": "fireball", "frost": "ice_shard",
+                "heal": "heal", "renew": "heal", "mend": "buff", "ward": "shield", "smite": "summon"}
 static var last := {}            # the last cast: kind, hand, aim, caster feet (tests)
 
 ## how tall a body stands (its own meshes; health bars and labels left out),
@@ -119,7 +123,10 @@ static func cast(kind: String, caster: Node3D, target, in_scar := false, more: A
     var hand := hand_of(caster, aim)
     last = {"kind": actual, "hand": hand, "aim": aim, "feet": caster.global_position}
     _flash(root, hand, col, 0.4)
-    Sfx.at("spell", hand)
+    Sfx.at("mana_charge", hand, -8.0)
+    Sfx.at(String(SOUND.get(actual, "spell")), hand, -2.0)
+    if in_scar:
+        Sfx.at("curse", hand, -4.0)
     match actual:
         "bolt": _bolt(root, hand, aim, col)
         "heal": _heal(root, ground, col)

@@ -165,12 +165,71 @@ func _cry(delta: float) -> void:
     _shout.visible = true
     UiTheme.fit_plate(_shout)
     Rig.play(_anim, "Cheer")
+    var now := Time.get_ticks_msec()
+    if randf() < 0.5 and now - _voice_last >= VOICE_GAP:   # S1: every other cry is shouted out loud (same town-wide gap)
+        _voice_last = now
+        var k := voice_sex() + "_attack_yell"
+        voices[k] = int(voices.get(k, 0)) + 1
+        Sfx.at(k, global_position + Vector3(0, 1.7, 0), -5.0)
     var st := create_tween()                 # D8: bound to this walker, dies with it
     st.tween_interval(5.0)
     st.tween_callback(func() -> void:
         if is_instance_valid(_shout):
             _shout.visible = false
             Rig.play(_anim, "Idle"))
+
+## S1: VOICES. Now and then a person of Bellmire grunts, puffs or laughs - by
+## their sex (the lore's first names; else the body: KayKit's Rogue bodies are
+## women). SAMPLED, never a crowd: each person speaks every 45-120 s at most,
+## only near the camera (LOD 0), out in the street, and the whole town gives at
+## most one voice every VOICE_GAP ms (real time - at 4x the town is no louder).
+## The crier's shout is a yell, under the same gap.
+const FEMALE := ["Edda", "Mira", "Hilda", "Ysolde", "Petra", "Nessa", "Wren", "Sable", "Tove", "Ingrid", "Maela"]
+const MALE := ["Bran", "Rolf", "Talen", "Osric", "Cort", "Garm", "Aldric", "Dunn", "Harl", "Rask", "Corvin"]
+const VOICE_GAP := 3500
+const QUIET := ["bandit"]                  # raiders cry in raids.gd, not here
+static var _voice_last := -100000
+static var voices := {}                    # kind -> count (tests)
+var sex := ""                              # "male" / "female"; "" = worked out once
+var _voice_t := randf_range(25.0, 120.0)
+
+func voice_sex() -> String:
+    if sex != "":
+        return sex
+    var first := person_name.get_slice(" ", 0)
+    if FEMALE.has(first):
+        sex = "female"
+    elif MALE.has(first):
+        sex = "male"
+    else:
+        sex = "female" if model.begins_with("Rogue") else "male"
+    return sex
+
+## the kind this person would voice now (a laugh, a grunt, an effort on the move)
+func voice_kind() -> String:
+    var s := voice_sex()
+    if role in ["child", "drunk", "bard"]:
+        return s + "_laugh"
+    if not _route.is_empty():
+        return s + ("_effort" if randf() < 0.6 else "_grunt")
+    var r := randf()
+    return s + ("_laugh" if r < 0.35 else ("_grunt" if r < 0.8 else "_effort"))
+
+func _voice(delta: float) -> void:
+    _voice_t -= delta
+    if _voice_t > 0.0:
+        return
+    _voice_t = randf_range(45.0, 120.0)
+    # heroes (rank >= 0) are the laptop's (S2: their voices ride their blows)
+    if inside or not visible or lod > 0 or rank >= 0 or QUIET.has(role) or not shout_lines.is_empty():
+        return
+    var now := Time.get_ticks_msec()
+    if now - _voice_last < VOICE_GAP:
+        return
+    _voice_last = now
+    var k := voice_kind()
+    voices[k] = int(voices.get(k, 0)) + 1
+    Sfx.at(k, global_position + Vector3(0, 1.6 * size_k, 0), -9.0)
 
 func _follow(delta: float) -> void:
     if not is_instance_valid(leader):
@@ -241,6 +300,7 @@ func _physics_process(delta: float) -> void:
     if town != null:
         _try_cast(delta)
         _cry(delta)
+        _voice(delta)
     if cart and is_instance_valid(cart):
         var back := global_position - global_transform.basis.z * 2.6
         cart.global_position = cart.global_position.lerp(Vector3(back.x, float(town.call("height_at", back.x, back.z)), back.z), minf(delta * 4.0, 1.0))

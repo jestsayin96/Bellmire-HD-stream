@@ -48,6 +48,50 @@ func setup(t: Node3D) -> void:
         (g as StandardMaterial3D).emission_enabled = true
         (g as StandardMaterial3D).emission = Color(1.0, 0.68, 0.32)
 
+## S1: THE VALLEY'S VOICES - quiet and now and then. By day birds and a crow, at
+## night an owl and the crickets; and when the camera is near the pens, one of
+## the animals (a dog, a cat, a horse, a pig). One sound every 5-11 real seconds
+## at most, low in the mix (-12 dB and under; Sfx.at fades the far ones), and
+## none while a raid has the stage.
+const PEN_VOICE := {"Pug": "dog_bark", "Corgi": "dog_bark", "Cat": "cat_meow", "Horse": "horse_neigh",
+                    "Foal": "horse_whinny", "Pig": "boar_grunt"}
+const DAY_AIR := ["bird_chirp", "bird_chirp", "crow_caw"]
+const NIGHT_AIR := ["owl_hoot", "cricket_chirp", "cricket_chirp"]
+const HEAR := 70.0
+var ambient_plays := {}          # kind -> count (tests)
+var _amb_t := 6.0
+
+func _ambient(dt: float) -> void:
+    _amb_t -= dt / maxf(Engine.time_scale, 0.001)
+    if _amb_t > 0.0:
+        return
+    _amb_t = randf_range(5.0, 11.0)
+    var r = town.get("raids")
+    if r and not (r.raiders as Array).is_empty():
+        return
+    var ear: Vector3 = town.get("_market_pos")
+    var cam: Camera3D = get_viewport().get_camera_3d() if get_viewport() else null
+    if cam:
+        ear = cam.global_position
+    var night := nightness(hour()) > 0.5
+    var kind := ""
+    var at := Vector3.ZERO
+    if randf() < 0.45:
+        var near: Array = []
+        for a in town.get("animals"):
+            if is_instance_valid(a) and PEN_VOICE.has(String(a.kind)) and (a as Node3D).global_position.distance_to(ear) < HEAR:
+                near.append(a)
+        if not near.is_empty():
+            var an: Node3D = near[randi() % near.size()]
+            kind = String(PEN_VOICE[String(an.kind)])
+            at = an.global_position + Vector3(0, 0.6, 0)
+    if kind == "":
+        kind = String((NIGHT_AIR if night else DAY_AIR)[randi() % 3])
+        at = ear + Vector3(randf_range(-25.0, 25.0), 0.0, randf_range(-25.0, 25.0))
+        at.y = float(town.call("height_at", at.x, at.z)) + (0.3 if kind == "cricket_chirp" else 9.0)
+    ambient_plays[kind] = int(ambient_plays.get(kind, 0)) + 1
+    Sfx.at(kind, at, -14.0 if kind in ["cricket_chirp", "bird_chirp"] else -12.0)
+
 func hour() -> float:
     return override_hour if override_hour >= 0.0 else economy.hour()
 
@@ -69,6 +113,7 @@ func goldness(h: float) -> float:
 func _process(_dt: float) -> void:
     if economy == null or sun == null:
         return
+    _ambient(_dt)
     var h := hour()
     var nt := nightness(h)
     var gd := goldness(h)

@@ -129,6 +129,7 @@ var _overlap_dropped := 0
 var _wall_info := {}
 var wall_parts: Array = []     # wall blocks, merlons, towers, gate arches (D3: palisade -> stone)
 var growth = null              # scripts/growth.gd - what the town level shows (D3)
+var _sound_level := 0          # S1: the last level shown (the fanfare plays only going up)
 var _scar := Vector3.ZERO      # centre of the wild-magic scar (dungeon mouth beyond it)
 var _north_from := Vector3.ZERO  # where the Delvers' Road leaves the ring
 var _scar_info := {}
@@ -979,6 +980,13 @@ func show_level(lv: int, quiet := false) -> void:
     if growth != null:
         growth.show_level(lv, quiet)
     _show_garrison(lv, quiet)
+    # S1: a new level is a fanfare for the whole stream (flat, not in the world):
+    # level_up, then quest_complete under the Chronicle line. Only on the way up.
+    if not quiet and _sound_level > 0 and lv > _sound_level:
+        Sfx.play("level_up", -2.0)
+        get_tree().create_timer(1.6, true, false, true).timeout.connect(func() -> void:
+            Sfx.play("quest_complete", -4.0))
+    _sound_level = lv
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,

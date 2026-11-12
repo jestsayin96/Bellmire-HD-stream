@@ -47,6 +47,10 @@ var size_k := 1.0                    # children are smaller
 var notable_title := ""
 var sway := 0.04
 var _tag: Label3D
+## D16a: room a body takes (centre to shoulder, m) and the way it is walking
+## this step (ZERO standing) - town.crowd_push reads both to make room and yield
+var body_r := 0.28
+var move_dir := Vector3.ZERO
 
 var _anim: AnimationPlayer
 var _mdl: Node3D
@@ -88,6 +92,7 @@ func _ready() -> void:
             _anim.seek(randf() * 2.0, true)
         if size_k != 1.0:
             _mdl.scale = Vector3.ONE * size_k
+            body_r *= size_k
         Gear.strip_props(_mdl)
         Gear.dress_role(_mdl, gear_role if gear_role != "" else role, gear_seed)
         Gear.clothe(_mdl, gear_role if gear_role != "" else role, livery, rank)
@@ -240,10 +245,13 @@ func _follow(delta: float) -> void:
     to.y = 0.0
     if to.length() > 0.35:
         var p := global_position + to.normalized() * minf(to.length(), speed * pace * 1.15 * delta)
+        p += (town.call("crowd_push", self, to.normalized()) as Vector3) * delta
+        move_dir = to.normalized()
         global_position = town.call("keep_walkable", p)
         rotation.y = leader.rotation.y
         Rig.play(_anim, "Walking_A")
     else:
+        move_dir = Vector3.ZERO
         rotation.y = leader.rotation.y
         Rig.play(_anim, "Idle")
 
@@ -314,6 +322,7 @@ func _physics_process(delta: float) -> void:
         _posted(delta)
         return
     if _route.is_empty():
+        move_dir = Vector3.ZERO
         _wait -= delta
         if _wait <= 0.0:
             if inside:
@@ -393,7 +402,9 @@ func _physics_process(delta: float) -> void:
     else:
         _ghost_last = Vector3.INF
         # room for each other, and never a foot inside anything solid
-        p += (town.call("crowd_push", self) as Vector3) * 1.4 * delta
+        # (D16a: crowd_push is a velocity - separation plus a sidestep to
+        # pass whoever is in the way ahead)
+        p += (town.call("crowd_push", self, dir) as Vector3) * delta
         var want := p
         p = town.call("keep_walkable", p)
         if Vector2(p.x - want.x, p.z - want.z).length() > 0.005:
@@ -401,6 +412,7 @@ func _physics_process(delta: float) -> void:
             # push-out only hands the foot back - step round it instead
             p = _slide_round(was, dir, speed * pace * delta, p)
     global_position = p
+    move_dir = dir
     rotation.y = atan2(dir.x, dir.z)
     Rig.play(_anim, "Walking_A")
     # a waypoint that cannot be reached (off the ground, behind a crowd):

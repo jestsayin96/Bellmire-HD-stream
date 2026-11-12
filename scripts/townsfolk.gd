@@ -315,6 +315,8 @@ func _follow(delta: float) -> void:
             Rig.play(_anim, "Idle")
 
 func _next_trip() -> Vector3:
+    _at_job = false
+    _eve_drink = false
     # old villager: at night the WORK state ends and they go home to REST until
     # morning (the old clock: night before 6:00 and after 18:30)
     var eco = town.get("economy") if town else null
@@ -329,13 +331,42 @@ func _next_trip() -> Vector3:
     if stops.is_empty():
         var dest: Vector3 = work if _to_work else home
         _enter_at = work_in if _to_work else home_in
-        _to_work = not _to_work
         _linger = -1.0
+        # D17c: a worker works the job out of doors a while (a yard with no
+        # door always; one with a door half the time) - seen at it, not gone in
+        if _to_work and job_out > 0.0 and JOB_ANIMS.has(role) and rank < 0 \
+                and (work_in == Vector3.ZERO or randf() < job_out):
+            _enter_at = Vector3.ZERO
+            _at_job = true
+            _linger = randf_range(25.0, 50.0)
+        _to_work = not _to_work
         return dest
+    # D17c: an evening's drink - now and then of an evening a body breaks off
+    # its round for the tavern's yard (a stool at the tables, or a mug stood
+    # up), then takes the round up again where it left it
+    if job_out > 0.0 and eco and (eco.hour() >= 17.0 or eco.hour() < 0.5) and rank < 0 \
+            and leader == null and cart == null and randf() < 0.3 and town.has_method("_shop_door"):
+        var td: Array = town.call("_shop_door", "tavern")
+        if not td.is_empty():
+            var dv: Vector3 = td[0]
+            if Vector2(dv.x - global_position.x, dv.z - global_position.z).length() > 8.0:
+                _enter_at = Vector3.ZERO
+                _linger = randf_range(20.0, 35.0)
+                _eve_drink = true
+                acts["tavern_eve"] = int(acts.get("tavern_eve", 0)) + 1
+                return dv
     var s: Array = stops[_stop_i % stops.size()]
     _stop_i += 1
     _enter_at = s[1]
     _linger = float(s[2])
+    # D17c: of an evening the tavern stop is often out in its yard - a seat at
+    # the tables, or a mug stood up - rather than gone indoors
+    var tv = town.get("tavern_at") if town else null
+    var sp: Vector3 = s[0]
+    if job_out > 0.0 and _enter_at != Vector3.ZERO and tv is Vector3 and tv != Vector3.INF \
+            and Vector2(sp.x - tv.x, sp.z - tv.z).length() < 12.0 and eco and (eco.hour() >= 17.0 or eco.hour() < 1.0) \
+            and randf() < 0.6:
+        _enter_at = Vector3.ZERO
     return s[0]
 
 var _linger := -1.0
@@ -440,6 +471,10 @@ func _physics_process(delta: float) -> void:
         move_dir = Vector3.ZERO
         _wd_at = Vector3.INF
         _wd_n = 0
+        if not inside and visible:
+            if _seated(delta):
+                return
+            _idle_acts(delta)
         _wait -= delta
         if _wait <= 0.0:
             if inside:
@@ -468,6 +503,10 @@ func _physics_process(delta: float) -> void:
     var tgt: Vector3 = _route[0]
     var to: Vector3 = tgt - global_position
     to.y = 0.0
+    if _sat:
+        # D17c: called away while sitting (a raid's flight): up and off
+        _sat = false
+        _release_seat()
     # D1: the last leg, door -> just inside, is the only one off the walkable
     # ground; corners are taken tight (0.9 m cut through house corners)
     var door_leg: bool = _route.size() == 1 and _enter_at != Vector3.ZERO
@@ -500,6 +539,9 @@ func _physics_process(delta: float) -> void:
         if _route.is_empty():
             Rig.play(_anim, "Idle")
             _door_retry = 0
+            if _seat_i >= 0:
+                _sit()
+                return
             if _enter_at != Vector3.ZERO:
                 # through the door and gone: a while indoors
                 inside = true
@@ -507,13 +549,17 @@ func _physics_process(delta: float) -> void:
                 _wait = _linger if _linger > 0.0 else randf_range(18.0, 45.0)
             else:
                 _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
+                if not _at_job:
+                    _maybe_sit()
         return
     var dir: Vector3 = to.normalized()
     _wobble += delta * 1.7
     dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * sway).normalized()
     var was := global_position
     var p: Vector3 = global_position + dir * speed * pace * delta
-    if door_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
+    # (D17c: the last step onto a seat is off the walkable ground too)
+    var seat_leg: bool = _route.size() == 1 and _seat_i >= 0
+    if door_leg or seat_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
         # (D14: brushing out of a pocket between props - see _escape_route)
         p.y = float(town.call("height_at", p.x, p.z))
     else:
@@ -844,6 +890,11 @@ func _posted(delta: float) -> void:
         return
     _post_t = randf_range(5.0, 13.0)
     var roll := randf()
+    if JOB_ANIMS.has(role):
+        # D17c: a keeper at the job works it - mostly the trade's own motions,
+        # now and then a look along the street; seldom a pace
+        _post_t = randf_range(1.2, 3.5)
+        roll = 0.8 if roll < 0.75 else 0.5
     if roll < 0.35:
         # a step or two along the post and back
         var side := Vector3(cos(face_yaw), 0.0, -sin(face_yaw)) * randf_range(-1.6, 1.6)
@@ -857,10 +908,13 @@ func _posted(delta: float) -> void:
         # look along the street, or at whoever is passing
         _look = face_yaw + randf_range(-1.1, 1.1)
         return
-    var g: String = POST_GESTURES[randi() % POST_GESTURES.size()]
+    var gl: Array = JOB_ANIMS.get(role, POST_GESTURES)
+    var g: String = gl[randi() % gl.size()]
     if _anim and _anim.has_animation(g):
         Rig.play(_anim, g)
         _gest_t = minf(_anim.get_animation(g).length, 3.5)
+        if gl != POST_GESTURES:
+            acts["job"] = int(acts.get("job", 0)) + 1
 
 ## D6: name this body as one of Bellmire's own (works before or after _ready)
 func make_notable(nm: String, title: String) -> void:
@@ -871,3 +925,157 @@ func make_notable(nm: String, title: String) -> void:
         _tag.modulate = Color(1.0, 0.88, 0.55)
         _tag.visible = true
         _tag.visibility_range_end = 60.0 if show_names else 14.0
+
+## ---- D17c: STATE COVERAGE. What a body does where it stands. A worker at
+## the job (posted keepers, and walkers who work their yard out of doors) works
+## it in the trade's own motions: the smith at the hammer, a farmer at the hoe
+## and the baskets, woodcutters and miners swinging, the stall's keeper with
+## the wares and the customers. Folk lingering on the square haggle; of an
+## evening at the tavern they drink and eat (KayKit has no seated eating clip:
+## a mug or a bite is Use_Item, stood at the tavern's tables). A free bench,
+## stool or chair near where someone stopped is sat on - often of an evening,
+## now and then by day - Sit_Chair_Down into Sit_Chair_Idle, up again with
+## Sit_Chair_StandUp. `job_out = 0` / `sit_ok = false` give the old town.
+const JOB_ANIMS := {
+    "smith": ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Chop", "Use_Item", "PickUp"],
+    "blacksmith": ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Chop", "Use_Item", "PickUp"],
+    "armorer": ["1H_Melee_Attack_Chop", "Use_Item", "Interact"],
+    "farmer": ["2H_Melee_Attack_Chop", "PickUp", "PickUp", "Use_Item"],
+    "miller": ["PickUp", "Use_Item", "Interact"],
+    "lumberjack": ["2H_Melee_Attack_Chop", "2H_Melee_Attack_Chop", "PickUp"],
+    "miner": ["2H_Melee_Attack_Chop", "2H_Melee_Attack_Chop", "PickUp"],
+    "fletcher": ["Use_Item", "1H_Ranged_Reload", "Interact"],
+    "merchant": ["Interact", "Cheer", "Use_Item", "PickUp"],
+    "trader": ["Interact", "Cheer", "Use_Item", "PickUp"],
+    "store": ["Interact", "PickUp", "Use_Item"],
+    "apothecary": ["Use_Item", "Interact", "PickUp"],
+    "tavern": ["Use_Item", "Interact", "Cheer"],
+    "innkeeper": ["Use_Item", "Interact", "Cheer"],
+    "baker": ["Use_Item", "PickUp", "Interact"],
+    "washer": ["PickUp", "Use_Item", "PickUp"],
+}
+const NO_SIT := ["caravan", "carter", "bandit", "guard", "watch", "crier", "priest"]
+static var job_out := 0.5
+static var sit_ok := true
+static var acts := {}                 # kind -> count (tools/_d17c_test.gd)
+var _at_job := false
+## (a day here is 90 s: a walk across town is hours, so an evening's errand
+## is remembered by why it was made, not by the clock on arrival)
+var _eve_drink := false
+var _seat_i := -1
+var _sat := false
+var _seat_for := 0.0
+var _act_t := randf_range(2.0, 6.0)
+
+func _maybe_sit() -> void:
+    if not sit_ok or rank >= 0 or role in NO_SIT or leader != null or cart != null \
+            or not shout_lines.is_empty() or not town.has_method("free_seat"):
+        return
+    var eco = town.get("economy")
+    var h: float = eco.hour() if eco != null else 12.0
+    var eve := h >= 17.0 or h < 1.0 or _eve_drink
+    if randf() > (0.55 if eve else 0.2):
+        return
+    var i: int = town.call("free_seat", global_position, 16.0 if eve else 9.0)
+    if i < 0:
+        return
+    var s: Dictionary = (town.get("seats") as Array)[i]
+    var sp: Vector3 = s["p"]
+    var app: Vector3 = sp + (s["f"] as Vector3) * 0.75
+    var r: Array = town.call("route", global_position, app)
+    if r.is_empty():
+        return
+    var end: Vector3 = r.back()
+    if Vector2(end.x - app.x, end.z - app.z).length() > 1.0:
+        return
+    s["by"] = get_instance_id()
+    _seat_i = i
+    _seat_for = maxf(_wait, randf_range(20.0, 45.0) if eve else randf_range(10.0, 22.0))
+    r.append(sp)
+    _route = r
+
+func _sit() -> void:
+    var seats: Array = town.get("seats")
+    if _seat_i < 0 or _seat_i >= seats.size():
+        _seat_i = -1
+        return
+    var s: Dictionary = seats[_seat_i]
+    var sp: Vector3 = s["p"]
+    if Vector2(sp.x - global_position.x, sp.z - global_position.z).length() > 1.3:
+        _release_seat()           # sent somewhere else on the way (a flight)
+        _wait = randf_range(2.0, 5.0)
+        return
+    var f: Vector3 = s["f"]
+    # the KayKit sit puts the hips 0.35 m behind the feet: the root goes that
+    # far forward of the seat so the hips land on the plank (tools/_d17c_fit.gd)
+    global_position = sp + f * 0.35
+    rotation.y = atan2(f.x, f.z)
+    _sat = true
+    _wait = _seat_for
+    if _anim:
+        _anim.set_meta("rig_move", false)
+        _anim.set_meta("rig_loop", "Sit_Chair_Idle")
+        Rig.play(_anim, "Sit_Chair_Down", 0.25)
+    acts["sit"] = int(acts.get("sit", 0)) + 1
+
+func _release_seat() -> void:
+    var seats: Array = town.get("seats") if town != null else []
+    if _seat_i >= 0 and _seat_i < seats.size() and int(seats[_seat_i]["by"]) == get_instance_id():
+        seats[_seat_i]["by"] = 0
+    _seat_i = -1
+
+## sitting: true while this frame is the getting-up (the next trip waits on it)
+func _seated(delta: float) -> bool:
+    if _seat_i >= 0 and not _sat:
+        _release_seat()           # the walk there ended some other way
+    if not _sat:
+        return false
+    if _wait > delta:
+        return false
+    _sat = false
+    _release_seat()
+    if _anim:
+        _anim.set_meta("rig_loop", Rig.idle_of(_anim))
+        Rig.play(_anim, "Sit_Chair_StandUp", 0.15)
+    _wait = 1.6
+    return true
+
+## lingering out of doors: the job's motions, haggling at the market, a mug
+## or a bite at the tavern of an evening
+func _idle_acts(delta: float) -> void:
+    if _sat or _seat_i >= 0 or rank >= 0 or leader != null or not shout_lines.is_empty() \
+            or _anim == null or _wait < 1.0:
+        return
+    _act_t -= delta
+    if _act_t > 0.0:
+        return
+    var cur := String(_anim.current_animation)
+    if cur != "" and not Rig.loops(cur):
+        _act_t = 0.5                  # a gesture still playing out
+        return
+    var list: Array = []
+    var kind := ""
+    if _at_job and JOB_ANIMS.has(role):
+        list = JOB_ANIMS[role]
+        kind = "job"
+        _act_t = randf_range(1.0, 3.0)
+    else:
+        _act_t = randf_range(4.0, 9.0)
+        var eco = town.get("economy")
+        var h: float = eco.hour() if eco != null else 12.0
+        var tv = town.get("tavern_at")
+        var mk = town.get("_market_pos")
+        var p := global_position
+        if (h >= 17.0 or h < 1.0 or _eve_drink) and tv is Vector3 and tv != Vector3.INF \
+                and Vector2(p.x - tv.x, p.z - tv.z).length() < 16.0:
+            list = ["Use_Item", "Use_Item", "Cheer"]
+            kind = "eat"
+        elif mk is Vector3 and mk != Vector3.ZERO and Vector2(p.x - mk.x, p.z - mk.z).length() < 20.0 \
+                and randf() < 0.6:
+            list = ["Interact", "PickUp", "Interact"]
+            kind = "haggle"
+        else:
+            return
+    var g: String = list[randi() % list.size()]
+    Rig.play(_anim, g)
+    acts[kind] = int(acts.get(kind, 0)) + 1

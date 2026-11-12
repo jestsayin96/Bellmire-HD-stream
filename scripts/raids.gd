@@ -269,7 +269,45 @@ func _anim(n: Node3D, key: String) -> void:
         (n as Monster)._play({"walk": "walk", "run": "walk", "attack": "attack", "idle": "idle", "die": "die"}[key])
     elif n is Townsfolk:
         var ap: AnimationPlayer = (n as Townsfolk)._anim
-        Rig.play(ap, {"walk": "Walking_A", "run": "Running_A", "attack": "1H_Melee_Attack_Chop", "idle": "Idle", "die": "Death_A"}[key])
+        var nm: String = {"walk": "Walking_A", "run": "Running_A", "attack": "1H_Melee_Attack_Chop", "idle": "Idle", "die": "Death_A"}[key]
+        # D17c: blows and falls vary - the watch's longsword cuts three ways
+        # and thrusts, a barbarian's two hands chop and sweep; two ways to fall
+        if key == "attack":
+            var pool: Array = SWINGS_2H if String((n as Townsfolk).model).begins_with("Barbarian") and randf() < 0.5 else SWINGS
+            nm = pool[randi() % pool.size()]
+            swings[nm] = int(swings.get(nm, 0)) + 1
+        elif key == "die" and randf() < 0.5:
+            nm = "Death_B"
+        Rig.play(ap, nm)
+
+## D17c: a blow that does not drop a body still lands - it reels (Hit_A/B), and
+## a guard sometimes takes it on the shield (Block_Hit); a swing that misses a
+## guard is often a parry (Block). Monsters (the laptop's) flash and number
+## themselves; the mounted watch sits it out in the saddle.
+const SWINGS := ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Slice_Diagonal",
+    "1H_Melee_Attack_Slice_Horizontal", "1H_Melee_Attack_Stab"]
+const SWINGS_2H := ["2H_Melee_Attack_Chop", "2H_Melee_Attack_Slice", "2H_Melee_Attack_Stab"]
+var swings := {}
+var reels := 0
+var parries := 0
+
+func _reel(n: Node3D, missed := false) -> void:
+    if not is_instance_valid(n) or n is Cavalry or not (n is Townsfolk):
+        return
+    var ap: AnimationPlayer = (n as Townsfolk)._anim
+    if ap == null:
+        return
+    var guard := String((n as Townsfolk).role) == "guard"
+    if missed:
+        if guard and randf() < 0.45:
+            Rig.play(ap, "Block", 0.08)
+            parries += 1
+        return
+    var k := "Hit_A" if randf() < 0.5 else "Hit_B"
+    if guard and randf() < 0.3:
+        k = "Block_Hit"
+    Rig.play(ap, k, 0.08)
+    reels += 1
 
 ## ---------------------------------------------------------------- tick
 func _process(delta: float) -> void:
@@ -441,6 +479,7 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
         dmg = _ward_soaks(ts, dmg)
     if dmg <= 0.0:
         Sfx.at("swing", tn.global_position, -4.0)
+        _reel(tn, true)
         return
     # S1: steel on steel when a blade meets the watch or a bandit; a dull blow on
     # the scar's dead; every 20 lands hard
@@ -459,6 +498,8 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
             _raider_falls(tg, killer)
         else:
             _defender_falls(tn, ts, killer)
+    else:
+        _reel(tn)
 
 ## ------------------------------------------------------------ spells (D2)
 ## The arcane callings (mage, sage, cleric) fight a raid with spells from
@@ -590,6 +631,8 @@ func _spell_hurt(r: Dictionary, dmg: float, crit: bool, who: String) -> void:
         (n as Monster)._flash()
     if float(r["hp"]) <= 0.0:
         _raider_falls(r, who)
+    else:
+        _reel(n)
 
 ## the defender within reach worst off (under 60%), not already blessed
 func _most_hurt(me: Node3D, reach: float):
@@ -1091,3 +1134,5 @@ func _bolt_lands(r: Dictionary, who: String) -> void:
         (tn as Monster)._flash()
     if float(r["hp"]) <= 0.0:
         _raider_falls(r, who)
+    else:
+        _reel(tn)

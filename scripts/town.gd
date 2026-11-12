@@ -2244,6 +2244,40 @@ func _lamp_post(p: Vector3, out: Vector3, lv: String, banner: bool) -> void:
 func _bench(p: Vector3, face: Vector3) -> void:
     _spawn(PROPS, "Bench", p, atan2(face.x, face.z))
     _objs.append([p, 1.2])
+    # D17c: room for two on it, facing the way the bench does
+    var fw := Vector3(face.x, 0.0, face.z).normalized()
+    var rt := Vector3(fw.z, 0.0, -fw.x)
+    for sx in [-0.42, 0.42]:
+        _seat(p + rt * float(sx), fw, "bench")
+
+## D17c: places a body can sit - the benches round the square, the tavern's
+## stools and chairs. {"p": the seat on the ground, "f": the way a sitter faces,
+## "kind", "by": the sitter's instance id (0 = free)}
+var seats: Array = []
+var tavern_at := Vector3.INF
+
+func _seat(p: Vector3, face: Vector3, kind: String) -> void:
+    face.y = 0.0
+    seats.append({"p": Vector3(p.x, height_at(p.x, p.z), p.z), "f": face.normalized(), "kind": kind, "by": 0})
+
+## the nearest free seat within r of `near` (-1 = none)
+func free_seat(near: Vector3, r: float) -> int:
+    var best := -1
+    var bd := r
+    for i in seats.size():
+        var s: Dictionary = seats[i]
+        var by := int(s["by"])
+        if by != 0:
+            var o := instance_from_id(by)
+            if o != null and is_instance_valid(o) and o is Townsfolk and int((o as Townsfolk)._seat_i) == i:
+                continue
+            s["by"] = 0
+        var sp: Vector3 = s["p"]
+        var d := Vector2(sp.x - near.x, sp.z - near.z).length()
+        if d < bd:
+            bd = d
+            best = i
+    return best
 
 func _planter(p: Vector3, yaw: float, wood: Material) -> void:
     var g := height_at(p.x, p.z)
@@ -3609,9 +3643,15 @@ func _dress_shops() -> void:
                     _on_top("Mug", tt, 0.4, 0.1, 1.0)
                     _yard("Stool", y, side, f, -2.2, float(tz))
                     _yard("Stool", y, side, f, 1.0, float(tz))
+                    # D17c: a stool either side of the table, each facing it
+                    _seat(y + side * -2.2 + f * float(tz), side, "tavern")
+                    _seat(y + side * 1.0 + f * float(tz), -side, "tavern")
                 # two chairs drawn up at the table ends (Fantasy Props MegaKit)
                 _yard("Chair_1", y, side, f, -0.6, 2.9, PI)
                 _yard("Chair_1", y, side, f, -0.6, -3.1)
+                _seat(y + side * -0.6 + f * 2.9, -f, "tavern")
+                _seat(y + side * -0.6 + f * -3.1, f, "tavern")
+                tavern_at = y
                 _yard("Barrel_Holder", y, side, f, 2.9, -2.6)
                 _yard("Barrel", y, side, f, 3.0, 0.4)
                 _yard("Barrel", y, side, f, 3.0, 1.6, 0.6)

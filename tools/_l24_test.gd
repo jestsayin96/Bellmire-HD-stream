@@ -51,7 +51,11 @@ func _process(_dt: float) -> bool:
 	if _f == 40:
 		_say("2401", "Ash", "!hero")              # Ash: the freshest chatter
 		_dir._cut(_dir._best())
-		_ok(_cur_node() == _ash(), "before: the director takes the freshest chatter, Ash (%s)" % _dir._cur.get("key"))
+		# a catch being landed / a fight / a lord is HOTTER than chatter by design (60+ vs 50):
+		# if one is live at this instant the director is right to be on it, not on Ash
+		var k := String(_dir._cur.get("key", ""))
+		var hotter := k.begins_with("fish_") or k.begins_with("fight_") or k.begins_with("lord_") or k == "raid"
+		_ok(_cur_node() == _ash() or hotter, "before: the director takes the freshest chatter, Ash, unless a hotter story is live (%s)" % k)
 	if _f == 60:
 		Spotlight.of(_t).put("2401", "bits", 60.0, "cheered 500 bits")
 		_spot_f = _f

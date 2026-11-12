@@ -1721,3 +1721,37 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 882, INPROP 0, MON_INPROP 0;
   _delve_test 0 script errors, 0 null; L25_TEST OK 13/13, 0 stuck, 0 nudges. No camera/UI files, no class_name.
 - Not yet seen windowed: the flinch is a tween on the body (logic-checked: 32 fired); worth a look in the next shot pass.
+
+## L-cycle 116 - L32a spotlight always-on (laptop jestai, 2026-11-12) - L32a DONE
+- Mr. E's correction (Nov 12 16:08, jumped the queue): the 2x2 spotlight grid is the stream's RESTING state, up 24/7.
+- scripts/spotlight.gd:
+  - _relayout always lays the grid - the "off" (full-screen) and "pair" (side-by-side) layouts are gone; the main
+    view's 3D stays off for good (the panes carry it, the director pane copies the eye's camera as before).
+  - AMBIENT LIFE (idle lanes): a lane with no paid moment follows an ambient subject and rotates to a new one every
+    20-30 s (_amb_tick/_amb_pick) - weighted toward something happening: a fight below (6) > a party walking a floor
+    (3) > a catch being landed (5) > viewers' heroes (2) > townsfolk (1.5) > animals (1). It never picks a body
+    another pane or the director's eye already shows, never the same subject twice running, and never goes blank
+    (empty town: the market wide shot).
+  - Paid moments untouched: per-lane FIFO queues, first payer's FULL seconds then the next in line; the bright lane
+    frame, name chip, lane tag and timer bar now belong to PAID moments only - an ambient lane wears the thin muted
+    frame, so a cheer visibly takes the pane. F10's label toggle kept.
+  - paid_target(lane): the director's L24 "never the same hero twice" rule now reads only paid holds
+    (auto_director.lane_held), so three ambient panes cannot starve the director of subjects.
+- tools/_l32_test.gd (windowed 1920x1080, ~3.5 min real - spotlight seconds are real seconds): L32_TEST OK, 102
+  checks. Grid up from boot, all four panes live, no wide pane; every lane rotated ambient subjects (soak 75 s);
+  scripted influx - 3 cheers queued in the bits lane played IN ORDER (20/15/30 s, each full), 2 subs, 1 redeem;
+  queues drained back to ambient, grid never collapsed. FPS judged relative on the same scene: old full-screen
+  resting state 41.9 -> idle grid 28.8 (69%, floor 65%) -> paid grid 21.6 (75% of idle). Shots
+  renders/cycles/20261112_l32/ (amb/paid/drain).
+- Tests: parse 0 script errors; _offfloor 0 of 979, INPROP 0, MON_INPROP 0; _delve_test clean; L26A_ANIMS OK
+  (static=0 of 19936); L21_TEST OK 50/50; L24_TEST OK 6/6; L25_TEST OK 13/13 (0 stuck, 0 nudges);
+  renders/cycles/20261112_l21 restored after the run. No class_name added.
+- _l24_test "before" check hardened: a catch being landed (pri 60) legitimately outranks fresh chatter (pri <= 50),
+  so the check now accepts a hotter live story at that instant (it raced an angler and false-failed).
+- For Mr. E:
+  - The always-on grid costs ~30% FPS vs the old full-screen resting state ON THE LAPTOP dev box (41.9 -> 28.8 idle);
+    the stream box (desktop) will land elsewhere - worth one look at the desktop's numbers after merge.
+  - leaderboard_panel (Guild Roll) and the director's "Now watching" banner hide whenever the panes carry the view -
+    with the grid permanent they now never show. The Chronicle chrome bar is fine. Rehome them (chrome bar? a pane
+    chip?) or drop them - your call; untouched here.
+  - Ambient lanes draw no name tags (clean shots); say the word if ambient heroes should carry their names.

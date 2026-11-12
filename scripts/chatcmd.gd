@@ -35,6 +35,15 @@ var away := {}
 var catches_of: Callable
 ## L17: the spotlight hands chat its put(uid, lane, seconds, reason) -> line (set by Spotlight.setup)
 var spot: Callable
+## L18: when each viewer last used a command (Time ticks, ms) - the director favours
+## the freshest chatters and their name glows for a few seconds (HeroBody.glow)
+static var last_cmd := {}
+
+## seconds since this viewer's last command (INF if never)
+static func since_cmd(uid: String) -> float:
+    if not last_cmd.has(uid):
+        return INF
+    return float(Time.get_ticks_msec() - int(last_cmd[uid])) / 1000.0
 
 ## what a hero has on them: steel, armour, potions, oil, gold, and the fish
 func inventory(user_id: String) -> String:
@@ -87,6 +96,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
     var out := ""
     if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
+        last_cmd[user_id] = now
         return "%s is %s." % [h["name"], away[user_id]]
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
@@ -137,6 +147,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
             out = "No !%s here - did you mean !%s? (!help lists them all)" % [verb, guess]
 
     _last[user_id] = now
+    last_cmd[user_id] = now
     if out != "":
         say.emit(out, _tone(out))
     return out

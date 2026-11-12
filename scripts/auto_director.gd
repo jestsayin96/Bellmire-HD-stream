@@ -12,6 +12,7 @@ extends Node
 const HOLD_MIN := 8.0
 const HOLD_MAX := 22.0
 const MANUAL_PAUSE := 20.0
+const CHAT_FRESH_S := 120.0     # L18: a command in the last 2 min makes a hero the director's pick
 
 var eye: RtsCamera
 var town: Node3D
@@ -27,6 +28,7 @@ func setup(e: RtsCamera, t: Node3D) -> void:
     eye = e
     town = t
     _rng.randomize()
+    UiTheme.watch(self)          # L18: the banner follows F11
 
 func _unhandled_input(ev: InputEvent) -> void:
     if ev is InputEventKey and ev.pressed and not ev.echo:
@@ -61,7 +63,50 @@ func _set_on(v: bool) -> void:
         if not on:
             eye._following = false
 
+## ---- L18: "Now watching: <name> the <people> <calling>" - top centre, on the house chip,
+## while the director holds on a viewer's hero (in town or below). Lives on the eye's UI
+## layer, so F10 hides it with the rest; hidden while the spotlight grid carries the view.
+var _banner: Label
+
+func banner_text(n: Node) -> String:
+    if not (n is HeroBody) or (n as HeroBody).npc or (n as HeroBody).roster == null:
+        return ""
+    var h := (n as HeroBody).roster.get_hero((n as HeroBody).user_id)
+    if h.is_empty():
+        return ""
+    return "Now watching: %s the %s %s" % [h.get("name", "?"), String(h.get("species", "")).capitalize(), String(h.get("class", "")).capitalize()]
+
+func _banner_tick() -> void:
+    if eye == null or eye._layer == null:
+        return
+    if _banner == null:
+        _banner = Label.new()
+        _banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+        _banner.anchor_left = 0.5
+        _banner.anchor_right = 0.5
+        _banner.grow_horizontal = Control.GROW_DIRECTION_BOTH
+        _banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+        eye._layer.add_child(_banner)
+        restyle()
+    var t := ""
+    if on and _paused_for <= 0.0 and _cur.has("node") and is_instance_valid(_cur["node"]) and not get_viewport().disable_3d:
+        t = banner_text(_cur["node"])
+    _banner.visible = t != ""
+    if t != "" and _banner.text != t:
+        _banner.text = t
+        _banner.reset_size()
+
+func restyle() -> void:
+    if _banner == null:
+        return
+    _banner.add_theme_stylebox_override("normal", UiTheme.chip())
+    _banner.add_theme_font_size_override("font_size", UiTheme.px(28))
+    _banner.add_theme_color_override("font_color", UiTheme.INK)
+    _banner.offset_top = UiTheme.px(16)
+    _banner.reset_size()
+
 func _process(delta: float) -> void:
+    _banner_tick()
     if not on or eye == null or town == null:
         return
     var real := delta / maxf(Engine.time_scale, 0.001)
@@ -169,8 +214,19 @@ func _best(avoid: String = "") -> Dictionary:
         if is_instance_valid(a) and (a.state == Angler.S.REEL or a.state == Angler.S.SHOW or a.state == Angler.S.BITE):
             c.append({"key": "fish_%d" % a.get_instance_id(), "pri": 60.0,
                       "node": a.get_parent(), "dist": 12.0, "pitch": -28.0})
-    # 5. viewers' heroes about town
+    # 5. viewers' heroes about town - L18: the freshest chatter first (36-50: ahead of a
+    # random hero, behind raids, lords and fights), then anyone at random
     var hs: Dictionary = town.get("heroes")
+    var fresh := ""
+    var fresh_ago := CHAT_FRESH_S
+    for uid in hs:
+        var ago := ChatCmd.since_cmd(String(uid))
+        if ago < fresh_ago and is_instance_valid(hs[uid]) and (hs[uid] as Node3D).is_visible_in_tree():
+            fresh = String(uid)
+            fresh_ago = ago
+    if fresh != "":
+        c.append({"key": "chat_%s" % fresh, "pri": 36.0 + 14.0 * (1.0 - fresh_ago / CHAT_FRESH_S),
+                  "node": hs[fresh], "dist": 14.0, "pitch": -30.0})
     var ks := hs.keys()
     ks.shuffle()
     for uid in ks:

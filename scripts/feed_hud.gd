@@ -149,6 +149,10 @@ func _rebuild() -> void:
         var lb := Label.new()
         lb.text = String(lines[i])
         lb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        # L18 review: a !hero sheet wrapped to 5 lines and buried the left of the screen -
+        # two lines an entry at most, the rest cut with an ellipsis (the full text is in chat)
+        lb.max_lines_visible = 2
+        lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
         lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
         lb.add_theme_font_size_override("font_size", UiTheme.px(28))
         # older lines fade toward the parchment; the newest is full ink

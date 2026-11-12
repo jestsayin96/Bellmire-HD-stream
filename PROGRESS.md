@@ -1131,3 +1131,13 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Looked at: renders/cycles/20261111_l17/pair_phone480.png, grid_1080.png, grid_phone480.png, grid_nolabels_phone480.png. Lane chips, names and the Chronicle read on the phone frame.
 - Tests: parse 0 errors, _l17_test (22 checks) OK, _l14 / _l16 OK, _l19 clean, _twitch_parse OK, _delve_test clean to floor 3.
 - For the desktop: (a) town.spotlight(uid, lane, secs, why) - a one-line wrapper in town.gd: `return Spotlight.spotlight(self, uid, lane, secs, why)` (T1's EventSub calls it). (b) The townsfolk name tags (townsfolk.gd) read a bit large in the close panes; they could follow the same disable_3d rule.
+
+## Cycle 77 - L18, free chat in the main view (laptop, 2026-11-11) - done
+- ChatCmd.last_cmd / since_cmd(uid): when each viewer last used a command.
+- AutoDirector: the director's hero shot goes to the freshest chatter in town (a command in the last 2 min; priority 36-50 by freshness). That ranks above a random hero (30-35) and below raids, fights and lords. After 2 quiet minutes it picks any hero again.
+- "Now watching: Bree the Elf Mage": a house chip at top centre while the director holds on a viewer's hero (in town or below). It is on the eye's UI layer, so F10 hides it, and it hides while you hold the camera or the spotlight grid is up. Follows F11.
+- A viewer's name glows for 5 s after any command (HeroBody.glow): near-white text with a thick pulsing teal halo, about 20% bigger, then back to gold. The first try was too faint to see in the render, so it was made stronger.
+- Free !look: the points lane, only when it is empty (L17).
+- Found in the render: one !hero sheet in the Chronicle wrapped to 5 lines and buried the left of the screen. Entries are now capped at 2 lines with an ellipsis.
+- Looked at: renders/cycles/20261111_l18/now_watching_1080.png and _phone480.png. The chip, the glow and the Chronicle read on the phone frame.
+- Tests: parse 0 errors, _l18_test OK, _l17 / _l14 / _l15 / _l16 OK, _twitch_parse OK, _delve_test clean to floor 3.

@@ -178,6 +178,30 @@ func _name_label() -> Label3D:
 
 static var _laid_frame := -1
 
+## L18: a viewer's name glows for GLOW_S seconds after any chat command - brighter,
+## a teal halo pulsing and fading out, a touch bigger. Returns the size factor.
+const GLOW_S := 5.0
+static func glow(lb: Label3D, ago: float) -> float:
+    if not lb.has_meta("om0"):
+        lb.set_meta("om0", lb.outline_modulate)
+        lb.set_meta("mod0", lb.modulate)
+        lb.set_meta("os0", lb.outline_size)
+    if ago >= GLOW_S:
+        if lb.has_meta("glowing"):
+            lb.remove_meta("glowing")
+            lb.outline_modulate = lb.get_meta("om0")
+            lb.modulate = lb.get_meta("mod0")
+            lb.outline_size = int(lb.get_meta("os0"))
+        return 1.0
+    lb.set_meta("glowing", true)
+    # full for the first 3 s, then fading out over the last 2
+    var fade := clampf((GLOW_S - ago) / 2.0, 0.0, 1.0)
+    var pulse := 0.5 + 0.5 * sin(ago * 7.0)
+    lb.modulate = (lb.get_meta("mod0") as Color).lerp(Color(1.0, 1.0, 0.92), 0.85 * fade)
+    lb.outline_modulate = (lb.get_meta("om0") as Color).lerp(Color(0.25, 0.95, 0.90, 1.0), fade * (0.7 + 0.3 * pulse))
+    lb.outline_size = int(lb.get_meta("os0")) + int(round(14.0 * fade * (0.6 + 0.4 * pulse)))
+    return 1.0 + 0.2 * fade
+
 ## HD: every hero's name laid out ON SCREEN in one pass: lowest on screen
 ## first, each lifted just enough to clear the names already placed. Done per
 ## frame for all heroes together so neighbours never disagree.
@@ -207,6 +231,8 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
         # and the main camera's on-screen declutter means nothing in the panes
         var grid := cam.get_viewport() != null and cam.get_viewport().disable_3d
         lb.pixel_size = float(lb.get_meta("px0")) * (0.55 if grid else clampf(cd / 16.0, 0.4, 3.0))
+        if not hb.npc:
+            lb.pixel_size *= HeroBody.glow(lb, ChatCmd.since_cmd(hb.user_id))
         if grid or cam.is_position_behind(anchor):
             lb.offset.y = 0.0
             continue

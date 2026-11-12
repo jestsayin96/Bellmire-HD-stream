@@ -345,9 +345,93 @@ func _follow(delta: float) -> void:
         if not (Rig.gait and leader is Townsfolk and (leader as Townsfolk)._vs > 0.3):
             Rig.play(_anim, "Idle")
 
+## D20a: RICHER ROUTINES. An ordinary shuttle-walker (empty stops, no leader,
+## no cart) breaks off ONCE a day around midday to shop the market, and once of
+## an evening for the tavern yard - so the day reads work -> market -> tavern ->
+## home rather than a bare work<->home shuttle. Each body has its own hour for
+## each (staggered, so the square fills over a few seconds, not all at once).
+## The right anim plays on arrival via _idle_acts (buy/haggle at the market, a
+## mug/bite at the tavern). Interrupts the linger (not the trip clock) so a long
+## job stint never swallows the short midday window. Returns true when it set a
+## new route (the caller stops this frame).
+func _maybe_errand() -> bool:
+    if market_off:
+        return false
+    if stay or rank >= 0 or leader != null or cart != null or not stops.is_empty():
+        return false
+    if _seat_i >= 0 or _sat or town == null:
+        return false
+    if inside and _door_out == Vector3.ZERO:
+        return false
+    var er = get("errand")
+    if er != null and String(er) != "":
+        return false
+    var eco = town.get("economy")
+    if eco == null or not town.has_method("keep_walkable"):
+        return false
+    var h: float = eco.hour()
+    var dest_key := ""
+    if not _mkt_done and not eco.is_night() and h >= _mkt_at and h < 15.0:
+        dest_key = "market"
+    elif not _tav_done and h >= _tav_at and h < 20.0:
+        dest_key = "tavern"
+    if dest_key == "":
+        return false
+    var centre: Vector3
+    if dest_key == "market":
+        var mk = town.get("_market_pos")
+        if not (mk is Vector3) or (mk as Vector3) == Vector3.ZERO:
+            return false
+        centre = mk
+    else:
+        var tv = town.get("tavern_at")
+        if not (tv is Vector3) or (tv as Vector3) == Vector3.INF or (tv as Vector3) == Vector3.ZERO:
+            return false
+        # folk knock off at dusk and some head to the tavern yard for a mug
+        # before home (the single tavern is across town, so this is the one
+        # errand that may land them there after dark - better than the aimless
+        # walk home the compressed night already gives everyone)
+        centre = tv
+    # indoors at work or home: step out through the door, then make for it
+    if inside:
+        inside = false
+        visible = true
+        global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
+    # already there (work or home by the square/tavern): count it done, no trip
+    if Vector2(centre.x - global_position.x, centre.z - global_position.z).length() < 8.0:
+        if dest_key == "market":
+            _mkt_done = true
+        else:
+            _tav_done = true
+        return false
+    var a := randf() * TAU
+    var spot: Vector3 = town.call("keep_walkable", centre + Vector3(cos(a), 0.0, sin(a)) * randf_range(3.0, 9.0))
+    var r: Array = town.call("route", global_position, spot)
+    if r.is_empty():
+        return false
+    _route = r
+    _enter_at = Vector3.ZERO
+    _door_out = Vector3.ZERO
+    _linger = randf_range(14.0, 26.0)
+    _wait = 0.0
+    _wd_at = Vector3.INF
+    _wd_n = 0
+    _best_d = INF
+    _prog_t = 0.0
+    if dest_key == "market":
+        _market_errand = true
+        _mkt_done = true
+        acts["market"] = int(acts.get("market", 0)) + 1
+    else:
+        _eve_drink = true
+        _tav_done = true
+        acts["tavern_errand"] = int(acts.get("tavern_errand", 0)) + 1
+    return true
+
 func _next_trip() -> Vector3:
     _at_job = false
     _eve_drink = false
+    _market_errand = false
     # old villager: at night the WORK state ends and they go home to REST until
     # morning (the old clock: night before 6:00 and after 18:30)
     var eco = town.get("economy") if town else null
@@ -355,6 +439,10 @@ func _next_trip() -> Vector3:
     if stops.is_empty() and eco and eco.is_night() and home != Vector3.ZERO and not on_errand:
         _enter_at = home_in
         _to_work = true                     # in the morning, off to work
+        _mkt_done = false                   # D20a: a fresh day - shop + drink again
+        _tav_done = false
+        _mkt_at = randf_range(10.5, 14.5)
+        _tav_at = randf_range(15.0, 17.0)
         var h: float = eco.hour()
         var left: float = (6.0 - h if h < 6.0 else 30.0 - h) / 24.0 * float(eco.DAY_SECONDS)
         _linger = maxf(left, 2.0)
@@ -506,6 +594,8 @@ func _physics_process(delta: float) -> void:
             if _seated(delta):
                 return
             _idle_acts(delta)
+        if _maybe_errand():
+            return
         _wait -= delta
         if _wait <= 0.0:
             if inside:
@@ -987,12 +1077,18 @@ const JOB_ANIMS := {
 }
 const NO_SIT := ["caravan", "carter", "bandit", "guard", "watch", "crier", "priest"]
 static var job_out := 0.5
+static var market_off := false     # D20a: tools/_d20a_test.gd --old turns the errands off
 static var sit_ok := true
 static var acts := {}                 # kind -> count (tools/_d17c_test.gd)
 var _at_job := false
 ## (a day here is 90 s: a walk across town is hours, so an evening's errand
 ## is remembered by why it was made, not by the clock on arrival)
 var _eve_drink := false
+var _market_errand := false     # D20a: on a midday errand to the market
+var _mkt_done := false          # D20a: already shopped today (reset each night)
+var _tav_done := false          # D20a: already took the evening tavern today
+var _mkt_at := randf_range(10.5, 14.5)   # D20a: this body's own market hour
+var _tav_at := randf_range(15.0, 17.0)   # D20a: this body's own tavern hour (after the shift)
 var _seat_i := -1
 var _sat := false
 var _seat_for := 0.0
@@ -1102,7 +1198,7 @@ func _idle_acts(delta: float) -> void:
             list = ["Use_Item", "Use_Item", "Cheer"]
             kind = "eat"
         elif mk is Vector3 and mk != Vector3.ZERO and Vector2(p.x - mk.x, p.z - mk.z).length() < 20.0 \
-                and randf() < 0.6:
+                and (_market_errand or randf() < 0.6):
             list = ["Interact", "PickUp", "Interact"]
             kind = "haggle"
         else:

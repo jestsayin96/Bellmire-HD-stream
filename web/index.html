@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bellmire - the Guild Hall</title>
+<meta name="description" content="Bellmire, live from the stream: every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
+<meta name="theme-color" content="#1c140e">
+<!--
+  W1b: the viewer hub. One static page, no build step, no framework (GitHub Pages, like
+  fightoverlay). It reads the ONE row the game upserts every 60 s (scripts/snapshot_pub.gd)
+  from Supabase with the PUBLISHABLE key - read-only by row-level security, safe to embed.
+  The service (secret) key never belongs here.
+
+  Honest about its data: "updated N minutes ago" is always on screen; past STALE_MIN it says
+  the town has gone quiet (Mr. E's PC is off); an empty table says the town has not reported in;
+  a failed fetch says so plainly and tries again - never a spinner forever.
+
+  Test hooks (local checks only, harmless): ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
+-->
+<style>
+  :root {
+    --parch: #eddbb0;          /* UiTheme.PARCH  (0.93, 0.86, 0.69) */
+    --parch-2: #e4cf9d;
+    --ink: #29190f;            /* UiTheme.INK    (0.16, 0.10, 0.06) */
+    --ink-soft: #614730;       /* UiTheme.INK_SOFT */
+    --ink-red: #7a331f;        /* UiTheme.INK_RED - panel titles */
+    --edge: #734d29;           /* UiTheme.EDGE */
+    --teal: #1a9e9e;           /* UiTheme.TEAL - the JestSayin accent */
+    --teal-ink: #0f6b6b;
+    --gold: #8c5905;           /* UiTheme.VIEWER - a viewer's name on parchment */
+    --dead: #6b5a49;
+    --night: #1c140e;          /* the world behind the panels */
+    --warn: #9a5b0b;
+    --bad: #8a2a1a;
+    --radius: 7px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--night) radial-gradient(ellipse at 50% -10%, #3a2a1c 0%, var(--night) 70%) fixed;
+    color: var(--ink);
+    font: 17px/1.45 "Segoe UI", system-ui, -apple-system, Roboto, "Noto Sans", sans-serif;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 12px 12px 40px; }
+
+  /* ---- the house panel: parchment, an inked edge, a teal-diamond title over a teal rule */
+  .panel {
+    background: var(--parch);
+    border: 3px solid var(--edge);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 14px rgba(0,0,0,.45);
+    padding: 12px 14px 14px;
+    margin: 0 0 14px;
+  }
+  .title {
+    display: flex; align-items: center; gap: 10px;
+    margin: 0 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--teal);
+    color: var(--ink-red); font-size: 1.3rem; font-weight: 650; letter-spacing: .01em;
+  }
+  .title::before {
+    content: ""; width: 10px; height: 10px; flex: none;
+    background: var(--teal); transform: rotate(45deg);
+  }
+  .title small { margin-left: auto; color: var(--ink-soft); font-size: .8rem; font-weight: 500; }
+  @media (max-width: 420px) { .title small { display: none; } }     /* a phone: the title alone, on one line */
+
+  /* ---- the head: the town and how fresh the word is */
+  header.panel { padding-bottom: 12px; }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .brand h1 { margin: 0; font-size: 1.9rem; line-height: 1.1; color: var(--ink-red); letter-spacing: .01em; }
+  .brand .sub { color: var(--ink-soft); font-size: .95rem; }
+  .town { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .town li {
+    background: var(--parch-2); border: 1px solid rgba(115,77,41,.45); border-radius: 999px;
+    padding: 3px 10px; font-size: .9rem; color: var(--ink);
+  }
+  .town b { color: var(--ink-red); }
+  .status {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin: 12px 0 0; padding: 8px 10px; border-radius: 6px;
+    border: 2px solid var(--teal); background: rgba(26,158,158,.12);
+    font-size: .95rem;
+  }
+  .status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); flex: none; margin-top: .45em; }
+  .status.live::before { animation: pulse 2s ease-in-out infinite; }
+  .status.stale { border-color: var(--warn); background: rgba(154,91,11,.12); }
+  .status.stale::before { background: var(--warn); }
+  .status.bad { border-color: var(--bad); background: rgba(138,42,26,.10); }
+  .status.bad::before { background: var(--bad); }
+  .status button {
+    margin-left: auto; flex: none; font: inherit; font-size: .85rem; cursor: pointer;
+    color: var(--ink); background: var(--parch-2); border: 1px solid var(--edge); border-radius: 5px; padding: 2px 10px;
+  }
+  @keyframes pulse { 50% { opacity: .35; } }
+  @media (prefers-reduced-motion: reduce) { .status.live::before { animation: none; } }
+
+  /* ---- the sections' nav: sticky pills, thumb-sized */
+  nav {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+    margin: 0 -12px 12px; padding: 8px 12px;
+    background: rgba(28,20,14,.92); backdrop-filter: blur(4px);
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    flex: none; text-decoration: none; color: var(--parch);
+    border: 2px solid rgba(237,219,176,.35); border-radius: 999px; padding: 6px 14px; font-size: .95rem; font-weight: 600;
+  }
+  nav a:hover, nav a:focus-visible { border-color: var(--teal); outline: none; }
+  nav a .n { color: #9fd9d9; font-weight: 500; margin-left: 4px; }
+
+  /* ---- heroes */
+  .find {
+    width: 100%; font: inherit; padding: 9px 12px; margin: 0 0 10px;
+    border: 2px solid var(--edge); border-radius: 6px; background: #f6ebcf; color: var(--ink);
+  }
+  .find:focus { outline: none; border-color: var(--teal); }
+  .heroes { display: grid; gap: 10px; }
+  details.hero {
+    background: #f4e6c3; border: 1px solid rgba(115,77,41,.5); border-radius: 6px;
+  }
+  details.hero[open] { background: #f7ecd2; border-color: var(--edge); }
+  details.hero > summary {
+    list-style: none; cursor: pointer; padding: 10px 12px; display: grid;
+    grid-template-columns: 1fr auto; gap: 2px 10px; align-items: baseline;
+  }
+  details.hero > summary::-webkit-details-marker { display: none; }
+  .hname { font-weight: 700; font-size: 1.1rem; color: var(--gold); overflow-wrap: anywhere; }
+  .hwhat { grid-column: 1; color: var(--ink-soft); font-size: .92rem; }
+  .hquick { grid-column: 2; grid-row: 1 / span 2; text-align: right; font-size: .85rem; color: var(--ink-soft); white-space: nowrap; }
+  .hquick b { color: var(--ink); font-size: 1.05rem; }
+  .htitle { font-style: italic; color: var(--teal-ink); }
+  .sheet { padding: 0 12px 12px; display: grid; gap: 10px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .stat {
+    text-align: center; background: var(--parch); border: 1px solid rgba(115,77,41,.45); border-radius: 6px; padding: 4px 2px;
+  }
+  .stat .k { font-size: .72rem; letter-spacing: .08em; color: var(--ink-soft); text-transform: uppercase; }
+  .stat .v { font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
+  .stat .m { font-size: .8rem; color: var(--teal-ink); font-weight: 600; }
+  dl.kv { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; font-size: .95rem; }
+  dl.kv dt { color: var(--ink-soft); }
+  dl.kv dd { margin: 0; overflow-wrap: anywhere; }
+  .sub-h { margin: 2px 0 0; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-red); font-weight: 700; }
+  .more { margin-top: 8px; font-size: .9rem; color: var(--ink-soft); }
+
+  /* ---- the roll */
+  ol.roll { list-style: none; margin: 0; padding: 0; }
+  ol.roll li {
+    display: grid; grid-template-columns: 2.2em 1fr auto; gap: 2px 10px; align-items: baseline;
+    padding: 7px 2px; border-bottom: 1px dashed rgba(115,77,41,.4);
+  }
+  ol.roll li:last-child { border-bottom: 0; }
+  .pos { color: var(--ink-soft); font-weight: 700; text-align: right; }
+  .rname { font-weight: 650; color: var(--gold); overflow-wrap: anywhere; }
+  .rank { grid-column: 2; font-size: .88rem; color: var(--ink-soft); }
+  .score { grid-column: 3; grid-row: 1 / span 2; text-align: right; font-size: .85rem; color: var(--ink-soft); white-space: nowrap; }
+  .score b { font-size: 1.05rem; color: var(--ink); }
+  li.gone .rname { color: var(--dead); }
+  li.gone .rname::before { content: "\2020 "; }
+
+  /* ---- the fallen */
+  .fallen { display: grid; gap: 10px; }
+  .grave { border-left: 4px solid var(--dead); background: #efe0bb; border-radius: 0 6px 6px 0; padding: 8px 12px; }
+  .grave .who { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+  .grave .how { color: var(--ink-red); font-size: .95rem; }
+  .grave .rec { color: var(--ink-soft); font-size: .85rem; }
+  .grave .epi { font-style: italic; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---- commands */
+  .cmds { display: grid; gap: 8px; }
+  details.cmd { background: #f4e6c3; border: 1px solid rgba(115,77,41,.45); border-radius: 6px; }
+  details.cmd > summary { cursor: pointer; list-style: none; padding: 8px 12px; }
+  details.cmd > summary::-webkit-details-marker { display: none; }
+  .cname { font: 700 1.02rem ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--teal-ink); }
+  .cargs { font: .92rem ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--ink-soft); }
+  .cshort { display: block; font-size: .93rem; }
+  .cbody { padding: 0 12px 10px; font-size: .93rem; display: grid; gap: 6px; }
+  code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; background: var(--parch-2); padding: 0 4px; border-radius: 3px; }
+
+  .empty, .msg { color: var(--ink-soft); font-style: italic; }
+  .big-msg { text-align: center; padding: 24px 10px; }
+  .big-msg h2 { margin: 0 0 6px; color: var(--ink-red); font-size: 1.3rem; font-style: normal; }
+  .big-msg p { margin: 0 auto; max-width: 34em; }
+  footer { color: rgba(237,219,176,.6); font-size: .82rem; text-align: center; margin-top: 18px; }
+  footer a { color: #9fd9d9; }
+  .hide { display: none !important; }
+
+  /* ---- wider screens: two columns of heroes, the roll and the fallen side by side */
+  @media (min-width: 760px) {
+    body { font-size: 16px; }
+    .wrap { padding: 20px 20px 48px; }
+    nav { margin: 0 0 14px; border-radius: 999px; }
+    .heroes { grid-template-columns: repeat(2, 1fr); align-items: start; }
+    .stats { grid-template-columns: repeat(6, 1fr); }
+    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .cmds { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  }
+  @media (min-width: 1040px) { .heroes { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="panel">
+    <div class="brand">
+      <h1>Bellmire</h1>
+      <span class="sub" id="townName">the Guild Hall</span>
+    </div>
+    <ul class="town" id="town" aria-label="The town"></ul>
+    <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+  </header>
+
+  <nav aria-label="Sections">
+    <a href="#heroes">Heroes<span class="n" id="nHeroes"></span></a>
+    <a href="#roll">Guild Roll</a>
+    <a href="#fallen">The Fallen<span class="n" id="nFallen"></span></a>
+    <a href="#commands">Commands</a>
+  </nav>
+
+  <main id="main">
+    <section class="panel big-msg hide" id="nothing"></section>
+
+    <section class="panel" id="heroes">
+      <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
+      <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
+      <div class="heroes" id="heroList"><p class="msg">&hellip;</p></div>
+      <p class="more hide" id="heroMore"></p>
+    </section>
+
+    <div class="duo">
+      <section class="panel" id="roll">
+        <h2 class="title">The Guild Roll <small>who stands highest</small></h2>
+        <ol class="roll" id="rollList"><li class="msg">&hellip;</li></ol>
+      </section>
+      <section class="panel" id="fallen">
+        <h2 class="title">The Fallen <small>remembered</small></h2>
+        <div class="fallen" id="fallenList"><p class="msg">&hellip;</p></div>
+      </section>
+    </div>
+
+    <section class="panel" id="commands">
+      <h2 class="title">Chat commands <small>type them in Twitch chat</small></h2>
+      <div class="cmds" id="cmdList"><p class="msg">&hellip;</p></div>
+    </section>
+  </main>
+
+  <footer>
+    The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
+    <br>Bellmire HD &middot; JestSayin
+  </footer>
+</div>
+
+<script>
+"use strict";
+// ---- where the town's word is kept (publishable key: read-only by row-level security)
+const URL_SNAPSHOT = "https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at";
+const KEY = "sb_publishable_q2Kn3weLLeYYXGAiow_4vw_3serNQlc";
+const REFRESH_MS = 60000;      // the game publishes every 60 s
+const STALE_MIN = 5;           // past this, the town has gone quiet (the game is likely off)
+const TIMEOUT_MS = 12000;      // a fetch that hangs is a failed fetch
+const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
+
+const TEST = new URLSearchParams(location.search).get("state");   // empty | fail | stale (local checks)
+const $ = (id) => document.getElementById(id);
+let last = null;               // {payload, updated_at} of the last good read
+let lastError = "";
+let heroFilter = "";
+let heroShown = HERO_PAGE;
+
+// every string from the game (viewers' names!) goes through esc() before it touches HTML
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+const cap = (s) => String(s ?? "").replace(/\b\w/g, (c) => c.toUpperCase());
+const num = (n) => Number.isFinite(+n) ? (+n).toLocaleString("en") : "-";
+const mod = (v) => { const m = Math.floor((+v - 10) / 2); return (m >= 0 ? "+" : "") + m; };
+const arr = (a) => Array.isArray(a) ? a : [];
+
+function ago(iso) {
+  const t = Date.parse(iso);
+  if (!Number.isFinite(t)) return null;
+  const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+  if (s < 45) return { s, text: "just now" };
+  const m = Math.round(s / 60);
+  if (m < 60) return { s, text: m === 1 ? "a minute ago" : m + " minutes ago" };
+  const h = Math.round(m / 60);
+  if (h < 36) return { s, text: h === 1 ? "an hour ago" : h + " hours ago" };
+  const d = Math.round(h / 24);
+  return { s, text: d === 1 ? "a day ago" : d + " days ago" };
+}
+function when(iso) {
+  const t = new Date(iso);
+  return isNaN(t) ? "" : t.toLocaleString(undefined, { weekday: "short", hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" });
+}
+
+// ---- the status line: always says how old the word is, and is honest about it
+function showStatus() {
+  const st = $("status");
+  st.className = "status";
+  let html;
+  if (last) {
+    const a = ago(last.updated_at);
+    const age = a ? a.text : "at an unknown time";
+    const stale = TEST === "stale" || !a || a.s > STALE_MIN * 60;
+    if (stale) {
+      st.classList.add("stale");
+      html = `<span><b>Last word from the town ${esc(age)}</b> (${esc(when(last.updated_at))}). The game is probably not running right now, so this may be out of date.</span>`;
+    } else {
+      st.classList.add("live");
+      html = `<span><b>Updated ${esc(age)}</b> &middot; live while the stream's game runs</span>`;
+    }
+    if (lastError) {
+      st.classList.add("bad");
+      html = `<span><b>Couldn't reach the town just now</b> (${esc(lastError)}). Showing what it said ${esc(age)}.</span><button type="button" id="retry">Try again</button>`;
+    }
+  } else if (lastError) {
+    st.classList.add("bad");
+    html = `<span><b>Couldn't reach the town's records</b> (${esc(lastError)}). The page will try again in a minute.</span><button type="button" id="retry">Try again</button>`;
+  } else {
+    st.classList.add("stale");
+    html = `<span><b>Bellmire has not reported in yet.</b> The page will check again every minute.</span>`;
+  }
+  st.innerHTML = html;
+  const r = $("retry");
+  if (r) r.onclick = () => { r.disabled = true; r.textContent = "Asking…"; load(); };
+}
+
+// ---- the fetch: a timeout, a plain message on any failure, never a spinner forever
+async function load() {
+  try {
+    if (TEST === "fail") throw new Error("test: no answer");
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+    let res;
+    try {
+      res = await fetch(URL_SNAPSHOT, { headers: { apikey: KEY, Authorization: "Bearer " + KEY }, cache: "no-store", signal: ctl.signal });
+    } finally { clearTimeout(timer); }
+    if (!res.ok) throw new Error("the records answered " + res.status);
+    let rows = await res.json();
+    if (TEST === "empty") rows = [];
+    const row = arr(rows)[0];
+    lastError = "";
+    if (!row || !row.payload || typeof row.payload !== "object") {
+      last = null;
+      renderNothing();
+    } else {
+      last = row;
+      render(row.payload);
+    }
+  } catch (e) {
+    lastError = e && e.name === "AbortError" ? "no answer in " + TIMEOUT_MS / 1000 + " s" :
+      (e && e.message && !/fetch|network/i.test(e.message) ? e.message : "you may be offline, or the records are down");
+    if (!last) renderNothing(true);
+  }
+  showStatus();
+}
+
+function renderNothing(failed) {
+  const box = $("nothing");
+  box.classList.remove("hide");
+  box.innerHTML = failed
+    ? `<h2>The town's records are out of reach</h2><p>Nothing could be read just now. Check your connection; the page tries again every minute on its own.</p>`
+    : `<h2>Bellmire has not reported in yet</h2><p>The town sends its news here while the stream's game is running. Once it does, every hero's sheet, the Guild Roll and the Fallen appear on this page.</p>`;
+  for (const id of ["heroes", "roll", "fallen"]) $(id).classList.add("hide");
+  $("town").innerHTML = "";
+  $("nHeroes").textContent = "";
+  $("nFallen").textContent = "";
+  renderCommands(null);
+}
+
+// ---- the page from the payload (scripts/snapshot_pub.gd, v1)
+function render(p) {
+  $("nothing").classList.add("hide");
+  for (const id of ["heroes", "roll", "fallen"]) $(id).classList.remove("hide");
+  const t = p.town || {};
+  $("townName").textContent = t.name ? String(t.name) : "the Guild Hall";     // the game's own words ("a market town")
+  const bits = [];
+  if (t.level != null) bits.push(`Town level <b>${esc(t.level)}</b>`);
+  if (t.souls != null) bits.push(`<b>${num(t.souls)}</b> souls`);
+  if (t.day != null) bits.push(`Day <b>${esc(t.day)}</b>`);
+  if (t.treasury != null) bits.push(`<b>${num(t.treasury)}</b> gold in the treasury`);
+  if (t.renown) bits.push(`Renown <b>${num(t.renown)}</b>`);
+  if (t.score != null && t.next_level_at != null && +t.next_level_at > 0) bits.push(`Growth <b>${num(t.score)}</b> / ${num(t.next_level_at)}`);
+  $("town").innerHTML = bits.map((b) => `<li>${b}</li>`).join("");
+  renderHeroes(arr(p.heroes));
+  renderRoll(arr(p.guild_roll));
+  renderFallen(arr(p.fallen));
+  renderCommands(p.commands);
+}
+
+function renderHeroes(hs) {
+  $("nHeroes").textContent = hs.length ? hs.length : "";
+  $("heroesNote").textContent = hs.length ? `${hs.length} living` : "";
+  const q = heroFilter.trim().toLowerCase();
+  const list = q ? hs.filter((h) => String(h.name || "").toLowerCase().includes(q)) : hs;
+  const box = $("heroList");
+  if (!hs.length) { box.innerHTML = `<p class="empty">No living heroes yet. Type <code>!enlist</code> in chat to raise one.</p>`; $("heroMore").classList.add("hide"); return; }
+  if (!list.length) { box.innerHTML = `<p class="empty">No hero by that name. (Fallen heroes are in The Fallen.)</p>`; $("heroMore").classList.add("hide"); return; }
+  const open = new Set([...box.querySelectorAll("details[open]")].map((d) => d.dataset.name));
+  if (new URLSearchParams(location.search).get("open") && !open.size && list[0]) open.add(String(list[0].name));
+  box.innerHTML = list.slice(0, heroShown).map((h) => heroCard(h, open.has(String(h.name)))).join("");
+  const more = $("heroMore");
+  if (list.length > heroShown) {
+    more.classList.remove("hide");
+    more.innerHTML = `Showing ${heroShown} of ${list.length}. <button type="button" id="moreBtn" class="find" style="width:auto;margin:0 0 0 6px;padding:2px 10px">Show more</button>`;
+    $("moreBtn").onclick = () => { heroShown += HERO_PAGE; renderHeroes(hs); };
+  } else more.classList.add("hide");
+}
+
+function heroCard(h, isOpen) {
+  const s = h.stats || {};
+  const order = ["str", "dex", "con", "int", "wis", "cha"];
+  const w = h.weapon || {}, ar = h.armour || {};
+  const kit = [];
+  // brews already counts the healing potions (as "Mending" - roster.brews_line); potions alone when it is missing
+  if (h.brews) kit.push(esc(h.brews));
+  else if (+h.potions) kit.push(`${num(h.potions)} Mending`);
+  kit.push(`${num(h.oil)} oil`);
+  kit.push(`${num(h.gold)} gold`);
+  return `<details class="hero" data-name="${esc(h.name)}"${isOpen ? " open" : ""}>
+    <summary>
+      <span class="hname">${esc(h.name)}</span>
+      <span class="hquick">AC <b>${esc(h.ac)}</b> &middot; HP <b>${esc(h.hp)}</b></span>
+      <span class="hwhat">${esc(cap(h.species))} ${esc(cap(h.class))}, level ${esc(h.level)} &middot; ${esc(h.rank)}${h.title ? ` &middot; <span class="htitle">${esc(h.title)}</span>` : ""}</span>
+    </summary>
+    <div class="sheet">
+      <div class="stats">${order.map((k) => `<div class="stat"><div class="k">${k}</div><div class="v">${esc(s[k] ?? "-")}</div><div class="m">${s[k] != null ? mod(s[k]) : ""}</div></div>`).join("")}</div>
+      <p class="sub-h">In a fight</p>
+      <dl class="kv">
+        <dt>Weapon</dt><dd>${esc(cap(w.name || "bare hands"))} &middot; <b>${esc(w.dice || "-")}</b> damage</dd>
+        <dt>To hit</dt><dd>+${esc(h.to_hit)} (proficiency +${esc(h.prof)})</dd>
+        <dt>Armour</dt><dd>${esc(cap(ar.name || "none"))} &middot; AC ${esc(h.ac)}</dd>
+        <dt>Saves</dt><dd>${esc(h.saves || "-")}</dd>
+      </dl>
+      <p class="sub-h">Carrying</p>
+      <dl class="kv">
+        <dt>Pack</dt><dd>${kit.join(" &middot; ")}</dd>
+        <dt>Wearing</dt><dd>${h.worn ? esc(h.worn) : "nothing fancy yet"}</dd>
+      </dl>
+      <p class="sub-h">Record</p>
+      <dl class="kv">
+        <dt>Deeds</dt><dd>${num(h.kills)} kills &middot; deepest floor ${num(h.deepest)} &middot; ${num(h.delves)} delves</dd>
+        <dt>Standing</dt><dd>${num(h.standing)} &middot; ${num(h.xp)} xp</dd>
+      </dl>
+    </div>
+  </details>`;
+}
+
+function renderRoll(rows) {
+  const box = $("rollList");
+  if (!rows.length) { box.innerHTML = `<li class="empty">The roll is empty - nobody has earned a place yet.</li>`; return; }
+  box.innerHTML = rows.map((r, i) => `<li class="${r.alive === false ? "gone" : ""}">
+      <span class="pos">${i + 1}</span>
+      <span class="rname">${esc(r.name)}</span>
+      <span class="score"><b>${num(r.standing)}</b><br>${num(r.kills)} kills &middot; floor ${num(r.deepest)}</span>
+      <span class="rank">${esc(r.rank)}, level ${esc(r.level)}${r.alive === false ? " &middot; fallen" : ""}</span>
+    </li>`).join("");
+}
+
+function renderFallen(fs) {
+  $("nFallen").textContent = fs.length ? fs.length : "";
+  const box = $("fallenList");
+  if (!fs.length) { box.innerHTML = `<p class="empty">No one has fallen. Yet.</p>`; return; }
+  box.innerHTML = fs.map((f) => `<div class="grave">
+      <div class="who">${esc(f.name)} <span class="rec">the ${esc(f.class)}, level ${esc(f.level)}</span></div>
+      <div class="how">Slain by ${esc(f.killed_by || "the dark")}${+f.day ? `, day ${esc(f.day)}` : ""}</div>
+      <div class="rec">${num(f.kills)} kills &middot; deepest floor ${num(f.deepest)}</div>
+      ${f.epitaph ? `<div class="epi">&ldquo;${esc(f.epitaph)}&rdquo;</div>` : ""}
+    </div>`).join("");
+}
+
+// the command list: from the snapshot when there is one; with no town yet, the page still
+// shows how to join (a short built-in list - the full one arrives with the first snapshot)
+const FALLBACK_CMDS = { order: ["enlist", "hero", "delve", "help"], commands: {
+  enlist: { args: "[class] [people]", short: "Raise your hero: a calling and a people, either order.", example: "!enlist knight dwarf" },
+  hero: { short: "Your hero's sheet.", example: "!hero" },
+  delve: { short: "Go down into the scar with your hero.", example: "!delve" },
+  help: { args: "[command]", short: "The command list; !help <command> for one in detail.", example: "!help forge" } } };
+
+function renderCommands(c) {
+  const src = c && c.commands && Object.keys(c.commands).length ? c : FALLBACK_CMDS;
+  const cs = src.commands;
+  const order = arr(src.order).filter((k) => cs[k]).concat(Object.keys(cs).filter((k) => !arr(src.order).includes(k)));
+  $("cmdList").innerHTML = order.map((k) => {
+    const d = cs[k] || {};
+    const al = arr(d.aliases).length ? `<div>Also: ${arr(d.aliases).map((a) => `<code>!${esc(a)}</code>`).join(" ")}</div>` : "";
+    return `<details class="cmd">
+      <summary><span class="cname">!${esc(k)}</span> ${d.args ? `<span class="cargs">${esc(d.args)}</span>` : ""}
+        <span class="cshort">${esc(d.short || d.what || "")}</span></summary>
+      <div class="cbody">
+        ${d.what && d.what !== d.short ? `<div>${esc(d.what)}</div>` : ""}
+        ${d.cost ? `<div><b>Cost:</b> ${esc(d.cost)}</div>` : ""}
+        ${d.needs_hero ? `<div>Needs a living hero.</div>` : ""}
+        ${al}
+        ${d.example ? `<div>Try: <code>${esc(d.example)}</code></div>` : ""}
+      </div>
+    </details>`;
+  }).join("");
+}
+
+$("find").addEventListener("input", (e) => {
+  heroFilter = e.target.value;
+  heroShown = HERO_PAGE;
+  if (last) renderHeroes(arr(last.payload.heroes));
+});
+
+load();
+setInterval(load, REFRESH_MS);
+setInterval(showStatus, 15000);   // "updated N minutes ago" keeps counting between fetches
+</script>
+</body>
+</html>

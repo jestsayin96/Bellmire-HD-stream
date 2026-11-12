@@ -263,15 +263,18 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Test that fails on the old build, then a 1080p render shrunk to 854x480 and looked at.
       DONE (Cycle 81): panes over the top 85%, the Chronicle + clock in a bottom chrome bar, boss card + party frames + unit frame docked in the pane showing them (scripts/hud_dock.gd), 3D text on render layers with a cull mask per pane, one name tag per lane pane; L21_TEST 32/32 (15 failed before).
       ALSO: !guild drops the "roll" alias (bare !roll is fightoverlay's dice, now silent here); L14_TEST OK.
-- [ ] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
-- [ ] L23. The director should cut away from a hero a lane already holds (or the split is wasted).
+- [x] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
+      DONE (Cycle 84): within 6 m of another pane's subject a lane takes its own quarter (90 / -90 / 180 deg from the director) and zoom, clearance tilts but never swings it; L22_TEST OK (views 84-177 deg apart).
+- [x] L23. The director should cut away from a hero a lane already holds (laptop commit a6eb770 calls this L24).
+      DONE (Cycle 85): lane-held heroes are skipped by every director pick, a fight or delve shot goes through a delver no lane holds, a held shot is cut within 1 s; L24_TEST OK (5 of 6 failed before).
 
-- [ ] L24. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
+- [x] L24. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with (laptop commit d3669e2 calls this L23)
       "the director never cut to fight" and "all six shot types were seen" (saw tour_market, tour_scar,
       tour_valley, hero, raid - no fight), then PASSED on an immediate re-run with no code change. It is
       waiting on the director to happen to cut to a fight inside the test window. Make the test drive the
       director deterministically - force a fight and force the cut - instead of waiting for one. A test
       that fails at random teaches everyone to ignore it, which is worse than no test.
+      DONE (Cycle 83): a lord floor + the director deciding at once when the story is live (its own _best / _cut); timing samples best of 3; L20_TEST OK x3 in a row.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
@@ -299,7 +302,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       no key file = off. publish() 0.3-0.7 ms, build 0.4 ms (202 heroes 5 ms, 95 KB). W1A_TEST OK 17/17 (live upsert 200,
       read back with the publishable key, publishable-key write refused 401); W1A_TOWN OK (real town + real save, read only:
       level 3, 51 souls, 2 heroes, 6 fallen, 21 commands - that is the row in the table now).
-- [ ] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
+- [x] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
       It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
         URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at
         key  sb_publishable_q2Kn3weLLeYYXGAiow_4vw_3serNQlc   (apikey header + Authorization: Bearer)
@@ -308,6 +311,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       first - most viewers will open it on one. Must work when the game has never run (empty table).
       Phase 2, later: polls that change the town, with Twitch login - that is why the data is in
       Supabase rather than in a file; a static host could not do it at all.
+      DONE (Cycle 86, laptop): web/index.html - one static file, no build, no framework; phone first (390 px), two / three columns when wide. Heroes (find by name, tap for the sheet: stats + mods, weapon dice, to-hit, armour / AC, saves, pack, worn, record), the Guild Roll, the Fallen (killer, day, epitaph when there is one), town level / souls / day / treasury / growth, the command list. "Updated N minutes ago" always; past 5 min it says the town has gone quiet; empty table -> "has not reported in yet"; failed fetch (12 s timeout) -> a plain message + Try again, retried every minute. Not published - Pages is Mr. E's call. Shots: renders/cycles/20261112_w1b.
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.
 - Firefly icons / title art: made by him in Adobe.

@@ -102,7 +102,7 @@ func _process(_dt: float) -> bool:
 		if d.lord:
 			d.lord.queue_free()
 		_cur = {"key": key, "info": d.info, "dun": d}
-		var fe = d.info.get("env")
+		var fe = d.env() if _envmode == "floor" else null
 		_we.environment = fe if _envmode == "floor" and fe is Environment else _town_env
 	_cur["job"] = job
 	var info: Dictionary = _cur["info"]

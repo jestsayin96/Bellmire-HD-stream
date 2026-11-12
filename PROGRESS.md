@@ -1581,3 +1581,32 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   renders/cycles/20261112_l28/a_sheet.png - crypt / flooded / treasury, before | after, room + close views.
 - Tests: parse 0 script errors; _offfloor 0 of 969, INPROP 0, MON_INPROP 0; _delve_test 0 script errors, 0 null;
   L25_TEST OK 13/13, 0 stuck, 0 nudges. tools/_l28_matcount.gd prints the material counts.
+
+## L-cycle 112 - L28b biome distinction (laptop jestai, 2026-11-12) - L28b DONE
+- Why the floors looked alike: every delve camera rendered through the TOWN's WorldEnvironment (procedural sky
+  ambient 0.85, valley haze) - each floor was lit by a blue sky under its own lid. Tint alone could not undo that.
+- data/biomes.json "looks" (14 themes, tunable by hand): ambient [colour, energy]; fog [colour, depth density,
+  height-fog density near the floor]; grade [shadows, mids, highlights] -> a GradientTexture1D colour-correction LUT;
+  sat / contrast / glow; motes; ground [colour, amount].
+- FloorGen.make_env(theme, floor_y, boss, cheap): BG_COLOR (dark), colour ambient, reflections off (no sky in the
+  gold), AGX, depth fog + height fog sitting on the floor, glow for flames, the LUT grade; boss floors a touch denser
+  fog, more glow and contrast. DungeonHD.env(cheap) caches it per floor; DungeonHD.env_at(tree, p) finds the floor
+  under a point (floors join group "dungeon_floor").
+- Cameras (approved by Mr. E this session - laptop files outside the L28 brief's list): rts_camera._air_tick swaps
+  cam.environment to the floor's air every 0.25 s while the focus is below ground (null = the town's again);
+  spotlight._cheap gives a lane looking into a delve that floor's cheap env (no SSAO), else the town copy as before.
+- FloorGen._motes: ONE GPUParticles3D per floor over the whole grid (cap 120): dust / ash / embers / pollen /
+  fireflies / drips / mist / sparkles by theme, additive billboards with a fade ramp.
+- Ground: kit shader patch_col / patch_amt on FLOOR tiles only (moss in the wood and meadow, soot in the firepits and
+  workshop, silt in the flooded gallery, sugar in the confection), broken by two noises.
+- No two alike: tools/_l28_alike.gd reads each theme's room shot - 8x8 thumbnail distance (closest barracks ~
+  workshop 0.159, min 0.08) and whole-frame palette distance (closest mess ~ treasury 0.093, min 0.05):
+  L28_ALIKE OK 14/14. Barracks was retuned away from prison (palette 0.050) and mess (both orange) on the way.
+- Sheet: renders/cycles/20261112_l28/all_sheet.png (L28_SET=all L28_ENV=floor, windowed 1920x1080), one row per theme
+  in FloorGen.all_themes() order: barracks, mess, crypt, prison, treasury, shrine, workshop, flooded, grassland, wood,
+  firepit, fogbound, confection, keep. (The mess "close" frame faces a bare wall - the shot tool's framing, not the look.)
+- Tests: parse 0 script errors (the 3 town-side headless null lines unchanged); _offfloor 0 of 1081, INPROP 0,
+  MON_INPROP 0; _delve_test 0 script errors, 0 null; L25_TEST OK 13/13 (1 nudge); L21_TEST OK 46/46 (windowed
+  1920x1080 - camera files touched); L24_TEST OK 6/6. No new class_name.
+- Next (L28c / L28d): lighting per floor (key+fill from the look, torches/braziers as OmniLights with embers, depth fog,
+  boss drama, emitter cap, FPS check) and detail decals. See the handoff brief.

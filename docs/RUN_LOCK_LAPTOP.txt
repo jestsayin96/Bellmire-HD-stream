@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 12:34 - L28 dungeon look
+IDLE 2026-11-12 14:38 - L28a + L28b done and pushed; L28c/L28d next

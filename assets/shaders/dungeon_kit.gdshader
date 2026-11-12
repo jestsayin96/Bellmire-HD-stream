@@ -24,6 +24,8 @@ uniform float normal_strength = 0.6;
 uniform float rough_mult = 1.0;
 uniform float vary = 0.18;
 uniform float wet = 0.0;
+uniform vec4 patch_col : source_color = vec4(0.5, 0.5, 0.5, 1.0);   // L28b: the biome's ground (moss, soot, silt, sugar)
+uniform float patch_amt = 0.0;
 
 varying vec3 w_pos;
 varying vec3 w_nrm;
@@ -76,6 +78,10 @@ void fragment() {
 	float up = smoothstep(0.6, 0.9, n.y) * wet;
 	vec3 col = a.rgb * tint.rgb * mix(1.0, 0.82 + 0.36 * v, vary);
 	col *= 1.0 - 0.35 * up;
+	// L28b: patches of the biome's ground over the floor tiles, broken by a second, finer noise
+	float pn = tri(vary_tex, w_pos * 0.11 + vec3(17.0, 0.0, 5.0), bw).r;
+	float pmask = smoothstep(0.52, 0.72, v * 0.6 + pn * 0.4) * smoothstep(0.55, 0.85, n.y) * patch_amt;
+	col = mix(col, patch_col.rgb * (0.75 + 0.5 * pn), pmask);
 	float rough = clamp(pm.r * rough_mult + (dr - 0.5) * 0.4 * has_d, 0.04, 1.0);
 	ROUGHNESS = mix(rough, 0.12, up);
 	METALLIC = pm.g;

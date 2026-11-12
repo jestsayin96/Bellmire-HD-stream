@@ -48,8 +48,35 @@ func _ready() -> void:
     if info.is_empty():
         build(floor_no)
 
+## L28b: the air of this floor for a camera looking into it (FloorGen.make_env, by theme,
+## made once each: full for the director's camera, cheap - no SSAO - for the lane panes)
+var _env := {}
+func env(cheap := false) -> Environment:
+    if not FloorGen.kit_look or info.is_empty():
+        return null
+    if not _env.has(cheap):
+        _env[cheap] = FloorGen.make_env(String(info.get("theme", "")), global_position.y, bool(info.get("boss", false)), cheap)
+    return _env[cheap]
+
+## the floor a camera at p is looking into (any floor in the tree whose grid is under p),
+## or null in the open air - cameras call this to swap the town's sky for the floor's air
+static func env_at(tree: SceneTree, p: Vector3, cheap := false) -> Environment:
+    if tree == null or p.y > -150.0:
+        return null
+    var best: DungeonHD = null
+    var bd := 1.0e9
+    for n in tree.get_nodes_in_group("dungeon_floor"):
+        var d: DungeonHD = n
+        var dd := Vector2(p.x - d.global_position.x, p.z - d.global_position.z).length()
+        if dd < bd:
+            bd = dd
+            best = d
+    return best.env(cheap) if best and bd < 200.0 else null
+
 func build(n: int) -> void:
     floor_no = n
+    add_to_group("dungeon_floor")
+    _env = {}
     for c in get_children():
         c.queue_free()
     monsters.clear()

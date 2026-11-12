@@ -439,6 +439,10 @@ func _clear(p: Dictionary, at: Vector3, want: Vector3, real: float) -> Vector3:
 		p["lift_t"] = 0.25
 		var sz: Vector2 = (p["box"] as Control).size
 		p["lift"] = eye.clear_shot(at, want, (p["cam"] as Camera3D).fov, sz.x / maxf(1.0, sz.y))
+		# L22: a lane spread round a group keeps its side - clearance may tilt it, never swing it
+		# round into a neighbour's quarter (a 70 deg swing had put two lanes 24 deg apart)
+		if bool(p.get("crowd", false)):
+			p["lift"] = Vector2((p["lift"] as Vector2).x, 0.0)
 	# eased like the eye's (tilt and swing glide, never snap; a cut - real 999 - goes straight there)
 	p["mv"] = (p.get("mv", Vector2.ZERO) as Vector2).lerp(p.get("lift", Vector2.ZERO), clampf(real * 3.0, 0.0, 1.0))
 	return RtsCamera.shifted(at, want, p["mv"])
@@ -461,13 +465,13 @@ func _offset_for(t: Node3D) -> Vector3:
 ## ---- L22: two spotlit heroes standing together made two panes of one picture (every lane
 ## sat at the same offset behind its hero). When another pane's subject - another lane's hero,
 ## or the director's - is within CLOSE_M of a lane's hero, that lane takes its own side of the
-## group and its own zoom: bits 110 deg round from the director's side and close in, subs
-## -110 deg at the usual distance, points straight opposite and further out. Measured from
+## group and its own zoom - the four views a quarter-turn apart: bits 90 deg round from the director's
+## side and close in, subs -90 deg at the usual distance, points straight opposite, further out. Measured from
 ## the director's camera, so no lane looks the director's way. Apart again (past APART_M,
 ## the gap stops it flickering): the usual view behind the hero. Each change is a cut.
 const CLOSE_M := 6.0
 const APART_M := 9.0
-const SPREAD := {"bits": [110.0, 0.85], "subs": [-110.0, 1.05], "points": [180.0, 1.32]}
+const SPREAD := {"bits": [90.0, 0.85], "subs": [-90.0, 1.05], "points": [180.0, 1.32]}
 
 func _offset_lane(l: String, t: Node3D) -> Vector3:
 	var o := _offset_for(t)

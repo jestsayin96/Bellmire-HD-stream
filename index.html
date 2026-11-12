@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bellmire - the Guild Hall</title>
+<meta name="description" content="Bellmire, live from the stream: every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
+<meta name="theme-color" content="#1c140e">
+<!--
+  W1b: the viewer hub. One static page, no build step, no framework (GitHub Pages, like
+  fightoverlay). It reads the ONE row the game upserts every 60 s (scripts/snapshot_pub.gd)
+  from Supabase with the PUBLISHABLE key - read-only by row-level security, safe to embed.
+  The service (secret) key never belongs here.
+
+  Honest about its data: "updated N minutes ago" is always on screen; past STALE_MIN it says
+  the town has gone quiet (Mr. E's PC is off); an empty table says the town has not reported in;
+  a failed fetch says so plainly and tries again - never a spinner forever.
+
+  Test hooks (local checks only, harmless): ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
+-->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="panel">
+    <div class="brand">
+      <h1>Bellmire</h1>
+      <span class="sub" id="townName">the Guild Hall</span>
+    </div>
+    <ul class="town" id="town" aria-label="The town"></ul>
+    <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+  </header>
+
+  <nav aria-label="Sections">
+    <a href="#heroes">Heroes<span class="n" id="nHeroes"></span></a>
+    <a href="#roll">Guild Roll</a>
+    <a href="#fallen">The Fallen<span class="n" id="nFallen"></span></a>
+    <a href="#commands">Commands</a>
+  </nav>
+
+  <main id="main">
+    <section class="panel big-msg hide" id="nothing"></section>
+
+    <section class="panel" id="heroes">
+      <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
+      <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
+      <div class="heroes" id="heroList"><p class="msg">&hellip;</p></div>
+      <p class="more hide" id="heroMore"></p>
+    </section>
+
+    <div class="duo">
+      <section class="panel" id="roll">
+        <h2 class="title">The Guild Roll <small>who stands highest</small></h2>
+        <ol class="roll" id="rollList"><li class="msg">&hellip;</li></ol>
+      </section>
+      <section class="panel" id="fallen">
+        <h2 class="title">The Fallen <small>remembered</small></h2>
+        <div class="fallen" id="fallenList"><p class="msg">&hellip;</p></div>
+      </section>
+    </div>
+
+    <section class="panel" id="commands">
+      <h2 class="title">Chat commands <small>type them in Twitch chat</small></h2>
+      <div class="cmds" id="cmdList"><p class="msg">&hellip;</p></div>
+    </section>
+  </main>
+
+  <footer>
+    The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
+    <br>Bellmire HD &middot; JestSayin
+  </footer>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>

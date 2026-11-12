@@ -1644,3 +1644,20 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Depth fog: kept exponential + height fog from L28b (the depth mode would re-tune every look); boss floors tint it.
 - Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 832, INPROP 0, MON_INPROP 0;
   _delve_test 0 script errors, 0 null; L25_TEST OK 13/13, 0 stuck, 0 nudges. No camera/UI files touched. No class_name.
+
+## L-cycle 114 - L28d detail decals (laptop jestai, 2026-11-12) - L28d DONE
+- tools/_l28_decals.gd (headless, fixed seeds) writes assets/dungeon_look/decal_{crack,moss,blood,soot,veins,
+  veins_glow}.png, 256x256 RGBA: branching random-walk fissures, FastNoiseLite moss clumps, a blood splat with drops
+  and a smear, a ragged scorch, white veins + a premultiplied glow mask (a Decal's emission ignores alpha - the first
+  try glowed as full squares). Self-made, CC0 - note in docs/ASSETS.md.
+- DungeonHD._decals: 18 decals a floor (DECAL_CAP 24, printed as L28D_DECALS): 9 of the theme's mark (moss in wood /
+  grassland / flooded, soot in firepit / workshop, blood in prison / barracks / crypt), scar-glass veins from floor 6
+  (floor-4, max 6; violet, emissive), cracks for the rest. ~45% of wall-touching picks project sideways onto the wall
+  base (normal_fade 0.5), the rest lie on the floor (2.6-3.8 m, random turn). Candidates are floor cells NOT in
+  info["keep_clear"] (the route + every corridor) and not the entry/exit stair cells. Distance-faded past 70 m.
+- FPS (tools/_l28_fps.gd, after_d): within +-1 fps of L28c on every theme (e.g. firepit 115.2, crypt 124.5,
+  confection 184.4, boss 143.4); fps_after_d.txt.
+- Shots: renders/cycles/20261112_l28/d_sheet.png (L28_SET=d L28_ENV=floor; every theme + boss, room / close / game).
+- Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 995, INPROP 0, MON_INPROP 0;
+  _delve_test 0 script errors, 0 null, 0 ERROR; windowed shot run 0 errors; L25_TEST OK 13/13, 0 stuck, 0 nudges.
+  No class_name, no camera/UI files touched.

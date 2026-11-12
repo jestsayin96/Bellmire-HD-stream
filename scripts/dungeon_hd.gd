@@ -86,6 +86,115 @@ func build(n: int) -> void:
     _dress()
     _people()
     _atmos()
+    _decals()
+
+## ---------------------------------------------------------------- L28d: detail decals
+## self-made textures (tools/_l28_decals.gd -> assets/dungeon_look, CC0) projected on floor
+## cells and wall bases to break the tile repetition: cracks everywhere, moss / soot / blood by
+## theme, scar-glass veins once the floors run deep. Never on the stairs or the keep-clear
+## route (info["keep_clear"]: the way through + every corridor). Capped per floor.
+const DECAL_CAP := 24
+const DECAL_TEX := "res://assets/dungeon_look/decal_%s.png"
+const THEME_DECAL := {"wood": "moss", "grassland": "moss", "flooded": "moss",
+    "firepit": "soot", "workshop": "soot", "prison": "blood", "barracks": "blood", "crypt": "blood"}
+const SCAR_VEIN := Color(0.62, 0.32, 1.0)
+static var _dtex := {}
+var decals := 0
+
+static func _decal_tex(kind: String) -> Texture2D:
+    if not _dtex.has(kind):
+        var p := DECAL_TEX % kind
+        _dtex[kind] = load(p) if ResourceLoader.exists(p) else null
+    return _dtex[kind]
+
+func _decals() -> void:
+    decals = 0
+    if not FloorGen.kit_look:
+        return
+    var cells: Dictionary = info["cells"]
+    var keep: Dictionary = info.get("keep_clear", {})
+    var G: float = info["grid"]
+    var hw: float = (float(info["w"]) - 1.0) * G * 0.5
+    var hh: float = (float(info["h"]) - 1.0) * G * 0.5
+    var stair_cells := {}
+    for k in ["entry", "exit"]:
+        var sp: Vector3 = info[k]
+        stair_cells[Vector2i(int(round((sp.x + hw) / G)), int(round((sp.z + hh) / G)))] = true
+    var cand: Array = []
+    for c in cells:
+        if not keep.has(c) and not stair_cells.has(c):
+            cand.append(c)
+    var r := RandomNumberGenerator.new()
+    r.seed = hash("decal:%d" % floor_no)
+    for i in range(cand.size() - 1, 0, -1):
+        var j := r.randi_range(0, i)
+        var t = cand[i]; cand[i] = cand[j]; cand[j] = t
+    # the floor's mix: its theme's own mark, cracks, and veins that grow with depth
+    var plan: Array = []
+    var tk := String(THEME_DECAL.get(String(info.get("theme", "")), ""))
+    for i in (9 if tk != "" else 0):
+        plan.append(tk)
+    var veins := 0 if floor_no < 6 else mini(floor_no - 4, 6)
+    for i in veins:
+        plan.append("veins")
+    while plan.size() < DECAL_CAP - 6:
+        plan.append("crack")
+    for i in range(plan.size() - 1, 0, -1):
+        var j2 := r.randi_range(0, i)
+        var t2 = plan[i]; plan[i] = plan[j2]; plan[j2] = t2
+    var sides := [Vector2i(0, -1), Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0)]
+    var root: Node3D = info["root"]
+    var ci := 0
+    for kind in plan:
+        if decals >= DECAL_CAP or ci >= cand.size():
+            break
+        var c: Vector2i = cand[ci]
+        ci += 1
+        var tex := _decal_tex(String(kind))
+        if tex == null:
+            continue
+        var d := Decal.new()
+        d.name = "Decal_" + String(kind)
+        d.texture_albedo = tex
+        var base := _cell_pos(c)
+        var walls: Array = []
+        for s in sides:
+            if not cells.has(c + (s as Vector2i)):
+                walls.append(s)
+        if not walls.is_empty() and kind != "blood" and r.randf() < 0.45:
+            # the foot of a wall: projected sideways into the wall face, fading off the floor
+            var sv: Vector2i = walls[r.randi() % walls.size()]
+            var dir := Vector3(sv.x, 0, sv.y)
+            var y_ax := -dir
+            var z_ax := Vector3.UP
+            d.transform = Transform3D(Basis(y_ax.cross(z_ax), y_ax, z_ax),
+                base + dir * (G * 0.5 - FloorGen.WALL_IN) + Vector3(r.randf_range(-0.9, 0.9) * absf(dir.z), 0.75,
+                    r.randf_range(-0.9, 0.9) * absf(dir.x)))
+            d.size = Vector3(r.randf_range(2.6, 3.6), 0.9, 1.8)
+            d.normal_fade = 0.5
+        else:
+            var s2 := r.randf_range(2.6, 3.8) * (0.85 if kind == "blood" else 1.0)
+            d.position = base + Vector3(r.randf_range(-1.0, 1.0), 0.0, r.randf_range(-1.0, 1.0))
+            d.rotation.y = r.randf() * TAU
+            d.size = Vector3(s2, 0.7, s2)
+            d.normal_fade = 0.35
+        d.upper_fade = 0.2
+        d.lower_fade = 0.2
+        match String(kind):
+            "veins":
+                d.modulate = SCAR_VEIN
+                d.texture_emission = _decal_tex("veins_glow")
+                d.emission_energy = 2.4
+            "crack":
+                d.modulate = Color(1, 1, 1, 0.85)
+            "soot":
+                d.modulate = Color(1, 1, 1, 0.9)
+        d.distance_fade_enabled = true
+        d.distance_fade_begin = 70.0
+        d.distance_fade_length = 20.0
+        root.add_child(d)
+        decals += 1
+    print("L28D_DECALS floor %d %s: %d (cap %d)" % [floor_no, String(info.get("theme", "")), decals, DECAL_CAP])
 
 ## ---------------------------------------------------------------- L28c: light and fire
 ## hard cap on particle emitters a floor's dressing may run (motes, the shared flame embers,

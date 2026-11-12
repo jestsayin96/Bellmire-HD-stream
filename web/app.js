@@ -75,6 +75,15 @@ function weaponIcon(name) {
   if (/mace|hammer|club|maul|flail|axe|warhammer|quarterstaff|wrap|fist|bare hands|knuckle/.test(w)) return "blunt";
   return "blade";   // sword, dagger, spear, blade, greatsword, rapier, ...
 }
+// a class crest: the calling's signature icon. Unknown callings fall back to a blade.
+function classIcon(cls) {
+  const c = String(cls || "").toLowerCase();
+  if (/mage|sage|necromancer|warlock|druid|sorcer|wizard|cleric|priest/.test(c)) return "arcane";
+  if (/ranger|hunter|archer|scout/.test(c)) return "ranged";
+  if (/barbarian|monk|brawler|fighter/.test(c)) return "blunt";
+  if (/knight|paladin|warden|guard|defender/.test(c)) return "shield";
+  return "blade";   // rogue, duelist, bard, and the rest carry a blade
+}
 
 // esc() is kept for the two legacy innerHTML sites that remain (status line and
 // the "nothing yet" messages) - both build from the page's OWN strings, never
@@ -426,9 +435,33 @@ function hpBar(h) {
   return wrap;
 }
 
-// a weapon/armour card with its item icon
-function gearCard(iconId, label, value) {
+// The level + XP bar. Like HP, the snapshot has xp but no per-hero next-level
+// threshold, so it is forward-compatible: if the publisher adds xp_next /
+// next_xp / xp_to_next / to_next, it draws a real progress bar to the next level;
+// otherwise it shows the level and the xp earned, with a quiet filled bar and no
+// invented denominator.
+function xpBar(h) {
+  const next = n0(h.xp_next) || n0(h.next_xp) || n0(h.xp_to_next) || n0(h.to_next) || 0;
+  const xp = n0(h.xp);
+  const hasNext = next > 0 && next >= xp;
+  const ratio = hasNext ? Math.max(0.03, Math.min(1, xp / next)) : 1;
+  const wrap = el("div", "xpbar" + (hasNext ? "" : " flat"));
+  wrap.setAttribute("role", "img");
+  wrap.setAttribute("aria-label", hasNext ? "Level " + n0(h.level) + ", " + xp + " of " + next + " xp to next"
+                                          : "Level " + n0(h.level) + ", " + xp + " xp");
+  wrap.append(el("span", "lvl", "Lv " + n0(h.level)));
+  const track = el("div", "xptrack");
+  const fill = el("span", "xpfill");
+  fill.style.setProperty("--xp", ratio);
+  track.append(fill);
+  wrap.append(track, el("span", "xpv", hasNext ? num(xp) + " / " + num(next) : num(xp) + " xp"));
+  return wrap;
+}
+
+// a weapon/armour card with its item icon and a full-name tooltip
+function gearCard(iconId, label, value, tip) {
   const c = el("div", "gcard");
+  if (tip) c.title = String(tip);          // tooltip: a property, never parsed as markup
   c.append(icon(iconId, "gic"));
   const t = el("div", "gt");
   t.append(el("span", "gl", label), el("span", "gv", value));
@@ -438,6 +471,7 @@ function gearCard(iconId, label, value) {
 // a carried-item chip with an icon
 function carryChip(iconId, text) {
   const c = el("div", "cchip");
+  c.title = String(text);
   c.append(icon(iconId, "cic"), el("span", null, text));
   return c;
 }
@@ -449,7 +483,13 @@ function heroCard(h, isOpen) {
   const det = el("details", "hero");
   if (isOpen) det.open = true;
   const sum = el("summary");
-  const sg = el("span", "hsigil", sigil(h.name));
+  // the crest: the hero's initials in a class-tinted ring, with the calling's icon
+  const sg = el("span", "hsigil cls-" + classIcon(h.class), sigil(h.name));
+  sg.title = (h.species ? cap(h.species) + " " : "") + cap(h.class || "adventurer");
+  const crest = el("span", "hcrest");
+  crest.setAttribute("aria-hidden", "true");
+  crest.append(icon(classIcon(h.class)));
+  sg.append(crest);
   const idb = el("span", "hid");
   idb.append(el("span", "hname", nameOf(h) || "(no name)"));
   // name gets the full body width; the class line and the AC/HP pair share a row below it
@@ -467,6 +507,7 @@ function heroCard(h, isOpen) {
   const sheet = el("div", "sheet");
 
   sheet.append(hpBar(h));
+  sheet.append(xpBar(h));
 
   const stats = el("div", "stats");
   for (const k of order) {
@@ -480,8 +521,10 @@ function heroCard(h, isOpen) {
   sheet.append(el("p", "eyebrow", "Equipped"));
   const gear = el("div", "gearstrip");
   gear.append(
-    gearCard(weaponIcon(w.name), "Weapon", `${cap(w.name || "bare hands")}  ·  ${w.dice || "-"}`),
-    gearCard("shield", "Armour", `${cap(armr.name || "none")}  ·  AC ${h.ac}`),
+    gearCard(weaponIcon(w.name), "Weapon", `${cap(w.name || "bare hands")}  ·  ${w.dice || "-"}`,
+             `${cap(w.name || "bare hands")} — ${w.dice || "-"} damage`),
+    gearCard("shield", "Armour", `${cap(armr.name || "none")}  ·  AC ${h.ac}`,
+             `${cap(armr.name || "none")} — armour class ${h.ac}`),
   );
   sheet.append(gear);
 
@@ -503,17 +546,30 @@ function heroCard(h, isOpen) {
     carryChip("coin", `${num(h.gold)} gold`),
   );
   sheet.append(carry);
-  if (h.worn) {
-    const worn = el("dl", "kvlist");
-    worn.append(kv("Wearing", String(h.worn)));
-    sheet.append(worn);
+
+  // Worn: cosmetics and any dye. A dye swatch colour comes from a WHITELISTED
+  // class (dye-<known colour>), never an inline style built from snapshot data;
+  // an unknown dye string shows as plain text only.
+  if (h.worn || h.dye) {
+    sheet.append(el("p", "eyebrow", "Worn"));
+    const cos = el("div", "cosmetics");
+    if (h.worn) cos.append(el("span", "cositem", String(h.worn)));
+    if (h.dye) {
+      const d = String(h.dye).trim();
+      const known = /^(black|white|red|blue|green|gold|purple|teal|brown|gr[ae]y)$/i.test(d);
+      const chip = el("span", "dyechip" + (known ? " dye-" + d.toLowerCase().replace("gray", "grey") : ""));
+      const sw = el("span", "dyeswatch"); sw.setAttribute("aria-hidden", "true");
+      chip.append(sw, document.createTextNode(cap(d) + " dye"));
+      cos.append(chip);
+    }
+    sheet.append(cos);
   }
 
   sheet.append(el("p", "eyebrow", "Record"));
   const rec = el("dl", "kvlist");
   rec.append(
     kv("Deeds", `${num(h.kills)} kills  ·  deepest floor ${num(h.deepest)}  ·  ${num(h.delves)} delves`),
-    kv("Standing", `${num(h.standing)}  ·  ${num(h.xp)} xp`),
+    kv("Standing", num(h.standing)),
   );
   sheet.append(rec);
   det.append(sheet);
@@ -552,6 +608,8 @@ function renderFallen(fs) {
     who.append(document.createTextNode(nameOf(f)));
     who.append(el("span", "grec", `the ${f.class}, level ${f.level}`));
     g.append(who);
+    // their earned title, if they carried one, kept with them on the memorial
+    if (f.title) g.append(el("div", "gtitle", String(f.title)));
     g.append(el("div", "ghow", `Slain by ${f.killed_by || "the dark"}` + (+f.day ? `, day ${f.day}` : "")));
     g.append(el("div", "grec", `${num(f.kills)} kills  ·  deepest floor ${num(f.deepest)}`));
     if (f.epitaph) g.append(el("div", "gepi", "“" + String(f.epitaph) + "”"));
@@ -920,6 +978,8 @@ function withMock(p) {
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
+    const weapons = ["sword", "oak staff", "shortbow", "warhammer"];
+    const dyes = ["teal", "gold", "red", "purple"], titles = ["the Bold", "Scarbane", "the Quick", "Emberkin"];
     const made = [];
     for (let i = 0; i < 40; i++) {
       made.push({
@@ -928,7 +988,15 @@ function withMock(p) {
         standing: (i * 37) % 300, ac: 12 + (i % 6), hp: 20 + i, gold: (i * 53) % 900,
         kills: (i * 7) % 60, deepest: i % 13, delves: i % 11, xp: i * 10, to_hit: 4, prof: 2,
         saves: "STR +4", stats: { str: 10 + (i % 8), dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
-        weapon: { name: "sword", dice: "1d8" }, armour: { name: "mail" }, worn: "", title: "", oil: i % 4, potions: i % 3, brews: "",
+        weapon: { name: weapons[i % 4], dice: "1d8" }, armour: { name: "mail" },
+        // a few heroes carry the forward-compatible fields, to exercise the real
+        // HP/XP bars, the dye swatch and a title (the publisher can add these any time)
+        max_hp: i % 3 === 0 ? 40 + i * 2 : undefined,
+        xp_next: i % 2 === 0 ? 100 + i * 5 : undefined,
+        worn: i % 5 === 0 ? "a corgi, a crown" : "",
+        dye: i % 4 === 0 ? dyes[(i / 4) % 4 | 0] : undefined,
+        title: i % 6 === 0 ? titles[(i / 6) % 4 | 0] : "",
+        oil: i % 4, potions: i % 3, brews: "",
       });
     }
     made[3].gold = made[4].gold = 777;

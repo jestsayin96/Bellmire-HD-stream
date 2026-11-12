@@ -671,3 +671,35 @@ html.overlay .title { font-size: 1.2rem; }
 /* ---- chronicle: filter chips with icons, and the text filter ---- */
 .chip .chipic { width: 1.05em; height: 1.05em; margin-right: -1px; }
 #chronFind { margin: 0 0 10px; }
+
+/* ---- H3: deepened hero sheet ---- */
+/* class crest on the sigil: initials in a class-tinted ring + the calling's glyph */
+.hsigil { position: relative; }
+.hcrest { position: absolute; right: -5px; bottom: -5px; width: 1.5em; height: 1.5em; border-radius: 50%; display: grid; place-items: center; background: var(--parch-hi); border: 1.5px solid var(--edge-2); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.hcrest .ic { width: .95em; height: .95em; color: var(--teal-ink); }
+.hsigil.cls-arcane { border-color: #6a4e9e; } .hsigil.cls-arcane .hcrest .ic { color: #6a4e9e; }
+.hsigil.cls-ranged { border-color: #3f6b33; } .hsigil.cls-ranged .hcrest .ic { color: #3f6b33; }
+.hsigil.cls-blunt  { border-color: var(--bad); } .hsigil.cls-blunt .hcrest .ic { color: var(--bad); }
+.hsigil.cls-shield { border-color: var(--gold-dk); } .hsigil.cls-shield .hcrest .ic { color: var(--gold-dk); }
+.hsigil.cls-blade  { border-color: var(--teal-ink); } .hsigil.cls-blade .hcrest .ic { color: var(--teal-ink); }
+
+/* level + XP bar */
+.xpbar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 9px; }
+.lvl { font-size: .72rem; font-weight: 800; letter-spacing: .03em; color: var(--gold-dk); background: var(--parch); border: 1px solid var(--edge-2); border-radius: 5px; padding: 2px 7px; }
+.xptrack { height: 7px; border-radius: 999px; background: #e0cd9c; border: 1px solid var(--edge-2); overflow: hidden; box-shadow: inset 0 1px 2px rgba(42,28,16,.18); }
+.xpfill { display: block; height: 100%; width: calc(var(--xp, 1) * 100%); border-radius: 999px; background: linear-gradient(90deg, var(--gold-dk), var(--gold)); transition: width .4s ease; }
+.xpbar.flat .xpfill { opacity: .45; }
+.xpv { font-size: .8rem; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+
+/* worn: cosmetics + dye swatch (swatch colour from a whitelisted class, never snapshot) */
+.cosmetics { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.cositem { font-size: .9rem; color: var(--ink); background: var(--parch); border: 1px solid var(--edge-2); border-radius: 999px; padding: 4px 11px; }
+.dyechip { display: inline-flex; align-items: center; gap: 7px; font-size: .88rem; color: var(--ink); background: var(--parch); border: 1px solid var(--edge-2); border-radius: 999px; padding: 4px 11px; }
+.dyeswatch { width: .95em; height: .95em; border-radius: 50%; border: 1px solid rgba(42,28,16,.45); background: var(--edge-2); }
+.dye-black .dyeswatch{background:#222}.dye-white .dyeswatch{background:#f4ecd8}.dye-red .dyeswatch{background:#9a3320}
+.dye-blue .dyeswatch{background:#2c4e7a}.dye-green .dyeswatch{background:#3f6b33}.dye-gold .dyeswatch{background:var(--gold)}
+.dye-purple .dyeswatch{background:#5a3e78}.dye-teal .dyeswatch{background:var(--teal)}.dye-brown .dyeswatch{background:#6d4824}
+.dye-grey .dyeswatch{background:#8a8278}
+
+/* the fallen's earned title on the memorial */
+.gtitle { font-style: italic; color: #cf9f6a; font-size: .9rem; margin-top: 1px; }

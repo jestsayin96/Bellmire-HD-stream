@@ -96,6 +96,66 @@ func setup(t: Node3D) -> void:
 	director.setup(self, t)
 	# L17: the spotlight split-screen (bits / subs / points lanes); chat's !look goes through it
 	spotlight = Spotlight.of(t)
+	# L21: the world's text on render layers, so each pane draws only what is its own
+	HudDock.install(get_tree(), t)
+	cam.cull_mask = HudDock.ALL & ~HudDock.LANES_MASK
+
+## ---- L21: the spotlight panes up -> the eye's own HUD leaves the seams. The clock chip
+## (or, while Mr. E types, the chat box) holds the right end of the chrome bar, the unit
+## frame docks bottom-right INSIDE the director pane, the key help steps aside. Back to
+## full screen: today's places again.
+var _hud_split := false
+func _dock_hud() -> void:
+	var sp := HudDock.split(town)
+	if sp != _hud_split:
+		_hud_split = sp
+		if not sp:
+			HudDock.reserve_right = 0.0
+			_place_full_hud()
+			restyle()                      # the unit frame is built again in its full-screen place
+	if not sp:
+		return
+	_help.visible = false
+	var bar := HudDock.chrome(town)
+	var m := float(UiTheme.px(6))
+	var right := 0.0
+	if _chat.visible:
+		_speed_lb.visible = false
+		_chat.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		var cw := float(UiTheme.px(600))
+		var ch := minf(float(UiTheme.px(52)), bar.size.y - 2.0 * m)
+		_chat.size = Vector2(cw, ch)
+		_chat.position = Vector2(bar.end.x - m - cw, bar.position.y + (bar.size.y - ch) * 0.5)
+		right = cw + m
+	else:
+		_speed_lb.visible = true
+		_speed_lb.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		var s := _speed_lb.get_combined_minimum_size()
+		_speed_lb.size = s
+		_speed_lb.position = Vector2(bar.end.x - m - s.x, bar.position.y + (bar.size.y - s.y) * 0.5)
+		right = s.x + m
+	HudDock.reserve_right = right
+	if _frame and _frame.visible:
+		HudDock.put(_frame, HudDock.pane(town, "director"), HudDock.pane_k(town, "director"), "br")
+
+func _place_full_hud() -> void:
+	_speed_lb.visible = true
+	_speed_lb.anchor_left = 1.0
+	_speed_lb.anchor_right = 1.0
+	_speed_lb.anchor_top = 0.0
+	_speed_lb.anchor_bottom = 0.0
+	_speed_lb.offset_left = -260
+	_speed_lb.offset_right = 0
+	_speed_lb.offset_top = 12
+	_speed_lb.offset_bottom = 12
+	_chat.anchor_left = 1.0
+	_chat.anchor_right = 1.0
+	_chat.anchor_top = 1.0
+	_chat.anchor_bottom = 1.0
+	_chat.offset_left = -UiTheme.px(760)
+	_chat.offset_right = -UiTheme.px(18)
+	_chat.offset_top = -UiTheme.px(70)
+	_chat.offset_bottom = -UiTheme.px(18)
 
 func _ground(p: Vector3) -> float:
 	if p.y < Delve.DELVE_Y * 0.5:
@@ -108,6 +168,7 @@ func _process(delta: float) -> void:
 	if cam == null:
 		return
 	var real := delta / maxf(Engine.time_scale, 0.001)    # camera moves in real time
+	_dock_hud()
 	_titles_tick(real)
 	_titles_follow()
 	if not _chat.visible:

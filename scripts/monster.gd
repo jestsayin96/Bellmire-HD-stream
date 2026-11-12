@@ -531,7 +531,7 @@ func _number(amount: float, crit: bool) -> void:
     var lb := Label3D.new()
     lb.text = ("%d!" if crit else "%d") % int(round(amount))
     lb.font_size = 96 if crit else 64
-    lb.pixel_size = 0.01
+    lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01    # L21: smaller in a close side-by-side pane
     lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
     lb.no_depth_test = true
     lb.outline_size = 20

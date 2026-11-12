@@ -48,7 +48,85 @@ func restyle() -> void:
         _card.visible = true
     _rebuild()
 
+## ---- L21: with the spotlight panes up the Chronicle leaves the panes for the CHROME bar
+## along the bottom (HudDock): full width (less the clock / chat at its right end), one line
+## an entry, as many as fit (2-3) at the L15 size, a lord's card at its left. It is the
+## narration: it stays readable, it just never sits on a pane.
+var _chrome := false
+
+func _build_chrome() -> void:
+    _panel = PanelContainer.new()
+    var sb := UiTheme.parchment()
+    sb.content_margin_top = UiTheme.px(6)
+    sb.content_margin_bottom = UiTheme.px(6)
+    _panel.add_theme_stylebox_override("panel", sb)
+    _panel.clip_contents = true
+    _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    add_child(_panel)
+    var h := HBoxContainer.new()
+    h.add_theme_constant_override("separation", UiTheme.px(16))
+    _panel.add_child(h)
+    _card = PanelContainer.new()
+    var cs := StyleBoxFlat.new()
+    cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
+    cs.border_color = Color(0.78, 0.62, 0.30)
+    cs.set_border_width_all(2)
+    cs.set_corner_radius_all(5)
+    cs.content_margin_left = UiTheme.px(12)
+    cs.content_margin_right = UiTheme.px(12)
+    cs.content_margin_top = UiTheme.px(2)
+    cs.content_margin_bottom = UiTheme.px(4)
+    _card.add_theme_stylebox_override("panel", cs)
+    _card.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+    var cv := VBoxContainer.new()
+    cv.add_theme_constant_override("separation", 0)
+    _card.add_child(cv)
+    _card_title = Label.new()
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(34))
+    _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+    _card_title.add_theme_constant_override("outline_size", 5)
+    cv.add_child(_card_title)
+    _card_sub = Label.new()
+    _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+    _card_sub.max_lines_visible = 2
+    _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(500), 0)
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(24))
+    _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
+    cv.add_child(_card_sub)
+    _card.visible = false
+    h.add_child(_card)
+    _box = VBoxContainer.new()
+    _box.add_theme_constant_override("separation", 1)
+    _box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _box.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+    h.add_child(_box)
+    _panel.visible = false
+    _place_chrome()
+
+## the panel fills the chrome bar (a small margin), short of the right end the clock holds
+func _place_chrome() -> void:
+    var r := HudDock.chrome(get_parent())
+    if r.size.y <= 0.0 or _panel == null:
+        return
+    var m := float(UiTheme.px(6))
+    _panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+    _panel.custom_minimum_size = Vector2.ZERO
+    _panel.position = r.position + Vector2(m, m)
+    _panel.size = Vector2(r.size.x - 2.0 * m - HudDock.reserve_right, r.size.y - 2.0 * m)
+
+## how many one-line entries fit the bar at the L15 size (2-3)
+func _chrome_lines() -> int:
+    var r := HudDock.chrome(get_parent())
+    var fs := UiTheme.px(28)
+    var lh := ThemeDB.fallback_font.get_height(fs) + 1.0
+    var inner := r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
+    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 3)
+
 func _build() -> void:
+    if _chrome:
+        _build_chrome()
+        return
     _panel = PanelContainer.new()
     var sb := UiTheme.parchment()
     _panel.add_theme_stylebox_override("panel", sb)
@@ -109,7 +187,6 @@ func card(title: String, sub: String, col: Color) -> void:
     _card_t = CARD_SECS
     _rebuild()
 
-var _grid := false
 
 func card_showing() -> bool:
     return _card != null and _card.visible
@@ -120,11 +197,13 @@ func _process(delta: float) -> void:
         if _card_t <= 0.0:
             _card.visible = false
             _rebuild()
-    # L17: the spotlight grid (root 3D off) - the Chronicle drops to 3 lines so it does not bury the subs pane
-    var g := get_viewport() != null and get_viewport().disable_3d
-    if g != _grid:
-        _grid = g
-        _rebuild()
+    # L21: the spotlight panes up -> the Chronicle moves to the chrome bar (and back)
+    var g := HudDock.split(get_parent())
+    if g != _chrome:
+        _chrome = g
+        restyle()
+    if _chrome:
+        _place_chrome()
     if source.size() != _seen:
         _seen = source.size()
         _rebuild()
@@ -140,8 +219,8 @@ func _rebuild() -> void:
     # with a card up, fewer lines, so the Chronicle does not climb into the party frames
     # L15: bigger text, fewer lines (5 at 100%, 4 at 125%, 3 at 150%)
     var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
-    if _grid:
-        show = mini(show, 3)
+    if _chrome:
+        show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
     var lines := source.slice(maxi(0, source.size() - maxi(1, show - 2 if card_showing() else show)))
     while _ages.size() < source.size():
         _ages.append(0.0)
@@ -154,6 +233,13 @@ func _rebuild() -> void:
         lb.max_lines_visible = 2
         lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
         lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
+        if _chrome:
+            # the bar: one line an entry, the full width
+            lb.autowrap_mode = TextServer.AUTOWRAP_OFF
+            lb.max_lines_visible = 1
+            lb.clip_text = true
+            lb.custom_minimum_size = Vector2.ZERO
+            lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         lb.add_theme_font_size_override("font_size", UiTheme.px(28))
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())

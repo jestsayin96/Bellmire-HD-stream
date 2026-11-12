@@ -214,6 +214,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       real director shots - town wide, tour, hero follow, fight, raid - rendered and looked at, not with a
       fixed test camera. The L17 spotlight panes each get their own camera, so they must share this rule.
       DONE (Cycle 79): every shot tilts / swings round its subject until the near lower frame is clear of roofs, props, walls and towers (one rule, the panes share it); pull-in never closer than 6 m; real director shots of all six types 0-2% blocked (raw up to 100%); L20_TEST OK.
+- [x] L21. THE INTERFACE over the spotlight panes (Mr. E, Nov 11). In the grid the HUD was laid out for one full-screen view:
+      the boss card across all four seams, the Chronicle over the subs pane, the delvers panel in the director pane's
+      corner, floating text everywhere, name tags in mush. THE RULE, in code: with more than one view up, no HUD
+      element crosses a seam or sits over a pane it does not belong to - docked inside one pane, or in the chrome bar.
+      Floating text clamped to its pane and off in quarter panes; name tags fixed in panes; full screen unchanged.
+      Test that fails on the old build, then a 1080p render shrunk to 854x480 and looked at.
+      DONE (Cycle 81): panes over the top 85%, the Chronicle + clock in a bottom chrome bar, boss card + party frames + unit frame docked in the pane showing them (scripts/hud_dock.gd), 3D text on render layers with a cull mask per pane, one name tag per lane pane; L21_TEST 32/32 (15 failed before).
+      ALSO: !guild drops the "roll" alias (bare !roll is fightoverlay's dice, now silent here); L14_TEST OK.
+- [ ] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
+- [ ] L23. The director should cut away from a hero a lane already holds (or the split is wasted).
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:

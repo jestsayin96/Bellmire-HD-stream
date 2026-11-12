@@ -1,1 +1,1 @@
-IDLE 2026-11-11 22:51 - overlay ignore list done (Cycle 80); waiting on Mr. E (T1 / opt-out / L17 grid fixes)
+IDLE 2026-11-11 23:42 - L21 done (Cycle 81), pushed; next L22 (close heroes, same view) / L23 (director cuts away from a lane's hero)

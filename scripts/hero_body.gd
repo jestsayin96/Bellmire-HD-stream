@@ -210,6 +210,7 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
     if fr == _laid_frame or cam == null:
         return
     _laid_frame = fr
+    var quarter := Spotlight.mode == "grid"
     var items: Array = []
     for o in tree.get_nodes_in_group("viewer_heroes"):
         var hb := o as HeroBody
@@ -226,14 +227,15 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
         if not lb.has_meta("px0"):
             lb.set_meta("px0", lb.pixel_size)
         var cd := cam.global_position.distance_to(anchor)
-        # L17: while the spotlight panes carry the view (root 3D off) the lane cameras sit ~11 m off -
-        # every name (in front of the director or not) keeps the size a close camera gives it,
-        # and the main camera's on-screen declutter means nothing in the panes
-        var grid := cam.get_viewport() != null and cam.get_viewport().disable_3d
-        lb.pixel_size = float(lb.get_meta("px0")) * (0.55 if grid else clampf(cd / 16.0, 0.4, 3.0))
+        # L21: the heroes' names are laid out on the DIRECTOR's screen - the director pane copies
+        # this camera, so the layout holds there; the lane panes never draw these tags (they
+        # show their own hero's tag, HudDock / Spotlight). In the 2x2 the director pane is a
+        # quarter of the screen: names half again bigger, and a name with no room is hidden.
+        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.4, 3.0) * (1.5 if quarter else 1.0)
         if not hb.npc:
             lb.pixel_size *= HeroBody.glow(lb, ChatCmd.since_cmd(hb.user_id))
-        if grid or cam.is_position_behind(anchor):
+        lb.transparency = 0.0
+        if cam.is_position_behind(anchor):
             lb.offset.y = 0.0
             continue
         var sp := cam.unproject_position(anchor)
@@ -265,6 +267,9 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
                 break
             lift += hit + lh * 0.12
             tries += 1
-        placed.append([sp.x, hw, sp.y - lift - bh, sp.y - lift])
         var lbl: Label3D = it[4]
+        if quarter and (tries >= 40 or lift > bh * 1.6):
+            lbl.transparency = 1.0          # no room in a quarter pane: hidden, not stacked into a tower
+            continue
+        placed.append([sp.x, hw, sp.y - lift - bh, sp.y - lift])
         lbl.offset.y = lift / lh * float(lbl.font_size) * 1.15

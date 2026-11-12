@@ -274,16 +274,18 @@ func _relayout(force := false) -> void:
 		"off":
 			pass
 		"grid":
-			rects["director"] = Rect2(0, 0, 0.5, 0.5)
-			var spots := {"bits": Rect2(0.5, 0, 0.5, 0.5), "subs": Rect2(0, 0.5, 0.5, 0.5), "points": Rect2(0.5, 0.5, 0.5, 0.5)}
+			var a := 1.0 - HudDock.CHROME      # L21: the bottom is the chrome bar (the Chronicle), no pane on it
+			rects["director"] = Rect2(0, 0, 0.5, 0.5 * a)
+			var spots := {"bits": Rect2(0.5, 0, 0.5, 0.5 * a), "subs": Rect2(0, 0.5 * a, 0.5, 0.5 * a), "points": Rect2(0.5, 0.5 * a, 0.5, 0.5 * a)}
 			for l in LANES:
 				if b.has(l):
 					rects[l] = spots[l]
 				else:
 					rects["wide"] = spots[l]
 		_:
-			rects["director"] = Rect2(0, 0, 0.5, 1.0)
-			rects[b[0]] = Rect2(0.5, 0, 0.5, 1.0)
+			rects["director"] = Rect2(0, 0, 0.5, 1.0 - HudDock.CHROME)
+			rects[b[0]] = Rect2(0.5, 0, 0.5, 1.0 - HudDock.CHROME)
+	_rects = rects
 	if lay == _layout and not force:
 		_labels()
 		return
@@ -312,7 +314,80 @@ func _relayout(force := false) -> void:
 			box.offset_bottom = 0
 			if k != "director":
 				_snap(k)
+	_rects = rects
+	mode = "off" if lay == "off" else ("grid" if lay.begins_with("grid") else "pair")
+	_masks()
 	_labels()
+
+## ---------------------------------------------------------------- L21: the panes' own rules
+
+static var mode := "off"           # "off" / "pair" / "grid" (HeroBody's name layout reads it)
+var _rects := {}                    # pane -> Rect2 in 0..1 of the screen
+
+func mode_now() -> String:
+	return "off" if _layout == "off" or _layout == "" else ("grid" if _layout.begins_with("grid") else "pair")
+
+## a pane's rect on screen in px (empty when it is not up)
+func pane_rect(k: String) -> Rect2:
+	if not _rects.has(k):
+		return Rect2()
+	var r: Rect2 = _rects[k]
+	var s := HudDock.screen()
+	return Rect2(r.position * s, r.size * s)
+
+## what each pane's camera draws of the world's text (HudDock's layers):
+##   the director   everything, but in a quarter no floating text, no townsfolk or monster names
+##                  (only the heroes' names, laid out by HeroBody on its screen)
+##   a lane         only its own hero's tag; floating text too when it is half the screen
+##   the wide view  no text at all
+func _masks() -> void:
+	var quarter := mode == "grid"
+	for k in _panes:
+		var cam: Camera3D = _panes[k]["cam"]
+		var m := HudDock.ALL & ~HudDock.LANES_MASK
+		if k == "director":
+			if quarter:
+				m &= ~(HudDock.L_FLOAT | HudDock.L_FTAG | HudDock.L_MTAG)
+		elif k == "wide":
+			m &= ~HudDock.TEXT_MASK
+		else:
+			m = (HudDock.ALL & ~HudDock.TEXT_MASK) | int(HudDock.L_LANE[k]) | (0 if quarter else HudDock.L_FLOAT)
+			var tag = _panes[k].get("tag")
+			if tag != null and is_instance_valid(tag) and not _rects.has(k):
+				(tag as Label3D).visible = false
+		cam.cull_mask = m
+
+## a lane's own name over its hero: only that lane's camera draws it, at a size read on a phone
+func _lane_tag(l: String, real: float) -> void:
+	var p: Dictionary = _panes[l]
+	var tag: Label3D = p.get("tag")
+	if tag == null or not is_instance_valid(tag):
+		tag = Label3D.new()
+		tag.set_meta("lane_tag", true)
+		tag.layers = HudDock.L_LANE[l]
+		tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		tag.fixed_size = true
+		tag.no_depth_test = true
+		tag.render_priority = 10
+		tag.font_size = 48
+		tag.outline_size = 14
+		tag.outline_modulate = Color(0, 0, 0, 0.95)
+		tag.modulate = Color(1.0, 0.86, 0.40)
+		tag.top_level = true
+		town.add_child(tag)
+		p["tag"] = tag
+	var t := _target(l)
+	var box: Control = p["box"]
+	tag.visible = t != null and box.visible
+	if not tag.visible:
+		return
+	var h := _hero(String(lanes[l]["cur"].get("uid", "")))
+	tag.text = String(h.get("name", ""))
+	tag.global_position = t.global_position + Vector3(0, 2.6, 0)
+	# fixed size: glyphs ~26 px on the 1080p stream whatever the pane's height
+	var ph := maxf(64.0, pane_rect(l).size.y)
+	var cam: Camera3D = p["cam"]
+	tag.pixel_size = float(UiTheme.px(26)) * 2.0 * tan(deg_to_rad(cam.fov) * 0.5) / (float(tag.font_size) * ph)
 
 func _labels() -> void:
 	for l in LANES:
@@ -324,6 +399,13 @@ func _labels() -> void:
 			continue
 		var h := _hero(String(cur["uid"]))
 		lb.text = "%s the %s %s - %s" % [h.get("name", "?"), String(h.get("species", "")).capitalize(), String(h.get("class", "")).capitalize(), cur["reason"]]
+		# L21: the chip never runs past its own pane (a long name is cut with an ellipsis)
+		lb.clip_text = true
+		lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		var fs := lb.get_theme_font_size("font_size")
+		var want := lb.get_theme_font("font").get_string_size(lb.text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x + float(UiTheme.px(26))
+		var room := pane_rect(l).size.x - float(UiTheme.px(20))
+		lb.size = Vector2(minf(want, maxf(40.0, room)), lb.get_combined_minimum_size().y)
 
 func _target(k: String) -> Node3D:
 	if k in LANES:
@@ -400,6 +482,7 @@ func _follow(real: float) -> void:
 		dc.far = main.far
 	for l in LANES:
 		var p: Dictionary = _panes[l]
+		_lane_tag(l, real)
 		if not (p["box"] as Control).visible:
 			continue
 		var cur: Dictionary = lanes[l]["cur"]

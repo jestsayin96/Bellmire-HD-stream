@@ -23,14 +23,7 @@ var _v: VBoxContainer
 func setup(t: Node3D) -> void:
 	town = t
 	UiTheme.watch(self)
-	# the bar keeps its 100% width at any UI scale (only its text grows): it must clear the side panels
-	var w := int(round(float(W) * UiTheme.res_k()))
-	anchor_left = 0.5
-	anchor_right = 0.5
-	offset_left = -w / 2
-	offset_right = w / 2
-	offset_top = UiTheme.px(140)          # under the key help (H), clear of it
-	custom_minimum_size = Vector2(w, 0)
+	var w := _place_full()
 	# L16: on a parchment plate like every other panel; the lord's own colour is its edge
 	_plate = PanelContainer.new()
 	_plate_sb = UiTheme.parchment(4)
@@ -79,10 +72,47 @@ func setup(t: Node3D) -> void:
 	_v.add_child(_sub)
 	refresh()
 
+## full screen: top centre, under the key help (H); returns the width
+func _place_full() -> int:
+	# the bar keeps its 100% width at any UI scale (only its text grows): it must clear the side panels
+	var w := int(round(float(W) * UiTheme.res_k()))
+	HudDock.unput(self)
+	anchor_left = 0.5
+	anchor_right = 0.5
+	anchor_top = 0.0
+	anchor_bottom = 0.0
+	offset_left = -w / 2
+	offset_right = w / 2
+	offset_top = UiTheme.px(140)          # under the key help (H), clear of it
+	offset_bottom = offset_top
+	custom_minimum_size = Vector2(w, 0)
+	return w
+
+## L21: with the spotlight panes up, the card docks to the top edge INSIDE the pane showing
+## its fight (scaled to that pane), under a lane's label chip; no pane shows it -> hidden.
+## Never centre screen, never across a seam.
+var _docked := ""
+func _dock() -> void:
+	if town == null:
+		return
+	if not HudDock.split(town):
+		if _docked != "":
+			_docked = ""
+			_place_full()
+		return
+	var k := HudDock.pane_for_delve(town, delve) if delve else ""
+	if k == "":
+		visible = false
+		_docked = "none"
+		return
+	_docked = k
+	HudDock.put(self, HudDock.pane(town, k), HudDock.pane_k(town, k), "tc", float(UiTheme.px(54)) if k != "director" else 0.0)
+
 ## L15: F11 changed the UI scale - build again
 func restyle() -> void:
 	for c in get_children():
 		c.free()
+	_docked = ""
 	setup(town)
 
 func _label(text: String, col: Color, size: int) -> Label:
@@ -100,6 +130,8 @@ func _process(delta: float) -> void:
 	if _t <= 0.0:
 		_t = 0.15
 		refresh()
+	if visible or _docked != "":
+		_dock()
 
 ## the lord to show: a viewers' party's first, then the town's band's
 func find_lord() -> Array:

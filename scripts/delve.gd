@@ -1385,7 +1385,7 @@ func _float_text(m: Dictionary, text: String, col: Color, size := 84, lift := 2.
 	var lb := Label3D.new()
 	lb.text = text
 	lb.font_size = size
-	lb.pixel_size = 0.01
+	lb.pixel_size = 0.006 if HudDock.split(town) else 0.01      # L21: smaller in a close side-by-side pane
 	lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	lb.no_depth_test = true
 	lb.outline_size = 22
@@ -1595,7 +1595,9 @@ func _tags_tick(delta: float) -> void:
 		# L15: keep the tag readable from far off (same rule as the names)
 		var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
 		if cam:
-			lb.pixel_size = 0.01 * clampf(cam.global_position.distance_to(lb.global_position) / 22.0, 0.4, 2.5)
+			# L21: sized for the director's camera at full screen; with panes up the side-by-side lane camera is
+			# ~11 m off and would draw it huge - a fixed close size then (quarter panes do not draw it at all)
+			lb.pixel_size = 0.005 if HudDock.split(town) else 0.01 * clampf(cam.global_position.distance_to(lb.global_position) / 22.0, 0.4, 2.5)
 
 ## ---- L19: more of the original's voice (data/lore_lines.json)
 static var _lore: Dictionary = {}

@@ -1023,3 +1023,22 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - tools/_l15_test.gd (headless, new): a Chronicle line 28 px and a roll line 26 px at 1080p; px() maths; F11
   100 -> 125 -> 150 -> 100; the Chronicle restyles bigger at 150%. L15_TEST OK.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L12 OK, BOSS_TEST OK.
+
+
+## Cycle 74 - L16, one theme for every panel (laptop, 2026-11-11)
+- UiTheme now carries the house style: parchment (0.93, 0.86, 0.69) with an inked edge, ink / soft ink / red-brown
+  ink text, the JestSayin teal as the one accent (a teal diamond before every title and a teal rule under it, the
+  chat box's focus edge), viewers' names in deep gold and the town's band in slate, inked HP bars (green / amber /
+  red), and TITLE / BODY / SMALL sizes. Nothing from the old game's interface.
+- Every panel built from it: the Chronicle and the Guild Roll (house titles); the party frames (parchment block,
+  house title "Delvers · floor 5", oil in ink, name and numbers riding on the inked bar, states under it, darkened
+  to read on parchment); the boss bar on a parchment plate whose edge is the lord's own colour, its name in that
+  colour inked dark; the unit frame on parchment; the key help and the speed as parchment chips; the chat box a
+  parchment chip with a teal focus edge, moved bottom-right, clear of the Chronicle.
+- First render: the party frames with a bar under each name grew into the Chronicle's title - back to the compact
+  row (name on the bar); the chat box sat on the Chronicle - moved.
+- tools/_l16_test.gd (headless, new): the Chronicle, the roll and the boss bar on the house parchment; titles carry
+  the teal; the unit frame, chips, chat and party frames build from the theme. L16_TEST OK. tools/_l16_shot.gd:
+  renders/cycles/20261111_l16 - looked at the whole interface at 1080p: one design, nothing overlapping.
+- _l15_test reads the roll's first row (its title is a themed block now). Checks: parse 0 script errors, _delve_test
+  ENDED all home, _offfloor 0 of 431, TWITCH_PARSE OK, L15 OK, BOSS_TEST OK.

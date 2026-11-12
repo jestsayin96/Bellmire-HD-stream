@@ -135,9 +135,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       100/125/150%). Test: render at 1920x1080, then downscale to 854x480 (what a phone sees) and LOOK - every
       name and Chronicle line must still be readable. Fix until it is.
       DONE (Cycle 73): UiTheme sizes for 1080p (Chronicle 28 px, roll 26, frames 28, boss bar 44/26), F11 100/125/150, names grow with distance; phone 854x480 frames read; L15_TEST OK.
-- [ ] L16. GUI/UI polish to an RTS/WoW standard: one theme for every panel (parchment + ink, the JestSayin teal
+- [x] L16. GUI/UI polish to an RTS/WoW standard: one theme for every panel (parchment + ink, the JestSayin teal
       as the accent), consistent fonts, icons, frames, spacing; the unit frame, party frames, guild roll,
       chronicle, boss bar, help, chat box all match. Nothing from the old game's interface.
+      DONE (Cycle 74): one house theme in UiTheme (parchment, ink, teal titles and rules, inked bars, chips) on every panel; L16_TEST OK.
 - [ ] L19. More lore: from the reference + the Lore Bible PDF - more Chronicle lines, NPC barks, floor-origin
       text, item and potion flavour, boss intros, town-level announcements; all in the original's voice, never
       contradicting it, never a floor count.

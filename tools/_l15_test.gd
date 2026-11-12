@@ -37,7 +37,7 @@ func _process(_d: float) -> bool:
 			line = c
 	_ok(line != null and float(_fs(line)) / k >= 27.5, "a Chronicle line is %.0f px at 1080p" % (float(_fs(line)) / k))
 	var roll: Array = _board._list.get_children().filter(func(c): return c is Label and not c.is_queued_for_deletion())
-	_ok(roll.size() >= 2 and float(_fs(roll[1])) / k >= 25.5, "a Guild Roll line is %.0f px at 1080p" % (float(_fs(roll[1])) / k))
+	_ok(roll.size() >= 1 and float(_fs(roll[0])) / k >= 25.5, "a Guild Roll line is %.0f px at 1080p" % (float(_fs(roll[0])) / k))
 	_ok(UiTheme.px(28) == int(round(28.0 * k)), "px() is 1080p pixels times the window")
 	var before := _fs(line)
 	_ok(is_equal_approx(UiTheme.cycle(), 1.25) and is_equal_approx(UiTheme.cycle(), 1.5) and is_equal_approx(UiTheme.cycle(), 1.0), "F11 cycles 100 -> 125 -> 150 -> 100%")

@@ -974,46 +974,183 @@ function showProblem(msg) {
   if (st) { st.className = "status bad"; st.textContent = "Showing nothing rather than guessing."; }
 }
 
-// ---------------------------------------------------------------- Twitch chat (H5)
-// Opt-in: the iframe is created ONLY when the viewer clicks. The channel is a
-// hard-coded constant and the parent is THIS page's own hostname - no snapshot
-// value is ever used to build the URL (docs/HUB_SECURITY.md). The page stays
-// read-only; the embed is a separate, cross-origin browsing context.
-const TWITCH_CHANNEL = "jestsayin96";    // Mr. E's channel - a constant, never snapshot data
-function loadTwitchChat() {
-  const box = $("chatBox");
-  if (!box || box.querySelector("iframe")) return;
-  const host = location.hostname || "localhost";
-  const frame = document.createElement("iframe");
-  frame.id = "twitchChatFrame";
-  frame.title = "Twitch chat for " + TWITCH_CHANNEL;
-  frame.setAttribute("loading", "lazy");
-  // official chat embed: https://www.twitch.tv/embed/<channel>/chat?parent=<host>
-  frame.src = "https://www.twitch.tv/embed/" + TWITCH_CHANNEL + "/chat?parent=" +
-              encodeURIComponent(host) + "&darkpopout";
-  box.replaceChildren(frame);
+// ---------------------------------------------------------------- Guild chat (H8)
+// Twitch chat, NATIVELY - no iframe. The old embed (H5) was broken for any viewer
+// whose browser blocks third-party cookies (Brave, Safari, strict Chrome - most of
+// them now): Twitch's page inside the frame could never keep its login, so the
+// input stayed dead. Mr. E hit this live on Brave, Nov 12. So the hub now speaks
+// Twitch's own chat protocol (IRC over WebSocket) itself:
+//   READ - anonymously, for everyone, no login and no cookies at all.
+//   SEND - with the viewer's own sign-in token (H6), whose grant now carries the
+//          two chat scopes. The message goes to Twitch; still nothing to OUR backend.
+// Opt-in is kept: nothing contacts Twitch until the viewer opens the chat.
+// SECURITY (docs/HUB_SECURITY.md, H8): every incoming line is attacker-controlled
+// viewer text and reaches the DOM only through el()/textContent. No wire value is
+// ever used as a URL, style, selector or markup; name colours are a fixed page
+// palette chosen by hash. Outgoing text strips CR/LF and control characters so a
+// message can never smuggle an IRC command. The socket host is a hard-coded
+// constant. Messages render as plain text - no emote images, by design.
+const TWITCH_CHANNEL = "jestsayin96";          // Mr. E's channel - a constant, never a runtime value
+const TW_IRC = "wss://irc-ws.chat.twitch.tv:443";   // constant; never from any runtime value
+const CHAT_MAX = 150;                               // lines kept on screen
+let chatWS = null, chatTries = 0, chatTimer = null, chatOpened = false, chatLastSend = 0;
+
+function ctrlStrip(s) { return String(s ?? "").replace(/[\u0000-\u001f\u007f]/g, " ").trim(); }
+function chatStatus(text, cls) {
+  const st = $("chatStatus"); if (!st) return;
+  st.className = "chatstatus" + (cls ? " " + cls : "");
+  st.textContent = text;                            // page-authored or stripped wire text; textContent regardless
+}
+function chatColor(name) {                          // fixed palette by hash - never a wire colour value
+  let h = 0; for (const c of String(name)) h = (h * 31 + c.codePointAt(0)) >>> 0;
+  return "cc" + (h % 6);
+}
+function chatLine(name, text, cls, mid, user) {
+  const list = $("chatList"); if (!list) return;
+  const li = el("li", "cl" + (cls ? " " + cls : ""));
+  // data-* values are inert attribute text (never parsed as markup); lookups below
+  // iterate and compare strings - no selector is ever built from wire data.
+  if (mid) li.dataset.mid = mid;
+  // moderation (CLEARCHAT) names the LOGIN, so that - not the display-name - is the match key
+  if (user) li.dataset.user = String(user).toLowerCase();
+  if (name) li.append(el("b", "cn " + chatColor(name), name));
+  li.append(el("span", "ct", text));
+  const pinned = list.scrollHeight - list.scrollTop - list.clientHeight < 48;
+  list.append(li);
+  while (list.childElementCount > CHAT_MAX) list.firstElementChild.remove();
+  if (pinned) list.scrollTop = list.scrollHeight;
+}
+function parseIrcTags(s) {
+  const out = {};
+  for (const kv of s.split(";")) {
+    const eq = kv.indexOf("="); if (eq === -1) { out[kv] = ""; continue; }
+    out[kv.slice(0, eq)] = kv.slice(eq + 1).replace(/\\(.)/g, (_, c) =>
+      c === "s" ? " " : c === "n" ? "\n" : c === "r" ? "\r" : c === ":" ? ";" : c);
+  }
+  return out;
+}
+function chatHandle(raw) {
+  if (raw.startsWith("PING")) { if (chatWS && chatWS.readyState === 1) chatWS.send("PONG :tmi.twitch.tv"); return; }
+  let rest = raw, tags = {};
+  if (rest.startsWith("@")) { const sp = rest.indexOf(" "); if (sp === -1) return; tags = parseIrcTags(rest.slice(1, sp)); rest = rest.slice(sp + 1); }
+  let prefix = "";
+  if (rest.startsWith(":")) { const sp = rest.indexOf(" "); if (sp === -1) return; prefix = rest.slice(1, sp); rest = rest.slice(sp + 1); }
+  const sp = rest.indexOf(" ");
+  const cmd = sp === -1 ? rest : rest.slice(0, sp);
+  const paramsRaw = sp === -1 ? "" : rest.slice(sp + 1);
+  let trailing = "";
+  if (paramsRaw.startsWith(":")) trailing = paramsRaw.slice(1);
+  else { const c = paramsRaw.indexOf(" :"); if (c !== -1) trailing = paramsRaw.slice(c + 2); }
+  const nick = prefix.split("!")[0];
+  if (cmd === "PRIVMSG") {
+    const action = /^\u0001ACTION (.*)\u0001$/.exec(trailing);     // "/me does a thing"
+    const text = ctrlStrip(action ? action[1] : trailing);
+    const name = ctrlStrip(tags["display-name"] || nick) || "someone";
+    if (text) chatLine(name, text, action ? "sys" : "", ctrlStrip(tags.id || ""), nick);
+  } else if (cmd === "NOTICE") {
+    const t = ctrlStrip(trailing); if (t) chatLine("", t, "sys");   // e.g. "You are sending messages too quickly"
+  } else if (cmd === "USERNOTICE") {
+    const sm = ctrlStrip(tags["system-msg"] || ""); if (sm) chatLine("", sm, "sys");
+  } else if (cmd === "CLEARCHAT") {
+    const list = $("chatList"); if (!list) return;
+    const who = ctrlStrip(trailing).toLowerCase();
+    if (who) { for (const li of [...list.children]) if (li.dataset.user === who) li.remove(); }
+    else list.replaceChildren();
+  } else if (cmd === "CLEARMSG") {
+    const id = ctrlStrip(tags["target-msg-id"] || ""); const list = $("chatList");
+    if (id && list) for (const li of [...list.children]) if (li.dataset.mid === id) li.remove();
+  } else if (cmd === "RECONNECT") { chatConnect(); }
+}
+function chatInputState() {
+  const inp = $("chatInput"), btn = $("chatSend"); if (!inp || !btn) return;
+  const authed = !!(twToken && twLogin);
+  const up = chatWS && chatWS.readyState === 1;
+  inp.disabled = btn.disabled = !(authed && up);
+  inp.placeholder = authed ? (up ? "Say something to the town…" : "Connecting…")
+                           : "Sign in with Twitch (under Heroes) to talk — reading needs nothing.";
+}
+function chatConnect() {
+  if (MOCK === "chat") return;                       // the mock feeds chatHandle directly
+  if (chatWS) { try { chatWS.onclose = null; chatWS.close(); } catch (e) {} chatWS = null; }
+  const authed = !!(twToken && twLogin);
+  let ws;
+  try { ws = new WebSocket(TW_IRC); } catch (e) { chatRetry(); return; }
+  chatWS = ws;
+  chatStatus("Reaching the guild hall…");
+  ws.onopen = () => {
+    chatTries = 0;
+    ws.send("CAP REQ :twitch.tv/tags twitch.tv/commands");
+    if (authed) { ws.send("PASS oauth:" + twToken); ws.send("NICK " + twLogin); }
+    else ws.send("NICK justinfan" + (10000 + Math.floor(Math.random() * 80000)));
+    ws.send("JOIN #" + TWITCH_CHANNEL);
+    chatStatus(authed ? "In the hall as " + twLogin + "." : "Reading the channel's chat. Sign in under Heroes to talk.", authed ? "ok" : "");
+    chatInputState();
+  };
+  ws.onmessage = (ev) => { for (const line of String(ev.data).split("\r\n")) if (line) chatHandle(line); };
+  ws.onclose = () => { chatWS = null; chatInputState(); chatRetry(); };
+}
+function chatRetry() {
+  if (!chatOpened) return;
+  clearTimeout(chatTimer);
+  const wait = Math.min(30000, 2000 * Math.pow(2, Math.min(chatTries++, 4)));
+  chatStatus("Chat lost its footing — trying again shortly.", "bad");
+  chatTimer = setTimeout(chatConnect, wait);
+}
+function chatSend() {
+  const inp = $("chatInput"); if (!inp) return;
+  const text = ctrlStrip(inp.value).slice(0, 450);   // CR/LF stripped: no IRC command smuggling
+  if (!text) return;
+  if (!(twToken && twLogin)) { chatStatus("Sign in with Twitch (under Heroes) to talk here.", "warn"); return; }
+  if (!chatWS || chatWS.readyState !== 1) { chatStatus("Not connected just now — one moment.", "warn"); return; }
+  const now = Date.now();
+  if (now - chatLastSend < 1200) { chatStatus("Easy — one message a breath.", "warn"); return; }
+  chatLastSend = now;
+  chatWS.send("PRIVMSG #" + TWITCH_CHANNEL + " :" + text);
+  chatLine(twLogin, text, "me", "", twLogin);        // Twitch does not echo your own line back
+  inp.value = "";
+}
+function openGuildChat() {
+  if (chatOpened) return;
+  chatOpened = true;
+  const btn = $("chatLoad"); if (btn) btn.classList.add("hide");
+  const panel = $("chatPanel"); if (panel) panel.classList.remove("hide");
+  if (MOCK === "chat") {                             // local check: the hostile name must render as text
+    const H = "<img src=x onerror=alert(1)>";
+    const Htag = H.replace(/ /g, "\\s");          // IRCv3 tag escaping, as the real wire would carry it
+    chatHandle("@id=m1;display-name=Brum :brum!brum@brum.tmi.twitch.tv PRIVMSG #" + TWITCH_CHANNEL + " :A health to the guild!");
+    chatHandle("@id=m2;display-name=" + Htag + " :evil!evil@evil.tmi.twitch.tv PRIVMSG #" + TWITCH_CHANNEL + " :" + H);
+    chatHandle(":tmi.twitch.tv NOTICE #" + TWITCH_CHANNEL + " :A notice from the hall, rendered as text.");
+    chatStatus("Mock chat — nothing is connected.", "");
+    chatInputState();
+    return;
+  }
+  chatConnect();
 }
 (function () {
-  const btn = $("chatLoad");
-  if (btn) btn.addEventListener("click", loadTwitchChat);
+  const btn = $("chatLoad"); if (btn) btn.addEventListener("click", openGuildChat);
+  const send = $("chatSend"); if (send) send.addEventListener("click", chatSend);
+  const inp = $("chatInput");
+  if (inp) inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); chatSend(); } });
 })();
 
 // ---------------------------------------------------------------- Twitch sign-in (H6)
-// Device-code OAuth. A viewer signs in so the page can spotlight THEIR hero instead of
-// making them scroll. Strictly read-only: the token is the viewer's own, used only
-// client-side to read their own Twitch login and match a hero. It is held in memory
-// only (never localStorage), never sent to our backend, never used to write anything.
+// Device-code OAuth. A viewer signs in so the page can spotlight THEIR hero and, if
+// they choose, talk in the guild chat (H8) as themselves. The token is the viewer's
+// own, held in memory only (never localStorage), never sent to our backend, and used
+// for exactly two things: reading their own Twitch login, and sending THEIR chat
+// lines to Twitch when THEY press send. No write to our backend, ever.
 //
 // LIVE: TWITCH_CLIENT_ID is Mr. E's registered public client id (Bellmire Hub Login),
 // baked in as a const and not overridable at runtime. Clicking the button runs the
 // device grant below (per the Twitch docs); nothing contacts Twitch before the click.
 // The empty-id branch in twitchSignIn() is kept as a defensive fallback only.
-const TWITCH_CLIENT_ID = "mpblygfdxvdpnr0dvi3andjlvb4y0r";  // Bellmire Hub Login: PUBLIC client, device-code grant, no scopes. Not overridable at runtime.
+const TWITCH_CLIENT_ID = "mpblygfdxvdpnr0dvi3andjlvb4y0r";  // Bellmire Hub Login: PUBLIC client, device-code grant, chat scopes only. Not overridable at runtime.
 const TW_DEVICE = "https://id.twitch.tv/oauth2/device";
 const TW_TOKEN = "https://id.twitch.tv/oauth2/token";
 const TW_USERS = "https://api.twitch.tv/helix/users";
-const TW_SCOPES = "";                            // read-only: we need only the user's login; no scopes
+const TW_SCOPES = "chat:read chat:edit";         // the guild chat (H8) and nothing more; was "" before H8
 let twToken = null;                              // in memory only, this session only
+let twLogin = null;                              // the signed-in viewer's own login, memory only
 let twPolling = false;
 
 function signinSay(html, cls) {
@@ -1084,7 +1221,9 @@ async function spotlightMe() {
     if (!res.ok) throw new Error("users " + res.status);
     const j = await res.json();
     const login = String((j.data && j.data[0] && j.data[0].login) || "").toLowerCase();
+    twLogin = login || null;
     highlightMyHero(login);
+    if (chatOpened) chatConnect();                 // reconnect the guild chat with their own voice
   } catch (e) {
     signinSay("Signed in, but couldn't read your Twitch name just now.", "bad");
   }

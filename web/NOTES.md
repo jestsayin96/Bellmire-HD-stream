@@ -405,3 +405,43 @@ Already-built hub features light up with no page change the day the publisher se
 - `max_hp` (or hp_max/maxhp) per hero -> real HP depletion bars, coloured by ratio
 - `xp_next` per hero -> real XP-to-next-level bars
 - `raids_turned` (or raids) in the town block -> a "Raids turned back" pill on the town strip
+
+
+## H8 (Nov 12, 2026) - the guild chat goes native; the iframe embed is retired
+
+Mr. E opened the live page on Brave and the embed's input was dead: the Twitch page inside the
+iframe cannot keep its login anywhere third-party cookies are blocked, which is Brave and Safari
+by default and Chrome increasingly. "We should not need another pop up for chat." He chose the
+full replacement over keeping the embed as a fallback.
+
+So the hub now speaks Twitch chat's own protocol (IRC over WebSocket, wss://irc-ws.chat.twitch.tv)
+itself. Reading is anonymous - works for every viewer instantly, no login, no cookies. Talking
+reuses the H6 sign-in, whose grant now carries chat:read chat:edit; the viewer's line goes to
+Twitch as themselves. Still opt-in (nothing contacts Twitch until "Open the guild chat" is
+clicked), still zero writes to our backend. Full security reasoning + the CSP delta (frame-src
+REMOVED, one wss host added to connect-src) in docs/HUB_SECURITY.md, H8 - flagged for review.
+
+Design choices and their reasons:
+- Plain text only, no emote images or badges: an emote would mean building an <img> src from wire
+  data, which the security rules forbid, and a third-party image host besides. The trade was put
+  to Mr. E and accepted.
+- Name colours from a fixed six-colour page palette by hash - never the wire's colour tag, so no
+  attacker-influenced style, and the palette stays the page's own.
+- CLEARCHAT matches on LOGIN (not display-name - a real bug the fake-socket test caught before it
+  shipped: a banned user's lines would not have cleared). CLEARMSG, NOTICE, USERNOTICE, PING and
+  RECONNECT are all handled; CHAT_MAX 150 lines; scroll pins to the bottom only when the viewer
+  is already there; 1.2 s client-side send spacing.
+- Outgoing ctrlStrip kills CR/LF (IRC command injection) and caps at 450 chars.
+
+Verified before push:
+- Fake-socket protocol test: handshake (CAP/NICK justinfan/JOIN) exact; hostile display-name
+  `<img src=x onerror=alert(1)>` (IRCv3-escaped on the wire) AND hostile message text render as
+  literal text; PING answered; CLEARMSG and CLEARCHAT remove the right lines; unauthenticated
+  send puts NOTHING on the wire; no dialogs, zero <img>, no overflow at 320 (a real grid
+  min-content blowout at 320 was found and fixed with min-width:0 on the chat panel).
+- ?mock=chat renders the hostile name as text with the input honestly disabled.
+- The full 11-mode harness still passes untouched.
+- REAL protocol check from this desktop's own network: Twitch answered our exact handshake with
+  CAP ACK, 001 Welcome, JOIN #jestsayin96 and ROOMSTATE. (The page's own socket couldn't be
+  exercised end-to-end from the build sandbox - its proxy blocks raw WebSockets - which is also
+  why the "lost its footing" retry state is known to render correctly.)

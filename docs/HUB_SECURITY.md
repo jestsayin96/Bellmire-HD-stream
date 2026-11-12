@@ -70,7 +70,14 @@ GitHub Pages is Mr. E's decision and happens after that review, not before.
 Voting with Twitch login reopens all of this and adds CSRF, session handling and ballot stuffing.
 None of it is in scope now. When it starts, this document gets a second half.
 
-## Phase 2, H5 - the Twitch chat embed and the ONE CSP change (FLAG: supervisor review)
+## Phase 2, H5 - the Twitch chat embed and the ONE CSP change (SUPERSEDED by H8)
+
+> **SUPERSEDED, Nov 12 2026:** the iframe embed is REMOVED. It was broken for every viewer whose
+> browser blocks third-party cookies (Brave, Safari, strict Chrome) - Twitch's page inside the
+> frame could never keep its login, so the input stayed dead; Mr. E hit this live on Brave. The
+> `frame-src` directive was removed with it (a net tightening: no third-party page is embedded at
+> all any more). The chat is now native - see the H8 section below. The text that follows is kept
+> as the record of what was reviewed.
 
 This is the first and only place the hub touches a third party. It is opt-in and the
 CSP change is the minimum the official embed needs. Review this section before any republish.
@@ -147,8 +154,9 @@ now registered, so the flow is LIVE but strictly READ-ONLY. Review before any re
 - The access token is the VIEWER'S OWN. It is held in a memory variable for the session only -
   never written to localStorage/sessionStorage, never sent to our Supabase backend, never used
   to write anything anywhere. It is used for exactly one read: the viewer's own login name.
-- No scopes are requested (TW_SCOPES is empty) - the default grant is enough to read the user's
-  own login, nothing more.
+- Scopes (updated for H8): `chat:read chat:edit` - the guild chat and nothing more. The token
+  reads the user's own login and, only when the viewer presses send, carries THEIR chat line to
+  Twitch. It is still never sent to our backend and still writes nothing anywhere else.
 - The verification_uri is taken from Twitch's OAuth response (not the snapshot) and is set as a
   link href ONLY after it is checked to be a twitch.tv URL; otherwise it is shown as plain text.
 - The snapshot path is untouched: no payload value is ever used in any Twitch URL, header or body.
@@ -161,7 +169,7 @@ now registered, so the flow is LIVE but strictly READ-ONLY. Review before any re
 2. TWITCH_CLIENT_ID is the baked `const` (Mr. E's registered public client), not overridable at
    runtime; grep confirms no `?twitch_client=` / localStorage / snapshot source can set it.
 3. The token is never persisted (no localStorage/sessionStorage) and never sent to Supabase.
-4. No scopes requested; the token reads only the user's own login.
+4. Scopes are exactly `chat:read chat:edit` (H8) and nothing more.
 5. Nothing contacts Twitch on page load - the device-code call happens only on the button click.
 If any of that is not true, do not republish. Mr. E has registered the app; the flow is live and read-only.
 
@@ -183,3 +191,44 @@ with a stranger's app connected to their account, authorized through Mr. E's bra
 
 Do not re-add that hook. To test the flow against another id, edit the const locally and do not
 commit it.
+
+## Phase 2, H8 - the NATIVE guild chat (FLAG: supervisor review)
+
+The iframe embed (H5) died of third-party cookie blocking, so the page now speaks Twitch chat's
+own protocol - IRC over WebSocket - directly, in app.js. No frame, no cookies, every browser.
+
+### The CSP delta (before -> after)
+- REMOVED: `frame-src https://www.twitch.tv https://embed.twitch.tv` (no iframe exists any more;
+  `default-src 'none'` again blocks every frame). This is a tightening.
+- ADDED to connect-src: `wss://irc-ws.chat.twitch.tv` - Twitch's own chat socket, a hard-coded
+  constant in app.js (TW_IRC), never built from any runtime value. Nothing else changed.
+
+### Why this stays safe
+- OPT-IN is kept: no connection of any kind is made until the viewer clicks "Open the guild chat".
+- READ is anonymous (a justinfan nick): no login, no cookie, no identity. SEND uses the viewer's
+  own H6 token, whose grant now carries `chat:read chat:edit` (see the H6 section); the message
+  goes to Twitch as the viewer, exactly as if they typed it on twitch.tv. The page still performs
+  NO write to our backend; Supabase remains read-only.
+- Every incoming line is attacker-controlled viewer text. It reaches the DOM ONLY through el()
+  (createElement + textContent) - plain text, no emote images, no markup, by design. No tag or
+  prefix value is ever used as a URL, src, href, style or selector; name colours come from a fixed
+  page palette chosen by hash, never from the wire's colour tag. data-* keys used for moderation
+  (message id, login) are inert attribute text, and lookups iterate + string-compare - no selector
+  is ever built from wire data.
+- OUTGOING text is stripped of CR/LF and all control characters before sending, so a typed message
+  can never smuggle a second IRC command (PASS/PRIVMSG injection). Messages are capped at 450
+  chars and client-side rate-limited.
+- Moderation is honoured: CLEARCHAT removes a banned user's lines (matched by LOGIN, not display
+  name), CLEARMSG removes a deleted message, NOTICE/USERNOTICE render as plain system lines, and
+  server PINGs are answered. Twitch's server-side bans/timeouts apply regardless, since this IS
+  Twitch chat.
+- Honest states: connecting / reading / connected-as / "lost its footing" with capped exponential
+  retry. ?mock=chat exercises the render path (including the hostile name) with no connection.
+
+### What the supervisor should check before republishing
+1. CSP: frame-src is GONE; connect-src gained exactly `wss://irc-ws.chat.twitch.tv`; nothing else.
+2. TW_IRC and TWITCH_CHANNEL are constants; grep confirms no wire/snapshot value reaches any URL.
+3. Every chat render path goes through el(); no innerHTML anywhere new; zero <img> on the page.
+4. ctrlStrip() runs on every OUTGOING send (IRC injection) and on incoming display strings.
+5. The hostile-name check passes in ?mock=chat and the fake-socket protocol test.
+If any of that is not true, do not republish.

@@ -1160,7 +1160,9 @@ function withMock(p) {
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];
     const dyes = ["teal", "gold", "red", "purple"], titles = ["the Bold", "Scarbane", "the Quick", "Emberkin"];
     const made = [];
-    for (let i = 0; i < 40; i++) {
+    // 200 heroes: H3's DONE line asks for "?mock=crowd 200 fast", and 40 never
+    // exercised the HERO_PAGE=60 paging. 200 does (4 pages), and the boards rank it.
+    for (let i = 0; i < 200; i++) {
       made.push({
         name: i === 0 ? "<img src=x onerror=alert(1)>" : "Hero" + String(i).padStart(2, "0"),
         class: classes[i % 4], species: species[i % 4], level: 1 + (i % 9), rank: "Delver",

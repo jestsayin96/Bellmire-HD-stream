@@ -338,3 +338,70 @@ hero name AND a chronicle line): no dialog fired, zero <img> elements, no `img[s
 string renders as literal text in span.hname and p.cline (brackets intact), no page errors, no
 horizontal overflow at 320. ?state=empty/fail/stale show their honest messages. Footer now computes
 to text-align:center, opacity:.55, font-size:.82rem at every width - the fix confirmed.
+
+
+## H6 doc-accuracy fix (Nov 12, 2026) - the sign-in is LIVE now, so the comments must say so
+
+Context: a later commit (`hub: wire the Bellmire Hub Login client id`) baked Mr. E's registered
+public client id into `TWITCH_CLIENT_ID` and removed the `?twitch_client=` runtime override. That
+made the H6 device-code sign-in LIVE (read-only). But three places still described it as inert:
+- index.html (CSP comment): "That flow is INERT ... so no call is made to those hosts today."
+- index.html (heroes section): "Gated: with no registered client id the button only explains that
+  it needs Mr. E."
+- app.js (H6 comment): "GATED on Mr. E: TWITCH_CLIENT_ID is a placeholder ... makes NO network call."
+- docs/HUB_SECURITY.md (H6 supervisor checklist, item 2): "TWITCH_CLIENT_ID ships empty (gated);
+  grep confirms the flow is dead without it" - which also contradicted the doc's own later section
+  "The client id is fixed in the page".
+
+Those are now false and would mislead the supervisor's security review into thinking the two Twitch
+connect-src hosts are dormant. Fixed, DOCUMENTATION ONLY - no code behaviour changed:
+- Rewrote the three comments to state the id is registered and the flow is live but strictly
+  READ-ONLY: clicking "Sign in with Twitch" starts the device-code grant; nothing contacts Twitch
+  before the click; the token is the viewer's own, in memory only, never sent to our backend.
+- Reconciled HUB_SECURITY.md's H6 section with its own "client id is fixed in the page" section:
+  retitled "Gated on Mr. E" -> "Now live (read-only)", and rewrote the supervisor checklist to
+  verify the REAL invariants (id is the non-overridable baked const; token never persisted/never
+  to Supabase; no scopes; nothing contacts Twitch on page load - only on the click).
+- Kept the empty-id branch in twitchSignIn() as a defensive fallback; relabelled its comment.
+
+Security: comment/markdown only. No `el()` path, no CSP directive, no URL/src/href, no snapshot
+field touched. Re-verified the BUILT page headlessly (Chromium, Supabase row stubbed with the
+attacker name `<img src=x onerror=alert(1)>` as every hero/town/fallen/chronicle/command field) at
+320 / 768 / 1280 / overlay / ?open=1 / reduced-motion and ?mock=crowd / ?mock=chronicle /
+?state=empty / ?state=fail / ?state=stale: no dialog fired, zero <img> elements, the hostile string
+renders as literal text, the `<colour>` !dye canary keeps its angle brackets, no page/console
+errors, no horizontal overflow at 320, and NOTHING contacts Twitch on load (the sign-in is
+click-gated). All four security invariants intact. Held for the supervisor's review as before.
+
+
+## Share polish (Nov 12, 2026) - favicon, social card, and the honest 200-hero mock
+
+Three small additions Mr. E approved, all read-only, none touching the snapshot path:
+
+- **Favicon**: an inline `data:` SVG of the crest (shield + teal scar) in a `<link rel="icon">`.
+  No new request, no asset file, allowed by the CSP's existing `img-src 'self' data:`. Every
+  visit used to 404 on /favicon.ico; now it doesn't.
+- **Social card**: Open Graph + Twitter meta so a shared hub link unfurls with a title card in
+  Discord/Twitter instead of a bare URL. `og:image` points at **web/og.png** (1200x630), my own
+  drawing: the index.html crest + the Gloock wordmark on the page's night/gold/teal palette.
+  Generator committed at **web/tools/og.html** (render with headless Chrome at 1200x630), so the
+  card is reproducible; Gloock is OFL (web/fonts/). Crawlers fetch og:image from OUTSIDE the page,
+  so there is no CSP change and nothing in the meta carries snapshot data. The og:url/og:image
+  host is the repo's GitHub Pages origin - flagged in index.html for the supervisor to confirm
+  at review.
+- **?mock=crowd now plants 200 heroes** (was 40). H3's DONE line says "?mock=crowd 200 fast",
+  and 40 never exercised HERO_PAGE=60. Verified: 60 cards drawn, "Show more (60 of 200)", the
+  boards rank the field, full render ~0.6 s headless.
+
+Re-verified after the change (headless Chromium, Supabase stubbed, hostile name
+`<img src=x onerror=alert(1)>` planted): all eleven modes (320/768/1280/overlay/?open=1/
+reduced-motion x crowd/chronicle/empty/fail/stale) - no dialog, zero <img> ELEMENTS on the page
+(the favicon is a <link>, not an <img>; the og meta is head-only), hostile string literal, the
+<colour> canary intact, no console/page errors, no overflow at 320, nothing contacts Twitch on
+load. Invariants intact; held for the supervisor's review as before.
+
+### Data-contract wishlist for the desktop (one-liners in scripts/snapshot_pub.gd, its call)
+Already-built hub features light up with no page change the day the publisher sends:
+- `max_hp` (or hp_max/maxhp) per hero -> real HP depletion bars, coloured by ratio
+- `xp_next` per hero -> real XP-to-next-level bars
+- `raids_turned` (or raids) in the town block -> a "Raids turned back" pill on the town strip

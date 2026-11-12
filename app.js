@@ -999,14 +999,15 @@ function loadTwitchChat() {
 })();
 
 // ---------------------------------------------------------------- Twitch sign-in (H6)
-// Device-code OAuth SCAFFOLDING. A viewer signs in so the page can spotlight THEIR hero
-// instead of making them scroll. Strictly read-only: the token is the viewer's own, used
-// only client-side to read their own Twitch login and match a hero. It is held in memory
+// Device-code OAuth. A viewer signs in so the page can spotlight THEIR hero instead of
+// making them scroll. Strictly read-only: the token is the viewer's own, used only
+// client-side to read their own Twitch login and match a hero. It is held in memory
 // only (never localStorage), never sent to our backend, never used to write anything.
 //
-// GATED on Mr. E: TWITCH_CLIENT_ID is a placeholder. With no registered public client id
-// the button only explains what is missing and makes NO network call. When Mr. E registers
-// the app and fills the id in, the flow below runs (device grant per the Twitch docs).
+// LIVE: TWITCH_CLIENT_ID is Mr. E's registered public client id (Bellmire Hub Login),
+// baked in as a const and not overridable at runtime. Clicking the button runs the
+// device grant below (per the Twitch docs); nothing contacts Twitch before the click.
+// The empty-id branch in twitchSignIn() is kept as a defensive fallback only.
 const TWITCH_CLIENT_ID = "mpblygfdxvdpnr0dvi3andjlvb4y0r";  // Bellmire Hub Login: PUBLIC client, device-code grant, no scopes. Not overridable at runtime.
 const TW_DEVICE = "https://id.twitch.tv/oauth2/device";
 const TW_TOKEN = "https://id.twitch.tv/oauth2/token";
@@ -1027,7 +1028,7 @@ function signinSay(html, cls) {
 async function twitchSignIn() {
   if (twPolling) return;
   if (!TWITCH_CLIENT_ID) {
-    // the gate: nothing happens until Mr. E registers the app
+    // defensive fallback: if the id were ever blanked, explain instead of calling Twitch
     signinSay("Twitch sign-in isn't set up yet — it needs Mr. E to register the app and add its client id. Until then, type your hero's name in the box below.", "gated");
     return;
   }
@@ -1159,7 +1160,9 @@ function withMock(p) {
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];
     const dyes = ["teal", "gold", "red", "purple"], titles = ["the Bold", "Scarbane", "the Quick", "Emberkin"];
     const made = [];
-    for (let i = 0; i < 40; i++) {
+    // 200 heroes: H3's DONE line asks for "?mock=crowd 200 fast", and 40 never
+    // exercised the HERO_PAGE=60 paging. 200 does (4 pages), and the boards rank it.
+    for (let i = 0; i < 200; i++) {
       made.push({
         name: i === 0 ? "<img src=x onerror=alert(1)>" : "Hero" + String(i).padStart(2, "0"),
         class: classes[i % 4], species: species[i % 4], level: 1 + (i % 9), rank: "Delver",

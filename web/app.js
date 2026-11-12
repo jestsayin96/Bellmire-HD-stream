@@ -264,8 +264,24 @@ setInterval(showStatus, 15000);   // "updated N minutes ago" keeps counting betw
 
 
 // Shown when the payload is a version this page was not written for.
+// Something we cannot safely render - e.g. a payload in a format this page predates.
+// Routed through elements that exist, with textContent/createElement only: never
+// document.body (which would wipe the page) and never innerHTML with the message.
 function showProblem(msg) {
-  const box = $("fail") || document.body;
-  box.textContent = msg;
-  box.classList && box.classList.remove("hide");
+  const box = $("nothing");
+  if (box) {
+    box.classList.remove("hide");
+    box.replaceChildren();
+    const h = document.createElement("h2");
+    h.textContent = "This page needs an update";
+    const p = document.createElement("p");
+    p.textContent = msg;
+    box.append(h, p);
+  }
+  for (const id of ["heroes", "roll", "fallen", "commands"]) {
+    const el = $(id);
+    if (el) el.classList.add("hide");
+  }
+  const st = $("status");
+  if (st) { st.className = "status bad"; st.textContent = "Showing nothing rather than guessing."; }
 }

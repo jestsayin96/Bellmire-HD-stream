@@ -1,1 +1,1 @@
-IDLE 2026-11-11 23:42 - L21 done (Cycle 81), pushed; next L22 (close heroes, same view) / L23 (director cuts away from a lane's hero)
+RUNNING 2026-11-11 23:55 - L22: test written (expected to fail), fix not started yet

@@ -170,3 +170,58 @@ line and the empty/stale/error states stay exactly as they are.
   closed.
 - No sixth board. The research caps it at five.
 - Nothing from phase 2 or 3.
+
+---
+
+## Addendum: the SSS+ grimoire elevation (second pass)
+
+The brief asks for a dark-fantasy grimoire with named components. Notes behind
+the second pass:
+
+### Tier styling (SSS / SS / S / A ...)
+- The canonical order is SSS > SS > S > A > B, descending, borrowed straight
+  from gacha/fighting-game tier lists. The colour convention is consistent
+  across them: gold/bright for the top, cooling and muting as you go down.
+- The hard rule from accessibility: the TIER LETTERS carry the meaning, never
+  the colour alone - the same rule that kept the boards colourblind-safe before.
+- Assignment: there is no "meta viability" here, so tier = rank bracket over the
+  ranked field (value > 0). SSS = 1st, SS = 2nd-3rd, S = 4th-6th, A = 7th-10th.
+  Robust for a 2-hero night and a 200-hero one alike. The exact numeric rank is
+  still shown, so the tier is a flourish on top of the real position, not a
+  replacement for it.
+
+### Illuminated initials / drop caps
+- Kept as CSS-styled first letters (Gloock, gold), NOT images: web drop caps
+  render differently across browsers and an image would mean an asset + an
+  <img> src, which the security rules fence off. A styled ::first-letter is
+  decorative only and degrades to a plain capital if it renders oddly.
+- Foliate-initial principle: keep the structure, vary the ornament. The initial
+  is the one ornament that changes per section; everything else holds.
+
+### Item icons (gear + chronicle types)
+- Drawn by hand as inline SVG <symbol>s in index.html - my own simple glyphs, so
+  CC0 by origin, no third-party asset, no <img> request, no CDN. Referenced with
+  <use href="#ic-..."> where the id is ALWAYS a fixed, page-authored string from
+  a whitelist; a snapshot value only ever SELECTS which known icon, it is never
+  written into the DOM as markup. A weapon name maps to a category (blade /
+  ranged / arcane / blunt) by keyword; an unknown weapon falls back to a blade.
+- This is the safe way to honour "gear with item icons" and "per-type icons"
+  without touching the no-third-party / no-snapshot-as-markup rules.
+
+### The HP bar, and an honesty problem
+- The snapshot carries hp but NO max hp. A current/max depletion bar needs a
+  denominator the data does not provide, and inventing one would break the
+  honesty the rest of the page keeps.
+- So the HP bar is forward-compatible: if the publisher ever adds max_hp /
+  hp_max / maxhp, the bar becomes a true current/max gauge that colours by
+  ratio (green / amber / red). Until then it renders as a full "vitality" bar
+  with the HP number on it - a styled display of the known value, making no
+  claim that the hero is injured. One line flips it to real depletion the day
+  the desktop publishes the max. (A data-contract note for the desktop side,
+  not something the hub can decide on its own.)
+
+### Ornate borders
+- A restrained double-rule (an inked frame with a hairline inside it) plus small
+  gold corner ticks, done entirely in CSS - no background images. The NOTES-1
+  warning against kitsch still governs: ornament is spent on the initials, the
+  tier emblems, the corners and the band, and nowhere else.

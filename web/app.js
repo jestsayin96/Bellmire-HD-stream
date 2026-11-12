@@ -40,6 +40,38 @@ function el(tag, cls, text) {
 }
 function frag(parent, ...kids) { for (const k of kids) if (k) parent.append(k); return parent; }
 
+// icon(): an <svg><use> pointing at one of the page's own <symbol> glyphs. The id
+// is ALWAYS a fixed, whitelisted string from this file - a snapshot value only
+// ever chooses WHICH known icon, it is never written into the DOM. No <img>, no
+// external request. (docs/HUB_SECURITY.md: nothing from the snapshot becomes markup.)
+const SVGNS = "http://www.w3.org/2000/svg";
+const XLINK = "http://www.w3.org/1999/xlink";
+const ICON_SET = new Set([
+  "blade", "ranged", "arcane", "blunt", "shield", "potion", "flask", "coin",
+  "fight", "death", "raid", "town", "lore", "loot", "delve", "other",
+]);
+function icon(id, cls) {
+  const key = ICON_SET.has(id) ? id : "other";      // whitelist: unknown -> a safe default
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "ic" + (cls ? " " + cls : ""));
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const use = document.createElementNS(SVGNS, "use");
+  use.setAttribute("href", "#ic-" + key);           // fixed literal; never snapshot data
+  use.setAttributeNS(XLINK, "xlink:href", "#ic-" + key);
+  svg.append(use);
+  return svg;
+}
+// a weapon's name chooses a category icon by keyword; anything unknown is a blade
+function weaponIcon(name) {
+  const w = String(name || "").toLowerCase();
+  if (/bow|crossbow|sling|arbalest/.test(w)) return "ranged";
+  if (/staff|wand|rod|scepter|sceptre|focus|tome|grimoire/.test(w)) return "arcane";
+  if (/mace|hammer|club|maul|flail|axe|warhammer|quarterstaff|wrap|fist|bare hands|knuckle/.test(w)) return "blunt";
+  return "blade";   // sword, dagger, spear, blade, greatsword, rapier, ...
+}
+
 // esc() is kept for the two legacy innerHTML sites that remain (status line and
 // the "nothing yet" messages) - both build from the page's OWN strings, never
 // from the snapshot. New code does not use it.
@@ -237,19 +269,29 @@ function subline(spec, r) {
   return bits.join("  ·  ");
 }
 
+// a hero's tier from their rank on the board. SSS/SS/S descending, the gacha/
+// fighting-game convention; the LETTERS carry the meaning so it stays colourblind
+// -safe, colour only reinforces it (web/NOTES.md). Tier is a flourish on top of
+// the exact rank, which is still shown.
+function tierOf(place) {
+  if (place <= 1) return { label: "SSS", cls: "sss" };
+  if (place <= 3) return { label: "SS", cls: "ss" };
+  if (place <= 6) return { label: "S", cls: "s" };
+  if (place <= 10) return { label: "A", cls: "a" };
+  return { label: "B", cls: "b" };
+}
+
 // one board row. featured=true is the leader's bigger treatment.
 function boardRow(spec, e, max, opts) {
   opts = opts || {};
-  const li = el("li", "brow" + (e.dead ? " gone" : "") + (opts.featured ? " lead" : "") + (opts.self ? " self" : ""));
+  const t = tierOf(e.place);
+  const li = el("li", "brow t-" + t.cls + (e.dead ? " gone" : "") + (opts.featured ? " lead" : "") + (opts.self ? " self" : ""));
   li.style.setProperty("--fill", max > 0 ? (n0(e.r[spec.key]) / max) : 0);
 
-  const rank = el("span", "brank r" + (e.place <= 3 ? e.place : "n"));
-  if (e.place <= 3) {
-    const s = el("span", "sigil", sigil(e.r.name));
-    rank.append(s, el("span", "medal", e.place));
-  } else {
-    rank.append(el("span", "rnum", e.place));
-  }
+  const rank = el("span", "brank");
+  const med = el("span", "tier", t.label);
+  med.setAttribute("aria-label", "Tier " + t.label + ", rank " + e.place);
+  rank.append(med, el("span", "rnum2", "#" + e.place));
   li.append(rank);
 
   const mid = el("span", "bmid");
@@ -358,6 +400,44 @@ function kv(dt, ...dd) {
   return w;
 }
 
+// The HP bar. The snapshot carries hp but no max hp, so a true current/max gauge
+// needs a denominator the data does not give. This is forward-compatible: if the
+// publisher ever adds max_hp / hp_max / maxhp, it becomes a real depletion bar
+// that colours by ratio; until then it shows a full "vitality" bar with the
+// number, claiming nothing about injury (web/NOTES.md). One line flips it over.
+function hpBar(h) {
+  const max = n0(h.max_hp) || n0(h.hp_max) || n0(h.maxhp) || n0(h.hpmax) || 0;
+  const hp = n0(h.hp);
+  const hasMax = max > 0 && max >= hp;
+  const ratio = hasMax ? Math.max(0.03, Math.min(1, hp / max)) : 1;
+  const grade = !hasMax ? "flat" : ratio <= 0.25 ? "low" : ratio <= 0.5 ? "mid" : "ok";
+  const wrap = el("div", "hpbar " + grade);
+  wrap.setAttribute("role", "img");
+  wrap.setAttribute("aria-label", hasMax ? "Hit points " + hp + " of " + max : "Hit points " + hp);
+  const track = el("div", "hptrack");
+  const fill = el("span", "hpfill");
+  fill.style.setProperty("--hp", ratio);     // CSSOM number only, never snapshot text
+  track.append(fill);
+  wrap.append(el("span", "hpk", "HP"), track, el("span", "hpv", hasMax ? num(hp) + " / " + num(max) : num(hp)));
+  return wrap;
+}
+
+// a weapon/armour card with its item icon
+function gearCard(iconId, label, value) {
+  const c = el("div", "gcard");
+  c.append(icon(iconId, "gic"));
+  const t = el("div", "gt");
+  t.append(el("span", "gl", label), el("span", "gv", value));
+  c.append(t);
+  return c;
+}
+// a carried-item chip with an icon
+function carryChip(iconId, text) {
+  const c = el("div", "cchip");
+  c.append(icon(iconId, "cic"), el("span", null, text));
+  return c;
+}
+
 function heroCard(h, isOpen) {
   const s = h.stats || {};
   const order = ["str", "dex", "con", "int", "wis", "cha"];
@@ -381,6 +461,9 @@ function heroCard(h, isOpen) {
   det.append(sum);
 
   const sheet = el("div", "sheet");
+
+  sheet.append(hpBar(h));
+
   const stats = el("div", "stats");
   for (const k of order) {
     const cell = el("div", "stat");
@@ -389,24 +472,38 @@ function heroCard(h, isOpen) {
   }
   sheet.append(stats);
 
+  // Equipped: weapon and armour as gear cards with item icons
+  sheet.append(el("p", "eyebrow", "Equipped"));
+  const gear = el("div", "gearstrip");
+  gear.append(
+    gearCard(weaponIcon(w.name), "Weapon", `${cap(w.name || "bare hands")}  ·  ${w.dice || "-"}`),
+    gearCard("shield", "Armour", `${cap(armr.name || "none")}  ·  AC ${h.ac}`),
+  );
+  sheet.append(gear);
+
   sheet.append(el("p", "eyebrow", "In a fight"));
   const f = el("dl", "kvlist");
   f.append(
-    kv("Weapon", `${cap(w.name || "bare hands")}  ·  ${w.dice || "-"} damage`),
     kv("To hit", `+${n0(h.to_hit)} (proficiency +${n0(h.prof)})`),
-    kv("Armour", `${cap(armr.name || "none")}  ·  AC ${h.ac}`),
     kv("Saves", h.saves || "-"),
   );
   sheet.append(f);
 
-  const kit = [];
-  if (h.brews) kit.push(String(h.brews));
-  else if (+h.potions) kit.push(`${num(h.potions)} Mending`);
-  kit.push(`${num(h.oil)} oil`, `${num(h.gold)} gold`);
+  // Carrying: icon chips
   sheet.append(el("p", "eyebrow", "Carrying"));
-  const c = el("dl", "kvlist");
-  c.append(kv("Pack", kit.join("  ·  ")), kv("Wearing", h.worn ? String(h.worn) : "nothing fancy yet"));
-  sheet.append(c);
+  const carry = el("div", "carry");
+  const brew = h.brews ? String(h.brews) : (+h.potions ? `${num(h.potions)} Mending` : "no brews");
+  carry.append(
+    carryChip("potion", brew),
+    carryChip("flask", `${num(h.oil)} oil`),
+    carryChip("coin", `${num(h.gold)} gold`),
+  );
+  sheet.append(carry);
+  if (h.worn) {
+    const worn = el("dl", "kvlist");
+    worn.append(kv("Wearing", String(h.worn)));
+    sheet.append(worn);
+  }
 
   sheet.append(el("p", "eyebrow", "Record"));
   const rec = el("dl", "kvlist");
@@ -514,9 +611,12 @@ function renderChronicle(raw) {
   }
   for (const e of shown) {
     const li = el("li", "centry kind-" + e.t);
-    const rail = el("span", "crail");
-    rail.setAttribute("aria-hidden", "true");
-    li.append(rail);
+    // a per-type icon badge in place of the plain rail (the icon id is the kind,
+    // which is already whitelisted to one of the known types or "other")
+    const badge = el("span", "cbadge");
+    badge.setAttribute("aria-hidden", "true");
+    badge.append(icon(e.t));
+    li.append(badge);
     const body = el("div", "cbody");
     const head = el("div", "chead");
     const kind = CHRON_KINDS.find((k) => k.t === e.t);

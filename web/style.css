@@ -78,7 +78,7 @@ b { font-weight: 700; }
 }
 
 /* ======================================================= the hero / masthead */
-.hero {
+header.hero {
   position: relative;
   display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 14px;
   padding: 14px 16px 0;
@@ -112,7 +112,7 @@ b { font-weight: 700; }
   padding: 0 .14em; margin-left: .18em; font-size: .46em; vertical-align: .42em;
   letter-spacing: .02em; box-shadow: 0 1px 0 rgba(0,0,0,.3);
 }
-.hero .sub { margin: 4px 0 0; color: var(--parch-dim); opacity: .8; font-size: .98rem; font-style: italic; }
+header.hero .sub { margin: 4px 0 0; color: var(--parch-dim); opacity: .8; font-size: .98rem; font-style: italic; }
 
 /* the harlequin band - the jester nod, kept to a thin strip */
 .band {
@@ -178,26 +178,48 @@ nav a .n { color: var(--teal-br); font-weight: 500; margin-left: 5px; }
    the Heroes and the Chronicle are discrete objects and keep a panel. The Guild
    Roll, the Fallen and the Commands step down to a rule + title on the dark
    ground - hierarchy from spacing and type, not from seven identical borders. */
+/* an ornate but restrained frame: the inked border, a hairline inset rule, and
+   small gold corner ticks drawn with the pseudo-elements (no background image).
+   The ornament budget is the initials, the tiers, these corners and the band. */
 .panel {
+  position: relative;
   background:
     linear-gradient(180deg, var(--parch-hi), var(--parch));
   border: 1px solid var(--edge);
   border-radius: var(--r);
-  box-shadow: 0 6px 20px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,250,235,.5);
-  padding: 14px 15px 16px; margin: 0 0 16px; color: var(--ink);
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.4),
+    inset 0 1px 0 rgba(255,250,235,.5),
+    inset 0 0 0 3px var(--parch-hi),
+    inset 0 0 0 4px rgba(109,72,36,.35);
+  padding: 15px 16px 17px; margin: 0 0 16px; color: var(--ink);
 }
+.panel::before, .panel::after {
+  content: ""; position: absolute; width: 13px; height: 13px; pointer-events: none;
+  border: 2px solid var(--gold); opacity: .6;
+}
+.panel::before { top: 6px; left: 6px; border-right: 0; border-bottom: 0; border-top-left-radius: 3px; }
+.panel::after { bottom: 6px; right: 6px; border-left: 0; border-top: 0; border-bottom-right-radius: 3px; }
 .plain { margin: 22px 0 8px; color: var(--parch-dim); }
 .duo .plain { margin-top: 0; }
 
 .title {
-  display: flex; align-items: baseline; gap: 10px; margin: 0 0 12px; padding-bottom: 7px;
+  display: block; margin: 0 0 12px; padding-bottom: 7px;
   font-family: "Gloock", Georgia, serif; font-weight: 400; font-size: 1.4rem;
-  color: var(--ink-red); letter-spacing: .005em;
+  color: var(--ink-red); letter-spacing: .005em; line-height: 1.15;
   border-bottom: 1px solid var(--edge-2);
 }
-.title small { margin-left: auto; font-family: var(--ui); color: var(--ink-soft); font-size: .78rem; font-weight: 500; font-style: italic; }
+/* illuminated initial: an enlarged gold versal on the first letter. Decorative
+   only (web/NOTES.md); degrades to a plain capital if a browser renders it oddly. */
+.title::first-letter {
+  font-size: 1.55em; color: var(--gold-dk); line-height: .7;
+  padding-right: .02em; text-shadow: 0 1px 0 rgba(255,246,224,.6);
+}
+.title small { float: right; font-family: var(--ui); color: var(--ink-soft); font-size: .78rem; font-weight: 500; font-style: italic; margin-top: .35em; }
 .title.light { color: var(--parch-hi); border-bottom-color: rgba(198,146,47,.22); }
+.title.light::first-letter { color: var(--gold); text-shadow: 0 0 10px rgba(198,146,47,.4); }
 .title.light small { color: var(--parch-dim); opacity: .75; }
+.icon-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 @media (max-width: 440px) { .title small { font-size: .72rem; } }
 
 .eyebrow { margin: 4px 0 0; font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-red); font-weight: 700; }
@@ -251,28 +273,32 @@ ol.board { list-style: none; margin: 0; padding: 0; }
   background: linear-gradient(90deg, rgba(35,166,160,.26), rgba(35,166,160,.06));
   border-radius: 6px;
 }
-.brank { display: inline-flex; align-items: center; justify-content: center; min-width: 2.4em; }
-.rnum { font-weight: 700; font-size: 1.05rem; color: var(--ink-soft); }
-/* top-3 sigils: a hero's own initials in a metal ring, with the place numeral.
-   Metal AND numeral AND position - the rank never rests on colour alone. */
-.brank .sigil {
-  position: relative; display: inline-grid; place-items: center;
-  width: 2.3em; height: 2.3em; border-radius: 50%;
-  font-weight: 700; font-size: .82rem; color: var(--ink);
-  background: var(--parch-hi); border: 2px solid var(--gold);
+/* the rank column: a tier medallion (SSS/SS/S/A/B) over the exact rank number.
+   The LETTERS carry the tier; colour and the metal ring only reinforce it. */
+.brank { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; min-width: 3em; }
+.tier {
+  display: inline-grid; place-items: center;
+  min-width: 2.5em; height: 1.9em; padding: 0 .3em; border-radius: 6px;
+  font-weight: 800; font-size: .78rem; letter-spacing: .02em;
+  color: var(--ink); background: var(--parch-2);
+  border: 1.5px solid var(--edge-2); font-variant-numeric: normal;
 }
-.brank .medal {
-  position: absolute; right: -3px; bottom: -3px;
-  width: 1.35em; height: 1.35em; border-radius: 50%; display: grid; place-items: center;
-  font-size: .64rem; font-weight: 700; color: var(--night); background: var(--gold);
-  border: 1.5px solid var(--parch-hi);
+.rnum2 { font-size: .72rem; font-weight: 700; color: var(--ink-soft); }
+/* tier palette: gold/bright at the top, cooling and muting downward */
+.t-sss .tier {
+  color: #3a2708; background: linear-gradient(180deg, #f1cf6e, var(--gold));
+  border-color: #e7b94e; box-shadow: 0 0 12px rgba(198,146,47,.55), inset 0 1px 0 rgba(255,255,255,.5);
 }
-.r1 .sigil { border-color: var(--gold); box-shadow: 0 0 10px rgba(198,146,47,.5); }
-.r1 .medal { background: var(--gold); }
-.r2 .sigil { border-color: var(--silver); }
-.r2 .medal { background: var(--silver); }
-.r3 .sigil { border-color: var(--bronze); }
-.r3 .medal { background: var(--bronze); }
+.t-ss .tier {
+  color: #f3ecd6; background: linear-gradient(180deg, var(--teal), var(--teal-ink));
+  border-color: var(--teal-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+}
+.t-s .tier {
+  color: #f3ecd6; background: linear-gradient(180deg, #c58a52, var(--bronze));
+  border-color: #a06a3a;
+}
+.t-a .tier { color: var(--ink-2); background: var(--parch-lo); border-color: var(--edge-2); }
+.t-b .tier { color: var(--ink-soft); background: var(--parch-2); border-color: var(--edge-2); }
 
 .bmid { grid-column: 2; min-width: 0; }
 .bname { font-weight: 650; color: var(--gold-dk); overflow-wrap: anywhere; }
@@ -293,7 +319,7 @@ ol.board { list-style: none; margin: 0; padding: 0; }
   border: 1px solid rgba(198,146,47,.5); border-radius: 9px;
 }
 .brow.lead::before { inset: 3px auto 3px 0; background: linear-gradient(90deg, rgba(198,146,47,.3), rgba(198,146,47,.05)); }
-.brow.lead .sigil { width: 2.9em; height: 2.9em; font-size: .95rem; }
+.brow.lead .tier { min-width: 3em; height: 2.3em; font-size: .95rem; }
 .brow.lead .bname { font-size: 1.12rem; color: var(--ink-red); }
 .brow.lead .bval b { font-size: 1.7rem; color: var(--ink-red); }
 
@@ -303,12 +329,12 @@ ol.board { list-style: none; margin: 0; padding: 0; }
 
 /* ======================================================= HEROES */
 #heroes .find { margin-bottom: 11px; }
-.heroes { display: grid; gap: 10px; }
+.heroes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 details.hero { background: #f2e2bd; border: 1px solid var(--edge-2); border-radius: 8px; }
 details.hero[open] { background: var(--parch-hi); border-color: var(--edge); }
 details.hero > summary {
   list-style: none; cursor: pointer; padding: 10px 12px;
-  display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start;
 }
 details.hero > summary::-webkit-details-marker { display: none; }
 .hsigil {
@@ -336,25 +362,52 @@ dl.kvlist .kv { display: contents; }
 dl.kvlist dt { color: var(--ink-soft); }
 dl.kvlist dd { margin: 0; overflow-wrap: anywhere; color: var(--ink); }
 
+/* ---- the HP bar ---- */
+.hpbar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 9px; }
+.hpk { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+.hptrack { height: 11px; border-radius: 999px; background: #e0cd9c; border: 1px solid var(--edge-2); overflow: hidden; box-shadow: inset 0 1px 2px rgba(42,28,16,.2); }
+.hpfill { display: block; height: 100%; width: calc(var(--hp, 1) * 100%); border-radius: 999px; transition: width .4s ease; }
+.hpv { font-size: .9rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.hpbar.ok   .hpfill { background: linear-gradient(90deg, #4f8f3a, #6fb14a); }
+.hpbar.mid  .hpfill { background: linear-gradient(90deg, #b07a12, #d19a2a); }
+.hpbar.low  .hpfill { background: linear-gradient(90deg, #8a2a1a, #b4432c); }
+/* no published max hp: a full vitality bar, teal, claiming nothing about injury */
+.hpbar.flat .hpfill { background: linear-gradient(90deg, var(--teal-ink), var(--teal)); }
+
+/* ---- gear cards with item icons ---- */
+.ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -.15em; }
+.gearstrip { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.gcard { display: flex; align-items: center; gap: 9px; background: var(--parch); border: 1px solid var(--edge-2); border-radius: 7px; padding: 7px 10px; min-width: 0; }
+.gic { width: 1.6em; height: 1.6em; flex: none; color: var(--teal-ink); }
+.gt { min-width: 0; display: flex; flex-direction: column; }
+.gl { font-size: .68rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); }
+.gv { font-size: .9rem; color: var(--ink); overflow-wrap: anywhere; }
+.carry { display: flex; flex-wrap: wrap; gap: 6px; }
+.cchip { display: inline-flex; align-items: center; gap: 6px; background: var(--parch); border: 1px solid var(--edge-2); border-radius: 999px; padding: 4px 11px; font-size: .88rem; color: var(--ink); }
+.cchip .cic { width: 1.1em; height: 1.1em; flex: none; color: var(--gold-dk); }
+@media (max-width: 460px) { .gearstrip { grid-template-columns: 1fr; } }
+
 /* ======================================================= THE CHRONICLE */
-ol.chron { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.centry { display: grid; grid-template-columns: auto 1fr; gap: 0; background: #f2e2bd; border-radius: 7px; overflow: hidden; }
-.crail { width: 4px; background: var(--ink-soft); }
-.cbody { padding: 7px 12px; min-width: 0; }
+ol.chron { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.centry { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; background: #f2e2bd; border-radius: 7px; padding: 8px 12px 8px 8px; border-left: 3px solid var(--ink-soft); }
+/* a per-type icon badge in place of the plain rail */
+.cbadge { display: inline-grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: 7px; background: var(--parch); border: 1px solid var(--edge-2); color: var(--ink-soft); margin-top: 1px; }
+.cbadge .ic { width: 1.25em; height: 1.25em; }
+.cbody { min-width: 0; }
 .chead { display: flex; align-items: baseline; gap: 8px; font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 700; }
 .ckind { color: var(--ink-red); }
 .cwhen { margin-left: auto; color: var(--ink-soft); font-weight: 600; white-space: nowrap; }
 .cline { margin: 2px 0 0; font-size: .96rem; color: var(--ink); overflow-wrap: anywhere; }
-.centry.kind-fight .crail { background: var(--bad); }
-.centry.kind-death .crail { background: var(--dead); }
-.centry.kind-raid  .crail { background: var(--warn); }
-.centry.kind-town  .crail { background: var(--teal-ink); }
-.centry.kind-lore  .crail { background: var(--edge); }
-.centry.kind-loot  .crail { background: var(--gold); }
-.centry.kind-delve .crail { background: var(--ink-red); }
+.centry.kind-fight { border-left-color: var(--bad); }       .centry.kind-fight .cbadge { color: var(--bad); }
+.centry.kind-death { border-left-color: var(--dead); }      .centry.kind-death .cbadge { color: var(--dead); }
+.centry.kind-raid  { border-left-color: var(--warn); }      .centry.kind-raid  .cbadge { color: var(--warn); }
+.centry.kind-town  { border-left-color: var(--teal-ink); }  .centry.kind-town  .cbadge { color: var(--teal-ink); }
+.centry.kind-lore  { border-left-color: var(--edge); }      .centry.kind-lore  .cbadge { color: var(--edge); }
+.centry.kind-loot  { border-left-color: var(--gold); }      .centry.kind-loot  .cbadge { color: var(--gold-dk); }
+.centry.kind-delve { border-left-color: var(--ink-red); }   .centry.kind-delve .cbadge { color: var(--ink-red); }
 
 /* ======================================================= GUILD ROLL + FALLEN (plain) */
-.duo { display: grid; gap: 4px; }
+.duo { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
 ol.roll { list-style: none; margin: 0; padding: 0; }
 ol.roll li { display: grid; grid-template-columns: 2em 1fr auto; gap: 1px 10px; align-items: center; padding: 8px 2px; border-bottom: 1px solid rgba(198,146,47,.14); }
 ol.roll li:last-child { border-bottom: 0; }
@@ -377,7 +430,7 @@ li.gone .rname::before { content: "\2020\00a0"; }
 .gepi { font-style: italic; color: var(--parch-dim); opacity: .8; margin-top: 3px; }
 
 /* ======================================================= COMMANDS (plain) */
-.cmds { display: grid; gap: 8px; }
+.cmds { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
 details.cmd { background: rgba(233,214,168,.06); border: 1px solid rgba(198,146,47,.16); border-radius: 7px; }
 details.cmd > summary { cursor: pointer; list-style: none; padding: 9px 12px; }
 details.cmd > summary::-webkit-details-marker { display: none; }
@@ -509,7 +562,7 @@ footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: c
 
 /* ======================================================= wider screens */
 @media (min-width: 680px) {
-  .hero { grid-template-columns: auto 1fr; padding: 18px 20px 0; gap: 18px; }
+  header.hero { grid-template-columns: auto 1fr; padding: 18px 20px 0; gap: 18px; }
   .emblem { width: 72px; }
   .dicebox { grid-template-columns: auto 1fr; justify-items: start; align-items: center; gap: 26px; }
   .diceside { text-align: left; }

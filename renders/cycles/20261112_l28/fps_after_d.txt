@@ -1,0 +1,16 @@
+L28_FPS after_d  2026-11-12T15:32:21  10 s/theme  NVIDIA GeForce RTX 2060
+L28_FPS barracks   floor 16  fps  161.3  worst   7.1 ms  lights 38 (shadowed 1)  emitters  2  decals 18
+L28_FPS mess       floor 26  fps  116.2  worst   9.6 ms  lights 51 (shadowed 1)  emitters  2  decals 18
+L28_FPS crypt      floor 13  fps  124.5  worst   9.7 ms  lights 52 (shadowed 1)  emitters  4  decals 18
+L28_FPS prison     floor 11  fps  175.8  worst  16.6 ms  lights 31 (shadowed 1)  emitters  2  decals 18
+L28_FPS treasury   floor  8  fps  157.2  worst  16.9 ms  lights 50 (shadowed 1)  emitters  3  decals 18
+L28_FPS shrine     floor  9  fps  135.1  worst   8.3 ms  lights 45 (shadowed 1)  emitters  4  decals 18
+L28_FPS workshop   floor  7  fps  139.1  worst   8.3 ms  lights 47 (shadowed 1)  emitters  2  decals 18
+L28_FPS flooded    floor  4  fps  141.3  worst   8.3 ms  lights 41 (shadowed 1)  emitters  2  decals 18
+L28_FPS grassland  floor  2  fps  133.7  worst   8.4 ms  lights 50 (shadowed 1)  emitters  2  decals 18
+L28_FPS wood       floor 21  fps  130.6  worst   8.7 ms  lights 52 (shadowed 1)  emitters  4  decals 18
+L28_FPS firepit    floor  6  fps  115.2  worst   9.5 ms  lights 62 (shadowed 1)  emitters  5  decals 18
+L28_FPS fogbound   floor 12  fps  121.5  worst   9.1 ms  lights 43 (shadowed 1)  emitters  3  decals 18
+L28_FPS confection floor  3  fps  184.4  worst   6.9 ms  lights 43 (shadowed 1)  emitters  2  decals 18
+L28_FPS keep       floor 14  fps  133.5  worst  16.5 ms  lights 37 (shadowed 1)  emitters  3  decals 18
+L28_FPS boss       floor  5  fps  143.4  worst  31.3 ms  lights 47 (shadowed 2)  emitters  5  decals 18

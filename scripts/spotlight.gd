@@ -178,7 +178,10 @@ func _cheap(real: float) -> void:
 	_lane_env.sdfgi_enabled = false
 	_lane_env.volumetric_fog_enabled = false
 	for k in ["bits", "subs", "points", "wide"]:
-		(_panes[k]["cam"] as Camera3D).environment = _lane_env
+		# L28b: a lane looking into a delve sees that floor's own air (cheap: no SSAO)
+		var lc: Camera3D = _panes[k]["cam"]
+		var fe := DungeonHD.env_at(get_tree(), lc.global_position, true) if lc.is_inside_tree() else null
+		lc.environment = fe if fe != null else _lane_env
 
 ## while the grid is up the panes carry the view (feed_hud / hero_body read this)
 static func grid_up(t: Node) -> bool:

@@ -1582,6 +1582,35 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Tests: parse 0 script errors; _offfloor 0 of 969, INPROP 0, MON_INPROP 0; _delve_test 0 script errors, 0 null;
   L25_TEST OK 13/13, 0 stuck, 0 nudges. tools/_l28_matcount.gd prints the material counts.
 
+## L-cycle 112 - L28b biome distinction (laptop jestai, 2026-11-12) - L28b DONE
+- Why the floors looked alike: every delve camera rendered through the TOWN's WorldEnvironment (procedural sky
+  ambient 0.85, valley haze) - each floor was lit by a blue sky under its own lid. Tint alone could not undo that.
+- data/biomes.json "looks" (14 themes, tunable by hand): ambient [colour, energy]; fog [colour, depth density,
+  height-fog density near the floor]; grade [shadows, mids, highlights] -> a GradientTexture1D colour-correction LUT;
+  sat / contrast / glow; motes; ground [colour, amount].
+- FloorGen.make_env(theme, floor_y, boss, cheap): BG_COLOR (dark), colour ambient, reflections off (no sky in the
+  gold), AGX, depth fog + height fog sitting on the floor, glow for flames, the LUT grade; boss floors a touch denser
+  fog, more glow and contrast. DungeonHD.env(cheap) caches it per floor; DungeonHD.env_at(tree, p) finds the floor
+  under a point (floors join group "dungeon_floor").
+- Cameras (approved by Mr. E this session - laptop files outside the L28 brief's list): rts_camera._air_tick swaps
+  cam.environment to the floor's air every 0.25 s while the focus is below ground (null = the town's again);
+  spotlight._cheap gives a lane looking into a delve that floor's cheap env (no SSAO), else the town copy as before.
+- FloorGen._motes: ONE GPUParticles3D per floor over the whole grid (cap 120): dust / ash / embers / pollen /
+  fireflies / drips / mist / sparkles by theme, additive billboards with a fade ramp.
+- Ground: kit shader patch_col / patch_amt on FLOOR tiles only (moss in the wood and meadow, soot in the firepits and
+  workshop, silt in the flooded gallery, sugar in the confection), broken by two noises.
+- No two alike: tools/_l28_alike.gd reads each theme's room shot - 8x8 thumbnail distance (closest barracks ~
+  workshop 0.159, min 0.08) and whole-frame palette distance (closest mess ~ treasury 0.093, min 0.05):
+  L28_ALIKE OK 14/14. Barracks was retuned away from prison (palette 0.050) and mess (both orange) on the way.
+- Sheet: renders/cycles/20261112_l28/all_sheet.png (L28_SET=all L28_ENV=floor, windowed 1920x1080), one row per theme
+  in FloorGen.all_themes() order: barracks, mess, crypt, prison, treasury, shrine, workshop, flooded, grassland, wood,
+  firepit, fogbound, confection, keep. (The mess "close" frame faces a bare wall - the shot tool's framing, not the look.)
+- Tests: parse 0 script errors (the 3 town-side headless null lines unchanged); _offfloor 0 of 1081, INPROP 0,
+  MON_INPROP 0; _delve_test 0 script errors, 0 null; L25_TEST OK 13/13 (1 nudge); L21_TEST OK 46/46 (windowed
+  1920x1080 - camera files touched); L24_TEST OK 6/6. No new class_name.
+- Next (L28c / L28d): lighting per floor (key+fill from the look, torches/braziers as OmniLights with embers, depth fog,
+  boss drama, emitter cap, FPS check) and detail decals. See the handoff brief.
+
 ## D18b dress the valley - DONE Nov 12 (desktop scheduled run, D-cycle)
 - The country past the wall had steadings but bare ground round them; D18b makes it read as worked land. New code in scripts/valley.gd: `_dress_valley(coal, bram, ash)` run at the end of setup() (before nav bake), plus `_steading / _field_spot / _field / _fence_ring / _scarecrow / _garden / _hayrick / _graze / _jetty / _copse / _verges / _find_open`.
 - Each steading (Coalfoot, Bramble End) gets up to 2 ploughed, fenced, cropped fields placed on clear gentle ground off the lanes (town._field_ok + town._ground_patch reused; crops a MultiMesh of Grass_Wispy_Tall tinted gold for wheat / Plant_1 for veg, shadows off, vis-range 320), a post-and-rail fence (Prop_WoodenFence_Single) with a gate gap facing the cottages, a straw scarecrow on a cross of poles, a worn footpath from the steading to the gate, a picket kitchen garden (rows of greens + a carrot crate + a bucket), a two-stack hayrick, and a few beasts grazing loose nearby (3 sheep / 2 cattle via town._animal).
@@ -1590,6 +1619,48 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - New tools: tools/_d18b_test.gd (build invariants: counts, every valley field on gentle ground off the roads inside the navmesh, none overlapping, jetty footprint present, grazing stock added) and tools/_d18b_shot.gd (windowed shot sheet of each steading, the jetty, the ford, an aerial).
 - Build + checks: parse 0 SCRIPT ERROR / Parse Error (3 known headless material-null, unchanged). D18B_TEST OK fields=4 crops=1416 fences=133 animals=79. _offfloor 0 of 1036 (INPROP 0, MON_INPROP 0). TWITCH_PARSE OK. _townwalk in_solid 0/18452 raid 0/4831 PASS, STUCK_ON_ROUTE_TOTAL 0 over 120 s. _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party back up from floor 2.
 - Shots renders/cycles/20261112_d18b: Coalfoot + Bramble End each read lived-in (furrowed fields, fences, kitchen garden, hayricks, residents, wildflower verges, footpaths); the jetty/ford framing is loose (camera aimed uphill) but the footprint and dock structures check out; aerial of the town core. valley.gd backed up valley.gd.bak_d18b.
+
+## L-cycle 113 - L28c lighting / atmosphere (laptop jestai, 2026-11-12) - L28c DONE
+- data/biomes.json looks gain "key" [colour, energy], "fill" [colour, energy] and "boss" (the lord's colour), all 14.
+- FloorGen: the KEY is one shadowed SpotLight3D under the lid raking the lamp-stand's room from a corner (the only
+  shadowed light on an ordinary floor); the overhead fill grid takes the look's fill colour at ~half its old energy;
+  make_env ambient x0.7 (AMBIENT_L28C) so key, torches and braziers make pools instead of flat light. Torch and lava
+  lights flicker (looping tweens, no script); all torches/fills/lava stay unshadowed.
+- Embers: FloorGen.flame_embers - ONE GPUParticles3D per floor emitting from a POINTS texture of every flame (torches,
+  braziers, lava pools), so twenty flames cost one emitter.
+- DungeonParts.brazier: standing iron brazier (legs, bowl, glowing coals, flame, flickering light); DungeonHD._dress
+  sets two on open cells (obstacles r 0.6).
+- Boss floors: a coloured shadowed spot + under-glow on the lord, an ash/ember ring round it, and a harder grade
+  (contrast x1.10, sat x1.08, shadows and haze pulled toward the lord's colour).
+- Emitter cap: DungeonHD._atmos counts the floor's own GPUParticles3D (creatures counted apart), cap 12 (drops the
+  lord's ash, then motes, if ever over) and prints L28C_EMITTERS ... per floor: 2-5 measured, lights 31-62 (1-2 shadowed).
+- FPS (tools/_l28_fps.gd, windowed 1920x1080, vsync off, floor at y -400, game camera orbiting the lamp, 10 s/theme),
+  before -> after: barracks 169->162, mess 122->116, crypt 129->125, prison 184->176, treasury 165->159,
+  shrine 139->138, workshop 148->137, flooded 144->142, grassland 141->131, wood 138->131, firepit 120->116,
+  fogbound 128->122, confection 197->184, keep 141->131, boss 149->144 (fps_before.txt / fps_after_c.txt).
+- Shots: renders/cycles/20261112_l28/c_sheet.png (L28_SET=c L28_ENV=floor): every theme + a boss floor, views
+  room / close / game (the director's framing). "close" now faces the longest open run (the mess bare-wall nit fixed
+  for c/d sets). L28_ALIKE OK 14/14 on c shots (L28_ALIKE_SET=c; barracks key/fill cooled to stay off mess).
+- Depth fog: kept exponential + height fog from L28b (the depth mode would re-tune every look); boss floors tint it.
+- Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 832, INPROP 0, MON_INPROP 0;
+  _delve_test 0 script errors, 0 null; L25_TEST OK 13/13, 0 stuck, 0 nudges. No camera/UI files touched. No class_name.
+
+## L-cycle 114 - L28d detail decals (laptop jestai, 2026-11-12) - L28d DONE
+- tools/_l28_decals.gd (headless, fixed seeds) writes assets/dungeon_look/decal_{crack,moss,blood,soot,veins,
+  veins_glow}.png, 256x256 RGBA: branching random-walk fissures, FastNoiseLite moss clumps, a blood splat with drops
+  and a smear, a ragged scorch, white veins + a premultiplied glow mask (a Decal's emission ignores alpha - the first
+  try glowed as full squares). Self-made, CC0 - note in docs/ASSETS.md.
+- DungeonHD._decals: 18 decals a floor (DECAL_CAP 24, printed as L28D_DECALS): 9 of the theme's mark (moss in wood /
+  grassland / flooded, soot in firepit / workshop, blood in prison / barracks / crypt), scar-glass veins from floor 6
+  (floor-4, max 6; violet, emissive), cracks for the rest. ~45% of wall-touching picks project sideways onto the wall
+  base (normal_fade 0.5), the rest lie on the floor (2.6-3.8 m, random turn). Candidates are floor cells NOT in
+  info["keep_clear"] (the route + every corridor) and not the entry/exit stair cells. Distance-faded past 70 m.
+- FPS (tools/_l28_fps.gd, after_d): within +-1 fps of L28c on every theme (e.g. firepit 115.2, crypt 124.5,
+  confection 184.4, boss 143.4); fps_after_d.txt.
+- Shots: renders/cycles/20261112_l28/d_sheet.png (L28_SET=d L28_ENV=floor; every theme + boss, room / close / game).
+- Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 995, INPROP 0, MON_INPROP 0;
+  _delve_test 0 script errors, 0 null, 0 ERROR; windowed shot run 0 errors; L25_TEST OK 13/13, 0 stuck, 0 nudges.
+  No class_name, no camera/UI files touched.
 
 ## D-cycle (D18c ground & materials) - DONE Nov 12 (desktop scheduled run)
 - ground.gdshader: a damp muddy shore where the valley ground dips to the waterline (new uniform water_y, set from town.WATER_Y;

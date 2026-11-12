@@ -374,8 +374,8 @@ static func _pbr_map(steel: bool) -> ImageTexture:
     _pbr[steel] = t
     return t
 
-static func _kit_mat(tint: Color, steel: bool) -> ShaderMaterial:
-    var key := "%s|%s|%s" % [_look_theme, tint.to_html(), steel]
+static func _kit_mat(tint: Color, steel: bool, ground := false) -> ShaderMaterial:
+    var key := "%s|%s|%s|%s" % [_look_theme, tint.to_html(), steel, ground]
     if _kit_mats.has(key):
         return _kit_mats[key]
     var L: Dictionary = LOOK.get(_look_theme, LOOK["_"])
@@ -393,8 +393,240 @@ static func _kit_mat(tint: Color, steel: bool) -> ShaderMaterial:
     m.set_shader_parameter("normal_strength", float(L["relief"]))
     m.set_shader_parameter("vary", float(L["vary"]))
     m.set_shader_parameter("wet", float(L["wet"]))
+    # L28b: the biome's ground lies over the floor tiles only (not table tops)
+    var gr: Array = look(_look_theme).get("ground", ["#808080", 0.0])
+    m.set_shader_parameter("patch_col", Color(String(gr[0])))
+    m.set_shader_parameter("patch_amt", float(gr[1]) if ground else 0.0)
     _kit_mats[key] = m
     return m
+
+## ---------------------------------------------------------------- L28b: each floor's own air
+## data/biomes.json "looks", by theme: ambient, fog, colour grade, glow, motes, ground
+static var _looks := {}
+static func look(theme: String) -> Dictionary:
+    if _looks.is_empty():
+        var f := FileAccess.open("res://data/biomes.json", FileAccess.READ)
+        if f:
+            var d = JSON.parse_string(f.get_as_text())
+            if d is Dictionary:
+                _looks = (d as Dictionary).get("looks", {})
+        if _looks.is_empty():
+            _looks = {"_": {}}
+    return _looks.get(theme, {})
+
+## the environment a camera looking into this floor uses instead of the town's sky: a dark
+## ground, the theme's ambient light, depth haze plus a heavier layer near the floor, the
+## colour grade as a per-channel LUT, and glow for the flames. `floor_y` = the floor's world
+## height (the height fog sits on it). Lanes ask with cheap = true (no SSAO / SSIL).
+const AMBIENT_L28C := 0.7
+static func make_env(theme: String, floor_y: float, boss: bool, cheap := false) -> Environment:
+    var L := look(theme)
+    var e := Environment.new()
+    var gr: Array = L.get("grade", ["#000000", "#808080", "#ffffff"])
+    var fog: Array = L.get("fog", ["#202020", 0.01, 0.1])
+    var amb: Array = L.get("ambient", ["#808080", 0.55])
+    e.background_mode = Environment.BG_COLOR
+    e.background_color = Color(String(gr[0])).darkened(0.4)
+    e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+    e.ambient_light_color = Color(String(amb[0]))
+    # L28c: the flat ambient steps back so the key, torches and braziers make pools of light
+    e.ambient_light_energy = float(amb[1]) * AMBIENT_L28C
+    e.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED   # no blue sky in the gold
+    e.tonemap_mode = Environment.TONE_MAPPER_AGX
+    e.fog_enabled = true
+    e.fog_light_color = Color(String(fog[0]))
+    e.fog_light_energy = 1.0
+    e.fog_density = float(fog[1]) * (1.25 if boss else 1.0)
+    e.fog_sky_affect = 0.0
+    e.fog_height = floor_y + 1.2
+    e.fog_height_density = float(fog[2])
+    e.glow_enabled = true
+    e.glow_intensity = float(L.get("glow", 0.4)) * (1.3 if boss else 1.0)
+    e.glow_bloom = 0.05
+    e.glow_hdr_threshold = 1.1
+    e.adjustment_enabled = true
+    e.adjustment_saturation = float(L.get("sat", 1.0))
+    e.adjustment_contrast = float(L.get("contrast", 1.0)) * (1.06 if boss else 1.0)
+    e.adjustment_brightness = 1.0
+    var g := Gradient.new()
+    g.set_color(0, Color(String(gr[0])))
+    g.set_color(1, Color(String(gr[2])))
+    g.add_point(0.5, Color(String(gr[1])))
+    var gt := GradientTexture1D.new()
+    gt.gradient = g
+    gt.width = 256
+    e.adjustment_color_correction = gt
+    e.ssao_enabled = not cheap
+    e.ssao_intensity = 1.6
+    # L28c: a lord's floor is graded harder - deeper shadows pulled toward the lord's colour,
+    # a little more contrast and colour, the haze tinted by it
+    if boss and L.has("boss"):
+        var bc := Color(String(L["boss"]))
+        e.fog_light_color = Color(String(fog[0])).lerp(bc.darkened(0.5), 0.35)
+        e.adjustment_contrast = float(L.get("contrast", 1.0)) * 1.10
+        e.adjustment_saturation = float(L.get("sat", 1.0)) * 1.08
+        g.set_color(0, Color(String(gr[0])).lerp(bc.darkened(0.85), 0.5))
+        e.ssao_intensity = 2.0
+    return e
+
+## the floor's ambient particles: ONE emitter over the whole grid (capped), what floats in
+## the air of that world - dust in the halls, embers over the firepits, spores in the buried
+## wood, fireflies, drips, sugar glints. [amount, colour, size, energy, up-speed, gravity, lifetime]
+const MOTES := {
+    "dust":      [90,  Color(1.0, 0.92, 0.78), 0.05, 1.2, 0.05, -0.01, 9.0],
+    "ash":       [110, Color(0.78, 0.80, 0.88), 0.06, 0.8, -0.10, -0.03, 10.0],
+    "embers":    [120, Color(1.0, 0.45, 0.12), 0.06, 6.0, 0.65, 0.05, 5.0],
+    "pollen":    [100, Color(1.0, 0.96, 0.55), 0.05, 2.0, 0.08, 0.0, 9.0],
+    "fireflies": [60,  Color(0.70, 1.0, 0.45), 0.07, 7.0, 0.06, 0.0, 7.0],
+    "drips":     [80,  Color(0.75, 0.85, 0.80), 0.035, 1.0, -2.6, -6.0, 1.6],
+    "mist":      [40,  Color(0.80, 0.88, 0.92), 0.9, 0.12, 0.03, 0.0, 12.0],
+    "sparkles":  [90,  Color(1.0, 0.92, 0.70), 0.045, 6.5, 0.04, 0.0, 4.0],
+}
+static func _motes(root: Node3D, kind: String, half_w: float, half_h: float) -> void:
+    if not MOTES.has(kind):
+        return
+    var s: Array = MOTES[kind]
+    var p := GPUParticles3D.new()
+    p.name = "Motes_" + kind
+    p.amount = int(s[0])
+    p.lifetime = float(s[6])
+    p.preprocess = float(s[6])
+    p.randomness = 0.6
+    var top := 5.5 if kind != "mist" else 1.2
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+    pm.emission_box_extents = Vector3(half_w, top * 0.5, half_h)
+    pm.direction = Vector3(0, signf(float(s[4])) if float(s[4]) != 0.0 else 1.0, 0)
+    pm.spread = 35.0 if kind != "drips" else 2.0
+    pm.initial_velocity_min = absf(float(s[4])) * 0.5
+    pm.initial_velocity_max = absf(float(s[4])) * 1.2
+    pm.gravity = Vector3(0, float(s[5]), 0)
+    pm.turbulence_enabled = kind in ["dust", "ash", "pollen", "fireflies", "mist", "embers"]
+    pm.turbulence_noise_strength = 0.6
+    pm.turbulence_noise_scale = 4.0
+    pm.scale_min = 0.6
+    pm.scale_max = 1.4
+    var fade := Gradient.new()
+    fade.set_color(0, Color(1, 1, 1, 0))
+    fade.set_color(1, Color(1, 1, 1, 0))
+    fade.add_point(0.2, Color(1, 1, 1, 1))
+    fade.add_point(0.8, Color(1, 1, 1, 1))
+    var ft := GradientTexture1D.new()
+    ft.gradient = fade
+    pm.color_ramp = ft
+    p.process_material = pm
+    var q := QuadMesh.new()
+    q.size = Vector2(float(s[2]), float(s[2]) * (3.0 if kind == "drips" else 1.0))
+    var mat := StandardMaterial3D.new()
+    mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD if kind != "mist" else BaseMaterial3D.BLEND_MODE_MIX
+    mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+    mat.vertex_color_use_as_albedo = true
+    var c: Color = s[1]
+    mat.albedo_color = Color(c.r * float(s[3]), c.g * float(s[3]), c.b * float(s[3]), 0.16 if kind == "mist" else 0.9)
+    if kind == "mist":
+        mat.albedo_color = Color(c.r, c.g, c.b, 0.10)
+    mat.no_depth_test = false
+    q.material = mat
+    p.draw_pass_1 = q
+    p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    p.position = Vector3(0, top * 0.5 + 0.2, 0)
+    p.visibility_aabb = AABB(Vector3(-half_w - 2, -top, -half_h - 2), Vector3(half_w * 2 + 4, top * 3, half_h * 2 + 4))
+    root.add_child(p)
+
+## ---------------------------------------------------------------- L28c: light and fire
+## a flame's light breathes: a looping tween of three random dips around `base` (no script,
+## no per-frame cost on the GDScript side). Starts when the light enters the tree.
+static func _flicker(l: Light3D, base: float, seed_i: int, depth := 0.18) -> void:
+    var r := RandomNumberGenerator.new()
+    r.seed = seed_i
+    var go := func() -> void:
+        var t := l.create_tween().set_loops()
+        for k in 3:
+            t.tween_property(l, "light_energy", base * (1.0 - depth * r.randf_range(0.3, 1.0)), r.randf_range(0.07, 0.19))
+            t.tween_property(l, "light_energy", base * (1.0 + depth * 0.4 * r.randf()), r.randf_range(0.09, 0.23))
+    if l.is_inside_tree():
+        go.call()
+    else:
+        l.ready.connect(go, CONNECT_ONE_SHOT)
+
+## the floor's key: a shadowed spot under the lid, off to one corner of the lamp-stand, so
+## the light rakes and the room's pieces throw shadows across the floor the party fights on
+static func _key_light(root: Node3D, at: Vector3, col: Color, energy: float, span: float) -> SpotLight3D:
+    var s := SpotLight3D.new()
+    s.name = "KeyLight"
+    var pos := at + Vector3(-3.4, 6.2, -2.6)
+    s.transform = Transform3D(Basis.looking_at(at + Vector3(0, 0.4, 0) - pos, Vector3.UP), pos)
+    s.light_color = col
+    s.light_energy = energy
+    s.spot_range = clampf(span * 1.4, 18.0, 34.0)
+    s.spot_angle = 52.0
+    s.spot_attenuation = 0.9
+    s.spot_angle_attenuation = 1.6
+    s.shadow_enabled = true
+    s.shadow_blur = 1.6
+    s.shadow_bias = 0.04
+    s.light_specular = 0.6
+    root.add_child(s)
+    return s
+
+## ONE ember emitter for every flame on a floor (torches, braziers, lava): GPU particles
+## that spawn at a list of points, so twenty torches cost one draw and one emitter.
+static func flame_embers(root: Node3D, pts: Array, col: Color, half_w: float, half_h: float) -> GPUParticles3D:
+    if pts.is_empty():
+        return null
+    var n := pts.size()
+    var img := Image.create(n, 1, false, Image.FORMAT_RGBF)
+    for i in n:
+        var p: Vector3 = pts[i]
+        img.set_pixel(i, 0, Color(p.x, p.y, p.z))
+    var gp := GPUParticles3D.new()
+    gp.name = "Embers_flames"
+    gp.amount = clampi(n * 6, 24, 150)
+    gp.lifetime = 1.7
+    gp.preprocess = 1.7
+    gp.randomness = 0.5
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINTS
+    pm.emission_point_texture = ImageTexture.create_from_image(img)
+    pm.emission_point_count = n
+    pm.direction = Vector3(0, 1, 0)
+    pm.spread = 28.0
+    pm.initial_velocity_min = 0.35
+    pm.initial_velocity_max = 1.1
+    pm.gravity = Vector3(0, 0.45, 0)
+    pm.damping_min = 0.2
+    pm.damping_max = 0.6
+    pm.turbulence_enabled = true
+    pm.turbulence_noise_strength = 0.5
+    pm.turbulence_noise_scale = 2.0
+    pm.scale_min = 0.5
+    pm.scale_max = 1.3
+    var g := Gradient.new()
+    g.set_color(0, Color(1, 1, 1, 1))
+    g.add_point(0.6, Color(1, 0.7, 0.5, 0.8))
+    g.set_color(g.get_point_count() - 1, Color(1, 0.4, 0.2, 0))
+    var gt := GradientTexture1D.new()
+    gt.gradient = g
+    pm.color_ramp = gt
+    gp.process_material = pm
+    var q := QuadMesh.new()
+    q.size = Vector2(0.045, 0.045)
+    var m := StandardMaterial3D.new()
+    m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+    m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+    m.vertex_color_use_as_albedo = true
+    var c := col.lerp(Color(1.0, 0.55, 0.2), 0.5)
+    m.albedo_color = Color(c.r * 3.5, c.g * 3.5, c.b * 3.5, 1.0)
+    q.material = m
+    gp.draw_pass_1 = q
+    gp.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    gp.visibility_aabb = AABB(Vector3(-half_w - 4, -2, -half_h - 4), Vector3(half_w * 2 + 8, 12, half_h * 2 + 8))
+    root.add_child(gp)
+    return gp
 
 ## every kit surface on n gets the shared kit material for this theme / tint (one material
 ## per combination, not a copy per piece as the old tint made)
@@ -404,7 +636,7 @@ static func _skin(n: Node, asset: String, tint: Color) -> void:
         if asset.begins_with(p):
             steel = true
             break
-    var mat := _kit_mat(tint, steel)
+    var mat := _kit_mat(tint, steel, _tag == "floor")
     var st: Array = [n]
     while st.size() > 0:
         var c: Node = st.pop_back()
@@ -1001,6 +1233,8 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
 
     # ---- torches, tinted by theme
     var lit: Color = T["light"]
+    var LK := look(theme_key)
+    var flames: Array = []          # L28c: every flame on the floor (floor-local), for the embers
     _tag = "torch"
     for t in torch_spots:
         _put(root, "torch_mounted", Vector3(t.x, t.y, t.z))
@@ -1008,8 +1242,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
         l.light_color = lit
         l.light_energy = 9.0
         l.omni_range = 19.0
+        l.shadow_enabled = false
         l.position = Vector3(t.x, t.y + 0.35, t.z)
         root.add_child(l)
+        flames.append(Vector3(t.x, t.y + 0.42, t.z))
+        if kit_look:
+            _flicker(l, 9.0, rng.randi())
         var flame := MeshInstance3D.new()
         var fm := SphereMesh.new()
         fm.radius = 0.22
@@ -1044,6 +1282,10 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             fill.position = Vector3(fx, 8.0, fz)
             fill.light_color = lit.lerp(Color(1, 1, 1), 0.35)
             fill.light_energy = 3.4 / sqrt(float(nx * nz))
+            if kit_look and LK.has("fill"):
+                # L28c: the fill is the floor's own cool/warm under-light, not the torch colour
+                fill.light_color = Color(String(LK["fill"][0]))
+                fill.light_energy *= float(LK["fill"][1])
             fill.omni_range = span * 1.6 + 16.0
             fill.omni_attenuation = 1.0
             fill.shadow_enabled = false
@@ -1056,6 +1298,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     bounce.omni_attenuation = 1.0
     bounce.shadow_enabled = false
     root.add_child(bounce)
+    # L28c: the KEY. One shadowed spot from under the lid, raking across the lamp-stand's room
+    # from a corner so walls, pillars and furniture throw long shadows over the fighting floor -
+    # the one light on a floor that casts them (torches and fills stay unshadowed for cost).
+    if kit_look and LK.has("key"):
+        _key_light(root, cell_pos.call(lamp_cell.x, lamp_cell.y), Color(String(LK["key"][0])),
+                   float(LK["key"][1]) * (0.8 if boss else 1.0), span)
 
     # a lid so the overworld sun doesn't flood it
     var lid := MeshInstance3D.new()
@@ -1068,6 +1316,10 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     lid.position = Vector3(0, 7.0, 0)
     lid.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
     root.add_child(lid)
+
+    # L28b: what floats in this world's air (one capped emitter a floor)
+    if kit_look:
+        _motes(root, String(look(theme_key).get("motes", "dust")), half_w, half_h)
 
     # ---- interior structure. "pillared" earns a full colonnade; the others
     # get something lighter so they don't fight the room's own shape.
@@ -1119,7 +1371,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             gl.light_energy = 4.2
             gl.omni_range = G * 2.6
             gl.position = at + Vector3(0, 0.9, 0)
+            gl.shadow_enabled = false
             root.add_child(gl)
+            if kit_look:
+                _flicker(gl, 4.2, rng.randi(), 0.25)
+                for k in 3:      # embers lift off the molten face too (same shared emitter)
+                    flames.append(at + Vector3(rng.randf_range(-1.2, 1.2), -0.3, rng.randf_range(-1.2, 1.2)))
 
     # ---- THE LAMP-STAND, dead centre of every floor.
     #
@@ -1343,6 +1600,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             "cells": cells, "w": w, "h": h, "grid": G,
             "half": Vector2(half_w, half_h),
             "lamp": origin + lamp,
+            "flames": flames, "flame_col": lit,
             "origin_key": origin_key,
             "origin_name": String(ORIGINS[origin_key]["of"]),
             "origin_tell": String(ORIGINS[origin_key]["tell"])}

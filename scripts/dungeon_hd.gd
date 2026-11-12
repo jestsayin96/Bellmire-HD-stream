@@ -48,8 +48,35 @@ func _ready() -> void:
     if info.is_empty():
         build(floor_no)
 
+## L28b: the air of this floor for a camera looking into it (FloorGen.make_env, by theme,
+## made once each: full for the director's camera, cheap - no SSAO - for the lane panes)
+var _env := {}
+func env(cheap := false) -> Environment:
+    if not FloorGen.kit_look or info.is_empty():
+        return null
+    if not _env.has(cheap):
+        _env[cheap] = FloorGen.make_env(String(info.get("theme", "")), global_position.y, bool(info.get("boss", false)), cheap)
+    return _env[cheap]
+
+## the floor a camera at p is looking into (any floor in the tree whose grid is under p),
+## or null in the open air - cameras call this to swap the town's sky for the floor's air
+static func env_at(tree: SceneTree, p: Vector3, cheap := false) -> Environment:
+    if tree == null or p.y > -150.0:
+        return null
+    var best: DungeonHD = null
+    var bd := 1.0e9
+    for n in tree.get_nodes_in_group("dungeon_floor"):
+        var d: DungeonHD = n
+        var dd := Vector2(p.x - d.global_position.x, p.z - d.global_position.z).length()
+        if dd < bd:
+            bd = dd
+            best = d
+    return best.env(cheap) if best and bd < 200.0 else null
+
 func build(n: int) -> void:
     floor_no = n
+    add_to_group("dungeon_floor")
+    _env = {}
     for c in get_children():
         c.queue_free()
     monsters.clear()
@@ -58,6 +85,195 @@ func build(n: int) -> void:
     info = FloorGen.build(self, n, Vector3.ZERO)
     _dress()
     _people()
+    _atmos()
+    _decals()
+
+## ---------------------------------------------------------------- L28d: detail decals
+## self-made textures (tools/_l28_decals.gd -> assets/dungeon_look, CC0) projected on floor
+## cells and wall bases to break the tile repetition: cracks everywhere, moss / soot / blood by
+## theme, scar-glass veins once the floors run deep. Never on the stairs or the keep-clear
+## route (info["keep_clear"]: the way through + every corridor). Capped per floor.
+const DECAL_CAP := 24
+const DECAL_TEX := "res://assets/dungeon_look/decal_%s.png"
+const THEME_DECAL := {"wood": "moss", "grassland": "moss", "flooded": "moss",
+    "firepit": "soot", "workshop": "soot", "prison": "blood", "barracks": "blood", "crypt": "blood"}
+const SCAR_VEIN := Color(0.62, 0.32, 1.0)
+static var _dtex := {}
+var decals := 0
+
+static func _decal_tex(kind: String) -> Texture2D:
+    if not _dtex.has(kind):
+        var p := DECAL_TEX % kind
+        _dtex[kind] = load(p) if ResourceLoader.exists(p) else null
+    return _dtex[kind]
+
+func _decals() -> void:
+    decals = 0
+    if not FloorGen.kit_look:
+        return
+    var cells: Dictionary = info["cells"]
+    var keep: Dictionary = info.get("keep_clear", {})
+    var G: float = info["grid"]
+    var hw: float = (float(info["w"]) - 1.0) * G * 0.5
+    var hh: float = (float(info["h"]) - 1.0) * G * 0.5
+    var stair_cells := {}
+    for k in ["entry", "exit"]:
+        var sp: Vector3 = info[k]
+        stair_cells[Vector2i(int(round((sp.x + hw) / G)), int(round((sp.z + hh) / G)))] = true
+    var cand: Array = []
+    for c in cells:
+        if not keep.has(c) and not stair_cells.has(c):
+            cand.append(c)
+    var r := RandomNumberGenerator.new()
+    r.seed = hash("decal:%d" % floor_no)
+    for i in range(cand.size() - 1, 0, -1):
+        var j := r.randi_range(0, i)
+        var t = cand[i]; cand[i] = cand[j]; cand[j] = t
+    # the floor's mix: its theme's own mark, cracks, and veins that grow with depth
+    var plan: Array = []
+    var tk := String(THEME_DECAL.get(String(info.get("theme", "")), ""))
+    for i in (9 if tk != "" else 0):
+        plan.append(tk)
+    var veins := 0 if floor_no < 6 else mini(floor_no - 4, 6)
+    for i in veins:
+        plan.append("veins")
+    while plan.size() < DECAL_CAP - 6:
+        plan.append("crack")
+    for i in range(plan.size() - 1, 0, -1):
+        var j2 := r.randi_range(0, i)
+        var t2 = plan[i]; plan[i] = plan[j2]; plan[j2] = t2
+    var sides := [Vector2i(0, -1), Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0)]
+    var root: Node3D = info["root"]
+    var ci := 0
+    for kind in plan:
+        if decals >= DECAL_CAP or ci >= cand.size():
+            break
+        var c: Vector2i = cand[ci]
+        ci += 1
+        var tex := _decal_tex(String(kind))
+        if tex == null:
+            continue
+        var d := Decal.new()
+        d.name = "Decal_" + String(kind)
+        d.texture_albedo = tex
+        var base := _cell_pos(c)
+        var walls: Array = []
+        for s in sides:
+            if not cells.has(c + (s as Vector2i)):
+                walls.append(s)
+        if not walls.is_empty() and kind != "blood" and r.randf() < 0.45:
+            # the foot of a wall: projected sideways into the wall face, fading off the floor
+            var sv: Vector2i = walls[r.randi() % walls.size()]
+            var dir := Vector3(sv.x, 0, sv.y)
+            var y_ax := -dir
+            var z_ax := Vector3.UP
+            d.transform = Transform3D(Basis(y_ax.cross(z_ax), y_ax, z_ax),
+                base + dir * (G * 0.5 - FloorGen.WALL_IN) + Vector3(r.randf_range(-0.9, 0.9) * absf(dir.z), 0.75,
+                    r.randf_range(-0.9, 0.9) * absf(dir.x)))
+            d.size = Vector3(r.randf_range(2.6, 3.6), 0.9, 1.8)
+            d.normal_fade = 0.5
+        else:
+            var s2 := r.randf_range(2.6, 3.8) * (0.85 if kind == "blood" else 1.0)
+            d.position = base + Vector3(r.randf_range(-1.0, 1.0), 0.0, r.randf_range(-1.0, 1.0))
+            d.rotation.y = r.randf() * TAU
+            d.size = Vector3(s2, 0.7, s2)
+            d.normal_fade = 0.35
+        d.upper_fade = 0.2
+        d.lower_fade = 0.2
+        match String(kind):
+            "veins":
+                d.modulate = SCAR_VEIN
+                d.texture_emission = _decal_tex("veins_glow")
+                d.emission_energy = 2.4
+            "crack":
+                d.modulate = Color(1, 1, 1, 0.85)
+            "soot":
+                d.modulate = Color(1, 1, 1, 0.9)
+        d.distance_fade_enabled = true
+        d.distance_fade_begin = 70.0
+        d.distance_fade_length = 20.0
+        root.add_child(d)
+        decals += 1
+    print("L28D_DECALS floor %d %s: %d (cap %d)" % [floor_no, String(info.get("theme", "")), decals, DECAL_CAP])
+
+## ---------------------------------------------------------------- L28c: light and fire
+## hard cap on particle emitters a floor's dressing may run (motes, the shared flame embers,
+## trap fire, the lord's ash...); creatures' own emitters are counted apart
+const EMITTER_CAP := 12
+var emitters := 0
+
+## the boss floor's drama (a coloured shadowed spot on the lord, ash or embers round it),
+## the one shared ember emitter for every flame on the floor, then the emitter count + cap
+func _atmos() -> void:
+    var root: Node3D = info["root"]
+    if FloorGen.kit_look:
+        var L := FloorGen.look(String(info.get("theme", "")))
+        var hh: Vector2 = info["half"]
+        if bool(info.get("boss", false)) and lord:
+            var bc := Color(String(L.get("boss", "#ff4030")))
+            var at: Vector3 = lord.position
+            var s := SpotLight3D.new()
+            s.name = "LordLight"
+            var pos := at + Vector3(1.6, 6.0, 1.2)
+            s.transform = Transform3D(Basis.looking_at(at - pos, Vector3.UP), pos)
+            s.light_color = bc
+            s.light_energy = 16.0
+            s.spot_range = 12.0
+            s.spot_angle = 26.0
+            s.spot_angle_attenuation = 0.8
+            s.shadow_enabled = true
+            s.shadow_blur = 1.2
+            root.add_child(s)
+            var glow := OmniLight3D.new()          # an under-glow that tints the lord's dais
+            glow.light_color = bc
+            glow.light_energy = 2.2
+            glow.omni_range = 6.0
+            glow.shadow_enabled = false
+            glow.position = at + Vector3(0, 0.4, 0)
+            root.add_child(glow)
+            var ash := DungeonParts.embers(bc.lerp(Color(1, 1, 1), 0.25), 48, 2.2, 3.2)
+            ash.name = "Embers_lord"
+            ash.position = at + Vector3(0, 0.1, 0)
+            root.add_child(ash)
+        var flames: Array = (info.get("flames", []) as Array).duplicate()
+        flames.append_array(info.get("brazier_flames", []))
+        FloorGen.flame_embers(root, flames, info.get("flame_col", Color(1, 0.6, 0.3)), hh.x, hh.y)
+    var mine: Array = []
+    var theirs := 0
+    var lights := [0, 0]
+    _tally(root, mine, lights)
+    for m in monsters:
+        var c: Array = []
+        _tally(m, c, [0, 0])
+        theirs += c.size()
+    if lord:
+        var c2: Array = []
+        _tally(lord, c2, [0, 0])
+        theirs += c2.size()
+    # over the cap: decorative emitters go first (the lord's ash, then the motes) - trap fire stays
+    for nm in ["Embers_lord", "Motes_"]:
+        if mine.size() <= EMITTER_CAP:
+            break
+        for e in mine.duplicate():
+            if String((e as Node).name).begins_with(nm) and mine.size() > EMITTER_CAP:
+                mine.erase(e)
+                (e as Node).queue_free()
+    emitters = mine.size()
+    print("L28C_EMITTERS floor %d %s: %d (cap %d), creatures %d; lights %d (shadowed %d)" % [
+        floor_no, String(info.get("theme", "")), emitters, EMITTER_CAP, theirs, lights[0], lights[1]])
+
+## the floor's own emitters and lights (a creature's are its own business)
+func _tally(n: Node, out: Array, lights: Array) -> void:
+    for k in n.get_children():
+        if k is Monster:
+            continue
+        if k is GPUParticles3D:
+            out.append(k)
+        elif k is Light3D:
+            lights[0] += 1
+            if (k as Light3D).shadow_enabled:
+                lights[1] += 1
+        _tally(k, out, lights)
 
 func _cell_pos(c: Vector2i) -> Vector3:
     var G: float = info["grid"]
@@ -213,6 +429,17 @@ func _dress() -> void:
         var pn := _mk(String(spec[0]))
         if pn:
             _place_solid(pn, c, float(spec[1]), float(_rng.randi() % 4) * PI * 0.5)
+    # L28c: standing braziers on the open floor - light where the wall torches cannot reach,
+    # each flame feeding the floor's shared ember emitter (DungeonHD._atmos)
+    if FloorGen.kit_look:
+        info["brazier_flames"] = []
+        for i in range(2):
+            var c: Vector2i = take.call()
+            if c.x <= -999:
+                break
+            var bz := DungeonParts.brazier(info.get("flame_col", Color(1, 0.6, 0.3)), _rng.randi())
+            _place_solid(bz, c, 0.6)
+            (info["brazier_flames"] as Array).append(bz.position + DungeonParts.BRAZIER_FLAME)
     # wild-magic scarring deepens with depth: scar-glass breaks through the floor
     var scars := 0 if floor_no < 3 else mini((floor_no - 1) / 2, 5)
     for i in range(scars):

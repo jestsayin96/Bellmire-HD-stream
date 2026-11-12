@@ -364,6 +364,69 @@ static func scar_glass(seed_i := 1, count := 7) -> Node3D:
         t.tween_property(l, "light_energy", 2.0, rng.randf_range(0.3, 0.9)))
     return n
 
+## L28c: a standing iron brazier - three legs, a bowl of glowing coals, a flame and a
+## flickering light (unshadowed). Its embers come from the floor's shared flame emitter
+## (FloorGen.flame_embers): the flame point is BRAZIER_FLAME above the node.
+const BRAZIER_FLAME := Vector3(0, 1.25, 0)
+static func brazier(col: Color, seed_i := 1) -> Node3D:
+    var n := Node3D.new()
+    n.name = "Brazier"
+    var iron := _m(Color(0.09, 0.085, 0.08), 0.85, 0.45)
+    for k in 3:
+        var a := float(k) * TAU / 3.0
+        _cyl(n, 0.045, 1.0, Vector3(cos(a) * 0.22, 0.48, sin(a) * 0.22), iron,
+             Vector3(sin(a) * 0.22, 0, -cos(a) * 0.22))
+    var bowl := MeshInstance3D.new()
+    var bm := CylinderMesh.new()
+    bm.top_radius = 0.5
+    bm.bottom_radius = 0.22
+    bm.height = 0.3
+    bm.radial_segments = 12
+    bowl.mesh = bm
+    bowl.material_override = iron
+    bowl.position = Vector3(0, 1.0, 0)
+    n.add_child(bowl)
+    var coal := _m(col.lerp(Color(1.0, 0.35, 0.08), 0.6), 0.0, 0.9)
+    coal.emission_enabled = true
+    coal.emission = col.lerp(Color(1.0, 0.35, 0.08), 0.6)
+    coal.emission_energy_multiplier = 3.0
+    _cyl(n, 0.44, 0.06, Vector3(0, 1.13, 0), coal)
+    var flame := MeshInstance3D.new()
+    var fm := SphereMesh.new()
+    fm.radius = 0.26
+    fm.height = 0.7
+    fm.radial_segments = 10
+    fm.rings = 6
+    flame.mesh = fm
+    var fmat := StandardMaterial3D.new()
+    fmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    fmat.albedo_color = col
+    fmat.emission_enabled = true
+    fmat.emission = col
+    fmat.emission_energy_multiplier = 8.0
+    fm.material = fmat
+    flame.position = Vector3(0, 1.38, 0)
+    n.add_child(flame)
+    var l := OmniLight3D.new()
+    l.light_color = col
+    l.light_energy = 5.0
+    l.omni_range = 11.0
+    l.shadow_enabled = false
+    l.position = Vector3(0, 1.7, 0)
+    n.add_child(l)
+    var r := RandomNumberGenerator.new()
+    r.seed = seed_i
+    n.ready.connect(func() -> void:
+        var t := l.create_tween().set_loops()
+        t.tween_property(l, "light_energy", 3.8, r.randf_range(0.08, 0.16))
+        t.tween_property(l, "light_energy", 5.4, r.randf_range(0.10, 0.22))
+        t.tween_property(l, "light_energy", 4.4, r.randf_range(0.07, 0.14))
+        t.tween_property(l, "light_energy", 5.0, r.randf_range(0.12, 0.2))
+        var ft := flame.create_tween().set_loops()
+        ft.tween_property(flame, "scale", Vector3(1.0, 1.15, 1.0), r.randf_range(0.12, 0.2))
+        ft.tween_property(flame, "scale", Vector3(0.92, 0.9, 0.92), r.randf_range(0.12, 0.2)), CONNECT_ONE_SHOT)
+    return n
+
 ## a lit wall torch with a flickering light
 static func torch_lit() -> Node3D:
     var n := kit("torch_mounted")

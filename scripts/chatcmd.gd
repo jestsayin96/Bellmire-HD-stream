@@ -126,7 +126,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "memorial": out = _memorial()
         "deepest":  out = _board("deepest")
         "richest":  out = _board("gold")
-        "guild", "roll", "ranks":
+        "guild", "ranks":
                     out = _board("standing")
         "deadliest": out = _board("kills")
         "patrons", "benefactors":

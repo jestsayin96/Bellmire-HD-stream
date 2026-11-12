@@ -54,7 +54,7 @@ func _initialize() -> void:
 	# fightoverlay shares the chat (data/commands.json "foreign"): its words, its v-prefix and
 	# their near misses get NO reply and NO nudge; Bellmire's own typos still get one
 	var silent: Array = []
-	for w in ["!hug", "!hugg", "!jump", "!8ball", "!royale", "!boss", "!fightt", "!clas", "!vstats", "!vstat", "!vhelp", "!vroll", "!vshop", "!valley", "!vanything"]:
+	for w in ["!hug", "!hugg", "!jump", "!8ball", "!royale", "!boss", "!fightt", "!clas", "!vstats", "!vstat", "!vhelp", "!vroll", "!vshop", "!valley", "!vanything", "!roll", "!roll 2d6", "!rol"]:
 		cc._last.clear()
 		if cc.handle("u1", "Ash", w) != "":
 			silent.append(w)
@@ -63,6 +63,9 @@ func _initialize() -> void:
 		cc._last.clear()
 		out = cc.handle("u1", "Ash", pair[0])
 		_ok(out.contains("did you mean " + pair[1]), "Bellmire's own typo %s is still nudged: %s" % [pair[0], out])
+	cc._last.clear()
+	var rk := cc.handle("u1", "Ash", "!ranks")
+	_ok(rk != "" and not rk.contains("did you mean"), "!ranks still answers the Guild Roll: %s" % rk.substr(0, 60))
 	var clash: Array = []
 	for k in cs:
 		for n in [k] + Array(cs[k].get("aliases", [])):

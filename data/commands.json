@@ -43,7 +43,7 @@
     "respec":    {"aliases": [], "args": "<class>", "cost": "200 gold", "needs_hero": true,
                   "what": "Take up another calling, keeping your hero.",
                   "example": "!respec cleric"},
-    "guild":     {"aliases": ["roll", "ranks"], "args": "", "cost": "free", "needs_hero": false,
+    "guild":     {"aliases": ["ranks"], "args": "", "cost": "free", "needs_hero": false,
                   "what": "The Guild Roll: who stands highest.",
                   "example": "!guild"},
     "memorial":  {"aliases": [], "args": "", "cost": "free", "needs_hero": false,
@@ -71,7 +71,7 @@
   "foreign": {
     "_why": "Other apps reading the same chat (Mr. E, Nov 11). Bellmire never answers these, and never nudges a word that is one of them, starts with one of their prefixes, or is a near miss of one - a viewer's !hug works in the overlay, and a 'No !hug here' in the Chronicle would read as a broken game. A new overlay command is an edit here, not in code. Never add a Bellmire command that matches one.",
     "fightoverlay": {"prefixes": ["v"],
-                     "exact": ["jump", "dance", "sit", "wave", "hat", "charge", "color", "random", "hideavatar", "hug", "attack", "slap", "punch", "bomb", "explode", "avatar", "class", "accept", "royale", "join", "basketball", "hoop", "shoot", "boss", "megaboss", "lounge", "war", "fight", "village", "log", "feed", "8ball", "mass",
+                     "exact": ["jump", "dance", "sit", "wave", "hat", "charge", "color", "random", "hideavatar", "hug", "attack", "slap", "punch", "bomb", "explode", "avatar", "class", "accept", "royale", "join", "basketball", "hoop", "shoot", "boss", "megaboss", "lounge", "war", "fight", "village", "log", "roll", "feed", "8ball", "mass",
                                "vshop", "vbuy", "vpoints", "vgive", "vtop", "vduel", "vslots", "vcoins", "vgold", "vlb", "vleaderboard", "vstats", "vroll", "vhelp", "vcommands"]},
     "chat_bots":    {"prefixes": [], "exact": ["discord", "so"]}
   }

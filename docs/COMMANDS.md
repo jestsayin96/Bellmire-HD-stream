@@ -19,7 +19,7 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 | `!dye` |  | <colour> | 25 gold | Dye your armour and cloak: black, white, red, blue, green, gold, purple, teal, brown, grey. | `!dye teal` |
 | `!reroll` |  |  | free when dead; 120 gold alive | Dead: raise a new hero. Alive: throw your ability scores again (a worse throw keeps the old ones). | `!reroll` |
 | `!respec` |  | <class> | 200 gold | Take up another calling, keeping your hero. | `!respec cleric` |
-| `!guild` | !roll, !ranks |  | free | The Guild Roll: who stands highest. (no hero needed) | `!guild` |
+| `!guild` | !ranks |  | free | The Guild Roll: who stands highest. (no hero needed) | `!guild` |
 | `!memorial` |  |  | free | The fallen, newest first. (no hero needed) | `!memorial` |
 | `!deepest` |  |  | free | Who has been furthest down. (no hero needed) | `!deepest` |
 | `!deadliest` |  |  | free | Who has killed the most. (no hero needed) | `!deadliest` |

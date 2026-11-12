@@ -590,3 +590,79 @@ footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: c
   .brow.lead .bval b { font-size: 1.45rem; }
   .town li { font-size: .84rem; padding: 3px 10px; }
 }
+
+/* ===========================================================================
+   Micro-animations. All gated behind prefers-reduced-motion: no-preference, so
+   a reduced-motion viewer gets a still page. Kept off the 200-hero crowd (only
+   panels, board rows and chronicle entries animate) so a busy night stays fast.
+   ======================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .panel, .plain { animation: rise .45s cubic-bezier(.22,1,.36,1) both; }
+  .brow { animation: feedin .4s ease both; }
+  .centry { animation: feedin .4s ease both; }
+  /* a short stagger so the boards and the feed settle in sequence, not all at once */
+  .brow:nth-child(2) { animation-delay: .03s; } .brow:nth-child(3) { animation-delay: .06s; }
+  .brow:nth-child(4) { animation-delay: .09s; } .brow:nth-child(5) { animation-delay: .12s; }
+  .brow:nth-child(6) { animation-delay: .15s; } .brow:nth-child(n+7) { animation-delay: .18s; }
+  .centry:nth-child(2) { animation-delay: .03s; } .centry:nth-child(3) { animation-delay: .06s; }
+  .centry:nth-child(4) { animation-delay: .09s; } .centry:nth-child(n+5) { animation-delay: .12s; }
+
+  details.hero { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+  details.hero:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.28); border-color: var(--edge); }
+  .brow:not(.lead) { transition: background .15s ease; }
+  .brow:not(.lead):hover { background: rgba(35,166,160,.08); }
+  .chip, nav a, .d20, .linkbtn { transition: transform .12s ease, border-color .15s ease, background .15s ease, color .15s ease; }
+  .chip:hover { transform: translateY(-1px); }
+  .cchip { transition: border-color .15s ease; }
+  .gcard { transition: border-color .15s ease, background .15s ease; }
+  details.hero:hover .gcard { border-color: var(--edge-2); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes feedin { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+/* ===========================================================================
+   Stream-overlay mode (?overlay=1): a thin, glanceable parchment column sized
+   for an OBS browser source over gameplay. Same markup, same data, same
+   security - the stylesheet just narrows it to the live essentials (town
+   status, the top of the current board, and the Chronicle feed) and hides the
+   interactive furniture nobody can click through a stream. Designed to read at
+   a 1080-tall source; the page background goes transparent so it sits over the
+   capture. Everything stays on-brand parchment, a touch larger for distance.
+   ======================================================================== */
+html.overlay, html.overlay body { background: transparent !important; }
+html.overlay .wrap { max-width: 440px; margin: 0; padding: 10px 10px 14px; }
+html.overlay nav,
+html.overlay #heroes,
+html.overlay #dice,
+html.overlay .duo,
+html.overlay #commands,
+html.overlay footer,
+html.overlay .findrow,
+html.overlay #boardSelf,
+html.overlay #boardTabs,
+html.overlay #chronChips,
+html.overlay .big-msg { display: none !important; }
+/* a slim masthead */
+html.overlay header.hero { padding: 10px 12px 0; margin-bottom: 10px; }
+html.overlay .emblem { width: 44px; }
+html.overlay .wordmark { font-size: 1.8rem; }
+html.overlay .hero .sub { font-size: .85rem; }
+html.overlay .band { height: 5px; margin-top: 8px; }
+/* town + status stay, compact */
+html.overlay .town { gap: 5px; margin-bottom: 8px; }
+html.overlay .town li { font-size: .86rem; padding: 3px 9px; }
+html.overlay .status { font-size: .85rem; padding: 7px 10px; margin-bottom: 10px; }
+html.overlay .status button { display: none; }   /* no retry button on a stream source */
+/* the current board: leader + the next four = a top five */
+html.overlay #boardList .brow:nth-child(n+5) { display: none; }
+html.overlay .board, html.overlay #boardTop { font-size: .96rem; }
+html.overlay .bval b { font-size: 1.25rem; }
+html.overlay .boardCount, html.overlay #boardNote { display: none; }
+/* the Chronicle is the live heart of the overlay - give it room, keep it a feed */
+html.overlay #chronicle { margin-top: 10px; }
+html.overlay .chron { gap: 6px; }
+html.overlay .centry { font-size: .92rem; }
+html.overlay .cline { font-size: .95rem; }
+html.overlay .note { font-size: .8rem; }
+/* titles a touch tighter in the column */
+html.overlay .title { font-size: 1.2rem; }

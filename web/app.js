@@ -22,6 +22,10 @@ const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
 const params = new URLSearchParams(location.search);
 const TEST = params.get("state");   // empty | fail | stale (local checks)
 const MOCK = params.get("mock");    // chronicle | crowd (local checks)
+const OVERLAY = params.has("overlay");  // ?overlay=1 : the thin on-stream (OBS) column
+// overlay mode: a narrow, dark, glanceable column over the stream. Same data, same
+// security - a body class the stylesheet reshapes; no separate code path for snapshot data.
+if (OVERLAY) document.documentElement.classList.add("overlay");
 
 const $ = (id) => document.getElementById(id);
 let last = null;               // {payload, updated_at} of the last good read
@@ -872,6 +876,7 @@ function withMock(p) {
     made[3].gold = made[4].gold = 777;
     out.heroes = made.concat(arr(p.heroes));
     out.fallen = [{ name: "Grimhollow", class: "knight", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12 }].concat(arr(p.fallen));
+    out.chronicle = MOCK_CHRONICLE;   // so ?mock=crowd exercises the feed too
   }
   return out;
 }

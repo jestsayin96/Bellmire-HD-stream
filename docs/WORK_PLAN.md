@@ -276,6 +276,48 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       that fails at random teaches everyone to ignore it, which is worse than no test.
       DONE (Cycle 83): a lord floor + the director deciding at once when the story is live (its own _best / _cut); timing samples best of 3; L20_TEST OK x3 in a row.
 
+- [ ] S1. SOUND WIRING - DESKTOP (town side). The RPG sound library is already on main (commit 00cf0ef):
+      86 ids registered as Sfx kinds, played with Sfx.at(id, pos) (3D, in the world) or Sfx.play(id)
+      (flat). Do NOT edit sfx.gd except to add a GAP throttle for a kind that fires often. Wire the
+      kinds that belong to the town, in the desktop-owned files only:
+        - townsfolk.gd: villagers and named NPCs give an occasional gendered voice - male_/female_grunt,
+          _effort, _laugh (pick by the NPC's sex). Sample it, do not sound every tick - it should feel
+          alive, not a crowd grunting. The crier can use male_/female_attack_yell for a shout.
+        - spells.gd: town-side casts -> fireball (magic fire), ice_shard, lightning (zap), heal, buff,
+          curse, shield, summon, mana_charge. Play at the caster's position.
+        - raids.gd: raiders arriving -> orc_roar / troll_roar / goblin_screech (by raider kind), a horn
+          already plays; combat hits during the raid -> sword_clash / hit_impact at the fight.
+        - town.gd / daylight.gd animals + time of day: dog_bark, cat_meow, horse_neigh/whinny, boar_grunt
+          from the pens; bird_chirp / crow_caw by day, owl_hoot + cricket_chirp at night, kept quiet and
+          occasional under the ambience bus.
+        - level_up / quest_complete when the town reaches a new level.
+      Keep it tasteful: throttle, keep volumes under the existing buses, and don't let far events be loud
+      (Sfx.at already attenuates by distance). Add a tools/_s1_test.gd that asserts each wired event calls
+      Sfx with a kind that exists in SETS. Render/soak a minute and listen in your head via the play counts
+      (Sfx.plays) - 0 SCRIPT ERROR, no kind played that isn't registered.
+- [ ] S2. SOUND WIRING - LAPTOP (dungeon + heroes + UI). Same library on main (00cf0ef), same API, same
+      rule: do not edit sfx.gd except to add a GAP. Pull main into the laptop branch first. Wire the
+      laptop-owned files only:
+        - monster.gd / bestiary.gd: each monster species gets a voice on spawn and on death - map
+          goblin->goblin_screech/cackle, orc->orc_roar, troll->troll_roar, skeleton->skeleton_rattle,
+          zombie->zombie_moan, ghost->ghost_wail, wraith->wraith_whisper, slime->slime_squish,
+          spider->spider_skitter, bat->bat_screech, demon->demon_growl, dragon->dragon_roar (+ 
+          dragon_fire_breath on its breath attack), minotaur->minotaur_bellow, giant->giant_footstep.
+          A boss roars on arrival (ties in with the spotlight). Throttle so a room of monsters is not a
+          wall of noise - sample, and favour the biggest/nearest.
+        - delve.gd combat: sword_swing then sword_clash/hit_impact on a melee hit, dagger_stab for
+          daggers, bow_draw -> arrow_shot for ranged, shield_bash/block on a block; a miss can whiff with
+          sword_swing alone. Heroes' spells reuse fireball/ice_shard/lightning/heal/shield.
+        - heroes' voices by sex: male_/female_hurt on taking a hit, _death on dying (the death music
+          duck already fires), _effort/_grunt on a big swing. Sample, do not voice every blow.
+        - dungeon ambience per floor: a quiet bed of bat_screech / spider_skitter / skeleton_rattle /
+          ghost_wail, occasional, under the ambience bus.
+        - chatcmd.gd / UI feedback: menu_select on a recognised command, error on a typo nudge,
+          item_pickup / chest_open / coins_stack on buys and finds, potion_drink on !brew, inventory_open
+          on !inventory, level_up when a hero levels. These are flat (Sfx.play), not positional.
+      Add tools/_s2_test.gd asserting every wired event uses a registered kind; 0 SCRIPT ERROR; the
+      existing _delve_test should still pass with sound calls in.
+
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
       data (Nov 12, free tier, project already created and the table already exists). Every 60 s the

@@ -256,7 +256,7 @@ func _trappings() -> void:
 ## was undone the next frame and creatures glided frozen across the floor.
 ## A one-shot (attack, cast, hit, summon, rise) owns the body until it ends; only
 ## death cuts it short.
-const ONE_SHOTS := ["attack", "cast", "hit", "summon", "rise"]
+const ONE_SHOTS := ["attack", "attack2", "cast", "hit", "summon", "rise"]
 var _ext_t := -99.0
 var _hold_until := -1.0
 func _play(key: String) -> void:
@@ -269,19 +269,77 @@ func busy() -> bool:
 
 func _play_now(key: String) -> void:
     if _ap == null:
+        if key == "hit":
+            _flinch()
         return
     var an: Dictionary = def.get("anims", {})
-    var nm := String(an.get(key, ""))
-    if nm == "" or not _ap.has_animation(nm):
+    # L26a: a second swing where the body has one (bat, wyrm), now and then
+    if key == "attack" and an.has("attack2") and _rng.randf() < 0.4:
+        key = "attack2"
+    var nm := clip_for(key)
+    if nm == "":
+        if key == "hit":
+            _flinch()          # no reaction clip: the body itself recoils
         return
     if key != "die" and _t < _hold_until and not ONE_SHOTS.has(key):
         return
     if ONE_SHOTS.has(key):
         _ap.play(nm, 0.12)
         _ap.seek(0.0, true)
-        _hold_until = _t + clampf(_ap.get_animation(nm).length * 0.9, 0.3, 2.0)
+        var ln := _ap.get_animation(nm).length
+        _hold_until = _t + clampf(ln * 0.9, 0.3, 2.0)
+        if key in ["attack", "attack2", "cast"]:
+            _swing_len = ln
     elif _ap.current_animation != nm:
         _ap.play(nm, 0.2)
+
+## ---- L26a: no creature stands frozen for want of a clip
+## when the body lacks the asked-for clip, the nearest one it does have. A missing walk
+## falls to run then idle (never nothing - that is the glide); a missing hit has no
+## stand-in clip, Monster flinches procedurally instead.
+const FALLBACK := {"run": ["walk"], "walk": ["run", "idle"], "idle": ["walk"], "cast": ["attack"],
+    "summon": ["cast", "attack"], "rise": ["idle"], "attack": ["cast"], "attack2": ["attack"],
+    "hit": [], "die": []}
+func clip_for(key: String) -> String:
+    if _ap == null:
+        return ""
+    var an: Dictionary = def.get("anims", {})
+    var keys: Array = [key]
+    keys.append_array(FALLBACK.get(key, []))
+    for k in keys:
+        var nm := String(an.get(k, ""))
+        if nm != "" and _ap.has_animation(nm):
+            return nm
+    return ""
+
+## when a swing lands: the contact point of the clip just started (about 0.42 of a
+## melee swing - the blade comes down there), so Delve applies the blow then, not on the
+## swing's first frame
+const IMPACT_FRAC := 0.42
+var _swing_len := 0.8
+func impact() -> float:
+    return clampf(_swing_len * IMPACT_FRAC / maxf(0.1, _ap.speed_scale if _ap else 1.0), 0.12, 0.6)
+
+## the body recoils (no hit clip): tipped back and squashed for a beat, then home
+var _flinch_tw: Tween
+var _base_scale := Vector3.ZERO
+var flinches := 0
+func _flinch() -> void:
+    if _body == null or not is_inside_tree():
+        return
+    flinches += 1
+    # the rest size is read fresh unless a flinch is mid-way (enrage swells the body)
+    if _flinch_tw and _flinch_tw.is_valid() and _flinch_tw.is_running():
+        _flinch_tw.kill()
+    else:
+        _base_scale = _body.scale
+    _body.scale = _base_scale
+    _body.rotation.x = 0.0
+    _flinch_tw = create_tween()
+    _flinch_tw.tween_property(_body, "rotation:x", -0.22, 0.07).set_ease(Tween.EASE_OUT)
+    _flinch_tw.parallel().tween_property(_body, "scale", _base_scale * Vector3(1.08, 0.86, 1.08), 0.07)
+    _flinch_tw.tween_property(_body, "rotation:x", 0.0, 0.22).set_trans(Tween.TRANS_BACK)
+    _flinch_tw.parallel().tween_property(_body, "scale", _base_scale, 0.22).set_trans(Tween.TRANS_BACK)
 
 func _entering() -> bool:
     return _body.position.y < -0.05

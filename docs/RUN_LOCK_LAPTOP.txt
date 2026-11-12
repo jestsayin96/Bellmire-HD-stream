@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 14:52 - L28c lighting/atmosphere + L28d detail decals (laptop jestai)
+IDLE 2026-11-12 15:39 - L28c + L28d done and pushed; Phase B L28 complete

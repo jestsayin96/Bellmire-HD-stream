@@ -5,7 +5,7 @@ class_name BossBar
 ## Lives in the RtsCamera's layer, so F10 hides it with the rest. With two
 ## delves below, a viewers' party's lord comes first.
 
-const W := 560
+const W := 780          # L15: at 1080p; UiTheme.px scales it
 
 var town: Node3D
 var lord: Monster = null
@@ -16,24 +16,41 @@ var _bar: ProgressBar
 var _fill: StyleBoxFlat
 var _num: Label
 var _sub: Label
+var _plate: PanelContainer
+var _plate_sb: StyleBoxFlat
+var _v: VBoxContainer
 
 func setup(t: Node3D) -> void:
 	town = t
+	UiTheme.watch(self)
+	# the bar keeps its 100% width at any UI scale (only its text grows): it must clear the side panels
+	var w := int(round(float(W) * UiTheme.res_k()))
 	anchor_left = 0.5
 	anchor_right = 0.5
-	offset_left = -W / 2
-	offset_right = W / 2
-	offset_top = 108          # under the key help (H), clear of it
-	custom_minimum_size = Vector2(W, 0)
+	offset_left = -w / 2
+	offset_right = w / 2
+	offset_top = UiTheme.px(140)          # under the key help (H), clear of it
+	custom_minimum_size = Vector2(w, 0)
+	# L16: on a parchment plate like every other panel; the lord's own colour is its edge
+	_plate = PanelContainer.new()
+	_plate_sb = UiTheme.parchment(4)
+	_plate.add_theme_stylebox_override("panel", _plate_sb)
+	_plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_plate)
+	_v = VBoxContainer.new()
+	_v.add_theme_constant_override("separation", UiTheme.px(2))
+	_v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_plate.add_child(_v)
 	add_theme_constant_override("separation", 2)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_title = _label("", Color(1, 0.85, 0.5), 24)
+	_title = _label("", Color(1, 0.85, 0.5), 44)
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_title)
+	_title.add_theme_constant_override("outline_size", 0)
+	_v.add_child(_title)
 	var box := Control.new()
-	box.custom_minimum_size = Vector2(W, 24)
+	box.custom_minimum_size = Vector2(w - UiTheme.px(40), UiTheme.px(36))
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(box)
+	_v.add_child(box)
 	_bar = ProgressBar.new()
 	_bar.show_percentage = false
 	_bar.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -51,23 +68,30 @@ func setup(t: Node3D) -> void:
 	_fill.set_border_width_all(2)
 	_bar.add_theme_stylebox_override("fill", _fill)
 	box.add_child(_bar)
-	_num = _label("", Color(1, 1, 1), 14)
+	_num = _label("", Color(1, 1, 1), 26)
 	_num.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_num.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	box.add_child(_num)
-	_sub = _label("", Color(0.93, 0.86, 0.69), 13)
+	_sub = _label("", UiTheme.INK_SOFT, 26)
+	_sub.add_theme_constant_override("outline_size", 0)
 	_sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_sub)
+	_v.add_child(_sub)
 	refresh()
+
+## L15: F11 changed the UI scale - build again
+func restyle() -> void:
+	for c in get_children():
+		c.free()
+	setup(town)
 
 func _label(text: String, col: Color, size: int) -> Label:
 	var lb := Label.new()
 	lb.text = text
-	lb.add_theme_font_size_override("font_size", size)
+	lb.add_theme_font_size_override("font_size", UiTheme.px(size))
 	lb.add_theme_color_override("font_color", col)
 	lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	lb.add_theme_constant_override("outline_size", 5)
+	lb.add_theme_constant_override("outline_size", UiTheme.px(7))
 	lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return lb
 
@@ -103,7 +127,9 @@ func refresh() -> void:
 	lord = f[1]
 	var col: Color = lord.def.get("aura", Color(1, 0.8, 0.4))
 	_title.text = String(lord.def.get("name", "A lord"))
-	_title.add_theme_color_override("font_color", col.lightened(0.35))
+	_title.add_theme_color_override("font_color", col.darkened(0.55))
+	if _plate_sb:
+		_plate_sb.border_color = col.darkened(0.15)
 	_fill.bg_color = Color(0.72, 0.12, 0.08).lerp(col, 0.18)     # blood red, a hint of its own colour
 	_fill.border_color = col.darkened(0.2)
 	_bar.max_value = maxf(1.0, lord.max_hp)

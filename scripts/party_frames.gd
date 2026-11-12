@@ -1,15 +1,14 @@
 extends VBoxContainer
 class_name PartyFrames
-## WoW-style party frames for the delves running below: a compact column on the
-## left edge, above the Chronicle. One block per delve - the floor they are on
-## and the party's oil - then each delver: name, HP bar. Viewers' heroes gold,
-## the town's own band silver, the fallen greyed with a cross. Lives in the
+## WoW-style party frames for the delves running below: a compact column at the
+## top-left under the key help. One parchment block per delve (L16: the house
+## theme) - the floor they are on and the party's oil - then each delver: name,
+## the numbers, an inked HP bar, their states. Viewers' heroes in deep gold, the
+## town's own band in slate, the fallen greyed with a cross. Lives in the
 ## RtsCamera's layer, so F10 hides it with the rest of the interface.
 
-const W := 250
-const GOLD := Color(1.0, 0.84, 0.36)
-const SILVER := Color(0.82, 0.84, 0.88)
-const DEAD := Color(0.55, 0.52, 0.50)
+const W := 400          # L15: at 1080p; UiTheme.px scales it
+const DEAD := Color(0.45, 0.38, 0.32)
 const MAX_ROWS := 8          # per delve; more than that folds into "+N more"
 
 var town: Node3D
@@ -17,15 +16,25 @@ var _t := 0.0
 
 func setup(t: Node3D) -> void:
 	town = t
-	anchor_left = 0.0
-	anchor_top = 1.0
-	anchor_bottom = 1.0
-	offset_left = 18
-	offset_bottom = -300
-	grow_vertical = Control.GROW_DIRECTION_BEGIN
-	custom_minimum_size = Vector2(W, 0)
-	add_theme_constant_override("separation", 6)
+	UiTheme.watch(self)
+	_place()
+	add_theme_constant_override("separation", UiTheme.px(8))
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	refresh()
+
+## L15: top-left, under the key help (the Chronicle owns the bottom-left)
+func _place() -> void:
+	anchor_left = 0.0
+	anchor_top = 0.0
+	anchor_bottom = 0.0
+	offset_left = UiTheme.px(18)
+	offset_top = UiTheme.px(150)
+	grow_vertical = Control.GROW_DIRECTION_END
+	custom_minimum_size = Vector2(UiTheme.px(W), 0)
+
+func restyle() -> void:
+	_place()
+	add_theme_constant_override("separation", UiTheme.px(8))
 	refresh()
 
 func _process(delta: float) -> void:
@@ -52,50 +61,22 @@ func refresh() -> void:
 	for d: Delve in ds:
 		add_child(_block(d))
 
-func _style(col: Color, border: Color) -> StyleBoxFlat:
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = col
-	sb.border_color = border
-	sb.set_border_width_all(1)
-	sb.set_corner_radius_all(3)
-	return sb
-
-func _label(text: String, col: Color, size: int) -> Label:
-	var lb := Label.new()
-	lb.text = text
-	lb.clip_text = true
-	lb.add_theme_font_size_override("font_size", size)
-	lb.add_theme_color_override("font_color", col)
-	lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	lb.add_theme_constant_override("outline_size", 4)
-	lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	return lb
-
 func _block(d: Delve) -> PanelContainer:
 	var p := PanelContainer.new()
-	var sb := _style(Color(0.06, 0.06, 0.08, 0.80), Color(0.78, 0.62, 0.30))
-	sb.set_border_width_all(2)
-	sb.set_corner_radius_all(5)
-	sb.content_margin_left = 8
-	sb.content_margin_right = 8
-	sb.content_margin_top = 5
-	sb.content_margin_bottom = 7
+	var sb := UiTheme.parchment()
+	sb.content_margin_left = UiTheme.px(12)
+	sb.content_margin_right = UiTheme.px(12)
 	p.add_theme_stylebox_override("panel", sb)
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var v := VBoxContainer.new()
-	v.add_theme_constant_override("separation", 3)
+	v.add_theme_constant_override("separation", UiTheme.px(4))
+	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	p.add_child(v)
 	# header: which floor, and the oil they carry (it is their light)
-	var head := HBoxContainer.new()
-	v.add_child(head)
 	var who := "The town's band" if d.npc_party else "Delvers"
-	var t := _label("%s · floor %d" % [who, d.floor_no], Color(0.95, 0.80, 0.50), 14)
-	t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	head.add_child(t)
-	var oil_col := Color(1.0, 0.45, 0.30) if d.dark or d.oil < 1.0 else (Color(1.0, 0.75, 0.35) if d.oil <= float(d._alive().size()) else Color(0.95, 0.88, 0.60))
-	var oil := _label(("oil %.1f" % d.oil) if d.oil > 0.0 else "no oil - dark", oil_col, 14)
-	oil.clip_text = false
-	head.add_child(oil)
+	v.add_child(UiTheme.title("%s · floor %d" % [who, d.floor_no], 24))
+	var oil_col := UiTheme.INK_RED if d.dark or d.oil < 1.0 else (Color(0.62, 0.38, 0.05) if d.oil <= float(d._alive().size()) else UiTheme.INK_SOFT)
+	v.add_child(UiTheme.label(("oil %.1f flasks" % d.oil) if d.oil > 0.0 else "no oil - the dark", UiTheme.SMALL, oil_col))
 	var shown := 0
 	for m: Dictionary in d.party:
 		if shown >= MAX_ROWS:
@@ -103,7 +84,7 @@ func _block(d: Delve) -> PanelContainer:
 		v.add_child(_row(m, d.npc_party, d))
 		shown += 1
 	if d.party.size() > MAX_ROWS:
-		v.add_child(_label("+%d more" % (d.party.size() - MAX_ROWS), SILVER, 12))
+		v.add_child(UiTheme.label("+%d more" % (d.party.size() - MAX_ROWS), UiTheme.SMALL, UiTheme.INK_SOFT))
 	return p
 
 func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
@@ -111,46 +92,43 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	var hp := maxf(0.0, float(m.get("hp", 0.0)))
 	var mx := maxf(1.0, float(m.get("max", 1.0)))
 	var alive := hp > 0.0
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", UiTheme.px(1))
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# the name and the numbers ride on the inked bar itself: one compact row a delver
 	var box := Control.new()
-	box.custom_minimum_size = Vector2(W - 16, 20)
+	box.custom_minimum_size = Vector2(UiTheme.px(W - 24), UiTheme.px(36))
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var bar := ProgressBar.new()
-	bar.show_percentage = false
-	bar.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bar.max_value = mx
-	bar.value = hp
-	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var k := hp / mx
-	var fill := Color(0.20, 0.72, 0.25) if k > 0.5 else (Color(0.85, 0.65, 0.15) if k > 0.25 else Color(0.85, 0.18, 0.12))
-	bar.add_theme_stylebox_override("background", _style(Color(0.18, 0.05, 0.05, 0.9), Color(0, 0, 0, 0.8)))
-	bar.add_theme_stylebox_override("fill", _style(fill, Color(0, 0, 0, 0.0)))
-	box.add_child(bar)
-	var name_col := (SILVER if npc else GOLD) if alive else DEAD
-	var nm := _label(("%s" if alive else "+ %s") % String(h.get("name", "?")), name_col, 13)
+	var b := UiTheme.bar(hp if alive else 0.0, mx, 36)
+	b.set_anchors_preset(Control.PRESET_FULL_RECT)
+	box.add_child(b)
+	var name_col := (Color(0.80, 0.86, 1.0) if npc else Color(1.0, 0.86, 0.40)) if alive else Color(0.75, 0.70, 0.66)
+	var nm := UiTheme.label(("%s" if alive else "+ %s") % String(h.get("name", "?")), 26, name_col)
+	nm.add_theme_color_override("font_outline_color", UiTheme.INK)
+	nm.add_theme_constant_override("outline_size", UiTheme.px(6))
+	nm.clip_text = true
 	nm.set_anchors_preset(Control.PRESET_FULL_RECT)
-	nm.offset_left = 5
+	nm.offset_left = UiTheme.px(8)
 	nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	box.add_child(nm)
-	var num := _label("%d/%d" % [int(ceil(hp)), int(mx)] if alive else "fallen", Color(0.95, 0.95, 0.95) if alive else DEAD, 12)
+	var num := UiTheme.label("%d/%d" % [int(ceil(hp)), int(mx)] if alive else "fallen", UiTheme.SMALL, Color(1, 1, 1))
+	num.add_theme_color_override("font_outline_color", UiTheme.INK)
+	num.add_theme_constant_override("outline_size", UiTheme.px(5))
 	num.set_anchors_preset(Control.PRESET_FULL_RECT)
-	num.offset_right = -5
+	num.offset_right = -UiTheme.px(8)
 	num.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	box.add_child(num)
-	# L12: the delver's states, coloured, under the bar
-	var sts: Array = d.statuses(m) if d and alive else []
-	if sts.is_empty():
-		return box
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 1)
-	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	col.add_child(box)
-	var tags := HBoxContainer.new()
-	tags.add_theme_constant_override("separation", 6)
-	tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	for s in sts:
-		var tl := _label(String(s[0]), s[1], 12)
-		tl.clip_text = false
-		tags.add_child(tl)
-	col.add_child(tags)
+	# L12: the delver's states, coloured, under the bar (at the largest UI scale the
+	# states show under each hero only - room for the Chronicle)
+	var sts: Array = d.statuses(m) if d and alive and UiTheme.scale < 1.4 else []
+	if not sts.is_empty():
+		var tags := HBoxContainer.new()
+		tags.add_theme_constant_override("separation", UiTheme.px(8))
+		tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		for s in sts:
+			# the state colours are bright for the dark world; on parchment, darkened to read
+			tags.add_child(UiTheme.label(String(s[0]), UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
+		col.add_child(tags)
 	return col

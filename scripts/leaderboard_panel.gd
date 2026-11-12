@@ -4,11 +4,11 @@ class_name LeaderboardPanel
 ## the !top chat lists) and the latest of the fallen, on parchment like the
 ## Chronicle, top-right. L toggles it; F10 hides it with the rest of the UI.
 
-const ROWS := 10
+const ROWS := 8
 const FALLEN := 3
 const INK := Color(0.20, 0.13, 0.08)
-const GOLD := Color(0.62, 0.42, 0.05)
-const DEAD := Color(0.45, 0.36, 0.28)
+const GOLD := Color(0.50, 0.32, 0.02)
+const DEAD := Color(0.36, 0.27, 0.19)
 
 var roster: Roster
 var _panel: PanelContainer
@@ -21,25 +21,25 @@ func setup(r: Roster) -> void:
 
 func _ready() -> void:
     layer = 20
+    UiTheme.watch(self)
+    _build()
+
+## L15: F11 changed the UI scale
+func restyle() -> void:
+    if _panel:
+        _panel.queue_free()
+    _build()
+    _refresh()
+
+func _build() -> void:
     _panel = PanelContainer.new()
-    var sb := StyleBoxFlat.new()
-    sb.bg_color = Color(0.93, 0.86, 0.69, 0.88)
-    sb.border_color = Color(0.45, 0.30, 0.16, 0.95)
-    sb.set_border_width_all(3)
-    sb.set_corner_radius_all(6)
-    sb.content_margin_left = 14
-    sb.content_margin_right = 14
-    sb.content_margin_top = 10
-    sb.content_margin_bottom = 10
-    sb.shadow_color = Color(0, 0, 0, 0.35)
-    sb.shadow_size = 6
-    _panel.add_theme_stylebox_override("panel", sb)
+    _panel.add_theme_stylebox_override("panel", UiTheme.parchment())
     _panel.anchor_left = 1.0
     _panel.anchor_right = 1.0
-    _panel.offset_right = -18
-    _panel.offset_top = 64
+    _panel.offset_right = -UiTheme.px(18)
+    _panel.offset_top = UiTheme.px(290)      # L15: below the boss bar's band at every scale
     _panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-    _panel.custom_minimum_size = Vector2(330, 0)
+    _panel.custom_minimum_size = Vector2(UiTheme.px(500), 0)
     add_child(_panel)
     _list = VBoxContainer.new()
     _list.add_theme_constant_override("separation", 1)
@@ -60,10 +60,10 @@ func _process(delta: float) -> void:
 func _line(text: String, col: Color, size := 15) -> void:
     var lb := Label.new()
     lb.text = text
-    lb.add_theme_font_size_override("font_size", size)
+    lb.add_theme_font_size_override("font_size", UiTheme.px(size))
     lb.add_theme_color_override("font_color", col)
     lb.clip_text = true
-    lb.custom_minimum_size = Vector2(300, 0)
+    lb.custom_minimum_size = Vector2(UiTheme.px(464), 0)
     _list.add_child(lb)
 
 func _refresh() -> void:
@@ -71,21 +71,21 @@ func _refresh() -> void:
         return
     for c in _list.get_children():
         c.queue_free()
-    _line("The Guild Roll", Color(0.48, 0.20, 0.12), 17)
-    var rows: Array = roster.leaderboard("standing", ROWS)
+    _list.add_child(UiTheme.title("The Guild Roll", 30))      # L16: the house title
+    var rows: Array = roster.leaderboard("standing", ROWS - int(round((UiTheme.scale - 1.0) * 6.0)))
     if rows.is_empty():
-        _line("Nobody has enlisted yet.  !enlist <class>", DEAD, 14)
+        _line("Nobody has enlisted yet.  !enlist <class>", DEAD, 24)
     var i := 0
     for row: Dictionary in rows:
         i += 1
         var alive := bool(row.get("alive", true))
-        var t := "%2d. %s  %s  · lv %d · deepest %d%s" % [i, String(row.get("name", "?")),
+        var t := "%d. %s  %s · lv %d · deep %d%s" % [i, String(row.get("name", "?")),
             String(row.get("rank", "Unproven")), int(row.get("level", 1)),
             int(row.get("deepest", 0)), "" if alive else "  +"]
-        _line(t, (GOLD if i <= 3 else INK) if alive else DEAD)
-    if not roster.fallen.is_empty():
-        _line(" ", INK, 6)
-        _line("The Fallen", Color(0.48, 0.20, 0.12), 16)
+        _line(t, (GOLD if i <= 3 else INK) if alive else DEAD, 26)
+    if not roster.fallen.is_empty() and UiTheme.scale < 1.4:
+        _line(" ", INK, 8)
+        _list.add_child(UiTheme.title("The Fallen", 24))
         for f: Dictionary in roster.fallen.slice(0, FALLEN):
             _line("%s the %s, lv%d - %s" % [String(f.get("name", "?")), String(f.get("class", "")),
-                int(f.get("level", 1)), String(f.get("killed_by", "the dark"))], DEAD, 14)
+                int(f.get("level", 1)), String(f.get("killed_by", "the dark"))], DEAD, 22)

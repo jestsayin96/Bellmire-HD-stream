@@ -1050,3 +1050,57 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   renders/cycles/20261112_d6b - looked at: the square at frame 60, just after the sync, people spread over it.
 - Checks: parse 0 script errors, _townwalk in_solid 0/7923 and 0/8317 PASS, _offfloor 0 of 1120, TWITCH_PARSE OK, _delve_test
   runs (0 script errors), D4_TEST OK, D6_TEST OK.
+
+## Cycle 74 - L15, stream readability (laptop, 2026-11-11)
+- scripts/ui_theme.gd (new, UiTheme): sizes are written for 1920x1080 and follow the window height; F11 cycles a
+  UI scale of 100 / 125 / 150% (a Chronicle line says which); panels watch it and restyle.
+- At 1080p, 100%: Chronicle lines 28 px (title 24, the lord's card 46 / 28), 5 lines, wider (760), darker ink on
+  the older lines; Guild Roll title 30, lines 26, fallen 22, higher-contrast gold and grey; party frames names 28,
+  numbers and states 22, 400 wide - moved to the top-left under the key help (the Chronicle owns the bottom-left);
+  boss bar title 44, numbers and subtitle 26, 780 wide, under the help; unit frame name 32, text 24; key help 19.
+- Bigger scales adapt instead of colliding: the Chronicle shows 5 / 4 / 3 lines, the Guild Roll sits on the right
+  below the boss bar's band with fewer rows (and no Fallen at 150%), the boss bar keeps its width (text grows),
+  the party frames leave the states to the overhead tags at 150%.
+- Names in the world: a hero's name tag now grows with camera distance past 16 m (up to 3x) so it stays readable
+  from the high stream camera - one line in hero_body.gd (on neither machine's list; L15 asks for name tags). The
+  same rule for creature names (monster.gd) and the state tags under the names (delve.gd).
+- tools/_l15_shot.gd (new; --resolution 1920x1080): the town, a lord fight below, the Chronicle, the roll, saved at
+  1080p and shrunk to 854x480 - LOOKED at the phone frames: at 100% every panel line and hero name reads; at 150%
+  first pass everything overlapped, after the adaptations nothing does. renders/cycles/20261111_l15.
+- tools/_l15_test.gd (headless, new): a Chronicle line 28 px and a roll line 26 px at 1080p; px() maths; F11
+  100 -> 125 -> 150 -> 100; the Chronicle restyles bigger at 150%. L15_TEST OK.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L12 OK, BOSS_TEST OK.
+
+
+## Cycle 75 - L16, one theme for every panel (laptop, 2026-11-11)
+- UiTheme now carries the house style: parchment (0.93, 0.86, 0.69) with an inked edge, ink / soft ink / red-brown
+  ink text, the JestSayin teal as the one accent (a teal diamond before every title and a teal rule under it, the
+  chat box's focus edge), viewers' names in deep gold and the town's band in slate, inked HP bars (green / amber /
+  red), and TITLE / BODY / SMALL sizes. Nothing from the old game's interface.
+- Every panel built from it: the Chronicle and the Guild Roll (house titles); the party frames (parchment block,
+  house title "Delvers · floor 5", oil in ink, name and numbers riding on the inked bar, states under it, darkened
+  to read on parchment); the boss bar on a parchment plate whose edge is the lord's own colour, its name in that
+  colour inked dark; the unit frame on parchment; the key help and the speed as parchment chips; the chat box a
+  parchment chip with a teal focus edge, moved bottom-right, clear of the Chronicle.
+- First render: the party frames with a bar under each name grew into the Chronicle's title - back to the compact
+  row (name on the bar); the chat box sat on the Chronicle - moved.
+- tools/_l16_test.gd (headless, new): the Chronicle, the roll and the boss bar on the house parchment; titles carry
+  the teal; the unit frame, chips, chat and party frames build from the theme. L16_TEST OK. tools/_l16_shot.gd:
+  renders/cycles/20261111_l16 - looked at the whole interface at 1080p: one design, nothing overlapping.
+- _l15_test reads the roll's first row (its title is a themed block now). Checks: parse 0 script errors, _delve_test
+  ENDED all home, _offfloor 0 of 431, TWITCH_PARSE OK, L15 OK, BOSS_TEST OK.
+
+
+## Cycle 75b - L16 phone test fixes (laptop, 2026-11-11, Mr. E)
+- Phone test on the themed UI: tools/_l16_phone.gd (new; --resolution 1920x1080) - the market square, four heroes
+  with cosmetic titles, the crier calling - saved at 1080p and shrunk to 854x480, LOOKED at, then F9.
+- 1. Titles: shown only on the selected hero (the director's focus selects too); F9 shows every hero's. A shown
+  title rides one line under its hero's name label - same size rule and lift as the name, so the names' own
+  spread keeps titles apart and inside the view; long titles shortened to 22 characters. (First pass they sat tiny
+  at the heroes' feet.)
+- 2. Speech bubbles (townsfolk shout lines, the crier): UiTheme.style_bubble / fit_plate - ink on a parchment plate
+  sized to the words, FIXED on-screen size (~28 px glyphs at 1080p at any distance), drawn over the ground. Two
+  calls in townsfolk.gd (the desktop's file), at Mr. E's request; nothing else there changed.
+- 3. The key strip: hidden by default (H shows it), on its parchment chip, scaled with the UI scale (L15/L16).
+- Also: the hero unit frame moved bottom-right (it sat on the Chronicle in the phone frame).
+- Checks: L13, L15, L16 OK, TWITCH_PARSE OK.

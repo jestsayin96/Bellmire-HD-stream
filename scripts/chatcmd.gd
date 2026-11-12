@@ -217,7 +217,8 @@ func _memorial() -> String:
     var bits := []
     for f: Dictionary in roster.fallen.slice(0, 5):
         bits.append("%s (lv%d, floor %d)" % [f["name"], int(f["level"]), int(f["deepest"])])
-    return "The fallen: " + "  -  ".join(bits)
+    var ep := String((roster.fallen[0] as Dictionary).get("epitaph", ""))
+    return "The fallen: " + "  -  ".join(bits) + ("  |  %s: %s" % [roster.fallen[0]["name"], ep] if ep != "" else "")
 
 # A thank-you board, deliberately separate from the achievement boards.
 func _patrons() -> String:

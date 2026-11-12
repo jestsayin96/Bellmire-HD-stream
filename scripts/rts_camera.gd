@@ -42,19 +42,22 @@ func setup(t: Node3D) -> void:
 	add_child(cam)
 	cam.make_current()
 	focus = t.get("_market_pos")
+	UiTheme.watch(self)
 	_layer = CanvasLayer.new()
 	_layer.layer = 30
 	add_child(_layer)
 	_help = Label.new()
 	_help.text = "WASD pan · wheel zoom · right-drag rotate · Q/E turn · R/T tilt\nclick: select · F follow (your hero if none selected) · Esc clear · N names\n1 square · 2 scar · 3 gate · 4 tavern · 5 smithy · 6 armourer · 7 apothecary\nTab: jump into a delve · Space pause · [ ] speed · Enter chat · H hide"
-	_help.add_theme_font_size_override("font_size", 15)
+	_help.add_theme_font_size_override("font_size", UiTheme.px(19))
 	_help.add_theme_color_override("font_color", Color(1, 0.95, 0.85))
 	_help.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 	_help.add_theme_constant_override("outline_size", 6)
 	_help.position = Vector2(16, 12)
+	_help.visible = false            # L16 phone test: dev furniture, not stream furniture - H shows it
+	_skin_chips()
 	_layer.add_child(_help)
 	_speed_lb = Label.new()
-	_speed_lb.add_theme_font_size_override("font_size", 18)
+	_speed_lb.add_theme_font_size_override("font_size", UiTheme.px(24))
 	_speed_lb.add_theme_color_override("font_color", Color(1, 0.86, 0.45))
 	_speed_lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 	_speed_lb.add_theme_constant_override("outline_size", 6)
@@ -65,14 +68,16 @@ func setup(t: Node3D) -> void:
 	_layer.add_child(_speed_lb)
 	_chat = LineEdit.new()
 	_chat.placeholder_text = "chat as MrE, e.g. !enlist knight   (Enter to send, Esc to close)"
-	_chat.anchor_left = 0.5
-	_chat.anchor_right = 0.5
+	# L16: bottom-right, clear of the Chronicle
+	_chat.anchor_left = 1.0
+	_chat.anchor_right = 1.0
 	_chat.anchor_top = 1.0
 	_chat.anchor_bottom = 1.0
-	_chat.offset_left = -330
-	_chat.offset_right = 330
-	_chat.offset_top = -64
-	_chat.offset_bottom = -30
+	_chat.offset_left = -UiTheme.px(760)
+	_chat.offset_right = -UiTheme.px(18)
+	_chat.offset_top = -UiTheme.px(70)
+	_chat.offset_bottom = -UiTheme.px(18)
+	_skin_chat()
 	_chat.visible = false
 	_chat.text_submitted.connect(_send_chat)
 	_layer.add_child(_chat)
@@ -101,6 +106,8 @@ func _process(delta: float) -> void:
 	if cam == null:
 		return
 	var real := delta / maxf(Engine.time_scale, 0.001)    # camera moves in real time
+	_titles_tick(real)
+	_titles_follow()
 	if not _chat.visible:
 		var mv := Vector2.ZERO
 		if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP): mv.y -= 1
@@ -186,6 +193,14 @@ func _unhandled_input(ev: InputEvent) -> void:
 				_speed_i = mini(_speeds.size() - 1, _speed_i + 1)
 				_set_speed()
 			KEY_H: _help.visible = not _help.visible
+			KEY_F9:
+				# L16 phone test: every hero's title, or only the one in view (selected / the director's focus)
+				titles_all = not titles_all
+				_titles_t = 0.0
+			KEY_F11:
+				# L15: the interface scale for the stream, 100 / 125 / 150%
+				var s := UiTheme.cycle()
+				_say_scale(s)
 			KEY_F: _follow_key()
 			KEY_ESCAPE:
 				_following = false
@@ -383,38 +398,35 @@ func _track(real: float) -> void:
 
 func _build_frame() -> void:
 	_frame = PanelContainer.new()
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.06, 0.06, 0.08, 0.86)
-	sb.border_color = Color(0.78, 0.62, 0.30)
-	sb.set_border_width_all(2)
-	sb.set_corner_radius_all(6)
-	sb.content_margin_left = 14
+	var sb := UiTheme.parchment()      # L16: the house parchment
+	sb.content_margin_left = UiTheme.px(16)
 	sb.content_margin_right = 14
 	sb.content_margin_top = 8
 	sb.content_margin_bottom = 10
 	_frame.add_theme_stylebox_override("panel", sb)
-	_frame.anchor_left = 0.5
-	_frame.anchor_right = 0.5
+	# L16 phone test: bottom-right, clear of the Chronicle (above the chat box line)
+	_frame.anchor_left = 1.0
+	_frame.anchor_right = 1.0
 	_frame.anchor_top = 1.0
 	_frame.anchor_bottom = 1.0
-	_frame.offset_left = -230
-	_frame.offset_right = 230
-	_frame.offset_bottom = -14
+	_frame.offset_left = -UiTheme.px(618)
+	_frame.offset_right = -UiTheme.px(18)
+	_frame.offset_bottom = -UiTheme.px(86)
 	_frame.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_layer.add_child(_frame)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation", 3)
 	_frame.add_child(v)
 	_f_name = Label.new()
-	_f_name.add_theme_font_size_override("font_size", 20)
-	_f_name.add_theme_color_override("font_color", Color(1.0, 0.86, 0.45))
+	_f_name.add_theme_font_size_override("font_size", UiTheme.px(32))
+	_f_name.add_theme_color_override("font_color", UiTheme.VIEWER)
 	v.add_child(_f_name)
 	_f_sub = Label.new()
-	_f_sub.add_theme_font_size_override("font_size", 14)
-	_f_sub.add_theme_color_override("font_color", Color(0.8, 0.8, 0.82))
+	_f_sub.add_theme_font_size_override("font_size", UiTheme.px(24))
+	_f_sub.add_theme_color_override("font_color", UiTheme.INK_SOFT)
 	v.add_child(_f_sub)
 	var hpbox := Control.new()
-	hpbox.custom_minimum_size = Vector2(430, 18)
+	hpbox.custom_minimum_size = Vector2(UiTheme.px(560), UiTheme.px(26))
 	v.add_child(hpbox)
 	_f_hp = ProgressBar.new()
 	_f_hp.show_percentage = false
@@ -429,13 +441,16 @@ func _build_frame() -> void:
 	_f_hp_lb = Label.new()
 	_f_hp_lb.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_f_hp_lb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_f_hp_lb.add_theme_font_size_override("font_size", 13)
+	_f_hp_lb.add_theme_font_size_override("font_size", UiTheme.px(20))
+	_f_hp_lb.add_theme_color_override("font_color", Color(1, 1, 1))
+	_f_hp_lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+	_f_hp_lb.add_theme_constant_override("outline_size", UiTheme.px(5))
 	hpbox.add_child(_f_hp_lb)
 	_f_body = Label.new()
-	_f_body.add_theme_font_size_override("font_size", 14)
-	_f_body.add_theme_color_override("font_color", Color(0.92, 0.9, 0.85))
+	_f_body.add_theme_font_size_override("font_size", UiTheme.px(24))
+	_f_body.add_theme_color_override("font_color", UiTheme.INK)
 	_f_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_f_body.custom_minimum_size = Vector2(430, 0)
+	_f_body.custom_minimum_size = Vector2(UiTheme.px(560), 0)
 	v.add_child(_f_body)
 
 func _fill_frame() -> void:
@@ -651,3 +666,94 @@ func _fill_light(real: float) -> void:
 		var to_cam := cam.global_position - selected.global_position
 		to_cam.y = 0.0
 		fill.global_position = selected.global_position + Vector3(0, 2.6, 0) + to_cam.normalized() * 1.8
+
+## ---- L15: the stream's UI scale (F11). Panels elsewhere restyle themselves
+## (UiTheme.watch); here the key help, the speed label and the unit frame.
+func restyle() -> void:
+	if _help:
+		_help.add_theme_font_size_override("font_size", UiTheme.px(19))
+	if _speed_lb:
+		_speed_lb.add_theme_font_size_override("font_size", UiTheme.px(24))
+	_skin_chips()
+	_skin_chat()
+	if _frame:
+		var was := _frame.visible
+		_frame.queue_free()
+		_frame = null
+		if was and selected:
+			_build_frame()
+			_fill_frame()
+
+func _say_scale(s: float) -> void:
+	if town and town.get("feed") != null:
+		(town.get("feed") as Array).append("Interface at %d%% (F11)." % int(round(s * 100.0)))
+
+## ---- L16: the key help, the speed and the chat box on parchment chips, ink text,
+## the teal as the chat box's focus edge - the same house as every panel
+func _skin_chips() -> void:
+	for lb: Label in [_help, _speed_lb]:
+		if lb == null:
+			continue
+		lb.add_theme_stylebox_override("normal", UiTheme.chip())
+		lb.add_theme_color_override("font_color", UiTheme.INK)
+		lb.add_theme_constant_override("outline_size", 0)
+
+func _skin_chat() -> void:
+	if _chat == null:
+		return
+	var n := UiTheme.chip()
+	var f := UiTheme.chip()
+	f.border_color = UiTheme.TEAL
+	_chat.add_theme_stylebox_override("normal", n)
+	_chat.add_theme_stylebox_override("focus", f)
+	_chat.add_theme_color_override("font_color", UiTheme.INK)
+	_chat.add_theme_color_override("font_placeholder_color", UiTheme.INK_SOFT)
+	_chat.add_theme_color_override("caret_color", UiTheme.TEAL)
+	_chat.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.SMALL))
+
+## ---- L16 phone test: cosmetic titles (Gear's "eq_title" under a hero's body)
+## show on the selected hero - which is also the director's focus - and on all of
+## them only with F9; a long title is shortened so it keeps to its hero's column.
+var titles_all := false
+var _titles_t := 0.0
+var _shown_titles: Array = []
+const TITLE_MAX := 22
+func _titles_tick(real: float) -> void:
+	_titles_t -= real
+	if _titles_t > 0.0 or town == null:
+		return
+	_titles_t = 0.25
+	_shown_titles.clear()
+	for o in get_tree().get_nodes_in_group("viewer_heroes"):
+		var hb := o as HeroBody
+		if hb == null or hb._mdl == null:
+			continue
+		var lb := hb._mdl.get_node_or_null("eq_title") as Label3D
+		if lb == null:
+			continue
+		if not lb.has_meta("full"):
+			lb.set_meta("full", lb.text)
+		var full := String(lb.get_meta("full"))
+		lb.text = full if full.length() <= TITLE_MAX else full.substr(0, TITLE_MAX - 1) + "…"
+		lb.visible = titles_all or hb == selected
+		lb.top_level = true
+		if lb.visible:
+			_shown_titles.append(hb)
+
+## every frame: a shown title rides one line under its hero's name label, at the
+## name's own size and lift (the hero's label layout spreads the names apart)
+func _titles_follow() -> void:
+	for hb in _shown_titles:
+		if not is_instance_valid(hb) or (hb as HeroBody)._mdl == null:
+			continue
+		var lb := (hb as HeroBody)._mdl.get_node_or_null("eq_title") as Label3D
+		var nm := (hb as HeroBody)._name_label()
+		if lb == null or nm == null or not nm.visible:
+			if lb:
+				lb.visible = false
+			continue
+		lb.global_position = nm.global_position
+		lb.pixel_size = nm.pixel_size
+		lb.font_size = int(nm.font_size * 0.62)
+		lb.offset = Vector2(0, nm.offset.y - float(nm.font_size) * 0.95)
+		lb.vertical_alignment = VERTICAL_ALIGNMENT_TOP

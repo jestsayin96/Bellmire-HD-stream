@@ -1,0 +1,59 @@
+{
+  "_source": "L19 (work plan 2). More of the original's voice, never contradicting it and never a floor count. Built on its own phrases: the Chief's Hall inscription (MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR.), the architect and his toys, the bell with no clapper, the scar that misfires every spell, the dungeon still being built. Budget (origins.json): one 'tell' per delve, on its first floor.",
+  "tells": {
+    "tomb": ["The dead here were laid out in rows, and the rows were counted.", "Every niche has a name scratched out of it."],
+    "mine": ["Someone dug here for something, and stopped all at once.", "The seam glitters where the scar has been at it."],
+    "fortress": ["Arrow-slits face inward. Whoever held this was keeping something in.", "The gate was barred from the far side."],
+    "temple": ["The altar is clean. Nobody down here cleans.", "Prayers are carved low on the walls, where a kneeling hand would reach."],
+    "lair": ["The floor is worn smooth by something heavy that came and went.", "It smells of old fur and new blood."],
+    "prison": ["The cells lock from the outside, and some are still locked.", "Tally marks, thousands of them, and then none."],
+    "works": ["Benches, tools, a half-made thing nobody finished. Don't touch the architect's toys.", "The work stopped mid-stroke, as if called away."],
+    "warren": ["Doorways, chimneys, a street sign - a whole town, swallowed.", "Somebody lived here once and kept a window box."]
+  },
+  "descend": ["%s %s into the scar.", "%s %s down past the guild post. The door is kept behind them.", "%s %s into the dark below Bellmire, counting the flasks."],
+  "cleared": ["Floor %d cleared.", "Floor %d is quiet again.", "Floor %d falls silent."],
+  "lord_intros": {
+    "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
+    "grubmother": "The floor is wet, and getting wetter.",
+    "rattling_host": "Somewhere ahead, something counts its own bones out loud.",
+    "nightwing": "Every torch on the floor gutters at once.",
+    "gravewyrm": "The dungeon was built around this, and it knows it.",
+    "ossuary_lord": "It has waited a very long time. A little longer is nothing.",
+    "pale_duchess": "A lady laughs somewhere ahead, very politely.",
+    "mourncoil": "Breath steams. Then the steam freezes."
+  },
+  "unique_intros": {
+    "gnawbone": "The walls squeal.",
+    "mother_silk": "The threads across the doorway are new.",
+    "weeping_bowman": "A string twangs in the dark, and something weeps after it.",
+    "cinderjack": "Someone has been playing with the firepits.",
+    "kept": "A voice the guild knew calls a name the guild remembers."
+  },
+  "barks": {
+    "enter": ["Count the flasks.", "Keep the door.", "Light first. Then steel.", "Mind the floor."],
+    "lord": ["Hold together!", "That one's mine.", "Not today.", "Keep the door!"],
+    "trap": ["Floor's wrong here.", "Step where I step.", "Clever. Not clever enough."],
+    "hurt": ["I'm bleeding!", "Too close.", "Someone mend me!"],
+    "drink": ["Bottoms up.", "Tastes of iron.", "That's better."],
+    "misfire": ["That wasn't the spell I cast.", "The scar's answering again.", "Stupid scar."]
+  },
+  "misfire": ["%s's %s goes wrong - the scar answers (%d vs DC %d).", "%s reaches for %s and the scar hands back something else (%d vs DC %d).", "%s's %s comes out sideways - wild magic (%d vs DC %d)."],
+  "epitaphs": ["Measured the grain. Counted the flasks. Kept the door.", "The scar keeps what it takes.", "Went down with a lamp. Did not come up.", "The guild writes the name and keeps it.", "Somewhere below, a bell with no clapper rings once.", "One floor too many."],
+  "forge": {
+    "1": "Bellmire iron: honest, dull, and better than bare hands.",
+    "2": "Folded twice; the smith signs it.",
+    "3": "Runes along the fuller smoulder when it is drawn.",
+    "4": "Dragontooth - nobody in Bellmire will say whose tooth.",
+    "5": "Scarforged. It hums when the dark is near."
+  },
+  "town_levels_for_the_desktop": {
+    "_note": "For the desktop's town.gd if it wants them (the laptop does not edit town.gd): an announcement when Bellmire reaches a level, in the original's voice.",
+    "1": "Bellmire is a hamlet with a hole in it.",
+    "2": "Bellmire is a village now. The guild post has a door.",
+    "3": "Bellmire stands as a market town. Measure the grain.",
+    "4": "Bellmire grows into a town of note. Count the flasks.",
+    "5": "Bellmire is a walled town. Keep the door.",
+    "6": "Bellmire is a city in all but charter.",
+    "7": "Bellmire is a city. The scar is still deeper than it was."
+  }
+}

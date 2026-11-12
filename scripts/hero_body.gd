@@ -199,11 +199,13 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
             lb.offset.y = 0.0
             continue
         # HD: up close a name grew to fill the screen; shrink it with nearness
-        # (unchanged from 22 m out, down to 40% when the camera is on top of it)
+        # (down to 40% when the camera is on top of it). L15 (laptop, stream
+        # readability): and grow it with distance past 16 m, up to 3x, so a
+        # name stays readable on a phone from the high stream camera.
         if not lb.has_meta("px0"):
             lb.set_meta("px0", lb.pixel_size)
         var cd := cam.global_position.distance_to(anchor)
-        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 22.0, 0.4, 1.0)
+        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.4, 3.0)
         var sp := cam.unproject_position(anchor)
         var line_w := float(lb.font_size) * lb.pixel_size * 1.15
         var up := cam.unproject_position(anchor + cam.global_transform.basis.y * line_w)

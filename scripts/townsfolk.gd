@@ -142,8 +142,10 @@ func _cry(delta: float) -> void:
         # D6: above a named person's two-line tag, not over it
         _shout.position = Vector3(0, 3.1 if notable_title == "" else 3.75, 0)
         add_child(_shout)
+        UiTheme.style_bubble(_shout)       # laptop L16 phone test (Mr. E): ink on a parchment plate, ~28 px at 1080p
     _shout.text = "\"" + String(shout_lines[randi() % shout_lines.size()]) + "\""
     _shout.visible = true
+    UiTheme.fit_plate(_shout)
     Rig.play(_anim, "Cheer")
     get_tree().create_timer(5.0).timeout.connect(func() -> void:
         if is_instance_valid(_shout):

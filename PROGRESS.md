@@ -1063,3 +1063,9 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - The state word on a new status (e.g. "frightened") no longer floats; states show in the party frames and under each hero.
 - Looked at: renders/cycles/20261111_l19/pale_duchess_fight_2.png (bubble readable, no pile-up).
 - L16 (Cycles 74, 74b) is committed and pushed (8d9c295).
+
+## Cycle 75 - L19, more lore (laptop, 2026-11-11) - done
+- data/lore_lines.json: origin tells (one per delve, first floor only), lord and unique intros, hero barks (enter, lord, trap, hurt, drink, misfire), varied descend/cleared/misfire Chronicle lines, epitaphs on the fallen (!memorial reads them), forge words per tier, town-level lines offered to the desktop. All in the original's voice (the Chief's Hall inscription, the architect's toys, the bell with no clapper, the scar); no line states a floor count (tested).
+- Barks are parchment speech bubbles (Cycle 75a); _hero_hit no longer touches a body that has left the tree.
+- Tests: _l19_test (checks + FEED: tell on the first floor only, Grubmother intro), _l12_test OK, _delve_test, _offfloor, _twitch_parse OK.
+- For the desktop: "Lambda capture at index 0 was freed" (1-3 per delve test, also before L19) comes from spells.gd timers/tweens firing after a floor is freed (chain hops, _fly callbacks capture root).

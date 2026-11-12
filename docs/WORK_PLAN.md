@@ -139,7 +139,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       as the accent), consistent fonts, icons, frames, spacing; the unit frame, party frames, guild roll,
       chronicle, boss bar, help, chat box all match. Nothing from the old game's interface.
       DONE (Cycle 74): one house theme in UiTheme (parchment, ink, teal titles and rules, inked bars, chips) on every panel; L16_TEST OK.
-- [ ] L19. More lore: from the reference + the Lore Bible PDF - more Chronicle lines, NPC barks, floor-origin
+- [x] L19. More lore: from the reference + the Lore Bible PDF - more Chronicle lines, NPC barks, floor-origin
       text, item and potion flavour, boss intros, town-level announcements; all in the original's voice, never
       contradicting it, never a floor count.
 - [ ] L17. (moved from D10; laptop owns the UI) Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.

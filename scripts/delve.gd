@@ -964,8 +964,9 @@ func _hero_hit(m: Dictionary) -> void:
 		m["hurt_bark"] = floor_no
 		_bark(m, "hurt")
 	var b: HeroBody = m["body"]
-	Rig.play(b._anim, "Hit_A")
-	Sfx.at("hit", b.global_position)
+	if is_instance_valid(b) and b.is_inside_tree():
+		Rig.play(b._anim, "Hit_A")
+		Sfx.at("hit", b.global_position)
 	if float(m["hp"]) > 0.0:
 		return
 	# one death save per delve (old rule): claw back to 1 hp on a DC 10 CON save

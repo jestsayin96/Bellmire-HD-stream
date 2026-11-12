@@ -131,6 +131,7 @@ var _crowded := false
 var _compact := false
 
 func _process(delta: float) -> void:
+    _gait_step(delta)            # D17b (Townsfolk._process is overridden here)
     if not visible:
         return
     if is_inside_tree():

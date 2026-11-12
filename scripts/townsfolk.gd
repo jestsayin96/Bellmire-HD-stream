@@ -9,7 +9,9 @@ extends Node3D
 
 const ADV := "res://addons/kaykit_character_pack_adventures/Characters/gltf/"
 ## the old game's pace multiplier: flat 4-6 m/s read as skating
-static var pace := 0.62
+## (D17b: 0.62 put a stroll at 2.6 m/s - a sprint for these short KayKit legs,
+## whose walk covers 0.8 m/s. 0.40 is a brisk walk the gait can match.)
+static var pace := 0.40
 ## On stream the names that matter are the viewers' heroes (HeroBody turns its
 ## own back on). Townsfolk names are off unless this is set.
 static var show_names := false
@@ -78,6 +80,48 @@ var lod := 0
 static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_test.gd)
 var _lod_n := 0
 var _lod_acc := 0.0
+
+## D17b: the gait follows how fast the body really moves this frame (its own
+## steps, the crowd's push, a raid's _step - whoever moved it), smoothed; and a
+## body walking faces the way it goes, so it never walks backwards in a walk
+var _gp := Vector3.INF
+var _vs := 0.0
+static var face_fix := true
+
+func _process(delta: float) -> void:
+    _gait_step(delta)
+
+func _gait_step(delta: float) -> void:
+    if _anim == null or delta <= 0.0 or not Rig.gait:
+        return
+    if inside or not visible:
+        _gp = Vector3.INF
+        _vs = 0.0
+        return
+    var p := global_position
+    var vel := Vector2.ZERO
+    if _gp != Vector3.INF:
+        vel = Vector2(p.x - _gp.x, p.z - _gp.z) / delta
+        var v := vel.length()
+        if v > 15.0:            # a teleport (out of a door, a raid reset)
+            v = _vs
+        _vs = lerpf(_vs, v, minf(delta * 7.0, 1.0))
+    _gp = p
+    # moved along in an idle (a wagon's shove, a pair's shoulder spot, a raid
+    # walking them home) - take the steps, the gait stands them again after
+    if _vs > 0.6 * size_k and not bool(_anim.get_meta("rig_move", false)) \
+            and String(_anim.current_animation) == Rig.idle_of(_anim):
+        Rig.play(_anim, "Walking_A")
+    Rig.drive(_anim, _vs, size_k, delta)
+    if face_fix and _vs > 0.35 and vel.length() > 0.25 and Rig.is_gait(String(_anim.current_animation)):
+        _face = lerp_angle(_face if _face_ok else rotation.y, atan2(vel.x, vel.y), minf(delta * 9.0, 1.0))
+        _face_ok = true
+        rotation.y = _face
+    else:
+        _face_ok = false
+
+var _face := 0.0
+var _face_ok := false
 
 func set_lod(l: int) -> void:
     if l == lod:
@@ -264,7 +308,11 @@ func _follow(delta: float) -> void:
     else:
         move_dir = Vector3.ZERO
         rotation.y = leader.rotation.y
-        Rig.play(_anim, "Idle")
+        # D17b: at the shoulder and keeping up is still walking (stepping
+        # between Idle and Walking_A every other frame read as a glide);
+        # the gait stands him once the pair has stopped
+        if not (Rig.gait and leader is Townsfolk and (leader as Townsfolk)._vs > 0.3):
+            Rig.play(_anim, "Idle")
 
 func _next_trip() -> Vector3:
     # old villager: at night the WORK state ends and they go home to REST until

@@ -83,9 +83,96 @@ static func after(ap: AnimationPlayer, nm: String) -> String:
         back = idle_of(ap)
     return back
 
+## D17b: LOCOMOTION. The KayKit walks and runs are authored in place at a set
+## ground speed (tools/_d17b_clipspeed.gd: the planted foot slides back under
+## the hips at it). A body moving at any other speed in them skates - the old
+## town walked everyone at 2.6 m/s in a 0.8 m/s walk. A body that asks for a
+## walk or a run (Rig.play) is now handed a GAIT from how fast it really moves
+## (Rig.drive, every frame): standing still -> its idle, slow -> the walk,
+## brisk -> a jog, fast -> the run, each played at speed / the clip's own speed
+## and crossfaded with hysteresis. `gait = false` = the old behaviour.
+static var gait := true
+static var gait_swaps := 0
+## m/s each clip covers at speed_scale 1 (model scale 1, chibi KayKit legs)
+const GAIT_MPS := {"Walking_A": 0.80, "Walking_B": 0.78, "Walking_C": 0.53,
+    "Running_A": 3.3, "Running_B": 2.1}
+const WALK_MAX := 2.1           # fastest the walk is played before it turns to a jog
+const STAND_V := 0.18           # under this (m/s, per model scale) the feet stop
+const GAIT_BLEND := 0.3
+
+static func is_gait(nm: String) -> bool:
+    return GAIT_MPS.has(nm)
+
+## the body moves at `v` m/s (measured), its model is scaled `k`
+static func drive(ap: AnimationPlayer, v: float, k: float, delta: float) -> void:
+    if ap == null or not gait:
+        return
+    var cur := String(ap.current_animation)
+    if not bool(ap.get_meta("rig_move", false)):
+        if ap.speed_scale != 1.0 and not is_gait(cur):
+            ap.speed_scale = 1.0
+        return
+    var vn := v / maxf(k, 0.2)
+    var g := String(ap.get_meta("rig_gait", "Walking_A"))
+    var want := g
+    if g == "stand":
+        if vn > STAND_V * 1.8:
+            want = "Walking_A"
+    elif g == "Walking_A":
+        if vn < STAND_V:
+            want = "stand"
+        elif vn > GAIT_MPS["Walking_A"] * WALK_MAX + 0.1:
+            want = "Running_B"
+    elif g == "Running_B":
+        if vn < GAIT_MPS["Walking_A"] * WALK_MAX - 0.12:
+            want = "Walking_A"
+        elif vn > 2.9:
+            want = "Running_A"
+    elif g == "Running_A":
+        if vn < 2.6:
+            want = "Running_B"
+    else:
+        want = "Walking_A"
+    var clip := idle_of(ap) if want == "stand" else want
+    if want != g:
+        ap.set_meta("rig_gait", want)
+        gait_swaps += 1
+    # a one-shot (a swing, a cast) plays out at its own speed; its queued
+    # return is the loop it came from, made current here once it is back
+    if cur != "" and not loops(cur):
+        if ap.speed_scale != 1.0:
+            ap.speed_scale = 1.0
+        return
+    if cur != clip and clip != "":
+        ap.set_meta("rig_loop", clip)
+        ap.play(clip, GAIT_BLEND)
+    var sc := 1.0
+    if want == "Walking_A":
+        sc = clampf(vn / GAIT_MPS["Walking_A"], 0.45, WALK_MAX)
+    elif want == "Running_B" or want == "Running_A":
+        sc = clampf(vn / float(GAIT_MPS[want]), 0.7, 1.5)
+    ap.speed_scale = lerpf(ap.speed_scale, sc, minf(delta * 8.0, 1.0))
+
 static func play(ap: AnimationPlayer, nm: String, blend := 0.15) -> void:
     if ap == null:
         return
+    if gait and loops(nm) or gait and is_gait(nm):
+        # D17b: a body asking to walk/run is driven (Rig.drive); any other loop
+        # (idle, a seat, a cast) stops that and plays at its own speed
+        var mv := is_gait(nm)
+        if mv != bool(ap.get_meta("rig_move", false)) or not ap.has_meta("rig_move"):
+            ap.set_meta("rig_move", mv)
+        if mv:
+            if ap.has_meta("rig_gait"):
+                var g := String(ap.get_meta("rig_gait"))
+                nm = idle_of(ap) if g == "stand" else g
+            else:
+                ap.set_meta("rig_gait", "Walking_A")
+                nm = "Walking_A" if ap.has_animation("Walking_A") else nm
+        elif ap.speed_scale != 1.0:
+            ap.speed_scale = 1.0
+    elif gait and ap.speed_scale != 1.0:
+        ap.speed_scale = 1.0
     if not ap.has_animation(nm):
         if not fallback:
             return

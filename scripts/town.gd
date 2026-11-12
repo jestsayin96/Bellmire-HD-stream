@@ -4304,7 +4304,7 @@ func _spawn_garrison() -> void:
         c.gear_role = "guard"
         c.gear_seed = rng.randi() % 5
         c.livery = blue
-        c.speed = 7.5
+        c.speed = 11.6                  # D17b: x Townsfolk.pace 0.40 = the watch's old 4.65 m/s
         var loop: Array = ride.duplicate()
         if k % 2 == 1:
             loop.reverse()

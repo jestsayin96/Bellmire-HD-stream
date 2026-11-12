@@ -266,7 +266,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
 - [ ] L23. The director should cut away from a hero a lane already holds (or the split is wasted).
 
-- [ ] L23. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
+- [ ] L24. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
       "the director never cut to fight" and "all six shot types were seen" (saw tour_market, tour_scar,
       tour_valley, hero, raid - no fight), then PASSED on an immediate re-run with no code change. It is
       waiting on the director to happen to cut to a fight inside the test window. Make the test drive the

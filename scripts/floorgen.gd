@@ -143,7 +143,7 @@ const BIOMES := {
         "wall_tint": Color(0.60, 0.34, 0.28),
         "banners": ["banner_patternA_red", "banner_red"],
         "clusters": ["collapse", "collapse", "old_arms"],
-        "scatter": [["rubble_large", 0.14, 0.8, 1.3],
+        "scatter": [["rubble_large", 0.14, 0.3, 0.45],
                     ["hex:decoration/nature/rock_single_D", 0.10, 0.6, 1.1]],
         "prop_tint": Color(0.70, 0.38, 0.30),
         # He asked for LAVA PITS and got red-lit rock. Checked it with a
@@ -164,7 +164,7 @@ const BIOMES := {
         "banners": ["banner_thin_white", "banner_white"],
         "clusters": ["collapse", "grave_candles", "old_arms"],
         "scatter": [["pillar", 0.07, 0.9, 1.1],
-                    ["rubble_half", 0.09, 0.7, 1.0]],
+                    ["rubble_half", 0.09, 0.35, 0.5]],
         "prop_tint": Color(0.74, 0.78, 0.84),
     },
     "confection": {
@@ -212,20 +212,20 @@ const CLUSTERS := {
               ["candle_triple", 0, 0, 0, 1], ["bottle_B_brown", 1.5, 0.3, 0, 1]],
     "kegs": [["keg_decorated", 0, 0, 0, 1], ["keg", 1.3, 0.5, 30, 1],
              ["barrel_large", -1.4, 0.4, 0, 1], ["plate_stack", 0.3, -1.2, 0, 1]],
-    "shelf_stock": [["shelf_large", 0, 0, 0, 1], ["box_small", 1.5, 0.4, 18, 1],
+    "shelf_stock": [["crates_stacked", 0, 0, 0, 1], ["box_small", 1.5, 0.4, 18, 1],
                     ["bottle_A_labeled_brown", -1.2, 0.5, 0, 1],
                     ["bottle_C_green", -0.8, 0.7, 0, 1]],
     "grave_candles": [["candle_thin_lit", 0, 0, 0, 1], ["candle_thin_lit", 0.7, 0.5, 0, 1],
-                      ["candle_melted", -0.6, 0.4, 0, 1], ["rubble_half", 1.6, -0.8, 40, 1],
+                      ["candle_melted", -0.6, 0.4, 0, 1], ["rubble_half", 1.0, -0.8, 40, 0.5],
                       ["coin_stack_small", -1.2, -0.7, 0, 1]],
-    "collapse": [["rubble_large", 0, 0, 0, 1], ["rubble_half", 1.8, 0.7, 55, 1],
+    "collapse": [["rubble_large", 0, 0, 0, 0.45], ["rubble_half", 1.0, 0.7, 55, 0.5],
                  ["barrier_half", -1.7, 0.5, 15, 1]],
-    "old_arms": [["sword_shield_broken", 0, 0, 20, 1], ["rubble_half", 1.2, 0.6, 0, 1],
+    "old_arms": [["sword_shield_broken", 0, 0, 20, 1], ["rubble_half", 0.8, 0.6, 0, 0.5],
                  ["banner_shield_white", -1.3, 0.3, 0, 1]],
     "cell": [["barrier_column", 0, 0, 0, 1], ["barrier", 1.6, 0, 0, 1],
              ["barrier_corner", -1.6, 0, 0, 1], ["bed_floor", 0.4, 1.8, 0, 1],
              ["plate_small", -0.6, 1.6, 0, 1]],
-    "keyring_post": [["keyring_hanging", 0, 0, 0, 1], ["key", 0.8, 0.5, 25, 1],
+    "keyring_post": [["keyring", 0, 0, 0, 1], ["key", 0.8, 0.5, 25, 1],
                      ["stool", -1.2, 0.4, 0, 1], ["candle_lit", 1.0, -0.6, 0, 1]],
     "hoard": [["coin_stack_large", 0, 0, 0, 1], ["coin_stack_medium", 1.1, 0.6, 0, 1],
               ["coin_stack_small", -0.9, 0.7, 0, 1], ["chest_gold", 0.3, -1.4, 15, 1],
@@ -247,8 +247,8 @@ const CLUSTERS := {
                   ["candle_lit", -0.4, 0.2, 0, 1]],
     "stores": [["crates_stacked", 0, 0, 0, 1], ["box_stacked", 1.5, 0.5, 25, 1],
                ["barrel_large", -1.5, 0.4, 0, 1], ["box_small_decorated", 0.4, -1.3, 10, 1]],
-    "overgrowth": [["rubble_large", 0, 0, 0, 1], ["barrel_large", 1.7, 0.5, 0, 1],
-                   ["rubble_half", -1.5, 0.8, 70, 1]],
+    "overgrowth": [["rubble_large", 0, 0, 0, 0.45], ["barrel_large", 1.7, 0.5, 0, 1],
+                   ["rubble_half", -1.5, 0.8, 70, 0.5]],
 }
 
 # An asset name prefixed "hex:" comes from the HEX kit instead of the dungeon
@@ -286,6 +286,27 @@ static func _put(parent: Node3D, asset: String, pos: Vector3, rz := 0.0,
     var k: float = sc * (2.5 if asset.begins_with("hex:") else 1.0)
     n.scale = Vector3(k, k, k)
     parent.add_child(n)
+    # L25: what this piece is, for the placement rules and the overlap probe
+    n.set_meta("fg_kind", _tag)
+    n.set_meta("fg_grp", _grp)
+    n.set_meta("fg_asset", asset)
+    if _tag in REST_KINDS:
+        # rest it ON the floor: a wall-mounted piece (a sword-and-shield plaque, a hanging
+        # keyring, a shelf) has its origin at the mount, and set down at y 0 it sank to the hilt
+        var lb := _local_box(asset, n)
+        var low := lb.position.y * k
+        if low < -0.03:
+            n.position.y -= low
+    if _tag in CHECK_KINDS:
+        var bx := _box_of(n, asset)
+        if fit_checks and _blocked(bx) > PEN_MAX:
+            if not _try_table_top(n, asset, bx):
+                n.free()
+                return null
+            bx = _box_of(n, asset)
+        _boxes.append(bx)
+    elif _tag in SOLID_KINDS:
+        _boxes.append(_box_of(n, asset))
     # Tint is what turns one kit into many worlds - the same trick that made
     # five creature strains out of eight models.
     if tint != Color(1, 1, 1):
@@ -305,18 +326,36 @@ static func _free_at(at: Vector3, r: float) -> bool:
             return false
     return true
 
-static func _cluster(root: Node3D, key: String, at: Vector3, facing: float) -> void:
+## L25: a cluster is placed only if its first (anchor) piece fits; the rest go where they fit
+static func _cluster(root: Node3D, key: String, at: Vector3, facing: float) -> bool:
     if not CLUSTERS.has(key):
-        return
-    _obs.append([at, float(CLUSTER_R.get(key, 1.5))])
+        return false
+    _grp += 1
+    _tag = "prop"
     var c := cos(deg_to_rad(facing))
     var s := sin(deg_to_rad(facing))
+    var first := true
     for item: Array in CLUSTERS[key]:
-        var dx := float(item[1])
-        var dz := float(item[2])
-        _put(root, String(item[0]),
-             at + Vector3(dx * c - dz * s, 0, dx * s + dz * c),
-             facing + float(item[3]), float(item[4]))
+        # L25: an item that does not fit where the cluster puts it tries closer in, then mirrored
+        var got: Node3D = null
+        for f in ([1.0] if first else [1.0, 0.7, 0.45]):
+            for mir in ([1.0] if first else [1.0, -1.0]):
+                var dx: float = float(item[1]) * f * mir
+                var dz: float = float(item[2]) * f
+                got = _put(root, String(item[0]),
+                     at + Vector3(dx * c - dz * s, 0, dx * s + dz * c),
+                     facing + float(item[3]) * mir, float(item[4]))
+                if got:
+                    break
+            if got:
+                break
+        if got == null:
+            if first:
+                return false          # the caller counts a cluster that never found room
+            _rejected += 1
+        first = false
+    _obs.append([at, float(CLUSTER_R.get(key, 1.5))])
+    return true
 
 # Drawn from a shuffled bag rather than picked at random, so a descent never
 # meets the same room type twice in a row - picking randomly gave three prison
@@ -700,6 +739,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             pool_cells[c] = true
             made += 1
 
+    # L25: the floor's footprints start empty; tiles are floor (flat, not registered)
+    _boxes.clear()
+    _pool_obs.clear()
+    _rejected = 0
+    _grp = 0
+    _tag = "floor"
     var bag: Array = T["floors"]
     var acc: Array = T["accents"]
     var main := String(bag[0])
@@ -752,7 +797,15 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                   [Vector2i(0, 1), 180.0, Vector3(0, 0, G * 0.5)],
                   [Vector2i(1, 0), 90.0, Vector3(G * 0.5, 0, 0)],
                   [Vector2i(-1, 0), 270.0, Vector3(-G * 0.5, 0, 0)]]
+    # L25: the stair cells are chosen FIRST, so the walls behind and beside a flight are plain
+    # walls (a wall pillar reaches 0.75 m into the cell, a plain wall 0.5) and no column stands
+    # in one. The entry is the most southerly cell, the exit the most northerly.
+    var occupied := cells.keys()
+    occupied.sort_custom(func(x, y): return (x as Vector2i).y > (y as Vector2i).y)
+    var near: Vector2i = occupied[0]
+    var far: Vector2i = occupied[occupied.size() - 1]
     var n_wall := 0
+    _tag = "wall"
     for c: Vector2i in cells:
         var base: Vector3 = cell_pos.call(c.x, c.y)
         for sd: Array in sides:
@@ -761,14 +814,83 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                 continue
             n_wall += 1
             var k := "wall_pillar" if n_wall % 4 == 1 else String(wall_bag[rng.randi() % wall_bag.size()])
+            if c == near or c == far:
+                k = "wall"
             var at: Vector3 = base + (sd[2] as Vector3)
             _put(root, k, at, float(sd[1]), 1.0, wall_tint)
             if n_wall % 4 == 1:
                 var inward: Vector3 = (base - at).normalized() * 0.45
                 torch_spots.append(Vector3(at.x + inward.x, 2.35, at.z + inward.z))
 
+    # (L25b: the lamp's cell is chosen before the dressing, so the route can go round it)
+    var lamp_cell: Vector2i = Vector2i(int(w / 2), int(h / 2))
+    # The lamp-stand must stand in a ROOM for the same reason as the pillars.
+    # It is a piece of furniture a party fights around, not a cork in a pipe.
+    var lamp_ok := false
+    for r: Rect2i in rooms:
+        if r.has_point(lamp_cell):
+            lamp_ok = true
+            break
+    if not lamp_ok:
+        var best := 1e9
+        for r2: Rect2i in rooms:
+            var c2: Vector2i = r2.get_center()
+            var d2 := Vector2(c2 - lamp_cell).length()
+            if d2 < best and cells.has(c2):
+                best = d2
+                lamp_cell = c2
+                lamp_ok = true
+    if not lamp_ok and not cells.has(lamp_cell):
+        var best3 := 1e9
+        for c: Vector2i in cells:
+            var d := Vector2(c - lamp_cell).length()
+            if d < best3:
+                best3 = d
+                lamp_cell = c
+    # L25b: KEEP CLEAR. The way from the stairs down to the stairs out (around the lamp's cell)
+    # and every corridor cell are registered as zones no furniture may stand in: props kept
+    # landing on the route and in doorways, and the party had to push through them.
+    var route_prev := {near: near}
+    var rq: Array = [near]
+    while not rq.is_empty():
+        var rc: Vector2i = rq.pop_front()
+        if rc == far:
+            break
+        for dv in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+            var rn: Vector2i = rc + dv
+            if cells.has(rn) and not route_prev.has(rn) and (rn != lamp_cell or rn == far):
+                route_prev[rn] = rc
+                rq.append(rn)
+    if not route_prev.has(far):
+        route_prev = {near: near}          # the lamp cell is the only way through: go by it
+        rq = [near]
+        while not rq.is_empty():
+            var rc2: Vector2i = rq.pop_front()
+            for dv2 in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+                var rn2: Vector2i = rc2 + dv2
+                if cells.has(rn2) and not route_prev.has(rn2):
+                    route_prev[rn2] = rc2
+                    rq.append(rn2)
+    var keep_clear := {}
+    var rcur := far
+    while route_prev.has(rcur) and rcur != near:
+        keep_clear[rcur] = true
+        rcur = route_prev[rcur]
+    keep_clear[near] = true
+    for c: Vector2i in cells:
+        if _is_corridor(cells, c):
+            keep_clear[c] = true
+    keep_clear.erase(lamp_cell)
+    for c: Vector2i in keep_clear:
+        var kp: Vector3 = cell_pos.call(c.x, c.y)
+        _boxes.append({"o": Vector2(kp.x, kp.z), "ux": Vector2(1, 0), "uz": Vector2(0, 1), "hx": CLEAR_HALF, "hz": CLEAR_HALF,
+            "y0": 0.0, "y1": 2.0, "kind": "clear", "grp": -1, "asset": "", "node": null})
+    _cells = cells
+    _half_v = Vector2(half_w, half_h)
+
     # ---- torches, tinted by theme
     var lit: Color = T["light"]
+    _tag = "torch"
     for t in torch_spots:
         _put(root, "torch_mounted", Vector3(t.x, t.y, t.z))
         var l := OmniLight3D.new()
@@ -848,14 +970,15 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             if r.has_point(c):
                 return true
         return false
+    _tag = "struct"
     if shape == "pillared":
         for c: Vector2i in cells:
-            if c.x % 3 == 1 and c.y % 3 == 1 and in_room.call(c):
+            if c.x % 3 == 1 and c.y % 3 == 1 and in_room.call(c) and c != near and c != far and not keep_clear.has(c):
                 _put(root, "pillar_decorated", cell_pos.call(c.x, c.y))
     else:
         var structural := []
         for c: Vector2i in cells:
-            if c.x % 4 == 2 and c.y % 4 == 2 and in_room.call(c):
+            if c.x % 4 == 2 and c.y % 4 == 2 and in_room.call(c) and c != near and c != far and not keep_clear.has(c):
                 structural.append(c)
         for c: Vector2i in structural:
             _put(root, "column" if rng.randf() < 0.5 else "pillar",
@@ -879,6 +1002,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             mi.position = at + Vector3(0, -0.38, 0)
             root.add_child(mi)
             _obs.append([at, G * 0.5])      # nobody strolls across molten rock
+            _pool_obs.append([at, G * 0.5])
             var gl := OmniLight3D.new()
             gl.light_color = Color(1.0, 0.42, 0.12)
             gl.light_energy = 4.2
@@ -900,43 +1024,23 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     # by PLAYING rather than by purchasing, which is the better half of the
     # curve. It sits in the middle because that is where a party has to fight
     # its way to, not somewhere safe.
-    var lamp_cell: Vector2i = Vector2i(int(w / 2), int(h / 2))
-    # The lamp-stand must stand in a ROOM for the same reason as the pillars.
-    # It is a piece of furniture a party fights around, not a cork in a pipe.
-    var lamp_ok := false
-    for r: Rect2i in rooms:
-        if r.has_point(lamp_cell):
-            lamp_ok = true
-            break
-    if not lamp_ok:
-        var best := 1e9
-        for r2: Rect2i in rooms:
-            var c2: Vector2i = r2.get_center()
-            var d2 := Vector2(c2 - lamp_cell).length()
-            if d2 < best and cells.has(c2):
-                best = d2
-                lamp_cell = c2
-                lamp_ok = true
-    if not lamp_ok and not cells.has(lamp_cell):
-        var best3 := 1e9
-        for c: Vector2i in cells:
-            var d := Vector2(c - lamp_cell).length()
-            if d < best3:
-                best3 = d
-                lamp_cell = c
     var lamp: Vector3 = cell_pos.call(lamp_cell.x, lamp_cell.y)
     _cluster(root, "lampstand", lamp, float(rng.randi() % 4) * 90.0)
 
     # ---- entry and exit must be cells that EXIST. On an L-room or a cross the
     # old fixed coordinates landed in empty space outside the floor.
-    var occupied := cells.keys()
-    occupied.sort_custom(func(x, y): return (x as Vector2i).y > (y as Vector2i).y)
-    var near: Vector2i = occupied[0]
-    var far: Vector2i = occupied[occupied.size() - 1]
+    # (L25: near / far are chosen before the walls go up - see there)
     var entry: Vector3 = cell_pos.call(near.x, near.y)
     var exit_p: Vector3 = cell_pos.call(far.x, far.y)
-    _put(root, "stairs_wide", entry + Vector3(0, 0, G * 0.55), 180.0)
-    _put(root, "stairs_wide", exit_p - Vector3(0, 0, G * 0.55), 0.0)
+    # L25: the stairs. The old ones were "stairs_wide" - 7 m across on a 4 m cell - set with
+    # their HIGH end buried in the middle of the wall. Now a narrow flight at 3/4 size (3 m wide,
+    # 3 m deep, 3.8 m up, under the 4 m wall top), its high end flush on the INNER face of the
+    # wall it backs onto (walls reach 0.5 m into the cell), its foot on the floor of the room.
+    # The entry is the most southerly cell (a wall on its +z side), the exit the most northerly.
+    _tag = "stairs"
+    var wall_face := G * 0.5 - WALL_IN
+    _put(root, STAIRS, entry + Vector3(0, 0, wall_face), 180.0, STAIRS_K)
+    _put(root, STAIRS, exit_p - Vector3(0, 0, wall_face), 0.0, STAIRS_K)
 
     # ---- dressing. Clusters go in occupied cells near a wall, keeping the
     # middle clear to fight in.
@@ -968,15 +1072,30 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             continue
         var at: Vector3 = cell_pos.call(ec.x, ec.y)
         # pull the cluster toward its wall so the room's middle stays open
+        var pull := Vector3.ZERO
         for sd3: Array in sides:
             if not cells.has(ec + (sd3[0] as Vector2i)):
-                at += (sd3[2] as Vector3).normalized() * G * 0.18
+                pull += (sd3[2] as Vector3).normalized()
+        if pull != Vector3.ZERO:
+            pull = pull.normalized()
+        at += pull * G * 0.18
         var key := String(cl[rng.randi() % cl.size()])
         if not _free_at(at, float(CLUSTER_R.get(key, 1.5))) or at.distance_to(entry) < G * 1.2 or at.distance_to(exit_p) < G * 1.2:
             continue
         var facing := rad_to_deg(atan2(-at.x, -at.z)) + rng.randf_range(-25.0, 25.0)
-        _cluster(root, key, at, facing)
-        placed += 1
+        # L25: an anchor that does not fit tries further off its wall, then turned
+        var done := false
+        for nudge in [0.0, 0.6, 1.2]:
+            for turn in [0.0, 90.0, -90.0]:
+                if _cluster(root, key, at - pull * nudge, facing + turn):
+                    done = true
+                    break
+            if done:
+                break
+        if done:
+            placed += 1
+        else:
+            _rejected += (CLUSTERS[key] as Array).size()
 
     # A few loose things away from the walls so the middle is not bare floor.
     # Kept sparse and off-centre: the party still needs room to fight.
@@ -995,12 +1114,21 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var n_loose: int = mini(inner.size(), clampi(int(float(cells.size()) / 11.0), 2, 8))
     for i in range(n_loose):
         var ip: Vector3 = cell_pos.call(inner[i].x, inner[i].y)
-        _put(root, String(ac[rng.randi() % ac.size()]), ip)
+        var ak := String(ac[rng.randi() % ac.size()])
+        _tag = "floor" if ak.begins_with("floor_") else "prop"
+        _grp += 1
+        _put(root, ak, ip)
         # (HD: no furniture clusters dropped in the middle - the party fights there)
 
     # banners near the far end
     var bn: Array = T["banners"]
+    _tag = "banner"
     for sx: int in [-1, 1]:
+        _grp += 1
+        # L25: only where that spot is floor with a wall behind it - one used to hang in the void
+        var bc := far + Vector2i(sx, 0)
+        if not cells.has(bc) or cells.has(bc + Vector2i(0, -1)):
+            continue
         _put(root, String(bn[rng.randi() % bn.size()]),
              exit_p + Vector3(float(sx) * G, 0, -G * 0.45))
     if boss:
@@ -1069,10 +1197,32 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                 var r2 := 0.75 * sc2
                 if not _free_at(at2, r2) or at2.distance_to(entry) < G or at2.distance_to(exit_p) < G or at2.distance_to(lamp) < G:
                     continue
-                _put(root, String(spec[0]), at2, rng.randf_range(0.0, 360.0), sc2, prop_tint)
-                _obs.append([at2, r2])
+                _tag = "scatter"
+                _grp += 1
+                if _put(root, String(spec[0]), at2, rng.randf_range(0.0, 360.0), sc2, prop_tint) != null:
+                    _obs.append([at2, r2])
+                else:
+                    _rejected += 1
 
-    return {"root": root, "entry": origin + entry, "exit": origin + exit_p, "obstacles": _obs.duplicate(),
+    # L25c: a creature never waits inside furniture (the party could not reach it and stood
+    # pressing at the table) - one in an obstacle goes to the nearest clear cell
+    var wob := walk_obstacles()
+    for si in spawns.size():
+        var sp: Vector3 = spawns[si]
+        if _in_obstacle(sp, wob):
+            var bestc := Vector3.ZERO
+            var bd := 1e9
+            for c: Vector2i in cells:
+                var cp: Vector3 = cell_pos.call(c.x, c.y)
+                if not _in_obstacle(cp, wob) and cp.distance_to(sp) < bd and cp.distance_to(entry) > G * 2.0:
+                    bd = cp.distance_to(sp)
+                    bestc = cp
+            if bd < 1e8:
+                spawns[si] = bestc
+    _cells = {}
+    _tag = ""
+    return {"root": root, "entry": origin + entry, "exit": origin + exit_p, "obstacles": walk_obstacles(),
+            "rejected": _rejected, "boxes": _boxes.size(), "keep_clear": keep_clear,
             "spawns": spawns, "origin": origin, "boss": boss,
             "theme": theme_key, "theme_name": String(T["name"]), "shape": shape,
             # The occupancy grid goes home with the floor so the party can be
@@ -1096,4 +1246,137 @@ static func _is_corridor(cells: Dictionary, c: Vector2i) -> bool:
         return true
     if n == 2:
         return (cells.has(c + Vector2i(1, 0)) and cells.has(c + Vector2i(-1, 0))) or (cells.has(c + Vector2i(0, 1)) and cells.has(c + Vector2i(0, -1)))
+    return false
+
+## ---- L25 (Mr. E: "looks like shit - stairs, objects clipping, people get stuck"). Every piece
+## the floor places has a real footprint - an oriented box from its own meshes (cached per
+## asset) - and furniture is only set down where it fits: not into a wall (walls are 1 m thick
+## and reach 0.5 m into every cell), not into a pillar, the stairs or another cluster. A small
+## thing that lands on a plain table goes ON it; anything else that does not fit is left out,
+## and a cluster whose anchor piece does not fit is not placed at all. tools/_l25_test.gd probes it.
+const PEN_MAX := 0.15                # m a piece may touch another (the probe allows 0.2)
+const WALL_IN := 0.5                 # a wall reaches this far into its cell (kit walls are 1 m thick, centred on the edge)
+const STAIRS := "stairs_narrow"
+const STAIRS_K := 0.75
+const SOLID_KINDS := ["wall", "struct", "stairs"]       # registered, placed regardless (the shape)
+const CHECK_KINDS := ["prop", "scatter", "banner"]      # registered only where they fit
+const REST_KINDS := ["prop", "scatter", "struct"]
+static var _tag := ""
+static var _grp := 0
+static var _boxes: Array = []
+static var _box_cache := {}
+static var _rejected := 0
+static var _pool_obs: Array = []
+static var _cells := {}
+static var _half_v := Vector2.ZERO
+const CLEAR_HALF := 0.6              # m round a keep-clear cell centre (the route, the corridors)
+static var fit_checks := true        # tests switch it off to measure what placement does without it
+
+## the asset's own bounds, in its node's space at scale 1 (meshes merged, cached)
+static func _local_box(asset: String, n: Node3D) -> AABB:
+    if _box_cache.has(asset):
+        return _box_cache[asset]
+    var out := AABB()
+    var first := true
+    var st: Array = [[n, Transform3D.IDENTITY]]
+    while not st.is_empty():
+        var it: Array = st.pop_back()
+        var c: Node = it[0]
+        var xf: Transform3D = it[1]
+        if c is MeshInstance3D and (c as MeshInstance3D).mesh:
+            var a: AABB = xf * (c as MeshInstance3D).get_aabb()
+            out = a if first else out.merge(a)
+            first = false
+        for g in c.get_children():
+            if g is Node3D:
+                st.append([g, xf * (g as Node3D).transform])
+    _box_cache[asset] = out
+    return out
+
+## a placed piece's footprint on the floor: centre, axes, half sizes, height range
+static func _box_of(n: Node3D, asset: String) -> Dictionary:
+    var lb := _local_box(asset, n)
+    var k := n.scale.x
+    var a := n.rotation.y
+    var ux := Vector2(cos(a), -sin(a))
+    var uz := Vector2(sin(a), cos(a))
+    var lc := lb.get_center() * k
+    var o := Vector2(n.position.x, n.position.z) + ux * lc.x + uz * lc.z
+    return {"o": o, "ux": ux, "uz": uz, "hx": lb.size.x * k * 0.5, "hz": lb.size.z * k * 0.5,
+        "y0": n.position.y + lb.position.y * k, "y1": n.position.y + lb.end.y * k,
+        "kind": _tag, "grp": _grp, "asset": asset, "node": n}
+
+## how deep two footprints interpenetrate (0 = apart): the separating-axis test on the floor,
+## and the height ranges
+static func pen(a: Dictionary, b: Dictionary) -> float:
+    var dy := minf(float(a["y1"]), float(b["y1"])) - maxf(float(a["y0"]), float(b["y0"]))
+    if dy <= 0.0:
+        return 0.0
+    var best := dy
+    var d: Vector2 = b["o"] - a["o"]
+    for ax: Vector2 in [a["ux"], a["uz"], b["ux"], b["uz"]]:
+        var ra := float(a["hx"]) * absf((a["ux"] as Vector2).dot(ax)) + float(a["hz"]) * absf((a["uz"] as Vector2).dot(ax))
+        var rb := float(b["hx"]) * absf((b["ux"] as Vector2).dot(ax)) + float(b["hz"]) * absf((b["uz"] as Vector2).dot(ax))
+        var ov := ra + rb - absf(d.dot(ax))
+        if ov <= 0.0:
+            return 0.0
+        best = minf(best, ov)
+    return best
+
+## the deepest this footprint would sit in anything already placed
+static func _blocked(bx: Dictionary) -> float:
+    var worst := 0.0
+    # L25b: off the floor (a cluster reaching past a doorway into the void) is never a fit
+    if not _cells.is_empty():
+        var o: Vector2 = bx["o"]
+        if not _cells.has(Vector2i(roundi((o.x + _half_v.x) / G), roundi((o.y + _half_v.y) / G))):
+            return 99.0
+    for b: Dictionary in _boxes:
+        if String(b["kind"]) == "clear":
+            if pen(bx, b) > 0.0:
+                return 99.0            # nothing stands on the route or in a doorway
+            continue
+        worst = maxf(worst, pen(bx, b))
+        if worst > PEN_MAX:
+            return worst
+    return worst
+
+## a small thing (a plate, a candle, a bottle) that lands on a plain table of its own cluster
+## goes on its top instead; a decorated table already has its own and the thing is left out
+static func _try_table_top(n: Node3D, asset: String, bx: Dictionary) -> bool:
+    if float(bx["y1"]) - float(bx["y0"]) > 1.0 or _tag != "prop":
+        return false
+    for b: Dictionary in _boxes:
+        if int(b["grp"]) != _grp or not String(b["asset"]).begins_with("table") or String(b["asset"]).contains("decorated"):
+            continue
+        if pen(bx, b) <= 0.0:
+            continue
+        n.position.y = float(b["y1"])
+        var on := _box_of(n, asset)
+        var others := 0.0
+        for c: Dictionary in _boxes:
+            if c != b:
+                others = maxf(others, pen(on, c))
+        return others <= PEN_MAX
+    return false
+
+## L25c: what a delver walks AROUND - one circle per real piece that stands in the way (furniture,
+## columns, growth: anything taller than a shin), sized from its measured footprint, plus the lava
+## pools. (It was one fixed 1.5-2 m circle per cluster, which covered cell centres the route ran
+## through, while pillars and columns were not obstacles at all.)
+static func walk_obstacles() -> Array:
+    var out: Array = _pool_obs.duplicate()
+    for b: Dictionary in _boxes:
+        if not (String(b["kind"]) in ["prop", "scatter", "struct"]):
+            continue
+        if float(b["y1"]) - maxf(0.0, float(b["y0"])) < 0.4 or float(b["y0"]) > 1.0:
+            continue
+        var o: Vector2 = b["o"]
+        out.append([Vector3(o.x, 0, o.y), maxf(float(b["hx"]), float(b["hz"])) * 0.85])
+    return out
+
+static func _in_obstacle(p: Vector3, obs: Array) -> bool:
+    for o in obs:
+        if Vector2(p.x - (o[0] as Vector3).x, p.z - (o[0] as Vector3).z).length() < float(o[1]) + 0.6:
+            return true
     return false

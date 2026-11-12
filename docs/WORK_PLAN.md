@@ -400,6 +400,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       connect with no gaps/floating; collision-aware prop/furniture placement so nothing interpenetrates walls or each
       other; floor tiles align; dungeon nav so delvers don't wall-stick. DONE: an overlap probe over 10 generated floors
       reports 0 prop-prop and 0 prop-wall interpenetration > 0.2 m, stair treads continuous, 0 stuck delvers in a 10-floor run.
+      IN PROGRESS (Cycle 89, laptop, 7 checks of 9 green - NOT ticked): L25a stairs, L25b collision-aware placement +
+      keep-clear route / doorways, L25d reachability all pass on 12 floors (tools/_l25_test.gd); L25c nav: forced descents
+      9 -> 0, stuck samples 209 -> 104 (91 of them one lord fight on floor 10), watchdog 51 nudges / 10 floors - still open.
 - [ ] L26. MONSTER/BOSS ANIMATIONS - extend L10 to the WHOLE bestiary: idle/move/attack/death fire, no gliding.
       DONE: MON_ANIMS across the full bestiary, 0 static creatures.
 - [ ] L27. NEW CONTENT from the Lore Bible: more monsters, 2-3 new bosses with mechanics, new gear tiers +

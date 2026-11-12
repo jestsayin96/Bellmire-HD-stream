@@ -284,6 +284,15 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       in the repo - Mr. E copies it from the Supabase dashboard (Project Settings > API). Skip the
       publish quietly if the key is absent so the game still runs without it. Failures must never stall
       the sim: fire and forget on a thread, and never block a frame on the network.
+      CONNECTIVITY IS ALREADY PROVEN (supervisor, Nov 12 01:05): the key is in
+      user://supabase.json as {"url": ..., "service_key": ...}; a write with it succeeded, a read with
+      the publishable key succeeded, and a write attempted with the publishable key was correctly
+      refused by RLS. The table currently holds a test row - overwrite it.
+      GOTCHA, do not rediscover this: Supabase REFUSES a secret key when the request looks like it came
+      from a browser - "Forbidden use of secret API key in browser". PowerShell's default User-Agent
+      triggers it; setting User-Agent: BellmireHD/1.0 fixed it instantly. If the publish ever returns
+      403 with that message, set a non-browser User-Agent on the HTTPRequest rather than hunting the key.
+      Upsert with POST to /rest/v1/snapshot?on_conflict=id and the header Prefer: resolution=merge-duplicates.
 - [ ] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
       It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
         URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at

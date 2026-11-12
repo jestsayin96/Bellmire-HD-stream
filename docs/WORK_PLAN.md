@@ -344,6 +344,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       no key file = off. publish() 0.3-0.7 ms, build 0.4 ms (202 heroes 5 ms, 95 KB). W1A_TEST OK 17/17 (live upsert 200,
       read back with the publishable key, publishable-key write refused 401); W1A_TOWN OK (real town + real save, read only:
       level 3, 51 souls, 2 heroes, 6 fallen, 21 commands - that is the row in the table now).
+      ADDED cycle 89: payload.chronicle - the last 50 town.feed lines, newest first, {t, s, at}; t by keyword (death/raid/loot/delve/
+      town/lore/fight, unsure = town), at = when the publisher first saw it; control chars, BBCode, < > and 7+ digit runs stripped, 200 chars max.
+      No existing key changed. W1A_TEST OK 23/23 (6 new checks).
 - [x] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
       It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
         URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at

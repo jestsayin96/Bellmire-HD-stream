@@ -24,6 +24,34 @@ const TIMEOUT := 20.0
 const USER_AGENT := "BellmireHD/1.0"
 const ROLL_MAX := 50
 const FALLEN_MAX := 50
+## the Chronicle for the hub: the last CHRON_MAX lines of town.feed, newest first, each
+## {t, s, at}. town.feed is append-only plain text, so the publisher keeps its own
+## stamps: a line's "at" is when the publisher first saw it (scanned every second;
+## lines already in the feed at start share the start time).
+const CHRON_MAX := 50
+const LINE_MAX := 200
+const CHRON_TYPES := ["death", "raid", "loot", "delve", "town", "lore", "fight"]
+## first match wins, in this order (a delve's homecoming counts its gold and a trap's
+## damage is the delve's, so those come before "loot" / "fight"; plain floor news after)
+const CHRON_RULES := [
+    ["death", ["is killed", "killed by", "cut down", "falls on floor", "keeps them all", "no one comes home",
+               "slain", "laid to rest", "is buried", "burial", "!reroll", "perishes", "the fallen"]],
+    ["raid", ["raider", "bandit", "raid", "boil out of", "the gates hold", "is burning", "mounted watch",
+              "rides out", "torch", "rebuilt", "rebuild", "breach", "the attack"]],
+    ["town", ["town level", "bellmire grows", "grows into", "falls back to", "souls live", "begins  ", "begins -",
+              " begins", "settles", "sworn into", "takes the oath", "rises as", "reaches level", "joins the guild",
+              "guild place", "market hall", "stables", "bathhouse", "mage tower", "the wall"]],
+    ["delve", ["come home", "comes home", "descend", "sets out for", "the dungeon mouth", "trap", "steps on",
+               "perception", "wild magic", "scar answers", "hands back", "lamp"]],
+    ["loot", ["gold", "forge", "loot", "hoard", "treasury", "coffer", "wages", "caravan", "buys", "sells",
+              "finds a", "salvaged", "turns up", "commissions", "brew", "drinks", "armour", "a vial"]],
+    ["fight", ["rolls a 20", "falls to", "damage", "save", "goes down", "claws back", "enraged", "reels",
+               "is gone", "comes round", "senseless", "stands back up", "initiative", "strikes", "hits ",
+               "misses", "swings", "wounds", "fight", "kills"]],
+    ["delve", ["floor", "the dungeon", "the dark below", " oil", "flask", "the party"]],
+    ["lore", ["somewhere", "something", "the scar", "sings", "preach", "chapel", "tavern", "hammer", "the bell", "a bell",
+              "remember", "the valley", "legend", "whisper", "they say", "song", "story", "old ", "dark"]],
+]
 
 var town: Node                      # roster, economy
 var key_file := KEY_FILE            # tests point this elsewhere
@@ -41,6 +69,10 @@ var failed := 0
 var last_bytes := 0
 var last_build_ms := 0.0
 var _warned := {}
+var _chron: Array = []              # {t, s, at}, OLDEST first (the payload reverses it)
+var _feed_seen := -1                # how many lines of town.feed are already stamped
+var _scan_t := 0.0
+static var _strip_re: RegEx = null
 
 func setup(t: Node) -> void:
     town = t
@@ -80,6 +112,10 @@ func _load_commands() -> Dictionary:
 func _process(delta: float) -> void:
     if not enabled:
         return
+    _scan_t -= delta
+    if _scan_t <= 0.0:
+        _scan_t = 1.0
+        scan_feed()
     _t -= delta
     if _t <= 0.0:
         _t = EVERY
@@ -102,6 +138,7 @@ func build_payload() -> Dictionary:
         "fallen": [],
         "heroes": [],
         "commands": _commands,
+        "chronicle": chronicle(),
     }
     if r:
         out["guild_roll"] = r.leaderboard("standing", ROLL_MAX)
@@ -121,6 +158,66 @@ func build_payload() -> Dictionary:
         out["heroes"] = sheets
     last_build_ms = (Time.get_ticks_usec() - t0) / 1000.0
     return out
+
+# ---------------------------------------------------------------- the Chronicle
+
+## stamp the feed lines not seen yet (town.feed only ever grows)
+func scan_feed() -> void:
+    var feed = town.get("feed") if town else null
+    if typeof(feed) != TYPE_ARRAY:
+        return
+    var n: int = (feed as Array).size()
+    if _feed_seen < 0 or n < _feed_seen:
+        _feed_seen = maxi(0, n - CHRON_MAX)
+    if n == _feed_seen:
+        return
+    var at := Time.get_datetime_string_from_system(true) + "Z"
+    for i in range(maxi(_feed_seen, n - CHRON_MAX), n):
+        var line := clean_line(str(feed[i]))
+        if line != "":
+            _chron.append({"t": kind_of(line), "s": line, "at": at})
+    _feed_seen = n
+    if _chron.size() > CHRON_MAX:
+        _chron = _chron.slice(_chron.size() - CHRON_MAX)
+
+## the payload's chronicle: newest first, copies (the hub never edits ours)
+func chronicle() -> Array:
+    scan_feed()
+    var out: Array = []
+    for i in range(_chron.size() - 1, -1, -1):
+        out.append((_chron[i] as Dictionary).duplicate())
+    return out
+
+## plain text for the hub: no control chars, no BBCode or angle brackets (it is not
+## HTML), no long digit runs (a Twitch user id is 7+ digits; days, gold, floors are
+## shorter), one line, at most LINE_MAX characters
+static func clean_line(raw: String) -> String:
+    if _strip_re == null:
+        _strip_re = RegEx.new()
+        _strip_re.compile("[\\x00-\\x1F\\x7F]+")
+    var s := _strip_re.sub(raw, " ", true)
+    var bb := RegEx.new()
+    bb.compile("\\[/?[a-zA-Z_]+(=[^\\]]*)?\\]")
+    s = bb.sub(s, "", true)
+    s = s.replace("<", "").replace(">", "")
+    var ids := RegEx.new()
+    ids.compile("\\d{7,}")
+    s = ids.sub(s, "#", true)
+    while s.contains("   "):
+        s = s.replace("   ", "  ")
+    s = s.strip_edges()
+    if s.length() > LINE_MAX:
+        s = s.left(LINE_MAX - 1).strip_edges() + "\u2026"
+    return s
+
+## one type per line, by keyword (CHRON_RULES, first match); unsure = "town"
+static func kind_of(line: String) -> String:
+    var l := line.to_lower()
+    for rule in CHRON_RULES:
+        for k in (rule[1] as Array):
+            if l.contains(String(k)):
+                return String(rule[0])
+    return "town"
 
 func _town_block(e: Economy) -> Dictionary:
     if e == null:

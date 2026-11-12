@@ -109,11 +109,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 
 ## LAPTOP list 3 (Mr. E, Nov 11 evening) - UI + content. The laptop now owns the UI files too:
 ## rts_camera.gd, feed_hud.gd, leaderboard_panel.gd, party_frames.gd, boss_bar.gd, auto_director.gd, health_bar_3d.gd, new UI files.
-- [ ] L11. Traps that visibly work (Mr. E: "they don't show functioning or doing damage"): every trap kind
+- [x] L11. Traps that visibly work (Mr. E: "they don't show functioning or doing damage"): every trap kind
       (pressure plate, spikes, darts, blades, pits...) has a trigger animation + sound, a DEX save (or Perception
       to spot first) rolled with real stats, damage dice with the number floating up, a Chronicle line
       ("BigAxe steps on a plate - darts! DEX 9 vs DC 13, 7 damage"), disarming by a rogue (Thieves' tools check).
       Render a trap going off; test that damage lands and saves roll.
+      DONE (Cycle 69): 6 kinds armed until stepped on, trigger anim + sound, Perception/thieves' tools/DEX save, dice, floating numbers, Chronicle; L11_TEST OK.
 - [ ] L12. Potions with status effects, 5e style: healing tiers (2d4+2 ... 10d4+20), plus antidote, fire/frost
       resistance, haste, giant strength, invisibility, heroism, darkvision for unlit floors; and the bad states
       to cure/inflict: poisoned, burning, frozen/slowed, blinded, frightened. Status icons on party frames and

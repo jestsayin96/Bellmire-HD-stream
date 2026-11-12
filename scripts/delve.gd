@@ -1224,13 +1224,29 @@ func _mon_saves(mon: Monster, m: Dictionary, _kind: int) -> bool:
         return true
     return d + floor_no / 3 + (2 if mon.def.get("boss", false) else 0) >= dc
 
-## traps: the first delver to come within reach of one looks for it - Perception,
-## d20 + WIS (+ proficiency for rogue, ranger, monk) vs DC 10 + floor/2. Seen, it
-## is stepped round. Missed, it goes off: a DEX save vs the same DC halves it.
-## Spikes 2d6 + floor, fire 2d8 + floor; a pressure plate drops a stone, 1d10 + floor.
+## ---- L11: traps that visibly work. The first delver to come within reach of
+## an armed trap looks for it: Perception, d20 + WIS (+ proficiency for rogue,
+## ranger, monk; disadvantage in the dark without darkvision) vs DC 10 + floor/2.
+## Spotted by someone with thieves' tools (rogue, bard), it is disarmed on a DEX
+## (+ proficiency) check; failing that by 5 or more sets it off on them. Spotted
+## by anyone else, it is stepped round. Missed, it goes off: the trap plays, a DEX
+## save halves the dice, the number floats up, the Chronicle says what happened.
 const SPOTTERS := ["rogue", "ranger", "monk"]
+const TOOLS := ["rogue", "bard"]
 const TRAP_REACH := 0.9
-var trap_log := {"spotted": 0, "sprung": 0, "saved": 0}
+const TRAPS := {
+    "SpikeTrap":     {"noun": "a spiked plate", "what": "spikes!", "dice": [2, 6], "sfx": "swing", "name": "a spike trap"},
+    "PressurePlate": {"noun": "a plate", "what": "darts!", "dice": [3, 4], "sfx": "ui", "name": "a pressure plate"},
+    "FireTrap":      {"noun": "a grate", "what": "fire!", "dice": [2, 8], "sfx": "spell", "name": "a fire grate"},
+    "DartTrap":      {"noun": "a loose flagstone", "what": "darts!", "dice": [3, 4], "sfx": "swing", "name": "a dart trap"},
+    "BladeTrap":     {"noun": "a slot in the floor", "what": "a blade!", "dice": [2, 8], "sfx": "swing", "name": "a blade trap"},
+    "PitTrap":       {"noun": "rotten boards", "what": "the floor drops away!", "dice": [2, 6], "sfx": "hit", "name": "a pit"},
+}
+var trap_log := {"spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0}
+
+func trap_dc() -> int:
+    return mini(20, 10 + floor_no / 2)
+
 func _traps_tick() -> void:
     if dun == null or not dun.info.has("traps"):
         return
@@ -1243,25 +1259,86 @@ func _traps_tick() -> void:
             if _flat((m["body"] as Node3D).global_position, tp) > TRAP_REACH:
                 continue
             tr["done"] = true
-            var h: Dictionary = m["h"]
-            var dc := mini(20, 10 + floor_no / 2)
-            var what := String(tr.get("what", "trap"))
-            var pd := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
-            var per := pd + roster.mod(h, "wis") + (roster.prof(h) if String(h["class"]) in SPOTTERS else 0)
-            if pd != 1 and (pd == 20 or per >= dc):
-                trap_log["spotted"] += 1
-                _say("%s spots %s and steps round it (Perception %d)." % [h["name"], what, per])
-                break
-            trap_log["sprung"] += 1
-            var dmg := float(floor_no) + float(_dice(2, 8) if what.contains("fire") else (_dice(1, 10) if what.contains("plate") else _dice(2, 6)))
-            var sd := _rng.randi_range(1, 20)
-            var sv := sd + roster.save_bonus(h, "dex")
-            if sd != 1 and (sd == 20 or sv >= dc):
-                trap_log["saved"] += 1
-                dmg *= 0.5
-                _say("%s springs %s and twists clear of the worst (DEX save %d)." % [h["name"], what, sv])
-            else:
-                _say("%s springs %s (DEX save %d)." % [h["name"], what, sv])
-            m["hp"] = float(m["hp"]) - _soak(m, dmg)
-            _hero_hit(m)
+            _meet_trap(m, tr)
             break
+
+func _meet_trap(m: Dictionary, tr: Dictionary, force_spot := -1) -> void:
+    var h: Dictionary = m["h"]
+    var spec: Dictionary = TRAPS.get(String(tr.get("kind", "SpikeTrap")), TRAPS["SpikeTrap"])
+    var dc := trap_dc()
+    var pd := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
+    var per := pd + roster.mod(h, "wis") + (roster.prof(h) if String(h["class"]) in SPOTTERS else 0)
+    var spotted := pd != 1 and (pd == 20 or per >= dc)
+    if force_spot >= 0:
+        spotted = force_spot == 1
+    if spotted:
+        trap_log["spotted"] += 1
+        if String(h["class"]) in TOOLS:
+            var td := _rng.randi_range(1, 20)
+            var tt := td + roster.mod(h, "dex") + roster.prof(h)
+            if td != 1 and (td == 20 or tt >= dc):
+                trap_log["disarmed"] += 1
+                _say("%s spots %s (Perception %d vs DC %d) and disarms it with thieves' tools (%d)." % [h["name"], spec["name"], per, dc, tt])
+                _float_text(m, "disarmed", Color(0.6, 1.0, 0.7))
+                return
+            if tt <= dc - 5:
+                _say("%s fumbles the thieves' tools on %s (%d vs DC %d) -" % [h["name"], spec["name"], tt, dc])
+                _spring(m, tr, spec, dc)
+                return
+        _say("%s spots %s (Perception %d vs DC %d) and steps round it." % [h["name"], spec["name"], per, dc])
+        _float_text(m, "spotted", Color(0.85, 0.95, 1.0))
+        return
+    _spring(m, tr, spec, dc)
+
+func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
+    var h: Dictionary = m["h"]
+    trap_log["sprung"] += 1
+    var node: Node3D = tr["node"]
+    if node.has_meta("fire"):
+        (node.get_meta("fire") as Callable).call()
+    node.set_meta("fired", int(node.get_meta("fired", 0)) + 1)
+    Sfx.at(String(spec["sfx"]), node.global_position, 2.0)
+    var what := String(spec["what"])
+    var dice: Array = spec["dice"]
+    if String(tr.get("kind", "")) == "PressurePlate" and _rng.randi() % 2 == 0:
+        what = "a stone from the ceiling!"
+        dice = [1, 10]
+    var dmg := float(_dice(int(dice[0]), int(dice[1])) + floor_no / 2)
+    var sd := _rng.randi_range(1, 20)
+    var sv := sd + roster.save_bonus(h, "dex")
+    var saved := sd != 1 and (sd == 20 or sv >= dc)
+    if saved:
+        trap_log["saved"] += 1
+        dmg = floorf(dmg * 0.5)
+    var took := _soak(m, dmg)
+    trap_log["damage"] += took
+    m["hp"] = float(m["hp"]) - took
+    _say("%s steps on %s - %s DEX %d vs DC %d, %d damage%s." % [h["name"], spec["noun"], what, sv, dc, int(took), " (halved)" if saved else ""])
+    _float_text(m, "-%d" % int(took), Color(1.0, 0.35, 0.25) if not saved else Color(1.0, 0.75, 0.3))
+    _hero_hit(m)
+
+## a number or word floating up off a delver's head
+func _float_text(m: Dictionary, text: String, col: Color) -> void:
+    var b: Node3D = m["body"]
+    if not is_instance_valid(b):
+        return
+    var lb := Label3D.new()
+    lb.text = text
+    lb.font_size = 84
+    lb.pixel_size = 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 22
+    lb.outline_modulate = Color(0, 0, 0, 0.95)
+    lb.modulate = col
+    lb.top_level = true
+    # on the floor, not the hero: HeroBody renames every Label3D under it to its name
+    var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
+    host.add_child(lb)
+    var p := b.global_position + Vector3(0, 2.4, 0)
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.4, 0), 1.2).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 1.2).set_delay(0.5)
+    tw.chain().tween_callback(lb.queue_free)

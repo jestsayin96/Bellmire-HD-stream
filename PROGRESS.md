@@ -902,3 +902,26 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   Rattling Host with a bone bowman, a sentinel and a spider called beside it; frames taken only while the lord
   is playing its attack - looked at: the Host's axe raised high over the knight, the bowman and sentinel by it.
 - Mr. E's other note (the sage's scar check on WIS) was already done in Cycle 67.
+
+
+## Cycle 69 - L11, traps that visibly work (laptop, 2026-11-11)
+- Merged origin/main (desktop D4/D5; LAPTOP list 3; the UI files are the laptop's now). Import pass, parse clean.
+- Mr. E: traps "don't show functioning or doing damage". They looped their animation forever whoever was near.
+  Now every trap is armed until something steps on it and carries meta "fire" (its trigger). dungeon_parts.gd:
+  spikes, pressure plate, fire grate made armed; new dart trap (darts fly across from two posts), blade trap
+  (a scything blade sweeps up out of a floor slot), pit (two boards drop open over a dark shaft). All six are
+  laid by dungeon_hd and recorded by kind.
+- Delve._meet_trap: Perception (d20 + WIS, + prof rogue/ranger/monk, disadvantage in the dark without
+  darkvision) vs DC 10 + floor/2. Spotted by a rogue or bard: thieves' tools, d20 + DEX + prof - disarmed, or
+  failing by 5+ sets it off on them; spotted by anyone else: stepped round. Missed: the trap plays, the sound,
+  a DEX save halves the dice (spikes 2d6, darts 3d4, fire 2d8, blade 2d8, pit 2d6, a plate's stone 1d10; + floor/2),
+  the damage floats up red over the hero (amber if halved), and the Chronicle: "BigAxe steps on a loose
+  flagstone - darts! DEX 7 vs DC 11, 10 damage." Ward soaks it; a fall can kill (death save as ever).
+- Found on the way: a Label3D under a HeroBody is renamed to the hero's name by its own label code - the floating
+  numbers came out as giant names. They hang off the floor now.
+- tools/_l11_test.gd (headless, new): all six kinds play their trigger and do damage when sprung; DEX saves at
+  0.459 vs the exact odds 0.450; a rogue disarms 273 of 400 spotted traps; a barbarian who spots one steps round.
+  L11_TEST OK. tools/_l11_shot.gd: renders/cycles/20261111_l11 - looked at: the blade sweeping through BigAxe,
+  fire under the mage, the pit's boards open, -7 / -9 / -10 floating, the six lines in the Chronicle.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 413 (MON_INPROP 0), TWITCH_PARSE OK,
+  L9_TEST OK.

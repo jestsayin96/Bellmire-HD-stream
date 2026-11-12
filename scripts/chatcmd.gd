@@ -157,6 +157,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
     last_cmd[user_id] = now
     if out != "":
         say.emit(out, _tone(out))
+        _ui_snd(verb, out)
     return _reply(user_id, display, login, out)
 
 ## T1: hand a command's answer to Twitch chat (via the desktop's twitch_eventsub.gd)
@@ -404,3 +405,37 @@ static func _lev(a: String, b: String) -> int:
             cur.append(mini(mini(int(cur[j - 1]) + 1, int(prev[j]) + 1), int(prev[j - 1]) + cost))
         prev = cur
     return int(prev[b.length()])
+
+## ---- S2: what a command sounds like on the stream (flat - Sfx.play, not in the world).
+## A typo nudge or a refusal: error. A buy that went through: coins, and the thing picked
+## up (or the flask drunk); !inventory opens the pack; any other command: menu_select.
+## At most one every UI_GAP s, so a busy chat is not a wall of clicks.
+const UI_GAP := 0.35
+static var _ui_last := -100000
+static var ui_sounds := {}          # kind -> times (tests read it)
+
+static func ui_kinds(verb: String, out: String) -> Array:
+    var low := out.to_lower()
+    if out.begins_with("No !") and out.contains("did you mean"):
+        return ["error"]
+    if out.contains(" - you have ") or low.begins_with("no hero") or low.contains("needs ") or low.contains("can't") or low.contains("cannot"):
+        return ["error"]
+    match verb:
+        "inventory", "inv", "bag", "items":
+            return ["inventory_open"]
+        "brew":
+            return ["coins_stack", "potion_drink"]
+        "forge", "armoury", "armory", "wear":
+            return ["coins_stack", "item_pickup"]
+        "oil", "lamp", "torch", "dye":
+            return ["coins_stack"]
+    return ["menu_select"]
+
+func _ui_snd(verb: String, out: String) -> void:
+    var now := Time.get_ticks_msec()
+    if now - _ui_last < int(UI_GAP * 1000.0):
+        return
+    _ui_last = now
+    for k in ui_kinds(verb, out):
+        ui_sounds[k] = int(ui_sounds.get(k, 0)) + 1
+        Sfx.play(String(k), -6.0)

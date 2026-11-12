@@ -159,6 +159,7 @@ func _next_floor() -> void:
 			for m in _alive():
 				if _rng.randi_range(1, 20) + roster.save_bonus(m["h"], "wis") < mini(20, 10 + floor_no / 2):
 					_give(m, "frightened", 6.0)
+		Monster.roar(dun.lord)          # S2: the lord's voice as it rises (the card, the director and the spotlight cut to it)
 		FeedHUD.card_on(town, String(dun.lord.def.get("name", "A lord")),
 			(("A rare thing on floor %d. %s" if uniq else "Lord of floor %d. %s") % [floor_no, note]).strip_edges(), dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
 	if not dark and not _warned_low and oil > 0.0 and oil <= float(alive_now):
@@ -462,6 +463,7 @@ func _process(delta: float) -> void:
 	if dun == null or not is_instance_valid(dun):
 		return
 	_tags_tick(delta)
+	_amb_tick(delta)          # S2: the quiet bed below
 	_t += delta
 	match state:
 		"fight":
@@ -551,6 +553,7 @@ func _fight(delta: float) -> void:
 				# D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
 				var mk := String(MENDERS.get(String(h["class"]), "heal"))
 				var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
+				_snd(String(SPELL_SND.get(got, "")), (low["body"] as Node3D).global_position + Vector3(0, 1.2, 0))     # S2
 				Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
 				if Spells.HARM.has(got):
 					# L8: the scar turned the mending into a blow - it lands on the friend
@@ -599,7 +602,9 @@ func _fight(delta: float) -> void:
 			continue
 		else:
 			Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
-		if roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() + (2 if has_st(m, "giant") else 0) >= ac):
+		var lands := roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() + (2 if has_st(m, "giant") else 0) >= ac)
+		_blow_snd(m, tgt, lands, roll == 20)          # S2
+		if lands:
 			var dmg := _hero_damage(h, roll == 20) + (4.0 if has_st(m, "giant") else 0.0)
 			dmg *= _ward(tgt) * _ability_mult(ability, tgt)
 			_ability_hit(ability, m, tgt, dmg, foes)
@@ -699,6 +704,8 @@ func _fight(delta: float) -> void:
 						o["hp"] = float(o["hp"]) - _soak(o, dmg * 0.5 * _resist(o, "frost" if String(mon.def.get("id", "")) == "mourncoil" else "fire"))
 						_give(o, "slowed" if String(mon.def.get("id", "")) == "mourncoil" else "burning", 3.0)
 						_hero_hit(o)
+		elif _has_shield(near["h"]) and shots <= 0.0 and not ways.has("breath"):
+			_snd("block", (near["body"] as Node3D).global_position + Vector3(0, 1.2, 0))     # S2: a miss rings off the shield
 
 ## ---- ways (L1). A slain ooze divides; a gravecaller calls up the dead.
 func _spawn_on_floor(d: Dictionary, at: Vector3) -> Monster:
@@ -894,6 +901,7 @@ func _loot(alive: Array) -> void:
 		mult = minf(1.35, 1.0 + 0.03 * float(st - sdc))
 	var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * mult)
 	Sfx.play("coin", -4.0)
+	_snd("chest_open", (seeker["body"] as Node3D).global_position, -2.0)      # S2: a find
 	if boss:
 		var share := int(float(found) / float(alive.size()))
 		var took: Array = []
@@ -967,6 +975,7 @@ func _hero_hit(m: Dictionary) -> void:
 	if is_instance_valid(b) and b.is_inside_tree():
 		Rig.play(b._anim, "Hit_A")
 		Sfx.at("hit", b.global_position)
+		_hurt_snd(m)                  # S2: a cry, now and then
 	if float(m["hp"]) > 0.0:
 		return
 	# one death save per delve (old rule): claw back to 1 hp on a DC 10 CON save
@@ -984,6 +993,7 @@ func _hero_hit(m: Dictionary) -> void:
 			_say("%s should be dead - and stands back up (%d)." % [m["h"]["name"], s])
 			return
 	Rig.play(b._anim, "Death_A")
+	_vox(m, "death", 3.0)             # S2
 	b.fallen = true
 	var line := roster.kill(String(m["uid"]), "the dark below", floor_no, 0)
 	_say(line)
@@ -1084,6 +1094,7 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
 			more.append(nx)
 			at = nx.global_position
 	var actual := Spells.cast(kind, b, tgt, _scar_check(m, kind), more)
+	_snd(String(SPELL_SND.get(actual, "")), b.global_position + Vector3(0, 1.4, 0))      # S2
 	Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
 	if not Spells.HARM.has(actual):
 		# L8: the scar turned the blow into a mending - wild magic mends the creature
@@ -1500,6 +1511,8 @@ func _quaff(m: Dictionary) -> bool:
 	if want == "":
 		return false
 	drink(m, want)
+	if is_instance_valid(m.get("body")):
+		_snd("potion_drink", (m["body"] as Node3D).global_position + Vector3(0, 1.5, 0))     # S2
 	return true
 
 func drink(m: Dictionary, key: String) -> void:
@@ -1646,3 +1659,93 @@ func _say_bubble(m: Dictionary, text: String) -> void:
 	var tw := lb.create_tween()
 	tw.tween_interval(3.0)
 	tw.tween_callback(lb.queue_free)
+
+## ---- S2: the fight's sounds (the RPG sound library, Sfx kinds). All positional (Sfx.at).
+##   a delver's blow   the weapon's own sound on the swing (sword_swing / dagger_stab /
+##                     bow_draw then arrow_shot), then on a hit sword_clash on bone and
+##                     armour or hit_impact on flesh; a miss is the swing alone. A shield
+##                     calling now and then puts its shield into it (shield_bash).
+##   a creature's miss on a shield-bearer: block
+##   voices            male_ / female_ (Roster.voice_of): hurt on a hit (sampled: not every
+##                     blow; a delver's cries and efforts share one HURT_GAP s), effort on a big swing (a 20, or one
+##                     in EFFORT_ODDS), death when they fall (the death sting already ducks
+##                     the music)
+##   spells            SPELL_SND: the caster's spell, whatever the scar made of it
+##   below             a quiet bed (AMB_KINDS) somewhere off in the dark every AMB_MIN-AMB_MAX s
+const SPELL_SND := {"bolt": "lightning", "chain": "lightning", "fire": "fireball", "frost": "ice_shard", "smite": "lightning",
+					"renew": "heal", "heal": "heal", "mend": "heal", "ward": "shield"}
+const HURT_GAP := 2.5
+const EFFORT_ODDS := 8
+const AMB_KINDS := ["bat_screech", "spider_skitter", "skeleton_rattle", "ghost_wail"]
+const AMB_MIN := 9.0
+const AMB_MAX := 22.0
+const AMB_DB := -16.0
+var _amb_t := 6.0
+var sounds := {}                   # kind -> times this delve asked for it (tests read it)
+
+func _snd(kind: String, at: Vector3, db := 0.0) -> void:
+	if kind == "":
+		return
+	sounds[kind] = int(sounds.get(kind, 0)) + 1
+	Sfx.at(kind, at, db)
+
+func _vox(m: Dictionary, what: String, db := 0.0) -> void:
+	var b = m.get("body")
+	if is_instance_valid(b) and (b as Node3D).is_inside_tree():
+		_snd("%s_%s" % [Roster.voice_of(m["h"]), what], (b as Node3D).global_position + Vector3(0, 1.6, 0), db)
+
+## the swing: which sound a delver's weapon makes
+func _swing_snd(h: Dictionary) -> String:
+	if String(h.get("class", "")) == "ranger":
+		return "bow_draw"
+	if roster.weapon_name(h).to_lower().contains("dagger") or String(h.get("class", "")) in ["rogue", "duelist"]:
+		return "dagger_stab"
+	return "sword_swing"
+
+func _blow_snd(m: Dictionary, tgt: Monster, landed: bool, crit: bool) -> void:
+	var h: Dictionary = m["h"]
+	var b: Node3D = m["body"]
+	var at := b.global_position + Vector3(0, 1.2, 0)
+	var sw := _swing_snd(h)
+	_snd(sw, at)
+	if sw == "bow_draw":
+		var to := tgt.global_position + Vector3(0, tgt._height() * 0.6, 0)
+		get_tree().create_timer(0.22).timeout.connect(func() -> void: Sfx.at("arrow_shot", at))
+		if landed:
+			get_tree().create_timer(0.45).timeout.connect(func() -> void: Sfx.at("hit_impact", to))
+			sounds["arrow_shot"] = int(sounds.get("arrow_shot", 0)) + 1
+	elif landed:
+		var hard := String(tgt.def.get("family", "")) in ["undead", "the fallen"] or bool(tgt.def.get("boss", false))
+		_snd("sword_clash" if hard else "hit_impact", tgt.global_position + Vector3(0, tgt._height() * 0.55, 0), 2.0 if crit else 0.0)
+	if landed and _has_shield(h) and _rng.randi_range(1, 4) == 1:
+		_snd("shield_bash", at, -2.0)
+	if (crit or _rng.randi_range(1, EFFORT_ODDS) == 1) and _t - float(m.get("cry_t", -99.0)) >= HURT_GAP:
+		m["cry_t"] = _t                 # one voice gap a delver, shared by cries and efforts
+		_vox(m, "effort", -3.0)
+
+func _has_shield(h: Dictionary) -> bool:
+	return String((Roster.CLASSES.get(String(h.get("class", "")), {}) as Dictionary).get("offhand", "")).contains("shield")
+
+## a hurt delver cries out now and then - never every blow
+func _hurt_snd(m: Dictionary) -> void:
+	if float(m["hp"]) <= 0.0 or _t - float(m.get("cry_t", -99.0)) < HURT_GAP:
+		return
+	if _rng.randi_range(1, 2) == 1 or float(m["hp"]) < float(m["max"]) * 0.3:
+		m["cry_t"] = _t
+		_vox(m, "hurt")
+
+func _amb_tick(delta: float) -> void:
+	if dun == null or not is_instance_valid(dun) or state == "home":
+		return
+	_amb_t -= delta
+	if _amb_t > 0.0:
+		return
+	_amb_t = _rng.randf_range(AMB_MIN, AMB_MAX)
+	var alive := _alive()
+	if alive.is_empty():
+		return
+	var b: Node3D = alive[0]["body"]
+	if not is_instance_valid(b):
+		return
+	var a := _rng.randf() * TAU
+	_snd(String(AMB_KINDS[_rng.randi() % AMB_KINDS.size()]), b.global_position + Vector3(cos(a), 0.3, sin(a)) * _rng.randf_range(10.0, 18.0), AMB_DB)

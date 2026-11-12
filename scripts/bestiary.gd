@@ -412,3 +412,30 @@ static func boss_def(b: Dictionary) -> Dictionary:
     out["id"] = b.get("id", "")
     out["ways"] = (LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true)
     return out
+
+## ---- S2 (sound): each creature's voice from the RPG sound library (Sfx kinds), heard on
+## spawn, on death and - for a lord - on arrival. Matched on what the creature IS (its type,
+## its body, its name, its model), most specific first; its family is the fallback.
+const VOICES := [
+    ["dragon", "dragon_roar"], ["wyrm", "dragon_roar"], ["whelp", "dragon_roar"],
+    ["minotaur", "minotaur_bellow"], ["troll", "troll_roar"], ["giant_", "giant_footstep"], ["ogre", "giant_footstep"],
+    ["orc", "orc_roar"], ["goblin", "goblin_screech"], ["puglin", "goblin_screech"],
+    ["demon", "demon_growl"], ["imp", "demon_growl"],
+    ["wraith", "wraith_whisper"], ["ghost", "ghost_wail"], ["spirit", "ghost_wail"], ["zombie", "zombie_moan"], ["ghoul", "zombie_moan"],
+    ["skeleton", "skeleton_rattle"], ["bone", "skeleton_rattle"], ["gravecaller", "skeleton_rattle"], ["sentinel", "skeleton_rattle"],
+    ["slime", "slime_squish"], ["ooze", "slime_squish"],
+    ["spider", "spider_skitter"], ["bat", "bat_screech"],
+    ["viper", "snake_hiss"], ["adder", "snake_hiss"], ["snake", "snake_hiss"],
+    ["frog", "frog_ribbit"], ["wasp", "insect_buzz"], ["rat", "cat_hiss"],
+]
+const FAMILY_VOICE := {"undead": "skeleton_rattle", "ooze": "slime_squish", "fiend": "demon_growl", "wyrm": "dragon_roar", "beast": "wolf_growl"}
+
+static func voice_of(d: Dictionary) -> String:
+    # the lost delver is one of us, not a creature - a man's grunt
+    if String(d.get("type", d.get("body", ""))) == "lost":
+        return "male_grunt"
+    var words := " ".join([d.get("type", ""), d.get("body", ""), d.get("id", ""), d.get("name", ""), String(d.get("path", "")).get_file()]).to_lower()
+    for pair in VOICES:
+        if words.contains(String(pair[0])):
+            return String(pair[1])
+    return String(FAMILY_VOICE.get(String(d.get("family", "")), ""))

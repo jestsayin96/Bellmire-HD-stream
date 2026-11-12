@@ -139,6 +139,18 @@ func _with_species(stats: Dictionary, species: String) -> Dictionary:
 static func species_of(h: Dictionary) -> String:
     return String(h.get("species", "human"))
 
+## ---- S2: the voice a hero shouts and dies in ("male" / "female"), kept on the hero once
+## chosen. The KayKit bodies that read one way decide it (the Rogue and the hooded Rogue are
+## women, the Knight, the Barbarian and the Mage men); for any other body (the Ranger) a
+## stable coin-flip on the hero, so a hero never changes voice between delves.
+static func voice_of(h: Dictionary) -> String:
+    if h.has("voice"):
+        return String(h["voice"])
+    var model := String((CLASSES.get(String(h.get("class", "")), {}) as Dictionary).get("model", "")).get_file()
+    var v := "female" if model.contains("Rogue") else ("male" if model.contains("Knight") or model.contains("Barbarian") or model.contains("Mage") else ("female" if hash(String(h.get("id", h.get("name", "")))) % 2 == 0 else "male"))
+    h["voice"] = v
+    return v
+
 static func has_trait(h: Dictionary, t: String) -> bool:
     return String(SPECIES.get(species_of(h), {}).get("trait", "")) == t
 
@@ -548,6 +560,7 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
         h["level"] = int(h["level"]) + 1
         var s: String = STATS[rng.randi() % STATS.size()]
         h["stats"][s] = int(h["stats"][s]) + 1
+        Sfx.play("level_up", -4.0)          # S2
         announced.emit("%s reaches level %d (+1 %s)." % [h["name"], int(h["level"]), s],
             Color(0.95, 0.86, 0.45))
     # A promotion is a story beat, so it is said out loud like a level-up.

@@ -295,7 +295,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       (Sfx.at already attenuates by distance). Add a tools/_s1_test.gd that asserts each wired event calls
       Sfx with a kind that exists in SETS. Render/soak a minute and listen in your head via the play counts
       (Sfx.plays) - 0 SCRIPT ERROR, no kind played that isn't registered.
-- [ ] S2. SOUND WIRING - LAPTOP (dungeon + heroes + UI). Same library on main (00cf0ef), same API, same
+- [x] S2. SOUND WIRING - LAPTOP (dungeon + heroes + UI). Same library on main (00cf0ef), same API, same
       rule: do not edit sfx.gd except to add a GAP. Pull main into the laptop branch first. Wire the
       laptop-owned files only:
         - monster.gd / bestiary.gd: each monster species gets a voice on spawn and on death - map
@@ -317,6 +317,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
           on !inventory, level_up when a hero levels. These are flat (Sfx.play), not positional.
       Add tools/_s2_test.gd asserting every wired event uses a registered kind; 0 SCRIPT ERROR; the
       existing _delve_test should still pass with sound calls in.
+      DONE (Cycle 87, laptop): Bestiary.voice_of (34 creatures, every lord and unique voiced), queued creature voices (one a 0.9 s beat, biggest / nearest / a death first, same kind 3.5 s), a lord roars as it rises, breath on the breath; per-weapon swings + hit / clash / bow / block / shield_bash, spells, potions, finds; hero voices sampled (Roster.voice_of); a quiet bed below; chat / UI sounds; level_up. GAPs added in sfx.gd. S2_TEST OK x3.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the

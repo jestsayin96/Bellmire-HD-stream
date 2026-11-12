@@ -72,7 +72,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
     var parts := msg.substr(1).split(" ", false)
     if parts.is_empty():
         return ""
-    var verb := String(parts[0]).to_lower()
+    var verb := canonical(String(parts[0]).to_lower())
     var arg := String(parts[1]).to_lower() if parts.size() > 1 else ""
     var arg2 := String(parts[2]).to_lower() if parts.size() > 2 else ""
     var rest := " ".join(parts.slice(1)).to_lower()
@@ -119,8 +119,13 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
-        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge [kind|list] !armoury !brew [potion] !wear <item> !dye <colour> !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
-        _:          return ""
+        "help":     out = help_line(arg)
+        _:
+            # L14: a near miss of a real command gets a nudge, anything else is left alone (other bots)
+            var guess := _closest(verb)
+            if guess == "":
+                return ""
+            out = "No !%s here - did you mean !%s? (!help lists them all)" % [verb, guess]
 
     _last[user_id] = now
     if out != "":
@@ -255,3 +260,66 @@ func _tone(line: String) -> Color:
     if l.contains("takes") or l.contains("rises") or l.contains("fitted") or l.contains("sets out"):
         return C_OK
     return C_INFO
+
+## ---- L14: the command list, from data/commands.json (the one source)
+static var _cmds: Dictionary = {}
+static func commands() -> Dictionary:
+    if _cmds.is_empty():
+        var f := FileAccess.open("res://data/commands.json", FileAccess.READ)
+        if f:
+            _cmds = JSON.parse_string(f.get_as_text())
+    return _cmds
+
+## an alias -> its command ("inv" -> "inventory"); anything else unchanged
+static func canonical(word: String) -> String:
+    var cs: Dictionary = commands().get("commands", {})
+    if cs.has(word):
+        return word
+    for k in cs:
+        if (cs[k].get("aliases", []) as Array).has(word):
+            return k
+    return word
+
+## !help: the short list; !help <command>: that one in detail
+static func help_line(arg := "") -> String:
+    var cs: Dictionary = commands().get("commands", {})
+    if arg != "":
+        var k := canonical(arg.trim_prefix("!").to_lower())
+        if not cs.has(k):
+            return "No !%s. !help lists them all." % arg.trim_prefix("!")
+        var c: Dictionary = cs[k]
+        var al := ""
+        if not (c.get("aliases", []) as Array).is_empty():
+            al = " (also !" + " !".join(c["aliases"]) + ")"
+        # on stream it goes in the Chronicle: the first sentence, the cost, an example (all of it in docs/COMMANDS.md)
+        var first := String(c.get("short", String(c["what"]).split(". ")[0].trim_suffix(".") + "."))
+        return "!%s %s%s - %s %s. e.g. %s" % [k, c.get("args", ""), al, first, c.get("cost", "free"), c.get("example", "!" + k)]
+    var bits: Array = []
+    for k in commands().get("order", cs.keys()):
+        bits.append("!" + String(k))
+    return "Commands: %s  |  !help <command> for more." % " ".join(bits)
+
+## the nearest command to a typo (edit distance 2 or less), or ""
+static func _closest(word: String) -> String:
+    var best := ""
+    var bd := 2 if word.length() <= 4 else 3
+    var names: Array = []
+    for k in commands().get("commands", {}):
+        names.append(k)
+        names.append_array(commands()["commands"][k].get("aliases", []))
+    for n in names:
+        var d := _lev(word, String(n))
+        if d < bd:
+            bd = d
+            best = canonical(String(n))
+    return best
+
+static func _lev(a: String, b: String) -> int:
+    var prev: Array = range(b.length() + 1)
+    for i in range(1, a.length() + 1):
+        var cur: Array = [i]
+        for j in range(1, b.length() + 1):
+            var cost := 0 if a[i - 1] == b[j - 1] else 1
+            cur.append(mini(mini(int(cur[j - 1]) + 1, int(prev[j]) + 1), int(prev[j - 1]) + cost))
+        prev = cur
+    return int(prev[b.length()])

@@ -410,7 +410,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
                 return "No smith in Bellmire will put a hammer to scarforged steel."
             var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4)))
             if not spend(h, rework):
-                return "%s needs %d gold to have it reworked into a %s (has %d)." % [h["name"], rework, kind, int(h["gold"])]
+                return "%s needs %d gold to have it reworked into a %s - you have %d." % [h["name"], rework, kind, int(h["gold"])]
             h["wkind"] = kind
             changed.emit(user_id)
             return "The smith reworks %s's steel into %s %s.%s" % [h["name"], _an(weapon_name(h)), weapon_name(h), last_haggle]
@@ -429,7 +429,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
     var label := weapon_name(peek)
     var price := haggle(h, cost_for(h, int(w["cost"])))
     if not spend(h, price):
-        return "%s needs %d gold for %s %s (has %d)." \
+        return "%s needs %d gold for %s %s - you have %d." \
             % [h["name"], price, _an(label), label, int(h["gold"])]
     h["weapon"] = nxt
     if kind != "":
@@ -452,7 +452,7 @@ func buy_armour(user_id: String) -> String:
     var a: Dictionary = ARMOUR[nxt]
     var aprice := haggle(h, cost_for(h, int(a["cost"])))
     if not spend(h, aprice):
-        return "%s needs %d gold for %s (has %d)." \
+        return "%s needs %d gold for %s - you have %d." \
             % [h["name"], aprice, a["name"], int(h["gold"])]
     h["armour"] = nxt
     changed.emit(user_id)
@@ -463,7 +463,7 @@ func buy_potion(user_id: String, n := 1) -> String:
     if h.is_empty(): return "no hero"
     var pprice := haggle(h, cost_for(h, POTION_COST * n))
     if not spend(h, pprice):
-        return "%s needs %d gold (has %d)." % [h["name"], pprice, int(h["gold"])]
+        return "%s needs %d gold - you have %d." % [h["name"], pprice, int(h["gold"])]
     h["potions"] = int(h["potions"]) + n
     changed.emit(user_id)
     return "%s buys %d %s. Now carrying %d.%s" % [h["name"], n,
@@ -477,7 +477,7 @@ func buy_oil(user_id: String, n := 1) -> String:
     if h.is_empty(): return "no hero"
     var oprice := haggle(h, cost_for(h, OIL_COST * n))
     if not spend(h, oprice):
-        return "%s needs %d gold for oil (has %d)." \
+        return "%s needs %d gold for oil - you have %d." \
             % [h["name"], oprice, int(h["gold"])]
     h["oil"] = int(h.get("oil", 0)) + n
     changed.emit(user_id)
@@ -490,7 +490,7 @@ func reroll(user_id: String, prepaid := false) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
     if not prepaid and not spend(h, cost_for(h, REROLL_COST)):
-        return "%s needs %d gold to reroll (has %d)." \
+        return "%s needs %d gold to reroll - you have %d." \
             % [h["name"], REROLL_COST, int(h["gold"])]
     var before: Dictionary = h["stats"].duplicate()
     var a := _with_species(roll_stats(String(h["class"])), species_of(h))
@@ -522,7 +522,7 @@ func respec(user_id: String, cls: String, prepaid := false) -> String:
     if cls == h["class"]:
         return "%s is already a %s." % [h["name"], cls]
     if not prepaid and not spend(h, cost_for(h, RESPEC_COST)):
-        return "%s needs %d gold to retrain (has %d)." \
+        return "%s needs %d gold to retrain - you have %d." \
             % [h["name"], RESPEC_COST, int(h["gold"])]
     var was: String = h["class"]
     h["class"] = cls
@@ -881,7 +881,7 @@ func buy_brew(user_id: String, key: String, n := 1) -> String:
         return "%s wants %s, but Bellmire's apothecary cannot brew it yet." % [h["name"], p["name"]]
     var price := haggle(h, cost_for(h, int(p["cost"]) * n))
     if not spend(h, price):
-        return "%s needs %d gold for %d %s (has %d)." % [h["name"], price, n, p["name"], int(h["gold"])]
+        return "%s needs %d gold for %d %s - you have %d." % [h["name"], price, n, p["name"], int(h["gold"])]
     add_brew(h, key, n)
     changed.emit(user_id)
     return "%s buys %d %s. %s%s" % [h["name"], n, p["name"], String(p.get("flavour", "")), last_haggle]
@@ -953,7 +953,7 @@ func wear(user_id: String, words: String) -> String:
     if not owned.has(key):
         var price := haggle(h, cost_for(h, int(it["cost"])))
         if not spend(h, price):
-            return "%s needs %d gold for %s (has %d)." % [h["name"], price, it["name"], int(h["gold"])]
+            return "%s needs %d gold for %s - you have %d." % [h["name"], price, it["name"], int(h["gold"])]
         owned.append(key)
         h["owned"] = owned
         note = " (%d gold)%s" % [price, last_haggle]
@@ -982,7 +982,7 @@ func dye(user_id: String, colour: String) -> String:
         return "The dyer has: %s." % ", ".join(dyes.keys())
     var price := haggle(h, cost_for(h, int(items().get("dye_cost", 25))))
     if not spend(h, price):
-        return "%s needs %d gold for the dyer (has %d)." % [h["name"], price, int(h["gold"])]
+        return "%s needs %d gold for the dyer - you have %d." % [h["name"], price, int(h["gold"])]
     if not h.has("cos"):
         h["cos"] = {}
     h["cos"]["dye"] = c

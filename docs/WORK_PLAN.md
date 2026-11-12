@@ -125,9 +125,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       the back, a pet that follows (from the CC0 animals), titles shown under the name. !wear <item>, !dye <colour>.
       Bought with gold now; later channel points (T1). Visible on the hero; render a lineup.
       DONE (Cycle 71): 10 accessories with 5e bonuses, 18 cosmetics (hats, banners, pets, titles), 10 dyes, !wear / !dye; L13_TEST OK.
-- [ ] L14. The command list in detail: one source of truth (data/commands.json): name, aliases, args, cost,
+- [x] L14. The command list in detail: one source of truth (data/commands.json): name, aliases, args, cost,
       cooldown, what it does, example. !help / !commands (short), !help <cmd> (detail). Friendly error replies
       ("!forge needs 120 gold - you have 40"). Write docs/COMMANDS.md from the same data (the hub/website uses it).
+      DONE (Cycle 72): data/commands.json -> !help, !help <cmd>, aliases, typo nudges, "- you have N" replies, docs/COMMANDS.md; L14_TEST OK.
 - [ ] L15. STREAM READABILITY (Mr. E: will viewers be able to read it?): design for a 1080p stream watched on a
       phone. Minimum on-screen text ~28 px at 1080p for anything viewers must read; name tags, Chronicle, Guild
       Roll, party frames, boss bar, banners scaled up; high contrast + outline; a UI scale setting (F11 cycles

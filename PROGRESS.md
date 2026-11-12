@@ -987,3 +987,18 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   piece on a dressed body; one pet after re-dressing. L13_TEST OK. tools/_l13_shot.gd: renders/cycles/20261111_l13
   - looked at: six heroes front and back in their hats, banners, dyes, pets and titles.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 441, TWITCH_PARSE OK, L3, L5, L12 OK.
+
+
+## Cycle 72 - L14, the command list from one source (laptop, 2026-11-11)
+- data/commands.json: every chat command - name, aliases, arguments, list cost, what it does (and a short stream
+  line for the long ones), an example, whether it needs a hero - plus the cooldowns and the order.
+- ChatCmd reads it: aliases resolve from the data (new: !stats / !sheet for !hero, !commands / !valley for !help);
+  !help is the short list; !help <command> one line in detail for the Chronicle (short line, cost, example). A
+  near miss of a real command gets a nudge ("No !forg here - did you mean !forge?"); other bots' commands
+  (!discord, !so) are left alone. Gold replies all read "X needs 43 gold for leather - you have 30."
+- tools/_commands_doc.gd writes docs/COMMANDS.md from the same data (the hub / website can read the JSON).
+- tools/_l14_test.gd (headless, new): all 29 verbs in ChatCmd's match are in the data and all 20 commands are
+  answered; aliases; !help names every command; typo nudge; other bots ignored; friendly gold; the doc carries every
+  command. L14_TEST OK. tools/_l14_shot.gd: renders/cycles/20261111_l14 - looked at: the replies in the Chronicle;
+  first pass !help forge took seven lines, the short stream line brings it to three.
+- Checks: parse 0 script errors, TWITCH_PARSE OK, L3, L13 OK.

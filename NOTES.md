@@ -312,3 +312,29 @@ and correct, and spending more ornament would break the anti-kitsch rule above. 
 evidence for the supervisor's review gate. (Verified with fallback display metrics where the
 self-hosted Gloock woff2 was present; the live checks ?state=empty/fail/stale, ?mock=chronicle/crowd
 and ?open=1 all pass.)
+
+## H1 follow-up (Nov 12, 2026) - a real bug the verification pass had missed
+
+The previous H1 run concluded "no code change - the look is already complete" and recorded a
+verification pass. Re-reading style.css this run turned up an actual defect, not a matter of taste:
+
+- The d20 GEOMETRY section of style.css ended with a block of stray JavaScript - a `//` line
+  (illegal in CSS) and a full `const D20_FACES = [ ... ];` array. This is gen_d20.py's JS output,
+  which belongs in app.js (where a correct, separate copy already lives and drives the die). It had
+  been pasted into the stylesheet by mistake.
+- Why it mattered: CSS has no `//` comment, so the parser treated `// ... const D20_FACES = [...];`
+  as a malformed selector prelude and kept consuming tokens until the next `{` - which was the
+  `footer {...}` rule. The footer rule was swallowed into the invalid selector and DROPPED, so the
+  footer rendered unstyled (left-aligned, full-opacity, 16.5px instead of centred, .55, .82rem).
+- Fix: deleted the stray JS block (~1.9 KB). The `.d20face.fN` transform rules and the
+  `/* edge ... */` geometry comment above it are valid CSS and were kept. app.js is untouched, so
+  the die is unaffected - it never read the CSS copy.
+
+Security: CSS-only change. No snapshot value, no `el()` path, no CSP, no URL/src/href touched.
+
+Re-verified the BUILT page headlessly (Chromium, Supabase row stubbed): at 320/768/1280 + overlay,
+and ?mock=crowd / ?mock=chronicle / ?open=1 (the `<img src=x onerror=alert(1)>` attacker name as a
+hero name AND a chronicle line): no dialog fired, zero <img> elements, no `img[src=x]`, the hostile
+string renders as literal text in span.hname and p.cline (brackets intact), no page errors, no
+horizontal overflow at 320. ?state=empty/fail/stale show their honest messages. Footer now computes
+to text-align:center, opacity:.55, font-size:.82rem at every width - the fix confirmed.

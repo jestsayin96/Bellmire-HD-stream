@@ -105,7 +105,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       nav band) + the Ford Mill; the Old Footing ruins off the Delvers' Road; 10 dirt roads; 8 trips of travellers/carts;
       5 director tour stops. FOUND: map_get_path stops at 4096 polygons (mesh has ~25000) - long routes came back cut
       30-50 m short; TownNav.path now queries with room. D12_TEST OK; renders/cycles/20261112_d12.
-- [ ] D13. MOVED to L20 (laptop owns scripts/rts_camera.gd - every recent commit to it is the laptop's).
+- [x] D13. MOVED to L20 (laptop owns scripts/rts_camera.gd - every recent commit to it is the laptop's).
 - [x] D14. Stuck walkers against props (supervisor, Nov 11): _townwalk reports stuck_on_route=4 steady
       (traders Petra Bramble, Maela of the Ford, farmer Maela Coalfoot) - pinned on a prop a few cm off
       their route, navoff 0.17-0.66, push (0,0,0). Nobody is inside a building (in_solid 0 of 8394), so
@@ -121,6 +121,32 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       freed (2 SCRIPT ERRORs) and 9 "Lambda capture freed" (timers holding freed nodes - spells/raids/town/notables/townsfolk);
       a raid ate a hero's errand (arrival fired mid-road); defenders whose post a prop blocks walked on the spot forever.
       D8_TEST OK; 9-min re-soak 0 script errors, 0 lambda errors; renders/cycles/20261112_d8.
+
+- [ ] T1. TWITCH PHASE 2 - DESKTOP OWNS THIS (Mr. E, Nov 11 23:18). All credentials are already
+      authorized and proven live: see the gitignored local/twitch.cfg for the client id, both user ids
+      and the file names. Tokens are in user://twitch_token.json (broadcaster) and
+      user://twitch_bot_token.json (bot bellmirebro, modded on the channel) on THIS machine - that is
+      why the desktop builds it. Build it in a NEW file, scripts/twitch_eventsub.gd:
+        - EventSub WebSocket: channel.cheer (bits:read), channel.subscribe / subscription.message /
+          subscription.gift (channel:read:subscriptions), channel.follow VERSION 2
+          (moderator:read:followers), channel.channel_points_custom_reward_redemption.add
+          (channel:read:redemptions) -> town.spotlight(uid, lane bits|subs|points, seconds, reason).
+        - REFRESH BOTH TOKENS ON A TIMER. They expire in about 4 hours. This is the most likely bug in
+          the whole item and it only shows up hours in, on a 24/7 run, when nobody is watching.
+        - Bellmire creates its OWN channel point rewards with its own client id at startup, and matches
+          redemptions BY REWARD ID, never by title. The six rewards already on the channel belong to
+          Mr. E's other app, fightoverlay - ignore them completely. Reward titles must avoid every
+          fightoverlay keyword (boss, monster, spawn, raid, mob, goblin, horde, loot, drop, chest,
+          treasure, invade, titan). Start with "Spotlight my hero".
+        - Event ownership: bits and subs -> Bellmire spotlight lanes; follows -> a Chronicle line only,
+          no spotlight (fightoverlay used to own follows and has turned its follower monster off).
+      NEVER EDIT chatcmd.gd - it is laptop-owned. The chat-reply half is split by contract: the laptop
+      adds  signal twitch_reply(user_login: String, text: String)  to chatcmd.gd, emitting the plain
+      answer with no @name prefix and no rate limiting. THIS file connects to that signal and owns the
+      queue, the rate limiting, the @name prefix and the Send Chat Message API call as bellmirebro
+      (broadcaster_id 138821183, sender_id 1609188025). Do not change that signature alone.
+      Test without a live stream: the test-only !testbits <n> / !testsub / !testpoints already exist
+      from L17. Prove the refresh path by forcing an expiry, not by waiting.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
 - [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
@@ -218,12 +244,6 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       fixed test camera. The L17 spotlight panes each get their own camera, so they must share this rule.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
-- [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:
-      bits (channel.cheer), channel points (channel.channel_points_custom_reward_redemption.add), follows,
-      subs -> town.spotlight(uid, lane bits|subs|points, seconds, reason) + in-game effects. Chat replies: !stats / !hero / !inventory answered in
-      Twitch chat as "@name ..." (Send Chat Message API), rate-limited.
-
-## Viewer hub website (main chat, after T1; Mr. E to confirm)
 - [ ] W1. A public page for viewers: hero sheet, inventory, gear, the guild roll, the fallen, the command list
       (from data/commands.json). The game publishes a JSON snapshot every minute; phase 2 adds voting (polls that
       change the town: next raid target, festival, a boss to summon) with Twitch login.

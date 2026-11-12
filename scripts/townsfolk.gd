@@ -292,6 +292,19 @@ var _slide_side := 0.0
 var _rerouted := 0
 var slides := 0
 var reroutes := 0
+# D16b: the unstick watchdog - where the feet stood WD_WINDOW s ago, how
+# long since, and how many tries in a row came to nothing
+static var watchdog := true    # off only for the D16b before/after test
+const WD_WINDOW := 2.0
+const WD_MIN := 0.2
+var _wd_at := Vector3.INF
+var _wd_t := 0.0
+var _wd_n := 0
+var wd_fires := 0
+var wd_close := 0
+var wd_repaths := 0
+var wd_nudges := 0
+var wd_giveups := 0
 
 func _physics_process(delta: float) -> void:
     if lod > 0:
@@ -323,6 +336,8 @@ func _physics_process(delta: float) -> void:
         return
     if _route.is_empty():
         move_dir = Vector3.ZERO
+        _wd_at = Vector3.INF
+        _wd_n = 0
         _wait -= delta
         if _wait <= 0.0:
             if inside:
@@ -415,6 +430,26 @@ func _physics_process(delta: float) -> void:
     move_dir = dir
     rotation.y = atan2(dir.x, dir.z)
     Rig.play(_anim, "Walking_A")
+    # D16b: on a route but the feet went under WD_MIN in WD_WINDOW s (pinned
+    # in a crowd, wedged on a prop, or the skip / re-route below going round
+    # in a circle): close enough is there, else re-path, else step aside
+    if not watchdog:
+        pass
+    elif _wd_at == Vector3.INF:
+        _wd_at = p
+        _wd_t = 0.0
+    else:
+        _wd_t += delta
+        if _wd_t >= WD_WINDOW:
+            var moved := Vector2(p.x - _wd_at.x, p.z - _wd_at.z).length()
+            _wd_t = 0.0
+            _wd_at = p
+            if moved < WD_MIN:
+                wd_fires += 1
+                if _unstick(dir):
+                    return
+            else:
+                _wd_n = 0
     # a waypoint that cannot be reached (off the ground, behind a crowd):
     # after a moment give it up and take the next
     if Vector2(p.x - was.x, p.z - was.z).length() < speed * pace * delta * 0.3:
@@ -459,6 +494,83 @@ func _physics_process(delta: float) -> void:
                     return
             _rerouted = 0
             _route.remove_at(0)
+
+## D16b: what the watchdog does with a walker that has not moved in
+## WD_WINDOW s. True when the route changed (the caller stops this step).
+func _unstick(dir: Vector3) -> bool:
+    _wd_n += 1
+    var here := global_position
+    var door := _enter_at != Vector3.ZERO
+    var goal: Vector3 = _route.back()
+    var end_at: Vector3 = _door_out if door and _door_out != Vector3.ZERO else goal
+    var to_end := Vector2(end_at.x - here.x, end_at.z - here.z).length()
+    _best_tgt = Vector3.INF
+    _prog_t = 0.0
+    _stuck_t = 0.0
+    # someone is standing on the very spot: near enough is there
+    if to_end < (1.5 if door else 2.5):
+        wd_close += 1
+        if door:
+            _route = [_enter_at]
+            return true
+        _route.clear()
+        Rig.play(_anim, "Idle")
+        _door_retry = 0
+        _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
+        return true
+    if _wd_n == 2:
+        # step aside (a body's width off the line, either hand, or back the
+        # way it came) onto free walkable ground, then on along the route
+        var side := Vector3(-dir.z, 0.0, dir.x)
+        if _slide_side < 0.0:
+            side = -side
+        # (either hand first, then round the clock; a body's width, then half)
+        for k in 16:
+            var ang: float = [PI * 0.5, -PI * 0.5, PI * 0.75, -PI * 0.75, PI * 0.25, -PI * 0.25, PI, 0.0][k % 8]
+            var c: Vector3 = here + side.rotated(Vector3.UP, ang - PI * 0.5) * (0.8 if k < 8 else 0.45)
+            var kw: Vector3 = town.call("keep_walkable", c)
+            if Vector2(kw.x - c.x, kw.z - c.z).length() > 0.05:
+                continue
+            if not (town.call("solid_at", c, 0.17) as Array).is_empty():
+                continue
+            c.y = float(town.call("height_at", c.x, c.z))
+            wd_nudges += 1
+            _route.push_front(c)
+            return true
+        # nowhere free to step: brush out past the props' edges to the mesh
+        if not door:
+            var gr := _flood_out(end_at, 0.02)
+            if not gr.is_empty():
+                _ghost_last = gr[_ghost_n_of]
+                wd_nudges += 1
+                _route = gr
+                return true
+    if _wd_n >= 3 and rank < 0 and role != "caravan":
+        # three tries and still pinned: let this trip go, try another later
+        # (a hero on an errand and a caravan, whose trip IS the errand, keep on)
+        wd_giveups += 1
+        _route.clear()
+        _enter_at = Vector3.ZERO
+        _door_out = Vector3.ZERO
+        _door_retry = 0
+        Rig.play(_anim, "Idle")
+        _wait = randf_range(2.0, 5.0)
+        return true
+    # a fresh path from where the feet are (out of a prop pocket first)
+    var nr: Array = []
+    if not door:
+        nr = _escape_route(end_at)
+    if nr.is_empty():
+        nr = town.call("route", here, end_at)
+    if nr.is_empty():
+        return false
+    if door:
+        nr.append(_enter_at)
+    wd_repaths += 1
+    if _wd_n >= 3:
+        _wd_n = 1           # a hero on an errand keeps trying
+    _route = nr
+    return true
 
 ## D14: a walker caught in a pocket between props (a yard's fence and its
 ## tables) is off the navmesh, and a path from there starts at the nearest

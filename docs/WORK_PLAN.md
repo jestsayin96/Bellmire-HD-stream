@@ -379,41 +379,74 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - Firefly icons / title art: made by him in Adobe.
 
 
-## ROUND 4 - Nov 12 polish + hub elevation (Mr. E, 03:47 CT). The plan ran dry; this refills it.
-## Priorities straight from Mr. E: people clip/stick, dungeon looks rough, animations are weak, hub must be SSS+.
-## Ownership unchanged. Each item: definition-of-done + a test. Supervisor drives DESKTOP; LAPTOP + HUB run in their own chats.
+## ROUND 4 - Nov 12 polish + hub elevation (Mr. E, 03:47 CT). Expanded into phased programs 04:16.
+## Priorities from Mr. E: people clip/stick, dungeon looks rough, animations weak, hub must be SSS+.
+## Ownership unchanged. Each item: subject + DONE/test. Workers take the FIRST unchecked item IN THEIR OWN section.
+## Full per-chat briefs with the long detail exist (desktop saved claude/desktop-program-d16-d23.md); these lines are the trackable checklist.
 
-### DESKTOP (town/people/nav/animation) - town.gd, town_nav.gd, townsfolk.gd, hero_body.gd, rig.gd, raids.gd, cavalry.gd, animal.gd
-- [ ] D16. LOCAL AVOIDANCE - stop people clipping/sticking. hero_body + townsfolk follow _route with NO dynamic
-      avoidance (no NavigationAgent3D, no separation). Add agent avoidance OR simple separation steering (push
-      apart within ~0.6 m) + an unstick watchdog (route active but displacement < 0.2 m over 2 s -> repath/nudge).
-      DONE: _townwalk stuck_on_route == 0 over 120 s AND a 50-person gate-funnel test shows 0 sustained overlaps > 0.3 m.
-- [ ] D17. ANIMATION PASS (town side). rig.gd silently no-ops a missing clip -> T-pose/glide. Audit every
-      state->clip mapping for heroes, townsfolk, animals: fallback clip when a model lacks the named anim (never
-      T-pose), speed-blend walk<->run, idle variety, attack/cast/death clips actually fire. DONE: an anim probe shows
-      every visible model has a non-empty current_animation each second over a 60 s walk+fight; before/after shot sheet.
-- [ ] D18. TOWN/VALLEY VISUAL PASS. Lighting, ground materials, shadow quality, and a prop-placement sanity sweep
-      (no floating or interpenetrating props in town/valley). DONE: shot sheet day+night; 0 floating/clipping town props.
+### DESKTOP (town/people/nav/animation) - town.gd, town_nav.gd, townsfolk.gd, hero_body.gd, rig.gd, raids.gd, cavalry.gd, animal.gd, spells.gd, daylight.gd, valley.gd, notables.gd, economy.gd, sfx.gd
+# Phase A - movement & nav (stop walls/sticking) [D16]
+- [ ] D16a. LOCAL AVOIDANCE: hero_body/townsfolk/animal/cavalry follow _route with no dynamic avoidance - add NavigationAgent3D avoidance OR separation steering (push apart within ~0.6 m). DONE: 50-body gate-funnel = 0 sustained overlaps > 0.3 m.
+- [ ] D16b. UNSTICK WATCHDOG: route active but displacement < 0.2 m over 2 s -> repath/nudge. DONE: _townwalk stuck_on_route == 0 over 120 s.
+- [ ] D16c. DYNAMIC OBSTACLES: stalls/carts/benches not in the navmesh - register or steer round. DONE: town soak = 0 bodies through a stall or stuck on a prop.
+- [ ] D16d. DOORWAY/GATE/BRIDGE FUNNELING: crowds queue and pass instead of piling. DONE: funnel test passes at the real gate and bridge.
+# Phase B - animation overhaul (town) [D17]
+- [ ] D17a. NO T-POSE: rig.gd fallback clip when a model lacks the named anim (play Idle + log once). DONE: anim probe = 0 empty current_animation over a 60 s day+raid.
+- [ ] D17b. LOCOMOTION BLEND: speed-blend walk<->run, match playback to move speed, face heading - no gliding/moonwalk. DONE: walk probe, no foot-slide beyond threshold.
+- [ ] D17c. STATE COVERAGE: job anims (smith/angler/farmer/vendor), sit/eat at night, attack/cast/hurt/death for guards/heroes/raiders, animal graze/walk/flee. DONE: town-day shot sheet, NPCs visibly work.
+- [ ] D17d. BLENDS/TRANSITIONS: proper blend times, no pops, death doesn't T-pose. DONE: no visible pops in a 60 s capture.
+# Phase C - the map: town & valley [D18]
+- [ ] D18a. PROP/BUILDING SANITY: 0 floating/interpenetrating props, buildings on ground, roads connect, wall/gates/bridge coherent. DONE: sweep = 0 floating/clipping; shot sheet.
+- [ ] D18b. DRESS THE VALLEY: fields, fences, crops, mill, docks, forest, paths. DONE: valley shot sheet reads lived-in.
+- [ ] D18c. GROUND & MATERIALS: ground texture blending (grass/dirt/road/water), water shader. DONE: before/after; 0 material-null headless.
+# Phase D - lighting, day/night, atmosphere [D19]
+- [ ] D19a. daylight.gd DAY/NIGHT: sun angle+colour, dawn/dusk warmth, real night dark, lamps/braziers/windows as OmniLights at night. DONE: full-day timelapse shot sheet.
+- [ ] D19b. ATMOSPHERE: fog/haze, clouds, optional rain, sky gradient + stars at night, soft god-rays. DONE: shots across time/weather; FPS holds.
+# Phase E - life & simulation depth [D20]
+- [ ] D20a. RICHER ROUTINES (notables/townsfolk): work->market->tavern->home by hour, right anim per activity. DONE: town soak shows routines.
+- [ ] D20b. CROWD REACTIONS: raid sends civilians fleeing/indoors; market bustle by hour; festival gathers. DONE: raid in a soak clears the streets.
+- [ ] D20c. ANIMALS: herds graze/drift, dogs follow, birds flock. DONE: animal-behaviour probe in a soak.
+# Phase F - magic & combat feel (town) [D21]
+- [ ] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.
+- [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
+# Phase G - audio polish (owns sfx.gd) [D22]
+- [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
+- [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
+# Phase H - performance (stretch) [D23]
+- [ ] D23. Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
 
-### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, data/*, UI files
-- [ ] L25. DUNGEON GEOMETRY FIX (Mr. E: "looks like shit - stairs, objects clipping, people get stuck"). Stairs
-      connect with no gaps/floating; collision-aware prop/furniture placement so nothing interpenetrates walls or each
-      other; floor tiles align; dungeon nav so delvers don't wall-stick. DONE: an overlap probe over 10 generated floors
-      reports 0 prop-prop and 0 prop-wall interpenetration > 0.2 m, stair treads continuous, 0 stuck delvers in a 10-floor run.
-- [ ] L26. MONSTER/BOSS ANIMATIONS - extend L10 to the WHOLE bestiary: idle/move/attack/death fire, no gliding.
-      DONE: MON_ANIMS across the full bestiary, 0 static creatures.
-- [ ] L27. NEW CONTENT from the Lore Bible: more monsters, 2-3 new bosses with mechanics, new gear tiers +
-      cosmetics (rings/amulets/cloaks/dyes), new floor themes/biomes. DONE: parse clean + content's own test + a delve soak sees them.
-- [ ] L28. DUNGEON TEXTURES/MATERIALS + per-biome lighting so floors aren't flat (CC0 only). DONE: shot sheet per biome, clear visual lift.
+### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
+# Phase A - dungeon geometry & nav [L25]
+- [ ] L25a. STAIR INTEGRITY: continuous treads, correct step vs G=4.0/floor height, landing both ends, registered walkable. DONE: stair-probe over 12 floors, 0 gaps, landings both ends.
+- [ ] L25b. COLLISION-AWARE PROPS: no prop-prop or prop-in-wall overlap, clearance from doorways/path; placement validator reseats/drops overlaps. DONE: overlap probe 12 floors = 0 > 0.2 m, 0 blocked doorways.
+- [ ] L25c. DUNGEON NAV: bake a NavigationRegion3D per floor (open cells minus obstacle circles + walls, like TownNav) OR cell-grid A*; route delvers on it + unstick watchdog. DONE: 10-floor descent = 0 stuck delvers, 0 in geometry.
+- [ ] L25d. ROOM/CORRIDOR COHERENCE: no orphan rooms, all reachable, doorways align, tiles don't z-fight. DONE: connectivity check over 12 floors, shot sheet.
+# Phase B - dungeon look: textures/materials/biome/lighting [L28]
+- [ ] L28a. MATERIALS: real albedo/rough/metal per theme+biome, normals where the kit has them, fix material-null. DONE: 0 material-null, before/after 3 themes.
+- [ ] L28b. BIOME DISTINCTION (data/biomes.json ~14 worlds): colour grade, fog/haze, ambient particles, ground variants - each biome its own place. DONE: per-biome shot sheet, no two alike.
+- [ ] L28c. LIGHTING/ATMOSPHERE: per-floor key+fill, torches/braziers as OmniLights w/ embers, depth fog, boss-floor drama. DONE: shot sheet, FPS holds (cap emitters).
+- [ ] L28d. DETAIL DECALS: cracks/moss/blood/scar-glass veins to break repetition. DONE: varied-floor shots, 0 new errors.
+# Phase C - creatures: animation + roster [L26/L27]
+- [ ] L26a. ANIM AUDIT across the WHOLE bestiary: every family map resolves to real clips, fallback when missing (no T-pose/glide); monster.gd states drive the right clip; attack timing lines up. DONE: MON_ANIMS = 0 static.
+- [ ] L27a. NEW MONSTERS from owned CC0 packs (KayKit Skeletons/Halloween, Quaternius - NOT Bestiary/QAL): add to TYPES with height/anim map/depth/strain. DONE: appear at depth in a soak, animate, parse clean.
+- [ ] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
+# Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]
+- [ ] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
+- [ ] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
+- [ ] L29c. SET-PIECE ENCOUNTERS from lore (ambush/guarded hoard/mini-event) so a floor isn't just a room of monsters. DONE: set pieces appear + resolve, Chronicle logs them.
+# Phase E - gear, cosmetics, loot [L30]
+- [ ] L30a. GEAR EXPANSION (items.json accessories): more weapons/armour per tier, visible on handslot bones (rig EQUIP), real bonuses. DONE: heroes equip visibly in a soak, bonuses apply.
+- [ ] L30b. COSMETICS & DYES (items.json): more cloaks/hats/rings/amulets/boots/gloves; !wear/!dye change the model live; channel-point cosmetics gated (needs T1/Mr. E). DONE: !wear + !dye change the model in a soak.
+- [ ] L30c. LOOT TABLES by depth/biome/boss; boss uniques; Chronicle announces rare finds. DONE: loot scales in a 10-floor soak, a boss drops its unique.
+# Phase F - dungeon-side UI / readability (stretch) [L31]
+- [ ] L31. Dungeon-fight UI (party frames, boss bar, feed HUD): damage numbers, status-effect icons, "Now fighting: <lord>" banner, legible at 1080p. Keep the parchment+ink+teal theme. DONE: 1080p capture, HP/damage/statuses/phase readable.
 
-### HUB (web/) - hub builder owns web/index.html, app.js, style.css, docs/HUB_SECURITY.md. Security-review + republish gated on supervisor.
-- [ ] H1. ELEVATE TO AN "SSS+ D&D" PAGE. Target aesthetic: dark-fantasy grimoire - parchment+ink base with the
-      JestSayin teal/gold, ornate borders, drop-cap section heads. Components: a "character sheet" card per viewer-hero
-      (class/species/level/HP bar/gear with item icons), an animated d20, a live Chronicle feed with filter tabs + per-type
-      icons, a Boards/leaderboard with ranked tier styling (SSS/SS/S...), a town-status strip (day, population, treasury, raids).
-      Responsive, fast, static (no build step), works on a phone and on a stream overlay.
-      PALETTE: sample the exact ink/parchment/teal/gold from the title art (supervisor DECISION: yes - the title PNG
-      will be dropped into web/assets on the elevate merge so colours match the brand).
-      HARD: keep ALL Phase-1 hardening - esc() on every DOM interpolation, strict CSP, payload version gate, read-only.
-      Research first (D&D Beyond character sheets, grimoire UIs, SSS-tier leaderboard styling), then implement on branch hub.
-      DONE: supervisor security-review vs docs/HUB_SECURITY.md passes, then republish gh-pages + live checks in the browser.
+### HUB (web/ only) - hub builder owns web/index.html, app.js, style.css, NOTES.md, docs/HUB_SECURITY.md. Keep the el()/textContent + ICON_SET + CSP model. Republish gated on supervisor review.
+- [ ] H1. VISUAL ELEVATION to an SSS+ grimoire: ornate frames/borders, parchment texture, illuminated drop-cap heads, richer hero character-sheet cards, tier badges on boards, better animated d20, micro-anims (respect reduced-motion). Responsive: phone/desktop/overlay. DONE: before/after at 3 widths; security invariants + hostile-name test pass.
+- [ ] H2. CHRONICLE on-site + filter tabs by type (combat/loot/boss/town/chat) + per-type icons + text filter + pause-on-hover (keep the on-stream strip in-game). DONE: filters work vs ?mock=chronicle, legible at 1080p.
+- [ ] H3. HERO SHEETS deepened: stat block + mods, class/species crest, level/XP, HP, equipped gear w/ icon+tooltip, cosmetics/dyes, title+epitaph for the Fallen. Keep paging (HERO_PAGE 60). DONE: ?mock=crowd 200 fast, ?open=1 full sheet.
+- [ ] H4. BOARDS/LEADERBOARD tiers (SSS/SS/S/A/B) styled, sort tabs, Guild Roll + Fallen, town-status strip (day/pop/treasury/raids). DONE: tiers + sorts render, status strip live.
+- [ ] H5. TWITCH CHAT EMBED + clickable local d20. CAUTION: minimal CSP change for the embed, documented in HUB_SECURITY.md, flagged for supervisor review; page stays read-only. DONE: chat loads, d20 rolls, CSP documented, invariants intact.
+- [ ] H6. TWITCH LOGIN scaffolding (device-code OAuth, public client id) so viewers see their own hero - the client id is NEEDS-MR.-E; wire against a placeholder. Still no viewer writes (read-only through Phase 2). DONE: flow wired/testable w/ placeholder, token step gated on Mr. E.
+- [ ] H7. PERF/A11Y/POLISH (stretch): fast first paint, no layout shift, lazy-render the crowd, reduced-motion, contrast+focus, keep offline/stale honesty. DONE: fast on a phone, a11y pass, invariants intact.
+# Phase 3 (NOT now - stays read-only until RLS designed): friends/party, a write-backed leaderboard, any viewer WRITE path.

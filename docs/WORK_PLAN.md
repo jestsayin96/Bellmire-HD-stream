@@ -415,26 +415,13 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
 
-<<<<<<< HEAD
-### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, data/*, UI files
-- [ ] L25. DUNGEON GEOMETRY FIX (Mr. E: "looks like shit - stairs, objects clipping, people get stuck"). Stairs
-      connect with no gaps/floating; collision-aware prop/furniture placement so nothing interpenetrates walls or each
-      other; floor tiles align; dungeon nav so delvers don't wall-stick. DONE: an overlap probe over 10 generated floors
-      reports 0 prop-prop and 0 prop-wall interpenetration > 0.2 m, stair treads continuous, 0 stuck delvers in a 10-floor run.
-      IN PROGRESS (Cycle 89, laptop, 7 checks of 9 green - NOT ticked): L25a stairs, L25b collision-aware placement +
-      keep-clear route / doorways, L25d reachability all pass on 12 floors (tools/_l25_test.gd); L25c nav: forced descents
-      9 -> 0, stuck samples 209 -> 104 (91 of them one lord fight on floor 10), watchdog 51 nudges / 10 floors - still open.
-- [ ] L26. MONSTER/BOSS ANIMATIONS - extend L10 to the WHOLE bestiary: idle/move/attack/death fire, no gliding.
-      DONE: MON_ANIMS across the full bestiary, 0 static creatures.
-- [ ] L27. NEW CONTENT from the Lore Bible: more monsters, 2-3 new bosses with mechanics, new gear tiers +
-      cosmetics (rings/amulets/cloaks/dyes), new floor themes/biomes. DONE: parse clean + content's own test + a delve soak sees them.
-- [ ] L28. DUNGEON TEXTURES/MATERIALS + per-biome lighting so floors aren't flat (CC0 only). DONE: shot sheet per biome, clear visual lift.
-=======
 ### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
 # Phase A - dungeon geometry & nav [L25]
 - [ ] L25a. STAIR INTEGRITY: continuous treads, correct step vs G=4.0/floor height, landing both ends, registered walkable. DONE: stair-probe over 12 floors, 0 gaps, landings both ends.
 - [ ] L25b. COLLISION-AWARE PROPS: no prop-prop or prop-in-wall overlap, clearance from doorways/path; placement validator reseats/drops overlaps. DONE: overlap probe 12 floors = 0 > 0.2 m, 0 blocked doorways.
 - [ ] L25c. DUNGEON NAV: bake a NavigationRegion3D per floor (open cells minus obstacle circles + walls, like TownNav) OR cell-grid A*; route delvers on it + unstick watchdog. DONE: 10-floor descent = 0 stuck delvers, 0 in geometry.
+      IN PROGRESS (Cycle 89, laptop): L25a/b/d green on 12 floors (tools/_l25_test.gd). L25c uses a cell-grid BFS route; forced
+      descents 9 -> 0, stuck samples 209 -> 104 (91 in one floor-10 lord fight), watchdog 51 nudges / 10 floors - still open.
 - [ ] L25d. ROOM/CORRIDOR COHERENCE: no orphan rooms, all reachable, doorways align, tiles don't z-fight. DONE: connectivity check over 12 floors, shot sheet.
 # Phase B - dungeon look: textures/materials/biome/lighting [L28]
 - [ ] L28a. MATERIALS: real albedo/rough/metal per theme+biome, normals where the kit has them, fix material-null. DONE: 0 material-null, before/after 3 themes.
@@ -455,7 +442,6 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] L30c. LOOT TABLES by depth/biome/boss; boss uniques; Chronicle announces rare finds. DONE: loot scales in a 10-floor soak, a boss drops its unique.
 # Phase F - dungeon-side UI / readability (stretch) [L31]
 - [ ] L31. Dungeon-fight UI (party frames, boss bar, feed HUD): damage numbers, status-effect icons, "Now fighting: <lord>" banner, legible at 1080p. Keep the parchment+ink+teal theme. DONE: 1080p capture, HP/damage/statuses/phase readable.
->>>>>>> origin/main
 
 ### HUB (web/ only) - hub builder owns web/index.html, app.js, style.css, NOTES.md, docs/HUB_SECURITY.md. Keep the el()/textContent + ICON_SET + CSP model. Republish gated on supervisor review.
 - [ ] H1. VISUAL ELEVATION to an SSS+ grimoire: ornate frames/borders, parchment texture, illuminated drop-cap heads, richer hero character-sheet cards, tier badges on boards, better animated d20, micro-anims (respect reduced-motion). Responsive: phone/desktop/overlay. DONE: before/after at 3 widths; security invariants + hostile-name test pass.

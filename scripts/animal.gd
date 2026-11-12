@@ -34,6 +34,48 @@ var _idle := ""
 var _target := Vector3.ZERO
 var _wait := 0.0
 var _rng := RandomNumberGenerator.new()
+## D17c: the beasts graze (head down in the grass, chewing - the CC0 farm pack
+## has no eating clip, so the neck is bent over the clip by a SkeletonModifier3D)
+## and FLEE: a raider within FLEE_R sends a beast running for the far side of
+## its own pen or field (Run, else the walk played fast) for a few seconds.
+const FLEE_R := 14.0
+static var graze_on := true
+static var flee_on := true
+static var flees := 0
+var _run := ""
+var _graze: Graze = null
+var _flee_t := 0.0
+var _scan_t := 0.0
+
+class Graze extends SkeletonModifier3D:
+    var neck := -1
+    var head := -1
+    var axis := Vector3.RIGHT
+    var amount := 0.0
+    var target := 0.0
+    var t := 0.0
+    func _process_modification() -> void:
+        var sk := get_skeleton()
+        if sk == null or neck < 0:
+            return
+        var dt := get_process_delta_time()
+        amount = move_toward(amount, target, dt * 0.8)
+        if amount <= 0.001:
+            return
+        t += dt
+        var e := amount * amount * (3.0 - 2.0 * amount)
+        sk.set_bone_pose_rotation(neck, sk.get_bone_pose_rotation(neck) * Quaternion(axis, -1.0 * e))
+        if head >= 0:
+            var chew := sin(t * 5.5) * 0.10 * e
+            sk.set_bone_pose_rotation(head, sk.get_bone_pose_rotation(head) * Quaternion(axis, -0.35 * e + chew))
+
+func grazing() -> bool:
+    if _proc == "hen":
+        return not _moving and _peck < 0.0
+    return _graze != null and _graze.target > 0.5 and not _moving
+
+func fleeing() -> bool:
+    return _flee_t > 0.0
 
 func _ready() -> void:
     _rng.randomize()
@@ -71,18 +113,39 @@ func _ready() -> void:
                 _walk = s                     # grazing pace reads better
             if s.begins_with("Idle"):
                 _idle = s
+            if s == "Run":
+                _run = s
             if s == "clip":
                 _walk = s
                 _idle = s
-        for a in [_walk, _idle]:
+        for a in [_walk, _idle, _run]:
             if a != "" and _ap.has_animation(a):
                 _ap.get_animation(a).loop_mode = Animation.LOOP_LINEAR
+        # D17c: a neck to bend for grazing (the four-legged farm beasts)
+        var sk: Skeleton3D = null
+        var st2: Array = [m]
+        while not st2.is_empty() and sk == null:
+            var c2: Node = st2.pop_back()
+            if c2 is Skeleton3D:
+                sk = c2
+            for g2 in c2.get_children():
+                st2.append(g2)
+        if graze_on and sk != null and sk.find_bone("Neck") >= 0 \
+                and kind in ["Cow", "Horse", "Foal", "Sheep", "Llama", "Pig"]:
+            _graze = Graze.new()
+            _graze.neck = sk.find_bone("Neck")
+            _graze.head = sk.find_bone("Head")
+            sk.add_child(_graze)
         _play(_idle)
         _ap.seek(_rng.randf() * 1.5, true)
     _wait = _rng.randf_range(0.0, 6.0)
 
 func _play(a: String) -> void:
-    _moving = a == _walk
+    _moving = a == _walk or (a == _run and a != "")
+    if _graze != null and _moving:
+        _graze.target = 0.0
+    if _ap and _ap.speed_scale != 1.0 and not (_flee_t > 0.0 and _run == ""):
+        _ap.speed_scale = 1.0
     if _ap and a != "" and _ap.current_animation != a:
         _ap.play(a, 0.25)
 
@@ -124,6 +187,13 @@ func _physics_process(delta: float) -> void:
         _anim(delta)
     if town == null:
         return
+    # D16c: a wagon rolling up shoves a grazing beast aside too
+    if float_y == INF and town.has_method("off_wagons"):
+        var wq: Vector3 = town.call("off_wagons", global_position, self)
+        if wq != global_position:
+            wq.y = _ground(wq)
+            global_position = wq
+    _flee_scan(delta)
     if _target == Vector3.ZERO:
         _wait -= delta
         if _wait <= 0.0:
@@ -140,10 +210,16 @@ func _physics_process(delta: float) -> void:
         _wait = _rng.randf_range(3.0, 12.0)
         if _proc == "cat":
             _wait = _rng.randf_range(8.0, 30.0)     # cats nap
+        _flee_t = 0.0
         _play(_idle)
+        # D17c: most stops are a mouthful of grass (longer, head down)
+        if _graze != null and _rng.randf() < 0.65:
+            _graze.target = 1.0
+            _wait += _rng.randf_range(4.0, 10.0)
         return
     var d := to.normalized()
-    var p := global_position + d * speed * delta
+    var spd := speed * (3.0 if _flee_t > 0.0 else 1.0)
+    var p := global_position + d * spd * delta
     if float_y == INF and town.has_method("crowd_push"):
         # D16a: room for folk and each other, and step round whoever is ahead
         p += (town.call("crowd_push", self, d) as Vector3) * delta
@@ -152,10 +228,66 @@ func _physics_process(delta: float) -> void:
         _wait = _rng.randf_range(0.5, 2.0)
         _play(_idle)
         return
+    if float_y == INF and town.has_method("off_wagons"):
+        p = town.call("off_wagons", p, self)     # D16c: never under a wagon
     p.y = _ground(p)
     global_position = p
-    rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * 4.0)
-    _play(_walk)
+    rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * (8.0 if _flee_t > 0.0 else 4.0))
+    if _flee_t > 0.0 and _run != "":
+        _play(_run)
+    else:
+        _play(_walk)
+        if _flee_t > 0.0 and _ap:
+            _ap.speed_scale = 2.2                  # no run clip: the walk, fast
+
+## D17c: a raider near - off to the far side of its own ground from it
+func _flee_scan(delta: float) -> void:
+    if _flee_t > 0.0:
+        _flee_t -= delta
+    _scan_t -= delta
+    if _scan_t > 0.0 or not flee_on or float_y != INF:
+        return
+    _scan_t = 0.5
+    var rd = town.get("raids")
+    if rd == null:
+        return
+    var rs = rd.get("raiders")
+    if not (rs is Array) or (rs as Array).is_empty():
+        return
+    var me := global_position
+    var near := Vector3.INF
+    var nd := FLEE_R
+    for r in rs:
+        var n = (r as Dictionary).get("node")
+        if n == null or not is_instance_valid(n):
+            continue
+        var q: Vector3 = (n as Node3D).global_position
+        var d := Vector2(q.x - me.x, q.z - me.z).length()
+        if d < nd:
+            nd = d
+            near = q
+    if near == Vector3.INF:
+        return
+    if _flee_t > 0.8:
+        return                                     # already running
+    var best := Vector3.ZERO
+    var bd := -1.0
+    for i in 8:
+        var c := _pick()
+        if c == Vector3.ZERO:
+            continue
+        var dc := Vector2(c.x - near.x, c.z - near.z).length()
+        if dc > bd:
+            bd = dc
+            best = c
+    if best == Vector3.ZERO:
+        return
+    _target = best
+    _flee_t = 3.5
+    _wait = 0.0
+    if _graze != null:
+        _graze.target = 0.0
+    flees += 1
 
 ## ------------------------------------------------ hand-built hen and cat
 func _m(c: Color) -> StandardMaterial3D:

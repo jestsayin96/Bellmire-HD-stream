@@ -9,7 +9,9 @@ extends Node3D
 
 const ADV := "res://addons/kaykit_character_pack_adventures/Characters/gltf/"
 ## the old game's pace multiplier: flat 4-6 m/s read as skating
-static var pace := 0.62
+## (D17b: 0.62 put a stroll at 2.6 m/s - a sprint for these short KayKit legs,
+## whose walk covers 0.8 m/s. 0.40 is a brisk walk the gait can match.)
+static var pace := 0.40
 ## On stream the names that matter are the viewers' heroes (HeroBody turns its
 ## own back on). Townsfolk names are off unless this is set.
 static var show_names := false
@@ -54,7 +56,18 @@ var move_dir := Vector3.ZERO
 
 var _anim: AnimationPlayer
 var _mdl: Node3D
-var _route: Array = []
+## D16d: a route asked for before the navmesh is in the server's map comes
+## from the old road-hex fallback - 1.8 m right of the hex centres and, for any
+## goal past the wall, out through the nearest gate and back in: at the start of
+## every stream the first trips crowded the gates two ways for nothing. Such a
+## route is marked (the setter) and walked again from the navmesh once it syncs.
+var _route: Array = []:
+    set(value):
+        _route = value
+        _route_presync = not value.is_empty() and _nav_unsynced()
+var _route_presync := false
+static var funnel_fix := true        # false only for the before figure (tools/_d16d_test.gd)
+static var presync_reroutes := 0
 var _enter_at := Vector3.ZERO
 var _wait := 0.0
 var _to_work := true
@@ -67,6 +80,79 @@ var lod := 0
 static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_test.gd)
 var _lod_n := 0
 var _lod_acc := 0.0
+
+## D17b: the gait follows how fast the body really moves this frame (its own
+## steps, the crowd's push, a raid's _step - whoever moved it), smoothed; and a
+## body walking faces the way it goes, so it never walks backwards in a walk
+var _gp := Vector3.INF
+var _vs := 0.0
+static var face_fix := true
+
+func _process(delta: float) -> void:
+    _gait_step(delta)
+
+func _gait_step(delta: float) -> void:
+    if _anim == null or delta <= 0.0 or not Rig.gait:
+        return
+    if inside or not visible:
+        _gp = Vector3.INF
+        _vs = 0.0
+        _yaw_shown = INF
+        return
+    var p := global_position
+    var vel := Vector2.ZERO
+    var jump := false
+    if _gp != Vector3.INF:
+        vel = Vector2(p.x - _gp.x, p.z - _gp.z) / delta
+        var v := vel.length()
+        if v > 15.0:            # a teleport (out of a door, a raid reset)
+            v = _vs
+            jump = true
+        _vs = lerpf(_vs, v, minf(delta * 7.0, 1.0))
+    _gp = p
+    # moved along in an idle (a wagon's shove, a pair's shoulder spot, a raid
+    # walking them home) - take the steps, the gait stands them again after
+    if _vs > 0.6 * size_k and not bool(_anim.get_meta("rig_move", false)) \
+            and String(_anim.current_animation) == Rig.idle_of(_anim):
+        Rig.play(_anim, "Walking_A")
+    Rig.drive(_anim, _vs, size_k, delta)
+    if face_fix and _vs > 0.35 and vel.length() > 0.25 and Rig.is_gait(String(_anim.current_animation)):
+        # (D17d: from the yaw on screen, not one steering just snapped to)
+        var from := _face if _face_ok else (_yaw_shown if Rig.smooth and _yaw_shown != INF and not jump else rotation.y)
+        _face = lerp_angle(from, atan2(vel.x, vel.y), minf(delta * 9.0, 1.0))
+        _face_ok = true
+        rotation.y = _face
+    else:
+        _face_ok = false
+    # a walker already turns smoothly with the way it goes (face_fix)
+    _ease_turn(delta, jump or _face_ok)
+
+## D17d: TURNS EASE. Steering sets rotation.y outright - a raid's step faces
+## the foe, a new leg of a route, a seat, a post - up to an about-face in one
+## frame. The body now swings round toward whatever was set at TURN_RATE; a
+## teleport (out of a door) still snaps, and a walker's heading is face_fix's.
+const TURN_RATE := 9.5          # rad/s, ~540 deg/s: an about-face in a third of a second
+var _yaw_shown := INF
+var _yaw_goal := 0.0
+var _yaw_set := 0.0             # what was last written here; anything else is a new heading
+
+func _ease_turn(delta: float, jump: bool) -> void:
+    if not Rig.smooth:
+        return
+    var r := rotation.y
+    if _yaw_shown == INF or jump:
+        _yaw_shown = r
+        _yaw_goal = r
+        _yaw_set = r
+        return
+    if absf(angle_difference(r, _yaw_set)) > 0.0005:
+        _yaw_goal = r
+    _yaw_shown = rotate_toward(_yaw_shown, _yaw_goal, TURN_RATE * delta)
+    rotation.y = _yaw_shown
+    _yaw_set = _yaw_shown
+
+var _face := 0.0
+var _face_ok := false
 
 func set_lod(l: int) -> void:
     if l == lod:
@@ -253,9 +339,15 @@ func _follow(delta: float) -> void:
     else:
         move_dir = Vector3.ZERO
         rotation.y = leader.rotation.y
-        Rig.play(_anim, "Idle")
+        # D17b: at the shoulder and keeping up is still walking (stepping
+        # between Idle and Walking_A every other frame read as a glide);
+        # the gait stands him once the pair has stopped
+        if not (Rig.gait and leader is Townsfolk and (leader as Townsfolk)._vs > 0.3):
+            Rig.play(_anim, "Idle")
 
 func _next_trip() -> Vector3:
+    _at_job = false
+    _eve_drink = false
     # old villager: at night the WORK state ends and they go home to REST until
     # morning (the old clock: night before 6:00 and after 18:30)
     var eco = town.get("economy") if town else null
@@ -270,13 +362,42 @@ func _next_trip() -> Vector3:
     if stops.is_empty():
         var dest: Vector3 = work if _to_work else home
         _enter_at = work_in if _to_work else home_in
-        _to_work = not _to_work
         _linger = -1.0
+        # D17c: a worker works the job out of doors a while (a yard with no
+        # door always; one with a door half the time) - seen at it, not gone in
+        if _to_work and job_out > 0.0 and JOB_ANIMS.has(role) and rank < 0 \
+                and (work_in == Vector3.ZERO or randf() < job_out):
+            _enter_at = Vector3.ZERO
+            _at_job = true
+            _linger = randf_range(25.0, 50.0)
+        _to_work = not _to_work
         return dest
+    # D17c: an evening's drink - now and then of an evening a body breaks off
+    # its round for the tavern's yard (a stool at the tables, or a mug stood
+    # up), then takes the round up again where it left it
+    if job_out > 0.0 and eco and (eco.hour() >= 17.0 or eco.hour() < 0.5) and rank < 0 \
+            and leader == null and cart == null and randf() < 0.3 and town.has_method("_shop_door"):
+        var td: Array = town.call("_shop_door", "tavern")
+        if not td.is_empty():
+            var dv: Vector3 = td[0]
+            if Vector2(dv.x - global_position.x, dv.z - global_position.z).length() > 8.0:
+                _enter_at = Vector3.ZERO
+                _linger = randf_range(20.0, 35.0)
+                _eve_drink = true
+                acts["tavern_eve"] = int(acts.get("tavern_eve", 0)) + 1
+                return dv
     var s: Array = stops[_stop_i % stops.size()]
     _stop_i += 1
     _enter_at = s[1]
     _linger = float(s[2])
+    # D17c: of an evening the tavern stop is often out in its yard - a seat at
+    # the tables, or a mug stood up - rather than gone indoors
+    var tv = town.get("tavern_at") if town else null
+    var sp: Vector3 = s[0]
+    if job_out > 0.0 and _enter_at != Vector3.ZERO and tv is Vector3 and tv != Vector3.INF \
+            and Vector2(sp.x - tv.x, sp.z - tv.z).length() < 12.0 and eco and (eco.hour() >= 17.0 or eco.hour() < 1.0) \
+            and randf() < 0.6:
+        _enter_at = Vector3.ZERO
     return s[0]
 
 var _linger := -1.0
@@ -292,8 +413,33 @@ var _slide_side := 0.0
 var _rerouted := 0
 var slides := 0
 var reroutes := 0
+# D16b: the unstick watchdog - where the feet stood WD_WINDOW s ago, how
+# long since, and how many tries in a row came to nothing
+static var watchdog := true    # off only for the D16b before/after test
+const WD_WINDOW := 2.0
+const WD_MIN := 0.2
+var _wd_at := Vector3.INF
+var _wd_t := 0.0
+var _wd_n := 0
+var wd_fires := 0
+var wd_close := 0
+var wd_repaths := 0
+var wd_nudges := 0
+var wd_giveups := 0
+# D16c: when the wagons were last checked against the next leg, and how often
+# a walker went round one
+var _wag_t := randf() * 0.5
+var wag_detours := 0
+var _park: Array = []           # D16c: where the wagon is drawn up while stood still
 
 func _physics_process(delta: float) -> void:
+    # D16c: a wagon is not in the navmesh - one rolling into someone (walking
+    # or stood still) shoves them aside; never a foot inside a wagon. Every
+    # frame, before the LOD skip: a far body must not lag inside one either.
+    if town != null and not inside and visible and town.has_method("off_wagons"):
+        var wq: Vector3 = town.call("off_wagons", global_position, self)
+        if wq != global_position:
+            global_position = town.call("keep_walkable", wq)
     if lod > 0:
         _lod_acc += delta
         _lod_n += 1
@@ -311,8 +457,39 @@ func _physics_process(delta: float) -> void:
         _voice(delta)
     if cart and is_instance_valid(cart):
         var back := global_position - global_transform.basis.z * 2.6
-        cart.global_position = cart.global_position.lerp(Vector3(back.x, float(town.call("height_at", back.x, back.z)), back.z), minf(delta * 4.0, 1.0))
-        cart.rotation.y = lerp_angle(cart.rotation.y, rotation.y + PI * 0.5, delta * 3.0)
+        back.y = float(town.call("height_at", back.x, back.z))
+        var cy := rotation.y + PI * 0.5
+        # D16c: stood still (a stop, a camp) the wagon is drawn up on open
+        # ground beside them, never left across a lane between two props
+        if _route.is_empty() and town.has_method("wagon_park"):
+            if _park.is_empty():
+                _park = town.call("wagon_park", self)
+                if _park.is_empty():
+                    _park = [back, cy]
+            back = _park[0]
+            cy = _park[1]
+        else:
+            _park = []
+        # (D16c: no faster than a wagon rolls, so nobody is swept up by one)
+        var cstep: Vector3 = (back - cart.global_position) * minf(delta * 4.0, 1.0)
+        cart.global_position += cstep.limit_length(4.0 * delta)
+        cart.rotation.y = lerp_angle(cart.rotation.y, cy, delta * 3.0)
+    if town != null and not inside and visible and town.has_method("off_wagons"):
+        # on a route, twice a second: a waypoint under a parked wagon is moved
+        # beside it, a leg across one goes round its corner (the navmesh does
+        # not know the wagons). Not the door leg - that is a step indoors.
+        _wag_t -= delta
+        if _wag_t <= 0.0 and not _route.is_empty() and not (_route.size() == 1 and _enter_at != Vector3.ZERO):
+            _wag_t = 0.5
+            var ww: Array = town.call("wagon_way", global_position, _route[0], self)
+            if not ww.is_empty():
+                wag_detours += 1
+                if ww[0] == "under":
+                    _route[0] = ww[1]
+                elif _route.size() < 400:
+                    _route.insert(0, ww[1])
+    if _route_presync and funnel_fix and town != null:
+        _resync_route()
     if leader != null and town != null:
         _follow(delta)
         return
@@ -323,6 +500,12 @@ func _physics_process(delta: float) -> void:
         return
     if _route.is_empty():
         move_dir = Vector3.ZERO
+        _wd_at = Vector3.INF
+        _wd_n = 0
+        if not inside and visible:
+            if _seated(delta):
+                return
+            _idle_acts(delta)
         _wait -= delta
         if _wait <= 0.0:
             if inside:
@@ -351,6 +534,10 @@ func _physics_process(delta: float) -> void:
     var tgt: Vector3 = _route[0]
     var to: Vector3 = tgt - global_position
     to.y = 0.0
+    if _sat:
+        # D17c: called away while sitting (a raid's flight): up and off
+        _sat = false
+        _release_seat()
     # D1: the last leg, door -> just inside, is the only one off the walkable
     # ground; corners are taken tight (0.9 m cut through house corners)
     var door_leg: bool = _route.size() == 1 and _enter_at != Vector3.ZERO
@@ -383,6 +570,9 @@ func _physics_process(delta: float) -> void:
         if _route.is_empty():
             Rig.play(_anim, "Idle")
             _door_retry = 0
+            if _seat_i >= 0:
+                _sit()
+                return
             if _enter_at != Vector3.ZERO:
                 # through the door and gone: a while indoors
                 inside = true
@@ -390,13 +580,17 @@ func _physics_process(delta: float) -> void:
                 _wait = _linger if _linger > 0.0 else randf_range(18.0, 45.0)
             else:
                 _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
+                if not _at_job:
+                    _maybe_sit()
         return
     var dir: Vector3 = to.normalized()
     _wobble += delta * 1.7
     dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * sway).normalized()
     var was := global_position
     var p: Vector3 = global_position + dir * speed * pace * delta
-    if door_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
+    # (D17c: the last step onto a seat is off the walkable ground too)
+    var seat_leg: bool = _route.size() == 1 and _seat_i >= 0
+    if door_leg or seat_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
         # (D14: brushing out of a pocket between props - see _escape_route)
         p.y = float(town.call("height_at", p.x, p.z))
     else:
@@ -415,6 +609,26 @@ func _physics_process(delta: float) -> void:
     move_dir = dir
     rotation.y = atan2(dir.x, dir.z)
     Rig.play(_anim, "Walking_A")
+    # D16b: on a route but the feet went under WD_MIN in WD_WINDOW s (pinned
+    # in a crowd, wedged on a prop, or the skip / re-route below going round
+    # in a circle): close enough is there, else re-path, else step aside
+    if not watchdog:
+        pass
+    elif _wd_at == Vector3.INF:
+        _wd_at = p
+        _wd_t = 0.0
+    else:
+        _wd_t += delta
+        if _wd_t >= WD_WINDOW:
+            var moved := Vector2(p.x - _wd_at.x, p.z - _wd_at.z).length()
+            _wd_t = 0.0
+            _wd_at = p
+            if moved < WD_MIN:
+                wd_fires += 1
+                if _unstick(dir):
+                    return
+            else:
+                _wd_n = 0
     # a waypoint that cannot be reached (off the ground, behind a crowd):
     # after a moment give it up and take the next
     if Vector2(p.x - was.x, p.z - was.z).length() < speed * pace * delta * 0.3:
@@ -459,6 +673,113 @@ func _physics_process(delta: float) -> void:
                     return
             _rerouted = 0
             _route.remove_at(0)
+
+func _nav_unsynced() -> bool:
+    if town == null:
+        return false
+    var n = town.get("nav")
+    return n != null and not bool(n.call("synced"))
+
+## D16d: the navmesh is in the map now - walk the same trip on it instead of the
+## pre-sync road-hex route (a door trip keeps its last step indoors)
+func _resync_route() -> void:
+    if _nav_unsynced():
+        return
+    _route_presync = false
+    if _route.is_empty():
+        return
+    var door := _enter_at != Vector3.ZERO and _door_out != Vector3.ZERO
+    var goal: Vector3 = _door_out if door else _route.back()
+    var nr: Array = town.call("route", global_position, goal)
+    if nr.is_empty():
+        return
+    if door:
+        var end: Vector3 = nr.back()
+        if Vector2(end.x - goal.x, end.z - goal.z).length() > 1.0:
+            return
+        nr.append(_enter_at)
+    _route = nr
+    presync_reroutes += 1
+    _best_tgt = Vector3.INF
+    _prog_t = 0.0
+    _stuck_t = 0.0
+
+## D16b: what the watchdog does with a walker that has not moved in
+## WD_WINDOW s. True when the route changed (the caller stops this step).
+func _unstick(dir: Vector3) -> bool:
+    _wd_n += 1
+    var here := global_position
+    var door := _enter_at != Vector3.ZERO
+    var goal: Vector3 = _route.back()
+    var end_at: Vector3 = _door_out if door and _door_out != Vector3.ZERO else goal
+    var to_end := Vector2(end_at.x - here.x, end_at.z - here.z).length()
+    _best_tgt = Vector3.INF
+    _prog_t = 0.0
+    _stuck_t = 0.0
+    # someone is standing on the very spot: near enough is there
+    if to_end < (1.5 if door else 2.5):
+        wd_close += 1
+        if door:
+            _route = [_enter_at]
+            return true
+        _route.clear()
+        Rig.play(_anim, "Idle")
+        _door_retry = 0
+        _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
+        return true
+    if _wd_n == 2:
+        # step aside (a body's width off the line, either hand, or back the
+        # way it came) onto free walkable ground, then on along the route
+        var side := Vector3(-dir.z, 0.0, dir.x)
+        if _slide_side < 0.0:
+            side = -side
+        # (either hand first, then round the clock; a body's width, then half)
+        for k in 16:
+            var ang: float = [PI * 0.5, -PI * 0.5, PI * 0.75, -PI * 0.75, PI * 0.25, -PI * 0.25, PI, 0.0][k % 8]
+            var c: Vector3 = here + side.rotated(Vector3.UP, ang - PI * 0.5) * (0.8 if k < 8 else 0.45)
+            var kw: Vector3 = town.call("keep_walkable", c)
+            if Vector2(kw.x - c.x, kw.z - c.z).length() > 0.05:
+                continue
+            if not (town.call("solid_at", c, 0.17) as Array).is_empty():
+                continue
+            c.y = float(town.call("height_at", c.x, c.z))
+            wd_nudges += 1
+            _route.push_front(c)
+            return true
+        # nowhere free to step: brush out past the props' edges to the mesh
+        if not door:
+            var gr := _flood_out(end_at, 0.02)
+            if not gr.is_empty():
+                _ghost_last = gr[_ghost_n_of]
+                wd_nudges += 1
+                _route = gr
+                return true
+    if _wd_n >= 3 and rank < 0 and role != "caravan":
+        # three tries and still pinned: let this trip go, try another later
+        # (a hero on an errand and a caravan, whose trip IS the errand, keep on)
+        wd_giveups += 1
+        _route.clear()
+        _enter_at = Vector3.ZERO
+        _door_out = Vector3.ZERO
+        _door_retry = 0
+        Rig.play(_anim, "Idle")
+        _wait = randf_range(2.0, 5.0)
+        return true
+    # a fresh path from where the feet are (out of a prop pocket first)
+    var nr: Array = []
+    if not door:
+        nr = _escape_route(end_at)
+    if nr.is_empty():
+        nr = town.call("route", here, end_at)
+    if nr.is_empty():
+        return false
+    if door:
+        nr.append(_enter_at)
+    wd_repaths += 1
+    if _wd_n >= 3:
+        _wd_n = 1           # a hero on an errand keeps trying
+    _route = nr
+    return true
 
 ## D14: a walker caught in a pocket between props (a yard's fence and its
 ## tables) is off the navmesh, and a path from there starts at the nearest
@@ -600,6 +921,11 @@ func _posted(delta: float) -> void:
         return
     _post_t = randf_range(5.0, 13.0)
     var roll := randf()
+    if JOB_ANIMS.has(role):
+        # D17c: a keeper at the job works it - mostly the trade's own motions,
+        # now and then a look along the street; seldom a pace
+        _post_t = randf_range(1.2, 3.5)
+        roll = 0.8 if roll < 0.75 else 0.5
     if roll < 0.35:
         # a step or two along the post and back
         var side := Vector3(cos(face_yaw), 0.0, -sin(face_yaw)) * randf_range(-1.6, 1.6)
@@ -613,10 +939,13 @@ func _posted(delta: float) -> void:
         # look along the street, or at whoever is passing
         _look = face_yaw + randf_range(-1.1, 1.1)
         return
-    var g: String = POST_GESTURES[randi() % POST_GESTURES.size()]
+    var gl: Array = JOB_ANIMS.get(role, POST_GESTURES)
+    var g: String = gl[randi() % gl.size()]
     if _anim and _anim.has_animation(g):
         Rig.play(_anim, g)
         _gest_t = minf(_anim.get_animation(g).length, 3.5)
+        if gl != POST_GESTURES:
+            acts["job"] = int(acts.get("job", 0)) + 1
 
 ## D6: name this body as one of Bellmire's own (works before or after _ready)
 func make_notable(nm: String, title: String) -> void:
@@ -627,3 +956,157 @@ func make_notable(nm: String, title: String) -> void:
         _tag.modulate = Color(1.0, 0.88, 0.55)
         _tag.visible = true
         _tag.visibility_range_end = 60.0 if show_names else 14.0
+
+## ---- D17c: STATE COVERAGE. What a body does where it stands. A worker at
+## the job (posted keepers, and walkers who work their yard out of doors) works
+## it in the trade's own motions: the smith at the hammer, a farmer at the hoe
+## and the baskets, woodcutters and miners swinging, the stall's keeper with
+## the wares and the customers. Folk lingering on the square haggle; of an
+## evening at the tavern they drink and eat (KayKit has no seated eating clip:
+## a mug or a bite is Use_Item, stood at the tavern's tables). A free bench,
+## stool or chair near where someone stopped is sat on - often of an evening,
+## now and then by day - Sit_Chair_Down into Sit_Chair_Idle, up again with
+## Sit_Chair_StandUp. `job_out = 0` / `sit_ok = false` give the old town.
+const JOB_ANIMS := {
+    "smith": ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Chop", "Use_Item", "PickUp"],
+    "blacksmith": ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Chop", "Use_Item", "PickUp"],
+    "armorer": ["1H_Melee_Attack_Chop", "Use_Item", "Interact"],
+    "farmer": ["2H_Melee_Attack_Chop", "PickUp", "PickUp", "Use_Item"],
+    "miller": ["PickUp", "Use_Item", "Interact"],
+    "lumberjack": ["2H_Melee_Attack_Chop", "2H_Melee_Attack_Chop", "PickUp"],
+    "miner": ["2H_Melee_Attack_Chop", "2H_Melee_Attack_Chop", "PickUp"],
+    "fletcher": ["Use_Item", "1H_Ranged_Reload", "Interact"],
+    "merchant": ["Interact", "Cheer", "Use_Item", "PickUp"],
+    "trader": ["Interact", "Cheer", "Use_Item", "PickUp"],
+    "store": ["Interact", "PickUp", "Use_Item"],
+    "apothecary": ["Use_Item", "Interact", "PickUp"],
+    "tavern": ["Use_Item", "Interact", "Cheer"],
+    "innkeeper": ["Use_Item", "Interact", "Cheer"],
+    "baker": ["Use_Item", "PickUp", "Interact"],
+    "washer": ["PickUp", "Use_Item", "PickUp"],
+}
+const NO_SIT := ["caravan", "carter", "bandit", "guard", "watch", "crier", "priest"]
+static var job_out := 0.5
+static var sit_ok := true
+static var acts := {}                 # kind -> count (tools/_d17c_test.gd)
+var _at_job := false
+## (a day here is 90 s: a walk across town is hours, so an evening's errand
+## is remembered by why it was made, not by the clock on arrival)
+var _eve_drink := false
+var _seat_i := -1
+var _sat := false
+var _seat_for := 0.0
+var _act_t := randf_range(2.0, 6.0)
+
+func _maybe_sit() -> void:
+    if not sit_ok or rank >= 0 or role in NO_SIT or leader != null or cart != null \
+            or not shout_lines.is_empty() or not town.has_method("free_seat"):
+        return
+    var eco = town.get("economy")
+    var h: float = eco.hour() if eco != null else 12.0
+    var eve := h >= 17.0 or h < 1.0 or _eve_drink
+    if randf() > (0.55 if eve else 0.2):
+        return
+    var i: int = town.call("free_seat", global_position, 16.0 if eve else 9.0)
+    if i < 0:
+        return
+    var s: Dictionary = (town.get("seats") as Array)[i]
+    var sp: Vector3 = s["p"]
+    var app: Vector3 = sp + (s["f"] as Vector3) * 0.75
+    var r: Array = town.call("route", global_position, app)
+    if r.is_empty():
+        return
+    var end: Vector3 = r.back()
+    if Vector2(end.x - app.x, end.z - app.z).length() > 1.0:
+        return
+    s["by"] = get_instance_id()
+    _seat_i = i
+    _seat_for = maxf(_wait, randf_range(20.0, 45.0) if eve else randf_range(10.0, 22.0))
+    r.append(sp)
+    _route = r
+
+func _sit() -> void:
+    var seats: Array = town.get("seats")
+    if _seat_i < 0 or _seat_i >= seats.size():
+        _seat_i = -1
+        return
+    var s: Dictionary = seats[_seat_i]
+    var sp: Vector3 = s["p"]
+    if Vector2(sp.x - global_position.x, sp.z - global_position.z).length() > 1.3:
+        _release_seat()           # sent somewhere else on the way (a flight)
+        _wait = randf_range(2.0, 5.0)
+        return
+    var f: Vector3 = s["f"]
+    # the KayKit sit puts the hips 0.35 m behind the feet: the root goes that
+    # far forward of the seat so the hips land on the plank (tools/_d17c_fit.gd)
+    global_position = sp + f * 0.35
+    rotation.y = atan2(f.x, f.z)
+    _sat = true
+    _wait = _seat_for
+    if _anim:
+        _anim.set_meta("rig_move", false)
+        _anim.set_meta("rig_loop", "Sit_Chair_Idle")
+        Rig.play(_anim, "Sit_Chair_Down", 0.25)
+    acts["sit"] = int(acts.get("sit", 0)) + 1
+
+func _release_seat() -> void:
+    var seats: Array = town.get("seats") if town != null else []
+    if _seat_i >= 0 and _seat_i < seats.size() and int(seats[_seat_i]["by"]) == get_instance_id():
+        seats[_seat_i]["by"] = 0
+    _seat_i = -1
+
+## sitting: true while this frame is the getting-up (the next trip waits on it)
+func _seated(delta: float) -> bool:
+    if _seat_i >= 0 and not _sat:
+        _release_seat()           # the walk there ended some other way
+    if not _sat:
+        return false
+    if _wait > delta:
+        return false
+    _sat = false
+    _release_seat()
+    if _anim:
+        _anim.set_meta("rig_loop", Rig.idle_of(_anim))
+        Rig.play(_anim, "Sit_Chair_StandUp", 0.15)
+    _wait = 1.6
+    return true
+
+## lingering out of doors: the job's motions, haggling at the market, a mug
+## or a bite at the tavern of an evening
+func _idle_acts(delta: float) -> void:
+    if _sat or _seat_i >= 0 or rank >= 0 or leader != null or not shout_lines.is_empty() \
+            or _anim == null or _wait < 1.0:
+        return
+    _act_t -= delta
+    if _act_t > 0.0:
+        return
+    var cur := String(_anim.current_animation)
+    if cur != "" and not Rig.loops(cur):
+        _act_t = 0.5                  # a gesture still playing out
+        return
+    var list: Array = []
+    var kind := ""
+    if _at_job and JOB_ANIMS.has(role):
+        list = JOB_ANIMS[role]
+        kind = "job"
+        _act_t = randf_range(1.0, 3.0)
+    else:
+        _act_t = randf_range(4.0, 9.0)
+        var eco = town.get("economy")
+        var h: float = eco.hour() if eco != null else 12.0
+        var tv = town.get("tavern_at")
+        var mk = town.get("_market_pos")
+        var p := global_position
+        if (h >= 17.0 or h < 1.0 or _eve_drink) and tv is Vector3 and tv != Vector3.INF \
+                and Vector2(p.x - tv.x, p.z - tv.z).length() < 16.0:
+            list = ["Use_Item", "Use_Item", "Cheer"]
+            kind = "eat"
+        elif mk is Vector3 and mk != Vector3.ZERO and Vector2(p.x - mk.x, p.z - mk.z).length() < 20.0 \
+                and randf() < 0.6:
+            list = ["Interact", "PickUp", "Interact"]
+            kind = "haggle"
+        else:
+            return
+    var g: String = list[randi() % list.size()]
+    Rig.play(_anim, g)
+    acts[kind] = int(acts.get(kind, 0)) + 1

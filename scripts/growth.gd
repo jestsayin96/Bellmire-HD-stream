@@ -470,6 +470,11 @@ func _stables(nd: Node3D, plot: Dictionary) -> void:
         if horse:
             horse.name = "StableHorse"
             horse.rotation.y = PI * (0.5 if i % 4 == 0 else -0.5)    # stood side-on in the stall
+            var hap := Rig.find(horse)          # D17a: idling in the stall, not frozen in the bind pose
+            if hap:
+                Rig.prep(hap)
+                Rig.play(hap, "Idle", 0.0)
+                hap.seek(randf() * 2.0, true)
     for i in range(stalls):
         _prop(nd, PROPS, "FarmCrate_Empty", Vector3(c.x - hx + w * (float(i) + 0.5) + w * 0.3, 0.1, c.y - hz + 0.6), 0.0, 1.3)
     _prop(nd, PROPS, "Bucket_Wooden_1", Vector3(c.x + hx - 0.8, 0.1, c.y + hz - 0.9), 0.0, 1.45)

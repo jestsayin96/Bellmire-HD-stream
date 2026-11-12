@@ -138,6 +138,10 @@ func _process(_dt: float) -> void:
         env.ambient_light_sky_contribution = lerpf(1.0, 0.3, nt)
         env.ambient_light_energy = lerpf(0.85, 0.8, nt)
         env.fog_light_color = Color(0.70, 0.77, 0.84).lerp(Color(0.86, 0.60, 0.45), gd * (1.0 - nt)).lerp(Color(0.10, 0.12, 0.20), nt)
+        # night bloom rises with the dark (and a touch at the gold hours)
+        env.glow_intensity = lerpf(0.25, 1.0, maxf(nt, gd * 0.4))
+        env.glow_bloom = lerpf(0.02, 0.16, nt)
+        env.glow_strength = lerpf(0.9, 1.15, nt)
     if sky and not _sky_day.is_empty():
         var night_top := Color(0.02, 0.03, 0.09)
         var night_hor := Color(0.07, 0.08, 0.16)

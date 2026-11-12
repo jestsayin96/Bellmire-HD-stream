@@ -1661,3 +1661,43 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 995, INPROP 0, MON_INPROP 0;
   _delve_test 0 script errors, 0 null, 0 ERROR; windowed shot run 0 errors; L25_TEST OK 13/13, 0 stuck, 0 nudges.
   No class_name, no camera/UI files touched.
+
+## D-cycle (D18c ground & materials) - DONE Nov 12 (desktop scheduled run)
+- ground.gdshader: a damp muddy shore where the valley ground dips to the waterline (new uniform water_y, set from town.WATER_Y;
+  a noise-ragged smoothstep band turns albedo to wet earth and roughness 0.92 -> 0.38), so the banks slide under the river instead
+  of grass meeting water on a hard seam. Grass/dirt/road blending already lived in the shader (town-mask trodden dirt, rock/snow/scar
+  bands); the water shader keeps its scrolling normals + fresnel. Backups: ground.gdshader.bak_d18c, town.gd.bak_d18c.
+- THE 3 HEADLESS MATERIAL-NULLS (L28a's note, 'for the desktop'): bisected the town build with env-gated checkpoints to _dress_shops
+  -> _tier_rack -> the glow block. Gear.ignite sets per-surface overrides on the glowing rack weapons; economy's show_tiers then
+  drapes material_override (_cloth) over them, and that stacking throws 'Parameter "material" is null' in the dummy renderer, once
+  per draped rack mesh (axe t3/t4 share one mesh: 3 errors, not 4; reproduced in isolation - ignite alone 0, ignite+cloth errors).
+  Fix in town.gd _tier_rack only: bake the ignited material into a duplicated mesh and clear the surface override, so rack weapons
+  carry plain meshes; show_tiers' cloth lock/unlock untouched, gear.gd (laptop file) untouched. Rack render: lit weapons + cloth read as before.
+- Checks: bare headless start 0 material-null (was 3), 0 SCRIPT ERROR / Parse Error, 0 ERROR lines. OFFFLOOR 0 of 1017 (INPROP 0,
+  MON_INPROP 0). TWITCH_PARSE OK. _townwalk 120 s: in_solid 0/17407, raid 0/5626 PASS; STUCK_ON_ROUTE_TOTAL 1 (one peasant, watchdog
+  repathed - transient, nav untouched by this item). _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party home from floor 2.
+- Shots (windowed 1920x1080, tools/_d18c_shot.gd): renders/cycles/20261112_d18c - bank + ford before/after (wet shore on, off),
+  smith's tier rack. The shot tool can flip water_y to re-shoot the 'before' at any time.
+- Run note: a diagnostic headless Godot launched without --quit-after hung the Blender bridge mid-run; Mr. E cleared it (taskkill).
+  All diagnostic guards/tools removed after the bisection; only tools/_d18c_shot.gd kept.
+
+## D-cycle (D19a daylight day/night) - DONE Nov 12 (desktop scheduled run)
+- daylight.gd already drove the clock to the sky each frame: the sun climbs from 6:00 and sets 18:30 (sin arc elevation, azimuth
+  sweep), white at noon lerping warm at the horizon (goldness), a low cold moon you can SEE by at night (nightness, energy up to
+  0.7 - the stream was near black before), the night sky near black with cool moonlit ambient, lamps burn low by day and full at
+  night (k factor), windows glow (emission_energy_multiplier up to 2.4). D19a is the formal pass + the missing night BLOOM.
+- NEW: night bloom. town.gd _build environment gets glow_enabled (normalized, SCREEN blend, hdr_threshold 1.1, modest base);
+  daylight.gd scales env.glow_intensity/bloom/strength with nightness (and a touch at the gold hours), so after dark the emissive
+  windows, street lamps and yard braziers halo softly while midday stays clean (glow 0.25 noon -> 1.0 night). Nothing else in the
+  lighting balance was touched - it was already tuned for a 24/7 stream.
+- Tools: tools/_d19a_test.gd (drives override_hour across the day, checks nightness/goldness shape, sun brighter+higher at noon,
+  lamps/windows/glow all rise after dark) and tools/_d19a_shot.gd (windowed full-day timelapse over the square, holds each hour
+  with override_hour). Backups: scripts/town.gd.bak_d19a, scripts/daylight.gd.bak_d19a.
+- Checks: parse 0 SCRIPT ERROR / Parse Error (known texture-UID warnings only). D19A_TEST OK (noon sun_e1.50 x-58 white glow0.25;
+  dawn/dusk gold1.0 lamp0.95 glass1.60 glow0.75; night moon0.70 lamp1.28 glass2.40 glow1.00; 92 lights, 1 glass mat). OFFFLOOR 0
+  of 1097 (INPROP 0, MON_INPROP 0). TWITCH_PARSE OK. _townwalk 120 s PASS: in_solid 1/16687 (0.006%), raid 0/3532, STUCK_ON_ROUTE
+  0 (watchdog repathed 1). _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party delved to floor 2 and came home.
+- Shots (windowed 1920x1080, tools/_d19a_shot.gd): renders/cycles/20261112_d19a - 04:00 night, 06:00 dawn (warm, windows lit),
+  08:00, 12:00 noon (bright, white sun, hard shadows), 16:00, 18:30 dusk (amber), 20:00, 22:00 night + a close night framing. The
+  LOOK: noon crisp; dawn/dusk read warm; night is dark but watchable - moonlit blue town, warm windows + lamp pools haloed by the
+  new bloom, townsfolk clearly readable.

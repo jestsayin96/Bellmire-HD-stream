@@ -541,13 +541,6 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
 			left = _flat(n.global_position, pts[0]) + _flat(pts[-1], to)
 			for i in range(1, pts.size()):
 				left += _flat(pts[i - 1], pts[i])
-	var tr: Array = n.get_meta("trail", [])
-	if tr.is_empty() or _t - float(n.get_meta("trail_t", -9.0)) > 0.25:
-		n.set_meta("trail_t", _t)
-		tr.append("%.1f,%.1f>%s %.1f" % [n.global_position.x, n.global_position.z, ("%.0f,%.0f" % [(pts[0] as Vector3).x, (pts[0] as Vector3).z]) if not pts.is_empty() else "-", left])
-		if tr.size() > 9:
-			tr.pop_front()
-		n.set_meta("trail", tr)
 	var pg: Array = _prog.get(n, [])
 	# (a goal that moves - a delver backing off, a beast circling - starts the clock again, if the
 	# body is following it and not pressed against something)
@@ -617,7 +610,6 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 						break
 				if not took:
 					p = n.global_position       # hold rather than go through stone
-					n.set_meta("sw", "rim-hold")
 				continue
 			var pushed := Vector3(c.x + dir.x * need, p.y, c.z + dir.y * need)
 			if cells.has(_cell_of(pushed)):
@@ -633,7 +625,6 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 				p = slide
 			else:
 				p = n.global_position       # hold rather than go through stone
-				n.set_meta("sw", "slide-hold")
 	# a creature has a body, not a point: it keeps its own half-width off any
 	# wall (big lords and wide beasts were walking half into the stone)
 	if n is Monster and dun and dun.info.has("cells"):
@@ -657,9 +648,7 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	# last guard: a step that would end beyond the walls is not taken
 	if dun and dun.info.has("cells") and not (dun.info["cells"] as Dictionary).has(_cell_of(p)) \
 			and (dun.info["cells"] as Dictionary).has(_cell_of(n.global_position)):
-		n.set_meta("sw", "guard %s->%s" % [n.global_position.snappedf(0.1), p.snappedf(0.1)])
 		return false
-	n.set_meta("sw", "moved %.3f of %.3f" % [_flat(p, n.global_position), minf(spd * delta, d.length())])
 	n.global_position = p
 	n.rotation.y = atan2(d.x, d.z)
 	return _flat(p, to) < 0.05
@@ -2025,4 +2014,4 @@ func _why(n: Node3D, pts: Array) -> String:
 	var wp := ""
 	for i in range(mini(3, pts.size())):
 		wp += str((pts[i] as Vector3).snappedf(0.1)) + " "
-	return " trail=%s [%s] cell %s%s nb(+x-x+z-z)=%s wps=%s obst=%s" % [" | ".join(n.get_meta("trail", [])), n.get_meta("sw", "-"), here, (" B" if _blocked_cells().has(here) else ""), nb, wp, ", ".join(near)]
+	return " cell %s%s nb(+x-x+z-z)=%s wps=%s obst=%s" % [here, (" B" if _blocked_cells().has(here) else ""), nb, wp, ", ".join(near)]

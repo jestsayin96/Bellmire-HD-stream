@@ -101,6 +101,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         h["name"] = display
 
     var out := ""
+    var gold0 := int(h.get("gold", 0)) if not h.is_empty() else -1      # S3: money that moves chinks
     if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
         last_cmd[user_id] = now
@@ -157,7 +158,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
     last_cmd[user_id] = now
     if out != "":
         say.emit(out, _tone(out))
-        _ui_snd(verb, out)
+        _ui_snd(verb, out, _gold_moved(user_id, gold0))
     return _reply(user_id, display, login, out)
 
 ## T1: hand a command's answer to Twitch chat (via the desktop's twitch_eventsub.gd)
@@ -411,8 +412,20 @@ static func _lev(a: String, b: String) -> int:
 ## up (or the flask drunk); !inventory opens the pack; any other command: menu_select.
 ## At most one every UI_GAP s, so a busy chat is not a wall of clicks.
 const UI_GAP := 0.35
+## S3 (the sound review, measured against the music as heard): menu_select is the commonest
+## UI sound and was +4.6 dB over the music at -6, potion_drink -6.8 under it - each kind its own
+## level; the rest at UI_DB_BASE
+const UI_DB_BASE := -6.0
+const UI_DB := {"menu_select": -10.0, "potion_drink": -2.0, "level_up": -4.0}
 static var _ui_last := -100000
 static var ui_sounds := {}          # kind -> times (tests read it)
+
+## S3: did this command move the hero's gold (a buy, a reroll or respec paid for, a find)?
+func _gold_moved(user_id: String, gold0: int) -> bool:
+    if gold0 < 0:
+        return false
+    var h := roster.get_hero(user_id)
+    return not h.is_empty() and int(h.get("gold", 0)) != gold0
 
 static func ui_kinds(verb: String, out: String) -> Array:
     var low := out.to_lower()
@@ -431,11 +444,15 @@ static func ui_kinds(verb: String, out: String) -> Array:
             return ["coins_stack"]
     return ["menu_select"]
 
-func _ui_snd(verb: String, out: String) -> void:
+func _ui_snd(verb: String, out: String, paid := false) -> void:
     var now := Time.get_ticks_msec()
     if now - _ui_last < int(UI_GAP * 1000.0):
         return
     _ui_last = now
-    for k in ui_kinds(verb, out):
+    var ks := ui_kinds(verb, out)
+    # S3: whatever the command, gold that moved is heard (reroll / respec cost gold too)
+    if paid and not ks.has("coins_stack") and not ks.has("error"):
+        ks = ["coins_stack"] + (ks.filter(func(k): return k != "menu_select"))
+    for k in ks:
         ui_sounds[k] = int(ui_sounds.get(k, 0)) + 1
-        Sfx.play(String(k), -6.0)
+        Sfx.play(String(k), float(UI_DB.get(k, UI_DB_BASE)))

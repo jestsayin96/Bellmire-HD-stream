@@ -117,16 +117,19 @@ AFTER (one directive added):
 3. The embed is opt-in (button-triggered) and absent in overlay mode.
 If any of that is not true, do not republish.
 
-## Phase 2, H6 - Twitch device-code sign-in SCAFFOLDING (FLAG: supervisor review; NEEDS MR. E)
+## Phase 2, H6 - Twitch device-code sign-in (FLAG: supervisor review)
 
-Built so a viewer can spotlight THEIR OWN hero instead of scrolling. It is scaffolding: inert
-until Mr. E registers a public client id. Review before any republish.
+Built so a viewer can spotlight THEIR OWN hero instead of scrolling. Mr. E's public client id is
+now registered, so the flow is LIVE but strictly READ-ONLY. Review before any republish.
 
-### Gated on Mr. E
-- `TWITCH_CLIENT_ID` is a placeholder (empty). With no id, the "Sign in with Twitch" button only
-  explains that it needs Mr. E and makes NO network call. The whole flow is dead code until the
-  id is filled in. (A local test hook, ?twitch_client=..., can set it for testing only; it is
-  never baked into the repo.)
+### Now live (read-only)
+- `TWITCH_CLIENT_ID` is Mr. E's registered public client id (Bellmire Hub Login: PUBLIC client,
+  device-code grant, no scopes), baked in as a `const` and NOT overridable at runtime - see the
+  final section of this document. Clicking "Sign in with Twitch" starts the device-code grant;
+  nothing contacts Twitch before the click. The old `?twitch_client=` test hook has been REMOVED
+  (it was an account-phishing vector on a public page - see the final section).
+- The empty-id branch in `twitchSignIn()` is kept only as a defensive fallback; it is not the
+  live state.
 
 ### The flow (OAuth 2.0 device grant, when enabled)
 1. POST id.twitch.tv/oauth2/device (client_id) -> device_code + user_code + verification_uri.
@@ -155,10 +158,12 @@ until Mr. E registers a public client id. Review before any republish.
 
 ### What the supervisor should check before republishing
 1. connect-src lists only Supabase + the two Twitch hosts, no wildcard; no other directive loosened.
-2. TWITCH_CLIENT_ID ships empty (gated); grep confirms the flow is dead without it.
+2. TWITCH_CLIENT_ID is the baked `const` (Mr. E's registered public client), not overridable at
+   runtime; grep confirms no `?twitch_client=` / localStorage / snapshot source can set it.
 3. The token is never persisted (no localStorage/sessionStorage) and never sent to Supabase.
 4. No scopes requested; the token reads only the user's own login.
-If any of that is not true, do not republish. The token step is Mr. E's to enable (register the app).
+5. Nothing contacts Twitch on page load - the device-code call happens only on the button click.
+If any of that is not true, do not republish. Mr. E has registered the app; the flow is live and read-only.
 
 ## The client id is fixed in the page - never overridable at runtime (supervisor, Nov 12)
 

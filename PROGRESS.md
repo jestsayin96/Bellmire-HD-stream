@@ -955,3 +955,10 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   tools/_l12_shot.gd: renders/cycles/20261111_l12 - looked at: Nightwing, the party frames with "ogre-strong heroic",
   the tags under the names.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 422, TWITCH_PARSE OK, L3, L9, L11 OK.
+
+
+## Cycle 70b - L11 test fix (laptop, 2026-11-11)
+- Mr. E: tools/_l11_test.gd spammed "Condition !is_inside_tree() is true" (get_global_transform). The test's save
+  and disarm loops hand Delve trap nodes that are never added to the tree, and _spring read their position for the
+  sound, _float_text the body's. Delve now plays the trap sound and floats text only for nodes in the tree (a real
+  floor's traps and delvers always are). _l11_test: L11_TEST OK with 0 errors / 0 "Condition" lines.

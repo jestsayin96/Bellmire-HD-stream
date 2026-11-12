@@ -1333,7 +1333,8 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 	if node.has_meta("fire"):
 		(node.get_meta("fire") as Callable).call()
 	node.set_meta("fired", int(node.get_meta("fired", 0)) + 1)
-	Sfx.at(String(spec["sfx"]), node.global_position, 2.0)
+	if node.is_inside_tree():
+		Sfx.at(String(spec["sfx"]), node.global_position, 2.0)
 	var what := String(spec["what"])
 	var dice: Array = spec["dice"]
 	if String(tr.get("kind", "")) == "PressurePlate" and _rng.randi() % 2 == 0:
@@ -1360,7 +1361,7 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 ## a number or word floating up off a delver's head
 func _float_text(m: Dictionary, text: String, col: Color) -> void:
 	var b: Node3D = m["body"]
-	if not is_instance_valid(b):
+	if not is_instance_valid(b) or not b.is_inside_tree():
 		return
 	var lb := Label3D.new()
 	lb.text = text

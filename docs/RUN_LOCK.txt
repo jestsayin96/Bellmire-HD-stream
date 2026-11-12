@@ -1,1 +1,1 @@
-IDLE 2026-11-12 14:55 - D18c ground & materials: wet shore + 3 material-nulls fixed; all checks pass
+RUNNING 2026-11-12 16:01 (supervisor: merge L28b + tick hub)

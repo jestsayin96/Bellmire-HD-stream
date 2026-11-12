@@ -274,10 +274,25 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       that fails at random teaches everyone to ignore it, which is worse than no test.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
-- [ ] W1. A public page for viewers: hero sheet, inventory, gear, the guild roll, the fallen, the command list
-      (from data/commands.json). The game publishes a JSON snapshot every minute; phase 2 adds voting (polls that
-      change the town: next raid target, festival, a boss to summon) with Twitch login.
-
+- [ ] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
+      data (Nov 12, free tier, project already created and the table already exists). Every 60 s the
+      game upserts ONE row into the Supabase table public.snapshot: id=1, payload = a jsonb blob with the
+      guild roll, the fallen, each hero's sheet/inventory/gear, town level and souls, and the command
+      list from data/commands.json. One row, overwritten - the database never grows and nothing has to
+      be cleaned up. Project URL https://paaukwaffaamazgrndbv.supabase.co . Writing needs the SERVICE
+      ROLE key, which bypasses row-level security: it goes in user:// beside the Twitch tokens and NEVER
+      in the repo - Mr. E copies it from the Supabase dashboard (Project Settings > API). Skip the
+      publish quietly if the key is absent so the game still runs without it. Failures must never stall
+      the sim: fire and forget on a thread, and never block a frame on the network.
+- [ ] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
+      It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
+        URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at
+        key  sb_publishable_q2Kn3weLLeYYXGAiow_4vw_3serNQlc   (apikey header + Authorization: Bearer)
+      Shows hero sheets, inventory, gear, the guild roll, the fallen and the command list, with "as of
+      <updated_at>" visible so a stale snapshot is obvious when the game is off. Readable on a phone
+      first - most viewers will open it on one. Must work when the game has never run (empty table).
+      Phase 2, later: polls that change the town, with Twitch login - that is why the data is in
+      Supabase rather than in a file; a static host could not do it at all.
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.
 - Firefly icons / title art: made by him in Adobe.

@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bellmire - the Guild Hall</title>
-<meta name="description" content="Bellmire, live from the stream: every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
-<meta name="theme-color" content="#1c140e">
+<title>Bellmire HD - the Guild Hall</title>
+<meta name="description" content="Bellmire, live from the stream: the boards, every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
+<meta name="theme-color" content="#120d09">
 <!--
   W1b: the viewer hub. One static page, no build step, no framework (GitHub Pages, like
   fightoverlay). It reads the ONE row the game upserts every 60 s (scripts/snapshot_pub.gd)
@@ -18,28 +18,59 @@
   the town has gone quiet (Mr. E's PC is off); an empty table says the town has not reported in;
   a failed fetch says so plainly and tries again - never a spinner forever.
 
-  Test hooks (local checks only, harmless): ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)  ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
+  Every string from the snapshot reaches the DOM through createElement + textContent only.
+  There is no innerHTML anywhere in app.js. See docs/HUB_SECURITY.md; the reasoning behind
+  the look is in web/NOTES.md. Neither is served content.
+
+  Test hooks (local checks only, harmless):
+    ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
+    ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
 -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrap">
-  <header class="panel">
-    <div class="brand">
-      <h1>Bellmire</h1>
-      <span class="sub" id="townName">the Guild Hall</span>
+
+  <header class="hero">
+    <div class="crest">
+      <!-- The Bellmire mark: the keep above the valley, the teal scar below it,
+           a struck gold bell for the jester, and the harlequin band. Drawn here
+           rather than loaded, so there is no image request and nothing to cache. -->
+      <svg class="emblem" viewBox="0 0 64 72" aria-hidden="true" focusable="false">
+        <path class="em-shield" d="M4 4 h56 v40 a28 28 0 0 1 -28 26 a28 28 0 0 1 -28 -26 z"></path>
+        <g class="em-keep">
+          <path d="M18 34 v-13 h4 v-4 h4 v4 h4 v-6 h4 v6 h4 v-4 h4 v4 h4 v13 z"></path>
+          <rect class="em-door" x="29" y="27" width="6" height="7"></rect>
+        </g>
+        <path class="em-hill" d="M6 42 q10 -7 16 -3 q6 4 10 1 q7 -5 13 -1 q6 3 9 5 v3 h-48 z"></path>
+        <path class="em-scar" d="M30 40 l4 0 l-1.4 9 l2.4 0 l-5 11 l1 -9 l-2.4 0 z"></path>
+        <g class="em-bell">
+          <path d="M44 52 q0 -6 4 -6 q4 0 4 6 v3 h-8 z"></path>
+          <rect x="43" y="55" width="10" height="2" rx="1"></rect>
+          <circle cx="48" cy="59" r="1.6"></circle>
+        </g>
+      </svg>
     </div>
-    <ul class="town" id="town" aria-label="The town"></ul>
-    <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+    <div class="namebox">
+      <h1 class="wordmark">Bellmire<span class="hd">HD</span></h1>
+      <p class="sub" id="townName">the Guild Hall</p>
+    </div>
+    <ul class="band" aria-hidden="true">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
   </header>
+
+  <ul class="town" id="town" aria-label="The town"></ul>
+  <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
 
   <nav aria-label="Sections">
     <a href="#boards">Boards</a>
     <a href="#heroes">Heroes<span class="n" id="nHeroes"></span></a>
     <a href="#chronicle">Chronicle</a>
+    <a href="#dice">The die</a>
     <a href="#roll">Guild Roll</a>
     <a href="#fallen">The Fallen<span class="n" id="nFallen"></span></a>
-    <a href="#dice">Dice</a>
     <a href="#commands">Commands</a>
   </nav>
 
@@ -47,61 +78,66 @@
     <section class="panel big-msg hide" id="nothing"></section>
 
     <section class="panel" id="boards">
-      <h2 class="title">The Boards <small>who leads the valley</small></h2>
+      <h2 class="title">The Boards <small id="boardCount"></small></h2>
       <div class="chips" id="boardTabs" role="tablist" aria-label="Choose a board"></div>
-      <ol class="board" id="boardList"><li class="msg">&hellip;</li></ol>
-      <p class="boardnote" id="boardNote"></p>
+      <div id="boardTop"></div>
+      <ol class="board" id="boardList"></ol>
+      <div class="findrow">
+        <input class="find" id="boardFind" type="search" autocomplete="off"
+               placeholder="Find a hero's place&hellip;" aria-label="Find a hero's place on this board">
+      </div>
+      <div id="boardSelf"></div>
+      <p class="note" id="boardNote"></p>
+    </section>
+
+    <section class="panel" id="dice">
+      <h2 class="title">The Guild Hall die <small>a d20, for the fun of it</small></h2>
+      <div class="dicebox">
+        <div class="dicetable">
+          <button type="button" class="d20" id="d20" aria-label="Roll the twenty-sided die">
+            <span class="d20scene">
+              <span class="d20cage" id="d20cage"></span>
+            </span>
+          </button>
+          <p class="d20shadow" aria-hidden="true"></p>
+        </div>
+        <div class="diceside">
+          <p class="d20result" id="d20result" role="status" aria-live="polite">Tap the die.</p>
+          <p class="d20help">The roll happens in your own browser and the town never hears about it. It has nothing to do with your hero.</p>
+          <p class="eyebrow">Last rolls</p>
+          <ol class="d20hist" id="d20hist"></ol>
+        </div>
+      </div>
     </section>
 
     <section class="panel" id="heroes">
       <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
       <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
-      <div class="heroes" id="heroList"><p class="msg">&hellip;</p></div>
-      <p class="more hide" id="heroMore"></p>
+      <div class="heroes" id="heroList"></div>
+      <p class="note hide" id="heroMore"></p>
     </section>
 
     <section class="panel" id="chronicle">
       <h2 class="title">The Chronicle <small>what the town reports</small></h2>
       <div class="chips" id="chronChips" aria-label="Filter the chronicle by kind"></div>
       <ol class="chron" id="chronList"></ol>
-      <p class="chronnote" id="chronNote"></p>
+      <p class="note" id="chronNote"></p>
     </section>
 
     <div class="duo">
-      <section class="panel" id="roll">
-        <h2 class="title">The Guild Roll <small>who stands highest</small></h2>
-        <ol class="roll" id="rollList"><li class="msg">&hellip;</li></ol>
+      <section class="plain" id="roll">
+        <h2 class="title light">The Guild Roll <small>who stands highest</small></h2>
+        <ol class="roll" id="rollList"></ol>
       </section>
-      <section class="panel" id="fallen">
-        <h2 class="title">The Fallen <small>remembered</small></h2>
-        <div class="fallen" id="fallenList"><p class="msg">&hellip;</p></div>
+      <section class="plain" id="fallen">
+        <h2 class="title light">The Fallen <small>remembered</small></h2>
+        <div class="fallen" id="fallenList"></div>
       </section>
     </div>
 
-    <section class="panel" id="dice">
-      <h2 class="title">The Guild Hall die <small>a d20, for the fun of it</small></h2>
-      <div class="dicebox">
-        <button type="button" class="d20" id="d20" aria-describedby="d20Help">
-          <svg class="d20svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-            <polygon class="d20face" points="50,4 94,29 94,71 50,96 6,71 6,29"></polygon>
-            <polygon class="d20inner" points="50,20 78,36 78,64 50,80 22,64 22,36"></polygon>
-            <path class="d20lines" d="M50,4 L50,20 M94,29 L78,36 M94,71 L78,64 M50,96 L50,80 M6,71 L22,64 M6,29 L22,36 M22,36 L78,64 M78,36 L22,64 M50,20 L50,80"></path>
-          </svg>
-          <span class="d20num" id="d20num" aria-hidden="true">20</span>
-          <span class="sr-only" id="d20Label">Roll the twenty-sided die</span>
-        </button>
-        <div class="diceside">
-          <p class="d20result" id="d20result" role="status" aria-live="polite">Tap the die.</p>
-          <p class="d20help" id="d20Help">A toy, and honest about it: the roll happens in your own browser and the town never hears about it.</p>
-          <p class="sub-h">Last rolls</p>
-          <ol class="d20hist" id="d20hist"><li class="empty">Nothing rolled yet.</li></ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel" id="commands">
-      <h2 class="title">Chat commands <small>type them in Twitch chat</small></h2>
-      <div class="cmds" id="cmdList"><p class="msg">&hellip;</p></div>
+    <section class="plain" id="commands">
+      <h2 class="title light">Chat commands <small>type them in Twitch chat</small></h2>
+      <div class="cmds" id="cmdList"></div>
     </section>
   </main>
 

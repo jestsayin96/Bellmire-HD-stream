@@ -8,6 +8,7 @@ const TIMEOUT_MS = 12000;      // a fetch that hangs is a failed fetch
 const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
 
 const TEST = new URLSearchParams(location.search).get("state");   // empty | fail | stale (local checks)
+const MOCK = new URLSearchParams(location.search).get("mock");    // chronicle | crowd (local checks)
 const $ = (id) => document.getElementById(id);
 let last = null;               // {payload, updated_at} of the last good read
 let lastError = "";
@@ -92,7 +93,7 @@ async function load() {
       renderNothing();
     } else {
       last = row;
-      render(row.payload);
+      render(MOCK ? withMock(row.payload) : row.payload);
     }
   } catch (e) {
     lastError = e && e.name === "AbortError" ? "no answer in " + TIMEOUT_MS / 1000 + " s" :
@@ -108,7 +109,7 @@ function renderNothing(failed) {
   box.innerHTML = failed
     ? `<h2>The town's records are out of reach</h2><p>Nothing could be read just now. Check your connection; the page tries again every minute on its own.</p>`
     : `<h2>Bellmire has not reported in yet</h2><p>The town sends its news here while the stream's game is running. Once it does, every hero's sheet, the Guild Roll and the Fallen appear on this page.</p>`;
-  for (const id of ["heroes", "roll", "fallen"]) $(id).classList.add("hide");
+  for (const id of ["boards", "heroes", "chronicle", "roll", "fallen"]) $(id).classList.add("hide");
   $("town").innerHTML = "";
   $("nHeroes").textContent = "";
   $("nFallen").textContent = "";
@@ -125,7 +126,7 @@ function render(p) {
     return;
   }
   $("nothing").classList.add("hide");
-  for (const id of ["heroes", "roll", "fallen"]) $(id).classList.remove("hide");
+  for (const id of ["boards", "heroes", "chronicle", "roll", "fallen"]) $(id).classList.remove("hide");
   const t = p.town || {};
   $("townName").textContent = t.name ? String(t.name) : "the Guild Hall";     // the game's own words ("a market town")
   const bits = [];
@@ -137,6 +138,8 @@ function render(p) {
   if (t.score != null && t.next_level_at != null && +t.next_level_at > 0) bits.push(`Growth <b>${num(t.score)}</b> / ${num(t.next_level_at)}`);
   $("town").innerHTML = bits.map((b) => `<li>${b}</li>`).join("");
   renderHeroes(arr(p.heroes));
+  renderBoards(arr(p.heroes), arr(p.fallen));
+  renderChronicle(p.chronicle);
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
@@ -278,10 +281,364 @@ function showProblem(msg) {
     p.textContent = msg;
     box.append(h, p);
   }
-  for (const id of ["heroes", "roll", "fallen", "commands"]) {
+  for (const id of ["boards", "heroes", "chronicle", "roll", "fallen", "commands"]) {
     const el = $(id);
     if (el) el.classList.add("hide");
   }
   const st = $("status");
   if (st) { st.className = "status bad"; st.textContent = "Showing nothing rather than guessing."; }
+}
+
+
+/* ============================================================================
+   W1b phase 1: the Boards, the Chronicle, the die.
+
+   Every node below is built with createElement + textContent. No innerHTML,
+   no insertAdjacentHTML, nothing that parses a snapshot string as markup -
+   see docs/HUB_SECURITY.md, layer 2. A hostile hero name renders as the
+   literal text a hostile hero typed, which is the whole point.
+   ========================================================================= */
+
+// a tiny element builder: text goes in as text, always
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = String(text);
+  return n;
+}
+const n0 = (v) => { const x = +v; return Number.isFinite(x) ? x : 0; };
+const nameOf = (r) => String(r && r.name != null ? r.name : "");
+
+/* ---------------------------------------------------------------- the Boards
+   Five boards over the data the town already publishes - no backend.
+   Deepest and Deadliest also count the dead: a hero's deepest floor and kill
+   count stand after they fall, and leaving them out would quietly erase the
+   valley's best delve. Gold, delves and standing are a living hero's to hold,
+   and the payload does not carry them for the fallen, so those boards are the
+   living only. Each board says which it is, rather than leaving you to guess.
+
+   Ties: the primary number, then a second number that means something for that
+   board, then the name - so the order is stable between refreshes instead of
+   shuffling two equal heroes about.                                         */
+const BOARDS = [
+  { key: "gold",     tab: "Gold",     title: "Most gold",      unit: "gold",   dead: false, second: "level",   secondLabel: "level" },
+  { key: "deepest",  tab: "Deepest",  title: "Deepest floor",  unit: "floor",  dead: true,  second: "kills",   secondLabel: "kills" },
+  { key: "kills",    tab: "Deadliest",tab2: "Deadliest", title: "Deadliest",   unit: "kills",  dead: true,  second: "deepest", secondLabel: "floor" },
+  { key: "delves",   tab: "Delves",   title: "Most delves",    unit: "delves", dead: false, second: "deepest", secondLabel: "floor" },
+  { key: "standing", tab: "Standing", title: "Highest standing", unit: "standing", dead: false, second: "kills", secondLabel: "kills" },
+];
+const BOARD_TOP = 10;
+let boardKey = "gold";
+
+function boardRows(spec, heroes, fallen) {
+  const living = heroes.map((h) => ({ r: h, dead: false }));
+  const gone = spec.dead ? fallen.map((f) => ({ r: f, dead: true })) : [];
+  const rows = living.concat(gone).filter((e) => e.r && typeof e.r === "object");
+  rows.sort((a, b) =>
+    n0(b.r[spec.key]) - n0(a.r[spec.key]) ||
+    n0(b.r[spec.second]) - n0(a.r[spec.second]) ||
+    nameOf(a.r).localeCompare(nameOf(b.r), "en", { sensitivity: "base" }));
+  return rows;
+}
+
+function renderBoards(heroes, fallen) {
+  const spec = BOARDS.find((b) => b.key === boardKey) || BOARDS[0];
+
+  // the tabs
+  const tabs = $("boardTabs");
+  tabs.replaceChildren();
+  for (const b of BOARDS) {
+    const t = el("button", "chip" + (b.key === spec.key ? " on" : ""), b.tab);
+    t.type = "button";
+    t.setAttribute("role", "tab");
+    t.setAttribute("aria-selected", b.key === spec.key ? "true" : "false");
+    t.addEventListener("click", () => {
+      boardKey = b.key;
+      renderBoards(heroes, fallen);
+      // keep the board in view when the list length changes under the tap
+      $("boards").scrollIntoView({ block: "nearest" });
+    });
+    tabs.append(t);
+  }
+
+  const box = $("boardList");
+  box.replaceChildren();
+  const note = $("boardNote");
+  const all = boardRows(spec, heroes, fallen);
+  const ranked = all.filter((e) => n0(e.r[spec.key]) > 0);
+
+  if (!ranked.length) {
+    box.append(el("li", "empty", heroes.length
+      ? "Nobody has earned a place on this board yet."
+      : "No heroes yet. Type !enlist in chat to raise one."));
+    note.textContent = "";
+    return;
+  }
+
+  const top = ranked.slice(0, BOARD_TOP);
+  let place = 0, prev = null;
+  top.forEach((e, i) => {
+    const v = n0(e.r[spec.key]);
+    if (v !== prev) { place = i + 1; prev = v; }        // equal numbers share a place
+    const li = el("li", "brow" + (e.dead ? " gone" : "") + (place === 1 ? " first" : ""));
+
+    li.append(el("span", "pos", place));
+
+    const who = el("span", "bname");
+    who.append(document.createTextNode(nameOf(e.r) || "(no name)"));
+    // a space before the badge, so the name does not read as "NameFALLEN"
+    // when it is copied or spoken aloud
+    if (e.dead) { who.append(document.createTextNode(" ")); who.append(el("span", "tag", "fallen")); }
+    li.append(who);
+
+    const val = el("span", "bval");
+    val.append(el("b", null, num(e.r[spec.key])));
+    val.append(el("span", "bunit", spec.unit));
+    li.append(val);
+
+    const sub = [];
+    const cls = e.r.class ? cap(e.r.class) : "";
+    if (e.r.level != null) sub.push((cls ? cls + ", " : "") + "level " + e.r.level);
+    else if (cls) sub.push(cls);
+    // the tie-breaker, unless the line already says it (gold breaks ties on level,
+    // and "Knight, level 7 - 7 level" reads like a mistake)
+    if (e.r[spec.second] != null && spec.secondLabel !== "level" && spec.second !== spec.key)
+      sub.push(num(e.r[spec.second]) + " " + spec.secondLabel);
+    li.append(el("span", "bsub", sub.join("  ·  ")));
+
+    box.append(li);
+  });
+
+  const counted = spec.dead ? "the living and the fallen" : "living heroes";
+  note.textContent = ranked.length > BOARD_TOP
+    ? spec.title + ": top " + top.length + " of " + ranked.length + ", counting " + counted + "."
+    : spec.title + ", counting " + counted + ".";
+}
+
+/* ------------------------------------------------------------ the Chronicle
+   payload.chronicle is OPTIONAL: up to 50 entries, newest first, each
+   { t, s, at }. t is one of the kinds below. While the desktop has not
+   started publishing it, the section says so calmly and renders nothing -
+   an absent field is not an error.                                         */
+const CHRON_KINDS = [
+  { t: "fight", label: "Fights" },
+  { t: "death", label: "Deaths" },
+  { t: "raid",  label: "Raids" },
+  { t: "town",  label: "Town" },
+  { t: "lore",  label: "Lore" },
+  { t: "loot",  label: "Loot" },
+  { t: "delve", label: "Delves" },
+];
+const CHRON_MAX = 50;
+let chronOff = new Set();          // kinds the viewer has switched OFF (default: all on)
+
+function chronEntries(raw) {
+  return arr(raw)
+    .filter((e) => e && typeof e === "object" && typeof e.s === "string" && e.s.trim() !== "")
+    .slice(0, CHRON_MAX)
+    .map((e) => ({
+      // an unknown kind is not a reason to drop the line - it files under "other"
+      t: CHRON_KINDS.some((k) => k.t === e.t) ? e.t : "other",
+      s: String(e.s),
+      at: typeof e.at === "string" ? e.at : "",
+    }));
+}
+
+function renderChronicle(raw) {
+  const chips = $("chronChips");
+  const list = $("chronList");
+  const note = $("chronNote");
+  chips.replaceChildren();
+  list.replaceChildren();
+
+  if (raw == null || !Array.isArray(raw)) {
+    note.textContent = "The chronicle will appear here once the town reports it.";
+    note.className = "chronnote quiet";
+    return;
+  }
+
+  const entries = chronEntries(raw);
+  if (!entries.length) {
+    note.textContent = "Nothing has been written in the chronicle yet.";
+    note.className = "chronnote quiet";
+    return;
+  }
+
+  // a chip for each kind actually present, plus "other" if anything landed there
+  const present = CHRON_KINDS.filter((k) => entries.some((e) => e.t === k.t));
+  if (entries.some((e) => e.t === "other")) present.push({ t: "other", label: "Other" });
+
+  for (const k of present) {
+    const count = entries.filter((e) => e.t === k.t).length;
+    const on = !chronOff.has(k.t);
+    const c = el("button", "chip kind-" + k.t + (on ? " on" : ""));
+    c.type = "button";
+    c.setAttribute("aria-pressed", on ? "true" : "false");
+    c.append(document.createTextNode(k.label));
+    c.append(el("span", "cnt", count));
+    c.addEventListener("click", () => {
+      if (chronOff.has(k.t)) chronOff.delete(k.t); else chronOff.add(k.t);
+      renderChronicle(raw);
+    });
+    chips.append(c);
+  }
+  if (chronOff.size) {
+    const clear = el("button", "chip clear", "Show all");
+    clear.type = "button";
+    clear.addEventListener("click", () => { chronOff.clear(); renderChronicle(raw); });
+    chips.append(clear);
+  }
+
+  const shown = entries.filter((e) => !chronOff.has(e.t));
+  if (!shown.length) {
+    note.textContent = "Every kind is switched off - tap a chip to bring the chronicle back.";
+    note.className = "chronnote quiet";
+    return;
+  }
+
+  for (const e of shown) {
+    const li = el("li", "centry kind-" + e.t);
+    const head = el("div", "chead");
+    const kind = CHRON_KINDS.find((k) => k.t === e.t);
+    // the same word the chip uses, so the filter and the entry agree
+    head.append(el("span", "ckind", kind ? kind.label.replace(/s$/, "") : "Other"));
+    const a = ago(e.at);
+    if (a) {
+      const t = el("time", "cwhen", a.text);
+      t.dateTime = e.at;                                 // an ISO stamp the game wrote, as an attribute value only
+      t.title = when(e.at);
+      head.append(t);
+    }
+    li.append(head);
+    li.append(el("p", "cline", e.s));                    // viewer-shaped text: textContent, never markup
+    list.append(li);
+  }
+
+  note.className = "chronnote";
+  note.textContent = shown.length === entries.length
+    ? entries.length + (entries.length === 1 ? " entry" : " entries") + ", newest first."
+    : "Showing " + shown.length + " of " + entries.length + ", newest first.";
+}
+
+/* ------------------------------------------------------------------ the die
+   A toy. The roll is made here in the browser from crypto.getRandomValues and
+   goes nowhere - no fetch, no record, nothing to do with the game's dice.
+   Rejection sampling (drop 240-255) keeps all twenty faces equally likely;
+   a plain % 20 over 0-255 would favour 1-16.                                */
+function rollD20() {
+  const b = new Uint8Array(1);
+  for (let i = 0; i < 64; i++) {
+    crypto.getRandomValues(b);
+    if (b[0] < 240) return (b[0] % 20) + 1;              // 240 = 12 x 20
+  }
+  crypto.getRandomValues(b);
+  return (b[0] % 20) + 1;                                // unreachable in practice
+}
+
+const D20_HIST = 8;
+let d20hist = [];
+let d20busy = false;
+
+function d20Verdict(v) {
+  if (v === 20) return "A natural twenty. The hall roars.";
+  if (v === 1)  return "A one. The hall goes quiet.";
+  if (v >= 15)  return "A good roll.";
+  if (v >= 8)   return "A fair roll.";
+  return "A poor roll.";
+}
+
+function paintD20Hist() {
+  const box = $("d20hist");
+  box.replaceChildren();
+  if (!d20hist.length) { box.append(el("li", "empty", "Nothing rolled yet.")); return; }
+  for (const v of d20hist) {
+    box.append(el("li", "hroll" + (v === 20 ? " crit" : v === 1 ? " crat" : ""), v));
+  }
+}
+
+function setUpD20() {
+  const btn = $("d20"), out = $("d20num"), say = $("d20result");
+  if (!btn) return;
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  btn.addEventListener("click", () => {
+    if (d20busy) return;
+    d20busy = true;
+    const value = rollD20();                             // decided up front; the tumble is only show
+    btn.classList.add("rolling");
+    say.textContent = "Rolling…";
+
+    const land = () => {
+      btn.classList.remove("rolling");
+      out.textContent = value;
+      btn.classList.toggle("crit", value === 20);
+      btn.classList.toggle("crat", value === 1);
+      say.textContent = value + " · " + d20Verdict(value);
+      d20hist.unshift(value);
+      if (d20hist.length > D20_HIST) d20hist.length = D20_HIST;
+      paintD20Hist();
+      d20busy = false;
+    };
+
+    if (calm) { land(); return; }
+    const started = Date.now(), SPIN = 620;
+    const tick = setInterval(() => {
+      out.textContent = rollD20();                       // the blur of faces
+      if (Date.now() - started >= SPIN) { clearInterval(tick); land(); }
+    }, 55);
+  });
+
+  // the die is a button, so Enter and Space already work; make that plain to a reader
+  btn.setAttribute("aria-label", "Roll the twenty-sided die");
+  paintD20Hist();
+}
+setUpD20();
+
+
+/* ---------------------------------------------------------------- test hooks
+   Local checks only (?mock=...), and harmless: they alter nothing that is
+   fetched or sent - they only stand in for data the town has not published
+   yet, so the Chronicle and the Boards can be exercised before it does.
+   The hostile name below is deliberate: it must appear on screen as the
+   literal characters a viewer typed, and never run.                        */
+const MOCK_CHRONICLE = [
+  { t: "death", s: "Grimhollow the Knight fell on floor 7, run through by a bone-knight.", at: new Date(Date.now() - 2 * 60000).toISOString() },
+  { t: "fight", s: "<img src=x onerror=alert(1)> struck a cave troll for 14 and lived to say so.", at: new Date(Date.now() - 9 * 60000).toISOString() },
+  { t: "loot",  s: "A teal-dyed cloak and 230 gold came up out of the scar.", at: new Date(Date.now() - 24 * 60000).toISOString() },
+  { t: "raid",  s: "Bandits tested the west gate and were turned back by the watch.", at: new Date(Date.now() - 95 * 60000).toISOString() },
+  { t: "town",  s: "Bellmire reached town level 4; the treasury stands at 1,280 gold.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
+  { t: "delve", s: "Four delvers went down together and three came back up.", at: new Date(Date.now() - 5 * 3600000).toISOString() },
+  { t: "lore",  s: "The guild writes that the scar was a well before it was a wound.", at: new Date(Date.now() - 26 * 3600000).toISOString() },
+  { t: "wat",   s: "A kind the page has never heard of, which must still render.", at: new Date(Date.now() - 30 * 3600000).toISOString() },
+  { t: "fight", s: "A stat line with no stamp at all.", at: "" },
+];
+function withMock(p) {
+  const out = Object.assign({}, p);
+  if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "crowd") {
+    const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
+    const made = [];
+    for (let i = 0; i < 40; i++) {
+      made.push({
+        name: i === 0 ? "<img src=x onerror=alert(1)>" : "Hero" + String(i).padStart(2, "0"),
+        class: classes[i % 4], species: species[i % 4], level: 1 + (i % 9),
+        rank: "Delver", standing: (i * 37) % 300, ac: 12 + (i % 6), hp: 20 + i,
+        gold: (i * 53) % 900, kills: (i * 7) % 60, deepest: i % 13, delves: i % 11,
+        xp: i * 10, to_hit: 4, prof: 2, saves: "STR +4",
+        stats: { str: 10 + (i % 8), dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
+        weapon: { name: "sword", dice: "1d8" }, armour: { name: "mail" },
+        worn: "", title: "", oil: i % 4, potions: i % 3, brews: "",
+      });
+    }
+    // two heroes dead level on gold, to see the shared place and the name tie-break
+    made[3].gold = made[4].gold = 777;
+    out.heroes = made.concat(arr(p.heroes));
+    // a fallen hero good enough to hold a place, so the boards that count the dead
+    // actually show one rather than only being able to
+    out.fallen = [{ name: "Grimhollow", class: "knight", level: 9, kills: 140, deepest: 31,
+                    killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12 }]
+                  .concat(arr(p.fallen));
+    out.chronicle = MOCK_CHRONICLE;
+  }
+  return out;
 }

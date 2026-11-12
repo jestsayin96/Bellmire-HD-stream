@@ -183,3 +183,162 @@
 /* was an inline style attribute on the "show more heroes" button; moved here so the
    Content-Security-Policy below never needs 'unsafe-inline'. */
 .find.morebtn{width:auto;margin:0 0 0 6px;padding:2px 10px}
+
+
+/* ===========================================================================
+   Phase 1: the Boards, the Chronicle, the die.
+   Same house style - parchment, an inked edge, teal for the accent. Phone
+   first: one column, thumb-sized taps, and nothing that needs a hover.
+   ======================================================================== */
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px;
+  padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---- the chip row, shared by the boards' tabs and the chronicle's filters */
+.chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 0 0 10px;
+}
+.chip {
+  font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 5px;
+  min-height: 36px; padding: 4px 13px;
+  color: var(--ink-soft); background: var(--parch-2);
+  border: 2px solid rgba(115,77,41,.45); border-radius: 999px;
+}
+.chip:hover { border-color: var(--teal); }
+.chip:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.chip.on {
+  color: #f6ecd2; background: var(--teal-ink); border-color: var(--teal-ink);
+}
+.chip .cnt {
+  font-size: .78rem; font-weight: 700; padding: 0 5px; border-radius: 999px;
+  background: rgba(41,25,15,.14);
+}
+.chip.on .cnt { background: rgba(255,255,255,.22); }
+.chip.clear { font-style: italic; font-weight: 500; }
+
+/* ---- the boards */
+ol.board { list-style: none; margin: 0; padding: 0; }
+.brow {
+  display: grid; grid-template-columns: 2.1em 1fr auto; gap: 1px 10px; align-items: baseline;
+  padding: 8px 2px; border-bottom: 1px dashed rgba(115,77,41,.4);
+}
+.brow:last-child { border-bottom: 0; }
+.brow .pos { font-size: 1.05rem; }
+.brow.first .pos { color: var(--ink-red); }
+.bname { font-weight: 650; color: var(--gold); overflow-wrap: anywhere; }
+.bname .tag {
+  margin-left: 6px; font-size: .7rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--parch); background: var(--dead);
+  border-radius: 3px; padding: 1px 5px; vertical-align: 1px;
+}
+.brow.gone .bname { color: var(--dead); }
+.bval { grid-column: 3; grid-row: 1 / span 2; text-align: right; white-space: nowrap; }
+.bval b { font-size: 1.3rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bval .bunit {
+  display: block; font-size: .72rem; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.brow.first .bval b { color: var(--ink-red); }
+.bsub { grid-column: 2; font-size: .87rem; color: var(--ink-soft); }
+.boardnote { margin: 10px 0 0; font-size: .85rem; color: var(--ink-soft); font-style: italic; }
+
+/* ---- the chronicle */
+ol.chron { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.centry {
+  border-left: 4px solid var(--ink-soft);
+  background: #f4e6c3; border-radius: 0 6px 6px 0; padding: 7px 12px;
+}
+.chead {
+  display: flex; align-items: baseline; gap: 8px;
+  font-size: .74rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 700;
+}
+.ckind { color: var(--ink-red); }
+.cwhen { margin-left: auto; color: var(--ink-soft); font-weight: 600; letter-spacing: .03em; white-space: nowrap; }
+.cline { margin: 2px 0 0; font-size: .97rem; overflow-wrap: anywhere; }
+.chronnote { margin: 10px 0 0; font-size: .85rem; color: var(--ink-soft); font-style: italic; }
+.chronnote.quiet { margin: 0; }
+
+/* each kind gets its own edge, so the feed reads at a glance without colour alone
+   carrying the meaning - the kind is spelled out in words on every entry */
+.centry.kind-fight { border-left-color: var(--bad); }
+.centry.kind-death { border-left-color: var(--dead); }
+.centry.kind-raid  { border-left-color: var(--warn); }
+.centry.kind-town  { border-left-color: var(--teal-ink); }
+.centry.kind-lore  { border-left-color: var(--edge); }
+.centry.kind-loot  { border-left-color: var(--gold); }
+.centry.kind-delve { border-left-color: var(--ink-red); }
+
+/* ---- the die */
+.dicebox { display: grid; gap: 14px; justify-items: center; }
+.d20 {
+  position: relative; cursor: pointer; padding: 0;
+  width: 168px; height: 168px; flex: none;
+  background: none; border: 0; border-radius: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+.d20:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.d20svg { display: block; width: 100%; height: 100%; }
+.d20face { fill: var(--parch-2); stroke: var(--edge); stroke-width: 3; }
+.d20inner { fill: #f6ecd2; stroke: rgba(115,77,41,.55); stroke-width: 1.5; }
+.d20lines { stroke: rgba(115,77,41,.45); stroke-width: 1.2; fill: none; }
+.d20num {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: 3.4rem; font-weight: 700; line-height: 1; color: var(--ink);
+  font-variant-numeric: tabular-nums; pointer-events: none;
+}
+.d20:hover .d20face { fill: #f0dfb0; }
+.d20:active { transform: scale(.97); }
+.d20.rolling .d20svg { animation: tumble .62s linear; }
+.d20.rolling .d20num { opacity: .55; }
+.d20.crit .d20face { fill: #d9f0ee; stroke: var(--teal-ink); }
+.d20.crit .d20num { color: var(--teal-ink); }
+.d20.crat .d20face { fill: #f0dcd4; stroke: var(--bad); }
+.d20.crat .d20num { color: var(--bad); }
+@keyframes tumble {
+  0%   { transform: rotate(0deg)   scale(1); }
+  30%  { transform: rotate(140deg) scale(1.06); }
+  60%  { transform: rotate(260deg) scale(.95); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d20.rolling .d20svg { animation: none; }
+  .d20:active { transform: none; }
+}
+.diceside { width: 100%; max-width: 30em; text-align: center; }
+.d20result { margin: 0 0 4px; font-size: 1.05rem; font-weight: 600; min-height: 1.5em; }
+.d20help { margin: 0 0 10px; font-size: .85rem; color: var(--ink-soft); }
+.diceside .sub-h { text-align: center; }
+ol.d20hist {
+  list-style: none; margin: 6px 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+}
+.hroll {
+  min-width: 2.1em; padding: 3px 7px; border-radius: 5px;
+  font-weight: 700; font-variant-numeric: tabular-nums;
+  background: var(--parch); border: 1px solid rgba(115,77,41,.45);
+}
+.hroll:first-child { border-color: var(--edge); background: #f7ecd2; }
+.hroll.crit { color: var(--teal-ink); border-color: var(--teal-ink); }
+.hroll.crat { color: var(--bad); border-color: var(--bad); }
+ol.d20hist .empty { font-style: italic; color: var(--ink-soft); }
+
+/* ---- wider screens */
+@media (min-width: 760px) {
+  .dicebox { grid-template-columns: auto 1fr; justify-items: start; align-items: center; gap: 22px; }
+  .diceside { text-align: left; }
+  .diceside .sub-h { text-align: left; }
+  ol.d20hist { justify-content: flex-start; }
+  ol.chron { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* a phone: tighter chips, so a full set of filters is two rows and not three -
+   they still all wrap into view rather than hiding off the side of a scroller */
+@media (max-width: 460px) {
+  .chips { gap: 5px; }
+  .chip { font-size: .85rem; padding: 3px 10px; min-height: 34px; }
+  .chip .cnt { font-size: .72rem; padding: 0 4px; }
+}

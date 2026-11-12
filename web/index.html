@@ -18,7 +18,7 @@
   the town has gone quiet (Mr. E's PC is off); an empty table says the town has not reported in;
   a failed fetch says so plainly and tries again - never a spinner forever.
 
-  Test hooks (local checks only, harmless): ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
+  Test hooks (local checks only, harmless): ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)  ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
 -->
 <link rel="stylesheet" href="style.css">
 </head>
@@ -34,20 +34,37 @@
   </header>
 
   <nav aria-label="Sections">
+    <a href="#boards">Boards</a>
     <a href="#heroes">Heroes<span class="n" id="nHeroes"></span></a>
+    <a href="#chronicle">Chronicle</a>
     <a href="#roll">Guild Roll</a>
     <a href="#fallen">The Fallen<span class="n" id="nFallen"></span></a>
+    <a href="#dice">Dice</a>
     <a href="#commands">Commands</a>
   </nav>
 
   <main id="main">
     <section class="panel big-msg hide" id="nothing"></section>
 
+    <section class="panel" id="boards">
+      <h2 class="title">The Boards <small>who leads the valley</small></h2>
+      <div class="chips" id="boardTabs" role="tablist" aria-label="Choose a board"></div>
+      <ol class="board" id="boardList"><li class="msg">&hellip;</li></ol>
+      <p class="boardnote" id="boardNote"></p>
+    </section>
+
     <section class="panel" id="heroes">
       <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
       <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
       <div class="heroes" id="heroList"><p class="msg">&hellip;</p></div>
       <p class="more hide" id="heroMore"></p>
+    </section>
+
+    <section class="panel" id="chronicle">
+      <h2 class="title">The Chronicle <small>what the town reports</small></h2>
+      <div class="chips" id="chronChips" aria-label="Filter the chronicle by kind"></div>
+      <ol class="chron" id="chronList"></ol>
+      <p class="chronnote" id="chronNote"></p>
     </section>
 
     <div class="duo">
@@ -60,6 +77,27 @@
         <div class="fallen" id="fallenList"><p class="msg">&hellip;</p></div>
       </section>
     </div>
+
+    <section class="panel" id="dice">
+      <h2 class="title">The Guild Hall die <small>a d20, for the fun of it</small></h2>
+      <div class="dicebox">
+        <button type="button" class="d20" id="d20" aria-describedby="d20Help">
+          <svg class="d20svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <polygon class="d20face" points="50,4 94,29 94,71 50,96 6,71 6,29"></polygon>
+            <polygon class="d20inner" points="50,20 78,36 78,64 50,80 22,64 22,36"></polygon>
+            <path class="d20lines" d="M50,4 L50,20 M94,29 L78,36 M94,71 L78,64 M50,96 L50,80 M6,71 L22,64 M6,29 L22,36 M22,36 L78,64 M78,36 L22,64 M50,20 L50,80"></path>
+          </svg>
+          <span class="d20num" id="d20num" aria-hidden="true">20</span>
+          <span class="sr-only" id="d20Label">Roll the twenty-sided die</span>
+        </button>
+        <div class="diceside">
+          <p class="d20result" id="d20result" role="status" aria-live="polite">Tap the die.</p>
+          <p class="d20help" id="d20Help">A toy, and honest about it: the roll happens in your own browser and the town never hears about it.</p>
+          <p class="sub-h">Last rolls</p>
+          <ol class="d20hist" id="d20hist"><li class="empty">Nothing rolled yet.</li></ol>
+        </div>
+      </div>
+    </section>
 
     <section class="panel" id="commands">
       <h2 class="title">Chat commands <small>type them in Twitch chat</small></h2>

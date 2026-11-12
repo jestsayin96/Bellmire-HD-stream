@@ -20,3 +20,7 @@ local/
 _sup_tests.log
 _merge_tests.log
 renders/_look/
+_audio_import.log
+_l20_retry.log
+_d8_soak.log
+_soak*.log

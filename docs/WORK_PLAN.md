@@ -158,6 +158,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       (c) twitch_reply is not in chatcmd.gd yet (laptop) - connected automatically once it is; (d) !testbits etc. do not
       exist (L17 open) - tests feed recorded EventSub frames instead. Chat sending was not tried live (nothing posted).
 
+- [ ] D15. SOUND SOAK (supervisor, Nov 12). Now that S1+S2 wired the full RPG sound library, run a
+      30-45 min soak with sound ON and confirm it is safe for a 24/7 stream: (a) no audio-related
+      SCRIPT ERROR and no 'freed node'/lambda errors over the whole run; (b) the AudioStreamPlayer3D
+      pool in sfx.gd is not exhausted or growing without bound (log pool size + active players each
+      minute); (c) memory does not climb from audio streams (compare mem_mb first third vs last third,
+      as D8 did); (d) FPS holds as it did in the silent D8 soak (sound must not cost meaningful frame
+      time); (e) the GAP throttles hold under a busy town+raid so no kind machine-guns. Write the
+      findings into PROGRESS; if anything leaks or errors, fix it before ticking. Reuse tools/_soak.gd
+      with audio enabled. Commit + push only on a clean run.
+
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
 - [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
       each with stats, behaviour and a home biome/theme from the lore's bestiary; new strains.

@@ -40,8 +40,10 @@ func inventory(user_id: String) -> String:
     if h.is_empty():
         return "No hero yet - type !enlist to join the valley."
     var armour := String(Roster.ARMOUR[int(h["armour"])]["name"])
-    var line := "%s carries %s and wears %s  |  %s, %d oil, %d gold" % [
-        h["name"], roster.weapon_name(h), armour, roster.brews_line(h), int(h.get("oil", 0)), int(h.get("gold", 0))]
+    var worn := roster.worn_line(h)
+    var title := roster.title_of(h)
+    var line := "%s%s carries %s and wears %s%s  |  %s, %d oil, %d gold" % [
+        h["name"], (", " + title) if title != "" else "", roster.weapon_name(h), armour, (" + " + worn) if worn != "" else "", roster.brews_line(h), int(h.get("oil", 0)), int(h.get("gold", 0))]
     if catches_of.is_valid():
         var cs: Array = catches_of.call(String(h["name"]))
         if not cs.is_empty():
@@ -73,6 +75,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
     var verb := String(parts[0]).to_lower()
     var arg := String(parts[1]).to_lower() if parts.size() > 1 else ""
     var arg2 := String(parts[2]).to_lower() if parts.size() > 2 else ""
+    var rest := " ".join(parts.slice(1)).to_lower()
 
     # viewers rename themselves; keep the display name current
     var h := roster.get_hero(user_id)
@@ -80,7 +83,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         h["name"] = display
 
     var out := ""
-    if verb in ["fish", "forge", "armoury", "armory", "brew"] and away.has(user_id) and not h.is_empty():
+    if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
         return "%s is %s." % [h["name"], away[user_id]]
     match verb:
@@ -102,6 +105,8 @@ func handle(user_id: String, display: String, msg: String) -> String:
                         wants_shop.emit(user_id, "armorer")
                         return roster.buy_armour(user_id))
         "brew":     out = _brew(user_id, arg, arg2)
+        "wear":     out = _needs(user_id, func(): return roster.wear(user_id, rest))
+        "dye":      out = _needs(user_id, func(): return roster.dye(user_id, arg))
         "oil", "lamp", "torch":
                     out = _oil(user_id, arg)
         "reroll":   out = _reroll(user_id, display)
@@ -114,7 +119,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
-        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge [kind|list] !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
+        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge [kind|list] !armoury !brew [potion] !wear <item> !dye <colour> !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
         _:          return ""
 
     _last[user_id] = now

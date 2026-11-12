@@ -485,6 +485,7 @@ static func rank_trim(model_root: Node, rank: int) -> void:
         var cls: Dictionary = Roster.CLASSES.get(String(_dressing.get("class", "")), {})
         if cls.has("cape"):
             _cape_tint(model_root, cls["cape"])
+        dress_cosmetics(model_root, _dressing)
         _dressing = {}
     var sk := skeleton(model_root)
     if sk == null or rank <= 0:
@@ -511,3 +512,196 @@ static func rank_trim(model_root: Node, rank: int) -> void:
     sash.rotation.z = deg_to_rad(38.0)
     sash.position = Vector3(0, 0.15, 0.42)
     att.add_child(sash)
+
+## ---- L13: what a hero wears beyond their kit (data/items.json). Accessories
+## show small (a ring at the left wrist, an amulet on the chest, gloves, boots,
+## a cloak's colour on the cape); cosmetics are the hat, the dye (armour pieces
+## and cloak), a banner on the back, a pet at heel and a title under the name.
+const ACC_COL := {"ring": Color(0.85, 0.70, 0.30), "amulet": Color(0.80, 0.75, 0.55), "gloves": Color(0.30, 0.22, 0.16),
+                  "boots": Color(0.24, 0.17, 0.12)}
+const CLOAK_COL := {"guild_cloak": Color(0.45, 0.46, 0.48), "mire_cloak": Color(0.28, 0.38, 0.26)}
+
+static func dress_cosmetics(model_root: Node, h: Dictionary) -> void:
+    var sk := skeleton(model_root)
+    if sk == null:
+        return
+    for slot in ["eq_ring", "eq_amulet", "eq_glove_l", "eq_glove_r", "eq_hat", "eq_banner", "eq_cboot_l", "eq_cboot_r"]:
+        var old := sk.get_node_or_null(NodePath(slot))
+        if old:
+            old.free()
+    var acc: Dictionary = h.get("acc", {})
+    var cos: Dictionary = h.get("cos", {})
+    var has_dye := cos.has("dye")
+    var dye_col := Color.html(String((Roster.items().get("dyes", {}) as Dictionary).get(String(cos.get("dye", "")), "ffffff")))
+    # the cape: dye first, then a worn cloak's own colour (the calling's colour stays otherwise)
+    if has_dye:
+        _cape_tint(model_root, dye_col)
+    elif acc.has("cloak") and CLOAK_COL.has(String(acc["cloak"])):
+        _cape_tint(model_root, CLOAK_COL[String(acc["cloak"])])
+    # dye the armour pieces too
+    if has_dye:
+        for slot in ["eq_boot_l", "eq_boot_r", "eq_pauldron_l", "eq_pauldron_r", "eq_helm"]:
+            var p := sk.get_node_or_null(NodePath(slot))
+            if p:
+                for mi in p.find_children("*", "MeshInstance3D", true, false):
+                    var mm := (mi as MeshInstance3D).material_override as StandardMaterial3D
+                    if mm:
+                        var d := mm.duplicate() as StandardMaterial3D
+                        d.albedo_color = dye_col.lerp(mm.albedo_color, 0.25)
+                        (mi as MeshInstance3D).material_override = d
+    if acc.has("ring"):
+        var r := _piece(sk, "wrist.l", "eq_ring", _mat_c(ACC_COL["ring"], 0.9))
+        if r:
+            var tm := TorusMesh.new()
+            tm.inner_radius = 0.07
+            tm.outer_radius = 0.11
+            r.mesh = tm
+            r.rotation.z = PI * 0.5
+    if acc.has("amulet"):
+        var a := _piece(sk, "chest", "eq_amulet", _mat_c(ACC_COL["amulet"], 0.8))
+        if a:
+            var cm := CylinderMesh.new()
+            cm.top_radius = 0.13
+            cm.bottom_radius = 0.13
+            cm.height = 0.04
+            a.mesh = cm
+            a.rotation.x = PI * 0.5
+            a.position = Vector3(0, 0.25, 0.46)
+    if acc.has("gloves"):
+        for s in ["l", "r"]:
+            var g := _piece(sk, "hand." + s, "eq_glove_" + s, _mat_c(ACC_COL["gloves"], 0.1))
+            if g:
+                var bm := BoxMesh.new()
+                bm.size = Vector3(0.26, 0.22, 0.26)
+                g.mesh = bm
+    if acc.has("boots") and sk.get_node_or_null("eq_boot_l") == null:
+        for s in ["l", "r"]:
+            var bt := _piece(sk, "foot." + s, "eq_cboot_" + s, _mat_c(dye_col if has_dye else ACC_COL["boots"], 0.1))
+            if bt:
+                var bb := BoxMesh.new()
+                bb.size = Vector3(0.36, 0.28, 0.48)
+                bt.mesh = bb
+                bt.position = Vector3(0, 0.07, 0.04)
+    if cos.has("hat"):
+        _hat(model_root, sk, String(cos["hat"]))
+    if cos.has("banner"):
+        var it := Roster.item(String(cos["banner"]))
+        var bn := _piece(sk, "chest", "eq_banner", _mat_c(Color(0.35, 0.25, 0.15), 0.0))
+        if bn:
+            var pole := BoxMesh.new()
+            pole.size = Vector3(0.06, 2.0, 0.06)
+            bn.mesh = pole
+            bn.position = Vector3(0.25, 0.6, -0.45)
+            var cloth := MeshInstance3D.new()
+            var cb := BoxMesh.new()
+            cb.size = Vector3(0.55, 0.75, 0.03)
+            cloth.mesh = cb
+            cloth.material_override = _mat_c(Color.html(String(it.get("colour", "aa2222"))), 0.0)
+            cloth.position = Vector3(-0.3, 0.6, 0)
+            bn.add_child(cloth)
+    # the title, under the name (a Label3D straight under a HeroBody is renamed by it; this one sits deeper)
+    var old_t := model_root.get_node_or_null("eq_title")
+    if old_t:
+        old_t.free()
+    var title := _title_of(h)
+    if title != "" and model_root is Node3D:
+        var lb := Label3D.new()
+        lb.name = "eq_title"
+        lb.text = title
+        lb.font_size = 24
+        var sy := maxf(0.2, (model_root as Node3D).scale.y)
+        lb.pixel_size = 0.01 / sy
+        lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+        lb.no_depth_test = true
+        lb.outline_size = 12
+        lb.outline_modulate = Color(0, 0, 0, 0.9)
+        lb.modulate = Color(0.95, 0.85, 0.55)
+        lb.offset = Vector2(0, -34)
+        lb.position = Vector3(0, 2.3 / sy, 0)
+        model_root.add_child(lb)
+    # the pet, at heel
+    var host: Node = model_root.get_parent()
+    if host:
+        for c in host.get_children():
+            if c is HeroPet:
+                c.queue_free()
+        if cos.has("pet"):
+            var pit := Roster.item(String(cos["pet"]))
+            var pet := HeroPet.new()
+            pet.owner_body = host as Node3D
+            pet.model = String(pit.get("model", ""))
+            pet.scale_f = float(pit.get("scale", 0.35))
+            host.add_child(pet)
+
+static func _title_of(h: Dictionary) -> String:
+    var k := String((h.get("cos", {}) as Dictionary).get("title", ""))
+    return String(Roster.item(k).get("name", "")) if k != "" else ""
+
+static func _mat_c(col: Color, metal: float) -> StandardMaterial3D:
+    var m := StandardMaterial3D.new()
+    m.albedo_color = col
+    m.metallic = metal
+    m.roughness = 0.4 if metal > 0.5 else 0.8
+    return m
+
+## cosmetic hats sit over the head and hide the body's own hat or helmet
+static func _hat(model_root: Node, sk: Skeleton3D, key: String) -> void:
+    var it := Roster.item(key)
+    var st: Array = [model_root]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D and not String(c.name).begins_with("eq_") and (String(c.name).contains("Hat") or String(c.name).contains("Helmet")):
+            (c as MeshInstance3D).visible = false
+        for g in c.get_children():
+            if not String(g.name).begins_with("eq_"):
+                st.append(g)
+    var col := Color.html(String(it.get("colour", "553322")))
+    var hat := _piece(sk, "head", "eq_hat", _mat_c(col, 0.0))
+    if hat == null:
+        return
+    var crown := CylinderMesh.new()
+    match key:
+        "wide_hat":
+            crown.top_radius = 0.42
+            crown.bottom_radius = 0.48
+            crown.height = 0.36
+            hat.position = Vector3(0, 0.95, 0)
+            _brim(hat, 0.9, col)
+        "straw_hat":
+            crown.top_radius = 0.12
+            crown.bottom_radius = 0.5
+            crown.height = 0.4
+            hat.position = Vector3(0, 0.98, 0)
+            _brim(hat, 0.95, col)
+        "feather_cap":
+            crown.top_radius = 0.45
+            crown.bottom_radius = 0.6
+            crown.height = 0.3
+            hat.position = Vector3(0, 0.86, 0)
+            var f := MeshInstance3D.new()
+            var pm := PrismMesh.new()
+            pm.size = Vector3(0.12, 0.7, 0.05)
+            f.mesh = pm
+            f.material_override = _mat_c(Color(0.95, 0.92, 0.85), 0.0)
+            f.position = Vector3(0.4, 0.35, -0.1)
+            f.rotation.z = -0.5
+            hat.add_child(f)
+        "crown_of_ash":
+            var tm := TorusMesh.new()
+            tm.inner_radius = 0.5
+            tm.outer_radius = 0.58
+            hat.mesh = tm
+            hat.position = Vector3(0, 0.82, 0)
+            return
+    hat.mesh = crown
+
+static func _brim(hat: MeshInstance3D, r: float, col: Color) -> void:
+    var b := MeshInstance3D.new()
+    var cm := CylinderMesh.new()
+    cm.top_radius = r
+    cm.bottom_radius = r
+    cm.height = 0.04
+    b.mesh = cm
+    b.material_override = _mat_c(col.darkened(0.1), 0.0)
+    b.position = Vector3(0, -0.16, 0)
+    hat.add_child(b)

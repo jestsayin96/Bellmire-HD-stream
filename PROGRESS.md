@@ -962,3 +962,28 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   and disarm loops hand Delve trap nodes that are never added to the tree, and _spring read their position for the
   sound, _float_text the body's. Delve now plays the trap sound and floats text only for nodes in the tree (a real
   floor's traps and delvers always are). _l11_test: L11_TEST OK with 0 errors / 0 "Condition" lines.
+
+
+## Cycle 71 - L13, more equipment and cosmetics (laptop, 2026-11-11)
+- data/items.json (one source). Accessories, a small 5e bonus each, named in the valley's voice: Ring of the Night
+  Watch (+1 AC), Ferryman's Ring (+1 saves), Hearthstone Amulet (+12 hp), Lamplighter's Amulet (+1 saves), Guild
+  Cloak (+1 AC), Mire-walker's Cloak (+1 saves), Boots of the West Road (+0.6 speed), Soft Boots (+1 to hit),
+  Smith's Gauntlets (+2 damage), Fletcher's Gloves (+1 to hit) - one per slot (ring, amulet, cloak, boots, gloves).
+  Roster.acc_bonus feeds armour_class, save_bonus, max_hp, speed, attack_bonus and the damage dice.
+- Cosmetics (look only): four hats (wide-brimmed, feathered cap, straw, ash-wood circlet; they hide the body's own
+  hat or helmet), four district banners on the back (keep blue, market red, craft yellow, homes green), four pets
+  from the CC0 farm animals (corgi, pug, duck, fox - scripts/hero_pet.gd heels beside the hero, walks to catch up,
+  idles when they stand), six titles shown under the name (the Lamplighter, Keeper of the Door, Friend of the Ford,
+  Scarwalker, Counter of Grain, Bell without a Clapper), and ten dyes for the armour pieces and the cloak.
+- !wear <item> (any unique word of its name: !wear corgi, !wear night watch) buys it once (haggled) and wears it;
+  owned items are worn again for nothing; !wear off <slot>; !dye <colour> (25 gold). !inventory shows the title,
+  the accessories and the dye. Gold now; channel points later (T1).
+- Visible: a ring at the left wrist, an amulet on the chest, gloves, boots where no armour boots are, the cloak's
+  colour, the hat, the banner, the pet, the title (a Label3D one level under the hero so its label code leaves it).
+- First render: the corgi stood 120 m tall - the farm-animal models are authored ~100x (the town scales them
+  0.0019); pets now use the town's scales. Titles came down to a smaller size.
+- tools/_l13_test.gd (headless, new): the data; AC / saves / hp / speed / to-hit / +2 damage in the numbers; the
+  ring slot; owned is free; pet, title, dye, unknown colour, unknown item, !wear off, no gold; !inventory; every
+  piece on a dressed body; one pet after re-dressing. L13_TEST OK. tools/_l13_shot.gd: renders/cycles/20261111_l13
+  - looked at: six heroes front and back in their hats, banners, dyes, pets and titles.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 441, TWITCH_PARSE OK, L3, L5, L12 OK.

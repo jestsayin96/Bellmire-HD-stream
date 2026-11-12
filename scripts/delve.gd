@@ -1203,7 +1203,7 @@ func _hero_damage(h: Dictionary, crit: bool) -> float:
 	var s := int(d[1])
 	var prim := String(Roster.CLASSES[String(h["class"])].get("primary", "str"))
 	var md := roster.mod(h, prim)
-	var flat := roster.attack(h) * 0.75 + kit_bonus - float(n) * float(s + 1) * 0.5 - float(md)
+	var flat := roster.attack(h) * 0.75 + kit_bonus + roster.acc_bonus(h, "dmg") - float(n) * float(s + 1) * 0.5 - float(md)
 	var dice := _dice(n, s) + (_dice(n, s) if crit else 0)
 	return maxf(1.0, float(dice + md) + flat)
 

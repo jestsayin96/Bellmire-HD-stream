@@ -120,10 +120,11 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       to cure/inflict: poisoned, burning, frozen/slowed, blinded, frightened. Status icons on party frames and
       over heads; durations; brewed at the apothecary (!brew <potion>), found below. Lore voice for names.
       DONE (Cycle 70): 12 brews (data/potions.json), 5 bad states with sources and cures, drinking below, !brew <potion>, tags; L12_TEST OK.
-- [ ] L13. More equipment + COSMETICS: more weapons/armour per tier (rings, amulets, cloaks, boots, gloves with
+- [x] L13. More equipment + COSMETICS: more weapons/armour per tier (rings, amulets, cloaks, boots, gloves with
       small 5e bonuses), and cosmetic-only items - hats, hoods, capes, dyes (colour the armour), banners on
       the back, a pet that follows (from the CC0 animals), titles shown under the name. !wear <item>, !dye <colour>.
       Bought with gold now; later channel points (T1). Visible on the hero; render a lineup.
+      DONE (Cycle 71): 10 accessories with 5e bonuses, 18 cosmetics (hats, banners, pets, titles), 10 dyes, !wear / !dye; L13_TEST OK.
 - [ ] L14. The command list in detail: one source of truth (data/commands.json): name, aliases, args, cost,
       cooldown, what it does, example. !help / !commands (short), !help <cmd> (detail). Friendly error replies
       ("!forge needs 120 gold - you have 40"). Write docs/COMMANDS.md from the same data (the hub/website uses it).

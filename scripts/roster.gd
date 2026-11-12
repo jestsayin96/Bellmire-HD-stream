@@ -296,17 +296,18 @@ func armour_class(h: Dictionary) -> int:
     # L4: a monk in no more than leather adds WIS (unarmoured defence)
     if String(h["class"]) == "monk" and int(h.get("armour", 0)) <= 1:
         ac += maxi(0, mod(h, "wis"))
+    ac += int(acc_bonus(h, "ac"))
     return ac
 
 # d20 + proficiency + the class's own ability, as the attack line on the sheet.
 func attack_bonus(h: Dictionary) -> int:
-    return prof(h) + mod(h, String(CLASSES[String(h["class"])].get("primary", "str")))
+    return prof(h) + mod(h, String(CLASSES[String(h["class"])].get("primary", "str"))) + int(acc_bonus(h, "hit"))
 
 func save_bonus(h: Dictionary, stat: String) -> int:
     var b := mod(h, stat)
     if stat in SAVES.get(String(h["class"]), []):
         b += prof(h)
-    return b
+    return b + int(acc_bonus(h, "saves"))
 
 func save_line(h: Dictionary) -> String:
     var parts := []
@@ -319,7 +320,7 @@ func mod(h: Dictionary, stat: String) -> int:
 
 func max_hp(h: Dictionary) -> float:
     return float(CLASSES[h["class"]]["hp"]) + float(mod(h, "con")) * 5.0 \
-         + float(ARMOUR[int(h["armour"])]["hp"])
+         + float(ARMOUR[int(h["armour"])]["hp"]) + acc_bonus(h, "hp")
 
 # a class hits with its own ability: a mage's INT, a rogue's DEX, a knight's STR
 func attack(h: Dictionary) -> float:
@@ -328,7 +329,7 @@ func attack(h: Dictionary) -> float:
          + float(WEAPONS[int(h["weapon"])]["atk"])
 
 func speed(h: Dictionary) -> float:
-    return float(CLASSES[h["class"]]["spd"]) + float(mod(h, "dex")) * 0.15
+    return float(CLASSES[h["class"]]["spd"]) + float(mod(h, "dex")) * 0.15 + acc_bonus(h, "speed")
 
 # WIS drives mending; sages mend harder than clerics
 func heal_power(h: Dictionary) -> float:
@@ -890,3 +891,116 @@ func _other_brews(h: Dictionary) -> int:
     for k in (h.get("brews", {}) as Dictionary):
         t += int(h["brews"][k])
     return t
+
+## ---- L13: accessories (small 5e bonuses) and cosmetics (the look only), from
+## data/items.json. A hero keeps what they own in "owned", what they wear in
+## "acc" {slot: key} and "cos" {hat|banner|pet|title: key, dye: colour}.
+static var _items: Dictionary = {}
+static func items() -> Dictionary:
+    if _items.is_empty():
+        var f := FileAccess.open("res://data/items.json", FileAccess.READ)
+        if f:
+            _items = JSON.parse_string(f.get_as_text())
+    return _items
+
+static func item(key: String) -> Dictionary:
+    var a: Dictionary = items().get("accessories", {})
+    if a.has(key):
+        return a[key]
+    return (items().get("cosmetics", {}) as Dictionary).get(key, {})
+
+## a name a viewer typed -> an item key ("" if none): the key, its full name,
+## or any word of it that is unique ("!wear corgi", "!wear night watch")
+static func item_key(words: String) -> String:
+    var w := words.to_lower().strip_edges()
+    var all: Dictionary = (items().get("accessories", {}) as Dictionary).duplicate()
+    all.merge(items().get("cosmetics", {}))
+    if all.has(w):
+        return w
+    var hits: Array = []
+    for k in all:
+        var nm := String(all[k]["name"]).to_lower()
+        if nm == w or nm.trim_prefix("a ").trim_prefix("the ") == w:
+            return k
+        if w.length() >= 3 and (nm.contains(w) or String(k).contains(w.replace(" ", "_"))):
+            hits.append(k)
+    return hits[0] if hits.size() == 1 else ""
+
+func acc_bonus(h: Dictionary, what: String) -> float:
+    var t := 0.0
+    for slot in (h.get("acc", {}) as Dictionary):
+        t += float(item(String(h["acc"][slot])).get(what, 0))
+    return t
+
+func wear(user_id: String, words: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var w := words.to_lower().strip_edges()
+    if w.begins_with("off ") or w == "off":
+        var slot := w.trim_prefix("off").strip_edges()
+        for d in ["acc", "cos"]:
+            if (h.get(d, {}) as Dictionary).has(slot):
+                (h[d] as Dictionary).erase(slot)
+                changed.emit(user_id)
+                return "%s takes off their %s." % [h["name"], slot]
+        return "Take off what? (ring, amulet, cloak, boots, gloves, hat, banner, pet, title)"
+    var key := item_key(w)
+    if key == "":
+        return "No such thing for sale in Bellmire. !help wear lists them."
+    var it := item(key)
+    var owned: Array = h.get("owned", [])
+    var note := ""
+    if not owned.has(key):
+        var price := haggle(h, cost_for(h, int(it["cost"])))
+        if not spend(h, price):
+            return "%s needs %d gold for %s (has %d)." % [h["name"], price, it["name"], int(h["gold"])]
+        owned.append(key)
+        h["owned"] = owned
+        note = " (%d gold)%s" % [price, last_haggle]
+    if it.has("slot"):
+        if not h.has("acc"):
+            h["acc"] = {}
+        h["acc"][String(it["slot"])] = key
+    else:
+        if not h.has("cos"):
+            h["cos"] = {}
+        h["cos"][String(it["kind"])] = key
+    changed.emit(user_id)
+    var what := String(it["name"])
+    if String(it.get("kind", "")) == "title":
+        return "%s is known now as %s, %s.%s" % [h["name"], h["name"], what, note]
+    if String(it.get("kind", "")) == "pet":
+        return "%s now has %s at their heels.%s" % [h["name"], what, note]
+    return "%s wears %s.%s %s" % [h["name"], what, note, String(it.get("flavour", ""))]
+
+func dye(user_id: String, colour: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var c := colour.to_lower().strip_edges()
+    var dyes: Dictionary = items().get("dyes", {})
+    if not dyes.has(c):
+        return "The dyer has: %s." % ", ".join(dyes.keys())
+    var price := haggle(h, cost_for(h, int(items().get("dye_cost", 25))))
+    if not spend(h, price):
+        return "%s needs %d gold for the dyer (has %d)." % [h["name"], price, int(h["gold"])]
+    if not h.has("cos"):
+        h["cos"] = {}
+    h["cos"]["dye"] = c
+    changed.emit(user_id)
+    return "%s's armour and cloak are dyed %s.%s" % [h["name"], c, last_haggle]
+
+## what a hero wears, for the sheet: "Guild Cloak, Soft Boots | a corgi | the Lamplighter"
+func worn_line(h: Dictionary) -> String:
+    var bits: Array = []
+    for slot in (h.get("acc", {}) as Dictionary):
+        bits.append(String(item(String(h["acc"][slot])).get("name", "?")))
+    for k in ["hat", "banner", "pet"]:
+        if (h.get("cos", {}) as Dictionary).has(k):
+            bits.append(String(item(String(h["cos"][k])).get("name", "?")))
+    if (h.get("cos", {}) as Dictionary).has("dye"):
+        bits.append("dyed " + String(h["cos"]["dye"]))
+    return ", ".join(bits)
+
+func title_of(h: Dictionary) -> String:
+    var k := String((h.get("cos", {}) as Dictionary).get("title", ""))
+    return String(item(k).get("name", "")) if k != "" else ""

@@ -72,10 +72,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       LAST, title tag up close, own look, hour-slot days in their own quarter, Chronicle lines, the crier shouts the
       latest Chronicle news. D6_TEST OK (86% of slots reached, drunk out 0/134 by day 96/96 at night, 0 in_solid);
       renders/cycles/20261111_d6.
-- [ ] D6b. Nav snap bug: town._snap / TownNav.closest() returns (0,0,0) for a while after start (navmesh not
+- [x] D6b. Nav snap bug: town._snap / TownNav.closest() returns (0,0,0) for a while after start (navmesh not
       synced yet). Wait for the map's first sync (NavigationServer3D.map_get_iteration_id > 0 or map_changed) before
       snapping; until then fall back to the raw position, never the origin. Re-check D4 watch patrol routes and
       anyone stacked on the square at start. Test: snap right after start never returns 0,0,0; render the square.
+      DONE cycle 73: iteration id > 0 came ~40 frames before the region was in the map; TownNav.synced() waits for
+      the region + a vertex probe, _snap falls back to keep_walkable. Also: traders' market spot kept the old plot's
+      inside point (a 30-47 m "door leg" through houses) and a door leg left after stuck waypoints now re-routes.
+      D6B_TEST OK (0 of 600 snaps at the origin, 90 beats clean); _townwalk in_solid 0/7923 and 0/8317; renders/cycles/20261112_d6b.
 - [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
 - [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
 - [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'

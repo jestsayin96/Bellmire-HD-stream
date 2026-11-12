@@ -3840,6 +3840,9 @@ func _spawn_people() -> void:
             elif role == "trader" or role == "innkeeper":
                 # D4: on open ground - a spot inside a stall left them pressing into it
                 v.work = _snap(_market_pos + Vector3(rng.randf_range(-7.0, 7.0), 0.0, rng.randf_range(-7.0, 7.0)))
+                # D6b: an open-air spot has no door - the plot's inside point stayed
+                # behind and the "door leg" ran 30-47 m through the houses to it
+                v.work_in = Vector3.ZERO
             start.y = height_at(start.x, start.z)
             v.position = start
             add_child(v)
@@ -4111,8 +4114,10 @@ func _guard_posts() -> Array:
     return posts
 
 ## the nearest point a foot (or a hoof) may stand on
+## (D6b: only once the navmesh is in the server's map - before that the town's own
+## push-out of solids, never the origin)
 func _snap(p: Vector3) -> Vector3:
-    if nav != null and nav.ready_ok:
+    if nav != null and nav.synced():
         var q: Vector3 = nav.closest(Vector3(p.x, 0.0, p.z))
         return Vector3(q.x, 0.0, q.z)
     return keep_walkable(p)

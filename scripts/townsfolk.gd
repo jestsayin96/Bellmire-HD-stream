@@ -193,6 +193,7 @@ func _next_trip() -> Vector3:
 var _linger := -1.0
 var _door_out := Vector3.ZERO
 var _stuck_t := 0.0
+var _door_retry := 0
 
 func _physics_process(delta: float) -> void:
     if town != null:
@@ -242,11 +243,30 @@ func _physics_process(delta: float) -> void:
     # D1: the last leg, door -> just inside, is the only one off the walkable
     # ground; corners are taken tight (0.9 m cut through house corners)
     var door_leg: bool = _route.size() == 1 and _enter_at != Vector3.ZERO
+    if door_leg and to.length() > 3.0:
+        # D6b: a door leg is a step or two. Far from the door (the waypoints
+        # before it were given up as stuck) walk the street back to the door
+        # first - once; then leave the house be rather than cut through walls
+        _route.clear()
+        if _door_out != Vector3.ZERO and _door_retry < 1:
+            _door_retry += 1
+            _route = town.call("route", global_position, _door_out)
+            var end: Vector3 = _route.back() if not _route.is_empty() else global_position
+            if Vector2(end.x - _door_out.x, end.z - _door_out.z).length() <= 1.0:
+                _route.append(_enter_at)
+                return
+            _route.clear()
+        _enter_at = Vector3.ZERO
+        _door_out = Vector3.ZERO
+        _door_retry = 0
+        _wait = randf_range(2.0, 5.0)
+        return
     if to.length() < (0.9 if _route.size() == 1 else 0.45):
         _stuck_t = 0.0
         _route.remove_at(0)
         if _route.is_empty():
             Rig.play(_anim, "Idle")
+            _door_retry = 0
             if _enter_at != Vector3.ZERO:
                 # through the door and gone: a while indoors
                 inside = true

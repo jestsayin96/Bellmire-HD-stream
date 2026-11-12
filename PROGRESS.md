@@ -1032,3 +1032,21 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   command. L14_TEST OK. tools/_l14_shot.gd: renders/cycles/20261111_l14 - looked at: the replies in the Chronicle;
   first pass !help forge took seven lines, the short stream line brings it to three.
 - Checks: parse 0 script errors, TWITCH_PARSE OK, L3, L13 OK.
+
+
+## Cycle 73 - D6b, the nav snap and the long door legs (desktop, 2026-11-11)
+- Cause: the server's map reports iteration id > 0 about 40 frames before the town's region is in it; in that window
+  map_get_closest_point answers (0,0,0) for everything (420 of 600 probes at the origin in the first second).
+- TownNav.synced(): the region is in the map AND one of the mesh's own vertices (one well away from the origin) snaps
+  back onto itself; cached once true. closest() / path() give no opinion until then (flat p / []), and town._snap
+  falls back to keep_walkable (the town's own push-out of solids) - never the origin.
+- Found while re-checking: traders get an open-air spot on the square, but kept the old plot's inside point, so their
+  "door leg" ran 30-47 m straight through the houses (Maela of the Ford, Petra Bramble). work_in is cleared now.
+  And a door leg left after the stuck-waypoint give-up (Harl of the Ford, 17 m to the tavern door) re-routes along
+  the street to the door once, else leaves the house be. _townwalk had drifted 1-23 bad samples run to run; now 0.
+- tools/_d6b_test.gd (headless, new): _snap + closest probed every frame for the first second - 0 at the origin, 0
+  far; the watch's 90 beats and the traders' spots - none at the origin, none collapsed; people stacked on one spot
+  (63 pairs at frame 61, at shared doors) clear within 15 s (3). D6B_TEST OK. tools/_d6b_shot.gd:
+  renders/cycles/20261112_d6b - looked at: the square at frame 60, just after the sync, people spread over it.
+- Checks: parse 0 script errors, _townwalk in_solid 0/7923 and 0/8317 PASS, _offfloor 0 of 1120, TWITCH_PARSE OK, _delve_test
+  runs (0 script errors), D4_TEST OK, D6_TEST OK.

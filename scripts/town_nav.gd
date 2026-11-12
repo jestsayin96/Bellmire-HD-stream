@@ -100,15 +100,49 @@ func _rect(src: NavigationMeshSourceGeometryData3D, r: Array) -> void:
 func path(a: Vector3, b: Vector3) -> PackedVector3Array:
     if not ready_ok:
         return PackedVector3Array()
-    var map := get_navigation_map()
-    if NavigationServer3D.map_get_iteration_id(map) == 0:
+    if not synced():
         return PackedVector3Array()
+    var map := get_navigation_map()
     return NavigationServer3D.map_get_path(map, Vector3(a.x, 0, a.z), Vector3(b.x, 0, b.z), true)
 
-func closest(p: Vector3) -> Vector3:
-    if not ready_ok:
-        return p
+## D6b: true once the server's map really holds this region's polygons. The
+## map's iteration id goes above 0 a while before the region is in it, and until
+## then map_get_closest_point answers (0,0,0) for everything - which stacked the
+## square's people and the watch's beats on the origin. The probe: one of our
+## own mesh vertices must snap back onto itself.
+var _synced := false
+var _probe := Vector3.INF
+
+func synced() -> bool:
+    if _synced:
+        return true
+    if not ready_ok or not is_inside_tree():
+        return false
     var map := get_navigation_map()
-    if NavigationServer3D.map_get_iteration_id(map) == 0:
+    if not map.is_valid() or NavigationServer3D.map_get_iteration_id(map) == 0:
+        return false
+    if not NavigationServer3D.map_get_regions(map).has(get_rid()):
+        return false
+    if _probe == Vector3.INF:
+        var nm := navigation_mesh
+        var verts := nm.get_vertices()
+        if nm.get_polygon_count() == 0 or verts.is_empty():
+            return false
+        # a vertex well away from the origin, so a (0,0,0) answer cannot pass
+        var best := 0
+        for i in range(verts.size()):
+            if Vector2(verts[i].x, verts[i].z).length() > Vector2(verts[best].x, verts[best].z).length():
+                best = i
+            if Vector2(verts[best].x, verts[best].z).length() > 20.0:
+                break
+        _probe = verts[best] * global_transform.basis.get_scale() + global_position
+    var q := NavigationServer3D.map_get_closest_point(map, _probe)
+    _synced = Vector2(q.x - _probe.x, q.z - _probe.z).length() < 1.0
+    return _synced
+
+## the nearest walkable point to p; before the first sync, p itself (flat) -
+## never the origin
+func closest(p: Vector3) -> Vector3:
+    if not synced():
         return Vector3(p.x, 0, p.z)       # not synced yet: no opinion
-    return NavigationServer3D.map_get_closest_point(map, Vector3(p.x, 0, p.z))
+    return NavigationServer3D.map_get_closest_point(get_navigation_map(), Vector3(p.x, 0, p.z))

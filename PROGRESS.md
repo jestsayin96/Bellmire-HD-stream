@@ -203,7 +203,7 @@
 - PAUSED here at Mr. E's request until Thursday. No scheduled blocks are pending.
 
 
-## Cycle 43b - a player camera (2026-11-08)
+## Cycle 44b - a player camera (2026-11-08)
 - There was NO player camera: the main scene had none (every picture came from the test tools' own
   cameras), so pressing Play showed nothing to navigate. scripts/rts_camera.gd (class RtsCamera, NEW, RTS
   style per Mr. E's interface direction): WASD/arrows pan, wheel zoom, right-drag rotate/tilt, Q/E R/F,
@@ -213,7 +213,7 @@
 - `Play Jests HD.bat` in the project folder: double-click to play.
 
 
-## Cycle 44 - from Mr. E playing it (2026-11-08)
+## Cycle 45 - from Mr. E playing it (2026-11-08)
 - Wall-walking in the scar FIXED: a hero closing on a monster aimed for a ring slot (5 m out for casters
   and archers); when that slot fell off the floor the path search found nothing and the old fallback walked
   them straight there - through walls, over the void. Delve._go now snaps any goal to the nearest floor
@@ -228,7 +228,7 @@
 - Tests: tools/_select_test.gd (real input), tools/_inv_test.gd. Renders: renders/cycles/20261108_1232_select.
 
 
-## Cycle 45 - moved to Godot 4.7.2 (2026-11-08)
+## Cycle 46 - moved to Godot 4.7.2 (2026-11-08)
 - Saved the last 4.6.1 state as git tag `godot-4.6.1-stable` (pushed); worked on branch `godot-4.7`.
 - Full re-import under 4.7.2 (old cache kept as .godot_46_backup/): 53 s, 0 errors, 0 warnings. 522 .import
   files gained 4.7's new default options (mesh_library/use_node_names_as_mesh_names, array_mesh/
@@ -240,7 +240,7 @@
 - Play Jests HD.bat and RUNNING.md now point at D:\1game\Godot_v4.7.2-stable_win64.exe.
 
 
-## Cycle 46 - "the dungeons are a hot mess", "the town isn't alive" (2026-11-08)
+## Cycle 47 - "the dungeons are a hot mess", "the town isn't alive" (2026-11-08)
 Dungeon
 - Health bars (HealthBar3D, shader billboard): everyone in a fight, heroes and monsters, plus anyone not at
   full HP; raiders/defenders in raids; starving townsfolk. tools/_bars_test.gd: 189 hero / 18 monster samples.
@@ -271,7 +271,7 @@ Town
 - Renders: renders/cycles/20261108_dungeon_fix3, 20261108_town_walk2. renders/.gdignore added.
 
 
-## Cycle 47 - from Mr. E's recordings (2026-11-08)
+## Cycle 48 - from Mr. E's recordings (2026-11-08)
 - Watched his 7 OBS clips (9.5 min, no audio) as contact sheets. Fixed what they showed:
 - The white thread across the town: a hero's fishing rod stayed on the body after they walked off the dock,
   drawing its line from wherever they were back to the water. The rod is now packed away beyond 14 m, and a
@@ -289,7 +289,7 @@ Town
   `--headless --quit-after` first after edits.
 
 
-## Cycle 48 - live Twitch chat, phase 1 (2026-11-08)
+## Cycle 49 - live Twitch chat, phase 1 (2026-11-08)
 - scripts/twitch_chat.gd (class TwitchChat): read-only, anonymous (justinfan) Twitch IRC over
   WebSocketPeer; login sent only once the socket is OPEN; PING/PONG; RECONNECT and drops retry with
   backoff 2-60 s; half lines buffered across packets; only "!" commands; bots ignored by login;
@@ -303,12 +303,12 @@ Town
   town.gd restored from git and only the 5-line hook re-added.
 
 
-## Cycle 48b - Twitch chat restored on the desktop (2026-11-11)
+## Cycle 50b - Twitch chat restored on the desktop (2026-11-11)
 - twitch_chat.gd, tools/_twitch_parse.gd and the town.gd hook had been deleted (local model); restored.
   Parse test 8/8, live "TWITCH joined #jestsayin96", and Mr. E's own "!enlist knight" from Twitch worked.
   Broken local draft (twitch_chat.gd.bak_local) deleted.
 
-## Cycle 49 - the auto-director (stream mode) (2026-11-11)
+## Cycle 51 - the auto-director (stream mode) (2026-11-11)
 - scripts/auto_director.gd (AutoDirector), owned by the RTS camera. V toggles it, F10 hides/shows the
   whole interface for a clean OBS layout. Touching the camera pauses it 20 s, then it resumes.
 - Every second it scores shots and cuts: raid 95 > fight below 75-95 (viewer parties +10, more hurt =
@@ -319,7 +319,7 @@ Town
   catch, frames in renders/cycles/20261111_director. 0 script errors.
 
 
-## Cycle 50 - the Guild Roll panel (2026-11-11)
+## Cycle 52 - the Guild Roll panel (2026-11-11)
 - scripts/leaderboard_panel.gd (LeaderboardPanel): parchment panel top-right, the roster's standing
   board (top 10, top three in gold, the dead marked +) and the last three of the fallen. Refreshes every
   5 s; L toggles; the director's F10 hides it with the rest. Started next to TwitchChat (Play runs only).
@@ -327,7 +327,7 @@ Town
 - docs/FINISH_PLAN.md + docs/RUN_LOCK.txt: the deadline checklist the scheduled build runs work through.
 
 
-## Cycle 51 - party frames (2026-11-11)
+## Cycle 53 - party frames (2026-11-11)
 - scripts/party_frames.gd (PartyFrames): WoW-style column on the left edge, above the Chronicle, shown
   only while a delve runs. One dark gold-edged block per delve: "Delvers / The town's band · floor N"
   and the party's oil (amber when low, red "no oil - dark"); one HP bar per delver (green/amber/red),
@@ -340,7 +340,7 @@ Town
   not from this change) - worth a look.
 
 
-## Cycle 52 - sound and music (2026-11-11)
+## Cycle 54 - sound and music (2026-11-11)
 - assets/audio (all CC0, LICENSE.txt lists every file and its page): Kenney RPG Audio / Impact Sounds /
   UI Audio (hits, coins, bell, chimes for spells, clicks); RandomMind (OpenGameArt) medieval loops -
   day: The Old Tower Inn, Minstrel Dance; night: The Bard's Tale, Exploration; raid: Battle; the death
@@ -363,7 +363,7 @@ Town
   stops and drops them in _exit_tree.
 
 
-## Cycle 53 - Fantasy Props MegaKit placed (2026-11-11)
+## Cycle 55 - Fantasy Props MegaKit placed (2026-11-11)
 - Town (town.gd): the doors already had Lantern_Wall + barrels/crates/buckets and the square its stalls;
   added two Chair_1 at the tavern table ends, a BookStand with a Candle_1 on it and two lit
   CandleStick_Stand at the chapel door, and standing Banner_1 / Banner_2 flanking every landmark front
@@ -382,7 +382,7 @@ Town
   (no ENDED); with DELVE_OIL=1 (the documented short run) it ends.
 
 
-## Cycle 54 - floor lords as events (2026-11-11)
+## Cycle 56 - floor lords as events (2026-11-11)
 - Bestiary.LORD_SCALE 1.2: every lord stands a fifth taller than its canon height (lift scaled with it).
   Canon untouched: the eight lords, their titles and notes, the floors ending in 5 / every 10th.
 - FeedHUD.card(title, sub, colour) / FeedHUD.card_on(town, ...): a dark gold-edged name card at the head
@@ -406,7 +406,7 @@ Town
   0 script errors (the 3 old 'material is null' engine lines remain).
 
 
-## Cycle 55 - raid balance (2026-11-11)
+## Cycle 57 - raid balance (2026-11-11)
 - raids.gd (backup raids.gd.bak_c55): GREEN_BELOW 3. A hero under level 3 no longer charges the raiders
   across the valley: while no raider is inside the walls they hold the market square (a ring 5-8 m out,
   facing outward) and only take a raider within HOLD_REACH 9 m. Once any raider is inside the walls
@@ -424,7 +424,7 @@ Town
   (the 3 old 'material is null' engine lines remain).
 
 
-## Cycle 56 - camera and bar fixes (2026-11-11)
+## Cycle 58 - camera and bar fixes (2026-11-11)
 - rts_camera.gd (backup .bak_c56): the follow camera (F, and the director, which follows too) can no
   longer sit inside a wall. No physics bodies in this game, so the "raycast" marches the line from the
   followed one's head out to the camera through what is solid: every house box up to its roof in town
@@ -448,7 +448,7 @@ Town
   script errors, parse check 0 script errors (the 3 old 'material is null' engine lines remain).
 
 
-## Cycle 57 - the soak, the docs; the finish list is done (2026-11-11)
+## Cycle 59 - the soak, the docs; the finish list is done (2026-11-11)
 - Soak (tools/_soak.gd, real window, director on, 4x, six fake viewers): ran 22 wall minutes = 56 valley
   days before the window was closed. 0 script errors. Memory flat (443 -> 485 MB). 34 raids driven off,
   21 delves home, 0 wipes, 9 viewer deaths and 8 rerolls; the director cut between raids, fights, lords,
@@ -462,7 +462,7 @@ Town
 - Checks: parse 0 errors, _offfloor 0/904 off-floor, _twitch_parse OK, _delve_test progressing (floor 2).
 
 
-## Cycle 58 - L1, more monsters (laptop, 2026-11-11)
+## Cycle 60 - L1, more monsters (laptop, 2026-11-11)
 - Lore read first (old bestiary.gd, NOTES.md bestiary/strains/biomes, data/*.json): the old game's creatures
   are undead, ooze, beasts, fiends and the wyrm; strains rename and recolour; 14 themes. Everything new
   keeps to those families and that plain voice; no lord was added (the eight are canon).
@@ -493,7 +493,7 @@ Town
   four home, _offfloor 0 of 434, TWITCH_PARSE OK.
 
 
-## Cycle 59 - L2, lords with mechanics and rare uniques (laptop, 2026-11-11)
+## Cycle 61 - L2, lords with mechanics and rare uniques (laptop, 2026-11-11)
 - Lore: the eight lords stay canon (names, titles, notes, floors ending 5 / every 10th, the two bags). Each
   now fights the way its own note says (Bestiary.LORD_WAYS, read by Delve like any creature's ways):
   The Hollow King, "wreathed in cold fire" - casts from 6 m and rolls a ring of cold fire (6 m, DEX save
@@ -529,7 +529,7 @@ Town
   four runs (after the entry fix), TWITCH_PARSE OK, L1_TEST OK.
 
 
-## Cycle 60 - L3, weapons and armour (laptop, 2026-11-11)
+## Cycle 62 - L3, weapons and armour (laptop, 2026-11-11)
 - Weapon KINDS (Gear.KINDS): blade - sword, greatsword, dagger, spear; axe - axe, mace; arcane - staff,
   wand; ranged - crossbow, bow. Each has its own mesh at every tier from the CC0 kits already here (KayKit
   Adventurers, the KayKit weapon bits in assets/gear scaled x0.62 for the hand, the KayKit skeleton pack's
@@ -557,7 +557,7 @@ Town
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 483, TWITCH_PARSE OK, L1_TEST OK.
 
 
-## Cycle 61 - L4, six more callings (laptop, 2026-11-11)
+## Cycle 63 - L4, six more callings (laptop, 2026-11-11)
 - Lore first: the old game's nine callings (knight, warden, barbarian, rogue, duelist, ranger, mage, sage,
   cleric) stay as they are. Six more, built the old way - a KayKit body + a weapon family + an offhand +
   a stat profile - each with 5e saves, a default weapon kind, one ability Delve reads, and a cloak colour:
@@ -581,7 +581,7 @@ Town
   back view now reads paladin pale, necromancer black, monk saffron, druid green, warlock violet, bard red.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 427, TWITCH_PARSE OK,
   L1_TEST OK, L3_TEST OK.
-## Cycle 58 - D1: nobody walks through houses (2026-11-11, desktop)
+## Cycle 64 - D1: nobody walks through houses (2026-11-11, desktop)
 - The cause: the navmesh CARVED every footprint (add_projected_obstruction carve=true), and a carved
   obstruction skips the agent-radius margin - paths ran along the very walls, the 0.5 m cells and the
   1.6 m edge simplification put feet inside houses, stalls and fences; thin fences (0.32 m) slipped
@@ -611,7 +611,7 @@ Town
 
 
 
-## Cycle 62 - L5, the peoples of the valley (laptop, 2026-11-11)
+## Cycle 65 - L5, the peoples of the valley (laptop, 2026-11-11)
 (Cycle numbers: the desktop's D1 entry is also "Cycle 58"; the laptop cycles run 58-62 today.)
 - Lore: the old game names no races - its folk (Garm of the Ford, Tove Ashwood...) read as valley humans.
   So the peoples are new, kept in its plain voice and tied to its places: human ("valley-born, like most
@@ -637,7 +637,7 @@ Town
 - Merged origin/main (desktop D1) before the item; PROGRESS.md append conflict resolved keeping both.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 438, TWITCH_PARSE OK,
   L1_TEST OK, L3_TEST OK, L4_TEST OK.
-## Cycle 59 - D2: spells at the chest, not the sky; battle spells in raids (2026-11-11, desktop)
+## Cycle 66 - D2: spells at the chest, not the sky; battle spells in raids (2026-11-11, desktop)
 - The "4th of July": HealthBar3D is a MeshInstance3D child of its owner, and Monster._height() measures
   every visible mesh under the monster - the bar included. delve.gd and raids.gd asked for the bar at
   _height() + 0.25 EVERY FRAME, so the bar climbed ~0.25 m a frame and the bolt aim (_height() * 0.5, then
@@ -671,7 +671,7 @@ Town
   TOWNWALK in_solid 0/6965 raid 0/3867 PASS; _delve_test ENDED 4 survivors, 0 script errors.
 
 
-## Cycle 63 - D2's laptop half: monster bars, spells below (laptop, 2026-11-11)
+## Cycle 67 - D2's laptop half: monster bars, spells below (laptop, 2026-11-11)
 - Merged origin/main (desktop D2 spells); PROGRESS.md append conflict resolved keeping both.
 - monster.gd: _local_bounds() and the _height() fallback skip HealthBar3D. Delve placed each bar at
   _height() + 0.25 and _height() measured the bar - it climbed every frame (D2's cause, in the dungeon).
@@ -694,7 +694,7 @@ Town
   spells and the scar misfire rule - D2's fire/frost match it; the other D2 spells come from the plan's list.
 
 
-## Cycle 64 - D3: buildings that level up (desktop, 2026-11-11)
+## Cycle 68 - D3: buildings that level up (desktop, 2026-11-11)
 - Lore: the town ladder is the original sim.gd's six levels (a hamlet, a village, a market town, a walled town,
   a free city, the seat of the valley) - six, so the renders are levels 1, 3, 5 and 6 (the plan said 7).
   "A walled town" is level 4, so that is where the stone wall comes; below it the wall is a timber palisade.
@@ -729,7 +729,7 @@ Town
   in_solid 5/6482 (0.077%) raid 0/4102 PASS, _delve_test ran with 0 script errors.
 
 
-## Cycle 65 - D4: more guards and the mounted watch (desktop, 2026-11-11)
+## Cycle 69 - D4: more guards and the mounted watch (desktop, 2026-11-11)
 - Lore: the original town.gd _chief_spends grows the standing garrison with the danger ("3 + raids/2" guards,
   each "%s is sworn into the watch."). Bellmire HD grows it with the town level instead. Horsemen are the plan's
   ask (town guards only); named "the mounted watch". (D3's box in WORK_PLAN was left unticked last run - ticked.)
@@ -763,7 +763,7 @@ Town
 
 
 
-## Cycle 64 - L7, the soak with the new content (laptop, 2026-11-11)
+## Cycle 70 - L7, the soak with the new content (laptop, 2026-11-11)
 - tools/_soak_l7.gd (new, from _soak.gd): six fake viewers on the new callings and peoples - dwarf paladin,
   scarkin necromancer, halfling monk, elf druid, orc warlock, human bard - forging their own kinds (spear,
   wand, wraps, staff, staff, sword); also counts finds, uniques, lords and enrages. Window, director on, 4x.
@@ -780,7 +780,7 @@ Town
 - L6 stays open: no new CC0 character bodies are reachable from here (see WORK_PLAN).
 
 
-## Cycle 65 - L6, new character bodies (laptop, 2026-11-11)
+## Cycle 71 - L6, new character bodies (laptop, 2026-11-11)
 - Mr. E asked for the pack to be fetched: KayKit Adventurers 2.0 FREE (CC0, licence checked) from Kay's own itch.io
   page through its free-download flow, 13 MB; kept Characters + the Rig_Medium animations + the licence in
   assets/characters/kaykit_adv2 (SOURCE.txt records where it came from).
@@ -799,7 +799,7 @@ Town
   D2_DELVE OK.
 
 
-## Cycle 66 - D5, more animals (desktop, 2026-11-12)
+## Cycle 72 - D5, more animals (desktop, 2026-11-12)
 - No CC0 hen or cat in the packs we hold (lore has none either: one "named livestock" note), so scripts/animal.gd
   (.bak_d5) builds them from shapes: "proc:hen" (4 feather colours, comb, beak, legs that step, pecks when idle)
   and "proc:cat" (5 coats, ears, green eyes, swaying tail, settles low and naps 8-30 s). Animal.kind / .edge added.
@@ -820,7 +820,7 @@ Town
 - Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 1039, TWITCH_PARSE OK, TOWNWALK
   PASS (0.098%, raid 0%), _delve_test ran with 0 script errors.
 
-## Cycle 66 - L8, wild magic below (laptop, 2026-11-11)
+## Cycle 73 - L8, wild magic below (laptop, 2026-11-11)
 - Merged origin/main (desktop D3; Mr. E's DnD RULE, L8, L9). WORK_PLAN conflict: kept L6 ticked (done in
   Cycle 65 - the pack is in assets/characters/kaykit_adv2) and the new L8/L9. A --headless --import was needed
   for the desktop's new Cavalry class before the parse check was clean.
@@ -844,7 +844,7 @@ Town
   TWITCH_PARSE OK, L4 OK.
 
 
-## Cycle 67 - L9, the roll audit, dungeon side (laptop, 2026-11-11)
+## Cycle 74 - L9, the roll audit, dungeon side (laptop, 2026-11-11)
 Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll on the hero's real numbers.
 - Damage dice: each weapon tier has dice (bare 1d4, plain 1d6, fine 1d8, runed 1d10, dragontooth 1d12,
   scarforged 2d8; Roster/Gear WEAPONS "dice"). A blow = the dice + the ability mod + a flat part that keeps the
@@ -878,7 +878,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   L5, L8 OK. (The town side - fishing, the town's work - is the desktop's part of the rule.)
 
 
-## Cycle 68 - monsters walk and swing again (laptop, 2026-11-11, urgent from the live stream)
+## Cycle 75 - monsters walk and swing again (laptop, 2026-11-11, urgent from the live stream)
 - Mr. E saw it live: creatures and lords glided along the floor and never swung. tools/_mon_anims.gd (new) spawns
   every def - all 21 creatures, the eight lords, the five uniques - and reports model, AnimationPlayer, its list,
   and which of idle/walk/run/attack/cast/hit/die/rise exist. Every def HAD its names (34 of 34 idle+walk+attack).
@@ -904,7 +904,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Mr. E's other note (the sage's scar check on WIS) was already done in Cycle 67.
 
 
-## Cycle 69 - D6, Bellmire's named people (desktop, 2026-11-11)
+## Cycle 76 - D6, Bellmire's named people (desktop, 2026-11-11)
 - Lore first (reference town.gd ROSTER + FIRST/LAST): the old valley already had the chief in his hall, the smith,
   the chapel healer, the innkeeper. Those bodies are PROMOTED (same role and work door, so the economy counts them as
   before - no doubles); the crier and priest already on the square/chapel steps too. New, named in the same voice:
@@ -934,7 +934,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   priest_chapel_steps, healer_rounds, drunk_at_night) - looked at: tags readable, smith at his forge, the square's
   four apart (first pass: two shots inside walls and the stack - fixed).
 
-## Cycle 69 - L11, traps that visibly work (laptop, 2026-11-11)
+## Cycle 77 - L11, traps that visibly work (laptop, 2026-11-11)
 - Merged origin/main (desktop D4/D5; LAPTOP list 3; the UI files are the laptop's now). Import pass, parse clean.
 - Mr. E: traps "don't show functioning or doing damage". They looped their animation forever whoever was near.
   Now every trap is armed until something steps on it and carries meta "fire" (its trigger). dungeon_parts.gd:
@@ -957,7 +957,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   L9_TEST OK.
 
 
-## Cycle 70 - L12, potions and states (laptop, 2026-11-11)
+## Cycle 78 - L12, potions and states (laptop, 2026-11-11)
 - data/potions.json (one source): 12 brews in Bellmire's voice - Draught of Mending 2d4+2, Greater 4d4+4, Superior
   8d4+8, Supreme 10d4+20 (the 5e tiers), Bitterleaf Tincture (antidote), Emberward / Hearthwarm (resist fire /
   frost), Quickwater (haste), Ogre's Draught (giant strength), Shadowcloak (invisibility), Bravecup (heroism),
@@ -987,14 +987,14 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 422, TWITCH_PARSE OK, L3, L9, L11 OK.
 
 
-## Cycle 70b - L11 test fix (laptop, 2026-11-11)
+## Cycle 79b - L11 test fix (laptop, 2026-11-11)
 - Mr. E: tools/_l11_test.gd spammed "Condition !is_inside_tree() is true" (get_global_transform). The test's save
   and disarm loops hand Delve trap nodes that are never added to the tree, and _spring read their position for the
   sound, _float_text the body's. Delve now plays the trap sound and floats text only for nodes in the tree (a real
   floor's traps and delvers always are). _l11_test: L11_TEST OK with 0 errors / 0 "Condition" lines.
 
 
-## Cycle 71 - L13, more equipment and cosmetics (laptop, 2026-11-11)
+## Cycle 80 - L13, more equipment and cosmetics (laptop, 2026-11-11)
 - data/items.json (one source). Accessories, a small 5e bonus each, named in the valley's voice: Ring of the Night
   Watch (+1 AC), Ferryman's Ring (+1 saves), Hearthstone Amulet (+12 hp), Lamplighter's Amulet (+1 saves), Guild
   Cloak (+1 AC), Mire-walker's Cloak (+1 saves), Boots of the West Road (+0.6 speed), Soft Boots (+1 to hit),
@@ -1019,7 +1019,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 441, TWITCH_PARSE OK, L3, L5, L12 OK.
 
 
-## Cycle 72 - L14, the command list from one source (laptop, 2026-11-11)
+## Cycle 81 - L14, the command list from one source (laptop, 2026-11-11)
 - data/commands.json: every chat command - name, aliases, arguments, list cost, what it does (and a short stream
   line for the long ones), an example, whether it needs a hero - plus the cooldowns and the order.
 - ChatCmd reads it: aliases resolve from the data (new: !stats / !sheet for !hero, !commands / !valley for !help);
@@ -1034,7 +1034,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, TWITCH_PARSE OK, L3, L13 OK.
 
 
-## Cycle 73 - D6b, the nav snap and the long door legs (desktop, 2026-11-11)
+## Cycle 82 - D6b, the nav snap and the long door legs (desktop, 2026-11-11)
 - Cause: the server's map reports iteration id > 0 about 40 frames before the town's region is in it; in that window
   map_get_closest_point answers (0,0,0) for everything (420 of 600 probes at the origin in the first second).
 - TownNav.synced(): the region is in the map AND one of the mesh's own vertices (one well away from the origin) snaps
@@ -1051,7 +1051,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _townwalk in_solid 0/7923 and 0/8317 PASS, _offfloor 0 of 1120, TWITCH_PARSE OK, _delve_test
   runs (0 script errors), D4_TEST OK, D6_TEST OK.
 
-## Cycle 74 - L15, stream readability (laptop, 2026-11-11)
+## Cycle 83 - L15, stream readability (laptop, 2026-11-11)
 - scripts/ui_theme.gd (new, UiTheme): sizes are written for 1920x1080 and follow the window height; F11 cycles a
   UI scale of 100 / 125 / 150% (a Chronicle line says which); panels watch it and restyle.
 - At 1080p, 100%: Chronicle lines 28 px (title 24, the lord's card 46 / 28), 5 lines, wider (760), darker ink on
@@ -1072,7 +1072,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L12 OK, BOSS_TEST OK.
 
 
-## Cycle 75 - L16, one theme for every panel (laptop, 2026-11-11)
+## Cycle 84 - L16, one theme for every panel (laptop, 2026-11-11)
 - UiTheme now carries the house style: parchment (0.93, 0.86, 0.69) with an inked edge, ink / soft ink / red-brown
   ink text, the JestSayin teal as the one accent (a teal diamond before every title and a teal rule under it, the
   chat box's focus edge), viewers' names in deep gold and the town's band in slate, inked HP bars (green / amber /
@@ -1091,7 +1091,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   ENDED all home, _offfloor 0 of 431, TWITCH_PARSE OK, L15 OK, BOSS_TEST OK.
 
 
-## Cycle 75b - L16 phone test fixes (laptop, 2026-11-11, Mr. E)
+## Cycle 85b - L16 phone test fixes (laptop, 2026-11-11, Mr. E)
 - Phone test on the themed UI: tools/_l16_phone.gd (new; --resolution 1920x1080) - the market square, four heroes
   with cosmetic titles, the crier calling - saved at 1080p and shrunk to 854x480, LOOKED at, then F9.
 - 1. Titles: shown only on the selected hero (the director's focus selects too); F9 shows every hero's. A shown
@@ -1105,7 +1105,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Also: the hero unit frame moved bottom-right (it sat on the Chronicle in the phone frame).
 - Checks: L13, L15, L16 OK, TWITCH_PARSE OK.
 
-## Cycle 76 - D7, far-away LOD, the street cap, and the hitch found (desktop, 2026-11-11)
+## Cycle 86 - D7, far-away LOD, the street cap, and the hitch found (desktop, 2026-11-11)
 - tools/_d7_hitch.gd (new): the real town windowed, director on, 4x, six fake viewers, every frame over 250 ms
   printed with what changed. 41 hitches of 350-810 ms in 6 minutes, every one on a dungeon floor change (+700 to
   +1180 nodes) of the viewers' delve or the town band's. Timed alone (HITCH_BENCH=1): DungeonHD.build 580-820 ms
@@ -1127,23 +1127,23 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   100.9 / 127.3 / 96.7 / 124.7 FPS -> LOD on 126.0 vs off 98.8 (+28%). Looked at renders/cycles/20261112_d7: the
   town and the square read normally, nothing popping.
 
-## Cycle 77a - L19 in progress: barks as speech bubbles (laptop, 2026-11-11)
+## Cycle 87a - L19 in progress: barks as speech bubbles (laptop, 2026-11-11)
 - Hero barks ("Count the flasks.", "Bottoms up.") now show as the same parchment speech plate as the crier's in town (UiTheme.style_bubble / fit_plate), over the delver's head for 3 s, instead of floating words that piled up with the state words.
 - The state word on a new status (e.g. "frightened") no longer floats; states show in the party frames and under each hero.
 - Looked at: renders/cycles/20261111_l19/pale_duchess_fight_2.png (bubble readable, no pile-up).
 - L16 (Cycles 74, 74b) is committed and pushed (8d9c295).
 
-## Cycle 77 - L19, more lore (laptop, 2026-11-11) - done
+## Cycle 88 - L19, more lore (laptop, 2026-11-11) - done
 - data/lore_lines.json: origin tells (one per delve, first floor only), lord and unique intros, hero barks (enter, lord, trap, hurt, drink, misfire), varied descend/cleared/misfire Chronicle lines, epitaphs on the fallen (!memorial reads them), forge words per tier, town-level lines offered to the desktop. All in the original's voice (the Chief's Hall inscription, the architect's toys, the bell with no clapper, the scar); no line states a floor count (tested).
 - Barks are parchment speech bubbles (Cycle 75a); _hero_hit no longer touches a body that has left the tree.
 - Tests: _l19_test (checks + FEED: tell on the first floor only, Grubmother intro), _l12_test OK, _delve_test, _offfloor, _twitch_parse OK.
 - For the desktop: "Lambda capture at index 0 was freed" (1-3 per delve test, also before L19) comes from spells.gd timers/tweens firing after a floor is freed (chain hops, _fly callbacks capture root).
 
-## Cycle 76a - L17 started, then frozen (laptop, 2026-11-11, Mr. E: "freeze")
+## Cycle 89a - L17 started, then frozen (laptop, 2026-11-11, Mr. E: "freeze")
 - scripts/spotlight.gd (new, class Spotlight): the three lanes (bits / subs / points) with queues, free !look into the points lane only when it is empty, the layout (off / director + one pane / 2x2 with a wide town view in an empty lane), SubViewport panes at half resolution following the hero into the scar, lane-coloured frames, name + reason chips, timer bars, F10 label hook (set_labels). API: Spotlight.spotlight(town, uid, lane, seconds, reason).
 - ChatCmd has a `spot` Callable for it. NOT YET: the !look / !testbits / !testsub / !testpoints verbs, the RtsCamera / AutoDirector wiring (creation, F10), commands.json + COMMANDS.md, the test and the render tool. Untested; parses clean.
 
-## Cycle 76 - L17, the spotlight lanes (laptop, 2026-11-11) - done
+## Cycle 90 - L17, the spotlight lanes (laptop, 2026-11-11) - done
 - Read the frozen spotlight.gd and kept it, but it did not work as written: with two lanes open, a third never showed (the layout key was just "grid", so the relayout returned early). The key now names the busy lanes.
 - Wired: RtsCamera makes the Spotlight (Spotlight.of(town)). ChatCmd: !look (aliases !spotlight / !watch; 10 s in the points lane, only when it is empty and nobody is queued) and the test-only !testbits <n> [name] / !testsub [name] / !testpoints [name], which only work from local_* ids (the chat box), never from Twitch. commands.json and docs/COMMANDS.md list !look; the _l14_test exempts the !test* verbs.
 - F10: the director already used F10 to hide the stream UI and swallowed the key, so the pane chips now hide with the rest of the UI (auto_director.gd). The key strip says so.
@@ -1154,7 +1154,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Tests: parse 0 errors, _l17_test (22 checks) OK, _l14 / _l16 OK, _l19 clean, _twitch_parse OK, _delve_test clean to floor 3.
 - For the desktop: (a) town.spotlight(uid, lane, secs, why) - a one-line wrapper in town.gd: `return Spotlight.spotlight(self, uid, lane, secs, why)` (T1's EventSub calls it). (b) The townsfolk name tags (townsfolk.gd) read a bit large in the close panes; they could follow the same disable_3d rule.
 
-## Cycle 77 - L18, free chat in the main view (laptop, 2026-11-11) - done
+## Cycle 91 - L18, free chat in the main view (laptop, 2026-11-11) - done
 - ChatCmd.last_cmd / since_cmd(uid): when each viewer last used a command.
 - AutoDirector: the director's hero shot goes to the freshest chatter in town (a command in the last 2 min; priority 36-50 by freshness). That ranks above a random hero (30-35) and below raids, fights and lords. After 2 quiet minutes it picks any hero again.
 - "Now watching: Bree the Elf Mage": a house chip at top centre while the director holds on a viewer's hero (in town or below). It is on the eye's UI layer, so F10 hides it, and it hides while you hold the camera or the spotlight grid is up. Follows F11.
@@ -1164,7 +1164,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Looked at: renders/cycles/20261111_l18/now_watching_1080.png and _phone480.png. The chip, the glow and the Chronicle read on the phone frame.
 - Tests: parse 0 errors, _l18_test OK, _l17 / _l14 / _l15 / _l16 OK, _twitch_parse OK, _delve_test clean to floor 3.
 
-## Cycle 78 - D9, the roll audit, town side (desktop, 2026-11-12)
+## Cycle 92 - D9, the roll audit, town side (desktop, 2026-11-12)
 - scripts/dice.gd (new, class_name Dice): d20 (adv/disadv), roll(n, sides), damage(dice, bonus, crit = dice twice,
   never under 1), mean, check(bonus, dc) - a 20 always succeeds, a 1 always fails. Global RNG (tests seed it).
 - WHAT CHANGED (flat number / flat chance -> roll):
@@ -1198,7 +1198,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _offfloor 0 of 1063 (monsters 0 of 231), TWITCH_PARSE OK, _townwalk PASS (in_solid
   1/8099, raid 0/6520; stuck_on_route 1-3 = D14), _delve_test ENDED all four home, 0 SCRIPT ERROR.
 
-## Cycle 79 - D12, the valley beyond the walls (desktop, 2026-11-12)
+## Cycle 93 - D12, the valley beyond the walls (desktop, 2026-11-12)
 - scripts/valley.gd (new, class_name Valley), built in town._build after the farms and BEFORE the navmesh bake. From the
   original game (read only): "Outlying farmsteads: a cottage and a well where a highway leaves the wall", woods "belong
   OUTSIDE the wall", the lumbermill "against the treeline"; names from the lore's own surnames (Coalfoot, Bramble,
@@ -1231,7 +1231,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   stuck_on_route 1-3 = D14), _delve_test ran 150 s with 0 SCRIPT ERROR (two "Lambda capture freed" engine errors in the
   delve, laptop side, not new here). Laptop files untouched.
 
-## Cycle 80 - D14, walkers pinned on props (desktop, 2026-11-12)
+## Cycle 94 - D14, walkers pinned on props (desktop, 2026-11-12)
 - Cause (scripts/townsfolk.gd): a walker stepping into a prop (a stool, a bench, a fence end, a stall corner) was pushed
   back by town.keep_walkable to nearly where it stood, but the push-out plus the step still counted as "the feet
   moved", so the 1.2 s give-up never fired and it stood there all stream. Some were in a pocket off the navmesh (the
@@ -1253,7 +1253,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _offfloor 0 of 983 (MON_INPROP 0), TWITCH_PARSE OK, _townwalk PASS (in_solid
   0/8365, raid 0/4237, stuck_on_route 0-1), _delve_test 150 s with 0 SCRIPT ERROR.
 
-## Cycle 81 - D8, the 30-minute soak (desktop, 2026-11-12)
+## Cycle 95 - D8, the 30-minute soak (desktop, 2026-11-12)
 - tools/_soak.gd (SOAK_OUT env for the frame folder): 30 min in a real window, RtsCamera + director on, 4x, six fake
   viewers enlisting, delving, fishing, forging, rerolling (fake chat feed, nothing posted).
   Result: FPS avg 139.2, min 29 (the minutes with a 0.7-1.3 s proc spike = a dungeon floor built in one frame, the D7
@@ -1284,7 +1284,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _offfloor 0 of 1054 (MON_INPROP 0 of 214), TWITCH_PARSE OK, _townwalk PASS (in_solid
   0/8702, raid 0/3350, stuck_on_route 0-1), _delve_test ENDED all four home, 0 SCRIPT ERROR. Laptop files untouched.
 
-## Cycle 82 - T1, Twitch phase 2: EventSub, token refresh, rewards by id, chat replies (desktop, 2026-11-12)
+## Cycle 96 - T1, Twitch phase 2: EventSub, token refresh, rewards by id, chat replies (desktop, 2026-11-12)
 - scripts/twitch_eventsub.gd (new, class TwitchEventSub), added by town.gd beside TwitchChat in play only (not under
   --script tools); [twitch] eventsub=false in user://twitch.cfg turns it off. Reads client id / ids from the gitignored
   res://local/twitch.cfg (then user://twitch.cfg); tokens from user://twitch_token.json and twitch_bot_token.json.
@@ -1318,7 +1318,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _offfloor 0 of 1162 (MON_INPROP 0 of 282), TWITCH_PARSE OK, _townwalk PASS (in_solid
   0/8559, raid 0/5315), _delve_test 150 s 0 SCRIPT ERROR. Laptop files untouched (chatcmd.gd not edited).
 
-## Cycle 83 - L20, director camera clearance (laptop, 2026-11-11) - done
+## Cycle 97 - L20, director camera clearance (laptop, 2026-11-11) - done
 - First, measured (no code changed, on an origin/main checkout): i7-9750H 6c/12t, 32 GB, RTX 2060 Laptop 6 GB, on mains. _d7_fps: LOD on 35.0 fps, off 27.2 (215 people). A 10-minute hold: 40 fps in minute 1, 29 in minute 10, 1% low 14, a 1.8-3.2 s freeze in every minute from minute 3 (the D7 freeze, longer than noted). GPU 64-66 C at a steady 1.2-1.4 GHz, 35-55% busy, never thermal-throttled; CPU at a steady ~4.05 GHz turbo, main-thread bound. Thermally fit for 24/7; not playable 24/7 until D7's freeze and script cost are fixed.
 - The D13 frame was _d6b_shot.gd's own fixed camera (supervisor agreed; D13 moved here as L20).
 - The rule (rts_camera.gd), for EVERY shot - tour, town wide, hero, fight, raid: six lines into the lower half of the picture plus the line to the subject. Anything solid along the first 80% of a lower-frame line, up to 40 m from the camera, makes the eye move like a cameraman: tilt a little, swing round the subject (35 or 70 deg), both, and only then look steeply down (clear_shot). It searches 5 times a second, eases in fast and home slowly, and never glides through a roof to get there. Underground only the line to the hero counts (the maze walls are the floor).
@@ -1330,7 +1330,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Found for the L17 re-check: in the grid the boss bar straddles the director and bits panes, and a monster's floating Label3D shows huge in a close pane.
 - Tests: parse 0 errors (after an --import for main's new Dice class), _l20_test OK x3, _l17 / _l18 / _l14 / _l16 OK, _twitch_parse OK, _delve_test clean to floor 3.
 
-## Cycle 84 - chat: sharing the channel with fightoverlay (laptop, 2026-11-11) - done
+## Cycle 98 - chat: sharing the channel with fightoverlay (laptop, 2026-11-11) - done
 - data/commands.json gains a "foreign" block: fightoverlay's full command list, its v prefix (and its v commands by name), and the chat bots' !discord / !so. A new overlay command is a data edit.
 - ChatCmd.foreign(word): one of theirs, starts with one of their prefixes, or a near miss of one of theirs. Bellmire never answers these and never nudges them (!hug, !hugg, !vstat, !vhelp, !fightt: silent). A near miss of a Bellmire command still gets its nudge (!hro -> !hero, !fsh -> !fish).
 - !valley dropped (the !help alias started with v, and viewers are learning "v means the overlay"); !help and !commands cover it. docs/COMMANDS.md regenerated.
@@ -1338,7 +1338,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Tests: _l14_test gains the silence, nudge and clash checks - L14_TEST OK; _l17 / _l18 OK, _twitch_parse OK, parse 0 errors.
 - T1 not started (Mr. E may give it to the desktop). The opt-out command (Mr. E's point 5) is not built yet.
 
-## Cycle 85 - L21, the interface over the spotlight panes (laptop, 2026-11-12) - done
+## Cycle 99 - L21, the interface over the spotlight panes (laptop, 2026-11-12) - done
 - The problem (renders/cycles/20261112_l21/before_*): the HUD was laid out for one full-screen view with the L17 grid slid under it. Boss card dead centre across all four seams, the Chronicle on ~40% of the subs pane, the clock on the bits pane, floating numbers and state words in every pane (sized for the director's far camera, so huge in a close pane), townsfolk / monster / hero names in mush in the market panes.
 - THE RULE, in code: with more than one view up, every drawn HUD control is inside ONE pane (that pane's overlay) or inside the chrome bar. scripts/hud_dock.gd (new, class HudDock) holds the geometry and the placing.
   - Panes cover the top 85% only (Spotlight). The bottom 15% is the chrome bar: the Chronicle full width (one line an entry, 2-3 lines at the L15 28 px, a lord's card at its left), the clock chip at its right end (the local chat box takes that end while Mr. E types).
@@ -1355,7 +1355,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Tests: parse 0 errors, L21_TEST OK, L14 / L15 / L16 / L17 / L18 / L20 OK, BOSS_TEST OK, TWITCH_PARSE OK, _delve_test clean to floor 3.
 - Next (in WORK_PLAN): L22 panes that look the same when two spotlit heroes stand close; L23 the director cutting away from a hero a lane already holds.
 
-## Cycle 86 - L21 fixed for the merge with main (laptop, 2026-11-12) - done
+## Cycle 100 - L21 fixed for the merge with main (laptop, 2026-11-12) - done
 - The supervisor's merge with main (8eeda31) failed _l21_test 8 of 32. Reproduced: it was NOT main's code - with main merged the test passed windowed (32/32) and failed with exactly the supervisor's numbers HEADLESS. Headless Godot gives a 100x100 window (the town later sets 64x64); the panes and the HUD were laid out on that, so the Chronicle at (3,57) 289x70 and the boss card at (-150,6) were real, just squeezed. The "lord card" in that rect is the Chronicle itself (its bar mode puts the lord's name card at its left) - main added no panel (D8 only changed timers in notables / town / townsfolk). The holes were the test's: no fixed screen, and lookups that could be fooled.
 - The test now holds a 1920x1080 screen headless (every frame - the town resets it) and FAILS on any screen under 1280x720 instead of judging it. Windowed keeps --resolution.
 - DEFAULT-DENY, in code (HudDock.mark / region_of / guard): every HUD control is given a home - a pane, "chrome", or "none" (hides while split) - and inherits its nearest marked ancestor's. While the panes are up, guard() hides any visible top-level HUD control with no home (a panel either machine adds later), warns once, and shows it again at full screen. The test fails a drawn control with no home, one outside the home it was given (sitting in some pane by luck is not enough), and any panel the guard had to hide. Homes given: Chronicle chrome; clock + chat box chrome; boss card / party columns / unit frame their pane (set as they dock); key help, Guild Roll, "Now watching" none; each spotlight pane box its pane.
@@ -1366,28 +1366,26 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - L22 (close heroes) was stopped part-way, on the supervisor's word; its uncommitted camera change is in a local git stash ("L22 WIP"). Its test (9d72739) is pushed and still fails on purpose.
 - Tests (origin/main merged): parse 0 errors, L21_TEST OK 46/46 (headless + windowed), L14 / L15 / L16 / L17 / L18 OK, BOSS_TEST OK, TWITCH_PARSE OK. L20_TEST: 1 timing check is FLAKY on the valley tour shot - its worst clearance search measured 2.5 / 5.2 / 9.9 ms in three runs against a 5 ms limit (2.9 ms in Cycle 79, before D12 put the valley's trees and steadings into view). Not touched by L21; left as is and flagged rather than loosening the limit here.
 
-<<<<<<< HEAD
-## Cycle 83 - L24 (main's number; commit says L23), _l20_test made deterministic (laptop, 2026-11-12) - done
+## Cycle 101 - L24 (main's number; commit says L23), _l20_test made deterministic (laptop, 2026-11-12) - done
 - The flake (supervisor, on the merge run): "the director never cut to fight" / "all six shot types were seen", then a pass on re-run. The fight shot started a floor-2 delve and waited up to 3000 frames for the party to happen on monsters AND for the director's 1 s tick and hold timers to cut there. The raid shot waited the same way. The search-cost check took ONE timing sample, so a busy laptop could read a 2.5 ms search as 9.9 ms.
 - Now: the fight shot is a LORD floor (5) - its lord rises as the party arrives, every run - with the world at 4x only while waiting (1x for the measured shot). Raid and fight both go through _decide(): once the story is really happening (raiders on the road / the lord fighting), the director decides at once - its own _best() through its own _cut(), so still the director's choice, not a fixed camera. The lord outranks a leftover raid (100 vs 95), so the pick is deterministic. Each timing sample is the fastest of 3 runs of the search (its own cost, not a time the OS took the thread away); the 4 ms limit is unchanged.
 - Three runs in a row: L20_TEST OK x3; the fight shot was the lord each time; valley search 2.34 / 2.37 / 2.40 ms.
 - Note: main's TwitchEventSub class needed a one-time --import on this checkout (the import itself hangs after writing the class cache; killed after 240 s). Until then the town did not load and any test fails with "TwitchEventSub not declared".
 
-## Cycle 84 - L22, lane panes differ when spotlit heroes stand close (laptop, 2026-11-12) - done
+## Cycle 102 - L22, lane panes differ when spotlit heroes stand close (laptop, 2026-11-12) - done
 - The problem: every lane camera sat at the same offset behind its hero, so two spotlit heroes standing together gave two panes of one picture (and the same again as the director's when it followed one of them). renders/cycles/20261112_l22/before_close_*.
 - Spotlight._offset_lane: when another open pane's subject (another lane's hero, or the director's focus) is within 6 m of a lane's hero, that lane takes its own quarter of the group, measured from the director's camera - bits 90 deg round and closer in (x0.85), subs -90 deg at about the usual distance (x1.05), points straight opposite and further out (x1.32) - so no lane looks the director's way and no two lanes look the same way. Released past 9 m (no flicker at the edge); each change is a cut, not a swoop through the group.
 - Found on the way: the L20 clearance swing (up to 70 deg) rotated a lane straight into its neighbour's quarter (two lanes 24 deg apart). While a lane is spread round a group its clearance may only TILT it, never swing it.
 - tools/_l22_test.gd: three viewers pinned within 2 m in the market, all three lanes open, the director on one of them. Before: 5 of 7 close-heroes checks failed (two lanes 0 deg from the director, the others 35 deg apart, all at ~12 m). After: every pair of the four views 84-177 deg apart, zooms 10.4 / 12.7 / 15.9 m; heroes moved 30 m apart -> the lanes go back behind their heroes. L22_TEST OK.
 - Looked at: renders/cycles/20261112_l22/close_phone480.png - three different pictures of the same corner of the market, each lane's name on its hero.
 
-## Cycle 85 - L23 (main's number; commit says L24), the director cuts away from a hero a lane holds (laptop, 2026-11-12) - done
+## Cycle 103 - L23 (main's number; commit says L24), the director cuts away from a hero a lane holds (laptop, 2026-11-12) - done
 - The problem: the director could follow the very hero a spotlight lane already showed (often: a viewer who cheers is also the freshest chatter, the director's favourite pick since L18), so the split showed one thing twice.
 - AutoDirector.lane_held(): the bodies the open lanes follow. In _best(): a candidate on a lane-held hero is skipped (the freshest chatter and the random hero pass over them); a fight or delve shot is seen through the first delver no lane holds. In the tick: if the shot being held becomes lane-held, cut now to the best other story. A lord or a raid is followed by its own node, never a hero, so it is never given up for this.
 - tools/_l24_test.gd (new): Ash is the freshest chatter and the director's shot; Ash is spotlit in the bits lane and keeps chatting. Without the change 5 of 6 checks fail (the director stays on Ash all 900 frames; below, the fight is shot through Ash). With it: cut away in 52 frames, 0 frames back on Ash in 15 s, the fight below shot through Bree. L24_TEST OK.
 - Numbering: main numbers this L23 and the de-flake L24; the laptop commits had them swapped. WORK_PLAN now follows main.
 - Tests (on fb0bbc1 + L22/L23/L24): parse 0 errors, L14 / L17 / L18 / L20 / L21 (46/46) / L22 / L24 OK, BOSS_TEST OK, TWITCH_PARSE OK, T1_TEST OK (the desktop's - twitch_reply unchanged).
-=======
-## Cycle 87 - W1a snapshot publisher for the viewer hub (desktop, 2026-11-12) - done
+## Cycle 104 - W1a snapshot publisher for the viewer hub (desktop, 2026-11-12) - done
 - scripts/snapshot_pub.gd (new, class_name SnapshotPublisher): every 60 s (first beat 20 s after start) upserts ONE row of
   Supabase public.snapshot (POST /rest/v1/snapshot?on_conflict=id, Prefer: resolution=merge-duplicates,return=minimal,
   User-Agent: BellmireHD/1.0). Key from user://supabase.json {url, service_key}; absent = off with one console line.
@@ -1406,9 +1404,8 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 SCRIPT ERROR / Parse Error, TWITCH_PARSE OK, OFFFLOOR 0 (MON_INPROP 0), TOWNWALK in_solid 0/8262 PASS,
   _delve_test to floor 3 0 script errors, T1_TEST OK.
 - Next: W1b (the static hub page) - reads the same row with the publishable key.
->>>>>>> origin/main
 
-## Cycle 86 - W1b, the viewer hub page (laptop, 2026-11-12) - done
+## Cycle 105 - W1b, the viewer hub page (laptop, 2026-11-12) - done
 - web/index.html (I chose web/, not docs/: docs/ is the project's own notes and plan, and a Pages site served from docs/ would publish those too). One static file - HTML, CSS and plain JS, no build step, no framework, no external fonts or scripts. Not published: no Pages setting, no gh-pages branch (Mr. E's call).
 - Reads public.snapshot with the PUBLISHABLE key (read-only by RLS). No service key anywhere in web/ (grepped). Every string from the game - viewers' Twitch names above all - is HTML-escaped before it is drawn.
 - Payload: scripts/snapshot_pub.gd v1 (read, not guessed). Shows: the town (level, souls, day, treasury, renown when any, growth toward the next level), hero sheets (search by name; a card per hero with AC / HP, tap for the sheet: the six scores with modifiers, weapon and its dice, to-hit and proficiency, armour and AC, saves, the pack, worn gear, kills / deepest floor / delves / standing / xp), the Guild Roll (the fallen on it marked), the Fallen (killer, day, epitaph when the game sends one - none yet), and the command list from data/commands.json (tap for what / cost / aliases / example). 60 heroes at a time with "Show more" (a busy night has 200+). Found on the way: the sheet's "brews" already counts the healing potions as Mending, so the page shows brews alone (it had said "1 healing potion - 1 Mending" for one flask).
@@ -1417,7 +1414,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Merged origin/main first (W1a). WORK_PLAN: L23 / L24 now use main's numbers (L23 = the director cut-away, L24 = the _l20_test de-flake; the laptop commits had them swapped).
 
 
-## Cycle 88 - S1, the town's sound wiring (desktop, 2026-11-12) - done
+## Cycle 106 - S1, the town's sound wiring (desktop, 2026-11-12) - done
 - scripts/townsfolk.gd: voice_sex() - the lore's FIRST names split female/male (Ysolde, Petra, Wren... / Bran, Cort, Harl...), else the body (KayKit Rogue bodies are women). _voice(): each person every 45-120 s at most, only out in the street, near the camera (LOD 0), never heroes (rank >= 0, S2) or bandits; town-wide one voice per 3.5 s REAL time (so 4x is no louder); laugh for children / the drunk / the bard, effort or grunt on the move, grunt / laugh / effort standing. -9 dB. The crier shouts *_attack_yell on every other cry, under the same gap.
 - scripts/spells.gd: Spells.SOUND - bolt + chain -> lightning, fire -> fireball, frost -> ice_shard, heal + renew -> heal, mend -> buff, ward -> shield, smite -> summon; every cast a soft mana_charge (-8 dB) at the hands; a scar misfire adds curse. Replaces the old glass "spell" ping. (Delve casters use Spells.cast too, so the laptop's heroes get these for free.)
 - scripts/raids.gd: Raids.cry_of(r) - goblin_screech / orc_roar / troll_roar by name, skeleton_rattle for the scar's dead (today's raiders are skeleton warrior / rogue / minion), male_attack_yell for the west road's bandits; two cries at the spawn as they arrive (the horn already plays). Blows: sword_clash when steel meets the watch or a bandit, hit_impact on the dead and on every 20; crossbow bolts land with hit_impact.
@@ -1426,3 +1423,12 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - scripts/sfx.gd: GAP only - sword_clash 0.08, hit_impact 0.08, mana_charge 0.12.
 - tools/_s1_test.gd: static (every Sfx literal in the desktop files, Spells.SOUND, the pens and the air, both sexes' voice kinds, each raider's cry) all in Sfx.SETS; live 80 s at 4x with two raids, every spell and a level-up: 33 kinds played, all registered; voices 16.5/min (13 male, 9 female); ambience 9 in 80 s. First run failed on the cap (26/min: the crier's yells skipped the gap at 4x) - gap now real-time 3.5 s and the crier shares it. S1_TEST OK.
 - Checks: parse 0 errors; _offfloor 0 of 1091 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk in_solid 0/8659, raid 0/3897 PASS; _delve_test ran, 0 SCRIPT ERROR. No render (sound item; play counts above).
+## Cycle 107 - S2, sound wiring: dungeon, heroes, chat (laptop, 2026-11-12) - done
+- Merged origin/main (00cf0ef: the RPG sound library, 86 kinds). sfx.gd touched only to ADD GAP entries for the kinds a fight and a busy chat call often (sword_swing, dagger_stab, sword_clash, hit_impact, bow_draw, arrow_shot, block, shield_bash, menu_select, error, coins_stack). Wired in laptop files only.
+- CREATURES (bestiary.gd / monster.gd): Bestiary.voice_of(def) - a creature's voice from what it is (type, body, id, name, model), most specific first, family as the fallback: skeletons / bones / sentinels / gravecallers rattle, slimes squish, bats screech, spiders skitter, the wyrms and the grave-whelp roar as dragons, imps growl as demons, puglins screech as goblins, vipers and adders hiss, frogs ribbit, wasps buzz, a giant RAT hisses (not a giant's footstep), the lost delver grunts as a man; orc / troll / ghost / wraith / zombie / minotaur / giant are mapped for when they exist. Voices on spawn and on death are QUEUED: one plays a beat (0.9 s), the frame's best claim wins - biggest, nearest the camera, a death before a spawn - and the same kind waits 3.5 s, so a floor of twelve is one voice, not twelve. A lord ROARS as it rises (where the card, the director and the spotlight cut to it), +6 dB, and the room keeps quiet under it for 1.5 s. Breath attacks play dragon_fire_breath.
+- THE FIGHT (delve.gd): each blow sounds its weapon - sword_swing, dagger_stab (rogue / duelist / daggers), bow_draw then arrow_shot (ranger); a hit adds sword_clash on bone, armour and lords or hit_impact on flesh (a crit louder); a miss is the swing alone; a shield calling now and then puts its shield in (shield_bash); a creature's miss on a shield-bearer rings off it (block). Spells: SPELL_SND (bolt / chain / smite -> lightning, fire -> fireball, frost -> ice_shard, renew / heal / mend -> heal, ward -> shield), for whatever the scar made of the cast. Potions drunk below: potion_drink. A find: chest_open.
+- VOICES (roster.gd): Roster.voice_of(h) -> "male" / "female", kept on the hero once chosen. Heroes have no sex in the data, so the KayKit body decides where it reads one way (the Rogue and hooded Rogue bodies female; Knight, Barbarian, Mage male) and a stable coin-flip on the hero decides the rest (the Ranger body). A viewer choosing (!voice) would be a small follow-up. Hurt on a hit, effort on a 20 or one swing in 8, and a delver's cries and efforts share one 2.5 s gap; death always (the death sting already ducks the music). Measured: 4-7 voices per 20-24 swings.
+- BELOW: a quiet bed - bat_screech / spider_skitter / skeleton_rattle / ghost_wail somewhere 10-18 m off in the dark every 9-22 s, at -16 dB. (Sfx.at plays on the Sfx bus; putting it on the Ambience bus would need an sfx.gd change, which S2 rules out - flagged for the desktop if wanted.)
+- CHAT (chatcmd.gd, flat Sfx.play): a typo nudge or a refusal ("- you have", "No hero", "needs") -> error; !inventory -> inventory_open; !brew -> coins_stack + potion_drink; !forge / !armoury / !wear -> coins_stack + item_pickup; !oil / !dye -> coins_stack; anything else -> menu_select. One every 0.35 s at most. A hero levelling: level_up (roster.gd).
+- tools/_s2_test.gd (new): static - every literal kind in the five files, every sound table, every hero voice and every creature's voice (34: types, lords, uniques) is a key of Sfx.SETS, and the brief's mapping holds; live - a real town and a lord-floor delve (knight, ranger, rogue, cleric): everything Sfx PLAYED is registered (27 kinds), sword / dagger / bow swings, hits, arrows, spells, sampled voices, creatures heard, the lord's roar; chat sounds for pack, typo, buys, brew. S2_TEST OK three runs in a row.
+- Tests: parse 0 errors, S2_TEST OK x3, _delve_test clean to floor 3 (0 SCRIPT ERROR), L14 / L24 / BOSS / T1 / TWITCH_PARSE OK. (main's SnapshotPublisher needed the one-time --import on this checkout.)

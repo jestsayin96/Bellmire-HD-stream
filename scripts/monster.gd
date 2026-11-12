@@ -73,6 +73,7 @@ func _ready() -> void:
     if bool(def.get("boss", false)):
         _trappings()
     _label()
+    Monster.voice(self, false)            # S2: it makes itself known (one voice a beat, the biggest / nearest)
 
 static var _ual: Array = []
 
@@ -291,6 +292,7 @@ func _gy(x: float, z: float) -> float:
 func _process(delta: float) -> void:
     _t += delta
     _tick_flash(delta)
+    Monster._voice_flush()
     if _body == null or state == S.DEAD:
         return
     _tick_wild()
@@ -381,6 +383,7 @@ func shoot(to: Vector3) -> void:
 ## a grave-whelp's breath: a short stream of pale grave-fire at the mark
 func breathe(to: Vector3) -> void:
     shots += 1
+    Sfx.at("dragon_fire_breath", global_position + Vector3(0, _height() * 0.5, 0), 3.0)    # S2
     _play("attack")
     if _ap:
         _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
@@ -586,6 +589,7 @@ func _tick_flash(delta: float) -> void:
 func die() -> void:
     state = S.DEAD
     _play("die")
+    Monster.voice(self, true)             # S2: its last sound
     if _aura:
         _aura.visible = false
     var tw := create_tween()
@@ -658,3 +662,59 @@ func _tick_tag(delta: float) -> void:
         lb.set_meta("px0", lb.pixel_size)
     var cd := cam.global_position.distance_to(lb.global_position)
     lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.6, 3.0)
+
+## ---- S2: creatures' voices (Bestiary.voice_of -> an Sfx kind). A floor spawns a dozen at
+## once and a fight kills several in a second, so voices are QUEUED and one plays a beat:
+## the frame's loudest claim wins - the biggest, the nearest the camera, a death over a
+## spawn - and then nobody speaks for VOICE_GAP, nor that same kind for KIND_GAP. A lord's
+## arrival roar goes straight through (and holds the rest off for a moment).
+const VOICE_GAP := 900               # ms between any two creature voices
+const KIND_GAP := 3500               # ms before the same kind of voice again
+static var _vq: Array = []           # [score, kind, pos, db] claims this frame
+static var _vq_frame := -1
+static var _v_any := -100000
+static var _v_kind := {}
+static var voiced := {}              # kind -> times heard (tests read it)
+
+static func voice(m: Monster, dying: bool) -> void:
+    if m == null or not m.is_inside_tree():
+        return
+    var kind := Bestiary.voice_of(m.def)
+    if kind == "":
+        return
+    var cam := m.get_viewport().get_camera_3d() if m.get_viewport() else null
+    var far := cam.global_position.distance_to(m.global_position) if cam else 30.0
+    var score := m._height() * 2.0 - far * 0.08 + (3.0 if dying else 0.0) + (10.0 if bool(m.def.get("boss", false)) else 0.0)
+    _vq.append([score, kind, m.global_position + Vector3(0, m._height() * 0.6, 0), 2.0 if dying else 0.0])
+
+static func _voice_flush() -> void:
+    var fr := Engine.get_process_frames()
+    if fr == _vq_frame:
+        return
+    _vq_frame = fr
+    if _vq.is_empty():
+        return
+    var best: Array = _vq[0]
+    for c in _vq:
+        if float(c[0]) > float(best[0]):
+            best = c
+    _vq.clear()
+    var now := Time.get_ticks_msec()
+    var kind := String(best[1])
+    if now - _v_any < VOICE_GAP or now - int(_v_kind.get(kind, -100000)) < KIND_GAP:
+        return
+    _v_any = now
+    _v_kind[kind] = now
+    voiced[kind] = int(voiced.get(kind, 0)) + 1
+    Sfx.at(kind, best[2], float(best[3]))
+
+## a lord's arrival: its voice, loud, and the room falls quiet under it for a beat
+static func roar(m: Monster) -> void:
+    var kind := Bestiary.voice_of(m.def)
+    if kind == "" or not m.is_inside_tree():
+        return
+    var now := Time.get_ticks_msec()
+    _v_any = now + 1500
+    _v_kind[kind] = now
+    voiced[kind] = int(voiced.get(kind, 0)) + 1
+    Sfx.at(kind, m.global_position + Vector3(0, m._height() * 0.6, 0), 6.0)

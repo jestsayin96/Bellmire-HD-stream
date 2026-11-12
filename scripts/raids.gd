@@ -799,6 +799,7 @@ func _stand_down(delta: float) -> void:
             st.erase("ko")
             st["hp"] = 1.0
             _say("%s comes round." % (d as Townsfolk).person_name)
+            Rig.revive((d as Townsfolk)._anim)      # D17d: up off the ground
         var post: Vector3 = st["post"]
         var gap := _flat((d as Node3D).global_position, post)
         # D8: a post a prop now stands on (or one the push-out keeps them off) was

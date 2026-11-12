@@ -25,6 +25,15 @@ static func find(n: Node) -> AnimationPlayer:
 ## idle, the saddle); a death settles into its held _Pose clip. `fallback =
 ## false` gives the old behaviour (tools/_d17a_test.gd --old).
 static var fallback := true
+## D17d: TRANSITIONS. A body that falls stays down: Rig.play of a Death_*
+## marks the player fallen, and from then on only another death or an explicit
+## Rig.revive (a knocked-out hero coming round) moves it - the gait (Rig.drive),
+## a shove that "takes steps", an idle or a flinch asked of a corpse used to
+## stand it straight back up out of its held _Pose. Turns ease (Townsfolk,
+## TURN_RATE). `smooth = false` = the before figure (tools/_d17d_test.gd --old).
+static var smooth := true
+static var dead_held := 0       # plays refused on a fallen body
+static var revived := 0
 static var misses := 0          # distinct clip names asked for and missing
 static var fell_back := 0       # plays that went to the idle instead
 static var chained := 0         # one-shots given a clip to return to
@@ -107,6 +116,8 @@ static func is_gait(nm: String) -> bool:
 static func drive(ap: AnimationPlayer, v: float, k: float, delta: float) -> void:
     if ap == null or not gait:
         return
+    if smooth and bool(ap.get_meta("rig_dead", false)):
+        return
     var cur := String(ap.current_animation)
     if not bool(ap.get_meta("rig_move", false)):
         if ap.speed_scale != 1.0 and not is_gait(cur):
@@ -156,6 +167,15 @@ static func drive(ap: AnimationPlayer, v: float, k: float, delta: float) -> void
 static func play(ap: AnimationPlayer, nm: String, blend := 0.15) -> void:
     if ap == null:
         return
+    if smooth:
+        if nm.begins_with("Death_"):
+            ap.set_meta("rig_dead", true)
+            ap.set_meta("rig_move", false)
+            if ap.speed_scale != 1.0:
+                ap.speed_scale = 1.0
+        elif bool(ap.get_meta("rig_dead", false)):
+            dead_held += 1
+            return
     if gait and loops(nm) or gait and is_gait(nm):
         # D17b: a body asking to walk/run is driven (Rig.drive); any other loop
         # (idle, a seat, a cast) stops that and plays at its own speed
@@ -200,6 +220,15 @@ static func play(ap: AnimationPlayer, nm: String, blend := 0.15) -> void:
         if nxt != "" and nxt != nm:
             ap.queue(nxt)
             chained += 1
+
+## a fallen body that really gets up (a green hero's knock-out) - back to its idle
+static func revive(ap: AnimationPlayer) -> void:
+    if ap == null:
+        return
+    if ap.has_meta("rig_dead"):
+        ap.remove_meta("rig_dead")
+        revived += 1
+    play(ap, idle_of(ap), 0.4)
 
 static func tint(n: Node, col: Color) -> void:
     var st: Array = [n]

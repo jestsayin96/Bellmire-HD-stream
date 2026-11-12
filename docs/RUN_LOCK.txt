@@ -1,1 +1,1 @@
-IDLE 2026-11-12 07:41 - D16d funneling committed (docs/RUN_LOCK.txt is the canonical lock)
+IDLE 2026-11-12 11:35 - D17d blends/transitions committed (docs/RUN_LOCK.txt is the canonical lock)

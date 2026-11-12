@@ -97,14 +97,17 @@ func _gait_step(delta: float) -> void:
     if inside or not visible:
         _gp = Vector3.INF
         _vs = 0.0
+        _yaw_shown = INF
         return
     var p := global_position
     var vel := Vector2.ZERO
+    var jump := false
     if _gp != Vector3.INF:
         vel = Vector2(p.x - _gp.x, p.z - _gp.z) / delta
         var v := vel.length()
         if v > 15.0:            # a teleport (out of a door, a raid reset)
             v = _vs
+            jump = true
         _vs = lerpf(_vs, v, minf(delta * 7.0, 1.0))
     _gp = p
     # moved along in an idle (a wagon's shove, a pair's shoulder spot, a raid
@@ -114,11 +117,39 @@ func _gait_step(delta: float) -> void:
         Rig.play(_anim, "Walking_A")
     Rig.drive(_anim, _vs, size_k, delta)
     if face_fix and _vs > 0.35 and vel.length() > 0.25 and Rig.is_gait(String(_anim.current_animation)):
-        _face = lerp_angle(_face if _face_ok else rotation.y, atan2(vel.x, vel.y), minf(delta * 9.0, 1.0))
+        # (D17d: from the yaw on screen, not one steering just snapped to)
+        var from := _face if _face_ok else (_yaw_shown if Rig.smooth and _yaw_shown != INF and not jump else rotation.y)
+        _face = lerp_angle(from, atan2(vel.x, vel.y), minf(delta * 9.0, 1.0))
         _face_ok = true
         rotation.y = _face
     else:
         _face_ok = false
+    # a walker already turns smoothly with the way it goes (face_fix)
+    _ease_turn(delta, jump or _face_ok)
+
+## D17d: TURNS EASE. Steering sets rotation.y outright - a raid's step faces
+## the foe, a new leg of a route, a seat, a post - up to an about-face in one
+## frame. The body now swings round toward whatever was set at TURN_RATE; a
+## teleport (out of a door) still snaps, and a walker's heading is face_fix's.
+const TURN_RATE := 9.5          # rad/s, ~540 deg/s: an about-face in a third of a second
+var _yaw_shown := INF
+var _yaw_goal := 0.0
+var _yaw_set := 0.0             # what was last written here; anything else is a new heading
+
+func _ease_turn(delta: float, jump: bool) -> void:
+    if not Rig.smooth:
+        return
+    var r := rotation.y
+    if _yaw_shown == INF or jump:
+        _yaw_shown = r
+        _yaw_goal = r
+        _yaw_set = r
+        return
+    if absf(angle_difference(r, _yaw_set)) > 0.0005:
+        _yaw_goal = r
+    _yaw_shown = rotate_toward(_yaw_shown, _yaw_goal, TURN_RATE * delta)
+    rotation.y = _yaw_shown
+    _yaw_set = _yaw_shown
 
 var _face := 0.0
 var _face_ok := false

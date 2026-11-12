@@ -109,7 +109,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (Cycle 62): human, elf, dwarf, halfling, orc + the scarkin; bonuses, traits, proportions, skin, parts; L5_TEST OK.
 - [x] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
 - [x] L8. (Mr. E's decision, Nov 11) Wild magic below: every spell in the dungeon is a check against the scar - d20 + casting mod (INT mage/sage/necromancer, WIS cleric/druid/monk, CHA warlock/bard/paladin) + proficiency vs DC 10 + floor/2 (cap 20); fail = misfire as on the scar's surface (Spells.cast in_scar=true); nat 1 always, nat 20 never. Monsters unaffected. Test the misfire rates (strong vs weak caster, shallow vs deep).
-- [ ] L10. (URGENT, do before L9 - Mr. E saw it live) Monsters and bosses have NO animations: they glide/"fly"
+- [x] L10. (DONE Nov 11, be7c9a9: idle no longer overrides walk/attack; MON_ANIMS OK; 0 monsters in props) (URGENT, do before L9 - Mr. E saw it live) Monsters and bosses have NO animations: they glide/"fly"
       along the ground, never swing, and get stuck in walls and props. 1) Write tools/_mon_anims.gd: for EVERY
       bestiary def (incl. lords, uniques, L1 creatures) spawn it and print its model, whether an AnimationPlayer
       was found, the animation list, and which of def.anims (idle/walk/run/attack/cast/hit/die/rise) actually

@@ -318,6 +318,12 @@ func _ready() -> void:
         es.name = "TwitchEventSub"
         add_child(es)
         es.call_deferred("setup", self)
+        # W1a: the viewer hub's snapshot - one Supabase row every 60 s (key in
+        # user://supabase.json; no key = off, quietly)
+        var snap := SnapshotPublisher.new()
+        snap.name = "SnapshotPublisher"
+        add_child(snap)
+        snap.call_deferred("setup", self)
         var board := LeaderboardPanel.new()
         add_child(board)
         board.call_deferred("setup", roster)

@@ -274,7 +274,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       that fails at random teaches everyone to ignore it, which is worse than no test.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
-- [ ] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
+- [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
       data (Nov 12, free tier, project already created and the table already exists). Every 60 s the
       game upserts ONE row into the Supabase table public.snapshot: id=1, payload = a jsonb blob with the
       guild roll, the fallen, each hero's sheet/inventory/gear, town level and souls, and the command
@@ -293,6 +293,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       triggers it; setting User-Agent: BellmireHD/1.0 fixed it instantly. If the publish ever returns
       403 with that message, set a non-browser User-Agent on the HTTPRequest rather than hunting the key.
       Upsert with POST to /rest/v1/snapshot?on_conflict=id and the header Prefer: resolution=merge-duplicates.
+      DONE cycle 87: scripts/snapshot_pub.gd (SnapshotPublisher, started by town.gd in play only) - every 60 s (first at 20 s)
+      one threaded HTTPRequest upserts id=1 {town, guild_roll (50), fallen (50), heroes = living sheets (stats, saves, AC/HP,
+      weapon+dice, armour, potions/brews, oil, gold, worn, rank, title), commands}; no Twitch ids; one in flight at most;
+      no key file = off. publish() 0.3-0.7 ms, build 0.4 ms (202 heroes 5 ms, 95 KB). W1A_TEST OK 17/17 (live upsert 200,
+      read back with the publishable key, publishable-key write refused 401); W1A_TOWN OK (real town + real save, read only:
+      level 3, 51 souls, 2 heroes, 6 fallen, 21 commands - that is the row in the table now).
 - [ ] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
       It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
         URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at

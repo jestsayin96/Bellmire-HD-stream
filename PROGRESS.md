@@ -1365,3 +1365,23 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - With origin/main merged into laptop: L21_TEST OK 46/46 headless and windowed 1920x1080. Looked at renders/cycles/20261112_l21/grid_phone480.png: boss card and party frames in the director pane (it is on the fight), the Chronicle reads in the bar, one name per lane, nothing on a seam.
 - L22 (close heroes) was stopped part-way, on the supervisor's word; its uncommitted camera change is in a local git stash ("L22 WIP"). Its test (9d72739) is pushed and still fails on purpose.
 - Tests (origin/main merged): parse 0 errors, L21_TEST OK 46/46 (headless + windowed), L14 / L15 / L16 / L17 / L18 OK, BOSS_TEST OK, TWITCH_PARSE OK. L20_TEST: 1 timing check is FLAKY on the valley tour shot - its worst clearance search measured 2.5 / 5.2 / 9.9 ms in three runs against a 5 ms limit (2.9 ms in Cycle 79, before D12 put the valley's trees and steadings into view). Not touched by L21; left as is and flagged rather than loosening the limit here.
+
+## Cycle 87 - W1a snapshot publisher for the viewer hub (desktop, 2026-11-12) - done
+- scripts/snapshot_pub.gd (new, class_name SnapshotPublisher): every 60 s (first beat 20 s after start) upserts ONE row of
+  Supabase public.snapshot (POST /rest/v1/snapshot?on_conflict=id, Prefer: resolution=merge-duplicates,return=minimal,
+  User-Agent: BellmireHD/1.0). Key from user://supabase.json {url, service_key}; absent = off with one console line.
+  HTTPRequest.use_threads, one request in flight (a beat is skipped, never queued), answer by signal, each failure kind
+  warned once. Payload v1: generated_at, town {name, level, souls, day, treasury, renown, score, next_level_at},
+  guild_roll (Roster.leaderboard standing, 50), fallen (50, with killer + epitaph), heroes (living, by standing: species,
+  class, level, xp, rank, title, AC, HP, prof, to-hit, 6 stats, saves, weapon name/dice/tier, armour, potions, brews,
+  oil, gold, worn, kills, deepest, delves), commands {order, commands} from data/commands.json. Twitch ids left out.
+- town.gd: starts it beside TwitchEventSub (play only, never under --script). docs/RUNNING.md: how to set the key.
+- tools/_w1a_test.gd: W1A_TEST OK 17/17 - off switch, blob parts, no ids, JSON round trip, 202 heroes 95 KB / 5.2 ms;
+  live: publish() 0.26 ms, second publish skipped while in flight, upsert 200, read back with the publishable key,
+  a publishable-key write refused (401).
+- tools/_w1a_town.gd: the real town + the real roster save READ ONLY (save untouched): publish 0.7 ms, worst frame
+  while in flight 13 ms (the town's own), read back level 3 "a market town", 51 souls, 2 heroes, 6 fallen, roll 8,
+  21 commands -> renders/cycles/20261112_w1a/snapshot_readback.json (looked at: sheets complete). That row is live now.
+- Checks: parse 0 SCRIPT ERROR / Parse Error, TWITCH_PARSE OK, OFFFLOOR 0 (MON_INPROP 0), TOWNWALK in_solid 0/8262 PASS,
+  _delve_test to floor 3 0 script errors, T1_TEST OK.
+- Next: W1b (the static hub page) - reads the same row with the publishable key.

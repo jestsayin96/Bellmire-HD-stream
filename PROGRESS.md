@@ -1590,3 +1590,22 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - New tools: tools/_d18b_test.gd (build invariants: counts, every valley field on gentle ground off the roads inside the navmesh, none overlapping, jetty footprint present, grazing stock added) and tools/_d18b_shot.gd (windowed shot sheet of each steading, the jetty, the ford, an aerial).
 - Build + checks: parse 0 SCRIPT ERROR / Parse Error (3 known headless material-null, unchanged). D18B_TEST OK fields=4 crops=1416 fences=133 animals=79. _offfloor 0 of 1036 (INPROP 0, MON_INPROP 0). TWITCH_PARSE OK. _townwalk in_solid 0/18452 raid 0/4831 PASS, STUCK_ON_ROUTE_TOTAL 0 over 120 s. _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party back up from floor 2.
 - Shots renders/cycles/20261112_d18b: Coalfoot + Bramble End each read lived-in (furrowed fields, fences, kitchen garden, hayricks, residents, wildflower verges, footpaths); the jetty/ford framing is loose (camera aimed uphill) but the footprint and dock structures check out; aerial of the town core. valley.gd backed up valley.gd.bak_d18b.
+
+## D-cycle (D18c ground & materials) - DONE Nov 12 (desktop scheduled run)
+- ground.gdshader: a damp muddy shore where the valley ground dips to the waterline (new uniform water_y, set from town.WATER_Y;
+  a noise-ragged smoothstep band turns albedo to wet earth and roughness 0.92 -> 0.38), so the banks slide under the river instead
+  of grass meeting water on a hard seam. Grass/dirt/road blending already lived in the shader (town-mask trodden dirt, rock/snow/scar
+  bands); the water shader keeps its scrolling normals + fresnel. Backups: ground.gdshader.bak_d18c, town.gd.bak_d18c.
+- THE 3 HEADLESS MATERIAL-NULLS (L28a's note, 'for the desktop'): bisected the town build with env-gated checkpoints to _dress_shops
+  -> _tier_rack -> the glow block. Gear.ignite sets per-surface overrides on the glowing rack weapons; economy's show_tiers then
+  drapes material_override (_cloth) over them, and that stacking throws 'Parameter "material" is null' in the dummy renderer, once
+  per draped rack mesh (axe t3/t4 share one mesh: 3 errors, not 4; reproduced in isolation - ignite alone 0, ignite+cloth errors).
+  Fix in town.gd _tier_rack only: bake the ignited material into a duplicated mesh and clear the surface override, so rack weapons
+  carry plain meshes; show_tiers' cloth lock/unlock untouched, gear.gd (laptop file) untouched. Rack render: lit weapons + cloth read as before.
+- Checks: bare headless start 0 material-null (was 3), 0 SCRIPT ERROR / Parse Error, 0 ERROR lines. OFFFLOOR 0 of 1017 (INPROP 0,
+  MON_INPROP 0). TWITCH_PARSE OK. _townwalk 120 s: in_solid 0/17407, raid 0/5626 PASS; STUCK_ON_ROUTE_TOTAL 1 (one peasant, watchdog
+  repathed - transient, nav untouched by this item). _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party home from floor 2.
+- Shots (windowed 1920x1080, tools/_d18c_shot.gd): renders/cycles/20261112_d18c - bank + ford before/after (wet shore on, off),
+  smith's tier rack. The shot tool can flip water_y to re-shoot the 'before' at any time.
+- Run note: a diagnostic headless Godot launched without --quit-after hung the Blender bridge mid-run; Mr. E cleared it (taskkill).
+  All diagnostic guards/tools removed after the bisection; only tools/_d18c_shot.gd kept.

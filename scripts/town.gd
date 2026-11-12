@@ -859,6 +859,7 @@ func _build() -> void:
     gsm.set_shader_parameter("scar_r", SCAR_R)
     gsm.set_shader_parameter("town_mask", _town_mask())
     gsm.set_shader_parameter("mask_half", MASK_HALF)
+    gsm.set_shader_parameter("water_y", WATER_Y)
     gnd.material_override = gsm
     add_child(gnd)
 
@@ -3716,6 +3717,26 @@ func _tier_rack(p: Vector3, f: Vector3, side: Vector3, family: String) -> void:
         _rack_items.append(item)
         if float(w["glow"]) > 0.0:
             Gear.ignite(n, float(w["glow"]))
+            # D18c: ignite leaves per-surface overrides; show_tiers later drapes
+            # material_override (_cloth) over them, and that stacking is what
+            # threw the 3 headless "Parameter 'material' is null" errors (the
+            # dummy renderer, once per draped rack mesh). Bake the lit material
+            # into a unique mesh so rack weapons carry no surface overrides.
+            for m in ([n as Node] + n.find_children("*", "MeshInstance3D", true, false)):
+                if m is MeshInstance3D:
+                    var mi2 := m as MeshInstance3D
+                    if mi2.mesh == null:
+                        continue
+                    var baked: Mesh = null
+                    for si in range(mi2.mesh.get_surface_count()):
+                        var ov := mi2.get_surface_override_material(si)
+                        if ov != null:
+                            if baked == null:
+                                baked = mi2.mesh.duplicate()
+                            baked.surface_set_material(si, ov)
+                            mi2.set_surface_override_material(si, null)
+                    if baked != null:
+                        mi2.mesh = baked
             var l := OmniLight3D.new()
             l.light_color = Color(1.0, 0.62, 0.22).lerp(Color(0.65, 0.85, 1.0), clampf(float(w["glow"]) - 0.5, 0.0, 1.0) * 0.7)
             l.light_energy = 0.6 * float(w["glow"])

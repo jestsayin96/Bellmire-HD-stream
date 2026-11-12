@@ -411,7 +411,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       along the lanes and a copse between the roads. Built 4 fields / 1416 crop sprites / 133 fence posts / +5 beasts.
       D18B_TEST OK; parse 0 err, _offfloor 0/1036 (0 inprop), TWITCH_PARSE OK, _townwalk in_solid 0/18452 stuck 0,
       _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR to floor 2. Shots renders/cycles/20261112_d18b (steadings, jetty, aerial).
-- [ ] D18c. GROUND & MATERIALS: ground texture blending (grass/dirt/road/water), water shader. DONE: before/after; 0 material-null headless.
+- [x] D18c. GROUND & MATERIALS: ground texture blending (grass/dirt/road/water), water shader. DONE: before/after; 0 material-null headless. -> DONE Nov 12: wet muddy shore in ground.gdshader (noise-ragged band at the waterline, wet sheen; water_y from town) blends the banks under the river; grass/dirt/road blending already lived in the shader (town-mask trodden dirt + rock/snow/scar), water shader kept. The 3 headless material-nulls traced (bisection) to Gear.ignite's per-surface overrides draped by show_tiers' _cloth material_override on the rack weapons - town.gd _tier_rack now bakes the lit material into a duplicate mesh (gear.gd untouched). Bare headless start: 0 material-null, 0 errors; shots renders/cycles/20261112_d18c (bank+ford before/after, rack intact).
 # Phase D - lighting, day/night, atmosphere [D19]
 - [ ] D19a. daylight.gd DAY/NIGHT: sun angle+colour, dawn/dusk warmth, real night dark, lamps/braziers/windows as OmniLights at night. DONE: full-day timelapse shot sheet.
 - [ ] D19b. ATMOSPHERE: fog/haze, clouds, optional rain, sky gradient + stars at night, soft god-rays. DONE: shots across time/weather; FPS holds.

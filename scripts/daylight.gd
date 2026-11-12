@@ -9,7 +9,7 @@ var town: Node3D
 var economy: Economy
 var sun: DirectionalLight3D
 var env: Environment
-var sky: ProceduralSkyMaterial
+var sky: ShaderMaterial            # D19b: the custom town sky (clouds/stars/sun)
 var _lights: Array = []          # [OmniLight3D, base energy]
 var _glass: Array = []           # window materials
 var _sky_day := {}
@@ -17,6 +17,20 @@ var override_hour := -1.0        # test hook
 
 const DAWN := 6.0
 const DUSK := 18.5
+
+## D19b ATMOSPHERE - weather machine + fog + rain + volumetric light.
+## Weather drifts between clear / overcast / rain every couple of in-world days
+## (days are 90 s real); the change itself blends over ~8 s so the sky never pops.
+const WEATHERS := {
+    "clear":    {"cover": 0.32, "dark": 0.0,  "fog": 1.0, "sun": 1.0,  "rain": 0.0},
+    "overcast": {"cover": 0.78, "dark": 0.55, "fog": 2.3, "sun": 0.76, "rain": 0.0},
+    "rain":     {"cover": 0.97, "dark": 0.9,  "fog": 4.2, "sun": 0.55, "rain": 1.0},
+}
+const FOG_BASE := 0.0011           # the D18 distance haze, scaled by weather
+var weather := "clear"             # the name the snapshot publishes
+var _wx := {"cover": 0.32, "dark": 0.0, "fog": 1.0, "sun": 1.0, "rain": 0.0}
+var _wx_t := randf_range(70.0, 160.0)
+var rain: GPUParticles3D
 
 func setup(t: Node3D) -> void:
     town = t
@@ -27,9 +41,26 @@ func setup(t: Node3D) -> void:
         elif c is WorldEnvironment and env == null:
             env = (c as WorldEnvironment).environment
     if env and env.sky:
-        sky = env.sky.sky_material as ProceduralSkyMaterial
-        _sky_day = {"top": sky.sky_top_color, "hor": sky.sky_horizon_color,
-                    "gb": sky.ground_bottom_color, "gh": sky.ground_horizon_color}
+        # D19b: the ProceduralSky becomes the custom shader sky; its day colours
+        # stay the day palette the gradients lerp from.
+        var pm := env.sky.sky_material as ProceduralSkyMaterial
+        if pm:
+            _sky_day = {"top": pm.sky_top_color, "hor": pm.sky_horizon_color,
+                        "gb": pm.ground_bottom_color, "gh": pm.ground_horizon_color}
+        var sh := load("res://assets/shaders/town_sky.gdshader") as Shader
+        if sh and not _sky_day.is_empty():
+            sky = ShaderMaterial.new()
+            sky.shader = sh
+            env.sky.sky_material = sky
+    if env:
+        # soft god-rays: a thin volumetric air the sun (and the lamps at night)
+        # scatter through; the spotlight panes copy the env WITHOUT it (L28b).
+        env.volumetric_fog_enabled = true
+        env.volumetric_fog_density = 0.006
+        env.volumetric_fog_length = 110.0
+        env.volumetric_fog_anisotropy = 0.62
+        env.volumetric_fog_albedo = Color(0.9, 0.93, 0.97)
+    _build_rain()
     # every town light that exists at founding: lamps, yard fires, beacons
     for n in t.find_children("*", "OmniLight3D", true, false):
         _lights.append([n, (n as OmniLight3D).light_energy])
@@ -92,6 +123,73 @@ func _ambient(dt: float) -> void:
     ambient_plays[kind] = int(ambient_plays.get(kind, 0)) + 1
     Sfx.at(kind, at, -14.0 if kind in ["cricket_chirp", "bird_chirp"] else -12.0)
 
+func _build_rain() -> void:
+    rain = GPUParticles3D.new()
+    rain.name = "Rain"
+    rain.amount = 900
+    rain.lifetime = 1.1
+    rain.emitting = false
+    rain.visibility_aabb = AABB(Vector3(-60, -30, -60), Vector3(120, 60, 120))
+    var pm := ParticleProcessMaterial.new()
+    pm.direction = Vector3(0, -1, 0)
+    pm.spread = 0.0
+    pm.initial_velocity_min = 16.0
+    pm.initial_velocity_max = 21.0
+    pm.gravity = Vector3(0.6, -9.0, 0.0)
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+    pm.emission_box_extents = Vector3(24, 1.0, 24)
+    rain.process_material = pm
+    var qm := QuadMesh.new()
+    qm.size = Vector2(0.028, 0.5)
+    var mm := StandardMaterial3D.new()
+    mm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    mm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    mm.albedo_color = Color(0.72, 0.78, 0.88, 0.34)
+    mm.billboard_mode = BaseMaterial3D.BILLBOARD_FIXED_Y
+    qm.material = mm
+    rain.draw_pass_1 = qm
+    town.add_child(rain)
+
+## test hook and the machine's switch; instant also snaps the blend
+func set_weather(w: String, instant := false) -> void:
+    if not WEATHERS.has(w):
+        return
+    weather = w
+    if instant:
+        for k in _wx:
+            _wx[k] = WEATHERS[w][k]
+
+func _pick_weather() -> String:
+    var r := randf()
+    if r < 0.50:
+        return "clear"
+    return "overcast" if r < 0.82 else "rain"
+
+func _tick_weather(dt: float) -> void:
+    _wx_t -= dt
+    if _wx_t <= 0.0:
+        _wx_t = randf_range(70.0, 160.0)
+        var w := _pick_weather()
+        if w != weather:
+            var was := weather
+            set_weather(w)
+            if w == "rain":
+                (town.get("feed") as Array).append("Rain sets in over Bellmire.")
+            elif was == "rain":
+                (town.get("feed") as Array).append("The rain passes; the clouds break over the valley.")
+    var tgt: Dictionary = WEATHERS[weather]
+    for k in _wx:
+        _wx[k] = move_toward(float(_wx[k]), float(tgt[k]), dt * 0.12)
+
+## what part of the day it is, for the hub: night / dawn / day / dusk
+func day_phase() -> String:
+    var h := hour()
+    if nightness(h) >= 0.6:
+        return "night"
+    if goldness(h) >= 0.45:
+        return "dawn" if h < 12.0 else "dusk"
+    return "day"
+
 func hour() -> float:
     return override_hour if override_hour >= 0.0 else economy.hour()
 
@@ -114,6 +212,7 @@ func _process(_dt: float) -> void:
     if economy == null or sun == null:
         return
     _ambient(_dt)
+    _tick_weather(_dt)
     var h := hour()
     var nt := nightness(h)
     var gd := goldness(h)
@@ -125,11 +224,11 @@ func _process(_dt: float) -> void:
         # the moon: low, cold, faint
         sun.rotation = Vector3(deg_to_rad(-34.0), deg_to_rad(150.0), 0.0)
         sun.light_color = Color(0.62, 0.70, 0.95)
-        sun.light_energy = lerpf(0.0, 0.7, nt)       # HD: a moon you can see by - the stream was near black at night
+        sun.light_energy = lerpf(0.0, 0.7, nt) * lerpf(1.0, float(_wx["sun"]), 0.7)   # HD: a moon you can see by
     else:
         sun.rotation = Vector3(deg_to_rad(-maxf(elev, 4.0)), deg_to_rad(az), 0.0)
         sun.light_color = Color(1, 1, 1).lerp(Color(1.0, 0.62, 0.36), gd)
-        sun.light_energy = lerpf(1.5, 0.7, gd) * (1.0 - nt)
+        sun.light_energy = lerpf(1.5, 0.7, gd) * (1.0 - nt) * float(_wx["sun"])
     if env:
         # a stream must stay watchable at night: the night sky is near black,
         # so at night the ambient comes mostly from a cool moonlit colour
@@ -137,7 +236,14 @@ func _process(_dt: float) -> void:
         env.ambient_light_color = Color(0.42, 0.50, 0.74)
         env.ambient_light_sky_contribution = lerpf(1.0, 0.3, nt)
         env.ambient_light_energy = lerpf(0.85, 0.8, nt)
-        env.fog_light_color = Color(0.70, 0.77, 0.84).lerp(Color(0.86, 0.60, 0.45), gd * (1.0 - nt)).lerp(Color(0.10, 0.12, 0.20), nt)
+        env.fog_light_color = Color(0.70, 0.77, 0.84).lerp(Color(0.86, 0.60, 0.45), gd * (1.0 - nt)).lerp(Color(0.10, 0.12, 0.20), nt) \
+            .lerp(Color(0.45, 0.48, 0.52), float(_wx["dark"]) * 0.5 * (1.0 - nt))
+        # D19b: the haze thickens with the weather, and a mist at the gold hours of the morning
+        var mist := 1.0 + gd * 0.9 * (1.0 - nt) * (1.0 if h < 12.0 else 0.25)
+        env.fog_density = FOG_BASE * float(_wx["fog"]) * mist
+        env.fog_sky_affect = lerpf(0.15, 0.4, float(_wx["rain"]))
+        env.volumetric_fog_density = lerpf(0.006, 0.022, maxf(float(_wx["rain"]), (float(_wx["fog"]) - 1.0) / 3.2)) \
+            * lerpf(1.0, 0.6, nt) + 0.004 * gd * (1.0 - nt)
         # night bloom rises with the dark (and a touch at the gold hours)
         env.glow_intensity = lerpf(0.25, 1.0, maxf(nt, gd * 0.4))
         env.glow_bloom = lerpf(0.02, 0.16, nt)
@@ -146,10 +252,25 @@ func _process(_dt: float) -> void:
         var night_top := Color(0.02, 0.03, 0.09)
         var night_hor := Color(0.07, 0.08, 0.16)
         var gold_hor := Color(0.98, 0.58, 0.32)
-        sky.sky_top_color = (_sky_day["top"] as Color).lerp(Color(0.32, 0.30, 0.52), gd * 0.6).lerp(night_top, nt)
-        sky.sky_horizon_color = (_sky_day["hor"] as Color).lerp(gold_hor, gd).lerp(night_hor, nt)
-        sky.ground_horizon_color = (_sky_day["gh"] as Color).lerp(Color(0.5, 0.4, 0.35), gd).lerp(night_hor, nt)
-        sky.ground_bottom_color = (_sky_day["gb"] as Color).lerp(Color(0.03, 0.03, 0.05), nt)
+        var dark := float(_wx["dark"])
+        var top := (_sky_day["top"] as Color).lerp(Color(0.32, 0.30, 0.52), gd * 0.6).lerp(night_top, nt)
+        var hor := (_sky_day["hor"] as Color).lerp(gold_hor, gd).lerp(night_hor, nt)
+        var gh := (_sky_day["gh"] as Color).lerp(Color(0.5, 0.4, 0.35), gd).lerp(night_hor, nt)
+        var gb := (_sky_day["gb"] as Color).lerp(Color(0.03, 0.03, 0.05), nt)
+        # overcast flattens the blue toward grey before the clouds go on
+        top = top.lerp(Color(0.55, 0.58, 0.63), dark * 0.55 * (1.0 - nt))
+        hor = hor.lerp(Color(0.62, 0.65, 0.69), dark * 0.45 * (1.0 - nt))
+        sky.set_shader_parameter("top_color", top)
+        sky.set_shader_parameter("horizon_color", hor)
+        sky.set_shader_parameter("ground_horizon", gh)
+        sky.set_shader_parameter("ground_bottom", gb)
+        sky.set_shader_parameter("stars", nt)
+        sky.set_shader_parameter("cloud_cover", float(_wx["cover"]))
+        sky.set_shader_parameter("cloud_dark", dark)
+        sky.set_shader_parameter("night", nt)
+        sky.set_shader_parameter("gold", gd)
+        sky.set_shader_parameter("moon_disc", 1.0 if (nt >= 1.0 or h < DAWN or h > DUSK) else 0.0)
+        sky.set_shader_parameter("wind", 1.0 + float(_wx["rain"]) * 2.0)
     # lamps burn low by day (they are lit, it is just bright out), full at night
     var k := lerpf(0.35, 1.6, maxf(nt, gd * 0.6))
     for l in _lights:
@@ -157,3 +278,10 @@ func _process(_dt: float) -> void:
             (l[0] as OmniLight3D).light_energy = float(l[1]) * k
     for g in _glass:
         (g as StandardMaterial3D).emission_energy_multiplier = lerpf(0.0, 2.4, nt)
+    if rain:
+        var rmix := float(_wx["rain"])
+        rain.emitting = rmix > 0.05
+        rain.amount_ratio = clampf(rmix, 0.05, 1.0)
+        var rcam: Camera3D = get_viewport().get_camera_3d() if get_viewport() else null
+        if rcam:
+            rain.global_position = rcam.global_position + Vector3(0, 13, 0)

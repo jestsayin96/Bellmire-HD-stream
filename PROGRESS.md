@@ -1458,6 +1458,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Baseline (before the fixes) SOUND_REVIEW FAIL 5 of 18 (two of the five were the review's own wrong calls - a word that is not nudged, award()'s argument order - fixed in the tool); after: SOUND_REVIEW OK 18/18.
 - Tests: parse 0 errors, SOUND_REVIEW OK 18/18 windowed (8/8 headless coverage), S1 / S2 / L14 OK, _delve_test clean to floor 3 (0 SCRIPT ERROR).
 
+<<<<<<< HEAD
 ## Cycle 89 - L25, dungeon geometry + nav (laptop, 2026-11-12) - IN PROGRESS (pushed so it is not lost)
 - Measured first (tools/_l25_measure.gd): kit walls are 1 m thick and reach 0.5 m into every cell (wall pillars 0.75); the old stairs were "stairs_wide", 7 m across on a 4 m cell, set with their HIGH end (local z = 0) buried mid-wall; rubble_large is 8 m wide inside a 1.8 m cluster budget (and scattered at 0.8-1.3x: up to 10 m); sword_shield / keyring_hanging / shelves / chest_gold are wall-mounted with the origin at the mount and sank up to 1.2 m into the floor at y 0.
 - floorgen.gd: every placed piece is tagged (kind, cluster, asset) and has a real footprint (an oriented box from its own meshes, cached per asset; FloorGen.pen = separating-axis depth on the floor + height overlap). Walls, columns, stairs register as solid; furniture / growth / banners only go where they fit (<= 0.15 m), rest ON the floor (no sinking), a small thing landing on a plain table goes on its top, an anchor that does not fit retries 0.6 / 1.2 m off its wall and turned, an item retries closer in and mirrored; a cluster whose anchor never fits is left out. Rubble scaled to its real size; the wall shelf and hanging keyring swapped for floor pieces; banners only where their spot is floor with a wall behind.
@@ -1467,3 +1468,13 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - tools/_l25_test.gd over 12 generated floors: 0 prop-prop and 0 prop-wall interpenetration > 0.2 m (the same floors with the fit checks off: 438 and 568), every room reachable from the entrance, 0 props on a doorway / corridor / the stair-to-stair route, the kept-clear way unbroken, every flight on the floor and flush to its wall with open floor at its foot, nothing sunk, nothing in the void. A 10-floor run: floor 10 reached, 0 forced descents (was 9). STILL FAILING: stuck delvers 104 samples (was 209), 91 of them in the floor-10 lord fight, and the watchdog nudged 51 times - the lord-fight approach needs more work (next session).
 - Renders: renders/cycles/20261112_l25/f{1,3,6}_{before,after}_{wide,stairs,room}.png ("before" = the same floors, fit checks off). Looked: props clear of walls, rooms still furnished, the stairs a single flight up to the wall top.
 - Backups (untracked): scripts/delve.gd.bak_l25, scripts/floorgen.gd.bak_l25.
+=======
+
+## D15 sound soak - DONE Nov 12 04:16 CT (audio safe for 24/7)
+- 35-min windowed soak, audio ON: 87 valley days, 228 people, 51 raids.
+- 0 SCRIPT ERROR, 0 freed-node/lambda. fps_avg 108.2 (130 early -> 97 at 228 people; population-bound, matches the LOD curve; min dips = the known floor-build hitch).
+- mem 589-653 MB: rise tracks town growth, not audio (streams cache plateaued at 131). pool_max_active 16/16 (graceful voice-steal at peak), flat 4/6.
+- GAP held: busiest mana_charge 3.93/s vs its 0.12s ceiling (~8.3/s). No kind machine-gunned.
+- Instrumented tools/_soak.gd with a per-minute audio snapshot (pool/flat/streams/plays/busiest-kind + end summary).
+- Follow-up (D22 audio polish): bump the sfx 3D pool 16->24 for fewer cutoffs in a very busy town+raid.
+>>>>>>> origin/main

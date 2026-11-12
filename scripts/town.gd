@@ -3137,10 +3137,10 @@ func _on_caught(item: Dictionary, who: String) -> void:
 
 ## Chat / hero entry point (!fish): roll a cast with the hero's luck and lure,
 ## and if a dock is free play it out there so the stream sees the catch.
-func go_fish(hero_name: String, luck := 0, lure := 0, skill := 0.85) -> Dictionary:
+func go_fish(hero_name: String, luck := 0, lure := 0, hook_bonus := Fishing.DOCK_HAND) -> Dictionary:
     var rng := RandomNumberGenerator.new()
     rng.randomize()
-    var res := Fishing.cast_result(rng, luck, lure, skill)
+    var res := Fishing.cast_result(rng, luck, lure, hook_bonus)
     if bool(res.get("caught", false)):
         for a in anglers:
             var an: Angler = a
@@ -4390,10 +4390,17 @@ func _on_fish(uid: String) -> void:
         ang.who = b.person_name
         ang.water_y = WATER_Y
         ang.demo = true
+        # D9: the hero strikes the bite with their own DEX (+ proficiency for a
+        # ranger or a druid, who know the river)
+        var fh: Dictionary = roster.get_hero(uid) if roster else {}
+        if not fh.is_empty():
+            ang.hook_bonus = roster.mod(fh, "dex") + (roster.prof(fh) if String(fh.get("class", "")) in ["ranger", "druid"] else 0)
         ang.target = end + fw * 7.0 + Vector3(1.0, 0, 0)
         ang.target.y = WATER_Y
         ang.caught.connect(func(item: Dictionary, who: String) -> void:
             _on_caught(item, who)
+            if int(item.get("strike", 0)) == 20:
+                feed.append("%s rolls a 20 on the strike - a perfect hook!" % who)
             feed.append("%s lands a %s (%s)!" % [who, item.get("name"), item.get("rarity")])
             print("FEED ", feed.back()))
         b.add_child(ang))

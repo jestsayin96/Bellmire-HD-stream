@@ -45,7 +45,7 @@ func _process(_d: float) -> bool:
         _snap("gate")
         # a breach: one house nearest a raider burns
         if not _rd.raiders.is_empty():
-            _rd._wreck_a_building()
+            _rd._wreck_a_building(true)
         _ruin_f = _f
     if _ruin_f > 0 and _f == _ruin_f + 2 and not _rd.ruins.is_empty():
         var pl: Dictionary = _rd.ruins[0]
@@ -58,7 +58,7 @@ func _process(_d: float) -> bool:
         _snap("ruin")
         _t.get("economy").stock["wood"] = 80.0
         _t.get("economy").stock["stone"] = 60.0
-        _rd._rebuild_pass()
+        _rd._rebuild_pass(true)
     if _ruin_f > 0 and _f == _ruin_f + 100:
         _snap("rebuilt")
         print("FEEDTAIL ", (_t.get("feed") as Array).slice(-5))

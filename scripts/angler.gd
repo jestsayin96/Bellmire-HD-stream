@@ -14,7 +14,8 @@ var target := Vector3.ZERO          # where the bobber lands (world)
 var water_y := -0.9
 var luck := 0
 var lure := 0
-var skill := 0.85                   # chance an NPC reacts inside the bite window
+var hook_bonus := Fishing.DOCK_HAND # D9: d20 + this vs Fishing.HOOK_DC strikes the bite
+var hooks := [0, 0]                 # struck, lost (tests)
 var who := ""
 var demo := false                   # first bite comes fast (render probe)
 var creel: Array = []               # everything landed, newest last
@@ -186,14 +187,22 @@ func _process(delta: float) -> void:
             # yanked under, twitching
             _bobber.global_position = target + Vector3(sin(_t * 40.0) * 0.04, water_y - target.y - 0.22, 0)
             if _t >= _dur * 0.35:
-                if not forced.is_empty() or _rng.randf() < skill:
-                    _item = forced if not forced.is_empty() else Fishing.roll(_rng, luck)
+                var hk := {"ok": true, "d": 0, "total": 0}
+                if forced.is_empty():
+                    hk = Fishing.hook(_rng, hook_bonus)
+                    hooks[0 if hk["ok"] else 1] += 1
+                if hk["ok"]:
+                    if forced.is_empty():
+                        _item = Fishing.roll(_rng, luck + (Fishing.NAT20_LUCK if int(hk["d"]) == 20 else 0))
+                        _item["strike"] = int(hk["d"])
+                    else:
+                        _item = forced
                     forced = {}
                     _spawn_catch()
                     _play("Interact")
                     _go(S.REEL, 0.9)
                 else:
-                    _show_text("It got away...", Color(0.75, 0.75, 0.75))
+                    _show_text("The line snaps!" if int(hk["d"]) == 1 else "It got away...", Color(0.75, 0.75, 0.75))
                     _go(S.MISS, 1.6)
         S.REEL:
             var k := clampf(_t / _dur, 0.0, 1.0)

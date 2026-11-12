@@ -78,10 +78,24 @@ static func roll(rng: RandomNumberGenerator, luck: int = 0) -> Dictionary:
 static func colour(item: Dictionary) -> Color:
     return RARITY_COLOR.get(item.get("rarity", "common"), Color.WHITE)
 
+## D9 (the DnD RULE): striking a bite is a DEX check - d20 + the fisher's bonus
+## (DEX, + proficiency for those who know the river) vs HOOK_DC. A 1 snaps the
+## line; a 20 is a perfect strike: the catch rolls with NAT20_LUCK more luck.
+const HOOK_DC := 10
+const NAT20_LUCK := 3
+const DOCK_HAND := 5              # a dock fisher: DEX +2, proficient +3
+
+static func hook(rng: RandomNumberGenerator, bonus: int) -> Dictionary:
+    var d := rng.randi_range(1, 20)
+    return {"d": d, "total": d + bonus, "ok": d == 20 or (d != 1 and d + bonus >= HOOK_DC)}
+
 ## A whole cast resolved at once, for chat (!fish) or offline ticks: did the
-## fisher react inside the bite window, and what came up.
-static func cast_result(rng: RandomNumberGenerator, luck: int = 0, lure: int = 0, skill: float = 0.8) -> Dictionary:
+## fisher strike inside the bite window (the hook check), and what came up.
+static func cast_result(rng: RandomNumberGenerator, luck: int = 0, lure: int = 0, hook_bonus: int = DOCK_HAND) -> Dictionary:
     var wait := bite_wait(rng, lure)
-    if rng.randf() > skill:
-        return {"wait": wait, "caught": false}
-    return {"wait": wait, "caught": true, "item": roll(rng, luck)}
+    var hk := hook(rng, hook_bonus)
+    if not hk["ok"]:
+        return {"wait": wait, "caught": false, "hook": hk}
+    var item := roll(rng, luck + (NAT20_LUCK if int(hk["d"]) == 20 else 0))
+    item["strike"] = int(hk["d"])
+    return {"wait": wait, "caught": true, "item": item, "hook": hk}

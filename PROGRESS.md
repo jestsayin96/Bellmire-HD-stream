@@ -1138,3 +1138,37 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Barks are parchment speech bubbles (Cycle 75a); _hero_hit no longer touches a body that has left the tree.
 - Tests: _l19_test (checks + FEED: tell on the first floor only, Grubmother intro), _l12_test OK, _delve_test, _offfloor, _twitch_parse OK.
 - For the desktop: "Lambda capture at index 0 was freed" (1-3 per delve test, also before L19) comes from spells.gd timers/tweens firing after a floor is freed (chain hops, _fly callbacks capture root).
+
+## Cycle 78 - D9, the roll audit, town side (desktop, 2026-11-12)
+- scripts/dice.gd (new, class_name Dice): d20 (adv/disadv), roll(n, sides), damage(dice, bonus, crit = dice twice,
+  never under 1), mean, check(bonus, dc) - a 20 always succeeds, a 1 always fails. Global RNG (tests seed it).
+- WHAT CHANGED (flat number / flat chance -> roll):
+  - raids.gd blows: fixed atk (x2 on a 20) -> d20 + to-hit vs AC, damage dice + mod, a 20 rolls the dice twice.
+    Raider 1d6+2, watchman 2d6+4 (longsword), chief 1d8+2, mounted watch 2d8+4 (lance), tower crossbow 1d10+3;
+    heroes their own weapon dice (Roster.weapon_dice) + class ability mod + the sheet's flat bonus (same average as
+    before). Averages unchanged (5.5 / 11 / 6.5 / 13 / 8.5), now spread by the dice.
+  - initiative (new): d20 + DEX for raiders (+1) and the watch (+2); the winning side swings first; told in the Chronicle.
+  - raid spells: bolt 1d10, chain 1d10 (x0.65 a hop), frost 1d8 (x0.7, slows on a hit), smite 2d8 (3d8 on the scar's
+    dead) - spell attacks; fire burst 2d6 - every raider in it makes a DEX save vs 8 + to-hit, a save halves it (was an
+    attack roll each). Mending: renew 4d8, ward 3d10 soak, heal/mend 2d8, misfire-mend on a raider 1d8 (+ caster mod)
+    - were % of max HP.
+  - going down: one CON save DC 10 for EVERY defender (was heroes only); a 20 stands them up at a quarter life, a 1 fails.
+  - the torch: a house burns only on d20 + 2 vs DC 12 (a 1: "fumbles the torch"); was every 7-13 s for sure.
+  - rebuilding: d20 + 2 vs DC 12, a miss tries again next pass, a 20 uses half the timber and stone.
+  - economy.gd work: every beat d20 + 2 vs DC 10 - 1 nothing, miss half, hit full, 20 double, / 0.85 so the town makes
+    the same on average (0.995 measured). A 20 reaches the Chronicle at most every 150 s.
+  - fishing: striking a bite is a DEX check vs DC 10 (Fishing.hook) - dock fishers +5 (was 85% flat), a viewer's hero
+    DEX mod (+ prof for ranger / druid); a 1 snaps the line, a 20 is a perfect strike (+3 luck on the catch, told).
+    go_fish(name, luck, lure, hook_bonus).
+  - heroes' natural 20s in a raid reach the Chronicle (once per hero per raid).
+- KEPT (not an action of a character): raid timer, size and source (world events), the scar-touched share of fish
+  (a property of the river), townsfolk idle gestures at their posts (cosmetic), spells.gd (no randomness; the surface
+  scar misfire is canon: "every spell misfires in turn"). Laptop files untouched (roster.gd read only).
+- tools/_d9_test.gd (new): fair d20, 2d6 = 7.03, +2 vs DC 10 0.651, watchman hits AC 10 0.646 for 10.99 (crit 18.06),
+  raider vs AC 13 0.499, fire DEX saves 0.456 (want 0.45), bolt hits 0.689 for 8.79, crossbow 0.588, work mean 0.995,
+  dock hook 0.795, untrained 0.556, nat 20 strikes marked; a real raid at level 5: initiative told, driven off, 356
+  d20s. D9_TEST OK. tools/_raid_shot.gd uses _wreck_a_building(true) / _rebuild_pass(true).
+- Render renders/cycles/20261112_d9 (raid_gate, raid_ruin, raid_rebuilt): the watch meets 4 bandits at the west gate,
+  the Chronicle reads "Initiative: the raiders 9, the watch 22 - the watch is ready for them."; a burning ruin. Looked.
+- Checks: parse 0 script errors, _offfloor 0 of 1063 (monsters 0 of 231), TWITCH_PARSE OK, _townwalk PASS (in_solid
+  1/8099, raid 0/6520; stuck_on_route 1-3 = D14), _delve_test ENDED all four home, 0 SCRIPT ERROR.

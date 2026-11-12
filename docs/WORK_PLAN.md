@@ -91,15 +91,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       yours): build the next floor ahead while the party fights (FloorGen.build on a DungeonHD that is not yet in the
       tree, on WorkerThreadPool - load() is thread-safe - then add_child on descend), or slice it over frames.
       Also fixed: a freed guard / notable stopped _show_garrison and the whole Notables pass every tick (2583 errors).
-- [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
+- [x] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
+      DONE cycle 78: scripts/dice.gd (Dice); raids: initiative, blows = weapon dice + mod (heroes' own dice), spell attacks +
+      fire burst DEX save vs 8+to-hit, mending dice, CON save for every defender, torch + rebuild checks; crossbows 1d10+3;
+      work beats d20+2 vs DC 10 (mean kept 1.0); fishing hook = DEX check (dock +5, heroes DEX + prof for ranger/druid).
+      Kept: raid timing/size/source (world events), townsfolk idle gestures (cosmetic), spells.gd (no rolls; the surface
+      scar rule is canon). D9_TEST OK; renders/cycles/20261112_d9. Full list in PROGRESS cycle 78.
 - [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'
       camp, a river ford and mill, old ruins (lore), roads linking them, the scar road; travellers and carts on
       the roads; the director's tour includes them. Navmesh + LOD keep FPS.
-- [ ] D13. Director camera clips into buildings (supervisor, Nov 11): in renders/cycles/20261112_d6b/
-      square_f460_east.png a house roof fills the bottom-left third of the frame - the auto-director
-      camera sits behind/inside geometry. Keep a minimum clearance from buildings, or fade/cull geometry
-      between the camera and its subject, so the stream view is never blocked. Check every director shot
-      type (town wide, hero follow, fight, raid) and render proof of each.
+- [ ] D13. MOVED to L20 (laptop owns scripts/rts_camera.gd - every recent commit to it is the laptop's).
 - [ ] D14. Stuck walkers against props (supervisor, Nov 11): _townwalk reports stuck_on_route=4 steady
       (traders Petra Bramble, Maela of the Ford, farmer Maela Coalfoot) - pinned on a prop a few cm off
       their route, navoff 0.17-0.66, push (0,0,0). Nobody is inside a building (in_solid 0 of 8394), so
@@ -193,6 +194,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       <class>" banner in the main view; their name glows above their hero for ~5 s after any command; free
       !look borrows the channel-points lane for 10 s only when it is empty.
 - [ ] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
+- [ ] L20. Director camera clearance (supervisor, Nov 11; was D13). CORRECTION to the original note: the
+      roof in renders/cycles/20261112_d6b/square_f460_east.png was NOT an auto-director shot - _d6b_shot.gd
+      placed its own fixed camera 14 m up beside the square, so that framing is the test tool's, not the
+      director's. The real gap (found by the laptop, Nov 11): the camera's edge-protection check only covers
+      hero-follow shots and tests a single line, so tour and wide shots have no clearance check at all and
+      roofs beside that line go unprotected. Fix it in the eye camera for every shot type, and prove it with
+      real director shots - town wide, tour, hero follow, fight, raid - rendered and looked at, not with a
+      fixed test camera. The L17 spotlight panes each get their own camera, so they must share this rule.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:

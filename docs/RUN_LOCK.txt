@@ -1,1 +1,1 @@
-IDLE 2026-11-12 11:35 - D17d blends/transitions committed (docs/RUN_LOCK.txt is the canonical lock)
+RUNNING 2026-11-12 13:09 (supervisor merge L25+L28a)

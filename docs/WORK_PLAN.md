@@ -317,6 +317,13 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Add tools/_s2_test.gd asserting every wired event uses a registered kind; 0 SCRIPT ERROR; the
       existing _delve_test should still pass with sound calls in.
       DONE (Cycle 87, laptop): Bestiary.voice_of (34 creatures, every lord and unique voiced), queued creature voices (one a 0.9 s beat, biggest / nearest / a death first, same kind 3.5 s), a lord roars as it rises, breath on the breath; per-weapon swings + hit / clash / bow / block / shield_bash, spells, potions, finds; hero voices sampled (Roster.voice_of); a quiet bed below; chat / UI sounds; level_up. GAPs added in sfx.gd. S2_TEST OK x3.
+- [x] S3. SOUND REVIEW + TUNING - LAPTOP (supervisor, Nov 12). S1 / S2 only proved the kinds exist; check the game
+      SOUNDS right: no silent monster, every command audible, throttles hold under load, levels balanced under the
+      buses, no pool exhaustion or freed-node errors. A test so a future monster or command cannot ship silent.
+      DONE (Cycle 88): tools/_sound_review.gd (coverage headless; load + measured levels windowed). Fixed: spells below
+      doubled (S1 + S2 both sounded them), !reroll / !respec paid silently, dragon roar +9.9 dB over the music,
+      skeleton / spider voices -9.5, half the dungeon bed inaudible (-25), menu_select +4.6, potion_drink buried,
+      a generic hit doubling every blow. Levels now -5.6 .. +1.9 dB of the music, bed -15 .. -18; SOUND_REVIEW OK 18/18.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the

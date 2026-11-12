@@ -520,7 +520,7 @@ func hurt(amount: float, crit := false) -> void:
     if state == S.DEAD:
         return
     hp -= amount
-    Sfx.at("hit", global_position, 2.0 if crit else 0.0)
+    Sfx.at("hit", global_position, HIT_DB + (3.0 if crit else 0.0))     # S3: under the weapon's own clash / impact
     _number(amount, crit)
     _flash()
     if hp <= 0.0:
@@ -668,6 +668,13 @@ func _tick_tag(delta: float) -> void:
 ## the frame's loudest claim wins - the biggest, the nearest the camera, a death over a
 ## spawn - and then nobody speaks for VOICE_GAP, nor that same kind for KIND_GAP. A lord's
 ## arrival roar goes straight through (and holds the rest off for a moment).
+## S3 (measured: file RMS against the music as heard, ~20 m off): the voices are not one
+## loudness - the dragon roars 10 dB hotter than a skeleton rattles - so each is trimmed to sit
+## near the music; a lord's roar is ROAR_DB over its own trimmed level
+const VOICE_TRIM := {"dragon_roar": -6.0, "demon_growl": -3.0, "wolf_growl": -3.0, "skeleton_rattle": 4.0, "spider_skitter": 4.0, "insect_buzz": 2.0}
+const ROAR_DB := 4.0
+const DEATH_DB := 2.0
+const HIT_DB := -4.0                 # the generic thud a blow lands with, under its weapon sound
 const VOICE_GAP := 900               # ms between any two creature voices
 const KIND_GAP := 3500               # ms before the same kind of voice again
 static var _vq: Array = []           # [score, kind, pos, db] claims this frame
@@ -685,7 +692,7 @@ static func voice(m: Monster, dying: bool) -> void:
     var cam := m.get_viewport().get_camera_3d() if m.get_viewport() else null
     var far := cam.global_position.distance_to(m.global_position) if cam else 30.0
     var score := m._height() * 2.0 - far * 0.08 + (3.0 if dying else 0.0) + (10.0 if bool(m.def.get("boss", false)) else 0.0)
-    _vq.append([score, kind, m.global_position + Vector3(0, m._height() * 0.6, 0), 2.0 if dying else 0.0])
+    _vq.append([score, kind, m.global_position + Vector3(0, m._height() * 0.6, 0), float(VOICE_TRIM.get(kind, 0.0)) + (DEATH_DB if dying else 0.0)])
 
 static func _voice_flush() -> void:
     var fr := Engine.get_process_frames()
@@ -717,4 +724,4 @@ static func roar(m: Monster) -> void:
     _v_any = now + 1500
     _v_kind[kind] = now
     voiced[kind] = int(voiced.get(kind, 0)) + 1
-    Sfx.at(kind, m.global_position + Vector3(0, m._height() * 0.6, 0), 6.0)
+    Sfx.at(kind, m.global_position + Vector3(0, m._height() * 0.6, 0), ROAR_DB + float(VOICE_TRIM.get(kind, 0.0)))

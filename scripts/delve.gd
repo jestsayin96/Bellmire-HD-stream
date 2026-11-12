@@ -553,7 +553,6 @@ func _fight(delta: float) -> void:
 				# D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
 				var mk := String(MENDERS.get(String(h["class"]), "heal"))
 				var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
-				_snd(String(SPELL_SND.get(got, "")), (low["body"] as Node3D).global_position + Vector3(0, 1.2, 0))     # S2
 				Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
 				if Spells.HARM.has(got):
 					# L8: the scar turned the mending into a blow - it lands on the friend
@@ -1094,7 +1093,6 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
 			more.append(nx)
 			at = nx.global_position
 	var actual := Spells.cast(kind, b, tgt, _scar_check(m, kind), more)
-	_snd(String(SPELL_SND.get(actual, "")), b.global_position + Vector3(0, 1.4, 0))      # S2
 	Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
 	if not Spells.HARM.has(actual):
 		# L8: the scar turned the blow into a mending - wild magic mends the creature
@@ -1512,7 +1510,7 @@ func _quaff(m: Dictionary) -> bool:
 		return false
 	drink(m, want)
 	if is_instance_valid(m.get("body")):
-		_snd("potion_drink", (m["body"] as Node3D).global_position + Vector3(0, 1.5, 0))     # S2
+		_snd("potion_drink", (m["body"] as Node3D).global_position + Vector3(0, 1.5, 0), POTION_DB)     # S2 (S3: up - it was buried)
 	return true
 
 func drink(m: Dictionary, key: String) -> void:
@@ -1670,16 +1668,20 @@ func _say_bubble(m: Dictionary, text: String) -> void:
 ##                     blow; a delver's cries and efforts share one HURT_GAP s), effort on a big swing (a 20, or one
 ##                     in EFFORT_ODDS), death when they fall (the death sting already ducks
 ##                     the music)
-##   spells            SPELL_SND: the caster's spell, whatever the scar made of it
+##   spells            Spells.cast sounds every cast itself (S1: mana_charge + its SOUND) - S3
+##                     found S2 layering a second copy here and took it out
 ##   below             a quiet bed (AMB_KINDS) somewhere off in the dark every AMB_MIN-AMB_MAX s
-const SPELL_SND := {"bolt": "lightning", "chain": "lightning", "fire": "fireball", "frost": "ice_shard", "smite": "lightning",
-					"renew": "heal", "heal": "heal", "mend": "heal", "ward": "shield"}
 const HURT_GAP := 2.5
 const EFFORT_ODDS := 8
 const AMB_KINDS := ["bat_screech", "spider_skitter", "skeleton_rattle", "ghost_wail"]
 const AMB_MIN := 9.0
 const AMB_MAX := 22.0
 const AMB_DB := -16.0
+## S3 (measured): the spider and skeleton files are ~10 dB quieter than the bat and the ghost -
+## at one level two of the four were 25 dB under the music, i.e. never heard. Trimmed so the
+## whole bed sits quiet but present, 12-24 dB under the music.
+const AMB_TRIM := {"spider_skitter": 8.0, "skeleton_rattle": 8.0}
+const POTION_DB := 4.0
 var _amb_t := 6.0
 var sounds := {}                   # kind -> times this delve asked for it (tests read it)
 
@@ -1748,4 +1750,5 @@ func _amb_tick(delta: float) -> void:
 	if not is_instance_valid(b):
 		return
 	var a := _rng.randf() * TAU
-	_snd(String(AMB_KINDS[_rng.randi() % AMB_KINDS.size()]), b.global_position + Vector3(cos(a), 0.3, sin(a)) * _rng.randf_range(10.0, 18.0), AMB_DB)
+	var k := String(AMB_KINDS[_rng.randi() % AMB_KINDS.size()])
+	_snd(k, b.global_position + Vector3(cos(a), 0.3, sin(a)) * _rng.randf_range(10.0, 18.0), AMB_DB + float(AMB_TRIM.get(k, 0.0)))

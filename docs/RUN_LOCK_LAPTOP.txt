@@ -1,1 +1,1 @@
-RUNNING 2026-11-11 21:34 - L20 director camera clearance (then L17 re-check)
+IDLE 2026-11-11 22:48 - L20 done (Cycle 79); next: overlay command ignore list + drop !valley

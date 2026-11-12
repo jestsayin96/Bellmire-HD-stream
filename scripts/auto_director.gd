@@ -171,6 +171,19 @@ func _shot_alive(s: Dictionary) -> bool:
         return is_instance_valid(n) and (n as Node3D).is_visible_in_tree()
     return true
 
+## the town tour's shots: the market (the town wide), the scar's mouth, the whole valley
+## (L20: the clearance test cuts to these through the director's own _cut)
+func tour_stops() -> Array:
+    var tour: Array = [[town.get("_market_pos"), 38.0, -42.0]]
+    var si: Dictionary = town.get("_scar_info")
+    if si.has("mouth"):
+        tour.append([si["mouth"], 45.0, -35.0])
+    tour.append([Vector3.ZERO, 120.0, -50.0])
+    var out: Array = []
+    for i in tour.size():
+        out.append({"key": "tour_%d" % i, "pri": 10.0, "pos": tour[i][0], "dist": tour[i][1], "pitch": tour[i][2], "tour": true})
+    return out
+
 ## every shot worth showing right now, best first; `avoid` skips one story
 func _best(avoid: String = "") -> Dictionary:
     var c: Array = []
@@ -236,14 +249,8 @@ func _best(avoid: String = "") -> Dictionary:
                       "node": hb, "dist": 14.0, "pitch": -30.0})
             break
     # 6. the town itself: a slow tour of its best views
-    var tour: Array = [[town.get("_market_pos"), 38.0, -42.0]]
-    var si: Dictionary = town.get("_scar_info")
-    if si.has("mouth"):
-        tour.append([si["mouth"], 45.0, -35.0])
-    tour.append([Vector3.ZERO, 120.0, -50.0])
-    var stp: Array = tour[_tour_i % tour.size()]
-    c.append({"key": "tour_%d" % (_tour_i % tour.size()), "pri": 10.0, "pos": stp[0],
-              "dist": stp[1], "pitch": stp[2], "tour": true})
+    var tour := tour_stops()
+    c.append(tour[_tour_i % tour.size()])
     if _cur.get("tour", false) and _held >= HOLD_MAX:
         _tour_i += 1
     var best := {}

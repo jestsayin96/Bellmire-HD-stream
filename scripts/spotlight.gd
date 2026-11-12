@@ -338,12 +338,36 @@ func _snap(k: String) -> void:
 	var cam: Camera3D = _panes[k]["cam"]
 	if t:
 		var at := t.global_position + Vector3(0, 1.0, 0)
-		cam.global_position = at + _offset_for(t)
+		cam.global_position = _clear(_panes[k], at, at + _offset_for(t), 999.0)
 		cam.look_at(at, Vector3.UP)
 	elif k == "wide":
 		var mp: Vector3 = town.get("_market_pos") if town and town.get("_market_pos") != null else Vector3.ZERO
 		cam.global_position = mp + Vector3(0, 70, 85)
 		cam.look_at(mp, Vector3.UP)
+
+## L20: the pane's camera position after the eye's clearance rule (searched every 0.25 s per pane)
+func _clear(p: Dictionary, at: Vector3, want: Vector3, real: float) -> Vector3:
+	var eye := _eye()
+	if eye == null:
+		return want
+	p["lift_t"] = float(p.get("lift_t", 0.0)) - real
+	if float(p["lift_t"]) <= 0.0:
+		p["lift_t"] = 0.25
+		var sz: Vector2 = (p["box"] as Control).size
+		p["lift"] = eye.clear_shot(at, want, (p["cam"] as Camera3D).fov, sz.x / maxf(1.0, sz.y))
+	# eased like the eye's (tilt and swing glide, never snap; a cut - real 999 - goes straight there)
+	p["mv"] = (p.get("mv", Vector2.ZERO) as Vector2).lerp(p.get("lift", Vector2.ZERO), clampf(real * 3.0, 0.0, 1.0))
+	return RtsCamera.shifted(at, want, p["mv"])
+
+var _eye_n: RtsCamera
+func _eye() -> RtsCamera:
+	if not is_instance_valid(_eye_n):
+		_eye_n = null
+		for c in town.get_children():
+			if c is RtsCamera:
+				_eye_n = c
+				break
+	return _eye_n
 
 ## a little higher and closer below ground, where walls crowd the view
 func _offset_for(t: Node3D) -> Vector3:
@@ -383,7 +407,8 @@ func _follow(real: float) -> void:
 		if t:
 			var cam: Camera3D = p["cam"]
 			var at := t.global_position + Vector3(0, 1.0, 0)
-			var want := at + _offset_for(t)
+			# L20: the eye's clearance rule, not a copy - tilt up over a roof in the pane's lower frame
+			var want := _clear(p, at, at + _offset_for(t), real)
 			if cam.global_position.distance_to(want) > 40.0:
 				cam.global_position = want          # the hero went below (or came up): cut, don't fly
 			else:

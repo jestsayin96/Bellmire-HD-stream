@@ -196,7 +196,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (Cycle 76): lanes + queues, !look / !testbits / !testsub / !testpoints (local only), pair + 2x2, F10 with the UI, FPS 44 -> 40 with all three lanes; L17_TEST OK. For the desktop: add `func spotlight(uid, lane, secs, why): return Spotlight.spotlight(self, uid, lane, secs, why)` to town.gd.
 - [x] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
       DONE (Cycle 77): the freshest chatter (2 min) is the director's hero pick (36-50), "Now watching" chip, 5 s teal name glow, !look via the points lane; Chronicle entries capped at 2 lines; L18_TEST OK.
-- [ ] L20. Director camera clearance (supervisor, Nov 11; was D13). CORRECTION to the original note: the
+- [x] L20. Director camera clearance (supervisor, Nov 11; was D13). CORRECTION to the original note: the
       roof in renders/cycles/20261112_d6b/square_f460_east.png was NOT an auto-director shot - _d6b_shot.gd
       placed its own fixed camera 14 m up beside the square, so that framing is the test tool's, not the
       director's. The real gap (found by the laptop, Nov 11): the camera's edge-protection check only covers
@@ -204,6 +204,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       roofs beside that line go unprotected. Fix it in the eye camera for every shot type, and prove it with
       real director shots - town wide, tour, hero follow, fight, raid - rendered and looked at, not with a
       fixed test camera. The L17 spotlight panes each get their own camera, so they must share this rule.
+      DONE (Cycle 79): every shot tilts / swings round its subject until the near lower frame is clear of roofs, props, walls and towers (one rule, the panes share it); pull-in never closer than 6 m; real director shots of all six types 0-2% blocked (raw up to 100%); L20_TEST OK.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:

@@ -1,1 +1,1 @@
-IDLE 2026-11-12 14:38 - L28a + L28b done and pushed; L28c/L28d next
+RUNNING 2026-11-12 14:52 - L28c lighting/atmosphere + L28d detail decals (laptop jestai)

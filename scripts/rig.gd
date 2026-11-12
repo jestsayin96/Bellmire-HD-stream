@@ -17,6 +17,25 @@ static func find(n: Node) -> AnimationPlayer:
             st.append(g)
     return null
 
+## D17a: NO T-POSE. A body whose AnimationPlayer has nothing playing stands in
+## whatever pose its last clip left it in - or the bind T-pose if the clip it was
+## asked for was never there. So: a missing clip falls back to the model's own
+## idle (logged once per clip name), and every one-shot (an attack, a cheer, a
+## hit, a cast) is queued back into the loop the body was in before it (walk,
+## idle, the saddle); a death settles into its held _Pose clip. `fallback =
+## false` gives the old behaviour (tools/_d17a_test.gd --old).
+static var fallback := true
+static var misses := 0          # distinct clip names asked for and missing
+static var fell_back := 0       # plays that went to the idle instead
+static var chained := 0         # one-shots given a clip to return to
+static var _missed := {}
+
+const IDLES := ["Idle", "Unarmed_Idle", "Idle_B", "2H_Melee_Idle", "Skeleton_Idle",
+    "Slime_Idle", "Bat_Flying", "Dragon_Flying"]
+
+static func loops(nm: String) -> bool:
+    return nm in LOOPING or nm.ends_with("_Pose") or nm.ends_with("_Idle")
+
 static func prep(ap: AnimationPlayer) -> void:
     if ap == null:
         return
@@ -24,16 +43,76 @@ static func prep(ap: AnimationPlayer) -> void:
         var a: Animation = ap.get_animation(nm)
         if a == null:
             continue
-        a.loop_mode = Animation.LOOP_LINEAR if nm in LOOPING else Animation.LOOP_NONE
+        var lp: bool = loops(String(nm)) if fallback else nm in LOOPING
+        a.loop_mode = Animation.LOOP_LINEAR if lp else Animation.LOOP_NONE
+    # a queued return (attack -> walk) blends instead of snapping
+    if fallback:
+        ap.playback_default_blend_time = 0.2
+
+## the model's own resting loop (cached on the player)
+static func idle_of(ap: AnimationPlayer) -> String:
+    if ap.has_meta("rig_idle"):
+        return String(ap.get_meta("rig_idle"))
+    var pick := ""
+    for nm in IDLES:
+        if ap.has_animation(nm):
+            pick = nm
+            break
+    if pick == "":
+        for nm in ap.get_animation_list():
+            var s := String(nm)
+            if s != "RESET" and s != "T-Pose" and ap.get_animation(nm).loop_mode != Animation.LOOP_NONE:
+                pick = s
+                break
+    if pick == "":
+        for nm in ap.get_animation_list():
+            var s := String(nm)
+            if s != "RESET" and s != "T-Pose":
+                pick = s
+                break
+    ap.set_meta("rig_idle", pick)
+    return pick
+
+## what a one-shot hands back to when it ends ("" = hold the last frame)
+static func after(ap: AnimationPlayer, nm: String) -> String:
+    if nm.begins_with("Death_"):
+        var p := nm + "_Pose"
+        return p if ap.has_animation(p) else ""
+    var back := String(ap.get_meta("rig_loop", ""))
+    if back == "" or not ap.has_animation(back):
+        back = idle_of(ap)
+    return back
 
 static func play(ap: AnimationPlayer, nm: String, blend := 0.15) -> void:
     if ap == null:
         return
     if not ap.has_animation(nm):
-        return
-    if ap.current_animation == nm and nm in LOOPING:
+        if not fallback:
+            return
+        if not _missed.has(nm):
+            _missed[nm] = true
+            misses += 1
+            print("RIG: no clip '%s' on %s - playing its idle" % [nm, ap.get_parent().name if ap.get_parent() else "?"])
+        fell_back += 1
+        nm = idle_of(ap)
+        if nm == "":
+            return
+    if loops(nm):
+        if fallback:
+            ap.set_meta("rig_loop", nm)
+        if ap.current_animation == nm:
+            return
+        if fallback:
+            ap.clear_queue()
+        ap.play(nm, blend)
         return
     ap.play(nm, blend)
+    if fallback:
+        ap.clear_queue()
+        var nxt := after(ap, nm)
+        if nxt != "" and nxt != nm:
+            ap.queue(nxt)
+            chained += 1
 
 static func tint(n: Node, col: Color) -> void:
     var st: Array = [n]

@@ -422,7 +422,7 @@ func _snap(k: String) -> void:
 	var cam: Camera3D = _panes[k]["cam"]
 	if t:
 		var at := t.global_position + Vector3(0, 1.0, 0)
-		cam.global_position = _clear(_panes[k], at, at + _offset_for(t), 999.0)
+		cam.global_position = _clear(_panes[k], at, at + _offset_lane(k, t), 999.0)
 		cam.look_at(at, Vector3.UP)
 	elif k == "wide":
 		var mp: Vector3 = town.get("_market_pos") if town and town.get("_market_pos") != null else Vector3.ZERO
@@ -457,6 +457,51 @@ func _eye() -> RtsCamera:
 func _offset_for(t: Node3D) -> Vector3:
 	var deep := t.global_position.y < -20.0 or _in_delve(t)
 	return Vector3(0, 9.0, 7.0) if deep else Vector3(0, 6.5, 9.5)
+
+## ---- L22: two spotlit heroes standing together made two panes of one picture (every lane
+## sat at the same offset behind its hero). When another pane's subject - another lane's hero,
+## or the director's - is within CLOSE_M of a lane's hero, that lane takes its own side of the
+## group and its own zoom: bits 110 deg round from the director's side and close in, subs
+## -110 deg at the usual distance, points straight opposite and further out. Measured from
+## the director's camera, so no lane looks the director's way. Apart again (past APART_M,
+## the gap stops it flickering): the usual view behind the hero. Each change is a cut.
+const CLOSE_M := 6.0
+const APART_M := 9.0
+const SPREAD := {"bits": [110.0, 0.85], "subs": [-110.0, 1.05], "points": [180.0, 1.32]}
+
+func _offset_lane(l: String, t: Node3D) -> Vector3:
+	var o := _offset_for(t)
+	if not l in LANES:
+		return o
+	var p: Dictionary = _panes[l]
+	var was := bool(p.get("crowd", false))
+	var near := 1.0e9
+	var tp := t.global_position
+	for k in LANES:
+		if k == l or not (_panes[k]["box"] as Control).visible:
+			continue
+		var b := _target(k)
+		if b:
+			near = minf(near, tp.distance_to(b.global_position))
+	var eye := _eye()
+	if eye and (_panes["director"]["box"] as Control).visible:
+		near = minf(near, tp.distance_to(eye.focus))
+	var crowd := near < (APART_M if was else CLOSE_M)
+	if crowd != was:
+		p["crowd"] = crowd
+		p["cut"] = true
+	if not crowd:
+		return o
+	var main := get_viewport().get_camera_3d() if get_viewport() else null
+	var base := 0.0
+	if main:
+		var d := main.global_position - tp
+		if Vector2(d.x, d.z).length() > 0.5:
+			base = atan2(d.x, d.z)
+	var yaw := base + deg_to_rad(float(SPREAD[l][0]))
+	var k := float(SPREAD[l][1])
+	var h := Vector2(o.x, o.z).length() * k
+	return Vector3(sin(yaw) * h, o.y * k, cos(yaw) * h)
 
 func _in_delve(t: Node3D) -> bool:
 	var p := t.get_parent()
@@ -493,8 +538,9 @@ func _follow(real: float) -> void:
 			var cam: Camera3D = p["cam"]
 			var at := t.global_position + Vector3(0, 1.0, 0)
 			# L20: the eye's clearance rule, not a copy - tilt up over a roof in the pane's lower frame
-			var want := _clear(p, at, at + _offset_for(t), real)
-			if cam.global_position.distance_to(want) > 40.0:
+			var want := _clear(p, at, at + _offset_lane(l, t), real)
+			if cam.global_position.distance_to(want) > 40.0 or bool(p.get("cut", false)):
+				p["cut"] = false          # L22: a new side of the group is a cut, not a swoop through the heroes
 				cam.global_position = want          # the hero went below (or came up): cut, don't fly
 			else:
 				cam.global_position = cam.global_position.lerp(want, clampf(real * 4.0, 0.0, 1.0))

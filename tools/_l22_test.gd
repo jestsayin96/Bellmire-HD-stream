@@ -64,9 +64,11 @@ func _process(_dt: float) -> bool:
 	if _f == 40:
 		var mp: Vector3 = _t.get("_market_pos")
 		_pin = {IDS[0]: mp + Vector3(0, 0, 0), IDS[1]: mp + Vector3(1.5, 0, 0.5), IDS[2]: mp + Vector3(-1.0, 0, 1.2)}
-		_say("local_mre", "MrE", "!testbits 100 ash")
-		_say("local_mre", "MrE", "!testsub bree")
-		_say("local_mre", "MrE", "!testpoints cole")
+		# long spotlights (the test runs past a points redeem's 15 s)
+		var s := Spotlight.of(_t)
+		s.put(IDS[0], "bits", 120.0, "cheered 100 bits")
+		s.put(IDS[1], "subs", 120.0, "subscribed")
+		s.put(IDS[2], "points", 120.0, "redeemed Spotlight")
 		# the director's view on Ash too: the main camera follows Ash
 		_eye._select(_body(IDS[0]))
 		_eye._following = true

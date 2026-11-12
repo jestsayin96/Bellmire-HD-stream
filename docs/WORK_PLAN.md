@@ -57,8 +57,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       landing), watch 12/14/16 walkers on wall/market/bridge beats by level ("sworn into the watch"); scripts/
       cavalry.gd - Knight on the Quaternius CC0 horse, 2/3/4 riders at levels 4/5/6 ride a gate loop from the
       Town Stables, ride out at raids (hp 80). D4_TEST OK; renders/cycles/20261111_d4.
-- [ ] D5. More animals: horses in paddocks, cows, sheep, pigs, chickens, dogs, cats, birds over the
+- [x] D5. More animals: horses in paddocks, cows, sheep, pigs, chickens, dogs, cats, birds over the
       fields, ducks; herded and penned, never on rooftops.
+      DONE cycle 66: hens (19, hand-built, peck) in a fenced run by each farmhouse, a sheepdog walking each flock's
+      fence, 5 horses + a foal in the paddock, 8 cats on the streets (they nap), crows over 5 fields; animals never
+      pick a spot or path through a building (solid_at) and stop at stalls. D5_TEST OK (0 in_solid / 0 high / 0 out
+      of pen in 22200 samples); renders/cycles/20261111_d5.
 - [ ] D6. Unique NPCs: named characters with jobs and daily routines from the lore (the chief, the smith,
       the healer, the innkeeper, the priest, a bard, a town crier who reads the Chronicle aloud, merchants
       with carts, children playing, beggars, a drunk at night). Each with a distinct look and a line in
@@ -105,6 +109,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (Cycle 62): human, elf, dwarf, halfling, orc + the scarkin; bonuses, traits, proportions, skin, parts; L5_TEST OK.
 - [x] L6. More character models for heroes and townsfolk (KayKit Adventurers 2.0 etc., CC0).
 - [ ] L8. (Mr. E's decision, Nov 11) Wild magic below: every spell in the dungeon is a check against the scar - d20 + casting mod (INT mage/sage/necromancer, WIS cleric/druid/monk, CHA warlock/bard/paladin) + proficiency vs DC 10 + floor/2 (cap 20); fail = misfire as on the scar's surface (Spells.cast in_scar=true); nat 1 always, nat 20 never. Monsters unaffected. Test the misfire rates (strong vs weak caster, shallow vs deep).
+- [ ] L10. (URGENT, do before L9 - Mr. E saw it live) Monsters and bosses have NO animations: they glide/"fly"
+      along the ground, never swing, and get stuck in walls and props. 1) Write tools/_mon_anims.gd: for EVERY
+      bestiary def (incl. lords, uniques, L1 creatures) spawn it and print its model, whether an AnimationPlayer
+      was found, the animation list, and which of def.anims (idle/walk/run/attack/cast/hit/die/rise) actually
+      exist - any missing name means monster._play() silently does nothing. 2) Fix each: correct the names, or
+      attach the shared rig library (KayKit Skeletons ship animations separately - Rig_Medium general/movement/
+      combat; the UAL path) so every humanoid has idle, walk, attack, hit, death; beasts get what their pack has.
+      3) Monster movement uses the same obstacle push-out/slide + never-off-floor guard the heroes use (delve.gd
+      _step/_go), so no monster walks into walls or props. 4) Render a fight with 3+ kinds and a lord mid-swing;
+      LOOK. Test: every def reports idle+walk+attack present; _offfloor counts monsters too (0 in props).
 - [ ] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
 - [x] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 

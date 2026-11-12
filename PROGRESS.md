@@ -797,3 +797,25 @@ Town
 - Townsfolk still wear the 1.0 bodies (townsfolk.gd is the desktop's): the same scenes are ready for it.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 528, TWITCH_PARSE OK, L3, L4, L5,
   D2_DELVE OK.
+
+
+## Cycle 66 - D5, more animals (desktop, 2026-11-12)
+- No CC0 hen or cat in the packs we hold (lore has none either: one "named livestock" note), so scripts/animal.gd
+  (.bak_d5) builds them from shapes: "proc:hen" (4 feather colours, comb, beak, legs that step, pecks when idle)
+  and "proc:cat" (5 coats, ears, green eyes, swaying tail, settles low and naps 8-30 s). Animal.kind / .edge added.
+- Every animal now refuses a wander target, or a straight walk to one, that crosses a building footprint
+  (town.solid_at, 0.35 m margin) and stops if a stall/house is in the next step; town._animal() starts each
+  one with keep_walkable() (the market dogs used to start inside stalls: 6-8 in_solid samples before the fix).
+- town.gd (.bak_d5) _spawn_more_animals(), own rng 5055 so the old herds stay put: a 7x6 m fenced hen run beside
+  each farmhouse (5-7 hens, 19 in all; the farm yard is in _objs so is_clear() refused everything - tested against
+  footprints 6.5 m, pens, fields, road, river instead); a Corgi sheepdog that walks the edges of each sheep pen;
+  two more horses and a Foal (Horse.glb at 0.17) in the paddock; 8 cats on street edges within 62 m of the
+  square; 3 crows wheeling over each of 5 fields.
+- tools/_d5_test.gd: 74 animals (Hen 19, Cat 8, Horse 5, Foal 1, Duck 19, sheepdog 1 per flock...), 3000 frames
+  at 4x: in_solid 0, on a roof 0, out of pen 0 of 22200 samples; hens and cats wander. D5_TEST OK.
+- tools/_d5_shot.gd -> renders/cycles/20261111_d5 (hens_close, hen_run, cat_close, cat_street, sheepdog_flock,
+  paddock_foal, paddock, crows_field, farm_above). Looked at: hens read as hens, the black and ginger cats sit by
+  houses, horses + foal graze, crows over a field, sheepdog among the flock. Weak spots: the shapes are simple next
+  to the Quaternius animals; the sheepdog is a little small for the sheep; only 3 farmsteads so 3 hen runs.
+- Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 1039, TWITCH_PARSE OK, TOWNWALK
+  PASS (0.098%, raid 0%), _delve_test ran with 0 script errors.

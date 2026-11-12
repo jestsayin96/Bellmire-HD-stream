@@ -2817,7 +2817,12 @@ const ANIMALS := {
     "Duck":  ["res://assets/animals/Duck.glb", 0.0019, 0.5],
     "Corgi": ["res://assets/animals/Corgi.glb", 0.0019, 1.5],
     "Fox":   ["res://assets/animals/Red.glb", 0.0022, 1.3],
+    "Foal":  ["res://assets/animals/Horse.glb", 0.17, 0.9],
+    "Hen":   ["proc:hen", 1.0, 0.7],
+    "Cat":   ["proc:cat", 1.0, 0.9],
 }
+var _flock_pens := []         # [centre, fw, sd, hw, hd] of each sheep pen (D5 sheepdogs)
+var _paddock := []            # [centre, fw, sd] of the horse paddock
 
 func _animal(kind: String, c: Vector3, fw: Vector3, sd: Vector3, hw: float, hd: float, at: Vector3, float_y := INF) -> void:
     var a := Animal.new()
@@ -2826,12 +2831,15 @@ func _animal(kind: String, c: Vector3, fw: Vector3, sd: Vector3, hw: float, hd: 
     a.scale_f = float(d[1])
     a.speed = float(d[2])
     a.town = self
+    a.kind = kind
     a.centre = c
     a.fwd = fw
     a.side = sd
     a.hw = hw
     a.hd = hd
     a.float_y = float_y
+    if float_y == INF:
+        at = keep_walkable(at)            # never start inside a stall or a house
     a.position = Vector3(at.x, float_y if float_y != INF else height_at(at.x, at.z), at.z)
     a.rotation.y = randf() * TAU
     a.name = kind
@@ -2887,6 +2895,8 @@ func _spawn_animals() -> void:
         _pen(pc, fw, sd, hw, hd, (hp - pc).normalized())
         _objs.append([pc, 10.0])
         var hk: Array = herds[i % herds.size()]
+        if String(hk[0]) == "Sheep":
+            _flock_pens.append([pc, fw, sd, hw - 1.4, hd - 1.4])
         for k in range(int(hk[1])):
             var at := pc + sd * rng.randf_range(-hw + 1.5, hw - 1.5) + fw * rng.randf_range(-hd + 1.5, hd - 1.5)
             _animal(String(hk[0]), pc, fw, sd, hw - 1.4, hd - 1.4, at)
@@ -2901,6 +2911,7 @@ func _spawn_animals() -> void:
             var pfw := out
             var psd := Vector3(-out.z, 0, out.x)
             _pen(pd, pfw, psd, 13.0, 10.0, -out)
+            _paddock = [pd, pfw, psd]
             _objs.append([pd, 16.0])
             for k in range(3):
                 _animal("Horse", pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
@@ -2952,6 +2963,96 @@ func _spawn_animals() -> void:
             var w := rng.randf_range(0.12, 0.25) * (1.0 if rng.randf() < 0.5 else -1.0)
             _birds.append([b, sp[0] as Vector3 + Vector3(rng.randf_range(-8, 8), rng.randf_range(-4, 6), rng.randf_range(-8, 8)),
                            float(sp[1]) * rng.randf_range(0.6, 1.1), w, rng.randf() * TAU])
+    _spawn_more_animals(dark)
+
+## D5: hens in a fenced run by each farmhouse, a sheepdog walking the edge of
+## each flock, more horses and a foal in the paddock, cats about the streets,
+## crows wheeling over the fields. Own rng so the older herds stay where they were.
+func _spawn_more_animals(dark: StandardMaterial3D) -> void:
+    var rng := RandomNumberGenerator.new()
+    rng.seed = 5055
+    for i in range(_farm_frames.size()):
+        var ff: Array = _farm_frames[i]
+        var hp: Vector3 = ff[0]
+        var fw: Vector3 = ff[1]
+        var sd: Vector3 = ff[2]
+        var sg: float = float(ff[3])
+        var to_road: Vector3 = ff[4]
+        var run := Vector3.INF
+        # (the farm's own yard is in _objs, so is_clear() refuses all of it: test
+        # the footprints, the other pens, the fields, the road and the river instead)
+        for cand in [hp - sd * (sg * 13.0), hp + fw * 13.0, hp - fw * 13.0, hp - to_road * 13.0,
+                     hp - sd * (sg * 17.0), hp + fw * 17.0, hp - fw * 17.0, hp - to_road * 17.0]:
+            var cv: Vector3 = cand
+            var near_pen := false
+            for pc in _pens:
+                if Vector2(cv.x - (pc as Vector3).x, cv.z - (pc as Vector3).z).length() < 15.0:
+                    near_pen = true
+            if not near_pen and not _in_field(cv, 4.0) and road_dist(cv) > 6.0 \
+                    and river_dist(cv.x, cv.z) > RIVER_W + RIVER_BANK + 5.0 and solid_at(cv, 6.5).is_empty():
+                run = cv
+                break
+        if run == Vector3.INF:
+            continue
+        _pen(run, fw, sd, 3.5, 3.0, (hp - run).normalized())
+        _objs.append([run, 5.0])
+        for k in range(rng.randi_range(5, 7)):
+            _animal("Hen", run, fw, sd, 2.7, 2.2, run + sd * rng.randf_range(-2.4, 2.4) + fw * rng.randf_range(-1.9, 1.9))
+    # a sheepdog with every flock, working the fence line
+    for fp in _flock_pens:
+        var c: Vector3 = fp[0]
+        _animal("Corgi", c, fp[1], fp[2], float(fp[3]), float(fp[4]), c + (fp[2] as Vector3) * float(fp[3]))
+        (animals[animals.size() - 1] as Animal).edge = true
+    # the paddock: two more horses and a foal (five grown horses in all)
+    if not _paddock.is_empty():
+        var pd: Vector3 = _paddock[0]
+        var pfw: Vector3 = _paddock[1]
+        var psd: Vector3 = _paddock[2]
+        for kind in ["Horse", "Horse", "Foal"]:
+            _animal(String(kind), pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+    # cats about the streets and doorsteps inside the town
+    if _market_pos != Vector3.ZERO:
+        var cats := 0
+        var tries := 0
+        while cats < 8 and tries < 600:
+            tries += 1
+            var a := rng.randf() * TAU
+            var r := rng.randf_range(16.0, 62.0)
+            var p := _market_pos + Vector3(cos(a) * r, 0.0, sin(a) * r)
+            if road_dist(p) > 3.5 or not solid_at(p, 1.2).is_empty() or river_dist(p.x, p.z) < RIVER_W + RIVER_BANK + 3.0:
+                continue
+            _animal("Cat", p, Vector3(0, 0, 1), Vector3(1, 0, 0), 4.0, 4.0, p)
+            cats += 1
+    # crows over the fields
+    var fi := 0
+    for f in _fields:
+        if fi >= 5:
+            break
+        fi += 1
+        var fc: Vector3 = f[0]
+        var top := fc + Vector3(0, height_at(fc.x, fc.z) + 15.0, 0)
+        var rad := 8.0 + maxf(float(f[3]), float(f[4])) * 0.35
+        for k in range(3):
+            var b := Node3D.new()
+            for side_s in [-1.0, 1.0]:
+                var wing := MeshInstance3D.new()
+                var wm := BoxMesh.new()
+                wm.size = Vector3(0.55, 0.03, 0.22)
+                wing.mesh = wm
+                wing.material_override = dark
+                wing.position = Vector3(0.28 * float(side_s), 0, 0)
+                b.add_child(wing)
+            var body := MeshInstance3D.new()
+            var bm := BoxMesh.new()
+            bm.size = Vector3(0.12, 0.1, 0.35)
+            body.mesh = bm
+            body.material_override = dark
+            b.add_child(body)
+            b.scale = Vector3.ONE * 1.3
+            add_child(b)
+            var w := rng.randf_range(0.15, 0.3) * (1.0 if rng.randf() < 0.5 else -1.0)
+            _birds.append([b, top + Vector3(rng.randf_range(-4, 4), rng.randf_range(-2, 4), rng.randf_range(-4, 4)),
+                           rad * rng.randf_range(0.6, 1.1), w, rng.randf() * TAU])
 
 ## ---------------------------------------------------------------- fishing
 ## Timber docks on the town bank, a fisher on each. Fishing rules are in

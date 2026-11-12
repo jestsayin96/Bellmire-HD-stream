@@ -726,3 +726,12 @@ details.hero > summary:focus-visible { outline-offset: -1px; }
 @media (forced-colors: active) {
   .tier, .cbadge, .hsigil, .chip, .brow::before, .hpfill, .xpfill { forced-color-adjust: none; }
 }
+
+/* ---- H5: Twitch chat (opt-in embed) ---- */
+#chat .chatbox { display: grid; gap: 10px; }
+.chatload { justify-self: start; font: inherit; font-weight: 600; cursor: pointer; color: var(--night); background: var(--teal-br); border: 0; border-radius: 8px; padding: 9px 16px; }
+.chatload:hover { background: var(--teal); }
+.chatnote { margin: 0; font-size: .84rem; color: var(--parch-dim); opacity: .75; }
+#twitchChatFrame { width: 100%; height: 480px; border: 1px solid var(--edge); border-radius: 8px; background: #18171f; display: block; }
+html.overlay #chat { display: none !important; }
+@media (max-width: 460px) { #twitchChatFrame { height: 420px; } }

@@ -941,6 +941,30 @@ function showProblem(msg) {
   if (st) { st.className = "status bad"; st.textContent = "Showing nothing rather than guessing."; }
 }
 
+// ---------------------------------------------------------------- Twitch chat (H5)
+// Opt-in: the iframe is created ONLY when the viewer clicks. The channel is a
+// hard-coded constant and the parent is THIS page's own hostname - no snapshot
+// value is ever used to build the URL (docs/HUB_SECURITY.md). The page stays
+// read-only; the embed is a separate, cross-origin browsing context.
+const TWITCH_CHANNEL = "jestsayin96";    // Mr. E's channel - a constant, never snapshot data
+function loadTwitchChat() {
+  const box = $("chatBox");
+  if (!box || box.querySelector("iframe")) return;
+  const host = location.hostname || "localhost";
+  const frame = document.createElement("iframe");
+  frame.id = "twitchChatFrame";
+  frame.title = "Twitch chat for " + TWITCH_CHANNEL;
+  frame.setAttribute("loading", "lazy");
+  // official chat embed: https://www.twitch.tv/embed/<channel>/chat?parent=<host>
+  frame.src = "https://www.twitch.tv/embed/" + TWITCH_CHANNEL + "/chat?parent=" +
+              encodeURIComponent(host) + "&darkpopout";
+  box.replaceChildren(frame);
+}
+(function () {
+  const btn = $("chatLoad");
+  if (btn) btn.addEventListener("click", loadTwitchChat);
+})();
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;

@@ -69,3 +69,50 @@ GitHub Pages is Mr. E's decision and happens after that review, not before.
 
 Voting with Twitch login reopens all of this and adds CSRF, session handling and ballot stuffing.
 None of it is in scope now. When it starts, this document gets a second half.
+
+## Phase 2, H5 - the Twitch chat embed and the ONE CSP change (FLAG: supervisor review)
+
+This is the first and only place the hub touches a third party. It is opt-in and the
+CSP change is the minimum the official embed needs. Review this section before any republish.
+
+### What was added
+- A "Twitch chat" section with a **Load Twitch chat** button. Nothing from Twitch loads on
+  page load. The iframe is created only when a viewer clicks the button (`loadTwitchChat()`).
+- The iframe is the official chat embed, exactly per dev.twitch.tv/docs/embed/chat:
+    https://www.twitch.tv/embed/<channel>/chat?parent=<host>
+  - `<channel>` is the hard-coded constant `TWITCH_CHANNEL = "jestsayin96"` in app.js. It is
+    NEVER built from snapshot data. No hero name / title / epitaph / any payload field goes
+    anywhere near the URL.
+  - `<host>` is `location.hostname` (this page's own domain), url-encoded. Not snapshot data.
+
+### The CSP change (before -> after)
+BEFORE:
+  default-src 'none'; connect-src <supabase>; script-src 'self'; style-src 'self';
+  img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'
+AFTER (one directive added):
+  ... ; font-src 'self'; frame-src https://www.twitch.tv https://embed.twitch.tv; base-uri 'none'; ...
+
+- The ONLY addition is `frame-src https://www.twitch.tv https://embed.twitch.tv` - two named
+  Twitch hosts, no wildcard. `www.twitch.tv` is the documented chat-embed host; `embed.twitch.tv`
+  covers the embed's own redirect. `default-src 'none'` still blocks every other frame.
+- Nothing else changed. script-src / style-src / connect-src / img-src are untouched, so the
+  embed cannot add scripts, styles, connections or images to THIS page.
+
+### Why this is safe
+- The iframe is a separate, cross-origin browsing context. Twitch's own page runs inside it under
+  Twitch's origin and Twitch's own CSP; our `frame-src` only governs WHICH origins may be framed,
+  not what runs inside the frame. Our page cannot read into the iframe and the iframe cannot read
+  our DOM (same-origin policy).
+- Opt-in means a viewer who never clicks never contacts Twitch at all - no third-party request,
+  no third-party cookie, by default.
+- The page stays strictly READ-ONLY. The embed sends no snapshot data anywhere; chatting happens
+  inside Twitch's own iframe, under the viewer's own Twitch session, not through this page.
+- All four original invariants are intact: snapshot strings still reach the DOM only via el();
+  no snapshot value is a URL/src/href/style; the rest of the CSP is unchanged; the honest states
+  and version gate are unchanged.
+
+### What the supervisor should check before republishing
+1. `frame-src` lists only the two Twitch hosts, no wildcard, and no other directive loosened.
+2. `TWITCH_CHANNEL` is a constant; grep confirms no snapshot field is concatenated into the src.
+3. The embed is opt-in (button-triggered) and absent in overlay mode.
+If any of that is not true, do not republish.

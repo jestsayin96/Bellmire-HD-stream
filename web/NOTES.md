@@ -225,3 +225,17 @@ the second pass:
   gold corner ticks, done entirely in CSS - no background images. The NOTES-1
   warning against kitsch still governs: ornament is spent on the initials, the
   tier emblems, the corners and the band, and nowhere else.
+
+---
+
+## H5: the Twitch chat embed (opt-in) and the one CSP change
+- The page's whole security stance is "no third party". The chat embed is the single
+  deliberate exception, so it is OPT-IN: the iframe is built only when the viewer clicks
+  "Load Twitch chat". A viewer who never clicks never contacts Twitch.
+- The CSP gains exactly one directive: `frame-src https://www.twitch.tv https://embed.twitch.tv`
+  (two named hosts, no wildcard). Everything else is unchanged, so the embed cannot add
+  scripts, styles, connections or images to this page. Full before/after + reasoning is in
+  docs/HUB_SECURITY.md, flagged for the supervisor.
+- The iframe src is the official chat embed, channel = the constant TWITCH_CHANNEL, parent =
+  this page's own hostname. No snapshot value ever touches the URL.
+- The clickable d20 the phase also asks for already exists - the die rolls on click/Enter/Space.

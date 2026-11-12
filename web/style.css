@@ -641,6 +641,7 @@ html.overlay .findrow,
 html.overlay #boardSelf,
 html.overlay #boardTabs,
 html.overlay #chronChips,
+html.overlay #chronFind,
 html.overlay .big-msg { display: none !important; }
 /* a slim masthead */
 html.overlay header.hero { padding: 10px 12px 0; margin-bottom: 10px; }
@@ -666,3 +667,7 @@ html.overlay .cline { font-size: .95rem; }
 html.overlay .note { font-size: .8rem; }
 /* titles a touch tighter in the column */
 html.overlay .title { font-size: 1.2rem; }
+
+/* ---- chronicle: filter chips with icons, and the text filter ---- */
+.chip .chipic { width: 1.05em; height: 1.05em; margin-right: -1px; }
+#chronFind { margin: 0 0 10px; }

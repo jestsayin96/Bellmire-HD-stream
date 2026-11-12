@@ -203,7 +203,7 @@ function render(p) {
   renderTown(t);
   renderBoards(arr(p.heroes), arr(p.fallen));
   renderHeroes(arr(p.heroes));
-  renderChronicle(p.chronicle);
+  renderChronicle(p.chronicle, { auto: true });
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
@@ -560,25 +560,62 @@ function renderFallen(fs) {
 }
 
 // ============================================================ THE CHRONICLE
+// The known kinds get an icon and a nice plural label; any OTHER kind the game
+// publishes still gets its own chip (a generic glyph + its own name, Title-cased),
+// so a new event type needs no page change. The kind string is sanitised for the
+// CSS class and whitelisted for the icon - it is never written to the DOM as
+// markup, only as textContent in the chip label and the entry heading.
 const CHRON_KINDS = [
-  { t: "fight", label: "Fights" }, { t: "death", label: "Deaths" }, { t: "raid", label: "Raids" },
-  { t: "town", label: "Town" }, { t: "lore", label: "Lore" }, { t: "loot", label: "Loot" }, { t: "delve", label: "Delves" },
+  { t: "fight", label: "Fights", one: "Fight" }, { t: "death", label: "Deaths", one: "Death" },
+  { t: "raid", label: "Raids", one: "Raid" }, { t: "town", label: "Town", one: "Town" },
+  { t: "lore", label: "Lore", one: "Lore" }, { t: "loot", label: "Loot", one: "Loot" },
+  { t: "delve", label: "Delves", one: "Delve" },
 ];
+const CHRON_ICON = new Set(CHRON_KINDS.map((k) => k.t));   // kinds that have a drawn glyph
 const CHRON_MAX = 50;
-let chronOff = new Set();
+let chronOff = new Set();          // kind keys switched OFF
+let chronText = "";                // free-text filter
+let chronData = null;              // the latest raw chronicle (for hover-paused repaints)
+let chronHover = false;            // true while the pointer is over the feed
+let chronPending = false;          // an auto-refresh arrived while hovering
+
+const titleCase = (s) => String(s).replace(/[_-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
 function chronEntries(raw) {
   return arr(raw)
     .filter((e) => e && typeof e === "object" && typeof e.s === "string" && e.s.trim() !== "")
     .slice(0, CHRON_MAX)
-    .map((e) => ({ t: CHRON_KINDS.some((k) => k.t === e.t) ? e.t : "other", s: String(e.s), at: typeof e.at === "string" ? e.at : "" }));
+    .map((e) => {
+      const rawT = String(e.t == null ? "" : e.t).toLowerCase().trim();
+      const t = /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rawT) ? rawT : "other";   // sane key, else "other"
+      const known = CHRON_KINDS.find((k) => k.t === t);
+      return { t, known: !!known, label: known ? known.one : (t === "other" ? "Other" : titleCase(t)),
+                icon: CHRON_ICON.has(t) ? t : "other",
+               key: t.replace(/[^a-z0-9]+/g, "-"),           // for the CSS class only
+               s: String(e.s), at: typeof e.at === "string" ? e.at : "" };
+    });
 }
 
-function renderChronicle(raw) {
-  const chips = $("chronChips"), list = $("chronList"), note = $("chronNote");
+// store the latest data and repaint. An AUTO refresh (from the 60 s poll) is held
+// back while the viewer is reading the feed (pointer over it), so a busy moment
+// does not reshuffle lines under them; the held update is applied when they leave.
+// A user action (chip, search, clear) always paints at once.
+function renderChronicle(raw, opts) {
+  if (raw !== undefined) chronData = raw;
+  const auto = opts && opts.auto;
+  if (auto && chronHover && $("chronList").childElementCount) { chronPending = true; return; }
+  chronPending = false;
+  paintChronicle();
+}
+
+function paintChronicle() {
+  const raw = chronData;
+  const chips = $("chronChips"), list = $("chronList"), note = $("chronNote"), find = $("chronFind");
   chips.replaceChildren();
   list.replaceChildren();
-  if (raw == null || !Array.isArray(raw)) {
+  const hasData = Array.isArray(raw);
+  if (find) find.classList.toggle("hide", !hasData);
+  if (!hasData) {
     note.textContent = "The chronicle will appear here once the town reports it.";
     note.className = "note quiet";
     return;
@@ -589,46 +626,54 @@ function renderChronicle(raw) {
     note.className = "note quiet";
     return;
   }
-  const present = CHRON_KINDS.filter((k) => entries.some((e) => e.t === k.t));
-  if (entries.some((e) => e.t === "other")) present.push({ t: "other", label: "Other" });
-  for (const k of present) {
-    const count = entries.filter((e) => e.t === k.t).length;
-    const on = !chronOff.has(k.t);
-    const c = el("button", "chip kind-" + k.t + (on ? " on" : ""));
+
+  // one chip per kind actually present: known kinds first (canonical order), then
+  // any novel kinds the game published, alphabetically.
+  const seen = new Map();   // key -> {key, label, icon, count}
+  for (const e of entries) {
+    const g = seen.get(e.t) || { t: e.t, key: e.key, icon: e.icon, label: e.known ? CHRON_KINDS.find((k) => k.t === e.t).label : e.label, count: 0 };
+    g.count++; seen.set(e.t, g);
+  }
+  const order = CHRON_KINDS.filter((k) => seen.has(k.t)).map((k) => seen.get(k.t))
+    .concat([...seen.values()].filter((g) => !CHRON_ICON.has(g.t)).sort((a, b) => a.label.localeCompare(b.label)));
+  for (const g of order) {
+    const on = !chronOff.has(g.t);
+    const c = el("button", "chip kind-" + g.key + (on ? " on" : ""));
     c.type = "button";
     c.setAttribute("aria-pressed", on ? "true" : "false");
-    c.append(document.createTextNode(k.label), el("span", "cnt", count));
-    c.addEventListener("click", () => { if (chronOff.has(k.t)) chronOff.delete(k.t); else chronOff.add(k.t); renderChronicle(raw); });
+    c.append(icon(g.icon, "chipic"), document.createTextNode(g.label), el("span", "cnt", g.count));
+    c.addEventListener("click", () => { if (chronOff.has(g.t)) chronOff.delete(g.t); else chronOff.add(g.t); paintChronicle(); });
     chips.append(c);
   }
   if (chronOff.size) {
-    const clear = el("button", "chip clear", "Show all");
+    const clear = el("button", "chip clear", "Show all kinds");
     clear.type = "button";
-    clear.addEventListener("click", () => { chronOff.clear(); renderChronicle(raw); });
+    clear.addEventListener("click", () => { chronOff.clear(); paintChronicle(); });
     chips.append(clear);
   }
-  const shown = entries.filter((e) => !chronOff.has(e.t));
+
+  const q = chronText.trim().toLowerCase();
+  const shown = entries.filter((e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)));
   if (!shown.length) {
-    note.textContent = "Every kind is switched off - tap a chip to bring the chronicle back.";
     note.className = "note quiet";
+    note.textContent = q
+      ? "No entries match “" + q + "”" + (chronOff.size ? " in the kinds shown." : ".")
+      : "Every kind is switched off - tap a chip to bring the chronicle back.";
     return;
   }
   for (const e of shown) {
-    const li = el("li", "centry kind-" + e.t);
-    // a per-type icon badge in place of the plain rail (the icon id is the kind,
-    // which is already whitelisted to one of the known types or "other")
+    const li = el("li", "centry kind-" + e.key);
     const badge = el("span", "cbadge");
     badge.setAttribute("aria-hidden", "true");
-    badge.append(icon(e.t));
+    badge.append(icon(e.icon));                 // whitelisted glyph id
     li.append(badge);
     const body = el("div", "cbody");
     const head = el("div", "chead");
-    const kind = CHRON_KINDS.find((k) => k.t === e.t);
-    head.append(el("span", "ckind", kind ? kind.label.replace(/s$/, "") : "Other"));
+    head.append(el("span", "ckind", e.label));  // textContent; a novel kind shows its own name, escaped
     const a = ago(e.at);
     if (a) {
       const time = el("time", "cwhen", a.text);
-      time.dateTime = e.at;        // ISO stamp as an attribute value only
+      time.dateTime = e.at;
       time.title = when(e.at);
       head.append(time);
     }
@@ -637,9 +682,10 @@ function renderChronicle(raw) {
     list.append(li);
   }
   note.className = "note";
-  note.textContent = shown.length === entries.length
-    ? entries.length + (entries.length === 1 ? " entry" : " entries") + ", newest first."
-    : "Showing " + shown.length + " of " + entries.length + ", newest first.";
+  const tail = q || chronOff.size ? " (" + entries.length + " in all)" : "";
+  note.textContent = (shown.length === entries.length
+    ? entries.length + (entries.length === 1 ? " entry" : " entries")
+    : "Showing " + shown.length + " of " + entries.length) + ", newest first." + (tail && shown.length !== entries.length ? "" : "");
 }
 
 // ============================================================ COMMANDS
@@ -838,6 +884,18 @@ $("boardFind").addEventListener("input", (e) => {
   boardFind = e.target.value;
   if (last) { const p = MOCK ? withMock(last.payload) : last.payload; renderBoards(arr(p.heroes), arr(p.fallen)); }
 });
+$("chronFind").addEventListener("input", (e) => { chronText = e.target.value; paintChronicle(); });
+// pause-on-hover: a poll that lands while the viewer is reading the feed is held,
+// then applied when they move away, so lines don't reshuffle under the pointer.
+(function () {
+  const sec = $("chronicle");
+  const enter = () => { chronHover = true; };
+  const leave = () => { chronHover = false; if (chronPending) { chronPending = false; paintChronicle(); } };
+  sec.addEventListener("mouseenter", enter);
+  sec.addEventListener("mouseleave", leave);
+  sec.addEventListener("focusin", enter);
+  sec.addEventListener("focusout", (e) => { if (!sec.contains(e.relatedTarget)) leave(); });
+})();
 
 load();
 setInterval(load, REFRESH_MS);

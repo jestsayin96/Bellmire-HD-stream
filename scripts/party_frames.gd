@@ -6,7 +6,7 @@ class_name PartyFrames
 ## the town's own band silver, the fallen greyed with a cross. Lives in the
 ## RtsCamera's layer, so F10 hides it with the rest of the interface.
 
-const W := 250
+const W := 400          # L15: at 1080p; UiTheme.px scales it
 const GOLD := Color(1.0, 0.84, 0.36)
 const SILVER := Color(0.82, 0.84, 0.88)
 const DEAD := Color(0.55, 0.52, 0.50)
@@ -17,15 +17,24 @@ var _t := 0.0
 
 func setup(t: Node3D) -> void:
 	town = t
-	anchor_left = 0.0
-	anchor_top = 1.0
-	anchor_bottom = 1.0
-	offset_left = 18
-	offset_bottom = -300
-	grow_vertical = Control.GROW_DIRECTION_BEGIN
-	custom_minimum_size = Vector2(W, 0)
+	UiTheme.watch(self)
+	_place()
 	add_theme_constant_override("separation", 6)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	refresh()
+
+## L15: top-left, under the key help (the Chronicle grew and owns the bottom-left)
+func _place() -> void:
+	anchor_left = 0.0
+	anchor_top = 0.0
+	anchor_bottom = 0.0
+	offset_left = UiTheme.px(18)
+	offset_top = UiTheme.px(150)
+	grow_vertical = Control.GROW_DIRECTION_END
+	custom_minimum_size = Vector2(UiTheme.px(W), 0)
+
+func restyle() -> void:
+	_place()
 	refresh()
 
 func _process(delta: float) -> void:
@@ -64,10 +73,10 @@ func _label(text: String, col: Color, size: int) -> Label:
 	var lb := Label.new()
 	lb.text = text
 	lb.clip_text = true
-	lb.add_theme_font_size_override("font_size", size)
+	lb.add_theme_font_size_override("font_size", UiTheme.px(size))
 	lb.add_theme_color_override("font_color", col)
 	lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	lb.add_theme_constant_override("outline_size", 4)
+	lb.add_theme_constant_override("outline_size", UiTheme.px(6))
 	lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return lb
 
@@ -89,11 +98,11 @@ func _block(d: Delve) -> PanelContainer:
 	var head := HBoxContainer.new()
 	v.add_child(head)
 	var who := "The town's band" if d.npc_party else "Delvers"
-	var t := _label("%s · floor %d" % [who, d.floor_no], Color(0.95, 0.80, 0.50), 14)
+	var t := _label("%s · floor %d" % [who, d.floor_no], Color(0.95, 0.80, 0.50), 24)
 	t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(t)
 	var oil_col := Color(1.0, 0.45, 0.30) if d.dark or d.oil < 1.0 else (Color(1.0, 0.75, 0.35) if d.oil <= float(d._alive().size()) else Color(0.95, 0.88, 0.60))
-	var oil := _label(("oil %.1f" % d.oil) if d.oil > 0.0 else "no oil - dark", oil_col, 14)
+	var oil := _label(("oil %.1f" % d.oil) if d.oil > 0.0 else "no oil - dark", oil_col, 24)
 	oil.clip_text = false
 	head.add_child(oil)
 	var shown := 0
@@ -103,7 +112,7 @@ func _block(d: Delve) -> PanelContainer:
 		v.add_child(_row(m, d.npc_party, d))
 		shown += 1
 	if d.party.size() > MAX_ROWS:
-		v.add_child(_label("+%d more" % (d.party.size() - MAX_ROWS), SILVER, 12))
+		v.add_child(_label("+%d more" % (d.party.size() - MAX_ROWS), SILVER, 20))
 	return p
 
 func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
@@ -112,7 +121,7 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	var mx := maxf(1.0, float(m.get("max", 1.0)))
 	var alive := hp > 0.0
 	var box := Control.new()
-	box.custom_minimum_size = Vector2(W - 16, 20)
+	box.custom_minimum_size = Vector2(UiTheme.px(W - 16), UiTheme.px(36))
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var bar := ProgressBar.new()
 	bar.show_percentage = false
@@ -126,19 +135,20 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	bar.add_theme_stylebox_override("fill", _style(fill, Color(0, 0, 0, 0.0)))
 	box.add_child(bar)
 	var name_col := (SILVER if npc else GOLD) if alive else DEAD
-	var nm := _label(("%s" if alive else "+ %s") % String(h.get("name", "?")), name_col, 13)
+	var nm := _label(("%s" if alive else "+ %s") % String(h.get("name", "?")), name_col, 28)
 	nm.set_anchors_preset(Control.PRESET_FULL_RECT)
 	nm.offset_left = 5
 	nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	box.add_child(nm)
-	var num := _label("%d/%d" % [int(ceil(hp)), int(mx)] if alive else "fallen", Color(0.95, 0.95, 0.95) if alive else DEAD, 12)
+	var num := _label("%d/%d" % [int(ceil(hp)), int(mx)] if alive else "fallen", Color(0.95, 0.95, 0.95) if alive else DEAD, 22)
 	num.set_anchors_preset(Control.PRESET_FULL_RECT)
 	num.offset_right = -5
 	num.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	box.add_child(num)
 	# L12: the delver's states, coloured, under the bar
-	var sts: Array = d.statuses(m) if d and alive else []
+	# at the largest UI scale the states show under each hero only (room for the Chronicle)
+	var sts: Array = d.statuses(m) if d and alive and UiTheme.scale < 1.4 else []
 	if sts.is_empty():
 		return box
 	var col := VBoxContainer.new()
@@ -149,7 +159,7 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	tags.add_theme_constant_override("separation", 6)
 	tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	for s in sts:
-		var tl := _label(String(s[0]), s[1], 12)
+		var tl := _label(String(s[0]), s[1], 22)
 		tl.clip_text = false
 		tags.add_child(tl)
 	col.add_child(tags)

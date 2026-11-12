@@ -5,7 +5,9 @@ class_name FeedHUD
 ## so the town, the delve and any test harness all share one feed.
 ## Lines age out gently; nothing is ever posted anywhere.
 
-const SHOW := 6
+const SHOW := 5
+## L15: a Chronicle line is 28 px at 1080p (phone-readable); the panel is this wide at 1080p
+const WIDTH := 760
 var source: Array = []
 var _seen := 0
 var _box: VBoxContainer
@@ -29,33 +31,41 @@ static func card_on(town: Node, title: String, sub: String, col: Color) -> void:
 
 func _ready() -> void:
     layer = 20
+    UiTheme.watch(self)
+    _build()
+
+## L15: F11 changed the UI scale - build the panel again at the new sizes
+func restyle() -> void:
+    var keep_t := _card_t
+    var keep_title := _card_title.text if _card_title else ""
+    var keep_sub := _card_sub.text if _card_sub else ""
+    if _panel:
+        _panel.queue_free()
+    _build()
+    if keep_t > 0.0:
+        _card_title.text = keep_title
+        _card_sub.text = keep_sub
+        _card.visible = true
+    _rebuild()
+
+func _build() -> void:
     _panel = PanelContainer.new()
-    var sb := StyleBoxFlat.new()
-    sb.bg_color = Color(0.93, 0.86, 0.69, 0.88)       # parchment
-    sb.border_color = Color(0.45, 0.30, 0.16, 0.95)   # inked edge
-    sb.set_border_width_all(3)
-    sb.set_corner_radius_all(6)
-    sb.content_margin_left = 16
-    sb.content_margin_right = 16
-    sb.content_margin_top = 10
-    sb.content_margin_bottom = 10
-    sb.shadow_color = Color(0, 0, 0, 0.35)
-    sb.shadow_size = 6
+    var sb := UiTheme.parchment()
     _panel.add_theme_stylebox_override("panel", sb)
     _panel.anchor_left = 0.0
     _panel.anchor_top = 1.0
     _panel.anchor_bottom = 1.0
-    _panel.offset_left = 18
-    _panel.offset_bottom = -18
+    _panel.offset_left = UiTheme.px(18)
+    _panel.offset_bottom = -UiTheme.px(18)
     _panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
-    _panel.custom_minimum_size = Vector2(560, 0)
+    _panel.custom_minimum_size = Vector2(UiTheme.px(WIDTH), 0)
     add_child(_panel)
     var v := VBoxContainer.new()
     v.add_theme_constant_override("separation", 2)
     _panel.add_child(v)
     var title := Label.new()
     title.text = "The Chronicle"
-    title.add_theme_font_size_override("font_size", 15)
+    title.add_theme_font_size_override("font_size", UiTheme.px(24))
     title.add_theme_color_override("font_color", Color(0.48, 0.20, 0.12))
     v.add_child(title)
     _card = PanelContainer.new()
@@ -64,23 +74,23 @@ func _ready() -> void:
     cs.border_color = Color(0.78, 0.62, 0.30)
     cs.set_border_width_all(2)
     cs.set_corner_radius_all(5)
-    cs.content_margin_left = 12
-    cs.content_margin_right = 12
-    cs.content_margin_top = 6
-    cs.content_margin_bottom = 8
+    cs.content_margin_left = UiTheme.px(14)
+    cs.content_margin_right = UiTheme.px(14)
+    cs.content_margin_top = UiTheme.px(6)
+    cs.content_margin_bottom = UiTheme.px(10)
     _card.add_theme_stylebox_override("panel", cs)
     var cv := VBoxContainer.new()
     cv.add_theme_constant_override("separation", 0)
     _card.add_child(cv)
     _card_title = Label.new()
-    _card_title.add_theme_font_size_override("font_size", 28)
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(46))
     _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
     _card_title.add_theme_constant_override("outline_size", 6)
     cv.add_child(_card_title)
     _card_sub = Label.new()
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-    _card_sub.custom_minimum_size = Vector2(500, 0)
-    _card_sub.add_theme_font_size_override("font_size", 15)
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 70), 0)
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(28))
     _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
     cv.add_child(_card_sub)
     _card.visible = false
@@ -125,17 +135,19 @@ func _rebuild() -> void:
     for c in _box.get_children():
         c.queue_free()
     # with a card up, fewer lines, so the Chronicle does not climb into the party frames
-    var lines := source.slice(maxi(0, source.size() - (SHOW - 2 if card_showing() else SHOW)))
+    # L15: bigger text, fewer lines (5 at 100%, 4 at 125%, 3 at 150%)
+    var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
+    var lines := source.slice(maxi(0, source.size() - maxi(1, show - 2 if card_showing() else show)))
     while _ages.size() < source.size():
         _ages.append(0.0)
     for i in lines.size():
         var lb := Label.new()
         lb.text = String(lines[i])
         lb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-        lb.custom_minimum_size = Vector2(528, 0)
-        lb.add_theme_font_size_override("font_size", 17)
+        lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
+        lb.add_theme_font_size_override("font_size", UiTheme.px(28))
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
-        lb.add_theme_color_override("font_color", Color(0.20, 0.13, 0.08).lerp(Color(0.55, 0.45, 0.33), 1.0 - k))
+        lb.add_theme_color_override("font_color", Color(0.16, 0.10, 0.06).lerp(Color(0.40, 0.30, 0.20), 1.0 - k))
         _box.add_child(lb)
     _panel.visible = not lines.is_empty() or card_showing()

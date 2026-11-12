@@ -1002,3 +1002,24 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   command. L14_TEST OK. tools/_l14_shot.gd: renders/cycles/20261111_l14 - looked at: the replies in the Chronicle;
   first pass !help forge took seven lines, the short stream line brings it to three.
 - Checks: parse 0 script errors, TWITCH_PARSE OK, L3, L13 OK.
+
+
+## Cycle 73 - L15, stream readability (laptop, 2026-11-11)
+- scripts/ui_theme.gd (new, UiTheme): sizes are written for 1920x1080 and follow the window height; F11 cycles a
+  UI scale of 100 / 125 / 150% (a Chronicle line says which); panels watch it and restyle.
+- At 1080p, 100%: Chronicle lines 28 px (title 24, the lord's card 46 / 28), 5 lines, wider (760), darker ink on
+  the older lines; Guild Roll title 30, lines 26, fallen 22, higher-contrast gold and grey; party frames names 28,
+  numbers and states 22, 400 wide - moved to the top-left under the key help (the Chronicle owns the bottom-left);
+  boss bar title 44, numbers and subtitle 26, 780 wide, under the help; unit frame name 32, text 24; key help 19.
+- Bigger scales adapt instead of colliding: the Chronicle shows 5 / 4 / 3 lines, the Guild Roll sits on the right
+  below the boss bar's band with fewer rows (and no Fallen at 150%), the boss bar keeps its width (text grows),
+  the party frames leave the states to the overhead tags at 150%.
+- Names in the world: a hero's name tag now grows with camera distance past 16 m (up to 3x) so it stays readable
+  from the high stream camera - one line in hero_body.gd (on neither machine's list; L15 asks for name tags). The
+  same rule for creature names (monster.gd) and the state tags under the names (delve.gd).
+- tools/_l15_shot.gd (new; --resolution 1920x1080): the town, a lord fight below, the Chronicle, the roll, saved at
+  1080p and shrunk to 854x480 - LOOKED at the phone frames: at 100% every panel line and hero name reads; at 150%
+  first pass everything overlapped, after the adaptations nothing does. renders/cycles/20261111_l15.
+- tools/_l15_test.gd (headless, new): a Chronicle line 28 px and a roll line 26 px at 1080p; px() maths; F11
+  100 -> 125 -> 150 -> 100; the Chronicle restyles bigger at 150%. L15_TEST OK.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L12 OK, BOSS_TEST OK.

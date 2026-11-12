@@ -129,11 +129,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       cooldown, what it does, example. !help / !commands (short), !help <cmd> (detail). Friendly error replies
       ("!forge needs 120 gold - you have 40"). Write docs/COMMANDS.md from the same data (the hub/website uses it).
       DONE (Cycle 72): data/commands.json -> !help, !help <cmd>, aliases, typo nudges, "- you have N" replies, docs/COMMANDS.md; L14_TEST OK.
-- [ ] L15. STREAM READABILITY (Mr. E: will viewers be able to read it?): design for a 1080p stream watched on a
+- [x] L15. STREAM READABILITY (Mr. E: will viewers be able to read it?): design for a 1080p stream watched on a
       phone. Minimum on-screen text ~28 px at 1080p for anything viewers must read; name tags, Chronicle, Guild
       Roll, party frames, boss bar, banners scaled up; high contrast + outline; a UI scale setting (F11 cycles
       100/125/150%). Test: render at 1920x1080, then downscale to 854x480 (what a phone sees) and LOOK - every
       name and Chronicle line must still be readable. Fix until it is.
+      DONE (Cycle 73): UiTheme sizes for 1080p (Chronicle 28 px, roll 26, frames 28, boss bar 44/26), F11 100/125/150, names grow with distance; phone 854x480 frames read; L15_TEST OK.
 - [ ] L16. GUI/UI polish to an RTS/WoW standard: one theme for every panel (parchment + ink, the JestSayin teal
       as the accent), consistent fonts, icons, frames, spacing; the unit frame, party frames, guild roll,
       chronicle, boss bar, help, chat box all match. Nothing from the old game's interface.

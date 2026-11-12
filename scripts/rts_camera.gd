@@ -42,19 +42,20 @@ func setup(t: Node3D) -> void:
 	add_child(cam)
 	cam.make_current()
 	focus = t.get("_market_pos")
+	UiTheme.watch(self)
 	_layer = CanvasLayer.new()
 	_layer.layer = 30
 	add_child(_layer)
 	_help = Label.new()
 	_help.text = "WASD pan · wheel zoom · right-drag rotate · Q/E turn · R/T tilt\nclick: select · F follow (your hero if none selected) · Esc clear · N names\n1 square · 2 scar · 3 gate · 4 tavern · 5 smithy · 6 armourer · 7 apothecary\nTab: jump into a delve · Space pause · [ ] speed · Enter chat · H hide"
-	_help.add_theme_font_size_override("font_size", 15)
+	_help.add_theme_font_size_override("font_size", UiTheme.px(19))
 	_help.add_theme_color_override("font_color", Color(1, 0.95, 0.85))
 	_help.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 	_help.add_theme_constant_override("outline_size", 6)
 	_help.position = Vector2(16, 12)
 	_layer.add_child(_help)
 	_speed_lb = Label.new()
-	_speed_lb.add_theme_font_size_override("font_size", 18)
+	_speed_lb.add_theme_font_size_override("font_size", UiTheme.px(24))
 	_speed_lb.add_theme_color_override("font_color", Color(1, 0.86, 0.45))
 	_speed_lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 	_speed_lb.add_theme_constant_override("outline_size", 6)
@@ -186,6 +187,10 @@ func _unhandled_input(ev: InputEvent) -> void:
 				_speed_i = mini(_speeds.size() - 1, _speed_i + 1)
 				_set_speed()
 			KEY_H: _help.visible = not _help.visible
+			KEY_F11:
+				# L15: the interface scale for the stream, 100 / 125 / 150%
+				var s := UiTheme.cycle()
+				_say_scale(s)
 			KEY_F: _follow_key()
 			KEY_ESCAPE:
 				_following = false
@@ -397,24 +402,24 @@ func _build_frame() -> void:
 	_frame.anchor_right = 0.5
 	_frame.anchor_top = 1.0
 	_frame.anchor_bottom = 1.0
-	_frame.offset_left = -230
-	_frame.offset_right = 230
-	_frame.offset_bottom = -14
+	_frame.offset_left = -UiTheme.px(300)
+	_frame.offset_right = UiTheme.px(300)
+	_frame.offset_bottom = -UiTheme.px(14)
 	_frame.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_layer.add_child(_frame)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation", 3)
 	_frame.add_child(v)
 	_f_name = Label.new()
-	_f_name.add_theme_font_size_override("font_size", 20)
+	_f_name.add_theme_font_size_override("font_size", UiTheme.px(32))
 	_f_name.add_theme_color_override("font_color", Color(1.0, 0.86, 0.45))
 	v.add_child(_f_name)
 	_f_sub = Label.new()
-	_f_sub.add_theme_font_size_override("font_size", 14)
+	_f_sub.add_theme_font_size_override("font_size", UiTheme.px(24))
 	_f_sub.add_theme_color_override("font_color", Color(0.8, 0.8, 0.82))
 	v.add_child(_f_sub)
 	var hpbox := Control.new()
-	hpbox.custom_minimum_size = Vector2(430, 18)
+	hpbox.custom_minimum_size = Vector2(UiTheme.px(560), UiTheme.px(26))
 	v.add_child(hpbox)
 	_f_hp = ProgressBar.new()
 	_f_hp.show_percentage = false
@@ -429,13 +434,13 @@ func _build_frame() -> void:
 	_f_hp_lb = Label.new()
 	_f_hp_lb.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_f_hp_lb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_f_hp_lb.add_theme_font_size_override("font_size", 13)
+	_f_hp_lb.add_theme_font_size_override("font_size", UiTheme.px(20))
 	hpbox.add_child(_f_hp_lb)
 	_f_body = Label.new()
-	_f_body.add_theme_font_size_override("font_size", 14)
+	_f_body.add_theme_font_size_override("font_size", UiTheme.px(24))
 	_f_body.add_theme_color_override("font_color", Color(0.92, 0.9, 0.85))
 	_f_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_f_body.custom_minimum_size = Vector2(430, 0)
+	_f_body.custom_minimum_size = Vector2(UiTheme.px(560), 0)
 	v.add_child(_f_body)
 
 func _fill_frame() -> void:
@@ -649,3 +654,22 @@ func _fill_light(real: float) -> void:
 		var to_cam := cam.global_position - selected.global_position
 		to_cam.y = 0.0
 		fill.global_position = selected.global_position + Vector3(0, 2.6, 0) + to_cam.normalized() * 1.8
+
+## ---- L15: the stream's UI scale (F11). Panels elsewhere restyle themselves
+## (UiTheme.watch); here the key help, the speed label and the unit frame.
+func restyle() -> void:
+	if _help:
+		_help.add_theme_font_size_override("font_size", UiTheme.px(19))
+	if _speed_lb:
+		_speed_lb.add_theme_font_size_override("font_size", UiTheme.px(24))
+	if _frame:
+		var was := _frame.visible
+		_frame.queue_free()
+		_frame = null
+		if was and selected:
+			_build_frame()
+			_fill_frame()
+
+func _say_scale(s: float) -> void:
+	if town and town.get("feed") != null:
+		(town.get("feed") as Array).append("Interface at %d%% (F11)." % int(round(s * 100.0)))

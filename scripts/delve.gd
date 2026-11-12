@@ -1575,3 +1575,7 @@ func _tags_tick(delta: float) -> void:
 		lb.visible = true
 		# anchored where the name is, pushed down in the billboard's own plane: always just under the name
 		lb.global_position = b.global_position + Vector3(0, 2.3, 0)
+		# L15: keep the tag readable from far off (same rule as the names)
+		var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
+		if cam:
+			lb.pixel_size = 0.01 * clampf(cam.global_position.distance_to(lb.global_position) / 22.0, 0.4, 2.5)

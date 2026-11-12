@@ -167,7 +167,8 @@ func _label() -> void:
     lb.outline_size = 18
     lb.outline_modulate = Color(0, 0, 0, 0.9)
     lb.modulate = (def.get("aura", Color(1, 0.8, 0.4)) as Color).lightened(0.3) if boss else Color(1.0, 0.55, 0.45)
-    lb.visibility_range_end = 70.0 if boss else 26.0
+    lb.visibility_range_end = 90.0 if boss else 60.0
+    lb.name = "name_tag"
     add_child(lb)
     lb.position = Vector3(0, _height() + 0.5, 0)
 
@@ -293,6 +294,7 @@ func _process(delta: float) -> void:
     if _body == null or state == S.DEAD:
         return
     _tick_wild()
+    _tick_tag(delta)
     var lift := float(def.get("lift", 0.0))
     if _body.position.y < lift - 0.05 and get_tree() and _entering():
         return
@@ -638,3 +640,21 @@ func entrance() -> void:
         Spells._burst(root, global_position + Vector3(0, 0.3, 0), col)
         dust.queue_free())
     _play("idle")
+
+## L15: a creature's name stays readable from the stream camera - its label
+## grows with distance past 16 m (as the heroes' names do), checked 4x a second
+var _tag_t := 0.0
+func _tick_tag(delta: float) -> void:
+    _tag_t -= delta
+    if _tag_t > 0.0:
+        return
+    _tag_t = 0.25
+    var lb := get_node_or_null("name_tag") as Label3D
+    var vp := get_viewport()
+    var cam := vp.get_camera_3d() if vp else null
+    if lb == null or cam == null:
+        return
+    if not lb.has_meta("px0"):
+        lb.set_meta("px0", lb.pixel_size)
+    var cd := cam.global_position.distance_to(lb.global_position)
+    lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.6, 3.0)

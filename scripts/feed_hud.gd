@@ -50,11 +50,16 @@ func restyle() -> void:
         _card.visible = true
     _rebuild()
 
-## ---- L21: with the spotlight panes up the Chronicle leaves the panes for the CHROME bar
-## along the bottom (HudDock): full width (less the clock / chat at its right end), one line
-## an entry, as many as fit (2-3) at the L15 size, a lord's card at its left. It is the
-## narration: it stays readable, it just never sits on a pane.
-var _chrome := false
+## ---- L32b (Mr. E's original ask): with the grid up - the stream's resting state, so in
+## effect always - the Chronicle lives on the CENTRE STRIP at the cross of the four panes
+## (HudDock.centre): full width, one line an entry at the L15 size, a lord's card at its
+## left. CALM PACING: a new line lands at most every PACE_S (no busy-moment scroll); a
+## flood skips ahead to the latest FLOOD lines instead of racing through the backlog;
+## each new line fades in.
+const PACE_S := 0.8
+const FLOOD := 8
+var _chrome := false            # "strip mode" (the name predates L32b: it was the chrome bar)
+var _pace_t := 0.0
 
 func _build_chrome() -> void:
     _panel = PanelContainer.new()
@@ -66,7 +71,7 @@ func _build_chrome() -> void:
     _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _panel.name = "Chronicle"
     _panel.add_to_group("hud_chronicle")
-    HudDock.mark(_panel, "chrome")
+    HudDock.mark(_panel, "centre")       # L32b: the strip at the cross of the panes
     add_child(_panel)
     var h := HBoxContainer.new()
     h.add_theme_constant_override("separation", UiTheme.px(16))
@@ -87,16 +92,18 @@ func _build_chrome() -> void:
     cv.add_theme_constant_override("separation", 0)
     _card.add_child(cv)
     _card_title = Label.new()
-    _card_title.add_theme_font_size_override("font_size", UiTheme.px(34))
+    # L32b: sized for the centre strip (0.10 of the screen) - the title and ONE sub
+    # line, so the card can never push the Chronicle past the strip's edge
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(26))
     _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-    _card_title.add_theme_constant_override("outline_size", 5)
+    _card_title.add_theme_constant_override("outline_size", 4)
     cv.add_child(_card_title)
     _card_sub = Label.new()
-    _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-    _card_sub.max_lines_visible = 2
+    _card_sub.autowrap_mode = TextServer.AUTOWRAP_OFF
+    _card_sub.max_lines_visible = 1
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
-    _card_sub.custom_minimum_size = Vector2(UiTheme.px(500), 0)
-    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(24))
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(420), 0)
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(18))
     _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
     cv.add_child(_card_sub)
     _card.visible = false
@@ -109,20 +116,21 @@ func _build_chrome() -> void:
     _panel.visible = false
     _place_chrome()
 
-## the panel fills the chrome bar (a small margin), short of the right end the clock holds
+## the panel fills the centre strip (a small margin); the clock / chat live in the
+## bottom chrome bar now, so the strip keeps its full width
 func _place_chrome() -> void:
-    var r := HudDock.chrome(get_parent())
+    var r := HudDock.centre(get_parent())
     if r.size.y <= 0.0 or _panel == null:
         return
     var m := float(UiTheme.px(6))
     _panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
     _panel.custom_minimum_size = Vector2.ZERO
     _panel.position = r.position + Vector2(m, m)
-    _panel.size = Vector2(r.size.x - 2.0 * m - HudDock.reserve_right, r.size.y - 2.0 * m)
+    _panel.size = Vector2(r.size.x - 2.0 * m, r.size.y - 2.0 * m)
 
-## how many one-line entries fit the bar at the L15 size (2-3)
+## how many one-line entries fit the strip at the L15 size (2-3)
 func _chrome_lines() -> int:
-    var r := HudDock.chrome(get_parent())
+    var r := HudDock.centre(get_parent())
     var fs := UiTheme.px(28)
     var lh := ThemeDB.fallback_font.get_height(fs) + 1.0
     var inner := r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
@@ -144,7 +152,7 @@ func _build() -> void:
     _panel.custom_minimum_size = Vector2(UiTheme.px(WIDTH), 0)
     _panel.name = "Chronicle"
     _panel.add_to_group("hud_chronicle")
-    HudDock.mark(_panel, "chrome")      # L21: with the panes up it is rebuilt in the chrome bar
+    HudDock.mark(_panel, "centre")      # L32b: with the panes up it is rebuilt on the centre strip
     add_child(_panel)
     var v := VBoxContainer.new()
     v.add_theme_constant_override("separation", 2)
@@ -212,9 +220,20 @@ func _process(delta: float) -> void:
         restyle()
     if _chrome:
         _place_chrome()
-    if source.size() != _seen:
+    # L32b calm pacing: _seen is the reveal cursor into source - it advances one line
+    # per PACE_S at most; a flood (a busy moment) skips the cursor to the latest FLOOD
+    # lines rather than racing the strip through the backlog
+    if source.size() < _seen:
         _seen = source.size()
         _rebuild()
+    _pace_t = maxf(0.0, _pace_t - delta / maxf(Engine.time_scale, 0.001))
+    if source.size() > _seen and _pace_t <= 0.0:
+        if source.size() - _seen > FLOOD:
+            _seen = source.size() - FLOOD
+        _seen += 1
+        _pace_t = PACE_S
+        _rebuild()
+        _fade_in_newest()
     for i in _ages.size():
         _ages[i] = float(_ages[i]) + delta
     # the panel itself fades when the town has been quiet a while
@@ -229,7 +248,9 @@ func _rebuild() -> void:
     var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
     if _chrome:
         show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
-    var lines := source.slice(maxi(0, source.size() - maxi(1, show - 2 if card_showing() else show)))
+    # L32b: only lines the pacing cursor has revealed (_seen), newest-revealed last
+    var upto := source.slice(0, mini(_seen, source.size()))
+    var lines := upto.slice(maxi(0, upto.size() - maxi(1, show - 2 if card_showing() else show)))
     while _ages.size() < source.size():
         _ages.append(0.0)
     for i in lines.size():
@@ -254,3 +275,15 @@ func _rebuild() -> void:
         lb.add_theme_color_override("font_color", Color(0.16, 0.10, 0.06).lerp(Color(0.40, 0.30, 0.20), 1.0 - k))
         _box.add_child(lb)
     _panel.visible = not lines.is_empty() or card_showing()
+
+## L32b: a newly revealed line fades in instead of popping
+func _fade_in_newest() -> void:
+    var kids := _box.get_children()
+    if kids.is_empty():
+        return
+    var lb := kids[kids.size() - 1] as Label
+    if lb == null:
+        return
+    lb.modulate.a = 0.0
+    var tw := lb.create_tween()
+    tw.tween_property(lb, "modulate:a", 1.0, 0.3)

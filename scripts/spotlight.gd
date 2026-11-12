@@ -369,9 +369,12 @@ func set_labels(v: bool) -> void:
 func _relayout(force := false) -> void:
 	var b := busy()
 	var lay := "grid_" + "_".join(b)
-	var a := 1.0 - HudDock.CHROME      # L21: the bottom is the chrome bar (the Chronicle), no pane on it
-	var rects := {"director": Rect2(0, 0, 0.5, 0.5 * a), "bits": Rect2(0.5, 0, 0.5, 0.5 * a),
-			"subs": Rect2(0, 0.5 * a, 0.5, 0.5 * a), "points": Rect2(0.5, 0.5 * a, 0.5, 0.5 * a)}
+	# L21: the slim bottom chrome (clock / chat) is no pane's; L32b: the Chronicle's
+	# centre strip parts the two pane rows at the cross of the grid
+	var h := (1.0 - HudDock.CHROME - HudDock.STRIP) * 0.5
+	var y2 := h + HudDock.STRIP
+	var rects := {"director": Rect2(0, 0, 0.5, h), "bits": Rect2(0.5, 0, 0.5, h),
+			"subs": Rect2(0, y2, 0.5, h), "points": Rect2(0.5, y2, 0.5, h)}
 	_rects = rects
 	if lay == _layout and not force:
 		_labels()

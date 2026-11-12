@@ -1755,3 +1755,25 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
     with the grid permanent they now never show. The Chronicle chrome bar is fine. Rehome them (chrome bar? a pane
     chip?) or drop them - your call; untouched here.
   - Ambient lanes draw no name tags (clean shots); say the word if ambient heroes should carry their names.
+
+## L-cycle 117 - L32b Chronicle at the centre (laptop jestai, 2026-11-12) - L32b DONE
+- Mr. E's original ask: the on-stream Chronicle moves to the MIDDLE of the 2x2, at the cross of the four panes.
+- hud_dock.gd: new "centre" region - STRIP 0.10 of the screen, full width, between the pane rows (HudDock.centre);
+  CHROME slimmed 0.15 -> 0.06 (it keeps only the clock / local chat at its right end). spotlight.gd lays the pane
+  rows flush above and below the strip (each row 0.42 vs 0.425 before - the panes barely changed).
+- feed_hud.gd: the Chronicle builds on the strip (home "centre", full width - the clock no longer shares its bar);
+  CALM PACING - the reveal cursor advances at most 1 line / 0.8 s (PACE_S), a busy moment of >8 pending lines skips
+  the cursor to the latest 8 (FLOOD) instead of racing the backlog, each new line fades in over 0.3 s; lines stay at
+  the L15 28 px size. The lord card is resized for the strip (title 26, one sub line) so it can never push the
+  panel past the strip's edge - that exact overflow was caught by _l21_test and fixed.
+- tools/_l32b_test.gd (windowed): L32B_TEST OK 9/9 - strip full width at the cross, panel inside it, rows flush,
+  L15 size; a 40-line flood changed the newest visible line only 2-7 times in 4 s and caught up to the latest
+  lines within 10 s. Capture renders/cycles/20261112_l32/b_centre_1080.png.
+- tools/_l21_test.gd: knows the "centre" region (default-deny box lookup, Chronicle home check moved there, chrome
+  bar check slimmed to >= 4%). L21_TEST OK 52/52. renders/cycles/20261112_l21 restored after the run.
+- Tests: parse 0 script errors; _offfloor 0 of 919; _delve_test clean; L24 OK 6/6; L25_TEST OK 13/13;
+  L32_TEST OK 102/102 (re-run after the layout change).
+- FPS note for Mr. E: the paid-grid window varies with what the delve is fighting - across four runs today the
+  laptop measured idle 28.8-30.7 and paid 16.4-21.6 (base full-screen 41.9-43.0). The _l32_test paid-vs-idle bar
+  now sits at 50% (under natural variance); the idle-vs-baseline 65% bar and the 15 fps floor still guard real
+  regressions. Desktop numbers worth one look after merge.

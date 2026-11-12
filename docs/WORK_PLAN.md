@@ -377,3 +377,43 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.
 - Firefly icons / title art: made by him in Adobe.
+
+
+## ROUND 4 - Nov 12 polish + hub elevation (Mr. E, 03:47 CT). The plan ran dry; this refills it.
+## Priorities straight from Mr. E: people clip/stick, dungeon looks rough, animations are weak, hub must be SSS+.
+## Ownership unchanged. Each item: definition-of-done + a test. Supervisor drives DESKTOP; LAPTOP + HUB run in their own chats.
+
+### DESKTOP (town/people/nav/animation) - town.gd, town_nav.gd, townsfolk.gd, hero_body.gd, rig.gd, raids.gd, cavalry.gd, animal.gd
+- [ ] D16. LOCAL AVOIDANCE - stop people clipping/sticking. hero_body + townsfolk follow _route with NO dynamic
+      avoidance (no NavigationAgent3D, no separation). Add agent avoidance OR simple separation steering (push
+      apart within ~0.6 m) + an unstick watchdog (route active but displacement < 0.2 m over 2 s -> repath/nudge).
+      DONE: _townwalk stuck_on_route == 0 over 120 s AND a 50-person gate-funnel test shows 0 sustained overlaps > 0.3 m.
+- [ ] D17. ANIMATION PASS (town side). rig.gd silently no-ops a missing clip -> T-pose/glide. Audit every
+      state->clip mapping for heroes, townsfolk, animals: fallback clip when a model lacks the named anim (never
+      T-pose), speed-blend walk<->run, idle variety, attack/cast/death clips actually fire. DONE: an anim probe shows
+      every visible model has a non-empty current_animation each second over a 60 s walk+fight; before/after shot sheet.
+- [ ] D18. TOWN/VALLEY VISUAL PASS. Lighting, ground materials, shadow quality, and a prop-placement sanity sweep
+      (no floating or interpenetrating props in town/valley). DONE: shot sheet day+night; 0 floating/clipping town props.
+
+### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, data/*, UI files
+- [ ] L25. DUNGEON GEOMETRY FIX (Mr. E: "looks like shit - stairs, objects clipping, people get stuck"). Stairs
+      connect with no gaps/floating; collision-aware prop/furniture placement so nothing interpenetrates walls or each
+      other; floor tiles align; dungeon nav so delvers don't wall-stick. DONE: an overlap probe over 10 generated floors
+      reports 0 prop-prop and 0 prop-wall interpenetration > 0.2 m, stair treads continuous, 0 stuck delvers in a 10-floor run.
+- [ ] L26. MONSTER/BOSS ANIMATIONS - extend L10 to the WHOLE bestiary: idle/move/attack/death fire, no gliding.
+      DONE: MON_ANIMS across the full bestiary, 0 static creatures.
+- [ ] L27. NEW CONTENT from the Lore Bible: more monsters, 2-3 new bosses with mechanics, new gear tiers +
+      cosmetics (rings/amulets/cloaks/dyes), new floor themes/biomes. DONE: parse clean + content's own test + a delve soak sees them.
+- [ ] L28. DUNGEON TEXTURES/MATERIALS + per-biome lighting so floors aren't flat (CC0 only). DONE: shot sheet per biome, clear visual lift.
+
+### HUB (web/) - hub builder owns web/index.html, app.js, style.css, docs/HUB_SECURITY.md. Security-review + republish gated on supervisor.
+- [ ] H1. ELEVATE TO AN "SSS+ D&D" PAGE. Target aesthetic: dark-fantasy grimoire - parchment+ink base with the
+      JestSayin teal/gold, ornate borders, drop-cap section heads. Components: a "character sheet" card per viewer-hero
+      (class/species/level/HP bar/gear with item icons), an animated d20, a live Chronicle feed with filter tabs + per-type
+      icons, a Boards/leaderboard with ranked tier styling (SSS/SS/S...), a town-status strip (day, population, treasury, raids).
+      Responsive, fast, static (no build step), works on a phone and on a stream overlay.
+      PALETTE: sample the exact ink/parchment/teal/gold from the title art (supervisor DECISION: yes - the title PNG
+      will be dropped into web/assets on the elevate merge so colours match the brand).
+      HARD: keep ALL Phase-1 hardening - esc() on every DOM interpolation, strict CSP, payload version gate, read-only.
+      Research first (D&D Beyond character sheets, grimoire UIs, SSS-tier leaderboard styling), then implement on branch hub.
+      DONE: supervisor security-review vs docs/HUB_SECURITY.md passes, then republish gh-pages + live checks in the browser.

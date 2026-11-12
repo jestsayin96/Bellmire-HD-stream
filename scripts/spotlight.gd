@@ -8,8 +8,12 @@ class_name Spotlight
 ##   top-right    BITS        gold    any cheer 15 s, 50+ bits 20 s, 100+ bits 30 s
 ##   bottom-left  SUBSCRIBERS purple  new sub / resub / gift 30 s (a gift bomb: each gifter 30 s)
 ##   bottom-right POINTS      teal    a channel-points redeem 15 s; a free !look 10 s when it is empty
-## Nobody spotlit: the director full screen. One lane busy: the director and that
-## pane side by side. More: the 2x2 (an empty lane shows a wide view of the town).
+## L32a (Mr. E, Nov 12): the 2x2 grid is the stream's RESTING state, up 24/7 - it
+## never collapses to a single full-screen view or a side-by-side. An idle lane shows
+## AMBIENT LIFE: a rotating shot of random heroes, townsfolk, animals or the dungeon
+## (a new subject every 20-30 s, preferring something happening - a fight, a catch).
+## A paid moment takes its lane for the seconds bought, queued in order; when it ends
+## and the queue is empty the lane returns to ambient, never to blank.
 ##
 ## API: Spotlight.spotlight(town, uid, lane, seconds, reason) -> the line for the
 ## Chronicle. (The desktop's town.gd can wrap it as town.spotlight(...); T1's
@@ -25,6 +29,8 @@ const LOOK_S := 10.0
 const POINTS_S := 15.0
 const SUB_S := 30.0
 const QUEUE_MAX := 24
+const AMB_MIN := 20.0          # L32a: an ambient shot holds 20-30 s, then rotates
+const AMB_MAX := 30.0
 
 var town: Node3D
 var labels_shown := true
@@ -32,6 +38,8 @@ var labels_shown := true
 var lanes := {}
 var _panes := {}           # director / bits / subs / points / wide -> {box, vp, cam, frame, label, bar}
 var _layout := ""
+var _amb := {}             # L32a: lane -> {node, t} - the ambient subject while the lane is idle
+var _amb_rng := RandomNumberGenerator.new()
 
 ## bits -> seconds in the bits lane
 static func bits_seconds(n: int) -> float:
@@ -58,8 +66,10 @@ static func spotlight(t: Node, uid: String, lane: String, seconds: float, reason
 func setup(t: Node3D) -> void:
 	town = t
 	layer = -1                 # over the world, under every panel (Chronicle, frames, chat)
+	_amb_rng.randomize()
 	for l in LANES:
 		lanes[l] = {"cur": {}, "q": []}
+		_amb[l] = {}
 	for k in ["director", "bits", "subs", "points", "wide"]:
 		_panes[k] = _make_pane(k)
 	var ch = t.get("chat")
@@ -141,9 +151,92 @@ func _process(delta: float) -> void:
 			changed = true
 	if changed:
 		_relayout()
-	if _layout != "off":
+	_amb_tick(real)
+	if _layout != "off" and _layout != "":
 		_follow(real)
 		_cheap(real)
+
+## L32a: each idle lane holds its ambient subject 20-30 s, then rotates to another
+func _amb_tick(real: float) -> void:
+	for l in LANES:
+		if not (lanes[l]["cur"] as Dictionary).is_empty():
+			continue
+		var A: Dictionary = _amb[l]
+		A["t"] = float(A.get("t", 0.0)) - real
+		var n = A.get("node")
+		if n == null or not is_instance_valid(n) or not (n as Node3D).is_inside_tree() or float(A["t"]) <= 0.0:
+			_amb_pick(l)
+
+## a new ambient subject for the lane: something happening first (a fight below, a catch
+## being landed), then viewers' heroes, townsfolk at large, the animals - never a body
+## another pane or the director already shows, never the same subject twice running
+func _amb_pick(l: String) -> void:
+	var A: Dictionary = _amb[l]
+	var last = A.get("node")
+	var used: Array = []
+	for k in LANES:
+		var pb := paid_target(k)
+		if pb:
+			used.append(pb)
+		if k != l:
+			var an = (_amb[k] as Dictionary).get("node")
+			if an != null and is_instance_valid(an):
+				used.append(an)
+	var eye := _eye()
+	if eye and eye.get("selected") != null and is_instance_valid(eye.get("selected")):
+		used.append(eye.get("selected"))
+	var c: Array = []            # [weight, node]
+	for d in town.get_children():
+		if d is Delve and (d as Delve).dun != null and is_instance_valid((d as Delve).dun):
+			var w := 6.0 if String((d as Delve).state) == "fight" else 3.0
+			for m in (d as Delve)._alive():
+				var b = m.get("body")
+				if is_instance_valid(b) and (b as Node3D).is_inside_tree():
+					c.append([w, b])
+	var ang = town.get("anglers")
+	if ang is Array:
+		for a in ang:
+			if is_instance_valid(a) and a.get_parent() is Node3D \
+					and (a.state == Angler.S.REEL or a.state == Angler.S.SHOW or a.state == Angler.S.BITE):
+				c.append([5.0, a.get_parent()])
+	var hs = town.get("heroes")
+	if hs is Dictionary:
+		for uid in hs:
+			if is_instance_valid(hs[uid]) and (hs[uid] as Node3D).is_visible_in_tree():
+				c.append([2.0, hs[uid]])
+	var folk := town.find_children("*", "Townsfolk", false, false)
+	folk.shuffle()
+	for f in folk.slice(0, 12):
+		if (f as Node3D).is_visible_in_tree():
+			c.append([1.5, f])
+	var am = town.get("animals")
+	if am is Array:
+		for a2 in am:
+			if a2 is Node3D and is_instance_valid(a2) and (a2 as Node3D).is_visible_in_tree():
+				c.append([1.0, a2])
+	var total := 0.0
+	var pool: Array = []
+	for e in c:
+		if used.has(e[1]) or e[1] == last:
+			continue
+		pool.append(e)
+		total += float(e[0])
+	var pick: Node3D = null
+	if not pool.is_empty():
+		var r := _amb_rng.randf() * total
+		for e in pool:
+			r -= float(e[0])
+			if r <= 0.0:
+				pick = e[1]
+				break
+		if pick == null:
+			pick = pool[pool.size() - 1][1]
+	elif last != null and is_instance_valid(last) and (last as Node3D).is_inside_tree():
+		pick = last                      # nobody else about: keep the shot rather than go blank
+	A["node"] = pick
+	A["t"] = _amb_rng.randf_range(AMB_MIN, AMB_MAX)
+	if (_panes[l]["box"] as Control).visible:
+		_snap(l)                         # a rotation is a cut, not a swoop across the town
 
 ## FPS (the desktop is chasing stutter): the lane panes take turns, one a frame,
 ## so each lane runs at a third of the game rate and the cost is about two views;
@@ -197,15 +290,17 @@ func _hero_ok(uid: String) -> bool:
 
 ## ---------------------------------------------------------------- the panes
 
-func _frame_box(k: String) -> StyleBoxFlat:
+## L32a: an ambient (idle) lane wears the thin muted frame, so a paid moment's
+## gold / purple / teal visibly takes the pane
+func _frame_box(k: String, amb := false) -> StyleBoxFlat:
 	var sb := StyleBoxFlat.new()
 	sb.draw_center = false
-	var w := UiTheme.px(6) if k in LANES else UiTheme.px(2)
+	var w := UiTheme.px(6) if k in LANES and not amb else UiTheme.px(2)
 	sb.border_width_left = w
 	sb.border_width_right = w
 	sb.border_width_top = w
 	sb.border_width_bottom = w
-	sb.border_color = COL[k]
+	sb.border_color = COL["wide"] if amb else COL[k]
 	return sb
 
 func _make_pane(k: String) -> Dictionary:
@@ -269,44 +364,30 @@ func set_labels(v: bool) -> void:
 	labels_shown = v
 	_relayout(true)
 
-## which pane sits where: full / side by side / 2x2
+## L32a: the 2x2 is the resting state - the layout is ALWAYS the grid. The key still
+## names the busy lanes, so a lane turning paid or ambient re-lays (frames, labels, cuts).
 func _relayout(force := false) -> void:
 	var b := busy()
-	# the key names the busy lanes, so a third lane opening re-lays the grid
-	var lay := "off" if b.is_empty() else ("pair_" + String(b[0]) if b.size() == 1 else "grid_" + "_".join(b))
-	var rects := {}           # pane -> Rect2 in 0..1
-	match lay.get_slice("_", 0) if lay.begins_with("grid") else lay:
-		"off":
-			pass
-		"grid":
-			var a := 1.0 - HudDock.CHROME      # L21: the bottom is the chrome bar (the Chronicle), no pane on it
-			rects["director"] = Rect2(0, 0, 0.5, 0.5 * a)
-			var spots := {"bits": Rect2(0.5, 0, 0.5, 0.5 * a), "subs": Rect2(0, 0.5 * a, 0.5, 0.5 * a), "points": Rect2(0.5, 0.5 * a, 0.5, 0.5 * a)}
-			for l in LANES:
-				if b.has(l):
-					rects[l] = spots[l]
-				else:
-					rects["wide"] = spots[l]
-		_:
-			rects["director"] = Rect2(0, 0, 0.5, 1.0 - HudDock.CHROME)
-			rects[b[0]] = Rect2(0.5, 0, 0.5, 1.0 - HudDock.CHROME)
+	var lay := "grid_" + "_".join(b)
+	var a := 1.0 - HudDock.CHROME      # L21: the bottom is the chrome bar (the Chronicle), no pane on it
+	var rects := {"director": Rect2(0, 0, 0.5, 0.5 * a), "bits": Rect2(0.5, 0, 0.5, 0.5 * a),
+			"subs": Rect2(0, 0.5 * a, 0.5, 0.5 * a), "points": Rect2(0.5, 0.5 * a, 0.5, 0.5 * a)}
 	_rects = rects
 	if lay == _layout and not force:
 		_labels()
 		return
 	_layout = lay
-	visible = lay != "off"
-	# the main view stops drawing 3D while the panes carry it (the director pane copies its camera)
+	visible = true
+	# the main view never draws 3D - the panes carry it (the director pane copies its camera)
 	var root_vp := get_viewport()
 	if root_vp:
-		root_vp.disable_3d = lay != "off"
+		root_vp.disable_3d = true
 	for k in _panes:
 		var p: Dictionary = _panes[k]
 		var box: Control = p["box"]
 		var on := rects.has(k)
 		box.visible = on
-		# the wide town view barely moves: redrawn 4x a second in _follow, not every frame
-		(p["vp"] as SubViewport).render_target_update_mode = (SubViewport.UPDATE_ONCE if k == "wide" else SubViewport.UPDATE_ALWAYS) if on else SubViewport.UPDATE_DISABLED
+		(p["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_ALWAYS if on else SubViewport.UPDATE_DISABLED
 		if on:
 			var r: Rect2 = rects[k]
 			box.anchor_left = r.position.x
@@ -320,7 +401,7 @@ func _relayout(force := false) -> void:
 			if k != "director":
 				_snap(k)
 	_rects = rects
-	mode = "off" if lay == "off" else ("grid" if lay.begins_with("grid") else "pair")
+	mode = "grid"
 	_masks()
 	_labels()
 
@@ -330,7 +411,7 @@ static var mode := "off"           # "off" / "pair" / "grid" (HeroBody's name la
 var _rects := {}                    # pane -> Rect2 in 0..1 of the screen
 
 func mode_now() -> String:
-	return "off" if _layout == "off" or _layout == "" else ("grid" if _layout.begins_with("grid") else "pair")
+	return "off" if _layout == "" else "grid"      # L32a: once set up, always the grid
 
 ## a pane's rect on screen in px (empty when it is not up)
 func pane_rect(k: String) -> Rect2:
@@ -381,7 +462,7 @@ func _lane_tag(l: String, real: float) -> void:
 		tag.top_level = true
 		town.add_child(tag)
 		p["tag"] = tag
-	var t := _target(l)
+	var t := paid_target(l)          # L32a: only a PAID hero gets the name tag, never an ambient subject
 	var box: Control = p["box"]
 	tag.visible = t != null and box.visible
 	if not tag.visible:
@@ -400,6 +481,9 @@ func _labels() -> void:
 		var cur: Dictionary = lanes[l]["cur"]
 		var lb: Label = p["label"]
 		lb.visible = labels_shown and not cur.is_empty()
+		# L32a: the timer bar and the bright lane frame belong to a paid moment only
+		(p["bar"] as ColorRect).visible = not cur.is_empty()
+		(p["frame"] as Panel).add_theme_stylebox_override("panel", _frame_box(l, cur.is_empty()))
 		if cur.is_empty():
 			continue
 		var h := _hero(String(cur["uid"]))
@@ -417,6 +501,18 @@ func _target(k: String) -> Node3D:
 		var cur: Dictionary = lanes[k]["cur"]
 		if not cur.is_empty():
 			return body_of(String(cur["uid"]))
+		# L32a: the lane is idle - its camera follows the ambient subject
+		var an = (_amb.get(k, {}) as Dictionary).get("node")
+		if an != null and is_instance_valid(an) and (an as Node3D).is_inside_tree():
+			return an
+	return null
+
+## the body a PAID moment holds in this lane (null while the lane is ambient) -
+## the director's L24 "never the same hero twice" rule reads this, so ambient
+## shots never starve the director of subjects
+func paid_target(k: String) -> Node3D:
+	if k in LANES and not (lanes[k]["cur"] as Dictionary).is_empty():
+		return body_of(String(lanes[k]["cur"]["uid"]))
 	return null
 
 ## put a pane's camera straight onto its hero (no swoop in from the last one)
@@ -427,7 +523,9 @@ func _snap(k: String) -> void:
 		var at := t.global_position + Vector3(0, 1.0, 0)
 		cam.global_position = _clear(_panes[k], at, at + _offset_lane(k, t), 999.0)
 		cam.look_at(at, Vector3.UP)
-	elif k == "wide":
+	else:
+		# L32a: no subject at all (the first frames of an empty town): the market wide,
+		# never a blank pane
 		var mp: Vector3 = town.get("_market_pos") if town and town.get("_market_pos") != null else Vector3.ZERO
 		cam.global_position = mp + Vector3(0, 70, 85)
 		cam.look_at(mp, Vector3.UP)

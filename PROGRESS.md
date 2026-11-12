@@ -1457,3 +1457,12 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   Found and NOT a gap: a few source files peak ~1 dB over full scale (hit_impact, block, ghost_wail, dagger_stab, sword_clash, shield_bash); through their call and the -6 dB Sfx bus the mix peaks near -5 dBFS - no clipping.
 - Baseline (before the fixes) SOUND_REVIEW FAIL 5 of 18 (two of the five were the review's own wrong calls - a word that is not nudged, award()'s argument order - fixed in the tool); after: SOUND_REVIEW OK 18/18.
 - Tests: parse 0 errors, SOUND_REVIEW OK 18/18 windowed (8/8 headless coverage), S1 / S2 / L14 OK, _delve_test clean to floor 3 (0 SCRIPT ERROR).
+
+
+## D15 sound soak - DONE Nov 12 04:16 CT (audio safe for 24/7)
+- 35-min windowed soak, audio ON: 87 valley days, 228 people, 51 raids.
+- 0 SCRIPT ERROR, 0 freed-node/lambda. fps_avg 108.2 (130 early -> 97 at 228 people; population-bound, matches the LOD curve; min dips = the known floor-build hitch).
+- mem 589-653 MB: rise tracks town growth, not audio (streams cache plateaued at 131). pool_max_active 16/16 (graceful voice-steal at peak), flat 4/6.
+- GAP held: busiest mana_charge 3.93/s vs its 0.12s ceiling (~8.3/s). No kind machine-gunned.
+- Instrumented tools/_soak.gd with a per-minute audio snapshot (pool/flat/streams/plays/busiest-kind + end summary).
+- Follow-up (D22 audio polish): bump the sfx 3D pool 16->24 for fewer cutoffs in a very busy town+raid.

@@ -158,7 +158,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       (c) twitch_reply is not in chatcmd.gd yet (laptop) - connected automatically once it is; (d) !testbits etc. do not
       exist (L17 open) - tests feed recorded EventSub frames instead. Chat sending was not tried live (nothing posted).
 
-- [ ] D15. SOUND SOAK (supervisor, Nov 12). Now that S1+S2 wired the full RPG sound library, run a
+- [x] D15. (DONE Nov 12 04:16: 35-min soak / 87 valley days / 228 people / 51 raids - 0 script/freed-node errors; audio pool bounded (16/16 peak = graceful voice-steal), streams cached 131 plateaued; memory rise tracks town growth not audio; GAP held (busiest mana_charge 3.93/s vs ~8.3/s); FPS population-bound not audio. Follow-up D22: bump sfx pool 16->24 for peak headroom.) SOUND SOAK (supervisor, Nov 12). Now that S1+S2 wired the full RPG sound library, run a
       30-45 min soak with sound ON and confirm it is safe for a 24/7 stream: (a) no audio-related
       SCRIPT ERROR and no 'freed node'/lambda errors over the whole run; (b) the AudioStreamPlayer3D
       pool in sfx.gd is not exhausted or growing without bound (log pool size + active players each

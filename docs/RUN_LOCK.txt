@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 03:20 (supervisor merge S3)
+IDLE 2026-11-12 04:45 - D16a local avoidance committed (docs/RUN_LOCK.txt is the canonical lock)

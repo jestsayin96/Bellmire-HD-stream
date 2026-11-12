@@ -22,6 +22,7 @@ var float_y := INF            # set for ducks: ride the water surface
 var yaw_off := 0.0            # models that face -Z get PI
 var kind := ""
 var edge := false             # a sheepdog: walks the edge of its flock's pen
+var body_r := 0.3             # D16a: room it takes in town.crowd_push
 var _proc := ""
 var _parts := {}
 var _moving := false
@@ -38,6 +39,7 @@ func _ready() -> void:
     _rng.randomize()
     if model.begins_with("proc:"):
         _proc = model.substr(5)
+        body_r = 0.15                       # a hen, a cat
         var pm := _build_hen() if _proc == "hen" else _build_cat()
         pm.scale = Vector3.ONE * scale_f
         add_child(pm)
@@ -142,6 +144,9 @@ func _physics_process(delta: float) -> void:
         return
     var d := to.normalized()
     var p := global_position + d * speed * delta
+    if float_y == INF and town.has_method("crowd_push"):
+        # D16a: room for folk and each other, and step round whoever is ahead
+        p += (town.call("crowd_push", self, d) as Vector3) * delta
     if float_y == INF and _blocked(p) and not _blocked(global_position):
         _target = Vector3.ZERO                  # a stall or a wall in the way: stop, pick again
         _wait = _rng.randf_range(0.5, 2.0)

@@ -1484,3 +1484,12 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - GAP held: busiest mana_charge 3.93/s vs its 0.12s ceiling (~8.3/s). No kind machine-gunned.
 - Instrumented tools/_soak.gd with a per-minute audio snapshot (pool/flat/streams/plays/busiest-kind + end summary).
 - Follow-up (D22 audio polish): bump the sfx 3D pool 16->24 for fewer cutoffs in a very busy town+raid.
+
+
+## D16a local avoidance - DONE Nov 12 (desktop scheduled run)
+- town.gd crowd_push(v, dir) is a velocity now (m/s), not a shove scaled by 1.4: soft ring out to CROWD_R 0.75 (the old push), plus a HARD push inside two bodies' width (5 m/s at full overlap - faster than anyone walks, so nobody is walked through), plus YIELD: given the walker's heading, the nearest someone in the way within 2.2 m ahead is passed on the side away from them (dead ahead: keep right) - the one coming the other way does the same, so they pass. Someone ahead walking the same way (move_dir) is followed, not dodged. The grid skips anyone > 3 m above/below (delvers under the town no longer shove townsfolk).
+- Bodies have a radius: Townsfolk.body_r 0.28 (x size_k for children), Cavalry 0.6, Animal 0.3 (hen/cat 0.15). Animals are in the crowd grid and step round folk too; the watch pair's second man (_follow) gets the push as well.
+- tools/_d16a_test.gd (new, run with --fixed-fps 60): 50 walkers head-on through the real west gate, 25 each way, routed once the navmesh answers. Before -> after: under 0.3 m 1750 frames (29.2 pair-s) -> 0; clip < 0.45 m 62.5 -> 2.2 pair-s; min gap 0.02 -> 0.38 m; sustained (>1 s under 0.3 m) 0 -> 0; through 50/50 both, median 10.0 s, last 11.9 -> 12.5 s. D16A_TEST PASS (pass = 0 sustained, < 0.5 pair-s under 0.3 m, >= 45 through - the old code fails the middle bar).
+- Note: a route asked for on the spawn frame came back from the old road-hex fallback (a detour 20 m past the gate and back) - the test now routes a second later. Worth a look in D16d.
+- tools/_d16a_shot.gd -> renders/cycles/20261112_d16a/funnel_03s..08s: the two streams meet under the gate arch and press through as one crowd, no one inside anyone.
+

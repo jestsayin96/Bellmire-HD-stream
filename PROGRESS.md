@@ -1057,3 +1057,9 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - 3. The key strip: hidden by default (H shows it), on its parchment chip, scaled with the UI scale (L15/L16).
 - Also: the hero unit frame moved bottom-right (it sat on the Chronicle in the phone frame).
 - Checks: L13, L15, L16 OK, TWITCH_PARSE OK.
+
+## Cycle 75a - L19 in progress: barks as speech bubbles (laptop, 2026-11-11)
+- Hero barks ("Count the flasks.", "Bottoms up.") now show as the same parchment speech plate as the crier's in town (UiTheme.style_bubble / fit_plate), over the delver's head for 3 s, instead of floating words that piled up with the state words.
+- The state word on a new status (e.g. "frightened") no longer floats; states show in the party frames and under each hero.
+- Looked at: renders/cycles/20261111_l19/pale_duchess_fight_2.png (bubble readable, no pile-up).
+- L16 (Cycles 74, 74b) is committed and pushed (8d9c295).

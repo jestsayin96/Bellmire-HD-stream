@@ -1434,9 +1434,6 @@ func _give(m: Dictionary, name: String, secs: float) -> void:
 		m["st"] = {}
 	var was := has_st(m, name)
 	m["st"][name] = maxf(float((m["st"] as Dictionary).get(name, 0.0)), secs)
-	if not was:
-		var spec: Dictionary = (Roster.potions().get("states", {}) as Dictionary).get(name, {})
-		_float_text(m, String(spec.get("word", name)), Color.html(String(spec.get("colour", "ffffff"))))
 
 func _status_tick(m: Dictionary, delta: float) -> void:
 	if not m.has("st"):
@@ -1622,10 +1619,27 @@ func _bark(m: Dictionary, kind: String) -> void:
 	if opts.is_empty():
 		return
 	m["bark_t"] = _t + 8.0
-	# speech, not a number: smaller, a little higher, so a few at once do not pile up
-	_float_text(m, "\"%s\"" % String(opts[_rng.randi() % opts.size()]), Color(1.0, 0.97, 0.88), 46, 3.2 + _rng.randf() * 0.6)
+	_say_bubble(m, "\"%s\"" % String(opts[_rng.randi() % opts.size()]))
 
 func _bark_any(kind: String) -> void:
 	var al := _alive()
 	if not al.is_empty():
 		_bark(al[_rng.randi() % al.size()], kind)
+
+## a bark as a speech bubble - the same parchment plate as the crier's in town
+## (UiTheme.style_bubble), over the delver's head for three seconds
+func _say_bubble(m: Dictionary, text: String) -> void:
+	var b: Node3D = m["body"]
+	if not is_instance_valid(b) or not b.is_inside_tree() or dun == null:
+		return
+	var lb := Label3D.new()
+	UiTheme.style_bubble(lb)
+	lb.width = 360.0
+	lb.text = text
+	lb.top_level = true
+	dun.info["root"].add_child(lb)
+	lb.global_position = b.global_position + Vector3(0, 3.4, 0)
+	UiTheme.fit_plate(lb)
+	var tw := lb.create_tween()
+	tw.tween_interval(3.0)
+	tw.tween_callback(lb.queue_free)

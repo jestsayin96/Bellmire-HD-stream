@@ -69,24 +69,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       the Chronicle now and then.
 - [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
 - [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
-- [ ] D10. Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
-      FIXED LANES in a 2x2 grid, each with its own queue and colour-coded frame:
-        top-left     = the director (always, the main view)
-        top-right    = BITS / cheers lane (gold frame) - any cheer 15 s, 50+ bits 20 s, 100+ bits 30 s
-        bottom-left  = SUBSCRIBERS lane (purple frame) - new sub / resub / gift 30 s, gift bomb: each gifter 30 s
-        bottom-right = CHANNEL POINTS lane (teal frame) - 15 s; free !look 10 s when it is otherwise empty
-      Only lanes with someone in them open: no spotlights = full-screen director; one lane busy = director +
-      that pane side by side; more = the 2x2 (an empty lane shows the director's wide view of the town).
-      Each pane: a SubViewport + Camera3D following that hero (into the scar too), half resolution, the
-      viewer's name + class + "cheered 500 bits" / "subscribed" / "redeemed <reward>" across the top, a thin
-      timer bar. API: town.spotlight(uid, lane, seconds, reason). Test with local commands (!look, and
-      test-only !testbits <n> / !testsub / !testpoints) and a tool that fills all lanes and renders the grid.
-      F10 hides pane labels. Watch FPS.
-      FREE CHAT (no pane, the main view instead): the director's hero shots favour the most recently active
-      chatters (ahead of random heroes, behind raids/lords/fights); a small "Now watching: <name> the <species>
-      <class>" banner in the main view; their name glows above their hero for ~5 s after any command; free
-      !look borrows the channel-points lane for 10 s only when it is empty.
-- [ ] D11. Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
+- [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'
+      camp, a river ford and mill, old ruins (lore), roads linking them, the scar road; travellers and carts on
+      the roads; the director's tour includes them. Navmesh + LOD keep FPS.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
@@ -122,11 +107,64 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L9. Roll audit (dungeon/hero side): delve.gd, monster.gd, roster.gd, chatcmd.gd, gear.gd - attacks, damage dice, saves, traps (Perception/DEX save), loot (Investigation), initiative, death saves, shop haggling (CHA check) all as d20 rolls with real stats; nat 20/nat 1; big rolls in the Chronicle.
 - [x] L7. Soak the delve 30 min with 6 fake viewers using the new classes/species/gear; fix what breaks.
 
+## LAPTOP list 3 (Mr. E, Nov 11 evening) - UI + content. The laptop now owns the UI files too:
+## rts_camera.gd, feed_hud.gd, leaderboard_panel.gd, party_frames.gd, boss_bar.gd, auto_director.gd, health_bar_3d.gd, new UI files.
+- [ ] L11. Traps that visibly work (Mr. E: "they don't show functioning or doing damage"): every trap kind
+      (pressure plate, spikes, darts, blades, pits...) has a trigger animation + sound, a DEX save (or Perception
+      to spot first) rolled with real stats, damage dice with the number floating up, a Chronicle line
+      ("BigAxe steps on a plate - darts! DEX 9 vs DC 13, 7 damage"), disarming by a rogue (Thieves' tools check).
+      Render a trap going off; test that damage lands and saves roll.
+- [ ] L12. Potions with status effects, 5e style: healing tiers (2d4+2 ... 10d4+20), plus antidote, fire/frost
+      resistance, haste, giant strength, invisibility, heroism, darkvision for unlit floors; and the bad states
+      to cure/inflict: poisoned, burning, frozen/slowed, blinded, frightened. Status icons on party frames and
+      over heads; durations; brewed at the apothecary (!brew <potion>), found below. Lore voice for names.
+- [ ] L13. More equipment + COSMETICS: more weapons/armour per tier (rings, amulets, cloaks, boots, gloves with
+      small 5e bonuses), and cosmetic-only items - hats, hoods, capes, dyes (colour the armour), banners on
+      the back, a pet that follows (from the CC0 animals), titles shown under the name. !wear <item>, !dye <colour>.
+      Bought with gold now; later channel points (T1). Visible on the hero; render a lineup.
+- [ ] L14. The command list in detail: one source of truth (data/commands.json): name, aliases, args, cost,
+      cooldown, what it does, example. !help / !commands (short), !help <cmd> (detail). Friendly error replies
+      ("!forge needs 120 gold - you have 40"). Write docs/COMMANDS.md from the same data (the hub/website uses it).
+- [ ] L15. STREAM READABILITY (Mr. E: will viewers be able to read it?): design for a 1080p stream watched on a
+      phone. Minimum on-screen text ~28 px at 1080p for anything viewers must read; name tags, Chronicle, Guild
+      Roll, party frames, boss bar, banners scaled up; high contrast + outline; a UI scale setting (F11 cycles
+      100/125/150%). Test: render at 1920x1080, then downscale to 854x480 (what a phone sees) and LOOK - every
+      name and Chronicle line must still be readable. Fix until it is.
+- [ ] L16. GUI/UI polish to an RTS/WoW standard: one theme for every panel (parchment + ink, the JestSayin teal
+      as the accent), consistent fonts, icons, frames, spacing; the unit frame, party frames, guild roll,
+      chronicle, boss bar, help, chat box all match. Nothing from the old game's interface.
+- [ ] L19. More lore: from the reference + the Lore Bible PDF - more Chronicle lines, NPC barks, floor-origin
+      text, item and potion flavour, boss intros, town-level announcements; all in the original's voice, never
+      contradicting it, never a floor count.
+- [ ] L17. (moved from D10; laptop owns the UI) Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
+      FIXED LANES in a 2x2 grid, each with its own queue and colour-coded frame:
+        top-left     = the director (always, the main view)
+        top-right    = BITS / cheers lane (gold frame) - any cheer 15 s, 50+ bits 20 s, 100+ bits 30 s
+        bottom-left  = SUBSCRIBERS lane (purple frame) - new sub / resub / gift 30 s, gift bomb: each gifter 30 s
+        bottom-right = CHANNEL POINTS lane (teal frame) - 15 s; free !look 10 s when it is otherwise empty
+      Only lanes with someone in them open: no spotlights = full-screen director; one lane busy = director +
+      that pane side by side; more = the 2x2 (an empty lane shows the director's wide view of the town).
+      Each pane: a SubViewport + Camera3D following that hero (into the scar too), half resolution, the
+      viewer's name + class + "cheered 500 bits" / "subscribed" / "redeemed <reward>" across the top, a thin
+      timer bar. API: town.spotlight(uid, lane, seconds, reason). Test with local commands (!look, and
+      test-only !testbits <n> / !testsub / !testpoints) and a tool that fills all lanes and renders the grid.
+      F10 hides pane labels. Watch FPS.
+      FREE CHAT (no pane, the main view instead): the director's hero shots favour the most recently active
+      chatters (ahead of random heroes, behind raids/lords/fights); a small "Now watching: <name> the <species>
+      <class>" banner in the main view; their name glows above their hero for ~5 s after any command; free
+      !look borrows the channel-points lane for 10 s only when it is empty.
+- [ ] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
+
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:
       bits (channel.cheer), channel points (channel.channel_points_custom_reward_redemption.add), follows,
       subs -> town.spotlight(uid, lane bits|subs|points, seconds, reason) + in-game effects. Chat replies: !stats / !hero / !inventory answered in
       Twitch chat as "@name ..." (Send Chat Message API), rate-limited.
+
+## Viewer hub website (main chat, after T1; Mr. E to confirm)
+- [ ] W1. A public page for viewers: hero sheet, inventory, gear, the guild roll, the fallen, the command list
+      (from data/commands.json). The game publishes a JSON snapshot every minute; phase 2 adds voting (polls that
+      change the town: next raid target, festival, a boss to summon) with Twitch login.
 
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.

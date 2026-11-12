@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 13:09 (supervisor merge L25+L28a)
+IDLE 2026-11-12 13:18 - supervisor: merged laptop L25(fixed)+L28a, all tests pass, pushed

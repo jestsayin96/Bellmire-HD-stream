@@ -115,10 +115,11 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       ("BigAxe steps on a plate - darts! DEX 9 vs DC 13, 7 damage"), disarming by a rogue (Thieves' tools check).
       Render a trap going off; test that damage lands and saves roll.
       DONE (Cycle 69): 6 kinds armed until stepped on, trigger anim + sound, Perception/thieves' tools/DEX save, dice, floating numbers, Chronicle; L11_TEST OK.
-- [ ] L12. Potions with status effects, 5e style: healing tiers (2d4+2 ... 10d4+20), plus antidote, fire/frost
+- [x] L12. Potions with status effects, 5e style: healing tiers (2d4+2 ... 10d4+20), plus antidote, fire/frost
       resistance, haste, giant strength, invisibility, heroism, darkvision for unlit floors; and the bad states
       to cure/inflict: poisoned, burning, frozen/slowed, blinded, frightened. Status icons on party frames and
       over heads; durations; brewed at the apothecary (!brew <potion>), found below. Lore voice for names.
+      DONE (Cycle 70): 12 brews (data/potions.json), 5 bad states with sources and cures, drinking below, !brew <potion>, tags; L12_TEST OK.
 - [ ] L13. More equipment + COSMETICS: more weapons/armour per tier (rings, amulets, cloaks, boots, gloves with
       small 5e bonuses), and cosmetic-only items - hats, hoods, capes, dyes (colour the armour), banners on
       the back, a pet that follows (from the CC0 animals), titles shown under the name. !wear <item>, !dye <colour>.

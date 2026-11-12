@@ -925,3 +925,33 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   fire under the mage, the pit's boards open, -7 / -9 / -10 floating, the six lines in the Chronicle.
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 413 (MON_INPROP 0), TWITCH_PARSE OK,
   L9_TEST OK.
+
+
+## Cycle 70 - L12, potions and states (laptop, 2026-11-11)
+- data/potions.json (one source): 12 brews in Bellmire's voice - Draught of Mending 2d4+2, Greater 4d4+4, Superior
+  8d4+8, Supreme 10d4+20 (the 5e tiers), Bitterleaf Tincture (antidote), Emberward / Hearthwarm (resist fire /
+  frost), Quickwater (haste), Ogre's Draught (giant strength), Shadowcloak (invisibility), Bravecup (heroism),
+  Owl-eye Drops (darkvision) - each with a cost, the town tier its apothecary needs, aliases and a flavour line;
+  and the states, each with its word, colour and what it does.
+- The bad states and where they come from: poisoned (venom: now disadvantage too), burning (fire traps, the
+  grave-fire breath, the Hollow King's and Cinderjack's rings; 1d4 a second), slowed (frost), blinded (Nightwing's
+  swoop, CON save DC 12; foes get advantage), frightened (a lord rising: WIS save vs DC 10 + floor/2). Emberward /
+  Hearthwarm halve fire / frost and stop burning / slowing; Bravecup stops fear (+10 temporary hp); any Mending
+  puts a fire out. Good states: hasted (swings a third faster), ogre-strong (+2 to hit, +4 damage), unseen (foes
+  cannot pick them; advantage on the first blow, which ends it), heroic, owl-eyed (no disadvantage in the dark).
+- Heroes finally drink below (the HD delve never had): the best Mending under a third of their life; the cure for
+  what ails them; Ogre's / Quickwater / Shadowcloak / Bravecup when a lord fights; Owl-eye in the dark. A drink
+  costs the swing and floats its number or word; the Chronicle names any brew but plain Mending.
+- !brew [n] buys Mending as before; !brew <potion> [n] any brew (names or aliases: !brew haste 2), haggled, locked
+  by the town's tier ("Bellmire's apothecary cannot brew it yet"). !inventory lists them. A good Investigation
+  below finds a vial ("X finds a vial of Quickwater."), better ones deeper.
+- Shown: coloured state tags under each delver's bar in the party frames, and under each name below. First pass
+  the overhead tag sat on the name; moved into the billboard's own plane just under the name.
+- Found on the way: a Godot editor open on this laptop saved delve.gd from its buffer (all tabs, one of this
+  cycle's fixes lost); re-applied. A typed lookup of a tag freed with the last floor errored; untyped now.
+- tools/_l12_test.gd (headless, new): data and aliases; tier lock; !brew haste 2; !brew 3; !inventory; Supreme
+  heals 35-56; poisoned -> disadvantage -> Bitterleaf cures; Bravecup; Emberward; burning 1d4/s; unseen advantage;
+  a low delver drinks Mending; a real lord floor: frightened at the rise, Ogre's Draught drunk. L12_TEST OK.
+  tools/_l12_shot.gd: renders/cycles/20261111_l12 - looked at: Nightwing, the party frames with "ogre-strong heroic",
+  the tags under the names.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 422, TWITCH_PARSE OK, L3, L9, L11 OK.

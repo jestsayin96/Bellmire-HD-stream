@@ -40,8 +40,8 @@ func inventory(user_id: String) -> String:
     if h.is_empty():
         return "No hero yet - type !enlist to join the valley."
     var armour := String(Roster.ARMOUR[int(h["armour"])]["name"])
-    var line := "%s carries %s and wears %s  |  %d potions, %d oil, %d gold" % [
-        h["name"], roster.weapon_name(h), armour, int(h.get("potions", 0)), int(h.get("oil", 0)), int(h.get("gold", 0))]
+    var line := "%s carries %s and wears %s  |  %s, %d oil, %d gold" % [
+        h["name"], roster.weapon_name(h), armour, roster.brews_line(h), int(h.get("oil", 0)), int(h.get("gold", 0))]
     if catches_of.is_valid():
         var cs: Array = catches_of.call(String(h["name"]))
         if not cs.is_empty():
@@ -101,7 +101,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
                     out = _needs(user_id, func():
                         wants_shop.emit(user_id, "armorer")
                         return roster.buy_armour(user_id))
-        "brew":     out = _brew(user_id, arg)
+        "brew":     out = _brew(user_id, arg, arg2)
         "oil", "lamp", "torch":
                     out = _oil(user_id, arg)
         "reroll":   out = _reroll(user_id, display)
@@ -173,11 +173,21 @@ func _oil(user_id: String, arg: String) -> String:
         n = clampi(int(arg), 1, 10)
     return _needs(user_id, func(): return roster.buy_oil(user_id, n))
 
-func _brew(user_id: String, arg: String) -> String:
+func _brew(user_id: String, arg: String, arg2 := "") -> String:
+    # L12: !brew [n] buys Mending as before; !brew <potion> [n] any brew the apothecary makes
     var n := 1
+    var key := "mending"
     if arg != "" and arg.is_valid_int():
         n = clampi(int(arg), 1, 10)
-    return _needs(user_id, func(): return roster.buy_potion(user_id, n))
+    elif arg != "":
+        key = Roster.potion_key(arg)
+        if arg2 != "" and arg2.is_valid_int():
+            n = clampi(int(arg2), 1, 10)
+        if key == "":
+            return _needs(user_id, func(): return roster.buy_brew(user_id, arg, n))
+    if key == "mending":
+        return _needs(user_id, func(): return roster.buy_potion(user_id, n))
+    return _needs(user_id, func(): return roster.buy_brew(user_id, key, n))
 
 # !reroll does double duty: raise a new hero if dead, reroll stats if alive
 func _reroll(user_id: String, display: String) -> String:

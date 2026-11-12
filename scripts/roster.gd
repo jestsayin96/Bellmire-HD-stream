@@ -737,7 +737,7 @@ func describe(user_id: String) -> String:
            armour_class(h), int(max_hp(h)), sign_str(prof(h)),
            sign_str(attack_bonus(h)), _stat_line(h["stats"]), save_line(h),
            "%s (%s)" % [weapon_name(h), dice_str(h)], ARMOUR[int(h["armour"])]["name"],
-           int(h["potions"]), int(h.get("oil", 0)), int(h["gold"]),
+           int(h["potions"]) + _other_brews(h), int(h.get("oil", 0)), int(h["gold"]),
            int(h["deepest"]), int(h["kills"])]
 
 # ---------------------------------------------------------------- persistence
@@ -816,3 +816,77 @@ func grant_all(gold: int, potions: int) -> int:
         h["potions"] = int(h["potions"]) + potions
         touched += 1
     return touched
+
+## ---- L12: potions (data/potions.json). A hero's Draughts of Mending stay in
+## "potions" (old saves, !brew with no name); every other brew is counted in
+## "brews" {key: n}.
+static var _potions: Dictionary = {}
+static func potions() -> Dictionary:
+    if _potions.is_empty():
+        var f := FileAccess.open("res://data/potions.json", FileAccess.READ)
+        if f:
+            _potions = JSON.parse_string(f.get_as_text())
+    return _potions
+
+static func potion(key: String) -> Dictionary:
+    return (potions().get("potions", {}) as Dictionary).get(key, {})
+
+## a name or alias a viewer typed -> the potion's key ("" if none)
+static func potion_key(word: String) -> String:
+    var w := word.to_lower().replace("'", "").replace("-", "").replace("_", "")
+    var ps: Dictionary = potions().get("potions", {})
+    for k in ps:
+        if w == k or (ps[k].get("aliases", []) as Array).has(w):
+            return k
+        if String(ps[k]["name"]).to_lower().replace("'", "").replace("-", "").replace(" ", "") == w.replace(" ", ""):
+            return k
+    return ""
+
+func brew_count(h: Dictionary, key: String) -> int:
+    if key == "mending":
+        return int(h.get("potions", 0))
+    return int((h.get("brews", {}) as Dictionary).get(key, 0))
+
+func add_brew(h: Dictionary, key: String, n: int) -> void:
+    if key == "mending":
+        h["potions"] = maxi(0, int(h.get("potions", 0)) + n)
+        return
+    if not h.has("brews"):
+        h["brews"] = {}
+    var b: Dictionary = h["brews"]
+    b[key] = maxi(0, int(b.get(key, 0)) + n)
+    if int(b[key]) == 0:
+        b.erase(key)
+
+## "2 Mending, 1 Quickwater" - what a hero carries
+func brews_line(h: Dictionary) -> String:
+    var bits: Array = []
+    if int(h.get("potions", 0)) > 0:
+        bits.append("%d Mending" % int(h["potions"]))
+    for k in (h.get("brews", {}) as Dictionary):
+        bits.append("%d %s" % [int(h["brews"][k]), String(potion(k).get("name", k))])
+    return ", ".join(bits) if not bits.is_empty() else "no potions"
+
+func buy_brew(user_id: String, key: String, n := 1) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var p := potion(key)
+    if p.is_empty():
+        var names: Array = []
+        for k in potions().get("potions", {}):
+            names.append(k)
+        return "The apothecary has no such brew. Ask for: %s." % ", ".join(names)
+    if int(p.get("tier", 1)) > town_tier:
+        return "%s wants %s, but Bellmire's apothecary cannot brew it yet." % [h["name"], p["name"]]
+    var price := haggle(h, cost_for(h, int(p["cost"]) * n))
+    if not spend(h, price):
+        return "%s needs %d gold for %d %s (has %d)." % [h["name"], price, n, p["name"], int(h["gold"])]
+    add_brew(h, key, n)
+    changed.emit(user_id)
+    return "%s buys %d %s. %s%s" % [h["name"], n, p["name"], String(p.get("flavour", "")), last_haggle]
+
+func _other_brews(h: Dictionary) -> int:
+    var t := 0
+    for k in (h.get("brews", {}) as Dictionary):
+        t += int(h["brews"][k])
+    return t

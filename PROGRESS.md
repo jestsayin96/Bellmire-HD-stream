@@ -904,6 +904,36 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Mr. E's other note (the sage's scar check on WIS) was already done in Cycle 67.
 
 
+## Cycle 69 - D6, Bellmire's named people (desktop, 2026-11-11)
+- Lore first (reference town.gd ROSTER + FIRST/LAST): the old valley already had the chief in his hall, the smith,
+  the chapel healer, the innkeeper. Those bodies are PROMOTED (same role and work door, so the economy counts them as
+  before - no doubles); the crier and priest already on the square/chapel steps too. New, named in the same voice:
+  the bard, a pedlar with her cart, two children, a beggar, the town drunk.
+- scripts/notables.gd (new, class Notables; town.notables): 12 people - Aldric Ashwood (Chief of Bellmire, lives in
+  his hall), Garm Coalfoot (the Smith), Ysolde of the Ford (Healer), Rolf Thatcher (Keeper of the Tavern), Osric
+  Hollow (Priest), Cort Rivers (Crier), Wren Bramble (Bard), Petra Fenwick (Pedlar + wagon), Tove Bramble (the bard's
+  girl), Dunn the Younger, Harl Quarryman (Beggar), Rask Stonehand (the Town Drunk). Each: own body/tint/size/cape,
+  a kit (bard pipe + songbook, beggar's empty mug, drunk's full one), a gold "Name / title" tag shown up close even
+  with names off (N still shows all), gestures while at their spot (sermon, playing, begging).
+- Days: hour slots [from, to, place, tag] read off the town clock; on a new slot they get Townsfolk.stops, so every
+  step is still the navmesh + doors (D1). Bellmire is wide (square -> tavern ~120 m is half a town day on foot), so
+  each day keeps to one quarter and they live near their work (nearest house whose door the streets reach); the
+  drunk sleeps in the tavern's back room by day, staggers round it 1-6 at night.
+- Chronicle: one named line every 28-55 s from whoever's slot has lines ("Garm Coalfoot quenches a blade and swears
+  at it."); the crier shouts the latest Chronicle news ("Hear ye! Floor 2 cleared."), his shout now sits above a
+  named person's two-line tag. No other townsfolk keeps a named person's name (rechecked as settlers arrive).
+- Found on the way: TownNav.closest() (town._snap) answers (0,0,0) for a while after start - the square's spots all
+  snapped onto one point and stacked four people; Notables._ground() falls back to keep_walkable(). Worth a look for
+  D4's _snap beats (not changed here).
+- townsfolk.gd (.bak_d6): notable_title, sway (the drunk's weave), _tag, make_notable(); rts_camera.gd (.bak_d6): N
+  keeps named tags; town.gd (.bak_d6): notables hook after _more_folk, spawn_wagon().
+- tools/_d6_test.gd (headless, new): 12 named, unique names and looks, lore roles promoted not doubled, 2.2 town days
+  at 4x: 71 slot changes, 86% reached in their slot, 4-5 named Chronicle lines, crier read news, drunk out 0/134 by
+  day and 96/96 at night, 0 in_solid of 7106 (townwalk's test). D6_TEST OK. tools/_d6_shot.gd -> renders/cycles/
+  20261111_d6 (square_named, crier_reads, bard_plays, pedlar_cart, chief_east_market, smith_at_smithy,
+  priest_chapel_steps, healer_rounds, drunk_at_night) - looked at: tags readable, smith at his forge, the square's
+  four apart (first pass: two shots inside walls and the stack - fixed).
+
 ## Cycle 69 - L11, traps that visibly work (laptop, 2026-11-11)
 - Merged origin/main (desktop D4/D5; LAPTOP list 3; the UI files are the laptop's now). Import pass, parse clean.
 - Mr. E: traps "don't show functioning or doing damage". They looped their animation forever whoever was near.
@@ -1004,7 +1034,24 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, TWITCH_PARSE OK, L3, L13 OK.
 
 
-## Cycle 73 - L15, stream readability (laptop, 2026-11-11)
+## Cycle 73 - D6b, the nav snap and the long door legs (desktop, 2026-11-11)
+- Cause: the server's map reports iteration id > 0 about 40 frames before the town's region is in it; in that window
+  map_get_closest_point answers (0,0,0) for everything (420 of 600 probes at the origin in the first second).
+- TownNav.synced(): the region is in the map AND one of the mesh's own vertices (one well away from the origin) snaps
+  back onto itself; cached once true. closest() / path() give no opinion until then (flat p / []), and town._snap
+  falls back to keep_walkable (the town's own push-out of solids) - never the origin.
+- Found while re-checking: traders get an open-air spot on the square, but kept the old plot's inside point, so their
+  "door leg" ran 30-47 m straight through the houses (Maela of the Ford, Petra Bramble). work_in is cleared now.
+  And a door leg left after the stuck-waypoint give-up (Harl of the Ford, 17 m to the tavern door) re-routes along
+  the street to the door once, else leaves the house be. _townwalk had drifted 1-23 bad samples run to run; now 0.
+- tools/_d6b_test.gd (headless, new): _snap + closest probed every frame for the first second - 0 at the origin, 0
+  far; the watch's 90 beats and the traders' spots - none at the origin, none collapsed; people stacked on one spot
+  (63 pairs at frame 61, at shared doors) clear within 15 s (3). D6B_TEST OK. tools/_d6b_shot.gd:
+  renders/cycles/20261112_d6b - looked at: the square at frame 60, just after the sync, people spread over it.
+- Checks: parse 0 script errors, _townwalk in_solid 0/7923 and 0/8317 PASS, _offfloor 0 of 1120, TWITCH_PARSE OK, _delve_test
+  runs (0 script errors), D4_TEST OK, D6_TEST OK.
+
+## Cycle 74 - L15, stream readability (laptop, 2026-11-11)
 - scripts/ui_theme.gd (new, UiTheme): sizes are written for 1920x1080 and follow the window height; F11 cycles a
   UI scale of 100 / 125 / 150% (a Chronicle line says which); panels watch it and restyle.
 - At 1080p, 100%: Chronicle lines 28 px (title 24, the lord's card 46 / 28), 5 lines, wider (760), darker ink on
@@ -1025,7 +1072,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 458, TWITCH_PARSE OK, L12 OK, BOSS_TEST OK.
 
 
-## Cycle 74 - L16, one theme for every panel (laptop, 2026-11-11)
+## Cycle 75 - L16, one theme for every panel (laptop, 2026-11-11)
 - UiTheme now carries the house style: parchment (0.93, 0.86, 0.69) with an inked edge, ink / soft ink / red-brown
   ink text, the JestSayin teal as the one accent (a teal diamond before every title and a teal rule under it, the
   chat box's focus edge), viewers' names in deep gold and the town's band in slate, inked HP bars (green / amber /
@@ -1044,7 +1091,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   ENDED all home, _offfloor 0 of 431, TWITCH_PARSE OK, L15 OK, BOSS_TEST OK.
 
 
-## Cycle 74b - L16 phone test fixes (laptop, 2026-11-11, Mr. E)
+## Cycle 75b - L16 phone test fixes (laptop, 2026-11-11, Mr. E)
 - Phone test on the themed UI: tools/_l16_phone.gd (new; --resolution 1920x1080) - the market square, four heroes
   with cosmetic titles, the crier calling - saved at 1080p and shrunk to 854x480, LOOKED at, then F9.
 - 1. Titles: shown only on the selected hero (the director's focus selects too); F9 shows every hero's. A shown

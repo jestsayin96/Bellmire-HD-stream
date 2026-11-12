@@ -63,15 +63,38 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       fence, 5 horses + a foal in the paddock, 8 cats on the streets (they nap), crows over 5 fields; animals never
       pick a spot or path through a building (solid_at) and stop at stalls. D5_TEST OK (0 in_solid / 0 high / 0 out
       of pen in 22200 samples); renders/cycles/20261111_d5.
-- [ ] D6. Unique NPCs: named characters with jobs and daily routines from the lore (the chief, the smith,
+- [x] D6. Unique NPCs: named characters with jobs and daily routines from the lore (the chief, the smith,
       the healer, the innkeeper, the priest, a bard, a town crier who reads the Chronicle aloud, merchants
       with carts, children playing, beggars, a drunk at night). Each with a distinct look and a line in
       the Chronicle now and then.
+      DONE cycle 69: scripts/notables.gd - 12 named folk (lore roster's chief/smith/healer/innkeeper promoted, not
+      doubled; + priest, crier, bard, pedlar with cart, two children, beggar, drunk), names from the lore's FIRST x
+      LAST, title tag up close, own look, hour-slot days in their own quarter, Chronicle lines, the crier shouts the
+      latest Chronicle news. D6_TEST OK (86% of slots reached, drunk out 0/134 by day 96/96 at night, 0 in_solid);
+      renders/cycles/20261111_d6.
+- [x] D6b. Nav snap bug: town._snap / TownNav.closest() returns (0,0,0) for a while after start (navmesh not
+      synced yet). Wait for the map's first sync (NavigationServer3D.map_get_iteration_id > 0 or map_changed) before
+      snapping; until then fall back to the raw position, never the origin. Re-check D4 watch patrol routes and
+      anyone stacked on the square at start. Test: snap right after start never returns 0,0,0; render the square.
+      DONE cycle 73: iteration id > 0 came ~40 frames before the region was in the map; TownNav.synced() waits for
+      the region + a vertex probe, _snap falls back to keep_walkable. Also: traders' market spot kept the old plot's
+      inside point (a 30-47 m "door leg" through houses) and a door leg left after stuck waypoints now re-routes.
+      D6B_TEST OK (0 of 600 snaps at the origin, 90 beats clean); _townwalk in_solid 0/7923 and 0/8317; renders/cycles/20261112_d6b.
 - [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
 - [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
 - [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'
       camp, a river ford and mill, old ruins (lore), roads linking them, the scar road; travellers and carts on
       the roads; the director's tour includes them. Navmesh + LOD keep FPS.
+- [ ] D13. Director camera clips into buildings (supervisor, Nov 11): in renders/cycles/20261112_d6b/
+      square_f460_east.png a house roof fills the bottom-left third of the frame - the auto-director
+      camera sits behind/inside geometry. Keep a minimum clearance from buildings, or fade/cull geometry
+      between the camera and its subject, so the stream view is never blocked. Check every director shot
+      type (town wide, hero follow, fight, raid) and render proof of each.
+- [ ] D14. Stuck walkers against props (supervisor, Nov 11): _townwalk reports stuck_on_route=4 steady
+      (traders Petra Bramble, Maela of the Ford, farmer Maela Coalfoot) - pinned on a prop a few cm off
+      their route, navoff 0.17-0.66, push (0,0,0). Nobody is inside a building (in_solid 0 of 8394), so
+      this is cosmetic, but they stand still all stream. Give the push-out rule a prop case. Fold into D7
+      if it is the same code path.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*

@@ -513,8 +513,10 @@ func _toggle_names() -> void:
 			continue
 		for c in (n as Node).get_children():
 			if c is Label3D and c != (n as Townsfolk)._shout:
-				(c as Label3D).visible = Townsfolk.show_names
-				(c as Label3D).visibility_range_end = 60.0 if Townsfolk.show_names else 9.0
+				# D6: Bellmire's named people keep their tag up close
+				var named: bool = (n as Townsfolk).notable_title != ""
+				(c as Label3D).visible = Townsfolk.show_names or named
+				(c as Label3D).visibility_range_end = 60.0 if Townsfolk.show_names else (14.0 if named else 9.0)
 	_say_local("Names %s." % ("shown" if Townsfolk.show_names else "hidden"))
 
 ## ================================================= follow camera fixes

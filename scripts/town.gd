@@ -135,6 +135,8 @@ var roster: Roster
 var chat: ChatCmd
 var heroes := {}             # user_id -> HeroBody
 var feed: Array = []
+## D6: Bellmire's named people and their days (scripts/notables.gd)
+var notables: Notables
 ## the valley's stock (Economy: a port of the old Sim). Delves bring ore,
 ## stone, salvaged gear and potions home into it.
 var economy: Economy
@@ -3838,6 +3840,9 @@ func _spawn_people() -> void:
             elif role == "trader" or role == "innkeeper":
                 # D4: on open ground - a spot inside a stall left them pressing into it
                 v.work = _snap(_market_pos + Vector3(rng.randf_range(-7.0, 7.0), 0.0, rng.randf_range(-7.0, 7.0)))
+                # D6b: an open-air spot has no door - the plot's inside point stayed
+                # behind and the "door leg" ran 30-47 m through the houses to it
+                v.work_in = Vector3.ZERO
             start.y = height_at(start.x, start.z)
             v.position = start
             add_child(v)
@@ -3905,6 +3910,10 @@ func _spawn_people() -> void:
         fsh.add_child(ang)
         anglers.append(ang)
     _more_folk(rng)
+    notables = Notables.new()
+    notables.name = "Notables"
+    add_child(notables)
+    notables.setup(self)
     # plain townsfolk: home -> market and back, so the streets are never empty
     for k in range(14):
         var v := Townsfolk.new()
@@ -4071,6 +4080,10 @@ func _more_folk(rng: RandomNumberGenerator) -> void:
         var w := _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(at.x, height_at(at.x, at.z), at.z - 2.6), PI * 0.5, 0.8)
         v.cart = w
 
+## D6: a pedlar's cart (the carters' wagon), standing on the ground at `at`
+func spawn_wagon(at: Vector3) -> Node3D:
+    return _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(at.x, height_at(at.x, at.z), at.z - 2.6), PI * 0.5, 0.8)
+
 ## ---------------------------------------------------------------- D4 the garrison
 ## Lore (the original town.gd _chief_spends): "standing garrison scales with how
 ## dangerous the valley has become" and each new man "is sworn into the watch."
@@ -4101,8 +4114,10 @@ func _guard_posts() -> Array:
     return posts
 
 ## the nearest point a foot (or a hoof) may stand on
+## (D6b: only once the navmesh is in the server's map - before that the town's own
+## push-out of solids, never the origin)
 func _snap(p: Vector3) -> Vector3:
-    if nav != null and nav.ready_ok:
+    if nav != null and nav.synced():
         var q: Vector3 = nav.closest(Vector3(p.x, 0.0, p.z))
         return Vector3(q.x, 0.0, q.z)
     return keep_walkable(p)

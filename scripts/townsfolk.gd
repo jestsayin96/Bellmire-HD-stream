@@ -42,6 +42,11 @@ var _shout_t := 4.0
 var _shout: Label3D
 var cart: Node3D = null              # carters pull a wagon
 var size_k := 1.0                    # children are smaller
+## D6: Bellmire's named people (Notables): a title under the name, the tag shown
+## up close even with names off, and how far they weave as they walk (the drunk)
+var notable_title := ""
+var sway := 0.04
+var _tag: Label3D
 
 var _anim: AnimationPlayer
 var _mdl: Node3D
@@ -69,20 +74,24 @@ func _ready() -> void:
         Gear.dress_role(_mdl, gear_role if gear_role != "" else role, gear_seed)
         Gear.clothe(_mdl, gear_role if gear_role != "" else role, livery, rank)
     var tag := Label3D.new()
-    tag.text = person_name
+    tag.text = person_name if notable_title == "" else "%s\n%s" % [person_name, notable_title]
     tag.font_size = 64
     tag.pixel_size = 0.008
     ## names only up close - forty labels at once was a wall of text
     ## with 130+ people, names only for whoever is right in front of the camera
     tag.visibility_range_end = 9.0
-    tag.visible = show_names
+    tag.visible = show_names or notable_title != ""
     tag.visibility_range_end_margin = 2.0
     tag.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
     tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
     tag.outline_size = 16
     tag.outline_modulate = Color(0, 0, 0, 0.85)
     tag.position = Vector3(0, 2.45, 0)
+    if notable_title != "":
+        tag.modulate = Color(1.0, 0.88, 0.55)
+        tag.visibility_range_end = 14.0
     add_child(tag)
+    _tag = tag
     _wobble = randf() * TAU
     _wait = randf_range(0.0, 5.0)
     if stay:
@@ -130,7 +139,8 @@ func _cry(delta: float) -> void:
         _shout.autowrap_mode = TextServer.AUTOWRAP_WORD
         _shout.outline_size = 14
         _shout.modulate = Color(1.0, 0.92, 0.6)
-        _shout.position = Vector3(0, 3.1, 0)
+        # D6: above a named person's two-line tag, not over it
+        _shout.position = Vector3(0, 3.1 if notable_title == "" else 3.75, 0)
         add_child(_shout)
         UiTheme.style_bubble(_shout)       # laptop L16 phone test (Mr. E): ink on a parchment plate, ~28 px at 1080p
     _shout.text = "\"" + String(shout_lines[randi() % shout_lines.size()]) + "\""
@@ -185,6 +195,7 @@ func _next_trip() -> Vector3:
 var _linger := -1.0
 var _door_out := Vector3.ZERO
 var _stuck_t := 0.0
+var _door_retry := 0
 
 func _physics_process(delta: float) -> void:
     if town != null:
@@ -234,11 +245,30 @@ func _physics_process(delta: float) -> void:
     # D1: the last leg, door -> just inside, is the only one off the walkable
     # ground; corners are taken tight (0.9 m cut through house corners)
     var door_leg: bool = _route.size() == 1 and _enter_at != Vector3.ZERO
+    if door_leg and to.length() > 3.0:
+        # D6b: a door leg is a step or two. Far from the door (the waypoints
+        # before it were given up as stuck) walk the street back to the door
+        # first - once; then leave the house be rather than cut through walls
+        _route.clear()
+        if _door_out != Vector3.ZERO and _door_retry < 1:
+            _door_retry += 1
+            _route = town.call("route", global_position, _door_out)
+            var end: Vector3 = _route.back() if not _route.is_empty() else global_position
+            if Vector2(end.x - _door_out.x, end.z - _door_out.z).length() <= 1.0:
+                _route.append(_enter_at)
+                return
+            _route.clear()
+        _enter_at = Vector3.ZERO
+        _door_out = Vector3.ZERO
+        _door_retry = 0
+        _wait = randf_range(2.0, 5.0)
+        return
     if to.length() < (0.9 if _route.size() == 1 else 0.45):
         _stuck_t = 0.0
         _route.remove_at(0)
         if _route.is_empty():
             Rig.play(_anim, "Idle")
+            _door_retry = 0
             if _enter_at != Vector3.ZERO:
                 # through the door and gone: a while indoors
                 inside = true
@@ -249,7 +279,7 @@ func _physics_process(delta: float) -> void:
         return
     var dir: Vector3 = to.normalized()
     _wobble += delta * 1.7
-    dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * 0.04).normalized()
+    dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * sway).normalized()
     var was := global_position
     var p: Vector3 = global_position + dir * speed * pace * delta
     if door_leg:
@@ -343,3 +373,12 @@ func _posted(delta: float) -> void:
         Rig.play(_anim, g)
         _gest_t = minf(_anim.get_animation(g).length, 3.5)
 
+## D6: name this body as one of Bellmire's own (works before or after _ready)
+func make_notable(nm: String, title: String) -> void:
+    person_name = nm
+    notable_title = title
+    if _tag != null:
+        _tag.text = "%s\n%s" % [nm, title]
+        _tag.modulate = Color(1.0, 0.88, 0.55)
+        _tag.visible = true
+        _tag.visibility_range_end = 60.0 if show_names else 14.0

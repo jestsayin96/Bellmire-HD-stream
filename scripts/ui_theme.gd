@@ -141,3 +141,43 @@ static func chip() -> StyleBoxFlat:
 	sb.content_margin_bottom = px(6)
 	sb.shadow_size = 3
 	return sb
+
+## ---- L16 (phone test): speech in the world - a townsperson's bubble, the crier.
+## Same house as the Chronicle: ink on parchment, a plate behind the words so they
+## never sit on the ground, and a FIXED on-screen size (~28 px at 1080p at any
+## distance). Call style_bubble once on the Label3D, fit_plate after each text.
+const BUBBLE_PX := 0.00085        # Label3D.fixed_size pixel_size: ~28 px glyphs at 1080p
+static func style_bubble(lb: Label3D) -> void:
+	lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	lb.fixed_size = true
+	lb.no_depth_test = true
+	lb.font_size = 32
+	lb.pixel_size = BUBBLE_PX * scale
+	lb.outline_size = 6
+	lb.outline_modulate = Color(PARCH.r, PARCH.g, PARCH.b, 1.0)
+	lb.modulate = INK
+	lb.render_priority = 12
+	lb.width = 520.0
+	lb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
+static func fit_plate(lb: Label3D) -> void:
+	var plate := lb.get_node_or_null("plate") as MeshInstance3D
+	if plate == null:
+		plate = MeshInstance3D.new()
+		plate.name = "plate"
+		var m := StandardMaterial3D.new()
+		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		m.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+		m.fixed_size = true
+		m.no_depth_test = true
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.albedo_color = Color(PARCH.r, PARCH.g, PARCH.b, 0.94)
+		m.render_priority = 11
+		plate.material_override = m
+		plate.mesh = QuadMesh.new()
+		lb.add_child(plate)
+	var font: Font = lb.font if lb.font else ThemeDB.fallback_font
+	var sz := font.get_multiline_string_size(lb.text, HORIZONTAL_ALIGNMENT_CENTER, lb.width, lb.font_size)
+	var pad := Vector2(28, 16)
+	(plate.mesh as QuadMesh).size = (sz + pad) * lb.pixel_size
+	plate.visible = lb.visible and lb.text != ""

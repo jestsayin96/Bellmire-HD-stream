@@ -53,6 +53,7 @@ func setup(t: Node3D) -> void:
 	_help.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 	_help.add_theme_constant_override("outline_size", 6)
 	_help.position = Vector2(16, 12)
+	_help.visible = false            # L16 phone test: dev furniture, not stream furniture - H shows it
 	_skin_chips()
 	_layer.add_child(_help)
 	_speed_lb = Label.new()
@@ -105,6 +106,8 @@ func _process(delta: float) -> void:
 	if cam == null:
 		return
 	var real := delta / maxf(Engine.time_scale, 0.001)    # camera moves in real time
+	_titles_tick(real)
+	_titles_follow()
 	if not _chat.visible:
 		var mv := Vector2.ZERO
 		if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP): mv.y -= 1
@@ -190,6 +193,10 @@ func _unhandled_input(ev: InputEvent) -> void:
 				_speed_i = mini(_speeds.size() - 1, _speed_i + 1)
 				_set_speed()
 			KEY_H: _help.visible = not _help.visible
+			KEY_F9:
+				# L16 phone test: every hero's title, or only the one in view (selected / the director's focus)
+				titles_all = not titles_all
+				_titles_t = 0.0
 			KEY_F11:
 				# L15: the interface scale for the stream, 100 / 125 / 150%
 				var s := UiTheme.cycle()
@@ -397,13 +404,14 @@ func _build_frame() -> void:
 	sb.content_margin_top = 8
 	sb.content_margin_bottom = 10
 	_frame.add_theme_stylebox_override("panel", sb)
-	_frame.anchor_left = 0.5
-	_frame.anchor_right = 0.5
+	# L16 phone test: bottom-right, clear of the Chronicle (above the chat box line)
+	_frame.anchor_left = 1.0
+	_frame.anchor_right = 1.0
 	_frame.anchor_top = 1.0
 	_frame.anchor_bottom = 1.0
-	_frame.offset_left = -UiTheme.px(300)
-	_frame.offset_right = UiTheme.px(300)
-	_frame.offset_bottom = -UiTheme.px(14)
+	_frame.offset_left = -UiTheme.px(618)
+	_frame.offset_right = -UiTheme.px(18)
+	_frame.offset_bottom = -UiTheme.px(86)
 	_frame.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_layer.add_child(_frame)
 	var v := VBoxContainer.new()
@@ -700,3 +708,50 @@ func _skin_chat() -> void:
 	_chat.add_theme_color_override("font_placeholder_color", UiTheme.INK_SOFT)
 	_chat.add_theme_color_override("caret_color", UiTheme.TEAL)
 	_chat.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.SMALL))
+
+## ---- L16 phone test: cosmetic titles (Gear's "eq_title" under a hero's body)
+## show on the selected hero - which is also the director's focus - and on all of
+## them only with F9; a long title is shortened so it keeps to its hero's column.
+var titles_all := false
+var _titles_t := 0.0
+var _shown_titles: Array = []
+const TITLE_MAX := 22
+func _titles_tick(real: float) -> void:
+	_titles_t -= real
+	if _titles_t > 0.0 or town == null:
+		return
+	_titles_t = 0.25
+	_shown_titles.clear()
+	for o in get_tree().get_nodes_in_group("viewer_heroes"):
+		var hb := o as HeroBody
+		if hb == null or hb._mdl == null:
+			continue
+		var lb := hb._mdl.get_node_or_null("eq_title") as Label3D
+		if lb == null:
+			continue
+		if not lb.has_meta("full"):
+			lb.set_meta("full", lb.text)
+		var full := String(lb.get_meta("full"))
+		lb.text = full if full.length() <= TITLE_MAX else full.substr(0, TITLE_MAX - 1) + "…"
+		lb.visible = titles_all or hb == selected
+		lb.top_level = true
+		if lb.visible:
+			_shown_titles.append(hb)
+
+## every frame: a shown title rides one line under its hero's name label, at the
+## name's own size and lift (the hero's label layout spreads the names apart)
+func _titles_follow() -> void:
+	for hb in _shown_titles:
+		if not is_instance_valid(hb) or (hb as HeroBody)._mdl == null:
+			continue
+		var lb := (hb as HeroBody)._mdl.get_node_or_null("eq_title") as Label3D
+		var nm := (hb as HeroBody)._name_label()
+		if lb == null or nm == null or not nm.visible:
+			if lb:
+				lb.visible = false
+			continue
+		lb.global_position = nm.global_position
+		lb.pixel_size = nm.pixel_size
+		lb.font_size = int(nm.font_size * 0.62)
+		lb.offset = Vector2(0, nm.offset.y - float(nm.font_size) * 0.95)
+		lb.vertical_alignment = VERTICAL_ALIGNMENT_TOP

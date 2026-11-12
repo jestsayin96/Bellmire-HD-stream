@@ -1042,3 +1042,18 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   renders/cycles/20261111_l16 - looked at the whole interface at 1080p: one design, nothing overlapping.
 - _l15_test reads the roll's first row (its title is a themed block now). Checks: parse 0 script errors, _delve_test
   ENDED all home, _offfloor 0 of 431, TWITCH_PARSE OK, L15 OK, BOSS_TEST OK.
+
+
+## Cycle 74b - L16 phone test fixes (laptop, 2026-11-11, Mr. E)
+- Phone test on the themed UI: tools/_l16_phone.gd (new; --resolution 1920x1080) - the market square, four heroes
+  with cosmetic titles, the crier calling - saved at 1080p and shrunk to 854x480, LOOKED at, then F9.
+- 1. Titles: shown only on the selected hero (the director's focus selects too); F9 shows every hero's. A shown
+  title rides one line under its hero's name label - same size rule and lift as the name, so the names' own
+  spread keeps titles apart and inside the view; long titles shortened to 22 characters. (First pass they sat tiny
+  at the heroes' feet.)
+- 2. Speech bubbles (townsfolk shout lines, the crier): UiTheme.style_bubble / fit_plate - ink on a parchment plate
+  sized to the words, FIXED on-screen size (~28 px glyphs at 1080p at any distance), drawn over the ground. Two
+  calls in townsfolk.gd (the desktop's file), at Mr. E's request; nothing else there changed.
+- 3. The key strip: hidden by default (H shows it), on its parchment chip, scaled with the UI scale (L15/L16).
+- Also: the hero unit frame moved bottom-right (it sat on the Chronicle in the phone frame).
+- Checks: L13, L15, L16 OK, TWITCH_PARSE OK.

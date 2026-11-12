@@ -54,7 +54,18 @@ var move_dir := Vector3.ZERO
 
 var _anim: AnimationPlayer
 var _mdl: Node3D
-var _route: Array = []
+## D16d: a route asked for before the navmesh is in the server's map comes
+## from the old road-hex fallback - 1.8 m right of the hex centres and, for any
+## goal past the wall, out through the nearest gate and back in: at the start of
+## every stream the first trips crowded the gates two ways for nothing. Such a
+## route is marked (the setter) and walked again from the navmesh once it syncs.
+var _route: Array = []:
+    set(value):
+        _route = value
+        _route_presync = not value.is_empty() and _nav_unsynced()
+var _route_presync := false
+static var funnel_fix := true        # false only for the before figure (tools/_d16d_test.gd)
+static var presync_reroutes := 0
 var _enter_at := Vector3.ZERO
 var _wait := 0.0
 var _to_work := true
@@ -367,6 +378,8 @@ func _physics_process(delta: float) -> void:
                     _route[0] = ww[1]
                 elif _route.size() < 400:
                     _route.insert(0, ww[1])
+    if _route_presync and funnel_fix and town != null:
+        _resync_route()
     if leader != null and town != null:
         _follow(delta)
         return
@@ -535,6 +548,36 @@ func _physics_process(delta: float) -> void:
                     return
             _rerouted = 0
             _route.remove_at(0)
+
+func _nav_unsynced() -> bool:
+    if town == null:
+        return false
+    var n = town.get("nav")
+    return n != null and not bool(n.call("synced"))
+
+## D16d: the navmesh is in the map now - walk the same trip on it instead of the
+## pre-sync road-hex route (a door trip keeps its last step indoors)
+func _resync_route() -> void:
+    if _nav_unsynced():
+        return
+    _route_presync = false
+    if _route.is_empty():
+        return
+    var door := _enter_at != Vector3.ZERO and _door_out != Vector3.ZERO
+    var goal: Vector3 = _door_out if door else _route.back()
+    var nr: Array = town.call("route", global_position, goal)
+    if nr.is_empty():
+        return
+    if door:
+        var end: Vector3 = nr.back()
+        if Vector2(end.x - goal.x, end.z - goal.z).length() > 1.0:
+            return
+        nr.append(_enter_at)
+    _route = nr
+    presync_reroutes += 1
+    _best_tgt = Vector3.INF
+    _prog_t = 0.0
+    _stuck_t = 0.0
 
 ## D16b: what the watchdog does with a walker that has not moved in
 ## WD_WINDOW s. True when the route changed (the caller stops this step).

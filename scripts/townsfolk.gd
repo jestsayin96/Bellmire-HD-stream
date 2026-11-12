@@ -165,7 +165,9 @@ func _cry(delta: float) -> void:
     _shout.visible = true
     UiTheme.fit_plate(_shout)
     Rig.play(_anim, "Cheer")
-    get_tree().create_timer(5.0).timeout.connect(func() -> void:
+    var st := create_tween()                 # D8: bound to this walker, dies with it
+    st.tween_interval(5.0)
+    st.tween_callback(func() -> void:
         if is_instance_valid(_shout):
             _shout.visible = false
             Rig.play(_anim, "Idle"))

@@ -138,6 +138,10 @@ func _defenders() -> Array:
         if not _fighters.has(p):
             var st := {"target": null, "swing": _first_swing(false), "post": (p as Node3D).global_position,
                        "yaw": (p as Node3D).rotation.y, "stay": (p as Townsfolk).stay}
+            # D8: a hero caught on an errand (the docks, the smithy, the scar road) keeps
+            # where they were going, and walks on there after the raid
+            if is_hero and String((p as HeroBody).errand) != "" and not (p as Townsfolk)._route.is_empty():
+                st["dest"] = (p as Townsfolk)._route.back()
             if is_hero:
                 var r: Roster = (p as HeroBody).roster      # viewers' roll or the town's own
                 var h: Dictionary = r.get_hero((p as HeroBody).user_id)
@@ -625,9 +629,11 @@ func _raider_falls(r: Dictionary, _killer: String) -> void:
         (n as Monster).die()
     else:
         _anim(n, "die")
+        var nid := n.get_instance_id()       # D8: never capture a node that may be freed first
         get_tree().create_timer(25.0).timeout.connect(func() -> void:
-            if is_instance_valid(n):
-                n.queue_free())
+            var o := instance_from_id(nid)
+            if o != null and is_instance_valid(o):
+                (o as Node).queue_free())
 
 func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
     # D9: anyone who goes down makes one CON save, DC 10 (heroes: the old
@@ -680,9 +686,11 @@ func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
         var adv = town.get("adventurers")
         if adv:
             (adv.bodies as Dictionary).erase((n as HeroBody).user_id)
+        var nid := n.get_instance_id()       # D8: never capture a node that may be freed first
         get_tree().create_timer(25.0).timeout.connect(func() -> void:
-            if is_instance_valid(n):
-                n.queue_free())
+            var o := instance_from_id(nid)
+            if o != null and is_instance_valid(o):
+                (o as Node).queue_free())
     elif String((n as Townsfolk).role) == "chief":
         town.call("bury", n, "%s, the chief of Bellmire, is killed by %s." % [who, killer])
     else:
@@ -716,14 +724,34 @@ func _stand_down(delta: float) -> void:
             st["hp"] = 1.0
             _say("%s comes round." % (d as Townsfolk).person_name)
         var post: Vector3 = st["post"]
-        if _flat((d as Node3D).global_position, post) > 0.6:
+        var gap := _flat((d as Node3D).global_position, post)
+        # D8: a post a prop now stands on (or one the push-out keeps them off) was
+        # never reached - they walked on the spot all stream. Close enough and no
+        # nearer for 3 s, or 45 s on the way at all: they are home.
+        st["sd_t"] = float(st.get("sd_t", 0.0)) + delta
+        if gap < float(st.get("sd_best", 1e9)) - 0.1:
+            st["sd_best"] = gap
+            st["sd_stall"] = 0.0
+        else:
+            st["sd_stall"] = float(st.get("sd_stall", 0.0)) + delta
+        var home := gap <= 0.6 or (gap < 4.0 and float(st["sd_stall"]) > 3.0) or float(st["sd_t"]) > 45.0
+        if not home:
             _step(d, post, float(st["speed"]), delta)
             _anim(d, "walk")
         else:
             (d as Node3D).rotation.y = float(st["yaw"])
             (d as Townsfolk).stay = bool(st["stay"])
             if not bool(st["stay"]):
-                (d as Townsfolk)._route = []
+                var dest = st.get("dest")
+                if dest == null and d is HeroBody and not (d as Townsfolk)._route.is_empty():
+                    dest = (d as Townsfolk)._route.back()      # an errand taken mid-raid
+                if dest != null and d is HeroBody and String((d as HeroBody).errand) != "":
+                    # D8: back on the errand - clearing the route here fired its arrival
+                    # on the spot (a fisher popped onto the dock, a smith's customer
+                    # stood mid-road "at the smithy")
+                    (d as Townsfolk)._route = town.call("route", (d as Node3D).global_position, dest)
+                else:
+                    (d as Townsfolk)._route = []
             _anim(d, "idle")
             _fighters.erase(d)
 

@@ -466,9 +466,10 @@ func _gesture(c: Dictionary, dt: float) -> void:
     var a: String = acts[rng.randi() % acts.size()]
     if who._anim.has_animation(a):
         Rig.play(who._anim, a)
-        var w := who
+        var wid := who.get_instance_id()     # D8: never capture a node that may be freed first
         get_tree().create_timer(minf(who._anim.get_animation(a).length, 3.0)).timeout.connect(func() -> void:
-            if is_instance_valid(w) and w._route.is_empty():
+            var w = instance_from_id(wid)
+            if w != null and is_instance_valid(w) and w._route.is_empty():
                 Rig.play(w._anim, "Idle"))
 
 ## ---------------------------------------------------------------- voices

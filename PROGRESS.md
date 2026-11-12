@@ -1227,3 +1227,34 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   walkers outside the fence, nobody pressed on it; the stall corner by the square has folk passing the house.
 - Checks: parse 0 script errors, _offfloor 0 of 983 (MON_INPROP 0), TWITCH_PARSE OK, _townwalk PASS (in_solid
   0/8365, raid 0/4237, stuck_on_route 0-1), _delve_test 150 s with 0 SCRIPT ERROR.
+
+## Cycle 81 - D8, the 30-minute soak (desktop, 2026-11-12)
+- tools/_soak.gd (SOAK_OUT env for the frame folder): 30 min in a real window, RtsCamera + director on, 4x, six fake
+  viewers enlisting, delving, fishing, forging, rerolling (fake chat feed, nothing posted).
+  Result: FPS avg 139.2, min 29 (the minutes with a 0.7-1.3 s proc spike = a dungeon floor built in one frame, the D7
+  hitch on the laptop's side), memory flat 552-585 MB, nodes 18.9-21k (no leak), 22 valley days, 13 raids, 7 band
+  delves home, 10 viewer deaths / 7 rerolls, director cuts fight 27, fish 17, hero 16, raid 16, delve 12, lord 7.
+- BROKE, FIXED:
+  - spells.gd: a chain bolt's later hops are timers on the tree that captured the floor; when the party came home and the
+    floor was freed mid-chain: 2 SCRIPT ERRORs (add_child on null in _arc_line / _burst). Now a WeakRef, skipped if gone.
+    Renew motes stop on a tween bound to the motes, not a tree timer.
+  - "Lambda capture at index 0 was freed" x9: 25 s body-clearing timers (raids.gd x2, town.bury) and the notables'
+    gesture timer now hold an instance id, not the node; the townsfolk shout uses a tween bound to the walker.
+  - raids.gd: a viewer's hero caught by a raid on the way to the docks / smithy / scar: stand-down cleared the route,
+    which fired the errand's arrival where they stood (a fisher popped onto the dock end, a buyer "at the smithy" in
+    the road). The muster keeps the errand's destination (or the route's end, for an errand taken mid-raid) and the hero
+    walks on after the raid.
+  - raids.gd: defenders whose post a prop now covers never got within 0.6 m and walked on the spot all stream (3 left
+    a minute after a raid in the test). Home when within 4 m and no nearer for 3 s, or after 45 s.
+- tools/_d8_test.gd (new): a chain bolt + renew on a floor freed mid-flight (no errors); a hero sent fishing, a raid
+  mid-walk: destination kept, 0 defenders still standing down 60 s after, the hero walked on and fished. D8_TEST OK.
+- Re-soak after the fixes (9 min before it was stopped): 0 SCRIPT ERROR, 0 lambda errors (were 2 + 9 in 30 min), viewer
+  catches 8 (0 in the first 30 min). Its FPS (avg 41-84) is NOT the game's: Mr. E's machine was running Marvel Rivals
+  and OBS at the same time, so the run was stopped to leave the PC to him. The first 30-min run is the FPS figure.
+- Seen in soak_03 (looked): at a raid by a wall three heroes' name tags stack over one another (JestFan / MossyMage /
+  Corvin the Younger) - the crowd name layout (hero_body / L15-L16 UI, laptop) does not spread townsfolk-band + viewers
+  mixed. Not fixed here.
+- Renders renders/cycles/20261112_d8 (soak_00-03, after_fix/soak_00). Looked: raid at the west gate with the band's
+  frames and the Chronicle; the late-stream raid by the wall.
+- Checks: parse 0 script errors, _offfloor 0 of 1054 (MON_INPROP 0 of 214), TWITCH_PARSE OK, _townwalk PASS (in_solid
+  0/8702, raid 0/3350, stuck_on_route 0-1), _delve_test ENDED all four home, 0 SCRIPT ERROR. Laptop files untouched.

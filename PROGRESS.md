@@ -1609,3 +1609,24 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   smith's tier rack. The shot tool can flip water_y to re-shoot the 'before' at any time.
 - Run note: a diagnostic headless Godot launched without --quit-after hung the Blender bridge mid-run; Mr. E cleared it (taskkill).
   All diagnostic guards/tools removed after the bisection; only tools/_d18c_shot.gd kept.
+
+## D-cycle (D19a daylight day/night) - DONE Nov 12 (desktop scheduled run)
+- daylight.gd already drove the clock to the sky each frame: the sun climbs from 6:00 and sets 18:30 (sin arc elevation, azimuth
+  sweep), white at noon lerping warm at the horizon (goldness), a low cold moon you can SEE by at night (nightness, energy up to
+  0.7 - the stream was near black before), the night sky near black with cool moonlit ambient, lamps burn low by day and full at
+  night (k factor), windows glow (emission_energy_multiplier up to 2.4). D19a is the formal pass + the missing night BLOOM.
+- NEW: night bloom. town.gd _build environment gets glow_enabled (normalized, SCREEN blend, hdr_threshold 1.1, modest base);
+  daylight.gd scales env.glow_intensity/bloom/strength with nightness (and a touch at the gold hours), so after dark the emissive
+  windows, street lamps and yard braziers halo softly while midday stays clean (glow 0.25 noon -> 1.0 night). Nothing else in the
+  lighting balance was touched - it was already tuned for a 24/7 stream.
+- Tools: tools/_d19a_test.gd (drives override_hour across the day, checks nightness/goldness shape, sun brighter+higher at noon,
+  lamps/windows/glow all rise after dark) and tools/_d19a_shot.gd (windowed full-day timelapse over the square, holds each hour
+  with override_hour). Backups: scripts/town.gd.bak_d19a, scripts/daylight.gd.bak_d19a.
+- Checks: parse 0 SCRIPT ERROR / Parse Error (known texture-UID warnings only). D19A_TEST OK (noon sun_e1.50 x-58 white glow0.25;
+  dawn/dusk gold1.0 lamp0.95 glass1.60 glow0.75; night moon0.70 lamp1.28 glass2.40 glow1.00; 92 lights, 1 glass mat). OFFFLOOR 0
+  of 1097 (INPROP 0, MON_INPROP 0). TWITCH_PARSE OK. _townwalk 120 s PASS: in_solid 1/16687 (0.006%), raid 0/3532, STUCK_ON_ROUTE
+  0 (watchdog repathed 1). _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party delved to floor 2 and came home.
+- Shots (windowed 1920x1080, tools/_d19a_shot.gd): renders/cycles/20261112_d19a - 04:00 night, 06:00 dawn (warm, windows lit),
+  08:00, 12:00 noon (bright, white sun, hard shadows), 16:00, 18:30 dusk (amber), 20:00, 22:00 night + a close night framing. The
+  LOOK: noon crisp; dawn/dusk read warm; night is dark but watchable - moonlit blue town, warm windows + lamp pools haloed by the
+  new bloom, townsfolk clearly readable.

@@ -827,6 +827,14 @@ func _build() -> void:
     e.ambient_light_energy = 0.85
     e.ssao_enabled = true
     e.tonemap_mode = Environment.TONE_MAPPER_AGX
+    # D19a night bloom: emissive windows, lamps and braziers glow after dark
+    e.glow_enabled = true
+    e.glow_normalized = true
+    e.glow_blend_mode = Environment.GLOW_BLEND_MODE_SCREEN
+    e.glow_hdr_threshold = 1.1
+    e.glow_intensity = 0.3
+    e.glow_strength = 1.0
+    e.glow_bloom = 0.03
     # distance haze: far ridges fade into the sky instead of ending hard
     e.fog_enabled = true
     e.fog_light_color = Color(0.70, 0.77, 0.84)

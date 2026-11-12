@@ -35,13 +35,17 @@ func _initialize() -> void:
 	root.add_child(_cam)
 	_cam.make_current()
 	var themes: Array = SET_A if _set == "a" else FloorGen.all_themes().keys()
+	if _set in ["c", "d"]:
+		themes = themes.duplicate()
+		themes.append("boss")
 	for th in themes:
 		var fl := _floor_of(String(th))
 		if fl < 0:
 			print("L28_SHOT no floor for ", th)
 			continue
+		var views: Array = ["room", "close", "game"] if _set in ["c", "d"] else ["room", "close"]
 		for look in ([false, true] if _set == "a" else [true]):
-			for view in ["room", "close"]:
+			for view in views:
 				_jobs.append([th, fl, look, view])
 
 ## the town's environment as town.gd builds it (sky ambient 0.85, AGX, haze, SSAO)
@@ -68,6 +72,10 @@ func _town_like() -> Environment:
 	return e
 
 func _floor_of(theme: String) -> int:
+	if theme == "boss":         # L28c: the first lord's floor, lord and all
+		for f in range(2, 80):
+			if Bestiary.is_boss_floor(f):
+				return f
 	for f in range(2, 80):
 		if FloorGen.theme_for(f) == theme and not Bestiary.is_boss_floor(f):
 			return f
@@ -99,7 +107,7 @@ func _process(_dt: float) -> bool:
 		_host.add_child(d)
 		for m in d.monsters:
 			(m as Node).queue_free()          # the look, not the residents
-		if d.lord:
+		if d.lord and String(job[0]) != "boss":
 			d.lord.queue_free()
 		_cur = {"key": key, "info": d.info, "dun": d}
 		var fe = d.env() if _envmode == "floor" else null
@@ -117,9 +125,42 @@ func _process(_dt: float) -> bool:
 			var dir := (lamp - en)
 			dir.y = 0
 			dir = dir.normalized() if dir.length() > 0.1 else Vector3(0, 0, 1)
+			if _set in ["c", "d"]:
+				dir = _open_dir(info, en)
 			_cam.global_position = en + dir * 3.0 + Vector3(0, 1.7, 0)
 			_cam.look_at(en + dir * 9.0 + Vector3(0, 0.6, 0), Vector3.UP)
+		"game":
+			# the director's camera as the game frames it: fov 55, 48 deg down, 34 m back,
+			# on the lord (boss floor) or the lamp-stand
+			var at := lamp
+			var dn: DungeonHD = _cur["dun"]
+			if dn.lord and is_instance_valid(dn.lord) and not dn.lord.is_queued_for_deletion():
+				at = dn.lord.global_position
+			var p := deg_to_rad(-48.0)
+			var yaw := deg_to_rad(35.0)
+			_cam.global_position = at + Vector3(sin(yaw) * cos(p), -sin(p), cos(yaw) * cos(p)) * 34.0
+			_cam.look_at(at + Vector3(0, 1.0, 0), Vector3.UP)
 	return false
+
+## the way from the entry with the longest run of open floor (so "close" faces into the
+## room, not a bare wall a cell away); lamp-ward wins ties
+func _open_dir(info: Dictionary, en: Vector3) -> Vector3:
+	var G: float = info["grid"]
+	var hv: Vector2 = info["half"]
+	var cells: Dictionary = info["cells"]
+	var c0 := Vector2i(int(round((en.x + hv.x) / G)), int(round((en.z + hv.y) / G)))
+	var best := Vector3(0, 0, -1)
+	var bn := -1
+	for d in [Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(1, 0), Vector2i(-1, 0)]:
+		var n := 0
+		var c: Vector2i = c0 + d
+		while cells.has(c) and n < 8:
+			n += 1
+			c += d
+		if n > bn:
+			bn = n
+			best = Vector3(d.x, 0, d.y).normalized()
+	return best
 
 ## one row per theme, its shots left to right at quarter size
 func _sheet() -> void:

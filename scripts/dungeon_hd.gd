@@ -85,6 +85,86 @@ func build(n: int) -> void:
     info = FloorGen.build(self, n, Vector3.ZERO)
     _dress()
     _people()
+    _atmos()
+
+## ---------------------------------------------------------------- L28c: light and fire
+## hard cap on particle emitters a floor's dressing may run (motes, the shared flame embers,
+## trap fire, the lord's ash...); creatures' own emitters are counted apart
+const EMITTER_CAP := 12
+var emitters := 0
+
+## the boss floor's drama (a coloured shadowed spot on the lord, ash or embers round it),
+## the one shared ember emitter for every flame on the floor, then the emitter count + cap
+func _atmos() -> void:
+    var root: Node3D = info["root"]
+    if FloorGen.kit_look:
+        var L := FloorGen.look(String(info.get("theme", "")))
+        var hh: Vector2 = info["half"]
+        if bool(info.get("boss", false)) and lord:
+            var bc := Color(String(L.get("boss", "#ff4030")))
+            var at: Vector3 = lord.position
+            var s := SpotLight3D.new()
+            s.name = "LordLight"
+            var pos := at + Vector3(1.6, 6.0, 1.2)
+            s.transform = Transform3D(Basis.looking_at(at - pos, Vector3.UP), pos)
+            s.light_color = bc
+            s.light_energy = 16.0
+            s.spot_range = 12.0
+            s.spot_angle = 26.0
+            s.spot_angle_attenuation = 0.8
+            s.shadow_enabled = true
+            s.shadow_blur = 1.2
+            root.add_child(s)
+            var glow := OmniLight3D.new()          # an under-glow that tints the lord's dais
+            glow.light_color = bc
+            glow.light_energy = 2.2
+            glow.omni_range = 6.0
+            glow.shadow_enabled = false
+            glow.position = at + Vector3(0, 0.4, 0)
+            root.add_child(glow)
+            var ash := DungeonParts.embers(bc.lerp(Color(1, 1, 1), 0.25), 48, 2.2, 3.2)
+            ash.name = "Embers_lord"
+            ash.position = at + Vector3(0, 0.1, 0)
+            root.add_child(ash)
+        var flames: Array = (info.get("flames", []) as Array).duplicate()
+        flames.append_array(info.get("brazier_flames", []))
+        FloorGen.flame_embers(root, flames, info.get("flame_col", Color(1, 0.6, 0.3)), hh.x, hh.y)
+    var mine: Array = []
+    var theirs := 0
+    var lights := [0, 0]
+    _tally(root, mine, lights)
+    for m in monsters:
+        var c: Array = []
+        _tally(m, c, [0, 0])
+        theirs += c.size()
+    if lord:
+        var c2: Array = []
+        _tally(lord, c2, [0, 0])
+        theirs += c2.size()
+    # over the cap: decorative emitters go first (the lord's ash, then the motes) - trap fire stays
+    for nm in ["Embers_lord", "Motes_"]:
+        if mine.size() <= EMITTER_CAP:
+            break
+        for e in mine.duplicate():
+            if String((e as Node).name).begins_with(nm) and mine.size() > EMITTER_CAP:
+                mine.erase(e)
+                (e as Node).queue_free()
+    emitters = mine.size()
+    print("L28C_EMITTERS floor %d %s: %d (cap %d), creatures %d; lights %d (shadowed %d)" % [
+        floor_no, String(info.get("theme", "")), emitters, EMITTER_CAP, theirs, lights[0], lights[1]])
+
+## the floor's own emitters and lights (a creature's are its own business)
+func _tally(n: Node, out: Array, lights: Array) -> void:
+    for k in n.get_children():
+        if k is Monster:
+            continue
+        if k is GPUParticles3D:
+            out.append(k)
+        elif k is Light3D:
+            lights[0] += 1
+            if (k as Light3D).shadow_enabled:
+                lights[1] += 1
+        _tally(k, out, lights)
 
 func _cell_pos(c: Vector2i) -> Vector3:
     var G: float = info["grid"]
@@ -240,6 +320,17 @@ func _dress() -> void:
         var pn := _mk(String(spec[0]))
         if pn:
             _place_solid(pn, c, float(spec[1]), float(_rng.randi() % 4) * PI * 0.5)
+    # L28c: standing braziers on the open floor - light where the wall torches cannot reach,
+    # each flame feeding the floor's shared ember emitter (DungeonHD._atmos)
+    if FloorGen.kit_look:
+        info["brazier_flames"] = []
+        for i in range(2):
+            var c: Vector2i = take.call()
+            if c.x <= -999:
+                break
+            var bz := DungeonParts.brazier(info.get("flame_col", Color(1, 0.6, 0.3)), _rng.randi())
+            _place_solid(bz, c, 0.6)
+            (info["brazier_flames"] as Array).append(bz.position + DungeonParts.BRAZIER_FLAME)
     # wild-magic scarring deepens with depth: scar-glass breaks through the floor
     var scars := 0 if floor_no < 3 else mini((floor_no - 1) / 2, 5)
     for i in range(scars):

@@ -10,7 +10,7 @@ func _initialize() -> void:
 	var th: Array = FloorGen.all_themes().keys()
 	var v := {}
 	for t in th:
-		var im := Image.load_from_file(ProjectSettings.globalize_path(DIR + "all_%s_after_room.png" % t))
+		var im := Image.load_from_file(ProjectSettings.globalize_path(DIR + "%s_%s_after_room.png" % [(OS.get_environment("L28_ALIKE_SET") if OS.get_environment("L28_ALIKE_SET") != "" else "all"), t]))
 		if im == null:
 			continue
 		im.convert(Image.FORMAT_RGB8)

@@ -1619,3 +1619,28 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - New tools: tools/_d18b_test.gd (build invariants: counts, every valley field on gentle ground off the roads inside the navmesh, none overlapping, jetty footprint present, grazing stock added) and tools/_d18b_shot.gd (windowed shot sheet of each steading, the jetty, the ford, an aerial).
 - Build + checks: parse 0 SCRIPT ERROR / Parse Error (3 known headless material-null, unchanged). D18B_TEST OK fields=4 crops=1416 fences=133 animals=79. _offfloor 0 of 1036 (INPROP 0, MON_INPROP 0). TWITCH_PARSE OK. _townwalk in_solid 0/18452 raid 0/4831 PASS, STUCK_ON_ROUTE_TOTAL 0 over 120 s. _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, party back up from floor 2.
 - Shots renders/cycles/20261112_d18b: Coalfoot + Bramble End each read lived-in (furrowed fields, fences, kitchen garden, hayricks, residents, wildflower verges, footpaths); the jetty/ford framing is loose (camera aimed uphill) but the footprint and dock structures check out; aerial of the town core. valley.gd backed up valley.gd.bak_d18b.
+
+## L-cycle 113 - L28c lighting / atmosphere (laptop jestai, 2026-11-12) - L28c DONE
+- data/biomes.json looks gain "key" [colour, energy], "fill" [colour, energy] and "boss" (the lord's colour), all 14.
+- FloorGen: the KEY is one shadowed SpotLight3D under the lid raking the lamp-stand's room from a corner (the only
+  shadowed light on an ordinary floor); the overhead fill grid takes the look's fill colour at ~half its old energy;
+  make_env ambient x0.7 (AMBIENT_L28C) so key, torches and braziers make pools instead of flat light. Torch and lava
+  lights flicker (looping tweens, no script); all torches/fills/lava stay unshadowed.
+- Embers: FloorGen.flame_embers - ONE GPUParticles3D per floor emitting from a POINTS texture of every flame (torches,
+  braziers, lava pools), so twenty flames cost one emitter.
+- DungeonParts.brazier: standing iron brazier (legs, bowl, glowing coals, flame, flickering light); DungeonHD._dress
+  sets two on open cells (obstacles r 0.6).
+- Boss floors: a coloured shadowed spot + under-glow on the lord, an ash/ember ring round it, and a harder grade
+  (contrast x1.10, sat x1.08, shadows and haze pulled toward the lord's colour).
+- Emitter cap: DungeonHD._atmos counts the floor's own GPUParticles3D (creatures counted apart), cap 12 (drops the
+  lord's ash, then motes, if ever over) and prints L28C_EMITTERS ... per floor: 2-5 measured, lights 31-62 (1-2 shadowed).
+- FPS (tools/_l28_fps.gd, windowed 1920x1080, vsync off, floor at y -400, game camera orbiting the lamp, 10 s/theme),
+  before -> after: barracks 169->162, mess 122->116, crypt 129->125, prison 184->176, treasury 165->159,
+  shrine 139->138, workshop 148->137, flooded 144->142, grassland 141->131, wood 138->131, firepit 120->116,
+  fogbound 128->122, confection 197->184, keep 141->131, boss 149->144 (fps_before.txt / fps_after_c.txt).
+- Shots: renders/cycles/20261112_l28/c_sheet.png (L28_SET=c L28_ENV=floor): every theme + a boss floor, views
+  room / close / game (the director's framing). "close" now faces the longest open run (the mess bare-wall nit fixed
+  for c/d sets). L28_ALIKE OK 14/14 on c shots (L28_ALIKE_SET=c; barracks key/fill cooled to stay off mess).
+- Depth fog: kept exponential + height fog from L28b (the depth mode would re-tune every look); boss floors tint it.
+- Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 832, INPROP 0, MON_INPROP 0;
+  _delve_test 0 script errors, 0 null; L25_TEST OK 13/13, 0 stuck, 0 nudges. No camera/UI files touched. No class_name.

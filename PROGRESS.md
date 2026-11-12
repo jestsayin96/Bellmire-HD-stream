@@ -1116,3 +1116,7 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Barks are parchment speech bubbles (Cycle 75a); _hero_hit no longer touches a body that has left the tree.
 - Tests: _l19_test (checks + FEED: tell on the first floor only, Grubmother intro), _l12_test OK, _delve_test, _offfloor, _twitch_parse OK.
 - For the desktop: "Lambda capture at index 0 was freed" (1-3 per delve test, also before L19) comes from spells.gd timers/tweens firing after a floor is freed (chain hops, _fly callbacks capture root).
+
+## Cycle 76a - L17 started, then frozen (laptop, 2026-11-11, Mr. E: "freeze")
+- scripts/spotlight.gd (new, class Spotlight): the three lanes (bits / subs / points) with queues, free !look into the points lane only when it is empty, the layout (off / director + one pane / 2x2 with a wide town view in an empty lane), SubViewport panes at half resolution following the hero into the scar, lane-coloured frames, name + reason chips, timer bars, F10 label hook (set_labels). API: Spotlight.spotlight(town, uid, lane, seconds, reason).
+- ChatCmd has a `spot` Callable for it. NOT YET: the !look / !testbits / !testsub / !testpoints verbs, the RtsCamera / AutoDirector wiring (creation, F10), commands.json + COMMANDS.md, the test and the render tool. Untested; parses clean.

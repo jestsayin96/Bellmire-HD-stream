@@ -1,1 +1,1 @@
-RUNNING 2026-11-11 20:24 - L17
+FROZEN 2026-11-11 20:29 - L17 in progress (scripts/spotlight.gd written, not wired or tested yet); Mr. E said freeze

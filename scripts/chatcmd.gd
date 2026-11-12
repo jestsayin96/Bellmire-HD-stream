@@ -33,6 +33,8 @@ var delve_queue: Array = []
 var away := {}
 ## the town hands chat the fishing log: name -> [{name, rarity, value}]
 var catches_of: Callable
+## L17: the spotlight hands chat its put(uid, lane, seconds, reason) -> line (set by Spotlight.setup)
+var spot: Callable
 
 ## what a hero has on them: steel, armour, potions, oil, gold, and the fish
 func inventory(user_id: String) -> String:

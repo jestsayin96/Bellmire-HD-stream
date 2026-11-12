@@ -724,6 +724,35 @@ details.hero > summary:focus-visible { outline-offset: -1px; }
 .chatload { justify-self: start; font: inherit; font-weight: 600; cursor: pointer; color: var(--night); background: var(--teal-br); border: 0; border-radius: 8px; padding: 9px 16px; }
 .chatload:hover { background: var(--teal); }
 .chatnote { margin: 0; font-size: .84rem; color: var(--parch-dim); opacity: .75; }
+/* H8: the native guild chat. Ink ground like the rest of the dark sections; names in a
+   fixed six-colour palette (chosen by hash in app.js - never a wire colour value). */
+.chatpanel { display: grid; gap: 8px; min-width: 0; max-width: 100%; }
+.chatpanel > *, .chatrow > * { min-width: 0; }
+.chatlist, .chatstatus, .chatnote { max-width: 100%; box-sizing: border-box; }
+.chatpanel.hide { display: none; }
+.chatlist { list-style: none; margin: 0; padding: 10px 14px; height: 340px; overflow-y: auto;
+  background: linear-gradient(180deg, var(--char), var(--night-2));
+  border: 1px solid var(--edge-2); border-radius: var(--r); }
+.cl { padding: 3px 0; font-size: .92rem; line-height: 1.45; overflow-wrap: anywhere; color: var(--parch-dim); }
+.cl.sys { color: var(--dead); font-style: italic; }
+.cl.me .ct { color: var(--parch-hi); }
+.cn { font-weight: 700; margin-right: .4em; }
+.cc0 { color: var(--teal-br); } .cc1 { color: var(--gold); } .cc2 { color: #c97a4e; }
+.cc3 { color: #93b061; } .cc4 { color: #b58fd0; } .cc5 { color: var(--silver); }
+.chatstatus { margin: 0; font-size: .84rem; color: var(--parch-dim); opacity: .8; min-height: 1.2em; }
+.chatstatus.ok { color: var(--teal-br); opacity: 1; }
+.chatstatus.warn { color: #d99b55; opacity: 1; }
+.chatstatus.bad { color: #c97a4e; opacity: 1; }
+.chatrow { display: flex; gap: 8px; }
+.chatinput { flex: 1; min-width: 0; font: inherit; color: var(--parch);
+  background: #1b140d; border: 1px solid var(--edge-2); border-radius: 8px; padding: 9px 12px; }
+.chatinput::placeholder { color: var(--parch-dim); opacity: .6; }
+.chatinput:focus-visible { outline: 2px solid var(--teal-br); outline-offset: 1px; }
+.chatinput:disabled { opacity: .55; }
+.chatsend { font: inherit; font-weight: 600; cursor: pointer; color: var(--night);
+  background: var(--teal-br); border: 0; border-radius: 8px; padding: 9px 16px; }
+.chatsend:disabled { opacity: .45; cursor: default; }
+.chatsend:not(:disabled):hover { background: var(--teal); }
 #twitchChatFrame { width: 100%; height: 480px; border: 1px solid var(--edge); border-radius: 8px; background: #18171f; display: block; }
 html.overlay #chat { display: none !important; }
 @media (max-width: 460px) { #twitchChatFrame { height: 420px; } }

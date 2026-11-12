@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co https://id.twitch.tv https://api.twitch.tv; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://www.twitch.tv https://embed.twitch.tv; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co https://id.twitch.tv https://api.twitch.tv wss://irc-ws.chat.twitch.tv; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
 <!-- connect-src lists id.twitch.tv + api.twitch.tv for the Phase-2 (H6) device-code sign-in.
      That flow is now LIVE but strictly READ-ONLY: Mr. E's public client id is registered and baked
      in, so clicking "Sign in with Twitch" starts the device-code grant. Nothing contacts those hosts
      until the viewer clicks; the token is the viewer's own, kept in memory only and never sent to our
-     backend. frame-src lists the two Twitch embed hosts for the opt-in chat (H5). Both are documented
-     in docs/HUB_SECURITY.md and flagged for the supervisor's review before any republish. Supabase
-     stays the only DATA origin; the page performs no viewer write. -->
+     backend. wss://irc-ws.chat.twitch.tv is the native guild chat (H8): the page speaks Twitch
+     chat's own protocol directly, opt-in, because the old iframe embed broke in every browser
+     that blocks third-party cookies - and with the iframe gone, frame-src is gone with it (a
+     net tightening: no third-party page is embedded at all). All documented in
+     docs/HUB_SECURITY.md and flagged for the supervisor's review before any republish. Supabase
+     stays the only DATA origin; the page performs no viewer write to any backend. -->
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bellmire HD - the Guild Hall</title>
@@ -208,18 +211,28 @@
     </section>
 
     <!--
-      Twitch chat (Phase 2). OPT-IN: nothing third-party loads until a viewer clicks
-      "Load chat". The iframe src uses a HARD-CODED channel constant and this page's
-      own hostname as the parent - no snapshot value goes anywhere near it. This is
-      the one place the page touches a third party, so the CSP gains a minimal
-      frame-src for the two Twitch embed hosts and nothing else. Documented in
-      docs/HUB_SECURITY.md and held for the supervisor's review before any republish.
+      Guild chat (H8): the channel's live Twitch chat, drawn by THIS page over
+      Twitch's own chat protocol - no iframe. The old embed died for every viewer
+      whose browser blocks third-party cookies (Brave, Safari, strict Chrome).
+      Still OPT-IN: nothing contacts Twitch until the viewer opens it. Reading is
+      anonymous; talking uses the viewer's own sign-in (under Heroes). Every
+      incoming line is attacker-controlled text and renders through el() only -
+      plain text, no emote images, no markup, ever. See docs/HUB_SECURITY.md (H8).
     -->
     <section class="plain" id="chat">
-      <h2 class="title light">Twitch chat <small>the channel's live chat</small></h2>
+      <h2 class="title light">Guild chat <small>the channel's live chat</small></h2>
       <div class="chatbox" id="chatBox">
-        <button type="button" class="chatload" id="chatLoad">Load Twitch chat</button>
-        <p class="chatnote" id="chatNote">Chat loads from Twitch only when you tap the button - nothing from Twitch is loaded until then.</p>
+        <button type="button" class="chatload" id="chatLoad">Open the guild chat</button>
+        <p class="chatnote" id="chatNote">Live Twitch chat, drawn by this page itself - it works in every browser, no Twitch frame, no cookies. Nothing contacts Twitch until you open it. Reading needs nothing; sign in under Heroes to talk.</p>
+        <div class="chatpanel hide" id="chatPanel">
+          <ol class="chatlist" id="chatList" aria-label="Live chat messages"></ol>
+          <p class="chatstatus" id="chatStatus" role="status" aria-live="polite"></p>
+          <div class="chatrow">
+            <input class="chatinput" id="chatInput" type="text" maxlength="450" autocomplete="off"
+                   placeholder="Sign in with Twitch (under Heroes) to talk — reading needs nothing." aria-label="Chat message" disabled>
+            <button type="button" class="chatsend" id="chatSend" disabled>Send</button>
+          </div>
+        </div>
       </div>
     </section>
   </main>

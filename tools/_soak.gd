@@ -27,12 +27,15 @@ var _cuts := {}
 var _last_cut := ""
 var V := [["1001", "JestFan", "knight"], ["1002", "MossyMage", "mage"], ["1003", "QuietArrow", "ranger"],
           ["1004", "BigAxe", "barbarian"], ["1005", "DawnCleric", "cleric"], ["1006", "Stabbity", "rogue"]]
-const OUT := "res://renders/cycles/20261111_soak"
+var OUT := "res://renders/cycles/20261111_soak"
 
 func _initialize() -> void:
     var m := OS.get_environment("SOAK_MIN")
     if m != "":
         _minutes = maxi(1, int(m))
+    var o := OS.get_environment("SOAK_OUT")
+    if o != "":
+        OUT = o
     _t = (load("res://Town.tscn") as PackedScene).instantiate()
     root.add_child(_t)
     DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))

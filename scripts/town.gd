@@ -4942,9 +4942,11 @@ func bury(v: Townsfolk, line: String) -> void:
         economy.dead += 1
     feed.append(line)
     print("FEED ", line)
+    var vid := v.get_instance_id()           # D8: never capture a node that may be freed first
     get_tree().create_timer(25.0).timeout.connect(func() -> void:
-        if is_instance_valid(v):
-            v.queue_free())
+        var o := instance_from_id(vid)
+        if o != null and is_instance_valid(o):
+            (o as Node).queue_free())
 
 func npc_name() -> String:
     return "%s %s" % [FIRST[randi() % FIRST.size()], LAST[randi() % LAST.size()]]

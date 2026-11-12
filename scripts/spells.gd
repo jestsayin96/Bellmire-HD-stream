@@ -388,9 +388,13 @@ static func _chain(root: Node, from: Vector3, hops: Array, col: Color) -> void:
         for i in range(1, hops.size()):
             var a: Vector3 = hops[i - 1]
             var b: Vector3 = hops[i]
+            var wr: WeakRef = weakref(root)          # D8: the floor may be gone before the hop lands
             root.get_tree().create_timer(CHAIN_HOP * float(i)).timeout.connect(func() -> void:
-                _arc_line(root, a, b, col)
-                _burst(root, b, col, 0.55)))
+                var rr: Node = wr.get_ref()
+                if rr == null or not rr.is_inside_tree():
+                    return
+                _arc_line(rr, a, b, col)
+                _burst(rr, b, col, 0.55)))
 
 ## an ember that flies, bursts in flame and scorches the ground round its mark
 static func _fire(root: Node, from: Vector3, to: Vector3, ground: Vector3, col: Color) -> void:
@@ -466,9 +470,10 @@ static func _renew(root: Node, target, col: Color) -> void:
     motes.explosiveness = 0.0
     host.add_child(motes)
     motes.global_position = at + Vector3(0, 0.4, 0)
-    motes.get_tree().create_timer(RENEW_T).timeout.connect(func() -> void:
-        if is_instance_valid(motes):
-            motes.emitting = false)
+    # D8: a tween on the motes themselves (dies with them if the host is freed first)
+    var mt := motes.create_tween()
+    mt.tween_interval(RENEW_T)
+    mt.tween_callback(func() -> void: motes.emitting = false)
     _free_after(motes, RENEW_T + 1.6)
     _heal(root, at, col)
 

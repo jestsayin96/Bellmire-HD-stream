@@ -20,3 +20,12 @@ Made for this game with ffmpeg (no source material; CC0 like the rest):
   amb/town_wind.ogg (filtered brown noise, 40 s loop)
 
 Downloaded 2026-11-11. CC0 needs no credit; credited anyway.
+
+rpg/ (CC0 1.0 - https://creativecommons.org/publicdomain/zero/1.0/)
+  Procedural RPG SFX generated with Mr. E's own music-studio (jestsayin96/music-studio v3.5.2,
+  `npm run sfx`). Original synthesized audio, released CC0. 86 ids x up to 2 variants: voices
+  (male/female effort, hurt, death, laugh...), monsters (orc, troll, dragon, goblin, demon,
+  skeleton, zombie, ghost, wraith, slime...), animals (wolf, bear, lion, horse, dog, cat, birds,
+  insects...), magic (fire, ice, lightning, heal, buff, curse, shield, summon, teleport...),
+  combat (sword, dagger, bow, shield, footsteps...) and ui (level_up, chest, coins, potion,
+  menu...). The music-studio repo is left untouched; these files were copied in.

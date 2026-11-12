@@ -100,13 +100,13 @@ func _block(d: Delve) -> PanelContainer:
 	for m: Dictionary in d.party:
 		if shown >= MAX_ROWS:
 			break
-		v.add_child(_row(m, d.npc_party))
+		v.add_child(_row(m, d.npc_party, d))
 		shown += 1
 	if d.party.size() > MAX_ROWS:
 		v.add_child(_label("+%d more" % (d.party.size() - MAX_ROWS), SILVER, 12))
 	return p
 
-func _row(m: Dictionary, npc: bool) -> Control:
+func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	var h: Dictionary = m.get("h", {})
 	var hp := maxf(0.0, float(m.get("hp", 0.0)))
 	var mx := maxf(1.0, float(m.get("max", 1.0)))
@@ -137,4 +137,20 @@ func _row(m: Dictionary, npc: bool) -> Control:
 	num.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	box.add_child(num)
-	return box
+	# L12: the delver's states, coloured, under the bar
+	var sts: Array = d.statuses(m) if d and alive else []
+	if sts.is_empty():
+		return box
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 1)
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.add_child(box)
+	var tags := HBoxContainer.new()
+	tags.add_theme_constant_override("separation", 6)
+	tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for s in sts:
+		var tl := _label(String(s[0]), s[1], 12)
+		tl.clip_text = false
+		tags.add_child(tl)
+	col.add_child(tags)
+	return col

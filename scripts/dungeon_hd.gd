@@ -132,17 +132,17 @@ func _dress() -> void:
                 return cv
         return Vector2i(-999, -999)
     # every floor: a few traps on the open floor, debris in proportion to depth
-    var traps := [DungeonParts.spike_trap, DungeonParts.pressure_plate, DungeonParts.fire_trap]
+    var traps := [DungeonParts.spike_trap, DungeonParts.pressure_plate, DungeonParts.fire_trap,
+                  DungeonParts.dart_trap, DungeonParts.blade_trap, DungeonParts.pit_trap]
     for i in range(1 + mini(floor_no / 3, 3)):
         var c: Vector2i = take.call()
         if c.x > -999:
             var tn: Node3D = (traps[_rng.randi() % traps.size()] as Callable).call()
             _place(tn, c)
             # L9: Delve rolls Perception / DEX saves against these
-            var what := "a fire trap" if String(tn.name).contains("Fire") else ("a pressure plate" if String(tn.name).to_lower().contains("plate") else "a spike trap")
             if not info.has("traps"):
                 info["traps"] = []
-            (info["traps"] as Array).append({"node": tn, "what": what})
+            (info["traps"] as Array).append({"node": tn, "kind": String(tn.name)})
     for i in range(1 + _rng.randi() % 3):
         var c: Vector2i = take.call()
         if c.x > -999:

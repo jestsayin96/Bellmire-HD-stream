@@ -1,0 +1,40 @@
+{
+  "_source": "L13 (work plan 2). Accessories carry small 5e bonuses (ac, saves, hp, speed, hit, dmg); cosmetics change only the look. Bought with gold (!wear <item>, !dye <colour>); later with channel points (T1). Names in Bellmire's plain voice.",
+  "accessories": {
+    "nightwatch_ring":  {"name": "Ring of the Night Watch", "slot": "ring", "cost": 380, "ac": 1, "flavour": "Iron, worn thin by the watch that wore it before you."},
+    "ferryman_ring":    {"name": "Ferryman's Ring", "slot": "ring", "cost": 420, "saves": 1, "flavour": "Paid once, to cross back."},
+    "hearth_amulet":    {"name": "Hearthstone Amulet", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "Warm to the touch on the coldest floor."},
+    "lamplight_amulet": {"name": "Lamplighter's Amulet", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "The guild gives these to the ones who keep the lamps."},
+    "guild_cloak":      {"name": "Guild Cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Grey wool, the guild's stitch at the collar."},
+    "mire_cloak":       {"name": "Mire-walker's Cloak", "slot": "cloak", "cost": 240, "saves": 1, "flavour": "Never quite dry."},
+    "road_boots":       {"name": "Boots of the West Road", "slot": "boots", "cost": 220, "speed": 0.6, "flavour": "They have walked further than you have."},
+    "quiet_boots":      {"name": "Soft Boots", "slot": "boots", "cost": 200, "hit": 1, "flavour": "Felt soles. The dark does not hear you coming."},
+    "smith_gloves":     {"name": "Smith's Gauntlets", "slot": "gloves", "cost": 280, "dmg": 2, "flavour": "Scorched at the fingertips."},
+    "archer_gloves":    {"name": "Fletcher's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Three fingers stitched, two bare."}
+  },
+  "cosmetics": {
+    "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a"},
+    "feather_cap":  {"name": "Feathered Cap", "kind": "hat", "cost": 80, "colour": "8a2a2a"},
+    "straw_hat":    {"name": "Straw Hat", "kind": "hat", "cost": 30, "colour": "d6b860"},
+    "crown_of_ash": {"name": "Ash-wood Circlet", "kind": "hat", "cost": 150, "colour": "b8a888"},
+    "banner_blue":  {"name": "Keep Banner (blue)", "kind": "banner", "cost": 90, "colour": "2a4a9a"},
+    "banner_red":   {"name": "Market Banner (red)", "kind": "banner", "cost": 90, "colour": "9a2a2a"},
+    "banner_yellow":{"name": "Craft Banner (yellow)", "kind": "banner", "cost": 90, "colour": "c8a028"},
+    "banner_green": {"name": "Homes Banner (green)", "kind": "banner", "cost": 90, "colour": "2a7a3a"},
+    "pet_corgi":    {"name": "a corgi", "kind": "pet", "cost": 250, "model": "res://assets/animals/Corgi.glb", "scale": 0.0017},
+    "pet_pug":      {"name": "a pug", "kind": "pet", "cost": 220, "model": "res://assets/animals/Pug.glb", "scale": 0.15},
+    "pet_duck":     {"name": "a duck", "kind": "pet", "cost": 120, "model": "res://assets/animals/Duck.glb", "scale": 0.0017},
+    "pet_fox":      {"name": "a fox", "kind": "pet", "cost": 300, "model": "res://assets/animals/Red.glb", "scale": 0.002},
+    "title_lamplighter": {"name": "the Lamplighter", "kind": "title", "cost": 120},
+    "title_door":        {"name": "Keeper of the Door", "kind": "title", "cost": 200},
+    "title_ford":        {"name": "Friend of the Ford", "kind": "title", "cost": 100},
+    "title_scarwalker":  {"name": "Scarwalker", "kind": "title", "cost": 250},
+    "title_grain":       {"name": "Counter of Grain", "kind": "title", "cost": 80},
+    "title_bell":        {"name": "Bell without a Clapper", "kind": "title", "cost": 300}
+  },
+  "dyes": {
+    "black": "2a2a2e", "white": "e8e4da", "red": "a02a26", "blue": "2a4aa0", "green": "2a7a3a",
+    "gold": "c8a028", "purple": "5a2a8a", "teal": "1e8a8a", "brown": "6a4a2a", "grey": "7a7a7e"
+  },
+  "dye_cost": 25
+}

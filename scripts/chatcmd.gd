@@ -40,8 +40,10 @@ func inventory(user_id: String) -> String:
     if h.is_empty():
         return "No hero yet - type !enlist to join the valley."
     var armour := String(Roster.ARMOUR[int(h["armour"])]["name"])
-    var line := "%s carries %s and wears %s  |  %d potions, %d oil, %d gold" % [
-        h["name"], roster.weapon_name(h), armour, int(h.get("potions", 0)), int(h.get("oil", 0)), int(h.get("gold", 0))]
+    var worn := roster.worn_line(h)
+    var title := roster.title_of(h)
+    var line := "%s%s carries %s and wears %s%s  |  %s, %d oil, %d gold" % [
+        h["name"], (", " + title) if title != "" else "", roster.weapon_name(h), armour, (" + " + worn) if worn != "" else "", roster.brews_line(h), int(h.get("oil", 0)), int(h.get("gold", 0))]
     if catches_of.is_valid():
         var cs: Array = catches_of.call(String(h["name"]))
         if not cs.is_empty():
@@ -70,9 +72,10 @@ func handle(user_id: String, display: String, msg: String) -> String:
     var parts := msg.substr(1).split(" ", false)
     if parts.is_empty():
         return ""
-    var verb := String(parts[0]).to_lower()
+    var verb := canonical(String(parts[0]).to_lower())
     var arg := String(parts[1]).to_lower() if parts.size() > 1 else ""
     var arg2 := String(parts[2]).to_lower() if parts.size() > 2 else ""
+    var rest := " ".join(parts.slice(1)).to_lower()
 
     # viewers rename themselves; keep the display name current
     var h := roster.get_hero(user_id)
@@ -80,7 +83,7 @@ func handle(user_id: String, display: String, msg: String) -> String:
         h["name"] = display
 
     var out := ""
-    if verb in ["fish", "forge", "armoury", "armory", "brew"] and away.has(user_id) and not h.is_empty():
+    if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
         return "%s is %s." % [h["name"], away[user_id]]
     match verb:
@@ -101,7 +104,9 @@ func handle(user_id: String, display: String, msg: String) -> String:
                     out = _needs(user_id, func():
                         wants_shop.emit(user_id, "armorer")
                         return roster.buy_armour(user_id))
-        "brew":     out = _brew(user_id, arg)
+        "brew":     out = _brew(user_id, arg, arg2)
+        "wear":     out = _needs(user_id, func(): return roster.wear(user_id, rest))
+        "dye":      out = _needs(user_id, func(): return roster.dye(user_id, arg))
         "oil", "lamp", "torch":
                     out = _oil(user_id, arg)
         "reroll":   out = _reroll(user_id, display)
@@ -114,8 +119,13 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
-        "valley":   out = "Commands: !enlist !hero !inventory !delve !fish !forge [kind|list] !armoury !brew !reroll !respec !guild !memorial !deepest !deadliest !richest !patrons"
-        _:          return ""
+        "help":     out = help_line(arg)
+        _:
+            # L14: a near miss of a real command gets a nudge, anything else is left alone (other bots)
+            var guess := _closest(verb)
+            if guess == "":
+                return ""
+            out = "No !%s here - did you mean !%s? (!help lists them all)" % [verb, guess]
 
     _last[user_id] = now
     if out != "":
@@ -173,11 +183,21 @@ func _oil(user_id: String, arg: String) -> String:
         n = clampi(int(arg), 1, 10)
     return _needs(user_id, func(): return roster.buy_oil(user_id, n))
 
-func _brew(user_id: String, arg: String) -> String:
+func _brew(user_id: String, arg: String, arg2 := "") -> String:
+    # L12: !brew [n] buys Mending as before; !brew <potion> [n] any brew the apothecary makes
     var n := 1
+    var key := "mending"
     if arg != "" and arg.is_valid_int():
         n = clampi(int(arg), 1, 10)
-    return _needs(user_id, func(): return roster.buy_potion(user_id, n))
+    elif arg != "":
+        key = Roster.potion_key(arg)
+        if arg2 != "" and arg2.is_valid_int():
+            n = clampi(int(arg2), 1, 10)
+        if key == "":
+            return _needs(user_id, func(): return roster.buy_brew(user_id, arg, n))
+    if key == "mending":
+        return _needs(user_id, func(): return roster.buy_potion(user_id, n))
+    return _needs(user_id, func(): return roster.buy_brew(user_id, key, n))
 
 # !reroll does double duty: raise a new hero if dead, reroll stats if alive
 func _reroll(user_id: String, display: String) -> String:
@@ -240,3 +260,66 @@ func _tone(line: String) -> Color:
     if l.contains("takes") or l.contains("rises") or l.contains("fitted") or l.contains("sets out"):
         return C_OK
     return C_INFO
+
+## ---- L14: the command list, from data/commands.json (the one source)
+static var _cmds: Dictionary = {}
+static func commands() -> Dictionary:
+    if _cmds.is_empty():
+        var f := FileAccess.open("res://data/commands.json", FileAccess.READ)
+        if f:
+            _cmds = JSON.parse_string(f.get_as_text())
+    return _cmds
+
+## an alias -> its command ("inv" -> "inventory"); anything else unchanged
+static func canonical(word: String) -> String:
+    var cs: Dictionary = commands().get("commands", {})
+    if cs.has(word):
+        return word
+    for k in cs:
+        if (cs[k].get("aliases", []) as Array).has(word):
+            return k
+    return word
+
+## !help: the short list; !help <command>: that one in detail
+static func help_line(arg := "") -> String:
+    var cs: Dictionary = commands().get("commands", {})
+    if arg != "":
+        var k := canonical(arg.trim_prefix("!").to_lower())
+        if not cs.has(k):
+            return "No !%s. !help lists them all." % arg.trim_prefix("!")
+        var c: Dictionary = cs[k]
+        var al := ""
+        if not (c.get("aliases", []) as Array).is_empty():
+            al = " (also !" + " !".join(c["aliases"]) + ")"
+        # on stream it goes in the Chronicle: the first sentence, the cost, an example (all of it in docs/COMMANDS.md)
+        var first := String(c.get("short", String(c["what"]).split(". ")[0].trim_suffix(".") + "."))
+        return "!%s %s%s - %s %s. e.g. %s" % [k, c.get("args", ""), al, first, c.get("cost", "free"), c.get("example", "!" + k)]
+    var bits: Array = []
+    for k in commands().get("order", cs.keys()):
+        bits.append("!" + String(k))
+    return "Commands: %s  |  !help <command> for more." % " ".join(bits)
+
+## the nearest command to a typo (edit distance 2 or less), or ""
+static func _closest(word: String) -> String:
+    var best := ""
+    var bd := 2 if word.length() <= 4 else 3
+    var names: Array = []
+    for k in commands().get("commands", {}):
+        names.append(k)
+        names.append_array(commands()["commands"][k].get("aliases", []))
+    for n in names:
+        var d := _lev(word, String(n))
+        if d < bd:
+            bd = d
+            best = canonical(String(n))
+    return best
+
+static func _lev(a: String, b: String) -> int:
+    var prev: Array = range(b.length() + 1)
+    for i in range(1, a.length() + 1):
+        var cur: Array = [i]
+        for j in range(1, b.length() + 1):
+            var cost := 0 if a[i - 1] == b[j - 1] else 1
+            cur.append(mini(mini(int(cur[j - 1]) + 1, int(prev[j]) + 1), int(prev[j - 1]) + cost))
+        prev = cur
+    return int(prev[b.length()])

@@ -137,13 +137,12 @@ static func spike_trap() -> Node3D:
             sp.position = Vector3(-0.72 + float(i) * 0.48, 0.35, -0.72 + float(j) * 0.48)
             spikes.add_child(sp)
     spikes.position.y = -0.72
-    var tw := n.create_tween() if n.is_inside_tree() else null
-    n.ready.connect(func() -> void:
-        var t := spikes.create_tween().set_loops()
-        t.tween_interval(1.4)
+    # L11: armed until something steps on it
+    n.set_meta("fire", func() -> void:
+        var t := spikes.create_tween()
         t.tween_property(spikes, "position:y", 0.0, 0.08)
-        t.tween_interval(0.9)
-        t.tween_property(spikes, "position:y", -0.72, 0.5))
+        t.tween_interval(1.1)
+        t.tween_property(spikes, "position:y", -0.72, 0.6))
     return n
 
 ## PRESSURE PLATE: a stone that sinks when stepped on (here: on a loop)
@@ -155,11 +154,10 @@ static func pressure_plate() -> Node3D:
     var rune := _box(n, Vector3(0.4, 0.01, 0.4), Vector3(0, 0.145, 0), _m(Color(0.9, 0.3, 0.2)))
     (rune.material_override as StandardMaterial3D).emission_enabled = true
     (rune.material_override as StandardMaterial3D).emission = Color(1.0, 0.3, 0.15)
-    n.ready.connect(func() -> void:
-        var t := plate.create_tween().set_loops()
-        t.tween_interval(2.0)
-        t.tween_property(plate, "position:y", 0.02, 0.1)
-        t.tween_interval(1.0)
+    n.set_meta("fire", func() -> void:
+        var t := plate.create_tween()
+        t.tween_property(plate, "position:y", 0.02, 0.08)
+        t.tween_interval(1.6)
         t.tween_property(plate, "position:y", 0.08, 0.4))
     return n
 
@@ -213,16 +211,16 @@ static func fire_trap() -> Node3D:
     l.omni_range = 7.0
     l.position = Vector3(0, 1.5, 0)
     n.add_child(l)
-    n.ready.connect(func() -> void:
-        var t := f.create_tween().set_loops()
-        t.tween_callback(func() -> void:
-            f.emitting = true
-            l.light_energy = 4.0)
+    f.emitting = false
+    l.light_energy = 0.3
+    n.set_meta("fire", func() -> void:
+        f.emitting = true
+        l.light_energy = 4.0
+        var t := f.create_tween()
         t.tween_interval(1.4)
         t.tween_callback(func() -> void:
             f.emitting = false
-            l.light_energy = 0.3)
-        t.tween_interval(1.8))
+            l.light_energy = 0.3))
     return n
 
 ## PORTCULLIS: an iron grid in a stone frame that winds up and drops
@@ -382,4 +380,72 @@ static func torch_lit() -> Node3D:
         var t := l.create_tween().set_loops()
         t.tween_property(l, "light_energy", 1.3, 0.13)
         t.tween_property(l, "light_energy", 2.0, 0.17))
+    return n
+
+## ---- L11: more traps, all armed until something steps on them. Each carries
+## meta "fire" (a Callable that plays the trap going off); Delve calls it.
+
+## DART TRAP: a worn flagstone with two dart posts either side; darts fly across
+static func dart_trap() -> Node3D:
+    var n := Node3D.new()
+    n.name = "DartTrap"
+    _box(n, Vector3(1.4, 0.06, 1.4), Vector3(0, 0.03, 0), _m(Color(0.30, 0.28, 0.26), 0.0, 0.95))
+    var post := _m(Color(0.25, 0.22, 0.20), 0.2, 0.8)
+    for s in [-1.0, 1.0]:
+        _box(n, Vector3(0.22, 1.1, 0.22), Vector3(1.0 * s, 0.55, 0), post)
+        _box(n, Vector3(0.06, 0.06, 0.06), Vector3(0.88 * s, 0.9, 0), _m(Color(0.05, 0.05, 0.05)))
+    n.set_meta("fire", func() -> void:
+        var dm := _m(Color(0.75, 0.72, 0.65), 0.6, 0.4)
+        for k in range(3):
+            var dart := _box(n, Vector3(0.36, 0.035, 0.035), Vector3(-0.9, 0.9 - 0.12 * float(k), -0.15 + 0.15 * float(k)), dm)
+            var t := dart.create_tween()
+            t.tween_interval(0.05 * float(k))
+            t.tween_property(dart, "position:x", 0.9, 0.16)
+            t.tween_interval(0.4)
+            t.tween_callback(dart.queue_free))
+    return n
+
+## BLADE TRAP: a slot in the floor; a scything blade sweeps up out of it and back
+static func blade_trap() -> Node3D:
+    var n := Node3D.new()
+    n.name = "BladeTrap"
+    _box(n, Vector3(1.8, 0.06, 1.8), Vector3(0, 0.03, 0), _m(Color(0.22, 0.20, 0.20), 0.3, 0.7))
+    _box(n, Vector3(1.6, 0.07, 0.14), Vector3(0, 0.05, 0), _m(Color(0.02, 0.02, 0.02)))
+    var pivot := Node3D.new()
+    pivot.name = "blade"
+    pivot.position = Vector3(0, -0.9, 0)
+    n.add_child(pivot)
+    var steel := _m(Color(0.70, 0.72, 0.76), 0.9, 0.25)
+    var arm := _box(pivot, Vector3(0.08, 1.4, 0.06), Vector3(0, 0.7, 0), _m(Color(0.20, 0.18, 0.16), 0.6, 0.6))
+    var edge := _box(pivot, Vector3(0.9, 0.22, 0.03), Vector3(0, 1.45, 0), steel)
+    pivot.rotation.x = -PI * 0.5
+    n.set_meta("fire", func() -> void:
+        var t := pivot.create_tween()
+        t.tween_property(pivot, "rotation:x", PI * 0.5, 0.28).set_trans(Tween.TRANS_SINE)
+        t.tween_property(pivot, "rotation:x", -PI * 0.5, 0.5).set_delay(0.2))
+    return n
+
+## PIT TRAP: two boards over a dark shaft; they drop open and close again
+static func pit_trap() -> Node3D:
+    var n := Node3D.new()
+    n.name = "PitTrap"
+    _box(n, Vector3(1.8, 0.04, 1.8), Vector3(0, -0.9, 0), _m(Color(0.01, 0.01, 0.01)))
+    for s in [-1.0, 1.0]:
+        _box(n, Vector3(0.12, 0.9, 1.8), Vector3(0.9 * s, -0.45, 0), _m(Color(0.08, 0.07, 0.07)))
+        _box(n, Vector3(1.8, 0.9, 0.12), Vector3(0, -0.45, 0.9 * s), _m(Color(0.08, 0.07, 0.07)))
+    var wood := _m(Color(0.40, 0.30, 0.20), 0.0, 0.9)
+    var doors: Array = []
+    for s in [-1.0, 1.0]:
+        var hinge := Node3D.new()
+        hinge.position = Vector3(0.9 * s, 0.04, 0)
+        n.add_child(hinge)
+        _box(hinge, Vector3(0.9, 0.06, 1.8), Vector3(-0.45 * s, 0, 0), wood)
+        doors.append([hinge, s])
+    n.set_meta("fire", func() -> void:
+        for d in doors:
+            var hinge: Node3D = d[0]
+            var t := hinge.create_tween()
+            t.tween_property(hinge, "rotation:z", -1.45 * float(d[1]), 0.15)
+            t.tween_interval(1.4)
+            t.tween_property(hinge, "rotation:z", 0.0, 0.6))
     return n

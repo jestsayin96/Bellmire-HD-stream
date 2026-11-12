@@ -1,0 +1,31 @@
+{
+  "_source": "L12 (work plan 2). 5e healing tiers and potion effects, named in Bellmire's plain voice; brewed at the apothecary (!brew <key>), found below on a good search. 'tier' = the town tier the apothecary needs (Roster.town_tier).",
+  "potions": {
+    "mending":    {"name": "Draught of Mending", "cost": 35, "tier": 1, "heal": [2, 4, 2], "aliases": ["heal", "healing", "potion"], "flavour": "Red, thin, and it tastes of iron. It works."},
+    "greater":    {"name": "Greater Mending", "cost": 90, "tier": 2, "heal": [4, 4, 4], "aliases": ["greatermending"], "flavour": "Brewed twice and stoppered with wax."},
+    "superior":   {"name": "Superior Mending", "cost": 220, "tier": 3, "heal": [8, 4, 8], "aliases": ["superiormending"], "flavour": "The apothecary will not say what is in it."},
+    "supreme":    {"name": "Supreme Mending", "cost": 480, "tier": 4, "heal": [10, 4, 20], "aliases": ["suprememending"], "flavour": "A guild price for a guild life."},
+    "antidote":   {"name": "Bitterleaf Tincture", "cost": 40, "tier": 1, "cures": ["poisoned"], "aliases": ["bitterleaf", "cure"], "flavour": "Ends a venom. Ruins a supper."},
+    "emberward":  {"name": "Emberward", "cost": 70, "tier": 2, "gives": "resist_fire", "secs": 120, "cures": ["burning"], "aliases": ["fireward", "fire"], "flavour": "Drunk cold. You will want it cold."},
+    "hearthwarm": {"name": "Hearthwarm", "cost": 70, "tier": 2, "gives": "resist_frost", "secs": 120, "cures": ["slowed"], "aliases": ["frostward", "frost"], "flavour": "Spiced, and warm all the way down."},
+    "quickwater": {"name": "Quickwater", "cost": 150, "tier": 3, "gives": "haste", "secs": 30, "aliases": ["haste"], "flavour": "The drinker hears their own heart outrun them."},
+    "ogre":       {"name": "Ogre's Draught", "cost": 160, "tier": 3, "gives": "giant", "secs": 60, "aliases": ["strength", "giant"], "flavour": "Thick as porridge, and it hits like a door."},
+    "shadow":     {"name": "Shadowcloak", "cost": 140, "tier": 3, "gives": "invisible", "secs": 20, "aliases": ["invisibility", "invis"], "flavour": "The dark forgets you, until you strike."},
+    "bravecup":   {"name": "Bravecup", "cost": 60, "tier": 1, "gives": "heroism", "secs": 60, "cures": ["frightened"], "aliases": ["heroism", "courage"], "flavour": "Mead and something stronger than mead."},
+    "owl":        {"name": "Owl-eye Drops", "cost": 50, "tier": 2, "gives": "darkvision", "secs": 900, "aliases": ["darkvision", "owleye"], "flavour": "Two drops in each eye, and the dark goes grey."}
+  },
+  "states": {
+    "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},
+    "burning":     {"word": "burning", "bad": true, "colour": "ff8a3a", "does": "1d4 fire a second"},
+    "slowed":      {"word": "slowed", "bad": true, "colour": "8fd6ff", "does": "swings at half pace"},
+    "blinded":     {"word": "blinded", "bad": true, "colour": "b0b0b0", "does": "disadvantage on attacks; foes have advantage"},
+    "frightened":  {"word": "frightened", "bad": true, "colour": "c79bff", "does": "disadvantage on attacks"},
+    "resist_fire": {"word": "emberward", "bad": false, "colour": "ffb36b", "does": "half damage from fire; no burning"},
+    "resist_frost":{"word": "hearthwarm", "bad": false, "colour": "bfe6ff", "does": "half damage from frost; no slowing"},
+    "haste":       {"word": "hasted", "bad": false, "colour": "fff07a", "does": "swings a third faster"},
+    "giant":       {"word": "ogre-strong", "bad": false, "colour": "e0a060", "does": "+2 to hit, +4 damage"},
+    "invisible":   {"word": "unseen", "bad": false, "colour": "9fa8c8", "does": "foes cannot pick them; advantage on the first blow, which ends it"},
+    "heroism":     {"word": "heroic", "bad": false, "colour": "ffd24a", "does": "cannot be frightened"},
+    "darkvision":  {"word": "owl-eyed", "bad": false, "colour": "c8c8a0", "does": "no disadvantage in the dark"}
+  }
+}

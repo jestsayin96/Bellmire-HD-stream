@@ -933,3 +933,102 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   20261111_d6 (square_named, crier_reads, bard_plays, pedlar_cart, chief_east_market, smith_at_smithy,
   priest_chapel_steps, healer_rounds, drunk_at_night) - looked at: tags readable, smith at his forge, the square's
   four apart (first pass: two shots inside walls and the stack - fixed).
+
+## Cycle 69 - L11, traps that visibly work (laptop, 2026-11-11)
+- Merged origin/main (desktop D4/D5; LAPTOP list 3; the UI files are the laptop's now). Import pass, parse clean.
+- Mr. E: traps "don't show functioning or doing damage". They looped their animation forever whoever was near.
+  Now every trap is armed until something steps on it and carries meta "fire" (its trigger). dungeon_parts.gd:
+  spikes, pressure plate, fire grate made armed; new dart trap (darts fly across from two posts), blade trap
+  (a scything blade sweeps up out of a floor slot), pit (two boards drop open over a dark shaft). All six are
+  laid by dungeon_hd and recorded by kind.
+- Delve._meet_trap: Perception (d20 + WIS, + prof rogue/ranger/monk, disadvantage in the dark without
+  darkvision) vs DC 10 + floor/2. Spotted by a rogue or bard: thieves' tools, d20 + DEX + prof - disarmed, or
+  failing by 5+ sets it off on them; spotted by anyone else: stepped round. Missed: the trap plays, the sound,
+  a DEX save halves the dice (spikes 2d6, darts 3d4, fire 2d8, blade 2d8, pit 2d6, a plate's stone 1d10; + floor/2),
+  the damage floats up red over the hero (amber if halved), and the Chronicle: "BigAxe steps on a loose
+  flagstone - darts! DEX 7 vs DC 11, 10 damage." Ward soaks it; a fall can kill (death save as ever).
+- Found on the way: a Label3D under a HeroBody is renamed to the hero's name by its own label code - the floating
+  numbers came out as giant names. They hang off the floor now.
+- tools/_l11_test.gd (headless, new): all six kinds play their trigger and do damage when sprung; DEX saves at
+  0.459 vs the exact odds 0.450; a rogue disarms 273 of 400 spotted traps; a barbarian who spots one steps round.
+  L11_TEST OK. tools/_l11_shot.gd: renders/cycles/20261111_l11 - looked at: the blade sweeping through BigAxe,
+  fire under the mage, the pit's boards open, -7 / -9 / -10 floating, the six lines in the Chronicle.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 413 (MON_INPROP 0), TWITCH_PARSE OK,
+  L9_TEST OK.
+
+
+## Cycle 70 - L12, potions and states (laptop, 2026-11-11)
+- data/potions.json (one source): 12 brews in Bellmire's voice - Draught of Mending 2d4+2, Greater 4d4+4, Superior
+  8d4+8, Supreme 10d4+20 (the 5e tiers), Bitterleaf Tincture (antidote), Emberward / Hearthwarm (resist fire /
+  frost), Quickwater (haste), Ogre's Draught (giant strength), Shadowcloak (invisibility), Bravecup (heroism),
+  Owl-eye Drops (darkvision) - each with a cost, the town tier its apothecary needs, aliases and a flavour line;
+  and the states, each with its word, colour and what it does.
+- The bad states and where they come from: poisoned (venom: now disadvantage too), burning (fire traps, the
+  grave-fire breath, the Hollow King's and Cinderjack's rings; 1d4 a second), slowed (frost), blinded (Nightwing's
+  swoop, CON save DC 12; foes get advantage), frightened (a lord rising: WIS save vs DC 10 + floor/2). Emberward /
+  Hearthwarm halve fire / frost and stop burning / slowing; Bravecup stops fear (+10 temporary hp); any Mending
+  puts a fire out. Good states: hasted (swings a third faster), ogre-strong (+2 to hit, +4 damage), unseen (foes
+  cannot pick them; advantage on the first blow, which ends it), heroic, owl-eyed (no disadvantage in the dark).
+- Heroes finally drink below (the HD delve never had): the best Mending under a third of their life; the cure for
+  what ails them; Ogre's / Quickwater / Shadowcloak / Bravecup when a lord fights; Owl-eye in the dark. A drink
+  costs the swing and floats its number or word; the Chronicle names any brew but plain Mending.
+- !brew [n] buys Mending as before; !brew <potion> [n] any brew (names or aliases: !brew haste 2), haggled, locked
+  by the town's tier ("Bellmire's apothecary cannot brew it yet"). !inventory lists them. A good Investigation
+  below finds a vial ("X finds a vial of Quickwater."), better ones deeper.
+- Shown: coloured state tags under each delver's bar in the party frames, and under each name below. First pass
+  the overhead tag sat on the name; moved into the billboard's own plane just under the name.
+- Found on the way: a Godot editor open on this laptop saved delve.gd from its buffer (all tabs, one of this
+  cycle's fixes lost); re-applied. A typed lookup of a tag freed with the last floor errored; untyped now.
+- tools/_l12_test.gd (headless, new): data and aliases; tier lock; !brew haste 2; !brew 3; !inventory; Supreme
+  heals 35-56; poisoned -> disadvantage -> Bitterleaf cures; Bravecup; Emberward; burning 1d4/s; unseen advantage;
+  a low delver drinks Mending; a real lord floor: frightened at the rise, Ogre's Draught drunk. L12_TEST OK.
+  tools/_l12_shot.gd: renders/cycles/20261111_l12 - looked at: Nightwing, the party frames with "ogre-strong heroic",
+  the tags under the names.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 422, TWITCH_PARSE OK, L3, L9, L11 OK.
+
+
+## Cycle 70b - L11 test fix (laptop, 2026-11-11)
+- Mr. E: tools/_l11_test.gd spammed "Condition !is_inside_tree() is true" (get_global_transform). The test's save
+  and disarm loops hand Delve trap nodes that are never added to the tree, and _spring read their position for the
+  sound, _float_text the body's. Delve now plays the trap sound and floats text only for nodes in the tree (a real
+  floor's traps and delvers always are). _l11_test: L11_TEST OK with 0 errors / 0 "Condition" lines.
+
+
+## Cycle 71 - L13, more equipment and cosmetics (laptop, 2026-11-11)
+- data/items.json (one source). Accessories, a small 5e bonus each, named in the valley's voice: Ring of the Night
+  Watch (+1 AC), Ferryman's Ring (+1 saves), Hearthstone Amulet (+12 hp), Lamplighter's Amulet (+1 saves), Guild
+  Cloak (+1 AC), Mire-walker's Cloak (+1 saves), Boots of the West Road (+0.6 speed), Soft Boots (+1 to hit),
+  Smith's Gauntlets (+2 damage), Fletcher's Gloves (+1 to hit) - one per slot (ring, amulet, cloak, boots, gloves).
+  Roster.acc_bonus feeds armour_class, save_bonus, max_hp, speed, attack_bonus and the damage dice.
+- Cosmetics (look only): four hats (wide-brimmed, feathered cap, straw, ash-wood circlet; they hide the body's own
+  hat or helmet), four district banners on the back (keep blue, market red, craft yellow, homes green), four pets
+  from the CC0 farm animals (corgi, pug, duck, fox - scripts/hero_pet.gd heels beside the hero, walks to catch up,
+  idles when they stand), six titles shown under the name (the Lamplighter, Keeper of the Door, Friend of the Ford,
+  Scarwalker, Counter of Grain, Bell without a Clapper), and ten dyes for the armour pieces and the cloak.
+- !wear <item> (any unique word of its name: !wear corgi, !wear night watch) buys it once (haggled) and wears it;
+  owned items are worn again for nothing; !wear off <slot>; !dye <colour> (25 gold). !inventory shows the title,
+  the accessories and the dye. Gold now; channel points later (T1).
+- Visible: a ring at the left wrist, an amulet on the chest, gloves, boots where no armour boots are, the cloak's
+  colour, the hat, the banner, the pet, the title (a Label3D one level under the hero so its label code leaves it).
+- First render: the corgi stood 120 m tall - the farm-animal models are authored ~100x (the town scales them
+  0.0019); pets now use the town's scales. Titles came down to a smaller size.
+- tools/_l13_test.gd (headless, new): the data; AC / saves / hp / speed / to-hit / +2 damage in the numbers; the
+  ring slot; owned is free; pet, title, dye, unknown colour, unknown item, !wear off, no gold; !inventory; every
+  piece on a dressed body; one pet after re-dressing. L13_TEST OK. tools/_l13_shot.gd: renders/cycles/20261111_l13
+  - looked at: six heroes front and back in their hats, banners, dyes, pets and titles.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 441, TWITCH_PARSE OK, L3, L5, L12 OK.
+
+
+## Cycle 72 - L14, the command list from one source (laptop, 2026-11-11)
+- data/commands.json: every chat command - name, aliases, arguments, list cost, what it does (and a short stream
+  line for the long ones), an example, whether it needs a hero - plus the cooldowns and the order.
+- ChatCmd reads it: aliases resolve from the data (new: !stats / !sheet for !hero, !commands / !valley for !help);
+  !help is the short list; !help <command> one line in detail for the Chronicle (short line, cost, example). A
+  near miss of a real command gets a nudge ("No !forg here - did you mean !forge?"); other bots' commands
+  (!discord, !so) are left alone. Gold replies all read "X needs 43 gold for leather - you have 30."
+- tools/_commands_doc.gd writes docs/COMMANDS.md from the same data (the hub / website can read the JSON).
+- tools/_l14_test.gd (headless, new): all 29 verbs in ChatCmd's match are in the data and all 20 commands are
+  answered; aliases; !help names every command; typo nudge; other bots ignored; friendly gold; the doc carries every
+  command. L14_TEST OK. tools/_l14_shot.gd: renders/cycles/20261111_l14 - looked at: the replies in the Chronicle;
+  first pass !help forge took seven lines, the short stream line brings it to three.
+- Checks: parse 0 script errors, TWITCH_PARSE OK, L3, L13 OK.

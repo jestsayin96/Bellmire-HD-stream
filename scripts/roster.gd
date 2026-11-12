@@ -296,17 +296,18 @@ func armour_class(h: Dictionary) -> int:
     # L4: a monk in no more than leather adds WIS (unarmoured defence)
     if String(h["class"]) == "monk" and int(h.get("armour", 0)) <= 1:
         ac += maxi(0, mod(h, "wis"))
+    ac += int(acc_bonus(h, "ac"))
     return ac
 
 # d20 + proficiency + the class's own ability, as the attack line on the sheet.
 func attack_bonus(h: Dictionary) -> int:
-    return prof(h) + mod(h, String(CLASSES[String(h["class"])].get("primary", "str")))
+    return prof(h) + mod(h, String(CLASSES[String(h["class"])].get("primary", "str"))) + int(acc_bonus(h, "hit"))
 
 func save_bonus(h: Dictionary, stat: String) -> int:
     var b := mod(h, stat)
     if stat in SAVES.get(String(h["class"]), []):
         b += prof(h)
-    return b
+    return b + int(acc_bonus(h, "saves"))
 
 func save_line(h: Dictionary) -> String:
     var parts := []
@@ -319,7 +320,7 @@ func mod(h: Dictionary, stat: String) -> int:
 
 func max_hp(h: Dictionary) -> float:
     return float(CLASSES[h["class"]]["hp"]) + float(mod(h, "con")) * 5.0 \
-         + float(ARMOUR[int(h["armour"])]["hp"])
+         + float(ARMOUR[int(h["armour"])]["hp"]) + acc_bonus(h, "hp")
 
 # a class hits with its own ability: a mage's INT, a rogue's DEX, a knight's STR
 func attack(h: Dictionary) -> float:
@@ -328,7 +329,7 @@ func attack(h: Dictionary) -> float:
          + float(WEAPONS[int(h["weapon"])]["atk"])
 
 func speed(h: Dictionary) -> float:
-    return float(CLASSES[h["class"]]["spd"]) + float(mod(h, "dex")) * 0.15
+    return float(CLASSES[h["class"]]["spd"]) + float(mod(h, "dex")) * 0.15 + acc_bonus(h, "speed")
 
 # WIS drives mending; sages mend harder than clerics
 func heal_power(h: Dictionary) -> float:
@@ -409,7 +410,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
                 return "No smith in Bellmire will put a hammer to scarforged steel."
             var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4)))
             if not spend(h, rework):
-                return "%s needs %d gold to have it reworked into a %s (has %d)." % [h["name"], rework, kind, int(h["gold"])]
+                return "%s needs %d gold to have it reworked into a %s - you have %d." % [h["name"], rework, kind, int(h["gold"])]
             h["wkind"] = kind
             changed.emit(user_id)
             return "The smith reworks %s's steel into %s %s.%s" % [h["name"], _an(weapon_name(h)), weapon_name(h), last_haggle]
@@ -428,7 +429,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
     var label := weapon_name(peek)
     var price := haggle(h, cost_for(h, int(w["cost"])))
     if not spend(h, price):
-        return "%s needs %d gold for %s %s (has %d)." \
+        return "%s needs %d gold for %s %s - you have %d." \
             % [h["name"], price, _an(label), label, int(h["gold"])]
     h["weapon"] = nxt
     if kind != "":
@@ -451,7 +452,7 @@ func buy_armour(user_id: String) -> String:
     var a: Dictionary = ARMOUR[nxt]
     var aprice := haggle(h, cost_for(h, int(a["cost"])))
     if not spend(h, aprice):
-        return "%s needs %d gold for %s (has %d)." \
+        return "%s needs %d gold for %s - you have %d." \
             % [h["name"], aprice, a["name"], int(h["gold"])]
     h["armour"] = nxt
     changed.emit(user_id)
@@ -462,7 +463,7 @@ func buy_potion(user_id: String, n := 1) -> String:
     if h.is_empty(): return "no hero"
     var pprice := haggle(h, cost_for(h, POTION_COST * n))
     if not spend(h, pprice):
-        return "%s needs %d gold (has %d)." % [h["name"], pprice, int(h["gold"])]
+        return "%s needs %d gold - you have %d." % [h["name"], pprice, int(h["gold"])]
     h["potions"] = int(h["potions"]) + n
     changed.emit(user_id)
     return "%s buys %d %s. Now carrying %d.%s" % [h["name"], n,
@@ -476,7 +477,7 @@ func buy_oil(user_id: String, n := 1) -> String:
     if h.is_empty(): return "no hero"
     var oprice := haggle(h, cost_for(h, OIL_COST * n))
     if not spend(h, oprice):
-        return "%s needs %d gold for oil (has %d)." \
+        return "%s needs %d gold for oil - you have %d." \
             % [h["name"], oprice, int(h["gold"])]
     h["oil"] = int(h.get("oil", 0)) + n
     changed.emit(user_id)
@@ -489,7 +490,7 @@ func reroll(user_id: String, prepaid := false) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
     if not prepaid and not spend(h, cost_for(h, REROLL_COST)):
-        return "%s needs %d gold to reroll (has %d)." \
+        return "%s needs %d gold to reroll - you have %d." \
             % [h["name"], REROLL_COST, int(h["gold"])]
     var before: Dictionary = h["stats"].duplicate()
     var a := _with_species(roll_stats(String(h["class"])), species_of(h))
@@ -521,7 +522,7 @@ func respec(user_id: String, cls: String, prepaid := false) -> String:
     if cls == h["class"]:
         return "%s is already a %s." % [h["name"], cls]
     if not prepaid and not spend(h, cost_for(h, RESPEC_COST)):
-        return "%s needs %d gold to retrain (has %d)." \
+        return "%s needs %d gold to retrain - you have %d." \
             % [h["name"], RESPEC_COST, int(h["gold"])]
     var was: String = h["class"]
     h["class"] = cls
@@ -737,7 +738,7 @@ func describe(user_id: String) -> String:
            armour_class(h), int(max_hp(h)), sign_str(prof(h)),
            sign_str(attack_bonus(h)), _stat_line(h["stats"]), save_line(h),
            "%s (%s)" % [weapon_name(h), dice_str(h)], ARMOUR[int(h["armour"])]["name"],
-           int(h["potions"]), int(h.get("oil", 0)), int(h["gold"]),
+           int(h["potions"]) + _other_brews(h), int(h.get("oil", 0)), int(h["gold"]),
            int(h["deepest"]), int(h["kills"])]
 
 # ---------------------------------------------------------------- persistence
@@ -816,3 +817,190 @@ func grant_all(gold: int, potions: int) -> int:
         h["potions"] = int(h["potions"]) + potions
         touched += 1
     return touched
+
+## ---- L12: potions (data/potions.json). A hero's Draughts of Mending stay in
+## "potions" (old saves, !brew with no name); every other brew is counted in
+## "brews" {key: n}.
+static var _potions: Dictionary = {}
+static func potions() -> Dictionary:
+    if _potions.is_empty():
+        var f := FileAccess.open("res://data/potions.json", FileAccess.READ)
+        if f:
+            _potions = JSON.parse_string(f.get_as_text())
+    return _potions
+
+static func potion(key: String) -> Dictionary:
+    return (potions().get("potions", {}) as Dictionary).get(key, {})
+
+## a name or alias a viewer typed -> the potion's key ("" if none)
+static func potion_key(word: String) -> String:
+    var w := word.to_lower().replace("'", "").replace("-", "").replace("_", "")
+    var ps: Dictionary = potions().get("potions", {})
+    for k in ps:
+        if w == k or (ps[k].get("aliases", []) as Array).has(w):
+            return k
+        if String(ps[k]["name"]).to_lower().replace("'", "").replace("-", "").replace(" ", "") == w.replace(" ", ""):
+            return k
+    return ""
+
+func brew_count(h: Dictionary, key: String) -> int:
+    if key == "mending":
+        return int(h.get("potions", 0))
+    return int((h.get("brews", {}) as Dictionary).get(key, 0))
+
+func add_brew(h: Dictionary, key: String, n: int) -> void:
+    if key == "mending":
+        h["potions"] = maxi(0, int(h.get("potions", 0)) + n)
+        return
+    if not h.has("brews"):
+        h["brews"] = {}
+    var b: Dictionary = h["brews"]
+    b[key] = maxi(0, int(b.get(key, 0)) + n)
+    if int(b[key]) == 0:
+        b.erase(key)
+
+## "2 Mending, 1 Quickwater" - what a hero carries
+func brews_line(h: Dictionary) -> String:
+    var bits: Array = []
+    if int(h.get("potions", 0)) > 0:
+        bits.append("%d Mending" % int(h["potions"]))
+    for k in (h.get("brews", {}) as Dictionary):
+        bits.append("%d %s" % [int(h["brews"][k]), String(potion(k).get("name", k))])
+    return ", ".join(bits) if not bits.is_empty() else "no potions"
+
+func buy_brew(user_id: String, key: String, n := 1) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var p := potion(key)
+    if p.is_empty():
+        var names: Array = []
+        for k in potions().get("potions", {}):
+            names.append(k)
+        return "The apothecary has no such brew. Ask for: %s." % ", ".join(names)
+    if int(p.get("tier", 1)) > town_tier:
+        return "%s wants %s, but Bellmire's apothecary cannot brew it yet." % [h["name"], p["name"]]
+    var price := haggle(h, cost_for(h, int(p["cost"]) * n))
+    if not spend(h, price):
+        return "%s needs %d gold for %d %s - you have %d." % [h["name"], price, n, p["name"], int(h["gold"])]
+    add_brew(h, key, n)
+    changed.emit(user_id)
+    return "%s buys %d %s. %s%s" % [h["name"], n, p["name"], String(p.get("flavour", "")), last_haggle]
+
+func _other_brews(h: Dictionary) -> int:
+    var t := 0
+    for k in (h.get("brews", {}) as Dictionary):
+        t += int(h["brews"][k])
+    return t
+
+## ---- L13: accessories (small 5e bonuses) and cosmetics (the look only), from
+## data/items.json. A hero keeps what they own in "owned", what they wear in
+## "acc" {slot: key} and "cos" {hat|banner|pet|title: key, dye: colour}.
+static var _items: Dictionary = {}
+static func items() -> Dictionary:
+    if _items.is_empty():
+        var f := FileAccess.open("res://data/items.json", FileAccess.READ)
+        if f:
+            _items = JSON.parse_string(f.get_as_text())
+    return _items
+
+static func item(key: String) -> Dictionary:
+    var a: Dictionary = items().get("accessories", {})
+    if a.has(key):
+        return a[key]
+    return (items().get("cosmetics", {}) as Dictionary).get(key, {})
+
+## a name a viewer typed -> an item key ("" if none): the key, its full name,
+## or any word of it that is unique ("!wear corgi", "!wear night watch")
+static func item_key(words: String) -> String:
+    var w := words.to_lower().strip_edges()
+    var all: Dictionary = (items().get("accessories", {}) as Dictionary).duplicate()
+    all.merge(items().get("cosmetics", {}))
+    if all.has(w):
+        return w
+    var hits: Array = []
+    for k in all:
+        var nm := String(all[k]["name"]).to_lower()
+        if nm == w or nm.trim_prefix("a ").trim_prefix("the ") == w:
+            return k
+        if w.length() >= 3 and (nm.contains(w) or String(k).contains(w.replace(" ", "_"))):
+            hits.append(k)
+    return hits[0] if hits.size() == 1 else ""
+
+func acc_bonus(h: Dictionary, what: String) -> float:
+    var t := 0.0
+    for slot in (h.get("acc", {}) as Dictionary):
+        t += float(item(String(h["acc"][slot])).get(what, 0))
+    return t
+
+func wear(user_id: String, words: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var w := words.to_lower().strip_edges()
+    if w.begins_with("off ") or w == "off":
+        var slot := w.trim_prefix("off").strip_edges()
+        for d in ["acc", "cos"]:
+            if (h.get(d, {}) as Dictionary).has(slot):
+                (h[d] as Dictionary).erase(slot)
+                changed.emit(user_id)
+                return "%s takes off their %s." % [h["name"], slot]
+        return "Take off what? (ring, amulet, cloak, boots, gloves, hat, banner, pet, title)"
+    var key := item_key(w)
+    if key == "":
+        return "No such thing for sale in Bellmire. !help wear lists them."
+    var it := item(key)
+    var owned: Array = h.get("owned", [])
+    var note := ""
+    if not owned.has(key):
+        var price := haggle(h, cost_for(h, int(it["cost"])))
+        if not spend(h, price):
+            return "%s needs %d gold for %s - you have %d." % [h["name"], price, it["name"], int(h["gold"])]
+        owned.append(key)
+        h["owned"] = owned
+        note = " (%d gold)%s" % [price, last_haggle]
+    if it.has("slot"):
+        if not h.has("acc"):
+            h["acc"] = {}
+        h["acc"][String(it["slot"])] = key
+    else:
+        if not h.has("cos"):
+            h["cos"] = {}
+        h["cos"][String(it["kind"])] = key
+    changed.emit(user_id)
+    var what := String(it["name"])
+    if String(it.get("kind", "")) == "title":
+        return "%s is known now as %s, %s.%s" % [h["name"], h["name"], what, note]
+    if String(it.get("kind", "")) == "pet":
+        return "%s now has %s at their heels.%s" % [h["name"], what, note]
+    return "%s wears %s.%s %s" % [h["name"], what, note, String(it.get("flavour", ""))]
+
+func dye(user_id: String, colour: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty(): return "no hero"
+    var c := colour.to_lower().strip_edges()
+    var dyes: Dictionary = items().get("dyes", {})
+    if not dyes.has(c):
+        return "The dyer has: %s." % ", ".join(dyes.keys())
+    var price := haggle(h, cost_for(h, int(items().get("dye_cost", 25))))
+    if not spend(h, price):
+        return "%s needs %d gold for the dyer - you have %d." % [h["name"], price, int(h["gold"])]
+    if not h.has("cos"):
+        h["cos"] = {}
+    h["cos"]["dye"] = c
+    changed.emit(user_id)
+    return "%s's armour and cloak are dyed %s.%s" % [h["name"], c, last_haggle]
+
+## what a hero wears, for the sheet: "Guild Cloak, Soft Boots | a corgi | the Lamplighter"
+func worn_line(h: Dictionary) -> String:
+    var bits: Array = []
+    for slot in (h.get("acc", {}) as Dictionary):
+        bits.append(String(item(String(h["acc"][slot])).get("name", "?")))
+    for k in ["hat", "banner", "pet"]:
+        if (h.get("cos", {}) as Dictionary).has(k):
+            bits.append(String(item(String(h["cos"][k])).get("name", "?")))
+    if (h.get("cos", {}) as Dictionary).has("dye"):
+        bits.append("dyed " + String(h["cos"]["dye"]))
+    return ", ".join(bits)
+
+func title_of(h: Dictionary) -> String:
+    var k := String((h.get("cos", {}) as Dictionary).get("title", ""))
+    return String(item(k).get("name", "")) if k != "" else ""

@@ -965,6 +965,123 @@ function loadTwitchChat() {
   if (btn) btn.addEventListener("click", loadTwitchChat);
 })();
 
+// ---------------------------------------------------------------- Twitch sign-in (H6)
+// Device-code OAuth SCAFFOLDING. A viewer signs in so the page can spotlight THEIR hero
+// instead of making them scroll. Strictly read-only: the token is the viewer's own, used
+// only client-side to read their own Twitch login and match a hero. It is held in memory
+// only (never localStorage), never sent to our backend, never used to write anything.
+//
+// GATED on Mr. E: TWITCH_CLIENT_ID is a placeholder. With no registered public client id
+// the button only explains what is missing and makes NO network call. When Mr. E registers
+// the app and fills the id in, the flow below runs (device grant per the Twitch docs).
+let TWITCH_CLIENT_ID = "";                       // NEEDS MR. E: a registered public client id
+const TW_DEVICE = "https://id.twitch.tv/oauth2/device";
+const TW_TOKEN = "https://id.twitch.tv/oauth2/token";
+const TW_USERS = "https://api.twitch.tv/helix/users";
+const TW_SCOPES = "";                            // read-only: we need only the user's login; no scopes
+let twToken = null;                              // in memory only, this session only
+let twPolling = false;
+
+function signinSay(html, cls) {
+  const box = $("signinState");
+  if (!box) return;
+  box.className = "signinstate" + (cls ? " " + cls : "");
+  box.replaceChildren();
+  if (typeof html === "string") { box.append(document.createTextNode(html)); return; }
+  for (const n of html) box.append(n);
+}
+
+async function twitchSignIn() {
+  if (twPolling) return;
+  if (!TWITCH_CLIENT_ID) {
+    // the gate: nothing happens until Mr. E registers the app
+    signinSay("Twitch sign-in isn't set up yet — it needs Mr. E to register the app and add its client id. Until then, type your hero's name in the box below.", "gated");
+    return;
+  }
+  try {
+    signinSay("Asking Twitch for a code…");
+    const body = "client_id=" + encodeURIComponent(TWITCH_CLIENT_ID) + "&scopes=" + encodeURIComponent(TW_SCOPES);
+    const res = await fetch(TW_DEVICE, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
+    if (!res.ok) throw new Error("Twitch said " + res.status);
+    const d = await res.json();
+    // show the user code + where to enter it (textContent / createElement only)
+    const strong = el("b", null, String(d.user_code || "").toUpperCase());
+    const uri = String(d.verification_uri || "https://www.twitch.tv/activate");
+    const link = el("a", "signinlink", uri.replace(/^https?:\/\//, ""));
+    // the link href is a Twitch verification URL from Twitch's own response, not snapshot data;
+    // still, only allow the known activate host to be clickable, else show it as text.
+    if (/^https:\/\/(www\.)?twitch\.tv\//.test(uri)) { link.href = uri; link.target = "_blank"; link.rel = "noopener noreferrer"; }
+    signinSay([document.createTextNode("Go to "), link, document.createTextNode(" and enter the code "), strong], "code");
+    pollForToken(String(d.device_code || ""), Math.max(5, n0(d.interval) || 5), Date.now() + (n0(d.expires_in) || 600) * 1000);
+  } catch (e) {
+    signinSay("Couldn't reach Twitch sign-in just now. Try again in a moment.", "bad");
+  }
+}
+
+async function pollForToken(deviceCode, intervalS, deadline) {
+  twPolling = true;
+  while (Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, intervalS * 1000));
+    let res;
+    try {
+      const body = "client_id=" + encodeURIComponent(TWITCH_CLIENT_ID) +
+        "&scopes=" + encodeURIComponent(TW_SCOPES) +
+        "&device_code=" + encodeURIComponent(deviceCode) +
+        "&grant_type=urn:ietf:params:oauth:grant-type:device_code";
+      res = await fetch(TW_TOKEN, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
+    } catch (e) { continue; }
+    if (res.ok) {
+      const t = await res.json();
+      twToken = String(t.access_token || "");    // memory only
+      twPolling = false;
+      await spotlightMe();
+      return;
+    }
+    // 400 authorization_pending / slow_down: keep waiting until the deadline
+  }
+  twPolling = false;
+  signinSay("That code expired before sign-in finished. Tap to try again.", "bad");
+}
+
+async function spotlightMe() {
+  try {
+    signinSay("Signed in — finding your hero…");
+    const res = await fetch(TW_USERS, { headers: { "Client-Id": TWITCH_CLIENT_ID, Authorization: "Bearer " + twToken } });
+    if (!res.ok) throw new Error("users " + res.status);
+    const j = await res.json();
+    const login = String((j.data && j.data[0] && j.data[0].login) || "").toLowerCase();
+    highlightMyHero(login);
+  } catch (e) {
+    signinSay("Signed in, but couldn't read your Twitch name just now.", "bad");
+  }
+}
+
+// match the viewer's Twitch login to a hero and spotlight it. Read-only, DOM only.
+function highlightMyHero(login) {
+  const p = last ? (MOCK ? withMock(last.payload) : last.payload) : null;
+  const heroes = p ? arr(p.heroes) : [];
+  const mine = heroes.find((h) => String(h.name || "").toLowerCase() === login);
+  if (!mine) {
+    signinSay("You're signed in as " + login + ", but no living hero carries that name yet. Type !enlist in chat to raise one.", "ok");
+    return;
+  }
+  heroFilter = login; heroShown = HERO_PAGE;
+  renderHeroes(heroes);
+  const card = [...$("heroList").querySelectorAll("details.hero")]
+    .find((d) => (d.querySelector(".hname") || {}).textContent === String(mine.name));
+  if (card) { card.open = true; card.classList.add("mine"); card.scrollIntoView({ block: "center", behavior: "smooth" }); }
+  signinSay("Spotlighting your hero, " + String(mine.name) + ".", "ok");
+}
+
+(function () {
+  // a local test hook (same spirit as ?mock): ?twitch_client=... lets the flow be exercised
+  // end-to-end against a registered id, without baking one into the repo. Harmless if unset.
+  const c = params.get("twitch_client");
+  if (c) TWITCH_CLIENT_ID = c;
+  const btn = $("signinBtn");
+  if (btn) btn.addEventListener("click", twitchSignIn);
+})();
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;

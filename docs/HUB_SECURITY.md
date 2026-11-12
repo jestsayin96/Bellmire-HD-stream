@@ -116,3 +116,46 @@ AFTER (one directive added):
 2. `TWITCH_CHANNEL` is a constant; grep confirms no snapshot field is concatenated into the src.
 3. The embed is opt-in (button-triggered) and absent in overlay mode.
 If any of that is not true, do not republish.
+
+## Phase 2, H6 - Twitch device-code sign-in SCAFFOLDING (FLAG: supervisor review; NEEDS MR. E)
+
+Built so a viewer can spotlight THEIR OWN hero instead of scrolling. It is scaffolding: inert
+until Mr. E registers a public client id. Review before any republish.
+
+### Gated on Mr. E
+- `TWITCH_CLIENT_ID` is a placeholder (empty). With no id, the "Sign in with Twitch" button only
+  explains that it needs Mr. E and makes NO network call. The whole flow is dead code until the
+  id is filled in. (A local test hook, ?twitch_client=..., can set it for testing only; it is
+  never baked into the repo.)
+
+### The flow (OAuth 2.0 device grant, when enabled)
+1. POST id.twitch.tv/oauth2/device (client_id) -> device_code + user_code + verification_uri.
+2. Show the viewer the user_code and the twitch.tv/activate link; they enter it on Twitch.
+3. Poll id.twitch.tv/oauth2/token until an access_token comes back.
+4. GET api.twitch.tv/helix/users with the token -> the viewer's own login.
+5. Match that login to a hero in the snapshot and spotlight that card.
+
+### The CSP change (the second and last one)
+- connect-src gains `https://id.twitch.tv https://api.twitch.tv` (two named hosts, no wildcard),
+  alongside the existing Supabase origin. Needed for steps 1, 3 and 4. Inert today (gated).
+- No other directive changes. Supabase remains the only DATA origin; frame-src (H5) is separate.
+
+### Why this stays safe and READ-ONLY
+- The access token is the VIEWER'S OWN. It is held in a memory variable for the session only -
+  never written to localStorage/sessionStorage, never sent to our Supabase backend, never used
+  to write anything anywhere. It is used for exactly one read: the viewer's own login name.
+- No scopes are requested (TW_SCOPES is empty) - the default grant is enough to read the user's
+  own login, nothing more.
+- The verification_uri is taken from Twitch's OAuth response (not the snapshot) and is set as a
+  link href ONLY after it is checked to be a twitch.tv URL; otherwise it is shown as plain text.
+- The snapshot path is untouched: no payload value is ever used in any Twitch URL, header or body.
+  Matching a hero is a read of the already-rendered data by name.
+- The page still performs NO viewer write to any backend. Writes remain a Phase-3 decision gated
+  on an RLS design.
+
+### What the supervisor should check before republishing
+1. connect-src lists only Supabase + the two Twitch hosts, no wildcard; no other directive loosened.
+2. TWITCH_CLIENT_ID ships empty (gated); grep confirms the flow is dead without it.
+3. The token is never persisted (no localStorage/sessionStorage) and never sent to Supabase.
+4. No scopes requested; the token reads only the user's own login.
+If any of that is not true, do not republish. The token step is Mr. E's to enable (register the app).

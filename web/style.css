@@ -735,3 +735,17 @@ details.hero > summary:focus-visible { outline-offset: -1px; }
 #twitchChatFrame { width: 100%; height: 480px; border: 1px solid var(--edge); border-radius: 8px; background: #18171f; display: block; }
 html.overlay #chat { display: none !important; }
 @media (max-width: 460px) { #twitchChatFrame { height: 420px; } }
+
+/* ---- H6: Twitch sign-in scaffolding ---- */
+.signin { margin: 0 0 11px; display: grid; gap: 8px; }
+.signinbtn { justify-self: start; font: inherit; font-weight: 600; cursor: pointer; color: var(--night); background: var(--teal-br); border: 0; border-radius: 8px; padding: 9px 15px; }
+.signinbtn:hover { background: var(--teal); }
+.signinstate:empty { display: none; }
+.signinstate { font-size: .9rem; color: var(--ink-soft); }
+.signinstate.gated { color: var(--ink-2); }
+.signinstate.bad { color: var(--bad); }
+.signinstate.ok { color: var(--teal-ink); font-weight: 600; }
+.signinstate.code b { font-size: 1.15rem; letter-spacing: .08em; color: var(--ink-red); }
+.signinlink { color: var(--teal-ink); font-weight: 600; }
+details.hero.mine { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(35,166,160,.45); }
+html.overlay #signin { display: none !important; }

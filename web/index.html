@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://www.twitch.tv https://embed.twitch.tv; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co https://id.twitch.tv https://api.twitch.tv; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://www.twitch.tv https://embed.twitch.tv; base-uri 'none'; form-action 'none'">
+<!-- connect-src lists id.twitch.tv + api.twitch.tv for the Phase-2 (H6) device-code sign-in.
+     That flow is INERT until Mr. E registers a public client id (it is gated on a placeholder),
+     so no call is made to those hosts today. frame-src lists the two Twitch embed hosts for the
+     opt-in chat (H5). Both are documented in docs/HUB_SECURITY.md and flagged for the supervisor's
+     review before any republish. Supabase stays the only data origin; the page stays read-only. -->
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bellmire HD - the Guild Hall</title>
@@ -141,6 +146,17 @@
 
     <section class="panel" id="heroes">
       <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
+      <!--
+        Phase 2 (H6) sign-in SCAFFOLDING. Device-code OAuth so a viewer can spotlight
+        THEIR OWN hero instead of scrolling for it. Gated: with no registered client id
+        the button only explains that it needs Mr. E. The token is the viewer's own,
+        used client-side to read their own Twitch login and match a hero - never sent
+        to our backend, never persisted. Still strictly read-only. See docs/HUB_SECURITY.md.
+      -->
+      <div class="signin" id="signin">
+        <button type="button" class="signinbtn" id="signinBtn">Sign in with Twitch to spotlight your hero</button>
+        <div class="signinstate" id="signinState" role="status" aria-live="polite"></div>
+      </div>
       <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
       <div class="heroes" id="heroList"></div>
       <p class="note hide" id="heroMore"></p>

@@ -239,3 +239,14 @@ the second pass:
 - The iframe src is the official chat embed, channel = the constant TWITCH_CHANNEL, parent =
   this page's own hostname. No snapshot value ever touches the URL.
 - The clickable d20 the phase also asks for already exists - the die rolls on click/Enter/Space.
+
+---
+
+## H6: device-code sign-in (scaffolding, gated on Mr. E)
+- Why: so a viewer spotlights their own hero instead of scrolling - "not peeping toms on
+  others' stats." Device-code grant suits a page with no server (no redirect URI to host).
+- Gated: TWITCH_CLIENT_ID ships empty, so the button only explains it needs Mr. E; no call is
+  made. A ?twitch_client= test hook exercises the flow end-to-end without baking an id in.
+- Read-only and minimal: no scopes (we need only the user's own login), token in memory only
+  (never storage, never our backend), no viewer write. The two connect-src hosts are documented
+  and flagged in docs/HUB_SECURITY.md. Phase 3 (any write path) stays off until the RLS is designed.

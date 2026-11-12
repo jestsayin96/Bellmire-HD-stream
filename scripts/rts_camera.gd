@@ -53,6 +53,7 @@ func setup(t: Node3D) -> void:
 	_help.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 	_help.add_theme_constant_override("outline_size", 6)
 	_help.position = Vector2(16, 12)
+	_skin_chips()
 	_layer.add_child(_help)
 	_speed_lb = Label.new()
 	_speed_lb.add_theme_font_size_override("font_size", UiTheme.px(24))
@@ -66,14 +67,16 @@ func setup(t: Node3D) -> void:
 	_layer.add_child(_speed_lb)
 	_chat = LineEdit.new()
 	_chat.placeholder_text = "chat as MrE, e.g. !enlist knight   (Enter to send, Esc to close)"
-	_chat.anchor_left = 0.5
-	_chat.anchor_right = 0.5
+	# L16: bottom-right, clear of the Chronicle
+	_chat.anchor_left = 1.0
+	_chat.anchor_right = 1.0
 	_chat.anchor_top = 1.0
 	_chat.anchor_bottom = 1.0
-	_chat.offset_left = -330
-	_chat.offset_right = 330
-	_chat.offset_top = -64
-	_chat.offset_bottom = -30
+	_chat.offset_left = -UiTheme.px(760)
+	_chat.offset_right = -UiTheme.px(18)
+	_chat.offset_top = -UiTheme.px(70)
+	_chat.offset_bottom = -UiTheme.px(18)
+	_skin_chat()
 	_chat.visible = false
 	_chat.text_submitted.connect(_send_chat)
 	_layer.add_child(_chat)
@@ -388,12 +391,8 @@ func _track(real: float) -> void:
 
 func _build_frame() -> void:
 	_frame = PanelContainer.new()
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.06, 0.06, 0.08, 0.86)
-	sb.border_color = Color(0.78, 0.62, 0.30)
-	sb.set_border_width_all(2)
-	sb.set_corner_radius_all(6)
-	sb.content_margin_left = 14
+	var sb := UiTheme.parchment()      # L16: the house parchment
+	sb.content_margin_left = UiTheme.px(16)
 	sb.content_margin_right = 14
 	sb.content_margin_top = 8
 	sb.content_margin_bottom = 10
@@ -412,11 +411,11 @@ func _build_frame() -> void:
 	_frame.add_child(v)
 	_f_name = Label.new()
 	_f_name.add_theme_font_size_override("font_size", UiTheme.px(32))
-	_f_name.add_theme_color_override("font_color", Color(1.0, 0.86, 0.45))
+	_f_name.add_theme_color_override("font_color", UiTheme.VIEWER)
 	v.add_child(_f_name)
 	_f_sub = Label.new()
 	_f_sub.add_theme_font_size_override("font_size", UiTheme.px(24))
-	_f_sub.add_theme_color_override("font_color", Color(0.8, 0.8, 0.82))
+	_f_sub.add_theme_color_override("font_color", UiTheme.INK_SOFT)
 	v.add_child(_f_sub)
 	var hpbox := Control.new()
 	hpbox.custom_minimum_size = Vector2(UiTheme.px(560), UiTheme.px(26))
@@ -435,10 +434,13 @@ func _build_frame() -> void:
 	_f_hp_lb.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_f_hp_lb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_f_hp_lb.add_theme_font_size_override("font_size", UiTheme.px(20))
+	_f_hp_lb.add_theme_color_override("font_color", Color(1, 1, 1))
+	_f_hp_lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+	_f_hp_lb.add_theme_constant_override("outline_size", UiTheme.px(5))
 	hpbox.add_child(_f_hp_lb)
 	_f_body = Label.new()
 	_f_body.add_theme_font_size_override("font_size", UiTheme.px(24))
-	_f_body.add_theme_color_override("font_color", Color(0.92, 0.9, 0.85))
+	_f_body.add_theme_color_override("font_color", UiTheme.INK)
 	_f_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_f_body.custom_minimum_size = Vector2(UiTheme.px(560), 0)
 	v.add_child(_f_body)
@@ -662,6 +664,8 @@ func restyle() -> void:
 		_help.add_theme_font_size_override("font_size", UiTheme.px(19))
 	if _speed_lb:
 		_speed_lb.add_theme_font_size_override("font_size", UiTheme.px(24))
+	_skin_chips()
+	_skin_chat()
 	if _frame:
 		var was := _frame.visible
 		_frame.queue_free()
@@ -673,3 +677,26 @@ func restyle() -> void:
 func _say_scale(s: float) -> void:
 	if town and town.get("feed") != null:
 		(town.get("feed") as Array).append("Interface at %d%% (F11)." % int(round(s * 100.0)))
+
+## ---- L16: the key help, the speed and the chat box on parchment chips, ink text,
+## the teal as the chat box's focus edge - the same house as every panel
+func _skin_chips() -> void:
+	for lb: Label in [_help, _speed_lb]:
+		if lb == null:
+			continue
+		lb.add_theme_stylebox_override("normal", UiTheme.chip())
+		lb.add_theme_color_override("font_color", UiTheme.INK)
+		lb.add_theme_constant_override("outline_size", 0)
+
+func _skin_chat() -> void:
+	if _chat == null:
+		return
+	var n := UiTheme.chip()
+	var f := UiTheme.chip()
+	f.border_color = UiTheme.TEAL
+	_chat.add_theme_stylebox_override("normal", n)
+	_chat.add_theme_stylebox_override("focus", f)
+	_chat.add_theme_color_override("font_color", UiTheme.INK)
+	_chat.add_theme_color_override("font_placeholder_color", UiTheme.INK_SOFT)
+	_chat.add_theme_color_override("caret_color", UiTheme.TEAL)
+	_chat.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.SMALL))

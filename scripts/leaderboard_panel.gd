@@ -71,7 +71,7 @@ func _refresh() -> void:
         return
     for c in _list.get_children():
         c.queue_free()
-    _line("The Guild Roll", Color(0.48, 0.20, 0.12), 30)
+    _list.add_child(UiTheme.title("The Guild Roll", 30))      # L16: the house title
     var rows: Array = roster.leaderboard("standing", ROWS - int(round((UiTheme.scale - 1.0) * 6.0)))
     if rows.is_empty():
         _line("Nobody has enlisted yet.  !enlist <class>", DEAD, 24)
@@ -85,7 +85,7 @@ func _refresh() -> void:
         _line(t, (GOLD if i <= 3 else INK) if alive else DEAD, 26)
     if not roster.fallen.is_empty() and UiTheme.scale < 1.4:
         _line(" ", INK, 8)
-        _line("The Fallen", Color(0.48, 0.20, 0.12), 26)
+        _list.add_child(UiTheme.title("The Fallen", 24))
         for f: Dictionary in roster.fallen.slice(0, FALLEN):
             _line("%s the %s, lv%d - %s" % [String(f.get("name", "?")), String(f.get("class", "")),
                 int(f.get("level", 1)), String(f.get("killed_by", "the dark"))], DEAD, 22)

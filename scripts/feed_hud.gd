@@ -63,11 +63,7 @@ func _build() -> void:
     var v := VBoxContainer.new()
     v.add_theme_constant_override("separation", 2)
     _panel.add_child(v)
-    var title := Label.new()
-    title.text = "The Chronicle"
-    title.add_theme_font_size_override("font_size", UiTheme.px(24))
-    title.add_theme_color_override("font_color", Color(0.48, 0.20, 0.12))
-    v.add_child(title)
+    v.add_child(UiTheme.title("The Chronicle", 26))       # L16: the house title
     _card = PanelContainer.new()
     var cs := StyleBoxFlat.new()
     cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)

@@ -1,1 +1,1 @@
-IDLE 2026-11-12 11:35 - D17d blends/transitions committed (docs/RUN_LOCK.txt is the canonical lock)
+IDLE 2026-11-12 13:18 - supervisor: merged laptop L25(fixed)+L28a, all tests pass, pushed

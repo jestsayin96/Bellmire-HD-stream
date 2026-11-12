@@ -2,6 +2,26 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle D1 - D18a PROP/BUILDING SANITY (desktop, Nov 12)
+- tools/_d18a_test.gd: a sanity sweep over Town.tscn. Check A (grounding): 1034 ground props, base vs height_at at
+  the prop's own origin; props on a steep slope (crag/mine/mountain/bank), surface/mounted/water dressing, dock
+  props over the river, and planter-box flowers are classified out by rule, not by eye. Check B (interpenetration):
+  the 83 building instances (mk_house_*, lm_*) tested as ORIENTED footprints (the engine's own _solid_of math) -
+  axis-aligned AABBs falsely overlapped rotated neighbours, oriented ones do not. Result: D18A_TEST OK, 0 floaters,
+  0 building overlaps.
+- Investigated every flag the raw probe raised; all were intended: wall lanterns (2.3 m), tower crossbowmen on the
+  watchtowers (~11.7 m), shop/smithy table + rack dressing, flowers planted in raised planter boxes (_planter builds
+  a 0.45 m box + soil), bucket/barrel on the raised dock over the riverbed, water lilies/boats, the scar-mouth rock
+  crag deliberately set on the mine slope (height_at - 0.8 + lift), and the two outlying farm cottages nestled into a
+  foothill at the _low seat. No game script needed changing - the town was already clean.
+- Shot sheet renders/cycles/20261112_d18a (1366x768): west_gate, bridge, market_square, street, scar_mouth, docks,
+  town_aerial, farmstead_slope, hamlet_north. Looked at: wall ring + towers + gates + roads all connect, the timber
+  bridge spans the river level on its pier, houses sit on the ground (hillside cottages read as nestled, not clipped),
+  props grounded with connected shadows - nothing floats.
+- Standard checks clean: parse 0, _offfloor 0/1615 (0 INPROP), _twitch_parse OK, _townwalk in_solid 0/7801 stuck 0,
+  _delve_test 0 SCRIPT ERROR. (Note: real-mode renders need `--headless --import` once first to settle the UID cache.)
+
+
 ## NEXT UP
 1. **Fix MegaKit assembly** (`village_assets/tools/megakit.py`). Current output
    is "legos in the wrong spot":

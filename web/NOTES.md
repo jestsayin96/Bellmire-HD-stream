@@ -250,3 +250,35 @@ the second pass:
 - Read-only and minimal: no scopes (we need only the user's own login), token in memory only
   (never storage, never our backend), no viewer write. The two connect-src hosts are documented
   and flagged in docs/HUB_SECURITY.md. Phase 3 (any write path) stays off until the RLS is designed.
+
+---
+
+## H4: the Boards and the town-status strip
+The grimoire pass already gave the Boards their tiers (SSS/SS/S/A/B), the featured leader,
+value bars and the find-your-hero row, and the Guild Roll and the Fallen were in place from
+phase 1. H4's remaining pieces were the explicit sort affordance and the town-status strip.
+
+### Sort tabs
+- The five board tabs ARE the sort - each ranks the field by its own metric (gold, deepest,
+  deadliest, delves, standing). They were unlabelled, so a "Sort heroes by" eyebrow now sits
+  above them and the tablist's accessible name became "Sort the boards by". No new board: the
+  research in section 3 caps it at five, and that still holds.
+
+### Town-status strip (day / pop / treasury / raids) - and an honesty line on raids
+- The strip shows every field the publisher's town block carries: town level, souls (the
+  population), the day, the treasury and renown. To these H4 adds a real **growth-to-the-next-
+  level bar**: `town.score / town.next_level_at`, both already published, drawn the same safe
+  way as the hero HP/XP bars (the fill is a CSSOM number set with setProperty, never snapshot
+  text; it only draws when next_level_at > 0, so there is no invented denominator).
+- **Raids is a data-contract gap, not a rendering one.** `_town_block` in
+  `scripts/snapshot_pub.gd` publishes name/level/souls/day/treasury/renown/next_level_at/score
+  and NO raids count. A raids number on the strip today would be invented, which the honesty
+  rule on this page forbids - and deriving one from the chronicle's last-50 "raid" lines would
+  be a total built from a window, which is the same sin. So the strip is **forward-compatible**:
+  the day the desktop adds a numeric raids field to the town block, the strip lights up a pill
+  for it with no further page change. The hub reads, in order:
+    - `raids_turned` / `raids_repelled` / `raids_held` / `raids_won`  -> labelled "Raids turned back"
+    - a bare `raids`                                                  -> labelled "Raids"
+  A field present as 0 shows 0 (an honest "none repelled"); an absent field shows nothing. This
+  is the same pattern as the hp_max / xp_next contract notes above - one line on the desktop
+  side flips it on, and it is the desktop's call whether that number is worth publishing.

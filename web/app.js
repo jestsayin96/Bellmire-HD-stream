@@ -97,6 +97,10 @@ const n0 = (v) => { const x = +v; return Number.isFinite(x) ? x : 0; };
 const modOf = (v) => { const m = Math.floor((+v - 10) / 2); return (m >= 0 ? "+" : "") + m; };
 const arr = (a) => Array.isArray(a) ? a : [];
 const nameOf = (r) => String(r && r.name != null ? r.name : "");
+// the first argument that is a present, finite number (else null). Lets a forward-
+// compatible field render only when the publisher actually sends it - never a zero
+// stood in for "absent", and never an invented value (web/NOTES.md honesty rule).
+const pickNum = (...vals) => { for (const v of vals) if (v != null && v !== "" && Number.isFinite(+v)) return +v; return null; };
 
 function ago(iso) {
   const t = Date.parse(iso);
@@ -218,22 +222,51 @@ function render(p) {
   renderCommands(p.commands);
 }
 
+// The town-status strip (H4): the day, the population, the treasury and - the day
+// the publisher sends one - the raids turned back, plus a real growth-to-next-level
+// bar. Every value is a published number rendered as textContent through el(); the
+// bar fill is a CSSOM number, never snapshot text. Nothing is invented: a field that
+// the town block does not carry simply does not appear.
 function renderTown(t) {
   const box = $("town");
   box.replaceChildren();
-  const bits = [];
-  if (t.level != null) bits.push(["Town level", esc(t.level)]);
-  if (t.souls != null) bits.push(["Souls", num(t.souls)]);
-  if (t.day != null) bits.push(["Day", esc(t.day)]);
-  if (t.treasury != null) bits.push(["Treasury", num(t.treasury) + " g"]);
-  if (t.renown) bits.push(["Renown", num(t.renown)]);
-  if (t.score != null && t.next_level_at != null && +t.next_level_at > 0)
-    bits.push(["Growth", num(t.score) + " / " + num(t.next_level_at)]);
-  for (const [k, v] of bits) {
-    const li = el("li");
-    li.append(el("span", "tk", k), el("span", "tv", v));
-    box.append(li);
-  }
+  const pill = (k, v) => { const li = el("li"); li.append(el("span", "tk", k), el("span", "tv", v)); box.append(li); };
+  if (t.level != null) pill("Town level", t.level);
+  if (t.souls != null) pill("Souls", num(t.souls));
+  if (t.day != null) pill("Day", t.day);
+  if (t.treasury != null) pill("Treasury", num(t.treasury) + " g");
+  if (t.renown) pill("Renown", num(t.renown));
+  // Raids: forward-compatible. The town block in scripts/snapshot_pub.gd carries no
+  // raids count today, so this shows ONLY if the publisher adds one - never a made-up
+  // number. A clearly-named "turned back / repelled / held / won" field reads as a
+  // defence tally; a bare "raids" reads as an occurrence count. (web/NOTES.md contract.)
+  const repelled = pickNum(t.raids_turned, t.raids_repelled, t.raids_held, t.raids_won);
+  if (repelled != null) pill("Raids turned back", num(repelled));
+  else { const raids = pickNum(t.raids); if (raids != null) pill("Raids", num(raids)); }
+  // Growth to the next town level: both score and next_level_at are published, so this
+  // is a true progress bar, not an invented denominator. Shown only when a real target
+  // exists; otherwise the strip is just the facts above.
+  const g = growthBar(t);
+  if (g) box.append(g);
+}
+
+// a growth-to-next-level bar for the town strip, on the dark ground. Honest: it draws
+// only when the publisher gives a positive next_level_at, and the fill is score/target
+// as a CSSOM number (never snapshot text), the same safe pattern as the hero HP/XP bars.
+function growthBar(t) {
+  if (t.score == null || !(+t.next_level_at > 0)) return null;
+  const score = n0(t.score), next = n0(t.next_level_at);
+  const ratio = Math.max(0.02, Math.min(1, score / next));
+  const li = el("li", "grow");
+  li.setAttribute("role", "img");
+  const toLevel = t.level != null ? "to town level " + (n0(t.level) + 1) : "to the next town level";
+  li.setAttribute("aria-label", "Growth " + score + " of " + next + " " + toLevel);
+  const track = el("div", "growtrack");
+  const fill = el("span", "growfill");
+  fill.style.setProperty("--grow", ratio);   // CSSOM number only
+  track.append(fill);
+  li.append(el("span", "tk", "Growth"), track, el("span", "tv growv", num(score) + " / " + num(next)));
+  return li;
 }
 
 // ============================================================ THE BOARDS

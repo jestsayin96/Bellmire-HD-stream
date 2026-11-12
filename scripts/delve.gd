@@ -55,7 +55,7 @@ func start(uids: Array) -> void:
 		party.append({"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()})
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
-	_say("%s %s into the scar." % [_names(), "descends" if party.size() == 1 else "descend"])
+	_say(_pick_line("descend", "%s %s into the scar.") % [_names(), "descends" if party.size() == 1 else "descend"])
 	for m in party:
 		oil += float(int(m["h"].get("oil", 0)))
 		m["h"]["oil"] = 0
@@ -135,6 +135,14 @@ func _next_floor() -> void:
 	var biome := String(dun.info.get("theme_name", "the dark"))
 	var line := "Floor %d - %s, remade as %s: %s." % [floor_no, of, biome, _census()]
 	_say(line)
+	# L19: the old budget - one tell a delve, on its first floor (the origin's own, or one of lore_lines)
+	if floor_no == start_floor:
+		var tells: Array = [String((FloorGen.ORIGINS.get(origin_key, {}) as Dictionary).get("tell", ""))]
+		tells.append_array((lore().get("tells", {}) as Dictionary).get(origin_key, []))
+		tells = tells.filter(func(s): return String(s) != "")
+		if not tells.is_empty():
+			_say(String(tells[_rng.randi() % tells.size()]))
+		_bark_any("enter")
 	if dun.lord:
 		# NOT capitalize(): it title-cases every word (origins.json warns about this)
 		var note := String(dun.lord.def.get("note", ""))
@@ -142,6 +150,10 @@ func _next_floor() -> void:
 			note = note.substr(0, 1).to_upper() + note.substr(1) + "."
 		var uniq := bool(dun.lord.def.get("unique", false))
 		_say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
+		var intro := String((lore().get("unique_intros" if uniq else "lord_intros", {}) as Dictionary).get(String(dun.lord.def.get("id", "")), ""))
+		if intro != "":
+			_say(intro)
+		_bark_any("lord")
 		# L12: a lord rising - a WIS save (DC 10 + floor/2) or frightened a while
 		if not uniq:
 			for m in _alive():
@@ -899,7 +911,7 @@ func _loot(alive: Array) -> void:
 		_gold += found
 		oil = maxf(0.0, oil - 0.5)
 		_say("%s searches (Investigation %d) and turns up %d gold on floor %d." % [f["h"]["name"], st, found, floor_no])
-		_say("Floor %d cleared." % floor_no)
+		_say(_pick_line("cleared", "Floor %d cleared.") % floor_no)
 	# renown (old rule): a floor cleared +1, a lord slain +6
 	var eco = town.get("economy") if town else null
 	if eco:
@@ -947,6 +959,10 @@ func _haul_line() -> String:
 	return ", ".join(bits.slice(0, bits.size() - 1)) + (" and " if bits.size() > 1 else "") + String(bits[-1])
 
 func _hero_hit(m: Dictionary) -> void:
+	# L19: a delver badly hurt says so, once a floor
+	if float(m["hp"]) > 0.0 and float(m["hp"]) < float(m["max"]) * 0.25 and int(m.get("hurt_bark", -1)) != floor_no:
+		m["hurt_bark"] = floor_no
+		_bark(m, "hurt")
 	var b: HeroBody = m["body"]
 	Rig.play(b._anim, "Hit_A")
 	Sfx.at("hit", b.global_position)
@@ -1182,7 +1198,8 @@ func _scar_check(m: Dictionary, kind: String) -> bool:
 		var key := "%s:%d" % [m["uid"], floor_no]
 		if not _misfire_said.has(key):
 			_misfire_said[key] = true
-			_say("%s's %s goes wrong - the scar answers (%d vs DC %d)." % [h["name"], kind, total if d != 1 else 1, scar_dc(floor_no)])
+			_say(_pick_line("misfire", "%s's %s goes wrong - the scar answers (%d vs DC %d).") % [h["name"], kind, total if d != 1 else 1, scar_dc(floor_no)])
+			_bark(m, "misfire")
 	return miss
 
 ## ---- L9 (DnD RULE): the roll audit, dungeon side. Everything below is a d20
@@ -1322,6 +1339,7 @@ func _meet_trap(m: Dictionary, tr: Dictionary, force_spot := -1) -> void:
 				_spring(m, tr, spec, dc)
 				return
 		_say("%s spots %s (Perception %d vs DC %d) and steps round it." % [h["name"], spec["name"], per, dc])
+		_bark(m, "trap")
 		_float_text(m, "spotted", Color(0.85, 0.95, 1.0))
 		return
 	_spring(m, tr, spec, dc)
@@ -1359,13 +1377,13 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 	_hero_hit(m)
 
 ## a number or word floating up off a delver's head
-func _float_text(m: Dictionary, text: String, col: Color) -> void:
+func _float_text(m: Dictionary, text: String, col: Color, size := 84, lift := 2.4) -> void:
 	var b: Node3D = m["body"]
 	if not is_instance_valid(b) or not b.is_inside_tree():
 		return
 	var lb := Label3D.new()
 	lb.text = text
-	lb.font_size = 84
+	lb.font_size = size
 	lb.pixel_size = 0.01
 	lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	lb.no_depth_test = true
@@ -1376,7 +1394,7 @@ func _float_text(m: Dictionary, text: String, col: Color) -> void:
 	# on the floor, not the hero: HeroBody renames every Label3D under it to its name
 	var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
 	host.add_child(lb)
-	var p := b.global_position + Vector3(0, 2.4, 0)
+	var p := b.global_position + Vector3(0, lift, 0)
 	lb.global_position = p
 	var tw := lb.create_tween()
 	tw.set_parallel(true)
@@ -1500,6 +1518,7 @@ func drink(m: Dictionary, key: String) -> void:
 		var amt := float(_dice(int(hd[0]), int(hd[1])) + int(hd[2]))
 		m["hp"] = minf(float(m["max"]), float(m["hp"]) + amt)
 		_float_text(m, "+%d" % int(amt), Color(0.45, 1.0, 0.5))
+		_bark(m, "drink")
 		if key != "mending":
 			_say("%s drinks %s (+%d)." % [h["name"], p["name"], int(amt)])
 		# any mending puts out a fire on you
@@ -1579,3 +1598,34 @@ func _tags_tick(delta: float) -> void:
 		var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
 		if cam:
 			lb.pixel_size = 0.01 * clampf(cam.global_position.distance_to(lb.global_position) / 22.0, 0.4, 2.5)
+
+## ---- L19: more of the original's voice (data/lore_lines.json)
+static var _lore: Dictionary = {}
+static func lore() -> Dictionary:
+	if _lore.is_empty():
+		var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+		if f:
+			_lore = JSON.parse_string(f.get_as_text())
+	return _lore
+
+## a variant of a stock line (same format arguments), or the stock line
+func _pick_line(key: String, stock: String) -> String:
+	var opts: Array = lore().get(key, [])
+	return String(opts[_rng.randi() % opts.size()]) if not opts.is_empty() else stock
+
+## a delver says something short over their head (not the Chronicle) - at most
+## one bark each eight seconds
+func _bark(m: Dictionary, kind: String) -> void:
+	if float(m.get("hp", 0.0)) <= 0.0 or float(m.get("bark_t", -99.0)) > _t:
+		return
+	var opts: Array = (lore().get("barks", {}) as Dictionary).get(kind, [])
+	if opts.is_empty():
+		return
+	m["bark_t"] = _t + 8.0
+	# speech, not a number: smaller, a little higher, so a few at once do not pile up
+	_float_text(m, "\"%s\"" % String(opts[_rng.randi() % opts.size()]), Color(1.0, 0.97, 0.88), 46, 3.2 + _rng.randf() * 0.6)
+
+func _bark_any(kind: String) -> void:
+	var al := _alive()
+	if not al.is_empty():
+		_bark(al[_rng.randi() % al.size()], kind)

@@ -435,7 +435,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
     if kind != "":
         h["wkind"] = kind
     changed.emit(user_id)
-    return "%s takes up %s %s. (+%d atk, %dd%d)%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), last_haggle]
+    return "%s takes up %s %s. (+%d atk, %dd%d) %s%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), forge_flavour(nxt), last_haggle]
 
 func _an(word: String) -> String:
     return "an" if word.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a"
@@ -570,6 +570,7 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
         "name": h["name"], "class": h["class"], "level": int(h["level"]),
         "deepest": max(int(h["deepest"]), floor_no), "kills": int(h["kills"]),
         "killed_by": killed_by, "day": day,
+        "epitaph": _epitaph(),
     })
     if fallen.size() > 200:
         fallen.resize(200)
@@ -1004,3 +1005,18 @@ func worn_line(h: Dictionary) -> String:
 func title_of(h: Dictionary) -> String:
     var k := String((h.get("cos", {}) as Dictionary).get("title", ""))
     return String(item(k).get("name", "")) if k != "" else ""
+
+## L19: a line for the memorial, in the old voice (data/lore_lines.json)
+func _epitaph() -> String:
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return ""
+    var eps: Array = (JSON.parse_string(f.get_as_text()) as Dictionary).get("epitaphs", [])
+    return String(eps[rng.randi() % eps.size()]) if not eps.is_empty() else ""
+
+## L19: the forge's word on a tier
+static func forge_flavour(tier: int) -> String:
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return ""
+    return String(((JSON.parse_string(f.get_as_text()) as Dictionary).get("forge", {}) as Dictionary).get(str(tier), ""))

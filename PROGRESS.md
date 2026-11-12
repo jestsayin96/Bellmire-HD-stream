@@ -902,3 +902,34 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   Rattling Host with a bone bowman, a sentinel and a spider called beside it; frames taken only while the lord
   is playing its attack - looked at: the Host's axe raised high over the knight, the bowman and sentinel by it.
 - Mr. E's other note (the sage's scar check on WIS) was already done in Cycle 67.
+
+
+## Cycle 69 - D6, Bellmire's named people (desktop, 2026-11-11)
+- Lore first (reference town.gd ROSTER + FIRST/LAST): the old valley already had the chief in his hall, the smith,
+  the chapel healer, the innkeeper. Those bodies are PROMOTED (same role and work door, so the economy counts them as
+  before - no doubles); the crier and priest already on the square/chapel steps too. New, named in the same voice:
+  the bard, a pedlar with her cart, two children, a beggar, the town drunk.
+- scripts/notables.gd (new, class Notables; town.notables): 12 people - Aldric Ashwood (Chief of Bellmire, lives in
+  his hall), Garm Coalfoot (the Smith), Ysolde of the Ford (Healer), Rolf Thatcher (Keeper of the Tavern), Osric
+  Hollow (Priest), Cort Rivers (Crier), Wren Bramble (Bard), Petra Fenwick (Pedlar + wagon), Tove Bramble (the bard's
+  girl), Dunn the Younger, Harl Quarryman (Beggar), Rask Stonehand (the Town Drunk). Each: own body/tint/size/cape,
+  a kit (bard pipe + songbook, beggar's empty mug, drunk's full one), a gold "Name / title" tag shown up close even
+  with names off (N still shows all), gestures while at their spot (sermon, playing, begging).
+- Days: hour slots [from, to, place, tag] read off the town clock; on a new slot they get Townsfolk.stops, so every
+  step is still the navmesh + doors (D1). Bellmire is wide (square -> tavern ~120 m is half a town day on foot), so
+  each day keeps to one quarter and they live near their work (nearest house whose door the streets reach); the
+  drunk sleeps in the tavern's back room by day, staggers round it 1-6 at night.
+- Chronicle: one named line every 28-55 s from whoever's slot has lines ("Garm Coalfoot quenches a blade and swears
+  at it."); the crier shouts the latest Chronicle news ("Hear ye! Floor 2 cleared."), his shout now sits above a
+  named person's two-line tag. No other townsfolk keeps a named person's name (rechecked as settlers arrive).
+- Found on the way: TownNav.closest() (town._snap) answers (0,0,0) for a while after start - the square's spots all
+  snapped onto one point and stacked four people; Notables._ground() falls back to keep_walkable(). Worth a look for
+  D4's _snap beats (not changed here).
+- townsfolk.gd (.bak_d6): notable_title, sway (the drunk's weave), _tag, make_notable(); rts_camera.gd (.bak_d6): N
+  keeps named tags; town.gd (.bak_d6): notables hook after _more_folk, spawn_wagon().
+- tools/_d6_test.gd (headless, new): 12 named, unique names and looks, lore roles promoted not doubled, 2.2 town days
+  at 4x: 71 slot changes, 86% reached in their slot, 4-5 named Chronicle lines, crier read news, drunk out 0/134 by
+  day and 96/96 at night, 0 in_solid of 7106 (townwalk's test). D6_TEST OK. tools/_d6_shot.gd -> renders/cycles/
+  20261111_d6 (square_named, crier_reads, bard_plays, pedlar_cart, chief_east_market, smith_at_smithy,
+  priest_chapel_steps, healer_rounds, drunk_at_night) - looked at: tags readable, smith at his forge, the square's
+  four apart (first pass: two shots inside walls and the stack - fixed).

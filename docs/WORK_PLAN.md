@@ -63,10 +63,15 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       fence, 5 horses + a foal in the paddock, 8 cats on the streets (they nap), crows over 5 fields; animals never
       pick a spot or path through a building (solid_at) and stop at stalls. D5_TEST OK (0 in_solid / 0 high / 0 out
       of pen in 22200 samples); renders/cycles/20261111_d5.
-- [ ] D6. Unique NPCs: named characters with jobs and daily routines from the lore (the chief, the smith,
+- [x] D6. Unique NPCs: named characters with jobs and daily routines from the lore (the chief, the smith,
       the healer, the innkeeper, the priest, a bard, a town crier who reads the Chronicle aloud, merchants
       with carts, children playing, beggars, a drunk at night). Each with a distinct look and a line in
       the Chronicle now and then.
+      DONE cycle 69: scripts/notables.gd - 12 named folk (lore roster's chief/smith/healer/innkeeper promoted, not
+      doubled; + priest, crier, bard, pedlar with cart, two children, beggar, drunk), names from the lore's FIRST x
+      LAST, title tag up close, own look, hour-slot days in their own quarter, Chronicle lines, the crier shouts the
+      latest Chronicle news. D6_TEST OK (86% of slots reached, drunk out 0/134 by day 96/96 at night, 0 in_solid);
+      renders/cycles/20261111_d6.
 - [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
 - [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
 - [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'

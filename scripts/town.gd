@@ -135,6 +135,8 @@ var roster: Roster
 var chat: ChatCmd
 var heroes := {}             # user_id -> HeroBody
 var feed: Array = []
+## D6: Bellmire's named people and their days (scripts/notables.gd)
+var notables: Notables
 ## the valley's stock (Economy: a port of the old Sim). Delves bring ore,
 ## stone, salvaged gear and potions home into it.
 var economy: Economy
@@ -3905,6 +3907,10 @@ func _spawn_people() -> void:
         fsh.add_child(ang)
         anglers.append(ang)
     _more_folk(rng)
+    notables = Notables.new()
+    notables.name = "Notables"
+    add_child(notables)
+    notables.setup(self)
     # plain townsfolk: home -> market and back, so the streets are never empty
     for k in range(14):
         var v := Townsfolk.new()
@@ -4070,6 +4076,10 @@ func _more_folk(rng: RandomNumberGenerator) -> void:
         _put_folk(v, at)
         var w := _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(at.x, height_at(at.x, at.z), at.z - 2.6), PI * 0.5, 0.8)
         v.cart = w
+
+## D6: a pedlar's cart (the carters' wagon), standing on the ground at `at`
+func spawn_wagon(at: Vector3) -> Node3D:
+    return _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(at.x, height_at(at.x, at.z), at.z - 2.6), PI * 0.5, 0.8)
 
 ## ---------------------------------------------------------------- D4 the garrison
 ## Lore (the original town.gd _chief_spends): "standing garrison scales with how

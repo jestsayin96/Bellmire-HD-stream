@@ -477,11 +477,7 @@ function carryChip(iconId, text) {
 }
 
 function heroCard(h, isOpen) {
-  const s = h.stats || {};
-  const order = ["str", "dex", "con", "int", "wis", "cha"];
-  const w = h.weapon || {}, armr = h.armour || {};
   const det = el("details", "hero");
-  if (isOpen) det.open = true;
   const sum = el("summary");
   // the crest: the hero's initials in a class-tinted ring, with the calling's icon
   const sg = el("span", "hsigil cls-" + classIcon(h.class), sigil(h.name));
@@ -504,6 +500,19 @@ function heroCard(h, isOpen) {
   sum.append(sg, idb);
   det.append(sum);
 
+  // lazy-render: the full sheet is built on first open, not for all 60+ cards up
+  // front. A busy night is 200 heroes; most cards are never opened.
+  let built = false;
+  const build = () => { if (built) return; built = true; det.append(heroSheet(h)); };
+  det.addEventListener("toggle", () => { if (det.open) build(); });
+  if (isOpen) { det.open = true; build(); }
+  return det;
+}
+
+function heroSheet(h) {
+  const s = h.stats || {};
+  const order = ["str", "dex", "con", "int", "wis", "cha"];
+  const w = h.weapon || {}, armr = h.armour || {};
   const sheet = el("div", "sheet");
 
   sheet.append(hpBar(h));
@@ -572,8 +581,7 @@ function heroCard(h, isOpen) {
     kv("Standing", num(h.standing)),
   );
   sheet.append(rec);
-  det.append(sheet);
-  return det;
+  return sheet;
 }
 
 // ============================================================ THE GUILD ROLL

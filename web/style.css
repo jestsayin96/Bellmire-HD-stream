@@ -703,3 +703,26 @@ html.overlay .title { font-size: 1.2rem; }
 
 /* the fallen's earned title on the memorial */
 .gtitle { font-style: italic; color: #cf9f6a; font-size: .9rem; margin-top: 1px; }
+
+/* ===========================================================================
+   H7: accessibility & polish. A consistent, visible keyboard focus ring on
+   every interactive element, stronger than any hover cue, and never removed.
+   ======================================================================== */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.find:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+details.hero > summary:focus-visible { outline-offset: -1px; }
+/* the die already has a focus ring; keep it the strongest */
+.d20:focus-visible { outline-width: 3px; outline-offset: 4px; }
+/* a slightly darker ink-soft for small print, to clear WCAG AA on parchment */
+:root { --ink-soft: #5e4226; }
+/* respect forced-colors / high-contrast mode: let the OS palette through */
+@media (forced-colors: active) {
+  .tier, .cbadge, .hsigil, .chip, .brow::before, .hpfill, .xpfill { forced-color-adjust: none; }
+}

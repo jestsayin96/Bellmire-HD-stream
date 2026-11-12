@@ -41,6 +41,12 @@ const SKELETONS := ["warrior", "cutpurse", "minion"]
 var town: Node3D
 var economy: Economy
 var raids := 0
+## D19b (for the hub's "Raids turned back" pill): every attack driven off, counted
+## and kept across streams in user://town_stats.json (saved only when the game
+## persists, so tests never touch it).
+const STATS_FILE := "user://town_stats.json"
+var raids_turned := 0
+var _stats_loaded := false
 var _raid_t := randf_range(110.0, 190.0)
 var _breach := 0.0
 var _rebuild_t := 22.0
@@ -310,9 +316,26 @@ func _reel(n: Node3D, missed := false) -> void:
     reels += 1
 
 ## ---------------------------------------------------------------- tick
+func _load_stats() -> void:
+    _stats_loaded = true
+    if not FileAccess.file_exists(STATS_FILE):
+        return
+    var j: Variant = JSON.parse_string(FileAccess.get_file_as_string(STATS_FILE))
+    if typeof(j) == TYPE_DICTIONARY:
+        raids_turned = int((j as Dictionary).get("raids_turned", 0))
+
+func _save_stats() -> void:
+    if town == null or not bool(town.get("persist")):
+        return
+    var f := FileAccess.open(STATS_FILE, FileAccess.WRITE)
+    if f:
+        f.store_string(JSON.stringify({"raids_turned": raids_turned}))
+
 func _process(delta: float) -> void:
     if town == null or economy == null:
         return
+    if not _stats_loaded:
+        _load_stats()
     _raid_t -= delta
     if _raid_t <= 0.0:
         _raid_t = randf_range(110.0, 190.0)
@@ -328,6 +351,8 @@ func _process(delta: float) -> void:
             _breach = 0.0
             breached = false
             _say("The attack is driven off. The gates hold.")
+            raids_turned += 1
+            _save_stats()
         _stand_down(delta)
         if _paths.size() > 400:
             _paths.clear()

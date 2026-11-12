@@ -222,9 +222,19 @@ static func kind_of(line: String) -> String:
 func _town_block(e: Economy) -> Dictionary:
     if e == null:
         return {}
-    return {"name": e.town_name, "level": e.town_level, "souls": e.population(),
+    var out := {"name": e.town_name, "level": e.town_level, "souls": e.population(),
         "day": e.day, "treasury": e.treasury, "renown": e.renown,
         "next_level_at": e.next_level_at(), "score": e.town_score()}
+    # D19b additions, all additive (payload v stays 1; the hub ignores what it
+    # does not know): the hub only gets a number that is real.
+    var rd = town.get("raids") if town else null
+    if rd != null and rd.get("raids_turned") != null:
+        out["raids_turned"] = int(rd.raids_turned)
+    var dl = town.get("daylight") if town else null
+    if dl != null and dl.has_method("day_phase"):
+        out["day_phase"] = String(dl.day_phase())
+        out["weather"] = String(dl.weather)
+    return out
 
 func _sheet(r: Roster, h: Dictionary) -> Dictionary:
     var stats := {}
@@ -235,7 +245,8 @@ func _sheet(r: Roster, h: Dictionary) -> Dictionary:
         "name": String(h.get("name", "?")), "class": String(h.get("class", "")),
         "species": Roster.species_of(h), "level": int(h.get("level", 1)), "xp": int(h.get("xp", 0)),
         "rank": r.rank_of(h), "standing": r.standing(h), "title": r.title_of(h),
-        "ac": r.armour_class(h), "hp": int(r.max_hp(h)), "prof": r.prof(h),
+        "ac": r.armour_class(h), "hp": int(r.max_hp(h)), "max_hp": int(r.max_hp(h)),
+        "xp_next": int(r._xp_needed(int(h.get("level", 1)))), "prof": r.prof(h),
         "to_hit": r.attack_bonus(h), "stats": stats, "saves": r.save_line(h),
         "weapon": {"name": r.weapon_name(h), "dice": r.dice_str(h), "tier": int(h.get("weapon", 0))},
         "armour": {"name": String(Roster.ARMOUR[clampi(arm, 0, Roster.ARMOUR.size() - 1)]["name"]), "tier": arm},

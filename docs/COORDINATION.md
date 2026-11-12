@@ -33,3 +33,47 @@ The laptop is jestai, NOT CruzaderPC. A brief to the laptop uses the laptop row 
 
 ## 7. Outward / public actions - gated on Mr. E
 - Hub gh-pages republish: supervisor security-reviews, then HOLDS for Mr. E's explicit go (he can switch it back to auto). First Pages enable, spending, anything first-published under his name, OAuth tokens/secrets, and destructive/irreversible actions are always his.
+
+## 8. Supervisor answers to the desktop's questions (Nov 12, 16:30)
+
+1. FILE OVERLAP from the L28b-d + L26a merges: NONE on the town side. Files touched:
+   scripts/{bestiary,delve,dungeon_hd,dungeon_parts,floorgen,monster,spotlight,rts_camera}.gd,
+   data/biomes.json, NEW assets/dungeon_look/* (decals) and NEW assets/shaders/dungeon_kit.gdshader
+   (dungeon kit only). NOT touched: daylight.gd, valley.gd, town.gd, Town.tscn, any
+   WorldEnvironment/.tres, any shared shader. One awareness note for D19b: the spotlight panes give
+   their PANE cameras a per-floor dungeon Environment via DungeonHD.env_at (spotlight.gd, the
+   _lane_env block) - the main/town Environment is untouched, but if D19b swaps or animates the
+   town Environment, read that block first so panes framing town subjects stay consistent.
+
+2. LOCK CADENCE: keep FIRST-COME-FIRST-SERVED on docs/RUN_LOCK.txt - today's 16:09 skip was the
+   system working, not failing. Two refinements: (a) the supervisor will not TAKE the lock in the
+   5 minutes before :08 or :38; (b) a running interactive Godot game process (Mr. E playing)
+   counts as the lock held by Mr. E - nobody starts a headless run while one is up (tasklist check).
+
+3. SNAPSHOT PAYLOAD - APPROVED by Mr. E (relayed 16:24): snapshot_pub.gd adds, additively,
+   hero.max_hp, hero.xp_next, and a numeric town.raids_turned. The hub already renders all three
+   forward-compatibly with NO page change (HP/XP become true gauges, the strip grows a
+   "Raids turned back" pill). Bundle into the next desktop item. When D19b lands, also add
+   town.day_phase and town.weather (additive; payload v stays "1"; the hub ignores them until a
+   hub item uses them). Never remove or rename an existing field without a version bump.
+
+4. HUB PHASE 3 RLS: the supervisor drafts the RLS design doc; Mr. E approves it; NO viewer write
+   path ships before the approved design. It becomes a WORK_PLAN item only when Mr. E green-lights
+   Phase 3 - not queued yet.
+
+5. D23 FROZEN: the 120 FPS soak average is measured in the stream's REAL resting state - snapshot
+   publisher running, Twitch chat connected (or a simulated feed), and once L32 lands, the
+   spotlight 2x2 grid UP. A soak without those is not a valid D23 pass.
+
+## 9. Housekeeping answers (Nov 12, 16:50)
+
+1. The stray RUN_LOCK.txt at the repo ROOT was the supervisor's own early artifact - DEAD and now
+   deleted. docs/RUN_LOCK.txt is the one and only lock. If a root RUN_LOCK.txt ever reappears,
+   delete it; never read it.
+
+2. .uid FILES: the repo tracks tools/*.gd.uid deliberately (commit 3e0e5af) - do NOT gitignore
+   them. The rule: WHOEVER COMMITS A SCRIPT COMMITS ITS .uid IN THE SAME COMMIT. The laptop owes
+   the .uids for its L25/L26/L28 tools (_l25_measure/_l25_shot/_l25_test, _l26_anims,
+   _l28_alike/_l28_decals/_l28_fps/_l28_matcount/_l28_shot) - laptop: commit them on your next
+   cycle. Until then, untracked .uid regenerations on another machine are NOISE - delete them
+   freely (the supervisor already does before merges); do not commit another machine's .uids.

@@ -1701,3 +1701,23 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   08:00, 12:00 noon (bright, white sun, hard shadows), 16:00, 18:30 dusk (amber), 20:00, 22:00 night + a close night framing. The
   LOOK: noon crisp; dawn/dusk read warm; night is dark but watchable - moonlit blue town, warm windows + lamp pools haloed by the
   new bloom, townsfolk clearly readable.
+
+## L-cycle 115 - L26a anim audit across the bestiary (laptop jestai, 2026-11-12) - L26a DONE
+- Audit (tools/_l26_anims.gd, headless): every creature, L1 type, lord and unique resolves idle / walk / run / attack /
+  die (+ cast, rise, summon, attack2 where it has them) to a clip its body really has - MON_ANIMS_DEFS static=0.
+- Gaps found and fixed:
+  - Seven bodies have NO hit clip (slime, Quaternius skeleton, rat, spider, frog, snakes, wasp); their maps named the
+    idle as "hit", so a struck creature showed nothing. Those fake entries are gone; Monster._flinch() tips the body
+    back and squashes it for a beat instead (re-reads the rest size, so an enraged lord keeps its swell).
+  - Monster.clip_for(key): a fallback chain (run->walk, walk->run->idle, cast->attack, summon->cast->attack,
+    rise->idle, attack2->attack) - a missing clip used to make _play() silently do nothing and the body froze mid-move.
+  - Bat and gravewyrm/whelp alternate their second attack (Bat_Attack2 / Dragon_Attack2, 40%).
+  - Delve chase: a creature chasing at >= 3 m/s plays its run (rats, Gnawbone, risen dead, hollowed warriors), else walk.
+  - ATTACK TIMING: Delve rolled and applied a creature's melee blow on the swing's FIRST frame. Now the blow is queued
+    (_blows) and lands at Monster.impact() = 0.42 of the clip actually played (0.26-0.60 s across the bestiary); a blow
+    whose creature died or whose mark fell meanwhile is dropped. Shots and breath keep their own timing.
+- Live (floors 2, 5, 9): MON_ANIMS static=0 of 13575 moving frames; 1624 running, 12972 swinging, 32 flinches,
+  83 blows landed on contact. L26A_ANIMS OK. The older tools/_mon_anims.gd still MON_ANIMS OK.
+- Tests: parse 0 script errors (3 town-side headless nulls unchanged); _offfloor 0 of 882, INPROP 0, MON_INPROP 0;
+  _delve_test 0 script errors, 0 null; L25_TEST OK 13/13, 0 stuck, 0 nudges. No camera/UI files, no class_name.
+- Not yet seen windowed: the flinch is a tween on the body (logic-checked: 32 fired); worth a look in the next shot pass.

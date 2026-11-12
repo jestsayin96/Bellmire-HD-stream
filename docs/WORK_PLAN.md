@@ -446,7 +446,8 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L28d. DETAIL DECALS: cracks/moss/blood/scar-glass veins to break repetition. DONE: varied-floor shots, 0 new errors.
       DONE (L-cycle 114): self-made CC0 decal textures (tools/_l28_decals.gd -> assets/dungeon_look) - cracks everywhere, moss/soot/blood by theme, glowing scar-glass veins from floor 6; 18/floor (cap 24) on room floors + wall bases, never stairs/keep-clear; 0 new errors, FPS unchanged; sheet renders/cycles/20261112_l28/d_sheet.png.
 # Phase C - creatures: animation + roster [L26/L27]
-- [ ] L26a. ANIM AUDIT across the WHOLE bestiary: every family map resolves to real clips, fallback when missing (no T-pose/glide); monster.gd states drive the right clip; attack timing lines up. DONE: MON_ANIMS = 0 static.
+- [x] L26a. ANIM AUDIT across the WHOLE bestiary: every family map resolves to real clips, fallback when missing (no T-pose/glide); monster.gd states drive the right clip; attack timing lines up. DONE: MON_ANIMS = 0 static.
+      DONE (L-cycle 115): tools/_l26_anims.gd - MON_ANIMS static=0 (13575 moving frames, floors 2/5/9), every def resolves; clip fallbacks, procedural flinch for 7 bodies with no hit clip, run when chasing fast, 2nd attacks, melee blows land at the clip contact (0.26-0.60 s). L25 OK.
 - [ ] L27a. NEW MONSTERS from owned CC0 packs (KayKit Skeletons/Halloween, Quaternius - NOT Bestiary/QAL): add to TYPES with height/anim map/depth/strain. DONE: appear at depth in a soak, animate, parse clean.
 - [ ] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
 # Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]

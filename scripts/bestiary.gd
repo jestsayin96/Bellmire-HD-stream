@@ -17,15 +17,15 @@ const ADV := "res://addons/kaykit_character_pack_adventures/Assets/gltf/"
 
 const A_KAY := {"idle": "Idle", "walk": "Walking_A", "run": "Running_A", "attack": "1H_Melee_Attack_Chop",
                 "cast": "Spellcast_Shoot", "die": "Death_A", "hit": "Hit_A"}
-const A_BAT := {"idle": "Bat_Flying", "walk": "Bat_Flying", "run": "Bat_Flying", "attack": "Bat_Attack", "die": "Bat_Death", "hit": "Bat_Hit"}
-const A_SLIME := {"idle": "Slime_Idle", "walk": "Slime_Walk", "run": "Slime_Walk", "attack": "Slime_Attack", "die": "Slime_Death", "hit": "Slime_Idle"}
-const A_BONES := {"idle": "Skeleton_Idle", "walk": "Skeleton_Running", "run": "Skeleton_Running", "attack": "Skeleton_Attack", "die": "Skeleton_Death", "hit": "Skeleton_Idle", "rise": "Skeleton_Spawn"}
-const A_DRAGON := {"idle": "Dragon_Flying", "walk": "Dragon_Flying", "run": "Dragon_Flying", "attack": "Dragon_Attack", "die": "Dragon_Death", "hit": "Dragon_Hit"}
-const A_RAT := {"idle": "Rat_Idle", "walk": "Rat_Walk", "run": "Rat_Run", "attack": "Rat_Attack", "die": "Rat_Death", "hit": "Rat_Idle"}
-const A_SPIDER := {"idle": "Spider_Idle", "walk": "Spider_Walk", "run": "Spider_Walk", "attack": "Spider_Attack", "die": "Spider_Death", "hit": "Spider_Idle"}
-const A_FROG := {"idle": "Frog_Idle", "walk": "Frog_Jump", "run": "Frog_Jump", "attack": "Frog_Attack", "die": "Frog_Death", "hit": "Frog_Idle"}
-const A_SNAKE := {"idle": "Snake_Idle", "walk": "Snake_Walk", "run": "Snake_Walk", "attack": "Snake_Attack", "die": "Snake_Death", "hit": "Snake_Idle"}
-const A_WASP := {"idle": "Wasp_Flying", "walk": "Wasp_Flying", "run": "Wasp_Flying", "attack": "Wasp_Attack", "die": "Wasp_Death", "hit": "Wasp_Flying"}
+const A_BAT := {"idle": "Bat_Flying", "walk": "Bat_Flying", "run": "Bat_Flying", "attack": "Bat_Attack", "attack2": "Bat_Attack2", "die": "Bat_Death", "hit": "Bat_Hit"}
+const A_SLIME := {"idle": "Slime_Idle", "walk": "Slime_Walk", "run": "Slime_Walk", "attack": "Slime_Attack", "die": "Slime_Death"}
+const A_BONES := {"idle": "Skeleton_Idle", "walk": "Skeleton_Running", "run": "Skeleton_Running", "attack": "Skeleton_Attack", "die": "Skeleton_Death", "rise": "Skeleton_Spawn"}
+const A_DRAGON := {"idle": "Dragon_Flying", "walk": "Dragon_Flying", "run": "Dragon_Flying", "attack": "Dragon_Attack", "attack2": "Dragon_Attack2", "die": "Dragon_Death", "hit": "Dragon_Hit"}
+const A_RAT := {"idle": "Rat_Idle", "walk": "Rat_Walk", "run": "Rat_Run", "attack": "Rat_Attack", "die": "Rat_Death"}
+const A_SPIDER := {"idle": "Spider_Idle", "walk": "Spider_Walk", "run": "Spider_Walk", "attack": "Spider_Attack", "die": "Spider_Death"}
+const A_FROG := {"idle": "Frog_Idle", "walk": "Frog_Jump", "run": "Frog_Jump", "attack": "Frog_Attack", "die": "Frog_Death"}
+const A_SNAKE := {"idle": "Snake_Idle", "walk": "Snake_Walk", "run": "Snake_Walk", "attack": "Snake_Attack", "die": "Snake_Death"}
+const A_WASP := {"idle": "Wasp_Flying", "walk": "Wasp_Flying", "run": "Wasp_Flying", "attack": "Wasp_Attack", "die": "Wasp_Death"}
 ## Imp and Puglin ship rigged but with NO animations. Their rig is the
 ## Quaternius Universal rig, so they borrow the owned Universal Animation
 ## Library (UAL1/UAL2 in assets/monsters) - Monster grafts it on at load.

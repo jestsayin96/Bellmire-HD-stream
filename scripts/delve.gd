@@ -686,6 +686,7 @@ func _process(delta: float) -> void:
 func _fight(delta: float) -> void:
 	_check_lamp()
 	_traps_tick()
+	_blows_tick(delta)
 	var foes := _foes()
 	_bars(foes)
 	var alive := _alive()
@@ -866,8 +867,10 @@ func _fight(delta: float) -> void:
 			# a creature mid-swing, mid-rise or reeling from a hit stands until it is done - no gliding
 			if mon.busy():
 				continue
-			_go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon), delta)
-			mon._play("walk")
+			var chase := float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon)
+			_go(mon, (near["body"] as Node3D).global_position, chase, delta)
+			# L26a: a fast chaser runs (its run clip, or its walk where it has none)
+			mon._play("run" if chase >= RUN_AT else "walk")
 			continue
 		var nb: Node3D = near["body"]
 		mon.rotation.y = atan2(nb.global_position.x - mon.global_position.x, nb.global_position.z - mon.global_position.z)
@@ -890,7 +893,39 @@ func _fight(delta: float) -> void:
 			if ways.has("volley"):
 				_volley(mon, alive, near, shots)
 		else:
+			# L26a: a melee blow lands at the swing's contact frame, not as the swing begins
 			mon._play("attack")
+			_blows.append({"t": mon.impact(), "mon": mon, "near": near, "fury": fury})
+			continue
+		_mon_blow(mon, near, fury, shots, ways, alive)
+
+## ---- L26a: blows in flight. A creature's melee swing is rolled when its blade comes
+## down (Monster.impact(): ~0.42 of the clip), so the hero's flinch matches the swing.
+## A blow whose creature died or whose mark fell meanwhile is dropped.
+const RUN_AT := 3.0            # chase speed (m/s) from which a creature runs instead of walks
+var _blows: Array = []
+var blows_landed := 0
+func _blows_tick(delta: float) -> void:
+	if _blows.is_empty():
+		return
+	var keep: Array = []
+	for b in _blows:
+		b["t"] = float(b["t"]) - delta
+		if float(b["t"]) > 0.0:
+			keep.append(b)
+			continue
+		var mon = b["mon"]
+		var near: Dictionary = b["near"]
+		if not is_instance_valid(mon) or (mon as Monster).state == Monster.S.DEAD or float(near["hp"]) <= 0.0 \
+				or not is_instance_valid(near["body"]):
+			continue
+		blows_landed += 1
+		_mon_blow(mon, near, float(b["fury"]), 0.0, (mon as Monster).def.get("ways", {}), _alive())
+	_blows = keep
+
+## a creature's blow resolved: d20 against the delver's armour, damage, venom, breath splash
+func _mon_blow(mon: Monster, near: Dictionary, fury: float, shots: float, ways: Dictionary, alive: Array) -> void:
+		var nb: Node3D = near["body"]
 		# L9: d20 + its to-hit vs the delver's AC; a natural 1 always misses, a natural 20 always hits and doubles the dice
 		var nat := _d20(1 if dark or has_st(near, "blinded") else 0)
 		var hit := nat + 2 + floor_no / 2

@@ -1366,7 +1366,8 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - L22 (close heroes) was stopped part-way, on the supervisor's word; its uncommitted camera change is in a local git stash ("L22 WIP"). Its test (9d72739) is pushed and still fails on purpose.
 - Tests (origin/main merged): parse 0 errors, L21_TEST OK 46/46 (headless + windowed), L14 / L15 / L16 / L17 / L18 OK, BOSS_TEST OK, TWITCH_PARSE OK. L20_TEST: 1 timing check is FLAKY on the valley tour shot - its worst clearance search measured 2.5 / 5.2 / 9.9 ms in three runs against a 5 ms limit (2.9 ms in Cycle 79, before D12 put the valley's trees and steadings into view). Not touched by L21; left as is and flagged rather than loosening the limit here.
 
-## Cycle 83 - L23, _l20_test made deterministic (laptop, 2026-11-12) - done
+<<<<<<< HEAD
+## Cycle 83 - L24 (main's number; commit says L23), _l20_test made deterministic (laptop, 2026-11-12) - done
 - The flake (supervisor, on the merge run): "the director never cut to fight" / "all six shot types were seen", then a pass on re-run. The fight shot started a floor-2 delve and waited up to 3000 frames for the party to happen on monsters AND for the director's 1 s tick and hold timers to cut there. The raid shot waited the same way. The search-cost check took ONE timing sample, so a busy laptop could read a 2.5 ms search as 9.9 ms.
 - Now: the fight shot is a LORD floor (5) - its lord rises as the party arrives, every run - with the world at 4x only while waiting (1x for the measured shot). Raid and fight both go through _decide(): once the story is really happening (raiders on the road / the lord fighting), the director decides at once - its own _best() through its own _cut(), so still the director's choice, not a fixed camera. The lord outranks a leftover raid (100 vs 95), so the pick is deterministic. Each timing sample is the fastest of 3 runs of the search (its own cost, not a time the OS took the thread away); the 4 ms limit is unchanged.
 - Three runs in a row: L20_TEST OK x3; the fight shot was the lord each time; valley search 2.34 / 2.37 / 2.40 ms.
@@ -1379,9 +1380,30 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - tools/_l22_test.gd: three viewers pinned within 2 m in the market, all three lanes open, the director on one of them. Before: 5 of 7 close-heroes checks failed (two lanes 0 deg from the director, the others 35 deg apart, all at ~12 m). After: every pair of the four views 84-177 deg apart, zooms 10.4 / 12.7 / 15.9 m; heroes moved 30 m apart -> the lanes go back behind their heroes. L22_TEST OK.
 - Looked at: renders/cycles/20261112_l22/close_phone480.png - three different pictures of the same corner of the market, each lane's name on its hero.
 
-## Cycle 85 - L24, the director cuts away from a hero a lane holds (laptop, 2026-11-12) - done
+## Cycle 85 - L23 (main's number; commit says L24), the director cuts away from a hero a lane holds (laptop, 2026-11-12) - done
 - The problem: the director could follow the very hero a spotlight lane already showed (often: a viewer who cheers is also the freshest chatter, the director's favourite pick since L18), so the split showed one thing twice.
 - AutoDirector.lane_held(): the bodies the open lanes follow. In _best(): a candidate on a lane-held hero is skipped (the freshest chatter and the random hero pass over them); a fight or delve shot is seen through the first delver no lane holds. In the tick: if the shot being held becomes lane-held, cut now to the best other story. A lord or a raid is followed by its own node, never a hero, so it is never given up for this.
 - tools/_l24_test.gd (new): Ash is the freshest chatter and the director's shot; Ash is spotlit in the bits lane and keeps chatting. Without the change 5 of 6 checks fail (the director stays on Ash all 900 frames; below, the fight is shot through Ash). With it: cut away in 52 frames, 0 frames back on Ash in 15 s, the fight below shot through Bree. L24_TEST OK.
-- WORK_PLAN: this was the laptop's own "L23" line; renamed L24 since the supervisor filed the _l20_test de-flake as L23.
+- Numbering: main numbers this L23 and the de-flake L24; the laptop commits had them swapped. WORK_PLAN now follows main.
 - Tests (on fb0bbc1 + L22/L23/L24): parse 0 errors, L14 / L17 / L18 / L20 / L21 (46/46) / L22 / L24 OK, BOSS_TEST OK, TWITCH_PARSE OK, T1_TEST OK (the desktop's - twitch_reply unchanged).
+=======
+## Cycle 87 - W1a snapshot publisher for the viewer hub (desktop, 2026-11-12) - done
+- scripts/snapshot_pub.gd (new, class_name SnapshotPublisher): every 60 s (first beat 20 s after start) upserts ONE row of
+  Supabase public.snapshot (POST /rest/v1/snapshot?on_conflict=id, Prefer: resolution=merge-duplicates,return=minimal,
+  User-Agent: BellmireHD/1.0). Key from user://supabase.json {url, service_key}; absent = off with one console line.
+  HTTPRequest.use_threads, one request in flight (a beat is skipped, never queued), answer by signal, each failure kind
+  warned once. Payload v1: generated_at, town {name, level, souls, day, treasury, renown, score, next_level_at},
+  guild_roll (Roster.leaderboard standing, 50), fallen (50, with killer + epitaph), heroes (living, by standing: species,
+  class, level, xp, rank, title, AC, HP, prof, to-hit, 6 stats, saves, weapon name/dice/tier, armour, potions, brews,
+  oil, gold, worn, kills, deepest, delves), commands {order, commands} from data/commands.json. Twitch ids left out.
+- town.gd: starts it beside TwitchEventSub (play only, never under --script). docs/RUNNING.md: how to set the key.
+- tools/_w1a_test.gd: W1A_TEST OK 17/17 - off switch, blob parts, no ids, JSON round trip, 202 heroes 95 KB / 5.2 ms;
+  live: publish() 0.26 ms, second publish skipped while in flight, upsert 200, read back with the publishable key,
+  a publishable-key write refused (401).
+- tools/_w1a_town.gd: the real town + the real roster save READ ONLY (save untouched): publish 0.7 ms, worst frame
+  while in flight 13 ms (the town's own), read back level 3 "a market town", 51 souls, 2 heroes, 6 fallen, roll 8,
+  21 commands -> renders/cycles/20261112_w1a/snapshot_readback.json (looked at: sheets complete). That row is live now.
+- Checks: parse 0 SCRIPT ERROR / Parse Error, TWITCH_PARSE OK, OFFFLOOR 0 (MON_INPROP 0), TOWNWALK in_solid 0/8262 PASS,
+  _delve_test to floor 3 0 script errors, T1_TEST OK.
+- Next: W1b (the static hub page) - reads the same row with the publishable key.
+>>>>>>> origin/main

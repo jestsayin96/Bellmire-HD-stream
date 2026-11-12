@@ -265,10 +265,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       ALSO: !guild drops the "roll" alias (bare !roll is fightoverlay's dice, now silent here); L14_TEST OK.
 - [x] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
       DONE (Cycle 84): within 6 m of another pane's subject a lane takes its own quarter (90 / -90 / 180 deg from the director) and zoom, clearance tilts but never swings it; L22_TEST OK (views 84-177 deg apart).
-- [x] L24. (was the laptop's "L23" before the supervisor's L23 below) The director cuts away from a hero a lane already holds.
+- [x] L23. The director should cut away from a hero a lane already holds (laptop commit a6eb770 calls this L24).
       DONE (Cycle 85): lane-held heroes are skipped by every director pick, a fight or delve shot goes through a delver no lane holds, a held shot is cut within 1 s; L24_TEST OK (5 of 6 failed before).
 
-- [x] L23. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
+- [x] L24. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with (laptop commit d3669e2 calls this L23)
       "the director never cut to fight" and "all six shot types were seen" (saw tour_market, tour_scar,
       tour_valley, hero, raid - no fight), then PASSED on an immediate re-run with no code change. It is
       waiting on the director to happen to cut to a fight inside the test window. Make the test drive the
@@ -277,10 +277,40 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (Cycle 83): a lord floor + the director deciding at once when the story is live (its own _best / _cut); timing samples best of 3; L20_TEST OK x3 in a row.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
-- [ ] W1. A public page for viewers: hero sheet, inventory, gear, the guild roll, the fallen, the command list
-      (from data/commands.json). The game publishes a JSON snapshot every minute; phase 2 adds voting (polls that
-      change the town: next raid target, festival, a boss to summon) with Twitch login.
-
+- [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
+      data (Nov 12, free tier, project already created and the table already exists). Every 60 s the
+      game upserts ONE row into the Supabase table public.snapshot: id=1, payload = a jsonb blob with the
+      guild roll, the fallen, each hero's sheet/inventory/gear, town level and souls, and the command
+      list from data/commands.json. One row, overwritten - the database never grows and nothing has to
+      be cleaned up. Project URL https://paaukwaffaamazgrndbv.supabase.co . Writing needs the SERVICE
+      ROLE key, which bypasses row-level security: it goes in user:// beside the Twitch tokens and NEVER
+      in the repo - Mr. E copies it from the Supabase dashboard (Project Settings > API). Skip the
+      publish quietly if the key is absent so the game still runs without it. Failures must never stall
+      the sim: fire and forget on a thread, and never block a frame on the network.
+      CONNECTIVITY IS ALREADY PROVEN (supervisor, Nov 12 01:05): the key is in
+      user://supabase.json as {"url": ..., "service_key": ...}; a write with it succeeded, a read with
+      the publishable key succeeded, and a write attempted with the publishable key was correctly
+      refused by RLS. The table currently holds a test row - overwrite it.
+      GOTCHA, do not rediscover this: Supabase REFUSES a secret key when the request looks like it came
+      from a browser - "Forbidden use of secret API key in browser". PowerShell's default User-Agent
+      triggers it; setting User-Agent: BellmireHD/1.0 fixed it instantly. If the publish ever returns
+      403 with that message, set a non-browser User-Agent on the HTTPRequest rather than hunting the key.
+      Upsert with POST to /rest/v1/snapshot?on_conflict=id and the header Prefer: resolution=merge-duplicates.
+      DONE cycle 87: scripts/snapshot_pub.gd (SnapshotPublisher, started by town.gd in play only) - every 60 s (first at 20 s)
+      one threaded HTTPRequest upserts id=1 {town, guild_roll (50), fallen (50), heroes = living sheets (stats, saves, AC/HP,
+      weapon+dice, armour, potions/brews, oil, gold, worn, rank, title), commands}; no Twitch ids; one in flight at most;
+      no key file = off. publish() 0.3-0.7 ms, build 0.4 ms (202 heroes 5 ms, 95 KB). W1A_TEST OK 17/17 (live upsert 200,
+      read back with the publishable key, publishable-key write refused 401); W1A_TOWN OK (real town + real save, read only:
+      level 3, 51 souls, 2 heroes, 6 fallen, 21 commands - that is the row in the table now).
+- [ ] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
+      It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
+        URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at
+        key  sb_publishable_q2Kn3weLLeYYXGAiow_4vw_3serNQlc   (apikey header + Authorization: Bearer)
+      Shows hero sheets, inventory, gear, the guild roll, the fallen and the command list, with "as of
+      <updated_at>" visible so a stale snapshot is obvious when the game is off. Readable on a phone
+      first - most viewers will open it on one. Must work when the game has never run (empty table).
+      Phase 2, later: polls that change the town, with Twitch login - that is why the data is in
+      Supabase rather than in a file; a static host could not do it at all.
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.
 - Firefly icons / title art: made by him in Adobe.

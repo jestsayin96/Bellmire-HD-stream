@@ -1,0 +1,470 @@
+[
+  {
+    "payload": {
+      "commands": {
+        "commands": {
+          "armoury": {
+            "aliases": [
+              "armory"
+            ],
+            "args": "",
+            "cost": "50 / 150 / 400 / 1000 gold by tier",
+            "example": "!armoury",
+            "needs_hero": true,
+            "short": "Next armour tier: leather, chainmail, plate, warded plate.",
+            "what": "Buy the next armour tier: leather, chainmail, plate, warded plate. It shows: boots, pauldrons, a helm. Scarwoven mail is only found below."
+          },
+          "brew": {
+            "aliases": [],
+            "args": "[potion] [n]",
+            "cost": "Mending 35; others 40-480 gold",
+            "example": "!brew quickwater 2",
+            "needs_hero": true,
+            "short": "Brews at the apothecary; no name buys Mending.",
+            "what": "Buy brews at the apothecary. No name buys Draughts of Mending. Names: mending, greater, superior, supreme, antidote, emberward, hearthwarm, quickwater (haste), ogre (strength), shadow (unseen), bravecup (heroism), owl (darkvision). Heroes drink them below when they need to."
+          },
+          "deadliest": {
+            "aliases": [],
+            "args": "",
+            "cost": "free",
+            "example": "!deadliest",
+            "needs_hero": false,
+            "what": "Who has killed the most."
+          },
+          "deepest": {
+            "aliases": [],
+            "args": "",
+            "cost": "free",
+            "example": "!deepest",
+            "needs_hero": false,
+            "what": "Who has been furthest down."
+          },
+          "delve": {
+            "aliases": [],
+            "args": "",
+            "cost": "free (bring oil)",
+            "example": "!delve",
+            "needs_hero": true,
+            "what": "Walk to the scar and go down with the next party. Everyone carries their own oil; out of oil, the dark wins."
+          },
+          "dye": {
+            "aliases": [],
+            "args": "<colour>",
+            "cost": "25 gold",
+            "example": "!dye teal",
+            "needs_hero": true,
+            "what": "Dye your armour and cloak: black, white, red, blue, green, gold, purple, teal, brown, grey."
+          },
+          "enlist": {
+            "aliases": [],
+            "args": "[class] [people]",
+            "cost": "free",
+            "example": "!enlist knight dwarf",
+            "needs_hero": false,
+            "short": "Raise your hero: a calling and a people, either order (see !help in docs/COMMANDS.md).",
+            "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks."
+          },
+          "fish": {
+            "aliases": [],
+            "args": "",
+            "cost": "free",
+            "example": "!fish",
+            "needs_hero": true,
+            "what": "Walk to a dock and fish: junk to rare catches."
+          },
+          "forge": {
+            "aliases": [],
+            "args": "[kind | list]",
+            "cost": "60 / 160 / 420 / 1100 gold by tier (rework at the top: a quarter)",
+            "example": "!forge spear",
+            "needs_hero": true,
+            "short": "Next weapon tier at the smithy, in a kind of your calling (!forge list).",
+            "what": "Buy the next weapon tier at the smithy, in your calling's kinds: sword, greatsword, dagger, spear / axe, mace / staff, wand / crossbow, bow / quarterstaff, wraps. !forge list shows yours and the next price. The best tiers need Bellmire to grow; scarforged steel is only found below."
+          },
+          "guild": {
+            "aliases": [
+              "ranks"
+            ],
+            "args": "",
+            "cost": "free",
+            "example": "!guild",
+            "needs_hero": false,
+            "what": "The Guild Roll: who stands highest."
+          },
+          "help": {
+            "aliases": [
+              "commands"
+            ],
+            "args": "[command]",
+            "cost": "free",
+            "example": "!help forge",
+            "needs_hero": false,
+            "what": "The command list; !help <command> for one in detail."
+          },
+          "hero": {
+            "aliases": [
+              "stats",
+              "sheet"
+            ],
+            "args": "",
+            "cost": "free",
+            "example": "!hero",
+            "needs_hero": true,
+            "short": "Your hero's sheet.",
+            "what": "Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record."
+          },
+          "inventory": {
+            "aliases": [
+              "inv",
+              "bag",
+              "items"
+            ],
+            "args": "",
+            "cost": "free",
+            "example": "!inventory",
+            "needs_hero": true,
+            "what": "What your hero carries: title, weapon, armour, accessories, dye, brews, oil, gold, and the best fish caught."
+          },
+          "look": {
+            "aliases": [
+              "spotlight",
+              "watch"
+            ],
+            "args": "",
+            "cost": "free",
+            "example": "!look",
+            "needs_hero": true,
+            "short": "A 10 s spotlight pane on your hero, when the channel-points lane is free.",
+            "what": "Ask for a look at your hero: a 10-second pane in the channel-points lane (teal), only when nobody has redeemed it or is waiting. Cheers, subs and redeems get their own longer panes."
+          },
+          "memorial": {
+            "aliases": [],
+            "args": "",
+            "cost": "free",
+            "example": "!memorial",
+            "needs_hero": false,
+            "what": "The fallen, newest first."
+          },
+          "oil": {
+            "aliases": [
+              "lamp",
+              "torch"
+            ],
+            "args": "[n]",
+            "cost": "12 gold a flask",
+            "example": "!oil 3",
+            "needs_hero": true,
+            "what": "Buy lamp oil: one flask lights a floor for two delvers."
+          },
+          "patrons": {
+            "aliases": [
+              "benefactors"
+            ],
+            "args": "",
+            "cost": "free",
+            "example": "!patrons",
+            "needs_hero": false,
+            "what": "Those who have kept the valley going."
+          },
+          "reroll": {
+            "aliases": [],
+            "args": "",
+            "cost": "free when dead; 120 gold alive",
+            "example": "!reroll",
+            "needs_hero": true,
+            "short": "Dead: a new hero. Alive: throw your scores again.",
+            "what": "Dead: raise a new hero. Alive: throw your ability scores again (a worse throw keeps the old ones)."
+          },
+          "respec": {
+            "aliases": [],
+            "args": "<class>",
+            "cost": "200 gold",
+            "example": "!respec cleric",
+            "needs_hero": true,
+            "what": "Take up another calling, keeping your hero."
+          },
+          "richest": {
+            "aliases": [],
+            "args": "",
+            "cost": "free",
+            "example": "!richest",
+            "needs_hero": false,
+            "what": "Who carries the most gold."
+          },
+          "wear": {
+            "aliases": [],
+            "args": "<item> | off <slot>",
+            "cost": "30-420 gold, once",
+            "example": "!wear corgi",
+            "needs_hero": true,
+            "short": "Buy and wear an accessory or a cosmetic (a hat, a banner, a pet, a title).",
+            "what": "Buy and wear an accessory (rings, amulets, cloaks, boots, gloves - small bonuses) or a cosmetic (hats, banners, a pet, a title). Owned things are worn again for nothing. !wear off ring takes one off."
+          }
+        },
+        "order": [
+          "enlist",
+          "hero",
+          "inventory",
+          "delve",
+          "fish",
+          "forge",
+          "armoury",
+          "brew",
+          "oil",
+          "wear",
+          "dye",
+          "reroll",
+          "respec",
+          "guild",
+          "memorial",
+          "deepest",
+          "deadliest",
+          "richest",
+          "patrons",
+          "look",
+          "help"
+        ]
+      },
+      "fallen": [
+        {
+          "class": "barbarian",
+          "day": 0.0,
+          "deepest": 0.0,
+          "epitaph": "",
+          "killed_by": "skeleton warrior",
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE"
+        },
+        {
+          "class": "ranger",
+          "day": 0.0,
+          "deepest": 0.0,
+          "epitaph": "",
+          "killed_by": "skeleton rogue",
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE"
+        },
+        {
+          "class": "warden",
+          "day": 0.0,
+          "deepest": 0.0,
+          "epitaph": "",
+          "killed_by": "skeleton warrior",
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE"
+        },
+        {
+          "class": "ranger",
+          "day": 0.0,
+          "deepest": 0.0,
+          "epitaph": "",
+          "killed_by": "skeleton rogue",
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE"
+        },
+        {
+          "class": "ranger",
+          "day": 0.0,
+          "deepest": 0.0,
+          "epitaph": "",
+          "killed_by": "a bandit",
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE"
+        },
+        {
+          "class": "ranger",
+          "day": 0.0,
+          "deepest": 1.0,
+          "epitaph": "",
+          "killed_by": "skeleton rogue",
+          "kills": 3.0,
+          "level": 1.0,
+          "name": "MrE"
+        }
+      ],
+      "game": "Bellmire HD",
+      "generated_at": "2026-11-12T07:13:54Z",
+      "guild_roll": [
+        {
+          "alive": true,
+          "deepest": 1.0,
+          "gold": 63.0,
+          "kills": 3.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Novice",
+          "standing": 12.0
+        },
+        {
+          "alive": false,
+          "deepest": 1.0,
+          "gold": 0.0,
+          "kills": 3.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Novice",
+          "standing": 12.0
+        },
+        {
+          "alive": true,
+          "deepest": 0.0,
+          "gold": 40.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "JestSayin96",
+          "rank": "Unproven",
+          "standing": 0.0
+        },
+        {
+          "alive": false,
+          "deepest": 0.0,
+          "gold": 0.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Unproven",
+          "standing": 0.0
+        },
+        {
+          "alive": false,
+          "deepest": 0.0,
+          "gold": 0.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Unproven",
+          "standing": 0.0
+        },
+        {
+          "alive": false,
+          "deepest": 0.0,
+          "gold": 0.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Unproven",
+          "standing": 0.0
+        },
+        {
+          "alive": false,
+          "deepest": 0.0,
+          "gold": 0.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Unproven",
+          "standing": 0.0
+        },
+        {
+          "alive": false,
+          "deepest": 0.0,
+          "gold": 0.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "MrE",
+          "rank": "Unproven",
+          "standing": 0.0
+        }
+      ],
+      "heroes": [
+        {
+          "ac": 13.0,
+          "armour": {
+            "name": "rags",
+            "tier": 0.0
+          },
+          "brews": "1 Mending",
+          "class": "ranger",
+          "deepest": 1.0,
+          "delves": 0.0,
+          "gold": 63.0,
+          "hp": 60.0,
+          "kills": 3.0,
+          "level": 1.0,
+          "name": "MrE",
+          "oil": 0.0,
+          "potions": 1.0,
+          "prof": 2.0,
+          "rank": "Novice",
+          "saves": "DEX +5 STR +4",
+          "species": "human",
+          "standing": 12.0,
+          "stats": {
+            "cha": 8.0,
+            "con": 12.0,
+            "dex": 16.0,
+            "int": 9.0,
+            "str": 14.0,
+            "wis": 6.0
+          },
+          "title": "",
+          "to_hit": 5.0,
+          "weapon": {
+            "dice": "1d4",
+            "name": "bare hands",
+            "tier": 0.0
+          },
+          "worn": "",
+          "xp": 29.0
+        },
+        {
+          "ac": 14.0,
+          "armour": {
+            "name": "rags",
+            "tier": 0.0
+          },
+          "brews": "1 Mending",
+          "class": "knight",
+          "deepest": 0.0,
+          "delves": 0.0,
+          "gold": 40.0,
+          "hp": 77.0,
+          "kills": 0.0,
+          "level": 1.0,
+          "name": "JestSayin96",
+          "oil": 2.0,
+          "potions": 1.0,
+          "prof": 2.0,
+          "rank": "Unproven",
+          "saves": "STR +4 CON +3",
+          "species": "human",
+          "standing": 0.0,
+          "stats": {
+            "cha": 12.0,
+            "con": 13.0,
+            "dex": 15.0,
+            "int": 15.0,
+            "str": 15.0,
+            "wis": 10.0
+          },
+          "title": "",
+          "to_hit": 4.0,
+          "weapon": {
+            "dice": "1d4",
+            "name": "bare hands",
+            "tier": 0.0
+          },
+          "worn": "",
+          "xp": 0.0
+        }
+      ],
+      "town": {
+        "day": 1.0,
+        "level": 3.0,
+        "name": "a market town",
+        "next_level_at": 190.0,
+        "renown": 0.0,
+        "score": 153.0,
+        "souls": 51.0,
+        "treasury": 415.0
+      },
+      "v": 1.0
+    },
+    "updated_at": "2026-11-12T07:13:54+00:00"
+  }
+]

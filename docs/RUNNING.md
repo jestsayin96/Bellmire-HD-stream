@@ -53,6 +53,13 @@ follows and channel points (EventSub) and refreshes both tokens by itself. Conso
 Bits/subs/points ask for a spotlight on that viewer's hero (the panes are L17); follows get a Chronicle line.
 Channel points only count for Bellmire's own reward "Spotlight my hero" - the broadcaster token must include
 `channel:manage:redemptions` for the game to create it. Turn phase 2 off with `eventsub=false` in twitch.cfg.
+**Viewer hub snapshot (W1a, scripts/snapshot_pub.gd):** every 60 s the game overwrites ONE row (id 1) of the
+Supabase table `public.snapshot` with the town, guild roll, the fallen, every living hero's sheet/gear and the
+command list. It needs `user://supabase.json` = `{"url": "https://<project>.supabase.co", "service_key": "<service role key>"}`
+(Supabase dashboard > Project Settings > API). That key bypasses row-level security: keep it in user:// only, never
+in the repo. No file = publish off (console `SNAPSHOT off`). Console lines start `SNAPSHOT`; a 403 "secret API key
+in browser" means the User-Agent is browser-like (it is set to BellmireHD/1.0). The request runs on its own thread;
+a frame never waits on it. Tools (`--script`) never start it; `tools/_w1a_test.gd` / `_w1a_town.gd` test it.
 
 | Command | What happens |
 |---|---|

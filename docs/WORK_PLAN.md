@@ -85,6 +85,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'
       camp, a river ford and mill, old ruins (lore), roads linking them, the scar road; travellers and carts on
       the roads; the director's tour includes them. Navmesh + LOD keep FPS.
+- [ ] D13. Director camera clips into buildings (supervisor, Nov 11): in renders/cycles/20261112_d6b/
+      square_f460_east.png a house roof fills the bottom-left third of the frame - the auto-director
+      camera sits behind/inside geometry. Keep a minimum clearance from buildings, or fade/cull geometry
+      between the camera and its subject, so the stream view is never blocked. Check every director shot
+      type (town wide, hero follow, fight, raid) and render proof of each.
+- [ ] D14. Stuck walkers against props (supervisor, Nov 11): _townwalk reports stuck_on_route=4 steady
+      (traders Petra Bramble, Maela of the Ford, farmer Maela Coalfoot) - pinned on a prop a few cm off
+      their route, navoff 0.17-0.66, push (0,0,0). Nobody is inside a building (in_solid 0 of 8394), so
+      this is cosmetic, but they stand still all stream. Give the push-out rule a prop case. Fold into D7
+      if it is the same code path.
 - [ ] D8. Soak 30 min with everything on; fix what breaks.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*

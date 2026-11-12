@@ -178,6 +178,30 @@ func _name_label() -> Label3D:
 
 static var _laid_frame := -1
 
+## L18: a viewer's name glows for GLOW_S seconds after any chat command - brighter,
+## a teal halo pulsing and fading out, a touch bigger. Returns the size factor.
+const GLOW_S := 5.0
+static func glow(lb: Label3D, ago: float) -> float:
+    if not lb.has_meta("om0"):
+        lb.set_meta("om0", lb.outline_modulate)
+        lb.set_meta("mod0", lb.modulate)
+        lb.set_meta("os0", lb.outline_size)
+    if ago >= GLOW_S:
+        if lb.has_meta("glowing"):
+            lb.remove_meta("glowing")
+            lb.outline_modulate = lb.get_meta("om0")
+            lb.modulate = lb.get_meta("mod0")
+            lb.outline_size = int(lb.get_meta("os0"))
+        return 1.0
+    lb.set_meta("glowing", true)
+    # full for the first 3 s, then fading out over the last 2
+    var fade := clampf((GLOW_S - ago) / 2.0, 0.0, 1.0)
+    var pulse := 0.5 + 0.5 * sin(ago * 7.0)
+    lb.modulate = (lb.get_meta("mod0") as Color).lerp(Color(1.0, 1.0, 0.92), 0.85 * fade)
+    lb.outline_modulate = (lb.get_meta("om0") as Color).lerp(Color(0.25, 0.95, 0.90, 1.0), fade * (0.7 + 0.3 * pulse))
+    lb.outline_size = int(lb.get_meta("os0")) + int(round(14.0 * fade * (0.6 + 0.4 * pulse)))
+    return 1.0 + 0.2 * fade
+
 ## HD: every hero's name laid out ON SCREEN in one pass: lowest on screen
 ## first, each lifted just enough to clear the names already placed. Done per
 ## frame for all heroes together so neighbours never disagree.
@@ -186,6 +210,7 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
     if fr == _laid_frame or cam == null:
         return
     _laid_frame = fr
+    var quarter := Spotlight.mode == "grid"
     var items: Array = []
     for o in tree.get_nodes_in_group("viewer_heroes"):
         var hb := o as HeroBody
@@ -195,9 +220,6 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
         if lb == null or not lb.visible:
             continue
         var anchor := hb.global_position + Vector3(0, lb.position.y, 0)
-        if cam.is_position_behind(anchor):
-            lb.offset.y = 0.0
-            continue
         # HD: up close a name grew to fill the screen; shrink it with nearness
         # (down to 40% when the camera is on top of it). L15 (laptop, stream
         # readability): and grow it with distance past 16 m, up to 3x, so a
@@ -205,7 +227,17 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
         if not lb.has_meta("px0"):
             lb.set_meta("px0", lb.pixel_size)
         var cd := cam.global_position.distance_to(anchor)
-        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.4, 3.0)
+        # L21: the heroes' names are laid out on the DIRECTOR's screen - the director pane copies
+        # this camera, so the layout holds there; the lane panes never draw these tags (they
+        # show their own hero's tag, HudDock / Spotlight). In the 2x2 the director pane is a
+        # quarter of the screen: names half again bigger, and a name with no room is hidden.
+        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.4, 3.0) * (1.5 if quarter else 1.0)
+        if not hb.npc:
+            lb.pixel_size *= HeroBody.glow(lb, ChatCmd.since_cmd(hb.user_id))
+        lb.transparency = 0.0
+        if cam.is_position_behind(anchor):
+            lb.offset.y = 0.0
+            continue
         var sp := cam.unproject_position(anchor)
         var line_w := float(lb.font_size) * lb.pixel_size * 1.15
         var up := cam.unproject_position(anchor + cam.global_transform.basis.y * line_w)
@@ -235,6 +267,9 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
                 break
             lift += hit + lh * 0.12
             tries += 1
-        placed.append([sp.x, hw, sp.y - lift - bh, sp.y - lift])
         var lbl: Label3D = it[4]
+        if quarter and (tries >= 40 or lift > bh * 1.6):
+            lbl.transparency = 1.0          # no room in a quarter pane: hidden, not stacked into a tower
+            continue
+        placed.append([sp.x, hw, sp.y - lift - bh, sp.y - lift])
         lbl.offset.y = lift / lh * float(lbl.font_size) * 1.15

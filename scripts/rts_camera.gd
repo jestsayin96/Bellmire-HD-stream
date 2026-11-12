@@ -47,7 +47,7 @@ func setup(t: Node3D) -> void:
 	_layer.layer = 30
 	add_child(_layer)
 	_help = Label.new()
-	_help.text = "WASD pan · wheel zoom · right-drag rotate · Q/E turn · R/T tilt\nclick: select · F follow (your hero if none selected) · Esc clear · N names\n1 square · 2 scar · 3 gate · 4 tavern · 5 smithy · 6 armourer · 7 apothecary\nTab: jump into a delve · Space pause · [ ] speed · Enter chat · H hide"
+	_help.text = "WASD pan · wheel zoom · right-drag rotate · Q/E turn · R/T tilt\nclick: select · F follow (your hero if none selected) · Esc clear · N names\n1 square · 2 scar · 3 gate · 4 tavern · 5 smithy · 6 armourer · 7 apothecary\nTab: jump into a delve · Space pause · [ ] speed · Enter chat · H hide\nF9 all titles · F10 hide UI + spotlight labels · F11 UI scale"
 	_help.add_theme_font_size_override("font_size", UiTheme.px(19))
 	_help.add_theme_color_override("font_color", Color(1, 0.95, 0.85))
 	_help.add_theme_color_override("font_outline_color", Color(0, 0, 0))
@@ -94,6 +94,77 @@ func setup(t: Node3D) -> void:
 	director = AutoDirector.new()
 	add_child(director)
 	director.setup(self, t)
+	# L17: the spotlight split-screen (bits / subs / points lanes); chat's !look goes through it
+	spotlight = Spotlight.of(t)
+	# L21: the world's text on render layers, so each pane draws only what is its own
+	HudDock.install(get_tree(), t)
+	# L21 default-deny: every piece of the eye's HUD has a home while the panes are up
+	HudDock.mark(_help, "none")
+	HudDock.mark(_speed_lb, "chrome")
+	HudDock.mark(_chat, "chrome")
+	HudDock.mark(party_frames, "none")
+	HudDock.mark(boss_bar, "none")
+	cam.cull_mask = HudDock.ALL & ~HudDock.LANES_MASK
+
+## ---- L21: the spotlight panes up -> the eye's own HUD leaves the seams. The clock chip
+## (or, while Mr. E types, the chat box) holds the right end of the chrome bar, the unit
+## frame docks bottom-right INSIDE the director pane, the key help steps aside. Back to
+## full screen: today's places again.
+var _hud_split := false
+func _dock_hud() -> void:
+	var sp := HudDock.split(town)
+	if sp != _hud_split:
+		_hud_split = sp
+		if not sp:
+			HudDock.reserve_right = 0.0
+			_place_full_hud()
+			restyle()                      # the unit frame is built again in its full-screen place
+	if not sp:
+		HudDock.guard(town)          # shows again anything it hid while split
+		return
+	_help.visible = false
+	var bar := HudDock.chrome(town)
+	var m := float(UiTheme.px(6))
+	var right := 0.0
+	if _chat.visible:
+		_speed_lb.visible = false
+		_chat.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		var cw := float(UiTheme.px(600))
+		var ch := minf(float(UiTheme.px(52)), bar.size.y - 2.0 * m)
+		_chat.size = Vector2(cw, ch)
+		_chat.position = Vector2(bar.end.x - m - cw, bar.position.y + (bar.size.y - ch) * 0.5)
+		right = cw + m
+	else:
+		_speed_lb.visible = true
+		_speed_lb.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		var s := _speed_lb.get_combined_minimum_size()
+		_speed_lb.size = s
+		_speed_lb.position = Vector2(bar.end.x - m - s.x, bar.position.y + (bar.size.y - s.y) * 0.5)
+		right = s.x + m
+	HudDock.reserve_right = right
+	if _frame and _frame.visible:
+		HudDock.mark(_frame, "director")
+		HudDock.put(_frame, HudDock.pane(town, "director"), HudDock.pane_k(town, "director"), "br")
+	HudDock.guard(town)              # default-deny: anything with no home hides while split
+
+func _place_full_hud() -> void:
+	_speed_lb.visible = true
+	_speed_lb.anchor_left = 1.0
+	_speed_lb.anchor_right = 1.0
+	_speed_lb.anchor_top = 0.0
+	_speed_lb.anchor_bottom = 0.0
+	_speed_lb.offset_left = -260
+	_speed_lb.offset_right = 0
+	_speed_lb.offset_top = 12
+	_speed_lb.offset_bottom = 12
+	_chat.anchor_left = 1.0
+	_chat.anchor_right = 1.0
+	_chat.anchor_top = 1.0
+	_chat.anchor_bottom = 1.0
+	_chat.offset_left = -UiTheme.px(760)
+	_chat.offset_right = -UiTheme.px(18)
+	_chat.offset_top = -UiTheme.px(70)
+	_chat.offset_bottom = -UiTheme.px(18)
 
 func _ground(p: Vector3) -> float:
 	if p.y < Delve.DELVE_Y * 0.5:
@@ -106,6 +177,7 @@ func _process(delta: float) -> void:
 	if cam == null:
 		return
 	var real := delta / maxf(Engine.time_scale, 0.001)    # camera moves in real time
+	_dock_hud()
 	_titles_tick(real)
 	_titles_follow()
 	if not _chat.visible:
@@ -128,12 +200,40 @@ func _process(delta: float) -> void:
 	_track(real)
 	focus.y = lerpf(focus.y, _ground(focus), clampf(real * 8.0, 0.0, 1.0))
 	var off := Vector3(sin(yaw) * cos(pitch), -sin(pitch), cos(yaw) * cos(pitch)) * dist
+	# L20: every shot keeps the lower frame clear - tilt up over a roof in the way
+	if pull_in:
+		_lift_t -= real
+		if _lift_t <= 0.0:
+			_lift_t = CLEAR_EVERY
+			var piv := focus + Vector3(0, 1.0, 0)
+			var mv := clear_shot(piv, focus + off, cam.fov, _aspect())
+			# don't glide THROUGH a roof to get there: where we are is clear and halfway is not -> stay
+			var cur := Vector2(_lift, _swing)
+			if cur.distance_to(mv) > 0.05:
+				var asp := _aspect()
+				if frame_clear(piv, shifted(piv, focus + off, cur), cam.fov, asp) \
+						and not frame_clear(piv, shifted(piv, focus + off, (cur + mv) * 0.5), cam.fov, asp):
+					mv = cur
+			_lift_want = mv.x
+			_swing_want = mv.y
+		_lift = lerpf(_lift, _lift_want, clampf(real * (8.0 if _lift_want > _lift else 1.2), 0.0, 1.0))
+		# a swing glides round (never snaps), and drifts home slowly once the view is clear
+		_swing = lerpf(_swing, _swing_want, clampf(real * (3.0 if absf(_swing_want) > absf(_swing) else 0.8), 0.0, 1.0))
+	else:
+		_lift = 0.0
+		_swing = 0.0
+	if _lift > 0.001 or absf(_swing) > 0.001:
+		var ep := maxf(pitch - _lift, deg_to_rad(-CLEAR_MAX_DEG))
+		var ey := yaw + _swing
+		off = Vector3(sin(ey) * cos(ep), -sin(ep), cos(ey) * cos(ep)) * dist
 	cam.global_position = focus + off
 	# never under the ground
 	var gy := _ground(cam.global_position) + 1.5
 	if cam.global_position.y < gy:
 		cam.global_position.y = gy
-	# a followed one: never inside a wall or a house - pull in along the line
+	# a followed one: never inside a wall or a house - pull in along the line to them. (L20: NOT for
+	# wide / tour shots - their pivot is a spot on the ground, and pulling in toward it parked the
+	# camera low in front of the nearest house; the tilt above keeps those clear instead.)
 	if _following and selected != null and pull_in:
 		_pull_in(real)
 	else:
@@ -284,6 +384,7 @@ var _f_body: Label
 var _frame_t := 0.0
 var quiet := false          # stream mode: no selection ring, no unit frame
 var director: AutoDirector
+var spotlight: Spotlight
 
 func _candidates() -> Array:
 	var out: Array = []
@@ -527,14 +628,26 @@ func _toggle_names() -> void:
 ## when the view clears it eases back out.
 const DUN_WALL_TOP := 4.6       # KayKit walls are one 4 m grid tall
 var pull_in := true
+const PULL_MIN := 6.0           # L20: the follow pull-in stops this far from the subject (town)
+const PULL_MIN_BELOW := 4.0     # and below
 var _pull_d := 1.0e9
 var _houses: Array = []         # [centre xz, ax, az, half extents, top y, radius]
 var _near: Array = []           # this frame's houses near the line
 var _cam_delve: Delve = null
 
+var _houses_key := ""
+
 func _house_rects() -> Array:
-	if not _houses.is_empty():
+	# L20: rebuilt when the town gains a house, a prop or a wall piece (a raid's rebuild)
+	var sr: Array = town.get("_solid_rects") if town.get("_solid_rects") != null else []
+	var ws: Array = town.get("_wall_solid") if town.get("_wall_solid") != null else []
+	var tw: Array = town.get("towers") if town.get("towers") != null else []
+	var key := "%d/%d/%d/%d" % [(town.get("plots") as Array).size(), sr.size(), ws.size(), tw.size()]
+	if not _houses.is_empty() and key == _houses_key:
 		return _houses
+	_houses_key = key
+	_houses = []
+	_more_solids(sr, ws, tw)
 	var hb: Dictionary = town.get("_house_box")
 	for plot in town.get("plots"):
 		var sh := String(plot.get("shape", "a"))
@@ -547,8 +660,32 @@ func _house_rects() -> Array:
 		var ax := Vector2(cos(yaw), -sin(yaw))
 		var az := Vector2(sin(yaw), cos(yaw))
 		var pp: Vector3 = plot["pos"]
-		_houses.append([Vector2(pp.x, pp.z) + ax * off.x + az * off.y, ax, az, he, pp.y + top, he.length()])
+		_houses.append([Vector2(pp.x, pp.z) + ax * off.x + az * off.y, ax, az, he, pp.y + top, he.length(), "house"])
 	return _houses
+
+## L20: the houses were the only solids the camera knew - a market stall's roof and a guard
+## tower filled director frames in the L20 renders. Same records the town's nav carves
+## (footprints only), with heights: towers 11 m + roof, the wall 5 m + merlons, a stall-size
+## prop 4.5 m (a canopy roof). Benches, barrels and anything under 0.9 m across cannot fill a frame - skipped.
+const TOWER_TOP := 15.5
+const WALL_TOP := 6.6
+const PROP_TOP := 4.5
+func _more_solids(sr: Array, ws: Array, tw: Array) -> void:
+	for t: Vector3 in tw:
+		var g := float(town.call("height_at", t.x, t.z))
+		_houses.append([Vector2(t.x, t.z), Vector2(1, 0), Vector2(0, 1), Vector2(4.2, 4.2), g + TOWER_TOP, 6.0, "tower"])
+	for w: Array in ws:
+		var wp: Vector3 = w[0]
+		var tg: Vector3 = w[1]
+		var g := float(town.call("height_at", wp.x, wp.z))
+		_houses.append([Vector2(wp.x, wp.z), Vector2(tg.x, tg.z), Vector2(-tg.z, tg.x), Vector2(2.0, 1.3), g + WALL_TOP, 2.4, "wall"])
+	for r: Array in sr:
+		var he: Vector2 = r[3]
+		if maxf(he.x, he.y) < 0.9:
+			continue
+		var c: Vector2 = r[0]
+		var g := float(town.call("height_at", c.x, c.y))
+		_houses.append([c, r[1], r[2], he, g + PROP_TOP, he.length(), "prop"])
 
 func _delve_at(p: Vector3) -> Delve:
 	var best: Delve = null
@@ -611,6 +748,12 @@ func _pull_in(real: float) -> void:
 		s0 += 0.2
 	if s0 >= L:
 		return
+	# L20: below, a hero with their back to a wall clipped it in the first metres of the line
+	# and the camera snapped in ~1.3 m from their head, into the wall's corner (_l20_test,
+	# 1 run in 3). The camera sits high above the walls there: a wall right by the hero is
+	# scenery - only what stands between, further out, pulls it in (the tilt sees that first).
+	if _cam_delve != null:
+		s0 = maxf(s0, 3.0)
 	var free_d := L
 	var s := s0 + 0.6
 	while s <= L:
@@ -618,12 +761,150 @@ func _pull_in(real: float) -> void:
 			free_d = maxf(s - 0.7, s0 + 0.3)
 			break
 		s += 0.4
+	# L20: never closer than this - a stall beside a hero (props are solids now) made the pull-in
+	# park the camera in their face (the L20 hero render). Nearer blockers are the tilt / swing's job.
+	free_d = maxf(free_d, minf(L, PULL_MIN_BELOW if _cam_delve != null else PULL_MIN))
 	if free_d < _pull_d:
 		_pull_d = free_d                                    # snap in
 	else:
 		_pull_d = minf(free_d, lerpf(_pull_d, free_d, clampf(real * 2.5, 0.0, 1.0)))   # ease out
 	if _pull_d < L:
 		cam.global_position = pivot + dir * _pull_d
+		# L20: below, pulled in over a wall's corner the camera could land inside the wall
+		# (1 frame in 455 in _l20_test) - lift it just over the wall top instead
+		if _cam_delve != null and _solid_at(cam.global_position):
+			cam.global_position.y = _cam_delve.dun.global_position.y + DUN_WALL_TOP + 0.6
+
+## ================================================= L20: clearance for EVERY shot
+## The pull-in above guards the one line from the subject to the camera. A roof beside
+## that line can still fill the bottom of the picture (the director's wide and tour
+## shots had no check at all). So: lines from the camera into the lower half of the
+## frame, toward the ground; anything solid in their NEAR stretch (a roof or a wall by
+## the camera - a house beside the subject is scenery, not a blocker) means tilt up.
+## clear_lift() finds the least extra tilt (keeping the distance) that clears them all.
+## The spotlight panes (spotlight.gd) call the same function for their own cameras.
+const CLEAR_EVERY := 0.2                     # s between searches
+const CLEAR_MAX_DEG := 80.0                  # never steeper than this
+## what a cameraman would try, cheapest first: tilt up a little; swing round the subject a
+## little; both; swing further; only then look steeply down. [extra tilt, swing] in degrees
+const CLEAR_CANDS := [Vector2(0, 0), Vector2(6, 0), Vector2(12, 0), Vector2(18, 0),
+	Vector2(0, 35), Vector2(0, -35), Vector2(12, 35), Vector2(12, -35), Vector2(24, 0),
+	Vector2(0, 70), Vector2(0, -70), Vector2(18, 70), Vector2(18, -70),
+	Vector2(31, 0), Vector2(24, 35), Vector2(24, -35), Vector2(38, 0), Vector2(46, 0)]
+const CLEAR_PTS := [Vector2(0.10, 0.94), Vector2(0.5, 0.96), Vector2(0.90, 0.94),
+	Vector2(0.15, 0.72), Vector2(0.85, 0.72), Vector2(0.5, 0.62)]      # where in the frame (u, v)
+const CLEAR_NEAR := 0.8                      # how far along each lower-frame line (to the ground, or the subject) counts
+const CLEAR_REACH := 40.0                    # past this from the camera nothing fills the frame
+var _lift := 0.0                             # radians of extra tilt now
+var _lift_want := 0.0
+var _swing := 0.0                            # radians round the subject now
+var _swing_want := 0.0
+var _lift_t := 0.0
+
+func _aspect() -> float:
+	var s := get_viewport().get_visible_rect().size if get_viewport() else Vector2(16, 9)
+	return s.x / maxf(1.0, s.y)
+
+## the least move (x: extra tilt, y: swing round the subject, radians) that clears the frame
+## of a camera at `pos` looking at `pivot`; nothing clears -> the steepest tilt tried
+func clear_shot(pivot: Vector3, pos: Vector3, fov_deg: float, aspect: float) -> Vector2:
+	if town == null:
+		return Vector2.ZERO
+	var L := (pos - pivot).length()
+	if L < 2.0 or Vector2(pos.x - pivot.x, pos.z - pivot.z).length() < 0.05:
+		return Vector2.ZERO
+	_clear_near(pivot, L)
+	var last := Vector2.ZERO
+	for c: Vector2 in CLEAR_CANDS:
+		var mv := Vector2(deg_to_rad(c.x), deg_to_rad(c.y))
+		if frame_clear(pivot, shifted(pivot, pos, mv), fov_deg, aspect):
+			return mv
+		if c.y == 0.0:
+			last = mv
+	return last
+
+## tilt only (kept for callers that cannot swing)
+func clear_lift(pivot: Vector3, pos: Vector3, fov_deg: float, aspect: float) -> float:
+	return clear_shot(pivot, pos, fov_deg, aspect).x
+
+## the houses (town) or the delve (below) that a camera this far from pivot could meet
+func _clear_near(pivot: Vector3, L: float) -> void:
+	_near.clear()
+	_cam_delve = null
+	if pivot.y < Delve.DELVE_Y * 0.5:
+		_cam_delve = _delve_at(pivot)
+		return
+	var a := Vector2(pivot.x, pivot.z)
+	for r in _house_rects():
+		if (r[0] as Vector2).distance_to(a) < L + float(r[5]) + 4.0:
+			_near.append(r)
+
+## is the near part of the lower frame free of roofs and walls? (call _clear_near first)
+func frame_clear(pivot: Vector3, p: Vector3, fov_deg: float, aspect: float) -> bool:
+	if _near.is_empty() and _cam_delve == null:
+		return true
+	if _solid_at(p):
+		return false
+	var fwd := (pivot - p).normalized()
+	if fwd.cross(Vector3.UP).length() < 0.01:
+		return true
+	var subj := p.distance_to(pivot)
+	# only the near half of every line counts: test only what stands within that reach of the
+	# camera (props + walls + towers are hundreds - a valley shot must not test them all)
+	var keep := _near
+	var reach_n := subj * CLEAR_NEAR + 1.5
+	var pc := Vector2(p.x, p.z)
+	_near = keep.filter(func(r): return (r[0] as Vector2).distance_to(pc) < reach_n + float(r[5]))
+	var ok := _frame_lines(pivot, p, fwd, subj, fov_deg, aspect)
+	_near = keep
+	return ok
+
+func _frame_lines(pivot: Vector3, p: Vector3, fwd: Vector3, subj: float, fov_deg: float, aspect: float) -> bool:
+	if _near.is_empty() and _cam_delve == null:
+		return true
+	var right := fwd.cross(Vector3.UP).normalized()
+	var up := right.cross(fwd)
+	var th := tan(deg_to_rad(fov_deg) * 0.5)
+	var gy := pivot.y - 1.0
+	# the line to the subject itself (short of the last 2.5 m, where a hero may stand in a doorway):
+	# a wall or roof across it is a reason to tilt over it before the follow's pull-in has to step in
+	var s0 := 1.0
+	var lim0 := minf(subj - 2.5, CLEAR_REACH)
+	while s0 < lim0:
+		if _solid_at(p + fwd * s0):
+			return false
+		s0 += 0.8 + s0 * 0.03
+	# below, the maze's walls in the lower frame ARE the floor - only the line to the hero counts
+	if _cam_delve != null:
+		return true
+	for uv: Vector2 in CLEAR_PTS:
+		var d := (fwd + right * (2.0 * uv.x - 1.0) * th * aspect + up * (1.0 - 2.0 * uv.y) * th).normalized()
+		var reach := CLEAR_REACH / CLEAR_NEAR
+		if d.y < -0.01:
+			reach = minf(reach, (gy - p.y) / d.y)
+		var s := 1.0
+		var lim := minf(reach, subj) * CLEAR_NEAR
+		while s < lim:
+			if _solid_at(p + d * s):
+				return false
+			s += 0.8 + s * 0.03                       # finer close to the camera, where size counts
+	return true
+
+## a camera at `pos` on `pivot`, moved by mv (x: tilt up, y: swing round) radians, same distance
+static func shifted(pivot: Vector3, pos: Vector3, mv: Vector2) -> Vector3:
+	if absf(mv.x) <= 0.001 and absf(mv.y) <= 0.001:
+		return pos
+	var off := pos - pivot
+	var h := Vector2(off.x, off.z)
+	if h.length() < 0.05:
+		return pos
+	var e := minf(atan2(off.y, h.length()) + mv.x, deg_to_rad(CLEAR_MAX_DEG))
+	var az := atan2(h.x, h.y) + mv.y
+	return pivot + Vector3(sin(az) * cos(e), sin(e), cos(az) * cos(e)) * off.length()
+
+## tilt only (kept for older callers)
+static func lifted(pivot: Vector3, pos: Vector3, lift: float) -> Vector3:
+	return shifted(pivot, pos, Vector2(lift, 0.0))
 
 ## camera_solid(): is the camera itself inside something solid right now (tests)
 func camera_solid() -> bool:

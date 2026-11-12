@@ -24,11 +24,15 @@ func setup(t: Node3D) -> void:
 
 ## L15: top-left, under the key help (the Chronicle owns the bottom-left)
 func _place() -> void:
+	HudDock.unput(self)
 	anchor_left = 0.0
+	anchor_right = 0.0
 	anchor_top = 0.0
 	anchor_bottom = 0.0
 	offset_left = UiTheme.px(18)
 	offset_top = UiTheme.px(150)
+	offset_right = offset_left + UiTheme.px(W)
+	offset_bottom = offset_top
 	grow_vertical = Control.GROW_DIRECTION_END
 	custom_minimum_size = Vector2(UiTheme.px(W), 0)
 
@@ -39,9 +43,38 @@ func restyle() -> void:
 
 func _process(delta: float) -> void:
 	_t -= delta / maxf(Engine.time_scale, 0.001)     # real time, like the camera
-	if _t <= 0.0:
+	var sp := HudDock.split(town)
+	if _t <= 0.0 or sp != _split:
 		_t = 0.4
 		refresh()
+	if sp:
+		_dock()
+
+## ---- L21: with the spotlight panes up, each party's block docks at the bottom-left INSIDE
+## the pane following that party (the director when it is down there, else a lane on one of
+## them), scaled to the pane. A party no pane shows is not drawn. A second pane's parties go
+## in a second column (_extra), so nothing ever spans a seam.
+var _split := false
+var _groups := {}          # pane -> [Delve]
+var _extra := {}           # pane -> VBoxContainer (the columns after the first)
+var _first := ""           # the pane this column itself sits in
+
+func _dock() -> void:
+	HudDock.mark(self, _first if _first != "" else "none")
+	for k in _extra:
+		HudDock.mark(_extra[k], k)
+	if _first != "":
+		HudDock.put(self, HudDock.pane(town, _first), HudDock.pane_k(town, _first), "bl")
+	for k in _extra:
+		var col: VBoxContainer = _extra[k]
+		if is_instance_valid(col):
+			HudDock.put(col, HudDock.pane(town, k), HudDock.pane_k(town, k), "bl")
+
+func _clear_extra() -> void:
+	for k in _extra:
+		if is_instance_valid(_extra[k]):
+			(_extra[k] as Node).queue_free()
+	_extra.clear()
 
 func delves() -> Array:
 	var out: Array = []
@@ -57,6 +90,38 @@ func refresh() -> void:
 		remove_child(c)
 		c.queue_free()
 	var ds := delves()
+	var sp := HudDock.split(town)
+	if sp != _split:
+		_split = sp
+		if not sp:
+			_place()
+	_clear_extra()
+	_first = ""
+	if sp:
+		_groups.clear()
+		for d: Delve in ds:
+			var k := HudDock.pane_for_delve(town, d)
+			if k != "":
+				if not _groups.has(k):
+					_groups[k] = []
+				(_groups[k] as Array).append(d)
+		for k in _groups:
+			if _first == "":
+				_first = k
+				for d: Delve in _groups[k]:
+					add_child(_block(d))
+			else:
+				var col := VBoxContainer.new()
+				col.add_theme_constant_override("separation", UiTheme.px(8))
+				col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				col.custom_minimum_size = Vector2(UiTheme.px(W), 0)
+				get_parent().add_child(col)
+				for d: Delve in _groups[k]:
+					col.add_child(_block(d))
+				_extra[k] = col
+		visible = _first != ""
+		_dock()
+		return
 	visible = not ds.is_empty()
 	for d: Delve in ds:
 		add_child(_block(d))
@@ -73,6 +138,8 @@ func _block(d: Delve) -> PanelContainer:
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	p.add_child(v)
 	# header: which floor, and the oil they carry (it is their light)
+	p.add_to_group("hud_party")          # L21: the test finds each party block by group + its delve
+	p.set_meta("delve", d)
 	var who := "The town's band" if d.npc_party else "Delvers"
 	v.add_child(UiTheme.title("%s · floor %d" % [who, d.floor_no], 24))
 	var oil_col := UiTheme.INK_RED if d.dark or d.oil < 1.0 else (Color(0.62, 0.38, 0.05) if d.oil <= float(d._alive().size()) else UiTheme.INK_SOFT)

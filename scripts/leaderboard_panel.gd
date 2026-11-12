@@ -40,6 +40,7 @@ func _build() -> void:
     _panel.offset_top = UiTheme.px(290)      # L15: below the boss bar's band at every scale
     _panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
     _panel.custom_minimum_size = Vector2(UiTheme.px(500), 0)
+    HudDock.mark(_panel, "none")        # L21: the Guild Roll steps aside while the spotlight panes are up
     add_child(_panel)
     _list = VBoxContainer.new()
     _list.add_theme_constant_override("separation", 1)
@@ -52,6 +53,9 @@ func _unhandled_input(ev: InputEvent) -> void:
         get_viewport().set_input_as_handled()
 
 func _process(delta: float) -> void:
+    # L17: the Guild Roll steps aside while the spotlight panes carry the view (it sat on the bits pane)
+    if _panel:
+        _panel.visible = roster != null and not (get_viewport() != null and get_viewport().disable_3d)
     _t -= delta
     if _t <= 0.0:
         _t = 5.0
@@ -67,6 +71,11 @@ func _line(text: String, col: Color, size := 15) -> void:
     _list.add_child(lb)
 
 func _refresh() -> void:
+    # L17 review: the town hands setup() its roster before the roster exists - pick it up late
+    if roster == null and get_parent() != null and get_parent().get("roster") is Roster:
+        roster = get_parent().get("roster")
+    if _panel:
+        _panel.visible = roster != null      # never a bare parchment strip
     if _list == null or roster == null:
         return
     for c in _list.get_children():

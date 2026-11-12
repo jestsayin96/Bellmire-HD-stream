@@ -22,7 +22,7 @@ func _initialize() -> void:
 			verbs.append(w.replace("\"", ""))
 	var missing: Array = []
 	for v in verbs:
-		if not cs.has(ChatCmd.canonical(v)):
+		if not cs.has(ChatCmd.canonical(v)) and not v.begins_with("test"):   # L17: !test* are local-only, never documented
 			missing.append(v)
 	_ok(verbs.size() >= 20 and missing.is_empty(), "every verb ChatCmd answers is in the data (%d verbs; missing %s)" % [verbs.size(), missing])
 	var unanswered: Array = []
@@ -35,7 +35,7 @@ func _initialize() -> void:
 	var cc := ChatCmd.new(r)
 	r.fresh("u1", "Ash", "knight", "human")
 	r.get_hero("u1")["gold"] = 40
-	for pair in [["!stats", "Ash the human knight"], ["!inv", "Ash carries"], ["!commands", "Commands:"], ["!valley", "Commands:"], ["!lamp", "buys"], ["!help forge", "60 / 160 / 420"]]:
+	for pair in [["!stats", "Ash the human knight"], ["!inv", "Ash carries"], ["!commands", "Commands:"], ["!lamp", "buys"], ["!help forge", "60 / 160 / 420"]]:
 		cc._last.clear()
 		var out := cc.handle("u1", "Ash", pair[0])
 		_ok(out.contains(pair[1]), "%s -> %s" % [pair[0], out.substr(0, 90)])
@@ -51,6 +51,41 @@ func _initialize() -> void:
 	_ok(out.contains("did you mean !forge"), "a typo is nudged: %s" % out)
 	cc._last.clear()
 	_ok(cc.handle("u1", "Ash", "!discord") == "" and cc.handle("u2", "Bo", "!so somebody") == "", "other bots' commands are left alone")
+	# fightoverlay shares the chat (data/commands.json "foreign"): its words, its v-prefix and
+	# their near misses get NO reply and NO nudge; Bellmire's own typos still get one
+	var silent: Array = []
+	for w in ["!hug", "!hugg", "!jump", "!8ball", "!royale", "!boss", "!fightt", "!clas", "!vstats", "!vstat", "!vhelp", "!vroll", "!vshop", "!valley", "!vanything", "!roll", "!roll 2d6", "!rol"]:
+		cc._last.clear()
+		if cc.handle("u1", "Ash", w) != "":
+			silent.append(w)
+	_ok(silent.is_empty(), "fightoverlay's commands, its v-prefix and near misses stay silent (answered: %s)" % [silent])
+	for pair in [["!hro", "!hero"], ["!fsh", "!fish"], ["!enlst", "!enlist"], ["!memoral", "!memorial"]]:
+		cc._last.clear()
+		out = cc.handle("u1", "Ash", pair[0])
+		_ok(out.contains("did you mean " + pair[1]), "Bellmire's own typo %s is still nudged: %s" % [pair[0], out])
+	cc._last.clear()
+	var rk := cc.handle("u1", "Ash", "!ranks")
+	_ok(rk != "" and not rk.contains("did you mean"), "!ranks still answers the Guild Roll: %s" % rk.substr(0, 60))
+	# T1 contract: twitch_reply carries the plain answer for the desktop to send; never for local_*
+	var tw: Array = []
+	cc.twitch_reply.connect(func(lg: String, tx: String) -> void: tw.append([lg, tx]))
+	cc._last.clear()
+	var hr := cc.handle("u1", "Ash", "!hero")
+	_ok(tw.size() == 1 and tw[0][0] == "ash" and tw[0][1] == hr and not String(tw[0][1]).begins_with("@"), "twitch_reply: the plain !hero answer for ash (%s)" % [tw])
+	cc._last.clear()
+	cc.handle("u1", "Ash", "!inventory", "ash_login")
+	_ok(tw.size() == 2 and tw[1][0] == "ash_login", "twitch_reply: the login when one is given")
+	cc._last.clear()
+	cc.handle("local_mre", "MrE", "!help")
+	cc._last.clear()
+	cc.handle("u1", "Ash", "!hug")
+	_ok(tw.size() == 2, "twitch_reply: nothing for the local keyboard or for fightoverlay's words (%d)" % tw.size())
+	var clash: Array = []
+	for k in cs:
+		for n in [k] + Array(cs[k].get("aliases", [])):
+			if ChatCmd.foreign(String(n), false):
+				clash.append(n)
+	_ok(clash.is_empty(), "no Bellmire command or alias is another app's or starts with its prefix (clash: %s)" % [clash])
 	cc._last.clear()
 	out = cc.handle("u1", "Ash", "!armoury")
 	_ok(out.contains("needs ") and out.contains(" gold for leather - you have "), "a friendly gold reply: %s" % out)

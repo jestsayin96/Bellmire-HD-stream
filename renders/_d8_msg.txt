@@ -1,0 +1,3 @@
+D8: the 30-minute soak - freed-floor chain bolts, lambda captures, raids no longer eat a hero's errand, defenders no longer pace a blocked post
+
+Co-Authored-By: Claude <noreply@anthropic.com>

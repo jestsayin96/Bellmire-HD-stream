@@ -17,6 +17,11 @@ signal say(line: String, colour: Color)
 signal wants_delve(user_id: String)
 signal wants_fish(user_id: String)
 signal wants_shop(user_id: String, kind: String)
+## T1 contract (supervisor, Nov 12): every answer a viewer's command produces, PLAIN - no "@name ",
+## no rate limit, no sending. The desktop's twitch_eventsub.gd connects here and owns the queue,
+## the rate limit, the prefix and the API call. Not emitted for Mr. E's local keyboard (local_*).
+## Do not change this signature without telling the desktop.
+signal twitch_reply(user_login: String, text: String)
 
 const COOLDOWN := 1.5          # seconds per viewer, anti-spam
 const QUEUE_MAX := 6
@@ -33,6 +38,17 @@ var delve_queue: Array = []
 var away := {}
 ## the town hands chat the fishing log: name -> [{name, rarity, value}]
 var catches_of: Callable
+## L17: the spotlight hands chat its put(uid, lane, seconds, reason) -> line (set by Spotlight.setup)
+var spot: Callable
+## L18: when each viewer last used a command (Time ticks, ms) - the director favours
+## the freshest chatters and their name glows for a few seconds (HeroBody.glow)
+static var last_cmd := {}
+
+## seconds since this viewer's last command (INF if never)
+static func since_cmd(uid: String) -> float:
+    if not last_cmd.has(uid):
+        return INF
+    return float(Time.get_ticks_msec() - int(last_cmd[uid])) / 1000.0
 
 ## what a hero has on them: steel, armour, potions, oil, gold, and the fish
 func inventory(user_id: String) -> String:
@@ -60,7 +76,9 @@ var _seen_names := {}
 func _init(r: Roster = null) -> void:
     roster = r
 
-func handle(user_id: String, display: String, msg: String) -> String:
+## `login` is the viewer's Twitch login for twitch_reply; left out, the display name lowercased
+## stands in (the same for every plain-letters name - pass the login for the rest)
+func handle(user_id: String, display: String, msg: String, login := "") -> String:
     if roster == null:
         return ""
     msg = msg.strip_edges()
@@ -85,7 +103,8 @@ func handle(user_id: String, display: String, msg: String) -> String:
     var out := ""
     if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
-        return "%s is %s." % [h["name"], away[user_id]]
+        last_cmd[user_id] = now
+        return _reply(user_id, display, login, "%s is %s." % [h["name"], away[user_id]])
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
         "hero":     out = _needs(user_id, func(): return roster.describe(user_id))
@@ -114,12 +133,19 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "memorial": out = _memorial()
         "deepest":  out = _board("deepest")
         "richest":  out = _board("gold")
-        "guild", "roll", "ranks":
+        "guild", "ranks":
                     out = _board("standing")
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()
         "help":     out = help_line(arg)
+        "look":     out = _needs(user_id, func(): return _spot(user_id, "look", 0.0, ""))
+        "testbits", "testsub", "testpoints":
+                    # L17 test-only: the local chat box (Mr. E's keyboard) fakes a cheer / sub / redeem.
+                    # Twitch users never reach these (their ids are not local_*); T1's EventSub calls the API.
+                    if not user_id.begins_with("local_"):
+                        return ""
+                    out = _test_spot(user_id, verb, arg, arg2)
         _:
             # L14: a near miss of a real command gets a nudge, anything else is left alone (other bots)
             var guess := _closest(verb)
@@ -128,8 +154,15 @@ func handle(user_id: String, display: String, msg: String) -> String:
             out = "No !%s here - did you mean !%s? (!help lists them all)" % [verb, guess]
 
     _last[user_id] = now
+    last_cmd[user_id] = now
     if out != "":
         say.emit(out, _tone(out))
+    return _reply(user_id, display, login, out)
+
+## T1: hand a command's answer to Twitch chat (via the desktop's twitch_eventsub.gd)
+func _reply(user_id: String, display: String, login: String, out: String) -> String:
+    if out != "" and not user_id.begins_with("local_"):
+        twitch_reply.emit(login if login != "" else display.to_lower(), out)
     return out
 
 # a command that requires a living hero
@@ -139,6 +172,33 @@ func _needs(user_id: String, fn: Callable) -> String:
     if not roster.is_alive(user_id):
         return "%s is dead. !reroll to raise a new hero." % roster.get_hero(user_id)["name"]
     return String(fn.call())
+
+## L17: a spotlight pane on a hero (the Spotlight sets `spot`; without it, nothing)
+func _spot(uid: String, lane: String, secs: float, why: String) -> String:
+    if not spot.is_valid():
+        return "The spotlight is not lit yet."
+    return String(spot.call(uid, lane, secs, why))
+
+## !testbits <n> [name] / !testsub [name] / !testpoints [name]: the named hero (or your own)
+func _test_spot(user_id: String, verb: String, arg: String, arg2: String) -> String:
+    var who := arg2 if verb == "testbits" else arg
+    var uid := user_id
+    if who != "":
+        uid = ""
+        for k in roster.heroes:
+            if String(roster.heroes[k].get("name", "")).to_lower() == who:
+                uid = k
+                break
+        if uid == "":
+            return "No hero named %s." % who
+    match verb:
+        "testbits":
+            var n := maxi(1, int(arg)) if arg.is_valid_int() else 100
+            return _spot(uid, "bits", Spotlight.bits_seconds(n), "cheered %d bits" % n)
+        "testsub":
+            return _spot(uid, "subs", Spotlight.SUB_S, "subscribed")
+        _:
+            return _spot(uid, "points", Spotlight.POINTS_S, "redeemed Spotlight")
 
 func _enlist(user_id: String, display: String, cls: String, species := "") -> String:
     # L5: !enlist <class> <species>, either way round ("!enlist dwarf knight" too)
@@ -301,7 +361,27 @@ static func help_line(arg := "") -> String:
     return "Commands: %s  |  !help <command> for more." % " ".join(bits)
 
 ## the nearest command to a typo (edit distance 2 or less), or ""
+## another app's command (data/commands.json "foreign"): one of theirs, one of their
+## prefixes (fightoverlay's "v"), or a near miss of one of theirs - Bellmire stays silent.
+## near_too = false: exact or prefix only (a Bellmire name may sit NEAR theirs: stats ~ vstats)
+static func foreign(word: String, near_too := true) -> bool:
+    var near := 2 if word.length() <= 4 else 3
+    var fs: Dictionary = commands().get("foreign", {})
+    for app in fs:
+        if not (fs[app] is Dictionary):
+            continue
+        for p in (fs[app] as Dictionary).get("prefixes", []):
+            if word.begins_with(String(p)):
+                return true
+        for n in (fs[app] as Dictionary).get("exact", []):
+            if word == String(n) or (near_too and _lev(word, String(n)) < near):
+                return true
+    return false
+
+## the Bellmire command a typo meant, or "" - never for another app's word (foreign)
 static func _closest(word: String) -> String:
+    if foreign(word):
+        return ""
     var best := ""
     var bd := 2 if word.length() <= 4 else 3
     var names: Array = []

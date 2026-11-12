@@ -226,7 +226,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L19. More lore: from the reference + the Lore Bible PDF - more Chronicle lines, NPC barks, floor-origin
       text, item and potion flavour, boss intros, town-level announcements; all in the original's voice, never
       contradicting it, never a floor count.
-- [ ] L17. (moved from D10; laptop owns the UI) Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
+- [x] L17. (moved from D10; laptop owns the UI) Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
       FIXED LANES in a 2x2 grid, each with its own queue and colour-coded frame:
         top-left     = the director (always, the main view)
         top-right    = BITS / cheers lane (gold frame) - any cheer 15 s, 50+ bits 20 s, 100+ bits 30 s
@@ -243,8 +243,10 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       chatters (ahead of random heroes, behind raids/lords/fights); a small "Now watching: <name> the <species>
       <class>" banner in the main view; their name glows above their hero for ~5 s after any command; free
       !look borrows the channel-points lane for 10 s only when it is empty.
-- [ ] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
-- [ ] L20. Director camera clearance (supervisor, Nov 11; was D13). CORRECTION to the original note: the
+      DONE (Cycle 76): lanes + queues, !look / !testbits / !testsub / !testpoints (local only), pair + 2x2, F10 with the UI, FPS 44 -> 40 with all three lanes; L17_TEST OK. For the desktop: add `func spotlight(uid, lane, secs, why): return Spotlight.spotlight(self, uid, lane, secs, why)` to town.gd.
+- [x] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
+      DONE (Cycle 77): the freshest chatter (2 min) is the director's hero pick (36-50), "Now watching" chip, 5 s teal name glow, !look via the points lane; Chronicle entries capped at 2 lines; L18_TEST OK.
+- [x] L20. Director camera clearance (supervisor, Nov 11; was D13). CORRECTION to the original note: the
       roof in renders/cycles/20261112_d6b/square_f460_east.png was NOT an auto-director shot - _d6b_shot.gd
       placed its own fixed camera 14 m up beside the square, so that framing is the test tool's, not the
       director's. The real gap (found by the laptop, Nov 11): the camera's edge-protection check only covers
@@ -252,6 +254,24 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       roofs beside that line go unprotected. Fix it in the eye camera for every shot type, and prove it with
       real director shots - town wide, tour, hero follow, fight, raid - rendered and looked at, not with a
       fixed test camera. The L17 spotlight panes each get their own camera, so they must share this rule.
+      DONE (Cycle 79): every shot tilts / swings round its subject until the near lower frame is clear of roofs, props, walls and towers (one rule, the panes share it); pull-in never closer than 6 m; real director shots of all six types 0-2% blocked (raw up to 100%); L20_TEST OK.
+- [x] L21. THE INTERFACE over the spotlight panes (Mr. E, Nov 11). In the grid the HUD was laid out for one full-screen view:
+      the boss card across all four seams, the Chronicle over the subs pane, the delvers panel in the director pane's
+      corner, floating text everywhere, name tags in mush. THE RULE, in code: with more than one view up, no HUD
+      element crosses a seam or sits over a pane it does not belong to - docked inside one pane, or in the chrome bar.
+      Floating text clamped to its pane and off in quarter panes; name tags fixed in panes; full screen unchanged.
+      Test that fails on the old build, then a 1080p render shrunk to 854x480 and looked at.
+      DONE (Cycle 81): panes over the top 85%, the Chronicle + clock in a bottom chrome bar, boss card + party frames + unit frame docked in the pane showing them (scripts/hud_dock.gd), 3D text on render layers with a cull mask per pane, one name tag per lane pane; L21_TEST 32/32 (15 failed before).
+      ALSO: !guild drops the "roll" alias (bare !roll is fightoverlay's dice, now silent here); L14_TEST OK.
+- [ ] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
+- [ ] L23. The director should cut away from a hero a lane already holds (or the split is wasted).
+
+- [ ] L23. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
+      "the director never cut to fight" and "all six shot types were seen" (saw tour_market, tour_scar,
+      tour_valley, hero, raid - no fight), then PASSED on an immediate re-run with no code change. It is
+      waiting on the director to happen to cut to a fight inside the test window. Make the test drive the
+      director deterministically - force a fight and force the cut - instead of waiting for one. A test
+      that fails at random teaches everyone to ignore it, which is worse than no test.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] W1. A public page for viewers: hero sheet, inventory, gear, the guild roll, the fallen, the command list

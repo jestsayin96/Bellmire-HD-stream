@@ -248,12 +248,37 @@ func _trappings() -> void:
     motes.draw_pass_1 = sm
     add_child(motes)
 
+## Anything outside (Delve, raids) drives the body through _play. The body's
+## own idle (state IDLE) waits until nobody has driven it for a moment - it used
+## to replay "idle" every frame, so every walk and every swing a fight asked for
+## was undone the next frame and creatures glided frozen across the floor.
+## A one-shot (attack, cast, hit, summon, rise) owns the body until it ends; only
+## death cuts it short.
+const ONE_SHOTS := ["attack", "cast", "hit", "summon", "rise"]
+var _ext_t := -99.0
+var _hold_until := -1.0
 func _play(key: String) -> void:
+    _ext_t = _t
+    _play_now(key)
+
+## mid one-shot (a swing, a rise, a hit): Delve does not walk it meanwhile
+func busy() -> bool:
+    return _t < _hold_until
+
+func _play_now(key: String) -> void:
     if _ap == null:
         return
     var an: Dictionary = def.get("anims", {})
     var nm := String(an.get(key, ""))
-    if nm != "" and _ap.has_animation(nm) and _ap.current_animation != nm:
+    if nm == "" or not _ap.has_animation(nm):
+        return
+    if key != "die" and _t < _hold_until and not ONE_SHOTS.has(key):
+        return
+    if ONE_SHOTS.has(key):
+        _ap.play(nm, 0.12)
+        _ap.seek(0.0, true)
+        _hold_until = _t + clampf(_ap.get_animation(nm).length * 0.9, 0.3, 2.0)
+    elif _ap.current_animation != nm:
         _ap.play(nm, 0.2)
 
 func _entering() -> bool:
@@ -286,7 +311,8 @@ func _process(delta: float) -> void:
         _aura.scale = Vector3(k, 1, k)
     match state:
         S.IDLE:
-            _play("idle")
+            if _t - _ext_t > 0.3:
+                _play_now("idle")
         S.PATROL:
             if _goal == Vector3.ZERO or global_position.distance_to(_goal) < 0.8:
                 _goal = home + Vector3(_rng.randf_range(-roam, roam), 0, _rng.randf_range(-roam, roam))
@@ -297,7 +323,7 @@ func _process(delta: float) -> void:
             p.y = _gy(p.x, p.z)
             global_position = p
             rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * 5.0)
-            _play("walk")
+            _play_now("walk")
         S.ATTACK:
             if target == null or not is_instance_valid(target):
                 state = S.PATROL
@@ -423,8 +449,8 @@ func nova(r: float) -> void:
 var nova_count := 0
 
 ## crosses the room in one beat onto `to` (Nightwing: too fast to see coming)
-func swoop(to: Vector3) -> void:
-    var dest := to + (global_position - to).normalized() * 1.4
+func swoop(to: Vector3, exact := false) -> void:
+    var dest := to if exact else to + (global_position - to).normalized() * 1.4
     dest.y = global_position.y
     var tw := create_tween()
     tw.tween_property(self, "global_position", dest, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)

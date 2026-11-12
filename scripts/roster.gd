@@ -157,13 +157,13 @@ const FAMILIES := {
 
 # tiered goods. index is the tier the viewer owns; 0 means nothing bought yet.
 const WEAPONS := [
-    {"name": "bare hands", "cost": 0,    "atk": 0,  "scale": 0.0, "glow": 0.0},
-    {"name": "plain steel", "cost": 60,  "atk": 4,  "scale": 1.0, "glow": 0.0},
-    {"name": "fine steel",  "cost": 160, "atk": 9,  "scale": 1.05, "glow": 0.0},
-    {"name": "runed",       "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5},
-    {"name": "dragontooth", "cost": 1100,"atk": 26, "scale": 1.25, "glow": 1.0},
+    {"name": "bare hands", "cost": 0,    "atk": 0,  "scale": 0.0, "glow": 0.0, "dice": [1, 4]},
+    {"name": "plain steel", "cost": 60,  "atk": 4,  "scale": 1.0, "glow": 0.0, "dice": [1, 6]},
+    {"name": "fine steel",  "cost": 160, "atk": 9,  "scale": 1.05, "glow": 0.0, "dice": [1, 8]},
+    {"name": "runed",       "cost": 420, "atk": 16, "scale": 1.12, "glow": 0.5, "dice": [1, 10]},
+    {"name": "dragontooth", "cost": 1100,"atk": 26, "scale": 1.25, "glow": 1.0, "dice": [1, 12]},
     # L3: found only below (Gear.WEAPONS carries the same row) - no smith makes it
-    {"name": "scarforged",  "cost": 0,   "atk": 34, "scale": 1.3, "glow": 1.3, "found": true},
+    {"name": "scarforged",  "cost": 0,   "atk": 34, "scale": 1.3, "glow": 1.3, "found": true, "dice": [2, 8]},
 ]
 # "ac" is the 5E armour bonus on top of 10 + DEX. Armour used to give hit
 # points only, which is not how D&D works: better armour should make you
@@ -341,9 +341,41 @@ func heal_power(h: Dictionary) -> float:
     var base: float = 11.0 if cls == "sage" else 7.0
     return base + float(mod(h, "wis")) * 2.5
 
-# CHA haggles the shopkeeper down, to a floor of 70%
-func price_mult(h: Dictionary) -> float:
-    return clampf(1.0 - float(mod(h, "cha")) * 0.05, 0.70, 1.25)
+## L9: a weapon's damage dice by tier (bare hands 1d4 ... scarforged 2d8)
+func weapon_dice(h: Dictionary) -> Array:
+    return WEAPONS[clampi(int(h.get("weapon", 0)), 0, WEAPONS.size() - 1)].get("dice", [1, 4])
+
+func dice_str(h: Dictionary) -> String:
+    var d := weapon_dice(h)
+    return "%dd%d" % [int(d[0]), int(d[1])]
+
+# L9 (DnD RULE): CHA no longer takes a flat cut off every price - the hero
+# haggles, a CHA check at the counter (Roster.haggle). Kept for old callers.
+func price_mult(_h: Dictionary) -> float:
+    return 1.0
+
+## Persuasion at the counter: d20 + CHA (+ proficiency for the talkers - bard,
+## warlock, paladin, rogue) vs DC 12. Beat it: 10% off, +1% a point over, at most
+## 20%. A natural 20: a quarter off. A natural 1: the smith takes offence, a
+## tenth over. Otherwise the list price. last_haggle says what happened.
+const HAGGLE_DC := 12
+const TALKERS := ["bard", "warlock", "paladin", "rogue"]
+var last_haggle := ""
+func haggle(h: Dictionary, list_price: int) -> int:
+    var d := rng.randi_range(1, 20)
+    var total := d + mod(h, "cha") + (prof(h) if String(h["class"]) in TALKERS else 0)
+    var k := 1.0
+    last_haggle = ""
+    if d == 20:
+        k = 0.75
+        last_haggle = " A natural 20 at the counter - a quarter off."
+    elif d == 1:
+        k = 1.1
+        last_haggle = " A natural 1 - the smith takes offence and charges a tenth over."
+    elif total >= HAGGLE_DC:
+        k = 1.0 - clampf(0.10 + 0.01 * float(total - HAGGLE_DC), 0.10, 0.20)
+        last_haggle = " Haggled %d%% off (%d)." % [int(round((1.0 - k) * 100.0)), total]
+    return maxi(1, int(round(float(list_price) * k)))
 
 # ------------------------------------------------------------------ spending
 # Every purchase in the game goes through here, so the guild's rate goes here
@@ -375,12 +407,12 @@ func buy_weapon(user_id: String, kind := "") -> String:
                 return "%s already carries %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
             if bool(WEAPONS[int(h["weapon"])].get("found", false)):
                 return "No smith in Bellmire will put a hammer to scarforged steel."
-            var rework := cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4))
+            var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4)))
             if not spend(h, rework):
                 return "%s needs %d gold to have it reworked into a %s (has %d)." % [h["name"], rework, kind, int(h["gold"])]
             h["wkind"] = kind
             changed.emit(user_id)
-            return "The smith reworks %s's steel into %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
+            return "The smith reworks %s's steel into %s %s.%s" % [h["name"], _an(weapon_name(h)), weapon_name(h), last_haggle]
     var nxt: int = int(h["weapon"]) + 1
     if nxt >= WEAPONS.size() or bool(WEAPONS[nxt].get("found", false)):
         return "%s already carries %s %s - nothing better is forged here." \
@@ -394,14 +426,15 @@ func buy_weapon(user_id: String, kind := "") -> String:
     if kind != "":
         peek["wkind"] = kind
     var label := weapon_name(peek)
-    if not spend(h, cost_for(h, int(w["cost"]))):
+    var price := haggle(h, cost_for(h, int(w["cost"])))
+    if not spend(h, price):
         return "%s needs %d gold for %s %s (has %d)." \
-            % [h["name"], cost_for(h, int(w["cost"])), _an(label), label, int(h["gold"])]
+            % [h["name"], price, _an(label), label, int(h["gold"])]
     h["weapon"] = nxt
     if kind != "":
         h["wkind"] = kind
     changed.emit(user_id)
-    return "%s takes up %s %s. (+%d atk)" % [h["name"], _an(label), label, int(w["atk"])]
+    return "%s takes up %s %s. (+%d atk, %dd%d)%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), last_haggle]
 
 func _an(word: String) -> String:
     return "an" if word.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a"
@@ -416,22 +449,24 @@ func buy_armour(user_id: String) -> String:
         return "%s wants %s, but Bellmire has no one who can make it yet." \
             % [h["name"], ARMOUR[nxt]["name"]]
     var a: Dictionary = ARMOUR[nxt]
-    if not spend(h, cost_for(h, int(a["cost"]))):
+    var aprice := haggle(h, cost_for(h, int(a["cost"])))
+    if not spend(h, aprice):
         return "%s needs %d gold for %s (has %d)." \
-            % [h["name"], cost_for(h, int(a["cost"])), a["name"], int(h["gold"])]
+            % [h["name"], aprice, a["name"], int(h["gold"])]
     h["armour"] = nxt
     changed.emit(user_id)
-    return "%s is fitted with %s. (+%d hp)" % [h["name"], a["name"], int(a["hp"])]
+    return "%s is fitted with %s. (+%d hp)%s" % [h["name"], a["name"], int(a["hp"]), last_haggle]
 
 func buy_potion(user_id: String, n := 1) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
-    if not spend(h, cost_for(h, POTION_COST * n)):
-        return "%s needs %d gold (has %d)." % [h["name"], cost_for(h, POTION_COST * n), int(h["gold"])]
+    var pprice := haggle(h, cost_for(h, POTION_COST * n))
+    if not spend(h, pprice):
+        return "%s needs %d gold (has %d)." % [h["name"], pprice, int(h["gold"])]
     h["potions"] = int(h["potions"]) + n
     changed.emit(user_id)
-    return "%s buys %d %s. Now carrying %d." % [h["name"], n,
-        "potion" if n == 1 else "potions", int(h["potions"])]
+    return "%s buys %d %s. Now carrying %d.%s" % [h["name"], n,
+        "potion" if n == 1 else "potions", int(h["potions"]), last_haggle]
 
 # Lamp oil. A flask is one floor of good light; what a hero carries is pooled
 # with the rest of the party at the mouth, so the miser and the spendthrift
@@ -439,13 +474,14 @@ func buy_potion(user_id: String, n := 1) -> String:
 func buy_oil(user_id: String, n := 1) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
-    if not spend(h, cost_for(h, OIL_COST * n)):
+    var oprice := haggle(h, cost_for(h, OIL_COST * n))
+    if not spend(h, oprice):
         return "%s needs %d gold for oil (has %d)." \
-            % [h["name"], cost_for(h, OIL_COST * n), int(h["gold"])]
+            % [h["name"], oprice, int(h["gold"])]
     h["oil"] = int(h.get("oil", 0)) + n
     changed.emit(user_id)
-    return "%s buys %d flask%s of oil. Now carrying %d." \
-        % [h["name"], n, "" if n == 1 else "s", int(h.get("oil", 0))]
+    return "%s buys %d flask%s of oil. Now carrying %d.%s" \
+        % [h["name"], n, "" if n == 1 else "s", int(h.get("oil", 0)), last_haggle]
 
 # `prepaid` is for redemptions already paid for in channel points or bits -
 # the viewer has spent something real, so the gold cost is waived.
@@ -700,7 +736,7 @@ func describe(user_id: String) -> String:
         % [h["name"], "%s %s" % [species_of(h), h["class"]], rank_of(h), int(h["level"]),
            armour_class(h), int(max_hp(h)), sign_str(prof(h)),
            sign_str(attack_bonus(h)), _stat_line(h["stats"]), save_line(h),
-           weapon_name(h), ARMOUR[int(h["armour"])]["name"],
+           "%s (%s)" % [weapon_name(h), dice_str(h)], ARMOUR[int(h["armour"])]["name"],
            int(h["potions"]), int(h.get("oil", 0)), int(h["gold"]),
            int(h["deepest"]), int(h["kills"])]
 

@@ -147,6 +147,7 @@ func _next_floor() -> void:
     if not dark and not _warned_low and oil > 0.0 and oil <= float(alive_now):
         _warned_low = true
         _say("The oil is running low.")
+    _initiative()
     _lamp_lit = false
     _light_check()
     state = "fight"
@@ -412,6 +413,25 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
                 p = slide
             else:
                 p = n.global_position       # hold rather than go through stone
+    # a creature has a body, not a point: it keeps its own half-width off any
+    # wall (big lords and wide beasts were walking half into the stone)
+    if n is Monster and dun and dun.info.has("cells"):
+        var rad := float(n.get_meta("rad", -1.0))
+        if rad < 0.0:
+            rad = clampf((n as Monster)._height() * 0.2, 0.3, 1.8)
+            n.set_meta("rad", rad)
+        var G: float = dun.info["grid"]
+        var cl: Dictionary = dun.info["cells"]
+        var cc := _cell_of(p)
+        if cl.has(cc):
+            var ctr := _cell_world(cc)
+            for dir: Vector3 in [Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)]:
+                if cl.has(cc + Vector2i(int(dir.x), int(dir.z))):
+                    continue
+                var wall: float = (ctr + dir * G * 0.5).dot(dir)
+                var over: float = (p + dir * minf(rad, G * 0.5 - 0.05)).dot(dir) - wall
+                if over > 0.0:
+                    p -= dir * over
     p.y = n.global_position.y
     # last guard: a step that would end beyond the walls is not taken
     if dun and dun.info.has("cells") and not (dun.info["cells"] as Dictionary).has(_cell_of(p)) \
@@ -443,6 +463,7 @@ func _process(delta: float) -> void:
 
 func _fight(delta: float) -> void:
     _check_lamp()
+    _traps_tick()
     var foes := _foes()
     _bars(foes)
     var alive := _alive()
@@ -506,9 +527,15 @@ func _fight(delta: float) -> void:
             if low != null and float(m["swing"]) <= 0.0:
                 m["swing"] = 2.4
                 # D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
-                var got := Spells.cast(String(MENDERS.get(String(h["class"]), "heal")), b, low["body"], false)
+                var mk := String(MENDERS.get(String(h["class"]), "heal"))
+                var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
                 Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
-                _bless(low, got, hp_pow)
+                if Spells.HARM.has(got):
+                    # L8: the scar turned the mending into a blow - it lands on the friend
+                    low["hp"] = float(low["hp"]) - hp_pow * 0.5
+                    _hero_hit(low)
+                else:
+                    _bless(low, got, hp_pow)
                 continue
         var tgt: Monster = null
         var bd := 1e9
@@ -547,11 +574,17 @@ func _fight(delta: float) -> void:
         else:
             Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
         if roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac):
-            var dmg := (roster.attack(h) * _rng.randf_range(0.55, 0.95) + kit_bonus) * (2.0 if roll == 20 else 1.0)
+            var dmg := _hero_damage(h, roll == 20)
             dmg *= _ward(tgt) * _ability_mult(ability, tgt)
             _ability_hit(ability, m, tgt, dmg, foes)
             var was_dead := tgt.state == Monster.S.DEAD
             tgt.hurt(dmg, roll == 20)
+            # a natural 20 reaches the Chronicle when it kills, or lands on a lord
+            if roll == 20 and not was_dead:
+                if tgt.state == Monster.S.DEAD:
+                    _big(m, "rolls a 20 - and the %s is gone." % String(tgt.def.get("name", "thing")))
+                elif bool(tgt.def.get("boss", false)):
+                    _big(m, "rolls a 20 - %s reels." % String(tgt.def.get("name", "it")))
             if not was_dead and tgt.state == Monster.S.DEAD:
                 _kills += 1
                 _on_kill(tgt)
@@ -590,6 +623,9 @@ func _fight(delta: float) -> void:
         if nearest < 16.0:
             _lord_tick(mon, ways, alive, near, delta)
         if nd > r:
+            # a creature mid-swing, mid-rise or reeling from a hit stands until it is done - no gliding
+            if mon.busy():
+                continue
             _go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon), delta)
             mon._play("walk")
             continue
@@ -615,10 +651,12 @@ func _fight(delta: float) -> void:
                 _volley(mon, alive, near, shots)
         else:
             mon._play("attack")
-        var hit := _d20(1 if dark else 0) + 2 + floor_no / 2
-        if hit >= roster.armour_class(near["h"]):
+        # L9: d20 + its to-hit vs the delver's AC; a natural 1 always misses, a natural 20 always hits and doubles the dice
+        var nat := _d20(1 if dark else 0)
+        var hit := nat + 2 + floor_no / 2
+        if nat != 1 and (nat == 20 or hit >= roster.armour_class(near["h"])):
             var base := float(mon.def.get("boss_atk", (6.0 + float(floor_no) * 2.2) * float(mon.def.get("atk", 1.0))))
-            var dmg := base * _rng.randf_range(0.6, 1.0) * fury
+            var dmg := _mdice(base, nat == 20) * fury
             near["hp"] = float(near["hp"]) - _soak(near, dmg)
             _hero_hit(near)
             if ways.has("venom") and float(near["hp"]) > 0.0:
@@ -752,9 +790,14 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
             for o in alive:
                 if float(o["hp"]) > 0.0 and float(o["hp"]) / float(o["max"]) < float(weak["hp"]) / float(weak["max"]):
                     weak = o
-            mon.swoop((weak["body"] as Node3D).global_position)
+            # the swoop lands on the floor beside its mark, never in the wall behind it
+            var wp: Vector3 = (weak["body"] as Node3D).global_position
+            var land := wp + (mon.global_position - wp).normalized() * 1.4
+            if not (dun.info["cells"] as Dictionary).has(_cell_of(land)):
+                land = wp
+            mon.swoop(land, true)
             if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(weak["h"]):
-                weak["hp"] = float(weak["hp"]) - _soak(weak, float(mon.def.get("boss_atk", 10.0)) * float(sw.get("mult", 1.5)) * _rng.randf_range(0.7, 1.0))
+                weak["hp"] = float(weak["hp"]) - _soak(weak, _mdice(float(mon.def.get("boss_atk", 10.0)) * float(sw.get("mult", 1.5)), false))
                 _hero_hit(weak)
     if ways.has("enrage") and not mon.enraged:
         if mon.hp / maxf(1.0, mon.max_hp) <= float((ways["enrage"] as Dictionary).get("at", 0.3)):
@@ -784,7 +827,7 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
             continue
         mon.shoot(ob.global_position + Vector3(0, 1.1, 0))
         if _d20(1 if dark else 0) + 2 + floor_no / 2 >= roster.armour_class(o["h"]):
-            o["hp"] = float(o["hp"]) - _soak(o, base * _rng.randf_range(0.6, 1.0))
+            o["hp"] = float(o["hp"]) - _soak(o, _mdice(base, false))
             _hero_hit(o)
 
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
@@ -793,7 +836,26 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
 func _loot(alive: Array) -> void:
     var boss := dun.lord != null
     var uniq := boss and bool(dun.lord.def.get("unique", false))
-    var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * _rng.randf_range(0.85, 1.35))
+    # L9: the party's sharpest eye searches - an Investigation check (d20 + INT,
+    # + proficiency for the trained, disadvantage in the dark without darkvision)
+    # vs DC 10 + floor/2: it sets how much is found, what is salvaged, and whether
+    # deep gear turns up.
+    var seeker: Dictionary = alive[0]
+    for m in alive:
+        if _search_bonus(m["h"]) > _search_bonus(seeker["h"]):
+            seeker = m
+    var sd := _d20(-1 if dark and not Roster.has_trait(seeker["h"], "darkvision") else 0)
+    var st := sd + _search_bonus(seeker["h"])
+    var sdc := mini(20, 10 + floor_no / 2)
+    var mult := 0.8
+    if sd == 20:
+        mult = 1.6
+        _big(seeker, "rolls a 20 searching the floor!")
+    elif sd == 1:
+        mult = 0.6
+    elif st >= sdc:
+        mult = minf(1.35, 1.0 + 0.03 * float(st - sdc))
+    var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * mult)
     Sfx.play("coin", -4.0)
     if boss:
         var share := int(float(found) / float(alive.size()))
@@ -807,11 +869,11 @@ func _loot(alive: Array) -> void:
             "Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
         _say("The hoard is split %d ways - %d gold each to %s." % [took.size(), share, ", ".join(took)])
     else:
-        var f: Dictionary = alive[_rng.randi() % alive.size()]
+        var f: Dictionary = seeker
         roster.award(String(f["uid"]), found, 0, 0, floor_no)
         _gold += found
         oil = maxf(0.0, oil - 0.5)
-        _say("%s turns up %d gold on floor %d." % [f["h"]["name"], found, floor_no])
+        _say("%s searches (Investigation %d) and turns up %d gold on floor %d." % [f["h"]["name"], st, found, floor_no])
         _say("Floor %d cleared." % floor_no)
     # renown (old rule): a floor cleared +1, a lord slain +6
     var eco = town.get("economy") if town else null
@@ -819,13 +881,15 @@ func _loot(alive: Array) -> void:
         eco.renown += (3 if uniq else 6) if boss else 1
     haul["ore"] += floor_no * 0.6
     haul["stone"] += floor_no * 0.45
-    if _rng.randf() < 0.32 + floor_no * 0.03:
+    if sd != 1 and st >= sdc - floor_no / 3:
         haul["gear"] += 1.0
-    if _rng.randf() < 0.4:
+    if sd != 1 and st >= sdc - 2:
         haul["potion"] += 1.0
     # L3: deep floors give up gear - one roll a floor, for whoever was searching
-    var finder: Dictionary = alive[_rng.randi() % alive.size()]
-    var found_line := roster.find_gear(String(finder["uid"]), floor_no, _rng.randf(), boss and not uniq)
+    var finder: Dictionary = seeker
+    var lordly := boss and not uniq
+    var deep_find := sd == 20 or (sd != 1 and st >= 25 - floor_no / 2 - (5 if lordly else 0))
+    var found_line := roster.find_gear(String(finder["uid"]), floor_no, 0.0 if deep_find else 1.0, lordly)
     if found_line != "":
         _say(found_line)
         var fb: HeroBody = finder["body"]
@@ -855,10 +919,16 @@ func _hero_hit(m: Dictionary) -> void:
     # one death save per delve (old rule): claw back to 1 hp on a DC 10 CON save
     if not bool(m["saved"]):
         m["saved"] = true
-        var s := _rng.randi_range(1, 20) + roster.save_bonus(m["h"], "con")
-        if s >= 10:
+        # L9: a natural 20 stands them up with a quarter of their life; a natural 1 is death
+        var sd := _rng.randi_range(1, 20)
+        var s := sd + roster.save_bonus(m["h"], "con")
+        if sd == 20:
+            m["hp"] = float(m["max"]) * 0.25
+            _say("%s rolls a 20 on the death save - and gets up swinging." % m["h"]["name"])
+            return
+        if sd != 1 and s >= 10:
             m["hp"] = 1.0
-            _say("%s should be dead - and stands back up." % m["h"]["name"])
+            _say("%s should be dead - and stands back up (%d)." % [m["h"]["name"], s])
             return
     Rig.play(b._anim, "Death_A")
     b.fallen = true
@@ -960,13 +1030,16 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
             hit.append(nx)
             more.append(nx)
             at = nx.global_position
-    var actual := Spells.cast(kind, b, tgt, false, more)
+    var actual := Spells.cast(kind, b, tgt, _scar_check(m, kind), more)
     Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
     if not Spells.HARM.has(actual):
+        # L8: the scar turned the blow into a mending - wild magic mends the creature
+        if actual in ["heal", "renew", "mend"] and is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
+            tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * 0.5)
         return
     if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
         return
-    var dmg := (roster.attack(h) * _rng.randf_range(0.55, 0.95) + kit_bonus) * (2.0 if roll == 20 else 1.0)
+    var dmg := _hero_damage(h, roll == 20)
     dmg *= _ability_mult(ability, tgt)
     var t := Spells.flight(actual, b, tgt)
     get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, m, hit, dmg, roll == 20, ability))
@@ -982,7 +1055,7 @@ func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: boo
             var p := first.global_position
             for f in _foes():
                 if _flat((f as Node3D).global_position, p) <= FIRE_R:
-                    _strike(m, f, dmg * 0.8, crit)
+                    _strike(m, f, dmg * 0.8 * (0.5 if _mon_saves(f, m, 0) else 1.0), crit)
         "chain":
             var k := 1.0
             for r in hit:
@@ -993,7 +1066,9 @@ func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: boo
             if first == null:
                 return
             _strike(m, first, dmg * 0.7, crit)
-            first.set_meta("slow_t", _t + FROST_SLOW)
+            # L9: a CON save against the caster's spell DC shrugs the slow off
+            if is_instance_valid(first) and not _mon_saves(first, m, 0):
+                first.set_meta("slow_t", _t + FROST_SLOW)
         "smite":
             if first == null:
                 return
@@ -1041,3 +1116,152 @@ func _soak(o: Dictionary, dmg: float) -> float:
 ## a frosted creature moves and swings at half pace
 func _mon_pace(mon: Monster) -> float:
     return 0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0
+
+## ---- L8 (Mr. E, Nov 11): wild magic below. The dungeon is one enormous scar,
+## so every spell cast down here is a check against it: d20 + casting ability
+## mod + proficiency vs DC 10 + floor/2 (cap 20). (The sage checks on WIS, its own sheet - Mr. E, L9.) A fail misfires the way it does
+## on the scar's surface (Spells.cast in_scar: the next spell in the order goes
+## off instead). A natural 1 always misfires, a natural 20 never. Monsters'
+## spells are not checked.
+const CAST_STAT := {"mage": "int", "necromancer": "int",
+                    "sage": "wis", "cleric": "wis", "druid": "wis", "monk": "wis",
+                    "warlock": "cha", "bard": "cha", "paladin": "cha"}
+var scar_casts := 0
+var scar_misfires := 0
+var _misfire_said := {}
+
+static func scar_dc(floor_no: int) -> int:
+    return mini(20, 10 + floor_no / 2)
+
+func _scar_check(m: Dictionary, kind: String) -> bool:
+    var h: Dictionary = m["h"]
+    var stat := String(CAST_STAT.get(String(h["class"]), String(Roster.CLASSES[String(h["class"])].get("primary", "int"))))
+    var d := _rng.randi_range(1, 20)
+    var total := d + roster.mod(h, stat) + roster.prof(h)
+    var miss := d == 1 or (d != 20 and total < scar_dc(floor_no))
+    scar_casts += 1
+    if miss:
+        scar_misfires += 1
+        # one Chronicle line per caster per floor, so the feed is not all sparks
+        var key := "%s:%d" % [m["uid"], floor_no]
+        if not _misfire_said.has(key):
+            _misfire_said[key] = true
+            _say("%s's %s goes wrong - the scar answers (%d vs DC %d)." % [h["name"], kind, total if d != 1 else 1, scar_dc(floor_no)])
+    return miss
+
+## ---- L9 (DnD RULE): the roll audit, dungeon side. Everything below is a d20
+## or dice roll on the hero's real numbers (Roster.mod / prof / save_bonus).
+func _dice(n: int, s: int) -> int:
+    var t := 0
+    for i in range(maxi(n, 1)):
+        t += _rng.randi_range(1, maxi(s, 1))
+    return t
+
+## a delver's blow: the weapon's dice + the ability mod + a flat part that keeps
+## the average exactly where it was (0.75 x Roster.attack + the muster's kit), so
+## the measured balance holds and only the spread is now dice. A crit rolls the
+## dice twice, as 5e does.
+func _hero_damage(h: Dictionary, crit: bool) -> float:
+    var d := roster.weapon_dice(h)
+    var n := int(d[0])
+    var s := int(d[1])
+    var prim := String(Roster.CLASSES[String(h["class"])].get("primary", "str"))
+    var md := roster.mod(h, prim)
+    var flat := roster.attack(h) * 0.75 + kit_bonus - float(n) * float(s + 1) * 0.5 - float(md)
+    var dice := _dice(n, s) + (_dice(n, s) if crit else 0)
+    return maxf(1.0, float(dice + md) + flat)
+
+## a creature's blow on 2d6: the same 0.6-1.0 of its base, mean 0.8, now dice;
+## a natural 20 doubles it
+func _mdice(base: float, crit: bool) -> float:
+    var k := 0.6 + 0.4 * float(_dice(2, 6) - 2) / 10.0
+    return base * k * (2.0 if crit else 1.0)
+
+## big rolls reach the Chronicle - once per delver per floor
+var _big_said := {}
+func _big(m: Dictionary, what: String) -> void:
+    var key := "%s:%d" % [m["uid"], floor_no]
+    if _big_said.has(key):
+        return
+    _big_said[key] = true
+    _say("%s %s" % [m["h"]["name"], what])
+
+## Investigation: d20 + INT (+ proficiency for the trained searchers)
+const SEARCHERS := ["rogue", "ranger", "mage", "sage", "necromancer"]
+func _search_bonus(h: Dictionary) -> int:
+    return roster.mod(h, "int") + (roster.prof(h) if String(h["class"]) in SEARCHERS else 0)
+
+## initiative: d20 + DEX for each delver, d20 + 1 for each creature; who rolls
+## high swings first (the first swing comes sooner the higher the roll)
+func _initiative() -> void:
+    var best = null
+    var bi := -99
+    for m in _alive():
+        var d := _rng.randi_range(1, 20)
+        var ini := d + roster.mod(m["h"], "dex")
+        m["swing"] = 0.15 + float(maxi(0, 22 - ini)) * 0.06
+        if ini > bi:
+            bi = ini
+            best = m
+        if d == 20:
+            _big(m, "rolls a 20 for initiative and is moving before anything else.")
+    for mon in dun.monsters:
+        if is_instance_valid(mon):
+            (mon as Monster)._swing = 0.15 + float(maxi(0, 21 - _rng.randi_range(1, 20))) * 0.06
+    if dun.lord and is_instance_valid(dun.lord):
+        dun.lord._swing = 0.15 + float(maxi(0, 19 - _rng.randi_range(1, 20))) * 0.06
+
+## a creature's save against a delver's spell: d20 + floor/3 (+2 for a lord) vs
+## the caster's spell DC (8 + proficiency + casting mod)
+func _mon_saves(mon: Monster, m: Dictionary, _kind: int) -> bool:
+    var h: Dictionary = m["h"]
+    var stat := String(CAST_STAT.get(String(h["class"]), String(Roster.CLASSES[String(h["class"])].get("primary", "int"))))
+    var dc := 8 + roster.prof(h) + roster.mod(h, stat)
+    var d := _rng.randi_range(1, 20)
+    if d == 1:
+        return false
+    if d == 20:
+        return true
+    return d + floor_no / 3 + (2 if mon.def.get("boss", false) else 0) >= dc
+
+## traps: the first delver to come within reach of one looks for it - Perception,
+## d20 + WIS (+ proficiency for rogue, ranger, monk) vs DC 10 + floor/2. Seen, it
+## is stepped round. Missed, it goes off: a DEX save vs the same DC halves it.
+## Spikes 2d6 + floor, fire 2d8 + floor; a pressure plate drops a stone, 1d10 + floor.
+const SPOTTERS := ["rogue", "ranger", "monk"]
+const TRAP_REACH := 0.9
+var trap_log := {"spotted": 0, "sprung": 0, "saved": 0}
+func _traps_tick() -> void:
+    if dun == null or not dun.info.has("traps"):
+        return
+    for t in dun.info["traps"]:
+        var tr: Dictionary = t
+        if bool(tr.get("done", false)) or not is_instance_valid(tr["node"]):
+            continue
+        var tp: Vector3 = (tr["node"] as Node3D).global_position
+        for m in _alive():
+            if _flat((m["body"] as Node3D).global_position, tp) > TRAP_REACH:
+                continue
+            tr["done"] = true
+            var h: Dictionary = m["h"]
+            var dc := mini(20, 10 + floor_no / 2)
+            var what := String(tr.get("what", "trap"))
+            var pd := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
+            var per := pd + roster.mod(h, "wis") + (roster.prof(h) if String(h["class"]) in SPOTTERS else 0)
+            if pd != 1 and (pd == 20 or per >= dc):
+                trap_log["spotted"] += 1
+                _say("%s spots %s and steps round it (Perception %d)." % [h["name"], what, per])
+                break
+            trap_log["sprung"] += 1
+            var dmg := float(floor_no) + float(_dice(2, 8) if what.contains("fire") else (_dice(1, 10) if what.contains("plate") else _dice(2, 6)))
+            var sd := _rng.randi_range(1, 20)
+            var sv := sd + roster.save_bonus(h, "dex")
+            if sd != 1 and (sd == 20 or sv >= dc):
+                trap_log["saved"] += 1
+                dmg *= 0.5
+                _say("%s springs %s and twists clear of the worst (DEX save %d)." % [h["name"], what, sv])
+            else:
+                _say("%s springs %s (DEX save %d)." % [h["name"], what, sv])
+            m["hp"] = float(m["hp"]) - _soak(m, dmg)
+            _hero_hit(m)
+            break

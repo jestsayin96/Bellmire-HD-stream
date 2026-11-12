@@ -819,3 +819,86 @@ Town
   to the Quaternius animals; the sheepdog is a little small for the sheep; only 3 farmsteads so 3 hen runs.
 - Checks: parse 0 script errors (the 3 old 'material is null'), _offfloor 0 of 1039, TWITCH_PARSE OK, TOWNWALK
   PASS (0.098%, raid 0%), _delve_test ran with 0 script errors.
+
+## Cycle 66 - L8, wild magic below (laptop, 2026-11-11)
+- Merged origin/main (desktop D3; Mr. E's DnD RULE, L8, L9). WORK_PLAN conflict: kept L6 ticked (done in
+  Cycle 65 - the pack is in assets/characters/kaykit_adv2) and the new L8/L9. A --headless --import was needed
+  for the desktop's new Cavalry class before the parse check was clean.
+- Delve._scar_check: every spell a delver casts below is a check against the scar - d20 + casting mod +
+  proficiency vs DC 10 + floor/2 (cap 20). Casting mod per Mr. E: INT mage/sage/necromancer, WIS
+  cleric/druid/monk, CHA warlock/bard/paladin. A fail calls Spells.cast(..., in_scar = true): the next spell in
+  the order goes off, with the scar's crackle. A natural 1 always misfires, a natural 20 never. Monsters' spells
+  are not checked. What the misfire does: a blow turned into a mending mends the creature (half the caster's
+  attack); a mending turned into a blow (renew -> bolt) hurts the friend it was meant for (half the heal).
+  One Chronicle line per caster per floor: "MossyMage's bolt goes wrong - the scar answers (12 vs DC 15)."
+  Note: the sage's own sheet uses WIS (to-hit, healing); for this check it is INT, as written in the plan.
+- tools/_l8_test.gd (headless, new): 12000 checks per case against the exact 5e odds - floor 1/6/14/30 (DC 10/13/
+  17/20), a strong caster (+9) and a weak one (+1): every rate within 1% (e.g. weak at DC 10: 0.402 vs 0.400,
+  strong at DC 20: 0.500 vs 0.500); the DC caps at 20; an unbeatable caster still misfires ~5% (nat 1), a hopeless
+  one at DC 20 still lands ~5% (nat 20); each calling checks its own ability; a real floor-6 delve checks and
+  misfires. L8_TEST OK. (First run used an unseeded RNG and one rate came out 4 sigma low; seeded, all match.)
+  tools/_l8_shot.gd: renders/cycles/20261111_l8 - looked at: Mourncoil on floor 10, two misfire lines in the
+  Chronicle beside its frost line.
+- _d2_delve_test's "every spell seen" checks are now chance-dependent (misfires swap kinds); it failed once in
+  three runs, passed twice. Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 459,
+  TWITCH_PARSE OK, L4 OK.
+
+
+## Cycle 67 - L9, the roll audit, dungeon side (laptop, 2026-11-11)
+Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll on the hero's real numbers.
+- Damage dice: each weapon tier has dice (bare 1d4, plain 1d6, fine 1d8, runed 1d10, dragontooth 1d12,
+  scarforged 2d8; Roster/Gear WEAPONS "dice"). A blow = the dice + the ability mod + a flat part that keeps the
+  average exactly where it was (0.75 x Roster.attack + kit), so the measured balance holds; a crit rolls the
+  dice twice (5e). Creatures hit on 2d6 of their base (same mean 0.8). The hero sheet shows the dice.
+- Creature attacks: d20 + to-hit vs the delver's AC, a natural 1 always misses, a natural 20 always hits and
+  doubles. Spell saves: fire burst DEX save for half, frost CON save against the slow, both vs the caster's
+  spell DC (8 + prof + casting mod); creature save d20 + floor/3 (+2 a lord), nat 1/20.
+- Initiative each floor: d20 + DEX for delvers, d20 + 1 creatures; the high roll swings first.
+- Traps are live: dungeon_hd records them (info["traps"]); the first delver to step within 0.9 m rolls
+  Perception (d20 + WIS, + prof for rogue/ranger/monk, disadvantage in the dark without darkvision) vs DC 10 +
+  floor/2 - spotted, stepped round; missed, it goes off: a DEX save halves 2d6 + floor (spikes), 2d8 + floor
+  (fire), 1d10 + floor (pressure plate's stone). Each a Chronicle line.
+- Loot: the party's sharpest eye makes an Investigation check (d20 + INT, + prof for rogue/ranger/mage/sage/
+  necromancer) vs DC 10 + floor/2 - it sets the gold (fail x0.8, beat it up to x1.35, nat 20 x1.6, nat 1 x0.6),
+  the salvage and potions, and whether deep gear turns up (nat 20, or a total of 25 - floor/2, -5 for a lord).
+- Death save: still one per delve (old rule), DC 10 CON; a natural 20 stands them up with a quarter of their
+  life, a natural 1 is death.
+- Shops: CHA no longer cuts every price flat. Each purchase is a Persuasion check at the counter (d20 + CHA,
+  + prof for bard/warlock/paladin/rogue) vs DC 12: 10% off +1% a point over (max 20%); nat 20 a quarter off;
+  nat 1 a tenth over; the line says so ("Haggled 11% off (13)."). The guild-rank discount stays on the list price.
+- Big rolls in the Chronicle, once per delver per floor: a natural 20 that kills ("rolls a 20 - and the drowned
+  skeleton mage is gone.") or lands on a lord ("BigAxe rolls a 20 - Gnawbone reels."), 20s on initiative,
+  searching and death saves. (First pass announced every 20: four lines a floor - cut to kills and lords.)
+- Mr. E: the sage's scar check (L8) uses WIS, its own sheet - Delve.CAST_STAT changed; L8_TEST OK with it.
+- tools/_l9_test.gd (headless, new): every tier's mean equals the old (e.g. runed 25.05 vs 25.05) with the dice's
+  exact spread; crits; creature 2d6 mean; haggling odds for CHA +0 (5/5/40/50%); spell save odds (0.493 vs 0.500);
+  the sheet; a real delve: initiative swings, every trap on a floor rolled for, traps across the run. L9_TEST OK.
+  tools/_l9_shot.gd: renders/cycles/20261111_l9 - looked at: Gnawbone with the misfire, the brood and the 20 lines.
+- Checks: parse 0 script errors, _delve_test ENDED all home, _offfloor 0 of 453, TWITCH_PARSE OK, L1, L3, L4,
+  L5, L8 OK. (The town side - fishing, the town's work - is the desktop's part of the rule.)
+
+
+## Cycle 68 - monsters walk and swing again (laptop, 2026-11-11, urgent from the live stream)
+- Mr. E saw it live: creatures and lords glided along the floor and never swung. tools/_mon_anims.gd (new) spawns
+  every def - all 21 creatures, the eight lords, the five uniques - and reports model, AnimationPlayer, its list,
+  and which of idle/walk/run/attack/cast/hit/die/rise exist. Every def HAD its names (34 of 34 idle+walk+attack).
+  Then it watches a real fight: walking skeletons showed their walk on 0 of 821 moving frames, and nothing was
+  ever seen swinging. The cause was in Monster, not the assets: Delve drives each creature (state IDLE, then
+  _play("walk") / _play("attack")), but Monster._process replayed "idle" every frame in state IDLE - so every
+  walk and swing was undone the next frame and the body slid along in a frozen blend.
+- monster.gd: outside calls go through _play (stamps the time); the body's own idle only plays when nobody has
+  driven it for 0.3 s; a one-shot (attack, cast, hit, summon, rise) owns the body until it ends (only death
+  cuts it short), so a swing finishes. busy() says so, and Delve no longer walks a creature mid-swing, mid-rise
+  or reeling (the raised dead slid while climbing out of the floor).
+- Walls and props: creature centres were never in a prop or off the floor (MON_INPROP 0 of 315 in three runs
+  before the fix), but a creature was moved as a point - a lord's or a wide beast's body hung half into the wall
+  beside it. Delve._step now keeps a creature its own half-width (height x 0.2, 0.3-1.8 m) off any wall cell.
+  Nightwing's swoop lands on the floor beside its mark, never in the wall behind it.
+- tools/_offfloor.gd also counts monsters inside props (MON_INPROP) now.
+- Checks: _mon_anims MON_ANIMS OK on floor 5 and floor 8 (every def idle+walk+attack; every moving creature plays
+  its walk, e.g. risen bones 1373 of 1373 frames; every creature seen swinging); _offfloor 0 of 486, INPROP 0,
+  MON_INPROP 0 of 110; _delve_test ENDED all home; TWITCH_PARSE OK; L1 (twice), L2, L8, L9, D2_DELVE OK.
+- Render renders/cycles/20261111_monanims (tools/_mon_fight_shot.gd, new): the real town's light, floor 5, the
+  Rattling Host with a bone bowman, a sentinel and a spider called beside it; frames taken only while the lord
+  is playing its attack - looked at: the Host's axe raised high over the knight, the bowman and sentinel by it.
+- Mr. E's other note (the sage's scar check on WIS) was already done in Cycle 67.

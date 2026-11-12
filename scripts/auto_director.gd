@@ -132,6 +132,8 @@ func _process(delta: float) -> void:
     var cut := false
     if _cur.is_empty() or not cur_alive:
         cut = true
+    elif _lane_owns(_cur) and best["key"] != _cur["key"]:
+        cut = true                              # L24: a lane holds this hero now - the split would show it twice
     elif best["key"] == _cur["key"]:
         _cur["pri"] = best["pri"]               # same story, keep watching
     elif String(best["key"]).begins_with("lord_") and not String(_cur["key"]).begins_with("lord_"):
@@ -148,6 +150,32 @@ func _process(delta: float) -> void:
             if best.is_empty():
                 return
         _cut(best)
+
+## ---- L24 (Mr. E, Nov 11): while a spotlight lane holds a hero, the director never follows
+## that same hero - the split would show one thing twice. It cuts away (to the story, through
+## another delver, or to the next best thing). A lord or a raid is followed by its own node,
+## never a hero, so it is never given up for this.
+var _held_now: Array = []
+
+func lane_held() -> Array:
+    var out: Array = []
+    var s := HudDock.spot(town)
+    if s == null or s.mode_now() == "off":
+        return out
+    for l in Spotlight.LANES:
+        if s.pane_rect(l).size.x > 0.0:
+            var b := s._target(l)
+            if b:
+                out.append(b)
+    return out
+
+func _lane_owns(s: Dictionary) -> bool:
+    if s.is_empty() or not s.has("node"):
+        return false
+    var k := String(s.get("key", ""))
+    if k.begins_with("lord_") or k == "raid":
+        return false
+    return lane_held().has(s["node"])
 
 func _cut(s: Dictionary) -> void:
     print("DIRECTOR cut ", s["key"], " pri ", s["pri"])
@@ -192,6 +220,7 @@ func tour_stops() -> Array:
 
 ## every shot worth showing right now, best first; `avoid` skips one story
 func _best(avoid: String = "") -> Dictionary:
+    _held_now = lane_held()
     var c: Array = []
     # 1. a raid on Bellmire
     var rd = town.get("raids")
@@ -208,7 +237,12 @@ func _best(avoid: String = "") -> Dictionary:
         var alive: Array = (d as Delve)._alive()
         if alive.is_empty():
             continue
+        # L24: the fight seen through a delver no spotlight lane already holds
         var body: Node3D = alive[0]["body"]
+        for m in alive:
+            if not _held_now.has(m["body"]):
+                body = m["body"]
+                break
         var hurt := 0.0
         for m in alive:
             hurt = maxf(hurt, 1.0 - float(m["hp"]) / maxf(float(m["max"]), 1.0))
@@ -240,7 +274,7 @@ func _best(avoid: String = "") -> Dictionary:
     var fresh_ago := CHAT_FRESH_S
     for uid in hs:
         var ago := ChatCmd.since_cmd(String(uid))
-        if ago < fresh_ago and is_instance_valid(hs[uid]) and (hs[uid] as Node3D).is_visible_in_tree():
+        if ago < fresh_ago and is_instance_valid(hs[uid]) and (hs[uid] as Node3D).is_visible_in_tree() and not _held_now.has(hs[uid]):
             fresh = String(uid)
             fresh_ago = ago
     if fresh != "":
@@ -250,7 +284,7 @@ func _best(avoid: String = "") -> Dictionary:
     ks.shuffle()
     for uid in ks:
         var hb = hs[uid]
-        if is_instance_valid(hb) and (hb as Node3D).is_visible_in_tree():
+        if is_instance_valid(hb) and (hb as Node3D).is_visible_in_tree() and not _held_now.has(hb):
             c.append({"key": "hero_%s" % uid, "pri": 30.0 + _rng.randf() * 5.0,
                       "node": hb, "dist": 14.0, "pitch": -30.0})
             break
@@ -263,6 +297,8 @@ func _best(avoid: String = "") -> Dictionary:
     for s in c:
         if String(s["key"]) == avoid:
             continue
+        if _lane_owns(s):
+            continue                            # L24: never the hero a lane already shows
         if best.is_empty() or float(s["pri"]) > float(best["pri"]):
             best = s
     return best

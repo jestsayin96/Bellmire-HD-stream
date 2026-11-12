@@ -263,15 +263,18 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Test that fails on the old build, then a 1080p render shrunk to 854x480 and looked at.
       DONE (Cycle 81): panes over the top 85%, the Chronicle + clock in a bottom chrome bar, boss card + party frames + unit frame docked in the pane showing them (scripts/hud_dock.gd), 3D text on render layers with a cull mask per pane, one name tag per lane pane; L21_TEST 32/32 (15 failed before).
       ALSO: !guild drops the "roll" alias (bare !roll is fightoverlay's dice, now silent here); L14_TEST OK.
-- [ ] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
-- [ ] L23. The director should cut away from a hero a lane already holds (or the split is wasted).
+- [x] L22. Panes near-identical when two spotlit heroes stand close: a different angle / zoom when subjects are within a few metres.
+      DONE (Cycle 84): within 6 m of another pane's subject a lane takes its own quarter (90 / -90 / 180 deg from the director) and zoom, clearance tilts but never swings it; L22_TEST OK (views 84-177 deg apart).
+- [x] L24. (was the laptop's "L23" before the supervisor's L23 below) The director cuts away from a hero a lane already holds.
+      DONE (Cycle 85): lane-held heroes are skipped by every director pick, a fight or delve shot goes through a delver no lane holds, a held shot is cut within 1 s; L24_TEST OK (5 of 6 failed before).
 
-- [ ] L23. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
+- [x] L23. De-flake tools/_l20_test.gd (supervisor, Nov 12). On the merge run it failed with
       "the director never cut to fight" and "all six shot types were seen" (saw tour_market, tour_scar,
       tour_valley, hero, raid - no fight), then PASSED on an immediate re-run with no code change. It is
       waiting on the director to happen to cut to a fight inside the test window. Make the test drive the
       director deterministically - force a fight and force the cut - instead of waiting for one. A test
       that fails at random teaches everyone to ignore it, which is worse than no test.
+      DONE (Cycle 83): a lord floor + the director deciding at once when the story is live (its own _best / _cut); timing samples best of 3; L20_TEST OK x3 in a row.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] W1. A public page for viewers: hero sheet, inventory, gear, the guild roll, the fallen, the command list

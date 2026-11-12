@@ -348,7 +348,27 @@ static func help_line(arg := "") -> String:
     return "Commands: %s  |  !help <command> for more." % " ".join(bits)
 
 ## the nearest command to a typo (edit distance 2 or less), or ""
+## another app's command (data/commands.json "foreign"): one of theirs, one of their
+## prefixes (fightoverlay's "v"), or a near miss of one of theirs - Bellmire stays silent.
+## near_too = false: exact or prefix only (a Bellmire name may sit NEAR theirs: stats ~ vstats)
+static func foreign(word: String, near_too := true) -> bool:
+    var near := 2 if word.length() <= 4 else 3
+    var fs: Dictionary = commands().get("foreign", {})
+    for app in fs:
+        if not (fs[app] is Dictionary):
+            continue
+        for p in (fs[app] as Dictionary).get("prefixes", []):
+            if word.begins_with(String(p)):
+                return true
+        for n in (fs[app] as Dictionary).get("exact", []):
+            if word == String(n) or (near_too and _lev(word, String(n)) < near):
+                return true
+    return false
+
+## the Bellmire command a typo meant, or "" - never for another app's word (foreign)
 static func _closest(word: String) -> String:
+    if foreign(word):
+        return ""
     var best := ""
     var bd := 2 if word.length() <= 4 else 3
     var names: Array = []

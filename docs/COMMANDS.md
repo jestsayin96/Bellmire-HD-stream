@@ -26,4 +26,4 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 | `!richest` |  |  | free | Who carries the most gold. (no hero needed) | `!richest` |
 | `!patrons` | !benefactors |  | free | Those who have kept the valley going. (no hero needed) | `!patrons` |
 | `!look` | !spotlight, !watch |  | free | Ask for a look at your hero: a 10-second pane in the channel-points lane (teal), only when nobody has redeemed it or is waiting. Cheers, subs and redeems get their own longer panes. | `!look` |
-| `!help` | !commands, !valley | [command] | free | The command list; !help <command> for one in detail. (no hero needed) | `!help forge` |
+| `!help` | !commands | [command] | free | The command list; !help <command> for one in detail. (no hero needed) | `!help forge` |

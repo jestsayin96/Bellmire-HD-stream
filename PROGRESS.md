@@ -1209,3 +1209,11 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Looked at: renders/cycles/20261111_l20/*_phone480.png (all six). L17 grid re-render: off 57.4 fps, full grid 55.1 (with main's D7).
 - Found for the L17 re-check: in the grid the boss bar straddles the director and bits panes, and a monster's floating Label3D shows huge in a close pane.
 - Tests: parse 0 errors (after an --import for main's new Dice class), _l20_test OK x3, _l17 / _l18 / _l14 / _l16 OK, _twitch_parse OK, _delve_test clean to floor 3.
+
+## Cycle 80 - chat: sharing the channel with fightoverlay (laptop, 2026-11-11) - done
+- data/commands.json gains a "foreign" block: fightoverlay's full command list, its v prefix (and its v commands by name), and the chat bots' !discord / !so. A new overlay command is a data edit.
+- ChatCmd.foreign(word): one of theirs, starts with one of their prefixes, or a near miss of one of theirs. Bellmire never answers these and never nudges them (!hug, !hugg, !vstat, !vhelp, !fightt: silent). A near miss of a Bellmire command still gets its nudge (!hro -> !hero, !fsh -> !fish).
+- !valley dropped (the !help alias started with v, and viewers are learning "v means the overlay"); !help and !commands cover it. docs/COMMANDS.md regenerated.
+- Bellmire keeps its bare names (!stats, !roll, !help, !commands). They sit near the overlay's vstats / vroll / vhelp / vcommands, which is fine: an exact Bellmire command is answered before any nudge logic. The clash check is exact-or-prefix.
+- Tests: _l14_test gains the silence, nudge and clash checks - L14_TEST OK; _l17 / _l18 OK, _twitch_parse OK, parse 0 errors.
+- T1 not started (Mr. E may give it to the desktop). The opt-out command (Mr. E's point 5) is not built yet.

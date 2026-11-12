@@ -1,1 +1,1 @@
-IDLE 2026-11-11 22:48 - L20 done (Cycle 79); next: overlay command ignore list + drop !valley
+IDLE 2026-11-11 22:51 - overlay ignore list done (Cycle 80); waiting on Mr. E (T1 / opt-out / L17 grid fixes)

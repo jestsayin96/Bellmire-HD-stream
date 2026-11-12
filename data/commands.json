@@ -64,8 +64,15 @@
     "look":      {"aliases": ["spotlight", "watch"], "args": "", "cost": "free", "needs_hero": true, "short": "A 10 s spotlight pane on your hero, when the channel-points lane is free.",
                   "what": "Ask for a look at your hero: a 10-second pane in the channel-points lane (teal), only when nobody has redeemed it or is waiting. Cheers, subs and redeems get their own longer panes.",
                   "example": "!look"},
-    "help":      {"aliases": ["commands", "valley"], "args": "[command]", "cost": "free", "needs_hero": false,
+    "help":      {"aliases": ["commands"], "args": "[command]", "cost": "free", "needs_hero": false,
                   "what": "The command list; !help <command> for one in detail.",
                   "example": "!help forge"}
+  },
+  "foreign": {
+    "_why": "Other apps reading the same chat (Mr. E, Nov 11). Bellmire never answers these, and never nudges a word that is one of them, starts with one of their prefixes, or is a near miss of one - a viewer's !hug works in the overlay, and a 'No !hug here' in the Chronicle would read as a broken game. A new overlay command is an edit here, not in code. Never add a Bellmire command that matches one.",
+    "fightoverlay": {"prefixes": ["v"],
+                     "exact": ["jump", "dance", "sit", "wave", "hat", "charge", "color", "random", "hideavatar", "hug", "attack", "slap", "punch", "bomb", "explode", "avatar", "class", "accept", "royale", "join", "basketball", "hoop", "shoot", "boss", "megaboss", "lounge", "war", "fight", "village", "log", "feed", "8ball", "mass",
+                               "vshop", "vbuy", "vpoints", "vgive", "vtop", "vduel", "vslots", "vcoins", "vgold", "vlb", "vleaderboard", "vstats", "vroll", "vhelp", "vcommands"]},
+    "chat_bots":    {"prefixes": [], "exact": ["discord", "so"]}
   }
 }

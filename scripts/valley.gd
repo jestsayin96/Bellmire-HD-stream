@@ -22,6 +22,8 @@ extends Node3D
 const NATURE := "res://assets/nature/"
 const PROPS := "res://assets/props/"
 const MKPROPS := "res://assets/mkprops/"
+const WATER_Y := -0.9              # mirrors town.WATER_Y (river surface)
+const RIVER_W := 7.0               # mirrors town.RIVER_W (half-width of open water)
 const LANE_W := 3.4
 const MAX_TRAVELLERS := 4
 ## [from, to, with a cart, Chronicle line ("" = none)]
@@ -52,6 +54,12 @@ var _rng := RandomNumberGenerator.new()
 var _wood: StandardMaterial3D
 var _moss: StandardMaterial3D
 var _bark: StandardMaterial3D
+var _soil: StandardMaterial3D
+var _wheat: StandardMaterial3D
+var _straw: StandardMaterial3D
+var _hay: StandardMaterial3D
+var _plank: StandardMaterial3D
+var _d18b_fields: Array = []   # D18b: centres of the valley fields (for the test)
 
 func setup(t) -> void:
     town = t
@@ -96,6 +104,7 @@ func setup(t) -> void:
     _road([ruin["join"], ruin["gate"]])
     _forest(ash["pos"])
     _ruin_growth(ruin["pos"])
+    _dress_valley(coal, bram, ash)
     # where travellers come and go
     ends["the market"] = town._market_pos + Vector3(3.0, 0, 3.0)
     var lm: Dictionary = town.landmarks
@@ -118,6 +127,21 @@ func _mats() -> void:
     _moss.albedo_color = Color(0.60, 0.63, 0.55)
     _bark = StandardMaterial3D.new()
     _bark.albedo_color = Color(0.38, 0.27, 0.18)
+    _soil = (town._mat.get("MI_Grass") as StandardMaterial3D).duplicate()
+    _soil.albedo_color = Color(0.52, 0.40, 0.29)
+    _soil.cull_mode = BaseMaterial3D.CULL_DISABLED
+    _wheat = StandardMaterial3D.new()
+    _wheat.albedo_color = Color(0.84, 0.69, 0.33)
+    _wheat.roughness = 0.9
+    _wheat.cull_mode = BaseMaterial3D.CULL_DISABLED
+    _straw = StandardMaterial3D.new()
+    _straw.albedo_color = Color(0.82, 0.68, 0.34)
+    _straw.roughness = 1.0
+    _hay = StandardMaterial3D.new()
+    _hay.albedo_color = Color(0.85, 0.70, 0.36)
+    _hay.roughness = 1.0
+    _plank = _wood.duplicate()
+    _plank.albedo_color = Color(0.48, 0.37, 0.26)
 
 ## ---------------------------------------------------------------- placing
 ## nearest spot to `want` with r metres of clear, gentle ground (no road, plot,
@@ -548,3 +572,274 @@ func _drop(tr: Dictionary) -> void:
         (tr["cart"] as Node).queue_free()
     if is_instance_valid(tr["v"]):
         (tr["v"] as Node).queue_free()
+
+## ================================================================ D18b dress
+## Make the country read as worked land: each steading gets ploughed, fenced,
+## cropped fields with a scarecrow, a kitchen garden, a hayrick and grazing
+## stock; the ford gets a fishing jetty; the lanes get wildflowers and tall
+## grass along the verges, and a copse stands between the roads.
+func _dress_valley(coal: Dictionary, bram: Dictionary, ash: Dictionary) -> void:
+    _steading(coal, "Sheep", 3)
+    _steading(bram, "Cow", 2)
+    _jetty()
+    _copse((coal["pos"] as Vector3).lerp(ash["pos"] as Vector3, 0.5) + Vector3(-20.0, 0, 6.0), 26)
+    _verges()
+    print("VALLEY dressed fields=%d crops=%d fences=%d" % [int(made.get("fields", 0)), int(made.get("crops", 0)), int(made.get("fences", 0))])
+
+func _steading(res: Dictionary, beast: String, n_beast: int) -> void:
+    var c: Vector3 = res["pos"]
+    var dirs := [Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, 0, -1),
+                 Vector3(1, 0, 1).normalized(), Vector3(-1, 0, 1).normalized(),
+                 Vector3(1, 0, -1).normalized(), Vector3(-1, 0, -1).normalized()]
+    var n := 0
+    var wheat := true
+    for d in dirs:
+        if n >= 2:
+            break
+        var dv: Vector3 = d
+        var spot := _field_spot(c + dv * 30.0, dv)
+        if spot == Vector3.INF:
+            continue
+        _field(spot, dv, 9.0, 7.0, wheat, c)
+        var to_c := (c - spot).normalized()
+        var gate: Vector3 = spot + to_c * 11.0
+        var path: Array[Vector3] = [Vector3(c.x, 0, c.z) + to_c * -9.0, Vector3(gate.x, 0, gate.z)]
+        town._road_strip(path, 1.6, true)
+        made["roads"] = int(made.get("roads", 0)) + 1
+        n += 1
+        wheat = not wheat
+    _garden(c)
+    _hayrick(c)
+    _graze(c, beast, n_beast)
+
+## nearest placeable field centre to `want`, laid along `fw`
+func _field_spot(want: Vector3, fw: Vector3) -> Vector3:
+    var sd := Vector3(-fw.z, 0, fw.x)
+    for ring in range(0, 6):
+        var cnt := 1 if ring == 0 else 6
+        for k in range(cnt):
+            var a := TAU * float(k) / float(cnt) + float(ring) * 0.3
+            var q := want + Vector3(cos(a), 0, sin(a)) * float(ring) * 6.0
+            if absf(q.x) > edge - 22.0 or absf(q.z) > edge - 22.0:
+                continue
+            if bool(town._field_ok(q, fw, sd, 9.0, 7.0)):
+                return q
+    return Vector3.INF
+
+## a ploughed, fenced, cropped field; the gate gap faces `toward` (the steading)
+func _field(c: Vector3, fw: Vector3, hw: float, hd: float, wheat: bool, toward: Vector3) -> void:
+    var sd := Vector3(-fw.z, 0, fw.x)
+    (town._fields as Array).append([c, fw, sd, hw, hd])
+    _d18b_fields.append(c)
+    town._ground_patch(c, fw, sd, hw, hd, _soil)
+    var mesh: Mesh = town._mesh_of(NATURE + ("Grass_Wispy_Tall.gltf" if wheat else "Plant_1.gltf"))
+    if mesh:
+        var xs: Array[Transform3D] = []
+        var row := -hd + 1.0
+        while row < hd - 0.8:
+            var col := -hw + 0.8
+            while col < hw - 0.6:
+                var q := c + sd * (col + _rng.randf_range(-0.12, 0.12)) + fw * row
+                var s := _rng.randf_range(0.26, 0.34) if wheat else _rng.randf_range(0.30, 0.42)
+                var b := Basis(Vector3.UP, _rng.randf() * TAU).scaled(Vector3(s, s * (1.25 if wheat else 1.0), s))
+                xs.append(Transform3D(b, Vector3(q.x, float(town.height_at(q.x, q.z)) + 0.05, q.z)))
+                col += 0.42 if wheat else 0.9
+            row += 1.1
+        var mm := MultiMesh.new()
+        mm.transform_format = MultiMesh.TRANSFORM_3D
+        mm.mesh = mesh
+        mm.instance_count = xs.size()
+        for i in range(xs.size()):
+            mm.set_instance_transform(i, xs[i])
+        var mmi := MultiMeshInstance3D.new()
+        mmi.multimesh = mm
+        if wheat:
+            mmi.material_override = _wheat
+        mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+        mmi.visibility_range_end = 320.0
+        add_child(mmi)
+        made["crops"] = int(made.get("crops", 0)) + xs.size()
+    _fence_ring(c, fw, sd, hw, hd, (toward - c).normalized())
+    _scarecrow(c + sd * (hw * 0.25) + fw * (hd * 0.1))
+    town._objs.append([c, sqrt(hw * hw + hd * hd)])
+    made["fields"] = int(made.get("fields", 0)) + 1
+
+## a post-and-rail fence round a plot, with a gap for a gate on the `gate_dir` side
+func _fence_ring(c: Vector3, fw: Vector3, sd: Vector3, hw: float, hd: float, gate_dir: Vector3) -> void:
+    var corners := [[-1.0, -1.0, 1.0, -1.0], [1.0, -1.0, 1.0, 1.0], [1.0, 1.0, -1.0, 1.0], [-1.0, 1.0, -1.0, -1.0]]
+    for cr in corners:
+        var p0 := c + sd * (hw * float(cr[0])) + fw * (hd * float(cr[1]))
+        var p1 := c + sd * (hw * float(cr[2])) + fw * (hd * float(cr[3]))
+        var L := p0.distance_to(p1)
+        if L < 0.1:
+            continue
+        var dirv := (p1 - p0) / L
+        var outward := ((p0 + p1) * 0.5 - c).normalized()
+        var gate_side := outward.dot(gate_dir) > 0.55
+        var cnt := int(L / 2.0)
+        for k in range(cnt):
+            if gate_side and absf(float(k) - float(cnt) * 0.5) < 0.9:
+                continue
+            var q := p0 + dirv * (2.0 * (float(k) + 0.5))
+            town._spawn_raw(MKPROPS, "Prop_WoodenFence_Single", Vector3(q.x, float(town.height_at(q.x, q.z)), q.z), atan2(dirv.x, dirv.z) - PI * 0.5, 1.0)
+            made["fences"] = int(made.get("fences", 0)) + 1
+
+## a straw figure on a cross of poles, over a tended field
+func _scarecrow(p: Vector3) -> void:
+    var g := float(town.height_at(p.x, p.z))
+    town._box(Vector3(0.12, 2.0, 0.12), Vector3(p.x, g + 1.0, p.z), _wood, 0.0)
+    town._box(Vector3(1.3, 0.1, 0.1), Vector3(p.x, g + 1.45, p.z), _wood, _rng.randf_range(-0.25, 0.25))
+    var rag := StandardMaterial3D.new()
+    rag.albedo_color = Color(0.55, 0.42, 0.40)
+    rag.roughness = 1.0
+    town._box(Vector3(0.6, 0.6, 0.2), Vector3(p.x, g + 1.15, p.z), rag, 0.0)
+    var head := MeshInstance3D.new()
+    var hm := SphereMesh.new()
+    hm.radius = 0.16
+    hm.height = 0.32
+    head.mesh = hm
+    head.material_override = _straw
+    head.position = Vector3(p.x, g + 1.78, p.z)
+    add_child(head)
+
+## a small fenced kitchen garden by the steading: rows of greens, a crate, a bucket
+func _garden(c: Vector3) -> void:
+    var want := c + Vector3(_rng.randf_range(-1.0, 1.0), 0, _rng.randf_range(-1.0, 1.0)).normalized() * 17.0
+    var g0 := _find_open(want, 4.5)
+    if g0 == Vector3.INF:
+        return
+    for r in range(4):
+        for cc in range(6):
+            var q := g0 + Vector3(-2.5 + float(cc), 0, -1.5 + float(r))
+            town._spawn_raw(NATURE, "Plant_1", Vector3(q.x, float(town.height_at(q.x, q.z)), q.z), _rng.randf() * TAU, _rng.randf_range(0.5, 0.8))
+    var ce := g0 + Vector3(3.2, 0, 0.0)
+    town._spawn_raw(PROPS, "FarmCrate_Carrot", Vector3(ce.x, float(town.height_at(ce.x, ce.z)), ce.z), _rng.randf() * TAU, 0.9)
+    var be := g0 + Vector3(-3.0, 0, 1.6)
+    town._spawn_raw(PROPS, "Bucket_Wooden_1", Vector3(be.x, float(town.height_at(be.x, be.z)), be.z), _rng.randf() * TAU, 1.0)
+    _fence_ring(g0, Vector3(0, 0, 1), Vector3(1, 0, 0), 3.2, 2.4, (c - g0).normalized())
+    town._objs.append([g0, 4.2])
+
+## a hayrick (two thatched stacks) on open ground by the steading
+func _hayrick(c: Vector3) -> void:
+    var want := c + Vector3(_rng.randf_range(-1.0, 1.0), 0, _rng.randf_range(-1.0, 1.0)).normalized() * 20.0
+    var h0 := _find_open(want, 3.5)
+    if h0 == Vector3.INF:
+        return
+    for off in [Vector3(-1.6, 0, 0), Vector3(1.6, 0, 0.4)]:
+        var sp: Vector3 = h0 + off
+        var stack := MeshInstance3D.new()
+        var cm := CylinderMesh.new()
+        cm.top_radius = 0.3
+        cm.bottom_radius = 1.4
+        cm.height = 2.4
+        stack.mesh = cm
+        stack.material_override = _hay
+        stack.position = Vector3(sp.x, float(town.height_at(sp.x, sp.z)) + 1.1, sp.z)
+        add_child(stack)
+    town._objs.append([h0, 3.2])
+
+## a few beasts grazing loose on open ground near the steading
+func _graze(c: Vector3, kind: String, n: int) -> void:
+    var want := c + Vector3(_rng.randf_range(-1.0, 1.0), 0, _rng.randf_range(-1.0, 1.0)).normalized() * 26.0
+    var center := _find_open(want, 8.0)
+    if center == Vector3.INF:
+        return
+    var fw := Vector3(0, 0, 1)
+    var sd := Vector3(1, 0, 0)
+    for k in range(n):
+        var at := center + sd * _rng.randf_range(-6.0, 6.0) + fw * _rng.randf_range(-5.0, 5.0)
+        town._animal(kind, center, fw, sd, 7.0, 5.5, at)
+    town._objs.append([center, 3.0])
+
+## a plank fishing jetty out over the ford's slow water, with a barrel, a crate,
+## a bucket and a coil of rope at the landward end
+func _jetty() -> void:
+    var x := float(town.ford_x) - 22.0
+    var rz := float(town.river_z_fast(x))
+    var bank := rz + RIVER_W + 1.0        # the near (south) bank
+    var tip := rz + 1.2                    # out over the water
+    var length := bank - tip
+    var midz := (bank + tip) * 0.5
+    var dy := WATER_Y + 0.55
+    town._box(Vector3(2.2, 0.14, length), Vector3(x, dy, midz), _plank, 0.0)
+    for sx in [-0.9, 0.9]:
+        for sz in [tip + 0.5, bank - 0.5]:
+            town._box(Vector3(0.14, 1.5, 0.14), Vector3(x + float(sx), dy - 0.75, float(sz)), _plank, 0.0)
+    var top := dy + 0.08
+    town._spawn_raw(PROPS, "Barrel", Vector3(x - 0.7, top, bank - 0.7), _rng.randf() * TAU, 0.9)
+    town._spawn_raw(PROPS, "Crate_Wooden", Vector3(x + 0.7, top, bank - 0.7), 0.4, 0.9)
+    town._spawn_raw(PROPS, "Bucket_Wooden_1", Vector3(x - 0.5, top, tip + 1.0), 0.0, 1.0)
+    town._spawn_raw(PROPS, "Rope_1", Vector3(x + 0.6, top, tip + 1.4), 0.0, 1.0)
+    _solid(Vector3(x, 0, midz), 0.0, Vector2(1.3, length * 0.5 + 0.3))
+    town._objs.append([Vector3(x, 0, midz), length * 0.5 + 2.0])
+    town._signpost(Vector3(x + 2.6, 0, bank + 1.5), Vector3(0, 0, -1), "THE JETTY", _wood, Color(0.95, 0.88, 0.70))
+
+## a small stand of common trees and undergrowth between the valley roads
+func _copse(center: Vector3, count: int) -> void:
+    var c := _find_open(center, 6.0)
+    if c == Vector3.INF:
+        return
+    var tries := 0
+    var n := 0
+    while n < count and tries < count * 14:
+        tries += 1
+        var a := _rng.randf() * TAU
+        var r := _rng.randf_range(4.0, 22.0)
+        var tp := c + Vector3(cos(a), 0, sin(a)) * r
+        if not bool(town.is_clear(tp, 1.4)) or bool(town._in_field(tp, 2.0)) or float(town.road_dist(tp)) < 3.0:
+            continue
+        var nm := ("CommonTree_%d" % (1 + _rng.randi() % 5)) if _rng.randf() < 0.7 else ("Pine_%d" % (1 + _rng.randi() % 5))
+        var nd: Node3D = town._spawn_raw(NATURE, nm, Vector3(tp.x, float(town.height_at(tp.x, tp.z)) - 0.05, tp.z), _rng.randf() * TAU, _rng.randf_range(1.0, 1.6))
+        if nd == null:
+            continue
+        town._objs.append([tp, 1.2])
+        n += 1
+        if _rng.randf() < 0.3:
+            var fp := tp + Vector3(_rng.randf_range(-2.0, 2.0), 0, _rng.randf_range(-2.0, 2.0))
+            town._spawn_raw(NATURE, ["Bush_Common", "Fern_1", "Flower_3_Group"][_rng.randi() % 3], Vector3(fp.x, float(town.height_at(fp.x, fp.z)), fp.z), _rng.randf() * TAU, 1.0)
+    made["trees"] += n
+
+## wildflowers, clover and tall grass along the valley lanes
+func _verges() -> void:
+    var placed := 0
+    for sg in (town._road_segs as Array):
+        var a: Vector3 = sg[0]
+        var b: Vector3 = sg[1]
+        var mid := (a + b) * 0.5
+        if Vector2(mid.x, mid.z).length() < 120.0:
+            continue                         # the town core, not the valley
+        var dv := b - a
+        dv.y = 0.0
+        var L := dv.length()
+        if L < 1.5:
+            continue
+        dv = dv / L
+        var perp := Vector3(-dv.z, 0, dv.x)
+        var steps := maxi(int(L / 5.0), 1)
+        for k in range(steps):
+            if _rng.randf() < 0.45:
+                continue
+            var t := (float(k) + 0.5) / float(steps)
+            var base := a.lerp(b, t)
+            var sgn := 1.0 if _rng.randf() < 0.5 else -1.0
+            var q := base + perp * sgn * (float(sg[2]) * 0.5 + _rng.randf_range(1.2, 3.2))
+            if not bool(town.is_clear(q, 0.6)) or bool(town._in_field(q, 1.0)):
+                continue
+            var nm: String = ["Grass_Common_Tall", "Grass_Wispy_Tall", "Clover_1", "Flower_3_Group", "Flower_4_Group", "Bush_Common_Flowers"][_rng.randi() % 6]
+            if town._spawn_raw(NATURE, nm, Vector3(q.x, float(town.height_at(q.x, q.z)), q.z), _rng.randf() * TAU, _rng.randf_range(0.9, 1.5)):
+                placed += 1
+    print("VALLEY verges ", placed)
+
+## nearest clear, gentle, road- and field-free open spot to `want`
+func _find_open(want: Vector3, r: float) -> Vector3:
+    for ring in range(0, 7):
+        var cnt := 1 if ring == 0 else 8
+        for k in range(cnt):
+            var a := TAU * float(k) / float(cnt) + float(ring) * 0.2
+            var q := want + Vector3(cos(a), 0, sin(a)) * float(ring) * 5.0
+            if absf(q.x) > edge - r - 4.0 or absf(q.z) > edge - r - 4.0:
+                continue
+            if bool(town.is_clear(q, r)) and not bool(town._in_field(q, r)) \
+                    and float(town.road_dist(q)) > r + 1.5 and float(town.river_dist(q.x, q.z)) > r + 6.0:
+                return q
+    return Vector3.INF

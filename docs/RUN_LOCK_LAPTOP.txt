@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 03:53 - L25 dungeon geometry
+IDLE 2026-11-12 04:27 - L25 in progress, pushed (geometry green; lord-fight stuck still open)

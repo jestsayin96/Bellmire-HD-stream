@@ -122,7 +122,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       a raid ate a hero's errand (arrival fired mid-road); defenders whose post a prop blocks walked on the spot forever.
       D8_TEST OK; 9-min re-soak 0 script errors, 0 lambda errors; renders/cycles/20261112_d8.
 
-- [ ] T1. TWITCH PHASE 2 - DESKTOP OWNS THIS (Mr. E, Nov 11 23:18). All credentials are already
+- [x] T1. TWITCH PHASE 2 - DESKTOP OWNS THIS (Mr. E, Nov 11 23:18). All credentials are already
       authorized and proven live: see the gitignored local/twitch.cfg for the client id, both user ids
       and the file names. Tokens are in user://twitch_token.json (broadcaster) and
       user://twitch_bot_token.json (bot bellmirebro, modded on the channel) on THIS machine - that is
@@ -147,6 +147,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       (broadcaster_id 138821183, sender_id 1609188025). Do not change that signature alone.
       Test without a live stream: the test-only !testbits <n> / !testsub / !testpoints already exist
       from L17. Prove the refresh path by forcing an expiry, not by waiting.
+      DONE cycle 82: scripts/twitch_eventsub.gd (TwitchEventSub, started by town.gd in play only) - EventSub socket, 6/6 subs
+      live (cheer, subscribe, sub.message, sub.gift, follow v2, redemption.add); both tokens refreshed 15 min early + hourly
+      validate + refresh on a stale-token 401, new pair saved .tmp -> read back -> rename; bits 15/20/30 s, sub/resub/gifter
+      30 s, follow = Chronicle only, rewards matched by id only (fightoverlay's ignored), refund when no hero; chat queue
+      (1.6 s gap, @name, 480 chars, 30 s repeat drop) waits on chatcmd's twitch_reply. T1_TEST OK (18/18 offline); T1_LIVE OK
+      (forced expiry -> both refreshed, saved, validated, socket stayed up). NOT YET: (a) the broadcaster token lacks
+      channel:manage:redemptions, so Bellmire can not make its "Spotlight my hero" reward (401) - Mr. E must re-authorize
+      with that scope; (b) town.spotlight is L17 (laptop) - until then events print SPOTLIGHT + emit spotlight_wanted;
+      (c) twitch_reply is not in chatcmd.gd yet (laptop) - connected automatically once it is; (d) !testbits etc. do not
+      exist (L17 open) - tests feed recorded EventSub frames instead. Chat sending was not tried live (nothing posted).
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
 - [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),

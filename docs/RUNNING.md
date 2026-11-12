@@ -48,7 +48,11 @@ Nightbot and other bots are ignored; 3 s per-viewer cooldown; at most 4 commands
 Settings: `%APPDATA%\Godot\app_userdata\Jests HD Medieval Adventure\twitch.cfg` (written on first run):
 `channel`, `enabled` (false = no Twitch), `ignore` (bot names). You can still type commands yourself with
 Enter (that hero is "MrE", a different hero from your Twitch account).
-Not yet: follows, subs, bits and channel points (needs a Twitch token - a later phase).
+**Phase 2 (scripts/twitch_eventsub.gd):** with the tokens in user:// the game also listens for bits, subs, gift subs,
+follows and channel points (EventSub) and refreshes both tokens by itself. Console lines start `TWITCH_EVENTSUB`.
+Bits/subs/points ask for a spotlight on that viewer's hero (the panes are L17); follows get a Chronicle line.
+Channel points only count for Bellmire's own reward "Spotlight my hero" - the broadcaster token must include
+`channel:manage:redemptions` for the game to create it. Turn phase 2 off with `eventsub=false` in twitch.cfg.
 
 | Command | What happens |
 |---|---|

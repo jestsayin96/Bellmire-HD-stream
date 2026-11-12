@@ -312,6 +312,12 @@ func _ready() -> void:
         tw.name = "TwitchChat"
         add_child(tw)
         tw.call_deferred("setup", self)
+        # Twitch phase 2 (T1): bits, subs, follows, channel points, chat replies as the bot
+        # (tokens in user://; [twitch] eventsub=false in user://twitch.cfg turns it off)
+        var es := TwitchEventSub.new()
+        es.name = "TwitchEventSub"
+        add_child(es)
+        es.call_deferred("setup", self)
         var board := LeaderboardPanel.new()
         add_child(board)
         board.call_deferred("setup", roster)

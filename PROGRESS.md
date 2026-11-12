@@ -1258,3 +1258,38 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   frames and the Chronicle; the late-stream raid by the wall.
 - Checks: parse 0 script errors, _offfloor 0 of 1054 (MON_INPROP 0 of 214), TWITCH_PARSE OK, _townwalk PASS (in_solid
   0/8702, raid 0/3350, stuck_on_route 0-1), _delve_test ENDED all four home, 0 SCRIPT ERROR. Laptop files untouched.
+
+## Cycle 82 - T1, Twitch phase 2: EventSub, token refresh, rewards by id, chat replies (desktop, 2026-11-12)
+- scripts/twitch_eventsub.gd (new, class TwitchEventSub), added by town.gd beside TwitchChat in play only (not under
+  --script tools); [twitch] eventsub=false in user://twitch.cfg turns it off. Reads client id / ids from the gitignored
+  res://local/twitch.cfg (then user://twitch.cfg); tokens from user://twitch_token.json and twitch_bot_token.json.
+  - EventSub WebSocket: welcome -> 6 subscriptions (channel.cheer, channel.subscribe, channel.subscription.message,
+    channel.subscription.gift, channel.follow v2, channel.channel_points_custom_reward_redemption.add); keepalive watch
+    (reconnect after timeout + 10 s), session_reconnect handover, revocation, repeated message ids dropped. Keeps
+    running while the game is paused.
+  - Tokens: validate at start and hourly; refresh 15 min before expiry and on a stale-token 401 (not on a missing-scope
+    401); the new pair (refresh tokens are single use) goes to a .tmp, is read back, then renamed over the old file;
+    400/401 on refresh = dead, logged loudly, no retry storm; other failures retry in a minute.
+  - Rewards: only_manageable_rewards (= made by Bellmire's client id) -> our ids in user://twitch_rewards.json; makes
+    "Spotlight my hero" (500) if missing; titles checked against fightoverlay's words. Redemptions with any other reward
+    id are ignored completely. Ours: points lane 15 s, FULFILLED; no hero -> CANCELED (refund) + a chat answer.
+  - Lanes: cheer 15 s / 50+ 20 s / 100+ 30 s (bits); new sub, resub, each gifter 30 s (subs; gifted recipients only get a
+    Chronicle line); follows a Chronicle line only; anonymous cheers/gifts Chronicle only. -> town.spotlight(uid, lane,
+    seconds, reason) when it exists (L17), else prints SPOTLIGHT and emits spotlight_wanted.
+  - Chat: connects to chatcmd's twitch_reply(user_login, text) if present (laptop adds it); queue max 15, one message per
+    1.6 s, "@login " prefix, cut to 480, a repeat inside 30 s dropped, 429 -> 10 s pause; Send Chat Message as bellmirebro.
+- tools/_t1_test.gd (offline, recorded frames): 18/18 PASS - T1_TEST OK.
+- tools/_t1_live.gd (live, nothing posted): both tokens valid, welcome, 6/6 subscribed, no refresh before the forced
+  expiry, forced expiry -> both refreshed (Twitch), saved and read back, validated again, socket still open, keepalives
+  arriving - T1_LIVE OK. Found + fixed on the way: the socket was polled (and opened) before the tokens were checked;
+  a missing-scope 401 triggered a needless refresh.
+- FOUND, needs Mr. E: the broadcaster token has channel:read:redemptions but NOT channel:manage:redemptions - creating
+  the reward fails "401 Missing scope: channel:manage:redemptions". Re-authorize the broadcaster with that scope added
+  (same device flow); nothing else changes. Until then bits/subs/follows work and points do nothing.
+- Render renders/cycles/20261112_t1/chronicle_events.png (tools/_t1_shot.gd, recorded frames into the real town): feed
+  shows the cheer, sub, resub, gift and follow lines and nothing for fightoverlay's reward; 5 SPOTLIGHT calls with the
+  right lanes. Looked: BigAxe / MossyMage / Corvin on the square by the well, the Chronicle panel lists the five lines
+  (cheer 500, joins the guild, renews 7 months, gifts 3 places, NewFriend follows) - nothing for fightoverlay's reward.
+- Checks: parse 0 script errors, _offfloor 0 of 1162 (MON_INPROP 0 of 282), TWITCH_PARSE OK, _townwalk PASS (in_solid
+  0/8559, raid 0/5315), _delve_test 150 s 0 SCRIPT ERROR. Laptop files untouched (chatcmd.gd not edited).
+

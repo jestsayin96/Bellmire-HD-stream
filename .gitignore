@@ -19,3 +19,4 @@ setup.ps1
 local/
 _sup_tests.log
 _merge_tests.log
+renders/_look/

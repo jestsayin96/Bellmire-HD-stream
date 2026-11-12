@@ -214,6 +214,15 @@ var _linger := -1.0
 var _door_out := Vector3.ZERO
 var _stuck_t := 0.0
 var _door_retry := 0
+# D14: progress toward the waypoint (not just "did the feet move") and the
+# side a walker slides round a prop by - kept so it does not dither
+var _best_d := INF
+var _best_tgt := Vector3.INF
+var _prog_t := 0.0
+var _slide_side := 0.0
+var _rerouted := 0
+var slides := 0
+var reroutes := 0
 
 func _physics_process(delta: float) -> void:
     if lod > 0:
@@ -294,6 +303,9 @@ func _physics_process(delta: float) -> void:
         return
     if to.length() < (0.9 if _route.size() == 1 else 0.45):
         _stuck_t = 0.0
+        _best_d = INF
+        _prog_t = 0.0
+        _rerouted = 0
         _route.remove_at(0)
         if lod > 0 and not _route.is_empty():
             _lod_acc += delta       # D7: no step was taken - the far walker keeps the time
@@ -313,12 +325,19 @@ func _physics_process(delta: float) -> void:
     dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * sway).normalized()
     var was := global_position
     var p: Vector3 = global_position + dir * speed * pace * delta
-    if door_leg:
+    if door_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
+        # (D14: brushing out of a pocket between props - see _escape_route)
         p.y = float(town.call("height_at", p.x, p.z))
     else:
+        _ghost_last = Vector3.INF
         # room for each other, and never a foot inside anything solid
         p += (town.call("crowd_push", self) as Vector3) * 1.4 * delta
+        var want := p
         p = town.call("keep_walkable", p)
+        if Vector2(p.x - want.x, p.z - want.z).length() > 0.005:
+            # D14: pressed against a prop (a crate, a bench, a fence end) the
+            # push-out only hands the foot back - step round it instead
+            p = _slide_round(was, dir, speed * pace * delta, p)
     global_position = p
     rotation.y = atan2(dir.x, dir.z)
     Rig.play(_anim, "Walking_A")
@@ -331,10 +350,131 @@ func _physics_process(delta: float) -> void:
             _stuck_t = 0.0
             _route.remove_at(0)
         elif _stuck_t > 1.2:
+            # D14: not just skip the waypoint (the next one lies past the same
+            # prop) - hand it to the re-route below
             _stuck_t = 0.0
-            _route.remove_at(0)
+            _prog_t = 3.0
     else:
         _stuck_t = maxf(_stuck_t - delta, 0.0)
+    # D14: feet that move but get no nearer (a prop's push-out and the step
+    # cancelling each other) are stuck too: re-route once, then skip it
+    var d_now := Vector2(tgt.x - p.x, tgt.z - p.z).length()
+    if tgt != _best_tgt:
+        _best_tgt = tgt
+        _best_d = d_now
+        _prog_t = 0.0
+    elif d_now < _best_d - 0.2:
+        _best_d = d_now
+        _prog_t = 0.0
+        _slide_side = 0.0
+    else:
+        _prog_t += delta
+        if _prog_t > 2.5 and not _route.is_empty():
+            _prog_t = 0.0
+            _best_d = INF
+            _slide_side = -_slide_side if _slide_side != 0.0 else 1.0
+            if _rerouted < 1 and _enter_at == Vector3.ZERO:
+                _rerouted += 1
+                reroutes += 1
+                var goal: Vector3 = _route.back()
+                var nr: Array = _escape_route(goal)
+                if nr.is_empty():
+                    nr = town.call("route", global_position, goal)
+                if not nr.is_empty():
+                    _route = nr
+                    return
+            _rerouted = 0
+            _route.remove_at(0)
+
+## D14: a walker caught in a pocket between props (a yard's fence and its
+## tables) is off the navmesh, and a path from there starts at the nearest
+## walkable point - often across the fence. Find the nearest walkable point
+## a straight step can reach, and go from there.
+func _escape_route(goal: Vector3) -> Array:
+    # first a foot's width clear of every solid; failing that (wedged between
+    # a fence and a stool) brush past the props' edges for that short stretch
+    var r := _flood_out(goal, 0.17)
+    if r.is_empty():
+        r = _flood_out(goal, 0.02)
+        if not r.is_empty():
+            _ghost_last = r[_ghost_n_of]
+    return r
+
+var _ghost_last := Vector3.INF
+var _ghost_n_of := 0
+
+func _flood_out(goal: Vector3, margin: float) -> Array:
+    var nav = town.get("nav")
+    if nav == null or not nav.ready_ok:
+        return []
+    var here := global_position
+    var c0: Vector3 = nav.closest(here)
+    if Vector2(c0.x - here.x, c0.z - here.z).length() < 0.4 and bool(town.call("_clear_line", here, c0)):
+        return []
+    # a small flood over free ground (a foot's width clear of every solid),
+    # 0.35 m steps, out to the first cell that is on the walkable mesh
+    const STEP := 0.35
+    var start := Vector2i(0, 0)
+    var prev := {start: start}
+    var q: Array[Vector2i] = [start]
+    var found := Vector2i(9999, 9999)
+    var head := 0
+    while head < q.size() and head < 2500:
+        var c: Vector2i = q[head]
+        head += 1
+        var w := here + Vector3(c.x * STEP, 0.0, c.y * STEP)
+        if c != start:
+            var nc: Vector3 = nav.closest(w)
+            if Vector2(nc.x - w.x, nc.z - w.z).length() < 0.2:
+                found = c
+                break
+        for n in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 1), Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1)]:
+            var nn: Vector2i = c + n
+            if prev.has(nn) or absi(nn.x) > 30 or absi(nn.y) > 30:
+                continue
+            var wp := here + Vector3(nn.x * STEP, 0.0, nn.y * STEP)
+            if not (town.call("solid_at", wp, margin) as Array).is_empty():
+                continue
+            prev[nn] = c
+            q.append(nn)
+    if found.x == 9999:
+        return []
+    var chain: Array = []
+    var cur := found
+    while cur != start:
+        var wp2 := here + Vector3(cur.x * STEP, 0.0, cur.y * STEP)
+        wp2.y = float(town.call("height_at", wp2.x, wp2.z))
+        chain.push_front(wp2)
+        cur = prev[cur]
+    var r: Array = town.call("route", chain.back(), goal)
+    if r.is_empty():
+        return []
+    _ghost_n_of = chain.size() - 1
+    return chain + r
+
+## D14: the first free step round whatever the foot met, turning a little
+## more each try, on the side chosen last time (toward the target first)
+func _slide_round(was: Vector3, dir: Vector3, step: float, fallback: Vector3) -> Vector3:
+    step = maxf(step, 0.02)
+    if _slide_side == 0.0:
+        var r: Array = town.call("solid_at", fallback, 0.6)
+        var side := 1.0
+        if not r.is_empty():
+            var c: Vector2 = r[0]
+            var off := Vector2(was.x - c.x, was.z - c.y)
+            # turn away from the prop's middle
+            side = 1.0 if (dir.x * off.y - dir.z * off.x) < 0.0 else -1.0
+        _slide_side = side
+    slides += 1
+    for a in [0.6, 1.0, 1.4, 1.8, 2.3]:
+        for sgn in [_slide_side, -_slide_side]:
+            var c2: Vector3 = was + dir.rotated(Vector3.UP, a * sgn) * step
+            if (town.call("solid_at", c2, 0.155) as Array).is_empty():
+                if sgn != _slide_side:
+                    _slide_side = sgn
+                c2.y = float(town.call("height_at", c2.x, c2.z))
+                return c2
+    return fallback
 
 ## ---- HD: somebody at a post is not a statue. Guards shift their weight,
 ## look up and down the street and pace a step or two; stallholders reach for

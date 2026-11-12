@@ -1205,3 +1205,25 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 script errors, _offfloor 0 of 978, TWITCH_PARSE OK, _townwalk PASS (in_solid 0/8025, raid 0/5682,
   stuck_on_route 1-3 = D14), _delve_test ran 150 s with 0 SCRIPT ERROR (two "Lambda capture freed" engine errors in the
   delve, laptop side, not new here). Laptop files untouched.
+
+## Cycle 80 - D14, walkers pinned on props (desktop, 2026-11-12)
+- Cause (scripts/townsfolk.gd): a walker stepping into a prop (a stool, a bench, a fence end, a stall corner) was pushed
+  back by town.keep_walkable to nearly where it stood, but the push-out plus the step still counted as "the feet
+  moved", so the 1.2 s give-up never fired and it stood there all stream. Some were in a pocket off the navmesh (the
+  fenced yard with benches and stools east of the market, navoff up to 3.5 m): every new route began at the nearest
+  walkable point - across the fence.
+- Fix, all in townsfolk.gd (no laptop files touched):
+  - a prop case for the push-out: when keep_walkable moves the foot, _slide_round tries the first free step round
+    the prop (34-130 deg off the heading, on the side chosen last time, so no dithering).
+  - progress, not motion: no 0.2 m nearer the waypoint in 2.5 s (or the old 1.2 s "feet did not move") -> re-route
+    once, then skip the waypoint.
+  - _escape_route: off the navmesh or no straight line to it -> a small flood (0.35 m steps, a foot's width clear of
+    every solid) out to walkable ground, then the normal route. Wedged tighter than that (fence + rotated stool),
+    the same flood with a 2 cm margin, walked brushing the prop edges for that short stretch only.
+- tools/_d14_test.gd (new): 120 s, every 10 s count routed walkers that moved < 0.3 m; "pinned" = caught twice running.
+  Before (old townsfolk.gd): pinned 25, stuck max 4. After: pinned 0, stuck max 1, 8 re-routes, 2571 prop slides;
+  feet touching any solid with no margin 0.91% (0.77% before - door legs and stall edges, not houses). D14_TEST OK.
+- Render renders/cycles/20261112_d14 (yard_40s/80s, stall_40s/80s). Looked: the yard has a sitter at the table and
+  walkers outside the fence, nobody pressed on it; the stall corner by the square has folk passing the house.
+- Checks: parse 0 script errors, _offfloor 0 of 983 (MON_INPROP 0), TWITCH_PARSE OK, _townwalk PASS (in_solid
+  0/8365, raid 0/4237, stuck_on_route 0-1), _delve_test 150 s with 0 SCRIPT ERROR.

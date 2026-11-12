@@ -53,6 +53,7 @@ func build(n: int) -> void:
     for c in get_children():
         c.queue_free()
     monsters.clear()
+    _reach = {}
     _rng.seed = hash("hd:%d" % n)
     info = FloorGen.build(self, n, Vector3.ZERO)
     _dress()
@@ -79,16 +80,49 @@ func _open_cells() -> Array:
     out.shuffle()
     return out
 
-## a spawn point clear of furniture AND on the floor: the nearest floor cell
-## centre that no prop covers (a push out of a table must not cross a wall)
+## L-cycle 111: the floor cells a body can walk to from the entry stairs without crossing
+## furniture (a cell whose centre an obstacle covers is not walked through - the same rule
+## as Delve._blocked_cells). A creature set down in a pocket walled in by tables never
+## reached the fight and the watchdog had to lift it out.
+var _reach := {}
+func _reachable() -> Dictionary:
+    if not _reach.is_empty():
+        return _reach
+    var cells: Dictionary = info["cells"]
+    var clear := func(c: Vector2i) -> bool:
+        return _clear_of_props(_cell_pos(c), 0.45)
+    var G: float = info["grid"]
+    var hw: float = (float(info["w"]) - 1.0) * G * 0.5
+    var hh: float = (float(info["h"]) - 1.0) * G * 0.5
+    var e: Vector3 = info["entry"]
+    var start := Vector2i(int(round((e.x + hw) / G)), int(round((e.z + hh) / G)))
+    var q: Array[Vector2i] = [start]
+    _reach[start] = true
+    while not q.is_empty():
+        var c: Vector2i = q.pop_back()
+        for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+            var n: Vector2i = c + d
+            if cells.has(n) and not _reach.has(n) and clear.call(n):
+                _reach[n] = true
+                q.append(n)
+    return _reach
+
+func _in_reach(at: Vector3) -> bool:
+    var G: float = info["grid"]
+    var hw: float = (float(info["w"]) - 1.0) * G * 0.5
+    var hh: float = (float(info["h"]) - 1.0) * G * 0.5
+    return _reachable().has(Vector2i(int(round((at.x + hw) / G)), int(round((at.z + hh) / G))))
+
+## a spawn point clear of furniture AND on the floor AND where the party can get to: the
+## nearest such floor cell centre (a push out of a table must not cross a wall)
 func _out_of_props(at: Vector3) -> Vector3:
-    if _clear_of_props(at, 0.6) and _on_floor(at):
+    if _clear_of_props(at, 0.6) and _on_floor(at) and _in_reach(at):
         return at
     var best := at
     var bd := 1e9
     for c in info["cells"]:
         var cp := _cell_pos(c)
-        if not _clear_of_props(cp, 0.6):
+        if not _clear_of_props(cp, 0.6) or not _reachable().has(c):
             continue
         var dd := cp.distance_to(at)
         if dd < bd:
@@ -238,10 +272,12 @@ func _people() -> void:
             var fd := -1.0
             for c in _open_cells():
                 var cp := _cell_pos(c)
+                if not _reachable().has(c) or not _clear_of_props(cp, 0.6):
+                    continue        # (a lord in a sealed pocket never comes to the fight)
                 var d := cp.distance_to(entry)
                 if d > fd:
                     fd = d
                     far = cp
-            lord.position = far
+            lord.position = far if fd >= 0.0 else _out_of_props(Vector3.ZERO)
             root.add_child(lord)
             lord.call_deferred("entrance")

@@ -88,6 +88,15 @@ Catalogue: tools/_dungeon_cat.gd. Library: village_assets/library/dungeon.
 scripts/floorgen.gd (old FloorGen, ported verbatim), scripts/dungeon_hd.gd + Dungeon.tscn (HD floor: pieces + monsters +
 lords), addons/hexkit (nature decorations used by biomes). Probe: tools/_floors.gd.
 
+## Dungeon look (L28, laptop 2026-11-12)
+assets/shaders/dungeon_kit.gdshader: the surface every KayKit Dungeon Remastered piece gets on a floor (FloorGen._skin).
+All 203 kit pieces share one atlas (Assets/texture/dungeon_texture.png; the per-piece copies are byte-identical), so a
+floor uses one material per theme / tint / steel flag. Detail textures are the Quaternius Medieval Village MegaKit set
+already in assets/kit/textures (CC0, Quaternius - NOT the Bestiary/QAL packs): T_Plaster_Normal + T_Plaster_ORM (stone
+grain), T_WoodTrim_Normal + T_WoodTrim_Roughness (wood grain), T_Noise_Terrain (slow tiling breakup). Read-only use - the
+town's .tres materials are untouched. The 8x4 per-swatch roughness / metal map is generated in code (FloorGen._pbr_map).
+LICENSE: KayKit Dungeon Remastered CC0 (addons/kaykit_dungeon_remastered/Assets/LICENSE.txt); MegaKit textures CC0.
+
 ## Heroes + chat
 scripts/roster.gd, scripts/chatcmd.gd (old game, verbatim), scripts/hero_body.gd (hero body: class/tier/rank look,
 errands), town.gd chat_line()/feed. Fake-chat test: tools/_heroes.gd.

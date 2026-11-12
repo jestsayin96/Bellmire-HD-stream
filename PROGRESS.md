@@ -1458,6 +1458,24 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Baseline (before the fixes) SOUND_REVIEW FAIL 5 of 18 (two of the five were the review's own wrong calls - a word that is not nudged, award()'s argument order - fixed in the tool); after: SOUND_REVIEW OK 18/18.
 - Tests: parse 0 errors, SOUND_REVIEW OK 18/18 windowed (8/8 headless coverage), S1 / S2 / L14 OK, _delve_test clean to floor 3 (0 SCRIPT ERROR).
 
+## Cycle 89 - L25, dungeon geometry + nav (laptop, 2026-11-12) - L25a/b/d done here; L25c finished in L-cycle 110 below
+- Measured first (tools/_l25_measure.gd): kit walls are 1 m thick and reach 0.5 m into every cell (wall pillars 0.75); the old stairs were "stairs_wide", 7 m across on a 4 m cell, set with their HIGH end (local z = 0) buried mid-wall; rubble_large is 8 m wide inside a 1.8 m cluster budget (and scattered at 0.8-1.3x: up to 10 m); sword_shield / keyring_hanging / shelves / chest_gold are wall-mounted with the origin at the mount and sank up to 1.2 m into the floor at y 0.
+- floorgen.gd: every placed piece is tagged (kind, cluster, asset) and has a real footprint (an oriented box from its own meshes, cached per asset; FloorGen.pen = separating-axis depth on the floor + height overlap). Walls, columns, stairs register as solid; furniture / growth / banners only go where they fit (<= 0.15 m), rest ON the floor (no sinking), a small thing landing on a plain table goes on its top, an anchor that does not fit retries 0.6 / 1.2 m off its wall and turned, an item retries closer in and mirrored; a cluster whose anchor never fits is left out. Rubble scaled to its real size; the wall shelf and hanging keyring swapped for floor pieces; banners only where their spot is floor with a wall behind.
+- Stairs: stairs_narrow at 0.75 (3 m wide, 3 m deep, 3.8 m up, under the 4 m wall top), high end flush on the inner face of the wall it backs onto, foot on open floor; the stair cells get plain walls and no column.
+- Keep-clear: the way from stair to stair (round the lamp's cell) and every corridor cell are zones no furniture may touch; nothing is placed off the floor.
+- Nav (delve.gd + floorgen.walk_obstacles): obstacles are now one circle per real piece (pillars and columns included - they were walk-through before) instead of one 1.5-2 m circle a cluster; the route avoids cells furniture blocks (plain grid as the fallback); a goal inside furniture moves to the nearest clear cell; a delver who gets no closer for 1.2 s in a fight takes another side of the target; the watchdog sets one stuck 2 s down in the nearest clear cell; the descent carries the party only for a real stop (3 s no progress) or after 45 s, not a flat 6 s; spawns inside furniture move to a clear cell.
+- tools/_l25_test.gd over 12 generated floors: 0 prop-prop and 0 prop-wall interpenetration > 0.2 m (the same floors with the fit checks off: 438 and 568), every room reachable from the entrance, 0 props on a doorway / corridor / the stair-to-stair route, the kept-clear way unbroken, every flight on the floor and flush to its wall with open floor at its foot, nothing sunk, nothing in the void. A 10-floor run: floor 10 reached, 0 forced descents (was 9). STILL FAILING: stuck delvers 104 samples (was 209), 91 of them in the floor-10 lord fight, and the watchdog nudged 51 times - the lord-fight approach needs more work (next session).
+- Renders: renders/cycles/20261112_l25/f{1,3,6}_{before,after}_{wide,stairs,room}.png ("before" = the same floors, fit checks off). Looked: props clear of walls, rooms still furnished, the stairs a single flight up to the wall top.
+- Backups (untracked): scripts/delve.gd.bak_l25, scripts/floorgen.gd.bak_l25.
+
+## L-cycle 110 - L25c, dungeon nav finished; L25 (a-d) DONE (laptop jestai, 2026-11-12)
+- Continues Cycle 89 above (that entry is the L25a/b/d work). First laptop cycle under the per-machine prefix; numbered on from the laptop's last (109).
+- Lord fight (delve._fight_slot): a delver picks its side of the target from points it can STAND on (a clear floor cell, off every obstacle, a body's width off the walls) and WALK to (the same connected patch of clear cells - delve._patches), nearest angle to its own slot first, then nearer in / further out; kept 0.5 s while the target holds still. Melee rings now sit inside reach (a tall lord's old ring, 1.4 + h*0.25, was outside REACH + h*0.15, so a delver could stand at its slot and never swing).
+- Bodies slide round the rim of an obstacle they walk into, keeping the side they took (a body heading dead at a table on its route was pushed straight back every frame and stood there).
+- Watchdog: progress is the route LEFT, not the straight line (a route that bends away from a far stair is not stuck); the clock restarts when the goal moves and the body follows it (a beast chasing a delver who backs off); the route cache and clocks are cleared when _t restarts (end of a fight) and on a new floor - stale fight clocks made bodies look stuck on the way down, or never checked; a freed body is set down in the goal's patch (one in a furniture-sealed pocket was set back into the same pocket again and again). delve.unstick_log records each nudge with what was round the body (the test prints it).
+- tools/_l25_test.gd, two runs: L25_TEST OK 13/13 both times - 0 stuck delvers (was 104), 0 forced descents, watchdog 5 and 1 nudges in 10 floors (was 51; limit 10) - each a floor-10 monster spawned in a pocket walled in by furniture, freed once. Probe: 0 prop-prop / 0 prop-wall > 0.2 m over 12 floors, all rooms reachable, stairs whole.
+- Regressions: _s2 OK 19/19, _sound_review OK 8/8 (A, headless), _l14 OK, _l24 OK 6/6, _l21 OK 46/46 (windowed 1920x1080), _delve_test 0 script errors (descent timings same as before the change).
+- Left for later (not L25): a few monsters still spawn in furniture-sealed pockets (spawn placement could require the main patch).
 
 ## D15 sound soak - DONE Nov 12 04:16 CT (audio safe for 24/7)
 - 35-min windowed soak, audio ON: 87 valley days, 228 people, 51 raids.
@@ -1540,3 +1558,26 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Renders tools/_d17d_shot.gd -> renders/cycles/20261112_d17d/sheet_d17d.png: a farmer buried mid-walk, frames 0/0.3/1/2/5/10 s - old row up again from 1 s (Idle, PickUp), new row stays down in Death_A_Pose (the 2 s frame is blocked by a passer-by).
 - Standard checks: parse 0 SCRIPT ERROR / Parse Error (3 known headless material-null), _offfloor 0 of 1039, TWITCH_PARSE OK, _townwalk in_solid 0/20222 raid 0/1822 PASS STUCK_ON_ROUTE_TOTAL 0, _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR to floor 2, _d17a_test --short empty 0 PASS, _d17b_test --short moonwalk 0.12% PASS (0.49% with the first cut of the turn ease - walkers now keep face_fix).
 - Note (laptop): delve.gd's Rig.play(Death_A) now also locks a fallen delve hero down; delve deaths are permanent so nothing changes - if a revive is ever added underground, call Rig.revive(b._anim).
+
+## L-cycle 111 - L28a dungeon materials + spawn pockets (laptop jestai, 2026-11-12) - L28a DONE
+- Spawns (dungeon_hd.gd): monsters and the lord are set only on cells reachable from the entry stairs over cells no
+  obstacle covers (Delve's blocked-cell rule). L25_TEST OK with 0 watchdog nudges in 10 floors (was 1-5).
+- Measured first: every KayKit Dungeon Remastered piece has ONE StandardMaterial3D, roughness 0.45, metal 0, no normal
+  map - stone, wood and gold were the same semi-gloss plastic. All 203 per-piece atlas PNGs are byte-identical copies of
+  Assets/texture/dungeon_texture.png (8x4 gradient swatches). Swatch use measured from UVs: walls/stairs/columns r0c1+r0c0,
+  tile + dirt floors r0c5, wood r0c4/r0c2, gold chests + coins r2c7, rubble r0c7.
+- assets/shaders/dungeon_kit.gdshader + FloorGen._skin/_kit_mat: atlas colour x tint; an 8x4 per-swatch map (made in
+  code) gives roughness / metalness / detail set, so gold is metal and wood is matte; blades, keys, torch brackets,
+  plates and chests read their greys as steel; world-space triplanar normal + roughness detail from the CC0 MegaKit
+  textures (plaster grain for stone - the RockTrim set striped the walls and turned tile floors into brick, swapped;
+  wood grain for wood); a slow world-space albedo variation against tiling; per-theme roughness / relief / variation /
+  standing water on floors (FloorGen.LOOK - the flooded gallery shines, the confection is glazed, the firepits dry).
+  The old Rig.tint duplicated a material per tinted piece: distinct materials on a floor 689 -> 44 (grassland),
+  59 -> 31 (barracks), 59 -> 34 (shrine). Hex-kit scatter keeps its own materials + tint.
+- material-null: 0 in every dungeon-side run (_delve_test, _l25_test, _offfloor, windowed floor renders). The 3
+  'Parameter "material" is null' lines left come from a bare headless start of the TOWN scene (dummy renderer,
+  material_get_instance_shader_parameters) - not the dungeon, not a laptop file; not touched. For the desktop / D18c.
+- Shots (windowed 1920x1080, tools/_l28_shot.gd, the town's environment as delves see it today):
+  renders/cycles/20261112_l28/a_sheet.png - crypt / flooded / treasury, before | after, room + close views.
+- Tests: parse 0 script errors; _offfloor 0 of 969, INPROP 0, MON_INPROP 0; _delve_test 0 script errors, 0 null;
+  L25_TEST OK 13/13, 0 stuck, 0 nudges. tools/_l28_matcount.gd prints the material counts.

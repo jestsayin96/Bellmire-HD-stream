@@ -124,6 +124,12 @@ func _physics_process(delta: float) -> void:
         _anim(delta)
     if town == null:
         return
+    # D16c: a wagon rolling up shoves a grazing beast aside too
+    if float_y == INF and town.has_method("off_wagons"):
+        var wq: Vector3 = town.call("off_wagons", global_position, self)
+        if wq != global_position:
+            wq.y = _ground(wq)
+            global_position = wq
     if _target == Vector3.ZERO:
         _wait -= delta
         if _wait <= 0.0:
@@ -152,6 +158,8 @@ func _physics_process(delta: float) -> void:
         _wait = _rng.randf_range(0.5, 2.0)
         _play(_idle)
         return
+    if float_y == INF and town.has_method("off_wagons"):
+        p = town.call("off_wagons", p, self)     # D16c: never under a wagon
     p.y = _ground(p)
     global_position = p
     rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * 4.0)

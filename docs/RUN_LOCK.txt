@@ -1,1 +1,1 @@
-IDLE 2026-11-12 05:24 - D16b unstick watchdog committed (docs/RUN_LOCK.txt is the canonical lock)
+IDLE 2026-11-12 06:46 - D16c dynamic obstacles committed (docs/RUN_LOCK.txt is the canonical lock)

@@ -305,8 +305,20 @@ var wd_close := 0
 var wd_repaths := 0
 var wd_nudges := 0
 var wd_giveups := 0
+# D16c: when the wagons were last checked against the next leg, and how often
+# a walker went round one
+var _wag_t := randf() * 0.5
+var wag_detours := 0
+var _park: Array = []           # D16c: where the wagon is drawn up while stood still
 
 func _physics_process(delta: float) -> void:
+    # D16c: a wagon is not in the navmesh - one rolling into someone (walking
+    # or stood still) shoves them aside; never a foot inside a wagon. Every
+    # frame, before the LOD skip: a far body must not lag inside one either.
+    if town != null and not inside and visible and town.has_method("off_wagons"):
+        var wq: Vector3 = town.call("off_wagons", global_position, self)
+        if wq != global_position:
+            global_position = town.call("keep_walkable", wq)
     if lod > 0:
         _lod_acc += delta
         _lod_n += 1
@@ -324,8 +336,37 @@ func _physics_process(delta: float) -> void:
         _voice(delta)
     if cart and is_instance_valid(cart):
         var back := global_position - global_transform.basis.z * 2.6
-        cart.global_position = cart.global_position.lerp(Vector3(back.x, float(town.call("height_at", back.x, back.z)), back.z), minf(delta * 4.0, 1.0))
-        cart.rotation.y = lerp_angle(cart.rotation.y, rotation.y + PI * 0.5, delta * 3.0)
+        back.y = float(town.call("height_at", back.x, back.z))
+        var cy := rotation.y + PI * 0.5
+        # D16c: stood still (a stop, a camp) the wagon is drawn up on open
+        # ground beside them, never left across a lane between two props
+        if _route.is_empty() and town.has_method("wagon_park"):
+            if _park.is_empty():
+                _park = town.call("wagon_park", self)
+                if _park.is_empty():
+                    _park = [back, cy]
+            back = _park[0]
+            cy = _park[1]
+        else:
+            _park = []
+        # (D16c: no faster than a wagon rolls, so nobody is swept up by one)
+        var cstep: Vector3 = (back - cart.global_position) * minf(delta * 4.0, 1.0)
+        cart.global_position += cstep.limit_length(4.0 * delta)
+        cart.rotation.y = lerp_angle(cart.rotation.y, cy, delta * 3.0)
+    if town != null and not inside and visible and town.has_method("off_wagons"):
+        # on a route, twice a second: a waypoint under a parked wagon is moved
+        # beside it, a leg across one goes round its corner (the navmesh does
+        # not know the wagons). Not the door leg - that is a step indoors.
+        _wag_t -= delta
+        if _wag_t <= 0.0 and not _route.is_empty() and not (_route.size() == 1 and _enter_at != Vector3.ZERO):
+            _wag_t = 0.5
+            var ww: Array = town.call("wagon_way", global_position, _route[0], self)
+            if not ww.is_empty():
+                wag_detours += 1
+                if ww[0] == "under":
+                    _route[0] = ww[1]
+                elif _route.size() < 400:
+                    _route.insert(0, ww[1])
     if leader != null and town != null:
         _follow(delta)
         return

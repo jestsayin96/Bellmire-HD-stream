@@ -2085,7 +2085,7 @@ func _build_mine(wood: Material) -> void:
         var tp := best + face * (0.0 + float(k) * 1.5)
         _box(Vector3(1.6, 0.08, 0.22), Vector3(tp.x, height_at(tp.x, tp.z) + 0.02, tp.z), wood, yaw)
     var cart := best + face * 7.0
-    _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), yaw + PI * 0.5, 0.7)
+    _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), yaw + PI * 0.5, 0.7, true)
     for i in range(10):
         var pb := best + face * rng.randf_range(4, 9) + side * rng.randf_range(3.0, 6.0)
         _spawn_raw(NATURE, "Pebble_Round_" + str([1, 3][rng.randi() % 2]), Vector3(pb.x, height_at(pb.x, pb.z), pb.z), rng.randf_range(0, TAU), rng.randf_range(3.0, 6.0))
@@ -2095,7 +2095,9 @@ func _build_mine(wood: Material) -> void:
     var start := ge + Vector3(1, 0, 0) * 20.0
     _road_strip([start, start.lerp(best + face * 12.0, 0.5), best + face * 12.0, best + face * 2.0], 3.4, true)
 
-func _spawn_raw(dir_path: String, nm: String, pos: Vector3, yaw: float, sc: float) -> Node3D:
+## D16c: solid=true leaves a footprint (navmesh + solid_at) like _spawn does -
+## a parked wagon, a crystal: anything with a body a foot must go round
+func _spawn_raw(dir_path: String, nm: String, pos: Vector3, yaw: float, sc: float, solid := false) -> Node3D:
     var path := dir_path + nm + ".gltf"
     if not ResourceLoader.exists(path):
         path = dir_path + nm + ".glb"
@@ -2110,6 +2112,8 @@ func _spawn_raw(dir_path: String, nm: String, pos: Vector3, yaw: float, sc: floa
     add_child(n)
     if dir_path == MKPROPS:
         _dress(n, "red")
+    if solid:
+        _solid_of(n)
     return n
 
 func _build_range(wood: Material) -> void:
@@ -2458,6 +2462,9 @@ func _build_scar() -> void:
         n.rotation.x = rng.randf_range(-0.55, 0.55)
         n.rotation.z = rng.randf_range(-0.55, 0.55)
         _glow_crystal(n, cols[rng.randi() % cols.size()], rng.randf_range(0.8, 2.4))
+        # D16c: scar-glass is solid - folk walked through it on the Delvers'
+        # Road (the mouth itself lies beyond the glass, SCAR_R + 6 out)
+        _solid_of(n)
     # warped trees round the rim
     for i in range(30):
         var a := rng.randf() * TAU
@@ -2839,7 +2846,7 @@ func _build_farms() -> void:
                 stack.position = Vector3(sp.x, height_at(sp.x, sp.z) + 1.1, sp.z)
                 add_child(stack)
             var cart := hp + to_road * 6.0 + fw * 2.0
-            _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), rng.randf() * TAU, 0.75)
+            _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), rng.randf() * TAU, 0.75, true)
             var door := house_pos + to_road * (_depth_of("d") * 0.5 + 1.4)
             _road_strip([door, door.lerp(road, 0.5), road], 3.0, true)
             _objs.append([hp, 14.0])
@@ -4702,7 +4709,233 @@ func crowd_push(v: Node3D, dir := Vector3.ZERO) -> Vector3:
                     yield_dir = -side if lat > 0.08 else side
     if yield_best > 0.0:
         push += yield_dir * CROWD_YIELD * yield_best
+    if dyn_obstacles:
+        push += _wagon_push(v, p, rv, dir)      # D16c
     return push
+
+## ---- D16c DYNAMIC OBSTACLES. Everything that stands still is carved out of
+## the navmesh and held off by solid_at (_solid_of, valley._solid); what MOVES
+## is not: the carters' and travellers' wagons, the caravan, the pedlar's cart.
+## Rebuilt once a physics frame from whoever has a .cart, each wagon is an
+## oriented footprint; crowd_push steers round it (a hard push out of it, and a
+## sidestep when it lies ahead) and off_wagons() puts a foot back out of it - a
+## wagon rolling into someone stood still shoves them aside. A carter is never
+## pushed off his own wagon. dyn_obstacles = false only for the before figure.
+var dyn_obstacles := true
+const WAGON_LOOK := 2.4
+var _wag_f := -1
+var _wag: Array = []               # [wagon, owner, centre (x,z), ax, az, half extents, y]
+var _wag_box: Dictionary = {}      # wagon id -> [local centre (x,z) at scale, half extents]
+
+func _wagon_box(w: Node3D) -> Array:
+    var id := w.get_instance_id()
+    if _wag_box.has(id):
+        return _wag_box[id]
+    var box := AABB()
+    var first := true
+    var inv := w.global_transform.affine_inverse()
+    var st: Array = [w]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var ab: AABB = (inv * (c as MeshInstance3D).global_transform) * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            st.append(g)
+    var sc := w.scale.x
+    var out: Array = [Vector2(box.get_center().x, box.get_center().z) * sc, Vector2(box.size.x, box.size.z) * 0.5 * sc] if not first else []
+    _wag_box[id] = out
+    return out
+
+func _wagons() -> Array:
+    var f := Engine.get_physics_frames()
+    if f == _wag_f:
+        return _wag
+    _wag_f = f
+    _wag.clear()
+    if not dyn_obstacles:
+        return _wag
+    for o in people:
+        if not is_instance_valid(o):
+            continue
+        var w = o.get("cart")
+        if w == null or not is_instance_valid(w) or not (w as Node3D).is_visible_in_tree():
+            continue
+        var wb := _wagon_box(w)
+        if wb.is_empty():
+            continue
+        var yaw: float = (w as Node3D).rotation.y
+        var ax := Vector2(cos(yaw), -sin(yaw))
+        var az := Vector2(sin(yaw), cos(yaw))
+        var wp: Vector3 = (w as Node3D).global_position
+        var lc: Vector2 = wb[0]
+        _wag.append([w, o, Vector2(wp.x, wp.z) + ax * lc.x + az * lc.y, ax, az, wb[1], wp.y])
+    return _wag
+
+## the wagons' share of crowd_push: out of any wagon (hard), and round one that
+## lies ahead (a sidestep, like the yield to a body coming the other way)
+func _wagon_push(v: Node3D, p: Vector3, rv: float, dir: Vector3) -> Vector3:
+    var push := Vector3.ZERO
+    var own = v.get("cart")
+    var p2 := Vector2(p.x, p.z)
+    var d2 := Vector2(dir.x, dir.z)
+    var side2 := Vector2(-dir.z, dir.x)
+    for e in _wagons():
+        if e[0] == own or e[1] == v or absf(float(e[6]) - p.y) > 3.0:
+            continue
+        var c: Vector2 = e[2]
+        var he: Vector2 = (e[5] as Vector2) + Vector2(rv + 0.1, rv + 0.1)
+        if p2.distance_to(c) > he.length() + WAGON_LOOK:
+            continue
+        var d := p2 - c
+        var lx := d.dot(e[3])
+        var lz := d.dot(e[4])
+        var gx := he.x - absf(lx)
+        var gz := he.y - absf(lz)
+        if gx > 0.0 and gz > 0.0:
+            var n: Vector2 = (e[3] as Vector2) * signf(lx if lx != 0.0 else 1.0) if gx < gz else (e[4] as Vector2) * signf(lz if lz != 0.0 else 1.0)
+            push += Vector3(n.x, 0.0, n.y) * CROWD_HARD
+            continue
+        if dir == Vector3.ZERO:
+            continue
+        for k in [0.6, 1.2, 1.8, 2.4]:
+            var q: Vector2 = p2 + d2 * float(k) - c
+            if absf(q.dot(e[3])) < he.x and absf(q.dot(e[4])) < he.y:
+                # pass on the side away from the wagon's middle
+                var s := -side2 if (c - p2).dot(side2) > 0.0 else side2
+                push += Vector3(s.x, 0.0, s.y) * CROWD_YIELD * (1.0 - float(k) / WAGON_LOOK * 0.7)
+                break
+    return push
+
+## p put back out of any wagon but `who`'s own (feet, with a body's margin,
+## plus `extra` - a spot to walk to is put clear of crowd_push's hard ring)
+func off_wagons(p: Vector3, who: Node3D = null, extra := 0.0) -> Vector3:
+    var own = who.get("cart") if who != null else null
+    var r := (body_r(who) if who != null else FOOT_R) + 0.05 + extra
+    for e in _wagons():
+        if e[0] == own or e[1] == who or absf(float(e[6]) - p.y) > 3.0:
+            continue
+        var c: Vector2 = e[2]
+        var he: Vector2 = (e[5] as Vector2) + Vector2(r, r)
+        var d := Vector2(p.x, p.z) - c
+        var lx := d.dot(e[3])
+        var lz := d.dot(e[4])
+        var gx := he.x - absf(lx)
+        var gz := he.y - absf(lz)
+        if gx <= 0.0 or gz <= 0.0:
+            continue
+        var mv: Vector2 = (e[3] as Vector2) * signf(lx if lx != 0.0 else 1.0) * (gx + 0.02) if gx < gz else (e[4] as Vector2) * signf(lz if lz != 0.0 else 1.0) * (gz + 0.02)
+        p.x += mv.x
+        p.z += mv.y
+    return p
+
+## Where `who` (stood still: a stop, a camp) draws their wagon up: on open
+## ground beside them with a clear metre all round, so a parked wagon never
+## plugs the lane between two stalls (the navmesh routes through that lane).
+## [centre, wagon yaw] - straight behind if that is clear, else the nearest
+## clear bearing round them; [] = nowhere better, leave it behind them.
+const PARK_CLEAR := 0.9
+func wagon_park(who: Node3D) -> Array:
+    var w = who.get("cart")
+    if w == null or not is_instance_valid(w):
+        return []
+    var wb := _wagon_box(w)
+    if wb.is_empty():
+        return []
+    var he: Vector2 = (wb[1] as Vector2) + Vector2(PARK_CLEAR, PARK_CLEAR)
+    var lc: Vector2 = wb[0]
+    var o := who.global_position
+    var face: float = who.rotation.y
+    for k in [0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6]:
+        var a := face + float(k) * PI / 6.0          # owner faces a; wagon behind
+        var back := Vector3(-sin(a), 0.0, -cos(a))
+        var yaw := a + PI * 0.5
+        var ax := Vector2(cos(yaw), -sin(yaw))
+        var az := Vector2(sin(yaw), cos(yaw))
+        var wp := o + back * 2.6
+        var c := Vector2(wp.x, wp.z) + ax * lc.x + az * lc.y
+        var ok := true
+        # not over a stallholder or a guard at their post
+        for pp in people:
+            if is_instance_valid(pp) and pp != who and bool(pp.get("stay")) and not bool(pp.get("inside")):
+                var dq := Vector2(pp.global_position.x, pp.global_position.z) - c
+                if absf(dq.dot(ax)) < he.x + 0.3 and absf(dq.dot(az)) < he.y + 0.3:
+                    ok = false
+                    break
+        for ix in (range(-3, 4) if ok else []):
+            for iz in range(-4, 5):
+                var q: Vector2 = c + ax * he.x * float(ix) / 3.0 + az * he.y * float(iz) / 4.0
+                var q3 := Vector3(q.x, 0.0, q.y)
+                if not solid_at(q3, 0.0).is_empty():
+                    ok = false
+                    break
+                if nav != null and nav.synced():
+                    var nc: Vector3 = nav.closest(q3)
+                    if Vector2(nc.x - q.x, nc.z - q.y).length() > 0.4:
+                        ok = false
+                        break
+            if not ok:
+                break
+        if ok:
+            return [Vector3(wp.x, height_at(wp.x, wp.z), wp.z), yaw]
+    return []
+
+## A walker's next leg p -> nx against the wagons (not who's own):
+## [] the way is clear; ["under", q] nx itself is under a wagon - q is the
+## nearest spot beside it; ["round", q] the leg crosses one - q is the corner to
+## go round by (the cheaper of the four, on open ground)
+func wagon_way(p: Vector3, nx: Vector3, who: Node3D = null) -> Array:
+    var own = who.get("cart") if who != null else null
+    var r := (body_r(who) if who != null else FOOT_R) + 0.15
+    var a := Vector2(p.x, p.z)
+    var b := Vector2(nx.x, nx.z)
+    var n := maxi(int(a.distance_to(b) / 0.3), 1)
+    for e in _wagons():
+        if e[0] == own or e[1] == who or absf(float(e[6]) - p.y) > 3.0:
+            continue
+        var c: Vector2 = e[2]
+        var he: Vector2 = (e[5] as Vector2) + Vector2(r, r)
+        var bd := b - c
+        if absf(bd.dot(e[3])) < he.x and absf(bd.dot(e[4])) < he.y:
+            var q := off_wagons(nx, who, 0.4)
+            return ["under", keep_walkable(q)]
+        var hit := false
+        for i in range(n + 1):
+            var d := a.lerp(b, float(i) / float(n)) - c
+            if absf(d.dot(e[3])) < he.x and absf(d.dot(e[4])) < he.y:
+                hit = true
+                break
+        if not hit:
+            continue
+        var best := Vector3.INF
+        var best_l := INF
+        var ho := he + Vector2(0.35, 0.35)
+        for sx in [-1.0, 1.0]:
+            for sz in [-1.0, 1.0]:
+                var k: Vector2 = c + (e[3] as Vector2) * ho.x * float(sx) + (e[4] as Vector2) * ho.y * float(sz)
+                var kp := Vector3(k.x, p.y, k.y)
+                if not solid_at(kp, FOOT_R).is_empty() or not _clear_line(p, kp):
+                    continue
+                # not the far corner: the way to it must not cross the wagon
+                var crosses := false
+                var m := maxi(int(a.distance_to(k) / 0.25), 1)
+                for j in range(2, m):
+                    var dj := a.lerp(k, float(j) / float(m)) - c
+                    if absf(dj.dot(e[3])) < he.x and absf(dj.dot(e[4])) < he.y:
+                        crosses = true
+                        break
+                if crosses:
+                    continue
+                # a corner the next leg can also be walked from is preferred
+                var l := a.distance_to(k) + k.distance_to(b) + (0.0 if _clear_line(kp, nx) else 6.0)
+                if l < best_l:
+                    best_l = l
+                    best = kp
+        if best != Vector3.INF:
+            best.y = height_at(best.x, best.z)
+            return ["round", best]
+    return []
 
 ## nothing solid on the straight line a -> b (feet only, no margin)
 func _clear_line(a: Vector3, b: Vector3) -> bool:

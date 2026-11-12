@@ -47,7 +47,7 @@ func setup(t: Node3D) -> void:
 	_layer.layer = 30
 	add_child(_layer)
 	_help = Label.new()
-	_help.text = "WASD pan · wheel zoom · right-drag rotate · Q/E turn · R/T tilt\nclick: select · F follow (your hero if none selected) · Esc clear · N names\n1 square · 2 scar · 3 gate · 4 tavern · 5 smithy · 6 armourer · 7 apothecary\nTab: jump into a delve · Space pause · [ ] speed · Enter chat · H hide"
+	_help.text = "WASD pan · wheel zoom · right-drag rotate · Q/E turn · R/T tilt\nclick: select · F follow (your hero if none selected) · Esc clear · N names\n1 square · 2 scar · 3 gate · 4 tavern · 5 smithy · 6 armourer · 7 apothecary\nTab: jump into a delve · Space pause · [ ] speed · Enter chat · H hide\nF9 all titles · F10 hide UI + spotlight labels · F11 UI scale"
 	_help.add_theme_font_size_override("font_size", UiTheme.px(19))
 	_help.add_theme_color_override("font_color", Color(1, 0.95, 0.85))
 	_help.add_theme_color_override("font_outline_color", Color(0, 0, 0))
@@ -94,6 +94,8 @@ func setup(t: Node3D) -> void:
 	director = AutoDirector.new()
 	add_child(director)
 	director.setup(self, t)
+	# L17: the spotlight split-screen (bits / subs / points lanes); chat's !look goes through it
+	spotlight = Spotlight.of(t)
 
 func _ground(p: Vector3) -> float:
 	if p.y < Delve.DELVE_Y * 0.5:
@@ -284,6 +286,7 @@ var _f_body: Label
 var _frame_t := 0.0
 var quiet := false          # stream mode: no selection ring, no unit frame
 var director: AutoDirector
+var spotlight: Spotlight
 
 func _candidates() -> Array:
 	var out: Array = []

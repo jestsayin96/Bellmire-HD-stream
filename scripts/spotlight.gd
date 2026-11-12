@@ -143,6 +143,51 @@ func _process(delta: float) -> void:
 		_relayout()
 	if _layout != "off":
 		_follow(real)
+		_cheap(real)
+
+## FPS (the desktop is chasing stutter): the lane panes take turns, one a frame,
+## so each lane runs at a third of the game rate and the cost is about two views;
+## they see the town's sky, fog and daylight but no SSAO (re-copied 2x a second).
+var _env_t := 9.0
+var _lane_env: Environment
+var _frame := 0
+
+func _cheap(real: float) -> void:
+	_frame += 1
+	var i := 0
+	for l in LANES:
+		var p: Dictionary = _panes[l]
+		if (p["box"] as Control).visible:
+			(p["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_ONCE if (_frame + i) % 3 == 0 else SubViewport.UPDATE_DISABLED
+			i += 1
+	_env_t += real
+	if _env_t < 0.5:
+		return
+	_env_t = 0.0
+	var src: Environment = null
+	for c in town.get_children():
+		if c is WorldEnvironment:
+			src = (c as WorldEnvironment).environment
+			break
+	if src == null:
+		return
+	_lane_env = src.duplicate(false)
+	_lane_env.ssao_enabled = false
+	_lane_env.ssil_enabled = false
+	_lane_env.ssr_enabled = false
+	_lane_env.sdfgi_enabled = false
+	_lane_env.volumetric_fog_enabled = false
+	for k in ["bits", "subs", "points", "wide"]:
+		(_panes[k]["cam"] as Camera3D).environment = _lane_env
+
+## while the grid is up the panes carry the view (feed_hud / hero_body read this)
+static func grid_up(t: Node) -> bool:
+	if t == null:
+		return false
+	for c in t.get_children():
+		if c is Spotlight:
+			return (c as Spotlight)._layout != "off"
+	return false
 
 func _hero_ok(uid: String) -> bool:
 	return not _hero(uid).is_empty()
@@ -174,10 +219,15 @@ func _make_pane(k: String) -> Dictionary:
 	var vp := SubViewport.new()
 	vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	vp.msaa_3d = Viewport.MSAA_DISABLED
+	if k != "director":
+		# FPS (the desktop is chasing stutter): the small panes skip omni/spot shadows,
+		# take coarser LODs and see 150 m, not the whole valley
+		vp.positional_shadow_atlas_size = 0
+		vp.mesh_lod_threshold = 4.0
 	svc.add_child(vp)
 	var cam := Camera3D.new()
 	cam.fov = 50.0
-	cam.far = 1500.0
+	cam.far = 1500.0 if k in ["director", "wide"] else 150.0
 	vp.add_child(cam)
 	cam.current = true
 	var frame := Panel.new()
@@ -217,9 +267,10 @@ func set_labels(v: bool) -> void:
 ## which pane sits where: full / side by side / 2x2
 func _relayout(force := false) -> void:
 	var b := busy()
-	var lay := "off" if b.is_empty() else ("pair_" + String(b[0]) if b.size() == 1 else "grid")
+	# the key names the busy lanes, so a third lane opening re-lays the grid
+	var lay := "off" if b.is_empty() else ("pair_" + String(b[0]) if b.size() == 1 else "grid_" + "_".join(b))
 	var rects := {}           # pane -> Rect2 in 0..1
-	match lay:
+	match lay.get_slice("_", 0) if lay.begins_with("grid") else lay:
 		"off":
 			pass
 		"grid":
@@ -247,7 +298,8 @@ func _relayout(force := false) -> void:
 		var box: Control = p["box"]
 		var on := rects.has(k)
 		box.visible = on
-		(p["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_ALWAYS if on else SubViewport.UPDATE_DISABLED
+		# the wide town view barely moves: redrawn 4x a second in _follow, not every frame
+		(p["vp"] as SubViewport).render_target_update_mode = (SubViewport.UPDATE_ONCE if k == "wide" else SubViewport.UPDATE_ALWAYS) if on else SubViewport.UPDATE_DISABLED
 		if on:
 			var r: Rect2 = rects[k]
 			box.anchor_left = r.position.x
@@ -306,7 +358,15 @@ func _in_delve(t: Node3D) -> bool:
 		p = p.get_parent()
 	return false
 
+var _wide_t := 0.0
+
 func _follow(real: float) -> void:
+	var w: Dictionary = _panes["wide"]
+	if (w["box"] as Control).visible:
+		_wide_t += real
+		if _wide_t >= 0.25:
+			_wide_t = 0.0
+			(w["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_ONCE
 	var main := get_viewport().get_camera_3d() if get_viewport() else null
 	var d: Dictionary = _panes["director"]
 	if main and (d["box"] as Control).visible:

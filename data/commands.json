@@ -2,7 +2,7 @@
   "_source": "L14: the one source of truth for chat commands. ChatCmd answers !help / !commands and !help <cmd> from it; tools/_commands_doc.gd writes docs/COMMANDS.md from it (the hub / website reads the same file). Costs are the list price before the haggle (a CHA check at the counter) and the guild-rank discount.",
   "cooldown_s": 1.5,
   "twitch_cooldown_s": 3.0,
-  "order": ["enlist", "hero", "inventory", "delve", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "help"],
+  "order": ["enlist", "hero", "inventory", "delve", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "help"],
   "commands": {
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order (see !help in docs/COMMANDS.md).",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
@@ -61,6 +61,9 @@
     "patrons":   {"aliases": ["benefactors"], "args": "", "cost": "free", "needs_hero": false,
                   "what": "Those who have kept the valley going.",
                   "example": "!patrons"},
+    "look":      {"aliases": ["spotlight", "watch"], "args": "", "cost": "free", "needs_hero": true, "short": "A 10 s spotlight pane on your hero, when the channel-points lane is free.",
+                  "what": "Ask for a look at your hero: a 10-second pane in the channel-points lane (teal), only when nobody has redeemed it or is waiting. Cheers, subs and redeems get their own longer panes.",
+                  "example": "!look"},
     "help":      {"aliases": ["commands", "valley"], "args": "[command]", "cost": "free", "needs_hero": false,
                   "what": "The command list; !help <command> for one in detail.",
                   "example": "!help forge"}

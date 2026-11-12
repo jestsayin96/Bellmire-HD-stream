@@ -40,6 +40,9 @@ func _unhandled_input(ev: InputEvent) -> void:
             for c in town.get_children():
                 if c is FeedHUD or c is LeaderboardPanel:
                     (c as CanvasLayer).visible = not (c as CanvasLayer).visible
+                # L17: the spotlight panes' name / reason chips go with the rest of the UI
+                if c is Spotlight:
+                    (c as Spotlight).set_labels(not (c as Spotlight).labels_shown)
             get_viewport().set_input_as_handled()
             return
     # any hands-on camera input: step aside for a while

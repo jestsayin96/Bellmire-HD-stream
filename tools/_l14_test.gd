@@ -22,7 +22,7 @@ func _initialize() -> void:
 			verbs.append(w.replace("\"", ""))
 	var missing: Array = []
 	for v in verbs:
-		if not cs.has(ChatCmd.canonical(v)):
+		if not cs.has(ChatCmd.canonical(v)) and not v.begins_with("test"):   # L17: !test* are local-only, never documented
 			missing.append(v)
 	_ok(verbs.size() >= 20 and missing.is_empty(), "every verb ChatCmd answers is in the data (%d verbs; missing %s)" % [verbs.size(), missing])
 	var unanswered: Array = []

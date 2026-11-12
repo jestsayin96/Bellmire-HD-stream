@@ -109,6 +109,8 @@ func card(title: String, sub: String, col: Color) -> void:
     _card_t = CARD_SECS
     _rebuild()
 
+var _grid := false
+
 func card_showing() -> bool:
     return _card != null and _card.visible
 
@@ -118,6 +120,11 @@ func _process(delta: float) -> void:
         if _card_t <= 0.0:
             _card.visible = false
             _rebuild()
+    # L17: the spotlight grid (root 3D off) - the Chronicle drops to 3 lines so it does not bury the subs pane
+    var g := get_viewport() != null and get_viewport().disable_3d
+    if g != _grid:
+        _grid = g
+        _rebuild()
     if source.size() != _seen:
         _seen = source.size()
         _rebuild()
@@ -133,6 +140,8 @@ func _rebuild() -> void:
     # with a card up, fewer lines, so the Chronicle does not climb into the party frames
     # L15: bigger text, fewer lines (5 at 100%, 4 at 125%, 3 at 150%)
     var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
+    if _grid:
+        show = mini(show, 3)
     var lines := source.slice(maxi(0, source.size() - maxi(1, show - 2 if card_showing() else show)))
     while _ages.size() < source.size():
         _ages.append(0.0)

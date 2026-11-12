@@ -122,6 +122,13 @@ func handle(user_id: String, display: String, msg: String) -> String:
         "patrons", "benefactors":
                     out = _patrons()
         "help":     out = help_line(arg)
+        "look":     out = _needs(user_id, func(): return _spot(user_id, "look", 0.0, ""))
+        "testbits", "testsub", "testpoints":
+                    # L17 test-only: the local chat box (Mr. E's keyboard) fakes a cheer / sub / redeem.
+                    # Twitch users never reach these (their ids are not local_*); T1's EventSub calls the API.
+                    if not user_id.begins_with("local_"):
+                        return ""
+                    out = _test_spot(user_id, verb, arg, arg2)
         _:
             # L14: a near miss of a real command gets a nudge, anything else is left alone (other bots)
             var guess := _closest(verb)
@@ -141,6 +148,33 @@ func _needs(user_id: String, fn: Callable) -> String:
     if not roster.is_alive(user_id):
         return "%s is dead. !reroll to raise a new hero." % roster.get_hero(user_id)["name"]
     return String(fn.call())
+
+## L17: a spotlight pane on a hero (the Spotlight sets `spot`; without it, nothing)
+func _spot(uid: String, lane: String, secs: float, why: String) -> String:
+    if not spot.is_valid():
+        return "The spotlight is not lit yet."
+    return String(spot.call(uid, lane, secs, why))
+
+## !testbits <n> [name] / !testsub [name] / !testpoints [name]: the named hero (or your own)
+func _test_spot(user_id: String, verb: String, arg: String, arg2: String) -> String:
+    var who := arg2 if verb == "testbits" else arg
+    var uid := user_id
+    if who != "":
+        uid = ""
+        for k in roster.heroes:
+            if String(roster.heroes[k].get("name", "")).to_lower() == who:
+                uid = k
+                break
+        if uid == "":
+            return "No hero named %s." % who
+    match verb:
+        "testbits":
+            var n := maxi(1, int(arg)) if arg.is_valid_int() else 100
+            return _spot(uid, "bits", Spotlight.bits_seconds(n), "cheered %d bits" % n)
+        "testsub":
+            return _spot(uid, "subs", Spotlight.SUB_S, "subscribed")
+        _:
+            return _spot(uid, "points", Spotlight.POINTS_S, "redeemed Spotlight")
 
 func _enlist(user_id: String, display: String, cls: String, species := "") -> String:
     # L5: !enlist <class> <species>, either way round ("!enlist dwarf knight" too)

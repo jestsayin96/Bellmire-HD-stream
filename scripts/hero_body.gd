@@ -195,9 +195,6 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
         if lb == null or not lb.visible:
             continue
         var anchor := hb.global_position + Vector3(0, lb.position.y, 0)
-        if cam.is_position_behind(anchor):
-            lb.offset.y = 0.0
-            continue
         # HD: up close a name grew to fill the screen; shrink it with nearness
         # (down to 40% when the camera is on top of it). L15 (laptop, stream
         # readability): and grow it with distance past 16 m, up to 3x, so a
@@ -205,7 +202,14 @@ static func _layout_names(tree: SceneTree, cam: Camera3D) -> void:
         if not lb.has_meta("px0"):
             lb.set_meta("px0", lb.pixel_size)
         var cd := cam.global_position.distance_to(anchor)
-        lb.pixel_size = float(lb.get_meta("px0")) * clampf(cd / 16.0, 0.4, 3.0)
+        # L17: while the spotlight panes carry the view (root 3D off) the lane cameras sit ~11 m off -
+        # every name (in front of the director or not) keeps the size a close camera gives it,
+        # and the main camera's on-screen declutter means nothing in the panes
+        var grid := cam.get_viewport() != null and cam.get_viewport().disable_3d
+        lb.pixel_size = float(lb.get_meta("px0")) * (0.55 if grid else clampf(cd / 16.0, 0.4, 3.0))
+        if grid or cam.is_position_behind(anchor):
+            lb.offset.y = 0.0
+            continue
         var sp := cam.unproject_position(anchor)
         var line_w := float(lb.font_size) * lb.pixel_size * 1.15
         var up := cam.unproject_position(anchor + cam.global_transform.basis.y * line_w)

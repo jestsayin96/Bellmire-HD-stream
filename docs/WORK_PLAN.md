@@ -165,7 +165,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L19. More lore: from the reference + the Lore Bible PDF - more Chronicle lines, NPC barks, floor-origin
       text, item and potion flavour, boss intros, town-level announcements; all in the original's voice, never
       contradicting it, never a floor count.
-- [ ] L17. (moved from D10; laptop owns the UI) Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
+- [x] L17. (moved from D10; laptop owns the UI) Spotlight split-screen (Mr. E, Nov 11): viewers who support the stream get a timed pane on their hero.
       FIXED LANES in a 2x2 grid, each with its own queue and colour-coded frame:
         top-left     = the director (always, the main view)
         top-right    = BITS / cheers lane (gold frame) - any cheer 15 s, 50+ bits 20 s, 100+ bits 30 s
@@ -182,6 +182,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       chatters (ahead of random heroes, behind raids/lords/fights); a small "Now watching: <name> the <species>
       <class>" banner in the main view; their name glows above their hero for ~5 s after any command; free
       !look borrows the channel-points lane for 10 s only when it is empty.
+      DONE (Cycle 76): lanes + queues, !look / !testbits / !testsub / !testpoints (local only), pair + 2x2, F10 with the UI, FPS 44 -> 40 with all three lanes; L17_TEST OK. For the desktop: add `func spotlight(uid, lane, secs, why): return Spotlight.spotlight(self, uid, lane, secs, why)` to town.gd.
 - [ ] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)

@@ -95,7 +95,14 @@ func _alive() -> Array:
 			out.append(m)
 	return out
 
+## L25c: forget the routes and the progress clocks (they are timed on _t, which restarts when a
+## floor is cleared - a clock from the fight read as "no progress for ages" on the way down)
+func _nav_reset() -> void:
+	_paths.clear()
+	_prog.clear()
+
 func _next_floor() -> void:
+	_nav_reset()
 	floor_no += 1
 	if dun:
 		dun.queue_free()
@@ -329,6 +336,98 @@ func _blocked_cells() -> Dictionary:
 				break
 	return _blocked
 
+## L25c: the clear cells labelled by which connected patch of them they belong to (a body can
+## walk between two cells of one patch without crossing furniture), worked out once a floor
+var _comp_for: Node = null
+var _comp := {}
+func _patches() -> Dictionary:
+	if _comp_for == dun:
+		return _comp
+	_comp_for = dun
+	_comp = {}
+	var cells: Dictionary = dun.info["cells"]
+	var bl := _blocked_cells()
+	var id := 0
+	for s: Vector2i in cells:
+		if bl.has(s) or _comp.has(s):
+			continue
+		_comp[s] = id
+		var q: Array[Vector2i] = [s]
+		while not q.is_empty():
+			var c: Vector2i = q.pop_back()
+			for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var n: Vector2i = c + d
+				if cells.has(n) and not bl.has(n) and not _comp.has(n):
+					_comp[n] = id
+					q.append(n)
+		id += 1
+	return _comp
+
+## L25c: a body (half-width 0.45) can stand at p: a clear floor cell, off every obstacle and
+## a body's width clear of the walls (kit walls reach 0.5 m into the cell)
+func _standable(p: Vector3) -> bool:
+	var cells: Dictionary = dun.info["cells"]
+	var c := _cell_of(p)
+	if not cells.has(c) or _blocked_cells().has(c):
+		return false
+	var G: float = dun.info["grid"]
+	var ctr := _cell_world(c)
+	for dir: Vector2i in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		if cells.has(c + dir):
+			continue
+		var off := (p.x - ctr.x) * float(dir.x) + (p.z - ctr.z) * float(dir.y)
+		if off > G * 0.5 - 0.95:
+			return false
+	var o0 := dun.global_position
+	for o in dun.info.get("obstacles", []):
+		var oc: Vector3 = (o[0] as Vector3) + o0
+		if Vector2(p.x - oc.x, p.z - oc.z).length() < float(o[1]) + 0.5:
+			return false
+	return true
+
+## L25c: where a delver stands to fight tgt. Its own side of the ring first (idx of n, turned
+## by slot_off), then the nearest side round from it, then nearer in / further out - only a
+## point the delver can stand on and walk to (the old fixed ring put slots round a big lord in
+## the wall or the hoard, and the delver pushed at them the whole fight). Kept for half a second
+## while the target holds still. Melee rings sit INSIDE reach (a tall lord's old ring did not).
+func _fight_slot(m: Dictionary, b: Node3D, tgt: Monster, idx: int, n: int, ranged: bool, reach: float) -> Vector3:
+	var tp := tgt.global_position
+	var sp = m.get("slot_pt")
+	if sp != null and _t - float(m.get("slot_t", -9.0)) < 0.5 and _flat(tp, m.get("slot_at", tp)) < 0.8 \
+			and int(m.get("slot_tgt", 0)) == tgt.get_instance_id():
+		return sp
+	var base := float(idx) * TAU / float(maxi(n, 1)) + float(m.get("slot_off", 0.0))
+	var trad := clampf(tgt._height() * 0.2, 0.3, 1.8)
+	var radii: Array
+	if ranged:
+		radii = [5.0, 4.0, 6.5, 3.0, 8.0]
+	else:
+		var r0 := clampf(trad + 0.75, 1.1, reach - 0.35)
+		radii = [r0, clampf(r0 - 0.4, trad + 0.45, reach - 0.35), reach - 0.2]
+	var pat := _patches()
+	var mine := int(pat.get(_cell_of(b.global_position), -1))
+	var pick = null
+	for k in range(0, 17):
+		var a := base + floorf((k + 1) / 2.0) * (1.0 if k % 2 == 1 else -1.0) * TAU / 16.0
+		for r in radii:
+			var p := tp + Vector3(cos(a), 0, sin(a)) * float(r)
+			if not _standable(p):
+				continue
+			if mine >= 0 and int(pat.get(_cell_of(p), -2)) != mine:
+				continue
+			pick = p
+			break
+		if pick != null:
+			break
+	if pick == null:
+		var r_old: float = 5.0 if ranged else clampf(trad + 0.75, 1.1, reach - 0.35)
+		pick = tp + Vector3(cos(base), 0, sin(base)) * r_old
+	m["slot_pt"] = pick
+	m["slot_at"] = tp
+	m["slot_t"] = _t
+	m["slot_tgt"] = tgt.get_instance_id()
+	return pick
+
 ## the route through the floor's cells, around the cells furniture blocks (the plain grid if
 ## that leaves no way through)
 func _bfs(a: Vector2i, b: Vector2i) -> Array:
@@ -422,25 +521,46 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
 		travel.erase(n)           # arrived: not on the move
 		_prog.erase(n)
 		return true
-	var pg: Array = _prog.get(n, [])
-	if pg.is_empty() or dist_to < float(pg[0]) - 0.2 or absf(dist_to - float(pg[0])) > 12.0:
-		_prog[n] = [dist_to, _t]     # progress (or a new goal far from the old one)
-	elif _t - float(pg[1]) > 2.0:
-		_unstick(n)
 	var ca_raw := _cell_of(n.global_position)
 	var ca := _snap_cell(ca_raw)
 	if ca != ca_raw:
 		# somehow off the floor: step straight back onto the nearest cell
 		_step(n, _cell_world(ca), spd, delta)
 		return false
+	var pts: Array = []
+	var left := dist_to
+	if ca != cb:
+		var e: Array = _paths.get(n, [])
+		if e.is_empty() or _t - float(e[1]) > 0.5 or (e[0] as Array).is_empty():
+			e = [_bfs(ca, cb), _t]
+			_paths[n] = e
+		pts = e[0]
+		if not pts.is_empty():
+			# L25c: progress is the way LEFT along the route, not the straight line - a route that
+			# bends away from a far stair or target is not being stuck
+			left = _flat(n.global_position, pts[0]) + _flat(pts[-1], to)
+			for i in range(1, pts.size()):
+				left += _flat(pts[i - 1], pts[i])
+	var tr: Array = n.get_meta("trail", [])
+	if tr.is_empty() or _t - float(n.get_meta("trail_t", -9.0)) > 0.25:
+		n.set_meta("trail_t", _t)
+		tr.append("%.1f,%.1f>%s %.1f" % [n.global_position.x, n.global_position.z, ("%.0f,%.0f" % [(pts[0] as Vector3).x, (pts[0] as Vector3).z]) if not pts.is_empty() else "-", left])
+		if tr.size() > 9:
+			tr.pop_front()
+		n.set_meta("trail", tr)
+	var pg: Array = _prog.get(n, [])
+	# (a goal that moves - a delver backing off, a beast circling - starts the clock again, if the
+	# body is following it and not pressed against something)
+	if pg.is_empty() or left < float(pg[0]) - 0.2 or absf(left - float(pg[0])) > 12.0 \
+			or (_flat(to, pg[2]) > 1.0 and _flat(n.global_position, pg[3]) > 0.5):
+		_prog[n] = [left, _t, to, n.global_position]     # progress (or a new goal far from the old one)
+	elif _t - float(pg[1]) > 2.0:
+		unstick_log.append("f%d %s %s %s at %s -> %s (%.1f m left, %s)" % [floor_no, state, n.name, ("hero" if n is HeroBody else "mon"), n.global_position.snappedf(0.1), to.snappedf(0.1), left, "same" if ca == cb else "diff"] + _why(n, pts))
+		_unstick(n, cb)
+		return false
 	if ca == cb:
 		_step(n, to, spd, delta)
 		return false
-	var e: Array = _paths.get(n, [])
-	if e.is_empty() or _t - float(e[1]) > 0.5 or (e[0] as Array).is_empty():
-		e = [_bfs(ca, cb), _t]
-		_paths[n] = e
-	var pts: Array = e[0]
 	if pts.is_empty():
 		return false          # no way through: wait rather than walk a wall
 	var nxt: Vector3 = pts[0]
@@ -475,6 +595,30 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 			if dd.length() >= need:
 				continue
 			var dir := dd.normalized() if dd.length() > 0.01 else Vector2(d.z, -d.x).normalized()
+			# L25c: walking INTO it, slide round its rim instead of being pushed straight back (a
+			# body heading dead at a table on its route stood pressed against it for good). Dead
+			# on, it keeps the side it took last, so it does not dither; a side that runs into
+			# stone is swapped for the other.
+			var mv := Vector2(d.x, d.z).normalized()
+			if dir.dot(mv) < -0.2:
+				var tg := Vector2(-dir.y, dir.x)
+				var side := tg.dot(mv)
+				if absf(side) < 0.35:
+					side = float(n.get_meta("slide", 1.0))
+				var sgn := 1.0 if side >= 0.0 else -1.0
+				var took := false
+				for s in [sgn, -sgn]:
+					var a2 := (dir + tg * float(s) * (step_len / need)).normalized()
+					var rim := Vector3(c.x + a2.x * need, p.y, c.z + a2.y * need)
+					if cells.has(_cell_of(rim)):
+						n.set_meta("slide", float(s))
+						p = rim
+						took = true
+						break
+				if not took:
+					p = n.global_position       # hold rather than go through stone
+					n.set_meta("sw", "rim-hold")
+				continue
 			var pushed := Vector3(c.x + dir.x * need, p.y, c.z + dir.y * need)
 			if cells.has(_cell_of(pushed)):
 				p = pushed
@@ -489,6 +633,7 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 				p = slide
 			else:
 				p = n.global_position       # hold rather than go through stone
+				n.set_meta("sw", "slide-hold")
 	# a creature has a body, not a point: it keeps its own half-width off any
 	# wall (big lords and wide beasts were walking half into the stone)
 	if n is Monster and dun and dun.info.has("cells"):
@@ -512,7 +657,9 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	# last guard: a step that would end beyond the walls is not taken
 	if dun and dun.info.has("cells") and not (dun.info["cells"] as Dictionary).has(_cell_of(p)) \
 			and (dun.info["cells"] as Dictionary).has(_cell_of(n.global_position)):
+		n.set_meta("sw", "guard %s->%s" % [n.global_position.snappedf(0.1), p.snappedf(0.1)])
 		return false
+	n.set_meta("sw", "moved %.3f of %.3f" % [_flat(p, n.global_position), minf(spd * delta, d.length())])
 	n.global_position = p
 	n.rotation.y = atan2(d.x, d.z)
 	return _flat(p, to) < 0.05
@@ -576,6 +723,7 @@ func _fight(delta: float) -> void:
 				m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m["max"]) * 0.25)
 			state = "descend"
 			_t = 0.0
+			_nav_reset()
 		return
 	# venom keeps working after the bite (spider, snake, adder, wasp)
 	for m in alive:
@@ -646,10 +794,10 @@ func _fight(delta: float) -> void:
 			# goes round to another side instead of pushing at it for the rest of the fight
 			if stuck_on(b):
 				m["slot_off"] = float(m.get("slot_off", 0.0)) + 1.1
+				m["slot_t"] = -9.0       # pick again from the new side
 				_prog.erase(b)
-			var slot := float(party.find(m)) * TAU / float(maxi(party.size(), 1)) + float(m.get("slot_off", 0.0))
-			var ring := Vector3(cos(slot), 0, sin(slot)) * (1.4 + tgt._height() * 0.25 if not ranged else 5.0)
-			_go(b, tgt.global_position + ring, roster.speed(h) * 0.9, delta)
+			var spot := _fight_slot(m, b, tgt, party.find(m), party.size(), ranged, reach)
+			_go(b, spot, roster.speed(h) * 0.9, delta)
 			Rig.play(b._anim, "Running_A")
 			continue
 		b.rotation.y = atan2(tgt.global_position.x - b.global_position.x, tgt.global_position.z - b.global_position.z)
@@ -1827,14 +1975,26 @@ func _amb_tick(delta: float) -> void:
 ## L25c: the watchdog. A body that has not got closer to its goal for 2 s (held by a wall and a
 ## table at once) is set down in the middle of the nearest clear cell and routes afresh.
 var unsticks := 0
-func _unstick(n: Node3D) -> void:
+var unstick_log: Array = []      # tests read it: where the watchdog fired
+func _unstick(n: Node3D, goal := Vector2i(-9999, -9999)) -> void:
 	var cells: Dictionary = dun.info["cells"]
 	var blocked := _blocked_cells()
 	var here := _cell_of(n.global_position)
+	# L25c: set it down where its goal can be walked to (the nearest clear cell could be a pocket
+	# walled in by furniture - it was set back in the same pocket again and again)
+	var pat := _patches()
+	var want := int(pat.get(goal, -1))
+	if want < 0 and goal.x != -9999:
+		var gd := 1e9
+		for c: Vector2i in pat:
+			var d0 := Vector2(c - goal).length()
+			if d0 < gd:
+				gd = d0
+				want = int(pat[c])
 	var best := Vector2i(-9999, -9999)
 	var bd := 1e9
 	for c: Vector2i in cells:
-		if blocked.has(c) or (c == here and _flat(n.global_position, _cell_world(c)) < 0.5):
+		if blocked.has(c) or (want >= 0 and int(pat.get(c, -1)) != want) or (c == here and _flat(n.global_position, _cell_world(c)) < 0.5):
 			continue          # (not where it already stands - that was a loop)
 		var d := Vector2(c - here).length()
 		if d < bd:
@@ -1847,3 +2007,22 @@ func _unstick(n: Node3D) -> void:
 	_paths.erase(n)
 	_prog.erase(n)
 	unsticks += 1
+
+## debug for the L25 test: what is round a body the watchdog had to free
+func _why(n: Node3D, pts: Array) -> String:
+	var o0 := dun.global_position
+	var near: Array = []
+	for o in dun.info.get("obstacles", []):
+		var c: Vector3 = (o[0] as Vector3) + o0
+		var d := _flat(c, n.global_position)
+		if d < float(o[1]) + 2.0:
+			near.append("(%.1f,%.1f r%.2f d%.2f)" % [c.x, c.z, float(o[1]), d])
+	var here := _cell_of(n.global_position)
+	var nb := ""
+	for dd in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var c2: Vector2i = here + dd
+		nb += ("#" if not (dun.info["cells"] as Dictionary).has(c2) else ("B" if _blocked_cells().has(c2) else "."))
+	var wp := ""
+	for i in range(mini(3, pts.size())):
+		wp += str((pts[i] as Vector3).snappedf(0.1)) + " "
+	return " trail=%s [%s] cell %s%s nb(+x-x+z-z)=%s wps=%s obst=%s" % [" | ".join(n.get_meta("trail", [])), n.get_meta("sw", "-"), here, (" B" if _blocked_cells().has(here) else ""), nb, wp, ", ".join(near)]

@@ -240,6 +240,7 @@ func _process(_dt: float) -> bool:
 			by[k] = int(by.get(k, 0)) + 1
 		print("  stuck by floor / state: ", by)
 		_ok(_stuck.is_empty(), "0 stuck delvers in the run (%d: %s)" % [_stuck.size(), _stuck.slice(0, 6)])
+		for u in _d.unstick_log: print("  nudge ", u)
 		_ok(_d.unsticks <= 10, "the watchdog had to set a stuck delver free at most once a floor (%d times in 10 floors)" % _d.unsticks)
 		_ok(_d.forced == 0, "no descent forced because someone never reached the stairs (%d)" % _d.forced)
 		_end()

@@ -83,6 +83,37 @@ const NEW_TYPES := {
                    "ways": {"breath": 2.8}, "homes": ["firepit", "crypt", "keep"]},
     "slimeling":  {"name": "slimeling", "path": QUAT + "Slime.glb", "anims": A_SLIME, "hp": 0.35, "atk": 0.5, "spd": 3.6, "h": 0.5, "lift": 0.0,
                    "family": "ooze", "homes": []},
+    # ---- L27a: the roster widened from the same owned CC0 bodies (KayKit Skeletons
+    # + its weapon set, KayKit Adventurers, Quaternius, assets/monsters). Variants
+    # earn their place with a different silhouette (height/weapons), a tint/glow the
+    # stream can read, and their own ways and homes. No lords; plain old-game voice.
+    "hewer":      {"name": "marrow hewer", "path": SKL + "Skeleton_Warrior.glb", "anims": A_SKL, "hp": 1.1, "atk": 1.3, "spd": 3.8, "h": 1.85, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Axe.gltf", "off": SKA + "Skeleton_Shield_Small_A.gltf", "family": "undead",
+                   "ways": {"pack": 1}, "homes": ["barracks", "firepit"]},
+    "cutthroat":  {"name": "pale cutthroat", "path": SKL + "Skeleton_Rogue.glb", "anims": A_SKL, "hp": 0.8, "atk": 1.5, "spd": 5.2, "h": 1.6, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Blade.gltf", "off": SKA + "Skeleton_Blade.gltf", "family": "undead", "tint": Color(0.90, 0.86, 0.96), "glow": Color(0.10, 0.05, 0.18),
+                   "ways": {"grudge": true}, "homes": ["treasury", "prison"]},
+    "silkmother": {"name": "silk mother", "path": MON + "Spider.glb", "anims": A_SPIDER, "hp": 1.5, "atk": 1.2, "spd": 3.8, "h": 1.3, "lift": 0.0,
+                   "family": "beast", "tint": Color(0.45, 0.42, 0.50), "glow": Color(0.15, 0.45, 0.20),
+                   "ways": {"venom": 5.0, "summon": {"type": "spiderling", "every": 13.0, "most": 2, "line": "Spiderlings spill from the silk mother's back."}},
+                   "homes": ["wood", "fogbound"]},
+    "spiderling": {"name": "spiderling", "path": MON + "Spider.glb", "anims": A_SPIDER, "hp": 0.3, "atk": 0.5, "spd": 5.2, "h": 0.35, "lift": 0.0,
+                   "family": "beast", "homes": []},
+    "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,
+                   "family": "beast", "tint": Color(0.72, 0.88, 0.62), "glow": Color(0.20, 0.50, 0.12),
+                   "ways": {"venom": 4.0, "pack": 2}, "homes": ["mess", "prison", "flooded"]},
+    "lurker":     {"name": "fen lurker", "path": MON + "Frog.glb", "anims": A_FROG, "hp": 1.6, "atk": 1.2, "spd": 3.0, "h": 1.5, "lift": 0.0,
+                   "family": "beast", "tint": Color(0.45, 0.58, 0.40), "glow": Color(0.08, 0.25, 0.10),
+                   "ways": {"venom": 3.0}, "homes": ["flooded", "grassland"]},
+    "pitwyrm":    {"name": "pit wyrm", "path": QUAT + "Dragon.glb", "anims": A_DRAGON, "hp": 1.8, "atk": 1.5, "spd": 2.6, "h": 4.0, "lift": 0.6,
+                   "family": "wyrm", "tint": Color(0.70, 0.55, 0.45), "glow": Color(0.45, 0.15, 0.05),
+                   "ways": {"breath": 2.4}, "homes": ["firepit", "keep"]},
+    "ashwight":   {"name": "ash wight", "path": ADVC + "Mage.glb", "anims": A_KAY, "hp": 0.9, "atk": 1.4, "spd": 3.6, "h": 1.75, "lift": 0.0,
+                   "hand": ADV + "staff.gltf", "off": "", "casts": true, "family": "the fallen", "tint": Color(0.76, 0.74, 0.72), "glow": Color(0.28, 0.10, 0.03),
+                   "ways": {"ranged": 7.5}, "homes": ["shrine", "firepit"]},
+    "gloombat":   {"name": "gloom bat", "path": QUAT + "Bat.glb", "anims": A_BAT, "hp": 0.8, "atk": 1.1, "spd": 6.0, "h": 1.2, "lift": 1.8,
+                   "family": "beast", "tint": Color(0.40, 0.36, 0.55), "glow": Color(0.35, 0.20, 0.65),
+                   "ways": {"pack": 2}, "homes": ["fogbound", "crypt"]},
 }
 ## what the old creatures do and where they are at home (L1). `ways` are the
 ## creature's habits in a fight (Delve reads them): ranged = keeps this far
@@ -341,9 +372,9 @@ const DEPTHS := [
     [1, 2,  ["slime", "bat", "minion", "rat", "frog"]],
     [3, 4,  ["minion", "bones", "bat", "slime", "rat", "spider", "puglin", "bowman"]],
     [5, 5,  ["warrior", "bones", "warlock", "spider", "bowman", "sentinel"]],
-    [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin", "bowman", "sentinel", "gravecaller"]],
-    [8, 9,  ["warrior", "warlock", "bones", "bat", "adder", "imp", "sentinel", "gravecaller", "lost"]],
-    [10, 99,["warrior", "warlock", "cutpurse", "bones", "adder", "imp", "wasp", "bowman", "sentinel", "gravecaller", "lost", "whelp"]],
+    [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin", "bowman", "sentinel", "gravecaller", "hewer", "scarrat", "lurker"]],
+    [8, 9,  ["warrior", "warlock", "bones", "bat", "adder", "imp", "sentinel", "gravecaller", "lost", "cutthroat", "ashwight", "gloombat", "silkmother", "scarrat"]],
+    [10, 99,["warrior", "warlock", "cutpurse", "bones", "adder", "imp", "wasp", "bowman", "sentinel", "gravecaller", "lost", "whelp", "hewer", "cutthroat", "silkmother", "pitwyrm", "ashwight", "gloombat"]],
 ]
 
 static func pool(floor_no: int) -> Array:

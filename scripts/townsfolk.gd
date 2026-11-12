@@ -55,6 +55,24 @@ var _enter_at := Vector3.ZERO
 var _wait := 0.0
 var _to_work := true
 var _wobble := 0.0
+## D7: far-away LOD, set by town._lod_pass from the camera's distance. 0 = every
+## physics tick; 1 = every 2nd; 2 = every 4th, the step taken with the summed
+## time so nobody walks slower. Past 0 the rig is advanced by hand on the same
+## beat (a 15 fps pose a hundred metres off reads the same on stream).
+var lod := 0
+static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_test.gd)
+var _lod_n := 0
+var _lod_acc := 0.0
+
+func set_lod(l: int) -> void:
+    if l == lod:
+        return
+    lod = l
+    _lod_n = 0
+    _lod_acc = 0.0
+    if _anim:
+        _anim.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL if l > 0 \
+                else AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE
 
 func _ready() -> void:
     var sc: PackedScene = load(ADV + model)
@@ -198,6 +216,17 @@ var _stuck_t := 0.0
 var _door_retry := 0
 
 func _physics_process(delta: float) -> void:
+    if lod > 0:
+        _lod_acc += delta
+        _lod_n += 1
+        if _lod_n < (2 if lod == 1 else 4):
+            return
+        _lod_n = 0
+        delta = _lod_acc
+        _lod_acc = 0.0
+        if _anim and visible:
+            _anim.advance(delta)
+    steps += 1
     if town != null:
         _try_cast(delta)
         _cry(delta)
@@ -266,6 +295,8 @@ func _physics_process(delta: float) -> void:
     if to.length() < (0.9 if _route.size() == 1 else 0.45):
         _stuck_t = 0.0
         _route.remove_at(0)
+        if lod > 0 and not _route.is_empty():
+            _lod_acc += delta       # D7: no step was taken - the far walker keeps the time
         if _route.is_empty():
             Rig.play(_anim, "Idle")
             _door_retry = 0

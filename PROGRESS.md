@@ -1104,3 +1104,25 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - 3. The key strip: hidden by default (H shows it), on its parchment chip, scaled with the UI scale (L15/L16).
 - Also: the hero unit frame moved bottom-right (it sat on the Chronicle in the phone frame).
 - Checks: L13, L15, L16 OK, TWITCH_PARSE OK.
+
+## Cycle 76 - D7, far-away LOD, the street cap, and the hitch found (desktop, 2026-11-11)
+- tools/_d7_hitch.gd (new): the real town windowed, director on, 4x, six fake viewers, every frame over 250 ms
+  printed with what changed. 41 hitches of 350-810 ms in 6 minutes, every one on a dungeon floor change (+700 to
+  +1180 nodes) of the viewers' delve or the town band's. Timed alone (HITCH_BENCH=1): DungeonHD.build 580-820 ms
+  a floor, FloorGen.build 450-770 ms of it, _dress 3-25, _people 9-270; freeing a floor 11-16 ms. The fix lives in
+  the laptop's files (delve.gd / dungeon_hd.gd / floorgen.gd) - handed over in WORK_PLAN D7: build the next floor
+  ahead off the main thread or over several frames. Not changed here.
+- LOD (town.gd _lod_pass every 0.25 s, townsfolk.gd set_lod): past 60 m from the camera a walker steps and its rig
+  advances every 2nd physics tick, past 120 m every 4th, with the summed time (a reached waypoint keeps the unused
+  time), so nobody walks slower. Viewers' heroes, the mounted watch and everyone during a raid always run full.
+- Street cap (town.gd STREET_CAP 200): a settler past it still settles - counted a soul for the level, fed,
+  taxed - but keeps to the house, hidden, no physics. A burial on the streets brings one out. New guards always walk.
+- Bugs found in the soak: a guard or a notable killed in a raid was typed before its validity test - _show_garrison
+  errored, and Notables._process stopped every tick from then on (2583 SCRIPT ERRORs in 6 min). Fixed (also
+  by_key and the crier).
+- tools/_d7_test.gd (headless, new): LOD tiers match distance (0 wrong), heroes/riders full; the same 360-frame walk
+  at every tick and every 4th tick: 2.52 vs 2.52 m/s; cap: 200 on the streets, newcomers indoors, souls counted,
+  guards walk, burials bring souls out; 43% fewer walker steps per tick. D7_TEST OK.
+- tools/_d7_fps.gd (windowed 1920x1080, 217 people, fixed stream camera over the market, 40 s blocks off/on/off/on):
+  100.9 / 127.3 / 96.7 / 124.7 FPS -> LOD on 126.0 vs off 98.8 (+28%). Looked at renders/cycles/20261112_d7: the
+  town and the square read normally, nothing popping.

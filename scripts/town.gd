@@ -3180,6 +3180,35 @@ func _process(delta: float) -> void:
     for sp in _spinners:
         var n: Node3D = sp[0]
         n.rotate_object_local(sp[1], float(sp[2]) * delta)
+    _lod_t -= delta
+    if _lod_t <= 0.0:
+        _lod_t = 0.25
+        _lod_pass()
+
+## ---- D7: far-away LOD. Townsfolk past LOD_NEAR from the camera step and
+## animate every 2nd physics tick, past LOD_FAR every 4th (townsfolk.gd set_lod).
+## Viewers' heroes and the mounted watch always run full; so does everyone while
+## raiders are in the valley (raids.gd moves the fighters itself).
+const LOD_NEAR := 60.0
+const LOD_FAR := 120.0
+var _lod_t := 0.0
+var lod_counts := [0, 0, 0]
+var lod_on := true          # tools compare FPS with it off
+
+func _lod_pass() -> void:
+    var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
+    var fight: bool = raids != null and not (raids as Raids).raiders.is_empty()
+    lod_counts = [0, 0, 0]
+    for p in people:
+        if not is_instance_valid(p) or not (p is Townsfolk):
+            continue
+        var v: Townsfolk = p
+        var l := 0
+        if lod_on and cam != null and not fight and not (v is HeroBody) and not (v is Cavalry):
+            var d := cam.global_position.distance_to(v.global_position)
+            l = 2 if d > LOD_FAR else (1 if d > LOD_NEAR else 0)
+        v.set_lod(l)
+        lod_counts[l] += 1
 
 ## ---------------------------------------------------------------- placement
 ## ONE rule for everything that stands on the ground: not in a carriageway,
@@ -4242,9 +4271,10 @@ func _show_garrison(lv: int, quiet := false) -> void:
     var sworn: Array = []
     var riders := 0
     for e in garrison:
-        var v: Townsfolk = e[0]
-        if not is_instance_valid(v):
+        # D7: a guard who fell in a raid is freed - test before typing it
+        if not is_instance_valid(e[0]):
             continue
+        var v: Townsfolk = e[0]
         var on: bool = lv >= int(e[1])
         var was: bool = bool(v.get_meta("on_duty", true))
         v.set_meta("on_duty", on)
@@ -4826,15 +4856,55 @@ func arrive(role: String, blurb: String) -> Townsfolk:
     people.append(v)
     v._route = route(start, v.work)
     var line := blurb % v.person_name
+    if _on_streets() > STREET_CAP and role != "guard":
+        _keep_indoors(v)
     feed.append(line)
     print("FEED ", line)
     return v
+
+## ---- D7: a population cap on the STREETS, not on the town. Past STREET_CAP
+## walkers a newcomer still settles - a soul of Bellmire, counted for the town's
+## level, fed and taxed - but keeps to the house (no body walking, no physics).
+## When someone in the streets is buried, one of them steps out to take the place.
+const STREET_CAP := 200
+var indoor_souls := 0
+
+func _on_streets() -> int:
+    var n := 0
+    for p in people:
+        if is_instance_valid(p) and not p.has_meta("indoor_soul"):
+            n += 1
+    return n
+
+func _keep_indoors(v: Townsfolk) -> void:
+    v.set_meta("indoor_soul", true)
+    v._route = []
+    v.inside = true
+    v.visible = false
+    v.global_position = Vector3(v.home.x, height_at(v.home.x, v.home.z), v.home.z)
+    v.process_mode = Node.PROCESS_MODE_DISABLED
+    indoor_souls += 1
+
+func _step_out() -> void:
+    for p in people:
+        if is_instance_valid(p) and p.has_meta("indoor_soul"):
+            var v: Townsfolk = p
+            v.remove_meta("indoor_soul")
+            v.process_mode = Node.PROCESS_MODE_INHERIT
+            v.inside = true          # comes out of the front door on its next trip
+            v._wait = randf_range(1.0, 6.0)
+            indoor_souls -= 1
+            return
 
 ## a townsfolk dies: the line, the fall, and the body cleared after a while
 func bury(v: Townsfolk, line: String) -> void:
     if not is_instance_valid(v):
         return
     people.erase(v)
+    if v.has_meta("indoor_soul"):
+        indoor_souls -= 1
+    elif _on_streets() < STREET_CAP:
+        _step_out()
     v.stay = true
     v._route = []
     Rig.play(v._anim, "Death_A")

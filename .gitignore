@@ -14,3 +14,8 @@ desktop.ini
 renders/obs_review/
 opencode.json
 setup.ps1
+
+# local-only Twitch config (client id, tokens) - never committed
+local/
+_sup_tests.log
+_merge_tests.log

@@ -107,9 +107,10 @@ func price(g: String) -> float:
     return clampf(base * (d / s) * 6.0, base * 0.35, base * 4.0)
 
 func add(g: String, n: float) -> void:
-    stock[g] = maxf(0.0, stock.get(g, 0.0) + n)
+    stock[g] = maxf(0.0, stock.get(g, 0.0) + n * _work_k)
 
 func take(g: String, n: float) -> bool:
+    n *= _work_k
     if stock.get(g, 0.0) < n:
         demand[g] = demand.get(g, 0.0) + n
         return false
@@ -127,8 +128,42 @@ func _at_work(f: Townsfolk) -> bool:
     # indoors at the workshop counts; indoors at home does not
     return Vector2(f.global_position.x - f.work.x, f.global_position.z - f.work.z).length() < 8.0
 
-## villager._produce, verbatim in effect
-func produce(role: String) -> void:
+## D9 (the DnD RULE): a beat of work is a roll - d20 + 2 (a trained hand) vs
+## DC 10. A 1 spoils the beat (nothing), a miss does half, a hit the full
+## measure, a 20 twice it - all divided by the mean (0.85), so the town makes
+## what it always made, now by the dice. A 20 reaches the Chronicle now and then.
+const WORK_BONUS := 2
+const WORK_DC := 10
+const WORK_MEAN := 0.85
+var _work_k := 1.0               # the beat's measure while produce() runs
+var work_rolls := [0, 0, 0, 0]   # nat 1, miss, hit, nat 20 (tests)
+var last_work_d := 0
+var _work_big_t := 60.0
+
+func work_roll() -> float:
+    var c := Dice.check(WORK_BONUS, WORK_DC)
+    last_work_d = int(c["d"])
+    var k := 1.0
+    if last_work_d == 1:
+        k = 0.0
+        work_rolls[0] += 1
+    elif last_work_d == 20:
+        k = 2.0
+        work_rolls[3] += 1
+    elif c["ok"]:
+        work_rolls[2] += 1
+    else:
+        k = 0.5
+        work_rolls[1] += 1
+    return k / WORK_MEAN
+
+## villager._produce, verbatim in effect (k: the work roll's measure, D9)
+func produce(role: String, k := 1.0) -> void:
+    _work_k = k
+    _produce(role)
+    _work_k = 1.0
+
+func _produce(role: String) -> void:
     match role:
         "farmer":
             add("food", 1.45)
@@ -146,7 +181,7 @@ func produce(role: String) -> void:
             if take("food", 0.4):
                 add("potion", 0.4)
         "merchant", "trader":
-            treasury += 2
+            treasury += int(round(2.0 * _work_k))
         "miller":
             if take("wood", 0.2):
                 add("food", 0.85)
@@ -155,7 +190,7 @@ func produce(role: String) -> void:
                 add("gear", 0.2)
         "innkeeper":
             if take("food", 0.5):
-                treasury += 3
+                treasury += int(round(3.0 * _work_k))
 
 func _process(delta: float) -> void:
     if town == null:
@@ -171,8 +206,11 @@ func _process(delta: float) -> void:
             # old villager: _produce runs in the WORK state, which is the
             # daytime (the old clock: night is before 6:00 and after 18:30)
             if not is_night():
-                produce(String(f.role))
+                produce(String(f.role), work_roll())
                 any = true
+                if last_work_d == 20 and _work_big_t <= 0.0 and f.person_name != "":
+                    _work_big_t = 150.0
+                    (town.get("feed") as Array).append("%s rolls a 20 at the %s's work - does a double day of it." % [f.person_name, String(f.role)])
         _beat[f] = t
     if any:
         changed.emit()
@@ -186,6 +224,7 @@ func _process(delta: float) -> void:
         day += 1
         _end_of_day()
     growth(delta)
+    _work_big_t -= delta
     _chatter -= delta
     if _chatter <= 0.0:
         _chatter = randf_range(11.0, 20.0)

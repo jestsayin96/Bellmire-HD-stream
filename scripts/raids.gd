@@ -18,6 +18,14 @@ class_name Raids
 ##    ("A building is burning!"); townsfolk raise the first ruin again every
 ##    22 s for 12 wood + 8 stone;
 ##  - "The attack is driven off. The gates hold." when the last one falls.
+## D9 (the DnD RULE): every outcome here is a roll (scripts/dice.gd) - initiative
+## (d20 + DEX, the side that wins swings first), every blow d20 + to-hit vs AC
+## with its damage as dice + modifier (a 20 rolls the dice twice), a caster's
+## bolt / chain / frost / smite as spell attacks, the fire burst as a DEX save vs
+## the caster's spell DC (8 + prof + mod, a save halves it), mending as dice, one
+## CON save DC 10 for anyone who goes down, the raiders' torch a check before a
+## house burns, the townsfolk's rebuilding a check. Heroes' big rolls reach the
+## Chronicle.
 ## Bellmire HD balance (cycle 55):
 ##  - a green hero (under GREEN_BELOW) does not charge the raiders: they hold
 ##    the market square with the townsfolk behind them and only fight what
@@ -59,6 +67,11 @@ func raid(source := "") -> void:
     var from_dungeon := randf() < 0.62 if source == "" else source == "scar"
     var day := economy.day
     var n: int = min(8, 2 + randi() % 3 + int(day / 3) + int(economy.renown / 12))
+    # D9: initiative - d20 + DEX for the raiders and for the watch; the side
+    # that wins swings first
+    _init_raid = Dice.d20() + 1
+    _init_watch = Dice.d20() + 2
+    _big_said.clear()
     var spawn: Vector3
     var sc: Dictionary = town.get("_scar_info")
     if from_dungeon and sc.has("mouth"):
@@ -94,12 +107,15 @@ func raid(source := "") -> void:
         node.position = at
         town.add_child(node)
         raiders.append({"node": node, "hp": 30.0, "max": 30.0, "atk": 5.5, "ac": 10, "to_hit": 2,
-                        "speed": 4.0, "name": nm, "target": null, "swing": randf() * 1.1,
+                        "dice": [1, 6], "dmod": 2, "dex": 1, "con": 1,
+                        "speed": 4.0, "name": nm, "target": null, "swing": _first_swing(true),
                         "kind": "monster" if from_dungeon else "bandit"})
     if from_dungeon:
         _say("%d creatures boil out of the dungeon!" % n)
     else:
         _say("%d bandits are riding on the west road!" % n)
+    _say("Initiative: the raiders %d, the watch %d - %s." % [_init_raid, _init_watch,
+        "the raiders strike first" if _init_raid > _init_watch else "the watch is ready for them"])
     var riders := 0
     for p in town.get("people"):
         if is_instance_valid(p) and p is Cavalry and (p as Node3D).visible:
@@ -120,37 +136,65 @@ func _defenders() -> Array:
         if String((p as Townsfolk).gear_role) == "lookout":
             continue          # the tower lookouts keep their towers
         if not _fighters.has(p):
-            var st := {"target": null, "swing": 0.0, "post": (p as Node3D).global_position,
+            var st := {"target": null, "swing": _first_swing(false), "post": (p as Node3D).global_position,
                        "yaw": (p as Node3D).rotation.y, "stay": (p as Townsfolk).stay}
             if is_hero:
                 var r: Roster = (p as HeroBody).roster      # viewers' roll or the town's own
                 var h: Dictionary = r.get_hero((p as HeroBody).user_id)
                 st.merge({"hp": r.max_hp(h), "max": r.max_hp(h), "atk": r.attack(h), "ac": r.armour_class(h),
                           "to_hit": r.attack_bonus(h), "speed": r.speed(h)})
+                # D9: the hero's own weapon dice + the class's ability; "flat" keeps the
+                # sheet's average blow (gear, class) on top of the dice
+                var dice: Array = r.weapon_dice(h)
+                var md := r.mod(h, String(Roster.CLASSES[String(h["class"])].get("primary", "str")))
+                st.merge({"dice": dice, "dmod": md, "flat": r.attack(h) - Dice.mean(dice) - float(md),
+                          "dex": r.mod(h, "dex"), "con": r.save_bonus(h, "con")})
                 st["green"] = int(h.get("level", 1)) < GREEN_BELOW
                 st["cls"] = String(h.get("class", ""))
             elif p is Cavalry:
                 # D4: the mounted watch - horsed, harder to bring down, rides at them
-                st.merge({"hp": 80.0, "max": 80.0, "atk": 13.0, "ac": 13, "to_hit": 4, "speed": 9.0})
+                st.merge({"hp": 80.0, "max": 80.0, "atk": 13.0, "ac": 13, "to_hit": 4, "speed": 9.0,
+                          "dice": [2, 8], "dmod": 4, "dex": 1, "con": 3})       # the lance
             elif role == "guard":
-                st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4})
+                st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4,
+                          "dice": [2, 6], "dmod": 4, "dex": 0, "con": 2})       # the watch's longsword
             else:
-                st.merge({"hp": 40.0, "max": 40.0, "atk": 6.0, "ac": 10, "to_hit": 2, "speed": 3.4})
+                st.merge({"hp": 40.0, "max": 40.0, "atk": 6.0, "ac": 10, "to_hit": 2, "speed": 3.4,
+                          "dice": [1, 8], "dmod": 2, "dex": 0, "con": 1})
             _fighters[p] = st
         out.append(p)
     return out
 
 func _d20() -> int:
-    return randi() % 20 + 1
+    return Dice.d20()
 
-## one swing, by the sheet
-func _strike(atk: float, to_hit: int, ac: int) -> float:
-    var d := _d20()
-    if d == 1:
+## D9: initiative decides who swings first - the winning side's first blow
+## comes at once, the other side's a beat later
+var _init_raid := 0
+var _init_watch := 0
+func _first_swing(raider: bool) -> float:
+    var first := (_init_raid > _init_watch) == raider
+    return randf_range(0.0, 0.3) if first else randf_range(0.6, 1.1)
+
+## one swing, by the sheet (D9): d20 + to-hit vs AC - a 1 always misses, a 20
+## always hits and rolls the dice twice; damage is the dice + modifier (+ flat).
+## `dice` overrides the striker's own (a spell's). last_nat keeps the d20.
+var last_nat := 0
+func _strike(st: Dictionary, ac: int, dice = null) -> float:
+    var d := Dice.d20()
+    last_nat = d
+    if d == 1 or (d != 20 and d + int(st.get("to_hit", 0)) < ac):
         return 0.0
-    if d == 20:
-        return atk * 2.0
-    return 0.0 if d + to_hit < ac else atk
+    var dd: Array = dice if dice != null else st.get("dice", [1, 6])
+    return Dice.damage(dd, float(st.get("dmod", 0)) + float(st.get("flat", 0.0)), d == 20)
+
+## heroes' big rolls reach the Chronicle - once per hero per raid
+var _big_said := {}
+func _big(who: String, what: String) -> void:
+    if _big_said.has(who):
+        return
+    _big_said[who] = true
+    _say("%s %s" % [who, what])
 
 func _flat(a: Vector3, b: Vector3) -> float:
     return Vector2(a.x - b.x, a.z - b.z).length()
@@ -356,7 +400,8 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
     st["swing"] = 1.1
     _anim(me, "attack")
     var ts: Dictionary = tg if defending else _fighters[tg]
-    var dmg := _strike(float(st["atk"]), int(st["to_hit"]), int(ts["ac"]))
+    var dmg := _strike(st, int(ts["ac"]))
+    var crit := last_nat == 20
     if dmg > 0.0 and not defending:
         dmg = _ward_soaks(ts, dmg)
     if dmg <= 0.0:
@@ -366,9 +411,12 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
     ts["hp"] = float(ts["hp"]) - dmg
     if tn is Monster:
         (tn as Monster).hp = float(ts["hp"])
-        (tn as Monster)._number(dmg, dmg > float(st["atk"]))
+        (tn as Monster)._number(dmg, crit)
         (tn as Monster)._flash()
     var killer := _name_of(me, st)
+    if crit and me is HeroBody and defending:
+        var tname := String(tg.get("name", "the raider"))
+        _big(killer, ("rolls a 20 - and %s falls." % tname) if float(ts["hp"]) <= 0.0 else ("rolls a 20 on %s!" % tname))
     if float(ts["hp"]) <= 0.0:
         if defending:
             _raider_falls(tg, killer)
@@ -417,7 +465,7 @@ func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> v
         if hurt != null:
             var mk := Spells.cast(String(MENDERS[cls]), me, hurt, in_scar)
             Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(mk, "Spellcasting"))
-            _bless(hurt, mk)
+            _bless(hurt, mk, st)
             return
     var book: Array = BOOKS[cls]
     var kind: String = book[int(st.get("spell_i", 0)) % book.size()]
@@ -446,42 +494,54 @@ func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> v
     if not Spells.HARM.has(actual):
         # a misfire into a mending spell mends the raider - wild magic
         if actual == "heal" or actual == "renew" or actual == "mend":
-            tg["hp"] = minf(float(tg["max"]), float(tg["hp"]) + float(st["atk"]) * 0.5)
+            tg["hp"] = minf(float(tg["max"]), float(tg["hp"]) + float(maxi(1, Dice.roll(1, 8) + int(st.get("dmod", 0)))))
         return
     var t := Spells.flight(actual, me, tn)
-    get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, hit, tn.global_position,
-        float(st["atk"]), int(st["to_hit"]), who))
+    get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, hit, tn.global_position, st, who))
 
-func _spell_lands(kind: String, hit: Array, at: Vector3, atk: float, to_hit: int, who: String) -> void:
+## D9: the spells' dice (+ the caster's ability mod and the sheet's flat bonus);
+## bolt, chain, frost and smite are spell attacks (d20 + to-hit vs AC), the fire
+## burst a DEX save for everyone in it vs the caster's spell DC (8 + to-hit)
+const SPELL_DICE := {"bolt": [1, 10], "chain": [1, 10], "fire": [2, 6], "frost": [1, 8], "smite": [2, 8]}
+const SMITE_DEAD_DICE := [3, 8]  # smite on the scar's dead
+var fire_saves := [0, 0]         # saved, failed (tests)
+
+func _spell_lands(kind: String, hit: Array, at: Vector3, st: Dictionary, who: String) -> void:
     var first: Dictionary = hit[0]
+    var dice: Array = SPELL_DICE.get(kind, [1, 8])
     if kind == "fire":
         var p := at
         if raiders.has(first) and is_instance_valid(first["node"]):
             p = (first["node"] as Node3D).global_position
+        var dc := 8 + int(st.get("to_hit", 0))
+        var full := Dice.damage(dice, float(st.get("dmod", 0)) + float(st.get("flat", 0.0)) * 0.8)
         for r in raiders.duplicate():
             if _flat((r["node"] as Node3D).global_position, p) <= FIRE_R:
-                _spell_hurt(r, _strike(atk * 0.8, to_hit, int(r["ac"])), atk, who)
+                var sv := Dice.check(int(r.get("dex", 0)), dc)
+                fire_saves[0 if sv["ok"] else 1] += 1
+                _spell_hurt(r, full * (0.5 if sv["ok"] else 1.0), false, who)
         return
     if kind == "chain":
         var k := 1.0
         for r in hit:
             if raiders.has(r):
-                _spell_hurt(r, _strike(atk * k, to_hit, int(r["ac"])), atk, who)
+                var cd := _strike(st, int(r["ac"]), dice) * k
+                _spell_hurt(r, cd, last_nat == 20, who)
             k *= 0.65
         return
     if not raiders.has(first):
         return
-    var mult := 1.0
+    if kind == "smite" and String(first.get("kind", "")) == "monster":
+        dice = SMITE_DEAD_DICE
+    var dmg := _strike(st, int(first["ac"]), dice)
+    var crit := last_nat == 20
     if kind == "frost":
-        mult = 0.7
-    elif kind == "smite" and String(first.get("kind", "")) == "monster":
-        mult = SMITE_DEAD
-    var dmg := _strike(atk * mult, to_hit, int(first["ac"]))
-    if kind == "frost" and dmg > 0.0:
-        first["slow_t"] = FROST_SLOW
-    _spell_hurt(first, dmg, atk, who)
+        dmg *= 0.7
+        if dmg > 0.0:
+            first["slow_t"] = FROST_SLOW
+    _spell_hurt(first, dmg, crit, who)
 
-func _spell_hurt(r: Dictionary, dmg: float, atk: float, who: String) -> void:
+func _spell_hurt(r: Dictionary, dmg: float, crit: bool, who: String) -> void:
     var n: Node3D = r["node"]
     if dmg <= 0.0 or not raiders.has(r) or not is_instance_valid(n):
         return
@@ -489,7 +549,7 @@ func _spell_hurt(r: Dictionary, dmg: float, atk: float, who: String) -> void:
     r["hp"] = float(r["hp"]) - dmg
     if n is Monster:
         (n as Monster).hp = float(r["hp"])
-        (n as Monster)._number(dmg, dmg > atk)
+        (n as Monster)._number(dmg, crit)
         (n as Monster)._flash()
     if float(r["hp"]) <= 0.0:
         _raider_falls(r, who)
@@ -512,20 +572,23 @@ func _most_hurt(me: Node3D, reach: float):
             best = d
     return best
 
-func _bless(d: Node3D, kind: String) -> void:
+## D9: mending is dice + the caster's mod - renew 4d8 over its time, a ward
+## soaks 3d10, a heal or mend 2d8 at once
+func _bless(d: Node3D, kind: String, by: Dictionary = {}) -> void:
     var s: Dictionary = _fighters.get(d, {})
     if s.is_empty():
         return
+    var md := int(by.get("dmod", 0))
     s["blessed_t"] = Spells.RENEW_T
     match kind:
         "renew":
             s["hot_t"] = Spells.RENEW_T
-            s["hot_rate"] = float(s["max"]) * RENEW_HEAL / Spells.RENEW_T
+            s["hot_rate"] = float(maxi(1, Dice.roll(4, 8) + md)) / Spells.RENEW_T
         "ward":
-            s["ward"] = float(s["max"]) * WARD_SOAK
+            s["ward"] = float(maxi(1, Dice.roll(3, 10) + md))
             s["ward_t"] = WARD_T
         "heal", "mend":
-            s["hp"] = minf(float(s["max"]), float(s["hp"]) + float(s["max"]) * 0.25)
+            s["hp"] = minf(float(s["max"]), float(s["hp"]) + float(maxi(1, Dice.roll(2, 8) + md)))
         _:
             pass         # a misfire into a harming spell fizzles on a friend
 
@@ -567,17 +630,27 @@ func _raider_falls(r: Dictionary, _killer: String) -> void:
                 n.queue_free())
 
 func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
-    # heroes get one CON save, DC 10 (old take_damage)
-    if n is HeroBody and not st.get("saved", false):
+    # D9: anyone who goes down makes one CON save, DC 10 (heroes: the old
+    # take_damage; now the watch, the riders and the chief too) - a 20 stands
+    # them up with a quarter of their life, a 1 always fails
+    if not st.get("saved", false):
         st["saved"] = true
-        var r: Roster = (n as HeroBody).roster
-        var h := r.get_hero((n as HeroBody).user_id)
-        var roll := randi() % 20 + 1 + r.save_bonus(h, "con")
-        if roll >= 10:
-            st["hp"] = 1.0
-            _say("%s goes down and claws back up. (CON save %d)" % [(n as Townsfolk).person_name, roll])
+        var bonus := int(st.get("con", 0))
+        if n is HeroBody:
+            var r: Roster = (n as HeroBody).roster
+            bonus = r.save_bonus(r.get_hero((n as HeroBody).user_id), "con")
+        var sv := Dice.check(bonus, 10)
+        var pn := (n as Townsfolk).person_name
+        if sv["ok"]:
+            if int(sv["d"]) == 20:
+                st["hp"] = float(st["max"]) * 0.25
+                _say("%s rolls a 20 on the save - and is up again, sword in hand." % pn)
+            else:
+                st["hp"] = 1.0
+                _say("%s goes down and claws back up. (CON save %d)" % [pn, int(sv["total"])])
             return
-        _say("%s fails the save. (CON %d)" % [(n as Townsfolk).person_name, roll])
+        if n is HeroBody:
+            _say("%s fails the save. (CON %d)" % [pn, int(sv["total"])])
     # the grace: a green hero's first fall is a knock-out, once ever
     if n is HeroBody:
         var rg: Roster = (n as HeroBody).roster
@@ -665,7 +738,18 @@ func _inside_walls(p: Vector3) -> bool:
 ## ------------------------------------------------------- ruin and rebuild
 const RUBBLE := "res://addons/kaykit_dungeon_remastered/Assets/gltf/"
 
-func _wreck_a_building() -> void:
+## D9: a torch is a roll - d20 + 2 vs DC 12 to set the thatch alight (a 1:
+## the torch is dropped). sure skips it (tools).
+const TORCH_DC := 12
+var torches := [0, 0]            # caught, failed (tests)
+func _wreck_a_building(sure := false) -> void:
+    if not sure:
+        var tc := Dice.check(2, TORCH_DC)
+        torches[0 if tc["ok"] else 1] += 1
+        if not tc["ok"]:
+            if int(tc["d"]) == 1:
+                _say("A raider fumbles the torch - it hisses out in the mud.")
+            return
     var pool: Array = []
     for plot in town.get("plots"):
         if plot.get("ruined", false) or not plot.has("node") or plot.has("landmark") \
@@ -815,7 +899,11 @@ func _tick_ruin_fires(delta: float) -> void:
             if f:
                 f.queue_free()
 
-func _rebuild_pass() -> void:
+## D9: raising a ruin is the townsfolk's work - d20 + 2 (carpenter's tools) vs
+## DC 12; a miss and they try again next time, a 20 and it goes up on half the
+## timber and stone. sure skips the roll (tools).
+const REBUILD_DC := 12
+func _rebuild_pass(sure := false) -> void:
     if ruins.is_empty():
         return
     var plot: Dictionary = ruins[0]
@@ -823,8 +911,13 @@ func _rebuild_pass() -> void:
         economy.want("wood", 12.0)
         economy.want("stone", 8.0)
         return
-    economy.take("wood", 12.0)
-    economy.take("stone", 8.0)
+    var w := Dice.check(2, REBUILD_DC)
+    if not sure and not w["ok"]:
+        _say("The new frame slips. The townsfolk will try again. (%d vs DC %d)" % [int(w["total"]), REBUILD_DC])
+        return
+    var thrift := 0.5 if int(w["d"]) == 20 else 1.0
+    economy.take("wood", 12.0 * thrift)
+    economy.take("stone", 8.0 * thrift)
     ruins.remove_at(0)
     plot["ruined"] = false
     if is_instance_valid(plot["node"]):
@@ -849,6 +942,7 @@ const BOW_REACH := 42.0
 const BOW_SWING := 2.4
 const BOW_ATK := 9.0
 const BOW_TO_HIT := 3
+const BOW := {"to_hit": BOW_TO_HIT, "dice": [1, 10], "dmod": 3}      # D9: a heavy crossbow, 1d10 + 3
 const ARROW_V := 40.0
 var _bows := {}
 var arrows_loosed := 0
@@ -923,7 +1017,8 @@ func _bolt_lands(r: Dictionary, who: String) -> void:
     if not raiders.has(r):
         return
     var tn: Node3D = r["node"]
-    var dmg := _strike(BOW_ATK, BOW_TO_HIT, int(r["ac"]))
+    var dmg := _strike(BOW, int(r["ac"]))
+    var crit := last_nat == 20
     if dmg <= 0.0:
         return
     arrows_hit += 1
@@ -931,7 +1026,7 @@ func _bolt_lands(r: Dictionary, who: String) -> void:
     r["hp"] = float(r["hp"]) - dmg
     if tn is Monster:
         (tn as Monster).hp = float(r["hp"])
-        (tn as Monster)._number(dmg, dmg > BOW_ATK)
+        (tn as Monster)._number(dmg, crit)
         (tn as Monster)._flash()
     if float(r["hp"]) <= 0.0:
         _raider_falls(r, who)

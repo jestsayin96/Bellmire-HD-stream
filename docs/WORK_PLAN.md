@@ -80,16 +80,27 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       the region + a vertex probe, _snap falls back to keep_walkable. Also: traders' market spot kept the old plot's
       inside point (a 30-47 m "door leg" through houses) and a door leg left after stuck waypoints now re-routes.
       D6B_TEST OK (0 of 600 snaps at the origin, 90 beats clean); _townwalk in_solid 0/7923 and 0/8317; renders/cycles/20261112_d6b.
-- [ ] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
-- [ ] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
+- [x] D7. (ALSO: a 1.5-1.9 s hitch about once a minute, present since before L1 - find it with a frame-time log; suspect building a dungeon floor in one frame -> build it over several frames or ahead of time) Population cap + far-away LOD so long streams keep 100+ FPS (soak FPS fell 150 -> 82 at 211 people).
+      DONE cycle 76: LOD - walkers past 60 m from the camera step + animate every 2nd physics tick, past 120 m every
+      4th (summed time, same pace: 2.52 vs 2.52 m/s); heroes, riders and raid fights always full. Street cap 200:
+      settlers past it still settle (souls, level, tax) but keep indoors; a burial brings one out. Windowed, 217
+      people: 98.8 -> 126.0 FPS (+28%); 43% fewer walker steps. D7_TEST OK; renders/cycles/20261112_d7.
+      THE HITCH, found (tools/_d7_hitch.gd): every new dungeon floor is built in ONE frame - DungeonHD.build takes
+      580-820 ms, of it FloorGen.build 450-770 ms (964-1684 nodes); 41 hitches of 350-810 ms in 6 min at 4x, each on
+      a floor change of the viewers' or the band's delve. FOR THE LAPTOP (delve.gd / dungeon_hd.gd / floorgen.gd are
+      yours): build the next floor ahead while the party fights (FloorGen.build on a DungeonHD that is not yet in the
+      tree, on WorkerThreadPool - load() is thread-safe - then add_child on descend), or slice it over frames.
+      Also fixed: a freed guard / notable stopped _show_garrison and the whole Notables pass every tick (2583 errors).
+- [x] D9. Roll audit (town side): townsfolk.gd, raids.gd, spells.gd, town.gd - every outcome that is a flat chance or fixed number becomes a d20 check / attack / save with real stats (raids, guards, cavalry, NPC work, fishing on the docks). List what changed.
+      DONE cycle 78: scripts/dice.gd (Dice); raids: initiative, blows = weapon dice + mod (heroes' own dice), spell attacks +
+      fire burst DEX save vs 8+to-hit, mending dice, CON save for every defender, torch + rebuild checks; crossbows 1d10+3;
+      work beats d20+2 vs DC 10 (mean kept 1.0); fishing hook = DEX check (dock +5, heroes DEX + prof for ranger/druid).
+      Kept: raid timing/size/source (world events), townsfolk idle gestures (cosmetic), spells.gd (no rolls; the surface
+      scar rule is canon). D9_TEST OK; renders/cycles/20261112_d9. Full list in PROGRESS cycle 78.
 - [ ] D12. Expand the map: the valley beyond the walls - outlying hamlets/farmsteads, a forest with a woodcutters'
       camp, a river ford and mill, old ruins (lore), roads linking them, the scar road; travellers and carts on
       the roads; the director's tour includes them. Navmesh + LOD keep FPS.
-- [ ] D13. Director camera clips into buildings (supervisor, Nov 11): in renders/cycles/20261112_d6b/
-      square_f460_east.png a house roof fills the bottom-left third of the frame - the auto-director
-      camera sits behind/inside geometry. Keep a minimum clearance from buildings, or fade/cull geometry
-      between the camera and its subject, so the stream view is never blocked. Check every director shot
-      type (town wide, hero follow, fight, raid) and render proof of each.
+- [ ] D13. MOVED to L20 (laptop owns scripts/rts_camera.gd - every recent commit to it is the laptop's).
 - [ ] D14. Stuck walkers against props (supervisor, Nov 11): _townwalk reports stuck_on_route=4 steady
       (traders Petra Bramble, Maela of the Ford, farmer Maela Coalfoot) - pinned on a prop a few cm off
       their route, navoff 0.17-0.66, push (0,0,0). Nobody is inside a building (in_solid 0 of 8394), so
@@ -185,6 +196,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (Cycle 76): lanes + queues, !look / !testbits / !testsub / !testpoints (local only), pair + 2x2, F10 with the UI, FPS 44 -> 40 with all three lanes; L17_TEST OK. For the desktop: add `func spotlight(uid, lane, secs, why): return Spotlight.spotlight(self, uid, lane, secs, why)` to town.gd.
 - [x] L18. (moved from D11) Free chat in the main view (Mr. E, Nov 11): the director's hero shots favour the most recent chatters; a small "Now watching: <name> the <species> <class>" tag; a chatter's name glows ~5 s after a command; free !look uses the channel-points pane only when it is empty. No pane for free chat.
       DONE (Cycle 77): the freshest chatter (2 min) is the director's hero pick (36-50), "Now watching" chip, 5 s teal name glow, !look via the points lane; Chronicle entries capped at 2 lines; L18_TEST OK.
+- [ ] L20. Director camera clearance (supervisor, Nov 11; was D13). CORRECTION to the original note: the
+      roof in renders/cycles/20261112_d6b/square_f460_east.png was NOT an auto-director shot - _d6b_shot.gd
+      placed its own fixed camera 14 m up beside the square, so that framing is the test tool's, not the
+      director's. The real gap (found by the laptop, Nov 11): the camera's edge-protection check only covers
+      hero-follow shots and tests a single line, so tour and wide shots have no clearance check at all and
+      roofs beside that line go unprotected. Fix it in the eye camera for every shot type, and prove it with
+      real director shots - town wide, tour, hero follow, fight, raid - rendered and looked at, not with a
+      fixed test camera. The L17 spotlight panes each get their own camera, so they must share this rule.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [ ] T1. Device-code OAuth (public client, no secret) -> token saved in user:// only. EventSub WebSocket:

@@ -214,7 +214,8 @@ func _kit(c: Dictionary) -> void:
 func _unique_names() -> void:
     var names := {}
     for c in cast:
-        names[(c["who"] as Townsfolk).person_name] = true
+        if is_instance_valid(c["who"]):
+            names[(c["who"] as Townsfolk).person_name] = true
     for p in town.get("people"):
         if not (p is Townsfolk) or p is HeroBody or (p as Townsfolk).notable_title != "":
             continue
@@ -418,9 +419,11 @@ func _process(delta: float) -> void:
     var raid_on: bool = raids != null and bool(raids.get("_live"))
     var h: float = eco.hour()
     for c in cast:
-        var who: Townsfolk = c["who"]
-        if not is_instance_valid(who):
+        # D7: a notable killed in a raid is freed - test before typing it (a
+        # typed assign of a freed body stopped this whole pass every tick)
+        if not is_instance_valid(c["who"]):
             continue
+        var who: Townsfolk = c["who"]
         if c.has("kit_due"):
             _kit(c)
         var i := slot_at((c["def"] as Dictionary)["day"], h)
@@ -436,7 +439,7 @@ func _process(delta: float) -> void:
                         c["hit"] = true
                         break
         _gesture(c, 0.25)
-    if _crier and is_instance_valid(_crier) and not _crier.shout_lines.is_empty():
+    if is_instance_valid(_crier) and not _crier.shout_lines.is_empty():
         _crier.shout_lines = _news()
     _names_t -= 0.25
     if _names_t <= 0.0:
@@ -510,5 +513,5 @@ func _news() -> Array:
 func by_key(k: String) -> Townsfolk:
     for c in cast:
         if String((c["def"] as Dictionary)["key"]) == k:
-            return c["who"]
+            return c["who"] if is_instance_valid(c["who"]) else null
     return null

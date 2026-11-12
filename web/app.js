@@ -1007,7 +1007,7 @@ function loadTwitchChat() {
 // GATED on Mr. E: TWITCH_CLIENT_ID is a placeholder. With no registered public client id
 // the button only explains what is missing and makes NO network call. When Mr. E registers
 // the app and fills the id in, the flow below runs (device grant per the Twitch docs).
-let TWITCH_CLIENT_ID = "";                       // NEEDS MR. E: a registered public client id
+const TWITCH_CLIENT_ID = "mpblygfdxvdpnr0dvi3andjlvb4y0r";  // Bellmire Hub Login: PUBLIC client, device-code grant, no scopes. Not overridable at runtime.
 const TW_DEVICE = "https://id.twitch.tv/oauth2/device";
 const TW_TOKEN = "https://id.twitch.tv/oauth2/token";
 const TW_USERS = "https://api.twitch.tv/helix/users";
@@ -1107,10 +1107,6 @@ function highlightMyHero(login) {
 }
 
 (function () {
-  // a local test hook (same spirit as ?mock): ?twitch_client=... lets the flow be exercised
-  // end-to-end against a registered id, without baking one into the repo. Harmless if unset.
-  const c = params.get("twitch_client");
-  if (c) TWITCH_CLIENT_ID = c;
   const btn = $("signinBtn");
   if (btn) btn.addEventListener("click", twitchSignIn);
 })();

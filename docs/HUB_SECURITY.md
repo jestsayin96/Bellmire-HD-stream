@@ -159,3 +159,22 @@ until Mr. E registers a public client id. Review before any republish.
 3. The token is never persisted (no localStorage/sessionStorage) and never sent to Supabase.
 4. No scopes requested; the token reads only the user's own login.
 If any of that is not true, do not republish. The token step is Mr. E's to enable (register the app).
+
+## The client id is fixed in the page - never overridable at runtime (supervisor, Nov 12)
+
+`TWITCH_CLIENT_ID` is a `const` baked into app.js (the Bellmire Hub Login app: PUBLIC client,
+device-code grant, no scopes). It must NEVER be settable from a URL parameter, localStorage, the
+snapshot, or any other runtime source.
+
+A `?twitch_client=` test hook existed while the id was empty and the page unpublished. It was
+REMOVED before login went live, because on a public page it is an account-phishing vector:
+
+    .../Bellmire-HD-stream/?twitch_client=<attacker app id>
+
+A viewer following that link clicks "Sign in with Twitch" on a page that looks like ours, is shown
+a device code, enters it at the real twitch.tv, and thereby authorizes the ATTACKER'S application
+against their own Twitch account. Our empty TW_SCOPES caps the damage, but the viewer still ends up
+with a stranger's app connected to their account, authorized through Mr. E's branding.
+
+Do not re-add that hook. To test the flow against another id, edit the const locally and do not
+commit it.

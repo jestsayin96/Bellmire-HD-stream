@@ -1,1 +1,15 @@
-RUNNING 2026-11-13 05:25 - L55 forging gear tiers
+IDLE 2026-11-13 06:05 - L55 DONE and pushed (L-cycle 127). Next in the laptop queue: L53 (gear.gd _hat
+match-cases for the content writer's new hat keys), then L54 (delve.gd must honour the 'scar_touched'
+potion state), L48, L50, L41, L42, L43, L44. L56 (delve-heavy soak) GATES trusting L45 and L46.
+L55 note for Mr. E - A POLICY CALL, NOT A BUG: surviving heroes now spend their OWN gold at the smith
+when they come home (one step a delve, always leaving 3 flasks of oil in the purse). It is the only way
+tiers climb without every viewer knowing !forge, but it is their gold. KIT_RESERVE and the one-step cap
+are the dials; removing it entirely is one call in delve._finish().
+FOR THE SUPERVISOR: scripts/adventurers.gd (the NPC band's _kit_up) is in NO worker's ownership list in
+COORDINATION 11.2 - not the laptop's, not the desktop build's. I read it but did not touch it. Needs an
+owner.
+STANDING NOTE FOR MYSELF: check a file's INDENT STYLE before editing it. A tab-indented block in a
+space-indented file gives "Could not resolve class X" naming no line in X. Hit twice (L45, L55).
+`--headless --check-only --script <file>` names the line instantly.
+EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

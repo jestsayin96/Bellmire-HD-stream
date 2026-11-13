@@ -49,7 +49,16 @@
     {"name": "Nightwing, the Famished", "shape": "faster and frailer - it swoops twice before you hear the first", "hp": 90, "speed": 7.4},
     {"name": "Nightwing, Roosted", "shape": "slower, heavier, and it never comes alone - the dark around it is all wings", "hp": 150, "speed": 5.2},
     {"name": "The Rattling Host, Marshalled", "shape": "it keeps its dead close - fewer drop, but those that stand hold a line", "hp": 180, "speed": 3.6},
-    {"name": "The Hollow King, Ashbound", "shape": "no clinging fire, just a cold that never lifts - slower and relentless", "hp": 160, "speed": 3.0}
+    {"name": "The Hollow King, Ashbound", "shape": "no clinging fire, just a cold that never lifts - slower and relentless", "hp": 160, "speed": 3.0},
+    {"name": "The Grubmother, Hollowed", "shape": "her brood gone and nothing left to spill - a wall that only holds, and holds", "hp": 270, "speed": 1.5},
+    {"name": "The Grubmother, Starved", "shape": "thin for a wall and far too quick - what little brood she has comes hungry", "hp": 150, "speed": 3.0},
+    {"name": "The Rattling Host, Silent", "shape": "no rattle at all - the crowd is on you before the floor says so", "hp": 165, "speed": 4.2},
+    {"name": "Nightwing, Broken-Winged", "shape": "grounded and furious - it cannot swoop, so it will not let go", "hp": 175, "speed": 3.2},
+    {"name": "The Hollow King, Unmade", "shape": "it comes apart as it fights, and every piece of it is still burning", "hp": 140, "speed": 3.8},
+    {"name": "Nightwing, Lamp-Drawn", "shape": "it will not leave the light - it circles the lamps and strikes whoever carries one", "hp": 120, "speed": 6.0},
+    {"name": "The Rattling Host, Bellbound", "shape": "it keeps time with a bell nobody can find - the crowd moves all at once or not at all", "hp": 175, "speed": 3.8},
+    {"name": "The Hollow King, Crowned Twice", "shape": "two cold crowns and no head worth the name - it fights as though a second king stood beside it", "hp": 190, "speed": 3.2},
+    {"name": "The Grubmother, Walled In", "shape": "she has sealed the room with her own brood - the wall is behind you as well now", "hp": 250, "speed": 1.6}
   ],
   "greater_uniques": [
     {"name": "The Gravewyrm, Half-Woken", "shape": "only half risen - slower and softer in the body, but its breath comes deep and ill-tempered", "hp": 230, "attack": 26},
@@ -59,6 +68,14 @@
     {"name": "Mourncoil, the Deep Freeze", "shape": "frost in sheets and the whole floor going to ice - everything slows but it", "hp": 320},
     {"name": "The Gravewyrm, Wakeful", "shape": "fully roused - no slower, but the breath comes with no warning at all", "hp": 260, "speed": 3.6, "attack": 24},
     {"name": "The Pale Duchess, Gracious", "shape": "all courtesy - she lets you come to her, slower, then opens the throat", "hp": 220, "speed": 4.4, "attack": 29},
-    {"name": "Mourncoil, Thawing", "shape": "its frost failing - softer and faster, lashing out as the ice cracks", "hp": 260, "speed": 3.2, "attack": 26}
+    {"name": "Mourncoil, Thawing", "shape": "its frost failing - softer and faster, lashing out as the ice cracks", "hp": 260, "speed": 3.2, "attack": 26},
+    {"name": "The Gravewyrm, Coiled", "shape": "it never leaves its ring - everything must come to the breath instead", "hp": 340, "speed": 2.2},
+    {"name": "The Ossuary Lord, Kneeling", "shape": "it spends its own ward to raise two at a time - unguarded, and never alone", "hp": 280, "attack": 28},
+    {"name": "The Pale Duchess, in Mourning", "shape": "veiled and slow, and every blow she lands grieves whoever stands nearest", "hp": 240, "speed": 3.8, "attack": 30},
+    {"name": "Mourncoil, Unspooled", "shape": "its coils apart and striking from three sides of the room, each one thinner", "hp": 240, "speed": 3.8, "attack": 25},
+    {"name": "The Ossuary Lord, Counting", "shape": "it raises the party's own dead first, and takes its time over each one", "hp": 300, "attack": 26},
+    {"name": "Mourncoil, Still", "shape": "it does not move at all - the cold does the moving, and the room keeps shrinking", "hp": 340, "speed": 1.8},
+    {"name": "The Gravewyrm, Scar-Fed", "shape": "the ground feeds it - every spell cast on this floor comes back out of its mouth", "hp": 300, "attack": 28},
+    {"name": "The Pale Duchess, Attended", "shape": "she never fights first and never alone - the room is full of borrowed hands", "hp": 200, "speed": 4.2, "attack": 27}
   ]
 }

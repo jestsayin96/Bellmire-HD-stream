@@ -2394,3 +2394,252 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
 - FOR THE SUPERVISOR: the census tool tools/_d28_census.gd is DESKTOP-owned, so the laptop has not touched
   it. Delve.chests_found and Delve.chests_empty are there for it to read whenever the desktop next edits
   it - that is what "census shows chests spawned/opened" needs on their side.
+
+## C-cycle 5 - E3PO deepened, disaster variants, two new disasters, repeat-line stock, cosmetics (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- No WORK_PLAN CONTENT item was unchecked and unwritten (C1-C3 are writing-complete per Phase O), so this cycle
+  worked the standing backlog in order: E3PO (3), disaster/event variants (4), the lines that repeat most on
+  stream (5), and cosmetics/accessories/dyes (1). Only the four owned files touched: items.json, lore_lines.json.
+  bosses.json and potions.json unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- lore_lines.json "e3po" DEEPENED (Mr. E's favourite; the C-side of D37 - the desktop still owns his behaviour):
+  - NEW keys: "raid" (8), "disaster" (8), "festival" (7), and "viewer_roll" keyed by outcome -
+    crit / high / low / fumble, 3 lines each (12), so the Commander can react to a viewer's d20.
+  - EXTENDED: intro 2->5, withdraw 4->7, return 3->6, says 8->12, town_talk 5->10.
+  - A "_note_extras" string documents the added keys (the original "_note" is untouched and byte-identical).
+- lore_lines.json "disasters": every one of the 11 existing disasters gained 2 more "during" lines (2->4 each,
+  +22) so a repeat viewing does not read identically. TWO NEW disasters in the identical schema, which also
+  settles the "+ one more" the plan asked for and takes the set to 13:
+  - "blight" - cost: most of the standing harvest lost; food prices climb and the stores do not refill this season.
+  - "coldsnap" - cost: livestock lost and work stopped; building, trade and the fields all halt until the thaw.
+  Both carry begin / during[2] / pass / cost in exactly the shape the other 11 use.
+- lore_lines.json repeat-heavy lines (these show the most on a long stream): epitaphs 21->33, descend 12->18
+  (format strings kept exactly two %s), cleared 12->18 (exactly one %d), and all six bark lanes +4 each -
+  enter/lord 12->16, trap/hurt/drink/misfire 11->15. Checked for duplicates against the existing lines: none.
+- items.json cosmetics/accessories/dyes, priced against the existing curve and named from this cycle's lore:
+  - accessories 51->57: thaw_ring, blight_charm, bucketline_gloves, barracks_cloak, crater_ring, drover_spurs.
+    Each carries name/slot/cost/flavour plus exactly ONE stat, like every existing entry; slots are only the
+    five that already exist (ring/amulet/cloak/gloves/boots).
+  - cosmetics 96->111: 3 hats (thaw_hood, rot_mask, crater_coronet), 4 banners (barracks, bucketline, thaw,
+    harvest), 8 titles (Thawkept, Rotwarden, of the Bucket Line, the Commander's Own, Crater-walker,
+    Lampwright, Doorkept, Cold-counted). Hats and banners carry a 6-hex "colour"; titles carry no colour,
+    as the existing titles do. No new pets - a pet needs a real asset path and the content worker does not
+    invent one.
+  - dyes 58->64: thaw, rot, hoarfrost, cinderfall, meltwater, lampblack. dye_cost
+    left at 25, unchanged.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  before/after comparison confirmed every pre-existing key and value present and unchanged and no list
+  shortened; new entries asserted against the existing field sets (slot in the existing five, kind in the
+  existing four, 6-hex colours, one stat per accessory, descend/cleared format specifiers). VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. gear.gd _hat cases for thaw_hood, rot_mask, crater_coronet (same L53 pattern as the earlier hats) - LAPTOP CODE.
+  2. raids.gd/town.gd: e3po.raid, e3po.disaster, e3po.festival lines, and e3po.viewer_roll[crit|high|low|fumble]
+     on a viewer's d20 - DESKTOP BUILD (D37), with the roll hook possibly DESKTOP HUD's dice.gd.
+  3. The two new disasters need their costs implemented like the other 11 (D34) - DESKTOP BUILD.
+  4. Nothing else changes shape: every extension is a longer list or a new sibling key, so existing loaders
+     keep working untouched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 6 - shop stock & trader cargo per growth tier, rare uniques, brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- No WORK_PLAN CONTENT item was unchecked and unwritten (C1-C3 writing-complete per Phase O), so this cycle
+  worked the two stalest standing-backlog entries: (2) shop stock and trader cargo per growth tier, and
+  (6) bosses and potions. Touched three of the four owned files: items.json, bosses.json, potions.json.
+  lore_lines.json unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- items.json shop_stock 32 -> 57 and trader_cargo 18 -> 30, then EVERY new key gated into stock_by_tier so a
+  crossing and a city no longer sell the same goods. All 57 shop goods and all 30 cargoes are now placed on a
+  tier; cumulative shop_adds per tier 1..12 is 6/5/6/6/6/4/5/4/4/3/4/4 and cargo_adds 0/1/3/2/3/3/3/3/4/2/3/3.
+  Nothing was removed or reordered - every tier list keeps its original keys first, in their original order.
+  - Tier 1-2 (Crossing, Hamlet): eggs, waterskin, butter, net. No caravan cargo at a crossing at all.
+  - Tier 3-5 (Guild Post, Village, Market Day): tallow, sealing_wax, preserves, besom, ribbon, handscales;
+    cargo charcoal, rawhides, oiljars.
+  - Tier 6-8 (Chapel, Craft Row, Garrison): mourning_cloth, psalter, bellows, hide_glue, smith_file, helm,
+    bowstrings; cargo chapel_plate, candlewax, millstones, mail_shirts.
+  - Tier 9-12 (Market Town, First Wall, Walled Town, City): soap, figs, lock, mortar, brass_lamp, spectacles,
+    pepper, carpet; cargo sugarloaf, parchment_bales, cut_stone, mirrorglass, goldwork.
+  - Prices sit on the existing curve: 2-15 at a crossing, 26-65 through the craft and wall tiers, 85-140 in the
+    city; cargo 85-400, so a late caravan is worth raiding and an early one is barely worth the road.
+- bosses.json rare uniques, shape-first and still only the EIGHT lords - no new lords:
+  - lesser_uniques 9 -> 14: The Grubmother, Hollowed (a wall that only holds, hp 270 / speed 1.5); The
+    Grubmother, Starved (quick for a wall, hp 150 / speed 3.0); The Rattling Host, Silent (no rattle at all,
+    hp 165 / speed 4.2); Nightwing, Broken-Winged (grounded, will not let go, hp 175 / speed 3.2); The Hollow
+    King, Unmade (comes apart still burning, hp 140 / speed 3.8).
+  - greater_uniques 8 -> 12: The Gravewyrm, Coiled (never leaves its ring, hp 340 / speed 2.2); The Ossuary
+    Lord, Kneeling (spends its ward to raise two, hp 280 / attack 28); The Pale Duchess, in Mourning (veiled
+    and slow, the grief spreads, hp 240 / speed 3.8 / attack 30); Mourncoil, Unspooled (striking from three
+    sides, each coil thinner, hp 240 / speed 3.8 / attack 25).
+  - Every stat is skewed TO the modifier per the file's own rule: slower buys hp, faster pays it back.
+- potions.json brews 25 -> 35, all using states that ALREADY exist, so no new state and no new engine effect:
+  pennymend (12/t1, 1d4), ratnip (45/t1, cures poisoned), thawbottle (75/t2, resist_frost 150s), longwatch
+  (65/t2, darkvision 1200s), commanders_flask (110/t2, heroism 120s - E3PO's, never opened), mirestep
+  (160/t3, haste 25s), quarryblood (190/t3, giant 45s), gravewater (240/t3, warded 60s), deepstill
+  (280/t4, 8d6+10), bellwater (350/t4, warded 90s). states unchanged at 15.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  before/after comparison against HEAD confirmed every pre-existing key and value present and unchanged and
+  no list shortened; new entries asserted against the existing field sets (shop/cargo exactly name+cost+
+  flavour with an int cost; every stock_by_tier key resolves in shop_stock/trader_cargo with no key gated
+  twice; tier names and numbering still match lore_lines.growth_tiers 1-12; every unique names one of the
+  eight lords, carries a shape, and no duplicate names; every potion's gives/cures resolves to an existing
+  state, cures only bad states, heal is exactly 3 ints, and all 58 potion aliases are collision-free).
+  0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. Nothing new in shape - shop_stock/trader_cargo/stock_by_tier are still dead until D35/D39 wires them;
+     this cycle only makes that wiring worth doing, since the tier gate now has something to gate.
+  2. bosses.json uniques: the draw already reads lesser_uniques/greater_uniques (D/L-side), so the 9 new
+     variants need no new code - but Broken-Winged (a grounded Nightwing) and Coiled (a Gravewyrm that holds
+     position) lean on behaviour the bestiary may not express yet - LAPTOP CODE to confirm.
+  3. potions.json: !brew reads the keys, so the 10 new brews need no new code. Two carry tier-4 prices, so
+     the apothecary's tier-4 stock list (if it is hardcoded anywhere) wants a look - LAPTOP CODE.
+  4. No key renamed, no list shortened, no new sibling key anywhere: existing loaders keep working untouched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 7 - the tier a good belongs to is now EXPLICIT on the good (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Merge: `git merge origin/main` in W3 reported "Already up to date" - `content` is a strict superset of
+  origin/main (750682b), and L45/L46/L47/L49 and the D28/D42 census commits are already ancestors of this
+  branch. NO PROGRESS.md conflict arose, so nothing had to be kept from either side.
+- FLAG for the supervisor: COORDINATION section 12 (documenting W3 as part of the contract) is NOT in the repo
+  - `git grep "## 12" docs/COORDINATION.md` finds nothing on HEAD or on origin/main. Section 11 is the last
+  one present. If it was written, it is unpushed. The content worker is still operating off sections 10+11.
+- This cycle took the backlog's shop/trader item, which the desktop needs soonest (D31/D32, D35/D39), and
+  closed the one thing a filter still had to guess at. Only items.json touched; bosses.json, potions.json and
+  lore_lines.json are unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- EVERY good now names its own tier. shop_stock and trader_cargo entries each carry a new "tier" key (1-12,
+  the same scale as lore_lines.growth_tiers), so D35/D39 can filter with `good.tier <= town_tier` instead of
+  building a reverse map out of stock_by_tier. The shape is the one the project already uses - potions.json
+  has keyed brews by "tier" since L12.
+  - The values are DERIVED from stock_by_tier, not hand-typed, so the two gates cannot drift apart. The
+    validator asserts they agree key-for-key in both directions and that no good is gated twice or left
+    ungated; stock_by_tier stays as it was and remains the readable per-tier view.
+  - A "_note_tier" sibling in each block documents the key, the cumulative rule, and that the two gates are
+    generated together. The original "_note" in both blocks is untouched and byte-identical.
+- Catalogue filled out at the thin tiers: shop_stock 57 -> 63 (altar_oil t6, oilcloth t8, comb t9,
+  iron_hinges t10, pewter_set t11, glass_goblets t12), trader_cargo 30 -> 33 (salt_fish t4, lime t10,
+  spiced_wine t12). Per-tier shop adds are now 6/5/6/6/6/5/5/5/5/4/5/5 and cargo adds 0/1/3/3/3/3/3/3/4/3/3/4.
+- A crossing and a city are now unmistakably different shops: tier 1 sells six things - ale, bread, eggs,
+  firewood, turnips, a waterskin - and no caravan calls at all. A tier-12 city shelf carries all 63, up to
+  glass goblets at 130 and a carpet at 140, with caravans hauling goldwork at 400. Price span 2-140 in the
+  shop, 85-400 in the cargo, so an early caravan is barely worth the road and a late one is worth a raid.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  comparison against HEAD confirmed every pre-existing key and value present and unchanged with no list
+  shortened; a line-level diff of items.json confirmed that every one of the 96 changed lines is a
+  pre-existing line that only gained a trailing comma - no pre-existing line was reworded or dropped; new
+  entries assert to exactly name+cost+flavour+tier with an int cost and a tier in 1-12; both gates agree in
+  both directions; no good gated twice or ungated; tier names and numbering still match growth_tiers 1-12;
+  tier 1 still has no cargo. 0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. D35 (visible shop stock): read data/items.json shop_stock, skip keys beginning "_note", and show every
+     entry with entry.tier <= Roster.town_tier. That is the whole filter now - no reverse map, no lookup
+     against stock_by_tier. DESKTOP BUILD.
+  2. D39 (trader cargo worth intercepting): same filter over trader_cargo; a caravan rolls with cargo of
+     tier <= town_tier and its "cost" is what a bandit gains and the town loses. Tier 1 must load nothing,
+     because a crossing has no caravans. DESKTOP BUILD.
+  3. D31/D32 (one map, a town that grows): the 12 stock tiers are keyed to growth_tiers by name AND number,
+     both validated this cycle, so whichever the town code already tracks will line up. DESKTOP BUILD.
+  4. If anything already reads stock_by_tier, it keeps working untouched - that block is unchanged except for
+     the new keys appended to its lists. The "tier" key is additive and ignorable by any existing loader.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 8 - the repeat-heavy stream lines, widened (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) was on `laptop` with unpushed work of its own and was NEVER checked out,
+  only `git fetch`ed - read-only, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date"; `content` is still a strict superset of
+  origin/main. No PROGRESS.md conflict arose, so nothing had to be kept from either side.
+- BACKLOG ITEM 5 (epitaphs, barks, descend and cleared - the lines that repeat the most on stream), plus a
+  C3 top-up. data/items.json untouched this cycle.
+- data/lore_lines.json, all additive into the EXISTING lists (no key renamed, no list shortened):
+  - tells: 6 -> 12 per theme, all eight themes (tomb, mine, fortress, temple, lair, prison, works, warren),
+    so a delve's one tell has twice the pool. +48 lines.
+  - descend 18 -> 36, cleared 18 -> 36. A long stream can now run a lot of delves before a descent line or a
+    floor-cleared line comes round again.
+  - barks: enter 16 -> 28, lord 16 -> 28, trap/hurt/drink/misfire 15 -> 27 each. +72 lines, and these are the
+    ones a viewer hears most.
+  - epitaphs 33 -> 58 (+25). The memorial and the Guild Roll stop echoing.
+  - misfire (the Chronicle's %s/%s/%d/%d format lines) 7 -> 14.
+- data/lore_lines.json, TWO NEW SIBLING KEYS (the only non-list-append in this cycle):
+  - "lord_intros_alt": 3 extra intro lines for each of the SAME eight canon lords - no new lords.
+  - "unique_intros_alt": 3 extra intro lines for each of the SAME five rare uniques.
+    lord_intros / unique_intros are one string per key, so variety could not be added inside them without
+    changing their shape and breaking the loaders. Both new keys carry a "_note" naming the pick rule.
+- data/bosses.json: lesser_uniques 14 -> 18, greater_uniques 12 -> 16. Eight more rare uniques, all modified
+  versions of the eight canon lords, never new lords, each a SHAPE with stats skewed to match: Nightwing
+  Lamp-Drawn (hunts the lamp-bearer), the Rattling Host Bellbound (moves all at once or not at all), the
+  Hollow King Crowned Twice, the Grubmother Walled In (seals the room behind the party), the Ossuary Lord
+  Counting (raises the party's own dead first), Mourncoil Still (never moves; the cold closes in),
+  the Gravewyrm Scar-Fed (returns the floor's spells), the Pale Duchess Attended (never fights first).
+- data/potions.json: 35 -> 42 brews. Sweetwater (28), Cloisterbrew (110), Foxfire Drops (70), Fellstill (85,
+  cures poisoned AND blinded), Doorkeeper's Draught (150, warded), Hushwine (155, invisible),
+  The Grain Measure (340, tier 4, regenerating). Every "gives"/"cures" value is one of the 15 states already
+  in the file - no new state was invented, so !brew and the status code need no new cases.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  comparison of each file against its HEAD blob confirmed every pre-existing key and value present and
+  unchanged with no list shortened (0 differences across all four); every new lore entry is a plain string in
+  a list of strings; every new boss entry's keys are a subset of name/shape/hp/speed/attack with the same
+  types as the entries beside it; every new brew's keys are a subset of name/cost/tier/heal/gives/secs/cures/
+  aliases/flavour, no key or alias collides with an existing one, and every state named already exists; a
+  line-level diff showed 21 changed lines and 0 unaccounted for - each is a pre-existing line that only had
+  entries appended inside its array, none reworded or dropped. 0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. lord_intros_alt / unique_intros_alt (NEW keys, the only wiring this cycle): wherever a lord or unique
+     rises and prints lore_lines.lord_intros[key] / unique_intros[key], pick at random from
+     [that string] + lore_lines.lord_intros_alt.get(key, []) (skip the "_note" key). Four lines per lord
+     instead of one. Until that is wired the new keys are simply unread and nothing regresses. OWNER:
+     whoever owns the boss-rise print - LAPTOP CODE (bestiary.gd / delve.gd).
+  2. Everything else needs NO code: tells, descend, cleared, barks, epitaphs and misfire are all existing
+     lists that are already picked from at random, and the new brews are read by !brew from their keys.
+  3. The tier-4 brew (The Grain Measure, 340) is the eighth tier-4 price in the file - if the apothecary's
+     tier-4 stock is hardcoded anywhere rather than filtered on "tier", it wants a look. LAPTOP CODE.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 9 - the channel-point shelf: accessories, cosmetics and dyes widened (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, and was NEVER checked out - only `git fetch`ed,
+  per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- BACKLOG ITEM 1 (cosmetics, accessories and dyes - what viewers actually spend on). Only data/items.json
+  was touched this cycle; lore_lines.json, bosses.json and potions.json are byte-unchanged.
+- data/items.json, all additive into the EXISTING blocks (no key renamed, no key removed, no new block):
+  - accessories 57 -> 78 (+21), spread so no slot falls behind: ring 13 -> 17, amulet 12 -> 16,
+    cloak 11 -> 15, boots 10 -> 14, gloves 11 -> 16. Each new entry carries exactly ONE of the six
+    existing bonus keys (ac / saves / hp / speed / hit / dmg) at the same magnitudes already in the file
+    (+1, or hp 10-14) - no new stat key, no bigger number than the catalogue already allows.
+    Priced inside the ranges already set per slot (ring 210-520, amulet 230-360, cloak 240-480,
+    boots 200-300, gloves 200-300). Named off canon, not invented against it: the clapperless bell,
+    the architect and his toys, the toll, the Ford and the ferry, the bucket line, the chapel, the crater,
+    the Chronicle, and the eight lords (Gravewyrm hide, Ossuary mantle, Mourncoil scale, Nightwing boots,
+    the Pale Duchess's gloves, the Rattling Gauntlets, the Grubmother's brood-iron). Every flavour line is
+    one short beat that earns the price - a reason to buy THAT one, not a restatement of the name.
+  - cosmetics 111 -> 157 (+46): hats 25 -> 37 (+12), banners 23 -> 32 (+9), pets 14 -> 22 (+8),
+    titles 49 -> 66 (+17). Same three shapes as before and no fourth: hats and banners {name, kind, cost,
+    colour}, pets {name, kind, cost, model, scale}, titles {name, kind, cost}.
+  - The eight new pets reuse MODELS ALREADY ON DISK (Duck, Sheep, Pig, Corgi, Horse, Cow, Red) at new
+    scales - a gander, a drake, a yearling ewe, a young boar, a corgi pup, a mare, a heifer, a fox cub -
+    so they need NO new art and cannot render as a missing mesh. Every model path was checked to exist
+    in the tree as part of validation.
+  - Titles are the cheap tier that keeps a small-spend viewer buying (Late to the Ford 40, the Unmeasured
+    50, the Quiet One 60, Toll-paid 70) and the trophy tier that gives a big spend somewhere to go
+    (Gravewyrm-faced 290, the Architect's Toy 280, Favoured of the Duchess 270, the Clapperless 260).
+  - dyes 64 -> 83 (+19) lore-named colours: clapper, ossuary, gravewyrm, nightwing, duchess, mourncoil,
+    hollow, toll, barracks, grainsack, tannin, blueglass, sedge, quarry, lampoil, soot, brick, flaxen,
+    bellbronze. All six-digit lowercase hex, exactly as the existing dyes are. dye_cost left at 25 -
+    one flat price is what keeps !dye an impulse buy, so widening the palette does not touch it.
+- VALIDATION OK (python only - the content worker never runs Godot):
+  - All four owned files json.load() clean.
+  - Key-shape census before/after: accessories still has exactly the same six key-sets, cosmetics exactly
+    the same three. No entry introduced a new or missing field; name/cost/slot/kind value types checked;
+    every dye value checked as 6-char lowercase hex.
+  - `git diff` on data/items.json is 89 added lines and 3 removed, and all three removals are the former
+    last entry of each block re-added with nothing but a trailing comma (drover_spurs, title_coldcounted,
+    lampblack) - so every pre-existing key is byte-identical.
+- CODE WIRING the new keys imply (for the supervisor to route - content never touches code):
+  1. NOTHING here is required. Accessories, dyes and titles are read by key from blocks the game already
+     reads, so the catalogue simply gets longer the moment this merges. If !wear / !dye / the shop list
+     page their output, 78 accessories and 83 dyes may now need a second page. OWNER: whoever owns the
+     shop/wear command print - LAPTOP CODE (chatcmd.gd / gear.gd).
+  2. STILL OPEN from C-cycle 1, now larger: hats and banners carry a `colour` but no `model`, so unless
+     the hat/banner spawner maps a cosmetic key to a mesh, all 37 hats and 32 banners render as the
+     default shape tinted. That is the single highest-value wiring job on this file. OWNER: whoever owns
+     cosmetic spawning - LAPTOP CODE (gear.gd) for the delver, DESKTOP BUILD (hero_body.gd / rig.gd) if
+     town bodies wear them too.
+  3. The 8 new pets need no new asset, but the pet spawner must read `scale` from the entry rather than
+     assuming one scale per model - three models now appear at two sizes each (Duck, Sheep/Pig, Horse/Cow,
+     Red). OWNER: whoever spawns pets - DESKTOP BUILD (animal.gd) / LAPTOP CODE (gear.gd).
+  4. Titles are text-only. If the HUD nameplate has a fixed width, "Favoured of the Duchess" and
+     "Clapperless Bell Banner" are the longest strings the catalogue now contains. OWNER: DESKTOP HUD.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

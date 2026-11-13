@@ -4308,3 +4308,41 @@ content writer's and was not touched.
   speed and Nightwing's canon 6.6 has never reached the mover. A unique with a written speed now does
   set it. Fixing it for plain lords would change how every lord moves mid-stream-cycle, so it is raised
   here rather than slipped into L29b.
+
+
+## U-cycle 9 - L61: the Chronicle becomes an UNFURLED SCROLL (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13)
+The on-stream Chronicle was approved as a parchment box (U1) but Mr. E wanted it taken all the way:
+READ AS AN UNFURLED SCROLL, the stream's signature piece ("an elder scroll, OUR own design" - ornate,
+illuminated, original filigree, explicitly NOT The Elder Scrolls / Bethesda art, font, logo or UI).
+- Built the skin IN hud_dock.gd as a new inner class HudDock.ChronicleScroll (extends Control): ONE cheap
+  procedural _draw layer, NO texture import. It redraws only on resize, so it is free on stream.
+- What it draws: a wavy, DECKLED parchment POLYGON with a slight sag - a non-rectangular silhouette, not a
+  box; warm cream->tan vellum with a faint vertical fibre, an edge vignette and faint foxing; top AND bottom
+  wooden SPINDLES that OVERHANG the sheet, their ends capped by ornamented finials (aged brass with a teal
+  patina ring); strong CURL SHADOWS so the paper visibly furls under each rod; an ILLUMINATED teal+gold
+  filigree FRAME with corner flourishes (a frame only - readability wins, it never crosses the text);
+  "CHRONICLE" burned/embossed on the top rod; a teal WAX-SEAL medallion with a gold jester-diamond (our
+  heraldic mark) at the top-left.
+- feed_hud.gd now uses the scroll as the centre-box backdrop: _build_chrome makes a ChronicleScroll instead
+  of a flat PanelContainer and docks the live lines + a lord's card inside ChronicleScroll.sheet_rect() so
+  ink always sits on open vellum, clear of the spindles and the margin. _place_chrome re-places that content
+  each frame; _chrome_lines reads the sheet_rect height; _panel is now typed Control (a ChronicleScroll on
+  the grid, the parchment PanelContainer at full screen). The old flat teal rule + gold pips + left wordmark
+  are gone - the skin carries the house accent now.
+- KEPT exactly as Mr. E signed off: the centre-box size (HudDock.STRIP/CENTRE_W untouched, 714x295 at 1080p),
+  CHRON_PX = 18, and the 8-9 line capacity. L40 discipline holds - everything is drawn inside the pane-safe
+  centre box and HudDock.put() still keeps pane-docked elements off it. The U1 18 px legibility caveat was
+  already closed by L39/L39b (Mr. E's eye); size is unchanged and 18 px still reads in the crop.
+- ONLY my seven files touched: hud_dock.gd (new ChronicleScroll class) and feed_hud.gd. New harness
+  tools/_l61_shot.gd. No other owner's file edited.
+- VERIFIED: headless --quit-after 300 parse = 0 parse errors, 0 SCRIPT ERRORs (first pass caught a real one -
+  _panel was typed PanelContainer, widened to Control - and two Dictionary-value annotations). Then a WINDOWED
+  1080p render, LOOKED AT: renders/cycles/20261113_l61 (1_grid_scroll_card_1080 + 2_scroll_card_crop with a
+  lord's card up, 3_grid_scroll_clean_1080 + 4_scroll_clean_crop clean). It reads as a scroll, not a box: the
+  rods overhang, the finials cap the ends, the paper curls under the rods. Centred at the 2x2 cross, clear of
+  all four panes and the L62 lane titles.
+- OPEN FOR MR. E (does NOT block the look): the spec asks for the Gloock typeface on the word "Chronicle", but
+  there is NO Gloock - in fact NO font files at all - in the repo (the game runs on the engine default font
+  everywhere). The wordmark is drawn burned in that default font. Bringing in Gloock is a new font-asset import
+  (OFL) and needs an owner's sign-off + a LICENSE note; flagged, not slipped in. If he wants the craft pushed
+  further: a more torn bottom edge and heavier side-curl are easy follow-ups.

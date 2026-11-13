@@ -11,7 +11,7 @@ const WIDTH := 760
 var source: Array = []
 var _seen := 0
 var _box: VBoxContainer
-var _panel: PanelContainer
+var _panel: Control            # L61: a ChronicleScroll on the grid, a parchment PanelContainer at full screen
 var _ages: Array = []
 ## the lord's name card: a dark gold-edged block at the head of the Chronicle
 ## when a lord rises (and again when one falls); held CARD_SECS real seconds
@@ -68,78 +68,28 @@ const CARD_PX := 20             # a lord's card title in the box
 const CARD_SUB_PX := 14
 var _chrome := false            # "strip mode" (the name predates L32b: it was the chrome bar)
 var _pace_t := 0.0
+var _content: HBoxContainer      # L61: the scroll's open-vellum text area, re-placed each frame
 
 func _build_chrome() -> void:
-    _panel = PanelContainer.new()
-    # L61 (Mr. E, Nov 13): the centre box had no CHARACTER - "just a box". Give it the
-    # house aesthetic the hub already wears: proper parchment (UiTheme.PARCH), a deep
-    # ink border, a restrained gold hairline inside it, and a TEAL accent rule across
-    # the top edge drawn as a child ColorRect (so it reads as the one accent, not just
-    # a coloured border). Line size (CHRON_PX = 18) and the 8-9 line capacity (read by
-    # _chrome_lines) stay as Mr. E signed off in L39.
-    var sb := StyleBoxFlat.new()
-    sb.bg_color = UiTheme.PARCH
-    sb.border_color = UiTheme.EDGE
-    sb.set_border_width_all(maxi(2, UiTheme.px(2)))
-    sb.set_corner_radius_all(UiTheme.px(5))
-    sb.shadow_color = Color(0, 0, 0, 0.45)
-    sb.shadow_size = UiTheme.px(5)
-    sb.content_margin_top = UiTheme.px(10)             # room for the teal accent rule above
-    sb.content_margin_bottom = UiTheme.px(6)
-    sb.content_margin_left = UiTheme.px(12)
-    sb.content_margin_right = UiTheme.px(12)
-    _panel.add_theme_stylebox_override("panel", sb)
+    # L61 (Mr. E, Nov 13): the centre Chronicle reads as an UNFURLED SCROLL now, the stream's
+    # signature piece. The parchment / spindles / illuminated margin are drawn by
+    # HudDock.ChronicleScroll (one cheap procedural layer, no texture). This panel just
+    # supplies the live lines and a lord's card, docked inside the scroll's open vellum
+    # (sheet_rect) so ink never sits on a spindle. Line size (CHRON_PX = 18) and the 8-9
+    # line capacity (_chrome_lines) stay as Mr. E signed off in L39/L39b.
+    _panel = HudDock.ChronicleScroll.new()
     _panel.clip_contents = true
     _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _panel.name = "Chronicle"
     _panel.add_to_group("hud_chronicle")
     HudDock.mark(_panel, "centre")       # L32b: the strip at the cross of the panes
     add_child(_panel)
-    # L61: the teal accent rule sits above the content, right under the top edge
-    var rule := ColorRect.new()
-    rule.color = Color(UiTheme.TEAL.r, UiTheme.TEAL.g, UiTheme.TEAL.b, 0.9)
-    rule.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    rule.anchor_left = 0.0
-    rule.anchor_right = 1.0
-    rule.offset_left = UiTheme.px(8)
-    rule.offset_right = -UiTheme.px(8)
-    rule.offset_top = UiTheme.px(3)
-    rule.custom_minimum_size = Vector2(0, maxi(2, UiTheme.px(2)))
-    rule.size = Vector2(0, maxi(2, UiTheme.px(2)))
-    _panel.add_child(rule)
-    # L61: a gold diamond ornament at each end of the teal rule - restrained, just two pips
-    for i in 2:
-        var pip := ColorRect.new()
-        pip.color = UiTheme.VIEWER        # deep gold
-        pip.mouse_filter = Control.MOUSE_FILTER_IGNORE
-        pip.size = Vector2(UiTheme.px(6), UiTheme.px(6))
-        pip.pivot_offset = pip.size * 0.5
-        pip.rotation = PI * 0.25
-        pip.anchor_left = 0.0 if i == 0 else 1.0
-        pip.anchor_right = pip.anchor_left
-        pip.offset_left = UiTheme.px(4) if i == 0 else -UiTheme.px(10)
-        pip.offset_top = UiTheme.px(1)
-        _panel.add_child(pip)
     var h := HBoxContainer.new()
+    h.set_anchors_preset(Control.PRESET_TOP_LEFT)
     h.add_theme_constant_override("separation", UiTheme.px(14))
+    h.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _panel.add_child(h)
-    # L61: a slim "Chronicle" wordmark down the left, so the box carries its own name
-    # without eating a line of entries. Same teal diamond + ink the hub titles use.
-    var wordmark := UiTheme.title("The Chronicle", 15)
-    var wtext := wordmark.get_node_or_null("HBoxContainer/text") as Label
-    if wtext == null:
-        # UiTheme.title's inner HBox isn't named; find the label defensively
-        for c in wordmark.get_children():
-            if c is HBoxContainer:
-                for cc in (c as HBoxContainer).get_children():
-                    if cc is Label:
-                        wtext = cc as Label
-    if wtext:
-        wtext.text = "Chronicle"
-        wtext.add_theme_color_override("font_color", UiTheme.INK_RED)
-    wordmark.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-    wordmark.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    h.add_child(wordmark)
+    _content = h
     _card = PanelContainer.new()
     var cs := StyleBoxFlat.new()
     cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
@@ -156,8 +106,6 @@ func _build_chrome() -> void:
     cv.add_theme_constant_override("separation", 0)
     _card.add_child(cv)
     _card_title = Label.new()
-    # L32b: sized for the centre strip (0.10 of the screen) - the title and ONE sub
-    # line, so the card can never push the Chronicle past the strip's edge
     _card_title.add_theme_font_size_override("font_size", UiTheme.px(CARD_PX))
     _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
     _card_title.add_theme_constant_override("outline_size", 4)
@@ -180,8 +128,8 @@ func _build_chrome() -> void:
     _panel.visible = false
     _place_chrome()
 
-## the panel fills the centre strip (a small margin); the clock / chat live in the
-## bottom chrome bar now, so the strip keeps its full width
+## the scroll fills the centre box (a small margin); the lines / lord card dock inside the
+## open vellum (ChronicleScroll.sheet_rect), clear of the spindles and the illuminated margin
 func _place_chrome() -> void:
     var r := HudDock.centre(get_parent())
     if r.size.y <= 0.0 or _panel == null:
@@ -191,13 +139,22 @@ func _place_chrome() -> void:
     _panel.custom_minimum_size = Vector2.ZERO
     _panel.position = r.position + Vector2(m, m)
     _panel.size = Vector2(r.size.x - 2.0 * m, r.size.y - 2.0 * m)
+    if _content != null and _panel is HudDock.ChronicleScroll:
+        var sr := (_panel as HudDock.ChronicleScroll).sheet_rect()
+        _content.position = sr.position
+        _content.size = sr.size
+        _content.custom_minimum_size = sr.size
 
-## how many one-line entries fit the centre box (L39b: up to 9 in the taller box)
+## how many one-line entries fit the scroll's open vellum (L39b: up to 9)
 func _chrome_lines() -> int:
-    var r := HudDock.centre(get_parent())
+    var inner: float
+    if _panel is HudDock.ChronicleScroll:
+        inner = (_panel as HudDock.ChronicleScroll).sheet_rect().size.y
+    else:
+        var r := HudDock.centre(get_parent())
+        inner = r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
     var fs := UiTheme.px(CHRON_PX)
     var lh := ThemeDB.fallback_font.get_height(fs) + 1.0
-    var inner := r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
     return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 9)   # L39b: the taller box holds 8-9 lines
 
 func _build() -> void:

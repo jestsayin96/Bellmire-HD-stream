@@ -264,3 +264,222 @@ static func guard(t: Node) -> Array:
 
 static var _layers: Array = []
 static var _layers_at := -100000
+
+
+## ---------------------------------------------------------------- L61 the Chronicle scroll
+## The on-stream Chronicle reads as an UNFURLED SCROLL (Mr. E, Nov 13): the stream's
+## signature piece. ONE cheap procedural draw layer - a wavy parchment POLYGON (deckled
+## sides, a slight sag), stepped-rect gradients, curl shadows and relief rects, a thin
+## vector filigree frame; NO texture import. The two spindles OVERHANG the sheet so their
+## ornamented finials cap the rods (not a framed box), and the paper visibly furls under
+## them. "An elder scroll, our own design": ornate, illuminated-manuscript feel in OUR
+## brand (parchment + ink + the JestSayin teal with a gold illumination), ORIGINAL filigree
+## - it copies no existing game's art, font, logo, blank-scroll motif or UI. feed_hud docks
+## the lines (and a lord's card) inside sheet_rect() so ink always sits on open vellum.
+## It redraws only on resize (a static HUD skin), so the stepped gradients cost nothing.
+class ChronicleScroll extends Control:
+	const CREAM := Color(0.960, 0.910, 0.770)
+	const TAN := Color(0.865, 0.760, 0.555)
+	const TAN_DK := Color(0.660, 0.520, 0.330)
+	const WOOD_LT := Color(0.560, 0.405, 0.235)
+	const WOOD_DK := Color(0.250, 0.160, 0.085)
+	const BRASS := Color(0.780, 0.635, 0.340)
+	const BRASS_DK := Color(0.360, 0.275, 0.130)
+	const GOLD := Color(0.840, 0.670, 0.310)
+	const TEAL := Color(0.10, 0.62, 0.62)
+	const BURN := Color(0.190, 0.110, 0.065)
+
+	func _ready() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func _notification(what: int) -> void:
+		if what == NOTIFICATION_RESIZED:
+			queue_redraw()
+
+	func _p(n: float) -> float:
+		return float(UiTheme.px(n))
+
+	## one source of geometry, shared by _draw and sheet_rect so they never drift
+	func _geo() -> Dictionary:
+		var s := size
+		var cap := maxf(_p(8.0), s.y * 0.050)
+		var mx := maxf(_p(18.0), cap * 2.4)      # the rods overhang the sheet by ~this much
+		var amp := _p(3.0)
+		var sag := _p(5.0)
+		var top_cy := cap * 1.25 + _p(1.0)
+		var bot_cy := s.y - cap * 1.25 - _p(1.0)
+		return {"cap": cap, "mx": mx, "amp": amp, "sag": sag, "top_cy": top_cy, "bot_cy": bot_cy,
+			"sx0": mx, "sx1": s.x - mx}
+
+	## the overlay rect: safely inside the wavy sheet silhouette
+	func _ov(g: Dictionary) -> Rect2:
+		var pad: float = g.amp + _p(2.0)
+		return Rect2(g.sx0 + pad, g.top_cy, (g.sx1 - g.sx0) - 2.0 * pad, g.bot_cy - g.top_cy)
+
+	## the writable vellum for feed_hud: inside the filigree frame
+	func sheet_rect() -> Rect2:
+		var g := _geo()
+		var ov := _ov(g)
+		var inx := _p(9.0)
+		var iny := _p(10.0)
+		return Rect2(ov.position.x + inx, ov.position.y + iny,
+			maxf(0.0, ov.size.x - 2.0 * inx), maxf(0.0, ov.size.y - 2.0 * iny))
+
+	func _sheet_poly(g: Dictionary, dx: float, dy: float) -> PackedVector2Array:
+		var pts := PackedVector2Array()
+		var n := 10
+		var x0: float = g.sx0
+		var x1: float = g.sx1
+		var y0: float = g.top_cy
+		var y1: float = g.bot_cy
+		var amp: float = g.amp
+		var sag: float = g.sag
+		pts.append(Vector2(x0 + dx, y0 + dy))
+		pts.append(Vector2(x1 + dx, y0 + dy))
+		for i in range(1, n):
+			var t := float(i) / float(n)
+			pts.append(Vector2(x1 + amp * sin(t * PI * 3.0) + dx, lerp(y0, y1, t) + dy))
+		for i in range(0, n + 1):
+			var u := float(i) / float(n)
+			pts.append(Vector2(lerp(x1, x0, u) + dx, y1 + sag * sin(u * PI) + dy))
+		for i in range(1, n):
+			var t2 := float(i) / float(n)
+			pts.append(Vector2(x0 - amp * sin(t2 * PI * 3.0) + dx, lerp(y1, y0, t2) + dy))
+		return pts
+
+	func _vgrad(r: Rect2, top: Color, bot: Color, steps: int) -> void:
+		steps = maxi(1, steps)
+		var h := r.size.y / float(steps)
+		for i in steps:
+			var k := (float(i) + 0.5) / float(steps)
+			draw_rect(Rect2(r.position.x, r.position.y + float(i) * h, r.size.x, h + 1.0), top.lerp(bot, k))
+
+	func _side_shade(ov: Rect2, band: float) -> void:
+		var n := 8
+		var w := band / float(n)
+		for i in n:
+			var k := 1.0 - float(i) / float(n)
+			var col := Color(TAN_DK.r, TAN_DK.g, TAN_DK.b, 0.26 * k)
+			draw_rect(Rect2(ov.position.x + float(i) * w, ov.position.y, w + 1.0, ov.size.y), col)
+			draw_rect(Rect2(ov.end.x - float(i + 1) * w, ov.position.y, w + 1.0, ov.size.y), col)
+
+	func _fibre(ov: Rect2) -> void:
+		var step := _p(16.0)
+		var x := ov.position.x + step * 0.5
+		var i := 0
+		while x < ov.end.x:
+			var col := CREAM if (i % 3 == 0) else TAN_DK
+			var a := 0.05 if (i % 2 == 0) else 0.035
+			draw_line(Vector2(x, ov.position.y + _p(3.0)), Vector2(x, ov.end.y - _p(3.0)), Color(col.r, col.g, col.b, a), 1.0)
+			x += step
+			i += 1
+
+	func _foxing(ov: Rect2) -> void:
+		for sp in [Vector2(0.20, 0.34), Vector2(0.72, 0.24), Vector2(0.55, 0.76), Vector2(0.88, 0.64)]:
+			var c := ov.position + Vector2(ov.size.x * sp.x, ov.size.y * sp.y)
+			var rr := _p(7.0)
+			draw_circle(c, rr, Color(0.55, 0.40, 0.22, 0.05))
+			draw_circle(c, rr * 0.6, Color(0.48, 0.34, 0.18, 0.05))
+
+	## the paper visibly furls under each rod: a strong dark gradient band hugging the rods
+	func _curl(ov: Rect2, cap: float) -> void:
+		var n := 7
+		var hh := (cap * 1.55) / float(n)
+		for i in n:
+			var k := 1.0 - float(i) / float(n)
+			var col := Color(0.22, 0.14, 0.07, 0.5 * k)
+			draw_rect(Rect2(ov.position.x, ov.position.y + float(i) * hh, ov.size.x, hh + 1.0), col)
+			draw_rect(Rect2(ov.position.x, ov.end.y - float(i + 1) * hh, ov.size.x, hh + 1.0), col)
+		# a faint central highlight so the sheet reads as a gently curved surface, not flat card
+		var midh := ov.size.y * 0.3
+		draw_rect(Rect2(ov.position.x, ov.position.y + (ov.size.y - midh) * 0.5, ov.size.x, midh), Color(1, 1, 1, 0.04))
+
+	func _frame(ov: Rect2) -> void:
+		var bi := _p(6.0)
+		var fr := Rect2(ov.position + Vector2(bi, bi), ov.size - Vector2(bi, bi) * 2.0)
+		if fr.size.x <= 0.0 or fr.size.y <= 0.0:
+			return
+		var tw := maxf(1.0, _p(1.4))
+		draw_rect(fr, Color(TEAL.r, TEAL.g, TEAL.b, 0.9), false, tw)
+		var inset := _p(3.0)
+		var fr2 := Rect2(fr.position + Vector2(inset, inset), fr.size - Vector2(inset, inset) * 2.0)
+		if fr2.size.x > 0.0 and fr2.size.y > 0.0:
+			draw_rect(fr2, Color(GOLD.r, GOLD.g, GOLD.b, 0.8), false, maxf(1.0, _p(1.0)))
+		var fl := _p(12.0)
+		for cdef in [[fr.position, Vector2(1, 1)], [Vector2(fr.end.x, fr.position.y), Vector2(-1, 1)], [Vector2(fr.position.x, fr.end.y), Vector2(1, -1)], [fr.end, Vector2(-1, -1)]]:
+			var p0: Vector2 = cdef[0]
+			var d: Vector2 = cdef[1]
+			draw_line(p0, p0 + Vector2(fl * d.x, 0.0), Color(GOLD.r, GOLD.g, GOLD.b, 0.95), tw)
+			draw_line(p0, p0 + Vector2(0.0, fl * d.y), Color(GOLD.r, GOLD.g, GOLD.b, 0.95), tw)
+			draw_line(p0 + Vector2(fl * 0.6 * d.x, 0.0), p0 + Vector2(fl * 0.2 * d.x, fl * 0.6 * d.y), Color(TEAL.r, TEAL.g, TEAL.b, 0.85), maxf(1.0, _p(1.0)))
+
+	func _finial(c: Vector2, cap: float) -> void:
+		var r := cap * 1.22
+		draw_circle(c, r, BRASS_DK)
+		draw_circle(c, r * 0.80, BRASS)
+		draw_arc(c, r * 0.54, 0.0, TAU, 22, Color(TEAL.r, TEAL.g, TEAL.b, 0.95), maxf(1.0, _p(1.7)))
+		draw_circle(c, r * 0.30, BRASS_DK)
+		draw_circle(c - Vector2(r * 0.26, r * 0.30), r * 0.15, Color(0.97, 0.90, 0.64, 0.75))
+
+	func _dowel(cy: float, cap: float) -> void:
+		var s := size
+		var x0 := _p(1.0)
+		var x1 := s.x - _p(1.0)
+		var wdt := x1 - x0
+		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
+		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
+		draw_rect(Rect2(x0, cy - cap * 0.5, wdt, maxf(1.0, cap * 0.20)), Color(0.68, 0.52, 0.31, 0.55))
+		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), Color(0.16, 0.10, 0.05, 0.85), 1.0)
+		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), Color(0.16, 0.10, 0.05, 0.85), 1.0)
+		_finial(Vector2(x0 + cap, cy), cap)
+		_finial(Vector2(x1 - cap, cy), cap)
+
+	func _header(g: Dictionary) -> void:
+		var s := size
+		var cap: float = g.cap
+		var top_cy: float = g.top_cy
+		var font := ThemeDB.fallback_font
+		var fs := maxi(10, UiTheme.px(15))
+		var word := "CHRONICLE"
+		var wsz := font.get_string_size(word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
+		var wx := (s.x - wsz.x) * 0.5
+		var wy := top_cy + wsz.y * 0.32
+		draw_string(font, Vector2(wx + 1.0, wy + 1.0), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.70, 0.55, 0.32, 0.8))
+		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, BURN)
+		# a teal wax-seal medallion with a gold jester diamond, on the top rod at the left
+		var sx: float = g.sx0 + cap * 0.6
+		var sy := top_cy
+		var sr := cap * 0.92
+		draw_circle(Vector2(sx, sy), sr, Color(0.06, 0.40, 0.40))
+		draw_circle(Vector2(sx, sy), sr * 0.82, TEAL)
+		var dd := sr * 0.52
+		draw_colored_polygon(PackedVector2Array([Vector2(sx, sy - dd), Vector2(sx + dd, sy), Vector2(sx, sy + dd), Vector2(sx - dd, sy)]), GOLD)
+		draw_circle(Vector2(sx, sy - dd), sr * 0.13, Color(0.97, 0.85, 0.48))
+		draw_circle(Vector2(sx, sy + dd), sr * 0.13, Color(0.97, 0.85, 0.48))
+
+	func _draw() -> void:
+		var s := size
+		if s.x < 16.0 or s.y < 16.0:
+			return
+		var g := _geo()
+		var cap: float = g.cap
+		var ov := _ov(g)
+		if ov.size.x <= 0.0 or ov.size.y <= 0.0:
+			return
+		# soft drop shadow (the whole sheet lifts off the panes)
+		draw_colored_polygon(_sheet_poly(g, _p(3.0), _p(4.0)), Color(0, 0, 0, 0.30))
+		# the parchment silhouette: a wavy, deckled, slightly sagging polygon - NOT a rectangle
+		draw_colored_polygon(_sheet_poly(g, 0.0, 0.0), CREAM)
+		_side_shade(ov, _p(34.0))
+		_fibre(ov)
+		_foxing(ov)
+		_curl(ov, cap)
+		_frame(ov)
+		# a soft inked edge along the deckled sides so they read as free paper edges
+		var edge := _sheet_poly(g, 0.0, 0.0)
+		draw_polyline(edge, Color(TAN_DK.r, TAN_DK.g, TAN_DK.b, 0.6), maxf(1.0, _p(1.2)))
+		# the two spindles overhang the sheet; their finials cap the rod ends
+		_dowel(g.top_cy, cap)
+		_dowel(g.bot_cy, cap)
+		_header(g)
+

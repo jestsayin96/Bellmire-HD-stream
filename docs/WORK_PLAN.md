@@ -951,14 +951,14 @@ writing-blocked item on Mr. E's list. The constraint is now code, not words.
 
 # Phase P - Mr. E's rulings, Nov 13 02:20.
 
-- [ ] L57. "NOW WATCHING" GOES ABOVE EACH PANE, not one global banner. Mr. E: "just have the now
+- [x] L57. "NOW WATCHING" GOES ABOVE EACH PANE, not one global banner. Mr. E: "just have the now
       watching above each of the split screen for whoever that specific screen is watching." Each
       pane carries its own small label naming the subject that pane is following, so a viewer can
       tell at a glance which of the four screens is theirs. Must not overlap the pane image or the
       Chronicle (L40 discipline). Owner: DESKTOP HUD (its own files).
       DONE: a 1080p capture, four panes, four correct labels, 0 overlaps.
 
-- [ ] L58. THE GUILD ROLL LEAVES THE STREAM. Mr. E: "the guild roll it can stay on the hub doesnt
+- [x] L58. THE GUILD ROLL LEAVES THE STREAM. Mr. E: "the guild roll it can stay on the hub doesnt
       need to be on stream, it can be for chat as well." It is the TOP-10 STANDINGS (rank, name,
       rank title, level, deepest, a mark for the dead) - not the full roster. It already exists in
       two places that are enough: the hub, and the free `!guild` / `!ranks` chat command. So:
@@ -1089,3 +1089,21 @@ type). Nobody has yet looked at the final crop and said it reads on stream. A me
 look. These stay open until a human says the type is legible.
 Also not ticked: L40 - only the HUD half is done (HudDock.put() keeps the Chronicle clear). The two
 overlaps Mr. E actually flagged live in party_frames.gd and rts_camera.gd and are D41, desktop-owned.
+
+# Phase T - supervisor pass 2026-11-13 10:19.
+
+- [ ] D44. TOWNWALK in_solid HAS GONE INTERMITTENTLY NON-ZERO. Owner: DESKTOP BUILD (town_nav.gd).
+      Measured by the supervisor, three consecutive runs on the same merged tree:
+          in_solid 2/745      in_solid 5/913      in_solid 0/810
+      Every supervisor gate before this one reported 0: 0/796, 0/824, 0/866, 0/900. So this is new
+      and it is INTERMITTENT, not a hard break - which is why the merge was pushed rather than held.
+      Walkers are momentarily registering inside solid geometry. "inside" (people legitimately in
+      buildings) sits at 45-48 across all three runs, so the likely place to look is the doorway
+      transition - a walker crossing a threshold sampled mid-step - rather than open-street nav.
+      DO NOT "fix" this by loosening the test. The 0 was real and worth keeping.
+      DONE: three consecutive _townwalk runs at in_solid 0, with the cause named.
+
+CHANGELOG 2026-11-13 10:19 (supervisor): merged content C12, laptop L43, hud-ui U7/U8 to main. Gate otherwise
+clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor, TWITCH_PARSE OK, _delve_test).
+TICKED L57 and L58 - both are Mr. E's own rulings, implemented as he worded them.
+D44 raised for the intermittent in_solid.

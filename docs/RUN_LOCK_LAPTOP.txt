@@ -1,12 +1,1 @@
-IDLE 2026-11-13 02:05 - L47 DONE and pushed (L-cycle 122). Next in the laptop queue: L45 (bosses scale
-with depth), then L46, L49, L52, L48, L50, L41, L42, L43, L44.
-L47 note: a delver who breaks off now LEAVES the fight, so a party can finish a floor a man short - a real
-balance change and the point of the item, but whether a fleeing delver should rejoin sooner than 55% hp is
-Mr. E's call.
-HANDOVER (COORDINATION 11.4): L34 is DONE on this branch at 75a6226 and L39 was built at 415885a, but BOTH
-are now DESKTOP HUD items. L39 is left UNTICKED because Mr. E redefined it (smaller TYPE first, then the
-panel) and the laptop only shrank the panel. `laptop` and `hud-ui` both touch the same four UI files -
-merge `laptop` to main FIRST, then cut/rebase `hud-ui`. The laptop will not touch those seven files again.
-STILL LAPTOP-OWNED AND OPEN: L43 (_l32_test's vacuous FPS gate - the base >= 10 assert is IN and must STAY;
-_l32_test reports FAIL on this laptop by design until the TAA warm-up lands) and L44 (_l24_test flaky).
-L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.
+RUNNING 2026-11-13 02:15 - L45 bosses scale with depth

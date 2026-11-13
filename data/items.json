@@ -735,6 +735,222 @@
       "cost": 130,
       "flavour": "Drinking from glass, in a town that drank from horn a lifetime ago.",
       "tier": 12
+    },
+    "clay_cups": {
+      "name": "Clay Cups",
+      "cost": 1,
+      "flavour": "Thrown wet, dried in the sun, chipped by Thursday.",
+      "tier": 1
+    },
+    "onions": {
+      "name": "Rope of Onions",
+      "cost": 2,
+      "flavour": "Hung from a beam until wanted. The whole hut smells of them.",
+      "tier": 1
+    },
+    "straw": {
+      "name": "Bale of Straw",
+      "cost": 2,
+      "flavour": "Bedding for the beast, and for whoever lost the argument.",
+      "tier": 1
+    },
+    "milk": {
+      "name": "Pail of Milk",
+      "cost": 3,
+      "flavour": "Carried up from the pen without spilling, which is the whole trick.",
+      "tier": 2
+    },
+    "honey": {
+      "name": "Pot of Honey",
+      "cost": 10,
+      "flavour": "Robbed from the skeps by the well. Worth the stings.",
+      "tier": 2
+    },
+    "flax": {
+      "name": "Bundle of Flax",
+      "cost": 7,
+      "flavour": "Retted in the river, spun by the fire, worn until it falls off.",
+      "tier": 2
+    },
+    "ledger": {
+      "name": "Guild Ledger",
+      "cost": 24,
+      "flavour": "Ruled, bound, and feared. The post keeps everything in it.",
+      "tier": 3
+    },
+    "pitch": {
+      "name": "Bucket of Pitch",
+      "cost": 11,
+      "flavour": "Seals a roof, a boot, or a boat. Mostly the boot.",
+      "tier": 3
+    },
+    "lamp_wick": {
+      "name": "Reel of Lamp Wick",
+      "cost": 5,
+      "flavour": "Cut to length by the lamplighter, who has opinions about length.",
+      "tier": 3
+    },
+    "bacon": {
+      "name": "Flitch of Bacon",
+      "cost": 15,
+      "flavour": "Smoked in the rafters since autumn. Counted by the slice.",
+      "tier": 4
+    },
+    "shears": {
+      "name": "Pair of Shears",
+      "cost": 19,
+      "flavour": "Sheep first, hair second, and nobody washes them between.",
+      "tier": 4
+    },
+    "vinegar": {
+      "name": "Jug of Vinegar",
+      "cost": 7,
+      "flavour": "For the pickling and for the wound. Same jug, different day.",
+      "tier": 4
+    },
+    "coin_purse": {
+      "name": "Leather Purse",
+      "cost": 13,
+      "flavour": "Empty, and optimistic about it.",
+      "tier": 5
+    },
+    "tally_sticks": {
+      "name": "Bundle of Tally Sticks",
+      "cost": 6,
+      "flavour": "Split, notched, and matched. A promise you cannot argue with.",
+      "tier": 5
+    },
+    "stall_canvas": {
+      "name": "Stall Canvas",
+      "cost": 26,
+      "flavour": "Market-day roof. Sheds rain, not gossip.",
+      "tier": 5
+    },
+    "bell_rope": {
+      "name": "Bell Rope",
+      "cost": 20,
+      "flavour": "The bell has no clapper. They pull it anyway, and the town stands up.",
+      "tier": 6
+    },
+    "grave_marker": {
+      "name": "Carved Grave Marker",
+      "cost": 35,
+      "flavour": "The mason cuts the name and leaves the date to the scar.",
+      "tier": 6
+    },
+    "censer": {
+      "name": "Brass Censer",
+      "cost": 48,
+      "flavour": "Swung slow. Smoke covers a great deal.",
+      "tier": 6
+    },
+    "pit_saw": {
+      "name": "Two-Man Pit Saw",
+      "cost": 42,
+      "flavour": "Takes two men to use and three to argue about.",
+      "tier": 7
+    },
+    "potters_clay": {
+      "name": "Load of Potter's Clay",
+      "cost": 9,
+      "flavour": "Dug from the riverbank, trodden barefoot, fired at the Row.",
+      "tier": 7
+    },
+    "forge_apron": {
+      "name": "Leather Forge Apron",
+      "cost": 27,
+      "flavour": "Scorched in the shape of its last owner.",
+      "tier": 7
+    },
+    "watch_horn": {
+      "name": "Watch Horn",
+      "cost": 33,
+      "flavour": "One blast for raiders, two for fire. Three and you run.",
+      "tier": 8
+    },
+    "caltrops": {
+      "name": "Bag of Caltrops",
+      "cost": 26,
+      "flavour": "Scattered at dusk, gathered at dawn, counted both times.",
+      "tier": 8
+    },
+    "field_bandages": {
+      "name": "Roll of Field Bandages",
+      "cost": 16,
+      "flavour": "The garrison buys them by the roll and still runs short.",
+      "tier": 8
+    },
+    "almonds": {
+      "name": "Sack of Sugared Almonds",
+      "cost": 34,
+      "flavour": "Came up the road with the figs and twice the price.",
+      "tier": 9
+    },
+    "tin_whistle": {
+      "name": "Tin Whistle",
+      "cost": 14,
+      "flavour": "Market-day music, and market-day regret.",
+      "tier": 9
+    },
+    "dyed_sash": {
+      "name": "Dyed Sash",
+      "cost": 40,
+      "flavour": "Colour a labourer can afford, worn where it shows.",
+      "tier": 9
+    },
+    "door_bar": {
+      "name": "Oak Door Bar",
+      "cost": 24,
+      "flavour": "A wall is a rumour until something drops into the brackets.",
+      "tier": 10
+    },
+    "gate_tar": {
+      "name": "Barrel of Gate Tar",
+      "cost": 32,
+      "flavour": "Painted on the gate each spring. It stinks, and the gate lasts.",
+      "tier": 10
+    },
+    "street_lamp": {
+      "name": "Iron Street Lamp",
+      "cost": 75,
+      "flavour": "Set along the wall road. The lamplighters drank to it for a week.",
+      "tier": 10
+    },
+    "writing_desk": {
+      "name": "Folding Writing Desk",
+      "cost": 120,
+      "flavour": "Travels with the guild's clerk and outranks him.",
+      "tier": 11
+    },
+    "kid_gloves": {
+      "name": "Pair of Kid Gloves",
+      "cost": 60,
+      "flavour": "Thin enough to feel a coin through. That is the point.",
+      "tier": 11
+    },
+    "apothecary_jar": {
+      "name": "Apothecary Jar",
+      "cost": 45,
+      "flavour": "Lidded, labelled, and not to be opened by the curious.",
+      "tier": 11
+    },
+    "lute": {
+      "name": "Painted Lute",
+      "cost": 150,
+      "flavour": "Bought by a man who fully intends to learn.",
+      "tier": 12
+    },
+    "tapestry": {
+      "name": "Wall Tapestry",
+      "cost": 190,
+      "flavour": "A hunt nobody here has ever been on, hung where guests must pass.",
+      "tier": 12
+    },
+    "silver_spoons": {
+      "name": "Case of Silver Spoons",
+      "cost": 165,
+      "flavour": "Counted after guests leave. Always.",
+      "tier": 12
     }
   },
   "trader_cargo": {
@@ -937,6 +1153,96 @@
       "cost": 230,
       "flavour": "Brought up for the guild's table and guarded like the guild's gold.",
       "tier": 12
+    },
+    "plough_irons": {
+      "name": "Crate of Plough Irons",
+      "cost": 110,
+      "flavour": "Share and coulter, carted in. The wood is local; the iron never is.",
+      "tier": 2
+    },
+    "wheel_rims": {
+      "name": "Bundle of Wheel Rims",
+      "cost": 95,
+      "flavour": "Iron hoops for the wheelwright. A cart is mostly other people's work.",
+      "tier": 3
+    },
+    "tanbark": {
+      "name": "Load of Tanbark",
+      "cost": 85,
+      "flavour": "Oak bark for the tannery. Cheap to steal, miserable to carry.",
+      "tier": 4
+    },
+    "crockery_crates": {
+      "name": "Crates of Crockery",
+      "cost": 105,
+      "flavour": "Packed in straw. Half of it arrives as half of it.",
+      "tier": 5
+    },
+    "chapel_bell": {
+      "name": "Chapel Bell",
+      "cost": 350,
+      "flavour": "Cast downriver, hauled up by six oxen, and it still has no clapper.",
+      "tier": 6
+    },
+    "anvils": {
+      "name": "Pair of Anvils",
+      "cost": 260,
+      "flavour": "Craft Row ordered two. Craft Row will fight for two.",
+      "tier": 7
+    },
+    "window_lead": {
+      "name": "Rolls of Window Lead",
+      "cost": 140,
+      "flavour": "Came up for the chapel glass and stayed for the roofs.",
+      "tier": 7
+    },
+    "crossbows": {
+      "name": "Chest of Crossbows",
+      "cost": 290,
+      "flavour": "Garrison order, sealed. The seal is the only thing bandits respect.",
+      "tier": 8
+    },
+    "war_harness": {
+      "name": "Bundle of War Harness",
+      "cost": 190,
+      "flavour": "Straps, buckles, and the smell of a better stable than ours.",
+      "tier": 8
+    },
+    "dried_fruit": {
+      "name": "Crates of Dried Fruit",
+      "cost": 130,
+      "flavour": "Figs, dates, apricots. The market town learned the words this year.",
+      "tier": 9
+    },
+    "linen_bales": {
+      "name": "Bales of Fine Linen",
+      "cost": 175,
+      "flavour": "Woven somewhere flat and sunny. Bellmire is neither.",
+      "tier": 9
+    },
+    "iron_grating": {
+      "name": "Load of Iron Grating",
+      "cost": 165,
+      "flavour": "For the gate and for the drains. Both keep things out.",
+      "tier": 10
+    },
+    "lens_blanks": {
+      "name": "Case of Lens Blanks",
+      "cost": 240,
+      "flavour": "Ground glass for spectacles. Worth more than the cart under it.",
+      "tier": 11
+    },
+    "amber": {
+      "name": "Casket of Amber",
+      "cost": 380,
+      "flavour": "Sea-stone from a coast nobody here has seen. Warm in the hand.",
+      "tier": 12
+    },
+    "coin_chest": {
+      "name": "Sealed Coin Chest",
+      "cost": 500,
+      "flavour": "The guild's own, under seal, with four guards who pretend it is grain.",
+      "tier": 12
     }
   },
   "stock_by_tier": {
@@ -951,7 +1257,10 @@
           "firewood",
           "turnips",
           "eggs",
-          "waterskin"
+          "waterskin",
+          "clay_cups",
+          "onions",
+          "straw"
         ],
         "cargo_adds": []
       },
@@ -963,10 +1272,14 @@
           "fish",
           "hooks",
           "butter",
-          "net"
+          "net",
+          "milk",
+          "honey",
+          "flax"
         ],
         "cargo_adds": [
-          "seedcorn"
+          "seedcorn",
+          "plough_irons"
         ]
       },
       {
@@ -978,12 +1291,16 @@
           "lampoil",
           "wool",
           "tallow",
-          "sealing_wax"
+          "sealing_wax",
+          "ledger",
+          "pitch",
+          "lamp_wick"
         ],
         "cargo_adds": [
           "timber",
           "pigiron",
-          "charcoal"
+          "charcoal",
+          "wheel_rims"
         ]
       },
       {
@@ -995,12 +1312,16 @@
           "whetstone",
           "blanket",
           "preserves",
-          "besom"
+          "besom",
+          "bacon",
+          "shears",
+          "vinegar"
         ],
         "cargo_adds": [
           "furs",
           "rawhides",
-          "salt_fish"
+          "salt_fish",
+          "tanbark"
         ]
       },
       {
@@ -1012,12 +1333,16 @@
           "candles",
           "boots",
           "ribbon",
-          "handscales"
+          "handscales",
+          "coin_purse",
+          "tally_sticks",
+          "stall_canvas"
         ],
         "cargo_adds": [
           "wine",
           "saltblock",
-          "oiljars"
+          "oiljars",
+          "crockery_crates"
         ]
       },
       {
@@ -1028,12 +1353,16 @@
           "parchment",
           "mourning_cloth",
           "psalter",
-          "altar_oil"
+          "altar_oil",
+          "bell_rope",
+          "grave_marker",
+          "censer"
         ],
         "cargo_adds": [
           "incense",
           "chapel_plate",
-          "candlewax"
+          "candlewax",
+          "chapel_bell"
         ]
       },
       {
@@ -1044,12 +1373,17 @@
           "lantern",
           "bellows",
           "hide_glue",
-          "smith_file"
+          "smith_file",
+          "pit_saw",
+          "potters_clay",
+          "forge_apron"
         ],
         "cargo_adds": [
           "tools",
           "copperware",
-          "millstones"
+          "millstones",
+          "anvils",
+          "window_lead"
         ]
       },
       {
@@ -1060,12 +1394,17 @@
           "shield",
           "helm",
           "bowstrings",
-          "oilcloth"
+          "oilcloth",
+          "watch_horn",
+          "caltrops",
+          "field_bandages"
         ],
         "cargo_adds": [
           "steelbar",
           "warhorses",
-          "mail_shirts"
+          "mail_shirts",
+          "crossbows",
+          "war_harness"
         ]
       },
       {
@@ -1076,13 +1415,18 @@
           "sweets",
           "soap",
           "figs",
-          "comb"
+          "comb",
+          "almonds",
+          "tin_whistle",
+          "dyed_sash"
         ],
         "cargo_adds": [
           "spice",
           "dyestuff",
           "sugarloaf",
-          "parchment_bales"
+          "parchment_bales",
+          "dried_fruit",
+          "linen_bales"
         ]
       },
       {
@@ -1092,12 +1436,16 @@
           "glass_pane",
           "lock",
           "mortar",
-          "iron_hinges"
+          "iron_hinges",
+          "door_bar",
+          "gate_tar",
+          "street_lamp"
         ],
         "cargo_adds": [
           "scarglass",
           "cut_stone",
-          "lime"
+          "lime",
+          "iron_grating"
         ]
       },
       {
@@ -1108,12 +1456,16 @@
           "mirror",
           "brass_lamp",
           "spectacles",
-          "pewter_set"
+          "pewter_set",
+          "writing_desk",
+          "kid_gloves",
+          "apothecary_jar"
         ],
         "cargo_adds": [
           "glassware",
           "simples",
-          "mirrorglass"
+          "mirrorglass",
+          "lens_blanks"
         ]
       },
       {
@@ -1124,13 +1476,18 @@
           "silk_kerchief",
           "pepper",
           "carpet",
-          "glass_goblets"
+          "glass_goblets",
+          "lute",
+          "tapestry",
+          "silver_spoons"
         ],
         "cargo_adds": [
           "silk",
           "books",
           "goldwork",
-          "spiced_wine"
+          "spiced_wine",
+          "amber",
+          "coin_chest"
         ]
       }
     ]

@@ -2976,3 +2976,46 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   4. Nothing in this cycle changes a `cost` statement, so no disaster mechanic that is already
      implemented needs revisiting. This is a narration-only widening.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 16 - a shelf worth looking at twice: shop stock and caravan cargo per growth tier (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: standing-backlog item 2. C-cycle 15 recorded that the tier STRUCTURE was finished in
+  C-cycle 7, and that is still true - `stock_by_tier` has all twelve stages and every good carries
+  its own `tier`. What was thin was the BREADTH inside each stage. Measured before writing: 63 shop
+  goods and 33 cargoes over twelve tiers, which left tier 10 with four goods added and tier 12 with
+  five. A shop that shows its shelf twice in one stream shows the same shelf, and a caravan at the
+  high tiers kept drawing from a very short list. This cycle widens every stage instead of adding a
+  new mechanism.
+- data/items.json (additive only - the ONLY file touched this cycle):
+  - `shop_stock`: 63 -> 99. 36 new goods, three at every tier 1-12, each {name, cost, flavour, tier}
+    exactly like the existing entries. A crossing gains clay cups, onions and straw; a city gains a
+    painted lute, a wall tapestry and a case of silver spoons. Nothing a crossing cannot plausibly
+    sell appears below tier 9.
+  - `trader_cargo`: 33 -> 48. 15 new cargoes from tier 2 (plough irons) to tier 12 (a sealed coin
+    chest at 500, the most valuable thing a caravan now carries). Tier 1 still has no cargo at all,
+    because a tier-1 crossing has no caravans - that invariant is unchanged.
+  - `stock_by_tier`: each tier's `shop_adds` and `cargo_adds` APPENDED to with exactly the new keys
+    that carry that tier. Nothing removed, nothing reordered, no tier renamed. Per-tier shop_adds is
+    now 7-9 everywhere (was 4-6), cargo_adds 0-6.
+  - Costs follow the curve already in the file: everyday goods 1-40 low down, 60-190 at tiers 11-12;
+    cargo 85-500. No existing cost was touched.
+- NOT TOUCHED: lore_lines.json, bosses.json, potions.json (parsed, unchanged). No .gd, no .tscn, no
+  assets, no web/, no new data files. `growth_tiers` in lore_lines is READ ONLY here - the twelve
+  stage names in `stock_by_tier` still match it one for one.
+- VALIDATION OK (python only, no Godot): all four owned files json.load() clean; every pre-existing
+  key in items.json compared against `git show HEAD:data/items.json` and byte-identical, including
+  every one of the 63 old goods and 33 old cargoes and every pre-existing entry in `stock_by_tier`;
+  each tier's adds verified as an append-only PREFIX match of its old list; every new entry carries
+  exactly {name, cost, flavour, tier} with the same value types; every key named in `shop_adds` /
+  `cargo_adds` exists in its block and its `tier` field agrees with the tier that gates it; and every
+  good and cargo in the file is gated by exactly one tier (no orphans, no ungated goods). Errors: 0.
+  No dungeon floor count appears anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Nothing new. The two gates are the same two that C-cycle 7 established: filter with
+     `good.tier <= town_tier`, or read `stock_by_tier.tiers[n]` cumulatively. Both still agree.
+     OWNER: DESKTOP BUILD (D35 shop display / D39 trader caravans).
+  2. THE ONE RISK: any shop or caravan picker that reads a FIXED count off these blocks, or slices
+     the head of the dict, will show the same short shelf it showed before. Size off the filtered
+     list. OWNER: DESKTOP BUILD, same item.
+  3. A shop panel that was laid out for ~6 visible goods at a tier will now be handed 7-9. That is a
+     display decision, not a data one - the data is cumulative by design and will keep growing.
+     OWNER: DESKTOP BUILD (and DESKTOP HUD if the shelf is drawn in a HUD file).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

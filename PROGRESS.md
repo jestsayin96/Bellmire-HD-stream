@@ -2804,3 +2804,26 @@ on the hero and did NOTHING.
 - FOR MR. E: Scarwater is now a real gamble - 300 gold for a coin-flip between a doubled spell and losing
   the cast outright. That is what the flavour text promised ("it cuts both ways, and it knows which"). If
   he wants the odds tilted, the coin flip is one line in _scar_check.
+
+## S-cycle 3 - supervisor pass (2026-11-13 05:02)
+MERGED to main, full gate clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _townwalk in_solid 0/824 stuck_on_route 0, _delve_test):
+  - content C5-C9: tier-gated shop stock and trader cargo (every good names its growth tier),
+    the repeat-heavy stream lines widened, channel-point shelf at 21 accessories / 46 cosmetics /
+    19 dyes, rare uniques and brews.
+  - laptop L52 (spell choice made legible), L53 (hat keys given shapes + a safe default so the
+    next new key cannot break), L54 (Scarwater's scar_touched finally does something).
+
+HELD: hud-ui. Same four code conflicts for the third time. Root cause found and it is not skill:
+hud-ui branched at a1f7463 and has NEVER merged main (main +49, hud-ui +5). A U2 session resolved
+all four correctly in the worktree and the run ended before committing, so it was lost; U3 and U4
+built on the still-unmerged branch. Logged as L59b with an explicit ordering fix: merge, resolve,
+COMMIT AND PUSH, and only then test. Not resolved blind by the supervisor - these are the HUD
+worker's files and a windowed test is the only real check.
+
+HUB H9 SECURITY REVIEW - PASS, HELD FOR MR. E. 282 added lines across app.js/index.html/style.css.
+No innerHTML anywhere in the diff. No fetch/POST/PATCH/upsert - there is NO viewer write path, which
+is the invariant that mattered most: the die DISPLAYS a roll the game already made, so the hub stays
+read-only and the Phase 3 RLS gate is not tripped. No CSP change. No snapshot value used as a URL,
+src, href or style; the only setAttribute added is aria-hidden. Republishing gh-pages remains Mr. E's
+explicit call.

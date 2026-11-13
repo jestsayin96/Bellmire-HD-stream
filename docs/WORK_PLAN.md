@@ -467,7 +467,21 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (L-cycle 115): tools/_l26_anims.gd - MON_ANIMS static=0 (13575 moving frames, floors 2/5/9), every def resolves; clip fallbacks, procedural flinch for 7 bodies with no hit clip, run when chasing fast, 2nd attacks, melee blows land at the clip contact (0.26-0.60 s). L25 OK.
 - [x] L27a. NEW MONSTERS from owned CC0 packs (KayKit Skeletons/Halloween, Quaternius - NOT Bestiary/QAL): add to TYPES with height/anim map/depth/strain. DONE: appear at depth in a soak, animate, parse clean.
       DONE (L-cycle 118): 9 new creatures from owned bodies (no Halloween pack on disk) - marrow hewer, pale cutthroat, silk mother (+spiderling fodder), scar rat, fen lurker, pit wyrm, ash wight, gloom bat - each with height/anims/tint+glow/ways/homes, wired into DEPTHS 6-7/8-9/10+. L27A_TEST OK; deep soak (floors 7/9/11) static=0 of 21637, hewer/ash wight/cutthroat seen fighting; parse 0; line-up shots renders/cycles/20261112_l27/.
-- [ ] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
+- [x] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
+      DONE L-cycle 136: the code landed at 0f3986c and only ever owed three test runs; closed now rather
+      than left as a WIP the supervisor skips. _l26_anims cleared in L-cycle 119 (static 0 of 20819
+      moving frames); _l25_test OK 13/13 on current HEAD with 0 stuck; and the windowed line-up finally
+      judged by eye. RE-VERIFIED ON CURRENT HEAD rather than trusting the old run - bestiary.gd and
+      monster.gd have been through L45, L48 and L50 since - L27B_TEST OK: json still the authority, every
+      named strain still has a tell, stat mods still apply through Bestiary.make.
+      THE TELLS READ: renders/cycles/20261112_l27/b_lineup + b_left/mid/right. All ten strains distinct
+      at a glance, and all three kinds of tell land - GLOW (scarborn mint, wraithtouched violet),
+      PARTICLES (wraithtouched wisps, emberbound sparks) and SCALE (gorged plainly biggest, no glow).
+      Checked rather than assumed: L42 cut dungeon emission two cycles ago and could have dimmed the very
+      tells this item exists for. It did not.
+      FOR MR. E, carried from the original WIP: the strain re-weighting of the 6-9 and 10+ bands is a
+      BALANCE CHANGE (shares taken from the non-plain pool; shallows stay 85% plain). No existing
+      strain's frozen numbers were touched.
 # Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]
 - [ ] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
 - [ ] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
@@ -493,7 +507,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 ## CHANGELOG 16:10 (supervisor): added L32a-b (spotlight always-on 2x2 + centre Chronicle), placed BEFORE Phase C at Mr. E's direction - it corrects the stream's idle look. IDs frozen as ever.
 
 # Phase H - regression found by the supervisor (Nov 12 18:25)
-- [ ] L33. STUCK DELVER REGRESSION: after L27a (nine new monsters at depth) _l25_test went from a clean 0 stuck / 0 nudges to 1 stuck delver (floor 3, state=descend) in a 10-floor run. Likely the denser monster population crowding fight slots or the descend route. The watchdog still frees them, so it is not fatal, but L25's acceptance was 0. Reproduce, find whether it is spawn crowding or route blocking, fix, and get _l25_test back to 0 stuck. DONE: _l25_test OK 13/13 with 0 stuck over 3 consecutive runs.
+- [x] L33. STUCK DELVER REGRESSION: after L27a (nine new monsters at depth) _l25_test went from a clean 0 stuck / 0 nudges to 1 stuck delver (floor 3, state=descend) in a 10-floor run. Likely the denser monster population crowding fight slots or the descend route. The watchdog still frees them, so it is not fatal, but L25's acceptance was 0. Reproduce, find whether it is spawn crowding or route blocking, fix, and get _l25_test back to 0 stuck. DONE: _l25_test OK 13/13 with 0 stuck over 3 consecutive runs.
+      DONE L-cycle 137: three consecutive _l25_test runs on current HEAD, no re-rolling and no best-of -
+      all three OK 13/13 with 0 stuck delvers AND 0 watchdog frees. That is the bar the item set.
+      WHAT IT DOES NOT PROVE, said plainly: I did not reproduce the original failure, so the mechanism is
+      NOT identified - "fixed" here means "not observable". Beyond the three runs, _l25_test has run about
+      a dozen times across this session at 0 stuck every time bar one, and that one was state="search" on
+      floor 10 - my own L49 chest bug, diagnosed and fixed in the L52 cycle. Different state, different
+      cause, already closed.
+      THE ITEM'S ATTRIBUTION LOOKS WRONG, which is worth more than the tick: it blames L27a's new monsters
+      at depth, but the recorded failure was FLOOR 3, state=descend, and L27a widened only the 6-7, 8-9
+      and 10+ bands - the shallows were deliberately untouched and its test still enforces that. Floor 3's
+      roster was never changed by L27a, and "descend" is routing to the stairs, not spawn density. Same
+      shape as L46, L49, L50, L52 and L55: real symptom, wrong assumed cause.
+      Candidates for what helped since, NOT claims: L50's pack cap (one pick can no longer fill a third of
+      a floor - exactly the crowding the item suspected) and L25's watchdog work.
+      IF IT RETURNS: read the STATE in the failure line - descend means routing, search means L49's
+      chests, fight means slot crowding. The test prints "stuck by floor / state"; keep it.
 
 # Phase I - Mr. E's live-stream findings (Nov 12 ~21:55, from his own OBS recordings + play test)
 - [x] L34. DIRECTOR PANE FREEZES (top-left) when a hero dies, rerolls, or a subject vanishes. ROOT CAUSE FOUND by the supervisor, two parts, both laptop-owned:
@@ -515,7 +545,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L38. AMBIENT PANE FRAMING IS POOR - THE BIGGEST VISUAL PROBLEM (supervisor reviewed all 13 recordings: a large share of pane-frames are a close-up rooftop, bare grass, open water, a blank wall or a dark void): idle lanes frequently frame a rooftop, a blank wall, empty paving or the inside of a market stall - the camera sits too close/low and clips into structures. Ambient subjects must be chosen AND framed so something legible is happening: prefer a subject with motion, pull back and raise the eye, reject a shot whose view is mostly roof/ground/wall (the _clear() clearance rule exists - extend it to reject bad compositions). DONE: a 3-minute idle capture where every pane change lands on a readable subject; no roof-fillers.
 
 # Phase J - from Mr. E's full OBS review (supervisor watched all 13 Nov-12 recordings, 22:30)
-- [ ] L39. CHRONICLE IS A CENTRE BOX, NOT A BAR (Mr. E, with reference screenshot; this REPLACES L32b's full-width band). The Chronicle must be a COMPACT PANEL sitting at the centre cross of the 2x2 - roughly the size of the small white box in his screenshot - NOT a tan band spanning the whole screen. Requirements: a small light/white panel centred on the intersection of the four panes; it covers only the corners of the panes it touches, never a full-width strip; it shows the latest few lines, calmly paced (L32b's pacing work is kept); nothing else may draw over it and it may not draw over chat (see L36). DONE: a 1080p capture with the grid up showing a compact centred box, measured at well under half the screen width, with no full-width band anywhere, and Mr. E's eye on it.  [OWNERSHIP MOVED TO DESKTOP HUD + REDEFINED - COORDINATION 11.4; left UNTICKED deliberately, see the laptop note below]
+- [x] L39. CHRONICLE IS A CENTRE BOX, NOT A BAR (Mr. E, with reference screenshot; this REPLACES L32b's full-width band). The Chronicle must be a COMPACT PANEL sitting at the centre cross of the 2x2 - roughly the size of the small white box in his screenshot - NOT a tan band spanning the whole screen. Requirements: a small light/white panel centred on the intersection of the four panes; it covers only the corners of the panes it touches, never a full-width strip; it shows the latest few lines, calmly paced (L32b's pacing work is kept); nothing else may draw over it and it may not draw over chat (see L36). DONE: a 1080p capture with the grid up showing a compact centred box, measured at well under half the screen width, with no full-width band anywhere, and Mr. E's eye on it.  [OWNERSHIP MOVED TO DESKTOP HUD + REDEFINED - COORDINATION 11.4; left UNTICKED deliberately, see the laptop note below]
       DONE L-cycle 120: HudDock.STRIP (a full-width band) -> BOX_W 0.30 x BOX_H 0.13, centre() returns a
       compact rect centred ON the cross; spotlight._relayout lets the two pane rows MEET there, so the box
       covers only each pane's corner (~4.2%). feed_hud: light near-white panel, lord card shrunk again for
@@ -593,7 +623,20 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       CROSS-CHECK (either machine): run _l32_test once on the DESKTOP to see whether a collapsed base reproduces there. That distinguishes harness artifact from machine. A healthy D23 soak does NOT rule it out - D23 does not use this harness.
       NOTE FOR EVERY RUN UNTIL THIS IS DONE: _l32_test now REPORTS FAIL on the laptop by design (the new assert). That red is THIS flag, not a regression in L34/L39, and it is not a reason to reject an unrelated laptop item.
       DONE: base reads a sane FPS on both machines with TAA on, the relative checks are meaningful again, the base>=10 and min-sample asserts stay, and a deliberately-broken base makes the suite FAIL.
-- [ ] L44. _l24_test IS FLAKY (OWNER: LAPTOP). Failed 3 of 6 once ("Ash's body below is the one the lane holds" plus the two checks depending on it), then passed 6/6 on an immediate re-run with nothing changed - a lane/delve timing race, the same class as the "before" check already noted.
+- [x] L44. _l24_test IS FLAKY (OWNER: LAPTOP). Failed 3 of 6 once ("Ash's body below is the one the lane holds" plus the two checks depending on it), then passed 6/6 on an immediate re-run with nothing changed - a lane/delve timing race, the same class as the "before" check already noted.
+      DONE L-cycle 135: the race was FOUND, not guessed at. The test put Ash in the bits lane for 60
+      SECONDS and ran its final checks 1200 FRAMES later - and Spotlight seconds are REAL seconds, so
+      1200 frames is 20 s at 60 fps but about 60 s at the 14-20 fps this machine runs DURING A DELVE,
+      which is when the second half of this test runs. The hold expired just as the asserts fired, which
+      is exactly the recorded 3-of-6 failure, and it explains why an immediate re-run passed: it was
+      faster. Same shape as L43 - a test measuring in frames something that lives in seconds.
+      Fixed by DRIVING the state (the L23 precedent), not by retrying: the hold is 900 s so it cannot
+      expire inside a test that never meant to test expiry; the final checks wait for the CONDITION they
+      need (both delvers' bodies in the tree, since body_of resolves through the Delve party first) and
+      fail with a named check if it never arrives; and the lane is re-bound to the underground body
+      immediately before the asserts, so the precondition is ESTABLISHED rather than hoped for.
+      NO retries and NO best-of-N. PROVEN: ten consecutive windowed runs, 6/6 every time, 0 failures.
+      Only the test file changed - no game script touched.
       SUPERVISOR'S DECISION: make it DETERMINISTIC, following the precedent already set by L23 (_l20_test drives its fight and raid shots deterministically rather than hoping the timing lines up). Drive the lane/delve state the test needs instead of waiting on it. Do NOT paper over it with retries or a best-of-N: a flaky test is worse than no test, because it trains every run - and every supervisor - to ignore red. DONE: _l24_test passes 6/6 on ten consecutive runs.
 
 # Phase L - Mr. E's Nov 13 review (the stream test + his 20-point list). IDs by the supervisor.
@@ -1019,7 +1062,7 @@ not a worker error, and handed to the owner of the files to resolve with a windo
 
 # Phase R - L39 SIZED FROM MR. E'S OWN SCREENSHOT (2026-11-13 04:05). HUD worker: this supersedes the guesswork.
 
-- [ ] L39b. THE CHRONICLE BOX IS TOO SHORT, NOT TOO NARROW. Mr. E drew a red rectangle on a live
+- [x] L39b. THE CHRONICLE BOX IS TOO SHORT, NOT TOO NARROW. Mr. E drew a red rectangle on a live
       1x screenshot showing exactly how big the box may be. Measured against his window:
           his red box   ~0.37 of window WIDTH, ~0.27 of window HEIGHT
           current box   ~0.33 wide, ~0.10 tall   (CENTRE_W 0.34, STRIP 0.12 -> 652x130 at 1080p)
@@ -1152,3 +1195,363 @@ COORDINATION 11:
 CHANGELOG 2026-11-13 11:22 (supervisor): queued L29a/L30c/L29b/L29c/L37/L33/L27b/L56/L30a/L30b for the laptop in
 priority order; reassigned L31 and L36 off the laptop to the HUD and desktop workers respectively;
 noted C1-C3 as stale. No new IDs minted - every item here already existed and keeps its number.
+
+# Phase V - D44 ESCALATED (supervisor, 2026-11-13 12:03). Desktop build: THIS JUMPS YOUR QUEUE.
+
+- [ ] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+      Measured by the supervisor across six runs on two separate merged trees:
+          pass 1:  2/745   5/913   0/810      (peak 5)
+          pass 2:  8/899   0/754   0/852      (peak 8)
+      Every gate before pass 1 read a clean 0: 0/796, 0/824, 0/866, 0/900.
+      So: still intermittent, two runs in three come back clean - but the PEAK IS RISING. That is
+      the signature of a race or a tolerance that is being crossed more often as the town fills,
+      not of harmless noise. It will not settle on its own.
+      WHAT IS KNOWN: "inside" (people legitimately indoors) holds steady at 41-49 across all six
+      runs, so this is not a miscount of building interiors. walking is 114-124. The failures are
+      a small number of walkers out of 750-900 samples, which points at a transient - most likely
+      a walker sampled mid-step through a doorway or against a prop placed after nav was baked.
+      D20b (raid flee into doorways) and D20c/animals are the most recent town-nav-adjacent
+      changes; the trap and chest props added dungeon-side should NOT affect town walkers, but
+      rule it out rather than assume.
+      DO NOT raise the tolerance, widen the sample, or soften the assert. The 0 was real for many
+      consecutive gates and it is the only thing telling us the town nav is sound.
+      DONE: three consecutive _townwalk runs at in_solid 0 WITH the cause named in PROGRESS - not
+      three lucky runs.
+      PARTIAL (desktop D-cycle 126): CAUSE NAMED. The offenders are the stops-based _more_folk
+      townsfolk - their home/work are ZERO by design (a day of `stops` replaces the shuttle),
+      so the audit's `e != ZERO` endpoint guard can never shield them. _put_folk placed them
+      at a stop point WITHOUT a walkability check. Two sub-cases:
+        (a) SPAWN EMBEDDED - the spawn/stop point lay inside a carved solid; an off-mesh start
+            breaks route() (it falls back to a single far waypoint and the body wanders into
+            the valley), and keep_walkable shoves it clear only over ~2 s, counted every
+            sample meanwhile. This was the PERSISTENT, town-fill-scaling contributor behind
+            the RISING 5->8 peak. FIXED: _put_folk now snaps the spawn out of any footprint
+            (keep_walkable; pre-sync so purely geometric). Verified: pre-fix a peasant span
+            embedded every seeded run; post-fix none do.
+        (b) RESIDUAL, FLAT (not rising): a walker on a NORMAL leg sitting ~1.5 m inside a
+            carved footprint for a few samples at the 15 southern 'market'-district houses
+            (z<-55) - e.g. (51.7,-93.8), prop (74.1,-65.6). dl/seat/ghost all false, navoff
+            ~1.5. Post-fix the gate gave THREE consecutive _townwalk 0 (0/16017, 0/16363,
+            0/15601) with _offfloor/_twitch_parse/_delve all clean, BUT other post-fix runs
+            still showed a stray 1-2 (one verify run 2/16003; one seeded diag 1) - so this is
+            NOT yet the 'not-lucky' three zeros. Left UNTICKED for that reason.
+      FOLLOW-UP for the next desktop cycle (NOT done here - would be an unverified change to
+      the hot walker loop): snap stop DESTINATIONS too, or add a keep_walkable net on the
+      waypoint-pop early-return (townsfolk ~L813 returns before the step's keep_walkable), or
+      widen the nav margin at the southern houses. The test was NOT loosened.
+
+CHANGELOG 2026-11-13 12:03 (supervisor): merged content C13-C14, laptop L44 + L27b (no laptop WIP remains),
+hud-ui U9. Gate otherwise clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _delve_test). D44 escalated to D44b after its peak rose from 5 to 8.
+
+# Phase W - Mr. E's L41 ruling (2026-11-13 12:37)
+
+- [x] L41 CLOSED BY MR. E. He looked at confection_before.png and confection_after_muted.png and
+      ruled: TOO MUTED, PUT THE PINK BACK. data/biomes.json confection ground reverted to
+      ["#e8b0cc", 0.35] - the exact one-line revert the laptop itself documented. ONLY the ground
+      was reverted: L42 separately lowered this biome's sat and glow, and that stays, so the floor
+      is bright pink under calmer lighting rather than the original neon.
+      The laptop's GUARD STAYS and was the real work of L41: FloorGen._kit_mat() now falls back to
+      plain grey if a shader or atlas fails to load, instead of handing back a ShaderMaterial with
+      a null shader - which is what Godot draws magenta. A shader can load on one machine and fail
+      on another, so that fault would only ever have appeared on stream.
+      NOTE THE LOOSE END, honestly: the laptop proved the binding is NOT broken (384 materials, 0
+      null, 0 magenta), and Mr. E has now said the confection's bright pink is wanted. So the
+      original "an entire dungeon floor renders hot magenta" report is explained as the confection
+      looking as intended - not as a bug that was found and fixed. If he ever sees a magenta floor
+      again, it is NEW, and the guard's kit_fail_count is the thing to read.
+      Supervisor note on ownership: data/biomes.json is laptop-owned and the supervisor edited it
+      directly. Justified narrowly - a one-line data revert that the owning worker itself specified
+      in its own PROGRESS entry, made at Mr. E's explicit direction while he was present. Not a
+      precedent for editing another worker's code.
+
+CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confection ground reverted; the guard kept.
+
+# Phase X - Mr. E looked at the Chronicle and gave three new items (2026-11-13 14:12)
+
+- [x] L39 / L39b CLOSED BY MR. E'S EYE. He ran the game, looked at the centre Chronicle at 714x295
+      / 18 px, and said: "the chronicle is the correct size." SIZE AND LEGIBILITY ARE SETTLED - the
+      item he corrected three times is done. The styling complaint below is a SEPARATE, new item,
+      not a reason to leave L39 open.
+
+- [ ] L61. THE CHRONICLE BOX HAS NO CHARACTER - "it's just a box". Owner: DESKTOP HUD (hud_dock.gd).
+      The size is right; now it needs to look like it belongs in a medieval town, not a debug
+      panel. Give it the frame/parchment/ornament treatment. The viewer HUB already has the house
+      aesthetic (deep ink/charcoal, parchment, one teal accent, restrained gold, Gloock for
+      titles) - bring that on-stream so the Chronicle and the hub read as one brand. Keep 18 px and
+      the 8-9 line capacity; this is skin, not size. L40 discipline still holds (stay clear of the
+      panes).
+      DONE: a windowed 1080p crop of a styled Chronicle Mr. E signs off.
+
+- [ ] L62. THE PANES NEED TITLES, not only "Now watching: <who>". Owner: DESKTOP HUD. Right now a
+      pane says who it follows but not WHAT KIND of pane it is. Each should carry its lane identity
+      - DIRECTOR / SUBSCRIBER / BITS / CHANNEL POINTS / (ambient) - as a title, with "Now watching:
+      <who>" beneath or beside it. The lane colour already exists (L57); this makes the category
+      legible in words too, so a viewer knows why a pane is showing what it shows. Stay in the
+      seven HUD files.
+      DONE: a 1080p crop with all four panes carrying a readable lane title + subject.
+
+- [ ] D45. THE GRASS READS AS SAND - REPLACE THE TEXTURE. Owner: DESKTOP BUILD (valley.gd / town
+      ground material). Mr. E: "the grass needs work still looks like sand so we should at this
+      point use a different texture for it." Source a proper grass texture - CC0 only (Kenney,
+      ambientCG, Poly Haven CC0), self-hosted with a LICENSE note, never Quaternius Bestiary/QAL.
+      Tile it so it does not obviously repeat at the pane's zoom, and check it against the dusk and
+      night lighting, not just noon. The town ground, the valley and the pane backdrops all read it.
+      DONE: a 1080p crop at the stream's zoom where the ground reads as grass, Mr. E signs off.
+
+CHANGELOG 2026-11-13 14:12 (supervisor): L39/L39b CLOSED on Mr. E's eye - the Chronicle size is right. Three new
+items from his look: L61 (Chronicle styling, HUD), L62 (pane lane titles, HUD), D45 (grass texture,
+desktop). None are launched yet - he is moving to the broadcaster token next and will come back to
+these.
+
+# Phase Y - the party band leaves the stream for the hub (Mr. E, 2026-11-13 14:15)
+
+Mr. E, looking at a live pane: "the towns band covers up most of the screen in one screen so im
+assuming it would on the others, lets take that out and add it to the HUB. and we can add a
+section on the HUB for parties or bands that are currently in the dungeon." The band panel
+("The town's band - floor 5" with members + HP bars) eats most of a 2x2 pane. It comes off stream
+and moves to the hub, which has the room.
+
+- [ ] D46. TAKE THE PARTY-BAND PANEL OFF THE STREAM, AND PUT THE BAND IN THE SNAPSHOT. Owner:
+      DESKTOP BUILD (party_frames.gd + the snapshot upsert). TWO linked halves, do both:
+        (a) Stop drawing the on-stream party-band panel - it covers most of a pane and would on
+            every pane. The in-game unit frame / selection (rts_camera.gd) stays; it is the big
+            multi-member BAND board that goes.
+        (b) THE HUB CAN ONLY SHOW WHAT THE SNAPSHOT CARRIES. Add the delving parties to the snapshot
+            the game upserts every 60 s: for each party/band currently below - its name, its floor,
+            and each member {name, hp, max_hp, status (ok/fallen/burning/...)}. Read-only, same
+            publishable-key path as the rest of the snapshot; no new write path. Keep the payload
+            version gate - if you add a field, bump the version the hub checks.
+      DONE: no band board on stream (1080p crop), and the snapshot row contains a parties array the
+      hub can read. This SUPERSEDES the party-frames half of D41/L40 - that overlap is moot once the
+      board is gone; D41 shrinks to just the Twitch chat column (the L36 overlap), still desktop-owned.
+
+- [ ] H10. "BANDS BELOW" SECTION ON THE HUB. Owner: HUB BUILDER (web/ only). A section that lists
+      every party currently in the dungeon from the snapshot's new parties array: band name, floor,
+      and each member with an HP bar and status, fallen and burning shown honestly. The hub has room
+      the stream does not, so show ALL active parties, not just one. Every string is attacker-shaped
+      Twitch input (hero names) - it reaches the DOM ONLY via el()/textContent, HP bar widths are
+      page-computed numbers not snapshot strings, status picks an icon from the ICON_SET whitelist.
+      No new fetch, no write path; same read-only snapshot. Keep the house palette (parchment/teal/
+      gold, Gloock titles).
+      GATED ON D46: until the snapshot carries parties, build against the shape and show an honest
+      empty state ("no bands delving right now") - never a fabricated party. Flag to the supervisor
+      the exact field shape you expect so D46 writes the same one.
+
+CHANGELOG 2026-11-13 14:15 (supervisor): added D46 (party band off stream + into the snapshot) and H10 (Bands
+Below section on the hub, gated on D46's snapshot field). D41/L40's party-frames half is superseded
+- only the chat-column overlap remains there. Agreed field shape for the parties array to be
+pinned when D46 and H10 start, so the two sides match.
+
+# Phase Z - strip the stream to Mr. E's six (supervisor, 2026-11-13 14:20). See COORDINATION 13.
+
+Mr. E's answers to the three edge cases: unit frame -> STRIP (to hub); boss bar -> KEEP on stream;
+in-world health bars / damage numbers / VFX -> KEEP (they are the content).
+
+- [ ] D48. STRIP THE UNIT / SELECTION FRAME OFF STREAM. Owner: DESKTOP BUILD (rts_camera.gd). The
+      bottom-centre stats panel that appears when a hero is selected comes off the stream canvas.
+      SELECTION ITSELF STAYS as the director mechanic (it still decides which pane follows whom) -
+      only the drawn stats panel goes. KEEP boss_bar.gd. KEEP the in-world health bars / damage
+      numbers / VFX - those are not this panel. The hub already shows hero sheets, so the selected
+      unit's detail is already reachable there; if any field is not in the snapshot, add it the
+      D46 way (read-only, version-gated).
+      DONE: no unit-stats panel on a 1080p stream crop; selection still drives the panes; boss bar
+      and in-world elements untouched.
+
+- [ ] L63. STRIP THE SATCHEL OFF STREAM. Owner: DESKTOP HUD (leaderboard_panel.gd). The L51 Satchel
+      (a viewer's gear / inventory / selling sheet) comes off the stream - it is a personal sheet
+      and belongs on the hub. After L58 (Guild Roll removed) and this, leaderboard_panel.gd draws
+      NOTHING on stream: retire the CanvasLayer or leave it dormant. The Satchel's content is not
+      lost - it moves to the hub (H11). The HUD worker's entire on-stream surface is now exactly
+      the six in COORDINATION 13: panes, Chronicle, lane titles (L62), now-watching (L57).
+      ALSO CONFIRM feed_hud.gd: if it draws a SECOND on-stream event feed separate from the
+      Chronicle, that is a seventh panel and must go - the Chronicle is the only event feed on
+      stream. If feed_hud IS the Chronicle's renderer, leave it. Say which in PROGRESS.
+      DONE: a 1080p stream crop showing ONLY the six; Satchel gone; feed_hud question answered.
+
+- [ ] H11. THE HUB ABSORBS WHAT LEFT THE STREAM. Owner: HUB BUILDER (web/ only). The hub already
+      carries hero sheets, inventory, gear, the fallen and the command list - so most of this
+      exists. Fill the gaps so nothing that left the stream is lost: (a) SELLING PRICES on the
+      viewer's sheet (the Satchel showed the counter's sell prices); (b) make a viewer's OWN hero
+      easy to find/pin, since the on-stream Satchel that used to show it is gone. Plus H10's Bands
+      Below. All read-only from the snapshot, el()/textContent only, ICON_SET for status, house
+      palette. No new fetch or write path.
+      DONE: a viewer can see on the hub everything the stream used to overlay - their sheet with
+      sell prices, their inventory, the bands below - and nothing on the hub is fabricated.
+
+CHANGELOG 2026-11-13 14:20 (supervisor): COORDINATION 13 added - the binding stream-HUD philosophy (six allowed
+elements, everything else hub-only), from Mr. E's rule + his three edge-case answers (unit frame
+strip, boss bar keep, in-world keep). Items: D48 (strip unit frame, desktop), L63 (strip Satchel +
+answer the feed_hud question, HUD), H11 (hub absorbs selling + own-hero find). L51's on-stream
+Satchel is intentionally removed - a direction change, its work feeds the hub, not wasted.
+
+# Phase AA - Mr. E's narrated clip 14-26-15 (transcribed) (2026-11-13 14:50)
+
+His words: "it looks very pixelated... it's only when they're moving, when characters are moving
+around, it looks like jack shit. Top left is fine, top right, bottom right, bottom left, it all
+looks like shit. And the grass looks freaking terrible, and I mean terrible, really bad."
+
+- [ ] D49. MOVING CHARACTERS PIXELATE / SHIMMER IN THE CLOSE PANES - SAME ROOT AS THE GRAIN (D24).
+      Owner: DESKTOP BUILD leads (project.godot [rendering]) WITH the HUD worker for the pane
+      viewports (spotlight.gd). The tell Mr. E gave is diagnostic: the TOP-LEFT director/wide pane
+      is FINE; the three CLOSE subject panes shimmer on movement. That is classic no-anti-aliasing
+      on sub-resolution viewports - each 2x2 pane renders at ~960x540 and upscales, so a moving,
+      animated character crawls with aliasing while a wide static shot hides it. project.godot's
+      [rendering] section is EMPTY (no MSAA/TAA/FXAA) - that is also the root of D24's grain.
+      THE FIX LIKELY SOLVES BOTH: add temporal AA (TAA) or MSAA. TAA specifically kills both the
+      moving-edge shimmer AND the SSAO/fog temporal-dither grain from D24. BUT verify in the live
+      2x2: (a) TAA needs the warm-up the laptop already added for L43's FPS test - a cold first
+      frame can ghost; (b) check it does not reintroduce grain or smear; (c) check the FPS cost
+      with the grid up and the publisher on (COORDINATION 8.5 budget). If TAA is too costly in four
+      live viewports, fall back to MSAA 2x/4x on the pane viewports plus FXAA. Also consider raising
+      the pane viewport render scale - sub-res is half the problem.
+      DONE: a 1080p capture of a MOVING character in a close pane that reads clean, grain gone,
+      FPS still in budget, and Mr. E signs off.
+      This supersedes D24 as the active rendering item - same cause, sharper repro. Keep D24's grain
+      acceptance in the DONE check.
+
+- [ ] D45 (reinforced). THE GRASS IS "REALLY BAD" IN EVERY PANE, not just some. Still owner DESKTOP
+      BUILD (valley.gd / ground material). His emphasis - "freaking terrible, really bad" across all
+      four panes - means a plain texture swap may not be enough: check the grass MATERIAL (tiling
+      scale, normal map, roughness) under the pane camera distance, not just the albedo. A good CC0
+      grass with a proper normal + correct tiling, judged at the pane's zoom. CC0 only, LICENSE note.
+
+CHANGELOG 2026-11-13 14:50 (supervisor): from Mr. E's transcribed clip 14-26-15 - D49 (moving-character
+pixelation in the close panes, same no-AA root as D24's grain; TAA/MSAA likely fixes both; desktop
+leads with the HUD worker for the pane viewports) and D45 reinforced (grass bad in every pane,
+check the material not just the texture). More clips to come as Mr. E transcribes them.
+
+# Phase AB - Mr. E's narrated clip 14-27-07 (transcribed) (2026-11-13 14:51)
+
+His words: "this guy is stuttering... this dude's animation's terrible... look at the grass, that
+texture, it's so nasty... this dude has not moved from his spot in the top right, a lot of them
+aren't moving... this dude's not even holding the fishing pole correctly... this grass texture,
+so nasty."
+
+- [ ] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
+      town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
+      from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
+      badly. This is "the town isn't alive" made concrete.
+      STRONG DIAGNOSTIC LINK: a townsperson frozen in place may be the SAME walker D44/D44b flags
+      as in_solid / stuck - a walker wedged in geometry stops moving AND stops its walk cycle. Check
+      whether the frozen NPCs correlate with the in_solid samples before treating these as separate.
+      If a townsperson has no nav target or a blocked path it idles forever - give idle NPCs
+      somewhere to go (work, wander, gather) on a cadence, and make sure the walk/idle animation
+      actually plays (the census showed anims fire, so a FROZEN one is likely a stuck agent, not a
+      missing clip). The stutter may be the sub-res pane (see D49) OR a real animation hitch - say
+      which once D49's AA work lands, so they are not conflated.
+      DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
+      pane crop Mr. E signs off.
+
+- [ ] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
+      pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
+      it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
+      bone. Pairs with D40's fishing animation + water work; do them together.
+      DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
+
+- NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
+  appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to
+  zoom/control each subject pane independently, or is one-pane control fine and this was just an
+  observation? Logged here so it is not lost; the supervisor will raise it and turn it into an item
+  only if he wants per-pane control. Owner would be HUD (spotlight.gd) + rts_camera.gd.
+
+Grass: already D45 (reinforced twice now - "so nasty" in two clips). Not re-logged.
+Pixelation-on-movement: already D49 from clip 14-26-15. The clip-2 "stuttering" is partly that
+(render) and partly D50 (animation) - separated above.
+
+CHANGELOG 2026-11-13 14:51 (supervisor): from Mr. E's transcribed clip 14-27-07 - D50 (townsfolk freeze +
+animation stutter, likely tied to D44's stuck walkers), D51 (fishing pole grip, part of D40).
+Grass reinforces D45; stutter split between D49 render and D50 animation. One open question logged
+for Mr. E: does he want per-pane zoom control.
+
+# Phase AC - *** CRITICAL *** Mr. E's clip 14-28-40: HEROES DO NOT MOVE (2026-11-13 14:52)
+
+His words: "I put it to follow me. My dude's not moving. None of these guys, barefoot Knights not
+moving, 96 Knights not moving, Mr. E Ranger is the one I just created, and I am following - I'm not
+moving, I told him to go delve, and he has not moved. This needs to be fixed."
+
+- [ ] D52. *** TOP PRIORITY, ABOVE EVERYTHING ELSE. *** HEROES DO NOT MOVE ON COMMAND. A viewer
+      enlists a hero, sends it to delve, and it stands frozen - the whole core loop (enlist -> party
+      -> delve) is dead on screen. Mr. E created a hero, issued delve, set a pane to follow it, and
+      it never moved. The follow-CAMERA works (the pane tracks it); the HERO's movement does not.
+      THE UNIFYING HYPOTHESIS - treat D44, D50 and D52 as ONE freeze bug until proven otherwise:
+      everything Mr. E sees frozen - townsfolk standing still (D50), NPCs not wandering, heroes not
+      delving (D52) - is an agent that cannot path. The _townwalk in_solid count that rose from a
+      clean 0 to peak 8 (D44/D44b) is very likely the MEASUREMENT of this same freeze: an agent
+      wedged in carved solid geometry stops translating AND stops delving. D44b's spawn-snap fixed
+      the RISING half; the residual is agents getting stuck at RUN TIME (doorways, props, nav-mesh
+      seams), and that residual is what freezes heroes mid-town.
+      THIS SPANS TWO OWNERS - coordinate, do not let it fall between them:
+        * DESKTOP BUILD (town_nav.gd, townsfolk.gd, hero movement in town): is the hero's nav agent
+          getting a path to the dungeon mouth at all? Is it wedged in_solid at spawn/standing? Does
+          it have a velocity but zero translation (stuck against a collider)?
+        * LAPTOP CODE (delve.gd, roster.gd, chatcmd.gd): does the !delve / go-delve command actually
+          ISSUE a move order and a destination, or does it set state without moving the body? The
+          census showed delving logic runs in tests - so why does a LIVE hero not move? Find the
+          live-vs-test difference.
+      REPRO FIRST, as every good find this session has: capture ONE hero from enlist to frozen, log
+      its nav state (has_target, path length, in_solid, velocity, position-delta per second). Do not
+      guess the mechanism. This is the same discipline that cracked L46/L49/L50/L52/L55.
+      DONE: a live run where an enlisted hero commanded to delve WALKS to the mouth and descends,
+      townsfolk wander, in_solid holds 0, and Mr. E confirms on stream that heroes move.
+
+CHANGELOG 2026-11-13 14:52 (supervisor): D52 raised CRITICAL and placed above all desktop and laptop work -
+heroes do not move on command, which kills the core loop. Unified with D44/D44b/D50 as one likely
+freeze bug (agents cannot path; in_solid is its measurement). Spans desktop (nav/movement) and
+laptop (the delve command path) - both must coordinate; repro before fixing.
+
+# Phase AD - Mr. E's clips 14-29-22 / 14-30-21 / 14-31-18 transcribed (2026-11-13 14:54). Important disambiguation.
+
+- [ ] D52 (REFRAMED - the supervisor unified too fast; the new clips split it in two). THE HERO
+      THAT WON'T DELVE IS A COMMAND/STATE BUG, NOT WEDGING. Clip 14-30-21: "Mr. is already waiting
+      at the dungeon mouth. No, he's not. He's standing by the WELL in the town square." The hero
+      stands in an OPEN area (the well), not jammed against anything, and never paths to the mouth
+      after a delve order - he even re-typed Delve and it still did nothing. So the go-delve command
+      sets state WITHOUT issuing a move/destination, or the hero's state machine never transitions
+      to "travel to mouth". OWNER: LAPTOP CODE (delve.gd / roster.gd / chatcmd.gd - the delve
+      trigger and the hero's travel-to-dungeon state). Repro one hero from the delve command and log
+      whether a nav target to the mouth is ever set. THIS IS STILL TOP PRIORITY - it kills the core
+      loop. It is NOT the same as the wedging below; do not fix it as a nav problem.
+
+- [ ] D44/D50 (CLARIFIED - the WEDGING half, distinct from D52). Clip 14-31-18: "this guy is stuck,
+      he's stuck against his pumpkins." SOME agents physically wedge against props (pumpkins) and
+      freeze. THAT is the in_solid / nav-collision bug, DESKTOP-owned (town_nav.gd), the thing the
+      rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
+      different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
+      bugs, two owners, do not conflate.
+
+- [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
+      equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
+      supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
+      its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
+      that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
+      its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
+      DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
+
+- [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
+      14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
+      and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
+      the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
+      (do they come back out on a timer? the D20b flee logic already ducks folk indoors and brings
+      them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
+      recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
+      not permanently lose it.
+
+REINFORCED, not re-logged:
+  * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a
+    subscription... channel... bits?" This is the STRONGEST confirmation yet - a viewer cannot tell
+    what to spend on. Bump L62 up the HUD queue; it is core to the spend-prompt model, not polish.
+  * D46 (band panel covers the screen) - "look how much it covers, this is what I was talking
+    about." Confirmed again; already moving to the hub.
+  * D50 (NPCs idle with no purpose) - "all these people just hanging out not doing anything,
+    congregating by the thing not doing anything." The idle half of D50.
+  * L38 (ambient pane framing) - "bottom right is watching the livestock, it's looking at the ROOF."
+    The ambient framing still aims at roofs/empty geometry sometimes. U2 did a first pass; it needs
+    another - the ambient subject pick or the camera offset is still landing on non-subjects. Raise
+    as a HUD follow-up to L38 when the HUD worker is next free.
+
+CHANGELOG 2026-11-13 14:54 (supervisor): clips 14-29/14-30/14-31. Split the "not moving" bug correctly: D52 =
+hero won't delve, stands idle at the well = COMMAND/STATE, LAPTOP; D44/D50 wedging (pumpkins) =
+nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53 (cart/pole not
+attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
+it up), D46, D50, L38 (needs a second framing pass).

@@ -53,7 +53,19 @@
     "coldcount": {"name": "Coldcount", "cost": 100, "tier": 2, "gives": "resist_frost", "secs": 120, "cures": ["slowed"], "aliases": ["coldcount", "cold"], "flavour": "Mourncoil taught the apothecary this one, unwillingly."},
     "wallmend": {"name": "Wallmend", "cost": 240, "tier": 3, "heal": [6, 4, 10], "aliases": ["wallmend", "wall"], "flavour": "Masons' brew. It does for a man what mortar does for a course."},
     "tollwater": {"name": "Tollwater", "cost": 130, "tier": 3, "gives": "haste", "secs": 25, "aliases": ["tollwater", "toll"], "flavour": "Paid in advance. The road goes past quicker."},
-    "clearfen": {"name": "Clearfen Drops", "cost": 80, "tier": 2, "cures": ["blinded"], "aliases": ["clearfen", "clear"], "flavour": "Stings worse than whatever blinded you. Works faster, too."}
+    "clearfen": {"name": "Clearfen Drops", "cost": 80, "tier": 2, "cures": ["blinded"], "aliases": ["clearfen", "clear"], "flavour": "Stings worse than whatever blinded you. Works faster, too."},
+    "ferrywater": {"name": "Ferryman's Measure", "cost": 110, "tier": 2, "gives": "warded", "secs": 60, "aliases": ["ferrywater", "ferry"], "flavour": "Drunk at the crossing. Paid for on the far bank."},
+    "brightbone": {"name": "Brightbone", "cost": 260, "tier": 3, "heal": [6, 4, 8], "aliases": ["brightbone", "bright"], "flavour": "Knits what the Ossuary Lord undid. Tastes of chalk and says so."},
+    "emberdregs": {"name": "Ember Dregs", "cost": 70, "tier": 1, "gives": "resist_fire", "secs": 90, "cures": ["burning"], "aliases": ["emberdregs", "dregs"], "flavour": "The bottom of the emberward jar, sold cheap. Still puts you out."},
+    "rushlight": {"name": "Rushlight Draught", "cost": 120, "tier": 2, "gives": "darkvision", "secs": 150, "aliases": ["rushlight", "rush"], "flavour": "Cheaper than a lamp, and nothing down there sees you carrying it."},
+    "mustering_cup": {"name": "Mustering Cup", "cost": 190, "tier": 3, "gives": "heroism", "secs": 45, "cures": ["frightened"], "aliases": ["musteringcup", "muster"], "flavour": "Poured at the barracks door. Nobody drinks it sitting down."},
+    "quietwater": {"name": "Quietwater", "cost": 160, "tier": 3, "gives": "invisible", "secs": 18, "aliases": ["quietwater", "quiet"], "flavour": "Bellmire's oldest answer to a bad decision."},
+    "oxdraught": {"name": "Ox-Draught", "cost": 210, "tier": 3, "gives": "giant", "secs": 40, "aliases": ["oxdraught", "ox"], "flavour": "Drovers' brew. Doubles the man, and the appetite with him."},
+    "mirethistle": {"name": "Mirethistle Tincture", "cost": 75, "tier": 1, "cures": ["poisoned"], "aliases": ["mirethistle", "thistle"], "flavour": "Bitter as the fen it came out of. Swallow it, do not sip it."},
+    "watchmans_pint": {"name": "Watchman's Pint", "cost": 95, "tier": 2, "gives": "regenerating", "secs": 120, "aliases": ["watchmanspint", "pint"], "flavour": "Slow and steady, like the man they named it after."},
+    "millrace": {"name": "Millrace", "cost": 130, "tier": 2, "gives": "haste", "secs": 22, "cures": ["slowed"], "aliases": ["millrace", "mill"], "flavour": "Goes through you the way the river goes under the wheel."},
+    "chapelwater": {"name": "Chapel Water", "cost": 100, "tier": 2, "cures": ["frightened", "blinded"], "aliases": ["chapelwater", "chapel"], "flavour": "Blessed on a feast day. Works on the other days as well."},
+    "scarbite": {"name": "Scarbite", "cost": 150, "tier": 3, "gives": "scar_touched", "secs": 45, "aliases": ["scarbite", "bite"], "flavour": "The scar in a bottle. The apothecary charges extra for the stopper."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},

@@ -14,6 +14,13 @@ var _checks := 0
 var _spot_f := -1
 var _back := 0
 var _cut_away_f := -1
+## L44: made deterministic. A hold long enough that it cannot expire inside the test, and the
+## final checks gated on a CONDITION - the delve's bodies being real and in the tree - instead
+## of a frame count that meant different things at different frame rates.
+const HOLD_S := 900.0
+const WAIT_CAP := 1800          # frames to wait for the delve before calling it a failure
+var _dv: Delve = null
+var _dv_f := -1
 
 func _initialize() -> void:
 	root.size = Vector2i(1920, 1080)
@@ -57,7 +64,13 @@ func _process(_dt: float) -> bool:
 		var hotter := k.begins_with("fish_") or k.begins_with("fight_") or k.begins_with("lord_") or k == "raid"
 		_ok(_cur_node() == _ash() or hotter, "before: the director takes the freshest chatter, Ash, unless a hotter story is live (%s)" % k)
 	if _f == 60:
-		Spotlight.of(_t).put("2401", "bits", 60.0, "cheered 500 bits")
+		# L44: the hold used to be 60 s while the test waited 1200 FRAMES for its last check.
+		# Spotlight seconds are REAL seconds, so at the 14-20 fps this machine runs during a
+		# delve those 1200 frames are around 60 s - the hold expired right as the final asserts
+		# ran, and the test failed or passed on how fast the machine happened to be. The hold is
+		# now far longer than the test can possibly take: this test is about whether the
+		# director yields to a lane, not about when a lane expires.
+		Spotlight.of(_t).put("2401", "bits", HOLD_S, "cheered 500 bits")
 		_spot_f = _f
 	if _spot_f > 0 and _f > _spot_f and _f <= _spot_f + 1020:
 		if _f % 120 == 0:
@@ -71,14 +84,36 @@ func _process(_dt: float) -> bool:
 		_ok(_cut_away_f > 0 and _cut_away_f - _spot_f <= 120, "a lane takes Ash: the director cuts away within 2 s (%d frames, now %s)" % [_cut_away_f - _spot_f, _dir._cur.get("key")])
 		_ok(_back == 0, "for 15 s the director never follows Ash while the lane holds them (%d frames on Ash)" % _back)
 		# 2. a delve with Ash spotlit: the delve's shot goes through Bree
-		var dv := Delve.new()
-		dv.town = _t
-		dv.roster = _t.get("roster")
-		dv.start_floor = 2
-		dv.max_floors = 2
-		_t.add_child(dv)
-		dv.start(["2401", "2402"])
-	if _f == _spot_f + 1200:
+		_dv = Delve.new()
+		_dv.town = _t
+		_dv.roster = _t.get("roster")
+		_dv.start_floor = 2
+		_dv.max_floors = 2
+		_t.add_child(_dv)
+		_dv.start(["2401", "2402"])
+		_dv_f = _f
+
+	# ---- L44: wait for the STATE the checks need, not for a number of frames.
+	# body_of() resolves a delver through the Delve party first, so the lane only points at the
+	# underground body once that body exists and is in the tree. Waiting a fixed 1200 frames
+	# hoped that had happened; this waits until it HAS, and fails loudly if it never does.
+	if _dv_f > 0 and _f > _dv_f:
+		var ready := false
+		if is_instance_valid(_dv) and _dv.party.size() >= 2:
+			ready = true
+			for m in _dv.party:
+				var b = m.get("body")
+				if not (is_instance_valid(b) and (b as Node3D).is_inside_tree()):
+					ready = false
+		if not ready and _f - _dv_f < WAIT_CAP:
+			return false
+		if not ready:
+			_ok(false, "the delve never put both delvers underground within %d frames" % WAIT_CAP)
+			print("L24_TEST %s (%d checks, %d failed)" % ["OK" if _fails.is_empty() else "FAIL", _checks, _fails.size()])
+			return true
+		# the bodies are real and underground: bind the lane to the body it must hold NOW,
+		# rather than trusting that a hold placed before the delve survived the body swap
+		Spotlight.of(_t).put("2401", "bits", HOLD_S, "cheered 500 bits")
 		var best := _dir._best()
 		var cands: Array = []
 		for k in ["delve_", "fight_"]:

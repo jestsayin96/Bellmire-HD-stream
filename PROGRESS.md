@@ -3620,6 +3620,32 @@ just been re-enabled has no temporal history to resolve against.
   Satchel's "No rings, no cloak..." hint still clips at the panel edge ("!wear ri[ng]") - a pre-existing
   L51 clip, not touched here; I can widen or wrap that line if you want it to read in full.
 
+## L-cycle 135 - L44 _l24_test made deterministic (laptop jestai, 2026-11-13) - L44 DONE
+THE RACE, FOUND RATHER THAN GUESSED AT. _l24_test put Ash in the bits lane for 60 SECONDS and then ran
+its final checks 1200 FRAMES later. Spotlight seconds are REAL seconds (left -= delta / time_scale), so
+those 1200 frames are 20 s at 60 fps but about 60 s at the 14-20 fps this machine actually runs during a
+delve - which is exactly when the second half of this test runs. The hold expired right as the final
+asserts fired, so "Ash's body below is the one the lane holds" failed, and the two checks that depend on
+it fell with it. That is precisely the 3-of-6 failure the supervisor recorded, and it explains why an
+immediate re-run passed: the re-run happened to be faster.
+  It is also, pleasingly, the same shape of bug as L43's: a test measuring in frames something that lives
+  in seconds.
+- FIXED BY DRIVING THE STATE, not by retrying - the supervisor's instruction and the L23 precedent:
+  1. the hold is now HOLD_S 900 s, far longer than the test can take. This test is about whether the
+     director yields to a lane, NOT about when a lane expires; tying it to an expiry it never meant to
+     test is what made it flaky.
+  2. the final checks no longer fire on a frame number. They wait for the CONDITION they actually need -
+     both delvers' bodies existing and in the tree, since Spotlight.body_of() resolves a delver through
+     the Delve party first - and fail loudly with a named check if that never happens within WAIT_CAP.
+  3. the lane is re-bound to the underground body immediately before the asserts, so the precondition is
+     ESTABLISHED rather than hoped for. Trusting a hold placed before the delve to survive the body swap
+     was the hope the test was built on.
+- NO RETRIES AND NO BEST-OF-N, as instructed. A flaky test is worse than no test because it trains every
+  run, and every supervisor, to ignore red - which is exactly what had started happening to _l32_test.
+- PROVEN TO THE ITEM'S OWN BAR: ten consecutive runs, 6 of 6 checks passing every time, 0 failures. Not
+  a best-of, not a re-run after a red - ten in a row, windowed at 1920x1080, exactly as the DONE asked.
+- Regression: parse 0 SCRIPT ERROR. Only tools/_l24_test.gd changed - no game script was touched, so the
+  wider battery has nothing new to catch; the ten runs ARE the evidence for this item.
 
 ## D-cycle 125 - T3 the Twitch reply path stops dropping replies silently (desktop CruzaderPC, 2026-11-13) - T3 DONE
 - T3 (URGENT, viewer-facing): on stream !enlist "did nothing" and the reply path dropped silently. The
@@ -3650,3 +3676,266 @@ just been re-enabled has no temporal history to resolve against.
   "String formatting error: not all arguments converted" at delve.gd:1479 (_loot). delve.gd is laptop-owned;
   flagging it rather than touching it. Not a SCRIPT ERROR, did not block the gate.
 - Did NOT touch chatcmd.gd (c) - laptop-owned. T3 ticked in WORK_PLAN with this result.
+
+## C-cycle 13 - rare uniques and brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, nothing unpushed, and was NEVER checked out -
+  only `git fetch`ed, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- WHY THIS CYCLE: C1/C2/C3 all still unticked, but the survey put the thin files first. items.json
+  (54 KB) and lore_lines.json (77 KB) are well stocked after cycles 7-12; bosses.json was still the
+  thinnest owned file at 9.3 KB, and a rare unique is the single most-screenshotted thing on a
+  stream. So: standing backlog 6 - more shape-first lord variants, and more brews. Only
+  data/bosses.json and data/potions.json were touched; items.json and lore_lines.json are
+  byte-unchanged this cycle.
+- `lesser_uniques` 28 -> 42 (+14, split 4 Hollow King / 4 Grubmother / 3 Rattling Host /
+  3 Nightwing). Shape-first per the file's own `uniques` rule: every one keeps its lord's silhouette
+  and twists the BEHAVIOUR, with hp/speed skewed to match - Banked holds its fire and spends it in
+  one burn (210/2.8), Carried moves its crown onto one of its own dead (170/3.6), Nesting never
+  advances and sends the brood instead (265/1.2), Shorn is a wall with no wall left in it (185/2.8),
+  Widowed spends itself fast (140/4.6), Processional is a line that does not end (195/2.8),
+  Smoke-Blind cannot find you and ruins the room looking (130/7.0), Belfried fights from overhead.
+  NO new lords - all 14 are the existing four lesser lords.
+- `greater_uniques` 24 -> 36 (+12, 3 each: Gravewyrm / Ossuary Lord / Pale Duchess / Mourncoil).
+  Fasting spends the breath on the body (250/3.8/29), Burrowed fights from under the floor
+  (330/1.8/26), Inventoried counts before it raises, Hollowed spends its own bones to raise three,
+  Unattended has no borrowed hands and is faster for it (190/4.8/32), Invited ignores anyone who has
+  not drawn, Rimed is armoured in its own frost (360/1.9/25), Drawn Thin is cold at both ends.
+  NO new lords. Total rare uniques now 78, zero duplicate names.
+- `potions.potions` 52 -> 64 (+12 brews), every one using an EXISTING state - nothing in `states`
+  was added, renamed or changed, so no brew promises an effect the code cannot already apply:
+  ferrywater (warded), brightbone (heal), emberdregs (resist_fire + cures burning), rushlight
+  (darkvision), mustering_cup (heroism + cures frightened), quietwater (invisible), oxdraught
+  (giant), mirethistle (cures poisoned), watchmans_pint (regenerating), millrace (haste + cures
+  slowed), chapelwater (cures frightened/blinded), scarbite (scar_touched). Costs sit inside the
+  existing band for their tier; tiers 1-3 only; `aliases` checked against every existing alias in
+  the file - zero collisions.
+- TOTAL: 38 new entries, 0 new keys, 0 keys renamed or removed, 0 existing entries reworded.
+- VALIDATION OK (python only - the content worker never runs Godot): all four owned files json.load
+  clean. A deep walk of `git show HEAD:data/bosses.json` and `HEAD:data/potions.json` against the
+  post-edit parse returned ZERO differences - every pre-existing key present, every pre-existing
+  scalar equal, both touched arrays equal on their original prefix (appends only), `states` equal
+  object-for-object. New boss entries asserted to carry only {name,shape,hp,speed,attack} with
+  name+shape required and integer hp; new brews asserted to carry {name,cost,tier,aliases,flavour}
+  plus optional {heal,gives,secs,cures}, every `gives`/`cures` value asserted to exist in `states`,
+  every `gives` asserted to carry `secs`. No dungeon floor count anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. The rare-unique draw must pick from the FULL `lesser_uniques`/`greater_uniques` arrays rather
+     than a hard-coded head slice - if anything still indexes a fixed count, this cycle's 26 new
+     variants never roll. OWNER: LAPTOP CODE (bestiary.gd / delve.gd).
+  2. `shape` is prose, not a mechanic. Each new variant's behaviour (fire left on the ground, brood
+     only on death, raising three at a time, striking only drawn weapons) is described, not
+     implemented. Whoever owns boss behaviour decides which of these get real behaviour and which
+     ride on the stat skew alone. OWNER: LAPTOP CODE (bestiary.gd).
+  3. The 5 rare uniques with intro lines in lore_lines (`unique_intros` / `unique_intros_alt`) are
+     still only 5; the other 73 rise unannounced. Either the intro picker falls back to the lord's
+     own intro, or a future content cycle writes intros per variant - the supervisor should say
+     which before that work is done. OWNER: supervisor decision, then CONTENT.
+  4. New brews are buyable the moment `!brew` reads the dict, but `scarbite` grants `scar_touched`,
+     whose `does` ("next spell doubled - or misfires") must already be implemented for a PLAYER-held
+     state, not only as something the scar inflicts. If it is not, hold scarbite back.
+     OWNER: LAPTOP CODE (delve.gd / chatcmd.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 14 - the stream's loudest lines, widened again (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THESE: the standing backlog has now cycled once, so this run measured the files instead of
+  guessing. `misfire` was the thinnest high-frequency key in the project - 14 lines carrying EVERY
+  wild-magic failure below (L8 makes every dungeon spell a check against the scar), so viewers were
+  seeing the same fourteen sentences all stream. Barks, descend, cleared and epitaphs were next by
+  fires-per-line. The channel-point shelf got a smaller top-up alongside.
+- data/lore_lines.json (additive only):
+  - `misfire` 14 -> 30. Every new line keeps the exact format contract: %s name, %s spell, %d roll,
+    %d DC, in that order - asserted programmatically, not by eye.
+  - `barks`: +8 per key, all six - enter 32->40, lord 32->40, trap 31->39, hurt 31->39,
+    drink 31->39, misfire 31->39. Mix of flat shouts and the quoted in-character lines, matching
+    the existing distribution in each list.
+  - `epitaphs` 74 -> 96. `descend` 48 -> 66 (9 of the "%s %s" formatted kind, 9 of the plain
+    narrator kind - both forms already exist in that array). `cleared` 48 -> 66 (9 "%d" floor
+    lines, 9 plain).
+- data/items.json (additive only):
+  - `accessories` 86 -> 96. Each carries {name, slot, cost, flavour} plus EXACTLY ONE bonus from
+    the existing set {ac, hp, hit, dmg, saves, speed} - same as every entry already there. Slots
+    stay within the existing five (ring, amulet, cloak, boots, gloves); no new slot invented.
+  - `cosmetics` 169 -> 183: 4 hats, 3 banners, 7 titles. Hats and banners carry
+    {name, kind, cost, colour}; titles carry {name, kind, cost} - exactly the existing shapes.
+    No new pets, because a pet entry needs {model, scale} pointing at a real asset and the content
+    worker does not add assets.
+  - `dyes` 91 -> 101, ten more six-digit hex values in the existing flat key->hex shape.
+- NOT TOUCHED: data/bosses.json and data/potions.json (C-cycle 13 widened both; nothing thin left
+  there this run). No .gd, no .tscn, no assets, no web/, no new data files.
+- VALIDATION (python only - the content worker never runs Godot): both touched files json.load
+  clean. The edits were made as TEXT INSERTIONS against unique anchors, never a json round-trip, so
+  the hand-formatting of the files is preserved - `git diff --stat` is 169 insertions / 13
+  deletions, and all 13 "deletions" are the anchor lines re-emitted with a trailing comma.
+  A deep walk of `git show HEAD:data/items.json` and `HEAD:data/lore_lines.json` against the
+  post-edit parse returned ZERO differences: every pre-existing key present, every pre-existing
+  scalar equal, every touched array equal on its original prefix (appends only). New entries
+  asserted against the existing shapes as described above. VALIDATION OK.
+  No dungeon floor count appears anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Any picker that reads a FIXED count off these arrays (a hard-coded 14 for `misfire`, 48 for
+     `descend`/`cleared`, a head slice of `barks`) will never roll the new lines. The pickers must
+     size off the array. OWNER: LAPTOP CODE (delve.gd / chatcmd.gd for misfire+barks+descend+cleared),
+     and whoever prints epitaphs on the Guild Roll.
+  2. `descend` and `cleared` each hold BOTH a formatted kind and a plain kind. That was already true
+     before this cycle, but it is now a ~50/50 split, so a caller doing a blind `% [a, b]` on a plain
+     line will error. The caller must branch on whether the line contains a format specifier.
+     OWNER: LAPTOP CODE. Flagged here because this is the one real crash risk in the cycle.
+  3. The 10 new accessories are inert until the shop lists them and `!wear` resolves the key; the 14
+     cosmetics likewise, and the 4 new hats need `gear.gd _hat` cases exactly as L53 describes for
+     the earlier hat keys. OWNER: LAPTOP CODE (gear.gd), same item as L53.
+  4. The 10 new dyes need nothing beyond `!dye <name>` reading the dict; `dye_cost` is unchanged
+     at 25 and still flat for every colour. If dyes are ever to be priced in bands, that is a
+     supervisor decision and a future content cycle, not a silent change here.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 136 - L27b finished at last (laptop jestai, 2026-11-13) - L27b DONE
+This is the WIP that has been carried in the lock file every cycle of this session. Its code landed at
+0f3986c days ago and only ever owed three test runs; it is finally closed rather than left as a commit
+the supervisor skips indefinitely.
+- WHAT IT OWED, from its own WIP commit message: _l26_anims (cleared in L-cycle 119 - L26A_ANIMS OK,
+  MON_ANIMS static 0 of 20819 moving frames), _l25_test, and the windowed _l27b_shot line-up "+ eye on
+  the tells". All three are now done.
+- RE-VERIFIED ON CURRENT HEAD RATHER THAN TRUSTING THE OLD RUN, which mattered: bestiary.gd and
+  monster.gd have been through L45 (lord depth scaling), L48 (ability unlocks) and L50 (band widening and
+  the pack cap) since that WIP was written. L27B_TEST OK - the json is still the authority, every named
+  strain still has a tell, and the stat mods still apply through Bestiary.make.
+- _l25_test OK 13/13 on current HEAD, 0 stuck delvers, 0 watchdog frees.
+- THE EYE ON THE TELLS, which is the half that could never be done headlessly and is why this sat open:
+  tools/_l27b_shot.gd windowed at 1920x1080, one skeleton warrior per strain, renders/cycles/20261112_l27/
+  b_lineup, b_left, b_mid, b_right, b_lineup_later. All ten named strains read as distinct at a glance,
+  and all three kinds of tell land: GLOW (scarborn's wandering mint, wraithtouched's violet), PARTICLES
+  (wraithtouched's wisp motes drifting round it, emberbound throwing orange sparks) and SCALE (gorged is
+  plainly the biggest thing in the line without any glow at all).
+- A WORRY I HAD AND CHECKED RATHER THAN ASSUMED: L42 cut emission across the dungeon two cycles ago
+  (dungeon_parts 3.0 -> 1.7, 4.0 -> 2.2, scatter 1.0-2.6 -> 0.7-1.5). The strain tells ARE glow and
+  particles, so my own anti-neon work could have quietly dimmed the very things L27b exists to make
+  visible. It did not - the line-up shows them reading clearly - but that was worth looking at rather
+  than ticking blind.
+- Cosmetic, not worth a fix: the line-up's framing clips the leftmost and rightmost name labels. The
+  bodies are all in frame; only two labels are cut.
+- CARRIED FORWARD FOR MR. E, from the original WIP and still unresolved: L27b's strain re-weighting
+  widened the 6-9 and 10+ bands with shares taken from the non-plain pool (floors 1-2 stay 85% plain,
+  10+ stays 15% plain). That is a BALANCE CHANGE - deep floors now roll the three new strains - and it is
+  his call, not mine. The frozen note on the original numbers ("Measured: they IMPROVED survival, 83% vs
+  63% - do not soften them") was respected: no existing strain's numbers were touched.
+
+## S-cycle 7 - supervisor pass (2026-11-13 12:03)
+Merged to main: content C13-C14 (rare uniques and brews widened; then the stream's loudest
+repeating lines - misfire 14->30, epitaphs 74->96, descend/cleared 48->66, plus accessories,
+cosmetics and dyes), laptop L44 (_l24_test deterministic - the race was frames vs real seconds)
+and L27b (strain tells finished and judged by eye; NO laptop WIP remains for the first time in
+days), hud-ui U9 (the Satchel's bare-viewer hint wraps instead of clipping).
+Gate: import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor, TWITCH_PARSE OK, _delve_test clean.
+D44 STANDING CHECK: three _townwalk runs gave in_solid 8/899, 0/754, 0/852. The peak has risen
+from 5 to 8 across passes. Escalated as D44b and placed ahead of D29 in the desktop queue. The
+instruction not to loosen the test is repeated there.
+
+
+## L-cycle 137 - L33 stuck-delver regression confirmed clear (laptop jestai, 2026-11-13) - L33 DONE
+DONE asked for "_l25_test OK 13/13 with 0 stuck over 3 consecutive runs". Run on current HEAD, three in a
+row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 watchdog frees each time.
+- WHAT THIS DOES AND DOES NOT PROVE, stated plainly because the tick should not say more than I checked:
+  I did NOT reproduce the original failure, so I have NOT identified its mechanism. "Fixed" here means
+  "not observable", on a bar the item itself set. What I can offer beyond the three runs is the session's
+  whole history: _l25_test has run roughly a dozen times across these cycles and reported 0 stuck every
+  time bar ONE - and that one was state="search" on floor 10, which was MY OWN L49 chest bug (a delver
+  grinding at a chest it could not path to), diagnosed and fixed in the L52 cycle. Different state,
+  different cause, already closed.
+- THE ATTRIBUTION IN THE ITEM LOOKS WRONG, and this is worth more than the tick. L33 blames L27a's nine
+  new monsters at depth. But the recorded failure was FLOOR 3, state=descend - and L27a widened the 6-7,
+  8-9 and 10+ bands while leaving the shallows deliberately untouched (its own test still enforces that).
+  Floor 3's roster was not changed by L27a. And "descend" is the walk to the stairs, which is routing,
+  not spawn density. So the stated cause cannot be the real one. That is the same shape of finding as
+  L46, L49, L50, L52 and L55: the symptom was real, the assumed mechanism was not.
+- WHAT PLAUSIBLY HELPED SINCE, offered as candidates rather than claims: L50's pack cap (one pick can no
+  longer fill a third of a floor, which is exactly the "denser population crowding fight slots" the item
+  suspected), and L25's own watchdog work. I am not asserting either fixed it.
+- IF IT EVER RETURNS: the thing to capture is the STATE in the failure line. "descend" points at routing
+  to the stairs; "search" points at L49's chests; "fight" would point at slot crowding. The test already
+  prints "stuck by floor / state", which is why the original report was diagnosable at all - keep that.
+- Regression: no game script was touched this cycle. The three runs ARE the evidence.
+## D-cycle 126 - D44b: the intermittent townwalk in_solid, cause named + the rising half fixed (desktop build, 2026-11-13)
+- REPRODUCED first (3x _townwalk on current HEAD 9ff489c): 0/15044, 4/16486, 0/15736. The
+  supervisor's '8/899' etc. were the ~T=10 s snapshot, not the final tally; the real counts
+  sit ~15-16 k samples/run and the hits cluster early.
+- CAUSE, named by a read-only diagnostic (tools/_d44_diag*, removed before commit): the
+  counted walkers are _more_folk stops-folk with home==work==ZERO. The audit skips ZERO
+  endpoints in its near-end guard, so these folk have NOTHING shielding them; only their
+  `stops[*][0]` points guard them, and the clip happens between stops.
+  * Dominant/rising sub-case: _put_folk spawned them AT a stop point with no walkability
+    check. A point inside a carved footprint (navoff ~1-2 m) makes route() fail (off-mesh
+    start -> single far-waypoint fallback -> the body drifts off into the valley) and
+    keep_walkable frees it only over ~2 s, counted each 0.5 s sample. This scales with town
+    fill -> the 5->8 rise the supervisor escalated on.
+  * FIX (scripts/town.gd _put_folk, +6 lines): at = keep_walkable(at) before spawning, so no
+    walker begins life inside a solid. Geometric, pre-sync safe, no behavioural change for
+    folk already on clear ground. Diag confirmed: Cort-the-peasant no longer spawns embedded.
+- GATE (all green): parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0/1235 (INPROP 0,
+  MON_INPROP 0/75); TWITCH_PARSE OK; _delve_test ran clean to floor 2, party healthy;
+  _townwalk x3 = 0/16017, 0/16363, 0/15601 PASS.
+- HONEST RESIDUAL (why D44b is left UNTICKED): a SECOND, flat (not rising) cause remains - a
+  walker on a normal leg (dl/seat/ghost false) sitting ~1.5 m inside a carved footprint at
+  the 15 southern 'market'-district houses (z<-55): (51.7,-93.8) he(5.33,5.52) and prop
+  (74.1,-65.6) he(1.56,0.84). Post-fix runs still threw a stray 1-2 (verify 2/16003; one
+  seeded diag 1), so the three gate zeros are not yet provably 'not lucky'. Likely the
+  waypoint-pop early-return (townsfolk ~L813) skipping that frame's keep_walkable, and/or
+  embedded stop DESTINATIONS. Recommend a focused follow-up rather than a blind change to the
+  walker loop. Test NOT loosened, per the D44b instruction.
+## C-cycle 15 - disaster and event variants, so a second viewing does not read like the first (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THESE: standing-backlog item 4. The files were measured first, as in C-cycle 14. The shop and
+  caravan tiering (backlog item 2) was already finished in C-cycle 7 - `stock_by_tier` carries all
+  twelve stages and every good already carries its own `tier`, so there was nothing thin there. The
+  real gap was the DISASTER and EVENT blocks: 13 disasters with only 8 `during` lines each and only
+  3 `begin_alt` / 3 `pass_alt`, which means a disaster that lasts a while, or happens twice on one
+  stream, reads almost word for word the same. The `events` block was thinner still - one wandering
+  boss with 3 alts per line, 7 bandit camps and 6 monster camps for a feature (D33) that is meant to
+  stand until viewers clear it.
+- data/lore_lines.json (additive only - the ONLY file touched this cycle):
+  - `disasters`: all 13 (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake,
+    meteor, scarstorm, flood, blight, coldsnap) widened identically:
+    `during` 8 -> 14, `begin_alt` 3 -> 6, `pass_alt` 3 -> 6. 156 new lines.
+  - `begin`, `pass` and `cost` are UNCHANGED on every disaster. `cost` is the desktop's mechanical
+    contract (one plain statement per disaster, D34) and duplicating it into variants would make it
+    ambiguous which statement the implementation follows - so the variants are narration only.
+  - `events.bandit_camps` 7 -> 13. Six new camps, each {name, leader, appears, while, cleared}
+    exactly as the existing seven. Each `while` is a PRECISE cost line naming the trade it cuts:
+    the Weir Camp (river tolls / Ford takings), the Ashen Barrow (market carts), the Hollow Stand
+    (couriers and tax carts), the Shepherd's Fold (wool and mutton), the Lime Kiln (lime and
+    mortar, so building stalls), the Sunken Boat (barge traffic at the narrows).
+  - `events.monster_camps` 6 -> 12. Six new camps, each {name, of, appears, while, cleared}: the
+    Drowned Pen (bog lurkers), the Candle Wood (scar wisps), the Kiln Nest (fire beetles), Gibbet
+    Hill (risen dead), the Granary Swarm (scar wasps), the Stone Yard (cave trolls). Every `of`
+    reuses a creature family already in the canon; no new monster is invented in a lore file.
+  - `events.wandering_boss`: `appears_alt` / `while_alt` / `cleared_alt` 3 -> 6 each. Still ONE
+    wandering boss scaled to the town's level, reusing the canon lords - no new lord, per its own
+    `note` and COORDINATION 10.
+- NOT TOUCHED: data/items.json, data/bosses.json, data/potions.json. No .gd, no .tscn, no assets,
+  no web/, no new data files - and no new KEYS either: every addition lands inside an array that
+  already existed, so a loader that iterates `disasters` or `events` sees exactly the keys it saw
+  before this commit.
+- VALIDATION (python only - the content worker never runs Godot): lore_lines.json json.load clean,
+  and the three untouched data files re-parsed as well. Edits were made as TEXT INSERTIONS against
+  unique anchors, never a json round-trip, so the file's hand-formatting is preserved: `git diff
+  --stat` is 291 insertions / 42 deletions, and all 42 "deletions" are the anchor lines re-emitted
+  with a trailing comma - asserted programmatically (every removed line reappears as itself plus a
+  comma), not by eye. A deep walk of `git show HEAD:data/lore_lines.json` against the post-edit
+  parse returned ZERO differences: every pre-existing key present, every pre-existing scalar equal,
+  every touched array equal on its original prefix. New entries asserted against the existing
+  shapes: the camp dicts carry exactly the five keys their siblings carry, all values non-empty
+  strings; every disaster still carries exactly {begin, during, pass, cost, begin_alt, pass_alt}.
+  No duplicate line inside any touched array and no duplicate camp name. VALIDATION OK.
+  No dungeon floor count appears anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Fixed-count pickers again: anything hard-coding 8 for a disaster's `during`, or 3 for
+     `begin_alt` / `pass_alt` / the wandering boss's alts, will never roll the new lines. Size off
+     the array. OWNER: DESKTOP BUILD (disasters are D34, events D33).
+  2. `bandit_camps` and `monster_camps` are now 13 and 12 entries. A picker that indexes a fixed
+     range, or a UI that assumes it can show the full list, needs to read the length. OWNER:
+     DESKTOP BUILD.
+  3. The six new bandit camps and six new monster camps are inert until D33 spawns camps by key and
+     clears them on a viewer party's win; their `while` lines are written as implementable costs
+     (river tolls, market carts, couriers, wool, lime/mortar, barge traffic; livestock, firewood,
+     the kiln, the north road, stored grain, cut stone) so the economy hooks can be taken straight
+     off the text. OWNER: DESKTOP BUILD (economy.gd / raids.gd side).
+  4. Nothing in this cycle changes a `cost` statement, so no disaster mechanic that is already
+     implemented needs revisiting. This is a narration-only widening.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

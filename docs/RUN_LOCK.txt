@@ -1,1 +1,1 @@
-IDLE 2026-11-13 11:21 - desktop build: T3 reply path made loud + per-user dedup; gate clean; next D29 (town silence)
+IDLE 2026-11-13 13:07 - desktop build: D44b embedded-spawn fixed (committed); residual southern-house route-hug left for next cycle

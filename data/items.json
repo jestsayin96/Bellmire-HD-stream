@@ -87,7 +87,17 @@
     "fordwarden_boots": {"name": "Fordwarden Boots", "slot": "boots", "cost": 350, "speed": 1, "flavour": "Wet to the knee for thirty years and never once lost."},
     "quarry_gloves": {"name": "Quarryman's Gloves", "slot": "gloves", "cost": 240, "dmg": 1, "flavour": "Stone taught these hands, and stone does not teach gently."},
     "host_amulet": {"name": "Rattling Host Amulet", "slot": "amulet", "cost": 430, "hp": 16, "flavour": "Strung with teeth that stopped chattering when the Host did."},
-    "tollkeep_ring": {"name": "Tollkeep's Ring", "slot": "ring", "cost": 390, "hit": 1, "flavour": "Sedge took a toll on that road. Somebody took the ring."}
+    "tollkeep_ring": {"name": "Tollkeep's Ring", "slot": "ring", "cost": 390, "hit": 1, "flavour": "Sedge took a toll on that road. Somebody took the ring."},
+    "lampfast_ring": {"name": "Lampfast Ring", "slot": "ring", "cost": 340, "ac": 1, "flavour": "Lamplighters learned early that steady hands outlive quick ones."},
+    "chalkline_gloves": {"name": "Chalkline Gloves", "slot": "gloves", "cost": 300, "hit": 1, "flavour": "Chalk in every seam. The marks they left are still saving strangers."},
+    "stairhold_boots": {"name": "Stairhold Boots", "slot": "boots", "cost": 420, "speed": 1, "flavour": "They held a stair long enough for four people to use it."},
+    "secondflask_amulet": {"name": "Second Flask Amulet", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "For the flask you keep back. There is always a second flask."},
+    "rollkeeper_ring": {"name": "Roll-keeper's Ring", "slot": "ring", "cost": 410, "saves": 1, "flavour": "The guild wears one to write the names. It is heavier than it looks."},
+    "backstair_cloak": {"name": "Backstair Cloak", "slot": "cloak", "cost": 450, "ac": 1, "flavour": "Grey as a wall and twice as uninteresting. That is the whole trick."},
+    "pitwalk_boots": {"name": "Pitwalker's Boots", "slot": "boots", "cost": 380, "saves": 1, "flavour": "Thin soles on purpose - you want to feel the floor lie to you."},
+    "mender_wraps": {"name": "Mender's Wraps", "slot": "gloves", "cost": 330, "hp": 10, "flavour": "Stained past washing, and every stain walked back out of the scar."},
+    "deeplamp_amulet": {"name": "Deep-lamp Amulet", "slot": "amulet", "cost": 470, "saves": 1, "flavour": "A thumb of lamp-glass that has been down further than most men."},
+    "warhorn_mantle": {"name": "Warhorn Mantle", "slot": "cloak", "cost": 500, "dmg": 1, "flavour": "Cut from a gate banner the raiders never got to take down."}
   },
   "cosmetics": {
     "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a"},
@@ -259,7 +269,21 @@
     "title_fenwalker": {"name": "the Fenwalker", "kind": "title", "cost": 110},
     "title_quarried": {"name": "the Quarried", "kind": "title", "cost": 120},
     "title_hostsilenced": {"name": "who Silenced the Host", "kind": "title", "cost": 260},
-    "title_measuretwice": {"name": "Twice-Measured", "kind": "title", "cost": 140}
+    "title_measuretwice": {"name": "Twice-Measured", "kind": "title", "cost": 140},
+    "chalk_cap": {"name": "Chalker's Cap", "kind": "hat", "cost": 70, "colour": "d8d4c6"},
+    "stairhold_helm": {"name": "Stairholder's Helm", "kind": "hat", "cost": 140, "colour": "6a6d72"},
+    "mender_coif": {"name": "Mender's Coif", "kind": "hat", "cost": 110, "colour": "b8c0b2"},
+    "pitwalk_hood": {"name": "Pitwalker's Hood", "kind": "hat", "cost": 120, "colour": "3a3630"},
+    "banner_stair": {"name": "Stairhold Banner (grey-blue)", "kind": "banner", "cost": 100, "colour": "5a6a78"},
+    "banner_chalk": {"name": "Chalkline Banner (white)", "kind": "banner", "cost": 90, "colour": "ded9c8"},
+    "banner_mender": {"name": "Menders' Banner (pale green)", "kind": "banner", "cost": 95, "colour": "9fb49a"},
+    "title_stairheld": {"name": "who Held the Stair", "kind": "title", "cost": 320},
+    "title_chalker": {"name": "the Chalker", "kind": "title", "cost": 260},
+    "title_secondflask": {"name": "of the Second Flask", "kind": "title", "cost": 280},
+    "title_lastup": {"name": "Last Up the Stair", "kind": "title", "cost": 340},
+    "title_pitwalker": {"name": "the Pitwalker", "kind": "title", "cost": 300},
+    "title_mender": {"name": "the Mender", "kind": "title", "cost": 290},
+    "title_countedback": {"name": "Counted Back", "kind": "title", "cost": 310}
   },
   "dyes": {
     "black": "2a2a2e", "white": "e8e4da", "red": "a02a26", "blue": "2a4aa0", "green": "2a7a3a",
@@ -318,7 +342,17 @@
     "wickash": "4a4238",
     "fordmud": "4a3e2e",
     "crierred": "b8303c",
-    "glasswort": "6a8a72"
+    "glasswort": "6a8a72",
+    "chalk": "e2dccb",
+    "stairgrey": "6d7278",
+    "lampglass": "cdbb86",
+    "menderspale": "a8bda3",
+    "pitdark": "2f2b26",
+    "banneriron": "55606b",
+    "oilcloth": "7a6b4a",
+    "waterline": "4e5f5a",
+    "rollink": "23262c",
+    "warhorn": "8c6a3a"
   },
   "dye_cost": 25,
   "shop_stock": {

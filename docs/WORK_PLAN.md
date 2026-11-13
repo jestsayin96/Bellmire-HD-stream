@@ -647,3 +647,50 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
 
 CHANGELOG 2026-11-13 01:41 (supervisor): added D41, D42, L53-L56; reframed D30 and L52 after the census
 disproved their premise; noted the C-side of D37 is delivered. C-cycles 1-3 merged to main.
+
+# Phase N - Mr. E's rulings, Nov 13 01:50. The d20 becomes the resolution mechanic for viewer spending.
+
+HIS WORDS: "we can do the hub for individual rolls, and then when it comes to making upgrades to the
+town depending on channel points or bits spent they can roll the die to make events happen, upgrade
+buildings, etc."
+
+SUPERVISOR ARCHITECTURE RULING - READ THIS BEFORE BUILDING ANY OF IT. The roll is resolved IN THE
+GAME, never on the website. Viewer redeems channel points or cheers bits -> Twitch EventSub reaches
+the game -> the GAME rolls the d20 and applies the outcome -> it is Chronicled and appears in the
+60 s snapshot -> the hub DISPLAYS the roll and its result. The hub therefore stays READ-ONLY and
+this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do not design one.
+
+- [ ] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+      spends channel points or bits to attempt something - upgrade a building, trigger an event,
+      push a proposition - and a d20 roll decides how it goes. D&D consequences: a high roll does it
+      well, a low roll does it badly or backfires, and the Chronicle says so in plain language.
+      Outcome tiers must be readable to someone who has never played D&D. The propositions the
+      content writer is authoring (lore_lines "propositions", C-cycle 4) are the menu this draws on.
+      Owner: DESKTOP BUILD (owns the Twitch layer, town and economy).
+      DONE: a viewer redemption rolls on stream, the town visibly changes, and the Chronicle explains
+      why - with at least one failure outcome demonstrated, not only successes.
+
+- [ ] H9. THE HUB DIE SHOWS THE ROLL. The hub's existing die section animates and displays rolls read
+      FROM THE SNAPSHOT - individual rolls, and the outcome of a T5 viewer roll. Read-only: the page
+      never initiates or submits a roll. Keep every HUB_SECURITY invariant (el()/textContent, no
+      snapshot value as URL/src/href/style, CSP unchanged). Owner: HUB BUILDER.
+      DONE: a roll and its outcome render on the hub, hostile-name test still passes.
+
+- [ ] D43. SUBSCRIBER ROSTER FROM THE TWITCH API (Mr. E approved). Twitch sends subscription EVENTS,
+      not a roster, so the subscriber lane currently only knows about subs that happen while live.
+      Fetch the real roster via Helix with the broadcaster token and the channel:read:subscriptions
+      scope, refresh it periodically, and expose it for the HUD worker's subs lane. Token in user://
+      NEVER in the repo. Owner: DESKTOP BUILD (owns the Twitch layer). UNBLOCKS L35.
+      NEEDS MR. E: authorize the broadcaster token with channel:read:subscriptions.
+
+- [ ] L35 note: the subs lane stays as built (rotates through subs seen this session) until D43
+      lands, then reads the real roster. Not a defect in the HUD worker's implementation.
+
+- [ ] L51 note: the "d20 redesign" part of L51 is now T5 + H9 and leaves the HUD worker's lane. What
+      REMAINS in L51 for the HUD worker: equipment with its buffs/debuffs, the viewer's inventory,
+      and selling - built as a NEW self-contained panel inside the seven HUD files. The unit frame
+      (rts_camera.gd) and the !hero sheet (chatcmd.gd) stay with their owners; if the panel needs
+      state those files hold, flag it and the owner exposes it. Do not edit another worker's file.
+
+CHANGELOG 2026-11-13 01:57 (supervisor): added T5, H9, D43 from Mr. E's rulings; L51 narrowed and its d20 part
+moved to T5/H9; L35 unblocked by D43. The hub remains read-only - the roll resolves in-game.

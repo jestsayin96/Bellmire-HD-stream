@@ -1,1 +1,50 @@
-RUNNING 2026-11-13 14:20 - L29b rare uniques (spawn rule + visible modification + better loot)
+IDLE 2026-11-13 14:55 - L29b DONE and pushed (L-cycle 140).
+L29b note: MEASURED FIRST and it moved the item for the eighth time this session. bestiary.gd already
+had a UNIQUES table - but those are the L2 FLOOR-uniques (new named things on an ORDINARY floor), the
+opposite of what L29b asks for. The real gap was where the supervisor pointed: the content writer had
+WRITTEN all 78 variants in data/bosses.json and no code read that file. Now read, never copied, no
+parallel table beside it, and data/bosses.json NOT touched. 78 load, 0 orphaned, all eight lords.
+Verified in a REAL soak, not just unit tests: "The Rattling Host, Widowed" rose on floor 5 of a real
+delve and the hoard was paid out. L29B_TEST OK (23 checks, 0 failed).
+
+*** NEW WORK ARRIVED IN THIS MERGE - THE QUEUE IS NOT EMPTY ***
+  origin/main brought COORDINATION 13 + Phases X/Y/Z. L63 (strip the Satchel, answer the feed_hud
+  question) reads as LAPTOP CODE. L61/L62/D45/D46/D48/H10/H11 read as other workers'. NOT STARTED -
+  the laptop should take L63 next unless the supervisor says otherwise.
+
+*** TWO UNOWNED FILES STILL - THE SUPERVISOR NEEDS TO ASSIGN BOTH ***
+  scripts/boss_bar.gd  - blocks the "boss_bar shows phase" half of L29a. Everything it needs is live
+    (Monster.phase, Monster.phase_count, phase_changed). L29b deliberately used the "rare" flag that
+    boss_bar ALREADY reads, so the rare uniques reach the stream without touching it. I did not touch it.
+  scripts/adventurers.gd - the NPC band's _kit_up, raised during L55. Still unassigned.
+  Neither appears in COORDINATION 11.2 under any worker.
+
+RAISED BY L29b, NOT CHANGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its
+BODY's speed and Nightwing's canon 6.6 has never reached the mover. A unique with a written speed now
+does set it. Fixing it for plain lords would change how EVERY lord moves mid-stream-cycle, so it is
+raised here rather than slipped into L29b. Supervisor's call.
+
+A PRE-EXISTING BUG THE SOAK FOUND AND I FIXED (my file): delve.gd _loot formatted every "cleared" line
+with % floor_no, but a written line need not carry a %d and one does not ("Bellmire gets a tale; the
+scar gets nothing"), so it threw a String formatting error every time that line came up. The content
+file was not at fault and was not touched.
+
+WHAT IS LEFT THAT IS LAPTOP-OWNED: L63 (new, from this merge), L29c (set-piece encounters).
+L30a-c and L31 lean on data/items.json and HUD/UI files that belong to OTHER workers now, so they
+likely need REASSIGNING or rewriting before anyone can take them.
+WAITING ON MR. E - eight decisions, all in PROGRESS with the exact dial, none resolved unasked: L41
+(confection?), L42 (lit stone?), L27b strains, L45 deep lords, L47 break-off, L48 levelling, L54
+Scarwater, L55 the smith.
+NOT MINE: the supervisor's DESKTOP cross-check of _l32_test.
+_l32_test reports OK (100 checks): base 38.2 / idle 27.3 / paid 16.1. The base >= 10 and min-sample
+asserts STAY.
+STANDING NOTES: (1) check INDENT STYLE before editing. (2) No backticks and no '"'"' escaping in a
+double-quoted shell -m or sed. (3) When a table names things, TEST each one does something. (4) MEASURE
+BEFORE FIXING - eight items this session had a real symptom or premise that did not survive checking.
+(5) Shot tools overwrite committed render refs - restore them. (6) No allocating helper in a per-frame
+loop. (7) A test measuring in FRAMES something that lives in SECONDS is a flake waiting to happen.
+(8) Do not count Godot nodes BY NAME - duplicate siblings get renamed; count by a property. (9) A node
+added during a SceneTree tool's _initialize NEVER enters the tree, so _ready never fires - build nodes in
+_process or the object looks broken when the harness is at fault. (10) A SOAK that has to walk somewhere
+must be SEEDED there (Delve.start_floor) - one that runs out of frames short of the thing it is testing
+reports a product bug that is not there.

@@ -1,1 +1,1 @@
-IDLE (L32a, L32b, L27a done - L-cycles 116-118)
+RUNNING 2026-11-12 21:20 - L27b STRAINS (data/strains.json, coverage + visual tells)

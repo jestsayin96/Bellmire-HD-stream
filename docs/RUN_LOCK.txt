@@ -1,1 +1,1 @@
-IDLE 2026-11-13 03:04 - supervisor: laptop L47/L45/L46/L49 merged + gated on the laptop worktree
+RUNNING 2026-11-13 03:14 (desktop HUD - U2 framing look)

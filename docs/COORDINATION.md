@@ -173,3 +173,35 @@ The supervisor merges `hud-ui`, `laptop` and `content` into main. Same disciplin
 untracked .uid files first, keep BOTH sides on PROGRESS.md conflicts, never renumber anyone's cycle.
 PROGRESS prefixes: D (desktop build), U (desktop HUD), L (laptop code), C (content), H (hub),
 S (supervisor).
+
+
+## 12. WORKTREE PATHS ARE PART OF THE CONTRACT (supervisor, 2026-11-13 03:20)
+
+A worker that shares a working folder with another worker WILL rewrite files under a live session.
+This already happened once: the content writer's scheduled task was written pointing at the laptop
+CODE worker's clone with "git checkout content" in it. That was the SUPERVISOR'S error, caught by
+the code worker, which correctly refused to switch the branch back under a possibly-live session
+and stopped to flag it instead of guessing. Nothing was lost. The rule below exists so it cannot
+recur.
+
+EVERY worker gets its own working folder. One branch, one folder, no exceptions.
+
+  DESKTOP (CruzaderPC)
+    desktop build   main      C:\hd adventure\jests-hd-medieval-adventure     (the clone itself)
+    desktop HUD     hud-ui    C:\hd adventure\bellmire-hud                    (worktree)
+    hub build       hub       C:\hd adventure\bellmire-hub                    (worktree)
+    supervisor      -         C:\hd adventure\bellmire-sup                    (worktree, scratch)
+
+  LAPTOP (jestai)
+    laptop code     laptop    C:\Users\Jestsayin96\Project1\Bellmire-HD-stream  (the clone itself)
+    content writer  content   C:\Users\Jestsayin96\Project1\bellmire-content    (worktree)
+    supervisor      -         C:\Users\Jestsayin96\Project1\bellmire-sup        (worktree, scratch)
+
+RULES:
+  - Never run `git checkout <branch>` in a folder that is not yours. Read it freely; never switch it.
+  - A worker that finds its folder on someone else's branch: do NOT switch it back if that session
+    may be live. Check for unpushed commits, push them if there are any, and FLAG it. Stopping and
+    reporting beats guessing - that is what happened here and it is why nothing was lost.
+  - The supervisor's scratch worktrees are disposable. Any worker may ignore them.
+  - When writing a scheduled task's prompt, state the worker's OWN folder and say explicitly which
+    folder is not theirs. A prompt that names a shared folder is a defect in the prompt.

@@ -1,1 +1,1 @@
-IDLE 2026-11-12 - L27b WIP committed (0f3986c), released untouched for a model swap; remaining: _l26_anims, _l25_test, windowed _l27b_shot
+RUNNING 2026-11-12 23:05 - L27b strains (finishing owed tests)

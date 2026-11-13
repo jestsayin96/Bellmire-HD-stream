@@ -2015,3 +2015,24 @@ L32b's calm pacing is KEPT; only the shape and the panes' geometry changed.
   (raid 0/4001); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR.
 - Shot sweep tools/_d27_shot.gd -> renders/cycles/20261112_d27/ (08 overcast+clear, 12 clear+overcast, 18, 22,
   plots_wide, back_grass). Backup scripts/daylight.gd.bak_d27 (not committed; town.gd.bak_d25 already made this run).
+
+## D-cycle 122 - D20b crowd reactions (desktop CruzaderPC, 2026-11-13) - D20b DONE
+- A raid is now a town-wide ALARM the townsfolk read: town.is_raid_on() reads raids._live (set while raiders are in the
+  valley). New townsfolk._civic_flee runs every frame - an ordinary body (rank<0, not the watch/chief, not a tower lookout,
+  not a posted stallholder, not a raider) drops its routine and RUNS (the D17b gait picks the run clip from a 1.7x step) for
+  the nearest cover: its own home, else the nearest built house via new town.flee_refuge(). With no interior point it ducks
+  inside at the doorway threshold, so the street truly clears rather than milling at the door. It cowers indoors until the
+  all-clear, then eases back out on a staggered wait. Heroes/guards/cavalry/chief keep fighting (raids.gd owns them).
+- New FESTIVAL beat: town._festival_pass() now and then (not during a raid or deep night) declares a festival at the market
+  square for ~55-85 s, Chronicled ("A festival gathers in the market square..." / "...winds down"). townsfolk._maybe_gather
+  draws idle folk to the square to mill and cheer (a "festival" idle act). Market bustle stays D20a's midday market errands.
+- town.gd: is_raid_on/is_festival/flee_refuge/_festival_pass + festival/festival_at/_fest_t/_fest_left/fests; _process calls
+  _festival_pass. townsfolk.gd: _flee_ok/_civic_flee/_maybe_gather, _fleeing/_at_fest/_flee_k/fled/gathered; flee step uses
+  _flee_k; _idle_acts cheers at the festival.
+- D20B_TEST (new tools/_d20b_test.gd): force a raid -> eligible street count 120 -> 52 (min), Townsfolk.fled>0; clear it ->
+  folk come back out (101); force a festival -> near-square count 3 -> 42, Townsfolk.gathered>0. PASS.
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/954 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/14380, raid_in_solid 0/2095); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR; D20B_TEST PASS.
+- New tools: _d20b_test.gd, _d20b_shot.gd. LOOK renders/cycles/20261113_d20b/ (1_busy_midday, 2_raid_streets_cleared,
+  3_festival_crowd - the square thins under the raid and re-gathers for the festival). Backups scripts/town.gd.bak_d20b,
+  scripts/townsfolk.gd.bak_d20b (not committed).

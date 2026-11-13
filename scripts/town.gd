@@ -141,6 +141,14 @@ var roster: Roster
 var chat: ChatCmd
 var heroes := {}             # user_id -> HeroBody
 var feed: Array = []
+# D20b: civic moods the townsfolk read. A raid clears the streets - ordinary
+# folk flee indoors (is_raid_on reads raids._live); a festival gathers them in
+# the market square. Market bustle is D20a's midday errands; the festival is new.
+var festival := false
+var festival_at := Vector3.ZERO
+var _fest_t := randf_range(150.0, 260.0)
+var _fest_left := 0.0
+static var fests := 0            # tools/_d20b_test.gd
 ## D6: Bellmire's named people and their days (scripts/notables.gd)
 var notables: Notables
 ## the valley's stock (Economy: a port of the old Sim). Delves bring ore,
@@ -3328,11 +3336,60 @@ func go_fish(hero_name: String, luck := 0, lure := 0, hook_bonus := Fishing.DOCK
         _on_caught(res["item"], hero_name)
     return res
 
+## D20b: the signals the townsfolk read each frame.
+func is_raid_on() -> bool:
+    return raids != null and bool(raids._live)
+
+func is_festival() -> bool:
+    return festival
+
+## the nearest house a frightened body with no home of its own can duck into -
+## a built residential plot's door + just-inside point
+func flee_refuge(pos: Vector3) -> Array:
+    var best := INF
+    var out: Array = []
+    for pl in plots:
+        if pl.has("back") or pl.has("shop") or pl.has("landmark") or pl.has("special") \
+                or pl.get("unbuilt", false) or not pl.has("door"):
+            continue
+        var d: Vector3 = pl["door"]
+        var dist := Vector2(d.x - pos.x, d.z - pos.z).length()
+        if dist < best:
+            best = dist
+            out = [d, pl.get("door_in", Vector3.ZERO)]
+    return out
+
+## D20b: a festival now and then draws the town to the square (never during a
+## raid or the deep night). Townsfolk._maybe_gather reads is_festival/festival_at.
+func _festival_pass(delta: float) -> void:
+    if economy == null:
+        return
+    if festival:
+        _fest_left -= delta
+        if _fest_left <= 0.0 or is_raid_on():
+            festival = false
+            feed.append("The festival in the square winds down; folk drift back to their work.")
+        return
+    if is_raid_on() or economy.is_night():
+        return
+    _fest_t -= delta
+    if _fest_t <= 0.0:
+        _fest_t = randf_range(260.0, 420.0)
+        var mk: Vector3 = _market_pos
+        if mk == Vector3.ZERO:
+            return
+        festival = true
+        festival_at = mk
+        _fest_left = randf_range(55.0, 85.0)
+        fests += 1
+        feed.append("A festival gathers in the market square - music, stalls, and a crowd!")
+
 func _process(delta: float) -> void:
     if economy:
         _caravan_pass(delta)
     if chat:
         _viewer_muster(delta)
+    _festival_pass(delta)
     if persist:
         _save_t -= delta
         if _save_t <= 0.0:

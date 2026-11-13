@@ -423,7 +423,13 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       D20A_TEST PASS (market 8, haggle 33, midday-square 358; tavern 5 + eat; notables reached 17/24; 0 empty clips).
       parse 0, OFFFLOOR 0/1027, TWITCH_PARSE OK, _townwalk in_solid 0/18496 stuck 0, _delve 0 SCRIPT ERROR. Night-home
       (homed folk walk the compressed night, pre-existing) out of scope. renders/cycles/20261112_d20a.
-- [ ] D20b. CROWD REACTIONS: raid sends civilians fleeing/indoors; market bustle by hour; festival gathers. DONE: raid in a soak clears the streets.
+- [x] D20b. CROWD REACTIONS: raid sends civilians fleeing/indoors; market bustle by hour; festival gathers. DONE: raid in a soak clears the streets.
+      DONE D-cycle 122: a raid is now an ALARM the townsfolk read (town.is_raid_on <- raids._live). Ordinary folk (not the
+      watch/chief/lookouts/stallholders) drop their routine and RUN for cover - home, else the nearest house (town.flee_refuge),
+      ducking indoors at the threshold - so the streets clear; they cower until the all-clear, then ease back out staggered. A new
+      FESTIVAL beat (town._festival_pass, is_festival/festival_at) gathers idle folk to the square to mill and cheer. Market bustle
+      stays D20a's midday errands. D20B_TEST PASS (base_street 120 -> raid_street 52; fled OK; festival square 3 -> 42, gathered OK).
+      parse 0, OFFFLOOR 0/954, TWITCH_PARSE OK, _townwalk in_solid 0/14380 raid 0/2095 PASS, _delve 0 SCRIPT ERROR. LOOK renders/cycles/20261113_d20b.
 - [ ] D20c. ANIMALS: herds graze/drift, dogs follow, birds flock. DONE: animal-behaviour probe in a soak.
 # Phase F - magic & combat feel (town) [D21]
 - [ ] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.
@@ -528,28 +534,22 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
 - [ ] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
 
-# RAISED BY THE LAPTOP - NEEDS AN ID AND AN OWNER (the supervisor assigns IDs, COORDINATION 2)
-- [ ] (no ID yet) _l32_test's FPS GATE IS VACUOUS ON THE LAPTOP SINCE D24. Raised 2026-11-12 23:58, laptop
-      jestai, during L39 (L-cycle 120). WHAT HAPPENED: _l32_test printed "L32_TEST OK (90 checks, 0 failed)"
-      while reporting "L32_FPS base 1.0 idle 26.8 paid 18.7". Every FPS check in that tool is RELATIVE to the
-      base phase ("idle >= 65% of base", "paid >= 50% of idle"), so a base of 1.0 makes them all pass
-      trivially: the suite reported OK while the FPS gate tested NOTHING. Nothing in the tool caught it.
-      IT IS NOT L39, AND NOT "TAA IS SLOW". Every _l32 run on the laptop earlier the same day gave base
-      38.9 / 44.4 / 45.6. This was the FIRST run after merging origin/main, which brought D24
-      (project.godot [rendering]: use_taa=true, msaa_3d=1). The GRID phases are unaffected and in line with
-      history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6) - only the FULL-SCREEN base phase collapsed.
-      D24's own desktop measurement has FPS RISING 123.4 -> 131.7, so this is laptop/harness-specific, not a
-      cost of TAA as such. Most likely mechanism: _l32_test measures base by setting root.disable_3d = false
-      mid-run and sampling immediately, and TAA's history buffer for a viewport that was disabled does not
-      survive that - a harness artifact rather than the town really running at 1 FPS.
-      WHAT THE LAPTOP ALREADY DID: _l32_test now asserts base >= 10.0 FPS BEFORE the relative checks, so a
-      collapsed base FAILS loudly instead of green-lighting the suite. CONSEQUENCE: _l32_test REPORTS FAIL on
-      the laptop until the base phase is sorted. That is the honest state, not a regression - treat a red
-      _l32 on the laptop as this item, and do not let it block an unrelated laptop item.
-      WHAT IS NEEDED (owner's call): either make the base phase robust with TAA on (re-create the viewport,
-      or let TAA settle for a second before sampling, or measure base in a separate process), or drop the
-      relative base entirely and judge the grid against fixed per-machine numbers. NOTE project.godot
-      [rendering] is DESKTOP-owned - the laptop has not touched it and is not proposing to.
-      ALSO WORTH AN ID WHILE HERE: _l24_test is FLAKY - it failed 3 of 6 once ("Ash's body below is the one
-      the lane holds" plus the two checks that depend on it) and passed 6/6 on an immediate re-run with
-      nothing changed. Same class of lane/delve timing race the plan already records for its "before" check.
+# Phase K - test validity (raised by the laptop, Nov 12 23:55; IDs + decisions by the supervisor)
+- [ ] L43. _l32_test's FPS GATE IS VACUOUS (test-validity bug, OWNER: LAPTOP). The suite printed "L32_TEST OK (90 checks, 0 failed)" while reporting "L32_FPS base 1.0 idle 26.8 paid 18.7": every FPS check is RELATIVE to base ("idle >= 65% of base"), so a base of 1.0 passed them all trivially and the gate tested nothing. First seen on the run after origin/main brought D24 (use_taa=true, msaa_3d=1). Only the FULL-SCREEN base phase collapsed; grid phases are in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6) and the DESKTOP's D24 numbers ROSE 123.4 -> 131.7, so this is harness-specific, not "TAA is slow".
+      SUPERVISOR'S DECISION: (1) KEEP the relative-to-base design - it is what makes the test portable across two very different machines; fixed per-machine numbers would need tuning and would drift. Fix the MEASUREMENT, not the design. (2) After ANY change to viewport 3D state (disable_3d toggled, grid raised/lowered) DISCARD A WARM-UP WINDOW before sampling - at least ~1.0 s of real time or 60 frames, whichever is longer - so TAA's history buffer refills; the suspected mechanism is sampling immediately after root.disable_3d=false, which TAA cannot survive. (3) KEEP the laptop's new `base >= 10.0` assert PERMANENTLY - it is what caught this. NEVER revert it to make the suite green. (4) Add a second validity guard: assert each phase sampled a minimum number of frames, and print the raw per-phase FPS so a vacuous pass can never hide again. (5) ONLY IF warm-up does not restore a sane base, measure the base phase in a separate process with a fresh viewport and no toggle. (6) DO NOT touch project.godot [rendering] - it is desktop-owned, TAA stays, and the desktop's numbers improved.
+      CROSS-CHECK (either machine): run _l32_test once on the DESKTOP to see whether a collapsed base reproduces there. That distinguishes harness artifact from machine. A healthy D23 soak does NOT rule it out - D23 does not use this harness.
+      NOTE FOR EVERY RUN UNTIL THIS IS DONE: _l32_test now REPORTS FAIL on the laptop by design (the new assert). That red is THIS flag, not a regression in L34/L39, and it is not a reason to reject an unrelated laptop item.
+      DONE: base reads a sane FPS on both machines with TAA on, the relative checks are meaningful again, the base>=10 and min-sample asserts stay, and a deliberately-broken base makes the suite FAIL.
+- [ ] L44. _l24_test IS FLAKY (OWNER: LAPTOP). Failed 3 of 6 once ("Ash's body below is the one the lane holds" plus the two checks depending on it), then passed 6/6 on an immediate re-run with nothing changed - a lane/delve timing race, the same class as the "before" check already noted.
+      SUPERVISOR'S DECISION: make it DETERMINISTIC, following the precedent already set by L23 (_l20_test drives its fight and raid shots deterministically rather than hoping the timing lines up). Drive the lane/delve state the test needs instead of waiting on it. Do NOT paper over it with retries or a best-of-N: a flaky test is worse than no test, because it trains every run - and every supervisor - to ignore red. DONE: _l24_test passes 6/6 on ten consecutive runs.
+
+# Phase L - Mr. E's Nov 13 review (the stream test + his 20-point list). IDs by the supervisor.
+# URGENT - viewer-facing
+- [ ] T3. !enlist "DID NOTHING" ON STREAM + THE REPLY PATH DROPS SILENTLY (OWNER: DESKTOP - twitch_eventsub.gd is desktop-owned). Investigated by the supervisor: the COMMAND path is sound - chatcmd._enlist() cannot crash on a typo or empty args because Roster.fresh() (roster.gd L231-234) substitutes a random class/species for anything unknown. The fault is far more likely in the REPLY path, which has drop points that log NOTHING:
+      (a) twitch_eventsub.gd L580: `if dry_run_chat or offline or tokens["bot"].is_empty() or _token_dead["bot"]: return` - this returns BEFORE _send_chat(), so the "chat not sent" log on L590 never runs. The hero IS created, the answer is queued, dequeued, appended to sent_chat, then silently discarded. From chat it looks exactly like the command did nothing.
+      (b) L572-573: an identical message inside 30 s is dropped silently. Two viewers making the same mistake within 30 s ("No hero yet - type !enlist") means the SECOND viewer gets silence. Same for any repeated error text.
+      (c) chatcmd.gd L88-89: the per-user cooldown returns "" with no feedback.
+      Checked and NOT the cause at the time of the stream: the bot token was refreshed 21:07 with user:read:chat + user:write:chat and ~3.7 h of validity, and no dry_run/offline flag is set in local/twitch.cfg.
+      FIX: every one of those drop points must _say_log() its reason (which condition, which user, which text). A silently-swallowed reply is undebuggable and this class of bug will recur. Then make the duplicate guard per-user instead of global, so one viewer's repeat cannot mute another's answer.
+      DECISIVE TEST FOR THE NEXT STREAM (Mr. E): have someone type !enlist, then look at the live hub. Hero appears on the hub but no chat reply => the command works and the reply path is broken. No hero on the hub => the command never ran (chat ingest/cooldown). That single check splits the problem in half.
+      DONE: every skipped reply writes a log line naming the reason; the duplicate guard is per-user; a scripted run proves a reply either reaches chat or is logged as to why.

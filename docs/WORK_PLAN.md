@@ -1499,3 +1499,59 @@ CHANGELOG 2026-11-13 14:52 (supervisor): D52 raised CRITICAL and placed above al
 heroes do not move on command, which kills the core loop. Unified with D44/D44b/D50 as one likely
 freeze bug (agents cannot path; in_solid is its measurement). Spans desktop (nav/movement) and
 laptop (the delve command path) - both must coordinate; repro before fixing.
+
+# Phase AD - Mr. E's clips 14-29-22 / 14-30-21 / 14-31-18 transcribed (2026-11-13 14:54). Important disambiguation.
+
+- [ ] D52 (REFRAMED - the supervisor unified too fast; the new clips split it in two). THE HERO
+      THAT WON'T DELVE IS A COMMAND/STATE BUG, NOT WEDGING. Clip 14-30-21: "Mr. is already waiting
+      at the dungeon mouth. No, he's not. He's standing by the WELL in the town square." The hero
+      stands in an OPEN area (the well), not jammed against anything, and never paths to the mouth
+      after a delve order - he even re-typed Delve and it still did nothing. So the go-delve command
+      sets state WITHOUT issuing a move/destination, or the hero's state machine never transitions
+      to "travel to mouth". OWNER: LAPTOP CODE (delve.gd / roster.gd / chatcmd.gd - the delve
+      trigger and the hero's travel-to-dungeon state). Repro one hero from the delve command and log
+      whether a nav target to the mouth is ever set. THIS IS STILL TOP PRIORITY - it kills the core
+      loop. It is NOT the same as the wedging below; do not fix it as a nav problem.
+
+- [ ] D44/D50 (CLARIFIED - the WEDGING half, distinct from D52). Clip 14-31-18: "this guy is stuck,
+      he's stuck against his pumpkins." SOME agents physically wedge against props (pumpkins) and
+      freeze. THAT is the in_solid / nav-collision bug, DESKTOP-owned (town_nav.gd), the thing the
+      rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
+      different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
+      bugs, two owners, do not conflate.
+
+- [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
+      equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
+      supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
+      its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
+      that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
+      its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
+      DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
+
+- [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
+      14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
+      and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
+      the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
+      (do they come back out on a timer? the D20b flee logic already ducks folk indoors and brings
+      them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
+      recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
+      not permanently lose it.
+
+REINFORCED, not re-logged:
+  * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a
+    subscription... channel... bits?" This is the STRONGEST confirmation yet - a viewer cannot tell
+    what to spend on. Bump L62 up the HUD queue; it is core to the spend-prompt model, not polish.
+  * D46 (band panel covers the screen) - "look how much it covers, this is what I was talking
+    about." Confirmed again; already moving to the hub.
+  * D50 (NPCs idle with no purpose) - "all these people just hanging out not doing anything,
+    congregating by the thing not doing anything." The idle half of D50.
+  * L38 (ambient pane framing) - "bottom right is watching the livestock, it's looking at the ROOF."
+    The ambient framing still aims at roofs/empty geometry sometimes. U2 did a first pass; it needs
+    another - the ambient subject pick or the camera offset is still landing on non-subjects. Raise
+    as a HUD follow-up to L38 when the HUD worker is next free.
+
+CHANGELOG 2026-11-13 14:54 (supervisor): clips 14-29/14-30/14-31. Split the "not moving" bug correctly: D52 =
+hero won't delve, stands idle at the well = COMMAND/STATE, LAPTOP; D44/D50 wedging (pumpkins) =
+nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53 (cart/pole not
+attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
+it up), D46, D50, L38 (needs a second framing pass).

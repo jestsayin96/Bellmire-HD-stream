@@ -3069,3 +3069,53 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      a HUD file rather than spoken by the town.
   5. Anything already reading `e3po` with a fixed line count will miss the appends. Size off len().
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 18 - the channel-point shelf: 18 accessories, 40 cosmetics, 20 dyes (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: standing-backlog item 1, and the rotation's turn (C14 item 5, C15 item 4, C16 item 2,
+  C17 item 3). This is also work-plan C1. Cosmetics are what viewers actually spend on, so the shelf
+  has to keep widening or the same hat is bought by everyone on a long stream. The gaps were measured
+  first: accessories sat at 96 with five slots, cosmetics at 183 (46 hat / 38 banner / 22 pet /
+  77 title), dyes at 101. Pets were SKIPPED on purpose - every .glb in assets/animals is already in
+  use by an existing pet and content does not invent asset paths.
+- ADDED, data/items.json ONLY (one file touched this cycle):
+  - ACCESSORIES 96 -> 114. Eighteen, spread across all five slots and all six stat shapes:
+    rings tithe/cartwright/lastcoin/watchfire/oathwrong, amulets ninthbell/saltline/kindling/
+    grainward, cloaks fogrun/sparewall/wakeward, boots mudplank/firstlight/longcount, gloves
+    ropeburn/coldforge/splintwrap. Every one carries exactly one bonus (ac, saves, hp, speed, hit or
+    dmg) and a flavour line that says what the thing IS, not what it does - "Hammered flat from the
+    coin he would not spend to leave", "Two fingers of hard cane sewn in. Hands break first and heal
+    slowest." Costs sit inside the ranges the existing entries already set per slot (ring 210-520,
+    amulet 230-470, cloak 240-500, boots 200-420, gloves 200-330), so nothing undercuts the shelf.
+  - COSMETICS 183 -> 223. Twelve hats (90-260), ten banners (90-140), eighteen titles (60-330).
+    The three sets share a spine with the new accessories - tithe, saltline, watchfire, ninth bell,
+    fog-run, long count, cold forge, kindling, rope-burn - so a viewer can dress a whole theme out of
+    hat + banner + title + dye + ring rather than buying one orphan. Titles stay the cheap repeat
+    purchase ("Rope-burned" 120, "Flat-footed in the Fen" 70) with the brag tier up top ("First on
+    the Wall" 320, "Wrong Hand, Right Oath" 330).
+  - DYES 101 -> 121. Twenty new names, all six-hex lowercase, none colliding with the existing set:
+    tithe, saltline, watchfire, fogrun, ninthbell, ropeburn, coldforge, kindling, longcount,
+    firstlight, wakeward, mudplank, splintcane, lastcoin, grainward, cartwheel, oathwrong, fenmist,
+    wallstone, nightfurrow. dye_cost UNCHANGED at 25 - widening the palette must not reprice it.
+- VALIDATION OK (python only, no Godot): data/items.json parsed BEFORE the edit, re-parsed after, and
+  the whole pre-edit tree compared node by node - every pre-existing key present, every pre-existing
+  scalar equal, top-level key order identical. Errors: 0. Every new accessory matches one of the six
+  keysets already in the block exactly; every new cosmetic matches its kind's keyset exactly
+  (hat/banner = colour+cost+kind+name, title = cost+kind+name); every colour and dye is /[0-9a-f]{6}/;
+  every cost is an int. The other three owned files were read and parsed clean and NOT edited.
+- FORMATTING NOTE, deliberate and harmless: `git diff --numstat` is 81 added / 3 removed. The three
+  "removed" lines are the former LAST entry of accessories, cosmetics and dyes, re-added byte for byte
+  with a trailing comma (warhorn_mantle, title_countedback, the `warhorn` dye). No value changed.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Nothing new to wire for function: every added entry uses a slot, kind and stat field the loaders
+     already read. If `!wear` and `!dye` work today they work on these.
+  2. SIZE OFF len(), NOT a constant. Any shop/wardrobe panel that pages cosmetics at a fixed count now
+     has 223 to page instead of 183, and 121 dyes instead of 101. A hard-coded dye grid will clip.
+     OWNER: DESKTOP HUD (the wardrobe/shop panel is a HUD file), with DESKTOP BUILD if the shelf is
+     drawn in town.
+  3. Titles are now 95 of the 223 cosmetics. If titles share one list with hats and banners in the UI,
+     they will swamp it - they want their own tab or a filter by `kind`. OWNER: DESKTOP HUD.
+  4. dye_cost is still a single int for all 121 dyes. If a rare-dye price tier is ever wanted, that is
+     a data-shape change and content should be asked for it - do not special-case it in .gd.
+  5. PETS NOT ADDED this cycle and that is a content block, not an oversight: new pets need new .glb
+     assets. OWNER: DESKTOP BUILD (assets) before content can name them.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

@@ -1,1 +1,20 @@
-RUNNING 2026-11-13 08:00 - L50 monster diversity
+IDLE 2026-11-13 08:30 - L50 DONE and pushed (L-cycle 131). Next in the laptop queue: L41 (a dungeon floor
+renders hot magenta), then L42 (dungeon lighting is neon), L43 (_l32_test's vacuous FPS gate), L44
+(_l24_test flaky). L56 (delve-heavy soak) GATES trusting L45 and L46.
+NOTE: L41 and L42 are VISUAL items and the laptop still owns the dungeon look (dungeon_kit.gdshader,
+dungeon_parts, dungeon_hd) - these two DO need windowed 1920x1080 judgement, unlike everything since L39.
+L50 note for Mr. E: the shallows now show puglins and spiders beside the rats and bats, and no single kind
+can swarm a floor (a pack is capped at ~34% of it). If floor one feels busier than he wants, the band is
+one line in Bestiary.DEPTHS and the pack cap one line in dungeon_hd.
+L48 note - A REAL BALANCE CHANGE: a levelled hero is meaningfully stronger both ways; numbers are in
+CLASS_UNLOCKS, SPECIES_UNLOCKS and the _ability_mult match.
+L55 note - A POLICY CALL: survivors spend their OWN gold at the smith on coming home.
+L54 note: Scarwater is a coin flip - doubled spell or lost cast. L53: hats are HEADLESS-verified only.
+FOR THE SUPERVISOR: scripts/adventurers.gd is in NO worker's ownership list in COORDINATION 11.2 - read,
+not touched. Needs an owner.
+STANDING NOTES FOR MYSELF: (1) check a file's INDENT STYLE before editing. (2) No backticks in a
+double-quoted shell -m message. (3) When a table names things, TEST that each one does something (L48's
+check D caught a name I shipped with no implementation). (4) MEASURE BEFORE FIXING - L46, L49, L52, L55
+and L50 were all something other than their reported symptom.
+EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

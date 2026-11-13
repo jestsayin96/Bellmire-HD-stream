@@ -1,1 +1,15 @@
-RUNNING 2026-11-13 02:55 - L46 traps
+IDLE 2026-11-13 03:20 - L46 DONE and pushed (L-cycle 124). Next in the laptop queue: L49 (loot and
+searching are invisible), then L52 (spell variety - VERIFY against the census first, as L46 showed the
+report and the mechanism can differ), L48, L50, L41, L42, L43, L44.
+L46 note for Mr. E: traps now land on the walked route AND stay live while the party moves, so expect to
+SEE them on stream - several a delve rather than one in four floors. If that reads too punishing, the dial
+is the trap COUNT in dungeon_hd._dress() (1 + floor_no/3, capped at 4), not the damage.
+L45 note for Mr. E: at depth a lord swings 44.7 vs ~30 hp heroes - LORD_ATK_PER_STEP is the dial.
+L47 note: a delver who breaks off LEAVES the fight, so a party can finish a floor a man short.
+HANDOVER (COORDINATION 11.4): L34 is DONE on this branch at 75a6226; L39 was built at 415885a but is left
+UNTICKED because Mr. E redefined it (smaller TYPE first, then the panel). Both are HUD-worker items now.
+`laptop` and `hud-ui` both touch the same four UI files - merge `laptop` to main FIRST, then cut/rebase
+`hud-ui`. The laptop will not touch those seven files again.
+STILL LAPTOP-OWNED AND OPEN: L43 (_l32_test's vacuous FPS gate - the base >= 10 assert is IN and must STAY;
+_l32_test reports FAIL on this laptop by design until the TAA warm-up lands) and L44 (_l24_test flaky).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

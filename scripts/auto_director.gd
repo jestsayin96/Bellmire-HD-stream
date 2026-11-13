@@ -155,9 +155,11 @@ func _process(delta: float) -> void:
         cut = true                              # quiet too long: move on
     if cut:
         if _held >= HOLD_MAX and best["key"] == _cur.get("key", ""):
-            best = _best(String(_cur.get("key", "")))      # something different
-            if best.is_empty():
-                return
+            var alt := _best(String(_cur.get("key", "")))      # something different
+            if alt.is_empty():
+                alt = _fallback_shot(String(_cur.get("key", "")))
+            if not alt.is_empty():          # L34: nothing else to show - re-cut, never return
+                best = alt
         _cut(best)
 
 ## ---- L24 (Mr. E, Nov 11): while a spotlight lane holds a hero, the director never follows

@@ -1853,6 +1853,50 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   noise deleted. The merged D19b sky/weather was read against the spotlight's _lane_env block (COORDINATION 8.1):
   panes copy the live town Environment every 0.5 s, so the new sky/weather carries into panes unchanged.
 
+## L-cycle 119 - L34 the director pane never freezes (laptop jestai, 2026-11-12) - L34 DONE
+Mr. E in his own game chat: "the top left screen goes black or stays stuck when someone dies". Both root
+causes the supervisor found were real and both are fixed:
+- scripts/auto_director.gd: `if best.is_empty(): return` in _process parked the eye whenever the subject
+  died / rerolled / despawned and _best() came back empty for a tick. New _fallback_shot() steps the town
+  tour on and returns the next stop, so there is ALWAYS a shot; the second return site (the HOLD_MAX
+  "something different" re-pick) now falls back the same way and re-cuts instead of returning.
+- scripts/spotlight.gd _follow(): the director pane copied get_viewport().get_camera_3d() and, when that
+  was null, silently held its last transform - the frozen/black pane. It now falls back to the eye's own
+  Camera3D, and failing that to the eye's numbers (new _eye_xform(), same placement convention as
+  RtsCamera: off = (sin yaw cos pitch, -sin pitch, cos yaw cos pitch) * dist, looking at focus + 1 m).
+- tools/_l34_test.gd (NEW, windowed 1920x1080 - a pane cannot be judged headless, COORDINATION 4): aims the
+  director at a hero, then scripts a DEATH (Roster.kill), a REROLL (Roster.reroll) and a DESPAWN (the body
+  freed under the eye), watching the REAL top-left pane camera for 3 s after each: 0 stale frames, 0 frames
+  below ground, 0 empty director ticks, and the director ends on a different subject each time.
+  L34_TEST OK - 30 checks, 0 failed. Shots renders/cycles/20261112_l34/ (0_baseline, 1_after_death,
+  2_after_reroll, 3_after_despawn, 4_null_main_camera).
+- ON THE TEST ITSELF, so the next run trusts the right number: two earlier metrics were WRONG and were
+  thrown away. (1) "pane transform identical to last frame" counts a MOTIONLESS SUBJECT (an angler at the
+  water, a hero standing still) as a freeze - it flagged 165/179-frame "freezes" that were correct held
+  shots. A stale frame is now only counted when the EYE moved and the pane did not. (2) Aggregate
+  eye-travel vs pane-travel is meaningless when the pane is hidden for part of the window (the eye's
+  travel arrives as one catch-up delta), so that check is gated on >= 60 consecutive sampled frames.
+  Neither of those metrics could tell fixed code from broken: the unfixed code PASSED them. The test only
+  became a real regression test once it FORCES the fault - window 4 takes the main viewport's camera out
+  of play (cam.current = false, the state L32a's disable_3d produces) and nudges the eye every frame.
+  Measured both ways on the same scene: UNFIXED - main_null 180/180, pane moved 0.00 m, 179 stale frames,
+  L34_TEST FAIL; FIXED - pane moved 257.71 m against the eye's 257.71 m, 0 stale, L34_TEST OK. The
+  4_null_main_camera capture shows the top-left pane live (an angler on the dock), not black.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1088 (MON_INPROP 0 of 168); _delve_test 0 errors/nulls;
+  L24_TEST OK (6); L21_TEST OK (52); renders/cycles/20261112_l21 restored after the shot tools overwrote it.
+- L27b is still WIP and UNTICKED (commit 0f3986c). Its code is all in and its own checks passed earlier
+  (L27B_TEST OK 73, parse, _offfloor, _delve_test); this cycle also cleared the owed _l26_anims with
+  L26_FLOORS=7,9,11 - MON_ANIMS static=0 of 20819 moving frames, L26A_ANIMS OK. Still owed before it can be
+  ticked: _l25_test and the windowed _l27b_shot line-up. NOTE the brief said "zero code exists" for L27b -
+  that was stale; the code was committed at 0f3986c.
+- FPS, _l32_test (camera/UI files changed, so it is a required gate): the FIRST run on the fixed code
+  FAILED - base 38.9, idle 22.9 = 58.9%, under the 65% bar. It was run variance, not a regression, and the
+  check was done properly rather than waved through: pre-fix on the same machine gave base 44.4 / idle 29.3
+  (66.0%, OK) and a second fixed run gave base 45.6 / idle 31.8 (69.7%, L32_TEST OK, 102 checks) - the
+  fixed code's clean run is the BEST of the three. The outlier was a cold/contended run (a leftover Godot
+  process from an earlier --import plus a polling loop). There is no plausible cost in the diff either: the
+  only per-frame addition is one _eye() call, and town.gd:309 makes the eye a direct child of town, so
+  _eye() caches and costs one is_instance_valid per frame.
 
 ## D-cycle 118 - D24 kill the grain (desktop CruzaderPC, 2026-11-12) - D24 DONE
 - Root cause confirmed: project.godot [rendering] held only the d3d12 driver line - no TAA/MSAA/FXAA. SSAO
@@ -1907,6 +1951,51 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - New tools: _d25_probe.gd, _d25_shot.gd, _d25_diag.gd (+ .uid). Shot sheet renders/cycles/20261112_d25/.
   Backup scripts/town.gd.bak_d25 (not committed).
 
+## L-cycle 120 - L39 the Chronicle is a centre box, not a bar (laptop jestai, 2026-11-12) - L39 DONE
+Mr. E rejected L32b's full-width tan band (reference screenshot: a small light box at the centre cross).
+L32b's calm pacing is KEPT; only the shape and the panes' geometry changed.
+- scripts/hud_dock.gd: STRIP 0.10 (a full-width band) is replaced by BOX_W 0.30 x BOX_H 0.13 - 576 x 138 px
+  at 1080p, 30% of the screen width (half would be 960). centre() now returns a compact rect CENTRED on the
+  cross of the 2x2 instead of a band spanning the screen. STRIP is kept as a name meaning the box's height,
+  so nothing reading it breaks.
+- scripts/spotlight.gd _relayout: the two pane rows now MEET at the cross (h = (1 - CHROME) * 0.5, y2 = h);
+  L32b parted them by STRIP to make room for the band. Each pane is bigger for it (0.42 -> 0.47 tall) and
+  the box covers only ~4.2% of each - its corner.
+- scripts/feed_hud.gd: the panel is lifted to a light near-white (0.97, 0.95, 0.90) per his screenshot and
+  its side margins tightened; the lord's name card shrinks again (title 26 -> 19, sub 18 -> 14, sub min
+  width 420 -> 150 px) because it was sized for the old full-width band; a line that overruns the narrow box
+  now ends in an ellipsis instead of being cut mid-glyph (clip_text off).
+- tools/_l39_test.gd (NEW, windowed 1920x1080): the box is under half the screen width AND not a wide band,
+  it is centred on the cross within a pixel, the pane rows meet there, the box covers under 12% of any pane,
+  the Chronicle is docked "centre" and sits inside it, >= 2 lines at the L15 size, no line spills out under a
+  30-line flood, pacing never stacked more than 4 lines, and a lord's card still fits. L39_TEST OK, 19 checks.
+  Shots renders/cycles/20261112_l39/ (box_idle, box_flood, box_lord_card).
+- Regression: parse 0 SCRIPT ERROR; L21_TEST OK (52) - the docking rules hold with the new region;
+  _offfloor 0 of 1017 (MON_INPROP 0 of 145); _delve_test 0 errors/nulls.
+- _l24_test is FLAKY, not broken by this: it failed 3 of 6 once ("Ash's body below is the one the lane
+  holds" and the two checks that depend on it) and passed 6/6 on an immediate re-run with nothing changed.
+  That is the same class of race the brief already records for its "before" check - the lane/delve state is
+  timing-dependent. Worth hardening in its own item rather than chased each cycle; it is NOT an L39 fault.
+- FOR MR. E: at 576 px a long Chronicle line is trimmed with an ellipsis ("Someone walks out to look at the
+  Old ..."). That is the cost of a compact box; the full text is always in chat. If he wants whole lines, the
+  box has to be wider or the line font smaller - his call, HudDock.BOX_W is the one number to change.
+- _l32_test: READ THIS BEFORE TRUSTING ITS "OK". This run printed "L32_TEST OK (90 checks, 0 failed)" with
+  "L32_FPS base 1.0 idle 26.8 paid 18.7". base 1.0 is a BROKEN MEASUREMENT, and because every FPS check in
+  that tool is RELATIVE to base ("idle >= 65% of base"), they all passed trivially - the suite reported OK
+  while the FPS gate tested nothing. Not caught by the tool, caught by reading the number.
+  - It is NOT L39. Every _l32 run earlier the same day gave base 38.9 / 44.4 / 45.6; this is the FIRST run
+    after merging origin/main, which brought D24 (project.godot [rendering]: use_taa=true, msaa_3d=1). The
+    grid phases are unaffected and in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6),
+    so L39 cost nothing; it is the full-screen base phase alone that collapsed. The likely mechanism is the
+    harness toggling root.disable_3d back to false mid-run with TAA on (TAA history for a viewport that was
+    disabled), i.e. a harness/TAA interaction rather than the town really running at 1 FPS.
+  - Fixed the lying, not the cause: _l32_test now asserts base >= 10.0 FPS first, so a collapsed base FAILS
+    loudly instead of green-lighting everything. _l32_test will therefore REPORT FAIL on this laptop until
+    the base phase is sorted - that is the honest state, not a regression from L39.
+  - NEEDS AN ID AND AN OWNER (the supervisor assigns IDs, COORDINATION 2): either make the base phase robust
+    with TAA on (re-create the viewport / let TAA settle before sampling, or measure base in a separate
+    process), or drop the relative base and judge the grid against fixed per-machine numbers. project.godot
+    [rendering] is DESKTOP-owned, so the laptop did not touch it.
 
 ## D-cycle 121 - D27 empty+dark town (desktop CruzaderPC, 2026-11-12) - D27 DONE
 - BRIGHTNESS: the "08:40 looks like dusk" was an OVERCAST morning, not the daylight curve. Clear 08:00 already
@@ -2197,3 +2286,780 @@ proves nothing. Recorded here because the discarded run's numbers looked like tw
 In 3_after_despawns.png two of the four panes are still poor ambient framing - one is a bare
 roof, one is empty grass with distant sheep. L38 was built in U1/U2 and is awaiting a tick; on
 this capture the roof-filler problem is not fully gone. Worth the supervisor's eye.
+
+## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
+  EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT
+  touched. Kept to a SEPARATE clone (Bellmire-content) per section 10, never the Claude Code tree. Additive only;
+  every pre-existing entry preserved verbatim; no .gd/.tscn/assets/web touched.
+- items.json: accessories 25 -> 37 (+12, incl. E3PO's Signet + Barracks Key; same 5e bonus magnitudes, no creep);
+  cosmetics 48 -> 64 (+16: 3 banners + E3PO's Standard, 10 titles incl. E3PO/town-growth, 2 hats); dyes 30 -> 44 (+14).
+- lore_lines.json: descend 8->12, cleared 8->12, epitaphs 14->21, barks +3 per kind (format contracts held: descend
+  two %s, cleared one %d, misfire %s %s %d %d). NEW additive blocks: "e3po" (intro/withdraw/return/says/town_talk -
+  immortal Commander of the Guards: badly hurt he withdraws to the barracks, heals, returns, never dies) and
+  "town_life" (crier/market/growth - Bellmire as it grows). lord_intros/unique_intros left intact.
+- bosses.json: +5 shape-first lord variants (lesser 7->9, greater 5->8), all modified versions of the eight canon
+  lords, stats traded not inflated, within the existing field vocabulary.
+- potions.json: potions 19 -> 25 (+6: Deepdraught, Wyrmsbane, Mirewine, Lastlight, The Hollow King's Cup, Scarwater);
+  states 14 -> 15 (+1: scar_touched). Every brew but Scarwater uses existing states and works immediately.
+- VALIDATION (python only, no Godot): every data/*.json parses; every new entry matches the existing field shape;
+  originals preserved verbatim; potion key/alias/name tokens unique; bosses within schema. Result: VALIDATION OK.
+- FOR THE OTHER WORKERS (code the content implies - not the content worker's to write):
+  (1) gear.gd _hat (laptop-code-owned) needs match cases for the new hat keys (guard_helm, plumed_helm + the C1 hats),
+  else they render as the default shape. (2) delve.gd: state 'scar_touched' displays but has no effect until wired
+  (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
+  town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 121 - ownership handover under COORDINATION 11 (laptop jestai, 2026-11-13)
+Merged main's FOUR-WORKER contract. The laptop CODE worker no longer owns the 7 UI files or the 4 content
+data files. FLAG FOR THE SUPERVISOR AND THE NEW DESKTOP HUD WORKER - two items the laptop already BUILT are
+now HUD-owned, and their work is on branch `laptop`, NOT yet merged to main:
+- L34 (director pane freezes) - DONE by the laptop, commit 75a6226, ticked, touching auto_director.gd and
+  spotlight.gd (+ tools/_l34_test.gd, which is a tools file and stays with the laptop). It is finished and
+  tested (L34_TEST OK, 30 checks, with a proven before/after: unfixed moves the pane 0.00 m, fixed tracks
+  the eye 257.71 m). The HUD worker should MERGE it, not rebuild it. If `hud-ui` was cut from origin/main it
+  does NOT contain this fix, and the top-left pane will still freeze there.
+- L39 (Chronicle centre box) - built by the laptop, commit 415885a, but Mr. E has since REDEFINED it as
+  "SMALLER TYPE - the font shrinks first, then the panel". The laptop shrank the PANEL and left the line
+  font at 28 px, so under the new wording it is NOT done. I have UNTICKED it and left a note in WORK_PLAN
+  pointing at the commit and the three numbers (HudDock.BOX_W, BOX_H, the feed_hud font size). The HUD
+  worker owns it.
+RISK IF IGNORED: both branches now contain edits to the same four UI files. `laptop` has L34 + L39 in
+hud_dock.gd, spotlight.gd, auto_director.gd and feed_hud.gd; `hud-ui` will grow its own. Whoever merges
+second gets the conflict. Cheapest fix is to merge `laptop` to main FIRST, then cut/rebase `hud-ui` on it.
+The laptop will not touch those seven files again (COORDINATION 11.2).
+Also still open and laptop-owned: L43 (_l32_test's vacuous FPS gate - the base >= 10 assert is in and MUST
+stay; _l32_test reports FAIL on this laptop by design until the TAA warm-up lands) and L44 (_l24_test flaky).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.
+
+## L-cycle 122 - L47 adventurers think for themselves (laptop jestai, 2026-11-13) - L47 DONE
+Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule I worked to is
+that a decision only counts if a VIEWER CAN SEE IT - the body does something visible AND the Chronicle says
+WHY. A silent stat change is not a decision for this item.
+- scripts/delve.gd, new decision layer: _decide() records every decision by kind (delve.decided) and
+  announces it, rate-limited per hero (DECIDE_EVERY 3 s) so a long fight reads as a few deliberate choices
+  instead of a wall of chatter - the DECISION is never rate-limited, only the line.
+- NEW decisions: (1) _think() per hero before they swing - BREAK OFF when under 22% hp with no heal brew
+  left (runs for info["entry"], the way up, Running_A, "X is badly hurt and breaks off"); REGROUP when more
+  than 15 m from the party's centre with foes about; REJOIN once mended past 55%. (2) _losing() at party
+  level - a fight that is plainly lost (mean hp under 18%, or under turn_back_at while outnumbered 2:1) is
+  broken off as a PARTY: new "flee" state, everyone runs for the way up, the delve ends with survivors.
+  This is Mr. E's "a hurt party retreats rather than dying in place". (3) _pick_target() replaces
+  nearest-foe: score = -0.35/m + up to 20 for how close the foe is to death + 14 for a caster/spitter/
+  shooter, so delvers finish the nearly-dead and shut up the ranged one, and say so when they switch.
+- COUNTED, NOT INVENTED: drinking a brew, a healer choosing who to mend, and press-on-or-climb-out at a
+  floor's end were ALREADY decisions with visible tells (Use_Item, Spellcasting, the bark) - they simply
+  were not legible as decisions. They are now recorded and reasoned through the same layer rather than me
+  bolting on new behaviour that duplicates them.
+- tools/_l47_test.gd (NEW, headless - this is delve LOGIC, not HUD, so COORDINATION 4's windowed rule does
+  not apply): A soak counts decisions and demands a RANGE of kinds; B slams the party to 10% hp mid-fight
+  with foes up and requires the "flee" state, the Chronicle line and SURVIVORS; C wounds a FAR foe and
+  requires it to be chosen over a healthy near one; D hurts exactly ONE delver to 8% and strips their
+  brews, leaving the rest healthy. L47_TEST OK - 8 checks, 0 failed. Soak run: 12 decisions, kinds
+  {press_on 3, finish 9}.
+- WHY PART D EXISTS, because it matters for trusting this: part B can NEVER reach the individual flee path
+  - there the whole party is dying, so the party-level retreat fires first and returns before any hero
+  thinks. Without D the single-hero branch would have been shipped unexecuted. It now runs and passes.
+- HONEST COVERAGE: proven by test = press_on, finish, party_retreat, flee. Wired and parsing but NOT yet
+  observed firing in a test = regroup, rejoin, silence, mend, brew_hurt/brew_cure/brew_lord, turn_back_oil,
+  turn_back_hurt. They sit on code paths that already ran in production (quaff, the healer triage, the
+  floor-end branch); the additions there are counters and lines, not new behaviour, so the risk is low -
+  but they are not proven and I am not claiming they are.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1043 (MON_INPROP 0 of 155); _delve_test 0 errors/nulls;
+  L25_TEST OK 13/13 - 0 stuck delvers and 0 watchdog frees over 10 floors, so the new break-off and the
+  party "flee" movement did NOT reintroduce stuck delvers. NOTE for L33 (the 1-stuck regression after
+  L27a): this run shows 0, but L33 asks for 0 over THREE consecutive runs - an observation, not a tick.
+  L25_TEST OK 13/13 with 0 stuck delvers and 0 watchdog frees over 10 floors - the new break-off and party
+  "flee" movement did NOT reintroduce stuck delvers. NOTE for L33 (the 1-stuck regression after L27a): this
+  run shows 0, but L33 asks for 0 over THREE consecutive runs, so that is an observation, not a tick.
+- FOR MR. E: a delver who breaks off now LEAVES the fight, so a party can finish a floor a man short. That
+  is a real balance change and the point of the item, but it is his call whether a fleeing delver should
+  rejoin faster (currently at 55% hp) or keep running all the way home.
+
+## L-cycle 123 - L45 bosses scale with depth (laptop jestai, 2026-11-13) - L45 DONE
+THE ACTUAL BUG, found on reading rather than assumed: Bestiary.boss_def() never received the floor at all.
+A lord's hp and damage came straight off the canon BOSS_DEFS table, so the SAME lord hit exactly as hard
+wherever you met it - only WHICH lord you met changed with depth (lesser on floors ending in 5, greater on
+every 10th). Uniques already scaled with depth (unique_def), lords did not. That is why deeper never felt
+more dangerous.
+- scripts/bestiary.gd: boss_def(b, floor_no := 0) now takes the depth. depth_step() counts how many
+  lord-floors deep we are from the first one, so the curve is OPEN-ENDED by construction - no floor count
+  is stated or implied anywhere (canon rule). The curve lives in named constants so the test and any future
+  tuning read the same numbers: LORD_HP_PER_STEP 0.28, LORD_ATK_PER_STEP 0.22, LORD_ADD_EVERY 2.
+- MECHANICS scale too, not just the two numbers - scale_ways() deepens summon/shed (more adds, arriving
+  faster), nova/swoop (more often, more damage), ward (holds harder), enrage (rages sooner) and the
+  breath/venom/ranged cadences. It mutates a DUPLICATE; the canon LORD_WAYS table is never written to, and
+  the test asserts that explicitly.
+- scripts/dungeon_hd.gd: the one call site passes floor_no.
+- DEFAULT floor_no = 0 keeps the canon numbers, so the bestiary line-up tools that call boss_def(b) with no
+  floor are unchanged.
+- tools/_l45_test.gd (NEW, headless - bestiary/delve arithmetic, not HUD): measures the curve on ONE fixed
+  lord so only depth varies, and asserts the deep one has >1.5x hp and >1.4x damage, that the curve never
+  dips, that the FIRST lord floor is unchanged canon (nothing retuned by accident), that adds grow and
+  arrive faster and the ward holds harder, that LORD_WAYS was not mutated, and finally the plan's own
+  wording - that a deep lord can wipe an unprepared party. L45_TEST OK, 10 checks, 0 failed.
+  Measured curve, the Hollow King, same lord throughout:
+    step 0  hp 150.0  atk 15.00     step 1  hp 192.0  atk 18.30     step 3  hp 276.0  atk 24.90
+    step 6  hp 402.0  atk 34.80     step 9  hp 528.0  atk 44.70
+  Mechanics: summon most 2 -> 6, every 12.0 s -> 5.7 s, ward 0.50 -> 0.80.
+  Wipe: a fresh unprepared party of four has 120 hp between them; a deep lord needs 2.7 landed blows to
+  chew through all of it, a shallow one 8.0.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1130 (MON_INPROP 0 of 154); _delve_test 0 errors/nulls;
+  L27A_TEST OK (the new-monster roster wiring still resolves); _l26_anims L26_FLOORS=7,9,11 L26A_ANIMS OK,
+  MON_ANIMS static=0 of 14532 moving frames (the deep roster still animates with the scaled lords).
+- A SELF-INFLICTED ONE WORTH RECORDING: my first edit went in TAB-indented into a SPACE-indented file.
+  GDScript rejects mixed indentation, so bestiary.gd stopped parsing and every script that referenced it
+  reported "Could not resolve class Bestiary" - the real cause named no line in bestiary.gd at all.
+  `--headless --check-only --script scripts/bestiary.gd` pointed straight at the line. Worth remembering:
+  when a wave of "could not resolve class X" appears, check-only on X itself, and check the indent style of
+  the file before editing it.
+- FOR MR. E - A REAL BALANCE CHANGE, HIS CALL: at depth a lord swings 44.7 against heroes with about 30 hp,
+  so roughly one landed blow a hero before armour soak and healing. That IS "deeper feels dangerous" as
+  asked, and an unprepared party is meant to lose - but if deep lords now feel unfair rather than
+  frightening, LORD_ATK_PER_STEP (0.22) is the single number to pull down; LORD_HP_PER_STEP (0.28) only
+  makes the fight longer, not deadlier.
+## D-cycle 123 - D28 live-run feature census (desktop CruzaderPC, 2026-11-13) - D28 DONE
+Ran tools/_d28_census.gd: the real Town, director on, 6 fake viewers enlisting/delving/fishing/forging/rerolling,
+7 wall-min at 8x time-scale (game reached day 32). Reads the in-game counters (Sfx.plays, new Rig.plays, new
+Spells.cast_counts, Townsfolk.voices/acts, Monster.voiced, Dice.rolled), scans the Chronicle feed, and watches the
+live delve. NEW counters added (desktop-owned files only): Rig.plays {clip->starts}, Spells.cast_counts {spell->times}.
+
+CENSUS TABLE (7 min, 8x):
+  SFX        total 3698 plays, 54/94 kinds fired. Top: mana_charge 541, splash 389, heal 326, sword_clash 244,
+             swing 243, hit_impact 229, hit 227, lightning 196, bell 186, buff 131, curse 126, sword_swing 119.
+             NEVER fired (40 kinds) incl: footstep_grass/stone/water/wood, dog_whine, wolf_howl/growl, eagle_cry,
+             lion_roar, orc_roar, troll_roar, zombie_moan, bow_draw, item_pickup, debuff, teleport, menu/inventory.
+  ANIM       22251 starts, 30 distinct clips, 0 missing, 0 fell-back. Top: Idle, PickUp, Interact, Use_Item,
+             Walking_A, 2H/1H attack chops, Cheer, Running_A/B, Spellcast_Raise/Shoot/Long, Hit_A/B, Throw.
+  SPELLS     9 distinct by name: heal 295, bolt 161, mend 131, ward 112, smite 85, frost 46, chain 35, renew 31, fire 12.
+  BOSSES     feed lord-intros = 3 (live-poll undercounted - see caveat). killed: not firmly counted this run.
+  TRAPS      feed trap lines = 3. Delve.trap_log read 0 this run (caveat: only ~1 sustained descent; poll missed it).
+  LOOT       gold lines 22, vials found 14, chest_open sfx 19, forge lines 17, buy/sell 41.
+  COSMETICS  worn = 0 (viewer !wear/!dye driven; never used in the soak). Gear tiers stayed w0/a0 for ALL 6 heroes
+             despite 17 forge lines and survivors with kills (MossyMage k4, DawnCleric k8).
+  LIFE       town voices 107, monster voices 44, dice rolled 52209, raids 17. acts: job 7395, haggle 641, eat 314,
+             festival 299 (D20b), tavern 530, market 227, sit 34.
+
+VERDICTS (broken / too-rare / fine):
+  - town ambient effects  BROKEN (never fire): footsteps have NO caller (sfx.gd defines footstep_* but nothing plays
+    them); dog/wolf/eagle/lion animal voices have no caller; horse_neigh/whinny called in daylight.gd but fired 0.
+    THIS is the "silent town" (D29): the town's most frequent discrete sound - footfalls - is simply never emitted.
+  - new sounds (combat/spell/raid)  FINE: fire heavily (mana_charge, sword_clash, hit_impact, lightning, bell...).
+  - animations  FINE: 30 distinct clips, 0 missing, attacks/casts/hits/throws/gestures all playing. "Not seeing new
+    anims" is perception, not breakage.
+  - spell variety  FINE: 9 distinct spells, good spread - not "always the same one" (addresses D30's premise).
+  - bosses/lords  TOO RARE to confirm here (feed shows 3; parties barely delved - 1 sustained descent). Needs a
+    delve-heavy soak for firm counts. OWNER of fix is LAPTOP (L45).
+  - traps  PRESENT-but-RARE in feed (3); DAMAGE-APPLIED unconfirmed. trap_log lives in delve.gd (LAPTOP) - recommend
+    the laptop read Delve.trap_log directly for L46 rather than trust this run's 0.
+  - loot  FINE: gold/vials/chests appear regularly.
+  - cosmetics/accessories  NOT SEEN: never worn (needs a viewer to !wear). SEPARATELY, gear weapon/armour tiers
+    stayed 0 across the board despite forging - forging may not be raising tiers (or resets on death). FLAG.
+
+CAVEAT / tool limitation: viewers delved little (raids kept pulling them into town); only ~1 sustained descent, so the
+dungeon-side direct counters (live boss poll, trap_log) undercounted vs the feed. The feed-scan and static counters are
+reliable; the live-delve poll is now every-frame for a future delve-heavy run (set CENSUS_MIN higher, or seed a party
+straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed except two read-only census counters
+(Rig.plays, Spells.cast_counts). Backups scripts/rig.gd.bak_d28, scripts/spells.gd.bak_d28 (not committed).
+
+## L-cycle 124 - L46 traps (laptop jestai, 2026-11-13) - L46 DONE
+VERIFIED FIRST, as the item demands - and Mr. E is RIGHT ABOUT THE EXPERIENCE, WRONG ABOUT THE MECHANISM.
+L11's damage code was never broken: a forced spring took 10 hp, rolled a DEX save, floated the number and
+printed to the Chronicle exactly as written. Traps are not inert. They were simply almost never MET:
+  BEFORE: over four floors with 6 traps, a delver came within the 0.90 m trigger radius of only 2 of them.
+  Closest approach per trap: 0.1, 0.4, 3.9, 4.0, 11.0, 23.5 m. One trap fired in the whole delve.
+So the fix is not "make traps hurt" - it is "put traps where people walk, and keep them live while people
+are walking". Three real defects found by measuring:
+1. TRAPS SAT WHERE NOBODY WENT. dungeon_hd._dress() took any open cell. info["keep_clear"] - the way
+   through plus the corridors - is exactly where the party walks, and props are deliberately kept OFF it;
+   traps are the one thing that belongs ON it. New take_route() lays traps on keep_clear by preference and
+   falls back to any open cell only when the route is used up. Coverage went 2 of 6 -> 5-6 of 6 within
+   reach, closest approaches now 0.0-0.7 m instead of 0.1-23.5 m.
+2. TRAPS WERE ONLY LIVE DURING A FIGHT. _traps_tick() was called only from _fight(), so the entire walk to
+   the stairs - where most of a floor is crossed - was trap-free. That alone explained why 6 traps walked
+   over produced 2 encounters. _traps_tick() now also runs in "descend" and in L47's new "flee" state.
+   Encounters over the same four floors went 2 -> 5.
+3. A SPRUNG TRAP COULD TAKE NOTHING AT ALL. dmg = floorf(dmg * 0.5) on a good save floors a low roll to 0,
+   and a fire grate against a fire-resistant delver multiplies to 0 - so a trap could land, play its
+   sound, print its line and remove zero hp. That IS "the trap did nothing", seen with my own eyes in the
+   first probe run. took is now maxf(1.0, ...): a save halves and resistance blunts, neither nullifies.
+- tools/_l46_test.gd (NEW, headless): A verifies on real delves and prints trap_log WITH the closest
+  approach to every trap, so the next run can tell "damage broken" from "never triggered" without
+  guessing; B forces a spring and then springs every trap against every delver, requiring not one of them
+  to take zero; C is lethality. L46_TEST OK, 10 checks, 0 failed.
+- A TEST BUG OF MINE, worth recording because it looked exactly like a product bug: part C put a delver on
+  1 hp, sprang a trap, saw them still standing on 1 hp and failed. The trap had dealt 13 damage. The cause
+  is canon - _hero_hit gives ONE death save a delve (DC 10 CON claws you back to 1 hp, a natural 20 to a
+  quarter). The rule was working; my assertion was wrong. Part C now asserts the save is BURNED on the
+  first lethal trap and that the delver DIES to the next one with it spent. I nearly "fixed" a correct
+  mechanic - the giveaway was that the Chronicle line reported real damage while hp did not move.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1063 (MON_INPROP 0 of 159); _delve_test 0 errors/nulls.
+  L25_TEST OK 13/13 - 0 prop-prop interpenetration over 12 floors, 0 stuck delvers, 0 watchdog frees, so
+  laying traps ON the walked route (keep_clear) did NOT crowd the path or block anyone. That was the risk
+  worth checking: traps are now deliberately where people walk, which is exactly where a bad placement
+  would strand them.
+- FOR MR. E: traps now land on the route and stay live while the party walks, so expect to SEE them on
+  stream - several a delve rather than one in four floors. If that reads as too punishing once he watches
+  it, the dial is the trap count in dungeon_hd._dress() (1 + floor_no/3, capped at 4), not the damage.
+## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
+  EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT
+  touched. Kept to a SEPARATE clone (Bellmire-content) per section 10, never the Claude Code tree. Additive only;
+  every pre-existing entry preserved verbatim; no .gd/.tscn/assets/web touched.
+- items.json: accessories 25 -> 37 (+12, incl. E3PO's Signet + Barracks Key; same 5e bonus magnitudes, no creep);
+  cosmetics 48 -> 64 (+16: 3 banners + E3PO's Standard, 10 titles incl. E3PO/town-growth, 2 hats); dyes 30 -> 44 (+14).
+- lore_lines.json: descend 8->12, cleared 8->12, epitaphs 14->21, barks +3 per kind (format contracts held: descend
+  two %s, cleared one %d, misfire %s %s %d %d). NEW additive blocks: "e3po" (intro/withdraw/return/says/town_talk -
+  immortal Commander of the Guards: badly hurt he withdraws to the barracks, heals, returns, never dies) and
+  "town_life" (crier/market/growth - Bellmire as it grows). lord_intros/unique_intros left intact.
+- bosses.json: +5 shape-first lord variants (lesser 7->9, greater 5->8), all modified versions of the eight canon
+  lords, stats traded not inflated, within the existing field vocabulary.
+- potions.json: potions 19 -> 25 (+6: Deepdraught, Wyrmsbane, Mirewine, Lastlight, The Hollow King's Cup, Scarwater);
+  states 14 -> 15 (+1: scar_touched). Every brew but Scarwater uses existing states and works immediately.
+- VALIDATION (python only, no Godot): every data/*.json parses; every new entry matches the existing field shape;
+  originals preserved verbatim; potion key/alias/name tokens unique; bosses within schema. Result: VALIDATION OK.
+- FOR THE OTHER WORKERS (code the content implies - not the content worker's to write):
+  (1) gear.gd _hat (laptop-code-owned) needs match cases for the new hat keys (guard_helm, plumed_helm + the C1 hats),
+  else they render as the default shape. (2) delve.gd: state 'scar_touched' displays but has no effect until wired
+  (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
+  town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 4 - viewer propositions, disasters, world events, growth tiers, shop/trader goods (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- The "blocked on writing" cycle: the desktop worker cannot build these until the words exist. Everything went into
+  existing owned files as NEW additive top-level blocks; no new data files; no .gd/.tscn/assets/web; every pre-C4 key
+  preserved byte-identical. Merged origin/main first, keeping BOTH PROGRESS sides on the conflict (COORDINATION 11.5).
+- lore_lines.json NEW blocks:
+  - "propositions" (T4 viewer-voting laws): 17 entries across law/taxes/militia/building/faith/outsiders, each a
+    title + flavour + a stated CONSEQUENCE good AND bad (a law that only helps is boring).
+  - "disasters" (D34): volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor + scarstorm
+    (wild-magic) + flood (river) = 11. Each: begin / during[] / pass lines + a plain cost statement to implement.
+  - "events" (D33): 4 NAMED bandit camps (Red Harl, Sedge the Toll, Cob Ashfoot, The Weasel), 3 monster camps, and a
+    wandering boss (The Scarred Lord) that scales to town level - reusing the eight canon lords, never a new one.
+    Each: appears / while (what it does to the town) / cleared.
+  - "growth_tiers" (D31/D32): 12 stages Crossing -> City-in-all-but-charter, each a crier line + what a viewer should
+    SEE appear - a long earned climb (town levels far too fast). Complements town_levels_for_the_desktop.
+- items.json NEW blocks: "shop_stock" (12 everyday goods a shop displays) and "trader_cargo" (10 higher-value caravan
+  goods worth losing to bandits). Flagged by block; keyed {name,cost,flavour} like the rest of the file.
+- bosses.json and potions.json NOT touched this cycle.
+- VALIDATION (python only, no Godot): every data/*.json parses; every pre-C4 key byte-identical; propositions carry
+  good+bad and cover all six categories; disasters carry begin/during/pass/cost; events and tiers well-formed. VALIDATION OK.
+- CODE WIRING THESE IMPLY (for the supervisor to turn into tracked items - all new lore/data keys, dead until the
+  owning code file reads them; content worker never writes code):
+  1. T4 voting: read lore_lines "propositions".entries, apply each good/bad consequence to the town.
+  2. D34: read lore_lines "disasters", fire begin/during/pass and apply each "cost" as a mechanic.
+  3. D33: read lore_lines "events", spawn the camps and the wandering boss (scale it; reuse the eight canon lords).
+  4. D31/D32: read lore_lines "growth_tiers".tiers, slow the climb and render each "see".
+  5. D35/D39: read items.json "shop_stock" and "trader_cargo" for shop display and interceptable caravan cargo.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor. Not a WIP commit.
+## L-cycle 125 - L49 loot and searching made visible (laptop jestai, 2026-11-13) - L49 DONE
+Mr. E: "no chests, no drops, nobody searching". As with L46, the mechanic was not missing - it was
+INVISIBLE. _loot() already rolled an Investigation check, scaled the gold by how well it went and awarded
+it, but it fired the instant a floor was cleared, with no chest to walk to, nobody moving and nothing on
+screen. A viewer could watch a whole delve and never see anyone find anything.
+- scripts/dungeon_parts.gd: NEW chest() - a banded wooden chest built from the kit's own primitives, with
+  a hinged lid and a small warm glint so it can be picked out of a dark floor in a pane. set_meta("open")
+  tips the lid and fades the glint; Delve calls it when a search finishes.
+- scripts/dungeon_hd.gd: 1-2 chests a floor, registered in info["chests"]. Deliberately placed on OPEN
+  floor rather than keep_clear: a chest should be somewhere you GO, not something you trip over on the way
+  through - that is what L46's traps are for now.
+- scripts/delve.gd: NEW "search" state between clearing a floor and leaving it. The party's sharpest eye
+  (the same _search_bonus seeker _loot already chose) WALKS to each chest, turns to face it, kneels over it
+  with Use_Item for SEARCH_S 1.8 s, and only then is the roll made. Both outcomes read out in Mr. E's own
+  words: "Successfully found loot!! N gold (Investigation X vs DC Y)" or "...no loot... (Investigation X vs
+  DC Y)", with a floating +N or "empty" over the delver. Counters chests_found / chests_empty are exposed
+  on Delve so a census can pick them up.
+- Refactor needed to get there: the floor-cleared branch of _fight() used to fall straight through to the
+  press-on/climb-out decision. That decision is now _floor_decision() and the rest of the fight body is
+  _fight_body(), so the same decision can be reached either immediately or after the searching is done.
+  Behaviour is unchanged on the no-chest path.
+- tools/_l49_test.gd (NEW, headless): A chests are placed; B the delve really enters "search", a delver
+  really walks within 2.2 m of the chest, and the LID really rotates (so the loot is not teleporting in);
+  C drives 80 searches and requires BOTH outcomes, that every find actually awarded gold, and that both
+  are counted. L49_TEST OK, 9 checks. Measured: 32 of 80 found, 48 of 80 empty, 32 of 32 finds paid.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1624 (MON_INPROP 0 of 72); _delve_test 0 errors/nulls.
+  L25_TEST OK 13/13 - 0 prop-prop AND 0 prop-wall interpenetration over 12 floors, 0 stuck delvers. The
+  chests are new props sitting on open floor, so this was the run that mattered. One thing to note rather
+  than hide: the watchdog freed a delver ONCE in 10 floors where the previous two runs were 0. The check
+  allows up to once a FLOOR and passed comfortably, and L25's own history records 1-5 nudges as normal,
+  but if a later cycle sees that climb, the chests are the first thing to suspect.
+- HONEST SCOPE - what this item does NOT include, so nobody reads the tick too generously: chests pay
+  GOLD. Gear salvage still comes from _loot() exactly as before. There are no per-monster physical drops
+  and no dropped-item pickups on the floor; the plan's "Not every monster drops" is satisfied only in the
+  sense that not every chest pays (48 of 80 were empty). If Mr. E wants a monster to leave something on
+  the ground to walk over, that is a separate piece of work and should get its own ID.
+- FOR THE SUPERVISOR: the census tool tools/_d28_census.gd is DESKTOP-owned, so the laptop has not touched
+  it. Delve.chests_found and Delve.chests_empty are there for it to read whenever the desktop next edits
+  it - that is what "census shows chests spawned/opened" needs on their side.
+
+## C-cycle 5 - E3PO deepened, disaster variants, two new disasters, repeat-line stock, cosmetics (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- No WORK_PLAN CONTENT item was unchecked and unwritten (C1-C3 are writing-complete per Phase O), so this cycle
+  worked the standing backlog in order: E3PO (3), disaster/event variants (4), the lines that repeat most on
+  stream (5), and cosmetics/accessories/dyes (1). Only the four owned files touched: items.json, lore_lines.json.
+  bosses.json and potions.json unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- lore_lines.json "e3po" DEEPENED (Mr. E's favourite; the C-side of D37 - the desktop still owns his behaviour):
+  - NEW keys: "raid" (8), "disaster" (8), "festival" (7), and "viewer_roll" keyed by outcome -
+    crit / high / low / fumble, 3 lines each (12), so the Commander can react to a viewer's d20.
+  - EXTENDED: intro 2->5, withdraw 4->7, return 3->6, says 8->12, town_talk 5->10.
+  - A "_note_extras" string documents the added keys (the original "_note" is untouched and byte-identical).
+- lore_lines.json "disasters": every one of the 11 existing disasters gained 2 more "during" lines (2->4 each,
+  +22) so a repeat viewing does not read identically. TWO NEW disasters in the identical schema, which also
+  settles the "+ one more" the plan asked for and takes the set to 13:
+  - "blight" - cost: most of the standing harvest lost; food prices climb and the stores do not refill this season.
+  - "coldsnap" - cost: livestock lost and work stopped; building, trade and the fields all halt until the thaw.
+  Both carry begin / during[2] / pass / cost in exactly the shape the other 11 use.
+- lore_lines.json repeat-heavy lines (these show the most on a long stream): epitaphs 21->33, descend 12->18
+  (format strings kept exactly two %s), cleared 12->18 (exactly one %d), and all six bark lanes +4 each -
+  enter/lord 12->16, trap/hurt/drink/misfire 11->15. Checked for duplicates against the existing lines: none.
+- items.json cosmetics/accessories/dyes, priced against the existing curve and named from this cycle's lore:
+  - accessories 51->57: thaw_ring, blight_charm, bucketline_gloves, barracks_cloak, crater_ring, drover_spurs.
+    Each carries name/slot/cost/flavour plus exactly ONE stat, like every existing entry; slots are only the
+    five that already exist (ring/amulet/cloak/gloves/boots).
+  - cosmetics 96->111: 3 hats (thaw_hood, rot_mask, crater_coronet), 4 banners (barracks, bucketline, thaw,
+    harvest), 8 titles (Thawkept, Rotwarden, of the Bucket Line, the Commander's Own, Crater-walker,
+    Lampwright, Doorkept, Cold-counted). Hats and banners carry a 6-hex "colour"; titles carry no colour,
+    as the existing titles do. No new pets - a pet needs a real asset path and the content worker does not
+    invent one.
+  - dyes 58->64: thaw, rot, hoarfrost, cinderfall, meltwater, lampblack. dye_cost
+    left at 25, unchanged.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  before/after comparison confirmed every pre-existing key and value present and unchanged and no list
+  shortened; new entries asserted against the existing field sets (slot in the existing five, kind in the
+  existing four, 6-hex colours, one stat per accessory, descend/cleared format specifiers). VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. gear.gd _hat cases for thaw_hood, rot_mask, crater_coronet (same L53 pattern as the earlier hats) - LAPTOP CODE.
+  2. raids.gd/town.gd: e3po.raid, e3po.disaster, e3po.festival lines, and e3po.viewer_roll[crit|high|low|fumble]
+     on a viewer's d20 - DESKTOP BUILD (D37), with the roll hook possibly DESKTOP HUD's dice.gd.
+  3. The two new disasters need their costs implemented like the other 11 (D34) - DESKTOP BUILD.
+  4. Nothing else changes shape: every extension is a longer list or a new sibling key, so existing loaders
+     keep working untouched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 6 - shop stock & trader cargo per growth tier, rare uniques, brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- No WORK_PLAN CONTENT item was unchecked and unwritten (C1-C3 writing-complete per Phase O), so this cycle
+  worked the two stalest standing-backlog entries: (2) shop stock and trader cargo per growth tier, and
+  (6) bosses and potions. Touched three of the four owned files: items.json, bosses.json, potions.json.
+  lore_lines.json unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- items.json shop_stock 32 -> 57 and trader_cargo 18 -> 30, then EVERY new key gated into stock_by_tier so a
+  crossing and a city no longer sell the same goods. All 57 shop goods and all 30 cargoes are now placed on a
+  tier; cumulative shop_adds per tier 1..12 is 6/5/6/6/6/4/5/4/4/3/4/4 and cargo_adds 0/1/3/2/3/3/3/3/4/2/3/3.
+  Nothing was removed or reordered - every tier list keeps its original keys first, in their original order.
+  - Tier 1-2 (Crossing, Hamlet): eggs, waterskin, butter, net. No caravan cargo at a crossing at all.
+  - Tier 3-5 (Guild Post, Village, Market Day): tallow, sealing_wax, preserves, besom, ribbon, handscales;
+    cargo charcoal, rawhides, oiljars.
+  - Tier 6-8 (Chapel, Craft Row, Garrison): mourning_cloth, psalter, bellows, hide_glue, smith_file, helm,
+    bowstrings; cargo chapel_plate, candlewax, millstones, mail_shirts.
+  - Tier 9-12 (Market Town, First Wall, Walled Town, City): soap, figs, lock, mortar, brass_lamp, spectacles,
+    pepper, carpet; cargo sugarloaf, parchment_bales, cut_stone, mirrorglass, goldwork.
+  - Prices sit on the existing curve: 2-15 at a crossing, 26-65 through the craft and wall tiers, 85-140 in the
+    city; cargo 85-400, so a late caravan is worth raiding and an early one is barely worth the road.
+- bosses.json rare uniques, shape-first and still only the EIGHT lords - no new lords:
+  - lesser_uniques 9 -> 14: The Grubmother, Hollowed (a wall that only holds, hp 270 / speed 1.5); The
+    Grubmother, Starved (quick for a wall, hp 150 / speed 3.0); The Rattling Host, Silent (no rattle at all,
+    hp 165 / speed 4.2); Nightwing, Broken-Winged (grounded, will not let go, hp 175 / speed 3.2); The Hollow
+    King, Unmade (comes apart still burning, hp 140 / speed 3.8).
+  - greater_uniques 8 -> 12: The Gravewyrm, Coiled (never leaves its ring, hp 340 / speed 2.2); The Ossuary
+    Lord, Kneeling (spends its ward to raise two, hp 280 / attack 28); The Pale Duchess, in Mourning (veiled
+    and slow, the grief spreads, hp 240 / speed 3.8 / attack 30); Mourncoil, Unspooled (striking from three
+    sides, each coil thinner, hp 240 / speed 3.8 / attack 25).
+  - Every stat is skewed TO the modifier per the file's own rule: slower buys hp, faster pays it back.
+- potions.json brews 25 -> 35, all using states that ALREADY exist, so no new state and no new engine effect:
+  pennymend (12/t1, 1d4), ratnip (45/t1, cures poisoned), thawbottle (75/t2, resist_frost 150s), longwatch
+  (65/t2, darkvision 1200s), commanders_flask (110/t2, heroism 120s - E3PO's, never opened), mirestep
+  (160/t3, haste 25s), quarryblood (190/t3, giant 45s), gravewater (240/t3, warded 60s), deepstill
+  (280/t4, 8d6+10), bellwater (350/t4, warded 90s). states unchanged at 15.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  before/after comparison against HEAD confirmed every pre-existing key and value present and unchanged and
+  no list shortened; new entries asserted against the existing field sets (shop/cargo exactly name+cost+
+  flavour with an int cost; every stock_by_tier key resolves in shop_stock/trader_cargo with no key gated
+  twice; tier names and numbering still match lore_lines.growth_tiers 1-12; every unique names one of the
+  eight lords, carries a shape, and no duplicate names; every potion's gives/cures resolves to an existing
+  state, cures only bad states, heal is exactly 3 ints, and all 58 potion aliases are collision-free).
+  0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. Nothing new in shape - shop_stock/trader_cargo/stock_by_tier are still dead until D35/D39 wires them;
+     this cycle only makes that wiring worth doing, since the tier gate now has something to gate.
+  2. bosses.json uniques: the draw already reads lesser_uniques/greater_uniques (D/L-side), so the 9 new
+     variants need no new code - but Broken-Winged (a grounded Nightwing) and Coiled (a Gravewyrm that holds
+     position) lean on behaviour the bestiary may not express yet - LAPTOP CODE to confirm.
+  3. potions.json: !brew reads the keys, so the 10 new brews need no new code. Two carry tier-4 prices, so
+     the apothecary's tier-4 stock list (if it is hardcoded anywhere) wants a look - LAPTOP CODE.
+  4. No key renamed, no list shortened, no new sibling key anywhere: existing loaders keep working untouched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 7 - the tier a good belongs to is now EXPLICIT on the good (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Merge: `git merge origin/main` in W3 reported "Already up to date" - `content` is a strict superset of
+  origin/main (750682b), and L45/L46/L47/L49 and the D28/D42 census commits are already ancestors of this
+  branch. NO PROGRESS.md conflict arose, so nothing had to be kept from either side.
+- FLAG for the supervisor: COORDINATION section 12 (documenting W3 as part of the contract) is NOT in the repo
+  - `git grep "## 12" docs/COORDINATION.md` finds nothing on HEAD or on origin/main. Section 11 is the last
+  one present. If it was written, it is unpushed. The content worker is still operating off sections 10+11.
+- This cycle took the backlog's shop/trader item, which the desktop needs soonest (D31/D32, D35/D39), and
+  closed the one thing a filter still had to guess at. Only items.json touched; bosses.json, potions.json and
+  lore_lines.json are unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- EVERY good now names its own tier. shop_stock and trader_cargo entries each carry a new "tier" key (1-12,
+  the same scale as lore_lines.growth_tiers), so D35/D39 can filter with `good.tier <= town_tier` instead of
+  building a reverse map out of stock_by_tier. The shape is the one the project already uses - potions.json
+  has keyed brews by "tier" since L12.
+  - The values are DERIVED from stock_by_tier, not hand-typed, so the two gates cannot drift apart. The
+    validator asserts they agree key-for-key in both directions and that no good is gated twice or left
+    ungated; stock_by_tier stays as it was and remains the readable per-tier view.
+  - A "_note_tier" sibling in each block documents the key, the cumulative rule, and that the two gates are
+    generated together. The original "_note" in both blocks is untouched and byte-identical.
+- Catalogue filled out at the thin tiers: shop_stock 57 -> 63 (altar_oil t6, oilcloth t8, comb t9,
+  iron_hinges t10, pewter_set t11, glass_goblets t12), trader_cargo 30 -> 33 (salt_fish t4, lime t10,
+  spiced_wine t12). Per-tier shop adds are now 6/5/6/6/6/5/5/5/5/4/5/5 and cargo adds 0/1/3/3/3/3/3/3/4/3/3/4.
+- A crossing and a city are now unmistakably different shops: tier 1 sells six things - ale, bread, eggs,
+  firewood, turnips, a waterskin - and no caravan calls at all. A tier-12 city shelf carries all 63, up to
+  glass goblets at 130 and a carpet at 140, with caravans hauling goldwork at 400. Price span 2-140 in the
+  shop, 85-400 in the cargo, so an early caravan is barely worth the road and a late one is worth a raid.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  comparison against HEAD confirmed every pre-existing key and value present and unchanged with no list
+  shortened; a line-level diff of items.json confirmed that every one of the 96 changed lines is a
+  pre-existing line that only gained a trailing comma - no pre-existing line was reworded or dropped; new
+  entries assert to exactly name+cost+flavour+tier with an int cost and a tier in 1-12; both gates agree in
+  both directions; no good gated twice or ungated; tier names and numbering still match growth_tiers 1-12;
+  tier 1 still has no cargo. 0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. D35 (visible shop stock): read data/items.json shop_stock, skip keys beginning "_note", and show every
+     entry with entry.tier <= Roster.town_tier. That is the whole filter now - no reverse map, no lookup
+     against stock_by_tier. DESKTOP BUILD.
+  2. D39 (trader cargo worth intercepting): same filter over trader_cargo; a caravan rolls with cargo of
+     tier <= town_tier and its "cost" is what a bandit gains and the town loses. Tier 1 must load nothing,
+     because a crossing has no caravans. DESKTOP BUILD.
+  3. D31/D32 (one map, a town that grows): the 12 stock tiers are keyed to growth_tiers by name AND number,
+     both validated this cycle, so whichever the town code already tracks will line up. DESKTOP BUILD.
+  4. If anything already reads stock_by_tier, it keeps working untouched - that block is unchanged except for
+     the new keys appended to its lists. The "tier" key is additive and ignorable by any existing loader.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 8 - the repeat-heavy stream lines, widened (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) was on `laptop` with unpushed work of its own and was NEVER checked out,
+  only `git fetch`ed - read-only, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date"; `content` is still a strict superset of
+  origin/main. No PROGRESS.md conflict arose, so nothing had to be kept from either side.
+- BACKLOG ITEM 5 (epitaphs, barks, descend and cleared - the lines that repeat the most on stream), plus a
+  C3 top-up. data/items.json untouched this cycle.
+- data/lore_lines.json, all additive into the EXISTING lists (no key renamed, no list shortened):
+  - tells: 6 -> 12 per theme, all eight themes (tomb, mine, fortress, temple, lair, prison, works, warren),
+    so a delve's one tell has twice the pool. +48 lines.
+  - descend 18 -> 36, cleared 18 -> 36. A long stream can now run a lot of delves before a descent line or a
+    floor-cleared line comes round again.
+  - barks: enter 16 -> 28, lord 16 -> 28, trap/hurt/drink/misfire 15 -> 27 each. +72 lines, and these are the
+    ones a viewer hears most.
+  - epitaphs 33 -> 58 (+25). The memorial and the Guild Roll stop echoing.
+  - misfire (the Chronicle's %s/%s/%d/%d format lines) 7 -> 14.
+- data/lore_lines.json, TWO NEW SIBLING KEYS (the only non-list-append in this cycle):
+  - "lord_intros_alt": 3 extra intro lines for each of the SAME eight canon lords - no new lords.
+  - "unique_intros_alt": 3 extra intro lines for each of the SAME five rare uniques.
+    lord_intros / unique_intros are one string per key, so variety could not be added inside them without
+    changing their shape and breaking the loaders. Both new keys carry a "_note" naming the pick rule.
+- data/bosses.json: lesser_uniques 14 -> 18, greater_uniques 12 -> 16. Eight more rare uniques, all modified
+  versions of the eight canon lords, never new lords, each a SHAPE with stats skewed to match: Nightwing
+  Lamp-Drawn (hunts the lamp-bearer), the Rattling Host Bellbound (moves all at once or not at all), the
+  Hollow King Crowned Twice, the Grubmother Walled In (seals the room behind the party), the Ossuary Lord
+  Counting (raises the party's own dead first), Mourncoil Still (never moves; the cold closes in),
+  the Gravewyrm Scar-Fed (returns the floor's spells), the Pale Duchess Attended (never fights first).
+- data/potions.json: 35 -> 42 brews. Sweetwater (28), Cloisterbrew (110), Foxfire Drops (70), Fellstill (85,
+  cures poisoned AND blinded), Doorkeeper's Draught (150, warded), Hushwine (155, invisible),
+  The Grain Measure (340, tier 4, regenerating). Every "gives"/"cures" value is one of the 15 states already
+  in the file - no new state was invented, so !brew and the status code need no new cases.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  comparison of each file against its HEAD blob confirmed every pre-existing key and value present and
+  unchanged with no list shortened (0 differences across all four); every new lore entry is a plain string in
+  a list of strings; every new boss entry's keys are a subset of name/shape/hp/speed/attack with the same
+  types as the entries beside it; every new brew's keys are a subset of name/cost/tier/heal/gives/secs/cures/
+  aliases/flavour, no key or alias collides with an existing one, and every state named already exists; a
+  line-level diff showed 21 changed lines and 0 unaccounted for - each is a pre-existing line that only had
+  entries appended inside its array, none reworded or dropped. 0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. lord_intros_alt / unique_intros_alt (NEW keys, the only wiring this cycle): wherever a lord or unique
+     rises and prints lore_lines.lord_intros[key] / unique_intros[key], pick at random from
+     [that string] + lore_lines.lord_intros_alt.get(key, []) (skip the "_note" key). Four lines per lord
+     instead of one. Until that is wired the new keys are simply unread and nothing regresses. OWNER:
+     whoever owns the boss-rise print - LAPTOP CODE (bestiary.gd / delve.gd).
+  2. Everything else needs NO code: tells, descend, cleared, barks, epitaphs and misfire are all existing
+     lists that are already picked from at random, and the new brews are read by !brew from their keys.
+  3. The tier-4 brew (The Grain Measure, 340) is the eighth tier-4 price in the file - if the apothecary's
+     tier-4 stock is hardcoded anywhere rather than filtered on "tier", it wants a look. LAPTOP CODE.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 9 - the channel-point shelf: accessories, cosmetics and dyes widened (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, and was NEVER checked out - only `git fetch`ed,
+  per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- BACKLOG ITEM 1 (cosmetics, accessories and dyes - what viewers actually spend on). Only data/items.json
+  was touched this cycle; lore_lines.json, bosses.json and potions.json are byte-unchanged.
+- data/items.json, all additive into the EXISTING blocks (no key renamed, no key removed, no new block):
+  - accessories 57 -> 78 (+21), spread so no slot falls behind: ring 13 -> 17, amulet 12 -> 16,
+    cloak 11 -> 15, boots 10 -> 14, gloves 11 -> 16. Each new entry carries exactly ONE of the six
+    existing bonus keys (ac / saves / hp / speed / hit / dmg) at the same magnitudes already in the file
+    (+1, or hp 10-14) - no new stat key, no bigger number than the catalogue already allows.
+    Priced inside the ranges already set per slot (ring 210-520, amulet 230-360, cloak 240-480,
+    boots 200-300, gloves 200-300). Named off canon, not invented against it: the clapperless bell,
+    the architect and his toys, the toll, the Ford and the ferry, the bucket line, the chapel, the crater,
+    the Chronicle, and the eight lords (Gravewyrm hide, Ossuary mantle, Mourncoil scale, Nightwing boots,
+    the Pale Duchess's gloves, the Rattling Gauntlets, the Grubmother's brood-iron). Every flavour line is
+    one short beat that earns the price - a reason to buy THAT one, not a restatement of the name.
+  - cosmetics 111 -> 157 (+46): hats 25 -> 37 (+12), banners 23 -> 32 (+9), pets 14 -> 22 (+8),
+    titles 49 -> 66 (+17). Same three shapes as before and no fourth: hats and banners {name, kind, cost,
+    colour}, pets {name, kind, cost, model, scale}, titles {name, kind, cost}.
+  - The eight new pets reuse MODELS ALREADY ON DISK (Duck, Sheep, Pig, Corgi, Horse, Cow, Red) at new
+    scales - a gander, a drake, a yearling ewe, a young boar, a corgi pup, a mare, a heifer, a fox cub -
+    so they need NO new art and cannot render as a missing mesh. Every model path was checked to exist
+    in the tree as part of validation.
+  - Titles are the cheap tier that keeps a small-spend viewer buying (Late to the Ford 40, the Unmeasured
+    50, the Quiet One 60, Toll-paid 70) and the trophy tier that gives a big spend somewhere to go
+    (Gravewyrm-faced 290, the Architect's Toy 280, Favoured of the Duchess 270, the Clapperless 260).
+  - dyes 64 -> 83 (+19) lore-named colours: clapper, ossuary, gravewyrm, nightwing, duchess, mourncoil,
+    hollow, toll, barracks, grainsack, tannin, blueglass, sedge, quarry, lampoil, soot, brick, flaxen,
+    bellbronze. All six-digit lowercase hex, exactly as the existing dyes are. dye_cost left at 25 -
+    one flat price is what keeps !dye an impulse buy, so widening the palette does not touch it.
+- VALIDATION OK (python only - the content worker never runs Godot):
+  - All four owned files json.load() clean.
+  - Key-shape census before/after: accessories still has exactly the same six key-sets, cosmetics exactly
+    the same three. No entry introduced a new or missing field; name/cost/slot/kind value types checked;
+    every dye value checked as 6-char lowercase hex.
+  - `git diff` on data/items.json is 89 added lines and 3 removed, and all three removals are the former
+    last entry of each block re-added with nothing but a trailing comma (drover_spurs, title_coldcounted,
+    lampblack) - so every pre-existing key is byte-identical.
+- CODE WIRING the new keys imply (for the supervisor to route - content never touches code):
+  1. NOTHING here is required. Accessories, dyes and titles are read by key from blocks the game already
+     reads, so the catalogue simply gets longer the moment this merges. If !wear / !dye / the shop list
+     page their output, 78 accessories and 83 dyes may now need a second page. OWNER: whoever owns the
+     shop/wear command print - LAPTOP CODE (chatcmd.gd / gear.gd).
+  2. STILL OPEN from C-cycle 1, now larger: hats and banners carry a `colour` but no `model`, so unless
+     the hat/banner spawner maps a cosmetic key to a mesh, all 37 hats and 32 banners render as the
+     default shape tinted. That is the single highest-value wiring job on this file. OWNER: whoever owns
+     cosmetic spawning - LAPTOP CODE (gear.gd) for the delver, DESKTOP BUILD (hero_body.gd / rig.gd) if
+     town bodies wear them too.
+  3. The 8 new pets need no new asset, but the pet spawner must read `scale` from the entry rather than
+     assuming one scale per model - three models now appear at two sizes each (Duck, Sheep/Pig, Horse/Cow,
+     Red). OWNER: whoever spawns pets - DESKTOP BUILD (animal.gd) / LAPTOP CODE (gear.gd).
+  4. Titles are text-only. If the HUD nameplate has a fixed width, "Favoured of the Duchess" and
+     "Clapperless Bell Banner" are the longest strings the catalogue now contains. OWNER: DESKTOP HUD.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 126 - L52 spells name themselves (laptop jestai, 2026-11-13) - L52 DONE
+VERIFIED INDEPENDENTLY, not taken on trust from either direction. Mr. E reported "only one spell"; the D28
+census measured nine. I ran my own caster-heavy delve rather than believe either: 19-25 casts a run across
+6-7 DISTINCT spells (bolt, chain, fire, frost, heal, renew, smite seen across runs). The content is not
+missing and no spells were added. The viewer simply could not TELL them apart - that is the whole item.
+- scripts/delve.gd: every cast now names itself. SPELL_WORDS gives all nine a readable word, and the name
+  floats over the caster's head in that spell's OWN colour (Spells.COL, which already existed and was only
+  used by the projectile) - that is the part that reads at a glance in a pane, with no Chronicle cost at
+  all. A calm line also names the spell and its target, rate-limited to one per caster per SPELL_SAY_EVERY
+  2.5 s so a long fight does not become a wall of casting chatter.
+- Both cast sites are covered: the offensive one AND the menders, which were the quietest of the lot - a
+  cleric warding someone produced nothing a viewer could see or read before.
+- spells_cast{} is exposed on Delve so a census can count the spread without re-deriving it.
+- A NOISE BUG I INTRODUCED AND THEN REMOVED, worth recording: my first version also announced scar
+  misfires ("X reaches for Bolt - the scar twists it into Heal"). The test output showed the Chronicle
+  printing TWO lines for one event, because _scar_check ALREADY emits a misfire line from a lore_lines
+  template, gated to one per caster per floor. Two lines for one beat is exactly the feed noise L32b's
+  pacing work existed to kill, and lore_lines.json is the CONTENT writer's file - not mine to reword. So
+  the misfire Chronicle line is left to them and the float carries the naming instead: it shows what the
+  spell BECAME, in that spell's colour. Legibility gained, no extra line spent.
+- tools/_l52_test.gd (NEW, headless): A verifies the premise with its own run and requires >= 3 distinct
+  spells; B requires every spell that fired AND all nine in Spells.ORDER to have both a name and a colour,
+  and that no two share a name (they must be tellable apart); C checks a scar misfire really does swap one
+  spell for another and that both sides can be named. L52_TEST OK, 9 checks, 0 failed.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 2004 (MON_INPROP 0 of 140); _delve_test 0 errors/nulls.
+- WHAT I DID NOT DO, and who owns it: making each spell LOOK different in flight - the projectile mesh,
+  trail and impact - lives in scripts/spells.gd, which is DESKTOP-owned under COORDINATION 11.2. I have not
+  touched it. Spells.COL already distinguishes them by colour and I have now surfaced that colour in the
+  float, which is the strongest legibility available from inside my own files. If Mr. E still cannot tell
+  two spells apart in flight after this, the remaining work is desktop-side in spells.gd (and it pairs with
+  D30, the town-side half of this same finding).
+- AN L49 REGRESSION OF MINE, CAUGHT HERE AND FIXED HERE. _l25_test failed this cycle with one stuck
+  delver: "floor 10 Bree at (-2.5, -400.0, -9.4) (search)". The state name gives it away - that is L49's
+  chest-search, not anything to do with L52. A chest can be placed somewhere the party cannot actually
+  path to, and _search_tick then ground the seeker against it for the whole 30 s window while the rest of
+  the party stood waiting. Last cycle I wrote in this file that the chests were "the first suspect if the
+  watchdog count climbs"; it climbed, and they were.
+  FIX: an unreachable chest is now ABANDONED - stuck_on(b, 2.0) marks it searched, clears the progress
+  record, counts chests_unreachable and says "X cannot get to the chest and leaves it" - and the whole
+  searching phase is capped at 12 s instead of 30. A chest is a nice-to-have; it is never a reason to pin
+  a delver to the floor. _l25_test back to OK 13/13 with 0 stuck.
+  WORTH KNOWING: this failure is INTERMITTENT - the same test passed twice before it failed once, so a
+  single green run is not proof. I re-ran it rather than declare it fixed off one: it passed TWICE
+  consecutively after the fix, 0 stuck both times. If a future cycle sees a stuck delver in state "search"
+  again, the unreachable-chest path is where to look first, and the honest answer may be to stop placing
+  chests in cells with no route to them at all (dungeon_hd._dress) rather than recovering after the fact.
+
+## L-cycle 127 - L55 forging now actually reaches a viewer's hero (laptop jestai, 2026-11-13) - L55 DONE
+MEASURED BEFORE CHANGING ANYTHING, and NEITHER of the supervisor's two candidates was the cause:
+- "forging never raises the tier" - FALSE. buy_weapon/buy_armour work perfectly: a probe with gold in
+  hand went w0 -> w1 and a0 -> a1 first try. town_tier is 4, so tier 1 is forgeable.
+- "death resets it" - FALSE as stated. kill() leaves weapon/armour on the record untouched and reroll()
+  rerolls STATS only. What IS true is that a hero who comes back is a FRESH hero (fresh() starts at
+  w0/a0, 40 gold) - but that is canon, not a bug, and the census saw w0/a0 on SURVIVORS.
+THE ACTUAL CAUSE: nothing ever CALLED the forge for a viewer's hero. The town's own band kits itself up
+in Adventurers._kit_up, but a viewer's hero only ever forged if that viewer typed !forge. So heroes
+earned and never spent - my soak reproduced it exactly: four survivors home with 69-115 gold, tier 1
+costing 52, and not one of them had climbed. The census's "17 forge lines" were refusals and flavour, not
+purchases; a hero with 0 gold gets "Pauper needs 52 gold ... you have 0" and stays at w0.
+- scripts/roster.gd: NEW kit_up_after_delve(uid) - the smith fits out a hero who comes home with coin.
+  Deliberately conservative, because this is a VIEWER'S gold and not mine to empty: at most ONE step a
+  delve, a reserve of KIT_RESERVE (3 flasks of oil) is always left so nobody is stranded without
+  re-supply money, armour first while it trails the weapon (Adventurers._kit_up's own rule), and a
+  viewer who is saving can still outpace it by hand with !forge.
+- scripts/delve.gd _finish(): survivors are fitted out when they get home, and the smith's line is SAID -
+  an upgrade nobody can see would be the same class of bug as L46 and L49.
+- tools/_l55_test.gd (NEW, headless): A proves the forge works when called and that a penniless hero is
+  REFUSED (so a "forge line" is not a purchase); B proves kill() and reroll() keep the gear and that the
+  real reset is simply coming back as a fresh hero; C runs a real delve to the end; D sends the SAME
+  heroes down a second time. L55_TEST OK, 12 checks. Measured: round 1 climbed 0 of 4, round 2 climbed
+  2-3 of 4 (Ashvein a1, Brelda w1/a1, Corrin a1 on one run) - tiers climb across a session.
+- TWO TEST BUGS OF MINE, both of which first looked like the fix had failed:
+  (1) the first soak used max_floors 8 and hit the frame cap in state "descend" - the delve never reached
+      _finish(), so the kit-up never ran. The fix was fine; the test never got to it. Shortened to 3.
+  (2) I then asserted "someone climbed" after ONE short delve. Whether anyone can afford the forge after
+      one run is loot luck (measured 0-1 of 4), so that assertion was flaky dressed up as a product
+      failure. The DONE criterion says a SOAK, and a soak is the session - the climb is now asserted
+      after the second delve, and round one only reports.
+- Also fixed while there: my first version called haggle() in the affordability pre-check AND buy_* then
+  haggled again, charging a different number than the check tested and burning a roll. It now tests the
+  un-haggled price, which is the conservative side.
+- AND AGAIN THE INDENTATION TRAP: my roster.gd block went in TAB-indented into a space-indented file and
+  every dependent script reported "Could not resolve class Roster" while naming no line in roster.gd.
+  This is the SECOND time this cycle-run (L45 was the first) - `--headless --check-only --script <file>`
+  names the line instantly. CHECK THE FILE'S INDENT STYLE BEFORE EDITING IT.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1231 (MON_INPROP 0 of 55); _delve_test 0 errors/nulls;
+  L3_TEST OK (the gear/forge suite still passes); L25_TEST OK 13/13 with 0 stuck and 0 watchdog frees.
+- FOR MR. E - A POLICY CALL, NOT A BUG: heroes now spend their own gold automatically when they come
+  home. That is the only way tiers climb without every viewer knowing !forge, but it IS their gold. If he
+  would rather viewers chose, the whole behaviour is one call in delve._finish(); if he wants them to
+  climb faster, KIT_RESERVE (36) and the one-step-a-delve cap are the dials.
+- NOTE FOR THE SUPERVISOR: scripts/adventurers.gd (which holds the NPC band's _kit_up) appears in NO
+  worker's ownership list in COORDINATION 11.2 - not the laptop's, not the desktop build's. I read it but
+  did not touch it. It needs an owner.
+
+## L-cycle 128 - L53 the content writer's hats have shapes (laptop jestai, 2026-11-13) - L53 DONE
+Raised by the content writer, and the symptom was worse than "renders as the default shape": gear.gd
+_hat() matched only four keys (wide_hat, straw_hat, feather_cap, crown_of_ash) and everything else fell
+through to `hat.mesh = crown` with CylinderMesh still at ITS OWN defaults - top 0.5, bottom 1.0, height
+2.0. That is a two-metre pale cone balanced on the hero's head, not a dull hat.
+- EIGHT keys had no case: guild_hood, mire_hood, watch_helm, miller_cap, bell_coif, ford_circlet,
+  guard_helm, plumed_helm. Each now has its own silhouette built from the kit's own primitives, because
+  the colour the data supplies is not enough to tell a coif from a kettle-helm at pane distance:
+  hoods get a close crown and a drape down the neck; bell_coif is a squashed dome on the skull with no
+  brim; watch_helm is a shallow steel dome under a wide flat brim; miller_cap is a low soft cap with a
+  peak over the brow; ford_circlet is a thinner, lower band than the ash crown; guard_helm is a closed
+  helm with a nasal bar, and plumed_helm is that plus a crest.
+- THE REAL FIX IS THE DEFAULT CASE. A named case each is only worth having until the content writer adds
+  hat number thirteen. `_:` now gives any unknown key a plain soft cap, so a new hat degrades to dull
+  instead of breaking the model and waiting for someone to notice on stream.
+- tools/_l53_test.gd (NEW, headless) is DRIVEN BY THE DATA, not by a list I typed: it reads every
+  cosmetic with kind == "hat" out of data/items.json and builds each one on a bare skeleton, so the next
+  hat added is checked automatically. It asserts every key builds a piece, that NONE is left at
+  CylinderMesh's untouched defaults (the actual bug, caught by value not by eye), that the hats are
+  tellable apart, and that an unknown key degrades. L53_TEST OK, 5 checks.
+  Measured: 12 hat keys, 11 distinct silhouettes. The one pair that shares a shape is guild_hood and
+  mire_hood - both hoods, differing by colour - which is deliberate, not an oversight.
+- data/items.json was READ, never written: it is the content writer's file (COORDINATION 11.2).
+- Regression: parse 0 SCRIPT ERROR; L3_TEST OK; _offfloor 0 of 1388 (MON_INPROP 0 of 92); _delve_test 0
+  errors/nulls. Indent style checked BEFORE editing this time (gear.gd is spaces) - the trap that cost
+  time in L45 and L55 cost nothing here.
+- NOT VERIFIED BY EYE: these are headless mesh assertions. The shapes are reasoned from primitives and
+  measured, but nobody has LOOKED at a hero wearing a plumed helm at 1080p. The laptop no longer owns the
+  UI files and this needs a hero on screen, so if a hat reads badly on stream it is a tweak to the numbers
+  in _hat, not a design question.
+
+## L-cycle 129 - L54 Scarwater finally does something (laptop jestai, 2026-11-13) - L54 DONE
+VERIFIED FIRST, as for L46/L52/L55, and the content writer's flag was exactly right. data/potions.json
+has shipped Scarwater (tier 4, 300 gold, 20 s) giving the state "scar_touched" - "its next spell is
+doubled, or misfires; the scar decides" - and the state was declared alongside it. The only scar_touched
+anywhere in scripts/ was fishing.gd's unrelated scar_touched_chance. The draught was bought, drunk, shown
+on the hero and did NOTHING.
+- scripts/delve.gd _scar_check(): a scar-touched hero now skips the usual scar roll entirely, because the
+  scar already has their spell. It decides once - half the time the spell is DOUBLED, half the time the
+  scar TAKES it (a misfire) - and the draught is spent either way. Both outcomes float over the caster in
+  the scar's own violet (Spells.SCAR) and say so in the Chronicle, so a viewer can see what 300 gold
+  bought. This hangs off the existing scar machinery rather than inventing a parallel one: _scar_check is
+  already the single place where the scar decides a cast's fate.
+- The doubling applies to MENDING as well as damage - the data says "its next SPELL", not "its next
+  attack", so a cleric who drinks it doubles the mend or loses it.
+- Counters scar_touched_spells and scar_doubles are exposed for a census.
+- A REAL BUG MY OWN TEST FOUND, before this shipped: the first version consumed the doubling AFTER the
+  to-hit check in _cast_at. A spell that MISSED therefore left the flag standing and doubled the NEXT
+  cast - one 300-gold draught paying twice, which is not what "its next spell is doubled" says. The
+  doubling is now taken and cleared at the top of _cast_at, before any path can return early: the scar
+  decided, and a fumble spends it just the same. I only noticed because an assertion about the COUNTER
+  disagreed with the flag, which is a good argument for counting things the test can see.
+- tools/_l54_test.gd (NEW, headless): A re-reads potions.json so the test tracks the DATA rather than my
+  memory of it; B drinking applies the state; C drives 60 scar-touched casts and requires BOTH outcomes,
+  that every cast is decided, that the state NEVER lingers (otherwise one draught buys a doubled spell
+  every cast for 20 s), and that the counters agree; D a hero without the draught is untouched.
+  L54_TEST OK, 10 checks. Measured: 28 doubled / 32 taken of 60, 0 lingered.
+- A TEST BUG OF MINE: my fake party dict had no "body" key, so drink() and _float_text() threw. A real
+  party member always has one - I fixed the harness rather than loosening the product code to suit it.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1430 (MON_INPROP 0 of 110); _delve_test 0
+  errors/nulls; L52_TEST OK (the spell-naming work still passes with the scar path changed); L25_TEST OK
+  13/13 with 0 stuck delvers.
+- data/potions.json was READ, never written - the content writer's file (COORDINATION 11.2).
+- FOR MR. E: Scarwater is now a real gamble - 300 gold for a coin-flip between a doubled spell and losing
+  the cast outright. That is what the flavour text promised ("it cuts both ways, and it knows which"). If
+  he wants the odds tilted, the coin flip is one line in _scar_check.
+
+## S-cycle 3 - supervisor pass (2026-11-13 05:02)
+MERGED to main, full gate clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _townwalk in_solid 0/824 stuck_on_route 0, _delve_test):
+  - content C5-C9: tier-gated shop stock and trader cargo (every good names its growth tier),
+    the repeat-heavy stream lines widened, channel-point shelf at 21 accessories / 46 cosmetics /
+    19 dyes, rare uniques and brews.
+  - laptop L52 (spell choice made legible), L53 (hat keys given shapes + a safe default so the
+    next new key cannot break), L54 (Scarwater's scar_touched finally does something).
+
+HELD: hud-ui. Same four code conflicts for the third time. Root cause found and it is not skill:
+hud-ui branched at a1f7463 and has NEVER merged main (main +49, hud-ui +5). A U2 session resolved
+all four correctly in the worktree and the run ended before committing, so it was lost; U3 and U4
+built on the still-unmerged branch. Logged as L59b with an explicit ordering fix: merge, resolve,
+COMMIT AND PUSH, and only then test. Not resolved blind by the supervisor - these are the HUD
+worker's files and a windowed test is the only real check.
+
+HUB H9 SECURITY REVIEW - PASS, HELD FOR MR. E. 282 added lines across app.js/index.html/style.css.
+No innerHTML anywhere in the diff. No fetch/POST/PATCH/upsert - there is NO viewer write path, which
+is the invariant that mattered most: the die DISPLAYS a roll the game already made, so the hub stays
+read-only and the Phase 3 RLS gate is not tripped. No CSP change. No snapshot value used as a URL,
+src, href or style; the only setAttribute added is aria-hidden. Republishing gh-pages remains Mr. E's
+explicit call.
+
+## D-cycle 124 - D30 spells made legible in town (desktop CruzaderPC, 2026-11-13) - D30 DONE
+The census (D28) ruled D30 is a READABILITY problem, not a content one: nine distinct spells already
+fire, the viewer just cannot tell them apart, and L52 did the dungeon half. This is the TOWN half, and
+it has two parts - both in desktop-owned files.
+- THE LOOK (scripts/spells.gd). Four spells are thrown, and three of them flew as the SAME round orb,
+  separated only by colour: a blue ball (bolt), a pale-blue ball (chain), an orange ball (fire). Frost
+  already flew as a prism shard, which is why it was the one spell nobody confused. So the three orbs now
+  each wear their own silhouette: bolt is a LANCE (a shaft of force, a BoxMesh core oriented along its
+  flight by a new orient flag on _fly); fire is an EMBER whose trail is fire-coloured and licks upward;
+  chain is a crackling SPARK with a pale electric trail. _orb grew one `form` argument and a form-aware
+  trail; none of the impact FX changed. Colour was never the fix on its own - shape and motion are what
+  read at pane distance under stream compression.
+- THE NAME (scripts/spells.gd + scripts/raids.gd). The town never named a cast. Added Spells.name_over()
+  - a billboard Label3D that rises and fades over the caster in the spell's own colour, carrying the
+  spell's WORD (Bolt/Heal/Ward/Mend/Chain/Fire/Frost/Smite/Renew) - throttled per caster so a busy mender
+  does not stack labels. Wired at BOTH raids.gd cast sites (the menders and the harm-casters). This is the
+  deliberate mirror of L52's dungeon float, which chose a float over a Chronicle line to respect the L32b/
+  L40 feed discipline; lore_lines.json is the content writer's, so no Chronicle line was added.
+- WHY name_over lives in spells.gd but is NOT called from Spells.cast: the dungeon (delve.gd, laptop-owned)
+  already floats its own name via L52. Putting it in cast() would double it there. So the helper is shared
+  but the TOWN caller invokes it; delve is untouched.
+- tools/_d30_test.gd (NEW, headless): A every spell in ORDER has a word and a colour and no two words
+  collide; B the four thrown spells map to four DISTINCT form tokens AND the form actually changes the
+  built core mesh (a lance builds a BoxMesh, a plain orb a SphereMesh) - checked by building the real
+  projectile, not by eye; C name_over floats a 'Frost' label in frost's colour; D all nine spells still
+  cast and are counted. D30_TEST OK, 11 checks, 0 fails. Thrown forms measured: bolt=lance chain=spark
+  fire=ember frost=shard.
+- NOT VERIFIED BY EYE: these are headless mesh/colour/string assertions - a --headless run renders no GPU
+  frame, so nobody has LOOKED at the four projectiles side by side at 1080p. The shapes are structurally
+  confirmed different and reasoned from primitives, the same limit L52 and L53 noted for their mesh work.
+  If two spells still read alike on stream it is a number tweak in _orb's forms, not a design question.
+- Indent checked BEFORE editing (spells.gd and raids.gd are 4-space; the test file is tabs, matching the
+  other tools/_*_test.gd) - the trap that cost L45/L55 time cost nothing here.
+- Gate on the merged tree: parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0 of 1206 (MON_INPROP 0 of 86);
+  TWITCH_PARSE OK; _townwalk PASS in_solid 0/15895 (0.000%) raid_in_solid 0/2767; _delve_test ran clean, 0
+  SCRIPT ERROR (its feed still shows casters naming Bolt/Smite, so the dungeon path is unbroken).
+- data/ was not touched; delve.gd, the HUD files and the dungeon files were not touched (COORDINATION 11.2).
+

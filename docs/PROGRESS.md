@@ -2,6 +2,31 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle D3 - D42 THE SILENT TOWN: FOOTSTEPS + ANIMAL VOICES GET A CALLER (desktop, Nov 13)
+Picked up a prior run's uncommitted D42 WIP (lock left RUNNING 02:20, no IDLE - cut off mid-cycle), reviewed it against
+my owned files, validated the full gate, and finished it. All changes are in DESKTOP BUILD files only.
+- THE BUG (census D28/D42): sfx.gd defines footstep_grass/stone/water/wood and the animal voices, and NOTHING ever
+  played them - 40 of 94 kinds fired 0 in the census soak. Footfalls are a town's most frequent discrete sound.
+- FOOTSTEPS: townsfolk.gd _gait_step now plays a footstep once per 0.62*size_k stride of real travel, lod==0 only (near
+  the camera; far steps are inaudible and would only spend the counter), surface from a new town.surface_at(pos):
+  the river bridge = wood, open river = water, cobbled roads + the market paving = stone, everything else = grass.
+  New Sfx GAP floor (0.05-0.08 s) keeps a crowd near the camera a patter, not a machine-gun. Heroes inherit it
+  (HeroBody extends Townsfolk; no _gait_step override).
+- ANIMAL VOICES: animal.gd _voice gives each beast its own species call on a 7-16 s stagger (VOICE: Pug/Corgi->dog_bark,
+  Cat->cat_meow, Horse->horse_neigh, Foal->horse_whinny, Pig->boar_grunt), raid-gated (quiet under a raid), 3D-attenuated
+  (-11 dB) so only what the camera is near is heard, and a fleeing/occasional dog whines instead of barks.
+- WHY horse_neigh FIRED 0: daylight.gd's ambient sampler keyed off the roaming director camera, and the animals are
+  penned, so it never reached them. The animals now voice themselves, independent of the sampler.
+- TEST tools/_d42_test.gd (real Town + director camera, 60 s / 8x soak, headless, counts plays): footsteps 1642
+  (grass 745, stone 790, wood 59, water 48), animal voices 85 (horse_neigh 20 + whinny 4, cat 28, dog 15 + whine 6,
+  boar 12). D42_TEST OK (footsteps>0, animals>0, horse>0).
+- GATE: parse 0 SCRIPT ERROR; _offfloor 0/1617 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk in_solid 1/17337
+  (0.006%) raid 0/5263, stuck_on_route 0, PASS; _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR to floor 4. All green.
+- NOT DONE here: Mr. E's own DONE bar is a re-recorded clip measured for discrete events; headless counts confirm the
+  callers fire, but his OBS Game Capture sits at 45% / -6.8 dB (WORK_PLAN D29), so he should raise it to actually hear
+  them. Files: scripts/townsfolk.gd, town.gd, animal.gd, sfx.gd, tools/_d42_test.gd(+.uid).
+
+
 ## D-cycle D1 - D18a PROP/BUILDING SANITY (desktop, Nov 12)
 - tools/_d18a_test.gd: a sanity sweep over Town.tscn. Check A (grounding): 1034 ground props, base vs height_at at
   the prop's own origin; props on a steep slope (crag/mine/mountain/bank), surface/mounted/water dressing, dock

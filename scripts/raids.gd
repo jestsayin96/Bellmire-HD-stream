@@ -568,6 +568,7 @@ func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> v
         if hurt != null:
             var mk := Spells.cast(String(MENDERS[cls]), me, hurt, in_scar)
             Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(mk, "Spellcasting"))
+            Spells.name_over(me, mk)   # D30: the mend names itself over the caster
             _bless(hurt, mk, st)
             return
     var book: Array = BOOKS[cls]
@@ -594,6 +595,7 @@ func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> v
             at = (nx["node"] as Node3D).global_position
     var actual := Spells.cast(kind, me, tn, in_scar, more)
     Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
+    Spells.name_over(me, actual)   # D30: the bolt/fire/frost/chain names itself over the caster
     if not Spells.HARM.has(actual):
         # a misfire into a mending spell mends the raider - wild magic
         if actual == "heal" or actual == "renew" or actual == "mend":

@@ -1,44 +1,95 @@
 {
-  "_source": "NOTES.md, creature strains",
-  "idea": "Rename, recolour and re-weight a body. Each strain is a distinct tactical shape, not a palette swap.",
+  "_source": "NOTES.md, creature strains. LIVE TABLE (L27b): Bestiary loads this at _static_init; the const table in bestiary.gd is only the fallback when this file is missing or broken.",
+  "_format": "tint/glow are [r,g,b] 0-1. hp/atk/spd multiply the creature's stats, scale multiplies its height. particle: ember rises, drip falls, wisp drifts, spark flickers, spore hangs slow. wild: the glow wanders the hue wheel (monster.gd _tick_wild).",
+  "_measured": "Strains IMPROVED survival (83% vs 63%) and soul retention. Do not soften them.",
+  "_gating": "Floors 1-2 are 85% plain so a new hero meets something readable; depth 10+ is only 15% plain.",
   "strains": [
     {
+      "id": "plain",
+      "label": "",
+      "hp": 1.0, "atk": 1.0, "spd": 1.0, "scale": 1.0,
+      "tint": [1.0, 1.0, 1.0], "glow": [0.0, 0.0, 0.0],
+      "shape": "the creature as the bestiary wrote it"
+    },
+    {
       "id": "hollowed",
-      "hp": 0.75,
-      "atk": 0.95,
-      "spd": 1.1,
+      "label": "hollowed",
+      "hp": 0.75, "atk": 0.95, "spd": 1.1, "scale": 0.92,
+      "tint": [0.86, 0.9, 0.84], "glow": [0.0, 0.0, 0.0],
       "shape": "fodder, quick and brittle"
     },
     {
       "id": "drowned",
-      "hp": 1.35,
-      "atk": 0.9,
-      "spd": 0.8,
+      "label": "drowned",
+      "hp": 1.35, "atk": 0.9, "spd": 0.8, "scale": 1.05,
+      "tint": [0.52, 0.78, 0.82], "glow": [0.2, 0.6, 0.7],
+      "particle": "drip",
       "shape": "a wall"
     },
     {
       "id": "emberbound",
-      "hp": 0.9,
-      "atk": 1.4,
-      "spd": 1.15,
+      "label": "emberbound",
+      "hp": 0.9, "atk": 1.4, "spd": 1.15, "scale": 1.0,
+      "tint": [1.0, 0.58, 0.32], "glow": [1.0, 0.4, 0.1],
+      "particle": "ember",
       "shape": "glass cannon"
     },
     {
       "id": "gorged",
-      "hp": 1.6,
-      "atk": 1.1,
-      "spd": 0.75,
-      "scale": 1.35,
+      "label": "gorged",
+      "hp": 1.6, "atk": 1.1, "spd": 0.75, "scale": 1.35,
+      "tint": [0.86, 0.84, 0.46], "glow": [0.0, 0.0, 0.0],
       "shape": "brute"
     },
     {
       "id": "wraithtouched",
-      "hp": 0.85,
-      "atk": 1.25,
-      "spd": 1.3,
+      "label": "wraithtouched",
+      "hp": 0.85, "atk": 1.25, "spd": 1.3, "scale": 0.98,
+      "tint": [0.68, 0.55, 0.95], "glow": [0.6, 0.4, 1.0],
+      "particle": "wisp",
       "shape": "skirmisher"
+    },
+    {
+      "id": "scarborn",
+      "label": "scarborn",
+      "hp": 0.95, "atk": 1.2, "spd": 1.1, "scale": 1.02,
+      "tint": [0.92, 0.8, 1.0], "glow": [0.9, 0.3, 0.8],
+      "wild": true,
+      "shape": "grown too near the wild magic; its glow never settles"
+    },
+    {
+      "id": "mossbacked",
+      "label": "mossbacked",
+      "hp": 1.3, "atk": 0.95, "spd": 0.85, "scale": 1.08,
+      "tint": [0.62, 0.82, 0.5], "glow": [0.0, 0.0, 0.0],
+      "shape": "the drowned of the buried meadows and woods, grown over"
+    },
+    {
+      "id": "duskforged",
+      "label": "duskforged",
+      "hp": 1.45, "atk": 1.35, "spd": 0.6, "scale": 1.15,
+      "tint": [0.45, 0.42, 0.52], "glow": [0.3, 0.18, 0.5],
+      "particle": "spark",
+      "shape": "the anvil - slow iron that hits like a falling gate; kite it or be broken",
+      "_new": "L27b deep strain"
+    },
+    {
+      "id": "sporeblown",
+      "label": "sporeblown",
+      "hp": 1.25, "atk": 1.05, "spd": 0.9, "scale": 1.05,
+      "tint": [0.78, 0.82, 0.58], "glow": [0.35, 0.5, 0.1],
+      "particle": "spore",
+      "shape": "creeping attrition - tougher than it looks and never in a hurry",
+      "_new": "L27b deep strain"
+    },
+    {
+      "id": "veilstruck",
+      "label": "veilstruck",
+      "hp": 0.6, "atk": 1.15, "spd": 1.5, "scale": 0.95,
+      "tint": [0.75, 0.8, 0.95], "glow": [0.4, 0.7, 0.9],
+      "particle": "wisp",
+      "shape": "a blur you cannot pin - gone before the blow lands, dead the moment one does",
+      "_new": "L27b deep strain"
     }
-  ],
-  "gating": "Floors 1-2 are 85% plain so a new hero meets something readable; depth 10+ is only 15% plain.",
-  "measured": "Strains IMPROVED survival (83% vs 63%) and soul retention. Do not soften them."
+  ]
 }

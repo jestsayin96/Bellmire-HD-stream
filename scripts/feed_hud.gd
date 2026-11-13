@@ -71,9 +71,14 @@ var _pace_t := 0.0
 
 func _build_chrome() -> void:
     _panel = PanelContainer.new()
+    # L39: Mr. E's reference is a small LIGHT box, so the parchment is lifted close to white
+    # and the side margins tightened - it is a compact panel now, not a full-width band.
     var sb := UiTheme.parchment()
+    sb.bg_color = Color(0.97, 0.95, 0.90, 0.95)
     sb.content_margin_top = UiTheme.px(6)
     sb.content_margin_bottom = UiTheme.px(6)
+    sb.content_margin_left = UiTheme.px(10)
+    sb.content_margin_right = UiTheme.px(10)
     _panel.add_theme_stylebox_override("panel", sb)
     _panel.clip_contents = true
     _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -271,10 +276,12 @@ func _rebuild() -> void:
         lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
         lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
         if _chrome:
-            # the bar: one line an entry, the full width
+            # L39 the centre box: one line an entry. The box is narrow, so a long line ends
+            # in an ellipsis rather than being cut mid-glyph (clip_text) - the full text is
+            # in chat either way.
             lb.autowrap_mode = TextServer.AUTOWRAP_OFF
             lb.max_lines_visible = 1
-            lb.clip_text = true
+            lb.clip_text = false
             lb.custom_minimum_size = Vector2.ZERO
             lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         lb.add_theme_font_size_override("font_size", UiTheme.px(CHRON_PX if _chrome else 28))

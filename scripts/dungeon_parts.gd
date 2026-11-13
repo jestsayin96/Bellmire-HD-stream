@@ -145,6 +145,42 @@ static func spike_trap() -> Node3D:
         t.tween_property(spikes, "position:y", -0.72, 0.6))
     return n
 
+## L49 (Mr. E: "no chests, no drops, nobody searching"): a CHEST - something physical on the
+## floor for a delver to walk to and search, so the loot roll that already existed has a place
+## and a moment instead of happening invisibly at floor's end.
+## set_meta("open") tips the lid and kills the glint; Delve calls it when the search finishes.
+static func chest() -> Node3D:
+    var n := Node3D.new()
+    n.name = "Chest"
+    var wood := _m(Color(0.33, 0.21, 0.11), 0.0, 0.85)
+    var iron := _m(Color(0.30, 0.30, 0.32), 0.8, 0.4)
+    _box(n, Vector3(1.0, 0.55, 0.65), Vector3(0, 0.275, 0), wood)
+    # the bands, so it reads as a chest and not a crate at pane distance
+    _box(n, Vector3(1.04, 0.10, 0.69), Vector3(0, 0.16, 0), iron)
+    _box(n, Vector3(0.12, 0.58, 0.69), Vector3(0, 0.28, 0), iron)
+    var lid := Node3D.new()
+    lid.name = "lid"
+    lid.position = Vector3(0, 0.55, -0.325)        # hinged at the back edge
+    n.add_child(lid)
+    _box(lid, Vector3(1.0, 0.14, 0.65), Vector3(0, 0.07, 0.325), wood)
+    _box(lid, Vector3(1.04, 0.06, 0.69), Vector3(0, 0.14, 0.325), iron)
+    # a small warm glint so a viewer can pick it out of a dark floor in a pane
+    var glint := OmniLight3D.new()
+    glint.name = "glint"
+    glint.light_color = Color(1.0, 0.85, 0.45)
+    glint.light_energy = 0.9
+    glint.omni_range = 3.2
+    glint.position = Vector3(0, 0.75, 0)
+    n.add_child(glint)
+    n.set_meta("open", func() -> void:
+        if not is_instance_valid(lid):
+            return
+        var t := lid.create_tween()
+        t.tween_property(lid, "rotation:x", deg_to_rad(-105.0), 0.45).set_trans(Tween.TRANS_BACK)
+        if is_instance_valid(glint):
+            t.parallel().tween_property(glint, "light_energy", 0.0, 0.45))
+    return n
+
 ## PRESSURE PLATE: a stone that sinks when stepped on (here: on a loop)
 static func pressure_plate() -> Node3D:
     var n := Node3D.new()

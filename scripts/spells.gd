@@ -42,7 +42,19 @@ const CHAIN_HOP := 0.12          # s between the chain's leaps
 ## cast gathers with a soft mana_charge under it; a scar misfire adds a curse.
 const SOUND := {"bolt": "lightning", "chain": "lightning", "fire": "fireball", "frost": "ice_shard",
                 "heal": "heal", "renew": "heal", "mend": "buff", "ward": "shield", "smite": "summon"}
+## D30: the human word for each spell, in the game's voice, FLOATED over the
+## caster in town so a viewer can tell a Bolt from a Frost from a Smite. This is
+## the town mirror of L52, which named the dungeon's casts; the town had none.
+const WORD := {"bolt": "Bolt", "heal": "Heal", "ward": "Ward", "mend": "Mend",
+               "chain": "Chain", "fire": "Fire", "frost": "Frost", "smite": "Smite", "renew": "Renew"}
+## D30: the in-flight SILHOUETTE each thrown spell wears, so colour is not the
+## only thing separating them. frost already flew as a prism shard; bolt, chain
+## and fire were all the same round orb (a blue, a pale-blue and an orange ball).
+## Now: bolt is a lance of force, fire a flaming ember, chain a crackling spark,
+## frost its shard. "shard" is built inside _frost; the rest go through _orb.
+const FORM := {"bolt": "lance", "chain": "spark", "fire": "ember", "frost": "shard"}
 static var last := {}            # the last cast: kind, hand, aim, caster feet (tests)
+static var cast_counts := {}     # D28/D30 census: spell name -> times cast (town + dungeon via Spells.cast)
 
 ## how tall a body stands (its own meshes; health bars and labels left out),
 ## measured once and kept on the body
@@ -122,6 +134,7 @@ static func cast(kind: String, caster: Node3D, target, in_scar := false, more: A
     var ground := ground_of(target)
     var hand := hand_of(caster, aim)
     last = {"kind": actual, "hand": hand, "aim": aim, "feet": caster.global_position}
+    cast_counts[actual] = int(cast_counts.get(actual, 0)) + 1
     _flash(root, hand, col, 0.4)
     Sfx.at("mana_charge", hand, -8.0)
     Sfx.at(String(SOUND.get(actual, "spell")), hand, -2.0)
@@ -144,6 +157,45 @@ static func cast(kind: String, caster: Node3D, target, in_scar := false, more: A
     if in_scar:
         _crackle(root, hand)
     return actual
+
+## D30: the readable word for a spell (town naming).
+static func word(kind: String) -> String:
+    return String(WORD.get(kind, kind.capitalize()))
+
+## D30: the in-flight form token for a thrown spell (tests + _orb read this).
+static func thrown_form(kind: String) -> String:
+    return String(FORM.get(kind, "orb"))
+
+## D30: a short billboard that rises and fades over the caster, in the spell's
+## own colour, naming the cast - so a viewer in town can read what was thrown.
+## Throttled per caster so a busy mender does not stack labels. The dungeon
+## floats its own name (L52); only town callers use this.
+static func name_over(caster: Node3D, kind: String) -> void:
+    if caster == null or not is_instance_valid(caster) or caster.get_tree() == null:
+        return
+    var now := Time.get_ticks_msec()
+    if caster.has_meta("spell_name_t") and now - int(caster.get_meta("spell_name_t")) < 1400:
+        return
+    caster.set_meta("spell_name_t", now)
+    var root: Node = caster.get_tree().current_scene if caster.get_tree().current_scene else caster.get_parent()
+    if root == null:
+        return
+    var lbl := Label3D.new()
+    lbl.text = word(kind)
+    lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lbl.modulate = COL.get(kind, Color.WHITE)
+    lbl.outline_modulate = Color(0, 0, 0, 0.85)
+    lbl.outline_size = 10
+    lbl.font_size = 40
+    lbl.pixel_size = 0.0045
+    lbl.no_depth_test = true
+    root.add_child(lbl)
+    lbl.global_position = caster.global_position + Vector3(0, body_height(caster) + 0.5, 0)
+    var tw := lbl.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lbl, "global_position:y", lbl.global_position.y + 0.8, 1.1)
+    tw.tween_property(lbl, "modulate:a", 0.0, 1.1)
+    _free_after(lbl, 1.3)
 
 static func _mat(col: Color, e: float, alpha := 1.0) -> StandardMaterial3D:
     var m := StandardMaterial3D.new()
@@ -205,16 +257,24 @@ static func _flash(root: Node, p: Vector3, col: Color, t: float, energy := 3.0, 
     tw.tween_property(l, "light_energy", 0.0, t)
     _free_after(l, t + 0.05)
 
-## a glowing orb (core + halo + trailing sparks + its own light), not yet moving
-static func _orb(root: Node, from: Vector3, col: Color, r: float) -> Node3D:
+## a glowing projectile (core + halo + trailing sparks + its own light), not yet
+## moving. D30: `form` sets the SILHOUETTE - "lance" is a shaft of force (point
+## along -Z, oriented by _fly); "ember" and "spark" keep a round core but trail
+## flame / electric sparks; "orb" (default) is the old round bolt.
+static func _orb(root: Node, from: Vector3, col: Color, r: float, form := "orb") -> Node3D:
     var orb := Node3D.new()
     root.add_child(orb)
     orb.global_position = from
     var core := MeshInstance3D.new()
-    var sm := SphereMesh.new()
-    sm.radius = r
-    sm.height = r * 2.0
-    core.mesh = sm
+    if form == "lance":
+        var bm := BoxMesh.new()
+        bm.size = Vector3(r * 0.8, r * 0.8, r * 3.6)   # a shaft, point leads along -Z
+        core.mesh = bm
+    else:
+        var sm := SphereMesh.new()
+        sm.radius = r
+        sm.height = r * 2.0
+        core.mesh = sm
     core.material_override = _mat(col.lightened(0.5), 9.0)
     orb.add_child(core)
     var halo := MeshInstance3D.new()
@@ -224,7 +284,22 @@ static func _orb(root: Node, from: Vector3, col: Color, r: float) -> Node3D:
     halo.mesh = hm
     halo.material_override = _mat(col, 3.0, 0.45)
     orb.add_child(halo)
-    var trail := _particles(col, 120, 0.6, r * 0.5, Vector2(0.1, 0.6), Vector3.ZERO, Vector2(0.7, 1.4))
+    # D30: the trail names the KIND in motion - a clean streak for a bolt, a lick
+    # of flame rising off an ember, a pale shower of sparks off a chain-spark
+    var tcol := col
+    var tvel := Vector2(0.1, 0.6)
+    var tgrav := Vector3.ZERO
+    var tsize := Vector2(0.7, 1.4)
+    if form == "ember":
+        tcol = Color(1.0, 0.55, 0.12)
+        tvel = Vector2(0.3, 1.0)
+        tgrav = Vector3(0, 1.4, 0)
+        tsize = Vector2(1.0, 1.9)
+    elif form == "spark":
+        tcol = Color(0.85, 0.92, 1.0)
+        tvel = Vector2(0.4, 1.1)
+        tsize = Vector2(0.5, 1.0)
+    var trail := _particles(tcol, 120, 0.6, r * 0.5, tvel, tgrav, tsize)
     trail.one_shot = false
     trail.explosiveness = 0.0
     trail.local_coords = false
@@ -238,7 +313,9 @@ static func _orb(root: Node, from: Vector3, col: Color, r: float) -> Node3D:
 
 ## fly a node from -> to along a FLAT arc (it rises a hand's breadth over a
 ## short throw, never more than 0.45 m), then call on_hit and free it
-static func _fly(n: Node3D, from: Vector3, to: Vector3, on_hit: Callable) -> void:
+static func _fly(n: Node3D, from: Vector3, to: Vector3, on_hit: Callable, orient := false) -> void:
+    if orient and absf((to - from).normalized().dot(Vector3.UP)) < 0.99:
+        n.look_at_from_position(from, to, Vector3.UP)
     var dist := from.distance_to(to)
     var mid := (from + to) * 0.5 + Vector3(0, minf(0.45, dist * 0.04), 0)
     var dur := maxf(dist / SPEED, 0.15)
@@ -252,8 +329,8 @@ static func _fly(n: Node3D, from: Vector3, to: Vector3, on_hit: Callable) -> voi
 
 ## a glowing orb that streaks to the target, trailing sparks, and bursts
 static func _bolt(root: Node, from: Vector3, to: Vector3, col: Color) -> void:
-    var orb := _orb(root, from, col, 0.22)
-    _fly(orb, from, to, func() -> void: _burst(root, to, col))
+    var orb := _orb(root, from, col, 0.22, "lance")
+    _fly(orb, from, to, func() -> void: _burst(root, to, col), true)
 
 static func _burst(root: Node, p: Vector3, col: Color, k := 1.0) -> void:
     var b := _particles(col, int(70 * k), 0.7, 0.2, Vector2(2.0, 5.0) * k, Vector3(0, -3, 0), Vector2(0.6, 1.4))
@@ -389,7 +466,7 @@ static func _arc_line(root: Node, a: Vector3, b: Vector3, col: Color) -> void:
 ## a bolt to the first foe, then the light leaps on to the next, and the next
 static func _chain(root: Node, from: Vector3, hops: Array, col: Color) -> void:
     var first: Vector3 = hops[0]
-    var orb := _orb(root, from, col, 0.16)
+    var orb := _orb(root, from, col, 0.16, "spark")
     _fly(orb, from, first, func() -> void:
         _burst(root, first, col, 0.7)
         for i in range(1, hops.size()):
@@ -405,7 +482,7 @@ static func _chain(root: Node, from: Vector3, hops: Array, col: Color) -> void:
 
 ## an ember that flies, bursts in flame and scorches the ground round its mark
 static func _fire(root: Node, from: Vector3, to: Vector3, ground: Vector3, col: Color) -> void:
-    var orb := _orb(root, from, col, 0.26)
+    var orb := _orb(root, from, col, 0.26, "ember")
     _fly(orb, from, to, func() -> void:
         _burst(root, to, col, 1.3)
         var flame := _particles(Color(1.0, 0.6, 0.15), 110, 0.9, 1.1, Vector2(1.0, 3.0), Vector3(0, 2.5, 0), Vector2(0.9, 1.8))

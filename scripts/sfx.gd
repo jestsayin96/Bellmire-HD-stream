@@ -127,7 +127,9 @@ const SILENT := -60.0
 const GAP := {"hit": 0.06, "swing": 0.06, "spell": 0.1, "coin": 0.15, "splash": 0.2,
     # S1 town casts + S2 dungeon/chat - merged union so a floor of blows (or a spam of commands) cannot machine-gun a sound
     "sword_swing": 0.07, "dagger_stab": 0.07, "sword_clash": 0.08, "hit_impact": 0.06, "bow_draw": 0.1, "arrow_shot": 0.08,
-    "block": 0.1, "shield_bash": 0.15, "mana_charge": 0.12, "menu_select": 0.25, "error": 0.4, "coins_stack": 0.2}
+    "block": 0.1, "shield_bash": 0.15, "mana_charge": 0.12, "menu_select": 0.25, "error": 0.4, "coins_stack": 0.2,
+    # D42: footfalls finally have a caller (Townsfolk._gait_step). A town-wide floor so a crowd near the camera patters, not machine-guns.
+    "footstep_grass": 0.05, "footstep_stone": 0.05, "footstep_wood": 0.06, "footstep_water": 0.08}
 
 static var _i: Sfx = null
 

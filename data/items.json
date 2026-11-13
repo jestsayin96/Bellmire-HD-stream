@@ -365,6 +365,131 @@
       "name": "Silk Kerchief",
       "cost": 80,
       "flavour": "Sold a square at a time, to people who were lately peasants."
+    },
+    "eggs": {
+      "name": "Basket of Eggs",
+      "cost": 2,
+      "flavour": "Still warm. Count them before you pay."
+    },
+    "waterskin": {
+      "name": "Waterskin",
+      "cost": 4,
+      "flavour": "Filled above the ford. Below it, you would not."
+    },
+    "butter": {
+      "name": "Crock of Butter",
+      "cost": 6,
+      "flavour": "Churned this morning, gone by this evening."
+    },
+    "net": {
+      "name": "Fishing Net",
+      "cost": 15,
+      "flavour": "Mended more times than it was ever woven."
+    },
+    "tallow": {
+      "name": "Tub of Tallow",
+      "cost": 7,
+      "flavour": "Lamp fat. Burns dirty, burns cheap, burns."
+    },
+    "sealing_wax": {
+      "name": "Block of Sealing Wax",
+      "cost": 13,
+      "flavour": "The guild post has a door, and the door has letters."
+    },
+    "preserves": {
+      "name": "Jar of Preserves",
+      "cost": 8,
+      "flavour": "Last summer in a jar, kept for the worst of the winter."
+    },
+    "besom": {
+      "name": "Besom Broom",
+      "cost": 5,
+      "flavour": "Twigs and twine. Every doorway in Bellmire owns one."
+    },
+    "ribbon": {
+      "name": "Reel of Ribbon",
+      "cost": 12,
+      "flavour": "Market-day colour, and the first thing bought with a girl's own coin."
+    },
+    "handscales": {
+      "name": "Hand Scales",
+      "cost": 38,
+      "flavour": "Brass pans, honest beam. Measure the grain."
+    },
+    "mourning_cloth": {
+      "name": "Length of Mourning Cloth",
+      "cost": 22,
+      "flavour": "Sold by the yard. The chapel keeps a stock. So does the mason."
+    },
+    "psalter": {
+      "name": "Chapel Psalter",
+      "cost": 60,
+      "flavour": "Copied by hand. The bell has no clapper, so the book does the singing."
+    },
+    "bellows": {
+      "name": "Hand Bellows",
+      "cost": 30,
+      "flavour": "Leather and ash-wood. A forge is a fire somebody keeps breathing."
+    },
+    "hide_glue": {
+      "name": "Pot of Hide Glue",
+      "cost": 14,
+      "flavour": "Smells like the tannery, because it is the tannery."
+    },
+    "smith_file": {
+      "name": "Smith's File",
+      "cost": 26,
+      "flavour": "Cuts iron slowly, which is the only way iron is cut."
+    },
+    "helm": {
+      "name": "Plain Helm",
+      "cost": 40,
+      "flavour": "Garrison issue, unpainted. The dents come free."
+    },
+    "bowstrings": {
+      "name": "Spare Bowstrings",
+      "cost": 12,
+      "flavour": "Waxed, coiled, three to a packet. The wet eats the first."
+    },
+    "soap": {
+      "name": "Cake of Scented Soap",
+      "cost": 28,
+      "flavour": "A market town can afford to smell like something other than a market."
+    },
+    "figs": {
+      "name": "Box of Dried Figs",
+      "cost": 36,
+      "flavour": "Came up the road in a crate stamped in a language nobody here reads."
+    },
+    "lock": {
+      "name": "Iron Lock and Key",
+      "cost": 65,
+      "flavour": "A wall is only a wall if the gate shuts. Same goes for a door."
+    },
+    "mortar": {
+      "name": "Barrel of Mortar",
+      "cost": 30,
+      "flavour": "Lime, sand, and the reason the first wall is still standing."
+    },
+    "brass_lamp": {
+      "name": "Brass Lamp",
+      "cost": 85,
+      "flavour": "Hangs in a hall, not on a pole. The lamplighters sniff at it."
+    },
+    "spectacles": {
+      "name": "Pair of Spectacles",
+      "cost": 110,
+      "flavour": "Two ground lenses in wire. The Chronicle's scribe wept."
+    },
+    "pepper": {
+      "name": "Pepper Mill",
+      "cost": 95,
+      "flavour": "Ground at the table, in front of guests. That is the entire point."
+    },
+    "carpet": {
+      "name": "Patterned Carpet",
+      "cost": 140,
+      "flavour": "Woven somewhere with no mire in it. Wipe your boots."
     }
   },
   "trader_cargo": {
@@ -458,6 +583,66 @@
       "name": "Chest of Books",
       "cost": 220,
       "flavour": "Twelve of them. More words than most of Bellmire has ever seen."
+    },
+    "charcoal": {
+      "name": "Load of Charcoal",
+      "cost": 85,
+      "flavour": "Burnt slow in the hills and hauled down by the sack. The forge eats it."
+    },
+    "rawhides": {
+      "name": "Bundle of Raw Hides",
+      "cost": 105,
+      "flavour": "Still smelling of the beast. The tanner pays before he looks."
+    },
+    "oiljars": {
+      "name": "Jars of Lamp Oil",
+      "cost": 100,
+      "flavour": "Forty jars, straw-packed. One broken jar can take the whole cart."
+    },
+    "chapel_plate": {
+      "name": "Case of Chapel Plate",
+      "cost": 240,
+      "flavour": "Silver for the altar. Bandits are not particular about blessings."
+    },
+    "candlewax": {
+      "name": "Barrels of Beeswax",
+      "cost": 175,
+      "flavour": "Chapel grade - the only candle that does not smell of the kill."
+    },
+    "millstones": {
+      "name": "Pair of Millstones",
+      "cost": 230,
+      "flavour": "Two tons of cut grit. Nobody steals these; they just stop the cart."
+    },
+    "mail_shirts": {
+      "name": "Bundle of Mail Shirts",
+      "cost": 280,
+      "flavour": "Riveted, oiled, rolled in sacking. The garrison counts the rings."
+    },
+    "sugarloaf": {
+      "name": "Loaves of Sugar",
+      "cost": 200,
+      "flavour": "White, hard, and worth a knife shaped for nothing else."
+    },
+    "parchment_bales": {
+      "name": "Bales of Parchment",
+      "cost": 185,
+      "flavour": "The Chronicle's standing order, and the scribes' whole year."
+    },
+    "cut_stone": {
+      "name": "Wagon of Cut Stone",
+      "cost": 160,
+      "flavour": "Squared at the quarry. A wall is paid for one wagon at a time."
+    },
+    "mirrorglass": {
+      "name": "Crate of Mirror Glass",
+      "cost": 260,
+      "flavour": "Packed face to face. Seven years of bad luck a sheet."
+    },
+    "goldwork": {
+      "name": "Casket of Goldwork",
+      "cost": 400,
+      "flavour": "Chains, clasps, and a coronet nobody in Bellmire has the neck for."
     }
   },
   "stock_by_tier": {
@@ -470,7 +655,9 @@
           "bread",
           "ale",
           "firewood",
-          "turnips"
+          "turnips",
+          "eggs",
+          "waterskin"
         ],
         "cargo_adds": []
       },
@@ -480,7 +667,9 @@
         "shop_adds": [
           "grain",
           "fish",
-          "hooks"
+          "hooks",
+          "butter",
+          "net"
         ],
         "cargo_adds": [
           "seedcorn"
@@ -493,11 +682,14 @@
           "rope",
           "torches",
           "lampoil",
-          "wool"
+          "wool",
+          "tallow",
+          "sealing_wax"
         ],
         "cargo_adds": [
           "timber",
-          "pigiron"
+          "pigiron",
+          "charcoal"
         ]
       },
       {
@@ -507,10 +699,13 @@
           "salt",
           "cheese",
           "whetstone",
-          "blanket"
+          "blanket",
+          "preserves",
+          "besom"
         ],
         "cargo_adds": [
-          "furs"
+          "furs",
+          "rawhides"
         ]
       },
       {
@@ -520,11 +715,14 @@
           "nails",
           "pottery",
           "candles",
-          "boots"
+          "boots",
+          "ribbon",
+          "handscales"
         ],
         "cargo_adds": [
           "wine",
-          "saltblock"
+          "saltblock",
+          "oiljars"
         ]
       },
       {
@@ -532,10 +730,14 @@
         "name": "The Chapel",
         "shop_adds": [
           "ink",
-          "parchment"
+          "parchment",
+          "mourning_cloth",
+          "psalter"
         ],
         "cargo_adds": [
-          "incense"
+          "incense",
+          "chapel_plate",
+          "candlewax"
         ]
       },
       {
@@ -543,11 +745,15 @@
         "name": "Craft Row",
         "shop_adds": [
           "leather",
-          "lantern"
+          "lantern",
+          "bellows",
+          "hide_glue",
+          "smith_file"
         ],
         "cargo_adds": [
           "tools",
-          "copperware"
+          "copperware",
+          "millstones"
         ]
       },
       {
@@ -555,11 +761,14 @@
         "name": "The Garrison",
         "shop_adds": [
           "arrows",
-          "shield"
+          "shield",
+          "helm",
+          "bowstrings"
         ],
         "cargo_adds": [
           "steelbar",
-          "warhorses"
+          "warhorses",
+          "mail_shirts"
         ]
       },
       {
@@ -567,21 +776,28 @@
         "name": "Market Town",
         "shop_adds": [
           "spice_twist",
-          "sweets"
+          "sweets",
+          "soap",
+          "figs"
         ],
         "cargo_adds": [
           "spice",
-          "dyestuff"
+          "dyestuff",
+          "sugarloaf",
+          "parchment_bales"
         ]
       },
       {
         "tier": 10,
         "name": "The First Wall",
         "shop_adds": [
-          "glass_pane"
+          "glass_pane",
+          "lock",
+          "mortar"
         ],
         "cargo_adds": [
-          "scarglass"
+          "scarglass",
+          "cut_stone"
         ]
       },
       {
@@ -589,11 +805,14 @@
         "name": "Walled Town",
         "shop_adds": [
           "physic",
-          "mirror"
+          "mirror",
+          "brass_lamp",
+          "spectacles"
         ],
         "cargo_adds": [
           "glassware",
-          "simples"
+          "simples",
+          "mirrorglass"
         ]
       },
       {
@@ -601,11 +820,14 @@
         "name": "City in all but Charter",
         "shop_adds": [
           "sandglass",
-          "silk_kerchief"
+          "silk_kerchief",
+          "pepper",
+          "carpet"
         ],
         "cargo_adds": [
           "silk",
-          "books"
+          "books",
+          "goldwork"
         ]
       }
     ]

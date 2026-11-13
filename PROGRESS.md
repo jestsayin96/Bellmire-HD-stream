@@ -2437,3 +2437,54 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   4. Nothing else changes shape: every extension is a longer list or a new sibling key, so existing loaders
      keep working untouched.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 6 - shop stock & trader cargo per growth tier, rare uniques, brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- No WORK_PLAN CONTENT item was unchecked and unwritten (C1-C3 writing-complete per Phase O), so this cycle
+  worked the two stalest standing-backlog entries: (2) shop stock and trader cargo per growth tier, and
+  (6) bosses and potions. Touched three of the four owned files: items.json, bosses.json, potions.json.
+  lore_lines.json unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- items.json shop_stock 32 -> 57 and trader_cargo 18 -> 30, then EVERY new key gated into stock_by_tier so a
+  crossing and a city no longer sell the same goods. All 57 shop goods and all 30 cargoes are now placed on a
+  tier; cumulative shop_adds per tier 1..12 is 6/5/6/6/6/4/5/4/4/3/4/4 and cargo_adds 0/1/3/2/3/3/3/3/4/2/3/3.
+  Nothing was removed or reordered - every tier list keeps its original keys first, in their original order.
+  - Tier 1-2 (Crossing, Hamlet): eggs, waterskin, butter, net. No caravan cargo at a crossing at all.
+  - Tier 3-5 (Guild Post, Village, Market Day): tallow, sealing_wax, preserves, besom, ribbon, handscales;
+    cargo charcoal, rawhides, oiljars.
+  - Tier 6-8 (Chapel, Craft Row, Garrison): mourning_cloth, psalter, bellows, hide_glue, smith_file, helm,
+    bowstrings; cargo chapel_plate, candlewax, millstones, mail_shirts.
+  - Tier 9-12 (Market Town, First Wall, Walled Town, City): soap, figs, lock, mortar, brass_lamp, spectacles,
+    pepper, carpet; cargo sugarloaf, parchment_bales, cut_stone, mirrorglass, goldwork.
+  - Prices sit on the existing curve: 2-15 at a crossing, 26-65 through the craft and wall tiers, 85-140 in the
+    city; cargo 85-400, so a late caravan is worth raiding and an early one is barely worth the road.
+- bosses.json rare uniques, shape-first and still only the EIGHT lords - no new lords:
+  - lesser_uniques 9 -> 14: The Grubmother, Hollowed (a wall that only holds, hp 270 / speed 1.5); The
+    Grubmother, Starved (quick for a wall, hp 150 / speed 3.0); The Rattling Host, Silent (no rattle at all,
+    hp 165 / speed 4.2); Nightwing, Broken-Winged (grounded, will not let go, hp 175 / speed 3.2); The Hollow
+    King, Unmade (comes apart still burning, hp 140 / speed 3.8).
+  - greater_uniques 8 -> 12: The Gravewyrm, Coiled (never leaves its ring, hp 340 / speed 2.2); The Ossuary
+    Lord, Kneeling (spends its ward to raise two, hp 280 / attack 28); The Pale Duchess, in Mourning (veiled
+    and slow, the grief spreads, hp 240 / speed 3.8 / attack 30); Mourncoil, Unspooled (striking from three
+    sides, each coil thinner, hp 240 / speed 3.8 / attack 25).
+  - Every stat is skewed TO the modifier per the file's own rule: slower buys hp, faster pays it back.
+- potions.json brews 25 -> 35, all using states that ALREADY exist, so no new state and no new engine effect:
+  pennymend (12/t1, 1d4), ratnip (45/t1, cures poisoned), thawbottle (75/t2, resist_frost 150s), longwatch
+  (65/t2, darkvision 1200s), commanders_flask (110/t2, heroism 120s - E3PO's, never opened), mirestep
+  (160/t3, haste 25s), quarryblood (190/t3, giant 45s), gravewater (240/t3, warded 60s), deepstill
+  (280/t4, 8d6+10), bellwater (350/t4, warded 90s). states unchanged at 15.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  before/after comparison against HEAD confirmed every pre-existing key and value present and unchanged and
+  no list shortened; new entries asserted against the existing field sets (shop/cargo exactly name+cost+
+  flavour with an int cost; every stock_by_tier key resolves in shop_stock/trader_cargo with no key gated
+  twice; tier names and numbering still match lore_lines.growth_tiers 1-12; every unique names one of the
+  eight lords, carries a shape, and no duplicate names; every potion's gives/cures resolves to an existing
+  state, cures only bad states, heal is exactly 3 ints, and all 58 potion aliases are collision-free).
+  0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. Nothing new in shape - shop_stock/trader_cargo/stock_by_tier are still dead until D35/D39 wires them;
+     this cycle only makes that wiring worth doing, since the tier gate now has something to gate.
+  2. bosses.json uniques: the draw already reads lesser_uniques/greater_uniques (D/L-side), so the 9 new
+     variants need no new code - but Broken-Winged (a grounded Nightwing) and Coiled (a Gravewyrm that holds
+     position) lean on behaviour the bestiary may not express yet - LAPTOP CODE to confirm.
+  3. potions.json: !brew reads the keys, so the 10 new brews need no new code. Two carry tier-4 prices, so
+     the apothecary's tier-4 stock list (if it is hardcoded anywhere) wants a look - LAPTOP CODE.
+  4. No key renamed, no list shortened, no new sibling key anywhere: existing loaders keep working untouched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

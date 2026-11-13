@@ -25,7 +25,17 @@
     "mirewine":  {"name": "Mirewine", "cost": 60, "tier": 1, "gives": "heroism", "secs": 60, "cures": ["frightened"], "aliases": ["mirewine"], "flavour": "Bellmire's own. Braver by the bottle, foolish by the jug."},
     "lastlight": {"name": "Lastlight", "cost": 200, "tier": 3, "gives": "heroism", "secs": 90, "aliases": ["lastlight"], "flavour": "Lit against the dark at the bottom of everything."},
     "kingsmend": {"name": "The Hollow King's Cup", "cost": 500, "tier": 4, "heal": [10, 6, 16], "aliases": ["kingscup", "hollowking"], "flavour": "Poured once for a king who would not heal. It heals you instead."},
-    "scarwater": {"name": "Scarwater", "cost": 300, "tier": 4, "gives": "scar_touched", "secs": 20, "aliases": ["scarwater"], "flavour": "Drawn from the scar itself. It cuts both ways, and it knows which."}
+    "scarwater": {"name": "Scarwater", "cost": 300, "tier": 4, "gives": "scar_touched", "secs": 20, "aliases": ["scarwater"], "flavour": "Drawn from the scar itself. It cuts both ways, and it knows which."},
+    "pennymend": {"name": "Pennymend", "cost": 12, "tier": 1, "heal": [1, 4, 0], "aliases": ["penny", "pennymend"], "flavour": "A copper's worth of mending. Better than nothing, and it knows it."},
+    "ratnip": {"name": "Ratcatcher's Nip", "cost": 45, "tier": 1, "cures": ["poisoned"], "aliases": ["ratnip", "nip"], "flavour": "He drinks it himself, which is the only recommendation it needs."},
+    "thawbottle": {"name": "Thawbottle", "cost": 75, "tier": 2, "gives": "resist_frost", "secs": 150, "cures": ["slowed"], "aliases": ["thawbottle", "thaw"], "flavour": "Corked in the cold snap and kept for the next one."},
+    "longwatch": {"name": "Longwatch Drops", "cost": 65, "tier": 2, "gives": "darkvision", "secs": 1200, "aliases": ["longwatch", "watch"], "flavour": "Two drops and a whole night. The walls are walked on these."},
+    "commanders_flask": {"name": "The Commander's Flask", "cost": 110, "tier": 2, "gives": "heroism", "secs": 120, "cures": ["frightened"], "aliases": ["commander", "flask"], "flavour": "E3PO carries one and has never opened it. That is the point of it."},
+    "mirestep": {"name": "Mirestep", "cost": 160, "tier": 3, "gives": "haste", "secs": 25, "aliases": ["mirestep"], "flavour": "The mire lets go of your boots. Everything else still has hold of you."},
+    "quarryblood": {"name": "Quarryblood", "cost": 190, "tier": 3, "gives": "giant", "secs": 45, "aliases": ["quarryblood", "quarry"], "flavour": "What the masons drink on the day a wall has to go up."},
+    "gravewater": {"name": "Gravewater", "cost": 240, "tier": 3, "gives": "warded", "secs": 60, "aliases": ["gravewater"], "flavour": "Drawn from the chapel well, behind the stones. It holds the first blow."},
+    "deepstill": {"name": "Deepstill", "cost": 280, "tier": 4, "heal": [8, 6, 10], "aliases": ["deepstill"], "flavour": "Brewed thick for the floors where help is a very long way up."},
+    "bellwater": {"name": "Bellwater", "cost": 350, "tier": 4, "gives": "warded", "secs": 90, "aliases": ["bellwater", "bell"], "flavour": "Blessed under a bell with no clapper. It rings anyway, and so does this."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},

@@ -1,1 +1,29 @@
-RUNNING 2026-11-13 12:25 - L37 scar-veins coverage and curves
+IDLE 2026-11-13 13:05 - L37 DONE and pushed (L-cycle 138). NO LAPTOP WIP REMAINS AND NOTHING ASSIGNED IS
+LEFT. Ticked this session: L45, L46, L49, L52, L48, L50, L41, L42, L43, L44, L53, L54, L55, L27b, L33,
+L37, and L34/L39 before they moved to the HUD worker.
+L37 note: the veins were never a texture problem - it was PLACEMENT. Up to six 2.6-3.8 m decals a floor
+on random cells with no separation, free to project up a wall. Now halved and capped at 3, drawn at half
+size, kept 9 m apart and off the walls. Measured: floor 14 went 6 veins closest 6.3 m -> 2 veins closest
+38.7 m. Shots renders/cycles/20261113_l37/.
+WHAT IS LEFT THAT IS LAPTOP-OWNED - THE SUPERVISOR SHOULD SAY WHETHER ANY OF IT IS STILL WANTED:
+  L29a-c (lord mechanics, rare uniques, set-pieces), L30a-c (gear, cosmetics, loot tables), L31
+  (dungeon-fight UI). These are older Phase D/E/F items written before the four-worker split. L30a/L30b
+  lean on data/items.json and L31 is a HUD/UI item - BOTH NOW BELONG TO OTHER WORKERS under COORDINATION
+  11.2, so they likely need REASSIGNING or rewriting before anyone can take them. L29a-c are genuinely
+  mine (bestiary/delve) if they are still wanted.
+NOT MINE, STILL OPEN: the supervisor's DESKTOP cross-check of _l32_test; an owner for
+scripts/adventurers.gd (in NO worker's list).
+WAITING ON MR. E - eight decisions, all in PROGRESS with the exact dial to turn, none resolved unasked:
+  L41 (was the magenta floor the CONFECTION biome as designed? renders/cycles/20261113_l41/)
+  L42 (does the per-theme sheet read as lit stone? renders/cycles/20261113_l42/)
+  L27b strain re-weighting; L45 deep lords ~one blow a hero; L47 a delver who breaks off leaves the
+  fight; L48 levelled heroes markedly stronger; L54 Scarwater is a coin flip; L55 survivors spend their
+  own gold at the smith.
+_l32_test reports OK (100 checks): base 38.2 / idle 27.3 / paid 16.1. The base >= 10 and min-sample
+asserts STAY - never revert them to make a suite green.
+STANDING NOTES: (1) check INDENT STYLE before editing. (2) No backticks and no '"'"' escaping in a
+double-quoted shell -m or sed. (3) When a table names things, TEST each one does something. (4) MEASURE
+BEFORE FIXING - six items this session had a real symptom and a wrong assumed cause. (5) Shot tools
+overwrite committed render refs - restore them. (6) No allocating helper in a per-frame loop. (7) A test
+measuring in FRAMES something that lives in SECONDS is a flake waiting to happen. (8) Do not count Godot
+nodes BY NAME - duplicate siblings get renamed, so a name match silently returns 1. Count by a property.

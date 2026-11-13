@@ -3595,6 +3595,32 @@ just been re-enabled has no temporal history to resolve against.
   Satchel's "No rings, no cloak..." hint still clips at the panel edge ("!wear ri[ng]") - a pre-existing
   L51 clip, not touched here; I can widen or wrap that line if you want it to read in full.
 
+## L-cycle 135 - L44 _l24_test made deterministic (laptop jestai, 2026-11-13) - L44 DONE
+THE RACE, FOUND RATHER THAN GUESSED AT. _l24_test put Ash in the bits lane for 60 SECONDS and then ran
+its final checks 1200 FRAMES later. Spotlight seconds are REAL seconds (left -= delta / time_scale), so
+those 1200 frames are 20 s at 60 fps but about 60 s at the 14-20 fps this machine actually runs during a
+delve - which is exactly when the second half of this test runs. The hold expired right as the final
+asserts fired, so "Ash's body below is the one the lane holds" failed, and the two checks that depend on
+it fell with it. That is precisely the 3-of-6 failure the supervisor recorded, and it explains why an
+immediate re-run passed: the re-run happened to be faster.
+  It is also, pleasingly, the same shape of bug as L43's: a test measuring in frames something that lives
+  in seconds.
+- FIXED BY DRIVING THE STATE, not by retrying - the supervisor's instruction and the L23 precedent:
+  1. the hold is now HOLD_S 900 s, far longer than the test can take. This test is about whether the
+     director yields to a lane, NOT about when a lane expires; tying it to an expiry it never meant to
+     test is what made it flaky.
+  2. the final checks no longer fire on a frame number. They wait for the CONDITION they actually need -
+     both delvers' bodies existing and in the tree, since Spotlight.body_of() resolves a delver through
+     the Delve party first - and fail loudly with a named check if that never happens within WAIT_CAP.
+  3. the lane is re-bound to the underground body immediately before the asserts, so the precondition is
+     ESTABLISHED rather than hoped for. Trusting a hold placed before the delve to survive the body swap
+     was the hope the test was built on.
+- NO RETRIES AND NO BEST-OF-N, as instructed. A flaky test is worse than no test because it trains every
+  run, and every supervisor, to ignore red - which is exactly what had started happening to _l32_test.
+- PROVEN TO THE ITEM'S OWN BAR: ten consecutive runs, 6 of 6 checks passing every time, 0 failures. Not
+  a best-of, not a re-run after a red - ten in a row, windowed at 1920x1080, exactly as the DONE asked.
+- Regression: parse 0 SCRIPT ERROR. Only tools/_l24_test.gd changed - no game script was touched, so the
+  wider battery has nothing new to catch; the ten runs ARE the evidence for this item.
 
 ## D-cycle 125 - T3 the Twitch reply path stops dropping replies silently (desktop CruzaderPC, 2026-11-13) - T3 DONE
 - T3 (URGENT, viewer-facing): on stream !enlist "did nothing" and the reply path dropped silently. The
@@ -3736,3 +3762,33 @@ just been re-enabled has no temporal history to resolve against.
      at 25 and still flat for every colour. If dyes are ever to be priced in bands, that is a
      supervisor decision and a future content cycle, not a silent change here.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 136 - L27b finished at last (laptop jestai, 2026-11-13) - L27b DONE
+This is the WIP that has been carried in the lock file every cycle of this session. Its code landed at
+0f3986c days ago and only ever owed three test runs; it is finally closed rather than left as a commit
+the supervisor skips indefinitely.
+- WHAT IT OWED, from its own WIP commit message: _l26_anims (cleared in L-cycle 119 - L26A_ANIMS OK,
+  MON_ANIMS static 0 of 20819 moving frames), _l25_test, and the windowed _l27b_shot line-up "+ eye on
+  the tells". All three are now done.
+- RE-VERIFIED ON CURRENT HEAD RATHER THAN TRUSTING THE OLD RUN, which mattered: bestiary.gd and
+  monster.gd have been through L45 (lord depth scaling), L48 (ability unlocks) and L50 (band widening and
+  the pack cap) since that WIP was written. L27B_TEST OK - the json is still the authority, every named
+  strain still has a tell, and the stat mods still apply through Bestiary.make.
+- _l25_test OK 13/13 on current HEAD, 0 stuck delvers, 0 watchdog frees.
+- THE EYE ON THE TELLS, which is the half that could never be done headlessly and is why this sat open:
+  tools/_l27b_shot.gd windowed at 1920x1080, one skeleton warrior per strain, renders/cycles/20261112_l27/
+  b_lineup, b_left, b_mid, b_right, b_lineup_later. All ten named strains read as distinct at a glance,
+  and all three kinds of tell land: GLOW (scarborn's wandering mint, wraithtouched's violet), PARTICLES
+  (wraithtouched's wisp motes drifting round it, emberbound throwing orange sparks) and SCALE (gorged is
+  plainly the biggest thing in the line without any glow at all).
+- A WORRY I HAD AND CHECKED RATHER THAN ASSUMED: L42 cut emission across the dungeon two cycles ago
+  (dungeon_parts 3.0 -> 1.7, 4.0 -> 2.2, scatter 1.0-2.6 -> 0.7-1.5). The strain tells ARE glow and
+  particles, so my own anti-neon work could have quietly dimmed the very things L27b exists to make
+  visible. It did not - the line-up shows them reading clearly - but that was worth looking at rather
+  than ticking blind.
+- Cosmetic, not worth a fix: the line-up's framing clips the leftmost and rightmost name labels. The
+  bodies are all in frame; only two labels are cut.
+- CARRIED FORWARD FOR MR. E, from the original WIP and still unresolved: L27b's strain re-weighting
+  widened the 6-9 and 10+ bands with shares taken from the non-plain pool (floors 1-2 stay 85% plain,
+  10+ stays 15% plain). That is a BALANCE CHANGE - deep floors now roll the three new strains - and it is
+  his call, not mine. The frozen note on the original numbers ("Measured: they IMPROVED survival, 83% vs
+  63% - do not soften them") was respected: no existing strain's numbers were touched.

@@ -1852,3 +1852,21 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Housekeeping this cycle (COORDINATION 9.2): laptop tool .uids committed (L25/L26/L28/L32), desktop _d1x .uid
   noise deleted. The merged D19b sky/weather was read against the spotlight's _lane_env block (COORDINATION 8.1):
   panes copy the live town Environment every 0.5 s, so the new sky/weather carries into panes unchanged.
+
+
+## D-cycle 118 - D24 kill the grain (desktop CruzaderPC, 2026-11-12) - D24 DONE
+- Root cause confirmed: project.godot [rendering] held only the d3d12 driver line - no TAA/MSAA/FXAA. SSAO
+  (town.gd) and volumetric fog (daylight.gd) are temporally dithered in Godot 4, so with no TAA to resolve
+  them they showed as fine static noise over the whole image, worst on the cluttered town cobbles.
+- FIX: project.godot [rendering] += anti_aliasing/quality/use_taa=true and anti_aliasing/quality/msaa_3d=1 (2x).
+  town.gd _build() SSAO softened so it reads as shade not grit now that TAA resolves it: ssao_radius=1.8,
+  ssao_intensity=1.3, ssao_detail=0.3, ssao_power=1.5. Volumetric fog resolved cleanly at the new AA, left as-is.
+- LOOKED: 1080p before/after at the town square (noon) and morning - the cobble/grass grain is gone, character
+  and building edges clean. renders/cycles/20261112_d24/{before,after}_{clutter_noon,square_noon,wide_noon,morning}.png.
+- FPS (uncapped, vsync off, 1080p, resting stream cam, noon clear): before avg 123.4 min 81.0 -> after avg 131.7
+  min 90.0. The fix is net FASTER (lower-detail SSAO more than pays for TAA+MSAA on this low-poly scene); >= the
+  D23 120 target. (A vsync-on measurement misleads: double-buffered vsync drops the heavier frame to the 60 step.)
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/1058 (INPROP 0, MON_INPROP 0/146); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/17596, raid 0/5984, giveup 0); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, ENDED clean.
+- New tools: tools/_d24_shot.gd (before/after stills + capped FPS), tools/_d24_fps.gd (uncapped FPS by AA tag).
+  Backups town.gd.bak_d24, daylight.gd.bak_d24, project.godot.bak_d24 (not committed).

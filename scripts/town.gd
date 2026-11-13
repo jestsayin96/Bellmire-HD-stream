@@ -825,7 +825,13 @@ func _build() -> void:
     e.sky = sky
     e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
     e.ambient_light_energy = 0.85
+    # D24: TAA now resolves SSAO's temporal dither, so SSAO stays for contact
+    # shadow, but softened (lower intensity + detail) so it reads as shade, not grit.
     e.ssao_enabled = true
+    e.ssao_radius = 1.8
+    e.ssao_intensity = 1.3
+    e.ssao_detail = 0.3
+    e.ssao_power = 1.5
     e.tonemap_mode = Environment.TONE_MAPPER_AGX
     # D19a night bloom: emissive windows, lamps and braziers glow after dark
     e.glow_enabled = true

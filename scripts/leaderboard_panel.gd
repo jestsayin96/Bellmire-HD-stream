@@ -295,7 +295,10 @@ class Satchel extends PanelContainer:
             worn.append(ck)
             _piece("%s  (%s)" % [String(Roster.item(ck).get("name", ck)), String(kind)], "for the look", SOFT)
         if (h.get("acc", {}) as Dictionary).is_empty() and (h.get("cos", {}) as Dictionary).is_empty():
-            _line("No rings, no cloak, nothing on the hands.  !wear ring", SOFT, 22)
+            # L51 finish (U9): let the "nothing worn" hint wrap instead of clipping at the panel edge
+            var none_lb := _line("No rings, no cloak, nothing on the hands.  !wear ring", SOFT, 22)
+            none_lb.clip_text = false
+            none_lb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
         # the numbers it adds up to - the Roster's own, never recomputed here
         _line("Altogether:  AC %d · %+d hit · %d HP · pace %.1f"
             % [r.armour_class(h), r.attack_bonus(h), int(r.max_hp(h)), r.speed(h)], INK, 22)

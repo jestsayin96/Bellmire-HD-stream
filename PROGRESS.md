@@ -2324,6 +2324,31 @@ this capture the roof-filler problem is not fully gone. Worth the supervisor's e
 - Only the seven HUD files + PROGRESS.md were touched in the resolution; notables.gd and every other
   non-HUD file was read for diagnosis, never edited (COORDINATION 11.2).
 
+## U9 - desktop HUD: L51 Satchel finish - the "nothing worn" hint no longer clips (Nov 13, 2026)
+
+The HUD queue is clear: every item (L34, L35, L38, L39, L39b, L40's Chronicle-untouchable half,
+L51, L57, L58, L59, L59b) is built and merged - hud-ui fast-forwarded to origin/main ad29979
+with nothing ahead. L40's remainder is D41 (desktop build); L39/L39b/L40 still read [ ] only
+because the supervisor ticks on review. The one open thread left in my own file was the L51
+Satchel's "No rings, no cloak, nothing on the hands.  !wear ring" hint clipping at the panel's
+right edge ("!wear ri[ng]") - flagged, deferred, in U8.
+
+- leaderboard_panel.gd (Satchel._refresh): the bare-viewer hint now WRAPS instead of clipping -
+  it uses the same clip_text=false + AUTOWRAP_WORD_SMART idiom the "running on them" and brews
+  lines in this same method already use. One Label, one extra wrapped row; the panel grows
+  ~34 px (502 -> 536) only when a viewer wears nothing. No other line touched.
+- Verified BY EYE, windowed 1920x1080 (tools/_u9_shot.gd kits a bare viewer so the branch
+  renders): renders/cycles/20261113_u9. satchel_before_crop - "...!wear ri" cut at the edge;
+  satchel_after_crop - "...!wear / ring" reads in full, the house parchment style intact.
+- Checks: headless --quit-after 120 parse clean (0 SCRIPT ERROR / 0 Parse Error; only the known
+  texture-UID warnings). Both windowed runs rc 0.
+- Godot lock: was IDLE (supervisor 10:19); took it RUNNING 10:48 (desktop HUD), set IDLE after.
+  No other Godot/OBS process was up (Mr. E not mid-stream).
+
+Nothing left in the HUD queue after this. The U1 Chronicle-legibility caveat is already closed
+(U5 read 18 px at 1:1; U6/L39b enlarged the box to 714x295). DECISION open for Mr. E: whether to
+repurpose the I key now the Guild Roll is off stream - say the word.
+
 ## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
 - Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
   EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT

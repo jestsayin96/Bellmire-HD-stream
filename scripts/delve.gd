@@ -134,6 +134,9 @@ func _next_floor() -> void:
 	if dun.lord:
 		dun.lord.max_hp = float(dun.lord.def.get("boss_hp", 200.0))
 		dun.lord.hp = dun.lord.max_hp
+		# L29a: a lord crossing a phase threshold is a story beat - say it
+		if not dun.lord.phase_changed.is_connected(_lord_phase):
+			dun.lord.phase_changed.connect(_lord_phase)
 	# a floor costs one flask per two bodies
 	var alive_now := _alive().size()
 	oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))
@@ -848,6 +851,23 @@ func _fight(delta: float) -> void:
 
 	# venom keeps working after the bite (spider, snake, adder, wasp)
 	_fight_body(delta, alive, foes)
+
+## ---- L29a: a lord changing phase, in the Chronicle. The mechanics themselves were already
+## canon (Bestiary.LORD_WAYS gives all eight a real one); what was missing was any sense that a
+## lord gets WORSE as it is worn down. The aura does it on the lord; this does it in words.
+var lord_phases := 0                # the L29a test counts these
+
+func _lord_phase(who: Monster, to: int) -> void:
+	if not is_instance_valid(who):
+		return
+	lord_phases += 1
+	var nm := String(who.def.get("name", "The lord"))
+	if to >= 3:
+		_say("%s is driven to its last - whatever it has been holding back, it is not holding it now." % nm)
+	else:
+		_say("%s shifts, and the fight changes with it." % nm)
+	FeedHUD.card_on(town, nm, "phase %d of %d" % [to, who.phase_count],
+		who.def.get("aura", Color(1, 0.8, 0.4)) as Color)
 
 ## ---------------------------------------------------------------- L49: searching, visibly
 ## Mr. E: "no chests, no drops, nobody searching". The loot ROLL already existed - it just

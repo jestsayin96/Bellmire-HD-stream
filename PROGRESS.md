@@ -3973,3 +3973,40 @@ that half.
   4. Nothing in this cycle changes a `cost` statement, so no disaster mechanic that is already
      implemented needs revisiting. This is a narration-only widening.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## L-cycle 139 - L29a lord phases (laptop jestai, 2026-11-13) - L29a DONE, with one part BLOCKED
+MEASURED BEFORE BUILDING, and it halved the work: ALL EIGHT canon lords already carried a real mechanic
+in Bestiary.LORD_WAYS - summon, nova, breath, swoop, shed, ward, venom, grudge, enrage. The item's "each
+canon lord gets a real mechanic" was ALREADY TRUE. No new mechanic was invented on top of canon ones that
+already work. What did not exist was any notion of a PHASE: only three of the eight had a threshold that
+changed behaviour, and nothing exposed a phase for a bar to read.
+- scripts/monster.gd: a lord now has three phases (PHASE_AT 0.66 / 0.33), advancing as it is worn down
+  and never going backwards. phase and phase_count are public so anything can read them, and
+  phase_changed(who, to) is emitted on each step. An ordinary creature stays at phase_count 1.
+- PER-PHASE TRAPPINGS, which the item asks for by name: the ground aura brightens (alpha 0.35 -> 0.53 ->
+  0.71) and breathes faster and wider with each phase, and the name tag lightens with it. The phase reads
+  off the LORD, so a viewer watching a pane does not have to find a bar to see the fight change.
+- scripts/delve.gd: each step is a Chronicle beat - "X shifts, and the fight changes with it", then "X is
+  driven to its last" - plus a FeedHUD card naming the phase. Counter lord_phases for a census.
+- A PRODUCT FIX THE TEST FOUND: phase_count was first set next to _trappings(), which sits AFTER the
+  early return in _ready that fires when a body model will not load. A lord whose mesh failed would have
+  had no phases at all. It is set at the TOP of _ready now - a lord's phase count is data, not
+  decoration, and the fight is not the model.
+- tools/_l29a_test.gd (NEW): guards the half that was already true (every lord still has a mechanic),
+  then checks phases exist only for lords, map correctly from health, advance one step at a time without
+  skipping or reversing, fire the signal exactly once per change, and VISIBLY change the aura.
+  L29A_TEST OK, 11 checks.
+- AND CHECKED IN A REAL FIGHT, not just in unit tests, because the DONE says "a delve fights a lord with
+  its mechanic": tools/_boss_test.gd windowed - BOSS_TEST OK, 8 checks, 0 failed, ZERO script errors, a
+  party started onto a lord floor, the lord rising, the bar up, the director cutting to it. And the
+  phases fired live: "Nightwing shifts, and the fight changes with it", then "Nightwing is driven to its
+  last". (Headless the same harness emits save_png errors because there is no frame to save - that is the
+  tool being a shot tool, not a product fault, which is why it was judged windowed.)
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1403 (MON_INPROP 0 of 107); _delve_test 0
+  errors/nulls; L45_TEST OK (boss depth scaling still holds with phases on top); L27B_TEST OK;
+  _l26_anims on floors 5/10/15 - the LORD floors - L26A_ANIMS OK.
+- ONE PART OF THIS ITEM IS BLOCKED, NOT DONE: "boss_bar shows phase". scripts/boss_bar.gd appears in NO
+  worker's ownership list in COORDINATION 11.2 - not the laptop's, not the desktop HUD's seven, not the
+  desktop build's. It is the SECOND unowned file I have hit, after scripts/adventurers.gd. I have not
+  touched it. Everything a bar needs is now exposed and live - Monster.phase, Monster.phase_count and the
+  phase_changed signal - so whoever owns it needs only to read them. SUPERVISOR: this file needs an owner.

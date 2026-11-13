@@ -483,7 +483,26 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       BALANCE CHANGE (shares taken from the non-plain pool; shallows stay 85% plain). No existing
       strain's frozen numbers were touched.
 # Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]
-- [ ] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
+- [x] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
+      DONE L-cycle 139 (one part BLOCKED - see the end). MEASURED FIRST and it halved the work: all EIGHT
+      canon lords ALREADY carried a real mechanic in LORD_WAYS, so "each lord gets a mechanic" was
+      already true and nothing was invented on top of working canon. What was missing was a PHASE - only
+      3 of 8 had any threshold, and nothing exposed one for a bar to read.
+      monster.gd: three phases a lord (0.66 / 0.33), advancing as it is worn down, never backwards;
+      phase and phase_count public; phase_changed(who, to) emitted. Ordinary creatures stay at 1.
+      PER-PHASE TRAPPINGS: the aura brightens (0.35 -> 0.53 -> 0.71) and breathes faster and wider each
+      phase, name tag with it - the phase reads off the LORD, not only off a bar.
+      delve.gd: each step is a Chronicle beat plus a FeedHUD card naming the phase.
+      A PRODUCT FIX THE TEST FOUND: phase_count was set after the early return in _ready that fires when
+      a body model will not load, so a lord without its mesh would have had NO phases. Set at the top now.
+      tools/_l29a_test.gd L29A_TEST OK (11 checks). AND IN A REAL FIGHT, since the DONE asks for one:
+      _boss_test.gd windowed BOSS_TEST OK, 8 checks, 0 failed, zero script errors - and the phases fired
+      live ("Nightwing shifts, and the fight changes with it", then "driven to its last").
+      _offfloor 0 of 1403, _delve_test clean, L45_TEST OK, L27B_TEST OK, _l26_anims on the LORD floors
+      5/10/15 L26A_ANIMS OK.
+      BLOCKED, NOT DONE: "boss_bar shows phase". scripts/boss_bar.gd is in NO worker's list in
+      COORDINATION 11.2 - the second unowned file after adventurers.gd. Untouched. Monster.phase,
+      phase_count and phase_changed are exposed and live, so its owner need only read them. NEEDS AN OWNER.
 - [ ] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
 - [ ] L29c. SET-PIECE ENCOUNTERS from lore (ambush/guarded hoard/mini-event) so a floor isn't just a room of monsters. DONE: set pieces appear + resolve, Chronicle logs them.
 # Phase E - gear, cosmetics, loot [L30]

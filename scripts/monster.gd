@@ -25,6 +25,11 @@ var _aura: MeshInstance3D
 func _ready() -> void:
     _rng.randomize()
     home = global_position if home == Vector3.ZERO else home
+    # L29a: a lord's phase count is DATA, not decoration, so it is set before anything that can
+    # bail out. _ready returns early when the body model will not load, and a lord that lost its
+    # mesh should still fight in phases - the fight is not the model.
+    if bool(def.get("boss", false)):
+        phase_count = 3
     var ps: PackedScene = load(String(def.get("path", "")))
     if ps == null:
         return
@@ -73,7 +78,7 @@ func _ready() -> void:
     max_hp = float(def.get("boss_hp", float(def.get("hp", 1.0)) * 30.0))
     hp = max_hp
     if bool(def.get("boss", false)):
-        _trappings()
+        _trappings()            # L29a sets phase_count at the top of _ready, before any bail-out
     _label()
     Monster.voice(self, false)            # S2: it makes itself known (one voice a beat, the biggest / nearest)
 
@@ -428,7 +433,11 @@ func _process(delta: float) -> void:
     if crown:
         crown.rotation.y += delta * 0.8
     if _aura:
-        var k := 0.85 + sin(_t * 1.6) * 0.15
+        # L29a: the aura breathes faster and wider the deeper into its phases a lord is, so the
+        # phase reads off the lord ITSELF - a viewer watching a pane should not have to find a
+        # bar to see that something has changed.
+        var beat := 1.6 + 0.9 * float(phase - 1)
+        var k := (0.85 + 0.12 * float(phase - 1)) + sin(_t * beat) * (0.15 + 0.05 * float(phase - 1))
         _aura.scale = Vector3(k, 1, k)
     match state:
         S.IDLE:
@@ -633,10 +642,52 @@ var _flash_t := 0.0
 var _flash_mats: Array = []
 
 ## take a hit: white flash, hit animation, a number that floats up, death at 0
+## ---------------------------------------------------------------- L29a: a lord has PHASES
+## MEASURED BEFORE BUILDING: all eight canon lords already carry a real mechanic in
+## Bestiary.LORD_WAYS (summon, nova, breath, swoop, shed, ward, venom, grudge, enrage), so the
+## "each lord gets a mechanic" half of this item was already true. What did NOT exist was any
+## notion of a PHASE - only three of the eight had a threshold that changed anything, and
+## nothing exposed a phase for a bar to show. So that is what this adds, and nothing else: no
+## new mechanics were invented on top of canon ones that already work.
+## A lord stands in phase 1 at full health, 2 below PHASE_AT[0] and 3 below PHASE_AT[1]. Each
+## step is announced by Delve and shows on the lord itself (the aura brightens and widens), so
+## it reads on stream even for a viewer who never looks at a bar.
+const PHASE_AT := [0.66, 0.33]
+var phase := 1                      # 1..3; boss_bar and Delve read this
+var phase_count := 1                # 1 for an ordinary creature, 3 for a lord
+
+## L29a: the per-phase trapping. The aura brightens and the name tag follows it, so the change
+## is visible on the lord rather than only in a number somewhere.
+func _enter_phase() -> void:
+    if _aura and _aura.material_override is StandardMaterial3D:
+        var m := _aura.material_override as StandardMaterial3D
+        var c: Color = m.albedo_color
+        m.albedo_color = Color(c.r, c.g, c.b, minf(0.85, 0.35 + 0.18 * float(phase - 1)))
+    var lb := get_node_or_null("tag")
+    if lb is Label3D:
+        (lb as Label3D).modulate = (def.get("aura", Color(1, 0.8, 0.4)) as Color).lightened(0.3 + 0.2 * float(phase - 1))
+    phase_changed.emit(self, phase)
+
+signal phase_changed(who: Monster, to: int)
+
+## which phase this much health puts a lord in
+static func phase_for(frac: float) -> int:
+    if frac <= PHASE_AT[1]:
+        return 3
+    if frac <= PHASE_AT[0]:
+        return 2
+    return 1
+
 func hurt(amount: float, crit := false) -> void:
     if state == S.DEAD:
         return
     hp -= amount
+    # L29a: a lord that crosses a threshold changes phase, visibly
+    if phase_count > 1 and hp > 0.0:
+        var now := phase_for(hp / maxf(1.0, max_hp))
+        if now > phase:
+            phase = now
+            _enter_phase()
     Sfx.at("hit", global_position, HIT_DB + (3.0 if crit else 0.0))     # S3: under the weapon's own clash / impact
     _number(amount, crit)
     _flash()

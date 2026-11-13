@@ -1048,7 +1048,15 @@
       "Boots on stone, slow and even. That will be the Commander.",
       "E3PO comes out of the gatehouse already unimpressed.",
       "The Commander takes the step nobody else wants and stands on it.",
-      "E3PO is here. Whatever this is, it is his problem now, and he prefers it that way."
+      "E3PO is here. Whatever this is, it is his problem now, and he prefers it that way.",
+      "The Commander comes through the crowd and the crowd closes behind him, facing out.",
+      "E3PO reaches the wall without hurrying, and the hurrying stops.",
+      "The Commander arrives, looks at the problem, and names it. That is usually enough.",
+      "E3PO puts his back to the gate. Everything else can be worked out from there.",
+      "The Commander walks past the trembling end of the line and stands at it.",
+      "E3PO steps out of the dark into the lamplight, which is the only warning anyone gets.",
+      "The Commander takes the wall and the whole guard remembers the drill at once.",
+      "E3PO arrives late, on purpose, so the men learn they can hold without him."
     ],
     "withdraw": [
       "E3PO is hauled to the barracks, swearing he is fine.",
@@ -1066,7 +1074,15 @@
       "They get E3PO's arm over a shoulder and he insists on taking the other side.",
       "'Barracks,' says the surgeon. 'Briefly,' says the Commander.",
       "E3PO leaves the wall under protest and under his own power, mostly.",
-      "The Commander withdraws, and the gate feels taller and thinner at once."
+      "The Commander withdraws, and the gate feels taller and thinner at once.",
+      "E3PO goes to one knee, is told to stay there, and loses the argument for once.",
+      "The Commander is carried past the Watch and tells each of them to carry on.",
+      "They shut the barracks door on E3PO and lean on it.",
+      "E3PO withdraws, and the gate bar suddenly looks like a piece of wood.",
+      "The surgeon wins. It takes four guards and a direct order from the surgeon.",
+      "The Commander leaves the wall promising to be dull about it.",
+      "E3PO is helped down the stair, counting the steps to prove he still can.",
+      "They take the Commander off the field, and nobody says the word dying, because it does not apply."
     ],
     "return": [
       "E3PO is back on the wall, mended and mortified.",
@@ -1083,7 +1099,15 @@
       "E3PO climbs the stair counting the steps aloud, as a demonstration.",
       "The barracks is done with him. He was done with it an hour ago.",
       "The Commander takes his step back and the guard stop glancing at it.",
-      "E3PO returns and asks what he missed in a tone that dares you to say 'much'."
+      "E3PO returns and asks what he missed in a tone that dares you to say 'much'.",
+      "E3PO comes back out with the strapping still showing and dares anyone to mention it.",
+      "The Commander is back at the gate, and the gate stops being a worry.",
+      "E3PO returns, inspects the bar, and finds it adequately kept. High praise.",
+      "The Commander comes back up and asks for the butcher's bill before he asks for a chair.",
+      "E3PO is on the wall again, and the raiders' scouts turn round without reporting why.",
+      "The Commander returns and takes the worst post back off whoever was holding it.",
+      "E3PO is back: stiffer, slower, and entirely immovable.",
+      "The barracks lets him go. It never really had a choice."
     ],
     "says": [
       "Hold the line. The line holds because I say so.",
@@ -1115,7 +1139,21 @@
       "Do not thank me. Shut the door behind you.",
       "The deep sends up monsters and we send down volunteers. I do not love the trade.",
       "There is no trick to it. Stand where you are told, for longer than you want to.",
-      "I am not brave. I am simply still here, which looks the same from a distance."
+      "I am not brave. I am simply still here, which looks the same from a distance.",
+      "I am not the wall. I am what the wall is for.",
+      "Every door in this town shuts. Mine shuts last.",
+      "Do not ask me how old I am. Ask the gate; it remembers more.",
+      "A town is a promise that somebody is awake. I am the somebody.",
+      "You will have braver days than this. Today I want a steady one.",
+      "I do not win fights. I outlast them. Try it, it is cheaper.",
+      "The scar is patient. I have the advantage there.",
+      "Keep your spear where I can see it and your fear where you can.",
+      "I have never once been rescued and I am not starting a fashion.",
+      "Report to me, not about me.",
+      "They call me immortal. I call it a long habit of not leaving.",
+      "Bellmire has buried everyone who built it. That is the job of a town.",
+      "If you want my post, you will have to wait a very long while.",
+      "Stand here. If something comes through, it came through me first, so take your time."
     ],
     "town_talk": [
       "They say E3PO has held the gate since before there was a gate.",
@@ -1141,7 +1179,21 @@
       "The graveyard has no stone for E3PO. The masons keep offering.",
       "They say if the bell ever gets a clapper, he will still hear the gate first.",
       "Recruits are told not to try out-standing him. They try anyway. They stop.",
-      "A caravan master swore he saw E3PO on the wall at dawn and at midnight. Same posture, same dent."
+      "A caravan master swore he saw E3PO on the wall at dawn and at midnight. Same posture, same dent.",
+      "The Watch say the Commander has never once been seen running, in any emergency, ever.",
+      "They say he has had three suits of armour and only one dent he keeps.",
+      "The gatekeeper's grandfather was told off by E3PO for the same thing, in the same words.",
+      "A tanner swears the Commander remembers his wedding, which was forty years back.",
+      "They say the scar has tried E3PO twice and gone back down both times.",
+      "The Watch keep a tally of nights the Commander slept. It is a short tally.",
+      "The schoolmistress uses E3PO to teach the children what reliable means.",
+      "The guild post keeps his name off the ledgers - he never asked for pay, so there is nothing to write.",
+      "A delver swore the Commander walked her home from the scar's edge without a word.",
+      "They say the architect drew the gate around the Commander's shoulders and got the measurements right.",
+      "No innkeeper in Bellmire will take his coin. He leaves it anyway, under the cup.",
+      "The gravediggers say E3PO knows where every one of them is, by row.",
+      "The children's game is called Hold The Door. Nobody wants to be the raiders.",
+      "They say Bellmire has two bells: the one with no clapper, and the Commander."
     ],
     "_note_extras": "Added keys (C-cycle 5): raid / disaster / festival lines, and viewer_roll keyed by outcome (crit, high, low, fumble) for the d20. Same voice as 'says'. Additive; dead until wired.",
     "raid": [
@@ -1172,7 +1224,17 @@
       "E3PO sends the youngest guard to the back and makes no speech about it.",
       "'They put themselves between us and the river. Poor planning. Theirs, not ours.'",
       "The Commander steps over a fallen man and puts a torch in his hand, not a sword.",
-      "'If I go down I will be up again before you finish worrying. Keep working.'"
+      "'If I go down I will be up again before you finish worrying. Keep working.'",
+      "'They will try the north corner. They always try the north corner. Meet them there.'",
+      "The Commander walks the line once before it starts and says one word to each man.",
+      "'Keep the lamps lit. Let them see exactly how much door there is.'",
+      "E3PO sets his shield in the gap and tells the guard to build the line off him.",
+      "'Wounded to the back. Arguments to me. Move.'",
+      "The Commander takes the first hit of the night on purpose, to show it can be taken.",
+      "'They have a captain. Point him out and I shall go and be a nuisance.'",
+      "E3PO holds the gate open two breaths longer so the last runner makes it.",
+      "'You have held longer than this at drill, and I was shouting then.'",
+      "The Commander ends the assault by refusing to notice it had started."
     ],
     "disaster": [
       "E3PO has the bucket line running before anyone thinks to ask him.",
@@ -1202,7 +1264,17 @@
       "'Water first, grain second, arguments never. Move.'",
       "E3PO takes the night watch himself so the Watch can dig.",
       "'I have seen this town burn, flood and starve. I have not seen it leave.'",
-      "The Commander is the last one out of the street and the first one back into it."
+      "The Commander is the last one out of the street and the first one back into it.",
+      "'Lamps out, every one. We are not fighting two fires tonight.'",
+      "E3PO empties the barracks into the street, and the barracks does not argue.",
+      "'Stand the old and the carrying at the Keep. Then come back to me.'",
+      "The Commander counts roofs out loud so nobody has to count them alone.",
+      "'The river wants the low street. It may have the street. Not the people.'",
+      "E3PO breaks a shutter rather than wait for the key, and pays the smith at dawn.",
+      "'Sleep in shifts. That is an order, and I shall take the worse shift.'",
+      "The Commander walks the ruin at first light, naming the houses that stood.",
+      "'Nothing here is unfixable. Several things here are urgent. Learn the difference.'",
+      "E3PO carries the grain out last, because the grain can wait and he knows it."
     ],
     "festival": [
       "E3PO attends the feast in full harness and declines a chair, as always.",
@@ -1226,7 +1298,17 @@
       "The Commander is given a wreath. He wears it over the helm, which ruins both.",
       "'Enjoy it loudly. The town should be heard enjoying itself at least once a season.'",
       "E3PO ends a wrestling match by lifting both men off the ground and setting them down apart.",
-      "The children try on his gauntlets. He times them, and he keeps the record."
+      "The children try on his gauntlets. He times them, and he keeps the record.",
+      "'Light the bonfire properly or do not light it. I will not watch a half-hearted blaze.'",
+      "The Commander is given the first cup and passes it to the oldest woman present.",
+      "E3PO keeps the children off the wall all evening and loses, gradually, to all of them.",
+      "'Masks are fine. I shall still know every one of you.'",
+      "The Commander watches the dancing with the expression of a man guarding it.",
+      "'A town that can feast is a town worth the door. Carry on.'",
+      "E3PO is persuaded to sing. The Watch never recover.",
+      "'Three cheers for the harvest, then back to work in the morning, and I mean morning.'",
+      "The Commander puts his helm down on the table. For one hour. It is noted.",
+      "E3PO walks each drunk home personally and remembers which house, every time."
     ],
     "viewer_roll": {
       "crit": [
@@ -1243,7 +1325,15 @@
         "The Commander takes off his helm for this one. That has happened four times.",
         "'Write the name down properly. Spell it right or do it again.'",
         "'That was not luck. I have watched luck. Luck is sloppier.'",
-        "The Commander claps once. The sound carries to the wall."
+        "The Commander claps once. The sound carries to the wall.",
+        "'Perfect. Do not get used to it, but do enjoy it.'",
+        "The Commander points at you, then at the rest of them. That is the lesson delivered.",
+        "'Twenty. The scar will hear about that one.'",
+        "'I have been doing this a very long while and I would not have done it better.'",
+        "The Commander stops mid-sentence to watch. He does not restart it.",
+        "'That goes in the book in ink. I use chalk for most of you.'",
+        "'Beautiful. Ugly would have done, but beautiful is nice.'",
+        "The Commander tells the whole wall to look. They look."
       ],
       "high": [
         "'Adequate. High praise, from me.'",
@@ -1259,7 +1349,15 @@
         "'That will do nicely, and I will deny having said so.'",
         "The Commander grunts. The guild has learned to read that grunt.",
         "'Textbook. My textbook, as it happens.'",
-        "'Keep that up and I shall recommend you for something tedious.'"
+        "'Keep that up and I shall recommend you for something tedious.'",
+        "'Sound. That is the word. Be sound more often.'",
+        "The Commander gives one nod and moves on. That is the whole award ceremony.",
+        "'No notes. I always have notes.'",
+        "'That is what drill is for. Somebody finally noticed.'",
+        "'Strong work. Now do the boring half as well.'",
+        "The Commander tilts his helm a fraction. The Watch call that the salute.",
+        "'Useful. I would rather useful than splendid, most nights.'",
+        "'Good. Stay alive and that becomes a habit.'"
       ],
       "low": [
         "'Luck is a resource and you have spent yours. Use skill.'",
@@ -1275,7 +1373,15 @@
         "The Commander says nothing and hands over a flask, which says plenty.",
         "'Not your night. Nights end.'",
         "'You are still standing. That is the only number that counted.'",
-        "The Commander marks it down and underlines nothing."
+        "The Commander marks it down and underlines nothing.",
+        "'Thin. It landed. Thin and landed beats thick and late.'",
+        "The Commander looks at the dice, then at you, and blames the dice out loud.",
+        "'The scar does not score us. Keep going.'",
+        "'Half a result is still a result. Take the half.'",
+        "E3PO shrugs, which from him is a letter of support.",
+        "'That is the sort of night the Watch is made of. Welcome to it.'",
+        "'You are swinging at the right thing. The rest will come.'",
+        "The Commander changes the subject, loudly and badly, to spare you."
       ],
       "fumble": [
         "'I have seen worse. I have not seen worse today.'",
@@ -1291,7 +1397,15 @@
         "The Commander turns his back so you can get up without an audience.",
         "'A bad roll is not a bad soldier. Do it again.'",
         "'I have fallen down more stairs than you have seen. Up.'",
-        "The Commander says your name, which is somehow the worst part."
+        "The Commander says your name, which is somehow the worst part.",
+        "'Spectacular. Wrong, but spectacular.'",
+        "The Commander closes his eyes for one second and opens them ready to move on.",
+        "'I shall pretend that was a feint. You will pretend with me.'",
+        "'Nobody is throwing you off the wall. Mostly because I would have to carry you back.'",
+        "The Commander hands you your own weapon back without comment.",
+        "'Thirty years and I still do that twice a winter. Up.'",
+        "'The dice are mocking you. Join in; it takes their power away.'",
+        "The Commander laughs once. It is the only time anyone has heard it."
       ]
     },
     "_note_c17": "Added keys (C-cycle 17): tier_up (one line per growth_tiers stage, matched by name), night_watch, recruit, viewer_down, viewer_returns, lord_sighted. Same voice as 'says'. Additive; dead until wired.",
@@ -1355,7 +1469,17 @@
       "E3PO shares the worst watch with whoever drew it. He calls that coincidence.",
       "The Commander's shape on the wall is the cheapest lamp the town owns.",
       "E3PO listens to the river a while and decides it is behaving.",
-      "The Commander walks the wall twice and finds nothing, which takes him just as long."
+      "The Commander walks the wall twice and finds nothing, which takes him just as long.",
+      "The Commander walks the river side at the dead hour because that is the side he likes least.",
+      "E3PO stops at every post and asks the same four questions in the same order.",
+      "'Nothing to report' is the whole conversation, and he still walks it twice.",
+      "The Commander stands where the lamplight ends and looks into the part that is not lit.",
+      "E3PO takes a cold post off a shivering recruit and sends him in for soup.",
+      "Gate bar checked, lamps counted, river listened to. Then again.",
+      "The Commander hears a dog stop barking and goes to find out why.",
+      "E3PO walks past the graveyard on every round. Nobody asks him why.",
+      "'The dead hour is only an hour. Stand in it.'",
+      "The town sleeps. One pair of boots goes round the wall until it does not have to."
     ],
     "recruit": [
       "'Name. Good. I shall use it. Learn mine, you will hear it often.'",
@@ -1365,7 +1489,17 @@
       "The Commander looks you over once. 'You will do. Everyone does, eventually.'",
       "'Welcome to the Watch. Nobody claps. We shut the door and go to bed.'",
       "'Three rules. Measure the grain. Count the flasks. Keep the door. The third is yours tonight.'",
-      "E3PO writes your name in his book and does not look up. That is the ceremony."
+      "E3PO writes your name in his book and does not look up. That is the ceremony.",
+      "'You will not like me. You will like the door being shut.'",
+      "E3PO hands you a lamp before a weapon. 'Learn what you are guarding first.'",
+      "'If you run, run once, and come back. I have taken people back.'",
+      "'I do not need heroes. I need a man at that post at the third hour.'",
+      "The Commander asks who is at home waiting for you, and writes that down too.",
+      "'Your post is yours. Nobody else's. That is the whole of the honour.'",
+      "'Wear the helm. I have met every argument against it, at funerals.'",
+      "E3PO shows you the gate bar and makes you lift it yourself, once, so you know.",
+      "'Bellmire does not ask you to die for it. It asks you to be awake.'",
+      "The Commander salutes a brand-new recruit, properly. It is the last one they get for a year."
     ],
     "viewer_down": [
       "The Commander takes his helm off. He knew the name without asking.",
@@ -1375,7 +1509,17 @@
       "The Commander stands at the gate until the body is past, then shuts it.",
       "'Another of mine. I shall be having words with the scar about this.'",
       "E3PO is at the graveside at dawn, alone, before the crowd comes.",
-      "'Not a waste. A cost. There is a difference and I will argue it with anyone.'"
+      "'Not a waste. A cost. There is a difference and I will argue it with anyone.'",
+      "The Commander closes the ledger line himself. He will not have a clerk do it.",
+      "'They went in knowing. That is not comfort. It is respect, and it is all I have.'",
+      "E3PO sends the pay home with his own escort and no explanation needed.",
+      "The Commander stands the whole night at the stone and is on the wall by dawn.",
+      "'Do not tell me they were unlucky. Tell me their name and I shall keep it.'",
+      "E3PO walks the family to the chapel and stands at the back, armed, as if it helps.",
+      "'The scar took one of mine today. It will not enjoy the rest of this season.'",
+      "The Commander never says lost. He says the name, and where.",
+      "'There will be a stone. I shall check the spelling myself.'",
+      "E3PO takes the dead one's post for the night. He does not explain and nobody asks."
     ],
     "viewer_returns": [
       "'Back, and whole-ish. My favourite kind of report.'",
@@ -1385,7 +1529,17 @@
       "'Surgeon, then tavern. In that order, and I shall know.'",
       "'Good. Now tell me what is down there, and leave the bragging out.'",
       "The Commander marks you present in his book and underlines it.",
-      "'Everyone who goes down is a name I am holding. Thank you for taking yours back.'"
+      "'Everyone who goes down is a name I am holding. Thank you for taking yours back.'",
+      "'Up and breathing. The rest is detail. Eat something.'",
+      "The Commander checks you over for what you have not mentioned yet.",
+      "'I had your name in the book twice tonight. Now it is once. Good.'",
+      "E3PO takes the first watch so you can sleep through the whole night.",
+      "'You owe the town nothing more today. That is an order.'",
+      "The Commander walks you to the surgeon, waits, and walks you to the tavern.",
+      "'Whatever you left down there, leave it down there.'",
+      "E3PO shakes your hand, which costs him a gauntlet and some dignity.",
+      "'Tell me the shape of it while it is fresh. Then forget it on purpose.'",
+      "The Commander marks you back through the gate and looks at the number for a while."
     ],
     "lord_sighted": [
       "'Something down there has a name. Names are worse than teeth.'",
@@ -1395,7 +1549,17 @@
       "'Shapes, not numbers. Tell me its shape and I shall tell you where to hit it.'",
       "The Commander has met one of those before. He does not say how it went.",
       "'Do not duel it to be remembered. Kill it and be forgotten with the rest of us.'",
-      "E3PO sharpens nothing, checks nothing, and simply waits at the gate all night."
+      "E3PO sharpens nothing, checks nothing, and simply waits at the gate all night.",
+      "'A crowned thing. Lovely. Fetch the long spears and the short tempers.'",
+      "The Commander puts every spare lamp in the town on the wall facing the scar.",
+      "'It has a shape. Everything with a shape can be stood in front of.'",
+      "E3PO cancels every leave in the Watch with one line and no apology.",
+      "'If it comes up the stair, let it. The stair is narrow and I am wide.'",
+      "The Commander sends the children inland and stays to argue with the parents.",
+      "'Do not look at the crown. Look at the knees.'",
+      "E3PO stands at the gate all night with his helm on, which he almost never does.",
+      "'I have seen one before. I am still here. Work out what that means.'",
+      "The Commander does not sleep while a lord has a name and the town does not have its head."
     ]
   },
   "town_life": {

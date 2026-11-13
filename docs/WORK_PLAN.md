@@ -1342,3 +1342,45 @@ CHANGELOG 2026-11-13 14:15 (supervisor): added D46 (party band off stream + into
 Below section on the hub, gated on D46's snapshot field). D41/L40's party-frames half is superseded
 - only the chat-column overlap remains there. Agreed field shape for the parties array to be
 pinned when D46 and H10 start, so the two sides match.
+
+# Phase Z - strip the stream to Mr. E's six (supervisor, 2026-11-13 14:20). See COORDINATION 13.
+
+Mr. E's answers to the three edge cases: unit frame -> STRIP (to hub); boss bar -> KEEP on stream;
+in-world health bars / damage numbers / VFX -> KEEP (they are the content).
+
+- [ ] D48. STRIP THE UNIT / SELECTION FRAME OFF STREAM. Owner: DESKTOP BUILD (rts_camera.gd). The
+      bottom-centre stats panel that appears when a hero is selected comes off the stream canvas.
+      SELECTION ITSELF STAYS as the director mechanic (it still decides which pane follows whom) -
+      only the drawn stats panel goes. KEEP boss_bar.gd. KEEP the in-world health bars / damage
+      numbers / VFX - those are not this panel. The hub already shows hero sheets, so the selected
+      unit's detail is already reachable there; if any field is not in the snapshot, add it the
+      D46 way (read-only, version-gated).
+      DONE: no unit-stats panel on a 1080p stream crop; selection still drives the panes; boss bar
+      and in-world elements untouched.
+
+- [ ] L63. STRIP THE SATCHEL OFF STREAM. Owner: DESKTOP HUD (leaderboard_panel.gd). The L51 Satchel
+      (a viewer's gear / inventory / selling sheet) comes off the stream - it is a personal sheet
+      and belongs on the hub. After L58 (Guild Roll removed) and this, leaderboard_panel.gd draws
+      NOTHING on stream: retire the CanvasLayer or leave it dormant. The Satchel's content is not
+      lost - it moves to the hub (H11). The HUD worker's entire on-stream surface is now exactly
+      the six in COORDINATION 13: panes, Chronicle, lane titles (L62), now-watching (L57).
+      ALSO CONFIRM feed_hud.gd: if it draws a SECOND on-stream event feed separate from the
+      Chronicle, that is a seventh panel and must go - the Chronicle is the only event feed on
+      stream. If feed_hud IS the Chronicle's renderer, leave it. Say which in PROGRESS.
+      DONE: a 1080p stream crop showing ONLY the six; Satchel gone; feed_hud question answered.
+
+- [ ] H11. THE HUB ABSORBS WHAT LEFT THE STREAM. Owner: HUB BUILDER (web/ only). The hub already
+      carries hero sheets, inventory, gear, the fallen and the command list - so most of this
+      exists. Fill the gaps so nothing that left the stream is lost: (a) SELLING PRICES on the
+      viewer's sheet (the Satchel showed the counter's sell prices); (b) make a viewer's OWN hero
+      easy to find/pin, since the on-stream Satchel that used to show it is gone. Plus H10's Bands
+      Below. All read-only from the snapshot, el()/textContent only, ICON_SET for status, house
+      palette. No new fetch or write path.
+      DONE: a viewer can see on the hub everything the stream used to overlay - their sheet with
+      sell prices, their inventory, the bands below - and nothing on the hub is fabricated.
+
+CHANGELOG 2026-11-13 14:20 (supervisor): COORDINATION 13 added - the binding stream-HUD philosophy (six allowed
+elements, everything else hub-only), from Mr. E's rule + his three edge-case answers (unit frame
+strip, boss bar keep, in-world keep). Items: D48 (strip unit frame, desktop), L63 (strip Satchel +
+answer the feed_hud question, HUD), H11 (hub absorbs selling + own-hero find). L51's on-stream
+Satchel is intentionally removed - a direction change, its work feeds the hub, not wasted.

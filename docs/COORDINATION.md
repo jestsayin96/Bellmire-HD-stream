@@ -205,3 +205,31 @@ RULES:
   - The supervisor's scratch worktrees are disposable. Any worker may ignore them.
   - When writing a scheduled task's prompt, state the worker's OWN folder and say explicitly which
     folder is not theirs. A prompt that names a shared folder is a defect in the prompt.
+
+
+## 13. THE STREAM-HUD PHILOSOPHY (Mr. E, Nov 13 2026) - BINDING ON EVERY HUD AND TOWN WORKER
+
+Mr. E's rule for what the on-stream picture may contain: "all we need on the stream screen itself
+is the chronicle, the split screen and the titles of each window so people know what to spend their
+money on, and which screen is currently watching who. Anything we can push to the hub, push it."
+
+THE STREAM SCREEN SHOWS ONLY THESE, AND NOTHING ELSE:
+  1. The 2x2 split-screen panes (spotlight.gd) - the stream's resting state, always up.
+  2. The Chronicle centre box (hud_dock.gd).
+  3. Each pane's LANE TITLE - DIRECTOR / SUBSCRIBER / BITS / CHANNEL POINTS / (ambient). This is the
+     spend prompt: a viewer must be able to read what a pane is for, so they know what to spend on.
+  4. Each pane's "Now watching: <who>".
+  5. THE BOSS BAR during a lord fight (boss_bar.gd) - the ONE overlay exception Mr. E kept, for the
+     tension of a lord's HP draining live. Nothing else gets this exception.
+  6. IN-WORLD elements inside the panes: health bars over characters, floating damage numbers,
+     spell and combat VFX. These are the CONTENT of the windows, not overlay chrome - they stay.
+
+EVERYTHING ELSE IS HUB-ONLY. No on-stream overlay panel, board, sheet, list or readout beyond the
+six above. If a worker is about to draw a new panel on the stream canvas, it is wrong unless it is
+one of the six. When in doubt, it goes to the hub.
+
+Already decided under this rule: the Guild Roll is gone (L58), the party band goes to the hub
+(D46/H10), the viewer Satchel goes to the hub (L63 below), the unit/selection frame goes (D48
+below), the d20 shows on the hub (H9). The hub already carries hero sheets, inventory, gear, the
+fallen and the command list, so most of "everything else" is ALREADY there - the work is stripping
+the stream and filling the few gaps (selling prices, the band grouping), not rebuilding the hub.

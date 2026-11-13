@@ -150,6 +150,8 @@ func body_of(uid: String) -> Node3D:
 	return null
 
 func _process(delta: float) -> void:
+	if _suspended:
+		return                              # L51: the Satchel holds the screen
 	var real := delta / maxf(Engine.time_scale, 0.001)
 	var changed := false
 	for l in LANES:
@@ -540,6 +542,8 @@ func set_labels(v: bool) -> void:
 ## L32a: the 2x2 is the resting state - the layout is ALWAYS the grid. The key still
 ## names the busy lanes, so a lane turning paid or ambient re-lays (frames, labels, cuts).
 func _relayout(force := false) -> void:
+	if _suspended:
+		return                              # L51: folded - do not re-grid under the Satchel
 	var b := busy()
 	var lay := "grid_" + "_".join(b)
 	# L21: the slim bottom chrome (clock / chat) is no pane's. L39: the two pane rows MEET at
@@ -585,10 +589,33 @@ func _relayout(force := false) -> void:
 ## ---------------------------------------------------------------- L21: the panes' own rules
 
 static var mode := "off"           # "off" / "pair" / "grid" (HeroBody's name layout reads it)
+## L51: a panel (the Satchel) can fold the whole grid for a deliberate full-screen
+## look, then restore it. While suspended the panes stop rendering and the eye's own
+## camera carries the view, so a region-"none" panel (Satchel, Guild Roll) can show.
+var _suspended := false
 var _rects := {}                    # pane -> Rect2 in 0..1 of the screen
 
 func mode_now() -> String:
+	if _suspended:
+		return "off"                                   # L51: folded for a full-screen panel
 	return "off" if _layout == "" else "grid"      # L32a: once set up, always the grid
+
+## L51: fold the grid away (panes stop, the eye draws full screen) or bring it back.
+func suspend(on: bool) -> void:
+	if _suspended == on:
+		return
+	_suspended = on
+	var root_vp := get_viewport()
+	if on:
+		for k in _panes:
+			var pp: Dictionary = _panes[k]
+			(pp["box"] as Control).visible = false
+			(pp["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_DISABLED
+		if root_vp:
+			root_vp.disable_3d = false      # the eye's own camera carries the full-screen view
+		mode = "off"
+	elif _layout != "":
+		_relayout(true)                     # back to the grid exactly as it was
 
 ## a pane's rect on screen in px (empty when it is not up)
 func pane_rect(k: String) -> Rect2:

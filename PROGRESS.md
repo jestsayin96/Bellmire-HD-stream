@@ -2102,3 +2102,46 @@ What the reconciliation has to settle - the laptop built L34 AND L39 independent
  - spotlight: theirs is +36 lines (L57 per-pane "now watching" label, per Phase P) and does not
    obviously collide with my L35/L38 work, but it needs reading, not assuming.
 This needs a windowed UI capture after resolving, per COORDINATION 4. Not attempted blind.
+
+
+## U3 - desktop HUD: L51 the Satchel - a viewer's gear/inventory/selling sheet (Nov 13, 2026)
+
+L51 (narrowed): a NEW self-contained panel showing equipment with the BUFFS/DEBUFFS it gives,
+the viewer's inventory, and SELLING. The d20 part has left this lane (now T5 rolls / H9 displays).
+
+Built inside my seven files - no reach into party_frames, rts_camera or chatcmd:
+- leaderboard_panel.gd: a `Satchel` inner class sharing the right column with the Guild Roll.
+  Sections, all in the house style (parchment, ink, teal diamond + rule):
+  - WORN: each piece with what it GIVES, signed and coloured (green buff, red penalty, grey
+    "for the look"), read from data/items.json fields (ac/hp/hit/dmg/saves/speed). Weapon and
+    armour from Roster.WEAPONS/ARMOUR. Then an "Altogether:" line of the TOTALS taken from the
+    Roster itself (armour_class/attack_bonus/max_hp/speed) - never recomputed here, so the panel
+    can't disagree with the dice.
+  - RUNNING ON THEM: the live states on the delver (poison + potion states), bad first, in the
+    state's own colour with its effect text and seconds left (reads delve.has_st / m["st"]).
+  - IN THE SATCHEL: brews line, lamp oil, a count of spare gear.
+  - AT THE COUNTER: per-item sell-back (40% of cost) for spare gear and brews, plus a grand
+    "Sell the lot (worn too)" total.
+- spotlight.gd: a `suspend(on)` hook. The stream runs a permanent 2x2 grid ("once set up, always
+  the grid"), so a right-column panel could never show. suspend() folds the panes away (the eye's
+  own camera draws full screen) and restores them exactly. The Satchel drives it: visible -> folded.
+- The streamer summons the sheet with I (pin: tours living heroes). A viewer's purchase/reroll/find
+  fires roster.changed -> raise_for(uid), which ARMS the sheet on that buyer but does NOT fold the
+  grid on its own (const AUTO_FOLD=false) - folding on every !buy would blank the game. See DECISION.
+
+Verified by looking: renders/cycles/20261113_u3/ (windowed 1920x1080).
+  1_satchel_town_1080.png - the sheet over a full-screen town view, nothing clipped.
+  2_satchel_states_1080.png - the same hero below, Poisoned/Frightened/Hasted/Ogre-Strong running.
+  3_chronicle_crop.png - the 2x2 grid restored, the Chronicle centre box at 1:1.
+
+U1 caveat resolved: the Chronicle's 18 px line IS legible on stream - read it at 1:1 in
+3_chronicle_crop.png, crisp at 1080p.
+
+OPEN for Mr. E:
+- !sell is not wired: the sell-back lives at the counter in roster.gd, which is the LAPTOP's file,
+  not this worker's. The panel shows the prices and a total and says "!sell opens the counter";
+  it offers the command only once Roster gains a sell() method. The laptop (or content) owner
+  exposes that - the correct move, not reaching into their file.
+- Should a viewer's purchase POP the sheet by itself (fold the grid for ~14 s), or only arm it for
+  the next I-press? Shipped as arm-only (AUTO_FOLD=false) because auto-folding on every buy blanks
+  the game view. One-line flip if Mr. E wants the pop.

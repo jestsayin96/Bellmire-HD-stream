@@ -580,7 +580,22 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       landed blows vs 8.0 shallow. tools/_l45_test.gd L45_TEST OK (10 checks) - also asserts the first lord
       floor is unchanged canon and the curve never dips. _offfloor 0 of 1130, _delve_test clean, L27A OK.
       MR. E'"'"'S CALL: 44.7 vs ~30 hp heroes is about one blow a hero - LORD_ATK_PER_STEP is the dial.
-- [ ] L46. TRAPS DO NO DAMAGE (he believes spikes/traps are inert). L11 claims working traps. Verify against the D28 census, then fix: a triggered trap must apply real hp loss, show a number, and reach the Chronicle. DONE: census shows trap triggers AND hp applied; a delver can die to a trap.
+- [x] L46. TRAPS DO NO DAMAGE (he believes spikes/traps are inert). L11 claims working traps. Verify against the D28 census, then fix: a triggered trap must apply real hp loss, show a number, and reach the Chronicle. DONE: census shows trap triggers AND hp applied; a delver can die to a trap.
+      DONE L-cycle 124: VERIFIED FIRST - Mr. E is right about the experience, wrong about the mechanism. L11'"'"'s
+      damage code was never broken (a forced spring took 10 hp, rolled the save, floated the number, printed
+      the line). Traps were almost never MET: over 4 floors a delver came within the 0.90 m radius of only
+      2 of 6 traps (closest approaches 0.1/0.4/3.9/4.0/11.0/23.5 m) and 1 fired. THREE real defects, all
+      measured: (1) dungeon_hd._dress() laid traps on ANY open cell - they now go on info["keep_clear"], the
+      way through, which is where the party walks (coverage 2 of 6 -> 5-6 of 6, closest 0.0-0.7 m);
+      (2) _traps_tick() ran ONLY inside _fight(), so the whole walk to the stairs was trap-free - it now
+      runs in "descend" and in the "flee" state too (encounters 2 -> 5 over the same floors); (3) a sprung
+      trap could take ZERO hp - floorf(dmg*0.5) on a save floors a low roll to 0 and fire resistance
+      multiplies to 0 - now maxf(1.0, ...), so a save halves and resistance blunts but neither nullifies.
+      tools/_l46_test.gd L46_TEST OK (10 checks) - it prints trap_log WITH the closest approach to every
+      trap, so the next run can tell "damage broken" from "never triggered". _offfloor 0 of 1063,
+      _delve_test clean, L25_TEST OK 13/13 (0 stuck, 0 prop overlap - traps on the route block nobody).
+      NOTE: part C first failed on a CORRECT mechanic - the canon one-death-save-a-delve
+      in _hero_hit stood the delver back up on 1 hp; the test now burns the save then kills.
 - [x] L47. ADVENTURERS MUST THINK FOR THEMSELVES (Mr. E marked this PRIORITY). Delvers should make visible decisions: retreat when hurt, drink a brew when low, use oil before the dark, pick targets sensibly, search for loot, regroup, flee a losing fight, go home when spent. Right now they read as scripted. DONE: a soak where the Chronicle shows real decisions, and a hurt party retreats rather than dying in place.
       DONE L-cycle 122: delve.gd decision layer - _decide() records+announces by kind (the LINE is rate-limited
       per hero, the decision never is). NEW: _think() per hero (BREAK OFF under 22% hp with no heal brew and

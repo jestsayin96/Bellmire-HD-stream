@@ -2240,3 +2240,43 @@ dungeon-side direct counters (live boss poll, trap_log) undercounted vs the feed
 reliable; the live-delve poll is now every-frame for a future delve-heavy run (set CENSUS_MIN higher, or seed a party
 straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed except two read-only census counters
 (Rig.plays, Spells.cast_counts). Backups scripts/rig.gd.bak_d28, scripts/spells.gd.bak_d28 (not committed).
+
+## L-cycle 124 - L46 traps (laptop jestai, 2026-11-13) - L46 DONE
+VERIFIED FIRST, as the item demands - and Mr. E is RIGHT ABOUT THE EXPERIENCE, WRONG ABOUT THE MECHANISM.
+L11's damage code was never broken: a forced spring took 10 hp, rolled a DEX save, floated the number and
+printed to the Chronicle exactly as written. Traps are not inert. They were simply almost never MET:
+  BEFORE: over four floors with 6 traps, a delver came within the 0.90 m trigger radius of only 2 of them.
+  Closest approach per trap: 0.1, 0.4, 3.9, 4.0, 11.0, 23.5 m. One trap fired in the whole delve.
+So the fix is not "make traps hurt" - it is "put traps where people walk, and keep them live while people
+are walking". Three real defects found by measuring:
+1. TRAPS SAT WHERE NOBODY WENT. dungeon_hd._dress() took any open cell. info["keep_clear"] - the way
+   through plus the corridors - is exactly where the party walks, and props are deliberately kept OFF it;
+   traps are the one thing that belongs ON it. New take_route() lays traps on keep_clear by preference and
+   falls back to any open cell only when the route is used up. Coverage went 2 of 6 -> 5-6 of 6 within
+   reach, closest approaches now 0.0-0.7 m instead of 0.1-23.5 m.
+2. TRAPS WERE ONLY LIVE DURING A FIGHT. _traps_tick() was called only from _fight(), so the entire walk to
+   the stairs - where most of a floor is crossed - was trap-free. That alone explained why 6 traps walked
+   over produced 2 encounters. _traps_tick() now also runs in "descend" and in L47's new "flee" state.
+   Encounters over the same four floors went 2 -> 5.
+3. A SPRUNG TRAP COULD TAKE NOTHING AT ALL. dmg = floorf(dmg * 0.5) on a good save floors a low roll to 0,
+   and a fire grate against a fire-resistant delver multiplies to 0 - so a trap could land, play its
+   sound, print its line and remove zero hp. That IS "the trap did nothing", seen with my own eyes in the
+   first probe run. took is now maxf(1.0, ...): a save halves and resistance blunts, neither nullifies.
+- tools/_l46_test.gd (NEW, headless): A verifies on real delves and prints trap_log WITH the closest
+  approach to every trap, so the next run can tell "damage broken" from "never triggered" without
+  guessing; B forces a spring and then springs every trap against every delver, requiring not one of them
+  to take zero; C is lethality. L46_TEST OK, 10 checks, 0 failed.
+- A TEST BUG OF MINE, worth recording because it looked exactly like a product bug: part C put a delver on
+  1 hp, sprang a trap, saw them still standing on 1 hp and failed. The trap had dealt 13 damage. The cause
+  is canon - _hero_hit gives ONE death save a delve (DC 10 CON claws you back to 1 hp, a natural 20 to a
+  quarter). The rule was working; my assertion was wrong. Part C now asserts the save is BURNED on the
+  first lethal trap and that the delver DIES to the next one with it spent. I nearly "fixed" a correct
+  mechanic - the giveaway was that the Chronicle line reported real damage while hp did not move.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1063 (MON_INPROP 0 of 159); _delve_test 0 errors/nulls.
+  L25_TEST OK 13/13 - 0 prop-prop interpenetration over 12 floors, 0 stuck delvers, 0 watchdog frees, so
+  laying traps ON the walked route (keep_clear) did NOT crowd the path or block anyone. That was the risk
+  worth checking: traps are now deliberately where people walk, which is exactly where a bad placement
+  would strand them.
+- FOR MR. E: traps now land on the route and stay live while the party walks, so expect to SEE them on
+  stream - several a delve rather than one in four floors. If that reads as too punishing once he watches
+  it, the dial is the trap count in dungeon_hd._dress() (1 + floor_no/3, capped at 4), not the damage.

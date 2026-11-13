@@ -663,6 +663,11 @@ func _process(delta: float) -> void:
 		"fight":
 			_fight(delta)
 		"descend":
+			# L46: traps were only ever checked inside _fight(), so the whole walk to the stairs
+			# - where most of the floor is actually crossed - was trap-free. Measured: 6 of 6
+			# traps were walked within reach of, but only 2 were ever MET. They are live now
+			# wherever the party is moving.
+			_traps_tick()
 			var ex: Vector3 = dun.info["exit"] + dun.global_position
 			var all_there := true
 			for m in _alive():
@@ -683,6 +688,7 @@ func _process(delta: float) -> void:
 		"flee":
 			# L47: the party broke off a losing fight. They RUN for the way up, visibly, and
 			# the delve ends when they are there (or when they plainly cannot get there).
+			_traps_tick()      # L46: and a panicked run out is no safer than the walk in
 			var up: Vector3 = dun.info["entry"] + dun.global_position
 			var all_up := true
 			for m in _alive():
@@ -1789,7 +1795,11 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 	if saved:
 		trap_log["saved"] += 1
 		dmg = floorf(dmg * 0.5)
-	var took := _soak(m, dmg)
+	# L46: a trap that has actually SPRUNG must hurt. Measured: 2d6 halved by a good save floors
+	# to 0, and a fire grate against a fire-resistant delver multiplies to 0 - so a trap could
+	# land, play its sound, print its line and take nothing at all. That is the "traps are inert"
+	# Mr. E reported. A save halves it and resistance blunts it, but neither nullifies it now.
+	var took := maxf(1.0, _soak(m, dmg))
 	trap_log["damage"] += took
 	m["hp"] = float(m["hp"]) - took
 	_say("%s steps on %s - %s DEX %d vs DC %d, %d damage%s." % [h["name"], spec["noun"], what, sv, dc, int(took), " (halved)" if saved else ""])

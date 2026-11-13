@@ -381,11 +381,30 @@ func _dress() -> void:
                         used[cv + Vector2i(dx, dy)] = true
                 return cv
         return Vector2i(-999, -999)
+    # L46 (Mr. E: "traps do no damage"): measured first, and the damage was never the problem -
+    # over four floors a delver came within the trigger radius of only 2 of 6 traps, the rest
+    # sitting 3.9 to 23.5 m off the line anyone walked. A trap in a corner nobody visits may as
+    # well not exist, which is exactly why he never sees one go off. info["keep_clear"] is the
+    # way through plus the corridors - where the party actually walks - so traps are now laid ON
+    # it by preference and only fall back to any open cell when the route is used up. Props are
+    # kept OFF keep_clear; traps are the one thing that belongs on it.
+    var route: Dictionary = info.get("keep_clear", {})
+    var take_route := func() -> Vector2i:
+        for c in spots:
+            var cv: Vector2i = c
+            if route.has(cv) and not used.has(cv) and _clear_of_props(_cell_pos(cv), 2.2):
+                for dx in range(-1, 2):
+                    for dy in range(-1, 2):
+                        used[cv + Vector2i(dx, dy)] = true
+                return cv
+        return Vector2i(-999, -999)
     # every floor: a few traps on the open floor, debris in proportion to depth
     var traps := [DungeonParts.spike_trap, DungeonParts.pressure_plate, DungeonParts.fire_trap,
                   DungeonParts.dart_trap, DungeonParts.blade_trap, DungeonParts.pit_trap]
     for i in range(1 + mini(floor_no / 3, 3)):
-        var c: Vector2i = take.call()
+        var c: Vector2i = take_route.call()
+        if c.x <= -999:
+            c = take.call()
         if c.x > -999:
             var tn: Node3D = (traps[_rng.randi() % traps.size()] as Callable).call()
             _place(tn, c)

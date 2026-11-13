@@ -126,6 +126,8 @@ func _process(delta: float) -> void:
     _tick = 1.0
     var best := _best()
     if best.is_empty():
+        best = _fallback_shot()             # L34: never leave the eye parked
+    if best.is_empty():
         return
     var cur_pri := float(_cur.get("pri", -1.0))
     var cur_alive := _shot_alive(_cur)
@@ -146,9 +148,11 @@ func _process(delta: float) -> void:
         cut = true                              # quiet too long: move on
     if cut:
         if _held >= HOLD_MAX and best["key"] == _cur.get("key", ""):
-            best = _best(String(_cur.get("key", "")))      # something different
-            if best.is_empty():
-                return
+            var alt := _best(String(_cur.get("key", "")))      # something different
+            if alt.is_empty():
+                alt = _fallback_shot(String(_cur.get("key", "")))
+            if not alt.is_empty():          # L34: nothing else to show - re-cut, never return
+                best = alt
         _cut(best)
 
 ## ---- L24 (Mr. E, Nov 11): while a spotlight lane holds a hero, the director never follows
@@ -219,6 +223,22 @@ func tour_stops() -> Array:
     for i in tour.size():
         out.append({"key": "tour_%d" % i, "pri": 10.0, "pos": tour[i][0], "dist": tour[i][1], "pitch": tour[i][2], "tour": true})
     return out
+
+## L34 (Mr. E's recordings: "the top left screen goes black or stays stuck when someone dies"):
+## when the subject dies, rerolls or despawns, _best() can come back EMPTY for a tick. The old
+## code returned, which left the eye parked exactly where it was - and the director pane, which
+## copies the eye, showed a frozen frame (or a black void, the camera left inside geometry).
+## So there is always a shot: step the town tour on and take the next stop.
+func _fallback_shot(avoid: String = "") -> Dictionary:
+    var tour := tour_stops()
+    if tour.is_empty():
+        return {}
+    _tour_i += 1
+    var s: Dictionary = tour[_tour_i % tour.size()]
+    if avoid != "" and String(s.get("key", "")) == avoid and tour.size() > 1:
+        _tour_i += 1
+        s = tour[_tour_i % tour.size()]
+    return s
 
 ## every shot worth showing right now, best first; `avoid` skips one story
 func _best(avoid: String = "") -> Dictionary:

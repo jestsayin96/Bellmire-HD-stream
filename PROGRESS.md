@@ -1852,3 +1852,48 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Housekeeping this cycle (COORDINATION 9.2): laptop tool .uids committed (L25/L26/L28/L32), desktop _d1x .uid
   noise deleted. The merged D19b sky/weather was read against the spotlight's _lane_env block (COORDINATION 8.1):
   panes copy the live town Environment every 0.5 s, so the new sky/weather carries into panes unchanged.
+
+## L-cycle 119 - L34 the director pane never freezes (laptop jestai, 2026-11-12) - L34 DONE
+Mr. E in his own game chat: "the top left screen goes black or stays stuck when someone dies". Both root
+causes the supervisor found were real and both are fixed:
+- scripts/auto_director.gd: `if best.is_empty(): return` in _process parked the eye whenever the subject
+  died / rerolled / despawned and _best() came back empty for a tick. New _fallback_shot() steps the town
+  tour on and returns the next stop, so there is ALWAYS a shot; the second return site (the HOLD_MAX
+  "something different" re-pick) now falls back the same way and re-cuts instead of returning.
+- scripts/spotlight.gd _follow(): the director pane copied get_viewport().get_camera_3d() and, when that
+  was null, silently held its last transform - the frozen/black pane. It now falls back to the eye's own
+  Camera3D, and failing that to the eye's numbers (new _eye_xform(), same placement convention as
+  RtsCamera: off = (sin yaw cos pitch, -sin pitch, cos yaw cos pitch) * dist, looking at focus + 1 m).
+- tools/_l34_test.gd (NEW, windowed 1920x1080 - a pane cannot be judged headless, COORDINATION 4): aims the
+  director at a hero, then scripts a DEATH (Roster.kill), a REROLL (Roster.reroll) and a DESPAWN (the body
+  freed under the eye), watching the REAL top-left pane camera for 3 s after each: 0 stale frames, 0 frames
+  below ground, 0 empty director ticks, and the director ends on a different subject each time.
+  L34_TEST OK - 30 checks, 0 failed. Shots renders/cycles/20261112_l34/ (0_baseline, 1_after_death,
+  2_after_reroll, 3_after_despawn, 4_null_main_camera).
+- ON THE TEST ITSELF, so the next run trusts the right number: two earlier metrics were WRONG and were
+  thrown away. (1) "pane transform identical to last frame" counts a MOTIONLESS SUBJECT (an angler at the
+  water, a hero standing still) as a freeze - it flagged 165/179-frame "freezes" that were correct held
+  shots. A stale frame is now only counted when the EYE moved and the pane did not. (2) Aggregate
+  eye-travel vs pane-travel is meaningless when the pane is hidden for part of the window (the eye's
+  travel arrives as one catch-up delta), so that check is gated on >= 60 consecutive sampled frames.
+  Neither of those metrics could tell fixed code from broken: the unfixed code PASSED them. The test only
+  became a real regression test once it FORCES the fault - window 4 takes the main viewport's camera out
+  of play (cam.current = false, the state L32a's disable_3d produces) and nudges the eye every frame.
+  Measured both ways on the same scene: UNFIXED - main_null 180/180, pane moved 0.00 m, 179 stale frames,
+  L34_TEST FAIL; FIXED - pane moved 257.71 m against the eye's 257.71 m, 0 stale, L34_TEST OK. The
+  4_null_main_camera capture shows the top-left pane live (an angler on the dock), not black.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1088 (MON_INPROP 0 of 168); _delve_test 0 errors/nulls;
+  L24_TEST OK (6); L21_TEST OK (52); renders/cycles/20261112_l21 restored after the shot tools overwrote it.
+- L27b is still WIP and UNTICKED (commit 0f3986c). Its code is all in and its own checks passed earlier
+  (L27B_TEST OK 73, parse, _offfloor, _delve_test); this cycle also cleared the owed _l26_anims with
+  L26_FLOORS=7,9,11 - MON_ANIMS static=0 of 20819 moving frames, L26A_ANIMS OK. Still owed before it can be
+  ticked: _l25_test and the windowed _l27b_shot line-up. NOTE the brief said "zero code exists" for L27b -
+  that was stale; the code was committed at 0f3986c.
+- FPS, _l32_test (camera/UI files changed, so it is a required gate): the FIRST run on the fixed code
+  FAILED - base 38.9, idle 22.9 = 58.9%, under the 65% bar. It was run variance, not a regression, and the
+  check was done properly rather than waved through: pre-fix on the same machine gave base 44.4 / idle 29.3
+  (66.0%, OK) and a second fixed run gave base 45.6 / idle 31.8 (69.7%, L32_TEST OK, 102 checks) - the
+  fixed code's clean run is the BEST of the three. The outlier was a cold/contended run (a leftover Godot
+  process from an earlier --import plus a polling loop). There is no plausible cost in the diff either: the
+  only per-frame addition is one _eye() call, and town.gd:309 makes the eye a direct child of town, so
+  _eye() caches and costs one is_instance_valid per frame.

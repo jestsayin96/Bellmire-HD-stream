@@ -2534,3 +2534,55 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   4. If anything already reads stock_by_tier, it keeps working untouched - that block is unchanged except for
      the new keys appended to its lists. The "tier" key is additive and ignorable by any existing loader.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 8 - the repeat-heavy stream lines, widened (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) was on `laptop` with unpushed work of its own and was NEVER checked out,
+  only `git fetch`ed - read-only, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date"; `content` is still a strict superset of
+  origin/main. No PROGRESS.md conflict arose, so nothing had to be kept from either side.
+- BACKLOG ITEM 5 (epitaphs, barks, descend and cleared - the lines that repeat the most on stream), plus a
+  C3 top-up. data/items.json untouched this cycle.
+- data/lore_lines.json, all additive into the EXISTING lists (no key renamed, no list shortened):
+  - tells: 6 -> 12 per theme, all eight themes (tomb, mine, fortress, temple, lair, prison, works, warren),
+    so a delve's one tell has twice the pool. +48 lines.
+  - descend 18 -> 36, cleared 18 -> 36. A long stream can now run a lot of delves before a descent line or a
+    floor-cleared line comes round again.
+  - barks: enter 16 -> 28, lord 16 -> 28, trap/hurt/drink/misfire 15 -> 27 each. +72 lines, and these are the
+    ones a viewer hears most.
+  - epitaphs 33 -> 58 (+25). The memorial and the Guild Roll stop echoing.
+  - misfire (the Chronicle's %s/%s/%d/%d format lines) 7 -> 14.
+- data/lore_lines.json, TWO NEW SIBLING KEYS (the only non-list-append in this cycle):
+  - "lord_intros_alt": 3 extra intro lines for each of the SAME eight canon lords - no new lords.
+  - "unique_intros_alt": 3 extra intro lines for each of the SAME five rare uniques.
+    lord_intros / unique_intros are one string per key, so variety could not be added inside them without
+    changing their shape and breaking the loaders. Both new keys carry a "_note" naming the pick rule.
+- data/bosses.json: lesser_uniques 14 -> 18, greater_uniques 12 -> 16. Eight more rare uniques, all modified
+  versions of the eight canon lords, never new lords, each a SHAPE with stats skewed to match: Nightwing
+  Lamp-Drawn (hunts the lamp-bearer), the Rattling Host Bellbound (moves all at once or not at all), the
+  Hollow King Crowned Twice, the Grubmother Walled In (seals the room behind the party), the Ossuary Lord
+  Counting (raises the party's own dead first), Mourncoil Still (never moves; the cold closes in),
+  the Gravewyrm Scar-Fed (returns the floor's spells), the Pale Duchess Attended (never fights first).
+- data/potions.json: 35 -> 42 brews. Sweetwater (28), Cloisterbrew (110), Foxfire Drops (70), Fellstill (85,
+  cures poisoned AND blinded), Doorkeeper's Draught (150, warded), Hushwine (155, invisible),
+  The Grain Measure (340, tier 4, regenerating). Every "gives"/"cures" value is one of the 15 states already
+  in the file - no new state was invented, so !brew and the status code need no new cases.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  comparison of each file against its HEAD blob confirmed every pre-existing key and value present and
+  unchanged with no list shortened (0 differences across all four); every new lore entry is a plain string in
+  a list of strings; every new boss entry's keys are a subset of name/shape/hp/speed/attack with the same
+  types as the entries beside it; every new brew's keys are a subset of name/cost/tier/heal/gives/secs/cures/
+  aliases/flavour, no key or alias collides with an existing one, and every state named already exists; a
+  line-level diff showed 21 changed lines and 0 unaccounted for - each is a pre-existing line that only had
+  entries appended inside its array, none reworded or dropped. 0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. lord_intros_alt / unique_intros_alt (NEW keys, the only wiring this cycle): wherever a lord or unique
+     rises and prints lore_lines.lord_intros[key] / unique_intros[key], pick at random from
+     [that string] + lore_lines.lord_intros_alt.get(key, []) (skip the "_note" key). Four lines per lord
+     instead of one. Until that is wired the new keys are simply unread and nothing regresses. OWNER:
+     whoever owns the boss-rise print - LAPTOP CODE (bestiary.gd / delve.gd).
+  2. Everything else needs NO code: tells, descend, cleared, barks, epitaphs and misfire are all existing
+     lists that are already picked from at random, and the new brews are read by !brew from their keys.
+  3. The tier-4 brew (The Grain Measure, 340) is the eighth tier-4 price in the file - if the apothecary's
+     tier-4 stock is hardcoded anywhere rather than filtered on "tier", it wants a look. LAPTOP CODE.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

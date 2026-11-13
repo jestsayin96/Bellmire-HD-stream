@@ -35,7 +35,14 @@
     "quarryblood": {"name": "Quarryblood", "cost": 190, "tier": 3, "gives": "giant", "secs": 45, "aliases": ["quarryblood", "quarry"], "flavour": "What the masons drink on the day a wall has to go up."},
     "gravewater": {"name": "Gravewater", "cost": 240, "tier": 3, "gives": "warded", "secs": 60, "aliases": ["gravewater"], "flavour": "Drawn from the chapel well, behind the stones. It holds the first blow."},
     "deepstill": {"name": "Deepstill", "cost": 280, "tier": 4, "heal": [8, 6, 10], "aliases": ["deepstill"], "flavour": "Brewed thick for the floors where help is a very long way up."},
-    "bellwater": {"name": "Bellwater", "cost": 350, "tier": 4, "gives": "warded", "secs": 90, "aliases": ["bellwater", "bell"], "flavour": "Blessed under a bell with no clapper. It rings anyway, and so does this."}
+    "bellwater": {"name": "Bellwater", "cost": 350, "tier": 4, "gives": "warded", "secs": 90, "aliases": ["bellwater", "bell"], "flavour": "Blessed under a bell with no clapper. It rings anyway, and so does this."},
+    "sweetwater": {"name": "Sweetwater", "cost": 28, "tier": 1, "heal": [2, 4, 0], "aliases": ["sweetwater"], "flavour": "Bellmire's own well, boiled with honey. Mends a little and lifts a lot."},
+    "cloisterbrew": {"name": "Cloisterbrew", "cost": 110, "tier": 2, "heal": [4, 4, 6], "aliases": ["cloister", "cloisterbrew"], "flavour": "The chapel brews it for the watch and charges the guild double."},
+    "doorkeep": {"name": "Doorkeeper's Draught", "cost": 150, "tier": 3, "gives": "warded", "secs": 50, "aliases": ["doorkeep", "doorkeeper"], "flavour": "Drunk on the threshold. Keep the door, and the door keeps you."},
+    "foxfire": {"name": "Foxfire Drops", "cost": 70, "tier": 2, "gives": "darkvision", "secs": 900, "aliases": ["foxfire"], "flavour": "Cold green light behind the eyes, and the dark turns shallow."},
+    "grainmeasure": {"name": "The Grain Measure", "cost": 340, "tier": 4, "gives": "regenerating", "secs": 40, "aliases": ["grainmeasure", "measure"], "flavour": "Four doses to a flask, and the apothecary counts them out loud."},
+    "hushwine": {"name": "Hushwine", "cost": 155, "tier": 3, "gives": "invisible", "secs": 18, "aliases": ["hushwine", "hush"], "flavour": "Nobody remembers the drinker. The drinker included."},
+    "fellstill": {"name": "Fellstill", "cost": 85, "tier": 2, "cures": ["poisoned", "blinded"], "aliases": ["fellstill"], "flavour": "Two ills in one bottle, and it tastes of both."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},

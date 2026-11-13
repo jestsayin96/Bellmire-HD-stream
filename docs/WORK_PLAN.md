@@ -564,7 +564,18 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] D28. LIVE-RUN FEATURE CENSUS (OWNER: DESKTOP, reports to the supervisor). Mr. E says he has not SEEN: the new sounds, any new animations, new bosses, new cosmetics/armour/weapons, trap damage, spell variety, or loot. All of those are ticked DONE with passing tests. Before building anything further, find out which are BROKEN and which merely never FIRE. Instrument a 30-minute soak with the director on and COUNT, per feature: every Sfx kind played (by id, with totals - the 86 RPG kinds from S1/S2/S3 especially); every animation clip actually played, by body type; bosses/lords/uniques spawned and killed; traps armed vs triggered vs DAMAGE APPLIED (hp actually lost); spells cast BY SPELL NAME (is it always the same one?); loot: chests spawned, chests opened, items dropped, items picked up; cosmetics/accessories worn by anyone. Print a table of counts and write it into PROGRESS. A count of ZERO means broken; a count of 2 in 30 minutes means too rare to ever be seen on stream - both are findings, and they are DIFFERENT fixes. DONE: the census table in PROGRESS.md, and a one-line verdict per feature (broken / too rare / fine).
 
 # Mr. E's Nov 13 list - LAPTOP (dungeon, combat, HUD)
-- [ ] L45. BOSSES SCALE WITH DEPTH (his call): a lord on a deep floor must be meaningfully harder than a shallow one - hp, damage, mechanics, adds. Deeper should feel dangerous. DONE: a measured curve of boss difficulty by floor; a deep lord can wipe an unprepared party.
+- [x] L45. BOSSES SCALE WITH DEPTH (his call): a lord on a deep floor must be meaningfully harder than a shallow one - hp, damage, mechanics, adds. Deeper should feel dangerous. DONE: a measured curve of boss difficulty by floor; a deep lord can wipe an unprepared party.
+      DONE L-cycle 123: the real bug was that Bestiary.boss_def() never SAW the floor - a lord's hp/atk came
+      straight off canon, so the same lord hit identically at any depth (uniques already scaled; lords did
+      not). boss_def(b, floor_no) + depth_step() (counts lord-floors from the first, so the curve is
+      open-ended and states no floor count) + named constants LORD_HP_PER_STEP 0.28 / LORD_ATK_PER_STEP 0.22.
+      scale_ways() deepens the MECHANICS too - more adds arriving faster, stronger nova/swoop, harder ward,
+      earlier enrage - mutating a duplicate so canon LORD_WAYS is never written to. dungeon_hd passes the
+      floor. Measured curve (Hollow King, same lord): hp 150->528, atk 15.0->44.7; summon most 2->6, every
+      12.0s->5.7s, ward 0.50->0.80. Wipe: an unprepared party of four (120 hp) falls to a deep lord in 2.7
+      landed blows vs 8.0 shallow. tools/_l45_test.gd L45_TEST OK (10 checks) - also asserts the first lord
+      floor is unchanged canon and the curve never dips. _offfloor 0 of 1130, _delve_test clean, L27A OK.
+      MR. E'"'"'S CALL: 44.7 vs ~30 hp heroes is about one blow a hero - LORD_ATK_PER_STEP is the dial.
 - [ ] L46. TRAPS DO NO DAMAGE (he believes spikes/traps are inert). L11 claims working traps. Verify against the D28 census, then fix: a triggered trap must apply real hp loss, show a number, and reach the Chronicle. DONE: census shows trap triggers AND hp applied; a delver can die to a trap.
 - [x] L47. ADVENTURERS MUST THINK FOR THEMSELVES (Mr. E marked this PRIORITY). Delvers should make visible decisions: retreat when hurt, drink a brew when low, use oil before the dark, pick targets sensibly, search for loot, regroup, flee a losing fight, go home when spent. Right now they read as scripted. DONE: a soak where the Chronicle shows real decisions, and a hurt party retreats rather than dying in place.
       DONE L-cycle 122: delve.gd decision layer - _decide() records+announces by kind (the LINE is rate-limited

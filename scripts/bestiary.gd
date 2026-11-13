@@ -483,8 +483,61 @@ static func pick(floor_no: int, theme := "") -> Dictionary:
     var p := pool_for(floor_no, theme)
     return make(String(p[randi() % p.size()]), strain_for_theme(floor_no, theme))
 
-## a boss as a spawnable def: its body, scaled up, armed, haloed, named
-static func boss_def(b: Dictionary) -> Dictionary:
+## ---- L45 (Mr. E): A LORD DEEP DOWN MUST BE MEANINGFULLY HARDER THAN A SHALLOW ONE.
+## Until now boss_def() never saw the floor, so the same lord hit exactly as hard wherever it
+## was met - only WHICH lord changed with depth. Uniques already scaled (unique_def); lords did
+## not. depth_step() is how many lord-floors deep we are, counting from the first one, so it is
+## open-ended by construction - no floor count is stated or implied anywhere.
+static func depth_step(floor_no: int) -> int:
+    return maxi(0, int(floor(float(floor_no) / 5.0)) - 1)
+
+## the curve, kept in one place so the test and the Chronicle read the same numbers
+const LORD_HP_PER_STEP := 0.28      # +28% hp a lord-floor deeper
+const LORD_ATK_PER_STEP := 0.22     # +22% damage
+const LORD_ADD_EVERY := 2           # one extra add per summon every 2 steps
+
+static func lord_hp_mult(floor_no: int) -> float:
+    return 1.0 + LORD_HP_PER_STEP * float(depth_step(floor_no))
+
+static func lord_atk_mult(floor_no: int) -> float:
+    return 1.0 + LORD_ATK_PER_STEP * float(depth_step(floor_no))
+
+## L45: the MECHANICS get worse with depth too, not just the numbers - more things crawl out of
+## it, they come faster, and what shields it holds harder. Mutated on a duplicate; the canon
+## table LORD_WAYS is never written to.
+static func scale_ways(ways: Dictionary, floor_no: int) -> Dictionary:
+    var step := depth_step(floor_no)
+    if step <= 0 or ways.is_empty():
+        return ways
+    for k in ["summon", "shed"]:
+        if ways.has(k):
+            var w: Dictionary = ways[k]
+            if w.has("most"):
+                w["most"] = int(w["most"]) + int(step / LORD_ADD_EVERY)
+            if w.has("n"):
+                w["n"] = int(w["n"]) + int(step / LORD_ADD_EVERY)
+            if w.has("every"):
+                w["every"] = maxf(3.0, float(w["every"]) * pow(0.92, float(step)))
+    for k in ["nova", "swoop"]:
+        if ways.has(k):
+            var w2: Dictionary = ways[k]
+            if w2.has("every"):
+                w2["every"] = maxf(3.0, float(w2["every"]) * pow(0.93, float(step)))
+            if w2.has("dmg"):
+                w2["dmg"] = float(w2["dmg"]) * (1.0 + 0.10 * float(step))
+    if ways.has("ward"):
+        ways["ward"] = minf(0.80, float(ways["ward"]) + 0.04 * float(step))
+    if ways.has("enrage"):
+        var en: Dictionary = ways["enrage"]
+        en["at"] = minf(0.55, float(en.get("at", 0.3)) + 0.03 * float(step))   # rages sooner
+    for k in ["breath", "venom", "ranged"]:
+        if ways.has(k):
+            ways[k] = maxf(2.0, float(ways[k]) * pow(0.95, float(step)))       # comes round faster
+    return ways
+
+## a boss as a spawnable def: its body, scaled up, armed, haloed, named.
+## L45: floor_no scales it - 0 keeps the canon numbers (the bestiary line-up tools pass nothing).
+static func boss_def(b: Dictionary, floor_no := 0) -> Dictionary:
     var out: Dictionary = (boss_body(b) as Dictionary).duplicate(true)
     out["name"] = b["title"]
     out["h"] = float(b["h"]) * LORD_SCALE
@@ -498,10 +551,12 @@ static func boss_def(b: Dictionary) -> Dictionary:
         out["off"] = b.get("off", "")
         out["wscale"] = b.get("wscale", 1.0)
         out["wglow"] = b.get("glow", 0.0)
-    out["boss_hp"] = b["hp"]
-    out["boss_atk"] = b["atk"]
+    # L45: hp, damage and the mechanics all take the depth curve
+    out["boss_hp"] = float(b["hp"]) * lord_hp_mult(floor_no)
+    out["boss_atk"] = float(b["atk"]) * lord_atk_mult(floor_no)
     out["id"] = b.get("id", "")
-    out["ways"] = (LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true)
+    out["depth_step"] = depth_step(floor_no)
+    out["ways"] = scale_ways((LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true), floor_no)
     return out
 
 ## ---- S2 (sound): each creature's voice from the RPG sound library (Sfx kinds), heard on

@@ -2154,3 +2154,46 @@ WHY. A silent stat change is not a decision for this item.
 - FOR MR. E: a delver who breaks off now LEAVES the fight, so a party can finish a floor a man short. That
   is a real balance change and the point of the item, but it is his call whether a fleeing delver should
   rejoin faster (currently at 55% hp) or keep running all the way home.
+
+## L-cycle 123 - L45 bosses scale with depth (laptop jestai, 2026-11-13) - L45 DONE
+THE ACTUAL BUG, found on reading rather than assumed: Bestiary.boss_def() never received the floor at all.
+A lord's hp and damage came straight off the canon BOSS_DEFS table, so the SAME lord hit exactly as hard
+wherever you met it - only WHICH lord you met changed with depth (lesser on floors ending in 5, greater on
+every 10th). Uniques already scaled with depth (unique_def), lords did not. That is why deeper never felt
+more dangerous.
+- scripts/bestiary.gd: boss_def(b, floor_no := 0) now takes the depth. depth_step() counts how many
+  lord-floors deep we are from the first one, so the curve is OPEN-ENDED by construction - no floor count
+  is stated or implied anywhere (canon rule). The curve lives in named constants so the test and any future
+  tuning read the same numbers: LORD_HP_PER_STEP 0.28, LORD_ATK_PER_STEP 0.22, LORD_ADD_EVERY 2.
+- MECHANICS scale too, not just the two numbers - scale_ways() deepens summon/shed (more adds, arriving
+  faster), nova/swoop (more often, more damage), ward (holds harder), enrage (rages sooner) and the
+  breath/venom/ranged cadences. It mutates a DUPLICATE; the canon LORD_WAYS table is never written to, and
+  the test asserts that explicitly.
+- scripts/dungeon_hd.gd: the one call site passes floor_no.
+- DEFAULT floor_no = 0 keeps the canon numbers, so the bestiary line-up tools that call boss_def(b) with no
+  floor are unchanged.
+- tools/_l45_test.gd (NEW, headless - bestiary/delve arithmetic, not HUD): measures the curve on ONE fixed
+  lord so only depth varies, and asserts the deep one has >1.5x hp and >1.4x damage, that the curve never
+  dips, that the FIRST lord floor is unchanged canon (nothing retuned by accident), that adds grow and
+  arrive faster and the ward holds harder, that LORD_WAYS was not mutated, and finally the plan's own
+  wording - that a deep lord can wipe an unprepared party. L45_TEST OK, 10 checks, 0 failed.
+  Measured curve, the Hollow King, same lord throughout:
+    step 0  hp 150.0  atk 15.00     step 1  hp 192.0  atk 18.30     step 3  hp 276.0  atk 24.90
+    step 6  hp 402.0  atk 34.80     step 9  hp 528.0  atk 44.70
+  Mechanics: summon most 2 -> 6, every 12.0 s -> 5.7 s, ward 0.50 -> 0.80.
+  Wipe: a fresh unprepared party of four has 120 hp between them; a deep lord needs 2.7 landed blows to
+  chew through all of it, a shallow one 8.0.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1130 (MON_INPROP 0 of 154); _delve_test 0 errors/nulls;
+  L27A_TEST OK (the new-monster roster wiring still resolves); _l26_anims L26_FLOORS=7,9,11 L26A_ANIMS OK,
+  MON_ANIMS static=0 of 14532 moving frames (the deep roster still animates with the scaled lords).
+- A SELF-INFLICTED ONE WORTH RECORDING: my first edit went in TAB-indented into a SPACE-indented file.
+  GDScript rejects mixed indentation, so bestiary.gd stopped parsing and every script that referenced it
+  reported "Could not resolve class Bestiary" - the real cause named no line in bestiary.gd at all.
+  `--headless --check-only --script scripts/bestiary.gd` pointed straight at the line. Worth remembering:
+  when a wave of "could not resolve class X" appears, check-only on X itself, and check the indent style of
+  the file before editing it.
+- FOR MR. E - A REAL BALANCE CHANGE, HIS CALL: at depth a lord swings 44.7 against heroes with about 30 hp,
+  so roughly one landed blow a hero before armour soak and healing. That IS "deeper feels dangerous" as
+  asked, and an unprepared party is meant to lose - but if deep lords now feel unfair rather than
+  frightening, LORD_ATK_PER_STEP (0.22) is the single number to pull down; LORD_HP_PER_STEP (0.28) only
+  makes the fight longer, not deadlier.

@@ -490,7 +490,9 @@ func _people() -> void:
         var b := Bestiary.next_boss(floor_no) if u.is_empty() else {}
         if not b.is_empty() or not u.is_empty():
             lord = Monster.new()
-            lord.def = Bestiary.boss_def(b) if u.is_empty() else Bestiary.unique_def(u, floor_no)
+            # L45: the lord is scaled to the depth it is met at - a deep lord is meaningfully
+            # harder than a shallow one (uniques already scaled; lords did not)
+            lord.def = Bestiary.boss_def(b, floor_no) if u.is_empty() else Bestiary.unique_def(u, floor_no)
             lord.state = Monster.S.IDLE
             # the lord holds the open interior cell farthest from where the party
             # comes in - never the stairs, never a corridor

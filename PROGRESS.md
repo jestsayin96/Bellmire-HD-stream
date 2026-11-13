@@ -2287,6 +2287,43 @@ In 3_after_despawns.png two of the four panes are still poor ambient framing - o
 roof, one is empty grass with distant sheep. L38 was built in U1/U2 and is awaiting a tick; on
 this capture the roof-filler problem is not fully gone. Worth the supervisor's eye.
 
+## U5 - desktop HUD: L59b - hud-ui reconciled with main at last (Nov 13, 2026)
+- THE MERGE IS COMMITTED AND PUSHED FIRST, before any test (merge 03bd563 on hud-ui). Phase S's ordering:
+  hud-ui had never merged main since a1f7463 (Coordination 11) and the resolution kept being lost before
+  commit. Branch went 74-behind -> 0-behind (ahead 6). `git merge origin/hud-ui` from main is now a clean
+  fast-forward, no conflicts - L59b DONE condition met.
+- Four code conflicts resolved hunk-by-hunk, all preferring the hud-ui (U1-U4, tested) side, so main's
+  non-conflicting edits to those same files were kept:
+    auto_director.gd - my L34(a) empty-best fallback (cut only when the on-screen shot is dead) + the
+      rotating _fallback_shot; main's always-reassign-best variant dropped.
+    hud_dock.gd - my CENTRE_W/STRIP box constants and centre() (all-ours here on purpose: mixing with
+      main's BOX_W/BOX_H would leave centre() referencing undefined names).
+    feed_hud.gd - my CARD_PX(20)/CARD_SUB_PX(14) card sizing over main's hardcoded 19/14.
+    spotlight.gd - my director-pane source chain, the laptop's is_instance_valid(src) guard and
+      _eye_xform(eye) step (both sat in the auto-merged region, kept), AND my market-wide else fallback.
+  PROGRESS.md kept both sides.
+- Parse clean on the merged tree: headless --import then a boot, 0 SCRIPT ERROR / 0 Parse Error from any
+  HUD file (only town.gd .tres ext_resource UID warnings - the build worker's kit assets, harmless).
+- Windowed 1920x1080 and LOOKED at (renders/cycles/20261113_u4, _u4_shot re-run on the merged tree):
+    DIES -> RECOVERED: top-left director pane cut from the dead subject to a live market view.
+    DESPAWNS -> RECOVERED: top-left pane cut to a live subject (evening market).
+    REROLLS -> NOT TESTED this run - the harness could not park the director on a level-1 town hero in
+      24 tries (acquisition timing, not a code regression; U4 got all three, and DIES+DESPAWNS exercise
+      the same recovery branch).
+- OPEN U1 CAVEAT ANSWERED by looking at the 652x130 centre box at 1:1 (4_lord_card_crop): 18 px Chronicle
+  type IS legible on stream - clean, well-spaced, not the "super huge" Mr. E rejected. The box fits ~3
+  lines at 130 px tall; L39b (taller box, same 18 px, 8-9 lines) is the right next step, not a type change.
+- L51 Satchel (built U3, now safely on the reconciled branch) verified by eye (1_satchel_crop): equipment
+  with per-item buffs + Altogether line, the viewer's inventory, and the sell counter with per-item gold
+  and "Sell the lot ... 1084 gold / !sell opens the counter". The narrowed L51 is essentially built,
+  awaiting the supervisor's look.
+- FLAG for the DESKTOP BUILD worker (NOT my file, not edited): SCRIPT ERROR "Left operand of 'is' is a
+  previously freed instance" at scripts/notables.gd:220 (Notables._unique_names, from _process:447),
+  fired once when the test force-freed a townsfolk body. An is_instance_valid() guard before the `is`
+  would fix it; it can fire in live play if a notable is freed mid-frame. It did not block recovery.
+- Only the seven HUD files + PROGRESS.md were touched in the resolution; notables.gd and every other
+  non-HUD file was read for diagnosis, never edited (COORDINATION 11.2).
+
 ## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
 - Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
   EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT

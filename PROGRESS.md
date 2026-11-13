@@ -4010,3 +4010,54 @@ changed behaviour, and nothing exposed a phase for a bar to read.
   desktop build's. It is the SECOND unowned file I have hit, after scripts/adventurers.gd. I have not
   touched it. Everything a bar needs is now exposed and live - Monster.phase, Monster.phase_count and the
   phase_changed signal - so whoever owns it needs only to read them. SUPERVISOR: this file needs an owner.
+
+## L-cycle 140 - L29b rare uniques (laptop jestai, 2026-11-13) - L29b DONE
+MEASURED BEFORE BUILDING, and it moved the item for the eighth time this session. bestiary.gd ALREADY
+had a UNIQUES table, which reads at a glance like the item is half built - but those are the L2
+FLOOR-uniques (Gnawbone, Mother Silk, The Weeping Bowman, Cinderjack, Kept by the Scar): brand new named
+things that hold an ORDINARY floor. L29b asks for the opposite - "NOT new lords - modified variants" of
+the EIGHT. The real gap was exactly where the supervisor pointed: the content writer has WRITTEN all 78
+variants in data/bosses.json (lesser_uniques, greater_uniques) and NOT ONE LINE OF CODE READ THAT FILE.
+So the data is now read, never copied, and no parallel table was invented beside it. That file is the
+content writer's and was not touched.
+- scripts/bestiary.gd: lord_uniques() loads data/bosses.json once and files every written variant under
+  the lord it modifies, matching on that lord's own canon title ("The Hollow King, Thrice-Kindled" ->
+  hollow_king). uniq_orphans() REPORTS any variant the code cannot place instead of swallowing it, so a
+  name the writer changes later surfaces as a failing check rather than a silently missing boss.
+  All 78 load; 0 orphaned; all eight lords have variants.
+- THE SPAWN RULE (lord_unique_for): LORD_UNIQUE_CHANCE 0.18, drawn only from the variants of the lord
+  that was actually drawn, and never the same one twice running - so a repeat inside one session still
+  reads as a different rare thing. Rolled in next_boss, and a lord the crowd has already NAMED keeps its
+  name: a rare draw never overwrites a viewer's title.
+- THE VISIBLE MODIFICATION (apply_lord_unique), two things so it reads at a glance and on a still:
+  the writer's stat skew is carried in its SIZE (cube root, clamped 0.82-1.18, so the widest skew is
+  still a believable version of the same lord), and every rare one takes a cold scar-light in tint, aura
+  and weapon glow that no plain lord has. Measured: the Grubmother Winter-Fat 5.40 -> 5.84, Nightwing
+  Famished 3.84 -> 3.59.
+- IT IS STILL A LORD: same body, same LORD_WAYS mechanic, same L45 depth curve, and it still frightens
+  the party as it rises. Only what the writer skewed (hp / speed / attack) changes. It is flagged "rare",
+  which boss_bar.gd ALREADY reads ("A rare one, met on floor N") - so the stream shows it with NO UI file
+  touched, which matters while boss_bar.gd still has no owner.
+- scripts/delve.gd: boss_loot_mult() extracted so the loot ladder lives in ONE place and a test reads
+  the same number the Chronicle pays out, instead of a second copy of the arithmetic that can drift.
+  Rare lord 4.5x, plain lord 3.0x, floor-unique 2.0x, ordinary floor 1.0x. Two Chronicle beats: the
+  guild has put this lord down before, not this one; and a hoard that size does not come off an
+  ordinary one.
+- A REAL BUG FOUND BY THE SOAK, pre-existing and not part of L29b: _loot formatted every "cleared" line
+  with % floor_no, but a written line need not carry a %d and one of them does not ("Bellmire gets a
+  tale; the scar gets nothing"), so it threw a String formatting error every time that line came up.
+  The content file is not at fault and is not mine; the assumption in delve.gd was. Guarded.
+- tools/_l29b_test.gd: L29B_TEST OK, 23 checks, 0 failed. A (data read, 78 loaded, 0 orphaned),
+  B (rare at 19.0% measured against 18.0%, never two of a kind running, a lord only ever draws a version
+  of itself), C (named, noted, bigger/leaner, scar-lit, still the same body/mechanic/curve),
+  D (loot ladder), and E - the SOAK the DONE line asks for: a real Delve on a real floor, where
+  "The Rattling Host, Widowed" rose on floor 5 and the hoard was actually paid out.
+  The first run of that soak FAILED because it crawled from floor 1 and ran out of frames at floor 3 -
+  it reported "no unique rose" when the soak had simply never reached a lord. A harness miss that reads
+  exactly like a product bug: the L29a lesson again. Fixed with start_floor.
+- REGRESSION: _offfloor 0 of 1438; _l25_test OK (13 checks, 0 stuck delvers); _l45_test OK;
+  _l2_test OK; _l29a_test OK (11 checks).
+- FLAGGED, NOT CHANGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its BODY's
+  speed and Nightwing's canon 6.6 has never reached the mover. A unique with a written speed now does
+  set it. Fixing it for plain lords would change how every lord moves mid-stream-cycle, so it is raised
+  here rather than slipped into L29b.

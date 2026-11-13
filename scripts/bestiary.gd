@@ -304,6 +304,12 @@ static func next_boss(floor_no: int) -> Dictionary:
     _last_lord = pick_k
     var out: Dictionary = (BOSS_DEFS[pick_k] as Dictionary).duplicate()
     out["id"] = pick_k
+    # L29b: rarely the lord that rises is one of the written versions of ITSELF, not a new lord.
+    # A lord the crowd has already named keeps that name - a rare draw never overwrites it.
+    if pending_title == "":
+        var uq := lord_unique_for(pick_k, force_lord_unique if force_lord_unique >= 0.0 else randf())
+        if not uq.is_empty():
+            out["uniq"] = uq
     if pending_title != "":
         out["title"] = pending_title
         out["note"] = "named by the crowd above"
@@ -564,6 +570,125 @@ static func boss_def(b: Dictionary, floor_no := 0) -> Dictionary:
     out["id"] = b.get("id", "")
     out["depth_step"] = depth_step(floor_no)
     out["ways"] = scale_ways((LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true), floor_no)
+    # L29b: if next_boss drew a written variant of this lord, it is applied LAST, over a lord
+    # that is otherwise complete - so a unique is always a real lord first.
+    var uq: Dictionary = (b.get("uniq", {}) as Dictionary)
+    if not uq.is_empty():
+        out = apply_lord_unique(out, b, uq, floor_no)
+    return out
+
+## ---- L29b: RARE UNIQUES. NOT new lords - modified versions of the EIGHT, and the content
+## writer has already WRITTEN all of them (data/bosses.json: lesser_uniques, greater_uniques).
+## That file is theirs: this READS it and never writes it, and keeps no second copy of a variant
+## anywhere in this script. A variant keeps its lord's shape - the same body, the same LORD_WAYS
+## mechanic, the same bag, the same L45 depth curve - and twists only what the writer skewed
+## (hp / speed / attack) plus how it LOOKS, so a rare one is recognisable on stream before
+## anybody has read the name card.
+const LORD_UNIQUE_CHANCE := 0.18
+const BOSSES_JSON := "res://data/bosses.json"
+## the cold scar-light every rare one carries, whatever lord it is a version of
+const UNIQ_LIGHT := Color(0.86, 0.93, 1.0)
+## test hooks: a roll below the chance forces one (negative = roll); a name pins the draw
+static var force_lord_unique := -1.0
+static var only_lord_unique := ""
+static var _last_uniq := ""
+static var _uniq_by_lord: Dictionary = {}
+static var _uniq_orphans: Array = []
+
+## every written variant, filed under the lord it modifies. Loaded once. A variant is matched to
+## its lord by that lord's own canon title, which is how the writer names them ("The Hollow King,
+## Thrice-Kindled"). No title is a prefix of another, so the match is unambiguous.
+static func lord_uniques() -> Dictionary:
+    if not _uniq_by_lord.is_empty():
+        return _uniq_by_lord
+    var f := FileAccess.open(BOSSES_JSON, FileAccess.READ)
+    if f == null:
+        push_warning("L29b: %s could not be read - no rare uniques will rise" % BOSSES_JSON)
+        return _uniq_by_lord
+    var raw = JSON.parse_string(f.get_as_text())
+    f.close()
+    if typeof(raw) != TYPE_DICTIONARY:
+        push_warning("L29b: %s did not parse - no rare uniques will rise" % BOSSES_JSON)
+        return _uniq_by_lord
+    for k in ["lesser_uniques", "greater_uniques"]:
+        for v in ((raw as Dictionary).get(k, []) as Array):
+            if typeof(v) != TYPE_DICTIONARY:
+                continue
+            var vd: Dictionary = v as Dictionary
+            var nm := String(vd.get("name", ""))
+            var lord_id := ""
+            for lk in BOSS_DEFS:
+                if nm.begins_with(String((BOSS_DEFS[lk] as Dictionary)["title"])):
+                    lord_id = String(lk)
+                    break
+            if lord_id == "":
+                # written for something that is not one of the eight: it is never spawned, and
+                # uniq_orphans() reports it so the miss is visible instead of silent.
+                _uniq_orphans.append(nm)
+                continue
+            if not _uniq_by_lord.has(lord_id):
+                _uniq_by_lord[lord_id] = []
+            (_uniq_by_lord[lord_id] as Array).append(vd)
+    return _uniq_by_lord
+
+## written variants that match no canon lord - should be empty; reported, not swallowed
+static func uniq_orphans() -> Array:
+    lord_uniques()
+    return _uniq_orphans
+
+## THE SPAWN RULE: rare, drawn only from this lord's own variants, and never the same one twice
+## running, so a repeat inside one session still looks like a different rare thing.
+static func lord_unique_for(lord_id: String, roll: float) -> Dictionary:
+    var pool: Array = (lord_uniques().get(lord_id, []) as Array)
+    if pool.is_empty():
+        return {}
+    if only_lord_unique != "":
+        for v in pool:
+            if String((v as Dictionary).get("name", "")) == only_lord_unique:
+                _last_uniq = only_lord_unique
+                return (v as Dictionary).duplicate(true)
+        return {}
+    if roll >= LORD_UNIQUE_CHANCE:
+        return {}
+    var fresh: Array = []
+    for v in pool:
+        if String((v as Dictionary).get("name", "")) != _last_uniq:
+            fresh.append(v)
+    if fresh.is_empty():
+        fresh = pool
+    var pick: Dictionary = fresh[randi() % fresh.size()] as Dictionary
+    _last_uniq = String(pick.get("name", ""))
+    return pick.duplicate(true)
+
+## Apply a written variant to an already-built lord def. The lord's shape is KEPT: same body,
+## same ways, same depth curve. Only the writer's own skew is applied, and the visible modifier.
+static func apply_lord_unique(out: Dictionary, b: Dictionary, uq: Dictionary, floor_no: int) -> Dictionary:
+    out["name"] = String(uq.get("name", out.get("name", "")))
+    out["note"] = String(uq.get("shape", out.get("note", "")))
+    out["rare"] = true                  # boss_bar ALREADY reads this - no UI file is touched
+    out["lord_unique"] = true
+    out["lord_title"] = String(b.get("title", ""))
+    var canon_hp := maxf(1.0, float(b.get("hp", 1.0)))
+    var ratio := 1.0
+    if uq.has("hp"):
+        ratio = float(uq["hp"]) / canon_hp
+        out["boss_hp"] = float(uq["hp"]) * lord_hp_mult(floor_no)
+    if uq.has("attack"):
+        out["boss_atk"] = float(uq["attack"]) * lord_atk_mult(floor_no)
+    if uq.has("speed"):
+        out["spd"] = float(uq["speed"])
+    # THE VISIBLE MODIFICATION, and it is two things so it reads at a glance and on a still:
+    # the skew is carried in its SIZE (a swollen one is bigger, a famished one leaner - a cube
+    # root so even the widest skew stays a believable version of the same lord), and every rare
+    # one takes a cold scar-light in its tint, its aura and its weapon that no plain lord has.
+    var size := clampf(pow(ratio, 0.34), 0.82, 1.18)
+    out["h"] = float(out.get("h", 1.0)) * size
+    out["lift"] = float(out.get("lift", 0.0)) * size
+    out["uniq_size"] = size
+    out["tint"] = (out.get("tint", Color(1, 1, 1)) as Color).lerp(UNIQ_LIGHT, 0.30)
+    out["aura"] = (out.get("aura", Color(1, 0.8, 0.4)) as Color).lerp(UNIQ_LIGHT, 0.40)
+    if out.has("hand"):
+        out["wglow"] = maxf(float(out.get("wglow", 0.0)), 1.1)
     return out
 
 ## ---- S2 (sound): each creature's voice from the RPG sound library (Sfx kinds), heard on

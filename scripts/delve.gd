@@ -160,6 +160,9 @@ func _next_floor() -> void:
 			note = note.substr(0, 1).to_upper() + note.substr(1) + "."
 		var uniq := bool(dun.lord.def.get("unique", false))
 		_say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
+		# L29b: the guild knows this lord. It does not know THIS one.
+		if bool(dun.lord.def.get("lord_unique", false)):
+			_say("The guild has put down %s before. Not this one." % String(dun.lord.def.get("lord_title", "its like")))
 		var intro := String((lore().get("unique_intros" if uniq else "lord_intros", {}) as Dictionary).get(String(dun.lord.def.get("id", "")), ""))
 		if intro != "":
 			_say(intro)
@@ -1451,12 +1454,24 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
 			o["hp"] = float(o["hp"]) - _soak(o, _mdice(base, false))
 			_hero_hit(o)
 
+## L29b: what a floor pays is multiplied by this. Kept in ONE place so a test reads the same
+## number the Chronicle actually pays out, instead of a second copy of the arithmetic that can
+## drift. A rare unique is a lord AND THEN SOME; a floor-unique is less than a lord.
+static func boss_loot_mult(boss: bool, uniq: bool, rare_lord: bool) -> float:
+	if not boss:
+		return 1.0
+	if rare_lord:
+		return 4.5
+	return 2.0 if uniq else 3.0
+
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
 ## brought it down; anything else found belongs to whoever prised it open, and
 ## searching costs half a flask. Materials go home to the town.
 func _loot(alive: Array) -> void:
 	var boss := dun.lord != null
 	var uniq := boss and bool(dun.lord.def.get("unique", false))
+	# L29b: a rare unique IS a lord, not a floor-unique - it pays better than one, not worse
+	var rare_lord := boss and bool(dun.lord.def.get("lord_unique", false))
 	# L9: the party's sharpest eye searches - an Investigation check (d20 + INT,
 	# + proficiency for the trained, disadvantage in the dark without darkvision)
 	# vs DC 10 + floor/2: it sets how much is found, what is salvaged, and whether
@@ -1476,7 +1491,7 @@ func _loot(alive: Array) -> void:
 		mult = 0.6
 	elif st >= sdc:
 		mult = minf(1.35, 1.0 + 0.03 * float(st - sdc))
-	var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * mult)
+	var found := int(float(floor_no) * 11.0 * boss_loot_mult(boss, uniq, rare_lord) * mult)
 	Sfx.play("coin", -4.0)
 	_snd("chest_open", (seeker["body"] as Node3D).global_position, -2.0)      # S2: a find
 	if boss:
@@ -1489,6 +1504,8 @@ func _loot(alive: Array) -> void:
 		_say("%s is slain on floor %d!" % [dun.lord.def.get("name", "The lord"), floor_no])
 		FeedHUD.card_on(town, String(dun.lord.def.get("name", "The lord")),
 			"Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
+		if rare_lord:
+			_say("A hoard that size does not come off an ordinary %s." % String(dun.lord.def.get("lord_title", "lord")))
 		_say("The hoard is split %d ways - %d gold each to %s." % [took.size(), share, ", ".join(took)])
 	else:
 		var f: Dictionary = seeker
@@ -1496,7 +1513,11 @@ func _loot(alive: Array) -> void:
 		_gold += found
 		oil = maxf(0.0, oil - 0.5)
 		_say("%s searches (Investigation %d) and turns up %d gold on floor %d." % [f["h"]["name"], st, found, floor_no])
-		_say(_pick_line("cleared", "Floor %d cleared.") % floor_no)
+		# L29b found this: a written "cleared" line need not carry a %d, and one of them does not -
+		# formatting it anyway threw a String formatting error every time that line came up. The
+		# content file is not at fault and is not mine; the assumption here was.
+		var cl := _pick_line("cleared", "Floor %d cleared.")
+		_say(cl % floor_no if cl.contains("%d") else cl)
 	# renown (old rule): a floor cleared +1, a lord slain +6
 	var eco = town.get("economy") if town else null
 	if eco:

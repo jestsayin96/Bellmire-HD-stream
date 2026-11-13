@@ -503,7 +503,29 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       BLOCKED, NOT DONE: "boss_bar shows phase". scripts/boss_bar.gd is in NO worker's list in
       COORDINATION 11.2 - the second unowned file after adventurers.gd. Untouched. Monster.phase,
       phase_count and phase_changed are exposed and live, so its owner need only read them. NEEDS AN OWNER.
-- [ ] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
+- [x] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
+      DONE 2026-11-13 (L-cycle 140). MEASURED FIRST and it moved the item: bestiary.gd already had a
+      UNIQUES table, but those are the L2 FLOOR-uniques (new named things on an ORDINARY floor), which
+      is the opposite of what L29b asks for. The real gap was where the supervisor pointed - the content
+      writer has WRITTEN all 78 variants in data/bosses.json and no code read that file. Now read, never
+      copied; no parallel table invented; data/bosses.json NOT touched.
+      SPAWN RULE: 18% on a lord floor, only variants of the lord actually drawn, never the same one
+      twice running, and a lord the crowd has named keeps its name.
+      VISIBLE MODIFIER: the writer's stat skew carried in its SIZE (Grubmother Winter-Fat 5.40 -> 5.84,
+      Nightwing Famished 3.84 -> 3.59) plus a cold scar-light in tint/aura/weapon. Flagged "rare", which
+      boss_bar.gd ALREADY reads - the stream shows it with NO UI file touched.
+      STILL A LORD: same body, same LORD_WAYS mechanic, same L45 depth curve.
+      BETTER LOOT: Delve.boss_loot_mult() - rare lord 4.5x vs a plain lord's 3.0x, in ONE place so the
+      test reads the number the Chronicle actually pays.
+      tools/_l29b_test.gd L29B_TEST OK (23 checks, 0 failed), INCLUDING THE SOAK the DONE line asks for:
+      "The Rattling Host, Widowed" rose on floor 5 of a real delve and the hoard was paid out.
+      The soak also caught a PRE-EXISTING bug in delve.gd: _loot formatted every "cleared" line with
+      % floor_no, but one written line carries no %d, so it threw a String formatting error whenever
+      that line came up. Guarded (the content file was not at fault and was not touched).
+      REGRESSION: _offfloor 0/1438, _l25_test OK (0 stuck), _l45_test OK, _l2_test OK, _l29a_test OK.
+      FLAGGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its BODY's speed and
+      Nightwing's canon 6.6 has never reached the mover. Raised, not silently changed - it would alter
+      how every lord moves mid-cycle.
 - [ ] L29c. SET-PIECE ENCOUNTERS from lore (ambush/guarded hoard/mini-event) so a floor isn't just a room of monsters. DONE: set pieces appear + resolve, Chronicle logs them.
 # Phase E - gear, cosmetics, loot [L30]
 - [ ] L30a. GEAR EXPANSION (items.json accessories): more weapons/armour per tier, visible on handslot bones (rig EQUIP), real bonuses. DONE: heroes equip visibly in a soak, bonuses apply.

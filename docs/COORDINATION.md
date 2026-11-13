@@ -77,3 +77,36 @@ The laptop is jestai, NOT CruzaderPC. A brief to the laptop uses the laptop row 
    _l28_alike/_l28_decals/_l28_fps/_l28_matcount/_l28_shot) - laptop: commit them on your next
    cycle. Until then, untracked .uid regenerations on another machine are NOISE - delete them
    freely (the supervisor already does before merges); do not commit another machine's .uids.
+
+## 10. The CONTENT writer (laptop, branch `content`) - added Nov 12 22:45
+
+A fourth worker: a plain Claude chat on the laptop that writes DATA and LORE only. It NEVER runs
+Godot, so it cannot collide with the laptop's Claude Code session over the .godot import cache.
+
+| Role    | Device | Branch    | Runs Godot |
+|---------|--------|-----------|------------|
+| Content | jestai | `content` | NEVER      |
+
+OWNS (and nobody else edits these while it is working):
+  data/items.json      - accessories, cosmetics, dyes, dye_cost (the gear/cosmetic catalogue)
+  data/lore_lines.json - tells, descend, cleared, lord_intros, unique_intros, barks, epitaphs
+  data/potions.json    - brews and states
+  data/fishing.json    - catches
+  data/bosses.json     - lesser/greater/draw/rule variants (rare uniques, NOT new lords)
+  data/ranks.json, data/origins.json - flavour and titles
+
+MUST NOT TOUCH: any .gd script, .tscn, .godot/, assets/, web/, and specifically
+  data/strains.json  (the laptop is working L27b in it right now)
+  data/biomes.json   (dungeon look, L28)
+  data/world.json, data/classes.json, data/commands.json (tied tightly to code paths)
+
+RULES: work in a SEPARATE clone or git worktree on the laptop, on branch `content` - never the same
+working folder as the laptop's Claude Code session. Follow the LORE RULE (read the reference; do not
+invent against canon). Keep each file's existing shape and key names exactly - additive only; never
+rename or remove a key, because the .gd loaders read them. Validate before committing: a short Python
+script that json.load()s every file it touched and checks the new entries carry the same fields as the
+existing ones (python only - no Godot). Commit to `content` and push; the supervisor merges it to main
+and runs the Godot battery - authoring is parallel, TESTING IS STILL THE SUPERVISOR'S GATE.
+
+IDs: the content writer's items are the C-block (C1, C2, ...), assigned by the supervisor, and its
+PROGRESS entries are prefixed "C-cycle N" (per section 3).

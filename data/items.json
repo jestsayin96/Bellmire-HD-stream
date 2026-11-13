@@ -25,7 +25,19 @@
     "scout_boots":      {"name": "Scout's Boots", "slot": "boots", "cost": 220, "hit": 1, "flavour": "Quiet on gravel, quieter on stone."},
     "mason_mitts":      {"name": "Mason's Mitts", "slot": "gloves", "cost": 280, "dmg": 2, "flavour": "Stone-callused, and two sizes too big."},
     "pick_gloves":      {"name": "Pickman's Gloves", "slot": "gloves", "cost": 290, "dmg": 2, "flavour": "They know the weight of a swing better than you do."},
-    "bowyer_wraps":     {"name": "Bowyer's Wraps", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "Linen, chalked white."}
+    "bowyer_wraps":     {"name": "Bowyer's Wraps", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "Linen, chalked white."},
+    "hollow_ring":      {"name": "Hollowbone Ring", "slot": "ring", "cost": 400, "saves": 1, "flavour": "Carved from a lord's knuckle. It was not asked."},
+    "market_ring":      {"name": "Market Seal", "slot": "ring", "cost": 240, "hit": 1, "flavour": "The trade-master's ring - it opens purses, not doors."},
+    "bell_amulet":      {"name": "Clapperless Charm", "slot": "amulet", "cost": 340, "hp": 12, "flavour": "Shaped like the bell that never rings. It keeps you quiet too."},
+    "scribe_amulet":    {"name": "Guild Scribe's Seal", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "The roll is written in this hand."},
+    "raid_cloak":       {"name": "Raider's Trophy Cloak", "slot": "cloak", "cost": 300, "ac": 1, "flavour": "Taken off a raider who will not miss it."},
+    "deep_cloak":       {"name": "Deepwarden's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "The deeper you go, the colder it keeps you honest."},
+    "gate_boots":       {"name": "Gatewarden's Boots", "slot": "boots", "cost": 230, "hit": 1, "flavour": "They have stood a long watch at the Keep door."},
+    "fen_boots":        {"name": "Fen-strider's Boots", "slot": "boots", "cost": 220, "speed": 0.6, "flavour": "Mud slides off them like it was never there."},
+    "forge_grips":      {"name": "Forgemaster's Grips", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "The last pair the old smith wore."},
+    "tanner_gloves":    {"name": "Tanner's Gloves", "slot": "gloves", "cost": 240, "hit": 1, "flavour": "Supple, and they never let go."},
+    "e3po_signet":      {"name": "E3PO's Signet", "slot": "ring", "cost": 420, "ac": 1, "flavour": "The Commander's own seal. He always comes back for it - he comes back for everything."},
+    "barracks_key":     {"name": "Barracks Key", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "The guard's own door. Hurt enough and E3PO walks through it, then walks back out whole."}
   },
   "cosmetics": {
     "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a"},
@@ -75,7 +87,23 @@
     "title_bellringer":    {"name": "the Bellringer", "kind": "title", "cost": 180},
     "title_returned":      {"name": "the Returned", "kind": "title", "cost": 120},
     "title_unproven":      {"name": "the Unproven", "kind": "title", "cost": 40},
-    "title_wardbearer":    {"name": "the Wardbearer", "kind": "title", "cost": 160}
+    "title_wardbearer":    {"name": "the Wardbearer", "kind": "title", "cost": 160},
+    "banner_watch":     {"name": "Watch Banner (black)", "kind": "banner", "cost": 90, "colour": "1a1a1e"},
+    "banner_apothecary": {"name": "Apothecary Banner (green)", "kind": "banner", "cost": 90, "colour": "6a8a3a"},
+    "banner_memorial":  {"name": "Memorial Banner (grey-violet)", "kind": "banner", "cost": 110, "colour": "5a4a6a"},
+    "banner_e3po":      {"name": "E3PO's Standard (guard blue)", "kind": "banner", "cost": 150, "colour": "2a3a7a"},
+    "title_e3po_watch": {"name": "of E3PO's Watch", "kind": "title", "cost": 150},
+    "title_unkillable": {"name": "the Unkillable", "kind": "title", "cost": 260},
+    "title_second":     {"name": "the Commander's Second", "kind": "title", "cost": 200},
+    "title_founder":    {"name": "Founder of Bellmire", "kind": "title", "cost": 300},
+    "title_walls":      {"name": "who Walled the Town", "kind": "title", "cost": 220},
+    "title_ratcatcher": {"name": "the Ratcatcher", "kind": "title", "cost": 60},
+    "title_deepwarden": {"name": "the Deepwarden", "kind": "title", "cost": 240},
+    "title_raidbreaker": {"name": "the Raidbreaker", "kind": "title", "cost": 220},
+    "title_apothecary": {"name": "the Apothecary's Friend", "kind": "title", "cost": 90},
+    "title_chronicler": {"name": "the Chronicler", "kind": "title", "cost": 160},
+    "guard_helm":       {"name": "Guard's Helm", "kind": "hat", "cost": 120, "colour": "3a4a6a"},
+    "plumed_helm":      {"name": "Plumed Helm", "kind": "hat", "cost": 140, "colour": "7a2a2a"}
   },
   "dyes": {
     "black": "2a2a2e", "white": "e8e4da", "red": "a02a26", "blue": "2a4aa0", "green": "2a7a3a",
@@ -83,7 +111,10 @@
     "ash": "5a5a5e", "moss": "4a6a3a", "wine": "6a1a2e", "rust": "8a4a22", "bone": "d8ccb0",
     "char": "1a1a1e", "copper": "b06a30", "plum": "4a2a5a", "slate": "46505a", "ochre": "c8963a",
     "indigo": "2a2a6a", "sage": "8a9a6a", "crimson": "7a1420", "mire": "2e3a2c", "river": "2a6a8a",
-    "ember": "d85a28", "iron": "44464a", "oak": "5a3a1e", "wheat": "d6b84a", "frost": "bfe6ff"
+    "ember": "d85a28", "iron": "44464a", "oak": "5a3a1e", "wheat": "d6b84a", "frost": "bfe6ff",
+    "blood": "6a1416", "pitch": "101014", "dusk": "3a2a4a", "fog": "c0c4c8", "verdigris": "3a7a6a",
+    "saffron": "d8a838", "clay": "a05a3a", "lichen": "7a8a5a", "storm": "3a4650", "candle": "e8c870",
+    "garnet": "5a1a2a", "pine": "1e3a2a", "tin": "9a9ea2", "murk": "24281e"
   },
   "dye_cost": 25
 }

@@ -1999,3 +1999,28 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   Gravewyrm "Half-Woken" -> 230 hp (< base 260, only half risen), trading body for a deeper breath. Rest of C1 stands.
 - Validated (python only, no Godot): every data/*.json parses; the two edited entries stay within the bosses schema.
   Committed + pushed from the laptop (path a: Blender subprocess git) to prove that route end to end.
+
+
+## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
+  EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT
+  touched. Kept to a SEPARATE clone (Bellmire-content) per section 10, never the Claude Code tree. Additive only;
+  every pre-existing entry preserved verbatim; no .gd/.tscn/assets/web touched.
+- items.json: accessories 25 -> 37 (+12, incl. E3PO's Signet + Barracks Key; same 5e bonus magnitudes, no creep);
+  cosmetics 48 -> 64 (+16: 3 banners + E3PO's Standard, 10 titles incl. E3PO/town-growth, 2 hats); dyes 30 -> 44 (+14).
+- lore_lines.json: descend 8->12, cleared 8->12, epitaphs 14->21, barks +3 per kind (format contracts held: descend
+  two %s, cleared one %d, misfire %s %s %d %d). NEW additive blocks: "e3po" (intro/withdraw/return/says/town_talk -
+  immortal Commander of the Guards: badly hurt he withdraws to the barracks, heals, returns, never dies) and
+  "town_life" (crier/market/growth - Bellmire as it grows). lord_intros/unique_intros left intact.
+- bosses.json: +5 shape-first lord variants (lesser 7->9, greater 5->8), all modified versions of the eight canon
+  lords, stats traded not inflated, within the existing field vocabulary.
+- potions.json: potions 19 -> 25 (+6: Deepdraught, Wyrmsbane, Mirewine, Lastlight, The Hollow King's Cup, Scarwater);
+  states 14 -> 15 (+1: scar_touched). Every brew but Scarwater uses existing states and works immediately.
+- VALIDATION (python only, no Godot): every data/*.json parses; every new entry matches the existing field shape;
+  originals preserved verbatim; potion key/alias/name tokens unique; bosses within schema. Result: VALIDATION OK.
+- FOR THE OTHER WORKERS (code the content implies - not the content worker's to write):
+  (1) gear.gd _hat (laptop-code-owned) needs match cases for the new hat keys (guard_helm, plumed_helm + the C1 hats),
+  else they render as the default shape. (2) delve.gd: state 'scar_touched' displays but has no effect until wired
+  (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
+  town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

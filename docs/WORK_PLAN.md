@@ -592,3 +592,58 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 
 # Mr. E's Nov 13 list - TWITCH (desktop owns the Twitch layer)
 - [ ] T4. VIEWERS SHAPE THE TOWN (he wants this to feel like a D&D campaign where actions have consequences). Let viewers spend bits or channel points to VOTE on how the town grows: what gets built first, what gets upgraded, what laws pass - with real, lasting, sometimes BAD consequences. Open-ended by design. Needs Mr. E on reward setup. DONE: a vote runs on stream, resolves, and the town visibly changes because of it.
+
+# Phase M - from the D28 census + the HUD worker's U1 report (supervisor, Nov 13 01:45). IDs frozen.
+
+CENSUS RESULT THAT CHANGES THE PLAN: three of Mr. E's complaints are NOT bugs. Animations are fine
+(30 distinct clips, 22251 starts, 0 missing, 0 fell-back). Spells are fine (9 distinct: heal 295,
+bolt 161, mend 131, ward 112, smite 85, frost 46, chain 35, renew 31, fire 12). Loot is fine.
+He is not seeing them - that is a READABILITY problem, not a content one. Do not build more of
+these; make the existing ones legible. D30 and L52 are reframed below accordingly.
+
+- [ ] D41. FINISH L40 - THE REST OF THE OVERLAP. The HUD worker made the Chronicle untouchable from
+      HudDock.put(), but the two overlaps Mr. E actually flagged live in DESKTOP BUILD's files:
+      party_frames.gd docks itself INTO a pane ("bl"), and rts_camera.gd owns the Twitch chat column
+      and the chrome bar. Move the party frames and the chat column OUT of the panes. Owner: DESKTOP
+      BUILD (do not reassign the files; the HUD worker correctly refused to touch them).
+      DONE: a 1080p capture with 0 overlaps between any pane, the party frames and the chat column.
+
+- [ ] D42. FOOTSTEPS AND ANIMAL VOICES HAVE NO CALLER - this is the silent town, exactly located.
+      sfx.gd DEFINES footstep_grass/stone/water/wood and dog_whine, wolf_howl/growl, eagle_cry,
+      lion_roar, orc_roar, troll_roar, zombie_moan - and NOTHING IN THE GAME EVER PLAYS THEM. 40 of
+      94 kinds never fired in a 7-minute 8x soak. Footfalls are the most frequent discrete sound a
+      town makes. Give them callers: footsteps from the walk cycle (surface-aware), animal voices
+      from the animals that own them. horse_neigh/whinny is called in daylight.gd but fired 0 -
+      find out why. This supersedes the open question in D29; D29's measurement was right.
+      DONE: a re-recorded town clip whose audio shows clear discrete events above the ambience bed.
+
+- [ ] D30. (REFRAMED by the census - the premise was wrong.) Spells are NOT monotonous: 9 distinct
+      spells fire with a good spread. The problem is the viewer cannot TELL them apart. Make each
+      spell read differently on screen and name itself in the Chronicle. Not more spells - clearer ones.
+
+- [ ] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
+      choice legible rather than adding spells.
+
+- [ ] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
+      plumed_helm and the C1 hats) or they render as the default shape. Raised by the content writer.
+
+- [ ] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
+      nothing. Raised by the content writer.
+
+- [ ] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
+      and armour tiers stayed w0/a0 for ALL SIX heroes through a 7-min soak despite 17 forge lines
+      and survivors with 4 and 8 kills. Either forging never raises the tier or death resets it.
+      DONE: a soak where surviving heroes visibly climb tiers.
+
+- [ ] L56. DELVE-HEAVY SOAK before L45 and L46 are trusted. The census could not confirm bosses or
+      trap damage: raids kept pulling parties back to town and only ~1 sustained descent happened,
+      so the dungeon-side counters undercounted. Seed a party straight to the mouth (or raise
+      CENSUS_MIN) and read Delve.trap_log directly. This GATES L45 and L46 - do not "fix" either
+      until this run says they are actually broken.
+
+- [ ] D37 note: E3PO's words now EXIST (content writer's e3po + town_life blocks in lore_lines.json,
+      merged). They are dead data until raids.gd/town.gd read them. The content half is done; the
+      behaviour half is still D37 and belongs to DESKTOP BUILD.
+
+CHANGELOG 2026-11-13 01:41 (supervisor): added D41, D42, L53-L56; reframed D30 and L52 after the census
+disproved their premise; noted the C-side of D37 is delivered. C-cycles 1-3 merged to main.

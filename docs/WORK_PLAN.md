@@ -1384,3 +1384,39 @@ elements, everything else hub-only), from Mr. E's rule + his three edge-case ans
 strip, boss bar keep, in-world keep). Items: D48 (strip unit frame, desktop), L63 (strip Satchel +
 answer the feed_hud question, HUD), H11 (hub absorbs selling + own-hero find). L51's on-stream
 Satchel is intentionally removed - a direction change, its work feeds the hub, not wasted.
+
+# Phase AA - Mr. E's narrated clip 14-26-15 (transcribed) (2026-11-13 14:50)
+
+His words: "it looks very pixelated... it's only when they're moving, when characters are moving
+around, it looks like jack shit. Top left is fine, top right, bottom right, bottom left, it all
+looks like shit. And the grass looks freaking terrible, and I mean terrible, really bad."
+
+- [ ] D49. MOVING CHARACTERS PIXELATE / SHIMMER IN THE CLOSE PANES - SAME ROOT AS THE GRAIN (D24).
+      Owner: DESKTOP BUILD leads (project.godot [rendering]) WITH the HUD worker for the pane
+      viewports (spotlight.gd). The tell Mr. E gave is diagnostic: the TOP-LEFT director/wide pane
+      is FINE; the three CLOSE subject panes shimmer on movement. That is classic no-anti-aliasing
+      on sub-resolution viewports - each 2x2 pane renders at ~960x540 and upscales, so a moving,
+      animated character crawls with aliasing while a wide static shot hides it. project.godot's
+      [rendering] section is EMPTY (no MSAA/TAA/FXAA) - that is also the root of D24's grain.
+      THE FIX LIKELY SOLVES BOTH: add temporal AA (TAA) or MSAA. TAA specifically kills both the
+      moving-edge shimmer AND the SSAO/fog temporal-dither grain from D24. BUT verify in the live
+      2x2: (a) TAA needs the warm-up the laptop already added for L43's FPS test - a cold first
+      frame can ghost; (b) check it does not reintroduce grain or smear; (c) check the FPS cost
+      with the grid up and the publisher on (COORDINATION 8.5 budget). If TAA is too costly in four
+      live viewports, fall back to MSAA 2x/4x on the pane viewports plus FXAA. Also consider raising
+      the pane viewport render scale - sub-res is half the problem.
+      DONE: a 1080p capture of a MOVING character in a close pane that reads clean, grain gone,
+      FPS still in budget, and Mr. E signs off.
+      This supersedes D24 as the active rendering item - same cause, sharper repro. Keep D24's grain
+      acceptance in the DONE check.
+
+- [ ] D45 (reinforced). THE GRASS IS "REALLY BAD" IN EVERY PANE, not just some. Still owner DESKTOP
+      BUILD (valley.gd / ground material). His emphasis - "freaking terrible, really bad" across all
+      four panes - means a plain texture swap may not be enough: check the grass MATERIAL (tiling
+      scale, normal map, roughness) under the pane camera distance, not just the albedo. A good CC0
+      grass with a proper normal + correct tiling, judged at the pane's zoom. CC0 only, LICENSE note.
+
+CHANGELOG 2026-11-13 14:50 (supervisor): from Mr. E's transcribed clip 14-26-15 - D49 (moving-character
+pixelation in the close panes, same no-AA root as D24's grain; TAA/MSAA likely fixes both; desktop
+leads with the HUD worker for the pane viewports) and D45 reinforced (grass bad in every pane,
+check the material not just the texture). More clips to come as Mr. E transcribes them.

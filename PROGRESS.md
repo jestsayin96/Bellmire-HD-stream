@@ -1853,6 +1853,50 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   noise deleted. The merged D19b sky/weather was read against the spotlight's _lane_env block (COORDINATION 8.1):
   panes copy the live town Environment every 0.5 s, so the new sky/weather carries into panes unchanged.
 
+## L-cycle 119 - L34 the director pane never freezes (laptop jestai, 2026-11-12) - L34 DONE
+Mr. E in his own game chat: "the top left screen goes black or stays stuck when someone dies". Both root
+causes the supervisor found were real and both are fixed:
+- scripts/auto_director.gd: `if best.is_empty(): return` in _process parked the eye whenever the subject
+  died / rerolled / despawned and _best() came back empty for a tick. New _fallback_shot() steps the town
+  tour on and returns the next stop, so there is ALWAYS a shot; the second return site (the HOLD_MAX
+  "something different" re-pick) now falls back the same way and re-cuts instead of returning.
+- scripts/spotlight.gd _follow(): the director pane copied get_viewport().get_camera_3d() and, when that
+  was null, silently held its last transform - the frozen/black pane. It now falls back to the eye's own
+  Camera3D, and failing that to the eye's numbers (new _eye_xform(), same placement convention as
+  RtsCamera: off = (sin yaw cos pitch, -sin pitch, cos yaw cos pitch) * dist, looking at focus + 1 m).
+- tools/_l34_test.gd (NEW, windowed 1920x1080 - a pane cannot be judged headless, COORDINATION 4): aims the
+  director at a hero, then scripts a DEATH (Roster.kill), a REROLL (Roster.reroll) and a DESPAWN (the body
+  freed under the eye), watching the REAL top-left pane camera for 3 s after each: 0 stale frames, 0 frames
+  below ground, 0 empty director ticks, and the director ends on a different subject each time.
+  L34_TEST OK - 30 checks, 0 failed. Shots renders/cycles/20261112_l34/ (0_baseline, 1_after_death,
+  2_after_reroll, 3_after_despawn, 4_null_main_camera).
+- ON THE TEST ITSELF, so the next run trusts the right number: two earlier metrics were WRONG and were
+  thrown away. (1) "pane transform identical to last frame" counts a MOTIONLESS SUBJECT (an angler at the
+  water, a hero standing still) as a freeze - it flagged 165/179-frame "freezes" that were correct held
+  shots. A stale frame is now only counted when the EYE moved and the pane did not. (2) Aggregate
+  eye-travel vs pane-travel is meaningless when the pane is hidden for part of the window (the eye's
+  travel arrives as one catch-up delta), so that check is gated on >= 60 consecutive sampled frames.
+  Neither of those metrics could tell fixed code from broken: the unfixed code PASSED them. The test only
+  became a real regression test once it FORCES the fault - window 4 takes the main viewport's camera out
+  of play (cam.current = false, the state L32a's disable_3d produces) and nudges the eye every frame.
+  Measured both ways on the same scene: UNFIXED - main_null 180/180, pane moved 0.00 m, 179 stale frames,
+  L34_TEST FAIL; FIXED - pane moved 257.71 m against the eye's 257.71 m, 0 stale, L34_TEST OK. The
+  4_null_main_camera capture shows the top-left pane live (an angler on the dock), not black.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1088 (MON_INPROP 0 of 168); _delve_test 0 errors/nulls;
+  L24_TEST OK (6); L21_TEST OK (52); renders/cycles/20261112_l21 restored after the shot tools overwrote it.
+- L27b is still WIP and UNTICKED (commit 0f3986c). Its code is all in and its own checks passed earlier
+  (L27B_TEST OK 73, parse, _offfloor, _delve_test); this cycle also cleared the owed _l26_anims with
+  L26_FLOORS=7,9,11 - MON_ANIMS static=0 of 20819 moving frames, L26A_ANIMS OK. Still owed before it can be
+  ticked: _l25_test and the windowed _l27b_shot line-up. NOTE the brief said "zero code exists" for L27b -
+  that was stale; the code was committed at 0f3986c.
+- FPS, _l32_test (camera/UI files changed, so it is a required gate): the FIRST run on the fixed code
+  FAILED - base 38.9, idle 22.9 = 58.9%, under the 65% bar. It was run variance, not a regression, and the
+  check was done properly rather than waved through: pre-fix on the same machine gave base 44.4 / idle 29.3
+  (66.0%, OK) and a second fixed run gave base 45.6 / idle 31.8 (69.7%, L32_TEST OK, 102 checks) - the
+  fixed code's clean run is the BEST of the three. The outlier was a cold/contended run (a leftover Godot
+  process from an earlier --import plus a polling loop). There is no plausible cost in the diff either: the
+  only per-frame addition is one _eye() call, and town.gd:309 makes the eye a direct child of town, so
+  _eye() caches and costs one is_instance_valid per frame.
 
 ## D-cycle 118 - D24 kill the grain (desktop CruzaderPC, 2026-11-12) - D24 DONE
 - Root cause confirmed: project.godot [rendering] held only the d3d12 driver line - no TAA/MSAA/FXAA. SSAO
@@ -1907,6 +1951,51 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - New tools: _d25_probe.gd, _d25_shot.gd, _d25_diag.gd (+ .uid). Shot sheet renders/cycles/20261112_d25/.
   Backup scripts/town.gd.bak_d25 (not committed).
 
+## L-cycle 120 - L39 the Chronicle is a centre box, not a bar (laptop jestai, 2026-11-12) - L39 DONE
+Mr. E rejected L32b's full-width tan band (reference screenshot: a small light box at the centre cross).
+L32b's calm pacing is KEPT; only the shape and the panes' geometry changed.
+- scripts/hud_dock.gd: STRIP 0.10 (a full-width band) is replaced by BOX_W 0.30 x BOX_H 0.13 - 576 x 138 px
+  at 1080p, 30% of the screen width (half would be 960). centre() now returns a compact rect CENTRED on the
+  cross of the 2x2 instead of a band spanning the screen. STRIP is kept as a name meaning the box's height,
+  so nothing reading it breaks.
+- scripts/spotlight.gd _relayout: the two pane rows now MEET at the cross (h = (1 - CHROME) * 0.5, y2 = h);
+  L32b parted them by STRIP to make room for the band. Each pane is bigger for it (0.42 -> 0.47 tall) and
+  the box covers only ~4.2% of each - its corner.
+- scripts/feed_hud.gd: the panel is lifted to a light near-white (0.97, 0.95, 0.90) per his screenshot and
+  its side margins tightened; the lord's name card shrinks again (title 26 -> 19, sub 18 -> 14, sub min
+  width 420 -> 150 px) because it was sized for the old full-width band; a line that overruns the narrow box
+  now ends in an ellipsis instead of being cut mid-glyph (clip_text off).
+- tools/_l39_test.gd (NEW, windowed 1920x1080): the box is under half the screen width AND not a wide band,
+  it is centred on the cross within a pixel, the pane rows meet there, the box covers under 12% of any pane,
+  the Chronicle is docked "centre" and sits inside it, >= 2 lines at the L15 size, no line spills out under a
+  30-line flood, pacing never stacked more than 4 lines, and a lord's card still fits. L39_TEST OK, 19 checks.
+  Shots renders/cycles/20261112_l39/ (box_idle, box_flood, box_lord_card).
+- Regression: parse 0 SCRIPT ERROR; L21_TEST OK (52) - the docking rules hold with the new region;
+  _offfloor 0 of 1017 (MON_INPROP 0 of 145); _delve_test 0 errors/nulls.
+- _l24_test is FLAKY, not broken by this: it failed 3 of 6 once ("Ash's body below is the one the lane
+  holds" and the two checks that depend on it) and passed 6/6 on an immediate re-run with nothing changed.
+  That is the same class of race the brief already records for its "before" check - the lane/delve state is
+  timing-dependent. Worth hardening in its own item rather than chased each cycle; it is NOT an L39 fault.
+- FOR MR. E: at 576 px a long Chronicle line is trimmed with an ellipsis ("Someone walks out to look at the
+  Old ..."). That is the cost of a compact box; the full text is always in chat. If he wants whole lines, the
+  box has to be wider or the line font smaller - his call, HudDock.BOX_W is the one number to change.
+- _l32_test: READ THIS BEFORE TRUSTING ITS "OK". This run printed "L32_TEST OK (90 checks, 0 failed)" with
+  "L32_FPS base 1.0 idle 26.8 paid 18.7". base 1.0 is a BROKEN MEASUREMENT, and because every FPS check in
+  that tool is RELATIVE to base ("idle >= 65% of base"), they all passed trivially - the suite reported OK
+  while the FPS gate tested nothing. Not caught by the tool, caught by reading the number.
+  - It is NOT L39. Every _l32 run earlier the same day gave base 38.9 / 44.4 / 45.6; this is the FIRST run
+    after merging origin/main, which brought D24 (project.godot [rendering]: use_taa=true, msaa_3d=1). The
+    grid phases are unaffected and in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6),
+    so L39 cost nothing; it is the full-screen base phase alone that collapsed. The likely mechanism is the
+    harness toggling root.disable_3d back to false mid-run with TAA on (TAA history for a viewport that was
+    disabled), i.e. a harness/TAA interaction rather than the town really running at 1 FPS.
+  - Fixed the lying, not the cause: _l32_test now asserts base >= 10.0 FPS first, so a collapsed base FAILS
+    loudly instead of green-lighting everything. _l32_test will therefore REPORT FAIL on this laptop until
+    the base phase is sorted - that is the honest state, not a regression from L39.
+  - NEEDS AN ID AND AN OWNER (the supervisor assigns IDs, COORDINATION 2): either make the base phase robust
+    with TAA on (re-create the viewport / let TAA settle before sampling, or measure base in a separate
+    process), or drop the relative base and judge the grid against fixed per-machine numbers. project.godot
+    [rendering] is DESKTOP-owned, so the laptop did not touch it.
 
 ## D-cycle 121 - D27 empty+dark town (desktop CruzaderPC, 2026-11-12) - D27 DONE
 - BRIGHTNESS: the "08:40 looks like dusk" was an OVERCAST morning, not the daylight curve. Clear 08:00 already
@@ -2024,6 +2113,114 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
   town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 121 - ownership handover under COORDINATION 11 (laptop jestai, 2026-11-13)
+Merged main's FOUR-WORKER contract. The laptop CODE worker no longer owns the 7 UI files or the 4 content
+data files. FLAG FOR THE SUPERVISOR AND THE NEW DESKTOP HUD WORKER - two items the laptop already BUILT are
+now HUD-owned, and their work is on branch `laptop`, NOT yet merged to main:
+- L34 (director pane freezes) - DONE by the laptop, commit 75a6226, ticked, touching auto_director.gd and
+  spotlight.gd (+ tools/_l34_test.gd, which is a tools file and stays with the laptop). It is finished and
+  tested (L34_TEST OK, 30 checks, with a proven before/after: unfixed moves the pane 0.00 m, fixed tracks
+  the eye 257.71 m). The HUD worker should MERGE it, not rebuild it. If `hud-ui` was cut from origin/main it
+  does NOT contain this fix, and the top-left pane will still freeze there.
+- L39 (Chronicle centre box) - built by the laptop, commit 415885a, but Mr. E has since REDEFINED it as
+  "SMALLER TYPE - the font shrinks first, then the panel". The laptop shrank the PANEL and left the line
+  font at 28 px, so under the new wording it is NOT done. I have UNTICKED it and left a note in WORK_PLAN
+  pointing at the commit and the three numbers (HudDock.BOX_W, BOX_H, the feed_hud font size). The HUD
+  worker owns it.
+RISK IF IGNORED: both branches now contain edits to the same four UI files. `laptop` has L34 + L39 in
+hud_dock.gd, spotlight.gd, auto_director.gd and feed_hud.gd; `hud-ui` will grow its own. Whoever merges
+second gets the conflict. Cheapest fix is to merge `laptop` to main FIRST, then cut/rebase `hud-ui` on it.
+The laptop will not touch those seven files again (COORDINATION 11.2).
+Also still open and laptop-owned: L43 (_l32_test's vacuous FPS gate - the base >= 10 assert is in and MUST
+stay; _l32_test reports FAIL on this laptop by design until the TAA warm-up lands) and L44 (_l24_test flaky).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.
+
+## L-cycle 122 - L47 adventurers think for themselves (laptop jestai, 2026-11-13) - L47 DONE
+Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule I worked to is
+that a decision only counts if a VIEWER CAN SEE IT - the body does something visible AND the Chronicle says
+WHY. A silent stat change is not a decision for this item.
+- scripts/delve.gd, new decision layer: _decide() records every decision by kind (delve.decided) and
+  announces it, rate-limited per hero (DECIDE_EVERY 3 s) so a long fight reads as a few deliberate choices
+  instead of a wall of chatter - the DECISION is never rate-limited, only the line.
+- NEW decisions: (1) _think() per hero before they swing - BREAK OFF when under 22% hp with no heal brew
+  left (runs for info["entry"], the way up, Running_A, "X is badly hurt and breaks off"); REGROUP when more
+  than 15 m from the party's centre with foes about; REJOIN once mended past 55%. (2) _losing() at party
+  level - a fight that is plainly lost (mean hp under 18%, or under turn_back_at while outnumbered 2:1) is
+  broken off as a PARTY: new "flee" state, everyone runs for the way up, the delve ends with survivors.
+  This is Mr. E's "a hurt party retreats rather than dying in place". (3) _pick_target() replaces
+  nearest-foe: score = -0.35/m + up to 20 for how close the foe is to death + 14 for a caster/spitter/
+  shooter, so delvers finish the nearly-dead and shut up the ranged one, and say so when they switch.
+- COUNTED, NOT INVENTED: drinking a brew, a healer choosing who to mend, and press-on-or-climb-out at a
+  floor's end were ALREADY decisions with visible tells (Use_Item, Spellcasting, the bark) - they simply
+  were not legible as decisions. They are now recorded and reasoned through the same layer rather than me
+  bolting on new behaviour that duplicates them.
+- tools/_l47_test.gd (NEW, headless - this is delve LOGIC, not HUD, so COORDINATION 4's windowed rule does
+  not apply): A soak counts decisions and demands a RANGE of kinds; B slams the party to 10% hp mid-fight
+  with foes up and requires the "flee" state, the Chronicle line and SURVIVORS; C wounds a FAR foe and
+  requires it to be chosen over a healthy near one; D hurts exactly ONE delver to 8% and strips their
+  brews, leaving the rest healthy. L47_TEST OK - 8 checks, 0 failed. Soak run: 12 decisions, kinds
+  {press_on 3, finish 9}.
+- WHY PART D EXISTS, because it matters for trusting this: part B can NEVER reach the individual flee path
+  - there the whole party is dying, so the party-level retreat fires first and returns before any hero
+  thinks. Without D the single-hero branch would have been shipped unexecuted. It now runs and passes.
+- HONEST COVERAGE: proven by test = press_on, finish, party_retreat, flee. Wired and parsing but NOT yet
+  observed firing in a test = regroup, rejoin, silence, mend, brew_hurt/brew_cure/brew_lord, turn_back_oil,
+  turn_back_hurt. They sit on code paths that already ran in production (quaff, the healer triage, the
+  floor-end branch); the additions there are counters and lines, not new behaviour, so the risk is low -
+  but they are not proven and I am not claiming they are.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1043 (MON_INPROP 0 of 155); _delve_test 0 errors/nulls;
+  L25_TEST OK 13/13 - 0 stuck delvers and 0 watchdog frees over 10 floors, so the new break-off and the
+  party "flee" movement did NOT reintroduce stuck delvers. NOTE for L33 (the 1-stuck regression after
+  L27a): this run shows 0, but L33 asks for 0 over THREE consecutive runs - an observation, not a tick.
+  L25_TEST OK 13/13 with 0 stuck delvers and 0 watchdog frees over 10 floors - the new break-off and party
+  "flee" movement did NOT reintroduce stuck delvers. NOTE for L33 (the 1-stuck regression after L27a): this
+  run shows 0, but L33 asks for 0 over THREE consecutive runs, so that is an observation, not a tick.
+- FOR MR. E: a delver who breaks off now LEAVES the fight, so a party can finish a floor a man short. That
+  is a real balance change and the point of the item, but it is his call whether a fleeing delver should
+  rejoin faster (currently at 55% hp) or keep running all the way home.
+
+## L-cycle 123 - L45 bosses scale with depth (laptop jestai, 2026-11-13) - L45 DONE
+THE ACTUAL BUG, found on reading rather than assumed: Bestiary.boss_def() never received the floor at all.
+A lord's hp and damage came straight off the canon BOSS_DEFS table, so the SAME lord hit exactly as hard
+wherever you met it - only WHICH lord you met changed with depth (lesser on floors ending in 5, greater on
+every 10th). Uniques already scaled with depth (unique_def), lords did not. That is why deeper never felt
+more dangerous.
+- scripts/bestiary.gd: boss_def(b, floor_no := 0) now takes the depth. depth_step() counts how many
+  lord-floors deep we are from the first one, so the curve is OPEN-ENDED by construction - no floor count
+  is stated or implied anywhere (canon rule). The curve lives in named constants so the test and any future
+  tuning read the same numbers: LORD_HP_PER_STEP 0.28, LORD_ATK_PER_STEP 0.22, LORD_ADD_EVERY 2.
+- MECHANICS scale too, not just the two numbers - scale_ways() deepens summon/shed (more adds, arriving
+  faster), nova/swoop (more often, more damage), ward (holds harder), enrage (rages sooner) and the
+  breath/venom/ranged cadences. It mutates a DUPLICATE; the canon LORD_WAYS table is never written to, and
+  the test asserts that explicitly.
+- scripts/dungeon_hd.gd: the one call site passes floor_no.
+- DEFAULT floor_no = 0 keeps the canon numbers, so the bestiary line-up tools that call boss_def(b) with no
+  floor are unchanged.
+- tools/_l45_test.gd (NEW, headless - bestiary/delve arithmetic, not HUD): measures the curve on ONE fixed
+  lord so only depth varies, and asserts the deep one has >1.5x hp and >1.4x damage, that the curve never
+  dips, that the FIRST lord floor is unchanged canon (nothing retuned by accident), that adds grow and
+  arrive faster and the ward holds harder, that LORD_WAYS was not mutated, and finally the plan's own
+  wording - that a deep lord can wipe an unprepared party. L45_TEST OK, 10 checks, 0 failed.
+  Measured curve, the Hollow King, same lord throughout:
+    step 0  hp 150.0  atk 15.00     step 1  hp 192.0  atk 18.30     step 3  hp 276.0  atk 24.90
+    step 6  hp 402.0  atk 34.80     step 9  hp 528.0  atk 44.70
+  Mechanics: summon most 2 -> 6, every 12.0 s -> 5.7 s, ward 0.50 -> 0.80.
+  Wipe: a fresh unprepared party of four has 120 hp between them; a deep lord needs 2.7 landed blows to
+  chew through all of it, a shallow one 8.0.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1130 (MON_INPROP 0 of 154); _delve_test 0 errors/nulls;
+  L27A_TEST OK (the new-monster roster wiring still resolves); _l26_anims L26_FLOORS=7,9,11 L26A_ANIMS OK,
+  MON_ANIMS static=0 of 14532 moving frames (the deep roster still animates with the scaled lords).
+- A SELF-INFLICTED ONE WORTH RECORDING: my first edit went in TAB-indented into a SPACE-indented file.
+  GDScript rejects mixed indentation, so bestiary.gd stopped parsing and every script that referenced it
+  reported "Could not resolve class Bestiary" - the real cause named no line in bestiary.gd at all.
+  `--headless --check-only --script scripts/bestiary.gd` pointed straight at the line. Worth remembering:
+  when a wave of "could not resolve class X" appears, check-only on X itself, and check the indent style of
+  the file before editing it.
+- FOR MR. E - A REAL BALANCE CHANGE, HIS CALL: at depth a lord swings 44.7 against heroes with about 30 hp,
+  so roughly one landed blow a hero before armour soak and healing. That IS "deeper feels dangerous" as
+  asked, and an unprepared party is meant to lose - but if deep lords now feel unfair rather than
+  frightening, LORD_ATK_PER_STEP (0.22) is the single number to pull down; LORD_HP_PER_STEP (0.28) only
+  makes the fight longer, not deadlier.
 ## D-cycle 123 - D28 live-run feature census (desktop CruzaderPC, 2026-11-13) - D28 DONE
 Ran tools/_d28_census.gd: the real Town, director on, 6 fake viewers enlisting/delving/fishing/forging/rerolling,
 7 wall-min at 8x time-scale (game reached day 32). Reads the in-game counters (Sfx.plays, new Rig.plays, new
@@ -2068,6 +2265,45 @@ reliable; the live-delve poll is now every-frame for a future delve-heavy run (s
 straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed except two read-only census counters
 (Rig.plays, Spells.cast_counts). Backups scripts/rig.gd.bak_d28, scripts/spells.gd.bak_d28 (not committed).
 
+## L-cycle 124 - L46 traps (laptop jestai, 2026-11-13) - L46 DONE
+VERIFIED FIRST, as the item demands - and Mr. E is RIGHT ABOUT THE EXPERIENCE, WRONG ABOUT THE MECHANISM.
+L11's damage code was never broken: a forced spring took 10 hp, rolled a DEX save, floated the number and
+printed to the Chronicle exactly as written. Traps are not inert. They were simply almost never MET:
+  BEFORE: over four floors with 6 traps, a delver came within the 0.90 m trigger radius of only 2 of them.
+  Closest approach per trap: 0.1, 0.4, 3.9, 4.0, 11.0, 23.5 m. One trap fired in the whole delve.
+So the fix is not "make traps hurt" - it is "put traps where people walk, and keep them live while people
+are walking". Three real defects found by measuring:
+1. TRAPS SAT WHERE NOBODY WENT. dungeon_hd._dress() took any open cell. info["keep_clear"] - the way
+   through plus the corridors - is exactly where the party walks, and props are deliberately kept OFF it;
+   traps are the one thing that belongs ON it. New take_route() lays traps on keep_clear by preference and
+   falls back to any open cell only when the route is used up. Coverage went 2 of 6 -> 5-6 of 6 within
+   reach, closest approaches now 0.0-0.7 m instead of 0.1-23.5 m.
+2. TRAPS WERE ONLY LIVE DURING A FIGHT. _traps_tick() was called only from _fight(), so the entire walk to
+   the stairs - where most of a floor is crossed - was trap-free. That alone explained why 6 traps walked
+   over produced 2 encounters. _traps_tick() now also runs in "descend" and in L47's new "flee" state.
+   Encounters over the same four floors went 2 -> 5.
+3. A SPRUNG TRAP COULD TAKE NOTHING AT ALL. dmg = floorf(dmg * 0.5) on a good save floors a low roll to 0,
+   and a fire grate against a fire-resistant delver multiplies to 0 - so a trap could land, play its
+   sound, print its line and remove zero hp. That IS "the trap did nothing", seen with my own eyes in the
+   first probe run. took is now maxf(1.0, ...): a save halves and resistance blunts, neither nullifies.
+- tools/_l46_test.gd (NEW, headless): A verifies on real delves and prints trap_log WITH the closest
+  approach to every trap, so the next run can tell "damage broken" from "never triggered" without
+  guessing; B forces a spring and then springs every trap against every delver, requiring not one of them
+  to take zero; C is lethality. L46_TEST OK, 10 checks, 0 failed.
+- A TEST BUG OF MINE, worth recording because it looked exactly like a product bug: part C put a delver on
+  1 hp, sprang a trap, saw them still standing on 1 hp and failed. The trap had dealt 13 damage. The cause
+  is canon - _hero_hit gives ONE death save a delve (DC 10 CON claws you back to 1 hp, a natural 20 to a
+  quarter). The rule was working; my assertion was wrong. Part C now asserts the save is BURNED on the
+  first lethal trap and that the delver DIES to the next one with it spent. I nearly "fixed" a correct
+  mechanic - the giveaway was that the Chronicle line reported real damage while hp did not move.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1063 (MON_INPROP 0 of 159); _delve_test 0 errors/nulls.
+  L25_TEST OK 13/13 - 0 prop-prop interpenetration over 12 floors, 0 stuck delvers, 0 watchdog frees, so
+  laying traps ON the walked route (keep_clear) did NOT crowd the path or block anyone. That was the risk
+  worth checking: traps are now deliberately where people walk, which is exactly where a bad placement
+  would strand them.
+- FOR MR. E: traps now land on the route and stay live while the party walks, so expect to SEE them on
+  stream - several a delve rather than one in four floors. If that reads as too punishing once he watches
+  it, the dial is the trap count in dungeon_hd._dress() (1 + floor_no/3, capped at 4), not the damage.
 ## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
 - Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
   EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT
@@ -2119,3 +2355,42 @@ straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed ex
   4. D31/D32: read lore_lines "growth_tiers".tiers, slow the climb and render each "see".
   5. D35/D39: read items.json "shop_stock" and "trader_cargo" for shop display and interceptable caravan cargo.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor. Not a WIP commit.
+## L-cycle 125 - L49 loot and searching made visible (laptop jestai, 2026-11-13) - L49 DONE
+Mr. E: "no chests, no drops, nobody searching". As with L46, the mechanic was not missing - it was
+INVISIBLE. _loot() already rolled an Investigation check, scaled the gold by how well it went and awarded
+it, but it fired the instant a floor was cleared, with no chest to walk to, nobody moving and nothing on
+screen. A viewer could watch a whole delve and never see anyone find anything.
+- scripts/dungeon_parts.gd: NEW chest() - a banded wooden chest built from the kit's own primitives, with
+  a hinged lid and a small warm glint so it can be picked out of a dark floor in a pane. set_meta("open")
+  tips the lid and fades the glint; Delve calls it when a search finishes.
+- scripts/dungeon_hd.gd: 1-2 chests a floor, registered in info["chests"]. Deliberately placed on OPEN
+  floor rather than keep_clear: a chest should be somewhere you GO, not something you trip over on the way
+  through - that is what L46's traps are for now.
+- scripts/delve.gd: NEW "search" state between clearing a floor and leaving it. The party's sharpest eye
+  (the same _search_bonus seeker _loot already chose) WALKS to each chest, turns to face it, kneels over it
+  with Use_Item for SEARCH_S 1.8 s, and only then is the roll made. Both outcomes read out in Mr. E's own
+  words: "Successfully found loot!! N gold (Investigation X vs DC Y)" or "...no loot... (Investigation X vs
+  DC Y)", with a floating +N or "empty" over the delver. Counters chests_found / chests_empty are exposed
+  on Delve so a census can pick them up.
+- Refactor needed to get there: the floor-cleared branch of _fight() used to fall straight through to the
+  press-on/climb-out decision. That decision is now _floor_decision() and the rest of the fight body is
+  _fight_body(), so the same decision can be reached either immediately or after the searching is done.
+  Behaviour is unchanged on the no-chest path.
+- tools/_l49_test.gd (NEW, headless): A chests are placed; B the delve really enters "search", a delver
+  really walks within 2.2 m of the chest, and the LID really rotates (so the loot is not teleporting in);
+  C drives 80 searches and requires BOTH outcomes, that every find actually awarded gold, and that both
+  are counted. L49_TEST OK, 9 checks. Measured: 32 of 80 found, 48 of 80 empty, 32 of 32 finds paid.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1624 (MON_INPROP 0 of 72); _delve_test 0 errors/nulls.
+  L25_TEST OK 13/13 - 0 prop-prop AND 0 prop-wall interpenetration over 12 floors, 0 stuck delvers. The
+  chests are new props sitting on open floor, so this was the run that mattered. One thing to note rather
+  than hide: the watchdog freed a delver ONCE in 10 floors where the previous two runs were 0. The check
+  allows up to once a FLOOR and passed comfortably, and L25's own history records 1-5 nudges as normal,
+  but if a later cycle sees that climb, the chests are the first thing to suspect.
+- HONEST SCOPE - what this item does NOT include, so nobody reads the tick too generously: chests pay
+  GOLD. Gear salvage still comes from _loot() exactly as before. There are no per-monster physical drops
+  and no dropped-item pickups on the floor; the plan's "Not every monster drops" is satisfied only in the
+  sense that not every chest pays (48 of 80 were empty). If Mr. E wants a monster to leave something on
+  the ground to walk over, that is a separate piece of work and should get its own ID.
+- FOR THE SUPERVISOR: the census tool tools/_d28_census.gd is DESKTOP-owned, so the laptop has not touched
+  it. Delve.chests_found and Delve.chests_empty are there for it to read whenever the desktop next edits
+  it - that is what "census shows chests spawned/opened" needs on their side.

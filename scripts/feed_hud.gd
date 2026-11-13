@@ -63,9 +63,14 @@ var _pace_t := 0.0
 
 func _build_chrome() -> void:
     _panel = PanelContainer.new()
+    # L39: Mr. E's reference is a small LIGHT box, so the parchment is lifted close to white
+    # and the side margins tightened - it is a compact panel now, not a full-width band.
     var sb := UiTheme.parchment()
+    sb.bg_color = Color(0.97, 0.95, 0.90, 0.95)
     sb.content_margin_top = UiTheme.px(6)
     sb.content_margin_bottom = UiTheme.px(6)
+    sb.content_margin_left = UiTheme.px(10)
+    sb.content_margin_right = UiTheme.px(10)
     _panel.add_theme_stylebox_override("panel", sb)
     _panel.clip_contents = true
     _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -94,7 +99,9 @@ func _build_chrome() -> void:
     _card_title = Label.new()
     # L32b: sized for the centre strip (0.10 of the screen) - the title and ONE sub
     # line, so the card can never push the Chronicle past the strip's edge
-    _card_title.add_theme_font_size_override("font_size", UiTheme.px(26))
+    # L39: the box is 576 px wide, not the full screen - the card shrinks again so it can
+    # never push the Chronicle's lines out of it (L32b sized this for the old full-width band)
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(19))
     _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
     _card_title.add_theme_constant_override("outline_size", 4)
     cv.add_child(_card_title)
@@ -102,8 +109,8 @@ func _build_chrome() -> void:
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_OFF
     _card_sub.max_lines_visible = 1
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
-    _card_sub.custom_minimum_size = Vector2(UiTheme.px(420), 0)
-    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(18))
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(150), 0)
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(14))
     _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
     cv.add_child(_card_sub)
     _card.visible = false
@@ -263,10 +270,12 @@ func _rebuild() -> void:
         lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
         lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
         if _chrome:
-            # the bar: one line an entry, the full width
+            # L39 the centre box: one line an entry. The box is narrow, so a long line ends
+            # in an ellipsis rather than being cut mid-glyph (clip_text) - the full text is
+            # in chat either way.
             lb.autowrap_mode = TextServer.AUTOWRAP_OFF
             lb.max_lines_visible = 1
-            lb.clip_text = true
+            lb.clip_text = false
             lb.custom_minimum_size = Vector2.ZERO
             lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         lb.add_theme_font_size_override("font_size", UiTheme.px(28))

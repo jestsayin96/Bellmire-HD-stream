@@ -369,10 +369,11 @@ func set_labels(v: bool) -> void:
 func _relayout(force := false) -> void:
 	var b := busy()
 	var lay := "grid_" + "_".join(b)
-	# L21: the slim bottom chrome (clock / chat) is no pane's; L32b: the Chronicle's
-	# centre strip parts the two pane rows at the cross of the grid
-	var h := (1.0 - HudDock.CHROME - HudDock.STRIP) * 0.5
-	var y2 := h + HudDock.STRIP
+	# L21: the slim bottom chrome (clock / chat) is no pane's. L39: the two pane rows MEET at
+	# the cross - L32b's full-width Chronicle band that parted them is gone (Mr. E rejected it);
+	# the Chronicle is now a compact box over the cross, covering only the panes' corners.
+	var h := (1.0 - HudDock.CHROME) * 0.5
+	var y2 := h
 	var rects := {"director": Rect2(0, 0, 0.5, h), "bits": Rect2(0.5, 0, 0.5, h),
 			"subs": Rect2(0, y2, 0.5, h), "points": Rect2(0.5, y2, 0.5, h)}
 	_rects = rects
@@ -551,6 +552,14 @@ func _clear(p: Dictionary, at: Vector3, want: Vector3, real: float) -> Vector3:
 	p["mv"] = (p.get("mv", Vector2.ZERO) as Vector2).lerp(p.get("lift", Vector2.ZERO), clampf(real * 3.0, 0.0, 1.0))
 	return RtsCamera.shifted(at, want, p["mv"])
 
+## L34: the eye's shot rebuilt from its OWN numbers (same convention as RtsCamera's placement),
+## for the tick where neither the main viewport's camera nor the eye's Camera3D can be read.
+## The director pane then still moves with the eye instead of holding a dead frame.
+func _eye_xform(eye: RtsCamera) -> Transform3D:
+	var off := Vector3(sin(eye.yaw) * cos(eye.pitch), -sin(eye.pitch), cos(eye.yaw) * cos(eye.pitch)) * eye.dist
+	var t := Transform3D(Basis(), eye.focus + off)
+	return t.looking_at(eye.focus + Vector3(0, 1.0, 0), Vector3.UP)
+
 var _eye_n: RtsCamera
 func _eye() -> RtsCamera:
 	if not is_instance_valid(_eye_n):
@@ -630,11 +639,22 @@ func _follow(real: float) -> void:
 			(w["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_ONCE
 	var main := get_viewport().get_camera_3d() if get_viewport() else null
 	var d: Dictionary = _panes["director"]
-	if main and (d["box"] as Control).visible:
+	if (d["box"] as Control).visible:
+		# L34: the main viewport's camera can be null (L32a keeps disable_3d on, or the eye's
+		# subject rerolled mid-frame). The old code just skipped the copy, so the pane SILENTLY
+		# held its last transform - the frozen/black top-left pane Mr. E saw. Never hold stale:
+		# drive the pane from the eye's own camera, and failing that from the eye's numbers.
 		var dc: Camera3D = d["cam"]
-		dc.global_transform = main.global_transform
-		dc.fov = main.fov
-		dc.far = main.far
+		var src: Camera3D = main
+		var eye := _eye()
+		if (src == null or not is_instance_valid(src)) and eye != null and is_instance_valid(eye.cam):
+			src = eye.cam
+		if src != null and is_instance_valid(src):
+			dc.global_transform = src.global_transform
+			dc.fov = src.fov
+			dc.far = src.far
+		elif eye != null:
+			dc.global_transform = _eye_xform(eye)
 	for l in LANES:
 		var p: Dictionary = _panes[l]
 		_lane_tag(l, real)

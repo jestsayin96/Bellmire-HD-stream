@@ -17,7 +17,13 @@
       "Someone swept this floor recently. Nobody has lived here in years.",
       "The slabs are lifted and leaned back, every one, from the inside.",
       "Offerings, fresh. Somebody still comes down to pay.",
-      "A row of boots at the door, paired and empty."
+      "A row of boots at the door, paired and empty.",
+      "The lids were moved from the inside, and then put back.",
+      "Somebody kept bringing flowers long after the names went.",
+      "The dust lies flat except in one line, wall to wall.",
+      "A tomb with a doorbell. It has been rung.",
+      "They buried the lamps with them, and the oil is still good.",
+      "One grave dug recently. Nothing in it yet."
     ],
     "mine": [
       "Someone dug here for something, and stopped all at once.",
@@ -35,7 +41,13 @@
       "The props are new timber. Whoever cut them did not go back up.",
       "A cart still loaded, half a turn short of the rail.",
       "The seam runs out, and something kept digging anyway.",
-      "Chalk marks counting days along the wall. The counting stops."
+      "Chalk marks counting days along the wall. The counting stops.",
+      "The props are new. Nobody down here needs props.",
+      "A seam of something that was never ore.",
+      "Picks laid down in a row, handles all pointing out.",
+      "The tally marks on the beam stop mid-week.",
+      "A cage still swinging, and no rope above it.",
+      "They were mining toward something, not for something."
     ],
     "fortress": [
       "Arrow-slits face inward. Whoever held this was keeping something in.",
@@ -53,7 +65,13 @@
       "The arrow slits face inward.",
       "A watch roster on the wall, every name struck through but one.",
       "The gate was barred from this side. Twice.",
-      "Spears stacked ready - dust on the hafts, none on the points."
+      "Spears stacked ready - dust on the hafts, none on the points.",
+      "Arrow slits cut on the inside wall. They were shooting in.",
+      "The gate was barred from this side.",
+      "A muster roll on the wall, every name struck through but one.",
+      "Clean stone, old blood, no bodies.",
+      "The watchfires are laid and never lit.",
+      "Somebody kept this place long after there was anything to keep."
     ],
     "temple": [
       "The altar is clean. Nobody down here cleans.",
@@ -71,7 +89,13 @@
       "The altar has been scrubbed. Something needed scrubbing off.",
       "Candles burnt to the socket, all of them in one night.",
       "The god's name is plastered over, and the plaster is scratched.",
-      "Kneeling marks worn into the stone. Too many, too deep."
+      "Kneeling marks worn into the stone. Too many, too deep.",
+      "The altar faces the wrong way, and was moved to face it.",
+      "Offerings, recent, and nobody to leave them.",
+      "Every god's name here is scratched over with the same word.",
+      "The font holds water that nothing is feeding.",
+      "Hymn-boards with the numbers still up for a service nobody came to.",
+      "Kneeling-marks worn deep. Too deep for knees."
     ],
     "lair": [
       "The floor is worn smooth by something heavy that came and went.",
@@ -89,7 +113,13 @@
       "Bones sorted by size. Something tidy lives here.",
       "The floor is warm and the walls are not.",
       "A nest of cloaks, guild-grey, carefully arranged.",
-      "It drags its kills in from somewhere further down."
+      "It drags its kills in from somewhere further down.",
+      "Bones sorted by size. Something here is tidy.",
+      "The nest is lined with guild cloaks.",
+      "Claw marks going up the wall, not down.",
+      "It eats, then it stacks what it does not eat.",
+      "Tracks in and out, and the out-tracks are deeper.",
+      "Something has been dragging full sacks home."
     ],
     "prison": [
       "The cells lock from the outside, and some are still locked.",
@@ -107,7 +137,13 @@
       "Every door is open and every lock is whole.",
       "Tally marks inside the cells, and the tallies run far too long.",
       "The keys are on the hook. Nobody reached for them.",
-      "A ration bowl, licked clean, still warm."
+      "A ration bowl, licked clean, still warm.",
+      "The keys are inside the cells.",
+      "Tally marks on one wall run into the thousands.",
+      "The doors open outward. They were keeping people in and something else out.",
+      "A cell scrubbed clean, lately.",
+      "Chains cut, not unlocked.",
+      "Somebody wrote MEASURE THE GRAIN on a cell wall and meant it."
     ],
     "works": [
       "Benches, tools, a half-made thing nobody finished. Don't touch the architect's toys.",
@@ -125,7 +161,13 @@
       "The wheel still turns, and nothing is driving it.",
       "Half-finished work on every bench, as if a bell had rung.",
       "The forge is banked, not cold. Somebody keeps it.",
-      "Measures and weights, and every weight filed light."
+      "Measures and weights, and every weight filed light.",
+      "The wheel still turns, and nothing drives it.",
+      "Half-finished stair, tools left where they fell.",
+      "A plan nailed to the post, for a room that is not here yet.",
+      "The furnace is warm and the fuel bins are full.",
+      "Spare parts for things nobody has built.",
+      "The architect's measurements, corrected in another hand."
     ],
     "warren": [
       "Doorways, chimneys, a street sign - a whole town, swallowed.",
@@ -143,7 +185,13 @@
       "The passage narrows until it has to be a mistake, then opens.",
       "Everything here was dug by something smaller than you.",
       "Fresh spoil, pushed out behind you as you pass.",
-      "Three ways on, and all three breathe."
+      "Three ways on, and all three breathe.",
+      "Shop fronts, a guild sign, a street with no sky.",
+      "Somebody's supper laid out and gone grey.",
+      "The doors are numbered, and the numbers keep going past the hallway.",
+      "A well in the middle of it all, dry and deep.",
+      "Shutters latched from inside every single house.",
+      "The lane bends the way no lane in Bellmire bends."
     ]
   },
   "descend": [
@@ -212,7 +260,27 @@
     "The chalk marks stop. Everybody notices; nobody says.",
     "Another stair the architect has not finished.",
     "Deeper. The lamps are honest and the dark is patient.",
-    "Down past the water-line, where the stone remembers being wet."
+    "Down past the water-line, where the stone remembers being wet.",
+    "%s %s down, and the stair takes the sound away first.",
+    "%s %s into the scar with the lamps trimmed low.",
+    "%s %s below - grain measured, flasks counted, door kept.",
+    "%s %s past the last chalk mark anyone trusts.",
+    "%s %s down where the architect ran out of plans.",
+    "%s %s into the dark, and the dark makes room.",
+    "%s %s below the guild post, roll in hand.",
+    "%s %s down the wet stair, one hand on the wall.",
+    "%s %s into the scar, and Bellmire goes quiet above them.",
+    "%s %s down. The bell with no clapper does not ring them off.",
+    "The stair is colder than the night that fed it.",
+    "The lamps lean, all of them, the same way.",
+    "Something below has already counted the party.",
+    "The steps are worn in the middle. Many went down.",
+    "Fresh mortar on an old wall. It is still being built.",
+    "The air changes hands here - theirs for the scar's.",
+    "A draught from a door nobody opened.",
+    "The chalk starts again below, in a hand nobody knows.",
+    "Down, where the guild's lantern oil earns its price.",
+    "Deeper. Whatever the lamps show is the good news."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -280,7 +348,27 @@
     "Cleared, and the floor below heard every bit of it.",
     "Held. The door is kept, and so is everyone standing.",
     "Finished. Count the living first, the loot after.",
-    "Clear, and the only sound left is the lamps."
+    "Clear, and the only sound left is the lamps.",
+    "Floor %d is theirs, and it cost.",
+    "Floor %d done. The flasks are fewer.",
+    "Floor %d quiet - the kind that means finished.",
+    "Floor %d held. Bellmire will hear about it.",
+    "Floor %d cleared, and the lamps still lit.",
+    "Floor %d gives in.",
+    "Floor %d swept. The chalk goes on the wall.",
+    "Floor %d is a story now, not a fight.",
+    "The last of it stops moving. That is clearance.",
+    "Held, and nobody had to be carried.",
+    "Clear. Count the living, then the coin.",
+    "Done. The guild gets its tenth and says nothing.",
+    "Swept. The dark goes back to waiting.",
+    "Finished, and the floor below has gone very still.",
+    "Clear - and that is one more the architect lost.",
+    "The room empties. The lamps steady.",
+    "Cleared. Somebody write it down before it is argued over.",
+    "Held. Measure the grain, count the flasks, keep the door.",
+    "Over. The only blood still moving is theirs.",
+    "Clear, and the quiet sounds like a favour owed."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -450,7 +538,19 @@
       "'The door is kept. Say it back to me.'",
       "'Ground's cold. Good. Cold is honest.'",
       "'Breathe now - we will be busy later.'",
-      "'Nobody dies in the first room. It is rude.'"
+      "'Nobody dies in the first room. It is rude.'",
+      "Door's kept.",
+      "Oil's good.",
+      "Two paces, then look.",
+      "Nobody wanders.",
+      "Breathe first.",
+      "Mark the wall.",
+      "Steel loose, lamp high.",
+      "Front rank, with me.",
+      "Quiet going in.",
+      "Count me in.",
+      "Watch the ceiling too.",
+      "Scar's awake down here."
     ],
     "lord": [
       "Hold together!",
@@ -492,7 +592,19 @@
       "'That is a great many shoulders.'",
       "'Hit it where the Chronicle says.'",
       "'It has one good trick. Make it use it.'",
-      "'If I fall, somebody finish the sentence.'"
+      "'If I fall, somebody finish the sentence.'",
+      "Big one! Spread out!",
+      "Don't crowd it!",
+      "Eyes up - it's rising!",
+      "Take the flank!",
+      "It's slow. Be slower than nothing.",
+      "Hold the line!",
+      "This is what we came for.",
+      "Wait for the opening!",
+      "Don't trade with it!",
+      "Mine's the left!",
+      "Let it come to us.",
+      "Give ground, not backs!"
     ],
     "trap": [
       "Floor's wrong here.",
@@ -533,7 +645,19 @@
       "'Hold still and let me be clever.'",
       "'The stone moved. Stone should not move.'",
       "'That is a pit with a lid on it.'",
-      "'Rope, lamp, patience. Mostly patience.'"
+      "'Rope, lamp, patience. Mostly patience.'",
+      "Stop. STOP.",
+      "That stone's loose.",
+      "Wire. There's wire.",
+      "Nobody move.",
+      "Behind me, slowly.",
+      "The floor's hollow here.",
+      "Well-made. Still a trap.",
+      "Somebody wanted us here.",
+      "Chalk it. Step round.",
+      "That's a trigger.",
+      "Found it with my boot.",
+      "Count your fingers after."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -574,7 +698,19 @@
       "'That is coming out of somebody's share.'",
       "'Fine. Fine. Entirely fine.'",
       "'The door is still kept. So am I.'",
-      "'Less of that, if you please.'"
+      "'Less of that, if you please.'",
+      "Still up!",
+      "That's a rib.",
+      "Need a minute!",
+      "Keep the line - I'm fine!",
+      "Flask! Anyone!",
+      "Caught me wrong.",
+      "That'll scar.",
+      "I'm slowing!",
+      "Don't look at me, look at it!",
+      "Not done yet.",
+      "Bleeding, not beaten.",
+      "Cover me, I'm drinking."
     ],
     "drink": [
       "Bottoms up.",
@@ -615,7 +751,19 @@
       "'Honey first, then the iron.'",
       "'The flask was counted. So am I.'",
       "'Better. Louder, even.'",
-      "'Save one for whoever is next.'"
+      "'Save one for whoever is next.'",
+      "Worth every coin.",
+      "Cold going down.",
+      "Apothecary earns her keep.",
+      "That's the burn gone.",
+      "Steady again.",
+      "Last one. Make it count.",
+      "Tastes like the Ford smells.",
+      "Right. Back in.",
+      "Still standing, cheers.",
+      "Stopper that.",
+      "Good brew.",
+      "On the house, apparently not."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -656,7 +804,17 @@
       "'The scar finished my sentence.'",
       "'I would like that one back.'",
       "'Nobody tell the guild.'",
-      "'It is the ground. It is definitely the ground.'"
+      "'It is the ground. It is definitely the ground.'",
+      "Not what I asked for!",
+      "The scar's taking a cut.",
+      "Wrong spell, wrong room.",
+      "It went the other way!",
+      "That's on the ground, not me.",
+      "The scar heard me wrong.",
+      "I had it. The scar had it harder.",
+      "Again, and properly!",
+      "Ask the scar, not me.",
+      "That is NOT fire."
     ]
   },
   "misfire": [
@@ -689,7 +847,15 @@
     "%s's %s spends itself on the stone instead (%d vs DC %d).",
     "%s reaches for %s; the scar reaches back (%d vs DC %d).",
     "%s's %s arrives, but something else wore it in (%d vs DC %d).",
-    "%s shapes %s and the floor finishes the shape (%d vs DC %d)."
+    "%s shapes %s and the floor finishes the shape (%d vs DC %d).",
+    "%s works %s and the scar gives it back inside out (%d vs DC %d).",
+    "%s's %s bends away from them - the scar has opinions (%d vs DC %d).",
+    "%s casts %s and the floor answers instead (%d vs DC %d).",
+    "%s's %s lands somewhere nobody aimed (%d vs DC %d).",
+    "%s calls %s and something older takes the call (%d vs DC %d).",
+    "%s's %s goes off wrong - that is the scar's toll (%d vs DC %d).",
+    "%s spends %s and the scar keeps the change (%d vs DC %d).",
+    "%s's %s unspools in their hands (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -787,7 +953,39 @@
     "Found what the gold was buried under.",
     "The quiet took them before the Chronicle did.",
     "Stayed to hold what everyone else had let go.",
-    "Bellmire measures the grain. The scar measured them."
+    "Bellmire measures the grain. The scar measured them.",
+    "Kept the door. The door did not keep them.",
+    "Went down rich in flasks and came back in the Chronicle.",
+    "Stood where the lamp was. That was the whole plan.",
+    "Named in the roll, missed at the gate.",
+    "Measured the grain for a town that outlived them.",
+    "The scar misfired. So did the luck.",
+    "Last through the door, always.",
+    "Spent their last flask on somebody else.",
+    "A good shield. A bad floor.",
+    "Took the front rank and kept it.",
+    "Their lamp came up. They did not.",
+    "Fought one room past sense.",
+    "The guild writes it; the scar keeps it.",
+    "Died owed wages. Bellmire paid them anyway.",
+    "Carried two out. Could not carry themselves.",
+    "Asked for the hard corner and got it.",
+    "The bell with no clapper rang for them, in the way it does.",
+    "Went looking for a name and found one.",
+    "Held the stair while the roll climbed it.",
+    "Laughed at the tell. The tell was right.",
+    "Counted wrong once.",
+    "Steady hands, short night.",
+    "Never once stepped where they were told not to.",
+    "The dark took the lamp first, then the rest.",
+    "Paid for the hall's roof in a single delve.",
+    "Chalked the wall, walked the room, stayed in it.",
+    "A quiet fighter and a loud end.",
+    "Said they would be back by the bell.",
+    "Wore the guild's colours all the way down.",
+    "Out of flasks, out of floor, out of time.",
+    "The scar does not haggle.",
+    "Bellmire keeps the name. That is the deal."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",

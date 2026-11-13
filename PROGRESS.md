@@ -3177,3 +3177,49 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      lines on any disaster. Roll against len(). OWNER: whoever owns D34.
   6. Nothing new needs wiring to FUNCTION: every key added this cycle is one the loaders already read.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 20 - the lines that repeat most, plus rare uniques and brews (laptop CONTENT, branch `content`)
+- WHEN: 2026-11-13, worktree C:\Users\Jestsayin96\Project1\bellmire-content (W3). Godot NEVER run.
+- WHY: standing backlog 5 (epitaphs, barks, descend, cleared - the lines a long stream repeats most)
+  and 6 (more shape-first lord variants and brews). WORK_PLAN has no ticked CONTENT item; C2 and C3
+  are the matching entries and are left UNTICKED for the supervisor.
+- data/lore_lines.json (additive):
+    descend   66 -> 86    cleared   66 -> 86    epitaphs  96 -> 128   misfire (templated) 30 -> 38
+    barks.enter 40->52, barks.lord 40->52, barks.trap 39->51, barks.hurt 39->51,
+    barks.drink 39->51, barks.misfire 39->49
+    tells: all eight locales 16 -> 22 (tomb, mine, fortress, temple, lair, prison, works, warren)
+  Every new `descend` line is either a 2-%s template or a plain line, matching both existing forms;
+  every new `cleared` line is either a single-%d template or plain; every new `misfire` line carries
+  exactly two %s then two %d, like the 30 already there. No floor count is stated anywhere.
+- data/bosses.json (additive): lesser_uniques 42 -> 54, greater_uniques 36 -> 48. All 24 are modified
+  versions of the EIGHT existing lords - no new lord, no new key. Each names its modifier in `shape`
+  and skews hp/speed/attack to match it (a faster one is frailer, a walling one is slower), never a
+  flat stat bump. Field sets are drawn only from {name, shape, hp, speed, attack}, as before.
+- data/potions.json (additive): potions 64 -> 76. Twelve brews across tiers 1-4, costs 40-440, sitting
+  inside the existing price ladder. Every `gives` names a state already in the `states` block and
+  carries `secs`; every `cures` names an existing state; every `heal` is a 3-int array. No state added,
+  no key renamed, `states` untouched.
+- VALIDATION OK: python json.load on all four owned files (items.json untouched this cycle) - all four
+  parse. A key-by-key walk against `git show HEAD:<file>` confirms every pre-existing key and value is
+  present and unchanged and no array shrank; the diff is +255 / -21 lines and every one of those 21 is
+  an existing last-entry line gaining a trailing comma. Files were edited in place so the original
+  one-entry-per-line formatting is preserved. No duplicate unique name; no new duplicate potion alias.
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. Nothing new needs wiring to FUNCTION. Every key touched this cycle already has a loader.
+  2. Any picker that rolls these arrays with a hard-coded range will now never show the new lines.
+     Roll against len(). Affected: descend/cleared/epitaphs/misfire and all six barks arrays
+     (LAPTOP CODE - delve.gd/chatcmd.gd), tells (LAPTOP CODE - floorgen/bestiary tell budget).
+  3. epitaphs is now 128 and the Chronicle shows epitaphs in a fixed-width lane - a longer line may
+     clip where the 96 older ones did not. The longest new epitaph is 59 chars against an old maximum
+     of 56, so the lane is now asked for 3 characters more than it has ever been asked for.
+     OWNER: DESKTOP HUD (L39/L40).
+  4. bosses.json uniques: 54 lesser / 48 greater. Any rare-unique draw with a hard-coded table size,
+     or a two-bag draw sized off the old counts, must size off len(). OWNER: LAPTOP CODE (bestiary.gd).
+  5. potions.json: 76 brews. !brew lists and any shop/apothecary panel laid out for a fixed count will
+     clip. The new keys are gatewater, chalkdraught, tallow_cup, guildmend, bannerbrew, fordwater,
+     smithsdram, keepwater, longmend, scarquiet, lordsmeasure, deeplast.
+     OWNER: LAPTOP CODE (the !brew path) / DESKTOP HUD (the panel).
+  6. PRE-EXISTING, NOT FROM THIS CYCLE: the alias "quarry" resolves to two brews (quarryblood and
+     quarrymend). It is ambiguous in HEAD too, so I left it alone - additive only. If !brew quarry
+     should pick one, that is Mr. E's call and a one-word content fix next cycle.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

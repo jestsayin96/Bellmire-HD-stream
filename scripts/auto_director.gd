@@ -126,8 +126,15 @@ func _process(delta: float) -> void:
     _tick = 1.0
     var best := _best()
     if best.is_empty():
-        best = _fallback_shot()             # L34: never leave the eye parked
-    if best.is_empty():
+        # L34(a): no candidate scored this tick. The old code returned here, which left
+        # the eye parked on whatever it was already following - and if THAT subject had
+        # just died, rerolled or vanished, the top-left pane froze on a dead body: the
+        # death check below never ran. So if the shot on screen is no longer alive, cut
+        # to a live fallback instead of holding a stale frame.
+        if not _shot_alive(_cur):
+            var fb := _fallback_shot()
+            if not fb.is_empty():
+                _cut(fb)
         return
     var cur_pri := float(_cur.get("pri", -1.0))
     var cur_alive := _shot_alive(_cur)
@@ -209,7 +216,8 @@ func _shot_alive(s: Dictionary) -> bool:
 ## the town tour's shots: the market (the town wide), the scar's mouth, the whole valley
 ## (L20: the clearance test cuts to these through the director's own _cut)
 func tour_stops() -> Array:
-    var tour: Array = [[town.get("_market_pos"), 38.0, -42.0]]
+    var mp = town.get("_market_pos")
+    var tour: Array = [[mp if mp != null else Vector3.ZERO, 38.0, -42.0]]
     var si: Dictionary = town.get("_scar_info")
     if si.has("mouth"):
         tour.append([si["mouth"], 45.0, -35.0])
@@ -224,21 +232,20 @@ func tour_stops() -> Array:
         out.append({"key": "tour_%d" % i, "pri": 10.0, "pos": tour[i][0], "dist": tour[i][1], "pitch": tour[i][2], "tour": true})
     return out
 
-## L34 (Mr. E's recordings: "the top left screen goes black or stays stuck when someone dies"):
-## when the subject dies, rerolls or despawns, _best() can come back EMPTY for a tick. The old
-## code returned, which left the eye parked exactly where it was - and the director pane, which
-## copies the eye, showed a frozen frame (or a black void, the camera left inside geometry).
-## So there is always a shot: step the town tour on and take the next stop.
+## L34(a): a shot that is ALWAYS available - the next stop on the town tour. The director
+## falls back to this whenever scoring comes back empty (every candidate avoided, lane-held
+## or dead), so it always has somewhere live to point. It rotates, so two empty ticks running
+## do not re-pick the same view.
 func _fallback_shot(avoid: String = "") -> Dictionary:
     var tour := tour_stops()
     if tour.is_empty():
         return {}
-    _tour_i += 1
-    var s: Dictionary = tour[_tour_i % tour.size()]
-    if avoid != "" and String(s.get("key", "")) == avoid and tour.size() > 1:
-        _tour_i += 1
-        s = tour[_tour_i % tour.size()]
-    return s
+    for i in tour.size():
+        var s: Dictionary = tour[(_tour_i + i) % tour.size()]
+        if String(s["key"]) != avoid:
+            _tour_i = (_tour_i + i + 1) % tour.size()
+            return s
+    return {}
 
 ## every shot worth showing right now, best first; `avoid` skips one story
 func _best(avoid: String = "") -> Dictionary:
@@ -323,4 +330,8 @@ func _best(avoid: String = "") -> Dictionary:
             continue                            # L24: never the hero a lane already shows
         if best.is_empty() or float(s["pri"]) > float(best["pri"]):
             best = s
+    if best.is_empty():
+        # L34(a): the avoid-filter or L24 lane-ownership removed every candidate. Never
+        # hand back an empty shot - the caller would freeze on its current subject.
+        best = _fallback_shot(avoid)
     return best

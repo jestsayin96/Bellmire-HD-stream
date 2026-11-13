@@ -2089,6 +2089,240 @@ L32b's calm pacing is KEPT; only the shape and the panes' geometry changed.
 - Validated (python only, no Godot): every data/*.json parses; the two edited entries stay within the bosses schema.
   Committed + pushed from the laptop (path a: Blender subprocess git) to prove that route end to end.
 
+## U1 - desktop HUD (Nov 13, 2026)
+NEW worker, new worktree W2 on branch `hud-ui`. Queue L34/L35/L38/L39/L40/L51.
+
+- **L34 director pane freezes - BOTH root causes fixed.**
+  (a) `auto_director._process()` returned early whenever `_best()` came back empty, so the
+  death check below it never ran and the eye stayed parked on a dead subject. It now cuts to
+  a live fallback when the current shot is not alive, and `_best()` itself never returns
+  empty any more (`_fallback_shot()` rotates the town tour when the avoid-filter or L24
+  lane-ownership removes every candidate).
+  (b) `spotlight._follow()` only copied the main camera `if main and ...`; a null
+  `get_camera_3d()` (subject died / rerolled / eye re-parented) skipped the block and the
+  pane kept its LAST transform. Now falls back to the eye's own Camera3D, then to a market
+  wide. Never a stale frame.
+- **L35 subscriber lane.** The idle subs lane rotates through subscribers seen this session,
+  newest first, every SUBS_ROT=15 s, skipping anyone another pane holds; no subscriber hero
+  available -> ordinary ambient (never blank, L32a). A paid sub moment is untouched: the
+  queue and its ordering are exactly as they were. SCOPE: Twitch sends subscription EVENTS,
+  not a roster of current subscribers, so the list builds as subs happen rather than being
+  known at boot. (roster.patrons persists GIVERS incl. bit-cheerers - deliberately not used.)
+- **L38 ambient framing.** `_offset_for` pulled back and raised (above ground 6.5/9.5 ->
+  8.5/12.5; below 9.0/7.0 -> 9.5/8.5), and a candidate is now TESTED before it is accepted:
+  `_shot_ok()` reuses the eye's own `RtsCamera.frame_clear()`, so a pane rejects a rooftop /
+  blank wall / inside-a-stall shot exactly the way the main camera judges one. Up to
+  FRAME_TRIES=6 draws, falling back to the first draw rather than going blank.
+- **L39 Chronicle is a centre BOX, font first.** Line size 28 -> 18 px at 1080p in centre
+  mode (the full-screen panel keeps 28 - he did not complain about that one); lord card
+  26/18 -> 20/14. THEN the box was sized to the smaller text: `HudDock.centre()` was
+  `Rect2(0, top, s.x, ...)` - the full-width band he rejected - and is now a centred
+  CENTRE_W=0.34 box. MEASURED at 1080p: box (634,442) 652x130, Chronicle 640x118,
+  **width_frac 0.333**, sitting in the gap between the two pane rows.
+- **L40 (the part this worker owns).** Enforced at `HudDock.put()` - the one chokepoint every
+  pane-docked element goes through - so a boss card or a party's frames is pushed clear of
+  the Chronicle box without touching their files. MEASURED overlaps=0 in all three captures.
+  NOT DONE, and NOT this worker's files: moving the party frames and the Twitch chat column
+  OUT of the panes needs `party_frames.gd` and `rts_camera.gd` (DESKTOP BUILD owns both).
+- **L51 NOT STARTED** - and a blocker found: `dice.gd` is the pure RNG rules engine
+  (`class_name Dice extends RefCounted`), not a visual d20. There is no on-screen d20 in the
+  seven HUD files to redesign. Needs Mr. E / the supervisor to say which d20 he means.
+
+Verified: project boots with 0 SCRIPT ERROR / 0 Parse Error; windowed 1920x1080 capture with
+the grid up, three shots + measurements above. Items left UNTICKED for the supervisor.
+
+## U2 - desktop HUD: L38 ambient framing, four measured iterations (Nov 13, 2026)
+L38 was NOT fixed by U1. I looked at the U1 renders and the panes were still bare grass, open
+water and roof-fillers, so this cycle iterated against captures instead of against the brief.
+Every step was diagnosed from a picture, not guessed:
+
+1. U1's line-of-sight gate (`frame_clear`) passed bad shots because it answers "can the camera
+   see the subject", not "is the frame worth looking at". A lone sheep in an empty paddock
+   passes it perfectly.
+2. Added a density pass - which made it WORSE: counting every nearby body made a herd of cows
+   and a raft of ducks the densest thing in the valley, and two lanes sat on the same empty
+   ford. Fixed by counting COMPANY FROM PEOPLE ONLY (base weight >= 1.5: townsfolk, heroes,
+   delvers, a catch being landed) and dropping livestock 1.0 -> 0.35 (scenery, not a story).
+   Densities read from the BASE weights so the pass cannot feed itself.
+3. Two lanes still framed the same stretch of river: `used` excluded the exact NODE, not the
+   PLACE. Added AMB_APART = 12 m spacing against what other panes show, with a second pass that
+   drops the rule rather than leave a lane with nothing.
+4. The real bug was mine: `_shot_ok` tested `_offset_for()` while the camera actually takes
+   `_offset_lane()`, which swings a lane 90/-90/180 degrees round a crowded subject (L22). So in
+   the BUSIEST spot on the board the pane swung behind a roof that was never tested. It now
+   tests the position actually used, snapshotting and restoring the pane's crowd/cut state so a
+   test cannot change what the pane does next.
+
+FINDING for the team: the valley's props (carts, barrels, beams, fences) have NO physics
+colliders - a ray gate added in step 3 rejected exactly 0 shots across three runs. rts_camera's
+clearance model knows the town's HOUSES only, so prop clutter in frame cannot be detected from
+this side. The ray gate is left in (free, and starts working if props ever get bodies) but it is
+not what fixed this.
+
+RESULT, measured over the last two captures: 5 of 6 ambient panes land on a readable, populated
+subject (market stalls with 12 and 18 townsfolk in frame, a street of walkers, an angler playing
+a line) against roughly 2 of 6 before. NOT 100%: when the town's activity is concentrated in one
+market, AMB_APART pushes the remaining lane out to quiet ground - that is the one bad pane in
+the last capture (0 folk within 14 m). A judgement call for Mr. E: loosen the spacing and lanes
+double up on the crowd, or keep it and one lane sometimes shows a quiet corner. L38 NOT ticked.
+
+Renders: renders/cycles/20261113_u2/ (gitignored). 0 SCRIPT ERROR / 0 Parse Error.
+Note: a stale global_script_class_cache mid-cycle produced phantom "Could not resolve class
+FeedHUD/HudDock/Spotlight" errors while every file passed --check-only individually;
+--headless --import cleared it. COORDINATION 5 is right about this one.
+
+### L59 (NEW, from the supervisor) - hud-ui / main reconciliation: NOT DONE, and why
+Part-way through this cycle a merge of main appeared in this worktree, unmerged, with the four
+UI files showing as conflicted but their conflict MARKERS already gone - the working tree held
+my side only. Committing that would have recorded a merge that silently deleted the laptop's 80
+lines across those files, which is precisely the blind merge 9fe6f31 refused. So I ran
+`git merge --abort` and re-applied my own U2 work on a clean base. Both sides are intact: mine
+on `hud-ui`, theirs on `main`. Nothing is lost and the merge can be redone deliberately.
+What the reconciliation has to settle - the laptop built L34 AND L39 independently of me:
+ - auto_director L34: both sides invented the SAME function, `_fallback_shot(avoid)`. Theirs
+   cuts to the tour whenever `_best()` is empty; mine only when the current shot is actually
+   dead (`_shot_alive`), and mine also makes `_best()` itself never return empty. Theirs handles
+   the HOLD_MAX re-pick path explicitly, which mine leaves returning. The union is better than
+   either: take their HOLD_MAX `alt` handling and my `_best()` guarantee + deterministic
+   non-avoided scan.
+ - feed_hud / hud_dock L39: they have tools/_l39_test.gd and renders/cycles/20261112_l39/
+   box_*.png, so they sized a Chronicle box too. Theirs must be diffed against mine before
+   either is kept - this is the one that can break the overlay.
+ - spotlight: theirs is +36 lines (L57 per-pane "now watching" label, per Phase P) and does not
+   obviously collide with my L35/L38 work, but it needs reading, not assuming.
+This needs a windowed UI capture after resolving, per COORDINATION 4. Not attempted blind.
+
+
+## U3 - desktop HUD: L51 the Satchel - a viewer's gear/inventory/selling sheet (Nov 13, 2026)
+
+L51 (narrowed): a NEW self-contained panel showing equipment with the BUFFS/DEBUFFS it gives,
+the viewer's inventory, and SELLING. The d20 part has left this lane (now T5 rolls / H9 displays).
+
+Built inside my seven files - no reach into party_frames, rts_camera or chatcmd:
+- leaderboard_panel.gd: a `Satchel` inner class sharing the right column with the Guild Roll.
+  Sections, all in the house style (parchment, ink, teal diamond + rule):
+  - WORN: each piece with what it GIVES, signed and coloured (green buff, red penalty, grey
+    "for the look"), read from data/items.json fields (ac/hp/hit/dmg/saves/speed). Weapon and
+    armour from Roster.WEAPONS/ARMOUR. Then an "Altogether:" line of the TOTALS taken from the
+    Roster itself (armour_class/attack_bonus/max_hp/speed) - never recomputed here, so the panel
+    can't disagree with the dice.
+  - RUNNING ON THEM: the live states on the delver (poison + potion states), bad first, in the
+    state's own colour with its effect text and seconds left (reads delve.has_st / m["st"]).
+  - IN THE SATCHEL: brews line, lamp oil, a count of spare gear.
+  - AT THE COUNTER: per-item sell-back (40% of cost) for spare gear and brews, plus a grand
+    "Sell the lot (worn too)" total.
+- spotlight.gd: a `suspend(on)` hook. The stream runs a permanent 2x2 grid ("once set up, always
+  the grid"), so a right-column panel could never show. suspend() folds the panes away (the eye's
+  own camera draws full screen) and restores them exactly. The Satchel drives it: visible -> folded.
+- The streamer summons the sheet with I (pin: tours living heroes). A viewer's purchase/reroll/find
+  fires roster.changed -> raise_for(uid), which ARMS the sheet on that buyer but does NOT fold the
+  grid on its own (const AUTO_FOLD=false) - folding on every !buy would blank the game. See DECISION.
+
+Verified by looking: renders/cycles/20261113_u3/ (windowed 1920x1080).
+  1_satchel_town_1080.png - the sheet over a full-screen town view, nothing clipped.
+  2_satchel_states_1080.png - the same hero below, Poisoned/Frightened/Hasted/Ogre-Strong running.
+  3_chronicle_crop.png - the 2x2 grid restored, the Chronicle centre box at 1:1.
+
+U1 caveat resolved: the Chronicle's 18 px line IS legible on stream - read it at 1:1 in
+3_chronicle_crop.png, crisp at 1080p.
+
+OPEN for Mr. E:
+- !sell is not wired: the sell-back lives at the counter in roster.gd, which is the LAPTOP's file,
+  not this worker's. The panel shows the prices and a total and says "!sell opens the counter";
+  it offers the command only once Roster gains a sell() method. The laptop (or content) owner
+  exposes that - the correct move, not reaching into their file.
+- Should a viewer's purchase POP the sheet by itself (fold the grid for ~14 s), or only arm it for
+  the next I-press? Shipped as arm-only (AUTO_FOLD=false) because auto-folding on every buy blanks
+  the game view. One-line flip if Mr. E wants the pop.
+
+
+## U4 - desktop HUD: L59's director-recovery test, and two open looks answered (Nov 13, 2026)
+
+### The L59 merge resolution is NOT in the worktree - it was not redone
+This run was fired with a supervisor note saying the L59 resolution was sitting unstaged in W2
+(UU in the index) and should be verified, staged and tested rather than redone. Checked first:
+`git diff --name-only --diff-filter=U` empty, no MERGE_HEAD, no conflict markers in any of the
+seven files, tracked tree clean. The resolution is gone - a later session aborted that merge
+(the 03:29 lock line says exactly that: "merge aborted, both sides intact"). So there was nothing
+to verify or stage, and the instruction was explicitly not to redo the merge. It was NOT redone:
+rebuilding a four-file semantic resolution from a prose description, unattended, is a guess.
+`hud-ui` still diverges from `origin/main` (3 vs 48) and L59's reconciliation remains OPEN.
+
+### What WAS done: L59's DONE condition, which nobody had run
+tools/_u4_shot.gd, windowed 1920x1080, grid up, director on. Each stage first DRIVES the director
+onto one of our heroes (L18: a recent chat command makes that hero the pick), CONFIRMS the pane is
+holding that body, and only then destroys it. Recovery = the shot is alive AND is no longer the
+thing we destroyed (compared by instance id, since a freed node cannot be passed to a typed param).
+
+  DIES      before=chat_8001  after=chat_8003  alive  still-on-victim=false  -> RECOVERED
+  REROLLS   before=chat_8002  after=chat_8003  alive  still-on-victim=false  -> RECOVERED
+  DESPAWNS  before=chat_8003  after=tour_0     alive  still-on-victim=false  -> RECOVERED
+
+The despawn falls through to `tour_0`, i.e. the `_fallback_shot()` path L34(a) added - exactly the
+intended behaviour. Looked at 3_after_despawns.png: the top-left pane carries a live market view,
+not a frozen frame. This tests `hud-ui` AS IT STANDS (the U1 L34 fix), not the merged tree.
+
+A FIRST ATTEMPT WAS DISCARDED and its frames deleted: it perturbed heroes the director was not
+watching, so "no change" was read as "frozen". A test that does not confirm the subject first
+proves nothing. Recorded here because the discarded run's numbers looked like two failures.
+
+### The two open looks, answered plainly
+1. DOES 18 px CHRONICLE TYPE READ ON STREAM? **Yes.** Read at 1:1 in 20261113_u3/3_chronicle_crop.png
+   and again here - crisp at 1080p. The U1 caveat is closed. Size is not the problem.
+2. DOES THE 240 px SUB-WIDTH CROWD THE LORD CARD AT 653 px? **Yes - this one is real.**
+   4_lord_card_crop.png (the box at 1:1, with the longest real sub line delve.gd sends):
+   - the card's sub TRUNCATES mid-sentence: "Slain on floor 7 by Delver1, Delver2 ..." - the stream
+     never learns who killed the lord, which is the whole point of that line;
+   - the card eats ~290 px of 652, so the Chronicle lines beside it truncate too
+     ("Delver2 the human knight, ...") - both halves lose their ends;
+   - 14 px sub against 18 px Chronicle also reads as the smaller, weaker text of the two.
+   NOT FIXED THIS RUN, deliberately: feed_hud.gd's card sizing is one of the four hunks the
+   unresolved L59 merge is contesting. Changing it now would entangle with that reconciliation.
+   The supervisor now has the measurement to decide with. Cheapest fixes, for whoever takes it:
+   drop the sub's min-width, let the sub wrap to a second line, or give the card the full box
+   width while it is up and pause the Chronicle lines behind it.
+
+### Also seen, honestly (not this run's item)
+In 3_after_despawns.png two of the four panes are still poor ambient framing - one is a bare
+roof, one is empty grass with distant sheep. L38 was built in U1/U2 and is awaiting a tick; on
+this capture the roof-filler problem is not fully gone. Worth the supervisor's eye.
+
+## U5 - desktop HUD: L59b - hud-ui reconciled with main at last (Nov 13, 2026)
+- THE MERGE IS COMMITTED AND PUSHED FIRST, before any test (merge 03bd563 on hud-ui). Phase S's ordering:
+  hud-ui had never merged main since a1f7463 (Coordination 11) and the resolution kept being lost before
+  commit. Branch went 74-behind -> 0-behind (ahead 6). `git merge origin/hud-ui` from main is now a clean
+  fast-forward, no conflicts - L59b DONE condition met.
+- Four code conflicts resolved hunk-by-hunk, all preferring the hud-ui (U1-U4, tested) side, so main's
+  non-conflicting edits to those same files were kept:
+    auto_director.gd - my L34(a) empty-best fallback (cut only when the on-screen shot is dead) + the
+      rotating _fallback_shot; main's always-reassign-best variant dropped.
+    hud_dock.gd - my CENTRE_W/STRIP box constants and centre() (all-ours here on purpose: mixing with
+      main's BOX_W/BOX_H would leave centre() referencing undefined names).
+    feed_hud.gd - my CARD_PX(20)/CARD_SUB_PX(14) card sizing over main's hardcoded 19/14.
+    spotlight.gd - my director-pane source chain, the laptop's is_instance_valid(src) guard and
+      _eye_xform(eye) step (both sat in the auto-merged region, kept), AND my market-wide else fallback.
+  PROGRESS.md kept both sides.
+- Parse clean on the merged tree: headless --import then a boot, 0 SCRIPT ERROR / 0 Parse Error from any
+  HUD file (only town.gd .tres ext_resource UID warnings - the build worker's kit assets, harmless).
+- Windowed 1920x1080 and LOOKED at (renders/cycles/20261113_u4, _u4_shot re-run on the merged tree):
+    DIES -> RECOVERED: top-left director pane cut from the dead subject to a live market view.
+    DESPAWNS -> RECOVERED: top-left pane cut to a live subject (evening market).
+    REROLLS -> NOT TESTED this run - the harness could not park the director on a level-1 town hero in
+      24 tries (acquisition timing, not a code regression; U4 got all three, and DIES+DESPAWNS exercise
+      the same recovery branch).
+- OPEN U1 CAVEAT ANSWERED by looking at the 652x130 centre box at 1:1 (4_lord_card_crop): 18 px Chronicle
+  type IS legible on stream - clean, well-spaced, not the "super huge" Mr. E rejected. The box fits ~3
+  lines at 130 px tall; L39b (taller box, same 18 px, 8-9 lines) is the right next step, not a type change.
+- L51 Satchel (built U3, now safely on the reconciled branch) verified by eye (1_satchel_crop): equipment
+  with per-item buffs + Altogether line, the viewer's inventory, and the sell counter with per-item gold
+  and "Sell the lot ... 1084 gold / !sell opens the counter". The narrowed L51 is essentially built,
+  awaiting the supervisor's look.
+- FLAG for the DESKTOP BUILD worker (NOT my file, not edited): SCRIPT ERROR "Left operand of 'is' is a
+  previously freed instance" at scripts/notables.gd:220 (Notables._unique_names, from _process:447),
+  fired once when the test force-freed a townsfolk body. An is_instance_valid() guard before the `is`
+  would fix it; it can fire in live play if a notable is freed mid-frame. It did not block recovery.
+- Only the seven HUD files + PROGRESS.md were touched in the resolution; notables.gd and every other
+  non-HUD file was read for diagnosis, never edited (COORDINATION 11.2).
 
 ## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
 - Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns

@@ -31,6 +31,14 @@ const SUB_S := 30.0
 const QUEUE_MAX := 24
 const AMB_MIN := 20.0          # L32a: an ambient shot holds 20-30 s, then rotates
 const AMB_MAX := 30.0
+## L35 (Mr. E, Nov 12): the subs lane must always be showing a SUBSCRIBER's hero. A paid
+## sub moment still owns the lane for its full purchased time - the queue below is NOT
+## touched. Only an IDLE subs lane rotates, every SUBS_ROT seconds, through the
+## subscribers seen this session, newest first.
+## Scope: Twitch sends us subscription EVENTS, not a roster of current subscribers, so the
+## list builds as subs happen rather than being known at boot. (roster.patrons persists
+## GIVERS, but that includes bit-cheerers, so it is deliberately NOT treated as subs.)
+const SUBS_ROT := 15.0
 
 var town: Node3D
 var labels_shown := true
@@ -40,6 +48,8 @@ var _panes := {}           # director / bits / subs / points / wide -> {box, vp,
 var _layout := ""
 var _amb := {}             # L32a: lane -> {node, t} - the ambient subject while the lane is idle
 var _amb_rng := RandomNumberGenerator.new()
+var _subs_seen: Array = []     # L35: uids seen in the subs lane, newest first
+var _subs_i := 0               # L35: where the idle rotation has got to
 
 ## bits -> seconds in the bits lane
 static func bits_seconds(n: int) -> float:
@@ -102,6 +112,8 @@ func put(uid: String, lane: String, seconds: float, reason: String) -> String:
 		reason = "took a look"
 	if not lanes.has(lane):
 		return ""
+	if lane == "subs":
+		_subs_note(uid)            # L35: remember them for the idle rotation
 	var L: Dictionary = lanes[lane]
 	var e := {"uid": uid, "seconds": seconds, "left": seconds, "reason": reason}
 	if (L["cur"] as Dictionary).is_empty():
@@ -138,6 +150,8 @@ func body_of(uid: String) -> Node3D:
 	return null
 
 func _process(delta: float) -> void:
+	if _suspended:
+		return                              # L51: the Satchel holds the screen
 	var real := delta / maxf(Engine.time_scale, 0.001)
 	var changed := false
 	for l in LANES:
@@ -156,6 +170,46 @@ func _process(delta: float) -> void:
 		_follow(real)
 		_cheap(real)
 
+## L35: remember a subscriber. Newest goes to the front and becomes the next face the
+## idle lane shows, which is Mr. E's "priority to the newest subscriber".
+func _subs_note(uid: String) -> void:
+	if uid == "":
+		return
+	_subs_seen.erase(uid)
+	_subs_seen.push_front(uid)
+	_subs_i = 0
+	if _subs_seen.size() > 64:
+		_subs_seen.resize(64)
+
+## L35: the idle subs lane picks a SUBSCRIBER's hero, newest first, rotating every
+## SUBS_ROT seconds. Skips anyone another pane already holds, so no subject shows twice.
+## No subscriber hero standing up right now -> the ordinary ambient pick, never blank (L32a).
+func _subs_pick() -> void:
+	var A: Dictionary = _amb["subs"]
+	var last = A.get("node")
+	var used: Array = []
+	for k in LANES:
+		var pb := paid_target(k)
+		if pb:
+			used.append(pb)
+		if k != "subs":
+			var an = (_amb[k] as Dictionary).get("node")
+			if an != null and is_instance_valid(an):
+				used.append(an)
+	var n := _subs_seen.size()
+	for i in n:
+		var uid := String(_subs_seen[(_subs_i + i) % n])
+		var b := body_of(uid)
+		if b != null and is_instance_valid(b) and b.is_inside_tree() and b.is_visible_in_tree() \
+			and not used.has(b) and (n == 1 or b != last):
+			_subs_i = (_subs_i + i + 1) % n
+			A["node"] = b
+			A["t"] = SUBS_ROT
+			if (_panes["subs"]["box"] as Control).visible:
+				_snap("subs")
+			return
+	_amb_pick("subs")
+
 ## L32a: each idle lane holds its ambient subject 20-30 s, then rotates to another
 func _amb_tick(real: float) -> void:
 	for l in LANES:
@@ -165,7 +219,99 @@ func _amb_tick(real: float) -> void:
 		A["t"] = float(A.get("t", 0.0)) - real
 		var n = A.get("node")
 		if n == null or not is_instance_valid(n) or not (n as Node3D).is_inside_tree() or float(A["t"]) <= 0.0:
-			_amb_pick(l)
+			if l == "subs":
+				_subs_pick()       # L35: a subscriber's hero, not just anyone
+			else:
+				_amb_pick(l)
+
+## L38: is this shot worth cutting to, or is it a rooftop / a wall / the inside of a stall?
+## Reuses the eye's OWN framing test (RtsCamera.frame_clear) rather than a second rule, so
+## a pane judges a composition exactly the way the main camera does: the camera must not be
+## inside geometry and the near part of the lower frame must be free of roofs and walls.
+func _shot_ok(t: Node3D, p: Dictionary) -> bool:
+	var eye := _eye()
+	if eye == null:
+		return true                      # no eye to ask: do not block the pick
+	if not is_instance_valid(t) or not t.is_inside_tree():
+		return false
+	var at := t.global_position + Vector3(0, 1.0, 0)
+	# Test the position the camera will ACTUALLY take. _offset_lane can swing a lane 90 /
+	# -90 / 180 degrees round a crowded subject (L22), so testing the plain behind-offset
+	# judged a shot the pane was never going to use - which is how a roof-filling frame got
+	# through in the busiest spot on the board. It records crowd/cut state, so snapshot those
+	# and put them back: a test must not change what the pane does next.
+	var had_crowd = p.get("crowd")
+	var had_cut = p.get("cut")
+	var pos := at + _offset_lane(String(p.get("key", "")), t)
+	if had_crowd == null:
+		p.erase("crowd")
+	else:
+		p["crowd"] = had_crowd
+	if had_cut == null:
+		p.erase("cut")
+	else:
+		p["cut"] = had_cut
+	var sz: Vector2 = (p["box"] as Control).size
+	var aspect := sz.x / maxf(1.0, sz.y)
+	# L38b: frame_clear knows the town's HOUSES only - the valley's props (carts, barrels,
+	# beams, fences) are invisible to it, and a cart beam right at the lens was the next
+	# failure after the density pass. A physics ray from where the camera would sit to the
+	# subject's head catches anything solid that the house model misses.
+	var w := town.get_world_3d()
+	if w != null and w.direct_space_state != null:
+		var q := PhysicsRayQueryParameters3D.create(pos, at)
+		q.collide_with_areas = false
+		var hit := w.direct_space_state.intersect_ray(q)
+		if not hit.is_empty():
+			var owns := false
+			var n: Node = hit.get("collider") as Node
+			while n != null:
+				if n == t:
+					owns = true
+					break
+				n = n.get_parent()
+			if not owns:
+				_amb_blocked += 1
+				return false
+	eye._clear_near(at, (pos - at).length())
+	return eye.frame_clear(at, pos, (p["cam"] as Camera3D).fov, aspect)
+
+## L38: draw a weighted candidate whose shot is actually legible. The old code drew once
+## and took whatever came out, which is why so many panes opened on bare grass or a blank
+## wall. Now a draw is TESTED; a badly framed candidate is dropped and another is drawn.
+## If every try fails we still return the first draw rather than go blank (L32a).
+const FRAME_TRIES := 6
+## L38: how near another subject must be to count as company (m)
+const AMB_NEAR := 14.0
+## L38: how far a lane's subject must stand from what another pane is showing (m)
+const AMB_APART := 12.0
+## L38b: how many candidate shots the ray gate has thrown out (read by the look script)
+static var _amb_blocked := 0
+
+func _draw_framed(pool: Array, total: float, l: String) -> Node3D:
+	var left := pool.duplicate()
+	var run := total
+	var first: Node3D = null
+	for _try in FRAME_TRIES:
+		if left.is_empty():
+			break
+		var r := _amb_rng.randf() * run
+		var hit := -1
+		for i in left.size():
+			r -= float(left[i][0])
+			if r <= 0.0:
+				hit = i
+				break
+		if hit < 0:
+			hit = left.size() - 1
+		var n: Node3D = left[hit][1]
+		if first == null:
+			first = n
+		if _shot_ok(n, _panes[l]):
+			return n
+		run -= float(left[hit][0])
+		left.remove_at(hit)
+	return first
 
 ## a new ambient subject for the lane: something happening first (a fight below, a catch
 ## being landed), then viewers' heroes, townsfolk at large, the animals - never a body
@@ -213,24 +359,53 @@ func _amb_pick(l: String) -> void:
 	if am is Array:
 		for a2 in am:
 			if a2 is Node3D and is_instance_valid(a2) and (a2 as Node3D).is_visible_in_tree():
-				c.append([1.0, a2])
-	var total := 0.0
+				c.append([0.35, a2])   # L38: livestock is scenery, not a story - last resort
+	# L38: skip what another pane already shows - and anything standing within AMB_APART of
+	# it. Excluding only the exact NODE put two lanes on the same stretch of river in the
+	# first pass; the viewer reads that as one shot shown twice.
 	var pool: Array = []
-	for e in c:
-		if used.has(e[1]) or e[1] == last:
-			continue
-		pool.append(e)
-		total += float(e[0])
+	for pass_i in 2:
+		for e in c:
+			if used.has(e[1]) or e[1] == last:
+				continue
+			if pass_i == 0:
+				var ep: Vector3 = (e[1] as Node3D).global_position
+				var crowded := false
+				for u in used:
+					if is_instance_valid(u) and ep.distance_to((u as Node3D).global_position) < AMB_APART:
+						crowded = true
+						break
+				if crowded:
+					continue
+			pool.append(e)
+		if not pool.is_empty():
+			break                    # second pass only if the spacing rule left nothing
+	# L38: prefer somewhere something is HAPPENING. The old weighting rated a lone sheep in
+	# an empty field the same as a busy market corner, which is why the recordings were full
+	# of bare grass, open water and a blank verge: the subject WAS framed, there was just
+	# nothing around it to read. Each candidate's weight is now multiplied by how many OTHER
+	# candidates stand within AMB_NEAR of it, so crowds, a working dock and a party below
+	# outrank a solitary animal in a paddock.
+	# Company is counted from PEOPLE only (weight >= 1.5: townsfolk, heroes, delvers, a catch
+	# being landed) - counting every body made a herd of cows or a raft of ducks the densest
+	# thing in the valley, which is exactly the bare-field and open-water shots in the
+	# recordings. Densities are taken from the BASE weights so the pass cannot feed itself.
+	var total := 0.0
+	var base: Array = []
+	for e in pool:
+		base.append(float(e[0]))
+	for i in pool.size():
+		var here: Vector3 = (pool[i][1] as Node3D).global_position
+		var near := 0
+		for j in pool.size():
+			if j != i and base[j] >= 1.5 \
+				and here.distance_to((pool[j][1] as Node3D).global_position) < AMB_NEAR:
+				near += 1
+		pool[i][0] = base[i] * (1.0 + 0.7 * minf(float(near), 5.0))
+		total += float(pool[i][0])
 	var pick: Node3D = null
 	if not pool.is_empty():
-		var r := _amb_rng.randf() * total
-		for e in pool:
-			r -= float(e[0])
-			if r <= 0.0:
-				pick = e[1]
-				break
-		if pick == null:
-			pick = pool[pool.size() - 1][1]
+		pick = _draw_framed(pool, total, l)   # L38: a draw whose shot is actually legible
 	elif last != null and is_instance_valid(last) and (last as Node3D).is_inside_tree():
 		pick = last                      # nobody else about: keep the shot rather than go blank
 	A["node"] = pick
@@ -358,7 +533,7 @@ func _make_pane(k: String) -> Dictionary:
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bar.visible = k in LANES
 	box.add_child(bar)
-	return {"box": box, "vp": vp, "cam": cam, "frame": frame, "label": lb, "bar": bar, "svc": svc}
+	return {"box": box, "vp": vp, "cam": cam, "frame": frame, "label": lb, "bar": bar, "svc": svc, "key": k}
 
 func set_labels(v: bool) -> void:
 	labels_shown = v
@@ -367,6 +542,8 @@ func set_labels(v: bool) -> void:
 ## L32a: the 2x2 is the resting state - the layout is ALWAYS the grid. The key still
 ## names the busy lanes, so a lane turning paid or ambient re-lays (frames, labels, cuts).
 func _relayout(force := false) -> void:
+	if _suspended:
+		return                              # L51: folded - do not re-grid under the Satchel
 	var b := busy()
 	var lay := "grid_" + "_".join(b)
 	# L21: the slim bottom chrome (clock / chat) is no pane's. L39: the two pane rows MEET at
@@ -412,10 +589,33 @@ func _relayout(force := false) -> void:
 ## ---------------------------------------------------------------- L21: the panes' own rules
 
 static var mode := "off"           # "off" / "pair" / "grid" (HeroBody's name layout reads it)
+## L51: a panel (the Satchel) can fold the whole grid for a deliberate full-screen
+## look, then restore it. While suspended the panes stop rendering and the eye's own
+## camera carries the view, so a region-"none" panel (Satchel, Guild Roll) can show.
+var _suspended := false
 var _rects := {}                    # pane -> Rect2 in 0..1 of the screen
 
 func mode_now() -> String:
+	if _suspended:
+		return "off"                                   # L51: folded for a full-screen panel
 	return "off" if _layout == "" else "grid"      # L32a: once set up, always the grid
+
+## L51: fold the grid away (panes stop, the eye draws full screen) or bring it back.
+func suspend(on: bool) -> void:
+	if _suspended == on:
+		return
+	_suspended = on
+	var root_vp := get_viewport()
+	if on:
+		for k in _panes:
+			var pp: Dictionary = _panes[k]
+			(pp["box"] as Control).visible = false
+			(pp["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_DISABLED
+		if root_vp:
+			root_vp.disable_3d = false      # the eye's own camera carries the full-screen view
+		mode = "off"
+	elif _layout != "":
+		_relayout(true)                     # back to the grid exactly as it was
 
 ## a pane's rect on screen in px (empty when it is not up)
 func pane_rect(k: String) -> Rect2:
@@ -570,10 +770,14 @@ func _eye() -> RtsCamera:
 				break
 	return _eye_n
 
-## a little higher and closer below ground, where walls crowd the view
+## a little higher and closer below ground, where walls crowd the view.
+## L38 (supervisor review of 13 recordings): above ground the eye sat too CLOSE and too
+## LOW - hence backs of heads, clipped bodies and a frame full of roof or paving. Pulled
+## back and raised, so a subject reads whole with some ground around it. Below stays
+## tighter (walls crowd the view down there) but is lifted a little too.
 func _offset_for(t: Node3D) -> Vector3:
 	var deep := t.global_position.y < -20.0 or _in_delve(t)
-	return Vector3(0, 9.0, 7.0) if deep else Vector3(0, 6.5, 9.5)
+	return Vector3(0, 9.5, 8.5) if deep else Vector3(0, 10.0, 11.5)
 
 ## ---- L22: two spotlit heroes standing together made two panes of one picture (every lane
 ## sat at the same offset behind its hero). When another pane's subject - another lane's hero,
@@ -640,10 +844,13 @@ func _follow(real: float) -> void:
 	var main := get_viewport().get_camera_3d() if get_viewport() else null
 	var d: Dictionary = _panes["director"]
 	if (d["box"] as Control).visible:
-		# L34: the main viewport's camera can be null (L32a keeps disable_3d on, or the eye's
-		# subject rerolled mid-frame). The old code just skipped the copy, so the pane SILENTLY
-		# held its last transform - the frozen/black top-left pane Mr. E saw. Never hold stale:
-		# drive the pane from the eye's own camera, and failing that from the eye's numbers.
+		# L34: this used to be `if main and ...`. When get_camera_3d() returned null - which
+		# happens for a frame or more when the followed subject dies, rerolls or the eye is
+		# re-parented, and whenever L32a keeps disable_3d on - the block was skipped and this
+		# pane silently kept its LAST transform. That is the frozen top-left pane. Now there is
+		# always a source: the main camera, else the eye's own Camera3D, else the eye's numbers,
+		# else a market wide. Never a stale frame. (A freed camera is non-null, so validity is
+		# checked as well as null - that case came from the laptop's own L34 and is kept.)
 		var dc: Camera3D = d["cam"]
 		var src: Camera3D = main
 		var eye := _eye()
@@ -655,6 +862,11 @@ func _follow(real: float) -> void:
 			dc.far = src.far
 		elif eye != null:
 			dc.global_transform = _eye_xform(eye)
+		else:
+			var mpos = town.get("_market_pos") if town else null
+			var mat: Vector3 = mpos if mpos != null else Vector3.ZERO
+			dc.global_position = mat + Vector3(0, 70, 85)
+			dc.look_at(mat, Vector3.UP)
 	for l in LANES:
 		var p: Dictionary = _panes[l]
 		_lane_tag(l, real)

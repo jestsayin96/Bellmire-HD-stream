@@ -574,3 +574,73 @@ func _people() -> void:
             lord.position = far if fd >= 0.0 else _out_of_props(Vector3.ZERO)
             root.add_child(lord)
             lord.call_deferred("entrance")
+    _set_pieces()
+
+## ---------------------------------------------------------------- L29c: set pieces
+## A floor is more than a room of monsters. One set piece per non-boss floor, chosen
+## from the kinds below, placed on an OPEN interior cell far from the entry so the
+## party has to WALK TO it: that is what makes it a set piece rather than another
+## spawn. The resolver (delve.gd _setpieces_tick) fires when a hero gets close.
+##
+## ROUND 1: AMBUSH only. A patch of air (no visible monsters) that, once a hero
+## crosses TRIGGER_R, pulls a short pack of theme-matched creatures out of the dark
+## RIGHT WHERE THE PARTY STANDS - not "another couple of foes on the far wall", but
+## a thing that reads as a trap you walked into. Future rounds add PRISONER (free a
+## captive, +gold, feed line) and SHRINE (touch; coin-flip boon/curse).
+##
+## Boss floors keep the lord's drama. Floor 1 is clean. Everything else has roughly
+## a two-in-three chance; the count is per floor so a single floor never gets two.
+const SETPIECE_TRIGGER_R := 5.0
+const SETPIECE_MIN_FROM_ENTRY := 10.0
+
+func _set_pieces() -> void:
+    info["set_pieces"] = []
+    if bool(info.get("boss", false)) or floor_no < 2:
+        return
+    if _rng.randf() > 0.66:
+        return
+    var cells: Dictionary = info["cells"]
+    var entry: Vector3 = info["entry"]
+    var exit_p: Vector3 = info["exit"]
+    var keep: Dictionary = info.get("keep_clear", {})
+    # Prefer a cell on the party's actual route (keep_clear - the BFS path from
+    # near-entry to near-exit plus every corridor) so the ambush trips. Fall
+    # back to any cell near one of those when the route is small. An ambush on
+    # an unreachable spur never fires.
+    var on_route: Array = []
+    var fallback: Array = []
+    for c in cells:
+        var cv: Vector2i = c
+        var cp := _cell_pos(cv)
+        if cp.distance_to(entry) < SETPIECE_MIN_FROM_ENTRY:
+            continue
+        if cp.distance_to(exit_p) < SETPIECE_MIN_FROM_ENTRY * 0.5:
+            continue
+        if not _clear_of_props(cp, 0.6):
+            continue
+        if keep.has(cv):
+            on_route.append(cp)
+        else:
+            # fallback: one step off the route (an alcove next to the walk-through)
+            for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+                if keep.has(cv + d):
+                    fallback.append(cp)
+                    break
+    var cand: Array = on_route if not on_route.is_empty() else fallback
+    if cand.is_empty():
+        return
+    var at: Vector3 = cand[_rng.randi() % cand.size()]
+    # ROUND 1: ambush is the only kind. The theme picks the creatures so a crypt
+    # ambush is skeletons, not goblins.
+    var theme := String(info.get("theme", ""))
+    var pack: Array = []
+    var want := 2 + _rng.randi() % 2        # 2 or 3 creatures
+    for i in range(want):
+        pack.append(Bestiary.pick(floor_no, theme))
+    (info["set_pieces"] as Array).append({
+        "kind": "ambush",
+        "pos": at,
+        "r": SETPIECE_TRIGGER_R,
+        "resolved": false,
+        "pack": pack,
+    })

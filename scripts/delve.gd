@@ -183,6 +183,82 @@ func _next_floor() -> void:
 	_light_check()
 	state = "fight"
 
+## ---------------------------------------------------------------- L29c: set pieces
+## A floor's AMBUSH goes off here: as the party walks past a trigger point one short
+## pack of theme-matched creatures peels out of the dark, named in the Chronicle so a
+## viewer who looks up from chat knows what just dropped on them. One resolution per
+## set piece per floor, and the ambush's own creatures are counted into the floor's
+## foes so every other system (the fight loop, the lord's roar, boss_bar) picks them
+## up for free. The data is laid by dungeon_hd._set_pieces; this is the ONLY code
+## that resolves it, so the test can count resolutions straight off setpieces_fired.
+static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd)
+const _AMBUSH_LINE := [
+	"Shadows peel off the walls - an ambush! %s surges in.",
+	"A grate shifts, and %s is already upon them.",
+	"%s was waiting in the dark, and now it isn't.",
+]
+
+func _setpieces_tick() -> void:
+	if dun == null or not dun.info.has("set_pieces"):
+		return
+	var sps: Array = dun.info["set_pieces"]
+	if sps.is_empty():
+		return
+	for sp_v in sps:
+		var sp: Dictionary = sp_v
+		if bool(sp.get("resolved", false)):
+			continue
+		var at: Vector3 = (sp["pos"] as Vector3) + dun.global_position
+		var r: float = float(sp.get("r", 3.0))
+		var triggered := false
+		for m in _alive():
+			if _flat((m["body"] as Node3D).global_position, at) <= r:
+				triggered = true
+				break
+		if not triggered:
+			continue
+		sp["resolved"] = true
+		var kind := String(sp.get("kind", ""))
+		Delve.setpieces_fired[kind] = int(Delve.setpieces_fired.get(kind, 0)) + 1
+		match kind:
+			"ambush":
+				_setpiece_ambush(sp, at)
+
+func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
+	var names: Array = []
+	var pack: Array = sp.get("pack", [])
+	var i := 0
+	for d_v in pack:
+		var d: Dictionary = d_v
+		var m := Monster.new()
+		m.def = d
+		m.state = Monster.S.PATROL
+		m.roam = 2.5
+		var off := Vector3(cos(float(i) * 2.1), 0.0, sin(float(i) * 2.1)) * 1.3 if i > 0 else Vector3.ZERO
+		m.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
+		dun.add_child(m)
+		(dun.monsters as Array).append(m)
+		# scale to this floor the same way _next_floor does for ordinary spawns
+		m.max_hp = (14.0 + float(floor_no) * 6.0) * float(m.def.get("hp", 1.0))
+		m.hp = m.max_hp
+		names.append(String(d.get("name", "something")))
+		i += 1
+	# "2 ghouls and a skeleton" rather than "ghoul, ghoul, skeleton"
+	var counts := {}
+	for nm in names:
+		counts[nm] = int(counts.get(nm, 0)) + 1
+	var parts: Array = []
+	for k in counts:
+		var ks := String(k)
+		var n: int = counts[k]
+		parts.append("%d %s" % [n, ks if n == 1 or ks.ends_with("s") else ks + "s"])
+	var who := ", ".join(parts) if not parts.is_empty() else "something"
+	_say(_AMBUSH_LINE[_rng.randi() % _AMBUSH_LINE.size()] % who)
+	# an ambush is a roar: Monster.roar would also fire when the pack enters
+	# its FIGHT state, but a single tell lands harder than three in a row
+	if not names.is_empty():
+		Sfx.play("roar", -4.0)
+
 ## ---- the wizard's lamp-stand (old expedition._check_lamp / _light_check).
 ## Dead centre of every floor (FloorGen puts it there). A hero who reaches it
 ## sets it burning: the floor is lit even with an empty satchel. It never
@@ -671,6 +747,7 @@ func _process(delta: float) -> void:
 		"search":
 			# L49: the floor is clear - someone is going through the chests before they move on
 			_traps_tick()
+			_setpieces_tick()           # L29c: a seeker walking to a chest can trip an ambush
 			_search_tick(delta)
 		"descend":
 			# L46: traps were only ever checked inside _fight(), so the whole walk to the stairs
@@ -678,6 +755,7 @@ func _process(delta: float) -> void:
 			# traps were walked within reach of, but only 2 were ever MET. They are live now
 			# wherever the party is moving.
 			_traps_tick()
+			_setpieces_tick()           # L29c: ambushes trigger on the walk too, not just mid-fight
 			var ex: Vector3 = dun.info["exit"] + dun.global_position
 			var all_there := true
 			for m in _alive():
@@ -833,6 +911,7 @@ func _losing(alive: Array, foes: Array) -> bool:
 func _fight(delta: float) -> void:
 	_check_lamp()
 	_traps_tick()
+	_setpieces_tick()                       # L29c: AMBUSH triggers as the party walks past
 	_blows_tick(delta)
 	var foes := _foes()
 	_bars(foes)

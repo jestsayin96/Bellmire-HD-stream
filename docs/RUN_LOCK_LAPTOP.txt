@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 23:35 - L39 Chronicle centre box
+IDLE 2026-11-12 23:55 - L39 DONE and pushed (L-cycle 120); next L38. OPEN: _l32_test's base phase measures 1.0 FPS since D24's TAA/MSAA merged - its relative FPS gate was vacuous, now guarded and failing loudly; needs an ID + owner. L27b still WIP (0f3986c), owes _l25_test + windowed _l27b_shot.

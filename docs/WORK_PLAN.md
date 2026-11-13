@@ -684,7 +684,7 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       BUILD (do not reassign the files; the HUD worker correctly refused to touch them).
       DONE: a 1080p capture with 0 overlaps between any pane, the party frames and the chat column.
 
-- [ ] D42. FOOTSTEPS AND ANIMAL VOICES HAVE NO CALLER - this is the silent town, exactly located.
+- [x] D42. FOOTSTEPS AND ANIMAL VOICES HAVE NO CALLER - this is the silent town, exactly located.
       sfx.gd DEFINES footstep_grass/stone/water/wood and dog_whine, wolf_howl/growl, eagle_cry,
       lion_roar, orc_roar, troll_roar, zombie_moan - and NOTHING IN THE GAME EVER PLAYS THEM. 40 of
       94 kinds never fired in a 7-minute 8x soak. Footfalls are the most frequent discrete sound a
@@ -692,6 +692,14 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       from the animals that own them. horse_neigh/whinny is called in daylight.gd but fired 0 -
       find out why. This supersedes the open question in D29; D29's measurement was right.
       DONE: a re-recorded town clip whose audio shows clear discrete events above the ambience bed.
+      -> DONE D-cycle D3 (Nov 13): footsteps given a caller in Townsfolk._gait_step (one per 0.62*size stride of
+      real travel, lod==0 only, surface from new town.surface_at - bridge=wood, river=water, roads/market=stone, else
+      grass; Sfx GAP floor 0.05-0.08 s so a crowd patters). Heroes inherit it (HeroBody extends Townsfolk). Animal._voice
+      gives each beast its own species call now and then (dog/cat/horse/foal/pig), raid-gated, 3D-attenuated, a frightened
+      dog whines; this is why horse_neigh fired 0 - daylight.gd's ambient sampler keyed off the roaming director and the
+      penned animals never triggered it, so the animals now voice themselves. tools/_d42_test.gd 60 s 8x soak: footsteps
+      1642 (grass 745/stone 790/wood 59/water 48), animal voices 85 (horse_neigh 20 + whinny 4, cat 28, dog 15+whine 6,
+      boar 12) -> D42_TEST OK. Gate: parse 0, _offfloor 0/1617, TWITCH_PARSE OK, _townwalk in_solid 0.006%, _delve 0 err.
 
 - [ ] D30. (REFRAMED by the census - the premise was wrong.) Spells are NOT monotonous: 9 distinct
       spells fire with a good spread. The problem is the viewer cannot TELL them apart. Make each

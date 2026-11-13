@@ -86,6 +86,9 @@ var _lod_acc := 0.0
 ## body walking faces the way it goes, so it never walks backwards in a walk
 var _gp := Vector3.INF
 var _vs := 0.0
+## D42: footstep sounds - one step per stride of real travel, surface-aware.
+static var foot_sfx := true
+var _stride := 0.0
 static var face_fix := true
 
 func _process(delta: float) -> void:
@@ -116,6 +119,19 @@ func _gait_step(delta: float) -> void:
             and String(_anim.current_animation) == Rig.idle_of(_anim):
         Rig.play(_anim, "Walking_A")
     Rig.drive(_anim, _vs, size_k, delta)
+    # D42: FOOTFALLS. The town read as silent because nothing ever played the
+    # footstep sounds Sfx defines. A step per stride of real travel, near the
+    # camera only (far steps are inaudible and only spend voices), the surface
+    # taken from the ground under the foot. A town-wide gap in Sfx (0.05 s) keeps
+    # a crowd a patter rather than a machine-gun.
+    if foot_sfx and lod == 0 and town and town.has_method("surface_at"):
+        if _vs > 0.5 * size_k:
+            _stride += _vs * delta
+            if _stride >= 0.62 * size_k:
+                _stride = 0.0
+                Sfx.at("footstep_" + String(town.call("surface_at", global_position)), global_position, -13.0)
+        else:
+            _stride = 0.0
     if face_fix and _vs > 0.35 and vel.length() > 0.25 and Rig.is_gait(String(_anim.current_animation)):
         # (D17d: from the yaw on screen, not one steering just snapped to)
         var from := _face if _face_ok else (_yaw_shown if Rig.smooth and _yaw_shown != INF and not jump else rotation.y)

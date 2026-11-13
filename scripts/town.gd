@@ -3483,6 +3483,21 @@ func road_dist(p: Vector3) -> float:
             best = d
     return best
 
+## D42: what a foot lands on here, for footstep sounds (Townsfolk._gait_step).
+## The river bridge is wood, the open water its own splash, the cobbled streets
+## and the market paving stone, everything else grass. Cheap - once a stride.
+func surface_at(p: Vector3) -> String:
+    var rd := river_dist(p.x, p.z)
+    if absf(p.z - _bridge_z) < RIVER_W + 2.0 and absf(p.x) < 6.0 and rd < RIVER_W + RIVER_BANK:
+        return "wood"
+    if rd < RIVER_W:
+        return "water"
+    if road_dist(p) < 0.4:
+        return "stone"
+    if _market_pos != Vector3.ZERO and Vector2(p.x - _market_pos.x, p.z - _market_pos.z).length() < 20.0:
+        return "stone"
+    return "grass"
+
 func _plot_r(plot: Dictionary) -> float:
     var sh: String = String(plot.get("shape", "a"))
     var dep: float = float((HOUSES.get(sh, {"depth": 10.0}) as Dictionary)["depth"])

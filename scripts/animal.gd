@@ -46,6 +46,16 @@ var _run := ""
 var _graze: Graze = null
 var _flee_t := 0.0
 var _scan_t := 0.0
+## D42: the beasts have voices. Sfx defines dog/cat/horse/pig calls but nothing
+## ever played them - the ambient sampler in daylight.gd keys off the roaming
+## director camera and the animals are penned, so the census read horse_neigh
+## (and the dog voices) at zero. Each animal gives its own species call now and
+## then: raid-gated, 3D-attenuated so far ones fade, never the whole yard at once.
+const VOICE := {"Pug": "dog_bark", "Corgi": "dog_bark", "Cat": "cat_meow",
+    "Horse": "horse_neigh", "Foal": "horse_whinny", "Pig": "boar_grunt"}
+static var voice_on := true
+static var voices := {}          # kind sounded -> count (tests)
+var _voice_t := -1.0
 
 class Graze extends SkeletonModifier3D:
     var neck := -1
@@ -187,6 +197,8 @@ func _physics_process(delta: float) -> void:
         _anim(delta)
     if town == null:
         return
+    if voice_on:
+        _voice(delta)
     # D16c: a wagon rolling up shoves a grazing beast aside too
     if float_y == INF and town.has_method("off_wagons"):
         var wq: Vector3 = town.call("off_wagons", global_position, self)
@@ -288,6 +300,28 @@ func _flee_scan(delta: float) -> void:
     if _graze != null:
         _graze.target = 0.0
     flees += 1
+
+## D42: this animal's own voice, now and then. Far ones are emitted too but fade
+## on Sfx's 3D attenuation, so whatever the camera is near is what is heard.
+func _voice(delta: float) -> void:
+    var vk := String(VOICE.get(kind, ""))
+    if vk == "":
+        return
+    if _voice_t < 0.0:
+        _voice_t = _rng.randf_range(3.0, 16.0)        # stagger the first calls
+    _voice_t -= delta / maxf(Engine.time_scale, 0.001)
+    if _voice_t > 0.0:
+        return
+    _voice_t = _rng.randf_range(7.0, 16.0)
+    var r = town.get("raids")
+    if r and not (r.raiders as Array).is_empty():
+        return                                         # quiet under a raid
+    if _flee_t > 0.0 and vk == "dog_bark":
+        vk = "dog_whine"                               # a frightened dog whines
+    elif vk == "dog_bark" and _rng.randf() < 0.25:
+        vk = "dog_whine"
+    voices[vk] = int(voices.get(vk, 0)) + 1
+    Sfx.at(vk, global_position + Vector3(0, 0.5, 0), -11.0)
 
 ## ------------------------------------------------ hand-built hen and cat
 func _m(c: Color) -> StandardMaterial3D:

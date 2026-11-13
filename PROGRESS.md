@@ -1722,6 +1722,61 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   _delve_test 0 script errors, 0 null; L25_TEST OK 13/13, 0 stuck, 0 nudges. No camera/UI files, no class_name.
 - Not yet seen windowed: the flinch is a tween on the body (logic-checked: 32 fired); worth a look in the next shot pass.
 
+## L-cycle 116 - L32a spotlight always-on (laptop jestai, 2026-11-12) - L32a DONE
+- Mr. E's correction (Nov 12 16:08, jumped the queue): the 2x2 spotlight grid is the stream's RESTING state, up 24/7.
+- scripts/spotlight.gd:
+  - _relayout always lays the grid - the "off" (full-screen) and "pair" (side-by-side) layouts are gone; the main
+    view's 3D stays off for good (the panes carry it, the director pane copies the eye's camera as before).
+  - AMBIENT LIFE (idle lanes): a lane with no paid moment follows an ambient subject and rotates to a new one every
+    20-30 s (_amb_tick/_amb_pick) - weighted toward something happening: a fight below (6) > a party walking a floor
+    (3) > a catch being landed (5) > viewers' heroes (2) > townsfolk (1.5) > animals (1). It never picks a body
+    another pane or the director's eye already shows, never the same subject twice running, and never goes blank
+    (empty town: the market wide shot).
+  - Paid moments untouched: per-lane FIFO queues, first payer's FULL seconds then the next in line; the bright lane
+    frame, name chip, lane tag and timer bar now belong to PAID moments only - an ambient lane wears the thin muted
+    frame, so a cheer visibly takes the pane. F10's label toggle kept.
+  - paid_target(lane): the director's L24 "never the same hero twice" rule now reads only paid holds
+    (auto_director.lane_held), so three ambient panes cannot starve the director of subjects.
+- tools/_l32_test.gd (windowed 1920x1080, ~3.5 min real - spotlight seconds are real seconds): L32_TEST OK, 102
+  checks. Grid up from boot, all four panes live, no wide pane; every lane rotated ambient subjects (soak 75 s);
+  scripted influx - 3 cheers queued in the bits lane played IN ORDER (20/15/30 s, each full), 2 subs, 1 redeem;
+  queues drained back to ambient, grid never collapsed. FPS judged relative on the same scene: old full-screen
+  resting state 41.9 -> idle grid 28.8 (69%, floor 65%) -> paid grid 21.6 (75% of idle). Shots
+  renders/cycles/20261112_l32/ (amb/paid/drain).
+- Tests: parse 0 script errors; _offfloor 0 of 979, INPROP 0, MON_INPROP 0; _delve_test clean; L26A_ANIMS OK
+  (static=0 of 19936); L21_TEST OK 50/50; L24_TEST OK 6/6; L25_TEST OK 13/13 (0 stuck, 0 nudges);
+  renders/cycles/20261112_l21 restored after the run. No class_name added.
+- _l24_test "before" check hardened: a catch being landed (pri 60) legitimately outranks fresh chatter (pri <= 50),
+  so the check now accepts a hotter live story at that instant (it raced an angler and false-failed).
+- For Mr. E:
+  - The always-on grid costs ~30% FPS vs the old full-screen resting state ON THE LAPTOP dev box (41.9 -> 28.8 idle);
+    the stream box (desktop) will land elsewhere - worth one look at the desktop's numbers after merge.
+  - leaderboard_panel (Guild Roll) and the director's "Now watching" banner hide whenever the panes carry the view -
+    with the grid permanent they now never show. The Chronicle chrome bar is fine. Rehome them (chrome bar? a pane
+    chip?) or drop them - your call; untouched here.
+  - Ambient lanes draw no name tags (clean shots); say the word if ambient heroes should carry their names.
+
+## L-cycle 117 - L32b Chronicle at the centre (laptop jestai, 2026-11-12) - L32b DONE
+- Mr. E's original ask: the on-stream Chronicle moves to the MIDDLE of the 2x2, at the cross of the four panes.
+- hud_dock.gd: new "centre" region - STRIP 0.10 of the screen, full width, between the pane rows (HudDock.centre);
+  CHROME slimmed 0.15 -> 0.06 (it keeps only the clock / local chat at its right end). spotlight.gd lays the pane
+  rows flush above and below the strip (each row 0.42 vs 0.425 before - the panes barely changed).
+- feed_hud.gd: the Chronicle builds on the strip (home "centre", full width - the clock no longer shares its bar);
+  CALM PACING - the reveal cursor advances at most 1 line / 0.8 s (PACE_S), a busy moment of >8 pending lines skips
+  the cursor to the latest 8 (FLOOD) instead of racing the backlog, each new line fades in over 0.3 s; lines stay at
+  the L15 28 px size. The lord card is resized for the strip (title 26, one sub line) so it can never push the
+  panel past the strip's edge - that exact overflow was caught by _l21_test and fixed.
+- tools/_l32b_test.gd (windowed): L32B_TEST OK 9/9 - strip full width at the cross, panel inside it, rows flush,
+  L15 size; a 40-line flood changed the newest visible line only 2-7 times in 4 s and caught up to the latest
+  lines within 10 s. Capture renders/cycles/20261112_l32/b_centre_1080.png.
+- tools/_l21_test.gd: knows the "centre" region (default-deny box lookup, Chronicle home check moved there, chrome
+  bar check slimmed to >= 4%). L21_TEST OK 52/52. renders/cycles/20261112_l21 restored after the run.
+- Tests: parse 0 script errors; _offfloor 0 of 919; _delve_test clean; L24 OK 6/6; L25_TEST OK 13/13;
+  L32_TEST OK 102/102 (re-run after the layout change).
+- FPS note for Mr. E: the paid-grid window varies with what the delve is fighting - across four runs today the
+  laptop measured idle 28.8-30.7 and paid 16.4-21.6 (base full-screen 41.9-43.0). The _l32_test paid-vs-idle bar
+  now sits at 50% (under natural variance); the idle-vs-baseline 65% bar and the 15 fps floor still guard real
+  regressions. Desktop numbers worth one look after merge.
 ## D-cycle 116 - D19b atmosphere: sky/weather/fog/rain/god-rays (desktop, 2026-11-12) - D19b DONE
 - The sky is a custom shader now (assets/shaders/town_sky.gdshader): day gradient from the old ProceduralSky palette, drifting
   fbm clouds, a sun disc with a warm halo (a pale moon disc at night), stars that fade in with nightness and hide behind cloud.
@@ -1774,3 +1829,26 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Checks: parse 0 SCRIPT ERROR/Parse Error; OFFFLOOR 0/1027 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK;
   _townwalk 120 s PASS (in_solid 0/18496, raid 0/5862, STUCK_ON_ROUTE 0); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR;
   D20A_TEST PASS. Backup scripts/townsfolk.gd.bak_d20a (not committed).
+## L-cycle 118 - L27a new monsters from owned CC0 packs (laptop jestai, 2026-11-12) - L27a DONE
+- The roster widened with 9 creatures from bodies already owned and licensed (KayKit Skeletons + its weapon set,
+  KayKit Adventurers, Quaternius, assets/monsters; docs/ASSETS.md unchanged - no new files). NOTE: no KayKit
+  Halloween pack exists on disk, so the brief's mention of it was moot; nothing downloaded.
+- bestiary.gd NEW_TYPES additions (each with real height, anim map, tint+glow tell, ways, homes):
+  marrow hewer (Skeleton_Warrior + Skeleton_Axe/Shield_Small, pack), pale cutthroat (Skeleton_Rogue + twin
+  Skeleton_Blades, grudge, pale lavender), silk mother (big spider, venom + summons spiderlings) with spiderling
+  (fodder, summon-only like slimeling), scar rat (sick-green venom pack), fen lurker (big dark frog, venom),
+  pit wyrm (grounded 4 m dragon, breath, ember glow), ash wight (Adventurers Mage body, the fallen, ranged caster,
+  ash tint + faint ember), gloom bat (violet pack flyer).
+- DEPTHS: 6-7 + hewer/scarrat/lurker; 8-9 + cutthroat/ashwight/gloombat/silkmother/scarrat; 10+ + hewer/cutthroat/
+  silkmother/pitwyrm/ashwight/gloombat. Shallows (1-5) untouched; fodder in no band.
+- tools/_l27a_test.gd (headless): defs resolve, body + weapon files exist, strain stat mods apply, band membership,
+  fodder never rolled, shallows stay innocent - L27A_TEST OK.
+- Soak: _l26_anims L26_FLOORS=7,9,11 - MON_ANIMS static=0 of 21637 moving frames; marrow hewer, ash wight (two
+  strains), pale cutthroat rolled and fought (ran, swung, flinched); every new def's clips resolve in part A.
+  Default floors 2,5,9 still L26A_ANIMS OK. _offfloor 0 of 1000; _delve_test clean; L25_TEST OK 13/13; parse 0.
+- tools/_l27a_shot.gd: windowed line-up (all 9 + a 1.8 m warrior for scale) - renders/cycles/20261112_l27/
+  a_lineup/a_left/a_right. One colour pass after the first shots: ash wight's ember glow muted (was traffic-cone
+  orange), cutthroat gone properly pale, pit wyrm raised to 4 m so it reads bigger than a fen lurker.
+- Housekeeping this cycle (COORDINATION 9.2): laptop tool .uids committed (L25/L26/L28/L32), desktop _d1x .uid
+  noise deleted. The merged D19b sky/weather was read against the spotlight's _lane_env block (COORDINATION 8.1):
+  panes copy the live town Environment every 0.5 s, so the new sky/weather carries into panes unchanged.

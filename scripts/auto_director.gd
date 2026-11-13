@@ -163,10 +163,12 @@ func lane_held() -> Array:
     if s == null or s.mode_now() == "off":
         return out
     for l in Spotlight.LANES:
-        if s.pane_rect(l).size.x > 0.0:
-            var b := s._target(l)
-            if b:
-                out.append(b)
+        # L32a: only a PAID moment holds its hero against the director; the always-on
+        # grid's ambient shots avoid the director themselves (Spotlight._amb_pick), so
+        # they never starve it of subjects
+        var b := s.paid_target(l)
+        if b:
+            out.append(b)
     return out
 
 func _lane_owns(s: Dictionary) -> bool:

@@ -5,8 +5,11 @@ class_name HudDock
 ## Every element is either docked INSIDE one pane (scaled to it) or sits in the reserved
 ## CHROME bar across the bottom that no pane covers. Full screen (no lanes) is untouched.
 ##
-##   chrome bar   the bottom CHROME of the screen in the side-by-side and the 2x2: the
-##                Chronicle (full width, L15 size), the clock / the local chat box at its right
+##   centre strip the STRIP across the middle of the 2x2, at the cross of the four panes:
+##                the on-stream Chronicle lives here (L32b, Mr. E's original ask), full
+##                width, one line an entry at the L15 size, calm pacing
+##   chrome bar   the slim bottom CHROME no pane covers: the clock / the local chat box
+##                at its right end
 ##   a pane       the boss card at its top edge, a party's frames at its bottom-left, the
 ##                director's unit frame at its bottom-right - each in the pane SHOWING it
 ##
@@ -18,7 +21,8 @@ class_name HudDock
 ##   LANE_*  a lane's own name tag over its spotlit hero (Spotlight makes them)
 ## tools/_l21_test.gd checks all of it.
 
-const CHROME := 0.15
+const CHROME := 0.06           # L32b: slim - the Chronicle left it for the centre strip
+const STRIP := 0.10            # L32b: the Chronicle's strip at the cross of the four panes
 const L_WORLD := 1
 const L_FLOAT := 1 << 10
 const L_HTAG := 1 << 11
@@ -106,6 +110,14 @@ static func chrome(t: Node) -> Rect2:
 	var s := screen()
 	var top := floorf(s.y * (1.0 - CHROME))
 	return Rect2(0, top, s.x, s.y - top)
+
+## L32b: the Chronicle's strip across the middle of the 2x2 (px); empty at full screen
+static func centre(t: Node) -> Rect2:
+	if not split(t):
+		return Rect2()
+	var s := screen()
+	var top := floorf(s.y * (1.0 - CHROME - STRIP) * 0.5)
+	return Rect2(0, top, s.x, ceilf(s.y * STRIP))
 
 ## a pane's rect on screen (px), or an empty rect if it is not up
 static func pane(t: Node, k: String) -> Rect2:

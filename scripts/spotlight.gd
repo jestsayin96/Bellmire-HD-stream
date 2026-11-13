@@ -31,6 +31,14 @@ const SUB_S := 30.0
 const QUEUE_MAX := 24
 const AMB_MIN := 20.0          # L32a: an ambient shot holds 20-30 s, then rotates
 const AMB_MAX := 30.0
+## L35 (Mr. E, Nov 12): the subs lane must always be showing a SUBSCRIBER's hero. A paid
+## sub moment still owns the lane for its full purchased time - the queue below is NOT
+## touched. Only an IDLE subs lane rotates, every SUBS_ROT seconds, through the
+## subscribers seen this session, newest first.
+## Scope: Twitch sends us subscription EVENTS, not a roster of current subscribers, so the
+## list builds as subs happen rather than being known at boot. (roster.patrons persists
+## GIVERS, but that includes bit-cheerers, so it is deliberately NOT treated as subs.)
+const SUBS_ROT := 15.0
 
 var town: Node3D
 var labels_shown := true
@@ -40,6 +48,8 @@ var _panes := {}           # director / bits / subs / points / wide -> {box, vp,
 var _layout := ""
 var _amb := {}             # L32a: lane -> {node, t} - the ambient subject while the lane is idle
 var _amb_rng := RandomNumberGenerator.new()
+var _subs_seen: Array = []     # L35: uids seen in the subs lane, newest first
+var _subs_i := 0               # L35: where the idle rotation has got to
 
 ## bits -> seconds in the bits lane
 static func bits_seconds(n: int) -> float:
@@ -102,6 +112,8 @@ func put(uid: String, lane: String, seconds: float, reason: String) -> String:
 		reason = "took a look"
 	if not lanes.has(lane):
 		return ""
+	if lane == "subs":
+		_subs_note(uid)            # L35: remember them for the idle rotation
 	var L: Dictionary = lanes[lane]
 	var e := {"uid": uid, "seconds": seconds, "left": seconds, "reason": reason}
 	if (L["cur"] as Dictionary).is_empty():
@@ -156,6 +168,46 @@ func _process(delta: float) -> void:
 		_follow(real)
 		_cheap(real)
 
+## L35: remember a subscriber. Newest goes to the front and becomes the next face the
+## idle lane shows, which is Mr. E's "priority to the newest subscriber".
+func _subs_note(uid: String) -> void:
+	if uid == "":
+		return
+	_subs_seen.erase(uid)
+	_subs_seen.push_front(uid)
+	_subs_i = 0
+	if _subs_seen.size() > 64:
+		_subs_seen.resize(64)
+
+## L35: the idle subs lane picks a SUBSCRIBER's hero, newest first, rotating every
+## SUBS_ROT seconds. Skips anyone another pane already holds, so no subject shows twice.
+## No subscriber hero standing up right now -> the ordinary ambient pick, never blank (L32a).
+func _subs_pick() -> void:
+	var A: Dictionary = _amb["subs"]
+	var last = A.get("node")
+	var used: Array = []
+	for k in LANES:
+		var pb := paid_target(k)
+		if pb:
+			used.append(pb)
+		if k != "subs":
+			var an = (_amb[k] as Dictionary).get("node")
+			if an != null and is_instance_valid(an):
+				used.append(an)
+	var n := _subs_seen.size()
+	for i in n:
+		var uid := String(_subs_seen[(_subs_i + i) % n])
+		var b := body_of(uid)
+		if b != null and is_instance_valid(b) and b.is_inside_tree() and b.is_visible_in_tree() \
+			and not used.has(b) and (n == 1 or b != last):
+			_subs_i = (_subs_i + i + 1) % n
+			A["node"] = b
+			A["t"] = SUBS_ROT
+			if (_panes["subs"]["box"] as Control).visible:
+				_snap("subs")
+			return
+	_amb_pick("subs")
+
 ## L32a: each idle lane holds its ambient subject 20-30 s, then rotates to another
 func _amb_tick(real: float) -> void:
 	for l in LANES:
@@ -165,7 +217,58 @@ func _amb_tick(real: float) -> void:
 		A["t"] = float(A.get("t", 0.0)) - real
 		var n = A.get("node")
 		if n == null or not is_instance_valid(n) or not (n as Node3D).is_inside_tree() or float(A["t"]) <= 0.0:
-			_amb_pick(l)
+			if l == "subs":
+				_subs_pick()       # L35: a subscriber's hero, not just anyone
+			else:
+				_amb_pick(l)
+
+## L38: is this shot worth cutting to, or is it a rooftop / a wall / the inside of a stall?
+## Reuses the eye's OWN framing test (RtsCamera.frame_clear) rather than a second rule, so
+## a pane judges a composition exactly the way the main camera does: the camera must not be
+## inside geometry and the near part of the lower frame must be free of roofs and walls.
+func _shot_ok(t: Node3D, p: Dictionary) -> bool:
+	var eye := _eye()
+	if eye == null:
+		return true                      # no eye to ask: do not block the pick
+	if not is_instance_valid(t) or not t.is_inside_tree():
+		return false
+	var at := t.global_position + Vector3(0, 1.0, 0)
+	var pos := at + _offset_for(t)
+	var sz: Vector2 = (p["box"] as Control).size
+	var aspect := sz.x / maxf(1.0, sz.y)
+	eye._clear_near(at, (pos - at).length())
+	return eye.frame_clear(at, pos, (p["cam"] as Camera3D).fov, aspect)
+
+## L38: draw a weighted candidate whose shot is actually legible. The old code drew once
+## and took whatever came out, which is why so many panes opened on bare grass or a blank
+## wall. Now a draw is TESTED; a badly framed candidate is dropped and another is drawn.
+## If every try fails we still return the first draw rather than go blank (L32a).
+const FRAME_TRIES := 6
+
+func _draw_framed(pool: Array, total: float, l: String) -> Node3D:
+	var left := pool.duplicate()
+	var run := total
+	var first: Node3D = null
+	for _try in FRAME_TRIES:
+		if left.is_empty():
+			break
+		var r := _amb_rng.randf() * run
+		var hit := -1
+		for i in left.size():
+			r -= float(left[i][0])
+			if r <= 0.0:
+				hit = i
+				break
+		if hit < 0:
+			hit = left.size() - 1
+		var n: Node3D = left[hit][1]
+		if first == null:
+			first = n
+		if _shot_ok(n, _panes[l]):
+			return n
+		run -= float(left[hit][0])
+		left.remove_at(hit)
+	return first
 
 ## a new ambient subject for the lane: something happening first (a fight below, a catch
 ## being landed), then viewers' heroes, townsfolk at large, the animals - never a body
@@ -223,14 +326,7 @@ func _amb_pick(l: String) -> void:
 		total += float(e[0])
 	var pick: Node3D = null
 	if not pool.is_empty():
-		var r := _amb_rng.randf() * total
-		for e in pool:
-			r -= float(e[0])
-			if r <= 0.0:
-				pick = e[1]
-				break
-		if pick == null:
-			pick = pool[pool.size() - 1][1]
+		pick = _draw_framed(pool, total, l)   # L38: a draw whose shot is actually legible
 	elif last != null and is_instance_valid(last) and (last as Node3D).is_inside_tree():
 		pick = last                      # nobody else about: keep the shot rather than go blank
 	A["node"] = pick
@@ -561,10 +657,14 @@ func _eye() -> RtsCamera:
 				break
 	return _eye_n
 
-## a little higher and closer below ground, where walls crowd the view
+## a little higher and closer below ground, where walls crowd the view.
+## L38 (supervisor review of 13 recordings): above ground the eye sat too CLOSE and too
+## LOW - hence backs of heads, clipped bodies and a frame full of roof or paving. Pulled
+## back and raised, so a subject reads whole with some ground around it. Below stays
+## tighter (walls crowd the view down there) but is lifted a little too.
 func _offset_for(t: Node3D) -> Vector3:
 	var deep := t.global_position.y < -20.0 or _in_delve(t)
-	return Vector3(0, 9.0, 7.0) if deep else Vector3(0, 6.5, 9.5)
+	return Vector3(0, 9.5, 8.5) if deep else Vector3(0, 8.5, 12.5)
 
 ## ---- L22: two spotlit heroes standing together made two panes of one picture (every lane
 ## sat at the same offset behind its hero). When another pane's subject - another lane's hero,
@@ -630,11 +730,27 @@ func _follow(real: float) -> void:
 			(w["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_ONCE
 	var main := get_viewport().get_camera_3d() if get_viewport() else null
 	var d: Dictionary = _panes["director"]
-	if main and (d["box"] as Control).visible:
+	if (d["box"] as Control).visible:
+		# L34(b): this used to be `if main and ...`. When get_camera_3d() returned null -
+		# which happens for a frame or more when the followed subject dies, rerolls or the
+		# eye is re-parented - the block was skipped and this pane silently kept its LAST
+		# transform. That is the frozen top-left pane. Now a null main camera falls back to
+		# the eye's own Camera3D, and failing that to a market wide: never a stale frame.
 		var dc: Camera3D = d["cam"]
-		dc.global_transform = main.global_transform
-		dc.fov = main.fov
-		dc.far = main.far
+		var src: Camera3D = main
+		if src == null:
+			var e := _eye()
+			if e != null and is_instance_valid(e.cam):
+				src = e.cam
+		if src != null:
+			dc.global_transform = src.global_transform
+			dc.fov = src.fov
+			dc.far = src.far
+		else:
+			var mpos = town.get("_market_pos") if town else null
+			var mat: Vector3 = mpos if mpos != null else Vector3.ZERO
+			dc.global_position = mat + Vector3(0, 70, 85)
+			dc.look_at(mat, Vector3.UP)
 	for l in LANES:
 		var p: Dictionary = _panes[l]
 		_lane_tag(l, real)

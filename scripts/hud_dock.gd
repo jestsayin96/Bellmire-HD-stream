@@ -22,7 +22,13 @@ class_name HudDock
 ## tools/_l21_test.gd checks all of it.
 
 const CHROME := 0.06           # L32b: slim - the Chronicle left it for the centre strip
-const STRIP := 0.10            # L32b: the Chronicle's strip at the cross of the four panes
+## L39 (Mr. E, Nov 13): the Chronicle is a compact BOX at the cross of the 2x2, NOT a band.
+## He rejected the full-width bar, and then the tiny box over-corrected from it: the real
+## problem was the TEXT, so feed_hud shrank the font first and the box is sized to the
+## smaller text. CENTRE_W is well under half the screen, so the box can only ever cover the
+## inner CORNERS of the panes it touches.
+const STRIP := 0.12            # the box's height, as a share of the screen
+const CENTRE_W := 0.34         # the box's width - well under half the screen (L39)
 const L_WORLD := 1
 const L_FLOAT := 1 << 10
 const L_HTAG := 1 << 11
@@ -35,6 +41,8 @@ const TEXT_MASK := L_FLOAT | L_HTAG | L_MTAG | L_FTAG | LANES_MASK
 
 ## how wide the chrome bar's right end is held for the clock / the chat box (px)
 static var reserve_right := 0.0
+## L40: the town, remembered so the static put() can ask where the Chronicle box is
+static var _town: Node = null
 static var _installed: SceneTree = null
 
 ## ---------------------------------------------------------------- 3D text layers
@@ -111,13 +119,15 @@ static func chrome(t: Node) -> Rect2:
 	var top := floorf(s.y * (1.0 - CHROME))
 	return Rect2(0, top, s.x, s.y - top)
 
-## L32b: the Chronicle's strip across the middle of the 2x2 (px); empty at full screen
+## L39: the Chronicle's compact box at the cross of the 2x2 (px); empty at full screen.
+## Was Rect2(0, top, s.x, ...) - the full-width band Mr. E rejected.
 static func centre(t: Node) -> Rect2:
 	if not split(t):
 		return Rect2()
 	var s := screen()
 	var top := floorf(s.y * (1.0 - CHROME - STRIP) * 0.5)
-	return Rect2(0, top, s.x, ceilf(s.y * STRIP))
+	var w := floorf(s.x * CENTRE_W)
+	return Rect2(floorf((s.x - w) * 0.5), top, w, ceilf(s.y * STRIP))
 
 ## a pane's rect on screen (px), or an empty rect if it is not up
 static func pane(t: Node, k: String) -> Rect2:
@@ -172,6 +182,16 @@ static func put(c: Control, r: Rect2, k: float, at: String, top_pad := 0.0) -> v
 	elif at[1] == "c":
 		x = r.position.x + (r.size.x - w.x) * 0.5
 	var y := r.position.y + m + top_pad if at[0] == "t" else r.end.y - m - w.y
+	# L40: the Chronicle box owns the centre cross - nothing docked in a pane may cross it.
+	# Enforced HERE, at the one chokepoint every pane-docked element goes through, so a
+	# boss card or a party's frames clears the Chronicle without their own files changing.
+	var box := centre(_town)
+	if box.size.x > 0.0 and region_of(c) != "centre" and Rect2(Vector2(x, y), w).intersects(box):
+		if y + w.y * 0.5 <= box.position.y + box.size.y * 0.5:
+			y = box.position.y - m - w.y        # it sits above the box: keep it above
+		else:
+			y = box.end.y + m                   # below: keep it below
+		y = clampf(y, r.position.y + m, maxf(r.position.y + m, r.end.y - m - w.y))
 	c.position = Vector2(roundf(x), roundf(y))
 
 ## undo put(): anchors are set again by the owner's own full-screen placement
@@ -204,6 +224,7 @@ static var _warned := {}
 ## hide every visible top-level HUD control with no home (or homed "none") while split;
 ## show them again at full screen. Returns the paths it hid this pass.
 static func guard(t: Node) -> Array:
+	_town = t                      # L40: put() needs it to find the Chronicle box
 	var hid: Array = []
 	if not split(t):
 		for id in _denied:

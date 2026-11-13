@@ -58,6 +58,14 @@ func restyle() -> void:
 ## each new line fades in.
 const PACE_S := 0.8
 const FLOOD := 8
+## L39 (Mr. E, Nov 13): "the letters are super huge". The on-stream Chronicle line was the
+## L15 reading size (28 px at 1080p) - right for the bottom-left panel at full screen, far
+## too big for a box at the centre of the grid. The FONT shrinks first; HudDock.centre is
+## then sized to the smaller text. The full-screen panel keeps 28 - he did not complain
+## about that one, and it is read from further back.
+const CHRON_PX := 18            # the centre box's line size at 1080p
+const CARD_PX := 20             # a lord's card title in the box
+const CARD_SUB_PX := 14
 var _chrome := false            # "strip mode" (the name predates L32b: it was the chrome bar)
 var _pace_t := 0.0
 
@@ -94,7 +102,7 @@ func _build_chrome() -> void:
     _card_title = Label.new()
     # L32b: sized for the centre strip (0.10 of the screen) - the title and ONE sub
     # line, so the card can never push the Chronicle past the strip's edge
-    _card_title.add_theme_font_size_override("font_size", UiTheme.px(26))
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(CARD_PX))
     _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
     _card_title.add_theme_constant_override("outline_size", 4)
     cv.add_child(_card_title)
@@ -102,8 +110,8 @@ func _build_chrome() -> void:
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_OFF
     _card_sub.max_lines_visible = 1
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
-    _card_sub.custom_minimum_size = Vector2(UiTheme.px(420), 0)
-    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(18))
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(240), 0)
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(CARD_SUB_PX))
     _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
     cv.add_child(_card_sub)
     _card.visible = false
@@ -131,10 +139,10 @@ func _place_chrome() -> void:
 ## how many one-line entries fit the strip at the L15 size (2-3)
 func _chrome_lines() -> int:
     var r := HudDock.centre(get_parent())
-    var fs := UiTheme.px(28)
+    var fs := UiTheme.px(CHRON_PX)
     var lh := ThemeDB.fallback_font.get_height(fs) + 1.0
     var inner := r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
-    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 3)
+    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 4)   # L39: smaller type fits one more
 
 func _build() -> void:
     if _chrome:
@@ -269,7 +277,7 @@ func _rebuild() -> void:
             lb.clip_text = true
             lb.custom_minimum_size = Vector2.ZERO
             lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-        lb.add_theme_font_size_override("font_size", UiTheme.px(28))
+        lb.add_theme_font_size_override("font_size", UiTheme.px(CHRON_PX if _chrome else 28))
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
         lb.add_theme_color_override("font_color", Color(0.16, 0.10, 0.06).lerp(Color(0.40, 0.30, 0.20), 1.0 - k))

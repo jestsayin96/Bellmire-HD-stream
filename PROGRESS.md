@@ -2197,3 +2197,46 @@ more dangerous.
   asked, and an unprepared party is meant to lose - but if deep lords now feel unfair rather than
   frightening, LORD_ATK_PER_STEP (0.22) is the single number to pull down; LORD_HP_PER_STEP (0.28) only
   makes the fight longer, not deadlier.
+## D-cycle 123 - D28 live-run feature census (desktop CruzaderPC, 2026-11-13) - D28 DONE
+Ran tools/_d28_census.gd: the real Town, director on, 6 fake viewers enlisting/delving/fishing/forging/rerolling,
+7 wall-min at 8x time-scale (game reached day 32). Reads the in-game counters (Sfx.plays, new Rig.plays, new
+Spells.cast_counts, Townsfolk.voices/acts, Monster.voiced, Dice.rolled), scans the Chronicle feed, and watches the
+live delve. NEW counters added (desktop-owned files only): Rig.plays {clip->starts}, Spells.cast_counts {spell->times}.
+
+CENSUS TABLE (7 min, 8x):
+  SFX        total 3698 plays, 54/94 kinds fired. Top: mana_charge 541, splash 389, heal 326, sword_clash 244,
+             swing 243, hit_impact 229, hit 227, lightning 196, bell 186, buff 131, curse 126, sword_swing 119.
+             NEVER fired (40 kinds) incl: footstep_grass/stone/water/wood, dog_whine, wolf_howl/growl, eagle_cry,
+             lion_roar, orc_roar, troll_roar, zombie_moan, bow_draw, item_pickup, debuff, teleport, menu/inventory.
+  ANIM       22251 starts, 30 distinct clips, 0 missing, 0 fell-back. Top: Idle, PickUp, Interact, Use_Item,
+             Walking_A, 2H/1H attack chops, Cheer, Running_A/B, Spellcast_Raise/Shoot/Long, Hit_A/B, Throw.
+  SPELLS     9 distinct by name: heal 295, bolt 161, mend 131, ward 112, smite 85, frost 46, chain 35, renew 31, fire 12.
+  BOSSES     feed lord-intros = 3 (live-poll undercounted - see caveat). killed: not firmly counted this run.
+  TRAPS      feed trap lines = 3. Delve.trap_log read 0 this run (caveat: only ~1 sustained descent; poll missed it).
+  LOOT       gold lines 22, vials found 14, chest_open sfx 19, forge lines 17, buy/sell 41.
+  COSMETICS  worn = 0 (viewer !wear/!dye driven; never used in the soak). Gear tiers stayed w0/a0 for ALL 6 heroes
+             despite 17 forge lines and survivors with kills (MossyMage k4, DawnCleric k8).
+  LIFE       town voices 107, monster voices 44, dice rolled 52209, raids 17. acts: job 7395, haggle 641, eat 314,
+             festival 299 (D20b), tavern 530, market 227, sit 34.
+
+VERDICTS (broken / too-rare / fine):
+  - town ambient effects  BROKEN (never fire): footsteps have NO caller (sfx.gd defines footstep_* but nothing plays
+    them); dog/wolf/eagle/lion animal voices have no caller; horse_neigh/whinny called in daylight.gd but fired 0.
+    THIS is the "silent town" (D29): the town's most frequent discrete sound - footfalls - is simply never emitted.
+  - new sounds (combat/spell/raid)  FINE: fire heavily (mana_charge, sword_clash, hit_impact, lightning, bell...).
+  - animations  FINE: 30 distinct clips, 0 missing, attacks/casts/hits/throws/gestures all playing. "Not seeing new
+    anims" is perception, not breakage.
+  - spell variety  FINE: 9 distinct spells, good spread - not "always the same one" (addresses D30's premise).
+  - bosses/lords  TOO RARE to confirm here (feed shows 3; parties barely delved - 1 sustained descent). Needs a
+    delve-heavy soak for firm counts. OWNER of fix is LAPTOP (L45).
+  - traps  PRESENT-but-RARE in feed (3); DAMAGE-APPLIED unconfirmed. trap_log lives in delve.gd (LAPTOP) - recommend
+    the laptop read Delve.trap_log directly for L46 rather than trust this run's 0.
+  - loot  FINE: gold/vials/chests appear regularly.
+  - cosmetics/accessories  NOT SEEN: never worn (needs a viewer to !wear). SEPARATELY, gear weapon/armour tiers
+    stayed 0 across the board despite forging - forging may not be raising tiers (or resets on death). FLAG.
+
+CAVEAT / tool limitation: viewers delved little (raids kept pulling them into town); only ~1 sustained descent, so the
+dungeon-side direct counters (live boss poll, trap_log) undercounted vs the feed. The feed-scan and static counters are
+reliable; the live-delve poll is now every-frame for a future delve-heavy run (set CENSUS_MIN higher, or seed a party
+straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed except two read-only census counters
+(Rig.plays, Spells.cast_counts). Backups scripts/rig.gd.bak_d28, scripts/spells.gd.bak_d28 (not committed).

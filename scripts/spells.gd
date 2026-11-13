@@ -43,6 +43,7 @@ const CHAIN_HOP := 0.12          # s between the chain's leaps
 const SOUND := {"bolt": "lightning", "chain": "lightning", "fire": "fireball", "frost": "ice_shard",
                 "heal": "heal", "renew": "heal", "mend": "buff", "ward": "shield", "smite": "summon"}
 static var last := {}            # the last cast: kind, hand, aim, caster feet (tests)
+static var cast_counts := {}     # D28/D30 census: spell name -> times cast (town + dungeon via Spells.cast)
 
 ## how tall a body stands (its own meshes; health bars and labels left out),
 ## measured once and kept on the body
@@ -122,6 +123,7 @@ static func cast(kind: String, caster: Node3D, target, in_scar := false, more: A
     var ground := ground_of(target)
     var hand := hand_of(caster, aim)
     last = {"kind": actual, "hand": hand, "aim": aim, "feet": caster.global_position}
+    cast_counts[actual] = int(cast_counts.get(actual, 0)) + 1
     _flash(root, hand, col, 0.4)
     Sfx.at("mana_charge", hand, -8.0)
     Sfx.at(String(SOUND.get(actual, "spell")), hand, -2.0)

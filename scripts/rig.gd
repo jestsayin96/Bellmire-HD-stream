@@ -37,6 +37,7 @@ static var revived := 0
 static var misses := 0          # distinct clip names asked for and missing
 static var fell_back := 0       # plays that went to the idle instead
 static var chained := 0         # one-shots given a clip to return to
+static var plays := {}          # clip name -> times a NEW clip was started (D28 census)
 static var _missed := {}
 
 const IDLES := ["Idle", "Unarmed_Idle", "Idle_B", "2H_Melee_Idle", "Skeleton_Idle",
@@ -211,8 +212,10 @@ static func play(ap: AnimationPlayer, nm: String, blend := 0.15) -> void:
             return
         if fallback:
             ap.clear_queue()
+        plays[nm] = int(plays.get(nm, 0)) + 1
         ap.play(nm, blend)
         return
+    plays[nm] = int(plays.get(nm, 0)) + 1
     ap.play(nm, blend)
     if fallback:
         ap.clear_queue()

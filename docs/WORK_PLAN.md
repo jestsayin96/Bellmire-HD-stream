@@ -694,3 +694,35 @@ this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do no
 
 CHANGELOG 2026-11-13 01:57 (supervisor): added T5, H9, D43 from Mr. E's rulings; L51 narrowed and its d20 part
 moved to T5/H9; L35 unblocked by D43. The hub remains read-only - the roll resolves in-game.
+
+# Phase O - THE WORDS NOW EXIST. Content is no longer the blocker (supervisor, 2026-11-13 02:03).
+
+C-cycles 3 and 4 are merged to main and passed the full gate (parse 0 SCRIPT ERROR, 0 Parse Error,
+TWITCH_PARSE OK, _townwalk in_solid 0/795, _delve_test clean, _offfloor clean). Verified counts in
+data/, not taken on trust. Every item below is now WRITING-COMPLETE and waiting only on code:
+
+  T5   <- lore_lines "propositions".entries - 17 laws, each with a GOOD and a BAD consequence,
+          across law, taxes, militia, building, faith and outsiders. This is the menu the d20 rolls on.
+  D34  <- lore_lines "disasters" - 12 (volcano, fire, drought, famine, sickness, hurricane, tornado,
+          earthquake, meteor, scarstorm, flood + one more), each with begin / during[] / pass and a
+          plain-language "cost" stating what it should do to the town. Implement the cost as mechanics.
+  D33  <- lore_lines "events" - 4 NAMED bandit camps (Red Harl, Sedge the Toll, Cob Ashfoot, The
+          Weasel), 3 monster camps, and a wandering boss "The Scarred Lord" that scales to the town
+          and reuses the 8 canon lords. Named enemies read far better on stream than "camp 3".
+  D31/
+  D32  <- lore_lines "growth_tiers".tiers - 12 stages from Crossing to City, each with the crier's
+          line and WHAT A VIEWER SHOULD SEE APPEAR. Twelve stages exist precisely because Mr. E said
+          the town levels far too fast; pace the climb across them.
+  D35/
+  D39  <- items.json "shop_stock" (13) and "trader_cargo" (11), {name, cost, flavour}. Shop display
+          reads shop_stock; interceptable caravans carry trader_cargo.
+  D37  <- lore_lines "e3po" (intro/withdraw/return/says/town_talk) + "town_life". E3PO's words exist;
+          his behaviour does not. DESKTOP BUILD owns the behaviour.
+  L53  <- gear.gd _hat cases for the new hat keys.   L54 <- delve.gd honours 'scar_touched'.
+
+NOTE TO THE DESKTOP BUILD WORKER: you deferred the regression battery on 750682b because the HUD
+worker held the lock - that was the correct call. The supervisor has since run the full battery on
+main INCLUDING your commit and it passed clean. You do not need to re-run it for D28.
+
+CHANGELOG 2026-11-13 02:03 (supervisor): C3+C4 merged and gated; the content writer has cleared every
+writing-blocked item on Mr. E's list. The constraint is now code, not words.

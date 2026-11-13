@@ -2919,3 +2919,44 @@ it has two parts - both in desktop-owned files.
   5. !brew / the apothecary stock list now has 52 brews. If that print is unpaged it will overflow chat.
      OWNER: LAPTOP CODE (chatcmd.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 130 - L48 levelling unlocks by class AND species (laptop jestai, 2026-11-13) - L48 DONE
+A level-up was "+1 to a random stat" and nothing else: nothing unlocked, nothing named, and two heroes of
+different blood levelled identically. Mr. E asked for unlocks depending on BOTH class and species, with
+tiers rather than a single step.
+- TWO TRACKS, NOT A 90-ROW TABLE. 15 classes x 6 species is 90 combinations; hand-writing that is a table
+  nobody could keep true. A hero draws from their CLASS track and their SPECIES track, so the COMBINATION
+  is what makes them, and adding a class or a species costs one row rather than six or fifteen. A dwarf
+  knight and an orc knight share the knight line and differ by blood - measured in the test, not asserted.
+- scripts/roster.gd: CLASS_UNLOCKS (every class, at levels 2 and 5), SPECIES_UNLOCKS (every species, at 3),
+  ABILITY_WORDS giving each ability a name AND a blurb, abilities_of(h) returning the whole current kit
+  (class birthright + both tracks, deduplicated - a monk granted flurry twice is not twice as fast), and
+  unlocked_at(h, level) so a level-up can name what it just handed over.
+- A LEVEL-UP NOW SAYS WHAT IT GAVE: "X learns Cleave - their blow carries into a second foe." An unlock
+  nobody can see would be the same bug as the stat bump it replaced.
+- scripts/delve.gd: the unlocks are USED through the seams that ALREADY existed rather than a parallel
+  system - _ability_mult and _ability_hit for what a hero deals, _soak for what they take. `ability` is
+  now the hero's whole kit rather than the single thing their class was born with, so a level-5 orc knight
+  brings cleave, bulwark AND rage. New effects: cleave (the blow carries into one close foe), luck (a
+  halfling's blow lands twice now and then), backstab (telling blows cut deeper once the thing is hurt),
+  bulwark/stoneblood (less taken, stacking gently, with a floor so a blow is never soaked to nothing),
+  and flat multipliers for rage/keen/resolve/riposte/deadeye/arcane_surge/scarborn.
+- tools/_l48_test.gd (NEW, headless): A every class and species has a track and every named ability has a
+  word and blurb; B the same class of different blood ends up with a DIFFERENT kit and vice versa;
+  C it is tiered (L1 -> L2 -> L5 keeps growing) and a real level-up announces the unlock by name;
+  D - THE IMPORTANT ONE - every ability in the table must actually change something in delve.
+  L48_TEST OK, 11 checks. Measured: 15 classes, 6 species, 17 distinct abilities, all 17 wired.
+- CHECK D CAUGHT MY OWN DECORATION. The first version had "backstab" in the rogue and duelist tracks with
+  a blurb and NO implementation - a name that did nothing, which is precisely the failure the table was
+  supposed to avoid. It is now +40% against a target already below half. The check also only tested a
+  HEALTHY target at first, which is how backstab slipped past; it tries a wounded one too now, since some
+  abilities only bite in one state.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1305 (MON_INPROP 0 of 97); _delve_test 0 errors/nulls;
+  L3_TEST OK; L25_TEST OK 13/13 with 0 stuck delvers and 0 watchdog frees.
+- SIGNATURES LOOSENED, deliberately and narrowly: _ability_mult, _ability_hit, _cast_at and _spell_lands
+  took `ability: String` and now take an untyped `ability` that may be a String or an Array. They are all
+  internal to delve.gd and all four callers pass an Array now; the String path is kept so nothing that
+  still hands one in breaks.
+- FOR MR. E - A BALANCE CHANGE, AND A REAL ONE: a levelled hero is meaningfully stronger than before, both
+  in damage dealt (rage/keen/backstab and the rest stack multiplicatively) and taken (bulwark + stoneblood
+  together cut about a quarter). The numbers are all in one place - CLASS_UNLOCKS, SPECIES_UNLOCKS and the
+  match in _ability_mult - if the curve wants flattening once he sees it on stream.

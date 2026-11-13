@@ -1080,7 +1080,8 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			m["tgt_was"] = tgt
 		var bd := _flat((tgt as Node3D).global_position, b.global_position)
 		var caster := String(h["class"]) in Roster.CASTERS
-		var ability := String(Roster.CLASSES[String(h["class"])].get("ability", ""))
+		# L48: the hero's whole unlocked kit, class birthright + class track + species track
+		var ability := Roster.abilities_of(h)
 		var ranged := caster or String(h["class"]) == "ranger"
 		var reach := 9.0 if ranged else REACH + tgt._height() * 0.15
 		if bd > reach:
@@ -1099,7 +1100,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 		m["swing"] = float(m["swing"]) - delta * _pace(m)
 		if float(m["swing"]) > 0.0:
 			continue
-		m["swing"] = (1.3 + _rng.randf() * 0.4) * (0.6 if ability == "flurry" else 1.0) * (0.66 if has_st(m, "haste") else 1.0)
+		m["swing"] = (1.3 + _rng.randf() * 0.4) * (0.6 if ability.has("flurry") else 1.0) * (0.66 if has_st(m, "haste") else 1.0)
 		# 5e: d20 + attack bonus vs the creature's AC (10 + depth band)
 		# L5: darkvision shrugs off the dark; a lucky halfling rolls a natural 1 again
 		var adv := _hero_adv(m)
@@ -1579,23 +1580,81 @@ func _inspired() -> int:
 			return 1
 	return 0
 
-func _ability_mult(ability: String, tgt: Monster) -> float:
+## L48: `ability` is now the hero's WHOLE unlocked kit (Roster.abilities_of), not the single
+## thing their class was born with - a level-5 orc knight brings knight's cleave and bulwark
+## AND orc rage. Every unlock resolves through this seam or _ability_hit/_soak, so nothing in
+## the levelling table is a name with no effect behind it.
+func _ability_mult(ability, tgt: Monster) -> float:
 	var k := 1.0
-	match ability:
-		"smite":    # a paladin hits the dead twice as hard
-			if String(tgt.def.get("family", "")) in ["undead", "the fallen"]:
-				k = 2.0
-		"flurry":   # a monk hits often and light
-			k = 0.7
+	var list: Array = ability if ability is Array else [String(ability)]
+	var undead := String(tgt.def.get("family", "")) in ["undead", "the fallen"]
+	for a in list:
+		match String(a):
+			"smite":    # a paladin hits the dead twice as hard
+				if undead:
+					k *= 2.0
+			"scarborn": # the scar's own are death to the same
+				if undead:
+					k *= 1.25
+			"flurry":   # a monk hits often and light
+				k *= 0.7
+			"rage":
+				k *= 1.20
+			"keen":
+				k *= 1.10
+			"resolve":
+				k *= 1.08
+			"riposte":
+				k *= 1.12
+			"deadeye":
+				k *= 1.15
+			"arcane_surge":
+				k *= 1.15
+			"backstab": # a telling blow cuts deeper once the thing is already hurt
+				if tgt.hp < tgt.max_hp * 0.5:
+					k *= 1.40
 	# a warlock's hex: everyone's blows land harder on the marked thing
 	if float(tgt.get_meta("hex_t", -1.0)) > _t:
 		k *= 1.25
 	return k
 
-func _ability_hit(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
+func _ability_hit(ability, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
+	# L48: every unlocked ability gets its turn, not just the class's birthright
+	var list: Array = ability if ability is Array else [String(ability)]
+	for a in list:
+		_ability_hit_one(String(a), m, tgt, dmg, foes)
+
+func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
 	match ability:
 		"drain":    # the necromancer drinks back a share of what it spends
 			m["hp"] = minf(float(m["max"]), float(m["hp"]) + dmg * 0.3)
+		"cleave":   # L48: the blow carries into ONE other foe standing close
+			var best: Monster = null
+			var bd := 3.0
+			for f in foes:
+				var o: Monster = f
+				if o == tgt or not is_instance_valid(o) or o.state == Monster.S.DEAD:
+					continue
+				var d := _flat(o.global_position, tgt.global_position)
+				if d < bd:
+					bd = d
+					best = o
+			if best != null:
+				var was_dead := best.state == Monster.S.DEAD
+				best.hurt(dmg * 0.35)
+				if not was_dead and best.state == Monster.S.DEAD:
+					_kills += 1
+					_on_kill(best)
+					roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
+		"luck":     # L48: halfling luck - now and then the blow lands twice
+			if is_instance_valid(tgt) and tgt.state != Monster.S.DEAD and _rng.randf() < 0.12:
+				var was2 := tgt.state == Monster.S.DEAD
+				tgt.hurt(dmg * 0.5)
+				_float_text(m, "lucky!", Color(0.95, 0.85, 0.40), 56, 2.6)
+				if not was2 and tgt.state == Monster.S.DEAD:
+					_kills += 1
+					_on_kill(tgt)
+					roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 		"hex":
 			if float(tgt.get_meta("hex_t", -1.0)) <= _t:
 				Spells._burst(tgt.get_parent(), tgt.global_position + Vector3(0, tgt._height() * 0.6, 0), Color(0.6, 0.2, 0.9))
@@ -1665,7 +1724,7 @@ const SMITE_DEAD := 1.5     # smite on the dead and the lost
 const WARD_SOAK := 0.35     # of the warded delver's max, soaked for WARD_T s
 const WARD_T := 8.0
 
-func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) -> void:
+func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability) -> void:
 	var b: HeroBody = m["body"]
 	var h: Dictionary = m["h"]
 	var book: Array = BOOKS.get(String(h["class"]), ["bolt"])
@@ -1714,7 +1773,7 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
 	var t := Spells.flight(actual, b, tgt)
 	get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, m, hit, dmg, roll == 20, ability))
 
-func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: bool, ability: String) -> void:
+func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: bool, ability) -> void:
 	if state != "fight" or dun == null or not is_instance_valid(dun):
 		return
 	var first: Monster = hit[0] if is_instance_valid(hit[0]) else null
@@ -1777,6 +1836,18 @@ func _bless(o: Dictionary, kind: String, pow: float) -> void:
 			o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow)
 
 func _soak(o: Dictionary, dmg: float) -> float:
+	# L48: the defensive unlocks live here, because this is already the one place a hero's
+	# incoming damage is reduced. Bulwark is trained, stoneblood is bred; they stack, but
+	# gently, and the floor keeps a blow from ever being soaked away to nothing.
+	if o.has("h"):
+		var kit := Roster.abilities_of(o["h"] as Dictionary)
+		var cut := 1.0
+		if kit.has("bulwark"):
+			cut *= 0.85
+		if kit.has("stoneblood"):
+			cut *= 0.88
+		if cut < 1.0:
+			dmg = maxf(1.0, dmg * cut)
 	if float(o.get("ward_t", 0.0)) <= 0.0 or float(o.get("ward", 0.0)) <= 0.0:
 		return dmg
 	var s := minf(float(o["ward"]), dmg)

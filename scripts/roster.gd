@@ -602,6 +602,12 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
         Sfx.play("level_up", -4.0)          # S2
         announced.emit("%s reaches level %d (+1 %s)." % [h["name"], int(h["level"]), s],
             Color(0.95, 0.86, 0.45))
+        # L48: a level-up that unlocks something SAYS so, by name and by what it does. A stat
+        # bump nobody can see was the whole complaint; an unlock nobody can see would be the
+        # same bug wearing a better hat.
+        for key in unlocked_at(h, int(h["level"])):
+            announced.emit("%s learns %s - %s." % [h["name"], ability_word(key), ability_blurb(key)],
+                Color(0.70, 0.92, 1.0))
     # A promotion is a story beat, so it is said out loud like a level-up.
     var rank_now := rank_of(h)
     if rank_now != rank_was:
@@ -611,6 +617,96 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
 
 func _xp_needed(level: int) -> int:
     return 40 + level * 30
+
+## ---- L48: LEVELLING UNLOCKS, BY CLASS **AND** SPECIES.
+## A level-up used to be "+1 to a random stat" and nothing else - nothing was unlocked, nothing
+## was named, and two heroes of different blood levelled identically. Mr. E asked for unlocks
+## that depend on BOTH, with tiers rather than a single step.
+## Two TRACKS, deliberately, instead of one table of 15 classes x 6 species = 90 hand-written
+## rows nobody could keep true: a hero draws from their CLASS track and their SPECIES track, so
+## the combination is what makes them, and adding a class or a species costs one row, not six
+## or fifteen. A dwarf knight and an orc knight share the knight line and differ by blood.
+## Every ability named here is USED - each one resolves in delve.gd through the seams that
+## already existed (_ability_mult and _ability_hit for what a hero deals, _soak for what they
+## take). Nothing here is a label with no effect behind it.
+const CLASS_UNLOCKS := {
+    "knight":      {2: "cleave", 5: "bulwark"},
+    "warden":      {2: "thorns", 5: "cleave"},
+    "barbarian":   {2: "cleave", 5: "rage"},
+    "rogue":       {2: "backstab", 5: "flurry"},
+    "duelist":     {2: "riposte", 5: "backstab"},
+    "ranger":      {2: "deadeye", 5: "cleave"},
+    "mage":        {2: "arcane_surge", 5: "hex"},
+    "sage":        {2: "arcane_surge", 5: "drain"},
+    "cleric":      {2: "smite", 5: "bulwark"},
+    "paladin":     {2: "smite", 5: "bulwark"},
+    "necromancer": {2: "drain", 5: "hex"},
+    "monk":        {2: "flurry", 5: "riposte"},
+    "druid":       {2: "thorns", 5: "rage"},
+    "warlock":     {2: "hex", 5: "drain"},
+    "bard":        {2: "riposte", 5: "arcane_surge"},
+}
+const SPECIES_UNLOCKS := {
+    "human":    {3: "resolve"},
+    "elf":      {3: "keen"},
+    "dwarf":    {3: "stoneblood"},
+    "halfling": {3: "luck"},
+    "orc":      {3: "rage"},
+    "scarkin":  {3: "scarborn"},
+}
+## what each one is called out loud, and what it actually does - the Chronicle says both, so a
+## viewer learns the hero's kit by watching rather than by reading a wiki that does not exist
+const ABILITY_WORDS := {
+    "cleave":       ["Cleave", "their blow carries into a second foe"],
+    "bulwark":      ["Bulwark", "they take less from every blow"],
+    "thorns":       ["Thorns", "what strikes them bleeds for it"],
+    "rage":         ["Rage", "they hit markedly harder"],
+    "backstab":     ["Backstab", "their telling blows cut deeper"],
+    "flurry":       ["Flurry", "they strike faster, and lighter"],
+    "riposte":      ["Riposte", "every blow is turned to advantage"],
+    "deadeye":      ["Deadeye", "their aim tells at any range"],
+    "arcane_surge": ["Arcane Surge", "their spells bite harder"],
+    "hex":          ["Hex", "what they mark is easier for everyone to hurt"],
+    "drain":        ["Drain", "they drink back a share of what they deal"],
+    "smite":        ["Smite", "the dead and the fallen take double"],
+    "resolve":      ["Resolve", "they give a little more than most"],
+    "keen":         ["Keen Eye", "elf-sight finds the gap"],
+    "stoneblood":   ["Stoneblood", "dwarf-stock shrugs off a share of it"],
+    "luck":         ["Halfling Luck", "now and then a blow lands twice"],
+    "scarborn":     ["Scarborn", "the scar's own are death to the undead"],
+}
+
+static func ability_word(key: String) -> String:
+    return String((ABILITY_WORDS.get(key, [key, ""]) as Array)[0])
+
+static func ability_blurb(key: String) -> String:
+    return String((ABILITY_WORDS.get(key, [key, ""]) as Array)[1])
+
+## every ability a hero has RIGHT NOW: what their class was born with, plus everything their
+## level has unlocked down both tracks. Deduplicated - a monk whose class grants flurry and
+## whose blood grants it again is not twice as fast.
+static func abilities_of(h: Dictionary) -> Array:
+    var out: Array = []
+    var base := String(CLASSES.get(String(h.get("class", "")), {}).get("ability", ""))
+    if base != "":
+        out.append(base)
+    var lvl := int(h.get("level", 1))
+    for src in [CLASS_UNLOCKS.get(String(h.get("class", "")), {}), SPECIES_UNLOCKS.get(species_of(h), {})]:
+        for at in (src as Dictionary):
+            if lvl >= int(at):
+                var k := String((src as Dictionary)[at])
+                if not out.has(k):
+                    out.append(k)
+    return out
+
+## what a level-up hands over at THIS level, so the announcement can name it
+static func unlocked_at(h: Dictionary, level: int) -> Array:
+    var out: Array = []
+    for src in [CLASS_UNLOCKS.get(String(h.get("class", "")), {}), SPECIES_UNLOCKS.get(species_of(h), {})]:
+        var d: Dictionary = src
+        if d.has(level):
+            out.append(String(d[level]))
+    return out
 
 func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String:
     var h := get_hero(user_id)

@@ -1999,3 +1999,45 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   Gravewyrm "Half-Woken" -> 230 hp (< base 260, only half risen), trading body for a deeper breath. Rest of C1 stands.
 - Validated (python only, no Godot): every data/*.json parses; the two edited entries stay within the bosses schema.
   Committed + pushed from the laptop (path a: Blender subprocess git) to prove that route end to end.
+
+## U1 - desktop HUD (Nov 13, 2026)
+NEW worker, new worktree W2 on branch `hud-ui`. Queue L34/L35/L38/L39/L40/L51.
+
+- **L34 director pane freezes - BOTH root causes fixed.**
+  (a) `auto_director._process()` returned early whenever `_best()` came back empty, so the
+  death check below it never ran and the eye stayed parked on a dead subject. It now cuts to
+  a live fallback when the current shot is not alive, and `_best()` itself never returns
+  empty any more (`_fallback_shot()` rotates the town tour when the avoid-filter or L24
+  lane-ownership removes every candidate).
+  (b) `spotlight._follow()` only copied the main camera `if main and ...`; a null
+  `get_camera_3d()` (subject died / rerolled / eye re-parented) skipped the block and the
+  pane kept its LAST transform. Now falls back to the eye's own Camera3D, then to a market
+  wide. Never a stale frame.
+- **L35 subscriber lane.** The idle subs lane rotates through subscribers seen this session,
+  newest first, every SUBS_ROT=15 s, skipping anyone another pane holds; no subscriber hero
+  available -> ordinary ambient (never blank, L32a). A paid sub moment is untouched: the
+  queue and its ordering are exactly as they were. SCOPE: Twitch sends subscription EVENTS,
+  not a roster of current subscribers, so the list builds as subs happen rather than being
+  known at boot. (roster.patrons persists GIVERS incl. bit-cheerers - deliberately not used.)
+- **L38 ambient framing.** `_offset_for` pulled back and raised (above ground 6.5/9.5 ->
+  8.5/12.5; below 9.0/7.0 -> 9.5/8.5), and a candidate is now TESTED before it is accepted:
+  `_shot_ok()` reuses the eye's own `RtsCamera.frame_clear()`, so a pane rejects a rooftop /
+  blank wall / inside-a-stall shot exactly the way the main camera judges one. Up to
+  FRAME_TRIES=6 draws, falling back to the first draw rather than going blank.
+- **L39 Chronicle is a centre BOX, font first.** Line size 28 -> 18 px at 1080p in centre
+  mode (the full-screen panel keeps 28 - he did not complain about that one); lord card
+  26/18 -> 20/14. THEN the box was sized to the smaller text: `HudDock.centre()` was
+  `Rect2(0, top, s.x, ...)` - the full-width band he rejected - and is now a centred
+  CENTRE_W=0.34 box. MEASURED at 1080p: box (634,442) 652x130, Chronicle 640x118,
+  **width_frac 0.333**, sitting in the gap between the two pane rows.
+- **L40 (the part this worker owns).** Enforced at `HudDock.put()` - the one chokepoint every
+  pane-docked element goes through - so a boss card or a party's frames is pushed clear of
+  the Chronicle box without touching their files. MEASURED overlaps=0 in all three captures.
+  NOT DONE, and NOT this worker's files: moving the party frames and the Twitch chat column
+  OUT of the panes needs `party_frames.gd` and `rts_camera.gd` (DESKTOP BUILD owns both).
+- **L51 NOT STARTED** - and a blocker found: `dice.gd` is the pure RNG rules engine
+  (`class_name Dice extends RefCounted`), not a visual d20. There is no on-screen d20 in the
+  seven HUD files to redesign. Needs Mr. E / the supervisor to say which d20 he means.
+
+Verified: project boots with 0 SCRIPT ERROR / 0 Parse Error; windowed 1920x1080 capture with
+the grid up, three shots + measurements above. Items left UNTICKED for the supervisor.

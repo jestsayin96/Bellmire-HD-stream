@@ -3621,3 +3621,33 @@ immediate re-run passed: the re-run happened to be faster.
   a best-of, not a re-run after a red - ten in a row, windowed at 1920x1080, exactly as the DONE asked.
 - Regression: parse 0 SCRIPT ERROR. Only tools/_l24_test.gd changed - no game script was touched, so the
   wider battery has nothing new to catch; the ten runs ARE the evidence for this item.
+
+## D-cycle 125 - T3 the Twitch reply path stops dropping replies silently (desktop CruzaderPC, 2026-11-13) - T3 DONE
+- T3 (URGENT, viewer-facing): on stream !enlist "did nothing" and the reply path dropped silently. The
+  supervisor's analysis named three drop points that log NOTHING; I own twitch_eventsub.gd and fixed the two
+  that are mine. (c), chatcmd.gd's per-user command cooldown, is LAPTOP-owned - left for them, noted here.
+- scripts/twitch_eventsub.gd ONLY (my file):
+  * bug (a) - the real one: _tick_chat appended the line to sent_chat, then `if dry_run_chat or offline or
+    tokens["bot"].is_empty() or _token_dead["bot"]: return` BEFORE _send_chat(), so on a live stream with an
+    empty/dead bot token the answer looked sent (it was in sent_chat) but never left the game and nothing was
+    logged. Replaced with _send_hold_reason() -> a named cause, and every held send now _say_log()s
+    "chat not sent (<reason>) @<user>: <text>".
+  * bug (b): the 30 s duplicate guard was keyed on the full outgoing line and returned with no log. It is now
+    keyed per-user on (login, text) - explicitly so one viewer's repeat can never mute another viewer's
+    identical answer - and logs "chat skipped (duplicate within 30s) @<user>: <text>" on every drop.
+  * also made loud: an empty reply (_on_twitch_reply) and a queue-full drop of the oldest answer now each
+    _say_log() their reason + the user/text, instead of returning / popping silently.
+- tools/_t3_test.gd (NEW, offline, no sockets): 12 checks. A reply reaches chat or is logged; the dry-run and
+  no-bot-token holds are logged with their reason; the SAME user's repeat is sent once and logged as a dup;
+  TWO DIFFERENT users with identical text BOTH get through and nothing is logged as a dup; empty and queue-full
+  are logged. T3_TEST OK (12/12).
+- Decisive on-stream test for Mr. E (unchanged, now debuggable either way): have someone type !enlist, then
+  look at the hub. Hero on the hub + no chat reply => reply path (now every skip writes a log line naming which
+  condition, which user, which text). No hero on the hub => chat ingest/cooldown (chatcmd, laptop).
+- Gate, full battery on the desktop (shared Godot lock held): parse-boot 0 SCRIPT ERROR / 0 Parse Error;
+  --import clean; TWITCH_PARSE OK; T3_TEST OK; _offfloor 0 of 1133 (MON_INPROP 0); _townwalk PASS
+  (in_solid 1/15316 = 0.007%, the known D44 intermittent, not this item); _delve_test rc=0, no SCRIPT ERROR.
+- SEEN, NOT MINE (for the laptop): _offfloor's incidental delve surfaced a runtime print bug -
+  "String formatting error: not all arguments converted" at delve.gd:1479 (_loot). delve.gd is laptop-owned;
+  flagging it rather than touching it. Not a SCRIPT ERROR, did not block the gate.
+- Did NOT touch chatcmd.gd (c) - laptop-owned. T3 ticked in WORK_PLAN with this result.

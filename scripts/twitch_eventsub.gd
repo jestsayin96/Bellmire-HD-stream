@@ -551,9 +551,11 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
 func _on_twitch_reply(user_login: String, text: String) -> void:
     var t := text.strip_edges()
     if t == "" or user_login == "":
+        _say_log("TWITCH_EVENTSUB chat skipped (empty reply) login='%s' text='%s'" % [user_login, text])
         return
     if _chat_q.size() >= CHAT_QUEUE_MAX:
-        _chat_q.pop_front()              # oldest answer is the stalest
+        var dropped: Array = _chat_q.pop_front()   # oldest answer is the stalest
+        _say_log("TWITCH_EVENTSUB chat skipped (queue full, dropped oldest) @%s: %s" % [String(dropped[0]), String(dropped[1])])
     _chat_q.append([user_login, t])
 
 func chat_line_for(user_login: String, text: String) -> String:
@@ -567,19 +569,41 @@ func _tick_chat(delta: float) -> void:
     if _chat_t > 0.0 or _chat_q.is_empty():
         return
     var q: Array = _chat_q.pop_front()
-    var m := chat_line_for(String(q[0]), String(q[1]))
+    var login := String(q[0])
+    var text := String(q[1])
+    var m := chat_line_for(login, text)
     var now := Time.get_unix_time_from_system()
-    if _chat_recent.has(m) and now - float(_chat_recent[m]) < 30.0:
-        return                           # Twitch drops a repeat inside 30 s anyway
-    _chat_recent[m] = now
+    # Per-user duplicate guard, keyed on (login, text): one viewer's repeat must
+    # never mute another viewer's identical answer. Twitch itself drops a repeat
+    # of the bot's own previous message inside 30 s; this mirrors that, per user.
+    var key := login + "\u0001" + text
+    if _chat_recent.has(key) and now - float(_chat_recent[key]) < 30.0:
+        _say_log("TWITCH_EVENTSUB chat skipped (duplicate within 30s) @%s: %s" % [login, text])
+        return
+    _chat_recent[key] = now
     for k in _chat_recent.keys():
         if now - float(_chat_recent[k]) > 60.0:
             _chat_recent.erase(k)
     _chat_t = CHAT_GAP
     sent_chat.append(m)
-    if dry_run_chat or offline or tokens["bot"].is_empty() or _token_dead["bot"]:
+    var hold := _send_hold_reason()
+    if hold != "":
+        _say_log("TWITCH_EVENTSUB chat not sent (%s) @%s: %s" % [hold, login, text])
         return
     _send_chat(m)
+
+## The reason the current chat line cannot go out, or "" if it can. Named so every
+## suppressed reply is logged with its cause instead of returning silently (T3).
+func _send_hold_reason() -> String:
+    if dry_run_chat:
+        return "dry_run_chat"
+    if offline:
+        return "offline"
+    if tokens["bot"].is_empty():
+        return "no bot token"
+    if _token_dead["bot"]:
+        return "bot token dead"
+    return ""
 
 func _send_chat(m: String) -> void:
     var r := await _helix("bot", HTTPClient.METHOD_POST, "/chat/messages",

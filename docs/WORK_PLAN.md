@@ -728,10 +728,24 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
 - [ ] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
       nothing. Raised by the content writer.
 
-- [ ] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
+- [x] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
       and armour tiers stayed w0/a0 for ALL SIX heroes through a 7-min soak despite 17 forge lines
       and survivors with 4 and 8 kills. Either forging never raises the tier or death resets it.
       DONE: a soak where surviving heroes visibly climb tiers.
+      DONE L-cycle 127: measured first, and NEITHER suspected cause was it. buy_weapon/buy_armour work
+      (a probe with gold went w0->w1, a0->a1), and kill()/reroll() keep the gear - a returning hero is a
+      FRESH hero at w0, which is canon. THE REAL CAUSE: nothing ever CALLED the forge for a VIEWER'"'"'s hero.
+      The town band kits up in Adventurers._kit_up; a viewer'"'"'s hero only forged if that viewer typed
+      !forge. Reproduced exactly - four survivors home with 69-115 gold, tier 1 costing 52, none climbed.
+      The census'"'"'s 17 "forge lines" were refusals, not purchases. FIX: Roster.kit_up_after_delve() fits
+      out a survivor who comes home with coin - ONE step a delve, always leaving KIT_RESERVE (3 oil) so
+      nobody is stranded, armour first while it trails, and the smith'"'"'s line is SAID so the viewer sees
+      what their gold bought. Called from delve._finish(). tools/_l55_test.gd L55_TEST OK (12 checks):
+      round 1 climbed 0 of 4 (loot luck), round 2 climbed 2-3 of 4 - tiers climb across a SESSION, which
+      is what "a soak" means. _offfloor 0 of 1231, _delve_test clean, L3_TEST OK.
+      MR. E'"'"'S CALL: heroes now spend their own gold automatically. KIT_RESERVE and the one-step cap are
+      the dials; removing it is one call in _finish(). FOR THE SUPERVISOR: scripts/adventurers.gd is in NO
+      worker'"'"'s ownership list in COORDINATION 11.2 - read, not touched; it needs an owner.
 
 - [ ] L56. DELVE-HEAVY SOAK before L45 and L46 are trusted. The census could not confirm bosses or
       trap damage: raids kept pulling parties back to town and only ~1 sustained descent happened,

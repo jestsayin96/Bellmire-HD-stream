@@ -1554,6 +1554,15 @@ func _finish() -> void:
 		_say("%s %s home to Bellmire with %s. %d %s." % [_names_of(out), "comes" if out.size() == 1 else "come", _haul_line(), _kills, ("kill" if _kills == 1 else "kills") + ("" if out.size() == 1 and party.size() == 1 else " between them")])
 		if town and town.has_method("receive_haul"):
 			town.receive_haul(haul)
+		# L55: they are home with their takings - the smith fits them out. Before this nothing
+		# ever called the forge for a viewer's hero, so they earned and never spent: tiers sat at
+		# w0/a0 all stream while gold piled up. One step each at most, and only with a reserve
+		# left (Roster.kit_up_after_delve). It is said aloud so the viewer sees what their gold
+		# bought - an upgrade nobody can see is the same bug over again.
+		for uid in out:
+			var line := roster.kit_up_after_delve(String(uid))
+			if line != "":
+				_say(line)
 	ended.emit(out)
 
 ## ---- L4: what the newer callings do in a fight

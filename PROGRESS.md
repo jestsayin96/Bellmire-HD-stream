@@ -2441,3 +2441,51 @@ missing and no spells were added. The viewer simply could not TELL them apart - 
   consecutively after the fix, 0 stuck both times. If a future cycle sees a stuck delver in state "search"
   again, the unreachable-chest path is where to look first, and the honest answer may be to stop placing
   chests in cells with no route to them at all (dungeon_hd._dress) rather than recovering after the fact.
+
+## L-cycle 127 - L55 forging now actually reaches a viewer's hero (laptop jestai, 2026-11-13) - L55 DONE
+MEASURED BEFORE CHANGING ANYTHING, and NEITHER of the supervisor's two candidates was the cause:
+- "forging never raises the tier" - FALSE. buy_weapon/buy_armour work perfectly: a probe with gold in
+  hand went w0 -> w1 and a0 -> a1 first try. town_tier is 4, so tier 1 is forgeable.
+- "death resets it" - FALSE as stated. kill() leaves weapon/armour on the record untouched and reroll()
+  rerolls STATS only. What IS true is that a hero who comes back is a FRESH hero (fresh() starts at
+  w0/a0, 40 gold) - but that is canon, not a bug, and the census saw w0/a0 on SURVIVORS.
+THE ACTUAL CAUSE: nothing ever CALLED the forge for a viewer's hero. The town's own band kits itself up
+in Adventurers._kit_up, but a viewer's hero only ever forged if that viewer typed !forge. So heroes
+earned and never spent - my soak reproduced it exactly: four survivors home with 69-115 gold, tier 1
+costing 52, and not one of them had climbed. The census's "17 forge lines" were refusals and flavour, not
+purchases; a hero with 0 gold gets "Pauper needs 52 gold ... you have 0" and stays at w0.
+- scripts/roster.gd: NEW kit_up_after_delve(uid) - the smith fits out a hero who comes home with coin.
+  Deliberately conservative, because this is a VIEWER'S gold and not mine to empty: at most ONE step a
+  delve, a reserve of KIT_RESERVE (3 flasks of oil) is always left so nobody is stranded without
+  re-supply money, armour first while it trails the weapon (Adventurers._kit_up's own rule), and a
+  viewer who is saving can still outpace it by hand with !forge.
+- scripts/delve.gd _finish(): survivors are fitted out when they get home, and the smith's line is SAID -
+  an upgrade nobody can see would be the same class of bug as L46 and L49.
+- tools/_l55_test.gd (NEW, headless): A proves the forge works when called and that a penniless hero is
+  REFUSED (so a "forge line" is not a purchase); B proves kill() and reroll() keep the gear and that the
+  real reset is simply coming back as a fresh hero; C runs a real delve to the end; D sends the SAME
+  heroes down a second time. L55_TEST OK, 12 checks. Measured: round 1 climbed 0 of 4, round 2 climbed
+  2-3 of 4 (Ashvein a1, Brelda w1/a1, Corrin a1 on one run) - tiers climb across a session.
+- TWO TEST BUGS OF MINE, both of which first looked like the fix had failed:
+  (1) the first soak used max_floors 8 and hit the frame cap in state "descend" - the delve never reached
+      _finish(), so the kit-up never ran. The fix was fine; the test never got to it. Shortened to 3.
+  (2) I then asserted "someone climbed" after ONE short delve. Whether anyone can afford the forge after
+      one run is loot luck (measured 0-1 of 4), so that assertion was flaky dressed up as a product
+      failure. The DONE criterion says a SOAK, and a soak is the session - the climb is now asserted
+      after the second delve, and round one only reports.
+- Also fixed while there: my first version called haggle() in the affordability pre-check AND buy_* then
+  haggled again, charging a different number than the check tested and burning a roll. It now tests the
+  un-haggled price, which is the conservative side.
+- AND AGAIN THE INDENTATION TRAP: my roster.gd block went in TAB-indented into a space-indented file and
+  every dependent script reported "Could not resolve class Roster" while naming no line in roster.gd.
+  This is the SECOND time this cycle-run (L45 was the first) - `--headless --check-only --script <file>`
+  names the line instantly. CHECK THE FILE'S INDENT STYLE BEFORE EDITING IT.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1231 (MON_INPROP 0 of 55); _delve_test 0 errors/nulls;
+  L3_TEST OK (the gear/forge suite still passes); L25_TEST OK 13/13 with 0 stuck and 0 watchdog frees.
+- FOR MR. E - A POLICY CALL, NOT A BUG: heroes now spend their own gold automatically when they come
+  home. That is the only way tiers climb without every viewer knowing !forge, but it IS their gold. If he
+  would rather viewers chose, the whole behaviour is one call in delve._finish(); if he wants them to
+  climb faster, KIT_RESERVE (36) and the one-step-a-delve cap are the dials.
+- NOTE FOR THE SUPERVISOR: scripts/adventurers.gd (which holds the NPC band's _kit_up) appears in NO
+  worker's ownership list in COORDINATION 11.2 - not the laptop's, not the desktop build's. I read it but
+  did not touch it. It needs an owner.

@@ -507,7 +507,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 ## CHANGELOG 16:10 (supervisor): added L32a-b (spotlight always-on 2x2 + centre Chronicle), placed BEFORE Phase C at Mr. E's direction - it corrects the stream's idle look. IDs frozen as ever.
 
 # Phase H - regression found by the supervisor (Nov 12 18:25)
-- [ ] L33. STUCK DELVER REGRESSION: after L27a (nine new monsters at depth) _l25_test went from a clean 0 stuck / 0 nudges to 1 stuck delver (floor 3, state=descend) in a 10-floor run. Likely the denser monster population crowding fight slots or the descend route. The watchdog still frees them, so it is not fatal, but L25's acceptance was 0. Reproduce, find whether it is spawn crowding or route blocking, fix, and get _l25_test back to 0 stuck. DONE: _l25_test OK 13/13 with 0 stuck over 3 consecutive runs.
+- [x] L33. STUCK DELVER REGRESSION: after L27a (nine new monsters at depth) _l25_test went from a clean 0 stuck / 0 nudges to 1 stuck delver (floor 3, state=descend) in a 10-floor run. Likely the denser monster population crowding fight slots or the descend route. The watchdog still frees them, so it is not fatal, but L25's acceptance was 0. Reproduce, find whether it is spawn crowding or route blocking, fix, and get _l25_test back to 0 stuck. DONE: _l25_test OK 13/13 with 0 stuck over 3 consecutive runs.
+      DONE L-cycle 137: three consecutive _l25_test runs on current HEAD, no re-rolling and no best-of -
+      all three OK 13/13 with 0 stuck delvers AND 0 watchdog frees. That is the bar the item set.
+      WHAT IT DOES NOT PROVE, said plainly: I did not reproduce the original failure, so the mechanism is
+      NOT identified - "fixed" here means "not observable". Beyond the three runs, _l25_test has run about
+      a dozen times across this session at 0 stuck every time bar one, and that one was state="search" on
+      floor 10 - my own L49 chest bug, diagnosed and fixed in the L52 cycle. Different state, different
+      cause, already closed.
+      THE ITEM'S ATTRIBUTION LOOKS WRONG, which is worth more than the tick: it blames L27a's new monsters
+      at depth, but the recorded failure was FLOOR 3, state=descend, and L27a widened only the 6-7, 8-9
+      and 10+ bands - the shallows were deliberately untouched and its test still enforces that. Floor 3's
+      roster was never changed by L27a, and "descend" is routing to the stairs, not spawn density. Same
+      shape as L46, L49, L50, L52 and L55: real symptom, wrong assumed cause.
+      Candidates for what helped since, NOT claims: L50's pack cap (one pick can no longer fill a third of
+      a floor - exactly the crowding the item suspected) and L25's watchdog work.
+      IF IT RETURNS: read the STATE in the failure line - descend means routing, search means L49's
+      chests, fight means slot crowding. The test prints "stuck by floor / state"; keep it.
 
 # Phase I - Mr. E's live-stream findings (Nov 12 ~21:55, from his own OBS recordings + play test)
 - [x] L34. DIRECTOR PANE FREEZES (top-left) when a hero dies, rerolls, or a subject vanishes. ROOT CAUSE FOUND by the supervisor, two parts, both laptop-owned:

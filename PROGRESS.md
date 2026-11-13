@@ -3829,3 +3829,27 @@ D44 STANDING CHECK: three _townwalk runs gave in_solid 8/899, 0/754, 0/852. The 
 from 5 to 8 across passes. Escalated as D44b and placed ahead of D29 in the desktop queue. The
 instruction not to loosen the test is repeated there.
 
+
+## L-cycle 137 - L33 stuck-delver regression confirmed clear (laptop jestai, 2026-11-13) - L33 DONE
+DONE asked for "_l25_test OK 13/13 with 0 stuck over 3 consecutive runs". Run on current HEAD, three in a
+row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 watchdog frees each time.
+- WHAT THIS DOES AND DOES NOT PROVE, stated plainly because the tick should not say more than I checked:
+  I did NOT reproduce the original failure, so I have NOT identified its mechanism. "Fixed" here means
+  "not observable", on a bar the item itself set. What I can offer beyond the three runs is the session's
+  whole history: _l25_test has run roughly a dozen times across these cycles and reported 0 stuck every
+  time bar ONE - and that one was state="search" on floor 10, which was MY OWN L49 chest bug (a delver
+  grinding at a chest it could not path to), diagnosed and fixed in the L52 cycle. Different state,
+  different cause, already closed.
+- THE ATTRIBUTION IN THE ITEM LOOKS WRONG, and this is worth more than the tick. L33 blames L27a's nine
+  new monsters at depth. But the recorded failure was FLOOR 3, state=descend - and L27a widened the 6-7,
+  8-9 and 10+ bands while leaving the shallows deliberately untouched (its own test still enforces that).
+  Floor 3's roster was not changed by L27a. And "descend" is the walk to the stairs, which is routing,
+  not spawn density. So the stated cause cannot be the real one. That is the same shape of finding as
+  L46, L49, L50, L52 and L55: the symptom was real, the assumed mechanism was not.
+- WHAT PLAUSIBLY HELPED SINCE, offered as candidates rather than claims: L50's pack cap (one pick can no
+  longer fill a third of a floor, which is exactly the "denser population crowding fight slots" the item
+  suspected), and L25's own watchdog work. I am not asserting either fixed it.
+- IF IT EVER RETURNS: the thing to capture is the STATE in the failure line. "descend" points at routing
+  to the stairs; "search" points at L49's chests; "fight" would point at slot crowding. The test already
+  prints "stuck by floor / state", which is why the original report was diagnosable at all - keep that.
+- Regression: no game script was touched this cycle. The three runs ARE the evidence.

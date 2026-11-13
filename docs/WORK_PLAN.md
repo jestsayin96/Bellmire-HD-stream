@@ -955,3 +955,40 @@ not a worker error, and handed to the owner of the files to resolve with a windo
 CHANGELOG 2026-11-13 04:05 (supervisor): L39b added from Mr. E's annotated screenshot. The earlier L39 work was
 not wrong, it was short - width was close, height was a third of what he wants. This is the first
 time the item has had a number from him rather than an inference.
+
+# Phase S - supervisor pass 2026-11-13 05:02. Merged: content C5-C9, laptop L52/L53/L54. Gate clean.
+
+- [ ] L59b. COMMIT THE MERGE FIRST, THEN TEST. THIS IS WHY L59 KEEPS COMING BACK.
+      `hud-ui` branched at a1f7463 (Coordination 11) and HAS NEVER MERGED main since. main is now
+      49 commits ahead of that point; hud-ui has 5. A U2 session DID resolve all four code
+      conflicts correctly in the worktree - and then the run ended before committing, so the
+      resolution was lost. U3 and U4 then built on top of the still-unmerged branch. The supervisor
+      has now hit the same four conflicts a third time and will not resolve them blind, because
+      these are your files and a windowed test is the only real check.
+      THE FIX IS ORDERING, NOT SKILL. Next run, in this order, and do not reorder it:
+        1. git -C W2 merge origin/main
+        2. Resolve the four conflicts (auto_director.gd, spotlight.gd, hud_dock.gd, feed_hud.gd)
+           plus PROGRESS.md. Prefer YOURS - you own these files - but keep the laptop's
+           is_instance_valid(src) guard and its _eye_xform(eye) step in spotlight.gd, which your
+           side lacks and which are real: a freed camera is non-null.
+        3. COMMIT AND PUSH THE MERGE IMMEDIATELY. Before any Godot run, before any test, before
+           any further edit. A merge commit that only resolves conflicts is a perfectly good
+           commit. If this run dies after step 3 the work survives; if it dies before, we are back
+           here a fourth time.
+        4. THEN run your headless parse and your windowed test, and commit those separately.
+      Your U1-U4 work is good and none of it is in question - L34 is verified recovering from die,
+      reroll and despawn, which is exactly what was asked. The only defect is that the branch has
+      drifted 49 commits behind main and nobody has landed the reconciliation.
+      DONE: origin/hud-ui contains a merge commit from origin/main, and `git merge origin/hud-ui`
+      from main reports no conflicts.
+
+NOTE ON COLLISIONS, and this one is the supervisor's fault: the HUD worker has reported repeated
+two-session collisions (U3, U5). The cause is almost certainly the supervisor firing the task
+manually at a time close to its own :41 slot, producing two runs of the same task against one
+worktree. The supervisor will not hand-fire the HUD task again unless its slot is more than 20
+minutes away. The workers' lock discipline has held throughout - nothing was lost in any collision,
+because each session checked, stood down and wrote down the state it left behind.
+
+CHANGELOG 2026-11-13 05:02 (supervisor): merged content C5-C9 and laptop L52/L53/L54 to main; full gate clean
+(import, parse 0 errors, _offfloor, TWITCH_PARSE OK, _townwalk in_solid 0/824, _delve_test).
+hud-ui held with L59b. Hub H9 reviewed separately and held for Mr. E.

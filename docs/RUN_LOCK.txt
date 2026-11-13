@@ -1,1 +1,1 @@
-RUNNING 2026-11-13 03:14 (desktop HUD - U2 framing look)
+IDLE 2026-11-13 05:02 - supervisor: content C5-C9 + laptop L52-L54 merged, gate clean

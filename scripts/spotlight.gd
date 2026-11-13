@@ -25,6 +25,11 @@ class_name Spotlight
 
 const LANES := ["bits", "subs", "points"]
 const COL := {"bits": Color(0.95, 0.72, 0.18), "subs": Color(0.62, 0.36, 0.92), "points": Color(0.20, 0.72, 0.70), "director": Color(0.16, 0.10, 0.06), "wide": Color(0.38, 0.28, 0.19)}
+## L62 (Mr. E, Nov 13): each pane carries a LANE TITLE in words - DIRECTOR / BITS /
+## SUBSCRIBER / CHANNEL POINTS / (ambient) - so a viewer can read what the pane is
+## FOR, not just who it follows. The spend prompt: lane colour (L57) says which lane
+## visually; the title says the same in words.
+const KIND := {"director": "DIRECTOR", "bits": "BITS", "subs": "SUBSCRIBER", "points": "CHANNEL POINTS"}
 const LOOK_S := 10.0
 const POINTS_S := 15.0
 const SUB_S := 30.0
@@ -92,6 +97,8 @@ func restyle() -> void:
 	for k in _panes:
 		var p: Dictionary = _panes[k]
 		(p["label"] as Label).add_theme_font_size_override("font_size", UiTheme.px(24))
+		if p.has("kind"):
+			(p["kind"] as Label).add_theme_font_size_override("font_size", UiTheme.px(30))
 		(p["frame"] as Panel).add_theme_stylebox_override("panel", _frame_box(k))
 	_relayout(true)
 
@@ -527,13 +534,35 @@ func _make_pane(k: String) -> Dictionary:
 	lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	lb.visible = false                 # L57: now-watching label on every pane; _labels() manages it
 	box.add_child(lb)
+	# L62: the lane TITLE - DIRECTOR / BITS / SUBSCRIBER / CHANNEL POINTS (with "(ambient)"
+	# on an idle paid lane) - above the now-watching line, brighter and larger so a viewer
+	# reads the KIND first, who second. Stays clear of the Chronicle box like the now-watching
+	# label (positioned by _now_watching, L40 rule).
+	var kind_lb := Label.new()
+	kind_lb.add_theme_font_size_override("font_size", UiTheme.px(30))
+	kind_lb.add_theme_color_override("font_color", Color(1, 0.98, 0.92))
+	kind_lb.add_theme_color_override("font_outline_color", UiTheme.INK)
+	kind_lb.add_theme_constant_override("outline_size", UiTheme.px(6))
+	var kind_chip := StyleBoxFlat.new()
+	kind_chip.bg_color = Color(COL[k].r * 0.72, COL[k].g * 0.72, COL[k].b * 0.72, 0.95)
+	kind_chip.border_color = COL[k]
+	kind_chip.set_border_width_all(maxi(2, UiTheme.px(2)))
+	kind_chip.set_corner_radius_all(3)
+	kind_chip.content_margin_left = UiTheme.px(14)
+	kind_chip.content_margin_right = UiTheme.px(14)
+	kind_chip.content_margin_top = UiTheme.px(3)
+	kind_chip.content_margin_bottom = UiTheme.px(3)
+	kind_lb.add_theme_stylebox_override("normal", kind_chip)
+	kind_lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	kind_lb.visible = false
+	box.add_child(kind_lb)
 	# a thin timer bar along the bottom edge
 	var bar := ColorRect.new()
 	bar.color = COL[k]
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bar.visible = k in LANES
 	box.add_child(bar)
-	return {"box": box, "vp": vp, "cam": cam, "frame": frame, "label": lb, "bar": bar, "svc": svc, "key": k}
+	return {"box": box, "vp": vp, "cam": cam, "frame": frame, "label": lb, "kind": kind_lb, "bar": bar, "svc": svc, "key": k}
 
 func set_labels(v: bool) -> void:
 	labels_shown = v
@@ -703,14 +732,18 @@ func _now_watching(k: String) -> void:
 	if p.is_empty():
 		return
 	var lb: Label = p["label"]
+	var kind_lb: Label = p.get("kind")
 	var box: Control = p["box"]
 	if not labels_shown or not box.visible or not _rects.has(k):
 		lb.visible = false
+		if kind_lb:
+			kind_lb.visible = false
 		return
 	var who := ""
 	var reason := ""
 	var paid := false
 	var col: Color = COL.get(k, COL["wide"])
+	var ambient := false
 	if k in LANES:
 		var cur: Dictionary = lanes[k]["cur"]
 		if not cur.is_empty():
@@ -721,6 +754,7 @@ func _now_watching(k: String) -> void:
 		else:
 			who = _subject_name(_target(k))      # L32a: the idle lane's ambient subject
 			col = COL["wide"]
+			ambient = true
 	else:
 		who = _subject_name(_director_subject())
 		col = COL["director"]
@@ -728,7 +762,15 @@ func _now_watching(k: String) -> void:
 			who = "Bellmire"                     # the eye roaming the town, no one subject held
 	if who == "":
 		lb.visible = false
+		if kind_lb:
+			kind_lb.visible = false
 		return
+	# L62: the lane kind's title text - "DIRECTOR", "BITS", "SUBSCRIBER", "CHANNEL POINTS",
+	# with " \u00b7 ambient" appended on an idle paid lane so a viewer can tell at a glance
+	# the lane is unspoken-for and up for grabs.
+	var kind_txt := String(KIND.get(k, k.to_upper()))
+	if ambient:
+		kind_txt += " \u00b7 ambient"
 	var txt := "Now watching: " + who
 	if paid and reason != "":
 		txt += " \u2014 " + reason             # em dash before the reason the lane was bought
@@ -744,21 +786,41 @@ func _now_watching(k: String) -> void:
 	lb.clip_text = true
 	lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	lb.text = txt
+	# L62: paint the lane-kind chip at the brighter paid colour (or the muted ambient edge)
+	if kind_lb:
+		var kcol: Color = COL[k] if (k == "director" or paid) else COL["wide"]
+		var kc := StyleBoxFlat.new()
+		kc.bg_color = Color(kcol.r * 0.72, kcol.g * 0.72, kcol.b * 0.72, 0.95) if not ambient else Color(kcol.r, kcol.g, kcol.b, 0.80)
+		kc.border_color = COL[k]
+		kc.set_border_width_all(maxi(2, UiTheme.px(2)))
+		kc.set_corner_radius_all(3)
+		kc.content_margin_left = UiTheme.px(14)
+		kc.content_margin_right = UiTheme.px(14)
+		kc.content_margin_top = UiTheme.px(3)
+		kc.content_margin_bottom = UiTheme.px(3)
+		kind_lb.add_theme_stylebox_override("normal", kc)
+		kind_lb.add_theme_font_size_override("font_size", UiTheme.px(30))
+		kind_lb.text = kind_txt
+		kind_lb.visible = true
 	# L21: the chip never runs past its own pane (a long subject is cut with an ellipsis)
 	var fs := lb.get_theme_font_size("font_size")
 	var want := lb.get_theme_font("font").get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x + float(UiTheme.px(26))
 	var pr := pane_rect(k)
 	var m := float(UiTheme.px(10))
 	var left_col := pr.position.x < HudDock.screen().x * 0.5 - 1.0
+	var kind_h := kind_lb.get_combined_minimum_size().y if kind_lb else 0.0
+	var kind_w := kind_lb.get_combined_minimum_size().x if kind_lb else 0.0
+	var gap := float(UiTheme.px(4))
 	var top_y := m
 	var label_h := lb.get_combined_minimum_size().y
-	# L57 / L40: keep the label on the OUTER side of the centre Chronicle box. The box covers
+	var stack_h := kind_h + gap + label_h
+	# L57 / L40: keep the labels on the OUTER side of the centre Chronicle box. The box covers
 	# each pane's INNER corner; on the BOTTOM row its lower half meets the panes' top edge, so
 	# a wide label there must stop short of the box (ellipsised) rather than cross into it.
 	var lo := m                              # inner edge of the usable band (pane-local)
 	var hi := pr.size.x - m                  # outer edge
 	var cbox := HudDock.centre(town)
-	if cbox.size.x > 0.0 and pr.position.y + top_y + label_h > cbox.position.y and pr.position.y + top_y < cbox.end.y:
+	if cbox.size.x > 0.0 and pr.position.y + top_y + stack_h > cbox.position.y and pr.position.y + top_y < cbox.end.y:
 		if left_col:
 			hi = minf(hi, cbox.position.x - pr.position.x - m)
 		else:
@@ -767,6 +829,12 @@ func _now_watching(k: String) -> void:
 	lb.size = Vector2(minf(want, room), label_h)
 	# left column flush to the inner edge; right column flush so its right edge meets the outer
 	var x := lo if left_col else maxf(lo, hi - lb.size.x)
+	# L62: the kind title sits above the now-watching line, aligned on the same outer edge
+	if kind_lb:
+		kind_lb.size = Vector2(minf(kind_w, room), kind_h)
+		var kx := lo if left_col else maxf(lo, hi - kind_lb.size.x)
+		kind_lb.position = Vector2(roundf(kx), roundf(top_y))
+		top_y += kind_h + gap
 	lb.position = Vector2(roundf(x), roundf(top_y))
 
 ## L57: a readable name for whatever a pane follows - a viewer's hero (in town or below) by

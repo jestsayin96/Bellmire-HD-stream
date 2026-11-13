@@ -1,56 +1,30 @@
 extends CanvasLayer
 class_name LeaderboardPanel
-## L58 (Mr. E, Nov 13): THE GUILD ROLL LEAVES THE STREAM. His call: "the guild roll
-## it can stay on the hub doesn't need to be on stream, it can be for chat as well."
-## The top-10 standings still live in the two homes he said are enough - the viewer
-## hub's snapshot (snapshot_pub's "guild_roll") and the free !guild / !ranks chat
-## command (chatcmd -> roster.leaderboard) - so the on-screen Guild Roll board, and
-## the small Fallen list it carried, are removed from this file. Deaths still reach
-## the stream through the Chronicle (feed_hud); the standings no longer sit on it.
-##
-## What this CanvasLayer now draws is ONLY L51 THE SATCHEL (below): a viewer's own
-## sheet - worn gear and what each piece gives, the states on them, what they carry,
-## and what the counter would pay. The streamer folds the permanent grid to it with
-## I; I again lets go. There is no L toggle any more - the roll it showed is gone.
+## L58 (Mr. E, Nov 13): THE GUILD ROLL LEAVES THE STREAM.
+## L63 (Mr. E, Nov 13): THE SATCHEL LEAVES THE STREAM TOO. Per COORDINATION 13 the
+## on-stream surface is exactly six things (panes, Chronicle, lane titles, now-watching,
+## boss bar, in-world) - a viewer's own sheet is NOT one of them, so the L51 Satchel
+## moves to the viewer hub (H11). This CanvasLayer now draws NOTHING on stream. The
+## Satchel class below is kept DORMANT (not instantiated, no I key handler) so its gear /
+## state / sell-price logic is still reachable if the hub wants to share it; nothing in
+## this file reaches the screen any more. The setup(roster) entry point is a no-op kept
+## so existing callers in town.gd compile unchanged.
 
 var roster: Roster
 
 func setup(r: Roster) -> void:
+    # L63: still take the reference (so town.gd compiles), but do NOT subscribe to the
+    # roster's changes - there is nothing on stream to raise.
     roster = r
-    # L51: a viewer's purchase, reroll or find raises their satchel on its own
-    if roster != null and not roster.changed.is_connected(_on_hero_changed):
-        roster.changed.connect(_on_hero_changed)
-
-func _on_hero_changed(user_id: String) -> void:
-    if _satchel != null and is_instance_valid(_satchel):
-        _satchel.raise_for(user_id)
 
 func _ready() -> void:
-    layer = 20
-    UiTheme.watch(self)
-    _build_satchel()
+    # L63: no satchel, no key handler, nothing in the tree. layer and UiTheme.watch are
+    # left behind too - the file prints nothing to the stream any more.
+    pass
 
-## L15: F11 changed the UI scale - rebuild the satchel at the new scale, keeping
-## whoever it was showing and whether it was pinned
+## L63: the restyle path is gone - there is no live satchel to rebuild on an F11 scale cycle.
 func restyle() -> void:
-    var keep := ""
-    var pinned := false
-    if _satchel != null and is_instance_valid(_satchel):
-        keep = _satchel.uid
-        pinned = _satchel.sticky
-        _satchel.queue_free()
-    _build_satchel()
-    _satchel.sticky = pinned
-    if keep != "":
-        _satchel.raise_for(keep)
-
-func _unhandled_input(ev: InputEvent) -> void:
-    # L51: I pins a satchel up and rotates it through the living; I again lets go
-    if ev is InputEventKey and ev.pressed and not ev.echo and ev.keycode == KEY_I:
-        if _satchel != null and is_instance_valid(_satchel):
-            _satchel.pin(not _satchel.sticky)
-            Sfx.play("ui", -8.0)
-        get_viewport().set_input_as_handled()
+    pass
 
 
 ## ---------------------------------------------------------------- L51: THE SATCHEL

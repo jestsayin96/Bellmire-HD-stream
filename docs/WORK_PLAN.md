@@ -1108,3 +1108,47 @@ CHANGELOG 2026-11-13 10:19 (supervisor): merged content C12, laptop L43, hud-ui 
 clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor, TWITCH_PARSE OK, _delve_test).
 TICKED L57 and L58 - both are Mr. E's own rulings, implemented as he worded them.
 D44 raised for the intermittent in_solid.
+
+# Phase U - the laptop's queue is NOT empty (supervisor, 2026-11-13 11:22)
+
+The laptop reported "the assigned queue is empty" after L44. It finished the list it was GIVEN;
+it did not run out of work. Eleven laptop-owned items are still open. Take them in this order -
+this ordering is by what Mr. E actually asked for, not by ID.
+
+  1. L29a LORD MECHANICS - each canon lord gets a real mechanic (adds / phase / hazard / enrage).
+     He asked for bosses that get harder with depth and L45 gave them numbers; this gives them
+     BEHAVIOUR, which is what makes a lord memorable on stream.
+  2. L30c LOOT TABLES by depth and biome, boss uniques, and the Chronicle announcing a rare find.
+     L49 made searching visible; this makes what you find worth watching.
+  3. L29b RARE UNIQUES - the content writer has already WRITTEN them (bosses.json lesser_uniques
+     42, greater_uniques 36). Your half is the spawn rule and the visible modification. Read the
+     data, do not invent a parallel copy, and do not edit that file - it is the content writer's.
+  4. L29c SET-PIECE ENCOUNTERS from lore so a floor is not just a room of monsters.
+  5. L37 DUNGEON SCAR-VEINS ARE OVERDONE - from Mr. E's own 19:27 recording, the L28d glow decals
+     read as bright purple spray. Same family as L42; he has already said the dungeon looked like
+     a nightclub.
+  6. L33 STUCK DELVER REGRESSION - _l25_test went from a clean 0 stuck after L27a. Worth closing
+     before more monsters land.
+  7. L27b STRAINS - still committed WIP at 0f3986c. Finish or withdraw it; do not leave it parked.
+  8. L56 DELVE-HEAVY SOAK - seed a party straight to the mouth so boss and trap counts can be
+     trusted. Lower priority now that L45/L46 shipped with their own tests, but it is the only
+     thing that will give a clean dungeon baseline.
+  9. L30a GEAR EXPANSION - the code half only: more weapons and armour per tier VISIBLE on the
+     handslot bones. The item list itself is the content writer's.
+ 10. L30b COSMETICS AND DYES - again the code half only: !wear and !dye changing the model live.
+     The catalogue is written (46 cosmetics, 19 dyes) and is not yours to edit.
+
+OWNERSHIP CORRECTIONS - three items are no longer the laptop's, because the UI files moved under
+COORDINATION 11:
+  - L31 DUNGEON-FIGHT UI (damage numbers, status icons, "Now fighting: <lord>") -> DESKTOP HUD
+    for anything inside its seven files, feed_hud.gd included. If it needs party_frames.gd or
+    rts_camera.gd, flag it for the desktop build worker rather than reaching in.
+  - L36 CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (from Mr. E's 19:34 recording) -> DESKTOP
+    BUILD. rts_camera.gd owns the chat column. Same family as D41 and should be done with it.
+  - C1, C2, C3 are long since delivered by the content writer (C-cycles 1-13) and are stale
+    entries, not open work. Ignore them; they are left unticked only because nobody has gone back
+    to tick them.
+
+CHANGELOG 2026-11-13 11:22 (supervisor): queued L29a/L30c/L29b/L29c/L37/L33/L27b/L56/L30a/L30b for the laptop in
+priority order; reassigned L31 and L36 off the laptop to the HUD and desktop workers respectively;
+noted C1-C3 as stale. No new IDs minted - every item here already existed and keeps its number.

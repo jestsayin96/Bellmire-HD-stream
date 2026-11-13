@@ -83,7 +83,19 @@
     {"name": "The Rattling Host, Armoured", "shape": "it wears what the floor left behind - slower, and nothing gets through the front rank", "hp": 210, "speed": 2.6},
     {"name": "Nightwing, Smoke-Blind", "shape": "it cannot find you - it strikes where you were and wrecks the room doing it", "hp": 130, "speed": 7.0},
     {"name": "Nightwing, Carrion-Heavy", "shape": "it will not drop what it is carrying, so it fights you one-clawed and furious", "hp": 165, "speed": 4.8},
-    {"name": "Nightwing, Belfried", "shape": "it fights from the dark overhead and only comes down for the bell", "hp": 115, "speed": 7.0}
+    {"name": "Nightwing, Belfried", "shape": "it fights from the dark overhead and only comes down for the bell", "hp": 115, "speed": 7.0},
+    {"name": "The Hollow King, Snuffed", "shape": "its fire out entirely - cold, heavy and silent, and it will not be found by light", "hp": 210, "speed": 2.4},
+    {"name": "The Hollow King, Twice-Lit", "shape": "two fires in one crown - it burns one rank while the other is still choosing", "hp": 165, "attack": 23},
+    {"name": "The Hollow King, Fordbound", "shape": "it drags the Ford's water with it - the floor goes to mud and nobody keeps their feet", "hp": 185, "speed": 2.6},
+    {"name": "The Grubmother, Famined", "shape": "nothing left to spill - she comes herself, and she is quick about it", "hp": 140, "speed": 3.4, "attack": 24},
+    {"name": "The Grubmother, Crowned in Brood", "shape": "the brood rides her - cut her and you fight what falls off", "hp": 250, "speed": 1.6},
+    {"name": "The Grubmother, Toll-Fed", "shape": "fat on what the scar took in tolls - a wall that advances", "hp": 270, "speed": 1.2},
+    {"name": "The Rattling Host, Scattered", "shape": "it comes from four doorways at once and none of them are the one you watched", "hp": 165, "speed": 3.2},
+    {"name": "The Rattling Host, Chained", "shape": "bound shoulder to shoulder - it cannot flank, and it cannot be broken either", "hp": 225, "speed": 1.8},
+    {"name": "The Rattling Host, Lampbearing", "shape": "it carries the light itself, so the room moves when it moves", "hp": 180, "speed": 2.8},
+    {"name": "Nightwing, Grounded", "shape": "it will not leave the floor - slower, but everything it hits goes down with it", "hp": 175, "speed": 3.2, "attack": 25},
+    {"name": "Nightwing, Thin-Boned", "shape": "barely there - it dies to a good swing and almost never takes one", "hp": 80, "speed": 7.8},
+    {"name": "Nightwing, Mourning", "shape": "it circles one fallen thing and savages anything that comes near it", "hp": 145, "speed": 5.4, "attack": 24}
   ],
   "greater_uniques": [
     {"name": "The Gravewyrm, Half-Woken", "shape": "only half risen - slower and softer in the body, but its breath comes deep and ill-tempered", "hp": 230, "attack": 26},
@@ -122,6 +134,18 @@
     {"name": "The Pale Duchess, Invited", "shape": "she will not strike whoever has not drawn - everyone else, all at once", "hp": 220, "speed": 4.2, "attack": 31},
     {"name": "Mourncoil, Rimed", "shape": "armoured in its own frost - slow, heavy, and nothing lands clean through it", "hp": 360, "speed": 1.9, "attack": 25},
     {"name": "Mourncoil, Shivering", "shape": "the cold comes off it in pulses now, and between them it is only a snake", "hp": 280, "speed": 3.4, "attack": 27},
-    {"name": "Mourncoil, Drawn Thin", "shape": "stretched the length of the room, cold at both ends and thin in the middle", "hp": 250, "speed": 3.6, "attack": 26}
+    {"name": "Mourncoil, Drawn Thin", "shape": "stretched the length of the room, cold at both ends and thin in the middle", "hp": 250, "speed": 3.6, "attack": 26},
+    {"name": "The Gravewyrm, Toothless", "shape": "the breath is gone - so it coils and crushes instead, and it is patient about it", "hp": 300, "speed": 2.4},
+    {"name": "The Gravewyrm, Surfacing", "shape": "it comes up where it likes - no approach, no warning, no front rank", "hp": 245, "speed": 4.2, "attack": 27},
+    {"name": "The Gravewyrm, Brooding", "shape": "it will not leave its length of floor, and nothing crosses that floor", "hp": 340, "speed": 1.8},
+    {"name": "The Ossuary Lord, Scattered", "shape": "its bones work apart from it - half the room is fighting the other half of him", "hp": 270, "speed": 3.0},
+    {"name": "The Ossuary Lord, Crowned", "shape": "it raises one great thing instead of many small - and stands back while it works", "hp": 300, "attack": 26},
+    {"name": "The Ossuary Lord, Measured", "shape": "it takes exactly as many as it loses, never more - a fight that will not shrink", "hp": 320, "speed": 2.6},
+    {"name": "The Pale Duchess, Widowed", "shape": "no court left - she fights alone and fast, and she is worse for it", "hp": 190, "speed": 4.6, "attack": 30},
+    {"name": "The Pale Duchess, Crowned in Frost", "shape": "she borrows Mourncoil's cold and spends it in single, deliberate strikes", "hp": 230, "speed": 3.2, "attack": 29},
+    {"name": "The Pale Duchess, Counting", "shape": "she strikes the healthiest in the room, every time, and keeps count aloud", "hp": 215, "attack": 31},
+    {"name": "Mourncoil, Guttering", "shape": "the cold fails and returns - between failures it is fast, and it knows it", "hp": 265, "speed": 4.0},
+    {"name": "Mourncoil, Shoaled", "shape": "it fights in lengths, never all at once - break one and another is already cold", "hp": 330, "speed": 2.2},
+    {"name": "Mourncoil, Doorbound", "shape": "it holds the way out and nothing else - leave it be and it will let you work", "hp": 350, "speed": 1.6, "attack": 26}
   ]
 }

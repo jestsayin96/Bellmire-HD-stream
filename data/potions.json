@@ -65,7 +65,19 @@
     "watchmans_pint": {"name": "Watchman's Pint", "cost": 95, "tier": 2, "gives": "regenerating", "secs": 120, "aliases": ["watchmanspint", "pint"], "flavour": "Slow and steady, like the man they named it after."},
     "millrace": {"name": "Millrace", "cost": 130, "tier": 2, "gives": "haste", "secs": 22, "cures": ["slowed"], "aliases": ["millrace", "mill"], "flavour": "Goes through you the way the river goes under the wheel."},
     "chapelwater": {"name": "Chapel Water", "cost": 100, "tier": 2, "cures": ["frightened", "blinded"], "aliases": ["chapelwater", "chapel"], "flavour": "Blessed on a feast day. Works on the other days as well."},
-    "scarbite": {"name": "Scarbite", "cost": 150, "tier": 3, "gives": "scar_touched", "secs": 45, "aliases": ["scarbite", "bite"], "flavour": "The scar in a bottle. The apothecary charges extra for the stopper."}
+    "scarbite": {"name": "Scarbite", "cost": 150, "tier": 3, "gives": "scar_touched", "secs": 45, "aliases": ["scarbite", "bite"], "flavour": "The scar in a bottle. The apothecary charges extra for the stopper."},
+    "gatewater": {"name": "Gatewater", "cost": 45, "tier": 1, "gives": "warded", "secs": 90, "aliases": ["gate", "gatewater"], "flavour": "Drawn from the butt by the town gate. The guard swears by it; the guard is also never hurt."},
+    "chalkdraught": {"name": "Chalk Draught", "cost": 40, "tier": 1, "cures": ["blinded"], "aliases": ["chalk", "chalkdraught"], "flavour": "White, gritty, and it clears the eyes of whatever the scar put there."},
+    "tallow_cup": {"name": "Tallow Cup", "cost": 55, "tier": 1, "gives": "darkvision", "secs": 600, "aliases": ["tallow", "tallowcup"], "flavour": "Cheap, foul, and it saves a lamp's worth of oil every time."},
+    "guildmend": {"name": "Guild Mending", "cost": 90, "tier": 2, "heal": [3, 6, 3], "aliases": ["guild", "guildmend"], "flavour": "The guild's own, bought at the guild's own price. Nobody pretends otherwise."},
+    "bannerbrew": {"name": "Banner Brew", "cost": 110, "tier": 2, "gives": "heroism", "secs": 90, "cures": ["frightened"], "aliases": ["banner", "bannerbrew"], "flavour": "Served before the colours go up. Half of it is the colours."},
+    "fordwater": {"name": "Ford Water", "cost": 95, "tier": 2, "gives": "resist_frost", "secs": 120, "cures": ["slowed"], "aliases": ["ford", "fordwater"], "flavour": "Cold enough that nothing colder impresses you afterwards."},
+    "smithsdram": {"name": "Smith's Dram", "cost": 120, "tier": 2, "gives": "giant", "secs": 60, "aliases": ["smith", "smithsdram"], "flavour": "One mouthful, one lift. The smith measures it herself."},
+    "keepwater": {"name": "Keepwater", "cost": 180, "tier": 3, "gives": "warded", "secs": 150, "cures": ["frightened"], "aliases": ["keep", "keepwater"], "flavour": "Keep the door. Keep the drinker. In that order, the apothecary says."},
+    "longmend": {"name": "Long Mending", "cost": 220, "tier": 3, "heal": [4, 8, 4], "aliases": ["long", "longmend"], "flavour": "Works slowly and completely, which is the wrong way round for most nights down there."},
+    "scarquiet": {"name": "Scarquiet", "cost": 260, "tier": 3, "gives": "regenerating", "secs": 60, "cures": ["poisoned", "burning"], "aliases": ["scarquiet", "quietscar"], "flavour": "The scar stops arguing for a minute. Only a minute."},
+    "lordsmeasure": {"name": "Lord's Measure", "cost": 380, "tier": 4, "gives": "heroism", "secs": 120, "cures": ["frightened"], "aliases": ["lords", "lordsmeasure"], "flavour": "Brewed for the night a lord rises. Priced for the same night."},
+    "deeplast": {"name": "Deep Last", "cost": 440, "tier": 4, "heal": [5, 8, 6], "aliases": ["deeplast", "last"], "flavour": "The bottle you do not open unless you have already decided to come back up."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},

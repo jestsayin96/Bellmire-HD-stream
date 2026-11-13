@@ -3939,3 +3939,250 @@ row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 wat
   4. Nothing in this cycle changes a `cost` statement, so no disaster mechanic that is already
      implemented needs revisiting. This is a narration-only widening.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 16 - a shelf worth looking at twice: shop stock and caravan cargo per growth tier (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: standing-backlog item 2. C-cycle 15 recorded that the tier STRUCTURE was finished in
+  C-cycle 7, and that is still true - `stock_by_tier` has all twelve stages and every good carries
+  its own `tier`. What was thin was the BREADTH inside each stage. Measured before writing: 63 shop
+  goods and 33 cargoes over twelve tiers, which left tier 10 with four goods added and tier 12 with
+  five. A shop that shows its shelf twice in one stream shows the same shelf, and a caravan at the
+  high tiers kept drawing from a very short list. This cycle widens every stage instead of adding a
+  new mechanism.
+- data/items.json (additive only - the ONLY file touched this cycle):
+  - `shop_stock`: 63 -> 99. 36 new goods, three at every tier 1-12, each {name, cost, flavour, tier}
+    exactly like the existing entries. A crossing gains clay cups, onions and straw; a city gains a
+    painted lute, a wall tapestry and a case of silver spoons. Nothing a crossing cannot plausibly
+    sell appears below tier 9.
+  - `trader_cargo`: 33 -> 48. 15 new cargoes from tier 2 (plough irons) to tier 12 (a sealed coin
+    chest at 500, the most valuable thing a caravan now carries). Tier 1 still has no cargo at all,
+    because a tier-1 crossing has no caravans - that invariant is unchanged.
+  - `stock_by_tier`: each tier's `shop_adds` and `cargo_adds` APPENDED to with exactly the new keys
+    that carry that tier. Nothing removed, nothing reordered, no tier renamed. Per-tier shop_adds is
+    now 7-9 everywhere (was 4-6), cargo_adds 0-6.
+  - Costs follow the curve already in the file: everyday goods 1-40 low down, 60-190 at tiers 11-12;
+    cargo 85-500. No existing cost was touched.
+- NOT TOUCHED: lore_lines.json, bosses.json, potions.json (parsed, unchanged). No .gd, no .tscn, no
+  assets, no web/, no new data files. `growth_tiers` in lore_lines is READ ONLY here - the twelve
+  stage names in `stock_by_tier` still match it one for one.
+- VALIDATION OK (python only, no Godot): all four owned files json.load() clean; every pre-existing
+  key in items.json compared against `git show HEAD:data/items.json` and byte-identical, including
+  every one of the 63 old goods and 33 old cargoes and every pre-existing entry in `stock_by_tier`;
+  each tier's adds verified as an append-only PREFIX match of its old list; every new entry carries
+  exactly {name, cost, flavour, tier} with the same value types; every key named in `shop_adds` /
+  `cargo_adds` exists in its block and its `tier` field agrees with the tier that gates it; and every
+  good and cargo in the file is gated by exactly one tier (no orphans, no ungated goods). Errors: 0.
+  No dungeon floor count appears anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Nothing new. The two gates are the same two that C-cycle 7 established: filter with
+     `good.tier <= town_tier`, or read `stock_by_tier.tiers[n]` cumulatively. Both still agree.
+     OWNER: DESKTOP BUILD (D35 shop display / D39 trader caravans).
+  2. THE ONE RISK: any shop or caravan picker that reads a FIXED count off these blocks, or slices
+     the head of the dict, will show the same short shelf it showed before. Size off the filtered
+     list. OWNER: DESKTOP BUILD, same item.
+  3. A shop panel that was laid out for ~6 visible goods at a tier will now be handed 7-9. That is a
+     display decision, not a data one - the data is cumulative by design and will keep growing.
+     OWNER: DESKTOP BUILD (and DESKTOP HUD if the shelf is drawn in a HUD file).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 17 - E3PO, the Commander who cannot die, given a night watch and a whole town's worth of occasions (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: standing-backlog item 3, and the rotation's turn (C14 took item 5, C15 item 4, C16 item 2).
+  The `e3po` block was measured first. It already had intro/withdraw/return/says/town_talk from the
+  early cycles and raid/disaster/festival/viewer_roll from C-cycle 5 - but every one of those is a
+  COMBAT or CROWD occasion. On a long stream E3PO is on screen far more often than the town is on
+  fire: quiet nights, a viewer signing on, a viewer coming back up the scar, a viewer who does not,
+  a lord getting a name below, and the town climbing a growth tier. Those were the holes.
+- ADDED, data/lore_lines.json, `e3po` block ONLY (one file touched this cycle):
+  - SIX NEW KEYS, all in the same voice as `says`:
+    `tier_up`    12 entries, one per growth stage, {tier, line} - the Commander's reaction to Bellmire
+                 growing. `tier` matches `growth_tiers.tiers[n].name` EXACTLY, one for one, verified.
+    `night_watch` 10 - the quiet hour. The cheapest E3PO content there is and the most reusable.
+    `recruit`     8 - a viewer joins the Watch. Ends on his book, which is the whole ceremony.
+    `viewer_down` 8 - a viewer is lost. Played straight, no joke lands here; he knows the name.
+    `viewer_returns` 8 - a viewer comes back up alive. The counterweight to the one above.
+    `lord_sighted` 8 - something below has a name. Keeps 'shapes, not numbers' as his idiom.
+    `_note_c17`   the usual dead-until-wired note, matching `_note_extras` from C-cycle 5.
+  - APPENDED to the existing arrays (nothing reworded, nothing dropped):
+    intro 8->14, withdraw 10->16, return 9->15, says 20->30, town_talk 16->24,
+    raid 12->20, disaster 12->20, festival 10->16,
+    viewer_roll.crit 5->9, .high 5->9, .low 5->9, .fumble 5->9.
+  - e3po total: 11 keys -> 17 keys, 104 lines -> 208 lines. Every new line is one screen-glance long.
+- CANON HELD: he cannot die and he is never said to; `withdraw` is always the barracks and never a
+  grave. He predates the wall (town_talk), so `tier_up` gives him a line at all twelve stages, not
+  only from The Garrison on. No dungeon floor count anywhere. The inscription (MEASURE THE GRAIN,
+  COUNT THE FLASKS, KEEP THE DOOR) is used as HIS three rules in `recruit` and again at the top tier.
+- VALIDATION OK (python only, no Godot): data/lore_lines.json json.load() clean; the file was parsed
+  BEFORE the edit and the whole pre-edit tree compared against the re-parsed file node by node - every
+  pre-existing key present, every pre-existing scalar equal, no list shorter than it was, and every
+  pre-existing list element still at its old index (append-only prefix match). Errors: 0. Every new
+  line is a str; every `tier_up` entry is exactly {tier, line} with both str. File stays pure ASCII,
+  LF, 2-space indent, trailing newline, as it was. The other three owned files were NOT touched.
+- ONE FORMATTING NOTE, deliberate and harmless: three entries in `town_life` carried a stray comma on
+  its own line from an older hand edit. Re-serialising normalised them to `"line",`. The STRINGS are
+  byte-identical - only the comma moved up a line. `git diff` shows 3 such pairs and nothing else
+  removed. No value in the file changed.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. All six new keys are DEAD until wired, exactly like the C-cycle 5 keys. OWNER: whoever owns the
+     E3PO wiring (raids.gd / town.gd on the DESKTOP BUILD side).
+  2. `tier_up` is the only new key with a JOIN: it is matched to the growth stage by `tier` NAME. If
+     the desktop prefers an index, read it positionally - the twelve are in `growth_tiers` order. Do
+     not re-key it by hand; ask content to add the field. OWNER: DESKTOP BUILD (D31/D32 growth).
+  3. `viewer_down` / `viewer_returns` / `recruit` need a VIEWER EVENT to hang on, not a tick. If no
+     such hook exists yet, these three sit dead and nothing breaks. OWNER: DESKTOP BUILD (Twitch hooks).
+  4. `night_watch` wants a RATE LIMIT, not a loop - it is ambient and will read as spam if fired every
+     night cycle. One in n nights, or on idle. OWNER: whoever wires it. DESKTOP HUD if it is drawn in
+     a HUD file rather than spoken by the town.
+  5. Anything already reading `e3po` with a fixed line count will miss the appends. Size off len().
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 18 - the channel-point shelf: 18 accessories, 40 cosmetics, 20 dyes (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: standing-backlog item 1, and the rotation's turn (C14 item 5, C15 item 4, C16 item 2,
+  C17 item 3). This is also work-plan C1. Cosmetics are what viewers actually spend on, so the shelf
+  has to keep widening or the same hat is bought by everyone on a long stream. The gaps were measured
+  first: accessories sat at 96 with five slots, cosmetics at 183 (46 hat / 38 banner / 22 pet /
+  77 title), dyes at 101. Pets were SKIPPED on purpose - every .glb in assets/animals is already in
+  use by an existing pet and content does not invent asset paths.
+- ADDED, data/items.json ONLY (one file touched this cycle):
+  - ACCESSORIES 96 -> 114. Eighteen, spread across all five slots and all six stat shapes:
+    rings tithe/cartwright/lastcoin/watchfire/oathwrong, amulets ninthbell/saltline/kindling/
+    grainward, cloaks fogrun/sparewall/wakeward, boots mudplank/firstlight/longcount, gloves
+    ropeburn/coldforge/splintwrap. Every one carries exactly one bonus (ac, saves, hp, speed, hit or
+    dmg) and a flavour line that says what the thing IS, not what it does - "Hammered flat from the
+    coin he would not spend to leave", "Two fingers of hard cane sewn in. Hands break first and heal
+    slowest." Costs sit inside the ranges the existing entries already set per slot (ring 210-520,
+    amulet 230-470, cloak 240-500, boots 200-420, gloves 200-330), so nothing undercuts the shelf.
+  - COSMETICS 183 -> 223. Twelve hats (90-260), ten banners (90-140), eighteen titles (60-330).
+    The three sets share a spine with the new accessories - tithe, saltline, watchfire, ninth bell,
+    fog-run, long count, cold forge, kindling, rope-burn - so a viewer can dress a whole theme out of
+    hat + banner + title + dye + ring rather than buying one orphan. Titles stay the cheap repeat
+    purchase ("Rope-burned" 120, "Flat-footed in the Fen" 70) with the brag tier up top ("First on
+    the Wall" 320, "Wrong Hand, Right Oath" 330).
+  - DYES 101 -> 121. Twenty new names, all six-hex lowercase, none colliding with the existing set:
+    tithe, saltline, watchfire, fogrun, ninthbell, ropeburn, coldforge, kindling, longcount,
+    firstlight, wakeward, mudplank, splintcane, lastcoin, grainward, cartwheel, oathwrong, fenmist,
+    wallstone, nightfurrow. dye_cost UNCHANGED at 25 - widening the palette must not reprice it.
+- VALIDATION OK (python only, no Godot): data/items.json parsed BEFORE the edit, re-parsed after, and
+  the whole pre-edit tree compared node by node - every pre-existing key present, every pre-existing
+  scalar equal, top-level key order identical. Errors: 0. Every new accessory matches one of the six
+  keysets already in the block exactly; every new cosmetic matches its kind's keyset exactly
+  (hat/banner = colour+cost+kind+name, title = cost+kind+name); every colour and dye is /[0-9a-f]{6}/;
+  every cost is an int. The other three owned files were read and parsed clean and NOT edited.
+- FORMATTING NOTE, deliberate and harmless: `git diff --numstat` is 81 added / 3 removed. The three
+  "removed" lines are the former LAST entry of accessories, cosmetics and dyes, re-added byte for byte
+  with a trailing comma (warhorn_mantle, title_countedback, the `warhorn` dye). No value changed.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Nothing new to wire for function: every added entry uses a slot, kind and stat field the loaders
+     already read. If `!wear` and `!dye` work today they work on these.
+  2. SIZE OFF len(), NOT a constant. Any shop/wardrobe panel that pages cosmetics at a fixed count now
+     has 223 to page instead of 183, and 121 dyes instead of 101. A hard-coded dye grid will clip.
+     OWNER: DESKTOP HUD (the wardrobe/shop panel is a HUD file), with DESKTOP BUILD if the shelf is
+     drawn in town.
+  3. Titles are now 95 of the 223 cosmetics. If titles share one list with hats and banners in the UI,
+     they will swamp it - they want their own tab or a filter by `kind`. OWNER: DESKTOP HUD.
+  4. dye_cost is still a single int for all 121 dyes. If a rare-dye price tier is ever wanted, that is
+     a data-shape change and content should be asked for it - do not special-case it in .gd.
+  5. PETS NOT ADDED this cycle and that is a content block, not an oversight: new pets need new .glb
+     assets. OWNER: DESKTOP BUILD (assets) before content can name them.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 19 - the spend shelf, the tier gate, E3PO and the disasters (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: the supervisor's streamable-today order - (1) what viewers buy, (2) tier-gated stock for
+  D35/D39, (3) E3PO for D37, (4) disaster variants so repeats do not read identically. All four were
+  taken in one cycle, two files touched: data/items.json and data/lore_lines.json.
+- 1. THE SPEND SHELF, data/items.json:
+  - ACCESSORIES 114 -> 130. Sixteen: rings bellfounder/quarryman/pilgrim, amulets ferrybell/votive/
+    weighstone, cloaks thatcher/crane/pilgrim, boots towpath/pavers/ferrystep, gloves glazier/
+    ropewalk/rivet/beeswax. One bonus each, costs inside the per-slot ranges already set, and a
+    flavour that sells the thing rather than the stat - "Doubled at the shoulder, where the rope goes
+    when the rope goes wrong", "Three thicknesses at the fingertip. Glass takes the careless hand."
+  - COSMETICS 223 -> 253: 10 hats (50-250), 8 banners (90-140), 12 titles (80-300). Same trade spine
+    as the accessories, so hat + banner + title + dye + ring buys a whole guild look rather than an
+    orphan hat. DYES 137 (+16). dye_cost UNCHANGED at 25.
+- 2. THE TIER GATE, data/items.json (feeds D35/D39):
+  - shop_stock 99 -> 123 goods: TWO new goods at EVERY tier 1-12, each carrying its "tier" field, so
+    a crossing sells thatch and a clay pot and a city sells a pomander and an empty gilt frame.
+  - trader_cargo 48 -> 68: two per tier for tiers 3-12 (tiers 1-2 still have no caravans, by design).
+  - stock_by_tier.shop_adds / cargo_adds extended in step, and the two representations were checked
+    against each other: every added key exists in its catalogue, its `tier` field equals the tier it
+    is listed under, nothing appears at two tiers, and nothing in either catalogue is ungated.
+- 3. E3PO, data/lore_lines.json (feeds D37): raid 20 -> 28, disaster 20 -> 28, festival 16 -> 22,
+  viewer_roll crit/high/low/fumble 9 -> 14 each. Voice unchanged - immortal, a little pompous, never
+  cruel to a viewer who rolled badly ("A bad roll is not a bad soldier. Do it again.").
+- 4. DISASTER VARIANTS, data/lore_lines.json: all THIRTEEN disasters widened in the same three places -
+  during 14 -> 17, begin_alt 6 -> 8, pass_alt 6 -> 8 (91 new lines). Every line is specific to its
+  disaster, not reusable filler: the ferryman walking the dry Ford in `drought`, boats in the market
+  square in `flood`, chalk washed off the last door in `sickness`. `begin`, `pass` and `cost` are
+  UNTOUCHED on every one - `cost` is the desktop's spec and content does not move it mid-build.
+- VALIDATION OK (python only, no Godot): both edited files json.load() clean; each was read from
+  HEAD, re-parsed after the edit and compared node by node - every pre-existing key present, every
+  pre-existing scalar equal, no list shorter than it was, every pre-existing element still at its old
+  index, top-level key order identical. Errors: 0. Shape checks: every new accessory matches one of
+  the six existing keysets; every new cosmetic matches its kind's keyset; every colour and dye is
+  /[0-9a-f]{6}/; every shop_stock and trader_cargo entry is exactly {name,cost,flavour,tier} with an
+  int cost and 1 <= tier <= 12; every disaster still carries exactly {begin,during,pass,cost,
+  begin_alt,pass_alt} and every new line is a str. Both files stay pure ASCII, LF, 2-space indent,
+  trailing newline. bosses.json and potions.json were parsed clean and NOT edited this cycle.
+- FORMATTING NOTE, deliberate and harmless: numstat is 177+/27- on items.json and 179+/46- on
+  lore_lines.json. Every "removed" line is a former LAST element re-added byte for byte with a
+  trailing comma (27 = the last entry of each extended block plus the last element of each extended
+  tier array; 46 = the 7 extended e3po arrays plus 3 arrays on each of the 13 disasters). No value
+  changed.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. D35/D39 CAN NOW FILTER WITHOUT A REVERSE MAP: `good.tier <= town_tier` over shop_stock, and
+     `cargo.tier <= town_tier` over trader_cargo, give the same answer as walking stock_by_tier
+     cumulatively. Both are maintained together; if they ever disagree, that is a content bug - report
+     it, do not patch one side in .gd. OWNER: DESKTOP BUILD.
+  2. A tier-1 shelf is now 11 goods and a tier-12 shelf is every good in the file. Any shop panel laid
+     out for a fixed count will clip at the top tiers. OWNER: DESKTOP BUILD / DESKTOP HUD.
+  3. A tier-1 or tier-2 caravan still has ZERO cargo by design. Code that assumes a caravan always has
+     something to carry must handle the empty list, not crash on it. OWNER: DESKTOP BUILD.
+  4. D37: the four viewer_roll buckets are now 14 lines each and `raid`/`disaster`/`festival` are
+     28/28/22. Size off len(). Nothing was re-keyed.
+  5. Disaster pickers that roll begin_alt/pass_alt by a hard-coded 0-5 will now never show the two new
+     lines on any disaster. Roll against len(). OWNER: whoever owns D34.
+  6. Nothing new needs wiring to FUNCTION: every key added this cycle is one the loaders already read.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 20 - the lines that repeat most, plus rare uniques and brews (laptop CONTENT, branch `content`)
+- WHEN: 2026-11-13, worktree C:\Users\Jestsayin96\Project1\bellmire-content (W3). Godot NEVER run.
+- WHY: standing backlog 5 (epitaphs, barks, descend, cleared - the lines a long stream repeats most)
+  and 6 (more shape-first lord variants and brews). WORK_PLAN has no ticked CONTENT item; C2 and C3
+  are the matching entries and are left UNTICKED for the supervisor.
+- data/lore_lines.json (additive):
+    descend   66 -> 86    cleared   66 -> 86    epitaphs  96 -> 128   misfire (templated) 30 -> 38
+    barks.enter 40->52, barks.lord 40->52, barks.trap 39->51, barks.hurt 39->51,
+    barks.drink 39->51, barks.misfire 39->49
+    tells: all eight locales 16 -> 22 (tomb, mine, fortress, temple, lair, prison, works, warren)
+  Every new `descend` line is either a 2-%s template or a plain line, matching both existing forms;
+  every new `cleared` line is either a single-%d template or plain; every new `misfire` line carries
+  exactly two %s then two %d, like the 30 already there. No floor count is stated anywhere.
+- data/bosses.json (additive): lesser_uniques 42 -> 54, greater_uniques 36 -> 48. All 24 are modified
+  versions of the EIGHT existing lords - no new lord, no new key. Each names its modifier in `shape`
+  and skews hp/speed/attack to match it (a faster one is frailer, a walling one is slower), never a
+  flat stat bump. Field sets are drawn only from {name, shape, hp, speed, attack}, as before.
+- data/potions.json (additive): potions 64 -> 76. Twelve brews across tiers 1-4, costs 40-440, sitting
+  inside the existing price ladder. Every `gives` names a state already in the `states` block and
+  carries `secs`; every `cures` names an existing state; every `heal` is a 3-int array. No state added,
+  no key renamed, `states` untouched.
+- VALIDATION OK: python json.load on all four owned files (items.json untouched this cycle) - all four
+  parse. A key-by-key walk against `git show HEAD:<file>` confirms every pre-existing key and value is
+  present and unchanged and no array shrank; the diff is +255 / -21 lines and every one of those 21 is
+  an existing last-entry line gaining a trailing comma. Files were edited in place so the original
+  one-entry-per-line formatting is preserved. No duplicate unique name; no new duplicate potion alias.
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. Nothing new needs wiring to FUNCTION. Every key touched this cycle already has a loader.
+  2. Any picker that rolls these arrays with a hard-coded range will now never show the new lines.
+     Roll against len(). Affected: descend/cleared/epitaphs/misfire and all six barks arrays
+     (LAPTOP CODE - delve.gd/chatcmd.gd), tells (LAPTOP CODE - floorgen/bestiary tell budget).
+  3. epitaphs is now 128 and the Chronicle shows epitaphs in a fixed-width lane - a longer line may
+     clip where the 96 older ones did not. The longest new epitaph is 59 chars against an old maximum
+     of 56, so the lane is now asked for 3 characters more than it has ever been asked for.
+     OWNER: DESKTOP HUD (L39/L40).
+  4. bosses.json uniques: 54 lesser / 48 greater. Any rare-unique draw with a hard-coded table size,
+     or a two-bag draw sized off the old counts, must size off len(). OWNER: LAPTOP CODE (bestiary.gd).
+  5. potions.json: 76 brews. !brew lists and any shop/apothecary panel laid out for a fixed count will
+     clip. The new keys are gatewater, chalkdraught, tallow_cup, guildmend, bannerbrew, fordwater,
+     smithsdram, keepwater, longmend, scarquiet, lordsmeasure, deeplast.
+     OWNER: LAPTOP CODE (the !brew path) / DESKTOP HUD (the panel).
+  6. PRE-EXISTING, NOT FROM THIS CYCLE: the alias "quarry" resolves to two brews (quarryblood and
+     quarrymend). It is ambiguous in HEAD too, so I left it alone - additive only. If !brew quarry
+     should pick one, that is Mr. E's call and a one-word content fix next cycle.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

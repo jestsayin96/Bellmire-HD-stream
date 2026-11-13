@@ -2586,3 +2586,60 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   3. The tier-4 brew (The Grain Measure, 340) is the eighth tier-4 price in the file - if the apothecary's
      tier-4 stock is hardcoded anywhere rather than filtered on "tier", it wants a look. LAPTOP CODE.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 9 - the channel-point shelf: accessories, cosmetics and dyes widened (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, and was NEVER checked out - only `git fetch`ed,
+  per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- BACKLOG ITEM 1 (cosmetics, accessories and dyes - what viewers actually spend on). Only data/items.json
+  was touched this cycle; lore_lines.json, bosses.json and potions.json are byte-unchanged.
+- data/items.json, all additive into the EXISTING blocks (no key renamed, no key removed, no new block):
+  - accessories 57 -> 78 (+21), spread so no slot falls behind: ring 13 -> 17, amulet 12 -> 16,
+    cloak 11 -> 15, boots 10 -> 14, gloves 11 -> 16. Each new entry carries exactly ONE of the six
+    existing bonus keys (ac / saves / hp / speed / hit / dmg) at the same magnitudes already in the file
+    (+1, or hp 10-14) - no new stat key, no bigger number than the catalogue already allows.
+    Priced inside the ranges already set per slot (ring 210-520, amulet 230-360, cloak 240-480,
+    boots 200-300, gloves 200-300). Named off canon, not invented against it: the clapperless bell,
+    the architect and his toys, the toll, the Ford and the ferry, the bucket line, the chapel, the crater,
+    the Chronicle, and the eight lords (Gravewyrm hide, Ossuary mantle, Mourncoil scale, Nightwing boots,
+    the Pale Duchess's gloves, the Rattling Gauntlets, the Grubmother's brood-iron). Every flavour line is
+    one short beat that earns the price - a reason to buy THAT one, not a restatement of the name.
+  - cosmetics 111 -> 157 (+46): hats 25 -> 37 (+12), banners 23 -> 32 (+9), pets 14 -> 22 (+8),
+    titles 49 -> 66 (+17). Same three shapes as before and no fourth: hats and banners {name, kind, cost,
+    colour}, pets {name, kind, cost, model, scale}, titles {name, kind, cost}.
+  - The eight new pets reuse MODELS ALREADY ON DISK (Duck, Sheep, Pig, Corgi, Horse, Cow, Red) at new
+    scales - a gander, a drake, a yearling ewe, a young boar, a corgi pup, a mare, a heifer, a fox cub -
+    so they need NO new art and cannot render as a missing mesh. Every model path was checked to exist
+    in the tree as part of validation.
+  - Titles are the cheap tier that keeps a small-spend viewer buying (Late to the Ford 40, the Unmeasured
+    50, the Quiet One 60, Toll-paid 70) and the trophy tier that gives a big spend somewhere to go
+    (Gravewyrm-faced 290, the Architect's Toy 280, Favoured of the Duchess 270, the Clapperless 260).
+  - dyes 64 -> 83 (+19) lore-named colours: clapper, ossuary, gravewyrm, nightwing, duchess, mourncoil,
+    hollow, toll, barracks, grainsack, tannin, blueglass, sedge, quarry, lampoil, soot, brick, flaxen,
+    bellbronze. All six-digit lowercase hex, exactly as the existing dyes are. dye_cost left at 25 -
+    one flat price is what keeps !dye an impulse buy, so widening the palette does not touch it.
+- VALIDATION OK (python only - the content worker never runs Godot):
+  - All four owned files json.load() clean.
+  - Key-shape census before/after: accessories still has exactly the same six key-sets, cosmetics exactly
+    the same three. No entry introduced a new or missing field; name/cost/slot/kind value types checked;
+    every dye value checked as 6-char lowercase hex.
+  - `git diff` on data/items.json is 89 added lines and 3 removed, and all three removals are the former
+    last entry of each block re-added with nothing but a trailing comma (drover_spurs, title_coldcounted,
+    lampblack) - so every pre-existing key is byte-identical.
+- CODE WIRING the new keys imply (for the supervisor to route - content never touches code):
+  1. NOTHING here is required. Accessories, dyes and titles are read by key from blocks the game already
+     reads, so the catalogue simply gets longer the moment this merges. If !wear / !dye / the shop list
+     page their output, 78 accessories and 83 dyes may now need a second page. OWNER: whoever owns the
+     shop/wear command print - LAPTOP CODE (chatcmd.gd / gear.gd).
+  2. STILL OPEN from C-cycle 1, now larger: hats and banners carry a `colour` but no `model`, so unless
+     the hat/banner spawner maps a cosmetic key to a mesh, all 37 hats and 32 banners render as the
+     default shape tinted. That is the single highest-value wiring job on this file. OWNER: whoever owns
+     cosmetic spawning - LAPTOP CODE (gear.gd) for the delver, DESKTOP BUILD (hero_body.gd / rig.gd) if
+     town bodies wear them too.
+  3. The 8 new pets need no new asset, but the pet spawner must read `scale` from the entry rather than
+     assuming one scale per model - three models now appear at two sizes each (Duck, Sheep/Pig, Horse/Cow,
+     Red). OWNER: whoever spawns pets - DESKTOP BUILD (animal.gd) / LAPTOP CODE (gear.gd).
+  4. Titles are text-only. If the HUD nameplate has a fixed width, "Favoured of the Duchess" and
+     "Clapperless Bell Banner" are the longest strings the catalogue now contains. OWNER: DESKTOP HUD.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

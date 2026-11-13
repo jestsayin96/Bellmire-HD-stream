@@ -1906,3 +1906,23 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   (in_solid 0/18777, raid 0/3561); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR; D25_PROBE OK (lvl 3 + 6).
 - New tools: _d25_probe.gd, _d25_shot.gd, _d25_diag.gd (+ .uid). Shot sheet renders/cycles/20261112_d25/.
   Backup scripts/town.gd.bak_d25 (not committed).
+
+
+## D-cycle 121 - D27 empty+dark town (desktop CruzaderPC, 2026-11-12) - D27 DONE
+- BRIGHTNESS: the "08:40 looks like dusk" was an OVERCAST morning, not the daylight curve. Clear 08:00 already
+  lights at full sun energy (1.5); overcast greyed the sky (cover 0.78 + dark 0.55) and cut sun to 0.76, so the
+  daytime fill light collapsed to a gloom. Fix in daylight.gd: overcast sun 0.76->0.88, dark 0.55->0.42; rain sun
+  0.55->0.66, dark 0.9->0.78; and a daytime ambient boost that compensates the greyed sky -
+  env.ambient_light_energy *= (1 + _wx.dark * 0.6 * (1 - nt)). Clear days (dark=0) and night (nt=1) are untouched.
+  08:00 overcast now reads as bright cloudy DAYLIGHT (before/after in renders/cycles/20261112_d27).
+- FILL: the hex grass islands between the radial roads were bare lawns (a lamp each). New town.gd _dress_greens()
+  (called right after _scatter_nature) dresses every grass cell (no road/square/plot) with 3-5 flora each - flower
+  beds (Flower_3/4_Group), bushes, ~16% small trees - is_clear-gated, gate lanes + river kept clear. 644 flora
+  placed. Trees + bushes register in _objs so the navmesh carves them; flower beds are walked over.
+- FPS (uncapped, 1080p, resting stream cam, noon clear) after the fill: avg 128.2 min 94.0 - still >= the D23 120
+  target (and that run was contended with the gate tools). _townwalk 120 s PASS in_solid 0/19095 - flora didn't
+  block walkability.
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/946 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk PASS
+  (raid 0/4001); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR.
+- Shot sweep tools/_d27_shot.gd -> renders/cycles/20261112_d27/ (08 overcast+clear, 12 clear+overcast, 18, 22,
+  plots_wide, back_grass). Backup scripts/daylight.gd.bak_d27 (not committed; town.gd.bak_d25 already made this run).

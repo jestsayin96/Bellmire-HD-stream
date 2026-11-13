@@ -975,6 +975,7 @@ func _build() -> void:
     _street_furniture()
     _dress_streets()
     _scatter_nature()
+    _dress_greens()
     _build_scar()
     _build_fields()
     _build_farms()
@@ -1255,6 +1256,56 @@ func _scatter_nature() -> void:
                 c + Vector3(cos(a) * r, 0.0, sin(a) * r),
                 rng.randf_range(0.0, TAU),
                 rng.randf_range(0.8, 1.35) if is_tree else rng.randf_range(0.7, 1.1)))
+
+## D27: the grass islands between the radial roads read as bare lawns from the
+## stream camera. Fill them with tended greenery - flower beds, bushes and the
+## odd tree - so no angle lands on featureless grass. Grass cells only (no road,
+## square or plot); gate lanes and the river kept clear; trees/bushes register as
+## nav solids so walkers route round them and _townwalk stays at 0 in_solid.
+func _dress_greens() -> void:
+    var taken := {}
+    for plot in plots:
+        taken[plot["cell"]] = true
+    var rng := RandomNumberGenerator.new()
+    rng.seed = 909
+    var flowers := ["Flower_3_Group", "Flower_4_Group"]
+    var lane_end := Hex.pos(Hex.COLS - 2, int(Hex.ROWS / 2))
+    var greened := 0
+    for cell in district_of:
+        if road_cells.has(cell) or square.has(cell) or taken.has(cell):
+            continue
+        var c := Hex.pos(cell.x, cell.y)
+        if river_dist(c.x, c.z) < RIVER_W + 2.0:
+            continue
+        var n := rng.randi_range(3, 5)
+        for i in range(n):
+            var a := rng.randf_range(0.0, TAU)
+            var r := rng.randf_range(0.8, 5.0)
+            var tp := c + Vector3(cos(a) * r, 0.0, sin(a) * r)
+            if absf(tp.z - lane_end.z) < 9.0 and absf(tp.x) > absf(lane_end.x) - 8.0:
+                continue        # keep the gate lanes clear
+            if river_dist(tp.x, tp.z) < RIVER_W + 2.0:
+                continue
+            var roll := rng.randf()
+            var is_tree := roll < 0.16
+            var rad := 1.6 if is_tree else 0.65
+            if not is_clear(tp, rad):
+                continue
+            var nm: String
+            if is_tree:
+                nm = String(TREES[rng.randi() % TREES.size()])
+            elif roll < 0.55:
+                nm = String(BUSHES[rng.randi() % BUSHES.size()])
+            else:
+                nm = flowers[rng.randi() % flowers.size()]
+            var sc := rng.randf_range(0.85, 1.3) if is_tree else rng.randf_range(0.6, 1.0)
+            if bool(_spawn(NATURE, nm, tp, rng.randf_range(0.0, TAU), sc)):
+                _nature_made += 1
+                greened += 1
+                # trees and bushes block the navmesh; flower beds are walked over
+                if is_tree or nm.begins_with("Bush"):
+                    _objs.append([tp, rad])
+    print("D27_GREENS placed %d flora on the grass islands" % greened)
 
 ## The spine is carried out to the wall later, so nothing may stand on that
 ## line - a house had been built right across the inside of the west gate.

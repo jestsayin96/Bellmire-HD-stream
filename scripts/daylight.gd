@@ -23,8 +23,8 @@ const DUSK := 18.5
 ## (days are 90 s real); the change itself blends over ~8 s so the sky never pops.
 const WEATHERS := {
     "clear":    {"cover": 0.32, "dark": 0.0,  "fog": 1.0, "sun": 1.0,  "rain": 0.0},
-    "overcast": {"cover": 0.78, "dark": 0.55, "fog": 2.3, "sun": 0.76, "rain": 0.0},
-    "rain":     {"cover": 0.97, "dark": 0.9,  "fog": 4.2, "sun": 0.55, "rain": 1.0},
+    "overcast": {"cover": 0.78, "dark": 0.42, "fog": 2.3, "sun": 0.88, "rain": 0.0},   # D27: brighter overcast - a grey DAYTIME, not dusk
+    "rain":     {"cover": 0.97, "dark": 0.78, "fog": 4.2, "sun": 0.66, "rain": 1.0},   # D27: rain a touch brighter too
 }
 const FOG_BASE := 0.0011           # the D18 distance haze, scaled by weather
 var weather := "clear"             # the name the snapshot publishes
@@ -235,7 +235,10 @@ func _process(_dt: float) -> void:
         env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
         env.ambient_light_color = Color(0.42, 0.50, 0.74)
         env.ambient_light_sky_contribution = lerpf(1.0, 0.3, nt)
-        env.ambient_light_energy = lerpf(0.85, 0.8, nt)
+        # D27: overcast/rain grey the sky, which dimmed the daytime fill light to a
+        # dusk-like gloom; lift daytime ambient with the weather darkness so a cloudy
+        # morning reads as bright-grey DAYLIGHT. Clear days (dark=0) are unchanged.
+        env.ambient_light_energy = lerpf(0.85, 0.8, nt) * (1.0 + float(_wx["dark"]) * 0.6 * (1.0 - nt))
         env.fog_light_color = Color(0.70, 0.77, 0.84).lerp(Color(0.86, 0.60, 0.45), gd * (1.0 - nt)).lerp(Color(0.10, 0.12, 0.20), nt) \
             .lerp(Color(0.45, 0.48, 0.52), float(_wx["dark"]) * 0.5 * (1.0 - nt))
         # D19b: the haze thickens with the weather, and a mist at the gold hours of the morning

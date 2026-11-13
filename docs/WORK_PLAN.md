@@ -598,7 +598,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 
 # Phase L - Mr. E's Nov 13 review (the stream test + his 20-point list). IDs by the supervisor.
 # URGENT - viewer-facing
-- [ ] T3. !enlist "DID NOTHING" ON STREAM + THE REPLY PATH DROPS SILENTLY (OWNER: DESKTOP - twitch_eventsub.gd is desktop-owned). Investigated by the supervisor: the COMMAND path is sound - chatcmd._enlist() cannot crash on a typo or empty args because Roster.fresh() (roster.gd L231-234) substitutes a random class/species for anything unknown. The fault is far more likely in the REPLY path, which has drop points that log NOTHING:
+- [x] T3. !enlist "DID NOTHING" ON STREAM + THE REPLY PATH DROPS SILENTLY (OWNER: DESKTOP - twitch_eventsub.gd is desktop-owned). Investigated by the supervisor: the COMMAND path is sound - chatcmd._enlist() cannot crash on a typo or empty args because Roster.fresh() (roster.gd L231-234) substitutes a random class/species for anything unknown. The fault is far more likely in the REPLY path, which has drop points that log NOTHING:
       (a) twitch_eventsub.gd L580: `if dry_run_chat or offline or tokens["bot"].is_empty() or _token_dead["bot"]: return` - this returns BEFORE _send_chat(), so the "chat not sent" log on L590 never runs. The hero IS created, the answer is queued, dequeued, appended to sent_chat, then silently discarded. From chat it looks exactly like the command did nothing.
       (b) L572-573: an identical message inside 30 s is dropped silently. Two viewers making the same mistake within 30 s ("No hero yet - type !enlist") means the SECOND viewer gets silence. Same for any repeated error text.
       (c) chatcmd.gd L88-89: the per-user cooldown returns "" with no feedback.
@@ -606,6 +606,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       FIX: every one of those drop points must _say_log() its reason (which condition, which user, which text). A silently-swallowed reply is undebuggable and this class of bug will recur. Then make the duplicate guard per-user instead of global, so one viewer's repeat cannot mute another's answer.
       DECISIVE TEST FOR THE NEXT STREAM (Mr. E): have someone type !enlist, then look at the live hub. Hero appears on the hub but no chat reply => the command works and the reply path is broken. No hero on the hub => the command never ran (chat ingest/cooldown). That single check splits the problem in half.
       DONE: every skipped reply writes a log line naming the reason; the duplicate guard is per-user; a scripted run proves a reply either reaches chat or is logged as to why.
+      RESULT (desktop D-cycle 125): twitch_eventsub.gd reply path is now loud - _on_twitch_reply logs empty replies and queue-full drops; _tick_chat's 30s duplicate guard is now keyed per-user (login+text) and logs each drop; a new _send_hold_reason() names why a send is held (dry_run_chat / offline / no bot token / bot token dead) so bug (a)'s silent discard is gone. (c) chatcmd.gd cooldown is LAPTOP-owned, left for them. tools/_t3_test.gd (NEW) proves 12 cases incl. two different users with identical text BOTH getting through. T3_TEST OK (12/12). Gate clean: parse 0 err, TWITCH_PARSE OK, _offfloor 0/1133, _townwalk PASS, _delve_test rc=0.
 
 # DO THIS FIRST - it decides how much of the rest is real work
 - [x] D28. LIVE-RUN FEATURE CENSUS (OWNER: DESKTOP, reports to the supervisor).
@@ -1107,3 +1108,47 @@ CHANGELOG 2026-11-13 10:19 (supervisor): merged content C12, laptop L43, hud-ui 
 clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor, TWITCH_PARSE OK, _delve_test).
 TICKED L57 and L58 - both are Mr. E's own rulings, implemented as he worded them.
 D44 raised for the intermittent in_solid.
+
+# Phase U - the laptop's queue is NOT empty (supervisor, 2026-11-13 11:22)
+
+The laptop reported "the assigned queue is empty" after L44. It finished the list it was GIVEN;
+it did not run out of work. Eleven laptop-owned items are still open. Take them in this order -
+this ordering is by what Mr. E actually asked for, not by ID.
+
+  1. L29a LORD MECHANICS - each canon lord gets a real mechanic (adds / phase / hazard / enrage).
+     He asked for bosses that get harder with depth and L45 gave them numbers; this gives them
+     BEHAVIOUR, which is what makes a lord memorable on stream.
+  2. L30c LOOT TABLES by depth and biome, boss uniques, and the Chronicle announcing a rare find.
+     L49 made searching visible; this makes what you find worth watching.
+  3. L29b RARE UNIQUES - the content writer has already WRITTEN them (bosses.json lesser_uniques
+     42, greater_uniques 36). Your half is the spawn rule and the visible modification. Read the
+     data, do not invent a parallel copy, and do not edit that file - it is the content writer's.
+  4. L29c SET-PIECE ENCOUNTERS from lore so a floor is not just a room of monsters.
+  5. L37 DUNGEON SCAR-VEINS ARE OVERDONE - from Mr. E's own 19:27 recording, the L28d glow decals
+     read as bright purple spray. Same family as L42; he has already said the dungeon looked like
+     a nightclub.
+  6. L33 STUCK DELVER REGRESSION - _l25_test went from a clean 0 stuck after L27a. Worth closing
+     before more monsters land.
+  7. L27b STRAINS - still committed WIP at 0f3986c. Finish or withdraw it; do not leave it parked.
+  8. L56 DELVE-HEAVY SOAK - seed a party straight to the mouth so boss and trap counts can be
+     trusted. Lower priority now that L45/L46 shipped with their own tests, but it is the only
+     thing that will give a clean dungeon baseline.
+  9. L30a GEAR EXPANSION - the code half only: more weapons and armour per tier VISIBLE on the
+     handslot bones. The item list itself is the content writer's.
+ 10. L30b COSMETICS AND DYES - again the code half only: !wear and !dye changing the model live.
+     The catalogue is written (46 cosmetics, 19 dyes) and is not yours to edit.
+
+OWNERSHIP CORRECTIONS - three items are no longer the laptop's, because the UI files moved under
+COORDINATION 11:
+  - L31 DUNGEON-FIGHT UI (damage numbers, status icons, "Now fighting: <lord>") -> DESKTOP HUD
+    for anything inside its seven files, feed_hud.gd included. If it needs party_frames.gd or
+    rts_camera.gd, flag it for the desktop build worker rather than reaching in.
+  - L36 CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (from Mr. E's 19:34 recording) -> DESKTOP
+    BUILD. rts_camera.gd owns the chat column. Same family as D41 and should be done with it.
+  - C1, C2, C3 are long since delivered by the content writer (C-cycles 1-13) and are stale
+    entries, not open work. Ignore them; they are left unticked only because nobody has gone back
+    to tick them.
+
+CHANGELOG 2026-11-13 11:22 (supervisor): queued L29a/L30c/L29b/L29c/L37/L33/L27b/L56/L30a/L30b for the laptop in
+priority order; reassigned L31 and L36 off the laptop to the HUD and desktop workers respectively;
+noted C1-C3 as stale. No new IDs minted - every item here already existed and keeps its number.

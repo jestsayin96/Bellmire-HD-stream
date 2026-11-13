@@ -530,7 +530,24 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       worker owns it now: either build on the laptop commit or redo it; HudDock.BOX_W / BOX_H and the font
       size in feed_hud are the three numbers. The laptop will not touch these files again (COORDINATION 11.2).
 - [ ] L40. HUD AND ALERTS MUST STAY OUT OF THE PANES AND OFF THE CHRONICLE. The recordings show (a) the party-frames panel ("The town's band - floor N") rendering INSIDE a pane, which L21's default-deny docking was supposed to prevent; (b) the "Joined The Court" follower/sub alert drawing across the Chronicle; (c) the Twitch chat column overprinting both the Chronicle and the lower-left pane. Every HUD element, alert and the chat column needs a dock that is clear of the panes and clear of the centre Chronicle box. DONE: a capture with a sub alert, busy chat, party frames and the Chronicle all live at once - zero overlapping pixels between any of them.
-- [ ] L41. MISSING MATERIAL ON A DUNGEON FLOOR (bright magenta). In the 19-17-57 recording an entire dungeon floor renders hot magenta - Godot's missing-shader/material colour - with the party frames over it. Something in the L28a dungeon_kit shader path fails to compile or bind for at least one theme. Find which theme/mesh, fix the binding, and add a guard so a failed material falls back to a plain grey PBR instead of magenta on stream. DONE: every theme sampled over 12 floors renders with real materials, 0 magenta, and a deliberate broken-material test shows grey not magenta.
+- [x] L41. MISSING MATERIAL ON A DUNGEON FLOOR (bright magenta). In the 19-17-57 recording an entire dungeon floor renders hot magenta - Godot's missing-shader/material colour - with the party frames over it. Something in the L28a dungeon_kit shader path fails to compile or bind for at least one theme. Find which theme/mesh, fix the binding, and add a guard so a failed material falls back to a plain grey PBR instead of magenta on stream. DONE: every theme sampled over 12 floors renders with real materials, 0 magenta, and a deliberate broken-material test shows grey not magenta.
+      DONE L-cycle 132: probed first - magenta is Godot's colour for a ShaderMaterial with a NULL shader,
+      and all eight themes bind correctly here (shader and every texture non-null), so the binding is not
+      broken on this machine. What was missing was the GUARD: FloorGen._kit_mat() now checks the shader
+      and atlas really loaded and returns plain grey stone if not, counting it in kit_fail_count, instead
+      of handing back the null-shader material that IS the magenta. A shader load fails when the
+      .gdshader is missing from a machine's import cache - which is why it would show on the desktop and
+      not here. tools/_l41_test.gd L41_TEST OK (9 checks): 384 materials over 8 themes x 12 floors, 0 null
+      and 0 magenta; the deliberate broken-material test returns a GREY StandardMaterial3D (channel spread
+      0.02) and the guard counts exactly 1.
+      A LIKELY DIFFERENT CULPRIT, FOR MR. E TO RULE ON: rendering all 14 biomes windowed at 1920x1080
+      found no magenta, but CONFECTION's floor is flat saturated pink - its ground was a LIGHT high-chroma
+      colour where every other biome uses a dark one, with the highest sat of any biome. In a pane at
+      stream distance with party frames over it that reads exactly as the report, and the grey walls match
+      too (a missing material would take the walls as well). Ground muted to ["#9a6a80", 0.28] so the
+      stone reads through; the biome is otherwise untouched because "the confection" is a NAMED lore biome
+      and is MEANT to be pink. Before/after in renders/cycles/20261113_l41/. Revert is one line.
+      _offfloor 0 of 1493, _delve_test clean. L28's overwritten render refs restored.
 - [ ] L42. DUNGEON LIGHTING IS NEON. Several floors read as saturated pink/green/cyan glow (silk-mother floor, firepits) rather than lit stone - L28c's key+fill and L28d's veins together are far too strong and too colourful. Pull emission and light colour saturation right down; the dungeon should read as dark stone with sources of light, not a nightclub. DONE: a per-theme shot sheet at 1080p that reads as lit stone; Mr. E's eye on it.
 - [x] D26. MOSS/DECAL SPLOTCHES ON TOWN ROOFS. Across the recordings the terracotta roofs carry bright flat green blobs that read as spilled paint, not moss. Either the decal is far too saturated/opaque or a dungeon decal is bleeding onto town roof materials. Fix so roof weathering is subtle. DONE: before/after roof close-ups at 1080p. RESULT (desktop D-cycle 119): not a decal/dungeon bleed - the town's GREEN livery roof tint (town.gd LIVERY_TINT) was Color(0.62,0.84,0.60), a bright green multiplied onto the terracotta tiles that read as green paint in the lighter tile areas. Toned to a subtle sage Color(0.78,0.85,0.74); blobs gone, roof reads as weathered terracotta. A/B in renders/cycles/20261112_d26/pair_green_{old,new}.png.
 - [x] D27. THE TOWN READS AS EMPTY AND DARK FROM THE STREAM CAMERA. The recordings show large flat grass expanses with nothing in them, panes that frame a bare field or a blank wall, and daytime shots (e.g. Day 11 08:40) that look like dusk. Two parts: (1) fill the town/valley so no camera angle lands on featureless grass - paths, hedges, crops, carts, clutter, people moving; (2) check the daylight curve and exposure - morning should read as morning, not gloom (this interacts with D24: fix the grain first, then re-judge brightness). DONE: a 12-shot sweep from the stream camera at 08:00/12:00/18:00/22:00 where every frame has something to look at and the daytime frames read as daylight. RESULT (desktop D-cycle 121): (1) BRIGHTNESS - the 'dusk' was overcast weather: it greyed the sky and dimmed the daytime fill to a gloom. daylight.gd overcast sun 0.76->0.88 and dark 0.55->0.42 (rain 0.55->0.66, 0.9->0.78), plus a daytime ambient boost scaled by weather darkness (env.ambient_light_energy *= 1 + dark*0.6*(1-nt)). Clear days and night unchanged. 08:00 overcast now reads as bright cloudy daylight. (2) FILL - new town.gd _dress_greens() dresses the bare grass islands with flower beds + bushes + the odd tree (644 flora), is_clear-gated, gate lanes/river kept clear; trees/bushes register as nav solids. FPS 128.2 avg/94 min (>120 D23 target); _townwalk 0 in_solid. Sweep in renders/cycles/20261112_d27/.
@@ -579,9 +596,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       12.0s->5.7s, ward 0.50->0.80. Wipe: an unprepared party of four (120 hp) falls to a deep lord in 2.7
       landed blows vs 8.0 shallow. tools/_l45_test.gd L45_TEST OK (10 checks) - also asserts the first lord
       floor is unchanged canon and the curve never dips. _offfloor 0 of 1130, _delve_test clean, L27A OK.
-      MR. E'"'"'S CALL: 44.7 vs ~30 hp heroes is about one blow a hero - LORD_ATK_PER_STEP is the dial.
+      MR. E'S CALL: 44.7 vs ~30 hp heroes is about one blow a hero - LORD_ATK_PER_STEP is the dial.
 - [x] L46. TRAPS DO NO DAMAGE (he believes spikes/traps are inert). L11 claims working traps. Verify against the D28 census, then fix: a triggered trap must apply real hp loss, show a number, and reach the Chronicle. DONE: census shows trap triggers AND hp applied; a delver can die to a trap.
-      DONE L-cycle 124: VERIFIED FIRST - Mr. E is right about the experience, wrong about the mechanism. L11'"'"'s
+      DONE L-cycle 124: VERIFIED FIRST - Mr. E is right about the experience, wrong about the mechanism. L11's
       damage code was never broken (a forced spring took 10 hp, rolled the save, floated the number, printed
       the line). Traps were almost never MET: over 4 floors a delver came within the 0.90 m radius of only
       2 of 6 traps (closest approaches 0.1/0.4/3.9/4.0/11.0/23.5 m) and 1 fired. THREE real defects, all
@@ -625,7 +642,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Check D caught my own decoration: "backstab" shipped in the first draft as a named ability with no
       implementation. Now +40% on an already-wounded target. 15 classes, 6 species, 17 abilities, all 17
       wired. _offfloor 0 of 1305, _delve_test clean, L3_TEST OK.
-      MR. E'"'"'S CALL: a levelled hero is now meaningfully stronger both ways; the numbers sit in
+      MR. E'S CALL: a levelled hero is now meaningfully stronger both ways; the numbers sit in
       CLASS_UNLOCKS, SPECIES_UNLOCKS and the _ability_mult match if the curve wants flattening.
 - [x] L49. LOOT AND SEARCHING ARE INVISIBLE. No chests, no drops, nobody searching. Heroes should visibly SEARCH specified spots - a dig/search animation, time taken - and report "...no loot..." or "Found loot!" style lines. Not every monster drops. DONE: census shows chests spawned/opened and items picked up; a capture shows a hero searching and both outcomes in the Chronicle.
       DONE L-cycle 125: as with L46 the mechanic was not missing, it was INVISIBLE - _loot() already rolled
@@ -634,7 +651,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       pane; set_meta("open") tips the lid). dungeon_hd lays 1-2 a floor in info["chests"], on OPEN floor
       rather than the route - a chest is somewhere you GO, traps are what you trip over. delve.gd gains a
       "search" state: the sharpest eye WALKS to each chest, faces it, kneels with Use_Item for 1.8 s, and
-      only then rolls - reading out in Mr. E'"'"'s own words, "Successfully found loot!! N gold" or
+      only then rolls - reading out in Mr. E's own words, "Successfully found loot!! N gold" or
       "...no loot...", with a floating +N / empty. Counters chests_found/chests_empty exposed for a census.
       Refactor: the floor-cleared branch became _floor_decision() + _fight_body() so the same decision is
       reachable after searching; the no-chest path is unchanged. tools/_l49_test.gd L49_TEST OK (9 checks)
@@ -642,16 +659,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       teleport in, and drives 80 searches: 32 found (32 of 32 paid gold), 48 empty. _offfloor 0 of 1624,
       _delve_test clean, L25_TEST OK 13/13 (0 prop-prop, 0 prop-wall, 0 stuck; watchdog 1 free in 10
       floors where the last runs were 0 - within the limit, but the chests are the thing to suspect if it
-      climbs). SCOPE: chests pay GOLD; gear salvage is still _loot()'"'"'s; there are NO per-monster
+      climbs). SCOPE: chests pay GOLD; gear salvage is still _loot()'s; there are NO per-monster
       physical drops or floor pickups - if Mr. E wants those they need their own ID.
 - [x] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
       DONE L-cycle 131: the census came FIRST and located the problem somewhere else. tools/_l50_test.gd
-      reproduces dungeon_hd'"'"'s own spawn loop (pick + pack expansion) so it measures what a floor really
+      reproduces dungeon_hd's own spawn loop (pick + pack expansion) so it measures what a floor really
       gets. BEFORE: depth 1 gave 3.5 distinct kinds a floor with one taking 51%; depths 6-14 gave 5.7-6.6
       at 30-36%. The DEEP floors were never thin - L27a had already done that work - ALL the repetition
       was in the shallows, which is the first thing a viewer sees. Two causes: the shallow band held only
       five kinds (widened to seven with the gentlest creatures from the next band up - puglin, spider -
-      NOT the deep roster, so L27a'"'"'s shallows-innocent rule still holds and _l27a_test still passes), and
+      NOT the deep roster, so L27a's shallows-innocent rule still holds and _l27a_test still passes), and
       pack expansion let ONE pick fill n = 1 + pack slots, so a rat pack took a third of a small floor
       (now capped at ~34% of a floor, which helps at every depth). AFTER: depth 1 is 4.3 distinct at 43%,
       worst share across all depths 43%. No new monster was invented - I checked, and the only unused
@@ -778,11 +795,11 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
 - [x] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
       nothing. Raised by the content writer.
       DONE L-cycle 129: verified first - the flag was right. potions.json has shipped Scarwater giving
-      scar_touched for a while and the ONLY scar_touched in scripts/ was fishing.gd'"'"'s unrelated
+      scar_touched for a while and the ONLY scar_touched in scripts/ was fishing.gd's unrelated
       scar_touched_chance, so the draught was bought, drunk, displayed and did nothing. delve.gd
       _scar_check(): a scar-touched hero skips the usual roll because the scar already has their spell -
       it decides once, half doubled and half taken, and the draught is spent either way. Both outcomes
-      float in the scar'"'"'s violet and reach the Chronicle. Hung off the EXISTING scar machinery rather
+      float in the scar's violet and reach the Chronicle. Hung off the EXISTING scar machinery rather
       than a parallel one. Applies to MENDING too - the data says "its next SPELL", not attack.
       A REAL BUG MY TEST FOUND BEFORE SHIPPING: the doubling was consumed AFTER the to-hit check, so a
       spell that MISSED kept the flag and doubled the next cast - one 300-gold draught paying twice. It
@@ -797,18 +814,18 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       DONE: a soak where surviving heroes visibly climb tiers.
       DONE L-cycle 127: measured first, and NEITHER suspected cause was it. buy_weapon/buy_armour work
       (a probe with gold went w0->w1, a0->a1), and kill()/reroll() keep the gear - a returning hero is a
-      FRESH hero at w0, which is canon. THE REAL CAUSE: nothing ever CALLED the forge for a VIEWER'"'"'s hero.
-      The town band kits up in Adventurers._kit_up; a viewer'"'"'s hero only forged if that viewer typed
+      FRESH hero at w0, which is canon. THE REAL CAUSE: nothing ever CALLED the forge for a VIEWER's hero.
+      The town band kits up in Adventurers._kit_up; a viewer's hero only forged if that viewer typed
       !forge. Reproduced exactly - four survivors home with 69-115 gold, tier 1 costing 52, none climbed.
-      The census'"'"'s 17 "forge lines" were refusals, not purchases. FIX: Roster.kit_up_after_delve() fits
+      The census's 17 "forge lines" were refusals, not purchases. FIX: Roster.kit_up_after_delve() fits
       out a survivor who comes home with coin - ONE step a delve, always leaving KIT_RESERVE (3 oil) so
-      nobody is stranded, armour first while it trails, and the smith'"'"'s line is SAID so the viewer sees
+      nobody is stranded, armour first while it trails, and the smith's line is SAID so the viewer sees
       what their gold bought. Called from delve._finish(). tools/_l55_test.gd L55_TEST OK (12 checks):
       round 1 climbed 0 of 4 (loot luck), round 2 climbed 2-3 of 4 - tiers climb across a SESSION, which
       is what "a soak" means. _offfloor 0 of 1231, _delve_test clean, L3_TEST OK.
-      MR. E'"'"'S CALL: heroes now spend their own gold automatically. KIT_RESERVE and the one-step cap are
+      MR. E'S CALL: heroes now spend their own gold automatically. KIT_RESERVE and the one-step cap are
       the dials; removing it is one call in _finish(). FOR THE SUPERVISOR: scripts/adventurers.gd is in NO
-      worker'"'"'s ownership list in COORDINATION 11.2 - read, not touched; it needs an owner.
+      worker's ownership list in COORDINATION 11.2 - read, not touched; it needs an owner.
 
 - [ ] L56. DELVE-HEAVY SOAK before L45 and L46 are trusted. The census could not confirm bosses or
       trap damage: raids kept pulling parties back to town and only ~1 sustained descent happened,

@@ -3236,3 +3236,42 @@ TWO CAUSES, both fixed:
 - FOR MR. E: the shallows now show puglins and spiders alongside the rats and bats, and no single kind can
   swarm a floor. If floor one feels busier than he wants for a first floor, the band is one line in
   Bestiary.DEPTHS and the pack cap is one line in dungeon_hd.
+
+## L-cycle 132 - L41 the magenta floor: a guard, and a likely different culprit (laptop jestai, 2026-11-13) - L41 DONE
+PROBED BEFORE CHANGING ANYTHING. Magenta is Godot's own colour for a ShaderMaterial whose shader is
+NULL. I built the kit material for all eight dungeon themes and checked every one: shader non-null, and
+every texture parameter (albedo_tex, pbr_map, stone_n, stone_r, wood_n, wood_r, vary_tex) non-null. The
+binding is NOT broken on this machine, and LOOK["_"] - the fallback an unknown theme would take - carries
+all four keys it is read for, so that path is safe too.
+- THE GUARD, which is what the item asks for and what was genuinely missing: FloorGen._kit_mat() now
+  checks that the shader and the atlas actually loaded. If either is null it returns plain grey stone
+  (StandardMaterial3D) and counts the catch in kit_fail_count, instead of handing back a ShaderMaterial
+  with a null shader - which IS the magenta. A shader load fails when the .gdshader is missing from the
+  import cache on the machine that is running, which is exactly the kind of thing that differs between
+  this laptop and the desktop and therefore only shows up on stream. Grey is dull and nobody will enjoy
+  it, but a dull floor is a bad half-hour and a magenta one is a clip.
+- tools/_l41_test.gd (NEW, headless - material BINDING is a property of the resource and can be asserted
+  exactly): 8 themes x 12 floors x steel/stone x ground/not = 384 materials built fresh, 0 null and
+  0 magenta; the bound material carries every texture; normal running trips the guard 0 times; and the
+  item's own "deliberate broken-material test" - force the shader unavailable and the result is a grey
+  StandardMaterial3D with a channel spread of 0.02, not magenta, with the guard counting exactly 1.
+  L41_TEST OK, 9 checks.
+- A LIKELY DIFFERENT CULPRIT, AND MR. E SHOULD RULE ON IT. I rendered all 14 biomes windowed at 1920x1080
+  (tools/_l28_shot.gd L28_SET=all) and found no magenta anywhere - but the CONFECTION biome's floor is a
+  flat, saturated pink. Its ground was ["#e8b0cc", 0.35]: a LIGHT, high-chroma colour where every other
+  biome uses a dark one (#2c3248, #1a0e0a, #4a3a2a...), and confection also carries the highest sat of
+  any biome at 1.25 with a pink ambient, key and fill. In a small pane at stream distance with party
+  frames over it, that reads exactly as "an entire dungeon floor renders hot magenta" - which is the
+  report. The walls stay grey, which also matches: a missing material would take the walls too.
+  I muted the ground to ["#9a6a80", 0.28] so the stone and the hex tile edges read through, and left the
+  biome otherwise alone: "the confection" is a NAMED biome in the lore list and it is MEANT to be pink.
+  I am not redesigning it on a hunch. Before/after and the full sheet are in renders/cycles/20261113_l41/.
+  FOR MR. E: was the floor you saw the confection biome working as designed, or a genuinely broken one?
+  If it was confection, the fix is a look decision (how pink is too pink) and the revert is one line -
+  data/biomes.json line 35, ground back to ["#e8b0cc", 0.35].
+- L28's committed reference renders were overwritten by the shot run and have been RESTORED with
+  git checkout; L41's own evidence lives in its own folder rather than churning L28's set.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1493 (MON_INPROP 0 of 141); _delve_test 0
+  errors/nulls; L25_TEST OK 13/13 with 0 stuck delvers (floorgen changed, so the geometry suite matters).
+  _kit_mat's return type widened from ShaderMaterial to Material (it can now return a
+  StandardMaterial3D); its single caller infers the type, so nothing else needed touching.

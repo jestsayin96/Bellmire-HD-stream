@@ -1419,7 +1419,17 @@
       "The Watch walked the wall twice and found nothing worth a second turn.",
       "Flasks on the shelf, grain in the measure - Bellmire keeps its own accounts!",
       "A lord came up out of the scar and went back down in pieces - hear it twice for a copper!",
-      "E3PO stood the night gate himself. Sleep easy, Bellmire."
+      "E3PO stood the night gate himself. Sleep easy, Bellmire.",
+      "Three down the scar before breakfast. The guild post is open and the ink is wet!",
+      "Stone on the road, masons on the wall - look lively or be built into it!",
+      "The Ford is running high. Cross at the ferry or cross at your own funeral!",
+      "Lost: one goat, answers to nothing. Found: one goat, answers to nobody!",
+      "The Hall sits at noon. Bring your grievance and bring it short!",
+      "Bandits on the west road, says the carter. Says it every week, mind.",
+      "Flasks counted twice today, on account of yesterday!",
+      "A caravan winters here, and the lanes are tight. Mind your elbows and your purse!",
+      "The night was quiet, the gate held, and the crier slept like an honest man!",
+      "New law posted at the Hall. Read it, or have it read to you at the gallows!"
     ],
     "market": [
       "Two coppers the carp, and the carp is grinning.",
@@ -1439,7 +1449,17 @@
       "Cheese with a crust you could roof a barn with!",
       "Fresh ink and honest parchment - write home while you still can!",
       "A hat that has never once been rained on. Not once!",
-      "Secondhand steel - all of it came back up. Most of it alone."
+      "Secondhand steel - all of it came back up. Most of it alone.",
+      "Wax and wick! Burn one for the ones still down there!",
+      "Charcoal by the sack, and the sack is nearly full!",
+      "Thread, needles, and a patch for whatever the scar did to you!",
+      "Smoked river fish - it has been through worse than you have!",
+      "Horn cups, horn combs, horn everything - we had a good year for horns!",
+      "Pickles! Older than some of my customers!",
+      "Blankets off the hill flocks, thick enough to stand up on their own!",
+      "Boots resoled while you wait, and you will wait!",
+      "Honey when the hives are ours to take it from. Today they are!",
+      "Lanterns, hooks and a long pole - everything a man needs to not go in after it!"
     ],
     "growth": [
       "The masons raised a new course on the wall today.",
@@ -1459,7 +1479,17 @@
       "A tannery, downwind - and the town voted on which wind.",
       "The market square has flagstones where the mud was.",
       "A second smith, and the two of them already disagree.",
-      "They are cutting a road where the fields used to stop."
+      "They are cutting a road where the fields used to stop.",
+      "They have roofed the old well, and the water tastes of less sky.",
+      "A stone granary going up by the Hall, and the masons will not say how much.",
+      "Drains under the high street. The town smells of digging instead of worse.",
+      "The chapel has a clapper on order, and opinions arriving free.",
+      "A second gate cut in the north wall, because the first one had a queue.",
+      "The guild post painted its door. The door is still kept.",
+      "A bath house, of all things, and a line outside it already.",
+      "They are laying a wharf at the Ford, long enough for two boats to argue over.",
+      "The yard has a practice dummy that E3PO himself broke in half. They built a stronger one.",
+      "Lamps the whole length of the high street now. The dark stops at the wall."
     ]
   },
   "propositions": {
@@ -1583,6 +1613,111 @@
         "flavour": "No stranger past the Ford without the guild's word.",
         "good": "No raider walks in wearing a traveller's coat.",
         "bad": "Trade withers, and the town turns inward and small."
+      },
+      {
+        "title": "The Honest Measure",
+        "category": "law",
+        "flavour": "Every weight in the market checked at the Hall, and stamped, or smashed.",
+        "good": "Buyers trust the stalls; market takings and the town cut both rise.",
+        "bad": "The sharper traders take their carts to an easier road, and stalls stand empty a while."
+      },
+      {
+        "title": "Blood Price",
+        "category": "law",
+        "flavour": "A killing is settled in coin paid to the family, not in rope.",
+        "good": "Feuds end at the Hall instead of in the street; fewer good hands are lost.",
+        "bad": "A rich man can afford a murder, and everyone in town can do the sum."
+      },
+      {
+        "title": "Chain Them to the Wall",
+        "category": "law",
+        "flavour": "Taken bandits work the wall instead of hanging from it.",
+        "good": "Building goes faster and costs the town nothing in wages.",
+        "bad": "Armed men guarding chained men; now and then a chain comes off at night."
+      },
+      {
+        "title": "The Delver's Tithe",
+        "category": "taxes",
+        "flavour": "One part in ten of everything carried up the scar, paid at the post.",
+        "good": "The treasury fills whenever the dungeon runs hot.",
+        "bad": "Delvers hide the best of it, and some sell to the Ford instead of the guild."
+      },
+      {
+        "title": "Hearth Tax",
+        "category": "taxes",
+        "flavour": "Every chimney in Bellmire pays, counted from the wall on a cold morning.",
+        "good": "Steady coin that does not care whether the dungeon pays out this week.",
+        "bad": "The poorest let their fires go out to go uncounted, and the winter takes some of them."
+      },
+      {
+        "title": "The Scarglass Levy",
+        "category": "taxes",
+        "flavour": "Tax what comes out of the scar as glass, not as gold.",
+        "good": "The oddities pay their way, and the apothecary gets first refusal on stock.",
+        "bad": "Scarglass goes under the counter; smuggling takes root at the Ford."
+      },
+      {
+        "title": "Drill Every Seventh Day",
+        "category": "militia",
+        "flavour": "Every able hand in the yard one day in seven. E3PO calls the time.",
+        "good": "The militia holds a line instead of breaking; raid losses drop sharply.",
+        "bad": "A day in seven out of the fields and workshops - everything else comes slower."
+      },
+      {
+        "title": "The Night Horn",
+        "category": "militia",
+        "flavour": "A horn hung in every quarter, and a standing order to blow it first and ask after.",
+        "good": "The town turns out fast; raids are met at the gate rather than in the square.",
+        "bad": "False alarms most weeks, and a town that sleeps badly works badly."
+      },
+      {
+        "title": "Muster the Farmhands",
+        "category": "militia",
+        "flavour": "The outlying holdings send one hand each to the garrison for the season.",
+        "good": "The garrison stands at full strength through the dangerous months.",
+        "bad": "Harvest comes in short-handed, and the holdings remember who asked."
+      },
+      {
+        "title": "Roof the Market",
+        "category": "building",
+        "flavour": "Timber and tile over the square, so market day happens whatever the sky does.",
+        "good": "Market day never cancels; trade income steadies across the whole year.",
+        "bad": "Costly, and a roofed square burns as one thing instead of twenty."
+      },
+      {
+        "title": "Dig the Drains",
+        "category": "building",
+        "flavour": "Stone drains under the streets, downhill, away from the well.",
+        "good": "Sickness drops and the town stops stinking in summer; growth comes easier.",
+        "bad": "Months of open trench through the middle of everything, and the cost of every yard of it."
+      },
+      {
+        "title": "Raise a Granary",
+        "category": "building",
+        "flavour": "A stone granary by the Hall, kept full against a bad year.",
+        "good": "A failed harvest or a burned field no longer means a hungry winter.",
+        "bad": "Grain sits idle that could have been sold, and a full granary is a target worth raiding."
+      },
+      {
+        "title": "Hang a Clapper in the Bell",
+        "category": "faith",
+        "flavour": "The bell has rung without one since the tower went up. The chapel wants it finished.",
+        "good": "A bell that carries - the town hears a raid called from any field it works.",
+        "bad": "Some swear the bell was better unfinished, and the old families take it badly."
+      },
+      {
+        "title": "Bring the Delvers Home",
+        "category": "faith",
+        "flavour": "The town pays to carry its dead up out of the scar and bury them in daylight.",
+        "good": "Delvers go down easier knowing it; the guild post never wants for names.",
+        "bad": "A steady drain of coin, and parties that turn back carrying a body instead of loot."
+      },
+      {
+        "title": "Winter the Caravans",
+        "category": "outsiders",
+        "flavour": "Let the road traders keep their carts inside the wall until the thaw.",
+        "good": "Goods and coin stay in Bellmire all winter, and the spring road opens from here.",
+        "bad": "Crowded lanes, strained stores, and outsiders who learn the inside of the wall by heart."
       }
     ]
   },
@@ -2256,6 +2391,55 @@
         "appears": "Hask has swamped a boat across the narrows and robs whoever stops to haul it clear.",
         "while": "The narrows are blocked; barges wait, and what they carry spoils in the hold.",
         "cleared": "The Sunken Boat burns to the waterline. Hask swims for the far bank and is met on it."
+      },
+      {
+        "name": "Blackbrier Hide",
+        "leader": "Iver Cutgrass",
+        "appears": "Iver Cutgrass has cut a camp into the blackbrier where no horse can follow.",
+        "while": "Foot traffic on the south track is robbed; the smaller traders stop coming at all.",
+        "cleared": "Blackbrier Hide is burned out. The south track carries packs again."
+      },
+      {
+        "name": "The Charcoal Camp",
+        "leader": "Mother Soot",
+        "appears": "Mother Soot and her burners hold the charcoal stands above the wood.",
+        "while": "Charcoal runs short; the forge works half days and smith prices climb.",
+        "cleared": "The Charcoal Camp is taken. The forge burns a full day again."
+      },
+      {
+        "name": "The Rook Field",
+        "leader": "Carrow Dace",
+        "appears": "Carrow Dace has set his crew in the rook field, where the crop stands tall enough to hide a man.",
+        "while": "Harvest carts are stopped at the field edge; grain comes in short at the measure.",
+        "cleared": "The Rook Field is cut early and cleared. The measure fills honestly again."
+      },
+      {
+        "name": "The Salt Road Camp",
+        "leader": "Tam Pell",
+        "appears": "Tam Pell has taken the salt road where it narrows, and charges the narrow part.",
+        "while": "Salt and cured stores arrive dear; preserved food in town spoils faster for want of it.",
+        "cleared": "The Salt Road Camp is broken. Salt comes in at the old price."
+      },
+      {
+        "name": "The Beekeeper's Hut",
+        "leader": "Hollis Grin",
+        "appears": "Hollis Grin has turned the beekeeper out of his own hut and kept the bees.",
+        "while": "Honey, wax and candle stock dry up; the apothecary brews slower without wax.",
+        "cleared": "Hollis Grin is stung out of the hut. The beekeeper goes back to his bees."
+      },
+      {
+        "name": "The Dry Ferry",
+        "leader": "Nils Odd",
+        "appears": "Nils Odd has taken the old ferry landing upriver and runs his own crossing at his own rates.",
+        "while": "Half the river trade goes around Bellmire entirely; the Ford takes less each day.",
+        "cleared": "The Dry Ferry is sunk at its moorings. The river comes back to the Ford."
+      },
+      {
+        "name": "The Ox Road Camp",
+        "leader": "Bram Sallow",
+        "appears": "Bram Sallow holds the ox road and takes a beast from every team that passes.",
+        "while": "Hauling costs double; stone, timber and grain all arrive late and dear.",
+        "cleared": "The Ox Road Camp is cleared out. The teams come in whole."
       }
     ],
     "monster_camps": [
@@ -2342,6 +2526,55 @@
         "appears": "Two things out of the deep have taken the mason's yard and are eating the mortar.",
         "while": "Cut stone and finished work are wrecked nightly; every build in town slows.",
         "cleared": "The Stone Yard is retaken. The masons find their tools, and a troll's tooth in a block."
+      },
+      {
+        "name": "The Thornwake",
+        "of": "scar hounds",
+        "appears": "Something hound-shaped dens in the thornwake, and it hunts in a pack now.",
+        "while": "Flocks and herds are taken nightly; the pens empty and the drovers will not go out.",
+        "cleared": "The Thornwake is cleared. The flocks sleep out again."
+      },
+      {
+        "name": "The Reed Hollow",
+        "of": "bog leeches",
+        "appears": "The reed hollow has gone thick with leeches the size of a forearm.",
+        "while": "Nobody will cut reed or draw water there; thatch and water both come from further off.",
+        "cleared": "The Reed Hollow is drained and burned. The reed cutters go back down."
+      },
+      {
+        "name": "Potter's Field",
+        "of": "risen dead",
+        "appears": "The nameless graves in Potter's Field are opening from the inside.",
+        "while": "The dead wander in from the south each night; the gate shuts an hour earlier.",
+        "cleared": "Potter's Field is put down and dug over. The south gate keeps its hours."
+      },
+      {
+        "name": "The Rookery Barn",
+        "of": "grave moths",
+        "appears": "Grave moths have taken the rookery barn, and the cloud of them is visible from the wall.",
+        "while": "Stored cloth, wool and grain sacks are eaten through; the market loses a stall a week.",
+        "cleared": "The Rookery Barn is smoked out. What is stored stays stored."
+      },
+      {
+        "name": "The Split Stone",
+        "of": "cave centipedes",
+        "appears": "Something long and many-legged is coming up through the Split Stone, one after another.",
+        "while": "The quarry stands idle; building work in town stops where the stone runs out.",
+        "cleared": "The Split Stone is sealed and the nest burned. The quarry rings again."
+      },
+      {
+        "name": "The Hog Mire",
+        "of": "mire boars",
+        "appears": "The mire boars have grown wrong and bold, and they hold the lower fields.",
+        "while": "The lower fields are rooted up; this season's crop is halved where they walk.",
+        "cleared": "The Hog Mire is cleared, and the town eats well for a week."
+      },
+      {
+        "name": "The Chalk Pit",
+        "of": "bone crawlers",
+        "appears": "The chalk pit has filled with crawling things made mostly of other things' bones.",
+        "while": "Lime and chalk stop coming up; mortar runs out and the masons down tools.",
+        "cleared": "The Chalk Pit is cleared to the floor. The masons take up tools again."
       }
     ],
     "wandering_boss": {

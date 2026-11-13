@@ -3019,3 +3019,53 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      display decision, not a data one - the data is cumulative by design and will keep growing.
      OWNER: DESKTOP BUILD (and DESKTOP HUD if the shelf is drawn in a HUD file).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 17 - E3PO, the Commander who cannot die, given a night watch and a whole town's worth of occasions (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THIS: standing-backlog item 3, and the rotation's turn (C14 took item 5, C15 item 4, C16 item 2).
+  The `e3po` block was measured first. It already had intro/withdraw/return/says/town_talk from the
+  early cycles and raid/disaster/festival/viewer_roll from C-cycle 5 - but every one of those is a
+  COMBAT or CROWD occasion. On a long stream E3PO is on screen far more often than the town is on
+  fire: quiet nights, a viewer signing on, a viewer coming back up the scar, a viewer who does not,
+  a lord getting a name below, and the town climbing a growth tier. Those were the holes.
+- ADDED, data/lore_lines.json, `e3po` block ONLY (one file touched this cycle):
+  - SIX NEW KEYS, all in the same voice as `says`:
+    `tier_up`    12 entries, one per growth stage, {tier, line} - the Commander's reaction to Bellmire
+                 growing. `tier` matches `growth_tiers.tiers[n].name` EXACTLY, one for one, verified.
+    `night_watch` 10 - the quiet hour. The cheapest E3PO content there is and the most reusable.
+    `recruit`     8 - a viewer joins the Watch. Ends on his book, which is the whole ceremony.
+    `viewer_down` 8 - a viewer is lost. Played straight, no joke lands here; he knows the name.
+    `viewer_returns` 8 - a viewer comes back up alive. The counterweight to the one above.
+    `lord_sighted` 8 - something below has a name. Keeps 'shapes, not numbers' as his idiom.
+    `_note_c17`   the usual dead-until-wired note, matching `_note_extras` from C-cycle 5.
+  - APPENDED to the existing arrays (nothing reworded, nothing dropped):
+    intro 8->14, withdraw 10->16, return 9->15, says 20->30, town_talk 16->24,
+    raid 12->20, disaster 12->20, festival 10->16,
+    viewer_roll.crit 5->9, .high 5->9, .low 5->9, .fumble 5->9.
+  - e3po total: 11 keys -> 17 keys, 104 lines -> 208 lines. Every new line is one screen-glance long.
+- CANON HELD: he cannot die and he is never said to; `withdraw` is always the barracks and never a
+  grave. He predates the wall (town_talk), so `tier_up` gives him a line at all twelve stages, not
+  only from The Garrison on. No dungeon floor count anywhere. The inscription (MEASURE THE GRAIN,
+  COUNT THE FLASKS, KEEP THE DOOR) is used as HIS three rules in `recruit` and again at the top tier.
+- VALIDATION OK (python only, no Godot): data/lore_lines.json json.load() clean; the file was parsed
+  BEFORE the edit and the whole pre-edit tree compared against the re-parsed file node by node - every
+  pre-existing key present, every pre-existing scalar equal, no list shorter than it was, and every
+  pre-existing list element still at its old index (append-only prefix match). Errors: 0. Every new
+  line is a str; every `tier_up` entry is exactly {tier, line} with both str. File stays pure ASCII,
+  LF, 2-space indent, trailing newline, as it was. The other three owned files were NOT touched.
+- ONE FORMATTING NOTE, deliberate and harmless: three entries in `town_life` carried a stray comma on
+  its own line from an older hand edit. Re-serialising normalised them to `"line",`. The STRINGS are
+  byte-identical - only the comma moved up a line. `git diff` shows 3 such pairs and nothing else
+  removed. No value in the file changed.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. All six new keys are DEAD until wired, exactly like the C-cycle 5 keys. OWNER: whoever owns the
+     E3PO wiring (raids.gd / town.gd on the DESKTOP BUILD side).
+  2. `tier_up` is the only new key with a JOIN: it is matched to the growth stage by `tier` NAME. If
+     the desktop prefers an index, read it positionally - the twelve are in `growth_tiers` order. Do
+     not re-key it by hand; ask content to add the field. OWNER: DESKTOP BUILD (D31/D32 growth).
+  3. `viewer_down` / `viewer_returns` / `recruit` need a VIEWER EVENT to hang on, not a tick. If no
+     such hook exists yet, these three sit dead and nothing breaks. OWNER: DESKTOP BUILD (Twitch hooks).
+  4. `night_watch` wants a RATE LIMIT, not a loop - it is ambient and will read as spam if fired every
+     night cycle. One in n nights, or on idle. OWNER: whoever wires it. DESKTOP HUD if it is drawn in
+     a HUD file rather than spoken by the town.
+  5. Anything already reading `e3po` with a fixed line count will miss the appends. Size off len().
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

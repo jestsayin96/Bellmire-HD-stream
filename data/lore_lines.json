@@ -10,8 +10,8 @@
     "works": ["Benches, tools, a half-made thing nobody finished. Don't touch the architect's toys.", "The work stopped mid-stroke, as if called away.", "Half a machine, and no telling what the other half was for.", "Chalk sums cover the wall - the same sum, wrong every time.", "The architect's bench is set for a hand that never came back.", "Tools laid out for a job nobody named. Leave the architect's toys be."],
     "warren": ["Doorways, chimneys, a street sign - a whole town, swallowed.", "Somebody lived here once and kept a window box.", "A doorway in the floor, and a doorway in the ceiling right above it.", "Washing on a line, gone to dust, still pegged.", "A whole street, folded into the dark like a letter.", "A doll in a window box. Someone waved from here, once."]
   },
-  "descend": ["%s %s into the scar.", "%s %s down past the guild post. The door is kept behind them.", "%s %s into the dark below Bellmire, counting the flasks.", "%s %s below, where the lamps are lit against nothing good.", "%s %s down the guild stair, flasks stowed and counted.", "%s %s into the dark - light first, steel after.", "%s %s below Bellmire, where the meadow turns to mountain.", "%s %s past the memorial and down into the deep."],
-  "cleared": ["Floor %d cleared.", "Floor %d is quiet again.", "Floor %d falls silent.", "Floor %d holds, for now.", "Floor %d is done, and the guild writes it down.", "Floor %d - the dark backs off a step.", "Floor %d quiets, and something deeper takes notice.", "Floor %d won. Count the flasks; one is always short."],
+  "descend": ["%s %s into the scar.", "%s %s down past the guild post. The door is kept behind them.", "%s %s into the dark below Bellmire, counting the flasks.", "%s %s below, where the lamps are lit against nothing good.", "%s %s down the guild stair, flasks stowed and counted.", "%s %s into the dark - light first, steel after.", "%s %s below Bellmire, where the meadow turns to mountain.", "%s %s past the memorial and down into the deep.", "%s %s on the guild's coin, and the guild wants a return.", "%s %s below, boots loud on the first stair and quiet after.", "%s %s into the scar with the lamps trimmed low.", "%s %s down, and Bellmire holds its breath."],
+  "cleared": ["Floor %d cleared.", "Floor %d is quiet again.", "Floor %d falls silent.", "Floor %d holds, for now.", "Floor %d is done, and the guild writes it down.", "Floor %d - the dark backs off a step.", "Floor %d quiets, and something deeper takes notice.", "Floor %d won. Count the flasks; one is always short.", "Floor %d cleared; the lamps move down a step.", "Floor %d is still, and the Chronicle catches up.", "Floor %d holds. The scar keeps count too.", "Floor %d done - breathe, then down."],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
     "grubmother": "The floor is wet, and getting wetter.",
@@ -30,15 +30,15 @@
     "kept": "A voice the guild knew calls a name the guild remembers."
   },
   "barks": {
-    "enter": ["Count the flasks.", "Keep the door.", "Light first. Then steel.", "Mind the floor.", "Lamps up.", "Down we go.", "Grain and flasks.", "Keep together.", "Eyes open."],
-    "lord": ["Hold together!", "That one's mine.", "Not today.", "Keep the door!", "Shapes, not numbers!", "On me!", "Break it where it's thin.", "For the door!", "This one carries a note."],
-    "trap": ["Floor's wrong here.", "Step where I step.", "Clever. Not clever enough.", "Floor lies here.", "Don't trust the stone.", "That click wasn't us.", "Hold - hold.", "Mark it and move."],
-    "hurt": ["I'm bleeding!", "Too close.", "Someone mend me!", "That's blood.", "I'm hit!", "Mend, now!", "Still standing.", "Close one."],
-    "drink": ["Bottoms up.", "Tastes of iron.", "That's better.", "Down it goes.", "Iron and honey.", "Steady now.", "One less flask.", "That'll hold."],
-    "misfire": ["That wasn't the spell I cast.", "The scar's answering again.", "Stupid scar.", "The scar took it.", "Wrong spell, wrong day.", "It answered, not me.", "Hate this ground.", "Came out sideways."]
+    "enter": ["Count the flasks.", "Keep the door.", "Light first. Then steel.", "Mind the floor.", "Lamps up.", "Down we go.", "Grain and flasks.", "Keep together.", "Eyes open.", "Boots on.", "Flasks? Flasks.", "After you."],
+    "lord": ["Hold together!", "That one's mine.", "Not today.", "Keep the door!", "Shapes, not numbers!", "On me!", "Break it where it's thin.", "For the door!", "This one carries a note.", "Big one. Stay loose.", "Mind its shape.", "Trade ground, not blows."],
+    "trap": ["Floor's wrong here.", "Step where I step.", "Clever. Not clever enough.", "Floor lies here.", "Don't trust the stone.", "That click wasn't us.", "Hold - hold.", "Mark it and move.", "Not that tile.", "Heard that click before.", "Slow is smooth."],
+    "hurt": ["I'm bleeding!", "Too close.", "Someone mend me!", "That's blood.", "I'm hit!", "Mend, now!", "Still standing.", "Close one.", "Patch me!", "That one hurt.", "Still here."],
+    "drink": ["Bottoms up.", "Tastes of iron.", "That's better.", "Down it goes.", "Iron and honey.", "Steady now.", "One less flask.", "That'll hold.", "Cheers, apothecary.", "Needed that.", "Back in it."],
+    "misfire": ["That wasn't the spell I cast.", "The scar's answering again.", "Stupid scar.", "The scar took it.", "Wrong spell, wrong day.", "It answered, not me.", "Hate this ground.", "Came out sideways.", "Scar's greedy today.", "Not what I asked for.", "Every time, this floor."]
   },
   "misfire": ["%s's %s goes wrong - the scar answers (%d vs DC %d).", "%s reaches for %s and the scar hands back something else (%d vs DC %d).", "%s's %s comes out sideways - wild magic (%d vs DC %d).", "%s's %s turns in their hand - the scar answers (%d vs DC %d).", "%s tries %s and the ground gives it back wrong (%d vs DC %d).", "%s's %s unravels mid-word - wild magic (%d vs DC %d).", "%s casts %s; the scar casts something else (%d vs DC %d)."],
-  "epitaphs": ["Measured the grain. Counted the flasks. Kept the door.", "The scar keeps what it takes.", "Went down with a lamp. Did not come up.", "The guild writes the name and keeps it.", "Somewhere below, a bell with no clapper rings once.", "One floor too many.", "Lit a lamp. The dark kept it.", "Counted every flask but the last.", "The guild writes the name; the scar keeps the rest.", "Measured the grain. The grain ran out.", "Went down proving something. Proved it.", "Kept the door, until the door kept them.", "The bell with no clapper rang, and they did not come up.", "Named on the roll, and marked with a dagger."],
+  "epitaphs": ["Measured the grain. Counted the flasks. Kept the door.", "The scar keeps what it takes.", "Went down with a lamp. Did not come up.", "The guild writes the name and keeps it.", "Somewhere below, a bell with no clapper rings once.", "One floor too many.", "Lit a lamp. The dark kept it.", "Counted every flask but the last.", "The guild writes the name; the scar keeps the rest.", "Measured the grain. The grain ran out.", "Went down proving something. Proved it.", "Kept the door, until the door kept them.", "The bell with no clapper rang, and they did not come up.", "Named on the roll, and marked with a dagger.", "Paid the guild's price in full.", "The door held. They did not.", "Last seen going down, lamp high.", "The Chronicle spells the name right, at least.", "Fed the scar and asked for nothing.", "A good hand with a flask, to the end.", "Kept the door one floor too long."],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
     "2": "Folded twice; the smith signs it.",
@@ -55,5 +55,62 @@
     "5": "Bellmire is a walled town. Keep the door.",
     "6": "Bellmire is a city in all but charter.",
     "7": "Bellmire is a city. The scar is still deeper than it was."
+  },
+  "e3po": {
+    "_note": "E3PO - Commander of the Guards. He CANNOT die; badly hurt he withdraws to the barracks, heals, and returns. Immortal, beloved, a little pompous, utterly reliable. For the desktop's raids.gd/town.gd if it wires him (content worker never touches code). Additive; dead until wired.",
+    "intro": [
+      "E3PO takes the wall. The whole guard stands straighter.",
+      "The Commander is on the field. Nobody tells him to be careful."
+    ],
+    "withdraw": [
+      "E3PO is hauled to the barracks, swearing he is fine.",
+      "The Commander falls back to heal. He will be back before you miss him.",
+      "Too much even for E3PO - he withdraws to the barracks.",
+      "They carry E3PO off the wall. 'A scratch,' he says, bleeding freely."
+    ],
+    "return": [
+      "E3PO is back on the wall, mended and mortified.",
+      "The Commander returns to duty. He apologises to no one.",
+      "E3PO retakes the gate, good as new and twice as loud."
+    ],
+    "says": [
+      "Hold the line. The line holds because I say so.",
+      "I have died exactly never. Let us keep the record.",
+      "Measure the grain, count the flasks, and leave the gate to me.",
+      "A guard who runs is a guard I must replace, and I hate paperwork.",
+      "They do not pay me to fall. They do not pay me at all - I simply refuse to leave.",
+      "The door stays shut. That is the whole job, and I am very good at it.",
+      "Wounded? I prefer 'briefly inconvenienced'.",
+      "Bellmire sleeps because I do not."
+    ],
+    "town_talk": [
+      "They say E3PO has held the gate since before there was a gate.",
+      "Old-timers swear E3PO has outlived three of his own gravestones.",
+      "The children drill with sticks and name the loudest one E3PO.",
+      "No raider has taken the Keep door while the Commander draws breath - which is to say, never.",
+      "The guild keeps a chair for E3PO at every feast. He never sits; he watches the door."
+    ]
+  },
+  "town_life": {
+    "_note": "Ambient Bellmire flavour as the town grows - crier calls, market and guild chatter, building news. For the desktop's town.gd if it wires a ticker; content worker never touches code. Additive; dead until wired.",
+    "crier": [
+      "Grain measured, flasks counted, door kept - Bellmire stands another day!",
+      "Fresh off the river: trout, and a tale with every one.",
+      "The guild takes names at the post. Bring your own courage.",
+      "Lamps lit, walls walked, all's well - or well enough.",
+      "Another delver down the scar. Put a copper on them coming back up."
+    ],
+    "market": [
+      "Two coppers the carp, and the carp is grinning.",
+      "Dye by the ounce - name a colour, Bellmire keeps it now.",
+      "Scarglass! Cheap, and only slightly cursed!",
+      "Boots that have walked further than you have, half off."
+    ],
+    "growth": [
+      "The masons raised a new course on the wall today.",
+      "A second well dug, and the queue at the first one shorter.",
+      "They are building where the fields used to stop.",
+      "The guild post has two doors now. Both kept."
+    ]
   }
 }

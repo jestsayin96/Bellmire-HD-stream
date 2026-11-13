@@ -1298,6 +1298,24 @@ noted C1-C3 as stale. No new IDs minted - every item here already existed and ke
       the hot walker loop): snap stop DESTINATIONS too, or add a keep_walkable net on the
       waypoint-pop early-return (townsfolk ~L813 returns before the step's keep_walkable), or
       widen the nav margin at the southern houses. The test was NOT loosened.
+      PARTIAL (desktop D-cycle D4, Nov 13 ~17:30): took the note's "keep_walkable
+      net" option. keep_walkable now runs 6 push passes (was 3 - a chain of
+      overlapping south-market footprints can oscillate and leave a foot inside
+      after 3) and, when the point is STILL in a footprint after the loop, snaps
+      to the navmesh's nearest walkable point (the authority); rare path, so the
+      common already-clear case pays no nav query. Full gate GREEN: parse 0,
+      _offfloor 0/1643 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test
+      clean to floor 2, _townwalk x3 PASS at in_solid 0/15466, 1/15863, 2/16816
+      (0.000/0.006/0.012%, all << 0.2%). NOT three-consecutive-0, so NOT ticked.
+      The residual did not move measurably: a single-FRAME transient at the ~15
+      south houses (recurring child Rask Coalfoot ~(52,-88.6), peasants ~(74,-64))
+      that a 0.25 s diagnostic probe (4 runs) could not catch at all - the gate's
+      0.5 s grid only rarely lands on it. Hardening kept as a correctness win (a
+      position can only become MORE walkable; no test loosened), not as a close.
+      NEXT: log PER-FRAME (not sampled) which branch commits the inside position -
+      prime suspect the ghost/pocket-escape leg (townsfolk ~L821) that moves on
+      height_at ALONE and never calls keep_walkable while _ghost_last stays in the
+      route; if confirmed, re-validate that leg with keep_walkable.
 
 CHANGELOG 2026-11-13 12:03 (supervisor): merged content C13-C14, laptop L44 + L27b (no laptop WIP remains),
 hud-ui U9. Gate otherwise clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,

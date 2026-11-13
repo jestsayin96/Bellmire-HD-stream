@@ -5254,7 +5254,11 @@ func solid_at(p: Vector3, m := 0.0) -> Array:
     return []
 
 func keep_walkable(p: Vector3) -> Vector3:
-    for i in range(3):
+    # D44b: a dense footprint cluster (the 15 south-market houses) overlaps, so
+    # pushing out of one rect can shove the foot into its neighbour; three
+    # passes left a walker ~1.5 m inside. More passes walk clear of a short
+    # chain of overlapping rects.
+    for i in range(6):
         var r := solid_at(p, FOOT_R)
         if r.is_empty():
             break
@@ -5269,6 +5273,17 @@ func keep_walkable(p: Vector3) -> Vector3:
         var mv := ax * signf(lx if lx != 0.0 else 1.0) * gx if gx < gz else az * signf(lz if lz != 0.0 else 1.0) * gz
         p.x += mv.x
         p.z += mv.y
+    # D44b: two overlapping rects can trap the push in an oscillation the loop
+    # above cannot resolve. The navmesh is the authority on walkable ground, so
+    # snap to its nearest point - but only when the point is STILL solid, so the
+    # common clear case pays no nav query. Pre-sync closest() returns p itself,
+    # which would still be solid; the second solid_at guard keeps p in that case
+    # rather than committing a point that has not actually left the footprint.
+    if nav != null and nav.ready_ok and not solid_at(p, FOOT_R).is_empty():
+        var q: Vector3 = nav.closest(p)
+        if solid_at(q, FOOT_R).is_empty():
+            p.x = q.x
+            p.z = q.z
     p.y = height_at(p.x, p.z)
     return p
 

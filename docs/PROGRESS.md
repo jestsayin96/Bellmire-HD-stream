@@ -2,6 +2,64 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle D4 - D44b keep_walkable net (south-market residual) (desktop, Nov 13)
+D44b (town_nav in_solid residual, sub-case b) - the supervisor flagged it "before
+D29 or anything else". Took the D-cycle 126 follow-up's "keep_walkable net" option.
+- CHANGE (scripts/town.gd keep_walkable ONLY): 3 push passes -> 6 (a chain of
+  overlapping south-market house footprints can oscillate and leave a foot inside
+  after 3), plus a navmesh-authority fallback - when the point is STILL inside a
+  footprint after the loop, snap to nav.closest (guarded so pre-sync, where
+  closest() returns p itself, it keeps p rather than looping). Rare path: the
+  common already-clear case pays no nav query. A position can only become MORE
+  walkable - no test loosened, nothing widened.
+- GATE (all GREEN on the hardened tree): parse 0 SCRIPT/Parse; _offfloor 0/1643
+  (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _delve_test (DELVE_OIL=1) clean to
+  floor 2, no SCRIPT ERROR; _townwalk x3 PASS in_solid 0/15466, 1/15863, 2/16816
+  (0.000/0.006/0.012%, all << the 0.2% bar).
+- NOT TICKED: the DONE bar is three-consecutive-0 and I got 0/1/2. The residual
+  did not move measurably - it is a single-FRAME transient at the ~15 south-market
+  houses (recurring: child Rask Coalfoot ~(52,-88.6); peasants ~(74,-64)). A
+  diagnostic sampling every 0.25 s (4 runs) caught ZERO inside, so the gate's
+  0.5 s grid only rarely lands on it. This is at the floor of measurement, well
+  inside PASS; "0/1/2" reads as noise, not a regression (PASS every run).
+- Committed the hardening as a PARTIAL (safe correctness improvement, full gate
+  green), NOT as a close of D44b. NEXT CYCLE: per-FRAME logging (not sampled) at
+  the south houses to name the committing branch - prime suspect the ghost/
+  pocket-escape leg (townsfolk ~L821) that moves on height_at alone, bypassing
+  keep_walkable while _ghost_last stays in the route.
+- Files: scripts/town.gd. (Also preserving the prior run's uncommitted D-cycle D3
+  note below - D42, the silent-town callers, is already on main at df393ff.)
+
+
+## U-cycle - L62 PANE LANE TITLES + L61 CHRONICLE STYLING + L63 SATCHEL OFF STREAM (desktop HUD, Nov 13)
+Three Mr. E HUD items from his 14:12 / 14:20 looks, all in the seven owned files, committed to hud-ui (21b6a14).
+- L62 PANE LANE TITLES (spotlight.gd). Mr. E: "I don't even know what window this is." Every pane now carries a
+  readable KIND title - DIRECTOR / BITS / SUBSCRIBER / CHANNEL POINTS - above the existing "Now watching: <who>"
+  line. Title uses the lane's bright paid colour; an idle paid lane shows "BITS · ambient" (etc.) in the muted
+  edge so a viewer can tell the lane is unspoken-for. Positioned on the pane's OUTER-top side (same L40 math as
+  the now-watching label) so the Chronicle box is never crossed. New KIND constant.
+- L61 CHRONICLE STYLING (feed_hud.gd _build_chrome). Mr. E: "just a box". The centre box now wears the hub's
+  aesthetic - UiTheme.PARCH parchment, UiTheme.EDGE ink border, a teal accent rule across the top with two
+  deep-gold diamond pips at its ends, and a left-side "Chronicle" wordmark with the teal diamond ornament
+  (UiTheme.title). Font STAYS at 18 px (L39b signed off); _chrome_lines still returns 8-9 lines - this is skin.
+- L63 STRIP SATCHEL OFF STREAM (leaderboard_panel.gd). Per COORDINATION 13 the viewer Satchel leaves the stream
+  for the hub (H11). _ready / _unhandled_input / restyle / setup stripped to no-ops. Satchel inner class kept
+  DORMANT (not instantiated) so its gear/state/sell-price logic is still reachable for the hub to reuse.
+- feed_hud ANSWER (asked in L63): it IS the Chronicle's renderer - single PanelContainer named "Chronicle" in
+  group "hud_chronicle", chrome and full-screen modes both built in-file. NOT a second on-stream event feed.
+  Nothing to remove; leave it.
+- TEST tools/_l62_test.gd (windowed 1920x1080, COORDINATION 4): three paid lanes + director on known heroes,
+  checks every KIND label is visible with the right text, then clears the bits paid moment and checks the
+  title reads "BITS · ambient", and that LeaderboardPanel has zero children on stream. 11 checks, 0 FAIL.
+- RENDERS looked at: renders/cycles/20261113_l62/l62_paid_all_four_1080.png (all four kinds legible, chip colours
+  match the lanes, Chronicle styled with wordmark + teal rule + gold pips, lines visible); l62_bits_ambient_1080.png
+  (bits reads "BITS · ambient" in the muted chip while the others stay paid-bright); l61_chronicle_styled_1080.png
+  (same frame as the ambient one for the Chronicle close-read). The on-stream surface is now exactly the six in
+  COORDINATION 13 (panes, Chronicle, lane titles, now-watching, boss bar during a fight, in-world).
+- Files: scripts/spotlight.gd, scripts/feed_hud.gd, scripts/leaderboard_panel.gd, tools/_l62_test.gd(+.uid).
+- COMMIT 21b6a14 on hud-ui, pushed. Did not tick L61 / L62 / L63 in WORK_PLAN - Mr. E signs those off on his eye.
+
+
 ## D-cycle D3 - D42 THE SILENT TOWN: FOOTSTEPS + ANIMAL VOICES GET A CALLER (desktop, Nov 13)
 Picked up a prior run's uncommitted D42 WIP (lock left RUNNING 02:20, no IDLE - cut off mid-cycle), reviewed it against
 my owned files, validated the full gate, and finished it. All changes are in DESKTOP BUILD files only.

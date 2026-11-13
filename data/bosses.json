@@ -38,5 +38,22 @@
       "name": "Mourncoil"
     }
   ],
-  "rule": "Bosses are deliberately different SHAPES, not bigger numbers. Each carries a note that prints when it rises."
+  "rule": "Bosses are deliberately different SHAPES, not bigger numbers. Each carries a note that prints when it rises.",
+  "uniques": "Rare modified versions of the EIGHT lords - never new lords. Each keeps its lord's shape and twists it: a different behaviour, with its stats skewed to match (lower hp for a faster one, and so on), never just a bigger number. 'shape' names the modifier and what it does.",
+  "lesser_uniques": [
+    {"name": "The Hollow King, Thrice-Kindled", "shape": "its cold fire clings - the ground it crosses stays burning behind it", "hp": 175},
+    {"name": "The Hollow King, Guttered", "shape": "its fire burnt low - quicker and desperate, it strikes twice and fades fast", "hp": 120, "speed": 4.4},
+    {"name": "The Grubmother, Overfull", "shape": "a slower, vaster wall that spills brood without pause and never stops spilling", "hp": 300, "speed": 1.4},
+    {"name": "The Grubmother, Split", "shape": "cut in two and still coming - each half a smaller wall that births its own", "hp": 170, "speed": 2.2},
+    {"name": "The Rattling Host, Unburdened", "shape": "sheds its dead early and often - a thinning crowd that will not thin", "hp": 150},
+    {"name": "Nightwing, the Famished", "shape": "faster and frailer - it swoops twice before you hear the first", "hp": 90, "speed": 7.4},
+    {"name": "Nightwing, Roosted", "shape": "slower, heavier, and it never comes alone - the dark around it is all wings", "hp": 150, "speed": 5.2}
+  ],
+  "greater_uniques": [
+    {"name": "The Gravewyrm, Half-Woken", "shape": "its breath comes slow but deep - it was never meant to stir, and resents it", "hp": 300, "attack": 26},
+    {"name": "The Ossuary Lord, Unending", "shape": "it raises its bones faster than any party can lay them down", "hp": 360},
+    {"name": "The Ossuary Lord, Stripped", "shape": "its ward broken - lighter and quicker, and it swings for the throat now", "hp": 240, "speed": 3.4, "attack": 24},
+    {"name": "The Pale Duchess, Unmasked", "shape": "no patience left - she opens throats on the first pass and does not curtsy", "hp": 180, "attack": 31},
+    {"name": "Mourncoil, the Deep Freeze", "shape": "frost in sheets and the whole floor going to ice - everything slows but it", "hp": 320}
+  ]
 }

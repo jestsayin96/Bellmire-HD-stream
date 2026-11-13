@@ -1852,3 +1852,44 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Housekeeping this cycle (COORDINATION 9.2): laptop tool .uids committed (L25/L26/L28/L32), desktop _d1x .uid
   noise deleted. The merged D19b sky/weather was read against the spotlight's _lane_env block (COORDINATION 8.1):
   panes copy the live town Environment every 0.5 s, so the new sky/weather carries into panes unchanged.
+
+## C-cycle 1 - C1/C2/C3 data+lore catalogue (content, branch `content`, jestai via a separate cloud clone, 2026-11-12) - authored + python-validated, NOT yet Godot-tested
+- First content-writer cycle. Data + lore only; never ran Godot, never touched a .gd/.tscn/assets/web or any
+  forbidden data file (strains/biomes/world/classes/commands untouched). Ground truth read first: COORDINATION 10,
+  WORK_PLAN CONTENT, PLAN lore spine, and the actual .gd loaders (gear/roster/delve/lore/bestiary - read only) so
+  every addition matches how the loaders read these files. Additive only: every pre-existing key/entry preserved
+  verbatim (checked old vs main).
+- C1 items.json (3.7 -> 9.6 KB). accessories 10 -> 25 (+15): rings/amulets/cloaks/boots/gloves, each ONE 5e bonus
+  at the EXISTING magnitudes (ac/saves +1, hp +12, speed +0.6, hit +1, dmg +2) - no power creep (one slot each),
+  priced in-band, named from canon (scar, Ford, guild, mill, mine, masons, the bell). cosmetics 18 -> 48 (+30):
+  6 hats/hoods/helms, 6 district/guild/Ford/scar banners, 5 young farm pets (piglet/lamb/foal/calf/cria - real
+  assets/animals models, scales anchored to town.gd's own MODELS table), 13 titles (all canon, none states a
+  floor count). dyes 10 -> 30 (+20), dye_cost unchanged at 25.
+- C2 lore_lines.json. tells 2 -> 6 in every one of the 8 origin buckets (+32); descend 3 -> 8, cleared 3 -> 8,
+  epitaphs 6 -> 14, top-level misfire 3 -> 7; barks enter/lord 4 -> 9, trap/hurt/drink/misfire 3 -> 8. Format
+  contracts held exactly (descend = two %s, cleared = one %d, misfire = %s %s %d %d) - a wrong %-count would crash
+  the runtime format. lord_intros/unique_intros LEFT UNTOUCHED on purpose: delve.gd:160 reads each as a single
+  string keyed by the boss def's id, and all 8 lords + all 5 bestiary uniques already have one; turning them into
+  arrays would need a delve.gd change (see handoff).
+- C3 bosses.json + potions.json. bosses.json: existing lesser/greater/draw/rule untouched; added two ADDITIVE
+  arrays lesser_uniques (7) + greater_uniques (5) = 12 rare variants of the EIGHT lords (modified lords, never new
+  lords), each using only the existing field vocabulary (name/shape/hp/speed/attack) with 'shape' naming the
+  modifier + effect, shape-first not just bigger numbers. NOTE: bosses.json is currently inert (only lore.gd parses
+  it; the live lords/uniques are in bestiary.gd). potions.json: potions 12 -> 19 (+7) - fieldmend/stillblood/
+  clearsight/steadynerve/nightdraught work immediately (heals + cures of EXISTING states + darkvision); states
+  12 -> 14 (+2: warded, regenerating) with wardwater/knitbone that give them.
+- VALIDATION (python only, no Godot, /home/claude/validate_content.py): all four touched files json.load() clean;
+  every data/*.json still parses (lore.gd parses the whole dir at boot); every NEW entry carries the same field
+  shape as the existing ones; potion key/alias/name tokens are unique (potion_key would mis-resolve a clash);
+  colours are 6-hex; pet models exist under assets/animals. Result: VALIDATION OK.
+- FOR THE LAPTOP/DESKTOP (code wiring the content implies - authoring is parallel, these are not mine to write):
+  (1) gear.gd _hat has a `match key:` with only 4 shapes; the 6 new hat keys (guild_hood, mire_hood, watch_helm,
+  miller_cap, bell_coif, ford_circlet) will fall to the default cylinder until cases are added - they carry a
+  "colour" like the existing hats, so a case per key (crown dims + position, optional _brim) is all each needs.
+  (2) new cosmetic cloaks degrade gracefully - gear.gd CLOAK_COL only special-tints guild_cloak/mire_cloak, so the
+  new cloak accessories give their bonus and keep the calling's cape colour until added to CLOAK_COL (optional).
+  (3) potion states 'warded' and 'regenerating' display in the HUD now but have NO combat effect until delve.gd
+  honours them (warded = turn aside the first blow each round; regenerating = knit a little hp back each second).
+  Until then wardwater/knitbone are a buff that shows but does nothing.
+- TICKING: WORK_PLAN C1/C2/C3 left UNTICKED (COORDINATION 6 + 10) - the supervisor merges `content` to main, runs
+  the Godot battery, and ticks. This commit is complete and validated, NOT a WIP: commit (do not skip it).

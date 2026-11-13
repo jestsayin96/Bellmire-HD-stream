@@ -12,7 +12,14 @@
     "ogre":       {"name": "Ogre's Draught", "cost": 160, "tier": 3, "gives": "giant", "secs": 60, "aliases": ["strength", "giant"], "flavour": "Thick as porridge, and it hits like a door."},
     "shadow":     {"name": "Shadowcloak", "cost": 140, "tier": 3, "gives": "invisible", "secs": 20, "aliases": ["invisibility", "invis"], "flavour": "The dark forgets you, until you strike."},
     "bravecup":   {"name": "Bravecup", "cost": 60, "tier": 1, "gives": "heroism", "secs": 60, "cures": ["frightened"], "aliases": ["heroism", "courage"], "flavour": "Mead and something stronger than mead."},
-    "owl":        {"name": "Owl-eye Drops", "cost": 50, "tier": 2, "gives": "darkvision", "secs": 900, "aliases": ["darkvision", "owleye"], "flavour": "Two drops in each eye, and the dark goes grey."}
+    "owl":        {"name": "Owl-eye Drops", "cost": 50, "tier": 2, "gives": "darkvision", "secs": 900, "aliases": ["darkvision", "owleye"], "flavour": "Two drops in each eye, and the dark goes grey."},
+    "fieldmend":  {"name": "Field Dressing", "cost": 20, "tier": 1, "heal": [1, 4, 1], "aliases": ["field", "dressing"], "flavour": "A rag, a splash of spirits, and no time to be gentle."},
+    "stillblood": {"name": "Stillblood Tincture", "cost": 45, "tier": 1, "cures": ["poisoned"], "aliases": ["stillblood"], "flavour": "Thicker than bitterleaf, and it stays down."},
+    "clearsight": {"name": "Clearsight Drops", "cost": 55, "tier": 2, "cures": ["blinded"], "aliases": ["clearsight", "sight"], "flavour": "Stings like the truth. Then you can see again."},
+    "steadynerve":{"name": "Steadynerve", "cost": 50, "tier": 1, "cures": ["frightened"], "aliases": ["steady", "nerve"], "flavour": "The hand stops shaking first."},
+    "nightdraught":{"name": "Nightdraught", "cost": 55, "tier": 2, "gives": "darkvision", "secs": 900, "aliases": ["night", "nightdraught"], "flavour": "The apothecary's own, for the long watch."},
+    "wardwater":  {"name": "Wardwater", "cost": 130, "tier": 3, "gives": "warded", "secs": 45, "aliases": ["wardwater"], "flavour": "A skinful, blessed at the chapel font."},
+    "knitbone":   {"name": "Knitbone Brew", "cost": 170, "tier": 3, "gives": "regenerating", "secs": 30, "aliases": ["knitbone", "regen"], "flavour": "Green, and it moves a little in the bottle."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},
@@ -26,6 +33,8 @@
     "giant":       {"word": "ogre-strong", "bad": false, "colour": "e0a060", "does": "+2 to hit, +4 damage"},
     "invisible":   {"word": "unseen", "bad": false, "colour": "9fa8c8", "does": "foes cannot pick them; advantage on the first blow, which ends it"},
     "heroism":     {"word": "heroic", "bad": false, "colour": "ffd24a", "does": "cannot be frightened"},
-    "darkvision":  {"word": "owl-eyed", "bad": false, "colour": "c8c8a0", "does": "no disadvantage in the dark"}
+    "darkvision":  {"word": "owl-eyed", "bad": false, "colour": "c8c8a0", "does": "no disadvantage in the dark"},
+    "warded":      {"word": "warded", "bad": false, "colour": "a0d0ff", "does": "turns aside the first blow each round"},
+    "regenerating":{"word": "mending", "bad": false, "colour": "ff9aa0", "does": "knits a little hurt back each second"}
   }
 }

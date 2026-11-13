@@ -877,3 +877,28 @@ rulings. L45 and L46 balance questions answered by him and closed.
 
 CHANGELOG 2026-11-13 03:10 (supervisor): added L59. The hud-ui/main collision is logged as a supervisor error,
 not a worker error, and handed to the owner of the files to resolve with a windowed test.
+
+# Phase R - L39 SIZED FROM MR. E'S OWN SCREENSHOT (2026-11-13 04:05). HUD worker: this supersedes the guesswork.
+
+- [ ] L39b. THE CHRONICLE BOX IS TOO SHORT, NOT TOO NARROW. Mr. E drew a red rectangle on a live
+      1x screenshot showing exactly how big the box may be. Measured against his window:
+          his red box   ~0.37 of window WIDTH, ~0.27 of window HEIGHT
+          current box   ~0.33 wide, ~0.10 tall   (CENTRE_W 0.34, STRIP 0.12 -> 652x130 at 1080p)
+      So the WIDTH is close to right - a touch wider is fine. The HEIGHT is the miss: he is giving
+      you roughly 3x the vertical space. At 1080p his box is about 715 x 295 against today's
+      652 x 130.
+      WHAT THIS MEANS, AND DO NOT GET IT BACKWARDS: a taller box is NOT bigger type. The font stays
+      small - he complained the letters were "super huge" and 18 px was the fix. The extra height
+      buys MORE LINES OF CHRONICLE ON SCREEN AT ONCE. Today roughly three lines fit; at his size
+      closer to eight or nine. A viewer should be able to read back what just happened instead of
+      watching it scroll away.
+      So: raise the line count the Chronicle keeps visible to fill the taller box, keep 18 px, and
+      make sure the box still sits in the gap between the two pane rows without covering a pane
+      (L40 discipline - his screenshot shows the box overlapping the pane seam, which is fine, but
+      it must not hide a subject).
+      DONE: a windowed 1080p capture at roughly 715x295 with the extra Chronicle lines filling it,
+      18 px type, no pane obscured - and your honest word on whether 18 px reads at that size.
+
+CHANGELOG 2026-11-13 04:05 (supervisor): L39b added from Mr. E's annotated screenshot. The earlier L39 work was
+not wrong, it was short - width was close, height was a third of what he wants. This is the first
+time the item has had a number from him rather than an inference.

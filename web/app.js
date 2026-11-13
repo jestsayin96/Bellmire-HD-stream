@@ -172,12 +172,17 @@ async function load() {
     if (TEST === "empty") rows = [];
     const row = arr(rows)[0];
     lastError = "";
-    if (!row || !row.payload || typeof row.payload !== "object") {
+    const payload = row && row.payload && typeof row.payload === "object" ? row.payload : null;
+    if (payload) {
+      last = row;
+      render(MOCK ? withMock(payload) : payload);
+    } else if (MOCK) {
+      // local check only: the town has not reported, but a ?mock= was asked for.
+      // Render the mock over an empty town so the checks run without live data.
+      render(withMock({}));
+    } else {
       last = null;
       renderNothing();
-    } else {
-      last = row;
-      render(MOCK ? withMock(row.payload) : row.payload);
     }
   } catch (e) {
     lastError = e && e.name === "AbortError" ? "no answer in " + TIMEOUT_MS / 1000 + " s" :
@@ -200,6 +205,7 @@ function renderNothing(failed) {
   $("nHeroes").textContent = "";
   $("nFallen").textContent = "";
   renderCommands(null);
+  renderRolls(null);
 }
 
 // ---------------------------------------------------------------- the page
@@ -220,6 +226,7 @@ function render(p) {
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
+  renderRolls(p.rolls);
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -961,6 +968,167 @@ function setUpDie() {
 }
 setUpDie();
 
+// ---------------------------------------------------------------- the town's rolls (H9)
+// The d20 is resolved IN THE GAME: a viewer spends channel points or bits, the game
+// rolls and applies the outcome (T5). The result rides the 60 s snapshot as p.rolls
+// (newest first) and shows here. This page only DISPLAYS it - it never initiates or
+// submits a roll, so the hub stays read-only (docs/HUB_SECURITY.md). Forward-
+// compatible, exactly like the hero HP/XP bars: the section lights up the day the
+// publisher sends the field and shows an honest empty state until then. It invents
+// no roll and never derives an outcome from the number.
+//
+// CONTRACT (also in web/NOTES.md). Each entry is an object; every field optional and
+// defended. Canonical key, then accepted aliases:
+//   n      1..20, the face rolled     (roll, d20, face, value)
+//   by     the roller's display name  (who, name, viewer)      - viewer text
+//   what   what was attempted         (title, proposition, action) - viewer text
+//   tier   outcome band: crit|good|mixed|bad|fumble (aliases in TIER_ALIAS)
+//   result the plain-language outcome (s, text, line)          - viewer text
+//   cost   what was spent, e.g. "500 channel points" (spent)
+//   at     ISO timestamp              (time)
+// Every string reaches the DOM only through el()/textContent; `tier` only ever picks
+// a whitelisted CSS class; no field is ever used as a URL/src/href/style.
+const ROLL_FEED_MAX = 30;
+const TIER = {
+  crit:   { label: "Triumph" },
+  good:   { label: "It goes well" },
+  mixed:  { label: "A mixed result" },
+  bad:    { label: "It goes badly" },
+  fumble: { label: "A fumble" },
+};
+const TIER_ALIAS = {
+  crit: "crit", critical: "crit", triumph: "crit", nat20: "crit",
+  good: "good", success: "good", great: "good", pass: "good", win: "good",
+  mixed: "mixed", partial: "mixed", neutral: "mixed",
+  bad: "bad", fail: "bad", failure: "bad", backfire: "bad", loss: "bad",
+  fumble: "fumble", botch: "fumble", disaster: "fumble", nat1: "fumble",
+};
+function rollFaceOf(r) {
+  const v = pickNum(r.n, r.roll, r.d20, r.face, r.value);
+  return (v != null && v >= 1 && v <= 20) ? Math.round(v) : null;
+}
+function rollTierOf(r) {
+  const raw = String(r.tier ?? r.band ?? r.result_tier ?? "").toLowerCase().trim();
+  return TIER_ALIAS[raw] || null;          // unknown or absent -> no tier claimed
+}
+function firstStr(...vals) { for (const v of vals) if (v != null && String(v).trim() !== "") return String(v); return ""; }
+
+function normalizeRolls(raw) {
+  return arr(raw)
+    .filter((r) => r && typeof r === "object")
+    .slice(0, ROLL_FEED_MAX)
+    .map((r) => ({
+      face: rollFaceOf(r),
+      by: firstStr(r.by, r.who, r.name, r.viewer).slice(0, 40),
+      what: firstStr(r.what, r.title, r.proposition, r.action).slice(0, 180),
+      result: firstStr(r.result, r.s, r.text, r.line).slice(0, 400),
+      cost: firstStr(r.cost, r.spent).slice(0, 60),
+      tier: rollTierOf(r),
+      at: typeof r.at === "string" ? r.at : (typeof r.time === "string" ? r.time : ""),
+    }))
+    .filter((r) => r.face != null || r.result || r.what);   // drop entries with nothing to show
+}
+
+// throw the die to a KNOWN value and settle on that face. Used by the town-roll
+// display (H9); it never chooses the value and never contacts anything. A standalone
+// twin of the viewer-tap animation, sharing the d20busy guard so the two never fight.
+function throwDie(value, done) {
+  const btn = $("d20"), cage = $("d20cage");
+  if (!btn || !cage) { if (done) done(); return; }
+  d20busy = true;
+  btn.classList.remove("crit", "crat", "land");
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const settle = () => {
+    d20spins += 2;
+    const base = "matrix3d(" + restFor(value).join(",") + ")";
+    cage.style.transform = calm ? base
+      : `rotateX(${d20spins * 360}deg) rotateY(${d20spins * 360}deg) ${base}`;
+  };
+  const finish = () => {
+    btn.classList.add("land");
+    btn.classList.toggle("crit", value === 20);
+    btn.classList.toggle("crat", value === 1);
+    d20busy = false;
+    if (done) done();
+  };
+  if (calm) { settle(); finish(); }
+  else {
+    btn.classList.add("rolling");
+    setTimeout(() => { btn.classList.remove("rolling"); settle(); setTimeout(finish, 650); }, 520);
+  }
+}
+
+let lastRollKey = null;      // internal only (never written to the DOM): detects a new top roll
+function rollKey(r) { return JSON.stringify([r.at, r.by, r.face, r.result]); }
+
+// one entry in the rolls feed. Mirrors a chronicle row: a die-face badge, a head
+// (who / what / tier / when) and the plain-language outcome line.
+function rollEntry(r) {
+  const li = el("li", "rentry" + (r.tier ? " tier-" + r.tier : "")
+    + (r.face === 20 ? " crit" : r.face === 1 ? " crat" : ""));
+  const face = el("span", "rface");
+  face.setAttribute("aria-hidden", "true");
+  face.append(el("span", "rfacen", r.face != null ? r.face : "\u00b7"));
+  li.append(face);
+  const body = el("div", "rbody");
+  const head = el("div", "rhead");
+  head.append(el("span", "rby", r.by || "A viewer"));          // viewer text: textContent
+  if (r.what) head.append(el("span", "rwhat", r.what));
+  if (r.tier) head.append(el("span", "rtier rt-" + r.tier, TIER[r.tier].label));  // whitelisted class
+  const a = ago(r.at);
+  if (a) { const time = el("time", "rwhen", a.text); time.dateTime = r.at; time.title = when(r.at); head.append(time); }
+  body.append(head);
+  if (r.cost) body.append(el("span", "rcost", r.cost));
+  if (r.result) body.append(el("p", "rline", r.result));
+  li.append(body);
+  return li;
+}
+
+// announce the latest town roll on the shared die. On first sight, a busy die, or
+// reduced motion, it just settles to the face; a genuinely new roll tumbles to it.
+function announceTownRoll(r, first) {
+  const say = $("d20result"), cage = $("d20cage"), btn = $("d20");
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const setText = () => {
+    if (!say) return;
+    say.replaceChildren();
+    say.append(el("b", null, String(r.face)));
+    say.append(document.createTextNode(" \u00b7 " + (r.by ? r.by + "\u2019s roll for the town" : "the town\u2019s roll")));
+    if (r.tier) { say.append(document.createTextNode(" \u2014 ")); say.append(el("span", "rt rt-" + r.tier, TIER[r.tier].label)); }
+  };
+  if (first || d20busy || calm) {
+    if (cage && !d20busy) cage.style.transform = "matrix3d(" + restFor(r.face).join(",") + ")";
+    if (btn && !d20busy) { btn.classList.remove("rolling"); btn.classList.toggle("crit", r.face === 20); btn.classList.toggle("crat", r.face === 1); }
+    setText();
+  } else {
+    if (say) say.textContent = "The town rolls\u2026";
+    throwDie(r.face, setText);
+  }
+}
+
+function renderRolls(raw) {
+  const feed = $("rollFeed"), note = $("rollNote");
+  if (!feed || !note) return;
+  const rolls = normalizeRolls(raw);
+  feed.replaceChildren();
+  if (!rolls.length) {
+    lastRollKey = null;     // so the next real roll animates fresh
+    note.className = "note quiet";
+    note.textContent = "No rolls from the town yet. When a viewer spends channel points or bits to roll the die for the town \u2014 to pass a law, set off an event or raise a building \u2014 the roll and how it turns out appear here. The die is thrown in the game; this page only reports it.";
+    return;
+  }
+  for (const r of rolls) feed.append(rollEntry(r));
+  note.className = "note";
+  note.textContent = rolls.length + (rolls.length === 1 ? " roll" : " rolls") + " from the town, newest first. The die above shows the latest.";
+  const top = rolls[0];
+  const key = rollKey(top);
+  if (key !== lastRollKey) {
+    const first = lastRollKey === null;
+    lastRollKey = key;
+    if (top.face != null) announceTownRoll(top, first);
+  }
+}
+
 // ---------------------------------------------------------------- problem state
 function showProblem(msg) {
   const box = $("nothing");
@@ -1291,9 +1459,26 @@ const MOCK_CHRONICLE = [
   { t: "wat", s: "A kind the page has never heard of, which must still render.", at: new Date(Date.now() - 30 * 3600000).toISOString() },
   { t: "fight", s: "A stat line with no stamp at all.", at: "" },
 ];
+// ?mock=roll: stand-in town rolls (the publisher sends no rolls yet). Exercises every
+// tier, a cost-less entry, and - deliberately - the hostile name as the roller, which
+// must render as literal text. The hostile entry is NOT the newest, so the die's
+// announcement shows a safe name while the feed proves the escape on the hostile one.
+const MOCK_ROLLS = [
+  { n: 20, by: "Brum the Cooper", what: "Raise the watchtower on the west wall", tier: "crit", cost: "800 channel points",
+    result: "A natural twenty — the tower is up in a day and the masons sing. The west wall has never been safer.", at: new Date(Date.now() - 1 * 60000).toISOString() },
+  { n: 3, by: "<img src=x onerror=alert(1)>", what: "Lower the gate toll on outsiders", tier: "bad", cost: "500 bits",
+    result: "It goes badly: smugglers slip in among the merchants and the treasury is lighter by morning.", at: new Date(Date.now() - 6 * 60000).toISOString() },
+  { n: 11, by: "Sedge the Toll", what: "Call a harvest festival", tier: "mixed", cost: "300 channel points",
+    result: "A mixed result — the ale flows and spirits lift, but three delvers are too merry to go down the next day.", at: new Date(Date.now() - 22 * 60000).toISOString() },
+  { n: 1, by: "Cob Ashfoot", what: "Conscript the farmhands into the militia", tier: "fumble", cost: "650 bits",
+    result: "A fumble. The recruits drill into each other, a hayrick catches fire, and the fields stand untended.", at: new Date(Date.now() - 55 * 60000).toISOString() },
+  { n: 17, by: "The Weasel", what: "Bless the delvers before the descent", tier: "good",
+    result: "It goes well: the party goes down under a good omen and all four come home whole.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];

@@ -232,3 +232,42 @@ own protocol - IRC over WebSocket - directly, in app.js. No frame, no cookies, e
 4. ctrlStrip() runs on every OUTGOING send (IRC injection) and on incoming display strings.
 5. The hostile-name check passes in ?mock=chat and the fake-socket protocol test.
 If any of that is not true, do not republish.
+
+## Phase 2, H9 - the hub die shows the town's rolls (FLAG: supervisor review)
+
+The d20 is resolved IN THE GAME (T5): a viewer spends channel points or bits, the game rolls
+and applies the outcome, it is Chronicled, and it rides the 60 s snapshot. The hub only
+DISPLAYS the roll in its die section - it never initiates or submits one. The page stays
+strictly READ-ONLY; no viewer write path to Supabase.
+
+### No CSP change
+- H9 adds NO external surface: no new connect-src, no frame-src, no script/style/img source.
+  The strict CSP is byte-for-byte unchanged. The roll data arrives inside the Supabase
+  snapshot the page already reads - nothing new is contacted.
+
+### The data (new optional `rolls` array, newest first)
+- Forward-compatible, exactly like the hero max_hp / xp_next bars: the die section shows an
+  honest empty state ("No rolls from the town yet...") until the publisher sends the field,
+  and invents no roll. The full contract is in web/NOTES.md.
+- Every entry field is viewer-controlled and treated as hostile - `by` (display name), `what`
+  (the proposition), `result` (the plain-language outcome), `cost`. All reach the DOM ONLY
+  through el()/textContent, in the feed AND in the die's one-line announcement. Verified: a
+  roller named <img src=x onerror=alert(1)> renders as literal text in both places; zero <img>
+  on the page; no alert fires (?mock=roll, and the animate path re-checked with a <b> name).
+- `tier` (crit|good|mixed|bad|fumble) is mapped through a fixed whitelist (TIER_ALIAS) and only
+  ever SELECTS a CSS class (rt-<tier> / tier-<tier>); an unknown or absent value yields no tier.
+  It is never written to the DOM as markup.
+- `n` (the face) is validated to an integer 1..20 and used only to pick a fixed, page-owned
+  rotation matrix (restFor) for the die and the crit/fumble styling by number. No snapshot
+  value is ever used as a URL/src/href/style.
+- Honesty: the outcome tier is shown ONLY when the publisher states it. The page NEVER derives
+  an outcome from the number - a low roll is not relabelled "bad" by the hub (web/NOTES.md).
+
+### What the supervisor should check before republishing
+1. CSP unchanged (diff index.html head against the H8 state - no new directive or host).
+2. renderRolls / rollEntry / announceTownRoll build the DOM through el()/createTextNode only;
+   grep confirms no new innerHTML, and that `tier` only indexes TIER / selects a class and `n`
+   only indexes restFor.
+3. ?mock=roll passes the hostile-name test (text, no alert, zero <img>) on both the feed and
+   the die's announcement; the honest empty state shows when no `rolls` field is present.
+If any of that is not true, do not republish.

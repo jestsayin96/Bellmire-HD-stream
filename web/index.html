@@ -52,6 +52,7 @@
   Test hooks (local checks only, harmless):
     ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
     ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
+    ?mock=roll (stand-in town rolls, with the hostile-name canary)
 -->
 <link rel="stylesheet" href="style.css">
 </head>
@@ -148,7 +149,7 @@
     </section>
 
     <section class="panel" id="dice">
-      <h2 class="title">The Guild Hall die <small>a d20, for the fun of it</small></h2>
+      <h2 class="title">The Guild Hall die <small>the town’s rolls — and one of your own</small></h2>
       <div class="dicebox">
         <div class="dicetable">
           <button type="button" class="d20" id="d20" aria-label="Roll the twenty-sided die">
@@ -160,10 +161,25 @@
         </div>
         <div class="diceside">
           <p class="d20result" id="d20result" role="status" aria-live="polite">Tap the die.</p>
-          <p class="d20help">The roll happens in your own browser and the town never hears about it. It has nothing to do with your hero.</p>
+          <p class="d20help">Tap for a roll of your own — it happens in your browser, the town never hears it, and it has nothing to do with your hero. When the town rolls (below), the die shows that instead.</p>
           <p class="eyebrow">Last rolls</p>
           <ol class="d20hist" id="d20hist"></ol>
         </div>
+      </div>
+      <!--
+        H9: the town’s rolls. A viewer spends channel points or bits and the d20
+        is rolled IN THE GAME (T5) - a law, an event, a building - and the result
+        rides the 60 s snapshot as p.rolls (newest first) and shows here; the die
+        above animates to the latest. READ-ONLY: this page never initiates or
+        submits a roll. Every roller name / proposition / outcome line is viewer-
+        controlled and reaches the DOM only through el()/textContent; the outcome
+        tier only ever selects a whitelisted CSS class, never markup or a URL.
+        See docs/HUB_SECURITY.md (H9) and web/NOTES.md. Local check: ?mock=roll.
+      -->
+      <div class="townrolls" id="townRolls">
+        <p class="eyebrow">The town’s rolls</p>
+        <ol class="rollfeed" id="rollFeed"></ol>
+        <p class="note quiet" id="rollNote"></p>
       </div>
     </section>
 

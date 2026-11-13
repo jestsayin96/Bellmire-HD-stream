@@ -445,3 +445,41 @@ Verified before push:
   CAP ACK, 001 Welcome, JOIN #jestsayin96 and ROOMSTATE. (The page's own socket couldn't be
   exercised end-to-end from the build sandbox - its proxy blocks raw WebSockets - which is also
   why the "lost its footing" retry state is known to render correctly.)
+
+
+## H9 - the town's rolls on the die (2026-11-13)
+
+Mr. E's Phase-N ruling: a viewer spends channel points or bits and a d20 decides how a town
+action goes (upgrade a building, pass a law, set off an event). The supervisor's architecture
+ruling is that the roll is resolved IN THE GAME (T5) and the hub only DISPLAYS it - the page
+stays read-only and never trips the Phase-3 RLS gate. H9 is the hub half: the die section now
+shows the town's rolls, read from the snapshot, and the big d20 animates to the latest one.
+
+Why it lives in the existing die section rather than a new panel: the d20 was already the page's
+one piece of motion and the obvious home for "a roll and its outcome". The local tap-to-roll
+stays (it is honestly yours - it happens in your browser, the town never hears it); when the
+town rolls, the same die shows that instead. One stage, two sources, clearly labelled.
+
+Forward-compatible, the same discipline as the HP/XP bars and the raids pill: the publisher
+(scripts/snapshot_pub.gd on main, DESKTOP BUILD) sends no `rolls` yet, so the section shows an
+honest empty state and the die stays the local fun die. It lights up with NO page change the day
+the field arrives. The hub makes no claim about a roll until the game sends it, and never derives
+an outcome tier from the number - a low roll is only "bad" if the game says so.
+
+### The data contract (publisher: add `rolls` to the snapshot payload, newest first)
+An array of objects; every field optional and defended. Canonical key, then accepted aliases:
+- `n`      - the face rolled, 1..20            (aliases: roll, d20, face, value)
+- `by`     - the roller's Twitch display name  (aliases: who, name, viewer)  [viewer text]
+- `what`   - what was attempted / the proposition (aliases: title, proposition, action) [viewer text]
+- `tier`   - the outcome band: one of crit | good | mixed | bad | fumble (aliases in TIER_ALIAS)
+- `result` - the plain-language outcome         (aliases: s, text, line)  [viewer text]
+- `cost`   - what was spent, e.g. "500 channel points"  (alias: spent)
+- `at`     - ISO timestamp                      (alias: time)
+
+Outcome tiers are deliberately WORD-first (Triumph / It goes well / A mixed result / It goes
+badly / A fumble), readable to someone who has never played D&D (T5's requirement); colour only
+reinforces them. Keep the result sentences plain, and always ship at least one failure outcome,
+not only wins - the feed is honest about backfires. Rendering is the same security as the
+chronicle: every string is textContent via el(); `tier` only selects a whitelisted class; `n`
+only picks a fixed rotation matrix; nothing becomes a URL. Local check: ?mock=roll (it carries
+the hostile-name canary as the roller). Reviewed in docs/HUB_SECURITY.md (H9).

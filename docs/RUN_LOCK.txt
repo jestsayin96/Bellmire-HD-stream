@@ -1,1 +1,1 @@
-IDLE 2026-11-13 16:09 - supervisor: merged content C20 + hud-ui (L62/L61/L63) + laptop (L29a/L29b+delve fix) to main a242347; full gate green (parse 0, offfloor 0/1469, twitch OK, delve loop healthy, townwalk x3 0.000%)
+IDLE 2026-11-13 17:06 - supervisor: merged scroll(L61)+content C21+laptop(L29c,L56) to main; gate green (parse0, offfloor0/1453, twitch OK, delve healthy, townwalk x3 PASS). NOTE: D52 scenario A STILL FAILS on this tree (reproduced, delve_queue empty) - laptop A-fix is unpushed.

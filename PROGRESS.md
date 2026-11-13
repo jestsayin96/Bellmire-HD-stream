@@ -3194,3 +3194,70 @@ tiers rather than a single step.
   in damage dealt (rage/keen/backstab and the rest stack multiplicatively) and taken (bulwark + stoneblood
   together cut about a quarter). The numbers are all in one place - CLASS_UNLOCKS, SPECIES_UNLOCKS and the
   match in _ability_mult - if the curve wants flattening once he sees it on stream.
+
+## C-cycle 11 - disaster/event variants and E3PO (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, everything pushed, and was NEVER checked out -
+  only `git fetch`ed, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- WHY THIS CYCLE: backlog items 4 (disaster and event variants) and 3 (E3PO) were the stalest - both
+  last touched in C-cycle 5. The repeat problem on those blocks was structural, not thin: every
+  disaster's `begin` and `pass` are SINGLE strings, so the second volcano of a stream read word for
+  word like the first, and there is only ONE wandering boss, so its three lines repeated verbatim
+  every time it walked. Only data/lore_lines.json was touched; items.json, bosses.json and
+  potions.json are byte-unchanged.
+- DISASTERS (13, backlog 4) - all additive, no key renamed or removed:
+  - `during` widened to 8 lines on EVERY disaster (was 4 on eleven of them, 2 on blight and coldsnap):
+    +56 lines. Each new line is a different camera - a store, a beast, a trade stopping, one person
+    doing one thing - so eight showings of the same disaster do not describe the same shot.
+  - NEW uniform keys `begin_alt` and `pass_alt` (3 lines each, all 13 disasters, +78 lines). `begin`
+    and `pass` are UNTOUCHED and remain the canonical single line; the alts are an optional reroll.
+    Same precedent as lord_intros_alt / unique_intros_alt already in this file, and as the `tier` key
+    added to every shop_stock entry in C-cycle 7: a new key present on every member of the block.
+  - `cost` statements are BYTE-UNCHANGED on all 13. The desktop implements mechanics from exactly
+    what is written there, so this cycle deliberately did not touch a single one.
+- EVENTS (backlog 4) - same key shapes, nothing renamed:
+  - bandit_camps 4 -> 7: The Drover's Rest (Juno Blackhand, livestock), The Quarry Camp (Old Peck,
+    cut stone and lime), The Lampless Road (Wick Harrow, puts out the road lamps and works the dark).
+    Each names a leader and costs the town a DIFFERENT thing, so the three do not overlap with Red
+    Harl, Sedge the Toll, Cob Ashfoot or The Weasel.
+  - monster_camps 3 -> 6: The Sedge Mound (bog frogs), The Silk Barn (cave spiders), The Gnaw Pits
+    (scar rats). All three creature kinds already exist in bestiary.gd - no new creature is implied.
+  - wandering_boss gains `appears_alt` / `while_alt` / `cleared_alt` (3 each). `name`, `appears`,
+    `while`, `cleared` and `note` are unchanged, and the note's rule still stands: it reuses the eight
+    canon lords and never a new one.
+  - A `_note_variants` key was added beside the existing `_note` in both blocks explaining the alt
+    arrays, same as the `_note_extras` pattern already used in e3po. Neither `_note` was reworded.
+- E3PO (backlog 3, Mr. E's favourite) - every existing line kept, 48 added across the blocks that
+  repeat on stream: says 12 -> 20, town_talk 10 -> 16, raid 8 -> 12, disaster 8 -> 12, festival 7 -> 10,
+  withdraw 7 -> 10, return 6 -> 9, intro 5 -> 8, and viewer_roll crit/high/low/fumble 3 -> 5 each.
+  Canon held: he never dies, never admits a wound, withdraws to the barracks and comes back louder,
+  and the new lines keep the Chief's Hall inscription in his mouth (count the grain, keep the door).
+- VALIDATION OK (python only - the content worker never runs Godot):
+  - All four owned files json.load() clean.
+  - STRUCTURAL DIFF against `git show HEAD:data/lore_lines.json`: every pre-existing key path still
+    present, no list shortened, and every pre-existing scalar compared equal - 0 problems.
+  - Shape census: all 13 disasters carry exactly {begin, during, pass, cost, begin_alt, pass_alt};
+    all 7 bandit camps exactly {name, leader, appears, while, cleared}; all 6 monster camps exactly
+    {name, of, appears, while, cleared}; every e3po value still a flat list of non-empty strings.
+  - Duplicate check: no repeated line inside any widened array, and no repeated event name.
+  - `git diff --numstat` on data/lore_lines.json is 326 added / 39 removed, and every one of the 39
+    removals matches an added line that is the SAME TEXT plus a trailing comma - so every pre-existing
+    line is byte-identical.
+- CODE WIRING the new keys imply (for the supervisor to route - content never touches code):
+  1. NOTHING here is required. Every widened array is read the same way it already was; the catalogue
+     simply gets longer the moment this merges.
+  2. NEW, optional, and the only real wiring: `begin_alt` / `pass_alt` on disasters and
+     `appears_alt` / `while_alt` / `cleared_alt` on wandering_boss are INERT unless the picker rolls
+     them. One line at each site - pick from [begin] + begin_alt instead of begin. Without it a second
+     volcano still reads identically to the first. OWNER: DESKTOP BUILD (D34 disasters, D33 events).
+  3. The 3 new bandit camps and 3 new monster camps need no new art or creature: the monster camps
+     name bog frogs, cave spiders and scar rats, which bestiary.gd already defines. OWNER: DESKTOP
+     BUILD (D33), which must spawn the camp from `of` rather than from a fixed list.
+  4. E3PO's words now cover intro/withdraw/return/says/town_talk/raid/disaster/festival/viewer_roll.
+     His BEHAVIOUR is still unwired (D37) - he cannot die and withdraws to the barracks to heal.
+     OWNER: DESKTOP BUILD.
+  5. STILL OPEN from C-cycle 1/9, unchanged by this cycle: hats and banners in items.json carry a
+     `colour` but no `model`, so they render as the default shape tinted until a cosmetic key is
+     mapped to a mesh. OWNER: LAPTOP CODE (gear.gd) / DESKTOP BUILD (hero_body.gd, rig.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

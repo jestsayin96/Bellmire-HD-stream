@@ -155,19 +155,69 @@ const DRAGON := {"name": "gravewyrm", "path": QUAT + "Dragon.glb", "anims": A_DR
 ## Strains (old game, numbers unchanged). Measured: they IMPROVED survival
 ## (83% vs 63%) - do not soften them. `glow` added: the strain is readable at
 ## stream distance, not only in the name.
-const STRAINS := {
+## L27b: the LIVE table is data/strains.json, loaded at class init; this const
+## is the fallback when the file is missing or broken. `particle` names a tell
+## Monster spawns (ember rises, drip falls, wisp drifts, spark flickers,
+## spore hangs slow).
+const STRAINS_FALLBACK := {
     "plain":        {"label": "", "hp": 1.00, "atk": 1.00, "spd": 1.00, "scale": 1.00, "tint": Color(1, 1, 1), "glow": Color(0, 0, 0)},
     "hollowed":     {"label": "hollowed", "hp": 0.75, "atk": 0.95, "spd": 1.10, "scale": 0.92, "tint": Color(0.86, 0.90, 0.84), "glow": Color(0, 0, 0)},
-    "drowned":      {"label": "drowned", "hp": 1.35, "atk": 0.90, "spd": 0.80, "scale": 1.05, "tint": Color(0.52, 0.78, 0.82), "glow": Color(0.2, 0.6, 0.7)},
-    "emberbound":   {"label": "emberbound", "hp": 0.90, "atk": 1.40, "spd": 1.15, "scale": 1.00, "tint": Color(1.00, 0.58, 0.32), "glow": Color(1.0, 0.4, 0.1)},
+    "drowned":      {"label": "drowned", "hp": 1.35, "atk": 0.90, "spd": 0.80, "scale": 1.05, "tint": Color(0.52, 0.78, 0.82), "glow": Color(0.2, 0.6, 0.7), "particle": "drip"},
+    "emberbound":   {"label": "emberbound", "hp": 0.90, "atk": 1.40, "spd": 1.15, "scale": 1.00, "tint": Color(1.00, 0.58, 0.32), "glow": Color(1.0, 0.4, 0.1), "particle": "ember"},
     "gorged":       {"label": "gorged", "hp": 1.60, "atk": 1.10, "spd": 0.75, "scale": 1.35, "tint": Color(0.86, 0.84, 0.46), "glow": Color(0, 0, 0)},
-    "wraithtouched":{"label": "wraithtouched", "hp": 0.85, "atk": 1.25, "spd": 1.30, "scale": 0.98, "tint": Color(0.68, 0.55, 0.95), "glow": Color(0.6, 0.4, 1.0)},
+    "wraithtouched":{"label": "wraithtouched", "hp": 0.85, "atk": 1.25, "spd": 1.30, "scale": 0.98, "tint": Color(0.68, 0.55, 0.95), "glow": Color(0.6, 0.4, 1.0), "particle": "wisp"},
     # L1: two strains the scar itself would make. Scarborn: grown too near the
     # wild magic - its glow wanders through every colour, as the scar's motes do.
     # Mossbacked: the drowned of the buried meadows and woods, grown over.
     "scarborn":     {"label": "scarborn", "hp": 0.95, "atk": 1.20, "spd": 1.10, "scale": 1.02, "tint": Color(0.92, 0.80, 1.00), "glow": Color(0.9, 0.3, 0.8), "wild": true},
     "mossbacked":   {"label": "mossbacked", "hp": 1.30, "atk": 0.95, "spd": 0.85, "scale": 1.08, "tint": Color(0.62, 0.82, 0.50), "glow": Color(0, 0, 0)},
+    # L27b deep strains (fallback copies of the json)
+    "duskforged":   {"label": "duskforged", "hp": 1.45, "atk": 1.35, "spd": 0.60, "scale": 1.15, "tint": Color(0.45, 0.42, 0.52), "glow": Color(0.3, 0.18, 0.5), "particle": "spark"},
+    "sporeblown":   {"label": "sporeblown", "hp": 1.25, "atk": 1.05, "spd": 0.90, "scale": 1.05, "tint": Color(0.78, 0.82, 0.58), "glow": Color(0.35, 0.5, 0.1), "particle": "spore"},
+    "veilstruck":   {"label": "veilstruck", "hp": 0.60, "atk": 1.15, "spd": 1.50, "scale": 0.95, "tint": Color(0.75, 0.80, 0.95), "glow": Color(0.4, 0.7, 0.9), "particle": "wisp"},
 }
+static var strains_from_json := false
+static var STRAINS: Dictionary = _load_strains()
+
+## data/strains.json is the authority; the const above only catches a missing
+## or broken file. Colors come as [r, g, b].
+static func _load_strains() -> Dictionary:
+    strains_from_json = false
+    var f := FileAccess.open("res://data/strains.json", FileAccess.READ)
+    if f == null:
+        return STRAINS_FALLBACK
+    var parsed: Variant = JSON.parse_string(f.get_as_text())
+    if typeof(parsed) != TYPE_DICTIONARY or not (parsed as Dictionary).has("strains"):
+        push_warning("Bestiary: data/strains.json unreadable - using the built-in strain table")
+        return STRAINS_FALLBACK
+    var out := {}
+    for e in ((parsed as Dictionary)["strains"] as Array):
+        var s: Dictionary = e
+        var id := String(s.get("id", ""))
+        if id == "":
+            continue
+        var d := {
+            "label": String(s.get("label", id)),
+            "hp": float(s.get("hp", 1.0)), "atk": float(s.get("atk", 1.0)),
+            "spd": float(s.get("spd", 1.0)), "scale": float(s.get("scale", 1.0)),
+            "tint": _col(s.get("tint", [1, 1, 1])), "glow": _col(s.get("glow", [0, 0, 0])),
+        }
+        if bool(s.get("wild", false)):
+            d["wild"] = true
+        if String(s.get("particle", "")) != "":
+            d["particle"] = String(s["particle"])
+        out[id] = d
+    if not out.has("plain"):
+        out["plain"] = STRAINS_FALLBACK["plain"]
+    strains_from_json = true
+    return out
+
+static func _col(v: Variant) -> Color:
+    if v is Array and (v as Array).size() >= 3:
+        var a: Array = v
+        return Color(float(a[0]), float(a[1]), float(a[2]))
+    return Color(1, 1, 1)
+
 static var no_strains := false
 
 ## the old bands, unchanged, then the scar's own strains: on a meadow or wood
@@ -192,17 +242,25 @@ static func strain_for(floor_no: int) -> String:
         if roll < 55: return "plain"
         if roll < 75: return "hollowed"
         return "drowned"
+    # L27b: the deep bands widened to roll the new strains. The plain share is
+    # untouched (30 / 15); the new strains' shares came out of the non-plain
+    # pool. BALANCE CHANGE flagged for Mr. E - the deep mix shifts.
     if floor_no <= 9:
         if roll < 30: return "plain"
-        if roll < 48: return "drowned"
-        if roll < 66: return "emberbound"
-        if roll < 84: return "wraithtouched"
-        return "gorged"
+        if roll < 44: return "drowned"
+        if roll < 58: return "emberbound"
+        if roll < 72: return "wraithtouched"
+        if roll < 84: return "gorged"
+        if roll < 93: return "duskforged"
+        return "sporeblown"
     if roll < 15: return "plain"
-    if roll < 40: return "emberbound"
-    if roll < 65: return "wraithtouched"
-    if roll < 85: return "gorged"
-    return "drowned"
+    if roll < 32: return "emberbound"
+    if roll < 49: return "wraithtouched"
+    if roll < 63: return "gorged"
+    if roll < 73: return "drowned"
+    if roll < 83: return "duskforged"
+    if roll < 91: return "sporeblown"
+    return "veilstruck"
 
 ## The eight lords (canon). Lesser hold floors ending in 5, greater every 10th.
 ## They rotate from two bags. `scale` multiplies the body's real-size scale.
@@ -415,6 +473,8 @@ static func make(type_key: String, strain_key := "plain") -> Dictionary:
     if strain_key != "plain" or not out.has("glow"):
         out["glow"] = st["glow"]
     out["wild"] = bool(st.get("wild", false))
+    if st.has("particle"):
+        out["particle"] = String(st["particle"])
     if not out.has("ways"):
         out["ways"] = {}
     return out

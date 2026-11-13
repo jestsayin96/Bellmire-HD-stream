@@ -64,6 +64,8 @@ func _ready() -> void:
     var glow: Color = def.get("glow", Color(0, 0, 0))
     if tint != Color(1, 1, 1) or glow != Color(0, 0, 0):
         _tint(_body, tint, glow)
+    if String(def.get("particle", "")) != "":
+        _strain_motes(String(def["particle"]), glow if glow != Color(0, 0, 0) else tint)
     if String(def.get("hand", "")) != "":
         Gear.equip(_body, String(def["hand"]), "handslot.r", "weapon", float(def.get("wscale", 1.0)), float(def.get("wglow", 0.0)))
     if String(def.get("off", "")) != "":
@@ -249,6 +251,63 @@ func _trappings() -> void:
     sm.material = rm
     motes.draw_pass_1 = sm
     add_child(motes)
+
+## L27b: a strained creature's particle tell - ONE small cheap emitter per
+## monster. kind -> motion: ember rises, drip falls, wisp drifts sideways,
+## spark flickers fast and short, spore hangs slow. Colour from the strain.
+func _strain_motes(kind: String, col: Color) -> void:
+    var h := float(def.get("h", 1.8))
+    var p := GPUParticles3D.new()
+    p.name = "strain_motes"
+    p.amount = 10
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+    pm.emission_box_extents = Vector3(h * 0.22, h * 0.35, h * 0.22)
+    pm.gravity = Vector3.ZERO
+    pm.color = Color(col.r, col.g, col.b, 0.85)
+    var size := 0.05
+    match kind:
+        "ember":
+            p.lifetime = 1.6
+            pm.direction = Vector3(0, 1, 0); pm.spread = 15.0
+            pm.initial_velocity_min = 0.5; pm.initial_velocity_max = 1.0
+        "drip":
+            p.lifetime = 1.2
+            pm.direction = Vector3(0, -1, 0); pm.spread = 5.0
+            pm.initial_velocity_min = 0.4; pm.initial_velocity_max = 0.9
+            pm.gravity = Vector3(0, -2.0, 0)
+        "wisp":
+            p.lifetime = 2.4
+            pm.direction = Vector3(1, 0.15, 0); pm.spread = 180.0
+            pm.initial_velocity_min = 0.15; pm.initial_velocity_max = 0.45
+            size = 0.065
+        "spark":
+            p.lifetime = 0.5
+            pm.direction = Vector3(0, 1, 0); pm.spread = 180.0
+            pm.initial_velocity_min = 1.2; pm.initial_velocity_max = 2.2
+            size = 0.035
+        _:  # "spore" and anything new: slow hang
+            p.lifetime = 3.0
+            pm.direction = Vector3(0, -0.2, 0); pm.spread = 180.0
+            pm.initial_velocity_min = 0.05; pm.initial_velocity_max = 0.2
+            size = 0.06
+    p.process_material = pm
+    var sm := SphereMesh.new()
+    sm.radius = size
+    sm.height = size * 2.0
+    sm.radial_segments = 6
+    sm.rings = 3
+    var mat := StandardMaterial3D.new()
+    mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    mat.albedo_color = col
+    mat.emission_enabled = true
+    mat.emission = col
+    mat.emission_energy_multiplier = 1.6
+    mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    sm.material = mat
+    p.draw_pass_1 = sm
+    p.position = Vector3(0, h * 0.5, 0)
+    add_child(p)
 
 ## Anything outside (Delve, raids) drives the body through _play. The body's
 ## own idle (state IDLE) waits until nobody has driven it for a moment - it used

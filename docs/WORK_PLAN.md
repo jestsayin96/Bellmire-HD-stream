@@ -611,7 +611,22 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       have shipped unexecuted. L47_TEST OK (8 checks). _offfloor 0 of 1043, _delve_test clean, parse 0.
       Proven by test: press_on, finish, party_retreat, flee. Wired but not yet observed firing: regroup,
       rejoin, silence, mend, brew_*, turn_back_*.
-- [ ] L48. LEVELLING: CLASS + RACE UNLOCKS. Levelling should unlock new skills, spells and abilities that depend on BOTH class and species, and go deeper than that (tiers, choices). Today a level-up is a stat bump. DONE: a levelling table per class x species; a hero visibly gains a named ability and uses it.
+- [x] L48. LEVELLING: CLASS + RACE UNLOCKS. Levelling should unlock new skills, spells and abilities that depend on BOTH class and species, and go deeper than that (tiers, choices). Today a level-up is a stat bump. DONE: a levelling table per class x species; a hero visibly gains a named ability and uses it.
+      DONE L-cycle 130: TWO TRACKS rather than a 90-row class x species table nobody could keep true - a
+      hero draws from their CLASS track (every class, levels 2 and 5) and their SPECIES track (every
+      species, level 3), so the COMBINATION makes them and a new class or species costs one row. roster.gd
+      gains CLASS_UNLOCKS, SPECIES_UNLOCKS, ABILITY_WORDS (a name AND a blurb each), abilities_of() and
+      unlocked_at(). A level-up now SAYS what it gave - "X learns Cleave - their blow carries into a second
+      foe" - because an unlock nobody can see is the same bug as the stat bump it replaced. delve.gd uses
+      them through the seams that already existed (_ability_mult, _ability_hit, _soak), so a level-5 orc
+      knight brings cleave, bulwark AND rage. tools/_l48_test.gd L48_TEST OK (11 checks): every class and
+      species has a track, the same class of different blood gets a DIFFERENT kit, it is tiered, a real
+      level-up announces it, and - check D - EVERY ability must actually change something in delve.
+      Check D caught my own decoration: "backstab" shipped in the first draft as a named ability with no
+      implementation. Now +40% on an already-wounded target. 15 classes, 6 species, 17 abilities, all 17
+      wired. _offfloor 0 of 1305, _delve_test clean, L3_TEST OK.
+      MR. E'"'"'S CALL: a levelled hero is now meaningfully stronger both ways; the numbers sit in
+      CLASS_UNLOCKS, SPECIES_UNLOCKS and the _ability_mult match if the curve wants flattening.
 - [x] L49. LOOT AND SEARCHING ARE INVISIBLE. No chests, no drops, nobody searching. Heroes should visibly SEARCH specified spots - a dig/search animation, time taken - and report "...no loot..." or "Found loot!" style lines. Not every monster drops. DONE: census shows chests spawned/opened and items picked up; a capture shows a hero searching and both outcomes in the Chronicle.
       DONE L-cycle 125: as with L46 the mechanic was not missing, it was INVISIBLE - _loot() already rolled
       Investigation and awarded gold, but fired the instant a floor cleared with no chest, nobody moving and

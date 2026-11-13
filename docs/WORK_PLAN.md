@@ -737,8 +737,21 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       degrades. L3_TEST OK, _offfloor 0 of 1388, _delve_test clean. items.json read, never written.
       NOT VERIFIED BY EYE: headless mesh assertions only - nobody has seen a plumed helm at 1080p yet.
 
-- [ ] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
+- [x] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
       nothing. Raised by the content writer.
+      DONE L-cycle 129: verified first - the flag was right. potions.json has shipped Scarwater giving
+      scar_touched for a while and the ONLY scar_touched in scripts/ was fishing.gd'"'"'s unrelated
+      scar_touched_chance, so the draught was bought, drunk, displayed and did nothing. delve.gd
+      _scar_check(): a scar-touched hero skips the usual roll because the scar already has their spell -
+      it decides once, half doubled and half taken, and the draught is spent either way. Both outcomes
+      float in the scar'"'"'s violet and reach the Chronicle. Hung off the EXISTING scar machinery rather
+      than a parallel one. Applies to MENDING too - the data says "its next SPELL", not attack.
+      A REAL BUG MY TEST FOUND BEFORE SHIPPING: the doubling was consumed AFTER the to-hit check, so a
+      spell that MISSED kept the flag and doubled the next cast - one 300-gold draught paying twice. It
+      is taken and cleared at the top of _cast_at now, before any early return. tools/_l54_test.gd
+      L54_TEST OK (10 checks) - it re-reads potions.json so it tracks the DATA, drives 60 casts needing
+      both outcomes, and asserts the state NEVER lingers. Measured 28 doubled / 32 taken / 0 lingered.
+      _offfloor 0 of 1430, _delve_test clean, L52_TEST OK. potions.json read, never written.
 
 - [x] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
       and armour tiers stayed w0/a0 for ALL SIX heroes through a 7-min soak despite 17 forge lines

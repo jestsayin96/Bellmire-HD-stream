@@ -1049,6 +1049,12 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 				Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
 				# L52: the menders were the quietest of all - name them too
 				_spell_said(m, mk, got, String(low["h"]["name"]))
+				# L54: the data says "its next SPELL", not "its next attack" - a mender who
+				# drinks Scarwater gets the doubling too, or loses the mending to the scar
+				if bool(m.get("scar_double", false)):
+					m["scar_double"] = false
+					hp_pow *= 2.0
+
 				if Spells.HARM.has(got):
 					# L8: the scar turned the mending into a blow - it lands on the friend
 					low["hp"] = float(low["hp"]) - hp_pow * 0.5
@@ -1688,15 +1694,23 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
 	Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
 	# L52: say which spell this was - the viewer could never tell them apart
 	_spell_said(m, kind, actual, String(tgt.def.get("name", "it")) if is_instance_valid(tgt) else "")
+	# L54: take the doubling NOW and clear it, before any path can return early. Consuming it
+	# after the to-hit check (as the first version did) meant a spell that MISSED left the flag
+	# standing and doubled the next cast instead - one draught paying twice, which is not what
+	# "its next spell is doubled" says. The scar decided; a fumble spends it just the same.
+	var scar_dbl := bool(m.get("scar_double", false))
+	m["scar_double"] = false
 	if not Spells.HARM.has(actual):
 		# L8: the scar turned the blow into a mending - wild magic mends the creature
 		if actual in ["heal", "renew", "mend"] and is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
-			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * 0.5)
+			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * (1.0 if scar_dbl else 0.5))
 		return
 	if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
 		return
 	var dmg := _hero_damage(h, roll == 20)
 	dmg *= _ability_mult(ability, tgt)
+	if scar_dbl:
+		dmg *= 2.0
 	var t := Spells.flight(actual, b, tgt)
 	get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, m, hit, dmg, roll == 20, ability))
 
@@ -1784,6 +1798,8 @@ const CAST_STAT := {"mage": "int", "necromancer": "int",
 					"warlock": "cha", "bard": "cha", "paladin": "cha"}
 var scar_casts := 0
 var scar_misfires := 0
+var scar_touched_spells := 0    # L54: Scarwater casts the scar decided
+var scar_doubles := 0           # L54: of those, the ones it doubled
 var _misfire_said := {}
 
 static func scar_dc(floor_no: int) -> int:
@@ -1791,6 +1807,30 @@ static func scar_dc(floor_no: int) -> int:
 
 func _scar_check(m: Dictionary, kind: String) -> bool:
 	var h: Dictionary = m["h"]
+	# ---- L54 (raised by the content writer): SCARWATER. data/potions.json has given the state
+	# "scar_touched" for a while - "its next spell is doubled, or misfires; the scar decides" -
+	# and NOTHING in the scripts ever read it. Verified before writing a line: the only
+	# scar_touched in code was fishing.gd's unrelated scar_touched_chance. So the draught was
+	# bought, drunk, displayed on the hero, and did exactly nothing.
+	# It resolves here because this is already where the scar decides a cast's fate, so a
+	# scar-touched hero skips the usual check entirely: the scar has their spell either way.
+	# One cast, decided once, and the draught is spent whichever way it falls.
+	if has_st(m, "scar_touched"):
+		(m.get("st", {}) as Dictionary).erase("scar_touched")
+		scar_casts += 1
+		scar_touched_spells += 1
+		if _rng.randi() % 2 == 0:
+			scar_misfires += 1
+			m["scar_double"] = false
+			_float_text(m, "SCAR", Spells.SCAR, 64, 3.2)
+			_say("%s's Scarwater turns on them - the scar takes the spell." % h["name"])
+			_bark(m, "misfire")
+			return true
+		m["scar_double"] = true
+		scar_doubles += 1
+		_float_text(m, "DOUBLED", Spells.SCAR, 72, 3.2)
+		_say("%s's Scarwater holds - the scar doubles the spell." % h["name"])
+		return false
 	var stat := String(CAST_STAT.get(String(h["class"]), String(Roster.CLASSES[String(h["class"])].get("primary", "int"))))
 	var d := _rng.randi_range(1, 20)
 	var total := d + roster.mod(h, stat) + roster.prof(h)

@@ -2520,3 +2520,39 @@ through to `hat.mesh = crown` with CylinderMesh still at ITS OWN defaults - top 
   measured, but nobody has LOOKED at a hero wearing a plumed helm at 1080p. The laptop no longer owns the
   UI files and this needs a hero on screen, so if a hat reads badly on stream it is a tweak to the numbers
   in _hat, not a design question.
+
+## L-cycle 129 - L54 Scarwater finally does something (laptop jestai, 2026-11-13) - L54 DONE
+VERIFIED FIRST, as for L46/L52/L55, and the content writer's flag was exactly right. data/potions.json
+has shipped Scarwater (tier 4, 300 gold, 20 s) giving the state "scar_touched" - "its next spell is
+doubled, or misfires; the scar decides" - and the state was declared alongside it. The only scar_touched
+anywhere in scripts/ was fishing.gd's unrelated scar_touched_chance. The draught was bought, drunk, shown
+on the hero and did NOTHING.
+- scripts/delve.gd _scar_check(): a scar-touched hero now skips the usual scar roll entirely, because the
+  scar already has their spell. It decides once - half the time the spell is DOUBLED, half the time the
+  scar TAKES it (a misfire) - and the draught is spent either way. Both outcomes float over the caster in
+  the scar's own violet (Spells.SCAR) and say so in the Chronicle, so a viewer can see what 300 gold
+  bought. This hangs off the existing scar machinery rather than inventing a parallel one: _scar_check is
+  already the single place where the scar decides a cast's fate.
+- The doubling applies to MENDING as well as damage - the data says "its next SPELL", not "its next
+  attack", so a cleric who drinks it doubles the mend or loses it.
+- Counters scar_touched_spells and scar_doubles are exposed for a census.
+- A REAL BUG MY OWN TEST FOUND, before this shipped: the first version consumed the doubling AFTER the
+  to-hit check in _cast_at. A spell that MISSED therefore left the flag standing and doubled the NEXT
+  cast - one 300-gold draught paying twice, which is not what "its next spell is doubled" says. The
+  doubling is now taken and cleared at the top of _cast_at, before any path can return early: the scar
+  decided, and a fumble spends it just the same. I only noticed because an assertion about the COUNTER
+  disagreed with the flag, which is a good argument for counting things the test can see.
+- tools/_l54_test.gd (NEW, headless): A re-reads potions.json so the test tracks the DATA rather than my
+  memory of it; B drinking applies the state; C drives 60 scar-touched casts and requires BOTH outcomes,
+  that every cast is decided, that the state NEVER lingers (otherwise one draught buys a doubled spell
+  every cast for 20 s), and that the counters agree; D a hero without the draught is untouched.
+  L54_TEST OK, 10 checks. Measured: 28 doubled / 32 taken of 60, 0 lingered.
+- A TEST BUG OF MINE: my fake party dict had no "body" key, so drink() and _float_text() threw. A real
+  party member always has one - I fixed the harness rather than loosening the product code to suit it.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1430 (MON_INPROP 0 of 110); _delve_test 0
+  errors/nulls; L52_TEST OK (the spell-naming work still passes with the scar path changed); L25_TEST OK
+  13/13 with 0 stuck delvers.
+- data/potions.json was READ, never written - the content writer's file (COORDINATION 11.2).
+- FOR MR. E: Scarwater is now a real gamble - 300 gold for a coin-flip between a doubled spell and losing
+  the cast outright. That is what the flavour text promised ("it cuts both ways, and it knows which"). If
+  he wants the odds tilted, the coin flip is one line in _scar_check.

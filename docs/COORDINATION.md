@@ -110,3 +110,66 @@ and runs the Godot battery - authoring is parallel, TESTING IS STILL THE SUPERVI
 
 IDs: the content writer's items are the C-block (C1, C2, ...), assigned by the supervisor, and its
 PROGRESS entries are prefixed "C-cycle N" (per section 3).
+
+
+## 11. FOUR WORKERS (Mr. E, Nov 13 2026) - ownership is now split four ways
+
+IDs stay FROZEN. Nothing is renumbered. What changes is WHO OWNS WHICH FILES. The laptop previously
+owned the dungeon AND every UI file, which is why every HUD complaint Mr. E raised sat unstarted
+behind dungeon work. The UI files move to a new worker.
+
+### 11.1 The four workers
+
+| # | Worker | Machine | Branch / tree | Owns |
+|---|--------|---------|---------------|------|
+| 1 | DESKTOP BUILD (scheduled :08) | CruzaderPC | main, in R | town/world/audio/visuals |
+| 2 | DESKTOP HUD (new chat) | CruzaderPC | `hud-ui`, worktree W2 | the 7 UI files |
+| 3 | LAPTOP CODE (Claude Code) | jestai | `laptop` | dungeon/combat/heroes |
+| 4 | LAPTOP CONTENT (Claude chat) | jestai | `content` | 4 data files, never runs Godot |
+
+R  = C:\hd adventure\jests-hd-medieval-adventure
+W2 = C:\hd adventure\bellmire-hud      (git -C R worktree add -B hud-ui W2 origin/main)
+
+### 11.2 File ownership - EXCLUSIVE. Touching another worker's file is a defect, not a shortcut.
+
+DESKTOP BUILD: town.gd, townsfolk.gd, town_nav.gd, spells.gd, raids.gd, daylight.gd, sfx.gd,
+  valley.gd, cavalry.gd, animal.gd, notables.gd, economy.gd, hero_body.gd, rig.gd, Town.tscn.
+
+DESKTOP HUD: hud_dock.gd, spotlight.gd, auto_director.gd, dice.gd, feed_hud.gd,
+  leaderboard_panel.gd, ui_theme.gd - and nothing else. These seven have no overlap with town or
+  dungeon logic, which is what makes a fourth worker safe.
+
+LAPTOP CODE: floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd,
+  roster.gd, chatcmd.gd, delve.gd, Dungeon.tscn, and data/ EXCEPT the four content files below.
+
+LAPTOP CONTENT: data/items.json, data/lore_lines.json, data/bosses.json, data/potions.json ONLY.
+  (Previously both laptop workers were told they owned data/* - that was a collision. This splits it.)
+
+HUB: web/* and docs/HUB_SECURITY.md. Unchanged.
+
+### 11.3 THE GODOT LOCK IS SHARED BY BOTH DESKTOP WORKERS - THIS ONE IS NOT OPTIONAL
+
+Workers 1 and 2 are on the SAME machine and both launch Godot. Two Godot instances at once already
+cost us a corrupted run. Both MUST use docs/RUN_LOCK.txt (canonical, in R, on main):
+  - Before launching Godot: read it. If it says RUNNING and the timestamp is under 45 min old, do
+    NOT launch. Do file-only work or stop and say "skipped: another run is working".
+  - Set "RUNNING <local time> (<worker name>)" before launching, "IDLE <local time> - <what>" after.
+  - Never start a second battery while any thread of a previous one may still be alive.
+  - If Mr. E is at the machine, say so before launching Godot - he may be playing or streaming.
+
+### 11.4 Item reassignment (ownership only - IDs unchanged, nothing renumbered)
+
+MOVED TO DESKTOP HUD: L34 (director pane freezes), L35 (subscriber lane), L38 (ambient pane
+framing - the biggest visual problem), L39 (Chronicle is a centre box with SMALLER TYPE - the font
+shrinks first, then the panel), L40 (HUD/alerts out of the panes and off the Chronicle),
+L51 (HUD overhaul: buffs/debuffs on equipment, the viewer's inventory, selling, the d20 redesign).
+
+STAYS WITH LAPTOP CODE: L41, L42, L43, L44, L45, L46, L47 (PRIORITY - delver AI), L48, L49, L50, L52.
+
+STAYS WITH DESKTOP BUILD: D24 (grain) and D28-D40, T3, T4.
+
+### 11.5 Merging
+The supervisor merges `hud-ui`, `laptop` and `content` into main. Same discipline as 9.2: delete
+untracked .uid files first, keep BOTH sides on PROGRESS.md conflicts, never renumber anyone's cycle.
+PROGRESS prefixes: D (desktop build), U (desktop HUD), L (laptop code), C (content), H (hub),
+S (supervisor).

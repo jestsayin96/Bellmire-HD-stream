@@ -3220,3 +3220,40 @@ tiers rather than a single step.
   by the supervisor (L59/L59b landed), so this built on a clean branch - no conflicts to resolve.
 - Did NOT tick L39/L39b. The supervisor ticks on review, and L39b's DONE still needs Mr. E's own eye on
   the crop (that is the one piece an unattended run cannot supply).
+
+
+## U-cycle 7 - L57: "Now watching" above EACH pane, not one global banner (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13)
+- L57 (Mr. E): "just have the now watching above each of the split screen for whoever that specific screen is
+  watching." The single global AutoDirector banner ("Now watching: ...") is HudDock-marked "none", so it is
+  HIDDEN while the 2x2 grid is up - i.e. the resting state showed no now-watching at all. L57 moves it ONTO the
+  panes: every pane in the grid now carries its own label naming the subject it follows.
+- scripts/spotlight.gd ONLY (my file):
+  * _labels() now paints a per-pane "Now watching: <subject>" label on ALL FOUR panes (director + the three
+    lanes), in both paid and idle/ambient states - not just the old paid-only chip on the three lanes.
+  * _now_watching(k): paid lane -> bright lane-colour chip, "<Name> the <Species> <Class> - <reason>"; idle lane
+    -> muted chip, the ambient subject; director -> muted chip, its auto-director pick, else "Bellmire".
+  * _subject_name()/_hero_label(): a viewer's hero (in town or down in a delve) is named; townsfolk/animals/
+    anglers get a gentle descriptor ("a townsperson", "the livestock", "an angler at the water").
+  * _director_subject(): reads the AutoDirector's current pick (eye.director._cur), else eye.selected.
+  * L40 discipline: each label sits at its pane's OUTER-top corner and is kept on the OUTER side of the centre
+    Chronicle box - the box covers each pane's INNER corner, and on the BOTTOM row its lower half meets the panes'
+    top edge, so a wide label there is ellipsised to stop short of the box rather than cross into it.
+  * _follow() refreshes a pane's label when its subject changes (ambient rotation, a director cut); guarded by
+    _pane_subj so a steady shot costs nothing. F10 still hides every pane label with the rest of the chrome.
+- tools/_l57_test.gd (NEW, WINDOWED 1920x1080 - a HUD cannot be judged headless, COORDINATION 4): three lanes
+  paid on known heroes + the director driven onto a fourth, then the lanes cleared to ambient. Asserts: the grid
+  is the resting state; all four panes carry a "Now watching..." label; each clears the Chronicle box and stays
+  inside its own pane (no seam cross); the paid lanes name the right heroes; no two labels overlap; F10 hides all
+  four; the ambient relabel names its own subjects. L57_TEST OK (32 checks, 0 fails). Parse clean headless.
+- I LOOKED at the 1080p crops (renders/cycles/20261113_u7_l57/grid_labels_1080 + grid_ambient_1080): four
+  colour-coded chips, one per pane (dark director / gold bits / purple subs / teal points / muted ambient), all at
+  the outer-top corners, all clear of the Chronicle box. Heroes are named in full; the two BOTTOM paid labels
+  ellipsise only their trailing REASON ("sub...", "red...") where the box caps the width - the lane colour + timer
+  already signal bits/sub/points, so the "who" is never lost. Reads clearly at native 1080p.
+- FOR MR. E (a small call): the bottom-row paid labels drop the tail of the reason to clear the Chronicle box. If
+  you want the full reason on those two panes I can drop "the <species> <class>" from the label or sit the bottom
+  labels just under the box. Also quiet moments can show "the livestock"/"a townsperson" on several lanes at once
+  (honest, but repetitive); livelier stream states vary.
+- Did NOT tick L57 - the supervisor ticks on review. hud-ui not newly merged with main this cycle (main advanced
+  to a3198ee during the run - laptop L41/L42/L50 - none touching my 7 files, so no conflict); supervisor to merge
+  hud-ui -> main as usual. The L39b 18 px Chronicle read still holds at 1080p in these crops (still Mr. E's eye).

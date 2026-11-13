@@ -525,7 +525,7 @@ func _make_pane(k: String) -> Dictionary:
 	lb.add_theme_stylebox_override("normal", chip)
 	lb.position = Vector2(UiTheme.px(10), UiTheme.px(10))
 	lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	lb.visible = k in LANES
+	lb.visible = false                 # L57: now-watching label on every pane; _labels() manages it
 	box.add_child(lb)
 	# a thin timer bar along the bottom edge
 	var bar := ColorRect.new()
@@ -594,6 +594,7 @@ static var mode := "off"           # "off" / "pair" / "grid" (HeroBody's name la
 ## camera carries the view, so a region-"none" panel (Satchel, Guild Roll) can show.
 var _suspended := false
 var _rects := {}                    # pane -> Rect2 in 0..1 of the screen
+var _pane_subj := {}                # L57: pane -> the subject node its label last named
 
 func mode_now() -> String:
 	if _suspended:
@@ -680,25 +681,149 @@ func _lane_tag(l: String, real: float) -> void:
 	tag.pixel_size = float(UiTheme.px(26)) * 2.0 * tan(deg_to_rad(cam.fov) * 0.5) / (float(tag.font_size) * ph)
 
 func _labels() -> void:
+	# L32a: the timer bar and the bright lane frame belong to a paid moment only
 	for l in LANES:
 		var p: Dictionary = _panes[l]
 		var cur: Dictionary = lanes[l]["cur"]
-		var lb: Label = p["label"]
-		lb.visible = labels_shown and not cur.is_empty()
-		# L32a: the timer bar and the bright lane frame belong to a paid moment only
 		(p["bar"] as ColorRect).visible = not cur.is_empty()
 		(p["frame"] as Panel).add_theme_stylebox_override("panel", _frame_box(l, cur.is_empty()))
-		if cur.is_empty():
-			continue
-		var h := _hero(String(cur["uid"]))
-		lb.text = "%s the %s %s - %s" % [h.get("name", "?"), String(h.get("species", "")).capitalize(), String(h.get("class", "")).capitalize(), cur["reason"]]
-		# L21: the chip never runs past its own pane (a long name is cut with an ellipsis)
-		lb.clip_text = true
-		lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		var fs := lb.get_theme_font_size("font_size")
-		var want := lb.get_theme_font("font").get_string_size(lb.text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x + float(UiTheme.px(26))
-		var room := pane_rect(l).size.x - float(UiTheme.px(20))
-		lb.size = Vector2(minf(want, maxf(40.0, room)), lb.get_combined_minimum_size().y)
+	# L57 (Mr. E, Nov 13): "now watching" ABOVE EACH PANE, not one global banner. Every pane
+	# in the grid carries its own label naming the subject it follows, so a viewer can tell
+	# at a glance which of the four screens is theirs.
+	_pane_subj.clear()
+	for k in _rects.keys():
+		_now_watching(String(k))
+
+## L57: the "now watching" label for one pane - a paid hero (bright lane chip + the reason
+## the lane was bought), an idle lane's ambient subject, or the director's own pick. Placed
+## at the pane's OUTER-top corner so it clears the central Chronicle box (which covers only
+## each pane's INNER corner) and never crosses a pane seam (L40). F10 hides it with the chrome.
+func _now_watching(k: String) -> void:
+	var p: Dictionary = _panes.get(k, {})
+	if p.is_empty():
+		return
+	var lb: Label = p["label"]
+	var box: Control = p["box"]
+	if not labels_shown or not box.visible or not _rects.has(k):
+		lb.visible = false
+		return
+	var who := ""
+	var reason := ""
+	var paid := false
+	var col: Color = COL.get(k, COL["wide"])
+	if k in LANES:
+		var cur: Dictionary = lanes[k]["cur"]
+		if not cur.is_empty():
+			paid = true
+			reason = String(cur.get("reason", ""))
+			col = COL[k]
+			who = _hero_label(_hero(String(cur["uid"])), String(cur["uid"]))
+		else:
+			who = _subject_name(_target(k))      # L32a: the idle lane's ambient subject
+			col = COL["wide"]
+	else:
+		who = _subject_name(_director_subject())
+		col = COL["director"]
+		if who == "":
+			who = "Bellmire"                     # the eye roaming the town, no one subject held
+	if who == "":
+		lb.visible = false
+		return
+	var txt := "Now watching: " + who
+	if paid and reason != "":
+		txt += " \u2014 " + reason             # em dash before the reason the lane was bought
+	lb.visible = true
+	var chip := StyleBoxFlat.new()
+	chip.bg_color = Color(col.r * 0.55, col.g * 0.55, col.b * 0.55, 0.85)
+	chip.content_margin_left = UiTheme.px(12)
+	chip.content_margin_right = UiTheme.px(12)
+	chip.content_margin_top = UiTheme.px(4)
+	chip.content_margin_bottom = UiTheme.px(4)
+	lb.add_theme_stylebox_override("normal", chip)
+	lb.add_theme_font_size_override("font_size", UiTheme.px(24))
+	lb.clip_text = true
+	lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	lb.text = txt
+	# L21: the chip never runs past its own pane (a long subject is cut with an ellipsis)
+	var fs := lb.get_theme_font_size("font_size")
+	var want := lb.get_theme_font("font").get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x + float(UiTheme.px(26))
+	var pr := pane_rect(k)
+	var m := float(UiTheme.px(10))
+	var left_col := pr.position.x < HudDock.screen().x * 0.5 - 1.0
+	var top_y := m
+	var label_h := lb.get_combined_minimum_size().y
+	# L57 / L40: keep the label on the OUTER side of the centre Chronicle box. The box covers
+	# each pane's INNER corner; on the BOTTOM row its lower half meets the panes' top edge, so
+	# a wide label there must stop short of the box (ellipsised) rather than cross into it.
+	var lo := m                              # inner edge of the usable band (pane-local)
+	var hi := pr.size.x - m                  # outer edge
+	var cbox := HudDock.centre(town)
+	if cbox.size.x > 0.0 and pr.position.y + top_y + label_h > cbox.position.y and pr.position.y + top_y < cbox.end.y:
+		if left_col:
+			hi = minf(hi, cbox.position.x - pr.position.x - m)
+		else:
+			lo = maxf(lo, cbox.end.x - pr.position.x + m)
+	var room := maxf(40.0, hi - lo)
+	lb.size = Vector2(minf(want, room), label_h)
+	# left column flush to the inner edge; right column flush so its right edge meets the outer
+	var x := lo if left_col else maxf(lo, hi - lb.size.x)
+	lb.position = Vector2(roundf(x), roundf(top_y))
+
+## L57: a readable name for whatever a pane follows - a viewer's hero (in town or below) by
+## name, else a gentle descriptor. "" when there is nothing nameable.
+func _subject_name(n) -> String:
+	if n == null or not (n is Node3D) or not is_instance_valid(n):
+		return ""
+	var hs = town.get("heroes")
+	if hs is Dictionary:
+		for uid in (hs as Dictionary):
+			if hs[uid] == n:
+				return _hero_label(_hero(String(uid)), String(uid))
+	for c in town.get_children():
+		if c is Delve:
+			for m: Dictionary in (c as Delve).party:
+				if m.get("body") == n:
+					var hh: Dictionary = m.get("h", {})
+					return _hero_label(hh, String(hh.get("id", "")))
+	if n is Townsfolk:
+		return "a townsperson"
+	var am = town.get("animals")
+	if am is Array and (am as Array).has(n):
+		return "the livestock"
+	var ang = town.get("anglers")
+	if ang is Array:
+		for a in (ang as Array):
+			if is_instance_valid(a) and a.get_parent() == n:
+				return "an angler at the water"
+	return ""
+
+func _hero_label(h: Dictionary, uid: String) -> String:
+	if h.is_empty():
+		return ""
+	var nm := String(h.get("name", uid))
+	var sp := String(h.get("species", "")).capitalize()
+	var cl := String(h.get("class", "")).capitalize()
+	if sp != "" and cl != "":
+		return "%s the %s %s" % [nm, sp, cl]
+	return nm
+
+## L57: the subject the DIRECTOR pane is framing - the auto-director's current pick, else
+## the eye's selection, else none (the eye is touring the town).
+func _director_subject() -> Node:
+	var eye := _eye()
+	if eye == null:
+		return null
+	var d = eye.get("director")
+	if d != null and is_instance_valid(d):
+		var cur = d.get("_cur")
+		if cur is Dictionary and (cur as Dictionary).has("node"):
+			var n = (cur as Dictionary)["node"]
+			if n != null and is_instance_valid(n) and n is Node3D and (n as Node3D).is_inside_tree():
+				return n as Node3D
+	var sel = eye.get("selected")
+	if sel != null and is_instance_valid(sel) and sel is Node3D and (sel as Node3D).is_inside_tree():
+		return sel as Node3D
+	return null
 
 func _target(k: String) -> Node3D:
 	if k in LANES:
@@ -835,6 +960,13 @@ func _in_delve(t: Node3D) -> bool:
 var _wide_t := 0.0
 
 func _follow(real: float) -> void:
+	# L57: refresh a pane's now-watching label when its subject changes (ambient rotation,
+	# a director cut). Guarded by _pane_subj so a steady shot costs nothing.
+	for k in _rects.keys():
+		var subj_now: Node = _director_subject() if k == "director" else _target(String(k))
+		if _pane_subj.get(k) != subj_now:
+			_pane_subj[k] = subj_now
+			_now_watching(String(k))
 	var w: Dictionary = _panes["wide"]
 	if (w["box"] as Control).visible:
 		_wide_t += real

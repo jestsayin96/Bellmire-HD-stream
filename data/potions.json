@@ -19,7 +19,13 @@
     "steadynerve":{"name": "Steadynerve", "cost": 50, "tier": 1, "cures": ["frightened"], "aliases": ["steady", "nerve"], "flavour": "The hand stops shaking first."},
     "nightdraught":{"name": "Nightdraught", "cost": 55, "tier": 2, "gives": "darkvision", "secs": 900, "aliases": ["night", "nightdraught"], "flavour": "The apothecary's own, for the long watch."},
     "wardwater":  {"name": "Wardwater", "cost": 130, "tier": 3, "gives": "warded", "secs": 45, "aliases": ["wardwater"], "flavour": "A skinful, blessed at the chapel font."},
-    "knitbone":   {"name": "Knitbone Brew", "cost": 170, "tier": 3, "gives": "regenerating", "secs": 30, "aliases": ["knitbone", "regen"], "flavour": "Green, and it moves a little in the bottle."}
+    "knitbone":   {"name": "Knitbone Brew", "cost": 170, "tier": 3, "gives": "regenerating", "secs": 30, "aliases": ["knitbone", "regen"], "flavour": "Green, and it moves a little in the bottle."},
+    "deepdraught": {"name": "Deepdraught", "cost": 260, "tier": 3, "heal": [6, 6, 6], "aliases": ["deep", "deepdraught"], "flavour": "Brewed for the long descents. Tastes of cold stone and keeps you going."},
+    "wyrmsbane": {"name": "Wyrmsbane", "cost": 90, "tier": 2, "gives": "resist_fire", "secs": 120, "cures": ["burning"], "aliases": ["wyrmsbane"], "flavour": "Bitter as a dragon's regard. Drink it before the breath, not after."},
+    "mirewine":  {"name": "Mirewine", "cost": 60, "tier": 1, "gives": "heroism", "secs": 60, "cures": ["frightened"], "aliases": ["mirewine"], "flavour": "Bellmire's own. Braver by the bottle, foolish by the jug."},
+    "lastlight": {"name": "Lastlight", "cost": 200, "tier": 3, "gives": "heroism", "secs": 90, "aliases": ["lastlight"], "flavour": "Lit against the dark at the bottom of everything."},
+    "kingsmend": {"name": "The Hollow King's Cup", "cost": 500, "tier": 4, "heal": [10, 6, 16], "aliases": ["kingscup", "hollowking"], "flavour": "Poured once for a king who would not heal. It heals you instead."},
+    "scarwater": {"name": "Scarwater", "cost": 300, "tier": 4, "gives": "scar_touched", "secs": 20, "aliases": ["scarwater"], "flavour": "Drawn from the scar itself. It cuts both ways, and it knows which."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},
@@ -35,6 +41,7 @@
     "heroism":     {"word": "heroic", "bad": false, "colour": "ffd24a", "does": "cannot be frightened"},
     "darkvision":  {"word": "owl-eyed", "bad": false, "colour": "c8c8a0", "does": "no disadvantage in the dark"},
     "warded":      {"word": "warded", "bad": false, "colour": "a0d0ff", "does": "turns aside the first blow each round"},
-    "regenerating":{"word": "mending", "bad": false, "colour": "ff9aa0", "does": "knits a little hurt back each second"}
+    "regenerating":{"word": "mending", "bad": false, "colour": "ff9aa0", "does": "knits a little hurt back each second"},
+    "scar_touched":{"word": "scar-touched", "bad": false, "colour": "b07adf", "does": "its next spell is doubled - or misfires; the scar decides"}
   }
 }

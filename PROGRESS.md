@@ -3194,3 +3194,45 @@ tiers rather than a single step.
   in damage dealt (rage/keen/backstab and the rest stack multiplicatively) and taken (bulwark + stoneblood
   together cut about a quarter). The numbers are all in one place - CLASS_UNLOCKS, SPECIES_UNLOCKS and the
   match in _ability_mult - if the curve wants flattening once he sees it on stream.
+
+## L-cycle 131 - L50 monster diversity, measured and then fixed where it was actually thin (laptop jestai, 2026-11-13) - L50 DONE
+MEASURED FIRST. The DONE criterion asks for a depth census, so the census came before any change, and it
+located the problem somewhere other than where the item implies. tools/_l50_test.gd reproduces
+dungeon_hd's own spawn loop exactly - pick per point, then pack expansion - so it measures what a floor
+REALLY gets rather than what the table could give.
+  BEFORE, 40 sampled floors per depth, 10 creatures a floor:
+    depth  1  band  5  -> 3.5 distinct types a floor, commonest took 51%
+    depth  3  band  8  -> 4.5                                        41%
+    depth  5  band  6  -> 5.1                                        37%
+    depth  6  band 12  -> 5.7                                        33%
+    depth  8  band 14  -> 5.7                                        36%
+    depth 10  band 18  -> 6.6                                        30%
+    depth 14  band 18  -> 6.5                                        33%
+  The DEEP floors were never the problem - L27a's widening did its job and they run 5.7-6.6 distinct
+  kinds. ALL the repetition was in the shallows: 3.5 kinds with ONE of them taking half the floor, which
+  is "three repeats" almost exactly - and it is the first thing any viewer ever sees.
+TWO CAUSES, both fixed:
+1. THE SHALLOW BAND WAS FIVE KINDS. Widened to seven with the two gentlest creatures already sitting in
+   the next band up (puglin 0.9/0.9, spider). Deliberately NOT from the deep roster: L27a's rule that the
+   shallows stay innocent of pitwyrm/silkmother/ashwight/cutthroat and that fodder is summon-only is
+   untouched, and _l27a_test still enforces it - run and OK this cycle.
+2. PACK EXPANSION COULD EAT A FLOOR. dungeon_hd filled n = 1 + pack slots from ONE pick, so a single rat
+   pack (pack 2) took a third of a small floor and two picks could all but fill it. A pack still arrives
+   as a pack, but no single pick may own more than ~34% of what is down here. This helps at every depth,
+   not only the shallows.
+  AFTER: depth 1 -> 4.3 distinct (was 3.5), commonest 43% (was 51%); every other depth improved a little
+  too, and the worst commonest-share across all depths is now 43%.
+- I checked for unused creatures before adding anything and found only slimeling and spiderling, both
+  deliberately summon-only fodder - so there was nothing to promote and no new monster was invented. The
+  roster did not need more; the DISTRIBUTION needed fixing. Same shape of finding as L46, L49, L52 and L55.
+- tools/_l50_test.gd (NEW, headless) IS the census the item asks for and it prints the table every run, so
+  the next cycle can see the spread rather than re-deriving it. It also asserts depth still CHANGES what
+  appears (18 kinds appear only deep, 7 only shallow) - variety at a depth is worth nothing if every depth
+  shows the same things. L50_TEST OK, 5 checks.
+- Regression: parse 0 SCRIPT ERROR; L27A_TEST OK (shallows still innocent); _offfloor 0 of 1405
+  (MON_INPROP 0 of 109); _delve_test 0 errors/nulls; _l26_anims L26_FLOORS=1,2,7 (the floors the new spawns
+  are actually on) L26A_ANIMS OK, MON_ANIMS static=0 of 14075 moving frames - puglin and spider animate
+  correctly in the shallows.
+- FOR MR. E: the shallows now show puglins and spiders alongside the rats and bats, and no single kind can
+  swarm a floor. If floor one feels busier than he wants for a first floor, the band is one line in
+  Bestiary.DEPTHS and the pack cap is one line in dungeon_hd.

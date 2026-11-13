@@ -644,7 +644,20 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       floors where the last runs were 0 - within the limit, but the chests are the thing to suspect if it
       climbs). SCOPE: chests pay GOLD; gear salvage is still _loot()'"'"'s; there are NO per-monster
       physical drops or floor pickups - if Mr. E wants those they need their own ID.
-- [ ] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
+- [x] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
+      DONE L-cycle 131: the census came FIRST and located the problem somewhere else. tools/_l50_test.gd
+      reproduces dungeon_hd'"'"'s own spawn loop (pick + pack expansion) so it measures what a floor really
+      gets. BEFORE: depth 1 gave 3.5 distinct kinds a floor with one taking 51%; depths 6-14 gave 5.7-6.6
+      at 30-36%. The DEEP floors were never thin - L27a had already done that work - ALL the repetition
+      was in the shallows, which is the first thing a viewer sees. Two causes: the shallow band held only
+      five kinds (widened to seven with the gentlest creatures from the next band up - puglin, spider -
+      NOT the deep roster, so L27a'"'"'s shallows-innocent rule still holds and _l27a_test still passes), and
+      pack expansion let ONE pick fill n = 1 + pack slots, so a rat pack took a third of a small floor
+      (now capped at ~34% of a floor, which helps at every depth). AFTER: depth 1 is 4.3 distinct at 43%,
+      worst share across all depths 43%. No new monster was invented - I checked, and the only unused
+      types are the two summon-only fodder. The test also asserts depth still CHANGES what appears (18
+      kinds only deep, 7 only shallow). L50_TEST OK (5 checks), L27A_TEST OK, _offfloor 0 of 1405,
+      _delve_test clean.
 - [x] L51. HUD OVERHAUL (he says it twice - it is plain and under-informative). Needs: equipment shown with what BUFFS/DEBUFFS it gives; the viewer's inventory visible so they know what they own; shops shown with WHAT THEY CURRENTLY STOCK; a way to SELL. Also the d20 needs redesigning - he does not like how it looks - and it exists to roll stats when a viewer builds a character, so wire it to that. DONE: a 1080p HUD capture Mr. E approves, showing gear with buffs, inventory, shop stock and selling.
 - [x] L52. (SUPERSEDED BY THE REFRAMED L52 IN THE Nov-13 SECTION - done there, L-cycle 126; the census disproved the premise, so the work was legibility, not more spells.) SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
 

@@ -502,7 +502,12 @@ func _people() -> void:
         var p: Vector3 = _out_of_props(pts[i])
         i += 1
         var d := Bestiary.pick(floor_no, theme)
-        var n := 1 + mini(int((d.get("ways", {}) as Dictionary).get("pack", 0)), count - placed - 1)
+        # L50: a pack used to fill as many slots as it liked from ONE pick, so a single rat
+        # pack could take a third of a small floor and two picks could all but fill it - which
+        # is how a floor came to read as three repeats. A pack still arrives as a pack; it just
+        # cannot own more than roughly a third of what is down here.
+        var pack_cap := maxi(1, int(round(float(count) * 0.34)))
+        var n := 1 + mini(mini(int((d.get("ways", {}) as Dictionary).get("pack", 0)), pack_cap - 1), count - placed - 1)
         for k in range(n):
             var m := Monster.new()
             m.def = d if k == 0 else Bestiary.make(String(d["type"]), String(d["strain"]))

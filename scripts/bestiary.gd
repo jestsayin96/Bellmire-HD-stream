@@ -427,7 +427,14 @@ static func unique_def(u: Dictionary, floor_no: int) -> Dictionary:
 ## which creatures live at which depth (old bands, the new creatures woven in
 ## where they fit: vermin up top, venom in the middle, fiends deep)
 const DEPTHS := [
-    [1, 2,  ["slime", "bat", "minion", "rat", "frog"]],
+    # L50: the census found the repetition was ENTIRELY in the shallows - the deep bands
+    # average 5.7-6.6 distinct kinds a floor, but 1-2 managed only 3.5 from a pool of five,
+    # with one kind taking half the floor. That is the first thing any viewer ever sees.
+    # Widened with the two gentlest creatures already in the next band up (puglin 0.9/0.9,
+    # spider), NOT with anything from the deep roster: L27a's rule that the shallows stay
+    # innocent of pitwyrm/silkmother/ashwight/cutthroat, and that fodder is summon-only, is
+    # untouched and still enforced by _l27a_test.
+    [1, 2,  ["slime", "bat", "minion", "rat", "frog", "puglin", "spider"]],
     [3, 4,  ["minion", "bones", "bat", "slime", "rat", "spider", "puglin", "bowman"]],
     [5, 5,  ["warrior", "bones", "warlock", "spider", "bowman", "sentinel"]],
     [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin", "bowman", "sentinel", "gravecaller", "hewer", "scarrat", "lurker"]],

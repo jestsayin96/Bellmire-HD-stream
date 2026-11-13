@@ -483,3 +483,35 @@ not only wins - the feed is honest about backfires. Rendering is the same securi
 chronicle: every string is textContent via el(); `tier` only selects a whitelisted class; `n`
 only picks a fixed rotation matrix; nothing becomes a URL. Local check: ?mock=roll (it carries
 the hostile-name canary as the roller). Reviewed in docs/HUB_SECURITY.md (H9).
+
+
+============================================================
+BANDS BELOW (H10) - the delving parties on the hub
+============================================================
+
+Mr. E (Phase Y): the on-stream party band "covers up most of the screen", so it leaves the
+stream (D46) and moves to the hub, "which has the room". The hub shows ALL active parties, not
+just the one the stream could fit.
+
+Why it lives here and not on stream: the stream is being stripped to Mr. E's six elements
+(COORDINATION 13); a multi-member band board is detail that belongs where there is room to read
+it. The hub already carries the hero sheets, so the bands-below view is the same honest data in
+a place with space.
+
+The contract (p.parties, optional, pinned for D46 - also in docs/HUB_SECURITY.md):
+  parties: [ { name, floor, members: [ { name, hp, max_hp, status, class } ] } ]
+  - name    band display name   (aliases band/party/title)   viewer text
+  - floor   integer floor        (alias depth)
+  - members name (who/hero), hp (health), max_hp (hp_max/maxhp/hpmax),
+            status ok|fallen|burning|<other> (state/condition), class (calling)
+
+Honesty, as everywhere else on this page:
+  - No parties field, or an empty array  -> "No bands are delving right now." Never a fake band.
+  - max_hp present -> a real depletion bar; absent -> a flat vitality bar; no hp -> no bar.
+  - status ok -> no tag (the bar says enough); fallen -> skull + greyed + empty bar;
+    burning -> flame + warm edge; anything else -> its own word as plain text, no icon.
+  - The hub DISPLAYS; it never initiates a delve or writes anything. Read-only, as Phase 2 demands.
+
+Security: identical discipline to the rolls feed. Every band/member string is hostile Twitch
+text and reaches the DOM only via el()/textContent; HP widths are CSSOM numbers; status only
+picks a whitelisted class + ICON_SET glyph. Verified with ?mock=bands and a live v2 payload.

@@ -657,6 +657,32 @@ footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: c
    a 1080-tall source; the page background goes transparent so it sits over the
    capture. Everything stays on-brand parchment, a touch larger for distance.
    ======================================================================== */
+/* ======================================================= BANDS BELOW (H10)
+   The parties currently delving, from the snapshot's parties array (the D46
+   contract, docs/HUB_SECURITY.md). Every name is attacker-shaped Twitch text set
+   via el()/textContent; HP widths are page-computed CSSOM numbers; status picks a
+   whitelisted icon + class, never markup or a URL. House palette, parchment panel. */
+.bands { display: grid; gap: 12px; }
+.bandcard { background: #f2e2bd; border: 1px solid var(--edge-2); border-left: 3px solid var(--teal-ink); border-radius: 8px; padding: 10px 12px; }
+.bandhead { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.bandname { font-weight: 700; color: var(--ink); font-size: 1.02rem; overflow-wrap: anywhere; min-width: 0; }
+.bandfloor { font-size: .7rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--parch-hi); background: var(--teal-ink); border-radius: 3px; padding: 2px 7px; white-space: nowrap; }
+.bandmeta { margin-left: auto; font-size: .76rem; color: var(--ink-soft); font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
+ul.bandmembers { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bmember { background: var(--parch); border: 1px solid var(--edge-2); border-radius: 7px; padding: 7px 10px; display: grid; gap: 6px; }
+.bmember.gone { opacity: .6; }
+.bmember.burning { border-left: 3px solid var(--warn); }
+.bmtop { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.bmname { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
+.bmcls { font-weight: 600; color: var(--ink-soft); font-size: .85rem; }
+.bmtag { display: inline-flex; align-items: center; gap: 5px; font-size: .62rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px; margin-left: auto; white-space: nowrap; }
+.bmic { width: 1.05em; height: 1.05em; }
+.bmtag.st-fallen  { color: var(--parch-hi); background: var(--bad); }
+.bmtag.st-burning { color: var(--parch-hi); background: var(--warn); }
+.bmtag.st-other   { color: var(--ink); background: var(--parch-lo); }
+/* a fallen member's bar reads empty and grey - honest, no invented vitality */
+.hpbar.gone .hpfill { background: #8a8278; }
+
 html.overlay, html.overlay body { background: transparent !important; }
 html.overlay .wrap { max-width: 440px; margin: 0; padding: 10px 10px 14px; }
 html.overlay nav,
@@ -807,3 +833,6 @@ html.overlay #chat { display: none !important; }
 .signinlink { color: var(--teal-ink); font-weight: 600; }
 details.hero.mine { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(35,166,160,.45); }
 html.overlay #signin { display: none !important; }
+/* Bands Below is exactly what D46 moved OFF the stream - the overlay is the on-stream
+   column, so it must NOT show the bands again. */
+html.overlay #bands { display: none !important; }

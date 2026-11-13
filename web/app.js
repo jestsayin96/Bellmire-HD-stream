@@ -21,7 +21,7 @@ const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
 
 const params = new URLSearchParams(location.search);
 const TEST = params.get("state");   // empty | fail | stale (local checks)
-const MOCK = params.get("mock");    // chronicle | crowd (local checks)
+const MOCK = params.get("mock");    // chronicle | crowd | roll | bands (local checks)
 const OVERLAY = params.has("overlay");  // ?overlay=1 : the thin on-stream (OBS) column
 // overlay mode: a narrow, dark, glanceable column over the stream. Same data, same
 // security - a body class the stylesheet reshapes; no separate code path for snapshot data.
@@ -53,6 +53,7 @@ const XLINK = "http://www.w3.org/1999/xlink";
 const ICON_SET = new Set([
   "blade", "ranged", "arcane", "blunt", "shield", "potion", "flask", "coin",
   "fight", "death", "raid", "town", "lore", "loot", "delve", "other",
+  "flame",   // H10: a burning delver's status glyph. "death" already serves the fallen.
 ]);
 function icon(id, cls) {
   const key = ICON_SET.has(id) ? id : "other";      // whitelist: unknown -> a safe default
@@ -192,7 +193,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "dice", "heroes", "chronicle", "roll", "fallen"];
+const SECTIONS = ["boards", "dice", "heroes", "bands", "chronicle", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -204,13 +205,20 @@ function renderNothing(failed) {
   $("town").replaceChildren();
   $("nHeroes").textContent = "";
   $("nFallen").textContent = "";
+  { const nb = $("nBands"); if (nb) nb.textContent = ""; }
   renderCommands(null);
   renderRolls(null);
 }
 
 // ---------------------------------------------------------------- the page
+// Payload version gate. v1 is today's shape; v2 adds p.parties - the H10/D46 "bands
+// below" contract (docs/HUB_SECURITY.md). BOTH are accepted so the hub keeps working
+// the moment D46 bumps the version; p.parties is read defensively either way (absent
+// -> honest empty state), so pre-accepting v2 shows nothing until it actually arrives.
+// Anything outside this set is an honest "this page needs an update", never a guess.
+const KNOWN_V = new Set(["1", "2"]);
 function render(p) {
-  if (p && p.v != null && String(p.v) !== "1") {
+  if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
                 String(p.v).slice(0, 8) + "). The page needs an update.");
     return;
@@ -222,6 +230,7 @@ function render(p) {
   renderTown(t);
   renderBoards(arr(p.heroes), arr(p.fallen));
   renderHeroes(arr(p.heroes));
+  renderBands(p.parties != null ? p.parties : p.bands);
   renderChronicle(p.chronicle, { auto: true });
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
@@ -663,6 +672,147 @@ function renderFallen(fs) {
     if (f.epitaph) g.append(el("div", "gepi", "“" + String(f.epitaph) + "”"));
     box.append(g);
   }
+}
+
+// ============================================================ BANDS BELOW (H10)
+// The parties currently delving, read from the snapshot's parties array. The hub
+// has room the stream does not, so it shows EVERY active band, not just one. This
+// is the viewer side of D46 (which takes the band panel off the stream and puts the
+// band into the snapshot). Forward-compatible exactly like the rolls feed and the
+// hero HP bars: the section shows an honest empty state until the publisher sends
+// p.parties, and invents nothing - no band, no member, no health it was not given.
+//
+// CONTRACT (pinned for D46, also in docs/HUB_SECURITY.md). p.parties is an array;
+// every field optional and defended. Canonical key, then accepted aliases:
+//   name    the band's display name          (band, party, title)  - viewer text
+//   floor   integer dungeon floor it is on    (depth)
+//   members array of per-member objects:
+//     name    the hero's name                (who, hero)           - viewer text
+//     hp      current hit points             (health)
+//     max_hp  max hit points                 (hp_max, maxhp, hpmax)
+//     status  ok | fallen | burning | ...     (state, condition)
+//     class   the calling, optional          (calling)             - viewer text
+// When p.v becomes "2" the publisher carries this (see the version gate above).
+// Every string reaches the DOM only through el()/textContent; HP widths are page-
+// computed CSSOM numbers, never snapshot text; `status` only ever picks a whitelisted
+// icon + CSS class; no field is EVER used as a URL/src/href/style.
+const PARTY_MAX = 24, MEMBER_MAX = 12;
+// status -> a canonical key. unknown non-empty -> "other" (shown as its own text);
+// absent -> "ok" (healthy: no tag, just the bar). fallen/burning carry an icon + class.
+const PARTY_STATUS = {
+  ok: "ok", alive: "ok", fine: "ok", well: "ok", up: "ok", healthy: "ok", active: "ok", delving: "ok",
+  fallen: "fallen", dead: "fallen", down: "fallen", slain: "fallen", ko: "fallen", out: "fallen",
+  burning: "burning", afire: "burning", aflame: "burning", ablaze: "burning", ignited: "burning", onfire: "burning",
+};
+const STATUS_META = {
+  fallen:  { label: "fallen",  icon: "death", cls: "st-fallen" },
+  burning: { label: "burning", icon: "flame", cls: "st-burning" },
+};
+function partyMember(m) {
+  const rawS = firstStr(m.status, m.state, m.condition).toLowerCase().trim();
+  const status = PARTY_STATUS[rawS] || (rawS ? "other" : "ok");
+  return {
+    name: firstStr(m.name, m.who, m.hero).slice(0, 40),
+    hp: pickNum(m.hp, m.health),
+    max: pickNum(m.max_hp, m.hp_max, m.maxhp, m.hpmax),
+    cls: firstStr(m.class, m.calling).slice(0, 24),
+    status: status,
+    statusText: status === "other" ? titleCase(rawS).slice(0, 24) : "",
+  };
+}
+function normalizeParties(raw) {
+  return arr(raw)
+    .filter((p) => p && typeof p === "object")
+    .map((p) => ({
+      name: firstStr(p.name, p.band, p.party, p.title).slice(0, 60),
+      floor: (function () { const v = pickNum(p.floor, p.depth); return v != null && v >= 0 ? Math.round(v) : null; })(),
+      members: arr(p.members != null ? p.members : (p.roster != null ? p.roster : p.heroes))
+        .filter((m) => m && typeof m === "object")
+        .map(partyMember)
+        .filter((m) => m.name || m.hp != null)
+        .slice(0, MEMBER_MAX),
+    }))
+    .filter((p) => p.name || p.members.length)
+    .slice(0, PARTY_MAX);
+}
+// a member's HP bar - the same safe pattern as the hero hpBar: a real depletion bar
+// when max_hp is published, a flat vitality bar otherwise, the fill a CSSOM number
+// (never snapshot text). A fallen member reads empty and grey. Claims nothing it
+// was not told.
+function memberHpBar(m) {
+  const max = n0(m.max), hp = n0(m.hp);
+  const fallen = m.status === "fallen";
+  const hasMax = max > 0 && max >= hp;
+  let ratio = hasMax ? Math.max(0.03, Math.min(1, hp / max)) : 1;
+  if (fallen) ratio = 0;
+  const grade = fallen ? "gone" : !hasMax ? "flat" : ratio <= 0.25 ? "low" : ratio <= 0.5 ? "mid" : "ok";
+  const wrap = el("div", "hpbar " + grade);
+  wrap.setAttribute("role", "img");
+  wrap.setAttribute("aria-label", fallen ? "Fallen" : hasMax ? "Hit points " + hp + " of " + max : "Hit points " + hp);
+  const track = el("div", "hptrack");
+  const fill = el("span", "hpfill");
+  fill.style.setProperty("--hp", ratio);     // CSSOM number only, never snapshot text
+  track.append(fill);
+  wrap.append(el("span", "hpk", "HP"), track, el("span", "hpv", fallen ? "\u2014" : hasMax ? num(hp) + " / " + num(max) : num(hp)));
+  return wrap;
+}
+function memberRow(m) {
+  const li = el("li", "bmember" + (m.status === "fallen" ? " gone" : "") + (m.status === "burning" ? " burning" : ""));
+  const top = el("div", "bmtop");
+  const nm = el("span", "bmname");
+  nm.append(document.createTextNode(m.name || "(no name)"));        // viewer text: textContent
+  if (m.cls) nm.append(el("span", "bmcls", "  \u00b7  " + cap(m.cls)));
+  top.append(nm);
+  const meta = STATUS_META[m.status];
+  if (meta) {
+    const tag = el("span", "bmtag " + meta.cls);
+    tag.append(icon(meta.icon, "bmic"));                            // whitelisted glyph id
+    tag.append(document.createTextNode(meta.label));
+    top.append(tag);
+  } else if (m.status === "other" && m.statusText) {
+    top.append(el("span", "bmtag st-other", m.statusText));         // unknown status: its own name, as text
+  }
+  li.append(top);
+  if (m.hp != null) li.append(memberHpBar(m));
+  return li;
+}
+function partyCard(p) {
+  const card = el("div", "bandcard");
+  const head = el("div", "bandhead");
+  const nm = el("span", "bandname");
+  nm.append(document.createTextNode(p.name || "A band"));           // viewer text: textContent
+  head.append(nm);
+  if (p.floor != null) head.append(el("span", "bandfloor", "Floor " + num(p.floor)));
+  const total = p.members.length;
+  const fallen = p.members.filter((m) => m.status === "fallen").length;
+  if (total) head.append(el("span", "bandmeta",
+    total + (total === 1 ? " delver" : " delvers") + (fallen ? "  \u00b7  " + fallen + " fallen" : "")));
+  card.append(head);
+  const ul = el("ul", "bandmembers");
+  if (!p.members.length) ul.append(el("li", "empty", "No members reported for this band."));
+  else for (const m of p.members) ul.append(memberRow(m));
+  card.append(ul);
+  return card;
+}
+function renderBands(raw) {
+  const box = $("bandList");
+  if (!box) return;
+  const note = $("bandNote"), count = $("bandCount"), nb = $("nBands");
+  const parties = normalizeParties(raw);
+  box.replaceChildren();
+  if (nb) nb.textContent = parties.length ? parties.length : "";
+  if (!parties.length) {
+    box.append(el("p", "empty", "No bands are delving right now. When a party goes down into the scar it appears here \u2014 every member, with their health and whether they still stand."));
+    if (count) count.textContent = "";
+    if (note) note.textContent = "";
+    return;
+  }
+  for (const p of parties) box.append(partyCard(p));
+  const heads = parties.reduce((a, p) => a + p.members.length, 0);
+  if (count) count.textContent = parties.length + (parties.length === 1 ? " band" : " bands");
+  if (note) note.textContent = parties.length + (parties.length === 1 ? " band" : " bands")
+    + " in the scar now, " + heads + (heads === 1 ? " delver" : " delvers")
+    + " in all. The hub shows every active band; the stream no longer has to.";
 }
 
 // ============================================================ THE CHRONICLE
@@ -1475,10 +1625,32 @@ const MOCK_ROLLS = [
   { n: 17, by: "The Weasel", what: "Bless the delvers before the descent", tier: "good",
     result: "It goes well: the party goes down under a good omen and all four come home whole.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
 ];
+// ?mock=bands: stand-in delving parties (the publisher sends no p.parties yet, D46).
+// Exercises a healthy member, an injured member (hp/max -> real depletion), a member
+// with hp but no max (flat vitality bar), a member with NO hp (name only, no bar), a
+// burning member, a fallen member, and an UNKNOWN status (rendered as its own text).
+// The hostile name is used as BOTH a band name and a member name - it must render as
+// literal text, never execute.
+const MOCK_PARTIES = [
+  { name: "The Ford Wardens", floor: 7, members: [
+    { name: "Brum the Cooper", hp: 34, max_hp: 40, status: "ok", class: "knight" },
+    { name: "Sedge the Toll", hp: 9, max_hp: 44, status: "burning", class: "ranger" },
+    { name: "<img src=x onerror=alert(1)>", hp: 0, max_hp: 38, status: "fallen", class: "mage" },
+    { name: "Cob Ashfoot", hp: 21, status: "ok", class: "rogue" },
+  ] },
+  { name: "<img src=x onerror=alert(1)>", floor: 3, members: [
+    { name: "The Weasel", hp: 12, max_hp: 26, status: "poisoned" },
+    { name: "Maddock", status: "ok" },
+  ] },
+  { name: "Lone Delver", members: [
+    { name: "Grey Pell", hp: 18, max_hp: 30, status: "ok", class: "cleric" },
+  ] },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
+  if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];

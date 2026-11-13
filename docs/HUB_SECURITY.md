@@ -271,3 +271,67 @@ strictly READ-ONLY; no viewer write path to Supabase.
 3. ?mock=roll passes the hostile-name test (text, no alert, zero <img>) on both the feed and
    the die's announcement; the honest empty state shows when no `rolls` field is present.
 If any of that is not true, do not republish.
+
+## Phase Y, H10 - the hub shows the bands below (FLAG: supervisor review + D46 field shape)
+
+The party-band panel comes OFF the stream (D46, desktop) and the delving parties go INTO the
+60 s snapshot as a new `parties` array. The hub's new "Bands below" section DISPLAYS every active
+party - band name, floor, and each member with an HP bar and status. Read-only; the page never
+writes. Built AHEAD of D46: until the publisher sends `parties`, the section shows an honest empty
+state ("No bands are delving right now...") and invents no band.
+
+### No CSP change
+- H10 adds NO external surface: no new connect-src, no script/style/img source. The CSP is
+  byte-for-byte unchanged. The parties data rides the Supabase snapshot the page already reads -
+  nothing new is contacted, no new fetch, no viewer write path.
+
+### Payload version gate - CHANGED, please review
+- D46 bumps the payload version when it adds `parties` (WORK_PLAN D46(b): "if you add a field,
+  bump the version the hub checks"). The gate now accepts a SET of known versions -
+  `KNOWN_V = {"1","2"}` - instead of only "1":  "1" = today's shape (no parties), "2" = adds
+  `parties`. `parties` is read defensively regardless of version (absent -> empty state), so
+  pre-accepting "2" shows nothing until D46 actually ships it, and today's "1" payload is
+  unaffected. Any version OUTSIDE the set still yields the honest "this page needs an update"
+  (verified with a v9 payload). ACTION FOR D46: publish the parties payload as v = "2". If a
+  different number is chosen, change KNOWN_V to match BEFORE D46 ships, or the hub rejects the
+  payload wholesale.
+
+### The data contract (new optional `parties` array) - PINNED FOR D46
+Each entry is an object; every field optional and defended. Canonical key, then accepted aliases:
+    name    the band's display name           (band, party, title)   - viewer text
+    floor   integer dungeon floor it is on     (depth)
+    members array of per-member objects:
+      name    the hero's name                 (who, hero)            - viewer text
+      hp      current hit points              (health)
+      max_hp  max hit points                  (hp_max, maxhp, hpmax)
+      status  ok | fallen | burning | <other>  (state, condition)
+      class   the calling, optional           (calling)              - viewer text
+Also in web/NOTES.md. D46 must write THIS shape so the two sides match.
+
+### Why this stays safe
+- Every string - band name, member name, an unknown status word, the class - reaches the DOM ONLY
+  through el()/createTextNode (textContent). Verified live: a band named AND a member named
+  <img src=x onerror=alert(1)> render as literal text; zero <img> on the page; no alert fires
+  (?mock=bands AND a stubbed v2 payload with the hostile name in both places).
+- HP bar widths are PAGE-COMPUTED numbers set as a CSSOM custom property (--hp), never snapshot
+  text - the same safe pattern as the hero HP/XP and town-growth bars. A fallen member reads empty
+  (ratio 0); a member with hp but no max_hp reads a flat vitality bar; a member with no hp shows no
+  bar at all. Nothing is invented.
+- `status` is mapped through a fixed whitelist (PARTY_STATUS) to ok|fallen|burning, which only ever
+  SELECTS a CSS class (st-<status>) and a whitelisted ICON_SET glyph (death for fallen, the new
+  page-owned `flame` for burning). An unknown status is shown as its own text (titleCased,
+  length-capped), no icon - honest, never markup. No field is EVER used as a URL/src/href/style.
+- New icon: `ic-flame` is a page-authored <symbol> (a hand-drawn line glyph, CC0, no request),
+  added to the ICON_SET whitelist. The fallen reuse the existing `death` skull.
+- Caps: at most 24 parties, 12 members each. The overlay (on-stream) column HIDES #bands - the
+  whole point of D46 is that the band left the stream.
+
+### What the supervisor should check before republishing
+1. CSP unchanged (diff index.html head - no new directive or host; H10 needed none).
+2. renderBands / partyCard / memberRow / memberHpBar / normalizeParties build the DOM through
+   el()/createTextNode only; grep confirms no new innerHTML/outerHTML/insertAdjacentHTML; `status`
+   only indexes PARTY_STATUS/STATUS_META and selects a class + whitelisted icon.
+3. The version-gate change (KNOWN_V {"1","2"}) is intended and matches D46's chosen version.
+4. ?mock=bands passes the hostile-name test (text, no alert, zero <img>) and the honest empty state
+   shows when no `parties` field is present.
+If any of that is not true, do not republish.

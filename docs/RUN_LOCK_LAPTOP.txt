@@ -1,1 +1,23 @@
-RUNNING 2026-11-13 09:05 - L42 neon dungeon lighting
+IDLE 2026-11-13 09:50 - L42 DONE and pushed (L-cycle 133). Next in the laptop queue: L43 (_l32_test's
+vacuous FPS gate - keep the relative design, add a TAA warm-up after any viewport 3D-state change, KEEP
+the base >= 10 assert, add a min-sample guard), then L44 (_l24_test flaky - make it deterministic, no
+retries). L56 (delve-heavy soak) GATES trusting L45 and L46.
+TWO ITEMS NOW WAITING ON MR. E'S EYE, both rendered and in the repo:
+  L42 - the per-theme sheet at 1920x1080 reading as lit stone: renders/cycles/20261113_l42/ (before and
+  after sheets + the firepit room). 48 biome values capped, scar-veins 2.4 -> 1.1. The flame itself was
+  left bright on purpose - it IS the light source. All recoverable from git if he wants any back.
+  L41 - was the magenta floor he saw the CONFECTION biome working as designed, or genuinely broken? All
+  8 themes bind correctly here and a guard now renders grey instead of magenta on failure.
+  renders/cycles/20261113_l41/. Revert of the ground mute is one line in data/biomes.json.
+OTHER OPEN NOTES FOR MR. E: L48 is a real balance change (levelled heroes are stronger both ways); L55
+is a policy call (survivors spend their own gold at the smith); L54 Scarwater is a coin flip; L53's hats
+are HEADLESS-verified only - nobody has seen a plumed helm at 1080p; L50 shallows now show puglins and
+spiders with a pack capped at ~34% of a floor.
+FOR THE SUPERVISOR: scripts/adventurers.gd is in NO worker's ownership list in COORDINATION 11.2 - read,
+not touched. Needs an owner.
+STANDING NOTES FOR MYSELF: (1) check INDENT STYLE before editing. (2) No backticks and no '"'"' escaping
+inside a double-quoted shell -m or sed - both leak literally. (3) When a table names things, TEST each
+one does something. (4) MEASURE BEFORE FIXING - L41, L46, L49, L50, L52 and L55 were all something other
+than their reported symptom. (5) Shot tools overwrite committed render refs - restore them afterwards.
+EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

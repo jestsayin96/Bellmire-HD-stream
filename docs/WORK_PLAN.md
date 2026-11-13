@@ -566,7 +566,21 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 # Mr. E's Nov 13 list - LAPTOP (dungeon, combat, HUD)
 - [ ] L45. BOSSES SCALE WITH DEPTH (his call): a lord on a deep floor must be meaningfully harder than a shallow one - hp, damage, mechanics, adds. Deeper should feel dangerous. DONE: a measured curve of boss difficulty by floor; a deep lord can wipe an unprepared party.
 - [ ] L46. TRAPS DO NO DAMAGE (he believes spikes/traps are inert). L11 claims working traps. Verify against the D28 census, then fix: a triggered trap must apply real hp loss, show a number, and reach the Chronicle. DONE: census shows trap triggers AND hp applied; a delver can die to a trap.
-- [ ] L47. ADVENTURERS MUST THINK FOR THEMSELVES (Mr. E marked this PRIORITY). Delvers should make visible decisions: retreat when hurt, drink a brew when low, use oil before the dark, pick targets sensibly, search for loot, regroup, flee a losing fight, go home when spent. Right now they read as scripted. DONE: a soak where the Chronicle shows real decisions, and a hurt party retreats rather than dying in place.
+- [x] L47. ADVENTURERS MUST THINK FOR THEMSELVES (Mr. E marked this PRIORITY). Delvers should make visible decisions: retreat when hurt, drink a brew when low, use oil before the dark, pick targets sensibly, search for loot, regroup, flee a losing fight, go home when spent. Right now they read as scripted. DONE: a soak where the Chronicle shows real decisions, and a hurt party retreats rather than dying in place.
+      DONE L-cycle 122: delve.gd decision layer - _decide() records+announces by kind (the LINE is rate-limited
+      per hero, the decision never is). NEW: _think() per hero (BREAK OFF under 22% hp with no heal brew and
+      run for the way up; REGROUP past 15 m from the party centre; REJOIN past 55%), _losing() at party level
+      (new "flee" state - a plainly lost fight is broken off and they run out WITH survivors), and
+      _pick_target() replacing nearest-foe (finish the nearly-dead, shut up the caster/spitter/shooter).
+      Drinking, healer triage and press-on/climb-out were ALREADY visible decisions - now counted and
+      reasoned through the same layer rather than duplicated with new behaviour.
+      tools/_l47_test.gd headless (delve LOGIC, not HUD): A soak demands a RANGE of kinds (12 decisions,
+      press_on+finish); B slams the party to 10% mid-fight and requires flee + the line + SURVIVORS; C prefers
+      a wounded FAR foe over a healthy near one; D hurts ONE delver to 8% with no brews - B can NEVER reach
+      the single-hero path (the party-level retreat fires first and returns), so without D that branch would
+      have shipped unexecuted. L47_TEST OK (8 checks). _offfloor 0 of 1043, _delve_test clean, parse 0.
+      Proven by test: press_on, finish, party_retreat, flee. Wired but not yet observed firing: regroup,
+      rejoin, silence, mend, brew_*, turn_back_*.
 - [ ] L48. LEVELLING: CLASS + RACE UNLOCKS. Levelling should unlock new skills, spells and abilities that depend on BOTH class and species, and go deeper than that (tiers, choices). Today a level-up is a stat bump. DONE: a levelling table per class x species; a hero visibly gains a named ability and uses it.
 - [ ] L49. LOOT AND SEARCHING ARE INVISIBLE. No chests, no drops, nobody searching. Heroes should visibly SEARCH specified spots - a dig/search animation, time taken - and report "...no loot..." or "Found loot!" style lines. Not every monster drops. DONE: census shows chests spawned/opened and items picked up; a capture shows a hero searching and both outcomes in the Chronicle.
 - [ ] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.

@@ -2110,3 +2110,47 @@ The laptop will not touch those seven files again (COORDINATION 11.2).
 Also still open and laptop-owned: L43 (_l32_test's vacuous FPS gate - the base >= 10 assert is in and MUST
 stay; _l32_test reports FAIL on this laptop by design until the TAA warm-up lands) and L44 (_l24_test flaky).
 L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.
+
+## L-cycle 122 - L47 adventurers think for themselves (laptop jestai, 2026-11-13) - L47 DONE
+Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule I worked to is
+that a decision only counts if a VIEWER CAN SEE IT - the body does something visible AND the Chronicle says
+WHY. A silent stat change is not a decision for this item.
+- scripts/delve.gd, new decision layer: _decide() records every decision by kind (delve.decided) and
+  announces it, rate-limited per hero (DECIDE_EVERY 3 s) so a long fight reads as a few deliberate choices
+  instead of a wall of chatter - the DECISION is never rate-limited, only the line.
+- NEW decisions: (1) _think() per hero before they swing - BREAK OFF when under 22% hp with no heal brew
+  left (runs for info["entry"], the way up, Running_A, "X is badly hurt and breaks off"); REGROUP when more
+  than 15 m from the party's centre with foes about; REJOIN once mended past 55%. (2) _losing() at party
+  level - a fight that is plainly lost (mean hp under 18%, or under turn_back_at while outnumbered 2:1) is
+  broken off as a PARTY: new "flee" state, everyone runs for the way up, the delve ends with survivors.
+  This is Mr. E's "a hurt party retreats rather than dying in place". (3) _pick_target() replaces
+  nearest-foe: score = -0.35/m + up to 20 for how close the foe is to death + 14 for a caster/spitter/
+  shooter, so delvers finish the nearly-dead and shut up the ranged one, and say so when they switch.
+- COUNTED, NOT INVENTED: drinking a brew, a healer choosing who to mend, and press-on-or-climb-out at a
+  floor's end were ALREADY decisions with visible tells (Use_Item, Spellcasting, the bark) - they simply
+  were not legible as decisions. They are now recorded and reasoned through the same layer rather than me
+  bolting on new behaviour that duplicates them.
+- tools/_l47_test.gd (NEW, headless - this is delve LOGIC, not HUD, so COORDINATION 4's windowed rule does
+  not apply): A soak counts decisions and demands a RANGE of kinds; B slams the party to 10% hp mid-fight
+  with foes up and requires the "flee" state, the Chronicle line and SURVIVORS; C wounds a FAR foe and
+  requires it to be chosen over a healthy near one; D hurts exactly ONE delver to 8% and strips their
+  brews, leaving the rest healthy. L47_TEST OK - 8 checks, 0 failed. Soak run: 12 decisions, kinds
+  {press_on 3, finish 9}.
+- WHY PART D EXISTS, because it matters for trusting this: part B can NEVER reach the individual flee path
+  - there the whole party is dying, so the party-level retreat fires first and returns before any hero
+  thinks. Without D the single-hero branch would have been shipped unexecuted. It now runs and passes.
+- HONEST COVERAGE: proven by test = press_on, finish, party_retreat, flee. Wired and parsing but NOT yet
+  observed firing in a test = regroup, rejoin, silence, mend, brew_hurt/brew_cure/brew_lord, turn_back_oil,
+  turn_back_hurt. They sit on code paths that already ran in production (quaff, the healer triage, the
+  floor-end branch); the additions there are counters and lines, not new behaviour, so the risk is low -
+  but they are not proven and I am not claiming they are.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1043 (MON_INPROP 0 of 155); _delve_test 0 errors/nulls;
+  L25_TEST OK 13/13 - 0 stuck delvers and 0 watchdog frees over 10 floors, so the new break-off and the
+  party "flee" movement did NOT reintroduce stuck delvers. NOTE for L33 (the 1-stuck regression after
+  L27a): this run shows 0, but L33 asks for 0 over THREE consecutive runs - an observation, not a tick.
+  L25_TEST OK 13/13 with 0 stuck delvers and 0 watchdog frees over 10 floors - the new break-off and party
+  "flee" movement did NOT reintroduce stuck delvers. NOTE for L33 (the 1-stuck regression after L27a): this
+  run shows 0, but L33 asks for 0 over THREE consecutive runs, so that is an observation, not a tick.
+- FOR MR. E: a delver who breaks off now LEAVES the fight, so a party can finish a floor a man short. That
+  is a real balance change and the point of the item, but it is his call whether a fleeing delver should
+  rejoin faster (currently at 55% hp) or keep running all the way home.

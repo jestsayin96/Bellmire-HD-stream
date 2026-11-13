@@ -680,8 +680,139 @@ func _process(delta: float) -> void:
 				if not all_there:
 					forced += 1
 				_next_floor()
+		"flee":
+			# L47: the party broke off a losing fight. They RUN for the way up, visibly, and
+			# the delve ends when they are there (or when they plainly cannot get there).
+			var up: Vector3 = dun.info["entry"] + dun.global_position
+			var all_up := true
+			for m in _alive():
+				var fb: HeroBody = m["body"]
+				if not _go(fb, up, roster.speed(m["h"]) * 1.15, delta, 0.9):
+					all_up = false
+					Rig.play(fb._anim, "Running_A")
+			var jammed := false
+			for m in _alive():
+				if stuck_on(m["body"], 3.0):
+					jammed = true
+			if _alive().is_empty():
+				_say("The scar keeps them all. No one comes home from floor %d." % floor_no)
+				_finish()
+			elif all_up or jammed or _t > 45.0:
+				_say("%s get out alive, and come home with what they carried." % _names())
+				_finish()
 		"home":
 			pass
+
+## ---------------------------------------------------------------- L47: delvers think
+## Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule
+## here is that a decision is only worth making if a VIEWER CAN SEE IT. So every branch below
+## does two things together - the body does something visible (breaks off and runs for the way
+## up, falls back to the others, drinks, switches target) AND the Chronicle says WHY. A silent
+## stat change is not a decision as far as this item is concerned.
+## Announcements are rate-limited per hero so a long fight reads as a few deliberate choices
+## rather than a wall of chatter; the decision itself is never rate-limited, only the line.
+const DECIDE_EVERY := 3.0        # s between one hero's announced decisions
+const FLEE_AT := 0.22            # hp fraction at which a hero breaks off alone
+const REGROUP_M := 15.0          # further than this from the party's centre is isolated
+var decisions := 0               # every announced decision (the L47 test counts these)
+var _fleeing_party := false      # L47: the party has broken off a losing fight
+var decided := {}                # kind -> count, so the test can see a RANGE of decisions
+
+func _decide(m: Dictionary, kind: String, line: String) -> void:
+	decided[kind] = int(decided.get(kind, 0)) + 1
+	decisions += 1
+	if _t < float(m.get("decide_t", -99.0)) + DECIDE_EVERY:
+		return                                  # thought it, acted on it, just does not say so
+	m["decide_t"] = _t
+	_say(line)
+
+func _party_centre(alive: Array) -> Vector3:
+	var c := Vector3.ZERO
+	var n := 0
+	for o in alive:
+		var ob = o["body"]
+		if is_instance_valid(ob):
+			c += (ob as Node3D).global_position
+			n += 1
+	return c / maxf(1.0, float(n))
+
+## L47: a target that makes sense instead of whatever is nearest. Finish the one that is nearly
+## down, shut up the one that casts or spits from range, and otherwise take the near one.
+func _pick_target(b: Node3D, foes: Array) -> Monster:
+	var best: Monster = null
+	var best_s := -1.0e9
+	for f in foes:
+		if not is_instance_valid(f):
+			continue
+		var mon := f as Monster
+		var d := _flat((mon as Node3D).global_position, b.global_position)
+		# distance is a WEIGHT, not the whole score - at 1.0/m it swamped everything and the
+		# pick was just "nearest" again with extra steps
+		var s := -d * 0.35
+		var frac := mon.hp / maxf(1.0, mon.max_hp)
+		s += (1.0 - frac) * 20.0                        # the nearer it is to down, the better
+		var ways: Dictionary = mon.def.get("ways", {})
+		if ways.has("cast") or ways.has("spit") or ways.has("shoot"):
+			s += 14.0                                   # the one hurting us from range
+		if s > best_s:
+			best_s = s
+			best = mon
+	return best
+
+## L47: one hero's own call, taken before they swing. Returns true when the decision has used
+## their action this tick (so the attack path below is skipped).
+func _think(m: Dictionary, foes: Array, alive: Array, delta: float) -> bool:
+	var b = m["body"]
+	if not is_instance_valid(b):
+		return false
+	var h: Dictionary = m["h"]
+	var nm := String(h.get("name", "A delver"))
+	var frac := float(m["hp"]) / maxf(1.0, float(m["max"]))
+
+	# ALREADY RUNNING: keep going for the way up until out of the fight
+	if bool(m.get("fleeing", false)):
+		var up: Vector3 = dun.info["entry"] + dun.global_position
+		_go(b, up, roster.speed(h) * 1.15, delta)
+		Rig.play((b as HeroBody)._anim, "Running_A")
+		if frac > 0.55:                                  # mended enough to turn and fight again
+			m["fleeing"] = false
+			_decide(m, "rejoin", "%s has the wind back and turns to fight." % nm)
+		return true
+
+	# BREAK OFF: badly hurt, nothing left to drink - get out rather than die in place
+	if frac < FLEE_AT and not _has_heal_brew(h):
+		m["fleeing"] = true
+		_decide(m, "flee", "%s is badly hurt and breaks off, making for the way up." % nm)
+		return true
+
+	# REGROUP: cut off from the others with foes about - fall back to them
+	if alive.size() > 1 and not foes.is_empty():
+		var c := _party_centre(alive)
+		if _flat((b as Node3D).global_position, c) > REGROUP_M:
+			_go(b, c, roster.speed(h), delta)
+			Rig.play((b as HeroBody)._anim, "Running_A")
+			_decide(m, "regroup", "%s is cut off and falls back to the others." % nm)
+			return true
+	return false
+
+func _has_heal_brew(h: Dictionary) -> bool:
+	for k in HEAL_ORDER:
+		if roster.brew_count(h, k) > 0:
+			return true
+	return false
+
+## L47: the party's own call. A fight that is plainly lost is broken off as a party - they run
+## for the way up instead of standing there being killed one by one (Mr. E's "a hurt party
+## retreats rather than dying in place").
+func _losing(alive: Array, foes: Array) -> bool:
+	if alive.is_empty() or foes.is_empty():
+		return false
+	var frac := 0.0
+	for m in alive:
+		frac += float(m["hp"]) / maxf(1.0, float(m["max"]))
+	frac /= float(alive.size())
+	# badly hurt AND outnumbered, or on the brink whatever the count
+	return frac < 0.18 or (frac < turn_back_at and foes.size() >= alive.size() * 2)
 
 func _fight(delta: float) -> void:
 	_check_lamp()
@@ -701,13 +832,22 @@ func _fight(delta: float) -> void:
 		for m in alive:
 			frac += float(m["hp"]) / float(m["max"])
 		frac /= float(alive.size())
+		# L47: whether to press on or climb out is the party's biggest standing decision - it
+		# already happened here, it just was not counted or reasoned as one.
 		if oil < 1.0:
+			decided["turn_back_oil"] = int(decided.get("turn_back_oil", 0)) + 1
+			decisions += 1
 			_say("Out of oil, the party feels its way back up from floor %d." % floor_no)
 			_finish()
 		elif frac < turn_back_at or floor_no >= max_floors:
+			decided["turn_back_hurt"] = int(decided.get("turn_back_hurt", 0)) + 1
+			decisions += 1
 			_say("Battered, the party climbs back out from floor %d." % floor_no)
 			_finish()
 		else:
+			decided["press_on"] = int(decided.get("press_on", 0)) + 1
+			decisions += 1
+			_say("%s take a breather, and press on deeper." % _names())
 			# a breather: clerics and sages mend between floors
 			for m in alive:
 				m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m["max"]) * 0.25)
@@ -736,11 +876,26 @@ func _fight(delta: float) -> void:
 			m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m.get("hot_rate", 0.0)) * delta)
 		if float(m.get("ward_t", 0.0)) > 0.0:
 			m["ward_t"] = float(m["ward_t"]) - delta
+	# L47: before anyone swings, does the PARTY still want this fight? A lost one is broken off
+	# as a party and they run for the way up - they no longer die standing in place.
+	if not bool(_fleeing_party) and _losing(alive, foes):
+		_fleeing_party = true
+		decisions += 1
+		decided["party_retreat"] = int(decided.get("party_retreat", 0)) + 1
+		_say("The fight is going badly - the party breaks off and runs for the way up from floor %d." % floor_no)
+		state = "flee"
+		_t = 0.0
+		_nav_reset()
+		return
+
 	for m in alive:
 		var b: HeroBody = m["body"]
 		var h: Dictionary = m["h"]
 		# L12: a potion first, if one is called for (it costs the swing)
 		if _quaff(m):
+			continue
+		# L47: then their own call - break off, fall back, keep running
+		if _think(m, foes, alive, delta):
 			continue
 		# healers mend whoever is lowest first
 		var hp_pow := roster.heal_power(h)
@@ -754,6 +909,12 @@ func _fight(delta: float) -> void:
 			m["swing"] = float(m["swing"]) - delta * _pace(m)
 			if low != null and float(m["swing"]) <= 0.0:
 				m["swing"] = 2.4
+				# L47: choosing WHO to mend is a decision - say so when it is a close call
+				if float(low["hp"]) < float(low["max"]) * 0.35:
+					_decide(m, "mend", "%s breaks off to mend %s, who is nearly down." % [h["name"], low["h"]["name"]])
+				else:
+					decided["mend"] = int(decided.get("mend", 0)) + 1
+					decisions += 1
 				# D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
 				var mk := String(MENDERS.get(String(h["class"]), "heal"))
 				var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
@@ -765,15 +926,23 @@ func _fight(delta: float) -> void:
 				else:
 					_bless(low, got, hp_pow)
 				continue
-		var tgt: Monster = null
-		var bd := 1e9
-		for f in foes:
-			var d := _flat((f as Node3D).global_position, b.global_position)
-			if d < bd:
-				bd = d
-				tgt = f
+		# L47: a target chosen on sense, not just proximity (finish the nearly-dead, shut up
+		# the ranged one). The switch is announced the first time a hero changes their mind.
+		var tgt: Monster = _pick_target(b, foes)
 		if tgt == null:
 			continue
+		if m.get("tgt_was") != tgt and is_instance_valid(tgt):
+			if m.has("tgt_was") and is_instance_valid(m.get("tgt_was")):
+				var tn := String(tgt.def.get("name", "it"))
+				var frac2 := tgt.hp / maxf(1.0, tgt.max_hp)
+				if frac2 < 0.34:
+					_decide(m, "finish", "%s turns on the wounded %s to finish it." % [h["name"], tn])
+				else:
+					var w: Dictionary = tgt.def.get("ways", {})
+					if w.has("cast") or w.has("spit") or w.has("shoot"):
+						_decide(m, "silence", "%s goes for the %s before it strikes again from range." % [h["name"], tn])
+			m["tgt_was"] = tgt
+		var bd := _flat((tgt as Node3D).global_position, b.global_position)
 		var caster := String(h["class"]) in Roster.CASTERS
 		var ability := String(Roster.CLASSES[String(h["class"])].get("ability", ""))
 		var ranged := caster or String(h["class"]) == "ranger"
@@ -1751,6 +1920,21 @@ func _quaff(m: Dictionary) -> bool:
 				break
 	if want == "":
 		return false
+	# L47: reaching for a brew IS a decision, and it already has a visible tell (Use_Item, the
+	# bark, the float). It just was not legible AS a decision - so it is counted and reasoned
+	# like the rest now. drink() already announces a heal, so only the quieter cases speak here.
+	var h2: Dictionary = m["h"]
+	var why := "brew"
+	if float(m["hp"]) < float(m["max"]) * 0.34:
+		why = "brew_hurt"
+		decided[why] = int(decided.get(why, 0)) + 1
+		decisions += 1
+	elif lord_fighting() != null and bool(m.get("buffed", false)):
+		why = "brew_lord"
+		_decide(m, why, "%s steels themself for the lord." % h2["name"])
+	else:
+		why = "brew_cure"
+		_decide(m, why, "%s drinks off what is on them." % h2["name"])
 	drink(m, want)
 	if is_instance_valid(m.get("body")):
 		_snd("potion_drink", (m["body"] as Node3D).global_position + Vector3(0, 1.5, 0), POTION_DB)     # S2 (S3: up - it was buried)

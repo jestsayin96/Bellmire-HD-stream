@@ -554,7 +554,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] L52. SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
 
 # Mr. E's Nov 13 list - DESKTOP (town, world, audio, visuals)
-- [ ] D29. THE NEW SOUNDS ARE NOT AUDIBLE. 86 CC0 kinds were wired by S1/S2/S3 and he hears none of them. Source of truth is github.com/jestsayin96/music-studio - READ-ONLY, copy what is needed into this repo, never modify that repo. Check against the census: are the kinds playing at zero volume, on a muted bus, never triggered, or missing from the build? DONE: census shows animal/human/spell/combat kinds firing with real counts, and Mr. E hears them.
+- [ ] D29. THE TOWN IS SILENT OF EFFECTS - MEASURED, NOT GUESSED. The supervisor analysed the AUDIO of Mr. E's own OBS recordings (he was right; this needs no census to confirm):
+      * 19-34-39 (town/market, 39 s): dynamic range only 13.0 dB, median -34.9, peak -30.1, and ZERO windows more than 8 dB above the bed - i.e. NOT ONE discrete sound event in a busy market with heroes walking, NPCs working and a caravan arriving. It is a flat ambience drone and nothing else.
+      * 19-27-48 (dungeon/delve, 49 s): range 29.8 dB with 79 spike windows (3.4%) - so the Sfx system DOES fire below ground. The fault is TOWN-SIDE, not the whole system.
+      * Everything is also too quiet: median ~-35 dB, peaks only -25 dB.
+      So: the 86 CC0 kinds wired by S1/S2/S3 are not reaching the town. Find whether town callers never call Sfx, call a kind id that is not in SETS, play on a muted/mis-routed bus, are throttled out by GAP, or are attenuated to nothing by 3D distance from the stream camera. Source library is github.com/jestsayin96/music-studio - READ-ONLY, copy what is needed, never modify that repo. Also raise the overall mix level.
+      DONE: a re-recorded town clip whose audio shows clear discrete events (>=8 dB above the bed) for footsteps, voices, work and combat, at a sane level - verified the same way, by measuring the recording.
 - [ ] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
 - [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.
 - [ ] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.

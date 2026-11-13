@@ -233,3 +233,34 @@ Already decided under this rule: the Guild Roll is gone (L58), the party band go
 below), the d20 shows on the hub (H9). The hub already carries hero sheets, inventory, gear, the
 fallen and the command list, so most of "everything else" is ALREADY there - the work is stripping
 the stream and filling the few gaps (selling prices, the band grouping), not rebuilding the hub.
+
+
+## 14. Laptop two-session collision + the merge-before-lock bug (supervisor ruling, Nov 13 ~16:50)
+
+Two LAPTOP CODE chats ran in the same folder (C:\Users\Jestsayin96\Project1\Bellmire-HD-stream,
+branch `laptop`) at once. The older one, on an hourly check-in, ran `git merge origin/main` as step 1
+and moved HEAD under the live session. Damage was contained (149 WIP lines intact, D52 c9daa0f present,
+nothing pushed/reset/force-pushed) and the older session stood down. Rulings:
+
+1. ONE LAPTOP CODE CHAT AT A TIME IN THAT FOLDER. Branch `laptop` + one folder is a single owner.
+   The live (newer) session keeps the folder; the older stays out permanently. If a second laptop
+   CODE chat is ever genuinely needed, it gets its OWN worktree on its OWN branch (as the content
+   writer already does, COORD 10/12) - never a second chat on `laptop` in the same tree.
+2. READ THE LOCK BEFORE YOU MERGE. The check-in ordering that put `git merge origin/main` ahead of
+   the lock read is WRONG and caused this. Correct order for every laptop run: (a) git fetch,
+   (b) READ docs/RUN_LOCK_LAPTOP.txt - if a live session holds it, do file-only work or stand down,
+   (c) only then merge origin/main. Never move HEAD before confirming no one else holds the folder.
+3. AN L-PREFIX DOES NOT MEAN LAPTOP OWNS IT. Ownership is whatever the item's own "Owner:" line says.
+   (L63 is DESKTOP HUD; leaderboard_panel.gd.) Every worker reads the Owner line, not the prefix.
+
+Two previously-unowned files now have owners (COORD 11.2):
+  - scripts/boss_bar.gd   -> LAPTOP. It displays Monster.phase/phase_count/phase_changed (laptop data)
+    and completes the "boss_bar shows phase" half of L29a (a laptop item). The HUD worker correctly
+    declined it; it belongs with the boss logic, not the 7 stream-UI files.
+  - scripts/adventurers.gd -> LAPTOP. The NPC band's _kit_up, tied to gear.gd and L55 (laptop).
+  Assigning ownership does NOT change the laptop's ACTIVE task, which is D52 (below).
+
+OPEN FOR MR. E (raised by the laptop, not decided): boss_def() never copies BOSS_DEFS "spd", so plain
+lords move at their body speed and Nightwing's canon 6.6 never reaches the mover. A written-speed
+unique now does set it. Fixing it for ALL plain lords changes how every lord moves mid-cycle - Mr. E's
+call, left unchanged.

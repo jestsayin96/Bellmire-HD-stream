@@ -98,11 +98,47 @@ func _sample_bits() -> void:
 		_bits_log.append([uid, _now()])
 		_bits_last = uid
 
+## ---- L43: THE WARM-UP, AND WHY IT EXISTS.
+## This suite judges FPS RELATIVE to a base phase, which is what makes it portable between two
+## very different machines. That design is kept. What was broken was the MEASUREMENT: the base
+## phase was sampled the instant root.disable_3d was set back to false, and with D24's TAA on,
+## a viewport whose 3D was just re-enabled has no temporal history to resolve against. The base
+## came back as 1.0 FPS, and because every check is relative to it, the whole suite passed
+## while testing nothing.
+## So after ANY change to viewport 3D state - disable_3d toggled, the grid raised or lowered -
+## samples are DISCARDED until TAA has refilled: at least 1 s of real time AND 60 frames,
+## whichever finishes last.
+const WARM_S := 1.0
+const WARM_F := 60
+const MIN_SAMPLES := 60         # a phase that sampled fewer frames than this measured nothing
+var _warm_t := 0.0              # real time at which the warm-up may end
+var _warm_f := 0                # frames remaining in the warm-up
+var _warm_drop := 0             # frames discarded, reported per phase
+var _n_base := 0
+var _n_amb := 0
+var _n_paid := 0
+
+## call this immediately after touching disable_3d or raising/lowering the grid
+func _warm_up() -> void:
+	_warm_t = _now() + WARM_S
+	_warm_f = WARM_F
+	_warm_drop = 0
+	_fps_n = 0
+	_fps_s = 0.0
+
 func _fps_tick() -> void:
+	# L43: discard everything until TAA has had time to settle
+	if _warm_f > 0 or _now() < _warm_t:
+		_warm_f = maxi(0, _warm_f - 1)
+		_warm_drop += 1
+		return
 	_fps_n += 1
 	_fps_s += Engine.get_frames_per_second()
 
+var _took_n := 0                # how many frames the phase just taken actually sampled
+
 func _fps_take() -> float:
+	_took_n = _fps_n
 	var v := _fps_s / maxf(1.0, float(_fps_n))
 	_fps_n = 0
 	_fps_s = 0.0
@@ -142,6 +178,7 @@ func _process(_dt: float) -> bool:
 				for k in s._panes:
 					(s._panes[k]["vp"] as SubViewport).render_target_update_mode = SubViewport.UPDATE_DISABLED
 				root.disable_3d = false
+				_warm_up()                 # L43: 3D just came back - let TAA refill before sampling
 				_stage = "base"
 				_t0 = _now()
 				print("L32 stage base (%.0f s real - the old full-screen resting state)" % BASE_S)
@@ -149,10 +186,14 @@ func _process(_dt: float) -> bool:
 			_fps_tick()
 			if _now() - _t0 >= BASE_S:
 				_fps_base = _fps_take()
+				_n_base = _took_n
+				print("L32 base measured %.1f fps over %d frames (%d discarded warming up)"
+					% [_fps_base, _n_base, _warm_drop])
 				var s := _spot()
 				s.set_process(true)
 				s.visible = true
 				s._relayout(true)          # the grid back up (disable_3d, pane update modes)
+				_warm_up()                 # L43: the grid is a 3D-state change too
 				_stage = "amb"
 				_t0 = _now()
 				print("L32 stage amb (%.0f s real - ambient rotation soak)" % AMB_S)
@@ -165,6 +206,8 @@ func _process(_dt: float) -> bool:
 				_ok(_spot().busy().is_empty(), "amb: no lane paid during the idle soak")
 			if _now() - _t0 >= AMB_S:
 				_fps_amb = _fps_take()
+				_n_amb = _took_n
+				print("L32 idle measured %.1f fps over %d frames (%d discarded warming up)" % [_fps_amb, _n_amb, _warm_drop])
 				var s := _spot()
 				for l in Spotlight.LANES:
 					var n := (_seen.get(l, {}) as Dictionary).size()
@@ -209,6 +252,8 @@ func _process(_dt: float) -> bool:
 				_save("paid_grid")
 			if _spot().busy().is_empty() and _now() - _t0 > 10.0:
 				_fps_paid = _fps_take()
+				_n_paid = _took_n
+				print("L32 paid measured %.1f fps over %d frames (%d discarded warming up)" % [_fps_paid, _n_paid, _warm_drop])
 				_check_order()
 				_stage = "drain"
 				_t0 = _now()
@@ -226,6 +271,15 @@ func _process(_dt: float) -> bool:
 				# tested. Seen for real on 2026-11-12: after D24 enabled TAA + MSAA the
 				# laptop's full-screen base came back at 1.0 FPS and the whole suite still
 				# printed OK. A base that low is a broken measurement, not a slow machine.
+				# L43: the raw numbers, always printed, so a vacuous pass can never hide again
+				print("L32_FPS_RAW base %.1f/%d frames  idle %.1f/%d  paid %.1f/%d"
+					% [_fps_base, _n_base, _fps_amb, _n_amb, _fps_paid, _n_paid])
+				# L43 guard 2: a phase that sampled almost nothing has not measured anything,
+				# whatever average it reports. This is the companion to the base >= 10 assert:
+				# that one catches a collapsed VALUE, this one catches a collapsed SAMPLE.
+				_ok(_n_base >= MIN_SAMPLES, "fps: the base phase sampled enough frames to mean anything (%d, need %d)" % [_n_base, MIN_SAMPLES])
+				_ok(_n_amb >= MIN_SAMPLES, "fps: the idle phase sampled enough frames (%d, need %d)" % [_n_amb, MIN_SAMPLES])
+				_ok(_n_paid >= MIN_SAMPLES, "fps: the paid phase sampled enough frames (%d, need %d)" % [_n_paid, MIN_SAMPLES])
 				_ok(_fps_base >= 10.0, "fps: the base phase measured a real frame rate (%.1f) - below this the relative checks mean nothing" % _fps_base)
 				_ok(_fps_amb >= _fps_base * 0.65, "fps: the idle grid keeps 65%% of the old resting state (%.1f of %.1f)" % [_fps_amb, _fps_base])
 				_ok(_fps_paid >= _fps_amb * 0.5, "fps: the paid grid within 50%% of the idle grid (%.1f of %.1f)" % [_fps_paid, _fps_amb])

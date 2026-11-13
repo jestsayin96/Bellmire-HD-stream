@@ -1080,8 +1080,17 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			m["tgt_was"] = tgt
 		var bd := _flat((tgt as Node3D).global_position, b.global_position)
 		var caster := String(h["class"]) in Roster.CASTERS
-		# L48: the hero's whole unlocked kit, class birthright + class track + species track
-		var ability := Roster.abilities_of(h)
+		# L48: the hero's whole unlocked kit, class birthright + class track + species track.
+		# L43 FOUND THE COST OF THIS: abilities_of() allocates an Array and walks two tables, and
+		# I had it running every frame for every delver in the fight loop. The paid phase fell
+		# from 16-18 fps to 14.3-14.7, under _l32_test's catastrophe floor - which is exactly
+		# the regression the repaired FPS gate was supposed to start catching, caught on its
+		# first honest run, on my own code. The kit only changes when the hero LEVELS, so it is
+		# worked out once and kept until then.
+		if int(m.get("abil_lvl", -1)) != int(h.get("level", 1)):
+			m["abil_lvl"] = int(h.get("level", 1))
+			m["abil"] = Roster.abilities_of(h)
+		var ability: Array = m["abil"]
 		var ranged := caster or String(h["class"]) == "ranger"
 		var reach := 9.0 if ranged else REACH + tgt._height() * 0.15
 		if bd > reach:

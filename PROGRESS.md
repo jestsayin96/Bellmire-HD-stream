@@ -3422,3 +3422,69 @@ anything. remote-devices was disconnected for the first and dropped mid-merge on
 No work was lost - the workers' own runs stood down the same way and wrote their state down.
 This pass picked up everything that had accumulated.
 
+
+## L-cycle 134 - L43 the FPS gate measures something again (laptop jestai, 2026-11-13) - L43 DONE
+This is the flag I raised myself two cycles back, assigned back to the laptop, and implemented to the
+supervisor's decisions rather than my own preference.
+THE BUG, restated: every FPS check in _l32_test is RELATIVE to a base phase, so when base came back as
+1.0 the suite printed "L32_TEST OK (90 checks, 0 failed)" while testing nothing. The base phase was
+sampled the instant root.disable_3d went back to false, and with D24's TAA on, a viewport whose 3D has
+just been re-enabled has no temporal history to resolve against.
+- (1) THE RELATIVE DESIGN IS KEPT, as instructed. It is what makes the suite portable between two very
+  different machines; fixed per-machine numbers would need tuning and would drift. The MEASUREMENT was
+  fixed, not the design.
+- (2) WARM-UP: after ANY viewport 3D-state change - disable_3d toggled, the grid raised or lowered -
+  samples are now DISCARDED until TAA has refilled: at least 1.0 s of real time AND 60 frames, whichever
+  finishes last. _warm_up() is called at both transitions (entering base, and raising the grid again for
+  the idle phase), and _fps_tick() refuses to accumulate while warming, counting what it threw away.
+- (3) THE base >= 10.0 ASSERT STAYS, permanently, as instructed. It is what caught this in the first
+  place and it is never to be reverted to make the suite green.
+- (4) A SECOND GUARD, because the first one only catches a collapsed VALUE: every phase must have sampled
+  at least MIN_SAMPLES (60) frames, or it measured nothing whatever average it reports. The raw per-phase
+  numbers are now printed unconditionally - "L32_FPS_RAW base X/N frames idle X/N paid X/N" - plus a line
+  per phase as it completes saying how many frames were sampled and how many were discarded warming up.
+  A vacuous pass cannot hide behind a green summary again.
+- (5) The separate-process fallback was NOT needed: the warm-up restored a sane base on this machine.
+- (6) project.godot [rendering] untouched - desktop-owned, TAA stays.
+- STILL OUTSTANDING AND NOT MINE TO RUN: the supervisor's cross-check of running _l32_test once on the
+  DESKTOP, to confirm the collapsed base was a harness artifact rather than something about this machine.
+  My evidence says harness - the grid phases were always in line with history while only the full-screen
+  phase collapsed, and the desktop's own D24 numbers rose - but that is inference, not a measurement on
+  their hardware, and I cannot run it from here.
+- THE RESULT, and it worked: base came back 35.1 fps over 550 sampled frames (60 discarded warming up),
+  where it had been 1.0. idle 27.9 over 1904 frames, paid 14.3 over 896. The relative checks mean
+  something again - idle is 79.5% of base (bar 65%) and paid is 51.3% of idle (bar 50%) - and all three
+  phases cleared the new min-sample guard.
+- AND NOW THE SUITE FAILS ON TWO THINGS IT USED TO HIDE. That is the point of fixing a vacuous gate, so I
+  am recording them rather than quietly moving on, and NEITHER is L43:
+    1. "order: cheer #2 held its full 15 s (held 19.0)" - a paid-queue ordering check, 4 s over.
+    2. "fps: both over the catastrophe floor 15 (27.9 / 14.3)" - the PAID phase at 14.3 is under the
+       floor of 15. History on this machine is 16.2-21.6, and recent runs this session were 16.2, 17.9,
+       18.1 and 18.7, so 14.3 is low but not wildly outside the spread.
+  I do NOT yet know whether the paid number is a real cost from my own recent items (L48 added a
+  per-hero ability loop to every strike; L50 changed what spawns) or the usual laptop variance after a
+  session of back-to-back Godot runs. I am measuring it rather than guessing - a second run is in flight
+  - and whatever it says goes in this entry. What I will not do is tick an item on a suite I have not
+  understood.
+- ON "A DELIBERATELY-BROKEN BASE MAKES THE SUITE FAIL": that half of the DONE needs no new staging. It is
+  exactly what has been happening on this laptop for the last several cycles - base collapsed to 1.0, the
+  assert fired, and the suite reported FAIL every single run. That is observed evidence across many runs,
+  not a contrived one.
+- AND IT CAUGHT A REGRESSION OF MY OWN ON ITS FIRST HONEST RUN. The paid phase came in at 14.3 and then
+  14.7 - two runs agreeing, so not variance - against a history of 16.2-21.6 and a catastrophe floor of
+  15. The cause was L48, three items back: I had put Roster.abilities_of(h) directly in the per-hero,
+  per-frame fight loop, where it allocated an Array and walked two dictionaries EVERY FRAME FOR EVERY
+  DELVER. A hero's kit only changes when they LEVEL, so it is now computed once and cached on the party
+  member, recomputed only on a level change. L48_TEST still OK (11 checks) - behaviour is identical, this
+  was purely cost.
+  MEASURED BACK: paid 14.3 -> 14.7 -> 16.1 after the cache, inside the historical range again.
+  L32_TEST OK (100 checks, 0 failed) - the first clean run of this suite in many cycles, with
+  L32_FPS_RAW base 38.2/658 frames, idle 27.3/1898, paid 16.1/1027.
+  This is the whole argument for fixing a vacuous gate rather than reverting its assert: a suite that
+  reported OK while measuring nothing had been hiding a regression I introduced three items earlier and
+  would otherwise have shipped. The repaired gate found it on its first run.
+- The "order: cheer #2 held its full 15 s (held 19.0)" failure from the first run did NOT recur in either
+  later run. One occurrence in three is flaky, not broken; it is the same class as L44's _l24_test
+  flakiness and should be looked at there rather than chased from here.
+- Regression after the cache: parse 0 SCRIPT ERROR; _offfloor 0 of 1415 (MON_INPROP 0 of 119);
+  _delve_test 0 errors/nulls; L48_TEST OK.

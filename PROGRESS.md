@@ -1893,3 +1893,15 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   Until then wardwater/knitbone are a buff that shows but does nothing.
 - TICKING: WORK_PLAN C1/C2/C3 left UNTICKED (COORDINATION 6 + 10) - the supervisor merges `content` to main, runs
   the Godot battery, and ticks. This commit is complete and validated, NOT a WIP: commit (do not skip it).
+
+
+## C-cycle 2 - canon pass against the original (content, branch `content`, jestai, 2026-11-12) - C3 boss variants retightened
+- Now running on the laptop (jestai) with the original game on disk, so the LORE RULE read happened for real:
+  trial-and-error-reference/NOTES.md (the lore bible) + bestiary.gd. C-cycle 1 checks out against canon - the eight
+  lords, the Ford, the districts (keep/market/craft/temple/homes/garrison/mill), the origins and the strains all
+  match, and no new monster/class/species/spell was invented.
+- Retightened the two bosses.json uniques that had leaned on bigger numbers (canon: "different shapes, not just
+  bigger numbers"): Grubmother "Overfull" -> 230 hp (= base), shape-only (a wall that keeps replacing itself);
+  Gravewyrm "Half-Woken" -> 230 hp (< base 260, only half risen), trading body for a deeper breath. Rest of C1 stands.
+- Validated (python only, no Godot): every data/*.json parses; the two edited entries stay within the bosses schema.
+  Committed + pushed from the laptop (path a: Blender subprocess git) to prove that route end to end.

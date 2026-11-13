@@ -559,7 +559,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       * 19-27-48 (dungeon/delve, 49 s): range 29.8 dB with 79 spike windows (3.4%) - so the Sfx system DOES fire below ground. The fault is TOWN-SIDE, not the whole system.
       * Everything is also too quiet: median ~-35 dB, peaks only -25 dB.
       So: the 86 CC0 kinds wired by S1/S2/S3 are not reaching the town. Find whether town callers never call Sfx, call a kind id that is not in SETS, play on a muted/mis-routed bus, are throttled out by GAP, or are attenuated to nothing by 3D distance from the stream camera. Source library is github.com/jestsayin96/music-studio - READ-ONLY, copy what is needed, never modify that repo. Also raise the overall mix level.
-      *** RULE OUT OBS FIRST - DO NOT START HUNTING A GAME BUG UNTIL THIS IS ANSWERED. ***
+      *** OBS RULED OUT - ANSWERED BY MR. E. THE TOWN SILENCE IS A REAL GAME BUG. PROCEED. ***
       Mr. E sent his OBS Advanced Audio Properties and mixer. Findings:
         - Desktop Audio is MUTED (red crossed speaker, flat meter). If Bellmire's output goes to the Windows
           default device, OBS was capturing it on a muted channel and no game sound could reach the recording.
@@ -567,10 +567,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
           OBS track 2 has nothing live on it (the -91 dB stream).
         - Source volumes are low at the source: Application Audio Capture 27%, Desktop Audio 28%,
           Game Capture 45%. That alone explains the -35 dB median.
-      OPEN QUESTION for Mr. E: which window is 'Application Audio Capture (BETA)' bound to? If it is
-      Godot/Bellmire, game audio WAS captured and the town silence is a real engine bug - proceed. If it is a
-      browser or music player, the only path for game sound was the muted Desktop Audio and the game may be fine.
-      Until that is answered, treat the measured town silence as UNATTRIBUTED between game and capture chain.
+      ANSWERED 2026-11-13: Mr. E captures Godot with the 'Game Capture' source, NOT Desktop Audio. Game
+      Capture is Active with a -6.8 dB fader, so Bellmire had a live audio path into those recordings. The
+      muted Desktop Audio is therefore irrelevant to the game's sound, and the measured town silence is
+      ATTRIBUTED TO THE GAME. Hunt it in the engine.
+      Still worth Mr. E's attention on his side, but not blocking: Game Capture sits at 45% (-6.8 dB), so even
+      once the town SFX fire they will be quiet for viewers; and OBS tracks 1/3 are duplicates with track 2 empty.
       DONE: a re-recorded town clip whose audio shows clear discrete events (>=8 dB above the bed) for footsteps, voices, work and combat, at a sane level - verified the same way, by measuring the recording.
 - [ ] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
 - [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.

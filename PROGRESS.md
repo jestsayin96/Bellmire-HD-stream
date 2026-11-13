@@ -3651,3 +3651,34 @@ immediate re-run passed: the re-run happened to be faster.
   "String formatting error: not all arguments converted" at delve.gd:1479 (_loot). delve.gd is laptop-owned;
   flagging it rather than touching it. Not a SCRIPT ERROR, did not block the gate.
 - Did NOT touch chatcmd.gd (c) - laptop-owned. T3 ticked in WORK_PLAN with this result.
+
+## L-cycle 136 - L27b finished at last (laptop jestai, 2026-11-13) - L27b DONE
+This is the WIP that has been carried in the lock file every cycle of this session. Its code landed at
+0f3986c days ago and only ever owed three test runs; it is finally closed rather than left as a commit
+the supervisor skips indefinitely.
+- WHAT IT OWED, from its own WIP commit message: _l26_anims (cleared in L-cycle 119 - L26A_ANIMS OK,
+  MON_ANIMS static 0 of 20819 moving frames), _l25_test, and the windowed _l27b_shot line-up "+ eye on
+  the tells". All three are now done.
+- RE-VERIFIED ON CURRENT HEAD RATHER THAN TRUSTING THE OLD RUN, which mattered: bestiary.gd and
+  monster.gd have been through L45 (lord depth scaling), L48 (ability unlocks) and L50 (band widening and
+  the pack cap) since that WIP was written. L27B_TEST OK - the json is still the authority, every named
+  strain still has a tell, and the stat mods still apply through Bestiary.make.
+- _l25_test OK 13/13 on current HEAD, 0 stuck delvers, 0 watchdog frees.
+- THE EYE ON THE TELLS, which is the half that could never be done headlessly and is why this sat open:
+  tools/_l27b_shot.gd windowed at 1920x1080, one skeleton warrior per strain, renders/cycles/20261112_l27/
+  b_lineup, b_left, b_mid, b_right, b_lineup_later. All ten named strains read as distinct at a glance,
+  and all three kinds of tell land: GLOW (scarborn's wandering mint, wraithtouched's violet), PARTICLES
+  (wraithtouched's wisp motes drifting round it, emberbound throwing orange sparks) and SCALE (gorged is
+  plainly the biggest thing in the line without any glow at all).
+- A WORRY I HAD AND CHECKED RATHER THAN ASSUMED: L42 cut emission across the dungeon two cycles ago
+  (dungeon_parts 3.0 -> 1.7, 4.0 -> 2.2, scatter 1.0-2.6 -> 0.7-1.5). The strain tells ARE glow and
+  particles, so my own anti-neon work could have quietly dimmed the very things L27b exists to make
+  visible. It did not - the line-up shows them reading clearly - but that was worth looking at rather
+  than ticking blind.
+- Cosmetic, not worth a fix: the line-up's framing clips the leftmost and rightmost name labels. The
+  bodies are all in frame; only two labels are cut.
+- CARRIED FORWARD FOR MR. E, from the original WIP and still unresolved: L27b's strain re-weighting
+  widened the 6-9 and 10+ bands with shares taken from the non-plain pool (floors 1-2 stay 85% plain,
+  10+ stays 15% plain). That is a BALANCE CHANGE - deep floors now roll the three new strains - and it is
+  his call, not mine. The frozen note on the original numbers ("Measured: they IMPROVED survival, 83% vs
+  63% - do not soften them") was respected: no existing strain's numbers were touched.

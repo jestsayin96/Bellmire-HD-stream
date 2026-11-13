@@ -467,7 +467,21 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       DONE (L-cycle 115): tools/_l26_anims.gd - MON_ANIMS static=0 (13575 moving frames, floors 2/5/9), every def resolves; clip fallbacks, procedural flinch for 7 bodies with no hit clip, run when chasing fast, 2nd attacks, melee blows land at the clip contact (0.26-0.60 s). L25 OK.
 - [x] L27a. NEW MONSTERS from owned CC0 packs (KayKit Skeletons/Halloween, Quaternius - NOT Bestiary/QAL): add to TYPES with height/anim map/depth/strain. DONE: appear at depth in a soak, animate, parse clean.
       DONE (L-cycle 118): 9 new creatures from owned bodies (no Halloween pack on disk) - marrow hewer, pale cutthroat, silk mother (+spiderling fodder), scar rat, fen lurker, pit wyrm, ash wight, gloom bat - each with height/anims/tint+glow/ways/homes, wired into DEPTHS 6-7/8-9/10+. L27A_TEST OK; deep soak (floors 7/9/11) static=0 of 21637, hewer/ash wight/cutthroat seen fighting; parse 0; line-up shots renders/cycles/20261112_l27/.
-- [ ] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
+- [x] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
+      DONE L-cycle 136: the code landed at 0f3986c and only ever owed three test runs; closed now rather
+      than left as a WIP the supervisor skips. _l26_anims cleared in L-cycle 119 (static 0 of 20819
+      moving frames); _l25_test OK 13/13 on current HEAD with 0 stuck; and the windowed line-up finally
+      judged by eye. RE-VERIFIED ON CURRENT HEAD rather than trusting the old run - bestiary.gd and
+      monster.gd have been through L45, L48 and L50 since - L27B_TEST OK: json still the authority, every
+      named strain still has a tell, stat mods still apply through Bestiary.make.
+      THE TELLS READ: renders/cycles/20261112_l27/b_lineup + b_left/mid/right. All ten strains distinct
+      at a glance, and all three kinds of tell land - GLOW (scarborn mint, wraithtouched violet),
+      PARTICLES (wraithtouched wisps, emberbound sparks) and SCALE (gorged plainly biggest, no glow).
+      Checked rather than assumed: L42 cut dungeon emission two cycles ago and could have dimmed the very
+      tells this item exists for. It did not.
+      FOR MR. E, carried from the original WIP: the strain re-weighting of the 6-9 and 10+ bands is a
+      BALANCE CHANGE (shares taken from the non-plain pool; shallows stay 85% plain). No existing
+      strain's frozen numbers were touched.
 # Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]
 - [ ] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
 - [ ] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.

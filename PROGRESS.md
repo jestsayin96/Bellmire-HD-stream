@@ -3880,3 +3880,37 @@ row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 wat
   waypoint-pop early-return (townsfolk ~L813) skipping that frame's keep_walkable, and/or
   embedded stop DESTINATIONS. Recommend a focused follow-up rather than a blind change to the
   walker loop. Test NOT loosened, per the D44b instruction.
+
+## L-cycle 138 - L37 scar-veins: the other half, with numbers (laptop jestai, 2026-11-13) - L37 DONE
+L42 had already cut vein EMISSION hard (2.4 -> 1.1), which is why I refused to tick L37 then - the item
+also asks to cut COVERAGE, to "break up the continuous curves", and for before/after floor shots. This is
+that half.
+- WHAT MADE IT READ AS SPAGHETTI, found by looking at the placement rather than the texture: up to SIX
+  vein decals a floor, each 2.6-3.8 m, dropped on random cells with NO separation and free to be
+  projected up a wall face. Several big curvy decals meeting edge to edge is piping; that is the whole
+  mechanism.
+- FOUR CHANGES, in dungeon_hd.gd: count halved and capped at 3 a floor; each vein drawn at HALF size, so
+  it is a crack in a flagstone rather than a curve across several; no vein within VEIN_APART (9 m) of
+  another, so two can never join up; and veins are never projected onto a wall - that is what turned a
+  crack in the floor into piping running up the stonework. Emission taken 1.1 -> 0.75 and alpha to 0.62
+  to finish "keep them as a subtle tell".
+- MEASURED, not asserted. tools/_l37_shot.gd (NEW) prints the vein count and the closest gap between any
+  two, and frames the floor from high and square-on - the angle that would EXPOSE continuous piping, not
+  a flattering one:
+      floor 8   4 veins, closest 7.1 m  ->  2 veins, closest 33.7 m
+      floor 11  6 veins, closest 9.9 m  ->  3 veins, closest 18.4 m
+      floor 14  6 veins, closest 6.3 m  ->  2 veins, closest 38.7 m
+  A vein is now ~1.3-1.9 m wide and the nearest neighbour is 18-38 m away, so they CANNOT join into a
+  curve. Before, 3.8 m decals sat 6.3 m apart and nearly touched.
+  Shots in renders/cycles/20261113_l37/ (f8/f11/f14, before and after).
+- A COUNTING BUG OF MINE, caught before it became a false claim: my first counter matched decals by NODE
+  NAME ("Decal_veins"). Godot renames duplicate siblings, so only the FIRST keeps that name and the rest
+  become @Decal@NNN - the counter returned exactly 1 on every floor, before AND after, and I was one step
+  from reporting "1 vein a floor" as proof of a coverage cut. It counts by texture_emission now, which
+  only the veins branch sets. The real numbers are the ones above.
+- CHECKED FOR OVERCORRECTION, because a tell nobody can see is not a tell: floor 11's after shot still
+  shows the veins as small violet cracks on inspection. Present, not dominant. That is the item's
+  "subtle tell".
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1343 (MON_INPROP 0 of 95); _delve_test 0 errors/nulls;
+  L41_TEST OK (the material guard still holds); L50_TEST OK (the spawn census is unaffected); L25_TEST OK
+  13/13 with 0 stuck (dungeon_hd changed, so the geometry suite matters).

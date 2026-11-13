@@ -3261,3 +3261,118 @@ tiers rather than a single step.
      `colour` but no `model`, so they render as the default shape tinted until a cosmetic key is
      mapped to a mesh. OWNER: LAPTOP CODE (gear.gd) / DESKTOP BUILD (hero_body.gd, rig.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 131 - L50 monster diversity, measured and then fixed where it was actually thin (laptop jestai, 2026-11-13) - L50 DONE
+MEASURED FIRST. The DONE criterion asks for a depth census, so the census came before any change, and it
+located the problem somewhere other than where the item implies. tools/_l50_test.gd reproduces
+dungeon_hd's own spawn loop exactly - pick per point, then pack expansion - so it measures what a floor
+REALLY gets rather than what the table could give.
+  BEFORE, 40 sampled floors per depth, 10 creatures a floor:
+    depth  1  band  5  -> 3.5 distinct types a floor, commonest took 51%
+    depth  3  band  8  -> 4.5                                        41%
+    depth  5  band  6  -> 5.1                                        37%
+    depth  6  band 12  -> 5.7                                        33%
+    depth  8  band 14  -> 5.7                                        36%
+    depth 10  band 18  -> 6.6                                        30%
+    depth 14  band 18  -> 6.5                                        33%
+  The DEEP floors were never the problem - L27a's widening did its job and they run 5.7-6.6 distinct
+  kinds. ALL the repetition was in the shallows: 3.5 kinds with ONE of them taking half the floor, which
+  is "three repeats" almost exactly - and it is the first thing any viewer ever sees.
+TWO CAUSES, both fixed:
+1. THE SHALLOW BAND WAS FIVE KINDS. Widened to seven with the two gentlest creatures already sitting in
+   the next band up (puglin 0.9/0.9, spider). Deliberately NOT from the deep roster: L27a's rule that the
+   shallows stay innocent of pitwyrm/silkmother/ashwight/cutthroat and that fodder is summon-only is
+   untouched, and _l27a_test still enforces it - run and OK this cycle.
+2. PACK EXPANSION COULD EAT A FLOOR. dungeon_hd filled n = 1 + pack slots from ONE pick, so a single rat
+   pack (pack 2) took a third of a small floor and two picks could all but fill it. A pack still arrives
+   as a pack, but no single pick may own more than ~34% of what is down here. This helps at every depth,
+   not only the shallows.
+  AFTER: depth 1 -> 4.3 distinct (was 3.5), commonest 43% (was 51%); every other depth improved a little
+  too, and the worst commonest-share across all depths is now 43%.
+- I checked for unused creatures before adding anything and found only slimeling and spiderling, both
+  deliberately summon-only fodder - so there was nothing to promote and no new monster was invented. The
+  roster did not need more; the DISTRIBUTION needed fixing. Same shape of finding as L46, L49, L52 and L55.
+- tools/_l50_test.gd (NEW, headless) IS the census the item asks for and it prints the table every run, so
+  the next cycle can see the spread rather than re-deriving it. It also asserts depth still CHANGES what
+  appears (18 kinds appear only deep, 7 only shallow) - variety at a depth is worth nothing if every depth
+  shows the same things. L50_TEST OK, 5 checks.
+- Regression: parse 0 SCRIPT ERROR; L27A_TEST OK (shallows still innocent); _offfloor 0 of 1405
+  (MON_INPROP 0 of 109); _delve_test 0 errors/nulls; _l26_anims L26_FLOORS=1,2,7 (the floors the new spawns
+  are actually on) L26A_ANIMS OK, MON_ANIMS static=0 of 14075 moving frames - puglin and spider animate
+  correctly in the shallows.
+- FOR MR. E: the shallows now show puglins and spiders alongside the rats and bats, and no single kind can
+  swarm a floor. If floor one feels busier than he wants for a first floor, the band is one line in
+  Bestiary.DEPTHS and the pack cap is one line in dungeon_hd.
+
+## L-cycle 132 - L41 the magenta floor: a guard, and a likely different culprit (laptop jestai, 2026-11-13) - L41 DONE
+PROBED BEFORE CHANGING ANYTHING. Magenta is Godot's own colour for a ShaderMaterial whose shader is
+NULL. I built the kit material for all eight dungeon themes and checked every one: shader non-null, and
+every texture parameter (albedo_tex, pbr_map, stone_n, stone_r, wood_n, wood_r, vary_tex) non-null. The
+binding is NOT broken on this machine, and LOOK["_"] - the fallback an unknown theme would take - carries
+all four keys it is read for, so that path is safe too.
+- THE GUARD, which is what the item asks for and what was genuinely missing: FloorGen._kit_mat() now
+  checks that the shader and the atlas actually loaded. If either is null it returns plain grey stone
+  (StandardMaterial3D) and counts the catch in kit_fail_count, instead of handing back a ShaderMaterial
+  with a null shader - which IS the magenta. A shader load fails when the .gdshader is missing from the
+  import cache on the machine that is running, which is exactly the kind of thing that differs between
+  this laptop and the desktop and therefore only shows up on stream. Grey is dull and nobody will enjoy
+  it, but a dull floor is a bad half-hour and a magenta one is a clip.
+- tools/_l41_test.gd (NEW, headless - material BINDING is a property of the resource and can be asserted
+  exactly): 8 themes x 12 floors x steel/stone x ground/not = 384 materials built fresh, 0 null and
+  0 magenta; the bound material carries every texture; normal running trips the guard 0 times; and the
+  item's own "deliberate broken-material test" - force the shader unavailable and the result is a grey
+  StandardMaterial3D with a channel spread of 0.02, not magenta, with the guard counting exactly 1.
+  L41_TEST OK, 9 checks.
+- A LIKELY DIFFERENT CULPRIT, AND MR. E SHOULD RULE ON IT. I rendered all 14 biomes windowed at 1920x1080
+  (tools/_l28_shot.gd L28_SET=all) and found no magenta anywhere - but the CONFECTION biome's floor is a
+  flat, saturated pink. Its ground was ["#e8b0cc", 0.35]: a LIGHT, high-chroma colour where every other
+  biome uses a dark one (#2c3248, #1a0e0a, #4a3a2a...), and confection also carries the highest sat of
+  any biome at 1.25 with a pink ambient, key and fill. In a small pane at stream distance with party
+  frames over it, that reads exactly as "an entire dungeon floor renders hot magenta" - which is the
+  report. The walls stay grey, which also matches: a missing material would take the walls too.
+  I muted the ground to ["#9a6a80", 0.28] so the stone and the hex tile edges read through, and left the
+  biome otherwise alone: "the confection" is a NAMED biome in the lore list and it is MEANT to be pink.
+  I am not redesigning it on a hunch. Before/after and the full sheet are in renders/cycles/20261113_l41/.
+  FOR MR. E: was the floor you saw the confection biome working as designed, or a genuinely broken one?
+  If it was confection, the fix is a look decision (how pink is too pink) and the revert is one line -
+  data/biomes.json line 35, ground back to ["#e8b0cc", 0.35].
+- L28's committed reference renders were overwritten by the shot run and have been RESTORED with
+  git checkout; L41's own evidence lives in its own folder rather than churning L28's set.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1493 (MON_INPROP 0 of 141); _delve_test 0
+  errors/nulls; L25_TEST OK 13/13 with 0 stuck delvers (floorgen changed, so the geometry suite matters).
+  _kit_mat's return type widened from ShaderMaterial to Material (it can now return a
+  StandardMaterial3D); its single caller infers the type, so nothing else needed touching.
+
+## L-cycle 133 - L42 the dungeon stops being a nightclub (laptop jestai, 2026-11-13) - L42 DONE
+MEASURED, NOT EYEBALLED. I scored every biome by sat x the summed HSV saturation of its ambient, key,
+fill and boss colours, so the ones to pull down were chosen on a number rather than on which screenshot
+bothered me. Worst first: firepit 2.94, treasury 2.74, workshop 2.33, mess 2.32, grassland 2.10, flooded
+2.01, wood 1.86, confection 1.59 ... fogbound 0.30. Firepit came out worst, which is one of the two
+floors Mr. E named, and the BOSS accent colours were the most saturated things in the whole table
+(0.62-0.94) - those are the pink/green/cyan he is seeing.
+- data/biomes.json, 48 values pulled down by a one-shot migration that edited the RAW TEXT so the file
+  keeps its one-line-per-biome layout (re-serialising the JSON would have reflowed the whole thing and
+  made the diff unreadable for the next person): ambient saturation capped at 0.34, key at 0.20 (a key
+  light should be near-white with a tint, not a colour), fill at 0.26, boss at 0.62, glow at 0.55 (was up
+  to 1.00) and the colour-grade sat at 1.05 (was up to 1.25).
+- EMISSION, which the item names directly: the L28d scar-veins were emission_energy 2.4 and read as neon
+  piping rather than cracks in stone - now 1.1. dungeon_parts' emitters 3.0 -> 1.7, 4.0 -> 2.2, and the
+  scatter range 1.0-2.6 -> 0.7-1.5. The brazier's ember bed 3.0 -> 2.2.
+- WHAT I DELIBERATELY LEFT ALONE: the flame itself (a small unshaded sphere at emission 8.0). The item
+  asks for "dark stone with SOURCES OF LIGHT, not a nightclub" - a fire is the source, and dimming it
+  would have missed the point. The nightclub came from the room being washed, not from the fire being
+  bright.
+- Per-theme shot sheet at 1920x1080 re-rendered (tools/_l28_shot.gd L28_SET=all, 14 biomes, 28 shots).
+  Before and after, plus the firepit room close up, are in renders/cycles/20261113_l42/. The firepit
+  before is every surface drenched in saturated red; after, the brickwork, the cream banners and the
+  shields all read, with the lava pool as the light source. No biome has gone washed-out grey - each
+  keeps its own character, just as a tint on stone rather than a colour cast over everything.
+  NOTE ON THE COMPARISON: the shot tool generates a fresh floor each run, so the before and after are not
+  the same geometry. Compare the LIGHTING character, not the layout.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1398 (MON_INPROP 0 of 110); _delve_test 0
+  errors/nulls; L41_TEST OK (the material guard from last cycle still holds with every biome retuned);
+  L25_TEST OK 13/13 with 0 stuck (dungeon_parts and dungeon_hd changed, so the geometry suite matters).
+  L28's committed reference renders were overwritten by the shot run and RESTORED with git checkout.
+- THE SECOND HALF OF THE DONE CRITERION IS NOT MINE: "a per-theme shot sheet at 1080p that reads as lit
+  stone; MR. E'S EYE ON IT". The sheet is rendered and in the repo. Whether it now reads right to him is
+  his call, and every number I moved is a cap in one place - the caps are at the top of the migration
+  note above, and data/biomes.json before this cycle is recoverable from git if he wants any of it back.

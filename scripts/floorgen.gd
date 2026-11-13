@@ -374,14 +374,45 @@ static func _pbr_map(steel: bool) -> ImageTexture:
     _pbr[steel] = t
     return t
 
-static func _kit_mat(tint: Color, steel: bool, ground := false) -> ShaderMaterial:
+## ---- L41: NEVER SHOW MAGENTA ON STREAM.
+## In Mr. E's 19-17-57 recording an entire dungeon floor rendered hot magenta. That colour is
+## Godot's, not ours: a ShaderMaterial whose shader is NULL draws magenta, and a shader load
+## fails whenever the .gdshader is missing from the import cache on the machine that is running
+## - which is exactly the sort of thing that differs between this laptop and the desktop and
+## shows up only on stream. Probed all eight themes here and every one binds correctly, so the
+## binding is not broken on this machine; what was missing was any guard for when it IS.
+## So the kit material is now built defensively: if the shader will not load, or a texture it
+## needs is missing, the floor comes back as plain grey stone instead of screaming magenta.
+## Grey is dull and nobody will enjoy it - but a dull floor is a bad half-hour, and a magenta
+## one is a clip.
+static var kit_fail_count := 0          # how many times the guard has caught a failure
+static var force_kit_fail := false      # test hook: pretend the shader will not load
+
+static func _grey_kit_mat() -> StandardMaterial3D:
+    var g := StandardMaterial3D.new()
+    g.albedo_color = Color(0.46, 0.46, 0.48)
+    g.roughness = 0.95
+    g.metallic = 0.0
+    return g
+
+static func _kit_mat(tint: Color, steel: bool, ground := false) -> Material:
     var key := "%s|%s|%s|%s" % [_look_theme, tint.to_html(), steel, ground]
     if _kit_mats.has(key):
         return _kit_mats[key]
     var L: Dictionary = LOOK.get(_look_theme, LOOK["_"])
+    var sh = null if force_kit_fail else load("res://assets/shaders/dungeon_kit.gdshader")
+    var atlas = null if force_kit_fail else load(KIT_ATLAS)
+    if sh == null or atlas == null:
+        # L41: the guard. A ShaderMaterial with a null shader is the magenta - so never make one.
+        kit_fail_count += 1
+        push_warning("L41: dungeon kit material unavailable (shader %s, atlas %s) - falling back to grey stone"
+            % ["null" if sh == null else "ok", "null" if atlas == null else "ok"])
+        var g := _grey_kit_mat()
+        _kit_mats[key] = g
+        return g
     var m := ShaderMaterial.new()
-    m.shader = load("res://assets/shaders/dungeon_kit.gdshader")
-    m.set_shader_parameter("albedo_tex", load(KIT_ATLAS))
+    m.shader = sh
+    m.set_shader_parameter("albedo_tex", atlas)
     m.set_shader_parameter("tint", tint)
     m.set_shader_parameter("pbr_map", _pbr_map(steel))
     m.set_shader_parameter("stone_n", load(MK_TEX + "T_Plaster_Normal.png"))

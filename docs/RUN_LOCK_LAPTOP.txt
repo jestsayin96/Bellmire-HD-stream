@@ -28,10 +28,19 @@ BODY's speed and Nightwing's canon 6.6 has never reached the mover. A unique wit
 does set it. Fixing it for plain lords would change how EVERY lord moves mid-stream-cycle, so it is
 raised here rather than slipped into L29b. Supervisor's call.
 
-A PRE-EXISTING BUG THE SOAK FOUND AND I FIXED (my file): delve.gd _loot formatted every "cleared" line
-with % floor_no, but a written line need not carry a %d and one does not ("Bellmire gets a tale; the
-scar gets nothing"), so it threw a String formatting error every time that line came up. The content
-file was not at fault and was not touched.
+A PRE-EXISTING BUG THE SOAK FOUND AND I FIXED (my file, commit 4dc3172) - and it was TWO sites, not the
+one I first reported: delve.gd formatted the writer's lines with arguments the code assumed were wanted,
+in _loot ("cleared", one arg) and in start() ("descend", two). A written line need not carry those
+tokens and several do not ("Bellmire gets a tale; the scar gets nothing"; "<who> descend into the dark,
+and the dark does not object"), so it threw a String formatting error and THE WHOLE LINE WAS LOST.
+That is not log noise - it is Chronicle text going missing ON STREAM at the two most frequent beats
+there are, every descent and most floors cleared, for as long as those lines have been in the file.
+_fmt_line() now formats only when the line's own token count matches what the code supplies.
+The content file was not at fault and was not touched.
+VERIFIED: _delve_test 0 formatting errors (it threw on every run before), _l2_test OK with its four
+per-lord errors gone, _l29b_test OK (23 checks) with the descend line now actually reaching the feed.
+NOTE FOR THE SUPERVISOR: any other _say(_pick_line(...) % ...) in files I do NOT own is the same bug
+waiting to happen. I checked only delve.gd, which is mine.
 
 WHAT IS LEFT THAT IS LAPTOP-OWNED: L29c (set-piece encounters), L56 (delve-heavy soak).
 L30a-c and L31 lean on data/items.json and HUD/UI files that belong to OTHER workers now, so they

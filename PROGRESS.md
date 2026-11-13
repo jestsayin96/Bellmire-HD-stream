@@ -3275,3 +3275,38 @@ all four keys it is read for, so that path is safe too.
   errors/nulls; L25_TEST OK 13/13 with 0 stuck delvers (floorgen changed, so the geometry suite matters).
   _kit_mat's return type widened from ShaderMaterial to Material (it can now return a
   StandardMaterial3D); its single caller infers the type, so nothing else needed touching.
+
+## L-cycle 133 - L42 the dungeon stops being a nightclub (laptop jestai, 2026-11-13) - L42 DONE
+MEASURED, NOT EYEBALLED. I scored every biome by sat x the summed HSV saturation of its ambient, key,
+fill and boss colours, so the ones to pull down were chosen on a number rather than on which screenshot
+bothered me. Worst first: firepit 2.94, treasury 2.74, workshop 2.33, mess 2.32, grassland 2.10, flooded
+2.01, wood 1.86, confection 1.59 ... fogbound 0.30. Firepit came out worst, which is one of the two
+floors Mr. E named, and the BOSS accent colours were the most saturated things in the whole table
+(0.62-0.94) - those are the pink/green/cyan he is seeing.
+- data/biomes.json, 48 values pulled down by a one-shot migration that edited the RAW TEXT so the file
+  keeps its one-line-per-biome layout (re-serialising the JSON would have reflowed the whole thing and
+  made the diff unreadable for the next person): ambient saturation capped at 0.34, key at 0.20 (a key
+  light should be near-white with a tint, not a colour), fill at 0.26, boss at 0.62, glow at 0.55 (was up
+  to 1.00) and the colour-grade sat at 1.05 (was up to 1.25).
+- EMISSION, which the item names directly: the L28d scar-veins were emission_energy 2.4 and read as neon
+  piping rather than cracks in stone - now 1.1. dungeon_parts' emitters 3.0 -> 1.7, 4.0 -> 2.2, and the
+  scatter range 1.0-2.6 -> 0.7-1.5. The brazier's ember bed 3.0 -> 2.2.
+- WHAT I DELIBERATELY LEFT ALONE: the flame itself (a small unshaded sphere at emission 8.0). The item
+  asks for "dark stone with SOURCES OF LIGHT, not a nightclub" - a fire is the source, and dimming it
+  would have missed the point. The nightclub came from the room being washed, not from the fire being
+  bright.
+- Per-theme shot sheet at 1920x1080 re-rendered (tools/_l28_shot.gd L28_SET=all, 14 biomes, 28 shots).
+  Before and after, plus the firepit room close up, are in renders/cycles/20261113_l42/. The firepit
+  before is every surface drenched in saturated red; after, the brickwork, the cream banners and the
+  shields all read, with the lava pool as the light source. No biome has gone washed-out grey - each
+  keeps its own character, just as a tint on stone rather than a colour cast over everything.
+  NOTE ON THE COMPARISON: the shot tool generates a fresh floor each run, so the before and after are not
+  the same geometry. Compare the LIGHTING character, not the layout.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1398 (MON_INPROP 0 of 110); _delve_test 0
+  errors/nulls; L41_TEST OK (the material guard from last cycle still holds with every biome retuned);
+  L25_TEST OK 13/13 with 0 stuck (dungeon_parts and dungeon_hd changed, so the geometry suite matters).
+  L28's committed reference renders were overwritten by the shot run and RESTORED with git checkout.
+- THE SECOND HALF OF THE DONE CRITERION IS NOT MINE: "a per-theme shot sheet at 1080p that reads as lit
+  stone; MR. E'S EYE ON IT". The sheet is rendered and in the repo. Whether it now reads right to him is
+  his call, and every number I moved is a cap in one place - the caps are at the top of the migration
+  note above, and data/biomes.json before this cycle is recoverable from git if he wants any of it back.

@@ -184,7 +184,7 @@ func _decals() -> void:
             "veins":
                 d.modulate = SCAR_VEIN
                 d.texture_emission = _decal_tex("veins_glow")
-                d.emission_energy = 2.4
+                d.emission_energy = 1.1          # L42: was 2.4 - the L28d veins read as neon piping, not cracks
             "crack":
                 d.modulate = Color(1, 1, 1, 0.85)
             "soot":

@@ -79,7 +79,7 @@ static func embers(col: Color, amount: int, radius: float, life := 2.5) -> GPUPa
     sm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
     sm.emission_enabled = true
     sm.emission = col
-    sm.emission_energy_multiplier = 3.0
+    sm.emission_energy_multiplier = 1.7      # L42: was 3.0
     s.material = sm
     gp.draw_pass_1 = s
     gp.visibility_aabb = AABB(Vector3(-radius - 1, -1, -radius - 1), Vector3(radius * 2 + 2, 8, radius * 2 + 2))
@@ -236,7 +236,7 @@ static func fire_trap() -> Node3D:
     sm.albedo_color = Color(1.0, 0.5, 0.12)
     sm.emission_enabled = true
     sm.emission = Color(1.0, 0.38, 0.06)
-    sm.emission_energy_multiplier = 4.0
+    sm.emission_energy_multiplier = 2.2      # L42: was 4.0
     s.material = sm
     f.draw_pass_1 = s
     f.position = Vector3(0, 0.1, 0)
@@ -382,7 +382,7 @@ static func scar_glass(seed_i := 1, count := 7) -> Node3D:
         m.albedo_color = c.darkened(0.3)
         m.emission_enabled = true
         m.emission = c
-        m.emission_energy_multiplier = rng.randf_range(1.0, 2.6)
+        m.emission_energy_multiplier = rng.randf_range(0.7, 1.5)   # L42: was 1.0-2.6
         m.roughness = 0.15
         cr.material_override = m
         cr.position = Vector3(rng.randf_range(-0.9, 0.9), hgt * 0.45, rng.randf_range(-0.9, 0.9))
@@ -425,7 +425,7 @@ static func brazier(col: Color, seed_i := 1) -> Node3D:
     var coal := _m(col.lerp(Color(1.0, 0.35, 0.08), 0.6), 0.0, 0.9)
     coal.emission_enabled = true
     coal.emission = col.lerp(Color(1.0, 0.35, 0.08), 0.6)
-    coal.emission_energy_multiplier = 3.0
+    coal.emission_energy_multiplier = 2.2    # L42: was 3.0 (the flame itself is left bright - it IS the light source)
     _cyl(n, 0.44, 0.06, Vector3(0, 1.13, 0), coal)
     var flame := MeshInstance3D.new()
     var fm := SphereMesh.new()

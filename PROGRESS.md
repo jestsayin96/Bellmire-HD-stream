@@ -2866,3 +2866,54 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      state, not only as something the scar inflicts. If it is not, hold scarbite back.
      OWNER: LAPTOP CODE (delve.gd / chatcmd.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## C-cycle 14 - the stream's loudest lines, widened again (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THESE: the standing backlog has now cycled once, so this run measured the files instead of
+  guessing. `misfire` was the thinnest high-frequency key in the project - 14 lines carrying EVERY
+  wild-magic failure below (L8 makes every dungeon spell a check against the scar), so viewers were
+  seeing the same fourteen sentences all stream. Barks, descend, cleared and epitaphs were next by
+  fires-per-line. The channel-point shelf got a smaller top-up alongside.
+- data/lore_lines.json (additive only):
+  - `misfire` 14 -> 30. Every new line keeps the exact format contract: %s name, %s spell, %d roll,
+    %d DC, in that order - asserted programmatically, not by eye.
+  - `barks`: +8 per key, all six - enter 32->40, lord 32->40, trap 31->39, hurt 31->39,
+    drink 31->39, misfire 31->39. Mix of flat shouts and the quoted in-character lines, matching
+    the existing distribution in each list.
+  - `epitaphs` 74 -> 96. `descend` 48 -> 66 (9 of the "%s %s" formatted kind, 9 of the plain
+    narrator kind - both forms already exist in that array). `cleared` 48 -> 66 (9 "%d" floor
+    lines, 9 plain).
+- data/items.json (additive only):
+  - `accessories` 86 -> 96. Each carries {name, slot, cost, flavour} plus EXACTLY ONE bonus from
+    the existing set {ac, hp, hit, dmg, saves, speed} - same as every entry already there. Slots
+    stay within the existing five (ring, amulet, cloak, boots, gloves); no new slot invented.
+  - `cosmetics` 169 -> 183: 4 hats, 3 banners, 7 titles. Hats and banners carry
+    {name, kind, cost, colour}; titles carry {name, kind, cost} - exactly the existing shapes.
+    No new pets, because a pet entry needs {model, scale} pointing at a real asset and the content
+    worker does not add assets.
+  - `dyes` 91 -> 101, ten more six-digit hex values in the existing flat key->hex shape.
+- NOT TOUCHED: data/bosses.json and data/potions.json (C-cycle 13 widened both; nothing thin left
+  there this run). No .gd, no .tscn, no assets, no web/, no new data files.
+- VALIDATION (python only - the content worker never runs Godot): both touched files json.load
+  clean. The edits were made as TEXT INSERTIONS against unique anchors, never a json round-trip, so
+  the hand-formatting of the files is preserved - `git diff --stat` is 169 insertions / 13
+  deletions, and all 13 "deletions" are the anchor lines re-emitted with a trailing comma.
+  A deep walk of `git show HEAD:data/items.json` and `HEAD:data/lore_lines.json` against the
+  post-edit parse returned ZERO differences: every pre-existing key present, every pre-existing
+  scalar equal, every touched array equal on its original prefix (appends only). New entries
+  asserted against the existing shapes as described above. VALIDATION OK.
+  No dungeon floor count appears anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Any picker that reads a FIXED count off these arrays (a hard-coded 14 for `misfire`, 48 for
+     `descend`/`cleared`, a head slice of `barks`) will never roll the new lines. The pickers must
+     size off the array. OWNER: LAPTOP CODE (delve.gd / chatcmd.gd for misfire+barks+descend+cleared),
+     and whoever prints epitaphs on the Guild Roll.
+  2. `descend` and `cleared` each hold BOTH a formatted kind and a plain kind. That was already true
+     before this cycle, but it is now a ~50/50 split, so a caller doing a blind `% [a, b]` on a plain
+     line will error. The caller must branch on whether the line contains a format specifier.
+     OWNER: LAPTOP CODE. Flagged here because this is the one real crash risk in the cycle.
+  3. The 10 new accessories are inert until the shop lists them and `!wear` resolves the key; the 14
+     cosmetics likewise, and the 4 new hats need `gear.gd _hat` cases exactly as L53 describes for
+     the earlier hat keys. OWNER: LAPTOP CODE (gear.gd), same item as L53.
+  4. The 10 new dyes need nothing beyond `!dye <name>` reading the dict; `dye_cost` is unchanged
+     at 25 and still flat for every colour. If dyes are ever to be priced in bands, that is a
+     supervisor decision and a future content cycle, not a silent change here.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

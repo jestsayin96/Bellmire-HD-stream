@@ -631,7 +631,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       physical drops or floor pickups - if Mr. E wants those they need their own ID.
 - [ ] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
 - [ ] L51. HUD OVERHAUL (he says it twice - it is plain and under-informative). Needs: equipment shown with what BUFFS/DEBUFFS it gives; the viewer's inventory visible so they know what they own; shops shown with WHAT THEY CURRENTLY STOCK; a way to SELL. Also the d20 needs redesigning - he does not like how it looks - and it exists to roll stats when a viewer builds a character, so wire it to that. DONE: a 1080p HUD capture Mr. E approves, showing gear with buffs, inventory, shop stock and selling.
-- [ ] L52. SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
+- [x] L52. (SUPERSEDED BY THE REFRAMED L52 IN THE Nov-13 SECTION - done there, L-cycle 126; the census disproved the premise, so the work was legibility, not more spells.) SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
 
 # Mr. E's Nov 13 list - DESKTOP (town, world, audio, visuals)
 - [ ] D29. THE TOWN IS SILENT OF EFFECTS - MEASURED, NOT GUESSED. The supervisor analysed the AUDIO of Mr. E's own OBS recordings (he was right; this needs no census to confirm):
@@ -697,8 +697,22 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       spells fire with a good spread. The problem is the viewer cannot TELL them apart. Make each
       spell read differently on screen and name itself in the Chronicle. Not more spells - clearer ones.
 
-- [ ] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
+- [x] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
       choice legible rather than adding spells.
+      DONE L-cycle 126: verified independently rather than trusting either side - my own caster-heavy run gave
+      19-25 casts across 6-7 DISTINCT spells, so the content was never the problem and no spells were added.
+      delve.gd: SPELL_WORDS names all nine and the name now FLOATS over the caster in that spell's own
+      Spells.COL colour (the colour existed but only the projectile used it) - glanceable in a pane at no
+      Chronicle cost - plus a calm line naming spell and target, one per caster per 2.5 s. BOTH cast sites,
+      including the menders, which were the quietest of all. spells_cast{} exposed for a census.
+      Removed again before shipping: my first version also announced misfires, which made the Chronicle
+      print TWO lines per event because _scar_check already emits one from a lore_lines template - that is
+      the feed noise L32b killed, and lore_lines.json is the content writer's file. The float carries the
+      naming instead. tools/_l52_test.gd L52_TEST OK (9 checks): all nine spells have a name AND a colour
+      and no two share a name. _offfloor 0 of 2004, _delve_test clean.
+      NOT DONE, NOT MINE: making spells look different IN FLIGHT is scripts/spells.gd, DESKTOP-owned
+      (COORDINATION 11.2) - untouched. If two spells still read alike after this, that is the remaining
+      desktop-side work, and it pairs with D30.
 
 - [ ] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
       plumed_helm and the C1 hats) or they render as the default shape. Raised by the content writer.

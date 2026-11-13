@@ -2394,3 +2394,50 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
 - FOR THE SUPERVISOR: the census tool tools/_d28_census.gd is DESKTOP-owned, so the laptop has not touched
   it. Delve.chests_found and Delve.chests_empty are there for it to read whenever the desktop next edits
   it - that is what "census shows chests spawned/opened" needs on their side.
+
+## L-cycle 126 - L52 spells name themselves (laptop jestai, 2026-11-13) - L52 DONE
+VERIFIED INDEPENDENTLY, not taken on trust from either direction. Mr. E reported "only one spell"; the D28
+census measured nine. I ran my own caster-heavy delve rather than believe either: 19-25 casts a run across
+6-7 DISTINCT spells (bolt, chain, fire, frost, heal, renew, smite seen across runs). The content is not
+missing and no spells were added. The viewer simply could not TELL them apart - that is the whole item.
+- scripts/delve.gd: every cast now names itself. SPELL_WORDS gives all nine a readable word, and the name
+  floats over the caster's head in that spell's OWN colour (Spells.COL, which already existed and was only
+  used by the projectile) - that is the part that reads at a glance in a pane, with no Chronicle cost at
+  all. A calm line also names the spell and its target, rate-limited to one per caster per SPELL_SAY_EVERY
+  2.5 s so a long fight does not become a wall of casting chatter.
+- Both cast sites are covered: the offensive one AND the menders, which were the quietest of the lot - a
+  cleric warding someone produced nothing a viewer could see or read before.
+- spells_cast{} is exposed on Delve so a census can count the spread without re-deriving it.
+- A NOISE BUG I INTRODUCED AND THEN REMOVED, worth recording: my first version also announced scar
+  misfires ("X reaches for Bolt - the scar twists it into Heal"). The test output showed the Chronicle
+  printing TWO lines for one event, because _scar_check ALREADY emits a misfire line from a lore_lines
+  template, gated to one per caster per floor. Two lines for one beat is exactly the feed noise L32b's
+  pacing work existed to kill, and lore_lines.json is the CONTENT writer's file - not mine to reword. So
+  the misfire Chronicle line is left to them and the float carries the naming instead: it shows what the
+  spell BECAME, in that spell's colour. Legibility gained, no extra line spent.
+- tools/_l52_test.gd (NEW, headless): A verifies the premise with its own run and requires >= 3 distinct
+  spells; B requires every spell that fired AND all nine in Spells.ORDER to have both a name and a colour,
+  and that no two share a name (they must be tellable apart); C checks a scar misfire really does swap one
+  spell for another and that both sides can be named. L52_TEST OK, 9 checks, 0 failed.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 2004 (MON_INPROP 0 of 140); _delve_test 0 errors/nulls.
+- WHAT I DID NOT DO, and who owns it: making each spell LOOK different in flight - the projectile mesh,
+  trail and impact - lives in scripts/spells.gd, which is DESKTOP-owned under COORDINATION 11.2. I have not
+  touched it. Spells.COL already distinguishes them by colour and I have now surfaced that colour in the
+  float, which is the strongest legibility available from inside my own files. If Mr. E still cannot tell
+  two spells apart in flight after this, the remaining work is desktop-side in spells.gd (and it pairs with
+  D30, the town-side half of this same finding).
+- AN L49 REGRESSION OF MINE, CAUGHT HERE AND FIXED HERE. _l25_test failed this cycle with one stuck
+  delver: "floor 10 Bree at (-2.5, -400.0, -9.4) (search)". The state name gives it away - that is L49's
+  chest-search, not anything to do with L52. A chest can be placed somewhere the party cannot actually
+  path to, and _search_tick then ground the seeker against it for the whole 30 s window while the rest of
+  the party stood waiting. Last cycle I wrote in this file that the chests were "the first suspect if the
+  watchdog count climbs"; it climbed, and they were.
+  FIX: an unreachable chest is now ABANDONED - stuck_on(b, 2.0) marks it searched, clears the progress
+  record, counts chests_unreachable and says "X cannot get to the chest and leaves it" - and the whole
+  searching phase is capped at 12 s instead of 30. A chest is a nice-to-have; it is never a reason to pin
+  a delver to the floor. _l25_test back to OK 13/13 with 0 stuck.
+  WORTH KNOWING: this failure is INTERMITTENT - the same test passed twice before it failed once, so a
+  single green run is not proof. I re-ran it rather than declare it fixed off one: it passed TWICE
+  consecutively after the fix, 0 stuck both times. If a future cycle sees a stuck delver in state "search"
+  again, the unreachable-chest path is where to look first, and the honest answer may be to stop placing
+  chests in cells with no route to them at all (dungeon_hd._dress) rather than recovering after the fact.

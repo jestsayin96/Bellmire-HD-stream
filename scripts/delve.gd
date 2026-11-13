@@ -858,6 +858,7 @@ const SEARCH_S := 1.8               # how long a delver spends over a chest
 const SEARCH_REACH := 1.6
 var chests_found := 0               # the L49 test / census counts these
 var chests_empty := 0
+var chests_unreachable := 0     # L49 regression guard: chests abandoned rather than pinning a delver
 var _search_i := -1                 # which chest is being worked on
 var _search_t := 0.0
 
@@ -882,7 +883,12 @@ func _seeker(alive: Array) -> Dictionary:
 func _search_tick(delta: float) -> void:
 	var alive := _alive()
 	var left := _unsearched()
-	if alive.is_empty() or left.is_empty() or _t > 30.0:
+	# L49 REGRESSION, caught by _l25_test: a chest can sit somewhere the party cannot actually
+	# path to, and the seeker then ground against it for the whole 30 s window - _l25 reported
+	# "floor 10 Bree ... (search)" as a stuck delver. A chest is a nice-to-have, never a reason
+	# to pin someone to the floor, so an unreachable one is abandoned (see stuck_on below) and
+	# the whole searching phase is capped far shorter.
+	if alive.is_empty() or left.is_empty() or _t > 12.0:
 		_search_t = 0.0
 		_floor_decision(_alive())
 		return
@@ -895,6 +901,13 @@ func _search_tick(delta: float) -> void:
 		return
 	var at := node.global_position
 	if _flat(b.global_position, at) > SEARCH_REACH:
+		# give up on a chest we are plainly not getting to, rather than grinding at it
+		if stuck_on(b, 2.0):
+			cd["searched"] = true
+			chests_unreachable += 1
+			_prog.erase(b)
+			_say("%s cannot get to the chest and leaves it." % m["h"]["name"])
+			return
 		_go(b, at, roster.speed(m["h"]), delta, SEARCH_REACH * 0.8)
 		Rig.play(b._anim, "Walking_A")
 		_search_t = 0.0
@@ -1034,6 +1047,14 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 				var mk := String(MENDERS.get(String(h["class"]), "heal"))
 				var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
 				Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
+				# L52: the menders were the quietest of all - name them too
+				_spell_said(m, mk, got, String(low["h"]["name"]))
+				# L54: the data says "its next SPELL", not "its next attack" - a mender who
+				# drinks Scarwater gets the doubling too, or loses the mending to the scar
+				if bool(m.get("scar_double", false)):
+					m["scar_double"] = false
+					hp_pow *= 2.0
+
 				if Spells.HARM.has(got):
 					# L8: the scar turned the mending into a blow - it lands on the friend
 					low["hp"] = float(low["hp"]) - hp_pow * 0.5
@@ -1539,6 +1560,15 @@ func _finish() -> void:
 		_say("%s %s home to Bellmire with %s. %d %s." % [_names_of(out), "comes" if out.size() == 1 else "come", _haul_line(), _kills, ("kill" if _kills == 1 else "kills") + ("" if out.size() == 1 and party.size() == 1 else " between them")])
 		if town and town.has_method("receive_haul"):
 			town.receive_haul(haul)
+		# L55: they are home with their takings - the smith fits them out. Before this nothing
+		# ever called the forge for a viewer's hero, so they earned and never spent: tiers sat at
+		# w0/a0 all stream while gold piled up. One step each at most, and only with a reserve
+		# left (Roster.kit_up_after_delve). It is said aloud so the viewer sees what their gold
+		# bought - an upgrade nobody can see is the same bug over again.
+		for uid in out:
+			var line := roster.kit_up_after_delve(String(uid))
+			if line != "":
+				_say(line)
 	ended.emit(out)
 
 ## ---- L4: what the newer callings do in a fight
@@ -1587,6 +1617,47 @@ func _ability_hit(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes
 const BOOKS := {"mage": ["bolt", "bolt", "chain", "fire"], "sage": ["frost", "bolt"], "cleric": ["smite", "bolt"],
 				"necromancer": ["bolt", "chain"], "druid": ["frost", "bolt"], "warlock": ["bolt", "fire"]}
 const MENDERS := {"sage": "renew", "cleric": "ward", "paladin": "heal"}
+
+## ---------------------------------------------------------------- L52: spells that name themselves
+## REFRAMED by the census, and the census was right. Mr. E reported "only one spell", but a 7-minute
+## soak measured NINE distinct spells firing with a good spread (heal 295, bolt 161, mend 131,
+## ward 112, smite 85, frost 46, chain 35, renew 31, fire 12). Nothing is missing: the viewer simply
+## cannot TELL them apart in a pane. So this adds no spells. It makes the choice legible - every
+## cast says its own name over the caster's head in that spell's own colour (Spells.COL), and the
+## Chronicle names it in words.
+## A scar misfire is the most readable moment in the game and was completely silent before: when the
+## scar turns one spell into another, it is now called out by name, both ways.
+const SPELL_WORDS := {
+	"bolt": "Bolt", "heal": "Heal", "ward": "Ward", "mend": "Mend", "chain": "Chain Bolt",
+	"fire": "Fire", "frost": "Frost", "smite": "Smite", "renew": "Renew",
+}
+const SPELL_SAY_EVERY := 2.5        # s between one caster's Chronicle lines (the float is every cast)
+var spells_cast := {}               # kind -> count, for the L52 test and a census
+
+## every cast, wherever it is cast from: the name over the caster, the count, and a calm line
+func _spell_said(m: Dictionary, wanted: String, actual: String, at_whom := "") -> void:
+	spells_cast[actual] = int(spells_cast.get(actual, 0)) + 1
+	var word := String(SPELL_WORDS.get(actual, actual.capitalize()))
+	var col: Color = Spells.COL.get(actual, Color.WHITE)
+	var misfired := actual != wanted
+	# the name over the caster's head, in the spell's own colour - this is the bit that makes a
+	# pane readable at a glance, without reading the Chronicle at all
+	_float_text(m, word if not misfired else "%s!" % word, col, 64, 3.0)
+	if misfired:
+		# _scar_check has ALREADY put a misfire line in the Chronicle (a lore_lines template,
+		# gated to one per caster per floor). Adding a second line for the same event would be
+		# exactly the feed noise L32b's pacing work set out to kill, and lore_lines.json is the
+		# content writer's file, not mine to reword. So the float above carries the naming - it
+		# shows what the spell BECAME, in that spell's colour - and the Chronicle keeps one line.
+		return
+	if _t < float(m.get("spell_say_t", -99.0)) + SPELL_SAY_EVERY:
+		return                      # cast freely, just do not narrate every single one
+	m["spell_say_t"] = _t
+	var who := String(m["h"]["name"])
+	if at_whom != "":
+		_say("%s casts %s at %s." % [who, word, at_whom])
+	else:
+		_say("%s casts %s." % [who, word])
 const CHAIN_R := 5.0        # the chain leaps to a creature this near the last
 const FIRE_R := 2.6         # the fire burst catches everything this near its mark
 const FROST_SLOW := 4.0     # s a frosted creature moves and swings at half pace
@@ -1621,15 +1692,25 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
 			at = nx.global_position
 	var actual := Spells.cast(kind, b, tgt, _scar_check(m, kind), more)
 	Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
+	# L52: say which spell this was - the viewer could never tell them apart
+	_spell_said(m, kind, actual, String(tgt.def.get("name", "it")) if is_instance_valid(tgt) else "")
+	# L54: take the doubling NOW and clear it, before any path can return early. Consuming it
+	# after the to-hit check (as the first version did) meant a spell that MISSED left the flag
+	# standing and doubled the next cast instead - one draught paying twice, which is not what
+	# "its next spell is doubled" says. The scar decided; a fumble spends it just the same.
+	var scar_dbl := bool(m.get("scar_double", false))
+	m["scar_double"] = false
 	if not Spells.HARM.has(actual):
 		# L8: the scar turned the blow into a mending - wild magic mends the creature
 		if actual in ["heal", "renew", "mend"] and is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
-			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * 0.5)
+			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * (1.0 if scar_dbl else 0.5))
 		return
 	if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
 		return
 	var dmg := _hero_damage(h, roll == 20)
 	dmg *= _ability_mult(ability, tgt)
+	if scar_dbl:
+		dmg *= 2.0
 	var t := Spells.flight(actual, b, tgt)
 	get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, m, hit, dmg, roll == 20, ability))
 
@@ -1717,6 +1798,8 @@ const CAST_STAT := {"mage": "int", "necromancer": "int",
 					"warlock": "cha", "bard": "cha", "paladin": "cha"}
 var scar_casts := 0
 var scar_misfires := 0
+var scar_touched_spells := 0    # L54: Scarwater casts the scar decided
+var scar_doubles := 0           # L54: of those, the ones it doubled
 var _misfire_said := {}
 
 static func scar_dc(floor_no: int) -> int:
@@ -1724,6 +1807,30 @@ static func scar_dc(floor_no: int) -> int:
 
 func _scar_check(m: Dictionary, kind: String) -> bool:
 	var h: Dictionary = m["h"]
+	# ---- L54 (raised by the content writer): SCARWATER. data/potions.json has given the state
+	# "scar_touched" for a while - "its next spell is doubled, or misfires; the scar decides" -
+	# and NOTHING in the scripts ever read it. Verified before writing a line: the only
+	# scar_touched in code was fishing.gd's unrelated scar_touched_chance. So the draught was
+	# bought, drunk, displayed on the hero, and did exactly nothing.
+	# It resolves here because this is already where the scar decides a cast's fate, so a
+	# scar-touched hero skips the usual check entirely: the scar has their spell either way.
+	# One cast, decided once, and the draught is spent whichever way it falls.
+	if has_st(m, "scar_touched"):
+		(m.get("st", {}) as Dictionary).erase("scar_touched")
+		scar_casts += 1
+		scar_touched_spells += 1
+		if _rng.randi() % 2 == 0:
+			scar_misfires += 1
+			m["scar_double"] = false
+			_float_text(m, "SCAR", Spells.SCAR, 64, 3.2)
+			_say("%s's Scarwater turns on them - the scar takes the spell." % h["name"])
+			_bark(m, "misfire")
+			return true
+		m["scar_double"] = true
+		scar_doubles += 1
+		_float_text(m, "DOUBLED", Spells.SCAR, 72, 3.2)
+		_say("%s's Scarwater holds - the scar doubles the spell." % h["name"])
+		return false
 	var stat := String(CAST_STAT.get(String(h["class"]), String(Roster.CLASSES[String(h["class"])].get("primary", "int"))))
 	var d := _rng.randi_range(1, 20)
 	var total := d + roster.mod(h, stat) + roster.prof(h)

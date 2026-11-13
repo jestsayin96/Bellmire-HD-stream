@@ -693,6 +693,93 @@ static func _hat(model_root: Node, sk: Skeleton3D, key: String) -> void:
             hat.mesh = tm
             hat.position = Vector3(0, 0.82, 0)
             return
+        # ---- L53: the content writer's hats. Every one of these had NO case, so it fell
+        # through to a bare CylinderMesh at its default size - a great pale cone on the head.
+        # Each gets its own silhouette, because the colour alone (which the data supplies) is
+        # not enough to tell a coif from a kettle-helm at pane distance.
+        "guild_hood", "mire_hood":
+            # a hood: close crown with a drape down the back of the neck
+            crown.top_radius = 0.40
+            crown.bottom_radius = 0.52
+            crown.height = 0.44
+            hat.position = Vector3(0, 0.92, 0)
+            var drape := MeshInstance3D.new()
+            var dm := BoxMesh.new()
+            dm.size = Vector3(0.62, 0.52, 0.18)
+            drape.mesh = dm
+            drape.material_override = _mat_c(col.darkened(0.12), 0.0)
+            drape.position = Vector3(0, -0.30, -0.26)
+            hat.add_child(drape)
+        "bell_coif":
+            # a coif sits ON the skull - a squashed dome, no brim, no crown above it
+            var sm := SphereMesh.new()
+            sm.radius = 0.52
+            sm.height = 0.78
+            hat.mesh = sm
+            hat.material_override = _mat_c(col, 0.25)
+            hat.position = Vector3(0, 0.84, 0)
+            return
+        "watch_helm":
+            # a kettle-helm: shallow steel dome under a wide flat brim
+            crown.top_radius = 0.30
+            crown.bottom_radius = 0.50
+            crown.height = 0.30
+            hat.material_override = _mat_c(col, 0.75)
+            hat.position = Vector3(0, 0.90, 0)
+            _brim(hat, 0.82, col.darkened(0.15))
+        "miller_cap":
+            # a soft flat cap with a short peak over the brow
+            crown.top_radius = 0.46
+            crown.bottom_radius = 0.50
+            crown.height = 0.18
+            hat.position = Vector3(0, 0.88, 0)
+            var peak := MeshInstance3D.new()
+            var pk := BoxMesh.new()
+            pk.size = Vector3(0.56, 0.05, 0.34)
+            peak.mesh = pk
+            peak.material_override = _mat_c(col.darkened(0.15), 0.0)
+            peak.position = Vector3(0, -0.07, 0.34)
+            hat.add_child(peak)
+        "ford_circlet":
+            # a circlet - thinner than the ash crown, and it sits lower
+            var cm2 := TorusMesh.new()
+            cm2.inner_radius = 0.50
+            cm2.outer_radius = 0.545
+            hat.mesh = cm2
+            hat.material_override = _mat_c(col, 0.7)
+            hat.position = Vector3(0, 0.80, 0)
+            return
+        "guard_helm", "plumed_helm":
+            # a closed helm with a nasal bar; the plumed one wears a crest as well
+            crown.top_radius = 0.44
+            crown.bottom_radius = 0.52
+            crown.height = 0.52
+            hat.material_override = _mat_c(col, 0.8)
+            hat.position = Vector3(0, 0.94, 0)
+            var nasal := MeshInstance3D.new()
+            var nm := BoxMesh.new()
+            nm.size = Vector3(0.09, 0.34, 0.06)
+            nasal.mesh = nm
+            nasal.material_override = _mat_c(col.darkened(0.2), 0.8)
+            nasal.position = Vector3(0, -0.22, 0.49)
+            hat.add_child(nasal)
+            if key == "plumed_helm":
+                var plume := MeshInstance3D.new()
+                var qm := PrismMesh.new()
+                qm.size = Vector3(0.14, 0.62, 0.42)
+                plume.mesh = qm
+                plume.material_override = _mat_c(Color(0.92, 0.88, 0.82), 0.0)
+                plume.position = Vector3(0, 0.46, -0.04)
+                hat.add_child(plume)
+        _:
+            # L53: a hat key with no case of its own must still read as a HAT. Before this the
+            # fall-through left CylinderMesh at its defaults (a 2 m cone), so every hat the
+            # content writer adds broke the model until someone noticed. A plain soft cap is a
+            # dull but honest default, and new keys now degrade instead of breaking.
+            crown.top_radius = 0.44
+            crown.bottom_radius = 0.52
+            crown.height = 0.30
+            hat.position = Vector3(0, 0.90, 0)
     hat.mesh = crown
 
 static func _brim(hat: MeshInstance3D, r: float, col: Color) -> void:

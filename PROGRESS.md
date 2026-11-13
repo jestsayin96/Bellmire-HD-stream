@@ -2643,3 +2643,164 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   4. Titles are text-only. If the HUD nameplate has a fixed width, "Favoured of the Duchess" and
      "Clapperless Bell Banner" are the longest strings the catalogue now contains. OWNER: DESKTOP HUD.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+## L-cycle 126 - L52 spells name themselves (laptop jestai, 2026-11-13) - L52 DONE
+VERIFIED INDEPENDENTLY, not taken on trust from either direction. Mr. E reported "only one spell"; the D28
+census measured nine. I ran my own caster-heavy delve rather than believe either: 19-25 casts a run across
+6-7 DISTINCT spells (bolt, chain, fire, frost, heal, renew, smite seen across runs). The content is not
+missing and no spells were added. The viewer simply could not TELL them apart - that is the whole item.
+- scripts/delve.gd: every cast now names itself. SPELL_WORDS gives all nine a readable word, and the name
+  floats over the caster's head in that spell's OWN colour (Spells.COL, which already existed and was only
+  used by the projectile) - that is the part that reads at a glance in a pane, with no Chronicle cost at
+  all. A calm line also names the spell and its target, rate-limited to one per caster per SPELL_SAY_EVERY
+  2.5 s so a long fight does not become a wall of casting chatter.
+- Both cast sites are covered: the offensive one AND the menders, which were the quietest of the lot - a
+  cleric warding someone produced nothing a viewer could see or read before.
+- spells_cast{} is exposed on Delve so a census can count the spread without re-deriving it.
+- A NOISE BUG I INTRODUCED AND THEN REMOVED, worth recording: my first version also announced scar
+  misfires ("X reaches for Bolt - the scar twists it into Heal"). The test output showed the Chronicle
+  printing TWO lines for one event, because _scar_check ALREADY emits a misfire line from a lore_lines
+  template, gated to one per caster per floor. Two lines for one beat is exactly the feed noise L32b's
+  pacing work existed to kill, and lore_lines.json is the CONTENT writer's file - not mine to reword. So
+  the misfire Chronicle line is left to them and the float carries the naming instead: it shows what the
+  spell BECAME, in that spell's colour. Legibility gained, no extra line spent.
+- tools/_l52_test.gd (NEW, headless): A verifies the premise with its own run and requires >= 3 distinct
+  spells; B requires every spell that fired AND all nine in Spells.ORDER to have both a name and a colour,
+  and that no two share a name (they must be tellable apart); C checks a scar misfire really does swap one
+  spell for another and that both sides can be named. L52_TEST OK, 9 checks, 0 failed.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 2004 (MON_INPROP 0 of 140); _delve_test 0 errors/nulls.
+- WHAT I DID NOT DO, and who owns it: making each spell LOOK different in flight - the projectile mesh,
+  trail and impact - lives in scripts/spells.gd, which is DESKTOP-owned under COORDINATION 11.2. I have not
+  touched it. Spells.COL already distinguishes them by colour and I have now surfaced that colour in the
+  float, which is the strongest legibility available from inside my own files. If Mr. E still cannot tell
+  two spells apart in flight after this, the remaining work is desktop-side in spells.gd (and it pairs with
+  D30, the town-side half of this same finding).
+- AN L49 REGRESSION OF MINE, CAUGHT HERE AND FIXED HERE. _l25_test failed this cycle with one stuck
+  delver: "floor 10 Bree at (-2.5, -400.0, -9.4) (search)". The state name gives it away - that is L49's
+  chest-search, not anything to do with L52. A chest can be placed somewhere the party cannot actually
+  path to, and _search_tick then ground the seeker against it for the whole 30 s window while the rest of
+  the party stood waiting. Last cycle I wrote in this file that the chests were "the first suspect if the
+  watchdog count climbs"; it climbed, and they were.
+  FIX: an unreachable chest is now ABANDONED - stuck_on(b, 2.0) marks it searched, clears the progress
+  record, counts chests_unreachable and says "X cannot get to the chest and leaves it" - and the whole
+  searching phase is capped at 12 s instead of 30. A chest is a nice-to-have; it is never a reason to pin
+  a delver to the floor. _l25_test back to OK 13/13 with 0 stuck.
+  WORTH KNOWING: this failure is INTERMITTENT - the same test passed twice before it failed once, so a
+  single green run is not proof. I re-ran it rather than declare it fixed off one: it passed TWICE
+  consecutively after the fix, 0 stuck both times. If a future cycle sees a stuck delver in state "search"
+  again, the unreachable-chest path is where to look first, and the honest answer may be to stop placing
+  chests in cells with no route to them at all (dungeon_hd._dress) rather than recovering after the fact.
+
+## L-cycle 127 - L55 forging now actually reaches a viewer's hero (laptop jestai, 2026-11-13) - L55 DONE
+MEASURED BEFORE CHANGING ANYTHING, and NEITHER of the supervisor's two candidates was the cause:
+- "forging never raises the tier" - FALSE. buy_weapon/buy_armour work perfectly: a probe with gold in
+  hand went w0 -> w1 and a0 -> a1 first try. town_tier is 4, so tier 1 is forgeable.
+- "death resets it" - FALSE as stated. kill() leaves weapon/armour on the record untouched and reroll()
+  rerolls STATS only. What IS true is that a hero who comes back is a FRESH hero (fresh() starts at
+  w0/a0, 40 gold) - but that is canon, not a bug, and the census saw w0/a0 on SURVIVORS.
+THE ACTUAL CAUSE: nothing ever CALLED the forge for a viewer's hero. The town's own band kits itself up
+in Adventurers._kit_up, but a viewer's hero only ever forged if that viewer typed !forge. So heroes
+earned and never spent - my soak reproduced it exactly: four survivors home with 69-115 gold, tier 1
+costing 52, and not one of them had climbed. The census's "17 forge lines" were refusals and flavour, not
+purchases; a hero with 0 gold gets "Pauper needs 52 gold ... you have 0" and stays at w0.
+- scripts/roster.gd: NEW kit_up_after_delve(uid) - the smith fits out a hero who comes home with coin.
+  Deliberately conservative, because this is a VIEWER'S gold and not mine to empty: at most ONE step a
+  delve, a reserve of KIT_RESERVE (3 flasks of oil) is always left so nobody is stranded without
+  re-supply money, armour first while it trails the weapon (Adventurers._kit_up's own rule), and a
+  viewer who is saving can still outpace it by hand with !forge.
+- scripts/delve.gd _finish(): survivors are fitted out when they get home, and the smith's line is SAID -
+  an upgrade nobody can see would be the same class of bug as L46 and L49.
+- tools/_l55_test.gd (NEW, headless): A proves the forge works when called and that a penniless hero is
+  REFUSED (so a "forge line" is not a purchase); B proves kill() and reroll() keep the gear and that the
+  real reset is simply coming back as a fresh hero; C runs a real delve to the end; D sends the SAME
+  heroes down a second time. L55_TEST OK, 12 checks. Measured: round 1 climbed 0 of 4, round 2 climbed
+  2-3 of 4 (Ashvein a1, Brelda w1/a1, Corrin a1 on one run) - tiers climb across a session.
+- TWO TEST BUGS OF MINE, both of which first looked like the fix had failed:
+  (1) the first soak used max_floors 8 and hit the frame cap in state "descend" - the delve never reached
+      _finish(), so the kit-up never ran. The fix was fine; the test never got to it. Shortened to 3.
+  (2) I then asserted "someone climbed" after ONE short delve. Whether anyone can afford the forge after
+      one run is loot luck (measured 0-1 of 4), so that assertion was flaky dressed up as a product
+      failure. The DONE criterion says a SOAK, and a soak is the session - the climb is now asserted
+      after the second delve, and round one only reports.
+- Also fixed while there: my first version called haggle() in the affordability pre-check AND buy_* then
+  haggled again, charging a different number than the check tested and burning a roll. It now tests the
+  un-haggled price, which is the conservative side.
+- AND AGAIN THE INDENTATION TRAP: my roster.gd block went in TAB-indented into a space-indented file and
+  every dependent script reported "Could not resolve class Roster" while naming no line in roster.gd.
+  This is the SECOND time this cycle-run (L45 was the first) - `--headless --check-only --script <file>`
+  names the line instantly. CHECK THE FILE'S INDENT STYLE BEFORE EDITING IT.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1231 (MON_INPROP 0 of 55); _delve_test 0 errors/nulls;
+  L3_TEST OK (the gear/forge suite still passes); L25_TEST OK 13/13 with 0 stuck and 0 watchdog frees.
+- FOR MR. E - A POLICY CALL, NOT A BUG: heroes now spend their own gold automatically when they come
+  home. That is the only way tiers climb without every viewer knowing !forge, but it IS their gold. If he
+  would rather viewers chose, the whole behaviour is one call in delve._finish(); if he wants them to
+  climb faster, KIT_RESERVE (36) and the one-step-a-delve cap are the dials.
+- NOTE FOR THE SUPERVISOR: scripts/adventurers.gd (which holds the NPC band's _kit_up) appears in NO
+  worker's ownership list in COORDINATION 11.2 - not the laptop's, not the desktop build's. I read it but
+  did not touch it. It needs an owner.
+
+## L-cycle 128 - L53 the content writer's hats have shapes (laptop jestai, 2026-11-13) - L53 DONE
+Raised by the content writer, and the symptom was worse than "renders as the default shape": gear.gd
+_hat() matched only four keys (wide_hat, straw_hat, feather_cap, crown_of_ash) and everything else fell
+through to `hat.mesh = crown` with CylinderMesh still at ITS OWN defaults - top 0.5, bottom 1.0, height
+2.0. That is a two-metre pale cone balanced on the hero's head, not a dull hat.
+- EIGHT keys had no case: guild_hood, mire_hood, watch_helm, miller_cap, bell_coif, ford_circlet,
+  guard_helm, plumed_helm. Each now has its own silhouette built from the kit's own primitives, because
+  the colour the data supplies is not enough to tell a coif from a kettle-helm at pane distance:
+  hoods get a close crown and a drape down the neck; bell_coif is a squashed dome on the skull with no
+  brim; watch_helm is a shallow steel dome under a wide flat brim; miller_cap is a low soft cap with a
+  peak over the brow; ford_circlet is a thinner, lower band than the ash crown; guard_helm is a closed
+  helm with a nasal bar, and plumed_helm is that plus a crest.
+- THE REAL FIX IS THE DEFAULT CASE. A named case each is only worth having until the content writer adds
+  hat number thirteen. `_:` now gives any unknown key a plain soft cap, so a new hat degrades to dull
+  instead of breaking the model and waiting for someone to notice on stream.
+- tools/_l53_test.gd (NEW, headless) is DRIVEN BY THE DATA, not by a list I typed: it reads every
+  cosmetic with kind == "hat" out of data/items.json and builds each one on a bare skeleton, so the next
+  hat added is checked automatically. It asserts every key builds a piece, that NONE is left at
+  CylinderMesh's untouched defaults (the actual bug, caught by value not by eye), that the hats are
+  tellable apart, and that an unknown key degrades. L53_TEST OK, 5 checks.
+  Measured: 12 hat keys, 11 distinct silhouettes. The one pair that shares a shape is guild_hood and
+  mire_hood - both hoods, differing by colour - which is deliberate, not an oversight.
+- data/items.json was READ, never written: it is the content writer's file (COORDINATION 11.2).
+- Regression: parse 0 SCRIPT ERROR; L3_TEST OK; _offfloor 0 of 1388 (MON_INPROP 0 of 92); _delve_test 0
+  errors/nulls. Indent style checked BEFORE editing this time (gear.gd is spaces) - the trap that cost
+  time in L45 and L55 cost nothing here.
+- NOT VERIFIED BY EYE: these are headless mesh assertions. The shapes are reasoned from primitives and
+  measured, but nobody has LOOKED at a hero wearing a plumed helm at 1080p. The laptop no longer owns the
+  UI files and this needs a hero on screen, so if a hat reads badly on stream it is a tweak to the numbers
+  in _hat, not a design question.
+
+## L-cycle 129 - L54 Scarwater finally does something (laptop jestai, 2026-11-13) - L54 DONE
+VERIFIED FIRST, as for L46/L52/L55, and the content writer's flag was exactly right. data/potions.json
+has shipped Scarwater (tier 4, 300 gold, 20 s) giving the state "scar_touched" - "its next spell is
+doubled, or misfires; the scar decides" - and the state was declared alongside it. The only scar_touched
+anywhere in scripts/ was fishing.gd's unrelated scar_touched_chance. The draught was bought, drunk, shown
+on the hero and did NOTHING.
+- scripts/delve.gd _scar_check(): a scar-touched hero now skips the usual scar roll entirely, because the
+  scar already has their spell. It decides once - half the time the spell is DOUBLED, half the time the
+  scar TAKES it (a misfire) - and the draught is spent either way. Both outcomes float over the caster in
+  the scar's own violet (Spells.SCAR) and say so in the Chronicle, so a viewer can see what 300 gold
+  bought. This hangs off the existing scar machinery rather than inventing a parallel one: _scar_check is
+  already the single place where the scar decides a cast's fate.
+- The doubling applies to MENDING as well as damage - the data says "its next SPELL", not "its next
+  attack", so a cleric who drinks it doubles the mend or loses it.
+- Counters scar_touched_spells and scar_doubles are exposed for a census.
+- A REAL BUG MY OWN TEST FOUND, before this shipped: the first version consumed the doubling AFTER the
+  to-hit check in _cast_at. A spell that MISSED therefore left the flag standing and doubled the NEXT
+  cast - one 300-gold draught paying twice, which is not what "its next spell is doubled" says. The
+  doubling is now taken and cleared at the top of _cast_at, before any path can return early: the scar
+  decided, and a fumble spends it just the same. I only noticed because an assertion about the COUNTER
+  disagreed with the flag, which is a good argument for counting things the test can see.
+- tools/_l54_test.gd (NEW, headless): A re-reads potions.json so the test tracks the DATA rather than my
+  memory of it; B drinking applies the state; C drives 60 scar-touched casts and requires BOTH outcomes,
+  that every cast is decided, that the state NEVER lingers (otherwise one draught buys a doubled spell
+  every cast for 20 s), and that the counters agree; D a hero without the draught is untouched.
+  L54_TEST OK, 10 checks. Measured: 28 doubled / 32 taken of 60, 0 lingered.
+- A TEST BUG OF MINE: my fake party dict had no "body" key, so drink() and _float_text() threw. A real
+  party member always has one - I fixed the harness rather than loosening the product code to suit it.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1430 (MON_INPROP 0 of 110); _delve_test 0
+  errors/nulls; L52_TEST OK (the spell-naming work still passes with the scar path changed); L25_TEST OK
+  13/13 with 0 stuck delvers.
+- data/potions.json was READ, never written - the content writer's file (COORDINATION 11.2).
+- FOR MR. E: Scarwater is now a real gamble - 300 gold for a coin-flip between a doubled spell and losing
+  the cast outright. That is what the flavour text promised ("it cuts both ways, and it knows which"). If
+  he wants the odds tilted, the coin flip is one line in _scar_check.

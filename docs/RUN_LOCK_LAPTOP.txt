@@ -1,17 +1,17 @@
-IDLE 2026-11-13 04:05 - L49 DONE and pushed (L-cycle 125). Next in the laptop queue: L52 (spell variety -
-VERIFY against the census FIRST; L46 and L49 both showed the report and the mechanism can differ), then
-L48, L50, L41, L42, L43, L44.
-DONE THIS SESSION: L47 (72a50d7), L45 (08a4838), L46 (6225e89), L49 (094cb78). Also L34 (75a6226) and
-L39 (415885a) before they moved to the HUD worker.
-NOTES FOR MR. E (all balance, all his call): L45 - a deep lord swings 44.7 vs ~30 hp heroes;
-LORD_ATK_PER_STEP is the dial. L46 - traps are on the route and live while walking, so several a delve
-now; the dial is the trap COUNT in dungeon_hd._dress(), not the damage. L47 - a delver who breaks off
-LEAVES the fight. L49 - chests pay gold only; no per-monster drops (would need its own ID).
-HANDOVER (COORDINATION 11.4): L34 is DONE at 75a6226; L39 was built at 415885a but is left UNTICKED
-because Mr. E redefined it (smaller TYPE first, then the panel). Both are HUD-worker items. `laptop` and
-`hud-ui` both touch the same four UI files - MERGE `laptop` TO MAIN FIRST, then cut/rebase `hud-ui`.
-EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert the
-supervisor told me to keep permanently). That is L43, not a regression - never revert the assert.
-FOR THE SUPERVISOR: tools/_d28_census.gd is desktop-owned and untouched. Delve.chests_found /
-.chests_empty (L49) and Delve.decisions / .decided (L47) are exposed for the census to read.
+IDLE 2026-11-13 07:05 - L54 DONE and pushed (L-cycle 129). Both content-writer wiring flags (L53, L54)
+are now closed. Next in the laptop queue: L48 (levelling: class+species unlocks), then L50 (monster
+diversity), L41 (magenta floor), L42 (neon lighting), L43, L44. L56 (delve-heavy soak) GATES trusting
+L45 and L46.
+L54 note for Mr. E: Scarwater is now a real gamble - 300 gold for a coin flip between a doubled spell and
+losing the cast outright, which is what its flavour promised. The flip is one line in _scar_check if he
+wants the odds tilted.
+L55 note for Mr. E - A POLICY CALL: surviving heroes now spend their OWN gold at the smith on coming home
+(one step a delve, 3 flasks of oil left in the purse). KIT_RESERVE and the one-step cap are the dials.
+L53 note: the eight new hats are verified HEADLESS only. Nobody has LOOKED at a plumed helm at 1080p.
+FOR THE SUPERVISOR: scripts/adventurers.gd (the NPC band's _kit_up) is in NO worker's ownership list in
+COORDINATION 11.2 - read, not touched. Needs an owner.
+STANDING NOTE FOR MYSELF: check a file's INDENT STYLE before editing (tabs in a space file give "Could
+not resolve class X" naming no line; --check-only --script <file> finds it). No backticks in a
+double-quoted shell -m message - they command-substitute and silently blank the word.
+EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert).
 L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

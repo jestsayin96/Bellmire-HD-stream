@@ -631,7 +631,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       physical drops or floor pickups - if Mr. E wants those they need their own ID.
 - [ ] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
 - [ ] L51. HUD OVERHAUL (he says it twice - it is plain and under-informative). Needs: equipment shown with what BUFFS/DEBUFFS it gives; the viewer's inventory visible so they know what they own; shops shown with WHAT THEY CURRENTLY STOCK; a way to SELL. Also the d20 needs redesigning - he does not like how it looks - and it exists to roll stats when a viewer builds a character, so wire it to that. DONE: a 1080p HUD capture Mr. E approves, showing gear with buffs, inventory, shop stock and selling.
-- [ ] L52. SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
+- [x] L52. (SUPERSEDED BY THE REFRAMED L52 IN THE Nov-13 SECTION - done there, L-cycle 126; the census disproved the premise, so the work was legibility, not more spells.) SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
 
 # Mr. E's Nov 13 list - DESKTOP (town, world, audio, visuals)
 - [ ] D29. THE TOWN IS SILENT OF EFFECTS - MEASURED, NOT GUESSED. The supervisor analysed the AUDIO of Mr. E's own OBS recordings (he was right; this needs no census to confirm):
@@ -705,19 +705,72 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       spells fire with a good spread. The problem is the viewer cannot TELL them apart. Make each
       spell read differently on screen and name itself in the Chronicle. Not more spells - clearer ones.
 
-- [ ] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
+- [x] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
       choice legible rather than adding spells.
+      DONE L-cycle 126: verified independently rather than trusting either side - my own caster-heavy run gave
+      19-25 casts across 6-7 DISTINCT spells, so the content was never the problem and no spells were added.
+      delve.gd: SPELL_WORDS names all nine and the name now FLOATS over the caster in that spell's own
+      Spells.COL colour (the colour existed but only the projectile used it) - glanceable in a pane at no
+      Chronicle cost - plus a calm line naming spell and target, one per caster per 2.5 s. BOTH cast sites,
+      including the menders, which were the quietest of all. spells_cast{} exposed for a census.
+      Removed again before shipping: my first version also announced misfires, which made the Chronicle
+      print TWO lines per event because _scar_check already emits one from a lore_lines template - that is
+      the feed noise L32b killed, and lore_lines.json is the content writer's file. The float carries the
+      naming instead. tools/_l52_test.gd L52_TEST OK (9 checks): all nine spells have a name AND a colour
+      and no two share a name. _offfloor 0 of 2004, _delve_test clean.
+      NOT DONE, NOT MINE: making spells look different IN FLIGHT is scripts/spells.gd, DESKTOP-owned
+      (COORDINATION 11.2) - untouched. If two spells still read alike after this, that is the remaining
+      desktop-side work, and it pairs with D30.
 
-- [ ] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
+- [x] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
       plumed_helm and the C1 hats) or they render as the default shape. Raised by the content writer.
+      DONE L-cycle 128: worse than "the default shape" - the fall-through left CylinderMesh at ITS OWN
+      defaults (top 0.5, bottom 1.0, height 2.0), a two-metre cone on the head. EIGHT keys had no case:
+      guild_hood, mire_hood, watch_helm, miller_cap, bell_coif, ford_circlet, guard_helm, plumed_helm -
+      each now has its own silhouette from the kit's primitives (hoods drape, coif is a dome on the skull,
+      watch_helm a dome under a wide brim, miller_cap a peaked soft cap, ford_circlet a thin low band,
+      guard_helm a closed helm with a nasal bar, plumed_helm that plus a crest). THE REAL FIX is the new
+      wildcard default case, so hat number thirteen degrades to a plain cap instead of breaking the model.
+      tools/_l53_test.gd is DATA-DRIVEN - it reads every kind=="hat" cosmetic out of items.json and builds
+      it, so new hats are covered without touching the test. L53_TEST OK (5 checks): 12 hats, 11 distinct
+      silhouettes (guild_hood/mire_hood share one by design), none left at the defaults, unknown key
+      degrades. L3_TEST OK, _offfloor 0 of 1388, _delve_test clean. items.json read, never written.
+      NOT VERIFIED BY EYE: headless mesh assertions only - nobody has seen a plumed helm at 1080p yet.
 
-- [ ] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
+- [x] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
       nothing. Raised by the content writer.
+      DONE L-cycle 129: verified first - the flag was right. potions.json has shipped Scarwater giving
+      scar_touched for a while and the ONLY scar_touched in scripts/ was fishing.gd'"'"'s unrelated
+      scar_touched_chance, so the draught was bought, drunk, displayed and did nothing. delve.gd
+      _scar_check(): a scar-touched hero skips the usual roll because the scar already has their spell -
+      it decides once, half doubled and half taken, and the draught is spent either way. Both outcomes
+      float in the scar'"'"'s violet and reach the Chronicle. Hung off the EXISTING scar machinery rather
+      than a parallel one. Applies to MENDING too - the data says "its next SPELL", not attack.
+      A REAL BUG MY TEST FOUND BEFORE SHIPPING: the doubling was consumed AFTER the to-hit check, so a
+      spell that MISSED kept the flag and doubled the next cast - one 300-gold draught paying twice. It
+      is taken and cleared at the top of _cast_at now, before any early return. tools/_l54_test.gd
+      L54_TEST OK (10 checks) - it re-reads potions.json so it tracks the DATA, drives 60 casts needing
+      both outcomes, and asserts the state NEVER lingers. Measured 28 doubled / 32 taken / 0 lingered.
+      _offfloor 0 of 1430, _delve_test clean, L52_TEST OK. potions.json read, never written.
 
-- [ ] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
+- [x] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
       and armour tiers stayed w0/a0 for ALL SIX heroes through a 7-min soak despite 17 forge lines
       and survivors with 4 and 8 kills. Either forging never raises the tier or death resets it.
       DONE: a soak where surviving heroes visibly climb tiers.
+      DONE L-cycle 127: measured first, and NEITHER suspected cause was it. buy_weapon/buy_armour work
+      (a probe with gold went w0->w1, a0->a1), and kill()/reroll() keep the gear - a returning hero is a
+      FRESH hero at w0, which is canon. THE REAL CAUSE: nothing ever CALLED the forge for a VIEWER'"'"'s hero.
+      The town band kits up in Adventurers._kit_up; a viewer'"'"'s hero only forged if that viewer typed
+      !forge. Reproduced exactly - four survivors home with 69-115 gold, tier 1 costing 52, none climbed.
+      The census'"'"'s 17 "forge lines" were refusals, not purchases. FIX: Roster.kit_up_after_delve() fits
+      out a survivor who comes home with coin - ONE step a delve, always leaving KIT_RESERVE (3 oil) so
+      nobody is stranded, armour first while it trails, and the smith'"'"'s line is SAID so the viewer sees
+      what their gold bought. Called from delve._finish(). tools/_l55_test.gd L55_TEST OK (12 checks):
+      round 1 climbed 0 of 4 (loot luck), round 2 climbed 2-3 of 4 - tiers climb across a SESSION, which
+      is what "a soak" means. _offfloor 0 of 1231, _delve_test clean, L3_TEST OK.
+      MR. E'"'"'S CALL: heroes now spend their own gold automatically. KIT_RESERVE and the one-step cap are
+      the dials; removing it is one call in _finish(). FOR THE SUPERVISOR: scripts/adventurers.gd is in NO
+      worker'"'"'s ownership list in COORDINATION 11.2 - read, not touched; it needs an owner.
 
 - [ ] L56. DELVE-HEAVY SOAK before L45 and L46 are trusted. The census could not confirm bosses or
       trap damage: raids kept pulling parties back to town and only ~1 sustained descent happened,

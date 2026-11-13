@@ -449,6 +449,45 @@ func buy_weapon(user_id: String, kind := "") -> String:
     changed.emit(user_id)
     return "%s takes up %s %s. (+%d atk, %dd%d) %s%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), forge_flavour(nxt), last_haggle]
 
+## ---- L55: the smith fits out a hero who comes home with coin in their purse.
+## FOUND BY THE CENSUS, reported by nobody: weapon and armour sat at w0/a0 for every hero through
+## a soak. Measured here before changing anything, and NEITHER of the two suspected causes was it:
+## buy_weapon/buy_armour raise a tier perfectly well when called with gold, and death does not
+## strip the record (coming back is a FRESH hero, which is canon). The real fault is that nothing
+## ever CALLED the forge for a viewer's hero. The town's own band kits up in Adventurers._kit_up,
+## but a viewer's hero only ever forged if that viewer typed !forge. So heroes earned and never
+## spent: survivors came home with 69-115 gold, tier 1 costs 52, and not one of them climbed.
+## Deliberately conservative, because this is a VIEWER'S gold and not mine to empty:
+##   - at most ONE step a delve, so nobody's purse is drained in a single run
+##   - a RESERVE is always left (oil money and then some), so coming home never strands a hero
+##     without the means to re-supply
+##   - armour first while it trails the weapon, which is Adventurers._kit_up's own rule
+##   - a viewer who is saving can still outpace it by hand with !forge
+## Returns the smith's line, or "" when nothing was bought.
+const KIT_RESERVE := OIL_COST * 3      # always leave at least this behind
+
+func kit_up_after_delve(user_id: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty() or not bool(h.get("alive", true)):
+        return ""
+    var w := int(h.get("weapon", 0))
+    var a := int(h.get("armour", 0))
+    var want_armour := a <= w
+    var nxt: int = (a + 1) if want_armour else (w + 1)
+    var table: Array = ARMOUR if want_armour else WEAPONS
+    if nxt >= table.size() or bool((table[nxt] as Dictionary).get("found", false)):
+        return ""                                   # nothing the smith can make
+    if nxt > town_tier:
+        return ""                                   # the town cannot forge it yet
+    # the UN-haggled price on purpose: haggle() rolls dice and sets last_haggle, so calling it
+    # here and again inside buy_* would charge a different number than this check tested and
+    # burn a roll for nothing. Haggling only ever reduces the price, so testing the full price
+    # is the conservative side of the line.
+    var price := cost_for(h, int((table[nxt] as Dictionary)["cost"]))
+    if int(h.get("gold", 0)) - price < KIT_RESERVE:
+        return ""                                   # not without leaving them skint
+    return buy_armour(user_id) if want_armour else buy_weapon(user_id, "")
+
 func _an(word: String) -> String:
     return "an" if word.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a"
 

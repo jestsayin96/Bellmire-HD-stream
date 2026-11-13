@@ -1333,22 +1333,36 @@ CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confectio
       item he corrected three times is done. The styling complaint below is a SEPARATE, new item,
       not a reason to leave L39 open.
 
-- [ ] L61. THE CHRONICLE BOX HAS NO CHARACTER - "it's just a box". Owner: DESKTOP HUD (hud_dock.gd).
-      The size is right; now it needs to look like it belongs in a medieval town, not a debug
-      panel. Give it the frame/parchment/ornament treatment. The viewer HUB already has the house
-      aesthetic (deep ink/charcoal, parchment, one teal accent, restrained gold, Gloock for
-      titles) - bring that on-stream so the Chronicle and the hub read as one brand. Keep 18 px and
-      the 8-9 line capacity; this is skin, not size. L40 discipline still holds (stay clear of the
-      panes).
-      DONE: a windowed 1080p crop of a styled Chronicle Mr. E signs off.
+- [ ] L61. THE CHRONICLE MUST BE A SCROLL, not a box. Owner: DESKTOP HUD (hud_dock.gd).
+      U-cycle gave it a parchment panel and Mr. E approved the direction but wants it taken all the
+      way: make the Chronicle READ AS AN UNFURLED SCROLL, something unique, the signature piece of
+      the stream. Build it in hud_dock.gd (skin only; keep the current size, the ~18 px text and the
+      8-9 line capacity; L40 discipline - stay clear of the panes).
+      THE SCROLL (build to this, use judgement on craft):
+        - Aged parchment field: warm cream->tan, a faint vertical fibre/vellum gradient, edges a
+          touch darker (age/handling). Not flat gold.
+        - A ROLLED SPINDLE top and bottom (horizontal scroll): a wooden/bone dowel with dark end-caps
+          and a soft curl-shadow where the sheet rolls under it, so the sheet looks furled, not cut.
+          Vertical scroll (spindles left/right) is fine too if it reads better at pane-safe width -
+          pick one and show it.
+        - A little weight/sag or deckled (torn) edge on the open sheet so it is not a clean rectangle.
+        - "Chronicle" as a burned/embossed label on the top spindle OR a small wax-seal tab (keep the
+          existing teal accent to tie to the hub brand; Gloock for the word).
+        - Ink: an aged serif, dark brown-black, not pure white. Newest line still gets the current
+          emphasis so the eye catches new entries.
+      Keep it ONE draw layer, cheap - a real-time HUD element, not a texture import; procedural
+      panel + gradients + a couple of shadow rects is the intent. CC0 only if any texture is used.
+      DONE: a windowed 1080p crop of the scroll that Mr. E signs off. Look at it before you call it
+      done - if it still reads as a box, it is not done.
 
-- [ ] L62. THE PANES NEED TITLES, not only "Now watching: <who>". Owner: DESKTOP HUD. Right now a
+- [x] L62. THE PANES NEED TITLES, not only "Now watching: <who>". Owner: DESKTOP HUD. Right now a
       pane says who it follows but not WHAT KIND of pane it is. Each should carry its lane identity
       - DIRECTOR / SUBSCRIBER / BITS / CHANNEL POINTS / (ambient) - as a title, with "Now watching:
       <who>" beneath or beside it. The lane colour already exists (L57); this makes the category
       legible in words too, so a viewer knows why a pane is showing what it shows. Stay in the
       seven HUD files.
-      DONE: a 1080p crop with all four panes carrying a readable lane title + subject.
+      DONE (U-cycle, verified+merged c9f9fb1): all four panes carry a colour-coded lane title
+      (DIRECTOR/BITS/SUBSCRIBER/CHANNEL POINTS) + now-watching; Mr. E approved on the 1080p crop.
 
 - [ ] D45. THE GRASS READS AS SAND - REPLACE THE TEXTURE. Owner: DESKTOP BUILD (valley.gd / town
       ground material). Mr. E: "the grass needs work still looks like sand so we should at this
@@ -1417,7 +1431,7 @@ in-world health bars / damage numbers / VFX -> KEEP (they are the content).
       DONE: no unit-stats panel on a 1080p stream crop; selection still drives the panes; boss bar
       and in-world elements untouched.
 
-- [ ] L63. STRIP THE SATCHEL OFF STREAM. Owner: DESKTOP HUD (leaderboard_panel.gd). The L51 Satchel
+- [x] L63. STRIP THE SATCHEL OFF STREAM. (done U-cycle, merged c9f9fb1) Owner: DESKTOP HUD (leaderboard_panel.gd). The L51 Satchel
       (a viewer's gear / inventory / selling sheet) comes off the stream - it is a personal sheet
       and belongs on the hub. After L58 (Guild Roll removed) and this, leaderboard_panel.gd draws
       NOTHING on stream: retire the CanvasLayer or leave it dormant. The Satchel's content is not

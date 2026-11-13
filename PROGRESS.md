@@ -3817,3 +3817,15 @@ the supervisor skips indefinitely.
   10+ stays 15% plain). That is a BALANCE CHANGE - deep floors now roll the three new strains - and it is
   his call, not mine. The frozen note on the original numbers ("Measured: they IMPROVED survival, 83% vs
   63% - do not soften them") was respected: no existing strain's numbers were touched.
+
+## S-cycle 7 - supervisor pass (2026-11-13 12:03)
+Merged to main: content C13-C14 (rare uniques and brews widened; then the stream's loudest
+repeating lines - misfire 14->30, epitaphs 74->96, descend/cleared 48->66, plus accessories,
+cosmetics and dyes), laptop L44 (_l24_test deterministic - the race was frames vs real seconds)
+and L27b (strain tells finished and judged by eye; NO laptop WIP remains for the first time in
+days), hud-ui U9 (the Satchel's bare-viewer hint wraps instead of clipping).
+Gate: import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor, TWITCH_PARSE OK, _delve_test clean.
+D44 STANDING CHECK: three _townwalk runs gave in_solid 8/899, 0/754, 0/852. The peak has risen
+from 5 to 8 across passes. Escalated as D44b and placed ahead of D29 in the desktop queue. The
+instruction not to loosen the test is repeated there.
+

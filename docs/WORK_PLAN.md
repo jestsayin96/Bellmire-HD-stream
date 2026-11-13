@@ -1179,3 +1179,29 @@ COORDINATION 11:
 CHANGELOG 2026-11-13 11:22 (supervisor): queued L29a/L30c/L29b/L29c/L37/L33/L27b/L56/L30a/L30b for the laptop in
 priority order; reassigned L31 and L36 off the laptop to the HUD and desktop workers respectively;
 noted C1-C3 as stale. No new IDs minted - every item here already existed and keeps its number.
+
+# Phase V - D44 ESCALATED (supervisor, 2026-11-13 12:03). Desktop build: THIS JUMPS YOUR QUEUE.
+
+- [ ] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+      Measured by the supervisor across six runs on two separate merged trees:
+          pass 1:  2/745   5/913   0/810      (peak 5)
+          pass 2:  8/899   0/754   0/852      (peak 8)
+      Every gate before pass 1 read a clean 0: 0/796, 0/824, 0/866, 0/900.
+      So: still intermittent, two runs in three come back clean - but the PEAK IS RISING. That is
+      the signature of a race or a tolerance that is being crossed more often as the town fills,
+      not of harmless noise. It will not settle on its own.
+      WHAT IS KNOWN: "inside" (people legitimately indoors) holds steady at 41-49 across all six
+      runs, so this is not a miscount of building interiors. walking is 114-124. The failures are
+      a small number of walkers out of 750-900 samples, which points at a transient - most likely
+      a walker sampled mid-step through a doorway or against a prop placed after nav was baked.
+      D20b (raid flee into doorways) and D20c/animals are the most recent town-nav-adjacent
+      changes; the trap and chest props added dungeon-side should NOT affect town walkers, but
+      rule it out rather than assume.
+      DO NOT raise the tolerance, widen the sample, or soften the assert. The 0 was real for many
+      consecutive gates and it is the only thing telling us the town nav is sound.
+      DONE: three consecutive _townwalk runs at in_solid 0 WITH the cause named in PROGRESS - not
+      three lucky runs.
+
+CHANGELOG 2026-11-13 12:03 (supervisor): merged content C13-C14, laptop L44 + L27b (no laptop WIP remains),
+hud-ui U9. Gate otherwise clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _delve_test). D44 escalated to D44b after its peak rose from 5 to 8.

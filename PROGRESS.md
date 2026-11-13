@@ -4392,3 +4392,42 @@ illuminated, original filigree, explicitly NOT The Elder Scrolls / Bethesda art,
   everywhere). The wordmark is drawn burned in that default font. Bringing in Gloock is a new font-asset import
   (OFL) and needs an owner's sign-off + a LICENSE note; flagged, not slipped in. If he wants the craft pushed
   further: a more torn bottom edge and heavier side-curl are easy follow-ups.
+## C-cycle 22 - E3PO, Commander of the Guards (standing backlog item 3)
+- FOLDER: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`).
+  The shared clone R was on `laptop` and was never checked out. R fetched only.
+- FILE TOUCHED: data/lore_lines.json ONLY. items.json, bosses.json and potions.json untouched this cycle.
+- WHAT WAS ADDED - the whole `e3po` block deepened, +164 lines, every one additive:
+    intro          14 -> 22      withdraw       16 -> 24     return        15 -> 23
+    says           30 -> 44      town_talk      24 -> 38
+    raid           28 -> 38      disaster       28 -> 38     festival      22 -> 32
+    night_watch    10 -> 20      recruit         8 -> 18
+    viewer_down     8 -> 18      viewer_returns  8 -> 18     lord_sighted   8 -> 18
+    viewer_roll.crit / .high / .low / .fumble   14 -> 22 each
+  The five thinnest arrays (recruit, viewer_down, viewer_returns, lord_sighted at 8; night_watch at
+  10) are now 18-20, because those are the ones that fire on a viewer's own hero and would otherwise
+  read identically twice in one stream. `says` and `town_talk` - the two that repeat most between
+  events - took the largest widening.
+  Voice unchanged: immortal, a little pompous, dry, never sentimental, never admits the wound. He is
+  still never said to die, never rescued, and never leaves the door.
+- VALIDATION OK (python only, no Godot):
+  json.load of all four owned files succeeds. Against `git show HEAD:data/lore_lines.json`:
+  every top-level key outside `e3po` deep-equal; the `e3po` key set unchanged; every untouched
+  `e3po` key deep-equal; and for all 17 widened arrays the old list is an exact PREFIX of the new
+  one - no element reordered, reworded or removed. All new values are non-empty strings, and no
+  array contains a duplicate line. git diff --numstat: 181 added / 17 removed, and all 17 "removed"
+  lines are the previous last element of each of the 17 arrays gaining a trailing comma.
+  Formatting preserved exactly: indent=2, CRLF, trailing newline (verified by round-trip against HEAD).
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. The `e3po` block is still marked "dead until wired" in the file. Nothing added changes that.
+  2. Any picker over an e3po array must size off len(). Anything that hard-coded 8, 10, 14, 22, 28 or
+     30 now silently ignores the new lines. OWNER: DESKTOP BUILD (raids.gd / town.gd).
+  3. viewer_roll is keyed crit / high / low / fumble and is the d20 reaction set - it belongs to the
+     dice/roll presentation, so if it is read anywhere it is DESKTOP HUD (dice.gd / feed_hud.gd),
+     not town.gd. Four keys, 22 lines each.
+  4. recruit, viewer_down, viewer_returns and lord_sighted fire off VIEWER events (enlist, hero
+     death, hero return, lord encountered), not town events. Whoever wires them needs the hook on
+     the roster/delve side, not the raid side. OWNER: split - raid-side lines are desktop, the four
+     viewer-event arrays want a hook LAPTOP CODE owns (roster.gd / delve.gd).
+  5. e3po.tier_up is still exactly 12 entries matched by growth_tiers name, and was deliberately NOT
+     widened: it is one line per stage, not a pool. Do not roll against it - match on name.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

@@ -835,3 +835,37 @@ writing-blocked item on Mr. E's list. The constraint is now code, not words.
 
 CHANGELOG 2026-11-13 02:24 (supervisor): merged laptop L47/L45/L46/L49 to main. Added L57, L58 from Mr. E's
 rulings. L45 and L46 balance questions answered by him and closed.
+
+# Phase Q - THE HUD RECONCILIATION. Read this before anything else, DESKTOP HUD worker (2026-11-13 03:10).
+
+- [ ] L59. RECONCILE hud-ui WITH main. DO THIS FIRST, BEFORE L51 OR ANYTHING ELSE.
+      WHAT HAPPENED, AND IT WAS THE SUPERVISOR'S MISTAKE: L34 (director pane freezes) and L39
+      (Chronicle) were handed to you under COORDINATION 11.4 without first checking whether the
+      laptop had already built them. It HAD. The laptop's L34 is commit 75a6226 and is now merged
+      into main. Your U1 (35d10d8) fixes the same bug independently. Two correct fixes, same two
+      files. Neither worker did anything wrong.
+      The supervisor attempted the merge and ABORTED it deliberately: it conflicts in FOUR code
+      files - auto_director.gd, spotlight.gd, hud_dock.gd, feed_hud.gd - and resolving competing
+      GDScript implementations without being able to run a WINDOWED UI test would risk shipping a
+      broken overlay. You own these files and you can look at the result. So it is yours.
+      HOW TO DO IT:
+        git -C W2 fetch origin ; git -C W2 merge origin/main        (expect the four conflicts)
+        For each conflicted hunk, PREFER YOUR OWN implementation - you own these files going
+        forward and yours was written against the current contract. BUT read the laptop's side
+        before you discard it: if its L34 handles a case yours does not, keep that case. The two
+        fixes were aimed at the same two root causes, so the union is likely better than either.
+        PROGRESS.md: keep BOTH sides, strip only the marker lines, never renumber a cycle.
+      THEN VERIFY, and this is the part that matters: boot WINDOWED at 1920x1080 and confirm the
+      director pane recovers when its subject dies, rerolls or vanishes - the actual bug. A clean
+      parse is not evidence here. LOOK at it.
+      L39 NOTE: the laptop's L39 attempt (415885a) shrank the PANEL and left the font at 28 px.
+      Mr. E's correction was the opposite order - SMALLER TYPE FIRST, then size the box. Your U1
+      did it his way (28 -> 18 px, then a 0.34-width centre box). Yours is the correct one. Do not
+      let the laptop's version win that hunk.
+      DONE: hud-ui merged with main, four conflicts resolved, a windowed 1080p capture showing the
+      director pane recovering from a subject death, and your honest read on whether 18 px is
+      legible on stream - Mr. E has not seen the final crop and the supervisor will not tick L39
+      until someone has actually looked at it.
+
+CHANGELOG 2026-11-13 03:10 (supervisor): added L59. The hud-ui/main collision is logged as a supervisor error,
+not a worker error, and handed to the owner of the files to resolve with a windowed test.

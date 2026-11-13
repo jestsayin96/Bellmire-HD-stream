@@ -7,10 +7,14 @@ parallel table beside it, and data/bosses.json NOT touched. 78 load, 0 orphaned,
 Verified in a REAL soak, not just unit tests: "The Rattling Host, Widowed" rose on floor 5 of a real
 delve and the hoard was paid out. L29B_TEST OK (23 checks, 0 failed).
 
-*** NEW WORK ARRIVED IN THIS MERGE - THE QUEUE IS NOT EMPTY ***
-  origin/main brought COORDINATION 13 + Phases X/Y/Z. L63 (strip the Satchel, answer the feed_hud
-  question) reads as LAPTOP CODE. L61/L62/D45/D46/D48/H10/H11 read as other workers'. NOT STARTED -
-  the laptop should take L63 next unless the supervisor says otherwise.
+NEW WORK ARRIVED IN THIS MERGE, BUT NONE OF IT IS THE LAPTOP'S. origin/main brought COORDINATION 13 +
+Phases X/Y/Z. I first read L63 as mine because its L-prefix; it is NOT - every new item names its owner
+and none is LAPTOP CODE: L61 and L62 are DESKTOP HUD (hud_dock.gd), L63 is DESKTOP HUD
+(leaderboard_panel.gd + the feed_hud question), D45/D46/D48 are DESKTOP BUILD, H10/H11 are the HUB.
+An L-number no longer implies the laptop owns it - read the Owner line.
+NEXT LAPTOP-OWNED ITEM IS L29c (set-piece encounters). L56 (delve-heavy soak) is also mine and is now
+cheaper than it was: L29b's test already seeds a party straight to a lord floor with Delve.start_floor,
+which is most of what L56 asked for.
 
 *** TWO UNOWNED FILES STILL - THE SUPERVISOR NEEDS TO ASSIGN BOTH ***
   scripts/boss_bar.gd  - blocks the "boss_bar shows phase" half of L29a. Everything it needs is live
@@ -29,7 +33,7 @@ with % floor_no, but a written line need not carry a %d and one does not ("Bellm
 scar gets nothing"), so it threw a String formatting error every time that line came up. The content
 file was not at fault and was not touched.
 
-WHAT IS LEFT THAT IS LAPTOP-OWNED: L63 (new, from this merge), L29c (set-piece encounters).
+WHAT IS LEFT THAT IS LAPTOP-OWNED: L29c (set-piece encounters), L56 (delve-heavy soak).
 L30a-c and L31 lean on data/items.json and HUD/UI files that belong to OTHER workers now, so they
 likely need REASSIGNING or rewriting before anyone can take them.
 WAITING ON MR. E - eight decisions, all in PROGRESS with the exact dial, none resolved unasked: L41

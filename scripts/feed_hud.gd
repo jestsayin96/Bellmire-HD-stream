@@ -141,13 +141,13 @@ func _place_chrome() -> void:
     _panel.position = r.position + Vector2(m, m)
     _panel.size = Vector2(r.size.x - 2.0 * m, r.size.y - 2.0 * m)
 
-## how many one-line entries fit the strip at the L15 size (2-3)
+## how many one-line entries fit the centre box (L39b: up to 9 in the taller box)
 func _chrome_lines() -> int:
     var r := HudDock.centre(get_parent())
     var fs := UiTheme.px(CHRON_PX)
     var lh := ThemeDB.fallback_font.get_height(fs) + 1.0
     var inner := r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
-    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 4)   # L39: smaller type fits one more
+    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 9)   # L39b: the taller box holds 8-9 lines
 
 func _build() -> void:
     if _chrome:

@@ -3376,3 +3376,28 @@ floors Mr. E named, and the BOSS accent colours were the most saturated things i
   stone; MR. E'S EYE ON IT". The sheet is rendered and in the repo. Whether it now reads right to him is
   his call, and every number I moved is a cap in one place - the caps are at the top of the migration
   note above, and data/biomes.json before this cycle is recoverable from git if he wants any of it back.
+
+## U-cycle 6 - L39b the Chronicle box gets its height (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13)
+- L39b (Mr. E, from his annotated 1x screenshot): the centre Chronicle box was the right WIDTH but a
+  third of the HEIGHT he drew - 652x130, where his red rectangle was ~715x295. A taller box is NOT
+  bigger type (he rejected the "super huge" 28 px; 18 px stays) - the extra height buys MORE LINES on
+  screen at once, so a viewer can read back what just happened instead of watching it scroll away.
+- scripts/hud_dock.gd: STRIP 0.12 -> 0.273 (box height ~295 px at 1080p) and CENTRE_W 0.34 -> 0.372
+  (~714 px wide - a touch wider, as he allowed). The box is now 714x295 at (603,360), centred on the
+  cross within a pixel; it covers 10.8% of each pane (the inner corner only), never a band.
+- scripts/feed_hud.gd: _chrome_lines() clamp 2..4 -> 2..9, so the taller box fills with 8-9 one-line
+  entries at the kept 18 px. Pacing (PACE_S 0.8, the fade, the flood-skip) is unchanged.
+- tools/_l39_test.gd rewritten to the L39b contract: the merged copy still asserted the OLD 28 px and
+  "<= 4 lines" (the laptop's pre-shrink version), both of which contradict shipped code and L39b. Now:
+  box ~0.37 wide / ~0.27 tall, centred on the cross, corners only, type 18 px (NOT 28), fills with 8-9
+  lines with no spill, a lord's card still fits. L39_TEST OK (22 checks, 0 fails), windowed 1080p.
+- Looked at the crop (renders/cycles/20261113_l39b/box_full + box_lord_card): the box fills with 9
+  Chronicle lines, newest in full ink, older lines fading gently - all legible; every pane subject
+  (heroes, the cattle farm, the square, the field) stays clear; the lord's name card fits at the left.
+  HONEST READ ON 18 px: at native 1080p it reads clearly and crisp - the right small size, not the old
+  huge type. Downscaled to 720p or on a phone it is on the smaller side but still readable for a viewer
+  who is paying attention, which is exactly what Mr. E asked for. I would leave it at 18 px.
+- Parse clean (--headless --quit-after 300, 0 SCRIPT/Parse errors). hud-ui was already merged with main
+  by the supervisor (L59/L59b landed), so this built on a clean branch - no conflicts to resolve.
+- Did NOT tick L39/L39b. The supervisor ticks on review, and L39b's DONE still needs Mr. E's own eye on
+  the crop (that is the one piece an unattended run cannot supply).

@@ -1,1 +1,1 @@
-IDLE 2026-11-13 05:35 - desktop build: D30 spells legible in town, gate clean
+IDLE 2026-11-13 06:16 - supervisor: content C10 + laptop L48 + hud-ui U1-U5 merged, gate clean

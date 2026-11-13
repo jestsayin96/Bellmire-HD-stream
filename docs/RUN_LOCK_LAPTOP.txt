@@ -1,1 +1,63 @@
-RUNNING 2026-11-13 12:25 - L37 scar-veins coverage and curves
+IDLE 2026-11-13 14:55 - L29b DONE and pushed (L-cycle 140).
+L29b note: MEASURED FIRST and it moved the item for the eighth time this session. bestiary.gd already
+had a UNIQUES table - but those are the L2 FLOOR-uniques (new named things on an ORDINARY floor), the
+opposite of what L29b asks for. The real gap was where the supervisor pointed: the content writer had
+WRITTEN all 78 variants in data/bosses.json and no code read that file. Now read, never copied, no
+parallel table beside it, and data/bosses.json NOT touched. 78 load, 0 orphaned, all eight lords.
+Verified in a REAL soak, not just unit tests: "The Rattling Host, Widowed" rose on floor 5 of a real
+delve and the hoard was paid out. L29B_TEST OK (23 checks, 0 failed).
+
+NEW WORK ARRIVED IN THIS MERGE, BUT NONE OF IT IS THE LAPTOP'S. origin/main brought COORDINATION 13 +
+Phases X/Y/Z. I first read L63 as mine because its L-prefix; it is NOT - every new item names its owner
+and none is LAPTOP CODE: L61 and L62 are DESKTOP HUD (hud_dock.gd), L63 is DESKTOP HUD
+(leaderboard_panel.gd + the feed_hud question), D45/D46/D48 are DESKTOP BUILD, H10/H11 are the HUB.
+An L-number no longer implies the laptop owns it - read the Owner line.
+NEXT LAPTOP-OWNED ITEM IS L29c (set-piece encounters). L56 (delve-heavy soak) is also mine and is now
+cheaper than it was: L29b's test already seeds a party straight to a lord floor with Delve.start_floor,
+which is most of what L56 asked for.
+
+*** TWO UNOWNED FILES STILL - THE SUPERVISOR NEEDS TO ASSIGN BOTH ***
+  scripts/boss_bar.gd  - blocks the "boss_bar shows phase" half of L29a. Everything it needs is live
+    (Monster.phase, Monster.phase_count, phase_changed). L29b deliberately used the "rare" flag that
+    boss_bar ALREADY reads, so the rare uniques reach the stream without touching it. I did not touch it.
+  scripts/adventurers.gd - the NPC band's _kit_up, raised during L55. Still unassigned.
+  Neither appears in COORDINATION 11.2 under any worker.
+
+RAISED BY L29b, NOT CHANGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its
+BODY's speed and Nightwing's canon 6.6 has never reached the mover. A unique with a written speed now
+does set it. Fixing it for plain lords would change how EVERY lord moves mid-stream-cycle, so it is
+raised here rather than slipped into L29b. Supervisor's call.
+
+A PRE-EXISTING BUG THE SOAK FOUND AND I FIXED (my file, commit 4dc3172) - and it was TWO sites, not the
+one I first reported: delve.gd formatted the writer's lines with arguments the code assumed were wanted,
+in _loot ("cleared", one arg) and in start() ("descend", two). A written line need not carry those
+tokens and several do not ("Bellmire gets a tale; the scar gets nothing"; "<who> descend into the dark,
+and the dark does not object"), so it threw a String formatting error and THE WHOLE LINE WAS LOST.
+That is not log noise - it is Chronicle text going missing ON STREAM at the two most frequent beats
+there are, every descent and most floors cleared, for as long as those lines have been in the file.
+_fmt_line() now formats only when the line's own token count matches what the code supplies.
+The content file was not at fault and was not touched.
+VERIFIED: _delve_test 0 formatting errors (it threw on every run before), _l2_test OK with its four
+per-lord errors gone, _l29b_test OK (23 checks) with the descend line now actually reaching the feed.
+NOTE FOR THE SUPERVISOR: any other _say(_pick_line(...) % ...) in files I do NOT own is the same bug
+waiting to happen. I checked only delve.gd, which is mine.
+
+WHAT IS LEFT THAT IS LAPTOP-OWNED: L29c (set-piece encounters), L56 (delve-heavy soak).
+L30a-c and L31 lean on data/items.json and HUD/UI files that belong to OTHER workers now, so they
+likely need REASSIGNING or rewriting before anyone can take them.
+WAITING ON MR. E - eight decisions, all in PROGRESS with the exact dial, none resolved unasked: L41
+(confection?), L42 (lit stone?), L27b strains, L45 deep lords, L47 break-off, L48 levelling, L54
+Scarwater, L55 the smith.
+NOT MINE: the supervisor's DESKTOP cross-check of _l32_test.
+_l32_test reports OK (100 checks): base 38.2 / idle 27.3 / paid 16.1. The base >= 10 and min-sample
+asserts STAY.
+STANDING NOTES: (1) check INDENT STYLE before editing. (2) No backticks and no '"'"' escaping in a
+double-quoted shell -m or sed. (3) When a table names things, TEST each one does something. (4) MEASURE
+BEFORE FIXING - eight items this session had a real symptom or premise that did not survive checking.
+(5) Shot tools overwrite committed render refs - restore them. (6) No allocating helper in a per-frame
+loop. (7) A test measuring in FRAMES something that lives in SECONDS is a flake waiting to happen.
+(8) Do not count Godot nodes BY NAME - duplicate siblings get renamed; count by a property. (9) A node
+added during a SceneTree tool's _initialize NEVER enters the tree, so _ready never fires - build nodes in
+_process or the object looks broken when the harness is at fault. (10) A SOAK that has to walk somewhere
+must be SEEDED there (Delve.start_floor) - one that runs out of frames short of the thing it is testing
+reports a product bug that is not there.

@@ -3880,6 +3880,40 @@ row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 wat
   waypoint-pop early-return (townsfolk ~L813) skipping that frame's keep_walkable, and/or
   embedded stop DESTINATIONS. Recommend a focused follow-up rather than a blind change to the
   walker loop. Test NOT loosened, per the D44b instruction.
+
+## L-cycle 138 - L37 scar-veins: the other half, with numbers (laptop jestai, 2026-11-13) - L37 DONE
+L42 had already cut vein EMISSION hard (2.4 -> 1.1), which is why I refused to tick L37 then - the item
+also asks to cut COVERAGE, to "break up the continuous curves", and for before/after floor shots. This is
+that half.
+- WHAT MADE IT READ AS SPAGHETTI, found by looking at the placement rather than the texture: up to SIX
+  vein decals a floor, each 2.6-3.8 m, dropped on random cells with NO separation and free to be
+  projected up a wall face. Several big curvy decals meeting edge to edge is piping; that is the whole
+  mechanism.
+- FOUR CHANGES, in dungeon_hd.gd: count halved and capped at 3 a floor; each vein drawn at HALF size, so
+  it is a crack in a flagstone rather than a curve across several; no vein within VEIN_APART (9 m) of
+  another, so two can never join up; and veins are never projected onto a wall - that is what turned a
+  crack in the floor into piping running up the stonework. Emission taken 1.1 -> 0.75 and alpha to 0.62
+  to finish "keep them as a subtle tell".
+- MEASURED, not asserted. tools/_l37_shot.gd (NEW) prints the vein count and the closest gap between any
+  two, and frames the floor from high and square-on - the angle that would EXPOSE continuous piping, not
+  a flattering one:
+      floor 8   4 veins, closest 7.1 m  ->  2 veins, closest 33.7 m
+      floor 11  6 veins, closest 9.9 m  ->  3 veins, closest 18.4 m
+      floor 14  6 veins, closest 6.3 m  ->  2 veins, closest 38.7 m
+  A vein is now ~1.3-1.9 m wide and the nearest neighbour is 18-38 m away, so they CANNOT join into a
+  curve. Before, 3.8 m decals sat 6.3 m apart and nearly touched.
+  Shots in renders/cycles/20261113_l37/ (f8/f11/f14, before and after).
+- A COUNTING BUG OF MINE, caught before it became a false claim: my first counter matched decals by NODE
+  NAME ("Decal_veins"). Godot renames duplicate siblings, so only the FIRST keeps that name and the rest
+  become @Decal@NNN - the counter returned exactly 1 on every floor, before AND after, and I was one step
+  from reporting "1 vein a floor" as proof of a coverage cut. It counts by texture_emission now, which
+  only the veins branch sets. The real numbers are the ones above.
+- CHECKED FOR OVERCORRECTION, because a tell nobody can see is not a tell: floor 11's after shot still
+  shows the veins as small violet cracks on inspection. Present, not dominant. That is the item's
+  "subtle tell".
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1343 (MON_INPROP 0 of 95); _delve_test 0 errors/nulls;
+  L41_TEST OK (the material guard still holds); L50_TEST OK (the spawn census is unaffected); L25_TEST OK
+  13/13 with 0 stuck (dungeon_hd changed, so the geometry suite matters).
 ## C-cycle 15 - disaster and event variants, so a second viewing does not read like the first (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
 - WHY THESE: standing-backlog item 4. The files were measured first, as in C-cycle 14. The shop and
   caravan tiering (backlog item 2) was already finished in C-cycle 7 - `stock_by_tier` carries all
@@ -4186,3 +4220,91 @@ row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 wat
      quarrymend). It is ambiguous in HEAD too, so I left it alone - additive only. If !brew quarry
      should pick one, that is Mr. E's call and a one-word content fix next cycle.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## L-cycle 139 - L29a lord phases (laptop jestai, 2026-11-13) - L29a DONE, with one part BLOCKED
+MEASURED BEFORE BUILDING, and it halved the work: ALL EIGHT canon lords already carried a real mechanic
+in Bestiary.LORD_WAYS - summon, nova, breath, swoop, shed, ward, venom, grudge, enrage. The item's "each
+canon lord gets a real mechanic" was ALREADY TRUE. No new mechanic was invented on top of canon ones that
+already work. What did not exist was any notion of a PHASE: only three of the eight had a threshold that
+changed behaviour, and nothing exposed a phase for a bar to read.
+- scripts/monster.gd: a lord now has three phases (PHASE_AT 0.66 / 0.33), advancing as it is worn down
+  and never going backwards. phase and phase_count are public so anything can read them, and
+  phase_changed(who, to) is emitted on each step. An ordinary creature stays at phase_count 1.
+- PER-PHASE TRAPPINGS, which the item asks for by name: the ground aura brightens (alpha 0.35 -> 0.53 ->
+  0.71) and breathes faster and wider with each phase, and the name tag lightens with it. The phase reads
+  off the LORD, so a viewer watching a pane does not have to find a bar to see the fight change.
+- scripts/delve.gd: each step is a Chronicle beat - "X shifts, and the fight changes with it", then "X is
+  driven to its last" - plus a FeedHUD card naming the phase. Counter lord_phases for a census.
+- A PRODUCT FIX THE TEST FOUND: phase_count was first set next to _trappings(), which sits AFTER the
+  early return in _ready that fires when a body model will not load. A lord whose mesh failed would have
+  had no phases at all. It is set at the TOP of _ready now - a lord's phase count is data, not
+  decoration, and the fight is not the model.
+- tools/_l29a_test.gd (NEW): guards the half that was already true (every lord still has a mechanic),
+  then checks phases exist only for lords, map correctly from health, advance one step at a time without
+  skipping or reversing, fire the signal exactly once per change, and VISIBLY change the aura.
+  L29A_TEST OK, 11 checks.
+- AND CHECKED IN A REAL FIGHT, not just in unit tests, because the DONE says "a delve fights a lord with
+  its mechanic": tools/_boss_test.gd windowed - BOSS_TEST OK, 8 checks, 0 failed, ZERO script errors, a
+  party started onto a lord floor, the lord rising, the bar up, the director cutting to it. And the
+  phases fired live: "Nightwing shifts, and the fight changes with it", then "Nightwing is driven to its
+  last". (Headless the same harness emits save_png errors because there is no frame to save - that is the
+  tool being a shot tool, not a product fault, which is why it was judged windowed.)
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1403 (MON_INPROP 0 of 107); _delve_test 0
+  errors/nulls; L45_TEST OK (boss depth scaling still holds with phases on top); L27B_TEST OK;
+  _l26_anims on floors 5/10/15 - the LORD floors - L26A_ANIMS OK.
+- ONE PART OF THIS ITEM IS BLOCKED, NOT DONE: "boss_bar shows phase". scripts/boss_bar.gd appears in NO
+  worker's ownership list in COORDINATION 11.2 - not the laptop's, not the desktop HUD's seven, not the
+  desktop build's. It is the SECOND unowned file I have hit, after scripts/adventurers.gd. I have not
+  touched it. Everything a bar needs is now exposed and live - Monster.phase, Monster.phase_count and the
+  phase_changed signal - so whoever owns it needs only to read them. SUPERVISOR: this file needs an owner.
+
+## L-cycle 140 - L29b rare uniques (laptop jestai, 2026-11-13) - L29b DONE
+MEASURED BEFORE BUILDING, and it moved the item for the eighth time this session. bestiary.gd ALREADY
+had a UNIQUES table, which reads at a glance like the item is half built - but those are the L2
+FLOOR-uniques (Gnawbone, Mother Silk, The Weeping Bowman, Cinderjack, Kept by the Scar): brand new named
+things that hold an ORDINARY floor. L29b asks for the opposite - "NOT new lords - modified variants" of
+the EIGHT. The real gap was exactly where the supervisor pointed: the content writer has WRITTEN all 78
+variants in data/bosses.json (lesser_uniques, greater_uniques) and NOT ONE LINE OF CODE READ THAT FILE.
+So the data is now read, never copied, and no parallel table was invented beside it. That file is the
+content writer's and was not touched.
+- scripts/bestiary.gd: lord_uniques() loads data/bosses.json once and files every written variant under
+  the lord it modifies, matching on that lord's own canon title ("The Hollow King, Thrice-Kindled" ->
+  hollow_king). uniq_orphans() REPORTS any variant the code cannot place instead of swallowing it, so a
+  name the writer changes later surfaces as a failing check rather than a silently missing boss.
+  All 78 load; 0 orphaned; all eight lords have variants.
+- THE SPAWN RULE (lord_unique_for): LORD_UNIQUE_CHANCE 0.18, drawn only from the variants of the lord
+  that was actually drawn, and never the same one twice running - so a repeat inside one session still
+  reads as a different rare thing. Rolled in next_boss, and a lord the crowd has already NAMED keeps its
+  name: a rare draw never overwrites a viewer's title.
+- THE VISIBLE MODIFICATION (apply_lord_unique), two things so it reads at a glance and on a still:
+  the writer's stat skew is carried in its SIZE (cube root, clamped 0.82-1.18, so the widest skew is
+  still a believable version of the same lord), and every rare one takes a cold scar-light in tint, aura
+  and weapon glow that no plain lord has. Measured: the Grubmother Winter-Fat 5.40 -> 5.84, Nightwing
+  Famished 3.84 -> 3.59.
+- IT IS STILL A LORD: same body, same LORD_WAYS mechanic, same L45 depth curve, and it still frightens
+  the party as it rises. Only what the writer skewed (hp / speed / attack) changes. It is flagged "rare",
+  which boss_bar.gd ALREADY reads ("A rare one, met on floor N") - so the stream shows it with NO UI file
+  touched, which matters while boss_bar.gd still has no owner.
+- scripts/delve.gd: boss_loot_mult() extracted so the loot ladder lives in ONE place and a test reads
+  the same number the Chronicle pays out, instead of a second copy of the arithmetic that can drift.
+  Rare lord 4.5x, plain lord 3.0x, floor-unique 2.0x, ordinary floor 1.0x. Two Chronicle beats: the
+  guild has put this lord down before, not this one; and a hoard that size does not come off an
+  ordinary one.
+- A REAL BUG FOUND BY THE SOAK, pre-existing and not part of L29b: _loot formatted every "cleared" line
+  with % floor_no, but a written line need not carry a %d and one of them does not ("Bellmire gets a
+  tale; the scar gets nothing"), so it threw a String formatting error every time that line came up.
+  The content file is not at fault and is not mine; the assumption in delve.gd was. Guarded.
+- tools/_l29b_test.gd: L29B_TEST OK, 23 checks, 0 failed. A (data read, 78 loaded, 0 orphaned),
+  B (rare at 19.0% measured against 18.0%, never two of a kind running, a lord only ever draws a version
+  of itself), C (named, noted, bigger/leaner, scar-lit, still the same body/mechanic/curve),
+  D (loot ladder), and E - the SOAK the DONE line asks for: a real Delve on a real floor, where
+  "The Rattling Host, Widowed" rose on floor 5 and the hoard was actually paid out.
+  The first run of that soak FAILED because it crawled from floor 1 and ran out of frames at floor 3 -
+  it reported "no unique rose" when the soak had simply never reached a lord. A harness miss that reads
+  exactly like a product bug: the L29a lesson again. Fixed with start_floor.
+- REGRESSION: _offfloor 0 of 1438; _l25_test OK (13 checks, 0 stuck delvers); _l45_test OK;
+  _l2_test OK; _l29a_test OK (11 checks).
+- FLAGGED, NOT CHANGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its BODY's
+  speed and Nightwing's canon 6.6 has never reached the mover. A unique with a written speed now does
+  set it. Fixing it for plain lords would change how every lord moves mid-stream-cycle, so it is raised
+  here rather than slipped into L29b.

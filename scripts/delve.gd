@@ -55,7 +55,7 @@ func start(uids: Array) -> void:
 		party.append({"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()})
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
-	_say(_pick_line("descend", "%s %s into the scar.") % [_names(), "descends" if party.size() == 1 else "descend"])
+	_say(_fmt_line(_pick_line("descend", "%s %s into the scar."), [_names(), "descends" if party.size() == 1 else "descend"]))
 	for m in party:
 		oil += float(int(m["h"].get("oil", 0)))
 		m["h"]["oil"] = 0
@@ -134,6 +134,9 @@ func _next_floor() -> void:
 	if dun.lord:
 		dun.lord.max_hp = float(dun.lord.def.get("boss_hp", 200.0))
 		dun.lord.hp = dun.lord.max_hp
+		# L29a: a lord crossing a phase threshold is a story beat - say it
+		if not dun.lord.phase_changed.is_connected(_lord_phase):
+			dun.lord.phase_changed.connect(_lord_phase)
 	# a floor costs one flask per two bodies
 	var alive_now := _alive().size()
 	oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))
@@ -157,6 +160,9 @@ func _next_floor() -> void:
 			note = note.substr(0, 1).to_upper() + note.substr(1) + "."
 		var uniq := bool(dun.lord.def.get("unique", false))
 		_say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
+		# L29b: the guild knows this lord. It does not know THIS one.
+		if bool(dun.lord.def.get("lord_unique", false)):
+			_say("The guild has put down %s before. Not this one." % String(dun.lord.def.get("lord_title", "its like")))
 		var intro := String((lore().get("unique_intros" if uniq else "lord_intros", {}) as Dictionary).get(String(dun.lord.def.get("id", "")), ""))
 		if intro != "":
 			_say(intro)
@@ -849,6 +855,23 @@ func _fight(delta: float) -> void:
 	# venom keeps working after the bite (spider, snake, adder, wasp)
 	_fight_body(delta, alive, foes)
 
+## ---- L29a: a lord changing phase, in the Chronicle. The mechanics themselves were already
+## canon (Bestiary.LORD_WAYS gives all eight a real one); what was missing was any sense that a
+## lord gets WORSE as it is worn down. The aura does it on the lord; this does it in words.
+var lord_phases := 0                # the L29a test counts these
+
+func _lord_phase(who: Monster, to: int) -> void:
+	if not is_instance_valid(who):
+		return
+	lord_phases += 1
+	var nm := String(who.def.get("name", "The lord"))
+	if to >= 3:
+		_say("%s is driven to its last - whatever it has been holding back, it is not holding it now." % nm)
+	else:
+		_say("%s shifts, and the fight changes with it." % nm)
+	FeedHUD.card_on(town, nm, "phase %d of %d" % [to, who.phase_count],
+		who.def.get("aura", Color(1, 0.8, 0.4)) as Color)
+
 ## ---------------------------------------------------------------- L49: searching, visibly
 ## Mr. E: "no chests, no drops, nobody searching". The loot ROLL already existed - it just
 ## happened invisibly the instant a floor was cleared, with no chest, nobody walking anywhere
@@ -1431,12 +1454,36 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
 			o["hp"] = float(o["hp"]) - _soak(o, _mdice(base, false))
 			_hero_hit(o)
 
+## L29b: a WRITTEN line need not carry the format tokens the code assumes it does. Formatting one
+## that does not throws "String formatting error" and the line is LOST from the Chronicle. Two sites
+## did this - the descend line in start() and the cleared line in _loot - and both threw on ordinary
+## runs, every run, for as long as the offending lines have been in the content file. The content
+## file is not at fault and is not mine; the assumption here was. So: format only what asks to be
+## formatted, and otherwise print the writer's line exactly as written.
+func _fmt_line(line: String, args: Array) -> String:
+	var want := line.count("%") - 2 * line.count("%%")
+	if want != args.size():
+		return line
+	return line % args
+
+## L29b: what a floor pays is multiplied by this. Kept in ONE place so a test reads the same
+## number the Chronicle actually pays out, instead of a second copy of the arithmetic that can
+## drift. A rare unique is a lord AND THEN SOME; a floor-unique is less than a lord.
+static func boss_loot_mult(boss: bool, uniq: bool, rare_lord: bool) -> float:
+	if not boss:
+		return 1.0
+	if rare_lord:
+		return 4.5
+	return 2.0 if uniq else 3.0
+
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
 ## brought it down; anything else found belongs to whoever prised it open, and
 ## searching costs half a flask. Materials go home to the town.
 func _loot(alive: Array) -> void:
 	var boss := dun.lord != null
 	var uniq := boss and bool(dun.lord.def.get("unique", false))
+	# L29b: a rare unique IS a lord, not a floor-unique - it pays better than one, not worse
+	var rare_lord := boss and bool(dun.lord.def.get("lord_unique", false))
 	# L9: the party's sharpest eye searches - an Investigation check (d20 + INT,
 	# + proficiency for the trained, disadvantage in the dark without darkvision)
 	# vs DC 10 + floor/2: it sets how much is found, what is salvaged, and whether
@@ -1456,7 +1503,7 @@ func _loot(alive: Array) -> void:
 		mult = 0.6
 	elif st >= sdc:
 		mult = minf(1.35, 1.0 + 0.03 * float(st - sdc))
-	var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * mult)
+	var found := int(float(floor_no) * 11.0 * boss_loot_mult(boss, uniq, rare_lord) * mult)
 	Sfx.play("coin", -4.0)
 	_snd("chest_open", (seeker["body"] as Node3D).global_position, -2.0)      # S2: a find
 	if boss:
@@ -1469,6 +1516,8 @@ func _loot(alive: Array) -> void:
 		_say("%s is slain on floor %d!" % [dun.lord.def.get("name", "The lord"), floor_no])
 		FeedHUD.card_on(town, String(dun.lord.def.get("name", "The lord")),
 			"Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
+		if rare_lord:
+			_say("A hoard that size does not come off an ordinary %s." % String(dun.lord.def.get("lord_title", "lord")))
 		_say("The hoard is split %d ways - %d gold each to %s." % [took.size(), share, ", ".join(took)])
 	else:
 		var f: Dictionary = seeker
@@ -1476,7 +1525,7 @@ func _loot(alive: Array) -> void:
 		_gold += found
 		oil = maxf(0.0, oil - 0.5)
 		_say("%s searches (Investigation %d) and turns up %d gold on floor %d." % [f["h"]["name"], st, found, floor_no])
-		_say(_pick_line("cleared", "Floor %d cleared.") % floor_no)
+		_say(_fmt_line(_pick_line("cleared", "Floor %d cleared."), [floor_no]))
 	# renown (old rule): a floor cleared +1, a lord slain +6
 	var eco = town.get("economy") if town else null
 	if eco:

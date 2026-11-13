@@ -483,8 +483,49 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       BALANCE CHANGE (shares taken from the non-plain pool; shallows stay 85% plain). No existing
       strain's frozen numbers were touched.
 # Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]
-- [ ] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
-- [ ] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
+- [x] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
+      DONE L-cycle 139 (one part BLOCKED - see the end). MEASURED FIRST and it halved the work: all EIGHT
+      canon lords ALREADY carried a real mechanic in LORD_WAYS, so "each lord gets a mechanic" was
+      already true and nothing was invented on top of working canon. What was missing was a PHASE - only
+      3 of 8 had any threshold, and nothing exposed one for a bar to read.
+      monster.gd: three phases a lord (0.66 / 0.33), advancing as it is worn down, never backwards;
+      phase and phase_count public; phase_changed(who, to) emitted. Ordinary creatures stay at 1.
+      PER-PHASE TRAPPINGS: the aura brightens (0.35 -> 0.53 -> 0.71) and breathes faster and wider each
+      phase, name tag with it - the phase reads off the LORD, not only off a bar.
+      delve.gd: each step is a Chronicle beat plus a FeedHUD card naming the phase.
+      A PRODUCT FIX THE TEST FOUND: phase_count was set after the early return in _ready that fires when
+      a body model will not load, so a lord without its mesh would have had NO phases. Set at the top now.
+      tools/_l29a_test.gd L29A_TEST OK (11 checks). AND IN A REAL FIGHT, since the DONE asks for one:
+      _boss_test.gd windowed BOSS_TEST OK, 8 checks, 0 failed, zero script errors - and the phases fired
+      live ("Nightwing shifts, and the fight changes with it", then "driven to its last").
+      _offfloor 0 of 1403, _delve_test clean, L45_TEST OK, L27B_TEST OK, _l26_anims on the LORD floors
+      5/10/15 L26A_ANIMS OK.
+      BLOCKED, NOT DONE: "boss_bar shows phase". scripts/boss_bar.gd is in NO worker's list in
+      COORDINATION 11.2 - the second unowned file after adventurers.gd. Untouched. Monster.phase,
+      phase_count and phase_changed are exposed and live, so its owner need only read them. NEEDS AN OWNER.
+- [x] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
+      DONE 2026-11-13 (L-cycle 140). MEASURED FIRST and it moved the item: bestiary.gd already had a
+      UNIQUES table, but those are the L2 FLOOR-uniques (new named things on an ORDINARY floor), which
+      is the opposite of what L29b asks for. The real gap was where the supervisor pointed - the content
+      writer has WRITTEN all 78 variants in data/bosses.json and no code read that file. Now read, never
+      copied; no parallel table invented; data/bosses.json NOT touched.
+      SPAWN RULE: 18% on a lord floor, only variants of the lord actually drawn, never the same one
+      twice running, and a lord the crowd has named keeps its name.
+      VISIBLE MODIFIER: the writer's stat skew carried in its SIZE (Grubmother Winter-Fat 5.40 -> 5.84,
+      Nightwing Famished 3.84 -> 3.59) plus a cold scar-light in tint/aura/weapon. Flagged "rare", which
+      boss_bar.gd ALREADY reads - the stream shows it with NO UI file touched.
+      STILL A LORD: same body, same LORD_WAYS mechanic, same L45 depth curve.
+      BETTER LOOT: Delve.boss_loot_mult() - rare lord 4.5x vs a plain lord's 3.0x, in ONE place so the
+      test reads the number the Chronicle actually pays.
+      tools/_l29b_test.gd L29B_TEST OK (23 checks, 0 failed), INCLUDING THE SOAK the DONE line asks for:
+      "The Rattling Host, Widowed" rose on floor 5 of a real delve and the hoard was paid out.
+      The soak also caught a PRE-EXISTING bug in delve.gd: _loot formatted every "cleared" line with
+      % floor_no, but one written line carries no %d, so it threw a String formatting error whenever
+      that line came up. Guarded (the content file was not at fault and was not touched).
+      REGRESSION: _offfloor 0/1438, _l25_test OK (0 stuck), _l45_test OK, _l2_test OK, _l29a_test OK.
+      FLAGGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its BODY's speed and
+      Nightwing's canon 6.6 has never reached the mover. Raised, not silently changed - it would alter
+      how every lord moves mid-cycle.
 - [ ] L29c. SET-PIECE ENCOUNTERS from lore (ambush/guarded hoard/mini-event) so a floor isn't just a room of monsters. DONE: set pieces appear + resolve, Chronicle logs them.
 # Phase E - gear, cosmetics, loot [L30]
 - [ ] L30a. GEAR EXPANSION (items.json accessories): more weapons/armour per tier, visible on handslot bones (rig EQUIP), real bonuses. DONE: heroes equip visibly in a soak, bonuses apply.
@@ -541,7 +582,25 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] D24. GRAPHICS - KILL THE GRAIN (Mr. E: "everything feels grainy... like someone sprinkled sand all over it", town worst). ROOT CAUSE FOUND: project.godot has an EMPTY [rendering] section - no TAA, no MSAA, no FXAA anywhere in the project. SSAO (town.gd:828) and volumetric fog (daylight.gd:58-62, 245) are BOTH temporally dithered in Godot 4; with no TAA to resolve them they show as fine static noise over the whole image, worst on cluttered town geometry, and the god-rays/glow add to it. FIX: enable TAA (rendering/anti_aliasing/quality/use_taa), add MSAA 3D 2x-4x for edges, then re-tune SSAO (radius/intensity/detail - or drop it if TAA alone looks right) and re-check volumetric fog density now that it resolves cleanly. Watch FPS: measure before/after. DONE: side-by-side town stills at 1080p before/after showing the grain gone, FPS still >= the D23 target, and Mr. E's eye on it. RESULT (desktop D-cycle 118): project.godot [rendering] now use_taa=true + msaa_3d=1 (2x); SSAO softened (intensity 1.3, detail 0.3, radius 1.8) in town.gd; volumetric fog resolves cleanly, left as-is. Grain gone in 1080p before/after; uncapped FPS at the resting stream cam ROSE 123.4->131.7 avg (min 81->90), >= 120 target. Stills in renders/cycles/20261112_d24. Awaiting Mr. E's eye.
 - [x] D25. TOWN REWORK - LAYOUT AND COLLISIONS (Mr. E: the farm, the streets, all of it needs revamping; "things are colliding, structures are overlapping"). NOTE: D18a reported "town placement already clean" yet the running build clearly shows overlaps - so D18a's probe is too narrow (it checked props, not buildings/farm/fence/road footprints). FIX: (1) widen the placement probe to test BUILDING and farm/fence/road footprints against each other, not just scatter props; (2) rework the town layout - real street topology that buildings face and do not block, a farm that reads as fields+barn+fences rather than scattered pieces, no structure intersecting another, nothing floating or sunk; (3) keep walkability - re-bake nav and keep _townwalk at 0 in_solid. DONE: the widened probe reports 0 overlapping footprints, a 1080p shot sheet of the town and farm from the stream camera, _townwalk PASS, and Mr. E's eye on it. RESULT (desktop D-cycle 120): tools/_d25_probe.gd tests footprints of houses, growth SPECIALS, valley structures AND field rects vs each other + roads (game's own _rect/_rect_on_road authority; plaza-fronting landmarks/shops/towers exempt). Town is geometrically CLEAN (BLD=0, FLD=0 at lvl 3+6); the one real defect was 1 house a later road was cut through, now removed by town.gd _final_road_sweep() after all roads are laid. D25_PROBE OK; _townwalk PASS (in_solid 0/18777); shot sheet renders/cycles/20261112_d25/. Farm reads as fields+cottages+fences+garden+hayricks.
 - [ ] L36. CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (seen in Mr. E's 19:34 recording): the in-game Twitch chat box draws over the L32b Chronicle strip - "A trade caravan is sighted on the west road." is overprinted by chat lines and both become unreadable. The chat and the Chronicle must not share pixels: give the centre strip its own reserved band that chat is docked clear of (HudDock), or move chat into a lane/side column. DONE: a 1080p capture with chat busy AND the Chronicle running shows zero overlapping text.
-- [ ] L37. DUNGEON SCAR-VEINS ARE OVERDONE (seen in the 19:27 recording): the L28d glowing vein decals read as bright purple/cyan neon spaghetti looping across the floor rather than cracks in stone. Cut emission strength and coverage hard, break up the continuous curves, and keep them as a subtle tell. DONE: before/after floor shots; the veins read as glowing cracks, not neon piping.
+- [x] L37. DUNGEON SCAR-VEINS ARE OVERDONE (seen in the 19:27 recording): the L28d glowing vein decals read as bright purple/cyan neon spaghetti looping across the floor rather than cracks in stone. Cut emission strength and coverage hard, break up the continuous curves, and keep them as a subtle tell. DONE: before/after floor shots; the veins read as glowing cracks, not neon piping.
+      DONE L-cycle 138: L42 had already cut vein EMISSION (2.4 -> 1.1), which is why this was left
+      unticked then - the item also wants COVERAGE cut, the continuous curves broken, and before/after
+      shots. WHAT MADE IT SPAGHETTI was the placement, not the texture: up to SIX decals a floor, each
+      2.6-3.8 m, on random cells with NO separation and free to project up a wall face. Four changes in
+      dungeon_hd.gd - count halved and capped at 3; each vein drawn at HALF size; none within VEIN_APART
+      (9 m) of another; and never projected onto a wall, which is what turned a floor crack into piping up
+      the stonework. Emission 1.1 -> 0.75 and alpha 0.62 for "a subtle tell".
+      MEASURED: tools/_l37_shot.gd prints the count and the closest gap, framed high and square-on - the
+      angle that EXPOSES piping rather than hiding it.
+        floor 8   4 veins closest 7.1 m -> 2 veins closest 33.7 m
+        floor 11  6 veins closest 9.9 m -> 3 veins closest 18.4 m
+        floor 14  6 veins closest 6.3 m -> 2 veins closest 38.7 m
+      A vein is now ~1.3-1.9 m wide with its nearest neighbour 18-38 m off, so they cannot join into a
+      curve. Shots in renders/cycles/20261113_l37/. Checked for OVERCORRECTION too - floor 11 still shows
+      them as small violet cracks, present but not dominant.
+      A counting bug of mine was caught first: matching decals by NODE NAME returned 1 every time,
+      because Godot renames duplicate siblings. It counts by texture_emission now.
+      _offfloor 0 of 1343, _delve_test clean, L41_TEST OK, L50_TEST OK.
 - [x] L38. AMBIENT PANE FRAMING IS POOR - THE BIGGEST VISUAL PROBLEM (supervisor reviewed all 13 recordings: a large share of pane-frames are a close-up rooftop, bare grass, open water, a blank wall or a dark void): idle lanes frequently frame a rooftop, a blank wall, empty paving or the inside of a market stall - the camera sits too close/low and clips into structures. Ambient subjects must be chosen AND framed so something legible is happening: prefer a subject with motion, pull back and raise the eye, reject a shot whose view is mostly roof/ground/wall (the _clear() clearance rule exists - extend it to reject bad compositions). DONE: a 3-minute idle capture where every pane change lands on a readable subject; no roof-fillers.
 
 # Phase J - from Mr. E's full OBS review (supervisor watched all 13 Nov-12 recordings, 22:30)

@@ -94,10 +94,14 @@ func build(n: int) -> void:
 ## theme, scar-glass veins once the floors run deep. Never on the stairs or the keep-clear
 ## route (info["keep_clear"]: the way through + every corridor). Capped per floor.
 const DECAL_CAP := 24
+var _vein_at: Array = []               # L37: vein positions placed on this floor
 const DECAL_TEX := "res://assets/dungeon_look/decal_%s.png"
 const THEME_DECAL := {"wood": "moss", "grassland": "moss", "flooded": "moss",
     "firepit": "soot", "workshop": "soot", "prison": "blood", "barracks": "blood", "crypt": "blood"}
 const SCAR_VEIN := Color(0.62, 0.32, 1.0)
+## L37: no two scar-veins within this many metres - adjacent decals joining edge to edge is
+## what made them read as continuous neon piping instead of separate cracks
+const VEIN_APART := 9.0
 static var _dtex := {}
 var decals := 0
 
@@ -134,7 +138,13 @@ func _decals() -> void:
     var tk := String(THEME_DECAL.get(String(info.get("theme", "")), ""))
     for i in (9 if tk != "" else 0):
         plan.append(tk)
-    var veins := 0 if floor_no < 6 else mini(floor_no - 4, 6)
+    # L37 (Mr. E, 19:27 recording): the veins read as "bright purple/cyan neon spaghetti looping
+    # across the floor rather than cracks in stone". L42 already cut their emission hard (2.4 ->
+    # 1.1); this is the other half of the item - COVERAGE and the continuous curves.
+    # Count halved and capped at 3 a floor (was up to 6). Below, each vein is also drawn much
+    # smaller, kept off the walls, and spaced away from its neighbours - because what made it
+    # read as piping was several big curvy decals meeting edge to edge.
+    var veins := 0 if floor_no < 6 else mini(int((floor_no - 4) / 2), 3)
     for i in veins:
         plan.append("veins")
     while plan.size() < DECAL_CAP - 6:
@@ -145,6 +155,7 @@ func _decals() -> void:
     var sides := [Vector2i(0, -1), Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0)]
     var root: Node3D = info["root"]
     var ci := 0
+    _vein_at.clear()                       # L37: per-floor record of where veins already sit
     for kind in plan:
         if decals >= DECAL_CAP or ci >= cand.size():
             break
@@ -161,7 +172,18 @@ func _decals() -> void:
         for s in sides:
             if not cells.has(c + (s as Vector2i)):
                 walls.append(s)
-        if not walls.is_empty() and kind != "blood" and r.randf() < 0.45:
+        # L37: a vein must never be projected up a wall face - that is what turned a crack in
+        # the floor into piping running up the stonework. Veins stay flat on the ground.
+        if String(kind) == "veins":
+            var too_near := false
+            for p in _vein_at:
+                if base.distance_to(p as Vector3) < VEIN_APART:
+                    too_near = true
+                    break
+            if too_near:
+                continue                       # L37: never two veins close enough to join up
+            _vein_at.append(base)
+        if not walls.is_empty() and kind != "blood" and String(kind) != "veins" and r.randf() < 0.45:
             # the foot of a wall: projected sideways into the wall face, fading off the floor
             var sv: Vector2i = walls[r.randi() % walls.size()]
             var dir := Vector3(sv.x, 0, sv.y)
@@ -173,7 +195,10 @@ func _decals() -> void:
             d.size = Vector3(r.randf_range(2.6, 3.6), 0.9, 1.8)
             d.normal_fade = 0.5
         else:
-            var s2 := r.randf_range(2.6, 3.8) * (0.85 if kind == "blood" else 1.0)
+            # L37: a vein is drawn roughly half size, so it reads as a crack in a flagstone
+            # rather than a curve sprawling across several of them
+            var s2 := r.randf_range(2.6, 3.8) * (0.85 if kind == "blood" else 1.0) \
+                * (0.5 if String(kind) == "veins" else 1.0)
             d.position = base + Vector3(r.randf_range(-1.0, 1.0), 0.0, r.randf_range(-1.0, 1.0))
             d.rotation.y = r.randf() * TAU
             d.size = Vector3(s2, 0.7, s2)
@@ -182,9 +207,12 @@ func _decals() -> void:
         d.lower_fade = 0.2
         match String(kind):
             "veins":
-                d.modulate = SCAR_VEIN
+                # L37: "keep them as a subtle tell". The violet is held but no longer at full
+                # strength - a scar-vein should be something a viewer notices on a deep floor,
+                # not the brightest thing in the room.
+                d.modulate = Color(SCAR_VEIN.r, SCAR_VEIN.g, SCAR_VEIN.b, 0.62)
                 d.texture_emission = _decal_tex("veins_glow")
-                d.emission_energy = 1.1          # L42: was 2.4 - the L28d veins read as neon piping, not cracks
+                d.emission_energy = 0.75         # L42 took this from 2.4 to 1.1; L37 finishes the job
             "crack":
                 d.modulate = Color(1, 1, 1, 0.85)
             "soot":

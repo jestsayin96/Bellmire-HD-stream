@@ -1227,3 +1227,27 @@ noted C1-C3 as stale. No new IDs minted - every item here already existed and ke
 CHANGELOG 2026-11-13 12:03 (supervisor): merged content C13-C14, laptop L44 + L27b (no laptop WIP remains),
 hud-ui U9. Gate otherwise clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
 TWITCH_PARSE OK, _delve_test). D44 escalated to D44b after its peak rose from 5 to 8.
+
+# Phase W - Mr. E's L41 ruling (2026-11-13 12:37)
+
+- [x] L41 CLOSED BY MR. E. He looked at confection_before.png and confection_after_muted.png and
+      ruled: TOO MUTED, PUT THE PINK BACK. data/biomes.json confection ground reverted to
+      ["#e8b0cc", 0.35] - the exact one-line revert the laptop itself documented. ONLY the ground
+      was reverted: L42 separately lowered this biome's sat and glow, and that stays, so the floor
+      is bright pink under calmer lighting rather than the original neon.
+      The laptop's GUARD STAYS and was the real work of L41: FloorGen._kit_mat() now falls back to
+      plain grey if a shader or atlas fails to load, instead of handing back a ShaderMaterial with
+      a null shader - which is what Godot draws magenta. A shader can load on one machine and fail
+      on another, so that fault would only ever have appeared on stream.
+      NOTE THE LOOSE END, honestly: the laptop proved the binding is NOT broken (384 materials, 0
+      null, 0 magenta), and Mr. E has now said the confection's bright pink is wanted. So the
+      original "an entire dungeon floor renders hot magenta" report is explained as the confection
+      looking as intended - not as a bug that was found and fixed. If he ever sees a magenta floor
+      again, it is NEW, and the guard's kit_fail_count is the thing to read.
+      Supervisor note on ownership: data/biomes.json is laptop-owned and the supervisor edited it
+      directly. Justified narrowly - a one-line data revert that the owning worker itself specified
+      in its own PROGRESS entry, made at Mr. E's explicit direction while he was present. Not a
+      precedent for editing another worker's code.
+
+CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confection ground reverted; the guard kept.
+

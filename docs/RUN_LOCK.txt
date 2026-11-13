@@ -1,1 +1,1 @@
-RUNNING 2026-11-13 13:07 (supervisor) - SHORT gate, data-only merge; back to Mr. E in ~4 min
+IDLE 2026-11-13 13:07 - desktop build: D44b embedded-spawn fixed (committed); residual southern-house route-hug left for next cycle

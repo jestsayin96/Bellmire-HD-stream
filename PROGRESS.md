@@ -2145,3 +2145,55 @@ OPEN for Mr. E:
 - Should a viewer's purchase POP the sheet by itself (fold the grid for ~14 s), or only arm it for
   the next I-press? Shipped as arm-only (AUTO_FOLD=false) because auto-folding on every buy blanks
   the game view. One-line flip if Mr. E wants the pop.
+
+
+## U4 - desktop HUD: L59's director-recovery test, and two open looks answered (Nov 13, 2026)
+
+### The L59 merge resolution is NOT in the worktree - it was not redone
+This run was fired with a supervisor note saying the L59 resolution was sitting unstaged in W2
+(UU in the index) and should be verified, staged and tested rather than redone. Checked first:
+`git diff --name-only --diff-filter=U` empty, no MERGE_HEAD, no conflict markers in any of the
+seven files, tracked tree clean. The resolution is gone - a later session aborted that merge
+(the 03:29 lock line says exactly that: "merge aborted, both sides intact"). So there was nothing
+to verify or stage, and the instruction was explicitly not to redo the merge. It was NOT redone:
+rebuilding a four-file semantic resolution from a prose description, unattended, is a guess.
+`hud-ui` still diverges from `origin/main` (3 vs 48) and L59's reconciliation remains OPEN.
+
+### What WAS done: L59's DONE condition, which nobody had run
+tools/_u4_shot.gd, windowed 1920x1080, grid up, director on. Each stage first DRIVES the director
+onto one of our heroes (L18: a recent chat command makes that hero the pick), CONFIRMS the pane is
+holding that body, and only then destroys it. Recovery = the shot is alive AND is no longer the
+thing we destroyed (compared by instance id, since a freed node cannot be passed to a typed param).
+
+  DIES      before=chat_8001  after=chat_8003  alive  still-on-victim=false  -> RECOVERED
+  REROLLS   before=chat_8002  after=chat_8003  alive  still-on-victim=false  -> RECOVERED
+  DESPAWNS  before=chat_8003  after=tour_0     alive  still-on-victim=false  -> RECOVERED
+
+The despawn falls through to `tour_0`, i.e. the `_fallback_shot()` path L34(a) added - exactly the
+intended behaviour. Looked at 3_after_despawns.png: the top-left pane carries a live market view,
+not a frozen frame. This tests `hud-ui` AS IT STANDS (the U1 L34 fix), not the merged tree.
+
+A FIRST ATTEMPT WAS DISCARDED and its frames deleted: it perturbed heroes the director was not
+watching, so "no change" was read as "frozen". A test that does not confirm the subject first
+proves nothing. Recorded here because the discarded run's numbers looked like two failures.
+
+### The two open looks, answered plainly
+1. DOES 18 px CHRONICLE TYPE READ ON STREAM? **Yes.** Read at 1:1 in 20261113_u3/3_chronicle_crop.png
+   and again here - crisp at 1080p. The U1 caveat is closed. Size is not the problem.
+2. DOES THE 240 px SUB-WIDTH CROWD THE LORD CARD AT 653 px? **Yes - this one is real.**
+   4_lord_card_crop.png (the box at 1:1, with the longest real sub line delve.gd sends):
+   - the card's sub TRUNCATES mid-sentence: "Slain on floor 7 by Delver1, Delver2 ..." - the stream
+     never learns who killed the lord, which is the whole point of that line;
+   - the card eats ~290 px of 652, so the Chronicle lines beside it truncate too
+     ("Delver2 the human knight, ...") - both halves lose their ends;
+   - 14 px sub against 18 px Chronicle also reads as the smaller, weaker text of the two.
+   NOT FIXED THIS RUN, deliberately: feed_hud.gd's card sizing is one of the four hunks the
+   unresolved L59 merge is contesting. Changing it now would entangle with that reconciliation.
+   The supervisor now has the measurement to decide with. Cheapest fixes, for whoever takes it:
+   drop the sub's min-width, let the sub wrap to a second line, or give the card the full box
+   width while it is up and pause the Chronicle lines behind it.
+
+### Also seen, honestly (not this run's item)
+In 3_after_despawns.png two of the four panes are still poor ambient framing - one is a bare
+roof, one is empty grass with distant sheep. L38 was built in U1/U2 and is awaiting a tick; on
+this capture the roof-filler problem is not fully gone. Worth the supervisor's eye.

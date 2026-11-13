@@ -1884,3 +1884,25 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/1040 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk 120 s PASS
   (in_solid 0/17738, raid 0/11808); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR.
 - New tools: tools/_d26_shot.gd, tools/_d26_pair.gd (+ .uid). Backup scripts/town.gd.bak_d26 (not committed).
+
+
+## D-cycle 120 - D25 town layout + collisions (desktop CruzaderPC, 2026-11-12) - D25 DONE
+- WIDENED the placement probe (old D18a only tested mk_house/lm_ nodes + props). New tools/_d25_probe.gd collects
+  oriented XZ footprints for every visible substantial structure - town houses, growth SPECIALS (market_hall/
+  stables/guild/bathhouse/mage_tower), valley cottages/barns - plus field rects (town._fields), and reports
+  building<->building overlaps, building/field overlaps, and buildings on roads. Runs at the live level and TOP
+  level, uses the game's own _rect/_rect_on_road for the road test (so the door-side hanging shop sign + planters
+  don't false-flag) and exempts plaza-fronting landmarks/shops/towers (a forecourt meeting paving is by design).
+- FINDING: the town is geometrically CLEAN - BLD=0 building-into-building, FLD=0 building-on-field at both levels.
+  The single real defect: 1 residential house standing in a road. _resolve_overlaps drops on-road plots BEFORE the
+  valley roads + real south road are laid, so a road later cut through a house survived. FIX: new town.gd
+  _final_road_sweep(), called right after valley.setup() (all roads laid, before growth + nav + people), drops any
+  remaining house whose _rect sits on a road. 1 dropped; probe then clean.
+- The 5 the probe first flagged were all LANDMARKS (hall/chapel/barracks/windmill/workshop) fronting their plaza by
+  design - verified by eye (windmill sails overhang paving, base on dirt). Exempted in the probe, skipped by sweep.
+- Farm (Coalfoot/Bramble) verified by eye: fields + cottages + fences + kitchen garden + hayricks + the Ford Mill,
+  lane-connected - reads as a farm, not scattered; left as-is.
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/850 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/18777, raid 0/3561); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR; D25_PROBE OK (lvl 3 + 6).
+- New tools: _d25_probe.gd, _d25_shot.gd, _d25_diag.gd (+ .uid). Shot sheet renders/cycles/20261112_d25/.
+  Backup scripts/town.gd.bak_d25 (not committed).

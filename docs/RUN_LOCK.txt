@@ -1,1 +1,1 @@
-IDLE 2026-11-13 10:19 - supervisor: content C12 + laptop L43 + hud-ui U7/U8 merged; D44 raised
+IDLE 2026-11-13 11:21 - desktop build: T3 reply path made loud + per-user dedup; gate clean; next D29 (town silence)

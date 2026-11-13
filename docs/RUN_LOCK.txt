@@ -1,1 +1,1 @@
-IDLE 2026-11-13 12:03 - supervisor: C13-C14 + L44/L27b + U9 merged; D44 escalated to D44b
+RUNNING 2026-11-13 13:07 (supervisor) - SHORT gate, data-only merge; back to Mr. E in ~4 min

@@ -4261,6 +4261,12 @@ func _folk(role: String, model: String, tint: Color, rng: RandomNumberGenerator)
     return v
 
 func _put_folk(v: Townsfolk, at: Vector3) -> void:
+    # D44b: a stops-walker (home/work ZERO, so the walk audit cannot shield it
+    # by an endpoint) must never START life inside a carved solid: an embedded
+    # spawn breaks route() (off-mesh start -> fallback path into the valley) and
+    # the body then shoves itself clear over a second or two, counted the whole
+    # time. Snap the spawn out of any footprint first (pre-sync: geometric).
+    at = keep_walkable(at)
     at.y = height_at(at.x, at.z)
     v.position = at
     add_child(v)

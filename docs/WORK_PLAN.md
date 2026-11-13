@@ -1201,6 +1201,28 @@ noted C1-C3 as stale. No new IDs minted - every item here already existed and ke
       consecutive gates and it is the only thing telling us the town nav is sound.
       DONE: three consecutive _townwalk runs at in_solid 0 WITH the cause named in PROGRESS - not
       three lucky runs.
+      PARTIAL (desktop D-cycle 126): CAUSE NAMED. The offenders are the stops-based _more_folk
+      townsfolk - their home/work are ZERO by design (a day of `stops` replaces the shuttle),
+      so the audit's `e != ZERO` endpoint guard can never shield them. _put_folk placed them
+      at a stop point WITHOUT a walkability check. Two sub-cases:
+        (a) SPAWN EMBEDDED - the spawn/stop point lay inside a carved solid; an off-mesh start
+            breaks route() (it falls back to a single far waypoint and the body wanders into
+            the valley), and keep_walkable shoves it clear only over ~2 s, counted every
+            sample meanwhile. This was the PERSISTENT, town-fill-scaling contributor behind
+            the RISING 5->8 peak. FIXED: _put_folk now snaps the spawn out of any footprint
+            (keep_walkable; pre-sync so purely geometric). Verified: pre-fix a peasant span
+            embedded every seeded run; post-fix none do.
+        (b) RESIDUAL, FLAT (not rising): a walker on a NORMAL leg sitting ~1.5 m inside a
+            carved footprint for a few samples at the 15 southern 'market'-district houses
+            (z<-55) - e.g. (51.7,-93.8), prop (74.1,-65.6). dl/seat/ghost all false, navoff
+            ~1.5. Post-fix the gate gave THREE consecutive _townwalk 0 (0/16017, 0/16363,
+            0/15601) with _offfloor/_twitch_parse/_delve all clean, BUT other post-fix runs
+            still showed a stray 1-2 (one verify run 2/16003; one seeded diag 1) - so this is
+            NOT yet the 'not-lucky' three zeros. Left UNTICKED for that reason.
+      FOLLOW-UP for the next desktop cycle (NOT done here - would be an unverified change to
+      the hot walker loop): snap stop DESTINATIONS too, or add a keep_walkable net on the
+      waypoint-pop early-return (townsfolk ~L813 returns before the step's keep_walkable), or
+      widen the nav margin at the southern houses. The test was NOT loosened.
 
 CHANGELOG 2026-11-13 12:03 (supervisor): merged content C13-C14, laptop L44 + L27b (no laptop WIP remains),
 hud-ui U9. Gate otherwise clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,

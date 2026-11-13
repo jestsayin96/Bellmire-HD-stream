@@ -2763,3 +2763,46 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      `colour` but no `model`, so they render as the default shape tinted until a cosmetic key is
      mapped to a mesh. OWNER: LAPTOP CODE (gear.gd) / DESKTOP BUILD (hero_body.gd, rig.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 12 - the lines that repeat verbatim (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, nothing unpushed, and was NEVER checked out -
+  only `git fetch`ed, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- WHY THIS CYCLE: C1/C2/C3 are all still unticked, and the survey showed the remaining repeat problem
+  is no longer thin blocks - cosmetics (169), dyes (91), epitaphs (74), descend/cleared (48 each) and
+  the barks (6 x ~31) are well stocked. What was left were the lines with NO variation at all: the
+  forge tiers are ONE string per tier, so every weapon of a given tier is described in the same
+  words forever; the eight lords and five rare uniques had 1 base + 3 alts, and a boss is named
+  often enough on a long stream that four lines is two sightings; and the ambient town ticker had
+  ten lines a category. Only data/lore_lines.json was touched - items.json, bosses.json and
+  potions.json are byte-unchanged this cycle.
+- NEW TOP-LEVEL KEY `forge_alt` (the only new key; mirrors `lord_intros_alt` exactly - a `_note`
+  plus the same tier keys as `forge`, each an array of strings): 5 tiers x 3 lines = 15. Tier voices
+  kept to canon - 1 plain Bellmire iron, 2 folded-and-signed, 3 runes along the fuller, 4 dragontooth
+  with nobody saying whose, 5 scarforged and listening.
+- `town_life` (+24, pure array appends, no key added): crier 11 -> 19, market 10 -> 18, growth 10 -> 18.
+  The crier now quotes the Hall inscription, the clapperless bell and E3PO on the night gate; the
+  market stalls sell rope, scarstone, candles and secondhand steel that came back up without its
+  owner; growth tracks the ditch, the ford lamp, the clerk's queue and the second smith.
+- `lord_intros_alt` (+24): all eight lords 3 -> 6 alt lines. Same eight lords, no new lord.
+- `unique_intros_alt` (+15): all five rare uniques 3 -> 6 alt lines. Same five, no new unique.
+- TOTAL: 78 new lines, 1 new key, 0 keys renamed or removed, 0 existing lines reworded.
+- VALIDATION (python only - the content worker never runs Godot): all four owned files json.load
+  clean. A deep walk of the pre-edit parse against the post-edit parse returned ZERO differences:
+  every pre-existing key present, every pre-existing scalar equal, every touched array equal on its
+  original prefix (appends only). `forge_alt` asserted same shape as `lord_intros_alt` (dict of
+  string -> list[str] plus `_note`) and its tier keys asserted equal to `forge`'s. No dungeon floor
+  count anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. `forge_alt` is DEAD DATA until whoever names a forged weapon picks from
+     [forge[tier]] + forge_alt[tier] instead of forge[tier] alone. Without that one change the tier
+     line still repeats verbatim and this cycle's 15 best lines never reach the stream.
+     OWNER: LAPTOP CODE (gear.gd).
+  2. Any consumer that ITERATES `forge`'s keys rather than looking up a tier must not pick up
+     `forge_alt` - it is a sibling top-level key, not a tier. OWNER: LAPTOP CODE (gear.gd).
+  3. `lord_intros_alt` / `unique_intros_alt` grew in place - no wiring change; if the C-cycle 8 pick
+     rule was never wired, that is still the outstanding item.
+  4. `town_life` stays dead until the town ticker is wired - its own `_note` already says so.
+     OWNER: DESKTOP BUILD (town.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

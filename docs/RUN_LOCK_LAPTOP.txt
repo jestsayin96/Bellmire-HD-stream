@@ -1,1 +1,18 @@
-RUNNING 2026-11-13 04:40 - L52 spell variety (verify first)
+IDLE 2026-11-13 05:15 - L52 DONE and pushed (L-cycle 126). Next in the laptop queue: L55 (forging may not
+raise gear tiers - found by the census, gear.gd is mine), then L53 (gear.gd _hat match-cases for the
+content writer's new hat keys), L54 (delve.gd must honour the 'scar_touched' potion state), then L48,
+L50, L41, L42, L43, L44.
+L52 note: the census was right and Mr. E's "only one spell" was READABILITY, not content - 6-7 distinct
+spells fire in a single run. No spells added; every cast now names itself in its own colour.
+NOT MINE: making spells look different IN FLIGHT is spells.gd (desktop-owned). Pairs with D30.
+L49 REGRESSION fixed this cycle: _l25_test caught a delver stuck in the "search" state - a chest placed
+where nobody can path to it. Unreachable chests are abandoned, search capped at 12 s. _l25 OK twice
+consecutively. If a stuck delver in state "search" ever returns, that path is the first place to look.
+FOLDER BREACH RESOLVED (supervisor owned the error): the content writer's scheduled task had been pointed
+at this clone. Their 5 commits are pushed (9136de7) and their 353 lines of UNCOMMITTED data/items.json
+were validated (parses; 8 top-level keys) and saved to `content` as b71f234 - THE CONTENT WRITER SHOULD
+CONFIRM IT IS A COMPLETE THOUGHT, it may have been mid-edit. A verbatim copy was kept outside the repo.
+Note: my merge fast-forwarded local `content` to origin/main before the checkout - harmless, nothing
+rewritten, but it was their branch and it is on the record.
+EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

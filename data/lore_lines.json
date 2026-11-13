@@ -112,5 +112,359 @@
       "They are building where the fields used to stop.",
       "The guild post has two doors now. Both kept."
     ]
+  },
+  "propositions": {
+    "_note": "Viewer-voting town laws (T4). 17 across law/taxes/militia/building/faith/outsiders. Each names a CONSEQUENCE, good and bad - a law that only helps is boring. Readable at a glance. Dead until wired.",
+    "entries": [
+      {
+        "title": "The Gallows Law",
+        "category": "law",
+        "flavour": "Thieves hang, not fine. The guild says it will clear the market of cutpurses.",
+        "good": "Crime falls; the market feels safe to spend in.",
+        "bad": "The desperate turn to worse than theft, and some good hands leave town."
+      },
+      {
+        "title": "Trial by the Roll",
+        "category": "law",
+        "flavour": "Let the accused delve the scar. Come back up, and you walk free.",
+        "good": "Wildly popular on stream, and the dungeon runs hot.",
+        "bad": "The innocent die below, and the guild loses good names."
+      },
+      {
+        "title": "Debtors' Pardon",
+        "category": "law",
+        "flavour": "Wipe the slate. Come spring, no one in Bellmire owes a copper.",
+        "good": "The poor breathe again; loyalty climbs.",
+        "bad": "The lenders shut their purses, and coin stops moving."
+      },
+      {
+        "title": "Raise the Grain Tithe",
+        "category": "taxes",
+        "flavour": "A heavier cut of every harvest goes to the town coffers.",
+        "good": "The treasury swells; walls and wages get paid.",
+        "bad": "Full barns, thin bellies - the folk grumble, and some go hungry."
+      },
+      {
+        "title": "The Free Market Charter",
+        "category": "taxes",
+        "flavour": "Drop the market tolls. Any trader sells in Bellmire toll-free.",
+        "good": "Caravans flock in; the stalls overflow.",
+        "bad": "The coffers thin, and the guild's grip slips."
+      },
+      {
+        "title": "Toll at the Ford",
+        "category": "taxes",
+        "flavour": "A copper to cross, paid to the Ferryman, paid to the town.",
+        "good": "Steady coin off every crossing.",
+        "bad": "Traders grumble, some ford downstream, and the Ferryman is not thanked."
+      },
+      {
+        "title": "Raise the Militia Levy",
+        "category": "militia",
+        "flavour": "Every household sends a hand to the wall.",
+        "good": "The guard doubles; raiders think twice.",
+        "bad": "Fewer hands in the fields - the town is safer but poorer."
+      },
+      {
+        "title": "Arm the Delvers",
+        "category": "militia",
+        "flavour": "Guild steel for anyone who will hold the gate.",
+        "good": "A hard town to raid.",
+        "bad": "Armed and idle men make their own trouble."
+      },
+      {
+        "title": "Night Curfew",
+        "category": "militia",
+        "flavour": "Lamps out, doors barred, the Watch walks till dawn.",
+        "good": "No raid slips in by night.",
+        "bad": "The taverns empty; the folk feel watched, not kept."
+      },
+      {
+        "title": "Wall the Town",
+        "category": "building",
+        "flavour": "Stone where the fields stop. The masons are ready and waiting.",
+        "good": "Bellmire holds against any raid.",
+        "bad": "It costs a fortune, and the harvest waits while the masons build."
+      },
+      {
+        "title": "Dig the Second Well",
+        "category": "building",
+        "flavour": "One well, long queues, and the dry months coming.",
+        "good": "Water for all, even in a drought.",
+        "bad": "The diggers want paying, and they keep hitting scarstone."
+      },
+      {
+        "title": "Pave the Market Square",
+        "category": "building",
+        "flavour": "Mud to flagstone, fit for a city.",
+        "good": "Traders linger; the town looks the part.",
+        "bad": "A whole season's coin, sunk into the ground."
+      },
+      {
+        "title": "Ring the Festival",
+        "category": "faith",
+        "flavour": "A feast day on the guild's coin, and the clapperless bell rung anyway.",
+        "good": "Spirits soar; both loyalty and trade rise.",
+        "bad": "A day's work lost, and a day's coin with it."
+      },
+      {
+        "title": "Tithe to the Chapel",
+        "category": "faith",
+        "flavour": "Fund the temple and light every candle.",
+        "good": "The faithful are glad; the sick are tended.",
+        "bad": "Coin the walls could have used."
+      },
+      {
+        "title": "Open the Gates to Refugees",
+        "category": "outsiders",
+        "flavour": "Folk fleeing the scar-lands crowd the Ford by the hundred.",
+        "good": "New hands for the fields and the wall.",
+        "bad": "More mouths to feed - and sickness travels with them."
+      },
+      {
+        "title": "Hire the Sellswords",
+        "category": "outsiders",
+        "flavour": "Coin for blades that answer to gold, not the guild.",
+        "good": "Hard muscle for the hard floors.",
+        "bad": "They stay bought only as long as you keep paying."
+      },
+      {
+        "title": "Shut the Border",
+        "category": "outsiders",
+        "flavour": "No stranger past the Ford without the guild's word.",
+        "good": "No raider walks in wearing a traveller's coat.",
+        "bad": "Trade withers, and the town turns inward and small."
+      }
+    ]
+  },
+  "disasters": {
+    "_note": "Natural disasters (D34). For each: begin (Chronicle line), during (lines while it lasts), pass (line when it ends), cost (plain statement of what it should cost the town, for the desktop to implement). Dead until wired.",
+    "volcano": {
+      "begin": "The mountain above the scar wakes - ash on the wind, and the sky goes copper.",
+      "during": [
+        "Ash falls on Bellmire; the sun is a dull coin behind the smoke.",
+        "The river runs grey, and the fish float up dead."
+      ],
+      "pass": "The mountain settles. Ash greys every roof, but the air clears.",
+      "cost": "A buried harvest and sickened livestock; the worst-hit district must be rebuilt."
+    },
+    "fire": {
+      "begin": "Fire in Craft Row - a forge banked wrong, and the wind unkind.",
+      "during": [
+        "The bucket line runs from the river; the Watch beats at the flames.",
+        "Smoke rolls over the square as the smiths' roofs go up."
+      ],
+      "pass": "The fire is out. A row of workshops is char and cinder.",
+      "cost": "Buildings in one district burned down and rebuilt from nothing; the smiths sit idle until then."
+    },
+    "drought": {
+      "begin": "No rain since the thaw. The river drops, and the wells go shy.",
+      "during": [
+        "The crops stand yellow and brittle in the field.",
+        "The queue at the well starts before dawn."
+      ],
+      "pass": "Rain, at last. The river climbs, and Bellmire drinks easy again.",
+      "cost": "A harvest cut to nothing and thinning livestock; morale sinks until the wells fill."
+    },
+    "famine": {
+      "begin": "The barns are near bare, and spring is a long way off.",
+      "during": [
+        "Rations at the guild post; the thin get thinner.",
+        "A copper will not buy bread that is not there."
+      ],
+      "pass": "The first harvest comes in, and Bellmire eats again.",
+      "cost": "The town shrinks as the weak are lost; no growth until the barns refill."
+    },
+    "sickness": {
+      "begin": "A fever walks the homes. The apothecary names it, then runs short of cures.",
+      "during": [
+        "Doors chalked with a warning mark; the healers do not sleep.",
+        "The chapel bell tolls more than anyone likes."
+      ],
+      "pass": "The fever burns itself out. Bellmire counts its dead and opens the windows.",
+      "cost": "The population falls, and a quarantine freezes trade and work while it lasts."
+    },
+    "hurricane": {
+      "begin": "A great storm drives inland, and the sky turns the colour of a bruise.",
+      "during": [
+        "Roofs peel away; the river bursts its low banks.",
+        "Nobody walks the wall in this."
+      ],
+      "pass": "The storm blows through. Bellmire is sodden and battered, but standing.",
+      "cost": "Roofs and buildings torn across the town, fields flooded, and days of repair."
+    },
+    "tornado": {
+      "begin": "A finger of wind drops out of the storm and walks toward the town.",
+      "during": [
+        "It takes a barn whole and sets it down in splinters.",
+        "Mind the sky - it has not lifted yet."
+      ],
+      "pass": "The wind lifts and is gone, leaving a straight scar of wreckage.",
+      "cost": "A random line of buildings flattened, and livestock scattered or lost."
+    },
+    "earthquake": {
+      "begin": "The ground rolls - the scar shudders, and so does everything above it.",
+      "during": [
+        "Walls crack; the clapperless bell swings and almost rings.",
+        "Aftershocks, and nobody trusts a roof."
+      ],
+      "pass": "The shaking stops. Bellmire checks its walls, and its dead.",
+      "cost": "Walls and buildings cracked or down town-wide; the scar may gape a little deeper."
+    },
+    "meteor": {
+      "begin": "A star falls - too slow, too bright - and comes down past the fields.",
+      "during": [
+        "The impact lights the night; the ground is scorched for a mile.",
+        "Something glitters in the new crater, and it hums like the scar."
+      ],
+      "pass": "The fires burn out. A crater smokes where the orchard used to stand.",
+      "cost": "An outlying district or the orchard is destroyed - but the crater yields scarglass worth a fortune."
+    },
+    "scarstorm": {
+      "begin": "The scar flares, and wild magic rolls up out of the dungeon mouth and over the town.",
+      "during": [
+        "Every spell cast in Bellmire goes wrong; the lamps burn strange colours.",
+        "The livestock speak for a heartbeat, and the well runs uphill."
+      ],
+      "pass": "The scar quiets. The magic settles, mostly, and the town tallies what changed.",
+      "cost": "Spellcasters are useless while it lasts; random buildings warp, and a few folk are scar-touched for good or ill."
+    },
+    "flood": {
+      "begin": "The thaw comes all at once. The river climbs the banks, and keeps climbing.",
+      "during": [
+        "The low district is ankle-deep, then knee-deep.",
+        "The Ford is gone under brown water; no crossing today."
+      ],
+      "pass": "The water drops back, leaving mud in every doorway - but the town held.",
+      "cost": "Riverside buildings and stores ruined; the Ford and its trade shut until the river falls."
+    }
+  },
+  "events": {
+    "_note": "Random world events (D33): bandit and monster camps that stand until cleared, and a wandering boss scaled to the town's level. Dead until wired.",
+    "bandit_camps": [
+      {
+        "name": "The Gallows Oak",
+        "leader": "Red Harl",
+        "appears": "Red Harl's lot have taken the west road. No caravan reaches the Ford unbled.",
+        "while": "Trade caravans are robbed; the market runs short and prices climb.",
+        "cleared": "Red Harl hangs from his own Gallows Oak. The west road is open again."
+      },
+      {
+        "name": "The Mire Nest",
+        "leader": "Sedge the Toll",
+        "appears": "Sedge the Toll holds the fen path and taxes everyone who is not her.",
+        "while": "Every trader by the fen pays Sedge first; the town's cut shrinks.",
+        "cleared": "Sedge the Toll pays her own toll at last. The fen path clears."
+      },
+      {
+        "name": "The Burnt Mill",
+        "leader": "Cob Ashfoot",
+        "appears": "Cob Ashfoot's raiders have holed up in the burnt mill, firing a field a night to keep the town afraid.",
+        "while": "A field burns most nights; harvest and morale both drop.",
+        "cleared": "The Burnt Mill burns one last time. Cob Ashfoot runs, and keeps running."
+      },
+      {
+        "name": "Scarside Camp",
+        "leader": "The Weasel",
+        "appears": "The Weasel's crew squat at the scar's edge, robbing the delvers who climb out.",
+        "while": "Returning delvers are waylaid; their gold and loot never reach Bellmire.",
+        "cleared": "Scarside Camp is cleared. Delvers come up to friends now, not knives."
+      }
+    ],
+    "monster_camps": [
+      {
+        "name": "The Bone Field",
+        "of": "risen dead",
+        "appears": "Something below spat up its dead, and they are gathering in the north field.",
+        "while": "The dead multiply nightly and gnaw at the outlying farms.",
+        "cleared": "The Bone Field is put down. The north field is only a field again."
+      },
+      {
+        "name": "The Slime Warren",
+        "of": "slimes",
+        "appears": "A slime nest has taken the old quarry, and it doubles every night it is left alone.",
+        "while": "The quarry is lost, and the nest creeps toward the homes.",
+        "cleared": "The Slime Warren is burned out. The quarry stops twitching."
+      },
+      {
+        "name": "The Belltower Roost",
+        "of": "cave bats",
+        "appears": "A roost of cave bats has taken the bell-tower; they foul the wells and spook every horse in town.",
+        "while": "The wells need watching, and the beasts are restless while they hang there.",
+        "cleared": "The Roost is cleared. The bell-tower is quiet. Almost."
+      }
+    ],
+    "wandering_boss": {
+      "name": "The Scarred Lord",
+      "appears": "A lord has climbed out of the scar and walks the open country - and it has grown to match the town it hunts.",
+      "while": "It razes an outlying farm each day it roams, and draws the dark along behind it.",
+      "cleared": "The wandering lord falls in the open field. Bellmire drags the body home as proof.",
+      "note": "Scales to the town's level: a lesser lord early, a greater lord once Bellmire is a city. Reuse the eight canon lords; never a new one."
+    }
+  },
+  "growth_tiers": {
+    "_note": "Town growth stages (D31/D32) - the town levels far too fast, so this is a long, earned climb. For each: the stage name, the crier's line on reaching it, and what a viewer should SEE appear. Complements town_levels_for_the_desktop (coarser, 7 levels). Dead until wired.",
+    "tiers": [
+      {
+        "name": "Crossing",
+        "crier": "A handful of huts at a river crossing. Somebody calls it Bellmire.",
+        "see": "Three or four huts, a cart, a cookfire."
+      },
+      {
+        "name": "Hamlet",
+        "crier": "Bellmire is a hamlet now - a well dug, and a reason to stay.",
+        "see": "A well, a few more homes, a fenced garden or two."
+      },
+      {
+        "name": "The Guild Post",
+        "crier": "The guild plants a post at Bellmire. The post has a door, and the door is kept.",
+        "see": "The guild post building, and the town's first lamp."
+      },
+      {
+        "name": "Village",
+        "crier": "Bellmire is a village. The scar has a name, and so do we.",
+        "see": "Homes clustered along a cart-track, chickens, a shared pen."
+      },
+      {
+        "name": "Market Day",
+        "crier": "Market day comes to Bellmire. Measure the grain.",
+        "see": "A market square with a few stalls, and the first outside traders."
+      },
+      {
+        "name": "The Chapel",
+        "crier": "A chapel and a bell-tower rise. The bell has no clapper, and rings anyway.",
+        "see": "The temple and its tower, and a small graveyard behind it."
+      },
+      {
+        "name": "Craft Row",
+        "crier": "The smiths and masons raise Craft Row. Count the flasks.",
+        "see": "Workshops trailing smoke, a forge-glow, the mill wheel turning."
+      },
+      {
+        "name": "The Garrison",
+        "crier": "Bellmire raises a garrison. The guard has a yard now - and a Commander.",
+        "see": "Barracks and a training yard, guards on patrol, E3PO up on the wall."
+      },
+      {
+        "name": "Market Town",
+        "crier": "Bellmire stands as a proper market town. The caravans know the road.",
+        "see": "A paved square, more districts, a busy Ford with its Ferryman."
+      },
+      {
+        "name": "The First Wall",
+        "crier": "Stone goes up where the fields used to stop. Keep the door.",
+        "see": "A low wall around the town's heart, and a gatehouse over the road."
+      },
+      {
+        "name": "Walled Town",
+        "crier": "Bellmire is a walled town now. Let them come.",
+        "see": "A full curtain wall, corner towers, a district banner on each quarter."
+      },
+      {
+        "name": "City in all but Charter",
+        "crier": "Bellmire is a city in all but the charter - and the scar is deeper than it has ever been.",
+        "see": "Dense districts, a second ring of homes outside the wall, traffic at every gate."
+      }
+    ]
   }
 }

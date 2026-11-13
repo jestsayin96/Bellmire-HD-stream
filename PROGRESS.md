@@ -2067,3 +2067,32 @@ dungeon-side direct counters (live boss poll, trap_log) undercounted vs the feed
 reliable; the live-delve poll is now every-frame for a future delve-heavy run (set CENSUS_MIN higher, or seed a party
 straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed except two read-only census counters
 (Rig.plays, Spells.cast_counts). Backups scripts/rig.gd.bak_d28, scripts/spells.gd.bak_d28 (not committed).
+
+
+## C-cycle 4 - viewer propositions, disasters, world events, growth tiers, shop/trader goods (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- The "blocked on writing" cycle: the desktop worker cannot build these until the words exist. Everything went into
+  existing owned files as NEW additive top-level blocks; no new data files; no .gd/.tscn/assets/web; every pre-C4 key
+  preserved byte-identical. Merged origin/main first, keeping BOTH PROGRESS sides on the conflict (COORDINATION 11.5).
+- lore_lines.json NEW blocks:
+  - "propositions" (T4 viewer-voting laws): 17 entries across law/taxes/militia/building/faith/outsiders, each a
+    title + flavour + a stated CONSEQUENCE good AND bad (a law that only helps is boring).
+  - "disasters" (D34): volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor + scarstorm
+    (wild-magic) + flood (river) = 11. Each: begin / during[] / pass lines + a plain cost statement to implement.
+  - "events" (D33): 4 NAMED bandit camps (Red Harl, Sedge the Toll, Cob Ashfoot, The Weasel), 3 monster camps, and a
+    wandering boss (The Scarred Lord) that scales to town level - reusing the eight canon lords, never a new one.
+    Each: appears / while (what it does to the town) / cleared.
+  - "growth_tiers" (D31/D32): 12 stages Crossing -> City-in-all-but-charter, each a crier line + what a viewer should
+    SEE appear - a long earned climb (town levels far too fast). Complements town_levels_for_the_desktop.
+- items.json NEW blocks: "shop_stock" (12 everyday goods a shop displays) and "trader_cargo" (10 higher-value caravan
+  goods worth losing to bandits). Flagged by block; keyed {name,cost,flavour} like the rest of the file.
+- bosses.json and potions.json NOT touched this cycle.
+- VALIDATION (python only, no Godot): every data/*.json parses; every pre-C4 key byte-identical; propositions carry
+  good+bad and cover all six categories; disasters carry begin/during/pass/cost; events and tiers well-formed. VALIDATION OK.
+- CODE WIRING THESE IMPLY (for the supervisor to turn into tracked items - all new lore/data keys, dead until the
+  owning code file reads them; content worker never writes code):
+  1. T4 voting: read lore_lines "propositions".entries, apply each good/bad consequence to the town.
+  2. D34: read lore_lines "disasters", fire begin/during/pass and apply each "cost" as a mechanic.
+  3. D33: read lore_lines "events", spawn the camps and the wandering boss (scale it; reuse the eight canon lords).
+  4. D31/D32: read lore_lines "growth_tiers".tiers, slow the climb and render each "see".
+  5. D35/D39: read items.json "shop_stock" and "trader_cargo" for shop display and interceptable caravan cargo.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor. Not a WIP commit.

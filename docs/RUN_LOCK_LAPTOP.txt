@@ -1,1 +1,7 @@
-IDLE 2026-11-12 23:55 - L39 DONE and pushed (L-cycle 120); next L38. OPEN: _l32_test's base phase measures 1.0 FPS since D24's TAA/MSAA merged - its relative FPS gate was vacuous, now guarded and failing loudly; needs an ID + owner. L27b still WIP (0f3986c), owes _l25_test + windowed _l27b_shot.
+IDLE 2026-11-13 00:05 - L39 DONE (L-cycle 120); next L38.
+FLAGGED FOR THE SUPERVISOR (WORK_PLAN tail, no ID - supervisor assigns): _l32_test's FPS gate is VACUOUS on
+the laptop since D24 merged - base phase measures 1.0 FPS, so its relative checks passed trivially and it
+printed OK while testing nothing. Now guarded (base >= 10 FPS asserted first), so _l32_test REPORTS FAIL on
+this laptop until the base phase is sorted - that is the flagged item, not a regression; do not let it block
+an unrelated laptop item. Also flagged: _l24_test is flaky (3/6 once, 6/6 on re-run, nothing changed).
+L27b still WIP (0f3986c), owes _l25_test + windowed _l27b_shot.

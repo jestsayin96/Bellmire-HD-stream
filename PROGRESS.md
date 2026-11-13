@@ -3594,3 +3594,30 @@ just been re-enabled has no temporal history to resolve against.
   want L repurposed (e.g. to fold the Satchel like I, or toggle something else), say the word. The L51
   Satchel's "No rings, no cloak..." hint still clips at the panel edge ("!wear ri[ng]") - a pre-existing
   L51 clip, not touched here; I can widen or wrap that line if you want it to read in full.
+
+## L-cycle 135 - L44 _l24_test made deterministic (laptop jestai, 2026-11-13) - L44 DONE
+THE RACE, FOUND RATHER THAN GUESSED AT. _l24_test put Ash in the bits lane for 60 SECONDS and then ran
+its final checks 1200 FRAMES later. Spotlight seconds are REAL seconds (left -= delta / time_scale), so
+those 1200 frames are 20 s at 60 fps but about 60 s at the 14-20 fps this machine actually runs during a
+delve - which is exactly when the second half of this test runs. The hold expired right as the final
+asserts fired, so "Ash's body below is the one the lane holds" failed, and the two checks that depend on
+it fell with it. That is precisely the 3-of-6 failure the supervisor recorded, and it explains why an
+immediate re-run passed: the re-run happened to be faster.
+  It is also, pleasingly, the same shape of bug as L43's: a test measuring in frames something that lives
+  in seconds.
+- FIXED BY DRIVING THE STATE, not by retrying - the supervisor's instruction and the L23 precedent:
+  1. the hold is now HOLD_S 900 s, far longer than the test can take. This test is about whether the
+     director yields to a lane, NOT about when a lane expires; tying it to an expiry it never meant to
+     test is what made it flaky.
+  2. the final checks no longer fire on a frame number. They wait for the CONDITION they actually need -
+     both delvers' bodies existing and in the tree, since Spotlight.body_of() resolves a delver through
+     the Delve party first - and fail loudly with a named check if that never happens within WAIT_CAP.
+  3. the lane is re-bound to the underground body immediately before the asserts, so the precondition is
+     ESTABLISHED rather than hoped for. Trusting a hold placed before the delve to survive the body swap
+     was the hope the test was built on.
+- NO RETRIES AND NO BEST-OF-N, as instructed. A flaky test is worse than no test because it trains every
+  run, and every supervisor, to ignore red - which is exactly what had started happening to _l32_test.
+- PROVEN TO THE ITEM'S OWN BAR: ten consecutive runs, 6 of 6 checks passing every time, 0 failures. Not
+  a best-of, not a re-run after a red - ten in a row, windowed at 1920x1080, exactly as the DONE asked.
+- Regression: parse 0 SCRIPT ERROR. Only tools/_l24_test.gd changed - no game script was touched, so the
+  wider battery has nothing new to catch; the ten runs ARE the evidence for this item.

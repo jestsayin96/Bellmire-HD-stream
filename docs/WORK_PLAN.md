@@ -593,7 +593,20 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       CROSS-CHECK (either machine): run _l32_test once on the DESKTOP to see whether a collapsed base reproduces there. That distinguishes harness artifact from machine. A healthy D23 soak does NOT rule it out - D23 does not use this harness.
       NOTE FOR EVERY RUN UNTIL THIS IS DONE: _l32_test now REPORTS FAIL on the laptop by design (the new assert). That red is THIS flag, not a regression in L34/L39, and it is not a reason to reject an unrelated laptop item.
       DONE: base reads a sane FPS on both machines with TAA on, the relative checks are meaningful again, the base>=10 and min-sample asserts stay, and a deliberately-broken base makes the suite FAIL.
-- [ ] L44. _l24_test IS FLAKY (OWNER: LAPTOP). Failed 3 of 6 once ("Ash's body below is the one the lane holds" plus the two checks depending on it), then passed 6/6 on an immediate re-run with nothing changed - a lane/delve timing race, the same class as the "before" check already noted.
+- [x] L44. _l24_test IS FLAKY (OWNER: LAPTOP). Failed 3 of 6 once ("Ash's body below is the one the lane holds" plus the two checks depending on it), then passed 6/6 on an immediate re-run with nothing changed - a lane/delve timing race, the same class as the "before" check already noted.
+      DONE L-cycle 135: the race was FOUND, not guessed at. The test put Ash in the bits lane for 60
+      SECONDS and ran its final checks 1200 FRAMES later - and Spotlight seconds are REAL seconds, so
+      1200 frames is 20 s at 60 fps but about 60 s at the 14-20 fps this machine runs DURING A DELVE,
+      which is when the second half of this test runs. The hold expired just as the asserts fired, which
+      is exactly the recorded 3-of-6 failure, and it explains why an immediate re-run passed: it was
+      faster. Same shape as L43 - a test measuring in frames something that lives in seconds.
+      Fixed by DRIVING the state (the L23 precedent), not by retrying: the hold is 900 s so it cannot
+      expire inside a test that never meant to test expiry; the final checks wait for the CONDITION they
+      need (both delvers' bodies in the tree, since body_of resolves through the Delve party first) and
+      fail with a named check if it never arrives; and the lane is re-bound to the underground body
+      immediately before the asserts, so the precondition is ESTABLISHED rather than hoped for.
+      NO retries and NO best-of-N. PROVEN: ten consecutive windowed runs, 6/6 every time, 0 failures.
+      Only the test file changed - no game script touched.
       SUPERVISOR'S DECISION: make it DETERMINISTIC, following the precedent already set by L23 (_l20_test drives its fight and raid shots deterministically rather than hoping the timing lines up). Drive the lane/delve state the test needs instead of waiting on it. Do NOT paper over it with retries or a best-of-N: a flaky test is worse than no test, because it trains every run - and every supervisor - to ignore red. DONE: _l24_test passes 6/6 on ten consecutive runs.
 
 # Phase L - Mr. E's Nov 13 review (the stream test + his 20-point list). IDs by the supervisor.

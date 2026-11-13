@@ -10,8 +10,8 @@
     "works": ["Benches, tools, a half-made thing nobody finished. Don't touch the architect's toys.", "The work stopped mid-stroke, as if called away.", "Half a machine, and no telling what the other half was for.", "Chalk sums cover the wall - the same sum, wrong every time.", "The architect's bench is set for a hand that never came back.", "Tools laid out for a job nobody named. Leave the architect's toys be."],
     "warren": ["Doorways, chimneys, a street sign - a whole town, swallowed.", "Somebody lived here once and kept a window box.", "A doorway in the floor, and a doorway in the ceiling right above it.", "Washing on a line, gone to dust, still pegged.", "A whole street, folded into the dark like a letter.", "A doll in a window box. Someone waved from here, once."]
   },
-  "descend": ["%s %s into the scar.", "%s %s down past the guild post. The door is kept behind them.", "%s %s into the dark below Bellmire, counting the flasks.", "%s %s below, where the lamps are lit against nothing good.", "%s %s down the guild stair, flasks stowed and counted.", "%s %s into the dark - light first, steel after.", "%s %s below Bellmire, where the meadow turns to mountain.", "%s %s past the memorial and down into the deep.", "%s %s on the guild's coin, and the guild wants a return.", "%s %s below, boots loud on the first stair and quiet after.", "%s %s into the scar with the lamps trimmed low.", "%s %s down, and Bellmire holds its breath."],
-  "cleared": ["Floor %d cleared.", "Floor %d is quiet again.", "Floor %d falls silent.", "Floor %d holds, for now.", "Floor %d is done, and the guild writes it down.", "Floor %d - the dark backs off a step.", "Floor %d quiets, and something deeper takes notice.", "Floor %d won. Count the flasks; one is always short.", "Floor %d cleared; the lamps move down a step.", "Floor %d is still, and the Chronicle catches up.", "Floor %d holds. The scar keeps count too.", "Floor %d done - breathe, then down."],
+  "descend": ["%s %s into the scar.", "%s %s down past the guild post. The door is kept behind them.", "%s %s into the dark below Bellmire, counting the flasks.", "%s %s below, where the lamps are lit against nothing good.", "%s %s down the guild stair, flasks stowed and counted.", "%s %s into the dark - light first, steel after.", "%s %s below Bellmire, where the meadow turns to mountain.", "%s %s past the memorial and down into the deep.", "%s %s on the guild's coin, and the guild wants a return.", "%s %s below, boots loud on the first stair and quiet after.", "%s %s into the scar with the lamps trimmed low.", "%s %s down, and Bellmire holds its breath.", "%s %s below with the guild's coin and the guild's warning.", "%s %s down the scar while the crier is still reading the name.", "%s %s into the deep, and the memorial gets another look on the way past.", "%s %s below, lamp trimmed, flasks counted, door kept behind them.", "%s %s down where the mountain starts under the meadow.", "%s %s into the scar, and the dark makes room."],
+  "cleared": ["Floor %d cleared.", "Floor %d is quiet again.", "Floor %d falls silent.", "Floor %d holds, for now.", "Floor %d is done, and the guild writes it down.", "Floor %d - the dark backs off a step.", "Floor %d quiets, and something deeper takes notice.", "Floor %d won. Count the flasks; one is always short.", "Floor %d cleared; the lamps move down a step.", "Floor %d is still, and the Chronicle catches up.", "Floor %d holds. The scar keeps count too.", "Floor %d done - breathe, then down.", "Floor %d gives it up. The lamps go lower.", "Floor %d cleared - the guild owes nothing yet.", "Floor %d empty, and the quiet is the suspicious kind.", "Floor %d is behind them. So is the way out.", "Floor %d settled. Something below shifts its weight.", "Floor %d cleared, and the Chronicle spells the name right."],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
     "grubmother": "The floor is wet, and getting wetter.",
@@ -30,15 +30,15 @@
     "kept": "A voice the guild knew calls a name the guild remembers."
   },
   "barks": {
-    "enter": ["Count the flasks.", "Keep the door.", "Light first. Then steel.", "Mind the floor.", "Lamps up.", "Down we go.", "Grain and flasks.", "Keep together.", "Eyes open.", "Boots on.", "Flasks? Flasks.", "After you."],
-    "lord": ["Hold together!", "That one's mine.", "Not today.", "Keep the door!", "Shapes, not numbers!", "On me!", "Break it where it's thin.", "For the door!", "This one carries a note.", "Big one. Stay loose.", "Mind its shape.", "Trade ground, not blows."],
-    "trap": ["Floor's wrong here.", "Step where I step.", "Clever. Not clever enough.", "Floor lies here.", "Don't trust the stone.", "That click wasn't us.", "Hold - hold.", "Mark it and move.", "Not that tile.", "Heard that click before.", "Slow is smooth."],
-    "hurt": ["I'm bleeding!", "Too close.", "Someone mend me!", "That's blood.", "I'm hit!", "Mend, now!", "Still standing.", "Close one.", "Patch me!", "That one hurt.", "Still here."],
-    "drink": ["Bottoms up.", "Tastes of iron.", "That's better.", "Down it goes.", "Iron and honey.", "Steady now.", "One less flask.", "That'll hold.", "Cheers, apothecary.", "Needed that.", "Back in it."],
-    "misfire": ["That wasn't the spell I cast.", "The scar's answering again.", "Stupid scar.", "The scar took it.", "Wrong spell, wrong day.", "It answered, not me.", "Hate this ground.", "Came out sideways.", "Scar's greedy today.", "Not what I asked for.", "Every time, this floor."]
+    "enter": ["Count the flasks.", "Keep the door.", "Light first. Then steel.", "Mind the floor.", "Lamps up.", "Down we go.", "Grain and flasks.", "Keep together.", "Eyes open.", "Boots on.", "Flasks? Flasks.", "After you.", "Trim the lamp.", "Doors first.", "Quiet feet.", "Nobody wanders."],
+    "lord": ["Hold together!", "That one's mine.", "Not today.", "Keep the door!", "Shapes, not numbers!", "On me!", "Break it where it's thin.", "For the door!", "This one carries a note.", "Big one. Stay loose.", "Mind its shape.", "Trade ground, not blows.", "Watch the shoulders.", "It telegraphs. Wait for it.", "Door behind us - keep it.", "Spread out, it's slow."],
+    "trap": ["Floor's wrong here.", "Step where I step.", "Clever. Not clever enough.", "Floor lies here.", "Don't trust the stone.", "That click wasn't us.", "Hold - hold.", "Mark it and move.", "Not that tile.", "Heard that click before.", "Slow is smooth.", "Wrong stone. Back.", "That seam's new.", "Dust sits funny there.", "Tap before you tread."],
+    "hurt": ["I'm bleeding!", "Too close.", "Someone mend me!", "That's blood.", "I'm hit!", "Mend, now!", "Still standing.", "Close one.", "Patch me!", "That one hurt.", "Still here.", "Bleeding, not beaten.", "Flask - now.", "Took that one wrong.", "Breathing. Mostly."],
+    "drink": ["Bottoms up.", "Tastes of iron.", "That's better.", "Down it goes.", "Iron and honey.", "Steady now.", "One less flask.", "That'll hold.", "Cheers, apothecary.", "Needed that.", "Back in it.", "Tastes of the scar.", "Last one, mind.", "Honey and rust.", "Count what's left."],
+    "misfire": ["That wasn't the spell I cast.", "The scar's answering again.", "Stupid scar.", "The scar took it.", "Wrong spell, wrong day.", "It answered, not me.", "Hate this ground.", "Came out sideways.", "Scar's greedy today.", "Not what I asked for.", "Every time, this floor.", "The ground ate it.", "Asked for fire. Got weather.", "Scar's listening again.", "Not my spell. Not my fault."]
   },
   "misfire": ["%s's %s goes wrong - the scar answers (%d vs DC %d).", "%s reaches for %s and the scar hands back something else (%d vs DC %d).", "%s's %s comes out sideways - wild magic (%d vs DC %d).", "%s's %s turns in their hand - the scar answers (%d vs DC %d).", "%s tries %s and the ground gives it back wrong (%d vs DC %d).", "%s's %s unravels mid-word - wild magic (%d vs DC %d).", "%s casts %s; the scar casts something else (%d vs DC %d)."],
-  "epitaphs": ["Measured the grain. Counted the flasks. Kept the door.", "The scar keeps what it takes.", "Went down with a lamp. Did not come up.", "The guild writes the name and keeps it.", "Somewhere below, a bell with no clapper rings once.", "One floor too many.", "Lit a lamp. The dark kept it.", "Counted every flask but the last.", "The guild writes the name; the scar keeps the rest.", "Measured the grain. The grain ran out.", "Went down proving something. Proved it.", "Kept the door, until the door kept them.", "The bell with no clapper rang, and they did not come up.", "Named on the roll, and marked with a dagger.", "Paid the guild's price in full.", "The door held. They did not.", "Last seen going down, lamp high.", "The Chronicle spells the name right, at least.", "Fed the scar and asked for nothing.", "A good hand with a flask, to the end.", "Kept the door one floor too long."],
+  "epitaphs": ["Measured the grain. Counted the flasks. Kept the door.", "The scar keeps what it takes.", "Went down with a lamp. Did not come up.", "The guild writes the name and keeps it.", "Somewhere below, a bell with no clapper rings once.", "One floor too many.", "Lit a lamp. The dark kept it.", "Counted every flask but the last.", "The guild writes the name; the scar keeps the rest.", "Measured the grain. The grain ran out.", "Went down proving something. Proved it.", "Kept the door, until the door kept them.", "The bell with no clapper rang, and they did not come up.", "Named on the roll, and marked with a dagger.", "Paid the guild's price in full.", "The door held. They did not.", "Last seen going down, lamp high.", "The Chronicle spells the name right, at least.", "Fed the scar and asked for nothing.", "A good hand with a flask, to the end.", "Kept the door one floor too long.", "Took the stair down and the guild's coin with it.", "Knew the shapes. Met a new one.", "Walked in light, left in the dark.", "The lamp came back. They did not.", "Marked present on the roll, and absent everywhere else.", "Trimmed the lamp low to save oil. Saved oil.", "Bellmire remembers the name and nothing else.", "Went down for the gold and found the rest of it.", "Mended everyone but themselves.", "The flask was full. The hand was slow.", "Stood where the floor lied.", "No body to bury. The guild buried the name."],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
     "2": "Folded twice; the smith signs it.",
@@ -60,18 +60,27 @@
     "_note": "E3PO - Commander of the Guards. He CANNOT die; badly hurt he withdraws to the barracks, heals, and returns. Immortal, beloved, a little pompous, utterly reliable. For the desktop's raids.gd/town.gd if it wires him (content worker never touches code). Additive; dead until wired.",
     "intro": [
       "E3PO takes the wall. The whole guard stands straighter.",
-      "The Commander is on the field. Nobody tells him to be careful."
+      "The Commander is on the field. Nobody tells him to be careful.",
+      "The gate opens, and it is only E3PO coming out to meet them.",
+      "E3PO arrives at a walk. Running would suggest doubt.",
+      "The Commander's voice reaches the back of the square before he does."
     ],
     "withdraw": [
       "E3PO is hauled to the barracks, swearing he is fine.",
       "The Commander falls back to heal. He will be back before you miss him.",
       "Too much even for E3PO - he withdraws to the barracks.",
-      "They carry E3PO off the wall. 'A scratch,' he says, bleeding freely."
+      "They carry E3PO off the wall. 'A scratch,' he says, bleeding freely.",
+      "E3PO goes down on one knee and the whole wall goes quiet. Then he swears, and it starts breathing again.",
+      "The Commander is carried off still giving orders over a shoulder.",
+      "'Barracks. Briefly.' E3PO lets himself be helped, which costs him more than the wound."
     ],
     "return": [
       "E3PO is back on the wall, mended and mortified.",
       "The Commander returns to duty. He apologises to no one.",
-      "E3PO retakes the gate, good as new and twice as loud."
+      "E3PO retakes the gate, good as new and twice as loud.",
+      "E3PO walks out of the barracks buckling the last strap. 'Where were we.'",
+      "The Commander returns with fresh bandages and the same volume.",
+      "E3PO is back, and the raiders can tell from the far field."
     ],
     "says": [
       "Hold the line. The line holds because I say so.",
@@ -81,15 +90,76 @@
       "They do not pay me to fall. They do not pay me at all - I simply refuse to leave.",
       "The door stays shut. That is the whole job, and I am very good at it.",
       "Wounded? I prefer 'briefly inconvenienced'.",
-      "Bellmire sleeps because I do not."
+      "Bellmire sleeps because I do not.",
+      "Shapes, not numbers. That goes for raiders too.",
+      "I do not require a monument. A kept door will do.",
+      "If the gate holds and the grain is counted, the day is a success. The rest is weather.",
+      "Call me Commander. 'Sir' is for men who might retire."
     ],
     "town_talk": [
       "They say E3PO has held the gate since before there was a gate.",
       "Old-timers swear E3PO has outlived three of his own gravestones.",
       "The children drill with sticks and name the loudest one E3PO.",
       "No raider has taken the Keep door while the Commander draws breath - which is to say, never.",
-      "The guild keeps a chair for E3PO at every feast. He never sits; he watches the door."
-    ]
+      "The guild keeps a chair for E3PO at every feast. He never sits; he watches the door.",
+      "The Watch say the Commander's armour has more dents than the gate has nails.",
+      "There is a standing wager at the tavern on what could fell E3PO. Nobody has collected.",
+      "The masons built the new wall a hand taller because he asked twice.",
+      "They tried to carve him a statue. He made them turn it to face the door.",
+      "Every recruit hears the same first words: 'The door stays shut.'"
+    ],
+    "_note_extras": "Added keys (C-cycle 5): raid / disaster / festival lines, and viewer_roll keyed by outcome (crit, high, low, fumble) for the d20. Same voice as 'says'. Additive; dead until wired.",
+    "raid": [
+      "E3PO plants himself in the gateway. 'This far. No further, and I am being generous.'",
+      "The Commander walks the wall at a stroll, which is somehow worse for the raiders.",
+      "'Form up on me! I am the easiest thing on this field to find.'",
+      "E3PO takes a blow meant for a bowman, then tells the bowman off for standing there.",
+      "'They brought ladders. Charming. Fetch the poles.'",
+      "The Commander counts the raiders aloud. The guard find it steadying. The raiders do not.",
+      "'Nobody dies tonight on my watch. I have written it down, so it is official.'",
+      "E3PO shoulders the gate shut with a raider still arguing on the other side."
+    ],
+    "disaster": [
+      "E3PO has the bucket line running before anyone thinks to ask him.",
+      "'Fire does not negotiate. Neither do I. Pass the buckets.'",
+      "The Commander carries two children out of the smoke and apologises for the noise.",
+      "'A disaster is a raid with worse manners. Work the problem.'",
+      "E3PO stands in the floodwater directing carts, soaked to the breastplate.",
+      "'Grain to the Keep, flasks to the chapel, people first. Move.'",
+      "The Commander does not sleep while the town is burning, drowning or shaking.",
+      "'Count the living twice. Then count them again for me.'"
+    ],
+    "festival": [
+      "E3PO attends the feast in full harness and declines a chair, as always.",
+      "'Dance. Someone has to watch the door while you do.'",
+      "The Commander judges the pie contest and refuses to be bribed, loudly, for an hour.",
+      "E3PO is talked into one dance and performs it like a drill.",
+      "'Festival rules: drink what you like. The gate stays shut.'",
+      "They hand the Commander a flower crown. He wears it over the helm.",
+      "E3PO lifts a cup to the dead, names every one, and goes back to the wall."
+    ],
+    "viewer_roll": {
+      "crit": [
+        "'Now THAT is how it is done. Write it down. Write it twice.'",
+        "The Commander salutes. From E3PO, that is a parade.",
+        "'Were you trained by me? No? Then you are frighteningly talented.'"
+      ],
+      "high": [
+        "'Adequate. High praise, from me.'",
+        "The Commander nods once. The guild post treats it as a medal.",
+        "'Good hands. Keep them attached.'"
+      ],
+      "low": [
+        "'Luck is a resource and you have spent yours. Use skill.'",
+        "The Commander looks away politely, which is worse than shouting.",
+        "'We will say the dice were tired.'"
+      ],
+      "fumble": [
+        "'I have seen worse. I have not seen worse today.'",
+        "The Commander writes something in his book. It is not your name spelled kindly.",
+        "'Stand up. Dust off. The dice do not get the last word. I do.'"
+      ]
+    }
   },
   "town_life": {
     "_note": "Ambient Bellmire flavour as the town grows - crier calls, market and guild chatter, building news. For the desktop's town.gd if it wires a ticker; content worker never touches code. Additive; dead until wired.",
@@ -243,7 +313,9 @@
       "begin": "The mountain above the scar wakes - ash on the wind, and the sky goes copper.",
       "during": [
         "Ash falls on Bellmire; the sun is a dull coin behind the smoke.",
-        "The river runs grey, and the fish float up dead."
+        "The river runs grey, and the fish float up dead.",
+        "Cinders tick off the roof-tiles all night; nobody opens a shutter.",
+        "The crier reads the day's news through a cloth over his mouth."
       ],
       "pass": "The mountain settles. Ash greys every roof, but the air clears.",
       "cost": "A buried harvest and sickened livestock; the worst-hit district must be rebuilt."
@@ -252,7 +324,9 @@
       "begin": "Fire in Craft Row - a forge banked wrong, and the wind unkind.",
       "during": [
         "The bucket line runs from the river; the Watch beats at the flames.",
-        "Smoke rolls over the square as the smiths' roofs go up."
+        "Smoke rolls over the square as the smiths' roofs go up.",
+        "Craft Row is a tunnel of heat; the Watch wets the next roof down and waits.",
+        "Somebody's apprentice runs back in for the tools and is dragged out again."
       ],
       "pass": "The fire is out. A row of workshops is char and cinder.",
       "cost": "Buildings in one district burned down and rebuilt from nothing; the smiths sit idle until then."
@@ -261,7 +335,9 @@
       "begin": "No rain since the thaw. The river drops, and the wells go shy.",
       "during": [
         "The crops stand yellow and brittle in the field.",
-        "The queue at the well starts before dawn."
+        "The queue at the well starts before dawn.",
+        "The mill-wheel stands still in a riverbed of stones.",
+        "Dust comes off the fields in sheets and settles on the market bread."
       ],
       "pass": "Rain, at last. The river climbs, and Bellmire drinks easy again.",
       "cost": "A harvest cut to nothing and thinning livestock; morale sinks until the wells fill."
@@ -270,7 +346,9 @@
       "begin": "The barns are near bare, and spring is a long way off.",
       "during": [
         "Rations at the guild post; the thin get thinner.",
-        "A copper will not buy bread that is not there."
+        "A copper will not buy bread that is not there.",
+        "The guild post weighs every portion and still sends people away short.",
+        "Children are fed first, and the adults have agreed not to discuss it."
       ],
       "pass": "The first harvest comes in, and Bellmire eats again.",
       "cost": "The town shrinks as the weak are lost; no growth until the barns refill."
@@ -279,7 +357,9 @@
       "begin": "A fever walks the homes. The apothecary names it, then runs short of cures.",
       "during": [
         "Doors chalked with a warning mark; the healers do not sleep.",
-        "The chapel bell tolls more than anyone likes."
+        "The chapel bell tolls more than anyone likes.",
+        "The healers run out of simples before they run out of patients.",
+        "Market day is called off; the square has never looked bigger."
       ],
       "pass": "The fever burns itself out. Bellmire counts its dead and opens the windows.",
       "cost": "The population falls, and a quarantine freezes trade and work while it lasts."
@@ -288,7 +368,9 @@
       "begin": "A great storm drives inland, and the sky turns the colour of a bruise.",
       "during": [
         "Roofs peel away; the river bursts its low banks.",
-        "Nobody walks the wall in this."
+        "Nobody walks the wall in this.",
+        "The gate bar is doubled and the horses are brought inside the hall.",
+        "Something large goes past the window sideways and nobody goes to look."
       ],
       "pass": "The storm blows through. Bellmire is sodden and battered, but standing.",
       "cost": "Roofs and buildings torn across the town, fields flooded, and days of repair."
@@ -297,7 +379,9 @@
       "begin": "A finger of wind drops out of the storm and walks toward the town.",
       "during": [
         "It takes a barn whole and sets it down in splinters.",
-        "Mind the sky - it has not lifted yet."
+        "Mind the sky - it has not lifted yet.",
+        "Carts are roped to posts and the posts are not reassuring.",
+        "It walks the far field twice and turns, and the whole town watches the turn."
       ],
       "pass": "The wind lifts and is gone, leaving a straight scar of wreckage.",
       "cost": "A random line of buildings flattened, and livestock scattered or lost."
@@ -306,7 +390,9 @@
       "begin": "The ground rolls - the scar shudders, and so does everything above it.",
       "during": [
         "Walls crack; the clapperless bell swings and almost rings.",
-        "Aftershocks, and nobody trusts a roof."
+        "Aftershocks, and nobody trusts a roof.",
+        "The well comes up muddy and the masons will not say why yet.",
+        "Every door in Bellmire sticks, and one wall leans that did not lean before."
       ],
       "pass": "The shaking stops. Bellmire checks its walls, and its dead.",
       "cost": "Walls and buildings cracked or down town-wide; the scar may gape a little deeper."
@@ -315,7 +401,9 @@
       "begin": "A star falls - too slow, too bright - and comes down past the fields.",
       "during": [
         "The impact lights the night; the ground is scorched for a mile.",
-        "Something glitters in the new crater, and it hums like the scar."
+        "Something glitters in the new crater, and it hums like the scar.",
+        "Carters give the crater a wide berth; the horses refuse it outright.",
+        "The scar hums all night, as if something answered."
       ],
       "pass": "The fires burn out. A crater smokes where the orchard used to stand.",
       "cost": "An outlying district or the orchard is destroyed - but the crater yields scarglass worth a fortune."
@@ -324,7 +412,9 @@
       "begin": "The scar flares, and wild magic rolls up out of the dungeon mouth and over the town.",
       "during": [
         "Every spell cast in Bellmire goes wrong; the lamps burn strange colours.",
-        "The livestock speak for a heartbeat, and the well runs uphill."
+        "The livestock speak for a heartbeat, and the well runs uphill.",
+        "The apothecary corks everything and sits on the box.",
+        "A delver's lamp burns green, and the dark leans in to look."
       ],
       "pass": "The scar quiets. The magic settles, mostly, and the town tallies what changed.",
       "cost": "Spellcasters are useless while it lasts; random buildings warp, and a few folk are scar-touched for good or ill."
@@ -333,10 +423,30 @@
       "begin": "The thaw comes all at once. The river climbs the banks, and keeps climbing.",
       "during": [
         "The low district is ankle-deep, then knee-deep.",
-        "The Ford is gone under brown water; no crossing today."
+        "The Ford is gone under brown water; no crossing today.",
+        "The grain store is moved up a floor by every pair of hands in town.",
+        "Boats in the lane where carts should be, and someone fishing out of a window."
       ],
       "pass": "The water drops back, leaving mud in every doorway - but the town held.",
       "cost": "Riverside buildings and stores ruined; the Ford and its trade shut until the river falls."
+    },
+    "blight": {
+      "begin": "A black rot is in the grain - it came up in one field and did not stop there.",
+      "during": [
+        "Whole rows are cut and burned before the rot can walk to the next field.",
+        "The miller turns away sack after sack, and says nothing, which is worse."
+      ],
+      "pass": "The blight burns out at the field edge. What is left of the harvest comes in early.",
+      "cost": "Most of the standing harvest is lost; food prices climb and the stores do not refill this season."
+    },
+    "coldsnap": {
+      "begin": "The cold comes early and hard - the Ford freezes over in a night.",
+      "during": [
+        "Firewood costs what wine cost last week, and the queue for it is longer.",
+        "The Watch walk in pairs now, because one man alone stops moving."
+      ],
+      "pass": "The thaw comes. The Ford runs again, and Bellmire counts who it kept.",
+      "cost": "Livestock lost and work stopped: building, trade and the fields all halt until the thaw."
     }
   },
   "events": {

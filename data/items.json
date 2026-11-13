@@ -51,7 +51,13 @@
     "mill_mitts":            {"name": "Millhand's Mitts", "slot": "gloves", "cost": 200, "dmg": 1, "flavour": "Hands that shift full sacks all day hit like full sacks."},
     "gate_whistle":          {"name": "Gatehouse Whistle", "slot": "amulet", "cost": 230, "saves": 1, "flavour": "One blast for bandits. Two for the scar. Nobody blows it twice."},
     "commander_mantle":      {"name": "Commander's Field Mantle", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "E3PO wore one to the wall and walked back. He always walks back."},
-    "tally_ring":            {"name": "Tallykeeper's Ring", "slot": "ring", "cost": 210, "hp": 8, "flavour": "Notched once a season. The notches go a long way round."}
+    "tally_ring":            {"name": "Tallykeeper's Ring", "slot": "ring", "cost": 210, "hp": 8, "flavour": "Notched once a season. The notches go a long way round."},
+    "thaw_ring": {"name": "Ring of the Thaw", "slot": "ring", "cost": 340, "saves": 1, "flavour": "Cut from the Ford's ice the morning it broke. Cold, and glad to be."},
+    "blight_charm": {"name": "Blightward Charm", "slot": "amulet", "cost": 360, "hp": 10, "flavour": "A rot-black ear of grain set in glass. Worn as a warning, not a trophy."},
+    "bucketline_gloves": {"name": "Bucket-line Gloves", "slot": "gloves", "cost": 260, "ac": 1, "flavour": "Scorched to the palm. In Bellmire that counts as a qualification."},
+    "barracks_cloak": {"name": "Barracks Watch-cloak", "slot": "cloak", "cost": 440, "ac": 1, "flavour": "Issued by the Commander himself, which means it was counted first."},
+    "crater_ring": {"name": "Crater-glass Ring", "slot": "ring", "cost": 520, "saves": 1, "flavour": "Glass from the night the sky fell. It hums when the scar does."},
+    "drover_spurs": {"name": "Drover's Spurs", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Walked cattle through a hurricane and did not lose one. Ask him about it. He will tell you."}
   },
   "cosmetics": {
     "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a"},
@@ -149,7 +155,22 @@
     "pet_ram":               {"name": "a ram", "kind": "pet", "cost": 300, "model": "res://assets/animals/Sheep.glb", "scale": 0.192},
     "pet_sow":               {"name": "a sow", "kind": "pet", "cost": 300, "model": "res://assets/animals/Pig.glb", "scale": 0.128},
     "pet_carthorse":         {"name": "a carthorse", "kind": "pet", "cost": 420, "model": "res://assets/animals/Horse.glb", "scale": 0.24},
-    "pet_vixen":             {"name": "a vixen", "kind": "pet", "cost": 320, "model": "res://assets/animals/Red.glb", "scale": 0.0032}
+    "pet_vixen":             {"name": "a vixen", "kind": "pet", "cost": 320, "model": "res://assets/animals/Red.glb", "scale": 0.0032},
+    "thaw_hood": {"name": "Thaw Hood", "kind": "hat", "cost": 160, "colour": "9ac8e0"},
+    "rot_mask": {"name": "Rotwarden's Mask", "kind": "hat", "cost": 200, "colour": "4a5a3a"},
+    "crater_coronet": {"name": "Crater-glass Coronet", "kind": "hat", "cost": 300, "colour": "6a7a8a"},
+    "banner_barracks": {"name": "Barracks Banner", "kind": "banner", "cost": 150, "colour": "3a4a8a"},
+    "banner_bucketline": {"name": "Bucket-line Banner", "kind": "banner", "cost": 140, "colour": "2a6a7a"},
+    "banner_thaw": {"name": "Thaw Banner", "kind": "banner", "cost": 150, "colour": "9ac8e0"},
+    "banner_harvest": {"name": "Harvest-saved Banner", "kind": "banner", "cost": 150, "colour": "c8a23a"},
+    "title_thawkept": {"name": "the Thawkept", "kind": "title", "cost": 240},
+    "title_rotwarden": {"name": "the Rotwarden", "kind": "title", "cost": 240},
+    "title_bucketline": {"name": "of the Bucket Line", "kind": "title", "cost": 180},
+    "title_commanders": {"name": "the Commander's Own", "kind": "title", "cost": 300},
+    "title_craterwalk": {"name": "the Crater-walker", "kind": "title", "cost": 260},
+    "title_lampwright": {"name": "the Lampwright", "kind": "title", "cost": 200},
+    "title_doorkept": {"name": "the Doorkept", "kind": "title", "cost": 220},
+    "title_coldcounted": {"name": "the Cold-counted", "kind": "title", "cost": 240}
   },
   "dyes": {
     "black": "2a2a2e", "white": "e8e4da", "red": "a02a26", "blue": "2a4aa0", "green": "2a7a3a",
@@ -174,7 +195,13 @@
     "peat": "3a2e22",
     "woad": "28467a",
     "madder": "9a3a2a",
-    "tallow": "e0d8b8"
+    "tallow": "e0d8b8",
+    "thaw": "9ac8e0",
+    "rot": "4a3a28",
+    "hoarfrost": "d8e4ee",
+    "cinderfall": "6a5248",
+    "meltwater": "7aa8b8",
+    "lampblack": "1a1814"
   },
   "dye_cost": 25,
   "shop_stock": {

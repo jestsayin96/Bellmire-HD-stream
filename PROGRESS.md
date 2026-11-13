@@ -2394,3 +2394,46 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
 - FOR THE SUPERVISOR: the census tool tools/_d28_census.gd is DESKTOP-owned, so the laptop has not touched
   it. Delve.chests_found and Delve.chests_empty are there for it to read whenever the desktop next edits
   it - that is what "census shows chests spawned/opened" needs on their side.
+
+## C-cycle 5 - E3PO deepened, disaster variants, two new disasters, repeat-line stock, cosmetics (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- No WORK_PLAN CONTENT item was unchecked and unwritten (C1-C3 are writing-complete per Phase O), so this cycle
+  worked the standing backlog in order: E3PO (3), disaster/event variants (4), the lines that repeat most on
+  stream (5), and cosmetics/accessories/dyes (1). Only the four owned files touched: items.json, lore_lines.json.
+  bosses.json and potions.json unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- lore_lines.json "e3po" DEEPENED (Mr. E's favourite; the C-side of D37 - the desktop still owns his behaviour):
+  - NEW keys: "raid" (8), "disaster" (8), "festival" (7), and "viewer_roll" keyed by outcome -
+    crit / high / low / fumble, 3 lines each (12), so the Commander can react to a viewer's d20.
+  - EXTENDED: intro 2->5, withdraw 4->7, return 3->6, says 8->12, town_talk 5->10.
+  - A "_note_extras" string documents the added keys (the original "_note" is untouched and byte-identical).
+- lore_lines.json "disasters": every one of the 11 existing disasters gained 2 more "during" lines (2->4 each,
+  +22) so a repeat viewing does not read identically. TWO NEW disasters in the identical schema, which also
+  settles the "+ one more" the plan asked for and takes the set to 13:
+  - "blight" - cost: most of the standing harvest lost; food prices climb and the stores do not refill this season.
+  - "coldsnap" - cost: livestock lost and work stopped; building, trade and the fields all halt until the thaw.
+  Both carry begin / during[2] / pass / cost in exactly the shape the other 11 use.
+- lore_lines.json repeat-heavy lines (these show the most on a long stream): epitaphs 21->33, descend 12->18
+  (format strings kept exactly two %s), cleared 12->18 (exactly one %d), and all six bark lanes +4 each -
+  enter/lord 12->16, trap/hurt/drink/misfire 11->15. Checked for duplicates against the existing lines: none.
+- items.json cosmetics/accessories/dyes, priced against the existing curve and named from this cycle's lore:
+  - accessories 51->57: thaw_ring, blight_charm, bucketline_gloves, barracks_cloak, crater_ring, drover_spurs.
+    Each carries name/slot/cost/flavour plus exactly ONE stat, like every existing entry; slots are only the
+    five that already exist (ring/amulet/cloak/gloves/boots).
+  - cosmetics 96->111: 3 hats (thaw_hood, rot_mask, crater_coronet), 4 banners (barracks, bucketline, thaw,
+    harvest), 8 titles (Thawkept, Rotwarden, of the Bucket Line, the Commander's Own, Crater-walker,
+    Lampwright, Doorkept, Cold-counted). Hats and banners carry a 6-hex "colour"; titles carry no colour,
+    as the existing titles do. No new pets - a pet needs a real asset path and the content worker does not
+    invent one.
+  - dyes 58->64: thaw, rot, hoarfrost, cinderfall, meltwater, lampblack. dye_cost
+    left at 25, unchanged.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  before/after comparison confirmed every pre-existing key and value present and unchanged and no list
+  shortened; new entries asserted against the existing field sets (slot in the existing five, kind in the
+  existing four, 6-hex colours, one stat per accessory, descend/cleared format specifiers). VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. gear.gd _hat cases for thaw_hood, rot_mask, crater_coronet (same L53 pattern as the earlier hats) - LAPTOP CODE.
+  2. raids.gd/town.gd: e3po.raid, e3po.disaster, e3po.festival lines, and e3po.viewer_roll[crit|high|low|fumble]
+     on a viewer's d20 - DESKTOP BUILD (D37), with the roll hook possibly DESKTOP HUD's dice.gd.
+  3. The two new disasters need their costs implemented like the other 11 (D34) - DESKTOP BUILD.
+  4. Nothing else changes shape: every extension is a longer list or a new sibling key, so existing loaders
+     keep working untouched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

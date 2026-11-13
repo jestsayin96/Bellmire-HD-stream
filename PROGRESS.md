@@ -3223,3 +3223,50 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      quarrymend). It is ambiguous in HEAD too, so I left it alone - additive only. If !brew quarry
      should pick one, that is Mr. E's call and a one-word content fix next cycle.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 21 - world events, viewer laws and the town ticker (laptop CONTENT, branch `content`)
+- WHEN: 2026-11-13. WHERE: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`).
+  R (the code worker's folder) was fetched and left on `laptop` - never checked out, never written to.
+- BACKLOG ITEM 4 (disaster and event VARIANTS) continued. C-cycle 19 widened the 13 disasters; the
+  EVENTS block and the viewer-facing law votes were still thin enough to repeat on a long stream.
+- ONE FILE TOUCHED: data/lore_lines.json. items.json, bosses.json and potions.json untouched.
+- ADDED (all additive, nothing renamed, reworded or removed):
+  - events.bandit_camps 13 -> 20. Seven camps, same five keys (name/leader/appears/while/cleared):
+    Blackbrier Hide (Iver Cutgrass), The Charcoal Camp (Mother Soot), The Rook Field (Carrow Dace),
+    The Salt Road Camp (Tam Pell), The Beekeeper's Hut (Hollis Grin), The Dry Ferry (Nils Odd),
+    The Ox Road Camp (Bram Sallow). Every `while` names a DISTINCT, implementable cost - charcoal,
+    salt, wax, river trade, hauling, foot trade, harvest - so no two camps are the same debuff.
+  - events.monster_camps 12 -> 19. Seven camps, same five keys (name/of/appears/while/cleared):
+    The Thornwake (scar hounds), The Reed Hollow (bog leeches), Potter's Field (risen dead),
+    The Rookery Barn (grave moths), The Split Stone (cave centipedes), The Hog Mire (mire boars),
+    The Chalk Pit (bone crawlers). Costs: livestock, reed/water, gate hours, stored goods, quarry
+    stone, crop, lime/mortar.
+  - propositions.entries 17 -> 32. Fifteen viewer-voted laws, same five keys, and ONLY the six
+    categories already in the file (law/taxes/militia/building/faith/outsiders): The Honest Measure,
+    Blood Price, Chain Them to the Wall, The Delver's Tithe, Hearth Tax, The Scarglass Levy,
+    Drill Every Seventh Day, The Night Horn, Muster the Farmhands, Roof the Market, Dig the Drains,
+    Raise a Granary, Hang a Clapper in the Bell, Bring the Delvers Home, Winter the Caravans.
+    Every one states a precise good AND a precise bad - a law that only helps is not a vote.
+  - town_life.crier 19 -> 29, town_life.market 18 -> 28, town_life.growth 18 -> 28 (+30 ticker lines).
+- VALIDATION OK (python only - the content worker never runs Godot):
+  json.load on all four data files passes. A recursive diff against HEAD confirms NO pre-existing key
+  removed, NO pre-existing value changed and NO list shortened - every old element is byte-identical
+  and the new entries are appended after them. git diff --numstat: 236 added / 3 removed, and all
+  three "removed" lines are the previous last array elements gaining a trailing comma.
+  Every new entry carries exactly the key set its block already used, all values str, no duplicate
+  camp name, no duplicate camp leader, no duplicate proposition title.
+  Formatting preserved exactly: indent=2, CRLF, trailing newline (verified by round-trip against HEAD).
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. events and propositions are both still marked "dead until wired" in the file. Nothing added here
+     changes that; this is stock waiting on D33 (world events) and T4 (viewer law votes).
+  2. Any picker over events.bandit_camps / events.monster_camps must size off len() - 13 and 12 are
+     now wrong. OWNER: DESKTOP BUILD (D33, raids.gd/town.gd).
+  3. propositions is now 32 across six categories. A vote UI that shows a fixed slate, or draws from a
+     hard-coded count, will never offer the new fifteen. If the vote is meant to be one law per
+     category, the per-category counts are now law 6, taxes 6, militia 6, building 6, faith 4,
+     outsiders 4. OWNER: DESKTOP HUD (the vote panel) / DESKTOP BUILD (T4 resolution).
+  4. Each camp's `while` is a standing town debuff, not a line - whoever implements D33 should read the
+     `while` text as the spec for what that camp costs the town while it stands.
+  5. town_life crier/market/growth are a ticker source with no loader yet. If town.gd wires a ticker,
+     roll against len(). OWNER: DESKTOP BUILD.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

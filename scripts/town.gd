@@ -4615,6 +4615,19 @@ func _start_guild() -> void:
 
 ## the one entry point for chat - a fake feed in tests, Twitch IRC in play
 func chat_line(user_id: String, display: String, msg: String) -> String:
+    # D52: raise an existing hero's body BEFORE chat.handle, not after. Signals
+    # fired inside handle (wants_delve / wants_fish / wants_shop) run their
+    # listeners synchronously, and every one guards on heroes.has(uid). At
+    # startup every hero loaded from the on-disk roster is call_deferred(_raise),
+    # so a viewer's first command of the session (very often !delve) arrived
+    # with heroes.has(uid) false - _on_delve returned silently, the hero stood
+    # idle at the well forever, and the chat reply still read "sets out for the
+    # dungeon mouth". Raise FIRST; !enlist (which creates the hero inside
+    # handle) is still covered by the post-handle raise below.
+    if not heroes.has(user_id):
+        var pre := roster.get_hero(user_id)
+        if not pre.is_empty() and roster.is_alive(user_id):
+            _raise(user_id)
     var out := chat.handle(user_id, display, msg)
     var h := roster.get_hero(user_id)
     if not h.is_empty() and roster.is_alive(user_id) and not heroes.has(user_id):

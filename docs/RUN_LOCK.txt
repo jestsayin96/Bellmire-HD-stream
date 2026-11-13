@@ -1,1 +1,1 @@
-IDLE 2026-11-13 13:07 - desktop build: D44b embedded-spawn fixed (committed); residual southern-house route-hug left for next cycle
+IDLE 2026-11-13 16:09 - supervisor: merged content C20 + hud-ui (L62/L61/L63) + laptop (L29a/L29b+delve fix) to main a242347; full gate green (parse 0, offfloor 0/1469, twitch OK, delve loop healthy, townwalk x3 0.000%)

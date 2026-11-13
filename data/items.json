@@ -205,444 +205,587 @@
   },
   "dye_cost": 25,
   "shop_stock": {
+    "_note_tier": "Each entry also carries \"tier\": the growth tier at which this good first appears on a shelf, 1-12, matching lore_lines.growth_tiers. It is the SAME gate as stock_by_tier.shop_adds (the two are generated together and must agree) - this key is here so a shop can filter its own stock with good.tier <= town_tier instead of building a reverse map. Cumulative: a tier-N shop shows every good with tier <= N. Added C-cycle 7.",
     "_note": "Shop display stock (D35/D39) - everyday goods a shop shows on its shelves. Keyed {name,cost,flavour} like the rest of the file. Dead until wired.",
     "grain": {
       "name": "Sack of Grain",
       "cost": 8,
-      "flavour": "Measured, counted, sold by the sack."
+      "flavour": "Measured, counted, sold by the sack.",
+      "tier": 2
     },
     "lampoil": {
       "name": "Flask of Oil",
       "cost": 6,
-      "flavour": "For the lamps. Count them twice."
+      "flavour": "For the lamps. Count them twice.",
+      "tier": 3
     },
     "bread": {
       "name": "Loaf",
       "cost": 2,
-      "flavour": "Yesterday's, half price; today's, full."
+      "flavour": "Yesterday's, half price; today's, full.",
+      "tier": 1
     },
     "ale": {
       "name": "Jug of Ale",
       "cost": 5,
-      "flavour": "The tavern's own. Cloudy and honest."
+      "flavour": "The tavern's own. Cloudy and honest.",
+      "tier": 1
     },
     "rope": {
       "name": "Coil of Rope",
       "cost": 9,
-      "flavour": "Mostly not knots."
+      "flavour": "Mostly not knots.",
+      "tier": 3
     },
     "torches": {
       "name": "Bundle of Torches",
       "cost": 7,
-      "flavour": "Light first, steel after."
+      "flavour": "Light first, steel after.",
+      "tier": 3
     },
     "salt": {
       "name": "Pouch of Salt",
       "cost": 12,
-      "flavour": "Worth its weight, nearly."
+      "flavour": "Worth its weight, nearly.",
+      "tier": 4
     },
     "wool": {
       "name": "Bolt of Wool",
       "cost": 18,
-      "flavour": "Grey, like everything the guild wears."
+      "flavour": "Grey, like everything the guild wears.",
+      "tier": 3
     },
     "candles": {
       "name": "Box of Candles",
       "cost": 10,
-      "flavour": "Chapel grade. Burn slow."
+      "flavour": "Chapel grade. Burn slow.",
+      "tier": 5
     },
     "nails": {
       "name": "Keg of Nails",
       "cost": 14,
-      "flavour": "The masons buy them by the keg."
+      "flavour": "The masons buy them by the keg.",
+      "tier": 5
     },
     "hooks": {
       "name": "Fishhooks",
       "cost": 4,
-      "flavour": "For the river. Mind the Grinning Carp."
+      "flavour": "For the river. Mind the Grinning Carp.",
+      "tier": 2
     },
     "lantern": {
       "name": "Tin Lantern",
       "cost": 22,
-      "flavour": "Keeps a flame in the wind off the scar."
+      "flavour": "Keeps a flame in the wind off the scar.",
+      "tier": 7
     },
     "firewood": {
       "name": "Cord of Firewood",
       "cost": 3,
-      "flavour": "Split, stacked, and sold before the frost."
+      "flavour": "Split, stacked, and sold before the frost.",
+      "tier": 1
     },
     "turnips": {
       "name": "Basket of Turnips",
       "cost": 3,
-      "flavour": "Nobody's favourite. Everybody's dinner."
+      "flavour": "Nobody's favourite. Everybody's dinner.",
+      "tier": 1
     },
     "fish": {
       "name": "String of River Fish",
       "cost": 4,
-      "flavour": "Caught above the ford, where the water still runs clean."
+      "flavour": "Caught above the ford, where the water still runs clean.",
+      "tier": 2
     },
     "cheese": {
       "name": "Round of Cheese",
       "cost": 9,
-      "flavour": "Hard, pale, keeps a month in a cold room."
+      "flavour": "Hard, pale, keeps a month in a cold room.",
+      "tier": 4
     },
     "whetstone": {
       "name": "Whetstone",
       "cost": 11,
-      "flavour": "A blade is only as sharp as the last man who sat down with this."
+      "flavour": "A blade is only as sharp as the last man who sat down with this.",
+      "tier": 4
     },
     "blanket": {
       "name": "Wool Blanket",
       "cost": 20,
-      "flavour": "Grey. Heavy. Worth every coin in the second week of winter."
+      "flavour": "Grey. Heavy. Worth every coin in the second week of winter.",
+      "tier": 4
     },
     "pottery": {
       "name": "Stack of Crockery",
       "cost": 16,
-      "flavour": "Fired at Craft Row. Chipped before it reaches the table."
+      "flavour": "Fired at Craft Row. Chipped before it reaches the table.",
+      "tier": 5
     },
     "boots": {
       "name": "Pair of Boots",
       "cost": 34,
-      "flavour": "Cobbled for the mire, not for the dance floor."
+      "flavour": "Cobbled for the mire, not for the dance floor.",
+      "tier": 5
     },
     "ink": {
       "name": "Pot of Ink",
       "cost": 28,
-      "flavour": "Oak gall and soot. The Chronicle drinks it by the pot."
+      "flavour": "Oak gall and soot. The Chronicle drinks it by the pot.",
+      "tier": 6
     },
     "parchment": {
       "name": "Sheaf of Parchment",
       "cost": 26,
-      "flavour": "Scraped thin. A name fits on a very small piece."
+      "flavour": "Scraped thin. A name fits on a very small piece.",
+      "tier": 6
     },
     "leather": {
       "name": "Hide of Leather",
       "cost": 24,
-      "flavour": "Tanned on the downwind side of town, for good reason."
+      "flavour": "Tanned on the downwind side of town, for good reason.",
+      "tier": 7
     },
     "arrows": {
       "name": "Sheaf of Arrows",
       "cost": 18,
-      "flavour": "Twenty-four, fletched grey. The garrison counts them back."
+      "flavour": "Twenty-four, fletched grey. The garrison counts them back.",
+      "tier": 8
     },
     "shield": {
       "name": "Plain Shield",
       "cost": 45,
-      "flavour": "Lime-wood, hide rim, no device. Devices get you noticed."
+      "flavour": "Lime-wood, hide rim, no device. Devices get you noticed.",
+      "tier": 8
     },
     "spice_twist": {
       "name": "Twist of Spice",
       "cost": 45,
-      "flavour": "A thimble of somewhere warmer, sold by the thimble."
+      "flavour": "A thimble of somewhere warmer, sold by the thimble.",
+      "tier": 9
     },
     "sweets": {
       "name": "Box of Sugared Peel",
       "cost": 30,
-      "flavour": "Market-day money, gone by market-day dusk."
+      "flavour": "Market-day money, gone by market-day dusk.",
+      "tier": 9
     },
     "glass_pane": {
       "name": "Pane of Glass",
       "cost": 55,
-      "flavour": "A window instead of a shutter. That is what a wall buys you."
+      "flavour": "A window instead of a shutter. That is what a wall buys you.",
+      "tier": 10
     },
     "physic": {
       "name": "Apothecary's Physic",
       "cost": 40,
-      "flavour": "Measured, corked, and written down in her ledger."
+      "flavour": "Measured, corked, and written down in her ledger.",
+      "tier": 11
     },
     "mirror": {
       "name": "Hand Mirror",
       "cost": 70,
-      "flavour": "Polished tin. Bellmire can finally afford to look at itself."
+      "flavour": "Polished tin. Bellmire can finally afford to look at itself.",
+      "tier": 11
     },
     "sandglass": {
       "name": "Sand-glass",
       "cost": 90,
-      "flavour": "The hour, in a bottle. The guild has opinions about the hour now."
+      "flavour": "The hour, in a bottle. The guild has opinions about the hour now.",
+      "tier": 12
     },
     "silk_kerchief": {
       "name": "Silk Kerchief",
       "cost": 80,
-      "flavour": "Sold a square at a time, to people who were lately peasants."
+      "flavour": "Sold a square at a time, to people who were lately peasants.",
+      "tier": 12
     },
     "eggs": {
       "name": "Basket of Eggs",
       "cost": 2,
-      "flavour": "Still warm. Count them before you pay."
+      "flavour": "Still warm. Count them before you pay.",
+      "tier": 1
     },
     "waterskin": {
       "name": "Waterskin",
       "cost": 4,
-      "flavour": "Filled above the ford. Below it, you would not."
+      "flavour": "Filled above the ford. Below it, you would not.",
+      "tier": 1
     },
     "butter": {
       "name": "Crock of Butter",
       "cost": 6,
-      "flavour": "Churned this morning, gone by this evening."
+      "flavour": "Churned this morning, gone by this evening.",
+      "tier": 2
     },
     "net": {
       "name": "Fishing Net",
       "cost": 15,
-      "flavour": "Mended more times than it was ever woven."
+      "flavour": "Mended more times than it was ever woven.",
+      "tier": 2
     },
     "tallow": {
       "name": "Tub of Tallow",
       "cost": 7,
-      "flavour": "Lamp fat. Burns dirty, burns cheap, burns."
+      "flavour": "Lamp fat. Burns dirty, burns cheap, burns.",
+      "tier": 3
     },
     "sealing_wax": {
       "name": "Block of Sealing Wax",
       "cost": 13,
-      "flavour": "The guild post has a door, and the door has letters."
+      "flavour": "The guild post has a door, and the door has letters.",
+      "tier": 3
     },
     "preserves": {
       "name": "Jar of Preserves",
       "cost": 8,
-      "flavour": "Last summer in a jar, kept for the worst of the winter."
+      "flavour": "Last summer in a jar, kept for the worst of the winter.",
+      "tier": 4
     },
     "besom": {
       "name": "Besom Broom",
       "cost": 5,
-      "flavour": "Twigs and twine. Every doorway in Bellmire owns one."
+      "flavour": "Twigs and twine. Every doorway in Bellmire owns one.",
+      "tier": 4
     },
     "ribbon": {
       "name": "Reel of Ribbon",
       "cost": 12,
-      "flavour": "Market-day colour, and the first thing bought with a girl's own coin."
+      "flavour": "Market-day colour, and the first thing bought with a girl's own coin.",
+      "tier": 5
     },
     "handscales": {
       "name": "Hand Scales",
       "cost": 38,
-      "flavour": "Brass pans, honest beam. Measure the grain."
+      "flavour": "Brass pans, honest beam. Measure the grain.",
+      "tier": 5
     },
     "mourning_cloth": {
       "name": "Length of Mourning Cloth",
       "cost": 22,
-      "flavour": "Sold by the yard. The chapel keeps a stock. So does the mason."
+      "flavour": "Sold by the yard. The chapel keeps a stock. So does the mason.",
+      "tier": 6
     },
     "psalter": {
       "name": "Chapel Psalter",
       "cost": 60,
-      "flavour": "Copied by hand. The bell has no clapper, so the book does the singing."
+      "flavour": "Copied by hand. The bell has no clapper, so the book does the singing.",
+      "tier": 6
     },
     "bellows": {
       "name": "Hand Bellows",
       "cost": 30,
-      "flavour": "Leather and ash-wood. A forge is a fire somebody keeps breathing."
+      "flavour": "Leather and ash-wood. A forge is a fire somebody keeps breathing.",
+      "tier": 7
     },
     "hide_glue": {
       "name": "Pot of Hide Glue",
       "cost": 14,
-      "flavour": "Smells like the tannery, because it is the tannery."
+      "flavour": "Smells like the tannery, because it is the tannery.",
+      "tier": 7
     },
     "smith_file": {
       "name": "Smith's File",
       "cost": 26,
-      "flavour": "Cuts iron slowly, which is the only way iron is cut."
+      "flavour": "Cuts iron slowly, which is the only way iron is cut.",
+      "tier": 7
     },
     "helm": {
       "name": "Plain Helm",
       "cost": 40,
-      "flavour": "Garrison issue, unpainted. The dents come free."
+      "flavour": "Garrison issue, unpainted. The dents come free.",
+      "tier": 8
     },
     "bowstrings": {
       "name": "Spare Bowstrings",
       "cost": 12,
-      "flavour": "Waxed, coiled, three to a packet. The wet eats the first."
+      "flavour": "Waxed, coiled, three to a packet. The wet eats the first.",
+      "tier": 8
     },
     "soap": {
       "name": "Cake of Scented Soap",
       "cost": 28,
-      "flavour": "A market town can afford to smell like something other than a market."
+      "flavour": "A market town can afford to smell like something other than a market.",
+      "tier": 9
     },
     "figs": {
       "name": "Box of Dried Figs",
       "cost": 36,
-      "flavour": "Came up the road in a crate stamped in a language nobody here reads."
+      "flavour": "Came up the road in a crate stamped in a language nobody here reads.",
+      "tier": 9
     },
     "lock": {
       "name": "Iron Lock and Key",
       "cost": 65,
-      "flavour": "A wall is only a wall if the gate shuts. Same goes for a door."
+      "flavour": "A wall is only a wall if the gate shuts. Same goes for a door.",
+      "tier": 10
     },
     "mortar": {
       "name": "Barrel of Mortar",
       "cost": 30,
-      "flavour": "Lime, sand, and the reason the first wall is still standing."
+      "flavour": "Lime, sand, and the reason the first wall is still standing.",
+      "tier": 10
     },
     "brass_lamp": {
       "name": "Brass Lamp",
       "cost": 85,
-      "flavour": "Hangs in a hall, not on a pole. The lamplighters sniff at it."
+      "flavour": "Hangs in a hall, not on a pole. The lamplighters sniff at it.",
+      "tier": 11
     },
     "spectacles": {
       "name": "Pair of Spectacles",
       "cost": 110,
-      "flavour": "Two ground lenses in wire. The Chronicle's scribe wept."
+      "flavour": "Two ground lenses in wire. The Chronicle's scribe wept.",
+      "tier": 11
     },
     "pepper": {
       "name": "Pepper Mill",
       "cost": 95,
-      "flavour": "Ground at the table, in front of guests. That is the entire point."
+      "flavour": "Ground at the table, in front of guests. That is the entire point.",
+      "tier": 12
     },
     "carpet": {
       "name": "Patterned Carpet",
       "cost": 140,
-      "flavour": "Woven somewhere with no mire in it. Wipe your boots."
+      "flavour": "Woven somewhere with no mire in it. Wipe your boots.",
+      "tier": 12
+    },
+    "altar_oil": {
+      "name": "Flask of Altar Oil",
+      "cost": 18,
+      "flavour": "Burns clear and slow. The chapel will not sell you the cheap stuff.",
+      "tier": 6
+    },
+    "oilcloth": {
+      "name": "Oilcloth Cape",
+      "cost": 24,
+      "flavour": "Keeps a bowstring dry, which keeps an archer useful.",
+      "tier": 8
+    },
+    "comb": {
+      "name": "Bone Comb",
+      "cost": 16,
+      "flavour": "Carved at the stall while you wait. Mind the teeth.",
+      "tier": 9
+    },
+    "iron_hinges": {
+      "name": "Set of Iron Hinges",
+      "cost": 28,
+      "flavour": "A gate is two hinges and an argument about who shuts it.",
+      "tier": 10
+    },
+    "pewter_set": {
+      "name": "Pewter Table Set",
+      "cost": 95,
+      "flavour": "Plates that match. Bellmire has opinions about plates that match.",
+      "tier": 11
+    },
+    "glass_goblets": {
+      "name": "Pair of Glass Goblets",
+      "cost": 130,
+      "flavour": "Drinking from glass, in a town that drank from horn a lifetime ago.",
+      "tier": 12
     }
   },
   "trader_cargo": {
+    "_note_tier": "Each entry also carries \"tier\": the growth tier at which a caravan first hauls this cargo, 1-12, matching lore_lines.growth_tiers. Same gate as stock_by_tier.cargo_adds (generated together, must agree) - here so a caravan can be loaded with cargo.tier <= town_tier without a reverse map. Cumulative. A tier-1 crossing has no caravans at all. Added C-cycle 7.",
     "_note": "Trader caravan cargo (D35/D39) - what a caravan carries and what bandits want. Higher value, worth losing. Keyed {name,cost,flavour}. Dead until wired.",
     "spice": {
       "name": "Crate of Spice",
       "cost": 120,
-      "flavour": "From downriver. Smells of somewhere warmer than here."
+      "flavour": "From downriver. Smells of somewhere warmer than here.",
+      "tier": 9
     },
     "pigiron": {
       "name": "Pig Iron",
       "cost": 90,
-      "flavour": "Bar stock for the smiths. Heavy, dull, wanted."
+      "flavour": "Bar stock for the smiths. Heavy, dull, wanted.",
+      "tier": 3
     },
     "silk": {
       "name": "Bale of Silk",
       "cost": 180,
-      "flavour": "Too fine for Bellmire, which is exactly why it sells."
+      "flavour": "Too fine for Bellmire, which is exactly why it sells.",
+      "tier": 12
     },
     "wine": {
       "name": "Cask of Wine",
       "cost": 110,
-      "flavour": "The real stuff, not the tavern's."
+      "flavour": "The real stuff, not the tavern's.",
+      "tier": 5
     },
     "saltblock": {
       "name": "Block of Salt",
       "cost": 140,
-      "flavour": "A caravan's fortune in one white brick."
+      "flavour": "A caravan's fortune in one white brick.",
+      "tier": 5
     },
     "glassware": {
       "name": "Crate of Glassware",
       "cost": 160,
-      "flavour": "Packed in straw and prayers."
+      "flavour": "Packed in straw and prayers.",
+      "tier": 11
     },
     "simples": {
       "name": "Chest of Simples",
       "cost": 150,
-      "flavour": "The apothecary's standing order. Guard it."
+      "flavour": "The apothecary's standing order. Guard it.",
+      "tier": 11
     },
     "timber": {
       "name": "Load of Seasoned Timber",
       "cost": 100,
-      "flavour": "Good beams - the kind the masons cannot cut fast enough."
+      "flavour": "Good beams - the kind the masons cannot cut fast enough.",
+      "tier": 3
     },
     "furs": {
       "name": "Pack of Furs",
       "cost": 130,
-      "flavour": "From the high country. Warm, and worth a raid."
+      "flavour": "From the high country. Warm, and worth a raid.",
+      "tier": 4
     },
     "scarglass": {
       "name": "Crate of Scarglass",
       "cost": 300,
-      "flavour": "Hauled up from below and sold above. Only slightly cursed."
+      "flavour": "Hauled up from below and sold above. Only slightly cursed.",
+      "tier": 10
     },
     "seedcorn": {
       "name": "Sacks of Seed Corn",
       "cost": 95,
-      "flavour": "Next year's bread, riding in this year's cart."
+      "flavour": "Next year's bread, riding in this year's cart.",
+      "tier": 2
     },
     "incense": {
       "name": "Casket of Incense",
       "cost": 190,
-      "flavour": "For the chapel. It makes the scar smell like somewhere holy."
+      "flavour": "For the chapel. It makes the scar smell like somewhere holy.",
+      "tier": 6
     },
     "tools": {
       "name": "Crate of Fine Tools",
       "cost": 140,
-      "flavour": "Chisels, files, calipers. A craft row cannot be built by hand."
+      "flavour": "Chisels, files, calipers. A craft row cannot be built by hand.",
+      "tier": 7
     },
     "copperware": {
       "name": "Crate of Copperware",
       "cost": 150,
-      "flavour": "Pots that outlive the cook. Bandits know it too."
+      "flavour": "Pots that outlive the cook. Bandits know it too.",
+      "tier": 7
     },
     "steelbar": {
       "name": "Bundle of Steel Bar",
       "cost": 210,
-      "flavour": "Proper steel, not bog iron. The garrison has first claim."
+      "flavour": "Proper steel, not bog iron. The garrison has first claim.",
+      "tier": 8
     },
     "warhorses": {
       "name": "String of Warhorses",
       "cost": 320,
-      "flavour": "Four of them, led not ridden. Worth more than the cart and crew."
+      "flavour": "Four of them, led not ridden. Worth more than the cart and crew.",
+      "tier": 8
     },
     "dyestuff": {
       "name": "Barrel of Dyestuff",
       "cost": 170,
-      "flavour": "Woad and madder. Colour is the first luxury a town buys."
+      "flavour": "Woad and madder. Colour is the first luxury a town buys.",
+      "tier": 9
     },
     "books": {
       "name": "Chest of Books",
       "cost": 220,
-      "flavour": "Twelve of them. More words than most of Bellmire has ever seen."
+      "flavour": "Twelve of them. More words than most of Bellmire has ever seen.",
+      "tier": 12
     },
     "charcoal": {
       "name": "Load of Charcoal",
       "cost": 85,
-      "flavour": "Burnt slow in the hills and hauled down by the sack. The forge eats it."
+      "flavour": "Burnt slow in the hills and hauled down by the sack. The forge eats it.",
+      "tier": 3
     },
     "rawhides": {
       "name": "Bundle of Raw Hides",
       "cost": 105,
-      "flavour": "Still smelling of the beast. The tanner pays before he looks."
+      "flavour": "Still smelling of the beast. The tanner pays before he looks.",
+      "tier": 4
     },
     "oiljars": {
       "name": "Jars of Lamp Oil",
       "cost": 100,
-      "flavour": "Forty jars, straw-packed. One broken jar can take the whole cart."
+      "flavour": "Forty jars, straw-packed. One broken jar can take the whole cart.",
+      "tier": 5
     },
     "chapel_plate": {
       "name": "Case of Chapel Plate",
       "cost": 240,
-      "flavour": "Silver for the altar. Bandits are not particular about blessings."
+      "flavour": "Silver for the altar. Bandits are not particular about blessings.",
+      "tier": 6
     },
     "candlewax": {
       "name": "Barrels of Beeswax",
       "cost": 175,
-      "flavour": "Chapel grade - the only candle that does not smell of the kill."
+      "flavour": "Chapel grade - the only candle that does not smell of the kill.",
+      "tier": 6
     },
     "millstones": {
       "name": "Pair of Millstones",
       "cost": 230,
-      "flavour": "Two tons of cut grit. Nobody steals these; they just stop the cart."
+      "flavour": "Two tons of cut grit. Nobody steals these; they just stop the cart.",
+      "tier": 7
     },
     "mail_shirts": {
       "name": "Bundle of Mail Shirts",
       "cost": 280,
-      "flavour": "Riveted, oiled, rolled in sacking. The garrison counts the rings."
+      "flavour": "Riveted, oiled, rolled in sacking. The garrison counts the rings.",
+      "tier": 8
     },
     "sugarloaf": {
       "name": "Loaves of Sugar",
       "cost": 200,
-      "flavour": "White, hard, and worth a knife shaped for nothing else."
+      "flavour": "White, hard, and worth a knife shaped for nothing else.",
+      "tier": 9
     },
     "parchment_bales": {
       "name": "Bales of Parchment",
       "cost": 185,
-      "flavour": "The Chronicle's standing order, and the scribes' whole year."
+      "flavour": "The Chronicle's standing order, and the scribes' whole year.",
+      "tier": 9
     },
     "cut_stone": {
       "name": "Wagon of Cut Stone",
       "cost": 160,
-      "flavour": "Squared at the quarry. A wall is paid for one wagon at a time."
+      "flavour": "Squared at the quarry. A wall is paid for one wagon at a time.",
+      "tier": 10
     },
     "mirrorglass": {
       "name": "Crate of Mirror Glass",
       "cost": 260,
-      "flavour": "Packed face to face. Seven years of bad luck a sheet."
+      "flavour": "Packed face to face. Seven years of bad luck a sheet.",
+      "tier": 11
     },
     "goldwork": {
       "name": "Casket of Goldwork",
       "cost": 400,
-      "flavour": "Chains, clasps, and a coronet nobody in Bellmire has the neck for."
+      "flavour": "Chains, clasps, and a coronet nobody in Bellmire has the neck for.",
+      "tier": 12
+    },
+    "salt_fish": {
+      "name": "Barrels of Salt Fish",
+      "cost": 115,
+      "flavour": "Downriver catch in brine. It outlasts the winter and the appetite.",
+      "tier": 4
+    },
+    "lime": {
+      "name": "Casks of Quicklime",
+      "cost": 120,
+      "flavour": "For the mortar. It burns the hands of anyone who hurries.",
+      "tier": 10
+    },
+    "spiced_wine": {
+      "name": "Butts of Spiced Wine",
+      "cost": 230,
+      "flavour": "Brought up for the guild's table and guarded like the guild's gold.",
+      "tier": 12
     }
   },
   "stock_by_tier": {
@@ -705,7 +848,8 @@
         ],
         "cargo_adds": [
           "furs",
-          "rawhides"
+          "rawhides",
+          "salt_fish"
         ]
       },
       {
@@ -732,7 +876,8 @@
           "ink",
           "parchment",
           "mourning_cloth",
-          "psalter"
+          "psalter",
+          "altar_oil"
         ],
         "cargo_adds": [
           "incense",
@@ -763,7 +908,8 @@
           "arrows",
           "shield",
           "helm",
-          "bowstrings"
+          "bowstrings",
+          "oilcloth"
         ],
         "cargo_adds": [
           "steelbar",
@@ -778,7 +924,8 @@
           "spice_twist",
           "sweets",
           "soap",
-          "figs"
+          "figs",
+          "comb"
         ],
         "cargo_adds": [
           "spice",
@@ -793,11 +940,13 @@
         "shop_adds": [
           "glass_pane",
           "lock",
-          "mortar"
+          "mortar",
+          "iron_hinges"
         ],
         "cargo_adds": [
           "scarglass",
-          "cut_stone"
+          "cut_stone",
+          "lime"
         ]
       },
       {
@@ -807,7 +956,8 @@
           "physic",
           "mirror",
           "brass_lamp",
-          "spectacles"
+          "spectacles",
+          "pewter_set"
         ],
         "cargo_adds": [
           "glassware",
@@ -822,12 +972,14 @@
           "sandglass",
           "silk_kerchief",
           "pepper",
-          "carpet"
+          "carpet",
+          "glass_goblets"
         ],
         "cargo_adds": [
           "silk",
           "books",
-          "goldwork"
+          "goldwork",
+          "spiced_wine"
         ]
       }
     ]

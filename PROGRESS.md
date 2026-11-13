@@ -2488,3 +2488,49 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      the apothecary's tier-4 stock list (if it is hardcoded anywhere) wants a look - LAPTOP CODE.
   4. No key renamed, no list shortened, no new sibling key anywhere: existing loaders keep working untouched.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 7 - the tier a good belongs to is now EXPLICIT on the good (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Merge: `git merge origin/main` in W3 reported "Already up to date" - `content` is a strict superset of
+  origin/main (750682b), and L45/L46/L47/L49 and the D28/D42 census commits are already ancestors of this
+  branch. NO PROGRESS.md conflict arose, so nothing had to be kept from either side.
+- FLAG for the supervisor: COORDINATION section 12 (documenting W3 as part of the contract) is NOT in the repo
+  - `git grep "## 12" docs/COORDINATION.md` finds nothing on HEAD or on origin/main. Section 11 is the last
+  one present. If it was written, it is unpushed. The content worker is still operating off sections 10+11.
+- This cycle took the backlog's shop/trader item, which the desktop needs soonest (D31/D32, D35/D39), and
+  closed the one thing a filter still had to guess at. Only items.json touched; bosses.json, potions.json and
+  lore_lines.json are unchanged this cycle. No .gd/.tscn/assets/web, no new data files.
+- EVERY good now names its own tier. shop_stock and trader_cargo entries each carry a new "tier" key (1-12,
+  the same scale as lore_lines.growth_tiers), so D35/D39 can filter with `good.tier <= town_tier` instead of
+  building a reverse map out of stock_by_tier. The shape is the one the project already uses - potions.json
+  has keyed brews by "tier" since L12.
+  - The values are DERIVED from stock_by_tier, not hand-typed, so the two gates cannot drift apart. The
+    validator asserts they agree key-for-key in both directions and that no good is gated twice or left
+    ungated; stock_by_tier stays as it was and remains the readable per-tier view.
+  - A "_note_tier" sibling in each block documents the key, the cumulative rule, and that the two gates are
+    generated together. The original "_note" in both blocks is untouched and byte-identical.
+- Catalogue filled out at the thin tiers: shop_stock 57 -> 63 (altar_oil t6, oilcloth t8, comb t9,
+  iron_hinges t10, pewter_set t11, glass_goblets t12), trader_cargo 30 -> 33 (salt_fish t4, lime t10,
+  spiced_wine t12). Per-tier shop adds are now 6/5/6/6/6/5/5/5/5/4/5/5 and cargo adds 0/1/3/3/3/3/3/3/4/3/3/4.
+- A crossing and a city are now unmistakably different shops: tier 1 sells six things - ale, bread, eggs,
+  firewood, turnips, a waterskin - and no caravan calls at all. A tier-12 city shelf carries all 63, up to
+  glass goblets at 130 and a carpet at 140, with caravans hauling goldwork at 400. Price span 2-140 in the
+  shop, 85-400 in the cargo, so an early caravan is barely worth the road and a late one is worth a raid.
+- VALIDATION (python only, no Godot - COORDINATION 10): all four owned files json.load() clean; a recursive
+  comparison against HEAD confirmed every pre-existing key and value present and unchanged with no list
+  shortened; a line-level diff of items.json confirmed that every one of the 96 changed lines is a
+  pre-existing line that only gained a trailing comma - no pre-existing line was reworded or dropped; new
+  entries assert to exactly name+cost+flavour+tier with an int cost and a tier in 1-12; both gates agree in
+  both directions; no good gated twice or ungated; tier names and numbering still match growth_tiers 1-12;
+  tier 1 still has no cargo. 0 problems. VALIDATION OK.
+- CODE WIRING the new keys imply, for the supervisor to route:
+  1. D35 (visible shop stock): read data/items.json shop_stock, skip keys beginning "_note", and show every
+     entry with entry.tier <= Roster.town_tier. That is the whole filter now - no reverse map, no lookup
+     against stock_by_tier. DESKTOP BUILD.
+  2. D39 (trader cargo worth intercepting): same filter over trader_cargo; a caravan rolls with cargo of
+     tier <= town_tier and its "cost" is what a bandit gains and the town loses. Tier 1 must load nothing,
+     because a crossing has no caravans. DESKTOP BUILD.
+  3. D31/D32 (one map, a town that grows): the 12 stock tiers are keyed to growth_tiers by name AND number,
+     both validated this cycle, so whichever the town code already tracks will line up. DESKTOP BUILD.
+  4. If anything already reads stock_by_tier, it keeps working untouched - that block is unchanged except for
+     the new keys appended to its lists. The "tier" key is additive and ignorable by any existing loader.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

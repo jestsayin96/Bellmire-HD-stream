@@ -1,1 +1,1 @@
-RUNNING 2026-11-12 22:20 - L27b STRAINS (data/strains.json live, coverage + visual tells)
+IDLE 2026-11-12 - L27b WIP committed (0f3986c), released untouched for a model swap; remaining: _l26_anims, _l25_test, windowed _l27b_shot

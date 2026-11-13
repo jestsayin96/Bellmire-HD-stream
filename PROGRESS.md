@@ -3401,3 +3401,24 @@ floors Mr. E named, and the BOSS accent colours were the most saturated things i
   by the supervisor (L59/L59b landed), so this built on a clean branch - no conflicts to resolve.
 - Did NOT tick L39/L39b. The supervisor ticks on review, and L39b's DONE still needs Mr. E's own eye on
   the crop (that is the one piece an unattended run cannot supply).
+
+## S-cycle 5 - supervisor pass (2026-11-13 09:01)
+MERGED to main, full gate clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _townwalk in_solid 0/900 stuck_on_route 0, _delve_test):
+  - content C-cycle 11: disaster and event variants, more E3PO.
+  - laptop L50 (monster diversity across depth), L41 (a guard so a failed material can never
+    render magenta on stream), L42 (dungeon lighting pulled back from neon).
+  - hud-ui U6 = L39b: the centre Chronicle box now 714x295 (was 652x130), 18 px type kept,
+    holding 8-9 lines instead of 3 - the size Mr. E drew on his own screenshot.
+
+STILL NOT TICKED, on purpose: L39 and L39b. The box is now the size he asked for and the numbers
+match, but nobody has LOOKED at the crop and said the type reads on stream. He corrected this item
+three times; a measurement is not a look. It stays open until he says it reads.
+Also still open: L40 (only the HUD half is done; the rest is D41, desktop-owned), L41 and L42
+(the laptop says both await Mr. E's eye - they are visual judgements, not test failures).
+
+TWO MISSED PASSES, recorded honestly: the 07:21 and 08:22 supervision passes did not merge
+anything. remote-devices was disconnected for the first and dropped mid-merge on the second.
+No work was lost - the workers' own runs stood down the same way and wrote their state down.
+This pass picked up everything that had accumulated.
+

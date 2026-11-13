@@ -221,6 +221,12 @@ func _process(_dt: float) -> bool:
 					_ok((s.lanes[l]["cur"] as Dictionary).is_empty(), "drain: the %s lane's queue drained" % l)
 					_ok(s._target(l) != null, "drain: the %s lane returned to ambient, not blank" % l)
 					_ok(not (s._panes[l]["bar"] as ColorRect).visible, "drain: the %s timer bar is gone" % l)
+				# The FPS judgment here is RELATIVE to the base phase, so a base that did not
+				# measure makes every check below trivially true - "OK" while nothing was
+				# tested. Seen for real on 2026-11-12: after D24 enabled TAA + MSAA the
+				# laptop's full-screen base came back at 1.0 FPS and the whole suite still
+				# printed OK. A base that low is a broken measurement, not a slow machine.
+				_ok(_fps_base >= 10.0, "fps: the base phase measured a real frame rate (%.1f) - below this the relative checks mean nothing" % _fps_base)
 				_ok(_fps_amb >= _fps_base * 0.65, "fps: the idle grid keeps 65%% of the old resting state (%.1f of %.1f)" % [_fps_amb, _fps_base])
 				_ok(_fps_paid >= _fps_amb * 0.5, "fps: the paid grid within 50%% of the idle grid (%.1f of %.1f)" % [_fps_paid, _fps_amb])
 				_ok(_fps_amb >= FPS_FLOOR and _fps_paid >= FPS_FLOOR, "fps: both over the catastrophe floor %.0f (%.1f / %.1f)" % [FPS_FLOOR, _fps_amb, _fps_paid])

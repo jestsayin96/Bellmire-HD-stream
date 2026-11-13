@@ -21,8 +21,14 @@ class_name HudDock
 ##   LANE_*  a lane's own name tag over its spotlit hero (Spotlight makes them)
 ## tools/_l21_test.gd checks all of it.
 
-const CHROME := 0.06           # L32b: slim - the Chronicle left it for the centre strip
-const STRIP := 0.10            # L32b: the Chronicle's strip at the cross of the four panes
+const CHROME := 0.06           # L32b: slim - the Chronicle left it for the centre box
+## L39 (Mr. E, Nov 12, with a reference screenshot): the Chronicle is a COMPACT BOX sitting on
+## the cross of the 2x2 - NOT the full-width band L32b built, which he rejected. The panes now
+## meet at the cross and the box covers only the corners they touch. Fractions of the screen:
+## 0.30 x 0.13 is 576 x 140 px at 1080p - well under half the screen width (960 px).
+const BOX_W := 0.30
+const BOX_H := 0.13
+const STRIP := BOX_H           # kept as a name: anything reading STRIP means the box's height
 const L_WORLD := 1
 const L_FLOAT := 1 << 10
 const L_HTAG := 1 << 11
@@ -111,13 +117,17 @@ static func chrome(t: Node) -> Rect2:
 	var top := floorf(s.y * (1.0 - CHROME))
 	return Rect2(0, top, s.x, s.y - top)
 
-## L32b: the Chronicle's strip across the middle of the 2x2 (px); empty at full screen
+## L39: the Chronicle's compact box centred ON the cross of the four panes (px); empty at
+## full screen. The panes meet at that cross (see Spotlight._relayout), so the box overlaps
+## only the four pane CORNERS - it is never a band across the screen.
 static func centre(t: Node) -> Rect2:
 	if not split(t):
 		return Rect2()
 	var s := screen()
-	var top := floorf(s.y * (1.0 - CHROME - STRIP) * 0.5)
-	return Rect2(0, top, s.x, ceilf(s.y * STRIP))
+	var cross := s.y * (1.0 - CHROME) * 0.5          # where the two pane rows meet
+	var w := ceilf(s.x * BOX_W)
+	var h := ceilf(s.y * BOX_H)
+	return Rect2(floorf((s.x - w) * 0.5), floorf(cross - h * 0.5), w, h)
 
 ## a pane's rect on screen (px), or an empty rect if it is not up
 static func pane(t: Node, k: String) -> Rect2:

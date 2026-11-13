@@ -369,10 +369,11 @@ func set_labels(v: bool) -> void:
 func _relayout(force := false) -> void:
 	var b := busy()
 	var lay := "grid_" + "_".join(b)
-	# L21: the slim bottom chrome (clock / chat) is no pane's; L32b: the Chronicle's
-	# centre strip parts the two pane rows at the cross of the grid
-	var h := (1.0 - HudDock.CHROME - HudDock.STRIP) * 0.5
-	var y2 := h + HudDock.STRIP
+	# L21: the slim bottom chrome (clock / chat) is no pane's. L39: the two pane rows MEET at
+	# the cross - L32b's full-width Chronicle band that parted them is gone (Mr. E rejected it);
+	# the Chronicle is now a compact box over the cross, covering only the panes' corners.
+	var h := (1.0 - HudDock.CHROME) * 0.5
+	var y2 := h
 	var rects := {"director": Rect2(0, 0, 0.5, h), "bits": Rect2(0.5, 0, 0.5, h),
 			"subs": Rect2(0, y2, 0.5, h), "points": Rect2(0.5, y2, 0.5, h)}
 	_rects = rects

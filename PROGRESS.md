@@ -1950,3 +1950,49 @@ causes the supervisor found were real and both are fixed:
   (in_solid 0/18777, raid 0/3561); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR; D25_PROBE OK (lvl 3 + 6).
 - New tools: _d25_probe.gd, _d25_shot.gd, _d25_diag.gd (+ .uid). Shot sheet renders/cycles/20261112_d25/.
   Backup scripts/town.gd.bak_d25 (not committed).
+
+## L-cycle 120 - L39 the Chronicle is a centre box, not a bar (laptop jestai, 2026-11-12) - L39 DONE
+Mr. E rejected L32b's full-width tan band (reference screenshot: a small light box at the centre cross).
+L32b's calm pacing is KEPT; only the shape and the panes' geometry changed.
+- scripts/hud_dock.gd: STRIP 0.10 (a full-width band) is replaced by BOX_W 0.30 x BOX_H 0.13 - 576 x 138 px
+  at 1080p, 30% of the screen width (half would be 960). centre() now returns a compact rect CENTRED on the
+  cross of the 2x2 instead of a band spanning the screen. STRIP is kept as a name meaning the box's height,
+  so nothing reading it breaks.
+- scripts/spotlight.gd _relayout: the two pane rows now MEET at the cross (h = (1 - CHROME) * 0.5, y2 = h);
+  L32b parted them by STRIP to make room for the band. Each pane is bigger for it (0.42 -> 0.47 tall) and
+  the box covers only ~4.2% of each - its corner.
+- scripts/feed_hud.gd: the panel is lifted to a light near-white (0.97, 0.95, 0.90) per his screenshot and
+  its side margins tightened; the lord's name card shrinks again (title 26 -> 19, sub 18 -> 14, sub min
+  width 420 -> 150 px) because it was sized for the old full-width band; a line that overruns the narrow box
+  now ends in an ellipsis instead of being cut mid-glyph (clip_text off).
+- tools/_l39_test.gd (NEW, windowed 1920x1080): the box is under half the screen width AND not a wide band,
+  it is centred on the cross within a pixel, the pane rows meet there, the box covers under 12% of any pane,
+  the Chronicle is docked "centre" and sits inside it, >= 2 lines at the L15 size, no line spills out under a
+  30-line flood, pacing never stacked more than 4 lines, and a lord's card still fits. L39_TEST OK, 19 checks.
+  Shots renders/cycles/20261112_l39/ (box_idle, box_flood, box_lord_card).
+- Regression: parse 0 SCRIPT ERROR; L21_TEST OK (52) - the docking rules hold with the new region;
+  _offfloor 0 of 1017 (MON_INPROP 0 of 145); _delve_test 0 errors/nulls.
+- _l24_test is FLAKY, not broken by this: it failed 3 of 6 once ("Ash's body below is the one the lane
+  holds" and the two checks that depend on it) and passed 6/6 on an immediate re-run with nothing changed.
+  That is the same class of race the brief already records for its "before" check - the lane/delve state is
+  timing-dependent. Worth hardening in its own item rather than chased each cycle; it is NOT an L39 fault.
+- FOR MR. E: at 576 px a long Chronicle line is trimmed with an ellipsis ("Someone walks out to look at the
+  Old ..."). That is the cost of a compact box; the full text is always in chat. If he wants whole lines, the
+  box has to be wider or the line font smaller - his call, HudDock.BOX_W is the one number to change.
+- _l32_test: READ THIS BEFORE TRUSTING ITS "OK". This run printed "L32_TEST OK (90 checks, 0 failed)" with
+  "L32_FPS base 1.0 idle 26.8 paid 18.7". base 1.0 is a BROKEN MEASUREMENT, and because every FPS check in
+  that tool is RELATIVE to base ("idle >= 65% of base"), they all passed trivially - the suite reported OK
+  while the FPS gate tested nothing. Not caught by the tool, caught by reading the number.
+  - It is NOT L39. Every _l32 run earlier the same day gave base 38.9 / 44.4 / 45.6; this is the FIRST run
+    after merging origin/main, which brought D24 (project.godot [rendering]: use_taa=true, msaa_3d=1). The
+    grid phases are unaffected and in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6),
+    so L39 cost nothing; it is the full-screen base phase alone that collapsed. The likely mechanism is the
+    harness toggling root.disable_3d back to false mid-run with TAA on (TAA history for a viewport that was
+    disabled), i.e. a harness/TAA interaction rather than the town really running at 1 FPS.
+  - Fixed the lying, not the cause: _l32_test now asserts base >= 10.0 FPS first, so a collapsed base FAILS
+    loudly instead of green-lighting everything. _l32_test will therefore REPORT FAIL on this laptop until
+    the base phase is sorted - that is the honest state, not a regression from L39.
+  - NEEDS AN ID AND AN OWNER (the supervisor assigns IDs, COORDINATION 2): either make the base phase robust
+    with TAA on (re-create the viewport / let TAA settle before sampling, or measure base in a separate
+    process), or drop the relative base and judge the grid against fixed per-machine numbers. project.godot
+    [rendering] is DESKTOP-owned, so the laptop did not touch it.

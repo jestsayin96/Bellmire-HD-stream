@@ -3857,3 +3857,62 @@ instruction not to loosen the test is repeated there.
   waypoint-pop early-return (townsfolk ~L813) skipping that frame's keep_walkable, and/or
   embedded stop DESTINATIONS. Recommend a focused follow-up rather than a blind change to the
   walker loop. Test NOT loosened, per the D44b instruction.
+## C-cycle 15 - disaster and event variants, so a second viewing does not read like the first (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- WHY THESE: standing-backlog item 4. The files were measured first, as in C-cycle 14. The shop and
+  caravan tiering (backlog item 2) was already finished in C-cycle 7 - `stock_by_tier` carries all
+  twelve stages and every good already carries its own `tier`, so there was nothing thin there. The
+  real gap was the DISASTER and EVENT blocks: 13 disasters with only 8 `during` lines each and only
+  3 `begin_alt` / 3 `pass_alt`, which means a disaster that lasts a while, or happens twice on one
+  stream, reads almost word for word the same. The `events` block was thinner still - one wandering
+  boss with 3 alts per line, 7 bandit camps and 6 monster camps for a feature (D33) that is meant to
+  stand until viewers clear it.
+- data/lore_lines.json (additive only - the ONLY file touched this cycle):
+  - `disasters`: all 13 (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake,
+    meteor, scarstorm, flood, blight, coldsnap) widened identically:
+    `during` 8 -> 14, `begin_alt` 3 -> 6, `pass_alt` 3 -> 6. 156 new lines.
+  - `begin`, `pass` and `cost` are UNCHANGED on every disaster. `cost` is the desktop's mechanical
+    contract (one plain statement per disaster, D34) and duplicating it into variants would make it
+    ambiguous which statement the implementation follows - so the variants are narration only.
+  - `events.bandit_camps` 7 -> 13. Six new camps, each {name, leader, appears, while, cleared}
+    exactly as the existing seven. Each `while` is a PRECISE cost line naming the trade it cuts:
+    the Weir Camp (river tolls / Ford takings), the Ashen Barrow (market carts), the Hollow Stand
+    (couriers and tax carts), the Shepherd's Fold (wool and mutton), the Lime Kiln (lime and
+    mortar, so building stalls), the Sunken Boat (barge traffic at the narrows).
+  - `events.monster_camps` 6 -> 12. Six new camps, each {name, of, appears, while, cleared}: the
+    Drowned Pen (bog lurkers), the Candle Wood (scar wisps), the Kiln Nest (fire beetles), Gibbet
+    Hill (risen dead), the Granary Swarm (scar wasps), the Stone Yard (cave trolls). Every `of`
+    reuses a creature family already in the canon; no new monster is invented in a lore file.
+  - `events.wandering_boss`: `appears_alt` / `while_alt` / `cleared_alt` 3 -> 6 each. Still ONE
+    wandering boss scaled to the town's level, reusing the canon lords - no new lord, per its own
+    `note` and COORDINATION 10.
+- NOT TOUCHED: data/items.json, data/bosses.json, data/potions.json. No .gd, no .tscn, no assets,
+  no web/, no new data files - and no new KEYS either: every addition lands inside an array that
+  already existed, so a loader that iterates `disasters` or `events` sees exactly the keys it saw
+  before this commit.
+- VALIDATION (python only - the content worker never runs Godot): lore_lines.json json.load clean,
+  and the three untouched data files re-parsed as well. Edits were made as TEXT INSERTIONS against
+  unique anchors, never a json round-trip, so the file's hand-formatting is preserved: `git diff
+  --stat` is 291 insertions / 42 deletions, and all 42 "deletions" are the anchor lines re-emitted
+  with a trailing comma - asserted programmatically (every removed line reappears as itself plus a
+  comma), not by eye. A deep walk of `git show HEAD:data/lore_lines.json` against the post-edit
+  parse returned ZERO differences: every pre-existing key present, every pre-existing scalar equal,
+  every touched array equal on its original prefix. New entries asserted against the existing
+  shapes: the camp dicts carry exactly the five keys their siblings carry, all values non-empty
+  strings; every disaster still carries exactly {begin, during, pass, cost, begin_alt, pass_alt}.
+  No duplicate line inside any touched array and no duplicate camp name. VALIDATION OK.
+  No dungeon floor count appears anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. Fixed-count pickers again: anything hard-coding 8 for a disaster's `during`, or 3 for
+     `begin_alt` / `pass_alt` / the wandering boss's alts, will never roll the new lines. Size off
+     the array. OWNER: DESKTOP BUILD (disasters are D34, events D33).
+  2. `bandit_camps` and `monster_camps` are now 13 and 12 entries. A picker that indexes a fixed
+     range, or a UI that assumes it can show the full list, needs to read the length. OWNER:
+     DESKTOP BUILD.
+  3. The six new bandit camps and six new monster camps are inert until D33 spawns camps by key and
+     clears them on a viewer party's win; their `while` lines are written as implementable costs
+     (river tolls, market carts, couriers, wool, lime/mortar, barge traffic; livestock, firewood,
+     the kiln, the north road, stored grain, cut stone) so the economy hooks can be taken straight
+     off the text. OWNER: DESKTOP BUILD (economy.gd / raids.gd side).
+  4. Nothing in this cycle changes a `cost` statement, so no disaster mechanic that is already
+     implemented needs revisiting. This is a narration-only widening.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

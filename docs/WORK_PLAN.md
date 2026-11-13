@@ -1303,3 +1303,42 @@ CHANGELOG 2026-11-13 14:12 (supervisor): L39/L39b CLOSED on Mr. E's eye - the Ch
 items from his look: L61 (Chronicle styling, HUD), L62 (pane lane titles, HUD), D45 (grass texture,
 desktop). None are launched yet - he is moving to the broadcaster token next and will come back to
 these.
+
+# Phase Y - the party band leaves the stream for the hub (Mr. E, 2026-11-13 14:15)
+
+Mr. E, looking at a live pane: "the towns band covers up most of the screen in one screen so im
+assuming it would on the others, lets take that out and add it to the HUB. and we can add a
+section on the HUB for parties or bands that are currently in the dungeon." The band panel
+("The town's band - floor 5" with members + HP bars) eats most of a 2x2 pane. It comes off stream
+and moves to the hub, which has the room.
+
+- [ ] D46. TAKE THE PARTY-BAND PANEL OFF THE STREAM, AND PUT THE BAND IN THE SNAPSHOT. Owner:
+      DESKTOP BUILD (party_frames.gd + the snapshot upsert). TWO linked halves, do both:
+        (a) Stop drawing the on-stream party-band panel - it covers most of a pane and would on
+            every pane. The in-game unit frame / selection (rts_camera.gd) stays; it is the big
+            multi-member BAND board that goes.
+        (b) THE HUB CAN ONLY SHOW WHAT THE SNAPSHOT CARRIES. Add the delving parties to the snapshot
+            the game upserts every 60 s: for each party/band currently below - its name, its floor,
+            and each member {name, hp, max_hp, status (ok/fallen/burning/...)}. Read-only, same
+            publishable-key path as the rest of the snapshot; no new write path. Keep the payload
+            version gate - if you add a field, bump the version the hub checks.
+      DONE: no band board on stream (1080p crop), and the snapshot row contains a parties array the
+      hub can read. This SUPERSEDES the party-frames half of D41/L40 - that overlap is moot once the
+      board is gone; D41 shrinks to just the Twitch chat column (the L36 overlap), still desktop-owned.
+
+- [ ] H10. "BANDS BELOW" SECTION ON THE HUB. Owner: HUB BUILDER (web/ only). A section that lists
+      every party currently in the dungeon from the snapshot's new parties array: band name, floor,
+      and each member with an HP bar and status, fallen and burning shown honestly. The hub has room
+      the stream does not, so show ALL active parties, not just one. Every string is attacker-shaped
+      Twitch input (hero names) - it reaches the DOM ONLY via el()/textContent, HP bar widths are
+      page-computed numbers not snapshot strings, status picks an icon from the ICON_SET whitelist.
+      No new fetch, no write path; same read-only snapshot. Keep the house palette (parchment/teal/
+      gold, Gloock titles).
+      GATED ON D46: until the snapshot carries parties, build against the shape and show an honest
+      empty state ("no bands delving right now") - never a fabricated party. Flag to the supervisor
+      the exact field shape you expect so D46 writes the same one.
+
+CHANGELOG 2026-11-13 14:15 (supervisor): added D46 (party band off stream + into the snapshot) and H10 (Bands
+Below section on the hub, gated on D46's snapshot field). D41/L40's party-frames half is superseded
+- only the chat-column overlap remains there. Agreed field shape for the parties array to be
+pinned when D46 and H10 start, so the two sides match.

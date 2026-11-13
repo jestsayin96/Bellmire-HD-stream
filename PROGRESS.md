@@ -2489,3 +2489,34 @@ purchases; a hero with 0 gold gets "Pauper needs 52 gold ... you have 0" and sta
 - NOTE FOR THE SUPERVISOR: scripts/adventurers.gd (which holds the NPC band's _kit_up) appears in NO
   worker's ownership list in COORDINATION 11.2 - not the laptop's, not the desktop build's. I read it but
   did not touch it. It needs an owner.
+
+## L-cycle 128 - L53 the content writer's hats have shapes (laptop jestai, 2026-11-13) - L53 DONE
+Raised by the content writer, and the symptom was worse than "renders as the default shape": gear.gd
+_hat() matched only four keys (wide_hat, straw_hat, feather_cap, crown_of_ash) and everything else fell
+through to `hat.mesh = crown` with CylinderMesh still at ITS OWN defaults - top 0.5, bottom 1.0, height
+2.0. That is a two-metre pale cone balanced on the hero's head, not a dull hat.
+- EIGHT keys had no case: guild_hood, mire_hood, watch_helm, miller_cap, bell_coif, ford_circlet,
+  guard_helm, plumed_helm. Each now has its own silhouette built from the kit's own primitives, because
+  the colour the data supplies is not enough to tell a coif from a kettle-helm at pane distance:
+  hoods get a close crown and a drape down the neck; bell_coif is a squashed dome on the skull with no
+  brim; watch_helm is a shallow steel dome under a wide flat brim; miller_cap is a low soft cap with a
+  peak over the brow; ford_circlet is a thinner, lower band than the ash crown; guard_helm is a closed
+  helm with a nasal bar, and plumed_helm is that plus a crest.
+- THE REAL FIX IS THE DEFAULT CASE. A named case each is only worth having until the content writer adds
+  hat number thirteen. `_:` now gives any unknown key a plain soft cap, so a new hat degrades to dull
+  instead of breaking the model and waiting for someone to notice on stream.
+- tools/_l53_test.gd (NEW, headless) is DRIVEN BY THE DATA, not by a list I typed: it reads every
+  cosmetic with kind == "hat" out of data/items.json and builds each one on a bare skeleton, so the next
+  hat added is checked automatically. It asserts every key builds a piece, that NONE is left at
+  CylinderMesh's untouched defaults (the actual bug, caught by value not by eye), that the hats are
+  tellable apart, and that an unknown key degrades. L53_TEST OK, 5 checks.
+  Measured: 12 hat keys, 11 distinct silhouettes. The one pair that shares a shape is guild_hood and
+  mire_hood - both hoods, differing by colour - which is deliberate, not an oversight.
+- data/items.json was READ, never written: it is the content writer's file (COORDINATION 11.2).
+- Regression: parse 0 SCRIPT ERROR; L3_TEST OK; _offfloor 0 of 1388 (MON_INPROP 0 of 92); _delve_test 0
+  errors/nulls. Indent style checked BEFORE editing this time (gear.gd is spaces) - the trap that cost
+  time in L45 and L55 cost nothing here.
+- NOT VERIFIED BY EYE: these are headless mesh assertions. The shapes are reasoned from primitives and
+  measured, but nobody has LOOKED at a hero wearing a plumed helm at 1080p. The laptop no longer owns the
+  UI files and this needs a hero on screen, so if a hat reads badly on stream it is a tweak to the numbers
+  in _hat, not a design question.

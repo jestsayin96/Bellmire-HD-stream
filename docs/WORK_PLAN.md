@@ -722,8 +722,20 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       (COORDINATION 11.2) - untouched. If two spells still read alike after this, that is the remaining
       desktop-side work, and it pairs with D30.
 
-- [ ] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
+- [x] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
       plumed_helm and the C1 hats) or they render as the default shape. Raised by the content writer.
+      DONE L-cycle 128: worse than "the default shape" - the fall-through left CylinderMesh at ITS OWN
+      defaults (top 0.5, bottom 1.0, height 2.0), a two-metre cone on the head. EIGHT keys had no case:
+      guild_hood, mire_hood, watch_helm, miller_cap, bell_coif, ford_circlet, guard_helm, plumed_helm -
+      each now has its own silhouette from the kit's primitives (hoods drape, coif is a dome on the skull,
+      watch_helm a dome under a wide brim, miller_cap a peaked soft cap, ford_circlet a thin low band,
+      guard_helm a closed helm with a nasal bar, plumed_helm that plus a crest). THE REAL FIX is the new
+      wildcard default case, so hat number thirteen degrades to a plain cap instead of breaking the model.
+      tools/_l53_test.gd is DATA-DRIVEN - it reads every kind=="hat" cosmetic out of items.json and builds
+      it, so new hats are covered without touching the test. L53_TEST OK (5 checks): 12 hats, 11 distinct
+      silhouettes (guild_hood/mire_hood share one by design), none left at the defaults, unknown key
+      degrades. L3_TEST OK, _offfloor 0 of 1388, _delve_test clean. items.json read, never written.
+      NOT VERIFIED BY EYE: headless mesh assertions only - nobody has seen a plumed helm at 1080p yet.
 
 - [ ] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
       nothing. Raised by the content writer.

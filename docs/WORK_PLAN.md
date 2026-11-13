@@ -1350,6 +1350,23 @@ CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confectio
           existing teal accent to tie to the hub brand; Gloock for the word).
         - Ink: an aged serif, dark brown-black, not pure white. Newest line still gets the current
           emphasis so the eye catches new entries.
+      ART TARGET - "AN ELDER SCROLL, OUR OWN DESIGN" (Mr. E, raised after the first scroll pass):
+        aim for the ancient, ORNATE, illuminated-prophecy feel - a scroll that looks old and important,
+        not just a parchment rectangle. This is the general aged-vellum archetype rendered in OUR brand;
+        do NOT copy The Elder Scrolls / Bethesda art, fonts, logo, the blank-scroll motif or any of
+        their UI - original filigree only.
+        Layer onto the furled-parchment base:
+          - METAL SCROLL CAPS / FINIALS on the spindle ends - small ornamented end-caps (aged brass or
+            dark iron with a teal patina to tie the brand), a hint of relief, not flat dowels.
+          - An ILLUMINATED BORDER just inside the sheet - a thin restrained filigree/vine rule in the
+            teal+gold, corners a touch more worked, like an illuminated manuscript margin. Keep it a
+            FRAME, never over the text; readability wins every time.
+          - A DROP-CAP / illuminated initial or a small heraldic mark by "Chronicle" (the Jester motif
+            if it reads at size) so the header feels inscribed, not labelled.
+          - Optional faint age: a soft foxing/stain or a whisper of arcane glow on the newest line -
+            subtle, must not cost readability or frame rate.
+        Still ONE cheap procedural layer (gradients + shadow/relief rects + a thin vector border);
+        if filigree needs an image it must be CC0, self-hosted, with a LICENSE note. Original, ours.
       Keep it ONE draw layer, cheap - a real-time HUD element, not a texture import; procedural
       panel + gradients + a couple of shadow rects is the intent. CC0 only if any texture is used.
       DONE: a windowed 1080p crop of the scroll that Mr. E signs off. Look at it before you call it

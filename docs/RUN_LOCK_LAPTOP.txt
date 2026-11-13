@@ -1,18 +1,1 @@
-IDLE 2026-11-13 06:35 - L53 DONE and pushed (L-cycle 128). Next in the laptop queue: L54 (delve.gd must
-honour the new 'scar_touched' potion state or Scarwater displays and does nothing), then L48, L50, L41,
-L42, L43, L44. L56 (delve-heavy soak) GATES trusting L45 and L46.
-L53 note: the eight new hats are verified HEADLESS only (mesh dimensions, data-driven from items.json).
-Nobody has LOOKED at a hero in a plumed helm at 1080p. If one reads badly on stream it is a tweak to the
-numbers in gear.gd _hat, not a design question. A wildcard default case now means hat number thirteen
-degrades to a plain cap instead of a 2 m cone.
-L55 note for Mr. E - A POLICY CALL, NOT A BUG: surviving heroes now spend their OWN gold at the smith
-when they come home (one step a delve, 3 flasks of oil left in the purse). KIT_RESERVE and the one-step
-cap are the dials; removing it is one call in delve._finish().
-FOR THE SUPERVISOR: scripts/adventurers.gd (the NPC band's _kit_up) is in NO worker's ownership list in
-COORDINATION 11.2 - read, not touched. Needs an owner.
-STANDING NOTE FOR MYSELF: check a file's INDENT STYLE before editing it (tabs in a space file give
-"Could not resolve class X" naming no line; --check-only --script <file> finds it). Hit in L45 and L55,
-avoided in L53. Also: no backticks in a double-quoted shell -m message - they command-substitute and
-silently blank the word.
-EXPECTED RED: _l32_test reports FAIL on this laptop BY DESIGN until L43 lands (the base >= 10 assert).
-L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.
+RUNNING 2026-11-13 06:40 - L54 scar_touched potion state

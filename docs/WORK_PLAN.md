@@ -802,3 +802,36 @@ main INCLUDING your commit and it passed clean. You do not need to re-run it for
 
 CHANGELOG 2026-11-13 02:03 (supervisor): C3+C4 merged and gated; the content writer has cleared every
 writing-blocked item on Mr. E's list. The constraint is now code, not words.
+
+# Phase P - Mr. E's rulings, Nov 13 02:20.
+
+- [ ] L57. "NOW WATCHING" GOES ABOVE EACH PANE, not one global banner. Mr. E: "just have the now
+      watching above each of the split screen for whoever that specific screen is watching." Each
+      pane carries its own small label naming the subject that pane is following, so a viewer can
+      tell at a glance which of the four screens is theirs. Must not overlap the pane image or the
+      Chronicle (L40 discipline). Owner: DESKTOP HUD (its own files).
+      DONE: a 1080p capture, four panes, four correct labels, 0 overlaps.
+
+- [ ] L58. THE GUILD ROLL LEAVES THE STREAM. Mr. E: "the guild roll it can stay on the hub doesnt
+      need to be on stream, it can be for chat as well." It is the TOP-10 STANDINGS (rank, name,
+      rank title, level, deepest, a mark for the dead) - not the full roster. It already exists in
+      two places that are enough: the hub, and the free `!guild` / `!ranks` chat command. So:
+      remove the on-stream Guild Roll panel and stop reserving space for it. Owner: DESKTOP HUD.
+      NOTE: the chat command already works - nothing to build there. Verify `!guild` still answers
+      after the panel is removed; if the panel owned the data path, keep the data path.
+      DONE: no Guild Roll on stream, !guild still answers in chat, hub unchanged.
+
+  This closes the carried-over question "the Guild Roll and the Now watching banner have no home
+  under the permanent grid". The banner becomes per-pane (L57); the roll is cut from stream (L58).
+
+- [x] L45 ANSWERED by Mr. E: "the bosses should get harder the further you go, so some bosses will
+      hurt and have a lot of hp". The depth curve ships as built. For the record, lords appear every
+      fifth floor and scaling starts at zero on the first one, so the first lord is unchanged canon
+      (15.0 atk / 150 hp) and the quoted 44.7 / 528 is ten lords down. The curve is open-ended.
+      No further balance change requested.
+
+- [x] L46 ANSWERED: leave the trap rate as built and see how it plays. The dial, if it ever reads
+      punishing, is the trap COUNT in dungeon_hd._dress(), not the damage.
+
+CHANGELOG 2026-11-13 02:24 (supervisor): merged laptop L47/L45/L46/L49 to main. Added L57, L58 from Mr. E's
+rulings. L45 and L46 balance questions answered by him and closed.

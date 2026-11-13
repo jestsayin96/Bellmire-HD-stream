@@ -515,3 +515,27 @@ Honesty, as everywhere else on this page:
 Security: identical discipline to the rolls feed. Every band/member string is hostile Twitch
 text and reaches the DOM only via el()/textContent; HP widths are CSSOM numbers; status only
 picks a whitelisted class + ICON_SET glyph. Verified with ?mock=bands and a live v2 payload.
+
+
+---
+
+## 5. H11 - what left the stream (the Satchel + "my hero")
+
+D48/L63 take the unit frame and the Satchel off the stream; their content moves here.
+
+**The Satchel (sell prices).** The on-stream Satchel showed a viewer their sellable items and
+the counter's prices. The hub shows the same on the hero sheet, read-only from the snapshot and
+forward-compatible exactly like the HP/XP bars: the block appears only once the publisher sends
+the items, and invents nothing. Prices and the total are page-computed (tabular, per the
+numbers research above); item names are viewer text through el()/textContent. Contract (also in
+docs/HUB_SECURITY.md): per-hero `satchel` = array of {name, qty, sell, kind}; aliases inventory/
+items, and value/sell_price/price/worth for the price; optional `satchel_total` for the
+counter's authoritative payout; a `sell` on the equipped weapon/armour lists it too.
+
+**"My hero" pin.** The stream always kept a viewer's own hero in view; a login-less page cannot,
+so the hub lets a viewer pin ONE hero by name (a button on the sheet, or automatically on Twitch
+sign-in). It is remembered in the browser (localStorage, the hero NAME only - never a token or
+id) so the hero floats to the top, opens and is highlighted next visit. This is the neighbourhood
+-view idea (section 3) carried to the whole page, and the no-login stand-in for the Satchel's
+always-on "your hero". Research consensus on personalization: the single most-used view is "me" -
+surface the viewer's own row first and everything else reads as context around it.

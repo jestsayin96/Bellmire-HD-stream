@@ -211,12 +211,15 @@ function renderNothing(failed) {
 }
 
 // ---------------------------------------------------------------- the page
-// Payload version gate. v1 is today's shape; v2 adds p.parties - the H10/D46 "bands
-// below" contract (docs/HUB_SECURITY.md). BOTH are accepted so the hub keeps working
-// the moment D46 bumps the version; p.parties is read defensively either way (absent
-// -> honest empty state), so pre-accepting v2 shows nothing until it actually arrives.
-// Anything outside this set is an honest "this page needs an update", never a guess.
-const KNOWN_V = new Set(["1", "2"]);
+// Payload version gate. v1 is today's shape; v2 adds p.parties (the H10/D46 "bands
+// below" contract); v3 adds the per-hero Satchel sell fields (the H11 contract). All
+// are accepted so the hub keeps working the moment the publisher bumps the version;
+// every new field is read DEFENSIVELY either way (absent -> honest empty state), so
+// pre-accepting a version shows nothing until that field actually arrives. Anything
+// OUTSIDE this set is an honest "this page needs an update", never a guess. ACTION for
+// the desktop: publish the Satchel sell fields as v = "3" (or extend this set BEFORE
+// shipping a different number). See docs/HUB_SECURITY.md (H11).
+const KNOWN_V = new Set(["1", "2", "3"]);
 function render(p) {
   if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
@@ -430,18 +433,154 @@ function renderBoards(heroes, fallen) {
 }
 
 // ============================================================ HEROES (unchanged look, safe render)
+// ============================================================ MY HERO (H11)
+// A viewer with no login can mark ONE hero as theirs so it is easy to find each
+// visit - the hub stand-in for the on-stream Satchel (L51) that always kept a viewer's
+// own hero in view, which D48/L63 took OFF the stream. Only the hero NAME is remembered,
+// in THIS browser, as a per-viewer convenience: it is never a secret, never sent
+// anywhere, never used to choose any page behaviour beyond matching a hero by name.
+// Like every snapshot string it reaches the DOM ONLY through el()/textContent, and it
+// is only ever string-COMPARED against hero names - never built into a selector, URL,
+// src, href or style. Storage throws in private windows, so every access is wrapped;
+// the page works with or without it. (docs/HUB_SECURITY.md, H11.)
+const MY_HERO_KEY = "bellmire.myhero";
+const cleanName = (s) => String(s == null ? "" : s).replace(/[\u0000-\u001f\u007f]/g, "").slice(0, 25);
+function getMyHero() { try { return cleanName(localStorage.getItem(MY_HERO_KEY) || ""); } catch (e) { return ""; } }
+function storeMyHero(name) {
+  const n = cleanName(name);
+  try { if (n) localStorage.setItem(MY_HERO_KEY, n); else localStorage.removeItem(MY_HERO_KEY); } catch (e) {}
+}
+function setMyHero(name) {                       // store + repaint the heroes section
+  storeMyHero(name);
+  if (last) renderHeroes(arr((MOCK ? withMock(last.payload) : last.payload).heroes));
+}
+function isMyHero(h) { const m = getMyHero().toLowerCase(); return !!m && String((h && h.name) || "").toLowerCase() === m; }
+
+// The "your hero" banner at the top of the Heroes section. Shows the pinned name as
+// textContent, whether that hero is among the living right now, and quick actions.
+// Honest: if the pinned hero is not in the snapshot it says so and invents nothing.
+function renderMyHeroBanner(hs) {
+  const box = $("myHero");
+  if (!box) return;
+  box.replaceChildren();
+  const mine = getMyHero();
+  if (!mine) { box.classList.add("hide"); return; }
+  box.classList.remove("hide");
+  const live = arr(hs).find((h) => String(h.name || "").toLowerCase() === mine.toLowerCase());
+  const line = el("p", "mhline");
+  line.append(el("span", "mhlabel", "Your hero: "));
+  const nm = el("b", "mhname"); nm.append(document.createTextNode(mine));   // viewer text
+  line.append(nm);
+  if (live) {
+    const show = el("button", "linkbtn", "Show"); show.type = "button";
+    show.addEventListener("click", () => {
+      const card = [...$("heroList").querySelectorAll("details.hero")]
+        .find((d) => (d.querySelector(".hname") || {}).textContent === String(live.name));
+      if (card) { card.open = true; card.scrollIntoView({ block: "center", behavior: "smooth" }); }
+    });
+    line.append(document.createTextNode("  \u00b7  "), show);
+  } else {
+    line.append(el("span", "mhgone", " \u2014 not among the living right now (fallen, or not raised yet)."));
+  }
+  const un = el("button", "linkbtn", "Unpin"); un.type = "button";
+  un.addEventListener("click", () => setMyHero(""));
+  line.append(document.createTextNode("  \u00b7  "), un);
+  box.append(line);
+}
+
+// ---------------------------------------------------------------- the Satchel (H11)
+// The viewer's sellable items and what the counter would pay for them - the hub home
+// for the on-stream Satchel's sell sheet (L51), which L63 took off the stream. READ-
+// ONLY and forward-compatible exactly like the HP/XP bars and the bands: the block
+// appears ONLY when the snapshot actually carries sellable items, and invents no item,
+// price or total. Every item name is viewer/lore text and reaches the DOM ONLY via
+// el()/createTextNode; prices and the total are PAGE-COMPUTED numbers set as text,
+// never snapshot markup; the kind only SELECTS a whitelisted ICON_SET glyph - no field
+// is ever used as a URL/src/href/style. The contract is pinned in docs/HUB_SECURITY.md.
+const SATCHEL_ICON = {
+  weapon: "blade", sword: "blade", blade: "blade", dagger: "blade", spear: "blade",
+  bow: "ranged", ranged: "ranged", staff: "arcane", wand: "arcane", arcane: "arcane",
+  hammer: "blunt", mace: "blunt", blunt: "blunt", armour: "shield", armor: "shield",
+  shield: "shield", potion: "potion", brew: "potion", oil: "flask", flask: "flask",
+  gold: "coin", coin: "coin", loot: "loot", treasure: "loot", gem: "loot", trinket: "loot",
+};
+function satchelIconId(kind) { return SATCHEL_ICON[String(kind || "").toLowerCase()] || "loot"; }
+function sellOf(it) {
+  const s = it.sell != null ? it.sell : it.value != null ? it.value
+          : it.sell_price != null ? it.sell_price : it.price != null ? it.price : it.worth;
+  return (s != null && Number.isFinite(+s)) ? Math.max(0, Math.round(+s)) : null;
+}
+function satchelRows(h) {
+  const rows = [];
+  const gear = (g, iconId, note) => {
+    if (!g || !g.name) return; const s = sellOf(g); if (s == null) return;
+    rows.push({ name: cap(g.name), qty: 1, sell: s, icon: iconId, note });
+  };
+  gear(h.weapon || {}, weaponIcon((h.weapon || {}).name), "equipped");
+  gear(h.armour || {}, "shield", "equipped");
+  const raw = arr(h.satchel != null ? h.satchel : h.inventory != null ? h.inventory : h.items);
+  for (const it of raw) {
+    if (!it || typeof it !== "object") continue;
+    const name = firstStr(it.name, it.item, it.label, it.title);
+    if (!name) continue;
+    const qty = Math.max(1, Math.round(n0(it.qty) || n0(it.count) || n0(it.n) || 1));
+    rows.push({ name: name.slice(0, 60), qty, sell: sellOf(it), icon: satchelIconId(firstStr(it.kind, it.slot, it.type, it.cat)) });
+    if (rows.length >= 40) break;
+  }
+  return rows;
+}
+function satchelBlock(h) {
+  const rows = satchelRows(h);
+  if (!rows.length) return null;
+  const wrap = document.createDocumentFragment();
+  wrap.append(el("p", "eyebrow", "Satchel \u2014 what the counter would pay"));
+  const list = el("ul", "satchel");
+  for (const r of rows) {
+    const li = el("li", "sitem");
+    li.append(icon(r.icon, "sic"));
+    const nm = el("span", "sname");
+    nm.append(document.createTextNode(r.name));                 // viewer text: textContent
+    if (r.qty > 1) nm.append(el("span", "sqty", " \u00d7" + r.qty));
+    if (r.note) nm.append(el("span", "stag", r.note));
+    li.append(nm);
+    li.append(el("span", "sprice", r.sell == null ? "\u2014" : num(r.sell * r.qty) + " gold"));
+    list.append(li);
+  }
+  wrap.append(list);
+  const stated = n0(h.satchel_total) || n0(h.sell_total);
+  let sum = 0, priced = false;
+  for (const r of rows) if (r.sell != null) { sum += r.sell * r.qty; priced = true; }
+  const foot = el("p", "satchelfoot");
+  if (stated > 0) foot.append(el("span", "sk", "Counter pays "), el("b", null, num(stated)), el("span", "sk", " gold"));
+  else if (priced) foot.append(el("span", "sk", "Counter would pay "), el("b", null, num(sum)), el("span", "sk", " gold for the priced items"));
+  else foot.append(el("span", "sk", "No sell prices quoted yet."));
+  wrap.append(foot);
+  return wrap;
+}
+
 function renderHeroes(hs) {
   $("nHeroes").textContent = hs.length ? hs.length : "";
   $("heroesNote").textContent = hs.length ? `${hs.length} living` : "";
+  renderMyHeroBanner(hs);
   const q = heroFilter.trim().toLowerCase();
-  const list = q ? hs.filter((h) => String(h.name || "").toLowerCase().includes(q)) : hs;
+  let list = q ? hs.filter((h) => String(h.name || "").toLowerCase().includes(q)) : hs.slice();
   const box = $("heroList");
   box.replaceChildren();
   if (!hs.length) { box.append(el("p", "empty", "No living heroes yet. Type !enlist in chat to raise one.")); $("heroMore").classList.add("hide"); return; }
   if (!list.length) { box.append(el("p", "empty", "No hero by that name. (Fallen heroes are in The Fallen.)")); $("heroMore").classList.add("hide"); return; }
+  // H11: the viewer's pinned hero floats to the front, opens and is marked, so it is
+  // the first thing they see - the hub's replacement for the on-stream Satchel.
+  let mineName = "";
+  const mineKey = getMyHero().toLowerCase();
+  if (mineKey) {
+    const idx = list.findIndex((h) => String(h.name || "").toLowerCase() === mineKey);
+    if (idx > 0) { const m = list.splice(idx, 1)[0]; list.unshift(m); }
+    if (idx >= 0) mineName = String(list[0].name);
+  }
   const openNames = new Set();
+  if (mineName) openNames.add(mineName);
   if (params.get("open") && list[0]) openNames.add(String(list[0].name));
-  for (const h of list.slice(0, heroShown)) box.append(heroCard(h, openNames.has(String(h.name))));
+  for (const h of list.slice(0, heroShown)) box.append(heroCard(h, openNames.has(String(h.name)), mineName !== "" && String(h.name) === mineName));
   const more = $("heroMore");
   if (list.length > heroShown) {
     more.classList.remove("hide");
@@ -525,8 +664,8 @@ function carryChip(iconId, text) {
   return c;
 }
 
-function heroCard(h, isOpen) {
-  const det = el("details", "hero");
+function heroCard(h, isOpen, isMine) {
+  const det = el("details", "hero" + (isMine ? " mine" : ""));
   const sum = el("summary");
   // the crest: the hero's initials in a class-tinted ring, with the calling's icon
   const sg = el("span", "hsigil cls-" + classIcon(h.class), sigil(h.name));
@@ -563,6 +702,18 @@ function heroSheet(h) {
   const order = ["str", "dex", "con", "int", "wis", "cha"];
   const w = h.weapon || {}, armr = h.armour || {};
   const sheet = el("div", "sheet");
+
+  // H11: pin this hero as "mine" so it is easy to find next visit (the on-stream
+  // Satchel used to keep a viewer's own hero in view; D48/L63 took it off the stream).
+  const shead = el("div", "sheethead");
+  const mineNow = isMyHero(h);
+  const pin = el("button", "pinbtn" + (mineNow ? " on" : ""), mineNow ? "Your hero \u2014 unpin" : "Pin as my hero");
+  pin.type = "button";
+  pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
+  pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
+  pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
+  shead.append(pin);
+  sheet.append(shead);
 
   sheet.append(hpBar(h));
   sheet.append(xpBar(h));
@@ -604,6 +755,11 @@ function heroSheet(h) {
     carryChip("coin", `${num(h.gold)} gold`),
   );
   sheet.append(carry);
+
+  // Satchel: the viewer's sellable items and the counter's prices (H11). Appears only
+  // when the snapshot carries items to sell; otherwise nothing is shown (never faked).
+  const satchel = satchelBlock(h);
+  if (satchel) sheet.append(satchel);
 
   // Worn: cosmetics and any dye. A dye swatch colour comes from a WHITELISTED
   // class (dye-<known colour>), never an inline style built from snapshot data;
@@ -1556,6 +1712,7 @@ function highlightMyHero(login) {
     signinSay("You're signed in as " + login + ", but no living hero carries that name yet. Type !enlist in chat to raise one.", "ok");
     return;
   }
+  storeMyHero(mine.name);               // H11: remember the signed-in viewer's own hero
   heroFilter = login; heroShown = HERO_PAGE;
   renderHeroes(heroes);
   const card = [...$("heroList").querySelectorAll("details.hero")]
@@ -1665,7 +1822,7 @@ function withMock(p) {
         standing: (i * 37) % 300, ac: 12 + (i % 6), hp: 20 + i, gold: (i * 53) % 900,
         kills: (i * 7) % 60, deepest: i % 13, delves: i % 11, xp: i * 10, to_hit: 4, prof: 2,
         saves: "STR +4", stats: { str: 10 + (i % 8), dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
-        weapon: { name: weapons[i % 4], dice: "1d8" }, armour: { name: "mail" },
+        weapon: { name: weapons[i % 4], dice: "1d8", sell: 30 + (i % 20) }, armour: { name: "mail", sell: i % 4 === 0 ? 45 : undefined },
         // a few heroes carry the forward-compatible fields, to exercise the real
         // HP/XP bars, the dye swatch and a title (the publisher can add these any time)
         max_hp: i % 3 === 0 ? 40 + i * 2 : undefined,
@@ -1673,6 +1830,12 @@ function withMock(p) {
         worn: i % 5 === 0 ? "a corgi, a crown" : "",
         dye: i % 4 === 0 ? dyes[(i / 4) % 4 | 0] : undefined,
         title: i % 6 === 0 ? titles[(i / 6) % 4 | 0] : "",
+        satchel: i < 3 ? [
+          { name: i === 0 ? "<img src=x onerror=alert(1)>" : "Moonlit dagger", qty: 1, sell: 120, kind: "weapon" },
+          { name: "Healing draught", qty: 2, sell: 15, kind: "potion" },
+          { name: "Scar-touched gem", sell: 300, kind: "gem" },
+          { name: "A curio of no fixed worth", kind: "trinket" },
+        ] : undefined,
         oil: i % 4, potions: i % 3, brews: "",
       });
     }

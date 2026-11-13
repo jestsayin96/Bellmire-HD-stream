@@ -54,6 +54,7 @@
     ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
     ?mock=roll (stand-in town rolls, with the hostile-name canary)
     ?mock=bands (stand-in delving parties, with the hostile-name canary)
+    ?mock=crowd also carries a Satchel (sell prices) with the hostile-name canary (H11)
 -->
 <link rel="stylesheet" href="style.css">
 </head>
@@ -201,6 +202,9 @@
         <button type="button" class="signinbtn" id="signinBtn">Sign in with Twitch to spotlight your hero</button>
         <div class="signinstate" id="signinState" role="status" aria-live="polite"></div>
       </div>
+      <!-- H11: the viewer's pinned hero (set from any hero's sheet, or on sign-in).
+           Remembered in this browser only; see docs/HUB_SECURITY.md. -->
+      <div class="myhero hide" id="myHero"></div>
       <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
       <div class="heroes" id="heroList"></div>
       <p class="note hide" id="heroMore"></p>

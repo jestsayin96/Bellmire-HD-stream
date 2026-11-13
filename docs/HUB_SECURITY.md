@@ -335,3 +335,77 @@ Also in web/NOTES.md. D46 must write THIS shape so the two sides match.
 4. ?mock=bands passes the hostile-name test (text, no alert, zero <img>) and the honest empty state
    shows when no `parties` field is present.
 If any of that is not true, do not republish.
+
+## Phase Z, H11 - the hub absorbs what left the stream (FLAG: supervisor review)
+
+D48/L63 strip the on-stream unit frame and the Satchel; the Satchel's content (a viewer's
+sellable items + the counter's sell prices, and keeping a viewer's OWN hero in view) moves to
+the hub. H11 fills the two gaps so nothing that left the stream is lost. Read-only; the page
+still writes nothing to any backend.
+
+### No CSP change
+- H11 adds NO external surface: no new connect-src, frame-src, script/style/img source. The CSP
+  is byte-for-byte unchanged (diff index.html head against the H8/H10 state). The sell data rides
+  the Supabase snapshot the page already reads - nothing new is contacted, no new fetch.
+- No new icon either: the Satchel reuses existing ICON_SET glyphs (blade/ranged/arcane/blunt/
+  shield/potion/flask/coin/loot). The `kind` field only SELECTS one of them; unknown -> "loot".
+
+### Part (a): the Satchel (sell prices) - forward-compatible, honest, nothing fabricated
+- A "Satchel - what the counter would pay" block on a hero's sheet. It appears ONLY when the
+  snapshot actually carries sellable items for that hero; with no such field it is simply absent
+  (the gated empty state - like the HP/XP bars and the bands before their fields shipped). The
+  hub invents no item, no price and no total.
+- Every item name is viewer/lore text and reaches the DOM ONLY through el()/createTextNode
+  (textContent). Prices and the total are PAGE-COMPUTED numbers (num()) set as text - never a
+  snapshot string rendered as markup. No field is EVER used as a URL/src/href/style.
+- The total: if the publisher sends an authoritative payout (`satchel_total`/`sell_total`) the
+  page shows THAT; otherwise it shows the sum of the quoted prices it listed, labelled as such.
+  An item with no price shows an em dash, never a guess. Caps: 40 items per hero.
+
+### Payload version gate - CHANGED, please review
+- KNOWN_V is now {"1","2","3"}: "1" today's shape, "2" adds p.parties (H10/D46), "3" adds the
+  per-hero Satchel sell fields (H11). Every field is read defensively regardless of version
+  (absent -> absent block), so pre-accepting "3" shows nothing until the publisher ships it.
+  Any version outside the set still yields the honest "this page needs an update".
+  ACTION for the desktop (L63/whoever writes the sell fields): publish them as v = "3", or
+  extend KNOWN_V BEFORE shipping a different number, or the hub rejects the payload wholesale.
+
+### The Satchel data contract (new optional per-hero fields) - PINNED
+On each hero object (all optional, all defended). Canonical key, then accepted aliases:
+    satchel  array of item objects              (inventory, items)
+      name     the item's display name          (item, label, title)  - viewer/lore text
+      qty      integer count, default 1          (count, n)
+      sell     integer sell price EACH           (value, sell_price, price, worth)
+      kind     slot/category -> picks an icon    (slot, type, cat)     - whitelist only
+    satchel_total  integer the counter actually pays for all of it   (sell_total)  - optional
+  Also honoured on the EQUIPPED weapon/armour objects: a `sell` (aliases value/sell_price/price)
+  renders that piece as a sellable row. `qty * sell` is summed page-side for the "would pay" line.
+
+### Part (b): "my hero" - a per-viewer pin (localStorage), name only
+- A viewer with no login can mark ONE hero as theirs (a "Pin as my hero" button on any hero's
+  sheet, or automatically on Twitch sign-in). On the next visit that hero floats to the top of
+  the Heroes list, opens, and is highlighted - the hub replacement for the on-stream Satchel
+  that always kept a viewer's own hero in view.
+- ONLY the hero NAME is stored, under localStorage key `bellmire.myhero`, in THIS browser. It is
+  the viewer's own choice, not a secret: no token, no id, nothing from Twitch or the snapshot is
+  ever written to storage (the H6 token stays memory-only, as before - unchanged by H11).
+- The stored name is control-stripped and length-capped (25, the display-name cap) on the way in
+  AND out, reaches the DOM ONLY through el()/createTextNode, and is ONLY ever string-COMPARED
+  (lower-cased) against hero names. It is NEVER built into a DOM selector, a URL, a src/href, a
+  style, or the TWITCH_CLIENT_ID (which stays a non-overridable const - a pin cannot touch it).
+- Every storage access is wrapped in try/catch (private windows throw); the page works without it.
+- This is the first use of browser storage on the hub. It is a per-viewer convenience only and
+  changes nothing about the read-only, no-backend-write posture.
+
+### What the supervisor should check before republishing
+1. CSP unchanged (diff index.html head - no new directive or host; H11 needed none); no new icon.
+2. satchelBlock / satchelRows / renderMyHeroBanner / renderHeroes build the DOM through
+   el()/createTextNode only; grep confirms no new innerHTML/outerHTML/insertAdjacentHTML; `kind`
+   only indexes SATCHEL_ICON and selects a whitelisted glyph; prices are num() of page arithmetic.
+3. localStorage holds ONLY `bellmire.myhero` = a cleaned, 25-capped hero name; grep confirms the
+   H6 token is still memory-only and TWITCH_CLIENT_ID is still a non-overridable const.
+4. The version-gate change (KNOWN_V {"1","2","3"}) is intended and matches the sell-field version.
+5. ?mock=crowd&open=1 passes the hostile-name test in the Satchel (the item named
+   <img src=x onerror=alert(1)> renders as literal text; zero <img>; no alert), and the Satchel
+   is simply absent on a hero carrying no sell data.
+If any of that is not true, do not republish.

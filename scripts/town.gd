@@ -75,7 +75,7 @@ const KIT_MAT_NAMES := ["MI_Brick", "MI_UnevenBrick", "MI_Plaster", "MI_RockTrim
 ## terracotta, so tinting it red would just oversaturate.
 const LIVERY_TINT := {
     "blue":   Color(0.58, 0.68, 0.95),
-    "green":  Color(0.62, 0.84, 0.60),
+    "green":  Color(0.78, 0.85, 0.74),   # D26: was (0.62,0.84,0.60) - read as bright green paint on terracotta; now a subtle weathered sage
     "red":    Color(1.00, 1.00, 1.00),
     "yellow": Color(1.00, 0.88, 0.52),
 }

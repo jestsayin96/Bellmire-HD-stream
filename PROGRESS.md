@@ -1870,3 +1870,17 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
   (in_solid 0/17596, raid 0/5984, giveup 0); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, ENDED clean.
 - New tools: tools/_d24_shot.gd (before/after stills + capped FPS), tools/_d24_fps.gd (uncapped FPS by AA tag).
   Backups town.gd.bak_d24, daylight.gd.bak_d24, project.godot.bak_d24 (not committed).
+
+
+## D-cycle 119 - D26 roof moss splotches (desktop CruzaderPC, 2026-11-12) - D26 DONE
+- Not a decal and not dungeon bleed: there are zero Decal nodes in the town (dungeon_hd.gd's decals live only on
+  DungeonHD floors at y=-400). The green came from town.gd LIVERY_TINT["green"] = Color(0.62,0.84,0.60), a bright
+  green albedo multiply on the shared MI_RoundTiles roof material; it showed as vivid green blobs in the lighter
+  tile/grout areas of the terracotta texture - Mr. E's "green paint splotches".
+- FIX: LIVERY_TINT["green"] -> Color(0.78,0.85,0.74), a subtle weathered sage. The green-livery roof now reads as
+  weathered terracotta; the district's green banner is unchanged. blue/yellow/red liveries left as-is (not flagged).
+- LOOKED: true A/B via tools/_d26_pair.gd (toggles the shared _roof["green"] colour at runtime, same camera):
+  renders/cycles/20261112_d26/pair_green_{old,new}.png - blobs gone. Also before/after overviews + green_roof.
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/1040 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/17738, raid 0/11808); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR.
+- New tools: tools/_d26_shot.gd, tools/_d26_pair.gd (+ .uid). Backup scripts/town.gd.bak_d26 (not committed).

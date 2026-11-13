@@ -3853,3 +3853,30 @@ row, no re-rolling and no best-of: all three OK 13/13, 0 stuck delvers AND 0 wat
   to the stairs; "search" points at L49's chests; "fight" would point at slot crowding. The test already
   prints "stuck by floor / state", which is why the original report was diagnosable at all - keep that.
 - Regression: no game script was touched this cycle. The three runs ARE the evidence.
+## D-cycle 126 - D44b: the intermittent townwalk in_solid, cause named + the rising half fixed (desktop build, 2026-11-13)
+- REPRODUCED first (3x _townwalk on current HEAD 9ff489c): 0/15044, 4/16486, 0/15736. The
+  supervisor's '8/899' etc. were the ~T=10 s snapshot, not the final tally; the real counts
+  sit ~15-16 k samples/run and the hits cluster early.
+- CAUSE, named by a read-only diagnostic (tools/_d44_diag*, removed before commit): the
+  counted walkers are _more_folk stops-folk with home==work==ZERO. The audit skips ZERO
+  endpoints in its near-end guard, so these folk have NOTHING shielding them; only their
+  `stops[*][0]` points guard them, and the clip happens between stops.
+  * Dominant/rising sub-case: _put_folk spawned them AT a stop point with no walkability
+    check. A point inside a carved footprint (navoff ~1-2 m) makes route() fail (off-mesh
+    start -> single far-waypoint fallback -> the body drifts off into the valley) and
+    keep_walkable frees it only over ~2 s, counted each 0.5 s sample. This scales with town
+    fill -> the 5->8 rise the supervisor escalated on.
+  * FIX (scripts/town.gd _put_folk, +6 lines): at = keep_walkable(at) before spawning, so no
+    walker begins life inside a solid. Geometric, pre-sync safe, no behavioural change for
+    folk already on clear ground. Diag confirmed: Cort-the-peasant no longer spawns embedded.
+- GATE (all green): parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0/1235 (INPROP 0,
+  MON_INPROP 0/75); TWITCH_PARSE OK; _delve_test ran clean to floor 2, party healthy;
+  _townwalk x3 = 0/16017, 0/16363, 0/15601 PASS.
+- HONEST RESIDUAL (why D44b is left UNTICKED): a SECOND, flat (not rising) cause remains - a
+  walker on a normal leg (dl/seat/ghost false) sitting ~1.5 m inside a carved footprint at
+  the 15 southern 'market'-district houses (z<-55): (51.7,-93.8) he(5.33,5.52) and prop
+  (74.1,-65.6) he(1.56,0.84). Post-fix runs still threw a stray 1-2 (verify 2/16003; one
+  seeded diag 1), so the three gate zeros are not yet provably 'not lucky'. Likely the
+  waypoint-pop early-return (townsfolk ~L813) skipping that frame's keep_walkable, and/or
+  embedded stop DESTINATIONS. Recommend a focused follow-up rather than a blind change to the
+  walker loop. Test NOT loosened, per the D44b instruction.

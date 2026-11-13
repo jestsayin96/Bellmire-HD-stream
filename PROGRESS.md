@@ -2806,3 +2806,63 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   4. `town_life` stays dead until the town ticker is wired - its own `_note` already says so.
      OWNER: DESKTOP BUILD (town.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 13 - rare uniques and brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, nothing unpushed, and was NEVER checked out -
+  only `git fetch`ed, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- WHY THIS CYCLE: C1/C2/C3 all still unticked, but the survey put the thin files first. items.json
+  (54 KB) and lore_lines.json (77 KB) are well stocked after cycles 7-12; bosses.json was still the
+  thinnest owned file at 9.3 KB, and a rare unique is the single most-screenshotted thing on a
+  stream. So: standing backlog 6 - more shape-first lord variants, and more brews. Only
+  data/bosses.json and data/potions.json were touched; items.json and lore_lines.json are
+  byte-unchanged this cycle.
+- `lesser_uniques` 28 -> 42 (+14, split 4 Hollow King / 4 Grubmother / 3 Rattling Host /
+  3 Nightwing). Shape-first per the file's own `uniques` rule: every one keeps its lord's silhouette
+  and twists the BEHAVIOUR, with hp/speed skewed to match - Banked holds its fire and spends it in
+  one burn (210/2.8), Carried moves its crown onto one of its own dead (170/3.6), Nesting never
+  advances and sends the brood instead (265/1.2), Shorn is a wall with no wall left in it (185/2.8),
+  Widowed spends itself fast (140/4.6), Processional is a line that does not end (195/2.8),
+  Smoke-Blind cannot find you and ruins the room looking (130/7.0), Belfried fights from overhead.
+  NO new lords - all 14 are the existing four lesser lords.
+- `greater_uniques` 24 -> 36 (+12, 3 each: Gravewyrm / Ossuary Lord / Pale Duchess / Mourncoil).
+  Fasting spends the breath on the body (250/3.8/29), Burrowed fights from under the floor
+  (330/1.8/26), Inventoried counts before it raises, Hollowed spends its own bones to raise three,
+  Unattended has no borrowed hands and is faster for it (190/4.8/32), Invited ignores anyone who has
+  not drawn, Rimed is armoured in its own frost (360/1.9/25), Drawn Thin is cold at both ends.
+  NO new lords. Total rare uniques now 78, zero duplicate names.
+- `potions.potions` 52 -> 64 (+12 brews), every one using an EXISTING state - nothing in `states`
+  was added, renamed or changed, so no brew promises an effect the code cannot already apply:
+  ferrywater (warded), brightbone (heal), emberdregs (resist_fire + cures burning), rushlight
+  (darkvision), mustering_cup (heroism + cures frightened), quietwater (invisible), oxdraught
+  (giant), mirethistle (cures poisoned), watchmans_pint (regenerating), millrace (haste + cures
+  slowed), chapelwater (cures frightened/blinded), scarbite (scar_touched). Costs sit inside the
+  existing band for their tier; tiers 1-3 only; `aliases` checked against every existing alias in
+  the file - zero collisions.
+- TOTAL: 38 new entries, 0 new keys, 0 keys renamed or removed, 0 existing entries reworded.
+- VALIDATION OK (python only - the content worker never runs Godot): all four owned files json.load
+  clean. A deep walk of `git show HEAD:data/bosses.json` and `HEAD:data/potions.json` against the
+  post-edit parse returned ZERO differences - every pre-existing key present, every pre-existing
+  scalar equal, both touched arrays equal on their original prefix (appends only), `states` equal
+  object-for-object. New boss entries asserted to carry only {name,shape,hp,speed,attack} with
+  name+shape required and integer hp; new brews asserted to carry {name,cost,tier,aliases,flavour}
+  plus optional {heal,gives,secs,cures}, every `gives`/`cures` value asserted to exist in `states`,
+  every `gives` asserted to carry `secs`. No dungeon floor count anywhere in the additions.
+- CODE WIRING THIS IMPLIES (for the supervisor's tracker):
+  1. The rare-unique draw must pick from the FULL `lesser_uniques`/`greater_uniques` arrays rather
+     than a hard-coded head slice - if anything still indexes a fixed count, this cycle's 26 new
+     variants never roll. OWNER: LAPTOP CODE (bestiary.gd / delve.gd).
+  2. `shape` is prose, not a mechanic. Each new variant's behaviour (fire left on the ground, brood
+     only on death, raising three at a time, striking only drawn weapons) is described, not
+     implemented. Whoever owns boss behaviour decides which of these get real behaviour and which
+     ride on the stat skew alone. OWNER: LAPTOP CODE (bestiary.gd).
+  3. The 5 rare uniques with intro lines in lore_lines (`unique_intros` / `unique_intros_alt`) are
+     still only 5; the other 73 rise unannounced. Either the intro picker falls back to the lord's
+     own intro, or a future content cycle writes intros per variant - the supervisor should say
+     which before that work is done. OWNER: supervisor decision, then CONTENT.
+  4. New brews are buyable the moment `!brew` reads the dict, but `scarbite` grants `scar_touched`,
+     whose `does` ("next spell doubled - or misfires") must already be implemented for a PLAYER-held
+     state, not only as something the scar inflicts. If it is not, hold scarbite back.
+     OWNER: LAPTOP CODE (delve.gd / chatcmd.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

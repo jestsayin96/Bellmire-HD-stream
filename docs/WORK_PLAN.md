@@ -1463,3 +1463,39 @@ CHANGELOG 2026-11-13 14:51 (supervisor): from Mr. E's transcribed clip 14-27-07 
 animation stutter, likely tied to D44's stuck walkers), D51 (fishing pole grip, part of D40).
 Grass reinforces D45; stutter split between D49 render and D50 animation. One open question logged
 for Mr. E: does he want per-pane zoom control.
+
+# Phase AC - *** CRITICAL *** Mr. E's clip 14-28-40: HEROES DO NOT MOVE (2026-11-13 14:52)
+
+His words: "I put it to follow me. My dude's not moving. None of these guys, barefoot Knights not
+moving, 96 Knights not moving, Mr. E Ranger is the one I just created, and I am following - I'm not
+moving, I told him to go delve, and he has not moved. This needs to be fixed."
+
+- [ ] D52. *** TOP PRIORITY, ABOVE EVERYTHING ELSE. *** HEROES DO NOT MOVE ON COMMAND. A viewer
+      enlists a hero, sends it to delve, and it stands frozen - the whole core loop (enlist -> party
+      -> delve) is dead on screen. Mr. E created a hero, issued delve, set a pane to follow it, and
+      it never moved. The follow-CAMERA works (the pane tracks it); the HERO's movement does not.
+      THE UNIFYING HYPOTHESIS - treat D44, D50 and D52 as ONE freeze bug until proven otherwise:
+      everything Mr. E sees frozen - townsfolk standing still (D50), NPCs not wandering, heroes not
+      delving (D52) - is an agent that cannot path. The _townwalk in_solid count that rose from a
+      clean 0 to peak 8 (D44/D44b) is very likely the MEASUREMENT of this same freeze: an agent
+      wedged in carved solid geometry stops translating AND stops delving. D44b's spawn-snap fixed
+      the RISING half; the residual is agents getting stuck at RUN TIME (doorways, props, nav-mesh
+      seams), and that residual is what freezes heroes mid-town.
+      THIS SPANS TWO OWNERS - coordinate, do not let it fall between them:
+        * DESKTOP BUILD (town_nav.gd, townsfolk.gd, hero movement in town): is the hero's nav agent
+          getting a path to the dungeon mouth at all? Is it wedged in_solid at spawn/standing? Does
+          it have a velocity but zero translation (stuck against a collider)?
+        * LAPTOP CODE (delve.gd, roster.gd, chatcmd.gd): does the !delve / go-delve command actually
+          ISSUE a move order and a destination, or does it set state without moving the body? The
+          census showed delving logic runs in tests - so why does a LIVE hero not move? Find the
+          live-vs-test difference.
+      REPRO FIRST, as every good find this session has: capture ONE hero from enlist to frozen, log
+      its nav state (has_target, path length, in_solid, velocity, position-delta per second). Do not
+      guess the mechanism. This is the same discipline that cracked L46/L49/L50/L52/L55.
+      DONE: a live run where an enlisted hero commanded to delve WALKS to the mouth and descends,
+      townsfolk wander, in_solid holds 0, and Mr. E confirms on stream that heroes move.
+
+CHANGELOG 2026-11-13 14:52 (supervisor): D52 raised CRITICAL and placed above all desktop and laptop work -
+heroes do not move on command, which kills the core loop. Unified with D44/D44b/D50 as one likely
+freeze bug (agents cannot path; in_solid is its measurement). Spans desktop (nav/movement) and
+laptop (the delve command path) - both must coordinate; repro before fixing.

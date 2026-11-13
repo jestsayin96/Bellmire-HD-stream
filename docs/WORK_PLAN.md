@@ -1420,3 +1420,46 @@ CHANGELOG 2026-11-13 14:50 (supervisor): from Mr. E's transcribed clip 14-26-15 
 pixelation in the close panes, same no-AA root as D24's grain; TAA/MSAA likely fixes both; desktop
 leads with the HUD worker for the pane viewports) and D45 reinforced (grass bad in every pane,
 check the material not just the texture). More clips to come as Mr. E transcribes them.
+
+# Phase AB - Mr. E's narrated clip 14-27-07 (transcribed) (2026-11-13 14:51)
+
+His words: "this guy is stuttering... this dude's animation's terrible... look at the grass, that
+texture, it's so nasty... this dude has not moved from his spot in the top right, a lot of them
+aren't moving... this dude's not even holding the fishing pole correctly... this grass texture,
+so nasty."
+
+- [ ] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
+      town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
+      from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
+      badly. This is "the town isn't alive" made concrete.
+      STRONG DIAGNOSTIC LINK: a townsperson frozen in place may be the SAME walker D44/D44b flags
+      as in_solid / stuck - a walker wedged in geometry stops moving AND stops its walk cycle. Check
+      whether the frozen NPCs correlate with the in_solid samples before treating these as separate.
+      If a townsperson has no nav target or a blocked path it idles forever - give idle NPCs
+      somewhere to go (work, wander, gather) on a cadence, and make sure the walk/idle animation
+      actually plays (the census showed anims fire, so a FROZEN one is likely a stuck agent, not a
+      missing clip). The stutter may be the sub-res pane (see D49) OR a real animation hitch - say
+      which once D49's AA work lands, so they are not conflated.
+      DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
+      pane crop Mr. E signs off.
+
+- [ ] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
+      pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
+      it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
+      bone. Pairs with D40's fishing animation + water work; do them together.
+      DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
+
+- NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
+  appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to
+  zoom/control each subject pane independently, or is one-pane control fine and this was just an
+  observation? Logged here so it is not lost; the supervisor will raise it and turn it into an item
+  only if he wants per-pane control. Owner would be HUD (spotlight.gd) + rts_camera.gd.
+
+Grass: already D45 (reinforced twice now - "so nasty" in two clips). Not re-logged.
+Pixelation-on-movement: already D49 from clip 14-26-15. The clip-2 "stuttering" is partly that
+(render) and partly D50 (animation) - separated above.
+
+CHANGELOG 2026-11-13 14:51 (supervisor): from Mr. E's transcribed clip 14-27-07 - D50 (townsfolk freeze +
+animation stutter, likely tied to D44's stuck walkers), D51 (fishing pole grip, part of D40).
+Grass reinforces D45; stutter split between D49 render and D50 animation. One open question logged
+for Mr. E: does he want per-pane zoom control.

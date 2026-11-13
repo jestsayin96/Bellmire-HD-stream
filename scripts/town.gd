@@ -75,7 +75,7 @@ const KIT_MAT_NAMES := ["MI_Brick", "MI_UnevenBrick", "MI_Plaster", "MI_RockTrim
 ## terracotta, so tinting it red would just oversaturate.
 const LIVERY_TINT := {
     "blue":   Color(0.58, 0.68, 0.95),
-    "green":  Color(0.62, 0.84, 0.60),
+    "green":  Color(0.78, 0.85, 0.74),   # D26: was (0.62,0.84,0.60) - read as bright green paint on terracotta; now a subtle weathered sage
     "red":    Color(1.00, 1.00, 1.00),
     "yellow": Color(1.00, 0.88, 0.52),
 }
@@ -825,7 +825,13 @@ func _build() -> void:
     e.sky = sky
     e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
     e.ambient_light_energy = 0.85
+    # D24: TAA now resolves SSAO's temporal dither, so SSAO stays for contact
+    # shadow, but softened (lower intensity + detail) so it reads as shade, not grit.
     e.ssao_enabled = true
+    e.ssao_radius = 1.8
+    e.ssao_intensity = 1.3
+    e.ssao_detail = 0.3
+    e.ssao_power = 1.5
     e.tonemap_mode = Environment.TONE_MAPPER_AGX
     # D19a night bloom: emissive windows, lamps and braziers glow after dark
     e.glow_enabled = true
@@ -976,6 +982,9 @@ func _build() -> void:
     valley = preload("res://scripts/valley.gd").new()
     add_child(valley)
     valley.setup(self)
+    # D25: the valley roads and the real south road are only laid now, so some
+    # houses placed clear in _resolve_overlaps now stand on a road - sweep again.
+    _final_road_sweep()
     _scatter_country()
     _meadow()
     # D3: the town grows with its level - lots, upgrades, new buildings, the wall
@@ -1612,6 +1621,30 @@ func _resolve_overlaps() -> void:
     _road_segs.clear()      # rebuilt for real once the gate lanes are cut
 
 var _road_dropped := 0
+
+## D25: final sweep after ALL roads (gate lanes, scar, south, valley) are laid.
+## Any already-built house whose footprint now sits on a road is removed, exactly
+## as _resolve_overlaps drops on-road plots before build. Landmarks/shops/towers
+## are placed deliberately and are never swept. Runs before growth + nav + people,
+## so nothing references a dropped plot.
+func _final_road_sweep() -> void:
+    var kept: Array = []
+    var dropped := 0
+    for pl in plots:
+        if pl.has("landmark") or pl.has("shop") or pl.has("tower") or not pl.has("node"):
+            kept.append(pl)
+            continue
+        if _rect_on_road(_rect(pl)):
+            var h = pl["node"]
+            if is_instance_valid(h):
+                (h as Node3D).queue_free()
+            pl.erase("node")
+            dropped += 1
+        else:
+            kept.append(pl)
+    plots = kept
+    _road_dropped += dropped
+    print("D25_SWEEP dropped %d on-road houses after valley/south roads (road_dropped total %d)" % [dropped, _road_dropped])
 
 ## any part of a footprint (5x5 samples over the rect) on or within 0.4 m of a road
 func _rect_on_road(r: Array) -> bool:

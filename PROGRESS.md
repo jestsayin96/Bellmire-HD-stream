@@ -1897,3 +1897,56 @@ causes the supervisor found were real and both are fixed:
   process from an earlier --import plus a polling loop). There is no plausible cost in the diff either: the
   only per-frame addition is one _eye() call, and town.gd:309 makes the eye a direct child of town, so
   _eye() caches and costs one is_instance_valid per frame.
+
+## D-cycle 118 - D24 kill the grain (desktop CruzaderPC, 2026-11-12) - D24 DONE
+- Root cause confirmed: project.godot [rendering] held only the d3d12 driver line - no TAA/MSAA/FXAA. SSAO
+  (town.gd) and volumetric fog (daylight.gd) are temporally dithered in Godot 4, so with no TAA to resolve
+  them they showed as fine static noise over the whole image, worst on the cluttered town cobbles.
+- FIX: project.godot [rendering] += anti_aliasing/quality/use_taa=true and anti_aliasing/quality/msaa_3d=1 (2x).
+  town.gd _build() SSAO softened so it reads as shade not grit now that TAA resolves it: ssao_radius=1.8,
+  ssao_intensity=1.3, ssao_detail=0.3, ssao_power=1.5. Volumetric fog resolved cleanly at the new AA, left as-is.
+- LOOKED: 1080p before/after at the town square (noon) and morning - the cobble/grass grain is gone, character
+  and building edges clean. renders/cycles/20261112_d24/{before,after}_{clutter_noon,square_noon,wide_noon,morning}.png.
+- FPS (uncapped, vsync off, 1080p, resting stream cam, noon clear): before avg 123.4 min 81.0 -> after avg 131.7
+  min 90.0. The fix is net FASTER (lower-detail SSAO more than pays for TAA+MSAA on this low-poly scene); >= the
+  D23 120 target. (A vsync-on measurement misleads: double-buffered vsync drops the heavier frame to the 60 step.)
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/1058 (INPROP 0, MON_INPROP 0/146); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/17596, raid 0/5984, giveup 0); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR, ENDED clean.
+- New tools: tools/_d24_shot.gd (before/after stills + capped FPS), tools/_d24_fps.gd (uncapped FPS by AA tag).
+  Backups town.gd.bak_d24, daylight.gd.bak_d24, project.godot.bak_d24 (not committed).
+
+
+## D-cycle 119 - D26 roof moss splotches (desktop CruzaderPC, 2026-11-12) - D26 DONE
+- Not a decal and not dungeon bleed: there are zero Decal nodes in the town (dungeon_hd.gd's decals live only on
+  DungeonHD floors at y=-400). The green came from town.gd LIVERY_TINT["green"] = Color(0.62,0.84,0.60), a bright
+  green albedo multiply on the shared MI_RoundTiles roof material; it showed as vivid green blobs in the lighter
+  tile/grout areas of the terracotta texture - Mr. E's "green paint splotches".
+- FIX: LIVERY_TINT["green"] -> Color(0.78,0.85,0.74), a subtle weathered sage. The green-livery roof now reads as
+  weathered terracotta; the district's green banner is unchanged. blue/yellow/red liveries left as-is (not flagged).
+- LOOKED: true A/B via tools/_d26_pair.gd (toggles the shared _roof["green"] colour at runtime, same camera):
+  renders/cycles/20261112_d26/pair_green_{old,new}.png - blobs gone. Also before/after overviews + green_roof.
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/1040 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/17738, raid 0/11808); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR.
+- New tools: tools/_d26_shot.gd, tools/_d26_pair.gd (+ .uid). Backup scripts/town.gd.bak_d26 (not committed).
+
+
+## D-cycle 120 - D25 town layout + collisions (desktop CruzaderPC, 2026-11-12) - D25 DONE
+- WIDENED the placement probe (old D18a only tested mk_house/lm_ nodes + props). New tools/_d25_probe.gd collects
+  oriented XZ footprints for every visible substantial structure - town houses, growth SPECIALS (market_hall/
+  stables/guild/bathhouse/mage_tower), valley cottages/barns - plus field rects (town._fields), and reports
+  building<->building overlaps, building/field overlaps, and buildings on roads. Runs at the live level and TOP
+  level, uses the game's own _rect/_rect_on_road for the road test (so the door-side hanging shop sign + planters
+  don't false-flag) and exempts plaza-fronting landmarks/shops/towers (a forecourt meeting paving is by design).
+- FINDING: the town is geometrically CLEAN - BLD=0 building-into-building, FLD=0 building-on-field at both levels.
+  The single real defect: 1 residential house standing in a road. _resolve_overlaps drops on-road plots BEFORE the
+  valley roads + real south road are laid, so a road later cut through a house survived. FIX: new town.gd
+  _final_road_sweep(), called right after valley.setup() (all roads laid, before growth + nav + people), drops any
+  remaining house whose _rect sits on a road. 1 dropped; probe then clean.
+- The 5 the probe first flagged were all LANDMARKS (hall/chapel/barracks/windmill/workshop) fronting their plaza by
+  design - verified by eye (windmill sails overhang paving, base on dirt). Exempted in the probe, skipped by sweep.
+- Farm (Coalfoot/Bramble) verified by eye: fields + cottages + fences + kitchen garden + hayricks + the Ford Mill,
+  lane-connected - reads as a farm, not scattered; left as-is.
+- Gate: parse 0 SCRIPT ERROR; OFFFLOOR 0/850 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk 120 s PASS
+  (in_solid 0/18777, raid 0/3561); _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR; D25_PROBE OK (lvl 3 + 6).
+- New tools: _d25_probe.gd, _d25_shot.gd, _d25_diag.gd (+ .uid). Shot sheet renders/cycles/20261112_d25/.
+  Backup scripts/town.gd.bak_d25 (not committed).

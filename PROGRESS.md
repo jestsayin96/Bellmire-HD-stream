@@ -3257,3 +3257,31 @@ tiers rather than a single step.
 - Did NOT tick L57 - the supervisor ticks on review. hud-ui not newly merged with main this cycle (main advanced
   to a3198ee during the run - laptop L41/L42/L50 - none touching my 7 files, so no conflict); supervisor to merge
   hud-ui -> main as usual. The L39b 18 px Chronicle read still holds at 1080p in these crops (still Mr. E's eye).
+
+
+## U-cycle 8 - L58: the Guild Roll leaves the stream (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13)
+- L58 (Mr. E): "the guild roll it can stay on the hub doesnt need to be on stream, it can be for chat
+  as well." Removed the on-screen Guild Roll board - the top-10 standings AND the small Fallen list it
+  carried - from scripts/leaderboard_panel.gd (the _panel/_list, _build/_refresh, the per-frame
+  visibility, and the now-dead L toggle). The CanvasLayer now draws ONLY the L51 Satchel.
+- Its two homes Mr. E said are enough are untouched (both read-only, both independent of this panel):
+  the viewer hub's snapshot (snapshot_pub "guild_roll", not my file) and the free !guild / !ranks chat
+  command (chatcmd -> roster.leaderboard, not my file). Deaths still reach the stream via the Chronicle.
+- The L51 Satchel is unchanged: a viewer's own sheet (worn gear + buffs, states running, what they carry,
+  the counter's sell prices), folded up with I. It had the column to itself already; it keeps it.
+- Reconciled the two HUD style tests that asserted the removed board: _l15_test (dropped the "Guild Roll
+  line px" check, kept the Chronicle size/restyle checks) and _l16_test (dropped the "Guild Roll:
+  parchment/teal" check, kept the Chronicle/boss-bar/theme checks). Added tools/_l58_test.gd (windowed).
+- Verified: parse-boot headless rc=0, 0 SCRIPT ERROR / Parse Error. Windowed - L58_TEST OK (8 checks, 0
+  fails: no "Guild Roll" label anywhere, _panel field gone, the Satchel still builds + folds up with real
+  content, roster.leaderboard('standing') still answers for !guild/!ranks + the hub). L15_TEST OK, L16_TEST OK.
+- I LOOKED (renders/cycles/20261113_u8_l58, 1920x1080): the RESTING frame's top-right corner - where the
+  Guild Roll board used to sit - is empty; only the Chronicle remains bottom-left. The SATCHEL frame shows
+  "Pike's Satchel" rendering cleanly in the house parchment/teal/ink style. L58 reads as intended.
+- Did NOT tick L58 - the supervisor ticks on review. No new class_name added (the test tool extends
+  SceneTree), so no class-cache action. origin/main unchanged since U7 (a3198ee) and none of its files are
+  mine, so no merge conflict; supervisor to merge hud-ui -> main as usual.
+- FOR MR. E (tiny, not blocking): with the roll gone the L key no longer does anything on stream. If you
+  want L repurposed (e.g. to fold the Satchel like I, or toggle something else), say the word. The L51
+  Satchel's "No rings, no cloak..." hint still clips at the panel edge ("!wear ri[ng]") - a pre-existing
+  L51 clip, not touched here; I can widen or wrap that line if you want it to read in full.

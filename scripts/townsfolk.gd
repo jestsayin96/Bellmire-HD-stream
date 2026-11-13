@@ -345,6 +345,124 @@ func _follow(delta: float) -> void:
         if not (Rig.gait and leader is Townsfolk and (leader as Townsfolk)._vs > 0.3):
             Rig.play(_anim, "Idle")
 
+## D20b: who takes cover when raiders are in the valley - ordinary folk, not
+## the watch, the chief, a tower lookout, a posted stallholder, or a raider.
+func _flee_ok() -> bool:
+    return rank < 0 and not stay and leader == null and cart == null \
+        and role != "guard" and role != "chief" and role != "bandit" \
+        and gear_role != "lookout"
+
+## D20b: while a raid is live an ordinary body drops what it is doing and runs
+## for the nearest cover (its home, else any house), then cowers indoors until
+## the all-clear. Returns true when it fully owns this frame (held indoors).
+func _civic_flee() -> bool:
+    if town == null or not town.has_method("is_raid_on"):
+        return false
+    if not bool(town.call("is_raid_on")):
+        if _fleeing:
+            _fleeing = false
+            _flee_k = 1.0
+            _wait = randf_range(1.0, 6.0)   # ease out after the all-clear, staggered
+        return false
+    if not _flee_ok():
+        return false
+    if inside:
+        _route.clear()
+        _fleeing = true
+        _flee_k = 1.0
+        _wait = 4.0
+        return true
+    # at the doorway with no interior point to step into (a homeless body's
+    # refuge, or a home with no inside point): duck inside at the threshold so
+    # the street truly clears, rather than mill about the door
+    if _fleeing and _enter_at == Vector3.ZERO and _door_out != Vector3.ZERO \
+            and Vector2(_door_out.x - global_position.x, _door_out.z - global_position.z).length() < 2.5:
+        inside = true
+        visible = false
+        _route.clear()
+        _wait = 4.0
+        return true
+    if _fleeing and not _route.is_empty():
+        return false                         # already running for cover
+    var dest := home
+    var inpt := home_in
+    if dest == Vector3.ZERO:
+        var rf: Array = town.call("flee_refuge", global_position)
+        if rf.size() == 2:
+            dest = rf[0]
+            inpt = rf[1]
+    if dest == Vector3.ZERO:
+        return false
+    if _sat:
+        _sat = false
+        _release_seat()
+    _seat_i = -1
+    var r: Array = town.call("route", global_position, dest)
+    if r.is_empty():
+        return false
+    _enter_at = inpt
+    _door_out = dest
+    var end: Vector3 = r.back()
+    if inpt != Vector3.ZERO and Vector2(end.x - dest.x, end.z - dest.z).length() <= 1.0:
+        r.append(inpt)
+    else:
+        _enter_at = Vector3.ZERO     # no interior leg; the doorway tuck takes over
+    _route = r
+    _fleeing = true
+    _at_fest = false
+    _flee_k = 1.7
+    _linger = 999.0
+    _wd_at = Vector3.INF
+    _wd_n = 0
+    _best_d = INF
+    _prog_t = 0.0
+    _wait = 0.0
+    fled += 1
+    return false
+
+## D20b: when a festival is on, an idle ordinary body wanders to the square to
+## join the crowd (and cheers there via _idle_acts). Returns true when it set a
+## route (the caller stops this frame), like _maybe_errand.
+func _maybe_gather() -> bool:
+    if town == null or not town.has_method("is_festival") or not bool(town.call("is_festival")):
+        _at_fest = false
+        return false
+    if not _flee_ok() or _fleeing or _seat_i >= 0 or _sat:
+        return false
+    var fp = town.get("festival_at")
+    if not (fp is Vector3) or (fp as Vector3) == Vector3.ZERO:
+        return false
+    var centre: Vector3 = fp
+    if Vector2(centre.x - global_position.x, centre.z - global_position.z).length() < 12.0:
+        _at_fest = true                       # already here - mill about and cheer
+        return false
+    if _at_fest:
+        return false
+    if inside:
+        if _door_out == Vector3.ZERO:
+            return false
+        inside = false
+        visible = true
+        global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
+    var a := randf() * TAU
+    var spot: Vector3 = town.call("keep_walkable", centre + Vector3(cos(a), 0.0, sin(a)) * randf_range(4.0, 11.0))
+    var r: Array = town.call("route", global_position, spot)
+    if r.is_empty():
+        return false
+    _route = r
+    _enter_at = Vector3.ZERO
+    _door_out = Vector3.ZERO
+    _linger = randf_range(25.0, 50.0)
+    _wait = 0.0
+    _wd_at = Vector3.INF
+    _wd_n = 0
+    _best_d = INF
+    _prog_t = 0.0
+    _at_fest = true
+    gathered += 1
+    acts["festival"] = int(acts.get("festival", 0)) + 1
+    return true
+
 ## D20a: RICHER ROUTINES. An ordinary shuttle-walker (empty stops, no leader,
 ## no cart) breaks off ONCE a day around midday to shop the market, and once of
 ## an evening for the tavern yard - so the day reads work -> market -> tavern ->
@@ -583,6 +701,8 @@ func _physics_process(delta: float) -> void:
         return
     if town == null:
         return
+    if _civic_flee():
+        return
     if stay:
         _posted(delta)
         return
@@ -594,6 +714,8 @@ func _physics_process(delta: float) -> void:
             if _seated(delta):
                 return
             _idle_acts(delta)
+        if _maybe_gather():
+            return
         if _maybe_errand():
             return
         _wait -= delta
@@ -677,7 +799,7 @@ func _physics_process(delta: float) -> void:
     _wobble += delta * 1.7
     dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * sway).normalized()
     var was := global_position
-    var p: Vector3 = global_position + dir * speed * pace * delta
+    var p: Vector3 = global_position + dir * speed * pace * _flee_k * delta
     # (D17c: the last step onto a seat is off the walkable ground too)
     var seat_leg: bool = _route.size() == 1 and _seat_i >= 0
     if door_leg or seat_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
@@ -1091,6 +1213,13 @@ var _mkt_at := randf_range(10.5, 14.5)   # D20a: this body's own market hour
 var _tav_at := randf_range(15.0, 17.0)   # D20a: this body's own tavern hour (after the shift)
 var _seat_i := -1
 var _sat := false
+# D20b: a body fleeing a raid for cover, and a body gone to the festival. The
+# flee runs (the D17b gait picks the run clip from the real speed via _flee_k).
+var _fleeing := false
+var _at_fest := false
+var _flee_k := 1.0
+static var fled := 0             # tools/_d20b_test.gd
+static var gathered := 0
 var _seat_for := 0.0
 var _act_t := randf_range(2.0, 6.0)
 
@@ -1193,7 +1322,10 @@ func _idle_acts(delta: float) -> void:
         var tv = town.get("tavern_at")
         var mk = town.get("_market_pos")
         var p := global_position
-        if (h >= 17.0 or h < 1.0 or _eve_drink) and tv is Vector3 and tv != Vector3.INF \
+        if _at_fest and bool(town.get("festival")):
+            list = ["Cheer", "Interact", "Cheer"]
+            kind = "festival"
+        elif (h >= 17.0 or h < 1.0 or _eve_drink) and tv is Vector3 and tv != Vector3.INF \
                 and Vector2(p.x - tv.x, p.z - tv.z).length() < 16.0:
             list = ["Use_Item", "Use_Item", "Cheer"]
             kind = "eat"

@@ -79,6 +79,15 @@
     "physic_gloves": {"name": "Apothecary's Gloves", "slot": "gloves", "cost": 220, "saves": 1, "flavour": "Stained to the wrist in colours the guild will not write down."},
     "rattling_gauntlets": {"name": "Rattling Gauntlets", "slot": "gloves", "cost": 280, "hit": 1, "flavour": "They clatter. So does the Host, and it never slowed them."},
     "mortar_gloves": {"name": "Mortarman's Gloves", "slot": "gloves", "cost": 230, "dmg": 1, "flavour": "The new wall went up in these. Something hit the old one first."}
+  ,
+    "lampwright_ring": {"name": "Lampwright's Ring", "slot": "ring", "cost": 330, "saves": 1, "flavour": "Turned on a wick-trimmer's bench. It keeps a flame honest."},
+    "measure_amulet": {"name": "Amulet of the Measure", "slot": "amulet", "cost": 410, "hp": 14, "flavour": "Grain-weight in silver. It settles whoever wears it."},
+    "scarglass_ring": {"name": "Scarglass Ring", "slot": "ring", "cost": 460, "ac": 1, "flavour": "Only slightly cursed, the market swears. The market swears a great deal."},
+    "crier_cloak": {"name": "Crier's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Loud cloth. Nobody shoves a man who has been shouting all morning."},
+    "fordwarden_boots": {"name": "Fordwarden Boots", "slot": "boots", "cost": 350, "speed": 1, "flavour": "Wet to the knee for thirty years and never once lost."},
+    "quarry_gloves": {"name": "Quarryman's Gloves", "slot": "gloves", "cost": 240, "dmg": 1, "flavour": "Stone taught these hands, and stone does not teach gently."},
+    "host_amulet": {"name": "Rattling Host Amulet", "slot": "amulet", "cost": 430, "hp": 16, "flavour": "Strung with teeth that stopped chattering when the Host did."},
+    "tollkeep_ring": {"name": "Tollkeep's Ring", "slot": "ring", "cost": 390, "hit": 1, "flavour": "Sedge took a toll on that road. Somebody took the ring."}
   },
   "cosmetics": {
     "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a"},
@@ -238,6 +247,19 @@
     "title_doorward": {"name": "Doorward", "kind": "title", "cost": 150},
     "title_unmeasured": {"name": "the Unmeasured", "kind": "title", "cost": 50},
     "title_latetoford": {"name": "Late to the Ford", "kind": "title", "cost": 40}
+  ,
+    "lampwright_cap": {"name": "Lampwright's Cap", "kind": "hat", "cost": 70, "colour": "8a7a3a"},
+    "quarry_helm": {"name": "Quarryman's Helm", "kind": "hat", "cost": 90, "colour": "6a6258"},
+    "crier_plume": {"name": "Crier's Plume", "kind": "hat", "cost": 120, "colour": "b02a3a"},
+    "fen_hood": {"name": "Fenwalker's Hood", "kind": "hat", "cost": 60, "colour": "3a4a32"},
+    "host_coif": {"name": "Rattling Coif", "kind": "hat", "cost": 140, "colour": "cdbfa0"},
+    "banner_lamplight": {"name": "Lamplight Banner (amber)", "kind": "banner", "cost": 110, "colour": "d8a038"},
+    "banner_quarry": {"name": "Quarry Banner (slate)", "kind": "banner", "cost": 100, "colour": "5a5e66"},
+    "banner_grubmother": {"name": "Grubmother Banner (pale)", "kind": "banner", "cost": 130, "colour": "9aa07a"},
+    "title_fenwalker": {"name": "the Fenwalker", "kind": "title", "cost": 110},
+    "title_quarried": {"name": "the Quarried", "kind": "title", "cost": 120},
+    "title_hostsilenced": {"name": "who Silenced the Host", "kind": "title", "cost": 260},
+    "title_measuretwice": {"name": "Twice-Measured", "kind": "title", "cost": 140}
   },
   "dyes": {
     "black": "2a2a2e", "white": "e8e4da", "red": "a02a26", "blue": "2a4aa0", "green": "2a7a3a",
@@ -288,6 +310,15 @@
     "brick": "9a5a3a",
     "flaxen": "dcc89a",
     "bellbronze": "a8803a"
+  ,
+    "fenwater": "2e3a34",
+    "lampwick": "c8b070",
+    "quarrydust": "a89c88",
+    "hostbone": "ddd2b8",
+    "wickash": "4a4238",
+    "fordmud": "4a3e2e",
+    "crierred": "b8303c",
+    "glasswort": "6a8a72"
   },
   "dye_cost": 25,
   "shop_stock": {

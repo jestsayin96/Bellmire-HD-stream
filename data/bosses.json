@@ -59,6 +59,17 @@
     {"name": "The Rattling Host, Bellbound", "shape": "it keeps time with a bell nobody can find - the crowd moves all at once or not at all", "hp": 175, "speed": 3.8},
     {"name": "The Hollow King, Crowned Twice", "shape": "two cold crowns and no head worth the name - it fights as though a second king stood beside it", "hp": 190, "speed": 3.2},
     {"name": "The Grubmother, Walled In", "shape": "she has sealed the room with her own brood - the wall is behind you as well now", "hp": 250, "speed": 1.6}
+  ,
+    {"name": "The Hollow King, Lampless", "shape": "it puts out every lamp it passes - the rest of the fight happens in the dark it made", "hp": 165, "speed": 3.4},
+    {"name": "The Hollow King, Measured", "shape": "it fights to a count - three steps, three blows, three paces back, and it never miscounts", "hp": 180, "speed": 3.0},
+    {"name": "The Hollow King, Sodden", "shape": "dragged up out of the fen; its fire hisses and will not catch, and it is furious about it", "hp": 200, "speed": 2.6},
+    {"name": "The Grubmother, Fording", "shape": "she has taken the water - the brood comes out of it wet and already moving", "hp": 220, "speed": 1.8},
+    {"name": "The Grubmother, Quiet", "shape": "nothing spills and nothing rattles; the wall simply arrives where you were standing", "hp": 240, "speed": 2.0},
+    {"name": "The Grubmother, Bell-Fed", "shape": "she answers a bell nobody rang - her brood comes in waves, on the count", "hp": 235, "speed": 1.6},
+    {"name": "The Rattling Host, Crowned", "shape": "one of its dead wears a crown, and nothing else falls while that one stands", "hp": 190, "speed": 3.4},
+    {"name": "The Rattling Host, Pressed", "shape": "too many in too small a room - it cannot swing, so it crushes", "hp": 205, "speed": 2.6},
+    {"name": "Nightwing, Twinned", "shape": "two shadows and one weight - whichever you strike, the other is already behind you", "hp": 100, "speed": 6.8},
+    {"name": "Nightwing, Mantled", "shape": "it folds its wings over itself and takes the first blow for nothing", "hp": 160, "speed": 5.4}
   ],
   "greater_uniques": [
     {"name": "The Gravewyrm, Half-Woken", "shape": "only half risen - slower and softer in the body, but its breath comes deep and ill-tempered", "hp": 230, "attack": 26},
@@ -77,5 +88,14 @@
     {"name": "Mourncoil, Still", "shape": "it does not move at all - the cold does the moving, and the room keeps shrinking", "hp": 340, "speed": 1.8},
     {"name": "The Gravewyrm, Scar-Fed", "shape": "the ground feeds it - every spell cast on this floor comes back out of its mouth", "hp": 300, "attack": 28},
     {"name": "The Pale Duchess, Attended", "shape": "she never fights first and never alone - the room is full of borrowed hands", "hp": 200, "speed": 4.2, "attack": 27}
+  ,
+    {"name": "The Gravewyrm, Toll-Taking", "shape": "it will not touch empty hands - whoever carries the most is the one it takes", "hp": 300, "attack": 27},
+    {"name": "The Gravewyrm, Shedding", "shape": "it leaves its skin behind in the corridor, and the skin keeps coming", "hp": 270, "speed": 3.0, "attack": 25},
+    {"name": "The Ossuary Lord, Walled", "shape": "it builds instead of raising - a bone wall across the room, and it works behind it", "hp": 320, "speed": 2.4},
+    {"name": "The Ossuary Lord, Lamplit", "shape": "it carries its own light and will not fight outside it; step out and it rebuilds", "hp": 290, "attack": 25},
+    {"name": "The Pale Duchess, Hosting", "shape": "she receives one at a time, and the rest of the room cannot reach her", "hp": 230, "speed": 4.0, "attack": 30},
+    {"name": "The Pale Duchess, Thirsting", "shape": "every throat she opens puts her further from dying", "hp": 210, "speed": 4.6, "attack": 28},
+    {"name": "Mourncoil, Bound", "shape": "iced to the floor it chose - it cannot follow, and nothing leaves the room either", "hp": 350, "speed": 1.6},
+    {"name": "Mourncoil, Hunting", "shape": "the frost goes down the corridor first and it comes in behind the cold", "hp": 270, "speed": 4.0, "attack": 27}
   ]
 }

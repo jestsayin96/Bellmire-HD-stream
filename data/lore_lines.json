@@ -97,22 +97,22 @@
   },
   "lord_intros_alt": {
     "_note": "C-cycle 8. Extra intro lines for the SAME eight lords - no new lords. Pick at random from [lord_intros[key]] + lord_intros_alt[key] so a second sighting on one stream does not read identically.",
-    "hollow_king": ["Blue light under the door, and no heat in it.", "Something cold is already seated in the hall.", "The braziers lean towards whatever just walked in."],
-    "grubmother": ["The wet reaches the boots before the sound does.", "The walls move, and it is not the walls.", "Something is birthing in the dark ahead, and not stopping."],
-    "rattling_host": ["A hundred small knocks, all keeping time.", "The dark ahead has too many elbows.", "It counts up, and it never reaches an end."],
-    "nightwing": ["A draught from the ceiling, and the ceiling has wings.", "The torches lie flat and stay flat.", "Something crosses the lamp twice before you look up."],
-    "gravewyrm": ["The corridor ahead is a throat.", "The stone trembles in long, patient breaths.", "Older than the guild, older than the scar - and still hungry."],
-    "ossuary_lord": ["The bones on the floor are getting up in order.", "It does not hurry. It has never had to.", "Somewhere ahead, a hand is arranging the dead."],
-    "pale_duchess": ["Perfume, down here. Expensive.", "She is already holding the room. You are late.", "Someone apologises, sweetly, for what comes next."],
-    "mourncoil": ["The puddles go hard underfoot.", "Breath hangs in the air and does not move on.", "Frost climbs the walls towards you."]
+    "hollow_king": ["Blue light under the door, and no heat in it.", "Something cold is already seated in the hall.", "The braziers lean towards whatever just walked in.", "The hall is colder at the far end than at the door.", "A crown's worth of blue light, and nothing wearing it yet.", "The fires burn and give nothing back."],
+    "grubmother": ["The wet reaches the boots before the sound does.", "The walls move, and it is not the walls.", "Something is birthing in the dark ahead, and not stopping.", "The floor gives under the boot and does not spring back.", "Something ahead is full and still feeding.", "The wet is warm. That is the worst of it."],
+    "rattling_host": ["A hundred small knocks, all keeping time.", "The dark ahead has too many elbows.", "It counts up, and it never reaches an end.", "A great many small bones, all in a hurry.", "Something ahead is taking stock of itself.", "The count carries down the corridor, and it is rising."],
+    "nightwing": ["A draught from the ceiling, and the ceiling has wings.", "The torches lie flat and stay flat.", "Something crosses the lamp twice before you look up.", "The lamps duck all together, as if something passed over.", "The ceiling is closer than it was, and breathing.", "Two shadows for every one thing above you."],
+    "gravewyrm": ["The corridor ahead is a throat.", "The stone trembles in long, patient breaths.", "Older than the guild, older than the scar - and still hungry.", "The walls were cut to let this thing pass, a long age ago.", "The floor lifts, very slightly, and settles.", "This was never a dungeon. It was a den."],
+    "ossuary_lord": ["The bones on the floor are getting up in order.", "It does not hurry. It has never had to.", "Somewhere ahead, a hand is arranging the dead.", "The dead ahead are sorting themselves into ranks.", "Nothing hurries. Nothing needs to.", "A dry sound of stacking, somewhere past the lamp."],
+    "pale_duchess": ["Perfume, down here. Expensive.", "She is already holding the room. You are late.", "Someone apologises, sweetly, for what comes next.", "The air ahead is warmer, and scented, and wrong.", "Somebody is being gracious at you out of the dark.", "She has had the room swept for your arrival."],
+    "mourncoil": ["The puddles go hard underfoot.", "Breath hangs in the air and does not move on.", "Frost climbs the walls towards you.", "The lamp's own heat gives up first.", "Ice on the steel before the first blow.", "The cold comes in coils, and tightens."]
   },
   "unique_intros_alt": {
     "_note": "C-cycle 8. Extra intro lines for the SAME five rare uniques. Same pick rule as lord_intros_alt.",
-    "gnawbone": ["Something is eating the wall, and gaining.", "Teeth on stone, all the way down the corridor.", "The squeal comes from inside the masonry."],
-    "mother_silk": ["The doorway has been re-strung since this morning.", "Everything in this room is wrapped and waiting.", "Threads tug at the lamp before you touch them."],
-    "weeping_bowman": ["A bowstring, then a sob, then nothing.", "An arrow in the doorframe, still humming.", "He is sorry already, and he will shoot anyway."],
-    "cinderjack": ["Every firepit on the floor is lit, and lit wrong.", "Footprints burnt into the stone, going both ways.", "Something laughs, and the flames laugh along."],
-    "kept": ["The guild wrote this name down as lost. It is not lost.", "A familiar voice, saying a familiar name, wrongly.", "Somebody the roll calls dead calls the roll."]
+    "gnawbone": ["Something is eating the wall, and gaining.", "Teeth on stone, all the way down the corridor.", "The squeal comes from inside the masonry.", "Mortar dust on the floor, and more of it every heartbeat.", "There is a hole in that wall that was not there, and it is widening.", "Chewing. Patient, enormous chewing."],
+    "mother_silk": ["The doorway has been re-strung since this morning.", "Everything in this room is wrapped and waiting.", "Threads tug at the lamp before you touch them.", "The lamp catches a thousand threads, all of them new.", "Something tidied this room and left the bundles upright.", "The silk goes taut, somewhere behind you."],
+    "weeping_bowman": ["A bowstring, then a sob, then nothing.", "An arrow in the doorframe, still humming.", "He is sorry already, and he will shoot anyway.", "A notch, a breath, a sob. In that order.", "He aims through tears and does not miss for them.", "Grief, and a very good bow."],
+    "cinderjack": ["Every firepit on the floor is lit, and lit wrong.", "Footprints burnt into the stone, going both ways.", "Something laughs, and the flames laugh along.", "Ash footprints, and the ash is warm.", "Every lamp on the floor burns green for a moment.", "Something is laughing in the firepit, and the firepit agrees."],
+    "kept": ["The guild wrote this name down as lost. It is not lost.", "A familiar voice, saying a familiar name, wrongly.", "Somebody the roll calls dead calls the roll.", "The roll says this one is dead. The roll is wrong, or the voice is.", "It wears a guild cloak and remembers the words.", "Somebody the guild buried is calling the muster."]
   },
   "barks": {
     "enter": ["Count the flasks.", "Keep the door.", "Light first. Then steel.", "Mind the floor.", "Lamps up.", "Down we go.", "Grain and flasks.", "Keep together.", "Eyes open.", "Boots on.", "Flasks? Flasks.", "After you.", "Trim the lamp.", "Doors first.", "Quiet feet.", "Nobody wanders.", "Lamp high.", "Watch the seams.", "Door stays ours.", "Walk, do not run.", "Steel loose.", "Nobody splits off.", "Good boots today.", "Measure the grain.", "Smells wrong already.", "In we go.", "Mark the way back.", "On my shoulder.",
@@ -177,6 +177,14 @@
     "3": "Runes along the fuller smoulder when it is drawn.",
     "4": "Dragontooth - nobody in Bellmire will say whose tooth.",
     "5": "Scarforged. It hums when the dark is near."
+  },
+  "forge_alt": {
+    "_note": "C-cycle 12. Extra forge-tier descriptions for the SAME five tiers - no new tiers. Pick at random from [forge[tier]] + forge_alt[tier] so a tier's line does not read identically every time a weapon is named. Keys are the same tier strings as forge.",
+    "1": ["Plain Bellmire work. It will not sing, and it will not snap.", "Dull as a ditch, honest as a measure. It holds an edge long enough.", "Town iron. The smith is not proud of it and will not take it back."],
+    "2": ["Folded twice and stamped. The smith puts her mark where you can see it.", "Twice-worked steel. It rings true when you knock it.", "Good enough that the smith wrote her name on it."],
+    "3": ["Runes down the fuller wake when it is drawn, and sulk when it is sheathed.", "The marks along the blade hold a low heat. Nobody will say who cut them.", "Drawn, it glows faint along the groove. Sheathed, it waits."],
+    "4": ["Dragontooth. Bellmire will sell it to you and still not say whose tooth.", "Tooth-forged. It bites first and asks after.", "Cut from something that had teeth to spare. One tooth, one blade."],
+    "5": ["Scarforged. It hums when the dark leans close, and it has never been wrong yet.", "Quenched in the scar. It knows what is coming before you do.", "Forged where the ground misfires. It keeps the habit."]
   },
   "town_levels_for_the_desktop": {
     "_note": "For the desktop's town.gd if it wants them (the laptop does not edit town.gd): an announcement when Bellmire reaches a level, in the original's voice.",
@@ -349,7 +357,15 @@
       "New names on the guild post. Read them while they are fresh.",
       "The apothecary has flasks and the guild has holes to put them in!",
       "Taxes measured, not guessed - the Hall says so.",
-      "Rain by evening. The crier is never wrong twice running."
+      "Rain by evening. The crier is never wrong twice running.",
+      "Measure the grain, count the flasks, keep the door - and the crier keeps his voice!",
+      "Two up from the scar this morning, and both of them walking!",
+      "The bell has no clapper and even less to say. All's well!",
+      "Market day! Bring coin, bring elbows!",
+      "The Watch walked the wall twice and found nothing worth a second turn.",
+      "Flasks on the shelf, grain in the measure - Bellmire keeps its own accounts!",
+      "A lord came up out of the scar and went back down in pieces - hear it twice for a copper!",
+      "E3PO stood the night gate himself. Sleep easy, Bellmire."
     ],
     "market": [
       "Two coppers the carp, and the carp is grinning.",
@@ -362,7 +378,15 @@
       "Salt off the coast road - you will taste the journey.",
       "Wool off the hill, and it still smells of the hill.",
       "Bread this morning; bread-shaped by this afternoon.",
-      "Lamp oil! Burns slow, and you will want the slow sort."
+      "Lamp oil! Burns slow, and you will want the slow sort.",
+      "Rope by the fathom, and it has held a man before!",
+      "Scarstone, polished - it only looks at you a little!",
+      "Candles! Burn one for the delvers, buy two for yourself!",
+      "Hooks, lines, and a river that owes you nothing!",
+      "Cheese with a crust you could roof a barn with!",
+      "Fresh ink and honest parchment - write home while you still can!",
+      "A hat that has never once been rained on. Not once!",
+      "Secondhand steel - all of it came back up. Most of it alone."
     ],
     "growth": [
       "The masons raised a new course on the wall today.",
@@ -375,7 +399,15 @@
       "The road out is cobbled as far as the ford.",
       "They are putting glass in the chapel windows.",
       "A second row of stalls, and a queue for them.",
-      "The barracks took on ten more. E3PO looked almost pleased."
+      "The barracks took on ten more. E3PO looked almost pleased.",
+      "The ditch is dug, the stakes are in, and the masons are measuring stone.",
+      "A new row of chimneys on the east side, all of them smoking.",
+      "They have hung a lamp at the ford. It burns all night now.",
+      "The guild post took on a clerk, and the clerk took on a queue.",
+      "A tannery, downwind - and the town voted on which wind.",
+      "The market square has flagstones where the mud was.",
+      "A second smith, and the two of them already disagree.",
+      "They are cutting a road where the fields used to stop."
     ]
   },
   "propositions": {

@@ -2041,3 +2041,64 @@ NEW worker, new worktree W2 on branch `hud-ui`. Queue L34/L35/L38/L39/L40/L51.
 
 Verified: project boots with 0 SCRIPT ERROR / 0 Parse Error; windowed 1920x1080 capture with
 the grid up, three shots + measurements above. Items left UNTICKED for the supervisor.
+
+## U2 - desktop HUD: L38 ambient framing, four measured iterations (Nov 13, 2026)
+L38 was NOT fixed by U1. I looked at the U1 renders and the panes were still bare grass, open
+water and roof-fillers, so this cycle iterated against captures instead of against the brief.
+Every step was diagnosed from a picture, not guessed:
+
+1. U1's line-of-sight gate (`frame_clear`) passed bad shots because it answers "can the camera
+   see the subject", not "is the frame worth looking at". A lone sheep in an empty paddock
+   passes it perfectly.
+2. Added a density pass - which made it WORSE: counting every nearby body made a herd of cows
+   and a raft of ducks the densest thing in the valley, and two lanes sat on the same empty
+   ford. Fixed by counting COMPANY FROM PEOPLE ONLY (base weight >= 1.5: townsfolk, heroes,
+   delvers, a catch being landed) and dropping livestock 1.0 -> 0.35 (scenery, not a story).
+   Densities read from the BASE weights so the pass cannot feed itself.
+3. Two lanes still framed the same stretch of river: `used` excluded the exact NODE, not the
+   PLACE. Added AMB_APART = 12 m spacing against what other panes show, with a second pass that
+   drops the rule rather than leave a lane with nothing.
+4. The real bug was mine: `_shot_ok` tested `_offset_for()` while the camera actually takes
+   `_offset_lane()`, which swings a lane 90/-90/180 degrees round a crowded subject (L22). So in
+   the BUSIEST spot on the board the pane swung behind a roof that was never tested. It now
+   tests the position actually used, snapshotting and restoring the pane's crowd/cut state so a
+   test cannot change what the pane does next.
+
+FINDING for the team: the valley's props (carts, barrels, beams, fences) have NO physics
+colliders - a ray gate added in step 3 rejected exactly 0 shots across three runs. rts_camera's
+clearance model knows the town's HOUSES only, so prop clutter in frame cannot be detected from
+this side. The ray gate is left in (free, and starts working if props ever get bodies) but it is
+not what fixed this.
+
+RESULT, measured over the last two captures: 5 of 6 ambient panes land on a readable, populated
+subject (market stalls with 12 and 18 townsfolk in frame, a street of walkers, an angler playing
+a line) against roughly 2 of 6 before. NOT 100%: when the town's activity is concentrated in one
+market, AMB_APART pushes the remaining lane out to quiet ground - that is the one bad pane in
+the last capture (0 folk within 14 m). A judgement call for Mr. E: loosen the spacing and lanes
+double up on the crowd, or keep it and one lane sometimes shows a quiet corner. L38 NOT ticked.
+
+Renders: renders/cycles/20261113_u2/ (gitignored). 0 SCRIPT ERROR / 0 Parse Error.
+Note: a stale global_script_class_cache mid-cycle produced phantom "Could not resolve class
+FeedHUD/HudDock/Spotlight" errors while every file passed --check-only individually;
+--headless --import cleared it. COORDINATION 5 is right about this one.
+
+### L59 (NEW, from the supervisor) - hud-ui / main reconciliation: NOT DONE, and why
+Part-way through this cycle a merge of main appeared in this worktree, unmerged, with the four
+UI files showing as conflicted but their conflict MARKERS already gone - the working tree held
+my side only. Committing that would have recorded a merge that silently deleted the laptop's 80
+lines across those files, which is precisely the blind merge 9fe6f31 refused. So I ran
+`git merge --abort` and re-applied my own U2 work on a clean base. Both sides are intact: mine
+on `hud-ui`, theirs on `main`. Nothing is lost and the merge can be redone deliberately.
+What the reconciliation has to settle - the laptop built L34 AND L39 independently of me:
+ - auto_director L34: both sides invented the SAME function, `_fallback_shot(avoid)`. Theirs
+   cuts to the tour whenever `_best()` is empty; mine only when the current shot is actually
+   dead (`_shot_alive`), and mine also makes `_best()` itself never return empty. Theirs handles
+   the HOLD_MAX re-pick path explicitly, which mine leaves returning. The union is better than
+   either: take their HOLD_MAX `alt` handling and my `_best()` guarantee + deterministic
+   non-avoided scan.
+ - feed_hud / hud_dock L39: they have tools/_l39_test.gd and renders/cycles/20261112_l39/
+   box_*.png, so they sized a Chronicle box too. Theirs must be diffed against mine before
+   either is kept - this is the one that can break the overlay.
+ - spotlight: theirs is +36 lines (L57 per-pane "now watching" label, per Phase P) and does not
+   obviously collide with my L35/L38 work, but it needs reading, not assuming.
+This needs a windowed UI capture after resolving, per COORDINATION 4. Not attempted blind.

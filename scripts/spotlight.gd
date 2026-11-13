@@ -233,9 +233,44 @@ func _shot_ok(t: Node3D, p: Dictionary) -> bool:
 	if not is_instance_valid(t) or not t.is_inside_tree():
 		return false
 	var at := t.global_position + Vector3(0, 1.0, 0)
-	var pos := at + _offset_for(t)
+	# Test the position the camera will ACTUALLY take. _offset_lane can swing a lane 90 /
+	# -90 / 180 degrees round a crowded subject (L22), so testing the plain behind-offset
+	# judged a shot the pane was never going to use - which is how a roof-filling frame got
+	# through in the busiest spot on the board. It records crowd/cut state, so snapshot those
+	# and put them back: a test must not change what the pane does next.
+	var had_crowd = p.get("crowd")
+	var had_cut = p.get("cut")
+	var pos := at + _offset_lane(String(p.get("key", "")), t)
+	if had_crowd == null:
+		p.erase("crowd")
+	else:
+		p["crowd"] = had_crowd
+	if had_cut == null:
+		p.erase("cut")
+	else:
+		p["cut"] = had_cut
 	var sz: Vector2 = (p["box"] as Control).size
 	var aspect := sz.x / maxf(1.0, sz.y)
+	# L38b: frame_clear knows the town's HOUSES only - the valley's props (carts, barrels,
+	# beams, fences) are invisible to it, and a cart beam right at the lens was the next
+	# failure after the density pass. A physics ray from where the camera would sit to the
+	# subject's head catches anything solid that the house model misses.
+	var w := town.get_world_3d()
+	if w != null and w.direct_space_state != null:
+		var q := PhysicsRayQueryParameters3D.create(pos, at)
+		q.collide_with_areas = false
+		var hit := w.direct_space_state.intersect_ray(q)
+		if not hit.is_empty():
+			var owns := false
+			var n: Node = hit.get("collider") as Node
+			while n != null:
+				if n == t:
+					owns = true
+					break
+				n = n.get_parent()
+			if not owns:
+				_amb_blocked += 1
+				return false
 	eye._clear_near(at, (pos - at).length())
 	return eye.frame_clear(at, pos, (p["cam"] as Camera3D).fov, aspect)
 
@@ -244,6 +279,12 @@ func _shot_ok(t: Node3D, p: Dictionary) -> bool:
 ## wall. Now a draw is TESTED; a badly framed candidate is dropped and another is drawn.
 ## If every try fails we still return the first draw rather than go blank (L32a).
 const FRAME_TRIES := 6
+## L38: how near another subject must be to count as company (m)
+const AMB_NEAR := 14.0
+## L38: how far a lane's subject must stand from what another pane is showing (m)
+const AMB_APART := 12.0
+## L38b: how many candidate shots the ray gate has thrown out (read by the look script)
+static var _amb_blocked := 0
 
 func _draw_framed(pool: Array, total: float, l: String) -> Node3D:
 	var left := pool.duplicate()
@@ -316,14 +357,50 @@ func _amb_pick(l: String) -> void:
 	if am is Array:
 		for a2 in am:
 			if a2 is Node3D and is_instance_valid(a2) and (a2 as Node3D).is_visible_in_tree():
-				c.append([1.0, a2])
-	var total := 0.0
+				c.append([0.35, a2])   # L38: livestock is scenery, not a story - last resort
+	# L38: skip what another pane already shows - and anything standing within AMB_APART of
+	# it. Excluding only the exact NODE put two lanes on the same stretch of river in the
+	# first pass; the viewer reads that as one shot shown twice.
 	var pool: Array = []
-	for e in c:
-		if used.has(e[1]) or e[1] == last:
-			continue
-		pool.append(e)
-		total += float(e[0])
+	for pass_i in 2:
+		for e in c:
+			if used.has(e[1]) or e[1] == last:
+				continue
+			if pass_i == 0:
+				var ep: Vector3 = (e[1] as Node3D).global_position
+				var crowded := false
+				for u in used:
+					if is_instance_valid(u) and ep.distance_to((u as Node3D).global_position) < AMB_APART:
+						crowded = true
+						break
+				if crowded:
+					continue
+			pool.append(e)
+		if not pool.is_empty():
+			break                    # second pass only if the spacing rule left nothing
+	# L38: prefer somewhere something is HAPPENING. The old weighting rated a lone sheep in
+	# an empty field the same as a busy market corner, which is why the recordings were full
+	# of bare grass, open water and a blank verge: the subject WAS framed, there was just
+	# nothing around it to read. Each candidate's weight is now multiplied by how many OTHER
+	# candidates stand within AMB_NEAR of it, so crowds, a working dock and a party below
+	# outrank a solitary animal in a paddock.
+	# Company is counted from PEOPLE only (weight >= 1.5: townsfolk, heroes, delvers, a catch
+	# being landed) - counting every body made a herd of cows or a raft of ducks the densest
+	# thing in the valley, which is exactly the bare-field and open-water shots in the
+	# recordings. Densities are taken from the BASE weights so the pass cannot feed itself.
+	var total := 0.0
+	var base: Array = []
+	for e in pool:
+		base.append(float(e[0]))
+	for i in pool.size():
+		var here: Vector3 = (pool[i][1] as Node3D).global_position
+		var near := 0
+		for j in pool.size():
+			if j != i and base[j] >= 1.5 \
+				and here.distance_to((pool[j][1] as Node3D).global_position) < AMB_NEAR:
+				near += 1
+		pool[i][0] = base[i] * (1.0 + 0.7 * minf(float(near), 5.0))
+		total += float(pool[i][0])
 	var pick: Node3D = null
 	if not pool.is_empty():
 		pick = _draw_framed(pool, total, l)   # L38: a draw whose shot is actually legible
@@ -454,7 +531,7 @@ func _make_pane(k: String) -> Dictionary:
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bar.visible = k in LANES
 	box.add_child(bar)
-	return {"box": box, "vp": vp, "cam": cam, "frame": frame, "label": lb, "bar": bar, "svc": svc}
+	return {"box": box, "vp": vp, "cam": cam, "frame": frame, "label": lb, "bar": bar, "svc": svc, "key": k}
 
 func set_labels(v: bool) -> void:
 	labels_shown = v
@@ -465,10 +542,11 @@ func set_labels(v: bool) -> void:
 func _relayout(force := false) -> void:
 	var b := busy()
 	var lay := "grid_" + "_".join(b)
-	# L21: the slim bottom chrome (clock / chat) is no pane's; L32b: the Chronicle's
-	# centre strip parts the two pane rows at the cross of the grid
-	var h := (1.0 - HudDock.CHROME - HudDock.STRIP) * 0.5
-	var y2 := h + HudDock.STRIP
+	# L21: the slim bottom chrome (clock / chat) is no pane's. L39: the two pane rows MEET at
+	# the cross - L32b's full-width Chronicle band that parted them is gone (Mr. E rejected it);
+	# the Chronicle is now a compact box over the cross, covering only the panes' corners.
+	var h := (1.0 - HudDock.CHROME) * 0.5
+	var y2 := h
 	var rects := {"director": Rect2(0, 0, 0.5, h), "bits": Rect2(0.5, 0, 0.5, h),
 			"subs": Rect2(0, y2, 0.5, h), "points": Rect2(0.5, y2, 0.5, h)}
 	_rects = rects
@@ -647,6 +725,14 @@ func _clear(p: Dictionary, at: Vector3, want: Vector3, real: float) -> Vector3:
 	p["mv"] = (p.get("mv", Vector2.ZERO) as Vector2).lerp(p.get("lift", Vector2.ZERO), clampf(real * 3.0, 0.0, 1.0))
 	return RtsCamera.shifted(at, want, p["mv"])
 
+## L34: the eye's shot rebuilt from its OWN numbers (same convention as RtsCamera's placement),
+## for the tick where neither the main viewport's camera nor the eye's Camera3D can be read.
+## The director pane then still moves with the eye instead of holding a dead frame.
+func _eye_xform(eye: RtsCamera) -> Transform3D:
+	var off := Vector3(sin(eye.yaw) * cos(eye.pitch), -sin(eye.pitch), cos(eye.yaw) * cos(eye.pitch)) * eye.dist
+	var t := Transform3D(Basis(), eye.focus + off)
+	return t.looking_at(eye.focus + Vector3(0, 1.0, 0), Vector3.UP)
+
 var _eye_n: RtsCamera
 func _eye() -> RtsCamera:
 	if not is_instance_valid(_eye_n):
@@ -664,7 +750,7 @@ func _eye() -> RtsCamera:
 ## tighter (walls crowd the view down there) but is lifted a little too.
 func _offset_for(t: Node3D) -> Vector3:
 	var deep := t.global_position.y < -20.0 or _in_delve(t)
-	return Vector3(0, 9.5, 8.5) if deep else Vector3(0, 8.5, 12.5)
+	return Vector3(0, 9.5, 8.5) if deep else Vector3(0, 10.0, 11.5)
 
 ## ---- L22: two spotlit heroes standing together made two panes of one picture (every lane
 ## sat at the same offset behind its hero). When another pane's subject - another lane's hero,
@@ -731,21 +817,24 @@ func _follow(real: float) -> void:
 	var main := get_viewport().get_camera_3d() if get_viewport() else null
 	var d: Dictionary = _panes["director"]
 	if (d["box"] as Control).visible:
-		# L34(b): this used to be `if main and ...`. When get_camera_3d() returned null -
-		# which happens for a frame or more when the followed subject dies, rerolls or the
-		# eye is re-parented - the block was skipped and this pane silently kept its LAST
-		# transform. That is the frozen top-left pane. Now a null main camera falls back to
-		# the eye's own Camera3D, and failing that to a market wide: never a stale frame.
+		# L34: this used to be `if main and ...`. When get_camera_3d() returned null - which
+		# happens for a frame or more when the followed subject dies, rerolls or the eye is
+		# re-parented, and whenever L32a keeps disable_3d on - the block was skipped and this
+		# pane silently kept its LAST transform. That is the frozen top-left pane. Now there is
+		# always a source: the main camera, else the eye's own Camera3D, else the eye's numbers,
+		# else a market wide. Never a stale frame. (A freed camera is non-null, so validity is
+		# checked as well as null - that case came from the laptop's own L34 and is kept.)
 		var dc: Camera3D = d["cam"]
 		var src: Camera3D = main
-		if src == null:
-			var e := _eye()
-			if e != null and is_instance_valid(e.cam):
-				src = e.cam
-		if src != null:
+		var eye := _eye()
+		if (src == null or not is_instance_valid(src)) and eye != null and is_instance_valid(eye.cam):
+			src = eye.cam
+		if src != null and is_instance_valid(src):
 			dc.global_transform = src.global_transform
 			dc.fov = src.fov
 			dc.far = src.far
+		elif eye != null:
+			dc.global_transform = _eye_xform(eye)
 		else:
 			var mpos = town.get("_market_pos") if town else null
 			var mat: Vector3 = mpos if mpos != null else Vector3.ZERO

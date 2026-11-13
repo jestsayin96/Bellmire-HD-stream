@@ -3530,3 +3530,67 @@ just been re-enabled has no temporal history to resolve against.
   flakiness and should be looked at there rather than chased from here.
 - Regression after the cache: parse 0 SCRIPT ERROR; _offfloor 0 of 1415 (MON_INPROP 0 of 119);
   _delve_test 0 errors/nulls; L48_TEST OK.
+
+## U-cycle 7 - L57: "Now watching" above EACH pane, not one global banner (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13)
+- L57 (Mr. E): "just have the now watching above each of the split screen for whoever that specific screen is
+  watching." The single global AutoDirector banner ("Now watching: ...") is HudDock-marked "none", so it is
+  HIDDEN while the 2x2 grid is up - i.e. the resting state showed no now-watching at all. L57 moves it ONTO the
+  panes: every pane in the grid now carries its own label naming the subject it follows.
+- scripts/spotlight.gd ONLY (my file):
+  * _labels() now paints a per-pane "Now watching: <subject>" label on ALL FOUR panes (director + the three
+    lanes), in both paid and idle/ambient states - not just the old paid-only chip on the three lanes.
+  * _now_watching(k): paid lane -> bright lane-colour chip, "<Name> the <Species> <Class> - <reason>"; idle lane
+    -> muted chip, the ambient subject; director -> muted chip, its auto-director pick, else "Bellmire".
+  * _subject_name()/_hero_label(): a viewer's hero (in town or down in a delve) is named; townsfolk/animals/
+    anglers get a gentle descriptor ("a townsperson", "the livestock", "an angler at the water").
+  * _director_subject(): reads the AutoDirector's current pick (eye.director._cur), else eye.selected.
+  * L40 discipline: each label sits at its pane's OUTER-top corner and is kept on the OUTER side of the centre
+    Chronicle box - the box covers each pane's INNER corner, and on the BOTTOM row its lower half meets the panes'
+    top edge, so a wide label there is ellipsised to stop short of the box rather than cross into it.
+  * _follow() refreshes a pane's label when its subject changes (ambient rotation, a director cut); guarded by
+    _pane_subj so a steady shot costs nothing. F10 still hides every pane label with the rest of the chrome.
+- tools/_l57_test.gd (NEW, WINDOWED 1920x1080 - a HUD cannot be judged headless, COORDINATION 4): three lanes
+  paid on known heroes + the director driven onto a fourth, then the lanes cleared to ambient. Asserts: the grid
+  is the resting state; all four panes carry a "Now watching..." label; each clears the Chronicle box and stays
+  inside its own pane (no seam cross); the paid lanes name the right heroes; no two labels overlap; F10 hides all
+  four; the ambient relabel names its own subjects. L57_TEST OK (32 checks, 0 fails). Parse clean headless.
+- I LOOKED at the 1080p crops (renders/cycles/20261113_u7_l57/grid_labels_1080 + grid_ambient_1080): four
+  colour-coded chips, one per pane (dark director / gold bits / purple subs / teal points / muted ambient), all at
+  the outer-top corners, all clear of the Chronicle box. Heroes are named in full; the two BOTTOM paid labels
+  ellipsise only their trailing REASON ("sub...", "red...") where the box caps the width - the lane colour + timer
+  already signal bits/sub/points, so the "who" is never lost. Reads clearly at native 1080p.
+- FOR MR. E (a small call): the bottom-row paid labels drop the tail of the reason to clear the Chronicle box. If
+  you want the full reason on those two panes I can drop "the <species> <class>" from the label or sit the bottom
+  labels just under the box. Also quiet moments can show "the livestock"/"a townsperson" on several lanes at once
+  (honest, but repetitive); livelier stream states vary.
+- Did NOT tick L57 - the supervisor ticks on review. hud-ui not newly merged with main this cycle (main advanced
+  to a3198ee during the run - laptop L41/L42/L50 - none touching my 7 files, so no conflict); supervisor to merge
+  hud-ui -> main as usual. The L39b 18 px Chronicle read still holds at 1080p in these crops (still Mr. E's eye).
+
+
+## U-cycle 8 - L58: the Guild Roll leaves the stream (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13)
+- L58 (Mr. E): "the guild roll it can stay on the hub doesnt need to be on stream, it can be for chat
+  as well." Removed the on-screen Guild Roll board - the top-10 standings AND the small Fallen list it
+  carried - from scripts/leaderboard_panel.gd (the _panel/_list, _build/_refresh, the per-frame
+  visibility, and the now-dead L toggle). The CanvasLayer now draws ONLY the L51 Satchel.
+- Its two homes Mr. E said are enough are untouched (both read-only, both independent of this panel):
+  the viewer hub's snapshot (snapshot_pub "guild_roll", not my file) and the free !guild / !ranks chat
+  command (chatcmd -> roster.leaderboard, not my file). Deaths still reach the stream via the Chronicle.
+- The L51 Satchel is unchanged: a viewer's own sheet (worn gear + buffs, states running, what they carry,
+  the counter's sell prices), folded up with I. It had the column to itself already; it keeps it.
+- Reconciled the two HUD style tests that asserted the removed board: _l15_test (dropped the "Guild Roll
+  line px" check, kept the Chronicle size/restyle checks) and _l16_test (dropped the "Guild Roll:
+  parchment/teal" check, kept the Chronicle/boss-bar/theme checks). Added tools/_l58_test.gd (windowed).
+- Verified: parse-boot headless rc=0, 0 SCRIPT ERROR / Parse Error. Windowed - L58_TEST OK (8 checks, 0
+  fails: no "Guild Roll" label anywhere, _panel field gone, the Satchel still builds + folds up with real
+  content, roster.leaderboard('standing') still answers for !guild/!ranks + the hub). L15_TEST OK, L16_TEST OK.
+- I LOOKED (renders/cycles/20261113_u8_l58, 1920x1080): the RESTING frame's top-right corner - where the
+  Guild Roll board used to sit - is empty; only the Chronicle remains bottom-left. The SATCHEL frame shows
+  "Pike's Satchel" rendering cleanly in the house parchment/teal/ink style. L58 reads as intended.
+- Did NOT tick L58 - the supervisor ticks on review. No new class_name added (the test tool extends
+  SceneTree), so no class-cache action. origin/main unchanged since U7 (a3198ee) and none of its files are
+  mine, so no merge conflict; supervisor to merge hud-ui -> main as usual.
+- FOR MR. E (tiny, not blocking): with the roll gone the L key no longer does anything on stream. If you
+  want L repurposed (e.g. to fold the Satchel like I, or toggle something else), say the word. The L51
+  Satchel's "No rings, no cloak..." hint still clips at the panel edge ("!wear ri[ng]") - a pre-existing
+  L51 clip, not touched here; I can widen or wrap that line if you want it to read in full.

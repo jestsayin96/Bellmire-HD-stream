@@ -1,31 +1,25 @@
 extends CanvasLayer
 class_name LeaderboardPanel
-## The Guild Roll on screen: the standing board from the roster (same roll as
-## the !top chat lists) and the latest of the fallen, on parchment like the
-## Chronicle, top-right. L toggles it; F10 hides it with the rest of the UI.
+## L58 (Mr. E, Nov 13): THE GUILD ROLL LEAVES THE STREAM. His call: "the guild roll
+## it can stay on the hub doesn't need to be on stream, it can be for chat as well."
+## The top-10 standings still live in the two homes he said are enough - the viewer
+## hub's snapshot (snapshot_pub's "guild_roll") and the free !guild / !ranks chat
+## command (chatcmd -> roster.leaderboard) - so the on-screen Guild Roll board, and
+## the small Fallen list it carried, are removed from this file. Deaths still reach
+## the stream through the Chronicle (feed_hud); the standings no longer sit on it.
 ##
-## L51: the SATCHEL shares this file and this column - a viewer's own sheet (worn
-## gear and what each piece gives, the states running on them, what they carry,
-## what the counter would pay). It takes the column rather than sharing it, so the
-## roll steps aside while a satchel is up. I pins one up.
-
-const ROWS := 8
-const FALLEN := 3
-const INK := Color(0.20, 0.13, 0.08)
-const GOLD := Color(0.50, 0.32, 0.02)
-const DEAD := Color(0.36, 0.27, 0.19)
+## What this CanvasLayer now draws is ONLY L51 THE SATCHEL (below): a viewer's own
+## sheet - worn gear and what each piece gives, the states on them, what they carry,
+## and what the counter would pay. The streamer folds the permanent grid to it with
+## I; I again lets go. There is no L toggle any more - the roll it showed is gone.
 
 var roster: Roster
-var _panel: PanelContainer
-var _list: VBoxContainer
-var _t := 0.0
 
 func setup(r: Roster) -> void:
     roster = r
     # L51: a viewer's purchase, reroll or find raises their satchel on its own
     if roster != null and not roster.changed.is_connected(_on_hero_changed):
         roster.changed.connect(_on_hero_changed)
-    _refresh()
 
 func _on_hero_changed(user_id: String) -> void:
     if _satchel != null and is_instance_valid(_satchel):
@@ -34,14 +28,11 @@ func _on_hero_changed(user_id: String) -> void:
 func _ready() -> void:
     layer = 20
     UiTheme.watch(self)
-    _build()
     _build_satchel()
 
-## L15: F11 changed the UI scale
+## L15: F11 changed the UI scale - rebuild the satchel at the new scale, keeping
+## whoever it was showing and whether it was pinned
 func restyle() -> void:
-    if _panel:
-        _panel.queue_free()
-    _build()
     var keep := ""
     var pinned := false
     if _satchel != null and is_instance_valid(_satchel):
@@ -52,85 +43,14 @@ func restyle() -> void:
     _satchel.sticky = pinned
     if keep != "":
         _satchel.raise_for(keep)
-    _refresh()
-
-func _build() -> void:
-    _panel = PanelContainer.new()
-    _panel.add_theme_stylebox_override("panel", UiTheme.parchment())
-    _panel.anchor_left = 1.0
-    _panel.anchor_right = 1.0
-    _panel.offset_right = -UiTheme.px(18)
-    _panel.offset_top = UiTheme.px(290)      # L15: below the boss bar's band at every scale
-    _panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-    _panel.custom_minimum_size = Vector2(UiTheme.px(500), 0)
-    HudDock.mark(_panel, "none")        # L21: the Guild Roll steps aside while the spotlight panes are up
-    add_child(_panel)
-    _list = VBoxContainer.new()
-    _list.add_theme_constant_override("separation", 1)
-    _panel.add_child(_list)
 
 func _unhandled_input(ev: InputEvent) -> void:
-    if ev is InputEventKey and ev.pressed and not ev.echo and ev.keycode == KEY_L:
-        visible = not visible
-        Sfx.play("ui", -8.0)
-        get_viewport().set_input_as_handled()
-        return
     # L51: I pins a satchel up and rotates it through the living; I again lets go
     if ev is InputEventKey and ev.pressed and not ev.echo and ev.keycode == KEY_I:
         if _satchel != null and is_instance_valid(_satchel):
             _satchel.pin(not _satchel.sticky)
             Sfx.play("ui", -8.0)
         get_viewport().set_input_as_handled()
-
-func _process(delta: float) -> void:
-    # L17: the Guild Roll steps aside while the spotlight panes carry the view (it sat on the bits pane)
-    if _panel:
-        var satchel_up: bool = _satchel != null and is_instance_valid(_satchel) and _satchel.visible
-        _panel.visible = roster != null and not satchel_up \
-            and not (get_viewport() != null and get_viewport().disable_3d)
-    _t -= delta
-    if _t <= 0.0:
-        _t = 5.0
-        _refresh()
-
-func _line(text: String, col: Color, size := 15) -> void:
-    var lb := Label.new()
-    lb.text = text
-    lb.add_theme_font_size_override("font_size", UiTheme.px(size))
-    lb.add_theme_color_override("font_color", col)
-    lb.clip_text = true
-    lb.custom_minimum_size = Vector2(UiTheme.px(464), 0)
-    _list.add_child(lb)
-
-func _refresh() -> void:
-    # L17 review: the town hands setup() its roster before the roster exists - pick it up late
-    if roster == null and get_parent() != null and get_parent().get("roster") is Roster:
-        roster = get_parent().get("roster")
-    if _panel:
-        var up: bool = _satchel != null and is_instance_valid(_satchel) and _satchel.visible
-        _panel.visible = roster != null and not up      # never a bare parchment strip
-    if _list == null or roster == null:
-        return
-    for c in _list.get_children():
-        c.queue_free()
-    _list.add_child(UiTheme.title("The Guild Roll", 30))      # L16: the house title
-    var rows: Array = roster.leaderboard("standing", ROWS - int(round((UiTheme.scale - 1.0) * 6.0)))
-    if rows.is_empty():
-        _line("Nobody has enlisted yet.  !enlist <class>", DEAD, 24)
-    var i := 0
-    for row: Dictionary in rows:
-        i += 1
-        var alive := bool(row.get("alive", true))
-        var t := "%d. %s  %s · lv %d · deep %d%s" % [i, String(row.get("name", "?")),
-            String(row.get("rank", "Unproven")), int(row.get("level", 1)),
-            int(row.get("deepest", 0)), "" if alive else "  +"]
-        _line(t, (GOLD if i <= 3 else INK) if alive else DEAD, 26)
-    if not roster.fallen.is_empty() and UiTheme.scale < 1.4:
-        _line(" ", INK, 8)
-        _list.add_child(UiTheme.title("The Fallen", 24))
-        for f: Dictionary in roster.fallen.slice(0, FALLEN):
-            _line("%s the %s, lv%d - %s" % [String(f.get("name", "?")), String(f.get("class", "")),
-                int(f.get("level", 1)), String(f.get("killed_by", "the dark"))], DEAD, 22)
 
 
 ## ---------------------------------------------------------------- L51: THE SATCHEL
@@ -146,8 +66,9 @@ func _refresh() -> void:
 ##   SATCHEL   what they carry: mending, oil, brews, and owned gear not worn.
 ##   THE COUNTER  what each of those is worth sold back, and the purse total.
 ##
-## It never shares pixels with the Guild Roll: it takes that column and the roll
-## steps aside (L40's rule, kept inside this one file).
+## L58: the Guild Roll that used to share this column is gone from the stream, so
+## the satchel has the column to itself; it still folds the permanent grid for its
+## moment (L40's rule, kept inside this one file) and restores it when it leaves.
 var _satchel: Satchel = null
 
 func _build_satchel() -> void:

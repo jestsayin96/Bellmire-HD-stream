@@ -55,7 +55,7 @@ func start(uids: Array) -> void:
 		party.append({"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()})
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
-	_say(_pick_line("descend", "%s %s into the scar.") % [_names(), "descends" if party.size() == 1 else "descend"])
+	_say(_fmt_line(_pick_line("descend", "%s %s into the scar."), [_names(), "descends" if party.size() == 1 else "descend"]))
 	for m in party:
 		oil += float(int(m["h"].get("oil", 0)))
 		m["h"]["oil"] = 0
@@ -1454,6 +1454,18 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
 			o["hp"] = float(o["hp"]) - _soak(o, _mdice(base, false))
 			_hero_hit(o)
 
+## L29b: a WRITTEN line need not carry the format tokens the code assumes it does. Formatting one
+## that does not throws "String formatting error" and the line is LOST from the Chronicle. Two sites
+## did this - the descend line in start() and the cleared line in _loot - and both threw on ordinary
+## runs, every run, for as long as the offending lines have been in the content file. The content
+## file is not at fault and is not mine; the assumption here was. So: format only what asks to be
+## formatted, and otherwise print the writer's line exactly as written.
+func _fmt_line(line: String, args: Array) -> String:
+	var want := line.count("%") - 2 * line.count("%%")
+	if want != args.size():
+		return line
+	return line % args
+
 ## L29b: what a floor pays is multiplied by this. Kept in ONE place so a test reads the same
 ## number the Chronicle actually pays out, instead of a second copy of the arithmetic that can
 ## drift. A rare unique is a lord AND THEN SOME; a floor-unique is less than a lord.
@@ -1513,11 +1525,7 @@ func _loot(alive: Array) -> void:
 		_gold += found
 		oil = maxf(0.0, oil - 0.5)
 		_say("%s searches (Investigation %d) and turns up %d gold on floor %d." % [f["h"]["name"], st, found, floor_no])
-		# L29b found this: a written "cleared" line need not carry a %d, and one of them does not -
-		# formatting it anyway threw a String formatting error every time that line came up. The
-		# content file is not at fault and is not mine; the assumption here was.
-		var cl := _pick_line("cleared", "Floor %d cleared.")
-		_say(cl % floor_no if cl.contains("%d") else cl)
+		_say(_fmt_line(_pick_line("cleared", "Floor %d cleared."), [floor_no]))
 	# renown (old rule): a floor cleared +1, a lord slain +6
 	var eco = town.get("economy") if town else null
 	if eco:

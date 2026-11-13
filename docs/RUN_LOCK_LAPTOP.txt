@@ -1,1 +1,14 @@
-RUNNING 2026-11-13 02:15 - L45 bosses scale with depth
+IDLE 2026-11-13 02:50 - L45 DONE and pushed (L-cycle 123). Next in the laptop queue: L46 (traps do no
+damage - VERIFY against the D28 census first, Mr. E may be wrong), then L49, L52, L48, L50, L41, L42,
+L43, L44.
+L45 note for Mr. E: at depth a lord swings 44.7 vs ~30 hp heroes - about one landed blow a hero before
+soak and healing. Intended ("deeper feels dangerous") but it is a real balance change; LORD_ATK_PER_STEP
+in bestiary.gd is the single dial if it reads unfair.
+L47 note: a delver who breaks off LEAVES the fight, so a party can finish a floor a man short.
+HANDOVER (COORDINATION 11.4): L34 is DONE on this branch at 75a6226; L39 was built at 415885a but is left
+UNTICKED because Mr. E redefined it (smaller TYPE first, then the panel). Both are HUD-worker items now.
+`laptop` and `hud-ui` both touch the same four UI files - merge `laptop` to main FIRST, then cut/rebase
+`hud-ui`. The laptop will not touch those seven files again.
+STILL LAPTOP-OWNED AND OPEN: L43 (_l32_test's vacuous FPS gate - the base >= 10 assert is IN and must STAY;
+_l32_test reports FAIL on this laptop by design until the TAA warm-up lands) and L44 (_l24_test flaky).
+L27b remains committed WIP (0f3986c), owing _l25_test and the windowed _l27b_shot line-up.

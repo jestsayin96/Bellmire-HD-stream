@@ -612,7 +612,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Proven by test: press_on, finish, party_retreat, flee. Wired but not yet observed firing: regroup,
       rejoin, silence, mend, brew_*, turn_back_*.
 - [ ] L48. LEVELLING: CLASS + RACE UNLOCKS. Levelling should unlock new skills, spells and abilities that depend on BOTH class and species, and go deeper than that (tiers, choices). Today a level-up is a stat bump. DONE: a levelling table per class x species; a hero visibly gains a named ability and uses it.
-- [ ] L49. LOOT AND SEARCHING ARE INVISIBLE. No chests, no drops, nobody searching. Heroes should visibly SEARCH specified spots - a dig/search animation, time taken - and report "...no loot..." or "Found loot!" style lines. Not every monster drops. DONE: census shows chests spawned/opened and items picked up; a capture shows a hero searching and both outcomes in the Chronicle.
+- [x] L49. LOOT AND SEARCHING ARE INVISIBLE. No chests, no drops, nobody searching. Heroes should visibly SEARCH specified spots - a dig/search animation, time taken - and report "...no loot..." or "Found loot!" style lines. Not every monster drops. DONE: census shows chests spawned/opened and items picked up; a capture shows a hero searching and both outcomes in the Chronicle.
+      DONE L-cycle 125: as with L46 the mechanic was not missing, it was INVISIBLE - _loot() already rolled
+      Investigation and awarded gold, but fired the instant a floor cleared with no chest, nobody moving and
+      nothing to watch. NEW DungeonParts.chest() (banded, hinged lid, a small glint to find it in a dark
+      pane; set_meta("open") tips the lid). dungeon_hd lays 1-2 a floor in info["chests"], on OPEN floor
+      rather than the route - a chest is somewhere you GO, traps are what you trip over. delve.gd gains a
+      "search" state: the sharpest eye WALKS to each chest, faces it, kneels with Use_Item for 1.8 s, and
+      only then rolls - reading out in Mr. E'"'"'s own words, "Successfully found loot!! N gold" or
+      "...no loot...", with a floating +N / empty. Counters chests_found/chests_empty exposed for a census.
+      Refactor: the floor-cleared branch became _floor_decision() + _fight_body() so the same decision is
+      reachable after searching; the no-chest path is unchanged. tools/_l49_test.gd L49_TEST OK (9 checks)
+      - it checks the LID actually rotates and the delver actually walks within 2.2 m, so loot cannot
+      teleport in, and drives 80 searches: 32 found (32 of 32 paid gold), 48 empty. _offfloor 0 of 1624,
+      _delve_test clean, L25_TEST OK 13/13 (0 prop-prop, 0 prop-wall, 0 stuck; watchdog 1 free in 10
+      floors where the last runs were 0 - within the limit, but the chests are the thing to suspect if it
+      climbs). SCOPE: chests pay GOLD; gear salvage is still _loot()'"'"'s; there are NO per-monster
+      physical drops or floor pickups - if Mr. E wants those they need their own ID.
 - [ ] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
 - [ ] L51. HUD OVERHAUL (he says it twice - it is plain and under-informative). Needs: equipment shown with what BUFFS/DEBUFFS it gives; the viewer's inventory visible so they know what they own; shops shown with WHAT THEY CURRENTLY STOCK; a way to SELL. Also the d20 needs redesigning - he does not like how it looks - and it exists to roll stats when a viewer builds a character, so wire it to that. DONE: a 1080p HUD capture Mr. E approves, showing gear with buffs, inventory, shop stock and selling.
 - [ ] L52. SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.

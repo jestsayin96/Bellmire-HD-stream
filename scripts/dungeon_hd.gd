@@ -412,6 +412,18 @@ func _dress() -> void:
             if not info.has("traps"):
                 info["traps"] = []
             (info["traps"] as Array).append({"node": tn, "kind": String(tn.name)})
+    # L49: CHESTS. Something physical to walk to and search - the loot roll already existed but
+    # happened invisibly at floor's end, so a viewer never saw anyone find anything. These go on
+    # open floor rather than keep_clear: a chest should be a place you go TO, not something you
+    # trip over on the way through (that is what the traps are for).
+    for i in range(1 + _rng.randi() % 2):
+        var cc: Vector2i = take.call()
+        if cc.x > -999:
+            var ch: Node3D = DungeonParts.chest()
+            _place(ch, cc)
+            if not info.has("chests"):
+                info["chests"] = []
+            (info["chests"] as Array).append({"node": ch, "searched": false})
     for i in range(1 + _rng.randi() % 3):
         var c: Vector2i = take.call()
         if c.x > -999:

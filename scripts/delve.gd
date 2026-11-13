@@ -662,6 +662,10 @@ func _process(delta: float) -> void:
 	match state:
 		"fight":
 			_fight(delta)
+		"search":
+			# L49: the floor is clear - someone is going through the chests before they move on
+			_traps_tick()
+			_search_tick(delta)
 		"descend":
 			# L46: traps were only ever checked inside _fight(), so the whole walk to the stairs
 			# - where most of the floor is actually crossed - was trap-free. Measured: 6 of 6
@@ -832,14 +836,118 @@ func _fight(delta: float) -> void:
 		_finish()
 		return
 	if foes.is_empty() and not (dun.lord and dun.lord._entering()):
-		# floor won: pay out, decide whether to press on
+		# floor won: pay out, then SEARCH what is on the floor before deciding (L49)
 		_loot(alive)
+		if not _unsearched().is_empty():
+			state = "search"
+			_t = 0.0
+			_nav_reset()
+			return
+		_floor_decision(alive)
+		return
+
+	# venom keeps working after the bite (spider, snake, adder, wasp)
+	_fight_body(delta, alive, foes)
+
+## ---------------------------------------------------------------- L49: searching, visibly
+## Mr. E: "no chests, no drops, nobody searching". The loot ROLL already existed - it just
+## happened invisibly the instant a floor was cleared, with no chest, nobody walking anywhere
+## and nothing to watch. Now a delver walks to the chest, kneels over it for a beat, and the
+## Chronicle says which way it went - BOTH outcomes, in his words.
+const SEARCH_S := 1.8               # how long a delver spends over a chest
+const SEARCH_REACH := 1.6
+var chests_found := 0               # the L49 test / census counts these
+var chests_empty := 0
+var _search_i := -1                 # which chest is being worked on
+var _search_t := 0.0
+
+func _unsearched() -> Array:
+	var out: Array = []
+	if dun == null or not dun.info.has("chests"):
+		return out
+	for c in dun.info["chests"]:
+		var cd: Dictionary = c
+		if not bool(cd.get("searched", false)) and is_instance_valid(cd["node"]):
+			out.append(cd)
+	return out
+
+## the party's sharpest eye does the searching, as _loot already decides
+func _seeker(alive: Array) -> Dictionary:
+	var s: Dictionary = alive[0]
+	for m in alive:
+		if _search_bonus(m["h"]) > _search_bonus(s["h"]):
+			s = m
+	return s
+
+func _search_tick(delta: float) -> void:
+	var alive := _alive()
+	var left := _unsearched()
+	if alive.is_empty() or left.is_empty() or _t > 30.0:
+		_search_t = 0.0
+		_floor_decision(_alive())
+		return
+	var cd: Dictionary = left[0]
+	var node: Node3D = cd["node"]
+	var m := _seeker(alive)
+	var b: HeroBody = m["body"]
+	if not is_instance_valid(b):
+		cd["searched"] = true
+		return
+	var at := node.global_position
+	if _flat(b.global_position, at) > SEARCH_REACH:
+		_go(b, at, roster.speed(m["h"]), delta, SEARCH_REACH * 0.8)
+		Rig.play(b._anim, "Walking_A")
+		_search_t = 0.0
+		return
+	# at the chest: kneel over it for a beat so the search is something you can WATCH
+	b.rotation.y = atan2(at.x - b.global_position.x, at.z - b.global_position.z)
+	Rig.play(b._anim, "Use_Item")
+	_search_t += delta
+	if _search_t < SEARCH_S:
+		return
+	_search_t = 0.0
+	cd["searched"] = true
+	_open_chest(m, cd)
+
+## the find itself: an Investigation check, the chest opens, and the Chronicle reads BOTH ways
+func _open_chest(m: Dictionary, cd: Dictionary) -> void:
+	var h: Dictionary = m["h"]
+	var node: Node3D = cd["node"]
+	if is_instance_valid(node) and node.has_meta("open"):
+		(node.get_meta("open") as Callable).call()
+	var sd := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
+	var st := sd + _search_bonus(h)
+	var dc := mini(20, 10 + floor_no / 2)
+	# not every chest pays out - "Not every monster drops" applies here too, and an empty one
+	# is what makes a find worth watching
+	if sd != 1 and (sd == 20 or st >= dc):
+		var gold := int(float(floor_no) * 9.0 * (1.6 if sd == 20 else 1.0)) + _rng.randi_range(4, 18)
+		chests_found += 1
+		roster.award(String(m["uid"]), gold, 0, 0, floor_no)
+		_gold += gold
+		_snd("chest_open", node.global_position if is_instance_valid(node) else b_pos(m), -2.0)
+		Sfx.play("coin", -4.0)
+		_float_text(m, "+%d" % gold, Color(1.0, 0.85, 0.35))
+		_say("%s searches the chest - Successfully found loot!! %d gold (Investigation %d vs DC %d)."
+			% [h["name"], gold, st, dc])
+	else:
+		chests_empty += 1
+		_float_text(m, "empty", Color(0.75, 0.75, 0.78))
+		_say("%s searches the chest - ...no loot... (Investigation %d vs DC %d)." % [h["name"], st, dc])
+
+func b_pos(m: Dictionary) -> Vector3:
+	var b = m["body"]
+	return (b as Node3D).global_position if is_instance_valid(b) else Vector3.ZERO
+
+## L47: press on or climb out - the party's biggest standing decision. Split out of _fight() for
+## L49 so the same call can be reached after the floor has been searched as well as straight away.
+func _floor_decision(alive: Array) -> void:
+		if alive.is_empty():
+			return
 		var frac := 0.0
 		for m in alive:
 			frac += float(m["hp"]) / float(m["max"])
 		frac /= float(alive.size())
-		# L47: whether to press on or climb out is the party's biggest standing decision - it
-		# already happened here, it just was not counted or reasoned as one.
 		if oil < 1.0:
 			decided["turn_back_oil"] = int(decided.get("turn_back_oil", 0)) + 1
 			decisions += 1
@@ -860,7 +968,8 @@ func _fight(delta: float) -> void:
 			state = "descend"
 			_t = 0.0
 			_nav_reset()
-		return
+
+func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 	# venom keeps working after the bite (spider, snake, adder, wasp)
 	for m in alive:
 		if float(m.get("venom", 0.0)) > 0.0:

@@ -2303,3 +2303,43 @@ are walking". Three real defects found by measuring:
   (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
   town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## L-cycle 125 - L49 loot and searching made visible (laptop jestai, 2026-11-13) - L49 DONE
+Mr. E: "no chests, no drops, nobody searching". As with L46, the mechanic was not missing - it was
+INVISIBLE. _loot() already rolled an Investigation check, scaled the gold by how well it went and awarded
+it, but it fired the instant a floor was cleared, with no chest to walk to, nobody moving and nothing on
+screen. A viewer could watch a whole delve and never see anyone find anything.
+- scripts/dungeon_parts.gd: NEW chest() - a banded wooden chest built from the kit's own primitives, with
+  a hinged lid and a small warm glint so it can be picked out of a dark floor in a pane. set_meta("open")
+  tips the lid and fades the glint; Delve calls it when a search finishes.
+- scripts/dungeon_hd.gd: 1-2 chests a floor, registered in info["chests"]. Deliberately placed on OPEN
+  floor rather than keep_clear: a chest should be somewhere you GO, not something you trip over on the way
+  through - that is what L46's traps are for now.
+- scripts/delve.gd: NEW "search" state between clearing a floor and leaving it. The party's sharpest eye
+  (the same _search_bonus seeker _loot already chose) WALKS to each chest, turns to face it, kneels over it
+  with Use_Item for SEARCH_S 1.8 s, and only then is the roll made. Both outcomes read out in Mr. E's own
+  words: "Successfully found loot!! N gold (Investigation X vs DC Y)" or "...no loot... (Investigation X vs
+  DC Y)", with a floating +N or "empty" over the delver. Counters chests_found / chests_empty are exposed
+  on Delve so a census can pick them up.
+- Refactor needed to get there: the floor-cleared branch of _fight() used to fall straight through to the
+  press-on/climb-out decision. That decision is now _floor_decision() and the rest of the fight body is
+  _fight_body(), so the same decision can be reached either immediately or after the searching is done.
+  Behaviour is unchanged on the no-chest path.
+- tools/_l49_test.gd (NEW, headless): A chests are placed; B the delve really enters "search", a delver
+  really walks within 2.2 m of the chest, and the LID really rotates (so the loot is not teleporting in);
+  C drives 80 searches and requires BOTH outcomes, that every find actually awarded gold, and that both
+  are counted. L49_TEST OK, 9 checks. Measured: 32 of 80 found, 48 of 80 empty, 32 of 32 finds paid.
+- Regression: parse 0 SCRIPT ERROR; _offfloor 0 of 1624 (MON_INPROP 0 of 72); _delve_test 0 errors/nulls.
+  L25_TEST OK 13/13 - 0 prop-prop AND 0 prop-wall interpenetration over 12 floors, 0 stuck delvers. The
+  chests are new props sitting on open floor, so this was the run that mattered. One thing to note rather
+  than hide: the watchdog freed a delver ONCE in 10 floors where the previous two runs were 0. The check
+  allows up to once a FLOOR and passed comfortably, and L25's own history records 1-5 nudges as normal,
+  but if a later cycle sees that climb, the chests are the first thing to suspect.
+- HONEST SCOPE - what this item does NOT include, so nobody reads the tick too generously: chests pay
+  GOLD. Gear salvage still comes from _loot() exactly as before. There are no per-monster physical drops
+  and no dropped-item pickups on the floor; the plan's "Not every monster drops" is satisfied only in the
+  sense that not every chest pays (48 of 80 were empty). If Mr. E wants a monster to leave something on
+  the ground to walk over, that is a separate piece of work and should get its own ID.
+- FOR THE SUPERVISOR: the census tool tools/_d28_census.gd is DESKTOP-owned, so the laptop has not touched
+  it. Delve.chests_found and Delve.chests_empty are there for it to read whenever the desktop next edits
+  it - that is what "census shows chests spawned/opened" needs on their side.

@@ -654,7 +654,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Still worth Mr. E's attention on his side, but not blocking: Game Capture sits at 45% (-6.8 dB), so even
       once the town SFX fire they will be quiet for viewers; and OBS tracks 1/3 are duplicates with track 2 empty.
       DONE: a re-recorded town clip whose audio shows clear discrete events (>=8 dB above the bed) for footsteps, voices, work and combat, at a sane level - verified the same way, by measuring the recording.
-- [ ] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
+- [x] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
 - [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.
 - [ ] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.
 - [ ] D33. RANDOM WORLD EVENTS ON THE MAP: bandit camps and monster camps that spawn around the map, and a random boss scaled to the TOWN's level. DONE: a soak shows camps appearing and a town-level-appropriate boss.
@@ -701,9 +701,19 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       1642 (grass 745/stone 790/wood 59/water 48), animal voices 85 (horse_neigh 20 + whinny 4, cat 28, dog 15+whine 6,
       boar 12) -> D42_TEST OK. Gate: parse 0, _offfloor 0/1617, TWITCH_PARSE OK, _townwalk in_solid 0.006%, _delve 0 err.
 
-- [ ] D30. (REFRAMED by the census - the premise was wrong.) Spells are NOT monotonous: 9 distinct
+- [x] D30. (REFRAMED by the census - the premise was wrong.) Spells are NOT monotonous: 9 distinct
       spells fire with a good spread. The problem is the viewer cannot TELL them apart. Make each
       spell read differently on screen and name itself in the Chronicle. Not more spells - clearer ones.
+      -> DONE D-cycle 124 (Nov 13): the TOWN side, both halves. spells.gd: bolt/chain/fire wore one round
+      orb (a blue, a pale-blue, an orange ball); now bolt is a lance of force (oriented along flight),
+      fire a flaming ember (fire-trail that licks up), chain a crackling spark - frost already flew as a
+      shard. And Spells.name_over() floats the cast's WORD over the town caster in its own colour (the
+      mirror of L52's dungeon naming; the town had none), wired at both raids.gd cast sites, throttled per
+      caster. tools/_d30_test.gd D30_TEST OK (11 checks): all 9 have a word+colour, no two words collide,
+      the 4 thrown spells build 4 distinct forms (lance builds a BoxMesh core, orb a SphereMesh), name_over
+      floats a correctly-coloured label, every spell still casts. NOT VERIFIED BY EYE at 1080p - headless
+      asserts the meshes/colours/words, not a GPU frame (same limit L52/L53 noted); if two still read alike
+      on stream it is a tweak to the forms in _orb, not a design question.
 
 - [x] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
       choice legible rather than adding spells.

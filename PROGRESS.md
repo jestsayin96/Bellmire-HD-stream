@@ -2827,3 +2827,42 @@ is the invariant that mattered most: the die DISPLAYS a roll the game already ma
 read-only and the Phase 3 RLS gate is not tripped. No CSP change. No snapshot value used as a URL,
 src, href or style; the only setAttribute added is aria-hidden. Republishing gh-pages remains Mr. E's
 explicit call.
+
+## D-cycle 124 - D30 spells made legible in town (desktop CruzaderPC, 2026-11-13) - D30 DONE
+The census (D28) ruled D30 is a READABILITY problem, not a content one: nine distinct spells already
+fire, the viewer just cannot tell them apart, and L52 did the dungeon half. This is the TOWN half, and
+it has two parts - both in desktop-owned files.
+- THE LOOK (scripts/spells.gd). Four spells are thrown, and three of them flew as the SAME round orb,
+  separated only by colour: a blue ball (bolt), a pale-blue ball (chain), an orange ball (fire). Frost
+  already flew as a prism shard, which is why it was the one spell nobody confused. So the three orbs now
+  each wear their own silhouette: bolt is a LANCE (a shaft of force, a BoxMesh core oriented along its
+  flight by a new orient flag on _fly); fire is an EMBER whose trail is fire-coloured and licks upward;
+  chain is a crackling SPARK with a pale electric trail. _orb grew one `form` argument and a form-aware
+  trail; none of the impact FX changed. Colour was never the fix on its own - shape and motion are what
+  read at pane distance under stream compression.
+- THE NAME (scripts/spells.gd + scripts/raids.gd). The town never named a cast. Added Spells.name_over()
+  - a billboard Label3D that rises and fades over the caster in the spell's own colour, carrying the
+  spell's WORD (Bolt/Heal/Ward/Mend/Chain/Fire/Frost/Smite/Renew) - throttled per caster so a busy mender
+  does not stack labels. Wired at BOTH raids.gd cast sites (the menders and the harm-casters). This is the
+  deliberate mirror of L52's dungeon float, which chose a float over a Chronicle line to respect the L32b/
+  L40 feed discipline; lore_lines.json is the content writer's, so no Chronicle line was added.
+- WHY name_over lives in spells.gd but is NOT called from Spells.cast: the dungeon (delve.gd, laptop-owned)
+  already floats its own name via L52. Putting it in cast() would double it there. So the helper is shared
+  but the TOWN caller invokes it; delve is untouched.
+- tools/_d30_test.gd (NEW, headless): A every spell in ORDER has a word and a colour and no two words
+  collide; B the four thrown spells map to four DISTINCT form tokens AND the form actually changes the
+  built core mesh (a lance builds a BoxMesh, a plain orb a SphereMesh) - checked by building the real
+  projectile, not by eye; C name_over floats a 'Frost' label in frost's colour; D all nine spells still
+  cast and are counted. D30_TEST OK, 11 checks, 0 fails. Thrown forms measured: bolt=lance chain=spark
+  fire=ember frost=shard.
+- NOT VERIFIED BY EYE: these are headless mesh/colour/string assertions - a --headless run renders no GPU
+  frame, so nobody has LOOKED at the four projectiles side by side at 1080p. The shapes are structurally
+  confirmed different and reasoned from primitives, the same limit L52 and L53 noted for their mesh work.
+  If two spells still read alike on stream it is a number tweak in _orb's forms, not a design question.
+- Indent checked BEFORE editing (spells.gd and raids.gd are 4-space; the test file is tabs, matching the
+  other tools/_*_test.gd) - the trap that cost L45/L55 time cost nothing here.
+- Gate on the merged tree: parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0 of 1206 (MON_INPROP 0 of 86);
+  TWITCH_PARSE OK; _townwalk PASS in_solid 0/15895 (0.000%) raid_in_solid 0/2767; _delve_test ran clean, 0
+  SCRIPT ERROR (its feed still shows casters naming Bolt/Smite, so the dungeon path is unbroken).
+- data/ was not touched; delve.gd, the HUD files and the dungeon files were not touched (COORDINATION 11.2).
+

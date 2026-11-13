@@ -24,11 +24,15 @@ class_name HudDock
 const CHROME := 0.06           # L32b: slim - the Chronicle left it for the centre strip
 ## L39 (Mr. E, Nov 13): the Chronicle is a compact BOX at the cross of the 2x2, NOT a band.
 ## He rejected the full-width bar, and then the tiny box over-corrected from it: the real
-## problem was the TEXT, so feed_hud shrank the font first and the box is sized to the
-## smaller text. CENTRE_W is well under half the screen, so the box can only ever cover the
-## inner CORNERS of the panes it touches.
-const STRIP := 0.12            # the box's height, as a share of the screen
-const CENTRE_W := 0.34         # the box's width - well under half the screen (L39)
+## problem was the TEXT, so feed_hud shrank the font first (28 -> 18 px) and the box is
+## sized to the smaller text. CENTRE_W is well under half the screen, so the box can only
+## ever cover the inner CORNERS of the panes it touches.
+## L39b (Mr. E, Nov 13, from his annotated 1x screenshot): the width was close but the box
+## was too SHORT. His red box is ~0.37 wide x ~0.27 tall (about 715x295 at 1080p, ~3x the
+## old height). The font STAYS 18 px - the extra height buys MORE LINES on screen at once
+## (feed_hud._chrome_lines), so a viewer can read back what just happened.
+const STRIP := 0.273           # L39b: the box's height - ~0.27 of the screen (~295 px at 1080p)
+const CENTRE_W := 0.372        # L39b: the box's width - ~0.37, a touch wider, still under half
 const L_WORLD := 1
 const L_FLOAT := 1 << 10
 const L_HTAG := 1 << 11

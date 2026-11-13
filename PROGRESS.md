@@ -2000,6 +2000,30 @@ Per Mr. E's DnD RULE, everything a delver does below is now a d20 or dice roll o
 - Validated (python only, no Godot): every data/*.json parses; the two edited entries stay within the bosses schema.
   Committed + pushed from the laptop (path a: Blender subprocess git) to prove that route end to end.
 
+
+## C-cycle 3 - cosmetics, lore, E3PO, uniques + brews (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- Started from merged main (a1f7463); re-read COORDINATION 10+11 and WORK_PLAN. Per 11.2 the content worker now owns
+  EXACTLY four files (items/lore_lines/bosses/potions.json); fishing/ranks/origins moved to laptop code and were NOT
+  touched. Kept to a SEPARATE clone (Bellmire-content) per section 10, never the Claude Code tree. Additive only;
+  every pre-existing entry preserved verbatim; no .gd/.tscn/assets/web touched.
+- items.json: accessories 25 -> 37 (+12, incl. E3PO's Signet + Barracks Key; same 5e bonus magnitudes, no creep);
+  cosmetics 48 -> 64 (+16: 3 banners + E3PO's Standard, 10 titles incl. E3PO/town-growth, 2 hats); dyes 30 -> 44 (+14).
+- lore_lines.json: descend 8->12, cleared 8->12, epitaphs 14->21, barks +3 per kind (format contracts held: descend
+  two %s, cleared one %d, misfire %s %s %d %d). NEW additive blocks: "e3po" (intro/withdraw/return/says/town_talk -
+  immortal Commander of the Guards: badly hurt he withdraws to the barracks, heals, returns, never dies) and
+  "town_life" (crier/market/growth - Bellmire as it grows). lord_intros/unique_intros left intact.
+- bosses.json: +5 shape-first lord variants (lesser 7->9, greater 5->8), all modified versions of the eight canon
+  lords, stats traded not inflated, within the existing field vocabulary.
+- potions.json: potions 19 -> 25 (+6: Deepdraught, Wyrmsbane, Mirewine, Lastlight, The Hollow King's Cup, Scarwater);
+  states 14 -> 15 (+1: scar_touched). Every brew but Scarwater uses existing states and works immediately.
+- VALIDATION (python only, no Godot): every data/*.json parses; every new entry matches the existing field shape;
+  originals preserved verbatim; potion key/alias/name tokens unique; bosses within schema. Result: VALIDATION OK.
+- FOR THE OTHER WORKERS (code the content implies - not the content worker's to write):
+  (1) gear.gd _hat (laptop-code-owned) needs match cases for the new hat keys (guard_helm, plumed_helm + the C1 hats),
+  else they render as the default shape. (2) delve.gd: state 'scar_touched' displays but has no effect until wired
+  (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
+  town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
 ## D-cycle 123 - D28 live-run feature census (desktop CruzaderPC, 2026-11-13) - D28 DONE
 Ran tools/_d28_census.gd: the real Town, director on, 6 fake viewers enlisting/delving/fishing/forging/rerolling,
 7 wall-min at 8x time-scale (game reached day 32). Reads the in-game counters (Sfx.plays, new Rig.plays, new
@@ -2067,3 +2091,31 @@ straight to the mouth). New tool: tools/_d28_census.gd. No game-logic changed ex
   (Scarwater). (3) E3PO (D37) + town_life are authored as lore DATA under new lore_lines keys - dead until raids.gd/
   town.gd read them; this is the C-side of D37, the desktop owns E3PO's in-game behaviour.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 4 - viewer propositions, disasters, world events, growth tiers, shop/trader goods (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- The "blocked on writing" cycle: the desktop worker cannot build these until the words exist. Everything went into
+  existing owned files as NEW additive top-level blocks; no new data files; no .gd/.tscn/assets/web; every pre-C4 key
+  preserved byte-identical. Merged origin/main first, keeping BOTH PROGRESS sides on the conflict (COORDINATION 11.5).
+- lore_lines.json NEW blocks:
+  - "propositions" (T4 viewer-voting laws): 17 entries across law/taxes/militia/building/faith/outsiders, each a
+    title + flavour + a stated CONSEQUENCE good AND bad (a law that only helps is boring).
+  - "disasters" (D34): volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor + scarstorm
+    (wild-magic) + flood (river) = 11. Each: begin / during[] / pass lines + a plain cost statement to implement.
+  - "events" (D33): 4 NAMED bandit camps (Red Harl, Sedge the Toll, Cob Ashfoot, The Weasel), 3 monster camps, and a
+    wandering boss (The Scarred Lord) that scales to town level - reusing the eight canon lords, never a new one.
+    Each: appears / while (what it does to the town) / cleared.
+  - "growth_tiers" (D31/D32): 12 stages Crossing -> City-in-all-but-charter, each a crier line + what a viewer should
+    SEE appear - a long earned climb (town levels far too fast). Complements town_levels_for_the_desktop.
+- items.json NEW blocks: "shop_stock" (12 everyday goods a shop displays) and "trader_cargo" (10 higher-value caravan
+  goods worth losing to bandits). Flagged by block; keyed {name,cost,flavour} like the rest of the file.
+- bosses.json and potions.json NOT touched this cycle.
+- VALIDATION (python only, no Godot): every data/*.json parses; every pre-C4 key byte-identical; propositions carry
+  good+bad and cover all six categories; disasters carry begin/during/pass/cost; events and tiers well-formed. VALIDATION OK.
+- CODE WIRING THESE IMPLY (for the supervisor to turn into tracked items - all new lore/data keys, dead until the
+  owning code file reads them; content worker never writes code):
+  1. T4 voting: read lore_lines "propositions".entries, apply each good/bad consequence to the town.
+  2. D34: read lore_lines "disasters", fire begin/during/pass and apply each "cost" as a mechanic.
+  3. D33: read lore_lines "events", spawn the camps and the wandering boss (scale it; reuse the eight canon lords).
+  4. D31/D32: read lore_lines "growth_tiers".tiers, slow the climb and render each "see".
+  5. D35/D39: read items.json "shop_stock" and "trader_cargo" for shop display and interceptable caravan cargo.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor. Not a WIP commit.

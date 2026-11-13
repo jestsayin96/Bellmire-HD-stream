@@ -116,5 +116,121 @@
     "saffron": "d8a838", "clay": "a05a3a", "lichen": "7a8a5a", "storm": "3a4650", "candle": "e8c870",
     "garnet": "5a1a2a", "pine": "1e3a2a", "tin": "9a9ea2", "murk": "24281e"
   },
-  "dye_cost": 25
+  "dye_cost": 25,
+  "shop_stock": {
+    "_note": "Shop display stock (D35/D39) - everyday goods a shop shows on its shelves. Keyed {name,cost,flavour} like the rest of the file. Dead until wired.",
+    "grain": {
+      "name": "Sack of Grain",
+      "cost": 8,
+      "flavour": "Measured, counted, sold by the sack."
+    },
+    "lampoil": {
+      "name": "Flask of Oil",
+      "cost": 6,
+      "flavour": "For the lamps. Count them twice."
+    },
+    "bread": {
+      "name": "Loaf",
+      "cost": 2,
+      "flavour": "Yesterday's, half price; today's, full."
+    },
+    "ale": {
+      "name": "Jug of Ale",
+      "cost": 5,
+      "flavour": "The tavern's own. Cloudy and honest."
+    },
+    "rope": {
+      "name": "Coil of Rope",
+      "cost": 9,
+      "flavour": "Mostly not knots."
+    },
+    "torches": {
+      "name": "Bundle of Torches",
+      "cost": 7,
+      "flavour": "Light first, steel after."
+    },
+    "salt": {
+      "name": "Pouch of Salt",
+      "cost": 12,
+      "flavour": "Worth its weight, nearly."
+    },
+    "wool": {
+      "name": "Bolt of Wool",
+      "cost": 18,
+      "flavour": "Grey, like everything the guild wears."
+    },
+    "candles": {
+      "name": "Box of Candles",
+      "cost": 10,
+      "flavour": "Chapel grade. Burn slow."
+    },
+    "nails": {
+      "name": "Keg of Nails",
+      "cost": 14,
+      "flavour": "The masons buy them by the keg."
+    },
+    "hooks": {
+      "name": "Fishhooks",
+      "cost": 4,
+      "flavour": "For the river. Mind the Grinning Carp."
+    },
+    "lantern": {
+      "name": "Tin Lantern",
+      "cost": 22,
+      "flavour": "Keeps a flame in the wind off the scar."
+    }
+  },
+  "trader_cargo": {
+    "_note": "Trader caravan cargo (D35/D39) - what a caravan carries and what bandits want. Higher value, worth losing. Keyed {name,cost,flavour}. Dead until wired.",
+    "spice": {
+      "name": "Crate of Spice",
+      "cost": 120,
+      "flavour": "From downriver. Smells of somewhere warmer than here."
+    },
+    "pigiron": {
+      "name": "Pig Iron",
+      "cost": 90,
+      "flavour": "Bar stock for the smiths. Heavy, dull, wanted."
+    },
+    "silk": {
+      "name": "Bale of Silk",
+      "cost": 180,
+      "flavour": "Too fine for Bellmire, which is exactly why it sells."
+    },
+    "wine": {
+      "name": "Cask of Wine",
+      "cost": 110,
+      "flavour": "The real stuff, not the tavern's."
+    },
+    "saltblock": {
+      "name": "Block of Salt",
+      "cost": 140,
+      "flavour": "A caravan's fortune in one white brick."
+    },
+    "glassware": {
+      "name": "Crate of Glassware",
+      "cost": 160,
+      "flavour": "Packed in straw and prayers."
+    },
+    "simples": {
+      "name": "Chest of Simples",
+      "cost": 150,
+      "flavour": "The apothecary's standing order. Guard it."
+    },
+    "timber": {
+      "name": "Load of Seasoned Timber",
+      "cost": 100,
+      "flavour": "Good beams - the kind the masons cannot cut fast enough."
+    },
+    "furs": {
+      "name": "Pack of Furs",
+      "cost": 130,
+      "flavour": "From the high country. Warm, and worth a raid."
+    },
+    "scarglass": {
+      "name": "Crate of Scarglass",
+      "cost": 300,
+      "flavour": "Hauled up from below and sold above. Only slightly cursed."
+    }
+  }
 }

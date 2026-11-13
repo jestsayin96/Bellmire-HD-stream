@@ -2866,3 +2866,56 @@ it has two parts - both in desktop-owned files.
   SCRIPT ERROR (its feed still shows casters naming Bolt/Smite, so the dungeon path is unbroken).
 - data/ was not touched; delve.gd, the HUD files and the dungeon files were not touched (COORDINATION 11.2).
 
+
+## C-cycle 10 - the thin files: rare uniques, brews, and the lines that repeat most (content, branch `content`, jestai, 2026-11-13) - authored + python-validated
+- FOLDER: worked entirely in W3 = C:\Users\Jestsayin96\Project1\bellmire-content, branch `content`.
+  R (the code worker's clone) sat on `laptop`, clean, everything pushed, and was NEVER checked out -
+  only `git fetch`ed, per the standing correction in COORDINATION 10/11.
+- Merge: `git merge origin/main` in W3 reported "Already up to date". No PROGRESS.md conflict arose.
+- WHY THIS CYCLE: bosses.json was the thinnest of the four owned files (6.4 KB against items 51 KB and
+  lore_lines 48 KB), and town_life had only 4-5 lines a category - the ambient town ticker would have
+  repeated inside a minute. Backlog items 6 (bosses and potions) and 5 (the repeat-heavy stream lines).
+- BOSSES (data/bosses.json, backlog 6): +10 lesser_uniques (18 -> 28) and +8 greater_uniques (16 -> 24).
+  All shape-first, all modified versions of the EIGHT canon lords - no new lords. Stats skewed to match
+  the behaviour, never a bigger number: Hollow King Lampless/Measured/Sodden, Grubmother Fording/Quiet/
+  Bell-Fed, Rattling Host Crowned/Pressed, Nightwing Twinned/Mantled; Gravewyrm Toll-Taking/Shedding,
+  Ossuary Lord Walled/Lamplit, Pale Duchess Hosting/Thirsting, Mourncoil Bound/Hunting.
+- BREWS (data/potions.json, backlog 6): +10 (42 -> 52) - Lampwater, Quarrymend, Fenward, The Crier's Cup,
+  Stonewater, Host's Silence, Coldcount, Wallmend, Tollwater, Clearfen Drops. Every `gives` and `cures`
+  names a state that ALREADY EXISTS in potions.json "states" - no new state key, so no new wiring.
+  heal arrays keep the [n, die, bonus] shape and sit between the existing tier prices.
+- REPEAT-HEAVY STREAM LINES (data/lore_lines.json, backlog 5):
+  tells +4 per biome (12 -> 16 each, 8 biomes, 32 lines); descend 36 -> 48; cleared 36 -> 48;
+  barks +4 per category (enter/lord 28 -> 32, trap/hurt/drink/misfire 27 -> 31); epitaphs 58 -> 74.
+  town_life widened where it was thinnest: crier 5 -> 11, market 4 -> 10, growth 4 -> 10.
+- CHANNEL-POINT SHELF (data/items.json, backlog 1): +8 accessories (78 -> 86), +12 cosmetics (157 -> 169),
+  +8 dyes (83 -> 91). Cosmetics are hats, banners and titles only - NO new pets, because a pet entry
+  needs a real `model` path and the content worker does not add assets. dye_cost left at 25.
+- VALIDATION OK (python only - the content worker never runs Godot):
+  - All four owned files json.load() clean.
+  - Pre-existing keys: a recursive compare of each file against `git show HEAD:<file>` - every key present,
+    every scalar equal, no list shorter than before - returned 0 problems on all four files.
+  - New entries match the shape of the entries beside them: accessories and cosmetics introduced no new
+    key-set (same six and same three as before), every dye value is 6-char lowercase hex, every new brew's
+    key-set is one of the four already in the file, every new unique carries only name/shape/hp/speed/attack
+    with the existing types, and no new key, alias or unique name collides with an existing one.
+  - `git diff --numstat`: 20/0 bosses, 31/0 items, 11/0 potions, 151/17 lore_lines. All 17 lore_lines
+    removals are pre-existing single-line arrays re-emitted with entries appended inside them - checked
+    one by one, none reworded or dropped, which the recursive compare above confirms independently.
+  - One deliberate note: fordwarden_boots uses "speed": 1 (int). That matches drover_boots, ashfoot_boots,
+    tollgate_boots and nightwing_boots, which are already int; only the three oldest boots use 0.6.
+- CODE WIRING the new keys imply (for the supervisor to route - content never touches code):
+  1. NOTHING is required. Every addition this cycle went into a block the game already reads by key or
+     picks from at random, so the catalogues simply get longer the moment this merges.
+  2. STILL OPEN (unchanged, and still the highest-value job on items.json): hats and banners carry a
+     `colour` but no `model`. Until a cosmetic key maps to a mesh, all hats and banners render as the
+     default shape tinted. OWNER: LAPTOP CODE (gear.gd) for delvers, DESKTOP BUILD (hero_body.gd / rig.gd)
+     if town bodies wear them.
+  3. The 18 new rare uniques assume the unique roll reads lesser_uniques/greater_uniques as whole lists
+     (L29b). If a draw bag was sized from a hardcoded count rather than len(), it wants a look.
+     OWNER: LAPTOP CODE (bestiary.gd).
+  4. town_life is still DEAD until the desktop wires a town ticker (D37 note, C-cycle 5). It now has
+     enough lines to be worth wiring: 31 across crier/market/growth. OWNER: DESKTOP BUILD (town.gd).
+  5. !brew / the apothecary stock list now has 52 brews. If that print is unpaged it will overflow chat.
+     OWNER: LAPTOP CODE (chatcmd.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

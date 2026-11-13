@@ -43,6 +43,17 @@
     "grainmeasure": {"name": "The Grain Measure", "cost": 340, "tier": 4, "gives": "regenerating", "secs": 40, "aliases": ["grainmeasure", "measure"], "flavour": "Four doses to a flask, and the apothecary counts them out loud."},
     "hushwine": {"name": "Hushwine", "cost": 155, "tier": 3, "gives": "invisible", "secs": 18, "aliases": ["hushwine", "hush"], "flavour": "Nobody remembers the drinker. The drinker included."},
     "fellstill": {"name": "Fellstill", "cost": 85, "tier": 2, "cures": ["poisoned", "blinded"], "aliases": ["fellstill"], "flavour": "Two ills in one bottle, and it tastes of both."}
+  ,
+    "lampwater": {"name": "Lampwater", "cost": 60, "tier": 2, "gives": "darkvision", "secs": 600, "aliases": ["lampwater", "lamp"], "flavour": "Thin and oily, and the dark goes one lamp wider."},
+    "quarrymend": {"name": "Quarrymend", "cost": 95, "tier": 2, "heal": [4, 4, 5], "aliases": ["quarrymend", "quarry"], "flavour": "Grit in the bottom of the flask. Drink that too."},
+    "fenward": {"name": "Fenward", "cost": 90, "tier": 2, "cures": ["poisoned"], "aliases": ["fenward", "fen"], "flavour": "Boiled out of the worst water in Bellmire. It knows poison personally."},
+    "criers_cup": {"name": "The Crier's Cup", "cost": 120, "tier": 3, "gives": "heroism", "secs": 60, "aliases": ["crierscup", "crier"], "flavour": "One swallow and the whole room can hear you."},
+    "stonewater": {"name": "Stonewater", "cost": 150, "tier": 3, "gives": "warded", "secs": 90, "aliases": ["stonewater", "stone"], "flavour": "Settles in the chest like a kept wall."},
+    "hostsilence": {"name": "Host's Silence", "cost": 170, "tier": 3, "gives": "invisible", "secs": 20, "aliases": ["hostsilence", "silence"], "flavour": "The rattle stops. So does everything else about you."},
+    "coldcount": {"name": "Coldcount", "cost": 100, "tier": 2, "gives": "resist_frost", "secs": 120, "cures": ["slowed"], "aliases": ["coldcount", "cold"], "flavour": "Mourncoil taught the apothecary this one, unwillingly."},
+    "wallmend": {"name": "Wallmend", "cost": 240, "tier": 3, "heal": [6, 4, 10], "aliases": ["wallmend", "wall"], "flavour": "Masons' brew. It does for a man what mortar does for a course."},
+    "tollwater": {"name": "Tollwater", "cost": 130, "tier": 3, "gives": "haste", "secs": 25, "aliases": ["tollwater", "toll"], "flavour": "Paid in advance. The road goes past quicker."},
+    "clearfen": {"name": "Clearfen Drops", "cost": 80, "tier": 2, "cures": ["blinded"], "aliases": ["clearfen", "clear"], "flavour": "Stings worse than whatever blinded you. Works faster, too."}
   },
   "states": {
     "poisoned":    {"word": "poisoned", "bad": true, "colour": "6fd36a", "does": "disadvantage on attacks; venom keeps hurting"},

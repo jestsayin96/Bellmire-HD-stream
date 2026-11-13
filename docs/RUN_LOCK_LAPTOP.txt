@@ -1,11 +1,1 @@
-IDLE 2026-11-13 00:35 - holding for the user; no item started.
-ANSWERED: the laptop's flag is now L43 (_l32_test's FPS gate is vacuous) and L44 (_l24_test is flaky),
-Phase K, BOTH OWNER: LAPTOP. Supervisor's call: keep the relative-to-base design, keep the laptop's
-base >= 10 assert PERMANENTLY (never revert it to go green), discard a warm-up window (>= 1.0 s real or
-60 frames) after any viewport 3D-state change so TAA's history refills, add a min-sample guard, and only
-fall back to measuring base in a separate process if warm-up does not fix it. project.godot [rendering]
-stays desktop-owned and untouched.
-EXPECTED RED: _l32_test REPORTS FAIL on this laptop by design until L43 lands - that is L43, not a
-regression in L34/L39, and not a reason to reject an unrelated laptop item.
-LAPTOP QUEUE: L43, L44 (new), then L38, L40, L41, L42, L35, L33 in Mr. E's order.
-L27b still WIP (0f3986c), owes _l25_test + the windowed _l27b_shot line-up.
+RUNNING 2026-11-13 01:05 - L47 delvers think for themselves (PRIORITY)

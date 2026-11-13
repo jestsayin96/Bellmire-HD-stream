@@ -1,1 +1,1 @@
-IDLE 2026-11-12 23:25 - L34 DONE and pushed (L-cycle 119); L27b still WIP (0f3986c), owes _l25_test + windowed _l27b_shot; next in Mr. E's order: L39
+RUNNING 2026-11-12 23:35 - L39 Chronicle centre box

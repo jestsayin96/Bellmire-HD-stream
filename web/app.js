@@ -1016,7 +1016,6 @@ function firstStr(...vals) { for (const v of vals) if (v != null && String(v).tr
 function normalizeRolls(raw) {
   return arr(raw)
     .filter((r) => r && typeof r === "object")
-    .slice(0, ROLL_FEED_MAX)
     .map((r) => ({
       face: rollFaceOf(r),
       by: firstStr(r.by, r.who, r.name, r.viewer).slice(0, 40),
@@ -1026,7 +1025,8 @@ function normalizeRolls(raw) {
       tier: rollTierOf(r),
       at: typeof r.at === "string" ? r.at : (typeof r.time === "string" ? r.time : ""),
     }))
-    .filter((r) => r.face != null || r.result || r.what);   // drop entries with nothing to show
+    .filter((r) => r.face != null || r.result || r.what)   // drop entries with nothing to show
+    .slice(0, ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
 }
 
 // throw the die to a KNOWN value and settle on that face. Used by the town-roll

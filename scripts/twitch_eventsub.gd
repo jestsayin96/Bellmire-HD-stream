@@ -102,6 +102,8 @@ func setup(t: Node) -> void:
         var c: Object = town.get("chat")
         if c.has_signal("twitch_reply") and not c.is_connected("twitch_reply", _on_twitch_reply):
             c.connect("twitch_reply", _on_twitch_reply)
+        if "bits_tier_fn" in c:
+            c.set("bits_tier_fn", Callable(self, "_do_bits_tier"))
     if not enabled or offline:
         return
     if client_id == "":
@@ -124,6 +126,8 @@ func _start() -> void:
         return
     await ensure_rewards()
     _open()
+    # L35: seed the subscriber pane with real channel subs
+    _fetch_subs()
 
 func _load_cfg() -> void:
     for path in CFGS:
@@ -384,6 +388,7 @@ func _process(delta: float) -> void:
         return
     _tick_tokens(delta)
     _tick_chat(delta)
+    _tick_subs_refresh(delta)
     if _token_dead["broadcaster"] or not _opened:
         return
     if _ws_next:
@@ -486,6 +491,53 @@ func subscribe_all() -> void:
             subs_failed.append("%s %d %s" % [s[0], int(r["code"]), _err_text(r)])
     _say_log("TWITCH_EVENTSUB subscribed %d of %d%s" % [subs_ok.size(), _sub_list().size(),
             "" if subs_failed.is_empty() else " - failed: " + ", ".join(subs_failed)])
+
+# ---------------------------------------------------------------- channel subscribers
+## L35: fetch the real subscriber list from the Helix API so the subs pane has
+## bodies to cycle through even before anyone subs this session.
+var _subs_refresh_t := 0.0
+const SUBS_REFRESH := 600.0      # re-fetch every 10 min
+
+func _fetch_subs() -> void:
+    if offline or _token_dead["broadcaster"]:
+        return
+    var all_uids: Array = []
+    var cursor := ""
+    for page in 5:     # cap at 5 pages (~500 subs max)
+        var url := "/subscriptions?broadcaster_id=%s&first=100" % broadcaster_id
+        if cursor != "":
+            url += "&after=" + cursor
+        var r := await _helix("broadcaster", HTTPClient.METHOD_GET, url)
+        if int(r["code"]) != 200:
+            _say_log("TWITCH_EVENTSUB sub list unavailable (%d)" % int(r["code"]))
+            break
+        var j: Dictionary = r["json"] if typeof(r["json"]) == TYPE_DICTIONARY else {}
+        var data: Array = j.get("data", []) if typeof(j.get("data")) == TYPE_ARRAY else []
+        for s in data:
+            var uid := String((s as Dictionary).get("user_id", ""))
+            if uid != "" and uid != broadcaster_id:
+                all_uids.append(uid)
+        var pag: Dictionary = j.get("pagination", {}) if typeof(j.get("pagination")) == TYPE_DICTIONARY else {}
+        cursor = String(pag.get("cursor", ""))
+        if cursor == "" or data.size() < 100:
+            break
+    if all_uids.is_empty():
+        _say_log("TWITCH_EVENTSUB no channel subs found (or affiliate not reached)")
+        return
+    _say_log("TWITCH_EVENTSUB seeded subs pane with %d subscriber(s)" % all_uids.size())
+    # feed into Spotlight._subs_seen (oldest first so newest is at front)
+    if town:
+        var spot := Spotlight.of(town)
+        if spot:
+            for uid in all_uids:
+                spot._subs_note(uid)
+    _subs_refresh_t = SUBS_REFRESH
+
+func _tick_subs_refresh(delta: float) -> void:
+    _subs_refresh_t -= delta
+    if _subs_refresh_t <= 0.0:
+        _subs_refresh_t = SUBS_REFRESH
+        _fetch_subs()
 
 # ---------------------------------------------------------------- events -> the town
 

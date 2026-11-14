@@ -55,6 +55,7 @@ var _amb := {}             # L32a: lane -> {node, t} - the ambient subject while
 var _amb_rng := RandomNumberGenerator.new()
 var _subs_seen: Array = []     # L35: uids seen in the subs lane, newest first
 var _subs_i := 0               # L35: where the idle rotation has got to
+var _paid_last := {"bits": "", "points": ""}   # Mr. E: bits/points panes rest on the last redeemer
 
 ## bits -> seconds in the bits lane
 static func bits_seconds(n: int) -> float:
@@ -109,6 +110,7 @@ func put(uid: String, lane: String, seconds: float, reason: String) -> String:
 	if h.is_empty():
 		return "No hero yet - type !enlist to join the valley."
 	var nm := String(h.get("name", uid))
+	var paid_lane := lane
 	if lane == "look":
 		# free chat: only into the channel-points lane, only when nobody is in it or waiting
 		var pl: Dictionary = lanes["points"]
@@ -121,6 +123,8 @@ func put(uid: String, lane: String, seconds: float, reason: String) -> String:
 		return ""
 	if lane == "subs":
 		_subs_note(uid)            # L35: remember them for the idle rotation
+	elif paid_lane == "bits" or paid_lane == "points":
+		_paid_last[paid_lane] = uid
 	var L: Dictionary = lanes[lane]
 	var e := {"uid": uid, "seconds": seconds, "left": seconds, "reason": reason}
 	if (L["cur"] as Dictionary).is_empty():
@@ -169,6 +173,8 @@ func _process(delta: float) -> void:
 		cur["left"] = float(cur["left"]) - real
 		if float(cur["left"]) <= 0.0 or not _hero_ok(String(cur["uid"])):
 			L["cur"] = (L["q"] as Array).pop_front() if not (L["q"] as Array).is_empty() else {}
+			if (L["cur"] as Dictionary).is_empty():
+				(_amb[l] as Dictionary)["t"] = 0.0   # re-pick the resting subject at once
 			changed = true
 	if changed:
 		_relayout()
@@ -217,6 +223,22 @@ func _subs_pick() -> void:
 			return
 	_amb_pick("subs")
 
+## Mr. E: the bits / points panes rest on the LAST redeemer - they stay featured, and the
+## pane follows their body (into a delve too) until someone new redeems. No valid body
+## (gone / dead / no hero yet) -> the ordinary ambient pick, never blank.
+func _rest_pick(l: String) -> void:
+	var uid := String(_paid_last.get(l, ""))
+	if uid != "":
+		var b := body_of(uid)
+		if b != null and is_instance_valid(b) and b.is_inside_tree() and b.is_visible_in_tree():
+			var A: Dictionary = _amb[l]
+			A["node"] = b
+			A["t"] = SUBS_ROT
+			if (_panes[l]["box"] as Control).visible:
+				_snap(l)
+			return
+	_amb_pick(l)
+
 ## L32a: each idle lane holds its ambient subject 20-30 s, then rotates to another
 func _amb_tick(real: float) -> void:
 	for l in LANES:
@@ -228,6 +250,8 @@ func _amb_tick(real: float) -> void:
 		if n == null or not is_instance_valid(n) or not (n as Node3D).is_inside_tree() or float(A["t"]) <= 0.0:
 			if l == "subs":
 				_subs_pick()       # L35: a subscriber's hero, not just anyone
+			elif l == "bits" or l == "points":
+				_rest_pick(l)      # Mr. E: hold on the last redeemer, follow them
 			else:
 				_amb_pick(l)
 

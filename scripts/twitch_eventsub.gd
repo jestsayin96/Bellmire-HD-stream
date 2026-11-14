@@ -40,9 +40,21 @@ const FORBIDDEN := ["boss", "monster", "spawn", "raid", "mob", "goblin", "horde"
         "drop", "chest", "treasure", "invade", "titan"]
 ## Bellmire's rewards: key -> settings. The key is ours; Twitch gives the id.
 const REWARDS := {
-    "spotlight": {"title": "Spotlight my hero", "cost": 500,
+    "spotlight": {"title": "Spotlight my hero", "cost": 500, "action": "spotlight",
         "prompt": "The eye of Bellmire turns to your hero for a while. Raise one first with !enlist.",
         "background_color": "#2AA198", "lane": "points", "seconds": 15.0},
+    "delve": {"title": "Send my hero delving", "cost": 400, "action": "delve",
+        "prompt": "Your hero sets out for the scar with the next party. Raise one first with !enlist.",
+        "background_color": "#B5462E"},
+    "fish": {"title": "Send my hero fishing", "cost": 150, "action": "fish",
+        "prompt": "Your hero heads to the docks to fish. Raise one first with !enlist.",
+        "background_color": "#2E7DB5"},
+    "join": {"title": "Join the delve", "cost": 300, "action": "join",
+        "prompt": "Your hero joins the party forming at the scar mouth. Raise one first with !enlist.",
+        "background_color": "#B58E2E"},
+    "patch": {"title": "Patch up my hero", "cost": 250, "action": "patch",
+        "prompt": "Your hero is handed a healing potion for the next delve. Raise one first with !enlist.",
+        "background_color": "#4BB54B"},
 }
 
 var town: Node                       # spotlight(uid, lane, seconds, reason), feed, roster, chat
@@ -528,8 +540,34 @@ func handle_event(kind: String, e: Dictionary) -> void:
                     _on_twitch_reply(login, "you need a hero first - type !enlist. Your points were returned.")
                 _settle(String(e.get("id", "")), rid, false)
                 return
-            _spot(uid, String(want["lane"]), float(want["seconds"]), "redeemed " + String(rw.get("title", want["title"])))
+            _do_reward(uid, want, String(rw.get("title", want["title"])))
             _settle(String(e.get("id", "")), rid, true)
+
+## Mr. E: a redeemed reward -> the right action. Every one also spotlights the
+## hero so viewers watch what they paid for (the points pane then rests on them).
+func _do_reward(uid: String, want: Dictionary, title: String) -> void:
+    match String(want.get("action", "spotlight")):
+        "delve":
+            if town and town.has_method("_on_delve"):
+                town.call("_on_delve", uid)
+            _spot(uid, "points", 15.0, "sent their hero delving")
+        "join":
+            if town and town.has_method("_on_delve"):
+                town.call("_on_delve", uid)
+            _spot(uid, "points", 15.0, "joined the delve party")
+        "fish":
+            if town and town.has_method("_on_fish"):
+                town.call("_on_fish", uid)
+            _spot(uid, "points", 15.0, "sent their hero fishing")
+        "patch":
+            var r = town.get("roster") if town else null
+            if r and r.has_method("get_hero"):
+                var h: Dictionary = r.call("get_hero", uid)
+                if not h.is_empty():
+                    h["potions"] = int(h.get("potions", 0)) + 1
+            _spot(uid, "points", 10.0, "is handed a healing potion")
+        _:
+            _spot(uid, String(want.get("lane", "points")), float(want.get("seconds", 15.0)), "redeemed " + title)
 
 func _has_hero(uid: String) -> bool:
     if town == null or town.get("roster") == null:
@@ -542,8 +580,10 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
     spotlight_wanted.emit(uid, lane, seconds, reason)
     if town and town.has_method("spotlight"):
         town.call("spotlight", uid, lane, seconds, reason)
+    elif town:
+        Spotlight.spotlight(town, uid, lane, seconds, reason)
     else:
-        print("SPOTLIGHT %s %s %.0fs %s (town.spotlight not built yet - L17)" % [uid, lane, seconds, reason])
+        print("SPOTLIGHT %s %s %.0fs %s (no town)" % [uid, lane, seconds, reason])
 
 # ---------------------------------------------------------------- chat replies
 

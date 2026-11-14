@@ -164,6 +164,7 @@ var economy: Economy
 ## the viewers' party goes in together: once nobody queued is still on the road
 ## to the scar (a few seconds after the last arrives), or 45 s after the first
 ## arrival with whoever is there - and never while their last delve is below
+const MUSTER_HOLD := 20.0    # Mr. E: min seconds to gather a party before a cleared road launches it
 var _muster_t := -1.0
 var _since_last := 0.0
 
@@ -176,7 +177,9 @@ func _viewer_muster(delta: float) -> void:
     for uid in chat.away:
         if String(chat.away[uid]) == "on the road to the scar":
             on_road += 1
-    if (on_road == 0 and _since_last > 4.0) or _muster_t > 45.0:
+    # Mr. E: hold the mouth open a short while so others can !delve / "Join the delve"
+    # and go in TOGETHER - a lone arrival no longer launches a party of one instantly.
+    if _muster_t > 45.0 or (on_road == 0 and _since_last > 4.0 and _muster_t >= MUSTER_HOLD):
         _muster_t = -1.0
         _begin_delve()
 var raids: Raids

@@ -582,7 +582,7 @@ func _people() -> void:
 ## party has to WALK TO it: that is what makes it a set piece rather than another
 ## spawn. The resolver (delve.gd _setpieces_tick) fires when a hero gets close.
 ##
-## ROUND 2: three kinds of set piece, chosen by weighted roll per floor.
+## ROUND 3: four kinds of set piece, chosen by weighted roll per floor.
 ##   AMBUSH   - the hero walks over the trigger and a short pack of theme-matched
 ##              creatures peels out of the dark RIGHT WHERE THE PARTY STANDS.
 ##   PRISONER - a captive who was already down here when the floor was made.
@@ -591,6 +591,11 @@ func _people() -> void:
 ##   SHRINE   - a small altar. First hero to touch rolls a coin flip in the
 ##              Chronicle: a BOON mends the party; a CURSE takes a bite from each.
 ##              Shrine / crypt themes are likelier.
+##   MINIBOSS - an elite theme creature alone in a chamber, 2x hp and +20% atk.
+##              A real fight, not a pack like ambush. Kill it and a bonus purse
+##              is split among the party - the Chronicle calls it out by name.
+##              Barracks / workshop themes (the drillmaster's kind of floor) lean
+##              this way.
 ## One set piece per floor; a floor can hold only one. The resolver fires when
 ## any alive hero crosses SETPIECE_TRIGGER_R of the set piece's pos.
 ##
@@ -635,11 +640,21 @@ func _set_pieces() -> void:
     # all the way (a crypt still rolls an ambush now and then; a prison still
     # gets its shrines)
     var theme := String(info.get("theme", ""))
-    var weights := {"ambush": 50, "prisoner": 25, "shrine": 25}
+    # ambush stays the most common because it is the clearest beat on stream; the
+    # other three fill the rest in roughly equal shares, and the theme nudges
+    # which one gets the extra weight (a prison more prisoners, a barracks more
+    # drillmasters, a shrine more altars). A miniboss on floor 2 would be a
+    # slog with a starting party - gate it on floor_no >= 4 so the set-piece
+    # ladder matches the rest of the dungeon's difficulty curve.
+    var weights := {"ambush": 45, "prisoner": 20, "shrine": 20, "miniboss": 15}
     if theme == "prison":
-        weights = {"ambush": 35, "prisoner": 50, "shrine": 15}
+        weights = {"ambush": 30, "prisoner": 40, "shrine": 15, "miniboss": 15}
     elif theme == "shrine" or theme == "crypt":
-        weights = {"ambush": 35, "prisoner": 15, "shrine": 50}
+        weights = {"ambush": 30, "prisoner": 15, "shrine": 45, "miniboss": 10}
+    elif theme == "barracks" or theme == "workshop":
+        weights = {"ambush": 35, "prisoner": 15, "shrine": 15, "miniboss": 35}
+    if floor_no < 4:
+        weights.erase("miniboss")
     var total := 0
     for k in weights:
         total += int(weights[k])
@@ -674,4 +689,16 @@ func _set_pieces() -> void:
             var boon: bool = _rng.randi() % 2 == 0
             (info["set_pieces"] as Array).append({
                 "kind": "shrine", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false, "boon": boon,
+            })
+        "miniboss":
+            # a theme-matched creature, picked once at build so the Chronicle
+            # line can name it before the fight ("A drillmaster holds this
+            # chamber alone"). The scaling (2x hp, 1.2x atk) is applied by
+            # delve._setpiece_miniboss when it spawns - the def is just the
+            # content writer's row.
+            var def := Bestiary.pick(floor_no, theme)
+            var purse: int = 40 + floor_no * 12 + _rng.randi() % 25
+            (info["set_pieces"] as Array).append({
+                "kind": "miniboss", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false,
+                "def": def, "purse": purse,
             })

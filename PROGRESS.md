@@ -4838,6 +4838,39 @@ and the Chronicle announcements still read correctly from an outside test.
      More content will not fix that; one line in the next census would confirm whether it is still true.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
 
+
+## L-cycle 145 - L29c round 3: MINIBOSS set pieces (laptop jestai, 2026-11-13) - L29c (IN PROGRESS, WORK_PLAN untouched)
+Round 3 adds MINIBOSS to the three kinds shipped in rounds 1-2 (ambush / prisoner / shrine). The
+supervisor's prompt named it directly: "mini-boss antechambers". A single elite theme creature
+standing alone in a chamber, 2x hp + 1.2x atk on top of the floor's depth scaling, and when it
+falls a floor-scaled purse (40 + floor_no*12 + 0..24) is split across the alive party and the
+Chronicle names the kill.
+- scripts/dungeon_hd.gd (_set_pieces): added "miniboss" to the weighted pick. Default weights
+  ambush 45 / prisoner 20 / shrine 20 / miniboss 15. Theme nudges: a barracks or a workshop (the
+  drillmaster's kind of floor) raises miniboss to 35; a prison stays prisoner-heavy; a crypt or
+  shrine stays shrine-heavy. MINIBOSS is gated on floor_no >= 4 - a drillmaster against a bare-
+  hands starting party on floor 2 would be a slog, so the set-piece ladder now matches the rest
+  of the dungeon's difficulty curve.
+- scripts/delve.gd (_setpieces_tick dispatch, _setpiece_miniboss): spawns ONE Monster at the
+  trigger pos, scaled via the normal (14 + floor*6) * def.hp curve then * MINIBOSS_HP_MULT (2.0);
+  atk via * MINIBOSS_ATK_MULT (1.2); the purse rides on set_meta("l29c_miniboss_purse"); the
+  Chronicle calls out the kill ("A drillmaster holds this chamber alone - a mini-boss stands
+  between you and the way deeper"); Sfx.play("roar") rides the appearance.
+- scripts/delve.gd (_on_kill): a monster carrying the miniboss purse meta pays out on death -
+  share = purse / alive, awarded via roster.award (same shape as a chest), floater on each,
+  Chronicle line naming the kill and the split, Delve.setpieces_fired["miniboss_down"] counted.
+  The meta is REMOVED on first payout so a re-raise or a second _on_kill cannot double-pay.
+- tools/_l29c_test.gd (rewritten, 26 checks): adds a B.miniboss phase that spawns the elite,
+  reads max_hp == (14 + floor*6) * base * MINIBOSS_HP_MULT exactly, the meta carries the purse,
+  killing the elite pays out across the party, and a second _on_kill does NOT re-pay. Also sped
+  up: the test now reuses a single DungeonHD across the whole suite instead of allocating +
+  queue_freeing one per iteration (the first draft piled 60+ pending frees and hung on
+  _find_floor_with). Scenario A sample widened to 2-39, all four kinds confirmed present; the
+  shrine-curse search extended to floor 80 (the flip is rarer under the theme-nudged weights).
+- GATE: --headless --import clean, _offfloor 0/1363, _twitch_parse OK, _delve_test no
+  SCRIPT ERROR, _l29c OK 26/26 (26 checks, 0 failed).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
 ## D-cycle D5 - D34 natural disasters (desktop build, 2026-11-13 ~20:34 local)
 
 - QUEUE REASONING (why D34 and not an earlier ID). D44b is the escalated top item but its sole
@@ -5077,3 +5110,33 @@ Closes the standing u23 caveat that U20's sign-off was on fd85570, not the fully
 - FOR MR. E / supervisor: D49 + L61 are now signed off on the FULLY-MERGED tree (434373b) - the u23 "nobody
   looked at the merged tree" caveat is CLOSED. Both are tick-ready. The only open HUD-lane question is whether
   the stale "build L51" payload gets repointed.
+
+
+## L-cycle 146 - L29c round 4: MINIBOSS rallies at half hp (laptop jestai, 2026-11-13)
+Supervisor at 20-something: "keep deepening YOUR lane - more floor hazard/trap variety, distinct
+miniboss/elite behaviors, bestiary depth". Round 4 adds a RALLY phase to the mini-boss I shipped in
+round 3 - at half hp the elite "finds its second wind", its atk climbs by MINIBOSS_RALLY_MULT and
+the Chronicle writes a tell. The fight now has a readable mid-beat on stream, not just a kill.
+- scripts/delve.gd (_miniboss_rally_tick, called from _fight): scans dun.monsters each fight tick
+  for a creature carrying the "l29c_miniboss_rallied == false" meta (set by _setpiece_miniboss at
+  spawn). Once its hp dips below MINIBOSS_RALLY_FRAC (0.5), the meta flips to true and its
+  def.atk is multiplied by MINIBOSS_RALLY_MULT (1.5). One rally per miniboss, counted in
+  Delve.setpieces_fired["miniboss_rally"] so the test can read it; a second tick never re-fires.
+- CHRONICLE: "%s finds its second wind - its strikes land harder." Sfx.play("roar", -4.0) rides
+  the beat so the lane speakers under the panes mark it too.
+- scripts/delve.gd (_setpiece_miniboss): added set_meta("l29c_miniboss_rallied", false) at
+  spawn. The spawn block otherwise unchanged.
+- SAFETY: the rally tick iterates on the LIVE monster instances. The first draft typed mon_v as
+  Monster before is_instance_valid, which cast a queue_freed instance back to Monster and threw
+  "Trying to assign invalid previously freed instance" ~40 times during the soak. Now the loop
+  checks is_instance_valid(mon_v) BEFORE the typecast, and the errors are 0 across a full run.
+- tools/_l29c_test.gd: extended B.miniboss (26->33 checks) with a rally phase: the flag starts
+  false, nick the elite to 48% hp, _miniboss_rally_tick sets it true, atk climbs by *exactly*
+  MINIBOSS_RALLY_MULT (1.95 -> 2.92 in the run), setpieces_fired["miniboss_rally"] counted, and a
+  second tick does NOT re-fire or re-bump the atk.
+- NO changes to Monster or Bestiary - the rally reuses the existing def.atk read path. If/when
+  the phase mechanic Monster.phase_changed carries up to non-lord enemies (L29a shipped it for
+  lords), this hook can move to it and the meta go away. For now the meta is the clean seam.
+- GATE: --headless --import clean, _offfloor 0/1316, _twitch_parse OK, _delve_test no
+  SCRIPT ERROR, _l29c OK 33/33.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

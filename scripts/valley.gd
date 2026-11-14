@@ -127,7 +127,7 @@ func _mats() -> void:
     _moss.albedo_color = Color(0.60, 0.63, 0.55)
     _bark = StandardMaterial3D.new()
     _bark.albedo_color = Color(0.38, 0.27, 0.18)
-    _soil = (town._mat.get("MI_Grass") as StandardMaterial3D).duplicate()
+    _soil = (town._mat.get("MI_Dirt") as StandardMaterial3D).duplicate()
     _soil.albedo_color = Color(0.52, 0.40, 0.29)
     _soil.cull_mode = BaseMaterial3D.CULL_DISABLED
     _wheat = StandardMaterial3D.new()

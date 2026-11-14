@@ -5013,3 +5013,28 @@ and the Chronicle announcements still read correctly from an outside test.
   5. NO NEW DATA FILE, NO RENAMED KEY, NO CHANGED VALUE. Any loader reading e3po today keeps working
      unchanged whether or not the new keys are ever read.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+
+## D-cycle D6 - D56 grass material repointed (desktop build, 2026-11-13 ~21:25)
+- CLEAN WINDOW confirmed by OS boot time: LastBootUpTime 21:00:01 was AFTER the stale lock stamp
+  (RUNNING 20:42, a run killed by the restart); 0 Godot processes. Acquired the lock, then worked.
+- D56: the material named "MI_Grass" referenced the DIRT textures (T_Dirt_*) under a tan albedo. On
+  inspection every consumer uses it AS DIRT: town.gd _path_strip (L1395, albedo 0.78,0.66,0.52),
+  town.gd _build_fields soil (L2830, 0.55,0.42,0.30), valley.gd _soil (L130, 0.52,0.40,0.29). So a
+  blind repoint would have turned the dirt paths and farm soil green.
+- FIX (in-ownership): MI_Grass.tres -> T_Meadow_BaseColor/Normal (the grass source D45 wired into
+  ground.gdshader) + albedo Color(0.5,0.92,0.34) matching the shader grass_tint, roughness 0.9,
+  triplanar uv1_scale 0.16. Added MI_Dirt.tres = the OLD MI_Grass dirt content verbatim. Added
+  "MI_Dirt" to KIT_MAT_NAMES (town.gd:72) and repointed the three dirt consumers MI_Grass->MI_Dirt;
+  their brown tints are unchanged so paths/soil are pixel-identical (no regression).
+- No new texture file added (T_Meadow already tracked) -> no LICENSE change. A procedurally-generated
+  grass set was made first, then discarded in favour of reusing T_Meadow for consistency with the lawn.
+- GATE (all green): boot --quit-after 300 rc0, 0 SCRIPT/Parse errors; _offfloor OFFFLOOR 0/1451 INPROP0
+  MON_INPROP0; _twitch_parse TWITCH_PARSE OK; _townwalk in_solid 0/16374 raid 0/2847 stuck 0 PASS;
+  _delve_test ran floors with no SCRIPT ERROR. Visual: renders/cycles/d56/swatch.png (MI_Grass=green
+  grass, MI_Dirt=brown dirt) + renders/cycles/d45/d56_{grass_close,back_grass,valley_field,greens_wide}
+  (town greens/fields unchanged). Looked at all.
+- OPEN for Mr. E: nothing assigns MI_Grass untinted today, so on-stream look is unchanged. MI_Grass is
+  now genuinely a grass material; if he wants a specific surface (the trodden dirt paths?) to read as
+  grass, that is a one-line repoint per surface on his word - did NOT guess that aesthetic unattended.
+- tools/_d56_shot.gd added (material swatch render).

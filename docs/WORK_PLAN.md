@@ -441,13 +441,26 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       11.1 m / 0 scattered samples. D20C_TEST PASS. parse 0, OFFFLOOR 0/1354, TWITCH_PARSE OK, _townwalk
       in_solid 0/17115 (0.000%) PASS, _delve_test clean. renders/cycles/20261113_d20c.
 # Phase F - magic & combat feel (town) [D21]
-- [ ] D56. GRASS MATERIAL WIRED TO DIRT (high priority, desktop). Owner: DESKTOP BUILD.
+- [x] D56. GRASS MATERIAL WIRED TO DIRT (high priority, desktop). Owner: DESKTOP BUILD.
       assets/kit/materials/MI_Grass.tres references T_Dirt_BaseColor/Normal/Roughness - the "MI_Grass"
       material literally uses DIRT textures. D45 re-graded ground.gdshader (the main lawn reads green),
       but THIS material instance was never repointed, so any surface using MI_Grass still looks like
       dirt/sand. Fix: point MI_Grass.tres at real CC0 grass textures (or the same source D45 used),
       correct tiling; if no grass texture asset exists, create/copy a CC0 one with a LICENSE note.
       Render the areas that use MI_Grass and LOOK. DONE: those surfaces read as grass, Mr. E confirms.
+      RESULT (D-cycle D6, 2026-11-13 ~21:25): MI_Grass had NO untinted consumer - all three uses
+      (town.gd dirt path L1395, town.gd farm soil L2830, valley.gd _soil L130) duplicate it and
+      OVERRIDE albedo to brown, i.e. it was a mis-named DIRT material. Blindly repointing it would
+      have turned paths/soil green. Fix: MI_Grass.tres repointed to the REAL grass source D45 used
+      (T_Meadow_BaseColor/Normal) + albedo Color(0.5,0.92,0.34) mirroring ground.gdshader grass_tint,
+      uv1_scale 0.16; NEW MI_Dirt.tres = the old MI_Grass dirt content verbatim; the 3 dirt consumers
+      repointed MI_Grass->MI_Dirt (tints unchanged -> dirt paths/soil pixel-identical, no regression).
+      No new texture asset (T_Meadow already tracked), so no LICENSE note needed. Swatch render:
+      MI_Grass reads as green grass, MI_Dirt as brown dirt (renders/cycles/d56/swatch.png); town
+      greens/fields unchanged (renders/cycles/d45/d56_*). Gate green. NOTE for Mr. E: nothing in the
+      town assigns MI_Grass untinted yet, so the on-stream look is UNCHANGED - the material is now
+      correctly a grass material, available to paint on a surface if he wants one specific ground
+      (e.g. the trodden dirt paths) to read as grass. Awaiting his eye.
 
 - [ ] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.

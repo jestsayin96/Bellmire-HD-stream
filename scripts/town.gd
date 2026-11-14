@@ -69,7 +69,7 @@ const KIT_MATS := "res://assets/kit/materials/"
 const KIT_MAT_NAMES := ["MI_Brick", "MI_UnevenBrick", "MI_Plaster", "MI_RockTrim",
                         "MI_RoundTiles", "MI_WoodTrim", "MI_WoodTrim_Wear",
                         "MI_WindowGlass", "MI_MetalOrnaments", "MI_Vine",
-                        "MI_Cobble", "MI_Grass"]
+                        "MI_Cobble", "MI_Grass", "MI_Dirt"]
 
 ## roof tint per livery. red is left neutral - the kit's tiles are already
 ## terracotta, so tinting it red would just oversaturate.
@@ -1392,7 +1392,7 @@ func _road_strip(pts_in: Array[Vector3], w: float, dirt := false) -> void:
     mi.mesh = m
     var mkey := "_path_strip" if dirt else "_road_strip"
     if not _mat.has(mkey):
-        var rm: StandardMaterial3D = (_mat.get("MI_Grass" if dirt else "MI_Cobble") as StandardMaterial3D).duplicate()
+        var rm: StandardMaterial3D = (_mat.get("MI_Dirt" if dirt else "MI_Cobble") as StandardMaterial3D).duplicate()
         rm.cull_mode = BaseMaterial3D.CULL_DISABLED
         if dirt:
             rm.albedo_color = Color(0.78, 0.66, 0.52)
@@ -2827,7 +2827,7 @@ func _build_fields() -> void:
     var az: float = float(_wall_info["az"])
     var rng := RandomNumberGenerator.new()
     rng.seed = 515
-    var soil: StandardMaterial3D = (_mat.get("MI_Grass") as StandardMaterial3D).duplicate()
+    var soil: StandardMaterial3D = (_mat.get("MI_Dirt") as StandardMaterial3D).duplicate()
     soil.albedo_color = Color(0.55, 0.42, 0.30)
     soil.cull_mode = BaseMaterial3D.CULL_DISABLED
     var wheat_mesh := _mesh_of(NATURE + "Grass_Wispy_Tall.gltf")

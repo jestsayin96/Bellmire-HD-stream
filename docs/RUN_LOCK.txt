@@ -1,1 +1,1 @@
-IDLE 2026-11-13 21:08 - desktop build: D29 work-sound layer shipped + callers verified, gate green
+IDLE 2026-11-13 21:28 - D56 grass material repointed + committed

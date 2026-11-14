@@ -3351,3 +3351,63 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      tier gate stays exactly as C-cycle 7 generated it. No new good was added that would need a
      matching stock_by_tier entry.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 24 - disaster and event variants (standing backlog item 3)
+- FOLDER: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`).
+  The shared clone R was on `laptop`, had NOTHING unpushed, and was NEVER checked out. R fetched only.
+  W3 checked out `content`, merged origin/main (already up to date), clean tree before and after.
+- FILE TOUCHED: data/lore_lines.json ONLY. items.json, bosses.json and potions.json untouched this cycle.
+- WHY THIS ITEM: backlog 1 (cosmetics/dyes) was C-cycle 23 and backlog 2 (shop stock / trader cargo
+  per growth tier) was audited this cycle and found ALREADY COMPLETE and self-consistent - 123 shop
+  goods, 68 cargo goods, every one of them gated in stock_by_tier, zero keys gated without a
+  definition, zero definitions left ungated, and zero tier mismatches between a good's own `tier`
+  and the tier that adds it. Nothing to add there, so this cycle took backlog item 3. E3PO (C-22)
+  and the most-repeated lines (C-20) were deliberately left alone.
+- WHAT WAS ADDED - 323 new lines, all viewer-facing, every one of them a line the Chronicle shows:
+    all 13 disasters   begin_alt   8 -> 16   (+104)
+    all 13 disasters   pass_alt    8 -> 16   (+104)
+    all 13 disasters   during     17 -> 24   (+91)
+    wandering_boss     appears_alt / while_alt / cleared_alt   6 -> 14 each   (+24)
+  Disasters covered: volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake,
+  meteor, scarstorm, flood, blight, coldsnap.
+  The point of the cycle: a disaster that fires twice on one stream must not read word for word
+  like the first time. begin_alt/pass_alt are now 16 deep each, so a repeat inside one session is
+  unlikely, and `during` at 24 carries a long disaster without looping visibly.
+- THE "COST" STATEMENTS ARE UNTOUCHED AND STILL PRECISE. Every disaster's `cost` - the one key the
+  desktop implements mechanics from - is byte-identical to HEAD. No begin, no pass and no cost was
+  reworded. The new `during` lines were written to stay INSIDE the cost already stated (e.g. flood's
+  new lines lose the grain store's bottom row and shut the Ford, which is exactly its existing cost
+  statement; coldsnap's halt building, trade and the fields, which is exactly its existing cost).
+  Nothing in the new lines implies damage the cost line does not already pay for.
+  wandering_boss: every one of the 8 new while_alt lines states the SAME implementable cost as the
+  canonical `while` - one outlying holding razed per day it roams, and the dark it drags persists
+  on the ruin. No new mechanic is smuggled in through a variant line.
+- TWO NEW KEYS, both documentation, both additive: disasters._note_variants_c24 and
+  events._note_variants_c24, in the same `_note`-prefixed style the file already uses. The existing
+  _note and _note_variants on both blocks are byte-identical to HEAD.
+- VALIDATION OK (python only - no Godot, per COORDINATION 10):
+  json.load succeeds. Deep-compared against `git show HEAD:data/lore_lines.json`: every pre-existing
+  key still present and deep-equal - zero values changed, zero keys renamed, zero keys removed - and
+  every pre-existing array is an EXACT PREFIX of its new self, so nothing was reordered or reworded,
+  only appended. The only keys that exist in the new file and not in HEAD are the two _note_variants_c24
+  notes above. All 42 arrays touched contain only non-empty strings, each array is free of duplicates,
+  all 13 disaster blocks still carry the identical key-set (begin, begin_alt, cost, during, pass,
+  pass_alt), and wandering_boss still carries its 8 keys. Total lines 1979 -> 2302 (+323). Longest new
+  line 119 chars - readable at a glance on stream. Zero non-ASCII, zero floor counts. The file
+  round-trips byte-exact at indent=2 / CRLF / trailing CRLF, which is HEAD's own formatting, so the
+  diff is purely the appended lines.
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. disasters and events are BOTH still "dead until wired" per their own _note. Nothing in this
+     cycle changes that; this is more ammunition for a picker that does not exist yet.
+  2. Whoever wires D34 (disasters) should roll begin_alt / pass_alt INSTEAD of begin / pass, not in
+     addition - begin and pass remain the single canonical line and are what a first-ever occurrence
+     should use. `during` is a pool to roll from while it lasts. OWNER: DESKTOP BUILD (D34).
+  3. Whoever wires D33 (events) should roll wandering_boss appears_alt / while_alt / cleared_alt the
+     same way. There is still exactly ONE wandering boss, scaled to town level from the eight canon
+     lords - no new lord was invented here. OWNER: DESKTOP BUILD (D33).
+  4. Anything that hard-coded an array length (8 begin_alt, 8 pass_alt, 17 during, 6 appears_alt)
+     must size off the array instead, or it will silently never show the new lines. Nothing in the
+     repo is known to do this - flagged because it is the one way this cycle could go unseen.
+  5. No new mechanic, no new disaster, no new event and no new cost was introduced, so no new
+     implementation work is created by this cycle - only more text for work already specified.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

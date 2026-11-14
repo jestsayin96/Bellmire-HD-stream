@@ -39,6 +39,16 @@ var start_floor := 1
 var npc_party := false           # the town's own band: no viewer gold
 var lane := 0                    # parallel delves sit side by side, 700 m apart
 
+## D37: E3PO voice hook. The town-held Notables carries _e3po_say. In a live
+## delve `town` is the Town node; in a bare test rig it may be a stub without a
+## notables ref, so this no-ops safely.
+func _e3po(cat: String, sub := "") -> void:
+	if town == null:
+		return
+	var n = town.get("notables") if town.get("notables") != null else null
+	if n != null and n.has_method("_e3po_say"):
+		n._e3po_say(cat, sub)
+
 func start(uids: Array) -> void:
 	_rng.randomize()
 	for uid in uids:
@@ -63,6 +73,7 @@ func start(uids: Array) -> void:
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
 	_say(_fmt_line(_pick_line("descend", "%s %s into the scar."), [_names(), "descends" if party.size() == 1 else "descend"]))
+	_e3po("delve_dispatch")         # D37: the Commander sees the party off
 	for m in party:
 		oil += float(int(m["h"].get("oil", 0)))
 		m["h"]["oil"] = 0
@@ -167,6 +178,7 @@ func _next_floor() -> void:
 			note = note.substr(0, 1).to_upper() + note.substr(1) + "."
 		var uniq := bool(dun.lord.def.get("unique", false))
 		_say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
+		_e3po("lord_sighted")   # D37: a lord has risen - the Commander calls it out
 		# L29b: the guild knows this lord. It does not know THIS one.
 		if bool(dun.lord.def.get("lord_unique", false)):
 			_say("The guild has put down %s before. Not this one." % String(dun.lord.def.get("lord_title", "its like")))
@@ -1762,6 +1774,7 @@ func _loot(alive: Array) -> void:
 			took.append(String(m["h"]["name"]))
 		_gold += share * alive.size()
 		_say("%s is slain on floor %d!" % [dun.lord.def.get("name", "The lord"), floor_no])
+		_e3po("lord_cleared")   # D37: a lord is down - the Commander marks the beat
 		FeedHUD.card_on(town, String(dun.lord.def.get("name", "The lord")),
 			"Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
 		if rare_lord:

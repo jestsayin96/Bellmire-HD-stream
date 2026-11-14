@@ -5297,3 +5297,42 @@ protective line in scripts/raids.gd.
 - DEFERRED (NOT mine to wire - laptop files, or D39 caravan): viewer_roll(4)/viewer_down/viewer_returns/
   viewer_cosmetic/rank_up (roster.gd), delve_dispatch/lord_sighted/lord_cleared (delve.gd), trader_arrives
   (D39). The lines + picker are ready; those triggers just need to call notables._e3po_say(cat[,sub]).
+
+
+## L-cycle 148 - E3PO voice hooks wired in roster + delve (laptop jestai, 2026-11-14)
+D37 shipped E3PO on main (desktop D-cycle D12, commit 4e59901): the Commander spawns, posts at the
+garrison, patrols at night, withdraws + heals on a breach, barks ambient lines, and the writer's
+500+ lines are loaded. notables.gd carries the picker _e3po_say(cat, sub := "). The remaining half
+was the EVENT triggers in laptop-owned files - this cycle wires all seven (+1 the supervisor named).
+- scripts/roster.gd (helper + 5 hook sites).
+    _e3po(cat, sub := "") - get_parent() reaches town.notables; no-ops when roster is standalone
+    (every bare-Roster test is unaffected). Right at the signal block so a reader finds it next
+    to changed/announced.
+    HOOKS:
+      haggle()      - the one viewer-triggered d20 that already lives on Roster, so this is the
+                      written-category match: d==20 -> viewer_roll "crit", d==1 -> "fumble",
+                      total >= HAGGLE_DC -> "high", otherwise -> "low".
+      fresh()       - a RETURNING viewer only (heroes[uid] existed AND was dead): viewer_returns.
+                      A first-time enlist is NOT a return.
+      kill()        - viewer_down, after the fallen record + changed.emit, so the Chronicle order
+                      stays fall-line -> E3PO, not E3PO -> fall-line.
+      wear()        - viewer_cosmetic on the slot/kind write, after the owned+spend path.
+      dye()         - viewer_cosmetic on the dye.
+      award() rank-up path - rank_up on the existing rank_now != rank_was branch, right after the
+                      standing announcement, so the Chronicle reads promotion -> E3PO.
+- scripts/delve.gd (helper + 3 hook sites).
+    _e3po(cat, sub := "") - town.notables direct call, guarded on town being set + notables being
+    the right shape. A bare Delve in a test (town is a FakeTown or null) no-ops.
+    HOOKS:
+      start()       - delve_dispatch, right after the descend Chronicle line so the Commander's
+                      send-off reads in order.
+      _next_floor() - lord_sighted, right after the "X rises" / "X is down here" line.
+      _loot() boss  - lord_cleared, right after "X is slain on floor N!".
+- NOT touched: notables.gd (desktop-owned), raids.gd (desktop-owned, already handles its own
+  E3PO raid/withdraw/return). No parallel copies of the picker.
+- GATE on jestai: parse clean (_delve_test 0 SCRIPT ERROR), _offfloor 0/1361, _twitch_parse OK,
+  _l30a OK 21/21 (haggle fires through wear + E3PO guard no-ops cleanly in a bare Roster),
+  _l30b OK 17/17 (wear + dye both hit viewer_cosmetic, guard still no-ops).
+  --import skipped; the prior environmental hang hasn't been confirmed resolved and _delve_test
+  implicitly covers parse.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

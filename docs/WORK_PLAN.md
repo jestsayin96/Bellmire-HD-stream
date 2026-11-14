@@ -1019,7 +1019,8 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       cats, NOT in defenders, picker OK, saying a line grows the feed + sets his shout -> D37_TEST OK.
       GATE GREEN: parse 0, _offfloor 0/1531, TWITCH_PARSE OK, _townwalk 0/18947 PASS, _delve_test rc0,
       0 SCRIPT ERRORs. LOOKED (renders/cycles/d37/e3po_post.png): the Commander at the garrison, named.
-      DEFERRED (need hooks in LAPTOP files roster.gd/delve.gd/chatcmd.gd, or caravan state - not mine to
+      DONE Nov 14 (all E3PO voice hooks now wired: laptop L-148 c4433a6 roster.gd+delve.gd;
+      desktop a2dbd3a town.gd trader_arrives). Originally deferred, needed hooks in LAPTOP files roster.gd/delve.gd/chatcmd.gd, or caravan state - were not DESKTOP BUILD's to
       edit): viewer_roll(4), viewer_down, viewer_returns, viewer_cosmetic, rank_up (roster.gd viewer
       events); delve_dispatch, lord_sighted, lord_cleared (delve.gd); trader_arrives (D39 caravan). These
       categories are written + the picker already handles them - they just need their triggers to call
@@ -1151,7 +1152,7 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       CENSUS_MIN) and read Delve.trap_log directly. This GATES L45 and L46 - do not "fix" either
       until this run says they are actually broken.
 
-- [ ] D37 note: E3PO's words now EXIST (content writer's e3po + town_life blocks in lore_lines.json,
+- [x] D37 note: E3PO's words now EXIST (content writer's e3po + town_life blocks in lore_lines.json,
       merged). They are dead data until raids.gd/town.gd read them. The content half is done; the
       behaviour half is still D37 and belongs to DESKTOP BUILD.
 
@@ -1789,3 +1790,5 @@ laptop (the delve command path) - both must coordinate; repro before fixing.
       rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
       different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
       bugs, two owners, do not conflate.
+
+CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-cheer tiers (7cdc363), Rally my hero reward + combat buff (eb707ae), hero idle-wander + delve-scope fix (19b1893/e1c9c1f), subscriber-pane Helix seed (19b1893), Custom Power-up redemption -> bit tiers (510a2e9), E3PO D37 live + all voice hooks (4e59901 + laptop L-148 + trader_arrives a2dbd3a), laptop merge c08cc08 (trap variety L-147, monster telegraphs L-149). Full gate green. OPEN for Mr. E: create the 5 Custom Power-ups in the dashboard; decide E3PO v2 (fighting commander).

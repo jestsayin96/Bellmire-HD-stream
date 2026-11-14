@@ -1,5 +1,87 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
+
+- [ ] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
+      town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
+      from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
+      badly. This is "the town isn't alive" made concrete.
+      STRONG DIAGNOSTIC LINK: a townsperson frozen in place may be the SAME walker D44/D44b flags
+      as in_solid / stuck - a walker wedged in geometry stops moving AND stops its walk cycle. Check
+      whether the frozen NPCs correlate with the in_solid samples before treating these as separate.
+      If a townsperson has no nav target or a blocked path it idles forever - give idle NPCs
+      somewhere to go (work, wander, gather) on a cadence, and make sure the walk/idle animation
+      actually plays (the census showed anims fire, so a FROZEN one is likely a stuck agent, not a
+      missing clip). The stutter may be the sub-res pane (see D49) OR a real animation hitch - say
+      which once D49's AA work lands, so they are not conflated.
+      DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
+      pane crop Mr. E signs off.
+
+- [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
+      equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
+      supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
+      its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
+      that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
+      its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
+      DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
+
+- [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
+      14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
+      and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
+      the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
+      (do they come back out on a timer? the D20b flee logic already ducks folk indoors and brings
+      them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
+      recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
+      not permanently lose it.
+
+REINFORCED, not re-logged:
+  * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a
+    subscription... channel... bits?" This is the STRONGEST confirmation yet - a viewer cannot tell
+    what to spend on. Bump L62 up the HUD queue; it is core to the spend-prompt model, not polish.
+  * D46 (band panel covers the screen) - "look how much it covers, this is what I was talking
+    about." Confirmed again; already moving to the hub.
+  * D50 (NPCs idle with no purpose) - "all these people just hanging out not doing anything,
+    congregating by the thing not doing anything." The idle half of D50.
+  * L38 (ambient pane framing) - "bottom right is watching the livestock, it's looking at the ROOF."
+    The ambient framing still aims at roofs/empty geometry sometimes. U2 did a first pass; it needs
+    another - the ambient subject pick or the camera offset is still landing on non-subjects. Raise
+    as a HUD follow-up to L38 when the HUD worker is next free.
+
+CHANGELOG 2026-11-13 14:54 (supervisor): clips 14-29/14-30/14-31. Split the "not moving" bug correctly: D52 =
+hero won't delve, stands idle at the well = COMMAND/STATE, LAPTOP; D44/D50 wedging (pumpkins) =
+nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53 (cart/pole not
+attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
+it up), D46, D50, L38 (needs a second framing pass).
+
+- [ ] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
+      pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
+      it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
+      bone. Pairs with D40's fishing animation + water work; do them together.
+      DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
+
+- NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
+  appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to
+  zoom/control each subject pane independently, or is one-pane control fine and this was just an
+  observation? Logged here so it is not lost; the supervisor will raise it and turn it into an item
+  only if he wants per-pane control. Owner would be HUD (spotlight.gd) + rts_camera.gd.
+
+Grass: already D45 (reinforced twice now - "so nasty" in two clips). Not re-logged.
+Pixelation-on-movement: already D49 from clip 14-26-15. The clip-2 "stuttering" is partly that
+(render) and partly D50 (animation) - separated above.
+
+CHANGELOG 2026-11-13 14:51 (supervisor): from Mr. E's transcribed clip 14-27-07 - D50 (townsfolk freeze +
+animation stutter, likely tied to D44's stuck walkers), D51 (fishing pole grip, part of D40).
+Grass reinforces D45; stutter split between D49 render and D50 animation. One open question logged
+for Mr. E: does he want per-pane zoom control.
+
+# Phase AC - *** CRITICAL *** Mr. E's clip 14-28-40: HEROES DO NOT MOVE (2026-11-13 14:52)
+
+His words: "I put it to follow me. My dude's not moving. None of these guys, barefoot Knights not
+moving, 96 Knights not moving, Mr. E Ranger is the one I just created, and I am following - I'm not
+moving, I told him to go delve, and he has not moved. This needs to be fixed."
+
+
+
 Two machines work at once, on DIFFERENT files so they never clash:
 - DESKTOP (CruzaderPC, scheduled build runs, branch `main`): the town, its people, magic. Lock: docs/RUN_LOCK.txt
 - LAPTOP (jestai, its own Claude Code session, branch `laptop`): monsters, bosses, gear, classes, species.
@@ -1587,48 +1669,6 @@ texture, it's so nasty... this dude has not moved from his spot in the top right
 aren't moving... this dude's not even holding the fishing pole correctly... this grass texture,
 so nasty."
 
-- [ ] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
-      town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
-      from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
-      badly. This is "the town isn't alive" made concrete.
-      STRONG DIAGNOSTIC LINK: a townsperson frozen in place may be the SAME walker D44/D44b flags
-      as in_solid / stuck - a walker wedged in geometry stops moving AND stops its walk cycle. Check
-      whether the frozen NPCs correlate with the in_solid samples before treating these as separate.
-      If a townsperson has no nav target or a blocked path it idles forever - give idle NPCs
-      somewhere to go (work, wander, gather) on a cadence, and make sure the walk/idle animation
-      actually plays (the census showed anims fire, so a FROZEN one is likely a stuck agent, not a
-      missing clip). The stutter may be the sub-res pane (see D49) OR a real animation hitch - say
-      which once D49's AA work lands, so they are not conflated.
-      DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
-      pane crop Mr. E signs off.
-
-- [ ] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
-      pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
-      it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
-      bone. Pairs with D40's fishing animation + water work; do them together.
-      DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
-
-- NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
-  appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to
-  zoom/control each subject pane independently, or is one-pane control fine and this was just an
-  observation? Logged here so it is not lost; the supervisor will raise it and turn it into an item
-  only if he wants per-pane control. Owner would be HUD (spotlight.gd) + rts_camera.gd.
-
-Grass: already D45 (reinforced twice now - "so nasty" in two clips). Not re-logged.
-Pixelation-on-movement: already D49 from clip 14-26-15. The clip-2 "stuttering" is partly that
-(render) and partly D50 (animation) - separated above.
-
-CHANGELOG 2026-11-13 14:51 (supervisor): from Mr. E's transcribed clip 14-27-07 - D50 (townsfolk freeze +
-animation stutter, likely tied to D44's stuck walkers), D51 (fishing pole grip, part of D40).
-Grass reinforces D45; stutter split between D49 render and D50 animation. One open question logged
-for Mr. E: does he want per-pane zoom control.
-
-# Phase AC - *** CRITICAL *** Mr. E's clip 14-28-40: HEROES DO NOT MOVE (2026-11-13 14:52)
-
-His words: "I put it to follow me. My dude's not moving. None of these guys, barefoot Knights not
-moving, 96 Knights not moving, Mr. E Ranger is the one I just created, and I am following - I'm not
-moving, I told him to go delve, and he has not moved. This needs to be fixed."
-
 - [x] D52. *** TOP PRIORITY, ABOVE EVERYTHING ELSE. *** HEROES DO NOT MOVE ON COMMAND. A viewer  [CLOSED nov13: pre-raise race fixed c9daa0f; happy-path 'failure' was a frame-vs-wallclock test artifact, laptop made it wall-clock deterministic b59fdc4; D52_TEST OK 6/0 on both machines]
       enlists a hero, sends it to delve, and it stands frozen - the whole core loop (enlist -> party
       -> delve) is dead on screen. Mr. E created a hero, issued delve, set a pane to follow it, and
@@ -1678,39 +1718,3 @@ laptop (the delve command path) - both must coordinate; repro before fixing.
       rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
       different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
       bugs, two owners, do not conflate.
-
-- [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
-      equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
-      supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
-      its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
-      that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
-      its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
-      DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
-
-- [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
-      14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
-      and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
-      the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
-      (do they come back out on a timer? the D20b flee logic already ducks folk indoors and brings
-      them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
-      recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
-      not permanently lose it.
-
-REINFORCED, not re-logged:
-  * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a
-    subscription... channel... bits?" This is the STRONGEST confirmation yet - a viewer cannot tell
-    what to spend on. Bump L62 up the HUD queue; it is core to the spend-prompt model, not polish.
-  * D46 (band panel covers the screen) - "look how much it covers, this is what I was talking
-    about." Confirmed again; already moving to the hub.
-  * D50 (NPCs idle with no purpose) - "all these people just hanging out not doing anything,
-    congregating by the thing not doing anything." The idle half of D50.
-  * L38 (ambient pane framing) - "bottom right is watching the livestock, it's looking at the ROOF."
-    The ambient framing still aims at roofs/empty geometry sometimes. U2 did a first pass; it needs
-    another - the ambient subject pick or the camera offset is still landing on non-subjects. Raise
-    as a HUD follow-up to L38 when the HUD worker is next free.
-
-CHANGELOG 2026-11-13 14:54 (supervisor): clips 14-29/14-30/14-31. Split the "not moving" bug correctly: D52 =
-hero won't delve, stands idle at the well = COMMAND/STATE, LAPTOP; D44/D50 wedging (pumpkins) =
-nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53 (cart/pole not
-attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
-it up), D46, D50, L38 (needs a second framing pass).

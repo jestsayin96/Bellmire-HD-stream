@@ -3310,3 +3310,44 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   5. e3po.tier_up is still exactly 12 entries matched by growth_tiers name, and was deliberately NOT
      widened: it is one line per stage, not a pool. Do not roll against it - match on name.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 23 - cosmetics, accessories and dyes (standing backlog item 1)
+- FOLDER: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`).
+  The shared clone R was on `laptop`, had nothing unpushed, and was NEVER checked out. R fetched only.
+- FILE TOUCHED: data/items.json ONLY. lore_lines.json, bosses.json and potions.json untouched this cycle.
+- WHAT WAS ADDED - 80 new keys, all viewer-spend (channel points / bits / gold):
+    accessories  130 -> 156   (+26: 6 rings, 5 amulets, 5 cloaks, 5 boots, 5 gloves)
+    cosmetics    253 -> 291   (+38: 8 hats/hoods/helms, 8 banners, 8 pets, 14 titles)
+    dyes         137 -> 153   (+16 colours)
+  The new trades are the ones Bellmire had not sold yet: cooper, orchard, reeve, collier,
+  netmender, wellhead, sawyer, shepherd, ostler, chandler, thresher, hedgeward, shingler,
+  winterwatch, saltboiler, carter, millrace, hayward, tinker, kennel, plasterer, wheelwright,
+  miner, baker. Every accessory carries exactly one 5e bonus (ac / saves / hp / speed / hit / dmg)
+  and a one-line flavour that earns the price - nothing reads as filler.
+  Costs sit inside the existing bands: accessories 200-420g, hats 70-150g, banners 90-120g,
+  pets 100-360g, titles 130-240g. dye_cost untouched at 25.
+- PETS: the 8 new pets reuse ONLY the nine .glb models that already exist in assets/animals
+  (Llama, Pug, Sheep, Cow, Duck, Pig, Horse, Red). No new asset is implied and every `model`
+  path was checked against the file on disk. Each new scale is distinct from every scale already
+  in the block, so no two pets render identically.
+- VALIDATION OK - python json.load() of data/items.json succeeds. Every pre-existing key in every
+  block (accessories, cosmetics, dyes, dye_cost, shop_stock, trader_cargo, stock_by_tier, _source)
+  is deep-equal to HEAD - nothing renamed, reworded or removed. Every one of the 80 new keys occurs
+  exactly once in the file. Shape check: the accessories key-set histogram still shows only the six
+  pre-existing shapes, and cosmetics still shows exactly one shape per kind (hat/banner 4 keys, pet
+  5, title 3) - no new entry introduced a new shape. git diff --numstat: 83 added / 3 removed, and
+  all 3 "removed" lines are the previous last entry of each block gaining a trailing comma.
+  Line endings unchanged (LF, as HEAD), trailing newline preserved.
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. Nothing new is needed if !wear / !dye / the cosmetic picker size off the dict instead of a
+     hard-coded count. Anything that hard-coded 130 accessories, 253 cosmetics or 137 dyes now
+     silently ignores the new entries. OWNER: LAPTOP CODE (gear.gd / chatcmd.gd) for wear/dye,
+     DESKTOP HUD (hud_dock.gd) for the shop/inventory list.
+  2. The 8 new pets are spawn-at-scale like the existing ones - no new loader path, but whoever
+     spawns pets must read `scale` per entry rather than per model. OWNER: DESKTOP BUILD (animal.gd).
+  3. The 16 new dyes are plain 6-hex strings like the rest; dye_cost is still a single int, so a
+     flat price still holds. No per-dye pricing was introduced.
+  4. shop_stock / trader_cargo / stock_by_tier were deliberately NOT touched this cycle, so the
+     tier gate stays exactly as C-cycle 7 generated it. No new good was added that would need a
+     matching stock_by_tier entry.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

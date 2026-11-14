@@ -4431,3 +4431,45 @@ illuminated, original filigree, explicitly NOT The Elder Scrolls / Bethesda art,
   5. e3po.tier_up is still exactly 12 entries matched by growth_tiers name, and was deliberately NOT
      widened: it is one line per stage, not a pool. Do not roll against it - match on name.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+
+## L-cycle 141 - L29c set pieces (laptop jestai, 2026-11-13) - L29c round 2 (IN PROGRESS, WORK_PLAN untouched)
+L29c asks for ambush / guarded hoard / mini-event so a floor is not just a room of monsters. Shipped in
+two rounds. Round 1 (merged earlier as 1f0741a) wired AMBUSH alone. Round 2, here, adds PRISONER and
+SHRINE alongside it so the kinds now cover the three names in the DONE line.
+- scripts/dungeon_hd.gd (_set_pieces): a floor past floor 1 non-boss rolls two-in-three for a set piece,
+  placed on a cell on keep_clear (the BFS path from near-entry to near-exit plus every corridor) or one
+  step off it, so the piece sits where the party actually walks. Kind is weighted-pick, with theme nudging
+  the odds: a prison tilts PRISONER, a crypt/shrine tilts SHRINE, the rest pick AMBUSH more often. Boss
+  floors stay the lord's drama; floor 1 stays the stream opener.
+- scripts/delve.gd (_setpieces_tick): one dispatch takes a kind string. The resolver fires on the first
+  alive hero within SETPIECE_TRIGGER_R, writes a Chronicle line, marks resolved, increments
+  Delve.setpieces_fired. Called from fight, search and descend so an ambush trips on the walk too (same
+  move L46 made for traps).
+    - AMBUSH: pulls 2-3 theme-matched creatures from Bestiary.pick into dun.monsters right where the
+      party stands, scaled to depth the same way _next_floor scales ordinary spawns, and lets Monster.roar
+      place the sound.
+    - PRISONER: the nearest alive hero does the freeing, every alive hero gets a share of the purse
+      (floor_no * 8 + 25 + 0..19 random, split with roster.award exactly like a chest), floater on each.
+    - SHRINE: the boon/curse flip is rolled at BUILD time (stored on the set piece) so the test can
+      inspect it without rolling again. BOON mends everyone to max_hp; CURSE knocks SHRINE_CURSE_HP off
+      each (12 - a bite, never lethal in one touch). Both write a short Chronicle line.
+- The Chronicle lines are HARDCODED here, three per prisoner/ambush, two per shrine. Not drawn from
+  data/lore_lines.json this round - keeps the content writer's file off the diff while the shape of each
+  kind is still settling.
+- tools/_l29c_test.gd (REWRITTEN from the round-1 shape to cover all three kinds, 18 checks):
+    A - 2-24 non-boss floors: >=5 carry a set piece, 0 on boss floors, all three KINDS appear in the
+        sample (seen prisoner=3, ambush=6, shrine=3 on one run).
+    B.ambush   - pack spawns (5 -> 7), resolved, counted once, second tick does NOT re-fire.
+    B.prisoner - gold up (40 -> 82), share equals purse / alive (42 == 42), resolved, counted once, does
+                 NOT re-fire.
+    B.shrine.boon  - 30 hp hero ends at 100/100, resolved, counted.
+    B.shrine.curse - 100 hp hero ends at 88, alive, resolved.
+    C - 6-floor soak at start_floor=3 fired >=1 set piece of any kind.
+- GATE: --headless --import clean, _offfloor 0/1386, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a OK 11/11, _l29b OK 23/23, _l56 OK 4/4, _l29c OK 18/18.
+- A pre-existing format bug the test caught: one of three PRISONER chronicle lines had its %d/%s in a
+  different order than the other two, so a random pick threw a String-format error at play. Fixed by
+  making argument order uniform across the three lines (same thing 4dc3172 did for delve.start / _loot).
+  Nothing in the content file is at fault and nothing there was touched.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

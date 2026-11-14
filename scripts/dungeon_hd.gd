@@ -582,14 +582,20 @@ func _people() -> void:
 ## party has to WALK TO it: that is what makes it a set piece rather than another
 ## spawn. The resolver (delve.gd _setpieces_tick) fires when a hero gets close.
 ##
-## ROUND 1: AMBUSH only. A patch of air (no visible monsters) that, once a hero
-## crosses TRIGGER_R, pulls a short pack of theme-matched creatures out of the dark
-## RIGHT WHERE THE PARTY STANDS - not "another couple of foes on the far wall", but
-## a thing that reads as a trap you walked into. Future rounds add PRISONER (free a
-## captive, +gold, feed line) and SHRINE (touch; coin-flip boon/curse).
+## ROUND 2: three kinds of set piece, chosen by weighted roll per floor.
+##   AMBUSH   - the hero walks over the trigger and a short pack of theme-matched
+##              creatures peels out of the dark RIGHT WHERE THE PARTY STANDS.
+##   PRISONER - a captive who was already down here when the floor was made.
+##              First hero close enough frees them; they slip a coin pouch to
+##              the party before fleeing up the stairs. Prison theme is likelier.
+##   SHRINE   - a small altar. First hero to touch rolls a coin flip in the
+##              Chronicle: a BOON mends the party; a CURSE takes a bite from each.
+##              Shrine / crypt themes are likelier.
+## One set piece per floor; a floor can hold only one. The resolver fires when
+## any alive hero crosses SETPIECE_TRIGGER_R of the set piece's pos.
 ##
-## Boss floors keep the lord's drama. Floor 1 is clean. Everything else has roughly
-## a two-in-three chance; the count is per floor so a single floor never gets two.
+## Boss floors keep the lord's drama. Floor 1 is clean. Everything else has
+## roughly a two-in-three chance.
 const SETPIECE_TRIGGER_R := 5.0
 const SETPIECE_MIN_FROM_ENTRY := 10.0
 
@@ -603,10 +609,6 @@ func _set_pieces() -> void:
     var entry: Vector3 = info["entry"]
     var exit_p: Vector3 = info["exit"]
     var keep: Dictionary = info.get("keep_clear", {})
-    # Prefer a cell on the party's actual route (keep_clear - the BFS path from
-    # near-entry to near-exit plus every corridor) so the ambush trips. Fall
-    # back to any cell near one of those when the route is small. An ambush on
-    # an unreachable spur never fires.
     var on_route: Array = []
     var fallback: Array = []
     for c in cells:
@@ -621,7 +623,6 @@ func _set_pieces() -> void:
         if keep.has(cv):
             on_route.append(cp)
         else:
-            # fallback: one step off the route (an alcove next to the walk-through)
             for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
                 if keep.has(cv + d):
                     fallback.append(cp)
@@ -630,17 +631,47 @@ func _set_pieces() -> void:
     if cand.is_empty():
         return
     var at: Vector3 = cand[_rng.randi() % cand.size()]
-    # ROUND 1: ambush is the only kind. The theme picks the creatures so a crypt
-    # ambush is skeletons, not goblins.
+    # weighted kind pick - theme tilts the odds a little without changing them
+    # all the way (a crypt still rolls an ambush now and then; a prison still
+    # gets its shrines)
     var theme := String(info.get("theme", ""))
-    var pack: Array = []
-    var want := 2 + _rng.randi() % 2        # 2 or 3 creatures
-    for i in range(want):
-        pack.append(Bestiary.pick(floor_no, theme))
-    (info["set_pieces"] as Array).append({
-        "kind": "ambush",
-        "pos": at,
-        "r": SETPIECE_TRIGGER_R,
-        "resolved": false,
-        "pack": pack,
-    })
+    var weights := {"ambush": 50, "prisoner": 25, "shrine": 25}
+    if theme == "prison":
+        weights = {"ambush": 35, "prisoner": 50, "shrine": 15}
+    elif theme == "shrine" or theme == "crypt":
+        weights = {"ambush": 35, "prisoner": 15, "shrine": 50}
+    var total := 0
+    for k in weights:
+        total += int(weights[k])
+    var roll := _rng.randi() % total
+    var kind := "ambush"
+    var acc := 0
+    for k in weights:
+        acc += int(weights[k])
+        if roll < acc:
+            kind = String(k)
+            break
+    match kind:
+        "ambush":
+            var pack: Array = []
+            var want := 2 + _rng.randi() % 2
+            for i in range(want):
+                pack.append(Bestiary.pick(floor_no, theme))
+            (info["set_pieces"] as Array).append({
+                "kind": "ambush", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false, "pack": pack,
+            })
+        "prisoner":
+            # purse scales with depth so freeing someone on floor 10 pays better
+            # than on floor 2, which is what the Chronicle already does with other
+            # per-floor payouts
+            var purse: int = 25 + floor_no * 8 + _rng.randi() % 20
+            (info["set_pieces"] as Array).append({
+                "kind": "prisoner", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false, "purse": purse,
+            })
+        "shrine":
+            # seed the flip at build time so the write's own test can inspect
+            # the outcome without rolling again at resolve time
+            var boon: bool = _rng.randi() % 2 == 0
+            (info["set_pieces"] as Array).append({
+                "kind": "shrine", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false, "boon": boon,
+            })

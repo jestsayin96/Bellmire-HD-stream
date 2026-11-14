@@ -1,3 +1,15 @@
+RUNNING 2026-11-13 - L29c (set-piece encounters). D52 done and pushed first (commit c9daa0f).
+
+D52 note: the supervisor's top-priority Phase AC item ("heroes do not move on command"). Repro in
+tools/_d52_test.gd walks three scenarios - happy path, cooldown back-to-back, and the pre-raise
+race which IS the live bug: chat_line ran chat.handle BEFORE raising a returning viewer's body,
+so wants_delve's synchronous _on_delve saw heroes.has(uid) == false and returned silently while
+the chat reply still read "sets out for the dungeon mouth". The muster queue gained the viewer
+but the body stood at the well. Fixed by raising a known-roster hero up front in chat_line
+(!enlist still covered by the post-handle raise). Three lines of code; nothing else moved.
+VERIFIED: _d52_test OK (6/6, v=2.58 / 3.28 m/s, routes 68 / 70, errand=delve). _delve_test still
+runs fight/search/descend unchanged.
+
 IDLE 2026-11-13 14:55 - L29b DONE and pushed (L-cycle 140).
 L29b note: MEASURED FIRST and it moved the item for the eighth time this session. bestiary.gd already
 had a UNIQUES table - but those are the L2 FLOOR-uniques (new named things on an ORDINARY floor), the

@@ -21,7 +21,7 @@ const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
 
 const params = new URLSearchParams(location.search);
 const TEST = params.get("state");   // empty | fail | stale (local checks)
-const MOCK = params.get("mock");    // chronicle | crowd (local checks)
+const MOCK = params.get("mock");    // chronicle | crowd | roll | bands (local checks)
 const OVERLAY = params.has("overlay");  // ?overlay=1 : the thin on-stream (OBS) column
 // overlay mode: a narrow, dark, glanceable column over the stream. Same data, same
 // security - a body class the stylesheet reshapes; no separate code path for snapshot data.
@@ -53,6 +53,7 @@ const XLINK = "http://www.w3.org/1999/xlink";
 const ICON_SET = new Set([
   "blade", "ranged", "arcane", "blunt", "shield", "potion", "flask", "coin",
   "fight", "death", "raid", "town", "lore", "loot", "delve", "other",
+  "flame",   // H10: a burning delver's status glyph. "death" already serves the fallen.
 ]);
 function icon(id, cls) {
   const key = ICON_SET.has(id) ? id : "other";      // whitelist: unknown -> a safe default
@@ -172,12 +173,17 @@ async function load() {
     if (TEST === "empty") rows = [];
     const row = arr(rows)[0];
     lastError = "";
-    if (!row || !row.payload || typeof row.payload !== "object") {
+    const payload = row && row.payload && typeof row.payload === "object" ? row.payload : null;
+    if (payload) {
+      last = row;
+      render(MOCK ? withMock(payload) : payload);
+    } else if (MOCK) {
+      // local check only: the town has not reported, but a ?mock= was asked for.
+      // Render the mock over an empty town so the checks run without live data.
+      render(withMock({}));
+    } else {
       last = null;
       renderNothing();
-    } else {
-      last = row;
-      render(MOCK ? withMock(row.payload) : row.payload);
     }
   } catch (e) {
     lastError = e && e.name === "AbortError" ? "no answer in " + TIMEOUT_MS / 1000 + " s" :
@@ -187,7 +193,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "dice", "heroes", "chronicle", "roll", "fallen"];
+const SECTIONS = ["boards", "dice", "heroes", "bands", "chronicle", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -199,12 +205,23 @@ function renderNothing(failed) {
   $("town").replaceChildren();
   $("nHeroes").textContent = "";
   $("nFallen").textContent = "";
+  { const nb = $("nBands"); if (nb) nb.textContent = ""; }
   renderCommands(null);
+  renderRolls(null);
 }
 
 // ---------------------------------------------------------------- the page
+// Payload version gate. v1 is today's shape; v2 adds p.parties (the H10/D46 "bands
+// below" contract); v3 adds the per-hero Satchel sell fields (the H11 contract). All
+// are accepted so the hub keeps working the moment the publisher bumps the version;
+// every new field is read DEFENSIVELY either way (absent -> honest empty state), so
+// pre-accepting a version shows nothing until that field actually arrives. Anything
+// OUTSIDE this set is an honest "this page needs an update", never a guess. ACTION for
+// the desktop: publish the Satchel sell fields as v = "3" (or extend this set BEFORE
+// shipping a different number). See docs/HUB_SECURITY.md (H11).
+const KNOWN_V = new Set(["1", "2", "3"]);
 function render(p) {
-  if (p && p.v != null && String(p.v) !== "1") {
+  if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
                 String(p.v).slice(0, 8) + "). The page needs an update.");
     return;
@@ -216,10 +233,12 @@ function render(p) {
   renderTown(t);
   renderBoards(arr(p.heroes), arr(p.fallen));
   renderHeroes(arr(p.heroes));
+  renderBands(p.parties != null ? p.parties : p.bands);
   renderChronicle(p.chronicle, { auto: true });
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
+  renderRolls(p.rolls);
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -414,18 +433,154 @@ function renderBoards(heroes, fallen) {
 }
 
 // ============================================================ HEROES (unchanged look, safe render)
+// ============================================================ MY HERO (H11)
+// A viewer with no login can mark ONE hero as theirs so it is easy to find each
+// visit - the hub stand-in for the on-stream Satchel (L51) that always kept a viewer's
+// own hero in view, which D48/L63 took OFF the stream. Only the hero NAME is remembered,
+// in THIS browser, as a per-viewer convenience: it is never a secret, never sent
+// anywhere, never used to choose any page behaviour beyond matching a hero by name.
+// Like every snapshot string it reaches the DOM ONLY through el()/textContent, and it
+// is only ever string-COMPARED against hero names - never built into a selector, URL,
+// src, href or style. Storage throws in private windows, so every access is wrapped;
+// the page works with or without it. (docs/HUB_SECURITY.md, H11.)
+const MY_HERO_KEY = "bellmire.myhero";
+const cleanName = (s) => String(s == null ? "" : s).replace(/[\u0000-\u001f\u007f]/g, "").slice(0, 25);
+function getMyHero() { try { return cleanName(localStorage.getItem(MY_HERO_KEY) || ""); } catch (e) { return ""; } }
+function storeMyHero(name) {
+  const n = cleanName(name);
+  try { if (n) localStorage.setItem(MY_HERO_KEY, n); else localStorage.removeItem(MY_HERO_KEY); } catch (e) {}
+}
+function setMyHero(name) {                       // store + repaint the heroes section
+  storeMyHero(name);
+  if (last) renderHeroes(arr((MOCK ? withMock(last.payload) : last.payload).heroes));
+}
+function isMyHero(h) { const m = getMyHero().toLowerCase(); return !!m && String((h && h.name) || "").toLowerCase() === m; }
+
+// The "your hero" banner at the top of the Heroes section. Shows the pinned name as
+// textContent, whether that hero is among the living right now, and quick actions.
+// Honest: if the pinned hero is not in the snapshot it says so and invents nothing.
+function renderMyHeroBanner(hs) {
+  const box = $("myHero");
+  if (!box) return;
+  box.replaceChildren();
+  const mine = getMyHero();
+  if (!mine) { box.classList.add("hide"); return; }
+  box.classList.remove("hide");
+  const live = arr(hs).find((h) => String(h.name || "").toLowerCase() === mine.toLowerCase());
+  const line = el("p", "mhline");
+  line.append(el("span", "mhlabel", "Your hero: "));
+  const nm = el("b", "mhname"); nm.append(document.createTextNode(mine));   // viewer text
+  line.append(nm);
+  if (live) {
+    const show = el("button", "linkbtn", "Show"); show.type = "button";
+    show.addEventListener("click", () => {
+      const card = [...$("heroList").querySelectorAll("details.hero")]
+        .find((d) => (d.querySelector(".hname") || {}).textContent === String(live.name));
+      if (card) { card.open = true; card.scrollIntoView({ block: "center", behavior: "smooth" }); }
+    });
+    line.append(document.createTextNode("  \u00b7  "), show);
+  } else {
+    line.append(el("span", "mhgone", " \u2014 not among the living right now (fallen, or not raised yet)."));
+  }
+  const un = el("button", "linkbtn", "Unpin"); un.type = "button";
+  un.addEventListener("click", () => setMyHero(""));
+  line.append(document.createTextNode("  \u00b7  "), un);
+  box.append(line);
+}
+
+// ---------------------------------------------------------------- the Satchel (H11)
+// The viewer's sellable items and what the counter would pay for them - the hub home
+// for the on-stream Satchel's sell sheet (L51), which L63 took off the stream. READ-
+// ONLY and forward-compatible exactly like the HP/XP bars and the bands: the block
+// appears ONLY when the snapshot actually carries sellable items, and invents no item,
+// price or total. Every item name is viewer/lore text and reaches the DOM ONLY via
+// el()/createTextNode; prices and the total are PAGE-COMPUTED numbers set as text,
+// never snapshot markup; the kind only SELECTS a whitelisted ICON_SET glyph - no field
+// is ever used as a URL/src/href/style. The contract is pinned in docs/HUB_SECURITY.md.
+const SATCHEL_ICON = {
+  weapon: "blade", sword: "blade", blade: "blade", dagger: "blade", spear: "blade",
+  bow: "ranged", ranged: "ranged", staff: "arcane", wand: "arcane", arcane: "arcane",
+  hammer: "blunt", mace: "blunt", blunt: "blunt", armour: "shield", armor: "shield",
+  shield: "shield", potion: "potion", brew: "potion", oil: "flask", flask: "flask",
+  gold: "coin", coin: "coin", loot: "loot", treasure: "loot", gem: "loot", trinket: "loot",
+};
+function satchelIconId(kind) { return SATCHEL_ICON[String(kind || "").toLowerCase()] || "loot"; }
+function sellOf(it) {
+  const s = it.sell != null ? it.sell : it.value != null ? it.value
+          : it.sell_price != null ? it.sell_price : it.price != null ? it.price : it.worth;
+  return (s != null && Number.isFinite(+s)) ? Math.max(0, Math.round(+s)) : null;
+}
+function satchelRows(h) {
+  const rows = [];
+  const gear = (g, iconId, note) => {
+    if (!g || !g.name) return; const s = sellOf(g); if (s == null) return;
+    rows.push({ name: cap(g.name), qty: 1, sell: s, icon: iconId, note });
+  };
+  gear(h.weapon || {}, weaponIcon((h.weapon || {}).name), "equipped");
+  gear(h.armour || {}, "shield", "equipped");
+  const raw = arr(h.satchel != null ? h.satchel : h.inventory != null ? h.inventory : h.items);
+  for (const it of raw) {
+    if (!it || typeof it !== "object") continue;
+    const name = firstStr(it.name, it.item, it.label, it.title);
+    if (!name) continue;
+    const qty = Math.max(1, Math.round(n0(it.qty) || n0(it.count) || n0(it.n) || 1));
+    rows.push({ name: name.slice(0, 60), qty, sell: sellOf(it), icon: satchelIconId(firstStr(it.kind, it.slot, it.type, it.cat)) });
+    if (rows.length >= 40) break;
+  }
+  return rows;
+}
+function satchelBlock(h) {
+  const rows = satchelRows(h);
+  if (!rows.length) return null;
+  const wrap = document.createDocumentFragment();
+  wrap.append(el("p", "eyebrow", "Satchel \u2014 what the counter would pay"));
+  const list = el("ul", "satchel");
+  for (const r of rows) {
+    const li = el("li", "sitem");
+    li.append(icon(r.icon, "sic"));
+    const nm = el("span", "sname");
+    nm.append(document.createTextNode(r.name));                 // viewer text: textContent
+    if (r.qty > 1) nm.append(el("span", "sqty", " \u00d7" + r.qty));
+    if (r.note) nm.append(el("span", "stag", r.note));
+    li.append(nm);
+    li.append(el("span", "sprice", r.sell == null ? "\u2014" : num(r.sell * r.qty) + " gold"));
+    list.append(li);
+  }
+  wrap.append(list);
+  const stated = n0(h.satchel_total) || n0(h.sell_total);
+  let sum = 0, priced = false;
+  for (const r of rows) if (r.sell != null) { sum += r.sell * r.qty; priced = true; }
+  const foot = el("p", "satchelfoot");
+  if (stated > 0) foot.append(el("span", "sk", "Counter pays "), el("b", null, num(stated)), el("span", "sk", " gold"));
+  else if (priced) foot.append(el("span", "sk", "Counter would pay "), el("b", null, num(sum)), el("span", "sk", " gold for the priced items"));
+  else foot.append(el("span", "sk", "No sell prices quoted yet."));
+  wrap.append(foot);
+  return wrap;
+}
+
 function renderHeroes(hs) {
   $("nHeroes").textContent = hs.length ? hs.length : "";
   $("heroesNote").textContent = hs.length ? `${hs.length} living` : "";
+  renderMyHeroBanner(hs);
   const q = heroFilter.trim().toLowerCase();
-  const list = q ? hs.filter((h) => String(h.name || "").toLowerCase().includes(q)) : hs;
+  let list = q ? hs.filter((h) => String(h.name || "").toLowerCase().includes(q)) : hs.slice();
   const box = $("heroList");
   box.replaceChildren();
   if (!hs.length) { box.append(el("p", "empty", "No living heroes yet. Type !enlist in chat to raise one.")); $("heroMore").classList.add("hide"); return; }
   if (!list.length) { box.append(el("p", "empty", "No hero by that name. (Fallen heroes are in The Fallen.)")); $("heroMore").classList.add("hide"); return; }
+  // H11: the viewer's pinned hero floats to the front, opens and is marked, so it is
+  // the first thing they see - the hub's replacement for the on-stream Satchel.
+  let mineName = "";
+  const mineKey = getMyHero().toLowerCase();
+  if (mineKey) {
+    const idx = list.findIndex((h) => String(h.name || "").toLowerCase() === mineKey);
+    if (idx > 0) { const m = list.splice(idx, 1)[0]; list.unshift(m); }
+    if (idx >= 0) mineName = String(list[0].name);
+  }
   const openNames = new Set();
+  if (mineName) openNames.add(mineName);
   if (params.get("open") && list[0]) openNames.add(String(list[0].name));
-  for (const h of list.slice(0, heroShown)) box.append(heroCard(h, openNames.has(String(h.name))));
+  for (const h of list.slice(0, heroShown)) box.append(heroCard(h, openNames.has(String(h.name)), mineName !== "" && String(h.name) === mineName));
   const more = $("heroMore");
   if (list.length > heroShown) {
     more.classList.remove("hide");
@@ -509,8 +664,8 @@ function carryChip(iconId, text) {
   return c;
 }
 
-function heroCard(h, isOpen) {
-  const det = el("details", "hero");
+function heroCard(h, isOpen, isMine) {
+  const det = el("details", "hero" + (isMine ? " mine" : ""));
   const sum = el("summary");
   // the crest: the hero's initials in a class-tinted ring, with the calling's icon
   const sg = el("span", "hsigil cls-" + classIcon(h.class), sigil(h.name));
@@ -547,6 +702,18 @@ function heroSheet(h) {
   const order = ["str", "dex", "con", "int", "wis", "cha"];
   const w = h.weapon || {}, armr = h.armour || {};
   const sheet = el("div", "sheet");
+
+  // H11: pin this hero as "mine" so it is easy to find next visit (the on-stream
+  // Satchel used to keep a viewer's own hero in view; D48/L63 took it off the stream).
+  const shead = el("div", "sheethead");
+  const mineNow = isMyHero(h);
+  const pin = el("button", "pinbtn" + (mineNow ? " on" : ""), mineNow ? "Your hero \u2014 unpin" : "Pin as my hero");
+  pin.type = "button";
+  pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
+  pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
+  pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
+  shead.append(pin);
+  sheet.append(shead);
 
   sheet.append(hpBar(h));
   sheet.append(xpBar(h));
@@ -588,6 +755,11 @@ function heroSheet(h) {
     carryChip("coin", `${num(h.gold)} gold`),
   );
   sheet.append(carry);
+
+  // Satchel: the viewer's sellable items and the counter's prices (H11). Appears only
+  // when the snapshot carries items to sell; otherwise nothing is shown (never faked).
+  const satchel = satchelBlock(h);
+  if (satchel) sheet.append(satchel);
 
   // Worn: cosmetics and any dye. A dye swatch colour comes from a WHITELISTED
   // class (dye-<known colour>), never an inline style built from snapshot data;
@@ -656,6 +828,147 @@ function renderFallen(fs) {
     if (f.epitaph) g.append(el("div", "gepi", "“" + String(f.epitaph) + "”"));
     box.append(g);
   }
+}
+
+// ============================================================ BANDS BELOW (H10)
+// The parties currently delving, read from the snapshot's parties array. The hub
+// has room the stream does not, so it shows EVERY active band, not just one. This
+// is the viewer side of D46 (which takes the band panel off the stream and puts the
+// band into the snapshot). Forward-compatible exactly like the rolls feed and the
+// hero HP bars: the section shows an honest empty state until the publisher sends
+// p.parties, and invents nothing - no band, no member, no health it was not given.
+//
+// CONTRACT (pinned for D46, also in docs/HUB_SECURITY.md). p.parties is an array;
+// every field optional and defended. Canonical key, then accepted aliases:
+//   name    the band's display name          (band, party, title)  - viewer text
+//   floor   integer dungeon floor it is on    (depth)
+//   members array of per-member objects:
+//     name    the hero's name                (who, hero)           - viewer text
+//     hp      current hit points             (health)
+//     max_hp  max hit points                 (hp_max, maxhp, hpmax)
+//     status  ok | fallen | burning | ...     (state, condition)
+//     class   the calling, optional          (calling)             - viewer text
+// When p.v becomes "2" the publisher carries this (see the version gate above).
+// Every string reaches the DOM only through el()/textContent; HP widths are page-
+// computed CSSOM numbers, never snapshot text; `status` only ever picks a whitelisted
+// icon + CSS class; no field is EVER used as a URL/src/href/style.
+const PARTY_MAX = 24, MEMBER_MAX = 12;
+// status -> a canonical key. unknown non-empty -> "other" (shown as its own text);
+// absent -> "ok" (healthy: no tag, just the bar). fallen/burning carry an icon + class.
+const PARTY_STATUS = {
+  ok: "ok", alive: "ok", fine: "ok", well: "ok", up: "ok", healthy: "ok", active: "ok", delving: "ok",
+  fallen: "fallen", dead: "fallen", down: "fallen", slain: "fallen", ko: "fallen", out: "fallen",
+  burning: "burning", afire: "burning", aflame: "burning", ablaze: "burning", ignited: "burning", onfire: "burning",
+};
+const STATUS_META = {
+  fallen:  { label: "fallen",  icon: "death", cls: "st-fallen" },
+  burning: { label: "burning", icon: "flame", cls: "st-burning" },
+};
+function partyMember(m) {
+  const rawS = firstStr(m.status, m.state, m.condition).toLowerCase().trim();
+  const status = PARTY_STATUS[rawS] || (rawS ? "other" : "ok");
+  return {
+    name: firstStr(m.name, m.who, m.hero).slice(0, 40),
+    hp: pickNum(m.hp, m.health),
+    max: pickNum(m.max_hp, m.hp_max, m.maxhp, m.hpmax),
+    cls: firstStr(m.class, m.calling).slice(0, 24),
+    status: status,
+    statusText: status === "other" ? titleCase(rawS).slice(0, 24) : "",
+  };
+}
+function normalizeParties(raw) {
+  return arr(raw)
+    .filter((p) => p && typeof p === "object")
+    .map((p) => ({
+      name: firstStr(p.name, p.band, p.party, p.title).slice(0, 60),
+      floor: (function () { const v = pickNum(p.floor, p.depth); return v != null && v >= 0 ? Math.round(v) : null; })(),
+      members: arr(p.members != null ? p.members : (p.roster != null ? p.roster : p.heroes))
+        .filter((m) => m && typeof m === "object")
+        .map(partyMember)
+        .filter((m) => m.name || m.hp != null)
+        .slice(0, MEMBER_MAX),
+    }))
+    .filter((p) => p.name || p.members.length)
+    .slice(0, PARTY_MAX);
+}
+// a member's HP bar - the same safe pattern as the hero hpBar: a real depletion bar
+// when max_hp is published, a flat vitality bar otherwise, the fill a CSSOM number
+// (never snapshot text). A fallen member reads empty and grey. Claims nothing it
+// was not told.
+function memberHpBar(m) {
+  const max = n0(m.max), hp = n0(m.hp);
+  const fallen = m.status === "fallen";
+  const hasMax = max > 0 && max >= hp;
+  let ratio = hasMax ? Math.max(0.03, Math.min(1, hp / max)) : 1;
+  if (fallen) ratio = 0;
+  const grade = fallen ? "gone" : !hasMax ? "flat" : ratio <= 0.25 ? "low" : ratio <= 0.5 ? "mid" : "ok";
+  const wrap = el("div", "hpbar " + grade);
+  wrap.setAttribute("role", "img");
+  wrap.setAttribute("aria-label", fallen ? "Fallen" : hasMax ? "Hit points " + hp + " of " + max : "Hit points " + hp);
+  const track = el("div", "hptrack");
+  const fill = el("span", "hpfill");
+  fill.style.setProperty("--hp", ratio);     // CSSOM number only, never snapshot text
+  track.append(fill);
+  wrap.append(el("span", "hpk", "HP"), track, el("span", "hpv", fallen ? "\u2014" : hasMax ? num(hp) + " / " + num(max) : num(hp)));
+  return wrap;
+}
+function memberRow(m) {
+  const li = el("li", "bmember" + (m.status === "fallen" ? " gone" : "") + (m.status === "burning" ? " burning" : ""));
+  const top = el("div", "bmtop");
+  const nm = el("span", "bmname");
+  nm.append(document.createTextNode(m.name || "(no name)"));        // viewer text: textContent
+  if (m.cls) nm.append(el("span", "bmcls", "  \u00b7  " + cap(m.cls)));
+  top.append(nm);
+  const meta = STATUS_META[m.status];
+  if (meta) {
+    const tag = el("span", "bmtag " + meta.cls);
+    tag.append(icon(meta.icon, "bmic"));                            // whitelisted glyph id
+    tag.append(document.createTextNode(meta.label));
+    top.append(tag);
+  } else if (m.status === "other" && m.statusText) {
+    top.append(el("span", "bmtag st-other", m.statusText));         // unknown status: its own name, as text
+  }
+  li.append(top);
+  if (m.hp != null) li.append(memberHpBar(m));
+  return li;
+}
+function partyCard(p) {
+  const card = el("div", "bandcard");
+  const head = el("div", "bandhead");
+  const nm = el("span", "bandname");
+  nm.append(document.createTextNode(p.name || "A band"));           // viewer text: textContent
+  head.append(nm);
+  if (p.floor != null) head.append(el("span", "bandfloor", "Floor " + num(p.floor)));
+  const total = p.members.length;
+  const fallen = p.members.filter((m) => m.status === "fallen").length;
+  if (total) head.append(el("span", "bandmeta",
+    total + (total === 1 ? " delver" : " delvers") + (fallen ? "  \u00b7  " + fallen + " fallen" : "")));
+  card.append(head);
+  const ul = el("ul", "bandmembers");
+  if (!p.members.length) ul.append(el("li", "empty", "No members reported for this band."));
+  else for (const m of p.members) ul.append(memberRow(m));
+  card.append(ul);
+  return card;
+}
+function renderBands(raw) {
+  const box = $("bandList");
+  if (!box) return;
+  const note = $("bandNote"), count = $("bandCount"), nb = $("nBands");
+  const parties = normalizeParties(raw);
+  box.replaceChildren();
+  if (nb) nb.textContent = parties.length ? parties.length : "";
+  if (!parties.length) {
+    box.append(el("p", "empty", "No bands are delving right now. When a party goes down into the scar it appears here \u2014 every member, with their health and whether they still stand."));
+    if (count) count.textContent = "";
+    if (note) note.textContent = "";
+    return;
+  }
+  for (const p of parties) box.append(partyCard(p));
+  const heads = parties.reduce((a, p) => a + p.members.length, 0);
+  if (count) count.textContent = parties.length + (parties.length === 1 ? " band" : " bands");
+  if (note) note.textContent = parties.length + (parties.length === 1 ? " band" : " bands")
+    + " in the scar now, " + heads + (heads === 1 ? " delver" : " delvers")
+    + " in all. The hub shows every active band; the stream no longer has to.";
 }
 
 // ============================================================ THE CHRONICLE
@@ -961,6 +1274,167 @@ function setUpDie() {
 }
 setUpDie();
 
+// ---------------------------------------------------------------- the town's rolls (H9)
+// The d20 is resolved IN THE GAME: a viewer spends channel points or bits, the game
+// rolls and applies the outcome (T5). The result rides the 60 s snapshot as p.rolls
+// (newest first) and shows here. This page only DISPLAYS it - it never initiates or
+// submits a roll, so the hub stays read-only (docs/HUB_SECURITY.md). Forward-
+// compatible, exactly like the hero HP/XP bars: the section lights up the day the
+// publisher sends the field and shows an honest empty state until then. It invents
+// no roll and never derives an outcome from the number.
+//
+// CONTRACT (also in web/NOTES.md). Each entry is an object; every field optional and
+// defended. Canonical key, then accepted aliases:
+//   n      1..20, the face rolled     (roll, d20, face, value)
+//   by     the roller's display name  (who, name, viewer)      - viewer text
+//   what   what was attempted         (title, proposition, action) - viewer text
+//   tier   outcome band: crit|good|mixed|bad|fumble (aliases in TIER_ALIAS)
+//   result the plain-language outcome (s, text, line)          - viewer text
+//   cost   what was spent, e.g. "500 channel points" (spent)
+//   at     ISO timestamp              (time)
+// Every string reaches the DOM only through el()/textContent; `tier` only ever picks
+// a whitelisted CSS class; no field is ever used as a URL/src/href/style.
+const ROLL_FEED_MAX = 30;
+const TIER = {
+  crit:   { label: "Triumph" },
+  good:   { label: "It goes well" },
+  mixed:  { label: "A mixed result" },
+  bad:    { label: "It goes badly" },
+  fumble: { label: "A fumble" },
+};
+const TIER_ALIAS = {
+  crit: "crit", critical: "crit", triumph: "crit", nat20: "crit",
+  good: "good", success: "good", great: "good", pass: "good", win: "good",
+  mixed: "mixed", partial: "mixed", neutral: "mixed",
+  bad: "bad", fail: "bad", failure: "bad", backfire: "bad", loss: "bad",
+  fumble: "fumble", botch: "fumble", disaster: "fumble", nat1: "fumble",
+};
+function rollFaceOf(r) {
+  const v = pickNum(r.n, r.roll, r.d20, r.face, r.value);
+  return (v != null && v >= 1 && v <= 20) ? Math.round(v) : null;
+}
+function rollTierOf(r) {
+  const raw = String(r.tier ?? r.band ?? r.result_tier ?? "").toLowerCase().trim();
+  return TIER_ALIAS[raw] || null;          // unknown or absent -> no tier claimed
+}
+function firstStr(...vals) { for (const v of vals) if (v != null && String(v).trim() !== "") return String(v); return ""; }
+
+function normalizeRolls(raw) {
+  return arr(raw)
+    .filter((r) => r && typeof r === "object")
+    .map((r) => ({
+      face: rollFaceOf(r),
+      by: firstStr(r.by, r.who, r.name, r.viewer).slice(0, 40),
+      what: firstStr(r.what, r.title, r.proposition, r.action).slice(0, 180),
+      result: firstStr(r.result, r.s, r.text, r.line).slice(0, 400),
+      cost: firstStr(r.cost, r.spent).slice(0, 60),
+      tier: rollTierOf(r),
+      at: typeof r.at === "string" ? r.at : (typeof r.time === "string" ? r.time : ""),
+    }))
+    .filter((r) => r.face != null || r.result || r.what)   // drop entries with nothing to show
+    .slice(0, ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
+}
+
+// throw the die to a KNOWN value and settle on that face. Used by the town-roll
+// display (H9); it never chooses the value and never contacts anything. A standalone
+// twin of the viewer-tap animation, sharing the d20busy guard so the two never fight.
+function throwDie(value, done) {
+  const btn = $("d20"), cage = $("d20cage");
+  if (!btn || !cage) { if (done) done(); return; }
+  d20busy = true;
+  btn.classList.remove("crit", "crat", "land");
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const settle = () => {
+    d20spins += 2;
+    const base = "matrix3d(" + restFor(value).join(",") + ")";
+    cage.style.transform = calm ? base
+      : `rotateX(${d20spins * 360}deg) rotateY(${d20spins * 360}deg) ${base}`;
+  };
+  const finish = () => {
+    btn.classList.add("land");
+    btn.classList.toggle("crit", value === 20);
+    btn.classList.toggle("crat", value === 1);
+    d20busy = false;
+    if (done) done();
+  };
+  if (calm) { settle(); finish(); }
+  else {
+    btn.classList.add("rolling");
+    setTimeout(() => { btn.classList.remove("rolling"); settle(); setTimeout(finish, 650); }, 520);
+  }
+}
+
+let lastRollKey = null;      // internal only (never written to the DOM): detects a new top roll
+function rollKey(r) { return JSON.stringify([r.at, r.by, r.face, r.result]); }
+
+// one entry in the rolls feed. Mirrors a chronicle row: a die-face badge, a head
+// (who / what / tier / when) and the plain-language outcome line.
+function rollEntry(r) {
+  const li = el("li", "rentry" + (r.tier ? " tier-" + r.tier : "")
+    + (r.face === 20 ? " crit" : r.face === 1 ? " crat" : ""));
+  const face = el("span", "rface");
+  face.setAttribute("aria-hidden", "true");
+  face.append(el("span", "rfacen", r.face != null ? r.face : "\u00b7"));
+  li.append(face);
+  const body = el("div", "rbody");
+  const head = el("div", "rhead");
+  head.append(el("span", "rby", r.by || "A viewer"));          // viewer text: textContent
+  if (r.what) head.append(el("span", "rwhat", r.what));
+  if (r.tier) head.append(el("span", "rtier rt-" + r.tier, TIER[r.tier].label));  // whitelisted class
+  const a = ago(r.at);
+  if (a) { const time = el("time", "rwhen", a.text); time.dateTime = r.at; time.title = when(r.at); head.append(time); }
+  body.append(head);
+  if (r.cost) body.append(el("span", "rcost", r.cost));
+  if (r.result) body.append(el("p", "rline", r.result));
+  li.append(body);
+  return li;
+}
+
+// announce the latest town roll on the shared die. On first sight, a busy die, or
+// reduced motion, it just settles to the face; a genuinely new roll tumbles to it.
+function announceTownRoll(r, first) {
+  const say = $("d20result"), cage = $("d20cage"), btn = $("d20");
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const setText = () => {
+    if (!say) return;
+    say.replaceChildren();
+    say.append(el("b", null, String(r.face)));
+    say.append(document.createTextNode(" \u00b7 " + (r.by ? r.by + "\u2019s roll for the town" : "the town\u2019s roll")));
+    if (r.tier) { say.append(document.createTextNode(" \u2014 ")); say.append(el("span", "rt rt-" + r.tier, TIER[r.tier].label)); }
+  };
+  if (first || d20busy || calm) {
+    if (cage && !d20busy) cage.style.transform = "matrix3d(" + restFor(r.face).join(",") + ")";
+    if (btn && !d20busy) { btn.classList.remove("rolling"); btn.classList.toggle("crit", r.face === 20); btn.classList.toggle("crat", r.face === 1); }
+    setText();
+  } else {
+    if (say) say.textContent = "The town rolls\u2026";
+    throwDie(r.face, setText);
+  }
+}
+
+function renderRolls(raw) {
+  const feed = $("rollFeed"), note = $("rollNote");
+  if (!feed || !note) return;
+  const rolls = normalizeRolls(raw);
+  feed.replaceChildren();
+  if (!rolls.length) {
+    lastRollKey = null;     // so the next real roll animates fresh
+    note.className = "note quiet";
+    note.textContent = "No rolls from the town yet. When a viewer spends channel points or bits to roll the die for the town \u2014 to pass a law, set off an event or raise a building \u2014 the roll and how it turns out appear here. The die is thrown in the game; this page only reports it.";
+    return;
+  }
+  for (const r of rolls) feed.append(rollEntry(r));
+  note.className = "note";
+  note.textContent = rolls.length + (rolls.length === 1 ? " roll" : " rolls") + " from the town, newest first. The die above shows the latest.";
+  const top = rolls[0];
+  const key = rollKey(top);
+  if (key !== lastRollKey) {
+    const first = lastRollKey === null;
+    lastRollKey = key;
+    if (top.face != null) announceTownRoll(top, first);
+  }
+}
+
 // ---------------------------------------------------------------- problem state
 function showProblem(msg) {
   const box = $("nothing");
@@ -1238,6 +1712,7 @@ function highlightMyHero(login) {
     signinSay("You're signed in as " + login + ", but no living hero carries that name yet. Type !enlist in chat to raise one.", "ok");
     return;
   }
+  storeMyHero(mine.name);               // H11: remember the signed-in viewer's own hero
   heroFilter = login; heroShown = HERO_PAGE;
   renderHeroes(heroes);
   const card = [...$("heroList").querySelectorAll("details.hero")]
@@ -1291,9 +1766,48 @@ const MOCK_CHRONICLE = [
   { t: "wat", s: "A kind the page has never heard of, which must still render.", at: new Date(Date.now() - 30 * 3600000).toISOString() },
   { t: "fight", s: "A stat line with no stamp at all.", at: "" },
 ];
+// ?mock=roll: stand-in town rolls (the publisher sends no rolls yet). Exercises every
+// tier, a cost-less entry, and - deliberately - the hostile name as the roller, which
+// must render as literal text. The hostile entry is NOT the newest, so the die's
+// announcement shows a safe name while the feed proves the escape on the hostile one.
+const MOCK_ROLLS = [
+  { n: 20, by: "Brum the Cooper", what: "Raise the watchtower on the west wall", tier: "crit", cost: "800 channel points",
+    result: "A natural twenty — the tower is up in a day and the masons sing. The west wall has never been safer.", at: new Date(Date.now() - 1 * 60000).toISOString() },
+  { n: 3, by: "<img src=x onerror=alert(1)>", what: "Lower the gate toll on outsiders", tier: "bad", cost: "500 bits",
+    result: "It goes badly: smugglers slip in among the merchants and the treasury is lighter by morning.", at: new Date(Date.now() - 6 * 60000).toISOString() },
+  { n: 11, by: "Sedge the Toll", what: "Call a harvest festival", tier: "mixed", cost: "300 channel points",
+    result: "A mixed result — the ale flows and spirits lift, but three delvers are too merry to go down the next day.", at: new Date(Date.now() - 22 * 60000).toISOString() },
+  { n: 1, by: "Cob Ashfoot", what: "Conscript the farmhands into the militia", tier: "fumble", cost: "650 bits",
+    result: "A fumble. The recruits drill into each other, a hayrick catches fire, and the fields stand untended.", at: new Date(Date.now() - 55 * 60000).toISOString() },
+  { n: 17, by: "The Weasel", what: "Bless the delvers before the descent", tier: "good",
+    result: "It goes well: the party goes down under a good omen and all four come home whole.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
+];
+// ?mock=bands: stand-in delving parties (the publisher sends no p.parties yet, D46).
+// Exercises a healthy member, an injured member (hp/max -> real depletion), a member
+// with hp but no max (flat vitality bar), a member with NO hp (name only, no bar), a
+// burning member, a fallen member, and an UNKNOWN status (rendered as its own text).
+// The hostile name is used as BOTH a band name and a member name - it must render as
+// literal text, never execute.
+const MOCK_PARTIES = [
+  { name: "The Ford Wardens", floor: 7, members: [
+    { name: "Brum the Cooper", hp: 34, max_hp: 40, status: "ok", class: "knight" },
+    { name: "Sedge the Toll", hp: 9, max_hp: 44, status: "burning", class: "ranger" },
+    { name: "<img src=x onerror=alert(1)>", hp: 0, max_hp: 38, status: "fallen", class: "mage" },
+    { name: "Cob Ashfoot", hp: 21, status: "ok", class: "rogue" },
+  ] },
+  { name: "<img src=x onerror=alert(1)>", floor: 3, members: [
+    { name: "The Weasel", hp: 12, max_hp: 26, status: "poisoned" },
+    { name: "Maddock", status: "ok" },
+  ] },
+  { name: "Lone Delver", members: [
+    { name: "Grey Pell", hp: 18, max_hp: 30, status: "ok", class: "cleric" },
+  ] },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "roll") out.rolls = MOCK_ROLLS;
+  if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];
@@ -1308,7 +1822,7 @@ function withMock(p) {
         standing: (i * 37) % 300, ac: 12 + (i % 6), hp: 20 + i, gold: (i * 53) % 900,
         kills: (i * 7) % 60, deepest: i % 13, delves: i % 11, xp: i * 10, to_hit: 4, prof: 2,
         saves: "STR +4", stats: { str: 10 + (i % 8), dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
-        weapon: { name: weapons[i % 4], dice: "1d8" }, armour: { name: "mail" },
+        weapon: { name: weapons[i % 4], dice: "1d8", sell: 30 + (i % 20) }, armour: { name: "mail", sell: i % 4 === 0 ? 45 : undefined },
         // a few heroes carry the forward-compatible fields, to exercise the real
         // HP/XP bars, the dye swatch and a title (the publisher can add these any time)
         max_hp: i % 3 === 0 ? 40 + i * 2 : undefined,
@@ -1316,6 +1830,12 @@ function withMock(p) {
         worn: i % 5 === 0 ? "a corgi, a crown" : "",
         dye: i % 4 === 0 ? dyes[(i / 4) % 4 | 0] : undefined,
         title: i % 6 === 0 ? titles[(i / 6) % 4 | 0] : "",
+        satchel: i < 3 ? [
+          { name: i === 0 ? "<img src=x onerror=alert(1)>" : "Moonlit dagger", qty: 1, sell: 120, kind: "weapon" },
+          { name: "Healing draught", qty: 2, sell: 15, kind: "potion" },
+          { name: "Scar-touched gem", sell: 300, kind: "gem" },
+          { name: "A curio of no fixed worth", kind: "trinket" },
+        ] : undefined,
         oil: i % 4, potions: i % 3, brews: "",
       });
     }

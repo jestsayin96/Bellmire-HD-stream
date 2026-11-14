@@ -445,3 +445,97 @@ Verified before push:
   CAP ACK, 001 Welcome, JOIN #jestsayin96 and ROOMSTATE. (The page's own socket couldn't be
   exercised end-to-end from the build sandbox - its proxy blocks raw WebSockets - which is also
   why the "lost its footing" retry state is known to render correctly.)
+
+
+## H9 - the town's rolls on the die (2026-11-13)
+
+Mr. E's Phase-N ruling: a viewer spends channel points or bits and a d20 decides how a town
+action goes (upgrade a building, pass a law, set off an event). The supervisor's architecture
+ruling is that the roll is resolved IN THE GAME (T5) and the hub only DISPLAYS it - the page
+stays read-only and never trips the Phase-3 RLS gate. H9 is the hub half: the die section now
+shows the town's rolls, read from the snapshot, and the big d20 animates to the latest one.
+
+Why it lives in the existing die section rather than a new panel: the d20 was already the page's
+one piece of motion and the obvious home for "a roll and its outcome". The local tap-to-roll
+stays (it is honestly yours - it happens in your browser, the town never hears it); when the
+town rolls, the same die shows that instead. One stage, two sources, clearly labelled.
+
+Forward-compatible, the same discipline as the HP/XP bars and the raids pill: the publisher
+(scripts/snapshot_pub.gd on main, DESKTOP BUILD) sends no `rolls` yet, so the section shows an
+honest empty state and the die stays the local fun die. It lights up with NO page change the day
+the field arrives. The hub makes no claim about a roll until the game sends it, and never derives
+an outcome tier from the number - a low roll is only "bad" if the game says so.
+
+### The data contract (publisher: add `rolls` to the snapshot payload, newest first)
+An array of objects; every field optional and defended. Canonical key, then accepted aliases:
+- `n`      - the face rolled, 1..20            (aliases: roll, d20, face, value)
+- `by`     - the roller's Twitch display name  (aliases: who, name, viewer)  [viewer text]
+- `what`   - what was attempted / the proposition (aliases: title, proposition, action) [viewer text]
+- `tier`   - the outcome band: one of crit | good | mixed | bad | fumble (aliases in TIER_ALIAS)
+- `result` - the plain-language outcome         (aliases: s, text, line)  [viewer text]
+- `cost`   - what was spent, e.g. "500 channel points"  (alias: spent)
+- `at`     - ISO timestamp                      (alias: time)
+
+Outcome tiers are deliberately WORD-first (Triumph / It goes well / A mixed result / It goes
+badly / A fumble), readable to someone who has never played D&D (T5's requirement); colour only
+reinforces them. Keep the result sentences plain, and always ship at least one failure outcome,
+not only wins - the feed is honest about backfires. Rendering is the same security as the
+chronicle: every string is textContent via el(); `tier` only selects a whitelisted class; `n`
+only picks a fixed rotation matrix; nothing becomes a URL. Local check: ?mock=roll (it carries
+the hostile-name canary as the roller). Reviewed in docs/HUB_SECURITY.md (H9).
+
+
+============================================================
+BANDS BELOW (H10) - the delving parties on the hub
+============================================================
+
+Mr. E (Phase Y): the on-stream party band "covers up most of the screen", so it leaves the
+stream (D46) and moves to the hub, "which has the room". The hub shows ALL active parties, not
+just the one the stream could fit.
+
+Why it lives here and not on stream: the stream is being stripped to Mr. E's six elements
+(COORDINATION 13); a multi-member band board is detail that belongs where there is room to read
+it. The hub already carries the hero sheets, so the bands-below view is the same honest data in
+a place with space.
+
+The contract (p.parties, optional, pinned for D46 - also in docs/HUB_SECURITY.md):
+  parties: [ { name, floor, members: [ { name, hp, max_hp, status, class } ] } ]
+  - name    band display name   (aliases band/party/title)   viewer text
+  - floor   integer floor        (alias depth)
+  - members name (who/hero), hp (health), max_hp (hp_max/maxhp/hpmax),
+            status ok|fallen|burning|<other> (state/condition), class (calling)
+
+Honesty, as everywhere else on this page:
+  - No parties field, or an empty array  -> "No bands are delving right now." Never a fake band.
+  - max_hp present -> a real depletion bar; absent -> a flat vitality bar; no hp -> no bar.
+  - status ok -> no tag (the bar says enough); fallen -> skull + greyed + empty bar;
+    burning -> flame + warm edge; anything else -> its own word as plain text, no icon.
+  - The hub DISPLAYS; it never initiates a delve or writes anything. Read-only, as Phase 2 demands.
+
+Security: identical discipline to the rolls feed. Every band/member string is hostile Twitch
+text and reaches the DOM only via el()/textContent; HP widths are CSSOM numbers; status only
+picks a whitelisted class + ICON_SET glyph. Verified with ?mock=bands and a live v2 payload.
+
+
+---
+
+## 5. H11 - what left the stream (the Satchel + "my hero")
+
+D48/L63 take the unit frame and the Satchel off the stream; their content moves here.
+
+**The Satchel (sell prices).** The on-stream Satchel showed a viewer their sellable items and
+the counter's prices. The hub shows the same on the hero sheet, read-only from the snapshot and
+forward-compatible exactly like the HP/XP bars: the block appears only once the publisher sends
+the items, and invents nothing. Prices and the total are page-computed (tabular, per the
+numbers research above); item names are viewer text through el()/textContent. Contract (also in
+docs/HUB_SECURITY.md): per-hero `satchel` = array of {name, qty, sell, kind}; aliases inventory/
+items, and value/sell_price/price/worth for the price; optional `satchel_total` for the
+counter's authoritative payout; a `sell` on the equipped weapon/armour lists it too.
+
+**"My hero" pin.** The stream always kept a viewer's own hero in view; a login-less page cannot,
+so the hub lets a viewer pin ONE hero by name (a button on the sheet, or automatically on Twitch
+sign-in). It is remembered in the browser (localStorage, the hero NAME only - never a token or
+id) so the hero floats to the top, opens and is highlighted next visit. This is the neighbourhood
+-view idea (section 3) carried to the whole page, and the no-login stand-in for the Satchel's
+always-on "your hero". Research consensus on personalization: the single most-used view is "me" -
+surface the viewer's own row first and everything else reads as context around it.

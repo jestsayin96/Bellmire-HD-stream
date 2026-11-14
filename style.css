@@ -524,6 +524,43 @@ ol.d20hist { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-
 .hroll.crat { color: var(--bad); border-color: var(--bad); }
 ol.d20hist .empty { font-style: italic; }
 
+/* ======================================================= THE TOWN'S ROLLS (H9)
+   The town's d20 rolls, read from the snapshot (resolved in the game, T5). Mirrors
+   the Chronicle row - a die-face badge, a head, the plain-language outcome - on the
+   same parchment. The outcome tier is a whitelisted class only; viewer text is
+   textContent. */
+.townrolls { width: 100%; max-width: 40em; margin: 4px auto 0; }
+.townrolls .eyebrow { text-align: center; }
+ol.rollfeed { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.rentry { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; background: #f2e2bd; border-radius: 7px; padding: 8px 12px 8px 8px; border-left: 3px solid var(--ink-soft); text-align: left; }
+.rface { display: inline-grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 8px; background: var(--parch); border: 1px solid var(--edge-2); color: var(--ink); margin-top: 1px; }
+.rfacen { font: 700 1.2rem/1 var(--ui); color: inherit; font-variant-numeric: tabular-nums; }
+.rbody { min-width: 0; }
+.rhead { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+.rby { font-weight: 700; color: var(--gold-dk); overflow-wrap: anywhere; }
+.rwhat { font-size: .9rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.rwhen { margin-left: auto; color: var(--ink-soft); font-weight: 600; white-space: nowrap; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.rtier { font-size: .64rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--parch-hi); background: var(--ink-soft); border-radius: 3px; padding: 1px 6px; }
+.rcost { display: inline-block; margin: 3px 0 0; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+.rline { margin: 3px 0 0; font-size: .96rem; color: var(--ink); overflow-wrap: anywhere; }
+/* outcome tiers - teal for a triumph / a good turn, gold for mixed, warn/bad for the low end.
+   Each pairs a left-border colour, a face ring and the tier pill; the WORD carries the meaning. */
+.rt-crit,   .rentry.tier-crit   .rtier { color: #f3ecd6; background: var(--teal-ink); }
+.rentry.tier-crit   { border-left-color: var(--teal-ink); }
+.rentry.tier-crit   .rface { border-color: var(--teal-ink); box-shadow: 0 0 10px rgba(35,166,160,.4); }
+.rt-good,   .rentry.tier-good   .rtier { color: #f3ecd6; background: var(--teal-ink); }
+.rentry.tier-good   { border-left-color: var(--teal); }
+.rt-mixed,  .rentry.tier-mixed  .rtier { color: var(--ink); background: var(--parch-lo); }
+.rentry.tier-mixed  { border-left-color: var(--gold-dk); }
+.rt-bad,    .rentry.tier-bad    .rtier { color: var(--parch-hi); background: var(--warn); }
+.rentry.tier-bad    { border-left-color: var(--warn); }
+.rt-fumble, .rentry.tier-fumble .rtier { color: var(--parch-hi); background: var(--bad); }
+.rentry.tier-fumble { border-left-color: var(--bad); }
+.rentry.tier-fumble .rface, .rentry.crat .rface { border-color: var(--bad); }
+.rentry.crit .rface { border-color: var(--teal-ink); }
+/* the inline tier pill in the die's announcement line (on parchment) */
+.d20result .rt { font-size: .66rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: 3px; padding: 1px 6px; vertical-align: 2px; margin-left: 2px; }
+
 /* ======================================================= geometry (generated) */
 .d20cage{width:108.000px;height:93.531px}
 .d20face{width:108.000px;height:93.531px;margin-left:-54.000px;margin-top:-46.765px}
@@ -620,6 +657,32 @@ footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: c
    a 1080-tall source; the page background goes transparent so it sits over the
    capture. Everything stays on-brand parchment, a touch larger for distance.
    ======================================================================== */
+/* ======================================================= BANDS BELOW (H10)
+   The parties currently delving, from the snapshot's parties array (the D46
+   contract, docs/HUB_SECURITY.md). Every name is attacker-shaped Twitch text set
+   via el()/textContent; HP widths are page-computed CSSOM numbers; status picks a
+   whitelisted icon + class, never markup or a URL. House palette, parchment panel. */
+.bands { display: grid; gap: 12px; }
+.bandcard { background: #f2e2bd; border: 1px solid var(--edge-2); border-left: 3px solid var(--teal-ink); border-radius: 8px; padding: 10px 12px; }
+.bandhead { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.bandname { font-weight: 700; color: var(--ink); font-size: 1.02rem; overflow-wrap: anywhere; min-width: 0; }
+.bandfloor { font-size: .7rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--parch-hi); background: var(--teal-ink); border-radius: 3px; padding: 2px 7px; white-space: nowrap; }
+.bandmeta { margin-left: auto; font-size: .76rem; color: var(--ink-soft); font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
+ul.bandmembers { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bmember { background: var(--parch); border: 1px solid var(--edge-2); border-radius: 7px; padding: 7px 10px; display: grid; gap: 6px; }
+.bmember.gone { opacity: .6; }
+.bmember.burning { border-left: 3px solid var(--warn); }
+.bmtop { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.bmname { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
+.bmcls { font-weight: 600; color: var(--ink-soft); font-size: .85rem; }
+.bmtag { display: inline-flex; align-items: center; gap: 5px; font-size: .62rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px; margin-left: auto; white-space: nowrap; }
+.bmic { width: 1.05em; height: 1.05em; }
+.bmtag.st-fallen  { color: var(--parch-hi); background: var(--bad); }
+.bmtag.st-burning { color: var(--parch-hi); background: var(--warn); }
+.bmtag.st-other   { color: var(--ink); background: var(--parch-lo); }
+/* a fallen member's bar reads empty and grey - honest, no invented vitality */
+.hpbar.gone .hpfill { background: #8a8278; }
+
 html.overlay, html.overlay body { background: transparent !important; }
 html.overlay .wrap { max-width: 440px; margin: 0; padding: 10px 10px 14px; }
 html.overlay nav,
@@ -770,3 +833,39 @@ html.overlay #chat { display: none !important; }
 .signinlink { color: var(--teal-ink); font-weight: 600; }
 details.hero.mine { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(35,166,160,.45); }
 html.overlay #signin { display: none !important; }
+/* Bands Below is exactly what D46 moved OFF the stream - the overlay is the on-stream
+   column, so it must NOT show the bands again. */
+html.overlay #bands { display: none !important; }
+
+
+/* ============================================================ H11: my hero + the Satchel
+   The viewer's pinned hero and the sellable-items sheet - the hub home for what the
+   on-stream Satchel (L51) used to show before D48/L63 took it off the stream. All of
+   this lives inside #heroes, which html.overlay already hides, so none of it appears on
+   the stream column. Numbers are tabular; nothing here is built from snapshot markup. */
+.myhero { margin: 0 0 11px; padding: 9px 12px; background: rgba(35,166,160,.08);
+  border: 1px solid var(--edge-2); border-left: 3px solid var(--teal); border-radius: 8px; }
+.myhero.hide { display: none; }
+.myhero .mhline { margin: 0; font-size: .92rem; color: var(--ink); }
+.mhlabel { color: var(--ink-soft); }
+.mhname { color: var(--teal-ink); overflow-wrap: anywhere; }
+.mhgone { color: var(--ink-soft); font-style: italic; }
+
+.sheethead { display: flex; justify-content: flex-end; margin: 1px 0 -2px; }
+.pinbtn { font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer;
+  color: var(--teal-ink); background: none; border: 1px solid var(--edge-2);
+  border-radius: 999px; padding: 3px 12px; }
+.pinbtn.on { color: var(--ink); background: rgba(35,166,160,.14); border-color: var(--teal); }
+.pinbtn:focus-visible { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(35,166,160,.2); }
+
+.satchel { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.satchel .sitem { display: flex; align-items: center; gap: 9px; background: var(--parch);
+  border: 1px solid var(--edge-2); border-radius: 7px; padding: 6px 10px; }
+.sic { width: 1.25em; height: 1.25em; flex: none; color: var(--gold-dk); }
+.sname { flex: 1 1 auto; min-width: 0; color: var(--ink); overflow-wrap: anywhere; }
+.sqty { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.stag { margin-left: 7px; font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.sprice { flex: none; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.satchelfoot { margin: 6px 0 0; font-size: .9rem; color: var(--ink); }
+.satchelfoot .sk { color: var(--ink-soft); }
+.satchelfoot b { color: var(--gold-dk); font-variant-numeric: tabular-nums; }

@@ -76,6 +76,7 @@ var _validate_t := VALIDATE_EVERY
 var reward_ids := {}                 # key -> Twitch reward id (ours)
 var rewards_ok := false
 var rewards_note := ""
+var rewards_resync := false          # cfg [twitch] rewards_resync: force (re)adopt/create missing rewards this run
 
 var _ws := WebSocketPeer.new()
 var _ws_next: WebSocketPeer = null   # session_reconnect: the new socket until it says welcome
@@ -143,6 +144,8 @@ func _load_cfg() -> void:
                 enabled = false
             if not bool(c.get_value("twitch", "eventsub", true)):
                 enabled = false
+            if bool(c.get_value("twitch", "rewards_resync", false)):
+                rewards_resync = true
 
 func _say_log(s: String) -> void:
     print(s)
@@ -306,9 +309,14 @@ static func title_ok(title: String) -> bool:
             return false
     return true
 
-## Finds Bellmire's own rewards (only_manageable_rewards = made by this client id) and
-## makes any that are missing. Matching is by id; a title is only used to adopt a reward
-## this same client id already made (a lost rewards file).
+## EDIT-PROOF reward handling. Bellmire's own rewards are matched BY STORED ID, so Mr. E
+## can freely edit a reward's title, cost, colour, icon or prompt on Twitch and the game
+## stays connected to it (the id never changes). What the game will NOT do is resurrect a
+## reward he removed: once we hold saved ids, a reward whose id has vanished is left OFF
+## (not recreated as a duplicate). The game only CREATES or re-ADOPTS rewards when it is
+## bootstrapping - the first run with no saved ids file, or an explicit resync
+## ([twitch] rewards_resync=true in local/twitch.cfg or user://twitch.cfg). On a resync it
+## adopts an existing reward by exact title before making a new one, so it never dupes.
 func ensure_rewards() -> void:
     if offline:
         return
@@ -319,18 +327,34 @@ func ensure_rewards() -> void:
         rewards_note = _err_text(r)
         _say_log("TWITCH_EVENTSUB rewards unavailable (%d %s). Spotlight-by-points is off; bits, subs and follows still work. The broadcaster token needs channel:manage:redemptions." % [int(r["code"]), rewards_note])
         return
-    var mine := {}                  # id -> title
+    var mine := {}                  # id -> title (our client's current rewards on the channel)
     for rw in (r["json"] as Dictionary).get("data", []):
         mine[String(rw["id"])] = String(rw["title"])
+    # bootstrap = we may adopt/create missing rewards this run; otherwise we touch nothing
+    # the broadcaster has changed. First ever run (no file) or an explicit resync bootstraps.
+    var bootstrap := reward_ids.is_empty() or rewards_resync
     for key in REWARDS:
         var want: Dictionary = REWARDS[key]
+        # a stored id that is still on the channel -> keep it as-is, whatever its title/cost/
+        # colour are now. This is what makes editing a reward on Twitch safe.
         if reward_ids.has(key) and mine.has(String(reward_ids[key])):
             continue
+        var had_saved := reward_ids.has(key)
         reward_ids.erase(key)
+        # steady state (not bootstrapping): a reward we knew is gone -> the broadcaster deleted
+        # it on purpose. Leave it off; do NOT recreate a ghost duplicate.
+        if had_saved and not bootstrap:
+            _say_log("TWITCH_EVENTSUB reward '%s' is no longer on the channel - its redemptions are off. Set [twitch] rewards_resync=true to remake it." % want["title"])
+            continue
+        # bootstrap/resync: adopt an existing reward by exact title (recovers a lost ids file
+        # without duplicating), else fall through and make it.
         for id in mine:
             if mine[id] == String(want["title"]):
                 reward_ids[key] = id
         if reward_ids.has(key):
+            continue
+        # no saved id and not bootstrapping -> never spawn a reward on our own
+        if not bootstrap:
             continue
         if not title_ok(String(want["title"])):
             _say_log("TWITCH_EVENTSUB reward title %s uses a fightoverlay word - not made" % want["title"])
@@ -345,6 +369,9 @@ func ensure_rewards() -> void:
         else:
             rewards_note = _err_text(c)
             _say_log("TWITCH_EVENTSUB could not make reward %s (%d %s)" % [want["title"], int(c["code"]), rewards_note])
+    if rewards_resync:
+        _say_log("TWITCH_EVENTSUB rewards resync done - set rewards_resync back to false to keep edits safe.")
+    rewards_resync = false
     rewards_ok = not reward_ids.is_empty()
     _save_rewards()
 

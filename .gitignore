@@ -24,3 +24,6 @@ _audio_import.log
 _l20_retry.log
 _d8_soak.log
 _soak*.log
+
+# standalone export output
+build/

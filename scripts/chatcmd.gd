@@ -40,6 +40,8 @@ var away := {}
 var catches_of: Callable
 ## L17: the spotlight hands chat its put(uid, lane, seconds, reason) -> line (set by Spotlight.setup)
 var spot: Callable
+## T1: the eventsub hands chat its _do_bits_tier(uid, bits) so !testbits fires town-wide effects
+var bits_tier_fn: Callable
 ## L18: when each viewer last used a command (Time ticks, ms) - the director favours
 ## the freshest chatters and their name glows for a few seconds (HeroBody.glow)
 static var last_cmd := {}
@@ -196,6 +198,8 @@ func _test_spot(user_id: String, verb: String, arg: String, arg2: String) -> Str
     match verb:
         "testbits":
             var n := maxi(1, int(arg)) if arg.is_valid_int() else 100
+            if bits_tier_fn.is_valid():
+                bits_tier_fn.call(uid, n)
             return _spot(uid, "bits", Spotlight.bits_seconds(n), "cheered %d bits" % n)
         "testsub":
             return _spot(uid, "subs", Spotlight.SUB_S, "subscribed")

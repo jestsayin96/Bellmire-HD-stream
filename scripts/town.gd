@@ -164,6 +164,7 @@ var economy: Economy
 ## the viewers' party goes in together: once nobody queued is still on the road
 ## to the scar (a few seconds after the last arrives), or 45 s after the first
 ## arrival with whoever is there - and never while their last delve is below
+const MUSTER_HOLD := 20.0    # Mr. E: min seconds to gather a party before a cleared road launches it
 var _muster_t := -1.0
 var _since_last := 0.0
 
@@ -176,7 +177,9 @@ func _viewer_muster(delta: float) -> void:
     for uid in chat.away:
         if String(chat.away[uid]) == "on the road to the scar":
             on_road += 1
-    if (on_road == 0 and _since_last > 4.0) or _muster_t > 45.0:
+    # Mr. E: hold the mouth open a short while so others can !delve / "Join the delve"
+    # and go in TOGETHER - a lone arrival no longer launches a party of one instantly.
+    if _muster_t > 45.0 or (on_road == 0 and _since_last > 4.0 and _muster_t >= MUSTER_HOLD):
         _muster_t = -1.0
         _begin_delve()
 var raids: Raids
@@ -4768,6 +4771,25 @@ func _on_fish(uid: String) -> void:
             feed.append("%s lands a %s (%s)!" % [who, item.get("name"), item.get("rarity")])
             print("FEED ", feed.back()))
         b.add_child(ang))
+
+## Rally (bits/points reward): a strong combat buff on the hero's next delve
+## (or their live delve if they are already below). Grants giant/haste/heroism/
+## regenerating for RALLY_SECS via the delve's state system.
+const RALLY_SECS := 90.0
+
+func _on_rally(uid: String) -> void:
+    if roster == null:
+        return
+    var h: Dictionary = roster.get_hero(uid)
+    if h.is_empty() or not bool(h.get("alive", true)):
+        return
+    var hname := String(h.get("name", "A hero"))
+    # already delving -> apply to the live combatant; else leave a pending flag
+    var live := delve != null and delve.has_method("apply_rally") and bool(delve.call("apply_rally", uid, RALLY_SECS))
+    if not live:
+        h["rally_secs"] = RALLY_SECS
+        feed.append("%s is rallied - strength, speed, courage, and a healer's touch wait for their next delve." % hname)
+        print("FEED ", feed.back())
 
 func _on_delve(uid: String) -> void:
     if not heroes.has(uid) or not _scar_info.has("post"):

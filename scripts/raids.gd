@@ -170,6 +170,8 @@ func _defenders() -> Array:
         var role := String((p as Townsfolk).role)
         if not is_hero and role != "guard" and role != "chief":
             continue
+        if not is_hero and (p as Townsfolk).notable_title == "Commander of the Guards":
+            continue          # D37: E3PO is immortal - he never joins the fall-able roster
         if String((p as Townsfolk).gear_role) == "lookout":
             continue          # the tower lookouts keep their towers
         if not _fighters.has(p):

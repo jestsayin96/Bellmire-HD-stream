@@ -84,7 +84,10 @@ func setup(t) -> void:
 
 ## ---------------------------------------------------------------- levels
 func show_level(lv: int, quiet := false) -> void:
-    lv = clampi(lv, 1, TOP_LEVEL)
+    # D32: economy now has 12 tiers but the visual build has 6 stages. Map two
+    # tiers per stage so construction spreads across the longer climb, and keep
+    # `level` in 1..6 - the contract town.gd's garrison sizing reads.
+    lv = clampi((lv + 1) / 2, 1, TOP_LEVEL)
     var was := level
     level = lv
     for k in _layers:

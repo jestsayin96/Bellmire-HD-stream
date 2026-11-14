@@ -937,3 +937,82 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - CROSS-WORKER FLAG (content/laptop): _sound_review coverage A fails on unique monster 'new ashwight'
   having no registered voice kind (bestiary/monster/bosses.json) - pre-existing, not desktop-owned,
   unrelated to the town-silence fix.
+
+
+## D-cycle D9 - D53 TOWED WAGONS STAY ATTACHED TO THEIR HAULER
+- Mr. E clip 14-31-18: "the cart is moving on its own ... supposed to be attached to this guy, but it
+  wasn't." DIAGNOSED (townsfolk.gd _physics_process cart-follow): the wagon chased a point 2.6 m behind
+  the carter at a 4 m/s crawl placed AFTER the LOD throttle, so any jump (door exit, respawn, raid reset,
+  far-LOD chunk) left it gliding across open ground untethered; a stale _park target could also pin it at
+  an old spot once the owner moved on.
+- FIX (townsfolk.gd ONLY; rig.gd equip/attach left as-is - that is for bone-held gear): the follow is now
+  keyed off the OWNER-to-cart distance. Owner within WAGON_SNAP (5 m): roll to the tow/park point, capped
+  no slower than the hauler (maxf(_vs+1.5, 4)). Owner beyond it (a jump): the wagon reattaches AT ONCE
+  behind them and re-parks when it settles. Indoors/culled owner: the wagon is left parked and reattaches
+  when they re-emerge. Covers every towed wagon - carters, the caravan master, the pedlar notable (all
+  use .cart). The fishing-pole grip is D51 (angler.gd), left open.
+- TEST tools/_d53_test.gd (new): boots the real Town (4 haulers with carts, nav ready), soaks travel +
+  parking (gated on physics frames - the cart follow is _physics_process), then teleports one hauler +25 m.
+  travel_max gap 2.72 m; post-teleport 22.8 m -> recovered 2.60 m. D53_TEST OK. Render tools/_d53_shot.gd
+  (windowed): carter<->cart 2.6 m, wagon at the draw-bar (renders/cycles/d53/hauler_cart.png, looked at).
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _townwalk in_solid 0/16438 (0.000%) PASS (nav untouched);
+  _offfloor 0/1368 (INPROP 0, MON_INPROP 0/104); TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR,
+  time-capped at T150s); D53_TEST OK.
+- Staged only the files this change touches (townsfolk.gd, _d53_test/_d53_shot .gd + .uid, WORK_PLAN,
+  PROGRESS, RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to
+  sweep in with git add -A.
+
+
+## D-cycle D10 - D54 NPCs NO LONGER VANISH INTO BUILDINGS FOR LONG
+- Mr. E clip 14-29-22: "they went in. But now I can't find, I can't see them." MEASURED first
+  (tools/_d54_probe.gd, midday soak): 127 ordinary folk, 39 entered a building, and the worst indoor
+  dwell was 59.5 s - an NPC indoors is invisible behind solid walls, so a pane following one loses it
+  for the better part of a minute. The ordinary enter path DID bring folk back out (step out the door
+  after _wait), but the daytime dwell was randf(18-45) s; only the flee duck (D20b) returned folk
+  promptly (~4 s).
+- FIX (townsfolk.gd): the DAYTIME indoor stay is capped to INDOOR_MIN..INDOOR_MAX (7-14 s, randomised
+  so folk do not all re-emerge in lockstep) - a watched body is always recoverable within that. The
+  deliberate NIGHT sleep (a long _linger set in _next_trip, is_night()) is left alone; the town is
+  meant to be abed then. The street-cap _keep_indoors population (off-street by design) is untouched.
+- TEST tools/_d54_test.gd (new; probe turned into an assertion, gated on physics frames): midday soak,
+  41 enter / 47 exit, max indoor dwell 13.7 s (was 59.5 s), 0 NPCs stuck >30 s. D54_TEST OK. Render
+  tools/_d54_shot.gd: a peopled midday square - folk out and about, not vanished (square_midday.png,
+  square_close.png), looked at.
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _townwalk in_solid 2/18008 (0.011%) PASS (nav
+  untouched; 'inside' count fell, streets busier); _offfloor 0/1361 (INPROP 0, MON_INPROP 0/97);
+  TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR, time-capped T150s); D54_TEST OK.
+- Staged only the files this change touches (townsfolk.gd, _d54_test/_d54_shot/_d54_probe .gd + .uid,
+  WORK_PLAN, PROGRESS, RUN_LOCK); other sessions' untracked WIP (renders/, logs, *.uid) left alone.
+
+
+## D-cycle D11 - D44/D44b TOWNWALK in_solid DRIVEN TO THREE CONSECUTIVE ZEROS (cause named per-frame)
+- Item: D44b (supervisor: "take it before D29 or anything else"). DONE = three consecutive _townwalk runs at
+  in_solid 0 WITH the cause named - not three lucky runs. Prior partials (D-cycle 126, D4) had named the
+  south-market cluster and hardened keep_walkable (3->6 passes + nav-snap) but only ever got 0/0/non-zero.
+- MEASURED FIRST, per the plan's own next step (log PER-FRAME which branch commits the inside position):
+  added a lightweight townsfolk member `_dbg_leg` set at the walk commit (1 door / 2 seat / 3 ghost / 0 normal)
+  and tools/_d44_perframe.gd, which runs the gate's exact in_solid test EVERY frame and tallies by leg.
+  RESULT over 513,201 per-frame samples: in_solid frames = 2, BOTH leg=0 (NORMAL), 0 ghost/door/seat - so the
+  prime suspect (the ghost/pocket-escape leg) was WRONG; the committer is the ordinary walk at the (52,-88.6)
+  south-market stop (a stops-based trader/_more_folk).
+- TWO ROOT CAUSES, both fixed in townsfolk.gd (town_nav.gd untouched - the nav is sound, the WALKER was not):
+  (1) EMBEDDED STOP DESTINATION. town.gd._more_folk generates stop points; one in the dense south overlap sat
+      inside a footprint. _next_trip() returned it verbatim, so the body routed to it and stood embedded on
+      arrival (the arrival position is not re-committed through the walk guard, so it leaked). FIX: at the
+      caller (townsfolk ~L783) the returned dest is keep_walkable-snapped when solid_at(dest,0) is non-empty -
+      a no-op for the common clear case; the door/interior leg still runs from the snapped point via _enter_at.
+  (2) CARRIED INSIDE FOOT. On the normal leg keep_walkable + _slide_round can fail to clear the overlapping
+      footprints and _slide_round hands back the still-inside fallback; committing it made next frame's `was`
+      inside too, so a hold-at-`was` guard just carried the embedding. FIX: the commit now, for every leg
+      except door/seat, snaps an inside foot to nav.closest (the navmesh is baked by carving the SAME
+      _solid_footprints, so its nearest point is walkable by construction), falling to `was` only if the nav
+      map is not ready. _solid_footprints = _solid_rects + house rects, and is INFLATED vs the audit's shrunk
+      test, so solid_at(p,0) empty guarantees the audit cannot flag p.
+- GATE GREEN: parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0/1344 (INPROP 0, MON_INPROP 0 of 88);
+  TWITCH_PARSE OK; _delve_test clean (no SCRIPT ERROR, descended to floor 2, T150 cap); _townwalk x3 =
+  in_solid 0/18657, 0/18673, 0/18748 (0.000%), raid_in_solid 0 in all three. THREE CONSECUTIVE ZEROS.
+- Not luck: both causes are removed at the source and are monotonic (a position can only become more walkable),
+  so the zero is the expected outcome. No tolerance raised, no sample widened, no assert softened.
+- Kept `_dbg_leg` + tools/_d44_perframe.gd as a cheap standing diagnostic for any future D44 recurrence.
+- Staged only the files this change touches (townsfolk.gd, tools/_d44_perframe.gd, WORK_PLAN, PROGRESS,
+  RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to git add -A.

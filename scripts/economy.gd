@@ -67,13 +67,27 @@ var disasters_survived := 0
 ## talking about; gold left out on purpose. Checked once a day (90 s), and a
 ## town can fall back down. Raids are gated on it (from level 3).
 const DAY_SECONDS := 90.0
+## D32: TWELVE earned tiers. The town was levelling far too fast - it FOUNDED at
+## level 3 of 6 (score ~153) and auto-climbed to 5 on settlers alone. Names and
+## crier lines are the content writer's (data/lore_lines.json "growth_tiers").
+## The curve: founding sits at a HAMLET (tier 2); the first handful of tiers come
+## from settlers filling the housing (the pop-driven ceiling is ~pop_cap*3, here
+## ~315); every tier above that is renown-gated, so reaching a CITY is a long
+## delving grind, not a free gift. town_name keeps the lowercase grammatical form
+## that slots into the feed lines; the proper names live in the crier line.
 const TOWN_LEVELS := [
-    {"at": 0,   "name": "a hamlet"},
-    {"at": 46,  "name": "a village"},
-    {"at": 104, "name": "a market town"},
-    {"at": 190, "name": "a walled town"},
-    {"at": 310, "name": "a free city"},
-    {"at": 470, "name": "the seat of the valley"},
+    {"at": 0,    "name": "a crossing"},
+    {"at": 120,  "name": "a hamlet"},
+    {"at": 175,  "name": "a guild post"},
+    {"at": 230,  "name": "a village"},
+    {"at": 290,  "name": "a market-day town"},
+    {"at": 360,  "name": "a chapel town"},
+    {"at": 440,  "name": "a crafters' row"},
+    {"at": 540,  "name": "a garrison town"},
+    {"at": 660,  "name": "a market town"},
+    {"at": 800,  "name": "a walled heart"},
+    {"at": 960,  "name": "a walled town"},
+    {"at": 1140, "name": "a city in all but charter"},
 ]
 var renown := 0
 var day := 1
@@ -86,7 +100,10 @@ func is_night() -> bool:
     var h := hour()
     return h < 6.0 or h > 18.5
 var town_level := 1
-var town_name := "a hamlet"
+var town_name := "a crossing"
+# D32: the content writer's crier lines for reaching a tier (growth_tiers.tiers)
+var _gt_lore: Array = []
+var _gt_loaded := false
 var _day_t := DAY_SECONDS
 var _founded := false
 
@@ -118,6 +135,29 @@ func level_for(score: int) -> int:
             lv = i + 1
     return lv
 
+## D32: load the content writer's growth-tier crier lines once, lazily.
+func _ensure_growth_lore() -> void:
+    if _gt_loaded:
+        return
+    _gt_loaded = true
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return
+    var data: Variant = JSON.parse_string(f.get_as_text())
+    f.close()
+    if data is Dictionary and (data as Dictionary).has("growth_tiers"):
+        var gt: Variant = (data as Dictionary)["growth_tiers"]
+        if gt is Dictionary and (gt as Dictionary).has("tiers"):
+            _gt_lore = (gt as Dictionary)["tiers"]
+
+## the crier's line on reaching town level `level` (1-based), or "" if none.
+func _crier_for(level: int) -> String:
+    _ensure_growth_lore()
+    var i := level - 1
+    if i >= 0 and i < _gt_lore.size():
+        return String((_gt_lore[i] as Dictionary).get("crier", ""))
+    return ""
+
 func check_town_level(founding := false) -> int:
     var want := level_for(town_score())
     if want == town_level and not founding:
@@ -136,9 +176,19 @@ func check_town_level(founding := false) -> int:
     var feed: Array = town.get("feed")
     if founding:
         feed.append("%d souls live here." % population())
-        feed.append("Bellmire stands as %s.  (town level %d)" % [town_name, town_level])
+        var cf := _crier_for(town_level)
+        if cf != "":
+            feed.append(cf)
+        else:
+            feed.append("Bellmire stands as %s.  (town level %d)" % [town_name, town_level])
     elif want > was:
-        feed.append("Bellmire grows into %s.  (town level %d)" % [town_name, town_level])
+        # D32: cry the content writer's line for each tier crossed on the way up
+        for l in range(was + 1, town_level + 1):
+            var c := _crier_for(l)
+            if c != "":
+                feed.append(c)
+            else:
+                feed.append("Bellmire grows into %s.  (town level %d)" % [town_name, town_level])
     else:
         feed.append("Bellmire falls back to %s.  (town level %d)" % [town_name, town_level])
     return want - was

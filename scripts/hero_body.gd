@@ -97,7 +97,13 @@ func go(dest: Vector3, why: String, then: Callable = Callable()) -> void:
     _route = town.call("route", global_position, dest)
     _enter_at = Vector3.ZERO
     _wait = 99999.0
+    _idle_t = 99999.0          # no idle wander while on an errand
     _route_done = then
+
+## idle wander: heroes with no errand stroll near where they stand, so they
+## look alive instead of standing statue-still on the square.
+var _idle_t := 0.0             # seconds until next idle stroll
+var _idle_home := Vector3.ZERO # the spot they were first placed (wander centre)
 
 func _physics_process(delta: float) -> void:
     var had := not _route.is_empty()
@@ -109,6 +115,33 @@ func _physics_process(delta: float) -> void:
             var cb := _route_done
             _route_done = Callable()
             cb.call()
+    # idle wander: no errand, posted, route empty -> stroll nearby
+    if stay and errand == "" and _route.is_empty() and town != null:
+        _idle_t -= delta
+        if _idle_t <= 0.0:
+            _idle_wander()
+
+func _idle_wander() -> void:
+    _idle_t = randf_range(8.0, 18.0)
+    # idle wander is a TOWN behaviour (town.keep_walkable / route); a delving
+    # hero's "town" is the Delve, which has neither - the delve drives its own
+    # movement, so skip wander there instead of calling a method it lacks.
+    if not is_instance_valid(town) or not town.has_method("keep_walkable"):
+        return
+    if _idle_home == Vector3.ZERO:
+        _idle_home = global_position
+    # pick a point 2-6 m from our home spot, on the navmesh
+    var angle := randf() * TAU
+    var dist := randf_range(2.0, 6.0)
+    var dest := _idle_home + Vector3(cos(angle), 0.0, sin(angle)) * dist
+    dest = town.call("keep_walkable", dest) as Vector3
+    var r: Array = town.call("route", global_position, dest)
+    if r.is_empty():
+        return   # nowhere to go; try again next tick
+    stay = false
+    _route = r
+    _enter_at = Vector3.ZERO
+    _route_done = Callable()
 
 ## underground the camera sits close and a party packs into corridors:
 ## one small line per hero so the fight stays readable. Off again in town.

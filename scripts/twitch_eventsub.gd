@@ -40,9 +40,24 @@ const FORBIDDEN := ["boss", "monster", "spawn", "raid", "mob", "goblin", "horde"
         "drop", "chest", "treasure", "invade", "titan"]
 ## Bellmire's rewards: key -> settings. The key is ours; Twitch gives the id.
 const REWARDS := {
-    "spotlight": {"title": "Spotlight my hero", "cost": 500,
+    "spotlight": {"title": "Spotlight my hero", "cost": 500, "action": "spotlight",
         "prompt": "The eye of Bellmire turns to your hero for a while. Raise one first with !enlist.",
         "background_color": "#2AA198", "lane": "points", "seconds": 15.0},
+    "delve": {"title": "Send my hero delving", "cost": 400, "action": "delve",
+        "prompt": "Your hero sets out for the scar with the next party. Raise one first with !enlist.",
+        "background_color": "#B5462E"},
+    "fish": {"title": "Send my hero fishing", "cost": 150, "action": "fish",
+        "prompt": "Your hero heads to the docks to fish. Raise one first with !enlist.",
+        "background_color": "#2E7DB5"},
+    "join": {"title": "Join the delve", "cost": 300, "action": "join",
+        "prompt": "Your hero joins the party forming at the scar mouth. Raise one first with !enlist.",
+        "background_color": "#B58E2E"},
+    "patch": {"title": "Patch up my hero", "cost": 250, "action": "patch",
+        "prompt": "Your hero is handed a healing potion for the next delve. Raise one first with !enlist.",
+        "background_color": "#4BB54B"},
+    "rally": {"title": "Rally my hero", "cost": 600, "action": "rally",
+        "prompt": "Your hero is rallied - stronger, swifter, fearless, and mending - for their next delve. Raise one first with !enlist.",
+        "background_color": "#9B59B6", "lane": "points", "seconds": 15.0},
 }
 
 var town: Node                       # spotlight(uid, lane, seconds, reason), feed, roster, chat
@@ -90,6 +105,8 @@ func setup(t: Node) -> void:
         var c: Object = town.get("chat")
         if c.has_signal("twitch_reply") and not c.is_connected("twitch_reply", _on_twitch_reply):
             c.connect("twitch_reply", _on_twitch_reply)
+        if "bits_tier_fn" in c:
+            c.set("bits_tier_fn", Callable(self, "_do_bits_tier"))
     if not enabled or offline:
         return
     if client_id == "":
@@ -112,6 +129,8 @@ func _start() -> void:
         return
     await ensure_rewards()
     _open()
+    # L35: seed the subscriber pane with real channel subs
+    _fetch_subs()
 
 func _load_cfg() -> void:
     for path in CFGS:
@@ -372,6 +391,7 @@ func _process(delta: float) -> void:
         return
     _tick_tokens(delta)
     _tick_chat(delta)
+    _tick_subs_refresh(delta)
     if _token_dead["broadcaster"] or not _opened:
         return
     if _ws_next:
@@ -475,6 +495,53 @@ func subscribe_all() -> void:
     _say_log("TWITCH_EVENTSUB subscribed %d of %d%s" % [subs_ok.size(), _sub_list().size(),
             "" if subs_failed.is_empty() else " - failed: " + ", ".join(subs_failed)])
 
+# ---------------------------------------------------------------- channel subscribers
+## L35: fetch the real subscriber list from the Helix API so the subs pane has
+## bodies to cycle through even before anyone subs this session.
+var _subs_refresh_t := 0.0
+const SUBS_REFRESH := 600.0      # re-fetch every 10 min
+
+func _fetch_subs() -> void:
+    if offline or _token_dead["broadcaster"]:
+        return
+    var all_uids: Array = []
+    var cursor := ""
+    for page in 5:     # cap at 5 pages (~500 subs max)
+        var url := "/subscriptions?broadcaster_id=%s&first=100" % broadcaster_id
+        if cursor != "":
+            url += "&after=" + cursor
+        var r := await _helix("broadcaster", HTTPClient.METHOD_GET, url)
+        if int(r["code"]) != 200:
+            _say_log("TWITCH_EVENTSUB sub list unavailable (%d)" % int(r["code"]))
+            break
+        var j: Dictionary = r["json"] if typeof(r["json"]) == TYPE_DICTIONARY else {}
+        var data: Array = j.get("data", []) if typeof(j.get("data")) == TYPE_ARRAY else []
+        for s in data:
+            var uid := String((s as Dictionary).get("user_id", ""))
+            if uid != "" and uid != broadcaster_id:
+                all_uids.append(uid)
+        var pag: Dictionary = j.get("pagination", {}) if typeof(j.get("pagination")) == TYPE_DICTIONARY else {}
+        cursor = String(pag.get("cursor", ""))
+        if cursor == "" or data.size() < 100:
+            break
+    if all_uids.is_empty():
+        _say_log("TWITCH_EVENTSUB no channel subs found (or affiliate not reached)")
+        return
+    _say_log("TWITCH_EVENTSUB seeded subs pane with %d subscriber(s)" % all_uids.size())
+    # feed into Spotlight._subs_seen (oldest first so newest is at front)
+    if town:
+        var spot := Spotlight.of(town)
+        if spot:
+            for uid in all_uids:
+                spot._subs_note(uid)
+    _subs_refresh_t = SUBS_REFRESH
+
+func _tick_subs_refresh(delta: float) -> void:
+    _subs_refresh_t -= delta
+    if _subs_refresh_t <= 0.0:
+        _subs_refresh_t = SUBS_REFRESH
+        _fetch_subs()
+
 # ---------------------------------------------------------------- events -> the town
 
 static func bits_seconds(bits: int) -> float:
@@ -493,9 +560,11 @@ func handle_event(kind: String, e: Dictionary) -> void:
             var bits := int(e.get("bits", 0))
             if bool(e.get("is_anonymous", false)) or uid == "":
                 _feed_line("A stranger tosses %d bits into Bellmire's well." % bits)
+                _do_bits_tier("", bits)
                 return
             _feed_line("%s cheers %d bits for Bellmire!" % [who, bits])
             _spot(uid, "bits", bits_seconds(bits), "cheered %d bits" % bits)
+            _do_bits_tier(uid, bits)
         "channel.subscribe":
             if bool(e.get("is_gift", false)):
                 _feed_line("%s is gifted a place in the guild." % who)    # the gifter has the pane
@@ -528,8 +597,38 @@ func handle_event(kind: String, e: Dictionary) -> void:
                     _on_twitch_reply(login, "you need a hero first - type !enlist. Your points were returned.")
                 _settle(String(e.get("id", "")), rid, false)
                 return
-            _spot(uid, String(want["lane"]), float(want["seconds"]), "redeemed " + String(rw.get("title", want["title"])))
+            _do_reward(uid, want, String(rw.get("title", want["title"])))
             _settle(String(e.get("id", "")), rid, true)
+
+## Mr. E: a redeemed reward -> the right action. Every one also spotlights the
+## hero so viewers watch what they paid for (the points pane then rests on them).
+func _do_reward(uid: String, want: Dictionary, title: String) -> void:
+    match String(want.get("action", "spotlight")):
+        "delve":
+            if town and town.has_method("_on_delve"):
+                town.call("_on_delve", uid)
+            _spot(uid, "points", 15.0, "sent their hero delving")
+        "join":
+            if town and town.has_method("_on_delve"):
+                town.call("_on_delve", uid)
+            _spot(uid, "points", 15.0, "joined the delve party")
+        "fish":
+            if town and town.has_method("_on_fish"):
+                town.call("_on_fish", uid)
+            _spot(uid, "points", 15.0, "sent their hero fishing")
+        "patch":
+            var r = town.get("roster") if town else null
+            if r and r.has_method("get_hero"):
+                var h: Dictionary = r.call("get_hero", uid)
+                if not h.is_empty():
+                    h["potions"] = int(h.get("potions", 0)) + 1
+            _spot(uid, "points", 10.0, "is handed a healing potion")
+        "rally":
+            if town and town.has_method("_on_rally"):
+                town.call("_on_rally", uid)
+            _spot(uid, "points", 15.0, "rallies their hero for the next delve")
+        _:
+            _spot(uid, String(want.get("lane", "points")), float(want.get("seconds", 15.0)), "redeemed " + title)
 
 func _has_hero(uid: String) -> bool:
     if town == null or town.get("roster") == null:
@@ -542,8 +641,173 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
     spotlight_wanted.emit(uid, lane, seconds, reason)
     if town and town.has_method("spotlight"):
         town.call("spotlight", uid, lane, seconds, reason)
+    elif town:
+        Spotlight.spotlight(town, uid, lane, seconds, reason)
     else:
-        print("SPOTLIGHT %s %s %.0fs %s (town.spotlight not built yet - L17)" % [uid, lane, seconds, reason])
+        print("SPOTLIGHT %s %s %.0fs %s (no town)" % [uid, lane, seconds, reason])
+
+# ---------------------------------------------------------------- bit tiers
+## Mr. E: cheered bits -> town-wide effects. Five tiers; the buyer's hero gets
+## personal bonuses at tier 3+. Anonymous cheers still fire the town-wide part
+## (uid == "" means no personal bonus). All tiers include the lower ones.
+
+const BIT_TIERS := [
+    {"min": 1,    "name": "Town Heal"},
+    {"min": 50,   "name": "Blessed Supplies"},
+    {"min": 150,  "name": "Fortune's Favour"},
+    {"min": 500,  "name": "Festival of Plenty"},
+    {"min": 1000, "name": "Summon the Host"},
+]
+
+## Which tier index (0-4) does this cheer land in?
+static func bits_tier(bits: int) -> int:
+    var t := 0
+    for i in BIT_TIERS.size():
+        if bits >= int(BIT_TIERS[i]["min"]):
+            t = i
+    return t
+
+func _do_bits_tier(uid: String, bits: int) -> void:
+    if town == null:
+        return
+    var tier := bits_tier(bits)
+    var r = town.get("roster") if town else null
+    var eco = town.get("economy") if town else null
+    var who := ""
+    var h := {}
+    if uid != "" and r and r.has_method("get_hero"):
+        h = r.call("get_hero", uid) as Dictionary
+        who = String(h.get("name", "")) if not h.is_empty() else ""
+
+    # ---- Tier 0 (1-49): Town Heal
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 0, 1)
+    if eco:
+        _restock_half(eco)
+    _feed_line("Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.")
+
+    if tier < 1:
+        return
+
+    # ---- Tier 1 (50-149): Blessed Supplies
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 0, 3)    # +3 more (4 total with tier 0)
+    if eco:
+        _restock_full(eco)
+    # +1 random brew to the buyer's hero
+    if not h.is_empty() and r:
+        var brew_key := _random_brew_key()
+        if brew_key != "":
+            r.call("add_brew", h, brew_key, 1)
+            var brew_name: String = String(Roster.potion(brew_key).get("name", brew_key))
+            _feed_line("%s is given a %s from the grateful apothecary." % [who, brew_name])
+    _feed_line("Blessed supplies arrive - the stores overflow with fresh goods!")
+
+    if tier < 2:
+        return
+
+    # ---- Tier 2 (150-499): Fortune's Favour
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 10, 4)   # +10 gold +4 more potions (8 total)
+    # +2 random brews to buyer
+    if not h.is_empty() and r:
+        for i in 2:
+            var brew_key := _random_brew_key()
+            if brew_key != "":
+                r.call("add_brew", h, brew_key, 1)
+        # free forge upgrade
+        if r.has_method("buy_weapon"):
+            # give gold to cover the cost, then forge
+            var old_gold: int = int(h.get("gold", 0))
+            h["gold"] = old_gold + 9999
+            r.call("buy_weapon", uid)
+            r.call("buy_armour", uid)
+            h["gold"] = old_gold      # refund what wasn't spent
+    _feed_line("Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime.")
+
+    if tier < 3:
+        return
+
+    # ---- Tier 3 (500-999): Festival of Plenty
+    # trigger festival
+    if not bool(town.get("festival")):
+        town.set("festival", true)
+        var mk: Vector3 = Vector3.ZERO
+        if mk == Vector3.ZERO and town.get("_market_pos") != null:
+            mk = town.get("_market_pos")
+        if mk != Vector3.ZERO:
+            town.set("festival_at", mk)
+    # production boost 4x for 30 min
+    if eco:
+        eco.set("dis_work_k", 4.0)
+        _create_timer(1800.0, func(): if eco: eco.set("dis_work_k", 1.0))
+    # top tier forge for buyer
+    if not h.is_empty() and r:
+        var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
+        if int(h.get("weapon", 0)) < top:
+            h["weapon"] = top
+        top = mini(Roster.forged_max(Roster.ARMOUR), Roster.town_tier)
+        if int(h.get("armour", 0)) < top:
+            h["armour"] = top
+    _feed_line("A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!")
+
+    if tier < 4:
+        return
+
+    # ---- Tier 4 (1000+): Summon the Host
+    # trigger a raid immediately
+    var raids_node = town.get("raids") if town else null
+    if raids_node and raids_node.has_method("raid"):
+        raids_node.call("raid", "bits_summon")
+    # if town survives, the grant comes when the raid ends (wired separately);
+    # for now, give the upfront bonus
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 50, 4)
+    # top everything for buyer
+    if not h.is_empty() and r:
+        var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
+        h["weapon"] = top
+        top = mini(Roster.forged_max(Roster.ARMOUR), Roster.town_tier)
+        h["armour"] = top
+    _feed_line("THE HOST IS SUMMONED! A mighty force marches on Bellmire - every hero to the walls!")
+
+func _restock_half(eco: Node) -> void:
+    var caps := {"food": 200.0, "wood": 120.0, "stone": 80.0, "ore": 50.0, "gear": 30.0, "potion": 20.0}
+    for g in caps:
+        var target: float = float(caps[g]) * 0.5
+        if float(eco.stock.get(g, 0.0)) < target:
+            eco.stock[g] = target
+
+func _restock_full(eco: Node) -> void:
+    var caps := {"food": 200.0, "wood": 120.0, "stone": 80.0, "ore": 50.0, "gear": 30.0, "potion": 20.0}
+    for g in caps:
+        if float(eco.stock.get(g, 0.0)) < float(caps[g]):
+            eco.stock[g] = float(caps[g])
+
+func _random_brew_key() -> String:
+    var ps: Dictionary = Roster.potions().get("potions", {})
+    if ps.is_empty():
+        return "mending"
+    var keys: Array = ps.keys()
+    # filter to brews the town can actually make
+    var valid: Array = []
+    for k in keys:
+        if int((ps[k] as Dictionary).get("tier", 1)) <= Roster.town_tier:
+            valid.append(k)
+    if valid.is_empty():
+        return "mending"
+    return String(valid[randi() % valid.size()])
+
+func _create_timer(secs: float, cb: Callable) -> void:
+    var t := Timer.new()
+    t.wait_time = secs
+    t.one_shot = true
+    t.autostart = true
+    add_child(t)
+    t.timeout.connect(func():
+        cb.call()
+        t.queue_free()
+    )
 
 # ---------------------------------------------------------------- chat replies
 

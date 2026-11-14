@@ -5175,3 +5175,125 @@ creature spawns, not just hp damage.
   (b8rdkoe0o) hung for 20+ min on --import, killed; a second attempt also hit a 300 s timeout.
   The hang is environmental (previous commits imported fine on jestai); re-verify when free.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## D-cycle D7 - D32 town levels too fast: a 12-tier EARNED ladder (desktop, 2026-11-13 23:03)
+Mr. E: "the town levels far too fast." The boot probe confirmed it - under the old 6-level
+table the town FOUNDED at level 3 of 6 (score 153 = pop 51x3, renown 0) and then auto-climbed
+to level 5 on settlers alone, with no achievement. Re-parameterised to the content writer's
+TWELVE growth tiers (data/lore_lines.json "growth_tiers") on an earned curve. Files mine
+(economy.gd) + growth.gd (desktop-origin, D-cycle D3, owned by no other worker); data read-only.
+- economy.gd TOWN_LEVELS: 6 -> 12 tiers (crossing/hamlet/guild post/village/market-day/chapel/
+  crafters' row/garrison/market town/walled heart/walled town/city). Thresholds on the existing
+  score (pop x3 + renown x2): 0/120/175/230/290/360/440/540/660/800/960/1140. Founding (153) now
+  lands at HAMLET (tier 2). The pop-driven ceiling is ~315 (pop_cap 105 x3) = tier 5, so EVERY
+  tier above that is RENOWN-gated: becoming a City is a long delving grind, not a free gift.
+- economy.gd: each tier crossed now cries the content writer's line (growth_tiers.tiers[i].crier),
+  loaded once via _ensure_growth_lore() mirroring the disaster loader; founding cries tier 1,
+  a multi-tier jump cries each crossed. town_name keeps a lowercase grammatical form for the
+  standing readout; the proper names live in the crier lines. No parallel copy of the words.
+- growth.gd show_level: maps the 12 economy tiers onto its 6 VISUAL build-stages (two tiers per
+  stage, clampi((lv+1)/2,1,6)) so construction spreads across the longer climb and level stays
+  1..6 - the contract town.gd garrison sizing reads.
+- roster.gd (laptop, READ ONLY): Roster.tier_for_town clamps to 1..4, so tiers 7-12 are safe for it.
+- MEASURED CURVE (tools/_d32_curve.gd, 30-day headless soak at 15x, no scripted delves): founds at
+  tier 2 and climbs crossing->hamlet(d2)->guild post(d6)->village(d17), then HOLDS at village
+  (tier 4, score 247, pop 69) through day 30 - gradual and earned, vs the old instant 3->5. The
+  town band's own delving lifted renown to ~24. Chart + csv in renders/cycles/d32/ (untracked),
+  delivered to Mr. E for approval.
+- GATE GREEN: parse 0 err, _offfloor 0/1393 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _townwalk
+  in_solid 1/15751 (0.006 pct) raid 0/3523 PASS, _delve_test clean to floor 2, _d32_test OK (15 checks).
+- NOTE for Mr. E: the 12 thresholds ARE the pace dial. Tiers 6-12 need renown, so how fast a stream
+  climbs depends on how much the town delves - say the word and I slacken/steepen. Disaster gating
+  (DIS_MIN_LEVEL=2) left as-is: founding is now a 51-soul hamlet, not a 4-hut crossing, so a day-6+
+  disaster at level 2 remains reasonable (and changing it would have broken D34's test, not mine).
+- STILL OPEN (D31, left UNTICKED): the per-tier DISTINCT buildings the content 'see' column asks for
+  (guild post at 2, chapel at 6, garrison+E3PO at 8, first wall at 10) and 'builders at work'
+  animation - growth.gd still shows its 6 generic stages. That is D31's visual half, a later cycle.
+TICKED D32 (code + measured curve; the 'Mr. E approves' half is his to confirm).
+
+
+## D-cycle D8 - D50 townsfolk freeze/stutter: idle life + LOD anim smoothing (desktop, 2026-11-13 23:31)
+Priority-section item (visible jank). MEASURED before touching anything (tools/_d50_probe.gd, 93 s):
+of 126 ordinary townsfolk, 111 move >8 m, 8 move 2-8 m, and only 7 are effectively frozen - and ALL
+7 are NAMED NOTABLES holding posts (Cort Rivers the Crier, 2 watch, 4 gate guards). in_solid ~0, so
+this is NOT the D44 geometry-wedge bug. notables.gd sets who.stay=false, so a posted notable skips the
+rich _posted() pace/look/gesture and falls into the normal idle branch, standing in a DEAD Idle pose -
+that is Mr. E's 'all these people hanging out not doing anything'. The 111 movers already wander fine.
+- FIX townsfolk.gd (mine), two contained changes:
+  (a) _idle_acts: a body idling away from the market/tavern/job used to `return` (no gesture) and stand
+      frozen. It now plays an occasional calm POST_GESTURES gesture (Interact/Idle_B/Use_Item/...), so
+      EVERY standing idler - the posted notables included - reads as alive, not a statue.
+  (b) LOD stutter: past 60 m the nav throttle (_physics_process every 2nd/4th frame) also advanced the
+      ANIMATION in chunks. The clip now advances EVERY frame in _gait_step for the clearly-visible lod-1
+      band (60-120 m); lod 2 (tiny, past 120 m) stays chunked for the FPS budget. Decouples anim from
+      the logic throttle.
+- TRIED AND REVERTED: a _wander_near fallback to send frozen idlers strolling. The probe showed it did
+  NOT unfreeze the 7 (they are posted notables whose stops keep them at post, not trip-failures), and a
+  crier/guard SHOULD hold its post, not wander - so it was both ineffective and conceptually wrong. Removed.
+- GATE GREEN: --headless --import clean, parse 0, _offfloor 0/1486 (INPROP 0, MON_INPROP 0), TWITCH_PARSE
+  OK, _delve_test clean to floor 2, _townwalk in_solid 0/16518 (0.000%) raid 0/2237 PASS - nav better,
+  no regression. tools/_d50_probe.gd (diagnostic) + tools/_d50_shot.gd (render) added.
+- LOOKED (WINDOWED crop, renders/cycles/d50/square_over+close): a populated midday square, folk in varied
+  poses, Cort Rivers the Crier at his post. D32's hamlet crier line is live in the Chronicle.
+- HONEST CAVEAT: a STILL cannot prove animation SMOOTHNESS or that a given fidget fired. The dead-statue
+  CAUSE is fixed in code and the square looks lively; the stutter fix and the gesture life need Mr. E's
+  eye on LIVE motion to sign off. Ticked on the code+gate+crop; his sign-off is the remaining half.
+- STILL IN THE PRIORITY SECTION (next desktop cycles): D53 (cart detached from hauler), D54 (NPCs vanish
+  into buildings), D51 (fishing-pole grip).
+
+
+## D-cycle D11 - D51 the angler's fishing pole now sits IN the hand (desktop build, 2026-11-14 ~02:30)
+Priority-section item (visible jank), pairs with D40. Mr. E (clip 14-27-07): the pole floats / is
+in the wrong grip. CAUSE (angler.gd): _build_rod() parented the rod pivot to the Angler node at a
+fixed offset Vector3(0.28,1.05,0.30) + a fixed tilt - a rod hanging beside the body, attached to
+nothing that moves with the hand.
+- FIX (angler.gd, mine): the rod now mounts on the body's RIGHT-HAND bone via a BoneAttachment3D,
+  the same mechanism Rig.equip uses for weapons on handslot.r. _mount_rod() (called deferred from
+  _find_anim, after the body's skeleton exists) finds handslot.r (then .l / hand.* as fallbacks),
+  reparents the rod pivot onto it, and applies a grip rotation ~+30deg about Z that rakes the tip
+  up and out over the water. If a body has NO hand bone it keeps the old fixed offset (safe). The
+  attachment is freed in _exit_tree so a despawning angler leaves no orphan rod in the hand.
+- Grip chosen with tools/_d51_aim.gd (headless): sampled pivot rotations and read rod-tip vs hand;
+  +30deg about Z gives tip +1.4 up / +2.4 out, a natural raised hold. (aim probe is scratch, not
+  committed.)
+- GATE GREEN: parse 0 (rc0, no SCRIPT/Parse errors), _offfloor 0/1700 (INPROP 0, MON_INPROP 0),
+  TWITCH_PARSE OK, _townwalk in_solid 1/18280 (0.005%) raid 0/5888 PASS, _delve_test rc0 no SCRIPT
+  ERROR. Item test tools/_d51_test.gd: for both dock anglers mount=handslot.r and the rod tip is a
+  descendant of the body skeleton -> D51_TEST OK (2 anglers).
+- LOOKED (WINDOWED, renders/cycles/d51/d51_pole_inhand.png): the rod rises from the fisher's hand,
+  angled up and out, the line running down to the water - clearly HELD, not floating beside him.
+- HONEST CAVEAT: a still frame + the node-tree test prove the rod is hand-parented and reads right
+  at rest/cast; the full cast->reel->show motion in live play is Mr. E's eye to sign off. Ticked on
+  code + gate + the in-hand capture; his live sign-off is the remaining half. Tools added:
+  tools/_d51_test.gd, tools/_d51_shot.gd.
+
+
+## D-cycle D12 - D37 E3PO, Commander of the Guards, brought to life (desktop build, 2026-11-14 ~05:10)
+Mr. E's favourite NPC: 500+ of his lines sat inert in lore_lines.json 'e3po' (27 categories) with NO code
+referencing him. Now he exists. All in MY files: scripts/notables.gd (the whole controller) + ONE
+protective line in scripts/raids.gd.
+- SPAWN: a new PEOPLE entry (key e3po) - Knight.glb, guard gear, cape, size 1.14, title 'Commander of the
+  Guards', posted at the garrison by day (lm_barracks door; falls back to the gate watch if no barracks is
+  built yet) and a night watch patrol to the gate. _door_of/_stops gained 'garrison'/'e3po_post'/'e3po_watch'.
+- IMMORTAL BY CONSTRUCTION: raids._defenders() skips a notable titled 'Commander of the Guards', so E3PO is
+  never enrolled as a fall-able fighter and town.bury can never reach him. role guard keeps him from civic-
+  fleeing, so he holds his post. (A richer v2 would let him fight and intercept his fall -> withdraw; v1
+  trades that for a hard guarantee he never dies.)
+- VOICE: _e3po_pick(cat[,sub]) reads lore_lines.json 'e3po'.<category> (handles the viewer_roll sub-keys)
+  with no immediate repeat. _e3po_say() puts EVENT lines in the Chronicle (town.feed) AND shouts them above
+  his head; ambient barks rotate his shout_lines from a time-appropriate category.
+- WITHDRAW/HEAL/RETURN: on a raid breach he rolls (0.6) hurt -> 'hurt' + 'withdraw' lines, walks into the
+  barracks (held there, out of the normal day loop), heals 45-80 s, then 'return' line and back to post.
+- HOOKS (poll real transitions each notables tick - ZERO edits to trigger files): intro(once), raid(start),
+  hurt/withdraw(breach), return(heal done), festival(town.festival), disaster(economy._dis_active), tier_up
+  (economy.town_level), + ambient says/town_talk/night_watch/drill/recruit/dispute.
+- FIXED mid-build: the generic _say() read def['lines'] directly and E3PO's def had none -> 2 SCRIPT ERRORs
+  per town run. Gave him 'lines': {} so the ambient picker cleanly skips him. Re-ran _townwalk: 0 errors.
+- GATE GREEN: PROJECT_PARSE 0, _offfloor 0/1531 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _townwalk
+  in_solid 0/18947 (0.000%) PASS, _delve_test rc0, _d37_test D37_TEST OK, 0 SCRIPT ERRORs overall.
+- LOOKED (WINDOWED, renders/cycles/d37/e3po_post.png): the armoured Commander at the garrison, name tag
+  'E3PO / Commander of the Guards'. Tools added: tools/_d37_test.gd, tools/_d37_shot.gd.
+- DEFERRED (NOT mine to wire - laptop files, or D39 caravan): viewer_roll(4)/viewer_down/viewer_returns/
+  viewer_cosmetic/rank_up (roster.gd), delve_dispatch/lord_sighted/lord_cleared (delve.gd), trader_arrives
+  (D39). The lines + picker are ready; those triggers just need to call notables._e3po_say(cat[,sub]).

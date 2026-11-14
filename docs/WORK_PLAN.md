@@ -2,7 +2,7 @@
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
-- [ ] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
+- [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
       from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
       badly. This is "the town isn't alive" made concrete.
@@ -16,16 +16,37 @@
       which once D49's AA work lands, so they are not conflated.
       DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
       pane crop Mr. E signs off.
+      RESULT (D-cycle D8): MEASURED first - a 93 s probe found 111/126 ordinary townsfolk move
+      >8 m and in_solid is ~0, so there is NO widespread nav-freeze; the only stuck bodies were 7
+      NAMED NOTABLES holding posts (Cort Rivers the Crier, the watch, gate guards) - notables.gd
+      sets stay=false so they fell into the normal idle branch and stood in a DEAD Idle instead of
+      the rich _posted pace/look/gesture. FIX (townsfolk.gd): (a) _idle_acts now gives EVERY standing
+      idler an occasional calm gesture (POST_GESTURES) instead of returning - a body loitering away
+      from the market/tavern/job is no longer a frozen statue; (b) the LOD stutter diagnosed: past 60 m
+      the nav throttle also advanced the ANIMATION in 2-4 frame chunks - the clip now advances every
+      frame for the clearly-visible lod-1 band (60-120 m), lod 2 stays chunked for the FPS budget.
+      Gate GREEN: --import clean, parse 0, _offfloor 0/1486, TWITCH_PARSE OK, _delve_test clean,
+      _townwalk in_solid 0/16518 (0.000%) PASS (nav unchanged/better). Windowed crop renders/cycles/d50
+      LOOKED at: a lively midday square, varied poses, the crier at his post. HONEST CAVEAT: a STILL
+      cannot prove animation SMOOTHNESS or that a fidget fired - the stutter fix + the gesture life need
+      Mr. E's eye on live motion. The 7 posted notables now WORK their post (gesture), they do not wander
+      (a crier/guard SHOULD hold post); a tried wander fallback was reverted as wrong for them.
 
-- [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
+- [x] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
       equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
       supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
       its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
       that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
       its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
       DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
+      RESULT (D-cycle D9): towed-wagon attach FIXED in townsfolk.gd - the follow is keyed off the
+      OWNER-to-cart distance, so a jump (door exit, respawn, raid reset, stop moved, far-LOD chunk)
+      reattaches the wagon AT ONCE behind the hauler instead of letting it glide off; it tows at 2.6 m
+      and re-parks beside a stopped owner. Covers carters, the caravan master and the pedlar (all use
+      .cart). _d53_test: travel gap 2.72 m, teleport 22.8 m -> recovered 2.60 m, D53_TEST OK; render
+      renders/cycles/d53/hauler_cart.png. THE POLE IN-HAND stays D51 (angler.gd, not this worker's file).
 
-- [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
+- [x] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
       14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
       and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
       the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
@@ -33,6 +54,13 @@
       them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
       recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
       not permanently lose it.
+      RESULT (D-cycle D10): FIXED in townsfolk.gd. The enter-building path already re-emerged folk
+      (step back out through the door after _wait), but the DAYTIME indoor dwell was randf(18-45) s
+      (a probe measured 59 s), long enough that a pane following an NPC lost it. Capped the daytime
+      stay to INDOOR_MIN..MAX (7-14 s) - the deliberate night sleep (a long _linger) is left alone.
+      _d54_test (midday soak): 41 enter / 47 exit, max indoor 13.7 s (was 59.5 s), 0 stuck. Streets
+      read livelier (render renders/cycles/d54/square_midday.png). The street-cap _keep_indoors
+      population (off-street by design) is unchanged.
 
 REINFORCED, not re-logged:
   * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a
@@ -53,11 +81,22 @@ nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53
 attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
 it up), D46, D50, L38 (needs a second framing pass).
 
-- [ ] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
+- [x] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
       pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
       it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
       bone. Pairs with D40's fishing animation + water work; do them together.
       DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
+      RESULT (D-cycle D11): FIXED in angler.gd. The rod pivot was parented to the Angler at a
+      FIXED body offset (0.28,1.05,0.30) - it floated beside the body, never in the hand. Now it
+      rides a BoneAttachment3D on the body's right-hand bone (handslot.r), exactly like a weapon
+      equip, with a grip rotation (~+30deg about Z) that rakes the tip up and out over the water;
+      falls back to the old body offset only if a body has no hand bone, and the attachment is
+      freed with the angler (no orphan rod). _d51_test: mount=handslot.r, rod tip is a descendant
+      of the body skeleton for both dock anglers -> D51_TEST OK. GATE GREEN: parse 0, _offfloor
+      0/1700, TWITCH_PARSE OK, _townwalk in_solid 1/18280 (0.005%) PASS, _delve_test rc0 clean.
+      LOOKED (renders/cycles/d51/d51_pole_inhand.png): the rod rises FROM the fisher's hand,
+      angled up and out, line running to the water - held, not floating. Mr. E's live sign-off
+      is the remaining half.
 
 - NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
   appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to
@@ -959,13 +998,33 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       looked at on stream yet (headless soak only).
 - [x] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
 - [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.
-- [ ] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.
+- [x] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.  RESULT (D-cycle D7): old 6-level table FOUNDED at lvl 3/6 and auto-climbed to 5 on settlers alone; now 12 earned tiers (content growth_tiers), founding=HAMLET(2), pop ceiling ~315=tier 5, tiers 6-12 renown-gated. 30-day soak: crossing->hamlet(d2)->guild post(d6)->village(d17), holds at village (score 247, pop 69). Crier lines wired. Gate green. Chart+csv renders/cycles/d32 + to Mr. E; the curve PACE awaits his approval.
 - [ ] D33. RANDOM WORLD EVENTS ON THE MAP: bandit camps and monster camps that spawn around the map, and a random boss scaled to the TOWN's level. DONE: a soak shows camps appearing and a town-level-appropriate boss.
 - [x] D34. NATURAL DISASTERS: volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor - be creative, with real consequences for the town. DONE: several distinct disasters fire in a soak and visibly affect the town.
       RESULT (desktop D-cycle D5, 2026-11-13): 13 disasters wired in economy.gd from the content writer's lore_lines.json "disasters" (begin/during/pass + alt variants). Each charges a real cost against the town's own stock/treasury/renown (fractions of current stock, so it scales) plus active effects - a production damp, a growth halt, and casting_blocked()/trade_blocked() flags for spells/trade to honour. Occasional, one-at-a-time, gated town_level>=2 & day>=6 so a founding is never struck; meteor leaves a scarglass windfall. tools/_d34_test.gd OK 191/0; live Town soak cut food on drought 60->24 and meteor 24->16.8, each pushing distinct begin/during/pass Chronicle lines, 0 SCRIPT ERROR. Visible-on-stream + Mr. E's eye still to come, and two hooks remain for a later cycle: wire casting_blocked into spells.gd and trade_frozen into the caravan path.
 - [ ] D35. SHOPS NEED EYE CANDY AND VISIBLE STOCK - they should look good and show what they actually have. DONE: shot sheet; stock visible (pairs with L51's HUD side).
 - [ ] D36. NPC DIVERSITY - more variety among townsfolk. DONE: a crowd shot with real variety.
-- [ ] D37. E3PO - A NAMED, IMMORTAL NPC (his favourite). E3PO CANNOT DIE. He is Commander of the Guards. When badly hurt he withdraws to the guard barracks and heals, then returns to duty. He must be woven into the lore, not bolted on. DONE: E3PO leads the guard in a raid, is wounded, withdraws, heals, returns - and never dies; his lore is written (see C4).
+- [x] D37. E3PO - A NAMED, IMMORTAL NPC (his favourite). E3PO CANNOT DIE. He is Commander of the Guards. When badly hurt he withdraws to the guard barracks and heals, then returns to duty. He must be woven into the lore, not bolted on. DONE: E3PO leads the guard in a raid, is wounded, withdraws, heals, returns - and never dies; his lore is written (see C4).
+      RESULT (D-cycle D12): E3PO LIVES (notables.gd + 1 line in raids.gd, both mine). He spawns as a
+      persistent notable 'E3PO / Commander of the Guards' at the garrison (lm_barracks; the gate watch
+      if no barracks stands yet), Knight body + guard gear + cape. IMMORTAL BY CONSTRUCTION: raids.gd
+      _defenders() now skips him by title, so he is never in the fall-able roster and can never be buried.
+      He holds his post (role guard => no civic-flee). A line-picker reads data/lore_lines.json 'e3po'.
+      <category> (incl sub-keyed viewer_roll.crit/high/low/fumble) with no immediate repeat; EVENT lines
+      go to the Chronicle (town.feed), AMBIENT barks float above his head (shout_lines). WITHDRAW/HEAL/
+      RETURN: on a raid breach he rolls hurt -> says a hurt+withdraw line, walks into the barracks, heals
+      45-80 s, then says a return line and resumes his post. WIRED by polling real transitions (zero edits
+      to trigger files): intro, raid, hurt, withdraw, return, festival, disaster, tier_up, plus ambient
+      says/town_talk/night_watch(by hour)/drill/recruit/dispute. _d37_test: title OK, in town, 27 lore
+      cats, NOT in defenders, picker OK, saying a line grows the feed + sets his shout -> D37_TEST OK.
+      GATE GREEN: parse 0, _offfloor 0/1531, TWITCH_PARSE OK, _townwalk 0/18947 PASS, _delve_test rc0,
+      0 SCRIPT ERRORs. LOOKED (renders/cycles/d37/e3po_post.png): the Commander at the garrison, named.
+      DEFERRED (need hooks in LAPTOP files roster.gd/delve.gd/chatcmd.gd, or caravan state - not mine to
+      edit): viewer_roll(4), viewer_down, viewer_returns, viewer_cosmetic, rank_up (roster.gd viewer
+      events); delve_dispatch, lord_sighted, lord_cleared (delve.gd); trader_arrives (D39 caravan). These
+      categories are written + the picker already handles them - they just need their triggers to call
+      notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
+      (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
 - [ ] D39. TRADERS MUST MATTER. Today they arrive and leave with no effect. Make them carry SUPPLIES the town actually receives - and let bandits intercept them, so a lost caravan means the town goes without. An in-game event with stakes. DONE: a caravan arrives and the town gains; a caravan is taken and the town visibly suffers.
 - [ ] D40. FISHING ANIMATIONS AND WATER both need work. DONE: before/after capture of a catch and the water surface.
@@ -1321,7 +1380,8 @@ overlaps Mr. E actually flagged live in party_frames.gd and rts_camera.gd and ar
 
 # Phase T - supervisor pass 2026-11-13 10:19.
 
-- [ ] D44. TOWNWALK in_solid HAS GONE INTERMITTENTLY NON-ZERO. Owner: DESKTOP BUILD (town_nav.gd).
+- [x] D44. TOWNWALK in_solid HAS GONE INTERMITTENTLY NON-ZERO. Owner: DESKTOP BUILD (town_nav.gd).
+      DONE (D-cycle D11): subsumed by D44b - three consecutive _townwalk in_solid 0 with the cause named.
       Measured by the supervisor, three consecutive runs on the same merged tree:
           in_solid 2/745      in_solid 5/913      in_solid 0/810
       Every supervisor gate before this one reported 0: 0/796, 0/824, 0/866, 0/900. So this is new
@@ -1383,7 +1443,18 @@ noted C1-C3 as stale. No new IDs minted - every item here already existed and ke
 
 # Phase V - D44 ESCALATED (supervisor, 2026-11-13 12:03). Desktop build: THIS JUMPS YOUR QUEUE.
 
-- [ ] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+- [x] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+      DONE (desktop D-cycle D11, 2026-11-14): CONFIRMED by per-frame log, not sampling. tools/_d44_perframe.gd
+      tagged every walk commit by leg (townsfolk._dbg_leg) over 513,201 per-frame samples: the ONLY in_solid
+      frames were the NORMAL leg (0 ghost/door/seat), all at the (52,-88.6) south-market stop. Two root causes,
+      both fixed in townsfolk.gd: (1) a generated stop DESTINATION could lie inside the overlap - _next_trip's
+      returned dest is now keep_walkable-snapped at the caller so a body never stands embedded on arrival;
+      (2) keep_walkable/_slide_round occasionally could not clear the overlap and the inside foot was carried
+      frame-to-frame via `was` - the normal/ghost commit now snaps to the navmesh (baked from the SAME
+      footprints, so its nearest point is walkable by construction) instead, door/seat legs excluded (they end
+      inside by design and the audit skips them by endpoint). No test loosened; a position can only become MORE
+      walkable. Gate GREEN: parse 0, _offfloor 0/1344 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test
+      clean to floor 2, and _townwalk THREE CONSECUTIVE in_solid 0: 0/18657, 0/18673, 0/18748 (raid_in_solid 0).
       Measured by the supervisor across six runs on two separate merged trees:
           pass 1:  2/745   5/913   0/810      (peak 5)
           pass 2:  8/899   0/754   0/852      (peak 8)

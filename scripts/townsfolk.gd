@@ -70,6 +70,12 @@ static var funnel_fix := true        # false only for the before figure (tools/_
 static var presync_reroutes := 0
 var _enter_at := Vector3.ZERO
 var _wait := 0.0
+## D54: a watched NPC goes invisible behind solid walls while indoors. The old
+## daytime dwell ran 18-45 s (a probe saw 59 s) - long enough that a pane loses
+## them ("I can't find them", Mr. E clip 14-29-22). Cap the DAYTIME indoor stay
+## so one always re-emerges within this, like the flee duck brings folk back.
+const INDOOR_MIN := 7.0
+const INDOOR_MAX := 14.0
 var _to_work := true
 var _wobble := 0.0
 ## D7: far-away LOD, set by town._lod_pass from the camera's distance. 0 = every
@@ -119,6 +125,12 @@ func _gait_step(delta: float) -> void:
             and String(_anim.current_animation) == Rig.idle_of(_anim):
         Rig.play(_anim, "Walking_A")
     Rig.drive(_anim, _vs, size_k, delta)
+    # D50: the LOD throttle in _physics_process (nav logic every 2nd/4th frame)
+    # also advanced the animation in chunks - the stutter Mr. E saw on mid-distance
+    # folk. Advance the clip every frame for the clearly-visible lod-1 band (60-120 m)
+    # so it animates smoothly; lod 2 (tiny, past 120 m) stays chunked for the budget.
+    if lod == 1 and _anim and visible:
+        _anim.advance(delta)
     # D42: FOOTFALLS. The town read as silent because nothing ever played the
     # footstep sounds Sfx defines. A step per stride of real travel, near the
     # camera only (far steps are inaudible and only spend voices), the surface
@@ -653,6 +665,7 @@ var wd_giveups := 0
 var _wag_t := randf() * 0.5
 var wag_detours := 0
 var _park: Array = []           # D16c: where the wagon is drawn up while stood still
+const WAGON_SNAP := 5.0         # D53: gap (m) past which a towed wagon snaps to its hauler, not crawls
 
 func _physics_process(delta: float) -> void:
     # D16c: a wagon is not in the navmesh - one rolling into someone (walking
@@ -670,7 +683,7 @@ func _physics_process(delta: float) -> void:
         _lod_n = 0
         delta = _lod_acc
         _lod_acc = 0.0
-        if _anim and visible:
+        if lod >= 2 and _anim and visible:
             _anim.advance(delta)
     steps += 1
     if town != null:
@@ -678,24 +691,47 @@ func _physics_process(delta: float) -> void:
         _cry(delta)
         _voice(delta)
     if cart and is_instance_valid(cart):
-        var back := global_position - global_transform.basis.z * 2.6
-        back.y = float(town.call("height_at", back.x, back.z))
-        var cy := rotation.y + PI * 0.5
-        # D16c: stood still (a stop, a camp) the wagon is drawn up on open
-        # ground beside them, never left across a lane between two props
-        if _route.is_empty() and town.has_method("wagon_park"):
-            if _park.is_empty():
-                _park = town.call("wagon_park", self)
-                if _park.is_empty():
-                    _park = [back, cy]
-            back = _park[0]
-            cy = _park[1]
-        else:
+        if inside or not visible:
+            # D53: the hauler is indoors or culled - leave the wagon parked where it
+            # stands; when they re-emerge the owner-gap snap below reattaches it, so it
+            # is never seen chasing a body that is not there.
             _park = []
-        # (D16c: no faster than a wagon rolls, so nobody is swept up by one)
-        var cstep: Vector3 = (back - cart.global_position) * minf(delta * 4.0, 1.0)
-        cart.global_position += cstep.limit_length(4.0 * delta)
-        cart.rotation.y = lerp_angle(cart.rotation.y, cy, delta * 3.0)
+        else:
+            var tow := global_position - global_transform.basis.z * 2.6
+            tow.y = float(town.call("height_at", tow.x, tow.z))
+            var tyaw := rotation.y + PI * 0.5
+            # D53: a towed wagon is ATTACHED to its hauler, not a free body. If the
+            # HAULER itself has got far from the wagon - it stepped out of a door,
+            # respawned, a raid reset it, its stop moved, or a far-LOD body jumped a
+            # chunk - the wagon is reattached AT ONCE behind them and re-parks when it
+            # settles, so a cart is never seen gliding across open ground with no one
+            # on it (Mr. E clip 14-31-18: "the cart is moving on its own ... supposed
+            # to be attached to this guy, but it wasn't"). Keyed off the owner-to-cart
+            # distance, not the (possibly stale) park target, so a jump can never hide.
+            var owner_gap := Vector2(global_position.x - cart.global_position.x, global_position.z - cart.global_position.z).length()
+            if owner_gap > WAGON_SNAP:
+                cart.global_position = tow
+                cart.rotation.y = tyaw
+                _park = []
+            else:
+                var back := tow
+                var cy := tyaw
+                # D16c: stood still (a stop, a camp) the wagon is drawn up on open
+                # ground beside them, never left across a lane between two props
+                if _route.is_empty() and town.has_method("wagon_park"):
+                    if _park.is_empty():
+                        _park = town.call("wagon_park", self)
+                        if _park.is_empty():
+                            _park = [back, cy]
+                    back = _park[0]
+                    cy = _park[1]
+                else:
+                    _park = []
+                # (D16c: rolls no faster than a wagon should, so nobody is swept up by
+                # one; but never slower than the hauler, so it cannot be left behind)
+                var cap: float = maxf(_vs + 1.5, 4.0)
+                cart.global_position += (back - cart.global_position).limit_length(cap * delta)
+                cart.rotation.y = lerp_angle(cart.rotation.y, cy, minf(delta * 6.0, 1.0))
     if town != null and not inside and visible and town.has_method("off_wagons"):
         # on a route, twice a second: a waypoint under a parked wagon is moved
         # beside it, a leg across one goes round its corner (the navmesh does
@@ -745,6 +781,13 @@ func _physics_process(delta: float) -> void:
                 if _door_out != Vector3.ZERO:
                     global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
             var dest: Vector3 = _next_trip()
+            # D44b: a generated stop point can sit inside a footprint in the
+            # dense south-market overlap (the (52,-88.6) hotspot) - route to the
+            # walkable point beside it so a body does not stand embedded on
+            # arrival (what the walk audit counts). No-op when dest is already
+            # clear; the door/interior leg still runs from here via _enter_at.
+            if not (town.call("solid_at", dest, 0.0) as Array).is_empty():
+                dest = town.call("keep_walkable", dest)
             _door_out = dest if _enter_at != Vector3.ZERO else Vector3.ZERO
             _route = town.call("route", global_position, dest)
             if _enter_at != Vector3.ZERO:
@@ -805,7 +848,15 @@ func _physics_process(delta: float) -> void:
                 # through the door and gone: a while indoors
                 inside = true
                 visible = false
-                _wait = _linger if _linger > 0.0 else randf_range(18.0, 45.0)
+                var dwell: float = _linger if _linger > 0.0 else randf_range(18.0, 45.0)
+                # D54: cap the DAYTIME stay so a pane following them does not lose
+                # them for good; the night sleep (a long _linger set in _next_trip)
+                # is left alone - the town is meant to be abed then.
+                var eco2 = town.get("economy") if town else null
+                var night: bool = eco2 != null and eco2.has_method("is_night") and bool(eco2.call("is_night"))
+                if not night:
+                    dwell = minf(dwell, randf_range(INDOOR_MIN, INDOOR_MAX))
+                _wait = dwell
             else:
                 _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
                 if not _at_job:
@@ -818,11 +869,14 @@ func _physics_process(delta: float) -> void:
     var p: Vector3 = global_position + dir * speed * pace * _flee_k * delta
     # (D17c: the last step onto a seat is off the walkable ground too)
     var seat_leg: bool = _route.size() == 1 and _seat_i >= 0
-    if door_leg or seat_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
+    var ghost_leg: bool = _ghost_last != Vector3.INF and _route.has(_ghost_last)
+    if door_leg or seat_leg or ghost_leg:
         # (D14: brushing out of a pocket between props - see _escape_route)
         p.y = float(town.call("height_at", p.x, p.z))
+        _dbg_leg = 1 if door_leg else (2 if seat_leg else 3)
     else:
         _ghost_last = Vector3.INF
+        _dbg_leg = 0
         # room for each other, and never a foot inside anything solid
         # (D16a: crowd_push is a velocity - separation plus a sidestep to
         # pass whoever is in the way ahead)
@@ -833,6 +887,22 @@ func _physics_process(delta: float) -> void:
             # D14: pressed against a prop (a crate, a bench, a fence end) the
             # push-out only hands the foot back - step round it instead
             p = _slide_round(was, dir, speed * pace * delta, p)
+    # D44b: never COMMIT a foot the walk audit (_solid_footprints: props +
+    # houses) would read as inside one. keep_walkable + _slide_round can fail to
+    # clear the dense south-market overlap, and a ghost brush or crowd nudge can
+    # cut a footprint corner; carrying that inside foot frame-to-frame via `was`
+    # is what left a stray 1/17k. Snap instead to the navmesh - it is baked by
+    # carving the SAME footprints, so its nearest point is walkable by
+    # construction. The door/seat legs legitimately end inside a house/at a seat
+    # (the audit skips them by endpoint), so exclude those; hold at the last
+    # spot only if the nav map is not ready yet.
+    if not door_leg and not seat_leg and not (town.call("solid_at", p, 0.0) as Array).is_empty():
+        var nav2 = town.get("nav")
+        if nav2 != null and nav2.ready_ok:
+            var q2: Vector3 = nav2.closest(p)
+            p = q2 if (town.call("solid_at", q2, 0.0) as Array).is_empty() else was
+        else:
+            p = was
     global_position = p
     move_dir = dir
     rotation.y = atan2(dir.x, dir.z)
@@ -1024,6 +1094,8 @@ func _escape_route(goal: Vector3) -> Array:
     return r
 
 var _ghost_last := Vector3.INF
+
+var _dbg_leg := 0
 var _ghost_n_of := 0
 
 func _flood_out(goal: Vector3, margin: float) -> Array:
@@ -1350,7 +1422,12 @@ func _idle_acts(delta: float) -> void:
             list = ["Interact", "PickUp", "Interact"]
             kind = "haggle"
         else:
-            return
+            # D50: a body idling away from the market/tavern/job used to stand in a
+            # dead Idle pose - "all these people just hanging out not doing anything".
+            # Give it an occasional calm gesture so a standing townsperson reads alive.
+            list = POST_GESTURES
+            kind = "idle"
+            _act_t = randf_range(5.0, 11.0)
     var g: String = list[randi() % list.size()]
     Rig.play(_anim, g)
     acts[kind] = int(acts.get(kind, 0)) + 1

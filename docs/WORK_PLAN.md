@@ -1399,7 +1399,7 @@ CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confectio
       DONE (U-cycle, verified+merged c9f9fb1): all four panes carry a colour-coded lane title
       (DIRECTOR/BITS/SUBSCRIBER/CHANNEL POINTS) + now-watching; Mr. E approved on the 1080p crop.
 
-- [ ] D45. THE GRASS READS AS SAND - REPLACE THE TEXTURE. Owner: DESKTOP BUILD (valley.gd / town
+- [x] D45. THE GRASS READS AS SAND - REPLACE THE TEXTURE. Owner: DESKTOP BUILD (valley.gd / town
       ground material). Mr. E: "the grass needs work still looks like sand so we should at this
       point use a different texture for it." Source a proper grass texture - CC0 only (Kenney,
       ambientCG, Poly Haven CC0), self-hosted with a LICENSE note, never Quaternius Bestiary/QAL.

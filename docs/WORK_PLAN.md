@@ -1406,6 +1406,13 @@ CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confectio
       Tile it so it does not obviously repeat at the pane's zoom, and check it against the dusk and
       night lighting, not just noon. The town ground, the valley and the pane backdrops all read it.
       DONE: a 1080p crop at the stream's zoom where the ground reads as grass, Mr. E signs off.
+      SHIPPED (desktop D-cycle D5, Nov 13 18:xx) - NOT TICKED, awaits Mr. E's eye. The grass was
+      a flat olive/tan wash at pane + aerial distance (the 'sand'). Fix was the MATERIAL grade in
+      assets/shaders/ground.gdshader (grass branch), not a new texture: a coarse 2nd grass sample
+      for distance detail + GREEN-dominant macro/patch mottling replacing the warm (1.10,1.06,0.92)
+      macro that desaturated the fields to tan. 1080p before/after rendered and LOOKED AT (close /
+      valley bank / aerial pane) - all read as varied green grass. Gate green. Crops in
+      renders/cycles/d45/. Mr. E to sign off, then tick.
 
 CHANGELOG 2026-11-13 14:12 (supervisor): L39/L39b CLOSED on Mr. E's eye - the Chronicle size is right. Three new
 items from his look: L61 (Chronicle styling, HUD), L62 (pane lane titles, HUD), D45 (grass texture,

@@ -50,10 +50,17 @@ void fragment() {
         g = max(g, 1.0 - trod);
     }
     vec3 dc = texture(dirt_tex, uvd).rgb * vec3(0.72, 0.66, 0.52);
-    vec3 gc = texture(grass_tex, uvg).rgb * grass_tint;
-    // large-scale variation so the meadow does not read as one tiled carpet
+    // D45: grass read as a flat olive/tan wash at pane + aerial distance. Fix:
+    // (1) a coarser second sample adds detail that survives mipping far off;
+    // (2) macro + patch mottling are GREEN-dominant (G highest), no warm
+    //     desaturation, so open fields vary in green instead of washing to tan.
+    vec3 gtex = texture(grass_tex, uvg).rgb;
+    vec3 gtexC = texture(grass_tex, uvg * 0.34).rgb;
+    vec3 gc = mix(gtex, gtexC, 0.45) * grass_tint;
     float macro = vnoise(wpos.xz * 0.008) * 0.5 + vnoise(wpos.xz * 0.023) * 0.5;
-    gc *= mix(vec3(0.82, 0.86, 0.70), vec3(1.10, 1.06, 0.92), macro);
+    float patch = vnoise(wpos.xz * 0.055 + 3.3);
+    gc *= mix(vec3(0.62, 0.74, 0.52), vec3(0.92, 1.06, 0.78), macro);
+    gc *= mix(0.84, 1.12, patch);
     vec3 col = mix(dc, gc, g);
     float slope = 1.0 - clamp(wnrm.y, 0.0, 1.0);
     float rk = smoothstep(rock_slope_lo, rock_slope_hi, slope + (n - 0.5) * 0.12);

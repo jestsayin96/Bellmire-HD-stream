@@ -2,6 +2,40 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle D5 - D45 grass material re-grade + D44b ghost-leg diagnostic (desktop, Nov 13)
+D45 THE GRASS READS AS SAND (owner desktop build; Mr. E quality-bar item, re-fired as an override).
+- LOOKED FIRST: rendered the current ground at 1080p (tools/_d45_shot.gd, new). The close-up was
+  already green; the failure was at PANE + AERIAL distance - the open fields read as a flat,
+  uniform, desaturated olive/tan wash (the "sand"). Root in assets/shaders/ground.gdshader: the
+  grass macro multiplier mixed to a WARM end (1.10,1.06,0.92) (R>=G, >1.0) that washed green to
+  tan, and there was no distance-surviving colour variation.
+- CHANGE (assets/shaders/ground.gdshader, grass branch ONLY - dirt/rock/snow/scar/mud/normal/
+  roughness untouched): (1) blend a coarser 2nd grass sample (uvg*0.34) so detail survives mipping
+  far off; (2) GREEN-dominant macro mix (0.62,0.74,0.52)->(0.92,1.06,0.78) (G highest at both ends)
+  replacing the warm wash; (3) a patch octave (vnoise *0.055) for value mottling visible from above.
+- LOOKED AGAIN (after): close / valley-bank / aerial-pane all read as varied green grass, not sand,
+  and NOT oversaturated/cartoon. before+after 1080p crops: renders/cycles/d45/.
+- GATE (green): parse 0, no SHADER ERROR; _townwalk PASS in_solid 0/15953; TWITCH_PARSE OK;
+  _delve_test clean to floor; _offfloor INPROP 0 / MON_INPROP 0 (OFFFLOOR off-floor count is an
+  intermittent DUNGEON-RNG metric - 25 one run, 0 the next on identical code; not town, not this
+  change). Committed to main. NOT TICKED: D45 DONE bar is "Mr. E signs off" and this is unattended
+  (same discipline the HUD worker used for L61/L62). Supervisor: show Mr. E the d45 crops.
+- D49/D24 (the override also named): STALE premise. project.godot [rendering] ALREADY has use_taa=
+  true + msaa_3d=1 (shipped with D24, which is ticked). The remaining D49 pane pixelation is the
+  pane SubViewports (spotlight.gd: MSAA_DISABLED + sub-resolution) = DESKTOP HUD-owned; desktop
+  build must not touch spotlight.gd. Flagged, not touched.
+- D44b UPDATE (per-frame diagnostic run this session, separate reverted cycle, no commit): the
+  ghost/pocket-escape leg is RULED OUT as the counted in_solid cause. Per-frame branch logging
+  showed ghost-leg inside-footprint commits are real (0/35/0 over 3 runs) but the counted offenders
+  are ALWAYS the else/keep_walkable branch at the south-market houses (child ~(52,-88.6), route 14/
+  33). keep_walkable cannot clear them because nav.closest() returns a walkable point INSIDE the
+  navmesh sliver. Sole remaining fix = the ATTENDED nav-param change (edge_max_error 0.4->0.2 or
+  widen the southern carve), verified not to raise stuck_on_route. See project doc
+  claude/desktop-d44b-ghostleg-ruledout-navsliver-confirmed-nov13-1802. A validated ghost-leg
+  keep_walkable patch is ready to bundle but was NOT committed (nil measured benefit; hot loop).
+- Files: assets/shaders/ground.gdshader, tools/_d45_shot.gd(+.uid), docs/WORK_PLAN.md, docs/PROGRESS.md.
+
+
 ## D-cycle D4 - D44b keep_walkable net (south-market residual) (desktop, Nov 13)
 D44b (town_nav in_solid residual, sub-case b) - the supervisor flagged it "before
 D29 or anything else". Took the D-cycle 126 follow-up's "keep_walkable net" option.

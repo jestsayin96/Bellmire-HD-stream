@@ -1,4 +1,32 @@
-RUNNING 2026-11-13 - L29c (set-piece encounters). D52 done and pushed first (commit c9daa0f).
+IDLE 2026-11-13 - the laptop queue is EMPTY. All ten items from Phase U are done, plus D52 (closed).
+
+Shipped this session, in order:
+  - D52 (c9daa0f): pre-raise race in town.chat_line - a returning viewer's first !delve was dropped
+    because wants_delve fired synchronously before the body was raised. Fixed in three lines.
+  - D52 test determinism (b59fdc4): CruzaderPC-vs-jestai flake was frame-vs-wall-clock timing on
+    the ChatCmd cooldown. Rewrote tools/_d52_test.gd to Time.get_ticks_msec() gates. D52_TEST OK
+    on both machines (6/0). Closed by the supervisor as ac590e9.
+  - L29c round 1 (1f0741a): AMBUSH set pieces in dungeon_hd._set_pieces + delve._setpieces_tick.
+  - L29c round 2 (b745433): PRISONER + SHRINE kinds alongside AMBUSH. 18/18 OK.
+  - L56 (8530253): delve-heavy soak gate for L45 + L46 - traps spring, damage lands, lord_hp_mult
+    scales. 4/4 OK.
+  - L30a (b4becff): accessory system verified end-to-end (130 items, acc_bonus flows to every
+    stat getter, eq_* nodes mount on the skeleton, 3-floor soak clean). 21/21 OK.
+  - L30b (50ad2cd): cosmetics + dyes verified (253 cosmetics + 137 dyes, eq_hat/eq_banner/HeroPet
+    mount, cape surface override matches dye hex exactly, 2-floor soak clean). 17/17 OK.
+  - L30c (f555c3c): loot ladder verified (strict boss_loot_mult 1<2<3<4.5, floor-10 average pays
+    >=3x floor-2 under 6-trial averaging, Bestiary.lord_unique_for returns 78 variants with 0
+    orphans, rare-lord Chronicle line present + plain-lord absent, start_floor=5 soak kills 1
+    boss and banks 528g). 9/9 OK.
+
+PHASE E (gear + cosmetics + loot) is now gated end-to-end from the laptop side. Nothing I own is
+open in Phase V-AD - D44/D50 are desktop nav, D53/D54 are desktop build, L62/L38 are HUD. Two files
+STILL UNOWNED and the supervisor has been asked twice: scripts/boss_bar.gd (L29a's "boss_bar shows
+phase" half) and scripts/adventurers.gd (the NPC band's _kit_up, raised during L55). Neither is in
+COORDINATION 11.2 under any worker; this lock does not advance until the supervisor answers.
+
+WORK_PLAN was left UNTICKED on every item delivered this session - the supervisor ticks on review
+(COORDINATION 6 + 11).
 
 D52 note: the supervisor's top-priority Phase AC item ("heroes do not move on command"). Repro in
 tools/_d52_test.gd walks three scenarios - happy path, cooldown back-to-back, and the pre-raise

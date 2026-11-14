@@ -4643,3 +4643,83 @@ SHRINE alongside it so the kinds now cover the three names in the DONE line.
 - L61 VERDICT -> READS AS AN ORNATE ELDER SCROLL. Rolled wooden spindles top & bottom; brass finial roundels (gold rings, teal centre) at all four spindle ends; "CHRONICLE" inscribed on the upper spindle with a teal heraldic lozenge drop-mark beside it; laid-paper striations + softly deckled parchment edges; a thin teal+gold illuminated filigree border running inside BOTH margins, clear of the text (symmetric - confirmed on a 4x left-edge zoom). U1 CAVEAT RESOLVED: the 18 px / 652-wide Chronicle lines are cleanly legible at 1:1 on the 1080p stream ("The smith's hammer rings on past midnight." reads with room to spare). L61 DONE pending supervisor tick.
 - NO FIX NEEDED on either item. No source file changed; this cycle commits only this PROGRESS entry. Renders left untracked (prior practice). Lock set back to IDLE in R.
 - FOR MR. E: nothing to decide - both the pane sharpness and the scroll are stream-ready. If you ever want the filigree bolder it's a one-line thickness bump in hud_dock.gd, but as-is it matches the brief ("a frame never over the text").
+
+
+## L-cycle 142 - L30a gear expansion verification (laptop jestai, 2026-11-13) - L30a (IN PROGRESS, WORK_PLAN untouched)
+L30a's DONE line asks for "heroes equip visibly in a soak, bonuses apply". The content writer has
+shipped 130 accessories in data/items.json across five slots (ring/amulet/cloak/boots/gloves) with
+real 5E bonuses (ac/saves/hp/speed/hit/dmg), and L13 already wired roster.wear / roster.acc_bonus /
+Gear.dress_cosmetics / HeroBody.refresh. The gap this round was PROOF the wiring still holds end-to-
+end, not more content.
+- tools/_l30a_test.gd (NEW, 21 checks):
+    A - items.json loads (130 accessories), all five slots represented, every accessory carries at
+        least one of the six bonus keys. The writer is not idle.
+    B - !wear puts the key in h["acc"][slot] for each of the five slots; !wear off <slot> removes it.
+    C - the stats the delve ACTUALLY reads each move by the expected amount: AC (+1 from a ring),
+        attack_bonus (+1 from gloves), max_hp (+12 from an amulet), speed (+0.60 from boots),
+        save_bonus(wis) (+1 from a cloak), acc_bonus(dmg) (+2 from a dmg glove).
+    D - a real HeroBody (model loaded, skeleton instantiated) carries eq_ring / eq_amulet /
+        eq_glove_l-r nodes on its skeleton after refresh(); a weapon tier change moves the mesh
+        at eq_weapon. This is the "visible on handslot bones (rig EQUIP)" half of the plan line.
+    E - a 3-floor soak at start_floor=2 with four heroes each wearing smith_gloves + nightwatch_ring
+        runs to its frame cap in a live state with NO SCRIPT ERROR - acc_bonus reads every blow and
+        the delve stays coherent.
+- NO changes to roster.gd / gear.gd / data/items.json - the existing wiring is correct. This round
+  measured it; if a later round widens the content it will leave this test in place.
+- GATE: --headless --import clean, _offfloor 0/1525, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a 11/11, _l29b 23/23, _l29c 18/18, _l56 4/4, _l30a 21/21.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 143 - L30b cosmetics & dyes verification (laptop jestai, 2026-11-13) - L30b (IN PROGRESS, WORK_PLAN untouched)
+L30b's DONE line asks for "!wear + !dye change the model in a soak". The content writer has shipped
+253 cosmetics (68 hats, 56 banners, 22 pets, 107 titles) and 137 dyes in data/items.json, and L13
+already wired roster.wear / roster.dye / Gear.dress_cosmetics / Gear._cape_tint / HeroPet. The gap
+this round was proof the model actually CHANGES under those commands - without a test, a future
+hand could break _cape_tint or the pet mount and no bench alarm would ring.
+- tools/_l30b_test.gd (NEW, 17 checks):
+    A - items.json: 253 cosmetics + 137 dyes, all four kinds (hat/banner/pet/title) represented,
+        every hat carries a colour hex, every pet carries a model path.
+    B - !wear hat / banner / pet / title put the key in h["cos"][kind]; !dye sets h["cos"]["dye"];
+        !wear off <kind> removes it.
+    C - a real HeroBody's SKELETON carries eq_hat and eq_banner after refresh(); a HeroPet child is
+        mounted under the HeroBody for pet; the cape mesh's surface override albedo matches the
+        !dye colour exactly (dye=teal, sample=(0.1176, 0.5412, 0.5412)).
+    D - a 2-floor soak with four heroes each wearing wide_hat + banner_blue + crimson dye runs to
+        state=home with NO SCRIPT ERROR; every hero keeps their cos entries across floor transitions.
+- NO changes to roster.gd / gear.gd / data/items.json - the existing wiring is correct; this round
+  measures it. The pet mount check learns the real shape (HeroPet child, not eq_* bone), which was
+  wrong in the first draft and a measurement in the end.
+- CHANNEL-POINT COSMETICS the plan line mentions ("gated, needs T1/Mr. E") stay unbuilt - that is
+  Mr. E's call and belongs to whatever handles redeems in the EventSub path, not here.
+- GATE: --headless --import clean, _offfloor 0/1554, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a 11/11, _l29b 23/23, _l29c 18/18, _l30a 21/21, _l30b 17/17, _l56 4/4.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 144 - L30c loot tables verification (laptop jestai, 2026-11-13) - L30c (IN PROGRESS, WORK_PLAN untouched)
+L30c's DONE line: "loot scales in a 10-floor soak, a boss drops its unique." The gold ladder lives
+in Delve.boss_loot_mult + Delve._loot (floor_no * 11 * mult, with 0.6-1.6 Investigation band);
+boss / rare-lord / floor-unique payouts stack on top of it; Bestiary.lord_unique_for already loads
+78 written variants from data/bosses.json (L-cycle 140). The gap this round was proof the ladder
+and the Chronicle announcements still read correctly from an outside test.
+- tools/_l30c_test.gd (NEW, 9 checks):
+    A - Delve.boss_loot_mult is the single source of truth: 1.0 < floor_unique 2.0 < lord 3.0 <
+        rare_lord 4.5. A strict order, not a loose claim.
+    B - running Delve._loot 6 times at floor_no=2 and 6 times at floor_no=10 gives averages ~24 and
+        ~104 gold - a floor-10 average pays at LEAST 3x floor-2 average. A single-trial comparison
+        collided on the 0.6-1.6 Investigation band, so the test averages (RNG-robust).
+    C - Bestiary.lord_unique_for("hollow_king", 0.001) returns a variant from the 78 (a real skew
+        on hp/attack/speed carried in the name), and Bestiary.uniq_orphans() is empty - every
+        variant is placed under one of the eight canon lords.
+    D - a rare-lord _loot writes "A hoard that size does not come off an ordinary lord." to the
+        town feed; a plain-lord _loot does NOT. Checked by exact substring on a FakeTown that
+        exposes `feed` and `economy`.
+    E - a real 3-floor soak at start_floor=5 (first floor IS a boss floor) reaches state=home with
+        1 boss seen, 1 slain, and 528 gold banked across the party. No SCRIPT ERROR.
+- NO changes to delve.gd / roster.gd / bestiary.gd / data/bosses.json - the existing wiring is
+  correct; this round measures it. The _run_sync_loot rig uses HeroBody stubs in the tree so
+  _loot's reads of body.global_position and body typed as HeroBody both pass.
+- GATE: --headless --import clean, _offfloor 0/1453, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a 11/11, _l29b 23/23, _l29c 18/18, _l30a 21/21, _l30b 17/17, _l30c 9/9, _l56 4/4.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

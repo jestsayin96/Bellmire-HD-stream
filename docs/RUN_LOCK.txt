@@ -1,1 +1,1 @@
-IDLE 2026-11-14 02:38 - D51 shipped: angler pole mounts handslot.r (in-hand), gate green
+IDLE 2026-11-14 04:29 - hero_body idle-wander scoped to town (no delve keep_walkable spam); twitch parse verified clean

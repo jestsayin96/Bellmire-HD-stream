@@ -123,6 +123,11 @@ func _physics_process(delta: float) -> void:
 
 func _idle_wander() -> void:
     _idle_t = randf_range(8.0, 18.0)
+    # idle wander is a TOWN behaviour (town.keep_walkable / route); a delving
+    # hero's "town" is the Delve, which has neither - the delve drives its own
+    # movement, so skip wander there instead of calling a method it lacks.
+    if not is_instance_valid(town) or not town.has_method("keep_walkable"):
+        return
     if _idle_home == Vector3.ZERO:
         _idle_home = global_position
     # pick a point 2-6 m from our home spot, on the navmesh

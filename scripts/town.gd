@@ -5435,6 +5435,9 @@ func _caravan() -> void:
     v._linger = 99999.0
     _caravans.append({"v": v, "start": start, "phase": "in", "t": 0.0, "wagon": w})
     feed.append("A trade caravan is sighted on the west road.")
+    # D37: E3PO greets an arriving caravan (notables is town-held, call it directly)
+    if notables and notables.has_method("_e3po_say"):
+        notables._e3po_say("trader_arrives")
 
 func _caravan_pass(delta: float) -> void:
     _caravan_t -= delta

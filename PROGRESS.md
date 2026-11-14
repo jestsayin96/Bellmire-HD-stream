@@ -4606,3 +4606,29 @@ SHRINE alongside it so the kinds now cover the three names in the DONE line.
   5. No new mechanic, no new disaster, no new event and no new cost was introduced, so no new
      implementation work is created by this cycle - only more text for work already specified.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## D-cycle 127 - D20c animals: herds drift, dogs follow, birds flock (desktop build, CruzaderPC, 2026-11-13) - D20c DONE
+- THE GAP: animals wandered as independent agents. Each beast picked random targets inside its own pen rect,
+  so a "herd" never moved as a group; the sheepdog just walked the fence; the town dogs circled the square on
+  their own; and every bird circled its own fixed point at its own speed - a sky of unrelated wheels, not a flock.
+  D20a (routines) and D20b (crowd reactions) were done; D20c is the animal-behaviour beat of the same phase.
+- HERDS DRIFT + COHERE (animal.gd Animal.HerdMind + town.gd _spawn_animals): one mind per herd holds a centre
+  that slowly ambles between waypoints inside the pen (town._process ticks each; scales with Engine.time_scale
+  via delta, so it keeps pace at any game speed). Each cow/sheep/pig and each paddock horse/llama/foal grazes
+  within COHERE=3.2 m of that centre (clamped to the pen), so the herd stays a tight group AND travels together.
+- SHEEPDOG WORKS THE FLOCK (animal.gd orbit): the per-flock Corgi now orbits its flock's drifting centre at the
+  pen radius instead of the static fence line - it circles the sheep and moves with them.
+- TOWN DOGS FOLLOW (animal.gd follow/_follow_scan): the four square dogs acquire the nearest visible outdoor
+  townsperson within 22 m and trail them at a short leash (LEASH=4 m), re-picking when the person goes indoors
+  or walks out of range. Fleeing a raider still overrides following.
+- BIRDS FLOCK (town.gd _add_flock/_make_bird + _process): birds are grouped into flocks. A flock has one shared
+  centre that migrates between sky waypoints, one shared turn direction (they bank together), and each bird a
+  small angle offset so they bunch into a loose knot rather than spreading evenly round a ring. _birds stays one
+  entry per bird (so _d5_test's count check is unaffected); a new _flocks list carries the shared state.
+- PROBE (tools/_d20c_test.gd, ~45 s soak after warm-up): herds=4, herd centre moved 13.5 m while mean member
+  cluster radius held at 3.5 m (drift + cohesion); dogs follows=4, nearest-person min 0.5 m, near-frac 1.00;
+  flocks=8, min migration 11.1 m, 0 samples where a flock's birds scattered past 2.2x its radius. D20C_TEST PASS.
+- GATE: parse 0 errors; tools/_offfloor 0 of 1354; tools/_twitch_parse TWITCH_PARSE OK; tools/_townwalk in_solid
+  0/17115 (0.000%), raid 0/3086 PASS; tools/_delve_test ran clean, no SCRIPT ERROR. LOOK renders/cycles/20261113_d20c
+  (paddock_herd: horses clustered + cows bunched; dog_follow: a pug in among the square folk; flock_wheel: birds over the valley).
+- Files: scripts/animal.gd, scripts/town.gd, tools/_d20c_test.gd, tools/_d20c_shot.gd. No other worker's files touched.

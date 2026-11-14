@@ -430,7 +430,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       FESTIVAL beat (town._festival_pass, is_festival/festival_at) gathers idle folk to the square to mill and cheer. Market bustle
       stays D20a's midday errands. D20B_TEST PASS (base_street 120 -> raid_street 52; fled OK; festival square 3 -> 42, gathered OK).
       parse 0, OFFFLOOR 0/954, TWITCH_PARSE OK, _townwalk in_solid 0/14380 raid 0/2095 PASS, _delve 0 SCRIPT ERROR. LOOK renders/cycles/20261113_d20b.
-- [ ] D20c. ANIMALS: herds graze/drift, dogs follow, birds flock. DONE: animal-behaviour probe in a soak.
+- [x] D20c. ANIMALS: herds graze/drift, dogs follow, birds flock. DONE: animal-behaviour probe in a soak.
+      DONE D-cycle 127: herds now have a shared drifting centre (Animal.HerdMind) that ambles the pen, and
+      each beast grazes near it, so a herd moves together and stays clustered instead of each on its own
+      random patch; the sheepdog works its flock's centre (orbits the drift, not the fence); the four town
+      dogs trot after the nearest townsperson; and birds now fly as flocks - a shared centre that migrates
+      across the sky plus a shared turn direction and small per-bird angle offsets, so they wheel as a knot
+      and travel together rather than each circling its own point. tools/_d20c_test.gd soak: herds=4
+      moved 13.5 m / cluster radius 3.5 m, dogs follows=4 min_dist 0.5 m near_frac 1.00, flocks=8 migration
+      11.1 m / 0 scattered samples. D20C_TEST PASS. parse 0, OFFFLOOR 0/1354, TWITCH_PARSE OK, _townwalk
+      in_solid 0/17115 (0.000%) PASS, _delve_test clean. renders/cycles/20261113_d20c.
 # Phase F - magic & combat feel (town) [D21]
 - [ ] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.

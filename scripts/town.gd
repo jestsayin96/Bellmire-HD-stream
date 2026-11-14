@@ -269,6 +269,8 @@ func receive_haul(h: Dictionary) -> void:
 var delve: Delve = null
 var _at_mouth: Array = []
 var _birds := []
+var _herds := []             # D20c: Animal.HerdMind per grazing herd (drift + cohesion)
+var _flocks := []            # D20c: bird-flock state dicts (wheel + migrate together)
 var _pens := []
 var _pulses := []             # [light, base energy, speed, phase]
 var _furniture := {}
@@ -3082,11 +3084,20 @@ func _spawn_animals() -> void:
         _pen(pc, fw, sd, hw, hd, (hp - pc).normalized())
         _objs.append([pc, 10.0])
         var hk: Array = herds[i % herds.size()]
+        var hm := Animal.HerdMind.new()
+        hm.centre = pc
+        hm.fwd = fw
+        hm.side = sd
+        hm.hw = hw - 1.4
+        hm.hd = hd - 1.4
+        hm.start()
+        _herds.append(hm)
         if String(hk[0]) == "Sheep":
-            _flock_pens.append([pc, fw, sd, hw - 1.4, hd - 1.4])
+            _flock_pens.append([pc, fw, sd, hw - 1.4, hd - 1.4, hm])
         for k in range(int(hk[1])):
             var at := pc + sd * rng.randf_range(-hw + 1.5, hw - 1.5) + fw * rng.randf_range(-hd + 1.5, hd - 1.5)
             _animal(String(hk[0]), pc, fw, sd, hw - 1.4, hd - 1.4, at)
+            (animals[animals.size() - 1] as Animal).herd = hm
     # horses + llamas grazing loose in the meadow by the first farm (a paddock)
     if not _farm_frames.is_empty():
         var hp0: Vector3 = _farm_frames[0][0]
@@ -3099,11 +3110,22 @@ func _spawn_animals() -> void:
             var psd := Vector3(-out.z, 0, out.x)
             _pen(pd, pfw, psd, 13.0, 10.0, -out)
             _paddock = [pd, pfw, psd]
+            var pm := Animal.HerdMind.new()
+            pm.centre = pd
+            pm.fwd = pfw
+            pm.side = psd
+            pm.hw = 11.5
+            pm.hd = 8.5
+            pm.start()
+            _herds.append(pm)
+            _paddock.append(pm)
             _objs.append([pd, 16.0])
             for k in range(3):
                 _animal("Horse", pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+                (animals[animals.size() - 1] as Animal).herd = pm
             for k in range(2):
                 _animal("Llama", pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+                (animals[animals.size() - 1] as Animal).herd = pm
     # ducks on the slow water, a little flotilla at a few spots
     for xx in [-80.0, 12.0, 95.0, -150.0]:
         var x: float = float(xx)
@@ -3118,38 +3140,19 @@ func _spawn_animals() -> void:
             var kind := "Pug" if k % 2 == 0 else "Corgi"
             _animal(kind, _market_pos, Vector3(0, 0, 1), Vector3(1, 0, 0), 9.0, 9.0,
                     _market_pos + Vector3(rng.randf_range(-6, 6), 0, rng.randf_range(-6, 6)))
+            (animals[animals.size() - 1] as Animal).follow = true
     # a fox at the edge of the lumber mill's woods
     if landmarks.has("lm_sawmill"):
         var sw: Vector3 = landmarks["lm_sawmill"][0]
         var fc := sw + Vector3(-18, 0, 30)
         _animal("Fox", fc, Vector3(0, 0, 1), Vector3(1, 0, 0), 10.0, 8.0, fc)
-    # birds: little dark shapes wheeling over the valley, crows over the scar
+    # birds: flocks that wheel and migrate over the valley, crows over the scar (D20c)
     var dark := StandardMaterial3D.new()
     dark.albedo_color = Color(0.08, 0.08, 0.1)
     dark.cull_mode = BaseMaterial3D.CULL_DISABLED
     var spots := [[Vector3(0, 42, 0), 70.0, 6], [Vector3(-160, 34, 70), 40.0, 4], [_scar + Vector3(0, 24, 0), 22.0, 5]]
     for sp in spots:
-        for k in range(int(sp[2])):
-            var b := Node3D.new()
-            for side_s in [-1.0, 1.0]:
-                var wing := MeshInstance3D.new()
-                var wm := BoxMesh.new()
-                wm.size = Vector3(0.55, 0.03, 0.22)
-                wing.mesh = wm
-                wing.material_override = dark
-                wing.position = Vector3(0.28 * float(side_s), 0, 0)
-                b.add_child(wing)
-            var body := MeshInstance3D.new()
-            var bm := BoxMesh.new()
-            bm.size = Vector3(0.12, 0.1, 0.35)
-            body.mesh = bm
-            body.material_override = dark
-            b.add_child(body)
-            b.scale = Vector3.ONE * 1.4
-            add_child(b)
-            var w := rng.randf_range(0.12, 0.25) * (1.0 if rng.randf() < 0.5 else -1.0)
-            _birds.append([b, sp[0] as Vector3 + Vector3(rng.randf_range(-8, 8), rng.randf_range(-4, 6), rng.randf_range(-8, 8)),
-                           float(sp[1]) * rng.randf_range(0.6, 1.1), w, rng.randf() * TAU])
+        _add_flock(sp[0] as Vector3, float(sp[1]) * 0.8, int(sp[2]), 1.4, dark, rng)
     _spawn_more_animals(dark)
 
 ## D5: hens in a fenced run by each farmhouse, a sheepdog walking the edge of
@@ -3189,14 +3192,21 @@ func _spawn_more_animals(dark: StandardMaterial3D) -> void:
     for fp in _flock_pens:
         var c: Vector3 = fp[0]
         _animal("Corgi", c, fp[1], fp[2], float(fp[3]), float(fp[4]), c + (fp[2] as Vector3) * float(fp[3]))
-        (animals[animals.size() - 1] as Animal).edge = true
+        var sdog := animals[animals.size() - 1] as Animal
+        sdog.edge = true
+        if fp.size() > 5 and fp[5] != null:      # D20c: work the flock, not the fence
+            sdog.herd = fp[5]
+            sdog.orbit = true
     # the paddock: two more horses and a foal (five grown horses in all)
     if not _paddock.is_empty():
         var pd: Vector3 = _paddock[0]
         var pfw: Vector3 = _paddock[1]
         var psd: Vector3 = _paddock[2]
+        var pm2 = _paddock[3] if _paddock.size() > 3 else null
         for kind in ["Horse", "Horse", "Foal"]:
             _animal(String(kind), pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+            if pm2 != null:
+                (animals[animals.size() - 1] as Animal).herd = pm2
     # cats about the streets and doorsteps inside the town
     if _market_pos != Vector3.ZERO:
         var cats := 0
@@ -3210,7 +3220,7 @@ func _spawn_more_animals(dark: StandardMaterial3D) -> void:
                 continue
             _animal("Cat", p, Vector3(0, 0, 1), Vector3(1, 0, 0), 4.0, 4.0, p)
             cats += 1
-    # crows over the fields
+    # crows over the fields - a small flock each (D20c)
     var fi := 0
     for f in _fields:
         if fi >= 5:
@@ -3219,27 +3229,40 @@ func _spawn_more_animals(dark: StandardMaterial3D) -> void:
         var fc: Vector3 = f[0]
         var top := fc + Vector3(0, height_at(fc.x, fc.z) + 15.0, 0)
         var rad := 8.0 + maxf(float(f[3]), float(f[4])) * 0.35
-        for k in range(3):
-            var b := Node3D.new()
-            for side_s in [-1.0, 1.0]:
-                var wing := MeshInstance3D.new()
-                var wm := BoxMesh.new()
-                wm.size = Vector3(0.55, 0.03, 0.22)
-                wing.mesh = wm
-                wing.material_override = dark
-                wing.position = Vector3(0.28 * float(side_s), 0, 0)
-                b.add_child(wing)
-            var body := MeshInstance3D.new()
-            var bm := BoxMesh.new()
-            bm.size = Vector3(0.12, 0.1, 0.35)
-            body.mesh = bm
-            body.material_override = dark
-            b.add_child(body)
-            b.scale = Vector3.ONE * 1.3
-            add_child(b)
-            var w := rng.randf_range(0.15, 0.3) * (1.0 if rng.randf() < 0.5 else -1.0)
-            _birds.append([b, top + Vector3(rng.randf_range(-4, 4), rng.randf_range(-2, 4), rng.randf_range(-4, 4)),
-                           rad * rng.randf_range(0.6, 1.1), w, rng.randf() * TAU])
+        _add_flock(top, rad * 0.85, 3, 1.3, dark, rng)
+
+## D20c: a flock of birds wheels AND migrates together - one shared centre that
+## ambles between waypoints (they travel as a group), one shared turn direction
+## (they bank the same way), and each bird a small angle offset so they bunch into
+## a loose knot instead of spreading evenly round a ring.
+func _add_flock(home: Vector3, rad: float, n: int, scl: float, dark: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+    var w := rng.randf_range(0.14, 0.26) * (1.0 if rng.randf() < 0.5 else -1.0)
+    var fl := {"home": home, "centre": home, "to": home, "t": 0.0, "w": w,
+               "phase": rng.randf() * TAU, "r": maxf(4.0, rad), "span": maxf(6.0, rad * 0.7), "moved": 0.0}
+    _flocks.append(fl)
+    for k in range(n):
+        var b := _make_bird(dark, scl)
+        add_child(b)
+        _birds.append([b, fl, rng.randf_range(-rad * 0.16, rad * 0.16), rng.randf_range(-0.7, 0.7), rng.randf() * TAU])
+
+func _make_bird(dark: StandardMaterial3D, scl: float) -> Node3D:
+    var b := Node3D.new()
+    for side_s in [-1.0, 1.0]:
+        var wing := MeshInstance3D.new()
+        var wm := BoxMesh.new()
+        wm.size = Vector3(0.55, 0.03, 0.22)
+        wing.mesh = wm
+        wing.material_override = dark
+        wing.position = Vector3(0.28 * float(side_s), 0, 0)
+        b.add_child(wing)
+    var body := MeshInstance3D.new()
+    var bm := BoxMesh.new()
+    bm.size = Vector3(0.12, 0.1, 0.35)
+    body.mesh = bm
+    body.material_override = dark
+    b.add_child(body)
+    b.scale = Vector3.ONE * scl
+    return b
 
 ## ---------------------------------------------------------------- fishing
 ## Timber docks on the town bank, a fisher on each. Fishing rules are in
@@ -3396,14 +3419,28 @@ func _process(delta: float) -> void:
             _save_t = 30.0
             roster.save_all()
     var tnow := Time.get_ticks_msec() / 1000.0
+    for fl in _flocks:
+        fl["phase"] = float(fl["phase"]) + float(fl["w"]) * delta
+        fl["t"] = float(fl["t"]) - delta
+        var fc: Vector3 = fl["centre"]
+        var fto: Vector3 = fl["to"]
+        if float(fl["t"]) <= 0.0 or fc.distance_to(fto) < 2.0:
+            fl["t"] = randf_range(5.0, 12.0)
+            var home: Vector3 = fl["home"]
+            var span: float = fl["span"]
+            fto = home + Vector3(randf_range(-span, span), randf_range(-span * 0.3, span * 0.3), randf_range(-span, span))
+            fl["to"] = fto
+        var step: Vector3 = fc.move_toward(fto, delta * 2.2)   # the flock drifts across the sky
+        fl["moved"] = float(fl["moved"]) + fc.distance_to(step)
+        fl["centre"] = step
     for b in _birds:
         var bn: Node3D = b[0]
-        var c: Vector3 = b[1]
-        var r: float = b[2]
-        var w: float = b[3]
-        var a := tnow * w + float(b[4])
-        bn.position = c + Vector3(cos(a) * r, sin(tnow * 0.7 + float(b[4])) * 2.0, sin(a) * r)
-        bn.rotation.y = -a + (PI if w > 0.0 else 0.0)
+        var fl2: Dictionary = b[1]
+        var r: float = float(fl2["r"]) + float(b[2])
+        var a := float(fl2["phase"]) + float(b[3])
+        var ctr: Vector3 = fl2["centre"]
+        bn.position = ctr + Vector3(cos(a) * r, sin(tnow * 0.7 + float(b[4])) * 1.6, sin(a) * r)
+        bn.rotation.y = -a + (PI if float(fl2["w"]) > 0.0 else 0.0)
         var flap := sin(tnow * 9.0 + float(b[4])) * 0.6
         (bn.get_child(0) as Node3D).rotation.z = flap
         (bn.get_child(1) as Node3D).rotation.z = -flap
@@ -3414,6 +3451,8 @@ func _process(delta: float) -> void:
     for sp in _spinners:
         var n: Node3D = sp[0]
         n.rotate_object_local(sp[1], float(sp[2]) * delta)
+    for h in _herds:
+        h.tick(delta)
     _lod_t -= delta
     if _lod_t <= 0.0:
         _lod_t = 0.25

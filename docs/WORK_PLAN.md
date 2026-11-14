@@ -441,6 +441,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       11.1 m / 0 scattered samples. D20C_TEST PASS. parse 0, OFFFLOOR 0/1354, TWITCH_PARSE OK, _townwalk
       in_solid 0/17115 (0.000%) PASS, _delve_test clean. renders/cycles/20261113_d20c.
 # Phase F - magic & combat feel (town) [D21]
+- [ ] D56. GRASS MATERIAL WIRED TO DIRT (high priority, desktop). Owner: DESKTOP BUILD.
+      assets/kit/materials/MI_Grass.tres references T_Dirt_BaseColor/Normal/Roughness - the "MI_Grass"
+      material literally uses DIRT textures. D45 re-graded ground.gdshader (the main lawn reads green),
+      but THIS material instance was never repointed, so any surface using MI_Grass still looks like
+      dirt/sand. Fix: point MI_Grass.tres at real CC0 grass textures (or the same source D45 used),
+      correct tiling; if no grass texture asset exists, create/copy a CC0 one with a LICENSE note.
+      Render the areas that use MI_Grass and LOOK. DONE: those surfaces read as grass, Mr. E confirms.
+
 - [ ] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
 # Phase G - audio polish (owns sfx.gd) [D22]

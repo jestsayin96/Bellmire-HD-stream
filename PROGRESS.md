@@ -4473,3 +4473,29 @@ SHRINE alongside it so the kinds now cover the three names in the DONE line.
   making argument order uniform across the three lines (same thing 4dc3172 did for delve.start / _loot).
   Nothing in the content file is at fault and nothing there was touched.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 142 - L30a gear expansion verification (laptop jestai, 2026-11-13) - L30a (IN PROGRESS, WORK_PLAN untouched)
+L30a's DONE line asks for "heroes equip visibly in a soak, bonuses apply". The content writer has
+shipped 130 accessories in data/items.json across five slots (ring/amulet/cloak/boots/gloves) with
+real 5E bonuses (ac/saves/hp/speed/hit/dmg), and L13 already wired roster.wear / roster.acc_bonus /
+Gear.dress_cosmetics / HeroBody.refresh. The gap this round was PROOF the wiring still holds end-to-
+end, not more content.
+- tools/_l30a_test.gd (NEW, 21 checks):
+    A - items.json loads (130 accessories), all five slots represented, every accessory carries at
+        least one of the six bonus keys. The writer is not idle.
+    B - !wear puts the key in h["acc"][slot] for each of the five slots; !wear off <slot> removes it.
+    C - the stats the delve ACTUALLY reads each move by the expected amount: AC (+1 from a ring),
+        attack_bonus (+1 from gloves), max_hp (+12 from an amulet), speed (+0.60 from boots),
+        save_bonus(wis) (+1 from a cloak), acc_bonus(dmg) (+2 from a dmg glove).
+    D - a real HeroBody (model loaded, skeleton instantiated) carries eq_ring / eq_amulet /
+        eq_glove_l-r nodes on its skeleton after refresh(); a weapon tier change moves the mesh
+        at eq_weapon. This is the "visible on handslot bones (rig EQUIP)" half of the plan line.
+    E - a 3-floor soak at start_floor=2 with four heroes each wearing smith_gloves + nightwatch_ring
+        runs to its frame cap in a live state with NO SCRIPT ERROR - acc_bonus reads every blow and
+        the delve stays coherent.
+- NO changes to roster.gd / gear.gd / data/items.json - the existing wiring is correct. This round
+  measured it; if a later round widens the content it will leave this test in place.
+- GATE: --headless --import clean, _offfloor 0/1525, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a 11/11, _l29b 23/23, _l29c 18/18, _l56 4/4, _l30a 21/21.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

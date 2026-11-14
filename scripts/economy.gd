@@ -20,6 +20,49 @@ var _beat := {}            # townsfolk -> seconds to next produce
 var _chatter := 15.0
 signal changed
 
+# ---- D34 natural disasters -------------------------------------------------
+# The words (begin / during / pass + alt variants) are the content writer's,
+# in data/lore_lines.json "disasters"; the COST of each is a mechanic and lives
+# here, charged against the town's own stock, treasury and renown. Disasters are
+# OCCASIONAL and gated on town size (a four-hut Crossing is never struck by a
+# volcano), one at a time, and they leave a mark the stream can read.
+const DIS_MIN_LEVEL := 2          # nothing before the town is more than a founding
+const DIS_MIN_DAY := 6            # and not in the first days
+const DIS_DAYS := 2.5             # how long one lingers, in in-game days
+const DIS_COOL_DAYS := 7.0        # mean quiet span between disasters, jittered
+const DIS_DURING_GAP := 24.0      # seconds between "during" Chronicle lines
+# frac_* are fractions of CURRENT stock lost at onset (scale with the town, never
+# over-draw); gold is a flat treasury hit, renown a flat standing hit. workk damps
+# production while it lasts; no_growth halts hiring/settling; no_cast / trade_frozen
+# are exposed for spells / trade to honour. on_pass_gold is a rebuild cost (<0) or a
+# windfall (>0) applied when it ends.
+const DIS_SPECS := {
+    "volcano":    {"food": 0.45, "gold": 120, "renown": 1, "workk": 0.6, "on_pass_gold": -60},
+    "fire":       {"wood": 0.6, "gear": 0.5, "gold": 90, "workk": 0.5, "on_pass_gold": -80},
+    "drought":    {"food": 0.6, "renown": 1, "workk": 0.5},
+    "famine":     {"food": 0.5, "renown": 2, "no_growth": true},
+    "sickness":   {"renown": 2, "workk": 0.35, "trade_frozen": true, "no_growth": true},
+    "hurricane":  {"wood": 0.5, "food": 0.3, "gold": 80, "workk": 0.6, "on_pass_gold": -60},
+    "tornado":    {"wood": 0.45, "stone": 0.3, "gold": 70, "workk": 0.7},
+    "earthquake": {"stone": 0.55, "wood": 0.3, "gold": 110, "renown": 1, "workk": 0.6, "on_pass_gold": -70},
+    "meteor":     {"food": 0.3, "wood": 0.3, "workk": 0.7, "on_pass_gold": 260},
+    "scarstorm":  {"renown": 1, "workk": 0.6, "no_cast": true},
+    "flood":      {"food": 0.35, "wood": 0.3, "gold": 60, "workk": 0.6, "trade_frozen": true},
+    "blight":     {"food": 0.7, "potion": 0.4, "no_growth": true},
+    "coldsnap":   {"food": 0.4, "wood": 0.4, "workk": 0.3, "no_growth": true},
+}
+var _dis_lore := {}
+var _dis_lore_loaded := false
+var _dis_active := ""
+var _dis_t := 0.0
+var _dis_during_t := 0.0
+var _dis_cool := DIS_COOL_DAYS * DAY_SECONDS   # a quiet spell before the first
+var dis_work_k := 1.0             # production multiplier while a disaster lasts
+var _dis_no_growth := false
+var _dis_no_cast := false
+var _dis_trade_frozen := false
+var disasters_survived := 0
+
 ## ---- town level (old sim.gd). Earned by holding people and being worth
 ## talking about; gold left out on purpose. Checked once a day (90 s), and a
 ## town can fall back down. Raids are gated on it (from level 3).
@@ -206,7 +249,7 @@ func _process(delta: float) -> void:
             # old villager: _produce runs in the WORK state, which is the
             # daytime (the old clock: night is before 6:00 and after 18:30)
             if not is_night():
-                produce(String(f.role), work_roll())
+                produce(String(f.role), work_roll() * dis_work_k)
                 any = true
                 if last_work_d == 20 and _work_big_t <= 0.0 and f.person_name != "":
                     _work_big_t = 150.0
@@ -224,6 +267,7 @@ func _process(delta: float) -> void:
         day += 1
         _end_of_day()
     growth(delta)
+    _disaster_tick(delta)
     _work_big_t -= delta
     _chatter -= delta
     if _chatter <= 0.0:
@@ -305,11 +349,13 @@ func growth(delta: float) -> void:
     _hire_t -= delta
     if _hire_t <= 0.0:
         _hire_t = 40.0
-        _chief_spends()
+        if not _dis_no_growth:
+            _chief_spends()
     _settler_t -= delta
     if _settler_t <= 0.0:
         _settler_t = randf_range(45.0, 80.0)
-        _settlers()
+        if not _dis_no_growth:
+            _settlers()
     _hunger_t -= delta
     if _hunger_t <= 0.0:
         _hunger_t = 20.0
@@ -381,3 +427,112 @@ func _hunger() -> void:
     if hp <= 0.0:
         renown = max(0, renown - 2)
         town.call("bury", v, "%s has starved." % v.person_name)
+
+
+## --------------------------------------------------- D34 natural disasters
+func _ensure_dis_lore() -> void:
+    if _dis_lore_loaded:
+        return
+    _dis_lore_loaded = true
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return
+    var data: Variant = JSON.parse_string(f.get_as_text())
+    f.close()
+    if data is Dictionary and (data as Dictionary).has("disasters"):
+        _dis_lore = (data as Dictionary)["disasters"]
+
+func disaster_active() -> String:
+    return _dis_active
+
+func casting_blocked() -> bool:
+    return _dis_no_cast
+
+func trade_blocked() -> bool:
+    return _dis_trade_frozen
+
+## the canonical line, or - 6 times in 10 - a random alt so a second disaster of
+## the same kind never reads word for word like the first
+func _dis_phrase(key: String, alt_key: String) -> String:
+    var d: Dictionary = _dis_lore.get(_dis_active, {})
+    if d.is_empty():
+        return ""
+    if alt_key != "" and d.has(alt_key):
+        var alt: Array = d[alt_key]
+        if alt.size() > 0 and randf() < 0.6:
+            return String(alt[randi() % alt.size()])
+    return String(d.get(key, ""))
+
+func _dis_say(line: String) -> void:
+    if line == "" or town == null:
+        return
+    var feed = town.get("feed")
+    if feed != null and (feed.is_empty() or String(feed.back()) != line):
+        feed.append(line)
+
+## begin a named disaster: charge its onset cost, raise its flags, cry the line
+func trigger_disaster(name: String) -> bool:
+    if _dis_active != "" or not DIS_SPECS.has(name):
+        return false
+    _ensure_dis_lore()
+    _dis_active = name
+    _dis_t = DIS_DAYS * DAY_SECONDS
+    _dis_during_t = DIS_DURING_GAP
+    var spec: Dictionary = DIS_SPECS[name]
+    for g in GOODS:
+        if spec.has(g):
+            stock[g] = maxf(0.0, stock.get(g, 0.0) * (1.0 - float(spec[g])))
+    if spec.has("gold"):
+        treasury = max(0, treasury - int(spec["gold"]))
+    if spec.has("renown"):
+        renown = max(0, renown - int(spec["renown"]))
+    dis_work_k = float(spec.get("workk", 1.0))
+    _dis_no_growth = bool(spec.get("no_growth", false))
+    _dis_no_cast = bool(spec.get("no_cast", false))
+    _dis_trade_frozen = bool(spec.get("trade_frozen", false))
+    _dis_say(_dis_phrase("begin", "begin_alt"))
+    changed.emit()
+    return true
+
+func _end_disaster() -> void:
+    if _dis_active == "":
+        return
+    var spec: Dictionary = DIS_SPECS.get(_dis_active, {})
+    _dis_say(_dis_phrase("pass", "pass_alt"))
+    var og: int = int(spec.get("on_pass_gold", 0))
+    if og != 0:
+        treasury = max(0, treasury + og)
+    disasters_survived += 1
+    _dis_active = ""
+    _dis_t = 0.0
+    dis_work_k = 1.0
+    _dis_no_growth = false
+    _dis_no_cast = false
+    _dis_trade_frozen = false
+    _dis_cool = randf_range(DIS_COOL_DAYS * 0.7, DIS_COOL_DAYS * 1.3) * DAY_SECONDS
+    changed.emit()
+
+func _disaster_tick(delta: float) -> void:
+    if _dis_active != "":
+        _dis_t -= delta
+        _dis_during_t -= delta
+        if _dis_during_t <= 0.0:
+            _dis_during_t = DIS_DURING_GAP
+            var d: Dictionary = _dis_lore.get(_dis_active, {})
+            var during: Array = d.get("during", [])
+            if during.size() > 0:
+                _dis_say(String(during[randi() % during.size()]))
+        if _dis_t <= 0.0:
+            _end_disaster()
+        return
+    _dis_cool -= delta
+    if _dis_cool <= 0.0:
+        _dis_cool = randf_range(DIS_COOL_DAYS * 0.7, DIS_COOL_DAYS * 1.3) * DAY_SECONDS
+        if town_level >= DIS_MIN_LEVEL and day >= DIS_MIN_DAY:
+            _maybe_disaster()
+
+func _maybe_disaster() -> void:
+    _ensure_dis_lore()
+    var pool: Array = DIS_SPECS.keys()
+    if not pool.is_empty():
+        trigger_disaster(String(pool[randi() % pool.size()]))

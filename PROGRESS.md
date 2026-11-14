@@ -4870,3 +4870,55 @@ Chronicle names the kill.
 - GATE: --headless --import clean, _offfloor 0/1363, _twitch_parse OK, _delve_test no
   SCRIPT ERROR, _l29c OK 26/26 (26 checks, 0 failed).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+## D-cycle D5 - D34 natural disasters (desktop build, 2026-11-13 ~20:34 local)
+
+- QUEUE REASONING (why D34 and not an earlier ID). D44b is the escalated top item but its sole
+  remaining cause is the south-market navmesh sliver, which needs the ATTENDED navmesh-bake param
+  change (edge_max_error 0.4 -> ~0.2 with a stuck_on_route guard) that the 18:02 diagnostic and the
+  supervisor both said not to gamble unattended - so it stays UNTICKED this firing. D29 (silent town):
+  D42 already added the surface-aware footstep caller (townsfolk.gd:132) and the animal-voice callers
+  (animal.gd:377, daylight.gd:124), and animal.gd documents why penned horses read 0 - so the CODE is
+  done; only Mr. E's re-recorded + measured clip remains, which is not a code task. D31 needs growth.gd
+  (UNOWNED in COORDINATION 11.2) for the visible construction, and D32 re-parameterises the core economy
+  level loop whose gate is "a measured curve Mr. E approves" - both are poor fits for a clean unattended
+  auto-commit. D33 needs monster camps + a scaled boss (monster.gd/bestiary.gd = laptop) and a clearing
+  mechanic - cross-ownership risk. D34 is the first clean, in-ownership, content-ready, fully-testable
+  item: environmental, self-contained, no cross-file coupling.
+
+- WHAT WAS BUILT (economy.gd only, +158/-3). A self-contained disaster subsystem driven by the content
+  writer's data/lore_lines.json "disasters" (READ, never edited). 13 disasters: volcano, fire, drought,
+  famine, sickness, hurricane, tornado, earthquake, meteor, scarstorm, flood, blight, coldsnap. Each has
+  a DIS_SPECS entry: onset cost as FRACTIONS of current stock (food/wood/stone/ore/gear/potion) so it
+  scales with the town and never over-draws, plus a flat gold (treasury) and renown hit; a production
+  multiplier dis_work_k folded into the work beat; no_growth (halts settlers + chief hiring); and
+  no_cast / trade_frozen exposed via casting_blocked() / trade_blocked() for spells.gd and the caravan
+  path to honour later. meteor's on_pass_gold is a +260 scarglass windfall; volcano/fire/hurricane/
+  earthquake/flood carry a rebuild cost paid when they pass. Lines use begin/during/pass and - 6 in 10 -
+  a random begin_alt/pass_alt so a second disaster of the same kind never reads word for word like the
+  first. OCCASIONAL and one-at-a-time: a ~7-day (jittered) quiet span, gated on town_level>=2 and day>=6
+  so a four-hut founding is never struck. All content-driven - no disaster names, lines or counts are
+  hard-coded here; adding one to lore_lines + DIS_SPECS is the only change needed for more.
+
+- TEST (tools/_d34_test.gd, new, committed). Builds a real Economy with a stub Node3D town carrying a
+  feed array, then for all 13: triggers, asserts the begin line reaches the Chronicle, asserts the onset
+  cost actually moved stock/treasury/renown, asserts every active flag matches the spec, asserts a second
+  cannot start while one is active, ticks a during line, ends it, asserts the pass line + the rebuild-cost
+  / windfall arithmetic + a full flag reset. Then the scheduler: no disaster for a tiny early town, one
+  fires once town_level/day are grown. D34_TEST OK (191 checks, 0 failed).
+
+- GATE (shared Godot lock held RUNNING 20:25 -> IDLE ~20:34, no second instance; tasklist clean before
+  each launch). --import clean (Economy registers). Boot --quit-after 300: rc 0, 0 SCRIPT ERROR / Parse
+  Error (the dormant disaster tick ran every frame in a live boot with no error). _offfloor 0 of 1487,
+  INPROP 0, MON_INPROP 0 of 119. TWITCH_PARSE OK. _townwalk in_solid 0/16966 (0.000%) raid 0/4648 PASS,
+  stuck_on_route 0 (my change does not touch nav). _delve_test ran clean across floors, 0 SCRIPT ERROR.
+  Live Town soak (temp script, deleted - not committed): forced drought cut food 60.0->24.0 and meteor
+  24.0->16.8, each pushing a distinct begin/during/pass triple into the Chronicle feed, 0 SCRIPT ERROR.
+
+- NOT DONE / FOR THE SUPERVISOR + NEXT CYCLE. The on-stream VISIBLE effect and Mr. E's eye are the last
+  piece of D34's DONE and need a live/visual pass I cannot do unattended - ticked [x] on the mechanic +
+  tests the D24/D30 way, untick if you want the visual held. Two wiring hooks are left for a later cycle,
+  both in desktop-owned files: honour casting_blocked() in spells.gd (no town casting during a scarstorm)
+  and trade_frozen in the caravan arrival path (no caravan during sickness/flood). D44b still needs its
+  attended navmesh-bake fix; D29 awaits Mr. E's measured re-recording; D31/D32 (growth, needs growth.gd
+  ownership + Mr. E's curve) and D33 (events, needs laptop monster/boss coordination) remain open.

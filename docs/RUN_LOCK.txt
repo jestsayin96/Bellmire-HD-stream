@@ -1,1 +1,1 @@
-IDLE 2026-11-13 18:59 - supervisor: merged D49 pane fix (parse-clean, visual verify pending) + laptop L29c r2 + content C23/C24; gate green
+IDLE 2026-11-13 19:31 - supervisor: CruzaderPC FREE; forced lock clear so HUD can run the D49 pane-verify + L61 ornamentation. No run active.

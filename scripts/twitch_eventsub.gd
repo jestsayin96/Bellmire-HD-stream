@@ -476,6 +476,9 @@ func _sub_list() -> Array:
         ["channel.subscription.gift", "1", b],
         ["channel.follow", "2", {"broadcaster_user_id": broadcaster_id, "moderator_user_id": broadcaster_id}],
         ["channel.channel_points_custom_reward_redemption.add", "1", b],
+        # Custom Power-ups (bit-cost rewards): fire the town-wide tier for the bits spent.
+        # v1, needs bits:read (already held). Payload: event.custom_power_up.{id,title,bits}.
+        ["channel.custom_power_up_redemption.add", "1", b],
     ]
 
 func subscribe_all() -> void:
@@ -565,6 +568,18 @@ func handle_event(kind: String, e: Dictionary) -> void:
             _feed_line("%s cheers %d bits for Bellmire!" % [who, bits])
             _spot(uid, "bits", bits_seconds(bits), "cheered %d bits" % bits)
             _do_bits_tier(uid, bits)
+        "channel.custom_power_up_redemption.add":
+            # a bought Power-up: its bit cost drives the same town-wide tier as a cheer
+            var pu: Dictionary = e.get("custom_power_up", {}) if typeof(e.get("custom_power_up")) == TYPE_DICTIONARY else {}
+            var pbits := int(pu.get("bits", 0))
+            var ptitle := String(pu.get("title", "a Power-up"))
+            if uid == "":
+                _feed_line("A stranger spends %d bits on %s for Bellmire." % [pbits, ptitle])
+                _do_bits_tier("", pbits)
+                return
+            _feed_line("%s redeems %s (%d bits) for Bellmire!" % [who, ptitle, pbits])
+            _spot(uid, "bits", bits_seconds(pbits), "redeemed %s" % ptitle)
+            _do_bits_tier(uid, pbits)
         "channel.subscribe":
             if bool(e.get("is_gift", false)):
                 _feed_line("%s is gifted a place in the guild." % who)    # the gifter has the pane

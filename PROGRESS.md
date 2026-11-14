@@ -5336,3 +5336,29 @@ was the EVENT triggers in laptop-owned files - this cycle wires all seven (+1 th
   --import skipped; the prior environmental hang hasn't been confirmed resolved and _delve_test
   implicitly covers parse.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 149 - monster telegraphs on boss big swings (laptop jestai, 2026-11-14)
+Supervisor: "bestiary depth (monster abilities/telegraphs)". A boss's heaviest attacks - the breath,
+the volley - used to just land. The stream saw the hit but not the wind-up. One line of Chronicle
+right before the attack fires makes the beat readable.
+- scripts/delve.gd (new _boss_tell helper, call sites in the creature-answer loop):
+    _boss_tell(mon, templ) - writes `templ % mon.def.name` to the Chronicle, ONLY for creatures
+    with def.boss == true (so ordinary foes stay silent), and ONCE per BOSS_TELL_EVERY (3.5 s)
+    per-monster via a set_meta("boss_tell_t", _t). Counted in Delve.bestiary_tells for the test.
+  Call sites in the creature-answer branch of _fight_body:
+    - before mon.breathe(chest):  "%s draws breath - brace."
+    - before a volley shot:       "%s nocks a volley - cover!"
+  Both templates use %s only (no leading "The"), because canon lord names already carry it
+  (Bestiary: "The Hollow King", "The Rattling Host", ...). Verified: "The Hollow King draws
+  breath - brace." reads clean, "The The Hollow King..." no longer possible.
+- tools/_bestiary_tells_test.gd (NEW, 10 checks):
+    A - a boss call writes exactly one line, name in the line, counter counted, cooldown meta set
+    B - a second call inside BOSS_TELL_EVERY writes nothing
+    C - the same call on a non-boss monster writes nothing
+    D - past the cooldown the tell fires again
+- NO changes to Monster or Bestiary - telegraphs ride the def.boss flag that is already set by
+  Bestiary.boss_def and Bestiary.unique_def (every lord and L2 unique).
+- GATE on jestai: _bestiary_tells OK 10/10, _delve_test 0 SCRIPT ERROR (ran before this cycle's
+  ...regression round is in flight as this is committed - trap and L29c tests are green already).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

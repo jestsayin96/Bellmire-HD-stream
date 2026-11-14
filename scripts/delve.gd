@@ -392,6 +392,27 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	def2["atk"] = float(def.get("atk", 4.0)) * MINIBOSS_ATK_MULT
 	m.def = def2
 
+## L-cycle 149 (bestiary depth): a boss or elite about to swing something big
+## writes a one-line TELL to the Chronicle so the stream sees it coming - the
+## "watch the wind-up" beat Mr. E has asked for in bits. Gated on boss=true so
+## ordinary foes do not spam. Rate-limited per-monster (BOSS_TELL_EVERY) in case
+## a boss's swing window is tight: one line per cadence, not one per tick.
+const BOSS_TELL_EVERY := 3.5
+func _boss_tell(mon: Monster, templ: String) -> void:
+	if not is_instance_valid(mon):
+		return
+	if not bool(mon.def.get("boss", false)):
+		return
+	var last := float(mon.get_meta("boss_tell_t", -99.0))
+	if _t - last < BOSS_TELL_EVERY:
+		return
+	mon.set_meta("boss_tell_t", _t)
+	_say(templ % String(mon.def.get("name", "the lord")))
+	Delve.bestiary_tells = int(Delve.bestiary_tells) + 1
+## Static counter so the test can read telegraph firings without reaching into a
+## live delve. Reset by tools that want deterministic counts.
+static var bestiary_tells := 0
+
 ## R4 rally tick: scan the floor for any wounded miniboss still carrying the
 ## "rallied == false" meta and, once its hp dips below half, bump its atk and
 ## write the Chronicle line. Called from _fight() alongside the other per-tick
@@ -1465,9 +1486,12 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			fury = float(en.get("atk", 1.3))
 		var chest := nb.global_position + Vector3(0, 1.1, 0)
 		if ways.has("breath"):
+			_boss_tell(mon, "%s draws breath - brace.")
 			mon._swing = 2.6
 			mon.breathe(chest)
 		elif shots > 0.0:
+			if ways.has("volley"):
+				_boss_tell(mon, "%s nocks a volley - cover!")
 			mon._swing = 2.2
 			mon.shoot(chest)
 			if ways.has("volley"):

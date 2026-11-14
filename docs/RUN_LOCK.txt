@@ -1,1 +1,1 @@
-IDLE 2026-11-13 19:31 - supervisor: CruzaderPC FREE; forced lock clear so HUD can run the D49 pane-verify + L61 ornamentation. No run active.
+IDLE 2026-11-13 19:40 - supervisor: CruzaderPC free. D49 pane fix is on main (spotlight.gd, u19) but UNVERIFIED - headless render tools hang; needs a windowed look (HUD worker or Mr. E in OBS).

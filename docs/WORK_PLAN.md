@@ -81,11 +81,22 @@ nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53
 attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
 it up), D46, D50, L38 (needs a second framing pass).
 
-- [ ] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
+- [x] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
       pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
       it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
       bone. Pairs with D40's fishing animation + water work; do them together.
       DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
+      RESULT (D-cycle D11): FIXED in angler.gd. The rod pivot was parented to the Angler at a
+      FIXED body offset (0.28,1.05,0.30) - it floated beside the body, never in the hand. Now it
+      rides a BoneAttachment3D on the body's right-hand bone (handslot.r), exactly like a weapon
+      equip, with a grip rotation (~+30deg about Z) that rakes the tip up and out over the water;
+      falls back to the old body offset only if a body has no hand bone, and the attachment is
+      freed with the angler (no orphan rod). _d51_test: mount=handslot.r, rod tip is a descendant
+      of the body skeleton for both dock anglers -> D51_TEST OK. GATE GREEN: parse 0, _offfloor
+      0/1700, TWITCH_PARSE OK, _townwalk in_solid 1/18280 (0.005%) PASS, _delve_test rc0 clean.
+      LOOKED (renders/cycles/d51/d51_pole_inhand.png): the rod rises FROM the fisher's hand,
+      angled up and out, line running to the water - held, not floating. Mr. E's live sign-off
+      is the remaining half.
 
 - NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
   appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to

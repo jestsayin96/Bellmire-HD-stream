@@ -5206,3 +5206,29 @@ that is Mr. E's 'all these people hanging out not doing anything'. The 111 mover
   eye on LIVE motion to sign off. Ticked on the code+gate+crop; his sign-off is the remaining half.
 - STILL IN THE PRIORITY SECTION (next desktop cycles): D53 (cart detached from hauler), D54 (NPCs vanish
   into buildings), D51 (fishing-pole grip).
+
+
+## D-cycle D11 - D51 the angler's fishing pole now sits IN the hand (desktop build, 2026-11-14 ~02:30)
+Priority-section item (visible jank), pairs with D40. Mr. E (clip 14-27-07): the pole floats / is
+in the wrong grip. CAUSE (angler.gd): _build_rod() parented the rod pivot to the Angler node at a
+fixed offset Vector3(0.28,1.05,0.30) + a fixed tilt - a rod hanging beside the body, attached to
+nothing that moves with the hand.
+- FIX (angler.gd, mine): the rod now mounts on the body's RIGHT-HAND bone via a BoneAttachment3D,
+  the same mechanism Rig.equip uses for weapons on handslot.r. _mount_rod() (called deferred from
+  _find_anim, after the body's skeleton exists) finds handslot.r (then .l / hand.* as fallbacks),
+  reparents the rod pivot onto it, and applies a grip rotation ~+30deg about Z that rakes the tip
+  up and out over the water. If a body has NO hand bone it keeps the old fixed offset (safe). The
+  attachment is freed in _exit_tree so a despawning angler leaves no orphan rod in the hand.
+- Grip chosen with tools/_d51_aim.gd (headless): sampled pivot rotations and read rod-tip vs hand;
+  +30deg about Z gives tip +1.4 up / +2.4 out, a natural raised hold. (aim probe is scratch, not
+  committed.)
+- GATE GREEN: parse 0 (rc0, no SCRIPT/Parse errors), _offfloor 0/1700 (INPROP 0, MON_INPROP 0),
+  TWITCH_PARSE OK, _townwalk in_solid 1/18280 (0.005%) raid 0/5888 PASS, _delve_test rc0 no SCRIPT
+  ERROR. Item test tools/_d51_test.gd: for both dock anglers mount=handslot.r and the rod tip is a
+  descendant of the body skeleton -> D51_TEST OK (2 anglers).
+- LOOKED (WINDOWED, renders/cycles/d51/d51_pole_inhand.png): the rod rises from the fisher's hand,
+  angled up and out, the line running down to the water - clearly HELD, not floating beside him.
+- HONEST CAVEAT: a still frame + the node-tree test prove the rod is hand-parented and reads right
+  at rest/cast; the full cast->reel->show motion in live play is Mr. E's eye to sign off. Ticked on
+  code + gate + the in-hand capture; his live sign-off is the remaining half. Tools added:
+  tools/_d51_test.gd, tools/_d51_shot.gd.

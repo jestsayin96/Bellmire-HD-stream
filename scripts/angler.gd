@@ -34,6 +34,13 @@ var _label: Label3D
 var _item: Dictionary = {}
 var _from := Vector3.ZERO
 var _anim: AnimationPlayer
+var _rod_pivot: Node3D
+var _rod_mount: BoneAttachment3D
+
+## D51: the rod rides the body's right-hand bone so it is HELD, not floating.
+const HAND_BONES := ["handslot.r", "handslot.l", "Hand.R", "hand.r", "hand_r"]
+const HAND_GRIP_POS := Vector3(0.0, 0.0, 0.0)
+const HAND_GRIP_ROT := Vector3(0.0, 0.0, 0.52)   # rad ~ +30 deg about Z: tip raised up and out over the water
 
 func _ready() -> void:
     _rng.randomize()
@@ -76,15 +83,53 @@ func _find_anim() -> void:
     var p := get_parent()
     if p and "_anim" in p:
         _anim = p.get("_anim")
+    _mount_rod()
+
+## Parent the rod onto the body's right-hand bone (like a weapon on
+## handslot.r) so the pole is gripped in the hand and follows every clip.
+## Falls back to the fixed body offset when the body has no hand bone.
+func _mount_rod() -> void:
+    if not is_instance_valid(_rod_pivot):
+        return
+    var holder := get_parent()
+    if holder == null:
+        return
+    var sk := Rig.skeleton(holder)
+    if sk == null:
+        return
+    var bone := ""
+    for bn in HAND_BONES:
+        if sk.find_bone(bn) >= 0:
+            bone = bn
+            break
+    if bone == "":
+        return
+    var att := BoneAttachment3D.new()
+    att.name = "angler_rod_mount"
+    att.bone_name = bone
+    sk.add_child(att)
+    _rod_mount = att
+    if _rod_pivot.get_parent():
+        _rod_pivot.get_parent().remove_child(_rod_pivot)
+    att.add_child(_rod_pivot)
+    _rod_pivot.position = HAND_GRIP_POS
+    _rod_pivot.rotation = HAND_GRIP_ROT
+
+func _exit_tree() -> void:
+    if is_instance_valid(_rod_mount):
+        _rod_mount.queue_free()
+        _rod_mount = null
 
 func _build_rod() -> void:
     var wood := StandardMaterial3D.new()
     wood.albedo_color = Color(0.45, 0.32, 0.20)
     var pivot := Node3D.new()
+    pivot.name = "RodPivot"
     pivot.position = Vector3(0.28, 1.05, 0.30)
     # rotating +Y about X by +a swings the tip toward +Z = out over the water
     pivot.rotation.x = deg_to_rad(52.0)
     add_child(pivot)
+    _rod_pivot = pivot
     var rod := MeshInstance3D.new()
     var cm := CylinderMesh.new()
     cm.top_radius = 0.012

@@ -1,1 +1,1 @@
-IDLE 2026-11-13 22:26 - supervisor: merged hud-ui U24 (D49/L61/18px signoff) + laptop dungeon; gate green
+IDLE 2026-11-13 23:03 - D32 12-tier growth ladder shipped, gate green

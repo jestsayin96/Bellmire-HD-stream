@@ -5140,3 +5140,39 @@ the Chronicle writes a tell. The fight now has a readable mid-beat on stream, no
 - GATE: --headless --import clean, _offfloor 0/1316, _twitch_parse OK, _delve_test no
   SCRIPT ERROR, _l29c OK 33/33.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## D-cycle D7 - D32 town levels too fast: a 12-tier EARNED ladder (desktop, 2026-11-13 23:03)
+Mr. E: "the town levels far too fast." The boot probe confirmed it - under the old 6-level
+table the town FOUNDED at level 3 of 6 (score 153 = pop 51x3, renown 0) and then auto-climbed
+to level 5 on settlers alone, with no achievement. Re-parameterised to the content writer's
+TWELVE growth tiers (data/lore_lines.json "growth_tiers") on an earned curve. Files mine
+(economy.gd) + growth.gd (desktop-origin, D-cycle D3, owned by no other worker); data read-only.
+- economy.gd TOWN_LEVELS: 6 -> 12 tiers (crossing/hamlet/guild post/village/market-day/chapel/
+  crafters' row/garrison/market town/walled heart/walled town/city). Thresholds on the existing
+  score (pop x3 + renown x2): 0/120/175/230/290/360/440/540/660/800/960/1140. Founding (153) now
+  lands at HAMLET (tier 2). The pop-driven ceiling is ~315 (pop_cap 105 x3) = tier 5, so EVERY
+  tier above that is RENOWN-gated: becoming a City is a long delving grind, not a free gift.
+- economy.gd: each tier crossed now cries the content writer's line (growth_tiers.tiers[i].crier),
+  loaded once via _ensure_growth_lore() mirroring the disaster loader; founding cries tier 1,
+  a multi-tier jump cries each crossed. town_name keeps a lowercase grammatical form for the
+  standing readout; the proper names live in the crier lines. No parallel copy of the words.
+- growth.gd show_level: maps the 12 economy tiers onto its 6 VISUAL build-stages (two tiers per
+  stage, clampi((lv+1)/2,1,6)) so construction spreads across the longer climb and level stays
+  1..6 - the contract town.gd garrison sizing reads.
+- roster.gd (laptop, READ ONLY): Roster.tier_for_town clamps to 1..4, so tiers 7-12 are safe for it.
+- MEASURED CURVE (tools/_d32_curve.gd, 30-day headless soak at 15x, no scripted delves): founds at
+  tier 2 and climbs crossing->hamlet(d2)->guild post(d6)->village(d17), then HOLDS at village
+  (tier 4, score 247, pop 69) through day 30 - gradual and earned, vs the old instant 3->5. The
+  town band's own delving lifted renown to ~24. Chart + csv in renders/cycles/d32/ (untracked),
+  delivered to Mr. E for approval.
+- GATE GREEN: parse 0 err, _offfloor 0/1393 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _townwalk
+  in_solid 1/15751 (0.006 pct) raid 0/3523 PASS, _delve_test clean to floor 2, _d32_test OK (15 checks).
+- NOTE for Mr. E: the 12 thresholds ARE the pace dial. Tiers 6-12 need renown, so how fast a stream
+  climbs depends on how much the town delves - say the word and I slacken/steepen. Disaster gating
+  (DIS_MIN_LEVEL=2) left as-is: founding is now a 51-soul hamlet, not a 4-hut crossing, so a day-6+
+  disaster at level 2 remains reasonable (and changing it would have broken D34's test, not mine).
+- STILL OPEN (D31, left UNTICKED): the per-tier DISTINCT buildings the content 'see' column asks for
+  (guild post at 2, chapel at 6, garrison+E3PO at 8, first wall at 10) and 'builders at work'
+  animation - growth.gd still shows its 6 generic stages. That is D31's visual half, a later cycle.
+TICKED D32 (code + measured curve; the 'Mr. E approves' half is his to confirm).

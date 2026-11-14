@@ -505,9 +505,11 @@ func handle_event(kind: String, e: Dictionary) -> void:
             var bits := int(e.get("bits", 0))
             if bool(e.get("is_anonymous", false)) or uid == "":
                 _feed_line("A stranger tosses %d bits into Bellmire's well." % bits)
+                _do_bits_tier("", bits)
                 return
             _feed_line("%s cheers %d bits for Bellmire!" % [who, bits])
             _spot(uid, "bits", bits_seconds(bits), "cheered %d bits" % bits)
+            _do_bits_tier(uid, bits)
         "channel.subscribe":
             if bool(e.get("is_gift", false)):
                 _feed_line("%s is gifted a place in the guild." % who)    # the gifter has the pane
@@ -584,6 +586,169 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
         Spotlight.spotlight(town, uid, lane, seconds, reason)
     else:
         print("SPOTLIGHT %s %s %.0fs %s (no town)" % [uid, lane, seconds, reason])
+
+# ---------------------------------------------------------------- bit tiers
+## Mr. E: cheered bits -> town-wide effects. Five tiers; the buyer's hero gets
+## personal bonuses at tier 3+. Anonymous cheers still fire the town-wide part
+## (uid == "" means no personal bonus). All tiers include the lower ones.
+
+const BIT_TIERS := [
+    {"min": 1,    "name": "Town Heal"},
+    {"min": 50,   "name": "Blessed Supplies"},
+    {"min": 150,  "name": "Fortune's Favour"},
+    {"min": 500,  "name": "Festival of Plenty"},
+    {"min": 1000, "name": "Summon the Host"},
+]
+
+## Which tier index (0-4) does this cheer land in?
+static func bits_tier(bits: int) -> int:
+    var t := 0
+    for i in BIT_TIERS.size():
+        if bits >= int(BIT_TIERS[i]["min"]):
+            t = i
+    return t
+
+func _do_bits_tier(uid: String, bits: int) -> void:
+    if town == null:
+        return
+    var tier := bits_tier(bits)
+    var r = town.get("roster") if town else null
+    var eco = town.get("economy") if town else null
+    var who := ""
+    var h := {}
+    if uid != "" and r and r.has_method("get_hero"):
+        h = r.call("get_hero", uid) as Dictionary
+        who = String(h.get("name", "")) if not h.is_empty() else ""
+
+    # ---- Tier 0 (1-49): Town Heal
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 0, 1)
+    if eco:
+        _restock_half(eco)
+    _feed_line("Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.")
+
+    if tier < 1:
+        return
+
+    # ---- Tier 1 (50-149): Blessed Supplies
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 0, 3)    # +3 more (4 total with tier 0)
+    if eco:
+        _restock_full(eco)
+    # +1 random brew to the buyer's hero
+    if not h.is_empty() and r:
+        var brew_key := _random_brew_key()
+        if brew_key != "":
+            r.call("add_brew", h, brew_key, 1)
+            var brew_name: String = String(Roster.potion(brew_key).get("name", brew_key))
+            _feed_line("%s is given a %s from the grateful apothecary." % [who, brew_name])
+    _feed_line("Blessed supplies arrive - the stores overflow with fresh goods!")
+
+    if tier < 2:
+        return
+
+    # ---- Tier 2 (150-499): Fortune's Favour
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 10, 4)   # +10 gold +4 more potions (8 total)
+    # +2 random brews to buyer
+    if not h.is_empty() and r:
+        for i in 2:
+            var brew_key := _random_brew_key()
+            if brew_key != "":
+                r.call("add_brew", h, brew_key, 1)
+        # free forge upgrade
+        if r.has_method("buy_weapon"):
+            # give gold to cover the cost, then forge
+            var old_gold: int = int(h.get("gold", 0))
+            h["gold"] = old_gold + 9999
+            r.call("buy_weapon", uid)
+            r.call("buy_armour", uid)
+            h["gold"] = old_gold      # refund what wasn't spent
+    _feed_line("Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime.")
+
+    if tier < 3:
+        return
+
+    # ---- Tier 3 (500-999): Festival of Plenty
+    # trigger festival
+    if not bool(town.get("festival", false)):
+        town.set("festival", true)
+        var mk: Vector3 = town.get("_market_pos", Vector3.ZERO) if town.has_method("get") else Vector3.ZERO
+        if mk == Vector3.ZERO and town.get("_market_pos") != null:
+            mk = town.get("_market_pos")
+        if mk != Vector3.ZERO:
+            town.set("festival_at", mk)
+    # production boost 4x for 30 min
+    if eco:
+        eco.set("dis_work_k", 4.0)
+        _create_timer(1800.0, func(): if eco: eco.set("dis_work_k", 1.0))
+    # top tier forge for buyer
+    if not h.is_empty() and r:
+        var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
+        if int(h.get("weapon", 0)) < top:
+            h["weapon"] = top
+        top = mini(Roster.forged_max(Roster.ARMOURS), Roster.town_tier)
+        if int(h.get("armour", 0)) < top:
+            h["armour"] = top
+    _feed_line("A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!")
+
+    if tier < 4:
+        return
+
+    # ---- Tier 4 (1000+): Summon the Host
+    # trigger a raid immediately
+    var raids_node = town.get("raids") if town else null
+    if raids_node and raids_node.has_method("raid"):
+        raids_node.call("raid", "bits_summon")
+    # if town survives, the grant comes when the raid ends (wired separately);
+    # for now, give the upfront bonus
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 50, 4)
+    # top everything for buyer
+    if not h.is_empty() and r:
+        var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
+        h["weapon"] = top
+        top = mini(Roster.forged_max(Roster.ARMOURS), Roster.town_tier)
+        h["armour"] = top
+    _feed_line("THE HOST IS SUMMONED! A mighty force marches on Bellmire - every hero to the walls!")
+
+func _restock_half(eco: Node) -> void:
+    var caps := {"food": 200.0, "wood": 120.0, "stone": 80.0, "ore": 50.0, "gear": 30.0, "potion": 20.0}
+    for g in caps:
+        var target: float = float(caps[g]) * 0.5
+        if float(eco.stock.get(g, 0.0)) < target:
+            eco.stock[g] = target
+
+func _restock_full(eco: Node) -> void:
+    var caps := {"food": 200.0, "wood": 120.0, "stone": 80.0, "ore": 50.0, "gear": 30.0, "potion": 20.0}
+    for g in caps:
+        if float(eco.stock.get(g, 0.0)) < float(caps[g]):
+            eco.stock[g] = float(caps[g])
+
+func _random_brew_key() -> String:
+    var ps: Dictionary = Roster.potions().get("potions", {})
+    if ps.is_empty():
+        return "mending"
+    var keys: Array = ps.keys()
+    # filter to brews the town can actually make
+    var valid: Array = []
+    for k in keys:
+        if int((ps[k] as Dictionary).get("tier", 1)) <= Roster.town_tier:
+            valid.append(k)
+    if valid.is_empty():
+        return "mending"
+    return String(valid[randi() % valid.size()])
+
+func _create_timer(secs: float, cb: Callable) -> void:
+    var t := Timer.new()
+    t.wait_time = secs
+    t.one_shot = true
+    t.autostart = true
+    add_child(t)
+    t.timeout.connect(func():
+        cb.call()
+        t.queue_free()
+    )
 
 # ---------------------------------------------------------------- chat replies
 

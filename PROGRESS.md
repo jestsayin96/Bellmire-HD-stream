@@ -3651,3 +3651,56 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   5. NO NEW DATA FILE, NO RENAMED KEY, NO CHANGED VALUE. Any loader reading e3po today keeps working
      unchanged whether or not the new keys are ever read.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 29 - every bandit and monster camp gets repeat-safe variants (standing backlog item 4)
+
+- RECOVERED, NOT NEW. This work was authored in cycle 29 and left uncommitted in the content
+  worktree when the Blender bridge dropped mid-cycle; cycles 30, 31, 32 and 33 could not reach the
+  disk at all and stood down with zero output. Found sitting dirty in W3 at the start of this run,
+  re-validated in full from scratch rather than trusted on sight, and committed as 617ab19.
+- data/lore_lines.json: all 20 bandit_camps and all 19 monster_camps gain appears_alt, while_alt and
+  cleared_alt at 4 lines each - 39 camps x 12 = 468 new lines. Each camp previously had exactly ONE
+  appears, while and cleared, so a second spawn of the same camp on one stream read word for word.
+  The three new keys copy the shape wandering_boss already uses, so the picker is the same picker.
+- COST DISCIPLINE: every while_alt restates the SAME implementable cost as that camp's canonical
+  `while`, reworded and never widened. No alt adds an effect the canonical line does not already
+  state, so the desktop worker implements the cost once per camp and may show any line.
+- VALIDATION OK. All four files json.load clean. Recursive diff against HEAD: 0 problems - every
+  pre-existing key present, in order, with an identical value; every list an exact prefix of its new
+  self; name, leader, of, appears, while and cleared unchanged on every camp. Only growth is the
+  three keys per camp plus the _note_variants_c29 note. Zero NEW duplicate lines (the 5 pre-existing
+  duplicate groups in descend and barks are untouched). items.json, bosses.json and potions.json
+  byte-identical to HEAD. No new camp, no new named leader, no floor count.
+
+## C-cycle 34 - the cosmetic shelf finally says what you are buying (standing backlog item 1; WORK_PLAN C1)
+
+- THE GAP: all 180 accessories carried a `flavour` line. NONE of the 321 cosmetics did - they were
+  {name, kind, cost} and nothing else. Cosmetics are the channel-point and bits spend, so the one
+  item class a viewer pays real money for was the one class with no description to earn the price.
+- data/items.json: `flavour` added to all 321 cosmetics - 86 hats, 72 banners, 30 pets, 133 titles.
+  One line each, in the accessories' voice: concrete, dry, and readable at a glance on stream.
+  Hats and banners say who wears or flies it and what it cost them; pets say what the animal is
+  actually like to own; titles say what you did to be called that.
+- Named off canon already in the repo - the Ford, the scar, the fen, the guild, the bucket line,
+  the thaw, the ninth bell, E3PO's watch, Red Harl, Cob Ashfoot, the Weasel. No new named character,
+  no new place, no floor count.
+- VALIDATION OK. All four files json.load clean. Recursive diff against HEAD: 0 problems - every
+  pre-existing key present, in order, with an identical value; name, kind, cost, colour, model and
+  scale untouched on every entry; `flavour` is the ONLY key added anywhere in the file, on exactly
+  321 entries. No duplicate flavour line among the 321 and no collision with the 180 accessory
+  lines. Longest line 95 chars. ASCII only. Formatting preserved: the file keeps its one-entry-per-
+  line layout, so the diff is 321 changed lines and nothing else. lore_lines.json, bosses.json and
+  potions.json byte-identical to HEAD.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. INERT UNTIL READ. Nothing breaks: every loader reading cosmetics today ignores the new key.
+     The gain only lands once a shop line, !wear confirmation or channel-point redemption prints
+     cosmetic.flavour the way the accessory path already prints accessory.flavour.
+     OWNER: whoever owns the cosmetic purchase and equip path.
+  2. SAME CAVEAT AS C-CYCLE 28 ITEM 3: D28's census says cosmetics are never actually WORN. A
+     description is the reward for the spend, and without the wearing it still has nothing to
+     attach to. These two want tracking together.
+  3. e3po.viewer_cosmetic (added C-cycle 28) now has something to name - the Commander's line about
+     a viewer's purchase reads better beside the item's own flavour than alone.
+  4. NO NEW KEY NAME TO TEACH A LOADER beyond `flavour`, which accessories already use with the same
+     meaning and the same type. No renamed key, no changed value, no new data file.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

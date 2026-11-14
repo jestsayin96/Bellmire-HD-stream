@@ -3474,3 +3474,55 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      needs no change. If !brew lists brewable potions anywhere, that list now has 92 entries and may need
      paging rather than one chat line. OWNER: LAPTOP CODE (chatcmd.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 26 - cosmetics, accessories and dyes (standing backlog item 1; WORK_PLAN C1)
+
+- WORKED IN: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`). R was on
+  `laptop` with nothing unpushed on `content`, so no safety push was needed and R was never checked out.
+- ONE FILE TOUCHED: data/items.json (97.1 KB -> 104.6 KB). Nothing else, no .gd, no .tscn, no new data file.
+- THEME: eight trades the catalogue had never named - tanner/currier, fuller/weaver, fletcher/bowyer,
+  farrier, potter, sexton, skepward (beekeeper), lockkeeper (the Ford's weir). Nothing reuses a trade
+  C-cycle 23 or 25 already spent (cooper, orchard, reeve, collier, shepherd, wellhead, winterwatch,
+  saltboiler), so there is no near-duplicate naming on the shelf.
+- accessories - 24 new, 156 -> 180. Spread by slot: ring x4, amulet x4, cloak x5, boots x5, gloves x6;
+  spread by bonus: saves x8, hp x4, dmg x4, hit x4, ac x3, speed x3. Costs 210-440, inside the existing
+  curve. Every one carries a `flavour` that earns the price - the line says what the thing has already
+  survived, not what it looks like (Sexton's Ring: "He wore it to every burial in Bellmire and walked
+  home from each one."). Longest flavour 91 chars - one glance on stream.
+- cosmetics - 30 new, 291 -> 321: 10 hats (with `colour`), 8 guild banners (with `colour`), 12 titles.
+  The titles keep the established two shapes - a plain trade name ("the Sexton") and an earned boast
+  ("who Held the Weir", "who Shod the Charger", "who Strung It Wet").
+- dyes - 16 new, 153 -> 169, drawn from the same trades: tanbark, fullerwhite, goosefeather, anvilblack,
+  kilnred, gravehill, waxgold, weirgreen, hidebrown, lyewhite, bowstave, currierred, skepstraw,
+  lockbrass, sextonslate, tannerpit. `dye_cost` is untouched at 25, so the dye economy does not move.
+- NO NEW SHAPE. Every new accessory's key-set is one the file already used (name/slot/cost/flavour +
+  exactly one of ac/saves/hp/speed/hit/dmg); every new cosmetic's is one of the file's existing three
+  (name/kind/cost [+colour]); no new `slot`, no new `kind`, no new field, no `model`/`scale` entry.
+- VALIDATION OK (python only - no Godot, per COORDINATION 10):
+  json.load succeeds on all four owned files; the other three are byte-identical to HEAD. items.json
+  deep-compared against `git show HEAD:data/items.json`: top-level key order unchanged; accessories,
+  cosmetics and dyes are each an EXACT PREFIX of their new selves in key order with every pre-existing
+  value deep-equal; `_source`, `dye_cost`, `shop_stock`, `trader_cargo` and `stock_by_tier` deep-equal
+  and untouched. Every new entry's key-set and value types match an existing one; every new hex is 6
+  lower-case hex digits. 212 asserts, 0 real failures - the one flag was a duplicate-display-name check
+  catching "Scarglass Ring", which is PRE-EXISTING in HEAD (two accessories share that name); additive
+  only, so it was left alone - flagging it for the supervisor rather than renaming it. No duplicate name
+  or key is introduced by this cycle, new-vs-new or new-vs-existing. Zero non-ASCII, LF preserved,
+  trailing newline preserved, numstat 73 added / 3 changed (the 3 are the former last entry of each
+  block gaining a comma). No floor count stated anywhere.
+- CODE WIRING IMPLIED (for the supervisor to route - none of it is mine to write):
+  1. TEN NEW HAT KEYS: tanner_cap, fletcher_hood, farrier_visor, potter_wrap, sexton_hat, skep_veil,
+     lockkeep_cap, fuller_coif, bowyer_cap, currier_hood. L53 gave gear.gd `_hat` a DEFAULT shape, so
+     these cannot break the model - but they will all render as that default until someone adds
+     match-cases. A visor, a veil and a low hat want distinct silhouettes if they are to be worth 110,
+     120 and 90 gold. OWNER: LAPTOP CODE (gear.gd `_hat`).
+  2. EIGHT NEW BANNERS use the generic banner pole + cloth path already there and need nothing.
+  3. TWELVE NEW TITLES are text-only. The longest new one is 24 chars ("who Stood in the Tanyard"), so a
+     fixed-width nameplate field needs checking. OWNER: DESKTOP HUD if titles appear on the nameplate.
+  4. CHECK FOR HARD-CODED LENGTHS: anything sized off 156 accessories, 291 cosmetics or 153 dyes rather
+     than the dict itself will silently never roll the new entries. OWNER: LAPTOP CODE (gear.gd,
+     chatcmd.gd read items.json), and the shop/channel-point shelf wherever it is built.
+  5. STILL THE REAL RISK, unchanged from earlier cycles: D28's census said cosmetics are never actually
+     worn. 321 cosmetics are worth nothing without a CALLER for !wear and the channel-point shelf (T1).
+     More content will not fix that; one line in the next census would confirm whether it is still true.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

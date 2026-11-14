@@ -223,6 +223,10 @@ func _setpieces_tick() -> void:
 		match kind:
 			"ambush":
 				_setpiece_ambush(sp, at)
+			"prisoner":
+				_setpiece_prisoner(sp, at)
+			"shrine":
+				_setpiece_shrine(sp, at)
 
 func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
 	var names: Array = []
@@ -258,6 +262,70 @@ func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
 	# its FIGHT state, but a single tell lands harder than three in a row
 	if not names.is_empty():
 		Sfx.play("roar", -4.0)
+
+## PRISONER: a captive was down here before the party was. A hero within reach
+## cracks the chain off; the captive slips a purse into the party's hands before
+## making for the stairs. Gold is split among the alive, same rule as a chest.
+## argument order on every line: [finder_name, purse, alive.size()] - keep it
+## uniform so a random pick never trips a String-format error at play
+const _PRISONER_LINE := [
+	"%s cracks the chain off a captive - %d gold passes to the party, split %d ways.",
+	"%s finds a man in a cage still alive. He slips %d gold to them on the way out, %d ways to split it.",
+	"%s gets a captive free. %d gold, %d ways - small thanks for a poor life.",
+]
+
+func _setpiece_prisoner(sp: Dictionary, at: Vector3) -> void:
+	var alive := _alive()
+	if alive.is_empty():
+		return
+	# the nearest alive hero does the freeing (the one who tripped the trigger)
+	var finder: Dictionary = alive[0]
+	var best := 1.0e9
+	for m in alive:
+		var d := _flat((m["body"] as Node3D).global_position, at)
+		if d < best:
+			best = d
+			finder = m
+	var purse := int(sp.get("purse", 50))
+	var share := maxi(1, purse / alive.size())
+	for m in alive:
+		roster.award(String(m["uid"]), share, 0, 0, floor_no)
+		_float_text(m, "+%d" % share, Color(1.0, 0.85, 0.35))
+	var finder_name := String(finder["h"].get("name", "A delver"))
+	_say(_PRISONER_LINE[_rng.randi() % _PRISONER_LINE.size()] % [finder_name, purse, alive.size()])
+	Sfx.play("coin", -4.0)
+
+## SHRINE: an altar older than the floor. A hero touches it; the die is already
+## cast in the data (dungeon_hd.gd rolls boon/curse at build). A BOON fills
+## everybody's hp; a CURSE takes a bite out of each - small and survivable, the
+## point is the risk of the touch, not the hit.
+const SHRINE_BOON_FRAC := 1.0           # a boon mends the party back to full
+const SHRINE_CURSE_HP := 12.0           # a curse takes this many hp from each
+
+func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
+	var alive := _alive()
+	if alive.is_empty():
+		return
+	var toucher: Dictionary = alive[0]
+	var best := 1.0e9
+	for m in alive:
+		var d := _flat((m["body"] as Node3D).global_position, at)
+		if d < best:
+			best = d
+			toucher = m
+	var who := String(toucher["h"].get("name", "A delver"))
+	var is_boon := bool(sp.get("boon", true))
+	if is_boon:
+		for m in alive:
+			m["hp"] = float(m["max"])       # the boon is a mend (max_hp of this delver)
+			_float_text(m, "+boon", Color(0.5, 1.0, 0.7))
+		_say("%s touches the altar - a boon. The light steadies; the party is mended." % who)
+	else:
+		for m in alive:
+			m["hp"] = maxf(1.0, float(m["hp"]) - SHRINE_CURSE_HP)
+			_float_text(m, "-%d" % int(SHRINE_CURSE_HP), Color(1.0, 0.45, 0.42))
+			_hero_hit(m)
+		_say("%s touches the altar - a curse. Something older than the floor takes a bite." % who)
 
 ## ---- the wizard's lamp-stand (old expedition._check_lamp / _light_check).
 ## Dead centre of every floor (FloorGen puts it there). A hero who reaches it

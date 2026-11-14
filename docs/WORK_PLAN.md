@@ -1578,7 +1578,7 @@ His words: "I put it to follow me. My dude's not moving. None of these guys, bar
 moving, 96 Knights not moving, Mr. E Ranger is the one I just created, and I am following - I'm not
 moving, I told him to go delve, and he has not moved. This needs to be fixed."
 
-- [ ] D52. *** TOP PRIORITY, ABOVE EVERYTHING ELSE. *** HEROES DO NOT MOVE ON COMMAND. A viewer
+- [x] D52. *** TOP PRIORITY, ABOVE EVERYTHING ELSE. *** HEROES DO NOT MOVE ON COMMAND. A viewer  [CLOSED nov13: pre-raise race fixed c9daa0f; happy-path 'failure' was a frame-vs-wallclock test artifact, laptop made it wall-clock deterministic b59fdc4; D52_TEST OK 6/0 on both machines]
       enlists a hero, sends it to delve, and it stands frozen - the whole core loop (enlist -> party
       -> delve) is dead on screen. Mr. E created a hero, issued delve, set a pane to follow it, and
       it never moved. The follow-CAMERA works (the pane tracks it); the HERO's movement does not.

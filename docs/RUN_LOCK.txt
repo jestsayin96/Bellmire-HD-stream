@@ -1,1 +1,1 @@
-IDLE 2026-11-13 17:35 - supervisor: CruzaderPC free; cleared a stale desktop RUNNING lock (diag runs exited). Next: HUD elder-scroll L61.
+IDLE 2026-11-13 18:05 - supervisor: D52 CLOSED (D52_TEST OK 6/0, wall-clock deterministic); merged laptop+content C22; gate green (parse0, offfloor0, twitch OK, delve, townwalk x2 PASS)

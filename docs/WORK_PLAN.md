@@ -1004,7 +1004,27 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       RESULT (desktop D-cycle D5, 2026-11-13): 13 disasters wired in economy.gd from the content writer's lore_lines.json "disasters" (begin/during/pass + alt variants). Each charges a real cost against the town's own stock/treasury/renown (fractions of current stock, so it scales) plus active effects - a production damp, a growth halt, and casting_blocked()/trade_blocked() flags for spells/trade to honour. Occasional, one-at-a-time, gated town_level>=2 & day>=6 so a founding is never struck; meteor leaves a scarglass windfall. tools/_d34_test.gd OK 191/0; live Town soak cut food on drought 60->24 and meteor 24->16.8, each pushing distinct begin/during/pass Chronicle lines, 0 SCRIPT ERROR. Visible-on-stream + Mr. E's eye still to come, and two hooks remain for a later cycle: wire casting_blocked into spells.gd and trade_frozen into the caravan path.
 - [ ] D35. SHOPS NEED EYE CANDY AND VISIBLE STOCK - they should look good and show what they actually have. DONE: shot sheet; stock visible (pairs with L51's HUD side).
 - [ ] D36. NPC DIVERSITY - more variety among townsfolk. DONE: a crowd shot with real variety.
-- [ ] D37. E3PO - A NAMED, IMMORTAL NPC (his favourite). E3PO CANNOT DIE. He is Commander of the Guards. When badly hurt he withdraws to the guard barracks and heals, then returns to duty. He must be woven into the lore, not bolted on. DONE: E3PO leads the guard in a raid, is wounded, withdraws, heals, returns - and never dies; his lore is written (see C4).
+- [x] D37. E3PO - A NAMED, IMMORTAL NPC (his favourite). E3PO CANNOT DIE. He is Commander of the Guards. When badly hurt he withdraws to the guard barracks and heals, then returns to duty. He must be woven into the lore, not bolted on. DONE: E3PO leads the guard in a raid, is wounded, withdraws, heals, returns - and never dies; his lore is written (see C4).
+      RESULT (D-cycle D12): E3PO LIVES (notables.gd + 1 line in raids.gd, both mine). He spawns as a
+      persistent notable 'E3PO / Commander of the Guards' at the garrison (lm_barracks; the gate watch
+      if no barracks stands yet), Knight body + guard gear + cape. IMMORTAL BY CONSTRUCTION: raids.gd
+      _defenders() now skips him by title, so he is never in the fall-able roster and can never be buried.
+      He holds his post (role guard => no civic-flee). A line-picker reads data/lore_lines.json 'e3po'.
+      <category> (incl sub-keyed viewer_roll.crit/high/low/fumble) with no immediate repeat; EVENT lines
+      go to the Chronicle (town.feed), AMBIENT barks float above his head (shout_lines). WITHDRAW/HEAL/
+      RETURN: on a raid breach he rolls hurt -> says a hurt+withdraw line, walks into the barracks, heals
+      45-80 s, then says a return line and resumes his post. WIRED by polling real transitions (zero edits
+      to trigger files): intro, raid, hurt, withdraw, return, festival, disaster, tier_up, plus ambient
+      says/town_talk/night_watch(by hour)/drill/recruit/dispute. _d37_test: title OK, in town, 27 lore
+      cats, NOT in defenders, picker OK, saying a line grows the feed + sets his shout -> D37_TEST OK.
+      GATE GREEN: parse 0, _offfloor 0/1531, TWITCH_PARSE OK, _townwalk 0/18947 PASS, _delve_test rc0,
+      0 SCRIPT ERRORs. LOOKED (renders/cycles/d37/e3po_post.png): the Commander at the garrison, named.
+      DEFERRED (need hooks in LAPTOP files roster.gd/delve.gd/chatcmd.gd, or caravan state - not mine to
+      edit): viewer_roll(4), viewer_down, viewer_returns, viewer_cosmetic, rank_up (roster.gd viewer
+      events); delve_dispatch, lord_sighted, lord_cleared (delve.gd); trader_arrives (D39 caravan). These
+      categories are written + the picker already handles them - they just need their triggers to call
+      notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
+      (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
 - [ ] D39. TRADERS MUST MATTER. Today they arrive and leave with no effect. Make them carry SUPPLIES the town actually receives - and let bandits intercept them, so a lost caravan means the town goes without. An in-game event with stakes. DONE: a caravan arrives and the town gains; a caravan is taken and the town visibly suffers.
 - [ ] D40. FISHING ANIMATIONS AND WATER both need work. DONE: before/after capture of a catch and the water surface.

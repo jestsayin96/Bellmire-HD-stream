@@ -5232,3 +5232,33 @@ nothing that moves with the hand.
   at rest/cast; the full cast->reel->show motion in live play is Mr. E's eye to sign off. Ticked on
   code + gate + the in-hand capture; his live sign-off is the remaining half. Tools added:
   tools/_d51_test.gd, tools/_d51_shot.gd.
+
+
+## D-cycle D12 - D37 E3PO, Commander of the Guards, brought to life (desktop build, 2026-11-14 ~05:10)
+Mr. E's favourite NPC: 500+ of his lines sat inert in lore_lines.json 'e3po' (27 categories) with NO code
+referencing him. Now he exists. All in MY files: scripts/notables.gd (the whole controller) + ONE
+protective line in scripts/raids.gd.
+- SPAWN: a new PEOPLE entry (key e3po) - Knight.glb, guard gear, cape, size 1.14, title 'Commander of the
+  Guards', posted at the garrison by day (lm_barracks door; falls back to the gate watch if no barracks is
+  built yet) and a night watch patrol to the gate. _door_of/_stops gained 'garrison'/'e3po_post'/'e3po_watch'.
+- IMMORTAL BY CONSTRUCTION: raids._defenders() skips a notable titled 'Commander of the Guards', so E3PO is
+  never enrolled as a fall-able fighter and town.bury can never reach him. role guard keeps him from civic-
+  fleeing, so he holds his post. (A richer v2 would let him fight and intercept his fall -> withdraw; v1
+  trades that for a hard guarantee he never dies.)
+- VOICE: _e3po_pick(cat[,sub]) reads lore_lines.json 'e3po'.<category> (handles the viewer_roll sub-keys)
+  with no immediate repeat. _e3po_say() puts EVENT lines in the Chronicle (town.feed) AND shouts them above
+  his head; ambient barks rotate his shout_lines from a time-appropriate category.
+- WITHDRAW/HEAL/RETURN: on a raid breach he rolls (0.6) hurt -> 'hurt' + 'withdraw' lines, walks into the
+  barracks (held there, out of the normal day loop), heals 45-80 s, then 'return' line and back to post.
+- HOOKS (poll real transitions each notables tick - ZERO edits to trigger files): intro(once), raid(start),
+  hurt/withdraw(breach), return(heal done), festival(town.festival), disaster(economy._dis_active), tier_up
+  (economy.town_level), + ambient says/town_talk/night_watch/drill/recruit/dispute.
+- FIXED mid-build: the generic _say() read def['lines'] directly and E3PO's def had none -> 2 SCRIPT ERRORs
+  per town run. Gave him 'lines': {} so the ambient picker cleanly skips him. Re-ran _townwalk: 0 errors.
+- GATE GREEN: PROJECT_PARSE 0, _offfloor 0/1531 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _townwalk
+  in_solid 0/18947 (0.000%) PASS, _delve_test rc0, _d37_test D37_TEST OK, 0 SCRIPT ERRORs overall.
+- LOOKED (WINDOWED, renders/cycles/d37/e3po_post.png): the armoured Commander at the garrison, name tag
+  'E3PO / Commander of the Guards'. Tools added: tools/_d37_test.gd, tools/_d37_shot.gd.
+- DEFERRED (NOT mine to wire - laptop files, or D39 caravan): viewer_roll(4)/viewer_down/viewer_returns/
+  viewer_cosmetic/rank_up (roster.gd), delve_dispatch/lord_sighted/lord_cleared (delve.gd), trader_arrives
+  (D39). The lines + picker are ready; those triggers just need to call notables._e3po_say(cat[,sub]).

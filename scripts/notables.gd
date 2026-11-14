@@ -94,6 +94,11 @@ const PEOPLE := [
      "lines": {"tavern": ["%s is turned out of the tavern. Again.", "%s challenges the innkeeper to an arm-wrestle and loses."],
                "stagger": ["%s sings at the moon outside the tavern.", "%s argues with a rain barrel. The barrel wins.",
                            "%s weaves home the long way round."]}},
+    {"key": "e3po", "role": "guard", "gear": "guard", "near": "garrison",
+     "name": "E3PO", "title": "Commander of the Guards",
+     "model": "Knight.glb", "tint": Color(0.80, 0.82, 0.92), "size": 1.14,
+     "act": ["Idle_B", "Interact"], "lines": {},
+     "day": [[6, 20, "e3po_post", "post"], [20, 6, "e3po_watch", "watch"]]},
 ]
 
 var town: Node3D
@@ -109,6 +114,26 @@ var visits := 0
 var reached := 0
 var lines_said := 0
 var read_aloud := 0
+
+## ---- E3PO, Commander of the Guards (D37) --------------------------------
+## Spawned as an immortal notable at the garrison; he is kept OUT of the raid
+## combat roster (raids._defenders skips him by title), so he can never fall.
+## Badly pressed (a breach) he withdraws to the barracks, heals, and returns.
+## His voice reads lore_lines.json "e3po".<category>: events to the Chronicle
+## (town.feed), ambient barks above his head (Townsfolk.shout_lines).
+var _e3po: Townsfolk = null
+var _e3po_c: Dictionary = {}
+var _e3po_lore: Dictionary = {}
+var _e3po_last := {}
+var _e3po_state := "post"          # "post" | "withdrawn"
+var _e3po_heal_t := 0.0
+var _e3po_amb_t := 6.0
+var _e3po_intro_t := 3.0
+var _e3po_raid_was := false
+var _e3po_breach_was := false
+var _e3po_fest_was := false
+var _e3po_dis_was := ""
+var _e3po_tier_was := -1
 
 func setup(t: Node3D) -> void:
     town = t
@@ -178,6 +203,7 @@ func setup(t: Node3D) -> void:
             who.cart = town.call("spawn_wagon", who.global_position)
         if String(def["key"]) == "crier":
             _crier = who
+    _e3po_setup()
     _unique_names()
     call_deferred("_unique_names")      # after the garrison is raised
 
@@ -251,6 +277,8 @@ func _door_of(place: String) -> Array:
             if (d[0] as Vector3) == (town.get("_market_pos") as Vector3):
                 d = town.call("_lm_door", "lm_workshop")
             return d
+        "garrison":
+            return _garrison_door()
     return [town.get("_market_pos"), Vector3.ZERO]
 
 func _spot(off: Vector3) -> Vector3:
@@ -363,6 +391,13 @@ func _stops(place: String, c: Dictionary) -> Array:
             return [[_spot(Vector3(-11.0, 0, -4.0)), Vector3.ZERO, 999.0]]
         "gate":
             return [[_gate(), Vector3.ZERO, 999.0]]
+        "e3po_post":
+            var gd: Array = _garrison_door()
+            return [[_ground((gd[0] as Vector3) + Vector3(2.0, 0.0, 2.0)), Vector3.ZERO, 999.0]]
+        "e3po_watch":
+            var gd: Array = _garrison_door()
+            return [[_ground((gd[0] as Vector3) + Vector3(1.5, 0.0, 1.5)), Vector3.ZERO, 14.0],
+                    [_gate(), Vector3.ZERO, 14.0]]
         "play":
             var out: Array = []
             for i in range(6):
@@ -424,6 +459,8 @@ func _process(delta: float) -> void:
         if not is_instance_valid(c["who"]):
             continue
         var who: Townsfolk = c["who"]
+        if who == _e3po and _e3po_state == "withdrawn":
+            continue   # the E3PO controller holds him in the barracks while he mends
         if c.has("kit_due"):
             _kit(c)
         var i := slot_at((c["def"] as Dictionary)["day"], h)
@@ -439,6 +476,7 @@ func _process(delta: float) -> void:
                         c["hit"] = true
                         break
         _gesture(c, 0.25)
+    _e3po_tick(0.25, eco, raids, raid_on, h)
     if is_instance_valid(_crier) and not _crier.shout_lines.is_empty():
         _crier.shout_lines = _news()
     _names_t -= 0.25
@@ -516,3 +554,138 @@ func by_key(k: String) -> Townsfolk:
         if String((c["def"] as Dictionary)["key"]) == k:
             return c["who"] if is_instance_valid(c["who"]) else null
     return null
+
+## ---------------------------------------------------------------- E3PO (D37)
+## the garrison door, a step outside; the gate watch if no barracks stands yet
+func _garrison_door() -> Array:
+    var d: Array = town.call("_lm_door", "lm_barracks")
+    var dv: Vector3 = d[0]
+    var mp: Vector3 = town.get("_market_pos")
+    if dv == Vector3.ZERO or dv.is_equal_approx(mp):
+        return [_gate(), Vector3.ZERO]
+    return d
+
+func _e3po_setup() -> void:
+    _e3po = by_key("e3po")
+    for c in cast:
+        if String((c["def"] as Dictionary)["key"]) == "e3po":
+            _e3po_c = c
+            break
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f:
+        var j = JSON.parse_string(f.get_as_text())
+        if typeof(j) == TYPE_DICTIONARY:
+            _e3po_lore = (j as Dictionary).get("e3po", {})
+    if is_instance_valid(_e3po):
+        _e3po.shout_lines = _e3po_sample("says", 5)
+
+## a few random lines from a category, for his rolling bark pool
+func _e3po_sample(cat: String, n: int) -> Array:
+    var arr = _e3po_lore.get(cat, [])
+    if typeof(arr) != TYPE_ARRAY or (arr as Array).is_empty():
+        return []
+    var pool: Array = (arr as Array).duplicate()
+    pool.shuffle()
+    return pool.slice(0, mini(n, pool.size()))
+
+## one line from "e3po".<cat> (or <cat>.<sub>, e.g. viewer_roll.crit), no repeat
+func _e3po_pick(cat: String, sub := "") -> String:
+    if _e3po_lore.is_empty():
+        return ""
+    var arr = _e3po_lore.get(cat, [])
+    if sub != "" and typeof(arr) == TYPE_DICTIONARY:
+        arr = (arr as Dictionary).get(sub, [])
+    if typeof(arr) != TYPE_ARRAY or (arr as Array).is_empty():
+        return ""
+    var key := cat + sub
+    var li := int(_e3po_last.get(key, -1))
+    var idx := rng.randi() % (arr as Array).size()
+    if (arr as Array).size() > 1 and idx == li:
+        idx = (idx + 1) % (arr as Array).size()
+    _e3po_last[key] = idx
+    return String((arr as Array)[idx])
+
+## say an EVENT line: to the Chronicle (town.feed) and shouted above his head
+func _e3po_say(cat: String, sub := "") -> void:
+    var line := _e3po_pick(cat, sub)
+    if line == "":
+        return
+    if is_instance_valid(_e3po):
+        _e3po.shout_lines = [line]
+        _e3po_amb_t = 12.0        # let this line stand before the ambient pool returns
+    var feed = town.get("feed")
+    if feed != null:
+        (feed as Array).append(line)
+
+func _e3po_withdraw() -> void:
+    if not is_instance_valid(_e3po):
+        return
+    _e3po_say("withdraw")
+    _e3po_state = "withdrawn"
+    _e3po_heal_t = rng.randf_range(45.0, 80.0)
+    var gd := _garrison_door()
+    _e3po.stay = false
+    _e3po.leader = null
+    _e3po.stops = [[gd[0], gd[1], 999.0]]
+    _e3po._stop_i = 0
+    _e3po._route = []
+    _e3po._wait = 0.0
+    _e3po.shout_lines = []         # quiet while he mends
+
+func _e3po_return() -> void:
+    _e3po_state = "post"
+    if not is_instance_valid(_e3po):
+        return
+    _e3po_say("return")
+    if not _e3po_c.is_empty():
+        _e3po_c["slot"] = -1       # _process re-applies his current post/watch slot
+    _e3po.shout_lines = _e3po_sample("says", 5)
+
+## polled each notables tick: fire E3PO's lines on real town transitions
+func _e3po_tick(delta: float, eco, raids, raid_on: bool, h: float) -> void:
+    if not is_instance_valid(_e3po) or _e3po_lore.is_empty():
+        return
+    if _e3po_intro_t > 0.0:
+        _e3po_intro_t -= delta
+        if _e3po_intro_t <= 0.0:
+            _e3po_say("intro")
+    if _e3po_state == "withdrawn":
+        _e3po_heal_t -= delta
+        if _e3po_heal_t <= 0.0:
+            _e3po_return()
+    else:
+        if raid_on and not _e3po_raid_was:
+            _e3po_say("raid")
+        var breach: bool = raids != null and bool(raids.get("breached"))
+        if raid_on and breach and not _e3po_breach_was and rng.randf() < 0.6:
+            _e3po_say("hurt")
+            _e3po_withdraw()
+        else:
+            if bool(town.get("festival")) and not _e3po_fest_was:
+                _e3po_say("festival")
+            var dis := (String(eco.get("_dis_active")) if eco else "")
+            if dis != "" and _e3po_dis_was == "":
+                _e3po_say("disaster")
+            var tier := (int(eco.get("town_level")) if eco else 0)
+            if _e3po_tier_was >= 0 and tier > _e3po_tier_was:
+                _e3po_say("tier_up")
+            _e3po_tier_was = tier
+            _e3po_amb_t -= delta
+            if _e3po_amb_t <= 0.0:
+                _e3po_amb_t = rng.randf_range(22.0, 40.0)
+                var cat: String = "night_watch"
+                if not (h >= 21.0 or h < 5.0):
+                    cat = String(["says", "town_talk", "drill", "recruit", "dispute"][rng.randi() % 5])
+                if raid_on:
+                    cat = "raid"
+                var pool := _e3po_sample(cat, 5)
+                if not pool.is_empty():
+                    _e3po.shout_lines = pool
+                    if rng.randf() < 0.35:
+                        var feed2 = town.get("feed")
+                        if feed2 != null:
+                            (feed2 as Array).append(String(pool[0]))
+    _e3po_raid_was = raid_on
+    _e3po_breach_was = raids != null and bool(raids.get("breached"))
+    _e3po_fest_was = bool(town.get("festival"))
+    _e3po_dis_was = (String(eco.get("_dis_active")) if eco else "")

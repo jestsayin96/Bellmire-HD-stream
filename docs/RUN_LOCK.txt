@@ -1,1 +1,1 @@
-IDLE 2026-11-14 00:04 - D53 towed-wagon attach shipped, gate green
+IDLE 2026-11-14 00:24 - D54 indoor-dwell cap shipped, gate green

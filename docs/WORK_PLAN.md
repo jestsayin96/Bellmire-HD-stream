@@ -46,7 +46,7 @@
       .cart). _d53_test: travel gap 2.72 m, teleport 22.8 m -> recovered 2.60 m, D53_TEST OK; render
       renders/cycles/d53/hauler_cart.png. THE POLE IN-HAND stays D51 (angler.gd, not this worker's file).
 
-- [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
+- [x] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
       14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
       and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
       the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
@@ -54,6 +54,13 @@
       them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
       recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
       not permanently lose it.
+      RESULT (D-cycle D10): FIXED in townsfolk.gd. The enter-building path already re-emerged folk
+      (step back out through the door after _wait), but the DAYTIME indoor dwell was randf(18-45) s
+      (a probe measured 59 s), long enough that a pane following an NPC lost it. Capped the daytime
+      stay to INDOOR_MIN..MAX (7-14 s) - the deliberate night sleep (a long _linger) is left alone.
+      _d54_test (midday soak): 41 enter / 47 exit, max indoor 13.7 s (was 59.5 s), 0 stuck. Streets
+      read livelier (render renders/cycles/d54/square_midday.png). The street-cap _keep_indoors
+      population (off-street by design) is unchanged.
 
 REINFORCED, not re-logged:
   * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a

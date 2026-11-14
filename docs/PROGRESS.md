@@ -961,3 +961,25 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - Staged only the files this change touches (townsfolk.gd, _d53_test/_d53_shot .gd + .uid, WORK_PLAN,
   PROGRESS, RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to
   sweep in with git add -A.
+
+
+## D-cycle D10 - D54 NPCs NO LONGER VANISH INTO BUILDINGS FOR LONG
+- Mr. E clip 14-29-22: "they went in. But now I can't find, I can't see them." MEASURED first
+  (tools/_d54_probe.gd, midday soak): 127 ordinary folk, 39 entered a building, and the worst indoor
+  dwell was 59.5 s - an NPC indoors is invisible behind solid walls, so a pane following one loses it
+  for the better part of a minute. The ordinary enter path DID bring folk back out (step out the door
+  after _wait), but the daytime dwell was randf(18-45) s; only the flee duck (D20b) returned folk
+  promptly (~4 s).
+- FIX (townsfolk.gd): the DAYTIME indoor stay is capped to INDOOR_MIN..INDOOR_MAX (7-14 s, randomised
+  so folk do not all re-emerge in lockstep) - a watched body is always recoverable within that. The
+  deliberate NIGHT sleep (a long _linger set in _next_trip, is_night()) is left alone; the town is
+  meant to be abed then. The street-cap _keep_indoors population (off-street by design) is untouched.
+- TEST tools/_d54_test.gd (new; probe turned into an assertion, gated on physics frames): midday soak,
+  41 enter / 47 exit, max indoor dwell 13.7 s (was 59.5 s), 0 NPCs stuck >30 s. D54_TEST OK. Render
+  tools/_d54_shot.gd: a peopled midday square - folk out and about, not vanished (square_midday.png,
+  square_close.png), looked at.
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _townwalk in_solid 2/18008 (0.011%) PASS (nav
+  untouched; 'inside' count fell, streets busier); _offfloor 0/1361 (INPROP 0, MON_INPROP 0/97);
+  TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR, time-capped T150s); D54_TEST OK.
+- Staged only the files this change touches (townsfolk.gd, _d54_test/_d54_shot/_d54_probe .gd + .uid,
+  WORK_PLAN, PROGRESS, RUN_LOCK); other sessions' untracked WIP (renders/, logs, *.uid) left alone.

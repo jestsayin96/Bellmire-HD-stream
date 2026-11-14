@@ -70,6 +70,12 @@ static var funnel_fix := true        # false only for the before figure (tools/_
 static var presync_reroutes := 0
 var _enter_at := Vector3.ZERO
 var _wait := 0.0
+## D54: a watched NPC goes invisible behind solid walls while indoors. The old
+## daytime dwell ran 18-45 s (a probe saw 59 s) - long enough that a pane loses
+## them ("I can't find them", Mr. E clip 14-29-22). Cap the DAYTIME indoor stay
+## so one always re-emerges within this, like the flee duck brings folk back.
+const INDOOR_MIN := 7.0
+const INDOOR_MAX := 14.0
 var _to_work := true
 var _wobble := 0.0
 ## D7: far-away LOD, set by town._lod_pass from the camera's distance. 0 = every
@@ -835,7 +841,15 @@ func _physics_process(delta: float) -> void:
                 # through the door and gone: a while indoors
                 inside = true
                 visible = false
-                _wait = _linger if _linger > 0.0 else randf_range(18.0, 45.0)
+                var dwell: float = _linger if _linger > 0.0 else randf_range(18.0, 45.0)
+                # D54: cap the DAYTIME stay so a pane following them does not lose
+                # them for good; the night sleep (a long _linger set in _next_trip)
+                # is left alone - the town is meant to be abed then.
+                var eco2 = town.get("economy") if town else null
+                var night: bool = eco2 != null and eco2.has_method("is_night") and bool(eco2.call("is_night"))
+                if not night:
+                    dwell = minf(dwell, randf_range(INDOOR_MIN, INDOOR_MAX))
+                _wait = dwell
             else:
                 _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
                 if not _at_job:

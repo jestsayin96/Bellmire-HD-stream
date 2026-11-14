@@ -52,7 +52,14 @@ func start(uids: Array) -> void:
 		b.stay = true
 		add_child(b)
 		var mx := roster.max_hp(h)
-		party.append({"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()})
+		var mem := {"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()}
+		party.append(mem)
+		# Rally (bits/points reward): a pending rally seeds this delver's combat states
+		var rs := float(h.get("rally_secs", 0.0))
+		if rs > 0.0:
+			_rally_states(mem, rs)
+			h.erase("rally_secs")
+			_say("%s descends rallied - strong, swift, and fearless." % String(h["name"]))
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
 	_say(_fmt_line(_pick_line("descend", "%s %s into the scar."), [_names(), "descends" if party.size() == 1 else "descend"]))
@@ -2432,6 +2439,30 @@ func has_st(m, name: String) -> bool:
 		"slowed":
 			return float(m.get("slow", 0.0)) > 0.0
 	return float((m.get("st", {}) as Dictionary).get(name, 0.0)) > 0.0
+
+## Rally (bits/points reward): the working combat states a rallied hero carries -
+## +2 to-hit & +4 damage (giant), faster swings (haste), no fear (heroism).
+## Mending over time is set separately via hot_t/hot_rate (the engine's own HoT).
+const RALLY_STATES := ["giant", "haste", "heroism"]
+const RALLY_HOT_FRAC := 0.015      # heal this fraction of max hp per second
+
+## Apply the rally package to one delver dict (live or just-formed).
+func _rally_states(m: Dictionary, secs: float) -> void:
+	for s in RALLY_STATES:
+		_give(m, s, secs)
+	# mend over time: top them up while the rally lasts (capped at max each tick)
+	m["hot_t"] = maxf(float(m.get("hot_t", 0.0)), secs)
+	m["hot_rate"] = maxf(float(m.get("hot_rate", 0.0)), float(m["max"]) * RALLY_HOT_FRAC)
+
+## Apply a rally to a live delver right now. Returns true if the hero was found
+## alive in this delve (so the caller knows not to leave a pending flag).
+func apply_rally(uid: String, secs: float) -> bool:
+	for m in party:
+		if String(m["uid"]) == uid and float(m.get("hp", 0.0)) > 0.0:
+			_rally_states(m, secs)
+			_say("%s is rallied mid-delve - strength, speed, and courage surge." % String(m["h"]["name"]))
+			return true
+	return false
 
 func _give(m: Dictionary, name: String, secs: float) -> void:
 	if float(m.get("hp", 0.0)) <= 0.0:

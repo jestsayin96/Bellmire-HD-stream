@@ -4772,6 +4772,25 @@ func _on_fish(uid: String) -> void:
             print("FEED ", feed.back()))
         b.add_child(ang))
 
+## Rally (bits/points reward): a strong combat buff on the hero's next delve
+## (or their live delve if they are already below). Grants giant/haste/heroism/
+## regenerating for RALLY_SECS via the delve's state system.
+const RALLY_SECS := 90.0
+
+func _on_rally(uid: String) -> void:
+    if roster == null:
+        return
+    var h: Dictionary = roster.get_hero(uid)
+    if h.is_empty() or not bool(h.get("alive", true)):
+        return
+    var hname := String(h.get("name", "A hero"))
+    # already delving -> apply to the live combatant; else leave a pending flag
+    var live := delve != null and delve.has_method("apply_rally") and bool(delve.call("apply_rally", uid, RALLY_SECS))
+    if not live:
+        h["rally_secs"] = RALLY_SECS
+        feed.append("%s is rallied - strength, speed, courage, and a healer's touch wait for their next delve." % hname)
+        print("FEED ", feed.back())
+
 func _on_delve(uid: String) -> void:
     if not heroes.has(uid) or not _scar_info.has("post"):
         return

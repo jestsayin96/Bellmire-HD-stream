@@ -55,6 +55,9 @@ const REWARDS := {
     "patch": {"title": "Patch up my hero", "cost": 250, "action": "patch",
         "prompt": "Your hero is handed a healing potion for the next delve. Raise one first with !enlist.",
         "background_color": "#4BB54B"},
+    "rally": {"title": "Rally my hero", "cost": 600, "action": "rally",
+        "prompt": "Your hero is rallied - stronger, swifter, fearless, and mending - for their next delve. Raise one first with !enlist.",
+        "background_color": "#9B59B6", "lane": "points", "seconds": 15.0},
 }
 
 var town: Node                       # spotlight(uid, lane, seconds, reason), feed, roster, chat
@@ -620,6 +623,10 @@ func _do_reward(uid: String, want: Dictionary, title: String) -> void:
                 if not h.is_empty():
                     h["potions"] = int(h.get("potions", 0)) + 1
             _spot(uid, "points", 10.0, "is handed a healing potion")
+        "rally":
+            if town and town.has_method("_on_rally"):
+                town.call("_on_rally", uid)
+            _spot(uid, "points", 15.0, "rallies their hero for the next delve")
         _:
             _spot(uid, String(want.get("lane", "points")), float(want.get("seconds", 15.0)), "redeemed " + title)
 
@@ -723,9 +730,9 @@ func _do_bits_tier(uid: String, bits: int) -> void:
 
     # ---- Tier 3 (500-999): Festival of Plenty
     # trigger festival
-    if not bool(town.get("festival", false)):
+    if not bool(town.get("festival")):
         town.set("festival", true)
-        var mk: Vector3 = town.get("_market_pos", Vector3.ZERO) if town.has_method("get") else Vector3.ZERO
+        var mk: Vector3 = Vector3.ZERO
         if mk == Vector3.ZERO and town.get("_market_pos") != null:
             mk = town.get("_market_pos")
         if mk != Vector3.ZERO:
@@ -739,7 +746,7 @@ func _do_bits_tier(uid: String, bits: int) -> void:
         var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
         if int(h.get("weapon", 0)) < top:
             h["weapon"] = top
-        top = mini(Roster.forged_max(Roster.ARMOURS), Roster.town_tier)
+        top = mini(Roster.forged_max(Roster.ARMOUR), Roster.town_tier)
         if int(h.get("armour", 0)) < top:
             h["armour"] = top
     _feed_line("A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!")
@@ -760,7 +767,7 @@ func _do_bits_tier(uid: String, bits: int) -> void:
     if not h.is_empty() and r:
         var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
         h["weapon"] = top
-        top = mini(Roster.forged_max(Roster.ARMOURS), Roster.town_tier)
+        top = mini(Roster.forged_max(Roster.ARMOUR), Roster.town_tier)
         h["armour"] = top
     _feed_line("THE HOST IS SUMMONED! A mighty force marches on Bellmire - every hero to the walls!")
 

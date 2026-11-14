@@ -494,13 +494,15 @@ func _make_pane(k: String) -> Dictionary:
 	add_child(box)
 	var svc := SubViewportContainer.new()
 	svc.stretch = true
-	svc.stretch_shrink = 1 if k == "director" else 2       # the panes at half resolution
+	svc.stretch_shrink = 1                                  # D49: all panes at full pane-pixel resolution (was: non-director at 1/2 -> 1/4 pixels)
+	svc.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR   # D49: explicit linear, never NEAREST
 	svc.set_anchors_preset(Control.PRESET_FULL_RECT)
 	svc.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(svc)
 	var vp := SubViewport.new()
 	vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
-	vp.msaa_3d = Viewport.MSAA_DISABLED
+	vp.msaa_3d = Viewport.MSAA_2X                           # D49: 2x MSAA so all four panes match (bump to 4X only if edges still crawl; watch D23 FPS)
+	vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA     # D49: cheap FXAA on top
 	if k != "director":
 		# FPS (the desktop is chasing stutter): the small panes skip omni/spot shadows,
 		# take coarser LODs and see 150 m, not the whole valley

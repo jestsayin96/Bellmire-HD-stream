@@ -4431,3 +4431,38 @@ illuminated, original filigree, explicitly NOT The Elder Scrolls / Bethesda art,
   5. e3po.tier_up is still exactly 12 entries matched by growth_tiers name, and was deliberately NOT
      widened: it is one line per stage, not a pool. Do not roll against it - match on name.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+
+## U-cycle 19 - D49: four-pane pixelation fix applied + parse-clean, WIP (windowed LOOK held - OBS up) (desktop HUD, CruzaderPC, branch hud-ui, 2026-11-13 ~18:48)
+- CONTEXT: my firing brief is STALE - it says "build the L51 Satchel panel". That is superseded:
+  L51 is ticked DONE, and L63 (also mine, merged c9f9fb1) STRIPPED that Satchel off stream on purpose
+  (Phase Z / COORDINATION 13 - the stream shows only the six; inventory/gear/selling moved to the hub,
+  H11). So I did NOT rebuild it. The real current HUD item is D49 (pane pixelation), diagnosed and
+  staged by the 18:08 + 18:21 HUD cycles and handed to "the next HUD run that holds the lock".
+- WHAT CHANGED (scripts/spotlight.gd, my file, only file touched): in _make_pane() the three
+  non-director panes were svc.stretch_shrink = 2 (half-res SubViewport -> quarter the pixels, upscaled
+  -> the pixelation Mr. E saw; only the top-left/director pane at shrink 1 was sharp). Now ALL panes:
+    svc.stretch_shrink = 1                                (full pane-pixel resolution)
+    svc.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR (explicit linear, never nearest)
+    vp.msaa_3d = Viewport.MSAA_2X                         (was MSAA_DISABLED on every pane)
+    vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+  The build worker's lock note called D49 "stale premise (AA already on)" - that misdiagnosed it; AA
+  was DISABLED and the real cause was the half-res render. Fixed in spotlight.gd.
+- VERIFIED SO FAR: headless --path W2 --quit-after 300 ran CLEAN (rc 0, zero SCRIPT ERROR / Parse
+  Error; only pre-existing town.gd material UID warnings). The edit compiles and the game boots with it.
+- NOT YET VERIFIED (why this is WIP, not done): the windowed 1080p LOOK at the 2x2 grid - the whole
+  point of D49 - was NOT done. OBS was running (possible live stream) and COORDINATION 11.3 / my brief
+  say not to launch a visible Godot window when Mr. E may be streaming. A headless window is invisible
+  so the parse check was fine; a windowed render is not. Held it.
+- LOCK: read IDLE (18:22, ~26 min old), no Godot process. Claimed "RUNNING ... (desktop HUD)" at
+  18:48:00 with the re-read guard, ran the headless check, released to IDLE at 18:48:23 (23 s held).
+- COMMIT: 3c8991e on hud-ui, pushed, "WIP:" so the supervisor SKIPS it until a future HUD cycle does
+  the LOOK. Item LEFT UNTICKED.
+- STANDING DECISION FOR MR. E (from the D49 diagnosis, unchanged): full-res + MSAA on four panes is
+  ~4x the per-pane pixel work the quarter-res was deliberately avoiding for stutter. It SHOULD hold
+  (three lanes update ~1/3 of frames; director already full-res every frame), but it bears directly on
+  D23 (120-FPS soak with the grid UP) and must be MEASURED on the real stream, not assumed. If stutter
+  returns: keep MSAA at 2X (FXAA is nearly free), or drop the lane update rate further.
+- STILL OWED next lock window with OBS down: (1) windowed 1080p LOOK confirming all four panes match the
+  top-left + the D23 FPS check, then re-commit non-WIP; (2) L61 elder-scroll ornamentation (visual);
+  (3) open U1 caveat - Chronicle centre box 18px/652x130 at 1080p, final crop never eyeballed.

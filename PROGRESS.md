@@ -4837,3 +4837,36 @@ and the Chronicle announcements still read correctly from an outside test.
      worn. 321 cosmetics are worth nothing without a CALLER for !wear and the channel-point shelf (T1).
      More content will not fix that; one line in the next census would confirm whether it is still true.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+
+## L-cycle 145 - L29c round 3: MINIBOSS set pieces (laptop jestai, 2026-11-13) - L29c (IN PROGRESS, WORK_PLAN untouched)
+Round 3 adds MINIBOSS to the three kinds shipped in rounds 1-2 (ambush / prisoner / shrine). The
+supervisor's prompt named it directly: "mini-boss antechambers". A single elite theme creature
+standing alone in a chamber, 2x hp + 1.2x atk on top of the floor's depth scaling, and when it
+falls a floor-scaled purse (40 + floor_no*12 + 0..24) is split across the alive party and the
+Chronicle names the kill.
+- scripts/dungeon_hd.gd (_set_pieces): added "miniboss" to the weighted pick. Default weights
+  ambush 45 / prisoner 20 / shrine 20 / miniboss 15. Theme nudges: a barracks or a workshop (the
+  drillmaster's kind of floor) raises miniboss to 35; a prison stays prisoner-heavy; a crypt or
+  shrine stays shrine-heavy. MINIBOSS is gated on floor_no >= 4 - a drillmaster against a bare-
+  hands starting party on floor 2 would be a slog, so the set-piece ladder now matches the rest
+  of the dungeon's difficulty curve.
+- scripts/delve.gd (_setpieces_tick dispatch, _setpiece_miniboss): spawns ONE Monster at the
+  trigger pos, scaled via the normal (14 + floor*6) * def.hp curve then * MINIBOSS_HP_MULT (2.0);
+  atk via * MINIBOSS_ATK_MULT (1.2); the purse rides on set_meta("l29c_miniboss_purse"); the
+  Chronicle calls out the kill ("A drillmaster holds this chamber alone - a mini-boss stands
+  between you and the way deeper"); Sfx.play("roar") rides the appearance.
+- scripts/delve.gd (_on_kill): a monster carrying the miniboss purse meta pays out on death -
+  share = purse / alive, awarded via roster.award (same shape as a chest), floater on each,
+  Chronicle line naming the kill and the split, Delve.setpieces_fired["miniboss_down"] counted.
+  The meta is REMOVED on first payout so a re-raise or a second _on_kill cannot double-pay.
+- tools/_l29c_test.gd (rewritten, 26 checks): adds a B.miniboss phase that spawns the elite,
+  reads max_hp == (14 + floor*6) * base * MINIBOSS_HP_MULT exactly, the meta carries the purse,
+  killing the elite pays out across the party, and a second _on_kill does NOT re-pay. Also sped
+  up: the test now reuses a single DungeonHD across the whole suite instead of allocating +
+  queue_freeing one per iteration (the first draft piled 60+ pending frees and hung on
+  _find_floor_with). Scenario A sample widened to 2-39, all four kinds confirmed present; the
+  shrine-curse search extended to floor 80 (the flip is rarer under the theme-nudged weights).
+- GATE: --headless --import clean, _offfloor 0/1363, _twitch_parse OK, _delve_test no
+  SCRIPT ERROR, _l29c OK 26/26 (26 checks, 0 failed).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

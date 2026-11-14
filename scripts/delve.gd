@@ -227,6 +227,8 @@ func _setpieces_tick() -> void:
 				_setpiece_prisoner(sp, at)
 			"shrine":
 				_setpiece_shrine(sp, at)
+			"miniboss":
+				_setpiece_miniboss(sp, at)
 
 func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
 	var names: Array = []
@@ -326,6 +328,42 @@ func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
 			_float_text(m, "-%d" % int(SHRINE_CURSE_HP), Color(1.0, 0.45, 0.42))
 			_hero_hit(m)
 		_say("%s touches the altar - a curse. Something older than the floor takes a bite." % who)
+
+## MINIBOSS: an elite theme creature standing alone in its own chamber - 2x hp
+## and +20% atk on top of the floor's depth scaling, so it reads as a real
+## fight and not another spawn. The Chronicle names it when the party crosses
+## the trigger, and when it falls _on_kill drops the purse carried on its meta
+## (set here) across the alive party - same split rule as a chest. Kept off
+## floors 1-3 by the picker in dungeon_hd._set_pieces.
+const MINIBOSS_HP_MULT := 2.0
+const MINIBOSS_ATK_MULT := 1.2
+
+func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
+	var def: Dictionary = sp.get("def", {})
+	if def.is_empty():
+		return
+	var purse := int(sp.get("purse", 50))
+	var pos: Vector3 = sp["pos"]
+	var m := Monster.new()
+	m.def = def
+	m.state = Monster.S.PATROL
+	m.roam = 2.0
+	m.position = Vector3(pos.x, 0.0, pos.z)
+	dun.add_child(m)
+	(dun.monsters as Array).append(m)
+	# scale to this floor exactly like _next_floor does for ordinary spawns, then
+	# the mini-boss multipliers on top
+	m.max_hp = (14.0 + float(floor_no) * 6.0) * float(def.get("hp", 1.0)) * MINIBOSS_HP_MULT
+	m.hp = m.max_hp
+	m.set_meta("l29c_miniboss_purse", purse)
+	var nm := String(def.get("name", "an elite"))
+	_say("%s holds this chamber alone - a mini-boss stands between you and the way deeper." % nm)
+	Sfx.play("roar", -2.0)
+	# the atk bump rides on the meta the hit code already reads nowhere, so set
+	# the def value directly: a copy of the pick with "atk" scaled
+	var def2 := def.duplicate()
+	def2["atk"] = float(def.get("atk", 4.0)) * MINIBOSS_ATK_MULT
+	m.def = def2
 
 ## ---- the wizard's lamp-stand (old expedition._check_lamp / _light_check).
 ## Dead centre of every floor (FloorGen puts it there). A hero who reaches it
@@ -1461,6 +1499,24 @@ func _on_kill(tgt: Monster) -> void:
 		if _split_said != floor_no:
 			_split_said = floor_no
 			_say("The %s divides." % String(tgt.def.get("name", "ooze")))
+	# L29c miniboss: the elite that stands in a chamber alone carries a purse on
+	# its meta. On death it pays out across every alive hero, Chronicle names
+	# the kill, Delve.setpieces_fired counts a "miniboss_down" so the test can
+	# see that resolve + bonus actually fired.
+	if tgt.has_meta("l29c_miniboss_purse"):
+		var purse := int(tgt.get_meta("l29c_miniboss_purse"))
+		tgt.remove_meta("l29c_miniboss_purse")
+		var alive := _alive()
+		if not alive.is_empty():
+			var share := maxi(1, purse / alive.size())
+			for m in alive:
+				roster.award(String(m["uid"]), share, 0, 0, floor_no)
+				_float_text(m, "+%d" % share, Color(1.0, 0.85, 0.35))
+			_gold += share * alive.size()
+			_say("The %s is down. The chamber keeps a purse of %d gold - %d a share, %d ways."
+				% [String(tgt.def.get("name", "elite")), purse, share, alive.size()])
+			Delve.setpieces_fired["miniboss_down"] = int(Delve.setpieces_fired.get("miniboss_down", 0)) + 1
+			Sfx.play("coin", -4.0)
 
 func _raise_tick(mon: Monster, most: int, delta: float) -> void:
 	_call_tick(mon, {"type": "minion", "strain": "hollowed", "name": "risen dead", "every": 9.0, "most": most,

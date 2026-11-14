@@ -5038,3 +5038,42 @@ and the Chronicle announcements still read correctly from an outside test.
   now genuinely a grass material; if he wants a specific surface (the trodden dirt paths?) to read as
   grass, that is a one-line repoint per surface on his word - did NOT guess that aesthetic unattended.
 - tools/_d56_shot.gd added (material swatch render).
+
+
+## U24 - MERGED-TREE WINDOWED SIGN-OFF (D49 4-pane + L61 scroll + 18px), 2026-11-13 ~21:48 (game-machine local)
+Fresh desktop-HUD session, scheduled fire. Lock IDLE + OBS down (obs64/obs-browser/Godot all absent) -
+FIRST cycle both preconditions held since U18. Took the lock, merged, rendered WINDOWED, LOOKED, released.
+Closes the standing u23 caveat that U20's sign-off was on fd85570, not the fully-merged tree.
+- QUEUE: L51 confirmed DONE + off-stream. WORK_PLAN origin/main shows `[x] L51` ("TICKED: L35,L38,L51,L59,L59b");
+  COORDINATION 13 (binding, Mr. E) moves the Satchel to the hub (L63, merged c9f9fb1) and the d20 to H9. Built NO
+  new on-stream L51 panel - doing so would duplicate finished code AND violate 13. The scheduled payload still
+  fires "build L51"; it should be repointed/retired (same ask as U18-U23).
+- SYNC: W2 hud-ui fast-forwarded fd85570..434373b (D56 grass + MI_Dirt, D29 work-sound, L30 tests, content C27/28).
+  My 7 files BYTE-IDENTICAL to origin/main before and after - the merge changed no HUD code.
+- PARSE: console --headless --path W2 --quit-after 300 -> rc 0, 0 SCRIPT ERROR / 0 Parse Error (only benign
+  texture-UID WARNINGs in town.gd, not ours).
+- RENDER (WINDOWED 1920x1080, tools/_u24_shot.gd = copy of _l61_shot, NOT headless per COORDINATION 4):
+  renders/cycles/20261113_u24 { 1_grid_scroll_card_1080, 3_grid_scroll_clean_1080, 2/4 chronicle crops }.
+  Chronicle box 714x295 (Mr. E's approved size). LOOKED at the clean 1080p grid, the 1:1 scroll crop, and the
+  lord-card frame.
+- D49 -> PANES MATCH (re-confirmed on the merged tree with real green grass). All four panes
+  (DIRECTOR/BITS/SUBSCRIBER/CHANNEL POINTS) read equally sharp; no quadrant is softer. U19's AA fix
+  (SubViewportContainer stretch_shrink=1 + TEXTURE_FILTER_LINEAR + msaa_3d MSAA_2X + FXAA per pane) holds.
+  D49 DONE pending supervisor tick.
+- L61 -> READS AS AN ORNATE ELDER SCROLL. Wooden spindles top/bottom; brass finial roundels (gold ring, teal
+  centre) at all four ends; "CHRONICLE" inscribed on the upper spindle + a teal heraldic lozenge drop-mark;
+  laid-paper parchment with deckled edges and a faint illuminated inner margin. Compact, centred on the cross,
+  overlaps only pane seams (allowed). L61 DONE pending supervisor tick.
+- 18px CAVEAT RESOLVED. All 8 Chronicle lines cleanly legible at 1:1 on the 1080p stream (dark-brown on cream),
+  now confirmed on the merged tree.
+- L40 discipline: lord-card frame - the "Grimwarden the Hollow" card composes INSIDE the Chronicle; the text
+  reflows to its right with ZERO overlapping pixels and the card stays within the Chronicle footprint (never
+  spills into a pane). Clean.
+- NIT (unchanged from u23, Mr. E's call): the gold-on-wood "CHRONICLE" wordmark is the lowest-contrast text in
+  the frame - reads at 1080p, first to blur on mobile/low bitrate. One-line lighten/size bump in hud_dock.gd if
+  ever wanted; parchment freshness is taste, not readability.
+- NO FIX NEEDED. No source file changed; this cycle commits ONLY this PROGRESS entry. Renders + the _u24_shot
+  harness left untracked (prior practice). Lock set back to IDLE in R.
+- FOR MR. E / supervisor: D49 + L61 are now signed off on the FULLY-MERGED tree (434373b) - the u23 "nobody
+  looked at the merged tree" caveat is CLOSED. Both are tick-ready. The only open HUD-lane question is whether
+  the stale "build L51" payload gets repointed.

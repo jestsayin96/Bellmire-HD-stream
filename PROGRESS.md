@@ -4525,3 +4525,31 @@ hand could break _cape_tint or the pet mount and no bench alarm would ring.
 - GATE: --headless --import clean, _offfloor 0/1554, _twitch_parse OK, _delve_test no SCRIPT ERROR,
   _l29a 11/11, _l29b 23/23, _l29c 18/18, _l30a 21/21, _l30b 17/17, _l56 4/4.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 144 - L30c loot tables verification (laptop jestai, 2026-11-13) - L30c (IN PROGRESS, WORK_PLAN untouched)
+L30c's DONE line: "loot scales in a 10-floor soak, a boss drops its unique." The gold ladder lives
+in Delve.boss_loot_mult + Delve._loot (floor_no * 11 * mult, with 0.6-1.6 Investigation band);
+boss / rare-lord / floor-unique payouts stack on top of it; Bestiary.lord_unique_for already loads
+78 written variants from data/bosses.json (L-cycle 140). The gap this round was proof the ladder
+and the Chronicle announcements still read correctly from an outside test.
+- tools/_l30c_test.gd (NEW, 9 checks):
+    A - Delve.boss_loot_mult is the single source of truth: 1.0 < floor_unique 2.0 < lord 3.0 <
+        rare_lord 4.5. A strict order, not a loose claim.
+    B - running Delve._loot 6 times at floor_no=2 and 6 times at floor_no=10 gives averages ~24 and
+        ~104 gold - a floor-10 average pays at LEAST 3x floor-2 average. A single-trial comparison
+        collided on the 0.6-1.6 Investigation band, so the test averages (RNG-robust).
+    C - Bestiary.lord_unique_for("hollow_king", 0.001) returns a variant from the 78 (a real skew
+        on hp/attack/speed carried in the name), and Bestiary.uniq_orphans() is empty - every
+        variant is placed under one of the eight canon lords.
+    D - a rare-lord _loot writes "A hoard that size does not come off an ordinary lord." to the
+        town feed; a plain-lord _loot does NOT. Checked by exact substring on a FakeTown that
+        exposes `feed` and `economy`.
+    E - a real 3-floor soak at start_floor=5 (first floor IS a boss floor) reaches state=home with
+        1 boss seen, 1 slain, and 528 gold banked across the party. No SCRIPT ERROR.
+- NO changes to delve.gd / roster.gd / bestiary.gd / data/bosses.json - the existing wiring is
+  correct; this round measures it. The _run_sync_loot rig uses HeroBody stubs in the tree so
+  _loot's reads of body.global_position and body typed as HeroBody both pass.
+- GATE: --headless --import clean, _offfloor 0/1453, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a 11/11, _l29b 23/23, _l29c 18/18, _l30a 21/21, _l30b 17/17, _l30c 9/9, _l56 4/4.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

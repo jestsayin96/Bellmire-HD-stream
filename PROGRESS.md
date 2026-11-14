@@ -4922,3 +4922,33 @@ Chronicle names the kill.
   and trade_frozen in the caravan arrival path (no caravan during sickness/flood). D44b still needs its
   attended navmesh-bake fix; D29 awaits Mr. E's measured re-recording; D31/D32 (growth, needs growth.gd
   ownership + Mr. E's curve) and D33 (events, needs laptop monster/boss coordination) remain open.
+
+
+## L-cycle 146 - L29c round 4: MINIBOSS rallies at half hp (laptop jestai, 2026-11-13)
+Supervisor at 20-something: "keep deepening YOUR lane - more floor hazard/trap variety, distinct
+miniboss/elite behaviors, bestiary depth". Round 4 adds a RALLY phase to the mini-boss I shipped in
+round 3 - at half hp the elite "finds its second wind", its atk climbs by MINIBOSS_RALLY_MULT and
+the Chronicle writes a tell. The fight now has a readable mid-beat on stream, not just a kill.
+- scripts/delve.gd (_miniboss_rally_tick, called from _fight): scans dun.monsters each fight tick
+  for a creature carrying the "l29c_miniboss_rallied == false" meta (set by _setpiece_miniboss at
+  spawn). Once its hp dips below MINIBOSS_RALLY_FRAC (0.5), the meta flips to true and its
+  def.atk is multiplied by MINIBOSS_RALLY_MULT (1.5). One rally per miniboss, counted in
+  Delve.setpieces_fired["miniboss_rally"] so the test can read it; a second tick never re-fires.
+- CHRONICLE: "%s finds its second wind - its strikes land harder." Sfx.play("roar", -4.0) rides
+  the beat so the lane speakers under the panes mark it too.
+- scripts/delve.gd (_setpiece_miniboss): added set_meta("l29c_miniboss_rallied", false) at
+  spawn. The spawn block otherwise unchanged.
+- SAFETY: the rally tick iterates on the LIVE monster instances. The first draft typed mon_v as
+  Monster before is_instance_valid, which cast a queue_freed instance back to Monster and threw
+  "Trying to assign invalid previously freed instance" ~40 times during the soak. Now the loop
+  checks is_instance_valid(mon_v) BEFORE the typecast, and the errors are 0 across a full run.
+- tools/_l29c_test.gd: extended B.miniboss (26->33 checks) with a rally phase: the flag starts
+  false, nick the elite to 48% hp, _miniboss_rally_tick sets it true, atk climbs by *exactly*
+  MINIBOSS_RALLY_MULT (1.95 -> 2.92 in the run), setpieces_fired["miniboss_rally"] counted, and a
+  second tick does NOT re-fire or re-bump the atk.
+- NO changes to Monster or Bestiary - the rally reuses the existing def.atk read path. If/when
+  the phase mechanic Monster.phase_changed carries up to non-lord enemies (L29a shipped it for
+  lords), this hook can move to it and the meta go away. For now the meta is the clean seam.
+- GATE: --headless --import clean, _offfloor 0/1316, _twitch_parse OK, _delve_test no
+  SCRIPT ERROR, _l29c OK 33/33.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

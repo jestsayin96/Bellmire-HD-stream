@@ -282,6 +282,30 @@ func _process(_dt: float) -> bool:
 				% [spawned.max_hp, expected_hp])
 			_ok(spawned.has_meta("l29c_miniboss_purse"),
 				"B.miniboss: carries l29c_miniboss_purse meta")
+			# R4: half-hp RALLY fires a Chronicle line and bumps the def's atk
+			_ok(spawned.has_meta("l29c_miniboss_rallied") and not bool(spawned.get_meta("l29c_miniboss_rallied")),
+				"B.miniboss.rally: rallied flag starts false")
+			var atk_before: float = float(spawned.def.get("atk", 0.0))
+			# nick the elite to just under half hp - rally should fire on the next tick
+			spawned.hp = spawned.max_hp * 0.48
+			d._miniboss_rally_tick()
+			var atk_after: float = float(spawned.def.get("atk", 0.0))
+			_ok(bool(spawned.get_meta("l29c_miniboss_rallied")),
+				"B.miniboss.rally: rallied flag set after dipping under half hp")
+			_ok(atk_after > atk_before,
+				"B.miniboss.rally: atk climbs on rally (%.2f -> %.2f)" % [atk_before, atk_after])
+			_ok(abs(atk_after - atk_before * Delve.MINIBOSS_RALLY_MULT) < 0.01,
+				"B.miniboss.rally: atk multiplied by MINIBOSS_RALLY_MULT exactly (%.2f * %.2f = %.2f, got %.2f)"
+				% [atk_before, Delve.MINIBOSS_RALLY_MULT, atk_before * Delve.MINIBOSS_RALLY_MULT, atk_after])
+			_ok(int(Delve.setpieces_fired.get("miniboss_rally", 0)) == 1,
+				"B.miniboss.rally: setpieces_fired[miniboss_rally] counted")
+			# second tick must NOT re-fire the rally
+			d._miniboss_rally_tick()
+			_ok(int(Delve.setpieces_fired.get("miniboss_rally", 0)) == 1,
+				"B.miniboss.rally: a second tick does NOT re-fire")
+			_ok(abs(float(spawned.def.get("atk", 0.0)) - atk_after) < 0.01,
+				"B.miniboss.rally: atk does NOT climb again on the second tick")
+
 			# kill it and check the bonus fires
 			var gold_before := int(h.get("gold", 0))
 			spawned.hp = 0

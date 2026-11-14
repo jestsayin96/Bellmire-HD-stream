@@ -524,6 +524,52 @@ static func blade_trap() -> Node3D:
         t.tween_property(pivot, "rotation:x", -PI * 0.5, 0.5).set_delay(0.2))
     return n
 
+## POISON DART: same mounts as the plain dart trap, but the darts fire
+## sickly green and their hit stacks a venom DoT on the victim instead of a
+## one-shot sting. The resolver branch in delve._spring reads kind == "PoisonDart".
+static func poison_dart() -> Node3D:
+    var n := Node3D.new()
+    n.name = "PoisonDart"
+    _box(n, Vector3(1.4, 0.06, 1.4), Vector3(0, 0.03, 0), _m(Color(0.22, 0.30, 0.22), 0.0, 0.95))
+    var post := _m(Color(0.18, 0.26, 0.18), 0.2, 0.8)
+    for s in [-1.0, 1.0]:
+        _box(n, Vector3(0.22, 1.1, 0.22), Vector3(1.0 * s, 0.55, 0), post)
+        _box(n, Vector3(0.06, 0.06, 0.06), Vector3(0.88 * s, 0.9, 0), _m(Color(0.08, 0.14, 0.08)))
+    n.set_meta("fire", func() -> void:
+        var dm := _m(Color(0.42, 0.78, 0.36), 0.2, 0.3)
+        dm.emission_enabled = true
+        dm.emission = Color(0.18, 0.52, 0.22)
+        dm.emission_energy_multiplier = 1.4
+        for k in range(3):
+            var dart := _box(n, Vector3(0.36, 0.035, 0.035), Vector3(-0.9, 0.9 - 0.12 * float(k), -0.15 + 0.15 * float(k)), dm)
+            var t := dart.create_tween()
+            t.tween_interval(0.05 * float(k))
+            t.tween_property(dart, "position:x", 0.9, 0.16)
+            t.tween_interval(0.4)
+            t.tween_callback(dart.queue_free))
+    return n
+
+## SWARM TRAP: a grate in the floor; stepping on it springs the bars and
+## something small comes up through them. The resolver branch in delve._spring
+## reads kind == "SwarmTrap" and spawns a short pack at the trap - no damage
+## up front, the swarm itself is the hit.
+static func swarm_trap() -> Node3D:
+    var n := Node3D.new()
+    n.name = "SwarmTrap"
+    _box(n, Vector3(1.6, 0.04, 1.6), Vector3(0, 0.02, 0), _m(Color(0.11, 0.10, 0.08), 0.1, 0.9))
+    var bar := _m(Color(0.22, 0.20, 0.18), 0.5, 0.45)
+    for k in range(-2, 3):
+        _box(n, Vector3(0.06, 0.02, 1.35), Vector3(float(k) * 0.28, 0.045, 0), bar)
+    _box(n, Vector3(1.35, 0.02, 0.06), Vector3(0, 0.045, -0.55), bar)
+    _box(n, Vector3(1.35, 0.02, 0.06), Vector3(0, 0.045, 0.55), bar)
+    n.set_meta("fire", func() -> void:
+        for bar_mesh in n.find_children("*", "MeshInstance3D", false, false):
+            var mi: MeshInstance3D = bar_mesh
+            if mi.mesh is BoxMesh and (mi.mesh as BoxMesh).size.x < 0.1:
+                var t := mi.create_tween()
+                t.tween_property(mi, "position:y", -0.3, 0.12))
+    return n
+
 ## PIT TRAP: two boards over a dark shaft; they drop open and close again
 static func pit_trap() -> Node3D:
     var n := Node3D.new()

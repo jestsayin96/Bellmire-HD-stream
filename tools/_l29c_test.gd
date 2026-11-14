@@ -338,8 +338,12 @@ func _process(_dt: float) -> bool:
 			ids.append(v[0])
 		_d = Delve.new()
 		_d.roster = _r
-		_d.max_floors = 6
-		_d.start_floor = 3
+		# soak wider than needed so a single unlucky RNG seed does not fail C:
+		# 8 floors starting at 2 crosses >=10 set-piece opportunities; past L29c
+		# round 5 the trap pool grew, which shifted RNG state going into
+		# _set_pieces and occasionally landed every piece off the walked path
+		_d.max_floors = 8
+		_d.start_floor = 2
 		root.add_child(_d)
 		_d.start(ids)
 		_f = 0

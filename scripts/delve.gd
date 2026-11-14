@@ -2301,6 +2301,10 @@ func _mon_saves(mon: Monster, m: Dictionary, _kind: int) -> bool:
 const SPOTTERS := ["rogue", "ranger", "monk"]
 const TOOLS := ["rogue", "bard"]
 const TRAP_REACH := 0.9
+## L29c r5 added PoisonDart (status, not spike) and SwarmTrap (a creature spawn,
+## not damage up front). PoisonDart carries a tiny immediate hit AND stacks a
+## venom DoT (6 s, dps 1 + floor/4). SwarmTrap deals no immediate damage - its
+## damage is whatever the pack it lets up does once the party sees it.
 const TRAPS := {
 	"SpikeTrap":     {"noun": "a spiked plate", "what": "spikes!", "dice": [2, 6], "sfx": "swing", "name": "a spike trap"},
 	"PressurePlate": {"noun": "a plate", "what": "darts!", "dice": [3, 4], "sfx": "ui", "name": "a pressure plate"},
@@ -2308,6 +2312,8 @@ const TRAPS := {
 	"DartTrap":      {"noun": "a loose flagstone", "what": "darts!", "dice": [3, 4], "sfx": "swing", "name": "a dart trap"},
 	"BladeTrap":     {"noun": "a slot in the floor", "what": "a blade!", "dice": [2, 8], "sfx": "swing", "name": "a blade trap"},
 	"PitTrap":       {"noun": "rotten boards", "what": "the floor drops away!", "dice": [2, 6], "sfx": "hit", "name": "a pit"},
+	"PoisonDart":    {"noun": "a loose flagstone", "what": "green darts!", "dice": [1, 4], "sfx": "swing", "name": "a poison-dart trap"},
+	"SwarmTrap":     {"noun": "a grated floor", "what": "the bars drop open - something is coming up through them!", "dice": [1, 1], "sfx": "swing", "name": "a swarm grate"},
 }
 var trap_log := {"spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0}
 
@@ -2392,7 +2398,61 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 	_float_text(m, "-%d" % int(took), Color(1.0, 0.35, 0.25) if not saved else Color(1.0, 0.75, 0.3))
 	if String(tr.get("kind", "")) == "FireTrap" and not saved:
 		_give(m, "burning", 3.0)
+	# L29c r5 trap variety: PoisonDart stacks a venom DoT on a failed save; the
+	# dart itself only grazes (1d4) but the venom carries the hit over the next
+	# few seconds, same mechanic a snake or spider bite uses, so the fight-loop
+	# venom tick reads it for free.
+	if String(tr.get("kind", "")) == "PoisonDart" and not saved:
+		m["venom"] = maxf(float(m.get("venom", 0.0)), 6.0)
+		m["venom_dps"] = maxf(float(m.get("venom_dps", 0.0)), 1.0 + float(floor_no) / 4.0)
+		trap_log["venomed"] = int(trap_log.get("venomed", 0)) + 1
+		_say("%s is venomed - the poison works over the next few seconds." % h["name"])
+	# SwarmTrap lets a small pack up through the grate right where the hero stepped.
+	# The plain damage above is the one-point tally so the "a trap must hurt" rule
+	# from L46 stays honoured; the real teeth are the pack. Count a SEPARATE
+	# telemetry key so the test can see swarm-ups fire in a soak without conflating
+	# them with the ordinary trap tally.
+	if String(tr.get("kind", "")) == "SwarmTrap":
+		trap_log["swarms"] = int(trap_log.get("swarms", 0)) + 1
+		_trap_swarm(tr)
 	_hero_hit(m)
+
+## L29c r5: a SwarmTrap springs up a short pack of theme-matched creatures
+## RIGHT WHERE THE PARTY STANDS, like an AMBUSH set piece but wired from the
+## trap pool. Reuses dun.monsters so the fight loop picks it up for free.
+func _trap_swarm(tr: Dictionary) -> void:
+	if dun == null or not is_instance_valid(dun):
+		return
+	var node = tr.get("node")
+	if not is_instance_valid(node):
+		return
+	var at: Vector3 = (node as Node3D).global_position
+	var theme := String(dun.info.get("theme", ""))
+	var names: Array = []
+	for k in range(2):
+		var d := Bestiary.pick(floor_no, theme)
+		var mon := Monster.new()
+		mon.def = d
+		mon.state = Monster.S.PATROL
+		mon.roam = 2.0
+		var off := Vector3(cos(float(k) * 2.1), 0.0, sin(float(k) * 2.1)) * 1.2
+		mon.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
+		dun.add_child(mon)
+		(dun.monsters as Array).append(mon)
+		mon.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
+		mon.hp = mon.max_hp
+		names.append(String(d.get("name", "something")))
+	# "2 rats", not "rat, rat"
+	var counts := {}
+	for nm in names:
+		counts[nm] = int(counts.get(nm, 0)) + 1
+	var parts: Array = []
+	for k in counts:
+		var ks := String(k)
+		var nc: int = counts[k]
+		parts.append("%d %s" % [nc, ks if nc == 1 or ks.ends_with("s") else ks + "s"])
+	_say("The grate pops - %s comes up through it." % ", ".join(parts))
+	Sfx.play("roar", -5.0)
 
 ## a number or word floating up off a delver's head
 func _float_text(m: Dictionary, text: String, col: Color, size := 84, lift := 2.4) -> void:

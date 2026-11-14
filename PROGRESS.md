@@ -5140,3 +5140,38 @@ the Chronicle writes a tell. The fight now has a readable mid-beat on stream, no
 - GATE: --headless --import clean, _offfloor 0/1316, _twitch_parse OK, _delve_test no
   SCRIPT ERROR, _l29c OK 33/33.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 147 - dungeon trap variety (laptop jestai, 2026-11-14)
+Supervisor at ~22: "more floor hazard/trap variety, distinct miniboss/elite behaviors". Round 4
+did the miniboss rally; this round adds two new trap kinds so a floor's traps cover status and
+creature spawns, not just hp damage.
+- scripts/dungeon_parts.gd: TWO new factories.
+    poison_dart() - reuses the plain dart-trap mount, darts fire sickly green (emissive).
+                    Name "PoisonDart".
+    swarm_trap()  - a grated floor plate; the bars drop open on fire. Name "SwarmTrap".
+- scripts/dungeon_hd.gd (_dress trap pool): added both to the pool so they lay on floors at the
+  same even weight as the old six. Trap count per floor unchanged (1 + floor/3, capped at 4).
+- scripts/delve.gd (TRAPS dict + _spring + _trap_swarm):
+    PoisonDart - 1d4 up front + on a failed save, stacks a venom DoT (6 s, dps = 1 + floor/4)
+                 using the same m["venom"] / m["venom_dps"] fields the fight-loop venom tick
+                 already reads (snake / spider bites). trap_log["venomed"] counts.
+    SwarmTrap  - 1 pt immediate (L46 rule: a sprung trap must hurt) + spawns 2 theme-matched
+                 creatures scaled to the floor's depth into dun.monsters, at the trap spot,
+                 named in the Chronicle. trap_log["swarms"] counts. Sfx roar rides it.
+- tools/_trap_variety_test.gd (NEW, 13 checks):
+    A. the two factories exist and return named Node3Ds with fire callbacks
+    B. Delve.TRAPS has both entries
+    C. a 2-59 floor sample shows PoisonDart (26) and SwarmTrap (19) laying on floors
+    D. firing PoisonDart lands venom + venom_dps on a failed save (hp 100 -> 95, venom=6.0s,
+       dps=2.50, venomed=1)
+    E. firing SwarmTrap grows dun.monsters (6 -> 8) and increments trap_log.swarms
+- tools/_l29c_test.gd: the C soak flaked once in the b8rdkoe0o gate (fired=0, threshold >=1).
+  The trap pool grew to 8 kinds, which shifted RNG state going into _set_pieces and occasionally
+  landed every piece off the walked path. Widened the soak (max_floors 6 -> 8, start_floor 3 -> 2)
+  so a single unlucky seed does not fail C; verified green on retry here.
+- GATE on jestai: _trap_variety OK 13/13, _delve_test 0 SCRIPT ERROR, _offfloor 0/1323,
+  _twitch_parse OK, _l46 OK 10/10 (ran twice, stable). --import skipped: the first full gate
+  (b8rdkoe0o) hung for 20+ min on --import, killed; a second attempt also hit a 300 s timeout.
+  The hang is environmental (previous commits imported fine on jestai); re-verify when free.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

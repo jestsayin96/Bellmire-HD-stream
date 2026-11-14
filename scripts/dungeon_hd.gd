@@ -427,8 +427,14 @@ func _dress() -> void:
                 return cv
         return Vector2i(-999, -999)
     # every floor: a few traps on the open floor, debris in proportion to depth
+    # L29c r5: the pool is now eight kinds - the two new ones carry status effects
+    # instead of a flat damage spike (poison dart stacks venom; swarm trap lets
+    # creatures up through the grate), and both hit the TRAPS dict + the _spring
+    # branches in delve.gd. Weighted by inclusion count - the old six each appear
+    # once, poison/swarm once each too, so every kind lands at even weight.
     var traps := [DungeonParts.spike_trap, DungeonParts.pressure_plate, DungeonParts.fire_trap,
-                  DungeonParts.dart_trap, DungeonParts.blade_trap, DungeonParts.pit_trap]
+                  DungeonParts.dart_trap, DungeonParts.blade_trap, DungeonParts.pit_trap,
+                  DungeonParts.poison_dart, DungeonParts.swarm_trap]
     for i in range(1 + mini(floor_no / 3, 3)):
         var c: Vector2i = take_route.call()
         if c.x <= -999:

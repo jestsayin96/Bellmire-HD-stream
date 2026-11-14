@@ -4889,3 +4889,127 @@ and the Chronicle announcements still read correctly from an outside test.
   and trade_frozen in the caravan arrival path (no caravan during sickness/flood). D44b still needs its
   attended navmesh-bake fix; D29 awaits Mr. E's measured re-recording; D31/D32 (growth, needs growth.gd
   ownership + Mr. E's curve) and D33 (events, needs laptop monster/boss coordination) remain open.
+## C-cycle 27 - the lines that repeat most: epitaphs, barks, descend, cleared, tells, misfire (standing backlog item 5; WORK_PLAN C2)
+
+- WORKED IN: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`). R
+  (Bellmire-HD-stream) was on `laptop`; its local `content` ref (b71f234) is an ANCESTOR of
+  origin/content, so nothing was unpushed, no safety push was needed and R was fetched only, never
+  checked out.
+- ONE FILE TOUCHED: data/lore_lines.json (188.3 KB -> 199.2 KB). items.json, bosses.json and
+  potions.json were parsed and left byte-identical to HEAD. No .gd, no .tscn, no assets, no web/, no
+  new data file.
+- WHY THIS BLOCK: backlog item 5 is the highest-frequency text in the game. A descend line and a
+  cleared line fire on EVERY floor, a bark fires on every entry/lord/trap/wound/drink, and an epitaph
+  fires on every death - these are what a viewer hears the fourth time in ten minutes.
+- ADDED - 212 new lines, additive only:
+  - tells 22 -> 28 in ALL EIGHT dungeon kinds (+48): tomb, mine, fortress, temple, lair, prison,
+    works, warren. One tell per delve (origins.json budget), so breadth here is what stops the
+    first-floor tell repeating across a long stream.
+  - descend 86 -> 110 (+24): 8 in the existing `%s %s ...` two-arg form, 16 plain Chronicle lines.
+  - cleared 86 -> 110 (+24): 8 in the existing `Floor %d ...` one-arg form, 16 plain.
+  - barks +12 each: enter 52 -> 64, lord 52 -> 64, trap 51 -> 63, hurt 51 -> 63, drink 51 -> 63,
+    misfire 49 -> 61 (+72). Short enough to read at a glance over a fight.
+  - misfire (the spell-failure Chronicle line) 38 -> 50 (+12), all in the exact existing
+    `%s ... %s ... (%d vs DC %d)` four-arg form and order.
+  - epitaphs 128 -> 160 (+32).
+- VOICE: built only on phrases the file already owns - MEASURE THE GRAIN / COUNT THE FLASKS / KEEP THE
+  DOOR, the guild's tenth, the chalk, lamp oil, the bell with no clapper, the architect and his toys,
+  the scar that takes its toll, the dungeon still being built, the memorial, the Ford. Nothing invented
+  against canon, nothing contradicting an existing line.
+- VALIDATION OK (python only - no Godot, per COORDINATION 10). 1545 asserts, 0 errors:
+  all four owned files json.load clean; the three untouched ones byte-identical to `git show HEAD`;
+  lore_lines.json deep-walked against HEAD - top-level key order unchanged, every dict key-set and
+  order unchanged, every scalar equal, no list shrank, and every one of the 18 grown lists is an EXACT
+  PREFIX of its new self, so no pre-existing line moved index or changed a character. The set of lists
+  that grew is exactly the 18 intended ones - nothing else in the file changed length. Every new entry
+  is a non-empty stripped str. Every new line's printf conversion sequence was checked against the set
+  of sequences already present in ITS OWN list (so a plain line can never land in a formatted slot, or
+  the reverse) and no line carries a stray %. No dungeon floor count is stated anywhere. numstat
+  230 added / 18 changed - the 18 are the former last entry of each grown list gaining a trailing
+  comma. LF-vs-CRLF: this file is CRLF, and a byte-exact serialiser round-trip of the UNMODIFIED file
+  was confirmed before any write, so the only byte changes in the diff are the added lines.
+- PRE-EXISTING DEFECT FLAGGED, NOT CHANGED (additive only - the supervisor's call): six lines are
+  duplicated inside their own list in HEAD, so they already roll at double weight -
+  descend "%s %s into the scar with the lamps trimmed low." x2; barks.enter "Nobody wanders." x2;
+  barks.trap "Nobody move." x2; barks.hurt "Bleeding, not beaten." x2 and "Not done yet." x2;
+  barks.misfire "Ask the scar, not me." x2. This cycle introduces ZERO new duplicates (asserted
+  new-vs-new and new-vs-existing in every grown list) and deliberately leaves those six alone.
+- CODE WIRING IMPLIED (for the supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO WIRE FOR FUNCTION. Every list that grew is already read by its existing caller
+     and every new line reuses a format the caller already passes args for. No new key, no new block.
+  2. CHECK FOR HARD-CODED LENGTHS. Anything sized off 86 descend / 86 cleared / 128 epitaphs / 52 or
+     51 or 49 barks / 38 misfire / 22 tells instead of the array itself will silently never roll the
+     new lines, which is the exact opposite of the point of this cycle. OWNER: LAPTOP CODE
+     (delve.gd descend/cleared/tells, roster.gd or delve.gd epitaphs, monster.gd/delve.gd barks,
+     spells.gd or delve.gd misfire - wherever each picker lives), plus DESKTOP HUD if the Chronicle
+     strip pre-sizes a line buffer.
+  3. REPEAT AVOIDANCE IS A CODE PROPERTY, NOT A DATA ONE. 110 descend lines still read the same twice
+     in a stream if the picker is a bare randi() % len with no recently-used window. If no picker keeps
+     a short no-repeat history, the content growth is worth much less than it looks. OWNER: LAPTOP CODE.
+     Worth one line in the next census the way D28 did for cosmetics.
+  4. LINE LENGTH: the longest new bark is 33 chars and the longest new epitaph 54, both inside the
+     existing ranges, so no nameplate or Chronicle field needs re-measuring for this cycle.
+     OWNER: DESKTOP HUD, no action expected.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 28 - E3PO, Commander of the Guards (standing backlog item 3)
+- FOLDER: C:\Users\Jestsayin96\Project1\bellmire-content (W3, worktree on branch `content`).
+  The code worker's clone was NOT touched and NOT checked out - it was sitting on `laptop`, 21 commits
+  ahead of origin/laptop, and was left exactly that way.
+- WHY THIS ITEM: backlog 1 was C-cycle 23 and 26, backlog 2 audited complete in C-cycle 24, backlog 4
+  was C-cycle 24, backlog 5 was C-cycle 27, backlog 6 was C-cycle 25. Backlog 3 (E3PO) was last
+  deepened in C-cycle 17 - the longest-standing gap, and Mr. E's favourite.
+- FILE TOUCHED: data/lore_lines.json ONLY. The other three owned files are byte-identical to HEAD.
+  315 new E3PO lines. The e3po block goes 451 -> 766 lines, 18 -> 27 keys.
+- EXISTING LISTS EXTENDED (the ones that repeat most on stream):
+  says 44->64, town_talk 38->54, raid 38->54, disaster 38->54, festival 32->44, intro 22->30,
+  withdraw 24->30, return 23->30, night_watch 20->28, lord_sighted 18->26, viewer_down 18->26,
+  viewer_returns 18->26, recruit 18->26, and all four d20 outcomes 22->30 each
+  (viewer_roll.crit / .high / .low / .fumble).
+- EIGHT NEW KEYS (all flagged in e3po._note_c28 as dead until wired):
+  hurt (20)            - badly hurt but STILL HOLDING. The gap in the existing set: he went straight
+                         from intro to withdraw with nothing in between, so the stream never saw the
+                         stage that makes "cannot die" mean something. Fires while he is below some
+                         hp fraction and has NOT yet withdrawn.
+  delve_dispatch (18)  - seeing a party off at the stairhead. He cannot follow them down; several
+                         lines say so, which is the canon reason he is a town character.
+  lord_cleared (18)    - a lord killed below. Pairs with the existing lord_sighted.
+  viewer_cosmetic (20) - he reacts to a viewer WEARING a bought cosmetic, dye or title. This is the
+                         channel-point/bits spend getting acknowledged by name on stream, which is
+                         what makes the shelf worth buying from. D28 found cosmetics are never worn.
+  rank_up (16)         - a viewer's hero promoted.
+  trader_arrives (16)  - a caravan at the gate; reuses the trade vocabulary C-cycle 23 put in town.
+  drill (18)           - quiet-day lines, so an idle town is not silent.
+  dispute (16)         - the Commander as the law at the gate (the reeve takes debts, he takes fists).
+- CANON: he cannot die, withdraws to the barracks, returns; pompous, dry, utterly reliable. Built on
+  phrases already in the file - MEASURE THE GRAIN / COUNT THE FLASKS / KEEP THE DOOR, the bell with no
+  clapper, the scar that misfires spells, the guild post, the reeve. No new named character invented
+  (one line was rewritten mid-cycle to say "the sergeant" rather than invent a name). NO FLOOR COUNT
+  stated anywhere; lords are referred to as coming "in their own order".
+- VALIDATION OK (python only - no Godot, per COORDINATION 10). 56 asserts, 0 failures:
+  all four owned files json.load; items.json / bosses.json / potions.json byte-identical to HEAD;
+  lore_lines top-level key ORDER unchanged and every top-level key but e3po deep-equal to HEAD;
+  the 18 old e3po keys are an exact PREFIX of the new 27 in order; every pre-existing string
+  identical and every pre-existing list an exact prefix of its new self (so nothing was reworded or
+  reordered); every new entry a non-empty string matching the shape of its block (tier_up's
+  {tier,line} dicts checked separately and left untouched at 12); zero duplicate lines in any list
+  (one new viewer_returns line collided with an existing one and was replaced); ASCII only; longest
+  line 107 chars, inside the existing range.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. THE EIGHT NEW KEYS HAVE NO CALLER AND DO NOTHING UNTIL WIRED. They are additive and inert.
+     OWNER: DESKTOP BUILD for the town-side ones (hurt, trader_arrives, drill, dispute, and the
+     raid/disaster/festival extensions in raids.gd/town.gd), LAPTOP CODE for the stair-side ones
+     (delve_dispatch, lord_cleared in delve.gd/dungeon_hd.gd), DESKTOP HUD for viewer_cosmetic and
+     rank_up if the acknowledgement is a HUD/Chronicle line rather than a town event.
+  2. `hurt` NEEDS AN HP THRESHOLD AND A LATCH, not just a random pick: it must fire while he is hurt
+     and not yet withdrawn, and must stop the moment `withdraw` fires, or both play at once and the
+     immortality gag reads as a bug. OWNER: DESKTOP BUILD (he is a town character).
+  3. `viewer_cosmetic` is only worth wiring if cosmetics are actually WORN - D28's census says they
+     never are. The line is the reward for the spend; without the wearing it has nothing to react to.
+     Flagging it so the two are tracked together. OWNER: whoever owns the cosmetic-equip path.
+  4. CHECK FOR HARD-CODED LENGTHS, same caveat as C-cycle 27: anything sized off 44 says / 38
+     town_talk / 38 raid / 38 disaster / 32 festival / 22 viewer_roll instead of the array itself will
+     silently never roll the new lines. OWNER: whichever file picks E3PO's lines once he is wired.
+  5. NO NEW DATA FILE, NO RENAMED KEY, NO CHANGED VALUE. Any loader reading e3po today keeps working
+     unchanged whether or not the new keys are ever read.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

@@ -617,12 +617,22 @@ func _e3po_say(cat: String, sub := "") -> void:
     if feed != null:
         (feed as Array).append(line)
 
-func _e3po_withdraw() -> void:
+## D37 v2: felled in combat (0 hp in a raid). He is NOT killed - he is dragged to
+## the barracks and mends to full over 15 minutes, then returns to his post.
+func _e3po_felled(killer := "") -> void:
+    if not is_instance_valid(_e3po):
+        return
+    var feed = town.get("feed")
+    if feed != null:
+        (feed as Array).append("%s falls, but the Commander cannot die - his guard drag him to the barracks to mend. He will return." % _e3po.person_name)
+    _e3po_withdraw(900.0)             # says the "withdraw" line; 15 minutes to full health -> _e3po_return()
+
+func _e3po_withdraw(secs := -1.0) -> void:
     if not is_instance_valid(_e3po):
         return
     _e3po_say("withdraw")
     _e3po_state = "withdrawn"
-    _e3po_heal_t = rng.randf_range(45.0, 80.0)
+    _e3po_heal_t = secs if secs >= 0.0 else rng.randf_range(45.0, 80.0)
     var gd := _garrison_door()
     _e3po.stay = false
     _e3po.leader = null
@@ -657,9 +667,8 @@ func _e3po_tick(delta: float, eco, raids, raid_on: bool, h: float) -> void:
         if raid_on and not _e3po_raid_was:
             _e3po_say("raid")
         var breach: bool = raids != null and bool(raids.get("breached"))
-        if raid_on and breach and not _e3po_breach_was and rng.randf() < 0.6:
-            _e3po_say("hurt")
-            _e3po_withdraw()
+        if raid_on and breach and not _e3po_breach_was:
+            _e3po_say("hurt")        # D37 v2: he holds the line at a breach - he fights on, never leaves it
         else:
             if bool(town.get("festival")) and not _e3po_fest_was:
                 _e3po_say("festival")

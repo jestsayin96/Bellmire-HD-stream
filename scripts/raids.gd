@@ -171,7 +171,11 @@ func _defenders() -> Array:
         if not is_hero and role != "guard" and role != "chief":
             continue
         if not is_hero and (p as Townsfolk).notable_title == "Commander of the Guards":
-            continue          # D37: E3PO is immortal - he never joins the fall-able roster
+            # D37 v2: the Commander FIGHTS - but is never killed. He sits a raid out
+            # only while recovering at the barracks (see _defender_falls / notables).
+            var _nb = town.get("notables")
+            if _nb != null and String(_nb.get("_e3po_state")) == "withdrawn":
+                continue
         if String((p as Townsfolk).gear_role) == "lookout":
             continue          # the tower lookouts keep their towers
         if not _fighters.has(p):
@@ -198,6 +202,11 @@ func _defenders() -> Array:
                 # D4: the mounted watch - horsed, harder to bring down, rides at them
                 st.merge({"hp": 80.0, "max": 80.0, "atk": 13.0, "ac": 13, "to_hit": 4, "speed": 9.0,
                           "dice": [2, 8], "dmod": 4, "dex": 1, "con": 3})       # the lance
+            elif (p as Townsfolk).notable_title == "Commander of the Guards":
+                # D37 v2: E3PO leads from the front - tough and hard-hitting, but at
+                # 0 hp he is dragged off to heal, never slain (_defender_falls).
+                st.merge({"hp": 140.0, "max": 140.0, "atk": 16.0, "ac": 15, "to_hit": 6, "speed": 4.8,
+                          "dice": [2, 8], "dmod": 5, "dex": 2, "con": 4})       # the Commander's blade
             elif role == "guard":
                 st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4,
                           "dice": [2, 6], "dmod": 4, "dex": 0, "con": 2})       # the watch's longsword
@@ -741,6 +750,15 @@ func _raider_falls(r: Dictionary, _killer: String) -> void:
                 (o as Node).queue_free())
 
 func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
+    # D37 v2: the Commander cannot die. Beaten to 0 hp, he is dragged to the
+    # barracks, heals to full over 15 min, and returns to his post - no CON save,
+    # no bury, no body removed.
+    if n is Townsfolk and (n as Townsfolk).notable_title == "Commander of the Guards":
+        _fighters.erase(n)
+        var nb = town.get("notables")
+        if nb != null and nb.has_method("_e3po_felled"):
+            nb._e3po_felled(killer)
+        return
     # D9: anyone who goes down makes one CON save, DC 10 (heroes: the old
     # take_damage; now the watch, the riders and the chief too) - a 20 stands
     # them up with a quarter of their life, a 1 always fails

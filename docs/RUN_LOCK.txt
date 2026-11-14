@@ -1,1 +1,1 @@
-IDLE 2026-11-13 20:09 - supervisor: merged hud-ui (D49 panes verified + L61 elder-scroll) + laptop + content to main; headless gate green
+IDLE 2026-11-13 20:36 - desktop build: D34 natural disasters wired in economy.gd + tested (191/0), gate green

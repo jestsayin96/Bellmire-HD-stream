@@ -39,6 +39,16 @@ var start_floor := 1
 var npc_party := false           # the town's own band: no viewer gold
 var lane := 0                    # parallel delves sit side by side, 700 m apart
 
+## D37: E3PO voice hook. The town-held Notables carries _e3po_say. In a live
+## delve `town` is the Town node; in a bare test rig it may be a stub without a
+## notables ref, so this no-ops safely.
+func _e3po(cat: String, sub := "") -> void:
+	if town == null:
+		return
+	var n = town.get("notables") if town.get("notables") != null else null
+	if n != null and n.has_method("_e3po_say"):
+		n._e3po_say(cat, sub)
+
 func start(uids: Array) -> void:
 	_rng.randomize()
 	for uid in uids:
@@ -63,6 +73,7 @@ func start(uids: Array) -> void:
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
 	_say(_fmt_line(_pick_line("descend", "%s %s into the scar."), [_names(), "descends" if party.size() == 1 else "descend"]))
+	_e3po("delve_dispatch")         # D37: the Commander sees the party off
 	for m in party:
 		oil += float(int(m["h"].get("oil", 0)))
 		m["h"]["oil"] = 0
@@ -167,6 +178,7 @@ func _next_floor() -> void:
 			note = note.substr(0, 1).to_upper() + note.substr(1) + "."
 		var uniq := bool(dun.lord.def.get("unique", false))
 		_say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
+		_e3po("lord_sighted")   # D37: a lord has risen - the Commander calls it out
 		# L29b: the guild knows this lord. It does not know THIS one.
 		if bool(dun.lord.def.get("lord_unique", false)):
 			_say("The guild has put down %s before. Not this one." % String(dun.lord.def.get("lord_title", "its like")))
@@ -379,6 +391,27 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	var def2 := def.duplicate()
 	def2["atk"] = float(def.get("atk", 4.0)) * MINIBOSS_ATK_MULT
 	m.def = def2
+
+## L-cycle 149 (bestiary depth): a boss or elite about to swing something big
+## writes a one-line TELL to the Chronicle so the stream sees it coming - the
+## "watch the wind-up" beat Mr. E has asked for in bits. Gated on boss=true so
+## ordinary foes do not spam. Rate-limited per-monster (BOSS_TELL_EVERY) in case
+## a boss's swing window is tight: one line per cadence, not one per tick.
+const BOSS_TELL_EVERY := 3.5
+func _boss_tell(mon: Monster, templ: String) -> void:
+	if not is_instance_valid(mon):
+		return
+	if not bool(mon.def.get("boss", false)):
+		return
+	var last := float(mon.get_meta("boss_tell_t", -99.0))
+	if _t - last < BOSS_TELL_EVERY:
+		return
+	mon.set_meta("boss_tell_t", _t)
+	_say(templ % String(mon.def.get("name", "the lord")))
+	Delve.bestiary_tells = int(Delve.bestiary_tells) + 1
+## Static counter so the test can read telegraph firings without reaching into a
+## live delve. Reset by tools that want deterministic counts.
+static var bestiary_tells := 0
 
 ## R4 rally tick: scan the floor for any wounded miniboss still carrying the
 ## "rallied == false" meta and, once its hp dips below half, bump its atk and
@@ -1453,9 +1486,12 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			fury = float(en.get("atk", 1.3))
 		var chest := nb.global_position + Vector3(0, 1.1, 0)
 		if ways.has("breath"):
+			_boss_tell(mon, "%s draws breath - brace.")
 			mon._swing = 2.6
 			mon.breathe(chest)
 		elif shots > 0.0:
+			if ways.has("volley"):
+				_boss_tell(mon, "%s nocks a volley - cover!")
 			mon._swing = 2.2
 			mon.shoot(chest)
 			if ways.has("volley"):
@@ -1762,6 +1798,7 @@ func _loot(alive: Array) -> void:
 			took.append(String(m["h"]["name"]))
 		_gold += share * alive.size()
 		_say("%s is slain on floor %d!" % [dun.lord.def.get("name", "The lord"), floor_no])
+		_e3po("lord_cleared")   # D37: a lord is down - the Commander marks the beat
 		FeedHUD.card_on(town, String(dun.lord.def.get("name", "The lord")),
 			"Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
 		if rare_lord:
@@ -2308,6 +2345,10 @@ func _mon_saves(mon: Monster, m: Dictionary, _kind: int) -> bool:
 const SPOTTERS := ["rogue", "ranger", "monk"]
 const TOOLS := ["rogue", "bard"]
 const TRAP_REACH := 0.9
+## L29c r5 added PoisonDart (status, not spike) and SwarmTrap (a creature spawn,
+## not damage up front). PoisonDart carries a tiny immediate hit AND stacks a
+## venom DoT (6 s, dps 1 + floor/4). SwarmTrap deals no immediate damage - its
+## damage is whatever the pack it lets up does once the party sees it.
 const TRAPS := {
 	"SpikeTrap":     {"noun": "a spiked plate", "what": "spikes!", "dice": [2, 6], "sfx": "swing", "name": "a spike trap"},
 	"PressurePlate": {"noun": "a plate", "what": "darts!", "dice": [3, 4], "sfx": "ui", "name": "a pressure plate"},
@@ -2315,6 +2356,8 @@ const TRAPS := {
 	"DartTrap":      {"noun": "a loose flagstone", "what": "darts!", "dice": [3, 4], "sfx": "swing", "name": "a dart trap"},
 	"BladeTrap":     {"noun": "a slot in the floor", "what": "a blade!", "dice": [2, 8], "sfx": "swing", "name": "a blade trap"},
 	"PitTrap":       {"noun": "rotten boards", "what": "the floor drops away!", "dice": [2, 6], "sfx": "hit", "name": "a pit"},
+	"PoisonDart":    {"noun": "a loose flagstone", "what": "green darts!", "dice": [1, 4], "sfx": "swing", "name": "a poison-dart trap"},
+	"SwarmTrap":     {"noun": "a grated floor", "what": "the bars drop open - something is coming up through them!", "dice": [1, 1], "sfx": "swing", "name": "a swarm grate"},
 }
 var trap_log := {"spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0}
 
@@ -2399,7 +2442,61 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 	_float_text(m, "-%d" % int(took), Color(1.0, 0.35, 0.25) if not saved else Color(1.0, 0.75, 0.3))
 	if String(tr.get("kind", "")) == "FireTrap" and not saved:
 		_give(m, "burning", 3.0)
+	# L29c r5 trap variety: PoisonDart stacks a venom DoT on a failed save; the
+	# dart itself only grazes (1d4) but the venom carries the hit over the next
+	# few seconds, same mechanic a snake or spider bite uses, so the fight-loop
+	# venom tick reads it for free.
+	if String(tr.get("kind", "")) == "PoisonDart" and not saved:
+		m["venom"] = maxf(float(m.get("venom", 0.0)), 6.0)
+		m["venom_dps"] = maxf(float(m.get("venom_dps", 0.0)), 1.0 + float(floor_no) / 4.0)
+		trap_log["venomed"] = int(trap_log.get("venomed", 0)) + 1
+		_say("%s is venomed - the poison works over the next few seconds." % h["name"])
+	# SwarmTrap lets a small pack up through the grate right where the hero stepped.
+	# The plain damage above is the one-point tally so the "a trap must hurt" rule
+	# from L46 stays honoured; the real teeth are the pack. Count a SEPARATE
+	# telemetry key so the test can see swarm-ups fire in a soak without conflating
+	# them with the ordinary trap tally.
+	if String(tr.get("kind", "")) == "SwarmTrap":
+		trap_log["swarms"] = int(trap_log.get("swarms", 0)) + 1
+		_trap_swarm(tr)
 	_hero_hit(m)
+
+## L29c r5: a SwarmTrap springs up a short pack of theme-matched creatures
+## RIGHT WHERE THE PARTY STANDS, like an AMBUSH set piece but wired from the
+## trap pool. Reuses dun.monsters so the fight loop picks it up for free.
+func _trap_swarm(tr: Dictionary) -> void:
+	if dun == null or not is_instance_valid(dun):
+		return
+	var node = tr.get("node")
+	if not is_instance_valid(node):
+		return
+	var at: Vector3 = (node as Node3D).global_position
+	var theme := String(dun.info.get("theme", ""))
+	var names: Array = []
+	for k in range(2):
+		var d := Bestiary.pick(floor_no, theme)
+		var mon := Monster.new()
+		mon.def = d
+		mon.state = Monster.S.PATROL
+		mon.roam = 2.0
+		var off := Vector3(cos(float(k) * 2.1), 0.0, sin(float(k) * 2.1)) * 1.2
+		mon.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
+		dun.add_child(mon)
+		(dun.monsters as Array).append(mon)
+		mon.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
+		mon.hp = mon.max_hp
+		names.append(String(d.get("name", "something")))
+	# "2 rats", not "rat, rat"
+	var counts := {}
+	for nm in names:
+		counts[nm] = int(counts.get(nm, 0)) + 1
+	var parts: Array = []
+	for k in counts:
+		var ks := String(k)
+		var nc: int = counts[k]
+		parts.append("%d %s" % [nc, ks if nc == 1 or ks.ends_with("s") else ks + "s"])
+	_say("The grate pops - %s comes up through it." % ", ".join(parts))
+	Sfx.play("roar", -5.0)
 
 ## a number or word floating up off a delver's head
 func _float_text(m: Dictionary, text: String, col: Color, size := 84, lift := 2.4) -> void:

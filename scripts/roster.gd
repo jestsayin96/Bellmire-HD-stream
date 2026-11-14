@@ -226,8 +226,25 @@ signal announced(line: String, colour: Color)
 func _init() -> void:
     rng.randomize()
 
+## D37: E3PO voice hook. The town-held Notables carries _e3po_say; Roster is
+## a child of town in live play (town.gd:_start_guild adds it), so get_parent()
+## reaches it. In the harness Roster is standalone and this no-ops, which keeps
+## the tests that build a bare Roster unaffected.
+func _e3po(cat: String, sub := "") -> void:
+    var p := get_parent()
+    if p == null:
+        return
+    var n = p.get("notables") if p.get("notables") != null else null
+    if n != null and n.has_method("_e3po_say"):
+        n._e3po_say(cat, sub)
+
 # ----------------------------------------------------------------- lifecycle
 func fresh(user_id: String, display: String, cls := "", species := "") -> Dictionary:
+    # D37: a returning viewer - uid was in the roster already and their old hero
+    # fell - is Mr. E's favourite tell for E3PO. A first-time enlist is NOT
+    # "returns"; check before the write so "already had an entry" means a true
+    # re-enlist after a death.
+    var returning := heroes.has(user_id) and not bool(heroes[user_id].get("alive", true))
     if cls == "" or not CLASSES.has(cls):
         cls = CLASSES.keys()[rng.randi() % CLASSES.size()]
     if not SPECIES.has(species):
@@ -240,6 +257,8 @@ func fresh(user_id: String, display: String, cls := "", species := "") -> Dictio
         "delves": 0, "kills": 0, "deepest": 0, "alive": true,
     }
     heroes[user_id] = h
+    if returning:
+        _e3po("viewer_returns")
     return h
 
 # 4d6 drop lowest, the way a tabletop roll goes. Range 3-18, centred near 12.
@@ -379,15 +398,24 @@ func haggle(h: Dictionary, list_price: int) -> int:
     var total := d + mod(h, "cha") + (prof(h) if String(h["class"]) in TALKERS else 0)
     var k := 1.0
     last_haggle = ""
+    var roll_kind := ""
     if d == 20:
         k = 0.75
         last_haggle = " A natural 20 at the counter - a quarter off."
+        roll_kind = "crit"
     elif d == 1:
         k = 1.1
         last_haggle = " A natural 1 - the smith takes offence and charges a tenth over."
+        roll_kind = "fumble"
     elif total >= HAGGLE_DC:
         k = 1.0 - clampf(0.10 + 0.01 * float(total - HAGGLE_DC), 0.10, 0.20)
         last_haggle = " Haggled %d%% off (%d)." % [int(round((1.0 - k) * 100.0)), total]
+        roll_kind = "high"
+    else:
+        roll_kind = "low"
+    # D37: E3PO calls out a viewer d20 (the haggle is the one viewer-triggered d20
+    # that already lives on the Roster - crit/high/low/fumble are the written subs)
+    _e3po("viewer_roll", roll_kind)
     return maxi(1, int(round(float(list_price) * k)))
 
 # ------------------------------------------------------------------ spending
@@ -613,6 +641,7 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
     if rank_now != rank_was:
         announced.emit("%s is raised to %s of the Bellmire Guild."
             % [h["name"], rank_now], Color(0.98, 0.90, 0.52))
+        _e3po("rank_up")       # D37: the Commander of the Guards notes the promotion
     changed.emit(user_id)
 
 func _xp_needed(level: int) -> int:
@@ -723,6 +752,7 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
     if fallen.size() > 200:
         fallen.resize(200)
     changed.emit(user_id)
+    _e3po("viewer_down")       # D37: a viewer's hero fell - E3PO notes it
     # A hero cut down in the town by a raider was being announced as "falls on
     # floor 0", because this line assumed every death happens underground.
     # Raids account for 3-5 deaths per ten days, so that nonsense was on screen
@@ -1115,6 +1145,7 @@ func wear(user_id: String, words: String) -> String:
             h["cos"] = {}
         h["cos"][String(it["kind"])] = key
     changed.emit(user_id)
+    _e3po("viewer_cosmetic")   # D37: a viewer kitted out - E3PO comments on the style
     var what := String(it["name"])
     if String(it.get("kind", "")) == "title":
         return "%s is known now as %s, %s.%s" % [h["name"], h["name"], what, note]
@@ -1136,6 +1167,7 @@ func dye(user_id: String, colour: String) -> String:
         h["cos"] = {}
     h["cos"]["dye"] = c
     changed.emit(user_id)
+    _e3po("viewer_cosmetic")   # D37: a dye is a cosmetic change too
     return "%s's armour and cloak are dyed %s.%s" % [h["name"], c, last_haggle]
 
 ## what a hero wears, for the sheet: "Guild Cloak, Soft Boots | a corgi | the Lamplighter"

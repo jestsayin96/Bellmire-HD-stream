@@ -937,3 +937,27 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - CROSS-WORKER FLAG (content/laptop): _sound_review coverage A fails on unique monster 'new ashwight'
   having no registered voice kind (bestiary/monster/bosses.json) - pre-existing, not desktop-owned,
   unrelated to the town-silence fix.
+
+
+## D-cycle D9 - D53 TOWED WAGONS STAY ATTACHED TO THEIR HAULER
+- Mr. E clip 14-31-18: "the cart is moving on its own ... supposed to be attached to this guy, but it
+  wasn't." DIAGNOSED (townsfolk.gd _physics_process cart-follow): the wagon chased a point 2.6 m behind
+  the carter at a 4 m/s crawl placed AFTER the LOD throttle, so any jump (door exit, respawn, raid reset,
+  far-LOD chunk) left it gliding across open ground untethered; a stale _park target could also pin it at
+  an old spot once the owner moved on.
+- FIX (townsfolk.gd ONLY; rig.gd equip/attach left as-is - that is for bone-held gear): the follow is now
+  keyed off the OWNER-to-cart distance. Owner within WAGON_SNAP (5 m): roll to the tow/park point, capped
+  no slower than the hauler (maxf(_vs+1.5, 4)). Owner beyond it (a jump): the wagon reattaches AT ONCE
+  behind them and re-parks when it settles. Indoors/culled owner: the wagon is left parked and reattaches
+  when they re-emerge. Covers every towed wagon - carters, the caravan master, the pedlar notable (all
+  use .cart). The fishing-pole grip is D51 (angler.gd), left open.
+- TEST tools/_d53_test.gd (new): boots the real Town (4 haulers with carts, nav ready), soaks travel +
+  parking (gated on physics frames - the cart follow is _physics_process), then teleports one hauler +25 m.
+  travel_max gap 2.72 m; post-teleport 22.8 m -> recovered 2.60 m. D53_TEST OK. Render tools/_d53_shot.gd
+  (windowed): carter<->cart 2.6 m, wagon at the draw-bar (renders/cycles/d53/hauler_cart.png, looked at).
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _townwalk in_solid 0/16438 (0.000%) PASS (nav untouched);
+  _offfloor 0/1368 (INPROP 0, MON_INPROP 0/104); TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR,
+  time-capped at T150s); D53_TEST OK.
+- Staged only the files this change touches (townsfolk.gd, _d53_test/_d53_shot .gd + .uid, WORK_PLAN,
+  PROGRESS, RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to
+  sweep in with git add -A.

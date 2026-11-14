@@ -659,6 +659,7 @@ var wd_giveups := 0
 var _wag_t := randf() * 0.5
 var wag_detours := 0
 var _park: Array = []           # D16c: where the wagon is drawn up while stood still
+const WAGON_SNAP := 5.0         # D53: gap (m) past which a towed wagon snaps to its hauler, not crawls
 
 func _physics_process(delta: float) -> void:
     # D16c: a wagon is not in the navmesh - one rolling into someone (walking
@@ -684,24 +685,47 @@ func _physics_process(delta: float) -> void:
         _cry(delta)
         _voice(delta)
     if cart and is_instance_valid(cart):
-        var back := global_position - global_transform.basis.z * 2.6
-        back.y = float(town.call("height_at", back.x, back.z))
-        var cy := rotation.y + PI * 0.5
-        # D16c: stood still (a stop, a camp) the wagon is drawn up on open
-        # ground beside them, never left across a lane between two props
-        if _route.is_empty() and town.has_method("wagon_park"):
-            if _park.is_empty():
-                _park = town.call("wagon_park", self)
-                if _park.is_empty():
-                    _park = [back, cy]
-            back = _park[0]
-            cy = _park[1]
-        else:
+        if inside or not visible:
+            # D53: the hauler is indoors or culled - leave the wagon parked where it
+            # stands; when they re-emerge the owner-gap snap below reattaches it, so it
+            # is never seen chasing a body that is not there.
             _park = []
-        # (D16c: no faster than a wagon rolls, so nobody is swept up by one)
-        var cstep: Vector3 = (back - cart.global_position) * minf(delta * 4.0, 1.0)
-        cart.global_position += cstep.limit_length(4.0 * delta)
-        cart.rotation.y = lerp_angle(cart.rotation.y, cy, delta * 3.0)
+        else:
+            var tow := global_position - global_transform.basis.z * 2.6
+            tow.y = float(town.call("height_at", tow.x, tow.z))
+            var tyaw := rotation.y + PI * 0.5
+            # D53: a towed wagon is ATTACHED to its hauler, not a free body. If the
+            # HAULER itself has got far from the wagon - it stepped out of a door,
+            # respawned, a raid reset it, its stop moved, or a far-LOD body jumped a
+            # chunk - the wagon is reattached AT ONCE behind them and re-parks when it
+            # settles, so a cart is never seen gliding across open ground with no one
+            # on it (Mr. E clip 14-31-18: "the cart is moving on its own ... supposed
+            # to be attached to this guy, but it wasn't"). Keyed off the owner-to-cart
+            # distance, not the (possibly stale) park target, so a jump can never hide.
+            var owner_gap := Vector2(global_position.x - cart.global_position.x, global_position.z - cart.global_position.z).length()
+            if owner_gap > WAGON_SNAP:
+                cart.global_position = tow
+                cart.rotation.y = tyaw
+                _park = []
+            else:
+                var back := tow
+                var cy := tyaw
+                # D16c: stood still (a stop, a camp) the wagon is drawn up on open
+                # ground beside them, never left across a lane between two props
+                if _route.is_empty() and town.has_method("wagon_park"):
+                    if _park.is_empty():
+                        _park = town.call("wagon_park", self)
+                        if _park.is_empty():
+                            _park = [back, cy]
+                    back = _park[0]
+                    cy = _park[1]
+                else:
+                    _park = []
+                # (D16c: rolls no faster than a wagon should, so nobody is swept up by
+                # one; but never slower than the hauler, so it cannot be left behind)
+                var cap: float = maxf(_vs + 1.5, 4.0)
+                cart.global_position += (back - cart.global_position).limit_length(cap * delta)
+                cart.rotation.y = lerp_angle(cart.rotation.y, cy, minf(delta * 6.0, 1.0))
     if town != null and not inside and visible and town.has_method("off_wagons"):
         # on a route, twice a second: a waypoint under a parked wagon is moved
         # beside it, a leg across one goes round its corner (the navmesh does

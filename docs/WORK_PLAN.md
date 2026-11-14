@@ -32,13 +32,19 @@
       Mr. E's eye on live motion. The 7 posted notables now WORK their post (gesture), they do not wander
       (a crier/guard SHOULD hold post); a tried wander fallback was reverted as wrong for them.
 
-- [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
+- [x] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
       equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
       supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
       its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
       that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
       its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
       DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
+      RESULT (D-cycle D9): towed-wagon attach FIXED in townsfolk.gd - the follow is keyed off the
+      OWNER-to-cart distance, so a jump (door exit, respawn, raid reset, stop moved, far-LOD chunk)
+      reattaches the wagon AT ONCE behind the hauler instead of letting it glide off; it tows at 2.6 m
+      and re-parks beside a stopped owner. Covers carters, the caravan master and the pedlar (all use
+      .cart). _d53_test: travel gap 2.72 m, teleport 22.8 m -> recovered 2.60 m, D53_TEST OK; render
+      renders/cycles/d53/hauler_cart.png. THE POLE IN-HAND stays D51 (angler.gd, not this worker's file).
 
 - [ ] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
       14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building

@@ -1,1 +1,1 @@
-IDLE 2026-11-13 23:31 - D50 idle-life + lod anim smoothing shipped, gate green
+IDLE 2026-11-14 00:04 - D53 towed-wagon attach shipped, gate green

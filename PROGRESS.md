@@ -4499,3 +4499,29 @@ end, not more content.
 - GATE: --headless --import clean, _offfloor 0/1525, _twitch_parse OK, _delve_test no SCRIPT ERROR,
   _l29a 11/11, _l29b 23/23, _l29c 18/18, _l56 4/4, _l30a 21/21.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+
+
+## L-cycle 143 - L30b cosmetics & dyes verification (laptop jestai, 2026-11-13) - L30b (IN PROGRESS, WORK_PLAN untouched)
+L30b's DONE line asks for "!wear + !dye change the model in a soak". The content writer has shipped
+253 cosmetics (68 hats, 56 banners, 22 pets, 107 titles) and 137 dyes in data/items.json, and L13
+already wired roster.wear / roster.dye / Gear.dress_cosmetics / Gear._cape_tint / HeroPet. The gap
+this round was proof the model actually CHANGES under those commands - without a test, a future
+hand could break _cape_tint or the pet mount and no bench alarm would ring.
+- tools/_l30b_test.gd (NEW, 17 checks):
+    A - items.json: 253 cosmetics + 137 dyes, all four kinds (hat/banner/pet/title) represented,
+        every hat carries a colour hex, every pet carries a model path.
+    B - !wear hat / banner / pet / title put the key in h["cos"][kind]; !dye sets h["cos"]["dye"];
+        !wear off <kind> removes it.
+    C - a real HeroBody's SKELETON carries eq_hat and eq_banner after refresh(); a HeroPet child is
+        mounted under the HeroBody for pet; the cape mesh's surface override albedo matches the
+        !dye colour exactly (dye=teal, sample=(0.1176, 0.5412, 0.5412)).
+    D - a 2-floor soak with four heroes each wearing wide_hat + banner_blue + crimson dye runs to
+        state=home with NO SCRIPT ERROR; every hero keeps their cos entries across floor transitions.
+- NO changes to roster.gd / gear.gd / data/items.json - the existing wiring is correct; this round
+  measures it. The pet mount check learns the real shape (HeroPet child, not eq_* bone), which was
+  wrong in the first draft and a measurement in the end.
+- CHANNEL-POINT COSMETICS the plan line mentions ("gated, needs T1/Mr. E") stay unbuilt - that is
+  Mr. E's call and belongs to whatever handles redeems in the EventSub path, not here.
+- GATE: --headless --import clean, _offfloor 0/1554, _twitch_parse OK, _delve_test no SCRIPT ERROR,
+  _l29a 11/11, _l29b 23/23, _l29c 18/18, _l30a 21/21, _l30b 17/17, _l56 4/4.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor to review.

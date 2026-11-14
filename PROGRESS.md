@@ -3411,3 +3411,66 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   5. No new mechanic, no new disaster, no new event and no new cost was introduced, so no new
      implementation work is created by this cycle - only more text for work already specified.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 25 - rare uniques and brews (standing backlog item 6; WORK_PLAN C3)
+- data/bosses.json and data/potions.json ONLY. Additive. Nothing renamed, nothing reworded, no new lord
+  and no new state.
+- data/bosses.json - 24 new rare uniques, three per lord, all eight lords covered:
+  lesser_uniques 54 -> 66. Hollow King: Tallow-Crowned (its crown burns down - the room darkens as it
+  lives), Drowned (fire out and it has not noticed - cold, slow, far heavier), Shared (two bodies, neither
+  the real king). Grubmother: Molting (shed the wall - quicker, brood come out grown), Lampburnt (will not
+  cross lit ground, so she puts the room out), Sowing (lays as she walks; the floor behind her hatches).
+  Rattling Host: Mustered (relieves its own front line - nothing facing you tires), Rotten (breaks easily,
+  every break throws bone), Hollow-Drummed (a drum keeps it in step; silence it and it forgets).
+  Nightwing: Soaked (wings heavy with fen water - cannot climb, cannot be shaken off), Shrieking (never
+  lands, never stops calling - the floor is coming), Sun-Blind (savages the dark, misses the lit).
+  greater_uniques 48 -> 60. Gravewyrm: Sated (too full to hunt - holds the ground it ate), Split-Tongued
+  (two breaths in turn, never the one you braced for), Grounded (will not rise - everything into the one
+  length it can reach). Ossuary Lord: Tithed (a bone for every bone raised, still ahead), Barred (raises
+  nothing, yields nothing - a shut door), Spilling (ward gone, its dead come up half-made and endless).
+  Pale Duchess: Receiving (holds court mid-fight - attendants arrive in ones, announced), Starved of Court
+  (nobody came; she means to be remembered), Masked in Bone (the mask takes the first blow every time).
+  Mourncoil: Deepening (the cold only grows - worse every minute you stay), Snapped (loose in the room,
+  fast and short-lived), Tolling (strikes in time, with pauses you can count).
+  Every one is a MODIFIED version of one of the eight canon lords (asserted by test), shape-first per the
+  file's own `rule` and `uniques` notes, with stats SKEWED to the shape and never merely raised: the fast
+  ones are soft (Nightwing, Shrieking hp 95 / speed 7.0; Mourncoil, Snapped hp 220 / speed 4.8), the walls
+  are slow (Gravewyrm, Sated hp 400 / speed 1.8; Ossuary Lord, Barred hp 380 / speed 1.8). All hp, speed
+  and attack values sit inside the bands the existing 102 uniques already occupy, so the depth scaling
+  L45 added (LORD_HP_PER_STEP / LORD_ATK_PER_STEP) stays in range.
+- data/potions.json - 16 new brews, potions 76 -> 92 (tier 1 x4, tier 2 x5, tier 3 x5, tier 4 x2), named
+  off the trades C-cycle 23 put in the town: Orchard Water, Netmender's Dram, Collier's Brew, Hayward's Cup
+  (t1); The Reeve's Measure, Winterwatch, Shepherd's Flask, Sawyer's Dram, Wellhead Draught (t2);
+  Chandler's Light, Kennel Water, Thresher's Pint, Hedgeward, Ostler's Bottle (t3); The Saltboiler's Last,
+  The Wheelwright's Turn (t4). Costs sit on the existing tier curve.
+- NO NEW STATE. `states` is byte-identical to HEAD at 15 entries. Every new `gives` names one of the
+  fifteen states already there and every new `cures` names one already flagged bad, so the new brews need
+  ZERO new status handling - the icon, colour, duration and `does` all already exist.
+- VALIDATION OK (python only - no Godot, per COORDINATION 10):
+  json.load succeeds on all four owned files. Deep-compared against `git show HEAD:data/bosses.json` and
+  `HEAD:data/potions.json`: every pre-existing key present and deep-equal, zero values changed, zero keys
+  renamed or removed; lesser_uniques and greater_uniques are each an EXACT PREFIX of their new selves, and
+  the 76 pre-existing potions are an exact prefix in key order with identical values. bosses' `_source`,
+  `draw`, `boss_floors`, `lesser`, `greater`, `rule`, `uniques` and `uniques`-adjacent notes unchanged;
+  potions' `_source` and the whole `states` block unchanged. Every new entry's KEY-SET matches a key-set
+  the file already used (uniques: name/shape/hp (+speed) (+attack); potions: name/cost/tier +heal or
+  +gives/secs (+cures) +aliases/flavour) and every value type matches. 125 asserts, 0 real failures - the
+  one flag raised was my own duplicate-token check counting a potion whose key also appears in its own
+  aliases, which 56 of the 76 canon potions already do (e.g. `gatewater`); re-checked cross-potion and
+  there are ZERO alias or key collisions, new-vs-new or new-vs-existing. Longest new line 158 chars in
+  the data, but the longest on-screen string is 97 chars - readable at a glance. Zero non-ASCII, zero
+  floor counts stated. LF preserved, no trailing-newline change.
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. NOTHING NEW IS REQUIRED. Both arrays and the potions dict are already read by name, and no new
+     state, field or mechanic was introduced. This cycle is pure pool-widening.
+  2. CHECK FOR HARD-CODED LENGTHS: anything that sized off 54 lesser_uniques, 48 greater_uniques or 76
+     potions instead of the array/dict itself will silently never roll the new entries. That is the one
+     way this cycle could go unseen on stream. OWNER: LAPTOP CODE (bestiary.gd reads the uniques;
+     gear/chatcmd read potions).
+  3. The eight new brews that `gives` haste/giant/warded/regenerating are only as visible as the status
+     icons already are - D28's census said cosmetics are never worn and gear tiers stick, so if brews are
+     in the same bucket the fix is a CALLER, not more content. Worth one line in the next census.
+  4. !brew resolution: the 16 new keys and 32 new aliases are collision-free, so an existing alias lookup
+     needs no change. If !brew lists brewable potions anywhere, that list now has 92 entries and may need
+     paging rather than one chat line. OWNER: LAPTOP CODE (chatcmd.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

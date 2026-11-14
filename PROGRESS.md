@@ -4723,3 +4723,117 @@ and the Chronicle announcements still read correctly from an outside test.
 - GATE: --headless --import clean, _offfloor 0/1453, _twitch_parse OK, _delve_test no SCRIPT ERROR,
   _l29a 11/11, _l29b 23/23, _l29c 18/18, _l30a 21/21, _l30b 17/17, _l30c 9/9, _l56 4/4.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+## C-cycle 25 - rare uniques and brews (standing backlog item 6; WORK_PLAN C3)
+- data/bosses.json and data/potions.json ONLY. Additive. Nothing renamed, nothing reworded, no new lord
+  and no new state.
+- data/bosses.json - 24 new rare uniques, three per lord, all eight lords covered:
+  lesser_uniques 54 -> 66. Hollow King: Tallow-Crowned (its crown burns down - the room darkens as it
+  lives), Drowned (fire out and it has not noticed - cold, slow, far heavier), Shared (two bodies, neither
+  the real king). Grubmother: Molting (shed the wall - quicker, brood come out grown), Lampburnt (will not
+  cross lit ground, so she puts the room out), Sowing (lays as she walks; the floor behind her hatches).
+  Rattling Host: Mustered (relieves its own front line - nothing facing you tires), Rotten (breaks easily,
+  every break throws bone), Hollow-Drummed (a drum keeps it in step; silence it and it forgets).
+  Nightwing: Soaked (wings heavy with fen water - cannot climb, cannot be shaken off), Shrieking (never
+  lands, never stops calling - the floor is coming), Sun-Blind (savages the dark, misses the lit).
+  greater_uniques 48 -> 60. Gravewyrm: Sated (too full to hunt - holds the ground it ate), Split-Tongued
+  (two breaths in turn, never the one you braced for), Grounded (will not rise - everything into the one
+  length it can reach). Ossuary Lord: Tithed (a bone for every bone raised, still ahead), Barred (raises
+  nothing, yields nothing - a shut door), Spilling (ward gone, its dead come up half-made and endless).
+  Pale Duchess: Receiving (holds court mid-fight - attendants arrive in ones, announced), Starved of Court
+  (nobody came; she means to be remembered), Masked in Bone (the mask takes the first blow every time).
+  Mourncoil: Deepening (the cold only grows - worse every minute you stay), Snapped (loose in the room,
+  fast and short-lived), Tolling (strikes in time, with pauses you can count).
+  Every one is a MODIFIED version of one of the eight canon lords (asserted by test), shape-first per the
+  file's own `rule` and `uniques` notes, with stats SKEWED to the shape and never merely raised: the fast
+  ones are soft (Nightwing, Shrieking hp 95 / speed 7.0; Mourncoil, Snapped hp 220 / speed 4.8), the walls
+  are slow (Gravewyrm, Sated hp 400 / speed 1.8; Ossuary Lord, Barred hp 380 / speed 1.8). All hp, speed
+  and attack values sit inside the bands the existing 102 uniques already occupy, so the depth scaling
+  L45 added (LORD_HP_PER_STEP / LORD_ATK_PER_STEP) stays in range.
+- data/potions.json - 16 new brews, potions 76 -> 92 (tier 1 x4, tier 2 x5, tier 3 x5, tier 4 x2), named
+  off the trades C-cycle 23 put in the town: Orchard Water, Netmender's Dram, Collier's Brew, Hayward's Cup
+  (t1); The Reeve's Measure, Winterwatch, Shepherd's Flask, Sawyer's Dram, Wellhead Draught (t2);
+  Chandler's Light, Kennel Water, Thresher's Pint, Hedgeward, Ostler's Bottle (t3); The Saltboiler's Last,
+  The Wheelwright's Turn (t4). Costs sit on the existing tier curve.
+- NO NEW STATE. `states` is byte-identical to HEAD at 15 entries. Every new `gives` names one of the
+  fifteen states already there and every new `cures` names one already flagged bad, so the new brews need
+  ZERO new status handling - the icon, colour, duration and `does` all already exist.
+- VALIDATION OK (python only - no Godot, per COORDINATION 10):
+  json.load succeeds on all four owned files. Deep-compared against `git show HEAD:data/bosses.json` and
+  `HEAD:data/potions.json`: every pre-existing key present and deep-equal, zero values changed, zero keys
+  renamed or removed; lesser_uniques and greater_uniques are each an EXACT PREFIX of their new selves, and
+  the 76 pre-existing potions are an exact prefix in key order with identical values. bosses' `_source`,
+  `draw`, `boss_floors`, `lesser`, `greater`, `rule`, `uniques` and `uniques`-adjacent notes unchanged;
+  potions' `_source` and the whole `states` block unchanged. Every new entry's KEY-SET matches a key-set
+  the file already used (uniques: name/shape/hp (+speed) (+attack); potions: name/cost/tier +heal or
+  +gives/secs (+cures) +aliases/flavour) and every value type matches. 125 asserts, 0 real failures - the
+  one flag raised was my own duplicate-token check counting a potion whose key also appears in its own
+  aliases, which 56 of the 76 canon potions already do (e.g. `gatewater`); re-checked cross-potion and
+  there are ZERO alias or key collisions, new-vs-new or new-vs-existing. Longest new line 158 chars in
+  the data, but the longest on-screen string is 97 chars - readable at a glance. Zero non-ASCII, zero
+  floor counts stated. LF preserved, no trailing-newline change.
+- CODE WIRING IMPLIED (for the supervisor to route - nothing here is mine to write):
+  1. NOTHING NEW IS REQUIRED. Both arrays and the potions dict are already read by name, and no new
+     state, field or mechanic was introduced. This cycle is pure pool-widening.
+  2. CHECK FOR HARD-CODED LENGTHS: anything that sized off 54 lesser_uniques, 48 greater_uniques or 76
+     potions instead of the array/dict itself will silently never roll the new entries. That is the one
+     way this cycle could go unseen on stream. OWNER: LAPTOP CODE (bestiary.gd reads the uniques;
+     gear/chatcmd read potions).
+  3. The eight new brews that `gives` haste/giant/warded/regenerating are only as visible as the status
+     icons already are - D28's census said cosmetics are never worn and gear tiers stick, so if brews are
+     in the same bucket the fix is a CALLER, not more content. Worth one line in the next census.
+  4. !brew resolution: the 16 new keys and 32 new aliases are collision-free, so an existing alias lookup
+     needs no change. If !brew lists brewable potions anywhere, that list now has 92 entries and may need
+     paging rather than one chat line. OWNER: LAPTOP CODE (chatcmd.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 26 - cosmetics, accessories and dyes (standing backlog item 1; WORK_PLAN C1)
+
+- WORKED IN: C:\Users\Jestsayin96\Project1\bellmire-content (worktree W3, branch `content`). R was on
+  `laptop` with nothing unpushed on `content`, so no safety push was needed and R was never checked out.
+- ONE FILE TOUCHED: data/items.json (97.1 KB -> 104.6 KB). Nothing else, no .gd, no .tscn, no new data file.
+- THEME: eight trades the catalogue had never named - tanner/currier, fuller/weaver, fletcher/bowyer,
+  farrier, potter, sexton, skepward (beekeeper), lockkeeper (the Ford's weir). Nothing reuses a trade
+  C-cycle 23 or 25 already spent (cooper, orchard, reeve, collier, shepherd, wellhead, winterwatch,
+  saltboiler), so there is no near-duplicate naming on the shelf.
+- accessories - 24 new, 156 -> 180. Spread by slot: ring x4, amulet x4, cloak x5, boots x5, gloves x6;
+  spread by bonus: saves x8, hp x4, dmg x4, hit x4, ac x3, speed x3. Costs 210-440, inside the existing
+  curve. Every one carries a `flavour` that earns the price - the line says what the thing has already
+  survived, not what it looks like (Sexton's Ring: "He wore it to every burial in Bellmire and walked
+  home from each one."). Longest flavour 91 chars - one glance on stream.
+- cosmetics - 30 new, 291 -> 321: 10 hats (with `colour`), 8 guild banners (with `colour`), 12 titles.
+  The titles keep the established two shapes - a plain trade name ("the Sexton") and an earned boast
+  ("who Held the Weir", "who Shod the Charger", "who Strung It Wet").
+- dyes - 16 new, 153 -> 169, drawn from the same trades: tanbark, fullerwhite, goosefeather, anvilblack,
+  kilnred, gravehill, waxgold, weirgreen, hidebrown, lyewhite, bowstave, currierred, skepstraw,
+  lockbrass, sextonslate, tannerpit. `dye_cost` is untouched at 25, so the dye economy does not move.
+- NO NEW SHAPE. Every new accessory's key-set is one the file already used (name/slot/cost/flavour +
+  exactly one of ac/saves/hp/speed/hit/dmg); every new cosmetic's is one of the file's existing three
+  (name/kind/cost [+colour]); no new `slot`, no new `kind`, no new field, no `model`/`scale` entry.
+- VALIDATION OK (python only - no Godot, per COORDINATION 10):
+  json.load succeeds on all four owned files; the other three are byte-identical to HEAD. items.json
+  deep-compared against `git show HEAD:data/items.json`: top-level key order unchanged; accessories,
+  cosmetics and dyes are each an EXACT PREFIX of their new selves in key order with every pre-existing
+  value deep-equal; `_source`, `dye_cost`, `shop_stock`, `trader_cargo` and `stock_by_tier` deep-equal
+  and untouched. Every new entry's key-set and value types match an existing one; every new hex is 6
+  lower-case hex digits. 212 asserts, 0 real failures - the one flag was a duplicate-display-name check
+  catching "Scarglass Ring", which is PRE-EXISTING in HEAD (two accessories share that name); additive
+  only, so it was left alone - flagging it for the supervisor rather than renaming it. No duplicate name
+  or key is introduced by this cycle, new-vs-new or new-vs-existing. Zero non-ASCII, LF preserved,
+  trailing newline preserved, numstat 73 added / 3 changed (the 3 are the former last entry of each
+  block gaining a comma). No floor count stated anywhere.
+- CODE WIRING IMPLIED (for the supervisor to route - none of it is mine to write):
+  1. TEN NEW HAT KEYS: tanner_cap, fletcher_hood, farrier_visor, potter_wrap, sexton_hat, skep_veil,
+     lockkeep_cap, fuller_coif, bowyer_cap, currier_hood. L53 gave gear.gd `_hat` a DEFAULT shape, so
+     these cannot break the model - but they will all render as that default until someone adds
+     match-cases. A visor, a veil and a low hat want distinct silhouettes if they are to be worth 110,
+     120 and 90 gold. OWNER: LAPTOP CODE (gear.gd `_hat`).
+  2. EIGHT NEW BANNERS use the generic banner pole + cloth path already there and need nothing.
+  3. TWELVE NEW TITLES are text-only. The longest new one is 24 chars ("who Stood in the Tanyard"), so a
+     fixed-width nameplate field needs checking. OWNER: DESKTOP HUD if titles appear on the nameplate.
+  4. CHECK FOR HARD-CODED LENGTHS: anything sized off 156 accessories, 291 cosmetics or 153 dyes rather
+     than the dict itself will silently never roll the new entries. OWNER: LAPTOP CODE (gear.gd,
+     chatcmd.gd read items.json), and the shop/channel-point shelf wherever it is built.
+  5. STILL THE REAL RISK, unchanged from earlier cycles: D28's census said cosmetics are never actually
+     worn. 321 cosmetics are worth nothing without a CALLER for !wear and the channel-point shelf (T1).
+     More content will not fix that; one line in the next census would confirm whether it is still true.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

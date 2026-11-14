@@ -1349,7 +1349,8 @@ overlaps Mr. E actually flagged live in party_frames.gd and rts_camera.gd and ar
 
 # Phase T - supervisor pass 2026-11-13 10:19.
 
-- [ ] D44. TOWNWALK in_solid HAS GONE INTERMITTENTLY NON-ZERO. Owner: DESKTOP BUILD (town_nav.gd).
+- [x] D44. TOWNWALK in_solid HAS GONE INTERMITTENTLY NON-ZERO. Owner: DESKTOP BUILD (town_nav.gd).
+      DONE (D-cycle D11): subsumed by D44b - three consecutive _townwalk in_solid 0 with the cause named.
       Measured by the supervisor, three consecutive runs on the same merged tree:
           in_solid 2/745      in_solid 5/913      in_solid 0/810
       Every supervisor gate before this one reported 0: 0/796, 0/824, 0/866, 0/900. So this is new
@@ -1411,7 +1412,18 @@ noted C1-C3 as stale. No new IDs minted - every item here already existed and ke
 
 # Phase V - D44 ESCALATED (supervisor, 2026-11-13 12:03). Desktop build: THIS JUMPS YOUR QUEUE.
 
-- [ ] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+- [x] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+      DONE (desktop D-cycle D11, 2026-11-14): CONFIRMED by per-frame log, not sampling. tools/_d44_perframe.gd
+      tagged every walk commit by leg (townsfolk._dbg_leg) over 513,201 per-frame samples: the ONLY in_solid
+      frames were the NORMAL leg (0 ghost/door/seat), all at the (52,-88.6) south-market stop. Two root causes,
+      both fixed in townsfolk.gd: (1) a generated stop DESTINATION could lie inside the overlap - _next_trip's
+      returned dest is now keep_walkable-snapped at the caller so a body never stands embedded on arrival;
+      (2) keep_walkable/_slide_round occasionally could not clear the overlap and the inside foot was carried
+      frame-to-frame via `was` - the normal/ghost commit now snaps to the navmesh (baked from the SAME
+      footprints, so its nearest point is walkable by construction) instead, door/seat legs excluded (they end
+      inside by design and the audit skips them by endpoint). No test loosened; a position can only become MORE
+      walkable. Gate GREEN: parse 0, _offfloor 0/1344 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test
+      clean to floor 2, and _townwalk THREE CONSECUTIVE in_solid 0: 0/18657, 0/18673, 0/18748 (raid_in_solid 0).
       Measured by the supervisor across six runs on two separate merged trees:
           pass 1:  2/745   5/913   0/810      (peak 5)
           pass 2:  8/899   0/754   0/852      (peak 8)

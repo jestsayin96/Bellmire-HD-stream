@@ -1,1 +1,1 @@
-IDLE 2026-11-14 00:24 - D54 indoor-dwell cap shipped, gate green
+IDLE 2026-11-14 01:55 - D44/D44b shipped: townwalk in_solid 3x0, gate green

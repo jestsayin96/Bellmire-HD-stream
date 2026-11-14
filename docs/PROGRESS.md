@@ -983,3 +983,36 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR, time-capped T150s); D54_TEST OK.
 - Staged only the files this change touches (townsfolk.gd, _d54_test/_d54_shot/_d54_probe .gd + .uid,
   WORK_PLAN, PROGRESS, RUN_LOCK); other sessions' untracked WIP (renders/, logs, *.uid) left alone.
+
+
+## D-cycle D11 - D44/D44b TOWNWALK in_solid DRIVEN TO THREE CONSECUTIVE ZEROS (cause named per-frame)
+- Item: D44b (supervisor: "take it before D29 or anything else"). DONE = three consecutive _townwalk runs at
+  in_solid 0 WITH the cause named - not three lucky runs. Prior partials (D-cycle 126, D4) had named the
+  south-market cluster and hardened keep_walkable (3->6 passes + nav-snap) but only ever got 0/0/non-zero.
+- MEASURED FIRST, per the plan's own next step (log PER-FRAME which branch commits the inside position):
+  added a lightweight townsfolk member `_dbg_leg` set at the walk commit (1 door / 2 seat / 3 ghost / 0 normal)
+  and tools/_d44_perframe.gd, which runs the gate's exact in_solid test EVERY frame and tallies by leg.
+  RESULT over 513,201 per-frame samples: in_solid frames = 2, BOTH leg=0 (NORMAL), 0 ghost/door/seat - so the
+  prime suspect (the ghost/pocket-escape leg) was WRONG; the committer is the ordinary walk at the (52,-88.6)
+  south-market stop (a stops-based trader/_more_folk).
+- TWO ROOT CAUSES, both fixed in townsfolk.gd (town_nav.gd untouched - the nav is sound, the WALKER was not):
+  (1) EMBEDDED STOP DESTINATION. town.gd._more_folk generates stop points; one in the dense south overlap sat
+      inside a footprint. _next_trip() returned it verbatim, so the body routed to it and stood embedded on
+      arrival (the arrival position is not re-committed through the walk guard, so it leaked). FIX: at the
+      caller (townsfolk ~L783) the returned dest is keep_walkable-snapped when solid_at(dest,0) is non-empty -
+      a no-op for the common clear case; the door/interior leg still runs from the snapped point via _enter_at.
+  (2) CARRIED INSIDE FOOT. On the normal leg keep_walkable + _slide_round can fail to clear the overlapping
+      footprints and _slide_round hands back the still-inside fallback; committing it made next frame's `was`
+      inside too, so a hold-at-`was` guard just carried the embedding. FIX: the commit now, for every leg
+      except door/seat, snaps an inside foot to nav.closest (the navmesh is baked by carving the SAME
+      _solid_footprints, so its nearest point is walkable by construction), falling to `was` only if the nav
+      map is not ready. _solid_footprints = _solid_rects + house rects, and is INFLATED vs the audit's shrunk
+      test, so solid_at(p,0) empty guarantees the audit cannot flag p.
+- GATE GREEN: parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0/1344 (INPROP 0, MON_INPROP 0 of 88);
+  TWITCH_PARSE OK; _delve_test clean (no SCRIPT ERROR, descended to floor 2, T150 cap); _townwalk x3 =
+  in_solid 0/18657, 0/18673, 0/18748 (0.000%), raid_in_solid 0 in all three. THREE CONSECUTIVE ZEROS.
+- Not luck: both causes are removed at the source and are monotonic (a position can only become more walkable),
+  so the zero is the expected outcome. No tolerance raised, no sample widened, no assert softened.
+- Kept `_dbg_leg` + tools/_d44_perframe.gd as a cheap standing diagnostic for any future D44 recurrence.
+- Staged only the files this change touches (townsfolk.gd, tools/_d44_perframe.gd, WORK_PLAN, PROGRESS,
+  RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to git add -A.

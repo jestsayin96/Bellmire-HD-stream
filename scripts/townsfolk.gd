@@ -781,6 +781,13 @@ func _physics_process(delta: float) -> void:
                 if _door_out != Vector3.ZERO:
                     global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
             var dest: Vector3 = _next_trip()
+            # D44b: a generated stop point can sit inside a footprint in the
+            # dense south-market overlap (the (52,-88.6) hotspot) - route to the
+            # walkable point beside it so a body does not stand embedded on
+            # arrival (what the walk audit counts). No-op when dest is already
+            # clear; the door/interior leg still runs from here via _enter_at.
+            if not (town.call("solid_at", dest, 0.0) as Array).is_empty():
+                dest = town.call("keep_walkable", dest)
             _door_out = dest if _enter_at != Vector3.ZERO else Vector3.ZERO
             _route = town.call("route", global_position, dest)
             if _enter_at != Vector3.ZERO:
@@ -862,11 +869,14 @@ func _physics_process(delta: float) -> void:
     var p: Vector3 = global_position + dir * speed * pace * _flee_k * delta
     # (D17c: the last step onto a seat is off the walkable ground too)
     var seat_leg: bool = _route.size() == 1 and _seat_i >= 0
-    if door_leg or seat_leg or (_ghost_last != Vector3.INF and _route.has(_ghost_last)):
+    var ghost_leg: bool = _ghost_last != Vector3.INF and _route.has(_ghost_last)
+    if door_leg or seat_leg or ghost_leg:
         # (D14: brushing out of a pocket between props - see _escape_route)
         p.y = float(town.call("height_at", p.x, p.z))
+        _dbg_leg = 1 if door_leg else (2 if seat_leg else 3)
     else:
         _ghost_last = Vector3.INF
+        _dbg_leg = 0
         # room for each other, and never a foot inside anything solid
         # (D16a: crowd_push is a velocity - separation plus a sidestep to
         # pass whoever is in the way ahead)
@@ -877,6 +887,22 @@ func _physics_process(delta: float) -> void:
             # D14: pressed against a prop (a crate, a bench, a fence end) the
             # push-out only hands the foot back - step round it instead
             p = _slide_round(was, dir, speed * pace * delta, p)
+    # D44b: never COMMIT a foot the walk audit (_solid_footprints: props +
+    # houses) would read as inside one. keep_walkable + _slide_round can fail to
+    # clear the dense south-market overlap, and a ghost brush or crowd nudge can
+    # cut a footprint corner; carrying that inside foot frame-to-frame via `was`
+    # is what left a stray 1/17k. Snap instead to the navmesh - it is baked by
+    # carving the SAME footprints, so its nearest point is walkable by
+    # construction. The door/seat legs legitimately end inside a house/at a seat
+    # (the audit skips them by endpoint), so exclude those; hold at the last
+    # spot only if the nav map is not ready yet.
+    if not door_leg and not seat_leg and not (town.call("solid_at", p, 0.0) as Array).is_empty():
+        var nav2 = town.get("nav")
+        if nav2 != null and nav2.ready_ok:
+            var q2: Vector3 = nav2.closest(p)
+            p = q2 if (town.call("solid_at", q2, 0.0) as Array).is_empty() else was
+        else:
+            p = was
     global_position = p
     move_dir = dir
     rotation.y = atan2(dir.x, dir.z)
@@ -1068,6 +1094,8 @@ func _escape_route(goal: Vector3) -> Array:
     return r
 
 var _ghost_last := Vector3.INF
+
+var _dbg_leg := 0
 var _ghost_n_of := 0
 
 func _flood_out(goal: Vector3, margin: float) -> Array:

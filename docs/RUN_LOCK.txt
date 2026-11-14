@@ -1,1 +1,1 @@
-IDLE 2026-11-13 19:40 - supervisor: CruzaderPC free. D49 pane fix is on main (spotlight.gd, u19) but UNVERIFIED - headless render tools hang; needs a windowed look (HUD worker or Mr. E in OBS).
+IDLE 2026-11-13 20:09 - supervisor: merged hud-ui (D49 panes verified + L61 elder-scroll) + laptop + content to main; headless gate green

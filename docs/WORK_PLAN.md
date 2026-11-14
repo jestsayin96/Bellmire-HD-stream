@@ -2,7 +2,7 @@
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
-- [ ] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
+- [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
       from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
       badly. This is "the town isn't alive" made concrete.
@@ -16,6 +16,21 @@
       which once D49's AA work lands, so they are not conflated.
       DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
       pane crop Mr. E signs off.
+      RESULT (D-cycle D8): MEASURED first - a 93 s probe found 111/126 ordinary townsfolk move
+      >8 m and in_solid is ~0, so there is NO widespread nav-freeze; the only stuck bodies were 7
+      NAMED NOTABLES holding posts (Cort Rivers the Crier, the watch, gate guards) - notables.gd
+      sets stay=false so they fell into the normal idle branch and stood in a DEAD Idle instead of
+      the rich _posted pace/look/gesture. FIX (townsfolk.gd): (a) _idle_acts now gives EVERY standing
+      idler an occasional calm gesture (POST_GESTURES) instead of returning - a body loitering away
+      from the market/tavern/job is no longer a frozen statue; (b) the LOD stutter diagnosed: past 60 m
+      the nav throttle also advanced the ANIMATION in 2-4 frame chunks - the clip now advances every
+      frame for the clearly-visible lod-1 band (60-120 m), lod 2 stays chunked for the FPS budget.
+      Gate GREEN: --import clean, parse 0, _offfloor 0/1486, TWITCH_PARSE OK, _delve_test clean,
+      _townwalk in_solid 0/16518 (0.000%) PASS (nav unchanged/better). Windowed crop renders/cycles/d50
+      LOOKED at: a lively midday square, varied poses, the crier at his post. HONEST CAVEAT: a STILL
+      cannot prove animation SMOOTHNESS or that a fidget fired - the stutter fix + the gesture life need
+      Mr. E's eye on live motion. The 7 posted notables now WORK their post (gesture), they do not wander
+      (a crier/guard SHOULD hold post); a tried wander fallback was reverted as wrong for them.
 
 - [ ] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
       equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's

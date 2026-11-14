@@ -119,6 +119,12 @@ func _gait_step(delta: float) -> void:
             and String(_anim.current_animation) == Rig.idle_of(_anim):
         Rig.play(_anim, "Walking_A")
     Rig.drive(_anim, _vs, size_k, delta)
+    # D50: the LOD throttle in _physics_process (nav logic every 2nd/4th frame)
+    # also advanced the animation in chunks - the stutter Mr. E saw on mid-distance
+    # folk. Advance the clip every frame for the clearly-visible lod-1 band (60-120 m)
+    # so it animates smoothly; lod 2 (tiny, past 120 m) stays chunked for the budget.
+    if lod == 1 and _anim and visible:
+        _anim.advance(delta)
     # D42: FOOTFALLS. The town read as silent because nothing ever played the
     # footstep sounds Sfx defines. A step per stride of real travel, near the
     # camera only (far steps are inaudible and only spend voices), the surface
@@ -670,7 +676,7 @@ func _physics_process(delta: float) -> void:
         _lod_n = 0
         delta = _lod_acc
         _lod_acc = 0.0
-        if _anim and visible:
+        if lod >= 2 and _anim and visible:
             _anim.advance(delta)
     steps += 1
     if town != null:
@@ -1350,7 +1356,12 @@ func _idle_acts(delta: float) -> void:
             list = ["Interact", "PickUp", "Interact"]
             kind = "haggle"
         else:
-            return
+            # D50: a body idling away from the market/tavern/job used to stand in a
+            # dead Idle pose - "all these people just hanging out not doing anything".
+            # Give it an occasional calm gesture so a standing townsperson reads alive.
+            list = POST_GESTURES
+            kind = "idle"
+            _act_t = randf_range(5.0, 11.0)
     var g: String = list[randi() % list.size()]
     Rig.play(_anim, g)
     acts[kind] = int(acts.get(kind, 0)) + 1

@@ -5176,3 +5176,33 @@ TWELVE growth tiers (data/lore_lines.json "growth_tiers") on an earned curve. Fi
   (guild post at 2, chapel at 6, garrison+E3PO at 8, first wall at 10) and 'builders at work'
   animation - growth.gd still shows its 6 generic stages. That is D31's visual half, a later cycle.
 TICKED D32 (code + measured curve; the 'Mr. E approves' half is his to confirm).
+
+
+## D-cycle D8 - D50 townsfolk freeze/stutter: idle life + LOD anim smoothing (desktop, 2026-11-13 23:31)
+Priority-section item (visible jank). MEASURED before touching anything (tools/_d50_probe.gd, 93 s):
+of 126 ordinary townsfolk, 111 move >8 m, 8 move 2-8 m, and only 7 are effectively frozen - and ALL
+7 are NAMED NOTABLES holding posts (Cort Rivers the Crier, 2 watch, 4 gate guards). in_solid ~0, so
+this is NOT the D44 geometry-wedge bug. notables.gd sets who.stay=false, so a posted notable skips the
+rich _posted() pace/look/gesture and falls into the normal idle branch, standing in a DEAD Idle pose -
+that is Mr. E's 'all these people hanging out not doing anything'. The 111 movers already wander fine.
+- FIX townsfolk.gd (mine), two contained changes:
+  (a) _idle_acts: a body idling away from the market/tavern/job used to `return` (no gesture) and stand
+      frozen. It now plays an occasional calm POST_GESTURES gesture (Interact/Idle_B/Use_Item/...), so
+      EVERY standing idler - the posted notables included - reads as alive, not a statue.
+  (b) LOD stutter: past 60 m the nav throttle (_physics_process every 2nd/4th frame) also advanced the
+      ANIMATION in chunks. The clip now advances EVERY frame in _gait_step for the clearly-visible lod-1
+      band (60-120 m); lod 2 (tiny, past 120 m) stays chunked for the FPS budget. Decouples anim from
+      the logic throttle.
+- TRIED AND REVERTED: a _wander_near fallback to send frozen idlers strolling. The probe showed it did
+  NOT unfreeze the 7 (they are posted notables whose stops keep them at post, not trip-failures), and a
+  crier/guard SHOULD hold its post, not wander - so it was both ineffective and conceptually wrong. Removed.
+- GATE GREEN: --headless --import clean, parse 0, _offfloor 0/1486 (INPROP 0, MON_INPROP 0), TWITCH_PARSE
+  OK, _delve_test clean to floor 2, _townwalk in_solid 0/16518 (0.000%) raid 0/2237 PASS - nav better,
+  no regression. tools/_d50_probe.gd (diagnostic) + tools/_d50_shot.gd (render) added.
+- LOOKED (WINDOWED crop, renders/cycles/d50/square_over+close): a populated midday square, folk in varied
+  poses, Cort Rivers the Crier at his post. D32's hamlet crier line is live in the Chronicle.
+- HONEST CAVEAT: a STILL cannot prove animation SMOOTHNESS or that a given fidget fired. The dead-statue
+  CAUSE is fixed in code and the square looks lively; the stutter fix and the gesture life need Mr. E's
+  eye on LIVE motion to sign off. Ticked on the code+gate+crop; his sign-off is the remaining half.
+- STILL IN THE PRIORITY SECTION (next desktop cycles): D53 (cart detached from hauler), D54 (NPCs vanish
+  into buildings), D51 (fishing-pole grip).

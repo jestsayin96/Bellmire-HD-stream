@@ -1,1 +1,1 @@
-IDLE 2026-11-13 23:03 - D32 12-tier growth ladder shipped, gate green
+IDLE 2026-11-13 23:31 - D50 idle-life + lod anim smoothing shipped, gate green

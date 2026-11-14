@@ -1,1 +1,1 @@
-IDLE 2026-11-13 20:36 - desktop build: D34 natural disasters wired in economy.gd + tested (191/0), gate green
+IDLE 2026-11-13 21:08 - desktop build: D29 work-sound layer shipped + callers verified, gate green

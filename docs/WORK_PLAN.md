@@ -849,6 +849,19 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Still worth Mr. E's attention on his side, but not blocking: Game Capture sits at 45% (-6.8 dB), so even
       once the town SFX fire they will be quiet for viewers; and OBS tracks 1/3 are duplicates with track 2 empty.
       DONE: a re-recorded town clip whose audio shows clear discrete events (>=8 dB above the bed) for footsteps, voices, work and combat, at a sane level - verified the same way, by measuring the recording.
+      ADVANCED, NOT TICKED (desktop D-cycle D6, 2026-11-13): the GAME side of the silent town is
+      verified AND the missing "work" layer is now built. D42's footstep/voice/animal callers
+      re-measured live (tools/_d42_test, 40 s 8x): footsteps 1255 (grass 564/stone 569/wood 62/
+      water 60), animal voices 68 (horse 16, dog 16, cat 25, boar 11) - all fire. NEW this cycle:
+      the ambient WORK sound the census had no caller for - town.gd._work_sounds rings the smith's
+      anvil ("hit" at the blacksmith yard) and chinks market trade ("coin" over the square),
+      station-based, 3D, daytime only (gated is_raid_on()+economy.is_night(), like the festival).
+      tools/_d29_test 30 s 8x: work_plays 69 (smith 46 + market 23), 0 SCRIPT ERROR. Gate GREEN:
+      parse 0, _offfloor 0/1411 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test clean,
+      _townwalk in_solid 0/15470 PASS. UNTICKED because the stated DONE is a re-recorded OBS clip
+      measured at >=8 dB discrete events - that needs Mr. E to record with Game Capture turned up
+      (it sits at 45% / -6.8 dB); headless COUNTS the events, it cannot measure his recording. Not
+      looked at on stream yet (headless soak only).
 - [x] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
 - [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.
 - [ ] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.

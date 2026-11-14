@@ -910,3 +910,30 @@ chatcmd/twitch (!join !fish !buy !delve), heroes walk from town through the nort
 NEXT: the delve itself - party enters DungeonHD floor 1 from the mouth (fade/transition), party AI fights the floor's
 monsters with Spells/Gear (port expedition.gd), descends by the exit stairs, lords on 5s, permadeath -> memorial,
 chronicle lines (canon: origin first, biome second; never a floor count).
+
+
+## D-cycle D6 - D29 THE WORKING TOWN HAS A VOICE (silent-town 'work' layer)
+- The census's silent-town (D29) was mostly fixed under D42 (footsteps + folk/animal voices got callers).
+  This cycle VERIFIED that live and added the one missing strand the DONE criterion names - WORK sound.
+- town.gd: new _work_sounds(delta), called from _process. Daytime only, never under a raid or at night
+  (gated is_raid_on() + economy.is_night(), same civic gate as the festival). Two station-based 3D sources:
+  the smith rings his anvil - a single paced 'hit' at the blacksmith yard (_shop_frame['blacksmith'] +
+  side*0.6 + f*0.4, the _yard 'Anvil' spot); and the market chinks with a 'coin' spread across the paved
+  square around _market_pos. Both reuse existing CC0 kinds already in assets/audio (no new asset). A
+  work_plays counter exposes it for the test. Every other town sound (footfalls) already carries only
+  3D-near, so this matches - a pane near the smithy/market hears it, a far pane does not.
+- tools/_d29_test.gd (new): boots the real Town, soaks 30 s at 8x, asserts work_plays>0 AND Sfx 'hit'>0
+  (smith) AND 'coin'>0 (market). Result: work_plays=69 (smith 46 + market 23). D29_TEST OK.
+- Re-verified D42 in the same gate (footsteps 1255, animal voices 68, horse 16 - all fire).
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _offfloor 0/1411 (INPROP 0, MON_INPROP 0 of 123);
+  TWITCH_PARSE OK; _delve_test RC 0, no SCRIPT ERROR (clean multi-floor run); _townwalk in_solid
+  0/15470 (0.000%) PASS (nav untouched - this change is town _process only).
+- D29 ADVANCED, left UNTICKED: full DONE is Mr. E's re-recorded OBS clip measured >=8 dB above the bed.
+  Headless counts the discrete events; it cannot measure his recording. He should also raise Game Capture
+  (45% / -6.8 dB) or the town stays quiet for viewers even now that it fires.
+- Commit note: staged only the files this change touches (town.gd, tools/_d29_test.gd, WORK_PLAN,
+  PROGRESS, RUN_LOCK) rather than git add -A, because the tree carried other sessions' untracked WIP
+  (renders/cycles/d45/, _sup_gate.log, *.uid) that is not mine to commit.
+- CROSS-WORKER FLAG (content/laptop): _sound_review coverage A fails on unique monster 'new ashwight'
+  having no registered voice kind (bestiary/monster/bosses.json) - pre-existing, not desktop-owned,
+  unrelated to the town-silence fix.

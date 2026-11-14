@@ -149,6 +149,13 @@ var festival_at := Vector3.ZERO
 var _fest_t := randf_range(150.0, 260.0)
 var _fest_left := 0.0
 static var fests := 0            # tools/_d20b_test.gd
+## D29: the working town has a VOICE. D42 gave footfalls and folk their voices;
+## a town also RINGS - the smith on his anvil, trade at the market. These fire
+## from the work STATIONS (not per-NPC), daytime only, never under a raid or at
+## night, and 3D so they carry only to a pane near the station like every other
+## town sound. The silent-town complaint (D29) named "work" among the missing.
+var _work_t := randf_range(1.5, 3.0)
+var work_plays := 0              # tools/_d29_test.gd (smith + market work sounds)
 ## D6: Bellmire's named people and their days (scripts/notables.gd)
 var notables: Notables
 ## the valley's stock (Economy: a port of the old Sim). Delves bring ore,
@@ -3407,12 +3414,36 @@ func _festival_pass(delta: float) -> void:
         fests += 1
         feed.append("A festival gathers in the market square - music, stalls, and a crowd!")
 
+func _work_sounds(delta: float) -> void:
+    # D29: a working town is never silent. The smith rings his anvil; the market
+    # chinks with trade. Daytime only - under a raid the forge is banked and the
+    # stalls shut (is_raid_on), and at night the town is abed (economy.is_night).
+    if economy == null or is_raid_on() or economy.is_night():
+        return
+    _work_t -= delta
+    if _work_t > 0.0:
+        return
+    _work_t = randf_range(1.6, 3.4)
+    # the smith: a single hammer-ring on the anvil - one blow, paced, not a fight
+    if _shop_frame.has("blacksmith"):
+        var fr: Array = _shop_frame["blacksmith"]
+        var anv: Vector3 = fr[0] + fr[1] * 0.6 + fr[2] * 0.4   # the anvil (see _yard "Anvil")
+        anv.y = height_at(anv.x, anv.z) + 0.9
+        Sfx.at("hit", anv, -7.0)
+        work_plays += 1
+    # the market: coins and trade spread across the paved square, a touch less often
+    if _market_pos != Vector3.ZERO and randf() < 0.55:
+        var st: Vector3 = _market_pos + Vector3(randf_range(-7.0, 7.0), 1.0, randf_range(-7.0, 7.0))
+        Sfx.at("coin", st, -9.0)
+        work_plays += 1
+
 func _process(delta: float) -> void:
     if economy:
         _caravan_pass(delta)
     if chat:
         _viewer_muster(delta)
     _festival_pass(delta)
+    _work_sounds(delta)
     if persist:
         _save_t -= delta
         if _save_t <= 0.0:

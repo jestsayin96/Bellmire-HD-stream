@@ -2434,6 +2434,14 @@ function setUpTabs() {
       else t.panel.classList.add("tab-hidden");
     }
     if (save) writeSaved(chosen.id);
+    // H17: on a phone the tab strip scrolls sideways - keep the lit tab in view
+    // (set scrollLeft directly so the page itself never scrolls sideways).
+    try {
+      const a = chosen.anchor;
+      if (navEl.scrollWidth > navEl.clientWidth) {
+        navEl.scrollLeft = Math.max(0, a.offsetLeft - (navEl.clientWidth - a.offsetWidth) / 2);
+      }
+    } catch (e) {}
     if (focusPanel) {
       try { chosen.panel.focus({ preventScroll: true }); } catch (e) { try { chosen.panel.focus(); } catch (e2) {} }
     }

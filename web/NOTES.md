@@ -593,3 +593,11 @@ A rolling per-browser history (localStorage key `bellmire.chron.v1`, newest firs
 - Epitaphs: the frozen lore (H12) carries NO epitaph set, so the hub shows only `f.epitaph` from the snapshot. No parallel list was invented.
 - Fields I wanted that the snapshot may lack (supervisor to raise with the game build worker): `weapon` and `armour` worn at death (string or {name}), `title`, and `epitaph` on every fallen row; `cause`/`killed_by`, `day`, `deepest`, `kills`, `level`, `class` are already read when present.
 - Local check: `?mock=fallen` (rich row, hostile-name row with hostile cause/epitaph/gear, name-only row, odd-types row). Hostile strings render as literal text; no element created from them. Run via headless Edge dump-dom: ?mock=fallen, crowd, chronicle, state=empty/fail/stale all render, no "undefined". Not visually reviewed (no screenshot viewer on this run) - eyeball at 390 and 1280.
+
+
+## H17 - the hub on a phone (Nov 15)
+Layout refinement only (palette, Gloock wordmark, tab model, CSP untouched; no new font/CDN/fetch).
+- Tab strip: >= 44px tall snap-scrolling rail; show() in app.js centres the lit tab via nav.scrollLeft (never scrolls the page sideways).
+- All tappables >= 44px at <= 760px (tabs, chips, linkbtn, retry, pin, sign-in, chat load, hero summary); text fields 16px (no iOS focus-zoom); small print floor 12px.
+- `html, body { overflow-x: clip }` as a backstop. Measured with headless Chrome in a 390/360/768/1280 iframe over mock=crowd, ?state=empty/fail/stale, ?mock=chronicle, ?open=1: zero horizontal scroll, no sub-44px tap target, no sub-12px text, every tab reachable. Hostile name renders as literal text (0 <img> created).
+- Not captured: pixel screenshots (no image viewer in the build session); measured via DOM geometry instead.

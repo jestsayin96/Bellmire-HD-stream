@@ -466,3 +466,57 @@ glyph (town / shield / raid / fight / death / lore), never a new id.
    named text, not a live report.
 
 If any of that is not true, do not republish.
+
+
+## H13 - NO-SCROLL TABBED LAYOUT (Nov 15)
+
+The hub's sections are now tabbed. The <nav> carries <button role="tab"> elements
+instead of anchor links; each section below is role="tabpanel" and only the active
+one is displayed. Pure layout rework - no new data, no new fetch, no new origin,
+no CSP change, no new icon, no new DOM path.
+
+### Storage: the TAB_KEY read is defensive by construction
+- Key: `bellmire.tab`. Value: the id of the last-picked tab.
+- Every read goes through `ctrlStrip` (same helper the chat path uses) plus a
+  25-char slice, then must match the page-authored `TABS` whitelist
+  (boards / heroes / bands / chronicle / dice / roll / fallen / lore / chat /
+  commands) before it decides anything. A non-matching value falls back to the
+  default tab, not an error.
+- The stored string is NEVER used as a URL, href, src, selector, query parameter
+  or style - only to look up a known id in TABS. The DOM id that follows comes
+  from the WHITELIST, not from storage.
+- Writes are wrapped in try/catch (private windows throw on localStorage); the
+  page works with or without storage.
+
+### What the keyboard controller does
+ArrowLeft/Right and Home/End move between tabs; Enter/Space activate (the default
+button behaviour). `tabindex` is -1 on inactive tabs and 0 on the active tab per
+the WAI-ARIA tabs pattern. Focus is moved by `.focus()`; no snapshot value ever
+reaches `.focus()` or any selector.
+
+### Invariants still hold
+- el() + textContent is the ONLY DOM path for snapshot (and lore-bundle) strings;
+  this change adds no new DOM path.
+- ICON_SET is unchanged; no new icon id.
+- CSP is unchanged (verify by diffing index.html head).
+- The honest states (updated N min ago, STALE_MIN, empty, failed-fetch retries,
+  payload version gate, <colour> canary in !dye) are untouched.
+- renderNothing's `.hide` class still wins over `.active` in CSS - when the town
+  has not reported in, clicking Boards still shows ONLY the big-msg banner.
+
+### What the supervisor should check before republishing
+1. CSP unchanged (diff index.html head - no new directive or host).
+2. grep confirms no new innerHTML / outerHTML / insertAdjacentHTML /
+   document.write / eval / new Function.
+3. The tab controller never passes `TAB_KEY`'s stored value to any
+   `getElementById`, `querySelector` or URL builder without the TABS whitelist
+   check in between.
+4. ?mock=chronicle / ?mock=crowd / ?mock=bands / ?mock=lore / ?mock=roll still
+   pass the hostile-name test on every tab (hostile strings render as literal
+   text; zero <img>; no alert) - switching tabs does not change how snapshot
+   strings reach the DOM.
+5. ?state=empty / ?state=fail / ?state=stale still render honestly; the nav is
+   visible across all three states.
+6. ?open=1 lands on the Heroes tab with the first hero's sheet open.
+
+If any of that is not true, do not republish.

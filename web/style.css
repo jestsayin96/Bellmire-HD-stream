@@ -186,6 +186,33 @@ nav a {
 nav a:hover, nav a:focus-visible { border-color: var(--teal); color: var(--parch-hi); outline: none; }
 nav a .n { color: var(--teal-br); font-weight: 500; margin-left: 5px; }
 
+/* ======================================================= H13 tabbed, no-scroll layout
+   The <nav> now carries <button role="tab"> elements and the sections below are
+   role="tabpanel". Only the ACTIVE panel is displayed; the viewer switches with
+   one click (or ArrowLeft/Right, Home/End). Pure layout - the panels themselves
+   are unchanged. */
+nav button {
+  flex: none; cursor: pointer; background: transparent;
+  color: var(--parch-dim);
+  border: 1px solid rgba(233,214,168,.2); border-radius: 999px; padding: 6px 14px;
+  font: inherit; font-size: .92rem; font-weight: 600; line-height: 1.2;
+}
+nav button:hover, nav button:focus-visible { border-color: var(--teal); color: var(--parch-hi); outline: none; }
+nav button[aria-selected="true"] {
+  background: rgba(55,199,191,.14);
+  border-color: var(--teal);
+  color: var(--parch-hi);
+}
+nav button .n { color: var(--teal-br); font-weight: 500; margin-left: 5px; }
+/* a tabpanel that is not active is hidden - the `.hide` class the renderers add
+   (empty / failed states) still wins visually, which is honest: when the town
+   has not reported in, clicking Boards still shows only the big-msg banner. */
+[role="tabpanel"] { outline: none; }
+[role="tabpanel"]:not(.active) { display: none; }
+/* Reduced motion: no new transitions were introduced here, but belt-and-braces -
+   the nav itself keeps its `backdrop-filter` and nothing else animates. */
+
+
 /* ======================================================= panels vs plain blocks
    Research: not every section should be a bordered box. The Boards, the die,
    the Heroes and the Chronicle are discrete objects and keep a panel. The Guild
@@ -913,3 +940,21 @@ html.overlay #bands { display: none !important; }
 @media (max-width: 560px) {
   .lore-tales  { grid-template-columns: 1fr; }
 }
+
+
+/* ======================================================= H13 tabs
+   A no-scroll layout: the existing <nav> anchors become a tablist and the
+   <main> sections become tabpanels (JS attaches the roles). Only the active
+   panel is shown; the rest are display:none so each section is at most one
+   viewport tall. Colour and type stay in the house palette - this is layout,
+   not a repaint. No transition is added, so prefers-reduced-motion is
+   honoured by construction. */
+.wrap[data-tabbed="1"] main > section.tab-hidden { display: none; }
+.wrap[data-tabbed="1"] main > .duo { display: block; }
+.wrap[data-tabbed="1"] main > .duo > section { margin-top: 0; }
+.wrap[data-tabbed="1"] nav a[aria-selected="true"] {
+  background: var(--teal); color: #0a1413; border-color: var(--teal);
+}
+.wrap[data-tabbed="1"] nav a[aria-selected="true"] .n { color: #0a1413; }
+.wrap[data-tabbed="1"] main > section[role="tabpanel"]:focus-visible { outline: none; }
+.wrap[data-tabbed="1"] main > section[role="tabpanel"] { scroll-margin-top: 60px; }

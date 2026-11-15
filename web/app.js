@@ -1962,6 +1962,68 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; pa
   sec.addEventListener("focusout", (e) => { if (!sec.contains(e.relatedTarget)) leave(); });
 })();
 
+// ---------------------------------------------------------------- H13 tabs
+// No-scroll, tabbed layout: one section at a time. The viewer picks with a nav
+// button and the chosen panel's `.active` class makes it visible (see style.css).
+//
+// Storage is per-browser and best-effort: the last-picked tab id is kept in
+// localStorage under TAB_KEY. Every READ goes through ctrlStrip + a 25-char cap
+// and must match TABS (a page-authored whitelist) before it decides anything.
+// The stored value is NEVER used as a URL, href, src, selector, query parameter
+// or style - only to look up a known id in TABS. In a private window (storage
+// throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
+const TABS = ["boards","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
+const TAB_KEY = "bellmire.tab";
+function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
+function getStoredTab() {
+  try { const v = cleanTab(localStorage.getItem(TAB_KEY) || ""); return TABS.indexOf(v) >= 0 ? v : ""; }
+  catch (e) { return ""; }
+}
+function storeTab(id) {
+  try { if (TABS.indexOf(id) >= 0) localStorage.setItem(TAB_KEY, id); } catch (e) {}
+}
+function setActiveTab(id) {
+  if (TABS.indexOf(id) < 0) id = TABS[0];
+  for (const t of TABS) {
+    const tab = $("tab-" + t);
+    const panel = $(t);
+    const on = (t === id);
+    if (tab) { tab.setAttribute("aria-selected", on ? "true" : "false"); tab.tabIndex = on ? 0 : -1; }
+    if (panel) { if (on) panel.classList.add("active"); else panel.classList.remove("active"); }
+  }
+  storeTab(id);
+}
+(function wireTabs() {
+  const navEl = $("tabs");
+  if (!navEl) return;
+  navEl.addEventListener("click", (e) => {
+    const b = e.target && e.target.closest ? e.target.closest("button[role='tab']") : null;
+    if (!b || !navEl.contains(b)) return;
+    e.preventDefault();
+    const id = cleanTab(b.getAttribute("data-tab") || "");
+    if (TABS.indexOf(id) >= 0) setActiveTab(id);
+  });
+  navEl.addEventListener("keydown", (e) => {
+    const cur = e.target;
+    if (!cur || cur.getAttribute == null || cur.getAttribute("role") !== "tab") return;
+    const i = TABS.indexOf(cleanTab(cur.getAttribute("data-tab") || ""));
+    if (i < 0) return;
+    let j = -1;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % TABS.length;
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + TABS.length) % TABS.length;
+    else if (e.key === "Home") j = 0;
+    else if (e.key === "End") j = TABS.length - 1;
+    if (j < 0) return;
+    e.preventDefault();
+    setActiveTab(TABS[j]);
+    const next = $("tab-" + TABS[j]);
+    if (next) next.focus();
+  });
+  // ?open=1 opens the first hero's sheet; land on Heroes so the opened sheet is visible.
+  const initial = (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  setActiveTab(initial);
+})();
+
 load();
 setInterval(load, REFRESH_MS);
 setInterval(showStatus, 15000);
@@ -2074,3 +2136,129 @@ function withMock(p) {
   }
   return out;
 }
+
+
+// ---------------------------------------------------------------- H13 tabs
+// A no-scroll layout: the existing <nav>'s anchors become tab buttons that
+// show one section at a time, so a viewer does not scroll one page end to
+// end. Purely a layout rework (docs/WORK_PLAN H13) - NO new data, NO new
+// fetch, NO CSP change, NO snapshot string reaches the DOM through this
+// code. Every id below is a page-owned constant taken from the nav we
+// author ourselves; a saved choice from localStorage is validated against
+// that same whitelist before use and is NEVER used as a URL, selector or
+// innerHTML. Reduced-motion is honoured because no transitions are added.
+function setUpTabs() {
+  const navEl = document.querySelector("nav");
+  if (!navEl) return;
+  const anchors = Array.from(navEl.querySelectorAll('a[href^="#"]'));
+  if (!anchors.length) return;
+
+  // Whitelist built from THIS page's own nav + sections; nothing else is ever
+  // a candidate tab. A href whose body is not a plain id, or whose target is
+  // not an actual <section>, is dropped.
+  const TABS = [];
+  for (const a of anchors) {
+    const id = String(a.getAttribute("href") || "").replace(/^#/, "");
+    if (!id || !/^[a-zA-Z][a-zA-Z0-9_-]{0,24}$/.test(id)) continue;
+    const panel = document.getElementById(id);
+    if (!panel || panel.tagName !== "SECTION") continue;
+    TABS.push({ id, anchor: a, panel });
+  }
+  if (!TABS.length) return;
+
+  const wrap = document.querySelector(".wrap");
+  if (wrap) wrap.setAttribute("data-tabbed", "1");
+
+  navEl.setAttribute("role", "tablist");
+  TABS.forEach(({ id, anchor, panel }, i) => {
+    anchor.setAttribute("role", "tab");
+    anchor.setAttribute("aria-controls", id);
+    anchor.setAttribute("id", "tab-" + id);
+    anchor.setAttribute("tabindex", i === 0 ? "0" : "-1");
+    anchor.setAttribute("aria-selected", "false");
+    panel.setAttribute("role", "tabpanel");
+    panel.setAttribute("aria-labelledby", "tab-" + id);
+    panel.setAttribute("tabindex", "-1");
+  });
+
+  const TAB_KEY = "bellmire.tab";
+  function readSaved() {
+    try {
+      const raw = localStorage.getItem(TAB_KEY) || "";
+      // Control-strip + 25-cap (same shape as cleanName, see MY_HERO). The
+      // cleaned value is only ever COMPARED to the whitelist - we never pass
+      // it to querySelector, document.getElementById, a URL, or innerHTML.
+      const clean = ctrlStrip(raw).slice(0, 25);
+      for (const t of TABS) if (t.id === clean) return t.id;
+    } catch (e) {}
+    return "";
+  }
+  function writeSaved(id) {
+    try { localStorage.setItem(TAB_KEY, String(id).slice(0, 25)); } catch (e) {}
+  }
+
+  function show(id, opts) {
+    const save = !opts || opts.save !== false;
+    const focusPanel = !!(opts && opts.focusPanel);
+    const found = TABS.find(t => t.id === id);
+    const chosen = found || TABS[0];
+    for (const t of TABS) {
+      const on = (t.id === chosen.id);
+      t.anchor.setAttribute("aria-selected", on ? "true" : "false");
+      t.anchor.setAttribute("tabindex", on ? "0" : "-1");
+      if (on) t.panel.classList.remove("tab-hidden");
+      else t.panel.classList.add("tab-hidden");
+    }
+    if (save) writeSaved(chosen.id);
+    if (focusPanel) {
+      try { chosen.panel.focus({ preventScroll: true }); } catch (e) { try { chosen.panel.focus(); } catch (e2) {} }
+    }
+    // Keep the sticky nav visible at the top after a switch - avoids the
+    // phone-view surprise where a tab change leaves you scrolled mid-page.
+    try { window.scrollTo({ top: 0, behavior: "auto" }); } catch (e) {}
+  }
+
+  navEl.addEventListener("click", (ev) => {
+    const a = ev.target && ev.target.closest ? ev.target.closest('a[role="tab"]') : null;
+    if (!a || !navEl.contains(a)) return;
+    const id = String(a.getAttribute("aria-controls") || "");
+    if (!TABS.find(t => t.id === id)) return;
+    ev.preventDefault();
+    show(id);
+    try { history.replaceState(null, "", "#" + id); } catch (e) {}
+    try { a.focus(); } catch (e) {}
+  });
+
+  navEl.addEventListener("keydown", (ev) => {
+    const a = ev.target && ev.target.closest ? ev.target.closest('a[role="tab"]') : null;
+    if (!a) return;
+    const idx = TABS.findIndex(t => t.anchor === a);
+    if (idx < 0) return;
+    let to = -1;
+    const k = ev.key;
+    if (k === "ArrowRight" || k === "ArrowDown") to = (idx + 1) % TABS.length;
+    else if (k === "ArrowLeft" || k === "ArrowUp") to = (idx - 1 + TABS.length) % TABS.length;
+    else if (k === "Home") to = 0;
+    else if (k === "End") to = TABS.length - 1;
+    else if (k === "Enter" || k === " ") { ev.preventDefault(); show(TABS[idx].id); try { TABS[idx].anchor.focus(); } catch (e) {} return; }
+    if (to >= 0) {
+      ev.preventDefault();
+      show(TABS[to].id);
+      try { TABS[to].anchor.focus(); } catch (e) {}
+    }
+  });
+
+  // Starting tab: URL hash wins (so a shared link still works), then the saved
+  // choice, then the first tab. The hash and saved values are BOTH validated
+  // against the whitelist above before anything is shown.
+  const hashId = String((location.hash || "").replace(/^#/, ""));
+  const hashMatch = TABS.find(t => t.id === hashId);
+  const start = hashMatch ? hashMatch.id : (readSaved() || TABS[0].id);
+  show(start, { save: !!hashMatch });
+
+  window.addEventListener("hashchange", () => {
+    const id = String((location.hash || "").replace(/^#/, ""));
+    if (TABS.find(t => t.id === id)) show(id);
+  });
+}
+setUpTabs();

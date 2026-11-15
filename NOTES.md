@@ -539,3 +539,33 @@ id) so the hero floats to the top, opens and is highlighted next visit. This is 
 -view idea (section 3) carried to the whole page, and the no-login stand-in for the Satchel's
 always-on "your hero". Research consensus on personalization: the single most-used view is "me" -
 surface the viewer's own row first and everything else reads as context around it.
+
+
+## H13 - a no-scroll hub (Nov 15)
+
+Mr. E wanted a viewer never to have to scroll the hub end to end. The hub kept
+all its sections - Boards, Heroes, Bands, Chronicle, the die, Guild Roll, the
+Fallen, Lore, Chat, Commands - and the nav carried links to each, but the page
+was one long column; on a phone or a laptop the die, the Roll and the Fallen
+sat several screens below.
+
+The simplest honest change: turn the <nav> into tabs. One click, one section,
+the choice remembered for next time. The nav is already sticky and already
+reads as a table of contents - all it needed was for the links to behave like
+tabs. I chose <button role="tab"> over anchors because the behaviour is now
+"switch what is shown" rather than "jump to an anchor"; the WAI-ARIA tabs
+pattern says buttons.
+
+The state lives in localStorage (bellmire.tab). Every read is run through
+ctrlStrip + a 25-char cap and then matched against a whitelist of ten known
+tab ids before it is used for anything - the stored value never becomes a
+selector or a URL, only an index into a page-authored list. In a private
+window the page falls back to the default tab silently.
+
+renderNothing's .hide class still wins in CSS. A viewer who clicks Boards
+when the town has not reported in still sees only the big-msg banner - the
+nav tells the honest story too, by never pretending there is content behind
+every tab.
+
+No animation, no scroll trickery, no viewport-math. A phone, a desktop and
+an overlay all get the same ten-button row with the same one-click reach.

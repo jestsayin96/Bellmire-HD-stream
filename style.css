@@ -186,6 +186,33 @@ nav a {
 nav a:hover, nav a:focus-visible { border-color: var(--teal); color: var(--parch-hi); outline: none; }
 nav a .n { color: var(--teal-br); font-weight: 500; margin-left: 5px; }
 
+/* ======================================================= H13 tabbed, no-scroll layout
+   The <nav> now carries <button role="tab"> elements and the sections below are
+   role="tabpanel". Only the ACTIVE panel is displayed; the viewer switches with
+   one click (or ArrowLeft/Right, Home/End). Pure layout - the panels themselves
+   are unchanged. */
+nav button {
+  flex: none; cursor: pointer; background: transparent;
+  color: var(--parch-dim);
+  border: 1px solid rgba(233,214,168,.2); border-radius: 999px; padding: 6px 14px;
+  font: inherit; font-size: .92rem; font-weight: 600; line-height: 1.2;
+}
+nav button:hover, nav button:focus-visible { border-color: var(--teal); color: var(--parch-hi); outline: none; }
+nav button[aria-selected="true"] {
+  background: rgba(55,199,191,.14);
+  border-color: var(--teal);
+  color: var(--parch-hi);
+}
+nav button .n { color: var(--teal-br); font-weight: 500; margin-left: 5px; }
+/* a tabpanel that is not active is hidden - the `.hide` class the renderers add
+   (empty / failed states) still wins visually, which is honest: when the town
+   has not reported in, clicking Boards still shows only the big-msg banner. */
+[role="tabpanel"] { outline: none; }
+[role="tabpanel"]:not(.active) { display: none; }
+/* Reduced motion: no new transitions were introduced here, but belt-and-braces -
+   the nav itself keeps its `backdrop-filter` and nothing else animates. */
+
+
 /* ======================================================= panels vs plain blocks
    Research: not every section should be a bordered box. The Boards, the die,
    the Heroes and the Chronicle are discrete objects and keep a panel. The Guild
@@ -869,3 +896,65 @@ html.overlay #bands { display: none !important; }
 .satchelfoot { margin: 6px 0 0; font-size: .9rem; color: var(--ink); }
 .satchelfoot .sk { color: var(--ink-soft); }
 .satchelfoot b { color: var(--gold-dk); font-variant-numeric: tabular-nums; }
+
+
+/* ================================================================== LORE (H12) */
+.lore          { display: grid; gap: 12px; margin-top: 4px; }
+.lore-sub      {
+  display: flex; align-items: center; gap: 8px; margin: 10px 0 2px;
+  font-family: "Gloock", Georgia, serif; font-weight: 400;
+  color: var(--ink-red); font-size: 1.05rem; letter-spacing: .005em;
+}
+.lore-sub-t    { line-height: 1.1; }
+.lore-ic       { width: 16px; height: 16px; color: var(--ink-red); flex: 0 0 auto; }
+.lore-lines    { display: grid; gap: 4px; }
+.lore-line     { margin: 0; color: var(--ink); font-size: .95rem; line-height: 1.45; }
+.lore-line.crier { font-style: italic; }
+.lore-line.see   { color: var(--ink-soft); font-size: .88rem; }
+.lore-stage    {
+  display: inline-block; margin-right: 4px; color: var(--ink-red);
+  font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700;
+}
+.lore-growth   { list-style: none; padding: 0; margin: 2px 0 0; display: grid; gap: 10px; }
+.lore-tier     {
+  background: rgba(246, 236, 209, .55); border: 1px solid var(--edge-2);
+  border-radius: 7px; padding: 8px 10px;
+}
+.lore-tier-head{ display: flex; align-items: baseline; gap: 6px; margin-bottom: 2px; }
+.lore-tier-name{ font-family: "Gloock", Georgia, serif; color: var(--ink-red); font-size: 1rem; }
+.lore-lords    { display: grid; gap: 8px; }
+.lore-lord     {
+  background: rgba(246, 236, 209, .55); border: 1px solid var(--edge-2);
+  border-radius: 7px; padding: 8px 10px;
+}
+.lore-lord-name{ display: flex; align-items: center; gap: 6px; }
+.lore-lord-key { font-family: "Gloock", Georgia, serif; color: var(--ink-red); text-transform: capitalize; }
+.lore-tales    { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.lore-tale     {
+  background: rgba(246, 236, 209, .55); border: 1px solid var(--edge-2);
+  border-radius: 7px; padding: 9px 11px; display: grid; gap: 4px;
+}
+.lore-tale-head{ display: flex; align-items: center; gap: 6px; margin: 0 0 2px; }
+.lore-tale-name{ font-family: "Gloock", Georgia, serif; color: var(--ink-red); font-size: 1rem; text-transform: capitalize; }
+.chip.on       { background: var(--teal); color: #0a1413; border-color: var(--teal); }
+@media (max-width: 560px) {
+  .lore-tales  { grid-template-columns: 1fr; }
+}
+
+
+/* ======================================================= H13 tabs
+   A no-scroll layout: the existing <nav> anchors become a tablist and the
+   <main> sections become tabpanels (JS attaches the roles). Only the active
+   panel is shown; the rest are display:none so each section is at most one
+   viewport tall. Colour and type stay in the house palette - this is layout,
+   not a repaint. No transition is added, so prefers-reduced-motion is
+   honoured by construction. */
+.wrap[data-tabbed="1"] main section.tab-hidden { display: none; }
+.wrap[data-tabbed="1"] main > .duo { display: block; }
+.wrap[data-tabbed="1"] main > .duo > section { margin-top: 0; }
+.wrap[data-tabbed="1"] nav a[aria-selected="true"] {
+  background: var(--teal); color: #0a1413; border-color: var(--teal);
+}
+.wrap[data-tabbed="1"] nav a[aria-selected="true"] .n { color: #0a1413; }
+.wrap[data-tabbed="1"] main > section[role="tabpanel"]:focus-visible { outline: none; }
+.wrap[data-tabbed="1"] main > section[role="tabpanel"] { scroll-margin-top: 60px; }

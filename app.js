@@ -193,7 +193,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "dice", "heroes", "bands", "chronicle", "roll", "fallen"];
+const SECTIONS = ["boards", "dice", "heroes", "bands", "chronicle", "lore", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -239,6 +239,7 @@ function render(p) {
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
   renderRolls(p.rolls);
+  renderLore();
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -1726,6 +1727,219 @@ function highlightMyHero(login) {
   if (btn) btn.addEventListener("click", twitchSignIn);
 })();
 
+// ============================================================ LORE (H12)
+// A FROZEN copy of data/lore_lines.json from the main branch, bundled so the page
+// needs no new fetch and no CSP change. The content is Twitch-era text and may
+// still carry hostile markup; it reaches the DOM ONLY through el()/textContent,
+// and every icon is a whitelisted ICON_SET glyph. See docs/HUB_SECURITY.md (H12).
+const LORE_SRC_SHA  = "1669c1b";
+const LORE_SRC_DATE = "2026-11-14";
+const LORE_FROZEN = {"town_life":{"crier":["Grain measured, flasks counted, door kept - Bellmire stands another day!","Fresh off the river: trout, and a tale with every one.","The guild takes names at the post. Bring your own courage.","Lamps lit, walls walked, all's well - or well enough.","Another delver down the scar. Put a copper on them coming back up.","Walls walked, gates kept, and the bell has nothing to say!","Caravan on the road - bring coin or bring your back!","New names on the guild post. Read them while they are fresh.","The apothecary has flasks and the guild has holes to put them in!","Taxes measured, not guessed - the Hall says so.","Rain by evening. The crier is never wrong twice running.","Measure the grain, count the flasks, keep the door - and the crier keeps his voice!","Two up from the scar this morning, and both of them walking!","The bell has no clapper and even less to say. All's well!","Market day! Bring coin, bring elbows!","The Watch walked the wall twice and found nothing worth a second turn.","Flasks on the shelf, grain in the measure - Bellmire keeps its own accounts!","A lord came up out of the scar and went back down in pieces - hear it twice for a copper!","E3PO stood the night gate himself. Sleep easy, Bellmire.","Three down the scar before breakfast. The guild post is open and the ink is wet!","Stone on the road, masons on the wall - look lively or be built into it!","The Ford is running high. Cross at the ferry or cross at your own funeral!","Lost: one goat, answers to nothing. Found: one goat, answers to nobody!","The Hall sits at noon. Bring your grievance and bring it short!","Bandits on the west road, says the carter. Says it every week, mind.","Flasks counted twice today, on account of yesterday!","A caravan winters here, and the lanes are tight. Mind your elbows and your purse!","The night was quiet, the gate held, and the crier slept like an honest man!","New law posted at the Hall. Read it, or have it read to you at the gallows!","'Hear it, pay it, pass it on! Bellmire, your news!'","'Second bell! Any body with hands and a name, the drill yard calls!'","'Lost: one grey cat by the ford. Found: three. Come and argue!'","'Prices on the board, honest or you'll hear about it!'"],"market":["Two coppers the carp, and the carp is grinning.","Dye by the ounce - name a colour, Bellmire keeps it now.","Scarglass! Cheap, and only slightly cursed!","Boots that have walked further than you have, half off.","Ale by the jug, and the jug is honest.","Nails, hooks, and a hammer that has seen things!","Salt off the coast road - you will taste the journey.","Wool off the hill, and it still smells of the hill.","Bread this morning; bread-shaped by this afternoon.","Lamp oil! Burns slow, and you will want the slow sort.","Rope by the fathom, and it has held a man before!","Scarstone, polished - it only looks at you a little!","Candles! Burn one for the delvers, buy two for yourself!","Hooks, lines, and a river that owes you nothing!","Cheese with a crust you could roof a barn with!","Fresh ink and honest parchment - write home while you still can!","A hat that has never once been rained on. Not once!","Secondhand steel - all of it came back up. Most of it alone.","Wax and wick! Burn one for the ones still down there!","Charcoal by the sack, and the sack is nearly full!","Thread, needles, and a patch for whatever the scar did to you!","Smoked river fish - it has been through worse than you have!","Horn cups, horn combs, horn everything - we had a good year for horns!","Pickles! Older than some of my customers!","Blankets off the hill flocks, thick enough to stand up on their own!","Boots resoled while you wait, and you will wait!","Honey when the hives are ours to take it from. Today they are!","Lanterns, hooks and a long pole - everything a man needs to not go in after it!","The baker's boy is undercutting his father two stalls down.","A fishwife has a crow in a cage. She is not selling it; she wants it on record.","The salt stall weighs twice and smiles once.","The potter will take a chipped cup in trade and knock a copper off."],"growth":["The masons raised a new course on the wall today.","A second well dug, and the queue at the first one shorter.","They are building where the fields used to stop.","The guild post has two doors now. Both kept.","The smith has an apprentice, and the apprentice has eyebrows. For now.","A proper gate, hung and swinging true.","The road out is cobbled as far as the ford.","They are putting glass in the chapel windows.","A second row of stalls, and a queue for them.","The barracks took on ten more. E3PO looked almost pleased.","The ditch is dug, the stakes are in, and the masons are measuring stone.","A new row of chimneys on the east side, all of them smoking.","They have hung a lamp at the ford. It burns all night now.","The guild post took on a clerk, and the clerk took on a queue.","A tannery, downwind - and the town voted on which wind.","The market square has flagstones where the mud was.","A second smith, and the two of them already disagree.","They are cutting a road where the fields used to stop.","They have roofed the old well, and the water tastes of less sky.","A stone granary going up by the Hall, and the masons will not say how much.","Drains under the high street. The town smells of digging instead of worse.","The chapel has a clapper on order, and opinions arriving free.","A second gate cut in the north wall, because the first one had a queue.","The guild post painted its door. The door is still kept.","A bath house, of all things, and a line outside it already.","They are laying a wharf at the Ford, long enough for two boats to argue over.","The yard has a practice dummy that E3PO himself broke in half. They built a stronger one.","Lamps the whole length of the high street now. The dark stops at the wall.","Another roof goes up; another kettle gets hung.","The ward lists a new name. Nobody argues it.","A second well is being dug, and a first argument is being had over it.","Market Day has outgrown its square. The square is being argued with."]},"growth_tiers":{"tiers":[{"name":"Crossing","crier":"A handful of huts at a river crossing. Somebody calls it Bellmire.","see":"Three or four huts, a cart, a cookfire."},{"name":"Hamlet","crier":"Bellmire is a hamlet now - a well dug, and a reason to stay.","see":"A well, a few more homes, a fenced garden or two."},{"name":"The Guild Post","crier":"The guild plants a post at Bellmire. The post has a door, and the door is kept.","see":"The guild post building, and the town's first lamp."},{"name":"Village","crier":"Bellmire is a village. The scar has a name, and so do we.","see":"Homes clustered along a cart-track, chickens, a shared pen."},{"name":"Market Day","crier":"Market day comes to Bellmire. Measure the grain.","see":"A market square with a few stalls, and the first outside traders."},{"name":"The Chapel","crier":"A chapel and a bell-tower rise. The bell has no clapper, and rings anyway.","see":"The temple and its tower, and a small graveyard behind it."},{"name":"Craft Row","crier":"The smiths and masons raise Craft Row. Count the flasks.","see":"Workshops trailing smoke, a forge-glow, the mill wheel turning."},{"name":"The Garrison","crier":"Bellmire raises a garrison. The guard has a yard now - and a Commander.","see":"Barracks and a training yard, guards on patrol, E3PO up on the wall."},{"name":"Market Town","crier":"Bellmire stands as a proper market town. The caravans know the road.","see":"A paved square, more districts, a busy Ford with its Ferryman."},{"name":"The First Wall","crier":"Stone goes up where the fields used to stop. Keep the door.","see":"A low wall around the town's heart, and a gatehouse over the road."},{"name":"Walled Town","crier":"Bellmire is a walled town now. Let them come.","see":"A full curtain wall, corner towers, a district banner on each quarter."},{"name":"City in all but Charter","crier":"Bellmire is a city in all but the charter - and the scar is deeper than it has ever been.","see":"Dense districts, a second ring of homes outside the wall, traffic at every gate."}]},"e3po":{"intro":["E3PO takes the wall. The whole guard stands straighter.","The Commander is on the field. Nobody tells him to be careful.","The gate opens, and it is only E3PO coming out to meet them.","E3PO arrives at a walk. Running would suggest doubt.","The Commander's voice reaches the back of the square before he does.","E3PO comes up the stair to the wall at the same pace he always does.","The Commander takes his place at the gate and the guard stop checking the horizon.","E3PO arrives already giving orders, which saves everyone a moment.","The Commander steps onto the wall. The night gets smaller.","E3PO arrives with his helm under his arm and his opinion ready.","Boots on stone, slow and even. That will be the Commander.","E3PO comes out of the gatehouse already unimpressed.","The Commander takes the step nobody else wants and stands on it.","E3PO is here. Whatever this is, it is his problem now, and he prefers it that way.","The Commander comes through the crowd and the crowd closes behind him, facing out.","E3PO reaches the wall without hurrying, and the hurrying stops.","The Commander arrives, looks at the problem, and names it. That is usually enough.","E3PO puts his back to the gate. Everything else can be worked out from there.","The Commander walks past the trembling end of the line and stands at it.","E3PO steps out of the dark into the lamplight, which is the only warning anyone gets.","The Commander takes the wall and the whole guard remembers the drill at once.","E3PO arrives late, on purpose, so the men learn they can hold without him.","E3PO comes out at a walk. Nothing about today is going to be hurried.","The Commander is at the gate before the horn has finished.","Boots on stone, in step, one pair louder than the rest. That is him.","E3PO takes his post and the whole wall exhales.","The Commander arrives in full harness on a quiet day, because quiet days end.","E3PO steps into the gateway and makes it look narrower than it is.","The guard snaps to without being told. He has not even spoken yet.","The Commander is where he always is. That is the point of him."],"says":["Hold the line. The line holds because I say so.","I have died exactly never. Let us keep the record.","Measure the grain, count the flasks, and leave the gate to me.","A guard who runs is a guard I must replace, and I hate paperwork.","They do not pay me to fall. They do not pay me at all - I simply refuse to leave.","The door stays shut. That is the whole job, and I am very good at it.","Wounded? I prefer 'briefly inconvenienced'.","Bellmire sleeps because I do not.","Shapes, not numbers. That goes for raiders too.","I do not require a monument. A kept door will do.","If the gate holds and the grain is counted, the day is a success. The rest is weather.","Call me Commander. 'Sir' is for men who might retire.","Shut the door, count the grain, and let me worry about the rest.","Courage is a habit. Start with standing still.","I was here before the wall. I will be here after it, if the masons keep this up.","A quiet night is the best work we ever do, and nobody writes it down.","The scar can have the deep. It cannot have the doorstep.","I do not need you brave. I need you where I put you.","Twenty years and no one has got past me. I would call that a record; I call it Tuesday.","If you must run, run toward something. Preferably me.","Grain, flasks, door. Everything else is a rumour.","I have no plan for losing. I never found the time to write one.","Hold your ground. Ground is the only thing here that cannot run.","You want glory. I want Thursday to be boring.","Fear is fine. Fear that moves its feet is a problem.","I have buried better men than me. That is the whole reason I stay.","Do not thank me. Shut the door behind you.","The deep sends up monsters and we send down volunteers. I do not love the trade.","There is no trick to it. Stand where you are told, for longer than you want to.","I am not brave. I am simply still here, which looks the same from a distance.","I am not the wall. I am what the wall is for.","Every door in this town shuts. Mine shuts last.","Do not ask me how old I am. Ask the gate; it remembers more.","A town is a promise that somebody is awake. I am the somebody.","You will have braver days than this. Today I want a steady one.","I do not win fights. I outlast them. Try it, it is cheaper.","The scar is patient. I have the advantage there.","Keep your spear where I can see it and your fear where you can.","I have never once been rescued and I am not starting a fashion.","Report to me, not about me.","They call me immortal. I call it a long habit of not leaving.","Bellmire has buried everyone who built it. That is the job of a town.","If you want my post, you will have to wait a very long while.","Stand here. If something comes through, it came through me first, so take your time.","Keep the door. Everything else is decoration.","I do not need sleep. I need the wall to still be there in the morning.","A gate is a promise. I am the one who keeps it.","You may panic after. I shall tell you when after is.","Two things never leave this post: the bell and me.","Courage is a habit. Start it now, you will want it later.","If the wall falls, step back one pace and be a wall.","I have no grave to visit. Count yourselves lucky it is mine.","Hold your ground. The ground has held mine for longer than you think.","The scar eats spells. It has never once eaten a spear.","Fear is fine. Moving is not.","I do not shout to frighten you. I shout so you can find me.","Drink after the gate is shut. Not one flask before.","Nobody in this town dies of my carelessness. That is the whole oath.","When I withdraw, I come back. Learn the second half.","Stand where I put you and the night is a short one.","A quiet watch is a watch that worked. Do not sulk.","I was not built for retreat and I was not built well for stairs.","Say my name if it helps. It usually does.","Measure the grain. Count the flasks. I shall keep the door."],"town_talk":["They say E3PO has held the gate since before there was a gate.","Old-timers swear E3PO has outlived three of his own gravestones.","The children drill with sticks and name the loudest one E3PO.","No raider has taken the Keep door while the Commander draws breath - which is to say, never.","The guild keeps a chair for E3PO at every feast. He never sits; he watches the door.","The Watch say the Commander's armour has more dents than the gate has nails.","There is a standing wager at the tavern on what could fell E3PO. Nobody has collected.","The masons built the new wall a hand taller because he asked twice.","They tried to carve him a statue. He made them turn it to face the door.","Every recruit hears the same first words: 'The door stays shut.'","The Watch say the Commander sleeps standing up, and only to set an example.","They reckon E3PO has worn out more armourers than armour.","A child asked the Commander what he is afraid of. He thought about it for a long time and said 'paperwork'.","The bakers keep him a loaf he never takes, and bake it anyway.","Two generations of this town have been told off by the same man in the same voice.","Nobody can name the day E3PO arrived, which is how you know the story is old.","The Watch measure a hard night by how many times the Commander said nothing.","They say the first wall was built around wherever E3PO happened to be standing.","Three innkeepers have retired on bets about the Commander's age.","He knows every guard's mother's name. Nobody knows how.","The graveyard has no stone for E3PO. The masons keep offering.","They say if the bell ever gets a clapper, he will still hear the gate first.","Recruits are told not to try out-standing him. They try anyway. They stop.","A caravan master swore he saw E3PO on the wall at dawn and at midnight. Same posture, same dent.","The Watch say the Commander has never once been seen running, in any emergency, ever.","They say he has had three suits of armour and only one dent he keeps.","The gatekeeper's grandfather was told off by E3PO for the same thing, in the same words.","A tanner swears the Commander remembers his wedding, which was forty years back.","They say the scar has tried E3PO twice and gone back down both times.","The Watch keep a tally of nights the Commander slept. It is a short tally.","The schoolmistress uses E3PO to teach the children what reliable means.","The guild post keeps his name off the ledgers - he never asked for pay, so there is nothing to write.","A delver swore the Commander walked her home from the scar's edge without a word.","They say the architect drew the gate around the Commander's shoulders and got the measurements right.","No innkeeper in Bellmire will take his coin. He leaves it anyway, under the cup.","The gravediggers say E3PO knows where every one of them is, by row.","The children's game is called Hold The Door. Nobody wants to be the raiders.","They say Bellmire has two bells: the one with no clapper, and the Commander.","They say the mason who cut E3PO's gravestone gave up and sold it as a doorstep.","The tally-man gave up counting the Commander's years and wrote 'yes'.","Mothers tell their children E3PO sleeps. The children have never seen it.","Bets on the wall: how many winters the Commander has stood. The pot has never paid.","Half the guard copies his stance. The other half copies his voice and gets caught.","The alehouse keeps a chair for E3PO. It has never been sat in and never been moved.","They say the gate was hung around him, not the other way about.","A trader asked who the statue by the gate was. The statue answered him.","Every guard captain since has been measured against him and come up short on purpose.","They say the scar misfires every spell in Bellmire except whatever keeps the Commander standing.","A priest offered him last rites once, hopefully. He declined, politely, for the ninth time.","Children dare each other to make the Commander laugh. One claims to have done it.","The guild post keeps his old spear on the wall. He keeps asking for it back.","They say if you are lost in the valley, walk until someone shouts at you. That is the road home.","Nobody remembers hiring him. The ledger simply starts with him in it.","The town has one true relic and it answers when you call it."]},"lord_intros":{"hollow_king":"The braziers in the hall burn blue, and then burn cold.","grubmother":"The floor is wet, and getting wetter.","rattling_host":"Somewhere ahead, something counts its own bones out loud.","nightwing":"Every torch on the floor gutters at once.","gravewyrm":"The dungeon was built around this, and it knows it.","ossuary_lord":"It has waited a very long time. A little longer is nothing.","pale_duchess":"A lady laughs somewhere ahead, very politely.","mourncoil":"Breath steams. Then the steam freezes."},"unique_intros":{"gnawbone":"The walls squeal.","mother_silk":"The threads across the doorway are new.","weeping_bowman":"A string twangs in the dark, and something weeps after it.","cinderjack":"Someone has been playing with the firepits.","kept":"A voice the guild knew calls a name the guild remembers."},"disasters":{"volcano":{"begin":"The mountain above the scar wakes - ash on the wind, and the sky goes copper.","during":["Ash falls on Bellmire; the sun is a dull coin behind the smoke.","The river runs grey, and the fish float up dead.","Cinders tick off the roof-tiles all night; nobody opens a shutter.","The crier reads the day's news through a cloth over his mouth.","The ash drifts into the grain store through a gap nobody knew was there.","Sheep come down off the high pasture coughing, and do not go back up.","The chapel bell rings muffled, packed with grey.","Children write their names in the ash on the shutters. By morning it has written over them.","A cart leaves two clean ruts in the grey, and nothing else does.","The guild post sells cloth masks and is out of them by noon.","Lamps are lit at midday; the copper sky gives nothing to work by.","Ash sits a finger deep on the chapel steps and is swept twice a day.","Grey settles on the market bread, and the bread sells anyway.","The high pasture is gone under ash; the shepherds bring everything down.","Ash falls like grey snow and the cookfires are put out to save the air.","The mountain speaks again and every bell in Bellmire answers it badly.","Carts queue at the Ford with everything a household can lift.","The water butts are skimmed twice a day and still run grey.","A roof goes in under the weight of its own ash, and nobody was under it.","The crier's voice carries badly; the ash eats it before the far side of the square.","The guild post weighs ash out of the grain and charges for honest weight.","Every doorstep is swept, and every doorstep is grey again by dusk.","The forge works blind, the smoke of its own making lost in the bigger smoke.","Bellmire counts the flasks early this week, because the lamps burn all day."],"pass":"The mountain settles. Ash greys every roof, but the air clears.","cost":"A buried harvest and sickened livestock; the worst-hit district must be rebuilt."},"fire":{"begin":"Fire in Craft Row - a forge banked wrong, and the wind unkind.","during":["The bucket line runs from the river; the Watch beats at the flames.","Smoke rolls over the square as the smiths' roofs go up.","Craft Row is a tunnel of heat; the Watch wets the next roof down and waits.","Somebody's apprentice runs back in for the tools and is dragged out again.","The wind turns, and the bucket line turns with it, cursing.","A roof-beam goes down and the whole square flinches.","They pull a smith off his own forge; he fights them the whole way out.","Sparks ride the night air toward the thatch, and every eye follows them up.","They pull down the shed between the forge and the next roof to starve it.","Buckets come up the line faster than hands can empty them.","A smith's tools glow in the ruin, too hot to carry for an hour.","Somebody counts heads in the square, twice, and then a third time.","The wind drops, and the bucket line gains a yard on it.","Soot comes off the Row and settles on the washing three streets away.","The chapel bell rings itself hoarse and nobody is spare to stop it.","They run a wet line of cloth along the next row and dare the fire to cross it.","A child is handed up the bucket line and over the heads to the far side.","The bucket line runs from the river to Craft Row and does not break.","A roof is pulled down on purpose, to stop the fire using it as a road.","Soot in the bread, soot in the ale, and the market sells both.","The smiths stand in the square with their tools and nowhere to put them.","The chapel bell rings for the line to change hands.","The guild post hands out wet sacking and writes down every one.","Somebody carries the ledgers out before the furniture, and is thanked for it."],"pass":"The fire is out. A row of workshops is char and cinder.","cost":"Buildings in one district burned down and rebuilt from nothing; the smiths sit idle until then."},"drought":{"begin":"No rain since the thaw. The river drops, and the wells go shy.","during":["The crops stand yellow and brittle in the field.","The queue at the well starts before dawn.","The mill-wheel stands still in a riverbed of stones.","Dust comes off the fields in sheets and settles on the market bread.","The well rope goes down further each morning and comes up lighter.","Dust walks the cart-track where the mud used to be.","The miller stops the wheel. There is no water to turn it.","Cattle are driven to the Ford and find it ankle-deep.","The Ford can be crossed dry-shod, and nobody is pleased about it.","Water is carted from upriver and sold by the bucket.","The fields crack into plates you could lift out whole.","The chapel prays for rain at every bell, and the bell is busy.","Thunder at dusk and no rain under it. That is the cruellest part.","The garden plots are given up so the grain can drink.","The river shows its bones at the Ford and the ferryman walks across.","Water is rationed by the bucket and counted by the chapel.","The fields crack open wide enough to lose a boot in.","The well-rope is spliced longer, twice.","Cattle are walked to the river and walked back thinner.","The millrace is a mud lane; the miller sits in his own doorway.","Dust comes off the market floor and settles on everything for sale.","The chapel is full, and nobody is pretending otherwise.","Water is rationed by the bucket, and the counting is done in public.","The grain is cut early and short, because waiting costs more than cutting."],"pass":"Rain, at last. The river climbs, and Bellmire drinks easy again.","cost":"A harvest cut to nothing and thinning livestock; morale sinks until the wells fill."},"famine":{"begin":"The barns are near bare, and spring is a long way off.","during":["Rations at the guild post; the thin get thinner.","A copper will not buy bread that is not there.","The guild post weighs every portion and still sends people away short.","Children are fed first, and the adults have agreed not to discuss it.","The barn is measured twice a day now, and the number never improves.","The guild post cuts the ration and does not meet anyone's eye.","Folk eat the seed grain, which is tomorrow eaten today.","A family leaves for downriver in the dark, so nobody has to say goodbye.","The tavern serves broth and calls it broth, which is honest of it.","Snares go out along every hedge and come back empty more often than not.","The guild post weighs a child's ration against a man's and gives both to the child.","Folk eat what the hens were owed, and the hens stop laying.","The market board is bare, and the stallholders stand behind it anyway.","Nobody talks about the dogs. There are fewer of them.","The grain is measured in front of witnesses now, every morning.","People eat the seed corn and do not discuss what that means for spring.","The chapel door stays open all night and the queue does not shorten.","Bread is weighed in front of the buyer, every loaf, no exceptions.","The seed corn is guarded, because eating it ends more than this winter.","The market has stalls and no goods; people come anyway, for the company.","A household gives up its laying hen and the street notices.","Soup from the chapel, thin and hot and gone in an hour.","The guild post lends against next year's harvest and charges for the doubt.","Nobody speaks of the stores above a murmur, as if loudness would spend them."],"pass":"The first harvest comes in, and Bellmire eats again.","cost":"The town shrinks as the weak are lost; no growth until the barns refill."},"sickness":{"begin":"A fever walks the homes. The apothecary names it, then runs short of cures.","during":["Doors chalked with a warning mark; the healers do not sleep.","The chapel bell tolls more than anyone likes.","The healers run out of simples before they run out of patients.","Market day is called off; the square has never looked bigger.","Doors are marked in chalk, and the chalk is running out.","The apothecary works the night through and brews water with a name on it.","The chapel keeps its lamps lit for the ones who will not see morning.","The Watch carry food to the marked doors and set it down without knocking.","The healers work in shifts and lose track of which shift is theirs.","The chapel sets out water for whoever is still walking.","Nobody shakes a hand in Bellmire this week.","They bury at dawn, in ones, with the fewest hands that will do.","The Ford turns travellers back, politely, with a spear held level.","A house goes quiet, and the chalk mark stays up a week past needing to.","Doors are marked in chalk and the marks are not argued with.","The apothecary works through the night and the queue is longer at dawn.","The Watch leaves bread at the marked doors and does not knock.","The quarantine holds at the Ford; the traders shout across the water.","The apothecary works through the night and writes down every flask.","Nobody shares a cup at market, and nobody has to be told twice.","A street is shut at both ends and fed over the barricade.","The chapel takes the worst cases, because it has the room and the roof.","Work stops in Craft Row - half the benches are empty and the other half are careful.","The crier reads the day's count from a distance, and the square keeps it."],"pass":"The fever burns itself out. Bellmire counts its dead and opens the windows.","cost":"The population falls, and a quarantine freezes trade and work while it lasts."},"hurricane":{"begin":"A great storm drives inland, and the sky turns the colour of a bruise.","during":["Roofs peel away; the river bursts its low banks.","Nobody walks the wall in this.","The gate bar is doubled and the horses are brought inside the hall.","Something large goes past the window sideways and nobody goes to look.","Thatch goes over the square in sheets, like a flock that forgot how.","The Watch rope themselves together to cross the open ground.","Every shutter in Bellmire is either barred or gone.","The river comes up the lane and knocks at the low doors.","The road lamps are taken in; there is nothing out there to hold them.","Rain comes sideways and finds every gap in every wall.","The chapel roof holds, which surprises the mason who built it.","Nobody sleeps, and everybody pretends to.","The orchard loses its oldest tree and half the fruit of the rest.","The gate stays shut. Whatever is outside can wait out the night.","Every shutter in Bellmire is barred and half of them are not enough.","The wind takes a roof whole and sets it down in the square, almost gently.","Nobody crosses the square. The square is not crossable.","Thatch leaves the roofs in sheets and is not seen again.","The river comes over the low bank with the wind pushing it.","A tree comes down across the west road and lies there all night.","Shutters hammer all night; nobody in the low district sleeps.","The market stalls are carried away whole and found in the fields.","The bucket line forms for water coming in, not going out.","The guild post's sign is taken off its hooks and never recovered."],"pass":"The storm blows through. Bellmire is sodden and battered, but standing.","cost":"Roofs and buildings torn across the town, fields flooded, and days of repair."},"tornado":{"begin":"A finger of wind drops out of the storm and walks toward the town.","during":["It takes a barn whole and sets it down in splinters.","Mind the sky - it has not lifted yet.","Carts are roped to posts and the posts are not reassuring.","It walks the far field twice and turns, and the whole town watches the turn.","It takes the fence line, the hay cart and the cart's horse, in that order.","The sound arrives before the wind does, and nobody forgets it.","Folk go flat in the ditches and hold on to the grass.","A door lands in the square. Nobody owns it.","It crosses the river and takes a column of water up with it.","The pens are opened on purpose - better scattered than roofed.","It walks the hedge line, and afterward the hedge is simply not there.","The air goes green and very quiet, and then it does not.","Folk count it across the fields the way they count thunder.","It touches the mill yard, leaves the mill, and takes the yard.","It walks the fields like something deciding, and the town watches it decide.","The cellars fill with people and the bell is left to ring alone.","A barn goes up and does not come down anywhere anyone can find.","The wind takes one house and leaves its neighbour's shutters latched.","Livestock is scattered over a mile of open country.","A cart is found in a tree and left there, because nobody can reach it.","The lane it cut runs straight through the town and out the other side.","Thatch, hurdles and a chapel bench come down in the next field.","A wall stands with no house behind it, and does not fall for days.","Nobody counts the sheep until the wind has fully gone."],"pass":"The wind lifts and is gone, leaving a straight scar of wreckage.","cost":"A random line of buildings flattened, and livestock scattered or lost."},"earthquake":{"begin":"The ground rolls - the scar shudders, and so does everything above it.","during":["Walls crack; the clapperless bell swings and almost rings.","Aftershocks, and nobody trusts a roof.","The well comes up muddy and the masons will not say why yet.","Every door in Bellmire sticks, and one wall leans that did not lean before.","The bell with no clapper rings anyway, and nobody finds that funny tonight.","Masonry comes off the gatehouse in the aftershock.","Folk sleep in the square rather than under their own beams.","A crack opens along the chapel floor and runs out under the door.","The masons walk the walls with chalk, marking what cannot be slept under.","The scar groans, and the delvers come up and stay up.","A chimney comes down into the lane and misses everybody.","The well water tastes of stone for three days.","Nobody rings the bell on purpose; it manages on its own.","The gate will not shut square, and the garrison props it.","The ground moves twice more while they are still counting the first.","Masons walk the walls tapping stone and shaking their heads.","Nobody sleeps indoors. The square is full of blankets.","Aftershocks come at no useful interval; nobody sleeps indoors.","The masons chalk every crack and come back to see if it has grown.","A well goes dry, and a different well comes up muddy.","The scar's mouth is wider this morning than it was last night.","The square fills with households and their bedding, by choice.","The bell with no clapper rings in its frame and unsettles everyone.","A wall is propped with timber and the timber is watched."],"pass":"The shaking stops. Bellmire checks its walls, and its dead.","cost":"Walls and buildings cracked or down town-wide; the scar may gape a little deeper."},"meteor":{"begin":"A star falls - too slow, too bright - and comes down past the fields.","during":["The impact lights the night; the ground is scorched for a mile.","Something glitters in the new crater, and it hums like the scar.","Carters give the crater a wide berth; the horses refuse it outright.","The scar hums all night, as if something answered.","The orchard burns in rows, tree after tree, very neatly.","The crater glows all night and hums if you stand too close.","The first fool down the crater wall comes back up with a fistful of glass.","The guild post has a man on the crater by morning, counting.","The crater throws a light on the clouds you could read by.","Grass fires walk the field edge and are beaten out with coats.","The guild post puts a guard on the glass and a price on it by noon.","Two delvers go down the crater wall on a rope, for a wager.","Every dog in Bellmire faces the crater and will not be turned.","The stone cools slowly, and the night smells of struck flint.","The crater glows for three nights and nobody will sleep near it.","Scavengers come to the crater and the Watch turns them back at the rim.","Glass lies in the crater, and the glass remembers the heat.","The crater smokes for days and nobody will say it is safe.","Scarglass is picked out of the rim by hand and weighed at the guild post.","The orchard burns in rows, neatly, as if planted that way.","A watch is set on the crater, less for the town than for the thieves.","Everything near the fall is warm to the touch and stays warm.","Traders arrive early, asking about glass before asking about the dead.","The crier reads the toll, then the price of scarglass, in that order."],"pass":"The fires burn out. A crater smokes where the orchard used to stand.","cost":"An outlying district or the orchard is destroyed - but the crater yields scarglass worth a fortune."},"scarstorm":{"begin":"The scar flares, and wild magic rolls up out of the dungeon mouth and over the town.","during":["Every spell cast in Bellmire goes wrong; the lamps burn strange colours.","The livestock speak for a heartbeat, and the well runs uphill.","The apothecary corks everything and sits on the box.","A delver's lamp burns green, and the dark leans in to look.","A door opens onto a different room than it did this morning.","Every candle in the chapel burns blue and will not be put out.","A cooper's barrel fills itself with river water, and nobody touches it.","The casters sit it out, hands in their laps, useless and insulted.","Shadows fall the wrong way across the square, and nobody mentions it.","A hedge flowers out of season, all at once, and then forgets.","The chapel bell rings a note that is not one of its own.","A delver's blade goes cold enough to burn the hand holding it.","The crier reads his notice twice and it says different things.","Birds fly one circle over the scar and will not break it.","The scar breathes out, and the air in the lower streets goes wrong.","Lamps burn purple at the scar's edge and the Watch pulls back a street.","Nothing comes out of the scar. That is the part that frightens people.","No spell holds while it lasts; casters stand in the square with nothing to offer.","A house is a slightly different shape by morning and will not be argued with.","The guild post's weights read differently every hour and are set aside.","Somebody comes out of the storm scar-touched, and it is not yet clear which way.","The bell with no clapper rings clean, once, and will not do it again.","The lamps burn colours and the oil is spent at twice the rate.","Nobody walks near the scar's mouth, and the watch is doubled anyway."],"pass":"The scar quiets. The magic settles, mostly, and the town tallies what changed.","cost":"Spellcasters are useless while it lasts; random buildings warp, and a few folk are scar-touched for good or ill."},"flood":{"begin":"The thaw comes all at once. The river climbs the banks, and keeps climbing.","during":["The low district is ankle-deep, then knee-deep.","The Ford is gone under brown water; no crossing today.","The grain store is moved up a floor by every pair of hands in town.","Boats in the lane where carts should be, and someone fishing out of a window.","The Ford is gone - only the posts show where it was.","Stores go up to the Keep a sack at a time, through knee-deep water.","A hen coop sails past the chapel with the hens still aboard.","The Watch mark the water on the gatepost each hour. The marks keep climbing.","The chapel keeps the pews stacked and the floor under an inch of river.","The low district moves upstairs and lives there.","The bridge posts are all that show of the road to the Ford.","A cellar gives up its stores in a slow brown stream.","Fish are taken in the lane, which is funny for a day and then is not.","The gatehouse step is the measure now, and everybody checks it.","The lower streets take water to the knee and then to the waist.","Boats work the market square, which nobody finds funny.","Grain goes up to the Keep sack by sack, by a line that does not stop.","The low district is moved upstairs, one household helping the next.","The grain store's bottom row is lost and counted as lost out loud.","Boats work the lanes where carts worked last week.","The traders stand on the far bank and shout their prices across.","The chapel floor is under water and the service is held on the steps.","The well is fouled by the river and roped off for drinking.","Everything that can be lifted has been lifted; the rest is being watched."],"pass":"The water drops back, leaving mud in every doorway - but the town held.","cost":"Riverside buildings and stores ruined; the Ford and its trade shut until the river falls."},"blight":{"begin":"A black rot is in the grain - it came up in one field and did not stop there.","during":["Whole rows are cut and burned before the rot can walk to the next field.","The miller turns away sack after sack, and says nothing, which is worse.","The rot shows black at the stalk and climbs from there.","Field hands burn their gloves at the end of the day, just in case.","Bread goes up a copper, then another, and the baker stops apologising.","The guild post buys grain from downriver at a price it will not read aloud.","A farmer stands at his field edge all afternoon doing nothing at all.","They plough the worst acre under and sow nothing in it.","The smoke of burning rows hangs over the fields all week.","Seed grain is set aside and guarded, because next year is in the sack.","A field is written off at noon and burned by dusk.","The baker mixes in what he can and calls it bread, generously.","Hands are scrubbed at the field gate before anyone walks home.","Downriver grain comes up the road under guard and is counted twice.","The fields go black in patches that spread while you watch them.","They burn one field to save the next and argue about it for years after.","The apothecary tests the grain and will not say what she found.","Infected fields are burned, deliberately, with the whole town watching.","Grain prices climb at the market and are read out anyway.","The seed corn is locked and a guard is put on the lock.","Traders come upriver with grain and name a price nobody likes.","The reeve walks the rows daily, marking what is still clean.","Bread is smaller this week and will be smaller next week.","The stores are measured twice, by two different people, in public."],"pass":"The blight burns out at the field edge. What is left of the harvest comes in early.","cost":"Most of the standing harvest is lost; food prices climb and the stores do not refill this season."},"coldsnap":{"begin":"The cold comes early and hard - the Ford freezes over in a night.","during":["Firewood costs what wine cost last week, and the queue for it is longer.","The Watch walk in pairs now, because one man alone stops moving.","The Ford is a road now, and nobody trusts it enough to use it.","The forge is the warmest room in Bellmire, and the smith charges for the privilege.","Water freezes in the bucket between the well and the door.","Caravans turn back at the hill, and the market has empty boards.","They bring the lambs indoors and share the floor with them.","The chapel takes in whoever has no fire, and the chapel is full.","Nails of ice hang off every eave, long enough to be dangerous.","The well head is thawed each morning with a kettle.","One oven bakes for the whole street, to save the wood.","The garrison drills indoors and complains, which keeps it warm.","Cattle breath stands in the byre like smoke that will not leave.","Two nights running, nobody goes further than the next door.","The river takes a skin of ice and the ferry stops for the first time in years.","Firewood doubles in price by noon and the Watch stands over the woodpile.","The old and the young are moved into the Keep hall together.","Livestock is brought indoors and lives among the household.","Building stops: the mortar will not set and nobody pretends it will.","The Ford is ice, so the trade is ice too - nothing moves either way.","Firewood is rationed and the rationing is read out by the crier.","The wells are broken open with a mallet each morning.","Work in Craft Row halts; the forge is the warmest room in Bellmire.","The chapel is full because the chapel is heated."],"pass":"The thaw comes. The Ford runs again, and Bellmire counts who it kept.","cost":"Livestock lost and work stopped: building, trade and the fields all halt until the thaw."}},"events":{"bandit_camps":[{"name":"The Gallows Oak","leader":"Red Harl","appears":"Red Harl's lot have taken the west road. No caravan reaches the Ford unbled.","while":"Trade caravans are robbed; the market runs short and prices climb.","cleared":"Red Harl hangs from his own Gallows Oak. The west road is open again."},{"name":"The Mire Nest","leader":"Sedge the Toll","appears":"Sedge the Toll holds the fen path and taxes everyone who is not her.","while":"Every trader by the fen pays Sedge first; the town's cut shrinks.","cleared":"Sedge the Toll pays her own toll at last. The fen path clears."},{"name":"The Burnt Mill","leader":"Cob Ashfoot","appears":"Cob Ashfoot's raiders have holed up in the burnt mill, firing a field a night to keep the town afraid.","while":"A field burns most nights; harvest and morale both drop.","cleared":"The Burnt Mill burns one last time. Cob Ashfoot runs, and keeps running."},{"name":"Scarside Camp","leader":"The Weasel","appears":"The Weasel's crew squat at the scar's edge, robbing the delvers who climb out.","while":"Returning delvers are waylaid; their gold and loot never reach Bellmire.","cleared":"Scarside Camp is cleared. Delvers come up to friends now, not knives."},{"name":"The Drover's Rest","leader":"Juno Blackhand","appears":"Juno Blackhand has taken the drovers' inn on the north road and left the sign hanging.","while":"Livestock driven to market never arrive; the pens stand empty on market day.","cleared":"The Drover's Rest changes hands again. Juno Blackhand does not leave with it."},{"name":"The Quarry Camp","leader":"Old Peck","appears":"Old Peck's lot have moved into the worked-out quarry and are selling Bellmire its own stone back.","while":"Cut stone and lime go missing; building in town stalls for want of either.","cleared":"The Quarry Camp is emptied out. The stone comes down the road at an honest price."},{"name":"The Lampless Road","leader":"Wick Harrow","appears":"Wick Harrow's crew put out the road lamps one by one, and work the dark they made.","while":"Nobody travels after dusk; the night trade stops and the Ford shuts early.","cleared":"The lamps burn the whole length of the road again. Wick Harrow walks it in chains."},{"name":"The Weir Camp","leader":"Marek Two-Coin","appears":"Marek Two-Coin has fortified the old weir and charges the river for using itself.","while":"River trade pays twice; the Ford's takings fall while the weir stands.","cleared":"The Weir Camp is broken open. The river runs toll-free again."},{"name":"The Ashen Barrow","leader":"Grell the Patient","appears":"Grell the Patient has dug into the barrow mound and watches the market road out of it.","while":"Market-bound carts are picked off; stalls stand empty on market day.","cleared":"The barrow is emptied of the living. Grell the Patient stays behind in it."},{"name":"The Hollow Stand","leader":"Ivett Crow","appears":"Ivett Crow's archers hold the wood where the road bends, and they do not miss twice.","while":"Couriers and tax carts are lost at the bend; news and coin both arrive late or not at all.","cleared":"The Hollow Stand is cleared. The road bends past nothing worse than trees."},{"name":"The Shepherd's Fold","leader":"Dunn Halfhand","appears":"Dunn Halfhand has taken the high fold and keeps whatever flock he finds in it.","while":"Wool and mutton stop coming down off the hills; the cloth trade and the tavern both feel it.","cleared":"The Fold changes shepherd. Dunn Halfhand leaves with a quarter hand and no flock."},{"name":"The Lime Kiln","leader":"Mad Tibb","appears":"Mad Tibb's crew sleep in the lime kiln and come out white as ghosts to work the road.","while":"Lime and mortar never reach the masons; whatever Bellmire is building stops where it stands.","cleared":"The kiln is cold and empty. Mad Tibb is walked back to town the colour of chalk."},{"name":"The Sunken Boat","leader":"Hask the Ferryman's Brother","appears":"Hask has swamped a boat across the narrows and robs whoever stops to haul it clear.","while":"The narrows are blocked; barges wait, and what they carry spoils in the hold.","cleared":"The Sunken Boat burns to the waterline. Hask swims for the far bank and is met on it."},{"name":"Blackbrier Hide","leader":"Iver Cutgrass","appears":"Iver Cutgrass has cut a camp into the blackbrier where no horse can follow.","while":"Foot traffic on the south track is robbed; the smaller traders stop coming at all.","cleared":"Blackbrier Hide is burned out. The south track carries packs again."},{"name":"The Charcoal Camp","leader":"Mother Soot","appears":"Mother Soot and her burners hold the charcoal stands above the wood.","while":"Charcoal runs short; the forge works half days and smith prices climb.","cleared":"The Charcoal Camp is taken. The forge burns a full day again."},{"name":"The Rook Field","leader":"Carrow Dace","appears":"Carrow Dace has set his crew in the rook field, where the crop stands tall enough to hide a man.","while":"Harvest carts are stopped at the field edge; grain comes in short at the measure.","cleared":"The Rook Field is cut early and cleared. The measure fills honestly again."},{"name":"The Salt Road Camp","leader":"Tam Pell","appears":"Tam Pell has taken the salt road where it narrows, and charges the narrow part.","while":"Salt and cured stores arrive dear; preserved food in town spoils faster for want of it.","cleared":"The Salt Road Camp is broken. Salt comes in at the old price."},{"name":"The Beekeeper's Hut","leader":"Hollis Grin","appears":"Hollis Grin has turned the beekeeper out of his own hut and kept the bees.","while":"Honey, wax and candle stock dry up; the apothecary brews slower without wax.","cleared":"Hollis Grin is stung out of the hut. The beekeeper goes back to his bees."},{"name":"The Dry Ferry","leader":"Nils Odd","appears":"Nils Odd has taken the old ferry landing upriver and runs his own crossing at his own rates.","while":"Half the river trade goes around Bellmire entirely; the Ford takes less each day.","cleared":"The Dry Ferry is sunk at its moorings. The river comes back to the Ford."},{"name":"The Ox Road Camp","leader":"Bram Sallow","appears":"Bram Sallow holds the ox road and takes a beast from every team that passes.","while":"Hauling costs double; stone, timber and grain all arrive late and dear.","cleared":"The Ox Road Camp is cleared out. The teams come in whole."}],"monster_camps":[{"name":"The Bone Field","of":"risen dead","appears":"Something below spat up its dead, and they are gathering in the north field.","while":"The dead multiply nightly and gnaw at the outlying farms.","cleared":"The Bone Field is put down. The north field is only a field again."},{"name":"The Slime Warren","of":"slimes","appears":"A slime nest has taken the old quarry, and it doubles every night it is left alone.","while":"The quarry is lost, and the nest creeps toward the homes.","cleared":"The Slime Warren is burned out. The quarry stops twitching."},{"name":"The Belltower Roost","of":"cave bats","appears":"A roost of cave bats has taken the bell-tower; they foul the wells and spook every horse in town.","while":"The wells need watching, and the beasts are restless while they hang there.","cleared":"The Roost is cleared. The bell-tower is quiet. Almost."},{"name":"The Sedge Mound","of":"bog frogs","appears":"The fen has gone loud - bog frogs the size of dogs have mounded up in the sedge.","while":"The fen path is lost, and the fishers work the river or not at all.","cleared":"The Sedge Mound is cleared. The fen is merely unpleasant again."},{"name":"The Silk Barn","of":"cave spiders","appears":"A barn on the south road has gone white - cave spiders came up out of the scar and took it.","while":"The south road is spun shut; nothing moves past the barn after dusk.","cleared":"The Silk Barn burns. The south road is clear, and nothing is watching it."},{"name":"The Gnaw Pits","of":"scar rats","appears":"Scar rats have got into the old root pits, and they are not the size rats are meant to be.","while":"Stores are gnawed through nightly; what the town keeps, it keeps losing.","cleared":"The Gnaw Pits are flooded out. The stores hold their weight overnight again."},{"name":"The Drowned Pen","of":"bog lurkers","appears":"Something came up the flooded ditch and has settled in the stock pen at the water's edge.","while":"Livestock go a head a night, and the herds will not drink near the water.","cleared":"The Drowned Pen is cleared and the ditch dug out. The herds drink again."},{"name":"The Candle Wood","of":"scar wisps","appears":"Lights have taken the coppice east of town, and they walk the paths at dusk like a procession.","while":"The woodcutters refuse the coppice; firewood and charcoal run short in town.","cleared":"The Candle Wood goes dark. The cutters go back in by daylight, then by dusk."},{"name":"The Kiln Nest","of":"fire beetles","appears":"Fire beetles have bored into the brick kiln and glow in its mouth all night.","while":"The kiln cannot be fired; brick, tile and pottery all stop at once.","cleared":"The Kiln Nest is smoked out. The kiln fires clean, and the tiles come again."},{"name":"Gibbet Hill","of":"risen dead","appears":"The hanged have got up off Gibbet Hill, and they keep to the road they knew.","while":"The north road belongs to the dead after dark; nothing travels it and the post stops.","cleared":"Gibbet Hill is put down and the ground turned. The road is only a road."},{"name":"The Granary Swarm","of":"scar wasps","appears":"A nest the size of a cart hangs in the granary roof, and this is not the season for it.","while":"The granary cannot be worked; stored grain spoils where it stands.","cleared":"The Granary Swarm is burned out. The grain is turned, and most of it is saved."},{"name":"The Stone Yard","of":"cave trolls","appears":"Two things out of the deep have taken the mason's yard and are eating the mortar.","while":"Cut stone and finished work are wrecked nightly; every build in town slows.","cleared":"The Stone Yard is retaken. The masons find their tools, and a troll's tooth in a block."},{"name":"The Thornwake","of":"scar hounds","appears":"Something hound-shaped dens in the thornwake, and it hunts in a pack now.","while":"Flocks and herds are taken nightly; the pens empty and the drovers will not go out.","cleared":"The Thornwake is cleared. The flocks sleep out again."},{"name":"The Reed Hollow","of":"bog leeches","appears":"The reed hollow has gone thick with leeches the size of a forearm.","while":"Nobody will cut reed or draw water there; thatch and water both come from further off.","cleared":"The Reed Hollow is drained and burned. The reed cutters go back down."},{"name":"Potter's Field","of":"risen dead","appears":"The nameless graves in Potter's Field are opening from the inside.","while":"The dead wander in from the south each night; the gate shuts an hour earlier.","cleared":"Potter's Field is put down and dug over. The south gate keeps its hours."},{"name":"The Rookery Barn","of":"grave moths","appears":"Grave moths have taken the rookery barn, and the cloud of them is visible from the wall.","while":"Stored cloth, wool and grain sacks are eaten through; the market loses a stall a week.","cleared":"The Rookery Barn is smoked out. What is stored stays stored."},{"name":"The Split Stone","of":"cave centipedes","appears":"Something long and many-legged is coming up through the Split Stone, one after another.","while":"The quarry stands idle; building work in town stops where the stone runs out.","cleared":"The Split Stone is sealed and the nest burned. The quarry rings again."},{"name":"The Hog Mire","of":"mire boars","appears":"The mire boars have grown wrong and bold, and they hold the lower fields.","while":"The lower fields are rooted up; this season's crop is halved where they walk.","cleared":"The Hog Mire is cleared, and the town eats well for a week."},{"name":"The Chalk Pit","of":"bone crawlers","appears":"The chalk pit has filled with crawling things made mostly of other things' bones.","while":"Lime and chalk stop coming up; mortar runs out and the masons down tools.","cleared":"The Chalk Pit is cleared to the floor. The masons take up tools again."}],"wandering_boss":{"name":"The Scarred Lord","appears":"A lord has climbed out of the scar and walks the open country - and it has grown to match the town it hunts.","while":"It razes an outlying farm each day it roams, and draws the dark along behind it.","cleared":"The wandering lord falls in the open field. Bellmire drags the body home as proof.","note":"Scales to the town's level: a lesser lord early, a greater lord once Bellmire is a city. Reuse the eight canon lords; never a new one."}}};
+
+// chapter tabs: id, label, icon (from ICON_SET), builder.
+const LORE_CHAPTERS = [
+  { id: "town",    label: "Town life",     icon: "town",  build: loreTownLife },
+  { id: "growth",  label: "The town's growth", icon: "town",  build: loreGrowth   },
+  { id: "e3po",    label: "Commander E3PO", icon: "shield", build: loreE3po    },
+  { id: "lords",   label: "The dark lords", icon: "raid",  build: loreLords   },
+  { id: "tales",   label: "Tales of the valley", icon: "lore", build: loreTales  },
+];
+let loreTab = "town";
+
+function loreLines(arr) {
+  // Render a list of lore strings as plain paragraphs. Every string goes through
+  // el()/textContent - the hostile-name canary in ?mock=lore must render as text.
+  const box = el("div", "lore-lines");
+  for (const s of (Array.isArray(arr) ? arr : [])) {
+    if (typeof s !== "string" || !s) continue;
+    box.append(el("p", "lore-line", s));
+  }
+  return box;
+}
+
+function loreSubhead(text, iconId) {
+  const h = el("h3", "lore-sub");
+  if (iconId) h.append(icon(iconId, "lore-ic"));
+  h.append(el("span", "lore-sub-t", text));
+  return h;
+}
+
+function loreTownLife(box, src) {
+  const tl = (src && src.town_life) || {};
+  const sets = [
+    { key: "crier",  label: "The crier's calls" },
+    { key: "market", label: "At the market" },
+    { key: "growth", label: "As the town grows" },
+  ];
+  for (const g of sets) {
+    const lines = Array.isArray(tl[g.key]) ? tl[g.key] : [];
+    if (!lines.length) continue;
+    box.append(loreSubhead(g.label, "town"));
+    box.append(loreLines(lines));
+  }
+}
+
+function loreGrowth(box, src) {
+  const tiers = (src && src.growth_tiers && Array.isArray(src.growth_tiers.tiers))
+    ? src.growth_tiers.tiers : [];
+  if (!tiers.length) { box.append(el("p", "lore-line", "The town has not yet named its stages.")); return; }
+  const ol = el("ol", "lore-growth");
+  for (const t of tiers) {
+    if (!t || typeof t !== "object") continue;
+    const li = el("li", "lore-tier");
+    const head = el("div", "lore-tier-head");
+    head.append(icon("town", "lore-ic"));
+    head.append(el("span", "lore-tier-name", t.name || "a stage"));
+    li.append(head);
+    if (t.crier) li.append(el("p", "lore-line crier", t.crier));
+    if (t.see)   li.append(el("p", "lore-line see", t.see));
+    ol.append(li);
+  }
+  box.append(ol);
+}
+
+function loreE3po(box, src) {
+  const e = (src && src.e3po) || {};
+  const sets = [
+    { key: "intro",     label: "When the Commander first speaks" },
+    { key: "says",      label: "Things the Commander says" },
+    { key: "town_talk", label: "The Commander on the town" },
+  ];
+  for (const g of sets) {
+    const lines = Array.isArray(e[g.key]) ? e[g.key] : [];
+    if (!lines.length) continue;
+    box.append(loreSubhead(g.label, "shield"));
+    box.append(loreLines(lines));
+  }
+}
+
+function loreLords(box, src) {
+  const li = (src && src.lord_intros) || {};
+  const ui = (src && src.unique_intros) || {};
+  const groups = [
+    { label: "The deep lords", obj: li },
+    { label: "The named ones", obj: ui },
+  ];
+  for (const g of groups) {
+    const keys = Object.keys(g.obj || {});
+    if (!keys.length) continue;
+    box.append(loreSubhead(g.label, "raid"));
+    const list = el("div", "lore-lords");
+    for (const k of keys) {
+      const text = g.obj[k];
+      if (typeof text !== "string" || !text) continue;
+      const row = el("div", "lore-lord");
+      const nm  = el("div", "lore-lord-name");
+      nm.append(icon("raid", "lore-ic"));
+      // key is a page-owned lookup key, but render as text anyway (never markup).
+      nm.append(el("span", "lore-lord-key", String(k).replace(/_/g, " ")));
+      row.append(nm);
+      row.append(el("p", "lore-line", text));
+      list.append(row);
+    }
+    box.append(list);
+  }
+}
+
+function loreTaleBlock(name, stages, iconId) {
+  const card = el("article", "lore-tale");
+  const head = el("h4", "lore-tale-head");
+  head.append(icon(iconId || "lore", "lore-ic"));
+  head.append(el("span", "lore-tale-name", name));
+  card.append(head);
+  for (const stg of stages) {
+    if (!stg || !stg.text) continue;
+    const row = el("p", "lore-line " + stg.cls);
+    row.append(el("span", "lore-stage", stg.label + " "));
+    row.append(document.createTextNode(stg.text));
+    card.append(row);
+  }
+  return card;
+}
+
+function loreTales(box, src) {
+  const dis = (src && src.disasters) || {};
+  const evs = (src && src.events) || {};
+  // Disasters: begin/during/pass/cost.
+  const dKeys = Object.keys(dis);
+  if (dKeys.length) {
+    box.append(loreSubhead("Disasters", "raid"));
+    const grid = el("div", "lore-tales");
+    for (const k of dKeys) {
+      const d = dis[k] || {};
+      const during = Array.isArray(d.during) ? d.during.join(" ") : (d.during || "");
+      const stages = [
+         { label: "Begins:",  text: d.begin,  cls: "stg-begin" },
+         { label: "During:",  text: during,   cls: "stg-during" },
+         { label: "Passes:",  text: d.pass,   cls: "stg-pass" },
+         { label: "Cost:",    text: d.cost,   cls: "stg-cost" },
+      ];
+      grid.append(loreTaleBlock(String(k).replace(/_/g, " "), stages, "raid"));
+    }
+    box.append(grid);
+  }
+  // Bandit camps / monster camps: appears/while/cleared.
+  for (const [key, label, ic] of [["bandit_camps", "Bandit camps", "raid"], ["monster_camps", "Monster camps", "fight"]]) {
+    const list = Array.isArray(evs[key]) ? evs[key] : [];
+    if (!list.length) continue;
+    box.append(loreSubhead(label, ic));
+    const grid = el("div", "lore-tales");
+    for (const c of list) {
+      if (!c || typeof c !== "object") continue;
+      const title = (c.name ? c.name : "a camp") + (c.leader ? " - " + c.leader : "") + (c.of ? " (" + c.of + ")" : "");
+      const stages = [
+        { label: "Appears:", text: c.appears, cls: "stg-begin" },
+        { label: "While:",   text: c["while"], cls: "stg-during" },
+        { label: "Cleared:", text: c.cleared, cls: "stg-pass" },
+      ];
+      grid.append(loreTaleBlock(title, stages, ic));
+    }
+    box.append(grid);
+  }
+  // Wandering boss: a single block.
+  const wb = evs.wandering_boss;
+  if (wb && typeof wb === "object") {
+    box.append(loreSubhead("The wandering boss", "death"));
+    const stages = [
+      { label: "Appears:", text: wb.appears, cls: "stg-begin" },
+      { label: "While:",   text: wb["while"], cls: "stg-during" },
+      { label: "Cleared:", text: wb.cleared, cls: "stg-pass" },
+      { label: "Note:",    text: wb.note,    cls: "stg-cost" },
+    ];
+    box.append(loreTaleBlock(wb.name || "the wanderer", stages, "death"));
+  }
+}
+
+function renderLore() {
+  const stamp = $("loreStamp");
+  if (stamp) { stamp.textContent = "frozen from the game's own words (" + LORE_SRC_SHA + ", " + LORE_SRC_DATE + ")"; }
+  const chipBox = $("loreChips");
+  if (chipBox && !chipBox.firstChild) {
+    for (const c of LORE_CHAPTERS) {
+      const btn = el("button", "chip", c.label);
+      btn.setAttribute("type", "button");
+      btn.setAttribute("role", "tab");
+      btn.dataset.tab = c.id;
+      btn.addEventListener("click", () => { loreTab = c.id; renderLore(); });
+      chipBox.append(btn);
+    }
+  }
+  // mark selected chip
+  if (chipBox) for (const b of chipBox.children) {
+    const on = b.dataset && b.dataset.tab === loreTab;
+    b.classList.toggle("on", !!on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  }
+  // Chapter body
+  const body = $("loreBody");
+  if (!body) return;
+  body.textContent = "";    // wipe; every child below is built with el().
+  const src = (MOCK === "lore") ? LORE_FROZEN_MOCK : LORE_FROZEN;
+  const ch  = LORE_CHAPTERS.find(c => c.id === loreTab) || LORE_CHAPTERS[0];
+  try { ch.build(body, src); }
+  catch (e) { body.append(el("p", "lore-line", "A chapter could not be drawn.")); }
+}
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;
@@ -1748,6 +1962,68 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; pa
   sec.addEventListener("focusout", (e) => { if (!sec.contains(e.relatedTarget)) leave(); });
 })();
 
+// ---------------------------------------------------------------- H13 tabs
+// No-scroll, tabbed layout: one section at a time. The viewer picks with a nav
+// button and the chosen panel's `.active` class makes it visible (see style.css).
+//
+// Storage is per-browser and best-effort: the last-picked tab id is kept in
+// localStorage under TAB_KEY. Every READ goes through ctrlStrip + a 25-char cap
+// and must match TABS (a page-authored whitelist) before it decides anything.
+// The stored value is NEVER used as a URL, href, src, selector, query parameter
+// or style - only to look up a known id in TABS. In a private window (storage
+// throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
+const TABS = ["boards","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
+const TAB_KEY = "bellmire.tab";
+function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
+function getStoredTab() {
+  try { const v = cleanTab(localStorage.getItem(TAB_KEY) || ""); return TABS.indexOf(v) >= 0 ? v : ""; }
+  catch (e) { return ""; }
+}
+function storeTab(id) {
+  try { if (TABS.indexOf(id) >= 0) localStorage.setItem(TAB_KEY, id); } catch (e) {}
+}
+function setActiveTab(id) {
+  if (TABS.indexOf(id) < 0) id = TABS[0];
+  for (const t of TABS) {
+    const tab = $("tab-" + t);
+    const panel = $(t);
+    const on = (t === id);
+    if (tab) { tab.setAttribute("aria-selected", on ? "true" : "false"); tab.tabIndex = on ? 0 : -1; }
+    if (panel) { if (on) panel.classList.add("active"); else panel.classList.remove("active"); }
+  }
+  storeTab(id);
+}
+(function wireTabs() {
+  const navEl = $("tabs");
+  if (!navEl) return;
+  navEl.addEventListener("click", (e) => {
+    const b = e.target && e.target.closest ? e.target.closest("button[role='tab']") : null;
+    if (!b || !navEl.contains(b)) return;
+    e.preventDefault();
+    const id = cleanTab(b.getAttribute("data-tab") || "");
+    if (TABS.indexOf(id) >= 0) setActiveTab(id);
+  });
+  navEl.addEventListener("keydown", (e) => {
+    const cur = e.target;
+    if (!cur || cur.getAttribute == null || cur.getAttribute("role") !== "tab") return;
+    const i = TABS.indexOf(cleanTab(cur.getAttribute("data-tab") || ""));
+    if (i < 0) return;
+    let j = -1;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % TABS.length;
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + TABS.length) % TABS.length;
+    else if (e.key === "Home") j = 0;
+    else if (e.key === "End") j = TABS.length - 1;
+    if (j < 0) return;
+    e.preventDefault();
+    setActiveTab(TABS[j]);
+    const next = $("tab-" + TABS[j]);
+    if (next) next.focus();
+  });
+  // ?open=1 opens the first hero's sheet; land on Heroes so the opened sheet is visible.
+  const initial = (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  setActiveTab(initial);
+})();
+
 load();
 setInterval(load, REFRESH_MS);
 setInterval(showStatus, 15000);
@@ -1755,6 +2031,20 @@ setInterval(showStatus, 15000);
 // ---------------------------------------------------------------- test hooks
 // Local only (?mock=...), harmless: they stand in for data the town has not
 // published yet. The hostile name is deliberate - it must render as literal text.
+// ?mock=lore: the hostile-name canary at the start of the crier list. The lore
+// bundle is page-authored, but lore_lines.json CAN carry future viewer-shaped text,
+// so this proves renderLore() escapes an attacker string before it reaches the DOM.
+const LORE_FROZEN_MOCK = (function () {
+  // shallow clone + splice in a hostile line; LORE_FROZEN itself is untouched.
+  const c = Object.assign({}, LORE_FROZEN);
+  c.town_life = Object.assign({}, LORE_FROZEN.town_life);
+  c.town_life.crier = ["<img src=x onerror=alert(1)>"].concat(LORE_FROZEN.town_life.crier || []);
+  c.lord_intros = Object.assign({}, LORE_FROZEN.lord_intros, {
+    "<img src=x onerror=alert(1)>": "A hostile key must render as text in the lord list.",
+  });
+  return c;
+})();
+
 const MOCK_CHRONICLE = [
   { t: "death", s: "Grimhollow the Knight fell on floor 7, run through by a bone-knight.", at: new Date(Date.now() - 2 * 60000).toISOString() },
   { t: "fight", s: "<img src=x onerror=alert(1)> struck a cave troll for 14 and lived to say so.", at: new Date(Date.now() - 9 * 60000).toISOString() },
@@ -1846,3 +2136,129 @@ function withMock(p) {
   }
   return out;
 }
+
+
+// ---------------------------------------------------------------- H13 tabs
+// A no-scroll layout: the existing <nav>'s anchors become tab buttons that
+// show one section at a time, so a viewer does not scroll one page end to
+// end. Purely a layout rework (docs/WORK_PLAN H13) - NO new data, NO new
+// fetch, NO CSP change, NO snapshot string reaches the DOM through this
+// code. Every id below is a page-owned constant taken from the nav we
+// author ourselves; a saved choice from localStorage is validated against
+// that same whitelist before use and is NEVER used as a URL, selector or
+// innerHTML. Reduced-motion is honoured because no transitions are added.
+function setUpTabs() {
+  const navEl = document.querySelector("nav");
+  if (!navEl) return;
+  const anchors = Array.from(navEl.querySelectorAll('a[href^="#"]'));
+  if (!anchors.length) return;
+
+  // Whitelist built from THIS page's own nav + sections; nothing else is ever
+  // a candidate tab. A href whose body is not a plain id, or whose target is
+  // not an actual <section>, is dropped.
+  const TABS = [];
+  for (const a of anchors) {
+    const id = String(a.getAttribute("href") || "").replace(/^#/, "");
+    if (!id || !/^[a-zA-Z][a-zA-Z0-9_-]{0,24}$/.test(id)) continue;
+    const panel = document.getElementById(id);
+    if (!panel || panel.tagName !== "SECTION") continue;
+    TABS.push({ id, anchor: a, panel });
+  }
+  if (!TABS.length) return;
+
+  const wrap = document.querySelector(".wrap");
+  if (wrap) wrap.setAttribute("data-tabbed", "1");
+
+  navEl.setAttribute("role", "tablist");
+  TABS.forEach(({ id, anchor, panel }, i) => {
+    anchor.setAttribute("role", "tab");
+    anchor.setAttribute("aria-controls", id);
+    anchor.setAttribute("id", "tab-" + id);
+    anchor.setAttribute("tabindex", i === 0 ? "0" : "-1");
+    anchor.setAttribute("aria-selected", "false");
+    panel.setAttribute("role", "tabpanel");
+    panel.setAttribute("aria-labelledby", "tab-" + id);
+    panel.setAttribute("tabindex", "-1");
+  });
+
+  const TAB_KEY = "bellmire.tab";
+  function readSaved() {
+    try {
+      const raw = localStorage.getItem(TAB_KEY) || "";
+      // Control-strip + 25-cap (same shape as cleanName, see MY_HERO). The
+      // cleaned value is only ever COMPARED to the whitelist - we never pass
+      // it to querySelector, document.getElementById, a URL, or innerHTML.
+      const clean = ctrlStrip(raw).slice(0, 25);
+      for (const t of TABS) if (t.id === clean) return t.id;
+    } catch (e) {}
+    return "";
+  }
+  function writeSaved(id) {
+    try { localStorage.setItem(TAB_KEY, String(id).slice(0, 25)); } catch (e) {}
+  }
+
+  function show(id, opts) {
+    const save = !opts || opts.save !== false;
+    const focusPanel = !!(opts && opts.focusPanel);
+    const found = TABS.find(t => t.id === id);
+    const chosen = found || TABS[0];
+    for (const t of TABS) {
+      const on = (t.id === chosen.id);
+      t.anchor.setAttribute("aria-selected", on ? "true" : "false");
+      t.anchor.setAttribute("tabindex", on ? "0" : "-1");
+      if (on) t.panel.classList.remove("tab-hidden");
+      else t.panel.classList.add("tab-hidden");
+    }
+    if (save) writeSaved(chosen.id);
+    if (focusPanel) {
+      try { chosen.panel.focus({ preventScroll: true }); } catch (e) { try { chosen.panel.focus(); } catch (e2) {} }
+    }
+    // Keep the sticky nav visible at the top after a switch - avoids the
+    // phone-view surprise where a tab change leaves you scrolled mid-page.
+    try { window.scrollTo({ top: 0, behavior: "auto" }); } catch (e) {}
+  }
+
+  navEl.addEventListener("click", (ev) => {
+    const a = ev.target && ev.target.closest ? ev.target.closest('a[role="tab"]') : null;
+    if (!a || !navEl.contains(a)) return;
+    const id = String(a.getAttribute("aria-controls") || "");
+    if (!TABS.find(t => t.id === id)) return;
+    ev.preventDefault();
+    show(id);
+    try { history.replaceState(null, "", "#" + id); } catch (e) {}
+    try { a.focus(); } catch (e) {}
+  });
+
+  navEl.addEventListener("keydown", (ev) => {
+    const a = ev.target && ev.target.closest ? ev.target.closest('a[role="tab"]') : null;
+    if (!a) return;
+    const idx = TABS.findIndex(t => t.anchor === a);
+    if (idx < 0) return;
+    let to = -1;
+    const k = ev.key;
+    if (k === "ArrowRight" || k === "ArrowDown") to = (idx + 1) % TABS.length;
+    else if (k === "ArrowLeft" || k === "ArrowUp") to = (idx - 1 + TABS.length) % TABS.length;
+    else if (k === "Home") to = 0;
+    else if (k === "End") to = TABS.length - 1;
+    else if (k === "Enter" || k === " ") { ev.preventDefault(); show(TABS[idx].id); try { TABS[idx].anchor.focus(); } catch (e) {} return; }
+    if (to >= 0) {
+      ev.preventDefault();
+      show(TABS[to].id);
+      try { TABS[to].anchor.focus(); } catch (e) {}
+    }
+  });
+
+  // Starting tab: URL hash wins (so a shared link still works), then the saved
+  // choice, then the first tab. The hash and saved values are BOTH validated
+  // against the whitelist above before anything is shown.
+  const hashId = String((location.hash || "").replace(/^#/, ""));
+  const hashMatch = TABS.find(t => t.id === hashId);
+  const start = hashMatch ? hashMatch.id : (readSaved() || TABS[0].id);
+  show(start, { save: !!hashMatch });
+
+  window.addEventListener("hashchange", () => {
+    const id = String((location.hash || "").replace(/^#/, ""));
+    if (TABS.find(t => t.id === id)) show(id);
+  });
+}
+setUpTabs();

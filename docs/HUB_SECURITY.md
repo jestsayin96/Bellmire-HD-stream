@@ -535,3 +535,8 @@ placed in an attribute, a URL, a style or markup, so a hostile name still yields
 text beside it. SVG is built with createElementNS + setAttribute of constants (no innerHTML). The one shared
 `<clipPath id="coa-clip">` is added once. The only reference is the local fragment `url(#coa-clip)`. No new
 fetch, no image file, no new origin, no CSP change. Matching is case-insensitive, so Aldric and aldric share arms.
+
+## H18 - Town tab (no new sinks)
+
+The Town tab adds no CSP change, no fetch and no URL sink. Town name, building names/lines and remembered chronicle lines go through `el()` (textContent) only; a building name selects an icon by keyword from the page-owned `ICON_SET`; the only snapshot number that reaches a style is the growth fraction, set via `style.setProperty` as a clamped number. Hostile names (`<img src=x onerror=alert(1)>`) verified literal in `?mock=town` at 390/768/1280 with zero `<img>` elements and no dialogs.
+

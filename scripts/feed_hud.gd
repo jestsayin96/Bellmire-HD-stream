@@ -92,10 +92,10 @@ func _build_chrome() -> void:
     _content = h
     _card = PanelContainer.new()
     var cs := StyleBoxFlat.new()
-    cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
-    cs.border_color = Color(0.78, 0.62, 0.30)
-    cs.set_border_width_all(2)
-    cs.set_corner_radius_all(5)
+    cs.bg_color = UiTheme.PLATE
+    cs.border_color = UiTheme.EDGE_ON_DARK
+    cs.set_border_width_all(UiTheme.BORDER)
+    cs.set_corner_radius_all(UiTheme.RADIUS)
     cs.content_margin_left = UiTheme.px(12)
     cs.content_margin_right = UiTheme.px(12)
     cs.content_margin_top = UiTheme.px(2)
@@ -107,7 +107,7 @@ func _build_chrome() -> void:
     _card.add_child(cv)
     _card_title = Label.new()
     _card_title.add_theme_font_size_override("font_size", UiTheme.px(CARD_PX))
-    _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+    _card_title.add_theme_color_override("font_outline_color", UiTheme.ON_DARK_SHADOW)
     _card_title.add_theme_constant_override("outline_size", 4)
     cv.add_child(_card_title)
     _card_sub = Label.new()
@@ -116,7 +116,7 @@ func _build_chrome() -> void:
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
     _card_sub.custom_minimum_size = Vector2(UiTheme.px(240), 0)
     _card_sub.add_theme_font_size_override("font_size", UiTheme.px(CARD_SUB_PX))
-    _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
+    _card_sub.add_theme_color_override("font_color", UiTheme.ON_DARK)
     cv.add_child(_card_sub)
     _card.visible = false
     h.add_child(_card)
@@ -181,10 +181,10 @@ func _build() -> void:
     v.add_child(UiTheme.title("The Chronicle", 26))       # L16: the house title
     _card = PanelContainer.new()
     var cs := StyleBoxFlat.new()
-    cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
-    cs.border_color = Color(0.78, 0.62, 0.30)
-    cs.set_border_width_all(2)
-    cs.set_corner_radius_all(5)
+    cs.bg_color = UiTheme.PLATE
+    cs.border_color = UiTheme.EDGE_ON_DARK
+    cs.set_border_width_all(UiTheme.BORDER)
+    cs.set_corner_radius_all(UiTheme.RADIUS)
     cs.content_margin_left = UiTheme.px(14)
     cs.content_margin_right = UiTheme.px(14)
     cs.content_margin_top = UiTheme.px(6)
@@ -194,15 +194,15 @@ func _build() -> void:
     cv.add_theme_constant_override("separation", 0)
     _card.add_child(cv)
     _card_title = Label.new()
-    _card_title.add_theme_font_size_override("font_size", UiTheme.px(46))
-    _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.T_WORDMARK))
+    _card_title.add_theme_color_override("font_outline_color", UiTheme.ON_DARK_SHADOW)
     _card_title.add_theme_constant_override("outline_size", 6)
     cv.add_child(_card_title)
     _card_sub = Label.new()
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
     _card_sub.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 70), 0)
-    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(28))
-    _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.T_NUMERAL))
+    _card_sub.add_theme_color_override("font_color", UiTheme.ON_DARK)
     cv.add_child(_card_sub)
     _card.visible = false
     v.add_child(_card)
@@ -219,7 +219,7 @@ func card(title: String, sub: String, col: Color) -> void:
     _card_sub.text = sub
     var cs := _card.get_theme_stylebox("panel") as StyleBoxFlat
     if cs:
-        cs.border_color = col.lerp(Color(0.78, 0.62, 0.30), 0.4)
+        cs.border_color = col.lerp(UiTheme.EDGE_ON_DARK, 0.4)
     _card.visible = true
     _card_t = CARD_SECS
     _rebuild()
@@ -295,7 +295,7 @@ func _rebuild() -> void:
         lb.add_theme_font_size_override("font_size", UiTheme.px(CHRON_PX if _chrome else 28))
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
-        lb.add_theme_color_override("font_color", Color(0.16, 0.10, 0.06).lerp(Color(0.40, 0.30, 0.20), 1.0 - k))
+        lb.add_theme_color_override("font_color", UiTheme.INK.lerp(UiTheme.INK_SOFT, 1.0 - k))
         _box.add_child(lb)
     _panel.visible = not lines.is_empty() or card_showing()
 

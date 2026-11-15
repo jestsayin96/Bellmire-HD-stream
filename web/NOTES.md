@@ -601,3 +601,18 @@ Layout refinement only (palette, Gloock wordmark, tab model, CSP untouched; no n
 - All tappables >= 44px at <= 760px (tabs, chips, linkbtn, retry, pin, sign-in, chat load, hero summary); text fields 16px (no iOS focus-zoom); small print floor 12px.
 - `html, body { overflow-x: clip }` as a backstop. Measured with headless Chrome in a 390/360/768/1280 iframe over mock=crowd, ?state=empty/fail/stale, ?mock=chronicle, ?open=1: zero horizontal scroll, no sub-44px tap target, no sub-12px text, every tab reachable. Hostile name renders as literal text (0 <img> created).
 - Not captured: pixel screenshots (no image viewer in the build session); measured via DOM geometry instead.
+
+## H18 - The State of Bellmire (Town tab)
+
+A new **Town** tab (`#state`, second tab) shows the place itself, in three parts. No new fetch, no new origin, no CSP change (byte-identical), no snapshot value used as a URL/src/href/style.
+
+- **H18.1 The ladder.** The 12 rungs come from the frozen lore (`growth_tiers`, H12), read as-is. `town.level` (1-based, matching `Economy.TOWN_LEVELS`) lights the current rung (teal), fills the ones behind (gold) and names the ones ahead (dim); the caption says how many stages are left. Beside it, stat tiles: level, day, souls, treasury, raids turned back, renown, and a growth bar from `score / next_level_at`. A field the town block lacks simply gets no tile; none at all gives "The town has not sent its numbers yet." Dimness is never the only signal - every rung carries a screen-reader state word and every building a visible "standing / not yet raised" tag.
+- **H18.2 What stands.** If the snapshot sends `town.buildings` (or top-level `buildings`) - an array of strings or `{name, built, does}` - the roster is LIVE: those rows are solid, and canon buildings the town did not list appear as dim outlines. Otherwise it renders the canon set (page-owned names + the frozen `see` line per tier) and is labelled honestly "canon, not live - read from the town's level"; built/unbuilt is then derived from the level. Icons: eight new page-owned symbols (`hut well stall chapel anvil tower ford wall`) added to `ICON_SET`; a building name only picks WHICH whitelisted icon by keyword.
+- **H18.3 What has befallen it.** Newest-first timeline built from the H14 browser history (`chronMem`), filtered to `raid` entries plus `town` entries that read as growth/disaster/festival (and never the daily "Day N begins" line). Empty history says "Bellmire has known only quiet days." Per-browser, 48 h at most.
+- Local check: `?mock=town` (every new field, hostile town/building/event names, all rendering as text). `?mock=chronicle` exercises the "no new fields" path.
+
+**Fields I wanted and the snapshot lacks** (supervisor to raise with the game build worker):
+- `town.buildings`: `[{name, built, does}]` - the roster is canon-only until it exists, and the frozen lore has no "what it DOES" line per building (the canon rows show the tier's `see` line instead; the content writer could add a short `does` per building to lore_lines.json).
+- A per-entry in-game `day` on chronicle rows, so the timeline can be stamped "Day 17" in the town's own count; today it is stamped by the viewer's clock (Today / Yesterday / N days gone).
+- Disaster and festival as their own chronicle `t` kinds; today they arrive as `town` and are recognised by keyword.
+

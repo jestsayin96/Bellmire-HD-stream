@@ -57,6 +57,11 @@ static func install(tree: SceneTree, town: Node) -> void:
 		tree.node_added.connect(_on_added)
 	for n in town.find_children("*", "Label3D", true, false):
 		sort(n as Label3D)
+	# L31: the "Now fighting" banner (one per town, made once)
+	if town.get_node_or_null("FightBanner") == null:
+		var fb := FightBanner.new()
+		fb.town = town
+		town.add_child(fb)
 
 static func _on_added(n: Node) -> void:
 	if n is Label3D:
@@ -499,3 +504,136 @@ class ChronicleScroll extends Control:
 		_dowel(g.bot_cy, cap)
 		_header(g)
 
+## ---------------------------------------------------------------- L31 the fight banner
+## "NOW FIGHTING / <the lord>": a parchment banner that announces a lord the moment it rises
+## and holds a few seconds, in the lord's own colour. It lives where the boss card lives -
+## docked in the pane showing the fight, directly UNDER the boss card, never across a seam or
+## the Chronicle (HudDock.put keeps it clear of both) - and at full screen below the boss bar.
+class FightBanner extends CanvasLayer:
+	const HOLD := 6.0           # real seconds on screen
+	const FADE := 1.0
+	var town: Node
+	var _plate: PanelContainer
+	var _sb: StyleBoxFlat
+	var _kick: Label
+	var _nm: Label
+	var _sub: Label
+	var _lord_id := 0
+	var _t := 0.0               # seconds left; 0 = hidden
+	var _poll := 0.0
+
+	func _ready() -> void:
+		name = "FightBanner"
+		layer = 21
+		UiTheme.watch(self)
+		_build()
+
+	func restyle() -> void:
+		if _plate:
+			var keep := [_kick.text, _nm.text, _sub.text, _nm.get_theme_color("font_color"), _sb.border_color]
+			remove_child(_plate)
+			_plate.queue_free()
+			_build()
+			_kick.text = keep[0]; _nm.text = keep[1]; _sub.text = keep[2]
+			_nm.add_theme_color_override("font_color", keep[3]); _sb.border_color = keep[4]
+
+	func _lab(size: int, col: Color) -> Label:
+		var lb := Label.new()
+		lb.add_theme_font_size_override("font_size", UiTheme.px(size))
+		lb.add_theme_color_override("font_color", col)
+		lb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lb.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		return lb
+
+	func _build() -> void:
+		_plate = PanelContainer.new()
+		_sb = UiTheme.parchment(4)
+		_sb.set_content_margin_all(UiTheme.px(10))
+		_plate.add_theme_stylebox_override("panel", _sb)
+		_plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_plate.visible = false
+		var v := VBoxContainer.new()
+		v.add_theme_constant_override("separation", UiTheme.px(0))
+		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_plate.add_child(v)
+		_kick = _lab(20, UiTheme.INK_RED)
+		_nm = _lab(40, UiTheme.INK)
+		_sub = _lab(20, UiTheme.INK_SOFT)
+		for l in [_kick, _nm, _sub]:
+			v.add_child(l)
+		add_child(_plate)
+
+	## the lord to announce: a viewers' party's first, then the town's band's
+	func _find() -> Array:
+		var best: Array = []
+		for c in town.get_children():
+			if not (c is Delve):
+				continue
+			var l: Monster = (c as Delve).lord_fighting()
+			if l == null:
+				continue
+			if best.is_empty() or (bool((best[0] as Delve).npc_party) and not (c as Delve).npc_party):
+				best = [c, l]
+		return best
+
+	func _process(delta: float) -> void:
+		if town == null or _plate == null:
+			return
+		var rd := delta / maxf(Engine.time_scale, 0.001)
+		_poll -= rd
+		if _poll <= 0.0:
+			_poll = 0.2
+			var f := _find()
+			if f.is_empty():
+				_lord_id = 0
+			else:
+				var l: Monster = f[1]
+				if l.get_instance_id() != _lord_id:
+					_lord_id = l.get_instance_id()
+					_announce(f[0], l)
+		if _t > 0.0:
+			_t = maxf(0.0, _t - rd)
+		_plate.visible = _t > 0.0
+		if not _plate.visible:
+			HudDock.mark(_plate, "none")
+			return
+		_plate.modulate.a = clampf(minf(_t / FADE, (HOLD - _t) / 0.3), 0.0, 1.0)
+		_place()
+
+	var _delve: Delve = null
+	func _announce(d: Delve, l: Monster) -> void:
+		_delve = d
+		var col: Color = l.def.get("aura", Color(1, 0.8, 0.4))
+		_kick.text = "NOW FIGHTING"
+		_nm.text = String(l.def.get("name", "A lord"))
+		_nm.add_theme_color_override("font_color", col.darkened(0.55))
+		_sb.border_color = col.darkened(0.15)
+		var rare := bool(l.def.get("unique", false)) or bool(l.def.get("rare", false))
+		_sub.text = ("A rare one" if rare else "Lord of the deep") + "  -  " + ("the town's band" if d.npc_party else "the delvers")
+		_t = HOLD
+
+	## under the boss card, in the pane showing this fight; full screen: below the boss bar
+	func _place() -> void:
+		var s := _plate.get_combined_minimum_size()
+		_plate.size = s
+		if HudDock.split(town):
+			var k := HudDock.pane_for_delve(town, _delve) if _delve and is_instance_valid(_delve) else ""
+			if k == "":
+				_plate.visible = false
+				HudDock.mark(_plate, "none")
+				return
+			HudDock.mark(_plate, k)
+			var r := HudDock.pane(town, k)
+			var pad := float(UiTheme.px(54))
+			for b in _plate.get_tree().get_nodes_in_group("hud_boss"):
+				if b is Control and (b as Control).visible and r.has_point((b as Control).position):
+					pad = maxf(pad, (b as Control).position.y + (b as Control).size.y * (b as Control).scale.y - r.position.y + float(UiTheme.px(8)))
+			HudDock.put(_plate, r, HudDock.pane_k(town, k), "tc", pad)
+		else:
+			HudDock.mark(_plate, "full")
+			_plate.scale = Vector2.ONE
+			var y := float(UiTheme.px(140))
+			for b in _plate.get_tree().get_nodes_in_group("hud_boss"):
+				if b is Control and (b as Control).visible:
+					y = maxf(y, (b as Control).position.y + (b as Control).size.y + float(UiTheme.px(8)))
+			_plate.position = Vector2(roundf((HudDock.screen().x - s.x) * 0.5), roundf(y))

@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SNAPSHOT off: no service key in user://_d57_no_such_file.json - the hub will not update
+PASS 0 off without a key file (no network in this test)
+PASS 1 payload v is 3 or later (v4 = D59, additive)
+PASS 2 both heroes published
+PASS 3 sheet carries the D57 fields
+PASS 4 four rows: mending, brew, oil, the spare amulet
+PASS 5 mending x2 at 14 each (35 * 0.4)
+PASS 6 Greater Mending x3 at 36 each (90 * 0.4)
+PASS 7 oil x5 at 4 each (12 * 0.4)
+PASS 8 the spare amulet is listed at 144 (360 * 0.4)
+PASS 9 the WORN ring gets no row of its own
+PASS 10 stated total is the whole purse, worn too (452)
+PASS 11 sellable / sell_prices mirror the rows
+PASS 12 every kind is one the hub's icon map knows
+PASS 13 every name is W1a clean and <= 25 chars
+PASS 14 bare hands / rags quote no price at all
+PASS 15 the pauper's satchel is empty and totals 0
+PASS 16 worn weapon and armour quote the counter's price
+PASS 17 and both are in the stated total (452 + 124)
+PASS 18 the v2 sheet is untouched
+PASS 19 payload still has every v2 block
+PASS 20 plain JSON, round-trips
+PASS 21 no Twitch ids leaked
+payload bytes: 7772   build ms: 0.25
+PASS 22 payload well under the size cap (1 MB)
+D57_SATCHEL OK
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+
+RC 0

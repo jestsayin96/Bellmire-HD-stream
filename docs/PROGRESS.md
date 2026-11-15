@@ -1362,3 +1362,33 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - LOOKED at renders/cycles/20261115_l654/1_live_1080.png: scroll text dark-on-vellum, lane chips readable, no overlap.
 - NOT DONE: lord card was not on screen when sampled (not measured); no pixel-exact before/after pair for the
   DONE line (before is numbers only); the zero-literal grep of the four adopting files was not re-run. L65 stays OPEN.
+
+## D-cycle - D60 Chronicle day/who/kind, 2026-11-15 ~10:30 CT (game build)
+- Item: D60 (D59 is the first open DESKTOP item but its remainder is hub-side: web/app.js KNOWN_V still {"1","2","3"},
+  H23 not shipped - nothing left for the game build there, so D60 was taken).
+- CHANGE scripts/town.gd: `feed_tags` (bounded 256, keyed by exact line text) + `tag_feed(kind, who=[])` - a raiser
+  tags the line it just appended; the town's day rides along from economy.day at raise time. town.feed stays plain
+  text, so feed_hud / crier / director are untouched. Tagged raisers: festival x2, watch x3, catch (find, who), rally
+  (who), scar mouth (delve, who), caravan x4, townsfolk arrival, townsfolk death.
+  scripts/economy.gd: `_tag()` helper; growth (founding/level up/down), day, hunger, treasury, disaster (begin/pass/
+  during via _dis_say), arrival with who (bounty + tavern sellswords). scripts/raids.gd: every raid line `raid`.
+  scripts/growth.gd: houses/news/scaffold `growth`. Backups *.bak_d60.
+- CHANGE scripts/snapshot_pub.gd: `_annotate()` per Chronicle row - `day` always (tag day, else economy.day at first
+  sight), `kind` (short ascii identifier) and `who` (W1a clean_name, <= 25, max WHO_MAX 4) ONLY from a tag. No
+  publisher-side name matching, no derived day. PAYLOAD_V unchanged (3).
+- TEST tools/_d60_chron.gd (real Town.tscn, real raisers): D60_CHRON OK 10/10 - 11 rows, 8 tagged {raid 2, disaster,
+  day, hunger, growth, festival, find}, 3 untagged with day only; "Day 1 begins" row dated day 1; the hostile who name
+  came back "Bad NamebThatIsFarTooLon…" (ctl/angle stripped, capped). Payload 6876 -> 7133 B (+257 B, 23 B/row);
+  worst case full ring with 4x25-char names: +7.3 KB on top of D59a's 244 KB. Readback renders/cycles/d60/chron_readback.json.
+- tools/_w1a_test.gd check 21 (was "exactly 3 keys") now allows day:int, kind:short word, who:[clean names] and
+  nothing else (backup .bak_d60).
+- GATES: --import clean; parse 0 errors; D60_CHRON OK; W1A_TEST OK; TWITCH_PARSE OK; D59_SHEET OK; D57_SATCHEL OK;
+  TOWNWALK in_solid 0/17645 raid_in_solid 0/7691 PASS; delve rc 0, 0 SCRIPT ERROR; OFFFLOOR 0/1403 INPROP 0 MON_INPROP
+  0/107 on the third run - the first two each showed ONE dungeon monster off-floor at the moment it died ("drowned
+  risen bones", "puglin", state=search, 1/1459 and 1/1309). Dungeon code unchanged since the last green run (L149,
+  Nov 14) and D60 touches nothing below ground - a laptop-owned flake, reported for L.
+- NOT DONE: no live 10-minute publish (tests run with no key/network) - the hub's Chronicle code (web/app.js) reads
+  only t/s/at, so the new fields are ignored and it renders as today. GAP for laptop code: hero lines raised in
+  delve.gd / chatcmd.gd / adventurers.gd (deaths below, kills, finds in the dark, homecomings) carry day but no
+  who/kind until each adds `town.tag_feed("death", [name])` (etc.) next to its feed append. notables.gd ambient voice
+  lines left untagged on purpose (townsfolk chatter, no event).

@@ -102,7 +102,7 @@ than leaving a queue that is all polish at the top.
   KNOWN_V refuses "4" - BLOCKED ON THE HUB: add "4" to KNOWN_V, read h.last_seen + h.events, and fix two H20 render bugs
   (gear slot text never appended; "[object SVGSVGElement]" in the card head). See PROGRESS D-cycle D59a.
 
-- [ ] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
+- [x] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
       (scripts/snapshot_pub.gd and whichever of your own files raise Chronicle lines). H21 shipped the hub's
       campaign journal on 2026-11-15 and it had to invent its own clock: chronicle lines carry no town day,
       so the journal groups by a wall-clock session heuristic (a 90-minute gap starts a new stretch), and it
@@ -123,6 +123,14 @@ than leaving a queue that is all polish at the top.
       the lines that have them and cleanly absent on the lines that do not; a stated payload KB before and
       after; W1A_TEST OK, TWITCH_PARSE OK, parse 0 errors; and the live hub's Chronicle still rendering
       correctly with the hub as it stands today (the hub's own adoption of these fields is a later H item).
+  RESULT (game build, 2026-11-15 ~10:30 CT): every Chronicle row now carries `day` (economy.day - the day the raiser
+  stamped, else the day the publisher first saw the line, scanned each second); `kind` and `who` ride ONLY on lines a
+  raiser tagged through the new town.tag_feed(kind, [heroes]) - raid, disaster, day, hunger, treasury, growth,
+  festival, caravan, watch, arrival, death (townsfolk), find (catch), rally, delve (at the mouth). Untagged lines have
+  neither field (no publisher-side name guessing). v stays 3, payload +23 B/row (worst case +7.3 KB for a full ring).
+  D60_CHRON OK, W1A_TEST OK (check 21 now types the new fields), D59/D57 OK, TWITCH_PARSE OK, parse 0.
+  GAP: hero lines raised by laptop-owned delve.gd / chatcmd.gd (deaths below, kills, finds in the dark) are untagged
+  until laptop code adds one town.tag_feed(...) call beside its feed.append - see PROGRESS D60.
 
 - [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP

@@ -141,6 +141,13 @@ var roster: Roster
 var chat: ChatCmd
 var heroes := {}             # user_id -> HeroBody
 var feed: Array = []
+## D60: the hub's Chronicle wants WHO a line is about and WHAT KIND of event it is. town.feed
+## stays plain text (feed_hud, the crier, the director and every raiser read strings), so a
+## raiser that KNOWS its subject tags the line it has just appended: tag_feed(kind, [hero
+## names]). Keyed by the exact text, bounded; snapshot_pub reads it when it stamps the line.
+## Untagged lines simply carry no who/kind - never a guess.
+var feed_tags: Dictionary = {}
+const FEED_TAG_MAX := 256
 # D20b: civic moods the townsfolk read. A raid clears the streets - ordinary
 # folk flee indoors (is_raid_on reads raids._live); a festival gathers them in
 # the market square. Market bustle is D20a's midday errands; the festival is new.
@@ -3395,6 +3402,23 @@ func flee_refuge(pos: Vector3) -> Array:
 
 ## D20b: a festival now and then draws the town to the square (never during a
 ## raid or the deep night). Townsfolk._maybe_gather reads is_festival/festival_at.
+## D60: tag the line just appended to feed (see feed_tags). `who` = the HEROES the line is
+## about, by the name the hub shows; omit it for a line about townsfolk or about nobody.
+## The town's own day rides along, taken now, when the line is raised.
+func tag_feed(kind: String, who: Array = []) -> void:
+    if feed.is_empty():
+        return
+    var t := {"kind": kind}
+    if not who.is_empty():
+        t["who"] = who.duplicate()
+    if economy:
+        t["day"] = int(economy.day)
+    var k := str(feed.back())
+    feed_tags.erase(k)                  # re-insert: newest last, so the trim below drops the oldest
+    feed_tags[k] = t
+    while feed_tags.size() > FEED_TAG_MAX:
+        feed_tags.erase(feed_tags.keys()[0])
+
 func _festival_pass(delta: float) -> void:
     if economy == null:
         return
@@ -3403,6 +3427,7 @@ func _festival_pass(delta: float) -> void:
         if _fest_left <= 0.0 or is_raid_on():
             festival = false
             feed.append("The festival in the square winds down; folk drift back to their work.")
+            tag_feed("festival")
         return
     if is_raid_on() or economy.is_night():
         return
@@ -3417,6 +3442,7 @@ func _festival_pass(delta: float) -> void:
         _fest_left = randf_range(55.0, 85.0)
         fests += 1
         feed.append("A festival gathers in the market square - music, stalls, and a crowd!")
+        tag_feed("festival")
 
 func _work_sounds(delta: float) -> void:
     # D29: a working town is never silent. The smith rings his anvil; the market
@@ -4747,10 +4773,13 @@ func _show_garrison(lv: int, quiet := false) -> void:
         return
     for nm in sworn:
         feed.append("%s is sworn into the watch." % nm)
+        tag_feed("watch")
     if riders == 1:
         feed.append("Another rider joins the mounted watch on Bellmire's roads.")
+        tag_feed("watch")
     elif riders > 1:
         feed.append("The mounted watch rides out of the Town Stables: %d riders on Bellmire's roads." % riders)
+        tag_feed("watch")
 
 ## ---------------------------------------------------------------- the guild
 ## Viewers' heroes. Roster + ChatCmd are the old game's, ported verbatim (pure
@@ -4866,7 +4895,9 @@ func _on_fish(uid: String) -> void:
             _on_caught(item, who)
             if int(item.get("strike", 0)) == 20:
                 feed.append("%s rolls a 20 on the strike - a perfect hook!" % who)
+                tag_feed("find", [who])
             feed.append("%s lands a %s (%s)!" % [who, item.get("name"), item.get("rarity")])
+            tag_feed("find", [who])
             print("FEED ", feed.back()))
         b.add_child(ang))
 
@@ -4887,6 +4918,7 @@ func _on_rally(uid: String) -> void:
     if not live:
         h["rally_secs"] = RALLY_SECS
         feed.append("%s is rallied - strength, speed, courage, and a healer's touch wait for their next delve." % hname)
+        tag_feed("rally", [hname])
         print("FEED ", feed.back())
 
 func _on_delve(uid: String) -> void:
@@ -4908,6 +4940,7 @@ func _on_delve(uid: String) -> void:
             b.face_yaw = atan2(-fw.x, -fw.z)
             b.rotation.y = b.face_yaw
             feed.append("%s stands at the mouth of the scar." % b.person_name)
+            tag_feed("delve", [b.person_name])
             chat.away[uid] = "waiting at the mouth of the scar"
             print("FEED ", feed.back())
             _at_mouth.append(uid)
@@ -5533,6 +5566,7 @@ func _caravan() -> void:
     v._linger = 99999.0
     _caravans.append({"v": v, "start": start, "phase": "in", "t": 0.0, "wagon": w})
     feed.append("A trade caravan is sighted on the west road.")
+    tag_feed("caravan")
     # D37: E3PO greets an arriving caravan (notables is town-held, call it directly)
     if notables and notables.has_method("_e3po_say"):
         notables._e3po_say("trader_arrives")
@@ -5587,10 +5621,13 @@ func _settle_trade() -> void:
             bought.append(g)
     if not sold.is_empty():
         feed.append("Caravan sells the town %s for %d gold." % [", ".join(sold), spent])
+        tag_feed("caravan")
     if not bought.is_empty():
         feed.append("Caravan buys up surplus %s." % ", ".join(bought))
+        tag_feed("caravan")
     if sold.is_empty() and bought.is_empty():
         feed.append("The caravan finds nothing worth trading and moves on.")
+        tag_feed("caravan")
     _stock_piles()
 
 ## ================================ settlers =================================
@@ -5652,6 +5689,7 @@ func arrive(role: String, blurb: String) -> Townsfolk:
     if _on_streets() > STREET_CAP and role != "guard":
         _keep_indoors(v)
     feed.append(line)
+    tag_feed("arrival")
     print("FEED ", line)
     return v
 
@@ -5704,6 +5742,7 @@ func bury(v: Townsfolk, line: String) -> void:
     if economy:
         economy.dead += 1
     feed.append(line)
+    tag_feed("death")
     print("FEED ", line)
     var vid := v.get_instance_id()           # D8: never capture a node that may be freed first
     get_tree().create_timer(25.0).timeout.connect(func() -> void:

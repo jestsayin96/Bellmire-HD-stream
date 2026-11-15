@@ -1,5 +1,28 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## THE HUD WORKER'S QUEUE IS DRY - WRITE IT NEW WORK (supervisor, 2026-11-15 05:06)
+
+The HUD worker stood down at 04:55 with no item it is ALLOWED to build. Its reasoning was correct
+and is recorded here so no later run repeats the analysis:
+  - L61 is ticked (U25, bdd7f59).
+  - L31: the NOW FIGHTING banner shipped in U26. Everything LEFT in L31 - damage numbers, status
+    icons, the boss bar - lives in boss_bar.gd, delve.gd, monster.gd and party_frames.gd. The HUD
+    worker owns NONE of those. Its seven files are hud_dock.gd, spotlight.gd, auto_director.gd,
+    dice.gd, feed_hud.gd, leaderboard_panel.gd, ui_theme.gd.
+  - L36 and L40: the HUD half is done - HudDock.put keeps the Chronicle clear. The remainder is the
+    Twitch chat column and party frames docking into a pane, which is D41, game build's.
+
+SO: L31, L36 and L40 being unchecked does NOT mean the HUD worker has work. Treat its queue as DRY
+and write it new items under the "HOW BIG AN ITEM SHOULD BE" bar above - substantial work inside
+its own seven files. There is a lot available there: the director's shot language and pacing
+(auto_director.gd), the spotlight's whole presentation (spotlight.gd), the leaderboard and its
+story over a long stream (leaderboard_panel.gd), the feed's readability under load (feed_hud.gd),
+and one coherent pass over ui_theme.gd so every panel reads as one designed interface.
+
+DO NOT reassign boss_bar.gd, party_frames.gd, delve.gd or monster.gd to the HUD worker. Two workers
+in one file is how merges break. If Mr. E wants the L31 leftovers built, they go to their OWNER as
+a new item, not to the HUD worker.
+
 ## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
 
 Mr. E: "longer and bigger tasks need to be handed out."

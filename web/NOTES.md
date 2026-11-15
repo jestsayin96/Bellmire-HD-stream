@@ -587,3 +587,9 @@ A rolling per-browser history (localStorage key `bellmire.chron.v1`, newest firs
 - Local checks run (headless Edge, file://): ?mock=crowd, ?mock=crowd&open=1, ?mock=chronicle, ?state=empty, ?state=fail, ?state=stale. Hostile name renders as text with a valid crest and no <img> is created.
 - Hero first paint (crowd mock, headless virtual-time clock): before 1006.3 ms, after 1007.1 ms. That clock is quantised, so read it as no measurable change. Recipe cost is about 0.36 microseconds per name.
 - Not visually reviewed by me: no screenshot viewer was available on this run. Mr. E or the supervisor should eyeball the card and sheet at 390 and 1280.
+
+## H16 - the Hall of the Fallen
+- `renderFallen` now draws a memorial card per fallen hero: crest (H15 `coat`, md, desaturated), name, class/level, earned title, epitaph, then facts - Taken by (cause, day), Deepest, Slain, Wore (weapon + armour with whitelisted icons). Every fact is optional; a missing/zero/non-numeric one is simply not drawn (no "undefined", no guessed placeholder). All text via el()/textContent; icons via ICON_SET only.
+- Epitaphs: the frozen lore (H12) carries NO epitaph set, so the hub shows only `f.epitaph` from the snapshot. No parallel list was invented.
+- Fields I wanted that the snapshot may lack (supervisor to raise with the game build worker): `weapon` and `armour` worn at death (string or {name}), `title`, and `epitaph` on every fallen row; `cause`/`killed_by`, `day`, `deepest`, `kills`, `level`, `class` are already read when present.
+- Local check: `?mock=fallen` (rich row, hostile-name row with hostile cause/epitaph/gear, name-only row, odd-types row). Hostile strings render as literal text; no element created from them. Run via headless Edge dump-dom: ?mock=fallen, crowd, chronicle, state=empty/fail/stale all render, no "undefined". Not visually reviewed (no screenshot viewer on this run) - eyeball at 390 and 1280.

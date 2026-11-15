@@ -1,5 +1,233 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### L71 - THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
+
+Mr. E, Nov 15 16:22, with a screenshot of the parchment strip: six of seven lines end in an
+ellipsis mid-sentence - "spots a swarm grate (Perception 20 vs ...", "steps on a grate - fire! DEX
+12 vs DC 13, ...", "searches the chest - Successfully found ...".
+
+THE CAUSE IS FOUND. DO NOT RE-DIAGNOSE IT. scripts/feed_hud.gd, the `if _chrome:` branch inside
+the line loop (around line 285) sets, for every line in the centre box:
+    lb.autowrap_mode   = TextServer.AUTOWRAP_OFF
+    lb.max_lines_visible = 1
+with OVERRUN_TRIM_WORD_ELLIPSIS already set above it. So any line wider than the box is truncated
+by design. The comment there says "the full text is in chat either way" - that reasoning was
+wrong. The Chronicle IS the story for anyone watching the stream rather than reading chat, and a
+D&D roll that gets cut off before its result ("Perception 20 vs ...") is worse than no line at
+all. It tells the viewer a check happened and refuses to say whether it passed.
+
+The fix is the HUD worker's, in its own file, and it is a design pass not a one-line flip:
+  1. Let a line WRAP in the centre box. Two lines an entry, as the side panel already allows.
+  2. Show fewer entries to pay for it. Six truncated lines are worth less than three whole ones.
+     Fewer, complete, and slower is the right trade and it suits the parchment.
+  3. Size the box to the text rather than the text to the box - the strip has room to grow
+     horizontally across the bottom, and widening it is cheaper than cutting sentences.
+  4. Go through the lines that actually appear and shorten the WRITING where it is the writing
+     that is long, in the HUD's own formatting - "Perception 20 vs DC 13" is tighter than
+     "(Perception 20 vs DC 13, ...)". Any line that belongs to another worker's file, list it for
+     them rather than reaching in.
+  5. A roll's RESULT must never be the part that gets cut. If a line has to be shortened, the
+     outcome survives and the detail goes.
+
+DONE TEST: a scripted run that emits the longest line of each kind the game produces (a hero
+sheet, a trap check with a save, a search result, an E3PO line) at UI scale 100/125/150%, shot at
+each; pass requires no ellipsis in the centre box at any scale, and no line overlapping the party
+frames. Put the shots in renders/cycles/l71/ with the before.
+
+### D83 - THE TRAPS ARE STUCK (game build - MEASURE FIRST, three candidates)
+
+Mr. E, Nov 15 16:22, with a screenshot of a dungeon floor: one plate ablaze, and beside it pale
+capsule shapes lying flat and motionless on the stone. "the traps are stuck".
+
+I did NOT find a confirmed cause. Three candidates are recorded so the owner starts from evidence
+instead of from the screenshot. MEASURE BEFORE CHANGING ANYTHING.
+
+  1. MOST LIKELY - the swarm trap's monsters never get nav. delve.gd `_trap_swarm` (~2467) builds
+     two Monsters, sets `mon.position` with a hard-coded `y = 0.0`, adds them to `dun`, and appends
+     them to `dun.monsters`. `_nav_reset()` runs at FLOOR START only (line ~118). Nothing re-runs
+     it for a creature added in the middle of a floor. A monster with no nav stands exactly where
+     it spawned - which is what "stuck" looks like, and the pale capsules may be these creatures
+     on an untextured fallback. This is the same family as D44's wedged walkers and should be
+     tested the same way: log each spawned monster's position every second for 20s and assert it
+     moves.
+  2. The hard-coded `y = 0.0` in that same function. Every other body on a floor is placed by the
+     floor's own height. If the walkable surface is not at 0 there, the swarm spawns inside or
+     above the stone, which would both freeze them AND make them read as strange flat shapes.
+     Check `height_at` for the floor and compare.
+  3. The trap props animate with tweens that must RUN TO COMPLETION to clean up after themselves.
+     dungeon_parts.gd `dart_trap`'s fire Callable spawns three dart boxes and relies on a final
+     `tween_callback(dart.queue_free)`; `spike_trap`'s relies on a third tween step to lower the
+     spikes back to -0.72. If either tween is interrupted - the node leaving the tree, the floor
+     being rebuilt under it, the trap firing twice - the darts stay lying on the floor forever and
+     the spikes stay up. Pale flat boxes lying on stone is exactly what orphaned darts look like.
+     Prove it or rule it out by counting the trap node's children before and after a fire.
+
+Whichever it is, the fix must also make the failure impossible rather than unlikely: a trap that
+fires must leave the floor in a known state whether or not its animation finished, and anything
+added to a floor mid-delve must get navigation the same way the floor's own creatures did.
+
+DONE TEST: a scripted floor that fires one of every trap kind in TRAPS, twice each. Assert: every
+spawned creature's position changes within 20s; no trap node retains child nodes from a previous
+firing; spike geometry returns to its armed offset; and a headless 10-minute delve ends with the
+same node count on each floor as it started with, plus the creatures that were meant to live.
+
+### D82 - THE WATERLINE (game build, art-critical - Mr. E, Nov 15 16:20)
+
+Mr. E, with a screenshot of the lake at night: "where the sand or gravel meets the water it looks
+bad, like how the grass was looking that needs fixing as well". He is right and the cause is
+measured, not guessed. THREE separate faults stack at that edge:
+
+  1. assets/shaders/water.gdshader IS 32 LINES AND HAS NO DEPTH AT ALL. No DEPTH_TEXTURE, no
+     shallow fade, no foam. ALPHA is `mix(0.82, 0.97, fres)` - effectively opaque everywhere. Real
+     water goes clear and light where it is shallow and you see the bottom through it. Ours is a
+     flat blue lid laid on top of the terrain, so the shore becomes a hard geometric cut. THIS IS
+     THE MAIN FAULT and it is why the screenshot reads as a painted plane rather than water.
+  2. ground.gdshader's wet shore (D18c, line 75) is a smoothstep on WORLD Y ONLY:
+     `smoothstep(water_y + 0.55, water_y - 0.2, wpos.y + ...)`. That is a 0.75-unit vertical band.
+     On the river's shallow bank it reads fine, which is why D18c passed. On the lake's steeper
+     bank the same band collapses into a thin ribbon and effectively disappears. The wet margin
+     must be driven by horizontal distance to the water's edge as well as height, so a steep bank
+     still gets a visible wet collar.
+  3. Nothing is authored AT the join. No pebble scatter breaking the silhouette, no darker wet
+     gravel, no foam or scum line. A real shoreline is a band of material, not a boundary.
+
+Staged parts:
+  a. Water shader: sample DEPTH_TEXTURE, derive water depth at the fragment, and drive BOTH alpha
+     and colour from it - clear and pale in the shallows, deep and saturated further out. This one
+     change fixes most of the screenshot on its own. Keep cull_disabled; the lake is viewed from
+     above and the camera can dip.
+  b. A foam/wet line where depth approaches zero: a soft bright band that follows the real
+     intersection, so the edge is drawn by the water rather than by geometry.
+  c. Gentle normal-map distortion of what is seen through the shallows, so the bottom reads as
+     being under water rather than behind glass.
+  d. ground.gdshader: add horizontal falloff to the wet band so a steep bank still darkens. Do NOT
+     break the river - D18c's bank is the regression case and must look the same or better.
+  e. Wet gravel at the join reads DARKER and SHINIER, not muddier. The lake shore is gravel and
+     sand, not river mud; mudc is the wrong colour there. Drive roughness down at the waterline.
+  f. A scatter of pebbles and reeds across the join to break the straight silhouette, on the same
+     pass that places other shore dressing.
+  g. The duck shadows in the screenshot land hard on the water surface. Once the water is depth-
+     aware, check them again - a shadow on clear shallow water should be on the BOTTOM, not on the
+     surface. If it still reads wrong, note it and hand it on rather than hacking the shader.
+
+DO THE SAME THING THE GRASS FIX DID: render it, LOOK at it, change it, look again. D56's grass was
+only fixed when someone actually looked at a render instead of trusting the material name. Take
+before/after shots of this exact view - the lake at night, camera high - plus the river bank as the
+regression, and put them in renders/cycles/d82/.
+
+DONE TEST: before/after renders of the lake shore (night AND day) and the river bank; headless
+start with 0 shader compile errors and 0 material-nulls; and Mr. E's eye on the after shot. His eye
+is final on this one - it is an art item and the test is whether it looks right to him.
+
+## MR. E'S RULING (Nov 15 16:19) - CARRY WEIGHT, AND HOW A VIEWER USES WHAT THEY OWN
+
+Verbatim: "has carry weight been a factor? DnD should have something on that correct?" and before it
+"how are people going to use their items: potions, equipment, teleport stone, etc.? should we make
+it on the hub that they can sort their own inventory, what they can sell, personal storage in the
+Guild/Adventurer Hall, and a way for them to use their items."
+
+MEASURED STATE (checked 16:19, do not re-derive):
+  - Abilities are proper D&D: roster.gd STATS = str/dex/con/int/wis/cha, 4d6-drop-lowest, 3-18.
+  - CARRY WEIGHT DOES NOT EXIST ANYWHERE. No weight field on any item in items.json (equipment,
+    230 accessories, 245 shop_stock, 147 trader_cargo - none), no encumbrance in any script. The
+    only thing ever counted as carried is flasks of oil, as a bare integer.
+  - STR currently does damage and little else. Three callings have str as primary and get no other
+    benefit from it.
+  - !inventory (inv/bag/items) EXISTS and so do !brew, !wear, !oil, !forge, !armoury. There is NO
+    way to USE an item, NO way to SELL one, and NO storage outside what a hero carries.
+  - THE HUB CAN ALREADY WRITE. H6's Twitch device-code sign-in is live, and the Guild chat tab
+    already sends a viewer's own chat line over wss://irc-ws.chat.twitch.tv (app.js ~2564) with
+    CR/LF stripped so no IRC command can be smuggled. So a hub button does not need a backend, an
+    API, a new scope or a CSP change - it sends the chat command the viewer would have typed.
+
+### D80 - CARRY WEIGHT (game build, with D77 - it is the ascent's teeth)
+
+5e's rule, the encumbrance variant, because graded consequences beat a hard wall:
+  - capacity = STR score x 15 lb
+  - over STR x 5: encumbered, speed -10 ft
+  - over STR x 10: heavily encumbered, speed -20 ft and disadvantage on attacks, and on checks and
+    saves using STR, DEX or CON
+  - push/drag/lift up to STR x 30, moving at 5 ft
+
+Why this is RC and not flavour: with no teleport out, what a party can carry up is the real limit
+on a delve, and greed becomes the drama. A band that strips floor nine bare cannot climb out of it.
+That is the best decision in the game and right now it cannot happen.
+
+Staged parts:
+  1. A `weight` field on every item in items.json - equipment, accessories, cargo, stock, flasks,
+     stones. Content worker's to author; game build's to consume. Use 5e's weights where an item
+     has an obvious counterpart (plate 65, chain mail 55, leather 10, longsword 3, potion 0.5) and
+     be consistent within a ladder: heavier armour is always heavier.
+  2. `Roster.capacity(uid)` and `Roster.carried(uid)` -> the band from the table above.
+  3. Speed penalties feed the SAME speed_scale D58 fixed, so an encumbered hero's gait reads as
+     laboured without a new animation. Do not add a new clip. Check D58's correlation test still
+     passes afterwards - that is the regression that matters.
+  4. Disadvantage at heavily encumbered, wired into the existing d20 path.
+  5. Loot picked up on a floor adds weight NOW, not at the end, so the party feels the floor it
+     just cleared. Haul is per-hero, not a party pool.
+  6. The choice must be sayable: when a party is over capacity at the stairs, they drop the lowest
+     value-per-pound first and the feed names what was left behind, by item, on that floor.
+  7. A dropped item stays on that floor for the rest of the delve. A party can come back for it on
+     the climb if they can afford the weight then. That single rule is worth more than any number.
+  8. The HUD needs the band, not the pounds. Hand it `Roster.encumbrance(uid)` -> ""/"encumbered"/
+     "heavily encumbered" and let the HUD worker own the display.
+
+DONE TEST: build parties at STR 6, 10 and 18, load them past each threshold, and assert capacity
+and band against the table by hand-computed expectation; log speed_scale and confirm the penalty
+lands in the gait; run a delve that forces a drop at the stairs and assert the dropped items are
+on the floor's loot list and named in the feed; re-run D58's gait test and require it still passes.
+
+### D81 - USING, SELLING, AND THE GUILD VAULT (game build, after D78)
+
+Mr. E's four asks, in the order they depend on each other.
+
+  1. STANDING ORDERS, NOT CLICKS. A potion is drunk by the HERO, in the fight, when their own rule
+     says to - "drink below half", "drink when the healer is down". The viewer sets the rule, the
+     character acts on it. This is the D&D answer and it is also the only one that works: the game
+     runs while Mr. E streams and a viewer clicking "heal now" from a web page at an arbitrary
+     moment breaks both the fiction and the autonomy. `!use <item>` exists for the deliberate
+     out-of-combat case; standing orders cover the rest.
+  2. THE STONE IS THE EXCEPTION. It is a panic button and it must be one click, right now, by the
+     viewer, mid-delve. That immediacy is what the 1,000 points buys. Everything else is orders.
+  3. SELLING. `!sell <item>` at the shop, as an errand like any purchase (D78): the hero walks the
+     goods there. Sell price is a fraction of shop price and the shop's level caps what it will
+     even take - a level 1 shop cannot buy a legendary piece, which is its own small tragedy and
+     should be said plainly. Equipped gear cannot be sold out from under a hero in a dungeon.
+  4. THE GUILD VAULT at the Adventurer Hall. Personal storage, in town, free, with a slot limit
+     that the Hall's own level raises (the same event-poll upgrade path as the shops). Stored items
+     weigh NOTHING against carry weight - that is the entire point of the vault and it is what
+     makes D80 a decision instead of a punishment. Depositing and withdrawing are errands: the
+     hero walks to the Hall.
+  5. A hero's death: carried items are LOST, vault items are NOT. The vault is the thing a viewer
+     builds across heroes, and it is why they come back after a wipe.
+  6. `!inventory` grows up: slots, weight, capacity band, what is in the vault, what orders are
+     outstanding.
+
+DONE TEST: a scripted stream that buys, equips, stores, withdraws, sells and dies; assert the gold
+ledger balances at every step, no item is ever in two places, vault contents survive the death,
+carried contents do not, and every transfer required a walk.
+
+### H30 - THE SATCHEL TAB (hub worker, after H29)
+
+A fourteenth tab: Satchel. A signed-in viewer's own things.
+
+  1. Their carried items with weight, their capacity, and their band - shown as a bar, because
+     "47 of 150 lb" is the number that makes D80 legible before a delve rather than during one.
+  2. Their vault at the Hall, their outstanding orders, and where the hero is walking.
+  3. Sort and filter their own items. By slot, weight, value, value-per-pound. Value-per-pound is
+     the one that teaches the game, so make it a first-class sort and not an afterthought.
+  4. Every action is a BUTTON THAT SENDS THE CHAT COMMAND over the IRC socket H6 already opened -
+     `!use`, `!sell`, `!store`, `!wear`, and the stone. No backend, no new scope, no CSP change.
+     Reuse the existing ctrlStrip path; an item name from a snapshot is untrusted input and must
+     never be able to smuggle an IRC command. Extend the hostile-name canary to cover it.
+  5. Signed out, the tab explains itself and shows nothing personal. Never guess who a viewer is.
+  6. Security invariants hold with no exceptions: el()/textContent only, ICON_SET whitelist, CSP
+     unchanged.
+
+DONE TEST: render signed out, signed in with an empty satchel, at each encumbrance band, and with
+a hostile item name; assert no innerHTML in the new code, CSP byte-identical, canary passes, and
+that every button produces exactly the chat command a viewer could have typed by hand.
+
 ## MR. E'S RULING (Nov 15 16:05) - DISTANCE IS THE COST. NOTHING TELEPORTS.
 
 Verbatim: "we need to add a store tab as well to the hub if its not there already so people can go
@@ -714,6 +942,10 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE CHANNEL:     L68, L69, D67, D69, D70, L70, D71 (D71 only if Mr. E approves it)
   THE SOUND:       D72
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
+  THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
+  IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck)
+    These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
     Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
     the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and
     H29 follow them and must not be started first.

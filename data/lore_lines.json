@@ -2981,7 +2981,13 @@
         "The guild post weighs ash out of the grain and charges for honest weight.",
         "Every doorstep is swept, and every doorstep is grey again by dusk.",
         "The forge works blind, the smoke of its own making lost in the bigger smoke.",
-        "Bellmire counts the flasks early this week, because the lamps burn all day."
+        "Bellmire counts the flasks early this week, because the lamps burn all day.",
+        "A crust of ash forms on every water barrel by noon.",
+        "The forges damp down - no sense feeding a fire the mountain is already feeding.",
+        "Children are kept indoors; a mask of linen goes with any errand.",
+        "Horses baulk at the grit and will not be led out of the stable.",
+        "The guild post marks a line through market day.",
+        "The clapperless bell wears a cowl of grey by evening."
       ],
       "pass": "The mountain settles. Ash greys every roof, but the air clears.",
       "cost": "A buried harvest and sickened livestock; the worst-hit district must be rebuilt.",
@@ -3001,7 +3007,13 @@
         "The mountain lifts a column of smoke, and the column points at Bellmire.",
         "First ash by first light. The crier is told to speak through cloth.",
         "The high pasture goes under grey before the shepherds are awake.",
-        "The mountain burns somewhere inside itself, and Bellmire gets the smoke."
+        "The mountain burns somewhere inside itself, and Bellmire gets the smoke.",
+        "The mountain sends its warning on the wind - grit between the teeth before the sun is up.",
+        "Copper sky. Copper taste. The scar is not the only thing in Bellmire with a temper.",
+        "Ash in the mornings' bread before anyone has baked. The mountain is lit.",
+        "The sky above the mountain goes the colour of a struck forge, and holds there.",
+        "The watchman on the north wall whistles once and points. That is enough.",
+        "A tremor runs the Ford, and the mountain answers with smoke."
       ],
       "pass_alt": [
         "The mountain goes quiet. Bellmire shovels grey off its roofs and breathes clean.",
@@ -3019,7 +3031,13 @@
         "The ash stops. Every gutter in town is packed and every gutter gets dug.",
         "The mountain banks its fire. Grey to the knee, and all of it to move.",
         "Clean air off the river at last. The grey goes back up the hill in carts.",
-        "It is over. The grain store is opened and the counting starts."
+        "It is over. The grain store is opened and the counting starts.",
+        "The mountain holds its breath. Bellmire does not, and scrubs.",
+        "The ashfall thins to nothing. The brooms come out before the sun.",
+        "A clean wind off the Ford, at last, and the roofs give up their grey.",
+        "The sky goes blue again - grudgingly, like a debt paid.",
+        "The forges wake. The smiths test the air and nod.",
+        "Bellmire sweeps its own eaves and calls it a holiday."
       ]
     },
     "fire": {
@@ -3048,7 +3066,13 @@
         "The smiths stand in the square with their tools and nowhere to put them.",
         "The chapel bell rings for the line to change hands.",
         "The guild post hands out wet sacking and writes down every one.",
-        "Somebody carries the ledgers out before the furniture, and is thanked for it."
+        "Somebody carries the ledgers out before the furniture, and is thanked for it.",
+        "Sparks ride the wind as far as the chapel roof; a boy on the bellrope watches for them.",
+        "Doors are left wide so the bucket line runs through, not around.",
+        "Someone's cat is handed out a window, cursing.",
+        "A second row catches - the wind has made up its mind.",
+        "The apothecary pours his own water and shuts the door against the smoke.",
+        "A ledger is thrown from a shutter and lands open in the mud."
       ],
       "pass": "The fire is out. A row of workshops is char and cinder.",
       "cost": "Buildings in one district burned down and rebuilt from nothing; the smiths sit idle until then.",
@@ -3068,7 +3092,13 @@
         "Fire takes a workshop, then its neighbour, then it stops asking.",
         "Sparks in the thatch and no rain since the thaw. Craft Row is alight.",
         "The bucket line is out before the smoke clears the ridge-tiles.",
-        "A banked forge woke in the night. Craft Row is the colour of a forge."
+        "A banked forge woke in the night. Craft Row is the colour of a forge.",
+        "Smoke on the Craft Row wind - a forge banked wrong and a day that will not forgive it.",
+        "A shout from the row, and then a louder one. Fire finds words faster than most.",
+        "The chapel bell goes before the alarm bell does. Somebody there has a nose for it.",
+        "Craft Row lights up at the end nearest the river - which is lucky, and not enough.",
+        "The wind turns, and Bellmire learns the word for it again.",
+        "Fire. The bucket line is already forming by the time the call is through."
       ],
       "pass_alt": [
         "The last roof falls in and stays down. The fire is finished.",
@@ -3086,7 +3116,13 @@
         "The bucket line stands down. The row is ash, and nobody is missing.",
         "The wind turned, and the fire had nowhere to go. It is finished.",
         "Rain, late and welcome. The fire drowns in it.",
-        "Out by morning. The guild post opens its ledger on what is owed."
+        "Out by morning. The guild post opens its ledger on what is owed.",
+        "The last wall falls and takes the fire with it. Bellmire breathes out.",
+        "The row is black and wet. The Watch sits down where it stood.",
+        "Smoke drifts off the Ford. The tally begins.",
+        "The flames are out. The silence after is loud enough for everyone.",
+        "A roof falls in at dawn and nobody flinches - the fire was finished hours ago.",
+        "The buckets go back to the wells, one by one, dented and sooted."
       ]
     },
     "drought": {
@@ -3115,7 +3151,13 @@
         "Dust comes off the market floor and settles on everything for sale.",
         "The chapel is full, and nobody is pretending otherwise.",
         "Water is rationed by the bucket, and the counting is done in public.",
-        "The grain is cut early and short, because waiting costs more than cutting."
+        "The grain is cut early and short, because waiting costs more than cutting.",
+        "The Ford shows gravel where it used to show fish.",
+        "The brewer waters the ale and does not pretend otherwise.",
+        "Beasts of the field crowd the one pond left on Bellmire's common.",
+        "The guild post moves the market an hour earlier, out of the worst of the sun.",
+        "The miller says the wheel will not turn by week's end, and he is counting.",
+        "Dust rises off the road to the Ford as if the road itself was walking."
       ],
       "pass": "Rain, at last. The river climbs, and Bellmire drinks easy again.",
       "cost": "A harvest cut to nothing and thinning livestock; morale sinks until the wells fill.",
@@ -3135,7 +3177,13 @@
         "The grain stands short and pale, and the sky stays clear.",
         "The wells go shy, and the queues at them get long and quiet.",
         "A dry wind off the high country, every day, for too many days.",
-        "The river narrows to a lane of water. The millrace runs on nothing."
+        "The river narrows to a lane of water. The millrace runs on nothing.",
+        "The sky holds a hard blue, and the almanac is wrong by ten days.",
+        "No rain since the thaw. The crops are already saying so with their colour.",
+        "The wells answer slower every morning. One answers not at all.",
+        "The Ford drops a hand in a week and keeps dropping.",
+        "The wind off the plain is dry as oven-brick, and stays.",
+        "Noon shadow under the chapel eaves goes short, and sharp, and long."
       ],
       "pass_alt": [
         "Rain. The whole town stands out in it and lets it happen.",
@@ -3153,7 +3201,13 @@
         "It breaks in the night - rain on the tiles, and nobody sleeps for listening.",
         "The sky finally pays what it owed. The wells are sweet again.",
         "Water over the stones in the river, and the Ford a ford again.",
-        "The drought lets go. The fields are late, but they are alive."
+        "The drought lets go. The fields are late, but they are alive.",
+        "Rain on the roofs. Bellmire sits down in it and does not move.",
+        "Thunder first, and then the gift. The brewer measures again by evening.",
+        "The Ford climbs a hand overnight, and another by morning.",
+        "The crier has nothing to say. The rain is saying it.",
+        "A whole day of weather, and no one complains of mud.",
+        "The wells answer at first draw. Bellmire drinks like a town that remembers thirst."
       ]
     },
     "famine": {
@@ -3182,7 +3236,13 @@
         "A household gives up its laying hen and the street notices.",
         "Soup from the chapel, thin and hot and gone in an hour.",
         "The guild post lends against next year's harvest and charges for the doubt.",
-        "Nobody speaks of the stores above a murmur, as if loudness would spend them."
+        "Nobody speaks of the stores above a murmur, as if loudness would spend them.",
+        "The guild post rations by name, and the clerks keep the names honest.",
+        "Bread in the market is a quarter-loaf and a short apology.",
+        "The chapel kitchen cooks a thin stew and keeps the fire up.",
+        "Children are sent to the river with lines and told not to come back empty.",
+        "A cat is missing from Craft Row, and nobody will say.",
+        "The Ford is dragged for anything that has a mouth and a scale."
       ],
       "pass": "The first harvest comes in, and Bellmire eats again.",
       "cost": "The town shrinks as the weak are lost; no growth until the barns refill.",
@@ -3202,7 +3262,13 @@
         "MEASURE THE GRAIN, says the hall, and the measure comes up wanting.",
         "The last full sack is counted, and the counting is written down.",
         "Bread by the ounce from today. The crier says it twice.",
-        "The stores are thin, the season is long, and the arithmetic is public."
+        "The stores are thin, the season is long, and the arithmetic is public.",
+        "The barns echo. Measure the grain - it is not the measure you wanted.",
+        "The last cart of autumn was lighter than the first. Now the barns say what that meant.",
+        "Winter is longer than the harvest was. Bellmire does the arithmetic out loud.",
+        "The miller stops grinding before the bell. The wheat is counted, not weighed.",
+        "The guild post has a new hand on the ration ledger, and his sleeves are rolled.",
+        "Bread is sold by the slice at the bakers', and the baker is not happy about it."
       ],
       "pass_alt": [
         "The first cart of grain comes in. The square goes quiet, then very loud.",
@@ -3220,7 +3286,13 @@
         "The hunger lets go. The barns are stacked past the beams.",
         "Bread back to the loaf from the ounce. It is a small sentence and a large day.",
         "The stores refill. The thin faces stay thin a while, and then they do not.",
-        "It is over. The grain is measured and the measure is good."
+        "It is over. The grain is measured and the measure is good.",
+        "A cart of grain through the gate at dawn. The square goes quiet, and then not.",
+        "The first harvest comes in short of plenty but far of hunger, and that is enough.",
+        "The barns fill a hand a day. Bellmire lets its belt out a notch.",
+        "Bread back to the loaf at the market, and a crowd to witness it.",
+        "The chapel pots are put away. The cooks sit down for the first time in a month.",
+        "The Ford gives up its fishing lines and the children run home empty-handed and proud."
       ]
     },
     "sickness": {
@@ -3249,7 +3321,13 @@
         "A street is shut at both ends and fed over the barricade.",
         "The chapel takes the worst cases, because it has the room and the roof.",
         "Work stops in Craft Row - half the benches are empty and the other half are careful.",
-        "The crier reads the day's count from a distance, and the square keeps it."
+        "The crier reads the day's count from a distance, and the square keeps it.",
+        "A chalk cross on a Craft Row door, then another on the next.",
+        "The apothecary's shutters never close; the queue runs down the lane.",
+        "The chapel takes in those with no kin. There are more than it has room for.",
+        "The Watch wears linen across the face and does not speak at the gate.",
+        "A child is carried out of a house wrapped, and nobody along the street looks away.",
+        "The clapperless bell swings once in a draught and everyone pretends it did not."
       ],
       "pass": "The fever burns itself out. Bellmire counts its dead and opens the windows.",
       "cost": "The population falls, and a quarantine freezes trade and work while it lasts.",
@@ -3269,7 +3347,13 @@
         "COUNT THE FLASKS, says the hall. The count is short and the fever is not.",
         "Sickness in the crowded end of town, where it always starts.",
         "The chapel bell rings for the third time this week, and it is not noon.",
-        "A fever comes up the river road and takes a street a day."
+        "A fever comes up the river road and takes a street a day.",
+        "A fever comes in with a cart from the road, and leaves the cart in the yard.",
+        "Three in one house by nightfall. The apothecary names the sickness and his hands shake.",
+        "A mark goes up at the guild post - keep off Craft Row until the chalk is scrubbed.",
+        "The healers meet in the chapel at dawn and come out looking older.",
+        "A chalk cross on a door nobody expected to see one on. Bellmire goes quiet.",
+        "The apothecary runs out of what helps, and sends to the Ford for more."
       ],
       "pass_alt": [
         "The fever lets go. The windows open, and the chalk comes off the doors.",
@@ -3287,7 +3371,13 @@
         "It burns out. The bell rings once, for the end of ringing.",
         "The quarantine ends at the Ford, and the first cart through is cheered.",
         "The fever lets go of the town. The memorial gets its new names.",
-        "Over. The apothecary sleeps, and the town lets her."
+        "Over. The apothecary sleeps, and the town lets her.",
+        "The chalk comes off the first door. Then the second. A woman weeps, laughing.",
+        "The apothecary sleeps, at last, and the queue lets him.",
+        "The chapel opens its doors and the air that comes out is fit to breathe.",
+        "A list of names goes up at the guild post. Bellmire reads it slowly.",
+        "The Watch takes the linen off its faces and steps into the market again.",
+        "The fever lets go, by handfuls, and then all at once."
       ]
     },
     "hurricane": {
@@ -3316,7 +3406,13 @@
         "Shutters hammer all night; nobody in the low district sleeps.",
         "The market stalls are carried away whole and found in the fields.",
         "The bucket line forms for water coming in, not going out.",
-        "The guild post's sign is taken off its hooks and never recovered."
+        "The guild post's sign is taken off its hooks and never recovered.",
+        "Shutters come loose and fly; the Watch nails what will hold and lets what will not.",
+        "The Ford climbs over its path and takes a stretch of fence with it.",
+        "A boat is up on the chapel steps and nobody knows whose.",
+        "Sign-posts lean at the same hour, in the same direction, all over Bellmire.",
+        "A sheet of rain crosses the square and the square empties behind it.",
+        "The guild post keeps its doors braced open, so the wind cannot slam them shut."
       ],
       "pass": "The storm blows through. Bellmire is sodden and battered, but standing.",
       "cost": "Roofs and buildings torn across the town, fields flooded, and days of repair.",
@@ -3336,7 +3432,13 @@
         "Everything loose in Bellmire is brought in or tied down by noon.",
         "The storm walks in off the water with the whole sky behind it.",
         "The chapel bell is tied silent so the wind cannot ring it.",
-        "Black weather upriver, coming fast. The Ford is cleared of carts."
+        "Black weather upriver, coming fast. The Ford is cleared of carts.",
+        "A bruise on the horizon - and the gulls came inland two days ago. Now we know.",
+        "The sky turns the colour of a bad plum and keeps the colour.",
+        "The wind picks up at noon, and every rope in town is checked by evening.",
+        "Rain comes sideways first, which is how Bellmire knows what is behind it.",
+        "A great storm rolls off the sea and up the valley, aimed at the mountain and us.",
+        "Clouds low enough to touch the chapel spire, and climbing."
       ],
       "pass_alt": [
         "The storm goes over the hills. Bellmire is sodden, battered and standing.",
@@ -3354,7 +3456,13 @@
         "It passes. Thatch is in the hedges for a mile downriver.",
         "The wind quits at dawn. The repairs start before breakfast.",
         "The storm is gone. Every ladder in Bellmire is spoken for.",
-        "Still air, at last. The town hears itself again."
+        "Still air, at last. The town hears itself again.",
+        "The storm goes over the hills and keeps going. Bellmire tips water out of its boots.",
+        "Wind gone, rain going. The fields are brown lakes and the lakes are brown fields.",
+        "The sky clears from the Ford outward, and the Ford says it first.",
+        "The wind drops at dawn, politely, as if it had not spent the night throwing roofs.",
+        "The storm is finished. Bellmire climbs its ladders.",
+        "The horizon goes quiet. The gulls go back where they came from."
       ]
     },
     "tornado": {
@@ -3383,7 +3491,13 @@
         "The lane it cut runs straight through the town and out the other side.",
         "Thatch, hurdles and a chapel bench come down in the next field.",
         "A wall stands with no house behind it, and does not fall for days.",
-        "Nobody counts the sheep until the wind has fully gone."
+        "Nobody counts the sheep until the wind has fully gone.",
+        "The sound is wrong - a train that was never built, going past.",
+        "A door is lifted off its frame and set down in a different lane entirely.",
+        "Hay from an outlying barn is in the chapel courtyard, miles from any barn.",
+        "The Watch runs people into cellars, not politely.",
+        "The Ford shows for a moment through a window where no window ought to show it.",
+        "The sky goes green, which Bellmire does not like and has learned to respect."
       ],
       "pass": "The wind lifts and is gone, leaving a straight scar of wreckage.",
       "cost": "A random line of buildings flattened, and livestock scattered or lost.",
@@ -3403,7 +3517,13 @@
         "A whirl of wind touches the stubble and the stubble is gone.",
         "Everyone in the open runs the same direction, which tells you the direction.",
         "The air goes still, then green, then loud.",
-        "The wind makes a column and the column picks a lane through town."
+        "The wind makes a column and the column picks a lane through town.",
+        "The storm grows a tail at the edge of the fields and the tail touches down.",
+        "A whistle on the wind, and everyone in Bellmire knows the shape of it.",
+        "A finger of cloud reaches down past the orchard road and begins to walk.",
+        "The sky lowers until the chapel spire is lost, and then something comes out of the low.",
+        "A column walks the common - thin at the top, wide at the foot, and loud.",
+        "The outer fences go first, as a courtesy, and then the barns."
       ],
       "pass_alt": [
         "The wind lifts. It left a straight road of wreckage through the town.",
@@ -3421,7 +3541,13 @@
         "Still again. The damage is a straight line and easy to read.",
         "The wind unpicks itself and the sky goes ordinary.",
         "Over in a minute, which is the whole trouble with it.",
-        "It lifts. Bellmire walks the lane it cut and tallies the houses."
+        "It lifts. Bellmire walks the lane it cut and tallies the houses.",
+        "The wind lifts. Bellmire looks up out of its cellars.",
+        "A straight line of damage runs across town, as if drawn with a ruler.",
+        "The column climbs back into the cloud it came from and is done with us.",
+        "Silence after, and then dogs, and then everybody.",
+        "The sky goes a plain grey, which Bellmire has not been so glad of in weeks.",
+        "It leaves by the same road it came in on, politely, and takes the orchard gate."
       ]
     },
     "earthquake": {
@@ -3450,7 +3576,13 @@
         "The scar's mouth is wider this morning than it was last night.",
         "The square fills with households and their bedding, by choice.",
         "The bell with no clapper rings in its frame and unsettles everyone.",
-        "A wall is propped with timber and the timber is watched."
+        "A wall is propped with timber and the timber is watched.",
+        "The chapel cross goes a hand off true and nobody has the hand to straighten it.",
+        "Wells silt up all at once, as if on a signal.",
+        "A shelf of pots in the bakers' goes over, and the cat with it, in that order.",
+        "The clapperless bell swings in the frame and nearly - nearly - rings.",
+        "A stair on Craft Row cracks across in a line too neat for weathering.",
+        "The Watch counts heads at the post and finds two short. Then one. Then none."
       ],
       "pass": "The shaking stops. Bellmire checks its walls, and its dead.",
       "cost": "Walls and buildings cracked or down town-wide; the scar may gape a little deeper.",
@@ -3470,7 +3602,13 @@
         "The ground shrugs. Chimneys answer by coming down.",
         "The scar grinds, and the town above it hears the grinding.",
         "Stone cracks in the chapel wall, straight up, floor to roof.",
-        "The earth rolls under Bellmire like water under a boat."
+        "The earth rolls under Bellmire like water under a boat.",
+        "The scar grunts, and Bellmire grunts back - the ground is doing the talking.",
+        "A long roll under the feet, as if a cart went by that was not there.",
+        "The floor of the chapel runs in a wave that nobody can find the edges of.",
+        "Dust falls off every beam in town, all at once, politely.",
+        "The Ford throws a wave across its path from no wind, and knows why.",
+        "The hills shrug. Bellmire shrugs back and tries to look like it meant to."
       ],
       "pass_alt": [
         "The shaking stops. Bellmire walks its own walls looking for daylight.",
@@ -3488,7 +3626,13 @@
         "Still ground at last. Bellmire props what it cannot yet rebuild.",
         "The shaking ends. The scar is a little wider and nobody says so loudly.",
         "Over. The chapel is shored with timber and keeps ringing.",
-        "The ground is quiet. The counting of chimneys begins."
+        "The ground is quiet. The counting of chimneys begins.",
+        "The shaking stops. The walls stand, mostly, and the masons are already walking.",
+        "Aftershock, then nothing. Then the first door reopens.",
+        "Bellmire checks the chapel first, as is proper, and then its own homes.",
+        "The scar settles into its own throat and the town does the same.",
+        "Dust lifts off the beams in the lanterns and goes out the eaves. We are still here.",
+        "Stillness, and then hammers. Stillness, and then hammers."
       ]
     },
     "meteor": {
@@ -3517,7 +3661,13 @@
         "A watch is set on the crater, less for the town than for the thieves.",
         "Everything near the fall is warm to the touch and stays warm.",
         "Traders arrive early, asking about glass before asking about the dead.",
-        "The crier reads the toll, then the price of scarglass, in that order."
+        "The crier reads the toll, then the price of scarglass, in that order.",
+        "The crater at dawn is a bowl of smoking glass, and the glass is still warm.",
+        "Children are kept from the orchard road; the Watch keeps them from it harder.",
+        "The apothecary sends a flask of water to the crater and asks for a spoon of it back.",
+        "The scar hums a note it has not hummed before, and the crater hums with it.",
+        "A hawk circles the fallen star all day and will not perch anywhere near.",
+        "The guild post posts a bounty for a shard the size of a thumb."
       ],
       "pass": "The fires burn out. A crater smokes where the orchard used to stand.",
       "cost": "An outlying district or the orchard is destroyed - but the crater yields scarglass worth a fortune.",
@@ -3537,7 +3687,13 @@
         "A long white scratch across the sky, ending in the orchard.",
         "The night goes to noon for a breath, then thunder with no storm.",
         "A star comes down beyond the fields, and the fields light up.",
-        "Fire out of the sky, and a sound that arrives after the shaking."
+        "Fire out of the sky, and a sound that arrives after the shaking.",
+        "A star comes down slow - too slow - and the orchard takes it.",
+        "A light the colour of a coin in a lantern crosses the sky and keeps going down.",
+        "The night goes white for a breath, and then goes the other way.",
+        "The Ford turns silver for a heartbeat as the fall passes over.",
+        "Thunder with no cloud. Fire where no fire was lit. The orchard is gone.",
+        "A streak across the top of the dark that does not end in the dark."
       ],
       "pass_alt": [
         "The fires die back. A crater smokes where the orchard stood.",
@@ -3555,7 +3711,13 @@
         "The fires are out. Bellmire is poorer by a district and richer by a crater.",
         "Settled. The crater glitters, and the architect wants a look.",
         "The last flame is beaten out. The digging starts the same hour.",
-        "Done. A hole where the orchard was, and glass worth a fortune in it."
+        "Done. A hole where the orchard was, and glass worth a fortune in it.",
+        "The fires go out at dawn. The crater sits, smoking, and the dogs walk past it carefully.",
+        "The orchard is a hole and the hole is a mine. Bellmire has a new word for that.",
+        "The light in the crater dims to a glow by dusk and holds there.",
+        "The wind clears the smoke off the fallen star. The star lies there, waiting.",
+        "A quiet morning after. The crater is a well of glass and the glass is worth more than the orchard was.",
+        "The scar and the crater find each other across the fields and speak in a hum."
       ]
     },
     "scarstorm": {
@@ -3584,7 +3746,13 @@
         "Somebody comes out of the storm scar-touched, and it is not yet clear which way.",
         "The bell with no clapper rings clean, once, and will not do it again.",
         "The lamps burn colours and the oil is spent at twice the rate.",
-        "Nobody walks near the scar's mouth, and the watch is doubled anyway."
+        "Nobody walks near the scar's mouth, and the watch is doubled anyway.",
+        "The baker's bread rises in the shape of a face it ought not to remember.",
+        "The Watch's horns play a chord nobody tuned, every quarter hour, exactly.",
+        "The chapel candles burn the colour of the scar for an hour, then go back.",
+        "A lamplight amulet lights every lamp in the lane at once and refuses to stop.",
+        "The guild post's ink writes a line the clerk did not write, in his own hand.",
+        "The clapperless bell rings. Bellmire does not look at it; Bellmire looks away."
       ],
       "pass": "The scar quiets. The magic settles, mostly, and the town tallies what changed.",
       "cost": "Spellcasters are useless while it lasts; random buildings warp, and a few folk are scar-touched for good or ill.",
@@ -3604,7 +3772,13 @@
         "Spells go sideways in the square. The storm is up.",
         "Colour runs across the sky that no sky should have.",
         "The dungeon mouth glows, and the glow comes up and out.",
-        "The scar misfires on everything at once, and the town is inside it."
+        "The scar misfires on everything at once, and the town is inside it.",
+        "The dungeon mouth lights up like a hearth, and the hearths go out.",
+        "A pulse comes off the scar and walks the lanes, counting doors.",
+        "The air above the scar bends, and Bellmire's shadows bend with it.",
+        "Wild magic rolls up the stair of the scar and over the roofs in a wave.",
+        "The scar flares - once, twice, and then steadily - and the town hears its own thoughts out loud.",
+        "A smell like a struck anvil comes out of the dungeon mouth and stays."
       ],
       "pass_alt": [
         "The scar quiets. The magic settles - mostly - and the tally begins.",
@@ -3622,7 +3796,13 @@
         "The glow goes out of the sky. The apothecary starts her list of oddities.",
         "The scar closes its mouth. Bellmire inventories what is no longer square.",
         "Done. Two doors in the low district now open onto the wrong rooms.",
-        "The storm passes down into the dark. The chapel rings the all-clear."
+        "The storm passes down into the dark. The chapel rings the all-clear.",
+        "The scar quiets. The lamps remember their colour. The bread forgets its face.",
+        "It settles by degrees. The guild post counts its ink and what the ink wrote.",
+        "The clapperless bell goes silent again, and stays that way for a season.",
+        "The hearths relight themselves one lane at a time, politely.",
+        "The magic goes to ground, mostly. Bellmire counts what did not.",
+        "The scar closes its throat and keeps most of what it borrowed."
       ]
     },
     "flood": {

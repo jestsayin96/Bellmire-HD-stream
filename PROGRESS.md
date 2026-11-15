@@ -3850,3 +3850,20 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   2. FORMAT CONTRACT KEPT. descend callers still see the mix of "%s %s ..." lines (hero name + verb) and bare narrator lines that was already in the pool; cleared callers still see the mix of "Floor %d ..." lines and bare narrator lines. Any caller already picking at random off these arrays is picked up automatically.
   3. EPITAPHS are plain strings, as before - unchanged shape.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 40: disaster variants widening - every disaster's live pool gets 6 more (standing backlog item 4) (2026-11-15)
+
+- data/lore_lines.json: for every one of the ten disasters (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor, scarstorm), the three pools that print WHILE a disaster is live or at its moment get 6 new lines each:
+  - during: 24 -> 30 (+6 x 10 = +60 lines)
+  - begin_alt: 16 -> 22 (+6 x 10 = +60 lines)
+  - pass_alt: 16 -> 22 (+6 x 10 = +60 lines)
+  Total: 180 new lines. Backlog item 4 was last hit at C-cycle 29 (events) and C-cycle 11 (disasters); disasters needed the widening most. during is the pool that fires every tick a disaster is up, so repeat-fatigue lands there first on a long stream.
+- Voice held: Bellmire, the Ford, the scar/dungeon mouth, Craft Row, the guild post, the chapel, the clapperless bell, the chalk-cross doors, the orchard, the apothecary; plain narrator, no high fantasy, no floor count stated anywhere. Each disaster's canon kept: volcano is the mountain with ash; fire is Craft Row; drought dries the Ford; famine is ration-and-measure; sickness is chalked doors; hurricane is the bruised sky; tornado is the finger of cloud; earthquake is the scar shuddering; meteor is the orchard-crater with scarglass; scarstorm is wild magic over the roofs.
+- NO new keys, NO new disaster, NO new placeholder. begin / pass / cost (the single canonical lines + the cost statement the desktop wires mechanics from) are byte-identical to HEAD on every disaster. Only during / begin_alt / pass_alt arrays were extended, and only by append.
+- VALIDATION OK: python json.loads all four files clean. data/items.json, data/bosses.json, data/potions.json byte-identical to HEAD (git diff --numstat empty). data/lore_lines.json top-level key order unchanged (20 keys, identical to HEAD); every untouched top-level key deep-equal to HEAD; disasters.* sub-key order unchanged on every disaster (begin, during, pass, cost, begin_alt, pass_alt); every pre-existing during / begin_alt / pass_alt line is byte-identical at its pre-existing index, with the new lines strictly appended; zero duplicate line inside any added block and zero collision against the pre-existing contents of the same array. Trailing newline present. Bytes: 297,295 -> 317,057.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new list, no new file. Whatever reads lore_lines.disasters.<name>.during / begin_alt / pass_alt today reads these extra lines unchanged.
+  2. RANDOM-PICK CONTRACT KEPT. during is still the per-tick pool; begin_alt / pass_alt are still the alt pools a picker rolls instead of the canonical begin / pass so a second volcano does not read word for word like the first. Any caller already picking at random off these three arrays per disaster is picked up automatically.
+  3. IF a caller currently picks from <disaster>.during by fixed index rather than random, THIS cycle changes nothing on stream for that call - that path is the repetition. OWNER: desktop build (disaster lines fire from the town side).
+  4. BEGIN / PASS / COST UNCHANGED. The canonical single-line begin and pass, and the cost statement the desktop reads to decide mechanics, were NOT touched on any disaster. No wiring break possible there.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

@@ -616,3 +616,30 @@ A new **Town** tab (`#state`, second tab) shows the place itself, in three parts
 - A per-entry in-game `day` on chronicle rows, so the timeline can be stamped "Day 17" in the town's own count; today it is stamped by the viewer's clock (Today / Yesterday / N days gone).
 - Disaster and festival as their own chronicle `t` kinds; today they arrive as `town` and are recognised by keyword.
 
+## H19 - the Bestiary (Nov 15)
+
+A Bestiary tab after Lore: 8 deep lords, 5 named ones and 17 monster families (grouped from the frozen
+`events.monster_camps`), each with a page-owned roundel sigil. Sigils reuse the H15 hash machinery
+(`crestRecipe("sigil|" + name)`) but index a separate ring/field/charge whitelist (fangs, horns, eye, claw,
+flame, wings, coil, broken crown, crossed bones), so a monster's mark never looks like a hero's crest. Same
+name -> same sigil on every reload. The name only ever picks indices; no snapshot string reaches an
+attribute, URL or style.
+
+- MET vs RUMOUR: an entry is Met when the browser's own remembered Chronicle (the H14 history) names it
+  (name, or for a family its singular/plural or a camp name). A Met card shows the frozen intro line (lords/named)
+  or the frozen camp "while" lines (families), how many remembered lines name it and when last. Anything else is a RUMOUR:
+  sigil and name only, a veiled town-voice line, no intro, no data. Chronicle lines themselves are NOT quoted
+  (a remembered line could carry a depth figure; this section never states one).
+- Optional snapshot numbers are read from `p.bestiary[<page-owned key>]` only if the publisher sends them
+  (`faced`, `killed`, `deepest`, `standing`), via own-property lookup, numeric-coerced and capped. Today it sends none.
+- The entry list scrolls inside the panel (H13); one column at 390 (H17).
+- `?mock=bestiary` shows a met lord with numbers, a hostile lord name, a met family and the rumours.
+
+### Fields the Bestiary wanted and did not get (honest gaps - game build / publisher owner)
+
+- Per-lord and per-family records in the snapshot: `bestiary.<key>.faced`, `.killed`, `.deepest`, `.standing`
+  (supported by the page, never sent).
+- Tells and a description per lord: `bosses.json` is not in the frozen lore bundle (only `lord_intros`,
+  `unique_intros`, `events.monster_camps`), so no tells/description are shown. Needs a lore refresh (content worker).
+- A structured "monster met" signal: Met is inferred from remembered Chronicle text, so a beast the town
+  met before this browser began remembering (or more than 48 h ago) reads as a rumour here.

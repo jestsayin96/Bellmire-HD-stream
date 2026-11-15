@@ -4414,7 +4414,9 @@ var _cloth: StandardMaterial3D
 ## Tiers the town cannot make yet (Roster.town_tier, old sync_unlocks) hang on
 ## the rack under a dark cloth, unlit, marked "not yet made in Bellmire";
 ## when the town grows the cloth comes off.
-func show_tiers(tier: int) -> void:
+## D64: the rack is the smithy's counter. A locked peg now says WHY - the rarity of the piece
+## and the level the smithy would need - so what is on the shelf matches what its level allows.
+func show_tiers(tier: int, shop_lv := 0) -> void:
     if _cloth == null:
         _cloth = StandardMaterial3D.new()
         _cloth.albedo_color = Color(0.14, 0.12, 0.11)
@@ -4430,7 +4432,11 @@ func show_tiers(tier: int) -> void:
             (it["light"] as OmniLight3D).visible = not locked
         if it["label"] != null and is_instance_valid(it["label"]):
             var lb: Label3D = it["label"]
-            lb.text = (String(it["text"]).split("\n")[0] + "\nnot yet made in Bellmire") if locked else String(it["text"])
+            var why := "not yet made in Bellmire"
+            if shop_lv > 0:
+                # short lines: the pegs are a metre apart and the label is big (D64 shot)
+                why = "%s\nsmithy lv %d" % [Economy.rarity_of(int(it["t"])), int(it["t"])]
+            lb.text = (String(it["text"]).split("\n")[0] + "\n" + why) if locked else String(it["text"])
             lb.modulate = Color(0.55, 0.52, 0.5) if locked else (it["col"] as Color)
 
 func _tier_rack(p: Vector3, f: Vector3, side: Vector3, family: String) -> void:

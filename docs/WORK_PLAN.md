@@ -269,6 +269,18 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       Chronicle line that announced each piece, (c) one caravan that carried an above-cap piece and
       one that was intercepted and lost it, and (d) a 1080p capture of a shop pane where what is on
       the shelf matches what that shop's level allows. Gates green, parse 0 errors, payload under cap.
+      STAGE D64a DONE (game build, 2026-11-15 ~14:30 CT) - .1 + .2 in the game build's OWN files only
+      (economy.gd, town.gd, snapshot_pub.gd): Economy.RARITY ranks the unchanged ladders (0 none, 1
+      common, 2 uncommon, 3 rare, 4 epic, 5 legendary = found-only); the SMITHY is a building with a
+      level (shop_grown from town growth, today's curve unchanged + shop_raised from viewers) and that
+      level alone sets Roster.town_tier, the counter's ceiling; raise_shop(key, by, who) is D66's entry
+      point and cries the raise crediting who paid; a daily counter watch says plainly, once per hero per
+      level, when a hero with the gold is turned away by the cap; the rack's draped pegs read
+      "<rarity> / smithy lv N"; the snapshot town block gains `shops` [{name, level, sells_to}]
+      (additive, v stays 4). D64_TEST OK 17/17. OPEN: .2's per-shop cap for the other counters, .3
+      route-tagged Chronicle lines and .4 the caravan's above-cap piece all need roster.gd / chatcmd.gd /
+      gear.gd, which COORDINATION 11.2 gives to LAPTOP CODE and the game build's standing brief forbids
+      it to touch - the supervisor or Mr. E must reassign those files (or this item's remainder) first.
 
 - [ ] D65. EVERY CALLING STARTS AS ITSELF, AND TWO HEROES AT ONE TIER ARE NOT THE SAME OBJECT. Owner:
       DESKTOP BUILD (scripts/gear.gd, scripts/roster.gd, scripts/hero_body.gd). Mr. E's ruling 5 and

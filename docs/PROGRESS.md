@@ -1447,3 +1447,28 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   (0.018%) raid 0/8909 PASS; delve 0 SCRIPT ERROR.
 - FOR THE SUPERVISOR: merge `content` (C6) -> main -> laptop to make the words live; no code change needed after.
 
+## D-cycle - D64a a shop's level decides what it sells (gates .1 + .2), 2026-11-15 ~14:30 CT (game build)
+- Item: D64 (first open DESKTOP-owned item). STAGED, left OPEN. Started with origin/main merged (eb59bf8).
+- OWNERSHIP CONFLICT, stated not worked around: D64 names gear.gd / roster.gd / chatcmd.gd as DESKTOP BUILD files,
+  but COORDINATION 11.2 and the game build's standing brief give them to LAPTOP CODE and forbid touching them. This
+  stage stays inside economy.gd, town.gd, snapshot_pub.gd and only READS the roster.
+- scripts/economy.gd: RARITY over the unchanged ladders (no cost/atk/hp/ac/dice touched); the smithy has a level
+  (shop_grown, from growth - Roster.tier_for_town, so nothing regresses - plus shop_raised from viewer events) and
+  _apply_shop_caps sets Roster.town_tier from it, so the existing counter checks in roster.gd now enforce a BUILDING
+  cap; raise_shop() for D66 (clamped at epic, never banks levels, cries the raise naming who paid); _counter_watch()
+  at end of day tells the Chronicle once per hero per level when a hero holding the price + KIT_RESERVE is refused.
+  scripts/town.gd: show_tiers(tier, shop_lv) - a draped peg reads "<rarity>\nsmithy lv N" (first wording overprinted
+  at peg spacing in the shot; shortened). scripts/snapshot_pub.gd: town.shops [{name, level, sells_to}], additive.
+  Backups *.bak_d64.
+- TEST tools/_d64_test.gd: D64_TEST OK 17/17 - level 1 smithy refuses fine steel to a knight holding 5000 gold
+  ("Aldric wants fine steel, but no smith in Bellmire can forge it yet."), Chronicle: "Aldric stands at the smithy
+  with 5000 gold for uncommon steel, but a level 1 smithy sells nothing past common - plain steel is the best it will
+  make." once only; a poor hero is not counted; raise to 2 -> the same knight buys fine steel; clamps at epic.
+- LOOK tools/_d64_shot.gd -> renders/cycles/d64/d64_rack_{lv1,lv3}.png (1920x1080): at lv1 only plain steel is
+  unveiled, the rest draped and labelled uncommon/rare/epic with the smithy level each needs; at lv3 three pegs lit.
+- GATES: parse 0 errors (x3); OFFFLOOR 0/1229 INPROP 0 MON_INPROP 0/101; TWITCH_PARSE OK; W1A_TEST OK; D59_SHEET OK
+  (202 heroes 244 KB); TOWNWALK in_solid 3/17359 (0.017%) raid 0/9981 PASS; delve rc 0, 0 SCRIPT ERROR. (The rack
+  label rewording came after the battery; parse re-run clean.)
+- OPEN for D64: .3 route-tagged lines, .4 caravan above-cap piece, per-shop caps for armour/brews - all need
+  laptop-owned files. Mr. E/supervisor: who owns roster.gd/chatcmd.gd/gear.gd now that no laptop code worker runs?
+

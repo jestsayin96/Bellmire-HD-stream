@@ -1185,11 +1185,12 @@ this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do no
       DONE: a viewer redemption rolls on stream, the town visibly changes, and the Chronicle explains
       why - with at least one failure outcome demonstrated, not only successes.
 
-- [ ] H9. THE HUB DIE SHOWS THE ROLL. The hub's existing die section animates and displays rolls read
+- [x] H9. THE HUB DIE SHOWS THE ROLL. The hub's existing die section animates and displays rolls read
       FROM THE SNAPSHOT - individual rolls, and the outcome of a T5 viewer roll. Read-only: the page
       never initiates or submits a roll. Keep every HUB_SECURITY invariant (el()/textContent, no
       snapshot value as URL/src/href/style, CSP unchanged). Owner: HUB BUILDER.
       DONE: a roll and its outcome render on the hub, hostile-name test still passes.
+      TICKED (supervisor, Nov 14): shipped on hub (49676fe, db2719e) - the die shows the town's rolls from the snapshot and the rolls feed caps after dropping empties.
 
 - [ ] D43. SUBSCRIBER ROSTER FROM THE TWITCH API (Mr. E approved). Twitch sends subscription EVENTS,
       not a roster, so the subscriber lane currently only knows about subs that happen while live.
@@ -1643,7 +1644,7 @@ and moves to the hub, which has the room.
       hub can read. This SUPERSEDES the party-frames half of D41/L40 - that overlap is moot once the
       board is gone; D41 shrinks to just the Twitch chat column (the L36 overlap), still desktop-owned.
 
-- [ ] H10. "BANDS BELOW" SECTION ON THE HUB. Owner: HUB BUILDER (web/ only). A section that lists
+- [x] H10. "BANDS BELOW" SECTION ON THE HUB. Owner: HUB BUILDER (web/ only). A section that lists
       every party currently in the dungeon from the snapshot's new parties array: band name, floor,
       and each member with an HP bar and status, fallen and burning shown honestly. The hub has room
       the stream does not, so show ALL active parties, not just one. Every string is attacker-shaped
@@ -1659,6 +1660,7 @@ CHANGELOG 2026-11-13 14:15 (supervisor): added D46 (party band off stream + into
 Below section on the hub, gated on D46's snapshot field). D41/L40's party-frames half is superseded
 - only the chat-column overlap remains there. Agreed field shape for the parties array to be
 pinned when D46 and H10 start, so the two sides match.
+      TICKED (supervisor, Nov 14): shipped on hub (1ccec4c) - Bands Below renders delving parties on the hub, gated on the D46 snapshot v2.
 
 # Phase Z - strip the stream to Mr. E's six (supervisor, 2026-11-13 14:20). See COORDINATION 13.
 

@@ -5558,3 +5558,64 @@ right before the attack fires makes the beat readable.
   ERROR (party descended through floor 4 and returned); _townwalk
   in_solid 1/14956 (0.007%) raid_in_solid 0/2930 (0.000%) PASS;
   tools/_d21b3_test.gd D21B3 OK 8/0.
+# C-cycle 37 (content, laptop, branch `content`)
+- WHAT: the lines that repeat most, widened again - 206 new lines in data/lore_lines.json.
+  * tells: all eight dungeon biomes extended, each 28 -> 34 (warren, tomb, mine, works, prison, lair, fortress, temple). Six new tells per biome; voice and canon preserved (fortress still reads a garrison keeping something in, temple still reads a half-remembered rite, prison still reads work-shift tallies, mine still reads the shaft that outlasted the vein).
+  * descend 110 -> 130 (+20): new punchy lines for the long walk down.
+  * cleared 110 -> 130 (+20): new closers for the moment a lord goes down.
+  * epitaphs 160 -> 200 (+40): the stream's single most-repeated channel, now widest.
+  * misfire 50 -> 60 (+10): a d20 one away from the fumble is still viewer-facing text.
+  * barks: all SIX bark kinds widened 8 each - trap/drink/hurt/misfire 63 -> 71, enter/lord 64 -> 72 (lord is 64 and keeps its shape).
+  * town_life.crier 33 -> 37, market 32 -> 36, growth 32 -> 36 (+4 each): the town ticker the desktop reads between raids.
+- WHY this cycle: standing backlog item 5 (epitaphs, barks, descend and cleared lines - the ones that repeat most on a long stream). The stream test on Nov 13 showed the Chronicle re-hitting its lines inside one hour; this cycle widens every array that repeats fastest, while keeping each line short enough to read at a glance in the HUD panes.
+- VALIDATION OK: python json.loads data/lore_lines.json without error; items.json, bosses.json and potions.json byte-identical to HEAD; top-level key order unchanged (20 keys, identical to HEAD); every pre-existing list is an exact prefix of the new one and every pre-existing string is byte-identical (deep-walk, 0 fails); trailing newline restored; zero duplicate lines inside any widened array.
+- CODE WIRING implied by the new keys: NONE. This cycle only extends existing arrays that are already read on every path - tells by the dungeon's biome text, descend/cleared/epitaphs/misfire by the Chronicle, barks by the hero pop-ups, town_life.crier/market/growth by the desktop's town chatter. The new lines inherit the existing paths unchanged; no loader touches a new key.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+
+## C-cycle 38 - deepening E3PO, the Commander of the Guards (standing backlog item 3)
+- Context: raid/disaster/festival/town_talk/says are the pools E3PO fires from most on a live stream, and viewer_roll is what the chat hears on every roll. Before this cycle the heavy-rotation pools sat at 54/54/44/54/64 and the four viewer_roll buckets at 30 each. On a long stream a chat viewer hears each one more than once an hour; the ask on the content slot is to widen the ones that repeat most, in voice.
+- data/lore_lines.json, e3po block only. ADDITIVE: every pre-existing entry byte-identical; no key removed or renamed; no new sub-key introduced.
+  * e3po.raid 54 -> 72 (+18): gate-held, bleeding-and-correcting, count-the-arrows, "fall back behind me" - Commander-at-the-wall voice.
+  * e3po.disaster 54 -> 72 (+18): bucket-line, roll-of-the-lost, shore-brace-feed, water-first-prayers-second - the quiet steady-work voice he uses while the town burns.
+  * e3po.festival 44 -> 64 (+20): full-harness-refusing-a-chair, one-toast-a-year, one-measure-of-dancing, crowned-with-barley-plait - the warm-and-stiff voice.
+  * e3po.town_talk 54 -> 74 (+20): mend-the-gate-with-his-hands, outstared-a-storm, refused-a-lordship, three-brides-given-away - the "they say" voice the town uses when he is not in the room.
+  * e3po.says 64 -> 80 (+16): drill-is-the-price, count-the-loaves, say-the-watchword, nobody-gets-a-second-first-impression - his own direct lines at the gate.
+  * e3po.viewer_roll.crit 30 -> 42 (+12), .high 30 -> 42 (+12), .low 30 -> 42 (+12), .fumble 30 -> 42 (+12) - the four buckets a roll lands in, now a chat viewer can hear the pool roll for roughly a fourth longer before any one line repeats.
+- 140 new lines total. Voice held: ancient Commander, "the scar", "the gate", "the wall", "the watch", the book he keeps, the roll he reads out. No contradiction of C-cycle 5 (raid/disaster/festival/viewer_roll), C-cycle 17 (tier_up / night_watch / recruit / viewer_down / viewer_returns / lord_sighted) or C-cycle 28 (hurt / delve_dispatch / lord_cleared / viewer_cosmetic / rank_up / trader_arrives / drill / dispute). E3PO still cannot die; the withdraw / return pools are untouched.
+- ONE FIX INSIDE THIS CYCLE: a line I drafted into viewer_roll.low happened to repeat a line already in the pre-existing viewer_roll.low array ('The scar does not score us. Keep going.' - canon from C-cycle 5). I replaced my new draft at the end of the array with a fresh line ("'The dice counted the throw. I count the soldier. Different ledgers.'") so the pre-existing canon line sits exactly where it sat at HEAD and no viewer_roll bucket has a duplicate.
+- VALIDATION OK: python json.loads all four files clean. data/items.json, data/bosses.json and data/potions.json byte-identical to HEAD (git diff --numstat clean). data/lore_lines.json top-level key order unchanged (20 keys, identical to HEAD); every untouched top-level key deep-equal to HEAD; the nine touched arrays (raid, disaster, festival, town_talk, says, and the four viewer_roll buckets) keep their exact pre-existing values at indices 0..n-1, with the new lines strictly appended; zero duplicate line inside any of the nine widened arrays; trailing newline present. Bytes: 282,200 -> 293,050.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new list, no new file. Whatever reads e3po.raid / e3po.disaster / e3po.festival / e3po.town_talk / e3po.says / e3po.viewer_roll.{crit,high,low,fumble} today reads these 140 extra lines unchanged.
+  2. VIEWER_ROLL CHANNEL. If the viewer-roll result is already keyed by the four buckets, the four 30->42 widenings are picked up automatically. If any caller currently reads e3po.viewer_roll.<bucket>[fixed_index] rather than choice(bucket), THIS cycle changes nothing on stream for that call - that path is the repetition. OWNER: laptop code (wherever the !roll result line is formatted).
+  3. TOWN_TALK vs TOWN_LIFE. e3po.town_talk is the "they say" channel ABOUT the Commander; lore_lines.town_life.crier/market/growth is the town's own ticker. The 20 new town_talk lines ride the existing e3po.town_talk path, not town_life. OWNER: whoever owns the ambient-town chatter window.
+  4. SAYS is E3PO's own voice (first person / imperative); it is a different channel from town_talk and should not be mixed. The 16 new says lines inherit the existing says path unchanged.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 39: stream-repeat widening - epitaphs, descend, cleared (2026-11-15)
+
+- data/lore_lines.json: epitaphs 200 -> 240 (+40), descend 130 -> 150 (+20), cleared 130 -> 150 (+20). 80 new lines in the three pools that print the MOST on a long stream (every hero death, every delve dispatch, every floor cleared).
+- Voice held: the guild post, the tenth, the chalk-cross, the stair, the clapperless bell, the Chronicle writing the name, "measure the grain / count the flasks / keep the door". No floor count stated anywhere. No new category, no new key, no new placeholder: the new descend lines use the existing "%s %s ..." and bare-narrator shapes; the new cleared lines use the existing "Floor %d ..." and bare-narrator shapes; epitaphs are bare strings as before.
+- VALIDATION OK: python json.loads all four files clean. data/items.json, data/bosses.json, data/potions.json byte-identical to HEAD (git diff --numstat empty). data/lore_lines.json top-level key order unchanged (20 keys, identical to HEAD); every untouched top-level key deep-equal to HEAD; the three touched arrays keep their exact pre-existing values at indices 0..n-1, with the new lines strictly appended; zero duplicate line inside any of the three widened arrays and zero collision against the pre-existing contents. Trailing newline present. Bytes: 293,050 -> 297,295.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new list, no new file. Whatever reads lore_lines.epitaphs / lore_lines.descend / lore_lines.cleared today reads these 80 extra lines unchanged.
+  2. FORMAT CONTRACT KEPT. descend callers still see the mix of "%s %s ..." lines (hero name + verb) and bare narrator lines that was already in the pool; cleared callers still see the mix of "Floor %d ..." lines and bare narrator lines. Any caller already picking at random off these arrays is picked up automatically.
+  3. EPITAPHS are plain strings, as before - unchanged shape.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 40: disaster variants widening - every disaster's live pool gets 6 more (standing backlog item 4) (2026-11-15)
+
+- data/lore_lines.json: for every one of the ten disasters (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor, scarstorm), the three pools that print WHILE a disaster is live or at its moment get 6 new lines each:
+  - during: 24 -> 30 (+6 x 10 = +60 lines)
+  - begin_alt: 16 -> 22 (+6 x 10 = +60 lines)
+  - pass_alt: 16 -> 22 (+6 x 10 = +60 lines)
+  Total: 180 new lines. Backlog item 4 was last hit at C-cycle 29 (events) and C-cycle 11 (disasters); disasters needed the widening most. during is the pool that fires every tick a disaster is up, so repeat-fatigue lands there first on a long stream.
+- Voice held: Bellmire, the Ford, the scar/dungeon mouth, Craft Row, the guild post, the chapel, the clapperless bell, the chalk-cross doors, the orchard, the apothecary; plain narrator, no high fantasy, no floor count stated anywhere. Each disaster's canon kept: volcano is the mountain with ash; fire is Craft Row; drought dries the Ford; famine is ration-and-measure; sickness is chalked doors; hurricane is the bruised sky; tornado is the finger of cloud; earthquake is the scar shuddering; meteor is the orchard-crater with scarglass; scarstorm is wild magic over the roofs.
+- NO new keys, NO new disaster, NO new placeholder. begin / pass / cost (the single canonical lines + the cost statement the desktop wires mechanics from) are byte-identical to HEAD on every disaster. Only during / begin_alt / pass_alt arrays were extended, and only by append.
+- VALIDATION OK: python json.loads all four files clean. data/items.json, data/bosses.json, data/potions.json byte-identical to HEAD (git diff --numstat empty). data/lore_lines.json top-level key order unchanged (20 keys, identical to HEAD); every untouched top-level key deep-equal to HEAD; disasters.* sub-key order unchanged on every disaster (begin, during, pass, cost, begin_alt, pass_alt); every pre-existing during / begin_alt / pass_alt line is byte-identical at its pre-existing index, with the new lines strictly appended; zero duplicate line inside any added block and zero collision against the pre-existing contents of the same array. Trailing newline present. Bytes: 297,295 -> 317,057.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new list, no new file. Whatever reads lore_lines.disasters.<name>.during / begin_alt / pass_alt today reads these extra lines unchanged.
+  2. RANDOM-PICK CONTRACT KEPT. during is still the per-tick pool; begin_alt / pass_alt are still the alt pools a picker rolls instead of the canonical begin / pass so a second volcano does not read word for word like the first. Any caller already picking at random off these three arrays per disaster is picked up automatically.
+  3. IF a caller currently picks from <disaster>.during by fixed index rather than random, THIS cycle changes nothing on stream for that call - that path is the repetition. OWNER: desktop build (disaster lines fire from the town side).
+  4. BEGIN / PASS / COST UNCHANGED. The canonical single-line begin and pass, and the cost statement the desktop reads to decide mechanics, were NOT touched on any disaster. No wiring break possible there.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

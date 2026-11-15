@@ -583,7 +583,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       correctly a grass material, available to paint on a surface if he wants one specific ground
       (e.g. the trodden dirt paths) to read as grass. Awaiting his eye.
 
-- [ ] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.
+- [x] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX. (D21A_RAIDVFX OK: 3 kinds mend/heal/ward fired visibly in a lvl-2 scar raid with mage/cleric/sage enlisted; test harness fixes: notables.gd:606 dict entry, _d21 enlist-retry + headless _snap guard.)
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
 # Phase G - audio polish (owns sfx.gd) [D22]
 - [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.

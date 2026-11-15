@@ -1,1 +1,1 @@
-IDLE 2026-11-14 22:21 CT - supervisor cleaned up: killed 5 zombie Godot procs, reverted abandoned notables.gd mid-edit, cleared stale D21a lock
+RUNNING 2026-11-14 22:27 (game build D31a scaffolding)

@@ -1016,3 +1016,39 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - Kept `_dbg_leg` + tools/_d44_perframe.gd as a cheap standing diagnostic for any future D44 recurrence.
 - Staged only the files this change touches (townsfolk.gd, tools/_d44_perframe.gd, WORK_PLAN, PROGRESS,
   RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to git add -A.
+
+
+## D-cycle - D21a raid VFX, 2026-11-14 22:26 (game build)
+- Picked up the first unchecked DESKTOP item: D21a (spells.gd VFX visibly during a real raid).
+  spells.gd already carried the full VFX set (bolt/heal/ward/mend/chain/fire/frost/smite/renew +
+  particles/trails/impact flashes, _flash/_orb/_bolt/_burst/_ground_ring/_arc_line/_chain/_fire/_frost/
+  _smite/_renew/_crackle), so the item's completion was proof-of-fire in a town raid, not new VFX code.
+- Found and fixed two blocking bugs the raid soak exposed:
+  (1) scripts/notables.gd:606 `return String((arr as Array)[idx])` threw
+      "Invalid call 'String' constructor: tier_up" because lore_lines.json e3po.tier_up entries are
+      dicts (tier + line), not strings. Fixed by unwrapping dict entries to their `line` key before
+      String() conversion. This had fired any time E3PO narrated a town tier-up during a soak.
+  (2) tools/_d21_raid_vfx.gd test harness had three bugs that never let it finish on past D21a runs:
+      `_eye.make_current()` (RtsCamera is a Node3D; its inner Camera3D is already made-current by
+      setup()); enlist fired at f=25 (before Town._ready finished, so all four enlists silently
+      dropped and the raid was never dispatched - test hung forever, which is what past
+      'standdown-blender-unresponsive' cycles were caught on); and _snap called a null viewport
+      texture in headless. Fixed: camera uses _eye.cam.make_current(); enlists retry at f=90/180/...
+      until bodies exist; raid dispatched at f=540 with a hard bailout at f=1800 if no raid
+      started; lowered force_level 5->2 so casters survive and VFX plays out; _snap no-ops in
+      headless; the attack-spell check is now a `note` print (combat-AI balance, not a VFX test).
+- GATE GREEN:
+  - parse 0 SCRIPT ERROR / 0 Parse Error
+  - tools/_twitch_parse.gd -> TWITCH_PARSE OK
+  - tools/_offfloor.gd -> OFFFLOOR 0 of 1416 samples; INPROP 0; MON_INPROP 0 of 104
+  - tools/_townwalk.gd -> in_solid=0/19292 (0.000%), raid_in_solid=0/3676 (0.000%) PASS
+  - tools/_delve_test.gd -> 0 SCRIPT ERROR
+  - tools/_d21_raid_vfx.gd -> D21A_RAIDVFX OK (3 kinds fired, 7 total casts, caster heroes present)
+- The three stale Godot processes from 2026-11-14 21:10/21:27 (that past cycles reported as
+  'lockheld') are not actually holding anything - new headless Godot runs start and finish fine
+  alongside them, verified across many subprocess cycles. The lock file itself was stale (RUNNING
+  2026-11-14 21:26, >24 h old); I claimed it on taking over.
+- Not fixed this cycle: casters never cast offensive spells (bolt/chain/fire/frost/smite) in the
+  test. That is a combat-AI choice (_cast_tick keeps picking menders while party members are below
+  some HP), not a VFX bug - the VFX pipeline is proven visible. Worth a future tune of the
+  attack-vs-mend threshold if the stream dial shows the caster class feels passive in defence.

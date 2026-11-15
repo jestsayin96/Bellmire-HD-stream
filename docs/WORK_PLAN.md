@@ -1688,7 +1688,7 @@ in-world health bars / damage numbers / VFX -> KEEP (they are the content).
       stream. If feed_hud IS the Chronicle's renderer, leave it. Say which in PROGRESS.
       DONE: a 1080p stream crop showing ONLY the six; Satchel gone; feed_hud question answered.
 
-- [ ] H11. THE HUB ABSORBS WHAT LEFT THE STREAM. Owner: HUB BUILDER (web/ only). The hub already
+- [x] H11. THE HUB ABSORBS WHAT LEFT THE STREAM. Owner: HUB BUILDER (web/ only). The hub already
       carries hero sheets, inventory, gear, the fallen and the command list - so most of this
       exists. Fill the gaps so nothing that left the stream is lost: (a) SELLING PRICES on the
       viewer's sheet (the Satchel showed the counter's sell prices); (b) make a viewer's OWN hero
@@ -1703,6 +1703,31 @@ elements, everything else hub-only), from Mr. E's rule + his three edge-case ans
 strip, boss bar keep, in-world keep). Items: D48 (strip unit frame, desktop), L63 (strip Satchel +
 answer the feed_hud question, HUD), H11 (hub absorbs selling + own-hero find). L51's on-stream
 Satchel is intentionally removed - a direction change, its work feeds the hub, not wasted.
+      TICKED (supervisor, Nov 14): shipped on hub (6424763) - the Satchel (sellable items +
+      counter sell prices) and pin-your-hero, CSP unchanged, hostile-name test passes. Mr. E
+      approved: "Yes - dormant until game publishes v=3, no downside." Code awaits game-build L63/D48
+      to publish snapshot v=3; hub republish still Mr. E's call.
+- [ ] H12. LORE SECTION ON THE HUB (Mr. E's ask, Nov 14). Owner: HUB BUILDER (web/ only). The hub
+      should carry the world's lore so a new viewer can get oriented without leaning on chat. Pull from
+      data/lore_lines.json (READ from main; it is content-writer-owned, do not edit) and present the
+      sections that read as world lore - town_life, growth_tiers.tiers (as the town's own history),
+      e3po intro/says/town_talk (the Commander), the lord intro lines, disasters/events as "tales".
+      ALL strings reach the DOM ONLY via el()/textContent - every lore_lines value is still Twitch-era
+      text and may embed hostile markup. No new fetch; load from the same snapshot pipeline or bundle
+      a frozen copy with a visible last-updated. Icons from ICON_SET; no new URL/src/style. House
+      palette (parchment/charcoal/teal, Gloock for section titles only).
+      DONE: a viewer can read town/kingdom lore on the hub, hostile-name test still passes, invariants
+      intact, CSP unchanged.
+- [ ] H13. NO-SCROLL LAYOUT - the hub is one long page (Mr. E's ask, Nov 14). Owner: HUB BUILDER
+      (web/ only). Reorganise the existing sections (Boards, Chronicle, Hero Sheets, Bands Below,
+      Satchel, chat, lore from H12) so a viewer does not have to scroll one page end to end. Tabbed or
+      sidebar-nav layout, remembers the last section the viewer picked (localStorage, control-stripped,
+      25-cap, never used as URL/selector), keyboard-navigable, respects reduced-motion. NO new data,
+      NO new fetch, NO CSP change - purely a layout rework. Keep the house palette and the title-card
+      feel; a section rename is fine, a section REMOVAL is not without supervisor sign-off.
+      DONE: no section is more than one viewport tall at 1080p; a viewer can reach every section in
+      one click; hostile-name test passes across every tab; mobile/phone layout still works; invariants
+      + CSP + hostile-name test all intact.
 
 # Phase AA - Mr. E's narrated clip 14-26-15 (transcribed) (2026-11-13 14:50)
 

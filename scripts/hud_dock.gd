@@ -283,16 +283,16 @@ static var _layers_at := -100000
 ## the lines (and a lord's card) inside sheet_rect() so ink always sits on open vellum.
 ## It redraws only on resize (a static HUD skin), so the stepped gradients cost nothing.
 class ChronicleScroll extends Control:
-	const CREAM := Color(0.960, 0.910, 0.770)
-	const TAN := Color(0.865, 0.760, 0.555)
-	const TAN_DK := Color(0.660, 0.520, 0.330)
-	const WOOD_LT := Color(0.560, 0.405, 0.235)
-	const WOOD_DK := Color(0.250, 0.160, 0.085)
-	const BRASS := Color(0.780, 0.635, 0.340)
-	const BRASS_DK := Color(0.360, 0.275, 0.130)
-	const GOLD := Color(0.840, 0.670, 0.310)
-	const TEAL := Color(0.10, 0.62, 0.62)
-	const BURN := Color(0.190, 0.110, 0.065)
+	const CREAM := UiTheme.SCROLL_CREAM
+	const TAN := UiTheme.SCROLL_TAN
+	const TAN_DK := UiTheme.SCROLL_TAN_DK
+	const WOOD_LT := UiTheme.SCROLL_WOOD_LT
+	const WOOD_DK := UiTheme.SCROLL_WOOD_DK
+	const BRASS := UiTheme.SCROLL_BRASS
+	const BRASS_DK := UiTheme.SCROLL_BRASS_DK
+	const GOLD := UiTheme.SCROLL_GOLD
+	const TEAL := UiTheme.TEAL
+	const BURN := UiTheme.SCROLL_BURN
 
 	func _ready() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -383,8 +383,8 @@ class ChronicleScroll extends Control:
 		for sp in [Vector2(0.20, 0.34), Vector2(0.72, 0.24), Vector2(0.55, 0.76), Vector2(0.88, 0.64)]:
 			var c := ov.position + Vector2(ov.size.x * sp.x, ov.size.y * sp.y)
 			var rr := _p(7.0)
-			draw_circle(c, rr, Color(0.55, 0.40, 0.22, 0.05))
-			draw_circle(c, rr * 0.6, Color(0.48, 0.34, 0.18, 0.05))
+			draw_circle(c, rr, UiTheme.SCROLL_STAIN)
+			draw_circle(c, rr * 0.6, UiTheme.SCROLL_STAIN_2)
 
 	## the paper visibly furls under each rod: a strong dark gradient band hugging the rods
 	func _curl(ov: Rect2, cap: float) -> void:
@@ -392,12 +392,12 @@ class ChronicleScroll extends Control:
 		var hh := (cap * 1.55) / float(n)
 		for i in n:
 			var k := 1.0 - float(i) / float(n)
-			var col := Color(0.22, 0.14, 0.07, 0.5 * k)
+			var col := Color(UiTheme.SCROLL_EDGE_SHADE, UiTheme.SCROLL_EDGE_SHADE.a * k)
 			draw_rect(Rect2(ov.position.x, ov.position.y + float(i) * hh, ov.size.x, hh + 1.0), col)
 			draw_rect(Rect2(ov.position.x, ov.end.y - float(i + 1) * hh, ov.size.x, hh + 1.0), col)
 		# a faint central highlight so the sheet reads as a gently curved surface, not flat card
 		var midh := ov.size.y * 0.3
-		draw_rect(Rect2(ov.position.x, ov.position.y + (ov.size.y - midh) * 0.5, ov.size.x, midh), Color(1, 1, 1, 0.04))
+		draw_rect(Rect2(ov.position.x, ov.position.y + (ov.size.y - midh) * 0.5, ov.size.x, midh), UiTheme.SCROLL_GRAIN_HI)
 
 	func _frame(ov: Rect2) -> void:
 		var bi := _p(6.0)
@@ -424,7 +424,7 @@ class ChronicleScroll extends Control:
 		draw_circle(c, r * 0.80, BRASS)
 		draw_arc(c, r * 0.54, 0.0, TAU, 22, Color(TEAL.r, TEAL.g, TEAL.b, 0.95), maxf(1.0, _p(1.7)))
 		draw_circle(c, r * 0.30, BRASS_DK)
-		draw_circle(c - Vector2(r * 0.26, r * 0.30), r * 0.15, Color(0.97, 0.90, 0.64, 0.75))
+		draw_circle(c - Vector2(r * 0.26, r * 0.30), r * 0.15, UiTheme.SCROLL_GLINT)
 
 	func _dowel(cy: float, cap: float) -> void:
 		var s := size
@@ -433,9 +433,9 @@ class ChronicleScroll extends Control:
 		var wdt := x1 - x0
 		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
 		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
-		draw_rect(Rect2(x0, cy - cap * 0.5, wdt, maxf(1.0, cap * 0.20)), Color(0.68, 0.52, 0.31, 0.55))
-		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), Color(0.16, 0.10, 0.05, 0.85), 1.0)
-		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), Color(0.16, 0.10, 0.05, 0.85), 1.0)
+		draw_rect(Rect2(x0, cy - cap * 0.5, wdt, maxf(1.0, cap * 0.20)), UiTheme.SCROLL_GRAIN)
+		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), UiTheme.SCROLL_RULE, 1.0)
+		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), UiTheme.SCROLL_RULE, 1.0)
 		_finial(Vector2(x0 + cap, cy), cap)
 		_finial(Vector2(x1 - cap, cy), cap)
 
@@ -465,18 +465,18 @@ class ChronicleScroll extends Control:
 		var wx := (s.x - wsz.x) * 0.5
 		var wy := top_cy + wsz.y * 0.32
 		# L61: gilt on the dark wood (the burn-brown wordmark vanished into the spindle at 1080p)
-		draw_string(font, Vector2(wx + 1.0, wy + 1.5), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.08, 0.04, 0.02, 0.95))
-		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.97, 0.88, 0.62))
+		draw_string(font, Vector2(wx + 1.0, wy + 1.5), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_SHADOW)
+		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_HI)
 		# a teal wax-seal medallion with a gold jester diamond, on the top rod at the left
 		var sx: float = g.sx0 + cap * 0.6
 		var sy := top_cy
 		var sr := cap * 0.92
-		draw_circle(Vector2(sx, sy), sr, Color(0.06, 0.40, 0.40))
+		draw_circle(Vector2(sx, sy), sr, UiTheme.SCROLL_SEAL)
 		draw_circle(Vector2(sx, sy), sr * 0.82, TEAL)
 		var dd := sr * 0.52
 		draw_colored_polygon(PackedVector2Array([Vector2(sx, sy - dd), Vector2(sx + dd, sy), Vector2(sx, sy + dd), Vector2(sx - dd, sy)]), GOLD)
-		draw_circle(Vector2(sx, sy - dd), sr * 0.13, Color(0.97, 0.85, 0.48))
-		draw_circle(Vector2(sx, sy + dd), sr * 0.13, Color(0.97, 0.85, 0.48))
+		draw_circle(Vector2(sx, sy - dd), sr * 0.13, UiTheme.SCROLL_SEAL_PIP)
+		draw_circle(Vector2(sx, sy + dd), sr * 0.13, UiTheme.SCROLL_SEAL_PIP)
 
 	func _draw() -> void:
 		var s := size
@@ -488,7 +488,7 @@ class ChronicleScroll extends Control:
 		if ov.size.x <= 0.0 or ov.size.y <= 0.0:
 			return
 		# soft drop shadow (the whole sheet lifts off the panes)
-		draw_colored_polygon(_sheet_poly(g, _p(3.0), _p(4.0)), Color(0, 0, 0, 0.30))
+		draw_colored_polygon(_sheet_poly(g, _p(3.0), _p(4.0)), UiTheme.SCROLL_SHEET_SHADOW)
 		# the parchment silhouette: a wavy, deckled, slightly sagging polygon - NOT a rectangle
 		draw_colored_polygon(_sheet_poly(g, 0.0, 0.0), CREAM)
 		_side_shade(ov, _p(34.0))
@@ -603,7 +603,7 @@ class FightBanner extends CanvasLayer:
 	var _delve: Delve = null
 	func _announce(d: Delve, l: Monster) -> void:
 		_delve = d
-		var col: Color = l.def.get("aura", Color(1, 0.8, 0.4))
+		var col: Color = l.def.get("aura", UiTheme.AURA_DEFAULT)
 		_kick.text = "NOW FIGHTING"
 		_nm.text = String(l.def.get("name", "A lord"))
 		_nm.add_theme_color_override("font_color", col.darkened(0.55))

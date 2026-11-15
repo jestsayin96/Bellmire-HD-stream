@@ -43,27 +43,27 @@ static func set_scale(s: float) -> void:
 ## the parchment every panel shares (L16 builds the theme on this)
 static func parchment(border := 3) -> StyleBoxFlat:
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.93, 0.86, 0.69, 0.92)
-	sb.border_color = Color(0.45, 0.30, 0.16, 0.95)
+	sb.bg_color = PARCHMENT
+	sb.border_color = EDGE
 	sb.set_border_width_all(border)
-	sb.set_corner_radius_all(6)
+	sb.set_corner_radius_all(RADIUS)
 	sb.content_margin_left = px(18)
 	sb.content_margin_right = px(18)
 	sb.content_margin_top = px(10)
 	sb.content_margin_bottom = px(12)
-	sb.shadow_color = Color(0, 0, 0, 0.4)
-	sb.shadow_size = 6
+	sb.shadow_color = SHADOW
+	sb.shadow_size = SHADOW_SIZE
 	return sb
 
 ## ---- L16: one theme for every panel - parchment and ink, the JestSayin teal as
 ## the one accent (title rules, the diamond before a title, focus, the timer).
 ## Text sizes: TITLE / BODY / SMALL, in 1080p pixels.
-const PARCH := Color(0.93, 0.86, 0.69, 0.93)
+const PARCH := PARCHMENT
 const INK := Color(0.16, 0.10, 0.06)
 const INK_SOFT := Color(0.38, 0.28, 0.19)
 const INK_RED := Color(0.48, 0.20, 0.12)
 const EDGE := Color(0.45, 0.30, 0.16, 0.95)
-const TEAL := Color(0.10, 0.62, 0.62)
+const TEAL := Color(0.10, 0.62, 0.62)   # the accent fill (rules, gems)
 const VIEWER := Color(0.55, 0.35, 0.02)      # a viewer's name on parchment (deep gold)
 const BAND := Color(0.24, 0.27, 0.34)        # the town's own band (slate)
 const TITLE := 30
@@ -141,6 +141,119 @@ static func chip() -> StyleBoxFlat:
 	sb.content_margin_bottom = px(6)
 	sb.shadow_size = 3
 	return sb
+
+## ---- L65.1 TOKENS: the design system. Every value is named once, here; the HUD
+## files read these and carry no literal colour, size or radius of their own.
+## Sizes are 1080p pixels (run them through px()).
+## TYPE SCALE (named roles). Floor: nothing a viewer must read is under T_CAPTION.
+const T_WORDMARK := 46     # the Chronicle wordmark / a spotlight card title (Gloock)
+const T_SECTION := 30      # a panel title
+const T_BODY := 26         # body copy on a panel
+const T_CHRONICLE := 21    # Chronicle body (Mr. E approved, L61)
+const T_CAPTION := 17      # smallest legible string on stream (world-space chip text)
+const T_NUMERAL := 28      # scores, counts, timers
+## SPACING step (1080p px): gaps are multiples of this
+const SP := 6
+const SP_2 := 12
+const SP_3 := 18
+## SURFACES. PARCHMENT is the one light value; PLATE is the one dark value.
+const PARCHMENT := Color(0.93, 0.86, 0.69, 0.93)
+const PARCHMENT_SOLID := Color(0.93, 0.86, 0.69, 1.0)
+const PLATE := Color(0.10, 0.07, 0.06, 0.94)
+const PLATE_SOLID := Color(0.10, 0.07, 0.06, 1.0)
+## INK pairs. ON PARCHMENT: INK / INK_SOFT / INK_RED / VIEWER / GOOD / BAD. ON DARK: ON_DARK*.
+const ON_DARK := Color(0.93, 0.86, 0.69)        # parchment-coloured text on PLATE
+const ON_DARK_SOFT := Color(0.74, 0.66, 0.50)
+const ON_DARK_SHADOW := Color(0.0, 0.0, 0.0)
+const GOOD := Color(0.10, 0.40, 0.16)
+const BAD := Color(0.60, 0.14, 0.10)
+## TEAL (the one accent) and GOLD, each with an on-parchment and an on-dark value.
+const TEAL_ON_PARCH := Color(0.06, 0.45, 0.45)
+const TEAL_ON_DARK := Color(0.30, 0.78, 0.76)
+const GOLD_ON_PARCH := Color(0.50, 0.32, 0.02)
+const GOLD_ON_DARK := Color(0.78, 0.62, 0.30)
+## BORDER and CORNER constants
+const BORDER := 2
+const BORDER_PANEL := 3
+const RADIUS := 6
+const EDGE_ON_DARK := Color(0.78, 0.62, 0.30)
+## ELEVATION: one shadow
+const SHADOW := Color(0, 0, 0, 0.4)
+const SHADOW_SIZE := 6
+## LEGIBILITY FLOOR (L65.4): min size and min contrast ratio vs the real backdrop
+const FLOOR_PX := 17
+const FLOOR_CONTRAST := 4.5
+
+## SCROLL palette (the Chronicle's vellum, wood and brass) and effect inks
+const SCROLL_CREAM := Color(0.960, 0.910, 0.770)
+const SCROLL_TAN := Color(0.865, 0.760, 0.555)
+const SCROLL_TAN_DK := Color(0.660, 0.520, 0.330)
+const SCROLL_WOOD_LT := Color(0.560, 0.405, 0.235)
+const SCROLL_WOOD_DK := Color(0.250, 0.160, 0.085)
+const SCROLL_BRASS := Color(0.780, 0.635, 0.340)
+const SCROLL_BRASS_DK := Color(0.360, 0.275, 0.130)
+const SCROLL_GOLD := Color(0.840, 0.670, 0.310)
+const SCROLL_BURN := Color(0.190, 0.110, 0.065)
+const SCROLL_GRAIN := Color(0.68, 0.52, 0.31, 0.55)
+const SCROLL_GRAIN_HI := Color(1, 1, 1, 0.04)
+const SCROLL_STAIN := Color(0.55, 0.40, 0.22, 0.05)
+const SCROLL_STAIN_2 := Color(0.48, 0.34, 0.18, 0.05)
+const SCROLL_RULE := Color(0.16, 0.10, 0.05, 0.85)
+const SCROLL_EDGE_SHADE := Color(0.22, 0.14, 0.07, 0.5)
+const SCROLL_SHEET_SHADOW := Color(0, 0, 0, 0.30)
+const SCROLL_GLINT := Color(0.97, 0.90, 0.64, 0.75)
+const SCROLL_SEAL := Color(0.06, 0.40, 0.40)
+const SCROLL_SEAL_PIP := Color(0.97, 0.85, 0.48)
+const WORD_HI := Color(0.97, 0.88, 0.62)
+const WORD_SHADOW := Color(0.08, 0.04, 0.02, 0.95)
+const AURA_DEFAULT := Color(1, 0.8, 0.4)
+const WHITE := Color(1, 1, 1)
+const ON_KIND := Color(1, 0.98, 0.92)
+const TAG_GOLD := Color(1.0, 0.86, 0.40)
+const TAG_OUTLINE := Color(0, 0, 0, 0.95)
+const CHIP_RADIUS := 3
+## spotlight / director subject colours, one per kind
+const KIND := {"bits": Color(0.95, 0.72, 0.18), "subs": Color(0.62, 0.36, 0.92), "points": Color(0.20, 0.72, 0.70), "director": Color(0.16, 0.10, 0.06), "wide": Color(0.38, 0.28, 0.19)}
+
+## L65.2 CHROME: the one panel frame. kind: "parch" (light) or "plate" (dark).
+static func frame(kind := "parch", margin_h := SP_3, margin_v := SP_2) -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	var dark := kind == "plate"
+	sb.bg_color = PLATE if dark else PARCHMENT
+	sb.border_color = EDGE_ON_DARK if dark else EDGE
+	sb.set_border_width_all(BORDER if dark else BORDER_PANEL)
+	sb.set_corner_radius_all(RADIUS)
+	sb.content_margin_left = px(margin_h)
+	sb.content_margin_right = px(margin_h)
+	sb.content_margin_top = px(margin_v * 0.8)
+	sb.content_margin_bottom = px(margin_v)
+	sb.shadow_color = SHADOW
+	sb.shadow_size = SHADOW_SIZE
+	return sb
+
+## the header (diamond + title + teal rule) is title(); the divider and the empty state:
+static func divider(col := INK_SOFT) -> ColorRect:
+	var r := ColorRect.new()
+	r.color = Color(col.r, col.g, col.b, 0.45)
+	r.custom_minimum_size = Vector2(0, maxi(1, px(1)))
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return r
+
+static func empty_state(text: String, col := INK_SOFT) -> Label:
+	var lb := label(text, T_BODY * 0.85, col)
+	lb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	return lb
+
+## WCAG contrast ratio of two opaque colours (used by the legibility audit, L65.4)
+static func contrast(a: Color, b: Color) -> float:
+	var la := _lum(a)
+	var lb := _lum(b)
+	return (maxf(la, lb) + 0.05) / (minf(la, lb) + 0.05)
+
+static func _lum(c: Color) -> float:
+	var f := func(v: float) -> float:
+		return v / 12.92 if v <= 0.03928 else pow((v + 0.055) / 1.055, 2.4)
+	return 0.2126 * f.call(c.r) + 0.7152 * f.call(c.g) + 0.0722 * f.call(c.b)
 
 ## ---- L16 (phone test): speech in the world - a townsperson's bubble, the crier.
 ## Same house as the Chronicle: ink on parchment, a plate behind the words so they

@@ -574,3 +574,9 @@ every tab.
 
 No animation, no scroll trickery, no viewport-math. A phone, a desktop and
 an overlay all get the same ten-button row with the same one-click reach.
+
+---
+
+## H14: the Chronicle remembers
+
+A rolling per-browser history (localStorage key `bellmire.chron.v1`, newest first, capped at 300 rows / 48 h / ~120 KB, oldest dropped first) is folded in from every live snapshot. Live lines show first, then an "Earlier" divider and day dividers in the town's voice. De-duplication is by kind+text against the live set. Remembered rows are re-validated field by field on read and drawn through the same chronShape/el()/textContent path as live ones. No new fetch, origin, write path or CSP change; storage absent/full/throwing leaves the page working with no history.

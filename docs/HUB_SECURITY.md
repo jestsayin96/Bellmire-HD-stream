@@ -520,3 +520,7 @@ reaches `.focus()` or any selector.
 6. ?open=1 lands on the Heroes tab with the first hero's sheet open.
 
 If any of that is not true, do not republish.
+
+## H14: stored chronicle history
+
+The hub now keeps up to 300 chronicle rows (48 h) in localStorage `bellmire.chron.v1`. Stored text is attacker-controlled Twitch input that has crossed a storage round-trip: it is re-cleaned (control chars stripped, 400-char cap, kind and timestamp regex-validated) on read and rendered only through el()/textContent. No snapshot or stored field becomes a URL, src, href or style. No CSP change, no new fetch, no write path to any server.

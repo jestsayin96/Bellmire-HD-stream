@@ -64,11 +64,11 @@ class Satchel extends PanelContainer:
     const AUTO_FOLD := false
     const SELL_BACK := 0.4          # what the counter pays for a thing already owned
     const W := 560                  # 1080p px
-    const INK := Color(0.20, 0.13, 0.08)
-    const SOFT := Color(0.38, 0.28, 0.19)
-    const GOLD := Color(0.50, 0.32, 0.02)
-    const GOOD := Color(0.10, 0.40, 0.16)
-    const BAD := Color(0.60, 0.14, 0.10)
+    const INK := UiTheme.INK
+    const SOFT := UiTheme.INK_SOFT
+    const GOLD := UiTheme.GOLD_ON_PARCH
+    const GOOD := UiTheme.GOOD
+    const BAD := UiTheme.BAD
     ## a worn piece's fields -> how the sheet says them
     const GIVES := [["ac", "AC"], ["hp", "HP"], ["hit", "to hit"], ["dmg", "dmg"],
         ["saves", "saves"], ["speed", "pace"]]

@@ -1,0 +1,528 @@
+{
+  "name": "raid",
+  "mapping": {
+    "style": "epic_cinematic",
+    "mood": "hype",
+    "role": "music"
+  },
+  "brief": {
+    "role": "music",
+    "mood": "hype",
+    "seconds": 48,
+    "seed": 3414,
+    "style": "epic_cinematic",
+    "brightnessBias": 0,
+    "densityBias": 0,
+    "targetBpm": 100,
+    "name": "bellmire_raid"
+  },
+  "pocket": false,
+  "project": {
+    "bpm": 80,
+    "bars": 16,
+    "key": {
+      "root": 4,
+      "scale": "minor"
+    },
+    "style": {
+      "id": "epic_cinematic",
+      "mood": "hype",
+      "progressionId": "i-VII-VI-VII",
+      "drumId": "kick808-ost+snare-late+hat-8+perc-fill",
+      "bassId": "octave-hop",
+      "motifId": "m6-3-ABAC",
+      "lengthMode": "loop",
+      "structure": [
+        {
+          "name": "A",
+          "bars": 4
+        },
+        {
+          "name": "build",
+          "bars": 3
+        },
+        {
+          "name": "drop",
+          "bars": 5
+        },
+        {
+          "name": "break",
+          "bars": 3
+        },
+        {
+          "name": "turnaround",
+          "bars": 1
+        }
+      ],
+      "fingerprint": "fp667dyy",
+      "requestedSeed": 3414,
+      "usedSeed": 3414,
+      "reseeds": 0,
+      "titleWords": "Soft Marble Turn 6",
+      "similarity": {
+        "nearestDistance": 1,
+        "nearestId": "",
+        "nearestName": "",
+        "threshold": 0.16,
+        "requestedSeed": 3414,
+        "usedSeed": 3414,
+        "reseeds": 0
+      }
+    },
+    "master": {
+      "gainDb": 0,
+      "speechPocket": false,
+      "speechDipDb": -5,
+      "targetLufs": -16,
+      "ceilingDbtp": -1
+    },
+    "seed": 3414
+  },
+  "norm": {
+    "before": {
+      "lufs": -34.96408314883595,
+      "shortTermMax": -34.03823255267937,
+      "samplePeak": -9.006199684335911,
+      "truePeak": -9.006199684335911
+    },
+    "after": {
+      "lufs": -17.98357299041762,
+      "shortTermMax": -16.271975703497834,
+      "samplePeak": -1.3000000932331663,
+      "truePeak": -1.2982929542584145
+    },
+    "passes": 6,
+    "note": "limited by ceiling"
+  },
+  "searched": 16,
+  "strictPass": false,
+  "moodPass": false,
+  "moodScore": 0.6026903796320315,
+  "moodBest": "hype",
+  "suggestions": [
+    "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+    "Loudness movement is 7.4 dB for hype, ideal 1-5 dB.",
+    "Drum regularity is 0.5 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+  ],
+  "speechRoom": {
+    "speechShare": 0.16577247320379473,
+    "speechBandDbBelowTotal": 7.804875831234618,
+    "restShare": 0.8342275267962053,
+    "role": "music",
+    "threshold": null,
+    "verdict": "n/a",
+    "message": "Speech band (300-3000 Hz) is 16.6% of the energy, 7.8 dB below the total. No speech-room limit for this role. Numbers only."
+  },
+  "seam": "ok",
+  "paragraph": "busy, mid-register arrangement at a slow minor setting (measured: 80 BPM, 9.06 onsets/s, median pitch D4, centroid 2817 Hz). Brightness reads balanced. Loudness movement reads dynamic (7.45 dB). Stereo reads mono-like. Voices used: kick808, snare, hatClosed, sub808, brass, strings. Layering measured A:6, build:6, drop:6, break:6, turnaround:6 active layers per section. These are measurements, not a judgment of how it sounds.",
+  "tries": [
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3303,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5857316616490108,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too empty for hype: 5.8 onsets/s, ideal 6-12. Add a few hat or pluck steps.",
+        "Loudness movement is 7.9 dB for hype, ideal 1-5 dB."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 5.81,
+        "brightness": 4030.06,
+        "loudnessMovement": 7.91,
+        "regularity": 0.44
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3340,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5024139184761909,
+      "best": "playful",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Loudness movement is 7 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.8 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 7.17,
+        "brightness": 2944.49,
+        "loudnessMovement": 6.95,
+        "regularity": 0.75
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3377,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.4978420636623443,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too bright for hype: centroid 5340.8 Hz, ideal 2000-4500 Hz. Lower a lowpass cutoff or drop the lead an octave.",
+        "Loudness movement is 7.7 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.5 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 6.9,
+        "brightness": 5340.79,
+        "loudnessMovement": 7.68,
+        "regularity": 0.55
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3414,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.6026903796320315,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Loudness movement is 7.4 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.5 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 9.06,
+        "brightness": 2816.7,
+        "loudnessMovement": 7.45,
+        "regularity": 0.53
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3451,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.49845292910541,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too bright for hype: centroid 4514.9 Hz, ideal 2000-4500 Hz. Lower a lowpass cutoff or drop the lead an octave.",
+        "Loudness movement is 7.5 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.7 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 7.17,
+        "brightness": 4514.89,
+        "loudnessMovement": 7.5,
+        "regularity": 0.67
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3488,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.34245896194518854,
+      "best": "lowkey",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too bright for hype: centroid 6447.3 Hz, ideal 2000-4500 Hz. Lower a lowpass cutoff or drop the lead an octave.",
+        "Loudness movement is 7.8 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.6 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 6.08,
+        "brightness": 6447.31,
+        "loudnessMovement": 7.76,
+        "regularity": 0.6
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3525,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.4081306627779215,
+      "best": "playful",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too empty for hype: 5 onsets/s, ideal 6-12. Add a few hat or pluck steps.",
+        "Loudness movement is 6.8 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 1 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 5,
+        "brightness": 3933.36,
+        "loudnessMovement": 6.84,
+        "regularity": 1
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 3562,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.45,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Loudness movement is 10.1 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.9 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 6.31,
+        "brightness": 2359.03,
+        "loudnessMovement": 10.09,
+        "regularity": 0.86
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3303,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5857316508355727,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too empty for hype: 5.8 onsets/s, ideal 6-12. Add a few hat or pluck steps.",
+        "Loudness movement is 7.9 dB for hype, ideal 1-5 dB."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 5.81,
+        "brightness": 4030.06,
+        "loudnessMovement": 7.91,
+        "regularity": 0.44
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3340,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5024139258990654,
+      "best": "playful",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Loudness movement is 7 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.8 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 7.17,
+        "brightness": 2944.49,
+        "loudnessMovement": 6.95,
+        "regularity": 0.75
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3377,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.49784199850034516,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too bright for hype: centroid 5340.8 Hz, ideal 2000-4500 Hz. Lower a lowpass cutoff or drop the lead an octave.",
+        "Loudness movement is 7.7 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.5 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 6.9,
+        "brightness": 5340.79,
+        "loudnessMovement": 7.68,
+        "regularity": 0.55
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3414,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.602690375147322,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Loudness movement is 7.4 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.5 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 9.06,
+        "brightness": 2816.7,
+        "loudnessMovement": 7.45,
+        "regularity": 0.53
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3451,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.49845293644394306,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too bright for hype: centroid 4514.9 Hz, ideal 2000-4500 Hz. Lower a lowpass cutoff or drop the lead an octave.",
+        "Loudness movement is 7.5 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.7 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 7.17,
+        "brightness": 4514.89,
+        "loudnessMovement": 7.5,
+        "regularity": 0.67
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3488,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.3424589672353431,
+      "best": "lowkey",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too bright for hype: centroid 6447.3 Hz, ideal 2000-4500 Hz. Lower a lowpass cutoff or drop the lead an octave.",
+        "Loudness movement is 7.8 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.6 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 6.08,
+        "brightness": 6447.31,
+        "loudnessMovement": 7.76,
+        "regularity": 0.6
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3525,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.40813067633463723,
+      "best": "playful",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Too empty for hype: 5 onsets/s, ideal 6-12. Add a few hat or pluck steps.",
+        "Loudness movement is 6.8 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 1 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 5,
+        "brightness": 3933.36,
+        "loudnessMovement": 6.84,
+        "regularity": 1
+      }
+    },
+    {
+      "bb": 0,
+      "db": 1,
+      "seed": 3562,
+      "pocket": false,
+      "bpm": 80,
+      "bars": 16,
+      "pass": false,
+      "score": 0.45,
+      "best": "hype",
+      "speech": "n/a",
+      "seam": "ok",
+      "sugg": [
+        "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+        "Loudness movement is 10.1 dB for hype, ideal 1-5 dB.",
+        "Drum regularity is 0.9 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 80,
+        "density": 6.31,
+        "brightness": 2359.03,
+        "loudnessMovement": 10.09,
+        "regularity": 0.86
+      }
+    }
+  ]
+}

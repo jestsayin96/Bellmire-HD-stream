@@ -1,0 +1,632 @@
+{
+  "name": "delve",
+  "mapping": {
+    "style": "lofi_chill",
+    "mood": "lowkey",
+    "role": "bed"
+  },
+  "brief": {
+    "role": "bed",
+    "mood": "lowkey",
+    "seconds": 64,
+    "seed": 4737,
+    "style": "lofi_chill",
+    "brightnessBias": 0,
+    "densityBias": -1.5,
+    "name": "bellmire_delve"
+  },
+  "pocket": false,
+  "project": {
+    "bpm": 70,
+    "bars": 16,
+    "key": {
+      "root": 0,
+      "scale": "dorian"
+    },
+    "style": {
+      "id": "lofi_chill",
+      "mood": "lowkey",
+      "progressionId": "i-bVII-IV",
+      "drumId": "kick-sparse+snare-late+hat-8+perc-off",
+      "bassId": "root-5",
+      "motifId": "m6-4-AABA",
+      "lengthMode": "loop",
+      "structure": [
+        {
+          "name": "A",
+          "bars": 5
+        },
+        {
+          "name": "B",
+          "bars": 4
+        },
+        {
+          "name": "break",
+          "bars": 2
+        },
+        {
+          "name": "A",
+          "bars": 4
+        },
+        {
+          "name": "turnaround",
+          "bars": 1
+        }
+      ],
+      "fingerprint": "fpaw4sk",
+      "requestedSeed": 4737,
+      "usedSeed": 4737,
+      "reseeds": 0,
+      "titleWords": "Rapid Canyon Step 6",
+      "similarity": {
+        "nearestDistance": 1,
+        "nearestId": "",
+        "nearestName": "",
+        "threshold": 0.16,
+        "requestedSeed": 4737,
+        "usedSeed": 4737,
+        "reseeds": 0
+      }
+    },
+    "master": {
+      "gainDb": 0,
+      "speechPocket": true,
+      "speechDipDb": -6,
+      "targetLufs": -20,
+      "ceilingDbtp": -1
+    },
+    "seed": 4737
+  },
+  "norm": {
+    "before": {
+      "lufs": -37.66716665829937,
+      "shortTermMax": -38.73539790967738,
+      "samplePeak": -11.685440026204075,
+      "truePeak": -11.661098622634325
+    },
+    "after": {
+      "lufs": -20.34371672539843,
+      "shortTermMax": -20.905270704893493,
+      "samplePeak": -1.3000000932331663,
+      "truePeak": -1.2999598547642974
+    },
+    "passes": 6,
+    "note": "limited by ceiling"
+  },
+  "searched": 20,
+  "strictPass": false,
+  "moodPass": false,
+  "moodScore": 0.563873311690273,
+  "moodBest": "lowkey",
+  "suggestions": [
+    "Too busy for lowkey: 6.3 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+    "Too dark for lowkey: centroid 338.5 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+    "Loudness movement is 4.4 dB for lowkey, ideal 0-2.5 dB.",
+    "Drum regularity is 0.6 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+  ],
+  "speechRoom": {
+    "speechShare": 0.20217926695976282,
+    "speechBandDbBelowTotal": 6.942633824079014,
+    "restShare": 0.7978207330402372,
+    "role": "bed",
+    "threshold": {
+      "pass": 0.4,
+      "warn": 0.55
+    },
+    "verdict": "pass",
+    "message": "Speech band (300-3000 Hz) is 20.2% of the energy, 6.9 dB below the total. That is at or under 40% for a bed."
+  },
+  "seam": "ok",
+  "paragraph": "busy, mid-register arrangement at a slow dorian setting (measured: 70 BPM, 6.33 onsets/s, median pitch Eb4, centroid 338 Hz). Brightness reads dark. Loudness movement reads dynamic (4.38 dB). Stereo reads mono-like. Voices used: kick, snareTight, shaker, sub808, bell, pizz. Layering measured A:6, B:6, break:6, A:6, turnaround:6 active layers per section. These are measurements, not a judgment of how it sounds.",
+  "tries": [
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4404,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": true,
+      "score": 0.6858889475035176,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 385.9 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 10.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 2.52,
+        "brightness": 385.89,
+        "loudnessMovement": 10.41,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4441,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5388407400133088,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 3.8 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 281.4 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.6 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.76,
+        "brightness": 281.38,
+        "loudnessMovement": 5.57,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4478,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5714284886159836,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 3.8 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 314 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.76,
+        "brightness": 313.96,
+        "loudnessMovement": 5.03,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4515,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.6350974141608988,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 335.1 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 8.8 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 2.22,
+        "brightness": 335.1,
+        "loudnessMovement": 8.84,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4552,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5179542848409119,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 218 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 8.3 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 2.46,
+        "brightness": 217.95,
+        "loudnessMovement": 8.3,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4589,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5432507928926386,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 3.8 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 285.8 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.7 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.76,
+        "brightness": 285.79,
+        "loudnessMovement": 5.66,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4626,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5777510981993843,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 3.8 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 320.3 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.1 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.76,
+        "brightness": 320.29,
+        "loudnessMovement": 5.06,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4663,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": true,
+      "score": 0.7,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Loudness movement is 7 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.03,
+        "brightness": 408.85,
+        "loudnessMovement": 7,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4700,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5039691311273141,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 204 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 8.9 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 2.19,
+        "brightness": 203.97,
+        "loudnessMovement": 8.9,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -2.5,
+      "seed": 4737,
+      "pocket": true,
+      "bpm": 70,
+      "bars": 16,
+      "pass": true,
+      "score": 0.7,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Loudness movement is 6.7 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.01,
+        "brightness": 500.27,
+        "loudnessMovement": 6.7,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4404,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.3612847222222222,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 4.6 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 166 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0.8 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 4.56,
+        "brightness": 166.02,
+        "loudnessMovement": 5.43,
+        "regularity": 0.75
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4441,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.41078384535023366,
+      "best": "hype",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 7.1 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 209 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.8 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0.6 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 7.07,
+        "brightness": 209,
+        "loudnessMovement": 4.78,
+        "regularity": 0.62
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4478,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.29792110906308583,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 5.8 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 190 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.8 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0.8 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 5.8,
+        "brightness": 189.95,
+        "loudnessMovement": 4.83,
+        "regularity": 0.75
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4515,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.4127853734875497,
+      "best": "lowkey",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 5.3 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 262.8 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.2 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0.7 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 5.29,
+        "brightness": 262.79,
+        "loudnessMovement": 5.18,
+        "regularity": 0.67
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4552,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5060483473541024,
+      "best": "lowkey",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 4.5 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 198.2 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.6 dB for lowkey, ideal 0-2.5 dB."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 4.5,
+        "brightness": 198.23,
+        "loudnessMovement": 4.61,
+        "regularity": 0.5
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4589,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.4,
+      "best": "hype",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 7.3 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 183.8 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.6 dB for lowkey, ideal 0-2.5 dB."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 7.33,
+        "brightness": 183.78,
+        "loudnessMovement": 5.64,
+        "regularity": 0.57
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4626,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5103868249196669,
+      "best": "hype",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 5.8 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 310.4 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5 dB for lowkey, ideal 0-2.5 dB."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 5.8,
+        "brightness": 310.39,
+        "loudnessMovement": 5.01,
+        "regularity": 0.5
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4663,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.3142857142857143,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 6.6 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 199.8 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 5.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0.7 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 6.6,
+        "brightness": 199.79,
+        "loudnessMovement": 5.42,
+        "regularity": 0.71
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4700,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5161684603386214,
+      "best": "lowkey",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 3.7 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 153.7 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.1 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 1 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 3.72,
+        "brightness": 153.71,
+        "loudnessMovement": 4.12,
+        "regularity": 1
+      }
+    },
+    {
+      "bb": 0,
+      "db": -1.5,
+      "seed": 4737,
+      "pocket": false,
+      "bpm": 70,
+      "bars": 16,
+      "pass": false,
+      "score": 0.563873311690273,
+      "best": "lowkey",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for lowkey: 6.3 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for lowkey: centroid 338.5 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0.6 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 70,
+        "density": 6.33,
+        "brightness": 338.49,
+        "loudnessMovement": 4.38,
+        "regularity": 0.62
+      }
+    }
+  ]
+}

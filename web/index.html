@@ -87,6 +87,15 @@
     <symbol id="ic-other" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 15 9l1-4 4 1-4 1L9 19l-5 1z"/></symbol>
     <!-- H10 status: a flame for a burning delver (the fallen use the skull above). -->
     <symbol id="ic-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3c0 3-4 4-4 8a3 3 0 0 0 6 0c0-1 0-2-1-3 2 1 4 4 4 7a6 6 0 0 1-12 0c0-5 5-6 7-12z"/></symbol>
+    <!-- H18: the town's buildings (page-owned drawings, same discipline as the rest) -->
+    <symbol id="ic-hut" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8M6 11v9h12v-9M10 20v-5h4v5"/></symbol>
+    <symbol id="ic-well" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14M6 11v9h12v-9M8 11V6h8v5M12 6V3M9 15h6"/></symbol>
+    <symbol id="ic-stall" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-2-5H5zM5 9v11M19 9v11M3 20h18M8 14h8"/></symbol>
+    <symbol id="ic-chapel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v5M10 4h4M7 21V12l5-5 5 5v9M3 21h18M10 21v-5h4v5"/></symbol>
+    <symbol id="ic-anvil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h15c0 3-2 4-5 4v3h3v3H8v-3h3v-3C7 12 5 11 3 8zM18 8h3"/></symbol>
+    <symbol id="ic-tower" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V8h12v13M5 8V4h3v2h2V4h4v2h2V4h3v4M10 21v-5h4v5"/></symbol>
+    <symbol id="ic-ford" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9q4-3 9 0t9 0M3 14q4-3 9 0t9 0M3 19q4-3 9 0t9 0"/></symbol>
+    <symbol id="ic-wall" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V7h3v2h3V7h3v2h3V7h3v2h3V7h0v13zM3 14h18M9 14v6M15 14v6"/></symbol>
   </defs>
 </svg>
 
@@ -134,7 +143,8 @@
        pattern. Reduced-motion is respected (no new animation here either way). -->
   <nav id="tabs" role="tablist" aria-label="Sections of the hub">
     <button type="button" role="tab" id="tab-boards"    data-tab="boards"    aria-controls="boards"    aria-selected="false" tabindex="-1">Boards</button>
-    <button type="button" role="tab" id="tab-heroes"    data-tab="heroes"    aria-controls="heroes"    aria-selected="false" tabindex="-1">Heroes<span class="n" id="nHeroes"></span></button>
+    <button type="button" role="tab" id="tab-state"     data-tab="state"     aria-controls="state"     aria-selected="false" tabindex="-1">Town</button>
+  <button type="button" role="tab" id="tab-heroes"    data-tab="heroes"    aria-controls="heroes"    aria-selected="false" tabindex="-1">Heroes<span class="n" id="nHeroes"></span></button>
     <button type="button" role="tab" id="tab-bands"     data-tab="bands"     aria-controls="bands"     aria-selected="false" tabindex="-1">Bands<span class="n" id="nBands"></span></button>
     <button type="button" role="tab" id="tab-chronicle" data-tab="chronicle" aria-controls="chronicle" aria-selected="false" tabindex="-1">Chronicle</button>
     <button type="button" role="tab" id="tab-dice"      data-tab="dice"      aria-controls="dice"      aria-selected="false" tabindex="-1">The die</button>
@@ -246,6 +256,25 @@
     <section class="plain" id="roll" role="tabpanel" aria-labelledby="tab-roll" tabindex="0">
       <h2 class="title light">The Guild Roll <small>who stands highest</small></h2>
       <ol class="roll" id="rollList"></ol>
+    </section>
+    <section class="plain" id="state" role="tabpanel" aria-labelledby="tab-state" tabindex="0">
+      <h2 class="title light">The State of Bellmire <small>the place itself</small></h2>
+      <div class="st-grid">
+        <div class="st-col">
+          <h3 class="st-h">The ladder</h3>
+          <p class="st-cap" id="stLadderCap"></p>
+          <ol class="ladder" id="stLadder" aria-label="The town's growth, rung by rung"></ol>
+        </div>
+        <div class="st-col">
+          <h3 class="st-h">The town now</h3>
+          <div class="st-tiles" id="stTiles"></div>
+          <div id="stGrow"></div>
+          <h3 class="st-h">What stands <small id="stRosterTag"></small></h3>
+          <ul class="st-roster" id="stRoster"></ul>
+          <h3 class="st-h">What has befallen it <small id="stTimeTag"></small></h3>
+          <ol class="st-time" id="stTime"></ol>
+        </div>
+      </div>
     </section>
     <section class="plain" id="fallen" role="tabpanel" aria-labelledby="tab-fallen" tabindex="0">
       <h2 class="title light">The Fallen <small>remembered</small></h2>

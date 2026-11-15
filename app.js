@@ -21,7 +21,7 @@ const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
 
 const params = new URLSearchParams(location.search);
 const TEST = params.get("state");   // empty | fail | stale (local checks)
-const MOCK = params.get("mock");    // chronicle | crowd | roll | bands (local checks)
+const MOCK = params.get("mock");    // chronicle | crowd | roll | bands | fallen (local checks)
 const OVERLAY = params.has("overlay");  // ?overlay=1 : the thin on-stream (OBS) column
 // overlay mode: a narrow, dark, glanceable column over the stream. Same data, same
 // security - a body class the stylesheet reshapes; no separate code path for snapshot data.
@@ -54,6 +54,7 @@ const ICON_SET = new Set([
   "blade", "ranged", "arcane", "blunt", "shield", "potion", "flask", "coin",
   "fight", "death", "raid", "town", "lore", "loot", "delve", "other",
   "flame",   // H10: a burning delver's status glyph. "death" already serves the fallen.
+  "hut", "well", "stall", "chapel", "anvil", "tower", "ford", "wall",   // H18: the town's buildings
 ]);
 function icon(id, cls) {
   const key = ICON_SET.has(id) ? id : "other";      // whitelist: unknown -> a safe default
@@ -121,9 +122,104 @@ function when(iso) {
 }
 // a hero's sigil: the first two letters of their own name, upper-cased. No image
 // (the payload has none, and building an <img> from snapshot data is forbidden).
-function sigil(name) {
+function initials(name) {
   const letters = String(name || "").replace(/[^A-Za-z0-9]/g, "");
   return (letters.slice(0, 2) || "?").toUpperCase();
+}
+
+// ---------------------------------------------------------------- crests (H15)
+// A coat of arms for every hero, drawn as inline SVG the PAGE owns. The hero's name
+// is hashed and the hash only picks INDICES into the fixed whitelists below (a field
+// division, two tinctures, one charge). No snapshot value is ever written into the
+// SVG: every path string and colour here is a constant in this file, so a hostile
+// name still yields a valid crest and can never become markup, a URL or a style.
+// Deterministic: the same name always gives the same arms, on every reload.
+const CREST_SHIELD = "M6 6H94V58C94 92 70 110 50 116C30 110 6 92 6 58Z";
+const CREST_TINCT = ["#2a1c10", "#f3e6c4", "#1d8f8a", "#c6922f"];   // ink, parchment, teal, gold
+const CREST_DIV = [                                                 // paths for the second tincture
+  null,                                                             // plain field
+  "M50 0H100V120H50Z",                                              // per pale
+  "M0 60H100V120H0Z",                                               // per fess
+  "M0 0L100 120H0Z",                                                // per bend
+  "M50 0H100V60H50Z M0 60H50V120H0Z",                               // quarterly
+  "M0 78L50 42L100 78V120H0Z",                                      // chevron
+  "M0 86H100V120H0Z",                                               // base
+];
+const CREST_CHARGE = (() => {
+  let star = "";
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 ? 9 : 22, a = -Math.PI / 2 + i * Math.PI / 5;
+    star += (i ? "L" : "M") + (50 + r * Math.cos(a)).toFixed(1) + " " + (56 + r * Math.sin(a)).toFixed(1);
+  }
+  return [
+    star + "Z",                                                                    // mullet
+    "M43 34H57V49H72V63H57V80H43V63H28V49H43Z",                                    // cross
+    "M60 34A24 24 0 1 0 60 82A18 18 0 1 1 60 34Z",                                 // crescent
+    "M50 33L69 58L50 83L31 58Z",                                                   // lozenge
+    "M47 32H53V68H47Z M37 68H63V74H37Z M47 74H53V86H47Z",                          // sword
+    "M33 84V50H38V43H43V50H47V43H53V50H57V43H62V50H67V84Z",                        // tower
+    "M30 58a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z M40 58a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z",  // annulet
+    "M40 44a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M30 66a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M50 66a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z", // trefoil
+  ];
+})();
+const crestMemo = new Map();
+function crestRecipe(name) {
+  const key = String(name == null ? "" : name).toLowerCase();
+  let r = crestMemo.get(key);
+  if (r) return r;
+  let a = 2166136261;                                  // FNV-1a over the name, then a seeded mixer
+  for (let i = 0; i < key.length; i++) { a ^= key.charCodeAt(i); a = Math.imul(a, 16777619) >>> 0; }
+  const next = () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), a | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return (t ^ (t >>> 14)) >>> 0;
+  };
+  const div = next() % CREST_DIV.length;
+  const ta = next() % CREST_TINCT.length;
+  const tb = (ta + 1 + (next() % (CREST_TINCT.length - 1))) % CREST_TINCT.length;
+  const spare = [];
+  for (let i = 0; i < CREST_TINCT.length; i++) if (i !== ta && (div === 0 || i !== tb)) spare.push(i);
+  const tc = spare[next() % spare.length];
+  const ch = next() % CREST_CHARGE.length;
+  r = { div, ta, tb, tc, ch };
+  if (crestMemo.size > 600) crestMemo.clear();
+  crestMemo.set(key, r);
+  return r;
+}
+function crestDefs() {                                  // the shared shield clip, added once
+  if (document.getElementById("coa-clip")) return;
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "coa-defs"); svg.setAttribute("width", "0"); svg.setAttribute("height", "0");
+  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
+  const clip = document.createElementNS(SVGNS, "clipPath");
+  clip.setAttribute("id", "coa-clip");
+  const p = document.createElementNS(SVGNS, "path");
+  p.setAttribute("d", CREST_SHIELD);
+  clip.append(p); svg.append(clip); document.body.append(svg);
+}
+function crestPath(d, fill, stroke) {
+  const p = document.createElementNS(SVGNS, "path");
+  p.setAttribute("d", d); p.setAttribute("fill", fill);
+  if (stroke) { p.setAttribute("stroke", stroke); p.setAttribute("stroke-width", "2.5"); p.setAttribute("stroke-linejoin", "round"); }
+  return p;
+}
+// coat(name, size): size is a page class suffix ("sm" | "md" | "lg"), never snapshot data.
+function coat(name, size) {
+  crestDefs();
+  const r = crestRecipe(name);
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "coa coa-" + (size === "sm" || size === "lg" ? size : "md"));
+  svg.setAttribute("viewBox", "0 0 100 120");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const g = document.createElementNS(SVGNS, "g");
+  g.setAttribute("clip-path", "url(#coa-clip)");
+  g.append(crestPath("M0 0H100V120H0Z", CREST_TINCT[r.ta]));
+  if (CREST_DIV[r.div]) g.append(crestPath(CREST_DIV[r.div], CREST_TINCT[r.tb]));
+  g.append(crestPath(CREST_CHARGE[r.ch], CREST_TINCT[r.tc], CREST_TINCT[0]));
+  svg.append(g, crestPath(CREST_SHIELD, "none", CREST_TINCT[3]));
+  return svg;
 }
 
 // ---------------------------------------------------------------- status line
@@ -193,7 +289,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "dice", "heroes", "bands", "chronicle", "lore", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -219,7 +315,7 @@ function renderNothing(failed) {
 // OUTSIDE this set is an honest "this page needs an update", never a guess. ACTION for
 // the desktop: publish the Satchel sell fields as v = "3" (or extend this set BEFORE
 // shipping a different number). See docs/HUB_SECURITY.md (H11).
-const KNOWN_V = new Set(["1", "2", "3"]);
+const KNOWN_V = new Set(["1", "2", "3", "4"]);   // v4 (H23): initiative, speed, gear by slot, status, per-hero last_seen + events
 function render(p) {
   if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
@@ -235,11 +331,13 @@ function render(p) {
   renderHeroes(arr(p.heroes));
   renderBands(p.parties != null ? p.parties : p.bands);
   renderChronicle(p.chronicle, { auto: true });
+  try { renderState(t, p); } catch (e) { /* the new tab must never break the rest of the page */ }
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
   renderRolls(p.rolls);
   renderLore();
+  try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -287,6 +385,144 @@ function growthBar(t) {
   track.append(fill);
   li.append(el("span", "tk", "Growth"), track, el("span", "tv growv", num(score) + " / " + num(next)));
   return li;
+}
+
+// ============================================================ THE STATE OF BELLMIRE (H18)
+// The place, not just its people: a ladder of the town's growth, the live numbers as
+// tiles, a roster of what stands, and a timeline of what has befallen it. Every string
+// - a town name, a building name, a remembered chronicle line - reaches the DOM only
+// through el() (createElement + textContent). Icons come from ICON_SET; a snapshot
+// value only ever chooses WHICH known icon. The only snapshot number that styles
+// anything is the growth fraction, set through the CSSOM as a number. No fetch, no URL.
+// The ladder and the canon roster read the frozen lore (H12) as-is: no parallel words.
+const CANON_BUILDINGS = [               // page-owned: [label, match key, icon, town level it arrives at, lore tier index]
+  ["The Huts", "hut", "hut", 1, 0], ["The Well", "well", "well", 2, 1], ["The Guild Post", "guild", "town", 3, 2],
+  ["Market Square", "market", "stall", 5, 4], ["The Chapel", "chapel", "chapel", 6, 5], ["Craft Row", "craft", "anvil", 7, 6],
+  ["The Garrison", "garrison", "tower", 8, 7], ["The Ford", "ford", "ford", 9, 8], ["The First Wall", "wall", "wall", 10, 9],
+  ["Corner Towers", "tower", "tower", 11, 10],
+];
+const BUILDING_ICON_KEYS = [["well", "well"], ["hut", "hut"], ["home", "hut"], ["house", "hut"], ["market", "stall"], ["stall", "stall"],
+  ["chapel", "chapel"], ["temple", "chapel"], ["forge", "anvil"], ["smith", "anvil"], ["craft", "anvil"], ["garrison", "tower"],
+  ["barrack", "tower"], ["tower", "tower"], ["wall", "wall"], ["gate", "wall"], ["ford", "ford"], ["bridge", "ford"], ["guild", "town"]];
+function buildingIcon(name) {           // keyword -> a whitelisted id; never a snapshot value used as one
+  const n = String(name || "").toLowerCase();
+  for (const [k, id] of BUILDING_ICON_KEYS) if (n.indexOf(k) >= 0) return id;
+  return "town";
+}
+const TOWN_SCALE = /disaster|\bfire\b|burn|drought|famine|sickness|plague|hurricane|tornado|earthquake|meteor|scarstorm|flood|blight|volcano|cold ?snap|festival|\bfair\b|harvest|siege|bandit|camp|grows into|falls back|stands as|raid/i;
+function townStamp(ts) {
+  const d0 = new Date(); d0.setHours(0, 0, 0, 0);
+  const d = new Date(ts), dd = new Date(ts); dd.setHours(0, 0, 0, 0);
+  const n = Math.round((d0 - dd) / 86400000);
+  let tm = ""; try { tm = d.toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" }); } catch (e) { tm = ""; }
+  return (n <= 0 ? "Today" : n === 1 ? "Yesterday" : n + " days gone") + (tm ? " \u00b7 " + tm : "");
+}
+function stTile(k, v) {
+  const d = el("div", "st-tile");
+  d.append(el("span", "st-k", k), el("span", "st-v", v));
+  return d;
+}
+function renderState(t, p) {
+  t = t && typeof t === "object" ? t : {};
+  const lore = LORE_FROZEN && LORE_FROZEN.growth_tiers;
+  const tiers = arr(lore && lore.tiers).filter((x) => x && typeof x === "object" && x.name);
+  const N = tiers.length;
+  const lvl = t.level != null && t.level !== "" && Number.isFinite(+t.level) && N ? Math.max(1, Math.min(N, Math.floor(+t.level))) : 0;
+  // ---- H18.1 the ladder
+  const ladder = $("stLadder"), cap = $("stLadderCap");
+  ladder.replaceChildren();
+  if (!N) { ladder.append(el("li", "empty", "The town has not yet named its stages.")); cap.textContent = ""; }
+  else {
+    tiers.forEach((tr, i) => {
+      const st = !lvl ? "ahead" : i + 1 < lvl ? "done" : i + 1 === lvl ? "now" : "ahead";
+      const li = el("li", "rung " + st);
+      if (st === "now") li.setAttribute("aria-current", "step");
+      const body = el("div", "rg-body");
+      body.append(el("span", "rg-name", String(tr.name)));
+      if (st === "now" && tr.see) body.append(el("span", "rg-see", String(tr.see)));
+      li.append(el("span", "rg-dot", String(i + 1)), body,
+        el("span", "st-sr", st === "done" ? " (reached)" : st === "now" ? " (the town is here)" : " (still ahead)"));
+      ladder.append(li);
+    });
+    const left = N - lvl;
+    cap.textContent = !lvl ? "Bellmire has not yet said how far it has come."
+      : left > 0 ? String(tiers[lvl - 1].name) + " - " + left + (left === 1 ? " stage" : " stages") + " still to climb."
+      : "Bellmire has climbed every rung.";
+  }
+  // ---- the live numbers, as tiles
+  const tiles = $("stTiles"); tiles.replaceChildren();
+  if (lvl) tiles.append(stTile("Town level", lvl + " of " + N));
+  if (t.day != null && t.day !== "") tiles.append(stTile("Day", num(t.day)));
+  if (t.souls != null && t.souls !== "") tiles.append(stTile("Souls", num(t.souls)));
+  if (t.treasury != null && t.treasury !== "") tiles.append(stTile("Treasury", num(t.treasury) + " g"));
+  const repelled = pickNum(t.raids_turned, t.raids_repelled, t.raids_held, t.raids_won);
+  if (repelled != null) tiles.append(stTile("Raids turned back", num(repelled)));
+  else { const raids = pickNum(t.raids); if (raids != null) tiles.append(stTile("Raids", num(raids))); }
+  if (t.renown) tiles.append(stTile("Renown", num(t.renown)));
+  if (!tiles.childElementCount) tiles.append(el("p", "empty", "The town has not sent its numbers yet."));
+  const grow = $("stGrow"); grow.replaceChildren();
+  if (t.score != null && +t.next_level_at > 0) {
+    const score = n0(t.score), next = n0(t.next_level_at);
+    const wrap = el("div", "st-grow");
+    wrap.setAttribute("role", "img");
+    wrap.setAttribute("aria-label", "Growth " + score + " of " + next + " toward the next stage");
+    const track = el("div", "st-track"), fill = el("span", "st-fill");
+    fill.style.setProperty("--grow", Math.max(0.02, Math.min(1, score / next)));   // CSSOM number only
+    track.append(fill);
+    wrap.append(el("span", "st-k", "Growth to the next stage"), track, el("span", "st-gv", num(score) + " / " + num(next)));
+    grow.append(wrap);
+  }
+  // ---- H18.2 what stands
+  const roster = $("stRoster"), rtag = $("stRosterTag"); roster.replaceChildren();
+  const live = [];
+  for (const b of arr(t.buildings != null ? t.buildings : p && p.buildings)) {
+    const o = typeof b === "string" ? { name: b } : b && typeof b === "object" ? b : null;
+    const name = o ? cleanName(o.name).trim().slice(0, 60) : "";
+    if (!name) continue;
+    const does = ctrlStrip(o.does != null ? o.does : o.desc != null ? o.desc : o.what != null ? o.what : "").slice(0, 140);
+    live.push({ name, built: o.built !== false, does });
+  }
+  const bld = (name, ic, built, line, tag) => {
+    const li = el("li", "bld " + (built ? "built" : "unbuilt"));
+    li.append(icon(ic, "bld-ic"));
+    const b = el("div", "bld-body");
+    b.append(el("span", "bld-name", name));
+    if (line) b.append(el("span", "bld-line", line));
+    b.append(el("span", "bld-tag", tag));
+    li.append(b);
+    return li;
+  };
+  if (live.length) {
+    rtag.textContent = "as the town reports it";
+    const have = live.map((b) => b.name.toLowerCase());
+    for (const b of live) roster.append(bld(b.name, buildingIcon(b.name), b.built, b.does, b.built ? "standing" : "not yet raised"));
+    for (const c of CANON_BUILDINGS) {
+      if (have.some((n) => n.indexOf(c[1]) >= 0)) continue;
+      const tr = tiers[c[4]];
+      roster.append(bld(c[0], c[2], false, tr && tr.see ? String(tr.see) : "", "not yet raised"));
+    }
+  } else {
+    rtag.textContent = "canon, not live - read from the town's level";
+    for (const c of CANON_BUILDINGS) {
+      const tr = tiers[c[4]], built = lvl >= c[3] && lvl > 0;
+      roster.append(bld(c[0], c[2], built, tr && tr.see ? String(tr.see) : "", built ? "standing" : "not yet raised"));
+    }
+  }
+  // ---- H18.3 what has befallen it: the browser's own Chronicle history, town-scale only
+  const tl = $("stTime"), ttag = $("stTimeTag"); tl.replaceChildren();
+  chronMemEnsure();
+  const rows = arr(chronMem).filter((r) => r && typeof r.s === "string" && (r.t === "raid" || (r.t === "town" && TOWN_SCALE.test(r.s) && !/^Day \d+ begins/i.test(r.s))))
+    .sort((x, y) => histTs(y) - histTs(x)).slice(0, 14);
+  ttag.textContent = "kept by this browser";
+  if (!rows.length) tl.append(el("li", "empty", "Bellmire has known only quiet days."));
+  for (const r of rows) {
+    const li = el("li", "tm " + (r.t === "raid" ? "raid" : "town"));
+    li.append(icon(/fire|burn|volcano|meteor/i.test(r.s) ? "flame" : r.t === "raid" ? "raid" : "town", "tm-ic"));
+    const b = el("div", "tm-body");
+    b.append(el("span", "tm-when", townStamp(histTs(r))), el("span", "tm-text", r.s));
+    li.append(b);
+    tl.append(li);
+  }
 }
 
 // ============================================================ THE BOARDS
@@ -362,6 +598,7 @@ function boardRow(spec, e, max, opts) {
 
   const mid = el("span", "bmid");
   const line = el("span", "bname");
+  if (e.place <= 5) line.append(coat(nameOf(e.r), "sm"));
   line.append(document.createTextNode(nameOf(e.r) || "(no name)"));
   if (e.dead) frag(line, el("span", "tag", "fallen"));
   mid.append(line, el("span", "bsub", subline(spec, e.r)));
@@ -580,7 +817,8 @@ function renderHeroes(hs) {
   }
   const openNames = new Set();
   if (mineName) openNames.add(mineName);
-  if (params.get("open") && list[0]) openNames.add(String(list[0].name));
+  if (params.get("open") === "all") list.slice(0, 6).forEach((x) => openNames.add(String(x.name)));
+  else if (params.get("open") && list[0]) openNames.add(String(list[0].name));
   for (const h of list.slice(0, heroShown)) box.append(heroCard(h, openNames.has(String(h.name)), mineName !== "" && String(h.name) === mineName));
   const more = $("heroMore");
   if (list.length > heroShown) {
@@ -669,7 +907,7 @@ function heroCard(h, isOpen, isMine) {
   const det = el("details", "hero" + (isMine ? " mine" : ""));
   const sum = el("summary");
   // the crest: the hero's initials in a class-tinted ring, with the calling's icon
-  const sg = el("span", "hsigil cls-" + classIcon(h.class), sigil(h.name));
+  const sg = el("span", "hsigil cls-" + classIcon(h.class), initials(h.name));
   sg.title = (h.species ? cap(h.species) + " " : "") + cap(h.class || "adventurer");
   const crest = el("span", "hcrest");
   crest.setAttribute("aria-hidden", "true");
@@ -686,7 +924,9 @@ function heroCard(h, isOpen, isMine) {
   meta.append(what, quick);
   idb.append(meta);
   if (h.title) idb.append(el("span", "htitle", h.title));
-  sum.append(sg, idb);
+  const coa = coat(h.name, "md");
+  coa.classList.add("hcoa");
+  sum.append(sg, idb, coa);
   det.append(sum);
 
   // lazy-render: the full sheet is built on first open, not for all 60+ cards up
@@ -698,75 +938,245 @@ function heroCard(h, isOpen, isMine) {
   return det;
 }
 
-function heroSheet(h) {
-  const s = h.stats || {};
-  const order = ["str", "dex", "con", "int", "wis", "cha"];
-  const w = h.weapon || {}, armr = h.armour || {};
-  const sheet = el("div", "sheet");
-
-  // H11: pin this hero as "mine" so it is easy to find next visit (the on-stream
-  // Satchel used to keep a viewer's own hero in view; D48/L63 took it off the stream).
-  const shead = el("div", "sheethead");
-  const mineNow = isMyHero(h);
-  const pin = el("button", "pinbtn" + (mineNow ? " on" : ""), mineNow ? "Your hero \u2014 unpin" : "Pin as my hero");
-  pin.type = "button";
-  pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
-  pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
-  pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
-  shead.append(pin);
-  sheet.append(shead);
-
-  sheet.append(hpBar(h));
-  sheet.append(xpBar(h));
-
-  const stats = el("div", "stats");
-  for (const k of order) {
-    const cell = el("div", "stat");
-    cell.append(el("div", "k", k), el("div", "v", s[k] != null ? s[k] : "-"), el("div", "m", s[k] != null ? modOf(s[k]) : ""));
-    stats.append(cell);
+// ============================================================ H20: THE CHARACTER SHEET
+// A sheet, not a stat line. Built from the snapshot row ONLY: a field the publisher does
+// not send is drawn as a deliberate empty cell (dashed, "not published") and named in a
+// foot line - never estimated, never derived (no modifier-based initiative, no guessed max
+// HP). Every string reaches the DOM via el()/textContent; the HP/XP fills are CSSOM
+// numbers; icons are ICON_SET ids; the only snapshot-chosen thing is WHICH known icon.
+// Living heroes build from p.heroes; the fallen build the same sheet from their memorial
+// row (mode "fallen"), where most combat fields are honestly empty.
+const SHEET_SLOTS = [   // [label, gear-object key, icon, source]  - source: "w" weapon, "a" armour, "" extra
+  ["Main hand", "main_hand", null, "w"], ["Off hand", "off_hand", "shield", ""],
+  ["Head", "head", "loot", ""], ["Body", "body", "shield", "a"],
+  ["Hands", "hands", "loot", ""], ["Feet", "feet", "loot", ""],
+  ["Cloak", "cloak", "loot", ""], ["Neck", "neck", "loot", ""], ["Ring", "ring", "loot", ""],
+];
+function sheetPayload() { try { return last ? (MOCK ? withMock(last.payload) : last.payload) : null; } catch (e) { return null; } }
+const slotText = (v) => (v == null ? "" : typeof v === "object" ? (v.name != null ? String(v.name).trim() : "") : String(v).trim());
+// does `text` name `key` (lower-cased) as a whole word? Short names must not match inside other words.
+function namesIn(text, key) {
+  const s = String(text).toLowerCase();
+  let i = s.indexOf(key);
+  while (i >= 0) {
+    const before = i === 0 ? "" : s[i - 1], after = s[i + key.length] || "";
+    if (!/[a-z0-9]/.test(before) && !/[a-z0-9]/.test(after)) return true;
+    i = s.indexOf(key, i + 1);
   }
-  sheet.append(stats);
+  return false;
+}
+// the H14 history (live + remembered in this browser), filtered to the lines naming THIS hero
+function personalLines(name, ring) {
+  // H23.2: the publisher's own per-hero ring (h.events, newest first, [{t, s, at}]) wins when it
+  // carries anything; each row goes through the same chronShape as a live line. Else name-match.
+  if (Array.isArray(ring) && ring.length) {
+    const own = chronEntries(ring).slice(0, 8);
+    if (own.length) return own;
+  }
+  const key = String(name || "").trim().toLowerCase();
+  if (!key) return [];
+  const p = sheetPayload();
+  chronMemEnsure();
+  const live = p ? chronEntries(p.chronicle) : [];
+  const liveKeys = new Set(live.map(histKey));
+  const rem = chronMem.filter((r) => !liveKeys.has(histKey(r))).map((r) => Object.assign(chronShape(r), { ts: histTs(r) }));
+  return live.concat(rem).filter((e) => namesIn(e.s, key)).slice(0, 8);
+}
+// where is this hero right now, in the town's own voice. Returns chips + any honest gap.
+function heroConditions(h, fallen, gaps) {
+  const out = [];
+  if (fallen) {
+    const day = pickNum(h.day);
+    out.push({ cls: "st-fallen", ic: "death", text: "Fallen" + (day != null && day > 0 ? " on day " + num(day) : "") });
+    return out;
+  }
+  const p = sheetPayload();
+  const key = nameOf(h).trim().toLowerCase();
+  let member = null, band = null;
+  if (p && Array.isArray(p.parties)) {
+    for (const b of normalizeParties(p.parties)) {
+      const m = b.members.find((x) => x.name.trim().toLowerCase() === key);
+      if (m) { member = m; band = b; break; }
+    }
+  }
+  if (band) {
+    out.push({ cls: "st-band", ic: "delve", text: "Delving with " + (band.name || "a band") + (band.floor != null ? ", floor " + num(band.floor) : "") });
+    if (member.status === "burning") out.push({ cls: "st-burning", ic: "flame", text: "Burning" });
+    else if (member.status === "fallen") out.push({ cls: "st-fallen", ic: "death", text: "Down in the dark" });
+    else if (member.status === "other" && member.statusText) out.push({ cls: "st-other", ic: null, text: member.statusText });
+  } else if (p && Array.isArray(p.parties)) {
+    out.push({ cls: "st-town", ic: "town", text: "Not in any band the town reports" });
+  }
+  const own = firstStr(h.status, h.state, h.activity, h.where).toLowerCase().trim();
+  if (own) {
+    const canon = PARTY_STATUS[own];
+    if (canon === "burning" && !out.some((c) => c.cls === "st-burning")) out.push({ cls: "st-burning", ic: "flame", text: "Burning" });
+    else if (canon === "fallen") out.push({ cls: "st-fallen", ic: "death", text: "Down" });
+    else if (!canon) out.push({ cls: "st-other", ic: null, text: titleCase(own).slice(0, 28) });
+  } else if (!band) gaps.push("what the hero is doing now (status / state)");
+  const max = pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax), hp = pickNum(h.hp);
+  const mhp = member && member.max != null ? member.max : max;
+  const chp = member && member.hp != null ? member.hp : hp;
+  if (mhp != null && chp != null && mhp > 0 && chp / mhp <= 0.5 && !(member && member.status === "fallen")) out.push({ cls: "st-hurt", ic: null, text: "Wounded" });
+  return out;
+}
+function sheetCell(k, v, sub, gap) {
+  const c = el("div", "stat" + (gap ? " unpub" : ""));
+  c.append(el("div", "k", k), el("div", "v", gap ? "\u2014" : v), el("div", "m", gap ? "" : (sub || "")));
+  if (gap) c.title = "The town does not publish this yet.";
+  return c;
+}
+function sheetSec(title) {
+  const sec = el("section", "ssec");
+  sec.append(el("p", "eyebrow", title));
+  return sec;
+}
+const signed = (n) => (n >= 0 ? "+" : "\u2212") + Math.abs(n);
 
-  // Equipped: weapon and armour as gear cards with item icons
-  sheet.append(el("p", "eyebrow", "Equipped"));
-  const gear = el("div", "gearstrip");
-  gear.append(
-    gearCard(weaponIcon(w.name), "Weapon", `${cap(w.name || "bare hands")}  ·  ${w.dice || "-"}`,
-             `${cap(w.name || "bare hands")} — ${w.dice || "-"} damage`),
-    gearCard("shield", "Armour", `${cap(armr.name || "none")}  ·  AC ${h.ac}`,
-             `${cap(armr.name || "none")} — armour class ${h.ac}`),
+function heroSheet(h, mode) {
+  const fallen = mode === "fallen";
+  const s = h.stats && typeof h.stats === "object" ? h.stats : {};
+  const gaps = [];
+  const sheet = el("div", "sheet charsheet" + (fallen ? " fallen" : ""));
+
+  // ---- identity: crest, name, title, calling, level; the pin sits at the right
+  const sid = el("div", "sid");
+  sid.append(coat(h.name, "lg"));
+  const who = el("div", "swho");
+  who.append(el("div", "sname", nameOf(h) || "(no name)"));
+  if (h.title) who.append(el("div", "stitle", String(h.title)));
+  const lv = pickNum(h.level);
+  const callingTxt = `${cap(h.species)} ${cap(h.class)}`.trim() || "Adventurer";
+  who.append(el("div", "scall", callingTxt + (lv != null && lv > 0 ? ", level " + num(lv) : "") + (h.rank ? "  \u00b7  " + h.rank : "")));
+  sid.append(who);
+  if (!fallen) {
+    // H11: pin this hero as "mine" so it is easy to find next visit
+    const mineNow = isMyHero(h);
+    const pin = el("button", "pinbtn" + (mineNow ? " on" : ""), mineNow ? "Your hero \u2014 unpin" : "Pin as my hero");
+    pin.type = "button";
+    pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
+    pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
+    pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
+    sid.append(pin);
+  }
+  sheet.append(sid);
+
+  // ---- H20.2 condition and state, with an honest "last seen"
+  const conds = el("div", "sconds");
+  for (const c of heroConditions(h, fallen, gaps)) {
+    const chip = el("span", "scond " + c.cls);
+    if (c.ic) chip.append(icon(c.ic, "bmic"));
+    chip.append(document.createTextNode(c.text));
+    conds.append(chip);
+  }
+  if (!fallen && last) {
+    const a = ago(last.updated_at);
+    const stale = TEST === "stale" || !a || a.s > STALE_MIN * 60;
+    // H23.2: a per-hero last_seen (ISO string, validated; never a URL/style) says when THIS hero
+    // last acted - distinct from the whole-town updated_at, which only says the town reported.
+    const ls = typeof h.last_seen === "string" && CHRON_AT_OK.test(h.last_seen) ? ago(h.last_seen) : null;
+    if (ls) {
+      conds.append(el("span", "sseen" + (stale ? " stale" : ""),
+        "Last seen " + ls.text + (stale ? " \u2014 but the town itself last reported " + (a ? a.text : "at an unknown time") + ", so this sheet may be out of date" : "")));
+    } else {
+      conds.append(el("span", "sseen" + (stale ? " stale" : ""),
+        stale ? "Last word from the town " + (a ? a.text : "at an unknown time") + " \u2014 this sheet may be out of date"
+              : "As of the town's last word, " + a.text));
+      gaps.push("a per-hero 'last seen' time (the sheet can only say when the whole town last reported)");
+    }
+  }
+  if (conds.childNodes.length) sheet.append(conds);
+
+  // ---- fallen: the manner of it, in the town's words
+  if (fallen) {
+    const doom = el("div", "sdoom");
+    const cause = h.killed_by ? String(h.killed_by) : "";
+    const day = pickNum(h.day);
+    if (cause || (day != null && day > 0)) doom.append(el("p", "sdline", "Taken by " + (cause || "the dark") + (day != null && day > 0 ? ", day " + num(day) : "") + "."));
+    if (h.epitaph) doom.append(el("p", "sepi", "\u201c" + String(h.epitaph) + "\u201d"));
+    if (doom.childNodes.length) sheet.append(doom);
+    else sheet.append(el("p", "empty", "The town wrote no epitaph for this one."));
+  } else {
+    sheet.append(hpBar(h));
+    sheet.append(xpBar(h));
+    if (pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax) == null) gaps.push("max HP (HP shows as vitality, not a depletion bar)");
+    if (pickNum(h.xp_next, h.next_xp, h.xp_to_next, h.to_next) == null) gaps.push("XP to next level");
+  }
+
+  // ---- abilities
+  const ab = sheetSec("Abilities");
+  const stats = el("div", "stats");
+  const missingStats = [];
+  for (const k of ["str", "dex", "con", "int", "wis", "cha"]) {
+    const v = pickNum(s[k]);
+    if (v == null) missingStats.push(k.toUpperCase());
+    stats.append(sheetCell(k, v != null ? v : "", v != null ? modOf(v) : "", v == null));
+  }
+  if (missingStats.length) gaps.push("ability scores (" + missingStats.join(", ") + ")");
+  ab.append(stats);
+  sheet.append(ab);
+
+  // ---- combat
+  const cb = sheetSec("Combat");
+  const cg = el("div", "stats combat");
+  const ac = pickNum(h.ac), hpv = pickNum(h.hp), maxv = pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax);
+  const th = pickNum(h.to_hit), pf = pickNum(h.prof), ini = pickNum(h.initiative, h.init), spd = pickNum(h.speed);
+  cg.append(
+    sheetCell("AC", ac, "", ac == null),
+    sheetCell("HP", hpv != null ? num(hpv) : "", maxv != null && maxv >= (hpv || 0) ? "of " + num(maxv) : "", hpv == null),
+    sheetCell("To hit", th != null ? signed(th) : "", "", th == null),
+    sheetCell("Prof.", pf != null ? signed(pf) : "", "", pf == null),
+    sheetCell("Initiative", ini != null ? signed(ini) : "", "", ini == null),
+    sheetCell("Speed", spd, "", spd == null),
   );
-  sheet.append(gear);
+  if (ac == null) gaps.push("armour class");
+  if (hpv == null && !fallen) gaps.push("hit points");
+  if (th == null) gaps.push("to-hit bonus");
+  if (pf == null) gaps.push("proficiency bonus");
+  if (ini == null) gaps.push("initiative");
+  if (spd == null) gaps.push("speed");
+  cb.append(cg);
+  const sv = el("dl", "kvlist");
+  const svTxt = h.saves ? String(h.saves) : "";
+  sv.append(kv("Saves", svTxt ? svTxt : el("span", "gapnote", "not published")));
+  if (!svTxt) gaps.push("saving throws");
+  cb.append(sv);
+  sheet.append(cb);
 
-  sheet.append(el("p", "eyebrow", "In a fight"));
-  const f = el("dl", "kvlist");
-  f.append(
-    kv("To hit", `+${n0(h.to_hit)} (proficiency +${n0(h.prof)})`),
-    kv("Saves", h.saves || "-"),
-  );
-  sheet.append(f);
-
-  // Carrying: icon chips
-  sheet.append(el("p", "eyebrow", "Carrying"));
-  const carry = el("div", "carry");
-  const brew = h.brews ? String(h.brews) : (+h.potions ? `${num(h.potions)} Mending` : "no brews");
-  carry.append(
-    carryChip("potion", brew),
-    carryChip("flask", `${num(h.oil)} oil`),
-    carryChip("coin", `${num(h.gold)} gold`),
-  );
-  sheet.append(carry);
-
-  // Satchel: the viewer's sellable items and the counter's prices (H11). Appears only
-  // when the snapshot carries items to sell; otherwise nothing is shown (never faked).
-  const satchel = satchelBlock(h);
-  if (satchel) sheet.append(satchel);
-
-  // Worn: cosmetics and any dye. A dye swatch colour comes from a WHITELISTED
-  // class (dye-<known colour>), never an inline style built from snapshot data;
-  // an unknown dye string shows as plain text only.
+  // ---- gear by slot: an empty slot is drawn as an empty slot, never omitted
+  const gb = sheetSec("Gear by slot");
+  const grid = el("div", "slots");
+  const gear = h.gear && typeof h.gear === "object" ? h.gear : (h.equipment && typeof h.equipment === "object" ? h.equipment : {});
+  const w = h.weapon, ar = h.armour != null ? h.armour : h.armor;
+  const unpubSlots = [];
+  for (const [label, key, ic, src] of SHEET_SLOTS) {
+    let val = "", known = false;
+    if (src === "w") { known = true; val = slotText(w) || slotText(gear[key]); }
+    else if (src === "a") { known = true; val = slotText(ar) || slotText(gear[key]); }
+    else if (gear[key] !== undefined) { known = true; val = slotText(gear[key]); }
+    const cell = el("div", "slot" + (val ? " filled" : " vacant") + (known ? "" : " unpub"));
+    const wi = src === "w" ? weaponIcon(val) : ic;
+    cell.append(icon(wi || "blade", "sic"));
+    const tx = el("div", "stx");
+    tx.append(el("span", "sl", label));
+    if (val) {
+      let line = cap(val);
+      if (src === "w" && w && typeof w === "object" && w.dice) line += "  \u00b7  " + w.dice;
+      if (src === "a" && ac != null) line += "  \u00b7  AC " + ac;
+      tx.append(el("span", "sv", line));
+      cell.title = line;
+    } else {
+      tx.append(el("span", "sv none", known ? (src === "w" ? "Empty \u2014 bare hands" : src === "a" ? "Empty \u2014 no armour" : "Empty") : "\u2014"));
+      cell.title = known ? label + " is empty." : "The town does not publish this slot yet.";
+      if (!known) unpubSlots.push(label.toLowerCase());
+    }
+    cell.append(tx);    // H23.3: the slot text block was built but never attached
+    grid.append(cell);
+  }
+  if (unpubSlots.length) gaps.push("gear slots (" + unpubSlots.join(", ") + ")");
+  gb.append(grid);
+  // cosmetics: a dye swatch colour comes from a WHITELISTED class, never an inline style
   if (h.worn || h.dye) {
-    sheet.append(el("p", "eyebrow", "Worn"));
     const cos = el("div", "cosmetics");
     if (h.worn) cos.append(el("span", "cositem", String(h.worn)));
     if (h.dye) {
@@ -777,16 +1187,60 @@ function heroSheet(h) {
       chip.append(sw, document.createTextNode(cap(d) + " dye"));
       cos.append(chip);
     }
-    sheet.append(cos);
+    gb.append(cos);
+  }
+  sheet.append(gb);
+
+  // ---- carrying + satchel (living only)
+  if (!fallen) {
+    const cr = sheetSec("Carrying");
+    const carry = el("div", "carry");
+    const brew = h.brews ? String(h.brews) : (+h.potions ? `${num(h.potions)} Mending` : "no brews");
+    carry.append(carryChip("potion", brew), carryChip("flask", `${num(h.oil)} oil`), carryChip("coin", `${num(h.gold)} gold`));
+    cr.append(carry);
+    sheet.append(cr);
+    // Satchel (H11): appears only when the snapshot carries items to sell; never faked.
+    const satchel = satchelBlock(h);
+    if (satchel) sheet.append(satchel);
   }
 
-  sheet.append(el("p", "eyebrow", "Record"));
+  // ---- the record, then THIS hero's own chronicle (H20.3)
+  const rc = sheetSec("Record");
   const rec = el("dl", "kvlist");
+  const dp = pickNum(h.deepest), kl = pickNum(h.kills), dl = pickNum(h.delves);
   rec.append(
-    kv("Deeds", `${num(h.kills)} kills  ·  deepest floor ${num(h.deepest)}  ·  ${num(h.delves)} delves`),
-    kv("Standing", num(h.standing)),
+    kv("Deepest", dp != null && dp > 0 ? "floor " + num(dp) : el("span", "gapnote", dp === 0 ? "never below the town" : "not published")),
+    kv("Foes slain", kl != null ? num(kl) : el("span", "gapnote", "not published")),
   );
-  sheet.append(rec);
+  if (!fallen) rec.append(kv("Delves", dl != null ? num(dl) : el("span", "gapnote", "not published")), kv("Standing", num(h.standing)));
+  rc.append(rec);
+  sheet.append(rc);
+
+  const life = sheetSec("Their own chronicle");
+  const lines = personalLines(h.name, fallen ? null : h.events);
+  if (!lines.length) {
+    life.append(el("p", "empty", "No line in the chronicle names them yet. (The hub remembers about two days of it, in this browser.)"));
+  } else {
+    const ul = el("ul", "plife");
+    for (const e of lines) {
+      const li = el("li", "pl kind-" + e.key);
+      li.append(icon(e.icon, "chipic"));
+      li.append(el("span", "pls", e.s));
+      const a = e.at ? ago(e.at) : (e.ts ? ago(new Date(e.ts).toISOString()) : null);
+      if (a) li.append(el("span", "plw", a.text));
+      ul.append(li);
+    }
+    life.append(ul);
+    const deaths = lines.filter((e) => e.t === "death").length;
+    if (deaths) life.append(el("p", "plnote", deaths === 1 ? "The chronicle records one death." : "The chronicle records " + deaths + " deaths."));
+  }
+  sheet.append(life);
+
+  // ---- H20.4: what the sheet wanted and the town did not send
+  const wanted = ["background / origin", "alignment", "skills and proficiencies", "spells and spell slots", "hit dice", "inventory beyond the satchel"];
+  const gp = el("p", "sgaps");
+  gp.append(el("b", null, "Not yet sent by the town: "), document.createTextNode(gaps.concat(wanted).join("; ") + "."));
+  sheet.append(gp);
   return sheet;
 }
 
@@ -810,23 +1264,68 @@ function renderRoll(rows) {
   });
 }
 
-// ============================================================ THE FALLEN
+// ============================================================ THE FALLEN (H16: Hall of the Fallen)
+// A memorial, not a list. Every field is optional and defended: a missing one is simply
+// not drawn (an honest blank) - never "undefined", never a guess. All text goes through
+// el()/textContent; the crest is page-owned heraldry chosen by hashing the name (H15).
+// The epitaph is whatever the snapshot carries (the town writes it at the hero's death);
+// the frozen lore (H12) holds no epitaph set, so there is no parallel list here.
+function fallenText(v) {                       // string | {name} | null -> trimmed text or ""
+  if (v == null) return "";
+  if (typeof v === "object") return v.name != null ? String(v.name).trim() : "";
+  return String(v).trim();
+}
+function fallenRow(label, value, cls) {
+  const row = el("div", "gfact" + (cls ? " " + cls : ""));
+  row.append(el("span", "gk", label), el("span", "gv", value));
+  return row;
+}
 function renderFallen(fs) {
   $("nFallen").textContent = fs.length ? fs.length : "";
   const box = $("fallenList");
   box.replaceChildren();
   if (!fs.length) { box.append(el("p", "empty", "No one has fallen. Yet.")); return; }
   for (const f of fs) {
-    const g = el("div", "grave");
+    if (f == null || typeof f !== "object") continue;
+    const g = el("article", "grave");
+    const head = el("div", "ghead");
+    head.append(coat(nameOf(f), "md"));
     const who = el("div", "gwho");
     who.append(document.createTextNode(nameOf(f)));
-    who.append(el("span", "grec", `the ${f.class}, level ${f.level}`));
-    g.append(who);
+    const klass = f.class ? String(f.class) : "";
+    const lvl = Number.isFinite(+f.level) && +f.level > 0 ? "level " + num(f.level) : "";
+    const rec = [klass ? "the " + klass : "", lvl].filter(Boolean).join(", ");
+    if (rec) who.append(el("span", "grec", rec));
+    head.append(who);
+    g.append(head);
     // their earned title, if they carried one, kept with them on the memorial
     if (f.title) g.append(el("div", "gtitle", String(f.title)));
-    g.append(el("div", "ghow", `Slain by ${f.killed_by || "the dark"}` + (+f.day ? `, day ${f.day}` : "")));
-    g.append(el("div", "grec", `${num(f.kills)} kills  ·  deepest floor ${num(f.deepest)}`));
-    if (f.epitaph) g.append(el("div", "gepi", "“" + String(f.epitaph) + "”"));
+    if (f.epitaph) g.append(el("div", "gepi", "\u201c" + String(f.epitaph) + "\u201d"));
+    const facts = el("div", "gfacts");
+    const cause = f.killed_by ? String(f.killed_by) : "";
+    const day = +f.day > 0 ? "day " + num(f.day) : "";
+    if (cause || day) facts.append(fallenRow("Taken by", [cause, day].filter(Boolean).join(", "), "gcause"));
+    if (Number.isFinite(+f.deepest) && +f.deepest > 0) facts.append(fallenRow("Deepest", "floor " + num(f.deepest)));
+    if (Number.isFinite(+f.kills) && +f.kills > 0) facts.append(fallenRow("Slain", num(f.kills) + (+f.kills === 1 ? " foe" : " foes")));
+    const wep = fallenText(f.weapon), arm = fallenText(f.armour != null ? f.armour : f.armor);
+    if (wep || arm) {
+      const row = el("div", "gfact gwore");
+      row.append(el("span", "gk", "Wore"));
+      const gv = el("span", "gv");
+      if (wep) frag(gv, icon(weaponIcon(wep), "gico"), el("span", null, cap(wep)));
+      if (wep && arm) gv.append(el("span", "gsep", " \u00b7 "));
+      if (arm) frag(gv, icon("shield", "gico"), el("span", null, cap(arm)));
+      row.append(gv);
+      facts.append(row);
+    }
+    if (facts.childNodes.length) g.append(facts);
+    // H20: the same character sheet, read from the memorial row; built lazily on first open
+    const sd = el("details", "gsheet");
+    sd.append(el("summary", null, "Read their sheet"));
+    let sbuilt = false;
+    sd.addEventListener("toggle", () => { if (sd.open && !sbuilt) { sbuilt = true; sd.append(heroSheet(f, "fallen")); } });
+    if (params.get("open") === "all") { sd.open = true; sbuilt = true; sd.append(heroSheet(f, "fallen")); }
+    g.append(sd);
     box.append(g);
   }
 }
@@ -988,6 +1487,11 @@ const CHRON_ICON = new Set(CHRON_KINDS.map((k) => k.t));   // kinds that have a 
 const CHRON_MAX = 50;
 let chronOff = new Set();          // kind keys switched OFF
 let chronText = "";                // free-text filter
+let chronHero = "", chronTopic = "all";   // H21.2 hero + event-kind filters (persisted, page-local)
+let chronFocusKeep = 0;            // the moment currently marked (until the viewer changes a filter)
+let chronFocusId = null;           // H21.4 a moment id (an integer the page owns) to open on
+const chronOpen = new Map();       // H21.1 episode key -> viewer's open/fold choice
+let chronHeroSig = "";
 let chronData = null;              // the latest raw chronicle (for hover-paused repaints)
 let chronHover = false;            // true while the pointer is over the feed
 let chronPending = false;          // an auto-refresh arrived while hovering
@@ -998,7 +1502,9 @@ function chronEntries(raw) {
   return arr(raw)
     .filter((e) => e && typeof e === "object" && typeof e.s === "string" && e.s.trim() !== "")
     .slice(0, CHRON_MAX)
-    .map((e) => {
+    .map(chronShape);
+}
+function chronShape(e) {
       const rawT = String(e.t == null ? "" : e.t).toLowerCase().trim();
       const t = /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rawT) ? rawT : "other";   // sane key, else "other"
       const known = CHRON_KINDS.find((k) => k.t === t);
@@ -1006,7 +1512,241 @@ function chronEntries(raw) {
                 icon: CHRON_ICON.has(t) ? t : "other",
                key: t.replace(/[^a-z0-9]+/g, "-"),           // for the CSS class only
                s: String(e.s), at: typeof e.at === "string" ? e.at : "" };
-    });
+}
+
+// ---- H14: the chronicle remembers. A small rolling history lives in THIS browser only
+// (localStorage; no write path to any server, no fetch). Newest first, hard-capped at
+// CHRON_HIST_MAX rows / 48 h / CHRON_HIST_BYTES, oldest dropped first. Everything read
+// back is attacker-controlled text that has crossed one storage round-trip, so it is
+// re-validated field by field and then shaped by the SAME chronShape + el()/textContent
+// path as a live line. Storage may be absent, full or throw: every access is wrapped and
+// the page renders fine with the history empty.
+const CHRON_HIST_KEY = "bellmire.chron.v1";
+const CHRON_HIST_MAX = 300, CHRON_HIST_MS = 48 * 3600000, CHRON_HIST_BYTES = 120000, CHRON_S_CAP = 400;
+const CHRON_AT_OK = /^\d{4}-\d\d-\d\dT[0-9:.]{5,16}(Z|[+-]\d\d:\d\d)?$/;
+let chronMem = [];                 // remembered rows [{t, s, at, k}], newest first
+let chronMemLoaded = false;
+const CHRON_SEQ_KEY = "bellmire.chron.seq.v1", CHRON_SEEN_KEY = "bellmire.chron.seen.v1", CHRON_F_KEY = "bellmire.chron.f.v1";
+let chronSeq = 0, chronSeenAtLoad = 0;
+const histTs = (r) => { const a = Date.parse(r.at); return isFinite(a) ? a : (r.k || 0); };
+const histKey = (r) => r.t + "|" + r.s;
+function histClean(a) {
+  const out = [];
+  for (const r of arr(a).slice(0, CHRON_HIST_MAX * 2)) {
+    if (!r || typeof r !== "object" || typeof r.s !== "string") continue;
+    const s = ctrlStrip(r.s).slice(0, CHRON_S_CAP);
+    if (!s) continue;
+    const rt = String(r.t == null ? "" : r.t).toLowerCase().trim();
+    const at = typeof r.at === "string" && r.at.length <= 40 && CHRON_AT_OK.test(r.at) ? r.at : "";
+    out.push({ t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
+               k: typeof r.k === "number" && isFinite(r.k) ? r.k : Date.now(),
+               n: Number.isInteger(r.n) && r.n > 0 && r.n < 2e9 ? r.n : 0 });
+  }
+  return out;
+}
+function chronMemEnsure() {
+  if (chronMemLoaded) return;
+  chronMemLoaded = true;
+  try {
+    const raw = localStorage.getItem(CHRON_HIST_KEY);
+    chronMem = raw && raw.length <= CHRON_HIST_BYTES * 2 ? histClean(JSON.parse(raw)) : [];
+  } catch (e) { chronMem = []; }
+  try { chronSeq = Math.max(0, parseInt(localStorage.getItem(CHRON_SEQ_KEY), 10) || 0); } catch (e) { chronSeq = 0; }
+  for (const r of chronMem) if (r.n > chronSeq) chronSeq = r.n;
+  try { const v = parseInt(localStorage.getItem(CHRON_SEEN_KEY), 10); chronSeenAtLoad = isFinite(v) && v > 0 && v <= Date.now() ? v : 0; } catch (e) { chronSeenAtLoad = 0; }
+  const away = parseFloat(params.get("away"));      // local check: pretend the last look was N hours ago
+  if (isFinite(away) && away >= 0.5 && away <= 72) chronSeenAtLoad = Date.now() - away * 3600000;
+  chronFiltLoad();
+}
+// fold the live entries into the history, prune, cap, persist.
+function chronRemember(live) {
+  chronMemEnsure();
+  const now = Date.now(), by = new Map();
+  for (const r of chronMem) { if (!r.n) r.n = ++chronSeq; if (!by.has(histKey(r))) by.set(histKey(r), r); }
+  for (const e of live) {
+    const r = { t: e.t, s: ctrlStrip(e.s).slice(0, CHRON_S_CAP), at: CHRON_AT_OK.test(e.at) ? e.at : "", k: now };
+    if (!r.s) continue;
+    const old = by.get(histKey(r));
+    if (old) { if (!old.at && r.at) old.at = r.at; } else { r.n = ++chronSeq; by.set(histKey(r), r); }
+  }
+  let rows = [...by.values()].filter((r) => histTs(r) >= now - CHRON_HIST_MS)
+    .sort((a, b) => histTs(b) - histTs(a)).slice(0, CHRON_HIST_MAX);
+  let json = "";
+  try {
+    json = JSON.stringify(rows);
+    while (json.length > CHRON_HIST_BYTES && rows.length) { rows.pop(); json = JSON.stringify(rows); }
+  } catch (e) { rows = []; }
+  chronMem = rows;
+  try { localStorage.setItem(CHRON_HIST_KEY, json || "[]"); } catch (e) { /* full or blocked: carry on in memory */ }
+  try { localStorage.setItem(CHRON_SEQ_KEY, String(chronSeq)); } catch (e) {}
+}
+// the town's own voice for a day divider
+function dayVoice(ts) {
+  const d0 = new Date(); d0.setHours(0, 0, 0, 0);
+  const d = new Date(ts); d.setHours(0, 0, 0, 0);
+  const n = Math.round((d0 - d) / 86400000);
+  return n <= 0 ? "Earlier today, by the bells" : n === 1 ? "Yesterday, as the town tells it" : "Two days gone, and not forgotten";
+}
+
+// ---- H21: the campaign journal. Episodes, filters, "while you were away", moment links.
+// Everything below is page-local: state lives in this browser's localStorage under
+// page-owned keys, every read is re-validated, and the only text that reaches the DOM
+// from the snapshot or the history is the chronicle line / a hero name, via el() only.
+// A moment link is "#moment-<n>" where n is an integer the PAGE assigned to a remembered
+// line - no snapshot string is ever written into a URL, src, href or style.
+const CHRON_DISASTER = /disaster|\bfire\b|burn|drought|famine|sickness|plague|hurricane|tornado|earthquake|meteor|scarstorm|flood|blight|volcano|cold ?snap/i;
+const CHRON_FESTIVAL = /festival|\bfair\b|harvest|feast|celebrat|revel|tournament|carnival/i;
+const CHRON_TOPICS = [
+  { k: "all", label: "Every kind of event", test: () => true },
+  { k: "raid", label: "Raids", test: (e) => e.t === "raid" || /\braid|bandit|siege/i.test(e.s) },
+  { k: "disaster", label: "Disasters", test: (e) => CHRON_DISASTER.test(e.s) },
+  { k: "festival", label: "Festivals", test: (e) => CHRON_FESTIVAL.test(e.s) },
+  { k: "death", label: "Deaths", test: (e) => e.t === "death" },
+  { k: "delve", label: "Delves", test: (e) => e.t === "delve" },
+  { k: "growth", label: "Town growth", test: (e) => e.t === "town" || /grows into|town level|\bbuilt\b|raised/i.test(e.s) },
+];
+function chronFiltLoad() {
+  try {
+    const raw = localStorage.getItem(CHRON_F_KEY);
+    if (!raw || raw.length > 4000) return;
+    const f = JSON.parse(raw);
+    if (!f || typeof f !== "object") return;
+    chronHero = typeof f.h === "string" ? ctrlStrip(f.h).slice(0, 40) : "";
+    chronTopic = CHRON_TOPICS.some((x) => x.k === f.t) ? f.t : "all";
+    chronOff = new Set(arr(f.o).filter((k) => typeof k === "string" && /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(k)).slice(0, 24));
+  } catch (e) { /* unreadable: start unfiltered */ }
+}
+function chronFiltSave() {
+  try { localStorage.setItem(CHRON_F_KEY, JSON.stringify({ h: chronHero, t: chronTopic, o: [...chronOff] })); } catch (e) {}
+}
+const CHRON_EP_GAP = 90 * 60000, CHRON_EP_SPAN = 6 * 3600000, CHRON_AWAY_MIN = 30 * 60000;
+const plural = (n, one, many) => num(n) + " " + (n === 1 ? one : many);
+// a one-line sense of a stretch, built only from page-owned words and counts
+function chronSense(items) {
+  const c = {}; let dis = 0, fes = 0;
+  for (const e of items) { c[e.t] = (c[e.t] || 0) + 1; if (CHRON_DISASTER.test(e.s)) dis++; if (CHRON_FESTIVAL.test(e.s)) fes++; }
+  const lead = c.death ? "A hard stretch" : dis ? "Trouble in the town" : c.raid ? "Steel at the gate" : fes ? "Merrymaking" : c.delve ? "Delvers in the dark" : c.town ? "The town changed" : "A quiet stretch";
+  const parts = [];
+  if (c.death) parts.push(plural(c.death, "death", "deaths"));
+  if (c.raid) parts.push(plural(c.raid, "raid", "raids"));
+  if (c.delve) parts.push(plural(c.delve, "delve", "delves"));
+  if (c.town) parts.push(plural(c.town, "town report", "town reports"));
+  if (dis) parts.push(plural(dis, "disaster line", "disaster lines"));
+  if (fes) parts.push(plural(fes, "festival line", "festival lines"));
+  return lead + (parts.length ? " - " + parts.join(", ") : "") + ".";
+}
+function chronRange(a, b) {   // a newest, b oldest
+  const tm = (ts) => { try { return new Date(ts).toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } };
+  const x = tm(b), y = tm(a);
+  return x === y ? x : x + " \u2013 " + y;
+}
+function chronGapText(ms) {
+  const m = Math.round(ms / 60000);
+  if (m < 90) return plural(m, "minute", "minutes");
+  const h = Math.round(m / 60);
+  return h < 36 ? "about " + plural(h, "hour", "hours") : "about " + plural(Math.round(h / 24), "day", "days");
+}
+// ---- H21.3 while you were away
+let chronAway = null, chronAwayDone = false, chronAwayDismissed = false, chronHiddenAt = 0;
+function chronScore(e) {
+  let s = e.t === "death" ? 5 : e.t === "raid" ? 4 : e.t === "town" ? 3 : e.t === "delve" ? 2 : 1;
+  if (CHRON_DISASTER.test(e.s)) s += 3;
+  if (CHRON_FESTIVAL.test(e.s)) s += 2;
+  return s;
+}
+function chronAwayCompute(liveCount) {
+  chronAwayDone = true;
+  chronAway = null;
+  const seen = chronSeenAtLoad, now = Date.now();
+  if (!seen || now - seen < CHRON_AWAY_MIN) return;
+  const rows = chronMem.map((r) => Object.assign(chronShape(r), { ts: histTs(r) }));
+  const fresh = rows.filter((e) => e.ts > seen);
+  const oldestMem = rows.length ? Math.min.apply(null, rows.map((e) => e.ts)) : now;
+  const incomplete = now - seen > CHRON_HIST_MS
+    || (liveCount >= CHRON_MAX && oldestMem > seen)
+    || (rows.length >= CHRON_HIST_MAX && oldestMem > seen);
+  chronAway = { gap: now - seen, fresh, incomplete };
+}
+function paintAway() {
+  const box = $("chronAway");
+  if (!box) return;
+  box.replaceChildren();
+  const a = chronAway;
+  if (!a || chronAwayDismissed) { box.classList.add("hide"); return; }
+  box.classList.remove("hide");
+  const head = el("div", "away-head");
+  head.append(el("strong", null, "While you were away"), el("span", "away-gap", chronGapText(a.gap) + " since you last looked"));
+  const dis = el("button", "chip clear", "Dismiss");
+  dis.type = "button";
+  dis.addEventListener("click", () => { chronAwayDismissed = true; paintAway(); });
+  head.append(dis);
+  box.append(head);
+  if (!a.fresh.length) {
+    box.append(el("p", "away-sum", "Nothing new has been written since you last looked."));
+  } else {
+    const c = {};
+    for (const e of a.fresh) c[e.t] = (c[e.t] || 0) + 1;
+    const parts = [];
+    if (c.death) parts.push(plural(c.death, "death", "deaths"));
+    if (c.raid) parts.push(plural(c.raid, "raid", "raids"));
+    if (c.delve) parts.push(plural(c.delve, "delve", "delves"));
+    if (c.town) parts.push(plural(c.town, "town report", "town reports"));
+    const top = a.fresh.map((e) => ({ e, s: chronScore(e) })).sort((x, y) => y.s - x.s || y.e.ts - x.e.ts).slice(0, 5)
+      .sort((x, y) => y.e.ts - x.e.ts).map((x) => x.e);
+    box.append(el("p", "away-sum", plural(a.fresh.length, "line", "lines") + " written" + (parts.length ? " - " + parts.join(", ") : "") +
+      (a.fresh.length > top.length ? ". The ones that matter most:" : ".")));
+    const ul = el("ul", "away-list");
+    for (const e of top) {
+      const li = el("li");
+      const ag = ago(e.at);
+      if (ag) li.append(el("span", "away-t", ag.text));
+      li.append(document.createTextNode(e.s));      // viewer text: text node only
+      ul.append(li);
+    }
+    box.append(ul);
+  }
+  box.append(el("p", "away-note", a.incomplete
+    ? "The town reports only its latest " + CHRON_MAX + " lines and this browser keeps about two days, so part of that gap may be missing - this is a summary of what is here, not a full record."
+    : "This is what the town's latest report and this browser's memory hold."));
+}
+function chronMarkSeen(force) {
+  try { if (force || document.visibilityState !== "hidden") localStorage.setItem(CHRON_SEEN_KEY, String(Date.now())); } catch (e) {}
+}
+document.addEventListener("visibilitychange", () => {
+  if (!chronAwayDone) return;
+  if (document.visibilityState === "hidden") { chronHiddenAt = Date.now(); chronMarkSeen(true); return; }
+  if (chronHiddenAt && Date.now() - chronHiddenAt >= CHRON_AWAY_MIN) {   // came back to a long-hidden tab
+    chronSeenAtLoad = chronHiddenAt; chronAwayDone = false; chronAwayDismissed = false; chronAway = null;
+  }
+  chronHiddenAt = 0;
+});
+window.addEventListener("pagehide", () => { if (chronAwayDone) chronMarkSeen(true); });
+// ---- H21.4 a moment you can point at
+function momentLink(n, btn) {
+  const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = "Link"; }, 1800); };
+  try { history.replaceState(null, "", "#moment-" + (n | 0)); } catch (e) {}
+  try { navigator.clipboard.writeText(location.href).then(() => flash("Copied"), () => flash("In address bar")); } catch (e) { flash("In address bar"); }
+}
+// ---- H21.2 the tool row (hero + event selects). Names come from the snapshot roster and are
+// written as option text via el(); the select's own value is only ever COMPARED, never rendered.
+function chronToolsSync() {
+  const sel = $("chronHero"), top = $("chronTopic"), clr = $("chronClear");
+  if (top) top.value = chronTopic;
+  if (sel) {
+    const p = sheetPayload(), names = new Set();
+    if (p) for (const h of arr(p.heroes).concat(arr(p.fallen))) { const n = cleanName(nameOf(h)); if (n) names.add(n); }
+    if (chronHero) names.add(chronHero);
+    const list = [...names].sort((a, b) => a.localeCompare(b)).slice(0, 400);
+    const sig = chronHero + "\u0001" + list.join("\u0001");
+    if (sig !== chronHeroSig) {              // leave an open dropdown alone when nothing changed
+      chronHeroSig = sig;
+      sel.replaceChildren();
+      const all = el("option", null, "Every hero"); all.value = ""; sel.append(all);
+      for (const n of list) { const o = el("option", null, n); o.value = n; sel.append(o); }
+    }
+    sel.value = chronHero;
+  }
+  if (clr) clr.classList.toggle("hide", !(chronHero || chronTopic !== "all" || chronOff.size || chronText.trim()));
 }
 
 // store the latest data and repaint. An AUTO refresh (from the 60 s poll) is held
@@ -1014,7 +1754,15 @@ function chronEntries(raw) {
 // does not reshuffle lines under them; the held update is applied when they leave.
 // A user action (chip, search, clear) always paints at once.
 function renderChronicle(raw, opts) {
-  if (raw !== undefined) chronData = raw;
+  if (raw !== undefined) {
+    chronData = raw;
+    if (Array.isArray(raw)) {
+      const le = chronEntries(raw);
+      chronRemember(le);
+      if (!chronAwayDone) chronAwayCompute(le.length);
+      chronMarkSeen(false);
+    }
+  }
   const auto = opts && opts.auto;
   if (auto && chronHover && $("chronList").childElementCount) { chronPending = true; return; }
   chronPending = false;
@@ -1023,17 +1771,31 @@ function renderChronicle(raw, opts) {
 
 function paintChronicle() {
   const raw = chronData;
-  const chips = $("chronChips"), list = $("chronList"), note = $("chronNote"), find = $("chronFind");
+  const chips = $("chronChips"), list = $("chronList"), note = $("chronNote"), find = $("chronFind"), tools = $("chronTools");
   chips.replaceChildren();
   list.replaceChildren();
   const hasData = Array.isArray(raw);
   if (find) find.classList.toggle("hide", !hasData);
+  if (tools) tools.classList.toggle("hide", !hasData);
+  paintAway();
   if (!hasData) {
     note.textContent = "The chronicle will appear here once the town reports it.";
     note.className = "note quiet";
     return;
   }
-  const entries = chronEntries(raw);
+  chronMemEnsure();
+  if (chronFocusId != null) {     // a moment link: show everything so the line can be found
+    chronHero = ""; chronTopic = "all"; chronOff = new Set(); chronText = ""; if (find) find.value = "";
+  }
+  chronToolsSync();
+  const live = chronEntries(raw);
+  const idByKey = new Map(chronMem.map((r) => [histKey(r), r.n]));
+  const liveKeys = new Set(live.map(histKey));
+  const now = Date.now();
+  for (const e of live) { const t = Date.parse(e.at); e.ts = isFinite(t) ? t : now; e.n = idByKey.get(histKey(e)) || 0; }
+  const rem = chronMem.filter((r) => !liveKeys.has(histKey(r)))
+    .map((r) => Object.assign(chronShape(r), { rem: true, ts: histTs(r), n: r.n || 0 }));
+  const entries = live.concat(rem).sort((x, y) => y.ts - x.ts);
   if (!entries.length) {
     note.textContent = "Nothing has been written in the chronicle yet.";
     note.className = "note quiet";
@@ -1055,50 +1817,110 @@ function paintChronicle() {
     c.type = "button";
     c.setAttribute("aria-pressed", on ? "true" : "false");
     c.append(icon(g.icon, "chipic"), document.createTextNode(g.label), el("span", "cnt", g.count));
-    c.addEventListener("click", () => { if (chronOff.has(g.t)) chronOff.delete(g.t); else chronOff.add(g.t); paintChronicle(); });
+    c.addEventListener("click", () => { if (chronOff.has(g.t)) chronOff.delete(g.t); else chronOff.add(g.t); chronFiltSave(); paintChronicle(); });
     chips.append(c);
   }
   if (chronOff.size) {
     const clear = el("button", "chip clear", "Show all kinds");
     clear.type = "button";
-    clear.addEventListener("click", () => { chronOff.clear(); paintChronicle(); });
+    clear.addEventListener("click", () => { chronOff.clear(); chronFiltSave(); paintChronicle(); });
     chips.append(clear);
   }
 
   const q = chronText.trim().toLowerCase();
-  const shown = entries.filter((e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)));
-  if (!shown.length) {
+  const hkey = chronHero.trim().toLowerCase();
+  const topic = CHRON_TOPICS.find((x) => x.k === chronTopic) || CHRON_TOPICS[0];
+  const pass = (e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)) && (!hkey || namesIn(e.s, hkey)) && topic.test(e);
+  const anyFilter = !!(q || hkey || chronOff.size || chronTopic !== "all");
+  const shownAll = entries.filter(pass);
+  if (!shownAll.length) {
     note.className = "note quiet";
-    note.textContent = q
-      ? "No entries match “" + q + "”" + (chronOff.size ? " in the kinds shown." : ".")
+    note.textContent = q ? "No entries match \u201c" + q + "\u201d" + (chronOff.size ? " in the kinds shown." : ".")
+      : (hkey || chronTopic !== "all") ? "Nothing in the journal matches that hero and event."
       : "Every kind is switched off - tap a chip to bring the chronicle back.";
     return;
   }
-  for (const e of shown) {
-    const li = el("li", "centry kind-" + e.key);
-    const badge = el("span", "cbadge");
-    badge.setAttribute("aria-hidden", "true");
-    badge.append(icon(e.icon));                 // whitelisted glyph id
-    li.append(badge);
-    const body = el("div", "cbody");
-    const head = el("div", "chead");
-    head.append(el("span", "ckind", e.label));  // textContent; a novel kind shows its own name, escaped
-    const a = ago(e.at);
-    if (a) {
-      const time = el("time", "cwhen", a.text);
-      time.dateTime = e.at;
-      time.title = when(e.at);
-      head.append(time);
+
+  // ---- H21.1 episodes: stretches split by a long quiet gap or by length
+  const eps = [];
+  for (const e of entries) {
+    const cur = eps[eps.length - 1];
+    if (cur && cur.last - e.ts <= CHRON_EP_GAP && cur.first - e.ts <= CHRON_EP_SPAN) { cur.items.push(e); cur.last = e.ts; }
+    else eps.push({ first: e.ts, last: e.ts, items: [e] });
+  }
+  let drawn = 0, sawEarlier = false;
+  for (const ep of eps) {
+    const items = ep.items.filter(pass);
+    if (!items.length) continue;
+    const hasLive = ep.items.some((e) => !e.rem);
+    const key = "e" + ep.last;
+    const focusIn = chronFocusId != null && ep.items.some((e) => e.n === chronFocusId);
+    const dflt = drawn === 0 || anyFilter;     // the newest stretch (or any filter hit) is open; older ones fold
+    let open = focusIn ? true : (chronOpen.has(key) ? chronOpen.get(key) : dflt);
+    if (!hasLive && !sawEarlier) { sawEarlier = true; list.append(el("li", "cdiv cdiv-earlier", "Earlier")); }
+    const li = el("li", "cep" + (open ? " open" : ""));
+    const hid = "cep-" + drawn;
+    const head = el("button", "cep-head");
+    head.type = "button";
+    head.setAttribute("aria-expanded", open ? "true" : "false");
+    head.setAttribute("aria-controls", hid);
+    head.append(el("span", "cep-title", drawn === 0 && now - ep.first < CHRON_EP_GAP ? "Now, as the town tells it" : dayVoice(ep.first)),
+      el("span", "cep-when", chronRange(ep.first, ep.last) + " \u00b7 " + plural(items.length, "line", "lines")),
+      el("span", "cep-sense", chronSense(items)));
+    const body = el("ol", "cep-list");
+    body.id = hid;
+    body.hidden = !open;
+    head.addEventListener("click", () => {
+      open = !open;
+      chronOpen.set(key, open);
+      li.classList.toggle("open", open);
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      body.hidden = !open;
+    });
+    drawn++;
+    li.append(head, body);
+    for (const e of items) {
+      const row = el("li", "centry kind-" + e.key + (e.rem ? " remembered" : "") + (e.n && e.n === chronFocusKeep ? " focus" : ""));
+      if (e.n) row.id = "moment-" + e.n;           // an integer the page assigned
+      const badge = el("span", "cbadge");
+      badge.setAttribute("aria-hidden", "true");
+      badge.append(icon(e.icon));                 // whitelisted glyph id
+      row.append(badge);
+      const cb = el("div", "cbody");
+      const ch = el("div", "chead");
+      ch.append(el("span", "ckind", e.label));    // textContent; a novel kind shows its own name, escaped
+      const a = ago(e.at);
+      if (a) {
+        const time = el("time", "cwhen", a.text);
+        time.dateTime = e.at;
+        time.title = when(e.at);
+        ch.append(time);
+      }
+      if (e.n) {
+        const lk = el("button", "cmoment", "Link");
+        lk.type = "button";
+        lk.title = "Link to this moment (opens on this line in a browser that remembers it)";
+        lk.setAttribute("aria-label", "Copy a link to this moment");
+        lk.addEventListener("click", () => momentLink(e.n, lk));
+        ch.append(lk);
+      }
+      cb.append(ch, el("p", "cline", e.s));       // viewer text: textContent
+      row.append(cb);
+      body.append(row);
     }
-    body.append(head, el("p", "cline", e.s));   // viewer text: textContent
-    li.append(body);
     list.append(li);
   }
   note.className = "note";
-  const tail = q || chronOff.size ? " (" + entries.length + " in all)" : "";
-  note.textContent = (shown.length === entries.length
+  note.textContent = (shownAll.length === entries.length
     ? entries.length + (entries.length === 1 ? " entry" : " entries")
-    : "Showing " + shown.length + " of " + entries.length) + ", newest first." + (tail && shown.length !== entries.length ? "" : "");
+    : "Showing " + shownAll.length + " of " + entries.length) + ", newest first, in " + plural(drawn, "stretch", "stretches") +
+    (drawn > 1 ? " - tap one to fold or open it." : ".");
+  if (chronFocusId != null) {
+    const target = document.getElementById("moment-" + chronFocusId);   // id built from an integer we own
+    chronFocusId = null;
+    if (target) { chronFocusKeep = +target.id.slice(7) || 0; target.classList.add("focus"); try { target.scrollIntoView({ block: "center" }); } catch (e) {} }
+    else { note.className = "note quiet"; note.textContent = "That moment is no longer in this browser's memory - it keeps only about two days of the chronicle."; }
+  }
 }
 
 // ============================================================ COMMANDS
@@ -1940,6 +2762,193 @@ function renderLore() {
   catch (e) { body.append(el("p", "lore-line", "A chapter could not be drawn.")); }
 }
 
+
+// ---------------------------------------------------------------- bestiary (H19)
+// What Bellmire has learned about what is down there. Words come ONLY from the frozen
+// lore bundle (lord_intros, unique_intros, events.monster_camps) read as-is; this page
+// invents no monster text. A sigil is a page-owned roundel: the name is hashed through
+// the same FNV + mixer as the crests (crestRecipe) and the hash only picks INDICES into
+// the constant whitelists below, so a lord's mark is drawn from a different charge set
+// than any hero's crest and a hostile name can never become markup, URL or style.
+// A beast is MET only when the browser's own remembered Chronicle names it; until then
+// it is a RUMOUR - sigil and name present, everything else veiled. Optional numbers
+// (faced, killed, deepest, standing) are read from p.bestiary[<page-owned key>] only
+// when the publisher sends them; today it does not, and the page never estimates them.
+const SIGIL_TINCT = ["#2a1c10", "#5a2a22", "#1d8f8a", "#c6922f", "#3a352e"];   // ink, oxblood, teal, gold, ash
+const SIGIL_RING = "M50 4A46 46 0 1 1 49.99 4Z";
+const SIGIL_DIV = [
+  null,
+  "M50 0H100V100H50Z",                    // per pale
+  "M0 50H100V100H0Z",                     // per fess
+  "M0 0L100 100H0Z",                      // per bend
+  "M50 0L100 50L50 100L0 50Z",            // lozenge field
+  "M0 74L50 36L100 74V100H0Z",            // chevron
+];
+const SIGIL_CHARGE = [
+  "M30 28L45 28L38 78Z M55 28L70 28L62 78Z",                                       // fangs
+  "M20 68C20 42 34 32 46 24C40 40 40 54 44 68Z M80 68C80 42 66 32 54 24C60 40 60 54 56 68Z",   // horns
+  "M12 50C30 24 70 24 88 50C70 76 30 76 12 50Z M38 50a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z",   // eye
+  "M28 22L40 22L52 80L42 80Z M46 18L58 18L70 76L60 76Z M62 22L74 22L84 70L76 70Z",             // claw
+  "M50 16C58 36 74 46 70 66C68 80 58 86 50 86C42 86 32 80 30 66C28 52 40 46 42 36C46 44 48 34 50 16Z",   // flame
+  "M12 64C26 38 44 30 50 22C56 30 74 38 88 64C76 58 66 60 58 68C54 60 46 60 42 68C34 60 24 58 12 64Z",  // wings
+  "M28 28H72V42H42V50H72V74H28V60H58V56H28Z",                                      // coil
+  "M24 76L28 36L40 54L50 28L60 54L72 36L76 76Z",                                    // broken crown
+  "M24 30L32 22L78 68L70 76Z M76 30L68 22L22 68L30 76Z",                            // crossed bones
+];
+function sigil(name, size) {
+  const r = crestRecipe("sigil|" + String(name == null ? "" : name));
+  const dv = r.div % SIGIL_DIV.length, ch = r.ch % SIGIL_CHARGE.length;
+  const ta = r.ta % SIGIL_TINCT.length;
+  const tb = (ta + 1 + (r.tb % (SIGIL_TINCT.length - 1))) % SIGIL_TINCT.length;
+  let tc = (tb + 1 + (r.tc % (SIGIL_TINCT.length - 1))) % SIGIL_TINCT.length;
+  if (tc === ta) tc = (tc + 1) % SIGIL_TINCT.length;
+  if (tc === tb) tc = (tc + 1) % SIGIL_TINCT.length;
+  if (!document.getElementById("sig-clip")) {
+    const defs = document.createElementNS(SVGNS, "svg");
+    defs.setAttribute("class", "coa-defs"); defs.setAttribute("width", "0"); defs.setAttribute("height", "0");
+    defs.setAttribute("aria-hidden", "true"); defs.setAttribute("focusable", "false");
+    const clip = document.createElementNS(SVGNS, "clipPath"); clip.setAttribute("id", "sig-clip");
+    const cp = document.createElementNS(SVGNS, "path"); cp.setAttribute("d", SIGIL_RING);
+    clip.append(cp); defs.append(clip); document.body.append(defs);
+  }
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "sigil sigil-" + (size === "sm" ? "sm" : "md"));
+  svg.setAttribute("viewBox", "0 0 100 100");
+  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
+  const g = document.createElementNS(SVGNS, "g"); g.setAttribute("clip-path", "url(#sig-clip)");
+  g.append(crestPath("M0 0H100V100H0Z", SIGIL_TINCT[ta]));
+  if (SIGIL_DIV[dv]) g.append(crestPath(SIGIL_DIV[dv], SIGIL_TINCT[tb]));
+  const c = crestPath(SIGIL_CHARGE[ch], SIGIL_TINCT[tc], SIGIL_TINCT[0]);
+  c.setAttribute("fill-rule", "evenodd");
+  g.append(c);
+  svg.append(g, crestPath(SIGIL_RING, "none", SIGIL_TINCT[3]));
+  return svg;
+}
+
+const BEAST_RUMOURS = [
+  "Whispers only. The guild has not stood before it.",
+  "Heard of, never met - and the town would keep it so.",
+  "A name from the old tales. Nobody here has seen it.",
+  "The sigil is all the guild has drawn of it so far.",
+  "Spoken of low, behind the hand. Not yet faced.",
+];
+const BEAST_KINDS = { lord: "A deep lord", named: "A named one", kin: "A kin of the deep" };
+let beastFilter = "all";
+const BEAST_CHIPS = [["all", "All"], ["lord", "Deep lords"], ["named", "Named ones"], ["kin", "Kin of the deep"]];
+const MOCK_BEAST_CHRON = [
+  { t: "boss", s: "The Hollow King came up the stair and the guild met it at the door.", at: new Date(Date.now() - 50 * 60000).toISOString() },
+  { t: "boss", s: "Heroes fell to the Hollow King before the watch drove it back.", at: new Date(Date.now() - 7 * 3600000).toISOString() },
+  { t: "fight", s: "A bog frog the size of a cart was put down at the quarry.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
+  { t: "boss", s: "<img src=x onerror=alert(1)> was heard laughing in the dark.", at: new Date(Date.now() - 2 * 3600000).toISOString() },
+];
+function beastTerms(name) {
+  const n = String(name).toLowerCase().replace(/_/g, " ").trim();
+  const t = [n];
+  if (/[^s]es$/.test(n)) t.push(n.replace(/es$/, ""));
+  if (/s$/.test(n)) t.push(n.replace(/s$/, ""));
+  return t.filter((x) => x.length >= 4);
+}
+// how many remembered Chronicle lines name any of the terms, and when the newest did
+function beastMentions(rows, terms) {
+  let n = 0, newest = 0;
+  for (const r of rows) {
+    const s = String(r && r.s != null ? r.s : "").toLowerCase();
+    if (!s) continue;
+    for (const t of terms) if (s.indexOf(t) >= 0) { n++; const ts = histTs(r); if (ts > newest) newest = ts; break; }
+  }
+  return { n, newest };
+}
+function beastNum(v) { return Number.isFinite(+v) && +v >= 0 ? Math.min(+v, 1e9) : null; }
+function beastTitle(key) {
+  return String(key).replace(/_/g, " ").replace(/\b[a-z]/g, (m) => m.toUpperCase());
+}
+function beastCard(b, rows, stats) {
+  const m = beastMentions(rows, b.terms);
+  const card = el("article", "beast " + (m.n ? "met" : "rumour"));
+  const head = el("div", "beast-head");
+  head.append(sigil(b.name, "md"));
+  const hb = el("div", "beast-hb");
+  hb.append(el("h3", "beast-name", b.name));
+  hb.append(el("span", "beast-kind", BEAST_KINDS[b.kind] || ""));
+  head.append(hb);
+  card.append(head);
+  if (!m.n) {
+    card.append(el("span", "beast-flag", "Rumour"));
+    let h = 0; for (let i = 0; i < b.name.length; i++) h = (h * 31 + b.name.charCodeAt(i)) >>> 0;
+    card.append(el("p", "beast-veil", BEAST_RUMOURS[h % BEAST_RUMOURS.length]));
+    return card;
+  }
+  card.append(el("span", "beast-flag met", "Met"));
+  if (b.intro) card.append(el("p", "beast-intro", "\u201c" + b.intro + "\u201d"));
+  for (const camp of arr(b.camps)) {
+    const cb = el("p", "beast-camp");
+    cb.append(el("strong", "", camp.name + ". "), document.createTextNode(camp.while));
+    card.append(cb);
+  }
+  const facts = el("dl", "beast-facts");
+  const add = (k, v) => { facts.append(el("dt", "", k), el("dd", "", v)); };
+  add("Named in the Chronicle", num(m.n) + (m.n === 1 ? " remembered line" : " remembered lines"));
+  const a = m.newest ? ago(new Date(m.newest).toISOString()) : null;
+  if (a) add("Last named", a.text);
+  if (stats) {
+    const f = beastNum(stats.faced), k = beastNum(stats.killed), d = beastNum(stats.deepest);
+    if (f != null) add("Times faced", num(f));
+    if (k != null) add("Heroes it has killed", num(k));
+    if (d != null) add("Deepest push against it", num(d));
+    if (typeof stats.standing === "boolean") add("Today", stats.standing ? "It stands" : "It is down");
+  }
+  card.append(facts);
+  return card;
+}
+function renderBestiary(p) {
+  const box = $("bestiaryBody");
+  if (!box) return;
+  const chipBox = $("bestiaryChips");
+  if (chipBox && !chipBox.firstChild) {
+    for (const [id, label] of BEAST_CHIPS) {
+      const btn = el("button", "chip", label);
+      btn.setAttribute("type", "button"); btn.dataset.f = id;
+      btn.addEventListener("click", () => { beastFilter = id; renderBestiary(lastBeastPayload); });
+      chipBox.append(btn);
+    }
+  }
+  lastBeastPayload = p;
+  if (chipBox) for (const b of chipBox.children) {
+    const on = b.dataset.f === beastFilter;
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  }
+  box.textContent = "";
+  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
+  let rows = chronMem.slice();
+  const snap = p && p.bestiary && typeof p.bestiary === "object" ? p.bestiary : null;
+  const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
+  const beasts = [];
+  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
+  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
+  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
+  const fam = new Map();
+  for (const c of arr(src && src.events && src.events.monster_camps)) {
+    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
+    let f = fam.get(c.of);
+    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
+    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
+    for (const t of beastTerms(c.name)) f.terms.push(t);
+  }
+  for (const f of fam.values()) beasts.push(f);
+  const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
+  const metN = shown.filter((b) => beastMentions(rows, b.terms).n).length;
+  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
+  box.append(note);
+  const grid = el("div", "beast-grid");
+  // met first, then rumours; stable inside each group
+  const ordered = shown.map((b, i) => ({ b, i, met: beastMentions(rows, b.terms).n ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
+  for (const o of ordered) {
+    try { grid.append(beastCard(o.b, rows, statOf(o.b.key))); } catch (e) { /* one bad entry never blanks the book */ }
+  }
+  box.append(grid);
+}
+let lastBeastPayload = null;
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;
@@ -1949,7 +2958,17 @@ $("boardFind").addEventListener("input", (e) => {
   boardFind = e.target.value;
   if (last) { const p = MOCK ? withMock(last.payload) : last.payload; renderBoards(arr(p.heroes), arr(p.fallen)); }
 });
-$("chronFind").addEventListener("input", (e) => { chronText = e.target.value; paintChronicle(); });
+$("chronFind").addEventListener("input", (e) => { chronText = e.target.value; chronFocusKeep = 0; paintChronicle(); });
+{
+  const th = $("chronTopic");
+  for (const t of CHRON_TOPICS) { const o = el("option", null, t.label); o.value = t.k; th.append(o); }
+  th.addEventListener("change", () => { chronTopic = CHRON_TOPICS.some((x) => x.k === th.value) ? th.value : "all"; chronFocusKeep = 0; chronFiltSave(); paintChronicle(); });
+  $("chronHero").addEventListener("change", (e) => { chronHero = ctrlStrip(e.target.value).slice(0, 40); chronFocusKeep = 0; chronFiltSave(); paintChronicle(); });
+  $("chronClear").addEventListener("click", () => {
+    chronHero = ""; chronTopic = "all"; chronOff = new Set(); chronText = ""; const f = $("chronFind"); if (f) f.value = "";
+    chronFiltSave(); paintChronicle();
+  });
+}
 // pause-on-hover: a poll that lands while the viewer is reading the feed is held,
 // then applied when they move away, so lines don't reshuffle under the pointer.
 (function () {
@@ -1972,7 +2991,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; pa
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -2020,8 +3039,19 @@ function setActiveTab(id) {
     if (next) next.focus();
   });
   // ?open=1 opens the first hero's sheet; land on Heroes so the opened sheet is visible.
-  const initial = (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  // H21.4: "#moment-<n>" opens the Chronicle on a remembered line. n is an integer the PAGE
+  // assigned to that line; it is only ever compared to the ids on rendered rows - never put
+  // in a URL, src, href, selector or style - and the tab chosen is a constant from TABS.
+  const momentFrom = () => { const m = /^moment-(\d{1,9})$/.exec(String(location.hash || "").replace(/^#/, "")); return m && +m[1] > 0 ? +m[1] : 0; };
+  const mid = momentFrom();
+  if (mid) chronFocusId = mid;
+  const initial = (mid ? "chronicle" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
   setActiveTab(initial);
+  window.addEventListener("hashchange", () => {
+    const n = momentFrom();
+    if (!n) return;
+    chronFocusId = n; setActiveTab("chronicle"); if (chronData) paintChronicle();
+  });
 })();
 
 load();
@@ -2093,11 +3123,72 @@ const MOCK_PARTIES = [
     { name: "Grey Pell", hp: 18, max_hp: 30, status: "ok", class: "cleric" },
   ] },
 ];
+// ?mock=fallen: a rich memorial row, a hostile name carrying every field, a bare name-only
+// row, and a row of odd types (nulls, NaN) - all must render cleanly, no "undefined".
+// ?mock=sheets (H20): three sheets that must each read as finished - a fresh level-1 hero with
+// almost nothing, a kitted veteran carrying every optional field, and a fallen hero - plus a
+// hostile name that must render as literal text.
+const MOCK_SHEET_HEROES = [
+  { name: "Pip", class: "rogue", species: "human", level: 1, ac: 11, hp: 8, xp: 0, gold: 3, deepest: 0, kills: 0, delves: 0,
+    gear: { main_hand: "rusty dagger", body: "rags" }, last_seen: new Date(Date.now() - 4000).toISOString(),
+    events: [{ t: "town", s: "Pip signed the guild ledger.", at: new Date(Date.now() - 4000).toISOString() }] },
+  { name: "Brum the Cooper", class: "knight", species: "dwarf", level: 9, rank: "Veteran", title: "the Bold", standing: 212,
+    ac: 18, hp: 61, max_hp: 88, xp: 4200, xp_next: 5000, to_hit: 7, prof: 4, saves: "STR +7, CON +6", initiative: 1, speed: 25,
+    stats: { str: 18, dex: 12, con: 16, int: 9, wis: 11, cha: 10 }, weapon: { name: "warhammer", dice: "1d10+4" }, armour: { name: "plate" },
+    gear: { off_hand: "tower shield", head: "iron helm", hands: "gauntlets", feet: "greaves", ring: "Ring of the Ford" },
+    worn: "a corgi, a crown", dye: "teal", gold: 540, oil: 2, potions: 3, kills: 140, deepest: 31, delves: 22, status: "delving",
+    last_seen: new Date(Date.now() - 55 * 60000).toISOString(),
+    events: [{ t: "delve", s: "Brum the Cooper led the Ford Wardens down to floor 7.", at: new Date(Date.now() - 600000).toISOString() },
+             { t: "fight", s: "Brum the Cooper broke a bone-knight on floor 6.", at: new Date(Date.now() - 3600000).toISOString() }] },
+  { name: "<img src=x onerror=alert(1)>", class: "mage", species: "elf", level: 4, ac: 12, hp: 14, max_hp: 22, xp: 900, gold: 12, kills: 9, deepest: 5, delves: 4,
+    weapon: { name: "oak staff", dice: "1d6" }, last_seen: "<img src=x onerror=alert(1)>",
+    events: [{ t: "loot", s: "<img src=x onerror=alert(1)> found a scar-touched gem.", at: new Date(Date.now() - 900000).toISOString() }] },
+];
+const MOCK_SHEET_FALLEN = [
+  { name: "Grimhollow", class: "knight", species: "orc", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12, title: "the Grim", weapon: { name: "greatsword" }, armour: { name: "mail" } },
+];
+const MOCK_SHEET_PARTIES = [{ name: "The Ford Wardens", floor: 7, members: [{ name: "Brum the Cooper", hp: 30, max_hp: 88, status: "burning", class: "knight" }, { name: "Pip", hp: 8, status: "ok" }] }];
+const MOCK_SHEET_CHRON = [
+  { t: "delve", s: "Brum the Cooper led the Ford Wardens down to floor 7.", at: new Date(Date.now() - 600000).toISOString() },
+  { t: "fight", s: "Brum the Cooper broke a bone-knight on floor 6.", at: new Date(Date.now() - 3600000).toISOString() },
+  { t: "death", s: "Grimhollow fell to a bone-knight on floor 31.", at: new Date(Date.now() - 7200000).toISOString() },
+  { t: "loot", s: "<img src=x onerror=alert(1)> found a scar-touched gem.", at: new Date(Date.now() - 900000).toISOString() },
+];
+const MOCK_FALLEN = [
+  { name: "Grimhollow", class: "knight", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12, title: "the Bold", weapon: { name: "Warhammer" }, armour: "Chain shirt" },
+  { name: "<img src=x onerror=alert(1)>", class: "mage", level: 4, kills: 1, deepest: 3, killed_by: "<b>a hostile</b>", epitaph: "<script>alert(1)</script>", day: 3, weapon: "oak staff", armour: { name: "<i>robe</i>" } },
+  { name: "Wren" },
+  { name: "Odd", class: null, level: "x", kills: NaN, deepest: null, killed_by: "", epitaph: "", weapon: null, armour: {} },
+];
+const MOCK_TOWN_CHRON = [
+  { t: "raid", s: "<img src=x onerror=alert(1)> led a raid on the east gate; the watch held.", at: new Date(Date.now() - 40 * 60000).toISOString() },
+  { t: "town", s: "Fire in Craft Row - a forge banked wrong, and the wind unkind.", at: new Date(Date.now() - 4 * 3600000).toISOString() },
+  { t: "town", s: "Day 17 begins  -  48 souls, 1280 gold, Village (lvl 3, steady)", at: new Date(Date.now() - 4 * 3600000).toISOString() },
+  { t: "town", s: "Bellmire grows into Village.  (town level 3)", at: new Date(Date.now() - 27 * 3600000).toISOString() },
+  { t: "raid", s: "Bandits tested the west road; the caravans came through bled.", at: new Date(Date.now() - 52 * 3600000).toISOString() },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "bestiary") {         // H19: one met lord with real numbers, rumours, hostile name
+    out.chronicle = MOCK_BEAST_CHRON;
+    out.bestiary = { hollow_king: { faced: 3, killed: 2, deepest: 7, standing: true } };
+  }
+  if (MOCK === "sheets") {            // H20: bare L1 hero, kitted veteran, a fallen hero; hostile strings throughout
+    out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN; out.parties = MOCK_SHEET_PARTIES; out.chronicle = MOCK_SHEET_CHRON;
+  }
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
+  if (MOCK === "fallen") out.fallen = MOCK_FALLEN;
+  if (MOCK === "town") {            // H18: a town with every new field, hostile strings included
+    out.town = Object.assign({}, p.town, {
+      name: "<img src=x onerror=alert(1)>", level: 3, souls: 48, day: 17, treasury: 1280, renown: 64,
+      raids_turned: 5, score: 120, next_level_at: 300,
+      buildings: ["The Well", { name: "<img src=x onerror=alert(1)> Forge", built: true, does: "<b>hostile</b> text that must stay text" },
+                  { name: "Watchtower", built: false }, { name: "" }, 7, null],
+    });
+    out.chronicle = MOCK_CHRONICLE.concat(MOCK_TOWN_CHRON);
+  }
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];
@@ -2210,6 +3301,14 @@ function setUpTabs() {
       else t.panel.classList.add("tab-hidden");
     }
     if (save) writeSaved(chosen.id);
+    // H17: on a phone the tab strip scrolls sideways - keep the lit tab in view
+    // (set scrollLeft directly so the page itself never scrolls sideways).
+    try {
+      const a = chosen.anchor;
+      if (navEl.scrollWidth > navEl.clientWidth) {
+        navEl.scrollLeft = Math.max(0, a.offsetLeft - (navEl.clientWidth - a.offsetWidth) / 2);
+      }
+    } catch (e) {}
     if (focusPanel) {
       try { chosen.panel.focus({ preventScroll: true }); } catch (e) { try { chosen.panel.focus(); } catch (e2) {} }
     }

@@ -242,11 +242,16 @@ the second pass:
 
 ---
 
-## H6: device-code sign-in (scaffolding, gated on Mr. E)
+## H6: device-code sign-in (LIVE - see the Nov 12 doc-accuracy fix further down)
 - Why: so a viewer spotlights their own hero instead of scrolling - "not peeping toms on
   others' stats." Device-code grant suits a page with no server (no redirect URI to host).
-- Gated: TWITCH_CLIENT_ID ships empty, so the button only explains it needs Mr. E; no call is
-  made. A ?twitch_client= test hook exercises the flow end-to-end without baking an id in.
+- LIVE (corrected Nov 15, 2026): TWITCH_CLIENT_ID is Mr. E's registered public client id, baked
+  as a non-overridable const; the ?twitch_client= test hook was REMOVED as a phishing vector.
+  Clicking "Sign in with Twitch" starts the real device-code grant. Nothing contacts Twitch
+  before the click. Verified end-to-end Nov 15: Mr. E signed in on the live page, his own hero
+  card rendered and the pin-your-hero flow worked. This bullet previously read "ships empty, the
+  button only explains it needs Mr. E" - that was already false and is what kept making hub runs
+  report the client id as an open item for Mr. E. It is NOT open.
 - Read-only and minimal: no scopes (we need only the user's own login), token in memory only
   (never storage, never our backend), no viewer write. The two connect-src hosts are documented
   and flagged in docs/HUB_SECURITY.md. Phase 3 (any write path) stays off until the RLS is designed.
@@ -569,3 +574,147 @@ every tab.
 
 No animation, no scroll trickery, no viewport-math. A phone, a desktop and
 an overlay all get the same ten-button row with the same one-click reach.
+
+---
+
+## H14: the Chronicle remembers
+
+A rolling per-browser history (localStorage key `bellmire.chron.v1`, newest first, capped at 300 rows / 48 h / ~120 KB, oldest dropped first) is folded in from every live snapshot. Live lines show first, then an "Earlier" divider and day dividers in the town's voice. De-duplication is by kind+text against the live set. Remembered rows are re-validated field by field on read and drawn through the same chronShape/el()/textContent path as live ones. No new fetch, origin, write path or CSP change; storage absent/full/throwing leaves the page working with no history.
+
+## H15 - every hero gets a crest
+- `coat(name, size)` in app.js (sizes sm/md/lg are page classes). Hero card: right of the summary. Opened sheet: large, left of the pin button. Boards: inline before the name for places 1-5.
+- Whitelists: 7 divisions x 4x3 tincture pairs x 2-3 charge tinctures x 8 charges. 200-hero mock: 187 distinct, 0 identical neighbours. Same name gives the same arms every load.
+- Local checks run (headless Edge, file://): ?mock=crowd, ?mock=crowd&open=1, ?mock=chronicle, ?state=empty, ?state=fail, ?state=stale. Hostile name renders as text with a valid crest and no <img> is created.
+- Hero first paint (crowd mock, headless virtual-time clock): before 1006.3 ms, after 1007.1 ms. That clock is quantised, so read it as no measurable change. Recipe cost is about 0.36 microseconds per name.
+- Not visually reviewed by me: no screenshot viewer was available on this run. Mr. E or the supervisor should eyeball the card and sheet at 390 and 1280.
+
+## H16 - the Hall of the Fallen
+- `renderFallen` now draws a memorial card per fallen hero: crest (H15 `coat`, md, desaturated), name, class/level, earned title, epitaph, then facts - Taken by (cause, day), Deepest, Slain, Wore (weapon + armour with whitelisted icons). Every fact is optional; a missing/zero/non-numeric one is simply not drawn (no "undefined", no guessed placeholder). All text via el()/textContent; icons via ICON_SET only.
+- Epitaphs: the frozen lore (H12) carries NO epitaph set, so the hub shows only `f.epitaph` from the snapshot. No parallel list was invented.
+- Fields I wanted that the snapshot may lack (supervisor to raise with the game build worker): `weapon` and `armour` worn at death (string or {name}), `title`, and `epitaph` on every fallen row; `cause`/`killed_by`, `day`, `deepest`, `kills`, `level`, `class` are already read when present.
+- Local check: `?mock=fallen` (rich row, hostile-name row with hostile cause/epitaph/gear, name-only row, odd-types row). Hostile strings render as literal text; no element created from them. Run via headless Edge dump-dom: ?mock=fallen, crowd, chronicle, state=empty/fail/stale all render, no "undefined". Not visually reviewed (no screenshot viewer on this run) - eyeball at 390 and 1280.
+
+
+## H17 - the hub on a phone (Nov 15)
+Layout refinement only (palette, Gloock wordmark, tab model, CSP untouched; no new font/CDN/fetch).
+- Tab strip: >= 44px tall snap-scrolling rail; show() in app.js centres the lit tab via nav.scrollLeft (never scrolls the page sideways).
+- All tappables >= 44px at <= 760px (tabs, chips, linkbtn, retry, pin, sign-in, chat load, hero summary); text fields 16px (no iOS focus-zoom); small print floor 12px.
+- `html, body { overflow-x: clip }` as a backstop. Measured with headless Chrome in a 390/360/768/1280 iframe over mock=crowd, ?state=empty/fail/stale, ?mock=chronicle, ?open=1: zero horizontal scroll, no sub-44px tap target, no sub-12px text, every tab reachable. Hostile name renders as literal text (0 <img> created).
+- Not captured: pixel screenshots (no image viewer in the build session); measured via DOM geometry instead.
+
+## H18 - The State of Bellmire (Town tab)
+
+A new **Town** tab (`#state`, second tab) shows the place itself, in three parts. No new fetch, no new origin, no CSP change (byte-identical), no snapshot value used as a URL/src/href/style.
+
+- **H18.1 The ladder.** The 12 rungs come from the frozen lore (`growth_tiers`, H12), read as-is. `town.level` (1-based, matching `Economy.TOWN_LEVELS`) lights the current rung (teal), fills the ones behind (gold) and names the ones ahead (dim); the caption says how many stages are left. Beside it, stat tiles: level, day, souls, treasury, raids turned back, renown, and a growth bar from `score / next_level_at`. A field the town block lacks simply gets no tile; none at all gives "The town has not sent its numbers yet." Dimness is never the only signal - every rung carries a screen-reader state word and every building a visible "standing / not yet raised" tag.
+- **H18.2 What stands.** If the snapshot sends `town.buildings` (or top-level `buildings`) - an array of strings or `{name, built, does}` - the roster is LIVE: those rows are solid, and canon buildings the town did not list appear as dim outlines. Otherwise it renders the canon set (page-owned names + the frozen `see` line per tier) and is labelled honestly "canon, not live - read from the town's level"; built/unbuilt is then derived from the level. Icons: eight new page-owned symbols (`hut well stall chapel anvil tower ford wall`) added to `ICON_SET`; a building name only picks WHICH whitelisted icon by keyword.
+- **H18.3 What has befallen it.** Newest-first timeline built from the H14 browser history (`chronMem`), filtered to `raid` entries plus `town` entries that read as growth/disaster/festival (and never the daily "Day N begins" line). Empty history says "Bellmire has known only quiet days." Per-browser, 48 h at most.
+- Local check: `?mock=town` (every new field, hostile town/building/event names, all rendering as text). `?mock=chronicle` exercises the "no new fields" path.
+
+**Fields I wanted and the snapshot lacks** (supervisor to raise with the game build worker):
+- `town.buildings`: `[{name, built, does}]` - the roster is canon-only until it exists, and the frozen lore has no "what it DOES" line per building (the canon rows show the tier's `see` line instead; the content writer could add a short `does` per building to lore_lines.json).
+- A per-entry in-game `day` on chronicle rows, so the timeline can be stamped "Day 17" in the town's own count; today it is stamped by the viewer's clock (Today / Yesterday / N days gone).
+- Disaster and festival as their own chronicle `t` kinds; today they arrive as `town` and are recognised by keyword.
+
+## H19 - the Bestiary (Nov 15)
+
+A Bestiary tab after Lore: 8 deep lords, 5 named ones and 17 monster families (grouped from the frozen
+`events.monster_camps`), each with a page-owned roundel sigil. Sigils reuse the H15 hash machinery
+(`crestRecipe("sigil|" + name)`) but index a separate ring/field/charge whitelist (fangs, horns, eye, claw,
+flame, wings, coil, broken crown, crossed bones), so a monster's mark never looks like a hero's crest. Same
+name -> same sigil on every reload. The name only ever picks indices; no snapshot string reaches an
+attribute, URL or style.
+
+- MET vs RUMOUR: an entry is Met when the browser's own remembered Chronicle (the H14 history) names it
+  (name, or for a family its singular/plural or a camp name). A Met card shows the frozen intro line (lords/named)
+  or the frozen camp "while" lines (families), how many remembered lines name it and when last. Anything else is a RUMOUR:
+  sigil and name only, a veiled town-voice line, no intro, no data. Chronicle lines themselves are NOT quoted
+  (a remembered line could carry a depth figure; this section never states one).
+- Optional snapshot numbers are read from `p.bestiary[<page-owned key>]` only if the publisher sends them
+  (`faced`, `killed`, `deepest`, `standing`), via own-property lookup, numeric-coerced and capped. Today it sends none.
+- The entry list scrolls inside the panel (H13); one column at 390 (H17).
+- `?mock=bestiary` shows a met lord with numbers, a hostile lord name, a met family and the rumours.
+
+### Fields the Bestiary wanted and did not get (honest gaps - game build / publisher owner)
+
+- Per-lord and per-family records in the snapshot: `bestiary.<key>.faced`, `.killed`, `.deepest`, `.standing`
+  (supported by the page, never sent).
+- Tells and a description per lord: `bosses.json` is not in the frozen lore bundle (only `lord_intros`,
+  `unique_intros`, `events.monster_camps`), so no tells/description are shown. Needs a lore refresh (content worker).
+- A structured "monster met" signal: Met is inferred from remembered Chronicle text, so a beast the town
+  met before this browser began remembering (or more than 48 h ago) reads as a rumour here.
+
+## H20 - the hero sheet is a character sheet (Nov 15)
+
+The hero card's open body is now a proper sheet (`heroSheet(h, mode)` in app.js), and every
+fallen memorial gets a lazily-built "Read their sheet" built from the same function
+(`mode = "fallen"`). Blocks: identity (crest, name, title, calling, level, pin), condition chips
+with an honest "last seen", HP/XP, Abilities, Combat, Gear by slot (nine slots; an empty slot is
+drawn as an empty slot, never omitted), Carrying/Satchel/cosmetics, Record, "Their own
+chronicle" (H20.3: the H14 history - live plus remembered in this browser, about 48 h - filtered
+to lines that name the hero as a whole word) and a foot line listing what the town did not send.
+
+Local check: `?mock=sheets&open=all` shows a bare level-1 hero, a kitted veteran, a hostile-named
+mage and a fallen hero's sheet (open the Fallen tab: `#fallen`). `?open=all` opens the first six
+heroes and every fallen sheet.
+
+Nothing is derived. No initiative-from-DEX, no estimated max HP, no guessed slot contents.
+
+### Snapshot fields the sheet wanted and did NOT get (for the game-build owner, snapshot_pub)
+These render as deliberate dashed empty cells and are named on each sheet's foot line. Aliases the
+page already accepts are in brackets - the publisher may send any of them.
+- `max_hp` [hp_max, maxhp, hpmax] - HP is a flat vitality bar without it.
+- `xp_next` [next_xp, xp_to_next, to_next].
+- `stats` {str,dex,con,int,wis,cha} - present in the real snapshot but absent on fresh heroes.
+- `ac`, `hp`, `to_hit`, `prof`, `saves` - drawn empty if missing (e.g. a fallen row carries none).
+- `initiative` [init] and `speed`.
+- `gear` / `equipment` object keyed `main_hand, off_hand, head, body, hands, feet, cloak, neck, ring`
+  (string or {name}). Only weapon (main hand) and armour (body) are published today; the other
+  seven slots are drawn empty with a "not published yet" tooltip.
+- `status` / `state` / `activity` / `where` on the hero - the sheet reads band membership from
+  `parties` and wounded from hp/max_hp, but cannot say "resting" or "in town" without a field.
+- ~~a per-hero last-seen time~~ - shipped in v=4 (`h.last_seen`), read since H23; older publishers still get the whole-town fallback and the named gap.
+- On fallen rows: `species`, `ac`, `stats`, `weapon`/`armour` as slots, level history.
+- Wanted but not drawn as cells: background/origin, alignment, skills and proficiencies,
+  spells and slots, hit dice, a full inventory.
+- Personal history is only as good as the chronicle: lines must contain the hero's name verbatim.
+  A per-hero event feed (best depth, notable kills, deaths with day) from the publisher would
+  replace the name-match.
+
+
+## H21 - the campaign journal (Nov 15)
+
+The Chronicle tab is now a journal, built only from what the page already has (the live snapshot's
+`chronicle` plus the H14 browser history). No new fetch, no new origin, no CSP change, no write path.
+
+- **H21.1 Episodes.** The snapshot carries no town-day on chronicle lines, so stretches are made by
+  session instead: a new stretch starts after a 90-minute quiet gap or after 6 hours of length. Each has a
+  town-voice heading (`Now, as the town tells it` / `Earlier today, by the bells` / ...), a clock range, a line
+  count and a one-line sense ("A hard stretch - 1 death, 1 raid.") made only from page-owned words and counts.
+  The newest stretch is open, older ones fold; a filter or a moment link opens what it needs. Open/fold is a
+  button with `aria-expanded`.
+- **H21.2 Filters.** A hero select (roster from the snapshot, whole-word name match - same `namesIn` as the
+  H20 sheet) and an event select (Raids, Disasters, Festivals, Deaths, Delves, Town growth - kind plus page-owned
+  keyword lists) join the existing kind chips and search. Hero + event + kind-off state persists in
+  `localStorage["bellmire.chron.f.v1"]` and is re-validated on read. Search text is not persisted.
+- **H21.3 While you were away.** `bellmire.chron.seen.v1` holds when this browser last looked (written while the
+  tab is visible and when it is hidden/closed). If the gap is 30+ minutes the Chronicle opens with a card: line
+  count by kind and up to five lines that matter (deaths > raids > town > delves, disaster/festival lines lifted).
+  It says so when it may be incomplete: the town only reports its latest 50 lines, this browser keeps ~2 days /
+  300 lines, and the page can only remember what it saw. `?away=6` (hours, 0.5-72) simulates a gap locally.
+- **H21.4 Moment links.** Every remembered line has a page-assigned integer id (`bellmire.chron.seq.v1` counter,
+  stored on the history rows). The Link button sets `#moment-<n>` and copies the address; opening it switches to
+  the Chronicle, opens that stretch, scrolls to and outlines the line. The id is only compared to row ids. Links
+  are per-browser: a browser that does not remember that line says so plainly instead of guessing.
+
+Not in the snapshot, so not possible yet: the in-game town day on each chronicle line (a `day` field would
+replace the session heuristic), and a structured hero/kind per line (the hero filter name-matches the text).
+Note: the older `setUpTabs()` in app.js is dead code (the nav uses buttons now; live tabs are `wireTabs`).
+
+## H23 - accept v=4, read last_seen / events, two render fixes
+- `KNOWN_V` is now 1-4. An unknown version still shows the honest "newer dialect" banner. A v=3 payload (no new fields) draws exactly as before.
+- `h.last_seen` (ISO string, validated with `CHRON_AT_OK`, then only fed to `ago()`) gives each sheet its own "Last seen N ago"; when the whole town is stale the line says so too. Absent -> the old whole-town line and the named gap.
+- `h.events` (newest-first `[{t, s, at}]`, up to 6) builds "Their own chronicle" through the same `chronEntries`/`chronShape` + `el()` path as a live line. Empty or absent -> the H20 whole-word name match against the H14 history.
+- Fix: each gear slot's text block (`.stx`) was built but never appended to its cell, so every slot drew as just an icon. Now attached.
+- Fix: the heroCard crest printed "[object SVGSVGElement]" because the H19 Bestiary's `sigil()` (returns an SVG) silently shadowed the initials helper of the same name. The initials helper is now `initials()`.
+- No CSP change, no new fetch/origin, no write path. `?mock=sheets` now carries last_seen, events and slot names (including a hostile `last_seen` that must be ignored).

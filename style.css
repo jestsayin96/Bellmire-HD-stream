@@ -942,6 +942,34 @@ html.overlay #bands { display: none !important; }
 }
 
 
+/* ================================================================== BESTIARY (H19) */
+.sigil { display: block; flex: none; filter: drop-shadow(0 1px 1px rgba(42,28,16,.4)); }
+.sigil-md { width: 46px; height: 46px; }
+.sigil-sm { width: 22px; height: 22px; }
+#bestiaryBody { max-height: max(320px, calc(100vh - 300px)); max-height: max(320px, calc(100dvh - 300px)); overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; }
+.beast-count { margin: 4px 0 8px; color: var(--ink-soft); font-size: .85rem; }
+.beast-grid  { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.beast {
+  background: rgba(246, 236, 209, .55); border: 1px solid var(--edge-2);
+  border-radius: 7px; padding: 9px 11px; display: grid; gap: 5px; align-content: start;
+  overflow-wrap: anywhere;
+}
+.beast-head { display: flex; align-items: center; gap: 10px; }
+.beast-hb   { display: grid; gap: 1px; min-width: 0; }
+.beast-name { margin: 0; font-family: "Gloock", Georgia, serif; font-weight: 400; color: var(--ink-red); font-size: 1.02rem; line-height: 1.15; }
+.beast-kind { color: var(--ink-soft); font-size: .76rem; letter-spacing: .04em; text-transform: uppercase; }
+.beast-flag { justify-self: start; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); border: 1px solid var(--edge-2); border-radius: 99px; padding: 1px 8px; }
+.beast-flag.met { color: #0a1413; background: var(--teal); border-color: var(--teal); }
+.beast-veil  { margin: 0; color: var(--ink-soft); font-style: italic; font-size: .9rem; line-height: 1.4; }
+.beast-intro { margin: 0; font-style: italic; color: var(--ink); font-size: .93rem; line-height: 1.4; }
+.beast-camp  { margin: 0; color: var(--ink); font-size: .86rem; line-height: 1.4; }
+.beast-facts { margin: 2px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 1px 10px; font-size: .84rem; }
+.beast-facts dt { color: var(--ink-soft); }
+.beast-facts dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.beast.rumour .sigil { filter: grayscale(.7) brightness(.8) drop-shadow(0 1px 1px rgba(42,28,16,.4)); opacity: .8; }
+@media (max-width: 560px) { .beast-grid { grid-template-columns: 1fr; } }
+
+
 /* ======================================================= H13 tabs
    A no-scroll layout: the existing <nav> anchors become a tablist and the
    <main> sections become tabpanels (JS attaches the roles). Only the active
@@ -958,3 +986,206 @@ html.overlay #bands { display: none !important; }
 .wrap[data-tabbed="1"] nav a[aria-selected="true"] .n { color: #0a1413; }
 .wrap[data-tabbed="1"] main > section[role="tabpanel"]:focus-visible { outline: none; }
 .wrap[data-tabbed="1"] main > section[role="tabpanel"] { scroll-margin-top: 60px; }
+
+/* H14: the Earlier divider and day dividers in the chronicle */
+.chron .cdiv { list-style: none; display: flex; align-items: center; gap: .7em; margin: 14px 0 6px; padding: 0;
+  color: var(--parch-dim); font-style: italic; font-size: .95rem; letter-spacing: .02em; }
+.chron .cdiv::before, .chron .cdiv::after { content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dk), transparent); }
+.chron .cdiv-earlier { color: var(--gold); font-style: normal; text-transform: uppercase; font-size: .8rem; letter-spacing: .14em; }
+.chron .centry.remembered { opacity: .88; }
+
+/* H15: heraldic crests - inline SVG the page draws; colours are the house palette only */
+.coa-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.coa { display: block; flex: none; filter: drop-shadow(0 1px 1px rgba(42,28,16,.35)); }
+.coa-sm { display: inline-block; width: 15px; height: 18px; margin-right: 6px; vertical-align: -3px; }
+.coa-md { width: 30px; height: 36px; }
+.coa-lg { width: 52px; height: 62px; }
+details.hero > summary { grid-template-columns: auto minmax(0, 1fr) auto; }
+.hcoa { margin-top: 1px; }
+.sheethead { justify-content: space-between; align-items: center; }
+
+/* H16: Hall of the Fallen - a memorial card per hero; blanks are simply absent */
+.fallen { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.grave { position: relative; padding: 12px 14px; border: 1px solid rgba(233,214,168,.14); border-left: 3px solid var(--dead); }
+.ghead { display: flex; align-items: center; gap: 10px; }
+.ghead .coa { flex: none; filter: grayscale(.55) brightness(.8); }
+.ghead .gwho { min-width: 0; }
+.ghead .gwho .grec { display: block; font-size: .88rem; color: var(--parch-dim); }
+.gepi { font-size: 1.02rem; line-height: 1.4; margin: 8px 0 2px; opacity: .95; overflow-wrap: anywhere; }
+.gfacts { margin-top: 8px; display: grid; gap: 3px; font-size: .9rem; border-top: 1px solid rgba(233,214,168,.1); padding-top: 7px; }
+.gfact { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.gfact .gk { flex: none; min-width: 5.2em; color: var(--parch-dim); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+.gfact .gv { color: var(--parch-hi); overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.gfact.gcause .gv { color: #d79a86; }
+.gico { width: 1.1em; height: 1.1em; flex: none; }
+
+
+/* ======================================================= H17 the hub on a phone
+   Refinement only: same palette, same Gloock wordmark, same tab model. The
+   tab strip is a thumb-sized, snap-scrolling rail (the lit tab is centred by
+   app.js); every tappable thing is >= 44px; small print steps up to 12px; text
+   fields are 16px so iOS does not zoom on focus. No new font, no CDN. */
+@media (max-width: 760px) {
+  nav { scroll-snap-type: x proximity; scroll-padding: 0 14px; overscroll-behavior-x: contain; }
+  nav button { min-height: 44px; padding: 8px 16px; scroll-snap-align: center; }
+  .chip { min-height: 44px; padding: 6px 15px; }
+  .linkbtn { min-height: 44px; display: inline-flex; align-items: center; padding: 6px 4px; }
+  .find { font-size: 16px; min-height: 44px; }
+  .signinbtn, .chatload, button.signinbtn, button.chatload { min-height: 44px; }
+  html body .eyebrow, html body .rnum2, html body .bunit, html body .ckind, html body .cwhen, html body .cnt, html body .gfact .gk, html body .hpk, html body .lvl, html body .title small, html body footer small, html body .bval .bunit, html body .chip .cnt, html body .stat .k, html body .gl { font-size: 12px; }
+  html body #retry, html body .pinbtn, html body button.pinbtn { min-height: 44px; min-width: 44px; }
+  details.hero > summary { min-height: 44px; }
+}
+html, body { overflow-x: clip; }
+
+/* ======================================================= H18 the State of Bellmire
+   The town as a place: a ladder of its growth, stat tiles, what stands, what has
+   befallen it. Same palette (ink ground, parchment text, one teal, restrained gold);
+   dimness is never the only signal - every rung and building also says it in words. */
+.st-grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+.st-col { min-width: 0; }
+.st-h { margin: 14px 0 8px; font-size: .78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gold); }
+.st-h:first-child { margin-top: 0; }
+.st-h small { font-weight: 500; letter-spacing: 0; text-transform: none; font-style: italic; color: var(--parch-dim); opacity: .75; margin-left: 6px; font-size: .78rem; }
+.st-cap { margin: 0 0 10px; color: var(--parch-hi); font-size: .95rem; }
+.st-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+ol.ladder { list-style: none; margin: 0; padding: 0; }
+.rung { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: start; padding: 5px 0 5px 0; min-height: 40px; }
+.rung::before { content: ""; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: rgba(198,146,47,.35); }
+.rung:first-child::before { top: 50%; }
+.rung:last-child::before { bottom: 50%; }
+.rung.ahead::before { background: rgba(233,214,168,.14); }
+.rg-dot { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; background: var(--night); border: 2px solid rgba(233,214,168,.25); color: var(--parch-dim); }
+.rung.done .rg-dot { background: var(--gold); border-color: var(--gold); color: var(--night); }
+.rung.now .rg-dot { background: var(--teal); border-color: var(--teal-br); color: var(--night); box-shadow: 0 0 0 4px rgba(55,199,191,.22); }
+.rg-body { display: flex; flex-direction: column; gap: 2px; padding-top: 4px; min-width: 0; overflow-wrap: anywhere; }
+.rg-name { font-weight: 600; color: var(--parch-hi); }
+.rung.now .rg-name { color: var(--teal-br); font-size: 1.05rem; }
+.rung.ahead .rg-name { color: var(--parch-dim); opacity: .55; font-weight: 500; }
+.rg-see { font-size: .88rem; font-style: italic; color: var(--parch-dim); }
+.st-tiles { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); }
+.st-tiles .empty { grid-column: 1 / -1; margin: 0; }
+.st-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: rgba(233,214,168,.07); border: 1px solid rgba(198,146,47,.28); min-width: 0; }
+.st-k { font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--parch-dim); }
+.st-v { font-size: 1.45rem; line-height: 1.15; font-weight: 700; color: var(--parch-hi); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.st-grow { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; margin-top: 10px; }
+.st-grow .st-k { grid-column: 1 / -1; }
+.st-track { height: 10px; border-radius: 999px; background: rgba(233,214,168,.12); overflow: hidden; }
+.st-fill { display: block; height: 100%; width: calc(var(--grow, 0) * 100%); background: linear-gradient(90deg, var(--teal), var(--teal-br)); border-radius: 999px; }
+.st-gv { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--parch-hi); font-size: .9rem; }
+.st-roster { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.bld { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px; }
+.bld.built { background: rgba(233,214,168,.09); border: 1px solid rgba(198,146,47,.4); }
+.bld.unbuilt { background: transparent; border: 1px dashed rgba(233,214,168,.28); }
+.bld-ic { width: 26px; height: 26px; color: var(--teal-br); }
+.bld.unbuilt .bld-ic { color: var(--parch-dim); opacity: .45; }
+.bld-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.bld-name { font-weight: 700; color: var(--parch-hi); }
+.bld.unbuilt .bld-name, .bld.unbuilt .bld-line { opacity: .6; }
+.bld-line { font-size: .88rem; color: var(--parch-dim); }
+.bld-tag { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 700; color: var(--gold); }
+.bld.unbuilt .bld-tag { color: var(--parch-dim); opacity: .7; }
+.st-time { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.st-time .empty { margin: 0; }
+.tm { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 10px; border-radius: 8px; background: rgba(233,214,168,.05); border-left: 3px solid var(--gold); }
+.tm.raid { border-left-color: var(--bad); }
+.tm-ic { width: 22px; height: 22px; color: var(--parch-dim); }
+.tm-body { display: flex; flex-direction: column; gap: 1px; min-width: 0; overflow-wrap: anywhere; }
+.tm-when { font-size: .78rem; color: var(--gold); font-weight: 700; letter-spacing: .03em; }
+.tm-text { color: var(--parch-hi); }
+@media (min-width: 760px) { .st-grid { grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); gap: 26px; } }
+@media (forced-colors: active) { .rung.now .rg-dot, .rung.done .rg-dot { forced-color-adjust: none; } }
+
+/* ============================================================ H20: the character sheet
+   Parchment and ink; teal for the one accent, gold restrained. A field the town does not
+   publish is a dashed, quiet cell - an honest gap, never a zero. */
+.charsheet { gap: 11px; }
+.charsheet .sid { display: flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 2px solid var(--edge-2); }
+.charsheet .sid .pinbtn { margin-left: auto; flex: none; }
+.charsheet .swho { min-width: 0; flex: 1 1 auto; }
+.charsheet .sname { font-size: 1.28rem; font-weight: 700; color: var(--ink); line-height: 1.15; overflow-wrap: anywhere; }
+.charsheet .stitle { font-size: .95rem; font-style: italic; color: var(--ink-red); }
+.charsheet .scall { font-size: .9rem; color: var(--ink-soft); }
+.sconds { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.scond { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 99px; background: var(--parch-lo); color: var(--ink); border: 1px solid var(--edge-2); }
+.scond .bmic { width: 13px; height: 13px; }
+.scond.st-band { background: var(--teal-ink); color: var(--parch-hi); border-color: transparent; }
+.scond.st-fallen { background: var(--bad); color: var(--parch-hi); border-color: transparent; }
+.scond.st-burning { background: var(--warn); color: var(--parch-hi); border-color: transparent; }
+.scond.st-hurt { background: transparent; color: var(--bad); border-color: var(--bad); }
+.sseen { font-size: .8rem; font-style: italic; color: var(--ink-soft); }
+.sseen.stale { color: var(--bad); font-style: normal; font-weight: 600; }
+.ssec { display: grid; gap: 6px; padding-top: 8px; border-top: 1px solid var(--edge-2); }
+.ssec > .eyebrow { margin: 0; }
+.stat.unpub { background: transparent; border: 1px dashed var(--edge-2); }
+.stat.unpub .v { color: var(--ink-soft); opacity: .55; font-weight: 400; }
+.stats.combat { grid-template-columns: repeat(3, 1fr); }
+.gapnote { color: var(--ink-soft); font-style: italic; opacity: .75; }
+.slots { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.slot { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 6px 9px; border-radius: 7px;
+  background: var(--parch); border: 1px solid var(--edge-2); }
+.slot .sic { flex: none; width: 22px; height: 22px; color: var(--teal-ink); }
+.slot .stx { display: grid; min-width: 0; }
+.slot .sl { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+.slot .sv { font-size: .9rem; color: var(--ink); overflow-wrap: anywhere; }
+.slot.vacant { background: transparent; border-style: dashed; }
+.slot.vacant .sic { color: var(--ink-soft); opacity: .4; }
+.slot .sv.none { color: var(--ink-soft); font-style: italic; opacity: .7; }
+.slot.unpub { opacity: .75; }
+.plife { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.plife .pl { display: grid; grid-template-columns: 18px 1fr auto; gap: 8px; align-items: baseline; font-size: .9rem; color: var(--ink); }
+.plife .chipic { width: 15px; height: 15px; color: var(--teal-ink); align-self: center; }
+.plife .pls { overflow-wrap: anywhere; }
+.plife .plw { font-size: .75rem; color: var(--ink-soft); font-style: italic; white-space: nowrap; }
+.plife .pl.kind-death .chipic { color: var(--bad); }
+.plnote { margin: 2px 0 0; font-size: .82rem; color: var(--ink-soft); font-style: italic; }
+.sgaps { margin: 0; padding-top: 8px; border-top: 1px dashed var(--edge-2); font-size: .78rem; line-height: 1.45; color: var(--ink-soft); }
+.sgaps b { color: var(--ink-red); font-weight: 700; }
+.sdoom { display: grid; gap: 4px; }
+.sdline { margin: 0; font-weight: 600; color: var(--bad); }
+.sepi { margin: 0; font-style: italic; font-size: 1.02rem; color: var(--ink); overflow-wrap: anywhere; }
+.charsheet.fallen .coa { filter: grayscale(.55) brightness(.9); }
+/* the fallen's sheet sits inside the dark memorial; give it its own parchment leaf */
+.gsheet { margin-top: 8px; }
+.gsheet > summary { cursor: pointer; font-size: .85rem; color: var(--parch-dim); }
+.gsheet > summary:hover { color: var(--parch-hi); }
+.gsheet .charsheet { margin-top: 8px; background: var(--parch); color: var(--ink); border-radius: 8px; border: 1px solid var(--edge); padding: 12px 14px 14px; }
+@media (max-width: 460px) { .slots { grid-template-columns: 1fr; } .charsheet .sid { flex-wrap: wrap; } }
+@media (min-width: 700px) { .charsheet .stats.combat { grid-template-columns: repeat(6, 1fr); } }
+
+
+/* ---- H21: the campaign journal - episodes, filters, while-you-were-away, moment links ---- */
+ol.chron.cj { grid-template-columns: minmax(0, 1fr); }
+.ctools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 12px; }
+.ctools label { display: inline-flex; align-items: center; gap: 7px; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); }
+.ctools select { font: inherit; font-size: .92rem; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--ink); background: var(--parch-hi); border: 1px solid var(--edge-2); border-radius: 7px; padding: 4px 8px; min-height: 34px; max-width: 14rem; }
+.ctools select:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.cep { list-style: none; border: 1px solid var(--edge-2); border-radius: 9px; background: rgba(255,255,255,.16); overflow: hidden; }
+.cep-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; width: 100%; text-align: left; position: relative; font: inherit; color: var(--ink); background: transparent; border: 0; padding: 9px 12px 9px 32px; cursor: pointer; }
+.cep-head:hover { background: rgba(35,166,160,.08); }
+.cep-head:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: -2px; }
+.cep-head::before { content: ""; position: absolute; left: 13px; top: 1.05em; border: 5px solid transparent; border-left-color: var(--teal-ink); }
+.cep.open > .cep-head::before { top: 1.2em; left: 11px; border-left-color: transparent; border-top-color: var(--teal-ink); }
+.cep-title { font-weight: 700; color: var(--ink-red); overflow-wrap: anywhere; }
+.cep-when { font-size: .78rem; color: var(--ink-soft); font-weight: 600; white-space: nowrap; align-self: center; }
+.cep-sense { grid-column: 1 / -1; font-size: .9rem; font-style: italic; color: var(--ink-2); }
+.cep-list { list-style: none; margin: 0; padding: 2px 8px 8px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.cep-list[hidden] { display: none; }
+.cmoment { margin-left: 8px; font: inherit; font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--teal-ink); background: transparent; border: 1px solid var(--edge-2); border-radius: 999px; padding: 1px 9px; min-height: 26px; cursor: pointer; }
+.cmoment:hover { border-color: var(--teal); }
+.cmoment:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.centry.focus { outline: 2px solid var(--gold); outline-offset: 2px; animation: none; }
+.away { margin: 0 0 14px; padding: 10px 14px; background: #f2e2bd; border: 1px solid var(--edge-2); border-left: 4px solid var(--gold); border-radius: 8px; }
+.away.hide { display: none; }
+.away-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.away-head strong { color: var(--ink-red); }
+.away-gap { color: var(--ink-soft); font-size: .85rem; margin-right: auto; }
+.away-sum { margin: 6px 0 4px; }
+.away-list { margin: 4px 0 6px; padding-left: 1.1em; }
+.away-list li { margin: 2px 0; overflow-wrap: anywhere; }
+.away-t { color: var(--ink-soft); font-size: .8rem; font-weight: 700; margin-right: .5em; }
+.away-note { margin: 6px 0 0; font-size: .82rem; font-style: italic; color: var(--ink-soft); }
+@media (min-width: 720px) { .cep-list { grid-template-columns: 1fr 1fr; } }
+html.overlay .away, html.overlay .ctools, html.overlay .cmoment { display: none; }

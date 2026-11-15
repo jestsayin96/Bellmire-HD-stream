@@ -862,11 +862,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
   Palette, Gloock wordmark and the H13 tab model untouched; no framework, no new font, no CDN, CSP byte-identical.
   All six query-string states pass at 390 and the hostile-name test still renders as literal text.
 
-- [ ] H18. THE TOWN ITSELF, NOT JUST ITS HEROES - "THE STATE OF BELLMIRE" (a whole section, staged). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). The hub tells a viewer everything about the PEOPLE and nothing about the PLACE. A newcomer who opens the page mid-stream cannot tell what Bellmire is, how far it has come, or what has been happening to it. Build a Town tab that answers that in one screen, in three staged parts under this one ID:
+- [x] H18. THE TOWN ITSELF, NOT JUST ITS HEROES - "THE STATE OF BELLMIRE" (a whole section, staged). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). The hub tells a viewer everything about the PEOPLE and nothing about the PLACE. A newcomer who opens the page mid-stream cannot tell what Bellmire is, how far it has come, or what has been happening to it. Build a Town tab that answers that in one screen, in three staged parts under this one ID:
       H18.1 THE LADDER. The town's growth tier shown as a ladder from Crossing to City, with the current rung lit, the rungs behind it filled, and the rungs ahead named but dim - so a viewer sees at a glance that the town is a Hamlet with seven stages still to climb. Beside it the live status the snapshot already carries (day, population, treasury, raids survived) as proper stat tiles, not a text strip.
       H18.2 WHAT STANDS. A roster of the town's buildings, each with its page-owned icon from the ICON_SET discipline, its name, and one line of what it DOES - built ones solid, unbuilt ones as dim outlines, so the viewer sees what the town is missing as clearly as what it has. Drive it from whatever the snapshot sends; if the publisher sends no building list yet, render the known set from the frozen lore (the H12 pattern) and mark the section honestly as canon rather than live.
       H18.3 WHAT HAS BEFALLEN IT. A timeline of the town's raids, disasters and festivals - newest first, day-stamped, in the town's own voice - built from the Chronicle history H14 already keeps in the browser, filtered to town-scale events. It must survive an empty history (a quiet "Bellmire has known only quiet days" rather than a blank box).
       Rules unchanged and non-negotiable: every snapshot string reaches the DOM only through el()/textContent; no snapshot value becomes a URL, src, href or style; icons only via the page-owned whitelist; the CSP stays byte-identical; no framework, no CDN, no new font, no viewer write path. Any field you wanted and the snapshot lacks goes in web/NOTES.md so the supervisor can raise it with the game build worker. DONE: a capture of the Town tab at 1280 and at 390 wide showing the ladder, the building roster and the timeline together; ?state=empty ?state=fail ?state=stale still honest with the new section present; a snapshot carrying NONE of the new fields renders the tab without a single "undefined" or empty frame; a hostile town/building/event name renders as literal text; H13's no-scroll tab discipline still holds and H17's 390-wide pass still holds.
+      DONE 2026-11-15 (hub bca363c, merged by the supervisor): the Town tab ships all three stages - the
+      Crossing->City growth ladder with the current rung lit and the rest named but dim, a building roster
+      (built solid / unbuilt dim outline) drawn from live snapshot data with the canon roster as fallback,
+      and a town-scale timeline built from the H14 Chronicle history. el()/textContent, ICON_SET and the
+      CSP all unchanged; the hub run reported the hostile-name test still renders as literal text.
 
 - [ ] H19. THE BESTIARY - WHAT BELLMIRE HAS LEARNED ABOUT WHAT IS DOWN THERE. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). A D&D campaign's players keep notes on the monsters; the hub should too, and the words already exist - the content writer's bosses.json lords and lore_lines.json tells and intros were frozen into the hub by H12. Build a Bestiary tab: one entry per lord and per monster family the town knows of, each with a page-owned sigil (reuse the H15 heraldry machinery with a different charge set so a lord's mark is distinct from a hero's crest), its canon name and description, its tells and its intro line, and - where the snapshot carries it - what the town has actually suffered at its hands: times faced, heroes it has killed, the deepest any party got against it, whether it currently stands. An entry the town has never met is shown as a RUMOUR: sigil and name present, details veiled, in the town's own voice - that unseen-monster tension is the point, so do not spoil a rumoured entry with data it should not have. Never state or imply a dungeon floor count anywhere in this section. Rules unchanged: el()/textContent for every string, no snapshot-derived URL/src/href/style, whitelist sigils only, CSP byte-identical, no new fetch, no framework, no viewer write path, and the frozen lore is read as-is - do not invent a parallel set of monster words. DONE: a capture of the Bestiary at 1280 and 390 wide showing at least one met entry with real numbers and one rumoured entry correctly veiled; a lord with no snapshot history still renders cleanly with no "undefined"; the same lord name always yields the same sigil across reloads; a hostile monster name renders as literal text; no floor count appears anywhere in the section or in the code comments; H13 no-scroll and H17 390-wide discipline both still hold.
 
@@ -2148,3 +2153,82 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       log for the same window - every line on screen is readable at normal viewing distance, repeats
       are merged, nothing above the stated priority was dropped, and the measured line rate is at or
       under the stated maximum.
+
+
+# Phase AF - THE HUB'S QUEUE GOES THIN (supervisor, 2026-11-15 13:10 CT). IDs frozen as ever.
+# H18 shipped this cycle and only H19 (the Bestiary) was left. These three are written to the
+# "HOW BIG AN ITEM SHOULD BE" bar and live ENTIRELY in web/index.html, web/app.js, web/style.css,
+# web/NOTES.md and docs/HUB_SECURITY.md. Order: finish H19 first, then H20, H21, H22.
+# EVERY ONE of them is bound by the security invariants in docs/HUB_SECURITY.md - el()/textContent
+# for every snapshot and viewer string, no snapshot value as URL/src/href/style, icons only from the
+# page-owned ICON_SET, CSP byte-identical, no framework, no CDN, no new font. A nicer hub that breaks
+# one of those is a failed item. Republishing to gh-pages stays Mr. E's call alone.
+
+- [ ] H20. THE HERO SHEET IS A CHARACTER SHEET, NOT A STAT LINE. Owner: HUB BUILDER (web/index.html,
+      web/app.js, web/style.css, web/NOTES.md). The hub's hero card tells a viewer a name, a level and
+      some numbers. A D&D campaign gives a player a SHEET - something they are proud to look at and can
+      read their character's whole story from. Mr. E's standing mandate is "make the game more D&D";
+      this is the viewer-facing half of that. Staged:
+      H20.1 THE SHEET. Lay the hero out as a proper sheet in the hub's parchment-and-ink register:
+            identity block (name, title, crest from H15, class/role), the ability block, the combat
+            block (HP, AC, the numbers a viewer needs to read a fight), and the gear block by SLOT -
+            an empty slot drawn as an empty slot, never omitted, so a viewer sees what the hero lacks.
+      H20.2 CONDITIONS AND STATE. Whatever the snapshot says about a hero right now - delving, resting,
+            wounded, fallen, in a band - reads at a glance from the sheet, in the town's own voice, with
+            an honest "last seen N minutes ago" when the snapshot is stale.
+      H20.3 THIS HERO'S OWN HISTORY. A short personal chronicle filtered from the H14 history to the
+            lines that name THIS hero - their best depth, their notable kills, their deaths - so the
+            sheet carries a life, not a snapshot.
+      H20.4 HONEST GAPS, NAMED. Any field the sheet wants that the snapshot does not publish yet is
+            drawn as a deliberate empty state and LISTED BY NAME in the run's summary and in
+            web/NOTES.md. Do not invent, estimate or derive a value the publisher does not send, and do
+            not reach into any game file - the supervisor raises the missing fields with snapshot_pub's
+            owner (game build) as a separate item.
+      DONE: screenshots of three sheets side by side - a fresh level-1 hero with almost nothing, a
+      kitted veteran, and a fallen hero - each reading as a finished sheet rather than a card with
+      holes; the six query-string states and the hostile-name test still pass; web/NOTES.md lists every
+      snapshot field the sheet wanted and did not get.
+
+- [ ] H21. THE CHRONICLE BECOMES A CAMPAIGN JOURNAL. Owner: HUB BUILDER (web/index.html, web/app.js,
+      web/style.css, web/NOTES.md). H14 made the Chronicle remember; a long scroll of remembered lines
+      is still only a scroll. On a 24/7 stream the common case is a viewer who was away for six hours
+      and wants to know what they missed. Staged:
+      H21.1 EPISODES. Group the remembered history into readable stretches - by town day, or by session
+            if the day is not knowable from the data - each with a heading and a one-line sense of what
+            that stretch was about, so the journal is browsable rather than infinite.
+      H21.2 FILTERS. Let a viewer narrow the journal to one hero, or to a kind of event (raids,
+            disasters, festivals, deaths, delves, town growth). Filter state is page-local only and must
+            survive a refresh without any viewer write path to the server.
+      H21.3 WHILE YOU WERE AWAY. On return, a short summary of what has happened since this browser last
+            looked - the handful of lines that actually matter, not a dump. Honest and bounded when the
+            gap is long or the history was trimmed; say so rather than implying completeness.
+      H21.4 A MOMENT YOU CAN POINT AT. A viewer can link to a specific remembered moment and have the
+            journal open on it. The link carries no snapshot string into any URL, src, href or style -
+            it addresses a moment by an index or id the page owns.
+      DONE: a recording of the journal in use - episodes collapsing and expanding, a hero filter and an
+      event filter applied, a "while you were away" summary after a simulated six-hour gap, and a
+      moment-link opened in a fresh tab landing on that moment; all six query-string states and the
+      hostile-name test still pass.
+
+- [ ] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
+      (web/index.html, web/app.js, web/style.css, web/NOTES.md). Someone arrives mid-raid from a raid
+      list, opens the hub, and sees boards and tabs for a world they know nothing about. The Commands
+      tab already lists WHAT TO TYPE; this item is about WHY, and it is not a wall of text. Staged:
+      H22.1 WHAT THIS IS. A short, well-set opening on the hub's landing view - what Bellmire is, that
+            the town is really being run live, and what the viewer's part in it is - written in the
+            town's voice, not in product copy, and never more than a newcomer will actually read.
+      H22.2 SHOWN WITH LIVE NUMBERS. The explanation uses the snapshot that is already on the page -
+            the town's current tier, how many heroes are abroad, what is happening right now - so the
+            first thing a newcomer reads is demonstrably true at that moment, with an honest fallback
+            when the snapshot is empty, stale or failed.
+      H22.3 THE THREE DOORS. Three clear next steps from the landing view - get a hero, watch what is
+            happening, learn the rules - each handing off to the tab that already does that job (the
+            Commands tab, the Chronicle/Town, the die and Guild Roll). No duplicated content: link,
+            do not restate.
+      H22.4 IT MUST NOT NAG. A returning viewer sees it once and can dismiss it for good, page-locally.
+            It never covers the live content and never appears on a narrow phone as a full-screen gate
+            (H17's reflow discipline holds).
+      DONE: a 390 px and a 1280 px capture of the landing view for a first-time visitor and for a
+      returning dismissed one; the opening read aloud in under thirty seconds; the empty, stale and
+      failed snapshot states all show the honest fallback; all six query-string states and the
+      hostile-name test still pass.

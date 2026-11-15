@@ -998,7 +998,9 @@ function chronEntries(raw) {
   return arr(raw)
     .filter((e) => e && typeof e === "object" && typeof e.s === "string" && e.s.trim() !== "")
     .slice(0, CHRON_MAX)
-    .map((e) => {
+    .map(chronShape);
+}
+function chronShape(e) {
       const rawT = String(e.t == null ? "" : e.t).toLowerCase().trim();
       const t = /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rawT) ? rawT : "other";   // sane key, else "other"
       const known = CHRON_KINDS.find((k) => k.t === t);
@@ -1006,7 +1008,70 @@ function chronEntries(raw) {
                 icon: CHRON_ICON.has(t) ? t : "other",
                key: t.replace(/[^a-z0-9]+/g, "-"),           // for the CSS class only
                s: String(e.s), at: typeof e.at === "string" ? e.at : "" };
-    });
+}
+
+// ---- H14: the chronicle remembers. A small rolling history lives in THIS browser only
+// (localStorage; no write path to any server, no fetch). Newest first, hard-capped at
+// CHRON_HIST_MAX rows / 48 h / CHRON_HIST_BYTES, oldest dropped first. Everything read
+// back is attacker-controlled text that has crossed one storage round-trip, so it is
+// re-validated field by field and then shaped by the SAME chronShape + el()/textContent
+// path as a live line. Storage may be absent, full or throw: every access is wrapped and
+// the page renders fine with the history empty.
+const CHRON_HIST_KEY = "bellmire.chron.v1";
+const CHRON_HIST_MAX = 300, CHRON_HIST_MS = 48 * 3600000, CHRON_HIST_BYTES = 120000, CHRON_S_CAP = 400;
+const CHRON_AT_OK = /^\d{4}-\d\d-\d\dT[0-9:.]{5,16}(Z|[+-]\d\d:\d\d)?$/;
+let chronMem = [];                 // remembered rows [{t, s, at, k}], newest first
+let chronMemLoaded = false;
+const histTs = (r) => { const a = Date.parse(r.at); return isFinite(a) ? a : (r.k || 0); };
+const histKey = (r) => r.t + "|" + r.s;
+function histClean(a) {
+  const out = [];
+  for (const r of arr(a).slice(0, CHRON_HIST_MAX * 2)) {
+    if (!r || typeof r !== "object" || typeof r.s !== "string") continue;
+    const s = ctrlStrip(r.s).slice(0, CHRON_S_CAP);
+    if (!s) continue;
+    const rt = String(r.t == null ? "" : r.t).toLowerCase().trim();
+    const at = typeof r.at === "string" && r.at.length <= 40 && CHRON_AT_OK.test(r.at) ? r.at : "";
+    out.push({ t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
+               k: typeof r.k === "number" && isFinite(r.k) ? r.k : Date.now() });
+  }
+  return out;
+}
+function chronMemEnsure() {
+  if (chronMemLoaded) return;
+  chronMemLoaded = true;
+  try {
+    const raw = localStorage.getItem(CHRON_HIST_KEY);
+    chronMem = raw && raw.length <= CHRON_HIST_BYTES * 2 ? histClean(JSON.parse(raw)) : [];
+  } catch (e) { chronMem = []; }
+}
+// fold the live entries into the history, prune, cap, persist.
+function chronRemember(live) {
+  chronMemEnsure();
+  const now = Date.now(), by = new Map();
+  for (const r of chronMem) if (!by.has(histKey(r))) by.set(histKey(r), r);
+  for (const e of live) {
+    const r = { t: e.t, s: ctrlStrip(e.s).slice(0, CHRON_S_CAP), at: CHRON_AT_OK.test(e.at) ? e.at : "", k: now };
+    if (!r.s) continue;
+    const old = by.get(histKey(r));
+    if (old) { if (!old.at && r.at) old.at = r.at; } else by.set(histKey(r), r);
+  }
+  let rows = [...by.values()].filter((r) => histTs(r) >= now - CHRON_HIST_MS)
+    .sort((a, b) => histTs(b) - histTs(a)).slice(0, CHRON_HIST_MAX);
+  let json = "";
+  try {
+    json = JSON.stringify(rows);
+    while (json.length > CHRON_HIST_BYTES && rows.length) { rows.pop(); json = JSON.stringify(rows); }
+  } catch (e) { rows = []; }
+  chronMem = rows;
+  try { localStorage.setItem(CHRON_HIST_KEY, json || "[]"); } catch (e) { /* full or blocked: carry on in memory */ }
+}
+// the town's own voice for a day divider
+function dayVoice(ts) {
+  const d0 = new Date(); d0.setHours(0, 0, 0, 0);
+  const d = new Date(ts); d.setHours(0, 0, 0, 0);
+  const n = Math.round((d0 - d) / 86400000);
+  return n <= 0 ? "Earlier today, by the bells" : n === 1 ? "Yesterday, as the town tells it" : "Two days gone, and not forgotten";
 }
 
 // store the latest data and repaint. An AUTO refresh (from the 60 s poll) is held
@@ -1014,7 +1079,10 @@ function chronEntries(raw) {
 // does not reshuffle lines under them; the held update is applied when they leave.
 // A user action (chip, search, clear) always paints at once.
 function renderChronicle(raw, opts) {
-  if (raw !== undefined) chronData = raw;
+  if (raw !== undefined) {
+    chronData = raw;
+    if (Array.isArray(raw)) chronRemember(chronEntries(raw));
+  }
   const auto = opts && opts.auto;
   if (auto && chronHover && $("chronList").childElementCount) { chronPending = true; return; }
   chronPending = false;
@@ -1033,7 +1101,12 @@ function paintChronicle() {
     note.className = "note quiet";
     return;
   }
-  const entries = chronEntries(raw);
+  chronMemEnsure();
+  const live = chronEntries(raw);
+  const liveKeys = new Set(live.map(histKey));
+  const rem = chronMem.filter((r) => !liveKeys.has(histKey(r)))
+    .map((r) => Object.assign(chronShape(r), { rem: true, ts: histTs(r) }));
+  const entries = live.concat(rem);
   if (!entries.length) {
     note.textContent = "Nothing has been written in the chronicle yet.";
     note.className = "note quiet";
@@ -1074,8 +1147,14 @@ function paintChronicle() {
       : "Every kind is switched off - tap a chip to bring the chronicle back.";
     return;
   }
+  let lastDay = null, sawEarlier = false;
   for (const e of shown) {
-    const li = el("li", "centry kind-" + e.key);
+    if (e.rem) {
+      if (!sawEarlier) { sawEarlier = true; list.append(el("li", "cdiv cdiv-earlier", "Earlier")); }
+      const dk = new Date(e.ts).toDateString();
+      if (dk !== lastDay) { lastDay = dk; list.append(el("li", "cdiv", dayVoice(e.ts))); }
+    }
+    const li = el("li", "centry kind-" + e.key + (e.rem ? " remembered" : ""));
     const badge = el("span", "cbadge");
     badge.setAttribute("aria-hidden", "true");
     badge.append(icon(e.icon));                 // whitelisted glyph id

@@ -1,5 +1,60 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
+
+"people are still overlapping eachother... animals, and characters and people literally walking
+through stuff and stacked on top of eachother is not okay. if we need to make dungeon hallways
+wider we can so they arent lined up in a narrow halway". He also sent a shot of a wizard standing
+INSIDE a bush in town.
+
+THE FINDING, AND IT IS BIGGER THAN THE SCREENSHOT: `crowd_push` IS A METHOD ON town.gd AND THE
+DUNGEON NEVER CALLS IT. Grep delve.gd, monster.gd and dungeon_hd.gd for crowd_push, body_r or any
+separation: there is NONE. The town got a whole local-avoidance system in D16a - a soft shove out
+to CROWD_R 0.75, a hard shove inside two bodies' width "faster than anyone walks, so nobody is
+ever walked through", yielding within CROWD_LOOK 2.2 m, passing on the correct side so two folk
+meeting in a gate step aside. The dungeon got none of it. Delvers and monsters below ground have
+ZERO body separation. They are free to stand in the same place, and they do.
+
+That is why Mr. E keeps seeing it underground, and why fixing town crowding never fixed it.
+
+AND HE IS RIGHT ABOUT THE HALLS. floorgen.gd builds ONE-CELL CORRIDORS (see its own comment,
+~819). A party of four to six, plus whatever meets them, in a one-cell corridor, with no avoidance
+at all, has nowhere to be except inside each other. Both halves need doing - avoidance alone in a
+one-cell hall just makes them shove each other down it.
+
+STAGED:
+  1. LIFT THE AVOIDANCE OUT OF town.gd. crowd_push, CROWD_R, CROWD_LOOK, CROWD_SOFT and the
+     yielding logic become a shared helper both the town and the dungeon call - NOT a second copy.
+     A copy will drift and then there are two bugs. Town behaviour must be byte-identical after
+     the move; that is the regression test.
+  2. WIRE IT INTO THE DUNGEON. Every delver body and every Monster gets a body_r and calls the
+     shared push each step, exactly as townsfolk and animals do. Monsters need it most - a pack
+     converging on one hero is the worst stack in the game.
+  3. WIDEN THE CORRIDORS, with Mr. E's explicit blessing. Two cells where a one-cell hall would
+     be, or one-and-a-half if the generator can carry it. Check what it does to floor footprint
+     and to the set pieces that assume a corridor's width (the portcullis in D88 spans one - it
+     must span whatever the new width is, which is one more reason D88 is about spanning, not
+     about a radius).
+  4. FORMATION IN A CORRIDOR. A party that cannot walk abreast should walk in FILE - deliberately,
+     spaced, in an order - not pile into the same cell. A column of adventurers moving down a hall
+     in order is a better shot than a wide room full of them anyway.
+  5. THE BUSH. The town's prop footprints (town.gd ~5588) clearly do not include scatter like
+     bushes, so a body stands inside one. Register scatter props in the same footprint system, or
+     keep bodies out of them with the same hard ring. Audit which prop kinds are registered and
+     which are not - the answer is probably "the big ones are".
+  6. ANIMALS TOO. He named animals specifically. animal.gd already calls crowd_push in town; check
+     it is using a body_r that matches each animal's real size, since a 0.3 default for every
+     creature from a chicken to a cow is wrong in both directions.
+
+NAMES ARE EXPLICITLY FINE. Mr. E: "names overlappiong was fine because depending on the angle."
+Do NOT spend any part of this item on nameplate overlap. Bodies only.
+
+DONE TEST: a 20-minute delve soak and a 20-minute town soak, sampling every body pair every frame.
+Pass requires ZERO frames in which two bodies' centres are closer than the sum of their body_r,
+in the dungeon and in town; zero bodies inside a registered prop's footprint; and no increase in
+stuck walkers over the D44 baseline - this must not trade clipping for wedging. Shoot a six-hero
+party moving down a corridor and meeting monsters head-on, and put it in renders/cycles/d91/.
+
 ### D90 - THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
 
 "the wagon is still trailing behind the person carrying it. you see the green hooded guy, the
@@ -1240,7 +1295,7 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
   THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
   IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report)
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report), D91 (NO crowd avoidance in the dungeon at all)
     These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
     Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
     the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and

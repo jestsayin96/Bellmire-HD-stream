@@ -2119,7 +2119,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
 # worker says so in its summary and the supervisor raises it with that file's owner - it does not reach in.
 # ORDER MATTERS: L65 first (one designed interface), because L64/L66/L67 all draw through the theme.
 
-- [ ] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
+- [x] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
       (ui_theme.gd, then hud_dock.gd, feed_hud.gd, leaderboard_panel.gd, spotlight.gd). The stream's
       panels were each built in a different week and it shows: different corner radii, different
       border weights, different type sizes for the same job, parchment at three different values.
@@ -2141,6 +2141,12 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       live at once, before and after, side by side - the after reads as one interface; a grep of the
       four adopting files shows zero literal colour/size/radius constants; the stated contrast and
       size floors are listed per element with their measured numbers.
+
+  RESULT (2026-11-15, hud-ui ffb9c77, cycles U27+U28): .1-.3 landed in U27 - ui_theme.gd is a real token
+  system (named type scale, one panel frame, shared chrome) and hud_dock, feed_hud, leaderboard_panel and
+  spotlight all draw from it. .4 landed in U28: tools/_l654_audit.gd measures every on-stream string and
+  all 15 now clear 4.5:1 at 1080p, via a chip_bg token and a softer scroll edge (renders/cycles/
+  20261115_l654/audit.txt). Next for this worker: L64.
 
 - [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS. Owner: DESKTOP HUD
       (auto_director.gd, spotlight.gd). The stream runs 24/7 and the director currently rotates;

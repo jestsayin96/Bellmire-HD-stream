@@ -2,12 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://paaukwaffaamazgrndbv.supabase.co https://id.twitch.tv https://api.twitch.tv wss://irc-ws.chat.twitch.tv; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<!-- connect-src lists id.twitch.tv + api.twitch.tv for the Phase-2 (H6) device-code sign-in.
+     That flow is now LIVE but strictly READ-ONLY: Mr. E's public client id is registered and baked
+     in, so clicking "Sign in with Twitch" starts the device-code grant. Nothing contacts those hosts
+     until the viewer clicks; the token is the viewer's own, kept in memory only and never sent to our
+     backend. wss://irc-ws.chat.twitch.tv is the native guild chat (H8): the page speaks Twitch
+     chat's own protocol directly, opt-in, because the old iframe embed broke in every browser
+     that blocks third-party cookies - and with the iframe gone, frame-src is gone with it (a
+     net tightening: no third-party page is embedded at all). All documented in
+     docs/HUB_SECURITY.md and flagged for the supervisor's review before any republish. Supabase
+     stays the only DATA origin; the page performs no viewer write to any backend. -->
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bellmire - the Guild Hall</title>
-<meta name="description" content="Bellmire, live from the stream: every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
-<meta name="theme-color" content="#1c140e">
+<title>Bellmire HD - the Guild Hall</title>
+<meta name="description" content="Bellmire, live from the stream: the boards, every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
+<meta name="theme-color" content="#120d09">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 72'%3E%3Cpath d='M4 4h56v40a28 28 0 0 1-28 26A28 28 0 0 1 4 44z' fill='%231a130c' stroke='%23c6922f' stroke-width='4'/%3E%3Cpath d='M28 16h9l-3 17h6l-11 24 2.5-17h-6z' fill='%2337c7bf'/%3E%3C/svg%3E">
+<!-- The favicon is an inline data: SVG of the crest (shield + teal scar) - no extra request,
+     allowed by the CSP's img-src data:. The social-card tags below point at web/og.png, a
+     page-owned static image drawn for this repo (the crest + wordmark; Gloock is OFL, see
+     web/fonts/). Crawlers fetch og:image from outside the page, so no CSP change is involved,
+     and nothing below carries snapshot data. The og:url/og:image host is the GitHub Pages
+     origin for this repo - supervisor: confirm it matches the published URL on review. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bellmire HD">
+<meta property="og:title" content="Bellmire HD - the Guild Hall">
+<meta property="og:description" content="Bellmire, live from the stream: the boards, every hero's sheet, the Guild Roll, the Fallen and the chat commands.">
+<meta property="og:url" content="https://jestsayin96.github.io/Bellmire-HD-stream/">
+<meta property="og:image" content="https://jestsayin96.github.io/Bellmire-HD-stream/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Bellmire crest - a keep above the teal scar on a dark shield - beside the wordmark Bellmire HD.">
+<meta name="twitter:card" content="summary_large_image">
 <!--
   W1b: the viewer hub. One static page, no build step, no framework (GitHub Pages, like
   fightoverlay). It reads the ONE row the game upserts every 60 s (scripts/snapshot_pub.gd)
@@ -18,52 +45,262 @@
   the town has gone quiet (Mr. E's PC is off); an empty table says the town has not reported in;
   a failed fetch says so plainly and tries again - never a spinner forever.
 
-  Test hooks (local checks only, harmless): ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
+  Every string from the snapshot reaches the DOM through createElement + textContent only.
+  There is no innerHTML anywhere in app.js. See docs/HUB_SECURITY.md; the reasoning behind
+  the look is in web/NOTES.md. Neither is served content.
+
+  Test hooks (local checks only, harmless):
+    ?state=empty  ?state=fail  ?state=stale  ?open=1 (first hero open)
+    ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
+    ?mock=roll (stand-in town rolls, with the hostile-name canary)
+    ?mock=bands (stand-in delving parties, with the hostile-name canary)
+    ?mock=crowd also carries a Satchel (sell prices) with the hostile-name canary (H11)
 -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- Icon sprite: hand-drawn line glyphs, no external asset and no <img> request.
+     Each <symbol> is page-authored and static; app.js references one with
+     <use href="#ic-..."> where the id is always a fixed, whitelisted string, so a
+     snapshot value can only SELECT a known icon, never inject markup. CC0 (my own
+     drawings). Lives in the DOM once; the hub never loads an image for these. -->
+<svg class="icon-defs" aria-hidden="true" focusable="false" width="0" height="0" overflow="hidden">
+  <defs>
+    <!-- gear -->
+    <symbol id="ic-blade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v12M9 14h6M12 14v6M10 20h4"/></symbol>
+    <symbol id="ic-ranged" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3Q18 12 6 21M6 3v18M6 12h12M14 9l4 3-4 3"/></symbol>
+    <symbol id="ic-arcane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21 16 7"/><circle cx="17" cy="5" r="3"/></symbol>
+    <symbol id="ic-blunt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 11 13"/><circle cx="15" cy="9" r="4"/><path d="M15 3v2M15 13v2M9 9h2M19 9h2"/></symbol>
+    <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 5-4 8-7 10-3-2-7-5-7-10V6z"/></symbol>
+    <symbol id="ic-potion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4M11 3v4l-4 8a5 5 0 0 0 10 0l-4-8V3M8 14h8"/></symbol>
+    <symbol id="ic-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5"/><path d="M12 10V5M10 5h4"/><path d="M12 4q2-2 0-3-2 1 0 3"/></symbol>
+    <symbol id="ic-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9 9h4a2 2 0 0 1 0 4H9"/></symbol>
+    <!-- chronicle kinds -->
+    <symbol id="ic-fight" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 14 10M18 4l2 2-6 6M4 4l2 2M20 20 10 10"/></symbol>
+    <symbol id="ic-death" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a8 8 0 0 1 7 12v3h-2v2h-2v-2h-2v2h-2v-2H9v2H7v-2H5v-3A8 8 0 0 1 12 3z"/><circle cx="9.5" cy="11" r="1.4"/><circle cx="14.5" cy="11" r="1.4"/></symbol>
+    <symbol id="ic-raid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2 4 6 5 4 11-1 3-3 4-4 8-1-4-3-5-4-8-2-6 2-7 4-11z"/></symbol>
+    <symbol id="ic-town" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9h2V7h2v2h2V5h4v4h2V7h2v2h2v12M10 21v-6h4v6"/></symbol>
+    <symbol id="ic-lore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c3-2 6-2 8 0 2-2 5-2 8 0v14c-3-2-6-2-8 0-2-2-5-2-8 0zM12 5v14"/></symbol>
+    <symbol id="ic-loot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l3 5-6 11-6-11zM6 9h12M9 4l3 5 3-5M12 9v11"/></symbol>
+    <symbol id="ic-delve" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h5v4h5v4h6M14 13v5M11 16l3 3 3-3"/></symbol>
+    <symbol id="ic-other" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 15 9l1-4 4 1-4 1L9 19l-5 1z"/></symbol>
+    <!-- H10 status: a flame for a burning delver (the fallen use the skull above). -->
+    <symbol id="ic-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3c0 3-4 4-4 8a3 3 0 0 0 6 0c0-1 0-2-1-3 2 1 4 4 4 7a6 6 0 0 1-12 0c0-5 5-6 7-12z"/></symbol>
+  </defs>
+</svg>
+
 <div class="wrap">
-  <header class="panel">
-    <div class="brand">
-      <h1>Bellmire</h1>
-      <span class="sub" id="townName">the Guild Hall</span>
+
+  <header class="hero">
+    <div class="crest">
+      <!-- The Bellmire mark: the keep above the valley, the teal scar below it,
+           a struck gold bell for the jester, and the harlequin band. Drawn here
+           rather than loaded, so there is no image request and nothing to cache. -->
+      <svg class="emblem" viewBox="0 0 64 72" aria-hidden="true" focusable="false">
+        <path class="em-shield" d="M4 4 h56 v40 a28 28 0 0 1 -28 26 a28 28 0 0 1 -28 -26 z"></path>
+        <g class="em-keep">
+          <path d="M18 34 v-13 h4 v-4 h4 v4 h4 v-6 h4 v6 h4 v-4 h4 v4 h4 v13 z"></path>
+          <rect class="em-door" x="29" y="27" width="6" height="7"></rect>
+        </g>
+        <path class="em-hill" d="M6 42 q10 -7 16 -3 q6 4 10 1 q7 -5 13 -1 q6 3 9 5 v3 h-48 z"></path>
+        <path class="em-scar" d="M30 40 l4 0 l-1.4 9 l2.4 0 l-5 11 l1 -9 l-2.4 0 z"></path>
+        <g class="em-bell">
+          <path d="M44 52 q0 -6 4 -6 q4 0 4 6 v3 h-8 z"></path>
+          <rect x="43" y="55" width="10" height="2" rx="1"></rect>
+          <circle cx="48" cy="59" r="1.6"></circle>
+        </g>
+      </svg>
     </div>
-    <ul class="town" id="town" aria-label="The town"></ul>
-    <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+    <div class="namebox">
+      <h1 class="wordmark">Bellmire<span class="hd">HD</span></h1>
+      <p class="sub" id="townName">the Guild Hall</p>
+    </div>
+    <ul class="band" aria-hidden="true">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
   </header>
 
-  <nav aria-label="Sections">
-    <a href="#heroes">Heroes<span class="n" id="nHeroes"></span></a>
-    <a href="#roll">Guild Roll</a>
-    <a href="#fallen">The Fallen<span class="n" id="nFallen"></span></a>
-    <a href="#commands">Commands</a>
+  <ul class="town" id="town" aria-label="The town"></ul>
+  <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+
+  <!-- H13: no-scroll, tabbed layout. A viewer picks one section at a time with a
+       tab button here; app.js shows the matching tabpanel below and remembers the
+       choice in localStorage (control-stripped, 25-cap, matched against a WHITELIST
+       before use - never built into a URL, href, src, selector or style). Pure
+       layout rework: no new data, no new fetch, no CSP change. Keyboard-navigable
+       (ArrowLeft/Right, Home/End move; Enter/Space activate) per the WAI-ARIA tabs
+       pattern. Reduced-motion is respected (no new animation here either way). -->
+  <nav id="tabs" role="tablist" aria-label="Sections of the hub">
+    <button type="button" role="tab" id="tab-boards"    data-tab="boards"    aria-controls="boards"    aria-selected="false" tabindex="-1">Boards</button>
+    <button type="button" role="tab" id="tab-heroes"    data-tab="heroes"    aria-controls="heroes"    aria-selected="false" tabindex="-1">Heroes<span class="n" id="nHeroes"></span></button>
+    <button type="button" role="tab" id="tab-bands"     data-tab="bands"     aria-controls="bands"     aria-selected="false" tabindex="-1">Bands<span class="n" id="nBands"></span></button>
+    <button type="button" role="tab" id="tab-chronicle" data-tab="chronicle" aria-controls="chronicle" aria-selected="false" tabindex="-1">Chronicle</button>
+    <button type="button" role="tab" id="tab-dice"      data-tab="dice"      aria-controls="dice"      aria-selected="false" tabindex="-1">The die</button>
+    <button type="button" role="tab" id="tab-roll"      data-tab="roll"      aria-controls="roll"      aria-selected="false" tabindex="-1">Guild Roll</button>
+    <button type="button" role="tab" id="tab-fallen"    data-tab="fallen"    aria-controls="fallen"    aria-selected="false" tabindex="-1">The Fallen<span class="n" id="nFallen"></span></button>
+    <button type="button" role="tab" id="tab-lore"      data-tab="lore"      aria-controls="lore"      aria-selected="false" tabindex="-1">Lore</button>
+    <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
+    <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
 
   <main id="main">
     <section class="panel big-msg hide" id="nothing"></section>
 
-    <section class="panel" id="heroes">
-      <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
-      <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
-      <div class="heroes" id="heroList"><p class="msg">&hellip;</p></div>
-      <p class="more hide" id="heroMore"></p>
+    <section class="panel" id="boards" role="tabpanel" aria-labelledby="tab-boards" tabindex="0">
+      <h2 class="title">The Boards <small id="boardCount"></small></h2>
+      <p class="eyebrow boardsort">Sort heroes by</p>
+      <div class="chips" id="boardTabs" role="tablist" aria-label="Sort the boards by"></div>
+      <div id="boardTop"></div>
+      <ol class="board" id="boardList"></ol>
+      <div class="findrow">
+        <input class="find" id="boardFind" type="search" autocomplete="off"
+               placeholder="Find a hero's place&hellip;" aria-label="Find a hero's place on this board">
+      </div>
+      <div id="boardSelf"></div>
+      <p class="note" id="boardNote"></p>
     </section>
 
-    <div class="duo">
-      <section class="panel" id="roll">
-        <h2 class="title">The Guild Roll <small>who stands highest</small></h2>
-        <ol class="roll" id="rollList"><li class="msg">&hellip;</li></ol>
-      </section>
-      <section class="panel" id="fallen">
-        <h2 class="title">The Fallen <small>remembered</small></h2>
-        <div class="fallen" id="fallenList"><p class="msg">&hellip;</p></div>
-      </section>
-    </div>
+    <section class="panel" id="dice" role="tabpanel" aria-labelledby="tab-dice" tabindex="0">
+      <h2 class="title">The Guild Hall die <small>the town’s rolls — and one of your own</small></h2>
+      <div class="dicebox">
+        <div class="dicetable">
+          <button type="button" class="d20" id="d20" aria-label="Roll the twenty-sided die">
+            <span class="d20scene">
+              <span class="d20cage" id="d20cage"></span>
+            </span>
+          </button>
+          <p class="d20shadow" aria-hidden="true"></p>
+        </div>
+        <div class="diceside">
+          <p class="d20result" id="d20result" role="status" aria-live="polite">Tap the die.</p>
+          <p class="d20help">Tap for a roll of your own — it happens in your browser, the town never hears it, and it has nothing to do with your hero. When the town rolls (below), the die shows that instead.</p>
+          <p class="eyebrow">Last rolls</p>
+          <ol class="d20hist" id="d20hist"></ol>
+        </div>
+      </div>
+      <!--
+        H9: the town’s rolls. A viewer spends channel points or bits and the d20
+        is rolled IN THE GAME (T5) - a law, an event, a building - and the result
+        rides the 60 s snapshot as p.rolls (newest first) and shows here; the die
+        above animates to the latest. READ-ONLY: this page never initiates or
+        submits a roll. Every roller name / proposition / outcome line is viewer-
+        controlled and reaches the DOM only through el()/textContent; the outcome
+        tier only ever selects a whitelisted CSS class, never markup or a URL.
+        See docs/HUB_SECURITY.md (H9) and web/NOTES.md. Local check: ?mock=roll.
+      -->
+      <div class="townrolls" id="townRolls">
+        <p class="eyebrow">The town’s rolls</p>
+        <ol class="rollfeed" id="rollFeed"></ol>
+        <p class="note quiet" id="rollNote"></p>
+      </div>
+    </section>
 
-    <section class="panel" id="commands">
-      <h2 class="title">Chat commands <small>type them in Twitch chat</small></h2>
-      <div class="cmds" id="cmdList"><p class="msg">&hellip;</p></div>
+    <section class="panel" id="heroes" role="tabpanel" aria-labelledby="tab-heroes" tabindex="0">
+      <h2 class="title">Heroes of the valley <small id="heroesNote"></small></h2>
+      <!--
+        Phase 2 (H6) sign-in. Device-code OAuth so a viewer can spotlight THEIR OWN hero
+        instead of scrolling for it. Mr. E's public client id is registered, so the button
+        starts the device-code grant on click (nothing before). The token is the viewer's
+        own, used client-side to read their own Twitch login and match a hero - kept in
+        memory only, never sent to our backend, never persisted. Still strictly read-only -
+        no viewer write. See docs/HUB_SECURITY.md.
+      -->
+      <div class="signin" id="signin">
+        <button type="button" class="signinbtn" id="signinBtn">Sign in with Twitch to spotlight your hero</button>
+        <div class="signinstate" id="signinState" role="status" aria-live="polite"></div>
+      </div>
+      <!-- H11: the viewer's pinned hero (set from any hero's sheet, or on sign-in).
+           Remembered in this browser only; see docs/HUB_SECURITY.md. -->
+      <div class="myhero hide" id="myHero"></div>
+      <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
+      <div class="heroes" id="heroList"></div>
+      <p class="note hide" id="heroMore"></p>
+    </section>
+
+    <!--
+      H10: Bands Below. Every party currently in the scar, from the snapshot's
+      parties array (the D46 contract; see docs/HUB_SECURITY.md and app.js). Each
+      member's name is attacker-shaped Twitch text and reaches the DOM only via
+      el()/textContent; HP bar widths are page-computed numbers; status picks a
+      whitelisted ICON_SET glyph. Read-only, no new fetch. GATED ON D46: until the
+      publisher sends p.parties, this shows an honest empty state, never a fake band.
+      Local check: ?mock=bands.
+    -->
+    <section class="panel" id="bands" role="tabpanel" aria-labelledby="tab-bands" tabindex="0">
+      <h2 class="title">Bands below <small id="bandCount"></small></h2>
+      <p class="eyebrow">Who is down in the scar right now</p>
+      <div class="bands" id="bandList"></div>
+      <p class="note" id="bandNote"></p>
+    </section>
+
+    <section class="panel" id="chronicle" role="tabpanel" aria-labelledby="tab-chronicle" tabindex="0">
+      <h2 class="title">The Chronicle <small>what the town reports</small></h2>
+      <div class="chips" id="chronChips" aria-label="Filter the chronicle by kind"></div>
+      <input class="find" id="chronFind" type="search" autocomplete="off" placeholder="Search the chronicle&hellip;" aria-label="Search the chronicle text">
+      <ol class="chron" id="chronList"></ol>
+      <p class="note" id="chronNote"></p>
+    </section>
+
+    <section class="plain" id="roll" role="tabpanel" aria-labelledby="tab-roll" tabindex="0">
+      <h2 class="title light">The Guild Roll <small>who stands highest</small></h2>
+      <ol class="roll" id="rollList"></ol>
+    </section>
+    <section class="plain" id="fallen" role="tabpanel" aria-labelledby="tab-fallen" tabindex="0">
+      <h2 class="title light">The Fallen <small>remembered</small></h2>
+      <div class="fallen" id="fallenList"></div>
+    </section>
+
+    <section class="plain" id="commands" role="tabpanel" aria-labelledby="tab-commands" tabindex="0">
+      <h2 class="title light">Chat commands <small>type them in Twitch chat</small></h2>
+      <div class="cmds" id="cmdList"></div>
+    </section>
+
+
+    <!--
+      H12: Lore. The town's own text, read into the hub so a new viewer can get
+      oriented without leaning on chat. Pulled from data/lore_lines.json on the
+      main branch (content-writer-owned, read-only to this builder) and FROZEN
+      into app.js as LORE_FROZEN - no new fetch, no CSP change, no new origin.
+      Every string is Twitch-era text and reaches the DOM ONLY via el()/textContent;
+      every icon is a whitelisted ICON_SET glyph. The "last-updated" line below
+      is the source commit so a viewer can see when it was last refreshed. Local
+      check: ?mock=lore (injects a hostile name into the lore stream; must render
+      as literal text).
+    -->
+    <section class="panel" id="lore" role="tabpanel" aria-labelledby="tab-lore" tabindex="0">
+      <h2 class="title">Lore of the valley <small id="loreStamp"></small></h2>
+      <p class="eyebrow">What the town itself says</p>
+      <div class="chips" id="loreChips" role="tablist" aria-label="Pick a lore chapter"></div>
+      <div class="lore" id="loreBody"></div>
+      <p class="note" id="loreNote">Bundled from the town's own words - no live fetch, refreshed when the hub is republished.</p>
+    </section>
+
+    <!--
+      Guild chat (H8): the channel's live Twitch chat, drawn by THIS page over
+      Twitch's own chat protocol - no iframe. The old embed died for every viewer
+      whose browser blocks third-party cookies (Brave, Safari, strict Chrome).
+      Still OPT-IN: nothing contacts Twitch until the viewer opens it. Reading is
+      anonymous; talking uses the viewer's own sign-in (under Heroes). Every
+      incoming line is attacker-controlled text and renders through el() only -
+      plain text, no emote images, no markup, ever. See docs/HUB_SECURITY.md (H8).
+    -->
+    <section class="plain" id="chat" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
+      <h2 class="title light">Guild chat <small>the channel's live chat</small></h2>
+      <div class="chatbox" id="chatBox">
+        <button type="button" class="chatload" id="chatLoad">Open the guild chat</button>
+        <p class="chatnote" id="chatNote">Live Twitch chat, drawn by this page itself - it works in every browser, no Twitch frame, no cookies. Nothing contacts Twitch until you open it. Reading needs nothing; sign in under Heroes to talk.</p>
+        <div class="chatpanel hide" id="chatPanel">
+          <ol class="chatlist" id="chatList" aria-label="Live chat messages"></ol>
+          <p class="chatstatus" id="chatStatus" role="status" aria-live="polite"></p>
+          <div class="chatrow">
+            <input class="chatinput" id="chatInput" type="text" maxlength="450" autocomplete="off"
+                   placeholder="Sign in with Twitch (under Heroes) to talk — reading needs nothing." aria-label="Chat message" disabled>
+            <button type="button" class="chatsend" id="chatSend" disabled>Send</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

@@ -151,9 +151,18 @@ HUB: web/* and docs/HUB_SECURITY.md. Unchanged.
 
 Workers 1 and 2 are on the SAME machine and both launch Godot. Two Godot instances at once already
 cost us a corrupted run. Both MUST use docs/RUN_LOCK.txt (canonical, in R, on main):
+  - TIMESTAMP FORMAT IS BINDING: ISO 8601 with the UTC offset, e.g. 2026-11-15T02:41:00-06:00.
+    NEVER write a bare "local time" and never write UTC without its offset. A lock line that does
+    not carry an offset cannot be aged reliably - workers run in a cloud session whose own clock is
+    UTC while the machine is America/Chicago, so a bare timestamp has been off by six hours in
+    practice (seen 2026-11-15: the lock read 08:41 when the machine clock said 02:41).
   - Before launching Godot: read it. If it says RUNNING and the timestamp is under 45 min old, do
     NOT launch. Do file-only work or stop and say "skipped: another run is working".
-  - Set "RUNNING <local time> (<worker name>)" before launching, "IDLE <local time> - <what>" after.
+  - IF THE LOCK LINE HAS NO OFFSET, its age is UNKNOWN. Do NOT clear it on age alone and do NOT
+    treat it as fresh. Check whether a Godot process is actually alive and whether a commit has
+    landed since; only then decide. Rewrite the line in the format above once you own the lock.
+  - Set "RUNNING <ISO 8601 with offset> (<worker name>)" before launching, and
+    "IDLE <ISO 8601 with offset> - <what>" after.
   - Never start a second battery while any thread of a previous one may still be alive.
   - If Mr. E is at the machine, say so before launching Godot - he may be playing or streaming.
 

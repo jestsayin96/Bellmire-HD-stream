@@ -31,6 +31,18 @@ const FALLEN_MAX := 50
 const CHRON_MAX := 50
 const LINE_MAX := 200
 const CHRON_TYPES := ["death", "raid", "loot", "delve", "town", "lore", "fight"]
+## D57 - THE SATCHEL (hub H11). What the counter would pay a viewer for what their
+## hero carries. The price curve is the counter's own, NOT a second opinion: the
+## on-stream sell sheet (leaderboard_panel.gd Satchel.SELL_BACK) pays 0.4 of an
+## item's buy cost, so the hub quotes the same number and the two can never disagree.
+## `sell` is PER UNIT - the hub multiplies by qty itself.
+const SELL_BACK := 0.4
+const SATCHEL_MAX := 40             # the hub stops reading rows at 40
+const NAME_MAX := 25                # W1a: every published name is capped here
+## kind -> the hub's icon map (web/app.js SATCHEL_ICON). Only these words are sent;
+## the kind SELECTS a whitelisted glyph on the hub and is never written into its DOM.
+const SATCHEL_KINDS := ["weapon", "armour", "potion", "oil", "gold", "trinket", "loot", "gem"]
+
 ## first match wins, in this order (a delve's homecoming counts its gold and a trap's
 ## damage is the delve's, so those come before "loot" / "fight"; plain floor news after)
 const CHRON_RULES := [
@@ -130,7 +142,7 @@ func build_payload() -> Dictionary:
     var r: Roster = town.get("roster") if town else null
     var e: Economy = town.get("economy") if town else null
     var out := {
-        "v": 2,                 # D46: v2 adds `parties` (the hub accepts 1, 2 and 3)
+        "v": 3,                 # D57: v3 adds the per-hero Satchel sell fields (v2 added `parties`)
         "game": "Bellmire HD",
         "generated_at": Time.get_datetime_string_from_system(true) + "Z",
         "town": _town_block(e),
@@ -255,6 +267,16 @@ static func clean_line(raw: String) -> String:
         s = s.left(LINE_MAX - 1).strip_edges() + "\u2026"
     return s
 
+## W1a for a short published name: the same control-char strip as clean_line, no
+## angle brackets or BBCode, one line, at most NAME_MAX characters. Item and potion
+## names are lore text written by the content writer, so they are cleaned like any
+## other string that leaves the game.
+static func clean_name(raw: String) -> String:
+    var s := clean_line(raw)
+    if s.length() > NAME_MAX:
+        s = s.left(NAME_MAX - 1).strip_edges() + "\u2026"
+    return s
+
 ## one type per line, by keyword (CHRON_RULES, first match); unsure = "town"
 static func kind_of(line: String) -> String:
     var l := line.to_lower()
@@ -281,11 +303,83 @@ func _town_block(e: Economy) -> Dictionary:
         out["weather"] = String(dl.weather)
     return out
 
+## D57: one hero's sell sheet for the hub's Satchel (H11). Plain data, no new fetch,
+## nothing invented - a row only exists for something the hero actually carries, and a
+## price only for something the counter actually buys back. Mirrors the on-stream sheet:
+## mending, brews, oil, then gear owned but not worn; the stated total is the purse the
+## counter would hand over for the lot, worn pieces included.
+## Returns {"rows": [{name, kind, qty, sell}], "total": int, "sellable": [{kind, qty}],
+## "prices": [int]} - `sellable`/`prices` are the parallel-array form of the same rows.
+func _satchel(h: Dictionary) -> Dictionary:
+    var rows: Array = []
+    var add := func(nm: String, kind: String, qty: int, sell: int) -> void:
+        if qty <= 0 or rows.size() >= SATCHEL_MAX:
+            return
+        var k := kind if SATCHEL_KINDS.has(kind) else "loot"
+        rows.append({"name": clean_name(nm), "kind": k, "qty": qty, "sell": maxi(0, sell)})
+
+    # draughts and light: the counter pays the same 0.4 on these as on gear
+    add.call("Mending draught", "potion", int(h.get("potions", 0)),
+        int(floorf(float(Roster.POTION_COST) * SELL_BACK)))
+    for bk: String in (h.get("brews", {}) as Dictionary):
+        var pot := Roster.potion(bk)
+        add.call(String(pot.get("name", bk)), "potion", int(h["brews"][bk]),
+            int(floorf(float(pot.get("cost", 0)) * SELL_BACK)))
+    add.call("Flask of lamp oil", "oil", int(h.get("oil", 0)),
+        int(floorf(float(Roster.OIL_COST) * SELL_BACK)))
+
+    # what is worn stays out of the spare list (it is in the stated total instead)
+    var worn: Dictionary = {}
+    for slot in (h.get("acc", {}) as Dictionary):
+        worn[String(h["acc"][slot])] = true
+    for kind in (h.get("cos", {}) as Dictionary):
+        if String(kind) != "dye":
+            worn[String(h["cos"][kind])] = true
+
+    var purse := 0                      # every owned piece, worn included
+    for key in (h.get("owned", []) as Array):
+        var it := Roster.item(String(key))
+        var v := int(floorf(float(it.get("cost", 0)) * SELL_BACK))
+        purse += v
+        if worn.has(String(key)):
+            continue
+        add.call(String(it.get("name", key)), "trinket", 1, v)
+
+    # the stated total is everything the counter would take: the rows above plus the
+    # worn pieces that never got a row of their own.
+    var total := purse
+    for row: Dictionary in rows:
+        if String(row["kind"]) != "trinket":
+            total += int(row["sell"]) * int(row["qty"])
+
+    var sellable: Array = []
+    var prices: Array = []
+    for row: Dictionary in rows:
+        sellable.append({"kind": String(row["kind"]), "qty": int(row["qty"])})
+        prices.append(int(row["sell"]))
+    return {"rows": rows, "total": total, "sellable": sellable, "prices": prices}
+
 func _sheet(r: Roster, h: Dictionary) -> Dictionary:
     var stats := {}
     for k: String in Roster.STATS:
         stats[k] = int((h.get("stats", {}) as Dictionary).get(k, 10))
     var arm := int(h.get("armour", 0))
+    var wt := clampi(int(h.get("weapon", 0)), 0, Roster.WEAPONS.size() - 1)
+    var at := clampi(arm, 0, Roster.ARMOUR.size() - 1)
+    var sat := _satchel(h)
+    # the counter's price for what they are wearing. Omitted (not zeroed) at tier 0:
+    # the hub only lists a worn piece once it has a price, so bare hands and rags
+    # stay out of the sell sheet instead of quoting "0 gold".
+    var wsell := int(floorf(float(Roster.WEAPONS[wt].get("cost", 0)) * SELL_BACK))
+    var asell := int(floorf(float(Roster.ARMOUR[at].get("cost", 0)) * SELL_BACK))
+    var wblock := {"name": r.weapon_name(h), "dice": r.dice_str(h), "tier": int(h.get("weapon", 0))}
+    if wsell > 0:
+        wblock["sell"] = wsell
+        sat["total"] = int(sat["total"]) + wsell
+    var ablock := {"name": String(Roster.ARMOUR[at]["name"]), "tier": arm}
+    if asell > 0:
+        ablock["sell"] = asell
+        sat["total"] = int(sat["total"]) + asell
     return {
         "name": String(h.get("name", "?")), "class": String(h.get("class", "")),
         "species": Roster.species_of(h), "level": int(h.get("level", 1)), "xp": int(h.get("xp", 0)),
@@ -293,11 +387,15 @@ func _sheet(r: Roster, h: Dictionary) -> Dictionary:
         "ac": r.armour_class(h), "hp": int(r.max_hp(h)), "max_hp": int(r.max_hp(h)),
         "xp_next": int(r._xp_needed(int(h.get("level", 1)))), "prof": r.prof(h),
         "to_hit": r.attack_bonus(h), "stats": stats, "saves": r.save_line(h),
-        "weapon": {"name": r.weapon_name(h), "dice": r.dice_str(h), "tier": int(h.get("weapon", 0))},
-        "armour": {"name": String(Roster.ARMOUR[clampi(arm, 0, Roster.ARMOUR.size() - 1)]["name"]), "tier": arm},
+        "weapon": wblock, "armour": ablock,
         "potions": int(h.get("potions", 0)), "brews": r.brews_line(h), "oil": int(h.get("oil", 0)),
         "gold": int(h.get("gold", 0)), "worn": r.worn_line(h),
         "kills": int(h.get("kills", 0)), "deepest": int(h.get("deepest", 0)), "delves": int(h.get("delves", 0)),
+        # D57 (v3, additive): the Satchel. `satchel` is what the hub renders; `sellable`
+        # and `sell_prices` are the same rows as parallel arrays for any other client.
+        # An older hub ignores all three and draws the sheet exactly as before.
+        "satchel": sat["rows"], "satchel_total": int(sat["total"]),
+        "sellable": sat["sellable"], "sell_prices": sat["prices"],
     }
 
 # ---------------------------------------------------------------- the send

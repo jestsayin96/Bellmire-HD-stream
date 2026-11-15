@@ -2,6 +2,68 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D57 the Satchel goes live in the snapshot, 2026-11-15 08:30 (game build)
+- Item: D57 (first open DESKTOP item, Mr. E's direct ask). The hub's H11 Satchel
+  panel has been shipped and dormant since it went up: it draws nothing until the
+  publisher sends the fields. This cycle sends them.
+- FIRST, THE CONTRACT. The written item and the shipped hub did not agree, so the
+  code was written against the hub that is actually live (bellmire-hub web/app.js,
+  satchelRows/satchelBlock). What it reads per hero:
+    * `h.satchel` (or inventory/items) - rows {name, kind, qty} with a price under
+      any of sell/value/sell_price/price/worth. `sell` is PER UNIT; the page does
+      the x qty itself and prints the row total.
+    * `h.satchel_total` (or sell_total) - the stated grand total. When present the
+      page prints "Counter pays N gold"; absent, it sums the priced rows instead.
+    * `h.weapon.sell` / `h.armour.sell` - worn gear only gets a row once it has a
+      price, so a 0-cost tier is OMITTED rather than quoted at "0 gold".
+    * `kind` only SELECTS a whitelisted glyph through SATCHEL_ICON, and the names
+      the item listed (Chest/Vial/Scroll/Fish/Herb/Bone/Cloth/Ore/Spark/Wood) are
+      in no whitelist on the hub - the real one is weapon/armour/potion/oil/gold/
+      trinket/loot/gem. The parallel `sellable`/`sell_prices` arrays the item asked
+      for are published too, but on their own they would have rendered NOTHING.
+- CHANGE scripts/snapshot_pub.gd (+101 lines, the only file touched):
+    * `v` 2 -> 3. web/app.js KNOWN_V already accepts "1","2","3", so no hub change
+      was needed and older clients are unaffected.
+    * SELL_BACK 0.4, SATCHEL_MAX 40 (the hub stops reading at 40), NAME_MAX 25.
+      The price is the COUNTER'S OWN, read off the on-stream sheet
+      (leaderboard_panel.gd Satchel.SELL_BACK = 0.4), not the "usually half" in the
+      item - two different numbers for the same counter is a bug waiting to happen.
+    * clean_name(): clean_line() (control chars, BBCode, angle brackets, long digit
+      runs) then capped at 25 with an ellipsis. Item and potion names are content-
+      writer lore text, so they are sanitised like any other string that leaves.
+    * _satchel(h): mending, then brews, then oil, then gear owned-but-not-worn.
+      Mirrors the on-stream sheet exactly, including which pieces count as worn
+      (h.acc values and h.cos values, dye excluded). Nothing is invented: a row
+      only exists for something carried, a price only for something bought back.
+      The stated total is the whole purse - every owned piece INCLUDING worn ones -
+      which is the panel's "Sell the lot (worn too)" number.
+    * _sheet(): weapon/armour blocks gain `sell` when their tier costs something;
+      the sheet gains satchel / satchel_total / sellable / sell_prices. Everything
+      else in the v2 sheet is byte-identical.
+- TEST tools/_d57_satchel.gd (new): 23 checks offline, no key file, no network -
+  v is 3, the four expected rows with the exact prices (35->14, 90->36, 12->4,
+  360->144), the worn ring gets no row, the stated total is 452 bare-handed and
+  576 once a fine steel blade and chainmail are worn, sellable/sell_prices mirror
+  the rows, every kind is one the hub's icon map knows, every name <= 25 and W1a
+  clean, bare hands and rags quote no price, a hero carrying nothing gets an EMPTY
+  satchel and total 0 (never a faked row), the v2 fields all survive, plain JSON
+  round-trips, no Twitch ids. D57_SATCHEL OK.
+- LOOKED AT IT. tools/_d57_dump.gd writes one real build_payload() to
+  user://_d57_payload.json; the live hub page was then rendered against exactly
+  that payload with the snapshot request stubbed. The Satchel block draws under
+  the hero: Fine Steel Blade EQUIPPED 64 gold / Chainmail EQUIPPED 60 / Mending
+  draught x2 28 / Greater Mending x3 108 / Flask of lamp oil x5 20 / Hearthstone
+  Amulet 144, footed "Counter pays 576 gold". The second hero, carrying nothing,
+  shows no Satchel at all - the honest empty state, as designed. 0 page errors.
+- GATES: parse 0 errors, offfloor 0 of 1217 (INPROP 0, MON_INPROP 0 of 81),
+  TWITCH_PARSE OK, W1A_TEST OK, TOWNWALK in_solid 0/18006 PASS, _delve_test rc 0
+  with 0 SCRIPT ERROR, D57_SATCHEL OK. Payload 7.5 KB, build 0.13 ms.
+- FOR MR. E: it is live on the next publish beat (60 s) once the game is running
+  with the service key - no hub deploy needed. One decision is waiting: the counter
+  pays 0.4, the item said "usually half". 0.4 is what !sell will actually pay, so
+  that is what the hub now quotes; say the word if you want 0.5 and it is a
+  one-constant change in both files.
+
 ## D-cycle - D21b.2 defender deaths read, 2026-11-15 00:46 (game build)
 - Item: D21b (first open DESKTOP item still) - RAID COMBAT FEEL. Next smallest
   readable piece after D21b.1: deaths that read. A Townsfolk or HeroBody beaten

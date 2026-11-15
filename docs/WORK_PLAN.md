@@ -2,7 +2,35 @@
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
-- [ ] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
+- [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
+  RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
+  NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
+
+- [ ] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
+      "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
+      BUILD (townsfolk.gd, rig.gd, hero_body.gd, town_nav.gd).
+      THIS IS A DIFFERENT BUG FROM THE THREE ALREADY ON THE BOARD - do not close it by re-fixing those:
+        * D50 (ticked) was agents FROZEN and their anim stuttering - missing callers. Fixed.
+        * D44/D50 (open) is agents WEDGED against props and stopping. A pinned agent.
+        * D52 (open) is the hero never pathing to the dungeon mouth. A state bug.
+        * D58 (this) is GAIT QUALITY on agents that ARE walking normally. They move from A to B
+          fine - they just look WRONG doing it. Nothing currently owns this.
+      LIKELY CAUSES, in the order worth checking (measure before changing anything):
+        1. Animation playback rate is fixed while nav velocity varies, so feet slide across the
+           ground instead of planting. This is the classic cause and the most likely one here.
+           Drive the walk AnimationPlayer/AnimationTree speed_scale from the agent's ACTUAL
+           per-frame velocity, not from a constant.
+        2. No blend between idle / walk / run - agents snap between clips instead of easing, which
+           reads as lurching.
+        3. No turn-in-place: an agent changing direction slides through the turn while the walk
+           cycle keeps playing forward.
+        4. Nav agents arriving with tiny residual velocity, so the walk clip plays at a crawl near
+           waypoints and looks laboured.
+      Fix the ones the measurement actually implicates. Do not rewrite the rig.
+      DONE: a 1080p capture of the market square with at least 15 townsfolk walking at once, plus a
+      logged check that animation speed tracks agent velocity (print velocity vs speed_scale for 10
+      agents over 30 s - they must correlate, not sit flat). In the capture: no foot sliding, no
+      snapping between clips, turns read as turns. Mr. E's bar for this one is WOW, not "oh".
 
 - [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved

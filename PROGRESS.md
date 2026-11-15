@@ -5814,3 +5814,11 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
   tier 12: General Goods +18/-0; Smithy +1/-0; Apothecary +3/-0
 - GAME BUILD MUST READ: items.json stock_retirement.{shop_goods,cargo}, trade_stock.trades.*.{opens_tier,carries,own_goods,schedule}, caravan_manifests.{supply_resources,caravans}. Existing shop_stock.tier / trader_cargo.tier / stock_by_tier unchanged.
 - VALIDATION OK: json.load passes; all pre-existing top-level values equal; keys resolve; ladders pass.
+
+## C-cycle 54: cosmetics, accessories and dyes - 71 cosmetics, 24 accessories, 27 dyes (standing backlog item 1) (2026-11-15)
+
+- data/items.json only, additive. cosmetics +71 (23 hats, 18 banners, 23 titles, 6 pets reusing the existing Corgi/Pug/Llama models and scales); accessories +24 (4 per slot-ish: rings, amulets, cloaks, boots, gloves; every stat is an existing key at an existing magnitude: ac/saves/hit 1, hp 8-14, speed 0.5-0.6, dmg 2); dyes +27 colours at the flat dye_cost. Themes: guild post, scar stair, the wall, the feast, the harvest, the caravan road, the Commander. One `_note_c54` key added.
+- Names that collided with existing entries were dropped or renamed rather than overwritten. Nothing reworded or removed.
+- VALIDATION OK: all four data files parse; every pre-existing key in cosmetics, accessories, dyes and every other top-level key equals HEAD; the original lines are untouched (pure insertion); every new entry matches its kind's field set; lore_lines, bosses, potions untouched. No floor count stated. ASCII only.
+- CODE WIRING: none new. Pets use existing model paths and scales. Confirm the shop lists read all of cosmetics/accessories by key (no fixed count) and dyes are read as name -> hex.
+- Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).

@@ -718,3 +718,15 @@ Note: the older `setUpTabs()` in app.js is dead code (the nav uses buttons now; 
 - Fix: each gear slot's text block (`.stx`) was built but never appended to its cell, so every slot drew as just an icon. Now attached.
 - Fix: the heroCard crest printed "[object SVGSVGElement]" because the H19 Bestiary's `sigil()` (returns an SVG) silently shadowed the initials helper of the same name. The initials helper is now `initials()`.
 - No CSP change, no new fetch/origin, no write path. `?mock=sheets` now carries last_seen, events and slot names (including a hostile `last_seen` that must be ignored).
+
+## H24 - the finder (find anything, from anywhere)
+
+One search field under the status line, over everything the page already holds in memory: living heroes, the fallen, bands (and their members), the Bestiary's lords and kin, and remembered Chronicle lines (the H14 browser history). Page-local only - no fetch, no origin, no write path, CSP untouched.
+
+- Opens a result by landing on the thing itself: a hero's own card (opened), the grave in The Fallen, the band card, the lord's Bestiary entry (filter reset to All), or the remembered moment in the journal via the H21.4 `#moment-<n>` id.
+- Results address their target by an INTEGER the page owns (`data-fi`, `data-bi`, the moment's `n`). No snapshot string goes into a selector, URL, href, src or style. Every result row is built with `el()`.
+- Honest empty state: says the finder only knows what this browser has seen (the live town + about two days of remembered Chronicle), and says so plainly when the town has not reported at all.
+- Keyboard: `/` focuses the field (never while typing in another input - the guild chat is safe), Up/Down choose, Enter opens, Escape closes (a second Escape clears). Min 2 characters, query capped at 60, control characters stripped.
+- Ranking: names that START with the query first, then word-start, then anywhere; stable across kinds (hero, fallen, band, lord, moment). 6 per kind, 24 total.
+- `beastBook()` was factored out of `renderBestiary` so the Bestiary and the finder read the same list.
+

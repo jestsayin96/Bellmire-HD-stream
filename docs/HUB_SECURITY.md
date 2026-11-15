@@ -581,3 +581,11 @@ No CSP change (meta byte-identical to HEAD), no new URL source, no fetch, no vie
 - Checked: ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 and ?mock=chronicle&away=6 with no page errors;
   the hostile `<img src=x onerror=alert(1)>` line renders as literal text (no `<img>` or `[onerror]` element), also
   as a hero filter value after a store-and-reload; innerHTML/outerHTML/eval counts unchanged from HEAD.
+
+## H24 - the finder (page-local search)
+
+- New input `#finderInput` and results list built ONLY with `el()`/`textContent`; a hero named `<img src=x onerror=alert(1)>` renders as text in the results (checked: 0 `<img>` in the list).
+- No new fetch, origin, storage key, or CSP change (CSP byte-identical). No new innerHTML/outerHTML/insertAdjacentHTML/eval/new Function - grep shows only the two legacy page-owned-constant sites.
+- A result chooses its target by integer (`data-fi`, `data-bi`, `#moment-<n>`); the only selector strings built are `[data-fi="<int>"]` / `[data-bi="<int>"]` from `| 0` integers. Snapshot strings are never used as URL, selector, src, href or style.
+- The `/` shortcut is ignored when the event target is INPUT/TEXTAREA/SELECT/contentEditable, so it cannot steal typing from the guild chat.
+

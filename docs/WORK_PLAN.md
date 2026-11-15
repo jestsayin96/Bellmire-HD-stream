@@ -302,7 +302,14 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       .1 THE POLL IS AN EVENT ON STREAM. It opens on a real occasion (a growth stage, a raid survived,
          a festival - D63a's reason machinery already exists), names the handful of specific things that
          could be upgraded, runs for a stated window, and closes with a result the Chronicle announces.
-      .2 BITS AND CHANNEL POINTS BOTH COUNT, and the rules are stated on screen before anyone spends.
+      .2 BITS AND CHANNEL POINTS BOTH COUNT - BUT NOT THE SAME WAY, AND THIS IS A HARD API FACT, NOT a
+         preference. TWITCH REMOVED BITS VOTING FROM POLLS: Create Poll silently drops
+         `bits_voting_enabled`/`bits_per_vote` and those fields were deleted from the API in Jan 2024.
+         So the CHANNEL-POINTS half can ride a native Twitch poll (`channel_points_voting_enabled`,
+         `channel_points_per_vote`), and the BITS half CANNOT - the game must tally bits itself from
+         cheers and power-up redemptions inside the poll window and add them as weight. Do not try to
+         pass bits to the Polls API; it will accept the call and ignore you, which is worse than failing.
+         State the rules on screen before anyone spends.
          Do NOT create, delete or re-price any Twitch reward - match on the permanent reward ID and the
          bit cost exactly as the existing power-ups do.
       .3 THE UPGRADE IS REAL AND IT SHOWS. The chosen building gains a level, its D64 tier cap rises,
@@ -392,6 +399,56 @@ deletes what OTHER patrons paid for - a viewer who spent 2,000 bits raising the 
 a stranger erase it. A feature that lets one person destroy another's contribution punishes the
 most invested people in the channel. Weigh any future "big destructive event" against that before
 writing it: Bellmire can have disasters and losses, but not ones that cancel a patron's gift.
+
+## MR. E'S ASK, Nov 15 14:28 - THE BOT RUNS THE CHAT AND THE POLLS
+
+- [ ] D69. BELLMIREBRO CONDUCTS THE POLL. Owner: DESKTOP BUILD (twitch_eventsub.gd - it already owns
+      the broadcaster token, the EventSub socket, the send path, the queue and the rate limiting).
+      Pairs with D66 (what a poll DOES) and D67 (the bot speaking unprompted). D66 decides the town's
+      ceiling; this is the machinery that runs the vote and makes chat the place it happens.
+      THE SCOPES ARE ALREADY LIVE - nothing is blocked on Mr. E. The broadcaster token holds
+      channel:manage:polls AND channel:read:polls (re-authorized Nov 15, validated as jestsayin96,
+      user_id 138821183, refresh present). Use them.
+      THE TWITCH POLLS API, AND ITS LIMITS - build to these, do not discover them live:
+        - POST helix/polls: 2-5 choices, title max 60 chars, duration 15-1800 s, ONE active poll at a
+          time per channel. Affiliate/Partner only.
+        - `channel_points_voting_enabled` + `channel_points_per_vote` work and are the supported way to
+          let viewers buy extra weight.
+        - BITS VOTING IS GONE. The endpoint accepts `bits_voting_enabled` and ignores it. Tally bits
+          yourself from cheers in the window.
+        - Subscribe to channel.poll.begin / .progress / .end over EventSub rather than polling the
+          REST endpoint for results.
+      .1 THE BOT OPENS IT. When D66 raises a poll, the bot announces it in chat: the occasion, the
+         choices, how to vote, what it costs, and how long is left. The native poll banner does the
+         voting; the bot does the telling, because the banner says nothing about Bellmire.
+      .2 IT KEEPS CHAT INFORMED WITHOUT FLOODING IT. One opening line, at most one mid-poll nudge, one
+         result. Hard cap, as a constant Mr. E can turn down. A poll every few minutes on a 24/7 stream
+         must never become the thing chat is mostly made of.
+      .3 IT TALLIES BOTH STREAMS AND SHOWS ITS WORKING. Channel-point votes come from the poll; bits
+         come from cheers the game counted in the window. The closing message states both and the
+         winner, so nobody has to trust a number they cannot see.
+      .4 IT CLOSES HONESTLY. Ties, a poll nobody voted in, a poll that ends while the game is mid-raid,
+         and a poll Twitch ends early all need a stated outcome rather than silence.
+      .5 IT NEVER LEAVES ONE OPEN. One active poll per channel is a hard Twitch limit - if the game
+         restarts mid-poll, find the live poll on startup (GET helix/polls) and adopt or end it. A
+         stuck poll blocks every later one.
+      DONE: a capture of a full poll - opened by the bot, voted with channel points, bits counted
+      alongside, closed with both totals stated and the Chronicle naming the winner; the cap proven by
+      forcing a burst; and a restart mid-poll proven to recover rather than deadlock.
+
+- [ ] L69. THE BOT CARRIES THE CHAT, NOT JUST THE COMMANDS. Owner: LAPTOP CODE (chatcmd.gd,
+      data/commands.json). Builds on L68. Mr. E: the bot needs to "handle a lot of the chat".
+      Today a viewer gets an answer only if they type the exact command. Widen it:
+      .1 UNDERSTAND WHAT THEY MEANT. Near-misses, plurals, aliases and plain questions ("how do I
+         join", "what's my hero") should reach the right command instead of silence. Silence reads as
+         a broken bot.
+      .2 ANSWER THE QUESTIONS CHAT ACTUALLY ASKS - the ones a new viewer asks in the first minute:
+         what is this, how do I get a hero, is this a real game, how do I get gear, what are the bits
+         for. H22 wrote the newcomer welcome for the hub; the same answers belong in chat.
+      .3 KNOW WHEN NOT TO SPEAK. A per-user cooldown already exists; keep it, and never answer the same
+         question twice in a row for different people inside the window - say it once to the channel.
+      DONE: a transcript of a busy chat where every reasonable phrasing lands, nothing is answered
+      twice inside the cooldown, and the drift test from L68 still passes.
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 

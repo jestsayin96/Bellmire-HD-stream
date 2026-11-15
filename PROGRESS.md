@@ -5726,3 +5726,12 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - VALIDATION OK: lore_lines.json parses; every pre-existing key and array element is byte-identical to HEAD (list contents are prefix-preserved, new entries appended at the end); every new entry matches its block's shape; items/bosses/potions parse and are untouched. No floor count stated. No non-ASCII characters added.
 - CODE WIRING: none new. The extra lines are plain strings in arrays the picker already reads (begin_alt/pass_alt/during on disasters, appears_alt/while_alt/cleared_alt on camps and the wandering boss). Confirm the picker uses len() of those arrays rather than a fixed 8/16/22 or 4. Still dead until wired, as the existing notes say.
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).
+
+
+## U29 - L64.1-L64.3 director tells a story (HUD, 2026-11-15, auto_director.gd)
+- L64.1 every candidate is scored with a reason note; each cut logs `CUT key shot pri why | top-5 candidates` to the console and user://director.log.
+- L64.2 named shots with own hold windows: establishing 12-30, push 10-24 (slow dolly-in), follow 8-18, shoulder 6-16, hard_cut 4-7 (death: a drop in a delve's live count).
+- L64.3 pace factor 0.6 in a raid / 1.4 in a quiet stretch; no cut inside an open beat (raid, lord, fight) until its max hold; 90 s anti-repeat memory per subject (raid/lord/death exempt) + same-shot penalty; raid rotates raiders.
+- L64.4 unchanged (lane_held / _lane_owns). Not re-verified against pane contents this cycle.
+- Test tools/_l64_test.gd, WINDOWED 1080p, 300 s director clock at 4x: 41 cuts, 0 repeat/hold/why violations, shots shoulder 24 / follow 15 / push 1 / hard_cut 1; raid covered, death was SYNTHETIC (no natural death in window).
+- NOT DONE: the 30-min unattended recording (L64 DONE) and my eyes on the screenshots (folder grant pending, see summary). L64 stays open.

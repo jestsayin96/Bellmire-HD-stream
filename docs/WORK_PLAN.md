@@ -716,12 +716,14 @@ That roughly doubles throughput on the ~570-piece art backlog without slowing Ph
   QUEUE:    D75 (the eight lords) -> D73 (icons for all 454) -> D76 (monster variety). D74 waits
             for Phase RC to close.
 
-THE ONE REAL CONFLICT, and it is not the lock: headless rendering is CPU/GPU heavy and CORRUPTS A
-PERFORMANCE MEASUREMENT. D23 (hold 100+ FPS) and L56 (delve soak) are measured on this same
-machine. The art worker reads RUN_LOCK READ-ONLY before a long batch and, if the live line says
-RUNNING and mentions a soak, FPS, D23 or L56, does file-only work instead and says so. It never
-writes to that file. GAME BUILD AND HUD: you do not need to do anything differently - the art lane
-yields to you, not the other way round.
+MR. E'S RULING (15 Nov 15:40) - THE ART LANE NEVER THROTTLES ITSELF. "I don't care if we go up to
+200 fps, my machine can handle it." So the art worker renders whenever it likes, including while a
+performance soak is running. It does not read RUN_LOCK at all.
+THE MEASUREMENT POINT STILL STANDS, but it cuts the other way and belongs to the GAME BUILD worker,
+not to art: a soak that PASSES while Blender is rendering on the same box is a STRONGER result than
+a clean-room pass, because the game held frame rate under load. Only a FAILED soak is ambiguous -
+if D23 or L56 fails, the game build worker re-runs it when the machine is quiet BEFORE anyone acts
+on the number. Nobody idles waiting for anybody.
 
 SUPERVISOR: merge `art` like any other branch, tick its items, and sync the plan to it each run.
 

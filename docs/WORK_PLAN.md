@@ -2806,7 +2806,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   whitelist-validated value. Measured min contrast 4.60:1. Reviewed: no CSP change, no new fetch, no write path, no new
   innerHTML - the security greps come back empty on the whole diff.
 
-- [ ] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
+- [x] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). Someone arrives mid-raid from a raid
       list, opens the hub, and sees boards and tabs for a world they know nothing about. The Commands
       tab already lists WHAT TO TYPE; this item is about WHY, and it is not a wall of text. Staged:
@@ -2830,6 +2830,13 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       hostile-name test still pass.
 
 
+      RESULT (supervisor 2026-11-15 14:05): shipped on `hub` da58b25 and merged. A dismissible
+      welcome card: what Bellmire is, ONE live line built from the snapshot the page already holds
+      (town stage + heroes on the roll + bands abroad + the latest Chronicle word), three doors to
+      Commands/Chronicle/die, hidden in Night watch, dismissal remembered per browser. SECURITY
+      REVIEW PASS: no new innerHTML (the two legacy page-owned sites are untouched), every snapshot
+      value through el()/textContent, door ids matched against TABS before acting, no new fetch or
+      origin, no CSP change, no viewer write path, honest empty/stale/failed states reused.
 # Phase AG - THE FIGHT, THE LOG AND THE TOWN'S OWN VOICE (supervisor, 2026-11-15 10:58 CT). IDs frozen as ever.
 # Written to the "HOW BIG AN ITEM SHOULD BE" bar. D61 finally builds the L31 leftovers - and it builds them
 # where the plan has always said they belong, with THEIR OWNER, not by handing the HUD worker files it does

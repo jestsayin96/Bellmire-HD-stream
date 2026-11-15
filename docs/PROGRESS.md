@@ -1426,3 +1426,24 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   D20B_TEST PASS; TOWNWALK in_solid 0/17081 raid 0/8837 PASS; delve rc 0, 0 SCRIPT ERROR. Not re-run: D22b music test
   (windowed, long) - the new mood only engages while a festival is on.
 - OPEN: a short clip of one festival start-to-finish; C6 words (shape the game reads is noted under C6 in WORK_PLAN).
+
+## D-cycle - D63b the festival talks in C6's words + the clip, 2026-11-15 ~13:30 CT (game build)
+- Item: D63 (first open DESKTOP-owned item; open for the clip and the C6 words). TICKED.
+- Found C6 on origin/content (bac1808, 365 lines) in a different shape from the one D63a guessed (reasons.* /
+  viewer_paid.* / notables {who,line}). scripts/town.gd: `_fest_pool` resolves C6's shape first, the D63a shape second,
+  code lines last; new `_fest_talk` - crowd/toast bubbles over festival-goers (Townsfolk.say_once) and a rotating
+  Chronicle line stalls -> notable -> E3PO. scripts/townsfolk.gd: bubble creation factored into `_shout_label`,
+  `say_once(line)` added (does not make anyone a crier). scripts/notables.gd: `e3po_line(line)`. Backups *.bak_d63b.
+- TEST tools/_d63b_talk.gd: D63B_TALK OK 17/17 with content's real lore_lines.json (env D63_LORE) AND with the inline
+  C6-shape fixture (every reason opening from its C6 key, 12 bubbles all C6 crowd/toast, stall+notable+E3PO in the
+  Chronicle, crowd kept off it, E3PO bubble, C6 closing; paid one opens/talks/closes from viewer_paid naming the buyer).
+  tools/_d63_fest.gd: D63_FEST OK on 2 of 2 re-runs after a test fix - A6 had failed 1 run in 3 (hero at 17 m, still on
+  its route: the D58 stroll is slower than the 45 s window); the check now waits up to 30 s more while the hero is still
+  routing, and A10 finds the closing by its trade tally so C6 closings (no word "festival") still pass.
+- CLIP tools/_d63_clip.gd -> renders/cycles/d63/d63_festival_clip.mp4 (75 s, 1152x648, not committed). Looked at a 3x3
+  contact sheet: dressed square, crowd bubbles ("Gate's shut and the cup's full!"), C6 lines in the Chronicle, gift at
+  dusk lit gold and named. Camera clips a roof twice; window stayed 1152x648 under the movie writer.
+- GATES: parse 0 errors (x2); OFFFLOOR 0/1317 INPROP 0 MON_INPROP 0/117; TWITCH_PARSE OK; TOWNWALK in_solid 3/16349
+  (0.018%) raid 0/8909 PASS; delve 0 SCRIPT ERROR.
+- FOR THE SUPERVISOR: merge `content` (C6) -> main -> laptop to make the words live; no code change needed after.
+

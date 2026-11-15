@@ -3428,9 +3428,8 @@ func tag_feed(kind: String, who: Array = []) -> void:
 ## treasury while it runs) and it calls a caravan in (a festival is a good hour for
 ## one - D39's chance, not a new mechanic). A festival a viewer PAID for is theirs:
 ## named in the Chronicle, longer, and dressed bigger and in gold.
-## Words: lore_lines.json "festivals" (C6) when the content writer has written it -
-## openings.<reason>, closings, gift_openings, gift_closings, with {who} {buyer}
-## {town} - else the short fallbacks below. All reads go through _fest_pick.
+## Words: lore_lines.json "festivals" (C6, read by _fest_pool - see D63b below),
+## with {who} {buyer} {town}; else the short fallbacks. All reads go through _fest_pick.
 var fest_reason := ""            # market / raid / level / hero / gift
 var fest_who: Array = []         # the heroes it is for (D60 `who`)
 var fest_buyer := ""             # D63.7: the viewer who paid for it
@@ -3458,34 +3457,122 @@ const FEST_OPEN := {
 const FEST_CLOSE := ["The festival in the square winds down; folk drift back to their work."]
 const FEST_GIFT_CLOSE := ["The lanterns of {buyer}'s festival burn down, and Bellmire will talk of it for days."]
 
-func _fest_pick(key: String, sub := "") -> String:
-    if not _fest_lore_ok:
-        _fest_lore_ok = true
-        var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
-        if f:
-            var d = JSON.parse_string(f.get_as_text())
-            if d is Dictionary and (d as Dictionary).get("festivals") is Dictionary:
-                _fest_lore = d["festivals"]
-    var pool: Array = []
-    var src = _fest_lore.get(key)
-    if sub != "" and src is Dictionary:
-        src = (src as Dictionary).get(sub)
+## D63b: C6 shipped in its own shape - reasons{harvest, raid_survived, lord_felled,
+## hero_home, town_level, viewer_gift}, crowd, toasts, stalls, notables[{who,line}],
+## e3po, closings, and viewer_paid{openings, crowd, toasts, stalls, e3po, notables,
+## closings} carrying {buyer}. The game's reasons map onto it (the timed market
+## festival is the harvest feast). The D63a shape (openings.<reason>, gift_*) is
+## still read, and the short code lines below are the last fallback.
+const FEST_REASON_KEY := {"market": "harvest", "raid": "raid_survived", "level": "town_level",
+    "hero": "hero_home", "gift": "viewer_gift", "lord": "lord_felled"}
+const FEST_CROWD := ["Make way for the dancers!", "Another round over here!"]
+const FEST_TOAST := ["To Bellmire!", "To the Watch, and the wall!"]
+
+func _fest_load() -> void:
+    if _fest_lore_ok:
+        return
+    _fest_lore_ok = true
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f:
+        var d = JSON.parse_string(f.get_as_text())
+        if d is Dictionary and (d as Dictionary).get("festivals") is Dictionary:
+            _fest_lore = d["festivals"]
+
+func _fest_arr(src) -> Array:
+    var out: Array = []
     if src is Array:
-        for s in src:
-            if s is String and String(s) != "":
-                pool.append(s)
-    if pool.is_empty():
-        match key:
-            "openings": pool = FEST_OPEN.get(sub, FEST_OPEN["market"])
-            "closings": pool = FEST_CLOSE
-            "gift_openings": pool = FEST_OPEN["gift"]
-            "gift_closings": pool = FEST_GIFT_CLOSE
+        for x in src:
+            if x is String and String(x) != "":
+                out.append(x)
+            elif x is Dictionary and String((x as Dictionary).get("line", "")) != "":
+                out.append(String(x["line"]))     # notables: {who, line}
+    return out
+
+func _fest_dig(path: Array):
+    var at = _fest_lore
+    for k in path:
+        if not (at is Dictionary):
+            return null
+        at = (at as Dictionary).get(k)
+    return at
+
+## the pool for one kind of line. A paid festival reads viewer_paid first.
+func _fest_pool(key: String, sub := "") -> Array:
+    _fest_load()
+    var vp := fest_reason == "gift" or key.begins_with("gift_")
+    var tries: Array = []
+    match key:
+        "openings":
+            tries = [["reasons", FEST_REASON_KEY.get(sub, "harvest")], ["openings", sub]]
+        "gift_openings":
+            tries = [["viewer_paid", "openings"], ["gift_openings"], ["reasons", "viewer_gift"]]
+        "closings":
+            tries = [["closings"]]
+        "gift_closings":
+            tries = [["viewer_paid", "closings"], ["gift_closings"], ["closings"]]
+        _:     # crowd, toasts, stalls, notables, e3po
+            tries = ([["viewer_paid", key]] if vp else []) + [[key]]
+    for t in tries:
+        var pool := _fest_arr(_fest_dig(t))
+        if not pool.is_empty():
+            return pool
+    match key:
+        "openings": return FEST_OPEN.get(sub, FEST_OPEN["market"])
+        "closings": return FEST_CLOSE
+        "gift_openings": return FEST_OPEN["gift"]
+        "gift_closings": return FEST_GIFT_CLOSE
+        "crowd": return FEST_CROWD
+        "toasts": return FEST_TOAST
+    return []
+
+func _fest_pick(key: String, sub := "") -> String:
+    var pool := _fest_pool(key, sub)
     if pool.is_empty():
         return ""
     var who := ", ".join(fest_who.map(func(x) -> String: return str(x)))
     var tn: String = String(economy.get("town_name")) if economy else "Bellmire"
     return String(pool[randi() % pool.size()]).format({"who": who if who != "" else "a hero",
         "buyer": fest_buyer if fest_buyer != "" else "a generous stranger", "town": tn})
+
+## D63b: the festival TALKS while it runs. Festival-goers in the square raise a
+## cup in their own bubble (crowd / toasts - never the feed, so the Chronicle is
+## not flooded); every 16-34 s the Chronicle gets one line that rotates stalls ->
+## a notable -> E3PO (who says his in his own bubble too).
+var fest_barks := 0
+var fest_news := 0
+var _fest_bark_t := 2.0
+var _fest_news_t := 12.0
+var _fest_news_i := 0
+const FEST_NEWS_ORDER := ["stalls", "notables", "e3po"]
+
+func _fest_talk(delta: float) -> void:
+    _fest_bark_t -= delta
+    if _fest_bark_t <= 0.0:
+        _fest_bark_t = randf_range(4.0, 7.0) if fest_big else randf_range(6.0, 10.0)
+        var near: Array = []
+        for p in people:
+            if is_instance_valid(p) and p.visible and not p.inside and p.rank < 0 \
+                    and p.shout_lines.is_empty() and p.global_position.distance_to(festival_at) < 22.0:
+                near.append(p)
+        if not near.is_empty():
+            var ln := _fest_pick("toasts" if randf() < 0.4 else "crowd")
+            if ln != "":
+                (near[randi() % near.size()] as Townsfolk).say_once(ln)
+                fest_barks += 1
+    _fest_news_t -= delta
+    if _fest_news_t <= 0.0:
+        _fest_news_t = randf_range(16.0, 24.0) if fest_big else randf_range(24.0, 34.0)
+        var k: String = FEST_NEWS_ORDER[_fest_news_i % FEST_NEWS_ORDER.size()]
+        _fest_news_i += 1
+        var ln := _fest_pick(k)
+        if ln == "":
+            return
+        if k == "e3po" and notables and notables.has_method("e3po_line") and notables.e3po_line(ln):
+            pass
+        else:
+            feed.append(ln)
+        tag_feed("festival", fest_who)
+        fest_news += 1
 
 ## Begin a festival. `who` = hero names it is for; `buyer` = a viewer who paid
 ## (a gift is never refused: under a raid it waits, at night it is lit). A caused
@@ -3525,6 +3612,9 @@ func start_festival(reason: String, who: Array = [], buyer := "") -> bool:
     fest_trades = 0
     fest_gold = 0
     _fest_trade_t = 4.0
+    _fest_bark_t = 2.0
+    _fest_news_t = 8.0 if paid else 12.0
+    _fest_news_i = 0
     var ln: Array = FEST_LEN.get(reason, FEST_LEN["market"])
     _fest_left = randf_range(float(ln[0]), float(ln[1]))
     _fest_t = randf_range(260.0, 420.0)     # a caused festival replaces the next timed one
@@ -3572,6 +3662,7 @@ func _festival_pass(delta: float) -> void:
     if festival:
         _fest_left -= delta
         _fest_trade(delta)
+        _fest_talk(delta)
         _fest_light_pass()
         if _fest_left <= 0.0 or is_raid_on():
             _end_festival()

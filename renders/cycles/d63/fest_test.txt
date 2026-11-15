@@ -3,23 +3,23 @@ PASS A0 market festival starts
 PASS A1 square dressed (204 pennants, 21 nodes)
 PASS A2 a caravan is called in
 PASS A3 music lifts to festival (mood=festival)
-PASS A4 the crowd does things { "fest_haggle": 5, "fest_dance": 40, "fest_drink": 14, "fest_cheer": 9 }
+PASS A4 the crowd does things { "fest_cheer": 12, "fest_haggle": 8, "fest_dance": 51, "fest_drink": 7 }
 PASS A5 notables sent to the square (8)
-PASS A6 the far hero joined the festival (12.0 m from the square)
-PASS A7 heroes act at the festival (3)
-PASS A8 goods sold (3 lots, 3 gold)
+PASS A6 the far hero joined the festival (14.0 m from the square)
+PASS A7 heroes act at the festival (2)
+PASS A8 goods sold (4 lots, 4 gold)
 PASS A9 festival over, dressing struck
-PASS A10 closing line reports the trade: 'The festival in the square winds down; folk drift back to their work.  (3 lots sold on the square, 3 gold to the treasury)'
+PASS A10 closing line reports the trade: 'The festival in the square winds down; folk drift back to their work.  (4 lots sold on the square, 4 gold to the treasury)'
 PASS A11 music returns to the day bed (mood=day)
 PASS B1 raid-caused festival refused inside FEST_GAP
 PASS B2 level festival starts
 PASS B3 its line names the reason: 'Bellmire is a hamlet now, and the square says so with music and bunting.'
 PASS C1 a paid festival runs and is big
-PASS C2 it lasts longer than any timed one (172 s)
+PASS C2 it lasts longer than any timed one (168 s)
 PASS C3 more dressing than the baseline (306 vs 204)
 PASS C4 every lantern lit for a gift (7)
 PASS C5 named for the buyer, sanitised and capped: 'BadBuyertownbWithAVeryLon'
-PASS C6 the Chronicle names them: Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked. | D63Alda is given a Clearsight Drops from the grateful apothecary. | Blessed supplies arrive - the stores overflow with fresh goods! | The Commander says nothing and hands over a flask, which says plenty. | The Commander pats the wall, as if asking it to be patient with you too. | Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime. | A Festival of Plenty, the gift of BadBuyertownbWithAVeryLon! The square is strung with gold and the town drinks their health. | A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!
+PASS C6 the Chronicle names them: Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked. | D63Alda is given a The Smokehouse Tonic from the grateful apothecary. | Blessed supplies arrive - the stores overflow with fresh goods! | 'Half a result is still a result. Take the half.' | The Commander writes it down small enough to pretend it did not happen. | Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime. | A Festival of Plenty, the gift of BadBuyertownbWithAVeryLon! The square is strung with gold and the town drinks their health. | A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!
 PASS D1 a gift under a raid waits (raid live=true)
 PASS D2 the waiting gift starts once the raid is driven off
 fest_log [["market", false, ""], ["level", false, ""], ["gift", true, "BadBuyertownbWithAVeryLon"], ["gift", true, "D63Patron"]]

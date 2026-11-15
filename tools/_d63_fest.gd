@@ -90,7 +90,10 @@ func _process(_d: float) -> bool:
 					print("D63DBG t=%d d=%.1f route=%d stay=%s errand='%s' idle_t=%.1f home=%s" % [_f - _mark,
 						Vector2(hb.global_position.x - _mk.x, hb.global_position.z - _mk.z).length(),
 						hb._route.size(), str(hb.stay), hb.errand, float(hb.get("_idle_t")), str(hb.get("_idle_home"))])
-			if _f - _mark == 2700:          # ~45 s at 60 fps
+			# ~45 s at 60 fps; a strolling hero (D58 gait) still on the road gets up to 30 s more to arrive
+			var hb2: HeroBody = (_t.get("heroes") as Dictionary).get(_far_uid)
+			var dnow := Vector2(hb2.global_position.x - _mk.x, hb2.global_position.z - _mk.z).length() if hb2 else 999.0
+			if _f - _mark >= 2700 and (dnow < 14.0 or _f - _mark >= 4500 or hb2 == null or hb2._route.is_empty()):
 				var mood := Sfx.live().mood if Sfx.live() else "?"
 				_check("A3 music lifts to festival (mood=%s)" % mood, mood == "festival")
 				var kinds := {}
@@ -121,7 +124,7 @@ func _process(_d: float) -> bool:
 				var lines := _feed_since(_feed0)
 				var closing := ""
 				for l in lines:
-					if "winds down" in String(l) or "festival" in String(l).to_lower():
+					if "winds down" in String(l) or "festival" in String(l).to_lower() or "lots sold" in String(l):
 						closing = String(l)
 				_check("A10 closing line reports the trade: '%s'" % closing, "lots sold" in closing)
 			if _f - _mark == 900:

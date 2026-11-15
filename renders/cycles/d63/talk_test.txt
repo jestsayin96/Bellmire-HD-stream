@@ -1,0 +1,18 @@
+source fixture
+PASS 0 C6 pool loaded from fixture (8 keys)
+PASS A market opens from reasons.harvest: FX harvest
+PASS A raid opens from reasons.raid_survived: FX raid
+PASS A level opens from reasons.town_level: FX level
+PASS A hero opens from reasons.hero_home: FX hero a hero
+PASS B0 market festival starts
+PASS B1 its Chronicle line is a C6 harvest opening
+PASS B2 festival-goers raised 12 lines in their own bubbles
+PASS B3 every bubble is a C6 crowd/toast line (10 seen)
+PASS B4 the Chronicle got a stall, a notable and E3PO (true/true/true, news=8)
+PASS B5 crowd lines stay OFF the Chronicle
+PASS B6 E3PO says his line in his own bubble
+PASS B7 it closes on a C6 closing
+PASS C0 a viewer's festival starts
+PASS C1 opens from viewer_paid.openings naming the buyer: FXV open PatronX
+PASS C2 the paid festival's talk reads viewer_paid
+PASS C3 closes on viewer_paid.closings

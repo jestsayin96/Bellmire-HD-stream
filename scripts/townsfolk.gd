@@ -312,6 +312,31 @@ func _cry(delta: float) -> void:
     if _shout_t > 0.0:
         return
     _shout_t = randf_range(9.0, 16.0)
+    _shout_label()
+    _shout.text = "\"" + String(shout_lines[randi() % shout_lines.size()]) + "\""
+    _shout.visible = true
+    UiTheme.fit_plate(_shout)
+    Rig.play(_anim, "Cheer")
+    _cry_voice_and_hide()
+
+## D63b: one line in the shout bubble, once (a festival-goer's toast) - does NOT
+## make them a crier (shout_lines stays empty, so seats and voices are unchanged)
+var said_once := 0
+func say_once(line: String) -> void:
+    if line == "" or not shout_lines.is_empty():
+        return
+    _shout_label()
+    _shout.text = "\"" + line + "\""
+    _shout.visible = true
+    UiTheme.fit_plate(_shout)
+    said_once += 1
+    var st := create_tween()
+    st.tween_interval(4.5)
+    st.tween_callback(func() -> void:
+        if is_instance_valid(_shout) and shout_lines.is_empty():
+            _shout.visible = false)
+
+func _shout_label() -> void:
     if _shout == null:
         _shout = Label3D.new()
         _shout.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -325,10 +350,8 @@ func _cry(delta: float) -> void:
         _shout.position = Vector3(0, 3.1 if notable_title == "" else 3.75, 0)
         add_child(_shout)
         UiTheme.style_bubble(_shout)       # laptop L16 phone test (Mr. E): ink on a parchment plate, ~28 px at 1080p
-    _shout.text = "\"" + String(shout_lines[randi() % shout_lines.size()]) + "\""
-    _shout.visible = true
-    UiTheme.fit_plate(_shout)
-    Rig.play(_anim, "Cheer")
+
+func _cry_voice_and_hide() -> void:
     var now := Time.get_ticks_msec()
     if randf() < 0.5 and now - _voice_last >= VOICE_GAP:   # S1: every other cry is shouted out loud (same town-wide gap)
         _voice_last = now

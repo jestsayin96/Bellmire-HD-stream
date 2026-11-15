@@ -167,9 +167,12 @@ func check_town_level(founding := false) -> int:
     town_name = String(TOWN_LEVELS[town_level - 1]["name"])
     # WHAT THE TOWN CAN MAKE (old sim.sync_unlocks): the smiths forge up to the
     # town's own tier - one static for every roll, the viewers' and the band's
-    Roster.town_tier = Roster.tier_for_town(town_level)
-    if town.has_method("show_tiers"):
-        town.call("show_tiers", Roster.town_tier)
+    # D64: that ceiling is now a property of the SMITHY (a building with a level), not of the
+    # town at large. Growth still grants the smithy what the town can host; D66's viewer poll
+    # adds levels on top through raise_shop(). The counter honours Roster.town_tier, which is
+    # set from the smithy's level and nothing else.
+    shop_grown["smithy"] = Roster.tier_for_town(town_level)
+    _apply_shop_caps()
     # D3: Bellmire's buildings follow its level (scripts/growth.gd)
     if town.has_method("show_level"):
         town.call("show_level", town_level, founding)
@@ -389,6 +392,7 @@ func _end_of_day() -> void:
         feed.append("The coffer is empty — wages go unpaid.")
         _tag("treasury")
     check_town_level()
+    _counter_watch()
     var nxt := next_level_at()
     var standing := ("standing %d/%d" % [town_score(), nxt]) if nxt > 0 else ("standing %d, at its height" % town_score())
     feed.append("Day %d begins  —  %d souls, %d gold, %s (lvl %d, %s)" % [day, pop, treasury, town_name, town_level, standing])
@@ -603,3 +607,94 @@ func _maybe_disaster() -> void:
     var pool: Array = DIS_SPECS.keys()
     if not pool.is_empty():
         trigger_disaster(String(pool[randi() % pool.size()]))
+
+## ---------------------------------------------- D64: a shop's level decides what it sells
+## Mr. E's ruling (Nov 15 11:46): "a shop that is level 1 isn't going to sell epic or legendary
+## equipment". Tier availability is a property of the BUILDING, not the buyer.
+##   - RARITY names the existing gear ladders (gear.gd/roster.gd WEAPONS + ARMOUR, read only - no
+##     cost, atk, hp, ac or dice value changes). Index = tier: 0 is the unarmed/unarmoured
+##     fallback, 1-4 are what a smith can make, 5 (scarforged / scarwoven mail) stays FOUND-only.
+##   - A shop's level IS the highest tier it will sell (level 1 sells common and nothing else).
+##   - shop_grown is what the town's growth grants the building (today's curve, unchanged, so
+##     nothing regresses); shop_raised is what viewers paid for (D66 calls raise_shop). The
+##     level is the sum, clamped to what a smith can make at all.
+const RARITY := ["none", "common", "uncommon", "rare", "epic", "legendary"]
+const SHOP_MAX_LEVEL := 4
+const SHOP_NAMES := {"smithy": "the smithy"}
+var shop_grown := {"smithy": 1}
+var shop_raised := {"smithy": 0}
+var _counter_told := {}           # "user_id|level" -> true: the counter says it once per level
+var counter_refusals := 0         # tests: times a richer hero was turned away by the cap
+
+static func rarity_of(tier: int) -> String:
+    return String(RARITY[clampi(tier, 0, RARITY.size() - 1)])
+
+func shop_level(key := "smithy") -> int:
+    return clampi(int(shop_grown.get(key, 1)) + int(shop_raised.get(key, 0)), 1, SHOP_MAX_LEVEL)
+
+## the best tier this shop will ever put on the counter
+func shop_cap(key := "smithy") -> int:
+    return shop_level(key)
+
+func shop_sells_to(key := "smithy") -> String:
+    return rarity_of(shop_cap(key))
+
+func _apply_shop_caps() -> void:
+    Roster.town_tier = shop_cap("smithy")
+    if town and town.has_method("show_tiers"):
+        town.call("show_tiers", Roster.town_tier, shop_level("smithy"))
+
+## D66's entry point: an event raises a named shop. Returns the levels actually gained.
+func raise_shop(key: String, by := 1, who := "") -> int:
+    if not SHOP_NAMES.has(key):
+        return 0
+    var was := shop_level(key)
+    shop_raised[key] = int(shop_raised.get(key, 0)) + maxi(by, 0)
+    var now := shop_level(key)
+    shop_raised[key] = now - int(shop_grown.get(key, 1))   # never bank levels past the top
+    if now == was:
+        return 0
+    _apply_shop_caps()
+    if town:
+        var feed: Array = town.get("feed")
+        var nm := String(SHOP_NAMES[key])
+        var by_who := (" - paid for by %s" % who) if who != "" else ""
+        feed.append("%s is raised to level %d: it will now sell %s goods%s." % [nm.capitalize(), now, rarity_of(shop_cap(key)), by_who])
+        _tag("shop", [who] if who != "" else [])
+    return now - was
+
+## The counter, once a day: a hero who has the gold for the next piece but stands at a shop
+## that is not allowed to sell it is told so plainly in the Chronicle, instead of the smith
+## silently handing over nothing. Read-only on the roster (laptop-owned).
+func _counter_watch() -> void:
+    if town == null:
+        return
+    var r = town.get("roster")
+    if r == null:
+        return
+    var feed: Array = town.get("feed")
+    var cap := shop_cap("smithy")
+    var lv := shop_level("smithy")
+    for uid in (r.heroes as Dictionary).keys():
+        var h: Dictionary = r.heroes[uid]
+        if not bool(h.get("alive", true)):
+            continue
+        var w := int(h.get("weapon", 0))
+        var nxt := w + 1
+        if nxt >= Roster.WEAPONS.size() or bool((Roster.WEAPONS[nxt] as Dictionary).get("found", false)):
+            continue
+        if nxt <= cap:
+            continue                  # the shop may sell it; whether they buy is the forge's business
+        var price: int = r.cost_for(h, int((Roster.WEAPONS[nxt] as Dictionary)["cost"]))
+        if int(h.get("gold", 0)) < price + Roster.KIT_RESERVE:
+            continue                  # not a richer hero - the cap is not what stops them
+        var key := "%s|%d" % [uid, lv]
+        if _counter_told.has(key):
+            continue
+        _counter_told[key] = true
+        counter_refusals += 1
+        var best: Dictionary = Roster.WEAPONS[cap]
+        var nm := String(h.get("name", "A hero"))
+        feed.append("%s stands at the smithy with %d gold for %s steel, but a level %d smithy sells nothing past %s - %s is the best it will make." \
+            % [nm, int(h.get("gold", 0)), rarity_of(nxt), lv, rarity_of(cap), String(best["name"])])
+        _tag("shop", [nm])

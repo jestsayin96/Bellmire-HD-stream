@@ -1170,6 +1170,10 @@ ol.chron.cj { grid-template-columns: minmax(0, 1fr); }
 .cep.open > .cep-head::before { top: 1.2em; left: 11px; border-left-color: transparent; border-top-color: var(--teal-ink); }
 .cep-title { font-weight: 700; color: var(--ink-red); overflow-wrap: anywhere; }
 .cep-when { font-size: .78rem; color: var(--ink-soft); font-weight: 600; white-space: nowrap; align-self: center; }
+.cep-basis { grid-column: 1 / -1; font-size: .75rem; color: var(--ink-soft); font-style: italic; }
+.cwho, .cinf { margin-left: 8px; font-size: .75rem; color: var(--ink-soft); font-style: italic; overflow-wrap: anywhere; }
+.cinf { font-weight: 700; }
+.plife .pinf { font-size: .75rem; color: var(--ink-soft); font-style: italic; font-weight: 700; white-space: nowrap; }
 .cep-sense { grid-column: 1 / -1; font-size: .9rem; font-style: italic; color: var(--ink-2); }
 .cep-list { list-style: none; margin: 0; padding: 2px 8px 8px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
 .cep-list[hidden] { display: none; }

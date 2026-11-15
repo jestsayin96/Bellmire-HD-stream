@@ -1154,3 +1154,38 @@ ol.ladder { list-style: none; margin: 0; padding: 0; }
 .gsheet .charsheet { margin-top: 8px; background: var(--parch); color: var(--ink); border-radius: 8px; border: 1px solid var(--edge); padding: 12px 14px 14px; }
 @media (max-width: 460px) { .slots { grid-template-columns: 1fr; } .charsheet .sid { flex-wrap: wrap; } }
 @media (min-width: 700px) { .charsheet .stats.combat { grid-template-columns: repeat(6, 1fr); } }
+
+
+/* ---- H21: the campaign journal - episodes, filters, while-you-were-away, moment links ---- */
+ol.chron.cj { grid-template-columns: minmax(0, 1fr); }
+.ctools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 12px; }
+.ctools label { display: inline-flex; align-items: center; gap: 7px; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); }
+.ctools select { font: inherit; font-size: .92rem; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--ink); background: var(--parch-hi); border: 1px solid var(--edge-2); border-radius: 7px; padding: 4px 8px; min-height: 34px; max-width: 14rem; }
+.ctools select:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.cep { list-style: none; border: 1px solid var(--edge-2); border-radius: 9px; background: rgba(255,255,255,.16); overflow: hidden; }
+.cep-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; width: 100%; text-align: left; position: relative; font: inherit; color: var(--ink); background: transparent; border: 0; padding: 9px 12px 9px 32px; cursor: pointer; }
+.cep-head:hover { background: rgba(35,166,160,.08); }
+.cep-head:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: -2px; }
+.cep-head::before { content: ""; position: absolute; left: 13px; top: 1.05em; border: 5px solid transparent; border-left-color: var(--teal-ink); }
+.cep.open > .cep-head::before { top: 1.2em; left: 11px; border-left-color: transparent; border-top-color: var(--teal-ink); }
+.cep-title { font-weight: 700; color: var(--ink-red); overflow-wrap: anywhere; }
+.cep-when { font-size: .78rem; color: var(--ink-soft); font-weight: 600; white-space: nowrap; align-self: center; }
+.cep-sense { grid-column: 1 / -1; font-size: .9rem; font-style: italic; color: var(--ink-2); }
+.cep-list { list-style: none; margin: 0; padding: 2px 8px 8px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.cep-list[hidden] { display: none; }
+.cmoment { margin-left: 8px; font: inherit; font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--teal-ink); background: transparent; border: 1px solid var(--edge-2); border-radius: 999px; padding: 1px 9px; min-height: 26px; cursor: pointer; }
+.cmoment:hover { border-color: var(--teal); }
+.cmoment:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.centry.focus { outline: 2px solid var(--gold); outline-offset: 2px; animation: none; }
+.away { margin: 0 0 14px; padding: 10px 14px; background: #f2e2bd; border: 1px solid var(--edge-2); border-left: 4px solid var(--gold); border-radius: 8px; }
+.away.hide { display: none; }
+.away-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.away-head strong { color: var(--ink-red); }
+.away-gap { color: var(--ink-soft); font-size: .85rem; margin-right: auto; }
+.away-sum { margin: 6px 0 4px; }
+.away-list { margin: 4px 0 6px; padding-left: 1.1em; }
+.away-list li { margin: 2px 0; overflow-wrap: anywhere; }
+.away-t { color: var(--ink-soft); font-size: .8rem; font-weight: 700; margin-right: .5em; }
+.away-note { margin: 6px 0 0; font-size: .82rem; font-style: italic; color: var(--ink-soft); }
+@media (min-width: 720px) { .cep-list { grid-template-columns: 1fr 1fr; } }
+html.overlay .away, html.overlay .ctools, html.overlay .cmoment { display: none; }

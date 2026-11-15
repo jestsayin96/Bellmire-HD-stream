@@ -949,7 +949,7 @@ html.overlay #bands { display: none !important; }
    viewport tall. Colour and type stay in the house palette - this is layout,
    not a repaint. No transition is added, so prefers-reduced-motion is
    honoured by construction. */
-.wrap[data-tabbed="1"] main > section.tab-hidden { display: none; }
+.wrap[data-tabbed="1"] main section.tab-hidden { display: none; }
 .wrap[data-tabbed="1"] main > .duo { display: block; }
 .wrap[data-tabbed="1"] main > .duo > section { margin-top: 0; }
 .wrap[data-tabbed="1"] nav a[aria-selected="true"] {

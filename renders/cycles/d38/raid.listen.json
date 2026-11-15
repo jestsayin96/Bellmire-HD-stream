@@ -1,0 +1,1073 @@
+{
+  "meta": {
+    "name": "bellmire_raid",
+    "role": "music",
+    "requestedMood": "hype",
+    "seed": 3414,
+    "bpm": 80,
+    "bars": 16,
+    "loopSeconds": 48,
+    "sampleRate": 44100,
+    "appVersion": "3.5.2",
+    "timestamp": "2026-11-15T12:30:14.972Z"
+  },
+  "musical": {
+    "key": {
+      "root": 4,
+      "rootName": "E",
+      "scale": "minor"
+    },
+    "instruments": [
+      {
+        "trackName": "kick",
+        "voice": "kick808",
+        "kind": "drum",
+        "notes": 52
+      },
+      {
+        "trackName": "snare",
+        "voice": "snare",
+        "kind": "drum",
+        "notes": 39
+      },
+      {
+        "trackName": "hat",
+        "voice": "hatClosed",
+        "kind": "drum",
+        "notes": 104
+      },
+      {
+        "trackName": "bass",
+        "voice": "sub808",
+        "kind": "synth",
+        "notes": 104,
+        "wave": "sawtooth"
+      },
+      {
+        "trackName": "lead",
+        "voice": "brass",
+        "kind": "synth",
+        "notes": 88,
+        "wave": "sawtooth"
+      },
+      {
+        "trackName": "harmony",
+        "voice": "strings",
+        "kind": "synth",
+        "notes": 48,
+        "wave": "triangle"
+      }
+    ],
+    "notesPerBar": [
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      27,
+      15,
+      15,
+      15,
+      27,
+      7,
+      7,
+      7,
+      15
+    ],
+    "notesPerBarMean": 15,
+    "synthNoteDensity": 5,
+    "drumHitsPerBar": 12.1875,
+    "drumVoiceCounts": {
+      "hatClosed": 104,
+      "kick808": 52,
+      "snare": 39
+    },
+    "rhythmicDensity": 9.0625,
+    "onsetGridShare": {
+      "quarter": 0.5517241379310345,
+      "eighthOffbeat": 0.3816091954022989,
+      "sixteenth": 0.06666666666666667
+    },
+    "rhythmRegularity": 0.5333333333333333,
+    "pitchRange": {
+      "minMidi": 35,
+      "maxMidi": 81,
+      "minName": "B1",
+      "maxName": "A5",
+      "spanSemitones": 46,
+      "medianMidi": 62,
+      "register": "mid"
+    },
+    "pitchClassHistogram": [
+      0.14583333333333334,
+      0,
+      0.31666666666666665,
+      0,
+      0.1625,
+      0,
+      0.09166666666666666,
+      0.0625,
+      0,
+      0.125,
+      0,
+      0.09583333333333334
+    ],
+    "inKeyShare": 1
+  },
+  "loudness": {
+    "integratedLufs": -17.98357299041762,
+    "truePeakDbtp": -1.2982929542584145,
+    "samplePeakDbfs": -1.3000000932331663,
+    "shortTerm": [
+      {
+        "t": 0,
+        "lufs": -18.08847613338757
+      },
+      {
+        "t": 1,
+        "lufs": -18.103685651360784
+      },
+      {
+        "t": 2,
+        "lufs": -18.06423456446206
+      },
+      {
+        "t": 3,
+        "lufs": -17.83867802242136
+      },
+      {
+        "t": 4,
+        "lufs": -17.850392150191823
+      },
+      {
+        "t": 5,
+        "lufs": -17.995447326855338
+      },
+      {
+        "t": 6,
+        "lufs": -17.8935343673648
+      },
+      {
+        "t": 7,
+        "lufs": -18.073608454895698
+      },
+      {
+        "t": 8,
+        "lufs": -17.88278935420658
+      },
+      {
+        "t": 9,
+        "lufs": -18.205268094639777
+      },
+      {
+        "t": 10,
+        "lufs": -17.980810634712615
+      },
+      {
+        "t": 11,
+        "lufs": -18.129993710076697
+      },
+      {
+        "t": 12,
+        "lufs": -17.800705593567102
+      },
+      {
+        "t": 13,
+        "lufs": -17.838314040378698
+      },
+      {
+        "t": 14,
+        "lufs": -17.76999284647623
+      },
+      {
+        "t": 15,
+        "lufs": -18.11568631040353
+      },
+      {
+        "t": 16,
+        "lufs": -18.121621337046584
+      },
+      {
+        "t": 17,
+        "lufs": -18.085603524542666
+      },
+      {
+        "t": 18,
+        "lufs": -17.804876358447853
+      },
+      {
+        "t": 19,
+        "lufs": -16.911130256069196
+      },
+      {
+        "t": 20,
+        "lufs": -16.560920265789772
+      },
+      {
+        "t": 21,
+        "lufs": -16.271975703497834
+      },
+      {
+        "t": 22,
+        "lufs": -17.1915473456662
+      },
+      {
+        "t": 23,
+        "lufs": -17.546299100397274
+      },
+      {
+        "t": 24,
+        "lufs": -18.206415930838553
+      },
+      {
+        "t": 25,
+        "lufs": -17.9114583132279
+      },
+      {
+        "t": 26,
+        "lufs": -18.105486341493695
+      },
+      {
+        "t": 27,
+        "lufs": -17.775739356807378
+      },
+      {
+        "t": 28,
+        "lufs": -17.894488180624766
+      },
+      {
+        "t": 29,
+        "lufs": -17.764097678641274
+      },
+      {
+        "t": 30,
+        "lufs": -18.115404847956924
+      },
+      {
+        "t": 31,
+        "lufs": -17.24164752391358
+      },
+      {
+        "t": 32,
+        "lufs": -16.70611839256536
+      },
+      {
+        "t": 33,
+        "lufs": -16.353333244665624
+      },
+      {
+        "t": 34,
+        "lufs": -18.200454582717832
+      },
+      {
+        "t": 35,
+        "lufs": -19.33472401320011
+      },
+      {
+        "t": 36,
+        "lufs": -24.137301726055792
+      },
+      {
+        "t": 37,
+        "lufs": -24.226852988659882
+      },
+      {
+        "t": 38,
+        "lufs": -24.229661202978622
+      },
+      {
+        "t": 39,
+        "lufs": -24.14944941172935
+      },
+      {
+        "t": 40,
+        "lufs": -24.051763202398714
+      },
+      {
+        "t": 41,
+        "lufs": -24.035061207287363
+      },
+      {
+        "t": 42,
+        "lufs": -24.024457463074018
+      },
+      {
+        "t": 43,
+        "lufs": -20.64867263014417
+      },
+      {
+        "t": 44,
+        "lufs": -20.151219738386146
+      },
+      {
+        "t": 45,
+        "lufs": -18.142253292694793
+      }
+    ],
+    "shortTermMin": -24.229661202978622,
+    "shortTermMax": -16.271975703497834,
+    "shortTermMedian": -18.06892150967888,
+    "loudnessMovement": 7.446192407359369,
+    "crestDb": 16.685280036159206,
+    "dynamicRangeDb": 16.685280036159206,
+    "rmsPerSecond": [
+      {
+        "t": 0,
+        "db": -16.721425157667294
+      },
+      {
+        "t": 1,
+        "db": -16.135594391190725
+      },
+      {
+        "t": 2,
+        "db": -17.726894611325147
+      },
+      {
+        "t": 3,
+        "db": -16.89454810561947
+      },
+      {
+        "t": 4,
+        "db": -16.358183667772984
+      },
+      {
+        "t": 5,
+        "db": -17.328763865640056
+      },
+      {
+        "t": 6,
+        "db": -16.628838381805352
+      },
+      {
+        "t": 7,
+        "db": -17.353136067139502
+      },
+      {
+        "t": 8,
+        "db": -17.19814636556534
+      },
+      {
+        "t": 9,
+        "db": -16.51354475190074
+      },
+      {
+        "t": 10,
+        "db": -16.741147432648834
+      },
+      {
+        "t": 11,
+        "db": -18.02245077045383
+      },
+      {
+        "t": 12,
+        "db": -16.17330954865881
+      },
+      {
+        "t": 13,
+        "db": -16.709157063856882
+      },
+      {
+        "t": 14,
+        "db": -17.43146436319521
+      },
+      {
+        "t": 15,
+        "db": -16.7256402445332
+      },
+      {
+        "t": 16,
+        "db": -16.24132636528099
+      },
+      {
+        "t": 17,
+        "db": -17.699571431752144
+      },
+      {
+        "t": 18,
+        "db": -16.871322177199662
+      },
+      {
+        "t": 19,
+        "db": -16.34842429515344
+      },
+      {
+        "t": 20,
+        "db": -17.4281334011826
+      },
+      {
+        "t": 21,
+        "db": -15.657637770678194
+      },
+      {
+        "t": 22,
+        "db": -16.513340422796603
+      },
+      {
+        "t": 23,
+        "db": -16.256961685507374
+      },
+      {
+        "t": 24,
+        "db": -16.722973627185738
+      },
+      {
+        "t": 25,
+        "db": -16.76183947061351
+      },
+      {
+        "t": 26,
+        "db": -17.990558183008872
+      },
+      {
+        "t": 27,
+        "db": -16.238283791092993
+      },
+      {
+        "t": 28,
+        "db": -16.96461563282875
+      },
+      {
+        "t": 29,
+        "db": -17.439416508685465
+      },
+      {
+        "t": 30,
+        "db": -16.817048711648933
+      },
+      {
+        "t": 31,
+        "db": -16.30944072838804
+      },
+      {
+        "t": 32,
+        "db": -17.79504187405329
+      },
+      {
+        "t": 33,
+        "db": -15.78181579143264
+      },
+      {
+        "t": 34,
+        "db": -16.038965706964873
+      },
+      {
+        "t": 35,
+        "db": -16.65566798230697
+      },
+      {
+        "t": 36,
+        "db": -25.76626892688944
+      },
+      {
+        "t": 37,
+        "db": -22.243540998952966
+      },
+      {
+        "t": 38,
+        "db": -25.42561938886
+      },
+      {
+        "t": 39,
+        "db": -26.094751913428414
+      },
+      {
+        "t": 40,
+        "db": -22.30898429229515
+      },
+      {
+        "t": 41,
+        "db": -25.57995576255376
+      },
+      {
+        "t": 42,
+        "db": -25.728892331426305
+      },
+      {
+        "t": 43,
+        "db": -22.309590061019865
+      },
+      {
+        "t": 44,
+        "db": -25.523590267468208
+      },
+      {
+        "t": 45,
+        "db": -16.7102078816688
+      },
+      {
+        "t": 46,
+        "db": -16.455241651764887
+      },
+      {
+        "t": 47,
+        "db": -18.041023008904133
+      }
+    ],
+    "windowSeconds": 3,
+    "hopSeconds": 1
+  },
+  "brightness": {
+    "centroidSeries": [
+      {
+        "t": 0,
+        "hz": 3613.0815914932414
+      },
+      {
+        "t": 1,
+        "hz": 322.4205701047663
+      },
+      {
+        "t": 2,
+        "hz": 5056.592033214184
+      },
+      {
+        "t": 3,
+        "hz": 3631.6155836352227
+      },
+      {
+        "t": 4,
+        "hz": 326.29417689644845
+      },
+      {
+        "t": 5,
+        "hz": 5350.498739724062
+      },
+      {
+        "t": 6,
+        "hz": 3196.2938662224506
+      },
+      {
+        "t": 7,
+        "hz": 325.6558776068503
+      },
+      {
+        "t": 8,
+        "hz": 5324.41404372723
+      },
+      {
+        "t": 9,
+        "hz": 2707.5671431236683
+      },
+      {
+        "t": 10,
+        "hz": 354.8605191759378
+      },
+      {
+        "t": 11,
+        "hz": 5737.948178760662
+      },
+      {
+        "t": 12,
+        "hz": 2867.278054206834
+      },
+      {
+        "t": 13,
+        "hz": 334.5790008226138
+      },
+      {
+        "t": 14,
+        "hz": 5806.3555362440375
+      },
+      {
+        "t": 15,
+        "hz": 3540.1925770709026
+      },
+      {
+        "t": 16,
+        "hz": 306.738518138609
+      },
+      {
+        "t": 17,
+        "hz": 4995.802004866499
+      },
+      {
+        "t": 18,
+        "hz": 3558.1456705656924
+      },
+      {
+        "t": 19,
+        "hz": 333.16710499861955
+      },
+      {
+        "t": 20,
+        "hz": 5674.150353516454
+      },
+      {
+        "t": 21,
+        "hz": 3032.2203998314194
+      },
+      {
+        "t": 22,
+        "hz": 684.8002018767518
+      },
+      {
+        "t": 23,
+        "hz": 3751.6390488683505
+      },
+      {
+        "t": 24,
+        "hz": 2766.125547115083
+      },
+      {
+        "t": 25,
+        "hz": 364.6108090188599
+      },
+      {
+        "t": 26,
+        "hz": 5698.894448921628
+      },
+      {
+        "t": 27,
+        "hz": 2954.0678464940574
+      },
+      {
+        "t": 28,
+        "hz": 349.93932234799416
+      },
+      {
+        "t": 29,
+        "hz": 5800.85507275755
+      },
+      {
+        "t": 30,
+        "hz": 3491.089657899189
+      },
+      {
+        "t": 31,
+        "hz": 305.99042643305046
+      },
+      {
+        "t": 32,
+        "hz": 5142.48908154919
+      },
+      {
+        "t": 33,
+        "hz": 3145.7309104473698
+      },
+      {
+        "t": 34,
+        "hz": 712.7989175435962
+      },
+      {
+        "t": 35,
+        "hz": 3935.4619738290976
+      },
+      {
+        "t": 36,
+        "hz": 883.6952903777247
+      },
+      {
+        "t": 37,
+        "hz": 1030.1173202999198
+      },
+      {
+        "t": 38,
+        "hz": 902.9044905865808
+      },
+      {
+        "t": 39,
+        "hz": 889.564068370996
+      },
+      {
+        "t": 40,
+        "hz": 1079.305817040854
+      },
+      {
+        "t": 41,
+        "hz": 1339.2428502092785
+      },
+      {
+        "t": 42,
+        "hz": 879.0269575687232
+      },
+      {
+        "t": 43,
+        "hz": 1112.3153808156217
+      },
+      {
+        "t": 44,
+        "hz": 1325.0774005803632
+      },
+      {
+        "t": 45,
+        "hz": 3408.4322249208185
+      },
+      {
+        "t": 46,
+        "hz": 317.2716254970206
+      },
+      {
+        "t": 47,
+        "hz": 5341.1435708506
+      }
+    ],
+    "centroidMedianHz": 2816.7018006609587,
+    "centroidMinHz": 305.99042643305046,
+    "centroidMaxHz": 5806.3555362440375,
+    "bands": {
+      "sub": {
+        "fraction": 0.5565484609609176,
+        "dbBelowTotal": 2.5449701387807337
+      },
+      "low": {
+        "fraction": 0.06522001302233543,
+        "dbBelowTotal": 11.856191188154366
+      },
+      "speech": {
+        "fraction": 0.1573877789942375,
+        "dbBelowTotal": 8.030289932058125
+      },
+      "presence": {
+        "fraction": 0.06594544324674712,
+        "dbBelowTotal": 11.808152083232855
+      },
+      "air": {
+        "fraction": 0.15489830377576233,
+        "dbBelowTotal": 8.09953337985532
+      }
+    },
+    "brightnessMedianHz": 4681.8203886510055,
+    "highShare": 0.24567494109648141
+  },
+  "stereo": {
+    "widthDb": -28.259536906503357,
+    "correlation": 0.9970227700059855,
+    "balanceDb": -0.025269682455977566,
+    "label": "mono-like"
+  },
+  "speechRoom": {
+    "speechShare": 0.16577247320379473,
+    "speechBandDbBelowTotal": 7.804875831234618,
+    "restShare": 0.8342275267962053,
+    "role": "music",
+    "threshold": null,
+    "verdict": "n/a",
+    "message": "Speech band (300-3000 Hz) is 16.6% of the energy, 7.8 dB below the total. No speech-room limit for this role. Numbers only."
+  },
+  "mood": {
+    "requested": "hype",
+    "role": "music",
+    "best": "hype",
+    "scores": {
+      "hype": 0.6026903796320315,
+      "playful": 0.36831537963203154,
+      "lowkey": 0.4
+    },
+    "pass": false,
+    "suggestions": [
+      "BPM is low for hype: 80, ideal 140-160. musicStudio.run({ op: \"set\", bpm: 150 })",
+      "Loudness movement is 7.4 dB for hype, ideal 1-5 dB.",
+      "Drum regularity is 0.5 for hype, ideal 0.25-0.5 (share of drum hits on quarter notes)."
+    ],
+    "perMetric": {
+      "bpm": {
+        "value": 80,
+        "ideal": [
+          140,
+          160
+        ],
+        "outer": [
+          120,
+          180
+        ],
+        "score": 0
+      },
+      "density": {
+        "value": 9.0625,
+        "ideal": [
+          6,
+          12
+        ],
+        "outer": [
+          3.5,
+          16
+        ],
+        "score": 1
+      },
+      "brightness": {
+        "value": 2816.7018006609587,
+        "ideal": [
+          2000,
+          4500
+        ],
+        "outer": [
+          1000,
+          6500
+        ],
+        "score": 1
+      },
+      "loudnessMovement": {
+        "value": 7.446192407359369,
+        "ideal": [
+          1,
+          5
+        ],
+        "outer": [
+          0,
+          8
+        ],
+        "score": 0.18460253088021025
+      },
+      "regularity": {
+        "value": 0.5333333333333333,
+        "ideal": [
+          0.25,
+          0.5
+        ],
+        "outer": [
+          0.1,
+          0.7
+        ],
+        "score": 0.8333333333333334
+      }
+    }
+  },
+  "seam": {
+    "joinStep": 0,
+    "p999Step": 0.5343567305803272,
+    "rmsDiffDb": 26.008826655640107,
+    "pass": true,
+    "windows": [
+      {
+        "ms": 50,
+        "firstRmsDb": -8.263295295831337,
+        "lastRmsDb": -34.27212195147144,
+        "diffDb": 26.008826655640103
+      },
+      {
+        "ms": 100,
+        "firstRmsDb": -10.70986065098926,
+        "lastRmsDb": -26.66589810008538,
+        "diffDb": 15.956037449096119
+      },
+      {
+        "ms": 250,
+        "firstRmsDb": -14.657794824868349,
+        "lastRmsDb": -17.522390206413768,
+        "diffDb": 2.864595381545419
+      },
+      {
+        "ms": 500,
+        "firstRmsDb": -15.464535025127761,
+        "lastRmsDb": -17.093275150569244,
+        "diffDb": 1.6287401254414835
+      }
+    ],
+    "clickScore": 0.0037562696470678242,
+    "clickDetected": false,
+    "levelMismatch": false,
+    "baselineDiffDb": 160.57950264626606,
+    "status": "ok",
+    "reasons": [],
+    "summary": "Seam OK. 50 ms 26.01 dB, 500 ms 1.63 dB, click score 0.00."
+  },
+  "summary": {
+    "paragraph": "busy, mid-register arrangement at a slow minor setting (measured: 80 BPM, 9.06 onsets/s, median pitch D4, centroid 2817 Hz). Brightness reads balanced. Loudness movement reads dynamic (7.45 dB). Stereo reads mono-like. Voices used: kick808, snare, hatClosed, sub808, brass, strings. Layering measured A:6, build:6, drop:6, break:6, turnaround:6 active layers per section. These are measurements, not a judgment of how it sounds.",
+    "facts": [
+      "Tempo reads 80 BPM (slow).",
+      "Density reads 9.06 onsets/s (busy).",
+      "Register reads mid, median MIDI 62.0, span 46 semitones.",
+      "Centroid median reads 2817 Hz (balanced).",
+      "Integrated loudness reads -17.98 LUFS, true peak -1.30 dBTP.",
+      "Seam status reads ok. Speech-room verdict reads n/a."
+    ]
+  },
+  "layers": {
+    "tracks": [
+      {
+        "name": "kick",
+        "group": null,
+        "kind": "drum",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "build",
+          "drop",
+          "break",
+          "turnaround"
+        ],
+        "onsetsPerBar": 3.25,
+        "gainDb": -8
+      },
+      {
+        "name": "snare",
+        "group": null,
+        "kind": "drum",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "build",
+          "drop",
+          "break",
+          "turnaround"
+        ],
+        "onsetsPerBar": 2.4375,
+        "gainDb": -10
+      },
+      {
+        "name": "hat",
+        "group": null,
+        "kind": "drum",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "build",
+          "drop",
+          "break",
+          "turnaround"
+        ],
+        "onsetsPerBar": 6.5,
+        "gainDb": -14
+      },
+      {
+        "name": "bass",
+        "group": null,
+        "kind": "synth",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "build",
+          "drop",
+          "break",
+          "turnaround"
+        ],
+        "onsetsPerBar": 6.5,
+        "gainDb": -6
+      },
+      {
+        "name": "lead",
+        "group": null,
+        "kind": "synth",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "build",
+          "drop",
+          "break",
+          "turnaround"
+        ],
+        "onsetsPerBar": 5.5,
+        "gainDb": -4
+      },
+      {
+        "name": "harmony",
+        "group": null,
+        "kind": "synth",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "build",
+          "drop",
+          "break",
+          "turnaround"
+        ],
+        "onsetsPerBar": 3,
+        "gainDb": -10
+      }
+    ],
+    "sections": [
+      {
+        "name": "A",
+        "bars": 4,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "dropped": [],
+        "shortTermLufs": -18.008909872047923,
+        "brightnessHz": 2816.7018006609587
+      },
+      {
+        "name": "build",
+        "bars": 3,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -17.667650059191292,
+        "brightnessHz": 2816.7018006609587
+      },
+      {
+        "name": "drop",
+        "bars": 5,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -17.64127937041429,
+        "brightnessHz": 2816.7018006609587
+      },
+      {
+        "name": "break",
+        "bars": 3,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -23.29493773007934,
+        "brightnessHz": 2816.7018006609587
+      },
+      {
+        "name": "turnaround",
+        "bars": 1,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -18.142253292694793,
+        "brightnessHz": 2816.7018006609587
+      }
+    ],
+    "buildDrop": [],
+    "samples": {
+      "used": [],
+      "missing": [],
+      "licenses": []
+    }
+  }
+}

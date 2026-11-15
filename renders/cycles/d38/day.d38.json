@@ -1,0 +1,271 @@
+{
+  "name": "day",
+  "mapping": {
+    "style": "playful_pizzicato",
+    "mood": "playful",
+    "role": "bed"
+  },
+  "brief": {
+    "role": "bed",
+    "mood": "playful",
+    "seconds": 64,
+    "seed": 1286,
+    "style": "playful_pizzicato",
+    "brightnessBias": 0,
+    "densityBias": 0,
+    "name": "bellmire_day"
+  },
+  "pocket": false,
+  "project": {
+    "bpm": 120,
+    "bars": 32,
+    "key": {
+      "root": 9,
+      "scale": "lydian"
+    },
+    "style": {
+      "id": "playful_pizzicato",
+      "mood": "playful",
+      "progressionId": "I-vi-IV-V",
+      "drumId": "kick-off-8+snare-back+hat-off+perc-off",
+      "bassId": "root-5",
+      "motifId": "m7-3-ABAC",
+      "lengthMode": "loop",
+      "structure": [
+        {
+          "name": "A",
+          "bars": 11
+        },
+        {
+          "name": "B",
+          "bars": 10
+        },
+        {
+          "name": "A",
+          "bars": 10
+        },
+        {
+          "name": "turnaround",
+          "bars": 1
+        }
+      ],
+      "fingerprint": "fp1auhgm3",
+      "requestedSeed": 1286,
+      "usedSeed": 1286,
+      "reseeds": 0,
+      "titleWords": "Bouncy Signal Step 4",
+      "similarity": {
+        "nearestDistance": 1,
+        "nearestId": "",
+        "nearestName": "",
+        "threshold": 0.16,
+        "requestedSeed": 1286,
+        "usedSeed": 1286,
+        "reseeds": 0
+      }
+    },
+    "master": {
+      "gainDb": 0,
+      "speechPocket": true,
+      "speechDipDb": -6,
+      "targetLufs": -20,
+      "ceilingDbtp": -1
+    },
+    "seed": 1286
+  },
+  "norm": {
+    "before": {
+      "lufs": -31.44808252567397,
+      "shortTermMax": -31.351456157143456,
+      "samplePeak": -8.430341617638549,
+      "truePeak": -8.329217213523004
+    },
+    "after": {
+      "lufs": -20.182832459285795,
+      "shortTermMax": -19.52410784291631,
+      "samplePeak": -1.3000000932331663,
+      "truePeak": -1.2994215771468962
+    },
+    "passes": 4,
+    "note": ""
+  },
+  "searched": 6,
+  "strictPass": true,
+  "moodPass": true,
+  "moodScore": 0.6784234592982729,
+  "moodBest": "playful",
+  "suggestions": [
+    "Too busy for playful: 11.1 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+    "Loudness movement is 0.8 dB for playful, ideal 1-6 dB.",
+    "Drum regularity is 0.4 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+  ],
+  "speechRoom": {
+    "speechShare": 0.22587069644574342,
+    "speechBandDbBelowTotal": 6.46140109041621,
+    "restShare": 0.7741293035542566,
+    "role": "bed",
+    "threshold": {
+      "pass": 0.4,
+      "warn": 0.55
+    },
+    "verdict": "pass",
+    "message": "Speech band (300-3000 Hz) is 22.6% of the energy, 6.5 dB below the total. That is at or under 40% for a bed."
+  },
+  "seam": "ok",
+  "paragraph": "busy, mid-register arrangement at a medium lydian setting (measured: 120 BPM, 11.06 onsets/s, median pitch F#4, centroid 1669 Hz). Brightness reads balanced. Loudness movement reads steady (0.77 dB). Stereo reads mono-like. Voices used: rim, snare, shaker, pluck, pizz, bell. Layering measured A:6, B:6, A:6, turnaround:6 active layers per section. These are measurements, not a judgment of how it sounds.",
+  "tries": [
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 1101,
+      "pocket": false,
+      "bpm": 120,
+      "bars": 32,
+      "pass": false,
+      "score": 0.4969135163208598,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for playful: 8.2 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for playful: centroid 714.6 Hz, ideal 1500-3500 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 0.6 dB for playful, ideal 1-6 dB.",
+        "Drum regularity is 0.7 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 120,
+        "density": 8.16,
+        "brightness": 714.6,
+        "loudnessMovement": 0.62,
+        "regularity": 0.67
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 1138,
+      "pocket": false,
+      "bpm": 120,
+      "bars": 32,
+      "pass": false,
+      "score": 0.5872474110506,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for playful: 13.1 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Loudness movement is 0.9 dB for playful, ideal 1-6 dB.",
+        "Drum regularity is 0.6 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 120,
+        "density": 13.06,
+        "brightness": 1701.13,
+        "loudnessMovement": 0.91,
+        "regularity": 0.57
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 1175,
+      "pocket": false,
+      "bpm": 120,
+      "bars": 32,
+      "pass": false,
+      "score": 0.6236067737741153,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for playful: 9.6 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Loudness movement is 0.9 dB for playful, ideal 1-6 dB.",
+        "Drum regularity is 0.6 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 120,
+        "density": 9.56,
+        "brightness": 1610.4,
+        "loudnessMovement": 0.91,
+        "regularity": 0.57
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 1212,
+      "pocket": false,
+      "bpm": 120,
+      "bars": 32,
+      "pass": false,
+      "score": 0.39948232620223545,
+      "best": "lowkey",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for playful: 13.1 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for playful: centroid 766.9 Hz, ideal 1500-3500 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 0.7 dB for playful, ideal 1-6 dB.",
+        "Drum regularity is 0.5 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 120,
+        "density": 13.06,
+        "brightness": 766.88,
+        "loudnessMovement": 0.75,
+        "regularity": 0.5
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 1249,
+      "pocket": false,
+      "bpm": 120,
+      "bars": 32,
+      "pass": false,
+      "score": 0.5142680124748045,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for playful: 12.6 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Too dark for playful: centroid 1425.7 Hz, ideal 1500-3500 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 0.6 dB for playful, ideal 1-6 dB.",
+        "Drum regularity is 0.6 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 120,
+        "density": 12.56,
+        "brightness": 1425.7,
+        "loudnessMovement": 0.57,
+        "regularity": 0.62
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 1286,
+      "pocket": false,
+      "bpm": 120,
+      "bars": 32,
+      "pass": true,
+      "score": 0.6784234592982729,
+      "best": "playful",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too busy for playful: 11.1 onsets/s, ideal 3.5-7. Reduce density (fewer hat/pluck steps) or lower BPM.",
+        "Loudness movement is 0.8 dB for playful, ideal 1-6 dB.",
+        "Drum regularity is 0.4 for playful, ideal 0.15-0.35 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 120,
+        "density": 11.06,
+        "brightness": 1669.41,
+        "loudnessMovement": 0.77,
+        "regularity": 0.4
+      }
+    }
+  ]
+}

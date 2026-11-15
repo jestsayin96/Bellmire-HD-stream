@@ -1313,3 +1313,31 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   noise, a CC0 field recording can drop into the same BEDS slot with no code change. Overall mix sits ~-29 dBFS RMS
   (bus levels predate this item) - OBS gain may want +6 dB.
 
+
+## D-cycle - D22b music moods (+ D38 beds generated), 2026-11-15 ~07:00 CT (game build)
+- Item: D22b (first open DESKTOP item; D57 was already ticked - the brief's "top priority" is stale). Paired with
+  D38 as the plan says: D38 renders the tracks, D22b wires them. D38 left OPEN (Mr. E approves the themes; see below).
+- GENERATION tools/_d38_music_gen.mjs (Windows node): starts music-studio v3.5.2's own vite dev server IN PLACE
+  (C:\Users\morta\music-studio git status clean before and after - nothing written there but vite's node_modules
+  cache), drives it in headless Edge over CDP, calls the tool's own composeProject -> renderAndNormalize ->
+  buildListenReport -> encodeWav (window.musicStudio.compose drops the bias knobs, so the modules are called
+  directly - same functions describe()/exportWav() use). WAV -> OGG q6 with ffmpeg. 66 candidates searched.
+  | bed   | style x mood x role              | seed | BPM | mood.pass (score) | speechRoom (share) | seam |
+  | day   | playful_pizzicato x playful x bed | 1286 | 120 | TRUE (0.678)      | pass (0.23)        | ok   |
+  | night | ambient_calm x lowkey x bed       | 2276 | 74  | false (0.637)     | pass (0.32)        | ok   |
+  | raid  | epic_cinematic x hype x music     | 3414 | 80  | false (0.603)     | n/a (music role)   | ok   |
+  | delve | lofi_chill x lowkey x bed         | 4737 | 70  | false (0.564)     | pass (0.20)        | ok   |
+  stings (the 2-5 s sting maker): victory = riser 3.2 s, defeat = hit 3.8 s, both normalised to -16 LUFS.
+- CHANGE scripts/sfx.gd (backup sfx.gd.bak_d22b): MUSIC -> the four bellmire_* files (old RandomMind loops kept as
+  MUSIC_OLD fallback); delve mood; HOLD hysteresis; FADES per transition; equal-power crossfade; bed resume;
+  play_sting + Sfx.victory()/Sfx.defeat(); raid end -> victory, delve.ended(survivors) -> victory/defeat.
+- TEST tools/_d22b_test.gd: D22B_TEST OK (0 fails) headless and windowed (clock pinned; flicker held; 7 transitions
+  with their own fades; day resumed at 18.2 s; victory 1, defeat 1, 2nd sting held back; mid-fade power 1.000).
+  LOOKED at renders/cycles/d22b/moods_review.png: no gaps at any transition, raid horn + cue, victory riser and
+  defeat hit visible, 0 clipped, peak -8.6 dBFS.
+- GATES: parse 0 errors; --import clean; TWITCH_PARSE OK; OFFFLOOR 0/1546 INPROP 0 MON_INPROP 0/138; TOWNWALK
+  in_solid 1/19169 raid_in_solid 0/6000 PASS; delve rc 0, 0 SCRIPT ERROR.
+- FOR MR. E: (1) listen to renders/cycles/d22b/moods.ogg (night reads quiet - an ambient bed at -20 LUFS under a
+  -14 dB bus). (2) raid: epic_cinematic can never pass the hype mood check (style max 100 BPM vs hype 140-160) -
+  keep it, or allow arcade_upbeat/retro_synthwave for the raid? (3) delve mood plays whenever a delve is live -
+  on a busy stream that may be most of the time; say if it should be director-driven instead.

@@ -1647,6 +1647,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       categories are written + the picker already handles them - they just need their triggers to call
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
+- [ ] D38. ON HOLD BY MR. E (2026-11-15 13:34) - DO NOT WORK THIS ITEM, DO NOT REGENERATE THE BEDS,
+      DO NOT TICK IT. He listened to the four beds and both stings and said they "sound good", but he
+      is UPGRADING music-studio first and wants them REDONE on the upgraded tool before he approves
+      anything. The current files in assets/audio/music/ (bellmire_day/night/raid/delve + the two
+      stings) STAY as they are and stay wired - they are good enough to stream on. Leave them alone.
+      The three open questions (raid style vs the hype tempo gate, night's level, whether the delve
+      bed should be director-driven) are DEFERRED until after the regeneration - do not answer them
+      on his behalf and do not raise them with him again until he says the tool is ready.
+      HE WILL SAY WHEN. Until he does, this item is not available to any worker.
+      The upgrade he is making covers: a genuinely headless CLI, the compose() bias-knob bug, the
+      style/mood tempo conflict, STEMS/vertical layering, long-form variation, project key+tempo
+      coherence, leitmotif, transition cues, better seed search, and later procedural crowd/creature
+      vocalisations, ambience and impact SFX.
+      WHEN STEMS LAND, THE WIRING CHANGES: D22b's sfx.gd crossfades whole tracks. With stems it
+      should fade LAYERS instead - the same piece with more of it as the town fills or a raid builds.
+      That is a better system than what shipped; write it as a new item then, do not retrofit it now.
+
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
       MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
       TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into

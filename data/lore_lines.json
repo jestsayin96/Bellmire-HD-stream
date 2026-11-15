@@ -7605,5 +7605,524 @@
         ]
       }
     ]
+  },
+  "festivals": {
+    "_note": "C-49 / WORK_PLAN C6 - THE FESTIVAL HAS A VOICE. D63 reads these instead of town.gd's two hardcoded lines. Dead until wired; content worker never touches code. Additive. KEY SHAPE: reasons{harvest,raid_survived,lord_felled,hero_home,town_level,viewer_gift}[] -> the OPENING line, pick by the reason that triggered the festival; crowd[] -> ambient shout from any townsperson during it; toasts[] -> raised-cup lines; stalls[] -> what the stalls are selling (a ticker or a stall sign); notables[] -> {who,line} a named notable's line (who matches townsfolk.cast name); e3po[] -> the Commander's festival line (E3PO cannot die and never leaves his post); closings[] -> end-of-festival lines. viewer_paid{...} is a separate richer set for a festival a VIEWER paid for: every string there may carry the token {buyer} (the paying viewer's display name) - substitute it, or strip it with its comma if the name is unknown. Cost statement: a viewer festival is purchased with bits/points by the buyer; the lines promise nothing mechanical beyond 'the town celebrates'. No floor counts.",
+    "reasons": {
+      "harvest": [
+        "The last cart is in. Bellmire holds its Harvest Feast.",
+        "Grain counted, barns full. Light the long tables.",
+        "The reed-cutters and the millers call it: Harvest Feast tonight.",
+        "The scythes are hung up. The ale is not.",
+        "A good year in the field. The crier orders a feast.",
+        "Sacks to the rafters. Bellmire eats before it counts.",
+        "Harvest is home. The ovens have been lit since dawn.",
+        "Gold fields, full bellies. Feast on the green.",
+        "The mill ran dry of corn to grind. Time to eat what it ground.",
+        "The last sheaf is bound with a ribbon. The feast begins.",
+        "Even the crows are fat. Bellmire holds its Harvest Feast.",
+        "Bring a bowl and a stool - the harvest was kind this year."
+      ],
+      "raid_survived": [
+        "The walls held. Bellmire feasts the night it lived.",
+        "Bandits broken at the gate. Pour for the wall-walkers.",
+        "The raid is over and nobody left the count. Feast!",
+        "Smoke clears, the bell rings once, and the tables come out.",
+        "We were not taken. That is worth a festival.",
+        "The gate stands and so do we. Light the lanterns.",
+        "The raiders fled the Ford. The town dances on their tracks.",
+        "Wounds bound, shields stacked. Bellmire calls a Victory Night.",
+        "Survived is a fine reason. The crier declares a feast.",
+        "The guard held the line. The town returns the favour in ale.",
+        "Not a door lost, not a soul lost. Mark it: Gate-Holding Day.",
+        "The raid broke on the wall like surf. Now the tables go up."
+      ],
+      "lord_felled": [
+        "A dungeon lord is dead. Bellmire hangs the banners.",
+        "The scar is quieter tonight. The crier calls a Felling Feast.",
+        "A lord is down and the guild bell will not stop ringing.",
+        "They carried the proof up the stairs. The town will not sleep.",
+        "The lord that frightened the Ford is finished. Drink to it.",
+        "One less shadow under the hill. The lanterns go up.",
+        "The delvers did it. The town pays in meat and music.",
+        "The scar owes us one lord. We call it a feast.",
+        "A lord's crown on the guild table. Come see, come eat.",
+        "They said it could not be felled. Bellmire raises a cup to the liars.",
+        "The ground will not forget, but tonight it can be quiet. Feast.",
+        "Tell the children: a lord died. Then let them have cake."
+      ],
+      "hero_home": [
+        "A hero walks in from the scar. The town turns out.",
+        "Home from the dark, alive. That is a festival all by itself.",
+        "The gate opens on a face we feared lost. Fetch the fiddlers.",
+        "Bellmire welcomes its delver home. Hang the lanterns low.",
+        "They went down and they came back. Pour the good ale.",
+        "Mud to the knee and grinning: a hero is home. Feast!",
+        "The bell rings for one name tonight. Make way.",
+        "A delver returns with a full pack and a story. Clear a table.",
+        "The scar gave one back. Bellmire says thank you loudly.",
+        "Home again. The innkeeper has already set a place.",
+        "Another one comes up the stairs breathing. Celebrate it.",
+        "The road in is lined with townsfolk. A hero is home."
+      ],
+      "town_level": [
+        "Bellmire has grown a stage. The crier declares a Raising Day.",
+        "New roofs, new roads. The town throws itself a party.",
+        "A bigger Bellmire needs a bigger celebration. Tables out!",
+        "The town has outgrown its old name's pride. Feast the new walls.",
+        "Another rung up the long climb. Ring the bell twice.",
+        "The builders are paid and the rafters are up. Raise a cup.",
+        "Look how far the huts have come. Festival!",
+        "Growth has a taste, and tonight it is honey cake.",
+        "Bellmire is more than it was this morning. Mark the day.",
+        "The mason's stone is set. Come eat beneath it.",
+        "A new stage, a new banner. The crier is hoarse already.",
+        "The town stands taller. Let the music stand taller still."
+      ],
+      "viewer_gift": [
+        "A gift has come to Bellmire. The crier names a feast.",
+        "Someone far away sent a kindness. The town pays it forward.",
+        "A gift from the watchers! Light the lanterns.",
+        "The strongbox rattles with a stranger's generosity. Feast!",
+        "Word from beyond the Ford: a gift for the town. Tables out.",
+        "A kind hand reached in from the dark. Bellmire answers in song.",
+        "A gift lands on the green and the whole town hears it clink.",
+        "Generosity, unannounced. The crier makes it a festival.",
+        "The guild treasurer weeps, then orders a barrel.",
+        "A gift, and no ask attached. Bellmire does not forget that.",
+        "Someone remembered Bellmire. Bellmire remembers back.",
+        "A gift for the town. The innkeeper tallies it in ale."
+      ]
+    },
+    "crowd": [
+      "Make room at the long table!",
+      "Who stole my turnip tart?",
+      "Pass the cider, pass the cider!",
+      "Dance, you lumps! The day won't last!",
+      "Look at the lanterns! Aren't they fine?",
+      "Gate's shut and the cup's full!",
+      "Mind my toes, you great ox!",
+      "Another round for the wall-walkers!",
+      "Fiddler! Something with a stamp in it!",
+      "Save me a pie, I'm only going to dance.",
+      "Ha! Even the guard is smiling!",
+      "Somebody count the barrels. Then don't.",
+      "Where did the dog get a sausage?",
+      "A ribbon for the brave, a ribbon for the lucky!",
+      "Hold the cup, hold the cup, I'm going in!",
+      "Bellmire! Bellmire! Bellmire!",
+      "My feet are done. My hands are not.",
+      "Is that honey cake or is it a miracle?",
+      "Careful, the cider has opinions.",
+      "One more song and then the chores!",
+      "Tell it again, the bit with the goblin!",
+      "The little ones have the whole green for a race.",
+      "Somebody lend me a hat for the toast.",
+      "That fiddler is a wizard, I swear it.",
+      "If this is a dream, nobody wake me.",
+      "Bread, cheese, and nobody barking orders. Bliss.",
+      "Hoist me up, I want to see the lanterns!",
+      "Bring the barrel closer, my arm is short.",
+      "A kiss for the cook! A coin for the cook!",
+      "The reed-cutters are winning the tug-of-war!",
+      "Boots off, boots off, the grass is warm.",
+      "No raids tonight, say the stars.",
+      "Who knows the words to the Ford song?",
+      "Cheers to the hearth that kept us!",
+      "I will remember this at the bottom of the scar.",
+      "Leave the washing. It will wait.",
+      "Oh, what a night for it!",
+      "Single-file for the pie line, you savages!",
+      "Shh! The singing starts."
+    ],
+    "toasts": [
+      "To the wall, and the ones who walk it!",
+      "To the Ford, may it never run dry!",
+      "To the dead, who bought us the morning.",
+      "To the delvers: down, and back again!",
+      "To Bellmire - small, stubborn, ours!",
+      "To the guard, and the guard's bad jokes!",
+      "To the hearth, the ale, and the lock on the door!",
+      "To the bell: may it ring for joy, not for fear!",
+      "To the harvest, and the hands that brought it!",
+      "To whoever fixed the roof last night!",
+      "To the scar: may it stay quiet and stay down!",
+      "To the cook, who made one pot feed everyone!",
+      "To the road home, wherever it runs!",
+      "To lost friends and found coin!",
+      "To full cups and empty graves!",
+      "To the ones who stayed and held the gate!",
+      "To dawn, and the new day it owes us!",
+      "To the mud that made us what we are!",
+      "To the long climb. One stage at a time!",
+      "To the watchers beyond the Ford - may they never lack for supper!",
+      "To the lantern, the candle, and the spark!",
+      "To luck - the only guild we all joined!",
+      "To the child with the first sword, and the grandmother who hid it!",
+      "To the damp, the draught, and the drink that cures both!",
+      "To what we built, and to the beams that carry it!",
+      "To bread, to blood, to Bellmire!",
+      "To the fiddlers who never sleep!",
+      "To a quiet night. May it last a week!",
+      "To the gate - shut and proud!",
+      "To the ones we owe. Everyone!"
+    ],
+    "stalls": [
+      "Honey cakes, a copper each, and one is a coin in disguise.",
+      "Roast pork on a stick. The stick is free.",
+      "Cider by the cup, warm, with cloves.",
+      "Ribbons for the brave and a ribbon for the unbrave.",
+      "Smoked trout from the Ford, still smelling of the river.",
+      "Pies - mutton, apple, and 'ask me tomorrow'.",
+      "A brewer's barrel, tapped and sweating.",
+      "Candied turnip, a Bellmire horror and a Bellmire delight.",
+      "Wooden swords for the little ones. Splinters extra.",
+      "Fortune-telling: three coppers, no refunds.",
+      "Spiced wine, which is only half water.",
+      "Flat bread with soft cheese and a handful of herbs.",
+      "A ring toss. First to win a goose keeps the goose.",
+      "Lanterns, painted, for the walk home.",
+      "Roast chestnuts in a bucket of hot embers.",
+      "Barley-sugar twists, sticky and criminal.",
+      "Hot broth for the guard on shift. Pay what you can.",
+      "Ribbon-braiders at work. A plait costs a song.",
+      "Honeyed nuts, a pinch of salt, a pinch of luck.",
+      "Pewter charms: a cup, a coin, a crooked little sword.",
+      "The smith's stall - horseshoes, thumb-rings, a very small knife.",
+      "Lamp-oil, wicks, and a pack of cheap cards.",
+      "Bone dice and a table. The house is honest. Mostly.",
+      "A bakery of sticky buns, steaming under cloth.",
+      "Plums in a jar, sugared, from a cellar nobody names.",
+      "A potion stall that swears it only sells cordial.",
+      "Meat pasties wrapped in cloth, still hot from the oven.",
+      "Mulled apples for the cold-fingered.",
+      "Garlands of straw and wild flower, three for a copper.",
+      "The apothecary's penny tonic - for headaches tomorrow."
+    ],
+    "notables": [
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes: 'Tonight the tab is on the house. Tomorrow the tab is on you.'"
+      },
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes pours with both hands and counts with neither."
+      },
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes: 'Cups back by midnight. I know who took the last ones.'"
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn: 'No hammers tonight. Pretty near killed me to say it.'"
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn stands his anvil on the green as a table and no one has the nerve to mention it."
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn: 'A good fire and a good crowd. That's nearly forge weather.'"
+      },
+      {
+        "who": "Maud Reedwhistle",
+        "line": "Maud: 'The trout is fresh. The jokes are not. Take either.'"
+      },
+      {
+        "who": "Maud Reedwhistle",
+        "line": "Maud sells the last fish and the first story of the night."
+      },
+      {
+        "who": "Bram Barrelbelly",
+        "line": "Bram: 'This barrel was meant for winter. Winter can find its own.'"
+      },
+      {
+        "who": "Bram Barrelbelly",
+        "line": "Bram gives a toast, drinks it, and gives another."
+      },
+      {
+        "who": "Nell Candlemas",
+        "line": "Nell: 'If it's sweet and warm it's mine. Line up.'"
+      },
+      {
+        "who": "Nell Candlemas",
+        "line": "Nell hands out cakes faster than the oven can answer."
+      },
+      {
+        "who": "Elspeth Hartley",
+        "line": "Elspeth blesses the feast in under a minute, as promised."
+      },
+      {
+        "who": "Elspeth Hartley",
+        "line": "Elspeth: 'Be glad. The gods have seen worse nights and survived them.'"
+      },
+      {
+        "who": "Wat Mudboot",
+        "line": "Wat: 'Quiet job, this. Nice to see the living look lively.'"
+      },
+      {
+        "who": "Wat Mudboot",
+        "line": "Wat toasts the ones he has dug a bed for, and lingers a moment."
+      },
+      {
+        "who": "Sibyl Wickham",
+        "line": "Sibyl: 'Drink what you like. I have remedies for what you do not remember.'"
+      },
+      {
+        "who": "Sibyl Wickham",
+        "line": "Sibyl hands out cordial and a very small warning."
+      },
+      {
+        "who": "Godric Fordbright",
+        "line": "Godric: 'Stand easy tonight. Easy, not slack.'"
+      },
+      {
+        "who": "Godric Fordbright",
+        "line": "Godric keeps one eye on the road and one on the pie."
+      },
+      {
+        "who": "Hob Coldfingers",
+        "line": "Hob: 'Reed wreaths, fresh cut. For luck, or for hats.'"
+      },
+      {
+        "who": "Hob Coldfingers",
+        "line": "Hob has never danced. Tonight he stands very near the music."
+      },
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes sings the first line of the Ford song and then lets the room finish it."
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn, flushed and happy, lifts a child up to touch the lantern."
+      }
+    ],
+    "e3po": [
+      "E3PO attends the feast in full harness and declines a chair.",
+      "'Enjoy it. I will count the doors.'",
+      "The Commander allows himself exactly one cup. He holds it for an hour.",
+      "E3PO walks the edge of the green while the town dances.",
+      "'Festival is a lull, not a lie. The wall stays manned.'",
+      "E3PO nods at a drunk guardsman and takes his post for him.",
+      "The children climb the Commander like a siege tower. He holds still.",
+      "'Revel. Someone has to be sober for you.'",
+      "E3PO inspects the pies and finds them in good order.",
+      "The Commander hangs a lantern on the barracks door himself.",
+      "'No raid tonight. I would know. I check every hour.'",
+      "E3PO is asked to dance. He asks for a drill instead.",
+      "E3PO taps his helm to the fiddler. It is the highest praise he has.",
+      "'The town is happy. This is what the wall is for.'",
+      "A child puts a flower in the Commander's gauntlet. He tucks it in his belt.",
+      "E3PO raises his cup to the dark, in case it is listening.",
+      "'Cakes are good. Posture is better.'",
+      "The Commander sits, briefly, on the barracks step, and watches the green.",
+      "E3PO assigns four guards to the feast and eight to the gates.",
+      "'Do not pull the lanterns down. They make good beacons.'",
+      "E3PO declines to name the age of the cheese he is eating.",
+      "The Commander knows every dancer by name and corrects none.",
+      "'Laugh louder. It carries. The enemy likes to hear it fail.'",
+      "E3PO stands before the feast like a statue that has been told it can smile.",
+      "The Commander's helm has a ribbon on it. No one saw who put it there.",
+      "E3PO sips his ale as if it were a duty. He seems to enjoy the duty.",
+      "'I have never lost a feast, either.'",
+      "E3PO hums the Ford song under his breath, off-key, and stops when noticed.",
+      "The Commander is stopped three times on his round for a toast. He accepts all three.",
+      "'Eat well. Tomorrow the walls need you.'"
+    ],
+    "closings": [
+      "The lanterns gutter. Bellmire goes home full.",
+      "The fiddler lays down the bow. The green is quiet.",
+      "The last barrel is dry. The last song is not.",
+      "Bellmire sleeps it off. E3PO does not.",
+      "The tables are stacked, the ribbons gathered. Dawn will want them.",
+      "The crier rings once more. Feast over, town fed.",
+      "Pie crumbs, ribbon ends, one lost boot. A good night.",
+      "The embers go grey. The bell keeps the quiet.",
+      "The children are asleep in a heap beneath the long table.",
+      "A last toast, whispered, and the lanterns come down.",
+      "The fiddler and the dog walk home together.",
+      "The green is trampled flat and smiling.",
+      "Dawn finds the stalls folded and the guard sharp-eyed.",
+      "The feast ends the way all Bellmire things do: with someone sweeping.",
+      "'Same again next year,' says the crier, and means 'sooner'.",
+      "The last cup is raised to the dark. The dark does not answer.",
+      "A lantern left burning on the green. Nobody will say who for.",
+      "Bellmire is tired, and it is the good kind.",
+      "The feast ends. The wall's lamps burn on.",
+      "The hearth gets the last of the wood and the last of the stories.",
+      "The fiddles go back in their cases. The green goes back to being a green.",
+      "The guard changes. The party goes quietly home beneath them.",
+      "The bell tolls once to say 'night.' It says it kindly.",
+      "Home, feet sore, belly warm. The scar can wait till morning."
+    ],
+    "viewer_paid": {
+      "_note": "A festival a VIEWER paid for. Richer than the ordinary set and every string may carry {buyer} - the paying viewer's display name. Cost statement: the buyer spends their bits/points to call it; the town celebrates for the festival's duration, and the lines credit the buyer by name. No guarantee of any other effect. No floor counts.",
+      "openings": [
+        "{buyer} has paid for a feast. The crier has been told to be loud about it.",
+        "By {buyer}'s coin, Bellmire feasts tonight. Tables out!",
+        "{buyer} stands the whole town a festival. Nobody argues.",
+        "The guild treasurer reads the name aloud: {buyer}. A feast is called.",
+        "A festival, courtesy of {buyer}. The innkeeper has stopped counting.",
+        "{buyer} wants the lanterns lit. The lanterns are lit.",
+        "Bellmire owes {buyer} a feast, and is paying it forward as a song.",
+        "{buyer} paid, the barrel was tapped, and the green filled.",
+        "On {buyer}'s say-so, the long tables come out and the fiddlers tune.",
+        "The bell rings thrice for {buyer}. That means a feast.",
+        "{buyer} has bought the town a night off. The wall can wait.",
+        "Word from {buyer} reaches the Ford: Feast! The town hears it all at once.",
+        "A toast to {buyer}, who bought the ale and the music both.",
+        "{buyer} bought Bellmire a good night and it shows already.",
+        "Not a coin spent by the town tonight. {buyer} has covered it all.",
+        "The crier hoists a banner: 'Feast of {buyer}'.",
+        "Ribbons are cut in {buyer}'s name. The festival is on.",
+        "{buyer}'s gift becomes a festival. Even the geese are excited.",
+        "The innkeeper chalks {buyer}'s name above the door: 'Paid in full.'",
+        "{buyer} lit the fuse; Bellmire brought the powder. Festival!",
+        "A feast of {buyer}'s making. The town only has to show up.",
+        "The guild hall rings with {buyer}'s name and a good deal of clatter.",
+        "The crier practised {buyer}'s name all morning. Tonight he gets to say it.",
+        "{buyer} has called a festival and Bellmire does not dither."
+      ],
+      "crowd": [
+        "Three cheers for {buyer}!",
+        "Who is {buyer}? Whoever they are, they're a saint!",
+        "Here's to {buyer} - and pass the pie!",
+        "{buyer}! {buyer}! {buyer}!",
+        "Somebody write {buyer} on the long table in flour.",
+        "I'd carry {buyer} home on my shoulders if I could find them!",
+        "A cup for {buyer}! A cup for the cup!",
+        "Is {buyer} here? Somebody find them and give them a cake!",
+        "Bless {buyer}'s open hands!",
+        "The brewer wants to meet {buyer}. For no reason. Except gratitude.",
+        "{buyer} bought the ale and the ale is good!",
+        "{buyer} the generous!",
+        "I'd march into the scar for {buyer} - after the cake.",
+        "Tell {buyer} the whole green says thank you!",
+        "Look - {buyer}'s ribbon is on the maypole!",
+        "Name a lantern for {buyer}!",
+        "The fiddlers know a song for {buyer} - it's the same song, but louder!",
+        "A kiss for whoever brought {buyer} to Bellmire!",
+        "They say {buyer} can hear us from beyond the Ford!",
+        "Say it again: {buyer}!"
+      ],
+      "toasts": [
+        "To {buyer}, who bought a night we won't forget!",
+        "To {buyer}: may your own table never be bare!",
+        "To {buyer}, and the good they send into the dark!",
+        "To {buyer} - Bellmire's friend beyond the Ford!",
+        "To {buyer}'s open hand, and the ale it poured!",
+        "To {buyer}, the patron of this evening!",
+        "To {buyer}: first cup is theirs, and so is the last!",
+        "To {buyer}, and may the road meet them kindly!",
+        "To {buyer}, the only guild we love more than our own!",
+        "To {buyer}'s name, now on the oldest wall we have!",
+        "To {buyer}: gold of the heart!",
+        "To {buyer}, whom the bell calls friend!",
+        "To {buyer}, who looked at Bellmire and said 'feast'.",
+        "To {buyer}'s health, wealth, and many a pie!",
+        "To {buyer} - may your luck run longer than our tabs!",
+        "To {buyer}, the reason for the crowd!"
+      ],
+      "stalls": [
+        "A cake iced with {buyer}'s name, wobbling slightly.",
+        "Mulled cider labelled 'The {buyer}' - warm and a little unwise.",
+        "Roast goose: 'by {buyer}'s leave', and nobody argues.",
+        "A honey-cake stall under {buyer}'s banner. Sold out in four minutes.",
+        "Free cups, tonight, thanks to {buyer}. Limit: all of them.",
+        "Painted lanterns, each with a small 'for {buyer}'.",
+        "Ribbon sellers have run out of {buyer}-coloured ribbon.",
+        "A sweet stall named in {buyer}'s honour: sticky, golden, famous.",
+        "The brewer's best barrel, tapped for {buyer}.",
+        "Pies marked with a crooked B, for 'buyer' - the baker's joke.",
+        "A lucky dip: every prize has {buyer}'s name on it, even the turnip.",
+        "A mulled-wine stall pours the first cup upright for {buyer}."
+      ],
+      "e3po": [
+        "E3PO raises his cup to {buyer}, once, and drinks it like an order.",
+        "'To {buyer}. The wall is grateful. So am I.'",
+        "The Commander posts a guard of honour at {buyer}'s banner.",
+        "E3PO reports to the crowd: 'Our patron tonight is {buyer}.' The crowd roars.",
+        "'I do not drink to many. I drink to {buyer}.'",
+        "E3PO salutes the empty air beyond the Ford, where {buyer} might be listening.",
+        "'{buyer} is welcome at my gate, any hour.'",
+        "The Commander allows a second cup. For {buyer}.",
+        "E3PO lifts a child up to see {buyer}'s banner and holds still for a very long time.",
+        "'The wall does not bow. But tonight it nods, {buyer}.'",
+        "E3PO personally unrolls the banner that says {buyer}.",
+        "'Patrons like {buyer} are why a gate stays shut.'",
+        "E3PO says one dry word of thanks to {buyer} and means ten.",
+        "The Commander's helm has {buyer}'s ribbon on it. He wears it into the night.",
+        "'To {buyer}. May the road rise to meet them - and be dry.'",
+        "E3PO stands guard over the {buyer} barrel. No one steals from the patron."
+      ],
+      "notables": [
+        {
+          "who": "Agnes Gatewood",
+          "line": "Agnes: '{buyer} paid for tonight. I only charge them for the next round.'"
+        },
+        {
+          "who": "Tobyn Ironside",
+          "line": "Tobyn: 'I'd forge {buyer} a medal if I knew what they'd done. Oh. That's it.'"
+        },
+        {
+          "who": "Maud Reedwhistle",
+          "line": "Maud: 'Fish for {buyer}, free as water. Take two.'"
+        },
+        {
+          "who": "Bram Barrelbelly",
+          "line": "Bram toasts {buyer} with the barrel itself."
+        },
+        {
+          "who": "Nell Candlemas",
+          "line": "Nell bakes a cake with {buyer}'s name on it and then eats a corner."
+        },
+        {
+          "who": "Elspeth Hartley",
+          "line": "Elspeth blesses {buyer} by name, in a voice the whole green can hear."
+        },
+        {
+          "who": "Wat Mudboot",
+          "line": "Wat: 'Whoever {buyer} is, they bought a better night than I have ever had.'"
+        },
+        {
+          "who": "Sibyl Wickham",
+          "line": "Sibyl: 'A toast to {buyer}. May their cups be full and their mornings kind.'"
+        },
+        {
+          "who": "Godric Fordbright",
+          "line": "Godric salutes {buyer}'s banner with a spoon."
+        },
+        {
+          "who": "Hob Coldfingers",
+          "line": "Hob weaves a reed wreath for {buyer} and sets it on the banner."
+        },
+        {
+          "who": "Agnes Gatewood",
+          "line": "Agnes carves {buyer}'s name into the bar with a hot nail."
+        },
+        {
+          "who": "Tobyn Ironside",
+          "line": "Tobyn: 'Say what you like about heroes. {buyer} pays for the music.'"
+        }
+      ],
+      "closings": [
+        "The feast ends. {buyer}'s banner stays up till morning.",
+        "Bellmire drinks a last cup to {buyer} and goes home.",
+        "The crier calls it: 'Thank {buyer}, and goodnight.'",
+        "The fiddlers play {buyer}'s song once more, softly.",
+        "The last toast belongs to {buyer}. Everyone remembers.",
+        "The lanterns are left lit for {buyer}'s sake.",
+        "The festival folds. {buyer}'s name stays on the lips of the sleepy.",
+        "The innkeeper wipes the bar, then wipes {buyer}'s name off the board - reluctantly.",
+        "The town sleeps well, thanks to {buyer}.",
+        "The banner of {buyer} is folded and kept in the guild chest.",
+        "'Same again,' says the crier. 'If {buyer} pays.'",
+        "A final cheer for {buyer} - and the green falls quiet.",
+        "The guard changes. E3PO tips his helm to the empty air, for {buyer}.",
+        "{buyer} bought the night. Bellmire gives it back in memory.",
+        "The ribbons come down. {buyer}'s stays on the maypole.",
+        "A sleepy child asks the crier who {buyer} is. 'A friend,' says the crier."
+      ]
+    }
   }
 }

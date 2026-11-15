@@ -1,5 +1,82 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## MR. E'S RULING (Nov 15 16:57) - BELLMIRE IS HAND-BUILT. NO MORE PROCEDURAL TOWN. **BINDING**
+
+Verbatim: "we need to make sure the roads are being built correctly and not overlapping. in my
+opnion we should just make the maps of the town. all the way to level 15. we have the buildings
+get placed in a specific fashion. for now this game is not an ever expanding world. we are keeping
+it to the one town. the lore can stay (if its in the lore at all) we will make a well built town.
+have it pre made for each level and however big the upgrades are. because right now its auto
+generating and causing collisions. so let make just one big map. lay out the roads correctly, the
+buildings, then town square."
+
+HE IS RIGHT AND THIS IS THE CORRECT CALL. Every town placement bug of the last two days - the
+overlapping farms (D92), the dirt patch cutting across the road in his 16:57 shot, the body in the
+bush (D91.5), props in lanes, wagons parked across paths - is the same bug wearing different
+clothes: a generator placing things by sampling and hoping. We have been writing better and better
+collision tests to referee a fight that should never happen. A town is a DESIGNED PLACE. Design it
+once, well, and the entire class of bug is gone by construction rather than by test.
+
+### WHAT THIS DECIDES, AND WHAT IT DOES NOT
+  - THE TOWN IS AUTHORED. One map, laid out by hand: roads first, then the square, then buildings
+    onto the blocks the roads make. No runtime placement, no seeded scatter deciding where a
+    building stands.
+  - THE DUNGEON STAYS PROCEDURAL. It must - it is a different floor every delve and that is the
+    point. D91's crowd avoidance and three-cell corridors are UNAFFECTED and still RC.
+  - THE VALLEY outside the town walls can stay generated; it is open ground and nothing there
+    needs to interlock. Keep the obstacle work honest there, but it is no longer urgent.
+  - D92 IS SUPERSEDED FOR THE TOWN. The oriented-rectangle test is still worth having for the
+    valley and for anything the dungeon places, but farms stop being a placement problem the
+    moment the farms are drawn by hand. Do not spend a big item on it now.
+  - LORE IS UNAFFECTED. He said the lore can stay. Nothing written is invalidated.
+
+### THE ARCHITECTURE ALREADY WANTS THIS - growth.gd is a layer system
+growth.gd keeps `_layers = {}  # level -> Array[Node3D], shown from that level on`, and
+`show_level()` SHOWS AND HIDES - it does not rebuild. Its own comment says a level change "costs
+nothing and the navmesh never moves". That is exactly the shape a hand-authored town needs. The
+only thing wrong today is that the nodes in those layers are generated at startup instead of
+authored. Keep the mechanism; replace its contents.
+
+### EACH LEVEL IS A SUPERSET OF THE ONE BEFORE - THIS IS THE RULE THAT MATTERS
+Level N+1 ADDS to level N. It never moves a road, never shifts a building, never re-plots the
+square. When the town levels up on stream, viewers must see something NEW APPEAR in a place that
+was empty - scaffolding becoming a shop, a dirt lane becoming cobbles, a wall extending. They must
+NEVER see the town they know rearrange itself around them. Author level 15 FIRST, as the finished
+town, then work backwards deciding what is absent at each earlier level. Authoring forwards
+guarantees a later level will want to move something an earlier one placed.
+
+### D93 - AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
+  1. A LAYOUT FORMAT, as data, not a scene: one file per level under data/town/ with roads as
+     polylines, the square as a polygon, and every building, prop and site as an entry with a
+     position, a rotation and an id. Data because it is diffable, editable by Mr. E and by any
+     worker, and reviewable in a PR. A .tscn is not.
+  2. ROADS FIRST. Lay the road network by hand, as a connected graph with real widths. Every road
+     a deliberate line. The ground patches (soil, dirt, cobble) are authored to the road polygons
+     so nothing is ever drawn across a road again - which is the dirt patch in his shot.
+  3. THE SQUARE. Then the blocks the roads enclose. Then buildings onto the blocks, each with its
+     door facing a road, by hand.
+  4. A LOADER that builds the town from the layout file and registers everything - navmesh,
+     obstacles, sites, doors - from authored data rather than discovering it. Delete the placement
+     code paths it replaces; do not leave both alive.
+  5. A VALIDATOR run in CI and headless: no two building footprints overlap, no footprint crosses
+     a road, every door touches a road, every site is reachable from every other, and no ground
+     patch overlaps a road polygon. It is cheap and it makes the authored town provably correct.
+  6. STAGE IT. Author level 15, get it right, then derive the earlier levels backwards. Ship the
+     loader against level 15 first so the town is playable the whole way through the work.
+
+### ONE THING MR. E MUST DECIDE: FIFTEEN LEVELS, OR TWELVE?
+He said "all the way to level 15". The numbers in the code today do not have a 15 in them:
+  - growth.gd TOP_LEVEL = 6 (six visual build stages)
+  - economy has 12 TOWN_LEVELS, and growth maps two economy tiers per visual stage
+  - items.json's shop_stock, trader_cargo and stock_by_tier are all keyed to tiers 1-12, matching
+    lore_lines.growth_tiers
+So the shop stock ladder, the trader's cargo and the growth lore are ALL built on TWELVE. Going to
+fifteen means extending all three, and the 16:05 gear ruling (shop level gates what is on the
+shelf) is wired to that same ladder. Going to twelve means authoring twelve maps and the rest
+already lines up. ASK HIM. Do not guess, and do not quietly author 12 and call it 15, or 15 and
+leave the stock tables at 12 - a shop at level 13 with no stock table is a silent hole in the
+economy he will find on stream.
+
 ### D92 - THE FARMS OVERLAP: RECTANGLES CHECKED AS CIRCLES, SAMPLED WITH GAPS (game build)
 
 Mr. E, Nov 15 16:53, with a shot of the livestock paddock: "the farms are being built so weirdly,

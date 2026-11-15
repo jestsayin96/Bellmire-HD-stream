@@ -101,13 +101,31 @@ func _run() -> void:
     iso.compile("^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ$")
     for e: Dictionary in ch:
         var es := String(e["s"])
-        if e.keys().size() != 3 or not (String(e["t"]) in SnapshotPublisher.CHRON_TYPES) or iso.search(String(e["at"])) == null \
+        # D60: {t, s, at} always; `day` (int), `kind` (short word) and `who` (W1a-clean names
+        # <= NAME_MAX) may ride along, and nothing else may
+        var extra_ok := e.has_all(["t", "s", "at"])
+        for k in e.keys():
+            if not (String(k) in ["t", "s", "at", "day", "kind", "who"]):
+                extra_ok = false
+        if e.has("day") and typeof(e["day"]) != TYPE_INT:
+            extra_ok = false
+        if e.has("kind") and (String(e["kind"]) == "" or String(e["kind"]).length() > 16 or not String(e["kind"]).is_valid_ascii_identifier()):
+            extra_ok = false
+        if e.has("who"):
+            if typeof(e["who"]) != TYPE_ARRAY or (e["who"] as Array).is_empty():
+                extra_ok = false
+            else:
+                for w in (e["who"] as Array):
+                    var ws := String(w)
+                    if ws == "" or ws.length() > SnapshotPublisher.NAME_MAX or ws.contains("<") or ctl.search(ws) != null:
+                        extra_ok = false
+        if not extra_ok or not (String(e["t"]) in SnapshotPublisher.CHRON_TYPES) or iso.search(String(e["at"])) == null \
                 or es.length() > SnapshotPublisher.LINE_MAX or es == "" or es.contains("<") or es.contains(">") \
                 or es.contains("[color") or ctl.search(es) != null or es.contains("123456789"):
             shape_ok = false
             print("   bad entry ", e)
     print("W1A chronicle sample: ", ch[1])
-    _check("21 every entry {t, s, at}: t allowed, ISO time, not HTML, no control chars, no ids, <= %d chars" % SnapshotPublisher.LINE_MAX, shape_ok)
+    _check("21 every entry {t, s, at} (+ D60 day/kind/who, typed): t allowed, ISO time, not HTML, no control chars, no ids, <= %d chars" % SnapshotPublisher.LINE_MAX, shape_ok)
     # more than the cap, then a later line: still newest first, still 50
     for i in 80:
         town.feed.append("Floor %d cleared." % (i + 1))

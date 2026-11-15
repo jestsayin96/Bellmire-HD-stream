@@ -91,6 +91,8 @@ func _level() -> int:
 
 func _say(line: String) -> void:
     (town.get("feed") as Array).append(line)
+    if town.has_method("tag_feed"):
+        town.call("tag_feed", "raid")       # D60
     print("FEED ", line)
 
 ## ------------------------------------------------------------------ raid

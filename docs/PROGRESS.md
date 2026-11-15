@@ -1052,3 +1052,33 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   test. That is a combat-AI choice (_cast_tick keeps picking menders while party members are below
   some HP), not a VFX bug - the VFX pipeline is proven visible. Worth a future tune of the
   attack-vs-mend threshold if the stream dial shows the caster class feels passive in defence.
+
+
+## D-cycle D13 - D31a VISIBLE CONSTRUCTION: scaffolding raises on level-up
+- Item: D31 "builders appear and actually construct new buildings" (first open DESKTOP item).
+  Scoped to the PART that is purely visual-and-visible-at-stream: scaffolding that goes up
+  around every newly-built plot and every newly-unlocked special at the moment the town
+  levels up. Builder NPC figures, map consolidation and the timelapse itself remain open.
+- CHANGE (scripts/growth.gd ONLY): added SCAFFOLD_LIFE=90s constant, _scaffolds array and
+  a dedicated "Scaffolds" child under Growth. show_level() now, going UP after the founding,
+  walks `houses` and `specials` for any grow/UNLOCK threshold in (was, lv] and calls
+  _raise_scaffold_plot - a timber frame (4 corner poles, 2 plank rings at h*0.33 and h*0.70,
+  diagonal braces, a crosspole with a yellow pennant, a stack of planks on the ground) sized
+  to the plot's own extent. A new `_process(delta)` sweeps entries whose `until` time has
+  passed and queue_frees the node. Chronicle gets one line: "Builders raise scaffolding
+  across Bellmire." Purely visual - no collision bodies, no navmesh touch, no interaction
+  with solid_at/_townwalk (my change adds Node3D+MeshInstance3D only).
+- TEST tools/_d31_test.gd (new): boots Town.tscn, finds the Growth node, forces show_level
+  quietly to 1, measures active_scaffolds()=0, jumps 1->4, measures mid=9, jumps 4->6,
+  measures late=17 (>mid), pushes every entry's `until` into the past, lets _process sweep,
+  measures cleaned=0. D31_TEST OK.
+- GATES: parse 0 SCRIPT ERROR / 0 Parse Error (--quit-after 300 clean); _offfloor
+  0 of 1359 samples (INPROP 0, MON_INPROP 0 of 127); _twitch_parse OK; _delve_test runs
+  clean (no SCRIPT ERROR, time-capped at T150s); _townwalk ran to T=110s in 2 attempts with
+  in_solid 0 across 6195 + 16702 samples and 0 stuck_on_route but the subprocess timeout
+  killed each run before the final PASS line. Given this change adds only visual nodes
+  with no collision/nav touch, the in_solid trace is the signal that matters and it is
+  clean. Treating that as a runs-with-no-regression rather than a strict PASS.
+- Staged only the files this change touches (scripts/growth.gd, tools/_d31_test.gd +
+  .uid, docs/WORK_PLAN.md, docs/PROGRESS.md, docs/RUN_LOCK.txt); the tree carries other
+  sessions' untracked WIP (prior cycles' .uid, logs) not mine to sweep in with git add -A.

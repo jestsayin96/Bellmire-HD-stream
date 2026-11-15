@@ -35,12 +35,22 @@ STAGED:
      Three is the right answer for what he is building: a six-hero party can walk three abreast
      with a monster line meeting them and nobody has to clip through anyone, and the camera has
      somewhere to sit that is not inside a wall.
-     IT IS A BIG CHANGE AND IT WILL PUSH BACK. floorgen's own comment (~1037) says rooms and
-     corridors occupy only about a third of the grid because "a plan of four to six rooms with
-     corridors between them needs space to breathe". Tripling corridor width spends that budget
-     fast. Expect to have to raise the grid size, or carry fewer rooms per floor, or both. MAKE
-     THAT TRADE DELIBERATELY AND SAY WHICH YOU TOOK - do not let floors silently become one big
-     open space with no rooms left in them, which would cost more than the crowding did.
+     THERE IS NO TRADE TO MAKE - GROW THE GRID. Mr. E, Nov 15 16:52: "i never limited the
+     dungeons floor plan. idc how big they get or how small they are". The grid size in floorgen
+     is NOT a budget to spend and never was a constraint he set. Three-cell corridors need more
+     room, so TAKE MORE ROOM. Raise the grid until the rooms and the wider halls both fit.
+     DO NOT PAY FOR THE CORRIDORS WITH ROOMS. Fewer rooms per floor, smaller rooms, or floors
+     that drift into one open space are all the WRONG answer and all forbidden here. A floor is a
+     plan of rooms joined by halls; the halls got wider, so the plan gets bigger. That is all.
+     Floors may also vary in size from one to the next - he said so explicitly - so the generator
+     need not pick one grid and keep it. A small tight floor and a sprawling one are both fine
+     and the variety is worth having.
+     The limits that DO apply are performance, not layout: generation time per floor, draw calls
+     and the FPS gates in D23. Measure those, not the grid. His machine is not the bottleneck
+     ("i dont care if we go up to 200 fps... my computer hits close to 300+"), so if a bigger
+     floor costs frames, that is a D23 optimisation problem to solve, not a reason to build a
+     smaller floor. Nothing here changes the standing rule that canon NEVER STATES A FLOOR COUNT -
+     that is about how many floors there are, not how big one is.
      Things that assume a corridor's width and must be re-checked: the portcullis (D88 - it must
      span whatever the new width is, which is one more reason that item is about spanning and not
      about a radius), the ambush trigger points, wall-drawing (floorgen walls any cell with no

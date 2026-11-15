@@ -5792,3 +5792,22 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
   residual at the south-market solid (32.5,-64..-69) on 100+-waypoint routes - left open, named in WORK_PLAN.
 - GATE GREEN: parse 0; _offfloor 0/1316 (INPROP 0, MON_INPROP 0/108); TWITCH_PARSE OK; _delve_test to floor 2,
   0 SCRIPT ERROR. D44/D50 left UNTICKED (in_solid not yet 0 every run). No pumpkin prop exists in code.
+
+## D-cycle D91a - one crowd for town and dungeon; bushes are solid; animals measured (game build, 2026-11-15 ~17:35 CT)
+- RC ITEM TAKEN: D91, first in the GAME BUILD row of the rewritten Phase RC queue. Did the stages in my own
+  files (1, 5, 6). Stages 2-4 (delvers/monsters call it, three-cell corridors, file formation) are in
+  delve.gd / monster.gd / floorgen.gd - LAPTOP CODE, no worker - so D91 stays OPEN pending Mr. E's ownership call.
+- GIT: the merge of origin/main had silently failed (a stale .git/ORIG_HEAD.lock + untracked copies of main's
+  L64.4 files). Lock moved aside, the identical untracked files cleared, laptop fast-forwarded to 91f01d4.
+- STAGE 1: new scripts/crowd.gd (class Crowd) - the D16a avoidance verbatim, plus fresh()/add() and an
+  overlaps() pair counter. town.crowd_push fills it and asks it; town.CROWD_* and town.body_r now alias Crowd.
+  tools/_d91_crowd.gd re-runs the OLD maths verbatim: 4000 samples, 0 mismatches.
+- STAGE 5: planter boxes now solid; valley tree-foot bushes and verge bushes spawned solid; a bush is never
+  skipped by the flat-thing rule; and solid_at's 600-frame grid cache is invalidated when a footprint is
+  added (it was hiding late footprints). Audit: Bush_Common 189/189, Bush_Common_Flowers 202/202 registered.
+  Still unregistered by design: flowers, grass, ferns, rocks-paths; also 280 pen fences and ~170 valley trees.
+- STAGE 6: animal body_r measured off each model (mean half-extent, clamp 0.12-0.75): Cow .71, Horse .75,
+  Sheep .45, Pig .47, Llama .58, Foal .50, Corgi .36, Fox .43, Pug .12, Hen/Cat .15.
+- TOWN BASELINE for the done test (90 s, 180 samples): 3.36 overlapping body pairs per sample, worst 0.97 m.
+- GATE GREEN: parse 0; _offfloor 0/1291 (INPROP 0, MON_INPROP 0/107); TWITCH_PARSE OK; townwalk in_solid 1/19366
+  PASS, stuck_on_route 0 (D44 baseline 0-2); _delve_test 0 SCRIPT ERROR.

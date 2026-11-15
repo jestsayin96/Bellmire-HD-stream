@@ -251,6 +251,21 @@ STAGED:
 NAMES ARE EXPLICITLY FINE. Mr. E: "names overlappiong was fine because depending on the angle."
 Do NOT spend any part of this item on nameplate overlap. Bodies only.
 
+STATUS D91a (game build, 2026-11-15 ~17:35 CT) - stages 1, 5, 6 DONE; 2, 3, 4 BLOCKED (owner):
+  1. scripts/crowd.gd (class Crowd) now holds the avoidance; town.crowd_push fills it once a physics
+     frame and asks it. tools/_d91_crowd.gd keeps the OLD town maths verbatim: 4000 samples, 0
+     mismatches - town behaviour identical. Crowd.overlaps() is the done-test's pair counter.
+  5. Bushes: every Bush_* now a footprint (town 189/189 + 202/202 registered, was 154+156 of 391).
+     Causes: planter boxes were not solid; valley bushes/verge bushes spawned with solid=false; and
+     solid_at's grid cache hid footprints added after the first query for up to 600 frames.
+  6. Animal body_r measured per model (mean half-extent, 0.12-0.75): Cow .71, Horse .75, Sheep .45,
+     Pig .47, Llama .58, Corgi .36, Fox .43, Pug .12, Hen/Cat .15.
+  TOWN BASELINE (90 s, 180 samples): 3.4 overlapping body pairs per sample, worst 0.97 m - NOT ZERO.
+  STAGES 2-4 (wire Crowd into delvers + monsters, three-cell corridors, file formation) live in
+  delve.gd / monster.gd / floorgen.gd - LAPTOP CODE files with no worker (see BLOCKED, NEEDS MR. E).
+  Crowd is ready for them: `var crowd := Crowd.new()`; each step `if not crowd.fresh(): add bodies`,
+  then `p += crowd.push(self, dir) * delta`.
+
 DONE TEST: a 20-minute delve soak and a 20-minute town soak, sampling every body pair every frame.
 Pass requires ZERO frames in which two bodies' centres are closer than the sum of their body_r,
 in the dungeon and in town; zero bodies inside a registered prop's footprint; and no increase in

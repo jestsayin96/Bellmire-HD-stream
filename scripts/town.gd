@@ -1078,7 +1078,9 @@ func _solid_of(n: Node3D) -> void:
         return
     var sc := n.scale.x
     var he := Vector2(box.size.x, box.size.z) * 0.5 * sc
-    if box.size.y * sc < 0.35 or maxf(he.x, he.y) < 0.2:
+    # D91: a bush is never walked through, however low and small it is - the
+    # flat-thing rule had let the smaller bushes go unregistered
+    if (box.size.y * sc < 0.35 or maxf(he.x, he.y) < 0.2) and not n.scene_file_path.get_file().begins_with("Bush"):
         return                  # rugs, mugs and flat things are walked over
     var yaw := n.rotation.y
     var ax := Vector2(cos(yaw), -sin(yaw))
@@ -1086,6 +1088,7 @@ func _solid_of(n: Node3D) -> void:
     var cen := box.get_center() * sc
     var c2 := Vector2(n.position.x, n.position.z) + ax * cen.x + az * cen.z
     _solid_rects.append([c2, ax, az, he + Vector2(0.1, 0.1)])
+    _sgrid_f = -100000          # D91: a new footprint is seen at once, not up to 600 frames late
 
 func _bake_nav() -> void:
     var rects: Array = _solid_rects.duplicate()
@@ -2402,7 +2405,9 @@ func free_seat(near: Vector3, r: float) -> int:
 
 func _planter(p: Vector3, yaw: float, wood: Material) -> void:
     var g := height_at(p.x, p.z)
-    _box(Vector3(1.1, 0.45, 0.45), Vector3(p.x, g + 0.22, p.z), wood, yaw)
+    # D91: the planter (and the bush in it) is a body's obstacle - a wizard
+    # had been standing inside one
+    _solid_of(_box(Vector3(1.1, 0.45, 0.45), Vector3(p.x, g + 0.22, p.z), wood, yaw))
     var soil := StandardMaterial3D.new()
     soil.albedo_color = Color(0.22, 0.15, 0.10)
     _box(Vector3(1.0, 0.04, 0.36), Vector3(p.x, g + 0.44, p.z), soil, yaw)
@@ -5490,95 +5495,32 @@ func route(from: Vector3, to: Vector3) -> Array:
 ## ahead: the walker's right) - the one coming the other way does the same, so
 ## two folk meeting in a gate step aside and pass instead of walking into each
 ## other. Someone ahead going the same way more slowly is followed, not shoved.
-const CROWD_R := 0.75
-const CROWD_LOOK := 2.2
-const CROWD_SOFT := 1.4        # m/s at the middle of the soft ring (the old shove)
-const CROWD_HARD := 5.0        # m/s at full overlap
-const CROWD_YIELD := 2.2       # m/s sidestep for someone dead ahead and close
-var _crowd_f := -1
-var _crowd: Dictionary = {}
+## D91: the avoidance itself now lives in crowd.gd (class Crowd), shared with
+## the dungeon - ONE copy. The numbers are Crowd's; these names stay for the
+## wagon push below and anyone reading town.CROWD_*.
+const CROWD_R := Crowd.CROWD_R
+const CROWD_LOOK := Crowd.CROWD_LOOK
+const CROWD_SOFT := Crowd.CROWD_SOFT
+const CROWD_HARD := Crowd.CROWD_HARD
+const CROWD_YIELD := Crowd.CROWD_YIELD
+var crowd := Crowd.new()
 
 ## how wide someone is (centre to shoulder): folk, children, riders, animals
 static func body_r(o: Node3D) -> float:
-    var r = o.get("body_r")
-    return float(r) if r != null else 0.28
-
-func _crowd_add(o: Node3D) -> void:
-    var op: Vector3 = o.global_position
-    var key := Vector2i(floori(op.x * 0.5), floori(op.z * 0.5))
-    if not _crowd.has(key):
-        _crowd[key] = []
-    (_crowd[key] as Array).append(o)
+    return Crowd.body_r(o)
 
 func crowd_push(v: Node3D, dir := Vector3.ZERO) -> Vector3:
-    var f := Engine.get_physics_frames()
-    if f != _crowd_f:
-        _crowd_f = f
-        _crowd.clear()
+    if not crowd.fresh():
         for o in people:
             if not is_instance_valid(o) or not (o as Node3D).visible or bool(o.get("inside")):
                 continue
-            _crowd_add(o)
+            crowd.add(o)
         for a in animals:
             if is_instance_valid(a) and (a as Node3D).visible and float(a.get("float_y")) == INF:
-                _crowd_add(a)
-    var p := v.global_position
-    var rv := body_r(v)
-    var kx := floori(p.x * 0.5)
-    var kz := floori(p.z * 0.5)
-    var push := Vector3.ZERO
-    var side := Vector3(-dir.z, 0.0, dir.x)       # the walker's right
-    var yield_best := 0.0
-    var yield_dir := Vector3.ZERO
-    var reach := 2 if dir != Vector3.ZERO else 1
-    for dx in range(-reach, reach + 1):
-        for dz in range(-reach, reach + 1):
-            var cell = _crowd.get(Vector2i(kx + dx, kz + dz))
-            if cell == null:
-                continue
-            for o in cell:
-                if o == v:
-                    continue
-                var op: Vector3 = (o as Node3D).global_position
-                if absf(op.y - p.y) > 3.0:
-                    continue                    # a delver far below, not a neighbour
-                var d := Vector3(p.x - op.x, 0.0, p.z - op.z)
-                var L := d.length()
-                var contact := rv + body_r(o)
-                var ring := maxf(CROWD_R, contact + 0.15)
-                if L < ring:
-                    if L < 0.01:
-                        d = Vector3(cos(float(v.get_instance_id() % 628) * 0.01), 0.0, sin(float(v.get_instance_id() % 628) * 0.01))
-                        L = 0.01
-                    var n := d / L
-                    push += n * CROWD_SOFT * 2.0 * (ring - L) / ring
-                    if L < contact:
-                        push += n * CROWD_HARD * (contact - L) / contact
-                if dir == Vector3.ZERO:
-                    continue
-                # yield: who is in the way ahead
-                var rel := -d                      # me -> them
-                var ahead := rel.dot(dir)
-                if ahead <= 0.05 or ahead > CROWD_LOOK:
-                    continue
-                var lat := rel.dot(side)
-                var clear := contact + 0.2
-                if absf(lat) >= clear:
-                    continue
-                # going my way and not slower: no need to pass them
-                var ov = o.get("move_dir")
-                var odir: Vector3 = ov if ov is Vector3 else Vector3.ZERO
-                if odir.dot(dir) > 0.6:
-                    continue
-                var w := (1.0 - ahead / CROWD_LOOK) * (1.0 - absf(lat) / clear)
-                if w > yield_best:
-                    yield_best = w
-                    # pass on the side away from them; dead ahead keep right
-                    yield_dir = -side if lat > 0.08 else side
-    if yield_best > 0.0:
-        push += yield_dir * CROWD_YIELD * yield_best
+                crowd.add(a)
+    var push := crowd.push(v, dir)
     if dyn_obstacles:
-        push += _wagon_push(v, p, rv, dir)      # D16c
+        push += _wagon_push(v, v.global_position, body_r(v), dir)      # D16c
     return push
 
 ## ---- D16c DYNAMIC OBSTACLES. Everything that stands still is carved out of

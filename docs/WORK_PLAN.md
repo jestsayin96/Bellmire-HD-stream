@@ -1,5 +1,55 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## MR. E'S RULING (Nov 15 16:41) - A LICENCE FOR BELLMIRE, AND THE DAIS STAYS LOCAL
+
+He pointed at the fightoverlay licence another chat wrote ("Proprietary, all-rights-reserved with
+teeth") and asked for the same here, plus a pen test if the Dais security worries me.
+
+LICENCE: WRITTEN AND IN THE REPO ROOT (LICENSE, this commit). Proprietary, all rights reserved:
+watch/play/read/fork-to-contribute only; no selling, redistributing, re-hosting, running it on
+another channel, ripping the art, ML training or claiming authorship; named characters and
+creatures are each separate works; DMCA, platform termination and 17 U.S.C. 504(c) statutory
+damages up to $150,000 per wilfully infringed work spelled out; git history cited as proof of
+authorship.
+
+ONE THING THE FIGHTOVERLAY VERSION APPEARS TO LACK, AND OURS MUST HAVE - SECTION 6. Bellmire is
+built on CC0 packs from Quaternius, KayKit and Kenney, with their licence files already in
+addons/*/LICENSE* and assets/**/LICENSE*. Mr. E CANNOT licence those to anyone, because they are
+not his, and a blanket "all rights reserved" over the whole repository would claim rights over
+public-domain assets he does not hold. That is both wrong and the kind of overreach that makes a
+real claim easier to attack. Section 6 says plainly: his rights cover his ORIGINAL work and the
+particular selection, arrangement and combination that is Bellmire HD; the underlying CC0 assets
+stay free under their own terms, and where the two conflict for a given file the third-party
+licence wins. This makes the licence STRONGER, not weaker - everything it claims, it can hold.
+IF THE FIGHTOVERLAY LICENCE HAS NO SUCH CARVE-OUT, TELL MR. E IT NEEDS ONE. Same CC0 packs, same
+problem, and it is a five-minute fix there too.
+
+### D89 - LICENCE PLUMBING (any worker, small, do it alongside your next item)
+  1. A short licence line in README.md pointing at LICENSE, so it is seen before the code is.
+  2. A NOTICE or CREDITS file listing every third-party pack in use, its author and its licence,
+     gathered from the existing addons/*/LICENSE* and assets/**/LICENSE* files. CC0 asks for no
+     attribution; give it anyway. It costs nothing and it is how the carve-out in Section 6 is
+     shown to be true rather than merely asserted.
+  3. The viewer hub's footer gets a one-line copyright and a link to the licence.
+  4. NEVER move, rename or delete a third-party LICENSE file. They must travel with their assets.
+
+### THE DAIS IS STILL LAN-ONLY, AND A LICENCE DOES NOT CHANGE THAT
+Mr. E offered a pen test. Good instinct, wrong lever for this particular risk - and worth saying
+why plainly, because the two things get conflated.
+  - A LICENCE is a legal remedy AFTER someone copies the work. It is the right tool for art theft
+    and re-hosting, which is exactly what he wants it for, and it is now in place.
+  - THE DAIS RISK IS NOT COPYING, IT IS CONTROL. Anyone who reaches a public Dais endpoint can
+    seize the camera on a LIVE stream. A licence does not stop that, and a takedown notice the
+    next morning does not un-ruin the broadcast. The only reliable defence is for the endpoint
+    not to exist on the public internet.
+  - So: bind to the LAN. No port forward, no tunnel, no Supabase command channel. His phone on
+    the same WiFi still reaches it, which covers the second-screen case he actually described.
+  - A pen test is genuinely welcome on the PUBLIC viewer hub, which is a real attack surface and
+    already carries a strict CSP, textContent-only rendering and a hostile-name canary. Point it
+    there. If Mr. E later wants the Dais reachable from outside the house, that is a separate
+    build - auth, transport, rate limiting, an audit log and a kill switch - and he should ask for
+    it by name rather than have it appear quietly.
+
 ### D88 - THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
 
 "one of the GATE traps that comes down to block the path was put in incorrectly, one of the
@@ -35,13 +85,23 @@ THREE FAULTS, AND THE RADIUS IS ONLY THE FIRST:
      geometry gives it two walls to meet, and make the span a condition of placing it at all: if
      no such spot exists on the floor, DO NOT PLACE ONE.
 
-WHILE IN THERE - IT IS NOT A TRAP EITHER. The grid's tween is `create_tween().set_loops()` on a
-fixed 2.0 / 2.4 / 1.5 / 0.35 cycle that runs forever regardless of whether anyone is near. Mr. E
-called it a "GATE trap that comes down to block the path", which is what it LOOKS like it should
-be. Decide with him which it is: scenery that cycles, or a real trap that drops when a party
-crosses it and has to be lifted, forced or gone around. If it drops on the party it belongs in
-delve.gd's TRAPS table with a DC and a save like the rest. Do not silently leave it as a prop that
-pretends.
+MR. E HAS RULED (Nov 15 16:41): "trap". IT IS A TRAP, NOT SCENERY. Today the grid runs on
+`create_tween().set_loops()` - a fixed 2.0 / 2.4 / 1.5 / 0.35 cycle that repeats forever whether
+or not anyone is near. KILL THAT LOOP. The gate hangs raised and still until a party crosses it.
+  - Add "Portcullis" to delve.gd's TRAPS table with a DC like every other trap (trap_dc()).
+  - It drops on the crossing. DEX save or take the fall; a success is a dive clear.
+  - IT SPLITS THE PARTY, and that is the whole point of it - whoever is on the far side is cut
+    off from the rest. Say who is on which side, by name, in the feed.
+  - Getting through it is a CHOICE with a cost: force it with a STR check (athletics, and the
+    strongest body present should matter - this is one of the few places STR earns its keep
+    besides D80), lift it with the winch if the floor has one, or go the long way round and let
+    the navmesh find another route. If there IS no other route, forcing it is the only way and
+    the party has to spend to do it.
+  - A rogue who SPOTS it before crossing gets the same treatment as any other trap: the party
+    steps round or wedges it open.
+  - Spotting, forcing and the split all go in trap_log so the delve summary can tell the story.
+This replaces the looping prop entirely. A gate that opens and shuts on a timer nobody can see is
+scenery pretending to be danger, and Mr. E read it as a trap because it should have been one.
 
 DONE TEST: build 50 floors of each theme that can spawn one ("crypt", "shrine", "treasury"), and
 for every portcullis assert (a) it spans wall to wall, (b) a straight-line path from one side to
@@ -1078,10 +1138,12 @@ WHAT THIS MEANS FOR DESIGN:
     answer and is NOT being built now. It needs a real split: two instances cannot share one
     Supabase row or one pair of Twitch tokens without fighting. Do not start it.
 
-- [ ] D71. THE REWARDS MUST FOLLOW THE GAME. Owner: DESKTOP BUILD (twitch_eventsub.gd).
-      MR. E DECLINED THIS ONCE (Nov 15 ~03:00) when it was framed as a nice-to-have. His 14:38
-      ruling changes the case, so it is written now - but it is still HIS call whether it gets
-      built, and he may decline it again. Do not treat silence as approval.
+- [~] D71. DECIDED AGAINST - CLOSED, DO NOT BUILD, DO NOT RE-PROPOSE.
+      Mr. E, Nov 15 16:41: "i thought you said it would cause to many issues so we both said no".
+      He is right and this entry was wrong to leave it open. The reward auto-pause is OFF the
+      plan. Rewards stay as Mr. E sets them and the game never reaches in to pause or unpause
+      them. Any later worker that thinks this is a good idea: it was considered twice and
+      declined twice. Leave it.
       THE PROBLEM, which he hit himself: on Nov 15 viewers redeemed Bellmire channel-point rewards
       while he was streaming something else. He fixed the CONFUSION by prefixing every reward with
       "Bellmire:" - but the redemption still lands in a void whenever the game is down, and under
@@ -1123,7 +1185,7 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE LOOP:        D52 (hero won't delve), D44/D50 (wedged walkers), D64, D65, D66, C7, T5, T4
   IT READS:        D61 (fights read), L36, L40, D41 (overlap), D48 (selection frame), L64 (director)
   IT SURVIVES:     D23 (FPS), L56 (delve soak)
-  THE CHANNEL:     L68, L69, D67, D69, D70, L70, D71 (D71 only if Mr. E approves it)
+  THE CHANNEL:     L68, L69, D67, D69, D70, L70   (D71 is CLOSED - decided against)
   THE SOUND:       D72
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
   THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
@@ -1178,6 +1240,10 @@ Do not re-scope or renumber anything to fit this. IDs stay frozen.
       beds stay wired and streamable until this lands). Owner: DESKTOP BUILD (sfx.gd and the
       generator tool) with the music-studio repo READ-ONLY as always - run it in place, copy WAVs
       out, never modify it.
+      GREEN LIT. Mr. E confirmed Nov 15 16:41 that the studio upgrade is FINISHED and the
+      regeneration pass is to go ahead. This is no longer waiting on him - BUILD IT. His ear is
+      still final on the result: generate, wire, and bring him the tracks to judge. Do not tick
+      D72 until he has listened and said yes.
       MR. E UPGRADED THE TOOL (Nov 15, v3.5.2 -> v3.5.15) and everything that blocked the first
       attempt is fixed. Read its own docs first; do not assume the old API:
         - 3.5.3 a truly headless compose path - no vite, no CDP, no browser. Use it.

@@ -1,5 +1,30 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
+
+Mr. E: "longer and bigger tasks need to be handed out."
+
+The workers are clearing items in 12-35 minutes. That is not speed, it is items that are too
+small. A queue of micro-fixes produces a game that is tidy and shallow. He wants depth.
+
+WHEN THE SUPERVISOR WRITES NEW WORK, the bar is now:
+  - An item should be a SUBSTANTIAL piece of work - a system, a feature, a whole subsystem
+    reworked - not a tweak, a number change, or a single-file polish pass. If a competent worker
+    would finish it in under an hour, it is too small to write as its own item.
+  - BUNDLE related small work into one larger item with staged parts (.1, .2, .3) under a single
+    ID, the way D21b was run. One item, several stages, one DONE test for the whole thing.
+  - Prefer DEPTH over breadth: a building type that NPCs actually use beats five new props; a
+    status-effect system beats one new icon; traps that interact with the party beat one new room
+    shape.
+  - Every item still needs its concrete DONE test. A bigger item needs a BIGGER test - a soak, a
+    timelapse, a capture with several things happening at once - not a single screenshot.
+  - Do NOT pad an item to look big. A real system with real stakes, or nothing.
+
+THIS DOES NOT CHANGE EXISTING ITEMS. IDs are frozen; nothing is renumbered or rescoped. It governs
+what gets WRITTEN from now on, and the order they are offered: when several items are open, put the
+substantial ones where a worker taking "the first unchecked item" will actually reach them, rather
+than leaving a queue that is all polish at the top.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.

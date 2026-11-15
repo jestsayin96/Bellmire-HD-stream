@@ -1,1 +1,1 @@
-IDLE 2026-11-15 08:41 - D57 satchel fields shipped in snapshot v=3 (game build)
+IDLE 2026-11-15T02:41:00-06:00 - D57 satchel fields shipped in snapshot v=3 (game build)

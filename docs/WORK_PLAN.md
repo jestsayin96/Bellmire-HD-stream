@@ -30,11 +30,21 @@ STAGED:
   2. WIRE IT INTO THE DUNGEON. Every delver body and every Monster gets a body_r and calls the
      shared push each step, exactly as townsfolk and animals do. Monsters need it most - a pack
      converging on one hero is the worst stack in the game.
-  3. WIDEN THE CORRIDORS, with Mr. E's explicit blessing. Two cells where a one-cell hall would
-     be, or one-and-a-half if the generator can carry it. Check what it does to floor footprint
-     and to the set pieces that assume a corridor's width (the portcullis in D88 spans one - it
-     must span whatever the new width is, which is one more reason D88 is about spanning, not
-     about a radius).
+  3. WIDEN THE CORRIDORS TO THREE CELLS. Mr. E's call, Nov 15 16:50: "lets do 3 cells." Not two -
+     THREE. That is the number; do not quietly settle for two because the generator fights you.
+     Three is the right answer for what he is building: a six-hero party can walk three abreast
+     with a monster line meeting them and nobody has to clip through anyone, and the camera has
+     somewhere to sit that is not inside a wall.
+     IT IS A BIG CHANGE AND IT WILL PUSH BACK. floorgen's own comment (~1037) says rooms and
+     corridors occupy only about a third of the grid because "a plan of four to six rooms with
+     corridors between them needs space to breathe". Tripling corridor width spends that budget
+     fast. Expect to have to raise the grid size, or carry fewer rooms per floor, or both. MAKE
+     THAT TRADE DELIBERATELY AND SAY WHICH YOU TOOK - do not let floors silently become one big
+     open space with no rooms left in them, which would cost more than the crowding did.
+     Things that assume a corridor's width and must be re-checked: the portcullis (D88 - it must
+     span whatever the new width is, which is one more reason that item is about spanning and not
+     about a radius), the ambush trigger points, wall-drawing (floorgen walls any cell with no
+     neighbour), and any set piece placed by "an open cell with clearance".
   4. FORMATION IN A CORRIDOR. A party that cannot walk abreast should walk in FILE - deliberately,
      spaced, in an order - not pile into the same cell. A column of adventurers moving down a hall
      in order is a better shot than a wide room full of them anyway.

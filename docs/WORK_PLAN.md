@@ -336,6 +336,49 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       plain statement of the exact keys and shape the game build worker reads.
 
 
+## MR. E'S ASK, Nov 15 13:36 - UPDATE BELLMIREBRO
+
+The bot has fallen behind the game. data/commands.json carries 21 commands (!armoury !brew
+!deadliest !deepest !delve !dye !enlist !fish !forge !guild !help !hero !inventory !look !memorial
+!oil !patrons !reroll !respec !richest !wear) and NOT ONE OF THEM MENTIONS THE HUB. The viewer
+website is live at https://jestsayin96.github.io/Bellmire-HD-stream/ with the Chronicle, hero
+sheets, the Satchel, crests, the Hall of the Fallen, the Bestiary, the Night Watch and search -
+and a viewer in chat has no way to learn it exists. Everything shipped since Nov 14 is invisible
+to the bot: the festival (D63), the Satchel (D57), the character sheet (D59), and the gear and
+shop economy now being built (D64-D66).
+
+- [ ] L68. BELLMIREBRO MUST KNOW WHAT THE GAME HAS BECOME. Owner: LAPTOP CODE (chatcmd.gd,
+      data/commands.json - both laptop-owned; data/ except the four content files). The DESKTOP
+      side of the chat contract is untouched: chatcmd.gd emits twitch_reply(user_login, text) with
+      no @name and no rate limiting, and twitch_eventsub.gd owns the queue, the prefix and the
+      Send Chat Message API call as bellmirebro. Do not change that signature.
+      .1 TELL THEM THE HUB EXISTS. A !hub (alias !site, !guildhall) command giving the URL and one
+         line on what is there. Fold a short pointer into !help and !hero too - a viewer who asks
+         about their hero should learn their full sheet is a click away.
+      .2 COVER WHAT SHIPPED. Commands or help text for the festival, the Satchel and its sell
+         prices, the character sheet, and the Bestiary. A viewer should be able to ask the bot
+         about anything they can see on stream.
+      .3 THE COMMAND LIST MUST NOT ROT AGAIN. !commands / !help are generated FROM
+         data/commands.json, so one edit updates chat, the bot and the hub's Commands tab
+         together. Add a test that fails when a command exists in code without an entry, or an
+         entry names a command the code does not answer. That test is the real deliverable - it is
+         what stops this item being written again in a month.
+      DONE: !hub answers with the live URL; !help and !commands list every command the code
+      actually answers; the drift test passes and fails when a command is removed from either side.
+
+- [ ] D67. BELLMIREBRO SHOULD SPEAK WHEN SOMETHING HAPPENS, NOT ONLY WHEN ASKED. Owner: DESKTOP
+      BUILD (twitch_eventsub.gd - it already owns the send path, the queue and the rate limiting).
+      Today the bot only ever replies. The big moments pass in silence for anyone reading chat
+      rather than watching the pane: a festival starting - especially one a viewer PAID for - a
+      lord felled, a hero dying, a town level, a caravan taken by bandits.
+      Pick the few that genuinely earn an interruption and announce them in chat, in Bellmire's
+      voice, reusing the lines CONTENT has already written (lore_lines.json festivals, epitaphs,
+      town_levels_for_the_desktop) rather than inventing parallel copies. A paid festival names
+      its patron. RATE LIMIT HARD and make the cap a constant Mr. E can turn down - a bot that
+      talks too much is worse than one that says nothing, and this runs 24/7.
+      DONE: a chat log from a soak showing each announcement fired once, in voice, within the cap;
+      and the cap proven by forcing a burst.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.

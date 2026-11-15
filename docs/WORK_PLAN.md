@@ -101,6 +101,11 @@ than leaving a queue that is all polish at the top.
   already there for every hero). D59_SHEET OK, gates green, 244 KB at 202 heroes. v HELD AT 3 (PAYLOAD_V): the hub's
   KNOWN_V refuses "4" - BLOCKED ON THE HUB: add "4" to KNOWN_V, read h.last_seen + h.events, and fix two H20 render bugs
   (gear slot text never appended; "[object SVGSVGElement]" in the card head). See PROGRESS D-cycle D59a.
+  UNBLOCKED 2026-11-15 ~11:00 CT (supervisor): the hub shipped H23 (c19608c, merged to main) - KNOWN_V now accepts
+  "4" and the sheet reads h.last_seen and h.events. NOTHING on the hub side is outstanding. All that is left of D59
+  is to flip PAYLOAD_V from "3" to "4" and run the DONE capture: the live hub hero sheet for a kitted veteran and a
+  freshly rolled hero. This is the FIRST thing the game build worker should do - the fields have been on the wire
+  since 09:30 and the sheet is still drawing dashes over them.
 
 - [x] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
       (scripts/snapshot_pub.gd and whichever of your own files raise Chronicle lines). H21 shipped the hub's
@@ -1085,6 +1090,43 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
       CYCLES LOGGED: C-41..C-46 (cosmetics/accessories/dyes, uniques, intro/forge, most-repeated, epitaph/descend/cleared, disaster variants). C-47 (2026-11-15, content 3d01748): +140 lines - forge, town_life, a wandering lord, and E3PO tier_up_alt. Standing item: stays open by design.
 - [ ] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
+
+- [ ] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
+      Owner: CONTENT WRITER (data/items.json ONLY). The town grows through twelve stages from Crossing to City
+      and every shop sells the same list the whole way, which makes growth invisible in the one place a viewer
+      spends their points. This is the data half of D35 (visible stock) and D39 (traders must matter) - the game
+      build worker implements the mechanics FROM THIS FILE, so be precise and do not describe code.
+      .1 A STOCK TIER ON GOODS. Every sellable entry declares the earliest growth stage at which it can appear
+         and, where it makes sense, the stage past which it stops being stocked (a crossing's dried fish and
+         bad rope should vanish from a city's shelves). Use the existing key style; additive only.
+      .2 THE SHOPS DIFFER FROM EACH OTHER. Stock sets for the trades the town actually has - smith, apothecary,
+         general goods, stables, guild - so two shops at the same stage do not read as one shop twice.
+      .3 TRADER CARGO. What a caravan ARRIVES carrying, by stage and by where it came from, with the supply the
+         town receives named in plain words (grain, iron, salt, lamp oil, physick) and a precise quantity or
+         cost statement - D39 will implement the town actually receiving it, and a vague line becomes a guess.
+      .4 PRICES THAT HOLD UP. Priced against the existing economy and against each other, so a city's plate is
+         not cheaper than a crossing's mail.
+      DONE: json validates; every pre-existing key byte-identical; a written table of stage -> what each trade
+      stocks at that stage, showing at least one entry that enters and one that leaves across the twelve stages;
+      and a count of new entries per trade. State plainly which keys the game build worker must read.
+
+- [ ] C5. THE TOWNSFOLK ARE A COMMUNITY, NOT WALKERS - NAMES, TRADES AND REACTIONS.
+      Owner: CONTENT WRITER (data/lore_lines.json ONLY). Mr. E wants more NPCs and better NPCs. Today the
+      townsfolk are anonymous bodies; the Chronicle can say a hero's name but not a baker's. This is the words
+      half of D36 (NPC diversity) - the game build worker binds a name and a trade to a body from this file.
+      .1 A NAMED POOL. A substantial pool of townsfolk: given name, family name or by-name, and trade, in the
+         established Bellmire voice (the Ford, the scar, the guild, the marsh). Enough that a long stream does
+         not see the same name twice in an evening.
+      .2 A VOICE PER TRADE. Idle barks keyed by trade, so the smith does not say the fishwife's line, plus
+         a short line for what that trade is DOING at morning, midday, evening and night.
+      .3 THEY REACT. Lines keyed by the events the game already raises - raid, disaster, festival, caravan,
+         growth, hunger, a hero falling, a hero coming back rich - in each case written so the speaker is an
+         ordinary person with something at stake, not a narrator.
+      .4 THEY REMEMBER. A few lines that only make sense after something has happened ("second flood this
+         season"), marked so the game can hold them back until the condition is true.
+      DONE: json validates; every pre-existing key byte-identical; counts per trade and per event; a written
+      sample of one named townsperson's full set read end to end as a character; and a plain statement of the
+      key shape the game build worker reads to pick a name, a trade and a reaction.
 
 # Phase K - test validity (raised by the laptop, Nov 12 23:55; IDs + decisions by the supervisor)
 - [x] L43. _l32_test's FPS GATE IS VACUOUS (test-validity bug, OWNER: LAPTOP). The suite printed "L32_TEST OK (90 checks, 0 failed)" while reporting "L32_FPS base 1.0 idle 26.8 paid 18.7": every FPS check is RELATIVE to base ("idle >= 65% of base"), so a base of 1.0 passed them all trivially and the gate tested nothing. First seen on the run after origin/main brought D24 (use_taa=true, msaa_3d=1). Only the FULL-SCREEN base phase collapsed; grid phases are in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6) and the DESKTOP's D24 numbers ROSE 123.4 -> 131.7, so this is harness-specific, not "TAA is slow".
@@ -2317,7 +2359,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   journal dates by session heuristic and the hero filter name-matches the text.
   HOUSEKEEPING NOTED BY THE WORKER: the older `setUpTabs()` in app.js is dead code (the nav uses `wireTabs`).
 
-- [ ] H23. ACCEPT THE CHARACTER SHEET THE PUBLISHER IS ALREADY SENDING - v=4, AND TWO RENDER BUGS.
+- [x] H23. ACCEPT THE CHARACTER SHEET THE PUBLISHER IS ALREADY SENDING - v=4, AND TWO RENDER BUGS.
       Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md). URGENT - TAKE THIS BEFORE H22. This is
       the mirror image of D57: the game build shipped D59a on 2026-11-15 (initiative, speed, gear by real
       slot, status, per-hero `last_seen`, a per-hero `events` ring) and then had to HOLD the payload at v=3
@@ -2339,6 +2381,15 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       that differs between two heroes, and a personal chronicle built from `events`; plus a v=3 payload still
       rendering unchanged (paste an old payload into a mock), all six query-string states and the
       hostile-name test passing, and the CSP unchanged.
+  RESULT (hub, 2026-11-15 ~10:40 CT, c19608c): KNOWN_V now accepts "4" and still accepts 1/2/3 - an unknown
+  version keeps its honest banner. The sheet reads `h.last_seen` (validated against CHRON_AT_OK, never used as a
+  URL/style) and prints a real per-hero last-seen distinct from the whole-town updated_at; the personal chronicle
+  is built from `h.events` through the same chronShape as a live line, falling back to the whole-word name match
+  when the publisher sends no ring. Both H20 render bugs fixed: the gear-slot text block was built and never
+  appended (one missing cell.append), and the "[object SVGSVGElement]" crest came from string-concatenating an
+  icon element. Mocks now carry gear/last_seen/events including a hostile name in all three fields. el() only,
+  no new fetch, no write path, CSP byte-identical. SUPERVISOR CHECK: greps clean - no new innerHTML/outerHTML/
+  insertAdjacentHTML/eval/new Function; the two legacy innerHTML sites are still page-owned constants.
 
 - [ ] H24. FIND ANYTHING, FROM ANYWHERE. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css,
       web/NOTES.md). The hub now holds twelve tabs, a 200-hero roster, a Bestiary, a Hall of the Fallen and
@@ -2397,3 +2448,81 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       returning dismissed one; the opening read aloud in under thirty seconds; the empty, stale and
       failed snapshot states all show the honest fallback; all six query-string states and the
       hostile-name test still pass.
+
+
+# Phase AG - THE FIGHT, THE LOG AND THE TOWN'S OWN VOICE (supervisor, 2026-11-15 10:58 CT). IDs frozen as ever.
+# Written to the "HOW BIG AN ITEM SHOULD BE" bar. D61 finally builds the L31 leftovers - and it builds them
+# where the plan has always said they belong, with THEIR OWNER, not by handing the HUD worker files it does
+# not own. D62 closes the GAP D60 left behind. H26 lets the hub stop guessing what D60 now publishes.
+# C4 and C5 sit in the CONTENT section above so the content writer reaches them.
+
+- [ ] D61. A FIGHT MUST READ WITHOUT A COMMENTATOR. Owner: DESKTOP BUILD (boss_bar.gd, party_frames.gd,
+      health_bar_3d.gd, delve.gd, monster.gd). This is everything LEFT of L31, written for its real owner
+      exactly as the note at the top of this file requires - the HUD worker owns none of these files and
+      must not be given them. A viewer watching a delve today sees bodies swapping places and a health bar
+      going down. None of the D&D underneath it reaches the screen.
+      .1 THE NUMBERS IN THE WORLD. Damage and healing numbers that rise off the target and fade: the amount,
+         and WHAT KIND of result it was - an ordinary hit, a critical (read unmistakably differently), a
+         miss that says so rather than showing nothing, a save made, a hit resisted and a hit that landed
+         for extra. Pooled and rate-capped so a flurry reads as a flurry instead of a wall of digits, and
+         legible at 1080p over a dark floor.
+      .2 CONDITIONS YOU CAN SEE. The conditions the game already applies, shown as icons - on the party
+         frames for heroes and over the monster for monsters - with duration or stack where the game knows
+         it. Icons come from the project's own set; no new asset without a CC0 LICENSE note. A viewer who
+         has never played D&D must be able to learn what one means from watching, so each has a readable
+         name the moment it is applied (the Chronicle line or the feed, whichever already fires).
+      .3 A BOSS BAR THAT IS A BOSS. The lord's name and title, its health, the thresholds where it changes
+         behaviour marked on the bar so a viewer can see one coming, and who currently holds its attention.
+         When a lord variant has a mechanic, the bar says what it is in a few words - not a stat dump.
+      .4 USE THE WORDS THAT EXIST. data/lore_lines.json already carries crit, fumble, descend, cleared and
+         lord-intro lines (C-37 through C-40, and C-38's viewer_roll outcome lines). Read them. Do not write
+         a parallel set of strings in code.
+      DONE: a 1080p capture of one boss fight that contains, in the same window, a critical, a miss, a
+      resisted hit, at least three different conditions visible on both a party frame and a monster, and the
+      boss bar crossing a marked threshold - plus the feed for that same window to confirm nothing on screen
+      contradicts the log. Then a delve soak measured the D23 way, stating average and minimum FPS against
+      D23's baseline, to prove the numbers and icons cost nothing that matters. Parse 0 errors.
+
+- [ ] D62. THE CHRONICLE IS THE CAMPAIGN LOG - IT MUST KNOW THE DARK AS WELL AS IT KNOWS THE TOWN.
+      Owner: DESKTOP BUILD (delve.gd, chatcmd.gd, gear.gd, roster.gd - the files that raise hero lines).
+      D60 shipped the machinery: every Chronicle row carries the town's day, and a raiser can tag a line
+      with its kind and the heroes it is about through town.tag_feed(kind, [names]). D60's own RESULT names
+      the gap it left: the lines raised in the DUNGEON - deaths below, kills, finds in the dark, descents,
+      level-ups - are still untagged, so the hub's journal cannot group or filter the half of the campaign
+      that viewers care about most.
+      .1 TAG EVERY HERO LINE. One town.tag_feed(...) call beside every feed.append in these files that is
+         about a hero, with the kind and the hero names the hub shows. Untagged stays untagged where the
+         line is genuinely about nobody - never guess a subject.
+      .2 THE DUNGEON RAISES LINES IT CURRENTLY SWALLOWS. A trap sprung, a secret door found, a hoard
+         opened, a party turning back, a hero going down and being carried out - moments the game already
+         knows about and says nothing about. Use the existing lore_lines.json keys (descend, cleared,
+         epitaph, find) rather than inventing strings in code; name any key you needed and did not find.
+      .3 IT MUST NOT FLOOD. A stated cadence and a dedupe window so a busy delve does not push the town out
+         of its own Chronicle, with the drops visible in a log so nothing vanishes unexamined.
+      DONE: a 10-minute run with a full roster and at least one delve and one raid overlapping, then the
+      published payload showing hero lines from the dungeon carrying `who` and `kind`, the new dungeon
+      moments present, and the town's lines still there alongside them. State the payload KB before and
+      after against D59a's 244 KB and the stated cap. W1A_TEST OK, TWITCH_PARSE OK, D60_CHRON OK, parse 0.
+
+- [ ] H26. THE JOURNAL STOPS GUESSING. Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md).
+      H21 built the campaign journal before the publisher could tell it anything, so it guesses twice: it
+      splits the campaign into "stretches" on a 90-minute wall-clock gap because no line carried a date, and
+      it decides which lines are about a hero by matching their name as a whole word in the text. D60 shipped
+      on 2026-11-15 and both guesses are now unnecessary - every row carries `day` (the town's own day) and
+      the tagged rows carry `kind` and `who` (an array of hero names).
+      .1 DAYS, NOT STRETCHES. Group the journal by the town's own day when the rows carry one, and say so in
+         the heading. Keep the wall-clock heuristic ONLY as the fallback for a v=3-era payload or an untagged
+         row, and make which one is in use visible rather than silent.
+      .2 WHO, FROM THE PAYLOAD. A hero's own lines come from `who` when the row has it, falling back to the
+         existing name match when it does not - and the fallback is labelled as such, because a viewer should
+         know when the page is inferring rather than reporting.
+      .3 FILTER BY KIND. The journal can be read by what happened - deaths, raids, finds, delves, town - from
+         `kind` where present, with an honest count of rows the filter could not classify.
+      .4 STILL HONEST. Every string through el(); no field used as a URL, src, href or style; `day` and `kind`
+         validated as a bounded number and a bounded identifier before they touch the DOM; `who` capped; CSP
+         byte-identical.
+      DONE: a capture of the journal grouped by town day with the day headings visible, the same journal with
+      a kind filter applied and its unclassified count shown, a hero's own lines drawn from `who` for a hero
+      whose lines never spell their name the same way, a v=3 payload pasted into a mock still rendering the
+      old grouping with the fallback labelled, the hostile-name test passing on a `who` entry and a `kind`
+      value, and all six query-string states passing.

@@ -776,6 +776,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 
 - [ ] H17. THE HUB ON A PHONE. Owner: HUB BUILDER (web/index.html, web/style.css, web/NOTES.md). Most viewers reach a Twitch stream's companion page on a handset, and H13's tabbed no-scroll layout was designed at desktop width. Make the hub work at 390x844 and at tablet width: tabs reachable with a thumb and never clipped, hero sheets readable without pinch-zoom, the Chronicle legible, the die and boards not overflowing, tap targets at least 44 px, no horizontal scroll at any supported width. Refine the existing layout - do not replace the palette, the Gloock wordmark treatment or the tab model. No framework, no new font, no CDN, no CSP change. DONE: screenshots at 390x844, 768 and 1280 wide, all three with zero horizontal scroll; every tab reachable and every section readable at 390 without zoom; ?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1 all still pass at 390; hostile-name test still passes.
 
+# CHANGELOG 2026-11-15 09:15 (supervisor): THE HUB QUEUE IS NOT EMPTY. H14 shipped (hub 456dc7f),
+# was security-reviewed and is merged and ticked. OPEN AND YOURS, in order: H15 (crests), H16 (the
+# Hall of the Fallen), H17 (the hub on a phone). The hub worker's standing brief still carries a
+# stale "the hub queue is EMPTY" line from before H14-H17 were written - THIS PLAN OVERRIDES IT.
+# Take the first unchecked H item and say in your summary that you did, so the staleness is visible.
+# Also stale in that brief: D57 is DONE (snapshot v=3 ships, the H11 Satchel has live data), and
+# gh-pages c926030 publishes hub through db06c03, so LIVE IS BEHIND SHIPPED by H14. Republishing is
+# Mr. E's call alone - it is not a bug for a hub run to fix.
 # CHANGELOG 16:01 (supervisor): H1-H7 built, security-reviewed and PUBLISHED LIVE (gh-pages 0ac04f8). Twitch sign-in wired with Mr. E's public client id; the ?twitch_client override removed as a phishing vector. Hub queue is now empty - only Phase 3 (gated) remains.
 
 # Phase 3 (NOT now - stays read-only until RLS designed): friends/party, a write-backed leaderboard, any viewer WRITE path.

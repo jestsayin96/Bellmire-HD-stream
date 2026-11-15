@@ -126,6 +126,101 @@ function sigil(name) {
   return (letters.slice(0, 2) || "?").toUpperCase();
 }
 
+// ---------------------------------------------------------------- crests (H15)
+// A coat of arms for every hero, drawn as inline SVG the PAGE owns. The hero's name
+// is hashed and the hash only picks INDICES into the fixed whitelists below (a field
+// division, two tinctures, one charge). No snapshot value is ever written into the
+// SVG: every path string and colour here is a constant in this file, so a hostile
+// name still yields a valid crest and can never become markup, a URL or a style.
+// Deterministic: the same name always gives the same arms, on every reload.
+const CREST_SHIELD = "M6 6H94V58C94 92 70 110 50 116C30 110 6 92 6 58Z";
+const CREST_TINCT = ["#2a1c10", "#f3e6c4", "#1d8f8a", "#c6922f"];   // ink, parchment, teal, gold
+const CREST_DIV = [                                                 // paths for the second tincture
+  null,                                                             // plain field
+  "M50 0H100V120H50Z",                                              // per pale
+  "M0 60H100V120H0Z",                                               // per fess
+  "M0 0L100 120H0Z",                                                // per bend
+  "M50 0H100V60H50Z M0 60H50V120H0Z",                               // quarterly
+  "M0 78L50 42L100 78V120H0Z",                                      // chevron
+  "M0 86H100V120H0Z",                                               // base
+];
+const CREST_CHARGE = (() => {
+  let star = "";
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 ? 9 : 22, a = -Math.PI / 2 + i * Math.PI / 5;
+    star += (i ? "L" : "M") + (50 + r * Math.cos(a)).toFixed(1) + " " + (56 + r * Math.sin(a)).toFixed(1);
+  }
+  return [
+    star + "Z",                                                                    // mullet
+    "M43 34H57V49H72V63H57V80H43V63H28V49H43Z",                                    // cross
+    "M60 34A24 24 0 1 0 60 82A18 18 0 1 1 60 34Z",                                 // crescent
+    "M50 33L69 58L50 83L31 58Z",                                                   // lozenge
+    "M47 32H53V68H47Z M37 68H63V74H37Z M47 74H53V86H47Z",                          // sword
+    "M33 84V50H38V43H43V50H47V43H53V50H57V43H62V50H67V84Z",                        // tower
+    "M30 58a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z M40 58a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z",  // annulet
+    "M40 44a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M30 66a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M50 66a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z", // trefoil
+  ];
+})();
+const crestMemo = new Map();
+function crestRecipe(name) {
+  const key = String(name == null ? "" : name).toLowerCase();
+  let r = crestMemo.get(key);
+  if (r) return r;
+  let a = 2166136261;                                  // FNV-1a over the name, then a seeded mixer
+  for (let i = 0; i < key.length; i++) { a ^= key.charCodeAt(i); a = Math.imul(a, 16777619) >>> 0; }
+  const next = () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), a | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return (t ^ (t >>> 14)) >>> 0;
+  };
+  const div = next() % CREST_DIV.length;
+  const ta = next() % CREST_TINCT.length;
+  const tb = (ta + 1 + (next() % (CREST_TINCT.length - 1))) % CREST_TINCT.length;
+  const spare = [];
+  for (let i = 0; i < CREST_TINCT.length; i++) if (i !== ta && (div === 0 || i !== tb)) spare.push(i);
+  const tc = spare[next() % spare.length];
+  const ch = next() % CREST_CHARGE.length;
+  r = { div, ta, tb, tc, ch };
+  if (crestMemo.size > 600) crestMemo.clear();
+  crestMemo.set(key, r);
+  return r;
+}
+function crestDefs() {                                  // the shared shield clip, added once
+  if (document.getElementById("coa-clip")) return;
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "coa-defs"); svg.setAttribute("width", "0"); svg.setAttribute("height", "0");
+  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
+  const clip = document.createElementNS(SVGNS, "clipPath");
+  clip.setAttribute("id", "coa-clip");
+  const p = document.createElementNS(SVGNS, "path");
+  p.setAttribute("d", CREST_SHIELD);
+  clip.append(p); svg.append(clip); document.body.append(svg);
+}
+function crestPath(d, fill, stroke) {
+  const p = document.createElementNS(SVGNS, "path");
+  p.setAttribute("d", d); p.setAttribute("fill", fill);
+  if (stroke) { p.setAttribute("stroke", stroke); p.setAttribute("stroke-width", "2.5"); p.setAttribute("stroke-linejoin", "round"); }
+  return p;
+}
+// coat(name, size): size is a page class suffix ("sm" | "md" | "lg"), never snapshot data.
+function coat(name, size) {
+  crestDefs();
+  const r = crestRecipe(name);
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "coa coa-" + (size === "sm" || size === "lg" ? size : "md"));
+  svg.setAttribute("viewBox", "0 0 100 120");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const g = document.createElementNS(SVGNS, "g");
+  g.setAttribute("clip-path", "url(#coa-clip)");
+  g.append(crestPath("M0 0H100V120H0Z", CREST_TINCT[r.ta]));
+  if (CREST_DIV[r.div]) g.append(crestPath(CREST_DIV[r.div], CREST_TINCT[r.tb]));
+  g.append(crestPath(CREST_CHARGE[r.ch], CREST_TINCT[r.tc], CREST_TINCT[0]));
+  svg.append(g, crestPath(CREST_SHIELD, "none", CREST_TINCT[3]));
+  return svg;
+}
+
 // ---------------------------------------------------------------- status line
 function showStatus() {
   const st = $("status");
@@ -362,6 +457,7 @@ function boardRow(spec, e, max, opts) {
 
   const mid = el("span", "bmid");
   const line = el("span", "bname");
+  if (e.place <= 5) line.append(coat(nameOf(e.r), "sm"));
   line.append(document.createTextNode(nameOf(e.r) || "(no name)"));
   if (e.dead) frag(line, el("span", "tag", "fallen"));
   mid.append(line, el("span", "bsub", subline(spec, e.r)));
@@ -686,7 +782,9 @@ function heroCard(h, isOpen, isMine) {
   meta.append(what, quick);
   idb.append(meta);
   if (h.title) idb.append(el("span", "htitle", h.title));
-  sum.append(sg, idb);
+  const coa = coat(h.name, "md");
+  coa.classList.add("hcoa");
+  sum.append(sg, idb, coa);
   det.append(sum);
 
   // lazy-render: the full sheet is built on first open, not for all 60+ cards up
@@ -713,7 +811,7 @@ function heroSheet(h) {
   pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
   pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
   pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
-  shead.append(pin);
+  shead.append(coat(h.name, "lg"), pin);
   sheet.append(shead);
 
   sheet.append(hpBar(h));

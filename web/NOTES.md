@@ -815,3 +815,23 @@ Local checks: `?mock=journal` (days + kind + who, hostile `<img>` in a `who` ent
 untagged) and `?mock=journal3` (the same rows with the fields stripped = a v=3 payload, old grouping with the fallback labelled).
 Headless Chromium over a stubbed snapshot: 0 dialogs, 0 <img>, no horizontal overflow at 390; ?state=empty/fail/stale, ?mock=chronicle,
 ?mock=crowd, ?open=1 and ?mock=sheets&open=all all render.
+
+## H27 - Tales of the Die (the night's rolls get a board)
+The town's rolls (H9, `p.rolls`) are now kept the way H14 keeps the Chronicle: per-browser, newest first, capped. localStorage key
+`bellmire.rolls.v1`, at most 100 rows / 48 h / 60 KB (oldest dropped first). Each pass folds the live rolls into the memory, de-duplicates on
+(at, by, face, result), keeps a roll's first-seen time `k` for rolls the publisher sends without `at`, and persists. Every stored row is
+re-validated on read (`rollsClean`: normalizeRolls + control-char strip + timestamp regex), so a tampered store cannot inject anything.
+- Board: day dividers in the town's own voice (`dayVoice`, same as the Chronicle), each roll = roller, what they paid for (`what`, `cost`),
+  the number, the tier tag and the outcome line (`result`, exactly what the publisher sent).
+- A crit is the 20 (or, face unknown, tier crit); a fumble is the 1 (or tier fumble). Crit = restrained gold (field, face, tier tag); fumble =
+  ink-soft, dashed face, no red - no new colour. A tally chip pair above the list counts crits/fumbles in the rolls SHOWN, so it always matches.
+- Empty (nothing live, nothing remembered): "No rolls yet tonight." With the town silent but rolls remembered, the board shows them and says so.
+- Storage absent/full/throwing: renders from the live rolls only. No new fetch/origin, no write path, CSP untouched (index.html only gained the
+  page-owned `<p id="rollTally">`). KNOWN_V unchanged.
+- FIELD WANTED, NOT PRESENT: the brief says crit/fumble outcome lines are `viewer_roll` in lore_lines.json (C-cycle 38). `data/lore_lines.json` on
+  hub/main has NO `viewer_roll` key, so nothing is frozen into the hub for them; the board shows the publisher's own `result` and draws no line
+  when it is absent. If the publisher omits `result` for crit/fumble, ask the game build to send it (or land the lines and a later H item freezes them).
+Local check: `?mock=roll` (crit, fumble, two ordinary, one hostile-name roller `<img src=x onerror=alert(1)>`). Headless Chromium over a stubbed
+snapshot: 5 rows, 1 crit + 1 fumble matching the chips, reload with no mock keeps all 5, a multi-day store divides Today/Yesterday, a tampered
+store (hostile strings, junk rows, bad timestamp) renders as text, 0 dialogs, 0 <img>/<script> in the feed, no horizontal scroll at 390,
+?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd and ?open=1 all render with 0 page errors.

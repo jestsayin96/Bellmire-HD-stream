@@ -1,5 +1,140 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## MR. E'S RULING (Nov 15 16:27) - THE DAIS: HIS OWN PRIVATE CONTROL PANEL
+
+Verbatim: "i am also going to need my own personal HUB my own Website for this game. so i can
+control the Director from time to time, look at specfied characters, NPCs. ETC."
+
+This is a NEW LANE and a new deliverable. It is NOT the viewer hub with extra buttons - the viewer
+hub is a public, read-only, static page on GitHub Pages and it must stay exactly that. Call this
+one THE DAIS. It is Mr. E's alone, it never goes on the public internet, and nothing a viewer can
+reach ever touches it.
+
+### HOW IT CONNECTS - decide this first, and the answer is LOCAL
+
+The viewer hub reads a Supabase snapshot the game pushes every 60 s (snapshot_pub.gd). That is a
+one-way pipe with a 60-second lag and it is useless for live direction.
+
+THE DAIS IS SERVED BY THE GAME ITSELF. A small TCPServer inside the Godot process, bound to
+127.0.0.1 and the LAN, serving one page and a tiny command endpoint. Reasons, and they are not
+close:
+  - Latency: a director cut has to happen NOW, not after a cloud round trip.
+  - Security: nothing is exposed to the internet, so there is no token to leak and no way for
+    anyone to seize control of a live stream. A control panel on a public URL is a stream-jacking
+    risk and we are not building one.
+  - It works when the net is down, and it needs no account, no auth flow and no backend.
+  - His phone on the same WiFi can open it. That covers "a second screen" without exposing
+    anything.
+BIND TO THE LAN ONLY. Never 0.0.0.0 with a port forward, never a tunnel, never Supabase as a
+command channel. If Mr. E later wants control from outside the house, that is a separate decision
+with its own security review - bring it to him, do not build it quietly.
+
+### D86 - THE DAIS, PART ONE: SEE (game build, after the RC bugs above)
+
+Read-only first. A panel that shows him the game better than the game window can.
+  1. The local server, the page, and a live feed (poll or server-sent events - polling at 4 Hz is
+     fine and simpler; do not add a websocket for this).
+  2. Every hero: name, viewer, class, gear tiers, gold, encumbrance band (D80), where they are,
+     what they are doing, satchel and vault. Searchable and sortable.
+  3. Every notable and NPC by name - which is how he would have found E3PO in D85. Where they
+     are, their schedule slot, their state.
+  4. Every live delve: floor, party, hp, flasks, haul, direction (D77's down/up).
+  5. The director's own thinking, which auto_director.gd ALREADY RECORDS and nothing displays:
+     `_cands` holds every scored candidate of the last pass and `log_lines` holds the history. Put
+     the candidate list on screen with its scores and the chosen shot. He will be able to see WHY
+     the camera went where it went, which is the thing that makes the next part usable.
+  6. The town: shop levels, stores, festival state, raid state.
+
+### D87 - THE DAIS, PART TWO: STEER (game build, after D86)
+
+Control, and only as much as a director needs.
+  1. Take the camera: cut to a named hero, NPC, building or delve, right now.
+  2. Hold a shot - pin the director off a subject for N seconds so a moment can play out.
+  3. Hand it back: resume automatic direction.
+  4. Nudge the pacing - auto_director's `_pace` already exists (0.6 in a raid, 1.4 when quiet);
+     expose it rather than inventing a second knob.
+  5. Exclude a subject for a while, for when something is misbehaving on stream.
+  6. EVERY COMMAND IS LOGGED with a timestamp, and every one is reversible by resuming automatic
+     direction. The director must never be left in a state he cannot get out of with one button.
+  7. What the Dais must NOT do: spend a viewer's gold, change a hero's gear, alter the roster, or
+     fake a roll. Mr. E directs the camera and the stream; he does not play other people's
+     characters. If he wants an admin action later he will ask for it by name.
+
+DONE TEST for both: start the game, open the Dais from a second machine on the LAN, and drive a
+full ten-minute session from it - find a named NPC, cut to them, hold, release, change pace, and
+confirm the director recovers automatic control every time. Assert the server refuses every
+connection from outside the LAN. Mr. E's eye on whether it is actually usable while streaming;
+that is the only test that matters in the end.
+
+### D84 - THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
+
+"this dude is GLOWING, its kinda funny but idk if thats what supposed to be happening". A knight in
+the town at night, rendered FEATURELESS PURE WHITE while every other body around him carries the
+night's blue. A second, smaller white figure is in the same shot, bottom right. A gold spotlight
+ring is under the big one.
+
+IT IS ALMOST CERTAINLY NOT A GLOW. A featureless white body is what Godot draws when a material is
+missing or a texture failed to load - no shading detail, no silhouette, just white. Two of them in
+one frame says asset pipeline, not effect. Start there.
+
+RULED OUT ALREADY, DO NOT RE-CHECK:
+  - Gear.ignite is NOT on this path. Its only live caller is town.gd:4468 and that is the WEAPON
+    RACK, not a hero body. rig.gd's _ignite is weapon-only too (rig.gd:298, inside equip()).
+  - Spotlight adds no light and no material: there is no OmniLight, SpotLight or DirectionalLight
+    anywhere in spotlight.gd, and it never touches a body's material. The gold ring is the
+    spotlight ring and is correct.
+  - The rank sash does emit at rank >= 6 (gear.gd ~507) but it is a 0.16 x 0.95 box. It cannot
+    make a whole body white.
+
+WHERE TO LOOK, in order:
+  1. Run the town headless and count material-nulls and failed resource loads. D18c had three of
+     these once and they were real; the fix then was to stop stacking material_override over
+     per-surface overrides. Something is stacking again, or a load is silently failing.
+  2. Gear.dress / gear.gd's per-surface duplication path (~340-470). It duplicates a surface's
+     ACTIVE material. If get_active_material returns null for a surface - a mesh that has not
+     finished importing, a model whose material lives on the mesh rather than the instance - the
+     duplicate is null and the surface renders white.
+  3. Identify WHO the two figures are. Log every body in town whose surfaces carry a null material,
+     with its uid, class, model path and gear tiers, every 5s for a minute. The pattern across the
+     two will name the cause faster than reading the code will.
+
+DONE TEST: headless town start reports 0 material-nulls and 0 failed loads; a 10-minute town soak
+with the null-surface logger attached reports zero bodies at any point; and a before/after shot of
+this exact scene - the knight by the barracks at night - in renders/cycles/d84/.
+
+### D85 - E3PO IS INVISIBLE IN A CROWD OF HIS OWN GUARDS (game build + art)
+
+Mr. E, Nov 15 16:25: "i also have not seen E3PO". He is in the Chronicle constantly - his lines
+were deepened only an hour ago in C-52 - and Mr. E has never laid eyes on him.
+
+HE IS ALMOST CERTAINLY PRESENT AND INDISTINGUISHABLE. notables.gd defines him with
+`"role": "guard", "gear": "guard", "near": "garrison"` and an all-day schedule (post 6-20, watch
+20-6), so he should exist at every hour. But town.gd:4622 gives EVERY guard the same body:
+`["guard", "garrison", "Knight.glb", 0.74, 0.82, 1.00, 5]`. The Commander of the Guards is wearing
+the same model, the same colours and the same kit as the men he commands, standing where they all
+stand. There is nothing to see.
+
+This is D75's problem again - a named character with no design of his own - and it is exactly what
+Mr. E's Nov 15 art principle forbids: "make sure they all have their designs not just spoken in
+name people want to see what they pay for not just a stat."
+
+  1. Confirm first, cheaply: log whether _e3po is non-null and where he is standing, once a minute
+     for ten minutes, with his _e3po_state. If he is null or stuck "withdrawn", that is a
+     different and simpler bug - fix that instead and say so.
+  2. Give him a body nobody else has. Commander's plate, a distinct cloak colour that is HIS, a
+     helm crest, a weapon the rank-and-file do not carry. Art lane's to build, against the real
+     Knight.glb so it reads at pane distance.
+  3. Give him a nameplate that says Commander of the Guards, like the notables code already does
+     for its named folk (notables.gd ~255), and make sure it is actually attached for him.
+  4. Put him somewhere the camera goes. A commander at a post nobody films is still invisible. The
+     director should have a reason to cut to the garrison - handed to the HUD worker as a subject,
+     not built here.
+  5. The same audit applies to EVERY notable: anyone with a name and a title in notables.gd needs a
+     silhouette of their own. List the ones that share a body and hand them to the art lane.
+
+DONE TEST: a shot of E3PO at his post, day and night, beside two ordinary guards in frame; pass
+requires that someone who has never seen the game can point at the commander. Mr. E's eye is final.
+
 ### L71 - THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
 
 Mr. E, Nov 15 16:22, with a screenshot of the parchment strip: six of seven lines end in an
@@ -944,7 +1079,7 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
   THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
   IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck)
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen)
     These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
     Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
     the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and

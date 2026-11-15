@@ -450,6 +450,46 @@ writing it: Bellmire can have disasters and losses, but not ones that cancel a p
       DONE: a transcript of a busy chat where every reasonable phrasing lands, nothing is answered
       twice inside the cooldown, and the drift test from L68 still passes.
 
+## THE BOT, CONTINUED (Claude's suggestions, Mr. E: "whatever you suggest", Nov 15 14:33)
+
+- [ ] D70. THE BOT SHOULD KNOW WHO IT IS TALKING TO. Owner: DESKTOP BUILD (twitch_eventsub.gd,
+      roster.gd read-only). Pairs with D67 (speaking unprompted) and L69 (understanding chat).
+      Today the bot treats every message the same. The two moments that decide whether a viewer
+      becomes a player are both being missed.
+      .1 THE FIRST-TIMER. Someone typing in this channel for the first time is the only moment they
+         are guaranteed to be paying attention. Once - exactly once, ever, per viewer - tell them
+         they can have a hero in this town and how. This is the whole conversion funnel: a lurker
+         who gets a hero has a reason to come back, and one who does not is a passer-by. Never
+         repeat it, never chase someone who ignored it.
+      .2 THEIR HERO'S MOMENTS, TOLD TO THEM. D67 announces the TOWN's big moments. This is the
+         viewer's own: their hero levelled, died, came home with something rare, was the one who
+         felled a lord. Address them by name, keep it to one line, and only for moments that
+         actually matter - not every kill. A viewer who learns their hero died while they were at
+         work is a viewer who comes back to see what happened next.
+      .3 KNOW WHEN THE ROOM IS EMPTY. The game runs 24/7; the stream does not. The bot should not
+         narrate to an offline channel - check stream state and stay quiet when nobody is there.
+         Queue nothing up to dump when it returns, either; stale news is worse than no news.
+      .4 SAFETY - THIS ONE IS NOT OPTIONAL. The bot must NEVER echo attacker-controlled text back
+         into chat. Hero titles, epitaphs, dye names and anything else a viewer can set are exactly
+         the hostile input the hub defends against with el()/textContent - chat has no such
+         protection, and a line the bot repeats is a line Mr. E's channel published. Echo only
+         values the GAME generated, or a Twitch login Twitch itself gave us. If a viewer-set string
+         must appear, cap its length, strip control characters and newlines, and never let it start
+         a message (a leading / or . is a chat command). Treat this as the W1a rule for chat.
+      DONE: a transcript showing a first-timer welcomed once and never again; a hero moment told to
+      its owner; the bot silent while the stream is offline; and a hostile hero title proven inert -
+      it either never reaches chat or reaches it declawed. Gates green.
+
+- [ ] L70. WHAT HAPPENED WHILE I WAS AWAY. Owner: LAPTOP CODE (chatcmd.gd, data/commands.json).
+      A viewer who looks in after two days has no way to find out what became of their hero. The
+      Chronicle knows - D60 gave it days and `who`, so the lines about a given hero are already
+      findable. Give them a !catchup (alias !mystory, !since) that answers in one or two lines: what
+      their hero did, how it went, and where it stands now. Cap it hard - a summary, not a saga, and
+      point them at the hub for the full sheet. If they have no hero, that is the moment to tell
+      them how to get one.
+      DONE: a hero with a busy history gets a short true summary; a hero with none gets the join
+      line; the L68 drift test still passes; output never exceeds the cap.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.

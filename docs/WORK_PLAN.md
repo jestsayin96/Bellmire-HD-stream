@@ -2973,39 +2973,45 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       old grouping with the fallback labelled, the hostile-name test passing on a `who` entry and a `kind`
       value, and all six query-string states passing.
 
+# Phase AG - the hub's queue was one item deep (supervisor, 2026-11-15 14:05, CORRECTED 14:12)
+# H26 is the hub's last unchecked item, so two were written to keep the builder fed. The first pair
+# was WITHDRAWN UNWRITTEN by the supervisor on checking the shipped record: a growth ladder is
+# already live as H18.1 and the phone layout is already live as H17 (360-1280, all six states at
+# 390). IDs H27 and H28 stay spent on these, their replacements - IDs are frozen once written.
+# Both are read-only, web/ only, no CSP change, no viewer write path, and both reuse machinery the
+# page already has rather than starting anything over.
 
-# Phase AG - the hub's queue was one item deep (supervisor, 2026-11-15 14:05)
-# H26 is the hub's last unchecked item. These two are written now so the hub builder is never
-# standing down with the page half-finished. Both are read-only, web/ only, no CSP change, no
-# viewer write path, and both build on what is already shipped rather than restarting anything.
+- [ ] H27. TALES OF THE DIE - THE NIGHT'S ROLLS DESERVE A BOARD, NOT JUST A FLICKER. Owner: HUB
+      BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). The d20 resolves in the
+      game and the hub displays the current roll (H9), so a roll appears, matters for a minute and
+      is gone - on a stream that runs all night the best moment of the evening scrolls away. Keep
+      the session's rolls the way H14 already keeps the Chronicle: capped per-browser history, newest
+      first, day-divided. Show for each the roller, what they paid for, the number, and what came of
+      it - the crit and the fumble lines content already wrote (lore_lines.json viewer_roll, C-cycle
+      38). Make a crit and a fumble unmistakable at a glance without inventing a new colour: use the
+      restrained gold already in the palette for a crit and ink-dim for a fumble. A counter of the
+      night's crits and fumbles earns its place; a leaderboard of rollers does not - that is L66's
+      season, not yours.
+      DONE: a capture of the board after several mocked rolls showing a crit, a fumble and two
+      ordinary results with their outcome lines, day-divided and newest first; the night's crit and
+      fumble counts matching the rolls shown; a capture after a reload proving the history survived;
+      ?state=empty renders "no rolls yet tonight" rather than an empty frame; ?state=fail and
+      ?state=stale stay honest; a hostile roller name renders as literal text; CSP unchanged and all
+      six local checks still pass.
 
-- [ ] H27. THE LADDER THE TOWN IS CLIMBING - SHOW THE 12 STAGES, NOT ONE NUMBER. Owner: HUB BUILDER
-      (web/index.html, web/app.js, web/style.css, web/NOTES.md). The page reports the town's stage
-      as a bare level, and a viewer has no way to know that Bellmire is a Crossing on its way to
-      being a City, what the next stage brings, or how far it has come tonight. The words already
-      exist and the page already loads them - lore_lines.json "growth_tiers".tiers, which H22's
-      welcome reads through LORE_FROZEN. Build a Ladder board: all twelve stages named in order,
-      the current one marked, the ones already passed marked as passed, and the next one shown with
-      what it brings. Where the Chronicle carries dated lines about the town levelling (D60 gave
-      every line a day, a who and a kind), say on which day a stage was reached. Keep every string
-      through el()/textContent - a tier name is lore, but the Chronicle lines beside it are
-      attacker-reachable. Honest when the snapshot has no level: show the ladder with nothing marked
-      and say the town has not reported its stage, never guess stage 1.
-      DONE: a capture of the Ladder at a mocked mid-ladder level showing passed / current / next and
-      a dated line for at least one passed stage; ?state=empty ?state=fail ?state=stale each render
-      the board honestly with no invented stage; a hostile Chronicle line renders as text; CSP
-      unchanged; the hostile-name test and the existing local checks still pass.
-
-- [ ] H28. THE HUB IN A POCKET - MOST VIEWERS ARRIVE ON A PHONE. Owner: HUB BUILDER
-      (web/style.css, web/index.html, web/NOTES.md - app.js only if a layout needs it). A viewer
-      finds the stream in the Twitch mobile app and opens the hub on a 390-wide screen. Everything
-      shipped since H14 - the finder, the character sheet, the Bestiary, Bands Below, Night watch,
-      H22's welcome - was laid out and looked at on a desktop. Make the page work in one thumb:
-      no horizontal scrolling at any width from 360 up, no two columns crushed into one unreadable
-      one, no text overlapping, tap targets big enough to hit (44 px), and the sections stacked in
-      the order a newcomer needs them. Refine the existing palette and type scale; do not replace
-      the design, and do not add a framework or a breakpoint library - plain CSS.
-      DONE: captures at 360x640 and 390x844 of the welcome, the town strip, a hero's character
-      sheet, the finder open, Bands Below and Night watch - each with zero horizontal page scroll
-      and no overlapping text; the same six captures at 1920x1080 proving the desktop layout did not
-      regress; CSP unchanged; local checks and the hostile-name test still pass.
+- [ ] H28. A VIEWER MUST BE ABLE TO SEND A FRIEND STRAIGHT TO THEIR HERO. Owner: HUB BUILDER
+      (web/index.html, web/app.js, web/style.css, web/NOTES.md). H20 built the character sheet and
+      H24's finder lands on a hero by id, but a viewer who wants to show someone their hero can only
+      send the hub's front door and say "now search for me". Give the page a deep link: opening the
+      hub with a hero address in the URL fragment opens that hero's sheet directly, and a "copy a
+      link to this hero" control on the sheet puts that address on the clipboard. The address is
+      resolved the way the finder already resolves a target - matched against the heroes in the
+      snapshot, integer-addressed, never taken as a selector, a URL or markup - and an address that
+      matches nothing lands on the roster with a plain "that hero is not on tonight's roll" instead
+      of an error or a blank page. No new fetch, no new origin, no write path; the fragment is the
+      only thing read from the URL and it is validated before it is used.
+      DONE: a capture of the hub opened cold at a hero's deep link showing that hero's sheet; a
+      capture of the copy control having produced the address; a capture of a nonsense address
+      landing on the roster with the plain message; a capture of an address built from a hostile
+      hero name resolving as text and executing nothing; the deep link working at 390 wide as well
+      as 1920; CSP unchanged and all six local checks still pass.

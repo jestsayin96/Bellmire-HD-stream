@@ -1,1 +1,1 @@
-RUNNING 2026-11-14 21:38 (game build - D21a spells VFX)
+IDLE 2026-11-14 22:21 CT - supervisor cleaned up: killed 5 zombie Godot procs, reverted abandoned notables.gd mid-edit, cleared stale D21a lock

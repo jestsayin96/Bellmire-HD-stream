@@ -115,6 +115,64 @@ what gets WRITTEN from now on, and the order they are offered: when several item
 substantial ones where a worker taking "the first unchecked item" will actually reach them, rather
 than leaving a queue that is all polish at the top.
 
+## MR. E'S ASK, Nov 15 11:51 - MAKE THE FESTIVAL ACTUALLY FEEL LIKE A FESTIVAL
+
+- [ ] D63. THE FESTIVAL MUST BE AN EVENT, NOT A BOOLEAN. Owner: DESKTOP BUILD (town.gd,
+      townsfolk.gd, sfx.gd, economy.gd, notables.gd, Town.tscn) with CONTENT writing the words
+      (see C6) and the HUD worker NOT involved - this happens in the world, not on a panel.
+      WHAT IT IS TODAY, measured: `_festival_pass` flips `festival = true` every 260-420 s for
+      55-85 s, points `festival_at` at the market square, and appends two feed lines. Idle
+      townsfolk walk there and mill about (`_maybe_gather`, `acts["festival"]`). That is the
+      entire feature. The feed line promises "music, stalls, and a crowd!" and the game delivers
+      a crowd. No stall is built, no music changes, nothing is sold, nobody gains anything, and
+      the heroes ignore it completely.
+      THIS IS NOT COSMETIC DEBT - IT IS SOLD. "Bellmire: Festival of Plenty" is a 500-bit
+      Custom Power-up. A viewer pays real money and gets bodies standing in a square for 70 s.
+      Fixing this is fixing a thing people have already bought.
+      .1 IT MUST LOOK LIKE ONE. The square dresses itself: stalls, bunting, banners, lanterns
+         after dark - built on the existing plot/landmark machinery, struck when it ends, CC0
+         assets only. A viewer glancing at the pane must know a festival is on without reading a
+         word of the feed.
+      .2 IT MUST SOUND LIKE ONE. D22a gave layered beds and a 24-voice pool; D22b gave music
+         moods. A festival gets its own: music lifts, crowd noise, a piper or a drum near the
+         square, trade chatter up. It returns to the ordinary day bed when the festival ends.
+      .3 PEOPLE MUST DO SOMETHING. Today they "mill about and cheer". Give the crowd real acts -
+         dancing, drinking, eating, a game, watching whatever is at the centre - drawn from the
+         existing _idle_acts machinery rather than a new system. NOTABLES (scripts/notables.gd)
+         should show their faces; E3PO has festival lines already written in lore_lines "e3po".
+      .4 HEROES MUST BE IN IT. A hero in town during a festival joins it instead of walking past.
+         A hero who comes home from a delve while one is on is received by it - that is the
+         moment the stream should feel like a town, and it costs nothing but routing.
+      .5 IT MUST DO SOMETHING. A festival with no consequence is scenery. Pick effects that fit
+         Mr. E's economy ruling above and state them in the item when you build it: goods change
+         hands (the market actually trades), a morale or luck lift while it runs, the smith or a
+         shop keeps late hours. A FESTIVAL IS A GOOD HOUR FOR A CARAVAN TO ARRIVE - that ties
+         D39 and the caravan-chance rule together without inventing a new mechanic.
+      .6 IT MUST HAVE A REASON, AND THE CHRONICLE MUST SAY SO. A festival should be caused -
+         a harvest, a raid survived, a lord felled, a hero's return, a town level - not only a
+         random timer. The random one stays as the quiet baseline. D60 gave the Chronicle days
+         and `who`; a festival line should name what is being celebrated and who it is for.
+      .7 THE 500-BIT POWER-UP MUST LAND VISIBLY. When a viewer buys Festival of Plenty, the
+         festival that starts is THEIRS - named in the Chronicle and on stream, and bigger than
+         the baseline one. Do not let a paid festival be indistinguishable from a timer firing.
+      DONE: a 1080p capture (and a short clip) of one festival from start to finish showing the
+      square dressed, the crowd doing more than standing, at least one notable and one hero in
+      it, the music lifting and returning, and the Chronicle naming the reason. Plus one capture
+      of a VIEWER-BOUGHT festival that is visibly bigger and named for the buyer. Gates green.
+
+- [ ] C6. THE FESTIVAL HAS A VOICE (data/lore_lines.json). Owner: CONTENT WRITER - words only,
+      never code, and D63 reads them rather than inventing parallel copies.
+      There is no festival pool in lore_lines.json today (keys: tells, descend, cleared,
+      lord_intros, unique_intros, barks, misfire, epitaphs, forge, town_levels_for_the_desktop,
+      e3po, town_life, propositions, disasters, events, growth_tiers). The two festival lines in
+      the game are hardcoded in town.gd. Write a "festivals" pool with, at minimum: openings that
+      name a REASON (harvest, a raid survived, a lord felled, a hero home, a town level, a
+      viewer's gift), crowd barks and toasts, what the stalls are selling, a notable's line,
+      E3PO's line, closings, and a separate richer set for a festival a VIEWER paid for naming
+      the buyer. Enough that a 24/7 stream does not repeat. Keep Bellmire's voice - medieval,
+      D&D-flavoured, short, readable at a glance.
+      DONE: json validates, every pre-existing key byte-identical, counts stated per category.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.

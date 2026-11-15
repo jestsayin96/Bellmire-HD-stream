@@ -747,6 +747,9 @@ func _raider_falls(r: Dictionary, _killer: String) -> void:
     if n is Monster:
         (n as Monster).die()
     else:
+        # D21b.2: a bandit's death reads too - red flash + FELLED! banner.
+        if n is Townsfolk:
+            (n as Townsfolk)._death_fx()
         _anim(n, "die")
         var nid := n.get_instance_id()       # D8: never capture a node that may be freed first
         get_tree().create_timer(25.0).timeout.connect(func() -> void:
@@ -800,6 +803,9 @@ func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
             _say("%s is knocked senseless, but lives. The guild's grace - once." % (n as Townsfolk).person_name)
             return
     _fighters.erase(n)
+    # D21b.2: the death reads at stream distance - red flash + FELLED! banner.
+    if n is Townsfolk:
+        (n as Townsfolk)._death_fx()
     _anim(n, "die")
     (town.get("people") as Array).erase(n)
     (n as Townsfolk).stay = true

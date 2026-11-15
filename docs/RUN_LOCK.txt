@@ -1,1 +1,1 @@
-IDLE 2026-11-14 23:42 - D21b.1 defender hit FX parity shipped (D-cycle); D21b full scope (deaths, formations, charge, FPS soak) open
+IDLE 2026-11-15 00:47 - D21b.2 defender deaths read (D-cycle); D21b remainder (formations, cavalry charge, FPS soak) open

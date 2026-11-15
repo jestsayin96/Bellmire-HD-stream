@@ -88,6 +88,7 @@ static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_te
 ## stream distance, matching the raider side (Monster._flash/_number).
 var _flash_t := 0.0
 var _flash_mats: Array = []
+var _flash_red := false
 var _lod_n := 0
 var _lod_acc := 0.0
 
@@ -1473,6 +1474,7 @@ func _flash() -> void:
             for g in c.get_children():
                 if not String(g.name).begins_with("eq_"):
                     st.append(g)
+    _flash_red = false
     for d in _flash_mats:
         var mm: StandardMaterial3D = d
         mm.emission_enabled = true
@@ -1508,4 +1510,64 @@ func _number(amount: float, crit: bool) -> void:
     tw.set_parallel(true)
     tw.tween_property(lb, "global_position", p + Vector3(0, 1.4, 0), 0.9).set_ease(Tween.EASE_OUT)
     tw.tween_property(lb, "modulate:a", 0.0, 0.9).set_delay(0.3)
+    tw.chain().tween_callback(lb.queue_free)
+
+## D21b.2: a defender's death reads at stream distance - a longer red flash and a
+## FELLED! banner that rises and fades. Called from raids._defender_falls at the
+## one real death point (after CON save / grace / KO have had their say), so a
+## knock-out does not spawn one. Headless-safe: skips the material surgery in
+## the dummy renderer, same as _flash.
+func _death_fx() -> void:
+    if _mdl == null or not is_instance_valid(_mdl):
+        return
+    if DisplayServer.get_name() == "headless":
+        _flash_red = true
+        _flash_t = 0.5
+        return
+    if _flash_mats.is_empty():
+        var st: Array = [_mdl]
+        while not st.is_empty():
+            var c: Node = st.pop_back()
+            if c is MeshInstance3D and (c as MeshInstance3D).visible and not String(c.name).begins_with("eq_"):
+                var mi: MeshInstance3D = c
+                if mi.mesh == null:
+                    continue
+                for i in range(mi.mesh.get_surface_count()):
+                    var src: Material = mi.get_active_material(i)
+                    if src is StandardMaterial3D:
+                        var d: StandardMaterial3D = src.duplicate()
+                        mi.set_surface_override_material(i, d)
+                        _flash_mats.append(d)
+            for g in c.get_children():
+                if not String(g.name).begins_with("eq_"):
+                    st.append(g)
+    _flash_red = true
+    for d in _flash_mats:
+        var mm: StandardMaterial3D = d
+        mm.emission_enabled = true
+        mm.emission = Color(1.0, 0.12, 0.08)
+        mm.emission_energy_multiplier = 2.0
+    _flash_t = 0.5
+    _death_label()
+
+## The FELLED! banner. Shape mirrors _number() so the stream reads them as one
+## family; bigger, red-on-black outline so it carries at pane distance.
+func _death_label() -> void:
+    var lb := Label3D.new()
+    lb.text = "FELLED!"
+    lb.font_size = 112
+    lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 24
+    lb.outline_modulate = Color(0, 0, 0, 0.95)
+    lb.modulate = Color(1.0, 0.25, 0.18)
+    lb.top_level = true
+    add_child(lb)
+    var p := global_position + Vector3(randf_range(-0.3, 0.3), 2.2, randf_range(-0.3, 0.3))
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.8, 0), 1.6).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 1.6).set_delay(0.5)
     tw.chain().tween_callback(lb.queue_free)

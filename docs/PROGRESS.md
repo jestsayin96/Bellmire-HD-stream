@@ -2,6 +2,53 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D21b.2 defender deaths read, 2026-11-15 00:46 (game build)
+- Item: D21b (first open DESKTOP item still) - RAID COMBAT FEEL. Next smallest
+  readable piece after D21b.1: deaths that read. A Townsfolk or HeroBody beaten
+  to 0 hp by a raider used to just play its 'die' anim via _anim(n, "die") and
+  be buried; from stream distance it was indistinguishable from a reel, an idle,
+  or a chair-sit. Monster.die() already did the readable thing on the raider
+  side (die anim + voice + sink). This cycle gives the defender side the same
+  weight.
+- CHANGE 1 scripts/townsfolk.gd: added _flash_red flag and two funcs mirroring
+  the D21b.1 shape - _death_fx() (a longer, RED flash: emission (1.0,0.12,0.08)
+  at 2.0x for 0.5s on the duplicated StandardMaterial3D set the class already
+  builds for _flash) and _death_label() (a "FELLED!" Label3D at font_size 112,
+  red with a 24px black outline, rising 1.8m over 1.6s and fading out). Both
+  skip the material surgery in --headless, same guard as _flash (the dummy
+  renderer logs "Parameter 'material' is null" when we duplicate SM3D with
+  external texture refs - the flash is invisible headless anyway). Reuse
+  _flash_t and _tick_flash to clear emission when the timer runs out; _flash
+  now sets _flash_red=false so a late hit can't paint a dying body white.
+- CHANGE 2 scripts/raids.gd: in _defender_falls, call (n as Townsfolk)._death_fx()
+  on the ONE real death line (after the CON save, after the green-grace KO,
+  after E3PO's immortal recovery path) right before _anim(n, "die"), so a KO
+  does not spawn the banner. In _raider_falls, non-Monster raiders (bandits
+  that are Townsfolk) get the same treatment - Monster.die() already covers
+  the lord/creature side. No change to any existing damage, death bookkeeping,
+  bury, roster.kill, or timer-based queue_free path.
+- GATE (all green on the hardened tree):
+  * parse clean (--headless --quit-after 300 rc=0, no SCRIPT ERROR / Parse Error)
+  * tools/_offfloor.gd rc=0, OFFFLOOR 0 of 1340 samples; INPROP 0; MON_INPROP
+    0 of 84; floor reached 4
+  * tools/_twitch_parse.gd TWITCH_PARSE OK (7+1 passes)
+  * tools/_delve_test.gd rc=0, no SCRIPT ERROR; reached floor 2 state=descend
+  * tools/_townwalk.gd ran with no SCRIPT ERROR for 70+ sim seconds (the box
+    wrapper cut at the 420s wall budget before the 120s-sim summary fired, a
+    known headless slowdown when a delve is concurrent); in_solid stayed flat
+    at 1 across T=10..70 samples, ratio 1/10898 = 0.009%, well under the
+    _townwalk PASS threshold of 0.2%. stuck_on_route=0 throughout.
+- Bar for the item itself: parse + the calls land at the one real death point
+  and are headless-safe. Visible sign-off ("a stream shot of a bandit going
+  down with a FELLED! banner over him") is where D21b.1 also stopped - it is
+  a live-run verdict Mr. E owns, not something a headless run can prove.
+- D21b itself STAYS OPEN. The remaining pieces named in its scope - guard
+  formations, a cavalry charge that lands, and the FPS raid soak - are
+  untouched this cycle.
+- Files: scripts/townsfolk.gd, scripts/raids.gd, docs/WORK_PLAN.md, docs/PROGRESS.md.
+
+
+
 ## D-cycle D5 - D45 grass material re-grade + D44b ghost-leg diagnostic (desktop, Nov 13)
 D45 THE GRASS READS AS SAND (owner desktop build; Mr. E quality-bar item, re-fired as an override).
 - LOOKED FIRST: rendered the current ground at 1080p (tools/_d45_shot.gd, new). The close-up was

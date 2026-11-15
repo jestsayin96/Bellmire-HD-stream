@@ -457,6 +457,7 @@ func _civic_flee() -> bool:
     if not bool(town.call("is_raid_on")):
         if _fleeing:
             _fleeing = false
+            _flee_end = Vector3.INF
             _flee_k = 1.0
             _wait = randf_range(1.0, 6.0)   # ease out after the all-clear, staggered
         return false
@@ -471,8 +472,17 @@ func _civic_flee() -> bool:
     # at the doorway with no interior point to step into (a homeless body's
     # refuge, or a home with no inside point): duck inside at the threshold so
     # the street truly clears, rather than mill about the door
+    # D44c: OR the flight's route has run out by its end point. The route ends on the
+    # navmesh beside the door, often ~2 m off it; with the 0.9 m arrival a body
+    # could stop 2.5-3 m from the door, fail the test above, be routed to the same
+    # end again, arrive again - every frame, a knot of a dozen folk frozen at one
+    # refuge for the whole raid (the townwalk STUCK_EX hotspot at (74,-63.5)).
+    var at_end := _route.is_empty() and _flee_end != Vector3.INF \
+            and Vector2(_flee_end.x - global_position.x, _flee_end.z - global_position.z).length() < 2.5
     if _fleeing and _enter_at == Vector3.ZERO and _door_out != Vector3.ZERO \
-            and Vector2(_door_out.x - global_position.x, _door_out.z - global_position.z).length() < 2.5:
+            and (at_end or Vector2(_door_out.x - global_position.x, _door_out.z - global_position.z).length() < 2.5):
+        if at_end:
+            flee_end_tucks += 1
         inside = true
         visible = false
         _route.clear()
@@ -504,6 +514,7 @@ func _civic_flee() -> bool:
     else:
         _enter_at = Vector3.ZERO     # no interior leg; the doorway tuck takes over
     _route = r
+    _flee_end = end
     _fleeing = true
     _at_fest = false
     _flee_k = 1.7
@@ -745,6 +756,11 @@ var wd_close := 0
 var wd_repaths := 0
 var wd_nudges := 0
 var wd_giveups := 0
+## D44c: final legs ended as arrived because the spot was taken
+var crowd_arrivals := 0
+## D44c: fleers tucked in at the end of their flight route (not within 2.5 m of the door)
+var flee_end_tucks := 0
+const ARRIVE_CROWDED := 2.5
 # D16c: when the wagons were last checked against the next leg, and how often
 # a walker went round one
 var _wag_t := randf() * 0.5
@@ -1045,6 +1061,20 @@ func _physics_process(delta: float) -> void:
         if _prog_t > 2.5 and not _route.is_empty():
             _prog_t = 0.0
             _best_d = INF
+            # D44c: the LAST leg of an open-ground trip, already within a body or
+            # two of the spot and getting no nearer (someone stands on it and the
+            # crowd push holds this walker off). Re-routing to the same spot only
+            # brings it back here - the escape route's first step resets the
+            # re-route count, so it looped for good (the townwalk STUCK_EX at
+            # (74,-63.5)). Near enough is there, as the watchdog's close branch.
+            if _route.size() == 1 and _enter_at == Vector3.ZERO and _seat_i < 0 and d_now < ARRIVE_CROWDED:
+                wd_close += 1
+                crowd_arrivals += 1
+                _route.clear()
+                _rerouted = 0
+                Rig.play(_anim, "Idle")
+                _wait = _linger if _linger > 0.0 else randf_range(5.0, 14.0)
+                return
             _slide_side = -_slide_side if _slide_side != 0.0 else 1.0
             if _rerouted < 1 and _enter_at == Vector3.ZERO:
                 _rerouted += 1
@@ -1398,6 +1428,8 @@ var _sat := false
 # D20b: a body fleeing a raid for cover, and a body gone to the festival. The
 # flee runs (the D17b gait picks the run clip from the real speed via _flee_k).
 var _fleeing := false
+## D44c: where the flight's route ends (the nav point by the refuge door; INF = none)
+var _flee_end := Vector3.INF
 var _at_fest := false
 ## D63.3: a festival act per body, and the clips that play it (all KayKit adventurer clips)
 var _fest_act := ""

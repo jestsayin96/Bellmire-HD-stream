@@ -5776,3 +5776,19 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
 - LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
 - L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.
+## D-cycle D44c - the raid-flight knot at (74,-63.5) (game build, 2026-11-15 ~15:45 CT)
+- RC ITEM TAKEN: D52 is first in Phase RC but LAPTOP-CODE owned (no worker) - skipped per the BLOCKED note;
+  next owned RC item is D44/D50 (wedging). Waited for the HUD's live lock (L64.4) to clear before launching.
+- CAUSE (tools/_d44c_probe.gd, new): every recent townwalk's STUCK_EX pointed at next=(74,-63.5). The probe
+  showed ~9 folk with _fleeing=true, enter=ZERO, door_out=(75.7,-64.6): a homeless refuge whose nav route
+  ends ~2 m off the door. 0.9 m arrival left them 2.5-3 m from the door, so the 2.5 m duck-in failed and
+  _civic_flee routed them to the same end again - arrive/re-route every frame for the whole raid.
+- FIX (townsfolk.gd only, .bak_d44c kept): _flee_end remembers the flight route's end; a fleer whose route
+  has run out within 2.5 m of it tucks in (flee_end_tucks). Also: a final open-ground leg that gets no
+  nearer within ARRIVE_CROWDED (2.5 m) counts as arrived (crowd_arrivals) - the same rule the D16b
+  watchdog's close branch uses, now reachable when crowd jitter defeats the watchdog.
+- TEST: probe still-on-route samples at the hotspot 43 -> 0. Townwalk x3: stuck_on_route total 0/2/0, hotspot
+  absent from all three STUCK_EX; in_solid 0/21402, 2/18031, 2/15629 (PASS). The 2s are the old D44b flat
+  residual at the south-market solid (32.5,-64..-69) on 100+-waypoint routes - left open, named in WORK_PLAN.
+- GATE GREEN: parse 0; _offfloor 0/1316 (INPROP 0, MON_INPROP 0/108); TWITCH_PARSE OK; _delve_test to floor 2,
+  0 SCRIPT ERROR. D44/D50 left UNTICKED (in_solid not yet 0 every run). No pumpkin prop exists in code.

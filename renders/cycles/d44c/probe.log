@@ -1,0 +1,153 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+FEED 4 bandits are riding on the west road!
+FEED Initiative: the raiders 10, the watch 8 - the raiders strike first.
+D44C f=600 child Dunn the Younger (73.17,-63.73) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=0", "peasant/Bran Rivers stay=false route=1", "child/Edda Hollow stay=false route=2", "child/Talen Fenwick stay=false route=1", "child/Edda of the Ford stay=false route=4", "watch/Sable Coalfoot stay=false route=3", "peasant/Cort the Younger stay=false route=0"]
+D44C f=720 peasant Maela Bramble (73.38,-62.86) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Bran Rivers stay=false route=0", "child/Edda Hollow stay=false route=1", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=1", "child/Dunn the Younger stay=false route=0", "peasant/Cort the Younger stay=false route=0"]
+D44C f=840 child Talen Fenwick (73.76,-62.67) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=0", "peasant/Bran Rivers stay=false route=0", "peasant/Harl Thatcher stay=false route=1", "child/Edda Hollow stay=false route=0", "child/Corvin Hollow stay=false route=0", "child/Dunn the Younger stay=false route=1", "peasant/Cort the Younger stay=false route=0"]
+D44C f=840 child Dunn the Younger (73.17,-63.73) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=0", "peasant/Bran Rivers stay=false route=0", "peasant/Harl Thatcher stay=false route=1", "child/Edda Hollow stay=false route=0", "child/Talen Fenwick stay=false route=1", "child/Corvin Hollow stay=false route=0", "watch/Hilda Bramble stay=false route=0", "peasant/Cort the Younger stay=false route=0"]
+D44C f=960 peasant Maela Bramble (73.38,-62.86) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Bran Rivers stay=false route=0", "peasant/Harl Thatcher stay=false route=1", "child/Edda Hollow stay=false route=1", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=0", "child/Dunn the Younger stay=false route=2", "peasant/Petra Stonehand stay=false route=1", "peasant/Cort the Younger stay=false route=0"]
+D44C f=960 child Edda Hollow (73.24,-63.06) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=1", "peasant/Bran Rivers stay=false route=0", "peasant/Harl Thatcher stay=false route=1", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=0", "child/Dunn the Younger stay=false route=2", "peasant/Petra Stonehand stay=false route=1", "peasant/Cort the Younger stay=false route=0"]
+D44C f=960 child Dunn the Younger (73.17,-63.73) route=2 r0=(73.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=1", "peasant/Bran Rivers stay=false route=0", "peasant/Harl Thatcher stay=false route=1", "child/Edda Hollow stay=false route=1", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=0", "watch/Hilda Bramble stay=false route=0", "peasant/Petra Stonehand stay=false route=1", "peasant/Cort the Younger stay=false route=0"]
+D44C f=1080 peasant Maela Bramble (73.38,-62.86) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Bran Rivers stay=false route=0", "child/Edda Hollow stay=false route=1", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=0", "child/Dunn the Younger stay=false route=2", "peasant/Cort the Younger stay=false route=0"]
+D44C f=1080 child Edda Hollow (73.24,-63.06) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=1", "peasant/Bran Rivers stay=false route=0", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=0", "child/Dunn the Younger stay=false route=2", "peasant/Cort the Younger stay=false route=0"]
+D44C f=1080 child Dunn the Younger (73.17,-63.73) route=2 r0=(73.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=1", "peasant/Bran Rivers stay=false route=0", "child/Edda Hollow stay=false route=1", "child/Talen Fenwick stay=false route=0", "child/Corvin Hollow stay=false route=0", "watch/Hilda Bramble stay=false route=0", "peasant/Cort the Younger stay=false route=0"]
+D44C f=1200 child Talen Fenwick (73.76,-62.67) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=0", "peasant/Bran Rivers stay=false route=0", "child/Edda Hollow stay=false route=0", "child/Corvin Hollow stay=false route=0", "child/Dunn the Younger stay=false route=1", "peasant/Cort the Younger stay=false route=0"]
+D44C f=1200 child Dunn the Younger (73.17,-63.73) route=1 r0=(74.0, 0.5, -63.5) back=(74.0, 0.5, -63.5) flee=true raid=true enter=(0.0, 0.0, 0.0) door_out=(75.69547, 0.75088, -64.61806) seat=-1 wait=0.0 lod=0 leader=false prog=0.00 best=inf rer=0 wd_n=0 near=["peasant/Maela Bramble stay=false route=0", "peasant/Bran Rivers stay=false route=0", "child/Edda Hollow stay=false route=0", "child/Talen Fenwick stay=false route=1", "child/Corvin Hollow stay=false route=0", "watch/Hilda Bramble stay=false route=0", "peasant/Cort the Younger stay=false route=0"]
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 16)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Cort Ashwood goes down and claws back up. (CON save 15)
+FEED The attack is driven off. The gates hold.
+FEED Dunn Stonehand settles in Bellmire, looking for work.
+D44C_DONE stuck_samples=43
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)

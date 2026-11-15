@@ -1285,9 +1285,11 @@ function renderFallen(fs) {
   const box = $("fallenList");
   box.replaceChildren();
   if (!fs.length) { box.append(el("p", "empty", "No one has fallen. Yet.")); return; }
-  for (const f of fs) {
+  for (let fi = 0; fi < fs.length; fi++) {
+    const f = fs[fi];
     if (f == null || typeof f !== "object") continue;
     const g = el("article", "grave");
+    g.dataset.fi = String(fi);            // H24: integer the page owns, so the finder can land here
     const head = el("div", "ghead");
     head.append(coat(nameOf(f), "md"));
     const who = el("div", "gwho");
@@ -1463,7 +1465,7 @@ function renderBands(raw) {
     if (note) note.textContent = "";
     return;
   }
-  for (const p of parties) box.append(partyCard(p));
+  parties.forEach((p, bi) => { const cardEl = partyCard(p); cardEl.dataset.bi = String(bi); box.append(cardEl); });   // H24: integer index
   const heads = parties.reduce((a, p) => a + p.members.length, 0);
   if (count) count.textContent = parties.length + (parties.length === 1 ? " band" : " bands");
   if (note) note.textContent = parties.length + (parties.length === 1 ? " band" : " bands")
@@ -2900,6 +2902,24 @@ function beastCard(b, rows, stats) {
   card.append(facts);
   return card;
 }
+// H24: the whole book as a list (page-owned lore constants), so the Bestiary and the finder agree
+function beastBook() {
+  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
+  const beasts = [];
+  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
+  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
+  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
+  const fam = new Map();
+  for (const c of arr(src && src.events && src.events.monster_camps)) {
+    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
+    let f = fam.get(c.of);
+    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
+    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
+    for (const t of beastTerms(c.name)) f.terms.push(t);
+  }
+  for (const f of fam.values()) beasts.push(f);
+  return beasts;
+}
 function renderBestiary(p) {
   const box = $("bestiaryBody");
   if (!box) return;
@@ -2918,23 +2938,10 @@ function renderBestiary(p) {
     b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
   }
   box.textContent = "";
-  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
   let rows = chronMem.slice();
   const snap = p && p.bestiary && typeof p.bestiary === "object" ? p.bestiary : null;
   const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
-  const beasts = [];
-  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
-  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
-  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
-  const fam = new Map();
-  for (const c of arr(src && src.events && src.events.monster_camps)) {
-    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
-    let f = fam.get(c.of);
-    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
-    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
-    for (const t of beastTerms(c.name)) f.terms.push(t);
-  }
-  for (const f of fam.values()) beasts.push(f);
+  const beasts = beastBook();
   const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
   const metN = shown.filter((b) => beastMentions(rows, b.terms).n).length;
   const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
@@ -2943,7 +2950,7 @@ function renderBestiary(p) {
   // met first, then rumours; stable inside each group
   const ordered = shown.map((b, i) => ({ b, i, met: beastMentions(rows, b.terms).n ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
   for (const o of ordered) {
-    try { grid.append(beastCard(o.b, rows, statOf(o.b.key))); } catch (e) { /* one bad entry never blanks the book */ }
+    try { const bc = beastCard(o.b, rows, statOf(o.b.key)); bc.dataset.bi = String(beasts.indexOf(o.b)); grid.append(bc); } catch (e) { /* one bad entry never blanks the book */ }
   }
   box.append(grid);
 }
@@ -3052,6 +3059,36 @@ function setActiveTab(id) {
     if (!n) return;
     chronFocusId = n; setActiveTab("chronicle"); if (chronData) paintChronicle();
   });
+})();
+
+// ---------------------------------------------------------------- H25 night watch
+// A long-session mode for a page left open beside the stream: a dimmed palette and an ambient
+// layout (town strip, status line, Chronicle and Bands side by side; the finder, tabs, filters and
+// footer fold away). It is ONE class on <html> (CSS does all the work) - no snapshot value is
+// involved, nothing is fetched, and nothing about it touches the DOM the renderers build.
+// The choice is per-browser: localStorage under a page-owned key, and the value read back is
+// compared to a two-item whitelist before it decides anything (private windows throw: then the
+// page simply starts in the full layout). ?watch=1 turns it on for a visit without storing it.
+const WATCH_KEY = "bellmire.watch.v1";
+const WATCH_LABEL = { on: "Back to the full page", off: "Night watch" };
+const WATCH_HINT  = { on: "Dim and quiet: the town, the Chronicle and who is below.", off: "A dim, quiet page for a second screen." };
+function getStoredWatch() {
+  try { return ctrlStrip(localStorage.getItem(WATCH_KEY) || "").slice(0, 12) === "watch" ? "watch" : ""; }
+  catch (e) { return ""; }
+}
+function applyWatch(on, keep) {
+  const root = document.documentElement;
+  root.classList.toggle("watch", !!on);
+  const btn = $("watchBtn"), hint = $("watchHint");
+  if (btn) btn.textContent = on ? WATCH_LABEL.on : WATCH_LABEL.off;
+  if (hint) hint.textContent = on ? WATCH_HINT.on : WATCH_HINT.off;
+  if (keep) { try { if (on) localStorage.setItem(WATCH_KEY, "watch"); else localStorage.removeItem(WATCH_KEY); } catch (e) {} }
+}
+(function wireWatch() {
+  const btn = $("watchBtn");
+  if (!btn) return;
+  btn.addEventListener("click", () => applyWatch(!document.documentElement.classList.contains("watch"), true));
+  applyWatch(params.get("watch") === "1" || getStoredWatch() === "watch", false);
 })();
 
 load();
@@ -3361,3 +3398,176 @@ function setUpTabs() {
   });
 }
 setUpTabs();
+
+// ---------------------------------------------------------------- H24 the finder
+// One search field that looks across everything this page already holds in memory:
+// living heroes, the fallen, bands, the Bestiary's lords and remembered Chronicle
+// lines. PAGE-LOCAL ONLY: no fetch, no new origin, no write path. Every result row is
+// built with el() (textContent) - a hero called <img src=x onerror=alert(1)> shows as
+// text. A result addresses its target by an INTEGER index/id the page owns (data-fi,
+// data-bi, #moment-n); no snapshot string is ever put in a URL, selector, src, href or
+// style. It never captures keys while the viewer is typing in another field.
+const FIND_MIN = 2, FIND_PER = 6, FIND_MAX = 24;
+const FIND_KIND = { hero: "Hero", fallen: "Fallen", band: "Band", lord: "Lord", moment: "Moment" };
+let finderRes = [], finderSel = -1;
+function finderPayload() { return last ? (MOCK ? withMock(last.payload) : last.payload) : null; }
+function finderQuery() { const i = $("finderInput"); return i ? ctrlStrip(i.value).slice(0, 60).trim().toLowerCase() : ""; }
+function finderRank(text, q) {
+  const t = String(text).toLowerCase();
+  const at = t.indexOf(q);
+  if (at < 0) return -1;
+  if (at === 0) return 0;
+  return /[^a-z0-9]/.test(t.charAt(at - 1)) ? 1 : 2;
+}
+function finderSearch(q) {
+  const p = finderPayload();
+  const groups = { hero: [], fallen: [], band: [], lord: [], moment: [] };
+  const add = (g, r, rank) => { r.g = g; r.rank = rank; groups[g].push(r); };
+  if (p && typeof p === "object") {
+    arr(p.heroes).forEach((h, i) => {
+      const n = nameOf(h); const k = n ? finderRank(n, q) : -1; if (k < 0) return;
+      const lvl = Number.isFinite(+h.level) && +h.level > 0 ? "level " + num(h.level) : "";
+      add("hero", { text: n, sub: [h.class ? cap(String(h.class)) : "", lvl].filter(Boolean).join(", "), i }, k);
+    });
+    arr(p.fallen).forEach((f, i) => {
+      if (f == null || typeof f !== "object") return;
+      const n = nameOf(f); const k = n ? finderRank(n, q) : -1; if (k < 0) return;
+      add("fallen", { text: n, sub: f.killed_by ? "taken by " + String(f.killed_by) : "in The Fallen", i }, k);
+    });
+    normalizeParties(p.parties != null ? p.parties : p.bands).forEach((b, i) => {
+      const k = b.name ? finderRank(b.name, q) : -1;
+      if (k >= 0) add("band", { text: b.name, sub: "a band in the scar", i }, k);
+      for (const m of b.members) {
+        const mk = m.name ? finderRank(m.name, q) : -1;
+        if (mk >= 0) add("band", { text: m.name, sub: "delving with " + (b.name || "a band"), i }, mk);
+      }
+    });
+  }
+  try {
+    beastBook().forEach((b, i) => {
+      let k = finderRank(b.name, q);
+      for (const t of arr(b.terms)) { const kk = finderRank(t, q); if (kk >= 0 && (k < 0 || kk < k)) k = kk; }
+      if (k >= 0) add("lord", { text: b.name, sub: BEAST_KINDS[b.kind] || "", i }, k);
+    });
+  } catch (e) { /* the book must never break the finder */ }
+  chronMemEnsure();
+  for (const r of chronMem) {
+    if (!r || !r.n || typeof r.s !== "string") continue;
+    const k = finderRank(r.s, q); if (k < 0) continue;
+    const a2 = r.at ? ago(r.at) : null;
+    add("moment", { text: r.s.length > 120 ? r.s.slice(0, 117) + "\u2026" : r.s, sub: a2 ? a2.text : "remembered", n: r.n | 0, ts: histTs(r) }, k);
+  }
+  const out = [];
+  for (const g of ["hero", "fallen", "band", "lord", "moment"]) {
+    groups[g].sort((x, y) => x.rank - y.rank || (g === "moment" ? y.ts - x.ts : 0));
+    for (const r of groups[g].slice(0, FIND_PER)) out.push(r);
+  }
+  // best match first across every group (a name that STARTS with the query beats a word buried in a line);
+  // the sort is stable, so ties keep the hero > fallen > band > lord > moment order
+  out.sort((x, y) => x.rank - y.rank);
+  return out.slice(0, FIND_MAX);
+}
+function finderOpenState(on) {
+  const panel = $("finderPanel"), inp = $("finderInput");
+  if (panel) panel.classList.toggle("hide", !on);
+  if (inp) { inp.setAttribute("aria-expanded", on ? "true" : "false"); if (!on) inp.removeAttribute("aria-activedescendant"); }
+}
+function finderSelect(i) {
+  const rows = $("finderList").children;
+  if (!rows.length) { finderSel = -1; return; }
+  finderSel = (i + rows.length) % rows.length;
+  for (let j = 0; j < rows.length; j++) rows[j].setAttribute("aria-selected", j === finderSel ? "true" : "false");
+  $("finderInput").setAttribute("aria-activedescendant", rows[finderSel].id);
+  try { rows[finderSel].scrollIntoView({ block: "nearest" }); } catch (e) {}
+}
+function finderPaint() {
+  const box = $("finderList"), note = $("finderNote");
+  if (!box || !note) return;
+  box.replaceChildren(); finderSel = -1; finderRes = [];
+  const q = finderQuery();
+  if (q.length < FIND_MIN) { note.textContent = ""; finderOpenState(false); return; }
+  finderRes = finderSearch(q);
+  finderOpenState(true);
+  if (!finderRes.length) {
+    const nothing = !finderPayload();
+    note.className = "finder-note finder-none";
+    note.textContent = nothing
+      ? "The town has not reported yet, so there is nothing here to search."
+      : "Nothing this page has seen matches \u201c" + q + "\u201d. The finder searches only what is in this browser: the town as last reported and about two days of remembered Chronicle. A name it has never seen cannot be found here.";
+    return;
+  }
+  note.className = "finder-note";
+  note.textContent = finderRes.length + (finderRes.length === 1 ? " place" : " places") + " to go. Up and down to choose, Enter to open, Escape to close.";
+  finderRes.forEach((r, i) => {
+    const li = el("li", "finder-row finder-" + r.g);
+    li.id = "finder-opt-" + i;
+    li.setAttribute("role", "option"); li.setAttribute("aria-selected", "false");
+    li.append(el("span", "fkind", FIND_KIND[r.g]), el("span", "ftext", r.text));
+    if (r.sub) li.append(el("span", "fsub", r.sub));
+    li.addEventListener("mousedown", (ev) => ev.preventDefault());      // keep focus in the field
+    li.addEventListener("click", () => finderOpen(r));
+    box.append(li);
+  });
+  finderSelect(0);
+}
+function finderLand(node) {
+  if (!node) return;
+  node.classList.add("finder-hit");
+  node.setAttribute("tabindex", "-1");
+  const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try { node.scrollIntoView({ block: "center", behavior: calm ? "auto" : "smooth" }); } catch (e) {}
+  try { node.focus({ preventScroll: true }); } catch (e) {}
+  setTimeout(() => node.classList.remove("finder-hit"), 3200);
+}
+function finderOpen(r) {
+  const p = finderPayload();
+  const inp = $("finderInput");
+  finderOpenState(false);
+  if (inp) inp.value = "";
+  if (!r || !p) return;
+  if (r.g === "hero") {
+    heroFilter = r.text; heroShown = HERO_PAGE;
+    const f = $("find"); if (f) f.value = r.text;
+    renderHeroes(arr(p.heroes));
+    setActiveTab("heroes");
+    const card = [...$("heroList").querySelectorAll("details.hero")].find((d) => (d.querySelector(".hname") || {}).textContent === r.text);
+    if (card) { card.open = true; finderLand(card); }
+  } else if (r.g === "fallen") {
+    setActiveTab("fallen");
+    finderLand($("fallenList").querySelector('[data-fi="' + (r.i | 0) + '"]'));
+  } else if (r.g === "band") {
+    setActiveTab("bands");
+    finderLand($("bandList").querySelector('[data-bi="' + (r.i | 0) + '"]'));
+  } else if (r.g === "lord") {
+    beastFilter = "all";
+    try { renderBestiary(p); } catch (e) {}
+    setActiveTab("bestiary");
+    finderLand($("bestiaryBody").querySelector('[data-bi="' + (r.i | 0) + '"]'));
+  } else if (r.g === "moment") {
+    chronFocusId = r.n | 0;
+    setActiveTab("chronicle");
+    paintChronicle();
+    try { history.replaceState(null, "", "#moment-" + (r.n | 0)); } catch (e) {}
+  }
+}
+(function setUpFinder() {
+  const inp = $("finderInput"), panel = $("finderPanel");
+  if (!inp || !panel) return;
+  inp.addEventListener("input", finderPaint);
+  inp.addEventListener("focus", () => { if (finderQuery().length >= FIND_MIN) finderPaint(); });
+  inp.addEventListener("keydown", (ev) => {
+    const open = !panel.classList.contains("hide");
+    if (ev.key === "ArrowDown") { ev.preventDefault(); if (!open) finderPaint(); else finderSelect(finderSel + 1); }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); if (open) finderSelect(finderSel - 1); }
+    else if (ev.key === "Enter") { if (open && finderRes[finderSel]) { ev.preventDefault(); finderOpen(finderRes[finderSel]); } }
+    else if (ev.key === "Escape") { ev.preventDefault(); if (open) finderOpenState(false); else { inp.value = ""; inp.blur(); } }
+  });
+  document.addEventListener("click", (ev) => { if (!ev.target || !ev.target.closest || !ev.target.closest("#finder")) finderOpenState(false); });
+  // "/" jumps to the field - but never while the viewer is typing somewhere else (the guild chat above all)
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key !== "/" || ev.ctrlKey || ev.metaKey || ev.altKey || ev.defaultPrevented) return;
+    const t = ev.target, tag = t && t.tagName ? t.tagName : "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    ev.preventDefault(); inp.focus();
+  });
+})();

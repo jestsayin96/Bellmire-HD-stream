@@ -2,6 +2,21 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## U-cycle - U26 L31 part 1: the "NOW FIGHTING" banner, 2026-11-15 (HUD)
+- Item: L31 (first unchecked item that is mine; L61 was already ticked by U25).
+- Built HudDock.FightBanner (hud_dock.gd, skin + watcher only): when a floor's lord rises
+  (Delve.lord_fighting(), same source as the boss card) a parchment banner reads
+  NOW FIGHTING / <lord> / "Lord of the deep" or "A rare one" - the town's band / the delvers,
+  in the lord's own colour, held 6 s real time, fades. Docked UNDER the boss card inside the
+  pane showing the fight via HudDock.put (so it can never cross a seam or the Chronicle); at
+  full screen it sits below the boss bar. Marked with a pane home so guard() leaves it alone.
+- Looked at: windowed 1920x1080 capture tools/_u26_shot.gd -> renders/cycles/20261115_u26
+  (1_full_crop.png: solid parchment, purple lord edge, 40 px name legible). Banner rect
+  measured clear of the Chronicle box (overlap=false). Parse 0 errors.
+- NOT DONE for L31 (so it stays unticked): damage numbers (Monster._number / Delve._float_text
+  are Label3D in files I do not own) and status icons (party_frames.gd shows words). Those need
+  an owner decision - see summary.
+
 ## D-cycle - D57 the Satchel goes live in the snapshot, 2026-11-15 08:30 (game build)
 - Item: D57 (first open DESKTOP item, Mr. E's direct ask). The hub's H11 Satchel
   panel has been shipped and dormant since it went up: it draws nothing until the

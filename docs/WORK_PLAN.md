@@ -2641,7 +2641,15 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   all 15 now clear 4.5:1 at 1080p, via a chip_bg token and a softer scroll edge (renders/cycles/
   20261115_l654/audit.txt). Next for this worker: L64.
 
-- [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS. Owner: DESKTOP HUD
+- [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS.
+      SUPERVISOR NOTE (2026-11-15 14:05): there are 12 UNCOMMITTED lines of L64.4 in
+      scripts/spotlight.gd in your worktree (a `handoff_swaps` counter + an _amb_tick handoff so an
+      idle pane yields the body the director just cut to, meaning one body is never on screen
+      twice). Your 13:53 run wrote them, ran a headless parse check (errors=0) and stopped without
+      committing. Nothing was lost and nothing of yours is in main unpushed. Pick it up
+      deliberately: either finish L64.4 - WINDOWED verify that no body appears in two panes at
+      once, LOOK at the capture, then commit - or revert it and say why. Do not leave it dirty a
+      third run. Owner: DESKTOP HUD
       (auto_director.gd, spotlight.gd). The stream runs 24/7 and the director currently rotates;
       rotation is not direction. A DM cuts to what matters. Staged:
       L64.1 INTEREST SCORING. Score every candidate subject each beat on what a viewer would care
@@ -2964,3 +2972,40 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       whose lines never spell their name the same way, a v=3 payload pasted into a mock still rendering the
       old grouping with the fallback labelled, the hostile-name test passing on a `who` entry and a `kind`
       value, and all six query-string states passing.
+
+
+# Phase AG - the hub's queue was one item deep (supervisor, 2026-11-15 14:05)
+# H26 is the hub's last unchecked item. These two are written now so the hub builder is never
+# standing down with the page half-finished. Both are read-only, web/ only, no CSP change, no
+# viewer write path, and both build on what is already shipped rather than restarting anything.
+
+- [ ] H27. THE LADDER THE TOWN IS CLIMBING - SHOW THE 12 STAGES, NOT ONE NUMBER. Owner: HUB BUILDER
+      (web/index.html, web/app.js, web/style.css, web/NOTES.md). The page reports the town's stage
+      as a bare level, and a viewer has no way to know that Bellmire is a Crossing on its way to
+      being a City, what the next stage brings, or how far it has come tonight. The words already
+      exist and the page already loads them - lore_lines.json "growth_tiers".tiers, which H22's
+      welcome reads through LORE_FROZEN. Build a Ladder board: all twelve stages named in order,
+      the current one marked, the ones already passed marked as passed, and the next one shown with
+      what it brings. Where the Chronicle carries dated lines about the town levelling (D60 gave
+      every line a day, a who and a kind), say on which day a stage was reached. Keep every string
+      through el()/textContent - a tier name is lore, but the Chronicle lines beside it are
+      attacker-reachable. Honest when the snapshot has no level: show the ladder with nothing marked
+      and say the town has not reported its stage, never guess stage 1.
+      DONE: a capture of the Ladder at a mocked mid-ladder level showing passed / current / next and
+      a dated line for at least one passed stage; ?state=empty ?state=fail ?state=stale each render
+      the board honestly with no invented stage; a hostile Chronicle line renders as text; CSP
+      unchanged; the hostile-name test and the existing local checks still pass.
+
+- [ ] H28. THE HUB IN A POCKET - MOST VIEWERS ARRIVE ON A PHONE. Owner: HUB BUILDER
+      (web/style.css, web/index.html, web/NOTES.md - app.js only if a layout needs it). A viewer
+      finds the stream in the Twitch mobile app and opens the hub on a 390-wide screen. Everything
+      shipped since H14 - the finder, the character sheet, the Bestiary, Bands Below, Night watch,
+      H22's welcome - was laid out and looked at on a desktop. Make the page work in one thumb:
+      no horizontal scrolling at any width from 360 up, no two columns crushed into one unreadable
+      one, no text overlapping, tap targets big enough to hit (44 px), and the sections stacked in
+      the order a newcomer needs them. Refine the existing palette and type scale; do not replace
+      the design, and do not add a framework or a breakpoint library - plain CSS.
+      DONE: captures at 360x640 and 390x844 of the welcome, the town strip, a hero's character
+      sheet, the finder open, Bands Below and Night watch - each with zero horizontal page scroll
+      and no overlapping text; the same six captures at 1920x1080 proving the desktop layout did not
+      regress; CSP unchanged; local checks and the hostile-name test still pass.

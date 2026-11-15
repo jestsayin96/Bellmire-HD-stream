@@ -590,6 +590,14 @@ none and fell back.
 SUPERVISOR: each run, also physically move the open RC items toward the top of their sections, so
 a worker that misses this note still lands on the right work.
 
+### STATUS OF THAT BLOCK (supervisor, 2026-11-15 15:58 CT)
+Mr. E stood up a FIFTH worker on 15 Nov 15:41 - the ART lane, on branch `art`, worktree
+C:\hd adventure\bellmire-art. It does not run Godot, holds no RUN_LOCK, renders in parallel, and its
+queue is D75 (the eight lords), D73 (icons for all 454 items) and D76 (monster variety). That lane answers
+the art half of the gap. IT DOES NOT ANSWER THE LAPTOP-CODE HALF: L56, L68, L69, L70, L55 and D64.3/.4
+are still owned on paper by the retired jestai worker and are still unstartable. Three of the four
+"THE CHANNEL" RC items (L68, L69, L70) are in that set. The decision below is still outstanding.
+
 ### BLOCKED, NEEDS MR. E: FOUR PHASE RC ITEMS HAVE NO WORKER (supervisor, 2026-11-15 15:05 CT)
 This is a report, not a reassignment - the supervisor is not changing anyone's ownership here.
 L56, L68, L69 and L70 sit in PHASE RC above, and the remainder of D64 (.3 and .4) depends on the
@@ -1838,6 +1846,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] D27. THE TOWN READS AS EMPTY AND DARK FROM THE STREAM CAMERA. The recordings show large flat grass expanses with nothing in them, panes that frame a bare field or a blank wall, and daytime shots (e.g. Day 11 08:40) that look like dusk. Two parts: (1) fill the town/valley so no camera angle lands on featureless grass - paths, hedges, crops, carts, clutter, people moving; (2) check the daylight curve and exposure - morning should read as morning, not gloom (this interacts with D24: fix the grain first, then re-judge brightness). DONE: a 12-shot sweep from the stream camera at 08:00/12:00/18:00/22:00 where every frame has something to look at and the daytime frames read as daylight. RESULT (desktop D-cycle 121): (1) BRIGHTNESS - the 'dusk' was overcast weather: it greyed the sky and dimmed the daytime fill to a gloom. daylight.gd overcast sun 0.76->0.88 and dark 0.55->0.42 (rain 0.55->0.66, 0.9->0.78), plus a daytime ambient boost scaled by weather darkness (env.ambient_light_energy *= 1 + dark*0.6*(1-nt)). Clear days and night unchanged. 08:00 overcast now reads as bright cloudy daylight. (2) FILL - new town.gd _dress_greens() dresses the bare grass islands with flower beds + bushes + the odd tree (644 flora), is_clear-gated, gate lanes/river kept clear; trees/bushes register as nav solids. FPS 128.2 avg/94 min (>120 D23 target); _townwalk 0 in_solid. Sweep in renders/cycles/20261112_d27/.
 
 ### CONTENT (laptop, branch `content`, data+lore only, NEVER runs Godot) - see COORDINATION 10
+SUPERVISOR NOTE (2026-11-15 15:58 CT): the content writer owns NO open PHASE RC item (C7 shipped and is
+ticked), so its brief's first-unchecked rule is back in force. C-52 landed this cycle off the standing
+backlog - E3PO deepened by 168 lines across 12 pools in lore_lines.json, merged to main. C1, C2 and C3 are
+the file's oldest entries and have been overtaken many times over by the C-cycles (C-34 through C-52);
+C4 is the one open CONTENT item written to the current "HOW BIG AN ITEM SHOULD BE" bar and the one the game
+build is waiting on - D35 and D39 read items.json `shop_stock` and `trader_cargo`, and D64's shop ladder
+now gates by level. CONTENT WRITER: TAKE C4 NEXT.
+
 - [ ] C1. COSMETICS & DYES CATALOGUE (data/items.json): items.json is only 3.7 KB - the cosmetic set is thin. Expand cosmetics and accessories a lot: cloaks, hats/hoods/helms-as-cosmetic, rings, amulets, boots, gloves, banners, pets, titles - each with the same fields the existing entries use, priced sensibly against the economy, and named from the lore (Bellmire, the scar, the Ford, the guild). Widen dyes beyond the current set and keep dye_cost coherent. Additive only; never rename or drop a key. DONE: json validates, every new entry carries the same fields as the existing ones, and a written list of what was added.
 - [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
       CYCLES LOGGED: C-41..C-46 (cosmetics/accessories/dyes, uniques, intro/forge, most-repeated, epitaph/descend/cleared, disaster variants). C-47 (2026-11-15, content 3d01748): +140 lines - forge, town_life, a wandering lord, and E3PO tier_up_alt. Standing item: stays open by design.
@@ -2313,6 +2329,14 @@ this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do no
       DONE: a viewer redemption rolls on stream, the town visibly changes, and the Chronicle explains
       why - with at least one failure outcome demonstrated, not only successes.
 
+  SUPERVISOR NOTE (2026-11-15 15:58 CT) - WHERE THE CRIT AND FUMBLE LINES ACTUALLY ARE. The hub shipped
+  H27's roll board this cycle and reported the field missing: there is NO top-level `viewer_roll` key in
+  data/lore_lines.json. The C-cycle 38 lines were written one level down, at `e3po.viewer_roll`, with four
+  pools (crit / high / low / fumble) - verified on main this run. Nothing is missing and the content writer
+  should NOT write a parallel top-level copy. GAME BUILD: when T5 resolves a roll, take the outcome line
+  from `e3po.viewer_roll` and PUBLISH IT as the roll's `result` string. The hub never reads lore_lines - it
+  renders exactly what the publisher sends - so a roll published without `result` shows a number and no
+  outcome, which is the one visible gap left in H27's board.
 - [x] H9. THE HUB DIE SHOWS THE ROLL. The hub's existing die section animates and displays rolls read
       FROM THE SNAPSHOT - individual rolls, and the outcome of a T5 viewer roll. Read-only: the page
       never initiates or submits a roll. Keep every HUB_SECURITY invariant (el()/textContent, no
@@ -3047,6 +3071,19 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   the DONE line asks for has not been made - the worker also could not look at its own screenshots (folder grant). This
   item stays the HUD worker's first unchecked item.
 
+  PROGRESS (2026-11-15 15:14 CT, hud-ui 227f35b, U30): .4 HANDOFF IS DONE AND VERIFIED. spotlight.gd
+  `_amb_tick`: an idle pane (ambient, or resting on a redeemer) showing the body the director just cut to
+  yields at once to an ordinary ambient pick, counted in `handoff_swaps`; a PAID moment still holds its
+  hero and the director yields to it instead. tools/_l644_handoff.gd, WINDOWED 1080p via --script (with -s
+  the Town spawns its own eye and live Twitch and the test measures the wrong camera): 90 s director clock
+  at 4x, 4 delving viewer heroes, every frame comparing each pane's subject to the director's - 5,000+
+  frames, ZERO with a body in two panes, swaps 1-2, and a FORCED collision resolved. LOOKED:
+  renders/cycles/20261115_l644/panes_1080.png - Chronicle scroll centred and uncovered. The 12 lines that
+  sat uncommitted for two runs are now committed; nothing is dirty.
+  ALL FOUR STAGES (.1 .2 .3 .4) ARE NOW BUILT. THE ONLY THING LEFT IN L64 IS ITS DONE TEST: the 30-minute
+  unattended recording with at least one raid, one death and one quiet stretch, plus the director's own
+  decision log for the same window. HUD worker: that recording IS the item now - do not rebuild the stages.
+
 - [ ] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
       A static top five stops being interesting twenty minutes into a stream and never changes again
       for a viewer who just arrived. Make the board tell the story of the run. Staged:
@@ -3358,7 +3395,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
 # Both are read-only, web/ only, no CSP change, no viewer write path, and both reuse machinery the
 # page already has rather than starting anything over.
 
-- [ ] H27. TALES OF THE DIE - THE NIGHT'S ROLLS DESERVE A BOARD, NOT JUST A FLICKER. Owner: HUB
+- [x] H27. TALES OF THE DIE - THE NIGHT'S ROLLS DESERVE A BOARD, NOT JUST A FLICKER. Owner: HUB
       BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). The d20 resolves in the
       game and the hub displays the current roll (H9), so a roll appears, matters for a minute and
       is gone - on a stream that runs all night the best moment of the evening scrolls away. Keep
@@ -3375,6 +3412,21 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       ?state=empty renders "no rolls yet tonight" rather than an empty frame; ?state=fail and
       ?state=stale stay honest; a hostile roller name renders as literal text; CSP unchanged and all
       six local checks still pass.
+
+      RESULT (hub 6901b60, 2026-11-15 15:40 CT): the board ships. `bellmire.rolls.v1` keeps up to 100
+      rolls / 48 h / 60 KB per browser, newest first, folded and de-duplicated on (at, by, face,
+      result) each pass and RE-VALIDATED on read (normalizeRolls + control-char strip + ISO regex on
+      `at`, tier only through the page-owned TIER_ALIAS whitelist, face an integer 1..20), so a
+      hand-tampered store cannot inject anything. Day dividers use the Chronicle's own `dayVoice`;
+      a crit is restrained gold, a fumble ink-soft and dashed - no new colour; a tally chip pair
+      counts the crits and fumbles SHOWN so it always matches the list. Empty says "No rolls yet
+      tonight."; storage absent/full/throwing degrades to live-only. CSP byte-identical, no new
+      fetch/origin, no write path, KNOWN_V unchanged - index.html gained only the page-owned
+      `<p id="rollTally">`. Checks: ?mock=roll (crit + fumble + two ordinary + a hostile roller
+      `<img src=x onerror=alert(1)>`), reload keeps all five, a multi-day store divides
+      Today/Yesterday, ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 - 0 dialogs,
+      0 injected nodes, no horizontal scroll at 390. Supervisor review: the diff adds no innerHTML/
+      outerHTML/insertAdjacentHTML/eval/new Function and no URL/src/href/style sink.
 
 - [ ] H28. A VIEWER MUST BE ABLE TO SEND A FRIEND STRAIGHT TO THEIR HERO. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). H20 built the character sheet and

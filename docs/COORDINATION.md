@@ -158,6 +158,15 @@ cost us a corrupted run. Both MUST use docs/RUN_LOCK.txt (canonical, in R, on ma
     practice (seen 2026-11-15: the lock read 08:41 when the machine clock said 02:41).
   - Before launching Godot: read it. If it says RUNNING and the timestamp is under 45 min old, do
     NOT launch. Do file-only work or stop and say "skipped: another run is working".
+  - REFRESH THE LOCK ON EVERY RELAUNCH. If your item runs Godot more than once - a second soak,
+    a retry, a re-run after a fix - write a NEW RUNNING line with a fresh timestamp each time.
+    Observed 2026-11-15 16:31: the HUD worker's 30-minute director soak finished and relaunched
+    without touching the lock, so a live run was sitting behind a 42-minute-old RUNNING line and
+    was three minutes from being cleared as stale by anyone applying the 45-minute rule. A long
+    item is a sequence of runs, not one; the lock must say so.
+  - BEFORE CLEARING ANY LOCK ON AGE, CHECK FOR A LIVE GODOT PROCESS FIRST. A running
+    Godot_v4.7.2 process whose --path points at a worktree means someone is working, whatever the
+    lock's timestamp says. The process is the ground truth; the lock line is only a claim.
   - IF THE LOCK LINE HAS NO OFFSET, its age is UNKNOWN. Do NOT clear it on age alone and do NOT
     treat it as fresh. Check whether a Godot process is actually alive and whether a commit has
     landed since; only then decide. Rewrite the line in the format above once you own the lock.

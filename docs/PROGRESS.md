@@ -2,6 +2,12 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## C-cycle - C-47 forge, town_life, wandering lord, E3PO tier-up variants, 2026-11-15 (content)
+- Item: standing backlog (every numbered item already had a cycle; this widens the lines that still repeat most). WORK_PLAN C1-C3 are long delivered; supervisor ticks.
+- data/lore_lines.json only, additive, +140 lines: forge_alt +10 per tier (50; tiers 1-5, now 16 each); town_life crier/market/growth +12 each (36); events.wandering_boss appears_alt/while_alt/cleared_alt +6 each (18; no lord named, canon lords only); NEW key e3po.tier_up_alt (3 Commander lines per growth tier, keyed by exact tier NAME, 36).
+- CODE WIRING for the desktop (dead until wired): e3po.tier_up_alt - pick at random from tier_up_alt[tier_name] plus the existing tier_up line. All other additions extend lists the game already reads; no new wiring.
+- VALIDATION OK: all four data files json.load clean; every pre-existing key and list element byte-identical (lists only appended, checked by script); no new line duplicates an existing one; roundtrip format unchanged (indent 2).
+
 ## C-cycle - C-44 shop stock and caravan cargo per growth tier, 2026-11-15 (content)
 - Item: standing backlog 2 (SHOP STOCK AND TRADER CARGO PER GROWTH TIER). C1 in WORK_PLAN was already delivered by C-34/C-35/C-41; supervisor ticks.
 - data/items.json only, additive: shop_stock 123 -> 171 (+48, four per tier, tiers 1-12); trader_cargo 68 -> 101 (+33, three per tier, tiers 2-12; tier 1 stays caravan-free).

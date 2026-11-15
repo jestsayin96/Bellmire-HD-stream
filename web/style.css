@@ -1010,3 +1010,61 @@ details.hero > summary { grid-template-columns: auto minmax(0, 1fr) auto; }
   details.hero > summary { min-height: 44px; }
 }
 html, body { overflow-x: clip; }
+
+/* ======================================================= H18 the State of Bellmire
+   The town as a place: a ladder of its growth, stat tiles, what stands, what has
+   befallen it. Same palette (ink ground, parchment text, one teal, restrained gold);
+   dimness is never the only signal - every rung and building also says it in words. */
+.st-grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+.st-col { min-width: 0; }
+.st-h { margin: 14px 0 8px; font-size: .78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gold); }
+.st-h:first-child { margin-top: 0; }
+.st-h small { font-weight: 500; letter-spacing: 0; text-transform: none; font-style: italic; color: var(--parch-dim); opacity: .75; margin-left: 6px; font-size: .78rem; }
+.st-cap { margin: 0 0 10px; color: var(--parch-hi); font-size: .95rem; }
+.st-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+ol.ladder { list-style: none; margin: 0; padding: 0; }
+.rung { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: start; padding: 5px 0 5px 0; min-height: 40px; }
+.rung::before { content: ""; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: rgba(198,146,47,.35); }
+.rung:first-child::before { top: 50%; }
+.rung:last-child::before { bottom: 50%; }
+.rung.ahead::before { background: rgba(233,214,168,.14); }
+.rg-dot { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; background: var(--night); border: 2px solid rgba(233,214,168,.25); color: var(--parch-dim); }
+.rung.done .rg-dot { background: var(--gold); border-color: var(--gold); color: var(--night); }
+.rung.now .rg-dot { background: var(--teal); border-color: var(--teal-br); color: var(--night); box-shadow: 0 0 0 4px rgba(55,199,191,.22); }
+.rg-body { display: flex; flex-direction: column; gap: 2px; padding-top: 4px; min-width: 0; overflow-wrap: anywhere; }
+.rg-name { font-weight: 600; color: var(--parch-hi); }
+.rung.now .rg-name { color: var(--teal-br); font-size: 1.05rem; }
+.rung.ahead .rg-name { color: var(--parch-dim); opacity: .55; font-weight: 500; }
+.rg-see { font-size: .88rem; font-style: italic; color: var(--parch-dim); }
+.st-tiles { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); }
+.st-tiles .empty { grid-column: 1 / -1; margin: 0; }
+.st-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: rgba(233,214,168,.07); border: 1px solid rgba(198,146,47,.28); min-width: 0; }
+.st-k { font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--parch-dim); }
+.st-v { font-size: 1.45rem; line-height: 1.15; font-weight: 700; color: var(--parch-hi); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.st-grow { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; margin-top: 10px; }
+.st-grow .st-k { grid-column: 1 / -1; }
+.st-track { height: 10px; border-radius: 999px; background: rgba(233,214,168,.12); overflow: hidden; }
+.st-fill { display: block; height: 100%; width: calc(var(--grow, 0) * 100%); background: linear-gradient(90deg, var(--teal), var(--teal-br)); border-radius: 999px; }
+.st-gv { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--parch-hi); font-size: .9rem; }
+.st-roster { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.bld { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px; }
+.bld.built { background: rgba(233,214,168,.09); border: 1px solid rgba(198,146,47,.4); }
+.bld.unbuilt { background: transparent; border: 1px dashed rgba(233,214,168,.28); }
+.bld-ic { width: 26px; height: 26px; color: var(--teal-br); }
+.bld.unbuilt .bld-ic { color: var(--parch-dim); opacity: .45; }
+.bld-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.bld-name { font-weight: 700; color: var(--parch-hi); }
+.bld.unbuilt .bld-name, .bld.unbuilt .bld-line { opacity: .6; }
+.bld-line { font-size: .88rem; color: var(--parch-dim); }
+.bld-tag { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 700; color: var(--gold); }
+.bld.unbuilt .bld-tag { color: var(--parch-dim); opacity: .7; }
+.st-time { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.st-time .empty { margin: 0; }
+.tm { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 10px; border-radius: 8px; background: rgba(233,214,168,.05); border-left: 3px solid var(--gold); }
+.tm.raid { border-left-color: var(--bad); }
+.tm-ic { width: 22px; height: 22px; color: var(--parch-dim); }
+.tm-body { display: flex; flex-direction: column; gap: 1px; min-width: 0; overflow-wrap: anywhere; }
+.tm-when { font-size: .78rem; color: var(--gold); font-weight: 700; letter-spacing: .03em; }
+.tm-text { color: var(--parch-hi); }
+@media (min-width: 760px) { .st-grid { grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); gap: 26px; } }
+@media (forced-colors: active) { .rung.now .rg-dot, .rung.done .rg-dot { forced-color-adjust: none; } }

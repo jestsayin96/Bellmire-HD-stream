@@ -19,6 +19,11 @@ its own seven files. There is a lot available there: the director's shot languag
 story over a long stream (leaderboard_panel.gd), the feed's readability under load (feed_hud.gd),
 and one coherent pass over ui_theme.gd so every panel reads as one designed interface.
 
+RESOLVED 2026-11-15 12:05: the supervisor wrote that work - Phase AE at the END of this file,
+items L65, L64, L66, L67, in that order, all inside the HUD worker's own seven files. The HUD
+worker's queue is NO LONGER DRY. Take L65 first. L31, L36 and L40 stay unchecked and stay NOT the
+HUD worker's - that is still true and is still the reason below.
+
 DO NOT reassign boss_bar.gd, party_frames.gd, delve.gd or monster.gd to the HUD worker. Two workers
 in one file is how merges break. If Mr. E wants the L31 leftovers built, they go to their OWNER as
 a new item, not to the HUD worker.
@@ -849,7 +854,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] H16. THE HALL OF THE FALLEN. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). The Fallen list from H4 is a list of names; make it a memorial a viewer would stop and read. Per fallen hero: the crest (H15 if it has shipped), the epitaph, what took them, how deep they got, their level and the gear they were wearing when they fell - whichever of those the snapshot actually carries. The content writer has already written the words: epitaphs live in data/lore_lines.json and were frozen into the hub by H12 - read from what is already there, do not invent a parallel set. Fields the publisher does not send yet must degrade quietly to an honest blank, never to "undefined" and never to a guess; list in web/NOTES.md any field you wanted and the snapshot lacks, so the supervisor can raise it with the game build worker. DONE: a mock with fallen heroes shows the memorial with epitaph and cause; a mock whose fallen rows carry only a name still renders cleanly with no console error and no placeholder junk; the hostile-name test passes in the new section; the no-scroll H13 tab discipline still holds.
   RESULT (ticked by supervisor, 2026-11-15 05:05 CT): shipped hub 2fd5e22, merged to main. The Fallen are now <article> memorial cards: H15 crest + name + "the <class>, level N", earned title, epitaph in quotes, then a fact block (Taken by <cause>, day N / Deepest floor N / Slain N foes / Wore <weapon> + <armour> with whitelist icons). Every field is optional and simply not drawn when absent - no "undefined", no guesses. New ?mock=fallen carries a rich row, a hostile-name row with markup in EVERY field, a name-only row and a row of nulls/NaN. All text still goes through el()/textContent; icons still come from the page-owned whitelist; no innerHTML, no new fetch, CSP byte-identical.
 
-- [ ] H17. THE HUB ON A PHONE. Owner: HUB BUILDER (web/index.html, web/style.css, web/NOTES.md). Most viewers reach a Twitch stream's companion page on a handset, and H13's tabbed no-scroll layout was designed at desktop width. Make the hub work at 390x844 and at tablet width: tabs reachable with a thumb and never clipped, hero sheets readable without pinch-zoom, the Chronicle legible, the die and boards not overflowing, tap targets at least 44 px, no horizontal scroll at any supported width. Refine the existing layout - do not replace the palette, the Gloock wordmark treatment or the tab model. No framework, no new font, no CDN, no CSP change. DONE: screenshots at 390x844, 768 and 1280 wide, all three with zero horizontal scroll; every tab reachable and every section readable at 390 without zoom; ?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1 all still pass at 390; hostile-name test still passes.
+- [x] H17. THE HUB ON A PHONE. Owner: HUB BUILDER (web/index.html, web/style.css, web/NOTES.md). Most viewers reach a Twitch stream's companion page on a handset, and H13's tabbed no-scroll layout was designed at desktop width. Make the hub work at 390x844 and at tablet width: tabs reachable with a thumb and never clipped, hero sheets readable without pinch-zoom, the Chronicle legible, the die and boards not overflowing, tap targets at least 44 px, no horizontal scroll at any supported width. Refine the existing layout - do not replace the palette, the Gloock wordmark treatment or the tab model. No framework, no new font, no CDN, no CSP change. DONE: screenshots at 390x844, 768 and 1280 wide, all three with zero horizontal scroll; every tab reachable and every section readable at 390 without zoom; ?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1 all still pass at 390; hostile-name test still passes.
+  RESULT (hub builder, 2026-11-15 05:40 CT, 448098d): the tab rail became a 44 px snap-scroll strip that never
+  clips at 360 px; tap targets raised to 44 px throughout; a 12 px type floor and 16 px form fields (no iOS
+  zoom-on-focus); hero sheets, Chronicle, boards and die reflow with no horizontal scroll from 360 to 1280.
+  Palette, Gloock wordmark and the H13 tab model untouched; no framework, no new font, no CDN, CSP byte-identical.
+  All six query-string states pass at 390 and the hostile-name test still renders as literal text.
 
 - [ ] H18. THE TOWN ITSELF, NOT JUST ITS HEROES - "THE STATE OF BELLMIRE" (a whole section, staged). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). The hub tells a viewer everything about the PEOPLE and nothing about the PLACE. A newcomer who opens the page mid-stream cannot tell what Bellmire is, how far it has come, or what has been happening to it. Build a Town tab that answers that in one screen, in three staged parts under this one ID:
       H18.1 THE LADDER. The town's growth tier shown as a ladder from Crossing to City, with the current rung lit, the rungs behind it filled, and the rungs ahead named but dim - so a viewer sees at a glance that the town is a Hamlet with seven stages still to climb. Beside it the live status the snapshot already carries (day, population, treasury, raids survived) as proper stat tiles, not a text strip.
@@ -2042,3 +2052,91 @@ laptop (the delve command path) - both must coordinate; repro before fixing.
       bugs, two owners, do not conflate.
 
 CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-cheer tiers (7cdc363), Rally my hero reward + combat buff (eb707ae), hero idle-wander + delve-scope fix (19b1893/e1c9c1f), subscriber-pane Helix seed (19b1893), Custom Power-up redemption -> bit tiers (510a2e9), E3PO D37 live + all voice hooks (4e59901 + laptop L-148 + trader_arrives a2dbd3a), laptop merge c08cc08 (trap variety L-147, monster telegraphs L-149). Full gate green. OPEN for Mr. E: create the 5 Custom Power-ups in the dashboard; decide E3PO v2 (fighting commander).
+
+
+# Phase AE - THE HUD WORKER GETS REAL WORK (supervisor, 2026-11-15 12:05 CT). IDs frozen as ever.
+# Written against the "HOW BIG AN ITEM SHOULD BE" bar. These four are the HUD worker's queue and they
+# live ENTIRELY inside its seven files: hud_dock.gd, spotlight.gd, auto_director.gd, dice.gd,
+# feed_hud.gd, leaderboard_panel.gd, ui_theme.gd. If a stage needs state another file holds, the HUD
+# worker says so in its summary and the supervisor raises it with that file's owner - it does not reach in.
+# ORDER MATTERS: L65 first (one designed interface), because L64/L66/L67 all draw through the theme.
+
+- [ ] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
+      (ui_theme.gd, then hud_dock.gd, feed_hud.gd, leaderboard_panel.gd, spotlight.gd). The stream's
+      panels were each built in a different week and it shows: different corner radii, different
+      border weights, different type sizes for the same job, parchment at three different values.
+      Mr. E's bar is RTS/WoW - a single interface a viewer reads without thinking. Staged:
+      L65.1 TOKENS. Make ui_theme.gd a real design system, not a colour bag: a type scale with named
+            roles (wordmark / section title / body / caption / numeral), a spacing step, named ink,
+            parchment, teal and gold values with their on-dark and on-parchment pairs, border and
+            corner constants, and one elevation/shadow treatment. Every value named once.
+      L65.2 CHROME. One panel frame drawn from those tokens - edge, corner, header, divider, empty
+            state - that every HUD panel uses instead of its own.
+      L65.3 ADOPTION. Convert hud_dock.gd, feed_hud.gd, leaderboard_panel.gd and spotlight.gd's
+            overlays to the tokens and the frame. No hard-coded colour, size or radius left in those
+            files - grep proves it.
+      L65.4 LEGIBILITY FLOOR. Every string on stream at 1080p meets a stated minimum size and a
+            stated contrast ratio against what is actually behind it (the live 3D, not a flat swatch).
+            State the numbers. Mr. E's 21 px Chronicle body and the Gloock wordmark (L61) are the
+            reference, not something to re-litigate.
+      DONE: one 1080p capture with the Chronicle, the feed, the leaderboard and a spotlight pane all
+      live at once, before and after, side by side - the after reads as one interface; a grep of the
+      four adopting files shows zero literal colour/size/radius constants; the stated contrast and
+      size floors are listed per element with their measured numbers.
+
+- [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS. Owner: DESKTOP HUD
+      (auto_director.gd, spotlight.gd). The stream runs 24/7 and the director currently rotates;
+      rotation is not direction. A DM cuts to what matters. Staged:
+      L64.1 INTEREST SCORING. Score every candidate subject each beat on what a viewer would care
+            about - a raid in progress, a boss rising, a hero dying, a viewer-named hero acting, a
+            trade caravan arriving, a festival, a disaster - against a quiet baseline of town life.
+            The scores must be readable in a log, so a bad cut can be explained afterwards.
+      L64.2 SHOT LANGUAGE. A small vocabulary of named shots with their own hold times and framing
+            (establishing wide, follow, over-the-shoulder on a fight, slow push on a quiet beat,
+            hard cut on a death) rather than one camera move reused everywhere.
+      L64.3 PACING AND MEMORY. Minimum and maximum holds per shot type, no cut inside a beat that
+            has not resolved, and an anti-repetition memory so the same subject and the same shot do
+            not come back inside a stated window. Quiet stretches get longer, calmer holds; a raid
+            cuts faster.
+      L64.4 HANDOFF. The spotlight panes and the director agree: what the director is on is never
+            also what a pane is showing, and the Chronicle is never covered (L40/L61 discipline holds).
+      DONE: a 30-minute unattended recording with at least one raid, one death and one quiet stretch
+      in it, plus the director's own decision log for the same window - every cut in the recording is
+      justifiable from the log, no subject repeats inside the stated window, no shot runs past its
+      stated maximum, and no pane shows what the main camera is on.
+
+- [ ] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
+      A static top five stops being interesting twenty minutes into a stream and never changes again
+      for a viewer who just arrived. Make the board tell the story of the run. Staged:
+      L66.1 MOVEMENT. Remember each hero's placing over the session and show the change - who is
+            climbing, who is falling, who has just entered the board - as a quiet mark beside the
+            row, not a flashing badge.
+      L66.2 MOMENTS. When the top place changes hands, when a hero enters the board for the first
+            time, or when a hero on the board falls, the panel marks it for a few seconds in the
+            town's own voice. The words exist in data/lore_lines.json - read them, do not write a
+            parallel set (the HUD worker reads data/ freely; it does not edit it).
+      L66.3 MORE THAN ONE BOARD. Rotate between a small set of boards - depth reached, gold earned,
+            monsters felled, longest survivor - on a stated cadence, each clearly titled so a viewer
+            who arrives mid-rotation knows what they are looking at.
+      L66.4 HONEST EMPTY AND HONEST SMALL. A fresh session with two heroes must look deliberate,
+            not broken: no blank rows, no "undefined", no placeholder names.
+      DONE: a recording of at least 20 minutes of a live session showing a lead change marked, a
+      hero entering the board, at least two full board rotations with their titles, and the same
+      panel at session start with only two heroes in it looking finished rather than empty.
+
+- [ ] L67. THE FEED MUST SURVIVE A RAID. Owner: DESKTOP HUD (feed_hud.gd). When everything happens
+      at once - a raid, a delve, chat, redemptions - the feed becomes a scroll of noise that nobody
+      can read, which is exactly the moment a viewer most wants to know what is going on. Staged:
+      L67.1 PRIORITY. Classify what the feed carries and let the important survive the flood: a
+            death, a boss, a viewer's own action and a town-level event outrank a routine pickup.
+      L67.2 MERGING. Repeats collapse instead of stacking ("3 goblins felled" rather than three
+            lines), with a stated window for what counts as a repeat.
+      L67.3 RATE AND DECAY. A stated maximum lines-per-second into the feed and a stated dwell per
+            line, so the feed never outruns reading speed; overflow is dropped by priority, lowest
+            first, and the drop is visible in a log so nothing silently vanishes unexamined.
+      L67.4 READABILITY UNDER LOAD. Through the L65 tokens, at 1080p, over the live 3D - still
+            legible with the feed at its maximum rate.
+      DONE: a 1080p capture during a forced raid with the feed saturated, alongside the feed's own
+      log for the same window - every line on screen is readable at normal viewing distance, repeats
+      are merged, nothing above the stated priority was dropped, and the measured line rate is at or
+      under the stated maximum.

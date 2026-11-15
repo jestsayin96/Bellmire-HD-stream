@@ -1,5 +1,65 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## MR. E ANSWERS THE ART LANE (Nov 15 17:42) - FOUR RULINGS
+
+The art worker shipped D75 (eight lords) and D73 (454 icons) and held four questions. Answered:
+
+### 1. THE GRUBMOTHER IS ROOM-LOCKED, AND HER BROOD COMES INSTEAD. **This is a design win.**
+Mr. E: "grub mother is a spider so lets make her only spawn on floors that have big rooms, if she
+cant fit through the corridors then she cant fit simple as that. thats why she is a mother her
+brood should be going through the corridor instead".
+DO NOT CLAMP HER. 8.3 m wide at 4.5 m tall is correct - bosses.json calls her a wall and she
+should BE one. The constraint becomes the character:
+  - She spawns only on a floor that HAS a room big enough to hold her, and she never leaves it.
+    Floor generation must check for a qualifying room before she is eligible at all; if no room on
+    that floor fits her, she is not that floor's lord.
+  - SHE DOES NOT PATHFIND DOWN CORRIDORS. Remove the possibility rather than relying on her
+    failing to fit - a boss wedged in a hall is D44 with a bigger body.
+  - HER BROOD IS HER REACH. The small ones come down the corridors after the party while she holds
+    the room. That is the fight: you are harried in the halls by her children and you have to walk
+    into her chamber to end it. It also makes the brood mechanically meaningful instead of
+    decoration.
+  - The party meeting the brood should read as a WARNING - the deeper they go the more of them,
+    so a viewer learns what is waiting before they see her.
+Owner: game build (floorgen eligibility + bestiary spawn rules), with the room-size check living
+beside the three-cell corridor work in D91.
+
+### 2. THE CAMERA PULLS BACK FOR A GREATER LORD. Mr. E: "yes it should pull back."
+Mourncoil at 10 m and the Gravewyrm at 9 m are canon heights and stay. The camera adapts:
+  - The director gets a shot that frames by the SUBJECT'S HEIGHT, not a fixed distance. A 10 m
+    lord is framed whole, including the floor it stands on.
+  - The pull-back is a MOVE, not a cut. Easing out as the lord rises is the reveal and it is worth
+    more than any amount of stat text.
+  - It must not fight the three-cell corridor work or leave the camera inside geometry - clamp to
+    the room, do not punch through a wall.
+Owner: HUD (auto_director.gd owns framing). Hand it the lord's height; do not special-case names.
+
+### 3. THE HOLLOW KING'S COLD FIRE GETS ITS VFX PASS. Mr. E: "do what you need to... if it needs it
+do it. if you need me to do something ask me."
+The geometry is right and stays. Flicker, drift and light are an in-engine pass: animate the blade
+geometry, add an emissive pulse, and let it cast actual light so the chamber reads cold. Keep it
+cheap - this is one boss on one floor, not a particle budget for the game. Owner: game build, with
+D75's wiring. NOTHING IS NEEDED FROM MR. E ON THIS.
+
+### 4. THE ACCESSORY ICONS GO DARKER. (He asked what was being asked - it was a taste question and
+it should not have been put to him as one.)
+WHAT IT MEANT: 224 of the 454 items store a colour, so their icons use it. The other 230 - the
+accessories - store none, so the generator invented their leather and metal tones from a default
+eight-tone palette, and those came out lighter and warmer than the rest of Bellmire looks.
+THE CALL: take them darker and colder, to sit with the game's grim register. It is one constant in
+icongen.py and a re-run. Mr. E can veto on sight - the contact sheets in renders/art/icons/ are
+how he will judge it, which is faster than describing it in words. DO NOT ASK HIM AGAIN IN WORDS;
+re-run it, show him the sheet.
+THE GENERAL RULE THIS SHOULD HAVE FOLLOWED: do not ask Mr. E a question that a picture would
+answer. Build it, render it, show him. He is quick and decisive when he can SEE the thing.
+
+### THE D76 CENSUS LINE IN THIS PLAN IS WRONG - CORRECTED HERE
+WORK_PLAN claimed ~109 monster families share 10 models. The art worker counted bestiary.gd:
+**30 creature types across 18 distinct models, with 12 types sharing a mesh with another type.**
+The 109 was most likely types x the nine strains, or types plus the 270 lord uniques. The scope is
+in docs/art/D76_SCOPE.md. D76 IS NOT "build a system to carry 109" - it is "give twelve creatures
+a body of their own", the same size as the eight lords. Treat the smaller number as the truth.
+
 ### THE DUNGEON FALLBACK (Mr. E, Nov 15 16:59) - HELD IN RESERVE, NOT STARTED
 
 "if dungeons become an issue we can make those pre built as well. and just have around 200+

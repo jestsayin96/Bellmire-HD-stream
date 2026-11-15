@@ -335,7 +335,7 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       upgraded building in the world; proof from the same run that the upgraded shop now stocks a tier
       it previously refused (ties D64); TWITCH_PARSE OK, W1A_TEST OK, gates green, payload under cap.
 
-- [ ] C7. THE EQUIPMENT CATALOGUE - NAMES, FLAVOUR AND CLASS KITS FOR GEAR THAT HAS STAKES. Owner:
+- [x] C7. THE EQUIPMENT CATALOGUE - NAMES, FLAVOUR AND CLASS KITS FOR GEAR THAT HAS STAKES. Owner:
       CONTENT WRITER (data/items.json ONLY - never code, never gear.gd). Mr. E's ruling 6: 6 weapon
       tiers and 6 armour tiers against 886 appearance items, and the thin one is the only one with
       mechanical stakes. Write the catalogue the gates will stock.
@@ -353,6 +353,13 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       DONE: json validates; every pre-existing key byte-identical; counts stated per family, per tier and
       per route; the fifteen starting kits listed in the summary as calling -> weapon + armour; and a
       plain statement of the exact keys and shape the game build worker reads.
+  RESULT (content C-51, merged 2026-11-15): data/items.json gains an `equipment` block - 86 named
+  weapons (blade 22, arcane 21, axe 17, ranged 16, open 10) and 33 armour pieces, each keyed by id with
+  {name, family, tier (0-5 index into gear.gd's unchanged ladder), tier_name, routes, flavour}, plus the
+  15 starting kits as calling -> {weapon, armour, family}. No cost/atk/hp/ac is stated anywhere - those
+  stay in gear.gd, so .1's "do not contradict the ladder" holds by construction. `routes` carries
+  looted/forged/shop/caravan, which is what gives D64.3's three routes and D64.4's above-cap caravan piece
+  real catalogue entries. JSON validates; pre-existing keys unchanged (additive block only).
 
 
 ## MR. E'S ASK, Nov 15 13:36 - UPDATE BELLMIREBRO
@@ -582,6 +589,20 @@ brief's first-unchecked rule. Say in your summary which RC item you took and why
 none and fell back.
 SUPERVISOR: each run, also physically move the open RC items toward the top of their sections, so
 a worker that misses this note still lands on the right work.
+
+### BLOCKED, NEEDS MR. E: FOUR PHASE RC ITEMS HAVE NO WORKER (supervisor, 2026-11-15 15:05 CT)
+This is a report, not a reassignment - the supervisor is not changing anyone's ownership here.
+L56, L68, L69 and L70 sit in PHASE RC above, and the remainder of D64 (.3 and .4) depends on the
+same files. All of them are marked "Owner: LAPTOP CODE" - worker 3 in COORDINATION 11.1, which ran
+on the jestai laptop. jestai was retired on Nov 15 and only four workers were recreated on
+cruzader: game build, content writer, hub build and HUD. Worker 3 was never rebuilt, so the files
+it owns (floorgen, dungeon_parts, dungeon_hd, bestiary, monster, gear, roster, chatcmd, delve,
+Dungeon.tscn, and data/ except the four content files) have an owner on paper and nobody to do the
+work. These items are unstartable rather than merely unstarted, and the game build worker's own
+D64a note says so in as many words. L55's gear-tier bug has been unowned since the D28 census for
+the same reason. Mr. E's call: either widen the game build worker's ownership to cover those files
+(it already works on branch `laptop`, so no branch move is involved), or stand up a fifth worker
+for them. Until he decides, every worker should skip these and take the next RC item it does own.
 
 ### THE RULE THAT MAKES THIS WORK
 WHILE ANY PHASE RC ITEM IS OPEN, DO NOT WRITE NEW ITEMS unless a worker has NO RC item it can take
@@ -1931,6 +1952,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       categories are written + the picker already handles them - they just need their triggers to call
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
+- [ ] D38. ON HOLD BY MR. E (2026-11-15 13:34) - DO NOT WORK THIS ITEM, DO NOT REGENERATE THE BEDS,
+      DO NOT TICK IT. He listened to the four beds and both stings and said they "sound good", but he
+      is UPGRADING music-studio first and wants them REDONE on the upgraded tool before he approves
+      anything. The current files in assets/audio/music/ (bellmire_day/night/raid/delve + the two
+      stings) STAY as they are and stay wired - they are good enough to stream on. Leave them alone.
+      The three open questions (raid style vs the hype tempo gate, night's level, whether the delve
+      bed should be director-driven) are DEFERRED until after the regeneration - do not answer them
+      on his behalf and do not raise them with him again until he says the tool is ready.
+      HE WILL SAY WHEN. Until he does, this item is not available to any worker.
+      The upgrade he is making covers: a genuinely headless CLI, the compose() bias-knob bug, the
+      style/mood tempo conflict, STEMS/vertical layering, long-form variation, project key+tempo
+      coherence, leitmotif, transition cues, better seed search, and later procedural crowd/creature
+      vocalisations, ambience and impact SFX.
+      WHEN STEMS LAND, THE WIRING CHANGES: D22b's sfx.gd crossfades whole tracks. With stems it
+      should fade LAYERS instead - the same piece with more of it as the town fills or a raid builds.
+      That is a better system than what shipped; write it as a new item then, do not retrofit it now.
+
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
       MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
       TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into
@@ -3123,7 +3161,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       moments present, and the town's lines still there alongside them. State the payload KB before and
       after against D59a's 244 KB and the stated cap. W1A_TEST OK, TWITCH_PARSE OK, D60_CHRON OK, parse 0.
 
-- [ ] H26. THE JOURNAL STOPS GUESSING. Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md).
+- [x] H26. THE JOURNAL STOPS GUESSING. Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md).
       H21 built the campaign journal before the publisher could tell it anything, so it guesses twice: it
       splits the campaign into "stretches" on a 90-minute wall-clock gap because no line carried a date, and
       it decides which lines are about a hero by matching their name as a whole word in the text. D60 shipped
@@ -3145,6 +3183,13 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       whose lines never spell their name the same way, a v=3 payload pasted into a mock still rendering the
       old grouping with the fallback labelled, the hostile-name test passing on a `who` entry and a `kind`
       value, and all six query-string states passing.
+  RESULT (hub 41125a4, 2026-11-15): the journal groups by the town's own `day` and says so in the heading,
+  with H21's 90-minute wall-clock split kept as a LABELLED fallback for untagged rows; hero lines come from
+  `who` and the name-match fallback is marked inferred; the Event filter prefers `kind` and states how many
+  rows it could not classify. `day`/`kind`/`who` are validated as a bounded number / bounded identifier /
+  capped array before storage and before the DOM; every string still goes through el(); no snapshot field is
+  used as a URL, src, href or style; CSP byte-identical. Adds ?mock=journal and ?mock=journal3. Supervisor
+  review: the diff introduces no innerHTML/outerHTML/insertAdjacentHTML/eval/new Function and no URL sink.
 
 # Phase AG - the hub's queue was one item deep (supervisor, 2026-11-15 14:05, CORRECTED 14:12)
 # H26 is the hub's last unchecked item, so two were written to keep the builder fed. The first pair

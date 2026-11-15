@@ -607,3 +607,9 @@ No CSP change (meta byte-identical to HEAD), no new URL source, no fetch, no vie
 - localStorage key `bellmire.welcome.v1` holds only the literal `seen`; the value read back is control-stripped, capped and
   compared to that one literal before it decides anything. Storage that throws leaves the welcome showing.
 - CSP byte-identical. No new fetch, no new origin, no viewer write path, no new innerHTML.
+
+## H26 - journal fields from the publisher (D60)
+New snapshot-controlled inputs: Chronicle row `day`, `kind`, `who`. Handling: `day` -> integer 0..999999 or null; `kind` -> /^[a-z0-9][a-z0-9_-]{0,23}$/ or ""
+(anything else is untagged); `who` -> array of at most 6 strings, control chars stripped, 40 chars each. They are re-validated after the localStorage
+round trip, rendered only via el() (textContent), never used as URL/src/href/style/class. `kind` only selects among page-owned topic tests. No CSP change,
+no new fetch/origin, no write path. Hostile check: `?mock=journal` plants `<img src=x onerror=alert(1)>` in a `who` entry and a `kind` value - literal text / ignored.

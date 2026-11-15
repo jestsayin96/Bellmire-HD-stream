@@ -336,6 +336,100 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       plain statement of the exact keys and shape the game build worker reads.
 
 
+## MR. E'S ASK, Nov 15 13:36 - UPDATE BELLMIREBRO
+
+The bot has fallen behind the game. data/commands.json carries 21 commands (!armoury !brew
+!deadliest !deepest !delve !dye !enlist !fish !forge !guild !help !hero !inventory !look !memorial
+!oil !patrons !reroll !respec !richest !wear) and NOT ONE OF THEM MENTIONS THE HUB. The viewer
+website is live at https://jestsayin96.github.io/Bellmire-HD-stream/ with the Chronicle, hero
+sheets, the Satchel, crests, the Hall of the Fallen, the Bestiary, the Night Watch and search -
+and a viewer in chat has no way to learn it exists. Everything shipped since Nov 14 is invisible
+to the bot: the festival (D63), the Satchel (D57), the character sheet (D59), and the gear and
+shop economy now being built (D64-D66).
+
+- [ ] L68. BELLMIREBRO MUST KNOW WHAT THE GAME HAS BECOME. Owner: LAPTOP CODE (chatcmd.gd,
+      data/commands.json - both laptop-owned; data/ except the four content files). The DESKTOP
+      side of the chat contract is untouched: chatcmd.gd emits twitch_reply(user_login, text) with
+      no @name and no rate limiting, and twitch_eventsub.gd owns the queue, the prefix and the
+      Send Chat Message API call as bellmirebro. Do not change that signature.
+      .1 TELL THEM THE HUB EXISTS. A !hub (alias !site, !guildhall) command giving the URL and one
+         line on what is there. Fold a short pointer into !help and !hero too - a viewer who asks
+         about their hero should learn their full sheet is a click away.
+      .2 COVER WHAT SHIPPED. Commands or help text for the festival, the Satchel and its sell
+         prices, the character sheet, and the Bestiary. A viewer should be able to ask the bot
+         about anything they can see on stream.
+      .3 THE COMMAND LIST MUST NOT ROT AGAIN. !commands / !help are generated FROM
+         data/commands.json, so one edit updates chat, the bot and the hub's Commands tab
+         together. Add a test that fails when a command exists in code without an entry, or an
+         entry names a command the code does not answer. That test is the real deliverable - it is
+         what stops this item being written again in a month.
+      DONE: !hub answers with the live URL; !help and !commands list every command the code
+      actually answers; the drift test passes and fails when a command is removed from either side.
+
+- [ ] D67. BELLMIREBRO SHOULD SPEAK WHEN SOMETHING HAPPENS, NOT ONLY WHEN ASKED. Owner: DESKTOP
+      BUILD (twitch_eventsub.gd - it already owns the send path, the queue and the rate limiting).
+      Today the bot only ever replies. The big moments pass in silence for anyone reading chat
+      rather than watching the pane: a festival starting - especially one a viewer PAID for - a
+      lord felled, a hero dying, a town level, a caravan taken by bandits.
+      Pick the few that genuinely earn an interruption and announce them in chat, in Bellmire's
+      voice, reusing the lines CONTENT has already written (lore_lines.json festivals, epitaphs,
+      town_levels_for_the_desktop) rather than inventing parallel copies. A paid festival names
+      its patron. RATE LIMIT HARD and make the cap a constant Mr. E can turn down - a bot that
+      talks too much is worse than one that says nothing, and this runs 24/7.
+      DONE: a chat log from a soak showing each announcement fired once, in voice, within the cap;
+      and the cap proven by forcing a burst.
+
+## MR. E'S ASK, Nov 15 14:01 - THE RAZING: A 10,000-BIT TOWN RESET
+
+- [ ] D68. THE RAZING - A PATRON CAN PUT BELLMIRE BACK TO LEVEL 1 FOR 10,000 BITS. Owner: DESKTOP
+      BUILD (twitch_eventsub.gd, town.gd, economy.gg/economy.gd, growth, notables.gd) with CONTENT
+      writing the words (C8). Mr. E's idea and his call. 10,000 bits is roughly $100 - this is the
+      single most expensive thing anyone can do to Bellmire and it must FEEL like it.
+      WHAT IT DOES: the town drops to level 1. Growth, treasury and the built plots go back to a
+      crossing. It is the biggest event the stream can have.
+
+      THE ONE THING MR. E MUST DECIDE BEFORE THIS IS BUILT - DO NOT GUESS, DO NOT PICK A DEFAULT:
+      D66 lets viewers spend bits and channel points to upgrade SPECIFIC shops and buildings. A
+      razing deletes what OTHER patrons paid for. A viewer who spent 2,000 bits raising the armoury
+      watches a stranger erase it. That is the difference between glorious drama and a feature that
+      punishes the most invested people in the channel. Three ways to square it, his pick:
+        (a) TOTAL - everything goes, other patrons' upgrades included. Maximum stakes, maximum
+            drama, and the risk that generous viewers stop giving because it can be taken away.
+        (b) THE TOWN FALLS, THE GIFTS REMAIN - level, growth and treasury reset, but buildings a
+            viewer PAID to upgrade keep their level. The town is razed; what patrons built endures
+            in the ruins. Protects giving, still a huge event, and is better lore.
+        (c) TOTAL, BUT IT CAN BE RESISTED - the razing is announced with a countdown and chat can
+            rally against it (bits, points, or a mass of !commands). If the town holds, the razer
+            loses it anyway. The best stream moment of the three and the most work.
+      Until he answers, BUILD NOTHING. Write the plumbing only if (b) or (c) is chosen and he says
+      so in writing.
+
+      WHATEVER HE PICKS, THESE HOLD:
+      .1 THE CHRONICLE SURVIVES. The town resets; its memory does not. A razing is the end of an
+         age, not a deletion - the next Bellmire is built on the ruins of the last, and the
+         Chronicle says whose ruins they are. This is what makes it lore instead of a wipe.
+      .2 THE RAZER IS NAMED FOREVER. A landmark, a monument or a permanent Chronicle entry naming
+         who did it and when. Someone paying $100 to end an age should be remembered for it - and
+         being remembered is most of what they are buying.
+      .3 IT CANNOT HAPPEN BY ACCIDENT. Confirmation, a cooldown so it is an event and not a
+         mechanic, and a streamer kill-switch Mr. E can throw live. A bits redemption cannot be
+         undone by the game, so the guard has to be before it fires, not after.
+      .4 IT MUST BE SEEN. The razing plays out - it is not a number changing. Whatever D63 taught
+         about dressing the square applies in reverse here.
+      .5 THE BOT ANNOUNCES IT (pairs with D67). In chat, named, in voice.
+      DONE: a capture of a full razing from redemption to the new crossing, the Chronicle carrying
+      the old age across, the razer named in-world, the cooldown and kill-switch proven, and the
+      patron-upgrade rule behaving exactly as Mr. E chose. Gates green.
+      NOT YOURS TO CREATE: the 10,000-bit Custom Power-up itself is made in the Twitch dashboard by
+      Mr. E. Do not create, delete or re-price rewards.
+
+- [ ] C8. THE WORDS FOR AN ENDING (data/lore_lines.json). Owner: CONTENT WRITER - words only.
+      A "razing" pool: the announcement, the razing itself, the morning after, how the Chronicle
+      records the end of an age, how the new crossing speaks of the old one, and how the razer is
+      remembered - by those who hated it and those who cheered. This is the darkest thing that
+      happens in Bellmire and it should read like the end of a chapter, not an error message.
+      DONE: json validates, pre-existing keys byte-identical, counts per category stated.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
@@ -1647,6 +1741,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       categories are written + the picker already handles them - they just need their triggers to call
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
+- [ ] D38. ON HOLD BY MR. E (2026-11-15 13:34) - DO NOT WORK THIS ITEM, DO NOT REGENERATE THE BEDS,
+      DO NOT TICK IT. He listened to the four beds and both stings and said they "sound good", but he
+      is UPGRADING music-studio first and wants them REDONE on the upgraded tool before he approves
+      anything. The current files in assets/audio/music/ (bellmire_day/night/raid/delve + the two
+      stings) STAY as they are and stay wired - they are good enough to stream on. Leave them alone.
+      The three open questions (raid style vs the hype tempo gate, night's level, whether the delve
+      bed should be director-driven) are DEFERRED until after the regeneration - do not answer them
+      on his behalf and do not raise them with him again until he says the tool is ready.
+      HE WILL SAY WHEN. Until he does, this item is not available to any worker.
+      The upgrade he is making covers: a genuinely headless CLI, the compose() bias-knob bug, the
+      style/mood tempo conflict, STEMS/vertical layering, long-form variation, project key+tempo
+      coherence, leitmotif, transition cues, better seed search, and later procedural crowd/creature
+      vocalisations, ambience and impact SFX.
+      WHEN STEMS LAND, THE WIRING CHANGES: D22b's sfx.gd crossfades whole tracks. With stems it
+      should fade LAYERS instead - the same piece with more of it as the town fills or a raid builds.
+      That is a better system than what shipped; write it as a new item then, do not retrofit it now.
+
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
       MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
       TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into
@@ -2746,7 +2857,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   whitelist-validated value. Measured min contrast 4.60:1. Reviewed: no CSP change, no new fetch, no write path, no new
   innerHTML - the security greps come back empty on the whole diff.
 
-- [ ] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
+- [x] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). Someone arrives mid-raid from a raid
       list, opens the hub, and sees boards and tabs for a world they know nothing about. The Commands
       tab already lists WHAT TO TYPE; this item is about WHY, and it is not a wall of text. Staged:
@@ -2770,6 +2881,13 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       hostile-name test still pass.
 
 
+      RESULT (supervisor 2026-11-15 14:05): shipped on `hub` da58b25 and merged. A dismissible
+      welcome card: what Bellmire is, ONE live line built from the snapshot the page already holds
+      (town stage + heroes on the roll + bands abroad + the latest Chronicle word), three doors to
+      Commands/Chronicle/die, hidden in Night watch, dismissal remembered per browser. SECURITY
+      REVIEW PASS: no new innerHTML (the two legacy page-owned sites are untouched), every snapshot
+      value through el()/textContent, door ids matched against TABS before acting, no new fetch or
+      origin, no CSP change, no viewer write path, honest empty/stale/failed states reused.
 # Phase AG - THE FIGHT, THE LOG AND THE TOWN'S OWN VOICE (supervisor, 2026-11-15 10:58 CT). IDs frozen as ever.
 # Written to the "HOW BIG AN ITEM SHOULD BE" bar. D61 finally builds the L31 leftovers - and it builds them
 # where the plan has always said they belong, with THEIR OWNER, not by handing the HUD worker files it does

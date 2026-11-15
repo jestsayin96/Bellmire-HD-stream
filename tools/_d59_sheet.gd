@@ -1,7 +1,7 @@
 extends SceneTree
 ## D59 - the H20 character sheet in the snapshot (v=4). Offline, no key file, no network:
 ## build_payload() on a fake town and check what the hub's hero sheet reads.
-##  - v is PAYLOAD_V (3 until web/app.js KNOWN_V takes "4"); every v=3 field (Satchel) and v=2 field still there
+##  - v is PAYLOAD_V (4 - web/app.js KNOWN_V takes "4" since H23); every v=3 field (Satchel) and v=2 field still there
 ##  - EVERY hero, a freshly rolled one included: stats (6), max_hp, xp_next, ac, hp, to_hit,
 ##    prof, saves, initiative (the delve's d20 + DEX bonus), speed (Roster.speed)
 ##  - gear keyed main_hand/body/hands/feet/cloak/neck/ring/head with ONLY real slots: no
@@ -57,7 +57,7 @@ func _run() -> void:
     _check("0 off without a key file (no network in this test)", not pub.enabled)
 
     var p := pub.build_payload()
-    _check("1 payload v = PAYLOAD_V (3 until the hub KNOWN_V takes 4), never below 3", int(p["v"]) == SnapshotPublisher.PAYLOAD_V and int(p["v"]) >= 3)
+    _check("1 payload v = PAYLOAD_V = 4 (hub KNOWN_V takes 4 since H23)", int(p["v"]) == SnapshotPublisher.PAYLOAD_V and int(p["v"]) == 4)
     var vet := _find(p, "D59Veteran")
     var keys := ["stats", "max_hp", "xp_next", "ac", "hp", "to_hit", "prof", "saves", "initiative", "speed", "gear", "status", "events"]
     _check("2 veteran carries every v4 sheet field", vet.has_all(keys))

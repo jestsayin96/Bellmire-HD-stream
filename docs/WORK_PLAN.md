@@ -119,6 +119,13 @@ than leaving a queue that is all polish at the top.
   is to flip PAYLOAD_V from "3" to "4" and run the DONE capture: the live hub hero sheet for a kitted veteran and a
   freshly rolled hero. This is the FIRST thing the game build worker should do - the fields have been on the wire
   since 09:30 and the sheet is still drawing dashes over them.
+  PROGRESS (game build, 2026-11-15 ~11:20 CT, D59b): PAYLOAD_V FLIPPED TO 4 and committed - checked the LIVE
+  github.io app.js first (KNOWN_V = 1,2,3,4), so this cannot blank the hub. The v4 payload rendered through the
+  current hub page: veteran + fresh hero both show Abilities/Combat with real numbers, Initiative/Speed, IN TOWN +
+  "Last seen N minutes ago", real gear slots filled and the rest empty, and "Their own chronicle" from h.events
+  (renders/cycles/d59/sheet_render_v4.png, 0 page errors). Gates green. STILL OPEN, only this: the DONE capture of
+  the LIVE hub after a 10-min run with the real roster - not run outside the stream (it would play roster.json
+  live). The next time the game runs, the live hub reads v4 with no further change from anyone.
 
 - [x] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
       (scripts/snapshot_pub.gd and whichever of your own files raise Chronicle lines). H21 shipped the hub's

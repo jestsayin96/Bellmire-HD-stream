@@ -31,7 +31,7 @@ than leaving a queue that is all polish at the top.
   RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
   NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
 
-- [ ] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
+- [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
       BUILD (townsfolk.gd, rig.gd, hero_body.gd, town_nav.gd).
       THIS IS A DIFFERENT BUG FROM THE THREE ALREADY ON THE BOARD - do not close it by re-fixing those:
@@ -56,6 +56,16 @@ than leaving a queue that is all polish at the top.
       logged check that animation speed tracks agent velocity (print velocity vs speed_scale for 10
       agents over 30 s - they must correlate, not sit flat). In the capture: no foot sliding, no
       snapping between clips, turns read as turns. Mr. E's bar for this one is WOW, not "oh".
+  RESULT (2026-11-15): measured first (tools/_d58_gait_probe.gd). Cause #1 was NOT it - speed_scale already
+  tracked velocity and feet were planted (slip ~1.0). The real cause: ordinary folk cruised at 1.6-1.9 m/s, so
+  the 0.8 m/s KayKit walk played at ~2.0x (476/481 walk samples over 1.5x - a frantic double-time shuffle),
+  and that cruise speed sat INSIDE the walk<->jog hysteresis band (23 walk/jog clip flips in 30 s, 10 agents).
+  Fix (townsfolk.gd only, rig untouched): walkers - not flees, not runners set over 2.4 m/s like the watch -
+  stroll at Townsfolk.stroll 0.66 of that (~1.1 m/s), via one _step_v() used by the step, the slide-round and
+  the stuck check. After: walk cadence 1.22-1.41x, corr(v, speed_scale) 0.73 (was -0.01, pinned at the cap),
+  slip>25% 1/588, 0 clip flips, 0 jog samples. 1080p market shots: 19-24 folk walking near the square
+  (renders/cycles/d58/). Gates: parse 0, offfloor 0/1483, TWITCH_PARSE OK, TOWNWALK PASS 0.012%, delve 0 SCRIPT ERROR.
+  Stills cannot show a stride - Mr. E's eye on the stream is the WOW check; Townsfolk.stroll is the one dial.
 
 - [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
@@ -785,7 +795,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
   NOT PROVEN: the 48 h and 300-row caps were read, not exercised by a long session. The code paths are
   simple and bounded, so this is a low-risk gap, but a future hub run should exercise them for real.
 
-- [ ] H15. EVERY HERO GETS A CREST (heraldry - the single cheapest way to make 200 names read as a guild). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). Give each hero a small coat of arms, drawn as inline SVG the page owns, derived deterministically from the hero's name: hash the name, then pick a field division, two tinctures and one charge from PAGE-OWNED whitelists (the same discipline as ICON_SET - the snapshot value chooses WHICH known shape, it never supplies one). Use the existing palette - deep ink, parchment, the one teal, restrained gold - so the crests read as one house, not a rainbow. Show the crest on the hero card, larger on the opened hero sheet, and beside the top entries on the boards. Keep it cheap: no image files, no new fetch, no CSP change, and the crest must not slow the 200-hero mock's first paint. DONE: the 200-hero mock shows visibly distinct crests with no two adjacent cards looking alike at a glance; the same name always yields the same crest across reloads; a hostile name renders as text AND still produces a valid crest; first paint on the 200-hero mock is no worse than before (state the before/after number).
+- [x] H15. EVERY HERO GETS A CREST (heraldry - the single cheapest way to make 200 names read as a guild). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). Give each hero a small coat of arms, drawn as inline SVG the page owns, derived deterministically from the hero's name: hash the name, then pick a field division, two tinctures and one charge from PAGE-OWNED whitelists (the same discipline as ICON_SET - the snapshot value chooses WHICH known shape, it never supplies one). Use the existing palette - deep ink, parchment, the one teal, restrained gold - so the crests read as one house, not a rainbow. Show the crest on the hero card, larger on the opened hero sheet, and beside the top entries on the boards. Keep it cheap: no image files, no new fetch, no CSP change, and the crest must not slow the 200-hero mock's first paint. DONE: the 200-hero mock shows visibly distinct crests with no two adjacent cards looking alike at a glance; the same name always yields the same crest across reloads; a hostile name renders as text AND still produces a valid crest; first paint on the 200-hero mock is no worse than before (state the before/after number).
+  RESULT (2026-11-15, hub 2067316): page-owned inline SVG coat of arms, FNV-1a over the lowercased
+  name seeding indices into fixed whitelists (7 field divisions, 4 tinctures from the existing ink/
+  parchment/teal/gold palette, 8 charges). SUPERVISOR SECURITY REVIEW (passed): every path and colour
+  is a constant in app.js, elements are built with createElementNS, and no snapshot value reaches any
+  attribute - a hostile name only chooses WHICH known shape, so it still yields a valid crest and can
+  never become markup, a URL or a style. Memoised (cap 600) and shown at three page-chosen sizes: hero
+  card, opened sheet, and the top five board rows. No image files, no new fetch, CSP byte-identical.
 
 - [ ] H16. THE HALL OF THE FALLEN. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). The Fallen list from H4 is a list of names; make it a memorial a viewer would stop and read. Per fallen hero: the crest (H15 if it has shipped), the epitaph, what took them, how deep they got, their level and the gear they were wearing when they fell - whichever of those the snapshot actually carries. The content writer has already written the words: epitaphs live in data/lore_lines.json and were frozen into the hub by H12 - read from what is already there, do not invent a parallel set. Fields the publisher does not send yet must degrade quietly to an honest blank, never to "undefined" and never to a guess; list in web/NOTES.md any field you wanted and the snapshot lacks, so the supervisor can raise it with the game build worker. DONE: a mock with fallen heroes shows the memorial with epitaph and cause; a mock whose fallen rows carry only a name still renders cleanly with no console error and no placeholder junk; the hostile-name test passes in the new section; the no-scroll H13 tab discipline still holds.
 

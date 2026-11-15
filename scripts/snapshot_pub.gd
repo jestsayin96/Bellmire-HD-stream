@@ -29,6 +29,7 @@ const FALLEN_MAX := 50
 ## stamps: a line's "at" is when the publisher first saw it (scanned every second;
 ## lines already in the feed at start share the start time).
 const CHRON_MAX := 50
+const WHO_MAX := 4                  # D60: heroes named on one Chronicle row
 const LINE_MAX := 200
 const CHRON_TYPES := ["death", "raid", "loot", "delve", "town", "lore", "fight"]
 ## D57 - THE SATCHEL (hub H11). What the counter would pay a viewer for what their
@@ -242,13 +243,41 @@ func scan_feed() -> void:
     if n == _feed_seen:
         return
     var at := Time.get_datetime_string_from_system(true) + "Z"
+    var tags = town.get("feed_tags")
+    var e: Economy = town.get("economy")
     for i in range(maxi(_feed_seen, n - CHRON_MAX), n):
-        var line := clean_line(str(feed[i]))
+        var raw := str(feed[i])
+        var line := clean_line(raw)
         if line != "":
-            _chron.append({"t": kind_of(line), "s": line, "at": at})
+            var row := {"t": kind_of(line), "s": line, "at": at}
+            _annotate(row, tags.get(raw, {}) if typeof(tags) == TYPE_DICTIONARY else {}, e)
+            _chron.append(row)
     _feed_seen = n
     if _chron.size() > CHRON_MAX:
         _chron = _chron.slice(_chron.size() - CHRON_MAX)
+
+## D60: a Chronicle row's `day`, `kind` and `who`, all ADDITIVE (a hub that does not know them
+## renders the row exactly as before). `day` is the town's own day (economy.day): the day the
+## raiser stamped when it tagged the line, else the day the publisher first saw it (scanned
+## once a second, so the same day bar a line raised in the last second before midnight).
+## `kind` and `who` come ONLY from a raiser's tag (town.tag_feed) - a line nobody tagged has
+## neither, so the hub keeps its honest fallback (`t` and its name match). `who` is the hero
+## names the hub shows, W1a-cleaned and capped like every other published name.
+func _annotate(row: Dictionary, tag: Dictionary, e: Economy) -> void:
+    if tag.has("day"):
+        row["day"] = int(tag["day"])
+    elif e != null:
+        row["day"] = int(e.day)
+    var k := String(tag.get("kind", "")).to_lower().strip_edges()
+    if k != "" and k.length() <= 16 and k.is_valid_ascii_identifier():
+        row["kind"] = k
+    var who: Array = []
+    for w in (tag.get("who", []) as Array):
+        var nm := clean_name(str(w))
+        if nm != "" and not who.has(nm) and who.size() < WHO_MAX:
+            who.append(nm)
+    if not who.is_empty():
+        row["who"] = who
 
 ## the payload's chronicle: newest first, copies (the hub never edits ours)
 func chronicle() -> Array:

@@ -181,6 +181,7 @@ func check_town_level(founding := false) -> int:
             feed.append(cf)
         else:
             feed.append("Bellmire stands as %s.  (town level %d)" % [town_name, town_level])
+        _tag("growth")
     elif want > was:
         # D32: cry the content writer's line for each tier crossed on the way up
         for l in range(was + 1, town_level + 1):
@@ -189,8 +190,10 @@ func check_town_level(founding := false) -> int:
                 feed.append(c)
             else:
                 feed.append("Bellmire grows into %s.  (town level %d)" % [town_name, town_level])
+            _tag("growth")
     else:
         feed.append("Bellmire falls back to %s.  (town level %d)" % [town_name, town_level])
+        _tag("growth")
     return want - was
 
 func price(g: String) -> float:
@@ -357,6 +360,11 @@ func next_level_at() -> int:
         return -1
     return int(TOWN_LEVELS[town_level]["at"])
 
+## D60: tag the Chronicle line just raised (town.tag_feed) - kind, and the heroes it is about
+func _tag(kind: String, who: Array = []) -> void:
+    if town and town.has_method("tag_feed"):
+        town.call("tag_feed", kind, who)
+
 func _end_of_day() -> void:
     var pop := population()
     var feed: Array = town.get("feed")
@@ -365,6 +373,7 @@ func _end_of_day() -> void:
         stock["food"] = 0.0
         starving += 1
         feed.append("Day %d  —  the granary is empty. Hunger bites (%d days)." % [day, starving])
+        _tag("hunger")
     else:
         starving = 0
     for g in GOODS:
@@ -375,10 +384,12 @@ func _end_of_day() -> void:
     if treasury < 0:
         treasury = 0
         feed.append("The coffer is empty — wages go unpaid.")
+        _tag("treasury")
     check_town_level()
     var nxt := next_level_at()
     var standing := ("standing %d/%d" % [town_score(), nxt]) if nxt > 0 else ("standing %d, at its height" % town_score())
     feed.append("Day %d begins  —  %d souls, %d gold, %s (lvl %d, %s)" % [day, pop, treasury, town_name, town_level, standing])
+    _tag("day")
 
 ## --------------------------------------------------- growth and hardship
 ## old town._peril_pass timers: rebuild 22 s (Raids), chief spends 40 s,
@@ -423,6 +434,7 @@ func _settlers() -> void:
         var b := adv.make("", true)
         var h := adv.npcs.get_hero(b.user_id)
         (town.get("feed") as Array).append("%s the %s arrives at the tavern, drawn by tales of the deep." % [b.person_name, h["class"]])
+        _tag("arrival", [b.person_name])
         renown -= 1
         return
     town.call("arrive", TRADES[randi() % TRADES.size()], "%s settles in Bellmire, looking for work.")
@@ -445,6 +457,7 @@ func _chief_spends() -> void:
         var b := adv.make("" if adv.has_healer() else "sage", true)
         var h := adv.npcs.get_hero(b.user_id)
         feed.append("A bounty is posted — %s the %s answers it." % [b.person_name, h["class"]])
+        _tag("arrival", [b.person_name])
         return
     # commission gear when the rack is bare
     if stock.get("gear", 0.0) < 4.0 and treasury >= 150:
@@ -519,6 +532,7 @@ func _dis_say(line: String) -> void:
     var feed = town.get("feed")
     if feed != null and (feed.is_empty() or String(feed.back()) != line):
         feed.append(line)
+        _tag("disaster")
 
 ## begin a named disaster: charge its onset cost, raise its flags, cry the line
 func trigger_disaster(name: String) -> bool:

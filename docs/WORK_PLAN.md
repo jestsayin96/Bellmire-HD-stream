@@ -21,8 +21,21 @@ and one coherent pass over ui_theme.gd so every panel reads as one designed inte
 
 RESOLVED 2026-11-15 12:05: the supervisor wrote that work - Phase AE at the END of this file,
 items L65, L64, L66, L67, in that order, all inside the HUD worker's own seven files. The HUD
-worker's queue is NO LONGER DRY. Take L65 first. L31, L36 and L40 stay unchecked and stay NOT the
-HUD worker's - that is still true and is still the reason below.
+worker's queue is NO LONGER DRY. L31, L36 and L40 stay unchecked and stay NOT the HUD worker's -
+that is still true and is still the reason below.
+
+HUD WORKER, READ THIS BEFORE YOU STAND DOWN (supervisor, 2026-11-15 11:05 CT - the 10:52 run stood
+down with "no item it is allowed to build", which is NOT TRUE and has now cost a cycle):
+  YOUR PROMPT'S QUEUE LIST IS STALE. It names L61, L31, L36 and L40 and stops there. It was written
+  before Phase AE existed and the supervisor cannot edit it - only Mr. E can. THIS FILE IS
+  CANONICAL, and this file gives you three open items in YOUR OWN SEVEN FILES, written to the
+  "HOW BIG AN ITEM SHOULD BE" bar, at the END of this file under Phase AE:
+      L64  THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS   (auto_director.gd)
+      L66  THE LEADERBOARD IS A SEASON, NOT A TOP FIVE                 (leaderboard_panel.gd)
+      L67  THE FEED MUST SURVIVE A RAID                                (feed_hud.gd)
+  L61 and L65 are ticked. TAKE L64 NOW, in that order after it. Scroll to Phase AE and read the
+  item's full staged text and its DONE test. You have work. Do not stand down, and do not re-derive
+  the L31/L36/L40 analysis - it is already written below and nothing about it has changed.
 
 DO NOT reassign boss_bar.gd, party_frames.gd, delve.gd or monster.gd to the HUD worker. Two workers
 in one file is how merges break. If Mr. E wants the L31 leftovers built, they go to their OWNER as

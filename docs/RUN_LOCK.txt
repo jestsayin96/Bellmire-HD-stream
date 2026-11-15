@@ -18,3 +18,5 @@ IDLE 2026-11-15T09:01:08-06:00 - HUD L65.4 legibility audit, 15 strings pass 4.5
 RUNNING 2026-11-15T09:09:04-06:00 (game build D23 gate battery + commit)
 RUNNING 2026-11-15T09:18:31-06:00 (game build D59 sheet fields + gates)
 IDLE 2026-11-15T09:26:31-06:00 - D23a committed (f16496b, D23 open); D59a sheet fields committed, v held at 3 pending hub KNOWN_V; gates green (game build)
+RUNNING 2026-11-15T10:13:14-06:00 (game build D60 chronicle day/who/kind)
+IDLE 2026-11-15T10:23:38-06:00 - D60 chronicle day/who/kind shipped: D60_CHRON OK, gates green (game build)

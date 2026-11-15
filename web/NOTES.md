@@ -673,7 +673,7 @@ page already accepts are in brackets - the publisher may send any of them.
   seven slots are drawn empty with a "not published yet" tooltip.
 - `status` / `state` / `activity` / `where` on the hero - the sheet reads band membership from
   `parties` and wounded from hp/max_hp, but cannot say "resting" or "in town" without a field.
-- a per-hero last-seen time - only the whole-snapshot `updated_at` exists.
+- ~~a per-hero last-seen time~~ - shipped in v=4 (`h.last_seen`), read since H23; older publishers still get the whole-town fallback and the named gap.
 - On fallen rows: `species`, `ac`, `stats`, `weapon`/`armour` as slots, level history.
 - Wanted but not drawn as cells: background/origin, alignment, skills and proficiencies,
   spells and slots, hit dice, a full inventory.
@@ -710,3 +710,11 @@ The Chronicle tab is now a journal, built only from what the page already has (t
 Not in the snapshot, so not possible yet: the in-game town day on each chronicle line (a `day` field would
 replace the session heuristic), and a structured hero/kind per line (the hero filter name-matches the text).
 Note: the older `setUpTabs()` in app.js is dead code (the nav uses buttons now; live tabs are `wireTabs`).
+
+## H23 - accept v=4, read last_seen / events, two render fixes
+- `KNOWN_V` is now 1-4. An unknown version still shows the honest "newer dialect" banner. A v=3 payload (no new fields) draws exactly as before.
+- `h.last_seen` (ISO string, validated with `CHRON_AT_OK`, then only fed to `ago()`) gives each sheet its own "Last seen N ago"; when the whole town is stale the line says so too. Absent -> the old whole-town line and the named gap.
+- `h.events` (newest-first `[{t, s, at}]`, up to 6) builds "Their own chronicle" through the same `chronEntries`/`chronShape` + `el()` path as a live line. Empty or absent -> the H20 whole-word name match against the H14 history.
+- Fix: each gear slot's text block (`.stx`) was built but never appended to its cell, so every slot drew as just an icon. Now attached.
+- Fix: the heroCard crest printed "[object SVGSVGElement]" because the H19 Bestiary's `sigil()` (returns an SVG) silently shadowed the initials helper of the same name. The initials helper is now `initials()`.
+- No CSP change, no new fetch/origin, no write path. `?mock=sheets` now carries last_seen, events and slot names (including a hostile `last_seen` that must be ignored).

@@ -1,5 +1,57 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### D92 - THE FARMS OVERLAP: RECTANGLES CHECKED AS CIRCLES, SAMPLED WITH GAPS (game build)
+
+Mr. E, Nov 15 16:53, with a shot of the livestock paddock: "the farms are being built so weirdly,
+ones overlapping theother". Fence lines at different angles run straight through one another.
+
+THE CAUSE IS A SHAPE MISMATCH, IN THREE PLACES. Fenced plots are ORIENTED RECTANGLES on the
+ground, and every test that is supposed to keep them apart is a CIRCLE or a sparse POINT SAMPLE.
+
+  1. SPARSE SAMPLING WITH HOLES. town.gd `_field_ok` (~2787) walks a 5x5 grid over the field and
+     calls `is_clear(q, 1.2)` at each point. The samples are spaced hw/2 and hd/2 apart - for the
+     9 x 7 fields valley.gd asks for, that is 4.5 m and 3.5 m between probes, each probe only 1.2 m
+     wide. That leaves roughly 2 m of COMPLETELY UNTESTED GROUND between adjacent samples in both
+     directions. A neighbouring fence line, or the edge of another plot, can sit entirely inside
+     one of those holes and the check passes.
+  2. EVERYTHING IS A CIRCLE IN `_objs`. `is_clear` is centre-distance versus the sum of two radii.
+     valley.gd `_field` registers a field as `[c, sqrt(hw*hw + hd*hd)]` - the half-DIAGONAL of the
+     rectangle. Two oriented rectangles cannot be kept apart by two circles: the circle is far too
+     big along the short axis and still says nothing about ROTATION, and the fences are drawn at
+     the rectangle's real edges with whatever `fw` that plot happened to get.
+  3. THE FARM CHECKS 3 POINTS AND THEN CLAIMS 14 METRES. town.gd `_build_farms` (~2967) tests
+     exactly three points - hp, hp +/- fw*8 - at radius 5.0, then after building appends
+     `_objs.append([hp, 14.0])`. It validated a thin line and then claimed a 14 m disc. Nothing on
+     the `sd` axis is tested at all, yet the haystacks go out to sd*9 and the barn to fw*-7.
+     Whatever it overlapped on that axis was never looked at.
+
+ALSO: the garden's paddock (valley.gd ~719) is fence-ringed AXIS-ALIGNED with a hard-coded
+`Vector3(0,0,1)` / `Vector3(1,0,0)`, while crop fields take an arbitrary `fw`. So an axis-aligned
+pen and a diagonal field sit side by side with no shared notion of orientation - which is exactly
+the crossing-at-an-angle Mr. E photographed.
+
+THE FIX - TEST THE SHAPE THAT IS ACTUALLY BUILT:
+  a. Add an ORIENTED RECTANGLE obstacle to `_objs` (centre, fw, sd, hw, hd) alongside the existing
+     circles, and an OBB-vs-OBB and OBB-vs-circle overlap test. Separating-axis test, four axes;
+     it is a dozen lines and it is exact.
+  b. Every fenced thing registers its REAL rectangle: crop fields, the kitchen garden's paddock,
+     and the farm steading's footprint. No more half-diagonal circles for rectangular plots.
+  c. `_field_ok` stops sampling a grid and asks the exact question: does this rectangle overlap
+     any registered obstacle, plus a margin. Keep a small margin (1.5-2 m) so fences never touch.
+  d. `_build_farms` tests the footprint it is about to occupy - the house, barn, haystack spread
+     and cart, out to the full 14 m it later claims - not three points on one axis. The claimed
+     radius and the tested area must be THE SAME AREA. That rule is the actual lesson here and it
+     applies to every placer in town.gd, so audit them while in there.
+  e. Give the garden paddock the steading's orientation instead of hard-coded world axes, so
+     neighbouring enclosures read as one farm laid out by one farmer rather than two unrelated
+     plots that happen to collide.
+
+DONE TEST: generate 200 towns from different seeds; for every pair of fenced plots assert their
+oriented rectangles do not overlap and are at least the margin apart; assert no fence segment
+intersects any other fence segment, which is the thing Mr. E can actually SEE; and assert every
+placer's claimed `_objs` radius covers everything it built. Shoot the livestock paddock and its
+neighbours before and after, in renders/cycles/d92/.
+
 ### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
 
 "people are still overlapping eachother... animals, and characters and people literally walking
@@ -1327,7 +1379,7 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
   THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
   IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report), D91 (NO crowd avoidance in the dungeon at all)
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report), D91 (NO crowd avoidance in the dungeon at all), D92 (farms overlap)
     These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
     Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
     the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and

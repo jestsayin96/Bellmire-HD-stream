@@ -289,7 +289,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -337,6 +337,7 @@ function render(p) {
   renderCommands(p.commands);
   renderRolls(p.rolls);
   renderLore();
+  try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -2295,6 +2296,193 @@ function renderLore() {
   catch (e) { body.append(el("p", "lore-line", "A chapter could not be drawn.")); }
 }
 
+
+// ---------------------------------------------------------------- bestiary (H19)
+// What Bellmire has learned about what is down there. Words come ONLY from the frozen
+// lore bundle (lord_intros, unique_intros, events.monster_camps) read as-is; this page
+// invents no monster text. A sigil is a page-owned roundel: the name is hashed through
+// the same FNV + mixer as the crests (crestRecipe) and the hash only picks INDICES into
+// the constant whitelists below, so a lord's mark is drawn from a different charge set
+// than any hero's crest and a hostile name can never become markup, URL or style.
+// A beast is MET only when the browser's own remembered Chronicle names it; until then
+// it is a RUMOUR - sigil and name present, everything else veiled. Optional numbers
+// (faced, killed, deepest, standing) are read from p.bestiary[<page-owned key>] only
+// when the publisher sends them; today it does not, and the page never estimates them.
+const SIGIL_TINCT = ["#2a1c10", "#5a2a22", "#1d8f8a", "#c6922f", "#3a352e"];   // ink, oxblood, teal, gold, ash
+const SIGIL_RING = "M50 4A46 46 0 1 1 49.99 4Z";
+const SIGIL_DIV = [
+  null,
+  "M50 0H100V100H50Z",                    // per pale
+  "M0 50H100V100H0Z",                     // per fess
+  "M0 0L100 100H0Z",                      // per bend
+  "M50 0L100 50L50 100L0 50Z",            // lozenge field
+  "M0 74L50 36L100 74V100H0Z",            // chevron
+];
+const SIGIL_CHARGE = [
+  "M30 28L45 28L38 78Z M55 28L70 28L62 78Z",                                       // fangs
+  "M20 68C20 42 34 32 46 24C40 40 40 54 44 68Z M80 68C80 42 66 32 54 24C60 40 60 54 56 68Z",   // horns
+  "M12 50C30 24 70 24 88 50C70 76 30 76 12 50Z M38 50a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z",   // eye
+  "M28 22L40 22L52 80L42 80Z M46 18L58 18L70 76L60 76Z M62 22L74 22L84 70L76 70Z",             // claw
+  "M50 16C58 36 74 46 70 66C68 80 58 86 50 86C42 86 32 80 30 66C28 52 40 46 42 36C46 44 48 34 50 16Z",   // flame
+  "M12 64C26 38 44 30 50 22C56 30 74 38 88 64C76 58 66 60 58 68C54 60 46 60 42 68C34 60 24 58 12 64Z",  // wings
+  "M28 28H72V42H42V50H72V74H28V60H58V56H28Z",                                      // coil
+  "M24 76L28 36L40 54L50 28L60 54L72 36L76 76Z",                                    // broken crown
+  "M24 30L32 22L78 68L70 76Z M76 30L68 22L22 68L30 76Z",                            // crossed bones
+];
+function sigil(name, size) {
+  const r = crestRecipe("sigil|" + String(name == null ? "" : name));
+  const dv = r.div % SIGIL_DIV.length, ch = r.ch % SIGIL_CHARGE.length;
+  const ta = r.ta % SIGIL_TINCT.length;
+  const tb = (ta + 1 + (r.tb % (SIGIL_TINCT.length - 1))) % SIGIL_TINCT.length;
+  let tc = (tb + 1 + (r.tc % (SIGIL_TINCT.length - 1))) % SIGIL_TINCT.length;
+  if (tc === ta) tc = (tc + 1) % SIGIL_TINCT.length;
+  if (tc === tb) tc = (tc + 1) % SIGIL_TINCT.length;
+  if (!document.getElementById("sig-clip")) {
+    const defs = document.createElementNS(SVGNS, "svg");
+    defs.setAttribute("class", "coa-defs"); defs.setAttribute("width", "0"); defs.setAttribute("height", "0");
+    defs.setAttribute("aria-hidden", "true"); defs.setAttribute("focusable", "false");
+    const clip = document.createElementNS(SVGNS, "clipPath"); clip.setAttribute("id", "sig-clip");
+    const cp = document.createElementNS(SVGNS, "path"); cp.setAttribute("d", SIGIL_RING);
+    clip.append(cp); defs.append(clip); document.body.append(defs);
+  }
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "sigil sigil-" + (size === "sm" ? "sm" : "md"));
+  svg.setAttribute("viewBox", "0 0 100 100");
+  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
+  const g = document.createElementNS(SVGNS, "g"); g.setAttribute("clip-path", "url(#sig-clip)");
+  g.append(crestPath("M0 0H100V100H0Z", SIGIL_TINCT[ta]));
+  if (SIGIL_DIV[dv]) g.append(crestPath(SIGIL_DIV[dv], SIGIL_TINCT[tb]));
+  const c = crestPath(SIGIL_CHARGE[ch], SIGIL_TINCT[tc], SIGIL_TINCT[0]);
+  c.setAttribute("fill-rule", "evenodd");
+  g.append(c);
+  svg.append(g, crestPath(SIGIL_RING, "none", SIGIL_TINCT[3]));
+  return svg;
+}
+
+const BEAST_RUMOURS = [
+  "Whispers only. The guild has not stood before it.",
+  "Heard of, never met - and the town would keep it so.",
+  "A name from the old tales. Nobody here has seen it.",
+  "The sigil is all the guild has drawn of it so far.",
+  "Spoken of low, behind the hand. Not yet faced.",
+];
+const BEAST_KINDS = { lord: "A deep lord", named: "A named one", kin: "A kin of the deep" };
+let beastFilter = "all";
+const BEAST_CHIPS = [["all", "All"], ["lord", "Deep lords"], ["named", "Named ones"], ["kin", "Kin of the deep"]];
+const MOCK_BEAST_CHRON = [
+  { t: "boss", s: "The Hollow King came up the stair and the guild met it at the door.", at: new Date(Date.now() - 50 * 60000).toISOString() },
+  { t: "boss", s: "Heroes fell to the Hollow King before the watch drove it back.", at: new Date(Date.now() - 7 * 3600000).toISOString() },
+  { t: "fight", s: "A bog frog the size of a cart was put down at the quarry.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
+  { t: "boss", s: "<img src=x onerror=alert(1)> was heard laughing in the dark.", at: new Date(Date.now() - 2 * 3600000).toISOString() },
+];
+function beastTerms(name) {
+  const n = String(name).toLowerCase().replace(/_/g, " ").trim();
+  const t = [n];
+  if (/[^s]es$/.test(n)) t.push(n.replace(/es$/, ""));
+  if (/s$/.test(n)) t.push(n.replace(/s$/, ""));
+  return t.filter((x) => x.length >= 4);
+}
+// how many remembered Chronicle lines name any of the terms, and when the newest did
+function beastMentions(rows, terms) {
+  let n = 0, newest = 0;
+  for (const r of rows) {
+    const s = String(r && r.s != null ? r.s : "").toLowerCase();
+    if (!s) continue;
+    for (const t of terms) if (s.indexOf(t) >= 0) { n++; const ts = histTs(r); if (ts > newest) newest = ts; break; }
+  }
+  return { n, newest };
+}
+function beastNum(v) { return Number.isFinite(+v) && +v >= 0 ? Math.min(+v, 1e9) : null; }
+function beastTitle(key) {
+  return String(key).replace(/_/g, " ").replace(/\b[a-z]/g, (m) => m.toUpperCase());
+}
+function beastCard(b, rows, stats) {
+  const m = beastMentions(rows, b.terms);
+  const card = el("article", "beast " + (m.n ? "met" : "rumour"));
+  const head = el("div", "beast-head");
+  head.append(sigil(b.name, "md"));
+  const hb = el("div", "beast-hb");
+  hb.append(el("h3", "beast-name", b.name));
+  hb.append(el("span", "beast-kind", BEAST_KINDS[b.kind] || ""));
+  head.append(hb);
+  card.append(head);
+  if (!m.n) {
+    card.append(el("span", "beast-flag", "Rumour"));
+    let h = 0; for (let i = 0; i < b.name.length; i++) h = (h * 31 + b.name.charCodeAt(i)) >>> 0;
+    card.append(el("p", "beast-veil", BEAST_RUMOURS[h % BEAST_RUMOURS.length]));
+    return card;
+  }
+  card.append(el("span", "beast-flag met", "Met"));
+  if (b.intro) card.append(el("p", "beast-intro", "\u201c" + b.intro + "\u201d"));
+  for (const camp of arr(b.camps)) {
+    const cb = el("p", "beast-camp");
+    cb.append(el("strong", "", camp.name + ". "), document.createTextNode(camp.while));
+    card.append(cb);
+  }
+  const facts = el("dl", "beast-facts");
+  const add = (k, v) => { facts.append(el("dt", "", k), el("dd", "", v)); };
+  add("Named in the Chronicle", num(m.n) + (m.n === 1 ? " remembered line" : " remembered lines"));
+  const a = m.newest ? ago(new Date(m.newest).toISOString()) : null;
+  if (a) add("Last named", a.text);
+  if (stats) {
+    const f = beastNum(stats.faced), k = beastNum(stats.killed), d = beastNum(stats.deepest);
+    if (f != null) add("Times faced", num(f));
+    if (k != null) add("Heroes it has killed", num(k));
+    if (d != null) add("Deepest push against it", num(d));
+    if (typeof stats.standing === "boolean") add("Today", stats.standing ? "It stands" : "It is down");
+  }
+  card.append(facts);
+  return card;
+}
+function renderBestiary(p) {
+  const box = $("bestiaryBody");
+  if (!box) return;
+  const chipBox = $("bestiaryChips");
+  if (chipBox && !chipBox.firstChild) {
+    for (const [id, label] of BEAST_CHIPS) {
+      const btn = el("button", "chip", label);
+      btn.setAttribute("type", "button"); btn.dataset.f = id;
+      btn.addEventListener("click", () => { beastFilter = id; renderBestiary(lastBeastPayload); });
+      chipBox.append(btn);
+    }
+  }
+  lastBeastPayload = p;
+  if (chipBox) for (const b of chipBox.children) {
+    const on = b.dataset.f === beastFilter;
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  }
+  box.textContent = "";
+  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
+  let rows = chronMem.slice();
+  const snap = p && p.bestiary && typeof p.bestiary === "object" ? p.bestiary : null;
+  const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
+  const beasts = [];
+  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
+  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
+  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
+  const fam = new Map();
+  for (const c of arr(src && src.events && src.events.monster_camps)) {
+    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
+    let f = fam.get(c.of);
+    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
+    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
+    for (const t of beastTerms(c.name)) f.terms.push(t);
+  }
+  for (const f of fam.values()) beasts.push(f);
+  const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
+  const metN = shown.filter((b) => beastMentions(rows, b.terms).n).length;
+  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
+  box.append(note);
+  const grid = el("div", "beast-grid");
+  // met first, then rumours; stable inside each group
+  const ordered = shown.map((b, i) => ({ b, i, met: beastMentions(rows, b.terms).n ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
+  for (const o of ordered) {
+    try { grid.append(beastCard(o.b, rows, statOf(o.b.key))); } catch (e) { /* one bad entry never blanks the book */ }
+  }
+  box.append(grid);
+}
+let lastBeastPayload = null;
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;
@@ -2327,7 +2515,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; pa
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -2466,6 +2654,10 @@ const MOCK_TOWN_CHRON = [
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "bestiary") {         // H19: one met lord with real numbers, rumours, hostile name
+    out.chronicle = MOCK_BEAST_CHRON;
+    out.bestiary = { hollow_king: { faced: 3, killed: 2, deepest: 7, standing: true } };
+  }
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "fallen") out.fallen = MOCK_FALLEN;

@@ -98,9 +98,19 @@ be bought BEFORE the gamble. 1,000 channel points.
   6. Stock is the shop's: not always available at level 1, and the trader may carry them. Per
      chance, per the trader ruling.
 
-DO NOT CREATE THE REWARD. The 1,000-point reward on Twitch is Mr. E's to make, as all rewards are.
-Build the item, the stock, and the command path; leave the redemption wiring behind a flag and tell
-him it is ready.
+THE REWARD EXISTS. Mr. E approved it at 16:15 and it was created on jestsayin96 at 16:16:
+  title: "Bellmire: Teleportation stone"   cost: 1000
+  id:    1af5cd91-eb0f-47ef-a63e-e8cb94d54463
+  is_enabled: FALSE - deliberately. Nothing consumes the redemption yet, and a viewer who spends
+  1,000 points on a no-op has been robbed. Mr. E flips it on when D79 ships; no worker enables it.
+  should_redemptions_skip_request_queue: FALSE, also deliberately, and this is load-bearing. The
+  redemption lands PENDING, so the game decides: FULFIL it when the stone is legitimately used, and
+  CANCEL it (which refunds the points automatically) when it is not - no hero, not in a delve, or a
+  lord's floor with the lord still alive. Never auto-fulfil. Match the reward by this permanent id,
+  never by title. Helix: PATCH /helix/channel_points/custom_reward_redemption/status with
+  status FULFILLED or CANCELED, broadcaster token, which already holds channel:manage:redemptions.
+Build the item, the stock, and the command path against that id. Do not re-create, rename or
+re-price the reward - that stays Mr. E's alone, as all rewards do.
 
 ### H29 - THE SHOP TAB (hub worker, next item)
 

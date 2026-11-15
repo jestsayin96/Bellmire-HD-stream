@@ -480,8 +480,13 @@ func log_text() -> String:
 ## "A goblin falls (3)" and "A goblin falls (4)" are one line: digits do not make a new one
 func _key_of(text: String) -> String:
     var out := ""
+    var in_num := false
     for ch in text.to_lower():
-        out += "#" if ch >= "0" and ch <= "9" else ch
+        var d: bool = ch >= "0" and ch <= "9"
+        if d and in_num:
+            continue                        # 89 and 149 are the same number as far as a repeat goes
+        out += "#" if d else ch
+        in_num = d
     return out
 
 ## L67.1: tag first (the raiser knew), words second (the raiser did not)

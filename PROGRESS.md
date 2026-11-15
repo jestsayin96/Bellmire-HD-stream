@@ -5811,3 +5811,9 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - RUN 2 (same test): 183 cuts (follow 59, shoulder 75, push 41, hard_cut 2, establishing 6), 0 repeats, 0 holds past max, every cut has a why, 138,053 frames with 0 frames of any ambient pane on the director's body. L64_LONG OK.
 - LOOKED: l64_raid.png, l64_death.png - director pane + three ambient panes on four different subjects, Chronicle scroll centred and uncovered, wordmark Gloock, 21 px text.
 - Raid beat held ~every 2-12 s (pace 0.6) per the log; first run had natural raid at t=83.
+
+## U32 - L67 the feed survives a raid (HUD, 2026-11-15, feed_hud.gd)
+- QUEUE: L61 ticked; L64's 30-min run was U31; L66 NOT built - it asks for an on-stream leaderboard, which COORDINATION 13 / L58 / L63 forbid (Mr. E: hub only). Flagged for Mr. E. Took L67.
+- feed_hud.gd: town.feed stays plain strings; FeedHUD now classes each line on arrival (P3 death/boss/lord/raid, P2 town-level or a line tagged with a named hero via town.feed_tags, P1 ordinary, P0 routine pickup), MERGES repeats (digits ignored, 30 s window -> "line  x3"), admits at most 1 line per 0.8 s (1.25/s), holds each line 4/7/12/18 s by priority (a higher priority may displace a lower one after 3 s), caps the wait queue at 10 (overflow drops lowest priority, oldest first; routine lines stale after 40 s), and logs every ADMIT / MERGE / DROP in `feed_log` (`log_text()`), with `stats`.
+- tools/_l67_test.gd WINDOWED 1080p `--script`: raid forced + ~12 lines/s flood for 30 s. Result: 376 seen, 210 merged, 33 admitted, 133 dropped (all P0/P1 overflow), 0 protected drops, min admit gap 0.80 s (max rate 1.25/s). L67_TEST OK.
+- LOOKED: renders/cycles/20261115_l67/l67_flood.png (+ feed_log.txt) - Chronicle scroll centred, 21 px lines legible over the live panes, "x6" merges visible.

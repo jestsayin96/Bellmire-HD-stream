@@ -126,6 +126,33 @@ func _physics_process(delta: float) -> void:
         _idle_t -= delta
         if _idle_t <= 0.0:
             _idle_wander()
+    # D63.4: a hero in town during a festival is IN it - joins the crowd (via the
+    # idle wander, centred on the square) and toasts, cheers and dances there
+    if stay and errand == "" and _route.is_empty() and _in_festival():
+        # a hero across town does not wait out a whole idle beat to go and join it
+        if not npc and _idle_t > 0.6 and _fest_c() != Vector3.ZERO \
+                and Vector2(global_position.x - _fest_c().x, global_position.z - _fest_c().z).length() > 14.0:
+            _idle_t = 0.5
+        _hfest_t -= delta
+        if _hfest_t <= 0.0:
+            _hfest_t = randf_range(3.0, 7.0)
+            var near: bool = Vector2(global_position.x - _fest_c().x, global_position.z - _fest_c().z).length() < 14.0
+            if near and _anim != null:
+                Rig.play(_anim, HERO_FEST[randi() % HERO_FEST.size()])
+                fest_acts += 1
+
+const HERO_FEST := ["Cheer", "Use_Item", "Spellcast_Raise", "Jump_Full_Short", "Cheer"]
+var _hfest_t := randf_range(1.0, 4.0)
+static var fest_acts := 0       # tools/_d63_fest.gd
+static var fest_joins := 0
+
+func _in_festival() -> bool:
+    return is_instance_valid(town) and town.has_method("is_festival") and bool(town.call("is_festival")) \
+        and town.has_method("keep_walkable")
+
+func _fest_c() -> Vector3:
+    var fp = town.get("festival_at")
+    return fp if fp is Vector3 else Vector3.ZERO
 
 func _idle_wander() -> void:
     _idle_t = randf_range(8.0, 18.0)
@@ -139,7 +166,13 @@ func _idle_wander() -> void:
     # pick a point 2-6 m from our home spot, on the navmesh
     var angle := randf() * TAU
     var dist := randf_range(2.0, 6.0)
-    var dest := _idle_home + Vector3(cos(angle), 0.0, sin(angle)) * dist
+    var centre := _idle_home
+    if _in_festival() and _fest_c() != Vector3.ZERO and not npc:
+        centre = _fest_c()                 # D63.4: the festival is where a hero idles now
+        dist = randf_range(4.5, 10.0)
+        if Vector2(global_position.x - centre.x, global_position.z - centre.z).length() > 14.0:
+            fest_joins += 1
+    var dest := centre + Vector3(cos(angle), 0.0, sin(angle)) * dist
     dest = town.call("keep_walkable", dest) as Vector3
     var r: Array = town.call("route", global_position, dest)
     if r.is_empty():

@@ -394,6 +394,9 @@ func _process(delta: float) -> void:
             breached = false
             _say("The attack is driven off. The gates hold.")
             raids_turned += 1
+            # D63.6: a raid survived is a reason to celebrate (the town's FEST_GAP keeps it rare)
+            if randf() < 0.5 and town != null and town.has_method("start_festival"):
+                town.call_deferred("start_festival", "raid")
             _save_stats()
         _stand_down(delta)
         if _paths.size() > 400:

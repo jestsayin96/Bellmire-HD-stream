@@ -191,6 +191,9 @@ func check_town_level(founding := false) -> int:
             else:
                 feed.append("Bellmire grows into %s.  (town level %d)" % [town_name, town_level])
             _tag("growth")
+        # D63.6: the town growing a level is a reason for a festival
+        if town.has_method("start_festival"):
+            town.call_deferred("start_festival", "level")
     else:
         feed.append("Bellmire falls back to %s.  (town level %d)" % [town_name, town_level])
         _tag("growth")

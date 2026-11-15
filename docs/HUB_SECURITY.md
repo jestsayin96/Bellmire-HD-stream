@@ -613,3 +613,11 @@ New snapshot-controlled inputs: Chronicle row `day`, `kind`, `who`. Handling: `d
 (anything else is untagged); `who` -> array of at most 6 strings, control chars stripped, 40 chars each. They are re-validated after the localStorage
 round trip, rendered only via el() (textContent), never used as URL/src/href/style/class. `kind` only selects among page-owned topic tests. No CSP change,
 no new fetch/origin, no write path. Hostile check: `?mock=journal` plants `<img src=x onerror=alert(1)>` in a `who` entry and a `kind` value - literal text / ignored.
+
+## H27 - remembered town rolls (`bellmire.rolls.v1`)
+New client-side store only: up to 100 normalized roll rows / 48 h / 60 KB in localStorage, read-only, per browser. Roll fields (`by`, `what`,
+`result`, `cost`) are viewer-controlled text; they are re-validated after the storage round trip (normalizeRolls, control-char strip, `at` must match
+an ISO regex else dropped, tier only via the page-owned TIER_ALIAS whitelist, face integer 1..20) and reach the DOM only through rollEntry() ->
+el()/textContent. Crit/fumble classification picks a CSS class from page-owned constants; no roll field is ever a URL/src/href/style/selector. The
+tally is computed counts rendered as text. No CSP change, no new fetch/origin, no write path. Hostile check: `?mock=roll` plants
+`<img src=x onerror=alert(1)>` as a roller; a hand-tampered store with markup in by/what/tier/at also renders as literal text. Storage failures degrade to live-only.

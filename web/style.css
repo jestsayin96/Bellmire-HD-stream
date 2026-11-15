@@ -1330,3 +1330,20 @@ html.watch .bandfloor { color: #dccfa9; background: #0b4f4c; }
 .welcome-dismiss:hover { border-color: var(--gold); color: var(--parch-hi); }
 @media (min-width: 680px) { .doors { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
+
+/* H27: Tales of the Die - day dividers, the night's tally, gold for a crit, ink-dim for a fumble */
+.rollfeed .rdiv { list-style: none; display: flex; align-items: center; gap: .7em; margin: 12px 0 4px; padding: 0; background: none;
+  color: var(--ink-soft); font-style: italic; font-size: .92rem; }
+.rollfeed .rdiv::before, .rollfeed .rdiv::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dk), transparent); }
+.rolltally { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 2px 0 6px; min-height: 0; }
+.rolltally:empty { display: none; }
+.rtally { font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--edge-2); color: var(--ink-soft); background: var(--parch); }
+.rtally b { font-size: 1rem; font-variant-numeric: tabular-nums; margin-right: 2px; }
+.rtally-crit { color: #3a2708; border-color: var(--gold-dk); background: linear-gradient(180deg, #f1cf6e, var(--gold)); }
+.rtally-fumble { color: var(--ink-soft); border-style: dashed; }
+.rentry.crit { border-left-color: var(--gold); background: #f4e0a6; }
+.rentry.crit .rface { border-color: var(--gold-dk); background: linear-gradient(150deg, #f8e3a0, #e2b755 65%, var(--gold)); color: #3a2708; box-shadow: 0 0 10px rgba(198,146,47,.55); }
+.rentry.crit .rtier { color: #3a2708; background: linear-gradient(180deg, #f1cf6e, var(--gold)); }
+.rentry.crat { border-left-color: var(--ink-soft); opacity: .86; }
+.rentry.crat .rface { border-color: var(--ink-soft); border-style: dashed; background: var(--parch-lo); color: var(--ink-soft); box-shadow: none; }
+.rentry.crat .rtier { color: var(--parch-hi); background: var(--ink-soft); }

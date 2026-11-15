@@ -1756,7 +1756,17 @@
       "Town iron. The smith is not proud of it and will not take it back.",
       "Ditch iron. It will not fail you first, and it will not save you either.",
       "Workman's steel. No song in it, no quit in it.",
-      "Honest work, honest price. It takes the first few blows for you."
+      "Honest work, honest price. It takes the first few blows for you.",
+      "Bellmire iron, cold-hammered and unbothered. It does the job and asks nothing.",
+      "A blade for people with bills. It cuts, it hangs on a hook, it goes on cutting.",
+      "No runes, no rumour. A smith who got paid and a blade that earned it.",
+      "The first forge in town made this. It has not improved since, and nobody minds.",
+      "Grey, blunt-looking, quietly lethal. The best thing a few coppers can buy.",
+      "It smells of the ford and of coal. That is all the magic it has.",
+      "A beginner's blade. Beginners who keep it stop being beginners.",
+      "Hammered flat on a Tuesday, sharpened on a Wednesday. Good enough for Thursday.",
+      "Nothing about it is clever. That is why it is still in one piece.",
+      "Common iron. The scar has eaten better and spat this one out."
     ],
     "2": [
       "Folded twice and stamped. The smith puts her mark where you can see it.",
@@ -1764,7 +1774,17 @@
       "Good enough that the smith wrote her name on it.",
       "The smith stamped her name inside the fuller. She will stand by it.",
       "Twice-folded, cleanly ground. It holds its line through a long fight.",
-      "A town weapon that the town will own to."
+      "A town weapon that the town will own to.",
+      "Folded, folded again, and the smith put his mark on it. He does not mark junk.",
+      "Two folds in the grain and a thumbprint of pride in the tang.",
+      "The edge ripples like water over a ford. That is the folding, and it bites.",
+      "The smith signed it small, thought better of it, and signed it larger.",
+      "A layered grain that rings true when flicked. The smith likes to flick it.",
+      "Good Bellmire steel. Ask whose mark that is and the smith is glad to say.",
+      "Beaten twice as long as it needed. You feel the difference in your wrist.",
+      "The folds show under oil like the rings of a tree. Count them and respect them.",
+      "A smith's pride, sharpened. He will ask for it back for a polish. Let him.",
+      "Two folds, one signature, no apologies."
     ],
     "3": [
       "Runes down the fuller wake when it is drawn, and sulk when it is sheathed.",
@@ -1772,7 +1792,17 @@
       "Drawn, it glows faint along the groove. Sheathed, it waits.",
       "The runes wake when the blade does. They quiet when it is put up.",
       "A low glow along the fuller when the fight gets close.",
-      "Rune-cut; nobody on the smiths' row will admit the cut."
+      "Rune-cut; nobody on the smiths' row will admit the cut.",
+      "The runes along the fuller glow like a banked fire when it leaves the sheath.",
+      "Warm to the hand even in frost. Something in the runes is awake.",
+      "Whisper to the runes and they answer. Do not whisper to the runes.",
+      "Cut by a hand that never said what the marks meant. The smith never asked.",
+      "A faint ember-light runs the blade whenever a lord is near.",
+      "The runes crawl a little in the dark and settle when it is sheathed, like a dog.",
+      "Chapel-blessed, rune-struck. It burns a pale orange when angry.",
+      "The edge hisses on the air as though it were hot. It is not. Not quite.",
+      "Runes down the fuller, sullen and glowing. The priest charged for the blessing. The smith did not ask how much.",
+      "It lights a small circle round the wielder in the cellars. Someone thought that was kind."
     ],
     "4": [
       "Dragontooth. Bellmire will sell it to you and still not say whose tooth.",
@@ -1780,7 +1810,17 @@
       "Cut from something that had teeth to spare. One tooth, one blade.",
       "Tooth-stock. Bellmire will sell it, Bellmire will not tell you whose.",
       "The blade was a tooth once and still remembers biting.",
-      "Something very large went short one tooth for this."
+      "Something very large went short one tooth for this.",
+      "Dragontooth. A thing that long was never a bear's, whatever the smith says.",
+      "Set with a tooth the length of a forearm. Nobody in town claims to have been there.",
+      "Grip bound in scale, edge bone-pale. Ask the smith nothing.",
+      "The tooth is yellow, ridged, and has the look of once having been very angry.",
+      "A dragon's tooth, or a tall tale ground to an edge. It cuts the same either way.",
+      "Heavy for its size, as if it remembers the jaw it came from.",
+      "The smith swears the tooth came from the river. The river has never grown teeth that large.",
+      "Grey scale on the hilt, ivory on the edge. The guild will not say whose it was.",
+      "It rings low when struck, like a bell thinking of something else.",
+      "The tooth is warm, as if it were still in a mouth."
     ],
     "5": [
       "Scarforged. It hums when the dark leans close, and it has never been wrong yet.",
@@ -1788,7 +1828,17 @@
       "Forged where the ground misfires. It keeps the habit.",
       "The scar quenched it. It has a scar's manners now.",
       "Forged where the ground is honest. It carries the honesty.",
-      "Scar-cooled steel. It hums first and swings second."
+      "Scar-cooled steel. It hums first and swings second.",
+      "Scarforged. It hums, and the hum rises when the dark is near.",
+      "Quenched in the scar's own breath. The metal remembers where it was cooled.",
+      "Black glass-veins run through the blade. They pulse below and lie still above.",
+      "The scar gave the heat and took the name. It is yours now, and you may not drop it.",
+      "It will not rest in a sheath that ever held anything lesser. The sheath is part of the weapon.",
+      "It hums at a pitch the dead can hear. They do not enjoy it.",
+      "Hold it and the whole scar leans toward you. It likes being held.",
+      "The edge drinks light the way a well drinks coins.",
+      "Nobody forges this by choice. It was asked for, and the asking was answered.",
+      "Scarforged steel: cold in the hand, hot in the fight, never quite empty."
     ]
   },
   "town_levels_for_the_desktop": {
@@ -2980,7 +3030,70 @@
       "'Two grown people, one goat. I have commanded sieges with fewer problems.'",
       "He rules, and then he buys the first round, which is the actual ruling."
     ],
-    "_note_c45": "Added lines (C-cycle 45): every E3PO list widened again - hurt, rank_up, drill, dispute, trader_arrives, delve_dispatch, lord_cleared, viewer_cosmetic, night_watch, recruit, viewer_down, viewer_returns, lord_sighted, intro, withdraw, return, says, town_talk, raid, disaster, festival, and viewer_roll crit/high/low/fumble. Same voice as 'says'. No new mechanics. Additive; dead until wired."
+    "_note_c45": "Added lines (C-cycle 45): every E3PO list widened again - hurt, rank_up, drill, dispute, trader_arrives, delve_dispatch, lord_cleared, viewer_cosmetic, night_watch, recruit, viewer_down, viewer_returns, lord_sighted, intro, withdraw, return, says, town_talk, raid, disaster, festival, and viewer_roll crit/high/low/fumble. Same voice as 'says'. No new mechanics. Additive; dead until wired.",
+    "tier_up_alt": {
+      "_note": "Added key (C-cycle 47): extra Commander lines on a growth-tier rise, keyed by tier NAME exactly as in growth_tiers.tiers (3 per tier). Pick at random from this list plus the matching tier_up line. Same voice as 'says'. No new mechanics. Additive; dead until wired.",
+      "Crossing": [
+        "'Three huts and a river. Every city has an embarrassing beginning.'",
+        "'A fire, a ford, and a stubborn few. I have held worse with less.'",
+        "'Nothing here to guard yet. I guard it anyway. Practice.'"
+      ],
+      "Hamlet": [
+        "'Chimneys. Chimneys mean people who intend to stay.'",
+        "'A hamlet. It has a name and a dog. It is nearly a town.'",
+        "'Walls will follow the roofs. They always do. I am prepared.'"
+      ],
+      "The Guild Post": [
+        "'The guild has a door and a ledger. Now it can be disappointed on paper.'",
+        "'A post, a roster, a stamp. The paperwork of heroism begins.'",
+        "'Somebody will sign up who ought not to. That is how it starts.'"
+      ],
+      "Village": [
+        "'A village. Now we have something to lose, and I like that. It sharpens a man.'",
+        "'Smoke from forty chimneys. Forty reasons to hold the road.'",
+        "'We have a green and a well. We shall be defending both.'"
+      ],
+      "Market Day": [
+        "'A market. Now thieves have somewhere to be, and I know where to stand.'",
+        "'Stalls, scales, and the hum of coin. The gate will be busy.'",
+        "'Traders bring wealth and weather. I prepare for both.'"
+      ],
+      "The Chapel": [
+        "'A chapel bell. Now the dead have an hour to rest in, and a reason to.'",
+        "'The priest has a roof. The roof has a vow. I shall be on the steps.'",
+        "'A chapel. I do not pray. I stand outside it, which counts for more.'"
+      ],
+      "Craft Row": [
+        "'A row of smithies. Good. Steel is the only argument that wins.'",
+        "'Hammers from dawn. I sleep better on the sound of it.'",
+        "'The craftsmen have their own street. The guard shall have its own corner.'"
+      ],
+      "The Garrison": [
+        "'A garrison. At last a proper barracks. I shall have my own bed, though I will not use it.'",
+        "'Bunks, a muster yard, a standing watch. Now we are an army with ambitions.'",
+        "'The garrison is raised. I shall say a few words, and you will wish I had said fewer.'"
+      ],
+      "Market Town": [
+        "'A market town. The roads will fill. So will the ledgers, I fear.'",
+        "'Carts at every gate and coin in every pocket. Keep a hand on your purse and mine on my sword.'",
+        "'Everyone is passing through. Everyone is passing something along.'"
+      ],
+      "The First Wall": [
+        "'A wall. A true one. I have waited years to lean on something that leans back.'",
+        "'Stone, finally. Now I shall have something to stand beside while I stand.'",
+        "'The First Wall. I walked its length twice before it was dry.'"
+      ],
+      "Walled Town": [
+        "'Walled, gated, and watched. Bellmire at last has a shape.'",
+        "'A walled town now. Enemies shall have to be creative, and I shall have to be pleased.'",
+        "'The walls hold. The people feel it. That is half the defence, and the cheap half.'"
+      ],
+      "City in all but Charter": [
+        "'A city in all but a paper. I shall wait for the paper. I have waited for worse.'",
+        "'Everything but the seal. The charter will arrive when somebody remembers to ask.'",
+        "'Bellmire. A city by every measure save the clerk's. I stand on the same gate I started on.'"
+      ]
+    }
   },
   "town_life": {
     "_note": "Ambient Bellmire flavour as the town grows - crier calls, market and guild chatter, building news. For the desktop's town.gd if it wires a ticker; content worker never touches code. Additive; dead until wired.",
@@ -3021,7 +3134,19 @@
       "'Third bell! Reeve wants a word at the Hall!'",
       "'New rate on the toll - read it before you cross it!'",
       "'Lost: a grey mare. Found: a grey mare. Not the same mare!'",
-      "'Bellmire sleeps well tonight, and E3PO sleeps better!'"
+      "'Bellmire sleeps well tonight, and E3PO sleeps better!'",
+      "Eight bells and all well! The ford is low, the gate is high, the guard is cross!",
+      "New names on the guild post! Come read them, and come add your own!",
+      "Lost: one goat, brown, answers to nothing. Found: the goat. Reward withdrawn.",
+      "The smith asks that no one lean on the new anvil. It is not set. It is not yet an anvil.",
+      "Market opens at the second bell! Count your coppers twice and your fingers three times!",
+      "The Commander says the wall is sound! The Commander says everything is sound! The Commander is correct!",
+      "Heard at the well: the scar was loud last night. Heard at the gate: it is always loud.",
+      "Bring your own bucket to the new well, and your own opinions to the old!",
+      "Ferry at the ford till dusk! The boatman is sober; the river is not!",
+      "A feast is promised and a fool is wanted for the middle of it! Apply at the chapel!",
+      "Every hero in Bellmire has a name here! Give yours at the post and be remembered!",
+      "Dark by the sixth bell and the lamps are lit! Walk in pairs, and let the lamps be yours!"
     ],
     "market": [
       "Two coppers the carp, and the carp is grinning.",
@@ -3059,7 +3184,19 @@
       "The chandler has a second row of lanterns - the first is spoken for.",
       "The miller's boy throws the weight twice, out of kindness.",
       "A new stall - saltpans by the ford, and the salt knows it.",
-      "The dyer has a run of carrion that nobody will admit to buying."
+      "The dyer has a run of carrion that nobody will admit to buying.",
+      "Pickled eel, three coppers, and the eel has seen things.",
+      "Iron nails by the fistful, and every nail sworn to hold.",
+      "Wool, washed, and the sheep has been told to look surprised.",
+      "Candles! Tallow, wax, and one that burns blue and is not for sale.",
+      "Come buy a flask! It is full, it is red, and it is a great deal better than it looks.",
+      "Honest scales here. Ask any man who has been wrong about it.",
+      "Smoked fish! Smoked cheese! Smoked, I say, and the smoke was well spent!",
+      "Dyer's corner: any colour in the world, and several that are not.",
+      "Rope, hemp, forty feet, and a knot the guild swears by.",
+      "Fresh bread, warm, and I will not discuss the price until you have had a bite.",
+      "Charms against the scar, two coppers. They do nothing. They comfort a great deal.",
+      "Hats, hoods, and a fine plain cap. Be visible, be remembered, be dry."
     ],
     "growth": [
       "The masons raised a new course on the wall today.",
@@ -3097,7 +3234,19 @@
       "The crier is paid a second copper for the second bell.",
       "A third guild post opens, and already the clerk is tired.",
       "The wall ward lists two new names, and argues about a third.",
-      "Lanterns the length of the ford now. The low field can see its own grain."
+      "Lanterns the length of the ford now. The low field can see its own grain.",
+      "A roof went up on Cobbler's Lane in a day, and the day was well spent.",
+      "The ferry has a second boat, and the first boat is looking at it nervously.",
+      "They are paving the square. The old mud will be missed by nobody but the pigs.",
+      "New smoke over the east side - three chimneys where there was one.",
+      "The guild post has a new shutter. It closes. It is considered a luxury.",
+      "Another baker has opened, and the first baker is being very polite about it.",
+      "The ditch by the wall has been dug deeper, to the guard's great satisfaction.",
+      "A second lantern at the gate, and the dark is a little thinner for it.",
+      "The chapel bell was rehung, and for the first time it rings on the hour.",
+      "Carts roll in from the west road with more timber, more nails, and more rumour.",
+      "Someone planted flowers at the guild post. They survived. This is a good sign.",
+      "A new family came down the road and took the empty house. It is no longer empty."
     ]
   },
   "propositions": {
@@ -5387,7 +5536,13 @@
         "One of them is out. It came up into daylight and did not mind the daylight.",
         "A lord is loose above ground, grown to match whatever Bellmire has become.",
         "The deep sent a crowned thing up the stair and out the door.",
-        "A lord is in the open fields, and it is wearing the town's own strength for size."
+        "A lord is in the open fields, and it is wearing the town's own strength for size.",
+        "A lord is walking the open country, and the fields remember its shadow before it passes.",
+        "The scar's own captain has taken to the road. It grows as the town grows, and so does the fear.",
+        "Something with a name is crossing the open fields, scaled to the size of the town that must meet it.",
+        "A lord out of the dark crosses the farmland at its own slow pace, and the dogs have gone silent.",
+        "The wandering lord has been seen at the treeline, exactly as large as it needs to be to frighten you.",
+        "A canon lord has left the scar and is walking up the valley. Bellmire is on the way, and knows it."
       ],
       "while_alt": [
         "A holding goes dark each night it roams, and the dark follows it home.",
@@ -5403,7 +5558,13 @@
         "One outlying farm razed a day, and monsters thicken in its wake.",
         "Each day it walks costs Bellmire a holding and leaves the dark sitting on it.",
         "A holding a day, burned, and what follows the lord does not leave when it does.",
-        "The outlying farms fall one a day, and the deep moves up into the gaps."
+        "The outlying farms fall one a day, and the deep moves up into the gaps.",
+        "Each day it walks, another farm goes dark, and the dark does not go back.",
+        "An outlying farm falls every day it roams, and the night comes earlier behind it.",
+        "The fields it crosses lie fallow after. The people on them do not come back.",
+        "It keeps the pace of a funeral and razes a holding a day.",
+        "Another farm lost with every dawn. The dark trails it like a train.",
+        "It razes one steading a day, and the stillness after is the worst of it."
       ],
       "cleared_alt": [
         "The wandering lord goes down in the open field, in daylight, in front of everyone.",
@@ -5419,7 +5580,13 @@
         "The lord falls under the sky. The holdings light their fires again that night.",
         "Put down in the stubble, in front of everyone. The dark goes back down.",
         "The crowned thing falls in the open country, and the far farms come back.",
-        "It is killed in daylight, outside the walls, and Bellmire makes a cartload of proof."
+        "It is killed in daylight, outside the walls, and Bellmire makes a cartload of proof.",
+        "The wandering lord falls in the open, the field goes red, and then it is only a field.",
+        "It drops at last in the sunlight, and Bellmire hauls the proof back by cart.",
+        "Its walk ends in the long grass. The town carries the head home, or nobody would believe it.",
+        "The wandering lord is brought down in the open country, and the dark it dragged behind it thins and goes.",
+        "The field holds the body and the farms hold their breath. Then both let go.",
+        "It is done in daylight, which the scar did not expect. The town counts the cost, then the cart."
       ]
     },
     "_note_variants_c24": "Widened C-cycle 24: wandering_boss appears_alt / while_alt / cleared_alt 6 -> 14 each. There is still only one wandering boss, so these three are the lines that repeat most. Every while_alt states the same implementable cost as the canonical while - one outlying holding razed per day it roams, and the dark it drags persists on the ruin. name, appears, while, cleared and note are UNCHANGED. Additive; dead until wired.",

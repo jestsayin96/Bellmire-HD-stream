@@ -5754,3 +5754,9 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - VALIDATION OK: all four data files parse; every pre-existing key and array element is byte-equal to HEAD (new entries only appended); new entries match their blocks' shapes; items/bosses/potions untouched; ASCII only; no floor count stated.
 - CODE WIRING: none new. Plain strings in arrays the pickers already read; confirm they use len() of the array rather than a fixed count (tells 40, descend 170, cleared 168, epitaphs 270, barks 83/84, misfire 70).
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Device_bash had no connected folders this run, so edits were made through the Blender bridge (Python on the Windows side), validated the same way. Not ticked in WORK_PLAN (supervisor ticks).
+
+## U30 - L64.4 handoff verified (HUD, 2026-11-15, spotlight.gd)
+- spotlight.gd `_amb_tick`: an idle (ambient or resting-on-redeemer) pane that is showing the body the director cut to yields at once to an ordinary ambient pick; `handoff_swaps` counts it. A paid moment still holds its hero (the director yields to it, as before).
+- NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
+- LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
+- L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.

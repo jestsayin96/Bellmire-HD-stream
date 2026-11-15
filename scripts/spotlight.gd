@@ -240,13 +240,25 @@ func _rest_pick(l: String) -> void:
 	_amb_pick(l)
 
 ## L32a: each idle lane holds its ambient subject 20-30 s, then rotates to another
+var handoff_swaps := 0     # L64.4: how many times a pane gave up the body the director cut to
+
 func _amb_tick(real: float) -> void:
+	var dsub := _director_subject()
 	for l in LANES:
 		if not (lanes[l]["cur"] as Dictionary).is_empty():
 			continue
 		var A: Dictionary = _amb[l]
 		A["t"] = float(A.get("t", 0.0)) - real
 		var n = A.get("node")
+		# L64.4: the director cut to the body this idle (ambient or resting-on-a-redeemer) pane
+		# is showing - the pane yields at once, to an ordinary ambient pick (which already
+		# avoids the director's selection), so one body is never on screen twice
+		A["hand_t"] = float(A.get("hand_t", 0.0)) - real
+		if dsub != null and n == dsub and float(A["hand_t"]) <= 0.0:
+			A["hand_t"] = 1.0              # nobody else to show: do not re-pick every frame
+			handoff_swaps += 1
+			_amb_pick(l)
+			continue
 		if n == null or not is_instance_valid(n) or not (n as Node3D).is_inside_tree() or float(A["t"]) <= 0.0:
 			if l == "subs":
 				_subs_pick()       # L35: a subscriber's hero, not just anyone

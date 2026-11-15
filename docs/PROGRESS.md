@@ -1280,3 +1280,28 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   no SCRIPT ERROR; TOWNWALK in_solid 3/17482 (0.017%) raid_in_solid 0/8089 PASS; D21B3 OK; D21B_FX OK.
 - MERGE NOTE: origin/main ff-merged via the Windows git (device_bash git cannot unlink files in the mount); an
   untracked tools/_u26_shot.gd identical to main's was moved aside to tools/_u26_shot.gd.bak_premerge.
+
+## D-cycle - D22a mix & spatialisation, 2026-11-15 05:35 (game build)
+- Item: D22a (first open DESKTOP item). D57 was already done (snapshot v=3 shipped 08:41 cycle) - the brief's
+  "top priority" line is stale.
+- CHANGE scripts/sfx.gd (backup sfx.gd.bak_d22a): VOICES 24 (was 16); _voice_for = first free voice, else steal the
+  lowest-PRIO / farthest busy voice only if it ranks below the newcomer. Low-priority kinds (footstep_*, laughs,
+  grunts, efforts, GAP>=0.3 animal calls) are skipped beyond LOW_FAR 60 m and dropped when >=18 voices are busy or
+  the 8/0.25 s burst budget is spent. New Sfx.bed(kind,pos,db) + BEDS table (river/market/forge) on a "Beds" bus
+  (-12 dB), faded per frame by bed_target (night/raid rules). GAP entries for 21 animal + townsfolk voice kinds.
+  "roar" set added (delve.gd called Sfx.play("roar") into nothing). Telemetry: busy_peak, steals, dropped,
+  far_skips, missing, min_gap.
+- CHANGE scripts/town.gd (backup town.gd.bak_d22a): _lay_sound_beds (deferred from _ready) - 7 river emitters every
+  40 m along river_z_fast, market bed at _market_pos, forge bed at the blacksmith anvil.
+- ASSETS assets/audio/amb/river_flow.ogg, market_murmur.ogg, forge_fire.ogg - synthesised here (numpy/scipy +
+  ffmpeg, no source audio), 30 s seamless loops, CC0; LICENSE.txt updated. Spectra: renders/cycles/d22a/beds_spectra.png.
+- TEST tools/_d22a_test.gd headless 90 s @4x: OK 8/8 (pool 24, peak 18, steals 0, far_skips 13275, beds 9/9, before
+  raid river -2/market 0/forge -1 dB -> under raid river -8/market -60/forge -60, GAP held, 0 missing kinds).
+  Windowed WASAPI 50 s @1x with Master recorded: OK 8/8; soak.ogg + soak_review.png looked at - footfall transients
+  over the bed the whole clip, raid horn at 25 s, 0 clipped samples, RMS ~-29 dBFS, peak -8.6 dBFS.
+- GATES: --import clean; parse 0 errors; D42_TEST OK (616 footsteps); TWITCH_PARSE OK; OFFFLOOR 0/1368 INPROP 0
+  MON_INPROP 0/112; TOWNWALK in_solid 2/16367 raid_in_solid 0/9438 PASS; delve rc 0 no SCRIPT ERROR.
+- FOR MR. E: the beds are synthesised, not recorded - listen to soak.ogg; if the river reads as hiss or the market as
+  noise, a CC0 field recording can drop into the same BEDS slot with no code change. Overall mix sits ~-29 dBFS RMS
+  (bus levels predate this item) - OBS gain may want +6 dB.
+

@@ -349,6 +349,7 @@ func _ready() -> void:
         add_child(board)
         board.call_deferred("setup", roster)
     call_deferred("_stock_piles")
+    call_deferred("_lay_sound_beds")
     roster.load_all() if roster and roster.has_method("load_all") else null
     var hud := FeedHUD.new()
     hud.source = feed
@@ -3439,6 +3440,29 @@ func _work_sounds(delta: float) -> void:
         var st: Vector3 = _market_pos + Vector3(randf_range(-7.0, 7.0), 1.0, randf_range(-7.0, 7.0))
         Sfx.at("coin", st, -9.0)
         work_plays += 1
+
+## D22a: the town's LAYERED AMBIENCE - looped beds that live in the world (Sfx.bed),
+## so the camera hears the place it is looking at. The river along its banks (one
+## emitter every 40 m of the reach the town sees), the market's murmur over the
+## paved square, the forge's fire at the smith's anvil. Sfx fades each by day,
+## night and raid; the discrete sounds (anvil rings, coins, footfalls) sit on top.
+func _lay_sound_beds() -> void:
+    var sfx := Sfx.live()
+    if sfx == null:
+        return
+    var x := -120.0
+    while x <= 120.0:
+        sfx.bed("river", Vector3(x, WATER_Y + 0.4, river_z_fast(x)), -2.0)
+        x += 40.0
+    if _market_pos != Vector3.ZERO:
+        var m := _market_pos
+        m.y = height_at(m.x, m.z) + 1.6
+        sfx.bed("market", m, 0.0)
+    if _shop_frame.has("blacksmith"):
+        var fr: Array = _shop_frame["blacksmith"]
+        var anv: Vector3 = fr[0] + fr[1] * 0.6 + fr[2] * 0.4
+        anv.y = height_at(anv.x, anv.z) + 1.0
+        sfx.bed("forge", anv, -1.0)
 
 func _process(delta: float) -> void:
     if economy:

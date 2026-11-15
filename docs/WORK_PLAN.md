@@ -703,7 +703,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
   NOTE FOR MR. E: raid-time FPS on cruzader sits ~50-60 for the first ~14 s of a raid from the overview camera
   WITH OR WITHOUT the charge (baseline min 48) - that is D23's job, not a D21b regression.
 # Phase G - audio polish (owns sfx.gd) [D22]
-- [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
+- [x] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
+  RESULT (game build, 2026-11-15 05:35 CT): sfx.gd - 3D pool 16->24 with free-voice-first allocation and priority
+  stealing (PRIO table; footfalls/animal/town voices are low and are DROPPED rather than steal: pool >=18 busy, an
+  8-per-0.25s burst budget, or >60 m from the ear). Layered positional BEDS on a new Beds bus: river x7 along the
+  banks, market murmur over the square, forge fire at the anvil (3 new CC0 loops made here, LICENSE noted); market
+  and forge sleep at night and shut for a raid, the river runs on 6 dB lower. GAPs added for animal + townsfolk
+  voices. "roar" (delve.gd's lord rising) had no sound set - now it does. tools/_d22a_test.gd: 90 s 4x soak + forced
+  raid OK (peak 18/24 voices, 0 steals, GAP held for every kind, 0 silent callers, beds 9/9 playing, market -60 dB /
+  river -8 dB under the raid). Windowed recording renders/cycles/d22a/soak.ogg + soak_review.png: discrete
+  footfalls above the bed throughout, horn at the raid, 0 clipped samples, peak -8.6 dBFS. Needs Mr. E's ear.
 - [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
       MR. E'S CALL (Nov 15): generate fresh from music-studio with the mapping below. Pairs with D38 -
       do them together; D38 renders the tracks, D22b wires the transitions and stings.

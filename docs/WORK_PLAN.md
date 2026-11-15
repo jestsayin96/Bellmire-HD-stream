@@ -562,6 +562,15 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
 T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
 it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
 
+### WORKERS: THIS OVERRIDES YOUR BRIEF
+Your standing prompt tells you to take the FIRST unchecked item in your section. WHILE PHASE RC IS
+OPEN, THAT RULE IS SUSPENDED. Take the first PHASE RC item you own instead, wherever it sits in
+this file - search the file for its ID. Only if you own no open RC item do you fall back to your
+brief's first-unchecked rule. Say in your summary which RC item you took and why, or that you had
+none and fell back.
+SUPERVISOR: each run, also physically move the open RC items toward the top of their sections, so
+a worker that misses this note still lands on the right work.
+
 ### THE RULE THAT MAKES THIS WORK
 WHILE ANY PHASE RC ITEM IS OPEN, DO NOT WRITE NEW ITEMS unless a worker has NO RC item it can take
 AND no open item at all. The "write new work when a queue runs dry" instruction still stands - it is

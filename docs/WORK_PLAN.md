@@ -71,10 +71,27 @@ it should not have been put to him as one.)
 WHAT IT MEANT: 224 of the 454 items store a colour, so their icons use it. The other 230 - the
 accessories - store none, so the generator invented their leather and metal tones from a default
 eight-tone palette, and those came out lighter and warmer than the rest of Bellmire looks.
-THE CALL: take them darker and colder, to sit with the game's grim register. It is one constant in
-icongen.py and a re-run. Mr. E can veto on sight - the contact sheets in renders/art/icons/ are
-how he will judge it, which is faster than describing it in words. DO NOT ASK HIM AGAIN IN WORDS;
-re-run it, show him the sheet.
+CORRECTED 17:50 - "DARKER AND COLDER" WAS WRONG AND IS WITHDRAWN. Mr. E pushed back: "it can
+come out however as long as it fits with the game. this game doesnt really have a tone
+preference, correct me if i am wrong". I checked lore_lines.json before answering, and he is
+right that there is no MOOD preference - but there is a very consistent VOICE, and it is not grim:
+    "Measured the grain. Counted the flasks. Kept the door."   (epitaph)
+    "Went down with a lamp. Did not come up."                  (epitaph)
+    "Count the flasks." / "Keep the door." / "Light first. Then steel."   (barks)
+    "The scar keeps what it takes."
+    "Fresh off the river: trout, and a tale with every one."   (the crier, cheerful)
+Terse, practical, working-class stoicism. Short declaratives. Nobody is dramatic. The dread is in
+what is NOT said - "did not come up" is six plain words and it is the whole horror of that line.
+And there is real warmth in it.
+SO THE RIGHT DIRECTION IS WORN AND USED, NOT DARK AND COLD. Leather that has been handled for
+years; metal maintained rather than polished; gear owned by people who count flasks and keep
+doors. A material story, not a mood. Gothic or desaturated icons would fight the writing.
+THE RULE FOR EVERY ART DECISION FROM HERE: Bellmire has no mood preference, it has a VOICE
+preference, and that voice is PLAINNESS. Things look like what they are for. When in doubt about
+how a thing should look, read the epitaphs - they are the clearest statement of the game's
+register anywhere in the repository.
+One constant in icongen.py and a re-run. Mr. E vetoes on sight from the contact sheets in
+renders/art/icons/. DO NOT ASK HIM IN WORDS; re-run it, show him the sheet.
 THE GENERAL RULE THIS SHOULD HAVE FOLLOWED: do not ask Mr. E a question that a picture would
 answer. Build it, render it, show him. He is quick and decisive when he can SEE the thing.
 

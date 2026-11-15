@@ -609,6 +609,8 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 # Phase G - audio polish (owns sfx.gd) [D22]
 - [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
 - [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
+      MR. E'S CALL (Nov 15): generate fresh from music-studio with the mapping below. Pairs with D38 -
+      do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
 
@@ -1049,11 +1051,30 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
+      MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
+      TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into
+      assets/audio/music/, never modify the repo. Headless renderer: `npm run render` (cli/render.ts).
+      Read docs/STYLES.md and docs/AI_GUIDE.md there first - they define every knob below.
+      THE MAPPING (style x mood x role):
+        day / town      -> style playful_pizzicato, mood playful, role bed
+        night           -> style ambient_calm,      mood lowkey,  role bed
+        raid            -> style epic_cinematic,    mood hype,    role music
+        delve / dungeon -> style lofi_chill,        mood lowkey,  role bed
+        victory + defeat stings -> the 2-5 s sting maker
+      WHY `bed` MATTERS: role bed targets -20 LUFS and opens a speech pocket; the tool MEASURES the
+      300-3000 Hz share so the music does not fight Mr. E's voice on a 24/7 stream. Use bed for
+      everything that loops under talking. Only the raid cue is role `music` (-16 LUFS) because it is
+      meant to take over. Verify with the tool's own describe()/report: mood.pass true and
+      speechRoom.verdict pass for every bed before shipping it.
+      LICENSING: music-studio synthesizes from seeds - the output is original, not a sample of anyone's
+      track. Still add the credit note in assets/audio/LICENSE.txt saying which version generated them.
+      DONE: day/night/raid/delve beds + 2 stings in assets/audio/music/, wired through D22b's
+      transitions, each one's mood.pass and speechRoom verdict recorded in PROGRESS.md.
 - [ ] D39. TRADERS MUST MATTER. Today they arrive and leave with no effect. Make them carry SUPPLIES the town actually receives - and let bandits intercept them, so a lost caravan means the town goes without. An in-game event with stakes. DONE: a caravan arrives and the town gains; a caravan is taken and the town visibly suffers.
 - [ ] D40. FISHING ANIMATIONS AND WATER both need work. DONE: before/after capture of a catch and the water surface.
 
 # Mr. E's Nov 13 list - TWITCH (desktop owns the Twitch layer)
-- [ ] T4. VIEWERS SHAPE THE TOWN (he wants this to feel like a D&D campaign where actions have consequences). Let viewers spend bits or channel points to VOTE on how the town grows: what gets built first, what gets upgraded, what laws pass - with real, lasting, sometimes BAD consequences. Open-ended by design. Needs Mr. E on reward setup. DONE: a vote runs on stream, resolves, and the town visibly changes because of it.
+- [ ] T4. VIEWERS SHAPE THE TOWN (he wants this to feel like a D&D campaign where actions have consequences). Let viewers spend bits or channel points to VOTE on how the town grows: what gets built first, what gets upgraded, what laws pass - with real, lasting, sometimes BAD consequences. Open-ended by design. REWARD/AUTH SETUP IS DONE (Nov 15) - see T5's note; nothing is blocked on Mr. E. DONE: a vote runs on stream, resolves, and the town visibly changes because of it.
 
 # Phase M - from the D28 census + the HUD worker's U1 report (supervisor, Nov 13 01:45). IDs frozen.
 
@@ -1198,6 +1219,18 @@ the game -> the GAME rolls the d20 and applies the outcome -> it is Chronicled a
 this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do not design one.
 
 - [ ] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+      UNBLOCKED (Nov 15): Mr. E re-authorized the broadcaster token via device-code grant. The game's
+      Twitch app (client s4lpypbhumi34uocr0jqrscsxmjz2u) now holds channel:manage:polls AND
+      channel:read:polls alongside the original five (bits:read, channel:manage:redemptions,
+      channel:read:redemptions, channel:read:subscriptions, moderator:read:followers). Validated live
+      against id.twitch.tv/oauth2/validate as login jestsayin96, user_id 138821183; refresh token
+      present so the game renews itself. Token at user://twitch_token.json; the pre-polls token is
+      backed up beside it as twitch_token.json.bak_prepolls. NOTHING IS BLOCKED ON MR. E.
+      THE WORDS ARE ALREADY WRITTEN: data/lore_lines.json "propositions".entries, and the
+      viewer_roll crit/high/low/fumble outcome lines added in C-cycle 38. Read them, do not invent
+      parallel copies.
+      ARCHITECTURE (unchanged): the d20 resolves IN THE GAME; the hub only DISPLAYS the result from
+      the snapshot (H9 already renders it). Do not build an on-screen d20 - that left the HUD lane.
       spends channel points or bits to attempt something - upgrade a building, trigger an event,
       push a proposition - and a d20 roll decides how it goes. D&D consequences: a high roll does it
       well, a low roll does it badly or backfires, and the Chronicle says so in plain language.

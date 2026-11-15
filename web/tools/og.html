@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<!-- Generator for web/og.png (the social share card). Not served as a page; render it with:
+     chrome --headless --screenshot=web/og.png --window-size=1200,630 web/tools/og.html
+     Own drawing (the crest from index.html) + Gloock (SIL OFL, web/fonts/). Palette = style.css. -->
+<style>
+@font-face{font-family:Gloock;src:url(../fonts/gloock-latin-400.woff2) format("woff2");font-weight:400}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{background:radial-gradient(130% 90% at 50% -10%, #2c2015 0%, #130d08 64%), #130d08;
+  font-family:"Segoe UI",system-ui,sans-serif;color:#c7b081;position:relative}
+.frame{position:absolute;inset:26px;border:1.5px solid rgba(198,146,47,.55)}
+.frame::after{content:"";position:absolute;inset:7px;border:1px solid rgba(198,146,47,.22)}
+.tick{position:absolute;width:26px;height:26px;border:2.5px solid #c6922f}
+.t1{top:16px;left:16px;border-right:0;border-bottom:0}
+.t2{top:16px;right:16px;border-left:0;border-bottom:0}
+.t3{bottom:16px;left:16px;border-right:0;border-top:0}
+.t4{bottom:16px;right:16px;border-left:0;border-top:0}
+.row{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:64px}
+svg.emblem{width:256px;height:288px;filter:drop-shadow(0 10px 26px rgba(0,0,0,.55))}
+.em-shield{fill:#1a130c;stroke:#c6922f;stroke-width:1.4}
+.em-keep path{fill:#c7b081}.em-door{fill:#0e6a66}.em-hill{fill:#0e6a66;opacity:.9}
+.em-scar{fill:#37c7bf}.em-bell path,.em-bell rect,.em-bell circle{fill:#c6922f}
+.words{max-width:620px}
+h1{font-family:Gloock,serif;font-weight:400;font-size:118px;line-height:1;color:#f3e6c4;
+  letter-spacing:.5px;text-shadow:0 2px 0 rgba(0,0,0,.45)}
+h1 .hd{color:#37c7bf;font-size:.62em;vertical-align:.14em;margin-left:.12em}
+.rule{height:2px;background:linear-gradient(90deg,#c6922f,rgba(198,146,47,0));margin:26px 0 22px;width:86%}
+.tag{font-size:31px;line-height:1.45;color:#c7b081}
+.sub{margin-top:18px;font-size:24px;color:#8a7458;letter-spacing:.4px}
+.sub b{color:#37c7bf;font-weight:600}
+.band{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;gap:0}
+.band i{width:22px;height:11px;background:#23a6a0;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.band i:nth-child(2n){background:#c6922f}
+</style></head><body>
+<div class="frame"></div>
+<i class="tick t1"></i><i class="tick t2"></i><i class="tick t3"></i><i class="tick t4"></i>
+<div class="row">
+  <svg class="emblem" viewBox="0 0 64 72" aria-hidden="true">
+    <path class="em-shield" d="M4 4 h56 v40 a28 28 0 0 1 -28 26 a28 28 0 0 1 -28 -26 z"></path>
+    <g class="em-keep"><path d="M18 34 v-13 h4 v-4 h4 v4 h4 v-6 h4 v6 h4 v-4 h4 v4 h4 v13 z"></path>
+    <rect class="em-door" x="29" y="27" width="6" height="7"></rect></g>
+    <path class="em-hill" d="M6 42 q10 -7 16 -3 q6 4 10 1 q7 -5 13 -1 q6 3 9 5 v3 h-48 z"></path>
+    <path class="em-scar" d="M30 40 l4 0 l-1.4 9 l2.4 0 l-5 11 l1 -9 l-2.4 0 z"></path>
+    <g class="em-bell"><path d="M44 52 q0 -6 4 -6 q4 0 4 6 v3 h-8 z"></path>
+    <rect x="43" y="55" width="10" height="2" rx="1"></rect><circle cx="48" cy="59" r="1.6"></circle></g>
+  </svg>
+  <div class="words">
+    <h1>Bellmire<span class="hd">HD</span></h1>
+    <div class="rule"></div>
+    <p class="tag">A medieval town run by Twitch chat &mdash; the boards, every hero's sheet, the Guild Roll, the Fallen.</p>
+    <p class="sub">live from <b>twitch.tv/jestsayin96</b></p>
+  </div>
+</div>
+<div class="band"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</body></html>

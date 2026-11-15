@@ -1393,6 +1393,13 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   who/kind until each adds `town.tag_feed("death", [name])` (etc.) next to its feed append. notables.gd ambient voice
   lines left untagged on purpose (townsfolk chatter, no event).
 
+## C-cycle - C-48 the townsfolk as a community (WORK_PLAN C5), 2026-11-15 (content)
+- Item: WORK_PLAN C5 (first CONTENT item with no cycle; C1-C4 already delivered by C-34..C-47, supervisor ticks).
+- data/lore_lines.json only, additive: NEW key `townsfolk` (906 lines + 40/40/40/30 name parts). names{given_f 40, given_m 40, family 40, by_names 30}; trades{28 trades, each 6 bark + 2 each morning/midday/evening/night = 14 lines; from_tier 1-12 gates the trade by growth stage}; react{raid, disaster, festival, caravan, growth, hunger, hero_falls, hero_rich: 20 each}; remember[24 conditional entries]; _conditions documents every condition token; cast[10 fully authored named townsfolk with bio, extra barks, 4 activity lines, 8 event reactions, 2 memory lines].
+- Trades: ferryman, fishwife, reed_cutter (t1); farmer, well_keeper, herder, baker (t2); guild_clerk, carter (t3); smith, brewer, miller (t4); chandler, weaver, innkeeper (t5); chapel_keeper, gravedigger, apothecary (t6); mason, cooper, tanner (t7); stabler, guardsman (t8); scribe, glassblower (t9); wallwright (t10); crier (t11); bellkeeper (t12).
+- CODE WIRING for the desktop (dead until wired, D36): pick given name (given_f/given_m by body) + EITHER one family OR one by_names entry; bind a trade whose from_tier <= current growth tier; ambient shout = random trade.bark; hour line = trade.morning/midday/evening/night; on a raised event pick react[<event>] (events: raid, disaster, festival, caravan, growth, hunger, hero_falls, hero_rich); remember[] entries fire only when their `when` token (see townsfolk._conditions; `n` and optional `kind` are the parameters) is true; cast[] are optional authored notables (cast.bark is EXTRA to the trade's bark; cast.react has one line per event).
+- Sample character read end to end: cast id `maud_fishwife` (Maud Reedwhistle, fishwife, widow of a ferryman lost at the Ford).
+- VALIDATION OK: all four data files json.load clean; every pre-existing top-level key of lore_lines.json equal to HEAD; diff numstat 1758 added / 0 removed; every trade has the same 7 keys and 6/2/2/2/2 line counts; no new line duplicates itself or any existing line; no dungeon floor count anywhere.
 ## D-cycle - D63a the festival is an event, 2026-11-15 ~12:30 CT (game build)
 - Item: D63 (D59 is the first open DESKTOP item but its remainder is only the live-hub capture during a real stream run;
   D63 is the next, Mr. E's 11:51 ask). All seven stages built; D63 left OPEN for the clip and the C6 words.

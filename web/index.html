@@ -54,6 +54,7 @@
     ?mock=chronicle (a stand-in chronicle)  ?mock=crowd (many heroes, for the boards)
     ?mock=roll (stand-in town rolls, with the hostile-name canary)
     ?mock=bands (stand-in delving parties, with the hostile-name canary)
+    ?welcome=1 (force the H22 welcome open, ignoring a past dismissal)
     ?mock=crowd also carries a Satchel (sell prices) with the hostile-name canary (H11)
 -->
 <link rel="stylesheet" href="style.css">
@@ -133,6 +134,45 @@
 
   <ul class="town" id="town" aria-label="The town"></ul>
   <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+
+  <!-- H25 Night watch: a page-owned toggle. It carries no snapshot data; app.js flips one class on <html>
+       and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
+  <div class="watchbar" id="watchbar">
+    <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
+    <button type="button" class="watchbtn hide" id="welcomeBtn">What is Bellmire?</button>
+    <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
+  </div>
+
+  <!-- H22: the first minute. A page-owned welcome for a newcomer: what Bellmire is, one live line built
+       in app.js from the snapshot already on the page (el()/textContent only), and three doors that
+       just switch to the tab that already does that job. Static copy only - no snapshot data in this
+       markup. Dismissed for good per browser (localStorage, whitelist-checked); ?welcome=1 forces it
+       open for a local check. It is an ordinary block in the flow: never a gate, never an overlay. -->
+  <section class="welcome hide" id="welcome" aria-labelledby="welcomeTitle">
+    <h2 id="welcomeTitle">Welcome to Bellmire</h2>
+    <p>Bellmire is a real town, and it is being run right now, live on stream. Its heroes are the people watching: they take a name, march down the scar, win loot, and sometimes die, and the town writes every bit of it down. This page is the town&rsquo;s ledger, read fresh every minute. Look at anything here; to act, you speak in Twitch chat.</p>
+    <div class="wl-live" id="welcomeLive" role="status" aria-live="polite"></div>
+    <ul class="doors">
+      <li><button type="button" class="door" data-door="commands"><span class="door-k">Get a hero</span><span class="door-d">The chat commands that give you a name and a place in the town.</span></button></li>
+      <li><button type="button" class="door" data-door="chronicle"><span class="door-k">Watch what is happening</span><span class="door-d">The Chronicle: raids, deaths, finds and delves as they happen.</span></button></li>
+      <li><button type="button" class="door" data-door="dice"><span class="door-k">Learn the rules</span><span class="door-d">The Guild Hall die and the town&rsquo;s rolls: how fate is settled here.</span></button></li>
+    </ul>
+    <button type="button" class="welcome-dismiss" id="welcomeDismiss">Got it &ndash; don&rsquo;t show this again</button>
+  </section>
+
+  <!-- H24: the finder. One field over everything the page already holds in memory (heroes,
+       the fallen, bands, lords, remembered Chronicle lines). Page-local: no fetch, no write
+       path. Results are built in app.js with el() only. -->
+  <div class="finder" id="finder" role="search">
+    <label class="finder-label" for="finderInput">Find</label>
+    <input class="finder-input" id="finderInput" type="search" maxlength="60" autocomplete="off" spellcheck="false"
+           placeholder="A hero, a lord, a band, a word from the Chronicle  (press / )"
+           role="combobox" aria-expanded="false" aria-controls="finderList" aria-autocomplete="list">
+    <div class="finder-panel hide" id="finderPanel">
+      <p class="finder-note" id="finderNote" role="status" aria-live="polite"></p>
+      <ul class="finder-list" id="finderList" role="listbox" aria-label="Places to go"></ul>
+    </div>
+  </div>
 
   <!-- H13: no-scroll, tabbed layout. A viewer picks one section at a time with a
        tab button here; app.js shows the matching tabpanel below and remembers the

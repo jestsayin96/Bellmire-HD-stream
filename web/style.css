@@ -1189,3 +1189,140 @@ ol.chron.cj { grid-template-columns: minmax(0, 1fr); }
 .away-note { margin: 6px 0 0; font-size: .82rem; font-style: italic; color: var(--ink-soft); }
 @media (min-width: 720px) { .cep-list { grid-template-columns: 1fr 1fr; } }
 html.overlay .away, html.overlay .ctools, html.overlay .cmoment { display: none; }
+
+/* ---- H24 the finder: one search field over everything the page remembers.
+   Dark field on the ink ground, parchment popover, teal focus, gold landing mark.
+   No animation beyond the smooth scroll (which app.js turns off for reduced motion). */
+.finder { position: relative; display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+.finder-label { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--parch-dim); flex: none; }
+.finder-input {
+  flex: 1; min-width: 0; padding: 9px 12px; border-radius: 8px;
+  border: 1px solid var(--edge-2); background: var(--char); color: var(--parch-hi);
+  font: inherit; font-size: .95rem;
+}
+.finder-input::placeholder { color: #a8946a; }
+.finder-input:focus { outline: 2px solid var(--teal-br); outline-offset: 1px; }
+.finder-panel {
+  position: absolute; z-index: 40; top: calc(100% + 4px); left: 0; right: 0;
+  max-height: min(60vh, 420px); overflow-y: auto;
+  background: var(--parch); color: var(--ink); border: 1px solid var(--edge); border-radius: 9px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.55);
+}
+.finder-note { margin: 0; padding: 8px 12px; font-size: .82rem; color: var(--ink-soft); border-bottom: 1px solid var(--edge-2); }
+.finder-note.finder-none { border-bottom: 0; font-size: .9rem; color: var(--ink-2); }
+.finder-list { list-style: none; margin: 0; padding: 4px; }
+.finder-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; padding: 8px 9px; border-radius: 6px; cursor: pointer; overflow-wrap: anywhere; }
+.finder-row[aria-selected="true"], .finder-row:hover { background: var(--parch-hi); box-shadow: inset 3px 0 0 var(--teal-ink); }
+.fkind { flex: none; min-width: 4.4em; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-ink); font-weight: 700; }
+.ftext { color: var(--ink); font-weight: 600; min-width: 0; }
+.fsub { color: var(--ink-soft); font-size: .82rem; }
+.finder-hit { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+@media (max-width: 520px) { .finder-label { display: none; } }
+
+/* ======================================================= H25 night watch
+   One class on <html> (app.js applyWatch). The page is left open beside a bright stream for hours,
+   so this mode (1) dims the palette by redefining the SAME tokens - parchment pulled back, ink kept
+   dark enough to hold 4.5:1 on it, the one teal and the restrained gold toned down - (2) lays out
+   only what changes by itself: the town strip, the status line, the Chronicle and who is below, and
+   (3) updates without a jolt: every animation and transition is off, the two live lists scroll
+   inside fixed-height boxes so a rebuild cannot move the page, and the status rows keep their height.
+   Nothing here reads a snapshot value; it is pure presentation. */
+.watchbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 12px; }
+.watchbtn {
+  font: inherit; font-size: .9rem; min-height: 44px; padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--parch-dim); border: 1px solid var(--gold-dk);
+}
+.watchbtn:hover { border-color: var(--gold); color: var(--parch-hi); }
+.watchbtn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.watchhint { font-size: .84rem; color: var(--parch-dim); }
+html.watch .watchbtn { background: var(--teal); color: #07100f; border-color: var(--teal); }
+
+html.watch {
+  --parch:   #a09270;
+  --parch-2: #988b6a;
+  --parch-hi:#aa9c78;
+  --parch-lo:#8f8363;
+  --ink:     #170f08;
+  --ink-2:   #22160b;
+  --ink-soft:#2a1b0c;
+  --ink-red: #4f1a0c;
+  --edge:    #5a3c1c;
+  --edge-2:  rgba(90,60,28,.5);
+  --night:   #0b0805;
+  --night-2: #120d08;
+  --char:    #17100a;
+  --parch-dim:#ad9a72;
+  --teal:    #2b9a94;
+  --teal-br: #3fb3ac;
+  --teal-ink:#0b4f4c;
+  --gold:    #a77d2c;
+  --gold-dk: #7c5810;
+  --dead:    #8d7c68;
+  --warn:    #c07b1c;
+  --bad:     #b5452f;
+}
+html.watch body {
+  background: radial-gradient(130% 70% at 50% -8%, #17100a 0%, var(--night) 62%) fixed, var(--night);
+}
+html.watch *, html.watch *::before, html.watch *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+html.watch .panel { box-shadow: 0 4px 14px rgba(0,0,0,.45), inset 0 0 0 3px var(--parch-hi), inset 0 0 0 4px rgba(90,60,28,.35); }
+html.watch .panel::before, html.watch .panel::after { opacity: .35; }
+
+/* ambient layout: fold away what only matters while someone is clicking */
+html.watch #finder, html.watch nav#tabs, html.watch footer, html.watch header.hero .band,
+html.watch #chronTools, html.watch #chronChips, html.watch #chronFind, html.watch #chronAway { display: none !important; }
+html.watch .wrap { max-width: 1180px; }
+html.watch header.hero { padding: 8px 14px 8px; margin: 0 0 10px; }
+html.watch header.hero .emblem { width: 34px; }
+html.watch .wordmark { font-size: clamp(1.4rem, 5vw, 1.9rem); }
+html.watch main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: start; }
+html.watch main > section[role="tabpanel"]:not(#chronicle):not(#bands) { display: none; }
+html.watch main > #chronicle, html.watch main > #bands { display: block; margin: 0; }
+html.watch main > #nothing:not(.hide) { grid-column: 1 / -1; }
+/* quiet: each live list scrolls in its own fixed box, so a refresh never moves the page */
+html.watch #chronList, html.watch #bandList {
+  max-height: 62vh; max-height: 62dvh; overflow-y: auto; overscroll-behavior: contain; overflow-anchor: none;
+}
+html.watch .status { min-height: 2.9em; }
+html.watch .town { min-height: 2.4em; }
+@media (min-width: 900px) {
+  html.watch main { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  html.watch #chronList, html.watch #bandList { max-height: calc(100vh - 250px); max-height: calc(100dvh - 250px); }
+}
+
+/* the dimmed pass keeps every text style at or above 4.5:1 (measured, see web/NOTES.md H25): faded
+   rows come back to full opacity (the dim palette already does the quieting), and the small status
+   tags carry their own fixed pairs instead of borrowing a token that is now darker. */
+html.watch .town .tk, html.watch header.hero .sub, html.watch .title.light small, html.watch .gepi,
+html.watch .bmember.gone, html.watch .chron .centry.remembered, html.watch .grec, html.watch .pos { opacity: 1; }
+html.watch .bmember.gone .bmname { font-style: italic; }
+html.watch .cdiv-earlier { color: var(--ink-red); }
+html.watch .bmtag.st-fallen  { color: #e6d9b8; background: #6b2214; }
+html.watch .bmtag.st-burning { color: #efe2bf; background: #6e4308; }
+html.watch .bandfloor { color: #dccfa9; background: #0b4f4c; }
+
+/* ---- H22 the first minute: a welcome in the flow (never an overlay or a gate), dismissible for good. */
+.welcome { margin: 0 0 14px; padding: 14px 16px 16px; border: 1px solid var(--gold-dk); border-radius: var(--r);
+  background: linear-gradient(180deg, var(--char), var(--night-2)); color: var(--parch-dim); }
+.welcome h2 { margin: 0 0 8px; font-family: "Gloock", Georgia, serif; font-weight: 400; font-size: 1.35rem; line-height: 1.15; color: var(--gold); }
+.welcome p { margin: 0 0 9px; font-size: .98rem; line-height: 1.5; }
+.wl-live { margin: 10px 0 12px; padding: 2px 0 2px 10px; border-left: 3px solid var(--teal); }
+.wl-live p { margin: 0 0 4px; font-size: .92rem; }
+.wl-live .wl-lead { color: var(--teal-br); font-weight: 600; }
+.wl-live.stale { border-left-color: var(--gold-dk); }
+.wl-live.stale .wl-lead { color: var(--gold); }
+.wl-last { color: var(--parch-dim); font-style: italic; overflow-wrap: anywhere; }
+.doors { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.door { width: 100%; min-height: 44px; display: flex; flex-direction: column; gap: 2px; text-align: left; cursor: pointer;
+  font: inherit; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--teal-ink); background: rgba(35,166,160,.08); color: var(--parch-hi); }
+.door:hover { border-color: var(--teal-br); }
+.door:focus-visible, .welcome-dismiss:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.door-k { font-weight: 600; color: var(--teal-br); }
+.door-d { font-size: .85rem; color: var(--parch-dim); }
+.welcome-dismiss { font: inherit; font-size: .88rem; min-height: 44px; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--parch-dim); border: 1px solid var(--gold-dk); }
+.welcome-dismiss:hover { border-color: var(--gold); color: var(--parch-hi); }
+@media (min-width: 680px) { .doors { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+html.watch .welcome, html.watch #welcomeBtn { display: none !important; }

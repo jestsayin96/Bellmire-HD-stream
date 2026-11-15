@@ -718,3 +718,81 @@ Note: the older `setUpTabs()` in app.js is dead code (the nav uses buttons now; 
 - Fix: each gear slot's text block (`.stx`) was built but never appended to its cell, so every slot drew as just an icon. Now attached.
 - Fix: the heroCard crest printed "[object SVGSVGElement]" because the H19 Bestiary's `sigil()` (returns an SVG) silently shadowed the initials helper of the same name. The initials helper is now `initials()`.
 - No CSP change, no new fetch/origin, no write path. `?mock=sheets` now carries last_seen, events and slot names (including a hostile `last_seen` that must be ignored).
+
+## H24 - the finder (find anything, from anywhere)
+
+One search field under the status line, over everything the page already holds in memory: living heroes, the fallen, bands (and their members), the Bestiary's lords and kin, and remembered Chronicle lines (the H14 browser history). Page-local only - no fetch, no origin, no write path, CSP untouched.
+
+- Opens a result by landing on the thing itself: a hero's own card (opened), the grave in The Fallen, the band card, the lord's Bestiary entry (filter reset to All), or the remembered moment in the journal via the H21.4 `#moment-<n>` id.
+- Results address their target by an INTEGER the page owns (`data-fi`, `data-bi`, the moment's `n`). No snapshot string goes into a selector, URL, href, src or style. Every result row is built with `el()`.
+- Honest empty state: says the finder only knows what this browser has seen (the live town + about two days of remembered Chronicle), and says so plainly when the town has not reported at all.
+- Keyboard: `/` focuses the field (never while typing in another input - the guild chat is safe), Up/Down choose, Enter opens, Escape closes (a second Escape clears). Min 2 characters, query capped at 60, control characters stripped.
+- Ranking: names that START with the query first, then word-start, then anywhere; stable across kinds (hero, fallen, band, lord, moment). 6 per kind, 24 total.
+- `beastBook()` was factored out of `renderBestiary` so the Bestiary and the finder read the same list.
+
+## H25 - the Night Watch (long-session mode)
+
+A button under the status line (`#watchBtn`, "Night watch" / "Back to the full page") flips ONE class, `watch`, on `<html>`; every change is CSS. It never touches the DOM the renderers build.
+
+- **Dimmed watch (.1)**: redefines the same tokens (parchment pulled back, ink kept dark, teal and gold toned down, night ground deeper). Faded rows (`opacity` .55-.88) return to full opacity in this mode; the three small status tags carry their own fixed colour pairs.
+- **Ambient layout (.2)**: shows only the town strip, the status line, the Chronicle and Bands below, side by side from 900 px and stacked under it. The finder, tab bar, Chronicle filters/search/away card, footer and the harlequin band fold away. The other tabs stay in the DOM (hidden), so the Back button restores everything.
+- **Quiet (.3)**: all animation/transition is off in this mode (the 60 s refresh re-runs `feedin` on every row in the full page, which reads as a flash). Chronicle and Bands scroll inside fixed-height boxes, the status and town rows keep a minimum height. Nothing in the page calls `focus()` on a refresh; the watch button keeps focus through updates. `prefers-reduced-motion` is therefore honoured by construction.
+- **Remembered (.4)**: key `bellmire.watch.v1`, value `watch` only. Read back through `ctrlStrip`, capped at 12 chars and compared to the single literal; anything else (including `<img src=x onerror=alert(1)>`) is ignored. Storage that throws leaves the full page. `?watch=1` turns it on for one visit without storing.
+- Known limit: the class is applied when `app.js` runs (CSP forbids an inline pre-paint script), so a remembered watch mode can show one frame of the full page before dimming.
+
+Measured (headless Chrome, 1280x800, `?watch=1` with `?mock=bands`, `?mock=chronicle`, `?mock=crowd`, `?state=stale|empty|fail`; worst colour stop vs the effective background, element opacity included; threshold 4.5:1, 3:1 for large text). 0 failures; lowest is 4.60:1.
+
+| text style | worst ratio |
+|---|---|
+| `h2.title fg=rgb(79, 26, 12)` | 4.60 |
+| `p.eyebrow fg=rgb(79, 26, 12)` | 4.60 |
+| `span.bmtag.st-other fg=rgb(23, 15, 8)` | 5.05 |
+| `small fg=rgb(42, 27, 12)` | 5.43 |
+| `span.bmcls fg=rgb(42, 27, 12)` | 5.43 |
+| `span.hpk fg=rgb(42, 27, 12)` | 5.43 |
+| `p.note fg=rgb(42, 27, 12)` | 5.43 |
+| `p.note.quiet fg=rgb(42, 27, 12)` | 5.43 |
+| `p.empty fg=rgb(42, 27, 12)` | 5.43 |
+| `button.watchbtn fg=rgb(7, 16, 15)` | 5.64 |
+| `span.cep-title fg=rgb(79, 26, 12)` | 5.69 |
+| `span.bandfloor fg=rgb(220, 207, 169)` | 6.05 |
+| `span.bmname fg=rgb(23, 15, 8)` | 6.17 |
+| `span.hpv fg=rgb(23, 15, 8)` | 6.17 |
+| `span.tk fg=rgb(173, 154, 114)` | 6.53 |
+| `span fg=rgb(173, 154, 114)` | 6.59 |
+| `span.bmtag.st-burning fg=rgb(239, 226, 191)` | 6.60 |
+| `p.sub fg=rgb(173, 154, 114)` | 6.60 |
+| `span.tv fg=rgb(170, 156, 120)` | 6.61 |
+| `span.tv.growv fg=rgb(170, 156, 120)` | 6.61 |
+| `b fg=rgb(170, 156, 120)` | 6.68 |
+| `h1.wordmark fg=rgb(170, 156, 120)` | 6.68 |
+| `span.cep-when fg=rgb(42, 27, 12)` | 6.70 |
+| `span.cep-sense fg=rgb(34, 22, 11)` | 7.11 |
+| `span.watchhint fg=rgb(173, 154, 114)` | 7.27 |
+| `button.cmoment fg=rgb(11, 79, 76)` | 7.33 |
+| `span.hd fg=rgb(11, 8, 5)` | 7.85 |
+| `span.bmtag.st-fallen fg=rgb(230, 217, 184)` | 8.04 |
+| `span.ckind fg=rgb(79, 26, 12)` | 11.03 |
+| `span.bandmeta fg=rgb(42, 27, 12)` | 13.00 |
+| `time.cwhen fg=rgb(42, 27, 12)` | 13.00 |
+| `span.bandname fg=rgb(23, 15, 8)` | 14.79 |
+| `p.cline fg=rgb(23, 15, 8)` | 14.79 |
+
+Quiet-update check: with `?watch=1&mock=bands` and `?mock=chronicle`, `load()` called twice with the page idle: 0 layout-shift entries, 0 running animations, every section's top/height identical before and after, scroll position unchanged, focus stays on `#watchBtn`. (Mock data is constant, so this proves the render path is geometry-stable, not that real changes are small.)
+
+Gaps, honestly: no desktop recording was made (headless capture only, no video); screenshots of full vs watch at 1280 and watch at 390 were taken but are not committed.
+
+## H22 - the first minute (newcomer welcome)
+
+A short welcome block sits between the status line and the finder: what Bellmire is (static copy, town's voice, about
+sixty words), ONE live line, and three doors. The live line is built in `paintWelcome()` from the payload `render()`
+last drew plus the same `last` / `lastError` / `STALE_MIN` the status line uses, so it is honest in every state: live
+("Live, updated N min ago"), stale or failed-refresh (the numbers are kept but prefixed "As of ..."), empty ("has not
+reported in yet") and failed fetch ("out of reach just now"). It says only what the snapshot carries - town stage from
+the lore tier names, heroes on the roll, heroes abroad (only when a bands field exists), and the newest Chronicle line.
+The doors (Get a hero / Watch what is happening / Learn the rules) switch to the Commands, Chronicle and die tabs via
+`setActiveTab()`; the markup only carries a page-owned `data-door` id that is matched against `TABS`. They link, they do
+not restate. "Got it - don't show this again" stores `seen` under `bellmire.welcome.v1` (per browser, whitelist-checked on
+read); a small "What is Bellmire?" button in the watch bar brings it back for the visit without un-dismissing. It is an
+ordinary block in the flow - no overlay, no sticky, no gate - the doors stack on a phone and sit three-across from 680 px.
+Hidden in Night watch. `?welcome=1` forces it open for local checks.

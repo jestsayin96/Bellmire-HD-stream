@@ -581,3 +581,29 @@ No CSP change (meta byte-identical to HEAD), no new URL source, no fetch, no vie
 - Checked: ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 and ?mock=chronicle&away=6 with no page errors;
   the hostile `<img src=x onerror=alert(1)>` line renders as literal text (no `<img>` or `[onerror]` element), also
   as a hero filter value after a store-and-reload; innerHTML/outerHTML/eval counts unchanged from HEAD.
+
+## H24 - the finder (page-local search)
+
+- New input `#finderInput` and results list built ONLY with `el()`/`textContent`; a hero named `<img src=x onerror=alert(1)>` renders as text in the results (checked: 0 `<img>` in the list).
+- No new fetch, origin, storage key, or CSP change (CSP byte-identical). No new innerHTML/outerHTML/insertAdjacentHTML/eval/new Function - grep shows only the two legacy page-owned-constant sites.
+- A result chooses its target by integer (`data-fi`, `data-bi`, `#moment-<n>`); the only selector strings built are `[data-fi="<int>"]` / `[data-bi="<int>"]` from `| 0` integers. Snapshot strings are never used as URL, selector, src, href or style.
+- The `/` shortcut is ignored when the event target is INPUT/TEXTAREA/SELECT/contentEditable, so it cannot steal typing from the guild chat.
+
+## H25 - the Night Watch
+
+- Presentation only: one class on `<html>`, CSS does the work. No new fetch, origin, `connect-src`, or CSP change (CSP byte-identical).
+- New JS touches no snapshot value: `applyWatch()` sets `classList` and two fixed page-owned strings via `textContent`. No innerHTML/outerHTML/insertAdjacentHTML/eval/new Function added (counts unchanged from HEAD).
+- One new storage key, `bellmire.watch.v1`, per-browser, never sent anywhere. It is read through `ctrlStrip`, length-capped, and compared to the single literal `"watch"`; the stored value is never used as a URL, selector, src, href or style. Verified: a stored `<img src=x onerror=alert(1)>` is ignored; a throwing `localStorage` leaves the full page.
+- Hostile hero name `<img src=x onerror=alert(1)>` renders as literal text in the watch layout (Chronicle and Bands): 0 `<img>` elements, 0 alert calls, no page errors. `?state=empty|fail|stale`, `?mock=chronicle|crowd|bands|fallen`, `?open=1` all pass with and without `?watch=1`, at 1280 and 390, with no horizontal scroll.
+- The page remains read-only; the toggle writes nothing outside this browser.
+
+## H22 - the first minute (welcome block)
+
+- Static copy lives in index.html; the single live line is built in `paintWelcome()` with `el()`/`textContent` only. The
+  snapshot values it can show are numbers, a lore tier name from the page's own frozen lore, and one Chronicle line
+  (attacker-controlled text: textContent only, capped at 140 characters, `overflow-wrap: anywhere`).
+- No snapshot value is a URL, src, href or style. The doors carry a page-owned `data-door` id, `cleanTab()`-stripped and
+  matched against the `TABS` whitelist before it selects a tab.
+- localStorage key `bellmire.welcome.v1` holds only the literal `seen`; the value read back is control-stripped, capped and
+  compared to that one literal before it decides anything. Storage that throws leaves the welcome showing.
+- CSP byte-identical. No new fetch, no new origin, no viewer write path, no new innerHTML.

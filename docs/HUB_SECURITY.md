@@ -540,3 +540,23 @@ fetch, no image file, no new origin, no CSP change. Matching is case-insensitive
 
 The Town tab adds no CSP change, no fetch and no URL sink. Town name, building names/lines and remembered chronicle lines go through `el()` (textContent) only; a building name selects an icon by keyword from the page-owned `ICON_SET`; the only snapshot number that reaches a style is the growth fraction, set via `style.setProperty` as a clamped number. Hostile names (`<img src=x onerror=alert(1)>`) verified literal in `?mock=town` at 390/768/1280 with zero `<img>` elements and no dialogs.
 
+## H19 - the Bestiary (Nov 15)
+
+- Every Bestiary string (lord/family names, frozen intro and camp lines, counts) reaches the DOM through el()/
+  textContent or createTextNode. Names come from the frozen lore keys; the only attacker-shaped text is the
+  remembered Chronicle, which is only searched (indexOf) and never rendered in this section.
+- Sigils are inline SVG built from constant paths and colours; the name hash only selects indices. No snapshot value
+  is used as a URL, src, href or style. No new fetch, no CSP change (meta byte-identical), no viewer write path.
+- `p.bestiary` is optional, looked up by own-property on page-owned keys, numbers coerced and capped, booleans only as typeof boolean.
+- Checked: ?state=empty/fail/stale, ?mock=chronicle/crowd/lore, ?open=1 and ?mock=bestiary; a hostile lord name
+  (`<img src=x onerror=alert(1)>`) renders as literal text, no `<img>` or `[onerror]` element is created.
+
+## H20 - character sheet (Nov 15)
+
+No CSP change, no new URL source, no write path. The sheet and the personal chronicle read only
+the snapshot and the H14 localStorage history; every string (names, titles, epitaphs, gear names,
+band names, chronicle lines) reaches the DOM through `el()` / `createTextNode`. Slot icons come
+from ICON_SET; `gear`/`equipment` slot values are text only. Personal-history matching is a
+whole-word string compare, never a regex built from a name. The hostile name
+`<img src=x onerror=alert(1)>` is carried through `?mock=sheets` and renders as literal text.
+

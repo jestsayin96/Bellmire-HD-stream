@@ -616,3 +616,68 @@ A new **Town** tab (`#state`, second tab) shows the place itself, in three parts
 - A per-entry in-game `day` on chronicle rows, so the timeline can be stamped "Day 17" in the town's own count; today it is stamped by the viewer's clock (Today / Yesterday / N days gone).
 - Disaster and festival as their own chronicle `t` kinds; today they arrive as `town` and are recognised by keyword.
 
+## H19 - the Bestiary (Nov 15)
+
+A Bestiary tab after Lore: 8 deep lords, 5 named ones and 17 monster families (grouped from the frozen
+`events.monster_camps`), each with a page-owned roundel sigil. Sigils reuse the H15 hash machinery
+(`crestRecipe("sigil|" + name)`) but index a separate ring/field/charge whitelist (fangs, horns, eye, claw,
+flame, wings, coil, broken crown, crossed bones), so a monster's mark never looks like a hero's crest. Same
+name -> same sigil on every reload. The name only ever picks indices; no snapshot string reaches an
+attribute, URL or style.
+
+- MET vs RUMOUR: an entry is Met when the browser's own remembered Chronicle (the H14 history) names it
+  (name, or for a family its singular/plural or a camp name). A Met card shows the frozen intro line (lords/named)
+  or the frozen camp "while" lines (families), how many remembered lines name it and when last. Anything else is a RUMOUR:
+  sigil and name only, a veiled town-voice line, no intro, no data. Chronicle lines themselves are NOT quoted
+  (a remembered line could carry a depth figure; this section never states one).
+- Optional snapshot numbers are read from `p.bestiary[<page-owned key>]` only if the publisher sends them
+  (`faced`, `killed`, `deepest`, `standing`), via own-property lookup, numeric-coerced and capped. Today it sends none.
+- The entry list scrolls inside the panel (H13); one column at 390 (H17).
+- `?mock=bestiary` shows a met lord with numbers, a hostile lord name, a met family and the rumours.
+
+### Fields the Bestiary wanted and did not get (honest gaps - game build / publisher owner)
+
+- Per-lord and per-family records in the snapshot: `bestiary.<key>.faced`, `.killed`, `.deepest`, `.standing`
+  (supported by the page, never sent).
+- Tells and a description per lord: `bosses.json` is not in the frozen lore bundle (only `lord_intros`,
+  `unique_intros`, `events.monster_camps`), so no tells/description are shown. Needs a lore refresh (content worker).
+- A structured "monster met" signal: Met is inferred from remembered Chronicle text, so a beast the town
+  met before this browser began remembering (or more than 48 h ago) reads as a rumour here.
+
+## H20 - the hero sheet is a character sheet (Nov 15)
+
+The hero card's open body is now a proper sheet (`heroSheet(h, mode)` in app.js), and every
+fallen memorial gets a lazily-built "Read their sheet" built from the same function
+(`mode = "fallen"`). Blocks: identity (crest, name, title, calling, level, pin), condition chips
+with an honest "last seen", HP/XP, Abilities, Combat, Gear by slot (nine slots; an empty slot is
+drawn as an empty slot, never omitted), Carrying/Satchel/cosmetics, Record, "Their own
+chronicle" (H20.3: the H14 history - live plus remembered in this browser, about 48 h - filtered
+to lines that name the hero as a whole word) and a foot line listing what the town did not send.
+
+Local check: `?mock=sheets&open=all` shows a bare level-1 hero, a kitted veteran, a hostile-named
+mage and a fallen hero's sheet (open the Fallen tab: `#fallen`). `?open=all` opens the first six
+heroes and every fallen sheet.
+
+Nothing is derived. No initiative-from-DEX, no estimated max HP, no guessed slot contents.
+
+### Snapshot fields the sheet wanted and did NOT get (for the game-build owner, snapshot_pub)
+These render as deliberate dashed empty cells and are named on each sheet's foot line. Aliases the
+page already accepts are in brackets - the publisher may send any of them.
+- `max_hp` [hp_max, maxhp, hpmax] - HP is a flat vitality bar without it.
+- `xp_next` [next_xp, xp_to_next, to_next].
+- `stats` {str,dex,con,int,wis,cha} - present in the real snapshot but absent on fresh heroes.
+- `ac`, `hp`, `to_hit`, `prof`, `saves` - drawn empty if missing (e.g. a fallen row carries none).
+- `initiative` [init] and `speed`.
+- `gear` / `equipment` object keyed `main_hand, off_hand, head, body, hands, feet, cloak, neck, ring`
+  (string or {name}). Only weapon (main hand) and armour (body) are published today; the other
+  seven slots are drawn empty with a "not published yet" tooltip.
+- `status` / `state` / `activity` / `where` on the hero - the sheet reads band membership from
+  `parties` and wounded from hp/max_hp, but cannot say "resting" or "in town" without a field.
+- a per-hero last-seen time - only the whole-snapshot `updated_at` exists.
+- On fallen rows: `species`, `ac`, `stats`, `weapon`/`armour` as slots, level history.
+- Wanted but not drawn as cells: background/origin, alignment, skills and proficiencies,
+  spells and slots, hit dice, a full inventory.
+- Personal history is only as good as the chronicle: lines must contain the hero's name verbatim.
+  A per-hero event feed (best depth, notable kills, deaths with day) from the publisher would
+  replace the name-match.
+

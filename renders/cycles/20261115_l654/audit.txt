@@ -1,0 +1,16 @@
+AUDIT|@CanvasLayer@41/Chronicle|Thornwake steps on a darting trap |21px|p10 5.00|mean 6.98|PASS
+AUDIT|@CanvasLayer@41/Chronicle|The town crier reads the day's new|21px|p10 8.66|mean 8.60|PASS
+AUDIT|@CanvasLayer@41/Chronicle|A rare lord stirs beneath the scar|21px|p10 9.61|mean 9.59|PASS
+AUDIT|@CanvasLayer@41/Chronicle|E3PO arrives with his helm under h|21px|p10 10.71|mean 10.65|PASS
+AUDIT|@CanvasLayer@41/Chronicle|Nessa Hollow is fitted with leathe|21px|p10 11.70|mean 11.69|PASS
+AUDIT|@CanvasLayer@41/Chronicle|Rolf the Younger, Petra of the For|21px|p10 12.79|mean 12.70|PASS
+AUDIT|@CanvasLayer@41/Chronicle|Someone walks out to look at the O|21px|p10 12.65|mean 13.39|PASS
+AUDIT|Spotlight/Pane_director|Now watching: Bellmire|24px|p10 16.19|mean 16.87|PASS
+AUDIT|Spotlight/Pane_director|DIRECTOR|30px|p10 17.00|mean 17.09|PASS
+AUDIT|Spotlight/Pane_bits|Now watching: MireWren the Elf Ran|24px|p10 5.89|mean 5.91|PASS
+AUDIT|Spotlight/Pane_bits|BITS|30px|p10 6.01|mean 6.01|PASS
+AUDIT|Spotlight/Pane_subs|Now watching: BellRinger the Human|24px|p10 6.31|mean 6.34|PASS
+AUDIT|Spotlight/Pane_subs|SUBSCRIBER|30px|p10 6.38|mean 6.38|PASS
+AUDIT|Spotlight/Pane_points|Now watching: AshenPike the Human |24px|p10 6.11|mean 6.12|PASS
+AUDIT|Spotlight/Pane_points|CHANNEL POINTS|30px|p10 6.23|mean 6.23|PASS
+TOTAL 15 elements, 0 below floor (17 px, 4.5:1)

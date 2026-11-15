@@ -151,6 +151,7 @@
     <button type="button" role="tab" id="tab-roll"      data-tab="roll"      aria-controls="roll"      aria-selected="false" tabindex="-1">Guild Roll</button>
     <button type="button" role="tab" id="tab-fallen"    data-tab="fallen"    aria-controls="fallen"    aria-selected="false" tabindex="-1">The Fallen<span class="n" id="nFallen"></span></button>
     <button type="button" role="tab" id="tab-lore"      data-tab="lore"      aria-controls="lore"      aria-selected="false" tabindex="-1">Lore</button>
+    <button type="button" role="tab" id="tab-bestiary"  data-tab="bestiary"  aria-controls="bestiary"  aria-selected="false" tabindex="-1">Bestiary</button>
     <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
     <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
@@ -304,6 +305,17 @@
       <div class="chips" id="loreChips" role="tablist" aria-label="Pick a lore chapter"></div>
       <div class="lore" id="loreBody"></div>
       <p class="note" id="loreNote">Bundled from the town's own words - no live fetch, refreshed when the hub is republished.</p>
+    </section>
+
+    <!-- Bestiary (H19): what the town has learned about what is down there. Every word is the
+         frozen lore bundle (app.js) or the viewer's own remembered Chronicle, drawn through el();
+         sigils are page-owned SVG whose only snapshot input is a hash index. -->
+    <section class="panel" id="bestiary" role="tabpanel" aria-labelledby="tab-bestiary" tabindex="0">
+      <h2 class="title">The Bestiary</h2>
+      <p class="eyebrow">What Bellmire has learned of what lies below</p>
+      <div class="chips" id="bestiaryChips" role="group" aria-label="Filter the Bestiary"></div>
+      <div id="bestiaryBody" role="region" aria-label="Bestiary entries" tabindex="0"></div>
+      <p class="note">A beast is marked <b>Met</b> once the town's remembered Chronicle names it; until then it is only a rumour, and its details stay veiled. Tells and full descriptions are not in the town's published words yet.</p>
     </section>
 
     <!--

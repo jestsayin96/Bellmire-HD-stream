@@ -289,7 +289,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -337,6 +337,7 @@ function render(p) {
   renderCommands(p.commands);
   renderRolls(p.rolls);
   renderLore();
+  try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -816,7 +817,8 @@ function renderHeroes(hs) {
   }
   const openNames = new Set();
   if (mineName) openNames.add(mineName);
-  if (params.get("open") && list[0]) openNames.add(String(list[0].name));
+  if (params.get("open") === "all") list.slice(0, 6).forEach((x) => openNames.add(String(x.name)));
+  else if (params.get("open") && list[0]) openNames.add(String(list[0].name));
   for (const h of list.slice(0, heroShown)) box.append(heroCard(h, openNames.has(String(h.name)), mineName !== "" && String(h.name) === mineName));
   const more = $("heroMore");
   if (list.length > heroShown) {
@@ -936,75 +938,230 @@ function heroCard(h, isOpen, isMine) {
   return det;
 }
 
-function heroSheet(h) {
-  const s = h.stats || {};
-  const order = ["str", "dex", "con", "int", "wis", "cha"];
-  const w = h.weapon || {}, armr = h.armour || {};
-  const sheet = el("div", "sheet");
-
-  // H11: pin this hero as "mine" so it is easy to find next visit (the on-stream
-  // Satchel used to keep a viewer's own hero in view; D48/L63 took it off the stream).
-  const shead = el("div", "sheethead");
-  const mineNow = isMyHero(h);
-  const pin = el("button", "pinbtn" + (mineNow ? " on" : ""), mineNow ? "Your hero \u2014 unpin" : "Pin as my hero");
-  pin.type = "button";
-  pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
-  pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
-  pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
-  shead.append(coat(h.name, "lg"), pin);
-  sheet.append(shead);
-
-  sheet.append(hpBar(h));
-  sheet.append(xpBar(h));
-
-  const stats = el("div", "stats");
-  for (const k of order) {
-    const cell = el("div", "stat");
-    cell.append(el("div", "k", k), el("div", "v", s[k] != null ? s[k] : "-"), el("div", "m", s[k] != null ? modOf(s[k]) : ""));
-    stats.append(cell);
+// ============================================================ H20: THE CHARACTER SHEET
+// A sheet, not a stat line. Built from the snapshot row ONLY: a field the publisher does
+// not send is drawn as a deliberate empty cell (dashed, "not published") and named in a
+// foot line - never estimated, never derived (no modifier-based initiative, no guessed max
+// HP). Every string reaches the DOM via el()/textContent; the HP/XP fills are CSSOM
+// numbers; icons are ICON_SET ids; the only snapshot-chosen thing is WHICH known icon.
+// Living heroes build from p.heroes; the fallen build the same sheet from their memorial
+// row (mode "fallen"), where most combat fields are honestly empty.
+const SHEET_SLOTS = [   // [label, gear-object key, icon, source]  - source: "w" weapon, "a" armour, "" extra
+  ["Main hand", "main_hand", null, "w"], ["Off hand", "off_hand", "shield", ""],
+  ["Head", "head", "loot", ""], ["Body", "body", "shield", "a"],
+  ["Hands", "hands", "loot", ""], ["Feet", "feet", "loot", ""],
+  ["Cloak", "cloak", "loot", ""], ["Neck", "neck", "loot", ""], ["Ring", "ring", "loot", ""],
+];
+function sheetPayload() { try { return last ? (MOCK ? withMock(last.payload) : last.payload) : null; } catch (e) { return null; } }
+const slotText = (v) => (v == null ? "" : typeof v === "object" ? (v.name != null ? String(v.name).trim() : "") : String(v).trim());
+// does `text` name `key` (lower-cased) as a whole word? Short names must not match inside other words.
+function namesIn(text, key) {
+  const s = String(text).toLowerCase();
+  let i = s.indexOf(key);
+  while (i >= 0) {
+    const before = i === 0 ? "" : s[i - 1], after = s[i + key.length] || "";
+    if (!/[a-z0-9]/.test(before) && !/[a-z0-9]/.test(after)) return true;
+    i = s.indexOf(key, i + 1);
   }
-  sheet.append(stats);
+  return false;
+}
+// the H14 history (live + remembered in this browser), filtered to the lines naming THIS hero
+function personalLines(name) {
+  const key = String(name || "").trim().toLowerCase();
+  if (!key) return [];
+  const p = sheetPayload();
+  chronMemEnsure();
+  const live = p ? chronEntries(p.chronicle) : [];
+  const liveKeys = new Set(live.map(histKey));
+  const rem = chronMem.filter((r) => !liveKeys.has(histKey(r))).map((r) => Object.assign(chronShape(r), { ts: histTs(r) }));
+  return live.concat(rem).filter((e) => namesIn(e.s, key)).slice(0, 8);
+}
+// where is this hero right now, in the town's own voice. Returns chips + any honest gap.
+function heroConditions(h, fallen, gaps) {
+  const out = [];
+  if (fallen) {
+    const day = pickNum(h.day);
+    out.push({ cls: "st-fallen", ic: "death", text: "Fallen" + (day != null && day > 0 ? " on day " + num(day) : "") });
+    return out;
+  }
+  const p = sheetPayload();
+  const key = nameOf(h).trim().toLowerCase();
+  let member = null, band = null;
+  if (p && Array.isArray(p.parties)) {
+    for (const b of normalizeParties(p.parties)) {
+      const m = b.members.find((x) => x.name.trim().toLowerCase() === key);
+      if (m) { member = m; band = b; break; }
+    }
+  }
+  if (band) {
+    out.push({ cls: "st-band", ic: "delve", text: "Delving with " + (band.name || "a band") + (band.floor != null ? ", floor " + num(band.floor) : "") });
+    if (member.status === "burning") out.push({ cls: "st-burning", ic: "flame", text: "Burning" });
+    else if (member.status === "fallen") out.push({ cls: "st-fallen", ic: "death", text: "Down in the dark" });
+    else if (member.status === "other" && member.statusText) out.push({ cls: "st-other", ic: null, text: member.statusText });
+  } else if (p && Array.isArray(p.parties)) {
+    out.push({ cls: "st-town", ic: "town", text: "Not in any band the town reports" });
+  }
+  const own = firstStr(h.status, h.state, h.activity, h.where).toLowerCase().trim();
+  if (own) {
+    const canon = PARTY_STATUS[own];
+    if (canon === "burning" && !out.some((c) => c.cls === "st-burning")) out.push({ cls: "st-burning", ic: "flame", text: "Burning" });
+    else if (canon === "fallen") out.push({ cls: "st-fallen", ic: "death", text: "Down" });
+    else if (!canon) out.push({ cls: "st-other", ic: null, text: titleCase(own).slice(0, 28) });
+  } else if (!band) gaps.push("what the hero is doing now (status / state)");
+  const max = pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax), hp = pickNum(h.hp);
+  const mhp = member && member.max != null ? member.max : max;
+  const chp = member && member.hp != null ? member.hp : hp;
+  if (mhp != null && chp != null && mhp > 0 && chp / mhp <= 0.5 && !(member && member.status === "fallen")) out.push({ cls: "st-hurt", ic: null, text: "Wounded" });
+  return out;
+}
+function sheetCell(k, v, sub, gap) {
+  const c = el("div", "stat" + (gap ? " unpub" : ""));
+  c.append(el("div", "k", k), el("div", "v", gap ? "\u2014" : v), el("div", "m", gap ? "" : (sub || "")));
+  if (gap) c.title = "The town does not publish this yet.";
+  return c;
+}
+function sheetSec(title) {
+  const sec = el("section", "ssec");
+  sec.append(el("p", "eyebrow", title));
+  return sec;
+}
+const signed = (n) => (n >= 0 ? "+" : "\u2212") + Math.abs(n);
 
-  // Equipped: weapon and armour as gear cards with item icons
-  sheet.append(el("p", "eyebrow", "Equipped"));
-  const gear = el("div", "gearstrip");
-  gear.append(
-    gearCard(weaponIcon(w.name), "Weapon", `${cap(w.name || "bare hands")}  ·  ${w.dice || "-"}`,
-             `${cap(w.name || "bare hands")} — ${w.dice || "-"} damage`),
-    gearCard("shield", "Armour", `${cap(armr.name || "none")}  ·  AC ${h.ac}`,
-             `${cap(armr.name || "none")} — armour class ${h.ac}`),
+function heroSheet(h, mode) {
+  const fallen = mode === "fallen";
+  const s = h.stats && typeof h.stats === "object" ? h.stats : {};
+  const gaps = [];
+  const sheet = el("div", "sheet charsheet" + (fallen ? " fallen" : ""));
+
+  // ---- identity: crest, name, title, calling, level; the pin sits at the right
+  const sid = el("div", "sid");
+  sid.append(coat(h.name, "lg"));
+  const who = el("div", "swho");
+  who.append(el("div", "sname", nameOf(h) || "(no name)"));
+  if (h.title) who.append(el("div", "stitle", String(h.title)));
+  const lv = pickNum(h.level);
+  const callingTxt = `${cap(h.species)} ${cap(h.class)}`.trim() || "Adventurer";
+  who.append(el("div", "scall", callingTxt + (lv != null && lv > 0 ? ", level " + num(lv) : "") + (h.rank ? "  \u00b7  " + h.rank : "")));
+  sid.append(who);
+  if (!fallen) {
+    // H11: pin this hero as "mine" so it is easy to find next visit
+    const mineNow = isMyHero(h);
+    const pin = el("button", "pinbtn" + (mineNow ? " on" : ""), mineNow ? "Your hero \u2014 unpin" : "Pin as my hero");
+    pin.type = "button";
+    pin.setAttribute("aria-pressed", mineNow ? "true" : "false");
+    pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
+    pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
+    sid.append(pin);
+  }
+  sheet.append(sid);
+
+  // ---- H20.2 condition and state, with an honest "last seen"
+  const conds = el("div", "sconds");
+  for (const c of heroConditions(h, fallen, gaps)) {
+    const chip = el("span", "scond " + c.cls);
+    if (c.ic) chip.append(icon(c.ic, "bmic"));
+    chip.append(document.createTextNode(c.text));
+    conds.append(chip);
+  }
+  if (!fallen && last) {
+    const a = ago(last.updated_at);
+    const stale = TEST === "stale" || !a || a.s > STALE_MIN * 60;
+    conds.append(el("span", "sseen" + (stale ? " stale" : ""),
+      stale ? "Last word from the town " + (a ? a.text : "at an unknown time") + " \u2014 this sheet may be out of date"
+            : "As of the town's last word, " + a.text));
+    gaps.push("a per-hero 'last seen' time (the sheet can only say when the whole town last reported)");
+  }
+  if (conds.childNodes.length) sheet.append(conds);
+
+  // ---- fallen: the manner of it, in the town's words
+  if (fallen) {
+    const doom = el("div", "sdoom");
+    const cause = h.killed_by ? String(h.killed_by) : "";
+    const day = pickNum(h.day);
+    if (cause || (day != null && day > 0)) doom.append(el("p", "sdline", "Taken by " + (cause || "the dark") + (day != null && day > 0 ? ", day " + num(day) : "") + "."));
+    if (h.epitaph) doom.append(el("p", "sepi", "\u201c" + String(h.epitaph) + "\u201d"));
+    if (doom.childNodes.length) sheet.append(doom);
+    else sheet.append(el("p", "empty", "The town wrote no epitaph for this one."));
+  } else {
+    sheet.append(hpBar(h));
+    sheet.append(xpBar(h));
+    if (pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax) == null) gaps.push("max HP (HP shows as vitality, not a depletion bar)");
+    if (pickNum(h.xp_next, h.next_xp, h.xp_to_next, h.to_next) == null) gaps.push("XP to next level");
+  }
+
+  // ---- abilities
+  const ab = sheetSec("Abilities");
+  const stats = el("div", "stats");
+  const missingStats = [];
+  for (const k of ["str", "dex", "con", "int", "wis", "cha"]) {
+    const v = pickNum(s[k]);
+    if (v == null) missingStats.push(k.toUpperCase());
+    stats.append(sheetCell(k, v != null ? v : "", v != null ? modOf(v) : "", v == null));
+  }
+  if (missingStats.length) gaps.push("ability scores (" + missingStats.join(", ") + ")");
+  ab.append(stats);
+  sheet.append(ab);
+
+  // ---- combat
+  const cb = sheetSec("Combat");
+  const cg = el("div", "stats combat");
+  const ac = pickNum(h.ac), hpv = pickNum(h.hp), maxv = pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax);
+  const th = pickNum(h.to_hit), pf = pickNum(h.prof), ini = pickNum(h.initiative, h.init), spd = pickNum(h.speed);
+  cg.append(
+    sheetCell("AC", ac, "", ac == null),
+    sheetCell("HP", hpv != null ? num(hpv) : "", maxv != null && maxv >= (hpv || 0) ? "of " + num(maxv) : "", hpv == null),
+    sheetCell("To hit", th != null ? signed(th) : "", "", th == null),
+    sheetCell("Prof.", pf != null ? signed(pf) : "", "", pf == null),
+    sheetCell("Initiative", ini != null ? signed(ini) : "", "", ini == null),
+    sheetCell("Speed", spd, "", spd == null),
   );
-  sheet.append(gear);
+  if (ac == null) gaps.push("armour class");
+  if (hpv == null && !fallen) gaps.push("hit points");
+  if (th == null) gaps.push("to-hit bonus");
+  if (pf == null) gaps.push("proficiency bonus");
+  if (ini == null) gaps.push("initiative");
+  if (spd == null) gaps.push("speed");
+  cb.append(cg);
+  const sv = el("dl", "kvlist");
+  const svTxt = h.saves ? String(h.saves) : "";
+  sv.append(kv("Saves", svTxt ? svTxt : el("span", "gapnote", "not published")));
+  if (!svTxt) gaps.push("saving throws");
+  cb.append(sv);
+  sheet.append(cb);
 
-  sheet.append(el("p", "eyebrow", "In a fight"));
-  const f = el("dl", "kvlist");
-  f.append(
-    kv("To hit", `+${n0(h.to_hit)} (proficiency +${n0(h.prof)})`),
-    kv("Saves", h.saves || "-"),
-  );
-  sheet.append(f);
-
-  // Carrying: icon chips
-  sheet.append(el("p", "eyebrow", "Carrying"));
-  const carry = el("div", "carry");
-  const brew = h.brews ? String(h.brews) : (+h.potions ? `${num(h.potions)} Mending` : "no brews");
-  carry.append(
-    carryChip("potion", brew),
-    carryChip("flask", `${num(h.oil)} oil`),
-    carryChip("coin", `${num(h.gold)} gold`),
-  );
-  sheet.append(carry);
-
-  // Satchel: the viewer's sellable items and the counter's prices (H11). Appears only
-  // when the snapshot carries items to sell; otherwise nothing is shown (never faked).
-  const satchel = satchelBlock(h);
-  if (satchel) sheet.append(satchel);
-
-  // Worn: cosmetics and any dye. A dye swatch colour comes from a WHITELISTED
-  // class (dye-<known colour>), never an inline style built from snapshot data;
-  // an unknown dye string shows as plain text only.
+  // ---- gear by slot: an empty slot is drawn as an empty slot, never omitted
+  const gb = sheetSec("Gear by slot");
+  const grid = el("div", "slots");
+  const gear = h.gear && typeof h.gear === "object" ? h.gear : (h.equipment && typeof h.equipment === "object" ? h.equipment : {});
+  const w = h.weapon, ar = h.armour != null ? h.armour : h.armor;
+  const unpubSlots = [];
+  for (const [label, key, ic, src] of SHEET_SLOTS) {
+    let val = "", known = false;
+    if (src === "w") { known = true; val = slotText(w) || slotText(gear[key]); }
+    else if (src === "a") { known = true; val = slotText(ar) || slotText(gear[key]); }
+    else if (gear[key] !== undefined) { known = true; val = slotText(gear[key]); }
+    const cell = el("div", "slot" + (val ? " filled" : " vacant") + (known ? "" : " unpub"));
+    const wi = src === "w" ? weaponIcon(val) : ic;
+    cell.append(icon(wi || "blade", "sic"));
+    const tx = el("div", "stx");
+    tx.append(el("span", "sl", label));
+    if (val) {
+      let line = cap(val);
+      if (src === "w" && w && typeof w === "object" && w.dice) line += "  \u00b7  " + w.dice;
+      if (src === "a" && ac != null) line += "  \u00b7  AC " + ac;
+      tx.append(el("span", "sv", line));
+      cell.title = line;
+    } else {
+      tx.append(el("span", "sv none", known ? (src === "w" ? "Empty \u2014 bare hands" : src === "a" ? "Empty \u2014 no armour" : "Empty") : "\u2014"));
+      cell.title = known ? label + " is empty." : "The town does not publish this slot yet.";
+      if (!known) unpubSlots.push(label.toLowerCase());
+    }
+    grid.append(cell);
+  }
+  if (unpubSlots.length) gaps.push("gear slots (" + unpubSlots.join(", ") + ")");
+  gb.append(grid);
+  // cosmetics: a dye swatch colour comes from a WHITELISTED class, never an inline style
   if (h.worn || h.dye) {
-    sheet.append(el("p", "eyebrow", "Worn"));
     const cos = el("div", "cosmetics");
     if (h.worn) cos.append(el("span", "cositem", String(h.worn)));
     if (h.dye) {
@@ -1015,16 +1172,60 @@ function heroSheet(h) {
       chip.append(sw, document.createTextNode(cap(d) + " dye"));
       cos.append(chip);
     }
-    sheet.append(cos);
+    gb.append(cos);
+  }
+  sheet.append(gb);
+
+  // ---- carrying + satchel (living only)
+  if (!fallen) {
+    const cr = sheetSec("Carrying");
+    const carry = el("div", "carry");
+    const brew = h.brews ? String(h.brews) : (+h.potions ? `${num(h.potions)} Mending` : "no brews");
+    carry.append(carryChip("potion", brew), carryChip("flask", `${num(h.oil)} oil`), carryChip("coin", `${num(h.gold)} gold`));
+    cr.append(carry);
+    sheet.append(cr);
+    // Satchel (H11): appears only when the snapshot carries items to sell; never faked.
+    const satchel = satchelBlock(h);
+    if (satchel) sheet.append(satchel);
   }
 
-  sheet.append(el("p", "eyebrow", "Record"));
+  // ---- the record, then THIS hero's own chronicle (H20.3)
+  const rc = sheetSec("Record");
   const rec = el("dl", "kvlist");
+  const dp = pickNum(h.deepest), kl = pickNum(h.kills), dl = pickNum(h.delves);
   rec.append(
-    kv("Deeds", `${num(h.kills)} kills  ·  deepest floor ${num(h.deepest)}  ·  ${num(h.delves)} delves`),
-    kv("Standing", num(h.standing)),
+    kv("Deepest", dp != null && dp > 0 ? "floor " + num(dp) : el("span", "gapnote", dp === 0 ? "never below the town" : "not published")),
+    kv("Foes slain", kl != null ? num(kl) : el("span", "gapnote", "not published")),
   );
-  sheet.append(rec);
+  if (!fallen) rec.append(kv("Delves", dl != null ? num(dl) : el("span", "gapnote", "not published")), kv("Standing", num(h.standing)));
+  rc.append(rec);
+  sheet.append(rc);
+
+  const life = sheetSec("Their own chronicle");
+  const lines = personalLines(h.name);
+  if (!lines.length) {
+    life.append(el("p", "empty", "No line in the chronicle names them yet. (The hub remembers about two days of it, in this browser.)"));
+  } else {
+    const ul = el("ul", "plife");
+    for (const e of lines) {
+      const li = el("li", "pl kind-" + e.key);
+      li.append(icon(e.icon, "chipic"));
+      li.append(el("span", "pls", e.s));
+      const a = e.at ? ago(e.at) : (e.ts ? ago(new Date(e.ts).toISOString()) : null);
+      if (a) li.append(el("span", "plw", a.text));
+      ul.append(li);
+    }
+    life.append(ul);
+    const deaths = lines.filter((e) => e.t === "death").length;
+    if (deaths) life.append(el("p", "plnote", deaths === 1 ? "The chronicle records one death." : "The chronicle records " + deaths + " deaths."));
+  }
+  sheet.append(life);
+
+  // ---- H20.4: what the sheet wanted and the town did not send
+  const wanted = ["background / origin", "alignment", "skills and proficiencies", "spells and spell slots", "hit dice", "inventory beyond the satchel"];
+  const gp = el("p", "sgaps");
+  gp.append(el("b", null, "Not yet sent by the town: "), document.createTextNode(gaps.concat(wanted).join("; ") + "."));
+  sheet.append(gp);
   return sheet;
 }
 
@@ -1103,6 +1304,13 @@ function renderFallen(fs) {
       facts.append(row);
     }
     if (facts.childNodes.length) g.append(facts);
+    // H20: the same character sheet, read from the memorial row; built lazily on first open
+    const sd = el("details", "gsheet");
+    sd.append(el("summary", null, "Read their sheet"));
+    let sbuilt = false;
+    sd.addEventListener("toggle", () => { if (sd.open && !sbuilt) { sbuilt = true; sd.append(heroSheet(f, "fallen")); } });
+    if (params.get("open") === "all") { sd.open = true; sbuilt = true; sd.append(heroSheet(f, "fallen")); }
+    g.append(sd);
     box.append(g);
   }
 }
@@ -2295,6 +2503,193 @@ function renderLore() {
   catch (e) { body.append(el("p", "lore-line", "A chapter could not be drawn.")); }
 }
 
+
+// ---------------------------------------------------------------- bestiary (H19)
+// What Bellmire has learned about what is down there. Words come ONLY from the frozen
+// lore bundle (lord_intros, unique_intros, events.monster_camps) read as-is; this page
+// invents no monster text. A sigil is a page-owned roundel: the name is hashed through
+// the same FNV + mixer as the crests (crestRecipe) and the hash only picks INDICES into
+// the constant whitelists below, so a lord's mark is drawn from a different charge set
+// than any hero's crest and a hostile name can never become markup, URL or style.
+// A beast is MET only when the browser's own remembered Chronicle names it; until then
+// it is a RUMOUR - sigil and name present, everything else veiled. Optional numbers
+// (faced, killed, deepest, standing) are read from p.bestiary[<page-owned key>] only
+// when the publisher sends them; today it does not, and the page never estimates them.
+const SIGIL_TINCT = ["#2a1c10", "#5a2a22", "#1d8f8a", "#c6922f", "#3a352e"];   // ink, oxblood, teal, gold, ash
+const SIGIL_RING = "M50 4A46 46 0 1 1 49.99 4Z";
+const SIGIL_DIV = [
+  null,
+  "M50 0H100V100H50Z",                    // per pale
+  "M0 50H100V100H0Z",                     // per fess
+  "M0 0L100 100H0Z",                      // per bend
+  "M50 0L100 50L50 100L0 50Z",            // lozenge field
+  "M0 74L50 36L100 74V100H0Z",            // chevron
+];
+const SIGIL_CHARGE = [
+  "M30 28L45 28L38 78Z M55 28L70 28L62 78Z",                                       // fangs
+  "M20 68C20 42 34 32 46 24C40 40 40 54 44 68Z M80 68C80 42 66 32 54 24C60 40 60 54 56 68Z",   // horns
+  "M12 50C30 24 70 24 88 50C70 76 30 76 12 50Z M38 50a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z",   // eye
+  "M28 22L40 22L52 80L42 80Z M46 18L58 18L70 76L60 76Z M62 22L74 22L84 70L76 70Z",             // claw
+  "M50 16C58 36 74 46 70 66C68 80 58 86 50 86C42 86 32 80 30 66C28 52 40 46 42 36C46 44 48 34 50 16Z",   // flame
+  "M12 64C26 38 44 30 50 22C56 30 74 38 88 64C76 58 66 60 58 68C54 60 46 60 42 68C34 60 24 58 12 64Z",  // wings
+  "M28 28H72V42H42V50H72V74H28V60H58V56H28Z",                                      // coil
+  "M24 76L28 36L40 54L50 28L60 54L72 36L76 76Z",                                    // broken crown
+  "M24 30L32 22L78 68L70 76Z M76 30L68 22L22 68L30 76Z",                            // crossed bones
+];
+function sigil(name, size) {
+  const r = crestRecipe("sigil|" + String(name == null ? "" : name));
+  const dv = r.div % SIGIL_DIV.length, ch = r.ch % SIGIL_CHARGE.length;
+  const ta = r.ta % SIGIL_TINCT.length;
+  const tb = (ta + 1 + (r.tb % (SIGIL_TINCT.length - 1))) % SIGIL_TINCT.length;
+  let tc = (tb + 1 + (r.tc % (SIGIL_TINCT.length - 1))) % SIGIL_TINCT.length;
+  if (tc === ta) tc = (tc + 1) % SIGIL_TINCT.length;
+  if (tc === tb) tc = (tc + 1) % SIGIL_TINCT.length;
+  if (!document.getElementById("sig-clip")) {
+    const defs = document.createElementNS(SVGNS, "svg");
+    defs.setAttribute("class", "coa-defs"); defs.setAttribute("width", "0"); defs.setAttribute("height", "0");
+    defs.setAttribute("aria-hidden", "true"); defs.setAttribute("focusable", "false");
+    const clip = document.createElementNS(SVGNS, "clipPath"); clip.setAttribute("id", "sig-clip");
+    const cp = document.createElementNS(SVGNS, "path"); cp.setAttribute("d", SIGIL_RING);
+    clip.append(cp); defs.append(clip); document.body.append(defs);
+  }
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "sigil sigil-" + (size === "sm" ? "sm" : "md"));
+  svg.setAttribute("viewBox", "0 0 100 100");
+  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
+  const g = document.createElementNS(SVGNS, "g"); g.setAttribute("clip-path", "url(#sig-clip)");
+  g.append(crestPath("M0 0H100V100H0Z", SIGIL_TINCT[ta]));
+  if (SIGIL_DIV[dv]) g.append(crestPath(SIGIL_DIV[dv], SIGIL_TINCT[tb]));
+  const c = crestPath(SIGIL_CHARGE[ch], SIGIL_TINCT[tc], SIGIL_TINCT[0]);
+  c.setAttribute("fill-rule", "evenodd");
+  g.append(c);
+  svg.append(g, crestPath(SIGIL_RING, "none", SIGIL_TINCT[3]));
+  return svg;
+}
+
+const BEAST_RUMOURS = [
+  "Whispers only. The guild has not stood before it.",
+  "Heard of, never met - and the town would keep it so.",
+  "A name from the old tales. Nobody here has seen it.",
+  "The sigil is all the guild has drawn of it so far.",
+  "Spoken of low, behind the hand. Not yet faced.",
+];
+const BEAST_KINDS = { lord: "A deep lord", named: "A named one", kin: "A kin of the deep" };
+let beastFilter = "all";
+const BEAST_CHIPS = [["all", "All"], ["lord", "Deep lords"], ["named", "Named ones"], ["kin", "Kin of the deep"]];
+const MOCK_BEAST_CHRON = [
+  { t: "boss", s: "The Hollow King came up the stair and the guild met it at the door.", at: new Date(Date.now() - 50 * 60000).toISOString() },
+  { t: "boss", s: "Heroes fell to the Hollow King before the watch drove it back.", at: new Date(Date.now() - 7 * 3600000).toISOString() },
+  { t: "fight", s: "A bog frog the size of a cart was put down at the quarry.", at: new Date(Date.now() - 3 * 3600000).toISOString() },
+  { t: "boss", s: "<img src=x onerror=alert(1)> was heard laughing in the dark.", at: new Date(Date.now() - 2 * 3600000).toISOString() },
+];
+function beastTerms(name) {
+  const n = String(name).toLowerCase().replace(/_/g, " ").trim();
+  const t = [n];
+  if (/[^s]es$/.test(n)) t.push(n.replace(/es$/, ""));
+  if (/s$/.test(n)) t.push(n.replace(/s$/, ""));
+  return t.filter((x) => x.length >= 4);
+}
+// how many remembered Chronicle lines name any of the terms, and when the newest did
+function beastMentions(rows, terms) {
+  let n = 0, newest = 0;
+  for (const r of rows) {
+    const s = String(r && r.s != null ? r.s : "").toLowerCase();
+    if (!s) continue;
+    for (const t of terms) if (s.indexOf(t) >= 0) { n++; const ts = histTs(r); if (ts > newest) newest = ts; break; }
+  }
+  return { n, newest };
+}
+function beastNum(v) { return Number.isFinite(+v) && +v >= 0 ? Math.min(+v, 1e9) : null; }
+function beastTitle(key) {
+  return String(key).replace(/_/g, " ").replace(/\b[a-z]/g, (m) => m.toUpperCase());
+}
+function beastCard(b, rows, stats) {
+  const m = beastMentions(rows, b.terms);
+  const card = el("article", "beast " + (m.n ? "met" : "rumour"));
+  const head = el("div", "beast-head");
+  head.append(sigil(b.name, "md"));
+  const hb = el("div", "beast-hb");
+  hb.append(el("h3", "beast-name", b.name));
+  hb.append(el("span", "beast-kind", BEAST_KINDS[b.kind] || ""));
+  head.append(hb);
+  card.append(head);
+  if (!m.n) {
+    card.append(el("span", "beast-flag", "Rumour"));
+    let h = 0; for (let i = 0; i < b.name.length; i++) h = (h * 31 + b.name.charCodeAt(i)) >>> 0;
+    card.append(el("p", "beast-veil", BEAST_RUMOURS[h % BEAST_RUMOURS.length]));
+    return card;
+  }
+  card.append(el("span", "beast-flag met", "Met"));
+  if (b.intro) card.append(el("p", "beast-intro", "\u201c" + b.intro + "\u201d"));
+  for (const camp of arr(b.camps)) {
+    const cb = el("p", "beast-camp");
+    cb.append(el("strong", "", camp.name + ". "), document.createTextNode(camp.while));
+    card.append(cb);
+  }
+  const facts = el("dl", "beast-facts");
+  const add = (k, v) => { facts.append(el("dt", "", k), el("dd", "", v)); };
+  add("Named in the Chronicle", num(m.n) + (m.n === 1 ? " remembered line" : " remembered lines"));
+  const a = m.newest ? ago(new Date(m.newest).toISOString()) : null;
+  if (a) add("Last named", a.text);
+  if (stats) {
+    const f = beastNum(stats.faced), k = beastNum(stats.killed), d = beastNum(stats.deepest);
+    if (f != null) add("Times faced", num(f));
+    if (k != null) add("Heroes it has killed", num(k));
+    if (d != null) add("Deepest push against it", num(d));
+    if (typeof stats.standing === "boolean") add("Today", stats.standing ? "It stands" : "It is down");
+  }
+  card.append(facts);
+  return card;
+}
+function renderBestiary(p) {
+  const box = $("bestiaryBody");
+  if (!box) return;
+  const chipBox = $("bestiaryChips");
+  if (chipBox && !chipBox.firstChild) {
+    for (const [id, label] of BEAST_CHIPS) {
+      const btn = el("button", "chip", label);
+      btn.setAttribute("type", "button"); btn.dataset.f = id;
+      btn.addEventListener("click", () => { beastFilter = id; renderBestiary(lastBeastPayload); });
+      chipBox.append(btn);
+    }
+  }
+  lastBeastPayload = p;
+  if (chipBox) for (const b of chipBox.children) {
+    const on = b.dataset.f === beastFilter;
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  }
+  box.textContent = "";
+  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
+  let rows = chronMem.slice();
+  const snap = p && p.bestiary && typeof p.bestiary === "object" ? p.bestiary : null;
+  const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
+  const beasts = [];
+  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
+  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
+  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
+  const fam = new Map();
+  for (const c of arr(src && src.events && src.events.monster_camps)) {
+    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
+    let f = fam.get(c.of);
+    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
+    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
+    for (const t of beastTerms(c.name)) f.terms.push(t);
+  }
+  for (const f of fam.values()) beasts.push(f);
+  const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
+  const metN = shown.filter((b) => beastMentions(rows, b.terms).n).length;
+  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
+  box.append(note);
+  const grid = el("div", "beast-grid");
+  // met first, then rumours; stable inside each group
+  const ordered = shown.map((b, i) => ({ b, i, met: beastMentions(rows, b.terms).n ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
+  for (const o of ordered) {
+    try { grid.append(beastCard(o.b, rows, statOf(o.b.key))); } catch (e) { /* one bad entry never blanks the book */ }
+  }
+  box.append(grid);
+}
+let lastBeastPayload = null;
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;
@@ -2327,7 +2722,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; pa
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -2450,6 +2845,29 @@ const MOCK_PARTIES = [
 ];
 // ?mock=fallen: a rich memorial row, a hostile name carrying every field, a bare name-only
 // row, and a row of odd types (nulls, NaN) - all must render cleanly, no "undefined".
+// ?mock=sheets (H20): three sheets that must each read as finished - a fresh level-1 hero with
+// almost nothing, a kitted veteran carrying every optional field, and a fallen hero - plus a
+// hostile name that must render as literal text.
+const MOCK_SHEET_HEROES = [
+  { name: "Pip", class: "rogue", species: "human", level: 1, ac: 11, hp: 8, xp: 0, gold: 3, deepest: 0, kills: 0, delves: 0 },
+  { name: "Brum the Cooper", class: "knight", species: "dwarf", level: 9, rank: "Veteran", title: "the Bold", standing: 212,
+    ac: 18, hp: 61, max_hp: 88, xp: 4200, xp_next: 5000, to_hit: 7, prof: 4, saves: "STR +7, CON +6", initiative: 1, speed: 25,
+    stats: { str: 18, dex: 12, con: 16, int: 9, wis: 11, cha: 10 }, weapon: { name: "warhammer", dice: "1d10+4" }, armour: { name: "plate" },
+    gear: { off_hand: "tower shield", head: "iron helm", hands: "gauntlets", feet: "greaves", ring: "Ring of the Ford" },
+    worn: "a corgi, a crown", dye: "teal", gold: 540, oil: 2, potions: 3, kills: 140, deepest: 31, delves: 22, status: "delving" },
+  { name: "<img src=x onerror=alert(1)>", class: "mage", species: "elf", level: 4, ac: 12, hp: 14, max_hp: 22, xp: 900, gold: 12, kills: 9, deepest: 5, delves: 4,
+    weapon: { name: "oak staff", dice: "1d6" } },
+];
+const MOCK_SHEET_FALLEN = [
+  { name: "Grimhollow", class: "knight", species: "orc", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12, title: "the Grim", weapon: { name: "greatsword" }, armour: { name: "mail" } },
+];
+const MOCK_SHEET_PARTIES = [{ name: "The Ford Wardens", floor: 7, members: [{ name: "Brum the Cooper", hp: 30, max_hp: 88, status: "burning", class: "knight" }, { name: "Pip", hp: 8, status: "ok" }] }];
+const MOCK_SHEET_CHRON = [
+  { t: "delve", s: "Brum the Cooper led the Ford Wardens down to floor 7.", at: new Date(Date.now() - 600000).toISOString() },
+  { t: "fight", s: "Brum the Cooper broke a bone-knight on floor 6.", at: new Date(Date.now() - 3600000).toISOString() },
+  { t: "death", s: "Grimhollow fell to a bone-knight on floor 31.", at: new Date(Date.now() - 7200000).toISOString() },
+  { t: "loot", s: "<img src=x onerror=alert(1)> found a scar-touched gem.", at: new Date(Date.now() - 900000).toISOString() },
+];
 const MOCK_FALLEN = [
   { name: "Grimhollow", class: "knight", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12, title: "the Bold", weapon: { name: "Warhammer" }, armour: "Chain shirt" },
   { name: "<img src=x onerror=alert(1)>", class: "mage", level: 4, kills: 1, deepest: 3, killed_by: "<b>a hostile</b>", epitaph: "<script>alert(1)</script>", day: 3, weapon: "oak staff", armour: { name: "<i>robe</i>" } },
@@ -2466,6 +2884,13 @@ const MOCK_TOWN_CHRON = [
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "bestiary") {         // H19: one met lord with real numbers, rumours, hostile name
+    out.chronicle = MOCK_BEAST_CHRON;
+    out.bestiary = { hollow_king: { faced: 3, killed: 2, deepest: 7, standing: true } };
+  }
+  if (MOCK === "sheets") {            // H20: bare L1 hero, kitted veteran, a fallen hero; hostile strings throughout
+    out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN; out.parties = MOCK_SHEET_PARTIES; out.chronicle = MOCK_SHEET_CHRON;
+  }
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "fallen") out.fallen = MOCK_FALLEN;

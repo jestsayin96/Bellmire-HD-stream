@@ -550,7 +550,7 @@ func _make_pane(k: String) -> Dictionary:
 	lb.add_theme_color_override("font_outline_color", UiTheme.INK)
 	lb.add_theme_constant_override("outline_size", UiTheme.px(6))
 	var chip := StyleBoxFlat.new()
-	chip.bg_color = Color(COL[k].r * 0.55, COL[k].g * 0.55, COL[k].b * 0.55, 0.85)
+	chip.bg_color = UiTheme.chip_bg(COL[k], 0.88, UiTheme.WHITE)
 	chip.content_margin_left = UiTheme.px(12)
 	chip.content_margin_right = UiTheme.px(12)
 	chip.content_margin_top = UiTheme.px(4)
@@ -570,7 +570,7 @@ func _make_pane(k: String) -> Dictionary:
 	kind_lb.add_theme_color_override("font_outline_color", UiTheme.INK)
 	kind_lb.add_theme_constant_override("outline_size", UiTheme.px(6))
 	var kind_chip := StyleBoxFlat.new()
-	kind_chip.bg_color = Color(COL[k].r * 0.72, COL[k].g * 0.72, COL[k].b * 0.72, 0.95)
+	kind_chip.bg_color = UiTheme.chip_bg(COL[k], 0.97)
 	kind_chip.border_color = COL[k]
 	kind_chip.set_border_width_all(maxi(2, UiTheme.px(2)))
 	kind_chip.set_corner_radius_all(UiTheme.CHIP_RADIUS)
@@ -802,7 +802,7 @@ func _now_watching(k: String) -> void:
 		txt += " \u2014 " + reason             # em dash before the reason the lane was bought
 	lb.visible = true
 	var chip := StyleBoxFlat.new()
-	chip.bg_color = Color(col.r * 0.55, col.g * 0.55, col.b * 0.55, 0.85)
+	chip.bg_color = UiTheme.chip_bg(col, 0.90, UiTheme.WHITE)
 	chip.content_margin_left = UiTheme.px(12)
 	chip.content_margin_right = UiTheme.px(12)
 	chip.content_margin_top = UiTheme.px(4)
@@ -816,7 +816,7 @@ func _now_watching(k: String) -> void:
 	if kind_lb:
 		var kcol: Color = COL[k] if (k == "director" or paid) else COL["wide"]
 		var kc := StyleBoxFlat.new()
-		kc.bg_color = Color(kcol.r * 0.72, kcol.g * 0.72, kcol.b * 0.72, 0.95) if not ambient else Color(kcol.r, kcol.g, kcol.b, 0.80)
+		kc.bg_color = UiTheme.chip_bg(kcol, 0.97 if not ambient else 0.88)
 		kc.border_color = COL[k]
 		kc.set_border_width_all(maxi(2, UiTheme.px(2)))
 		kc.set_corner_radius_all(UiTheme.CHIP_RADIUS)

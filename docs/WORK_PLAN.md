@@ -2,6 +2,8 @@
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
+- [ ] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
+
 - [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
       from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
@@ -584,6 +586,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       (e.g. the trodden dirt paths) to read as grass. Awaiting his eye.
 
 - [x] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX. (D21A_RAIDVFX OK: 3 kinds mend/heal/ward fired visibly in a lvl-2 scar raid with mage/cleric/sage enlisted; test harness fixes: notables.gd:606 dict entry, _d21 enlist-retry + headless _snap guard.)
+      TICKED (supervisor, Nov 15): shipped laptop e6a6812. D21b sub-parts landed on top the same
+      night - D21b.1 hit FX parity (9d332ab), D21b.2 defender deaths read (5d420c2), D21b.3 guards
+      form a muster line (29c5658).
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
   - [x] D21b.1 defender hit FX parity: a Townsfolk/HeroBody taking a melee hit now flashes white and a floating damage number pops (matches raider side); townwalk in_solid 0/6172 (4 raid cycles).
   - [x] D21b.2 defender deaths read: a Townsfolk/HeroBody that is slain by a raider (and a non-Monster raider slain by the defenders) gets a red flash + FELLED! banner at the one real death point in raids.gd, so the stream reads who just dropped at pane distance. Parity with Monster.die()'s own readable death; KO/grace/CON-save paths unchanged. Headless gate: parse 0; _offfloor 0/1340 INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR; _townwalk runs clean (in_solid=1/10898 at T=70s = 0.009%, well under PASS<0.2%).
@@ -604,6 +609,8 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 # Phase G - audio polish (owns sfx.gd) [D22]
 - [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
 - [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
+      MR. E'S CALL (Nov 15): generate fresh from music-studio with the mapping below. Pairs with D38 -
+      do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
 
@@ -1044,11 +1051,30 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
+      MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
+      TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into
+      assets/audio/music/, never modify the repo. Headless renderer: `npm run render` (cli/render.ts).
+      Read docs/STYLES.md and docs/AI_GUIDE.md there first - they define every knob below.
+      THE MAPPING (style x mood x role):
+        day / town      -> style playful_pizzicato, mood playful, role bed
+        night           -> style ambient_calm,      mood lowkey,  role bed
+        raid            -> style epic_cinematic,    mood hype,    role music
+        delve / dungeon -> style lofi_chill,        mood lowkey,  role bed
+        victory + defeat stings -> the 2-5 s sting maker
+      WHY `bed` MATTERS: role bed targets -20 LUFS and opens a speech pocket; the tool MEASURES the
+      300-3000 Hz share so the music does not fight Mr. E's voice on a 24/7 stream. Use bed for
+      everything that loops under talking. Only the raid cue is role `music` (-16 LUFS) because it is
+      meant to take over. Verify with the tool's own describe()/report: mood.pass true and
+      speechRoom.verdict pass for every bed before shipping it.
+      LICENSING: music-studio synthesizes from seeds - the output is original, not a sample of anyone's
+      track. Still add the credit note in assets/audio/LICENSE.txt saying which version generated them.
+      DONE: day/night/raid/delve beds + 2 stings in assets/audio/music/, wired through D22b's
+      transitions, each one's mood.pass and speechRoom verdict recorded in PROGRESS.md.
 - [ ] D39. TRADERS MUST MATTER. Today they arrive and leave with no effect. Make them carry SUPPLIES the town actually receives - and let bandits intercept them, so a lost caravan means the town goes without. An in-game event with stakes. DONE: a caravan arrives and the town gains; a caravan is taken and the town visibly suffers.
 - [ ] D40. FISHING ANIMATIONS AND WATER both need work. DONE: before/after capture of a catch and the water surface.
 
 # Mr. E's Nov 13 list - TWITCH (desktop owns the Twitch layer)
-- [ ] T4. VIEWERS SHAPE THE TOWN (he wants this to feel like a D&D campaign where actions have consequences). Let viewers spend bits or channel points to VOTE on how the town grows: what gets built first, what gets upgraded, what laws pass - with real, lasting, sometimes BAD consequences. Open-ended by design. Needs Mr. E on reward setup. DONE: a vote runs on stream, resolves, and the town visibly changes because of it.
+- [ ] T4. VIEWERS SHAPE THE TOWN (he wants this to feel like a D&D campaign where actions have consequences). Let viewers spend bits or channel points to VOTE on how the town grows: what gets built first, what gets upgraded, what laws pass - with real, lasting, sometimes BAD consequences. Open-ended by design. REWARD/AUTH SETUP IS DONE (Nov 15) - see T5's note; nothing is blocked on Mr. E. DONE: a vote runs on stream, resolves, and the town visibly changes because of it.
 
 # Phase M - from the D28 census + the HUD worker's U1 report (supervisor, Nov 13 01:45). IDs frozen.
 
@@ -1193,6 +1219,18 @@ the game -> the GAME rolls the d20 and applies the outcome -> it is Chronicled a
 this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do not design one.
 
 - [ ] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+      UNBLOCKED (Nov 15): Mr. E re-authorized the broadcaster token via device-code grant. The game's
+      Twitch app (client s4lpypbhumi34uocr0jqrscsxmjz2u) now holds channel:manage:polls AND
+      channel:read:polls alongside the original five (bits:read, channel:manage:redemptions,
+      channel:read:redemptions, channel:read:subscriptions, moderator:read:followers). Validated live
+      against id.twitch.tv/oauth2/validate as login jestsayin96, user_id 138821183; refresh token
+      present so the game renews itself. Token at user://twitch_token.json; the pre-polls token is
+      backed up beside it as twitch_token.json.bak_prepolls. NOTHING IS BLOCKED ON MR. E.
+      THE WORDS ARE ALREADY WRITTEN: data/lore_lines.json "propositions".entries, and the
+      viewer_roll crit/high/low/fumble outcome lines added in C-cycle 38. Read them, do not invent
+      parallel copies.
+      ARCHITECTURE (unchanged): the d20 resolves IN THE GAME; the hub only DISPLAYS the result from
+      the snapshot (H9 already renders it). Do not build an on-screen d20 - that left the HUD lane.
       spends channel points or bits to attempt something - upgrade a building, trigger an event,
       push a proposition - and a d20 roll decides how it goes. D&D consequences: a high roll does it
       well, a low roll does it badly or backfires, and the Chronicle says so in plain language.
@@ -1724,7 +1762,7 @@ Satchel is intentionally removed - a direction change, its work feeds the hub, n
       counter sell prices) and pin-your-hero, CSP unchanged, hostile-name test passes. Mr. E
       approved: "Yes - dormant until game publishes v=3, no downside." Code awaits game-build L63/D48
       to publish snapshot v=3; hub republish still Mr. E's call.
-- [ ] H12. LORE SECTION ON THE HUB (Mr. E's ask, Nov 14). Owner: HUB BUILDER (web/ only). The hub
+- [x] H12. LORE SECTION ON THE HUB (Mr. E's ask, Nov 14). Owner: HUB BUILDER (web/ only). The hub
       should carry the world's lore so a new viewer can get oriented without leaning on chat. Pull from
       data/lore_lines.json (READ from main; it is content-writer-owned, do not edit) and present the
       sections that read as world lore - town_life, growth_tiers.tiers (as the town's own history),
@@ -1734,8 +1772,9 @@ Satchel is intentionally removed - a direction change, its work feeds the hub, n
       a frozen copy with a visible last-updated. Icons from ICON_SET; no new URL/src/style. House
       palette (parchment/charcoal/teal, Gloock for section titles only).
       DONE: a viewer can read town/kingdom lore on the hub, hostile-name test still passes, invariants
-      intact, CSP unchanged.
-- [ ] H13. NO-SCROLL LAYOUT - the hub is one long page (Mr. E's ask, Nov 14). Owner: HUB BUILDER
+      intact, CSP unchanged.      TICKED (supervisor, Nov 15): shipped hub b470489, PUBLISHED LIVE gh-pages c926030. Mr. E reviewed the live page and signed off.
+
+- [x] H13. NO-SCROLL LAYOUT - the hub is one long page (Mr. E's ask, Nov 14). Owner: HUB BUILDER
       (web/ only). Reorganise the existing sections (Boards, Chronicle, Hero Sheets, Bands Below,
       Satchel, chat, lore from H12) so a viewer does not have to scroll one page end to end. Tabbed or
       sidebar-nav layout, remembers the last section the viewer picked (localStorage, control-stripped,
@@ -1745,6 +1784,7 @@ Satchel is intentionally removed - a direction change, its work feeds the hub, n
       DONE: no section is more than one viewport tall at 1080p; a viewer can reach every section in
       one click; hostile-name test passes across every tab; mobile/phone layout still works; invariants
       + CSP + hostile-name test all intact.
+      TICKED (supervisor, Nov 15): shipped hub 5c100ca + fix 8e248a5, PUBLISHED LIVE gh-pages c926030. Mr. E confirmed the tabs (Boards/Heroes/Bands/Chronicle) on the live page.
 
 # Phase AA - Mr. E's narrated clip 14-26-15 (transcribed) (2026-11-13 14:50)
 

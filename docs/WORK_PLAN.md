@@ -126,8 +126,20 @@ real claim easier to attack. Section 6 says plainly: his rights cover his ORIGIN
 particular selection, arrangement and combination that is Bellmire HD; the underlying CC0 assets
 stay free under their own terms, and where the two conflict for a given file the third-party
 licence wins. This makes the licence STRONGER, not weaker - everything it claims, it can hold.
-IF THE FIGHTOVERLAY LICENCE HAS NO SUCH CARVE-OUT, TELL MR. E IT NEEDS ONE. Same CC0 packs, same
-problem, and it is a five-minute fix there too.
+CORRECTION (16:49, same day): I ALSO TOLD MR. E TO SEND THAT CARVE-OUT TO FIGHTOVERLAY. THAT WAS
+WRONG AND IT HAS BEEN WITHDRAWN. I assumed fightoverlay carried the same CC0 packs as Bellmire
+without ever looking at that repository. It does not: its CC0 packs (0x72) and generated art were
+deleted months ago, all 56 characters are original, and its LICENSES.md already states that no
+asset there is stock, public domain, CC0 or third-party. Its only third-party dependency is two
+Google Fonts loaded from Google's CDN and not bundled. A carve-out for assets that do not exist
+would have WEAKENED that licence - it would imply some assets are not theirs when all of them are,
+and an infringer could point at the carve-out to argue the originals are CC0. Fightoverlay's
+licence is correct as it stands.
+THE LESSON IS FOR WHOEVER READS THIS NEXT: Bellmire's Section 6 is right BECAUSE Bellmire really
+does ship third-party CC0 packs - addons/kaykit_*, addons/quaternius_monsters,
+assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt and others are all present and were verified
+before the section was written. A carve-out is correct when the third-party assets exist and
+harmful when they do not. Check the repository, never the pattern.
 
 ### D89 - LICENCE PLUMBING (any worker, small, do it alongside your next item)
   1. A short licence line in README.md pointing at LICENSE, so it is seen before the code is.

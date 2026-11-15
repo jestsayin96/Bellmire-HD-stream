@@ -983,7 +983,12 @@ function personalLines(name, ring) {
   const live = p ? chronEntries(p.chronicle) : [];
   const liveKeys = new Set(live.map(histKey));
   const rem = chronMem.filter((r) => !liveKeys.has(histKey(r))).map((r) => Object.assign(chronShape(r), { ts: histTs(r) }));
-  return live.concat(rem).filter((e) => namesIn(e.s, key)).slice(0, 8);
+  const out = [];
+  for (const e of live.concat(rem)) {
+    const m = heroMatch(e, key);          // H26.2: the town's `who` first, the name guess only for untagged lines
+    if (m) { if (m === 2) e.inf = true; out.push(e); }
+  }
+  return out.slice(0, 8);
 }
 // where is this hero right now, in the town's own voice. Returns chips + any honest gap.
 function heroConditions(h, fallen, gaps) {
@@ -1229,11 +1234,13 @@ function heroSheet(h, mode) {
       const li = el("li", "pl kind-" + e.key);
       li.append(icon(e.icon, "chipic"));
       li.append(el("span", "pls", e.s));
+      if (e.inf) li.append(el("span", "pinf", "inferred from name"));
       const a = e.at ? ago(e.at) : (e.ts ? ago(new Date(e.ts).toISOString()) : null);
       if (a) li.append(el("span", "plw", a.text));
       ul.append(li);
     }
     life.append(ul);
+    if (lines.some((e) => e.inf)) life.append(el("p", "plnote", "Lines marked \u201cinferred from name\u201d were matched by this page from the wording; the rest are tagged to this hero by the town."));
     const deaths = lines.filter((e) => e.t === "death").length;
     if (deaths) life.append(el("p", "plnote", deaths === 1 ? "The chronicle records one death." : "The chronicle records " + deaths + " deaths."));
   }
@@ -1509,6 +1516,20 @@ function chronEntries(raw) {
     .slice(0, CHRON_MAX)
     .map(chronShape);
 }
+// H26: the town's own tags (D60). Each is validated to a bounded shape before it is stored or drawn:
+// `day` a whole number 0..999999, `kind` a bounded identifier, `who` at most 6 names of 40 characters.
+// All three are optional; absent or malformed means "untagged" and the page falls back, visibly.
+const chronDay = (v) => { const n = typeof v === "number" ? v : (typeof v === "string" && /^\d{1,6}$/.test(v) ? +v : NaN); return Number.isInteger(n) && n >= 0 && n <= 999999 ? n : null; };
+const chronKind = (v) => { const k = String(v == null ? "" : v).toLowerCase().trim(); return /^[a-z0-9][a-z0-9_-]{0,23}$/.test(k) ? k : ""; };
+const chronWho = (v) => {
+  const out = [];
+  for (const w of (typeof v === "string" ? [v] : arr(v)).slice(0, 8)) {
+    if (typeof w !== "string") continue;
+    const n = ctrlStrip(w).slice(0, 40);
+    if (n && !out.includes(n)) out.push(n);
+  }
+  return out.slice(0, 6);
+};
 function chronShape(e) {
       const rawT = String(e.t == null ? "" : e.t).toLowerCase().trim();
       const t = /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rawT) ? rawT : "other";   // sane key, else "other"
@@ -1516,7 +1537,14 @@ function chronShape(e) {
       return { t, known: !!known, label: known ? known.one : (t === "other" ? "Other" : titleCase(t)),
                 icon: CHRON_ICON.has(t) ? t : "other",
                key: t.replace(/[^a-z0-9]+/g, "-"),           // for the CSS class only
-               s: String(e.s), at: typeof e.at === "string" ? e.at : "" };
+               s: String(e.s), at: typeof e.at === "string" ? e.at : "",
+               day: chronDay(e.day), kd: chronKind(e.kind), who: chronWho(e.who) };
+}
+// copy the validated tags from a shaped line onto a remembered row (only the ones it has)
+function chronCarry(r, e) {
+  if (r.day == null && e.day != null) r.day = e.day;
+  if (!r.kind && e.kd) r.kind = e.kd;
+  if ((!r.who || !r.who.length) && e.who && e.who.length) r.who = e.who.slice();
 }
 
 // ---- H14: the chronicle remembers. A small rolling history lives in THIS browser only
@@ -1543,9 +1571,14 @@ function histClean(a) {
     if (!s) continue;
     const rt = String(r.t == null ? "" : r.t).toLowerCase().trim();
     const at = typeof r.at === "string" && r.at.length <= 40 && CHRON_AT_OK.test(r.at) ? r.at : "";
-    out.push({ t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
+    const row = { t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
                k: typeof r.k === "number" && isFinite(r.k) ? r.k : Date.now(),
-               n: Number.isInteger(r.n) && r.n > 0 && r.n < 2e9 ? r.n : 0 });
+               n: Number.isInteger(r.n) && r.n > 0 && r.n < 2e9 ? r.n : 0 };
+    const d = chronDay(r.day), kd = chronKind(r.kind), w = chronWho(r.who);    // H26: re-validated after the storage round trip
+    if (d != null) row.day = d;
+    if (kd) row.kind = kd;
+    if (w.length) row.who = w;
+    out.push(row);
   }
   return out;
 }
@@ -1571,8 +1604,9 @@ function chronRemember(live) {
   for (const e of live) {
     const r = { t: e.t, s: ctrlStrip(e.s).slice(0, CHRON_S_CAP), at: CHRON_AT_OK.test(e.at) ? e.at : "", k: now };
     if (!r.s) continue;
+    chronCarry(r, e);
     const old = by.get(histKey(r));
-    if (old) { if (!old.at && r.at) old.at = r.at; } else { r.n = ++chronSeq; by.set(histKey(r), r); }
+    if (old) { if (!old.at && r.at) old.at = r.at; chronCarry(old, e); } else { r.n = ++chronSeq; by.set(histKey(r), r); }
   }
   let rows = [...by.values()].filter((r) => histTs(r) >= now - CHRON_HIST_MS)
     .sort((a, b) => histTs(b) - histTs(a)).slice(0, CHRON_HIST_MAX);
@@ -1601,15 +1635,27 @@ function dayVoice(ts) {
 // line - no snapshot string is ever written into a URL, src, href or style.
 const CHRON_DISASTER = /disaster|\bfire\b|burn|drought|famine|sickness|plague|hurricane|tornado|earthquake|meteor|scarstorm|flood|blight|volcano|cold ?snap/i;
 const CHRON_FESTIVAL = /festival|\bfair\b|harvest|feast|celebrat|revel|tournament|carnival/i;
+// H26: a topic prefers the town's own `kind` tag when a line has one; only an untagged line is
+// matched by its wording (the old guess), and the Event filter says how many lines that was.
+const topicOf = (k, label, kinds, guess) => ({ k, label, kinds, test: (e) => (e.kd ? kinds.includes(e.kd) : guess(e)) });
 const CHRON_TOPICS = [
-  { k: "all", label: "Every kind of event", test: () => true },
-  { k: "raid", label: "Raids", test: (e) => e.t === "raid" || /\braid|bandit|siege/i.test(e.s) },
-  { k: "disaster", label: "Disasters", test: (e) => CHRON_DISASTER.test(e.s) },
-  { k: "festival", label: "Festivals", test: (e) => CHRON_FESTIVAL.test(e.s) },
-  { k: "death", label: "Deaths", test: (e) => e.t === "death" },
-  { k: "delve", label: "Delves", test: (e) => e.t === "delve" },
-  { k: "growth", label: "Town growth", test: (e) => e.t === "town" || /grows into|town level|\bbuilt\b|raised/i.test(e.s) },
+  { k: "all", label: "Every kind of event", kinds: [], test: () => true },
+  topicOf("raid", "Raids", ["raid"], (e) => e.t === "raid" || /\braid|bandit|siege/i.test(e.s)),
+  topicOf("disaster", "Disasters", ["disaster", "hunger"], (e) => CHRON_DISASTER.test(e.s)),
+  topicOf("festival", "Festivals", ["festival"], (e) => CHRON_FESTIVAL.test(e.s)),
+  topicOf("death", "Deaths", ["death"], (e) => e.t === "death"),
+  topicOf("delve", "Delves", ["delve"], (e) => e.t === "delve"),
+  topicOf("find", "Finds", ["find"], (e) => e.t === "loot"),
+  topicOf("growth", "Town growth", ["growth"], (e) => e.t === "town" || /grows into|town level|\bbuilt\b|raised/i.test(e.s)),
+  topicOf("town", "Town life", ["day", "treasury", "caravan", "arrival", "watch", "rally"], (e) => e.t === "town"),
 ];
+// H26.2: does this line belong to this hero (key lower-cased)? 1 = the town's own `who` tag says so,
+// 2 = inferred by the page from the name in the wording (only for a line with no `who`), 0 = no.
+function heroMatch(e, key) {
+  if (!key) return 1;
+  if (e.who && e.who.length) return e.who.some((n) => n.toLowerCase() === key) ? 1 : 0;
+  return namesIn(e.s, key) ? 2 : 0;
+}
 function chronFiltLoad() {
   try {
     const raw = localStorage.getItem(CHRON_F_KEY);
@@ -1835,7 +1881,7 @@ function paintChronicle() {
   const q = chronText.trim().toLowerCase();
   const hkey = chronHero.trim().toLowerCase();
   const topic = CHRON_TOPICS.find((x) => x.k === chronTopic) || CHRON_TOPICS[0];
-  const pass = (e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)) && (!hkey || namesIn(e.s, hkey)) && topic.test(e);
+  const pass = (e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)) && heroMatch(e, hkey) > 0 && topic.test(e);
   const anyFilter = !!(q || hkey || chronOff.size || chronTopic !== "all");
   const shownAll = entries.filter(pass);
   if (!shownAll.length) {
@@ -1846,19 +1892,25 @@ function paintChronicle() {
     return;
   }
 
-  // ---- H21.1 episodes: stretches split by a long quiet gap or by length
+  // ---- H26.1 days, not stretches: a line that carries the town's own `day` is grouped by it; a line
+  // without one (a v=3-era payload, an untagged row) falls back to the H21 wall-clock heuristic,
+  // and every group says which basis it is on.
   const eps = [];
   for (const e of entries) {
     const cur = eps[eps.length - 1];
-    if (cur && cur.last - e.ts <= CHRON_EP_GAP && cur.first - e.ts <= CHRON_EP_SPAN) { cur.items.push(e); cur.last = e.ts; }
-    else eps.push({ first: e.ts, last: e.ts, items: [e] });
+    if (e.day != null) {
+      if (cur && cur.day === e.day) { cur.items.push(e); cur.last = e.ts; }
+      else eps.push({ day: e.day, first: e.ts, last: e.ts, items: [e] });
+    } else if (cur && cur.day == null && cur.last - e.ts <= CHRON_EP_GAP && cur.first - e.ts <= CHRON_EP_SPAN) { cur.items.push(e); cur.last = e.ts; }
+    else eps.push({ day: null, first: e.ts, last: e.ts, items: [e] });
   }
-  let drawn = 0, sawEarlier = false;
+  let drawn = 0, sawEarlier = false, dayGroups = 0, clockGroups = 0;
   for (const ep of eps) {
     const items = ep.items.filter(pass);
     if (!items.length) continue;
     const hasLive = ep.items.some((e) => !e.rem);
-    const key = "e" + ep.last;
+    const key = (ep.day != null ? "d" + ep.day + "-" : "e") + ep.last;
+    if (ep.day != null) dayGroups++; else clockGroups++;
     const focusIn = chronFocusId != null && ep.items.some((e) => e.n === chronFocusId);
     const dflt = drawn === 0 || anyFilter;     // the newest stretch (or any filter hit) is open; older ones fold
     let open = focusIn ? true : (chronOpen.has(key) ? chronOpen.get(key) : dflt);
@@ -1869,8 +1921,12 @@ function paintChronicle() {
     head.type = "button";
     head.setAttribute("aria-expanded", open ? "true" : "false");
     head.setAttribute("aria-controls", hid);
-    head.append(el("span", "cep-title", drawn === 0 && now - ep.first < CHRON_EP_GAP ? "Now, as the town tells it" : dayVoice(ep.first)),
+    const fresh = drawn === 0 && now - ep.first < CHRON_EP_GAP;
+    const title = ep.day != null ? "Day " + num(ep.day) + (fresh ? " \u2013 now, as the town tells it" : "")
+      : fresh ? "Now, as the town tells it" : dayVoice(ep.first);
+    head.append(el("span", "cep-title", title),
       el("span", "cep-when", chronRange(ep.first, ep.last) + " \u00b7 " + plural(items.length, "line", "lines")),
+      el("span", "cep-basis", ep.day != null ? "Grouped by the town\u2019s own day." : "No town day on these lines - grouped by gaps in this browser\u2019s clock, a guess."),
       el("span", "cep-sense", chronSense(items)));
     const body = el("ol", "cep-list");
     body.id = hid;
@@ -1894,6 +1950,12 @@ function paintChronicle() {
       const cb = el("div", "cbody");
       const ch = el("div", "chead");
       ch.append(el("span", "ckind", e.label));    // textContent; a novel kind shows its own name, escaped
+      if (e.who && e.who.length) ch.append(el("span", "cwho", e.who.join(", ")));   // the town's `who` tag, textContent
+      if (hkey && heroMatch(e, hkey) === 2) {
+        const inf = el("span", "cinf", "inferred from name");
+        inf.title = "This line carries no hero tag from the town; the page matched the name in its wording.";
+        ch.append(inf);
+      }
       const a = ago(e.at);
       if (a) {
         const time = el("time", "cwhen", a.text);
@@ -1918,8 +1980,26 @@ function paintChronicle() {
   note.className = "note";
   note.textContent = (shownAll.length === entries.length
     ? entries.length + (entries.length === 1 ? " entry" : " entries")
-    : "Showing " + shownAll.length + " of " + entries.length) + ", newest first, in " + plural(drawn, "stretch", "stretches") +
+    : "Showing " + shownAll.length + " of " + entries.length) + ", newest first, in " +
+    (clockGroups === 0 ? plural(drawn, "day", "days") + " by the town\u2019s own calendar"
+      : dayGroups === 0 ? plural(drawn, "stretch", "stretches") + " guessed from gaps in the clock (these lines carry no town day)"
+      : plural(dayGroups, "town day", "town days") + " and " + plural(clockGroups, "clock-guessed stretch", "clock-guessed stretches")) +
     (drawn > 1 ? " - tap one to fold or open it." : ".");
+  {
+    const extra = [];
+    if (chronTopic !== "all") {
+      const noKind = entries.filter((e) => !e.kd).length, shownNoKind = shownAll.filter((e) => !e.kd).length;
+      extra.push(noKind ? plural(noKind, "line", "lines") + " in the journal carry no kind from the town and could not be classified; " +
+        (shownNoKind ? (shownNoKind === 1 ? "1 of them was" : num(shownNoKind) + " of them were") + " matched by wording." : "none was matched by wording.")
+        : "Every line carries the town\u2019s own kind.");
+    }
+    if (hkey) {
+      const inferred = shownAll.filter((e) => heroMatch(e, hkey) === 2).length;
+      extra.push(inferred ? plural(inferred, "line is", "lines are") + " inferred from the hero\u2019s name" + (shownAll.length > inferred ? "; the other " + (shownAll.length - inferred) + " are tagged to them by the town." : ".")
+        : "Every line shown is tagged to this hero by the town.");
+    }
+    if (extra.length) note.textContent += " " + extra.join(" ");
+  }
   if (chronFocusId != null) {
     const target = document.getElementById("moment-" + chronFocusId);   // id built from an integer we own
     chronFocusId = null;
@@ -3295,6 +3375,22 @@ const MOCK_TOWN_CHRON = [
   { t: "town", s: "Bellmire grows into Village.  (town level 3)", at: new Date(Date.now() - 27 * 3600000).toISOString() },
   { t: "raid", s: "Bandits tested the west road; the caravans came through bled.", at: new Date(Date.now() - 52 * 3600000).toISOString() },
 ];
+// ?mock=journal (H26): a D60-era payload - rows carry the town's `day`, and tagged rows carry `kind` and
+// `who`. "The Cooper" / "Brum" never spell the roster name "Brum the Cooper", so only `who` finds them.
+// Hostile strings sit in a `who` entry and in a `kind` value (the kind is not a bounded identifier, so
+// it must be treated as untagged). ?mock=journal3 is the SAME rows with the new fields stripped - a v=3 payload.
+const MOCK_JOURNAL = [
+  { t: "death", s: "The Cooper fell on floor 7, run through by a bone-knight.", at: new Date(Date.now() - 4 * 60000).toISOString(), day: 41, kind: "death", who: ["Brum the Cooper"] },
+  { t: "fight", s: "Brum's hammer rang true on floor 6.", at: new Date(Date.now() - 12 * 60000).toISOString(), day: 41, kind: "delve", who: ["Brum the Cooper"] },
+  { t: "loot", s: "A teal-dyed cloak came up out of the scar.", at: new Date(Date.now() - 30 * 60000).toISOString(), day: 41, kind: "find", who: ["<img src=x onerror=alert(1)>"] },
+  { t: "raid", s: "Bandits tested the west gate and were turned back.", at: new Date(Date.now() - 50 * 60000).toISOString(), day: 41, kind: "raid" },
+  { t: "town", s: "A line the town sent with a malformed kind.", at: new Date(Date.now() - 70 * 60000).toISOString(), day: 41, kind: "<img src=x onerror=alert(1)>", who: [7, null, "Pip"] },
+  { t: "town", s: "Day 40 begins - 48 souls, 1280 gold.", at: new Date(Date.now() - 20 * 3600000).toISOString(), day: 40, kind: "day" },
+  { t: "town", s: "Pip signed the guild ledger, and Brum the Cooper stood witness.", at: new Date(Date.now() - 21 * 3600000).toISOString(), day: 40 },
+  { t: "town", s: "Fire in Craft Row - a forge banked wrong.", at: new Date(Date.now() - 22 * 3600000).toISOString(), day: 40, kind: "disaster" },
+  { t: "delve", s: "Four delvers went down together and three came back up.", at: new Date(Date.now() - 44 * 3600000).toISOString(), day: 39, kind: "delve", who: ["Pip", "Brum the Cooper"] },
+  { t: "lore", s: "An old line with no day, no kind, no who.", at: new Date(Date.now() - 46 * 3600000).toISOString() },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
@@ -3304,6 +3400,11 @@ function withMock(p) {
   }
   if (MOCK === "sheets") {            // H20: bare L1 hero, kitted veteran, a fallen hero; hostile strings throughout
     out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN; out.parties = MOCK_SHEET_PARTIES; out.chronicle = MOCK_SHEET_CHRON;
+  }
+  if (MOCK === "journal" || MOCK === "journal3") {
+    out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN;
+    out.chronicle = MOCK === "journal" ? MOCK_JOURNAL : MOCK_JOURNAL.map((r) => ({ t: r.t, s: r.s, at: r.at }));
+    if (MOCK === "journal3") out.v = "3";
   }
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;

@@ -2,7 +2,35 @@
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
-- [ ] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
+- [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
+  RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
+  NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
+
+- [ ] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
+      "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
+      BUILD (townsfolk.gd, rig.gd, hero_body.gd, town_nav.gd).
+      THIS IS A DIFFERENT BUG FROM THE THREE ALREADY ON THE BOARD - do not close it by re-fixing those:
+        * D50 (ticked) was agents FROZEN and their anim stuttering - missing callers. Fixed.
+        * D44/D50 (open) is agents WEDGED against props and stopping. A pinned agent.
+        * D52 (open) is the hero never pathing to the dungeon mouth. A state bug.
+        * D58 (this) is GAIT QUALITY on agents that ARE walking normally. They move from A to B
+          fine - they just look WRONG doing it. Nothing currently owns this.
+      LIKELY CAUSES, in the order worth checking (measure before changing anything):
+        1. Animation playback rate is fixed while nav velocity varies, so feet slide across the
+           ground instead of planting. This is the classic cause and the most likely one here.
+           Drive the walk AnimationPlayer/AnimationTree speed_scale from the agent's ACTUAL
+           per-frame velocity, not from a constant.
+        2. No blend between idle / walk / run - agents snap between clips instead of easing, which
+           reads as lurching.
+        3. No turn-in-place: an agent changing direction slides through the turn while the walk
+           cycle keeps playing forward.
+        4. Nav agents arriving with tiny residual velocity, so the walk clip plays at a crawl near
+           waypoints and looks laboured.
+      Fix the ones the measurement actually implicates. Do not rewrite the rig.
+      DONE: a 1080p capture of the market square with at least 15 townsfolk walking at once, plus a
+      logged check that animation speed tracks agent velocity (print velocity vs speed_scale for 10
+      agents over 30 s - they must correlate, not sit flat). In the capture: no foot sliding, no
+      snapping between clips, turns read as turns. Mr. E's bar for this one is WOW, not "oh".
 
 - [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
@@ -716,6 +744,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] H5. TWITCH CHAT EMBED + clickable local d20. CAUTION: minimal CSP change for the embed, documented in HUB_SECURITY.md, flagged for supervisor review; page stays read-only. DONE: chat loads, d20 rolls, CSP documented, invariants intact.
 - [x] H6. TWITCH LOGIN scaffolding (device-code OAuth, public client id) so viewers see their own hero - the client id is NEEDS-MR.-E; wire against a placeholder. Still no viewer writes (read-only through Phase 2). DONE: flow wired/testable w/ placeholder, token step gated on Mr. E.
 - [x] H7. PERF/A11Y/POLISH (stretch): fast first paint, no layout shift, lazy-render the crowd, reduced-motion, contrast+focus, keep offline/stale honesty. DONE: fast on a phone, a11y pass, invariants intact.
+- [ ] H14. THE CHRONICLE REMEMBERS (Mr. E's world should have a past, not just a present). Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md). Today the hub's Chronicle shows only what is in the current snapshot row, so a viewer who comes back after an hour has missed everything. Keep a rolling client-side history in the browser (localStorage, newest-first, hard-capped - roughly the last 300 entries or 48 h, whichever is smaller, and drop the oldest first so storage never grows without bound). On load, show the live snapshot entries first, then a quiet "Earlier" divider, then the remembered ones, with day dividers in the town's own voice. De-duplicate against the live set so nothing appears twice. This is READ-ONLY and per-browser: no write path, no new fetch, no new origin, no CSP change. Remembered entries are attacker-controlled Twitch text that has been through one storage round-trip, so they must come back out through the SAME el()/textContent path as live ones - never innerHTML, never a URL/src/href/style, icons only via the ICON_SET whitelist. Storage can be absent, full or throw (private windows): every read and write wrapped, and the page must render correctly with the history empty or unavailable. DONE: with ?mock=chronicle, load, change the mock, reload - older lines appear under "Earlier" with a day divider and no duplicates; a hero named <img src=x onerror=alert(1)> survives a store-and-reload and still renders as literal text; clearing site data leaves the page working; the stored payload stays under the cap after a long session.
+
+- [ ] H15. EVERY HERO GETS A CREST (heraldry - the single cheapest way to make 200 names read as a guild). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). Give each hero a small coat of arms, drawn as inline SVG the page owns, derived deterministically from the hero's name: hash the name, then pick a field division, two tinctures and one charge from PAGE-OWNED whitelists (the same discipline as ICON_SET - the snapshot value chooses WHICH known shape, it never supplies one). Use the existing palette - deep ink, parchment, the one teal, restrained gold - so the crests read as one house, not a rainbow. Show the crest on the hero card, larger on the opened hero sheet, and beside the top entries on the boards. Keep it cheap: no image files, no new fetch, no CSP change, and the crest must not slow the 200-hero mock's first paint. DONE: the 200-hero mock shows visibly distinct crests with no two adjacent cards looking alike at a glance; the same name always yields the same crest across reloads; a hostile name renders as text AND still produces a valid crest; first paint on the 200-hero mock is no worse than before (state the before/after number).
+
+- [ ] H16. THE HALL OF THE FALLEN. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). The Fallen list from H4 is a list of names; make it a memorial a viewer would stop and read. Per fallen hero: the crest (H15 if it has shipped), the epitaph, what took them, how deep they got, their level and the gear they were wearing when they fell - whichever of those the snapshot actually carries. The content writer has already written the words: epitaphs live in data/lore_lines.json and were frozen into the hub by H12 - read from what is already there, do not invent a parallel set. Fields the publisher does not send yet must degrade quietly to an honest blank, never to "undefined" and never to a guess; list in web/NOTES.md any field you wanted and the snapshot lacks, so the supervisor can raise it with the game build worker. DONE: a mock with fallen heroes shows the memorial with epitaph and cause; a mock whose fallen rows carry only a name still renders cleanly with no console error and no placeholder junk; the hostile-name test passes in the new section; the no-scroll H13 tab discipline still holds.
+
+- [ ] H17. THE HUB ON A PHONE. Owner: HUB BUILDER (web/index.html, web/style.css, web/NOTES.md). Most viewers reach a Twitch stream's companion page on a handset, and H13's tabbed no-scroll layout was designed at desktop width. Make the hub work at 390x844 and at tablet width: tabs reachable with a thumb and never clipped, hero sheets readable without pinch-zoom, the Chronicle legible, the die and boards not overflowing, tap targets at least 44 px, no horizontal scroll at any supported width. Refine the existing layout - do not replace the palette, the Gloock wordmark treatment or the tab model. No framework, no new font, no CDN, no CSP change. DONE: screenshots at 390x844, 768 and 1280 wide, all three with zero horizontal scroll; every tab reachable and every section readable at 390 without zoom; ?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1 all still pass at 390; hostile-name test still passes.
+
 # CHANGELOG 16:01 (supervisor): H1-H7 built, security-reviewed and PUBLISHED LIVE (gh-pages 0ac04f8). Twitch sign-in wired with Mr. E's public client id; the ?twitch_client override removed as a phishing vector. Hub queue is now empty - only Phase 3 (gated) remains.
 
 # Phase 3 (NOT now - stays read-only until RLS designed): friends/party, a write-backed leaderboard, any viewer WRITE path.
@@ -1609,7 +1645,15 @@ CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confectio
       item he corrected three times is done. The styling complaint below is a SEPARATE, new item,
       not a reason to leave L39 open.
 
-- [ ] L61. THE CHRONICLE MUST BE A SCROLL, not a box. Owner: DESKTOP HUD (hud_dock.gd).
+- [x] L61. THE CHRONICLE MUST BE A SCROLL, not a box. Owner: DESKTOP HUD (hud_dock.gd).
+  RESULT (2026-11-15, hud-ui bdd7f59, U-cycle 25): the scroll was built over U23/U24; U25 closed the
+  remainder Mr. E named - Chronicle ink 18 -> 21 px (feed_hud.CHRON_PX), the wordmark set in Gloock
+  (gilt cream with a dark drop shadow, 17 px - the burned-brown first pass vanished on the dark
+  spindle), sheet inset 9 -> 15 px so 21 px ink clears the illuminated margin rule. Capacity is 7
+  lines at 21 px in the 714x295 box. Parse 0 errors; windowed 1920x1080 capture in
+  renders/cycles/20261115_u25 was LOOKED at - wordmark legible, 7 lines readable, no spindle or
+  margin overlap. The ornate/illuminated craft continues under the HUD worker's later items if
+  Mr. E asks for more; the item as written is met.
       U-cycle gave it a parchment panel and Mr. E approved the direction but wants it taken all the
       way: make the Chronicle READ AS AN UNFURLED SCROLL, something unique, the signature piece of
       the stream. Build it in hud_dock.gd (skin only; keep the current size, the ~18 px text and the

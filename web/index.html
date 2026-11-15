@@ -133,6 +133,7 @@
     <a href="#dice">The die</a>
     <a href="#roll">Guild Roll</a>
     <a href="#fallen">The Fallen<span class="n" id="nFallen"></span></a>
+    <a href="#lore">Lore</a>
     <a href="#commands">Commands</a>
   </nav>
 
@@ -248,6 +249,26 @@
     <section class="plain" id="commands">
       <h2 class="title light">Chat commands <small>type them in Twitch chat</small></h2>
       <div class="cmds" id="cmdList"></div>
+    </section>
+
+
+    <!--
+      H12: Lore. The town's own text, read into the hub so a new viewer can get
+      oriented without leaning on chat. Pulled from data/lore_lines.json on the
+      main branch (content-writer-owned, read-only to this builder) and FROZEN
+      into app.js as LORE_FROZEN - no new fetch, no CSP change, no new origin.
+      Every string is Twitch-era text and reaches the DOM ONLY via el()/textContent;
+      every icon is a whitelisted ICON_SET glyph. The "last-updated" line below
+      is the source commit so a viewer can see when it was last refreshed. Local
+      check: ?mock=lore (injects a hostile name into the lore stream; must render
+      as literal text).
+    -->
+    <section class="panel" id="lore">
+      <h2 class="title">Lore of the valley <small id="loreStamp"></small></h2>
+      <p class="eyebrow">What the town itself says</p>
+      <div class="chips" id="loreChips" role="tablist" aria-label="Pick a lore chapter"></div>
+      <div class="lore" id="loreBody"></div>
+      <p class="note" id="loreNote">Bundled from the town's own words - no live fetch, refreshed when the hub is republished.</p>
     </section>
 
     <!--

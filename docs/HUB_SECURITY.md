@@ -409,3 +409,60 @@ On each hero object (all optional, all defended). Canonical key, then accepted a
    <img src=x onerror=alert(1)> renders as literal text; zero <img>; no alert), and the Satchel
    is simply absent on a hero carrying no sell data.
 If any of that is not true, do not republish.
+
+
+## H12 - LORE SECTION ON THE HUB (Nov 15)
+
+The hub now carries a Lore section (index.html #lore, app.js renderLore). It lets
+a new viewer get oriented from the town's own words without leaning on chat.
+
+### Data origin and why it is BUNDLED, not fetched
+- Source: data/lore_lines.json on the main branch (content-writer-owned; this builder
+  does not edit it). The hub subset was taken at commit 1669c1b (2026-11-14).
+- The current CSP has NO connect-src 'self', so a runtime fetch of a .json file
+  would REQUIRE a CSP change. H12 is explicit: "No new fetch; load from the same
+  snapshot pipeline OR bundle a frozen copy with a visible last-updated." The
+  snapshot does not carry lore today, so the bundle path is taken.
+- The frozen subset is stored in app.js as LORE_FROZEN (a plain JS object literal).
+  LORE_SRC_SHA and LORE_SRC_DATE are rendered on the section header as
+  "frozen from the game's own words (<sha>, <date>)" so a viewer can see when it
+  was last refreshed. To refresh: re-run the H12 extractor, update LORE_FROZEN /
+  LORE_SRC_SHA / LORE_SRC_DATE, commit, and the supervisor republishes.
+- CSP: UNCHANGED. No new origin, no new directive, no new icon id.
+
+### Hostile-input posture
+Every string in LORE_FROZEN is treated as hostile - the content pipeline feeds the
+same file viewers can shape through Twitch chat and lore commands. Every lore
+string reaches the DOM ONLY via el()/textContent (or document.createTextNode in
+loreTaleBlock). The lord/disaster/event KEYS are page-authored lookup keys, but
+they are still rendered as text, never built into the DOM. Icons are drawn with
+icon() against the existing ICON_SET whitelist - the chapter chooses WHICH known
+glyph (town / shield / raid / fight / death / lore), never a new id.
+
+### Subset bundled (stripped of _alt variants and _note chaff)
+- town_life: crier, market, growth (lists of strings)
+- growth_tiers.tiers: the town's named stages (name, crier line, "see" line)
+- e3po: intro, says, town_talk (Commander E3PO's lines)
+- lord_intros + unique_intros: the deep and named lords
+- disasters: begin, during, pass, cost per kind
+- events.bandit_camps, events.monster_camps, events.wandering_boss: appears,
+  while, cleared (+ note for the wanderer)
+
+### What the supervisor should check before republishing
+1. CSP unchanged (diff index.html head - no new directive or host).
+2. renderLore + loreTownLife / loreGrowth / loreE3po / loreLords / loreTales /
+   loreTaleBlock / loreLines / loreSubhead build the DOM only through el() and
+   document.createTextNode; grep confirms no new innerHTML/outerHTML/
+   insertAdjacentHTML/document.write/eval/new Function; every icon() call
+   passes a literal id in ICON_SET.
+3. LORE_FROZEN and LORE_SRC_SHA/LORE_SRC_DATE match data/lore_lines.json on
+   origin/main at the stamped commit - no edits to the data in flight.
+4. ?mock=lore passes the hostile-name test (the crier line
+   <img src=x onerror=alert(1)> and the matching hostile lord key render as
+   literal text; zero <img>; no alert).
+5. ?state=empty / ?state=fail / ?state=stale still render honestly; the lore
+   section's own body is INDEPENDENT of the snapshot - it draws from the bundle
+   whether the fetch succeeds or not. That is on purpose: the lore is the town's
+   named text, not a live report.
+
+If any of that is not true, do not republish.

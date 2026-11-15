@@ -1,5 +1,156 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
+
+- [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
+  RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
+  NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
+
+- [ ] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
+      "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
+      BUILD (townsfolk.gd, rig.gd, hero_body.gd, town_nav.gd).
+      THIS IS A DIFFERENT BUG FROM THE THREE ALREADY ON THE BOARD - do not close it by re-fixing those:
+        * D50 (ticked) was agents FROZEN and their anim stuttering - missing callers. Fixed.
+        * D44/D50 (open) is agents WEDGED against props and stopping. A pinned agent.
+        * D52 (open) is the hero never pathing to the dungeon mouth. A state bug.
+        * D58 (this) is GAIT QUALITY on agents that ARE walking normally. They move from A to B
+          fine - they just look WRONG doing it. Nothing currently owns this.
+      LIKELY CAUSES, in the order worth checking (measure before changing anything):
+        1. Animation playback rate is fixed while nav velocity varies, so feet slide across the
+           ground instead of planting. This is the classic cause and the most likely one here.
+           Drive the walk AnimationPlayer/AnimationTree speed_scale from the agent's ACTUAL
+           per-frame velocity, not from a constant.
+        2. No blend between idle / walk / run - agents snap between clips instead of easing, which
+           reads as lurching.
+        3. No turn-in-place: an agent changing direction slides through the turn while the walk
+           cycle keeps playing forward.
+        4. Nav agents arriving with tiny residual velocity, so the walk clip plays at a crawl near
+           waypoints and looks laboured.
+      Fix the ones the measurement actually implicates. Do not rewrite the rig.
+      DONE: a 1080p capture of the market square with at least 15 townsfolk walking at once, plus a
+      logged check that animation speed tracks agent velocity (print velocity vs speed_scale for 10
+      agents over 30 s - they must correlate, not sit flat). In the capture: no foot sliding, no
+      snapping between clips, turns read as turns. Mr. E's bar for this one is WOW, not "oh".
+
+- [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
+      town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved
+      from his spot, a lot of them aren't moving"; (b) the ones that do move stutter / animate
+      badly. This is "the town isn't alive" made concrete.
+      STRONG DIAGNOSTIC LINK: a townsperson frozen in place may be the SAME walker D44/D44b flags
+      as in_solid / stuck - a walker wedged in geometry stops moving AND stops its walk cycle. Check
+      whether the frozen NPCs correlate with the in_solid samples before treating these as separate.
+      If a townsperson has no nav target or a blocked path it idles forever - give idle NPCs
+      somewhere to go (work, wander, gather) on a cadence, and make sure the walk/idle animation
+      actually plays (the census showed anims fire, so a FROZEN one is likely a stuck agent, not a
+      missing clip). The stutter may be the sub-res pane (see D49) OR a real animation hitch - say
+      which once D49's AA work lands, so they are not conflated.
+      DONE: a town soak where NPCs visibly wander/work with smooth animation, in_solid at 0, and a
+      pane crop Mr. E signs off.
+      RESULT (D-cycle D8): MEASURED first - a 93 s probe found 111/126 ordinary townsfolk move
+      >8 m and in_solid is ~0, so there is NO widespread nav-freeze; the only stuck bodies were 7
+      NAMED NOTABLES holding posts (Cort Rivers the Crier, the watch, gate guards) - notables.gd
+      sets stay=false so they fell into the normal idle branch and stood in a DEAD Idle instead of
+      the rich _posted pace/look/gesture. FIX (townsfolk.gd): (a) _idle_acts now gives EVERY standing
+      idler an occasional calm gesture (POST_GESTURES) instead of returning - a body loitering away
+      from the market/tavern/job is no longer a frozen statue; (b) the LOD stutter diagnosed: past 60 m
+      the nav throttle also advanced the ANIMATION in 2-4 frame chunks - the clip now advances every
+      frame for the clearly-visible lod-1 band (60-120 m), lod 2 stays chunked for the FPS budget.
+      Gate GREEN: --import clean, parse 0, _offfloor 0/1486, TWITCH_PARSE OK, _delve_test clean,
+      _townwalk in_solid 0/16518 (0.000%) PASS (nav unchanged/better). Windowed crop renders/cycles/d50
+      LOOKED at: a lively midday square, varied poses, the crier at his post. HONEST CAVEAT: a STILL
+      cannot prove animation SMOOTHNESS or that a fidget fired - the stutter fix + the gesture life need
+      Mr. E's eye on live motion. The 7 posted notables now WORK their post (gesture), they do not wander
+      (a crier/guard SHOULD hold post); a tried wander fallback was reverted as wrong for them.
+
+- [x] D53. TOWED / HELD OBJECTS ARE NOT ATTACHED TO THEIR OWNER. Owner: DESKTOP BUILD (rig.gd / the
+      equip + attach system). Clip 14-31-18: "the cart is moving on its own, I'm assuming it's
+      supposed to be attached to this guy, but it wasn't." A CART that an NPC should pull drifts on
+      its own, detached. Same family as D51 (the fishing pole not in the angler's hand): objects
+      that should be parented to an owner's bone/transform are not. Fix the attach so a cart follows
+      its hauler and a pole sits in the hand. Audit for other detached props (market goods, tools).
+      DONE: a capture of a cart moving WITH its hauler and the pole in-hand, Mr. E signs off.
+      RESULT (D-cycle D9): towed-wagon attach FIXED in townsfolk.gd - the follow is keyed off the
+      OWNER-to-cart distance, so a jump (door exit, respawn, raid reset, stop moved, far-LOD chunk)
+      reattaches the wagon AT ONCE behind the hauler instead of letting it glide off; it tows at 2.6 m
+      and re-parks beside a stopped owner. Covers carters, the caravan master and the pedlar (all use
+      .cart). _d53_test: travel gap 2.72 m, teleport 22.8 m -> recovered 2.60 m, D53_TEST OK; render
+      renders/cycles/d53/hauler_cart.png. THE POLE IN-HAND stays D51 (angler.gd, not this worker's file).
+
+- [x] D54. NPCs VANISH AFTER ENTERING A BUILDING. Owner: DESKTOP BUILD (townsfolk.gd). Clip
+      14-29-22: "they went in. But now I can't find, I can't see them." Townsfolk enter a building
+      and cannot be found again - either they despawn on entry, or they are culled/parked somewhere
+      the panes cannot reach, so the subject pane loses them for good. Decide the intended behaviour
+      (do they come back out on a timer? the D20b flee logic already ducks folk indoors and brings
+      them back - does the ORDINARY enter-building path do the same?) and make sure a watched NPC is
+      recoverable. DONE: a soak where NPCs enter and later re-emerge, and a pane following one does
+      not permanently lose it.
+      RESULT (D-cycle D10): FIXED in townsfolk.gd. The enter-building path already re-emerged folk
+      (step back out through the door after _wait), but the DAYTIME indoor dwell was randf(18-45) s
+      (a probe measured 59 s), long enough that a pane following an NPC lost it. Capped the daytime
+      stay to INDOOR_MIN..MAX (7-14 s) - the deliberate night sleep (a long _linger) is left alone.
+      _d54_test (midday soak): 41 enter / 47 exit, max indoor 13.7 s (was 59.5 s), 0 stuck. Streets
+      read livelier (render renders/cycles/d54/square_midday.png). The street-cap _keep_indoors
+      population (off-street by design) is unchanged.
+
+REINFORCED, not re-logged:
+  * L62 (pane lane titles) - Mr. E, verbatim: "I don't even know what window this is. Is it a
+    subscription... channel... bits?" This is the STRONGEST confirmation yet - a viewer cannot tell
+    what to spend on. Bump L62 up the HUD queue; it is core to the spend-prompt model, not polish.
+  * D46 (band panel covers the screen) - "look how much it covers, this is what I was talking
+    about." Confirmed again; already moving to the hub.
+  * D50 (NPCs idle with no purpose) - "all these people just hanging out not doing anything,
+    congregating by the thing not doing anything." The idle half of D50.
+  * L38 (ambient pane framing) - "bottom right is watching the livestock, it's looking at the ROOF."
+    The ambient framing still aims at roofs/empty geometry sometimes. U2 did a first pass; it needs
+    another - the ambient subject pick or the camera offset is still landing on non-subjects. Raise
+    as a HUD follow-up to L38 when the HUD worker is next free.
+
+CHANGELOG 2026-11-13 14:54 (supervisor): clips 14-29/14-30/14-31. Split the "not moving" bug correctly: D52 =
+hero won't delve, stands idle at the well = COMMAND/STATE, LAPTOP; D44/D50 wedging (pumpkins) =
+nav, DESKTOP - two bugs, do not conflate (supervisor had over-unified). New: D53 (cart/pole not
+attached to owner), D54 (NPCs vanish into buildings). Reinforced L62 (strongest signal yet - bump
+it up), D46, D50, L38 (needs a second framing pass).
+
+- [x] D51. THE ANGLER DOESN'T HOLD THE FISHING POLE RIGHT (part of D40). Owner: DESKTOP BUILD. The
+      pole is not parented to the hand bone correctly - it floats or sits in the wrong grip. Attach
+      it to the right hand bone with the correct offset/rotation, like a weapon equip on the handslot
+      bone. Pairs with D40's fishing animation + water work; do them together.
+      DONE: a capture of an angler holding and casting the pole from the hand, Mr. E signs off.
+      RESULT (D-cycle D11): FIXED in angler.gd. The rod pivot was parented to the Angler at a
+      FIXED body offset (0.28,1.05,0.30) - it floated beside the body, never in the hand. Now it
+      rides a BoneAttachment3D on the body's right-hand bone (handslot.r), exactly like a weapon
+      equip, with a grip rotation (~+30deg about Z) that rakes the tip up and out over the water;
+      falls back to the old body offset only if a body has no hand bone, and the attachment is
+      freed with the angler (no orphan rod). _d51_test: mount=handslot.r, rod tip is a descendant
+      of the body skeleton for both dock anglers -> D51_TEST OK. GATE GREEN: parse 0, _offfloor
+      0/1700, TWITCH_PARSE OK, _townwalk in_solid 1/18280 (0.005%) PASS, _delve_test rc0 clean.
+      LOOKED (renders/cycles/d51/d51_pole_inhand.png): the rod rises FROM the fisher's hand,
+      angled up and out, line running to the water - held, not floating. Mr. E's live sign-off
+      is the remaining half.
+
+- NOTE (not an item yet - needs Mr. E): "it only lets me zoom in on the top left." The zoom/control
+  appears to work only on ONE pane (the director/main). Open question for Mr. E: does he WANT to
+  zoom/control each subject pane independently, or is one-pane control fine and this was just an
+  observation? Logged here so it is not lost; the supervisor will raise it and turn it into an item
+  only if he wants per-pane control. Owner would be HUD (spotlight.gd) + rts_camera.gd.
+
+Grass: already D45 (reinforced twice now - "so nasty" in two clips). Not re-logged.
+Pixelation-on-movement: already D49 from clip 14-26-15. The clip-2 "stuttering" is partly that
+(render) and partly D50 (animation) - separated above.
+
+CHANGELOG 2026-11-13 14:51 (supervisor): from Mr. E's transcribed clip 14-27-07 - D50 (townsfolk freeze +
+animation stutter, likely tied to D44's stuck walkers), D51 (fishing pole grip, part of D40).
+Grass reinforces D45; stutter split between D49 render and D50 animation. One open question logged
+for Mr. E: does he want per-pane zoom control.
+
+# Phase AC - *** CRITICAL *** Mr. E's clip 14-28-40: HEROES DO NOT MOVE (2026-11-13 14:52)
+
+His words: "I put it to follow me. My dude's not moving. None of these guys, barefoot Knights not
+moving, 96 Knights not moving, Mr. E Ranger is the one I just created, and I am following - I'm not
+moving, I told him to go delve, and he has not moved. This needs to be fixed."
+
+
+
 Two machines work at once, on DIFFERENT files so they never clash:
 - DESKTOP (CruzaderPC, scheduled build runs, branch `main`): the town, its people, magic. Lock: docs/RUN_LOCK.txt
 - LAPTOP (jestai, its own Claude Code session, branch `laptop`): monsters, bosses, gear, classes, species.
@@ -157,6 +308,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       with that scope; (b) town.spotlight is L17 (laptop) - until then events print SPOTLIGHT + emit spotlight_wanted;
       (c) twitch_reply is not in chatcmd.gd yet (laptop) - connected automatically once it is; (d) !testbits etc. do not
       exist (L17 open) - tests feed recorded EventSub frames instead. Chat sending was not tried live (nothing posted).
+
+- [x] D15. (DONE Nov 12 04:16: 35-min soak / 87 valley days / 228 people / 51 raids - 0 script/freed-node errors; audio pool bounded (16/16 peak = graceful voice-steal), streams cached 131 plateaued; memory rise tracks town growth not audio; GAP held (busiest mana_charge 3.93/s vs ~8.3/s); FPS population-bound not audio. Follow-up D22: bump sfx pool 16->24 for peak headroom.) SOUND SOAK (supervisor, Nov 12). Now that S1+S2 wired the full RPG sound library, run a
+      30-45 min soak with sound ON and confirm it is safe for a 24/7 stream: (a) no audio-related
+      SCRIPT ERROR and no 'freed node'/lambda errors over the whole run; (b) the AudioStreamPlayer3D
+      pool in sfx.gd is not exhausted or growing without bound (log pool size + active players each
+      minute); (c) memory does not climb from audio streams (compare mem_mb first third vs last third,
+      as D8 did); (d) FPS holds as it did in the silent D8 soak (sound must not cost meaningful frame
+      time); (e) the GAP throttles hold under a busy town+raid so no kind machine-guns. Write the
+      findings into PROGRESS; if anything leaks or errors, fix it before ticking. Reuse tools/_soak.gd
+      with audio enabled. Commit + push only on a clean run.
 
 ## LAPTOP (dungeon, combat content, heroes) — files: bestiary.gd, monster.gd, floorgen.gd, dungeon_hd.gd, dungeon_parts.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*
 - [x] L1. More monsters: new CC0 creature models (KayKit Skeletons/Halloween, Quaternius CC0 monster packs),
@@ -317,6 +478,13 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       Add tools/_s2_test.gd asserting every wired event uses a registered kind; 0 SCRIPT ERROR; the
       existing _delve_test should still pass with sound calls in.
       DONE (Cycle 87, laptop): Bestiary.voice_of (34 creatures, every lord and unique voiced), queued creature voices (one a 0.9 s beat, biggest / nearest / a death first, same kind 3.5 s), a lord roars as it rises, breath on the breath; per-weapon swings + hit / clash / bow / block / shield_bash, spells, potions, finds; hero voices sampled (Roster.voice_of); a quiet bed below; chat / UI sounds; level_up. GAPs added in sfx.gd. S2_TEST OK x3.
+- [x] S3. SOUND REVIEW + TUNING - LAPTOP (supervisor, Nov 12). S1 / S2 only proved the kinds exist; check the game
+      SOUNDS right: no silent monster, every command audible, throttles hold under load, levels balanced under the
+      buses, no pool exhaustion or freed-node errors. A test so a future monster or command cannot ship silent.
+      DONE (Cycle 88): tools/_sound_review.gd (coverage headless; load + measured levels windowed). Fixed: spells below
+      doubled (S1 + S2 both sounded them), !reroll / !respec paid silently, dragon roar +9.9 dB over the music,
+      skeleton / spider voices -9.5, half the dungeon bed inaudible (-25), menu_select +4.6, potion_drink buried,
+      a generic hit doubling every blow. Levels now -5.6 .. +1.9 dB of the music, bed -15 .. -18; SOUND_REVIEW OK 18/18.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 - [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
@@ -344,6 +512,9 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       no key file = off. publish() 0.3-0.7 ms, build 0.4 ms (202 heroes 5 ms, 95 KB). W1A_TEST OK 17/17 (live upsert 200,
       read back with the publishable key, publishable-key write refused 401); W1A_TOWN OK (real town + real save, read only:
       level 3, 51 souls, 2 heroes, 6 fallen, 21 commands - that is the row in the table now).
+      ADDED cycle 89: payload.chronicle - the last 50 town.feed lines, newest first, {t, s, at}; t by keyword (death/raid/loot/delve/
+      town/lore/fight, unsure = town), at = when the publisher first saw it; control chars, BBCode, < > and 7+ digit runs stripped, 200 chars max.
+      No existing key changed. W1A_TEST OK 23/23 (6 new checks).
 - [x] W1b. THE VIEWER HUB PAGE - a static page, no build step, on GitHub Pages like fightoverlay.
       It fetches public.snapshot with the PUBLISHABLE key (safe to embed, read-only by policy):
         URL  https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at
@@ -357,3 +528,1399 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 ## Needs Mr. E (not for the runs)
 - Twitch follows/subs/bits/channel points: needs a Twitch token from him.
 - Firefly icons / title art: made by him in Adobe.
+
+
+## ROUND 4 - Nov 12 polish + hub elevation (Mr. E, 03:47 CT). Expanded into phased programs 04:16.
+## CHANGELOG 04:33: L25 was split into L25a-d (L25 = all four collectively); IDs are now FROZEN, PROGRESS cycles are per-machine prefixed (D/L/H). See docs/COORDINATION.md - the single source of truth for machines, paths, numbering, tests, merges, WIP.
+## Priorities from Mr. E: people clip/stick, dungeon looks rough, animations weak, hub must be SSS+.
+## Ownership unchanged. Each item: subject + DONE/test. Workers take the FIRST unchecked item IN THEIR OWN section.
+## Full per-chat briefs with the long detail exist (desktop saved claude/desktop-program-d16-d23.md); these lines are the trackable checklist.
+
+### DESKTOP (town/people/nav/animation) - town.gd, town_nav.gd, townsfolk.gd, hero_body.gd, rig.gd, raids.gd, cavalry.gd, animal.gd, spells.gd, daylight.gd, valley.gd, notables.gd, economy.gd, sfx.gd
+# Phase A - movement & nav (stop walls/sticking) [D16]
+- [x] D16a. LOCAL AVOIDANCE: hero_body/townsfolk/animal/cavalry follow _route with no dynamic avoidance - add NavigationAgent3D avoidance OR separation steering (push apart within ~0.6 m). DONE: 50-body gate-funnel = 0 sustained overlaps > 0.3 m. -> DONE Nov 12: town.crowd_push is now separation (soft ring + hard contact, per-body radius) + yield (sidestep to pass whoever is ahead; same-way walkers followed) for townsfolk/heroes/cavalry/watch pairs/animals. tools/_d16a_test.gd at the west gate: under-0.3 m pair-time 29.2 s -> 0, clip (<0.45 m) 62.5 -> 2.2 pair-s, min gap 0.02 -> 0.38 m, 0 sustained, 50/50 through (median 10.0 s, unchanged).
+- [x] D16b. UNSTICK WATCHDOG: route active but displacement < 0.2 m over 2 s -> repath/nudge. DONE: _townwalk stuck_on_route == 0 over 120 s. -> DONE Nov 12: Townsfolk watchdog (2 s / 0.2 m): near-enough arrival, else re-path, else side-step (or brush out of a prop pocket), else drop the trip (heroes/caravans keep trying). _townwalk now 120 s: stuck_on_route 0 (total 0); tools/_d16b_test.gd 180 s: 10 pinned events / 4 people with it off -> 0 with it on.
+- [x] D16c. DYNAMIC OBSTACLES: stalls/carts/benches not in the navmesh - register or steer round. DONE: town soak = 0 bodies through a stall or stuck on a prop. -> DONE Nov 12: moving wagons (carters, travellers, caravan, pedlar) steered round (crowd_push) + feet kept out (off_wagons, every frame before LOD) + legs re-routed round/beside them (wagon_way); parked wagons drawn up on open ground (wagon_park); mine/farm wagons + scar-glass now solid. tools/_d16c_test.gd 150 s town+raid: through-a-prop 26-33 -> 0, stuck_by_prop 0 (PASS).
+- [x] D16d. DOORWAY/GATE/BRIDGE FUNNELING: crowds queue and pass instead of piling. DONE: funnel test passes at the real gate and bridge. -> DONE Nov 12: the pile was the pre-sync road-hex route (D16a's note) - every route asked before the navmesh is in the map went out through a gate and back (walked/straight 1.68-1.78) and never crossed the bridge (50/100); Townsfolk now marks such a route and re-walks it on the navmesh once synced. tools/_d16d_test.gd 100 walkers two-way, routed on the spawn frame: gate 98/100 median 27.4 s -> 100/100 15.4 s, walked/straight 1.02, 0 overlap in the arch; bridge 50/100 -> 100/100, 0 overlap; routed after sync both PASS. A queue+lane steering variant was tried and measured worse (slower, more jostle) - not kept.
+# Phase B - animation overhaul (town) [D17]
+- [x] D17a. NO T-POSE: rig.gd fallback clip when a model lacks the named anim (play Idle + log once). DONE: anim probe = 0 empty current_animation over a 60 s day+raid. -> DONE Nov 12: Rig.play falls back to the model's idle on a missing clip (logged once) and queues every one-shot back into the loop the body was in (death -> its held Death_*_Pose); *_Idle/*_Pose clips loop; stable horses idle. tools/_d17a_test.gd 60 s day+raid: visible bodies with an empty player 182 samples (bandit Death_A, smith/farmer PickUp, fisher Interact, crier Cheer) -> 0 of 23927 (PASS).
+- [x] D17b. LOCOMOTION BLEND: speed-blend walk<->run, match playback to move speed, face heading - no gliding/moonwalk. DONE: walk probe, no foot-slide beyond threshold. -> DONE Nov 12: Rig.drive picks a gait from each body's measured speed (stand/walk/jog/run, hysteresis, 0.3 s crossfade) and plays it at speed / the clip's own ground speed (KayKit walk 0.8 m/s, jog 2.1, run 3.3 - tools/_d17b_clipspeed.gd); walkers face the way they actually move; Townsfolk.pace 0.62 -> 0.40 (2.6 m/s was a sprint for these legs; the mounted watch kept its speed). tools/_d17b_test.gd 60 s day+raid: skate median 1.80 -> 0.006 m/s, p90 2.50 -> 0.23, idle-glide 3600 -> 59 samples, moonwalk 0.09% (PASS).
+- [x] D17c. STATE COVERAGE: job anims (smith/angler/farmer/vendor), sit/eat at night, attack/cast/hurt/death for guards/heroes/raiders, animal graze/walk/flee. DONE: town-day shot sheet, NPCs visibly work. -> DONE Nov 12: trades work in their own motions (JOB_ANIMS: smith hammer, farmer hoe/baskets, woodcutter/miner swing, stalls+shops serve; walkers work their yard out of doors half the time); seats (square benches x2, tavern stools+chairs) sat on - Sit_Chair_Down/Idle/StandUp, often of an evening; tavern-yard drink/bite (Use_Item; no seated-eat clip in KayKit); raid swings vary (4x1H, 3x2H), Hit_A/B + Block_Hit + parries, Death_A/B; beasts graze (neck bent by a SkeletonModifier3D - the CC0 farm pack has no eating clip) and bolt from a raider within 14 m. tools/_d17c_test.gd 130 s day+evening+raid: all 14 states seen, 0 empty clips (PASS); old: no land-work, no sitting, no flight, graze only hens. Sheet renders/cycles/20261112_d17c.
+- [x] D17d. BLENDS/TRANSITIONS: proper blend times, no pops, death doesn't T-pose. DONE: no visible pops in a 60 s capture. -> DONE Nov 12: the real pops were corpses getting up (the gait drove a fallen body out of its held Death_*_Pose into Idle ~1 s after the fall - old render: a buried farmer back on her feet doing PickUp) and body-yaw snaps (steering sets rotation.y outright). Rig: a Death_* marks the player fallen, nothing but another death or Rig.revive (a KO'd hero coming round) moves it; Townsfolk eases turns at 540 deg/s (walkers keep face_fix). tools/_d17d_test.gd 60 s, 2 raids + 6-death fixture, 90 bodies/frame: risen 3 -> 0, turn snaps 165 -> 4, one-frame bone pops 0 -> 1 of 284k (clip changes already blend - D17a's 0.2 s default), shake 1 -> 0 (PASS). Sheet renders/cycles/20261112_d17d.
+# Phase C - the map: town & valley [D18]
+- [x] D18a. PROP/BUILDING SANITY: 0 floating/interpenetrating props, buildings on ground, roads connect, wall/gates/bridge coherent. DONE: sweep = 0 floating/clipping; shot sheet.
+      DONE cycle D1: tools/_d18a_test.gd sweeps 1034 ground props (0 floating/sunk past tol, slope+surface+water+planter
+      dressing classified) and 83 building footprints (oriented, 0 interpenetrating). D18A_TEST OK. No genuine placement
+      bug found - every earlier flag was intended (wall lanterns, tower crossbowmen ~11.7m, table/rack dressing, flowers
+      in raised planter boxes, dock props over the riverbed, scar-mouth crag on the mine slope, hillside cottages nestled
+      at the _low seat, forest canopies). No game script changed. renders/cycles/20261112_d18a (gate, bridge, square,
+      scar, docks, aerial, hillside farmstead) - wall/gates/bridge/roads coherent, buildings on ground, nothing floats.
+- [x] D18b. DRESS THE VALLEY: fields, fences, crops, mill, docks, forest, paths. DONE: valley shot sheet reads lived-in.
+      DONE cycle D2: valley.gd _dress_valley - each steading (Coalfoot, Bramble End) now has 2 fenced, ploughed,
+      cropped fields (wheat/veg) with a scarecrow + a footpath to the gate, a picket kitchen garden, a hayrick and
+      grazing stock (sheep/cattle); a plank fishing jetty over the ford's slow water; wildflower + tall-grass verges
+      along the lanes and a copse between the roads. Built 4 fields / 1416 crop sprites / 133 fence posts / +5 beasts.
+      D18B_TEST OK; parse 0 err, _offfloor 0/1036 (0 inprop), TWITCH_PARSE OK, _townwalk in_solid 0/18452 stuck 0,
+      _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR to floor 2. Shots renders/cycles/20261112_d18b (steadings, jetty, aerial).
+- [x] D18c. GROUND & MATERIALS: ground texture blending (grass/dirt/road/water), water shader. DONE: before/after; 0 material-null headless. -> DONE Nov 12: wet muddy shore in ground.gdshader (noise-ragged band at the waterline, wet sheen; water_y from town) blends the banks under the river; grass/dirt/road blending already lived in the shader (town-mask trodden dirt + rock/snow/scar), water shader kept. The 3 headless material-nulls traced (bisection) to Gear.ignite's per-surface overrides draped by show_tiers' _cloth material_override on the rack weapons - town.gd _tier_rack now bakes the lit material into a duplicate mesh (gear.gd untouched). Bare headless start: 0 material-null, 0 errors; shots renders/cycles/20261112_d18c (bank+ford before/after, rack intact).
+# Phase D - lighting, day/night, atmosphere [D19]
+- [x] D19a. daylight.gd DAY/NIGHT: sun angle+colour, dawn/dusk warmth, real night dark, lamps/braziers/windows as OmniLights at night. DONE: full-day timelapse shot sheet. -> DONE Nov 12: day/night was already driven by daylight.gd (sun arc+colour, goldness dawn/dusk, nightness + a moon you can see by, lamps*k, windows emission); added night BLOOM - town env glow_enabled, glow scaled by nightness in daylight.gd so windows/lamps/braziers halo after dark and the day stays clean. _d19a_test OK (noon sun_e1.5/high white; dawn+dusk gold, lamp0.95 glass1.6, glow0.75; night moon0.7, lamp1.28 glass2.4, glow1.0); 92 lights/1 glass-mat. Full-day sheet renders/cycles/20261112_d19a (04/06/08/12/16/18.5/20/22 + close night).
+- [x] D19b. (ALSO: snapshot_pub.gd adds hero.max_hp, hero.xp_next, town.raids_turned - Mr. E approved 16:24, see COORDINATION 8.3) ATMOSPHERE: fog/haze, clouds, optional rain, sky gradient + stars at night, soft god-rays. DONE: shots across time/weather; FPS holds. TICKED D-cycle 116: custom sky shader (clouds/stars/sun+moon), weather machine clear/overcast/rain + streak rain, fog by weather + dawn mist, volumetric god-rays; 9-shot sheet, D19B_FPS avg 110.3; snapshot adds max_hp/xp_next/raids_turned + day_phase/weather, W1A_TEST OK.
+# Phase E - life & simulation depth [D20]
+- [x] D20a. RICHER ROUTINES (notables/townsfolk): work->market->tavern->home by hour, right anim per activity. DONE: town soak shows routines.
+      DONE D-cycle 117: townsfolk.gd _maybe_errand - ordinary shuttle folk break off ONCE a day for a midday MARKET
+      shop (buy/haggle anims) and an after-shift TAVERN mug (eat/drink), each at its own staggered hour, interrupting
+      the linger so a 25-50 s job stint never swallows the short midday window; notables keep their hour-slot days.
+      D20A_TEST PASS (market 8, haggle 33, midday-square 358; tavern 5 + eat; notables reached 17/24; 0 empty clips).
+      parse 0, OFFFLOOR 0/1027, TWITCH_PARSE OK, _townwalk in_solid 0/18496 stuck 0, _delve 0 SCRIPT ERROR. Night-home
+      (homed folk walk the compressed night, pre-existing) out of scope. renders/cycles/20261112_d20a.
+- [x] D20b. CROWD REACTIONS: raid sends civilians fleeing/indoors; market bustle by hour; festival gathers. DONE: raid in a soak clears the streets.
+      DONE D-cycle 122: a raid is now an ALARM the townsfolk read (town.is_raid_on <- raids._live). Ordinary folk (not the
+      watch/chief/lookouts/stallholders) drop their routine and RUN for cover - home, else the nearest house (town.flee_refuge),
+      ducking indoors at the threshold - so the streets clear; they cower until the all-clear, then ease back out staggered. A new
+      FESTIVAL beat (town._festival_pass, is_festival/festival_at) gathers idle folk to the square to mill and cheer. Market bustle
+      stays D20a's midday errands. D20B_TEST PASS (base_street 120 -> raid_street 52; fled OK; festival square 3 -> 42, gathered OK).
+      parse 0, OFFFLOOR 0/954, TWITCH_PARSE OK, _townwalk in_solid 0/14380 raid 0/2095 PASS, _delve 0 SCRIPT ERROR. LOOK renders/cycles/20261113_d20b.
+- [x] D20c. ANIMALS: herds graze/drift, dogs follow, birds flock. DONE: animal-behaviour probe in a soak.
+      DONE D-cycle 127: herds now have a shared drifting centre (Animal.HerdMind) that ambles the pen, and
+      each beast grazes near it, so a herd moves together and stays clustered instead of each on its own
+      random patch; the sheepdog works its flock's centre (orbits the drift, not the fence); the four town
+      dogs trot after the nearest townsperson; and birds now fly as flocks - a shared centre that migrates
+      across the sky plus a shared turn direction and small per-bird angle offsets, so they wheel as a knot
+      and travel together rather than each circling its own point. tools/_d20c_test.gd soak: herds=4
+      moved 13.5 m / cluster radius 3.5 m, dogs follows=4 min_dist 0.5 m near_frac 1.00, flocks=8 migration
+      11.1 m / 0 scattered samples. D20C_TEST PASS. parse 0, OFFFLOOR 0/1354, TWITCH_PARSE OK, _townwalk
+      in_solid 0/17115 (0.000%) PASS, _delve_test clean. renders/cycles/20261113_d20c.
+# Phase F - magic & combat feel (town) [D21]
+- [x] D56. GRASS MATERIAL WIRED TO DIRT (high priority, desktop). Owner: DESKTOP BUILD.
+      assets/kit/materials/MI_Grass.tres references T_Dirt_BaseColor/Normal/Roughness - the "MI_Grass"
+      material literally uses DIRT textures. D45 re-graded ground.gdshader (the main lawn reads green),
+      but THIS material instance was never repointed, so any surface using MI_Grass still looks like
+      dirt/sand. Fix: point MI_Grass.tres at real CC0 grass textures (or the same source D45 used),
+      correct tiling; if no grass texture asset exists, create/copy a CC0 one with a LICENSE note.
+      Render the areas that use MI_Grass and LOOK. DONE: those surfaces read as grass, Mr. E confirms.
+      RESULT (D-cycle D6, 2026-11-13 ~21:25): MI_Grass had NO untinted consumer - all three uses
+      (town.gd dirt path L1395, town.gd farm soil L2830, valley.gd _soil L130) duplicate it and
+      OVERRIDE albedo to brown, i.e. it was a mis-named DIRT material. Blindly repointing it would
+      have turned paths/soil green. Fix: MI_Grass.tres repointed to the REAL grass source D45 used
+      (T_Meadow_BaseColor/Normal) + albedo Color(0.5,0.92,0.34) mirroring ground.gdshader grass_tint,
+      uv1_scale 0.16; NEW MI_Dirt.tres = the old MI_Grass dirt content verbatim; the 3 dirt consumers
+      repointed MI_Grass->MI_Dirt (tints unchanged -> dirt paths/soil pixel-identical, no regression).
+      No new texture asset (T_Meadow already tracked), so no LICENSE note needed. Swatch render:
+      MI_Grass reads as green grass, MI_Dirt as brown dirt (renders/cycles/d56/swatch.png); town
+      greens/fields unchanged (renders/cycles/d45/d56_*). Gate green. NOTE for Mr. E: nothing in the
+      town assigns MI_Grass untinted yet, so the on-stream look is UNCHANGED - the material is now
+      correctly a grass material, available to paint on a surface if he wants one specific ground
+      (e.g. the trodden dirt paths) to read as grass. Awaiting his eye.
+
+- [x] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX. (D21A_RAIDVFX OK: 3 kinds mend/heal/ward fired visibly in a lvl-2 scar raid with mage/cleric/sage enlisted; test harness fixes: notables.gd:606 dict entry, _d21 enlist-retry + headless _snap guard.)
+      TICKED (supervisor, Nov 15): shipped laptop e6a6812. D21b sub-parts landed on top the same
+      night - D21b.1 hit FX parity (9d332ab), D21b.2 defender deaths read (5d420c2), D21b.3 guards
+      form a muster line (29c5658).
+- [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
+  - [x] D21b.1 defender hit FX parity: a Townsfolk/HeroBody taking a melee hit now flashes white and a floating damage number pops (matches raider side); townwalk in_solid 0/6172 (4 raid cycles).
+  - [x] D21b.2 defender deaths read: a Townsfolk/HeroBody that is slain by a raider (and a non-Monster raider slain by the defenders) gets a red flash + FELLED! banner at the one real death point in raids.gd, so the stream reads who just dropped at pane distance. Parity with Monster.die()'s own readable death; KO/grace/CON-save paths unchanged. Headless gate: parse 0; _offfloor 0/1340 INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR; _townwalk runs clean (in_solid=1/10898 at T=70s = 0.009%, well under PASS<0.2%).
+  - [x] D21b.3 guard muster line: before the garrison closes with the raiders, each
+    guard takes a slot on a line drawn between the market centre and the raiders'
+    centre of mass (LINE_FROM_CENTRE 11 m, LINE_SPACING 2.2 m), facing them, until
+    a raider closes within LINE_HOLD 14 m - then normal _engage kicks in. Heroes,
+    the mounted watch and the Commander are untouched (they keep charging / the
+    square-hold / leading from the front); the line dissolves once the raiders'
+    centre is inside LINE_BREAK 22 m of the square, so a breach still fans the
+    guards out one-to-one. Gate GREEN: --import rc 0, parse 0; _offfloor 0/1320
+    INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR;
+    _townwalk in_solid 1/14956 (0.007%) raid_in_solid 0/2930 (0.000%) PASS;
+    tools/_d21b3_test.gd D21B3 OK 8 checks (8 raiders live when sampled, 8 of 14
+    muster-eligible guards had left their posts, 4 had closed toward the raiders'
+    centre, 2 stood on the line within 3.5 m). D21b REMAINDER: cavalry charge
+    that lands, FPS soak.
+# Phase G - audio polish (owns sfx.gd) [D22]
+- [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
+- [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
+      MR. E'S CALL (Nov 15): generate fresh from music-studio with the mapping below. Pairs with D38 -
+      do them together; D38 renders the tracks, D22b wires the transitions and stings.
+# Phase H - performance (stretch) [D23]
+- [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
+
+### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
+# Phase A - dungeon geometry & nav [L25]
+- [x] L25a. STAIR INTEGRITY: continuous treads, correct step vs G=4.0/floor height, landing both ends, registered walkable. DONE: stair-probe over 12 floors, 0 gaps, landings both ends.
+- [x] L25b. COLLISION-AWARE PROPS: no prop-prop or prop-in-wall overlap, clearance from doorways/path; placement validator reseats/drops overlaps. DONE: overlap probe 12 floors = 0 > 0.2 m, 0 blocked doorways.
+- [x] L25c. DUNGEON NAV: bake a NavigationRegion3D per floor (open cells minus obstacle circles + walls, like TownNav) OR cell-grid A*; route delvers on it + unstick watchdog. DONE: 10-floor descent = 0 stuck delvers, 0 in geometry.
+      DONE (Cycle 89 + L-cycle 110, laptop): tools/_l25_test.gd OK 13/13 twice - 0 stuck delvers (was 104), 0 forced descents,
+      watchdog 5 and 1 nudges / 10 floors (was 51). Nav = cell-grid BFS over clear cells + obstacle circles, reachable fight slots.
+- [x] L25d. ROOM/CORRIDOR COHERENCE: no orphan rooms, all reachable, doorways align, tiles don't z-fight. DONE: connectivity check over 12 floors, shot sheet.
+# Phase B - dungeon look: textures/materials/biome/lighting [L28]
+- [x] L28a. MATERIALS: real albedo/rough/metal per theme+biome, normals where the kit has them, fix material-null. DONE: 0 material-null, before/after 3 themes.
+      DONE (L-cycle 111): kit surface shader - per-swatch rough/metal + triplanar CC0 stone/wood detail + theme wetness; materials per floor 689 -> 44 (tinted biome); dungeon-side material-null 0. Shots renders/cycles/20261112_l28/a_*.
+- [x] L28b. BIOME DISTINCTION (data/biomes.json ~14 worlds): colour grade, fog/haze, ambient particles, ground variants - each biome its own place. DONE: per-biome shot sheet, no two alike.
+      DONE (L-cycle 112): per-floor Environment from data/biomes.json "looks" (ambient, depth+height fog, 1D-LUT grade, sat/contrast, glow) seen by the main camera + lanes; one capped mote emitter; ground patches. L28_ALIKE OK 14/14. Sheet renders/cycles/20261112_l28/all_sheet.png.
+- [x] L28c. LIGHTING/ATMOSPHERE: per-floor key+fill, torches/braziers as OmniLights w/ embers, depth fog, boss-floor drama. DONE: shot sheet, FPS holds (cap emitters).
+      DONE (L-cycle 113): look-driven key (1 shadowed spot) + fill, flickering torches/braziers, ONE shared ember emitter, boss lord light+ash+harder grade; emitters 2-5/floor (cap 12); FPS -1..-7% (all >=115); sheet renders/cycles/20261112_l28/c_sheet.png.
+- [x] L28d. DETAIL DECALS: cracks/moss/blood/scar-glass veins to break repetition. DONE: varied-floor shots, 0 new errors.
+      DONE (L-cycle 114): self-made CC0 decal textures (tools/_l28_decals.gd -> assets/dungeon_look) - cracks everywhere, moss/soot/blood by theme, glowing scar-glass veins from floor 6; 18/floor (cap 24) on room floors + wall bases, never stairs/keep-clear; 0 new errors, FPS unchanged; sheet renders/cycles/20261112_l28/d_sheet.png.
+# Phase G - the stream's resting state [L32] (Mr. E, Nov 12 16:08 - a CORRECTION of the spotlight's idle behaviour; jumps the queue)
+- [x] L32a. SPOTLIGHT ALWAYS-ON: the 2x2 grid is the stream's RESTING state, up 24/7 - never collapse to a single full-screen view. An idle lane shows AMBIENT LIFE: a rotating shot of random heroes, NPCs, town life or the dungeon (new subject every ~20-30 s; prefer something happening - a job, a fight, animals, the market). Paid moments (bits/subs/points) take their lane for the seconds bought, QUEUED IN ORDER - the first payer gets their FULL time, then the next in line (the existing per-lane queues already do this - keep them). When a paid moment ends and the queue is empty the lane returns to AMBIENT, never to blank, never collapsing the grid. Keep F10 labels toggle and the SubViewport perf model (the main view stops drawing 3D while the grid is up - which is now always). DONE: a soak shows all four panes live with ambient rotation while lanes are idle; a scripted influx of bits/subs/points plays out in order, each for its full seconds; FPS holds.
+      DONE (L-cycle 116): grid permanent (off/pair layouts gone), idle lanes rotate ambient subjects 20-30 s (fight > catch > heroes > folk > animals), paid FIFO kept - influx played in order, each full seconds; back to ambient on drain. L32_TEST OK 102 checks; FPS vs old full-screen 41.9 -> idle 28.8 / paid 21.6 (relative checks pass); shots renders/cycles/20261112_l32/. Guild Roll + director banner now never show (hid whenever panes carried the view) - needs Mr. E's call on a new home.
+- [x] L32b. (SUPERSEDED BY L39 - Mr. E rejected the full-width bar, Nov 12 22:25)  CHRONICLE AT THE CENTRE: the on-stream Chronicle moves to the MIDDLE of the 2x2 - a thin strip or vertical bar at the cross of the four panes (Mr. E's original ask) - with calm pacing so a busy moment does not scroll like crazy (batch or fade, cap lines per second); readable at 1080p. DONE: 1080p capture with the grid up and the Chronicle at the centre; a busy-moment pacing check.
+      DONE (L-cycle 117): full-width centre strip (HudDock.STRIP 0.10) parts the pane rows; chrome slimmed to 0.06 (clock/chat only); Chronicle paced - 1 line / 0.8 s, flood skips to the latest 8, fade-in; lord card resized to fit the strip. L32B_TEST OK 9/9 (pacing: 40-line flood stayed calm, caught up to latest); L21 52/52 with the new centre region; shot renders/cycles/20261112_l32/b_centre_1080.png.
+# Phase C - creatures: animation + roster [L26/L27]
+- [x] L26a. ANIM AUDIT across the WHOLE bestiary: every family map resolves to real clips, fallback when missing (no T-pose/glide); monster.gd states drive the right clip; attack timing lines up. DONE: MON_ANIMS = 0 static.
+      DONE (L-cycle 115): tools/_l26_anims.gd - MON_ANIMS static=0 (13575 moving frames, floors 2/5/9), every def resolves; clip fallbacks, procedural flinch for 7 bodies with no hit clip, run when chasing fast, 2nd attacks, melee blows land at the clip contact (0.26-0.60 s). L25 OK.
+- [x] L27a. NEW MONSTERS from owned CC0 packs (KayKit Skeletons/Halloween, Quaternius - NOT Bestiary/QAL): add to TYPES with height/anim map/depth/strain. DONE: appear at depth in a soak, animate, parse clean.
+      DONE (L-cycle 118): 9 new creatures from owned bodies (no Halloween pack on disk) - marrow hewer, pale cutthroat, silk mother (+spiderling fodder), scar rat, fen lurker, pit wyrm, ash wight, gloom bat - each with height/anims/tint+glow/ways/homes, wired into DEPTHS 6-7/8-9/10+. L27A_TEST OK; deep soak (floors 7/9/11) static=0 of 21637, hewer/ash wight/cutthroat seen fighting; parse 0; line-up shots renders/cycles/20261112_l27/.
+- [x] L27b. STRAINS (data/strains.json): widen coverage + a clear visual tell each (glow/particle/scale). DONE: strain probe shows tells, stat mods apply.
+      DONE L-cycle 136: the code landed at 0f3986c and only ever owed three test runs; closed now rather
+      than left as a WIP the supervisor skips. _l26_anims cleared in L-cycle 119 (static 0 of 20819
+      moving frames); _l25_test OK 13/13 on current HEAD with 0 stuck; and the windowed line-up finally
+      judged by eye. RE-VERIFIED ON CURRENT HEAD rather than trusting the old run - bestiary.gd and
+      monster.gd have been through L45, L48 and L50 since - L27B_TEST OK: json still the authority, every
+      named strain still has a tell, stat mods still apply through Bestiary.make.
+      THE TELLS READ: renders/cycles/20261112_l27/b_lineup + b_left/mid/right. All ten strains distinct
+      at a glance, and all three kinds of tell land - GLOW (scarborn mint, wraithtouched violet),
+      PARTICLES (wraithtouched wisps, emberbound sparks) and SCALE (gorged plainly biggest, no glow).
+      Checked rather than assumed: L42 cut dungeon emission two cycles ago and could have dimmed the very
+      tells this item exists for. It did not.
+      FOR MR. E, carried from the original WIP: the strain re-weighting of the 6-9 and 10+ bands is a
+      BALANCE CHANGE (shares taken from the non-plain pool; shallows stay 85% plain). No existing
+      strain's frozen numbers were touched.
+# Phase D - bosses & encounters (canon from NOTES.md/bosses.json) [L29]
+- [x] L29a. LORD MECHANICS: each canon lord gets a real mechanic (adds/phase/hazard/enrage); boss_bar shows phase; per-phase trappings. DONE: boss harness 0 errors, a delve fights a lord with its mechanic.
+      DONE L-cycle 139 (one part BLOCKED - see the end). MEASURED FIRST and it halved the work: all EIGHT
+      canon lords ALREADY carried a real mechanic in LORD_WAYS, so "each lord gets a mechanic" was
+      already true and nothing was invented on top of working canon. What was missing was a PHASE - only
+      3 of 8 had any threshold, and nothing exposed one for a bar to read.
+      monster.gd: three phases a lord (0.66 / 0.33), advancing as it is worn down, never backwards;
+      phase and phase_count public; phase_changed(who, to) emitted. Ordinary creatures stay at 1.
+      PER-PHASE TRAPPINGS: the aura brightens (0.35 -> 0.53 -> 0.71) and breathes faster and wider each
+      phase, name tag with it - the phase reads off the LORD, not only off a bar.
+      delve.gd: each step is a Chronicle beat plus a FeedHUD card naming the phase.
+      A PRODUCT FIX THE TEST FOUND: phase_count was set after the early return in _ready that fires when
+      a body model will not load, so a lord without its mesh would have had NO phases. Set at the top now.
+      tools/_l29a_test.gd L29A_TEST OK (11 checks). AND IN A REAL FIGHT, since the DONE asks for one:
+      _boss_test.gd windowed BOSS_TEST OK, 8 checks, 0 failed, zero script errors - and the phases fired
+      live ("Nightwing shifts, and the fight changes with it", then "driven to its last").
+      _offfloor 0 of 1403, _delve_test clean, L45_TEST OK, L27B_TEST OK, _l26_anims on the LORD floors
+      5/10/15 L26A_ANIMS OK.
+      BLOCKED, NOT DONE: "boss_bar shows phase". scripts/boss_bar.gd is in NO worker's list in
+      COORDINATION 11.2 - the second unowned file after adventurers.gd. Untouched. Monster.phase,
+      phase_count and phase_changed are exposed and live, so its owner need only read them. NEEDS AN OWNER.
+- [x] L29b. RARE UNIQUES (NOT new lords - modified variants, bosses.json lesser/greater/draw/rule): rare spawn, visible modifier, better loot. DONE: a unique rolls + drops in a soak.
+      DONE 2026-11-13 (L-cycle 140). MEASURED FIRST and it moved the item: bestiary.gd already had a
+      UNIQUES table, but those are the L2 FLOOR-uniques (new named things on an ORDINARY floor), which
+      is the opposite of what L29b asks for. The real gap was where the supervisor pointed - the content
+      writer has WRITTEN all 78 variants in data/bosses.json and no code read that file. Now read, never
+      copied; no parallel table invented; data/bosses.json NOT touched.
+      SPAWN RULE: 18% on a lord floor, only variants of the lord actually drawn, never the same one
+      twice running, and a lord the crowd has named keeps its name.
+      VISIBLE MODIFIER: the writer's stat skew carried in its SIZE (Grubmother Winter-Fat 5.40 -> 5.84,
+      Nightwing Famished 3.84 -> 3.59) plus a cold scar-light in tint/aura/weapon. Flagged "rare", which
+      boss_bar.gd ALREADY reads - the stream shows it with NO UI file touched.
+      STILL A LORD: same body, same LORD_WAYS mechanic, same L45 depth curve.
+      BETTER LOOT: Delve.boss_loot_mult() - rare lord 4.5x vs a plain lord's 3.0x, in ONE place so the
+      test reads the number the Chronicle actually pays.
+      tools/_l29b_test.gd L29B_TEST OK (23 checks, 0 failed), INCLUDING THE SOAK the DONE line asks for:
+      "The Rattling Host, Widowed" rose on floor 5 of a real delve and the hoard was paid out.
+      The soak also caught a PRE-EXISTING bug in delve.gd: _loot formatted every "cleared" line with
+      % floor_no, but one written line carries no %d, so it threw a String formatting error whenever
+      that line came up. Guarded (the content file was not at fault and was not touched).
+      REGRESSION: _offfloor 0/1438, _l25_test OK (0 stuck), _l45_test OK, _l2_test OK, _l29a_test OK.
+      FLAGGED: boss_def() never copies BOSS_DEFS' "spd", so a plain lord moves at its BODY's speed and
+      Nightwing's canon 6.6 has never reached the mover. Raised, not silently changed - it would alter
+      how every lord moves mid-cycle.
+- [ ] L29c. SET-PIECE ENCOUNTERS from lore (ambush/guarded hoard/mini-event) so a floor isn't just a room of monsters. DONE: set pieces appear + resolve, Chronicle logs them.
+# Phase E - gear, cosmetics, loot [L30]
+- [ ] L30a. GEAR EXPANSION (items.json accessories): more weapons/armour per tier, visible on handslot bones (rig EQUIP), real bonuses. DONE: heroes equip visibly in a soak, bonuses apply.
+- [ ] L30b. COSMETICS & DYES (items.json): more cloaks/hats/rings/amulets/boots/gloves; !wear/!dye change the model live; channel-point cosmetics gated (needs T1/Mr. E). DONE: !wear + !dye change the model in a soak.
+- [ ] L30c. LOOT TABLES by depth/biome/boss; boss uniques; Chronicle announces rare finds. DONE: loot scales in a 10-floor soak, a boss drops its unique.
+# Phase F - dungeon-side UI / readability (stretch) [L31]
+- [ ] L31. Dungeon-fight UI (party frames, boss bar, feed HUD): damage numbers, status-effect icons, "Now fighting: <lord>" banner, legible at 1080p. Keep the parchment+ink+teal theme. DONE: 1080p capture, HP/damage/statuses/phase readable.
+
+### HUB (web/ only) - hub builder owns web/index.html, app.js, style.css, NOTES.md, docs/HUB_SECURITY.md. Keep the el()/textContent + ICON_SET + CSP model. Republish gated on supervisor review.
+- [x] H1. VISUAL ELEVATION to an SSS+ grimoire: ornate frames/borders, parchment texture, illuminated drop-cap heads, richer hero character-sheet cards, tier badges on boards, better animated d20, micro-anims (respect reduced-motion). Responsive: phone/desktop/overlay. DONE: before/after at 3 widths; security invariants + hostile-name test pass.
+- [x] H2. CHRONICLE on-site + filter tabs by type (combat/loot/boss/town/chat) + per-type icons + text filter + pause-on-hover (keep the on-stream strip in-game). DONE: filters work vs ?mock=chronicle, legible at 1080p.
+- [x] H3. HERO SHEETS deepened: stat block + mods, class/species crest, level/XP, HP, equipped gear w/ icon+tooltip, cosmetics/dyes, title+epitaph for the Fallen. Keep paging (HERO_PAGE 60). DONE: ?mock=crowd 200 fast, ?open=1 full sheet.
+- [x] H4. BOARDS/LEADERBOARD tiers (SSS/SS/S/A/B) styled, sort tabs, Guild Roll + Fallen, town-status strip (day/pop/treasury/raids). DONE: tiers + sorts render, status strip live.
+- [x] H5. TWITCH CHAT EMBED + clickable local d20. CAUTION: minimal CSP change for the embed, documented in HUB_SECURITY.md, flagged for supervisor review; page stays read-only. DONE: chat loads, d20 rolls, CSP documented, invariants intact.
+- [x] H6. TWITCH LOGIN scaffolding (device-code OAuth, public client id) so viewers see their own hero - the client id is NEEDS-MR.-E; wire against a placeholder. Still no viewer writes (read-only through Phase 2). DONE: flow wired/testable w/ placeholder, token step gated on Mr. E.
+- [x] H7. PERF/A11Y/POLISH (stretch): fast first paint, no layout shift, lazy-render the crowd, reduced-motion, contrast+focus, keep offline/stale honesty. DONE: fast on a phone, a11y pass, invariants intact.
+- [ ] H14. THE CHRONICLE REMEMBERS (Mr. E's world should have a past, not just a present). Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md). Today the hub's Chronicle shows only what is in the current snapshot row, so a viewer who comes back after an hour has missed everything. Keep a rolling client-side history in the browser (localStorage, newest-first, hard-capped - roughly the last 300 entries or 48 h, whichever is smaller, and drop the oldest first so storage never grows without bound). On load, show the live snapshot entries first, then a quiet "Earlier" divider, then the remembered ones, with day dividers in the town's own voice. De-duplicate against the live set so nothing appears twice. This is READ-ONLY and per-browser: no write path, no new fetch, no new origin, no CSP change. Remembered entries are attacker-controlled Twitch text that has been through one storage round-trip, so they must come back out through the SAME el()/textContent path as live ones - never innerHTML, never a URL/src/href/style, icons only via the ICON_SET whitelist. Storage can be absent, full or throw (private windows): every read and write wrapped, and the page must render correctly with the history empty or unavailable. DONE: with ?mock=chronicle, load, change the mock, reload - older lines appear under "Earlier" with a day divider and no duplicates; a hero named <img src=x onerror=alert(1)> survives a store-and-reload and still renders as literal text; clearing site data leaves the page working; the stored payload stays under the cap after a long session.
+
+- [ ] H15. EVERY HERO GETS A CREST (heraldry - the single cheapest way to make 200 names read as a guild). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). Give each hero a small coat of arms, drawn as inline SVG the page owns, derived deterministically from the hero's name: hash the name, then pick a field division, two tinctures and one charge from PAGE-OWNED whitelists (the same discipline as ICON_SET - the snapshot value chooses WHICH known shape, it never supplies one). Use the existing palette - deep ink, parchment, the one teal, restrained gold - so the crests read as one house, not a rainbow. Show the crest on the hero card, larger on the opened hero sheet, and beside the top entries on the boards. Keep it cheap: no image files, no new fetch, no CSP change, and the crest must not slow the 200-hero mock's first paint. DONE: the 200-hero mock shows visibly distinct crests with no two adjacent cards looking alike at a glance; the same name always yields the same crest across reloads; a hostile name renders as text AND still produces a valid crest; first paint on the 200-hero mock is no worse than before (state the before/after number).
+
+- [ ] H16. THE HALL OF THE FALLEN. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). The Fallen list from H4 is a list of names; make it a memorial a viewer would stop and read. Per fallen hero: the crest (H15 if it has shipped), the epitaph, what took them, how deep they got, their level and the gear they were wearing when they fell - whichever of those the snapshot actually carries. The content writer has already written the words: epitaphs live in data/lore_lines.json and were frozen into the hub by H12 - read from what is already there, do not invent a parallel set. Fields the publisher does not send yet must degrade quietly to an honest blank, never to "undefined" and never to a guess; list in web/NOTES.md any field you wanted and the snapshot lacks, so the supervisor can raise it with the game build worker. DONE: a mock with fallen heroes shows the memorial with epitaph and cause; a mock whose fallen rows carry only a name still renders cleanly with no console error and no placeholder junk; the hostile-name test passes in the new section; the no-scroll H13 tab discipline still holds.
+
+- [ ] H17. THE HUB ON A PHONE. Owner: HUB BUILDER (web/index.html, web/style.css, web/NOTES.md). Most viewers reach a Twitch stream's companion page on a handset, and H13's tabbed no-scroll layout was designed at desktop width. Make the hub work at 390x844 and at tablet width: tabs reachable with a thumb and never clipped, hero sheets readable without pinch-zoom, the Chronicle legible, the die and boards not overflowing, tap targets at least 44 px, no horizontal scroll at any supported width. Refine the existing layout - do not replace the palette, the Gloock wordmark treatment or the tab model. No framework, no new font, no CDN, no CSP change. DONE: screenshots at 390x844, 768 and 1280 wide, all three with zero horizontal scroll; every tab reachable and every section readable at 390 without zoom; ?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1 all still pass at 390; hostile-name test still passes.
+
+# CHANGELOG 16:01 (supervisor): H1-H7 built, security-reviewed and PUBLISHED LIVE (gh-pages 0ac04f8). Twitch sign-in wired with Mr. E's public client id; the ?twitch_client override removed as a phishing vector. Hub queue is now empty - only Phase 3 (gated) remains.
+
+# Phase 3 (NOT now - stays read-only until RLS designed): friends/party, a write-backed leaderboard, any viewer WRITE path.
+## CHANGELOG 16:10 (supervisor): added L32a-b (spotlight always-on 2x2 + centre Chronicle), placed BEFORE Phase C at Mr. E's direction - it corrects the stream's idle look. IDs frozen as ever.
+
+# Phase H - regression found by the supervisor (Nov 12 18:25)
+- [x] L33. STUCK DELVER REGRESSION: after L27a (nine new monsters at depth) _l25_test went from a clean 0 stuck / 0 nudges to 1 stuck delver (floor 3, state=descend) in a 10-floor run. Likely the denser monster population crowding fight slots or the descend route. The watchdog still frees them, so it is not fatal, but L25's acceptance was 0. Reproduce, find whether it is spawn crowding or route blocking, fix, and get _l25_test back to 0 stuck. DONE: _l25_test OK 13/13 with 0 stuck over 3 consecutive runs.
+      DONE L-cycle 137: three consecutive _l25_test runs on current HEAD, no re-rolling and no best-of -
+      all three OK 13/13 with 0 stuck delvers AND 0 watchdog frees. That is the bar the item set.
+      WHAT IT DOES NOT PROVE, said plainly: I did not reproduce the original failure, so the mechanism is
+      NOT identified - "fixed" here means "not observable". Beyond the three runs, _l25_test has run about
+      a dozen times across this session at 0 stuck every time bar one, and that one was state="search" on
+      floor 10 - my own L49 chest bug, diagnosed and fixed in the L52 cycle. Different state, different
+      cause, already closed.
+      THE ITEM'S ATTRIBUTION LOOKS WRONG, which is worth more than the tick: it blames L27a's new monsters
+      at depth, but the recorded failure was FLOOR 3, state=descend, and L27a widened only the 6-7, 8-9
+      and 10+ bands - the shallows were deliberately untouched and its test still enforces that. Floor 3's
+      roster was never changed by L27a, and "descend" is routing to the stairs, not spawn density. Same
+      shape as L46, L49, L50, L52 and L55: real symptom, wrong assumed cause.
+      Candidates for what helped since, NOT claims: L50's pack cap (one pick can no longer fill a third of
+      a floor - exactly the crowding the item suspected) and L25's watchdog work.
+      IF IT RETURNS: read the STATE in the failure line - descend means routing, search means L49's
+      chests, fight means slot crowding. The test prints "stuck by floor / state"; keep it.
+
+# Phase I - Mr. E's live-stream findings (Nov 12 ~21:55, from his own OBS recordings + play test)
+- [x] L34. DIRECTOR PANE FREEZES (top-left) when a hero dies, rerolls, or a subject vanishes. ROOT CAUSE FOUND by the supervisor, two parts, both laptop-owned:
+      (a) scripts/auto_director.gd _process(): after `var best := _best()` there is `if best.is_empty(): return`. When the current subject dies/rerolls, _shot_alive(_cur) goes false AND _best() can come back empty during the transition, so the function returns and the eye is left parked exactly where it was - the top-left pane then shows a frozen frame. FIX: when best is empty, do NOT return - fall back to an ambient/tour shot (the `tour` path already exists, and L32a added ambient subject selection for the lanes - reuse it) so the director always has something to watch.
+      (b) scripts/spotlight.gd _follow(): the director pane copies the main viewport camera every frame (`var main := get_viewport().get_camera_3d()`; `dc.global_transform = main.global_transform`). When that returns null the pane silently holds its last transform with no visible error. FIX: if main is null or invalid, drive the director pane's own camera from the RtsCamera/eye focus (or the ambient subject) instead of leaving it stale.
+      CONFIRMED by Mr. E's own in-game chat note in the 19-34-39 recording ("the top left screen goes black or stays stuck when someone dies") and visually in the 19:27 recording: the top-left pane is not merely frozen - it renders a BLACK/empty void (camera left inside geometry or below ground) while the other three panes run normally. DONE: a scripted death + a reroll + a subject despawn each leave the top-left pane still moving (ambient or new subject) - verified in a windowed capture, 0 frozen frames.
+      DONE L-cycle 119: auto_director._fallback_shot() steps the tour instead of returning when _best() is
+      empty (both return sites); spotlight._follow() falls back to the eye's own camera, then to _eye_xform(),
+      so the pane never holds a dead frame. tools/_l34_test.gd windowed: scripted death + reroll + despawn
+      each leave the pane moving - 0 stale frames, 0 below-ground, 0 empty ticks, L34_TEST OK (30 checks).
+      Proven against the fault: with the main camera forced out of play the UNFIXED code moved the pane
+      0.00 m (179 stale frames, FAIL), the fixed code tracked the eye 257.71 m of 257.71 m. Shots
+      renders/cycles/20261112_l34/. _l24 OK, _l21 OK, _l32 OK (idle 69.7% of base), _offfloor 0, _delve_test clean.
+- [x] L35. SUBSCRIBER LANE follows subscribers (Mr. E, Nov 12): the subs lane should always be showing a SUBSCRIBER's hero, not sit idle. Priority: a NEW subscriber (sub/resub/gift) takes the lane immediately for their purchased seconds (the existing paid queue and ordering stay exactly as they are - first payer gets their full time, then the next in line). When no paid sub moment is queued, the lane ROTATES through known subscribers' heroes, changing subject every 15 s. If no subscriber hero is available, fall back to ambient (never blank, per L32a). DONE: with no paid events, the subs lane cycles a different subscriber every 15 s; a new sub interrupts and holds their full time; the queue order is unchanged.
+- [x] D24. GRAPHICS - KILL THE GRAIN (Mr. E: "everything feels grainy... like someone sprinkled sand all over it", town worst). ROOT CAUSE FOUND: project.godot has an EMPTY [rendering] section - no TAA, no MSAA, no FXAA anywhere in the project. SSAO (town.gd:828) and volumetric fog (daylight.gd:58-62, 245) are BOTH temporally dithered in Godot 4; with no TAA to resolve them they show as fine static noise over the whole image, worst on cluttered town geometry, and the god-rays/glow add to it. FIX: enable TAA (rendering/anti_aliasing/quality/use_taa), add MSAA 3D 2x-4x for edges, then re-tune SSAO (radius/intensity/detail - or drop it if TAA alone looks right) and re-check volumetric fog density now that it resolves cleanly. Watch FPS: measure before/after. DONE: side-by-side town stills at 1080p before/after showing the grain gone, FPS still >= the D23 target, and Mr. E's eye on it. RESULT (desktop D-cycle 118): project.godot [rendering] now use_taa=true + msaa_3d=1 (2x); SSAO softened (intensity 1.3, detail 0.3, radius 1.8) in town.gd; volumetric fog resolves cleanly, left as-is. Grain gone in 1080p before/after; uncapped FPS at the resting stream cam ROSE 123.4->131.7 avg (min 81->90), >= 120 target. Stills in renders/cycles/20261112_d24. Awaiting Mr. E's eye.
+- [x] D25. TOWN REWORK - LAYOUT AND COLLISIONS (Mr. E: the farm, the streets, all of it needs revamping; "things are colliding, structures are overlapping"). NOTE: D18a reported "town placement already clean" yet the running build clearly shows overlaps - so D18a's probe is too narrow (it checked props, not buildings/farm/fence/road footprints). FIX: (1) widen the placement probe to test BUILDING and farm/fence/road footprints against each other, not just scatter props; (2) rework the town layout - real street topology that buildings face and do not block, a farm that reads as fields+barn+fences rather than scattered pieces, no structure intersecting another, nothing floating or sunk; (3) keep walkability - re-bake nav and keep _townwalk at 0 in_solid. DONE: the widened probe reports 0 overlapping footprints, a 1080p shot sheet of the town and farm from the stream camera, _townwalk PASS, and Mr. E's eye on it. RESULT (desktop D-cycle 120): tools/_d25_probe.gd tests footprints of houses, growth SPECIALS, valley structures AND field rects vs each other + roads (game's own _rect/_rect_on_road authority; plaza-fronting landmarks/shops/towers exempt). Town is geometrically CLEAN (BLD=0, FLD=0 at lvl 3+6); the one real defect was 1 house a later road was cut through, now removed by town.gd _final_road_sweep() after all roads are laid. D25_PROBE OK; _townwalk PASS (in_solid 0/18777); shot sheet renders/cycles/20261112_d25/. Farm reads as fields+cottages+fences+garden+hayricks.
+- [ ] L36. CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (seen in Mr. E's 19:34 recording): the in-game Twitch chat box draws over the L32b Chronicle strip - "A trade caravan is sighted on the west road." is overprinted by chat lines and both become unreadable. The chat and the Chronicle must not share pixels: give the centre strip its own reserved band that chat is docked clear of (HudDock), or move chat into a lane/side column. DONE: a 1080p capture with chat busy AND the Chronicle running shows zero overlapping text.
+- [x] L37. DUNGEON SCAR-VEINS ARE OVERDONE (seen in the 19:27 recording): the L28d glowing vein decals read as bright purple/cyan neon spaghetti looping across the floor rather than cracks in stone. Cut emission strength and coverage hard, break up the continuous curves, and keep them as a subtle tell. DONE: before/after floor shots; the veins read as glowing cracks, not neon piping.
+      DONE L-cycle 138: L42 had already cut vein EMISSION (2.4 -> 1.1), which is why this was left
+      unticked then - the item also wants COVERAGE cut, the continuous curves broken, and before/after
+      shots. WHAT MADE IT SPAGHETTI was the placement, not the texture: up to SIX decals a floor, each
+      2.6-3.8 m, on random cells with NO separation and free to project up a wall face. Four changes in
+      dungeon_hd.gd - count halved and capped at 3; each vein drawn at HALF size; none within VEIN_APART
+      (9 m) of another; and never projected onto a wall, which is what turned a floor crack into piping up
+      the stonework. Emission 1.1 -> 0.75 and alpha 0.62 for "a subtle tell".
+      MEASURED: tools/_l37_shot.gd prints the count and the closest gap, framed high and square-on - the
+      angle that EXPOSES piping rather than hiding it.
+        floor 8   4 veins closest 7.1 m -> 2 veins closest 33.7 m
+        floor 11  6 veins closest 9.9 m -> 3 veins closest 18.4 m
+        floor 14  6 veins closest 6.3 m -> 2 veins closest 38.7 m
+      A vein is now ~1.3-1.9 m wide with its nearest neighbour 18-38 m off, so they cannot join into a
+      curve. Shots in renders/cycles/20261113_l37/. Checked for OVERCORRECTION too - floor 11 still shows
+      them as small violet cracks, present but not dominant.
+      A counting bug of mine was caught first: matching decals by NODE NAME returned 1 every time,
+      because Godot renames duplicate siblings. It counts by texture_emission now.
+      _offfloor 0 of 1343, _delve_test clean, L41_TEST OK, L50_TEST OK.
+- [x] L38. AMBIENT PANE FRAMING IS POOR - THE BIGGEST VISUAL PROBLEM (supervisor reviewed all 13 recordings: a large share of pane-frames are a close-up rooftop, bare grass, open water, a blank wall or a dark void): idle lanes frequently frame a rooftop, a blank wall, empty paving or the inside of a market stall - the camera sits too close/low and clips into structures. Ambient subjects must be chosen AND framed so something legible is happening: prefer a subject with motion, pull back and raise the eye, reject a shot whose view is mostly roof/ground/wall (the _clear() clearance rule exists - extend it to reject bad compositions). DONE: a 3-minute idle capture where every pane change lands on a readable subject; no roof-fillers.
+
+# Phase J - from Mr. E's full OBS review (supervisor watched all 13 Nov-12 recordings, 22:30)
+- [x] L39. CHRONICLE IS A CENTRE BOX, NOT A BAR (Mr. E, with reference screenshot; this REPLACES L32b's full-width band). The Chronicle must be a COMPACT PANEL sitting at the centre cross of the 2x2 - roughly the size of the small white box in his screenshot - NOT a tan band spanning the whole screen. Requirements: a small light/white panel centred on the intersection of the four panes; it covers only the corners of the panes it touches, never a full-width strip; it shows the latest few lines, calmly paced (L32b's pacing work is kept); nothing else may draw over it and it may not draw over chat (see L36). DONE: a 1080p capture with the grid up showing a compact centred box, measured at well under half the screen width, with no full-width band anywhere, and Mr. E's eye on it.  [OWNERSHIP MOVED TO DESKTOP HUD + REDEFINED - COORDINATION 11.4; left UNTICKED deliberately, see the laptop note below]
+      DONE L-cycle 120: HudDock.STRIP (a full-width band) -> BOX_W 0.30 x BOX_H 0.13, centre() returns a
+      compact rect centred ON the cross; spotlight._relayout lets the two pane rows MEET there, so the box
+      covers only each pane's corner (~4.2%). feed_hud: light near-white panel, lord card shrunk again for
+      the narrower box, overrun lines ellipsised. tools/_l39_test.gd windowed: 576 px = 30% of the width
+      (half is 960), centred within a pixel, rows meet, <12% of any pane covered, >=2 lines at the L15 size,
+      nothing spills under a 30-line flood, a lord's card still fits - L39_TEST OK (19 checks). L21_TEST OK
+      (52), _offfloor 0, _delve_test clean. Shots renders/cycles/20261112_l39/.
+      LAPTOP NOTE (do not delete; L-cycle 120, commit 415885a on branch `laptop`, NOT yet merged to main):
+      the laptop built the centre box BEFORE this item moved to the HUD worker and before Mr. E refined it to
+      "SMALLER TYPE - the font shrinks first, then the panel". What exists on `laptop` shrank the PANEL and
+      left the line font at 28 px, so under the new wording this item is NOT done - hence unticked. The HUD
+      worker owns it now: either build on the laptop commit or redo it; HudDock.BOX_W / BOX_H and the font
+      size in feed_hud are the three numbers. The laptop will not touch these files again (COORDINATION 11.2).
+- [ ] L40. HUD AND ALERTS MUST STAY OUT OF THE PANES AND OFF THE CHRONICLE. The recordings show (a) the party-frames panel ("The town's band - floor N") rendering INSIDE a pane, which L21's default-deny docking was supposed to prevent; (b) the "Joined The Court" follower/sub alert drawing across the Chronicle; (c) the Twitch chat column overprinting both the Chronicle and the lower-left pane. Every HUD element, alert and the chat column needs a dock that is clear of the panes and clear of the centre Chronicle box. DONE: a capture with a sub alert, busy chat, party frames and the Chronicle all live at once - zero overlapping pixels between any of them.
+- [x] L41. MISSING MATERIAL ON A DUNGEON FLOOR (bright magenta). In the 19-17-57 recording an entire dungeon floor renders hot magenta - Godot's missing-shader/material colour - with the party frames over it. Something in the L28a dungeon_kit shader path fails to compile or bind for at least one theme. Find which theme/mesh, fix the binding, and add a guard so a failed material falls back to a plain grey PBR instead of magenta on stream. DONE: every theme sampled over 12 floors renders with real materials, 0 magenta, and a deliberate broken-material test shows grey not magenta.
+      DONE L-cycle 132: probed first - magenta is Godot's colour for a ShaderMaterial with a NULL shader,
+      and all eight themes bind correctly here (shader and every texture non-null), so the binding is not
+      broken on this machine. What was missing was the GUARD: FloorGen._kit_mat() now checks the shader
+      and atlas really loaded and returns plain grey stone if not, counting it in kit_fail_count, instead
+      of handing back the null-shader material that IS the magenta. A shader load fails when the
+      .gdshader is missing from a machine's import cache - which is why it would show on the desktop and
+      not here. tools/_l41_test.gd L41_TEST OK (9 checks): 384 materials over 8 themes x 12 floors, 0 null
+      and 0 magenta; the deliberate broken-material test returns a GREY StandardMaterial3D (channel spread
+      0.02) and the guard counts exactly 1.
+      A LIKELY DIFFERENT CULPRIT, FOR MR. E TO RULE ON: rendering all 14 biomes windowed at 1920x1080
+      found no magenta, but CONFECTION's floor is flat saturated pink - its ground was a LIGHT high-chroma
+      colour where every other biome uses a dark one, with the highest sat of any biome. In a pane at
+      stream distance with party frames over it that reads exactly as the report, and the grey walls match
+      too (a missing material would take the walls as well). Ground muted to ["#9a6a80", 0.28] so the
+      stone reads through; the biome is otherwise untouched because "the confection" is a NAMED lore biome
+      and is MEANT to be pink. Before/after in renders/cycles/20261113_l41/. Revert is one line.
+      _offfloor 0 of 1493, _delve_test clean. L28's overwritten render refs restored.
+- [x] L42. DUNGEON LIGHTING IS NEON. Several floors read as saturated pink/green/cyan glow (silk-mother floor, firepits) rather than lit stone - L28c's key+fill and L28d's veins together are far too strong and too colourful. Pull emission and light colour saturation right down; the dungeon should read as dark stone with sources of light, not a nightclub. DONE: a per-theme shot sheet at 1080p that reads as lit stone; Mr. E's eye on it.
+      DONE L-cycle 133: measured, not eyeballed - every biome scored by sat x the summed HSV saturation of
+      its ambient/key/fill/boss, so the ones pulled down were chosen on a number. Worst: firepit 2.94,
+      treasury 2.74, workshop 2.33, mess 2.32 ... fogbound 0.30 - firepit being one of the two floors Mr.
+      E named, and the BOSS accents the most saturated things in the table (0.62-0.94), which is the
+      pink/green/cyan he sees. biomes.json: 48 values pulled down by a one-shot migration editing the RAW
+      TEXT so the one-line-per-biome layout survives - ambient S capped 0.34, key 0.20 (a key light is
+      near-white with a tint, not a colour), fill 0.26, boss 0.62, glow 0.55 (was up to 1.00), grade sat
+      1.05 (was 1.25). Emission, which the item names: L28d scar-veins 2.4 -> 1.1 (they read as neon
+      piping, not cracks), dungeon_parts 3.0 -> 1.7, 4.0 -> 2.2, scatter 1.0-2.6 -> 0.7-1.5, ember bed
+      3.0 -> 2.2. LEFT ALONE deliberately: the flame itself at 8.0 - the item asks for dark stone with
+      SOURCES of light, and a fire is the source; the nightclub came from the room being washed, not the
+      fire being bright. Sheet re-rendered 1920x1080, 14 biomes; before/after in
+      renders/cycles/20261113_l42/ (different generated floors - compare the lighting, not the layout).
+      _offfloor 0 of 1398, _delve_test clean, L41_TEST OK. L28's refs restored.
+      THE REST IS MR. E'S: the DONE asks for his eye on the sheet. Every number moved is a cap in one
+      place and the previous biomes.json is recoverable from git.
+- [x] D26. MOSS/DECAL SPLOTCHES ON TOWN ROOFS. Across the recordings the terracotta roofs carry bright flat green blobs that read as spilled paint, not moss. Either the decal is far too saturated/opaque or a dungeon decal is bleeding onto town roof materials. Fix so roof weathering is subtle. DONE: before/after roof close-ups at 1080p. RESULT (desktop D-cycle 119): not a decal/dungeon bleed - the town's GREEN livery roof tint (town.gd LIVERY_TINT) was Color(0.62,0.84,0.60), a bright green multiplied onto the terracotta tiles that read as green paint in the lighter tile areas. Toned to a subtle sage Color(0.78,0.85,0.74); blobs gone, roof reads as weathered terracotta. A/B in renders/cycles/20261112_d26/pair_green_{old,new}.png.
+- [x] D27. THE TOWN READS AS EMPTY AND DARK FROM THE STREAM CAMERA. The recordings show large flat grass expanses with nothing in them, panes that frame a bare field or a blank wall, and daytime shots (e.g. Day 11 08:40) that look like dusk. Two parts: (1) fill the town/valley so no camera angle lands on featureless grass - paths, hedges, crops, carts, clutter, people moving; (2) check the daylight curve and exposure - morning should read as morning, not gloom (this interacts with D24: fix the grain first, then re-judge brightness). DONE: a 12-shot sweep from the stream camera at 08:00/12:00/18:00/22:00 where every frame has something to look at and the daytime frames read as daylight. RESULT (desktop D-cycle 121): (1) BRIGHTNESS - the 'dusk' was overcast weather: it greyed the sky and dimmed the daytime fill to a gloom. daylight.gd overcast sun 0.76->0.88 and dark 0.55->0.42 (rain 0.55->0.66, 0.9->0.78), plus a daytime ambient boost scaled by weather darkness (env.ambient_light_energy *= 1 + dark*0.6*(1-nt)). Clear days and night unchanged. 08:00 overcast now reads as bright cloudy daylight. (2) FILL - new town.gd _dress_greens() dresses the bare grass islands with flower beds + bushes + the odd tree (644 flora), is_clear-gated, gate lanes/river kept clear; trees/bushes register as nav solids. FPS 128.2 avg/94 min (>120 D23 target); _townwalk 0 in_solid. Sweep in renders/cycles/20261112_d27/.
+
+### CONTENT (laptop, branch `content`, data+lore only, NEVER runs Godot) - see COORDINATION 10
+- [ ] C1. COSMETICS & DYES CATALOGUE (data/items.json): items.json is only 3.7 KB - the cosmetic set is thin. Expand cosmetics and accessories a lot: cloaks, hats/hoods/helms-as-cosmetic, rings, amulets, boots, gloves, banners, pets, titles - each with the same fields the existing entries use, priced sensibly against the economy, and named from the lore (Bellmire, the scar, the Ford, the guild). Widen dyes beyond the current set and keep dye_cost coherent. Additive only; never rename or drop a key. DONE: json validates, every new entry carries the same fields as the existing ones, and a written list of what was added.
+- [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
+- [ ] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
+
+# Phase K - test validity (raised by the laptop, Nov 12 23:55; IDs + decisions by the supervisor)
+- [x] L43. _l32_test's FPS GATE IS VACUOUS (test-validity bug, OWNER: LAPTOP). The suite printed "L32_TEST OK (90 checks, 0 failed)" while reporting "L32_FPS base 1.0 idle 26.8 paid 18.7": every FPS check is RELATIVE to base ("idle >= 65% of base"), so a base of 1.0 passed them all trivially and the gate tested nothing. First seen on the run after origin/main brought D24 (use_taa=true, msaa_3d=1). Only the FULL-SCREEN base phase collapsed; grid phases are in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6) and the DESKTOP's D24 numbers ROSE 123.4 -> 131.7, so this is harness-specific, not "TAA is slow".
+      DONE L-cycle 134: implemented to the supervisor's decisions. The relative-to-base design is KEPT;
+      the MEASUREMENT was fixed. After any viewport 3D-state change (disable_3d toggled, grid raised or
+      lowered) samples are discarded until TAA refills - 1.0 s AND 60 frames, whichever finishes last.
+      The base >= 10 assert STAYS permanently. Second guard added: every phase must sample >= 60 frames,
+      and the raw per-phase numbers print every run (L32_FPS_RAW base X/N idle X/N paid X/N) so a vacuous
+      pass cannot hide behind a green summary. The separate-process fallback was not needed.
+      RESULT: base 1.0 -> 35.1, 37.6, 38.2 across runs; L32_TEST OK (100 checks, 0 failed), the first
+      clean run of this suite in many cycles.
+      IT CAUGHT A REGRESSION OF MINE ON ITS FIRST HONEST RUN: paid fell to 14.3 then 14.7, under the
+      floor of 15, because L48 had put Roster.abilities_of() in the per-hero per-frame fight loop,
+      allocating an Array and walking two tables every frame for every delver. Now cached on the party
+      member and recomputed only when the hero LEVELS - paid back to 16.1, L48_TEST still OK.
+      That is the argument for repairing a vacuous gate instead of reverting its assert.
+      STILL OPEN AND NOT MINE: the supervisor's cross-check of running this on the DESKTOP.
+      SUPERVISOR'S DECISION: (1) KEEP the relative-to-base design - it is what makes the test portable across two very different machines; fixed per-machine numbers would need tuning and would drift. Fix the MEASUREMENT, not the design. (2) After ANY change to viewport 3D state (disable_3d toggled, grid raised/lowered) DISCARD A WARM-UP WINDOW before sampling - at least ~1.0 s of real time or 60 frames, whichever is longer - so TAA's history buffer refills; the suspected mechanism is sampling immediately after root.disable_3d=false, which TAA cannot survive. (3) KEEP the laptop's new `base >= 10.0` assert PERMANENTLY - it is what caught this. NEVER revert it to make the suite green. (4) Add a second validity guard: assert each phase sampled a minimum number of frames, and print the raw per-phase FPS so a vacuous pass can never hide again. (5) ONLY IF warm-up does not restore a sane base, measure the base phase in a separate process with a fresh viewport and no toggle. (6) DO NOT touch project.godot [rendering] - it is desktop-owned, TAA stays, and the desktop's numbers improved.
+      CROSS-CHECK (either machine): run _l32_test once on the DESKTOP to see whether a collapsed base reproduces there. That distinguishes harness artifact from machine. A healthy D23 soak does NOT rule it out - D23 does not use this harness.
+      NOTE FOR EVERY RUN UNTIL THIS IS DONE: _l32_test now REPORTS FAIL on the laptop by design (the new assert). That red is THIS flag, not a regression in L34/L39, and it is not a reason to reject an unrelated laptop item.
+      DONE: base reads a sane FPS on both machines with TAA on, the relative checks are meaningful again, the base>=10 and min-sample asserts stay, and a deliberately-broken base makes the suite FAIL.
+- [x] L44. _l24_test IS FLAKY (OWNER: LAPTOP). Failed 3 of 6 once ("Ash's body below is the one the lane holds" plus the two checks depending on it), then passed 6/6 on an immediate re-run with nothing changed - a lane/delve timing race, the same class as the "before" check already noted.
+      DONE L-cycle 135: the race was FOUND, not guessed at. The test put Ash in the bits lane for 60
+      SECONDS and ran its final checks 1200 FRAMES later - and Spotlight seconds are REAL seconds, so
+      1200 frames is 20 s at 60 fps but about 60 s at the 14-20 fps this machine runs DURING A DELVE,
+      which is when the second half of this test runs. The hold expired just as the asserts fired, which
+      is exactly the recorded 3-of-6 failure, and it explains why an immediate re-run passed: it was
+      faster. Same shape as L43 - a test measuring in frames something that lives in seconds.
+      Fixed by DRIVING the state (the L23 precedent), not by retrying: the hold is 900 s so it cannot
+      expire inside a test that never meant to test expiry; the final checks wait for the CONDITION they
+      need (both delvers' bodies in the tree, since body_of resolves through the Delve party first) and
+      fail with a named check if it never arrives; and the lane is re-bound to the underground body
+      immediately before the asserts, so the precondition is ESTABLISHED rather than hoped for.
+      NO retries and NO best-of-N. PROVEN: ten consecutive windowed runs, 6/6 every time, 0 failures.
+      Only the test file changed - no game script touched.
+      SUPERVISOR'S DECISION: make it DETERMINISTIC, following the precedent already set by L23 (_l20_test drives its fight and raid shots deterministically rather than hoping the timing lines up). Drive the lane/delve state the test needs instead of waiting on it. Do NOT paper over it with retries or a best-of-N: a flaky test is worse than no test, because it trains every run - and every supervisor - to ignore red. DONE: _l24_test passes 6/6 on ten consecutive runs.
+
+# Phase L - Mr. E's Nov 13 review (the stream test + his 20-point list). IDs by the supervisor.
+# URGENT - viewer-facing
+- [x] T3. !enlist "DID NOTHING" ON STREAM + THE REPLY PATH DROPS SILENTLY (OWNER: DESKTOP - twitch_eventsub.gd is desktop-owned). Investigated by the supervisor: the COMMAND path is sound - chatcmd._enlist() cannot crash on a typo or empty args because Roster.fresh() (roster.gd L231-234) substitutes a random class/species for anything unknown. The fault is far more likely in the REPLY path, which has drop points that log NOTHING:
+      (a) twitch_eventsub.gd L580: `if dry_run_chat or offline or tokens["bot"].is_empty() or _token_dead["bot"]: return` - this returns BEFORE _send_chat(), so the "chat not sent" log on L590 never runs. The hero IS created, the answer is queued, dequeued, appended to sent_chat, then silently discarded. From chat it looks exactly like the command did nothing.
+      (b) L572-573: an identical message inside 30 s is dropped silently. Two viewers making the same mistake within 30 s ("No hero yet - type !enlist") means the SECOND viewer gets silence. Same for any repeated error text.
+      (c) chatcmd.gd L88-89: the per-user cooldown returns "" with no feedback.
+      Checked and NOT the cause at the time of the stream: the bot token was refreshed 21:07 with user:read:chat + user:write:chat and ~3.7 h of validity, and no dry_run/offline flag is set in local/twitch.cfg.
+      FIX: every one of those drop points must _say_log() its reason (which condition, which user, which text). A silently-swallowed reply is undebuggable and this class of bug will recur. Then make the duplicate guard per-user instead of global, so one viewer's repeat cannot mute another's answer.
+      DECISIVE TEST FOR THE NEXT STREAM (Mr. E): have someone type !enlist, then look at the live hub. Hero appears on the hub but no chat reply => the command works and the reply path is broken. No hero on the hub => the command never ran (chat ingest/cooldown). That single check splits the problem in half.
+      DONE: every skipped reply writes a log line naming the reason; the duplicate guard is per-user; a scripted run proves a reply either reaches chat or is logged as to why.
+      RESULT (desktop D-cycle 125): twitch_eventsub.gd reply path is now loud - _on_twitch_reply logs empty replies and queue-full drops; _tick_chat's 30s duplicate guard is now keyed per-user (login+text) and logs each drop; a new _send_hold_reason() names why a send is held (dry_run_chat / offline / no bot token / bot token dead) so bug (a)'s silent discard is gone. (c) chatcmd.gd cooldown is LAPTOP-owned, left for them. tools/_t3_test.gd (NEW) proves 12 cases incl. two different users with identical text BOTH getting through. T3_TEST OK (12/12). Gate clean: parse 0 err, TWITCH_PARSE OK, _offfloor 0/1133, _townwalk PASS, _delve_test rc=0.
+
+# DO THIS FIRST - it decides how much of the rest is real work
+- [x] D28. LIVE-RUN FEATURE CENSUS (OWNER: DESKTOP, reports to the supervisor).
+      DONE D-cycle 123: 7-min 8x soak (director on, 6 viewers). CENSUS TABLE + verdicts in PROGRESS. Headline: audio is
+      NOT dead (3698 plays, 54/94 kinds) but FOOTSTEPS (footstep_grass/stone/water/wood) and most ANIMAL/UI sounds have
+      NO CALLER -> that is the silent-town bug (-> D29). Anims FINE (30 clips, 0 miss), spells FINE (9 by name), loot FINE,
+      bosses/traps PRESENT-but-RARE (feed: 3 lords, 3 traps), cosmetics NEVER worn + gear tiers stuck w0/a0 despite forging. Mr. E says he has not SEEN: the new sounds, any new animations, new bosses, new cosmetics/armour/weapons, trap damage, spell variety, or loot. All of those are ticked DONE with passing tests. Before building anything further, find out which are BROKEN and which merely never FIRE. Instrument a 30-minute soak with the director on and COUNT, per feature: every Sfx kind played (by id, with totals - the 86 RPG kinds from S1/S2/S3 especially); every animation clip actually played, by body type; bosses/lords/uniques spawned and killed; traps armed vs triggered vs DAMAGE APPLIED (hp actually lost); spells cast BY SPELL NAME (is it always the same one?); loot: chests spawned, chests opened, items dropped, items picked up; cosmetics/accessories worn by anyone. Print a table of counts and write it into PROGRESS. A count of ZERO means broken; a count of 2 in 30 minutes means too rare to ever be seen on stream - both are findings, and they are DIFFERENT fixes. DONE: the census table in PROGRESS.md, and a one-line verdict per feature (broken / too rare / fine).
+
+# Mr. E's Nov 13 list - LAPTOP (dungeon, combat, HUD)
+- [x] L45. BOSSES SCALE WITH DEPTH (his call): a lord on a deep floor must be meaningfully harder than a shallow one - hp, damage, mechanics, adds. Deeper should feel dangerous. DONE: a measured curve of boss difficulty by floor; a deep lord can wipe an unprepared party.
+      DONE L-cycle 123: the real bug was that Bestiary.boss_def() never SAW the floor - a lord's hp/atk came
+      straight off canon, so the same lord hit identically at any depth (uniques already scaled; lords did
+      not). boss_def(b, floor_no) + depth_step() (counts lord-floors from the first, so the curve is
+      open-ended and states no floor count) + named constants LORD_HP_PER_STEP 0.28 / LORD_ATK_PER_STEP 0.22.
+      scale_ways() deepens the MECHANICS too - more adds arriving faster, stronger nova/swoop, harder ward,
+      earlier enrage - mutating a duplicate so canon LORD_WAYS is never written to. dungeon_hd passes the
+      floor. Measured curve (Hollow King, same lord): hp 150->528, atk 15.0->44.7; summon most 2->6, every
+      12.0s->5.7s, ward 0.50->0.80. Wipe: an unprepared party of four (120 hp) falls to a deep lord in 2.7
+      landed blows vs 8.0 shallow. tools/_l45_test.gd L45_TEST OK (10 checks) - also asserts the first lord
+      floor is unchanged canon and the curve never dips. _offfloor 0 of 1130, _delve_test clean, L27A OK.
+      MR. E'S CALL: 44.7 vs ~30 hp heroes is about one blow a hero - LORD_ATK_PER_STEP is the dial.
+- [x] L46. TRAPS DO NO DAMAGE (he believes spikes/traps are inert). L11 claims working traps. Verify against the D28 census, then fix: a triggered trap must apply real hp loss, show a number, and reach the Chronicle. DONE: census shows trap triggers AND hp applied; a delver can die to a trap.
+      DONE L-cycle 124: VERIFIED FIRST - Mr. E is right about the experience, wrong about the mechanism. L11's
+      damage code was never broken (a forced spring took 10 hp, rolled the save, floated the number, printed
+      the line). Traps were almost never MET: over 4 floors a delver came within the 0.90 m radius of only
+      2 of 6 traps (closest approaches 0.1/0.4/3.9/4.0/11.0/23.5 m) and 1 fired. THREE real defects, all
+      measured: (1) dungeon_hd._dress() laid traps on ANY open cell - they now go on info["keep_clear"], the
+      way through, which is where the party walks (coverage 2 of 6 -> 5-6 of 6, closest 0.0-0.7 m);
+      (2) _traps_tick() ran ONLY inside _fight(), so the whole walk to the stairs was trap-free - it now
+      runs in "descend" and in the "flee" state too (encounters 2 -> 5 over the same floors); (3) a sprung
+      trap could take ZERO hp - floorf(dmg*0.5) on a save floors a low roll to 0 and fire resistance
+      multiplies to 0 - now maxf(1.0, ...), so a save halves and resistance blunts but neither nullifies.
+      tools/_l46_test.gd L46_TEST OK (10 checks) - it prints trap_log WITH the closest approach to every
+      trap, so the next run can tell "damage broken" from "never triggered". _offfloor 0 of 1063,
+      _delve_test clean, L25_TEST OK 13/13 (0 stuck, 0 prop overlap - traps on the route block nobody).
+      NOTE: part C first failed on a CORRECT mechanic - the canon one-death-save-a-delve
+      in _hero_hit stood the delver back up on 1 hp; the test now burns the save then kills.
+- [x] L47. ADVENTURERS MUST THINK FOR THEMSELVES (Mr. E marked this PRIORITY). Delvers should make visible decisions: retreat when hurt, drink a brew when low, use oil before the dark, pick targets sensibly, search for loot, regroup, flee a losing fight, go home when spent. Right now they read as scripted. DONE: a soak where the Chronicle shows real decisions, and a hurt party retreats rather than dying in place.
+      DONE L-cycle 122: delve.gd decision layer - _decide() records+announces by kind (the LINE is rate-limited
+      per hero, the decision never is). NEW: _think() per hero (BREAK OFF under 22% hp with no heal brew and
+      run for the way up; REGROUP past 15 m from the party centre; REJOIN past 55%), _losing() at party level
+      (new "flee" state - a plainly lost fight is broken off and they run out WITH survivors), and
+      _pick_target() replacing nearest-foe (finish the nearly-dead, shut up the caster/spitter/shooter).
+      Drinking, healer triage and press-on/climb-out were ALREADY visible decisions - now counted and
+      reasoned through the same layer rather than duplicated with new behaviour.
+      tools/_l47_test.gd headless (delve LOGIC, not HUD): A soak demands a RANGE of kinds (12 decisions,
+      press_on+finish); B slams the party to 10% mid-fight and requires flee + the line + SURVIVORS; C prefers
+      a wounded FAR foe over a healthy near one; D hurts ONE delver to 8% with no brews - B can NEVER reach
+      the single-hero path (the party-level retreat fires first and returns), so without D that branch would
+      have shipped unexecuted. L47_TEST OK (8 checks). _offfloor 0 of 1043, _delve_test clean, parse 0.
+      Proven by test: press_on, finish, party_retreat, flee. Wired but not yet observed firing: regroup,
+      rejoin, silence, mend, brew_*, turn_back_*.
+- [x] L48. LEVELLING: CLASS + RACE UNLOCKS. Levelling should unlock new skills, spells and abilities that depend on BOTH class and species, and go deeper than that (tiers, choices). Today a level-up is a stat bump. DONE: a levelling table per class x species; a hero visibly gains a named ability and uses it.
+      DONE L-cycle 130: TWO TRACKS rather than a 90-row class x species table nobody could keep true - a
+      hero draws from their CLASS track (every class, levels 2 and 5) and their SPECIES track (every
+      species, level 3), so the COMBINATION makes them and a new class or species costs one row. roster.gd
+      gains CLASS_UNLOCKS, SPECIES_UNLOCKS, ABILITY_WORDS (a name AND a blurb each), abilities_of() and
+      unlocked_at(). A level-up now SAYS what it gave - "X learns Cleave - their blow carries into a second
+      foe" - because an unlock nobody can see is the same bug as the stat bump it replaced. delve.gd uses
+      them through the seams that already existed (_ability_mult, _ability_hit, _soak), so a level-5 orc
+      knight brings cleave, bulwark AND rage. tools/_l48_test.gd L48_TEST OK (11 checks): every class and
+      species has a track, the same class of different blood gets a DIFFERENT kit, it is tiered, a real
+      level-up announces it, and - check D - EVERY ability must actually change something in delve.
+      Check D caught my own decoration: "backstab" shipped in the first draft as a named ability with no
+      implementation. Now +40% on an already-wounded target. 15 classes, 6 species, 17 abilities, all 17
+      wired. _offfloor 0 of 1305, _delve_test clean, L3_TEST OK.
+      MR. E'S CALL: a levelled hero is now meaningfully stronger both ways; the numbers sit in
+      CLASS_UNLOCKS, SPECIES_UNLOCKS and the _ability_mult match if the curve wants flattening.
+- [x] L49. LOOT AND SEARCHING ARE INVISIBLE. No chests, no drops, nobody searching. Heroes should visibly SEARCH specified spots - a dig/search animation, time taken - and report "...no loot..." or "Found loot!" style lines. Not every monster drops. DONE: census shows chests spawned/opened and items picked up; a capture shows a hero searching and both outcomes in the Chronicle.
+      DONE L-cycle 125: as with L46 the mechanic was not missing, it was INVISIBLE - _loot() already rolled
+      Investigation and awarded gold, but fired the instant a floor cleared with no chest, nobody moving and
+      nothing to watch. NEW DungeonParts.chest() (banded, hinged lid, a small glint to find it in a dark
+      pane; set_meta("open") tips the lid). dungeon_hd lays 1-2 a floor in info["chests"], on OPEN floor
+      rather than the route - a chest is somewhere you GO, traps are what you trip over. delve.gd gains a
+      "search" state: the sharpest eye WALKS to each chest, faces it, kneels with Use_Item for 1.8 s, and
+      only then rolls - reading out in Mr. E's own words, "Successfully found loot!! N gold" or
+      "...no loot...", with a floating +N / empty. Counters chests_found/chests_empty exposed for a census.
+      Refactor: the floor-cleared branch became _floor_decision() + _fight_body() so the same decision is
+      reachable after searching; the no-chest path is unchanged. tools/_l49_test.gd L49_TEST OK (9 checks)
+      - it checks the LID actually rotates and the delver actually walks within 2.2 m, so loot cannot
+      teleport in, and drives 80 searches: 32 found (32 of 32 paid gold), 48 empty. _offfloor 0 of 1624,
+      _delve_test clean, L25_TEST OK 13/13 (0 prop-prop, 0 prop-wall, 0 stuck; watchdog 1 free in 10
+      floors where the last runs were 0 - within the limit, but the chests are the thing to suspect if it
+      climbs). SCOPE: chests pay GOLD; gear salvage is still _loot()'s; there are NO per-monster
+      physical drops or floor pickups - if Mr. E wants those they need their own ID.
+- [x] L50. MONSTER DIVERSITY. More variety in what appears, and at what depth. DONE: a depth census showing a wide spread, not three repeats.
+      DONE L-cycle 131: the census came FIRST and located the problem somewhere else. tools/_l50_test.gd
+      reproduces dungeon_hd's own spawn loop (pick + pack expansion) so it measures what a floor really
+      gets. BEFORE: depth 1 gave 3.5 distinct kinds a floor with one taking 51%; depths 6-14 gave 5.7-6.6
+      at 30-36%. The DEEP floors were never thin - L27a had already done that work - ALL the repetition
+      was in the shallows, which is the first thing a viewer sees. Two causes: the shallow band held only
+      five kinds (widened to seven with the gentlest creatures from the next band up - puglin, spider -
+      NOT the deep roster, so L27a's shallows-innocent rule still holds and _l27a_test still passes), and
+      pack expansion let ONE pick fill n = 1 + pack slots, so a rat pack took a third of a small floor
+      (now capped at ~34% of a floor, which helps at every depth). AFTER: depth 1 is 4.3 distinct at 43%,
+      worst share across all depths 43%. No new monster was invented - I checked, and the only unused
+      types are the two summon-only fodder. The test also asserts depth still CHANGES what appears (18
+      kinds only deep, 7 only shallow). L50_TEST OK (5 checks), L27A_TEST OK, _offfloor 0 of 1405,
+      _delve_test clean.
+- [x] L51. HUD OVERHAUL (he says it twice - it is plain and under-informative). Needs: equipment shown with what BUFFS/DEBUFFS it gives; the viewer's inventory visible so they know what they own; shops shown with WHAT THEY CURRENTLY STOCK; a way to SELL. Also the d20 needs redesigning - he does not like how it looks - and it exists to roll stats when a viewer builds a character, so wire it to that. DONE: a 1080p HUD capture Mr. E approves, showing gear with buffs, inventory, shop stock and selling.
+- [x] L52. (SUPERSEDED BY THE REFRAMED L52 IN THE Nov-13 SECTION - done there, L-cycle 126; the census disproved the premise, so the work was legibility, not more spells.) SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
+
+# Mr. E's Nov 13 list - DESKTOP (town, world, audio, visuals)
+- [x] D29. THE TOWN IS SILENT OF EFFECTS - MEASURED, NOT GUESSED. The supervisor analysed the AUDIO of Mr. E's own OBS recordings (he was right; this needs no census to confirm):
+      * 19-34-39 (town/market, 39 s): dynamic range only 13.0 dB, median -34.9, peak -30.1, and ZERO windows more than 8 dB above the bed - i.e. NOT ONE discrete sound event in a busy market with heroes walking, NPCs working and a caravan arriving. It is a flat ambience drone and nothing else.
+      * 19-27-48 (dungeon/delve, 49 s): range 29.8 dB with 79 spike windows (3.4%) - so the Sfx system DOES fire below ground. The fault is TOWN-SIDE, not the whole system.
+      * Everything is also too quiet: median ~-35 dB, peaks only -25 dB.
+      So: the 86 CC0 kinds wired by S1/S2/S3 are not reaching the town. Find whether town callers never call Sfx, call a kind id that is not in SETS, play on a muted/mis-routed bus, are throttled out by GAP, or are attenuated to nothing by 3D distance from the stream camera. Source library is github.com/jestsayin96/music-studio - READ-ONLY, copy what is needed, never modify that repo. Also raise the overall mix level.
+      *** OBS RULED OUT - ANSWERED BY MR. E. THE TOWN SILENCE IS A REAL GAME BUG. PROCEED. ***
+      Mr. E sent his OBS Advanced Audio Properties and mixer. Findings:
+        - Desktop Audio is MUTED (red crossed speaker, flat meter). If Bellmire's output goes to the Windows
+          default device, OBS was capturing it on a muted channel and no game sound could reach the recording.
+        - OBS tracks 1 and 3 have identical source assignments (hence the two identical ffmpeg streams);
+          OBS track 2 has nothing live on it (the -91 dB stream).
+        - Source volumes are low at the source: Application Audio Capture 27%, Desktop Audio 28%,
+          Game Capture 45%. That alone explains the -35 dB median.
+      ANSWERED 2026-11-13: Mr. E captures Godot with the 'Game Capture' source, NOT Desktop Audio. Game
+      Capture is Active with a -6.8 dB fader, so Bellmire had a live audio path into those recordings. The
+      muted Desktop Audio is therefore irrelevant to the game's sound, and the measured town silence is
+      ATTRIBUTED TO THE GAME. Hunt it in the engine.
+      Still worth Mr. E's attention on his side, but not blocking: Game Capture sits at 45% (-6.8 dB), so even
+      once the town SFX fire they will be quiet for viewers; and OBS tracks 1/3 are duplicates with track 2 empty.
+      DONE: a re-recorded town clip whose audio shows clear discrete events (>=8 dB above the bed) for footsteps, voices, work and combat, at a sane level - verified the same way, by measuring the recording.
+      ADVANCED, NOT TICKED (desktop D-cycle D6, 2026-11-13): the GAME side of the silent town is
+      verified AND the missing "work" layer is now built. D42's footstep/voice/animal callers
+      re-measured live (tools/_d42_test, 40 s 8x): footsteps 1255 (grass 564/stone 569/wood 62/
+      water 60), animal voices 68 (horse 16, dog 16, cat 25, boar 11) - all fire. NEW this cycle:
+      the ambient WORK sound the census had no caller for - town.gd._work_sounds rings the smith's
+      anvil ("hit" at the blacksmith yard) and chinks market trade ("coin" over the square),
+      station-based, 3D, daytime only (gated is_raid_on()+economy.is_night(), like the festival).
+      tools/_d29_test 30 s 8x: work_plays 69 (smith 46 + market 23), 0 SCRIPT ERROR. Gate GREEN:
+      parse 0, _offfloor 0/1411 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test clean,
+      _townwalk in_solid 0/15470 PASS. UNTICKED because the stated DONE is a re-recorded OBS clip
+      measured at >=8 dB discrete events - that needs Mr. E to record with Game Capture turned up
+      (it sits at 45% / -6.8 dB); headless COUNTS the events, it cannot measure his recording. Not
+      looked at on stream yet (headless soak only).
+- [x] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
+- [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.
+      PART (D-cycle D13, 2026-11-14): visible construction added. growth.gd now raises a timber scaffolding frame (corner poles, two plank rings, diagonal braces, a pennant and a stack of planks) around every newly-built plot and every newly-unlocked special at each level-up; the frame lives SCAFFOLD_LIFE=90s real seconds then auto-removes via _process. Purely visual - no collision, no navmesh impact. _d31_test (Town.tscn booted, show_level 1->4->6): before=0 mid=9 late=17 cleaned=0 PASS. Chronicle picks up "Builders raise scaffolding across Bellmire." on each level-up. Still open for the DONE bar: builder NPC figures at the scaffolding, the one-map consolidation decision, and Mr. E's timelapse recording.
+- [x] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.  RESULT (D-cycle D7): old 6-level table FOUNDED at lvl 3/6 and auto-climbed to 5 on settlers alone; now 12 earned tiers (content growth_tiers), founding=HAMLET(2), pop ceiling ~315=tier 5, tiers 6-12 renown-gated. 30-day soak: crossing->hamlet(d2)->guild post(d6)->village(d17), holds at village (score 247, pop 69). Crier lines wired. Gate green. Chart+csv renders/cycles/d32 + to Mr. E; the curve PACE awaits his approval.
+- [ ] D33. RANDOM WORLD EVENTS ON THE MAP: bandit camps and monster camps that spawn around the map, and a random boss scaled to the TOWN's level. DONE: a soak shows camps appearing and a town-level-appropriate boss.
+- [x] D34. NATURAL DISASTERS: volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor - be creative, with real consequences for the town. DONE: several distinct disasters fire in a soak and visibly affect the town.
+      RESULT (desktop D-cycle D5, 2026-11-13): 13 disasters wired in economy.gd from the content writer's lore_lines.json "disasters" (begin/during/pass + alt variants). Each charges a real cost against the town's own stock/treasury/renown (fractions of current stock, so it scales) plus active effects - a production damp, a growth halt, and casting_blocked()/trade_blocked() flags for spells/trade to honour. Occasional, one-at-a-time, gated town_level>=2 & day>=6 so a founding is never struck; meteor leaves a scarglass windfall. tools/_d34_test.gd OK 191/0; live Town soak cut food on drought 60->24 and meteor 24->16.8, each pushing distinct begin/during/pass Chronicle lines, 0 SCRIPT ERROR. Visible-on-stream + Mr. E's eye still to come, and two hooks remain for a later cycle: wire casting_blocked into spells.gd and trade_frozen into the caravan path.
+- [ ] D35. SHOPS NEED EYE CANDY AND VISIBLE STOCK - they should look good and show what they actually have. DONE: shot sheet; stock visible (pairs with L51's HUD side).
+- [ ] D36. NPC DIVERSITY - more variety among townsfolk. DONE: a crowd shot with real variety.
+- [x] D37. E3PO - A NAMED, IMMORTAL NPC (his favourite). E3PO CANNOT DIE. He is Commander of the Guards. When badly hurt he withdraws to the guard barracks and heals, then returns to duty. He must be woven into the lore, not bolted on. DONE: E3PO leads the guard in a raid, is wounded, withdraws, heals, returns - and never dies; his lore is written (see C4).
+      RESULT (D-cycle D12): E3PO LIVES (notables.gd + 1 line in raids.gd, both mine). He spawns as a
+      persistent notable 'E3PO / Commander of the Guards' at the garrison (lm_barracks; the gate watch
+      if no barracks stands yet), Knight body + guard gear + cape. IMMORTAL BY CONSTRUCTION: raids.gd
+      _defenders() now skips him by title, so he is never in the fall-able roster and can never be buried.
+      He holds his post (role guard => no civic-flee). A line-picker reads data/lore_lines.json 'e3po'.
+      <category> (incl sub-keyed viewer_roll.crit/high/low/fumble) with no immediate repeat; EVENT lines
+      go to the Chronicle (town.feed), AMBIENT barks float above his head (shout_lines). WITHDRAW/HEAL/
+      RETURN: on a raid breach he rolls hurt -> says a hurt+withdraw line, walks into the barracks, heals
+      45-80 s, then says a return line and resumes his post. WIRED by polling real transitions (zero edits
+      to trigger files): intro, raid, hurt, withdraw, return, festival, disaster, tier_up, plus ambient
+      says/town_talk/night_watch(by hour)/drill/recruit/dispute. _d37_test: title OK, in town, 27 lore
+      cats, NOT in defenders, picker OK, saying a line grows the feed + sets his shout -> D37_TEST OK.
+      GATE GREEN: parse 0, _offfloor 0/1531, TWITCH_PARSE OK, _townwalk 0/18947 PASS, _delve_test rc0,
+      0 SCRIPT ERRORs. LOOKED (renders/cycles/d37/e3po_post.png): the Commander at the garrison, named.
+      DONE Nov 14 (all E3PO voice hooks now wired: laptop L-148 c4433a6 roster.gd+delve.gd;
+      desktop a2dbd3a town.gd trader_arrives). Originally deferred, needed hooks in LAPTOP files roster.gd/delve.gd/chatcmd.gd, or caravan state - were not DESKTOP BUILD's to
+      edit): viewer_roll(4), viewer_down, viewer_returns, viewer_cosmetic, rank_up (roster.gd viewer
+      events); delve_dispatch, lord_sighted, lord_cleared (delve.gd); trader_arrives (D39 caravan). These
+      categories are written + the picker already handles them - they just need their triggers to call
+      notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
+      (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
+- [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
+      MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
+      TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into
+      assets/audio/music/, never modify the repo. Headless renderer: `npm run render` (cli/render.ts).
+      Read docs/STYLES.md and docs/AI_GUIDE.md there first - they define every knob below.
+      THE MAPPING (style x mood x role):
+        day / town      -> style playful_pizzicato, mood playful, role bed
+        night           -> style ambient_calm,      mood lowkey,  role bed
+        raid            -> style epic_cinematic,    mood hype,    role music
+        delve / dungeon -> style lofi_chill,        mood lowkey,  role bed
+        victory + defeat stings -> the 2-5 s sting maker
+      WHY `bed` MATTERS: role bed targets -20 LUFS and opens a speech pocket; the tool MEASURES the
+      300-3000 Hz share so the music does not fight Mr. E's voice on a 24/7 stream. Use bed for
+      everything that loops under talking. Only the raid cue is role `music` (-16 LUFS) because it is
+      meant to take over. Verify with the tool's own describe()/report: mood.pass true and
+      speechRoom.verdict pass for every bed before shipping it.
+      LICENSING: music-studio synthesizes from seeds - the output is original, not a sample of anyone's
+      track. Still add the credit note in assets/audio/LICENSE.txt saying which version generated them.
+      DONE: day/night/raid/delve beds + 2 stings in assets/audio/music/, wired through D22b's
+      transitions, each one's mood.pass and speechRoom verdict recorded in PROGRESS.md.
+- [ ] D39. TRADERS MUST MATTER. Today they arrive and leave with no effect. Make them carry SUPPLIES the town actually receives - and let bandits intercept them, so a lost caravan means the town goes without. An in-game event with stakes. DONE: a caravan arrives and the town gains; a caravan is taken and the town visibly suffers.
+- [ ] D40. FISHING ANIMATIONS AND WATER both need work. DONE: before/after capture of a catch and the water surface.
+
+# Mr. E's Nov 13 list - TWITCH (desktop owns the Twitch layer)
+- [ ] T4. VIEWERS SHAPE THE TOWN (he wants this to feel like a D&D campaign where actions have consequences). Let viewers spend bits or channel points to VOTE on how the town grows: what gets built first, what gets upgraded, what laws pass - with real, lasting, sometimes BAD consequences. Open-ended by design. REWARD/AUTH SETUP IS DONE (Nov 15) - see T5's note; nothing is blocked on Mr. E. DONE: a vote runs on stream, resolves, and the town visibly changes because of it.
+
+# Phase M - from the D28 census + the HUD worker's U1 report (supervisor, Nov 13 01:45). IDs frozen.
+
+CENSUS RESULT THAT CHANGES THE PLAN: three of Mr. E's complaints are NOT bugs. Animations are fine
+(30 distinct clips, 22251 starts, 0 missing, 0 fell-back). Spells are fine (9 distinct: heal 295,
+bolt 161, mend 131, ward 112, smite 85, frost 46, chain 35, renew 31, fire 12). Loot is fine.
+He is not seeing them - that is a READABILITY problem, not a content one. Do not build more of
+these; make the existing ones legible. D30 and L52 are reframed below accordingly.
+
+- [ ] D41. FINISH L40 - THE REST OF THE OVERLAP. The HUD worker made the Chronicle untouchable from
+      HudDock.put(), but the two overlaps Mr. E actually flagged live in DESKTOP BUILD's files:
+      party_frames.gd docks itself INTO a pane ("bl"), and rts_camera.gd owns the Twitch chat column
+      and the chrome bar. Move the party frames and the chat column OUT of the panes. Owner: DESKTOP
+      BUILD (do not reassign the files; the HUD worker correctly refused to touch them).
+      DONE: a 1080p capture with 0 overlaps between any pane, the party frames and the chat column.
+
+- [x] D42. FOOTSTEPS AND ANIMAL VOICES HAVE NO CALLER - this is the silent town, exactly located.
+      sfx.gd DEFINES footstep_grass/stone/water/wood and dog_whine, wolf_howl/growl, eagle_cry,
+      lion_roar, orc_roar, troll_roar, zombie_moan - and NOTHING IN THE GAME EVER PLAYS THEM. 40 of
+      94 kinds never fired in a 7-minute 8x soak. Footfalls are the most frequent discrete sound a
+      town makes. Give them callers: footsteps from the walk cycle (surface-aware), animal voices
+      from the animals that own them. horse_neigh/whinny is called in daylight.gd but fired 0 -
+      find out why. This supersedes the open question in D29; D29's measurement was right.
+      TICKED (supervisor, Nov 14): D42 shipped the fix - townsfolk.gd:135-144 fires
+      Sfx.at("footstep_" + surface_at(pos), pos, -13 dB) per stride at LOD 0, and animal.gd has
+      VOICE[kind] on a per-beast timer. tools/_d42_test.gd gates it. The silent-town bug is closed;
+      remaining tuning (mix levels, Mr. E's ear on a live soak) lives under D22a.
+      DONE: a re-recorded town clip whose audio shows clear discrete events above the ambience bed.
+      -> DONE D-cycle D3 (Nov 13): footsteps given a caller in Townsfolk._gait_step (one per 0.62*size stride of
+      real travel, lod==0 only, surface from new town.surface_at - bridge=wood, river=water, roads/market=stone, else
+      grass; Sfx GAP floor 0.05-0.08 s so a crowd patters). Heroes inherit it (HeroBody extends Townsfolk). Animal._voice
+      gives each beast its own species call now and then (dog/cat/horse/foal/pig), raid-gated, 3D-attenuated, a frightened
+      dog whines; this is why horse_neigh fired 0 - daylight.gd's ambient sampler keyed off the roaming director and the
+      penned animals never triggered it, so the animals now voice themselves. tools/_d42_test.gd 60 s 8x soak: footsteps
+      1642 (grass 745/stone 790/wood 59/water 48), animal voices 85 (horse_neigh 20 + whinny 4, cat 28, dog 15+whine 6,
+      boar 12) -> D42_TEST OK. Gate: parse 0, _offfloor 0/1617, TWITCH_PARSE OK, _townwalk in_solid 0.006%, _delve 0 err.
+
+- [x] D30. (REFRAMED by the census - the premise was wrong.) Spells are NOT monotonous: 9 distinct
+      spells fire with a good spread. The problem is the viewer cannot TELL them apart. Make each
+      spell read differently on screen and name itself in the Chronicle. Not more spells - clearer ones.
+      -> DONE D-cycle 124 (Nov 13): the TOWN side, both halves. spells.gd: bolt/chain/fire wore one round
+      orb (a blue, a pale-blue, an orange ball); now bolt is a lance of force (oriented along flight),
+      fire a flaming ember (fire-trail that licks up), chain a crackling spark - frost already flew as a
+      shard. And Spells.name_over() floats the cast's WORD over the town caster in its own colour (the
+      mirror of L52's dungeon naming; the town had none), wired at both raids.gd cast sites, throttled per
+      caster. tools/_d30_test.gd D30_TEST OK (11 checks): all 9 have a word+colour, no two words collide,
+      the 4 thrown spells build 4 distinct forms (lance builds a BoxMesh core, orb a SphereMesh), name_over
+      floats a correctly-coloured label, every spell still casts. NOT VERIFIED BY EYE at 1080p - headless
+      asserts the meshes/colours/words, not a GPU frame (same limit L52/L53 noted); if two still read alike
+      on stream it is a tweak to the forms in _orb, not a design question.
+
+- [x] L52. (REFRAMED - same finding, dungeon side.) Nine spells already cast. Make the caster's
+      choice legible rather than adding spells.
+      DONE L-cycle 126: verified independently rather than trusting either side - my own caster-heavy run gave
+      19-25 casts across 6-7 DISTINCT spells, so the content was never the problem and no spells were added.
+      delve.gd: SPELL_WORDS names all nine and the name now FLOATS over the caster in that spell's own
+      Spells.COL colour (the colour existed but only the projectile used it) - glanceable in a pane at no
+      Chronicle cost - plus a calm line naming spell and target, one per caster per 2.5 s. BOTH cast sites,
+      including the menders, which were the quietest of all. spells_cast{} exposed for a census.
+      Removed again before shipping: my first version also announced misfires, which made the Chronicle
+      print TWO lines per event because _scar_check already emits one from a lore_lines template - that is
+      the feed noise L32b killed, and lore_lines.json is the content writer's file. The float carries the
+      naming instead. tools/_l52_test.gd L52_TEST OK (9 checks): all nine spells have a name AND a colour
+      and no two share a name. _offfloor 0 of 2004, _delve_test clean.
+      NOT DONE, NOT MINE: making spells look different IN FLIGHT is scripts/spells.gd, DESKTOP-owned
+      (COORDINATION 11.2) - untouched. If two spells still read alike after this, that is the remaining
+      desktop-side work, and it pairs with D30.
+
+- [x] L53. gear.gd _hat needs match-cases for the content writer's new hat keys (guard_helm,
+      plumed_helm and the C1 hats) or they render as the default shape. Raised by the content writer.
+      DONE L-cycle 128: worse than "the default shape" - the fall-through left CylinderMesh at ITS OWN
+      defaults (top 0.5, bottom 1.0, height 2.0), a two-metre cone on the head. EIGHT keys had no case:
+      guild_hood, mire_hood, watch_helm, miller_cap, bell_coif, ford_circlet, guard_helm, plumed_helm -
+      each now has its own silhouette from the kit's primitives (hoods drape, coif is a dome on the skull,
+      watch_helm a dome under a wide brim, miller_cap a peaked soft cap, ford_circlet a thin low band,
+      guard_helm a closed helm with a nasal bar, plumed_helm that plus a crest). THE REAL FIX is the new
+      wildcard default case, so hat number thirteen degrades to a plain cap instead of breaking the model.
+      tools/_l53_test.gd is DATA-DRIVEN - it reads every kind=="hat" cosmetic out of items.json and builds
+      it, so new hats are covered without touching the test. L53_TEST OK (5 checks): 12 hats, 11 distinct
+      silhouettes (guild_hood/mire_hood share one by design), none left at the defaults, unknown key
+      degrades. L3_TEST OK, _offfloor 0 of 1388, _delve_test clean. items.json read, never written.
+      NOT VERIFIED BY EYE: headless mesh assertions only - nobody has seen a plumed helm at 1080p yet.
+
+- [x] L54. delve.gd must honour the new 'scar_touched' potion state or Scarwater displays and does
+      nothing. Raised by the content writer.
+      DONE L-cycle 129: verified first - the flag was right. potions.json has shipped Scarwater giving
+      scar_touched for a while and the ONLY scar_touched in scripts/ was fishing.gd's unrelated
+      scar_touched_chance, so the draught was bought, drunk, displayed and did nothing. delve.gd
+      _scar_check(): a scar-touched hero skips the usual roll because the scar already has their spell -
+      it decides once, half doubled and half taken, and the draught is spent either way. Both outcomes
+      float in the scar's violet and reach the Chronicle. Hung off the EXISTING scar machinery rather
+      than a parallel one. Applies to MENDING too - the data says "its next SPELL", not attack.
+      A REAL BUG MY TEST FOUND BEFORE SHIPPING: the doubling was consumed AFTER the to-hit check, so a
+      spell that MISSED kept the flag and doubled the next cast - one 300-gold draught paying twice. It
+      is taken and cleared at the top of _cast_at now, before any early return. tools/_l54_test.gd
+      L54_TEST OK (10 checks) - it re-reads potions.json so it tracks the DATA, drives 60 casts needing
+      both outcomes, and asserts the state NEVER lingers. Measured 28 doubled / 32 taken / 0 lingered.
+      _offfloor 0 of 1430, _delve_test clean, L52_TEST OK. potions.json read, never written.
+
+- [x] L55. FORGING MAY NOT RAISE GEAR TIERS - a bug nobody had reported, found by the census. Weapon
+      and armour tiers stayed w0/a0 for ALL SIX heroes through a 7-min soak despite 17 forge lines
+      and survivors with 4 and 8 kills. Either forging never raises the tier or death resets it.
+      DONE: a soak where surviving heroes visibly climb tiers.
+      DONE L-cycle 127: measured first, and NEITHER suspected cause was it. buy_weapon/buy_armour work
+      (a probe with gold went w0->w1, a0->a1), and kill()/reroll() keep the gear - a returning hero is a
+      FRESH hero at w0, which is canon. THE REAL CAUSE: nothing ever CALLED the forge for a VIEWER's hero.
+      The town band kits up in Adventurers._kit_up; a viewer's hero only forged if that viewer typed
+      !forge. Reproduced exactly - four survivors home with 69-115 gold, tier 1 costing 52, none climbed.
+      The census's 17 "forge lines" were refusals, not purchases. FIX: Roster.kit_up_after_delve() fits
+      out a survivor who comes home with coin - ONE step a delve, always leaving KIT_RESERVE (3 oil) so
+      nobody is stranded, armour first while it trails, and the smith's line is SAID so the viewer sees
+      what their gold bought. Called from delve._finish(). tools/_l55_test.gd L55_TEST OK (12 checks):
+      round 1 climbed 0 of 4 (loot luck), round 2 climbed 2-3 of 4 - tiers climb across a SESSION, which
+      is what "a soak" means. _offfloor 0 of 1231, _delve_test clean, L3_TEST OK.
+      MR. E'S CALL: heroes now spend their own gold automatically. KIT_RESERVE and the one-step cap are
+      the dials; removing it is one call in _finish(). FOR THE SUPERVISOR: scripts/adventurers.gd is in NO
+      worker's ownership list in COORDINATION 11.2 - read, not touched; it needs an owner.
+
+- [ ] L56. DELVE-HEAVY SOAK before L45 and L46 are trusted. The census could not confirm bosses or
+      trap damage: raids kept pulling parties back to town and only ~1 sustained descent happened,
+      so the dungeon-side counters undercounted. Seed a party straight to the mouth (or raise
+      CENSUS_MIN) and read Delve.trap_log directly. This GATES L45 and L46 - do not "fix" either
+      until this run says they are actually broken.
+
+- [x] D37 note: E3PO's words now EXIST (content writer's e3po + town_life blocks in lore_lines.json,
+      merged). They are dead data until raids.gd/town.gd read them. The content half is done; the
+      behaviour half is still D37 and belongs to DESKTOP BUILD.
+
+CHANGELOG 2026-11-13 01:41 (supervisor): added D41, D42, L53-L56; reframed D30 and L52 after the census
+disproved their premise; noted the C-side of D37 is delivered. C-cycles 1-3 merged to main.
+
+# Phase N - Mr. E's rulings, Nov 13 01:50. The d20 becomes the resolution mechanic for viewer spending.
+
+HIS WORDS: "we can do the hub for individual rolls, and then when it comes to making upgrades to the
+town depending on channel points or bits spent they can roll the die to make events happen, upgrade
+buildings, etc."
+
+SUPERVISOR ARCHITECTURE RULING - READ THIS BEFORE BUILDING ANY OF IT. The roll is resolved IN THE
+GAME, never on the website. Viewer redeems channel points or cheers bits -> Twitch EventSub reaches
+the game -> the GAME rolls the d20 and applies the outcome -> it is Chronicled and appears in the
+60 s snapshot -> the hub DISPLAYS the roll and its result. The hub therefore stays READ-ONLY and
+this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do not design one.
+
+- [ ] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+      UNBLOCKED (Nov 15): Mr. E re-authorized the broadcaster token via device-code grant. The game's
+      Twitch app (client s4lpypbhumi34uocr0jqrscsxmjz2u) now holds channel:manage:polls AND
+      channel:read:polls alongside the original five (bits:read, channel:manage:redemptions,
+      channel:read:redemptions, channel:read:subscriptions, moderator:read:followers). Validated live
+      against id.twitch.tv/oauth2/validate as login jestsayin96, user_id 138821183; refresh token
+      present so the game renews itself. Token at user://twitch_token.json; the pre-polls token is
+      backed up beside it as twitch_token.json.bak_prepolls. NOTHING IS BLOCKED ON MR. E.
+      THE WORDS ARE ALREADY WRITTEN: data/lore_lines.json "propositions".entries, and the
+      viewer_roll crit/high/low/fumble outcome lines added in C-cycle 38. Read them, do not invent
+      parallel copies.
+      ARCHITECTURE (unchanged): the d20 resolves IN THE GAME; the hub only DISPLAYS the result from
+      the snapshot (H9 already renders it). Do not build an on-screen d20 - that left the HUD lane.
+      spends channel points or bits to attempt something - upgrade a building, trigger an event,
+      push a proposition - and a d20 roll decides how it goes. D&D consequences: a high roll does it
+      well, a low roll does it badly or backfires, and the Chronicle says so in plain language.
+      Outcome tiers must be readable to someone who has never played D&D. The propositions the
+      content writer is authoring (lore_lines "propositions", C-cycle 4) are the menu this draws on.
+      Owner: DESKTOP BUILD (owns the Twitch layer, town and economy).
+      DONE: a viewer redemption rolls on stream, the town visibly changes, and the Chronicle explains
+      why - with at least one failure outcome demonstrated, not only successes.
+
+- [x] H9. THE HUB DIE SHOWS THE ROLL. The hub's existing die section animates and displays rolls read
+      FROM THE SNAPSHOT - individual rolls, and the outcome of a T5 viewer roll. Read-only: the page
+      never initiates or submits a roll. Keep every HUB_SECURITY invariant (el()/textContent, no
+      snapshot value as URL/src/href/style, CSP unchanged). Owner: HUB BUILDER.
+      DONE: a roll and its outcome render on the hub, hostile-name test still passes.
+      TICKED (supervisor, Nov 14): shipped on hub (49676fe, db2719e) - the die shows the town's rolls from the snapshot and the rolls feed caps after dropping empties.
+
+- [ ] D43. SUBSCRIBER ROSTER FROM THE TWITCH API (Mr. E approved). Twitch sends subscription EVENTS,
+      not a roster, so the subscriber lane currently only knows about subs that happen while live.
+      Fetch the real roster via Helix with the broadcaster token and the channel:read:subscriptions
+      scope, refresh it periodically, and expose it for the HUD worker's subs lane. Token in user://
+      NEVER in the repo. Owner: DESKTOP BUILD (owns the Twitch layer). UNBLOCKS L35.
+      NEEDS MR. E: authorize the broadcaster token with channel:read:subscriptions.
+
+- [ ] L35 note: the subs lane stays as built (rotates through subs seen this session) until D43
+      lands, then reads the real roster. Not a defect in the HUD worker's implementation.
+
+- [ ] L51 note: the "d20 redesign" part of L51 is now T5 + H9 and leaves the HUD worker's lane. What
+      REMAINS in L51 for the HUD worker: equipment with its buffs/debuffs, the viewer's inventory,
+      and selling - built as a NEW self-contained panel inside the seven HUD files. The unit frame
+      (rts_camera.gd) and the !hero sheet (chatcmd.gd) stay with their owners; if the panel needs
+      state those files hold, flag it and the owner exposes it. Do not edit another worker's file.
+
+CHANGELOG 2026-11-13 01:57 (supervisor): added T5, H9, D43 from Mr. E's rulings; L51 narrowed and its d20 part
+moved to T5/H9; L35 unblocked by D43. The hub remains read-only - the roll resolves in-game.
+
+# Phase O - THE WORDS NOW EXIST. Content is no longer the blocker (supervisor, 2026-11-13 02:03).
+
+C-cycles 3 and 4 are merged to main and passed the full gate (parse 0 SCRIPT ERROR, 0 Parse Error,
+TWITCH_PARSE OK, _townwalk in_solid 0/795, _delve_test clean, _offfloor clean). Verified counts in
+data/, not taken on trust. Every item below is now WRITING-COMPLETE and waiting only on code:
+
+  T5   <- lore_lines "propositions".entries - 17 laws, each with a GOOD and a BAD consequence,
+          across law, taxes, militia, building, faith and outsiders. This is the menu the d20 rolls on.
+  D34  <- lore_lines "disasters" - 12 (volcano, fire, drought, famine, sickness, hurricane, tornado,
+          earthquake, meteor, scarstorm, flood + one more), each with begin / during[] / pass and a
+          plain-language "cost" stating what it should do to the town. Implement the cost as mechanics.
+  D33  <- lore_lines "events" - 4 NAMED bandit camps (Red Harl, Sedge the Toll, Cob Ashfoot, The
+          Weasel), 3 monster camps, and a wandering boss "The Scarred Lord" that scales to the town
+          and reuses the 8 canon lords. Named enemies read far better on stream than "camp 3".
+  D31/
+  D32  <- lore_lines "growth_tiers".tiers - 12 stages from Crossing to City, each with the crier's
+          line and WHAT A VIEWER SHOULD SEE APPEAR. Twelve stages exist precisely because Mr. E said
+          the town levels far too fast; pace the climb across them.
+  D35/
+  D39  <- items.json "shop_stock" (13) and "trader_cargo" (11), {name, cost, flavour}. Shop display
+          reads shop_stock; interceptable caravans carry trader_cargo.
+  D37  <- lore_lines "e3po" (intro/withdraw/return/says/town_talk) + "town_life". E3PO's words exist;
+          his behaviour does not. DESKTOP BUILD owns the behaviour.
+  L53  <- gear.gd _hat cases for the new hat keys.   L54 <- delve.gd honours 'scar_touched'.
+
+NOTE TO THE DESKTOP BUILD WORKER: you deferred the regression battery on 750682b because the HUD
+worker held the lock - that was the correct call. The supervisor has since run the full battery on
+main INCLUDING your commit and it passed clean. You do not need to re-run it for D28.
+
+CHANGELOG 2026-11-13 02:03 (supervisor): C3+C4 merged and gated; the content writer has cleared every
+writing-blocked item on Mr. E's list. The constraint is now code, not words.
+
+# Phase P - Mr. E's rulings, Nov 13 02:20.
+
+- [x] L57. "NOW WATCHING" GOES ABOVE EACH PANE, not one global banner. Mr. E: "just have the now
+      watching above each of the split screen for whoever that specific screen is watching." Each
+      pane carries its own small label naming the subject that pane is following, so a viewer can
+      tell at a glance which of the four screens is theirs. Must not overlap the pane image or the
+      Chronicle (L40 discipline). Owner: DESKTOP HUD (its own files).
+      DONE: a 1080p capture, four panes, four correct labels, 0 overlaps.
+
+- [x] L58. THE GUILD ROLL LEAVES THE STREAM. Mr. E: "the guild roll it can stay on the hub doesnt
+      need to be on stream, it can be for chat as well." It is the TOP-10 STANDINGS (rank, name,
+      rank title, level, deepest, a mark for the dead) - not the full roster. It already exists in
+      two places that are enough: the hub, and the free `!guild` / `!ranks` chat command. So:
+      remove the on-stream Guild Roll panel and stop reserving space for it. Owner: DESKTOP HUD.
+      NOTE: the chat command already works - nothing to build there. Verify `!guild` still answers
+      after the panel is removed; if the panel owned the data path, keep the data path.
+      DONE: no Guild Roll on stream, !guild still answers in chat, hub unchanged.
+
+  This closes the carried-over question "the Guild Roll and the Now watching banner have no home
+  under the permanent grid". The banner becomes per-pane (L57); the roll is cut from stream (L58).
+
+- [x] L45 ANSWERED by Mr. E: "the bosses should get harder the further you go, so some bosses will
+      hurt and have a lot of hp". The depth curve ships as built. For the record, lords appear every
+      fifth floor and scaling starts at zero on the first one, so the first lord is unchanged canon
+      (15.0 atk / 150 hp) and the quoted 44.7 / 528 is ten lords down. The curve is open-ended.
+      No further balance change requested.
+
+- [x] L46 ANSWERED: leave the trap rate as built and see how it plays. The dial, if it ever reads
+      punishing, is the trap COUNT in dungeon_hd._dress(), not the damage.
+
+CHANGELOG 2026-11-13 02:24 (supervisor): merged laptop L47/L45/L46/L49 to main. Added L57, L58 from Mr. E's
+rulings. L45 and L46 balance questions answered by him and closed.
+
+# Phase Q - THE HUD RECONCILIATION. Read this before anything else, DESKTOP HUD worker (2026-11-13 03:10).
+
+- [x] L59. RECONCILE hud-ui WITH main. DO THIS FIRST, BEFORE L51 OR ANYTHING ELSE.
+      WHAT HAPPENED, AND IT WAS THE SUPERVISOR'S MISTAKE: L34 (director pane freezes) and L39
+      (Chronicle) were handed to you under COORDINATION 11.4 without first checking whether the
+      laptop had already built them. It HAD. The laptop's L34 is commit 75a6226 and is now merged
+      into main. Your U1 (35d10d8) fixes the same bug independently. Two correct fixes, same two
+      files. Neither worker did anything wrong.
+      The supervisor attempted the merge and ABORTED it deliberately: it conflicts in FOUR code
+      files - auto_director.gd, spotlight.gd, hud_dock.gd, feed_hud.gd - and resolving competing
+      GDScript implementations without being able to run a WINDOWED UI test would risk shipping a
+      broken overlay. You own these files and you can look at the result. So it is yours.
+      HOW TO DO IT:
+        git -C W2 fetch origin ; git -C W2 merge origin/main        (expect the four conflicts)
+        For each conflicted hunk, PREFER YOUR OWN implementation - you own these files going
+        forward and yours was written against the current contract. BUT read the laptop's side
+        before you discard it: if its L34 handles a case yours does not, keep that case. The two
+        fixes were aimed at the same two root causes, so the union is likely better than either.
+        PROGRESS.md: keep BOTH sides, strip only the marker lines, never renumber a cycle.
+      THEN VERIFY, and this is the part that matters: boot WINDOWED at 1920x1080 and confirm the
+      director pane recovers when its subject dies, rerolls or vanishes - the actual bug. A clean
+      parse is not evidence here. LOOK at it.
+      L39 NOTE: the laptop's L39 attempt (415885a) shrank the PANEL and left the font at 28 px.
+      Mr. E's correction was the opposite order - SMALLER TYPE FIRST, then size the box. Your U1
+      did it his way (28 -> 18 px, then a 0.34-width centre box). Yours is the correct one. Do not
+      let the laptop's version win that hunk.
+      DONE: hud-ui merged with main, four conflicts resolved, a windowed 1080p capture showing the
+      director pane recovering from a subject death, and your honest read on whether 18 px is
+      legible on stream - Mr. E has not seen the final crop and the supervisor will not tick L39
+      until someone has actually looked at it.
+
+CHANGELOG 2026-11-13 03:10 (supervisor): added L59. The hud-ui/main collision is logged as a supervisor error,
+not a worker error, and handed to the owner of the files to resolve with a windowed test.
+
+# Phase R - L39 SIZED FROM MR. E'S OWN SCREENSHOT (2026-11-13 04:05). HUD worker: this supersedes the guesswork.
+
+- [x] L39b. THE CHRONICLE BOX IS TOO SHORT, NOT TOO NARROW. Mr. E drew a red rectangle on a live
+      1x screenshot showing exactly how big the box may be. Measured against his window:
+          his red box   ~0.37 of window WIDTH, ~0.27 of window HEIGHT
+          current box   ~0.33 wide, ~0.10 tall   (CENTRE_W 0.34, STRIP 0.12 -> 652x130 at 1080p)
+      So the WIDTH is close to right - a touch wider is fine. The HEIGHT is the miss: he is giving
+      you roughly 3x the vertical space. At 1080p his box is about 715 x 295 against today's
+      652 x 130.
+      WHAT THIS MEANS, AND DO NOT GET IT BACKWARDS: a taller box is NOT bigger type. The font stays
+      small - he complained the letters were "super huge" and 18 px was the fix. The extra height
+      buys MORE LINES OF CHRONICLE ON SCREEN AT ONCE. Today roughly three lines fit; at his size
+      closer to eight or nine. A viewer should be able to read back what just happened instead of
+      watching it scroll away.
+      So: raise the line count the Chronicle keeps visible to fill the taller box, keep 18 px, and
+      make sure the box still sits in the gap between the two pane rows without covering a pane
+      (L40 discipline - his screenshot shows the box overlapping the pane seam, which is fine, but
+      it must not hide a subject).
+      DONE: a windowed 1080p capture at roughly 715x295 with the extra Chronicle lines filling it,
+      18 px type, no pane obscured - and your honest word on whether 18 px reads at that size.
+
+CHANGELOG 2026-11-13 04:05 (supervisor): L39b added from Mr. E's annotated screenshot. The earlier L39 work was
+not wrong, it was short - width was close, height was a third of what he wants. This is the first
+time the item has had a number from him rather than an inference.
+
+# Phase S - supervisor pass 2026-11-13 05:02. Merged: content C5-C9, laptop L52/L53/L54. Gate clean.
+
+- [x] L59b. COMMIT THE MERGE FIRST, THEN TEST. THIS IS WHY L59 KEEPS COMING BACK.
+      `hud-ui` branched at a1f7463 (Coordination 11) and HAS NEVER MERGED main since. main is now
+      49 commits ahead of that point; hud-ui has 5. A U2 session DID resolve all four code
+      conflicts correctly in the worktree - and then the run ended before committing, so the
+      resolution was lost. U3 and U4 then built on top of the still-unmerged branch. The supervisor
+      has now hit the same four conflicts a third time and will not resolve them blind, because
+      these are your files and a windowed test is the only real check.
+      THE FIX IS ORDERING, NOT SKILL. Next run, in this order, and do not reorder it:
+        1. git -C W2 merge origin/main
+        2. Resolve the four conflicts (auto_director.gd, spotlight.gd, hud_dock.gd, feed_hud.gd)
+           plus PROGRESS.md. Prefer YOURS - you own these files - but keep the laptop's
+           is_instance_valid(src) guard and its _eye_xform(eye) step in spotlight.gd, which your
+           side lacks and which are real: a freed camera is non-null.
+        3. COMMIT AND PUSH THE MERGE IMMEDIATELY. Before any Godot run, before any test, before
+           any further edit. A merge commit that only resolves conflicts is a perfectly good
+           commit. If this run dies after step 3 the work survives; if it dies before, we are back
+           here a fourth time.
+        4. THEN run your headless parse and your windowed test, and commit those separately.
+      Your U1-U4 work is good and none of it is in question - L34 is verified recovering from die,
+      reroll and despawn, which is exactly what was asked. The only defect is that the branch has
+      drifted 49 commits behind main and nobody has landed the reconciliation.
+      DONE: origin/hud-ui contains a merge commit from origin/main, and `git merge origin/hud-ui`
+      from main reports no conflicts.
+
+NOTE ON COLLISIONS, and this one is the supervisor's fault: the HUD worker has reported repeated
+two-session collisions (U3, U5). The cause is almost certainly the supervisor firing the task
+manually at a time close to its own :41 slot, producing two runs of the same task against one
+worktree. The supervisor will not hand-fire the HUD task again unless its slot is more than 20
+minutes away. The workers' lock discipline has held throughout - nothing was lost in any collision,
+because each session checked, stood down and wrote down the state it left behind.
+
+CHANGELOG 2026-11-13 05:02 (supervisor): merged content C5-C9 and laptop L52/L53/L54 to main; full gate clean
+(import, parse 0 errors, _offfloor, TWITCH_PARSE OK, _townwalk in_solid 0/824, _delve_test).
+hud-ui held with L59b. Hub H9 reviewed separately and held for Mr. E.
+
+CHANGELOG 2026-11-13 06:16 (supervisor pass 06:07): merged content C10, laptop L48, and hud-ui U1-U5 to main.
+The hud-ui merge was CLEAN - L59b's ordering fix (commit the merge before testing) worked and the
+branch drift is gone. Full gate clean: import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _townwalk in_solid 0/866 stuck_on_route 0, _delve_test.
+TICKED: L35, L38, L51, L59, L59b.
+NOT TICKED ON PURPOSE: L39 and L39b. Mr. E corrected the Chronicle twice and has now given a size
+from his own screenshot (about 715x295 at 1080p, roughly 3x today's height, more LINES not bigger
+type). Nobody has yet looked at the final crop and said it reads on stream. A measurement is not a
+look. These stay open until a human says the type is legible.
+Also not ticked: L40 - only the HUD half is done (HudDock.put() keeps the Chronicle clear). The two
+overlaps Mr. E actually flagged live in party_frames.gd and rts_camera.gd and are D41, desktop-owned.
+
+# Phase T - supervisor pass 2026-11-13 10:19.
+
+- [x] D44. TOWNWALK in_solid HAS GONE INTERMITTENTLY NON-ZERO. Owner: DESKTOP BUILD (town_nav.gd).
+      DONE (D-cycle D11): subsumed by D44b - three consecutive _townwalk in_solid 0 with the cause named.
+      Measured by the supervisor, three consecutive runs on the same merged tree:
+          in_solid 2/745      in_solid 5/913      in_solid 0/810
+      Every supervisor gate before this one reported 0: 0/796, 0/824, 0/866, 0/900. So this is new
+      and it is INTERMITTENT, not a hard break - which is why the merge was pushed rather than held.
+      Walkers are momentarily registering inside solid geometry. "inside" (people legitimately in
+      buildings) sits at 45-48 across all three runs, so the likely place to look is the doorway
+      transition - a walker crossing a threshold sampled mid-step - rather than open-street nav.
+      DO NOT "fix" this by loosening the test. The 0 was real and worth keeping.
+      DONE: three consecutive _townwalk runs at in_solid 0, with the cause named.
+
+CHANGELOG 2026-11-13 10:19 (supervisor): merged content C12, laptop L43, hud-ui U7/U8 to main. Gate otherwise
+clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor, TWITCH_PARSE OK, _delve_test).
+TICKED L57 and L58 - both are Mr. E's own rulings, implemented as he worded them.
+D44 raised for the intermittent in_solid.
+
+# Phase U - the laptop's queue is NOT empty (supervisor, 2026-11-13 11:22)
+
+The laptop reported "the assigned queue is empty" after L44. It finished the list it was GIVEN;
+it did not run out of work. Eleven laptop-owned items are still open. Take them in this order -
+this ordering is by what Mr. E actually asked for, not by ID.
+
+  1. L29a LORD MECHANICS - each canon lord gets a real mechanic (adds / phase / hazard / enrage).
+     He asked for bosses that get harder with depth and L45 gave them numbers; this gives them
+     BEHAVIOUR, which is what makes a lord memorable on stream.
+  2. L30c LOOT TABLES by depth and biome, boss uniques, and the Chronicle announcing a rare find.
+     L49 made searching visible; this makes what you find worth watching.
+  3. L29b RARE UNIQUES - the content writer has already WRITTEN them (bosses.json lesser_uniques
+     42, greater_uniques 36). Your half is the spawn rule and the visible modification. Read the
+     data, do not invent a parallel copy, and do not edit that file - it is the content writer's.
+  4. L29c SET-PIECE ENCOUNTERS from lore so a floor is not just a room of monsters.
+  5. L37 DUNGEON SCAR-VEINS ARE OVERDONE - from Mr. E's own 19:27 recording, the L28d glow decals
+     read as bright purple spray. Same family as L42; he has already said the dungeon looked like
+     a nightclub.
+  6. L33 STUCK DELVER REGRESSION - _l25_test went from a clean 0 stuck after L27a. Worth closing
+     before more monsters land.
+  7. L27b STRAINS - still committed WIP at 0f3986c. Finish or withdraw it; do not leave it parked.
+  8. L56 DELVE-HEAVY SOAK - seed a party straight to the mouth so boss and trap counts can be
+     trusted. Lower priority now that L45/L46 shipped with their own tests, but it is the only
+     thing that will give a clean dungeon baseline.
+  9. L30a GEAR EXPANSION - the code half only: more weapons and armour per tier VISIBLE on the
+     handslot bones. The item list itself is the content writer's.
+ 10. L30b COSMETICS AND DYES - again the code half only: !wear and !dye changing the model live.
+     The catalogue is written (46 cosmetics, 19 dyes) and is not yours to edit.
+
+OWNERSHIP CORRECTIONS - three items are no longer the laptop's, because the UI files moved under
+COORDINATION 11:
+  - L31 DUNGEON-FIGHT UI (damage numbers, status icons, "Now fighting: <lord>") -> DESKTOP HUD
+    for anything inside its seven files, feed_hud.gd included. If it needs party_frames.gd or
+    rts_camera.gd, flag it for the desktop build worker rather than reaching in.
+  - L36 CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (from Mr. E's 19:34 recording) -> DESKTOP
+    BUILD. rts_camera.gd owns the chat column. Same family as D41 and should be done with it.
+  - C1, C2, C3 are long since delivered by the content writer (C-cycles 1-13) and are stale
+    entries, not open work. Ignore them; they are left unticked only because nobody has gone back
+    to tick them.
+
+CHANGELOG 2026-11-13 11:22 (supervisor): queued L29a/L30c/L29b/L29c/L37/L33/L27b/L56/L30a/L30b for the laptop in
+priority order; reassigned L31 and L36 off the laptop to the HUD and desktop workers respectively;
+noted C1-C3 as stale. No new IDs minted - every item here already existed and keeps its number.
+
+# Phase V - D44 ESCALATED (supervisor, 2026-11-13 12:03). Desktop build: THIS JUMPS YOUR QUEUE.
+
+- [x] D44b. D44 IS GETTING WORSE, NOT SETTLING. Take it before D29 or anything else.
+      DONE (desktop D-cycle D11, 2026-11-14): CONFIRMED by per-frame log, not sampling. tools/_d44_perframe.gd
+      tagged every walk commit by leg (townsfolk._dbg_leg) over 513,201 per-frame samples: the ONLY in_solid
+      frames were the NORMAL leg (0 ghost/door/seat), all at the (52,-88.6) south-market stop. Two root causes,
+      both fixed in townsfolk.gd: (1) a generated stop DESTINATION could lie inside the overlap - _next_trip's
+      returned dest is now keep_walkable-snapped at the caller so a body never stands embedded on arrival;
+      (2) keep_walkable/_slide_round occasionally could not clear the overlap and the inside foot was carried
+      frame-to-frame via `was` - the normal/ghost commit now snaps to the navmesh (baked from the SAME
+      footprints, so its nearest point is walkable by construction) instead, door/seat legs excluded (they end
+      inside by design and the audit skips them by endpoint). No test loosened; a position can only become MORE
+      walkable. Gate GREEN: parse 0, _offfloor 0/1344 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test
+      clean to floor 2, and _townwalk THREE CONSECUTIVE in_solid 0: 0/18657, 0/18673, 0/18748 (raid_in_solid 0).
+      Measured by the supervisor across six runs on two separate merged trees:
+          pass 1:  2/745   5/913   0/810      (peak 5)
+          pass 2:  8/899   0/754   0/852      (peak 8)
+      Every gate before pass 1 read a clean 0: 0/796, 0/824, 0/866, 0/900.
+      So: still intermittent, two runs in three come back clean - but the PEAK IS RISING. That is
+      the signature of a race or a tolerance that is being crossed more often as the town fills,
+      not of harmless noise. It will not settle on its own.
+      WHAT IS KNOWN: "inside" (people legitimately indoors) holds steady at 41-49 across all six
+      runs, so this is not a miscount of building interiors. walking is 114-124. The failures are
+      a small number of walkers out of 750-900 samples, which points at a transient - most likely
+      a walker sampled mid-step through a doorway or against a prop placed after nav was baked.
+      D20b (raid flee into doorways) and D20c/animals are the most recent town-nav-adjacent
+      changes; the trap and chest props added dungeon-side should NOT affect town walkers, but
+      rule it out rather than assume.
+      DO NOT raise the tolerance, widen the sample, or soften the assert. The 0 was real for many
+      consecutive gates and it is the only thing telling us the town nav is sound.
+      DONE: three consecutive _townwalk runs at in_solid 0 WITH the cause named in PROGRESS - not
+      three lucky runs.
+      PARTIAL (desktop D-cycle 126): CAUSE NAMED. The offenders are the stops-based _more_folk
+      townsfolk - their home/work are ZERO by design (a day of `stops` replaces the shuttle),
+      so the audit's `e != ZERO` endpoint guard can never shield them. _put_folk placed them
+      at a stop point WITHOUT a walkability check. Two sub-cases:
+        (a) SPAWN EMBEDDED - the spawn/stop point lay inside a carved solid; an off-mesh start
+            breaks route() (it falls back to a single far waypoint and the body wanders into
+            the valley), and keep_walkable shoves it clear only over ~2 s, counted every
+            sample meanwhile. This was the PERSISTENT, town-fill-scaling contributor behind
+            the RISING 5->8 peak. FIXED: _put_folk now snaps the spawn out of any footprint
+            (keep_walkable; pre-sync so purely geometric). Verified: pre-fix a peasant span
+            embedded every seeded run; post-fix none do.
+        (b) RESIDUAL, FLAT (not rising): a walker on a NORMAL leg sitting ~1.5 m inside a
+            carved footprint for a few samples at the 15 southern 'market'-district houses
+            (z<-55) - e.g. (51.7,-93.8), prop (74.1,-65.6). dl/seat/ghost all false, navoff
+            ~1.5. Post-fix the gate gave THREE consecutive _townwalk 0 (0/16017, 0/16363,
+            0/15601) with _offfloor/_twitch_parse/_delve all clean, BUT other post-fix runs
+            still showed a stray 1-2 (one verify run 2/16003; one seeded diag 1) - so this is
+            NOT yet the 'not-lucky' three zeros. Left UNTICKED for that reason.
+      FOLLOW-UP for the next desktop cycle (NOT done here - would be an unverified change to
+      the hot walker loop): snap stop DESTINATIONS too, or add a keep_walkable net on the
+      waypoint-pop early-return (townsfolk ~L813 returns before the step's keep_walkable), or
+      widen the nav margin at the southern houses. The test was NOT loosened.
+      PARTIAL (desktop D-cycle D4, Nov 13 ~17:30): took the note's "keep_walkable
+      net" option. keep_walkable now runs 6 push passes (was 3 - a chain of
+      overlapping south-market footprints can oscillate and leave a foot inside
+      after 3) and, when the point is STILL in a footprint after the loop, snaps
+      to the navmesh's nearest walkable point (the authority); rare path, so the
+      common already-clear case pays no nav query. Full gate GREEN: parse 0,
+      _offfloor 0/1643 (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _delve_test
+      clean to floor 2, _townwalk x3 PASS at in_solid 0/15466, 1/15863, 2/16816
+      (0.000/0.006/0.012%, all << 0.2%). NOT three-consecutive-0, so NOT ticked.
+      The residual did not move measurably: a single-FRAME transient at the ~15
+      south houses (recurring child Rask Coalfoot ~(52,-88.6), peasants ~(74,-64))
+      that a 0.25 s diagnostic probe (4 runs) could not catch at all - the gate's
+      0.5 s grid only rarely lands on it. Hardening kept as a correctness win (a
+      position can only become MORE walkable; no test loosened), not as a close.
+      NEXT: log PER-FRAME (not sampled) which branch commits the inside position -
+      prime suspect the ghost/pocket-escape leg (townsfolk ~L821) that moves on
+      height_at ALONE and never calls keep_walkable while _ghost_last stays in the
+      route; if confirmed, re-validate that leg with keep_walkable.
+
+CHANGELOG 2026-11-13 12:03 (supervisor): merged content C13-C14, laptop L44 + L27b (no laptop WIP remains),
+hud-ui U9. Gate otherwise clean (import, parse 0 SCRIPT ERROR / 0 Parse Error, _offfloor,
+TWITCH_PARSE OK, _delve_test). D44 escalated to D44b after its peak rose from 5 to 8.
+
+# Phase W - Mr. E's L41 ruling (2026-11-13 12:37)
+
+- [x] L41 CLOSED BY MR. E. He looked at confection_before.png and confection_after_muted.png and
+      ruled: TOO MUTED, PUT THE PINK BACK. data/biomes.json confection ground reverted to
+      ["#e8b0cc", 0.35] - the exact one-line revert the laptop itself documented. ONLY the ground
+      was reverted: L42 separately lowered this biome's sat and glow, and that stays, so the floor
+      is bright pink under calmer lighting rather than the original neon.
+      The laptop's GUARD STAYS and was the real work of L41: FloorGen._kit_mat() now falls back to
+      plain grey if a shader or atlas fails to load, instead of handing back a ShaderMaterial with
+      a null shader - which is what Godot draws magenta. A shader can load on one machine and fail
+      on another, so that fault would only ever have appeared on stream.
+      NOTE THE LOOSE END, honestly: the laptop proved the binding is NOT broken (384 materials, 0
+      null, 0 magenta), and Mr. E has now said the confection's bright pink is wanted. So the
+      original "an entire dungeon floor renders hot magenta" report is explained as the confection
+      looking as intended - not as a bug that was found and fixed. If he ever sees a magenta floor
+      again, it is NEW, and the guard's kit_fail_count is the thing to read.
+      Supervisor note on ownership: data/biomes.json is laptop-owned and the supervisor edited it
+      directly. Justified narrowly - a one-line data revert that the owning worker itself specified
+      in its own PROGRESS entry, made at Mr. E's explicit direction while he was present. Not a
+      precedent for editing another worker's code.
+
+CHANGELOG 2026-11-13 12:37 (supervisor): L41 closed on Mr. E's ruling; confection ground reverted; the guard kept.
+
+# Phase X - Mr. E looked at the Chronicle and gave three new items (2026-11-13 14:12)
+
+- [x] L39 / L39b CLOSED BY MR. E'S EYE. He ran the game, looked at the centre Chronicle at 714x295
+      / 18 px, and said: "the chronicle is the correct size." SIZE AND LEGIBILITY ARE SETTLED - the
+      item he corrected three times is done. The styling complaint below is a SEPARATE, new item,
+      not a reason to leave L39 open.
+
+- [x] L61. THE CHRONICLE MUST BE A SCROLL, not a box. Owner: DESKTOP HUD (hud_dock.gd).
+  RESULT (2026-11-15, hud-ui bdd7f59, U-cycle 25): the scroll was built over U23/U24; U25 closed the
+  remainder Mr. E named - Chronicle ink 18 -> 21 px (feed_hud.CHRON_PX), the wordmark set in Gloock
+  (gilt cream with a dark drop shadow, 17 px - the burned-brown first pass vanished on the dark
+  spindle), sheet inset 9 -> 15 px so 21 px ink clears the illuminated margin rule. Capacity is 7
+  lines at 21 px in the 714x295 box. Parse 0 errors; windowed 1920x1080 capture in
+  renders/cycles/20261115_u25 was LOOKED at - wordmark legible, 7 lines readable, no spindle or
+  margin overlap. The ornate/illuminated craft continues under the HUD worker's later items if
+  Mr. E asks for more; the item as written is met.
+      U-cycle gave it a parchment panel and Mr. E approved the direction but wants it taken all the
+      way: make the Chronicle READ AS AN UNFURLED SCROLL, something unique, the signature piece of
+      the stream. Build it in hud_dock.gd (skin only; keep the current size, the ~18 px text and the
+      8-9 line capacity; L40 discipline - stay clear of the panes).
+      THE SCROLL (build to this, use judgement on craft):
+        - Aged parchment field: warm cream->tan, a faint vertical fibre/vellum gradient, edges a
+          touch darker (age/handling). Not flat gold.
+        - A ROLLED SPINDLE top and bottom (horizontal scroll): a wooden/bone dowel with dark end-caps
+          and a soft curl-shadow where the sheet rolls under it, so the sheet looks furled, not cut.
+          Vertical scroll (spindles left/right) is fine too if it reads better at pane-safe width -
+          pick one and show it.
+        - A little weight/sag or deckled (torn) edge on the open sheet so it is not a clean rectangle.
+        - "Chronicle" as a burned/embossed label on the top spindle OR a small wax-seal tab (keep the
+          existing teal accent to tie to the hub brand; Gloock for the word).
+        - Ink: an aged serif, dark brown-black, not pure white. Newest line still gets the current
+          emphasis so the eye catches new entries.
+      ART TARGET - "AN ELDER SCROLL, OUR OWN DESIGN" (Mr. E, raised after the first scroll pass):
+        aim for the ancient, ORNATE, illuminated-prophecy feel - a scroll that looks old and important,
+        not just a parchment rectangle. This is the general aged-vellum archetype rendered in OUR brand;
+        do NOT copy The Elder Scrolls / Bethesda art, fonts, logo, the blank-scroll motif or any of
+        their UI - original filigree only.
+        Layer onto the furled-parchment base:
+          - METAL SCROLL CAPS / FINIALS on the spindle ends - small ornamented end-caps (aged brass or
+            dark iron with a teal patina to tie the brand), a hint of relief, not flat dowels.
+          - An ILLUMINATED BORDER just inside the sheet - a thin restrained filigree/vine rule in the
+            teal+gold, corners a touch more worked, like an illuminated manuscript margin. Keep it a
+            FRAME, never over the text; readability wins every time.
+          - A DROP-CAP / illuminated initial or a small heraldic mark by "Chronicle" (the Jester motif
+            if it reads at size) so the header feels inscribed, not labelled.
+          - Optional faint age: a soft foxing/stain or a whisper of arcane glow on the newest line -
+            subtle, must not cost readability or frame rate.
+        Still ONE cheap procedural layer (gradients + shadow/relief rects + a thin vector border);
+        if filigree needs an image it must be CC0, self-hosted, with a LICENSE note. Original, ours.
+      Keep it ONE draw layer, cheap - a real-time HUD element, not a texture import; procedural
+      panel + gradients + a couple of shadow rects is the intent. CC0 only if any texture is used.
+      DONE: a windowed 1080p crop of the scroll that Mr. E signs off. Look at it before you call it
+      done - if it still reads as a box, it is not done.
+
+- [x] L62. THE PANES NEED TITLES, not only "Now watching: <who>". Owner: DESKTOP HUD. Right now a
+      pane says who it follows but not WHAT KIND of pane it is. Each should carry its lane identity
+      - DIRECTOR / SUBSCRIBER / BITS / CHANNEL POINTS / (ambient) - as a title, with "Now watching:
+      <who>" beneath or beside it. The lane colour already exists (L57); this makes the category
+      legible in words too, so a viewer knows why a pane is showing what it shows. Stay in the
+      seven HUD files.
+      DONE (U-cycle, verified+merged c9f9fb1): all four panes carry a colour-coded lane title
+      (DIRECTOR/BITS/SUBSCRIBER/CHANNEL POINTS) + now-watching; Mr. E approved on the 1080p crop.
+
+- [x] D45. THE GRASS READS AS SAND - REPLACE THE TEXTURE. Owner: DESKTOP BUILD (valley.gd / town
+      ground material). Mr. E: "the grass needs work still looks like sand so we should at this
+      point use a different texture for it." Source a proper grass texture - CC0 only (Kenney,
+      ambientCG, Poly Haven CC0), self-hosted with a LICENSE note, never Quaternius Bestiary/QAL.
+      Tile it so it does not obviously repeat at the pane's zoom, and check it against the dusk and
+      night lighting, not just noon. The town ground, the valley and the pane backdrops all read it.
+      DONE: a 1080p crop at the stream's zoom where the ground reads as grass, Mr. E signs off.
+      SHIPPED (desktop D-cycle D5, Nov 13 18:xx) - NOT TICKED, awaits Mr. E's eye. The grass was
+      a flat olive/tan wash at pane + aerial distance (the 'sand'). Fix was the MATERIAL grade in
+      assets/shaders/ground.gdshader (grass branch), not a new texture: a coarse 2nd grass sample
+      for distance detail + GREEN-dominant macro/patch mottling replacing the warm (1.10,1.06,0.92)
+      macro that desaturated the fields to tan. 1080p before/after rendered and LOOKED AT (close /
+      valley bank / aerial pane) - all read as varied green grass. Gate green. Crops in
+      renders/cycles/d45/. Mr. E to sign off, then tick.
+
+CHANGELOG 2026-11-13 14:12 (supervisor): L39/L39b CLOSED on Mr. E's eye - the Chronicle size is right. Three new
+items from his look: L61 (Chronicle styling, HUD), L62 (pane lane titles, HUD), D45 (grass texture,
+desktop). None are launched yet - he is moving to the broadcaster token next and will come back to
+these.
+
+# Phase Y - the party band leaves the stream for the hub (Mr. E, 2026-11-13 14:15)
+
+Mr. E, looking at a live pane: "the towns band covers up most of the screen in one screen so im
+assuming it would on the others, lets take that out and add it to the HUB. and we can add a
+section on the HUB for parties or bands that are currently in the dungeon." The band panel
+("The town's band - floor 5" with members + HP bars) eats most of a 2x2 pane. It comes off stream
+and moves to the hub, which has the room.
+
+- [x] D46. TAKE THE PARTY-BAND PANEL OFF THE STREAM, AND PUT THE BAND IN THE SNAPSHOT. Owner:
+      DESKTOP BUILD (party_frames.gd + the snapshot upsert). TWO linked halves, do both:
+        (a) Stop drawing the on-stream party-band panel - it covers most of a pane and would on
+            every pane. The in-game unit frame / selection (rts_camera.gd) stays; it is the big
+            multi-member BAND board that goes.
+        (b) THE HUB CAN ONLY SHOW WHAT THE SNAPSHOT CARRIES. Add the delving parties to the snapshot
+            the game upserts every 60 s: for each party/band currently below - its name, its floor,
+            and each member {name, hp, max_hp, status (ok/fallen/burning/...)}. Read-only, same
+            publishable-key path as the rest of the snapshot; no new write path. Keep the payload
+            version gate - if you add a field, bump the version the hub checks.
+      DONE: no band board on stream (1080p crop), and the snapshot row contains a parties array the
+      hub can read. This SUPERSEDES the party-frames half of D41/L40 - that overlap is moot once the
+      board is gone; D41 shrinks to just the Twitch chat column (the L36 overlap), still desktop-owned.
+
+- [x] H10. "BANDS BELOW" SECTION ON THE HUB. Owner: HUB BUILDER (web/ only). A section that lists
+      every party currently in the dungeon from the snapshot's new parties array: band name, floor,
+      and each member with an HP bar and status, fallen and burning shown honestly. The hub has room
+      the stream does not, so show ALL active parties, not just one. Every string is attacker-shaped
+      Twitch input (hero names) - it reaches the DOM ONLY via el()/textContent, HP bar widths are
+      page-computed numbers not snapshot strings, status picks an icon from the ICON_SET whitelist.
+      No new fetch, no write path; same read-only snapshot. Keep the house palette (parchment/teal/
+      gold, Gloock titles).
+      GATED ON D46: until the snapshot carries parties, build against the shape and show an honest
+      empty state ("no bands delving right now") - never a fabricated party. Flag to the supervisor
+      the exact field shape you expect so D46 writes the same one.
+
+CHANGELOG 2026-11-13 14:15 (supervisor): added D46 (party band off stream + into the snapshot) and H10 (Bands
+Below section on the hub, gated on D46's snapshot field). D41/L40's party-frames half is superseded
+- only the chat-column overlap remains there. Agreed field shape for the parties array to be
+pinned when D46 and H10 start, so the two sides match.
+      TICKED (supervisor, Nov 14): shipped on hub (1ccec4c) - Bands Below renders delving parties on the hub, gated on the D46 snapshot v2.
+
+# Phase Z - strip the stream to Mr. E's six (supervisor, 2026-11-13 14:20). See COORDINATION 13.
+
+Mr. E's answers to the three edge cases: unit frame -> STRIP (to hub); boss bar -> KEEP on stream;
+in-world health bars / damage numbers / VFX -> KEEP (they are the content).
+
+- [ ] D48. STRIP THE UNIT / SELECTION FRAME OFF STREAM. Owner: DESKTOP BUILD (rts_camera.gd). The
+      bottom-centre stats panel that appears when a hero is selected comes off the stream canvas.
+      SELECTION ITSELF STAYS as the director mechanic (it still decides which pane follows whom) -
+      only the drawn stats panel goes. KEEP boss_bar.gd. KEEP the in-world health bars / damage
+      numbers / VFX - those are not this panel. The hub already shows hero sheets, so the selected
+      unit's detail is already reachable there; if any field is not in the snapshot, add it the
+      D46 way (read-only, version-gated).
+      DONE: no unit-stats panel on a 1080p stream crop; selection still drives the panes; boss bar
+      and in-world elements untouched.
+
+- [x] L63. STRIP THE SATCHEL OFF STREAM. (done U-cycle, merged c9f9fb1) Owner: DESKTOP HUD (leaderboard_panel.gd). The L51 Satchel
+      (a viewer's gear / inventory / selling sheet) comes off the stream - it is a personal sheet
+      and belongs on the hub. After L58 (Guild Roll removed) and this, leaderboard_panel.gd draws
+      NOTHING on stream: retire the CanvasLayer or leave it dormant. The Satchel's content is not
+      lost - it moves to the hub (H11). The HUD worker's entire on-stream surface is now exactly
+      the six in COORDINATION 13: panes, Chronicle, lane titles (L62), now-watching (L57).
+      ALSO CONFIRM feed_hud.gd: if it draws a SECOND on-stream event feed separate from the
+      Chronicle, that is a seventh panel and must go - the Chronicle is the only event feed on
+      stream. If feed_hud IS the Chronicle's renderer, leave it. Say which in PROGRESS.
+      DONE: a 1080p stream crop showing ONLY the six; Satchel gone; feed_hud question answered.
+
+- [x] H11. THE HUB ABSORBS WHAT LEFT THE STREAM. Owner: HUB BUILDER (web/ only). The hub already
+      carries hero sheets, inventory, gear, the fallen and the command list - so most of this
+      exists. Fill the gaps so nothing that left the stream is lost: (a) SELLING PRICES on the
+      viewer's sheet (the Satchel showed the counter's sell prices); (b) make a viewer's OWN hero
+      easy to find/pin, since the on-stream Satchel that used to show it is gone. Plus H10's Bands
+      Below. All read-only from the snapshot, el()/textContent only, ICON_SET for status, house
+      palette. No new fetch or write path.
+      DONE: a viewer can see on the hub everything the stream used to overlay - their sheet with
+      sell prices, their inventory, the bands below - and nothing on the hub is fabricated.
+
+CHANGELOG 2026-11-13 14:20 (supervisor): COORDINATION 13 added - the binding stream-HUD philosophy (six allowed
+elements, everything else hub-only), from Mr. E's rule + his three edge-case answers (unit frame
+strip, boss bar keep, in-world keep). Items: D48 (strip unit frame, desktop), L63 (strip Satchel +
+answer the feed_hud question, HUD), H11 (hub absorbs selling + own-hero find). L51's on-stream
+Satchel is intentionally removed - a direction change, its work feeds the hub, not wasted.
+      TICKED (supervisor, Nov 14): shipped on hub (6424763) - the Satchel (sellable items +
+      counter sell prices) and pin-your-hero, CSP unchanged, hostile-name test passes. Mr. E
+      approved: "Yes - dormant until game publishes v=3, no downside." Code awaits game-build L63/D48
+      to publish snapshot v=3; hub republish still Mr. E's call.
+- [x] H12. LORE SECTION ON THE HUB (Mr. E's ask, Nov 14). Owner: HUB BUILDER (web/ only). The hub
+      should carry the world's lore so a new viewer can get oriented without leaning on chat. Pull from
+      data/lore_lines.json (READ from main; it is content-writer-owned, do not edit) and present the
+      sections that read as world lore - town_life, growth_tiers.tiers (as the town's own history),
+      e3po intro/says/town_talk (the Commander), the lord intro lines, disasters/events as "tales".
+      ALL strings reach the DOM ONLY via el()/textContent - every lore_lines value is still Twitch-era
+      text and may embed hostile markup. No new fetch; load from the same snapshot pipeline or bundle
+      a frozen copy with a visible last-updated. Icons from ICON_SET; no new URL/src/style. House
+      palette (parchment/charcoal/teal, Gloock for section titles only).
+      DONE: a viewer can read town/kingdom lore on the hub, hostile-name test still passes, invariants
+      intact, CSP unchanged.      TICKED (supervisor, Nov 15): shipped hub b470489, PUBLISHED LIVE gh-pages c926030. Mr. E reviewed the live page and signed off.
+
+- [x] H13. NO-SCROLL LAYOUT - the hub is one long page (Mr. E's ask, Nov 14). Owner: HUB BUILDER
+      (web/ only). Reorganise the existing sections (Boards, Chronicle, Hero Sheets, Bands Below,
+      Satchel, chat, lore from H12) so a viewer does not have to scroll one page end to end. Tabbed or
+      sidebar-nav layout, remembers the last section the viewer picked (localStorage, control-stripped,
+      25-cap, never used as URL/selector), keyboard-navigable, respects reduced-motion. NO new data,
+      NO new fetch, NO CSP change - purely a layout rework. Keep the house palette and the title-card
+      feel; a section rename is fine, a section REMOVAL is not without supervisor sign-off.
+      DONE: no section is more than one viewport tall at 1080p; a viewer can reach every section in
+      one click; hostile-name test passes across every tab; mobile/phone layout still works; invariants
+      + CSP + hostile-name test all intact.
+      TICKED (supervisor, Nov 15): shipped hub 5c100ca + fix 8e248a5, PUBLISHED LIVE gh-pages c926030. Mr. E confirmed the tabs (Boards/Heroes/Bands/Chronicle) on the live page.
+
+# Phase AA - Mr. E's narrated clip 14-26-15 (transcribed) (2026-11-13 14:50)
+
+His words: "it looks very pixelated... it's only when they're moving, when characters are moving
+around, it looks like jack shit. Top left is fine, top right, bottom right, bottom left, it all
+looks like shit. And the grass looks freaking terrible, and I mean terrible, really bad."
+
+- [ ] D49. MOVING CHARACTERS PIXELATE / SHIMMER IN THE CLOSE PANES - SAME ROOT AS THE GRAIN (D24).
+      Owner: DESKTOP BUILD leads (project.godot [rendering]) WITH the HUD worker for the pane
+      viewports (spotlight.gd). The tell Mr. E gave is diagnostic: the TOP-LEFT director/wide pane
+      is FINE; the three CLOSE subject panes shimmer on movement. That is classic no-anti-aliasing
+      on sub-resolution viewports - each 2x2 pane renders at ~960x540 and upscales, so a moving,
+      animated character crawls with aliasing while a wide static shot hides it. project.godot's
+      [rendering] section is EMPTY (no MSAA/TAA/FXAA) - that is also the root of D24's grain.
+      THE FIX LIKELY SOLVES BOTH: add temporal AA (TAA) or MSAA. TAA specifically kills both the
+      moving-edge shimmer AND the SSAO/fog temporal-dither grain from D24. BUT verify in the live
+      2x2: (a) TAA needs the warm-up the laptop already added for L43's FPS test - a cold first
+      frame can ghost; (b) check it does not reintroduce grain or smear; (c) check the FPS cost
+      with the grid up and the publisher on (COORDINATION 8.5 budget). If TAA is too costly in four
+      live viewports, fall back to MSAA 2x/4x on the pane viewports plus FXAA. Also consider raising
+      the pane viewport render scale - sub-res is half the problem.
+      DONE: a 1080p capture of a MOVING character in a close pane that reads clean, grain gone,
+      FPS still in budget, and Mr. E signs off.
+      This supersedes D24 as the active rendering item - same cause, sharper repro. Keep D24's grain
+      acceptance in the DONE check.
+
+- [ ] D45 (reinforced). THE GRASS IS "REALLY BAD" IN EVERY PANE, not just some. Still owner DESKTOP
+      BUILD (valley.gd / ground material). His emphasis - "freaking terrible, really bad" across all
+      four panes - means a plain texture swap may not be enough: check the grass MATERIAL (tiling
+      scale, normal map, roughness) under the pane camera distance, not just the albedo. A good CC0
+      grass with a proper normal + correct tiling, judged at the pane's zoom. CC0 only, LICENSE note.
+
+CHANGELOG 2026-11-13 14:50 (supervisor): from Mr. E's transcribed clip 14-26-15 - D49 (moving-character
+pixelation in the close panes, same no-AA root as D24's grain; TAA/MSAA likely fixes both; desktop
+leads with the HUD worker for the pane viewports) and D45 reinforced (grass bad in every pane,
+check the material not just the texture). More clips to come as Mr. E transcribes them.
+
+# Phase AB - Mr. E's narrated clip 14-27-07 (transcribed) (2026-11-13 14:51)
+
+His words: "this guy is stuttering... this dude's animation's terrible... look at the grass, that
+texture, it's so nasty... this dude has not moved from his spot in the top right, a lot of them
+aren't moving... this dude's not even holding the fishing pole correctly... this grass texture,
+so nasty."
+
+- [x] D52. *** TOP PRIORITY, ABOVE EVERYTHING ELSE. *** HEROES DO NOT MOVE ON COMMAND. A viewer  [CLOSED nov13: pre-raise race fixed c9daa0f; happy-path 'failure' was a frame-vs-wallclock test artifact, laptop made it wall-clock deterministic b59fdc4; D52_TEST OK 6/0 on both machines]
+      enlists a hero, sends it to delve, and it stands frozen - the whole core loop (enlist -> party
+      -> delve) is dead on screen. Mr. E created a hero, issued delve, set a pane to follow it, and
+      it never moved. The follow-CAMERA works (the pane tracks it); the HERO's movement does not.
+      THE UNIFYING HYPOTHESIS - treat D44, D50 and D52 as ONE freeze bug until proven otherwise:
+      everything Mr. E sees frozen - townsfolk standing still (D50), NPCs not wandering, heroes not
+      delving (D52) - is an agent that cannot path. The _townwalk in_solid count that rose from a
+      clean 0 to peak 8 (D44/D44b) is very likely the MEASUREMENT of this same freeze: an agent
+      wedged in carved solid geometry stops translating AND stops delving. D44b's spawn-snap fixed
+      the RISING half; the residual is agents getting stuck at RUN TIME (doorways, props, nav-mesh
+      seams), and that residual is what freezes heroes mid-town.
+      THIS SPANS TWO OWNERS - coordinate, do not let it fall between them:
+        * DESKTOP BUILD (town_nav.gd, townsfolk.gd, hero movement in town): is the hero's nav agent
+          getting a path to the dungeon mouth at all? Is it wedged in_solid at spawn/standing? Does
+          it have a velocity but zero translation (stuck against a collider)?
+        * LAPTOP CODE (delve.gd, roster.gd, chatcmd.gd): does the !delve / go-delve command actually
+          ISSUE a move order and a destination, or does it set state without moving the body? The
+          census showed delving logic runs in tests - so why does a LIVE hero not move? Find the
+          live-vs-test difference.
+      REPRO FIRST, as every good find this session has: capture ONE hero from enlist to frozen, log
+      its nav state (has_target, path length, in_solid, velocity, position-delta per second). Do not
+      guess the mechanism. This is the same discipline that cracked L46/L49/L50/L52/L55.
+      DONE: a live run where an enlisted hero commanded to delve WALKS to the mouth and descends,
+      townsfolk wander, in_solid holds 0, and Mr. E confirms on stream that heroes move.
+
+CHANGELOG 2026-11-13 14:52 (supervisor): D52 raised CRITICAL and placed above all desktop and laptop work -
+heroes do not move on command, which kills the core loop. Unified with D44/D44b/D50 as one likely
+freeze bug (agents cannot path; in_solid is its measurement). Spans desktop (nav/movement) and
+laptop (the delve command path) - both must coordinate; repro before fixing.
+
+# Phase AD - Mr. E's clips 14-29-22 / 14-30-21 / 14-31-18 transcribed (2026-11-13 14:54). Important disambiguation.
+
+- [ ] D52 (REFRAMED - the supervisor unified too fast; the new clips split it in two). THE HERO
+      THAT WON'T DELVE IS A COMMAND/STATE BUG, NOT WEDGING. Clip 14-30-21: "Mr. is already waiting
+      at the dungeon mouth. No, he's not. He's standing by the WELL in the town square." The hero
+      stands in an OPEN area (the well), not jammed against anything, and never paths to the mouth
+      after a delve order - he even re-typed Delve and it still did nothing. So the go-delve command
+      sets state WITHOUT issuing a move/destination, or the hero's state machine never transitions
+      to "travel to mouth". OWNER: LAPTOP CODE (delve.gd / roster.gd / chatcmd.gd - the delve
+      trigger and the hero's travel-to-dungeon state). Repro one hero from the delve command and log
+      whether a nav target to the mouth is ever set. THIS IS STILL TOP PRIORITY - it kills the core
+      loop. It is NOT the same as the wedging below; do not fix it as a nav problem.
+
+- [ ] D44/D50 (CLARIFIED - the WEDGING half, distinct from D52). Clip 14-31-18: "this guy is stuck,
+      he's stuck against his pumpkins." SOME agents physically wedge against props (pumpkins) and
+      freeze. THAT is the in_solid / nav-collision bug, DESKTOP-owned (town_nav.gd), the thing the
+      rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
+      different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
+      bugs, two owners, do not conflate.
+
+CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-cheer tiers (7cdc363), Rally my hero reward + combat buff (eb707ae), hero idle-wander + delve-scope fix (19b1893/e1c9c1f), subscriber-pane Helix seed (19b1893), Custom Power-up redemption -> bit tiers (510a2e9), E3PO D37 live + all voice hooks (4e59901 + laptop L-148 + trader_arrives a2dbd3a), laptop merge c08cc08 (trap variety L-147, monster telegraphs L-149). Full gate green. OPEN for Mr. E: create the 5 Custom Power-ups in the dashboard; decide E3PO v2 (fighting commander).

@@ -9,6 +9,7 @@ class_name PartyFrames
 
 const W := 400          # L15: at 1080p; UiTheme.px scales it
 const DEAD := Color(0.45, 0.38, 0.32)
+const ON_STREAM := false      # D46: the multi-member band board no longer draws on stream (hub: Bands below)
 const MAX_ROWS := 8          # per delve; more than that folds into "+N more"
 
 var town: Node3D
@@ -47,7 +48,7 @@ func _process(delta: float) -> void:
 	if _t <= 0.0 or sp != _split:
 		_t = 0.4
 		refresh()
-	if sp:
+	if sp and ON_STREAM:
 		_dock()
 
 ## ---- L21: with the spotlight panes up, each party's block docks at the bottom-left INSIDE
@@ -89,6 +90,10 @@ func refresh() -> void:
 	for c in get_children():
 		remove_child(c)
 		c.queue_free()
+	if not ON_STREAM:                  # D46: the band board is off the stream; the hub carries it now
+		visible = false
+		_clear_extra()
+		return
 	var ds := delves()
 	var sp := HudDock.split(town)
 	if sp != _split:

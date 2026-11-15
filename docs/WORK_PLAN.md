@@ -1625,7 +1625,7 @@ section on the HUB for parties or bands that are currently in the dungeon." The 
 ("The town's band - floor 5" with members + HP bars) eats most of a 2x2 pane. It comes off stream
 and moves to the hub, which has the room.
 
-- [ ] D46. TAKE THE PARTY-BAND PANEL OFF THE STREAM, AND PUT THE BAND IN THE SNAPSHOT. Owner:
+- [x] D46. TAKE THE PARTY-BAND PANEL OFF THE STREAM, AND PUT THE BAND IN THE SNAPSHOT. Owner:
       DESKTOP BUILD (party_frames.gd + the snapshot upsert). TWO linked halves, do both:
         (a) Stop drawing the on-stream party-band panel - it covers most of a pane and would on
             every pane. The in-game unit frame / selection (rts_camera.gd) stays; it is the big

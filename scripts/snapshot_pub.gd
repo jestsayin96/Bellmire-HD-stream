@@ -130,7 +130,7 @@ func build_payload() -> Dictionary:
     var r: Roster = town.get("roster") if town else null
     var e: Economy = town.get("economy") if town else null
     var out := {
-        "v": 1,
+        "v": 2,                 # D46: v2 adds `parties` (the hub accepts 1, 2 and 3)
         "game": "Bellmire HD",
         "generated_at": Time.get_datetime_string_from_system(true) + "Z",
         "town": _town_block(e),
@@ -138,6 +138,7 @@ func build_payload() -> Dictionary:
         "fallen": [],
         "heroes": [],
         "commands": _commands,
+        "parties": _parties(),
         "chronicle": chronicle(),
     }
     if r:
@@ -157,6 +158,50 @@ func build_payload() -> Dictionary:
         sheets.sort_custom(func(a, b): return int(a["standing"]) > int(b["standing"]))
         out["heroes"] = sheets
     last_build_ms = (Time.get_ticks_usec() - t0) / 1000.0
+    return out
+
+# ---------------------------------------------------------------- the bands below (D46)
+
+const PARTY_MAX := 8
+const MEMBER_MAX := 8
+
+## Every delving party right now, for the hub's "Bands below": its name, the floor it is on and
+## each member {name, class, hp, max_hp, status}. Read-only and plain data - the hub renders every
+## string as text. status is "fallen" at 0 hp, else the first running state's word, else "ok".
+func _parties() -> Array:
+    var out: Array = []
+    if town == null:
+        return out
+    for c in town.get_children():
+        if out.size() >= PARTY_MAX:
+            break
+        if not (c is Delve):
+            continue
+        var d: Delve = c
+        if d.party.is_empty() or d.dun == null or not is_instance_valid(d.dun):
+            continue
+        var members: Array = []
+        var lead := ""
+        for m: Dictionary in d.party:
+            if members.size() >= MEMBER_MAX:
+                break
+            var h: Dictionary = m.get("h", {})
+            var hp := maxf(0.0, float(m.get("hp", 0.0)))
+            var mx := maxf(1.0, float(m.get("max", 1.0)))
+            var status := "ok"
+            if hp <= 0.0:
+                status = "fallen"
+            else:
+                var sts: Array = d.statuses(m)
+                if not sts.is_empty():
+                    status = String(sts[0][0]).to_lower().strip_edges().left(20)
+            var nm := String(h.get("name", "?")).left(40)
+            if lead == "" and hp > 0.0:
+                lead = nm
+            members.append({"name": nm, "class": String(h.get("class", "")).left(24),
+                "hp": int(ceil(hp)), "max_hp": int(ceil(mx)), "status": status})
+        var band := "The town's band" if d.npc_party else ("%s's band" % lead if lead != "" else "Delvers")
+        out.append({"name": band, "floor": int(d.floor_no), "members": members})
     return out
 
 # ---------------------------------------------------------------- the Chronicle

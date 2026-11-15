@@ -5476,3 +5476,9 @@ right before the attack fires makes the beat readable.
   5. 112 brews is past what a !help list can print. A shelf that pages, or filters to the ones the
      party can actually use, is now the readability question - not more brews. OWNER: HUD.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## D-cycle (supervisor Claude, Nov 14 evening) - D46: bands off the stream, into the snapshot
+- party_frames.gd: ON_STREAM := false - the multi-member band board no longer draws (delves() kept for tests).
+- snapshot_pub.gd: payload v2 adds `parties` [{name, floor, members[{name, class, hp, max_hp, status}]}], capped 8 bands x 8 members; read-only, same publishable-key path.
+- tools/_d46_test.gd: 11 checks OK. Gate: parse 0 errors, _offfloor 0, _townwalk 0/20120 PASS, _delve_test clean, TWITCH_PARSE OK.
+- Note: tools/_party_test.gd still expects the board visible and is now obsolete.

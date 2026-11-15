@@ -3766,3 +3766,42 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   5. 112 brews is past what a !help list can print. A shelf that pages, or filters to the ones the
      party can actually use, is now the readability question - not more brews. OWNER: HUD.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 36 - repeat-reducer: more alt intros for lords, uniques, forge tiers; a few more town_life lines (standing backlog item 5)
+- Context: lords/uniques/forge-tier intros fire on every encounter and every name - the alt pools
+  are the stream's repetition problem. C-cycle 8 added 6 alts per lord and per unique; C-cycle 12
+  added 3 alts per forge tier. On a long stream those pools roll over fast. This doubles them.
+- data/lore_lines.json: lord_intros_alt +6 per lord (all 8 canon lords; 48 new lines), unique_intros_alt
+  +6 per unique (all 5 canon rare uniques; 30 new lines), forge_alt +3 per tier (all 5 tiers; 15 new
+  lines). Every new line is written against the lord/unique/tier's established shape - cold-hall and
+  blue fire for the Hollow King, wet-floor and birthing for Grubmother, bones-in-ranks for Rattling
+  Host, ceiling and draught for Nightwing, patient-and-older-than for Gravewyrm, stacking-dead for
+  Ossuary Lord, polite-and-expensive for Pale Duchess, frost-and-coils for Mourncoil; chewing-stone
+  for Gnawbone, taut-silk for Mother Silk, sob-and-draw for Weeping Bowman, firepit-and-laughing for
+  Cinderjack, muster-roll-reading-itself for Kept; ditch-iron / smith's-stamp / rune-fuller /
+  dragontooth / scar-quenched for forge tiers 1-5. Nothing contradicts the single-line canon in
+  `lord_intros` / `unique_intros` / `forge`.
+- data/lore_lines.json: town_life +4 per category (crier, market, growth). Small block, same voice.
+- NO NEW LORD, NO NEW UNIQUE, NO NEW TIER, NO NEW KEY. Every new line slots into a list that was
+  already there, same value type (str) as its neighbours. The `_note` fields in each alt block stay
+  byte-identical, and the pick rule they describe (choose at random from [canon] + [alts]) still
+  reads the same list just a lot longer.
+- VALIDATION OK. All four owned files json.load clean. data/items.json, data/bosses.json and
+  data/potions.json byte-identical to HEAD. data/lore_lines.json top-level key order unchanged;
+  every untouched top-level key deep-equal to HEAD; the four touched dicts (lord_intros_alt,
+  unique_intros_alt, forge_alt, town_life) keep their exact sub-keyset and every pre-existing list
+  is an exact PREFIX of the new one. No new duplicate line inside any touched list. Bytes:
+  265,151 -> 271,335.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new list, no new file. Whatever
+     reads lord_intros_alt / unique_intros_alt / forge_alt / town_life today reads these 93 extra
+     lines unchanged.
+  2. The pick rule the _note fields describe is: random from [lord_intros[k]] + lord_intros_alt[k]
+     (and the parallel pairs for uniques and forge). If any caller is still reading only the canon
+     string and ignoring the alt list, THIS cycle changes nothing on stream - that path is where
+     the repetition shows up. OWNER: laptop code (bestiary.gd / gear.gd / wherever the forge-tier
+     line is formatted on pickup).
+  3. town_life.crier / market / growth appears to be read by the desktop's town chatter. The four
+     new lines per category inherit that path with no change. OWNER: desktop build (town.gd /
+     townsfolk.gd).
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

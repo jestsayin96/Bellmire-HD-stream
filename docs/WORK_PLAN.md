@@ -96,6 +96,33 @@ than leaving a queue that is all polish at the top.
       parse 0 errors, payload KB stated and under cap, and a v=3-era client still renders the hero sheet
       (additive check). State in your summary every field from the NOTES list you deliberately did not
       publish and why.
+  PROGRESS (game build, 2026-11-15 ~09:30 CT, committed): every sheet field the game computes is published
+  (initiative, speed, gear by real slot, status, last_seen, per-hero `events` ring; stats/max_hp/xp_next/combat were
+  already there for every hero). D59_SHEET OK, gates green, 244 KB at 202 heroes. v HELD AT 3 (PAYLOAD_V): the hub's
+  KNOWN_V refuses "4" - BLOCKED ON THE HUB: add "4" to KNOWN_V, read h.last_seen + h.events, and fix two H20 render bugs
+  (gear slot text never appended; "[object SVGSVGElement]" in the card head). See PROGRESS D-cycle D59a.
+
+- [ ] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
+      (scripts/snapshot_pub.gd and whichever of your own files raise Chronicle lines). H21 shipped the hub's
+      campaign journal on 2026-11-15 and it had to invent its own clock: chronicle lines carry no town day,
+      so the journal groups by a wall-clock session heuristic (a 90-minute gap starts a new stretch), and it
+      has no structured subject, so the per-hero filter falls back to matching the hero's name as a whole
+      word in the line's text - which silently misses every line that refers to a hero any other way.
+      The game knows both. Publish them, additively, on each chronicle entry:
+      .1 `day` - the town's own day number at the moment the line was raised, so a stretch of the journal is
+         "Day 41" rather than "Earlier today". Publish the day the game actually keeps; do not derive a day
+         from a timestamp on the publisher's side.
+      .2 `who` - the hero (or heroes) a line is about, as the roster key/name the hub already uses for a
+         hero, and `kind` - the line's event kind from the set the game already raises (raid, disaster,
+         festival, death, delve, growth, find, ...). Omit a field on a line that genuinely has no subject or
+         no kind; an omitted field draws as the honest fallback, an invented one is a lie on a 24/7 stream.
+      Forward-compatible and additive: a hub that does not know these fields must render the Chronicle
+      exactly as it does today, and the payload stays under its size cap (state the KB - D59a is already at
+      244 KB with 202 heroes, so state the delta and trim the ring if it threatens the cap).
+      DONE: a 10-minute run with the publisher on, then the published row showing `day`, `who` and `kind` on
+      the lines that have them and cleanly absent on the lines that do not; a stated payload KB before and
+      after; W1A_TEST OK, TWITCH_PARSE OK, parse 0 errors; and the live hub's Chronicle still rendering
+      correctly with the hub as it stands today (the hub's own adoption of these fields is a later H item).
 
 - [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
@@ -762,12 +789,11 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
-  PROGRESS (game build, 2026-11-15 ~08:40 CT, UNCOMMITTED in R's working tree - own test fails): LOD now follows
-  the cameras that DRAW (the panes), by on-screen size, with an unseen tier; poses on the physics tick; animals
-  LOD'd. tools/_d23_soak.gd 30 min: fps_avg 114.6 (baseline ~97), D23_SOAK FAIL against the >=120 bar. Gates
-  green. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code (DungeonHD/FloorGen/delve.gd), not D23's to
-  fix; and the director pane on the busy market. DO NOT discard R's dirty tree - this work is real and is 17
-  fps of it. Recorded by the supervisor 2026-11-15 15:00 UTC so a later run cannot wipe it by accident.
+  PROGRESS (game build, 2026-11-15): LOD now follows the cameras that DRAW (the panes), by on-screen size, with an
+  unseen tier; poses on the physics tick; animals LOD'd. tools/_d23_soak.gd 30 min: fps_avg 114.6 (baseline ~97),
+  D23_SOAK FAIL against the >=120 bar. COMMITTED f16496b (2026-11-15 ~09:22 CT) per the supervisor directive after
+  a green gate re-run; D23 stays OPEN. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code
+  (DungeonHD/FloorGen/delve.gd), not D23's to fix; and the director pane on the busy market.
 
 ### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
 # Phase A - dungeon geometry & nav [L25]
@@ -1049,6 +1075,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 ### CONTENT (laptop, branch `content`, data+lore only, NEVER runs Godot) - see COORDINATION 10
 - [ ] C1. COSMETICS & DYES CATALOGUE (data/items.json): items.json is only 3.7 KB - the cosmetic set is thin. Expand cosmetics and accessories a lot: cloaks, hats/hoods/helms-as-cosmetic, rings, amulets, boots, gloves, banners, pets, titles - each with the same fields the existing entries use, priced sensibly against the economy, and named from the lore (Bellmire, the scar, the Ford, the guild). Widen dyes beyond the current set and keep dye_cost coherent. Additive only; never rename or drop a key. DONE: json validates, every new entry carries the same fields as the existing ones, and a written list of what was added.
 - [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
+      CYCLES LOGGED: C-41..C-46 (cosmetics/accessories/dyes, uniques, intro/forge, most-repeated, epitaph/descend/cleared, disaster variants). C-47 (2026-11-15, content 3d01748): +140 lines - forge, town_life, a wandering lord, and E3PO tier_up_alt. Standing item: stays open by design.
 - [ ] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
 
 # Phase K - test validity (raised by the laptop, Nov 12 23:55; IDs + decisions by the supervisor)
@@ -2119,7 +2146,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
 # worker says so in its summary and the supervisor raises it with that file's owner - it does not reach in.
 # ORDER MATTERS: L65 first (one designed interface), because L64/L66/L67 all draw through the theme.
 
-- [ ] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
+- [x] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
       (ui_theme.gd, then hud_dock.gd, feed_hud.gd, leaderboard_panel.gd, spotlight.gd). The stream's
       panels were each built in a different week and it shows: different corner radii, different
       border weights, different type sizes for the same job, parchment at three different values.
@@ -2141,6 +2168,12 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       live at once, before and after, side by side - the after reads as one interface; a grep of the
       four adopting files shows zero literal colour/size/radius constants; the stated contrast and
       size floors are listed per element with their measured numbers.
+
+  RESULT (2026-11-15, hud-ui ffb9c77, cycles U27+U28): .1-.3 landed in U27 - ui_theme.gd is a real token
+  system (named type scale, one panel frame, shared chrome) and hud_dock, feed_hud, leaderboard_panel and
+  spotlight all draw from it. .4 landed in U28: tools/_l654_audit.gd measures every on-stream string and
+  all 15 now clear 4.5:1 at 1080p, via a chip_bg token and a softer scroll edge (renders/cycles/
+  20261115_l654/audit.txt). Next for this worker: L64.
 
 - [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS. Owner: DESKTOP HUD
       (auto_director.gd, spotlight.gd). The stream runs 24/7 and the director currently rotates;
@@ -2242,7 +2275,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   foot line. CSP byte-identical, no new fetch, no URL sink, hostile name renders as text (?mock=sheets).
   The fields it asked for and did not get are listed in web/NOTES.md and are now D59.
 
-- [ ] H21. THE CHRONICLE BECOMES A CAMPAIGN JOURNAL. Owner: HUB BUILDER (web/index.html, web/app.js,
+- [x] H21. THE CHRONICLE BECOMES A CAMPAIGN JOURNAL. Owner: HUB BUILDER (web/index.html, web/app.js,
       web/style.css, web/NOTES.md). H14 made the Chronicle remember; a long scroll of remembered lines
       is still only a scroll. On a 24/7 stream the common case is a viewer who was away for six hours
       and wants to know what they missed. Staged:
@@ -2262,6 +2295,77 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       event filter applied, a "while you were away" summary after a simulated six-hour gap, and a
       moment-link opened in a fresh tab landing on that moment; all six query-string states and the
       hostile-name test still pass.
+
+  RESULT (2026-11-15, hub dafb0a2): the Chronicle tab is a journal built only from what the page already
+  holds (live `chronicle` + the H14 browser history) - no new fetch, no new origin, no CSP change, no write
+  path. Episodes are session stretches (90-min quiet gap or 6 h of length) with a town-voice heading, clock
+  range, line count and a one-line sense; newest open, older folded, `aria-expanded` on the toggle. Hero and
+  event filters (whole-word `namesIn`, page-owned keyword lists) persist page-locally and are re-validated on
+  read. "While you were away" fires on a 30 min+ gap, bounded honestly (town sends 50 lines, browser keeps
+  ~300 / ~2 days, "only what this browser saw"); `?away=6` simulates it. Moment links use a page-assigned
+  integer id in `#moment-<n>` - no snapshot string reaches a URL. Security invariants and the hostile-name
+  test still pass; innerHTML remains only at the two page-owned legacy sites; CSP byte-identical.
+  HUB-SIDE GAPS NAMED (now D60): chronicle lines carry no town `day` and no structured hero/kind, so the
+  journal dates by session heuristic and the hero filter name-matches the text.
+  HOUSEKEEPING NOTED BY THE WORKER: the older `setUpTabs()` in app.js is dead code (the nav uses `wireTabs`).
+
+- [ ] H23. ACCEPT THE CHARACTER SHEET THE PUBLISHER IS ALREADY SENDING - v=4, AND TWO RENDER BUGS.
+      Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md). URGENT - TAKE THIS BEFORE H22. This is
+      the mirror image of D57: the game build shipped D59a on 2026-11-15 (initiative, speed, gear by real
+      slot, status, per-hero `last_seen`, a per-hero `events` ring) and then had to HOLD the payload at v=3
+      because this page's `KNOWN_V` refuses "4". Every one of those fields is on the wire right now and the
+      sheet is drawing dashes over them. Three parts:
+      .1 ACCEPT v=4. Add "4" to KNOWN_V and keep "1","2","3" - a v=3 publisher must still render exactly as
+         it does today. The version gate stays a gate: an unknown version still shows the honest banner.
+      .2 READ THE NEW FIELDS. The hero sheet consumes `h.last_seen` (a per-hero last-seen, so a hero who
+         acted a second ago no longer reads the same as one who has not moved in an hour - the whole-snapshot
+         `updated_at` was all the page had) and `h.events` (newest-first ring of that hero's own moments).
+         The personal chronicle on the sheet is built from `h.events` when the publisher sends it, and falls
+         back to the existing whole-word name match when it does not. Every string still reaches the DOM
+         through el(); no field is ever used as a URL, src, href or style.
+      .3 FIX THE TWO H20 RENDER BUGS the game build worker saw on the live sheet: gear slot text is never
+         appended (the slot draws empty even when the publisher sent a name), and "[object SVGSVGElement]"
+         is printed in the card head where an icon element is being string-concatenated.
+      DONE: a capture of the live hero sheet for a kitted veteran and for a freshly rolled hero with the
+      gear slots that exist showing their item names, no "[object" anywhere on the page, a per-hero last-seen
+      that differs between two heroes, and a personal chronicle built from `events`; plus a v=3 payload still
+      rendering unchanged (paste an old payload into a mock), all six query-string states and the
+      hostile-name test passing, and the CSP unchanged.
+
+- [ ] H24. FIND ANYTHING, FROM ANYWHERE. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css,
+      web/NOTES.md). The hub now holds twelve tabs, a 200-hero roster, a Bestiary, a Hall of the Fallen and
+      a journal that remembers days. A viewer who hears a name on stream has no way to reach it except by
+      guessing which tab owns it. One search field, always reachable, that looks across everything the page
+      already has in memory - heroes, fallen, bands, lords in the Bestiary, remembered Chronicle moments -
+      and jumps to the thing itself (the hero's sheet, the lord's Bestiary entry, the moment in the journal
+      via the H21.4 id). Page-local only: no new fetch, no new origin, no write path, no snapshot string in
+      any URL - a result addresses its target by an index or id the page owns. Honest when the page cannot
+      help: a name the browser has never seen says so rather than returning nothing. Keyboard-reachable
+      (focus the field, arrow through results, Enter opens, Escape closes) and it must not steal typing from
+      the guild chat input.
+      DONE: a recording searching one hero name, one lord name and one word from a remembered line, each
+      landing on the right place from a different starting tab; a search for something the page has never
+      seen showing the honest empty state; the hostile-name test passing on every result row (a hero called
+      <img src=x onerror=alert(1)> renders as text in the results list); all six query-string states pass.
+
+- [ ] H25. THE NIGHT WATCH - THE HUB IS OPEN FOR HOURS ON A SECOND SCREEN. Owner: HUB BUILDER
+      (web/index.html, web/app.js, web/style.css, web/NOTES.md). The common viewer leaves this page open
+      beside the stream all evening. Today it is lit and laid out for someone actively reading it. Give it a
+      long-session mode, in the hub's own palette (deep ink/charcoal, parchment, one teal accent, restrained
+      gold - refine it, do not replace it):
+      .1 A DIMMER WATCH. A low-light treatment that drops page luminance and pulls the parchment back without
+         losing the 4.5:1 floor on any text, so the page can sit next to a bright stream at 2 a.m.
+      .2 AN AMBIENT LAYOUT. A compact mode that keeps what changes by itself - the town's state line, the
+         Chronicle, who is below - and folds away the parts that only matter when someone is clicking.
+      .3 IT CHANGES QUIETLY. Anything that updates while the page is idle arrives without a jolt: no layout
+         jump, no flash, honour prefers-reduced-motion, and never steal focus from the chat input.
+      .4 IT REMEMBERS, PAGE-LOCALLY. The chosen mode survives a refresh in this browser only, re-validated on
+         read like every other stored preference, and there is an obvious way back to the full page.
+      DONE: 1280 px captures of the full page and of the watch mode side by side, a measured contrast table
+      showing every on-page text style still at or above 4.5:1 in the dimmed treatment, a recording of the
+      page sitting idle through at least two snapshot updates with no jump or flash, a 390 px capture
+      confirming H17's reflow discipline still holds, and all six query-string states plus the hostile-name
+      test passing.
 
 - [ ] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). Someone arrives mid-raid from a raid

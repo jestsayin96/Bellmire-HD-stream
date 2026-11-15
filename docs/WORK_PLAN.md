@@ -1,5 +1,54 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### D88 - THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
+
+"one of the GATE traps that comes down to block the path was put in incorrectly, one of the
+adventures walked right around it, through a very small crack".
+
+THE ARITHMETIC IS THE BUG. DO NOT RE-DIAGNOSE IT.
+  - DungeonParts.portcullis() defaults to w = 4.0 and adds a stone frame on each side, so the
+    thing is 5.6 units wide on the floor (dungeon_parts.gd:263-269).
+  - dungeon_hd.gd:475 places it with `_place_solid(DungeonParts.portcullis(), c, 1.2)`.
+  - `_place_solid(node, c, r)` registers ONE obstacle: `[_cell_pos(c), r]` - a CIRCLE of radius
+    1.2, so 2.4 units across, centred on the cell (dungeon_hd.gd:390-392).
+
+A 5.6-unit gate is being blocked by a 2.4-unit disc. That leaves roughly 1.6 units of navigable
+floor on EACH side of the obstacle, still inside the gate's own footprint. The navmesh is correct
+and the pathfinder is correct: it walks round the little circle and straight through the iron bars.
+Mr. E's "very small crack" is 1.6 units wide and it is on both sides.
+
+THREE FAULTS, AND THE RADIUS IS ONLY THE FIRST:
+  1. The radius does not cover the prop. Fix the number and the crack closes - but see 2 and 3
+     before calling it done.
+  2. THE OBSTACLE SHAPE IS WRONG IN KIND. A portcullis is a WALL. `info["obstacles"]` only holds
+     (position, radius) pairs, so every solid prop in the dungeon is approximated by a disc. For a
+     cell or a statue that is fine. For anything wall-shaped it is not: enlarge the radius enough
+     to seal the gap and it now also blocks the floor to either side of the gate, which will wedge
+     walkers - and wedged walkers are D44, the bug we have been chasing for two days. Add a
+     SEGMENT or BOX obstacle kind and give the portcullis that. Audit every other `_place_solid`
+     caller against its prop's real footprint while in there; the prison cell at r = 1.9 for a
+     3.0-wide box has the same shape of error, smaller.
+  3. IT IS NOT IN A DOORWAY. It is placed by `take.call()`, which returns any open cell with
+     clearance. A gate standing free in the middle of a room blocks nothing even when its obstacle
+     is perfect - walking around it is the CORRECT behaviour for a free-standing object. A
+     portcullis belongs in a corridor or a door, spanning it wall to wall. Place it where the
+     geometry gives it two walls to meet, and make the span a condition of placing it at all: if
+     no such spot exists on the floor, DO NOT PLACE ONE.
+
+WHILE IN THERE - IT IS NOT A TRAP EITHER. The grid's tween is `create_tween().set_loops()` on a
+fixed 2.0 / 2.4 / 1.5 / 0.35 cycle that runs forever regardless of whether anyone is near. Mr. E
+called it a "GATE trap that comes down to block the path", which is what it LOOKS like it should
+be. Decide with him which it is: scenery that cycles, or a real trap that drops when a party
+crosses it and has to be lifted, forced or gone around. If it drops on the party it belongs in
+delve.gd's TRAPS table with a DC and a save like the rest. Do not silently leave it as a prop that
+pretends.
+
+DONE TEST: build 50 floors of each theme that can spawn one ("crypt", "shrine", "treasury"), and
+for every portcullis assert (a) it spans wall to wall, (b) a straight-line path from one side to
+the other is blocked by the navmesh at every sample point across its width, and (c) no walkable
+cell within 3 m of it became unreachable. Then run a 20-minute delve soak and assert zero stuck
+walkers - this fix must not trade a crack for a wedge.
+
 ## MR. E'S RULING (Nov 15 16:27) - THE DAIS: HIS OWN PRIVATE CONTROL PANEL
 
 Verbatim: "i am also going to need my own personal HUB my own Website for this game. so i can
@@ -1079,7 +1128,7 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
   THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
   IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen)
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed)
     These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
     Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
     the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and

@@ -24,7 +24,7 @@ class_name Spotlight
 ## copies its camera), so the cost is roughly one full view, not five.
 
 const LANES := ["bits", "subs", "points"]
-const COL := {"bits": Color(0.95, 0.72, 0.18), "subs": Color(0.62, 0.36, 0.92), "points": Color(0.20, 0.72, 0.70), "director": Color(0.16, 0.10, 0.06), "wide": Color(0.38, 0.28, 0.19)}
+const COL := UiTheme.KIND
 ## L62 (Mr. E, Nov 13): each pane carries a LANE TITLE in words - DIRECTOR / BITS /
 ## SUBSCRIBER / CHANNEL POINTS / (ambient) - so a viewer can read what the pane is
 ## FOR, not just who it follows. The spend prompt: lane colour (L57) says which lane
@@ -546,7 +546,7 @@ func _make_pane(k: String) -> Dictionary:
 	# the viewer, their hero and why they are here - across the top, on a chip of the lane colour
 	var lb := Label.new()
 	lb.add_theme_font_size_override("font_size", UiTheme.px(24))
-	lb.add_theme_color_override("font_color", Color(1, 0.97, 0.9))
+	lb.add_theme_color_override("font_color", UiTheme.WHITE)
 	lb.add_theme_color_override("font_outline_color", UiTheme.INK)
 	lb.add_theme_constant_override("outline_size", UiTheme.px(6))
 	var chip := StyleBoxFlat.new()
@@ -566,14 +566,14 @@ func _make_pane(k: String) -> Dictionary:
 	# label (positioned by _now_watching, L40 rule).
 	var kind_lb := Label.new()
 	kind_lb.add_theme_font_size_override("font_size", UiTheme.px(30))
-	kind_lb.add_theme_color_override("font_color", Color(1, 0.98, 0.92))
+	kind_lb.add_theme_color_override("font_color", UiTheme.ON_KIND)
 	kind_lb.add_theme_color_override("font_outline_color", UiTheme.INK)
 	kind_lb.add_theme_constant_override("outline_size", UiTheme.px(6))
 	var kind_chip := StyleBoxFlat.new()
 	kind_chip.bg_color = Color(COL[k].r * 0.72, COL[k].g * 0.72, COL[k].b * 0.72, 0.95)
 	kind_chip.border_color = COL[k]
 	kind_chip.set_border_width_all(maxi(2, UiTheme.px(2)))
-	kind_chip.set_corner_radius_all(3)
+	kind_chip.set_corner_radius_all(UiTheme.CHIP_RADIUS)
 	kind_chip.content_margin_left = UiTheme.px(14)
 	kind_chip.content_margin_right = UiTheme.px(14)
 	kind_chip.content_margin_top = UiTheme.px(3)
@@ -717,8 +717,8 @@ func _lane_tag(l: String, real: float) -> void:
 		tag.render_priority = 10
 		tag.font_size = 48
 		tag.outline_size = 14
-		tag.outline_modulate = Color(0, 0, 0, 0.95)
-		tag.modulate = Color(1.0, 0.86, 0.40)
+		tag.outline_modulate = UiTheme.TAG_OUTLINE
+		tag.modulate = UiTheme.TAG_GOLD
 		tag.top_level = true
 		town.add_child(tag)
 		p["tag"] = tag
@@ -819,7 +819,7 @@ func _now_watching(k: String) -> void:
 		kc.bg_color = Color(kcol.r * 0.72, kcol.g * 0.72, kcol.b * 0.72, 0.95) if not ambient else Color(kcol.r, kcol.g, kcol.b, 0.80)
 		kc.border_color = COL[k]
 		kc.set_border_width_all(maxi(2, UiTheme.px(2)))
-		kc.set_corner_radius_all(3)
+		kc.set_corner_radius_all(UiTheme.CHIP_RADIUS)
 		kc.content_margin_left = UiTheme.px(14)
 		kc.content_margin_right = UiTheme.px(14)
 		kc.content_margin_top = UiTheme.px(3)

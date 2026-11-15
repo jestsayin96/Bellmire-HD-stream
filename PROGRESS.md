@@ -5670,3 +5670,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Canon held: the Hall's three rules, the bell with no clapper, the scar, the Ford, the guild chalk, the door kept. No dungeon floor count stated; `floor %d` is only the floor just cleared, as in the existing lines. Every new line is unique against every existing string in the file.
 - VALIDATION OK: lore_lines.json json.loads; every pre-existing entry is unchanged and in order; placeholder shapes match each existing pool; git diff is pure insertion (the only 18 changed existing lines are the former last entries of each list gaining a trailing comma).
 - CODE WIRING: none. All keys already exist and are read by the current loaders. Worth confirming nothing assumes a fixed pool size (descend 150 -> 170, cleared 150 -> 168, epitaphs 240 -> 270, barks ~72 -> ~84, tells 34 -> 40 per biome).
+
+
+## U27 - L65 one designed interface (stages .1-.3; .4 numbers pending) - 2026-11-15
+- ui_theme.gd is now a design system: type scale (T_WORDMARK 46 / SECTION 30 / BODY 26 / CHRONICLE 21 / NUMERAL 28 / CAPTION 17), spacing step, PARCHMENT/PLATE surfaces, ink + teal + gold with on-parchment/on-dark pairs, BORDER/RADIUS, one SHADOW, scroll palette, KIND colours; frame()/divider()/empty_state() chrome; contrast() helper; FLOOR_PX 17 / FLOOR_CONTRAST 4.5.
+- hud_dock, feed_hud, leaderboard_panel, spotlight: zero literal Color(n,...) or numeric corner radius left (grep). Visual output unchanged by design.
+- Looked at renders/cycles/20261115_l65/3_grid_scroll_clean_1080.png: scroll, pane chips, clock intact.
+- NOT done: L65.4 measured per-element contrast numbers, before/after side-by-side with leaderboard live, frame() adoption by the panels' own stylebox code. L65 stays open. Queue order is now L65 -> L64 -> L66 -> L67 (the dispatch prompt's L61/L31 list is stale: L61 ticked U25).

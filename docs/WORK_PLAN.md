@@ -703,6 +703,67 @@ a queue looked thin.
       stream distance; a crowd capture with 20+ equipped heroes holding D23's frame rate; and a
       stated list of which slots render at which distance.
 
+## MR. E'S PRINCIPLE, Nov 15 15:33 - BINDING ON EVERY WORKER AND ON THE SUPERVISOR
+
+  "go through everything - designs, game designs, bosses, monsters, items, equipment, cosmetics,
+   animals, everything - and make sure they all have their designs, not just spoken in name.
+   PEOPLE WANT TO SEE WHAT THEY PAY FOR, NOT JUST A STAT."
+
+This is a product rule, not a task. From now on: NOTHING A VIEWER CAN SPEND ON OR MEET SHIPS AS A
+NAME AND A NUMBER. If a thing can be bought, worn, fought or found, it must be visible as itself.
+When you write a new item of content, say what it LOOKS like, not only what it does. When you
+write a new work item that adds content, include how it will be seen.
+
+### THE ART CENSUS, measured 15 Nov - this is the true scale of the ask
+| What | Entries in data | Distinct models | Gap |
+|---|---|---|---|
+| Accessories (ring/amulet/cloak/boots/gloves) | 230 | 0 | 230 |
+| Hats and banners | 224 | 0 (colour only) | 224 |
+| Monster families | ~109 | 10 | ~99 |
+| Lords (4 lesser + 4 greater) | 8 | 0 bespoke | 8 |
+| Lord uniques | 270 | variants of the above | - |
+| Pets | 30 | 9 | - |
+| Weapons / armour tiers | 12 | shared geometry, size+glow | - |
+| Buildings | ~16 kinds | 12 | a few |
+Roughly **570 distinct pieces of art** do not exist. The project holds 254 models in total today.
+
+### THE FINDING NOBODY HAD WRITTEN DOWN
+**Your bosses are wearing hero bodies.** bestiary.gd builds a lord's model as `ADVC + body + ".glb"`
+from the ADVENTURER character set - and falls back to `Roster.CLASSES[cls]["model"]`. The Hollow
+King, Grubmother, Rattling Host, Nightwing, Gravewyrm, Ossuary Lord, Pale Duchess and Mourncoil
+are all reskinned adventurers. Every one of the 270 uniques inherits that. The biggest moment in a
+delve - a lord rising - is a hero model with a different name over its head. Fixing those EIGHT is
+the highest value-per-unit art in the whole project, and it is a small number.
+
+### HONEST SEQUENCING - the supervisor must not pretend this is small
+Taken in full this is LARGER THAN EVERYTHING IN PHASE RC COMBINED. It is the rest of the project,
+not a sprint. So it is ordered by what a viewer actually sees, most-seen first:
+  1. D75 THE EIGHT LORDS - bespoke, bought with the most viewer attention per asset.
+  2. D73 ICONS FOR EVERYTHING NAMED - cheap, parametric, covers all 454 items at once.
+  3. D76 MONSTER VARIETY - ~109 families sharing 10 models is the most-repeated visual in a delve.
+  4. D74 WORN ITEMS ON THE HERO - the expensive one; after Phase RC.
+ASSET CONSTRAINT, do not forget it: CC0 only (Quaternius, KayKit, Kenney) with a LICENSE note, and
+**Quaternius Bestiary / QAL is FORBIDDEN** - which is exactly the pack that would have solved the
+monsters. Procedural generation in headless Blender is therefore the main route, not asset hunting.
+
+- [ ] D75. THE EIGHT LORDS MUST LOOK LIKE LORDS. Owner: DESKTOP BUILD (bestiary.gd model path,
+      rig.gd) + a generator in tools/. Eight bespoke silhouettes - Hollow King, Grubmother,
+      Rattling Host, Nightwing, Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil - each readable
+      as ITSELF at stream distance, built from their written canon in bosses.json and lore_lines.
+      Not a reskinned adventurer. Their 270 uniques then read as variants of a real thing.
+      This is the single highest-impact art item in the plan: eight assets, maximum viewer
+      attention, and it makes every boss encounter land.
+      DONE: eight 1080p captures at stream distance, each lord distinguishable from the others and
+      from any hero, with the Chronicle naming it; D23's frame rate held in a delve soak.
+
+- [ ] D76. ~109 MONSTER FAMILIES SHARE 10 MODELS. Owner: DESKTOP BUILD + laptop code (bestiary.gd).
+      A delve is the most-watched thing on the stream and it is ten creatures wearing many names.
+      Build a parametric creature system - body plans varied by size, limbs, colour, texture and
+      silhouette, driven by the family's own written description - so a scarrat is not a rat with
+      a different label. Do NOT attempt 109 sculpts.
+      DONE: a 10-floor soak capture where consecutive floors are visibly different; a contact sheet
+      of every family; frame rate held.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.

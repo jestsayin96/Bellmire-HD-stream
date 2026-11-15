@@ -681,3 +681,32 @@ page already accepts are in brackets - the publisher may send any of them.
   A per-hero event feed (best depth, notable kills, deaths with day) from the publisher would
   replace the name-match.
 
+
+## H21 - the campaign journal (Nov 15)
+
+The Chronicle tab is now a journal, built only from what the page already has (the live snapshot's
+`chronicle` plus the H14 browser history). No new fetch, no new origin, no CSP change, no write path.
+
+- **H21.1 Episodes.** The snapshot carries no town-day on chronicle lines, so stretches are made by
+  session instead: a new stretch starts after a 90-minute quiet gap or after 6 hours of length. Each has a
+  town-voice heading (`Now, as the town tells it` / `Earlier today, by the bells` / ...), a clock range, a line
+  count and a one-line sense ("A hard stretch - 1 death, 1 raid.") made only from page-owned words and counts.
+  The newest stretch is open, older ones fold; a filter or a moment link opens what it needs. Open/fold is a
+  button with `aria-expanded`.
+- **H21.2 Filters.** A hero select (roster from the snapshot, whole-word name match - same `namesIn` as the
+  H20 sheet) and an event select (Raids, Disasters, Festivals, Deaths, Delves, Town growth - kind plus page-owned
+  keyword lists) join the existing kind chips and search. Hero + event + kind-off state persists in
+  `localStorage["bellmire.chron.f.v1"]` and is re-validated on read. Search text is not persisted.
+- **H21.3 While you were away.** `bellmire.chron.seen.v1` holds when this browser last looked (written while the
+  tab is visible and when it is hidden/closed). If the gap is 30+ minutes the Chronicle opens with a card: line
+  count by kind and up to five lines that matter (deaths > raids > town > delves, disaster/festival lines lifted).
+  It says so when it may be incomplete: the town only reports its latest 50 lines, this browser keeps ~2 days /
+  300 lines, and the page can only remember what it saw. `?away=6` (hours, 0.5-72) simulates a gap locally.
+- **H21.4 Moment links.** Every remembered line has a page-assigned integer id (`bellmire.chron.seq.v1` counter,
+  stored on the history rows). The Link button sets `#moment-<n>` and copies the address; opening it switches to
+  the Chronicle, opens that stretch, scrolls to and outlines the line. The id is only compared to row ids. Links
+  are per-browser: a browser that does not remember that line says so plainly instead of guessing.
+
+Not in the snapshot, so not possible yet: the in-game town day on each chronicle line (a `day` field would
+replace the session heuristic), and a structured hero/kind per line (the hero filter name-matches the text).
+Note: the older `setUpTabs()` in app.js is dead code (the nav uses buttons now; live tabs are `wireTabs`).

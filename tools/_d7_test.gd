@@ -1,6 +1,7 @@
 extends SceneTree
 ## D7 TEST (headless). Far-away LOD and the street cap.
-## 1) LOD tiers follow the camera distance (heroes and riders always full).
+## 1) LOD tiers follow how big each body is in a drawing camera, unseen = tier 3
+##    (D23; heroes and riders always full).
 ## 2) Far walkers keep their pace (summed-time steps).
 ## 3) Past STREET_CAP a settler keeps indoors, still counts as a soul; a burial
 ##    on the streets brings one out.
@@ -45,12 +46,13 @@ func _process(_d: float) -> bool:
         _cam.make_current()
         _t.call("_lod_pass")
         var bad := 0
-        var tiers := [0, 0, 0]
+        var tiers := [0, 0, 0, 0]
         var full_ok := true
+        var cams: Array = _t.call("lod_cams")
         for p in _t.get("people"):
             var v: Townsfolk = p
-            var d := _cam.global_position.distance_to(v.global_position)
-            var want := 2 if d > _k("LOD_FAR") else (1 if d > _k("LOD_NEAR") else 0)
+            var px: float = _t.call("lod_px", cams, v.global_position)
+            var want := 3 if px < 0.0 else (0 if px >= _k("LOD_PX_FULL") else (1 if px >= _k("LOD_PX_MID") else 2))
             if v is HeroBody or v is Cavalry:
                 want = 0
                 if v.lod != 0:
@@ -59,9 +61,10 @@ func _process(_d: float) -> bool:
                 bad += 1
             tiers[v.lod] += 1
         print("D7 lod tiers near/mid/far=", tiers, " counts=", _t.get("lod_counts"))
-        _check(bad == 0, "every walker's LOD matches its distance (%d wrong)" % bad)
+        _check(bad == 0, "every walker's LOD matches its size on screen (%d wrong)" % bad)
         _check(full_ok, "heroes and the mounted watch run full")
-        _check(tiers[2] > 10 and tiers[0] > 5, "the town has near and far walkers")
+        _check(tiers[0] > 5 and tiers[2] + tiers[3] > 10, "the town has near and far/unseen walkers")
+        _check(tiers[3] > 0, "D23: walkers no camera sees take the unseen tier")
         _t.set("_lod_t", 1e9)          # hold the LOD passes: this test sets them by hand
         for p in _t.get("people"):
             var v: Townsfolk = p

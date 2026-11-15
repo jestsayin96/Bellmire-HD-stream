@@ -27,3 +27,9 @@ _soak*.log
 
 # standalone export output
 build/
+
+# per-run scratch at the repo root (game build worker logs, supervisor share dirs)
+/_d*.log
+/_d*.done
+/_d*.flag
+/_sup_share*/

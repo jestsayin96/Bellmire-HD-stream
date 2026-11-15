@@ -1472,6 +1472,11 @@ const CHRON_ICON = new Set(CHRON_KINDS.map((k) => k.t));   // kinds that have a 
 const CHRON_MAX = 50;
 let chronOff = new Set();          // kind keys switched OFF
 let chronText = "";                // free-text filter
+let chronHero = "", chronTopic = "all";   // H21.2 hero + event-kind filters (persisted, page-local)
+let chronFocusKeep = 0;            // the moment currently marked (until the viewer changes a filter)
+let chronFocusId = null;           // H21.4 a moment id (an integer the page owns) to open on
+const chronOpen = new Map();       // H21.1 episode key -> viewer's open/fold choice
+let chronHeroSig = "";
 let chronData = null;              // the latest raw chronicle (for hover-paused repaints)
 let chronHover = false;            // true while the pointer is over the feed
 let chronPending = false;          // an auto-refresh arrived while hovering
@@ -1506,6 +1511,8 @@ const CHRON_HIST_MAX = 300, CHRON_HIST_MS = 48 * 3600000, CHRON_HIST_BYTES = 120
 const CHRON_AT_OK = /^\d{4}-\d\d-\d\dT[0-9:.]{5,16}(Z|[+-]\d\d:\d\d)?$/;
 let chronMem = [];                 // remembered rows [{t, s, at, k}], newest first
 let chronMemLoaded = false;
+const CHRON_SEQ_KEY = "bellmire.chron.seq.v1", CHRON_SEEN_KEY = "bellmire.chron.seen.v1", CHRON_F_KEY = "bellmire.chron.f.v1";
+let chronSeq = 0, chronSeenAtLoad = 0;
 const histTs = (r) => { const a = Date.parse(r.at); return isFinite(a) ? a : (r.k || 0); };
 const histKey = (r) => r.t + "|" + r.s;
 function histClean(a) {
@@ -1517,7 +1524,8 @@ function histClean(a) {
     const rt = String(r.t == null ? "" : r.t).toLowerCase().trim();
     const at = typeof r.at === "string" && r.at.length <= 40 && CHRON_AT_OK.test(r.at) ? r.at : "";
     out.push({ t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
-               k: typeof r.k === "number" && isFinite(r.k) ? r.k : Date.now() });
+               k: typeof r.k === "number" && isFinite(r.k) ? r.k : Date.now(),
+               n: Number.isInteger(r.n) && r.n > 0 && r.n < 2e9 ? r.n : 0 });
   }
   return out;
 }
@@ -1528,17 +1536,23 @@ function chronMemEnsure() {
     const raw = localStorage.getItem(CHRON_HIST_KEY);
     chronMem = raw && raw.length <= CHRON_HIST_BYTES * 2 ? histClean(JSON.parse(raw)) : [];
   } catch (e) { chronMem = []; }
+  try { chronSeq = Math.max(0, parseInt(localStorage.getItem(CHRON_SEQ_KEY), 10) || 0); } catch (e) { chronSeq = 0; }
+  for (const r of chronMem) if (r.n > chronSeq) chronSeq = r.n;
+  try { const v = parseInt(localStorage.getItem(CHRON_SEEN_KEY), 10); chronSeenAtLoad = isFinite(v) && v > 0 && v <= Date.now() ? v : 0; } catch (e) { chronSeenAtLoad = 0; }
+  const away = parseFloat(params.get("away"));      // local check: pretend the last look was N hours ago
+  if (isFinite(away) && away >= 0.5 && away <= 72) chronSeenAtLoad = Date.now() - away * 3600000;
+  chronFiltLoad();
 }
 // fold the live entries into the history, prune, cap, persist.
 function chronRemember(live) {
   chronMemEnsure();
   const now = Date.now(), by = new Map();
-  for (const r of chronMem) if (!by.has(histKey(r))) by.set(histKey(r), r);
+  for (const r of chronMem) { if (!r.n) r.n = ++chronSeq; if (!by.has(histKey(r))) by.set(histKey(r), r); }
   for (const e of live) {
     const r = { t: e.t, s: ctrlStrip(e.s).slice(0, CHRON_S_CAP), at: CHRON_AT_OK.test(e.at) ? e.at : "", k: now };
     if (!r.s) continue;
     const old = by.get(histKey(r));
-    if (old) { if (!old.at && r.at) old.at = r.at; } else by.set(histKey(r), r);
+    if (old) { if (!old.at && r.at) old.at = r.at; } else { r.n = ++chronSeq; by.set(histKey(r), r); }
   }
   let rows = [...by.values()].filter((r) => histTs(r) >= now - CHRON_HIST_MS)
     .sort((a, b) => histTs(b) - histTs(a)).slice(0, CHRON_HIST_MAX);
@@ -1549,6 +1563,7 @@ function chronRemember(live) {
   } catch (e) { rows = []; }
   chronMem = rows;
   try { localStorage.setItem(CHRON_HIST_KEY, json || "[]"); } catch (e) { /* full or blocked: carry on in memory */ }
+  try { localStorage.setItem(CHRON_SEQ_KEY, String(chronSeq)); } catch (e) {}
 }
 // the town's own voice for a day divider
 function dayVoice(ts) {
@@ -1558,6 +1573,167 @@ function dayVoice(ts) {
   return n <= 0 ? "Earlier today, by the bells" : n === 1 ? "Yesterday, as the town tells it" : "Two days gone, and not forgotten";
 }
 
+// ---- H21: the campaign journal. Episodes, filters, "while you were away", moment links.
+// Everything below is page-local: state lives in this browser's localStorage under
+// page-owned keys, every read is re-validated, and the only text that reaches the DOM
+// from the snapshot or the history is the chronicle line / a hero name, via el() only.
+// A moment link is "#moment-<n>" where n is an integer the PAGE assigned to a remembered
+// line - no snapshot string is ever written into a URL, src, href or style.
+const CHRON_DISASTER = /disaster|\bfire\b|burn|drought|famine|sickness|plague|hurricane|tornado|earthquake|meteor|scarstorm|flood|blight|volcano|cold ?snap/i;
+const CHRON_FESTIVAL = /festival|\bfair\b|harvest|feast|celebrat|revel|tournament|carnival/i;
+const CHRON_TOPICS = [
+  { k: "all", label: "Every kind of event", test: () => true },
+  { k: "raid", label: "Raids", test: (e) => e.t === "raid" || /\braid|bandit|siege/i.test(e.s) },
+  { k: "disaster", label: "Disasters", test: (e) => CHRON_DISASTER.test(e.s) },
+  { k: "festival", label: "Festivals", test: (e) => CHRON_FESTIVAL.test(e.s) },
+  { k: "death", label: "Deaths", test: (e) => e.t === "death" },
+  { k: "delve", label: "Delves", test: (e) => e.t === "delve" },
+  { k: "growth", label: "Town growth", test: (e) => e.t === "town" || /grows into|town level|\bbuilt\b|raised/i.test(e.s) },
+];
+function chronFiltLoad() {
+  try {
+    const raw = localStorage.getItem(CHRON_F_KEY);
+    if (!raw || raw.length > 4000) return;
+    const f = JSON.parse(raw);
+    if (!f || typeof f !== "object") return;
+    chronHero = typeof f.h === "string" ? ctrlStrip(f.h).slice(0, 40) : "";
+    chronTopic = CHRON_TOPICS.some((x) => x.k === f.t) ? f.t : "all";
+    chronOff = new Set(arr(f.o).filter((k) => typeof k === "string" && /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(k)).slice(0, 24));
+  } catch (e) { /* unreadable: start unfiltered */ }
+}
+function chronFiltSave() {
+  try { localStorage.setItem(CHRON_F_KEY, JSON.stringify({ h: chronHero, t: chronTopic, o: [...chronOff] })); } catch (e) {}
+}
+const CHRON_EP_GAP = 90 * 60000, CHRON_EP_SPAN = 6 * 3600000, CHRON_AWAY_MIN = 30 * 60000;
+const plural = (n, one, many) => num(n) + " " + (n === 1 ? one : many);
+// a one-line sense of a stretch, built only from page-owned words and counts
+function chronSense(items) {
+  const c = {}; let dis = 0, fes = 0;
+  for (const e of items) { c[e.t] = (c[e.t] || 0) + 1; if (CHRON_DISASTER.test(e.s)) dis++; if (CHRON_FESTIVAL.test(e.s)) fes++; }
+  const lead = c.death ? "A hard stretch" : dis ? "Trouble in the town" : c.raid ? "Steel at the gate" : fes ? "Merrymaking" : c.delve ? "Delvers in the dark" : c.town ? "The town changed" : "A quiet stretch";
+  const parts = [];
+  if (c.death) parts.push(plural(c.death, "death", "deaths"));
+  if (c.raid) parts.push(plural(c.raid, "raid", "raids"));
+  if (c.delve) parts.push(plural(c.delve, "delve", "delves"));
+  if (c.town) parts.push(plural(c.town, "town report", "town reports"));
+  if (dis) parts.push(plural(dis, "disaster line", "disaster lines"));
+  if (fes) parts.push(plural(fes, "festival line", "festival lines"));
+  return lead + (parts.length ? " - " + parts.join(", ") : "") + ".";
+}
+function chronRange(a, b) {   // a newest, b oldest
+  const tm = (ts) => { try { return new Date(ts).toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } };
+  const x = tm(b), y = tm(a);
+  return x === y ? x : x + " \u2013 " + y;
+}
+function chronGapText(ms) {
+  const m = Math.round(ms / 60000);
+  if (m < 90) return plural(m, "minute", "minutes");
+  const h = Math.round(m / 60);
+  return h < 36 ? "about " + plural(h, "hour", "hours") : "about " + plural(Math.round(h / 24), "day", "days");
+}
+// ---- H21.3 while you were away
+let chronAway = null, chronAwayDone = false, chronAwayDismissed = false, chronHiddenAt = 0;
+function chronScore(e) {
+  let s = e.t === "death" ? 5 : e.t === "raid" ? 4 : e.t === "town" ? 3 : e.t === "delve" ? 2 : 1;
+  if (CHRON_DISASTER.test(e.s)) s += 3;
+  if (CHRON_FESTIVAL.test(e.s)) s += 2;
+  return s;
+}
+function chronAwayCompute(liveCount) {
+  chronAwayDone = true;
+  chronAway = null;
+  const seen = chronSeenAtLoad, now = Date.now();
+  if (!seen || now - seen < CHRON_AWAY_MIN) return;
+  const rows = chronMem.map((r) => Object.assign(chronShape(r), { ts: histTs(r) }));
+  const fresh = rows.filter((e) => e.ts > seen);
+  const oldestMem = rows.length ? Math.min.apply(null, rows.map((e) => e.ts)) : now;
+  const incomplete = now - seen > CHRON_HIST_MS
+    || (liveCount >= CHRON_MAX && oldestMem > seen)
+    || (rows.length >= CHRON_HIST_MAX && oldestMem > seen);
+  chronAway = { gap: now - seen, fresh, incomplete };
+}
+function paintAway() {
+  const box = $("chronAway");
+  if (!box) return;
+  box.replaceChildren();
+  const a = chronAway;
+  if (!a || chronAwayDismissed) { box.classList.add("hide"); return; }
+  box.classList.remove("hide");
+  const head = el("div", "away-head");
+  head.append(el("strong", null, "While you were away"), el("span", "away-gap", chronGapText(a.gap) + " since you last looked"));
+  const dis = el("button", "chip clear", "Dismiss");
+  dis.type = "button";
+  dis.addEventListener("click", () => { chronAwayDismissed = true; paintAway(); });
+  head.append(dis);
+  box.append(head);
+  if (!a.fresh.length) {
+    box.append(el("p", "away-sum", "Nothing new has been written since you last looked."));
+  } else {
+    const c = {};
+    for (const e of a.fresh) c[e.t] = (c[e.t] || 0) + 1;
+    const parts = [];
+    if (c.death) parts.push(plural(c.death, "death", "deaths"));
+    if (c.raid) parts.push(plural(c.raid, "raid", "raids"));
+    if (c.delve) parts.push(plural(c.delve, "delve", "delves"));
+    if (c.town) parts.push(plural(c.town, "town report", "town reports"));
+    const top = a.fresh.map((e) => ({ e, s: chronScore(e) })).sort((x, y) => y.s - x.s || y.e.ts - x.e.ts).slice(0, 5)
+      .sort((x, y) => y.e.ts - x.e.ts).map((x) => x.e);
+    box.append(el("p", "away-sum", plural(a.fresh.length, "line", "lines") + " written" + (parts.length ? " - " + parts.join(", ") : "") +
+      (a.fresh.length > top.length ? ". The ones that matter most:" : ".")));
+    const ul = el("ul", "away-list");
+    for (const e of top) {
+      const li = el("li");
+      const ag = ago(e.at);
+      if (ag) li.append(el("span", "away-t", ag.text));
+      li.append(document.createTextNode(e.s));      // viewer text: text node only
+      ul.append(li);
+    }
+    box.append(ul);
+  }
+  box.append(el("p", "away-note", a.incomplete
+    ? "The town reports only its latest " + CHRON_MAX + " lines and this browser keeps about two days, so part of that gap may be missing - this is a summary of what is here, not a full record."
+    : "This is what the town's latest report and this browser's memory hold."));
+}
+function chronMarkSeen(force) {
+  try { if (force || document.visibilityState !== "hidden") localStorage.setItem(CHRON_SEEN_KEY, String(Date.now())); } catch (e) {}
+}
+document.addEventListener("visibilitychange", () => {
+  if (!chronAwayDone) return;
+  if (document.visibilityState === "hidden") { chronHiddenAt = Date.now(); chronMarkSeen(true); return; }
+  if (chronHiddenAt && Date.now() - chronHiddenAt >= CHRON_AWAY_MIN) {   // came back to a long-hidden tab
+    chronSeenAtLoad = chronHiddenAt; chronAwayDone = false; chronAwayDismissed = false; chronAway = null;
+  }
+  chronHiddenAt = 0;
+});
+window.addEventListener("pagehide", () => { if (chronAwayDone) chronMarkSeen(true); });
+// ---- H21.4 a moment you can point at
+function momentLink(n, btn) {
+  const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = "Link"; }, 1800); };
+  try { history.replaceState(null, "", "#moment-" + (n | 0)); } catch (e) {}
+  try { navigator.clipboard.writeText(location.href).then(() => flash("Copied"), () => flash("In address bar")); } catch (e) { flash("In address bar"); }
+}
+// ---- H21.2 the tool row (hero + event selects). Names come from the snapshot roster and are
+// written as option text via el(); the select's own value is only ever COMPARED, never rendered.
+function chronToolsSync() {
+  const sel = $("chronHero"), top = $("chronTopic"), clr = $("chronClear");
+  if (top) top.value = chronTopic;
+  if (sel) {
+    const p = sheetPayload(), names = new Set();
+    if (p) for (const h of arr(p.heroes).concat(arr(p.fallen))) { const n = cleanName(nameOf(h)); if (n) names.add(n); }
+    if (chronHero) names.add(chronHero);
+    const list = [...names].sort((a, b) => a.localeCompare(b)).slice(0, 400);
+    const sig = chronHero + "\u0001" + list.join("\u0001");
+    if (sig !== chronHeroSig) {              // leave an open dropdown alone when nothing changed
+      chronHeroSig = sig;
+      sel.replaceChildren();
+      const all = el("option", null, "Every hero"); all.value = ""; sel.append(all);
+      for (const n of list) { const o = el("option", null, n); o.value = n; sel.append(o); }
+    }
+    sel.value = chronHero;
+  }
+  if (clr) clr.classList.toggle("hide", !(chronHero || chronTopic !== "all" || chronOff.size || chronText.trim()));
+}
+
 // store the latest data and repaint. An AUTO refresh (from the 60 s poll) is held
 // back while the viewer is reading the feed (pointer over it), so a busy moment
 // does not reshuffle lines under them; the held update is applied when they leave.
@@ -1565,7 +1741,12 @@ function dayVoice(ts) {
 function renderChronicle(raw, opts) {
   if (raw !== undefined) {
     chronData = raw;
-    if (Array.isArray(raw)) chronRemember(chronEntries(raw));
+    if (Array.isArray(raw)) {
+      const le = chronEntries(raw);
+      chronRemember(le);
+      if (!chronAwayDone) chronAwayCompute(le.length);
+      chronMarkSeen(false);
+    }
   }
   const auto = opts && opts.auto;
   if (auto && chronHover && $("chronList").childElementCount) { chronPending = true; return; }
@@ -1575,22 +1756,31 @@ function renderChronicle(raw, opts) {
 
 function paintChronicle() {
   const raw = chronData;
-  const chips = $("chronChips"), list = $("chronList"), note = $("chronNote"), find = $("chronFind");
+  const chips = $("chronChips"), list = $("chronList"), note = $("chronNote"), find = $("chronFind"), tools = $("chronTools");
   chips.replaceChildren();
   list.replaceChildren();
   const hasData = Array.isArray(raw);
   if (find) find.classList.toggle("hide", !hasData);
+  if (tools) tools.classList.toggle("hide", !hasData);
+  paintAway();
   if (!hasData) {
     note.textContent = "The chronicle will appear here once the town reports it.";
     note.className = "note quiet";
     return;
   }
   chronMemEnsure();
+  if (chronFocusId != null) {     // a moment link: show everything so the line can be found
+    chronHero = ""; chronTopic = "all"; chronOff = new Set(); chronText = ""; if (find) find.value = "";
+  }
+  chronToolsSync();
   const live = chronEntries(raw);
+  const idByKey = new Map(chronMem.map((r) => [histKey(r), r.n]));
   const liveKeys = new Set(live.map(histKey));
+  const now = Date.now();
+  for (const e of live) { const t = Date.parse(e.at); e.ts = isFinite(t) ? t : now; e.n = idByKey.get(histKey(e)) || 0; }
   const rem = chronMem.filter((r) => !liveKeys.has(histKey(r)))
-    .map((r) => Object.assign(chronShape(r), { rem: true, ts: histTs(r) }));
-  const entries = live.concat(rem);
+    .map((r) => Object.assign(chronShape(r), { rem: true, ts: histTs(r), n: r.n || 0 }));
+  const entries = live.concat(rem).sort((x, y) => y.ts - x.ts);
   if (!entries.length) {
     note.textContent = "Nothing has been written in the chronicle yet.";
     note.className = "note quiet";
@@ -1612,56 +1802,110 @@ function paintChronicle() {
     c.type = "button";
     c.setAttribute("aria-pressed", on ? "true" : "false");
     c.append(icon(g.icon, "chipic"), document.createTextNode(g.label), el("span", "cnt", g.count));
-    c.addEventListener("click", () => { if (chronOff.has(g.t)) chronOff.delete(g.t); else chronOff.add(g.t); paintChronicle(); });
+    c.addEventListener("click", () => { if (chronOff.has(g.t)) chronOff.delete(g.t); else chronOff.add(g.t); chronFiltSave(); paintChronicle(); });
     chips.append(c);
   }
   if (chronOff.size) {
     const clear = el("button", "chip clear", "Show all kinds");
     clear.type = "button";
-    clear.addEventListener("click", () => { chronOff.clear(); paintChronicle(); });
+    clear.addEventListener("click", () => { chronOff.clear(); chronFiltSave(); paintChronicle(); });
     chips.append(clear);
   }
 
   const q = chronText.trim().toLowerCase();
-  const shown = entries.filter((e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)));
-  if (!shown.length) {
+  const hkey = chronHero.trim().toLowerCase();
+  const topic = CHRON_TOPICS.find((x) => x.k === chronTopic) || CHRON_TOPICS[0];
+  const pass = (e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)) && (!hkey || namesIn(e.s, hkey)) && topic.test(e);
+  const anyFilter = !!(q || hkey || chronOff.size || chronTopic !== "all");
+  const shownAll = entries.filter(pass);
+  if (!shownAll.length) {
     note.className = "note quiet";
-    note.textContent = q
-      ? "No entries match “" + q + "”" + (chronOff.size ? " in the kinds shown." : ".")
+    note.textContent = q ? "No entries match \u201c" + q + "\u201d" + (chronOff.size ? " in the kinds shown." : ".")
+      : (hkey || chronTopic !== "all") ? "Nothing in the journal matches that hero and event."
       : "Every kind is switched off - tap a chip to bring the chronicle back.";
     return;
   }
-  let lastDay = null, sawEarlier = false;
-  for (const e of shown) {
-    if (e.rem) {
-      if (!sawEarlier) { sawEarlier = true; list.append(el("li", "cdiv cdiv-earlier", "Earlier")); }
-      const dk = new Date(e.ts).toDateString();
-      if (dk !== lastDay) { lastDay = dk; list.append(el("li", "cdiv", dayVoice(e.ts))); }
+
+  // ---- H21.1 episodes: stretches split by a long quiet gap or by length
+  const eps = [];
+  for (const e of entries) {
+    const cur = eps[eps.length - 1];
+    if (cur && cur.last - e.ts <= CHRON_EP_GAP && cur.first - e.ts <= CHRON_EP_SPAN) { cur.items.push(e); cur.last = e.ts; }
+    else eps.push({ first: e.ts, last: e.ts, items: [e] });
+  }
+  let drawn = 0, sawEarlier = false;
+  for (const ep of eps) {
+    const items = ep.items.filter(pass);
+    if (!items.length) continue;
+    const hasLive = ep.items.some((e) => !e.rem);
+    const key = "e" + ep.last;
+    const focusIn = chronFocusId != null && ep.items.some((e) => e.n === chronFocusId);
+    const dflt = drawn === 0 || anyFilter;     // the newest stretch (or any filter hit) is open; older ones fold
+    let open = focusIn ? true : (chronOpen.has(key) ? chronOpen.get(key) : dflt);
+    if (!hasLive && !sawEarlier) { sawEarlier = true; list.append(el("li", "cdiv cdiv-earlier", "Earlier")); }
+    const li = el("li", "cep" + (open ? " open" : ""));
+    const hid = "cep-" + drawn;
+    const head = el("button", "cep-head");
+    head.type = "button";
+    head.setAttribute("aria-expanded", open ? "true" : "false");
+    head.setAttribute("aria-controls", hid);
+    head.append(el("span", "cep-title", drawn === 0 && now - ep.first < CHRON_EP_GAP ? "Now, as the town tells it" : dayVoice(ep.first)),
+      el("span", "cep-when", chronRange(ep.first, ep.last) + " \u00b7 " + plural(items.length, "line", "lines")),
+      el("span", "cep-sense", chronSense(items)));
+    const body = el("ol", "cep-list");
+    body.id = hid;
+    body.hidden = !open;
+    head.addEventListener("click", () => {
+      open = !open;
+      chronOpen.set(key, open);
+      li.classList.toggle("open", open);
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      body.hidden = !open;
+    });
+    drawn++;
+    li.append(head, body);
+    for (const e of items) {
+      const row = el("li", "centry kind-" + e.key + (e.rem ? " remembered" : "") + (e.n && e.n === chronFocusKeep ? " focus" : ""));
+      if (e.n) row.id = "moment-" + e.n;           // an integer the page assigned
+      const badge = el("span", "cbadge");
+      badge.setAttribute("aria-hidden", "true");
+      badge.append(icon(e.icon));                 // whitelisted glyph id
+      row.append(badge);
+      const cb = el("div", "cbody");
+      const ch = el("div", "chead");
+      ch.append(el("span", "ckind", e.label));    // textContent; a novel kind shows its own name, escaped
+      const a = ago(e.at);
+      if (a) {
+        const time = el("time", "cwhen", a.text);
+        time.dateTime = e.at;
+        time.title = when(e.at);
+        ch.append(time);
+      }
+      if (e.n) {
+        const lk = el("button", "cmoment", "Link");
+        lk.type = "button";
+        lk.title = "Link to this moment (opens on this line in a browser that remembers it)";
+        lk.setAttribute("aria-label", "Copy a link to this moment");
+        lk.addEventListener("click", () => momentLink(e.n, lk));
+        ch.append(lk);
+      }
+      cb.append(ch, el("p", "cline", e.s));       // viewer text: textContent
+      row.append(cb);
+      body.append(row);
     }
-    const li = el("li", "centry kind-" + e.key + (e.rem ? " remembered" : ""));
-    const badge = el("span", "cbadge");
-    badge.setAttribute("aria-hidden", "true");
-    badge.append(icon(e.icon));                 // whitelisted glyph id
-    li.append(badge);
-    const body = el("div", "cbody");
-    const head = el("div", "chead");
-    head.append(el("span", "ckind", e.label));  // textContent; a novel kind shows its own name, escaped
-    const a = ago(e.at);
-    if (a) {
-      const time = el("time", "cwhen", a.text);
-      time.dateTime = e.at;
-      time.title = when(e.at);
-      head.append(time);
-    }
-    body.append(head, el("p", "cline", e.s));   // viewer text: textContent
-    li.append(body);
     list.append(li);
   }
   note.className = "note";
-  const tail = q || chronOff.size ? " (" + entries.length + " in all)" : "";
-  note.textContent = (shown.length === entries.length
+  note.textContent = (shownAll.length === entries.length
     ? entries.length + (entries.length === 1 ? " entry" : " entries")
-    : "Showing " + shown.length + " of " + entries.length) + ", newest first." + (tail && shown.length !== entries.length ? "" : "");
+    : "Showing " + shownAll.length + " of " + entries.length) + ", newest first, in " + plural(drawn, "stretch", "stretches") +
+    (drawn > 1 ? " - tap one to fold or open it." : ".");
+  if (chronFocusId != null) {
+    const target = document.getElementById("moment-" + chronFocusId);   // id built from an integer we own
+    chronFocusId = null;
+    if (target) { chronFocusKeep = +target.id.slice(7) || 0; target.classList.add("focus"); try { target.scrollIntoView({ block: "center" }); } catch (e) {} }
+    else { note.className = "note quiet"; note.textContent = "That moment is no longer in this browser's memory - it keeps only about two days of the chronicle."; }
+  }
 }
 
 // ============================================================ COMMANDS
@@ -2699,7 +2943,17 @@ $("boardFind").addEventListener("input", (e) => {
   boardFind = e.target.value;
   if (last) { const p = MOCK ? withMock(last.payload) : last.payload; renderBoards(arr(p.heroes), arr(p.fallen)); }
 });
-$("chronFind").addEventListener("input", (e) => { chronText = e.target.value; paintChronicle(); });
+$("chronFind").addEventListener("input", (e) => { chronText = e.target.value; chronFocusKeep = 0; paintChronicle(); });
+{
+  const th = $("chronTopic");
+  for (const t of CHRON_TOPICS) { const o = el("option", null, t.label); o.value = t.k; th.append(o); }
+  th.addEventListener("change", () => { chronTopic = CHRON_TOPICS.some((x) => x.k === th.value) ? th.value : "all"; chronFocusKeep = 0; chronFiltSave(); paintChronicle(); });
+  $("chronHero").addEventListener("change", (e) => { chronHero = ctrlStrip(e.target.value).slice(0, 40); chronFocusKeep = 0; chronFiltSave(); paintChronicle(); });
+  $("chronClear").addEventListener("click", () => {
+    chronHero = ""; chronTopic = "all"; chronOff = new Set(); chronText = ""; const f = $("chronFind"); if (f) f.value = "";
+    chronFiltSave(); paintChronicle();
+  });
+}
 // pause-on-hover: a poll that lands while the viewer is reading the feed is held,
 // then applied when they move away, so lines don't reshuffle under the pointer.
 (function () {
@@ -2770,8 +3024,19 @@ function setActiveTab(id) {
     if (next) next.focus();
   });
   // ?open=1 opens the first hero's sheet; land on Heroes so the opened sheet is visible.
-  const initial = (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  // H21.4: "#moment-<n>" opens the Chronicle on a remembered line. n is an integer the PAGE
+  // assigned to that line; it is only ever compared to the ids on rendered rows - never put
+  // in a URL, src, href, selector or style - and the tab chosen is a constant from TABS.
+  const momentFrom = () => { const m = /^moment-(\d{1,9})$/.exec(String(location.hash || "").replace(/^#/, "")); return m && +m[1] > 0 ? +m[1] : 0; };
+  const mid = momentFrom();
+  if (mid) chronFocusId = mid;
+  const initial = (mid ? "chronicle" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
   setActiveTab(initial);
+  window.addEventListener("hashchange", () => {
+    const n = momentFrom();
+    if (!n) return;
+    chronFocusId = n; setActiveTab("chronicle"); if (chronData) paintChronicle();
+  });
 })();
 
 load();

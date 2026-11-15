@@ -37,6 +37,11 @@ const CHRON_TYPES := ["death", "raid", "loot", "delve", "town", "lore", "fight"]
 ## item's buy cost, so the hub quotes the same number and the two can never disagree.
 ## `sell` is PER UNIT - the hub multiplies by qty itself.
 const SELL_BACK := 0.4
+## D59: the H20 sheet fields are ADDITIVE and every v3 hub already reads most of them, but
+## the live hub (web/app.js KNOWN_V = {"1","2","3"}) refuses any other number outright -
+## "the page needs an update" instead of a town. So the number stays 3 until the hub
+## worker adds "4" to KNOWN_V; then flip this to 4. Shipping 4 first blanks the hub.
+const PAYLOAD_V := 3
 const SATCHEL_MAX := 40             # the hub stops reading rows at 40
 const NAME_MAX := 25                # W1a: every published name is capped here
 ## kind -> the hub's icon map (web/app.js SATCHEL_ICON). Only these words are sent;
@@ -90,6 +95,8 @@ func setup(t: Node) -> void:
     town = t
     _commands = _load_commands()
     _load_key()
+    if enabled:
+        _load_mem()
     if not enabled:
         print("SNAPSHOT off: no service key in %s - the hub will not update" % key_file)
         return
@@ -128,6 +135,10 @@ func _process(delta: float) -> void:
     if _scan_t <= 0.0:
         _scan_t = 1.0
         scan_feed()
+    _hero_scan_t -= delta
+    if _hero_scan_t <= 0.0:
+        _hero_scan_t = 1.0
+        scan_heroes()
     _t -= delta
     if _t <= 0.0:
         _t = EVERY
@@ -142,7 +153,7 @@ func build_payload() -> Dictionary:
     var r: Roster = town.get("roster") if town else null
     var e: Economy = town.get("economy") if town else null
     var out := {
-        "v": 3,                 # D57: v3 adds the per-hero Satchel sell fields (v2 added `parties`)
+        "v": PAYLOAD_V,         # see PAYLOAD_V (v3 the Satchel, v2 `parties`)
         "game": "Bellmire HD",
         "generated_at": Time.get_datetime_string_from_system(true) + "Z",
         "town": _town_block(e),
@@ -163,10 +174,12 @@ func build_payload() -> Dictionary:
                 "day": int(f.get("day", 0)), "epitaph": String(f.get("epitaph", ""))})
         out["fallen"] = dead
         var sheets: Array = []
+        scan_heroes()
+        var delv := _delvers()
         for id: String in r.heroes:
             var h: Dictionary = r.heroes[id]
             if bool(h.get("alive", false)):
-                sheets.append(_sheet(r, h))
+                sheets.append(_sheet(r, h, id, delv))
         sheets.sort_custom(func(a, b): return int(a["standing"]) > int(b["standing"]))
         out["heroes"] = sheets
     last_build_ms = (Time.get_ticks_usec() - t0) / 1000.0
@@ -359,7 +372,7 @@ func _satchel(h: Dictionary) -> Dictionary:
         prices.append(int(row["sell"]))
     return {"rows": rows, "total": total, "sellable": sellable, "prices": prices}
 
-func _sheet(r: Roster, h: Dictionary) -> Dictionary:
+func _sheet(r: Roster, h: Dictionary, id := "", delv: Dictionary = {}) -> Dictionary:
     var stats := {}
     for k: String in Roster.STATS:
         stats[k] = int((h.get("stats", {}) as Dictionary).get(k, 10))
@@ -380,7 +393,7 @@ func _sheet(r: Roster, h: Dictionary) -> Dictionary:
     if asell > 0:
         ablock["sell"] = asell
         sat["total"] = int(sat["total"]) + asell
-    return {
+    var row := {
         "name": String(h.get("name", "?")), "class": String(h.get("class", "")),
         "species": Roster.species_of(h), "level": int(h.get("level", 1)), "xp": int(h.get("xp", 0)),
         "rank": r.rank_of(h), "standing": r.standing(h), "title": r.title_of(h),
@@ -397,6 +410,186 @@ func _sheet(r: Roster, h: Dictionary) -> Dictionary:
         "satchel": sat["rows"], "satchel_total": int(sat["total"]),
         "sellable": sat["sellable"], "sell_prices": sat["prices"],
     }
+    # D59 (v4, additive): the rest of H20's sheet, only what the game computes.
+    # initiative = the bonus delve.gd/raids.gd add to their d20 (DEX mod);
+    # speed = the hero's own move speed in the game (m/s, Roster.speed).
+    row["initiative"] = r.mod(h, "dex")
+    row["speed"] = snappedf(r.speed(h), 0.1)
+    row["gear"] = _gear(r, h)
+    row["status"] = _status(id, delv)
+    if delv.has(id):        # below, the sheet's HP is the party's live HP
+        row["hp"] = int(delv[id]["hp"])
+        row["max_hp"] = int(delv[id]["max"])
+    var m: Dictionary = _mem.get(id, {})
+    if String(m.get("seen", "")) != "":
+        row["last_seen"] = String(m["seen"])
+    var ev: Array = []
+    for e: Dictionary in (m.get("ev", []) as Array):
+        ev.append(e.duplicate())
+    row["events"] = ev
+    return row
+
+# ---------------------------------------------------------------- D59: the character sheet (hub H20)
+
+## v4, additive. What H20's sheet asks for that the game ALREADY knows, and nothing it
+## does not: no off-hand (the class's shield / book / quiver is a model, not an item the
+## game names), no background, alignment, skills, spells or hit dice (no such systems).
+## acc slot -> the sheet's slot key; `hat` is the one cosmetic that sits in a body slot
+const GEAR_SLOT := {"gloves": "hands", "boots": "feet", "cloak": "cloak", "amulet": "neck", "ring": "ring"}
+const EVENT_MAX := 6                # per hero, newest first
+const EVENT_LINE := 90
+const MEM_FILE := "user://snapshot_heroes.json"
+var mem_file := MEM_FILE            # tests point this elsewhere
+var _mem: Dictionary = {}           # user_id -> {"sig": {...}, "seen": iso or "", "ev": [{t, s, at}]}
+var _mem_seeded := false
+var _hero_scan_t := 0.0
+
+## what a hero is wearing, keyed the way H20 draws it. Only the slots that are real;
+## an empty slot is OMITTED (the hub draws it empty, which is the truth).
+func _gear(r: Roster, h: Dictionary) -> Dictionary:
+    var g := {}
+    if int(h.get("weapon", 0)) > 0:
+        g["main_hand"] = clean_name(r.weapon_name(h))
+    var at := clampi(int(h.get("armour", 0)), 0, Roster.ARMOUR.size() - 1)
+    g["body"] = clean_name(String(Roster.ARMOUR[at]["name"]))
+    var acc: Dictionary = h.get("acc", {})
+    for slot in acc:
+        if GEAR_SLOT.has(String(slot)):
+            var nm := String(Roster.item(String(acc[slot])).get("name", ""))
+            if nm != "":
+                g[GEAR_SLOT[String(slot)]] = clean_name(nm)
+    var cos: Dictionary = h.get("cos", {})
+    if cos.has("hat"):
+        var hn := String(Roster.item(String(cos["hat"])).get("name", ""))
+        if hn != "":
+            g["head"] = clean_name(hn)
+    return g
+
+## every hero in a delving party right now: user_id -> {hp, max, status}
+func _delvers() -> Dictionary:
+    var out := {}
+    if town == null:
+        return out
+    for c in town.get_children():
+        if not (c is Delve):
+            continue
+        var d: Delve = c
+        if d.party.is_empty():
+            continue
+        for m: Dictionary in d.party:
+            var h: Dictionary = m.get("h", {})
+            var id := String(h.get("id", ""))
+            if id == "":
+                continue
+            var hp := maxf(0.0, float(m.get("hp", 0.0)))
+            var mx := maxf(1.0, float(m.get("max", 1.0)))
+            var st := "delving"
+            if hp <= 0.0:
+                st = "fallen"
+            elif hp < mx:
+                st = "wounded"
+            out[id] = {"hp": int(ceil(hp)), "max": int(ceil(mx)), "status": st}
+    return out
+
+## the state the game already holds: in a delving party (delving / wounded / fallen),
+## else walking the town ("in town"). Nothing else is claimed.
+static func _status(id: String, delv: Dictionary) -> String:
+    if delv.has(id):
+        return String(delv[id]["status"])
+    return "in town"
+
+func _sig(r: Roster, h: Dictionary, st: String) -> Dictionary:
+    return {"level": int(h.get("level", 1)), "xp": int(h.get("xp", 0)), "gold": int(h.get("gold", 0)),
+        "kills": int(h.get("kills", 0)), "deepest": int(h.get("deepest", 0)), "delves": int(h.get("delves", 0)),
+        "weapon": int(h.get("weapon", 0)), "armour": int(h.get("armour", 0)),
+        "potions": int(h.get("potions", 0)), "oil": int(h.get("oil", 0)),
+        "owned": (h.get("owned", []) as Array).duplicate(), "status": st}
+
+func _event(m: Dictionary, kind: String, text: String, at: String) -> void:
+    var s := clean_line(text)
+    if s.length() > EVENT_LINE:
+        s = s.left(EVENT_LINE - 1).strip_edges() + "…"
+    var ev: Array = m.get("ev", [])
+    ev.push_front({"t": kind, "s": s, "at": at})
+    if ev.size() > EVENT_MAX:
+        ev.resize(EVENT_MAX)
+    m["ev"] = ev
+
+## once a second: compare every living hero with what we saw last. A change of any
+## tracked number stamps their last-seen; the changes that are news become their own
+## events. Heroes present at the very first scan are seeded silently (no invented past).
+func scan_heroes() -> void:
+    var r: Roster = town.get("roster") if town else null
+    if r == null:
+        return
+    var at := Time.get_datetime_string_from_system(true) + "Z"
+    var delv := _delvers()
+    var live := {}
+    for id: String in r.heroes:
+        var h: Dictionary = r.heroes[id]
+        if not bool(h.get("alive", false)):
+            continue
+        live[id] = true
+        var st := _status(id, delv)
+        var now := _sig(r, h, st)
+        if not _mem.has(id):
+            _mem[id] = {"sig": now, "seen": "", "ev": []}
+            if _mem_seeded:
+                _mem[id]["seen"] = at
+                _event(_mem[id], "enlist", "Enlisted: %s %s." % [Roster.species_of(h), String(h.get("class", ""))], at)
+            continue
+        var m: Dictionary = _mem[id]
+        var was: Dictionary = m["sig"]
+        if was == now:
+            continue
+        m["seen"] = at
+        if int(now["level"]) > int(was.get("level", 1)):
+            _event(m, "level", "Reached level %d." % int(now["level"]), at)
+        if int(now["deepest"]) > int(was.get("deepest", 0)):
+            _event(m, "depth", "New deepest: floor %d." % int(now["deepest"]), at)
+        if int(now["delves"]) > int(was.get("delves", 0)):
+            var k := int(now["kills"]) - int(was.get("kills", 0))
+            _event(m, "delve", "Came home from a delve with %d kill%s." % [k, "" if k == 1 else "s"], at)
+        if int(now["weapon"]) > int(was.get("weapon", 0)):
+            _event(m, "gear", "Took up %s." % r.weapon_name(h), at)
+        if int(now["armour"]) > int(was.get("armour", 0)):
+            var an := String(Roster.ARMOUR[clampi(int(now["armour"]), 0, Roster.ARMOUR.size() - 1)]["name"])
+            _event(m, "gear", "Now wears %s." % an, at)
+        var had: Array = was.get("owned", [])
+        for key in (now["owned"] as Array):
+            if not had.has(key):
+                _event(m, "find", "Got %s." % String(Roster.item(String(key)).get("name", key)), at)
+        if String(now["status"]) != String(was.get("status", "")) and String(now["status"]) == "delving" \
+                and String(was.get("status", "")) == "in town":
+            _event(m, "delve", "Went down into the dungeon.", at)
+        m["sig"] = now
+    for id in _mem.keys():
+        if not live.has(id):
+            _mem.erase(id)          # fallen or gone: the fallen row carries their end
+    _mem_seeded = true
+
+func _load_mem() -> void:
+    if not FileAccess.file_exists(mem_file):
+        return
+    var j: Variant = JSON.parse_string(FileAccess.get_file_as_string(mem_file))
+    if typeof(j) != TYPE_DICTIONARY or typeof(j.get("heroes")) != TYPE_DICTIONARY:
+        return
+    for id in j["heroes"]:
+        var m: Variant = j["heroes"][id]
+        if typeof(m) != TYPE_DICTIONARY or typeof(m.get("sig")) != TYPE_DICTIONARY:
+            continue
+        var sig: Dictionary = m["sig"]
+        for k in sig:       # JSON brings numbers back as floats; the sig compares ints
+            if typeof(sig[k]) == TYPE_FLOAT:
+                sig[k] = int(sig[k])
+        _mem[String(id)] = {"sig": sig, "seen": String(m.get("seen", "")),
+            "ev": (m.get("ev", []) as Array).slice(0, EVENT_MAX)}
+    _mem_seeded = true      # a remembered roster: heroes new since then are news
+
+func save_mem() -> void:
+    var f := FileAccess.open(mem_file, FileAccess.WRITE)
+    if f:
+        f.store_string(JSON.stringify({"v": 1, "heroes": _mem}))
 
 # ---------------------------------------------------------------- the send
 
@@ -407,6 +600,7 @@ func publish() -> bool:
     if _busy:
         _note("busy", "SNAPSHOT: last publish still in flight - skipping this beat")
         return false
+    save_mem()
     var body := JSON.stringify([{"id": 1, "payload": build_payload(),
         "updated_at": Time.get_datetime_string_from_system(true) + "Z"}])
     last_bytes = body.length()

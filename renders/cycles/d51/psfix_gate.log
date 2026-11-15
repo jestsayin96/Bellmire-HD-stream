@@ -1,0 +1,963 @@
+
+===== PROJECT_PARSE =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 60 s
+TWITCH_EVENTSUB bot token valid (bellmirebro), 25 min left
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+TWITCH joined #jestsayin96
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQZeF8, keepalive 10 s
+TWITCH_EVENTSUB subscribed 6 of 6
+
+__RC__ PROJECT_PARSE 0
+
+===== offfloor =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Hero0 and 7 others descend down, and the stair takes the sound away first.
+FEED They carry 24 flasks of oil between them.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+L28C_EMITTERS floor 1 mess: 3 (cap 12), creatures 0; lights 48 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 bog frog, 1 slime.
+FEED A row of boots at the door, paired and empty.
+FEED Hero3 rolls a 20 for initiative and is moving before anything else.
+FEED Hero5 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 casts Smite at giant rat.
+FEED Hero6 casts Frost at giant rat.
+FEED Hero1 casts Bolt at bog frog.
+FEED Hero6 calls frost and something older takes the call (7 vs DC 10).
+FEED The slime divides.
+FEED Hero4 turns on the wounded slimeling to finish it.
+FEED Hero5 turns on the wounded slimeling to finish it.
+FEED Hero7 turns on the wounded slimeling to finish it.
+FEED Hero0 rolls a 20 - and the slimeling is gone.
+FEED Hero1 searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Floor 1 cleared. Something underneath heard it happen.
+FEED Hero1 finds a vial of Mirethistle Tincture.
+FEED Hero1 spots a fire grate (Perception 17 vs DC 10) and steps round it.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 searches the chest - ...no loot... (Investigation 6 vs DC 10).
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero0 and 7 others take a breather, and press on deeper.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 2 puglins.
+FEED Hero1 casts Bolt at bog frog.
+FEED Hero2's smite doubles back and finds them first (10 vs DC 11).
+FEED Hero6 casts Frost at puglin.
+FEED Hero2 casts Bolt at puglin.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 casts Fire at bog frog.
+FEED Hero6 casts Frost at bog frog.
+FEED Hero1 searches (Investigation 21) and turns up 28 gold on floor 2.
+FEED The room gives up and the lamps steady.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero0 and 7 others take a breather, and press on deeper.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 steps on a loose flagstone - darts! DEX 19 vs DC 11, 3 damage (halved).
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+L28C_EMITTERS floor 3 confection: 2 (cap 12), creatures 1; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned skeleton minion, 1 giant rat, 1 skeleton minion, 1 slime.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero6 spots a blade trap (Perception 14 vs DC 11) and steps round it.
+FEED Hero6 reaches for bolt and the scar hands back something else (7 vs DC 11).
+FEED Hero2 casts Bolt at giant rat.
+FEED Hero6 casts Frost at skeleton minion.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 casts Bolt at skeleton minion.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero2 casts Bolt at slime.
+FEED Hero6 casts Bolt at slime.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED The slime divides.
+FEED Hero1 searches (Investigation 21) and turns up 42 gold on floor 3.
+FEED Floor 3 holds - measure the grain, count the flasks.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 searches the chest - Successfully found loot!! 38 gold (Investigation 22 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero0 spots a dart trap (Perception 20 vs DC 11) and steps round it.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 2 cave bats, 1 risen bones, 1 hollowed slime.
+FEED The oil is running low.
+FEED Hero0 steps on a loose flagstone - darts! DEX 13 vs DC 12, 3 damage (halved).
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero6's bolt comes out sideways - wild magic (10 vs DC 12).
+FEED Hero2 offers bolt to the scar, and the scar keeps it (1 vs DC 12).
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED The hollowed slime divides.
+FEED Hero5 turns on the wounded hollowed slimeling to finish it.
+FEED Hero7 turns on the wounded slimeling to finish it.
+FEED Hero1 searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED Quiet - the kind you get after, not the kind you get before.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Shadows peel off the walls - an ambush! 1 hollowed cave bat, 1 risen bones surges in.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 cannot get to the chest and leaves it.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED Hero1 cannot get to the chest and leaves it.
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 170 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 24 kills between them.
+FEED Hero1 is fitted with leather. (+10 hp)
+OFFFLOOR 0 of 1351 samples; INPROP 0; MON_INPROP 0 of 103; floor reached 4 frames 4696 obstacles 28
+
+__RC__ offfloor 0
+
+===== twitch_parse =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS 1 command -> chat_line
+PASS 2 ping -> pong
+PASS 3 plain chat ignored
+PASS 4 bot ignored
+PASS 5 cooldown
+PASS 6 split packet
+PASS 7 four per frame
+PASS 7b rest next frame
+TWITCH_PARSE OK
+
+__RC__ twitch_parse 0
+
+===== townwalk =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:803)
+       [1] _ready (res://scripts/town.gd:359)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+NAV ready=true bake_ms=869 obstructions=2806 solids=1322 plots=66 road_dropped=188 people=163
+HOUSES_ON_ROAD 0
+DOORS 66 door_off_ground=0 door_leg_through_other_house=0
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+FEED 2 bandits are riding on the west road!
+FEED Initiative: the raiders 4, the watch 10 - the watch is ready for them.
+RAID started raiders=2
+T=10s walking=109 still=0 (posted=0) inside=54 in_solid=0/823 stuck_on_route=0
+FEED The attack is driven off. The gates hold.
+T=20s walking=80 still=32 (posted=17) inside=51 in_solid=1/1853 stuck_on_route=0
+T=30s walking=112 still=31 (posted=17) inside=20 in_solid=1/3292 stuck_on_route=0
+T=40s walking=108 still=38 (posted=19) inside=17 in_solid=1/4806 stuck_on_route=2
+T=50s walking=100 still=49 (posted=25) inside=14 in_solid=1/6395 stuck_on_route=0
+T=60s walking=105 still=49 (posted=26) inside=9 in_solid=1/8094 stuck_on_route=0
+T=70s walking=107 still=50 (posted=27) inside=6 in_solid=1/9898 stuck_on_route=0
+T=80s walking=105 still=50 (posted=27) inside=8 in_solid=1/11723 stuck_on_route=0
+T=90s walking=105 still=47 (posted=27) inside=11 in_solid=1/13605 stuck_on_route=0
+T=100s walking=105 still=49 (posted=27) inside=9 in_solid=1/15417 stuck_on_route=0
+T=110s walking=93 still=56 (posted=27) inside=14 in_solid=1/17089 stuck_on_route=0
+FEED Nessa Thatcher settles in Bellmire, looking for work.
+T=120s walking=86 still=62 (posted=27) inside=16 in_solid=1/18680 stuck_on_route=0
+STUCK_ON_ROUTE_TOTAL 2 over 120 s (raw still-with-a-route-now 4)  watchdog fires=7 close=5 repath=1 nudge=1 giveup=0
+TOWNWALK in_solid=1/18680 (0.005%) raid_in_solid=0/2140 (0.000%) PASS
+BAD ["child Talen Quarryman (32.5,-69.4) route=33 next=(33.21428, 0.5, -70.92857)"]
+STUCK_EX ["peasant Ingrid Bramble (33.2,-70.8) next=(33.57412, 0.5, -71.80862) route=31 solid=- navoff=0.00 push=(-0.562503, 0.0, 1.546839)", "peasant Talen Rivers (25.6,-84.8) next=(35.42105, 0.5, -77.96053) route=22 solid=- navoff=0.00 push=(0.0, 0.0, 0.0)"]
+
+__RC__ townwalk 0
+
+===== delve =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The chalk marks run on ahead, in a hand that never came back.
+FEED They carry 8 flasks of oil between them.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+L28C_EMITTERS floor 1 mess: 3 (cap 12), creatures 0; lights 48 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 giant rat.
+FEED Somebody kept bringing flowers long after the names went.
+T10s floor=1 state=fight foes=3 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at slime.
+FEED MossyMage casts Bolt at slime.
+FEED The slime divides.
+FEED DawnCleric casts smite; the scar casts something else (9 vs DC 10).
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+T20s floor=1 state=fight foes=2 ["JestFan 99/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at giant rat.
+FEED BigAxe steps on a grate - fire! DEX 7 vs DC 10, 10 damage.
+FEED MossyMage casts Chain Bolt at slime.
+FEED DawnCleric casts Bolt at slimeling.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T30s floor=1 state=fight foes=2 ["JestFan 96/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 104/124"]
+FEED MossyMage searches (Investigation 6) and turns up 6 gold on floor 1.
+FEED Floor 1 falls silent.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T40s floor=1 state=search foes=0 ["JestFan 96/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 104/124"]
+FEED MossyMage searches the chest - ...no loot... (Investigation 9 vs DC 10).
+T50s floor=1 state=search foes=0 ["JestFan 96/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 104/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED MossyMage searches the chest - Successfully found loot!! 24 gold (Investigation 10 vs DC 10).
+FEED JestFan and 3 others take a breather, and press on deeper.
+T60s floor=1 state=descend foes=0 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T70s floor=1 state=descend foes=0 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T80s floor=1 state=descend foes=0 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 2 bog frogs, 1 cave spider.
+FEED The oil is running low.
+T90s floor=2 state=fight foes=4 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED DawnCleric casts Bolt at cave spider.
+FEED MossyMage casts Bolt at cave spider.
+T100s floor=2 state=fight foes=3 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Bolt at bog frog.
+FEED MossyMage's chain fires off behind them (1 vs DC 11).
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T110s floor=2 state=fight foes=1 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED MossyMage rolls a 20 searching the floor!
+FEED MossyMage searches (Investigation 25) and turns up 35 gold on floor 2.
+FEED Floor 2 is theirs, for as long as they stand on it.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED MossyMage searches the chest - ...no loot... (Investigation 9 vs DC 11).
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T120s floor=2 state=search foes=0 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T130s floor=2 state=search foes=0 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+FEED JestFan and 3 others take a breather, and press on deeper.
+T140s floor=2 state=descend foes=0 ["JestFan 103/103", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED MossyMage steps on a loose flagstone - darts! DEX 7 vs DC 11, 10 damage.
+SCRIPT ERROR: Invalid call. Nonexistent function 'keep_walkable (via call)' in base 'Node3D (Delve)'.
+   at: HeroBody._idle_wander (res://scripts/hero_body.gd:132)
+   GDScript backtrace (most recent call first):
+       [0] _idle_wander (res://scripts/hero_body.gd:132)
+       [1] _physics_process (res://scripts/hero_body.gd:122)
+T150s floor=2 state=descend foes=0 ["JestFan 103/103", "MossyMage 73/83", "DawnCleric 81/81", "BigAxe 124/124"]
+
+__RC__ delve 0
+
+__ALLDONE__

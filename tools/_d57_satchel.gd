@@ -59,7 +59,7 @@ func _run() -> void:
     _check("0 off without a key file (no network in this test)", not pub.enabled)
 
     var p := pub.build_payload()
-    _check("1 payload v is 3", int(p["v"]) == 3)
+    _check("1 payload v is 3 or later (v4 = D59, additive)", int(p["v"]) >= 3)
 
     var rich := {}
     var lean := {}

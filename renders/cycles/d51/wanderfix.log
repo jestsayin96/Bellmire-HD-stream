@@ -1,0 +1,138 @@
+
+===== PARSE_hero =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+__RC__ PARSE_hero 0
+
+===== offfloor =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED A tally by the door, and one scratch more than there are names.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 3 (cap 12), creatures 0; lights 48 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 1 hollowed puglin, 1 slime.
+FEED Somebody kept bringing flowers long after the names went.
+FEED Hero1 rolls a 20 for initiative and is moving before anything else.
+FEED Hero6 casts Frost at hollowed puglin.
+FEED Hero2 casts Smite at hollowed puglin.
+FEED Hero1 casts Bolt at hollowed puglin.
+FEED The slime divides.
+FEED Hero6 turns on the wounded slimeling to finish it.
+FEED Hero1 searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Quiet - the kind you get after, not the kind you get before.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero5 spots a fire grate (Perception 14 vs DC 10) and disarms it with thieves' tools (21).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 hollowed cave spider, 1 giant rat, 1 hollowed skeleton minion.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED Hero0 rolls a 20 for initiative and is moving before anything else.
+FEED Hero3 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 casts Smite at Gnawbone.
+FEED Hero6 casts Frost at Gnawbone.
+FEED Hero1 casts Chain Bolt at Gnawbone.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Hero7 rolls a 20 - and the Gnawbone is gone.
+FEED Gnawbone falls to Hero7.
+FEED Hero5 steps on a loose flagstone - darts! DEX 18 vs DC 11, 4 damage (halved).
+FEED Hero6 casts Frost at giant rat.
+FEED Hero2 casts Smite at giant rat.
+FEED Hero1 reaches for bolt and the scar reaches back (7 vs DC 11).
+FEED Hero6's bolt comes out sideways - wild magic (1 vs DC 11).
+FEED Gnawbone is slain on floor 2!
+FEED The hoard is split 8 ways - 6 gold each to Hero0, Hero1, Hero2, Hero3, Hero4, Hero5, Hero6, Hero7.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 2 (cap 12), creatures 1; lights 43 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 slime, 1 giant rat, 1 hollowed slime.
+FEED Hero1 casts Chain Bolt at drowned giant rat.
+FEED Hero6 casts Bolt at drowned giant rat.
+FEED Hero2 casts Bolt at hollowed slime.
+FEED The hollowed slime divides.
+FEED Hero6's bolt goes out like a lamp in wind - wild magic (1 vs DC 11).
+FEED Hero1 casts Bolt at slimeling.
+FEED Hero1 searches (Investigation 12) and turns up 33 gold on floor 3.
+FEED Floor 3 won. Count the flasks; one is always short.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero1 steps on a loose flagstone - darts! DEX 17 vs DC 11, 3 damage (halved).
+FEED Hero1 steps on a slot in the floor - a blade! DEX 15 vs DC 11, 3 damage (halved).
+FEED Hero1 touches the altar - a curse. Something older than the floor takes a bite.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned slimes, 1 risen bones, 2 giant rats.
+FEED The oil is running low.
+FEED Hero6's bolt bends away from them - the scar has opinions (1 vs DC 12).
+FEED Hero2's ward spends itself on the stone instead (9 vs DC 12).
+FEED Hero1's chain lands on the floor like a dropped flask (7 vs DC 12).
+FEED The drowned slime divides.
+FEED Hero6 casts Bolt at drowned slimeling.
+FEED Hero2 casts Bolt at drowned slimeling.
+FEED Hero1 searches (Investigation 22) and turns up 57 gold on floor 4.
+FEED Held, and nobody had to be carried.
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 146 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 4 potions. 27 kills between them.
+FEED Hero1 is fitted with leather. (+10 hp) Haggled 17% off (19).
+OFFFLOOR 0 of 1347 samples; INPROP 0; MON_INPROP 0 of 83; floor reached 4 frames 4756 obstacles 28
+
+__RC__ offfloor 0
+
+===== delve =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend into the scar with steel borrowed and nerve their own.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 3 (cap 12), creatures 0; lights 48 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 skeleton minions, 1 hollowed slime.
+FEED The slabs were lifted from beneath - the chips all fell outward.
+FEED DawnCleric casts Smite at skeleton minion.
+FEED MossyMage casts Bolt at hollowed slime.
+FEED The hollowed slime divides.
+FEED MossyMage turns on the wounded hollowed slimeling to finish it.
+FEED DawnCleric turns on the wounded hollowed slimeling to finish it.
+FEED DawnCleric's bolt lands somewhere nobody aimed (1 vs DC 10).
+FEED BigAxe rolls a 20 - and the hollowed slimeling is gone.
+T10s floor=1 state=fight foes=1 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at skeleton minion.
+FEED MossyMage searches (Investigation 7) and turns up 8 gold on floor 1.
+FEED Clear, and the quiet sounds like a favour owed.
+T20s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED MossyMage searches the chest - Successfully found loot!! 26 gold (Investigation 22 vs DC 10).
+T30s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T40s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T50s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T60s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T70s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T80s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 giant rat, 1 cave spider, 1 slime.
+FEED The oil is running low.
+T90s floor=2 state=fight foes=4 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Chain Bolt at cave spider.
+T100s floor=2 state=fight foes=2 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Bolt at slime.
+FEED The slime divides.
+FEED MossyMage casts Fire at slimeling.
+T110s floor=2 state=fight foes=1 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at bog frog.
+FEED DawnCleric asks for bolt. The scar is not taking requests (10 vs DC 11).
+FEED MossyMage searches (Investigation 21) and turns up 28 gold on floor 2.
+FEED Quiet enough to hear the wall drip again.
+FEED MossyMage finds a vial of Hayward's Cup.
+T120s floor=2 state=search foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED MossyMage searches the chest - Successfully found loot!! 36 gold (Investigation 16 vs DC 11).
+T130s floor=2 state=search foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T140s floor=2 state=search foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T150s floor=2 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+
+__RC__ delve 0
+
+__ALLDONE__

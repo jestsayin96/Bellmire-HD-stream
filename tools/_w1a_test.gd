@@ -134,9 +134,12 @@ func _run() -> void:
         r.heroes.erase("x%d" % i)
 
     # live
-    if FileAccess.file_exists(SnapshotPublisher.KEY_FILE):
+    # `-- --offline` skips the live part: it overwrites the hub's ONE row with these test
+    # heroes, which stay up until the game next publishes (D59: never when the game is off)
+    if FileAccess.file_exists(SnapshotPublisher.KEY_FILE) and not OS.get_cmdline_user_args().has("--offline"):
         _live = true
         var pub := SnapshotPublisher.new()
+        pub.mem_file = "user://_w1a_mem.json"     # D59: never the game's own hero memory
         root.add_child(pub)
         pub.setup(town)
         _check("12 key file -> on, url is https", pub.enabled and pub.url.begins_with("https://"))

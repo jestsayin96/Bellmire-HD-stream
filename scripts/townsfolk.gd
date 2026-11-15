@@ -99,6 +99,12 @@ var _wobble := 0.0
 ## physics tick; 1 = every 2nd; 2 = every 4th, the step taken with the summed
 ## time so nobody walks slower. Past 0 the rig is advanced by hand on the same
 ## beat (a 15 fps pose a hundred metres off reads the same on stream).
+## D23: 3 = in NO drawing camera's view (town._lod_pass) - every 8th tick.
+const LOD_TICKS := [1, 2, 4, 8]
+## D23: a body is MOVED on the physics tick (60 Hz, no physics interpolation), so
+## posing it every RENDER frame bought nothing but cost - at 120 fps every
+## skeleton was solved twice per step it took. Poses now follow the physics tick.
+const POSE_MODE := AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
 var lod := 0
 static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_test.gd)
 ## D21b: a quick white flash + a damage number so a defender hit reads at
@@ -119,10 +125,23 @@ static var foot_sfx := true
 var _stride := 0.0
 static var face_fix := true
 
+var _gait_n := 0
+var _gait_acc := 0.0
+
 func _process(delta: float) -> void:
-    _gait_step(delta)
     if _flash_t > 0.0:
         _tick_flash(delta)
+    if lod >= 3:
+        # D23: no drawing camera sees this body - its gait (speed, facing, turn
+        # ease) catches up every 8th frame with the summed time, like its steps
+        _gait_acc += delta
+        _gait_n += 1
+        if _gait_n < LOD_TICKS[3]:
+            return
+        delta = _gait_acc
+    _gait_n = 0
+    _gait_acc = 0.0
+    _gait_step(delta)
 
 func _gait_step(delta: float) -> void:
     if _anim == null or delta <= 0.0 or not Rig.gait:
@@ -153,8 +172,8 @@ func _gait_step(delta: float) -> void:
     # also advanced the animation in chunks - the stutter Mr. E saw on mid-distance
     # folk. Advance the clip every frame for the clearly-visible lod-1 band (60-120 m)
     # so it animates smoothly; lod 2 (tiny, past 120 m) stays chunked for the budget.
-    if lod == 1 and _anim and visible:
-        _anim.advance(delta)
+    # (D23: that every-frame advance now happens on every PHYSICS tick, in
+    # _physics_process before the LOD skip - the body only moves at 60 Hz anyway)
     # D42: FOOTFALLS. The town read as silent because nothing ever played the
     # footstep sounds Sfx defines. A step per stride of real travel, near the
     # camera only (far steps are inaudible and only spend voices), the surface
@@ -214,7 +233,7 @@ func set_lod(l: int) -> void:
     _lod_acc = 0.0
     if _anim:
         _anim.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL if l > 0 \
-                else AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE
+                else POSE_MODE
 
 func _ready() -> void:
     var sc: PackedScene = load(ADV + model)
@@ -225,6 +244,8 @@ func _ready() -> void:
             Rig.tint(_mdl, tint)
         _anim = Rig.find(_mdl)
         Rig.prep(_anim)
+        if _anim:
+            _anim.callback_mode_process = POSE_MODE
         Rig.play(_anim, "Idle")
         if _anim:
             _anim.seek(randf() * 2.0, true)
@@ -699,10 +720,12 @@ func _physics_process(delta: float) -> void:
         var wq: Vector3 = town.call("off_wagons", global_position, self)
         if wq != global_position:
             global_position = town.call("keep_walkable", wq)
+    if lod == 1 and _anim and visible:
+        _anim.advance(delta)            # D50: the 60-120 m band poses every tick (smooth)
     if lod > 0:
         _lod_acc += delta
         _lod_n += 1
-        if _lod_n < (2 if lod == 1 else 4):
+        if _lod_n < LOD_TICKS[lod]:
             return
         _lod_n = 0
         delta = _lod_acc

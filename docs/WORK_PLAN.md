@@ -96,6 +96,11 @@ than leaving a queue that is all polish at the top.
       parse 0 errors, payload KB stated and under cap, and a v=3-era client still renders the hero sheet
       (additive check). State in your summary every field from the NOTES list you deliberately did not
       publish and why.
+  PROGRESS (game build, 2026-11-15 ~09:30 CT, committed): every sheet field the game computes is published
+  (initiative, speed, gear by real slot, status, last_seen, per-hero `events` ring; stats/max_hp/xp_next/combat were
+  already there for every hero). D59_SHEET OK, gates green, 244 KB at 202 heroes. v HELD AT 3 (PAYLOAD_V): the hub's
+  KNOWN_V refuses "4" - BLOCKED ON THE HUB: add "4" to KNOWN_V, read h.last_seen + h.events, and fix two H20 render bugs
+  (gear slot text never appended; "[object SVGSVGElement]" in the card head). See PROGRESS D-cycle D59a.
 
 - [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
@@ -762,12 +767,11 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
-  PROGRESS (game build, 2026-11-15 ~08:40 CT, UNCOMMITTED in R's working tree - own test fails): LOD now follows
-  the cameras that DRAW (the panes), by on-screen size, with an unseen tier; poses on the physics tick; animals
-  LOD'd. tools/_d23_soak.gd 30 min: fps_avg 114.6 (baseline ~97), D23_SOAK FAIL against the >=120 bar. Gates
-  green. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code (DungeonHD/FloorGen/delve.gd), not D23's to
-  fix; and the director pane on the busy market. DO NOT discard R's dirty tree - this work is real and is 17
-  fps of it. Recorded by the supervisor 2026-11-15 15:00 UTC so a later run cannot wipe it by accident.
+  PROGRESS (game build, 2026-11-15): LOD now follows the cameras that DRAW (the panes), by on-screen size, with an
+  unseen tier; poses on the physics tick; animals LOD'd. tools/_d23_soak.gd 30 min: fps_avg 114.6 (baseline ~97),
+  D23_SOAK FAIL against the >=120 bar. COMMITTED f16496b (2026-11-15 ~09:22 CT) per the supervisor directive after
+  a green gate re-run; D23 stays OPEN. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code
+  (DungeonHD/FloorGen/delve.gd), not D23's to fix; and the director pane on the busy market.
 
 ### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
 # Phase A - dungeon geometry & nav [L25]

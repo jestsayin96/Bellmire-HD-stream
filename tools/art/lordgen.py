@@ -408,4 +408,5 @@ def main():
                                           "blank": report.get("blank_check", {}).get("failures", [])[:5]}))
 
 
-main()
+if __name__ == "__main__":
+    main()

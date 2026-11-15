@@ -96,6 +96,11 @@ than leaving a queue that is all polish at the top.
       parse 0 errors, payload KB stated and under cap, and a v=3-era client still renders the hero sheet
       (additive check). State in your summary every field from the NOTES list you deliberately did not
       publish and why.
+  PROGRESS (game build, 2026-11-15 ~09:30 CT, committed): every sheet field the game computes is published
+  (initiative, speed, gear by real slot, status, last_seen, per-hero `events` ring; stats/max_hp/xp_next/combat were
+  already there for every hero). D59_SHEET OK, gates green, 244 KB at 202 heroes. v HELD AT 3 (PAYLOAD_V): the hub's
+  KNOWN_V refuses "4" - BLOCKED ON THE HUB: add "4" to KNOWN_V, read h.last_seen + h.events, and fix two H20 render bugs
+  (gear slot text never appended; "[object SVGSVGElement]" in the card head). See PROGRESS D-cycle D59a.
 
 - [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP

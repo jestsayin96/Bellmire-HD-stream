@@ -5691,3 +5691,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Canon held: he cannot die, withdraws to barracks to heal and returns; pompous, beloved, reliable; no floor count; nothing reworded or removed.
 - VALIDATION OK: all four owned files json.load (only lore_lines.json touched); every pre-existing key and list item compares equal (new lists are exact ordered prefixes); all new entries are plain strings like their lists; file round-trips at indent 2.
 - CODE WIRING: none required. New lines ride existing e3po lists; confirm nothing assumes a fixed list length. _note_c45 is a string key beginning with underscore, like the other notes.
+
+## C-cycle 46: lord variants and brews - 64 new uniques, 16 new potions (standing backlog item 6) (2026-11-15)
+
+- data/bosses.json: 32 lesser_uniques (8 each for Hollow King, Grubmother, Rattling Host, Nightwing) and 32 greater_uniques (8 each for Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified versions of the existing eight lords only, never new lords. Each 'shape' names its modifier; stats skewed to match (faster = frailer, slower = tougher). lesser_uniques 106 -> 138, greater_uniques 100 -> 132.
+- data/potions.json: 16 new brews across tiers 1-4 (4 healing, 3 cures, haste/darkvision/heroism/warded/invisible/giant/resist_fire/scar_touched/regenerating gives), reusing existing states and tier-appropriate heal dice, secs and costs. potions 136 -> 152. No new states.
+- VALIDATION OK: both files json.load; every pre-existing key and list item compares equal (new entries are pure insertion at list/dict ends); new entries have exactly the key sets of existing ones; no name, key or alias collides with an existing one.
+- CODE WIRING: none required. Uniques ride the existing unique draw and potions the existing !brew / apothecary tier filter; confirm nothing assumes fixed list lengths (106/100 uniques, 136 potions).

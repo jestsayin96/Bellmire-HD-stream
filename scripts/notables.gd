@@ -652,6 +652,17 @@ func _e3po_say(cat: String, sub := "") -> void:
     if feed != null:
         (feed as Array).append(line)
 
+## D63b: E3PO says a given line (the festival's own, lore_lines "festivals".e3po)
+func e3po_line(line: String) -> bool:
+    if line == "" or not is_instance_valid(_e3po):
+        return false
+    _e3po.shout_lines = [line]
+    _e3po_amb_t = 12.0
+    var feed = town.get("feed")
+    if feed != null:
+        (feed as Array).append(line)
+    return true
+
 ## D37 v2: felled in combat (0 hp in a raid). He is NOT killed - he is dragged to
 ## the barracks and mends to full over 15 minutes, then returns to his post.
 func _e3po_felled(killer := "") -> void:

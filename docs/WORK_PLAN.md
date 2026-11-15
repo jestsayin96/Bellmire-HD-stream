@@ -1,5 +1,38 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### THE DUNGEON FALLBACK (Mr. E, Nov 15 16:59) - HELD IN RESERVE, NOT STARTED
+
+"if dungeons become an issue we can make those pre built as well. and just have around 200+
+versions so it seems like its always 'changing'".
+
+RECORDED AS A CONTINGENCY. Do NOT start authoring dungeon floors. D91 (crowd avoidance + three-
+cell corridors) is the current answer and it must be tried first: the dungeon's problem is bodies
+with no separation in halls too narrow to hold them, and that is fixable without touching
+generation. If D91 lands and floors still read as broken, this is the fallback and Mr. E has
+already approved the shape of it.
+
+IF IT IS EVER TRIGGERED, DO NOT HAND-AUTHOR 200 WHOLE FLOORS. Author CHUNKS instead - rooms,
+junctions, corridor runs, stair halls, set-piece chambers - each one hand-built, correct, and with
+declared exits, then assemble a floor by snapping chunks together at those exits. Fifty authored
+chunks give more than 200 floors' worth of variety, every square metre of every floor is still
+hand-laid, and a fix to one chunk fixes it everywhere it appears. A hand-drawn floor is a
+beautiful thing you get once; a hand-drawn chunk is a beautiful thing you get a hundred times.
+It also keeps the thing Mr. E actually wants from a dungeon - that it is different every delve -
+which 200 fixed maps would lose the moment a regular viewer recognised one.
+
+The authored-town work (D93) builds the layout format, the loader and the validator. If this
+fallback is ever triggered, the chunk format should reuse all three rather than invent a second
+way of describing a place.
+
+TWO ADDITIONS (supervisor dedupe, 17:00 - this section was written twice independently and the
+other copy was removed; these are the only points it had that this one did not):
+  - A BIOME AND DRESSING PASS ON TOP OF AN AUTHORED LAYOUT makes the same skeleton read as a
+    different place. It multiplies whatever library we build, chunks or floors, for very little
+    work - floorgen already remakes a floor's origin as another biome, so the mechanism exists.
+  - THE STANDING RULE HOLDS REGARDLESS: canon NEVER STATES A FLOOR COUNT. A library of 200 layouts
+    is not a statement that the dungeon has 200 floors, and nothing in the game, the hub, the bot
+    or the lore may imply that it does.
+
 ## MR. E'S RULING (Nov 15 16:57) - BELLMIRE IS HAND-BUILT. NO MORE PROCEDURAL TOWN. **BINDING**
 
 Verbatim: "we need to make sure the roads are being built correctly and not overlapping. in my
@@ -1446,23 +1479,77 @@ Concretely, all five must be true:
   4. IT SURVIVES THE SESSION. Four hours at frame rate, no stranded heroes, no silent stalls.
   5. THE CHANNEL WORKS. The bot answers, the polls run, the hub is current.
 
-### PHASE RC - THE CRITICAL PATH. Nothing else ships the game; everything else deepens it.
-Work these FIRST, in roughly this order, regardless of where they sit elsewhere in this file:
-  THE LOOP:        D52 (hero won't delve), D44/D50 (wedged walkers), D64, D65, D66, C7, T5, T4
-  IT READS:        D61 (fights read), L36, L40, D41 (overlap), D48 (selection frame), L64 (director)
-  IT SURVIVES:     D23 (FPS), L56 (delve soak)
-  THE CHANNEL:     L68, L69, D67, D69, D70, L70   (D71 is CLOSED - decided against)
-  THE SOUND:       D72
-  THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
-  THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
-  IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report), D91 (NO crowd avoidance in the dungeon at all), D92 (farms overlap)
-    These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
-    Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
-    the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and
-    H29 follow them and must not be started first.
-T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
-it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
+### PHASE RC - THE ORDER OF WORK. Agreed with Mr. E, Nov 15 17:06: "do it start it, make it happen"
+REWRITTEN 17:10. This REPLACES every earlier RC ordering in this file. If you find an older RC list
+anywhere, it is dead - this is the one.
+
+THE PRINCIPLE BEHIND THE ORDER: a slightly ugly town costs us nothing with viewers. A missing loop
+costs us everything. Nobody ever left a stream because a fence overlapped; they leave because they
+redeemed something and nothing happened. So: stop it looking broken, then make the loop real, then
+make it beautiful.
+
+PHASE 1 - STOP IT LOOKING BROKEN. Visible wrongness, and most of these now have confirmed causes.
+  L71 Chronicle truncation (cause confirmed - a roll cut off before its result is the worst thing
+      on screen, and the Chronicle is what a non-chat viewer actually reads)
+  D91 crowd avoidance + three-cell corridors (the most obviously broken thing in the game)
+  D84 white figures · D90 the wagon (THIRD report) · D88 the gate · D83 the traps stuck
+  These do not make the game better. They stop it looking broken. That is a different job and it
+  comes first because Mr. E streams this.
+
+PHASE 2 - MAKE THE LOOP REAL. This is the phase that matters.
+  T5  THE VIEWER'S ROLL. FIRST IN THIS PHASE AND NOTHING JUMPS IT. Mr. E called it the heart of
+      viewer interaction. It is unblocked, its words were written in C-cycle 38, and it has sat
+      unbuilt since. It is the largest single gap in the game.
+  D77 + D78 + D80 THE ASCENT, THE ERRAND, CARRY WEIGHT. ONE SYSTEM, NOT THREE ITEMS - built
+      together or not at all. Nothing teleports out, buying is a walk to a specific building, and
+      what a party can carry is the real limit on how deep it goes.
+  D79 stones · H29 shop tab · H30 satchel tab · D81 use/sell/vault
+  WHEN PHASE 2 LANDS a viewer can enlist, roll, delve, fight their way back out, buy something,
+  carry it, store it and lose it. That is a game. Everything before it is scenery.
+  Also in this phase, where they block the loop: D64, D65, D66, C7, D61, L68, L69, L70, D67, D69,
+  D70, D23 (FPS), L56 (soak), L64 (director), D41, D48, L36, L40, T4, D44/D50.
+
+PHASE 3 - THE TOWN, AUTHORED ONCE. D93. Big, and no longer urgent once Phase 2 is in.
+  Build it as ONE map with per-level reveal states, not as 12-15 separate maps (see D93).
+
+PHASE 4 - THE ART PROGRAM. D75 the lords · D85 E3PO · D73 the icons · D76 monster variety ·
+  D82 the waterline. This is where "people want to see what they pay for" gets paid off - AFTER
+  the paying works.
+
+PHASE 5 - THE DAIS. D86, D87. Last, deliberately. It makes Mr. E's job easier; it does not make
+  the stream better. It waits.
+
+RUNNING ALONGSIDE, NO CONFLICT: D72 the music. Different worker, never touches Godot, already
+green lit. It proceeds through all five phases and comes to Mr. E for judgement when ready.
+
+SUPERSEDED / CLOSED, DO NOT WORK THEM: D71 (decided against, twice). D92 for the TOWN (D93's
+authored layout removes the problem; the oriented-rectangle test is still worth having for the
+valley and for anything the dungeon places, but it is not a big item any more).
+
+### YOUR LANE'S QUEUE - TAKE THE FIRST OPEN ITEM IN YOUR OWN ROW
+All six lanes run in parallel. Do not take another lane's item; if your row is empty, say so and
+stand down rather than reaching into someone else's files.
+  GAME BUILD:  D91 -> D84 -> D90 -> D88 -> D83 -> T5 -> (D77+D78+D80 as one) -> D79 -> D81
+  HUD:         L71 -> L64 -> D61 -> D41 -> D48
+  HUB:         H29 -> H30
+  CONTENT:     the words Phase 2 needs (T5's outcomes exist already - check before writing any),
+               then D81's feed lines, then C7
+  ART:         D75 -> D85 -> D73 -> D76 -> D82
+  SUPERVISOR:  merge, tick, and hold the freeze below
+
+### THE FREEZE - NO NEW ITEMS (Mr. E agreed, Nov 15 17:06)
+The open count must now go DOWN. On Nov 15 alone this plan gained D80-D93, H29, H30 and L71 -
+about fourteen items - while Phase RC existed specifically to stop the plan growing forever. Six
+workers closing roughly one item an hour cannot outrun that, and a plan that only grows is a plan
+nobody finishes.
+  - A NEW ITEM IS WRITTEN ONLY IF MR. E RAISES IT. A bug he reports goes in. Anything else does
+    not, however good it is.
+  - A good idea nobody asked for goes in a LATER list that no worker pulls from. It is not lost;
+    it is not work.
+  - BEFORE ADDING ANYTHING, CHECK IT IS NOT ALREADY HERE. The dungeon fallback got written twice
+    inside one minute on Nov 15. Search the file first.
+  - CLOSING COUNTS AS PROGRESS. A run that ticks a finished item, merges a duplicate or deletes a
+    dead one has done real work and should say so.
 
 ### WORKERS: THIS OVERRIDES YOUR BRIEF
 Your standing prompt tells you to take the FIRST unchecked item in your section. WHILE PHASE RC IS

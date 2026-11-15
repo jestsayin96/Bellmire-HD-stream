@@ -54,6 +54,7 @@ const ICON_SET = new Set([
   "blade", "ranged", "arcane", "blunt", "shield", "potion", "flask", "coin",
   "fight", "death", "raid", "town", "lore", "loot", "delve", "other",
   "flame",   // H10: a burning delver's status glyph. "death" already serves the fallen.
+  "hut", "well", "stall", "chapel", "anvil", "tower", "ford", "wall",   // H18: the town's buildings
 ]);
 function icon(id, cls) {
   const key = ICON_SET.has(id) ? id : "other";      // whitelist: unknown -> a safe default
@@ -288,7 +289,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "dice", "heroes", "bands", "chronicle", "lore", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -330,6 +331,7 @@ function render(p) {
   renderHeroes(arr(p.heroes));
   renderBands(p.parties != null ? p.parties : p.bands);
   renderChronicle(p.chronicle, { auto: true });
+  try { renderState(t, p); } catch (e) { /* the new tab must never break the rest of the page */ }
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
   renderCommands(p.commands);
@@ -382,6 +384,144 @@ function growthBar(t) {
   track.append(fill);
   li.append(el("span", "tk", "Growth"), track, el("span", "tv growv", num(score) + " / " + num(next)));
   return li;
+}
+
+// ============================================================ THE STATE OF BELLMIRE (H18)
+// The place, not just its people: a ladder of the town's growth, the live numbers as
+// tiles, a roster of what stands, and a timeline of what has befallen it. Every string
+// - a town name, a building name, a remembered chronicle line - reaches the DOM only
+// through el() (createElement + textContent). Icons come from ICON_SET; a snapshot
+// value only ever chooses WHICH known icon. The only snapshot number that styles
+// anything is the growth fraction, set through the CSSOM as a number. No fetch, no URL.
+// The ladder and the canon roster read the frozen lore (H12) as-is: no parallel words.
+const CANON_BUILDINGS = [               // page-owned: [label, match key, icon, town level it arrives at, lore tier index]
+  ["The Huts", "hut", "hut", 1, 0], ["The Well", "well", "well", 2, 1], ["The Guild Post", "guild", "town", 3, 2],
+  ["Market Square", "market", "stall", 5, 4], ["The Chapel", "chapel", "chapel", 6, 5], ["Craft Row", "craft", "anvil", 7, 6],
+  ["The Garrison", "garrison", "tower", 8, 7], ["The Ford", "ford", "ford", 9, 8], ["The First Wall", "wall", "wall", 10, 9],
+  ["Corner Towers", "tower", "tower", 11, 10],
+];
+const BUILDING_ICON_KEYS = [["well", "well"], ["hut", "hut"], ["home", "hut"], ["house", "hut"], ["market", "stall"], ["stall", "stall"],
+  ["chapel", "chapel"], ["temple", "chapel"], ["forge", "anvil"], ["smith", "anvil"], ["craft", "anvil"], ["garrison", "tower"],
+  ["barrack", "tower"], ["tower", "tower"], ["wall", "wall"], ["gate", "wall"], ["ford", "ford"], ["bridge", "ford"], ["guild", "town"]];
+function buildingIcon(name) {           // keyword -> a whitelisted id; never a snapshot value used as one
+  const n = String(name || "").toLowerCase();
+  for (const [k, id] of BUILDING_ICON_KEYS) if (n.indexOf(k) >= 0) return id;
+  return "town";
+}
+const TOWN_SCALE = /disaster|\bfire\b|burn|drought|famine|sickness|plague|hurricane|tornado|earthquake|meteor|scarstorm|flood|blight|volcano|cold ?snap|festival|\bfair\b|harvest|siege|bandit|camp|grows into|falls back|stands as|raid/i;
+function townStamp(ts) {
+  const d0 = new Date(); d0.setHours(0, 0, 0, 0);
+  const d = new Date(ts), dd = new Date(ts); dd.setHours(0, 0, 0, 0);
+  const n = Math.round((d0 - dd) / 86400000);
+  let tm = ""; try { tm = d.toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" }); } catch (e) { tm = ""; }
+  return (n <= 0 ? "Today" : n === 1 ? "Yesterday" : n + " days gone") + (tm ? " \u00b7 " + tm : "");
+}
+function stTile(k, v) {
+  const d = el("div", "st-tile");
+  d.append(el("span", "st-k", k), el("span", "st-v", v));
+  return d;
+}
+function renderState(t, p) {
+  t = t && typeof t === "object" ? t : {};
+  const lore = LORE_FROZEN && LORE_FROZEN.growth_tiers;
+  const tiers = arr(lore && lore.tiers).filter((x) => x && typeof x === "object" && x.name);
+  const N = tiers.length;
+  const lvl = t.level != null && t.level !== "" && Number.isFinite(+t.level) && N ? Math.max(1, Math.min(N, Math.floor(+t.level))) : 0;
+  // ---- H18.1 the ladder
+  const ladder = $("stLadder"), cap = $("stLadderCap");
+  ladder.replaceChildren();
+  if (!N) { ladder.append(el("li", "empty", "The town has not yet named its stages.")); cap.textContent = ""; }
+  else {
+    tiers.forEach((tr, i) => {
+      const st = !lvl ? "ahead" : i + 1 < lvl ? "done" : i + 1 === lvl ? "now" : "ahead";
+      const li = el("li", "rung " + st);
+      if (st === "now") li.setAttribute("aria-current", "step");
+      const body = el("div", "rg-body");
+      body.append(el("span", "rg-name", String(tr.name)));
+      if (st === "now" && tr.see) body.append(el("span", "rg-see", String(tr.see)));
+      li.append(el("span", "rg-dot", String(i + 1)), body,
+        el("span", "st-sr", st === "done" ? " (reached)" : st === "now" ? " (the town is here)" : " (still ahead)"));
+      ladder.append(li);
+    });
+    const left = N - lvl;
+    cap.textContent = !lvl ? "Bellmire has not yet said how far it has come."
+      : left > 0 ? String(tiers[lvl - 1].name) + " - " + left + (left === 1 ? " stage" : " stages") + " still to climb."
+      : "Bellmire has climbed every rung.";
+  }
+  // ---- the live numbers, as tiles
+  const tiles = $("stTiles"); tiles.replaceChildren();
+  if (lvl) tiles.append(stTile("Town level", lvl + " of " + N));
+  if (t.day != null && t.day !== "") tiles.append(stTile("Day", num(t.day)));
+  if (t.souls != null && t.souls !== "") tiles.append(stTile("Souls", num(t.souls)));
+  if (t.treasury != null && t.treasury !== "") tiles.append(stTile("Treasury", num(t.treasury) + " g"));
+  const repelled = pickNum(t.raids_turned, t.raids_repelled, t.raids_held, t.raids_won);
+  if (repelled != null) tiles.append(stTile("Raids turned back", num(repelled)));
+  else { const raids = pickNum(t.raids); if (raids != null) tiles.append(stTile("Raids", num(raids))); }
+  if (t.renown) tiles.append(stTile("Renown", num(t.renown)));
+  if (!tiles.childElementCount) tiles.append(el("p", "empty", "The town has not sent its numbers yet."));
+  const grow = $("stGrow"); grow.replaceChildren();
+  if (t.score != null && +t.next_level_at > 0) {
+    const score = n0(t.score), next = n0(t.next_level_at);
+    const wrap = el("div", "st-grow");
+    wrap.setAttribute("role", "img");
+    wrap.setAttribute("aria-label", "Growth " + score + " of " + next + " toward the next stage");
+    const track = el("div", "st-track"), fill = el("span", "st-fill");
+    fill.style.setProperty("--grow", Math.max(0.02, Math.min(1, score / next)));   // CSSOM number only
+    track.append(fill);
+    wrap.append(el("span", "st-k", "Growth to the next stage"), track, el("span", "st-gv", num(score) + " / " + num(next)));
+    grow.append(wrap);
+  }
+  // ---- H18.2 what stands
+  const roster = $("stRoster"), rtag = $("stRosterTag"); roster.replaceChildren();
+  const live = [];
+  for (const b of arr(t.buildings != null ? t.buildings : p && p.buildings)) {
+    const o = typeof b === "string" ? { name: b } : b && typeof b === "object" ? b : null;
+    const name = o ? cleanName(o.name).trim().slice(0, 60) : "";
+    if (!name) continue;
+    const does = ctrlStrip(o.does != null ? o.does : o.desc != null ? o.desc : o.what != null ? o.what : "").slice(0, 140);
+    live.push({ name, built: o.built !== false, does });
+  }
+  const bld = (name, ic, built, line, tag) => {
+    const li = el("li", "bld " + (built ? "built" : "unbuilt"));
+    li.append(icon(ic, "bld-ic"));
+    const b = el("div", "bld-body");
+    b.append(el("span", "bld-name", name));
+    if (line) b.append(el("span", "bld-line", line));
+    b.append(el("span", "bld-tag", tag));
+    li.append(b);
+    return li;
+  };
+  if (live.length) {
+    rtag.textContent = "as the town reports it";
+    const have = live.map((b) => b.name.toLowerCase());
+    for (const b of live) roster.append(bld(b.name, buildingIcon(b.name), b.built, b.does, b.built ? "standing" : "not yet raised"));
+    for (const c of CANON_BUILDINGS) {
+      if (have.some((n) => n.indexOf(c[1]) >= 0)) continue;
+      const tr = tiers[c[4]];
+      roster.append(bld(c[0], c[2], false, tr && tr.see ? String(tr.see) : "", "not yet raised"));
+    }
+  } else {
+    rtag.textContent = "canon, not live - read from the town's level";
+    for (const c of CANON_BUILDINGS) {
+      const tr = tiers[c[4]], built = lvl >= c[3] && lvl > 0;
+      roster.append(bld(c[0], c[2], built, tr && tr.see ? String(tr.see) : "", built ? "standing" : "not yet raised"));
+    }
+  }
+  // ---- H18.3 what has befallen it: the browser's own Chronicle history, town-scale only
+  const tl = $("stTime"), ttag = $("stTimeTag"); tl.replaceChildren();
+  chronMemEnsure();
+  const rows = arr(chronMem).filter((r) => r && typeof r.s === "string" && (r.t === "raid" || (r.t === "town" && TOWN_SCALE.test(r.s) && !/^Day \d+ begins/i.test(r.s))))
+    .sort((x, y) => histTs(y) - histTs(x)).slice(0, 14);
+  ttag.textContent = "kept by this browser";
+  if (!rows.length) tl.append(el("li", "empty", "Bellmire has known only quiet days."));
+  for (const r of rows) {
+    const li = el("li", "tm " + (r.t === "raid" ? "raid" : "town"));
+    li.append(icon(/fire|burn|volcano|meteor/i.test(r.s) ? "flame" : r.t === "raid" ? "raid" : "town", "tm-ic"));
+    const b = el("div", "tm-body");
+    b.append(el("span", "tm-when", townStamp(histTs(r))), el("span", "tm-text", r.s));
+    li.append(b);
+    tl.append(li);
+  }
 }
 
 // ============================================================ THE BOARDS
@@ -2187,7 +2327,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; pa
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -2316,12 +2456,28 @@ const MOCK_FALLEN = [
   { name: "Wren" },
   { name: "Odd", class: null, level: "x", kills: NaN, deepest: null, killed_by: "", epitaph: "", weapon: null, armour: {} },
 ];
+const MOCK_TOWN_CHRON = [
+  { t: "raid", s: "<img src=x onerror=alert(1)> led a raid on the east gate; the watch held.", at: new Date(Date.now() - 40 * 60000).toISOString() },
+  { t: "town", s: "Fire in Craft Row - a forge banked wrong, and the wind unkind.", at: new Date(Date.now() - 4 * 3600000).toISOString() },
+  { t: "town", s: "Day 17 begins  -  48 souls, 1280 gold, Village (lvl 3, steady)", at: new Date(Date.now() - 4 * 3600000).toISOString() },
+  { t: "town", s: "Bellmire grows into Village.  (town level 3)", at: new Date(Date.now() - 27 * 3600000).toISOString() },
+  { t: "raid", s: "Bandits tested the west road; the caravans came through bled.", at: new Date(Date.now() - 52 * 3600000).toISOString() },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "fallen") out.fallen = MOCK_FALLEN;
+  if (MOCK === "town") {            // H18: a town with every new field, hostile strings included
+    out.town = Object.assign({}, p.town, {
+      name: "<img src=x onerror=alert(1)>", level: 3, souls: 48, day: 17, treasury: 1280, renown: 64,
+      raids_turned: 5, score: 120, next_level_at: 300,
+      buildings: ["The Well", { name: "<img src=x onerror=alert(1)> Forge", built: true, does: "<b>hostile</b> text that must stay text" },
+                  { name: "Watchtower", built: false }, { name: "" }, 7, null],
+    });
+    out.chronicle = MOCK_CHRONICLE.concat(MOCK_TOWN_CHRON);
+  }
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];

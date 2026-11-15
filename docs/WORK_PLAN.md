@@ -963,7 +963,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L52. (SUPERSEDED BY THE REFRAMED L52 IN THE Nov-13 SECTION - done there, L-cycle 126; the census disproved the premise, so the work was legibility, not more spells.) SPELL VARIETY BELOW. He has only ever seen one spell. Verify against the census, then make casters actually choose among their spells. DONE: census shows several distinct spells cast in one run.
 
 # Mr. E's Nov 13 list - DESKTOP (town, world, audio, visuals)
-- [ ] D29. THE TOWN IS SILENT OF EFFECTS - MEASURED, NOT GUESSED. The supervisor analysed the AUDIO of Mr. E's own OBS recordings (he was right; this needs no census to confirm):
+- [x] D29. THE TOWN IS SILENT OF EFFECTS - MEASURED, NOT GUESSED. The supervisor analysed the AUDIO of Mr. E's own OBS recordings (he was right; this needs no census to confirm):
       * 19-34-39 (town/market, 39 s): dynamic range only 13.0 dB, median -34.9, peak -30.1, and ZERO windows more than 8 dB above the bed - i.e. NOT ONE discrete sound event in a busy market with heroes walking, NPCs working and a caravan arriving. It is a flat ambience drone and nothing else.
       * 19-27-48 (dungeon/delve, 49 s): range 29.8 dB with 79 spike windows (3.4%) - so the Sfx system DOES fire below ground. The fault is TOWN-SIDE, not the whole system.
       * Everything is also too quiet: median ~-35 dB, peaks only -25 dB.
@@ -1055,6 +1055,10 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       town makes. Give them callers: footsteps from the walk cycle (surface-aware), animal voices
       from the animals that own them. horse_neigh/whinny is called in daylight.gd but fired 0 -
       find out why. This supersedes the open question in D29; D29's measurement was right.
+      TICKED (supervisor, Nov 14): D42 shipped the fix - townsfolk.gd:135-144 fires
+      Sfx.at("footstep_" + surface_at(pos), pos, -13 dB) per stride at LOD 0, and animal.gd has
+      VOICE[kind] on a per-beast timer. tools/_d42_test.gd gates it. The silent-town bug is closed;
+      remaining tuning (mix levels, Mr. E's ear on a live soak) lives under D22a.
       DONE: a re-recorded town clip whose audio shows clear discrete events above the ambience bed.
       -> DONE D-cycle D3 (Nov 13): footsteps given a caller in Townsfolk._gait_step (one per 0.62*size stride of
       real travel, lod==0 only, surface from new town.surface_at - bridge=wood, river=water, roads/market=stone, else

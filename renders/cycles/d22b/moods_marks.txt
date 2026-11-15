@@ -1,0 +1,11 @@
+0.00 start, late morning
+8.01 dusk (clock -> 20:00)
+24.01 flicker to day for 1 s
+25.01 flicker back to night
+30.01 dawn (clock -> 11:00)
+44.02 raid forced
+60.00 raiders cleared - the raid is driven off
+62.43 victory sting heard
+76.02 a delve goes below
+96.01 the delve is lost - no survivors
+99.01 the delve is over

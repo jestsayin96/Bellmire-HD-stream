@@ -4,8 +4,15 @@ extends Node
 ## can call the static helpers - Sfx.at("hit", pos), Sfx.play("horn"),
 ## Sfx.sting() - and they do nothing when no Sfx is live (bare test tools).
 ##  - sounds in the world are 3D (a pool of players): far fights are quiet;
-##  - music: day / night / raid, crossfaded over 3 s, on its own bus at -14 dB
-##    (a stream has a voice over it); a hero's death ducks it for a few seconds;
+##  - music: day / night / raid / delve, on its own bus at -14 dB (a stream has a
+##    voice over it); a hero's death ducks it for a few seconds;
+##  - D22b MUSIC MOODS: the four beds were GENERATED for Bellmire with Mr. E's
+##    music-studio v3.5.2 (tools/_d38_music_gen.mjs, his approved style x mood x
+##    role mapping). A mood must be wanted HOLD seconds before the music moves (a
+##    raid moves it at once); each transition has its own equal-power crossfade
+##    length (FADES); a bed RESUMES where it left off instead of restarting; a
+##    raid driven off plays the victory sting, a delve that comes home plays it
+##    too, a delve with no survivors plays the defeat sting - each ducks the bed;
 ##  - a bell tolls three times at dawn and at dusk; a horn when a raid comes;
 ##  - a low wind under the town.
 ##  - D22a: LAYERED BEDS - looped, positional ambience laid by the town: the river
@@ -125,11 +132,32 @@ const SETS := {
     "quest_complete": ["rpg/quest_complete_0.ogg", "rpg/quest_complete_1.ogg"],
     "unlock": ["rpg/unlock_0.ogg", "rpg/unlock_1.ogg"],
 }
+## D22b/D38: generated with music-studio v3.5.2 - day playful_pizzicato x playful (bed), night
+## ambient_calm x lowkey (bed), raid epic_cinematic x hype (music), delve lofi_chill x lowkey (bed)
 const MUSIC := {
+    "day": ["music/bellmire_day.ogg"],
+    "night": ["music/bellmire_night.ogg"],
+    "raid": ["music/bellmire_raid.ogg"],
+    "delve": ["music/bellmire_delve.ogg"],
+}
+## the older CC0 loops (RandomMind) - used only if a generated file is missing
+const MUSIC_OLD := {
     "day": ["music/day_old_tower_inn.ogg", "music/day_minstrel_dance.ogg"],
     "night": ["music/night_bards_tale.ogg", "music/night_exploration.ogg"],
     "raid": ["music/raid_battle.ogg"],
+    "delve": ["music/night_exploration.ogg"],
 }
+## D22b: crossfade length per transition, real seconds ("from>to"; unlisted = FADE). A raid
+## comes in fast and leaves slowly; day and night melt into each other.
+const FADES := {"day>raid": 1.5, "night>raid": 1.5, "delve>raid": 1.5,
+    "raid>day": 6.0, "raid>night": 6.0, "raid>delve": 6.0,
+    "day>night": 8.0, "night>day": 8.0,
+    "day>delve": 5.0, "night>delve": 5.0, "delve>day": 5.0, "delve>night": 5.0}
+const HOLD := 2.0              # D22b: real seconds a new mood must be wanted before the music moves
+const STINGS := {"victory": "music/sting_victory.ogg", "defeat": "music/sting_defeat.ogg"}
+const STING_DB := 0.0          # the stings were made at -16 LUFS, 4 dB over the -20 LUFS beds already
+const STING_GAP := 20.0        # real seconds between two stings, at least
+const STING_DUCK := -8.0       # the bed dips this much under a sting
 const AMBIENCE := "amb/town_wind.ogg"
 ## D22a beds: kind -> [file, unit_size, max_distance, sleeps at night, shuts for a raid]
 ## (made for this game with numpy + ffmpeg, CC0 - see assets/audio/LICENSE.txt)
@@ -186,6 +214,18 @@ var _check := 0.0
 var _night := false
 var _night_known := false
 var _duck := 0.0
+var _fade_len := FADE          # D22b: the running crossfade's own length
+var _want := ""                # D22b: the mood being asked for, and for how long (HOLD)
+var _want_t := 0.0
+var _paths := ["", ""]         # D22b: the file each music player holds
+var _resume := {}              # D22b: path -> playback position when it was faded out
+var _sting_p: AudioStreamPlayer
+var _sting_duck := 0.0
+var _last_sting := -100000
+var _delve_seen: Object = null
+var transitions: Array = []    # D22b tests: [{from, to, fade, at, resumed}]
+var stings := {}               # D22b tests: which -> times played
+var stings_skipped := 0
 ## D22a: measured for the audio soak
 var busy_peak := 0             # most 3D voices playing at once
 var steals := 0                # a busy voice was taken for a higher-priority sound
@@ -211,6 +251,16 @@ static func at(kind: String, pos: Vector3, db := 0.0) -> void:
 static func play(kind: String, db := 0.0) -> void:
     if _i and is_instance_valid(_i):
         _i._play2d(kind, db)
+
+## D22b: the musical stings (anyone may call these; the town's own raid/delve
+## endings call them from here)
+static func victory() -> void:
+    if _i and is_instance_valid(_i):
+        _i.play_sting("victory")
+
+static func defeat() -> void:
+    if _i and is_instance_valid(_i):
+        _i.play_sting("defeat")
 
 ## a hero has died: the sting, the music ducks under it
 static func sting() -> void:
@@ -243,6 +293,9 @@ func setup(t: Node3D) -> void:
         m.volume_db = SILENT
         add_child(m)
         _music.append(m)
+    _sting_p = AudioStreamPlayer.new()
+    _sting_p.bus = "Music"
+    add_child(_sting_p)
     _amb = AudioStreamPlayer.new()
     _amb.bus = "Ambience"
     _amb.stream = _load(AMBIENCE, true)
@@ -454,6 +507,9 @@ func want_mood() -> String:
     var r = town.get("raids") if town else null
     if r and not (r.raiders as Array).is_empty():
         return "raid"
+    var dv = town.get("delve") if town else null
+    if dv != null and is_instance_valid(dv) and String(dv.get("state")) != "home":
+        return "delve"
     var eco = town.get("economy") if town else null
     if eco and eco.is_night():
         return "night"
@@ -468,7 +524,19 @@ func _process(delta: float) -> void:
         _check = 0.5
         var w := want_mood()
         if w != mood:
-            _switch(w)
+            # D22b hysteresis: a raid moves the music at once; anything else must be
+            # wanted HOLD seconds, so a mood flickering at a boundary never flaps it
+            if w == _want:
+                _want_t += 0.5
+            else:
+                _want = w
+                _want_t = 0.0
+            if mood == "" or w == "raid" or _want_t >= HOLD:
+                _switch(w)
+        else:
+            _want = w
+            _want_t = 0.0
+        _watch_delve()
         var eco = town.get("economy")
         if eco:
             var n: bool = eco.is_night()
@@ -477,37 +545,97 @@ func _process(delta: float) -> void:
             _night = n
             _night_known = true
     _duck = maxf(0.0, _duck - real)
+    _sting_duck = maxf(0.0, _sting_duck - real)
     if _fade > 0.0:
         _fade = maxf(0.0, _fade - real)
-    var k := 1.0 - _fade / FADE
-    var duck_db := -10.0 if _duck > 0.0 else 0.0
+    var k := clampf(1.0 - _fade / maxf(_fade_len, 0.01), 0.0, 1.0)
+    var duck_db := minf(-10.0 if _duck > 0.0 else 0.0, STING_DUCK if _sting_duck > 0.0 else 0.0)
     var a: AudioStreamPlayer = _music[_cur]
     var b: AudioStreamPlayer = _music[1 - _cur]
-    a.volume_db = lerpf(SILENT, 0.0, sqrt(k)) + duck_db
-    b.volume_db = lerpf(0.0, SILENT, sqrt(k)) + duck_db
+    # D22b: an equal-power crossfade - the sum stays level through the middle
+    a.volume_db = maxf(SILENT, linear_to_db(maxf(sin(k * PI * 0.5), 0.00001))) + duck_db
+    b.volume_db = maxf(SILENT, linear_to_db(maxf(cos(k * PI * 0.5), 0.00001))) + duck_db
     if _fade <= 0.0 and b.playing:
+        if _paths[1 - _cur] != "":
+            _resume[_paths[1 - _cur]] = b.get_playback_position()
         b.stop()
     _beds(real)
     # the wind drops under a raid's music
     if _amb:
         _amb.volume_db = -8.0 if mood == "raid" else 0.0
 
+func _music_list(w: String) -> Array:
+    var out: Array = []
+    for f in MUSIC.get(w, []):
+        if ResourceLoader.exists(DIR + String(f)):
+            out.append(f)
+    return out if not out.is_empty() else MUSIC_OLD.get(w, [])
+
 func _switch(w: String) -> void:
-    var list: Array = MUSIC.get(w, [])
+    var list: Array = _music_list(w)
     if list.is_empty():
         return
+    var from := mood
     if w == "raid" and mood != "raid":
         _play2d("horn", 0.0)
+    if from == "raid" and w != "raid":
+        play_sting("victory")            # the only way a raid ends is driven off
     mood = w
-    var s := _load(String(list[randi() % list.size()]), true)
+    _want = w
+    _want_t = 0.0
+    var path := String(list[randi() % list.size()])
+    var s := _load(path, true)
     if s == null:
         return
+    # the player going out remembers where it was, so its bed resumes rather than restarts
+    var out_p: AudioStreamPlayer = _music[_cur]
+    if out_p.playing and _paths[_cur] != "":
+        _resume[_paths[_cur]] = out_p.get_playback_position()
     _cur = 1 - _cur
     var m: AudioStreamPlayer = _music[_cur]
+    if m.playing and _paths[_cur] != "":
+        _resume[_paths[_cur]] = m.get_playback_position()
     m.stream = s
+    _paths[_cur] = path
     m.volume_db = SILENT
-    m.play()
-    _fade = FADE
+    # a raid cue always starts at its top; a bed picks up where it was left
+    var at := 0.0 if w == "raid" else float(_resume.get(path, 0.0))
+    if s.get_length() > 0.0:
+        at = fmod(at, s.get_length())
+    m.play(at)
+    _fade_len = float(FADES.get("%s>%s" % [from, w], FADE)) if from != "" else 1.0
+    _fade = _fade_len
+    transitions.append({"from": from, "to": w, "fade": _fade_len, "at": Time.get_ticks_msec(), "resumed": at})
+    if transitions.size() > 64:
+        transitions.pop_front()
+
+## ------------------------------------------------------------ D22b stings
+func play_sting(which: String) -> void:
+    var now := Time.get_ticks_msec()
+    if now - _last_sting < int(STING_GAP * 1000.0):
+        stings_skipped += 1
+        return
+    var s := _load(String(STINGS.get(which, "")), false)
+    if s == null or _sting_p == null:
+        return
+    _last_sting = now
+    stings[which] = int(stings.get(which, 0)) + 1
+    _sting_p.stream = s
+    _sting_p.volume_db = STING_DB
+    _sting_p.play()
+    _sting_duck = maxf(1.0, s.get_length())
+
+## a delve that comes home with anyone is a victory; one with no survivors, a defeat
+func _watch_delve() -> void:
+    var dv = town.get("delve") if town else null
+    if dv == null or not is_instance_valid(dv) or dv == _delve_seen:
+        return
+    _delve_seen = dv
+    if dv.has_signal("ended"):
+        dv.connect("ended", _on_delve_ended)
+
+func _on_delve_ended(survivors: Array) -> void:
+    play_sting("defeat" if survivors.is_empty() else "victory")
 
 ## the town bell: n strokes, 1.4 s apart (dawn and dusk)
 func _toll(n: int) -> void:

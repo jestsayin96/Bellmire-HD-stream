@@ -835,3 +835,10 @@ Local check: `?mock=roll` (crit, fumble, two ordinary, one hostile-name roller `
 snapshot: 5 rows, 1 crit + 1 fumble matching the chips, reload with no mock keeps all 5, a multi-day store divides Today/Yesterday, a tampered
 store (hostile strings, junk rows, bad timestamp) renders as text, 0 dialogs, 0 <img>/<script> in the feed, no horizontal scroll at 390,
 ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd and ?open=1 all render with 0 page errors.
+
+## H28 - a hero you can point at (deep link)
+- `#hero-<n>` opens that hero's sheet. n is an integer the PAGE computes: 32-bit FNV-1a of the lower-cased name (`heroAddr`). No name is ever in the URL.
+- The "Copy a link to this hero" control on a living hero's sheet writes `<page address>#hero-<n>` to the clipboard (falls back to the address bar when the clipboard is refused). Fallen heroes have no link control (the finder and Fallen tab cover them).
+- An address that matches nobody on the roll (or is malformed, e.g. `#hero-abc`, too many digits) lands on Heroes with the plain note "That hero is not on tonight's roll." No error, no blank page.
+- Applied after each render only when the address changes, so the 60 s refresh never re-lands the viewer. Two heroes whose names collide on the 32-bit hash would open the first one on the roll (vanishingly unlikely).
+- Known limit: the link is per NAME; a renamed hero's old link goes to the note. The snapshot carries no stable hero id (a field the hub would prefer).

@@ -266,6 +266,8 @@
       <!-- H11: the viewer's pinned hero (set from any hero's sheet, or on sign-in).
            Remembered in this browser only; see docs/HUB_SECURITY.md. -->
       <div class="myhero hide" id="myHero"></div>
+      <!-- H28: plain page-owned message for a hero link that matches nobody on the roll -->
+      <p class="note herolink-note hide" id="heroLinkNote" role="status" aria-live="polite"></p>
       <input class="find" id="find" type="search" placeholder="Find your hero by name&hellip;" autocomplete="off" aria-label="Find a hero by name">
       <div class="heroes" id="heroList"></div>
       <p class="note hide" id="heroMore"></p>

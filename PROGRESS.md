@@ -5362,3 +5362,117 @@ right before the attack fires makes the beat readable.
 - GATE on jestai: _bestiary_tells OK 10/10, _delve_test 0 SCRIPT ERROR (ran before this cycle's
   ...regression round is in flight as this is committed - trap and L29c tests are green already).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor to review.
+## C-cycle 29 - every bandit and monster camp gets repeat-safe variants (standing backlog item 4)
+
+- RECOVERED, NOT NEW. This work was authored in cycle 29 and left uncommitted in the content
+  worktree when the Blender bridge dropped mid-cycle; cycles 30, 31, 32 and 33 could not reach the
+  disk at all and stood down with zero output. Found sitting dirty in W3 at the start of this run,
+  re-validated in full from scratch rather than trusted on sight, and committed as 617ab19.
+- data/lore_lines.json: all 20 bandit_camps and all 19 monster_camps gain appears_alt, while_alt and
+  cleared_alt at 4 lines each - 39 camps x 12 = 468 new lines. Each camp previously had exactly ONE
+  appears, while and cleared, so a second spawn of the same camp on one stream read word for word.
+  The three new keys copy the shape wandering_boss already uses, so the picker is the same picker.
+- COST DISCIPLINE: every while_alt restates the SAME implementable cost as that camp's canonical
+  `while`, reworded and never widened. No alt adds an effect the canonical line does not already
+  state, so the desktop worker implements the cost once per camp and may show any line.
+- VALIDATION OK. All four files json.load clean. Recursive diff against HEAD: 0 problems - every
+  pre-existing key present, in order, with an identical value; every list an exact prefix of its new
+  self; name, leader, of, appears, while and cleared unchanged on every camp. Only growth is the
+  three keys per camp plus the _note_variants_c29 note. Zero NEW duplicate lines (the 5 pre-existing
+  duplicate groups in descend and barks are untouched). items.json, bosses.json and potions.json
+  byte-identical to HEAD. No new camp, no new named leader, no floor count.
+
+## C-cycle 34 - the cosmetic shelf finally says what you are buying (standing backlog item 1; WORK_PLAN C1)
+
+- THE GAP: all 180 accessories carried a `flavour` line. NONE of the 321 cosmetics did - they were
+  {name, kind, cost} and nothing else. Cosmetics are the channel-point and bits spend, so the one
+  item class a viewer pays real money for was the one class with no description to earn the price.
+- data/items.json: `flavour` added to all 321 cosmetics - 86 hats, 72 banners, 30 pets, 133 titles.
+  One line each, in the accessories' voice: concrete, dry, and readable at a glance on stream.
+  Hats and banners say who wears or flies it and what it cost them; pets say what the animal is
+  actually like to own; titles say what you did to be called that.
+- Named off canon already in the repo - the Ford, the scar, the fen, the guild, the bucket line,
+  the thaw, the ninth bell, E3PO's watch, Red Harl, Cob Ashfoot, the Weasel. No new named character,
+  no new place, no floor count.
+- VALIDATION OK. All four files json.load clean. Recursive diff against HEAD: 0 problems - every
+  pre-existing key present, in order, with an identical value; name, kind, cost, colour, model and
+  scale untouched on every entry; `flavour` is the ONLY key added anywhere in the file, on exactly
+  321 entries. No duplicate flavour line among the 321 and no collision with the 180 accessory
+  lines. Longest line 95 chars. ASCII only. Formatting preserved: the file keeps its one-entry-per-
+  line layout, so the diff is 321 changed lines and nothing else. lore_lines.json, bosses.json and
+  potions.json byte-identical to HEAD.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. INERT UNTIL READ. Nothing breaks: every loader reading cosmetics today ignores the new key.
+     The gain only lands once a shop line, !wear confirmation or channel-point redemption prints
+     cosmetic.flavour the way the accessory path already prints accessory.flavour.
+     OWNER: whoever owns the cosmetic purchase and equip path.
+  2. SAME CAVEAT AS C-CYCLE 28 ITEM 3: D28's census says cosmetics are never actually WORN. A
+     description is the reward for the spend, and without the wearing it still has nothing to
+     attach to. These two want tracking together.
+  3. e3po.viewer_cosmetic (added C-cycle 28) now has something to name - the Commander's line about
+     a viewer's purchase reads better beside the item's own flavour than alone.
+  4. NO NEW KEY NAME TO TEACH A LOADER beyond `flavour`, which accessories already use with the same
+     meaning and the same type. No renamed key, no changed value, no new data file.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 35 - rare uniques and brews (standing backlog item 6; WORK_PLAN C3)
+
+- WHY THIS ONE: bosses.json and potions.json were the two of my four files longest untouched -
+  last widened C-cycle 25, nine cycles ago, while items.json and lore_lines.json took C-26/27/28/
+  29/34. They are also still the thinnest files I own (21 KB each against items' 125 KB).
+- data/bosses.json: lesser_uniques 66 -> 82 and greater_uniques 60 -> 76. FOUR new variants per lord
+  across all eight canon lords, 32 in all. NO NEW LORD - every one of the 32 names a canon lord and
+  twists its shape, which is the rule the file states.
+    Hollow King: Smothered, Kindling, Wick-Thin, Stoked.
+    Grubmother: Lidded, Thinned, Swarming, Rain-Fat.
+    Rattling Host: Drilled, Unstrung, Halved, Ranked Deep.
+    Nightwing: Stooping, Snared, Moulting, Windless.
+    Gravewyrm: Stone-Bound, Drowning, Hooked, Blind-Headed.
+    Ossuary Lord: Shelved, Sorted Wrong, Unhoused, In Debt.
+    Pale Duchess: Dismissed, Seated, Courting, Pledged.
+    Mourncoil: Wintering, Slackened, Knotted, Sounding.
+  SHAPE-FIRST, as the `rule` key demands: every stat line is skewed to the shape, never merely
+  raised. The ones that commit to a wall are slow and fat (Ossuary Lord, Shelved 390 hp at 1.5;
+  Grubmother, Lidded 285 at 1.0); the ones that give up the wall pay for it (Grubmother, Thinned
+  150 at 3.2; Ossuary Lord, Unhoused 235 at 3.8); the fast ones are soft and hit once hard
+  (Nightwing, Stooping 105 hp at 7.2 with 25 attack; Pale Duchess, Dismissed 185 at 4.6 with 32).
+  Each `shape` says what the party should DO about it, not just what it is - go round the front,
+  stand still and it loses you, the pauses are the safe thing. Every new hp/speed/attack sits
+  inside the range the array already used, so nothing changes what a lord floor can throw.
+- data/potions.json: potions 92 -> 112. Twenty new brews, tiers 1-4 (4/8/6/2), named off town
+  trades the brew list had not reached yet - baker, tinker, almshouse, alewife, cooper, ropewalk,
+  miner, shingler, potter, tanner, carter, dyer, plasterer, glazier, mason, fletcher, weaver, the
+  drill yard, limeburner, bellfounder. Each flavour line is the trade explaining itself in one
+  breath, which is what makes a brew worth 250 gold on screen.
+- NO NEW STATE. `states` is byte-identical at 15 and every new gives/cures names one already
+  there, so the twenty brews need ZERO new status handling - the same discipline as C-cycle 25.
+  New costs sit inside the cost band the file already used for that tier (tier 1 12-75, tier 2
+  50-150, tier 3 120-260, tier 4 280-500), so the apothecary's shelf stays coherent.
+- VALIDATION OK. 2256 asserts, 0 failures. All four files json.load clean. items.json and
+  lore_lines.json byte-identical to HEAD. bosses.json: top-level key order unchanged; every
+  top-level key but the two unique arrays deep-equal to HEAD; both arrays an exact PREFIX of their
+  new selves; `lesser`/`greater` still 4 lords each; `rule`, `draw`, `boss_floors` and `uniques`
+  untouched. potions.json: top-level key order unchanged, `_source` and `states` deep-equal to
+  HEAD, the 92 old potions an exact prefix in key order with identical values. Every new entry
+  matches one of the keysets already present in that block, with the same value types (hp/attack
+  int, speed float, secs int, heal a 3-int list). Zero duplicate unique name, zero duplicate brew
+  name, zero new alias or key collision.
+  ONE PRE-EXISTING FINDING, NOT MINE AND NOT FIXED (additive only): `quarry` is an alias on BOTH
+  quarrymend and quarryblood at HEAD. Whichever the loader resolves first wins and the other is
+  unreachable by that alias. Flagging it for the supervisor rather than editing a shipped entry.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new state, no new data file. Whatever
+     reads lesser_uniques/greater_uniques and potions today reads these 52 entries unchanged.
+  2. L45 ALREADY SCALES THESE. Uniques were already depth-scaled before L45 (which fixed lords);
+     the 32 new ones inherit that path with no change. Worth one check that a deep Ossuary Lord,
+     Shelved at 390 hp is not past what a party can chew - that is the LORD_ATK_PER_STEP class of
+     dial Mr. E already flagged, on the hp side. OWNER: laptop code (bestiary.gd).
+  3. THE DRAW BAG. `draw` says every boss appears before any repeats. 158 uniques against 8 lords
+     means the unique roll, not the bag, is what decides how often one is seen - if uniques are
+     rare per the D28 census ("3 lords in a 7-min feed"), 52 more variants change nothing a viewer
+     sees until that roll is loosened. OWNER: whoever owns the unique roll.
+  4. !brew NEEDS NO CHANGE, but the tier gate does the usual work: 2 of the 20 are tier 4, so a
+     town below that tier shows 18. Expected, same as every brew cycle.
+  5. 112 brews is past what a !help list can print. A shelf that pages, or filters to the ones the
+     party can actually use, is now the readability question - not more brews. OWNER: HUD.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

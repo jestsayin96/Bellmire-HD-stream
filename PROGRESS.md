@@ -5684,3 +5684,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - hud_dock, feed_hud, leaderboard_panel, spotlight: zero literal Color(n,...) or numeric corner radius left (grep). Visual output unchanged by design.
 - Looked at renders/cycles/20261115_l65/3_grid_scroll_clean_1080.png: scroll, pane chips, clock intact.
 - NOT done: L65.4 measured per-element contrast numbers, before/after side-by-side with leaderboard live, frame() adoption by the panels' own stylebox code. L65 stays open. Queue order is now L65 -> L64 -> L66 -> L67 (the dispatch prompt's L61/L31 list is stale: L61 ticked U25).
+
+## C-cycle 45: E3PO deepened - 178 new Commander lines (standing backlog item 3) (2026-11-15)
+
+- data/lore_lines.json only. e3po lists widened: 21 lists gained 6-8 lines each (hurt, rank_up, drill, dispute, trader_arrives, delve_dispatch, lord_cleared, viewer_cosmetic, night_watch, recruit, viewer_down, viewer_returns, lord_sighted, intro, withdraw, return, says, town_talk, raid, disaster, festival) and viewer_roll crit/high/low/fumble gained 4 each (these feed the T5 d20 outcomes). Note key _note_c45 added.
+- Canon held: he cannot die, withdraws to barracks to heal and returns; pompous, beloved, reliable; no floor count; nothing reworded or removed.
+- VALIDATION OK: all four owned files json.load (only lore_lines.json touched); every pre-existing key and list item compares equal (new lists are exact ordered prefixes); all new entries are plain strings like their lists; file round-trips at indent 2.
+- CODE WIRING: none required. New lines ride existing e3po lists; confirm nothing assumes a fixed list length. _note_c45 is a string key beginning with underscore, like the other notes.

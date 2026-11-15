@@ -942,6 +942,34 @@ html.overlay #bands { display: none !important; }
 }
 
 
+/* ================================================================== BESTIARY (H19) */
+.sigil { display: block; flex: none; filter: drop-shadow(0 1px 1px rgba(42,28,16,.4)); }
+.sigil-md { width: 46px; height: 46px; }
+.sigil-sm { width: 22px; height: 22px; }
+#bestiaryBody { max-height: max(320px, calc(100vh - 300px)); max-height: max(320px, calc(100dvh - 300px)); overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; }
+.beast-count { margin: 4px 0 8px; color: var(--ink-soft); font-size: .85rem; }
+.beast-grid  { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.beast {
+  background: rgba(246, 236, 209, .55); border: 1px solid var(--edge-2);
+  border-radius: 7px; padding: 9px 11px; display: grid; gap: 5px; align-content: start;
+  overflow-wrap: anywhere;
+}
+.beast-head { display: flex; align-items: center; gap: 10px; }
+.beast-hb   { display: grid; gap: 1px; min-width: 0; }
+.beast-name { margin: 0; font-family: "Gloock", Georgia, serif; font-weight: 400; color: var(--ink-red); font-size: 1.02rem; line-height: 1.15; }
+.beast-kind { color: var(--ink-soft); font-size: .76rem; letter-spacing: .04em; text-transform: uppercase; }
+.beast-flag { justify-self: start; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); border: 1px solid var(--edge-2); border-radius: 99px; padding: 1px 8px; }
+.beast-flag.met { color: #0a1413; background: var(--teal); border-color: var(--teal); }
+.beast-veil  { margin: 0; color: var(--ink-soft); font-style: italic; font-size: .9rem; line-height: 1.4; }
+.beast-intro { margin: 0; font-style: italic; color: var(--ink); font-size: .93rem; line-height: 1.4; }
+.beast-camp  { margin: 0; color: var(--ink); font-size: .86rem; line-height: 1.4; }
+.beast-facts { margin: 2px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 1px 10px; font-size: .84rem; }
+.beast-facts dt { color: var(--ink-soft); }
+.beast-facts dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.beast.rumour .sigil { filter: grayscale(.7) brightness(.8) drop-shadow(0 1px 1px rgba(42,28,16,.4)); opacity: .8; }
+@media (max-width: 560px) { .beast-grid { grid-template-columns: 1fr; } }
+
+
 /* ======================================================= H13 tabs
    A no-scroll layout: the existing <nav> anchors become a tablist and the
    <main> sections become tabpanels (JS attaches the roles). Only the active

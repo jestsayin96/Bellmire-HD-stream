@@ -603,7 +603,10 @@ func _e3po_pick(cat: String, sub := "") -> String:
     if (arr as Array).size() > 1 and idx == li:
         idx = (idx + 1) % (arr as Array).size()
     _e3po_last[key] = idx
-    return String((arr as Array)[idx])
+    var entry: Variant = (arr as Array)[idx]
+    if typeof(entry) == TYPE_DICTIONARY:
+        return String((entry as Dictionary).get("line", ""))
+    return String(entry)
 
 ## say an EVENT line: to the Chronicle (town.feed) and shouted above his head
 func _e3po_say(cat: String, sub := "") -> void:

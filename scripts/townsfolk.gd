@@ -84,6 +84,11 @@ var _wobble := 0.0
 ## beat (a 15 fps pose a hundred metres off reads the same on stream).
 var lod := 0
 static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_test.gd)
+## D21b: a quick white flash + a damage number so a defender hit reads at
+## stream distance, matching the raider side (Monster._flash/_number).
+var _flash_t := 0.0
+var _flash_mats: Array = []
+var _flash_red := false
 var _lod_n := 0
 var _lod_acc := 0.0
 
@@ -99,6 +104,8 @@ static var face_fix := true
 
 func _process(delta: float) -> void:
     _gait_step(delta)
+    if _flash_t > 0.0:
+        _tick_flash(delta)
 
 func _gait_step(delta: float) -> void:
     if _anim == null or delta <= 0.0 or not Rig.gait:
@@ -1438,3 +1445,129 @@ func _idle_acts(delta: float) -> void:
     var g: String = list[randi() % list.size()]
     Rig.play(_anim, g)
     acts[kind] = int(acts.get(kind, 0)) + 1
+
+## D21b: parity with Monster._flash/_number so a defender hit shows at
+## stream distance (a townsfolk/hero taking damage from a raider).
+func _flash() -> void:
+    if _mdl == null or not is_instance_valid(_mdl):
+        return
+    # D21b: in --headless the dummy renderer logs "Parameter 'material' is null"
+    # when we duplicate a StandardMaterial3D with external texture refs; skip
+    # the material surgery there (the flash is invisible anyway).
+    if DisplayServer.get_name() == "headless":
+        _flash_t = 0.12
+        return
+    if _flash_mats.is_empty():
+        var st: Array = [_mdl]
+        while not st.is_empty():
+            var c: Node = st.pop_back()
+            if c is MeshInstance3D and (c as MeshInstance3D).visible and not String(c.name).begins_with("eq_"):
+                var mi: MeshInstance3D = c
+                if mi.mesh == null:
+                    continue
+                for i in range(mi.mesh.get_surface_count()):
+                    var src: Material = mi.get_active_material(i)
+                    if src is StandardMaterial3D:
+                        var d: StandardMaterial3D = src.duplicate()
+                        mi.set_surface_override_material(i, d)
+                        _flash_mats.append(d)
+            for g in c.get_children():
+                if not String(g.name).begins_with("eq_"):
+                    st.append(g)
+    _flash_red = false
+    for d in _flash_mats:
+        var mm: StandardMaterial3D = d
+        mm.emission_enabled = true
+        mm.emission = Color(1, 1, 1)
+        mm.emission_energy_multiplier = 1.6
+    _flash_t = 0.12
+
+func _tick_flash(delta: float) -> void:
+    if _flash_t <= 0.0:
+        return
+    _flash_t -= delta
+    if _flash_t <= 0.0:
+        for d in _flash_mats:
+            var mm: StandardMaterial3D = d
+            mm.emission_enabled = false
+            mm.emission_energy_multiplier = 0.0
+
+func _number(amount: float, crit: bool) -> void:
+    var lb := Label3D.new()
+    lb.text = ("%d!" if crit else "%d") % int(round(amount))
+    lb.font_size = 96 if crit else 64
+    lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 20
+    lb.outline_modulate = Color(0, 0, 0, 0.9)
+    lb.modulate = Color(1.0, 0.85, 0.2) if crit else Color(1.0, 0.95, 0.9)
+    lb.top_level = true
+    add_child(lb)
+    var p := global_position + Vector3(randf_range(-0.4, 0.4), 2.0, randf_range(-0.4, 0.4))
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.4, 0), 0.9).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 0.9).set_delay(0.3)
+    tw.chain().tween_callback(lb.queue_free)
+
+## D21b.2: a defender's death reads at stream distance - a longer red flash and a
+## FELLED! banner that rises and fades. Called from raids._defender_falls at the
+## one real death point (after CON save / grace / KO have had their say), so a
+## knock-out does not spawn one. Headless-safe: skips the material surgery in
+## the dummy renderer, same as _flash.
+func _death_fx() -> void:
+    if _mdl == null or not is_instance_valid(_mdl):
+        return
+    if DisplayServer.get_name() == "headless":
+        _flash_red = true
+        _flash_t = 0.5
+        return
+    if _flash_mats.is_empty():
+        var st: Array = [_mdl]
+        while not st.is_empty():
+            var c: Node = st.pop_back()
+            if c is MeshInstance3D and (c as MeshInstance3D).visible and not String(c.name).begins_with("eq_"):
+                var mi: MeshInstance3D = c
+                if mi.mesh == null:
+                    continue
+                for i in range(mi.mesh.get_surface_count()):
+                    var src: Material = mi.get_active_material(i)
+                    if src is StandardMaterial3D:
+                        var d: StandardMaterial3D = src.duplicate()
+                        mi.set_surface_override_material(i, d)
+                        _flash_mats.append(d)
+            for g in c.get_children():
+                if not String(g.name).begins_with("eq_"):
+                    st.append(g)
+    _flash_red = true
+    for d in _flash_mats:
+        var mm: StandardMaterial3D = d
+        mm.emission_enabled = true
+        mm.emission = Color(1.0, 0.12, 0.08)
+        mm.emission_energy_multiplier = 2.0
+    _flash_t = 0.5
+    _death_label()
+
+## The FELLED! banner. Shape mirrors _number() so the stream reads them as one
+## family; bigger, red-on-black outline so it carries at pane distance.
+func _death_label() -> void:
+    var lb := Label3D.new()
+    lb.text = "FELLED!"
+    lb.font_size = 112
+    lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 24
+    lb.outline_modulate = Color(0, 0, 0, 0.95)
+    lb.modulate = Color(1.0, 0.25, 0.18)
+    lb.top_level = true
+    add_child(lb)
+    var p := global_position + Vector3(randf_range(-0.3, 0.3), 2.2, randf_range(-0.3, 0.3))
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.8, 0), 1.6).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 1.6).set_delay(0.5)
+    tw.chain().tween_callback(lb.queue_free)

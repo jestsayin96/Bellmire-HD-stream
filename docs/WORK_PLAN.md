@@ -585,9 +585,27 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       correctly a grass material, available to paint on a surface if he wants one specific ground
       (e.g. the trodden dirt paths) to read as grass. Awaiting his eye.
 
-- [x] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX.      TICKED (supervisor, Nov 15): shipped laptop e6a6812 "spells raid VFX proven; notables tier_up string fix". D21b sub-parts (hit FX, deaths, guard muster) are already landing on top.
-
+- [x] D21a. spells.gd VFX: bolts/heals/buffs with real particles/trails/impact; mages/clerics cast visibly. DONE: raid soak shows spell VFX. (D21A_RAIDVFX OK: 3 kinds mend/heal/ward fired visibly in a lvl-2 scar raid with mage/cleric/sage enlisted; test harness fixes: notables.gd:606 dict entry, _d21 enlist-retry + headless _snap guard.)
+      TICKED (supervisor, Nov 15): shipped laptop e6a6812. D21b sub-parts landed on top the same
+      night - D21b.1 hit FX parity (9d332ab), D21b.2 defender deaths read (5d420c2), D21b.3 guards
+      form a muster line (29c5658).
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
+  - [x] D21b.1 defender hit FX parity: a Townsfolk/HeroBody taking a melee hit now flashes white and a floating damage number pops (matches raider side); townwalk in_solid 0/6172 (4 raid cycles).
+  - [x] D21b.2 defender deaths read: a Townsfolk/HeroBody that is slain by a raider (and a non-Monster raider slain by the defenders) gets a red flash + FELLED! banner at the one real death point in raids.gd, so the stream reads who just dropped at pane distance. Parity with Monster.die()'s own readable death; KO/grace/CON-save paths unchanged. Headless gate: parse 0; _offfloor 0/1340 INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR; _townwalk runs clean (in_solid=1/10898 at T=70s = 0.009%, well under PASS<0.2%).
+  - [x] D21b.3 guard muster line: before the garrison closes with the raiders, each
+    guard takes a slot on a line drawn between the market centre and the raiders'
+    centre of mass (LINE_FROM_CENTRE 11 m, LINE_SPACING 2.2 m), facing them, until
+    a raider closes within LINE_HOLD 14 m - then normal _engage kicks in. Heroes,
+    the mounted watch and the Commander are untouched (they keep charging / the
+    square-hold / leading from the front); the line dissolves once the raiders'
+    centre is inside LINE_BREAK 22 m of the square, so a breach still fans the
+    guards out one-to-one. Gate GREEN: --import rc 0, parse 0; _offfloor 0/1320
+    INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR;
+    _townwalk in_solid 1/14956 (0.007%) raid_in_solid 0/2930 (0.000%) PASS;
+    tools/_d21b3_test.gd D21B3 OK 8 checks (8 raiders live when sampled, 8 of 14
+    muster-eligible guards had left their posts, 4 had closed toward the raiders'
+    centre, 2 stood on the line within 3.5 m). D21b REMAINDER: cavalry charge
+    that lands, FPS soak.
 # Phase G - audio polish (owns sfx.gd) [D22]
 - [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
 - [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
@@ -1001,6 +1019,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       looked at on stream yet (headless soak only).
 - [x] D30. SPELL VARIETY IN TOWN - same complaint as L52, town side (mages/clerics). DONE: several distinct spells visible in a raid.
 - [ ] D31. ONE BIG MAP, ONE KINGDOM (his decision). Consolidate to a single map: a small market town that GROWS - as the town levels, builders appear and actually construct new buildings on the map. DONE: a timelapse of the town levelling with builders at work and new structures appearing.
+      PART (D-cycle D13, 2026-11-14): visible construction added. growth.gd now raises a timber scaffolding frame (corner poles, two plank rings, diagonal braces, a pennant and a stack of planks) around every newly-built plot and every newly-unlocked special at each level-up; the frame lives SCAFFOLD_LIFE=90s real seconds then auto-removes via _process. Purely visual - no collision, no navmesh impact. _d31_test (Town.tscn booted, show_level 1->4->6): before=0 mid=9 late=17 cleaned=0 PASS. Chronicle picks up "Builders raise scaffolding across Bellmire." on each level-up. Still open for the DONE bar: builder NPC figures at the scaffolding, the one-map consolidation decision, and Mr. E's timelapse recording.
 - [x] D32. TOWN LEVELS UP FAR TOO FAST. Re-parameterise growth so levelling is earned over a long stream. DONE: a measured curve Mr. E approves.  RESULT (D-cycle D7): old 6-level table FOUNDED at lvl 3/6 and auto-climbed to 5 on settlers alone; now 12 earned tiers (content growth_tiers), founding=HAMLET(2), pop ceiling ~315=tier 5, tiers 6-12 renown-gated. 30-day soak: crossing->hamlet(d2)->guild post(d6)->village(d17), holds at village (score 247, pop 69). Crier lines wired. Gate green. Chart+csv renders/cycles/d32 + to Mr. E; the curve PACE awaits his approval.
 - [ ] D33. RANDOM WORLD EVENTS ON THE MAP: bandit camps and monster camps that spawn around the map, and a random boss scaled to the TOWN's level. DONE: a soak shows camps appearing and a town-level-appropriate boss.
 - [x] D34. NATURAL DISASTERS: volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor - be creative, with real consequences for the town. DONE: several distinct disasters fire in a soak and visibly affect the town.

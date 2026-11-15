@@ -242,11 +242,16 @@ the second pass:
 
 ---
 
-## H6: device-code sign-in (scaffolding, gated on Mr. E)
+## H6: device-code sign-in (LIVE - see the Nov 12 doc-accuracy fix further down)
 - Why: so a viewer spotlights their own hero instead of scrolling - "not peeping toms on
   others' stats." Device-code grant suits a page with no server (no redirect URI to host).
-- Gated: TWITCH_CLIENT_ID ships empty, so the button only explains it needs Mr. E; no call is
-  made. A ?twitch_client= test hook exercises the flow end-to-end without baking an id in.
+- LIVE (corrected Nov 15, 2026): TWITCH_CLIENT_ID is Mr. E's registered public client id, baked
+  as a non-overridable const; the ?twitch_client= test hook was REMOVED as a phishing vector.
+  Clicking "Sign in with Twitch" starts the real device-code grant. Nothing contacts Twitch
+  before the click. Verified end-to-end Nov 15: Mr. E signed in on the live page, his own hero
+  card rendered and the pin-your-hero flow worked. This bullet previously read "ships empty, the
+  button only explains it needs Mr. E" - that was already false and is what kept making hub runs
+  report the client id as an open item for Mr. E. It is NOT open.
 - Read-only and minimal: no scopes (we need only the user's own login), token in memory only
   (never storage, never our backend), no viewer write. The two connect-src hosts are documented
   and flagged in docs/HUB_SECURITY.md. Phase 3 (any write path) stays off until the RLS is designed.

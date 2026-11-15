@@ -2,6 +2,14 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## C-cycle - C-44 shop stock and caravan cargo per growth tier, 2026-11-15 (content)
+- Item: standing backlog 2 (SHOP STOCK AND TRADER CARGO PER GROWTH TIER). C1 in WORK_PLAN was already delivered by C-34/C-35/C-41; supervisor ticks.
+- data/items.json only, additive: shop_stock 123 -> 171 (+48, four per tier, tiers 1-12); trader_cargo 68 -> 101 (+33, three per tier, tiers 2-12; tier 1 stays caravan-free).
+- Same shape as the existing blocks: {name, cost, flavour, tier}. Each new key is also appended to its tier's shop_adds / cargo_adds in stock_by_tier so the two gates agree (checked by script).
+- Crossing goods stay under 10 gold (kindling, rush light, alder bowl, oat cake); the City tier adds velvet, crystal, perfume, ivory and southern wine. A crossing still cannot sell glass.
+- VALIDATION OK: json.load clean; every pre-existing key equal to HEAD; stock_by_tier lists are old-prefix + appended keys; no duplicate keys or display names; diff removes only trailing-comma lines.
+- CODE WIRING: none new. The loader that filters good.tier <= town_tier picks these up if it enumerates the dicts; no new key, slot or file.
+
 ## U-cycle - U26 L31 part 1: the "NOW FIGHTING" banner, 2026-11-15 (HUD)
 - Item: L31 (first unchecked item that is mine; L61 was already ticked by U25).
 - Built HudDock.FightBanner (hud_dock.gd, skin + watcher only): when a floor's lord rises

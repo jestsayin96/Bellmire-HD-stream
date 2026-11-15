@@ -5619,3 +5619,16 @@ right before the attack fires makes the beat readable.
   3. IF a caller currently picks from <disaster>.during by fixed index rather than random, THIS cycle changes nothing on stream for that call - that path is the repetition. OWNER: desktop build (disaster lines fire from the town side).
   4. BEGIN / PASS / COST UNCHANGED. The canonical single-line begin and pass, and the cost statement the desktop reads to decide mechanics, were NOT touched on any disaster. No wiring break possible there.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+
+## U25 - L61 FINISHED: Chronicle text 21 px + Gloock wordmark, 2026-11-15 02:57 (game-machine local)
+Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a stale half-staged merge of old main
+(not my files) - stashed (`git stash list`, "hud-worker U25 leftover") and fast-forwarded hud-ui to origin/main 995eaef.
+- L61: feed_hud.CHRON_PX 18 -> 21 (Mr. E approved). Capacity at 21 px is 7 lines in the 714x295 box (was 8-9).
+  Wordmark now Gloock (assets/fonts/gloock-latin-400.woff2 + Gloock-OFL.txt, copied from the hub; SIL OFL 1.1,
+  loaded from bytes at runtime). First pass burned-brown on the dark spindle vanished, so it is gilt cream with a
+  dark drop shadow, 17 px. Sheet inset 9 -> 15 px so 21 px ink clears the illuminated margin line.
+- PARSE: --headless --quit-after 300 -> rc 0, 0 SCRIPT ERROR / 0 Parse Error.
+- RENDER (WINDOWED 1920x1080, tools/_u25_shot.gd): renders/cycles/20261115_u25. LOOKED at 4_scroll_clean_crop
+  (both passes): wordmark legible, 7 lines readable, no overlap with spindles or margin.
+- QUEUE NEXT: L31, L36, L40 untouched this run.

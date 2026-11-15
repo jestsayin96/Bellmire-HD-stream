@@ -320,7 +320,7 @@ class ChronicleScroll extends Control:
 	func sheet_rect() -> Rect2:
 		var g := _geo()
 		var ov := _ov(g)
-		var inx := _p(9.0)
+		var inx := _p(15.0)
 		var iny := _p(10.0)
 		return Rect2(ov.position.x + inx, ov.position.y + iny,
 			maxf(0.0, ov.size.x - 2.0 * inx), maxf(0.0, ov.size.y - 2.0 * iny))
@@ -434,18 +434,34 @@ class ChronicleScroll extends Control:
 		_finial(Vector2(x0 + cap, cy), cap)
 		_finial(Vector2(x1 - cap, cy), cap)
 
+	## L61: the wordmark is set in Gloock (SIL OFL, same face as the hub; assets/fonts has the
+	## licence). Loaded once from bytes so no editor import is needed; falls back to the engine
+	## font if the file is missing.
+	static var _gloock: Font = null
+	static func _wordmark_font() -> Font:
+		if _gloock == null:
+			var path := "res://assets/fonts/gloock-latin-400.woff2"
+			if FileAccess.file_exists(path):
+				var ff := FontFile.new()
+				ff.data = FileAccess.get_file_as_bytes(path)
+				_gloock = ff
+			else:
+				_gloock = ThemeDB.fallback_font
+		return _gloock
+
 	func _header(g: Dictionary) -> void:
 		var s := size
 		var cap: float = g.cap
 		var top_cy: float = g.top_cy
-		var font := ThemeDB.fallback_font
-		var fs := maxi(10, UiTheme.px(15))
+		var font: Font = _wordmark_font()
+		var fs := maxi(10, UiTheme.px(17))
 		var word := "CHRONICLE"
 		var wsz := font.get_string_size(word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 		var wx := (s.x - wsz.x) * 0.5
 		var wy := top_cy + wsz.y * 0.32
-		draw_string(font, Vector2(wx + 1.0, wy + 1.0), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.70, 0.55, 0.32, 0.8))
-		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, BURN)
+		# L61: gilt on the dark wood (the burn-brown wordmark vanished into the spindle at 1080p)
+		draw_string(font, Vector2(wx + 1.0, wy + 1.5), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.08, 0.04, 0.02, 0.95))
+		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.97, 0.88, 0.62))
 		# a teal wax-seal medallion with a gold jester diamond, on the top rod at the left
 		var sx: float = g.sx0 + cap * 0.6
 		var sy := top_cy

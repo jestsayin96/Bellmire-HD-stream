@@ -1,5 +1,41 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### WEAR IS A VARIABLE, NOT A STYLE (Mr. E, Nov 15 17:50) - READ THIS BEFORE ANY ART DECISION
+"just a reminder the town levels up so not everything is going to look used and abused just
+remember that".
+
+HE IS RIGHT AND THIS CORRECTS THE LINE ABOVE. "Worn and used" as a blanket look is WRONG, and
+applying it everywhere would quietly break the single most important thing the game has to show:
+a town getting better because viewers paid to make it better.
+
+CONDITION TRACKS LEVEL AND TIER. It is not a mood, it is a READOUT.
+  - A LEVEL 1 BELLMIRE is patched and make-do: mended thatch, grey timber, a banner that has seen
+    weather, tools worn to the shape of a hand.
+  - A LEVEL 12 BELLMIRE IS PROSPEROUS. Fresh-cut timber, cut stone, clean paint, bright banners,
+    glass where there were shutters. It should look like somewhere that is DOING WELL, because it
+    is, and because the viewers did that.
+  - THE SAME FOR GEAR. Rags and bare hands are worn. Plain steel is serviceable. Dragontooth,
+    warded plate and scarforged should read RICH and NEW - a viewer who spent months of points on
+    a legendary piece must not be handed something that looks second-hand.
+  - THE SAME FOR SHOPS. A level 1 shelf is thin and plain; a level 12 shelf is full and fine.
+
+WHY THIS MATTERS MORE THAN IT SOUNDS: the upgrade poll is a thing viewers SPEND ON, and the only
+proof they get is what they can see. If every level looks equally weathered, the money bought
+nothing visible and the whole growth system is invisible. CONDITION IS THE RECEIPT.
+
+HOW IT SITS WITH THE PLAINNESS RULE (they do not conflict):
+  - PLAINNESS is about VOICE - things look like what they are for, nothing is theatrical, no
+    gothic flourish. That holds at every level.
+  - WEAR is about STATE - how new, how rich, how cared-for. That CHANGES with level and tier.
+  - A level 12 Bellmire is plain AND prosperous: good timber, well cut, no ornament for its own
+    sake. Prosperity in this game looks like things being WELL MADE, not things being decorated.
+  - The epitaphs stay the guide for voice. They are not a guide for condition.
+
+FOR THE ICON RE-RUN SPECIFICALLY: the 230 accessories span the whole cost range, so drive their
+condition from COST as the generator already drives ornateness - cheap reads handled and worn,
+expensive reads new and well kept. One axis, already present in the data. Do not give all 230 the
+same wear.
+
 ### MINIBOSSES NEED NO LORE (Mr. E, Nov 15 17:43) - A STANDING PERMISSION FOR THE ART LANE
 "you can always add mini bosses as well. that dont have to be lore mentioned".
 

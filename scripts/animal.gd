@@ -149,6 +149,8 @@ func _ready() -> void:
         var c: Node = st.pop_back()
         if c is AnimationPlayer:
             _ap = c
+            # D23: posed on the physics tick it moves on, not every render frame
+            _ap.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
         for g in c.get_children():
             st.append(g)
     if _ap:
@@ -243,7 +245,35 @@ func _ground(p: Vector3) -> float:
         return float_y + sin(Time.get_ticks_msec() * 0.002 + p.x) * 0.03
     return float(town.call("height_at", p.x, p.z))
 
+## D23: the same far/unseen LOD as the townsfolk (town._lod_pass): past 0 the
+## beast thinks, moves and is posed every 2nd/4th/8th physics tick with the summed
+## time, so nobody walks slower - 3 is "no drawing camera can see it".
+const LOD_TICKS := [1, 2, 4, 8]
+var lod := 0
+var _lod_n := 0
+var _lod_acc := 0.0
+
+func set_lod(l: int) -> void:
+    if l == lod:
+        return
+    lod = l
+    _lod_n = 0
+    _lod_acc = 0.0
+    if _ap:
+        _ap.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL if l > 0 \
+                else AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
+
 func _physics_process(delta: float) -> void:
+    if lod > 0:
+        _lod_acc += delta
+        _lod_n += 1
+        if _lod_n < LOD_TICKS[lod]:
+            return
+        _lod_n = 0
+        delta = _lod_acc
+        _lod_acc = 0.0
+        if _ap and visible:
+            _ap.advance(delta)
     if _proc != "":
         _anim(delta)
     if town == null:

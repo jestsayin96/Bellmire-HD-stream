@@ -3513,33 +3513,107 @@ func _process(delta: float) -> void:
         h.tick(delta)
     _lod_t -= delta
     if _lod_t <= 0.0:
-        _lod_t = 0.25
+        _lod_t = LOD_EVERY
         _lod_pass()
 
 ## ---- D7: far-away LOD. Townsfolk past LOD_NEAR from the camera step and
 ## animate every 2nd physics tick, past LOD_FAR every 4th (townsfolk.gd set_lod).
-## Viewers' heroes and the mounted watch always run full; so does everyone while
-## raiders are in the valley (raids.gd moves the fighters itself).
+## Viewers' heroes and the mounted watch always run full; so does every defender
+## raids.gd is moving in a fight (raids._fighters).
+## D23: "the camera" is every view that is actually DRAWING - the eye's own camera
+## when the main view draws 3D, plus each visible spotlight pane's camera (the L32
+## 2x2 grid is the resting state, and with it up the eye draws no 3D at all, so
+## the old eye-only distance was measuring from a camera nobody sees). A body in
+## no drawing camera's view (outside every frustum, past its far, behind it) is
+## LOD 3: logic and pose every 8th tick - unseen, so the cost buys nothing. The
+## near tiers go by how big the body is ON SCREEN (lod_px), not raw metres. The
+## pass runs every 0.15 s so a pane cut promotes its new subjects within ~9 frames.
+## Animals take the same LOD (animal.gd set_lod).
 const LOD_NEAR := 60.0
 const LOD_FAR := 120.0
+const LOD_EVERY := 0.15
 var _lod_t := 0.0
-var lod_counts := [0, 0, 0]
+var lod_counts := [0, 0, 0, 0]
 var lod_on := true          # tools compare FPS with it off
+var lod_unseen := true      # D23: tools A/B the unseen tier
+
+## D23: the cameras that are drawing right now: [cam, tan(v_half_fov), aspect, px high]
+func lod_cams() -> Array:
+    var out: Array = []
+    if not is_inside_tree():
+        return out
+    var vp := get_viewport()
+    var main := vp.get_camera_3d()
+    if main != null and not vp.disable_3d:
+        var sz := vp.get_visible_rect().size
+        out.append([main, tan(deg_to_rad(main.fov) * 0.5), sz.x / maxf(1.0, sz.y), sz.y])
+    for c in get_children():
+        if c is Spotlight:
+            var panes = c.get("_panes")
+            if not (panes is Dictionary):
+                break
+            for k in panes:
+                var pd: Dictionary = panes[k]
+                var box = pd.get("box")
+                var cam = pd.get("cam")
+                var sv = pd.get("vp")
+                if box == null or cam == null or sv == null or not is_instance_valid(cam):
+                    continue
+                if not (box as Control).is_visible_in_tree() or not (cam as Camera3D).is_inside_tree():
+                    continue
+                var ssz: Vector2i = (sv as SubViewport).size
+                out.append([cam, tan(deg_to_rad((cam as Camera3D).fov) * 0.5), float(ssz.x) / maxf(1.0, float(ssz.y)), float(ssz.y)])
+            break
+    return out
+
+## D23: how tall (px) the body stands in the drawing camera that shows it biggest;
+## -1 when no drawing camera can see it (a body near a frustum edge counts as seen:
+## 1.6 m of slack each side). A pane is ~960x540, so "60 m" was a 17 px figure.
+const LOD_PX_FULL := 60.0       # >= this many pixels tall: every tick (lod 0)
+const LOD_PX_MID := 12.0        # >= this: logic every 2nd tick, pose every tick (lod 1)
+static func lod_px(cams: Array, p: Vector3) -> float:
+    var best := -1.0
+    var q := p + Vector3(0, 0.9, 0)
+    for c in cams:
+        var cam: Camera3D = c[0]
+        var l: Vector3 = cam.global_transform.affine_inverse() * q
+        var z := -l.z
+        if l.length() < 6.0:
+            return 9999.0
+        if z <= 0.0 or z > cam.far:
+            continue
+        var tv: float = float(c[1])
+        if absf(l.y) <= z * tv + 1.6 and absf(l.x) <= z * tv * float(c[2]) + 1.6:
+            best = maxf(best, float(c[3]) * 1.8 / (2.0 * z * tv))
+    return best
+
+func _lod_level(cams: Array, p: Vector3) -> int:
+    var px := lod_px(cams, p)
+    if px < 0.0:
+        if lod_unseen:
+            return 3
+        px = 0.0
+    return 0 if px >= LOD_PX_FULL else (1 if px >= LOD_PX_MID else 2)
 
 func _lod_pass() -> void:
-    var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
-    var fight: bool = raids != null and not (raids as Raids).raiders.is_empty()
-    lod_counts = [0, 0, 0]
+    var cams := lod_cams()
+    var fighters: Dictionary = {}
+    if raids != null and not (raids as Raids).raiders.is_empty():
+        fighters = raids.get("_fighters")
+    lod_counts = [0, 0, 0, 0]
     for p in people:
         if not is_instance_valid(p) or not (p is Townsfolk):
             continue
         var v: Townsfolk = p
         var l := 0
-        if lod_on and cam != null and not fight and not (v is HeroBody) and not (v is Cavalry):
-            var d := cam.global_position.distance_to(v.global_position)
-            l = 2 if d > LOD_FAR else (1 if d > LOD_NEAR else 0)
+        if lod_on and not cams.is_empty() and not (v is HeroBody) and not (v is Cavalry) and not fighters.has(v):
+            l = _lod_level(cams, v.global_position)
         v.set_lod(l)
         lod_counts[l] += 1
+    for a in animals:
+        if not is_instance_valid(a) or not a.has_method("set_lod"):
+            continue
+        a.call("set_lod", _lod_level(cams, (a as Node3D).global_position) if lod_on and not cams.is_empty() else 0)
 
 ## ---------------------------------------------------------------- placement
 ## ONE rule for everything that stands on the ground: not in a carriageway,

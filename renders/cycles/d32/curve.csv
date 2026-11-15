@@ -1,0 +1,31 @@
+day,pop,renown,score,level,name
+1,51,0,153,1,a crossing
+2,52,0,156,2,a hamlet
+3,53,0,159,2,a hamlet
+4,54,0,162,2,a hamlet
+5,55,1,167,2,a hamlet
+6,57,2,175,3,a guild post
+7,58,4,182,3,a guild post
+8,58,5,184,3,a guild post
+9,59,7,191,3,a guild post
+10,59,9,195,3,a guild post
+11,60,10,200,3,a guild post
+12,59,11,199,3,a guild post
+13,60,11,202,3,a guild post
+14,62,12,210,3,a guild post
+15,64,14,220,3,a guild post
+16,64,15,222,3,a guild post
+17,65,21,237,4,a village
+18,65,22,239,4,a village
+19,62,22,230,4,a village
+20,63,24,237,4,a village
+21,63,24,237,4,a village
+22,64,24,240,4,a village
+23,63,23,235,4,a village
+24,65,22,239,4,a village
+25,66,22,242,4,a village
+26,65,22,239,4,a village
+27,66,21,240,4,a village
+28,66,21,240,4,a village
+29,68,20,244,4,a village
+30,69,20,247,4,a village

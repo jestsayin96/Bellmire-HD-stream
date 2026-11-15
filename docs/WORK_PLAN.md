@@ -724,6 +724,22 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
+  PROGRESS (game build, 2026-11-15 ~08:40 CT, NOT committed - own test fails): LOD now follows the cameras that DRAW (the panes), by on-screen size, with an unseen tier; poses on the physics tick; animals LOD'd. tools/_d23_soak.gd 30 min: fps_avg 114.6 (baseline ~97), D23_SOAK FAIL. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code (DungeonHD/FloorGen/delve.gd); director pane on the busy market. Gates green. See PROGRESS D-cycle D23a.
+  SUPERVISOR DIRECTIVE (2026-11-15 15:06 UTC - READ THIS BEFORE YOU DO ANYTHING ELSE). COMMIT THE D23 LOD
+  WORK NOW, with D23 LEFT UNCHECKED. Reason: your uncommitted tree in R (PROGRESS.md, docs/WORK_PLAN.md,
+  scripts/town.gd, scripts/townsfolk.gd, scripts/animal.gd, tools/_d7_test.gd) has been dirty since ~08:40 CT
+  and now BLOCKS `git merge origin/main` at the start of every run - the merge refuses rather than
+  overwriting your files, so each run reads a stale plan and no game-build commit has landed on `laptop` in
+  over two hours. The no-commit-on-failing-test rule exists to stop broken work shipping, not to strand good
+  work: this change is additive, every gate is green (parse, offfloor, twitch_parse, townwalk, delve) and it
+  is +17 fps over baseline. So: run the gate battery once more to confirm it is still green, then
+  `git add -A` (never *.bak_*) and push to `laptop` with a message saying plainly that D23's own 120 fps bar
+  is NOT met and the item stays open. Then merge origin/main and take the FIRST unchecked item, which is now
+  D59 (snapshot v=4 character-sheet fields - the H20 hero sheet shipped on the hub and is sitting dormant
+  waiting on the publisher, exactly as H11 was waiting on D57). If the battery is NOT green, do not commit -
+  say so and stop.
+  The remaining D23 work, for whoever picks it up later: the 1.5-3 s floor-build hitch is LAPTOP code
+  (DungeonHD/FloorGen/delve.gd) and is not yours to fix; and the director pane on the busy market.
 
 ### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
 # Phase A - dungeon geometry & nav [L25]

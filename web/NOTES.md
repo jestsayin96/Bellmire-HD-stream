@@ -781,3 +781,18 @@ Measured (headless Chrome, 1280x800, `?watch=1` with `?mock=bands`, `?mock=chron
 Quiet-update check: with `?watch=1&mock=bands` and `?mock=chronicle`, `load()` called twice with the page idle: 0 layout-shift entries, 0 running animations, every section's top/height identical before and after, scroll position unchanged, focus stays on `#watchBtn`. (Mock data is constant, so this proves the render path is geometry-stable, not that real changes are small.)
 
 Gaps, honestly: no desktop recording was made (headless capture only, no video); screenshots of full vs watch at 1280 and watch at 390 were taken but are not committed.
+
+## H22 - the first minute (newcomer welcome)
+
+A short welcome block sits between the status line and the finder: what Bellmire is (static copy, town's voice, about
+sixty words), ONE live line, and three doors. The live line is built in `paintWelcome()` from the payload `render()`
+last drew plus the same `last` / `lastError` / `STALE_MIN` the status line uses, so it is honest in every state: live
+("Live, updated N min ago"), stale or failed-refresh (the numbers are kept but prefixed "As of ..."), empty ("has not
+reported in yet") and failed fetch ("out of reach just now"). It says only what the snapshot carries - town stage from
+the lore tier names, heroes on the roll, heroes abroad (only when a bands field exists), and the newest Chronicle line.
+The doors (Get a hero / Watch what is happening / Learn the rules) switch to the Commands, Chronicle and die tabs via
+`setActiveTab()`; the markup only carries a page-owned `data-door` id that is matched against `TABS`. They link, they do
+not restate. "Got it - don't show this again" stores `seen` under `bellmire.welcome.v1` (per browser, whitelist-checked on
+read); a small "What is Bellmire?" button in the watch bar brings it back for the visit without un-dismissing. It is an
+ordinary block in the flow - no overlay, no sticky, no gate - the doors stack on a phone and sit three-across from 680 px.
+Hidden in Night watch. `?welcome=1` forces it open for local checks.

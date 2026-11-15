@@ -252,6 +252,7 @@ function showStatus() {
   st.innerHTML = html;    // page-owned strings only; never snapshot data
   const r = $("retry");
   if (r) r.onclick = () => { r.disabled = true; r.textContent = "Asking…"; load(); };
+  try { paintWelcome(); } catch (e) { /* the welcome must never break the status line */ }
 }
 
 // ---------------------------------------------------------------- the fetch
@@ -324,6 +325,7 @@ function render(p) {
   }
   $("nothing").classList.add("hide");
   for (const id of SECTIONS) $(id).classList.remove("hide");
+  welcomeP = p;
   const t = p.town || {};
   $("townName").textContent = t.name ? String(t.name) : "the Guild Hall";
   renderTown(t);
@@ -338,6 +340,7 @@ function render(p) {
   renderRolls(p.rolls);
   renderLore();
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
+  try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -3089,6 +3092,94 @@ function applyWatch(on, keep) {
   if (!btn) return;
   btn.addEventListener("click", () => applyWatch(!document.documentElement.classList.contains("watch"), true));
   applyWatch(params.get("watch") === "1" || getStoredWatch() === "watch", false);
+})();
+
+// ---------------------------------------------------------------- H22 the first minute
+// A short welcome for someone who arrives mid-raid knowing nothing. The copy is static markup in
+// index.html. The ONE live line is built here from the snapshot the page already holds: no new
+// fetch, no new origin, no write path. Every value reaches the DOM through el()/textContent; the
+// three doors carry a page-owned data-door id that is matched against TABS before it does anything.
+// Honest by construction: it reads the same `last` / lastError / STALE_MIN the status line reads, so
+// an empty, stale or failed snapshot says so here too instead of showing numbers as if they were live.
+// Dismissal is per-browser: localStorage under a page-owned key, compared to a one-item whitelist.
+const WELCOME_KEY = "bellmire.welcome.v1";
+let welcomeP = null;       // the payload render() last drew (internal only)
+let welcomeShow = true;
+function getWelcomeSeen() {
+  try { return ctrlStrip(localStorage.getItem(WELCOME_KEY) || "").slice(0, 8) === "seen" ? "seen" : ""; }
+  catch (e) { return ""; }
+}
+function setWelcome(show, keep) {
+  welcomeShow = !!show;
+  const box = $("welcome"), btn = $("welcomeBtn");
+  if (box) box.classList.toggle("hide", !welcomeShow);
+  if (btn) btn.classList.toggle("hide", welcomeShow);
+  if (keep) { try { if (!welcomeShow) localStorage.setItem(WELCOME_KEY, "seen"); } catch (e) {} }
+}
+function paintWelcome() {
+  const box = $("welcomeLive");
+  if (!box) return;
+  box.replaceChildren();
+  box.classList.remove("stale");
+  if (!last) {
+    box.classList.add("stale");
+    box.append(el("p", null, lastError
+      ? "The town's records are out of reach just now, so there are no live numbers here yet. The page asks again every minute."
+      : "Bellmire has not reported in yet, so there are no live numbers to show. They appear here the moment the game is running."));
+    return;
+  }
+  if (!welcomeP || typeof welcomeP !== "object") {     // the version gate refused the payload: say so, show no numbers
+    box.classList.add("stale");
+    box.append(el("p", null, "The town's latest report is in a format this page does not understand yet, so there are no live numbers here."));
+    return;
+  }
+  const p = welcomeP;
+  const t = p.town && typeof p.town === "object" ? p.town : {};
+  const a = ago(last.updated_at);
+  const age = a ? a.text : "at an unknown time";
+  const stale = TEST === "stale" || !a || a.s > STALE_MIN * 60;
+  const tiers = arr(LORE_FROZEN && LORE_FROZEN.growth_tiers && LORE_FROZEN.growth_tiers.tiers).filter((x) => x && typeof x === "object" && x.name);
+  const lvl = t.level != null && t.level !== "" && Number.isFinite(+t.level) && tiers.length ? Math.max(1, Math.min(tiers.length, Math.floor(+t.level))) : 0;
+  const bits = [];
+  if (lvl) bits.push("The town stands at stage " + lvl + " of " + tiers.length + " - " + String(tiers[lvl - 1].name) + ".");
+  const heroes = arr(p.heroes).filter((h) => h && typeof h === "object").length;
+  const hasBands = p.parties != null || p.bands != null;
+  const bands = hasBands ? normalizeParties(p.parties != null ? p.parties : p.bands) : [];
+  const abroad = bands.reduce((n, b) => n + b.members.length, 0);
+  if (heroes > 0) {
+    let s = num(heroes) + (heroes === 1 ? " hero is" : " heroes are") + " on the roll";
+    if (hasBands) s += abroad > 0 ? ", " + num(abroad) + " abroad in " + bands.length + (bands.length === 1 ? " band." : " bands.") : ", none abroad just now.";
+    else s += ".";
+    bits.push(s);
+  } else if (Array.isArray(p.heroes)) bits.push("No hero has signed the guild post yet.");
+  if (!bits.length) bits.push("The town has not sent its numbers yet.");
+  let lead;
+  if (lastError) { lead = "Couldn't reach the town just now; as of " + age + ":"; box.classList.add("stale"); }
+  else if (stale) { lead = "As of " + age + " (the game is probably not running now):"; box.classList.add("stale"); }
+  else lead = "Live, updated " + age + ":";
+  const line = el("p", "wl-line");
+  line.append(el("b", "wl-lead", lead + " "), el("span", null, bits.join(" ")));
+  box.append(line);
+  const first = chronEntries(p.chronicle)[0];
+  if (first) box.append(el("p", "wl-last", "The latest word in the Chronicle: \u201c" + first.s.slice(0, 140) + (first.s.length > 140 ? "\u2026" : "") + "\u201d"));
+}
+(function wireWelcome() {
+  const box = $("welcome");
+  if (!box) return;
+  box.addEventListener("click", (e) => {
+    const b = e.target && e.target.closest ? e.target.closest("button[data-door]") : null;
+    if (!b || !box.contains(b)) return;
+    const id = cleanTab(b.getAttribute("data-door") || "");
+    if (TABS.indexOf(id) < 0) return;
+    setActiveTab(id);
+    const tab = $("tab-" + id);
+    if (tab) { try { tab.scrollIntoView({ block: "start" }); tab.focus({ preventScroll: true }); } catch (err) {} }
+  });
+  const d = $("welcomeDismiss");
+  if (d) d.addEventListener("click", () => setWelcome(false, true));
+  const r = $("welcomeBtn");
+  if (r) r.addEventListener("click", () => setWelcome(true, false));
+  setWelcome(params.get("welcome") === "1" || !getWelcomeSeen(), false);
 })();
 
 load();

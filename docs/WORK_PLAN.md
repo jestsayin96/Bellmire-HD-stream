@@ -302,7 +302,14 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       .1 THE POLL IS AN EVENT ON STREAM. It opens on a real occasion (a growth stage, a raid survived,
          a festival - D63a's reason machinery already exists), names the handful of specific things that
          could be upgraded, runs for a stated window, and closes with a result the Chronicle announces.
-      .2 BITS AND CHANNEL POINTS BOTH COUNT, and the rules are stated on screen before anyone spends.
+      .2 BITS AND CHANNEL POINTS BOTH COUNT - BUT NOT THE SAME WAY, AND THIS IS A HARD API FACT, NOT a
+         preference. TWITCH REMOVED BITS VOTING FROM POLLS: Create Poll silently drops
+         `bits_voting_enabled`/`bits_per_vote` and those fields were deleted from the API in Jan 2024.
+         So the CHANNEL-POINTS half can ride a native Twitch poll (`channel_points_voting_enabled`,
+         `channel_points_per_vote`), and the BITS half CANNOT - the game must tally bits itself from
+         cheers and power-up redemptions inside the poll window and add them as weight. Do not try to
+         pass bits to the Polls API; it will accept the call and ignore you, which is worse than failing.
+         State the rules on screen before anyone spends.
          Do NOT create, delete or re-price any Twitch reward - match on the permanent reward ID and the
          bit cost exactly as the existing power-ups do.
       .3 THE UPGRADE IS REAL AND IT SHOWS. The chosen building gains a level, its D64 tier cap rises,
@@ -379,56 +386,218 @@ shop economy now being built (D64-D66).
       DONE: a chat log from a soak showing each announcement fired once, in voice, within the cap;
       and the cap proven by forcing a burst.
 
-## MR. E'S ASK, Nov 15 14:01 - THE RAZING: A 10,000-BIT TOWN RESET
+## DECIDED AGAINST: A TOWN RESET POWER-UP (Mr. E, 2026-11-15 14:12)
 
-- [ ] D68. THE RAZING - A PATRON CAN PUT BELLMIRE BACK TO LEVEL 1 FOR 10,000 BITS. Owner: DESKTOP
-      BUILD (twitch_eventsub.gd, town.gd, economy.gg/economy.gd, growth, notables.gd) with CONTENT
-      writing the words (C8). Mr. E's idea and his call. 10,000 bits is roughly $100 - this is the
-      single most expensive thing anyone can do to Bellmire and it must FEEL like it.
-      WHAT IT DOES: the town drops to level 1. Growth, treasury and the built plots go back to a
-      crossing. It is the biggest event the stream can have.
+He raised a 10,000-bit power-up that would put Bellmire back to level 1, considered it, and said
+no: "lets not do the reset". D68 and C8 were written and are now withdrawn - DO NOT rebuild them
+and DO NOT propose a town-wipe, a razing, a reset or a "start the age over" mechanic again unless
+he raises it himself.
 
-      THE ONE THING MR. E MUST DECIDE BEFORE THIS IS BUILT - DO NOT GUESS, DO NOT PICK A DEFAULT:
-      D66 lets viewers spend bits and channel points to upgrade SPECIFIC shops and buildings. A
-      razing deletes what OTHER patrons paid for. A viewer who spent 2,000 bits raising the armoury
-      watches a stranger erase it. That is the difference between glorious drama and a feature that
-      punishes the most invested people in the channel. Three ways to square it, his pick:
-        (a) TOTAL - everything goes, other patrons' upgrades included. Maximum stakes, maximum
-            drama, and the risk that generous viewers stop giving because it can be taken away.
-        (b) THE TOWN FALLS, THE GIFTS REMAIN - level, growth and treasury reset, but buildings a
-            viewer PAID to upgrade keep their level. The town is razed; what patrons built endures
-            in the ruins. Protects giving, still a huge event, and is better lore.
-        (c) TOTAL, BUT IT CAN BE RESISTED - the razing is announced with a countdown and chat can
-            rally against it (bits, points, or a mass of !commands). If the town holds, the razer
-            loses it anyway. The best stream moment of the three and the most work.
-      Until he answers, BUILD NOTHING. Write the plumbing only if (b) or (c) is chosen and he says
-      so in writing.
+The reason is worth keeping, because it constrains other designs too: D66 lets viewers spend bits
+and channel points to upgrade SPECIFIC shops and buildings. Anything that wipes town progress also
+deletes what OTHER patrons paid for - a viewer who spent 2,000 bits raising the armoury would watch
+a stranger erase it. A feature that lets one person destroy another's contribution punishes the
+most invested people in the channel. Weigh any future "big destructive event" against that before
+writing it: Bellmire can have disasters and losses, but not ones that cancel a patron's gift.
 
-      WHATEVER HE PICKS, THESE HOLD:
-      .1 THE CHRONICLE SURVIVES. The town resets; its memory does not. A razing is the end of an
-         age, not a deletion - the next Bellmire is built on the ruins of the last, and the
-         Chronicle says whose ruins they are. This is what makes it lore instead of a wipe.
-      .2 THE RAZER IS NAMED FOREVER. A landmark, a monument or a permanent Chronicle entry naming
-         who did it and when. Someone paying $100 to end an age should be remembered for it - and
-         being remembered is most of what they are buying.
-      .3 IT CANNOT HAPPEN BY ACCIDENT. Confirmation, a cooldown so it is an event and not a
-         mechanic, and a streamer kill-switch Mr. E can throw live. A bits redemption cannot be
-         undone by the game, so the guard has to be before it fires, not after.
-      .4 IT MUST BE SEEN. The razing plays out - it is not a number changing. Whatever D63 taught
-         about dressing the square applies in reverse here.
-      .5 THE BOT ANNOUNCES IT (pairs with D67). In chat, named, in voice.
-      DONE: a capture of a full razing from redemption to the new crossing, the Chronicle carrying
-      the old age across, the razer named in-world, the cooldown and kill-switch proven, and the
-      patron-upgrade rule behaving exactly as Mr. E chose. Gates green.
-      NOT YOURS TO CREATE: the 10,000-bit Custom Power-up itself is made in the Twitch dashboard by
-      Mr. E. Do not create, delete or re-price rewards.
+## MR. E'S ASK, Nov 15 14:28 - THE BOT RUNS THE CHAT AND THE POLLS
 
-- [ ] C8. THE WORDS FOR AN ENDING (data/lore_lines.json). Owner: CONTENT WRITER - words only.
-      A "razing" pool: the announcement, the razing itself, the morning after, how the Chronicle
-      records the end of an age, how the new crossing speaks of the old one, and how the razer is
-      remembered - by those who hated it and those who cheered. This is the darkest thing that
-      happens in Bellmire and it should read like the end of a chapter, not an error message.
-      DONE: json validates, pre-existing keys byte-identical, counts per category stated.
+- [ ] D69. BELLMIREBRO CONDUCTS THE POLL. Owner: DESKTOP BUILD (twitch_eventsub.gd - it already owns
+      the broadcaster token, the EventSub socket, the send path, the queue and the rate limiting).
+      Pairs with D66 (what a poll DOES) and D67 (the bot speaking unprompted). D66 decides the town's
+      ceiling; this is the machinery that runs the vote and makes chat the place it happens.
+      THE SCOPES ARE ALREADY LIVE - nothing is blocked on Mr. E. The broadcaster token holds
+      channel:manage:polls AND channel:read:polls (re-authorized Nov 15, validated as jestsayin96,
+      user_id 138821183, refresh present). Use them.
+      THE TWITCH POLLS API, AND ITS LIMITS - build to these, do not discover them live:
+        - POST helix/polls: 2-5 choices, title max 60 chars, duration 15-1800 s, ONE active poll at a
+          time per channel. Affiliate/Partner only.
+        - `channel_points_voting_enabled` + `channel_points_per_vote` work and are the supported way to
+          let viewers buy extra weight.
+        - BITS VOTING IS GONE. The endpoint accepts `bits_voting_enabled` and ignores it. Tally bits
+          yourself from cheers in the window.
+        - Subscribe to channel.poll.begin / .progress / .end over EventSub rather than polling the
+          REST endpoint for results.
+      .1 THE BOT OPENS IT. When D66 raises a poll, the bot announces it in chat: the occasion, the
+         choices, how to vote, what it costs, and how long is left. The native poll banner does the
+         voting; the bot does the telling, because the banner says nothing about Bellmire.
+      .2 IT KEEPS CHAT INFORMED WITHOUT FLOODING IT. One opening line, at most one mid-poll nudge, one
+         result. Hard cap, as a constant Mr. E can turn down. A poll every few minutes on a 24/7 stream
+         must never become the thing chat is mostly made of.
+      .3 IT TALLIES BOTH STREAMS AND SHOWS ITS WORKING. Channel-point votes come from the poll; bits
+         come from cheers the game counted in the window. The closing message states both and the
+         winner, so nobody has to trust a number they cannot see.
+      .4 IT CLOSES HONESTLY. Ties, a poll nobody voted in, a poll that ends while the game is mid-raid,
+         and a poll Twitch ends early all need a stated outcome rather than silence.
+      .5 IT NEVER LEAVES ONE OPEN. One active poll per channel is a hard Twitch limit - if the game
+         restarts mid-poll, find the live poll on startup (GET helix/polls) and adopt or end it. A
+         stuck poll blocks every later one.
+      DONE: a capture of a full poll - opened by the bot, voted with channel points, bits counted
+      alongside, closed with both totals stated and the Chronicle naming the winner; the cap proven by
+      forcing a burst; and a restart mid-poll proven to recover rather than deadlock.
+
+- [ ] L69. THE BOT CARRIES THE CHAT, NOT JUST THE COMMANDS. Owner: LAPTOP CODE (chatcmd.gd,
+      data/commands.json). Builds on L68. Mr. E: the bot needs to "handle a lot of the chat".
+      Today a viewer gets an answer only if they type the exact command. Widen it:
+      .1 UNDERSTAND WHAT THEY MEANT. Near-misses, plurals, aliases and plain questions ("how do I
+         join", "what's my hero") should reach the right command instead of silence. Silence reads as
+         a broken bot.
+      .2 ANSWER THE QUESTIONS CHAT ACTUALLY ASKS - the ones a new viewer asks in the first minute:
+         what is this, how do I get a hero, is this a real game, how do I get gear, what are the bits
+         for. H22 wrote the newcomer welcome for the hub; the same answers belong in chat.
+      .3 KNOW WHEN NOT TO SPEAK. A per-user cooldown already exists; keep it, and never answer the same
+         question twice in a row for different people inside the window - say it once to the channel.
+      DONE: a transcript of a busy chat where every reasonable phrasing lands, nothing is answered
+      twice inside the cooldown, and the drift test from L68 still passes.
+
+## THE BOT, CONTINUED (Claude's suggestions, Mr. E: "whatever you suggest", Nov 15 14:33)
+
+- [ ] D70. THE BOT SHOULD KNOW WHO IT IS TALKING TO. Owner: DESKTOP BUILD (twitch_eventsub.gd,
+      roster.gd read-only). Pairs with D67 (speaking unprompted) and L69 (understanding chat).
+      Today the bot treats every message the same. The two moments that decide whether a viewer
+      becomes a player are both being missed.
+      .1 THE FIRST-TIMER. Someone typing in this channel for the first time is the only moment they
+         are guaranteed to be paying attention. Once - exactly once, ever, per viewer - tell them
+         they can have a hero in this town and how. This is the whole conversion funnel: a lurker
+         who gets a hero has a reason to come back, and one who does not is a passer-by. Never
+         repeat it, never chase someone who ignored it.
+      .2 THEIR HERO'S MOMENTS, TOLD TO THEM. D67 announces the TOWN's big moments. This is the
+         viewer's own: their hero levelled, died, came home with something rare, was the one who
+         felled a lord. Address them by name, keep it to one line, and only for moments that
+         actually matter - not every kill. A viewer who learns their hero died while they were at
+         work is a viewer who comes back to see what happened next.
+      .3 KNOW WHEN THE ROOM IS EMPTY. SIMPLIFIED by Mr. E's ruling below (14:38): the game runs only
+         while he streams, so the game being up is itself the signal that someone is there. No
+         stream-state check is needed. Still never queue news to dump at the start of the next
+         session - stale news is worse than no news.
+      .4 SAFETY - THIS ONE IS NOT OPTIONAL. The bot must NEVER echo attacker-controlled text back
+         into chat. Hero titles, epitaphs, dye names and anything else a viewer can set are exactly
+         the hostile input the hub defends against with el()/textContent - chat has no such
+         protection, and a line the bot repeats is a line Mr. E's channel published. Echo only
+         values the GAME generated, or a Twitch login Twitch itself gave us. If a viewer-set string
+         must appear, cap its length, strip control characters and newlines, and never let it start
+         a message (a leading / or . is a chat command). Treat this as the W1a rule for chat.
+      DONE: a transcript showing a first-timer welcomed once and never again; a hero moment told to
+      its owner; the bot silent while the stream is offline; and a hostile hero title proven inert -
+      it either never reaches chat or reaches it declawed. Gates green.
+
+- [ ] L70. WHAT HAPPENED WHILE I WAS AWAY. Owner: LAPTOP CODE (chatcmd.gd, data/commands.json).
+      A viewer who looks in after two days has no way to find out what became of their hero. The
+      Chronicle knows - D60 gave it days and `who`, so the lines about a given hero are already
+      findable. Give them a !catchup (alias !mystory, !since) that answers in one or two lines: what
+      their hero did, how it went, and where it stands now. Cap it hard - a summary, not a saga, and
+      point them at the hub for the full sheet. If they have no hero, that is the moment to tell
+      them how to get one.
+      DONE: a hero with a busy history gets a short true summary; a hero with none gets the join
+      line; the L68 drift test still passes; output never exceeds the cap.
+
+## MR. E'S RULING, Nov 15 14:38 - THE GAME RUNS ONLY WHILE HE STREAMS (BINDING)
+
+He chose this deliberately after weighing three options. Bellmire is NOT a 24/7 persistent world
+for now: the game runs when the stream runs, and stops when it stops.
+
+WHY IT MATTERS TO YOU, as a worker: cruzader is free for development whenever he is not live. That
+is the whole reason for the choice - a permanently running game would hold docs/RUN_LOCK.txt
+forever, every worker would see RUNNING and skip, and all development would stop. If you ever find
+the lock held by a session that is a LIVE STREAM rather than a test run, that is not a stale lock.
+Do not clear it. Stand down and say why.
+
+WHAT THIS MEANS FOR DESIGN:
+  - The hub is honest about it already and needs no change: it says "Last word from the town N
+    minutes ago. The game is probably not running right now."
+  - The bot can treat "the game is up" as "someone is watching" (see D70.3).
+  - A viewer redeeming a Bellmire reward while the game is DOWN gets nothing. That is the open
+    wound - see D71.
+  - Option 3 (a separate always-on instance, so the town lives between streams) is the long-term
+    answer and is NOT being built now. It needs a real split: two instances cannot share one
+    Supabase row or one pair of Twitch tokens without fighting. Do not start it.
+
+- [ ] D71. THE REWARDS MUST FOLLOW THE GAME. Owner: DESKTOP BUILD (twitch_eventsub.gd).
+      MR. E DECLINED THIS ONCE (Nov 15 ~03:00) when it was framed as a nice-to-have. His 14:38
+      ruling changes the case, so it is written now - but it is still HIS call whether it gets
+      built, and he may decline it again. Do not treat silence as approval.
+      THE PROBLEM, which he hit himself: on Nov 15 viewers redeemed Bellmire channel-point rewards
+      while he was streaming something else. He fixed the CONFUSION by prefixing every reward with
+      "Bellmire:" - but the redemption still lands in a void whenever the game is down, and under
+      the 14:38 ruling the game is down most of the day. The viewer spends; nothing happens.
+      THE FIX: pause the game's own rewards when it is not running and unpause them when it is.
+      Helix exposes `is_paused` on a custom reward, the game already holds every reward id in
+      `reward_ids`, and `_helix()` already does PATCH - so this is small.
+      FAIL SAFE, NOT FAIL OPEN: pause on STARTUP first, then unpause once EventSub is actually
+      connected, so a crash or a power cut leaves the rewards PAUSED rather than open on a town
+      nobody is simulating. A clean-exit-only hook is not good enough; this project has lost enough
+      time to sessions that died mid-run.
+      SCOPE LIMIT, state it in chat if asked: this covers only the SIX channel-point rewards the
+      game created and matches by id. The five Custom Power-ups have no API and stay manual, and
+      fightoverlay's rewards are not ours to touch.
+      DONE: rewards show paused on the dashboard within seconds of the game closing, unpaused once
+      it is live, a forced crash leaves them paused, and no fightoverlay reward is ever modified.
+
+## WHAT "DONE" MEANS - THE ROAD TO A FINISHED GAME (Mr. E: "do what's needed to get this game to
+## completion", Nov 15 14:50). BINDING ON THE SUPERVISOR.
+
+THE PROBLEM THIS SOLVES: this plan has had no finish line. The supervisor writes new work whenever
+a queue drains, which is correct for depth and fatal for shipping - left alone it generates items
+forever and the game is never done. 51 items are open and 169 are closed, but those 51 are not
+equal: a few are the game NOT WORKING and most are the game not being as deep as it could be.
+
+BELLMIRE HD IS FINISHED WHEN MR. E CAN STREAM IT FOR FOUR HOURS WITHOUT APOLOGISING FOR IT.
+Concretely, all five must be true:
+  1. THE LOOP CLOSES. A viewer arrives, gets a hero, that hero delves, gains or loses something
+     that matters, and comes home or doesn't - visibly, without Mr. E explaining it.
+  2. SPENDING CHANGES THE WORLD. Bits and channel points do something permanent and visible, not
+     just a buff. A viewer can point at the town and say "I paid for that".
+  3. IT READS WITHOUT A COMMENTATOR. A stranger watching for sixty seconds understands what is
+     happening. Nothing overlaps, nothing important is off-screen, a fight is legible.
+  4. IT SURVIVES THE SESSION. Four hours at frame rate, no stranded heroes, no silent stalls.
+  5. THE CHANNEL WORKS. The bot answers, the polls run, the hub is current.
+
+### PHASE RC - THE CRITICAL PATH. Nothing else ships the game; everything else deepens it.
+Work these FIRST, in roughly this order, regardless of where they sit elsewhere in this file:
+  THE LOOP:        D52 (hero won't delve), D44/D50 (wedged walkers), D64, D65, D66, C7, T5, T4
+  IT READS:        D61 (fights read), L36, L40, D41 (overlap), D48 (selection frame), L64 (director)
+  IT SURVIVES:     D23 (FPS), L56 (delve soak)
+  THE CHANNEL:     L68, L69, D67, D69, D70, L70, D71 (D71 only if Mr. E approves it)
+  THE SOUND:       D72
+T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
+it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
+
+### THE RULE THAT MAKES THIS WORK
+WHILE ANY PHASE RC ITEM IS OPEN, DO NOT WRITE NEW ITEMS unless a worker has NO RC item it can take
+AND no open item at all. The "write new work when a queue runs dry" instruction still stands - it is
+now subordinate to this. Depth is not cancelled, it is deferred: everything outside Phase RC stays
+in this file and gets built after, or when Mr. E asks for it by name.
+Do not re-scope or renumber anything to fit this. IDs stay frozen.
+
+- [ ] D72. REBUILD BELLMIRE'S SOUND ON MUSIC-STUDIO 3.5.15 (supersedes the old D38 recipe; D38's
+      beds stay wired and streamable until this lands). Owner: DESKTOP BUILD (sfx.gd and the
+      generator tool) with the music-studio repo READ-ONLY as always - run it in place, copy WAVs
+      out, never modify it.
+      MR. E UPGRADED THE TOOL (Nov 15, v3.5.2 -> v3.5.15) and everything that blocked the first
+      attempt is fixed. Read its own docs first; do not assume the old API:
+        - 3.5.3 a truly headless compose path - no vite, no CDP, no browser. Use it.
+        - 3.5.4 the bias knobs now survive compose(), so describe()/exportWav() agree.
+        - 3.5.5 tempoByMood + intensity-based mood scoring - THE RAID CUE CAN NOW PASS. The old
+          "epic_cinematic can never satisfy hype" compromise is dead; do not carry it forward.
+        - 3.5.6 compose --stems: vertical layers with an intensity manifest.
+        - 3.5.7 long-form variations sharing key, tempo and motif, with seam-checked loops.
+        - 3.5.8 a project JSON pinning key and tempo family across every cue.
+        - 3.5.9 a leitmotif quoted across town/night/combat treatments.
+        - 3.5.10 transition bridges; 3.5.11 hill-climb seed search toward the scorers.
+      .1 ONE PROJECT, ONE KEY, ONE MOTIF. Define Bellmire's own melodic phrase once and pin the
+         project key and tempo family, so day, night, raid and delve are the same place in
+         different weather rather than four unrelated cues. This is the point of the rebuild.
+      .2 STEMS, AND WIRE THEM. Render layers, then change sfx.gd from crossfading whole TRACKS to
+         fading LAYERS - the music thickens as the town fills or a raid builds. Keep the existing
+         whole-track path as the fallback when stems are missing.
+      .3 VARIATIONS SO A LONG SESSION DOES NOT REPEAT. Several renderings of each cue, shuffled.
+      .4 REGENERATE EVERYTHING on the new tool, including the raid cue at a tempo that passes.
+      .5 THE SPEECH POCKET STILL RULES. Every bed keeps its 300-3000 Hz speech-room verdict - Mr. E
+         talks over all of it. Record each cue's mood and speechRoom numbers in PROGRESS.md.
+      HE HAS THE FINAL EAR: deliver the files for him to listen to and DO NOT TICK THIS until he
+      approves them. He declined to approve the first set precisely so they could be redone here.
+      DONE: a project with key, tempo family and leitmotif; stem-wired transitions proven in a
+      capture; variations shuffling; every bed's speech room passing; Mr. E's approval recorded.
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
@@ -1741,23 +1910,6 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       categories are written + the picker already handles them - they just need their triggers to call
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
-- [ ] D38. ON HOLD BY MR. E (2026-11-15 13:34) - DO NOT WORK THIS ITEM, DO NOT REGENERATE THE BEDS,
-      DO NOT TICK IT. He listened to the four beds and both stings and said they "sound good", but he
-      is UPGRADING music-studio first and wants them REDONE on the upgraded tool before he approves
-      anything. The current files in assets/audio/music/ (bellmire_day/night/raid/delve + the two
-      stings) STAY as they are and stay wired - they are good enough to stream on. Leave them alone.
-      The three open questions (raid style vs the hype tempo gate, night's level, whether the delve
-      bed should be director-driven) are DEFERRED until after the regeneration - do not answer them
-      on his behalf and do not raise them with him again until he says the tool is ready.
-      HE WILL SAY WHEN. Until he does, this item is not available to any worker.
-      The upgrade he is making covers: a genuinely headless CLI, the compose() bias-knob bug, the
-      style/mood tempo conflict, STEMS/vertical layering, long-form variation, project key+tempo
-      coherence, leitmotif, transition cues, better seed search, and later procedural crowd/creature
-      vocalisations, ambience and impact SFX.
-      WHEN STEMS LAND, THE WIRING CHANGES: D22b's sfx.gd crossfades whole tracks. With stems it
-      should fade LAYERS instead - the same piece with more of it as the town fills or a raid builds.
-      That is a better system than what shipped; write it as a new item then, do not retrofit it now.
-
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
       MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
       TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into

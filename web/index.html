@@ -248,9 +248,15 @@
 
     <section class="panel" id="chronicle" role="tabpanel" aria-labelledby="tab-chronicle" tabindex="0">
       <h2 class="title">The Chronicle <small>what the town reports</small></h2>
+      <div class="away hide" id="chronAway" aria-live="polite"></div>
+      <div class="ctools hide" id="chronTools">
+        <label>Hero <select id="chronHero" aria-label="Show only lines naming one hero"></select></label>
+        <label>Event <select id="chronTopic" aria-label="Show only one kind of event"></select></label>
+        <button class="chip clear hide" id="chronClear" type="button">Clear filters</button>
+      </div>
       <div class="chips" id="chronChips" aria-label="Filter the chronicle by kind"></div>
       <input class="find" id="chronFind" type="search" autocomplete="off" placeholder="Search the chronicle&hellip;" aria-label="Search the chronicle text">
-      <ol class="chron" id="chronList"></ol>
+      <ol class="chron cj" id="chronList"></ol>
       <p class="note" id="chronNote"></p>
     </section>
 

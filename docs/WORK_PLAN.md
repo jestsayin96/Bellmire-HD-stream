@@ -768,13 +768,6 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
   green. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code (DungeonHD/FloorGen/delve.gd), not D23's to
   fix; and the director pane on the busy market. DO NOT discard R's dirty tree - this work is real and is 17
   fps of it. Recorded by the supervisor 2026-11-15 15:00 UTC so a later run cannot wipe it by accident.
-  SUPERVISOR DIRECTIVE (2026-11-15 15:06 UTC, also written into R's working copy so the worker sees it even
-  when the merge refuses): COMMIT THE D23 LOD WORK, D23 LEFT UNCHECKED. The dirty tree in R has blocked
-  `git merge origin/main` at the start of every game-build run since ~08:40 CT, so each run reads a stale
-  plan and nothing has landed on `laptop` in over two hours. The no-commit-on-failing-test rule is there to
-  stop broken work shipping, not to strand good work: this change is additive, every gate is green, and it
-  is +17 fps over baseline. Gate battery green -> `git add -A`, push to `laptop` with a message saying the
-  120 fps bar is NOT met and D23 stays open. Battery not green -> do not commit, say so, stop.
 
 ### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
 # Phase A - dungeon geometry & nav [L25]

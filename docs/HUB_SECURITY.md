@@ -560,3 +560,24 @@ from ICON_SET; `gear`/`equipment` slot values are text only. Personal-history ma
 whole-word string compare, never a regex built from a name. The hostile name
 `<img src=x onerror=alert(1)>` is carried through `?mock=sheets` and renders as literal text.
 
+
+## H21 - campaign journal (Nov 15)
+
+No CSP change (meta byte-identical to HEAD), no new URL source, no fetch, no viewer write path.
+
+- Chronicle lines and hero names still reach the DOM only through `el()` / `createTextNode`. The hero select's
+  options are built with `el("option", null, name)`; the option `value` is a plain string that is only ever
+  compared (`namesIn`) and never rendered, parsed as markup, or used as a URL/selector.
+- New localStorage keys are page-owned and re-validated on every read: `bellmire.chron.f.v1` (hero capped at 40
+  control-stripped chars, topic from a constant whitelist, kind keys by regex), `bellmire.chron.seen.v1` and
+  `bellmire.chron.seq.v1` (integers), and an `n` id on history rows (positive integer < 2e9, else reassigned).
+  Storage that is absent, full or throws leaves the page working with empty history/filters.
+- Moment links are `#moment-<n>`, n an integer the page assigned (regex `^moment-\d{1,9}$`). It is compared to
+  `id="moment-<n>"` on rows the page rendered; no snapshot string is ever put in a URL, href, src, selector or style.
+  The Link button writes only `location.href` (the page's own address) to the clipboard.
+- `?away=<hours>` only moves the local "last looked" time for the away card; it carries no data.
+- The summary/episode wording is built from page-owned phrases and counts; the only snapshot text shown is the
+  chronicle line itself (text node) and, in options, a hero name.
+- Checked: ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 and ?mock=chronicle&away=6 with no page errors;
+  the hostile `<img src=x onerror=alert(1)>` line renders as literal text (no `<img>` or `[onerror]` element), also
+  as a hero filter value after a store-and-reload; innerHTML/outerHTML/eval counts unchanged from HEAD.

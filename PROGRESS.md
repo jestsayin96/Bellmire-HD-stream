@@ -5520,3 +5520,41 @@ right before the attack fires makes the beat readable.
      new lines per category inherit that path with no change. OWNER: desktop build (town.gd /
      townsfolk.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## D-cycle (game build worker, Nov 15 2026 01:49 local) - D21b.3: guard muster line
+- raids.gd: before a guard closes with the raiders, he takes a slot on a line
+  drawn between the market centre and the raiders' centre of mass - facing
+  them, shoulder-to-shield (LINE_FROM_CENTRE 11 m, LINE_SPACING 2.2 m), until
+  a raider closes within LINE_HOLD 14 m. The branch is gated in the defender
+  loop between _targets() and _engage(): heroes keep their green-hero square
+  hold, the Commander leads from the front, the mounted watch rides, and any
+  guard whose raider is already within reach engages straight away - only
+  plain town guards with a far mark fall into the line. The line dissolves
+  once the raiders' centre is inside LINE_BREAK 22 m of the market, so a
+  breach still fans the guards out one-to-one (the existing wreck/engage
+  path is untouched).
+- Three new helpers in raids.gd: `_raider_centroid()`, `_musters(d, st)`,
+  `_line_up(d, st, i, n, centre, cent_r, delta)`. No new scenes, no new
+  assets, no new data files, no new class_name. Four new constants
+  (LINE_HOLD / LINE_BREAK / LINE_FROM_CENTRE / LINE_SPACING) sit next to
+  HOLD_REACH; _step / _anim unchanged.
+- tools/_d21b3_test.gd (new): spawns the town, dispatches a scar raid at
+  force_level 3 with economy.day 20 (a 6-8 raider horde), records every
+  muster-eligible guard's starting post, and samples 3 s after the horn.
+  Checks (1) the three helpers exist, (2) >= 3 muster-eligible guards,
+  (3) the raid is still on when sampled, (4) >= 2 guards left their posts,
+  (5) >= 1 guard closed toward the raiders' centroid.
+  Result: D21B3 OK 8 checks - raiders_live=8 moved=8 toward=4 on_line=2
+  guards=14 cent_from_centre=124.9 m.
+- Honest caveats: the test proves guards MOVE out of post and toward the
+  raiders' centroid, not that they stand shoulder-to-shoulder on a perfect
+  line - lateral spread was tolerated up to 12 m in the on-line check and
+  only 2/8 moved guards met the 3.5 m tolerance in 3 s of game time.
+  Formation READABILITY on stream still needs Mr. E's eye; the on-line
+  share should climb as the raid pushes past the first swing. No change to
+  the cavalry charge or the FPS soak - D21b remainder stays open.
+- Gate GREEN: --import rc 0; parse 0 errors; _offfloor 0/1320 INPROP 0
+  MON_INPROP 0; TWITCH_PARSE OK (7 checks); _delve_test rc 0 no SCRIPT
+  ERROR (party descended through floor 4 and returned); _townwalk
+  in_solid 1/14956 (0.007%) raid_in_solid 0/2930 (0.000%) PASS;
+  tools/_d21b3_test.gd D21B3 OK 8/0.

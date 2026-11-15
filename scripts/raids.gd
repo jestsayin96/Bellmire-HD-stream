@@ -37,6 +37,13 @@ class_name Raids
 const RAIDS_FROM_LEVEL := 3
 const GREEN_BELOW := 3           # heroes under this level hang back
 const HOLD_REACH := 9.0          # a hanging-back hero fights only this close
+## D21b.3: before a guard reaches his mark, he takes his place in a line drawn
+## between the market and the raiders' centroid - shoulder-to-shield, facing
+## them. He breaks for the fight when a raider closes within LINE_HOLD.
+const LINE_HOLD := 14.0          # a guard beyond this from his mark forms up instead of charging
+const LINE_BREAK := 22.0         # ... and only while the raiders' centre is this far from the square
+const LINE_FROM_CENTRE := 11.0   # the muster line sits this far out from the square, toward the raiders
+const LINE_SPACING := 2.2        # arm-and-shield across
 const SKELETONS := ["warrior", "cutpurse", "minion"]
 var town: Node3D
 var economy: Economy
@@ -399,6 +406,16 @@ func _process(delta: float) -> void:
         HealthBar3D.on(dd, 2.05, false).set_hp(float(st0["hp"]), float(st0["max"]), st0["target"] != null)
     # defenders
     var hold_i := 0
+    # D21b.3: only muster while the raiders' centre is still well out
+    var cent_r := _raider_centroid()
+    var musterers: Array = []
+    if cent_r != Vector3.ZERO and _flat(cent_r, centre) > LINE_BREAK:
+        for d2 in defs:
+            var st2: Dictionary = _fighters[d2]
+            if st2.get("ko", false):
+                continue
+            if _musters(d2, st2):
+                musterers.append(d2)
     for d in defs:
         var st: Dictionary = _fighters[d]
         if st.get("ko", false):
@@ -409,6 +426,10 @@ func _process(delta: float) -> void:
             if _hangs_back(st):
                 _hold_square(d, st, centre, hold_i, delta)
                 hold_i += 1
+            continue
+        var mi := musterers.find(d)
+        if mi >= 0:
+            _line_up(d, st, mi, musterers.size(), centre, cent_r, delta)
             continue
         (d as Townsfolk).stay = true
         _engage(d, st, tg, delta, true)
@@ -476,6 +497,60 @@ func _targets(defs: Array) -> void:
 ## a green hero hangs back unless the town is breached
 func _hangs_back(st: Dictionary) -> bool:
     return bool(st.get("green", false)) and not breached
+
+## D21b.3: raiders' centre of mass - the muster line runs between here and the market.
+func _raider_centroid() -> Vector3:
+    var c := Vector3.ZERO
+    var n := 0
+    for r in raiders:
+        var nd = r["node"]
+        if is_instance_valid(nd):
+            c += (nd as Node3D).global_position
+            n += 1
+    if n == 0:
+        return Vector3.ZERO
+    return c / float(n)
+
+## is this defender a plain town guard who should form up on the line?
+## (heroes keep their square-hold / charge rule; the mounted watch charges;
+## the Commander leads; the chief / fisherfolk / ordinary folk never reach
+## here since _defenders filters them out.)
+func _musters(d: Node3D, st: Dictionary) -> bool:
+    if breached:
+        return false
+    if d is HeroBody or d is Cavalry:
+        return false
+    if not (d is Townsfolk):
+        return false
+    if String((d as Townsfolk).role) != "guard":
+        return false
+    if String((d as Townsfolk).notable_title) != "":
+        return false
+    var tg = st["target"]
+    if tg == null:
+        return false
+    var tp: Vector3 = (tg["node"] as Node3D).global_position
+    return _flat((d as Node3D).global_position, tp) > LINE_HOLD
+
+## a guard's place on the muster line: slot i of n, facing the raiders.
+func _line_up(d: Node3D, st: Dictionary, i: int, n: int, centre: Vector3, cent_r: Vector3, delta: float) -> void:
+    (d as Townsfolk).stay = true
+    var v := Vector3(cent_r.x - centre.x, 0, cent_r.z - centre.z)
+    if v.length() < 0.5:
+        _anim(d, "idle")
+        return
+    var fwd := v.normalized()
+    var side := Vector3(-fwd.z, 0, fwd.x)
+    var mid := centre + fwd * LINE_FROM_CENTRE
+    var off := (float(i) - float(n - 1) * 0.5) * LINE_SPACING
+    var spot := mid + side * off
+    spot = town.call("keep_walkable", spot)
+    if _flat(d.global_position, spot) > 0.8:
+        _step(d, spot, float(st["speed"]), delta)
+        _anim(d, "run")
+        return
+    d.rotation.y = atan2(fwd.x, fwd.z)
+    _anim(d, "idle")
 
 ## a green hero's place: a ring on the market square, facing out
 func _hold_square(d: Node3D, st: Dictionary, centre: Vector3, i: int, delta: float) -> void:

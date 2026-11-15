@@ -587,6 +587,20 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
   - [x] D21b.1 defender hit FX parity: a Townsfolk/HeroBody taking a melee hit now flashes white and a floating damage number pops (matches raider side); townwalk in_solid 0/6172 (4 raid cycles).
   - [x] D21b.2 defender deaths read: a Townsfolk/HeroBody that is slain by a raider (and a non-Monster raider slain by the defenders) gets a red flash + FELLED! banner at the one real death point in raids.gd, so the stream reads who just dropped at pane distance. Parity with Monster.die()'s own readable death; KO/grace/CON-save paths unchanged. Headless gate: parse 0; _offfloor 0/1340 INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR; _townwalk runs clean (in_solid=1/10898 at T=70s = 0.009%, well under PASS<0.2%).
+  - [x] D21b.3 guard muster line: before the garrison closes with the raiders, each
+    guard takes a slot on a line drawn between the market centre and the raiders'
+    centre of mass (LINE_FROM_CENTRE 11 m, LINE_SPACING 2.2 m), facing them, until
+    a raider closes within LINE_HOLD 14 m - then normal _engage kicks in. Heroes,
+    the mounted watch and the Commander are untouched (they keep charging / the
+    square-hold / leading from the front); the line dissolves once the raiders'
+    centre is inside LINE_BREAK 22 m of the square, so a breach still fans the
+    guards out one-to-one. Gate GREEN: --import rc 0, parse 0; _offfloor 0/1320
+    INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR;
+    _townwalk in_solid 1/14956 (0.007%) raid_in_solid 0/2930 (0.000%) PASS;
+    tools/_d21b3_test.gd D21B3 OK 8 checks (8 raiders live when sampled, 8 of 14
+    muster-eligible guards had left their posts, 4 had closed toward the raiders'
+    centre, 2 stood on the line within 3.5 m). D21b REMAINDER: cavalry charge
+    that lands, FPS soak.
 # Phase G - audio polish (owns sfx.gd) [D22]
 - [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
 - [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.

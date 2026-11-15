@@ -5741,3 +5741,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - L64.4 unchanged (lane_held / _lane_owns). Not re-verified against pane contents this cycle.
 - Test tools/_l64_test.gd, WINDOWED 1080p, 300 s director clock at 4x: 41 cuts, 0 repeat/hold/why violations, shots shoulder 24 / follow 15 / push 1 / hard_cut 1; raid covered, death was SYNTHETIC (no natural death in window).
 - NOT DONE: the 30-min unattended recording (L64 DONE) and my eyes on the screenshots (folder grant pending, see summary). L64 stays open.
+## D-cycle D59b - snapshot v=4 goes out (game build, 2026-11-15 ~11:20 CT)
+- scripts/snapshot_pub.gd: PAYLOAD_V 3 -> 4 (.bak_d59b kept); comment now says never bump past the hub's KNOWN_V. tools/_d59_sheet.gd check 1 now asserts v == 4. Nothing else changed - every v4 field has been on the wire since D59a.
+- Safety: read the LIVE github.io app.js before flipping - KNOWN_V = {"1","2","3","4"} (H23), so v4 cannot blank the hub.
+- LOOKED: the v4 _d59_dump payload through the current web/ page (headless Chromium, supabase fetch intercepted): renders/cycles/d59/sheet_render_v4.png. Veteran Brannoc and fresh Isolde both: Abilities + Combat numbers, Initiative/Speed, IN TOWN chip, "Last seen 3 minutes ago", gear slots that exist filled and the rest drawn empty, Their own chronicle from h.events (veteran 4 lines, fresh "Enlisted: elf mage."). 0 page errors. The H20 gear-text and [object SVGSVGElement] bugs are gone.
+- Hub-side note (not mine): the fresh hero's MAIN HAND cell reads "Bare Hands · 1d4" though the publisher omits main_hand for bare hands - the hub falls back to h.weapon. Truthful enough; flagging only.
+- Tests: parse 0 errors; D59_SHEET OK 20/20; D57_SATCHEL OK; D60_CHRON OK; W1A_TEST OK (offline; 202 heroes 189 KB); TWITCH_PARSE OK; OFFFLOOR 0/1547 INPROP 0 MON_INPROP 0; TOWNWALK 3/14867 raid 0/10703 PASS; _delve_test rc 0; 0 SCRIPT ERROR anywhere. Payload: 2 heroes 8.0 KB.
+- D59 NOT ticked: only the LIVE-hub capture after a real 10-min run remains; not run outside the stream (it would play roster.json live). The next stream session shows it with no further change.

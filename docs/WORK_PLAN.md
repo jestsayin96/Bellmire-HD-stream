@@ -159,6 +159,29 @@ than leaving a queue that is all polish at the top.
       square dressed, the crowd doing more than standing, at least one notable and one hero in
       it, the music lifting and returning, and the Chronicle naming the reason. Plus one capture
       of a VIEWER-BOUGHT festival that is visibly bigger and named for the buyer. Gates green.
+  PROGRESS (game build, 2026-11-15 ~12:30 CT, D63a - all seven stages built, item left OPEN for two things):
+  .1 town.gd _dress_festival: a pole + pennon by every stall, bunting stall-to-stall round the ring and in to a lantern
+     crown over the well (one MultiMesh, 204 pennants; 306 for a gift, gold palette, a second lower ring), lantern
+     OmniLights lit from 18:00 (always for a gift), never solid (navmesh untouched), struck at the end.
+  .2 sfx.gd: mood "festival" (CC0 day_minstrel_dance, RandomMind) outranks delve/day/night, fades 3 s in / 6 s out;
+     the market murmur bed +5 dB while it runs. .3 townsfolk.gd: each body comes to DO something - dance (hop/cheer/
+     raise, near the well), drink, haggle at a stall front, cheer (acts fest_*); notables.gd sends chief, priest, bard
+     (plays in the middle), the children, pedlar, beggar and drunk; E3PO's festival lines already fire.
+  .4 hero_body.gd: a viewer's hero idling in town joins (its wander centres on the square) and toasts/cheers/hops;
+     a delve party coming home to a festival gets a "cheers them in" line tagged `who`; 40% of homecomings cause one.
+  .5 the square sells food off the stores into the treasury while it runs (closing line states lots + gold), and a
+     festival calls the next caravan in within 6-15 s (D39's chance, no new mechanic).
+  .6 reasons: market (the old timer, baseline), raid (50% when one is driven off), level (every level up), hero
+     (homecoming), gift - caused ones respect a 240 s gap; each reason has its own opening line, tagged festival + who.
+  .7 twitch_eventsub.gd tier 3 now calls town.start_festival("gift", [hero], buyer): 160-200 s, gold, lit, the
+     Chronicle names the buyer (control chars, <>{} stripped, 25 cap). FIXED A BUG: the old path set festival=true
+     with no timer, so a paid festival could end the very next frame. A gift bought during a raid waits for it to end.
+  TEST tools/_d63_fest.gd: D63_FEST OK 25/25. LOOK tools/_d63_shot.gd -> renders/cycles/d63/ (before / day festival /
+  struck / viewer festival at dusk, 1920x1080).
+  STILL OPEN: (a) the DONE's "short clip" - stills only, no clip recorded this run; (b) the words - every line is a
+  short code fallback until C6 lands. D63 READS C6 AS: lore_lines.json "festivals" = {openings: {market, raid, level,
+  hero, gift}, closings, gift_openings, gift_closings} - arrays of strings, placeholders {who} {buyer} {town}. No
+  code change needed when C6 ships in that shape. (Harvest and lord-felled reasons have no game event yet to hang on.)
 
 - [ ] C6. THE FESTIVAL HAS A VOICE (data/lore_lines.json). Owner: CONTENT WRITER - words only,
       never code, and D63 reads them rather than inventing parallel copies.
@@ -172,6 +195,10 @@ than leaving a queue that is all polish at the top.
       the buyer. Enough that a 24/7 stream does not repeat. Keep Bellmire's voice - medieval,
       D&D-flavoured, short, readable at a glance.
       DONE: json validates, every pre-existing key byte-identical, counts stated per category.
+      NOTE FROM D63a (game build, 12:30): the game already reads "festivals" in this shape - openings: {market, raid,
+      level, hero, gift} (the five reasons the game raises), closings, gift_openings, gift_closings; arrays of strings;
+      {who} = hero names, {buyer} = the viewer, {town} = the town's current name. Extra keys (barks, stalls, notable,
+      e3po) are welcome and will be read when D63 wires them; E3PO's festival lines stay in "e3po"."festival".
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
@@ -226,6 +253,13 @@ than leaving a queue that is all polish at the top.
   is to flip PAYLOAD_V from "3" to "4" and run the DONE capture: the live hub hero sheet for a kitted veteran and a
   freshly rolled hero. This is the FIRST thing the game build worker should do - the fields have been on the wire
   since 09:30 and the sheet is still drawing dashes over them.
+  PROGRESS (game build, 2026-11-15 ~11:20 CT, D59b): PAYLOAD_V FLIPPED TO 4 and committed - checked the LIVE
+  github.io app.js first (KNOWN_V = 1,2,3,4), so this cannot blank the hub. The v4 payload rendered through the
+  current hub page: veteran + fresh hero both show Abilities/Combat with real numbers, Initiative/Speed, IN TOWN +
+  "Last seen N minutes ago", real gear slots filled and the rest empty, and "Their own chronicle" from h.events
+  (renders/cycles/d59/sheet_render_v4.png, 0 page errors). Gates green. STILL OPEN, only this: the DONE capture of
+  the LIVE hub after a 10-min run with the real roster - not run outside the stream (it would play roster.json
+  live). The next time the game runs, the live hub reads v4 with no further change from anyone.
 
 - [x] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
       (scripts/snapshot_pub.gd and whichever of your own files raise Chronicle lines). H21 shipped the hub's

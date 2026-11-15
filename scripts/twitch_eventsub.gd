@@ -594,7 +594,7 @@ func handle_event(kind: String, e: Dictionary) -> void:
                 return
             _feed_line("%s cheers %d bits for Bellmire!" % [who, bits])
             _spot(uid, "bits", bits_seconds(bits), "cheered %d bits" % bits)
-            _do_bits_tier(uid, bits)
+            _do_bits_tier(uid, bits, who)
         "channel.custom_power_up_redemption.add":
             # a bought Power-up: its bit cost drives the same town-wide tier as a cheer
             var pu: Dictionary = e.get("custom_power_up", {}) if typeof(e.get("custom_power_up")) == TYPE_DICTIONARY else {}
@@ -606,7 +606,7 @@ func handle_event(kind: String, e: Dictionary) -> void:
                 return
             _feed_line("%s redeems %s (%d bits) for Bellmire!" % [who, ptitle, pbits])
             _spot(uid, "bits", bits_seconds(pbits), "redeemed %s" % ptitle)
-            _do_bits_tier(uid, pbits)
+            _do_bits_tier(uid, pbits, who)
         "channel.subscribe":
             if bool(e.get("is_gift", false)):
                 _feed_line("%s is gifted a place in the guild." % who)    # the gifter has the pane
@@ -709,7 +709,17 @@ static func bits_tier(bits: int) -> int:
             t = i
     return t
 
-func _do_bits_tier(uid: String, bits: int) -> void:
+## D63.7: the name a paid festival is given - the viewer's display name (control chars
+## stripped, capped at 25 like every W1a string), else their hero's, else nobody
+static func _buyer_name(buyer: String, hero: String) -> String:
+    var n := buyer if buyer != "" else hero
+    var out := ""
+    for ch in n:
+        if ch.unicode_at(0) >= 32 and ch != "<" and ch != ">" and ch != "{" and ch != "}":
+            out += ch
+    return out.strip_edges().left(25)
+
+func _do_bits_tier(uid: String, bits: int, buyer := "") -> void:
     if town == null:
         return
     var tier := bits_tier(bits)
@@ -771,14 +781,12 @@ func _do_bits_tier(uid: String, bits: int) -> void:
         return
 
     # ---- Tier 3 (500-999): Festival of Plenty
-    # trigger festival
-    if not bool(town.get("festival")):
-        town.set("festival", true)
-        var mk: Vector3 = Vector3.ZERO
-        if mk == Vector3.ZERO and town.get("_market_pos") != null:
-            mk = town.get("_market_pos")
-        if mk != Vector3.ZERO:
-            town.set("festival_at", mk)
+    # D63.7: the festival that starts is THEIRS - named for the buyer, longer, dressed in
+    # gold (town.start_festival "gift"). The old path set the flag with no timer, so a paid
+    # festival could end the very next frame. Under a raid it waits for the raid to end.
+    if town.has_method("start_festival"):
+        var heroes_for: Array = [who] if who != "" else []
+        town.call("start_festival", "gift", heroes_for, _buyer_name(buyer, who))
     # production boost 4x for 30 min
     if eco:
         eco.set("dis_work_k", 4.0)

@@ -643,3 +643,41 @@ attribute, URL or style.
   `unique_intros`, `events.monster_camps`), so no tells/description are shown. Needs a lore refresh (content worker).
 - A structured "monster met" signal: Met is inferred from remembered Chronicle text, so a beast the town
   met before this browser began remembering (or more than 48 h ago) reads as a rumour here.
+
+## H20 - the hero sheet is a character sheet (Nov 15)
+
+The hero card's open body is now a proper sheet (`heroSheet(h, mode)` in app.js), and every
+fallen memorial gets a lazily-built "Read their sheet" built from the same function
+(`mode = "fallen"`). Blocks: identity (crest, name, title, calling, level, pin), condition chips
+with an honest "last seen", HP/XP, Abilities, Combat, Gear by slot (nine slots; an empty slot is
+drawn as an empty slot, never omitted), Carrying/Satchel/cosmetics, Record, "Their own
+chronicle" (H20.3: the H14 history - live plus remembered in this browser, about 48 h - filtered
+to lines that name the hero as a whole word) and a foot line listing what the town did not send.
+
+Local check: `?mock=sheets&open=all` shows a bare level-1 hero, a kitted veteran, a hostile-named
+mage and a fallen hero's sheet (open the Fallen tab: `#fallen`). `?open=all` opens the first six
+heroes and every fallen sheet.
+
+Nothing is derived. No initiative-from-DEX, no estimated max HP, no guessed slot contents.
+
+### Snapshot fields the sheet wanted and did NOT get (for the game-build owner, snapshot_pub)
+These render as deliberate dashed empty cells and are named on each sheet's foot line. Aliases the
+page already accepts are in brackets - the publisher may send any of them.
+- `max_hp` [hp_max, maxhp, hpmax] - HP is a flat vitality bar without it.
+- `xp_next` [next_xp, xp_to_next, to_next].
+- `stats` {str,dex,con,int,wis,cha} - present in the real snapshot but absent on fresh heroes.
+- `ac`, `hp`, `to_hit`, `prof`, `saves` - drawn empty if missing (e.g. a fallen row carries none).
+- `initiative` [init] and `speed`.
+- `gear` / `equipment` object keyed `main_hand, off_hand, head, body, hands, feet, cloak, neck, ring`
+  (string or {name}). Only weapon (main hand) and armour (body) are published today; the other
+  seven slots are drawn empty with a "not published yet" tooltip.
+- `status` / `state` / `activity` / `where` on the hero - the sheet reads band membership from
+  `parties` and wounded from hp/max_hp, but cannot say "resting" or "in town" without a field.
+- a per-hero last-seen time - only the whole-snapshot `updated_at` exists.
+- On fallen rows: `species`, `ac`, `stats`, `weapon`/`armour` as slots, level history.
+- Wanted but not drawn as cells: background/origin, alignment, skills and proficiencies,
+  spells and slots, hit dice, a full inventory.
+- Personal history is only as good as the chronicle: lines must contain the hero's name verbatim.
+  A per-hero event feed (best depth, notable kills, deaths with day) from the publisher would
+  replace the name-match.
+

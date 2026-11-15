@@ -1096,3 +1096,61 @@ ol.ladder { list-style: none; margin: 0; padding: 0; }
 .tm-text { color: var(--parch-hi); }
 @media (min-width: 760px) { .st-grid { grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); gap: 26px; } }
 @media (forced-colors: active) { .rung.now .rg-dot, .rung.done .rg-dot { forced-color-adjust: none; } }
+
+/* ============================================================ H20: the character sheet
+   Parchment and ink; teal for the one accent, gold restrained. A field the town does not
+   publish is a dashed, quiet cell - an honest gap, never a zero. */
+.charsheet { gap: 11px; }
+.charsheet .sid { display: flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 2px solid var(--edge-2); }
+.charsheet .sid .pinbtn { margin-left: auto; flex: none; }
+.charsheet .swho { min-width: 0; flex: 1 1 auto; }
+.charsheet .sname { font-size: 1.28rem; font-weight: 700; color: var(--ink); line-height: 1.15; overflow-wrap: anywhere; }
+.charsheet .stitle { font-size: .95rem; font-style: italic; color: var(--ink-red); }
+.charsheet .scall { font-size: .9rem; color: var(--ink-soft); }
+.sconds { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.scond { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 99px; background: var(--parch-lo); color: var(--ink); border: 1px solid var(--edge-2); }
+.scond .bmic { width: 13px; height: 13px; }
+.scond.st-band { background: var(--teal-ink); color: var(--parch-hi); border-color: transparent; }
+.scond.st-fallen { background: var(--bad); color: var(--parch-hi); border-color: transparent; }
+.scond.st-burning { background: var(--warn); color: var(--parch-hi); border-color: transparent; }
+.scond.st-hurt { background: transparent; color: var(--bad); border-color: var(--bad); }
+.sseen { font-size: .8rem; font-style: italic; color: var(--ink-soft); }
+.sseen.stale { color: var(--bad); font-style: normal; font-weight: 600; }
+.ssec { display: grid; gap: 6px; padding-top: 8px; border-top: 1px solid var(--edge-2); }
+.ssec > .eyebrow { margin: 0; }
+.stat.unpub { background: transparent; border: 1px dashed var(--edge-2); }
+.stat.unpub .v { color: var(--ink-soft); opacity: .55; font-weight: 400; }
+.stats.combat { grid-template-columns: repeat(3, 1fr); }
+.gapnote { color: var(--ink-soft); font-style: italic; opacity: .75; }
+.slots { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.slot { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 6px 9px; border-radius: 7px;
+  background: var(--parch); border: 1px solid var(--edge-2); }
+.slot .sic { flex: none; width: 22px; height: 22px; color: var(--teal-ink); }
+.slot .stx { display: grid; min-width: 0; }
+.slot .sl { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+.slot .sv { font-size: .9rem; color: var(--ink); overflow-wrap: anywhere; }
+.slot.vacant { background: transparent; border-style: dashed; }
+.slot.vacant .sic { color: var(--ink-soft); opacity: .4; }
+.slot .sv.none { color: var(--ink-soft); font-style: italic; opacity: .7; }
+.slot.unpub { opacity: .75; }
+.plife { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.plife .pl { display: grid; grid-template-columns: 18px 1fr auto; gap: 8px; align-items: baseline; font-size: .9rem; color: var(--ink); }
+.plife .chipic { width: 15px; height: 15px; color: var(--teal-ink); align-self: center; }
+.plife .pls { overflow-wrap: anywhere; }
+.plife .plw { font-size: .75rem; color: var(--ink-soft); font-style: italic; white-space: nowrap; }
+.plife .pl.kind-death .chipic { color: var(--bad); }
+.plnote { margin: 2px 0 0; font-size: .82rem; color: var(--ink-soft); font-style: italic; }
+.sgaps { margin: 0; padding-top: 8px; border-top: 1px dashed var(--edge-2); font-size: .78rem; line-height: 1.45; color: var(--ink-soft); }
+.sgaps b { color: var(--ink-red); font-weight: 700; }
+.sdoom { display: grid; gap: 4px; }
+.sdline { margin: 0; font-weight: 600; color: var(--bad); }
+.sepi { margin: 0; font-style: italic; font-size: 1.02rem; color: var(--ink); overflow-wrap: anywhere; }
+.charsheet.fallen .coa { filter: grayscale(.55) brightness(.9); }
+/* the fallen's sheet sits inside the dark memorial; give it its own parchment leaf */
+.gsheet { margin-top: 8px; }
+.gsheet > summary { cursor: pointer; font-size: .85rem; color: var(--parch-dim); }
+.gsheet > summary:hover { color: var(--parch-hi); }
+.gsheet .charsheet { margin-top: 8px; background: var(--parch); color: var(--ink); border-radius: 8px; border: 1px solid var(--edge); padding: 12px 14px 14px; }
+@media (max-width: 460px) { .slots { grid-template-columns: 1fr; } .charsheet .sid { flex-wrap: wrap; } }
+@media (min-width: 700px) { .charsheet .stats.combat { grid-template-columns: repeat(6, 1fr); } }

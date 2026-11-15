@@ -141,9 +141,11 @@ func show_level(lv: int, quiet := false) -> void:
             built += 1
     if built > 0:
         feed.append("%d new houses go up in Bellmire." % built)
+        if town.has_method("tag_feed"): town.tag_feed("growth")     # D60
     for l in range(was + 1, lv + 1):
         for line in NEWS.get(l, []):
             feed.append(String(line))
+            if town.has_method("tag_feed"): town.tag_feed("growth")     # D60
 
     # D31a: visible construction. For every plot/special that newly turned
     # on this level-up, raise a scaffolding frame around it; _process clears
@@ -162,6 +164,7 @@ func show_level(lv: int, quiet := false) -> void:
                 scaffold_count += 1
         if scaffold_count > 0:
             feed.append("Builders raise scaffolding across Bellmire.")
+            if town.has_method("tag_feed"): town.tag_feed("growth")     # D60
 func stats() -> Dictionary:
     var built := 0
     for plot in houses:

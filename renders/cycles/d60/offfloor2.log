@@ -1,0 +1,68 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Hero0 and 7 others descend under the arch where the lamplight gives up.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 2 giant rats.
+FEED Somebody kept bringing flowers long after the names went.
+FEED Hero4 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 casts Smite at giant rat.
+FEED Hero6 casts Frost at giant rat.
+FEED Hero1 casts Bolt at giant rat.
+FEED Hero1 searches (Investigation 21) and turns up 14 gold on floor 1.
+FEED Floor 1 swept. The chalk goes on the wall.
+FEED Hero1 searches the chest - Successfully found loot!! 20 gold (Investigation 18 vs DC 10).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero0 spots a blade trap (Perception 14 vs DC 10) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 hollowed bog frog, 1 hollowed cave bat.
+FEED Hero2 casts Bolt at hollowed bog frog.
+FEED Hero6 casts Bolt at hollowed bog frog.
+FEED Hero1 casts Chain Bolt at hollowed bog frog.
+FEED Hero7 rolls a 20 - and the bog frog is gone.
+FEED Hero1 searches (Investigation 22) and turns up 29 gold on floor 2.
+FEED Clear. Count the flasks; the count tells the same lie it always does.
+FEED Hero1 finds a vial of Collier's Brew.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero1 cracks the chain off a captive - 42 gold passes to the party, split 8 ways.
+FEED Hero1 steps on a plate - darts! DEX 5 vs DC 11, 7 damage.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 risen bones, 1 puglin, 1 drowned slime.
+FEED Hero3 spots a pressure plate (Perception 18 vs DC 11) and steps round it.
+FEED Hero2 reaches for smite; the scar reaches back (1 vs DC 11).
+FEED Hero7 rolls a 20 - and the puglin is gone.
+FEED Hero0 rolls a 20 - and the risen bones is gone.
+FEED Hero6 casts Frost at drowned slime.
+FEED Hero2 casts Smite at drowned slime.
+FEED Hero1 casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Hero1 searches (Investigation 24) and turns up 44 gold on floor 3.
+FEED Floor 3 - the dark backs off a step.
+FEED Hero1 finds a vial of Owl-eye Drops.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero0 spots a fire grate (Perception 16 vs DC 11) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 1 hollowed skeleton minion, 2 cave spiders, 1 drowned giant rat.
+FEED The oil is running low.
+FEED Hero2 reaches for smite and the scar reaches back (7 vs DC 12).
+FEED The slime divides.
+FEED Hero6 shapes frost and the scar unshapes it (1 vs DC 12).
+FEED Hero4 turns on the wounded drowned giant rat to finish it.
+FEED Hero5 turns on the wounded drowned giant rat to finish it.
+FEED Hero6 turns on the wounded drowned giant rat to finish it.
+FEED Hero7 turns on the wounded drowned giant rat to finish it.
+FEED Hero1 searches (Investigation 14) and turns up 46 gold on floor 4.
+FEED Floor 4 holds. Measure the grain, mend the mail.
+FEED Hero1 spots a spike trap (Perception 15 vs DC 12) and steps round it.
+FEED 1 slime, 1 puglin was waiting in the dark, and now it isn't.
+OFF monster puglin state=search
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 153 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 20 kills between them.
+FEED Hero1 is fitted with leather. (+10 hp) Haggled 15% off (17).
+OFFFLOOR 1 of 1309 samples; INPROP 0; MON_INPROP 0 of 93; floor reached 4 frames 4568 obstacles 28
+
+RC 0

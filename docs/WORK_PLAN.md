@@ -41,6 +41,55 @@ DO NOT reassign boss_bar.gd, party_frames.gd, delve.gd or monster.gd to the HUD 
 in one file is how merges break. If Mr. E wants the L31 leftovers built, they go to their OWNER as
 a new item, not to the HUD worker.
 
+## MR. E'S GEAR AND ECONOMY RULING (2026-11-15 11:46 - BINDING, he designed this)
+
+His words, and the system they describe. Every gear, shop, trader and event item from here must
+obey it. This supersedes any earlier loose talk about "loot tables".
+
+  "gear can be obtained a number of ways, looting, buying in the shop, or forging at a blacksmith.
+   The only way progression would work is if they bought it in a shop. But reminder shops upgrade
+   depending on events. If people spend bits or channel points during an event poll to upgrade
+   specific shops and specific buildings or aspects of the town.
+   So a shop that is level 1 isn't going to sell epic or legendary equipment. Unless a trade
+   caravan comes along and per chance brings a higher tier item or equipment. All per chance when
+   it comes to the trader."
+
+WHAT THAT MEANS, stated so no worker has to guess:
+  1. THREE ROUTES TO GEAR, and they are NOT equivalent:
+     - LOOT from a delve: what the floor and the boss happened to drop. Chance.
+     - FORGE at the blacksmith: a hero spending their own gold, one step at a time (L55 shipped
+       this - Roster.kit_up_after_delve, armour first, KIT_RESERVE kept back).
+     - BUY at a shop: the ONLY reliable progression route. A hero who wants to climb, buys.
+  2. A SHOP'S LEVEL CAPS WHAT IT SELLS. A level 1 shop does not stock epic or legendary, no matter
+     how much gold a hero carries. Tier availability is a property of the BUILDING, not the buyer.
+  3. SHOPS AND BUILDINGS ARE UPGRADED BY VIEWERS, through an event poll, with bits or channel
+     points, naming the specific shop/building/aspect of the town to upgrade. This is the economic
+     spine of T4/T5 - the viewer roll is not decoration, it is how the town's ceiling rises.
+  4. THE TRADE CARAVAN IS THE ONLY WAY AROUND THE CAP, and it is PURE CHANCE. A caravan may
+     happen to carry one higher-tier piece. It is never guaranteed, never scheduled, never a
+     reliable route. That chance is what makes a caravan worth watching on stream - and it is why
+     D39 (traders must matter) and bandits intercepting them have real stakes.
+
+  5. EVERY HERO STARTS WITH THE MOST BASIC GEAR OF THEIR CLASS (Mr. E, 11:47). Not nothing.
+     Today tier 0 is "bare hands" (1d4, atk 0) and "rags" (0 hp, 0 ac) for EVERY calling, so a
+     Knight and a Mage begin identically holding nothing. That is wrong. A calling's starting kit
+     must be the plain, humble version of what that calling actually carries - a knight's worn
+     sword and gambeson, a mage's walking staff and travelling robes, a ranger's hunting bow, a
+     rogue's knife. Cheap, weak, unglamorous, and UNMISTAKABLY that class. "Bare hands" stays only
+     as the genuinely-unarmed fallback, not as everyone's default.
+     There are 15 callings (blade 5, axe 2, ranged 1, arcane 6, 1 open) sharing 6 weapon tiers.
+
+  6. AND YES - WE DO NEED MORE EQUIPMENT (Mr. E, 11:47). This is not only a gating job. The
+     catalogue itself is too thin: 6 weapon tiers and 6 armour tiers against 886 appearance items.
+     Expand it. More weapons and armour per family and per tier, so two heroes of the same calling
+     at the same tier are not holding an identical object, and so loot, forge and shop each have
+     something of their own to offer.
+
+CONSEQUENCE FOR THE PLAN - BOTH HALVES, and the gates come first only because the catalogue needs
+somewhere to land. Write the SYSTEM (class starting kits, tiers, shop levels, the upgrade poll, the
+caravan chance), and expand the CATALOGUE into it. Do not do one and call the item done. Gear
+variety without the gates is noise; gates without variety is an empty shop. Mr. E asked for both.
+
 ## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
 
 Mr. E: "longer and bigger tasks need to be handed out."

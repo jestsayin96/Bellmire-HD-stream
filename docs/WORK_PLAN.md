@@ -1,5 +1,130 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## MR. E'S RULING (Nov 15 16:05) - DISTANCE IS THE COST. NOTHING TELEPORTS.
+
+Verbatim: "we need to add a store tab as well to the hub if its not there already so people can go
+buy stuff from there as well. the caveat is that their character has to walk all the way back to
+the town to that specific shop to physically purchase it. also no more teleporting out of the
+dungeon. they have to physically walk out of the dungeon floor by floor, and fight their way back
+out. also we can add teleportation stones for 1,000 channel points."
+
+THIS IS BINDING AND IT IS THE SPINE OF THE ECONOMY. Gold is not the only price of a thing - the
+walk is. A hero eight floors down with a full satchel is carrying a decision, not an inventory.
+Every system below exists to make that walk matter. No worker may add a shortcut, a "go home"
+button, an instant collect, or any other quiet teleport to ANY of it.
+
+MEASURED STATE OF THE CODE (checked 16:05, do not re-derive it):
+  - delve.gd `_finish()` sets `state = "home"` and fires `ended`. The party blinks from the floor
+    it stood on to the town in one frame. THAT IS THE TELEPORT. It is one function, and D77 is
+    about what replaces it.
+  - delve.gd `_finish()` also calls `Roster.kit_up_after_delve()` - gear is fitted the instant the
+    delve ends, from nowhere, by no one. That contradicts the Nov 15 gear ruling (shops and the
+    blacksmith) and the shop caveat above. D78 ends it.
+  - The hub's twelve tabs are boards, state, heroes, bands, chronicle, dice, roll, fallen, lore,
+    bestiary, chat, commands. THERE IS NO SHOP TAB. H29 is new work, not a fix.
+
+### D77 - THE ASCENT (game build, after D44/D50 closes)
+
+No teleport out. A party that is done going down turns around and climbs. The floors they already
+cleared are not empty and are not a corridor: a scar closes behind an intruder.
+
+Staged parts, all of them:
+  1. `delve.gd` gains a `state = "ascending"` between the deepest floor and "home". `_finish()`
+     stops being the end of a delve and becomes the start of the climb.
+  2. The climb reuses the floors already generated, in reverse. A floor on the way up is NOT
+     rebuilt from scratch - it is the same room the party bled in, so the viewer recognises it.
+  3. Repopulation on the way up, and it must be thinner than the way down, not the same: a
+     fraction of the original floor budget, favouring the strains that scavenge (Bestiary already
+     bands these). A cleared floor that is as deadly as it was is not a climb, it is a second
+     delve, and nobody will ever go deep.
+  4. The stairs up are a real position the party walks to. Nav, not a signal.
+  5. Flasks and the satchel keep ticking on the way up. A party that spent everything getting down
+     is the one that does not come back - that is the whole drama and it must be real.
+  6. A wipe on the ascent is a wipe. `roster.kill` with the floor they fell on, and the haul is
+     LOST - it never reaches `town.receive_haul`. State that plainly in the feed.
+  7. The HUD must say which way they are going. Hand the direction to the HUD worker as a one-line
+     API (`Delve.direction` -> "down"/"up") rather than a HUD item; the HUD worker owns the panel.
+  8. The Chronicle and the hub payload need the climb: a delve's record now has a deepest floor AND
+     whether they got out. "Reached floor 9" and "came back from floor 9" are different sentences
+     and the hub must be able to tell them apart (payload v5).
+
+DONE TEST: start a delve with a scripted depth, let it turn around, and log every floor transition
+with a timestamp and the party's position. Pass requires: zero position discontinuities over 1.5
+units per frame across the whole climb, the party crossing every floor it descended, at least one
+fight on the way up, and a feed line naming the exit. Then run a wipe-on-ascent case and assert
+the town's stores did not change.
+
+### D78 - THE ERRAND (game build, with D77)
+
+A purchase is not a transaction, it is an errand. This is the caveat Mr. E named, and it applies to
+the shop, the blacksmith, and anything else bought in Bellmire.
+
+  1. A buy becomes an ORDER: who, which item, which building, placed when. It sits unfilled.
+  2. The hero walks to that building. The specific one - the armourer's order is not collectible at
+     the market stall. Existing town nav, existing building positions.
+  3. On arrival the gold moves and the item is theirs, and the feed says so by name and place.
+  4. Shop level gates the order at the moment of PLACING it (the Nov 15 ruling: a level 1 shop does
+     not stock epic). If the shop is upgraded between placing and collecting, the order does not
+     silently improve.
+  5. Gold is held when the order is placed, not when it is collected, so one purse cannot fund two
+     orders.
+  6. An order placed while the hero is in the dungeon waits. It is collectible after the ascent -
+     which is exactly how the walk becomes the price.
+  7. `kit_up_after_delve` is DELETED and replaced by orders. A hero who comes home with gold and no
+     order placed stays in the gear they wore. That is correct and it is the point: spending is a
+     choice a viewer makes, not something the game does for them.
+  8. Starting kits are untouched - everyone still begins in the basic gear of their calling.
+
+DONE TEST: place an order from each building type at two shop levels, log the hero's path and the
+gold ledger at placement and at arrival, and assert: no item ever appears in a satchel without a
+walk, no gold moves twice, a tier above the shop's level is refused at placement, and a hero
+interrupted mid-errand still has the order outstanding.
+
+### D79 - TELEPORTATION STONES (game build, after D77 - it is meaningless before the climb exists)
+
+Mr. E's idea, and it is the right shape: the stone is not a convenience, it is insurance that must
+be bought BEFORE the gamble. 1,000 channel points.
+
+  1. A stone is an item in the satchel. It is bought like anything else, which means D78's errand -
+     a stone cannot be conjured mid-delve, and it cannot be bought from the dark.
+  2. Using one ends the delve where the party stands and brings them home with what they carry.
+     This is the ONLY sanctioned teleport in the game and it exists because someone paid for it.
+  3. One stone, one hero. A party of four needs four to all get out, so the viewer with a stone
+     chooses between their own skin and the band's.
+  4. It is consumed. It is said aloud, loudly, with the floor number: "Stone shatters on floor 11.
+     <name> is home." The spectacle is the product.
+  5. A stone does NOT work on a lord's floor while the lord lives. There has to be one place the
+     stone cannot save you, or depth stops meaning anything.
+  6. Stock is the shop's: not always available at level 1, and the trader may carry them. Per
+     chance, per the trader ruling.
+
+DO NOT CREATE THE REWARD. The 1,000-point reward on Twitch is Mr. E's to make, as all rewards are.
+Build the item, the stock, and the command path; leave the redemption wiring behind a flag and tell
+him it is ready.
+
+### H29 - THE SHOP TAB (hub worker, next item)
+
+A thirteenth tab: Shops. The hub is where a viewer decides what to spend on, so it has to show the
+shelf honestly.
+
+  1. Every shop and the blacksmith, each with its level, and what that level stocks RIGHT NOW.
+  2. Prices from the live snapshot, never from a hard-coded table in the hub.
+  3. The trader's cargo when a caravan is in town, marked as passing through - it is the only place
+     a higher tier shows up at a low level and the hub should make that feel like luck.
+  4. State the caveat on the tab itself, in one plain line: buying places an order and the hero has
+     to walk to that building to collect it. A viewer who does not know that will think the hub is
+     broken.
+  5. A viewer's own outstanding orders, where they are, and who is walking.
+  6. `data/items.json` already holds `shop_stock` (245) and `trader_cargo` (147), both marked "Dead
+     until wired" and read by NOTHING. Wiring them is part of this: the payload must carry them
+     (v5, with D77's direction field) before the tab can be honest.
+  7. Security invariants hold with no exceptions: `el()`/textContent only, the ICON_SET whitelist,
+     the strict CSP unchanged, and the hostile-name canary extended to cover item and shop names.
+
+DONE TEST: the tab renders from a snapshot with every shop at level 1, again with mixed levels and
+a caravan present, and again with a hostile item name; no innerHTML anywhere in the new code, CSP
+unchanged, and the canary passes.
+
 ## THE HUD WORKER'S QUEUE IS DRY - WRITE IT NEW WORK (supervisor, 2026-11-15 05:06)
 
 The HUD worker stood down at 04:55 with no item it is ALLOWED to build. Its reasoning was correct
@@ -578,6 +703,10 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   IT SURVIVES:     D23 (FPS), L56 (delve soak)
   THE CHANNEL:     L68, L69, D67, D69, D70, L70, D71 (D71 only if Mr. E approves it)
   THE SOUND:       D72
+  THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
+    Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
+    the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and
+    H29 follow them and must not be started first.
 T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
 it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
 

@@ -525,6 +525,11 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
         (tn as Monster).hp = float(ts["hp"])
         (tn as Monster)._number(dmg, crit)
         (tn as Monster)._flash()
+    elif tn is Townsfolk:
+        # D21b: defenders (guards, chief, watch, heroes) show the same
+        # white flash + floating number as raiders when a blow lands.
+        (tn as Townsfolk)._number(dmg, crit)
+        (tn as Townsfolk)._flash()
     var killer := _name_of(me, st)
     if crit and me is HeroBody and defending:
         var tname := String(tg.get("name", "the raider"))

@@ -1082,3 +1082,49 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - Staged only the files this change touches (scripts/growth.gd, tools/_d31_test.gd +
   .uid, docs/WORK_PLAN.md, docs/PROGRESS.md, docs/RUN_LOCK.txt); the tree carries other
   sessions' untracked WIP (prior cycles' .uid, logs) not mine to sweep in with git add -A.
+
+
+## D-cycle - D21b.1 defender hit FX parity, 2026-11-14 23:41 (game build)
+- Item: D21b (first open DESKTOP item) - RAID COMBAT FEEL. Scoped this cycle to
+  the smallest readable piece: parity between raider and defender hit feedback.
+  Raiders flashed white and showed a floating damage number on every blow
+  (Monster._flash / Monster._number). Defenders (Townsfolk guards/chief/watch,
+  HeroBody heroes) did NOT - a melee hit on them only played a Hit_A/Hit_B/
+  Block_Hit anim via _reel, which is hard to read at stream distance. The rest
+  of D21b (deaths that read, guard formations, a cavalry charge, raid FPS soak)
+  stays open.
+- CHANGE 1 scripts/townsfolk.gd: added _flash() + _tick_flash() + _number() with
+  the same shape as Monster's (walk _mdl for visible MeshInstance3Ds, duplicate
+  StandardMaterial3D per surface, set emission to white at 1.6x for 0.12 s, then
+  clear). _process now ticks the flash when _flash_t > 0. HeroBody extends
+  Townsfolk so it inherits both. _number spawns a billboard Label3D that tweens
+  up and fades over 0.9 s; crits use a gold modulate and a '!' suffix, same as
+  Monster's.
+- CHANGE 2 scripts/raids.gd melee hit path (~offset 23698): kept the Monster
+  branch unchanged, added an `elif tn is Townsfolk` branch that calls the new
+  _number/_flash on the defender. The spell and tower-bolt damage paths target
+  raiders only (always Monster) so they needed no change.
+- HEADLESS: Townsfolk._flash guards `DisplayServer.get_name() == "headless"`
+  - the dummy renderer logs "Parameter 'material' is null" when we duplicate a
+  StandardMaterial3D with external texture refs (KayKit characters have them).
+  Under the guard _flash still sets _flash_t so _tick_flash runs, but skips the
+  material surgery. The three ERRORs still in the townwalk log are from the
+  Monster-side _flash (raiders from the scar, pre-existing, not from this
+  change) and don't appear in delve/offfloor.
+- TEST tools/_d21b_test.gd (new): builds a bare Townsfolk, confirms has_method
+  _flash/_number/_tick_flash, fires them (crit and non-crit), confirms HeroBody
+  inherits both. D21B_FX OK.
+- GATES:
+  - parse 0 SCRIPT ERROR / 0 Parse Error (--quit-after 300 clean)
+  - tools/_twitch_parse.gd -> TWITCH_PARSE OK
+  - tools/_offfloor.gd -> OFFFLOOR 0 of 1425 samples; INPROP 0; MON_INPROP 0 of 137
+  - tools/_delve_test.gd -> 0 SCRIPT ERROR, party reaches floor 2
+  - tools/_townwalk.gd -> in_solid 0/1215, 0/2890, 0/4578, 0/6172 across 4 raid
+    cycles; 0 stuck_on_route; 0 SCRIPT ERROR. The 240 s subprocess timed out
+    before the final PASS line (prior D31a cycle treated this the same way) -
+    the in_solid trace is the signal and it is clean. The 3 mat_null log lines
+    are the pre-existing Monster._flash-in-headless noise, unchanged by this
+    change.
+  - tools/_d21b_test.gd -> D21B_FX OK
+- Staged only the files this change touches (scripts/townsfolk.gd, scripts/raids.gd,
+  tools/_d21b_test.gd, docs/WORK_PLAN, docs/PROGRESS, docs/RUN_LOCK).

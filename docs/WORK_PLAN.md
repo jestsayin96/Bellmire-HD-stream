@@ -533,6 +533,72 @@ WHAT THIS MEANS FOR DESIGN:
       DONE: rewards show paused on the dashboard within seconds of the game closing, unpaused once
       it is live, a forced crash leaves them paused, and no fightoverlay reward is ever modified.
 
+## WHAT "DONE" MEANS - THE ROAD TO A FINISHED GAME (Mr. E: "do what's needed to get this game to
+## completion", Nov 15 14:50). BINDING ON THE SUPERVISOR.
+
+THE PROBLEM THIS SOLVES: this plan has had no finish line. The supervisor writes new work whenever
+a queue drains, which is correct for depth and fatal for shipping - left alone it generates items
+forever and the game is never done. 51 items are open and 169 are closed, but those 51 are not
+equal: a few are the game NOT WORKING and most are the game not being as deep as it could be.
+
+BELLMIRE HD IS FINISHED WHEN MR. E CAN STREAM IT FOR FOUR HOURS WITHOUT APOLOGISING FOR IT.
+Concretely, all five must be true:
+  1. THE LOOP CLOSES. A viewer arrives, gets a hero, that hero delves, gains or loses something
+     that matters, and comes home or doesn't - visibly, without Mr. E explaining it.
+  2. SPENDING CHANGES THE WORLD. Bits and channel points do something permanent and visible, not
+     just a buff. A viewer can point at the town and say "I paid for that".
+  3. IT READS WITHOUT A COMMENTATOR. A stranger watching for sixty seconds understands what is
+     happening. Nothing overlaps, nothing important is off-screen, a fight is legible.
+  4. IT SURVIVES THE SESSION. Four hours at frame rate, no stranded heroes, no silent stalls.
+  5. THE CHANNEL WORKS. The bot answers, the polls run, the hub is current.
+
+### PHASE RC - THE CRITICAL PATH. Nothing else ships the game; everything else deepens it.
+Work these FIRST, in roughly this order, regardless of where they sit elsewhere in this file:
+  THE LOOP:        D52 (hero won't delve), D44/D50 (wedged walkers), D64, D65, D66, C7, T5, T4
+  IT READS:        D61 (fights read), L36, L40, D41 (overlap), D48 (selection frame), L64 (director)
+  IT SURVIVES:     D23 (FPS), L56 (delve soak)
+  THE CHANNEL:     L68, L69, D67, D69, D70, L70, D71 (D71 only if Mr. E approves it)
+  THE SOUND:       D72
+T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
+it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
+
+### THE RULE THAT MAKES THIS WORK
+WHILE ANY PHASE RC ITEM IS OPEN, DO NOT WRITE NEW ITEMS unless a worker has NO RC item it can take
+AND no open item at all. The "write new work when a queue runs dry" instruction still stands - it is
+now subordinate to this. Depth is not cancelled, it is deferred: everything outside Phase RC stays
+in this file and gets built after, or when Mr. E asks for it by name.
+Do not re-scope or renumber anything to fit this. IDs stay frozen.
+
+- [ ] D72. REBUILD BELLMIRE'S SOUND ON MUSIC-STUDIO 3.5.15 (supersedes the old D38 recipe; D38's
+      beds stay wired and streamable until this lands). Owner: DESKTOP BUILD (sfx.gd and the
+      generator tool) with the music-studio repo READ-ONLY as always - run it in place, copy WAVs
+      out, never modify it.
+      MR. E UPGRADED THE TOOL (Nov 15, v3.5.2 -> v3.5.15) and everything that blocked the first
+      attempt is fixed. Read its own docs first; do not assume the old API:
+        - 3.5.3 a truly headless compose path - no vite, no CDP, no browser. Use it.
+        - 3.5.4 the bias knobs now survive compose(), so describe()/exportWav() agree.
+        - 3.5.5 tempoByMood + intensity-based mood scoring - THE RAID CUE CAN NOW PASS. The old
+          "epic_cinematic can never satisfy hype" compromise is dead; do not carry it forward.
+        - 3.5.6 compose --stems: vertical layers with an intensity manifest.
+        - 3.5.7 long-form variations sharing key, tempo and motif, with seam-checked loops.
+        - 3.5.8 a project JSON pinning key and tempo family across every cue.
+        - 3.5.9 a leitmotif quoted across town/night/combat treatments.
+        - 3.5.10 transition bridges; 3.5.11 hill-climb seed search toward the scorers.
+      .1 ONE PROJECT, ONE KEY, ONE MOTIF. Define Bellmire's own melodic phrase once and pin the
+         project key and tempo family, so day, night, raid and delve are the same place in
+         different weather rather than four unrelated cues. This is the point of the rebuild.
+      .2 STEMS, AND WIRE THEM. Render layers, then change sfx.gd from crossfading whole TRACKS to
+         fading LAYERS - the music thickens as the town fills or a raid builds. Keep the existing
+         whole-track path as the fallback when stems are missing.
+      .3 VARIATIONS SO A LONG SESSION DOES NOT REPEAT. Several renderings of each cue, shuffled.
+      .4 REGENERATE EVERYTHING on the new tool, including the raid cue at a tempo that passes.
+      .5 THE SPEECH POCKET STILL RULES. Every bed keeps its 300-3000 Hz speech-room verdict - Mr. E
+         talks over all of it. Record each cue's mood and speechRoom numbers in PROGRESS.md.
+      HE HAS THE FINAL EAR: deliver the files for him to listen to and DO NOT TICK THIS until he
+      approves them. He declined to approve the first set precisely so they could be redone here.
+      DONE: a project with key, tempo family and leitmotif; stem-wired transitions proven in a
+      capture; variations shuffling; every bed's speech room passing; Mr. E's approval recorded.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
@@ -1844,23 +1910,6 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       categories are written + the picker already handles them - they just need their triggers to call
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
-- [ ] D38. ON HOLD BY MR. E (2026-11-15 13:34) - DO NOT WORK THIS ITEM, DO NOT REGENERATE THE BEDS,
-      DO NOT TICK IT. He listened to the four beds and both stings and said they "sound good", but he
-      is UPGRADING music-studio first and wants them REDONE on the upgraded tool before he approves
-      anything. The current files in assets/audio/music/ (bellmire_day/night/raid/delve + the two
-      stings) STAY as they are and stay wired - they are good enough to stream on. Leave them alone.
-      The three open questions (raid style vs the hype tempo gate, night's level, whether the delve
-      bed should be director-driven) are DEFERRED until after the regeneration - do not answer them
-      on his behalf and do not raise them with him again until he says the tool is ready.
-      HE WILL SAY WHEN. Until he does, this item is not available to any worker.
-      The upgrade he is making covers: a genuinely headless CLI, the compose() bias-knob bug, the
-      style/mood tempo conflict, STEMS/vertical layering, long-form variation, project key+tempo
-      coherence, leitmotif, transition cues, better seed search, and later procedural crowd/creature
-      vocalisations, ambience and impact SFX.
-      WHEN STEMS LAND, THE WIRING CHANGES: D22b's sfx.gd crossfades whole tracks. With stems it
-      should fade LAYERS instead - the same piece with more of it as the town fills or a raid builds.
-      That is a better system than what shipped; write it as a new item then, do not retrofit it now.
-
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
       MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
       TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into

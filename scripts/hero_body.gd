@@ -46,21 +46,25 @@ func _ready() -> void:
         Gear.strip_props(_mdl)
         refresh()
     add_to_group("viewer_heroes")
-    # the town's own adventurers: a silver name (viewers' heroes are gold), no ring
+    # the town's own adventurers: a bold silver name (viewers' heroes are gold), no ring.
+    # Mr. E's rule: ONLY adventurers, notables, and shopkeepers get a floating name,
+    # and when they do it is big and bold so it reads from the stream cam.
     if npc:
         for c in get_children():
             if c is Label3D and c != _shout:
                 var lb: Label3D = c
                 lb.visibility_range_end = 0.0
                 lb.visible = true
-                lb.modulate = Color(0.84, 0.86, 0.92)
-                lb.font_size = 60
-                lb.pixel_size = 0.010
-                lb.position.y = 2.6
+                lb.modulate = Color(0.90, 0.92, 0.98)
+                lb.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+                lb.outline_size = 16
+                lb.font_size = 72
+                lb.pixel_size = 0.011
+                lb.position.y = 2.7
                 var hh := roster.get_hero(user_id)
                 lb.text = "%s\n%s" % [person_name, String(hh.get("class", "")).capitalize()]
         return
-    # viewers' heroes are what the stream watches: a gold name always shown,
+    # viewers' heroes are what the stream watches: a BOLD gold name always shown,
     # their class under it, and a soft ring of light at their feet
     for c in get_children():
         if c is Label3D:
@@ -68,8 +72,10 @@ func _ready() -> void:
             lb.visibility_range_end = 0.0
             lb.visible = true
             lb.modulate = Color(1.0, 0.84, 0.35)
-            lb.font_size = 72
-            lb.pixel_size = 0.011
+            lb.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+            lb.outline_size = 18
+            lb.font_size = 80
+            lb.pixel_size = 0.012
             lb.position.y = 2.7
             var h := roster.get_hero(user_id)
             lb.text = "%s\n%s" % [person_name, String(h["class"]).capitalize()]

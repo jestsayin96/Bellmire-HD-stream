@@ -1247,15 +1247,22 @@ func _posted(delta: float) -> void:
         if gl != POST_GESTURES:
             acts["job"] = int(acts.get("job", 0)) + 1
 
-## D6: name this body as one of Bellmire's own (works before or after _ready)
+## D6: name this body as one of Bellmire's own (works before or after _ready).
+## Mr. E's rule: a notable's name is BOLD and legible from the stream cam - the same
+## tier of visibility as viewer heroes / NPC adventurers, but in a warm cream colour
+## so they read as named townsfolk (E3PO, the chief, shopkeepers) distinct from heroes.
 func make_notable(nm: String, title: String) -> void:
     person_name = nm
     notable_title = title
     if _tag != null:
         _tag.text = "%s\n%s" % [nm, title]
-        _tag.modulate = Color(1.0, 0.88, 0.55)
+        _tag.modulate = Color(1.0, 0.90, 0.60)
+        _tag.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+        _tag.outline_size = 16
+        _tag.font_size = 68
+        _tag.pixel_size = 0.010
         _tag.visible = true
-        _tag.visibility_range_end = 60.0 if show_names else 14.0
+        _tag.visibility_range_end = 0.0           # always on, Mr. E wants them seen
 
 ## ---- D17c: STATE COVERAGE. What a body does where it stands. A worker at
 ## the job (posted keepers, and walkers who work their yard out of doors) works

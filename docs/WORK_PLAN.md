@@ -59,6 +59,44 @@ than leaving a queue that is all polish at the top.
   RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
   NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
 
+- [ ] D59. THE HERO SHEET NEEDS A CHARACTER SHEET TO READ - PUBLISH THE D&D BLOCK AT v=4 (supervisor,
+      2026-11-15, straight out of the hub's own NOTES; this is the D57 situation again - a shipped hub
+      section is sitting dormant waiting on the publisher). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd,
+      plus whichever of YOUR OWN files already hold the numbers). H20 shipped the hero sheet on the hub:
+      identity, conditions, abilities, combat, nine gear slots, a personal chronicle. Today most of those
+      cells render as honest dashes because the snapshot does not carry the fields. Fill the sheet in.
+      READ web/NOTES.md section "H20" FIRST - it lists every field the page wants and every alias it will
+      already accept, so you do not have to guess a key name. Additive and forward-compatible: bump the
+      published `v` from "3" to "4", keep every v=3 field exactly as it is, keep the W1a control-char strip
+      and the 25-char name cap on every string, and keep the payload under its size cap (state the KB).
+      .1 VITALS AND PROGRESSION. Per hero: `max_hp` (so the hub can draw a real vitality bar instead of a
+         flat one), `xp_next`, and `stats` {str,dex,con,int,wis,cha} present on EVERY hero including a
+         freshly rolled one - today they appear only once a hero has been somewhere. Then the combat block
+         the sheet already has cells for: `ac`, `hp`, `to_hit`, `prof`, `saves`, `initiative`, `speed`.
+         Publish what the game actually computes. If a number does not exist in the game yet, DO NOT invent
+         it and do not derive it on the publisher's side - leave the field out so the hub keeps drawing an
+         honest empty cell, and name it in your summary. A guessed stat on a 24/7 stream is worse than a dash.
+      .2 WHAT A HERO IS WEARING AND WHAT THEY ARE DOING. Publish `gear` as an object keyed exactly
+         main_hand, off_hand, head, body, hands, feet, cloak, neck, ring (string or {name}). Only main hand
+         and body exist today; send the slots that are real and OMIT the rest - an omitted slot draws as an
+         empty slot, which is the truth, while an empty string would read as a bug. Also per hero: `status`
+         (resting / in town / delving / wounded / fallen - the state the game already knows, not a new
+         system) and a per-hero last-seen timestamp, because the whole-snapshot `updated_at` is all the hub
+         has and it cannot tell a hero who acted a second ago from one who has not moved in an hour.
+      .3 A PER-HERO EVENT FEED, so the personal chronicle stops being a string match. The hub currently
+         builds "their own chronicle" by scanning Chronicle lines for the hero's name as a whole word,
+         which silently misses every line that refers to them any other way. Publish a short per-hero
+         ring of their own events (deepest run, notable kills, deaths with the day, level-ups, finds) -
+         capped, newest-first, oldest dropped, sized so the payload stays under cap with a full roster.
+      DONE (one test, all three stages): with the publisher on and a full roster, a 10-minute run, then a
+      capture of the LIVE hub hero sheet for (a) a kitted veteran and (b) a freshly rolled hero, showing
+      Abilities and Combat filled with real numbers on both, the gear slots that exist resolved and the
+      rest drawn empty, a status and a per-hero last-seen reading correctly, and the personal chronicle
+      populated from the published feed rather than from name-matching. Plus: W1A_TEST OK, TWITCH_PARSE OK,
+      parse 0 errors, payload KB stated and under cap, and a v=3-era client still renders the hero sheet
+      (additive check). State in your summary every field from the NOTES list you deliberately did not
+      publish and why.
+
 - [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
       BUILD (townsfolk.gd, rig.gd, hero_body.gd, town_nav.gd).
@@ -724,6 +762,12 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
 - [ ] D23. (measured per COORDINATION 8.5: publisher + chat on, L32 grid up) Hold 100+ FPS on a long busy stream: extend D7 LOD, cull far detail, kill the ~1.5 s floor-build hitch, cap particle emitters, cheap nav rebakes. DONE: 30-min soak fps_avg >= 120, no sustained dips.
+  PROGRESS (game build, 2026-11-15 ~08:40 CT, UNCOMMITTED in R's working tree - own test fails): LOD now follows
+  the cameras that DRAW (the panes), by on-screen size, with an unseen tier; poses on the physics tick; animals
+  LOD'd. tools/_d23_soak.gd 30 min: fps_avg 114.6 (baseline ~97), D23_SOAK FAIL against the >=120 bar. Gates
+  green. Remaining: the 1.5-3 s floor-build hitch is LAPTOP code (DungeonHD/FloorGen/delve.gd), not D23's to
+  fix; and the director pane on the busy market. DO NOT discard R's dirty tree - this work is real and is 17
+  fps of it. Recorded by the supervisor 2026-11-15 15:00 UTC so a later run cannot wipe it by accident.
 
 ### LAPTOP (dungeon/combat/content/UI) - floorgen.gd, dungeon_parts.gd, dungeon_hd.gd, bestiary.gd, monster.gd, gear.gd, roster.gd, chatcmd.gd, delve.gd, data/*, UI files (rts_camera, feed_hud, leaderboard_panel, party_frames, boss_bar, auto_director, health_bar_3d, spotlight)
 # Phase A - dungeon geometry & nav [L25]
@@ -2075,7 +2119,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
 # worker says so in its summary and the supervisor raises it with that file's owner - it does not reach in.
 # ORDER MATTERS: L65 first (one designed interface), because L64/L66/L67 all draw through the theme.
 
-- [ ] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
+- [x] L65. ONE DESIGNED INTERFACE, NOT SIX PANELS THAT GREW SEPARATELY. Owner: DESKTOP HUD
       (ui_theme.gd, then hud_dock.gd, feed_hud.gd, leaderboard_panel.gd, spotlight.gd). The stream's
       panels were each built in a different week and it shows: different corner radii, different
       border weights, different type sizes for the same job, parchment at three different values.
@@ -2097,6 +2141,12 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       live at once, before and after, side by side - the after reads as one interface; a grep of the
       four adopting files shows zero literal colour/size/radius constants; the stated contrast and
       size floors are listed per element with their measured numbers.
+
+  RESULT (2026-11-15, hud-ui ffb9c77, cycles U27+U28): .1-.3 landed in U27 - ui_theme.gd is a real token
+  system (named type scale, one panel frame, shared chrome) and hud_dock, feed_hud, leaderboard_panel and
+  spotlight all draw from it. .4 landed in U28: tools/_l654_audit.gd measures every on-stream string and
+  all 15 now clear 4.5:1 at 1080p, via a chip_bg token and a softer scroll edge (renders/cycles/
+  20261115_l654/audit.txt). Next for this worker: L64.
 
 - [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS. Owner: DESKTOP HUD
       (auto_director.gd, spotlight.gd). The stream runs 24/7 and the director currently rotates;
@@ -2165,7 +2215,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
 # page-owned ICON_SET, CSP byte-identical, no framework, no CDN, no new font. A nicer hub that breaks
 # one of those is a failed item. Republishing to gh-pages stays Mr. E's call alone.
 
-- [ ] H20. THE HERO SHEET IS A CHARACTER SHEET, NOT A STAT LINE. Owner: HUB BUILDER (web/index.html,
+- [x] H20. THE HERO SHEET IS A CHARACTER SHEET, NOT A STAT LINE. Owner: HUB BUILDER (web/index.html,
       web/app.js, web/style.css, web/NOTES.md). The hub's hero card tells a viewer a name, a level and
       some numbers. A D&D campaign gives a player a SHEET - something they are proud to look at and can
       read their character's whole story from. Mr. E's standing mandate is "make the game more D&D";
@@ -2189,6 +2239,14 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       kitted veteran, and a fallen hero - each reading as a finished sheet rather than a card with
       holes; the six query-string states and the hostile-name test still pass; web/NOTES.md lists every
       snapshot field the sheet wanted and did not get.
+
+  RESULT (2026-11-15, hub 445cfb3): heroSheet(h, mode) in app.js - identity with crest/title/calling/level,
+  condition chips with an honest last-seen, HP/XP, Abilities, Combat, nine gear slots with empty ones DRAWN
+  rather than omitted, Carrying/Satchel/cosmetics, Record, and "Their own chronicle" built from the H14
+  remembered history by whole-word name match. Fallen memorials get the same sheet (mode="fallen"). Nothing
+  is derived or guessed - a field the publisher does not send is a dashed empty cell named on the sheet's
+  foot line. CSP byte-identical, no new fetch, no URL sink, hostile name renders as text (?mock=sheets).
+  The fields it asked for and did not get are listed in web/NOTES.md and are now D59.
 
 - [ ] H21. THE CHRONICLE BECOMES A CAMPAIGN JOURNAL. Owner: HUB BUILDER (web/index.html, web/app.js,
       web/style.css, web/NOTES.md). H14 made the Chronicle remember; a long scroll of remembered lines

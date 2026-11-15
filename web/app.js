@@ -2227,7 +2227,7 @@ function rollTierOf(r) {
 }
 function firstStr(...vals) { for (const v of vals) if (v != null && String(v).trim() !== "") return String(v); return ""; }
 
-function normalizeRolls(raw) {
+function normalizeRolls(raw, cap) {
   return arr(raw)
     .filter((r) => r && typeof r === "object")
     .map((r) => ({
@@ -2240,7 +2240,7 @@ function normalizeRolls(raw) {
       at: typeof r.at === "string" ? r.at : (typeof r.time === "string" ? r.time : ""),
     }))
     .filter((r) => r.face != null || r.result || r.what)   // drop entries with nothing to show
-    .slice(0, ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
+    .slice(0, cap || ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
 }
 
 // throw the die to a KNOWN value and settle on that face. Used by the town-roll
@@ -2278,8 +2278,9 @@ function rollKey(r) { return JSON.stringify([r.at, r.by, r.face, r.result]); }
 // one entry in the rolls feed. Mirrors a chronicle row: a die-face badge, a head
 // (who / what / tier / when) and the plain-language outcome line.
 function rollEntry(r) {
+  const kind = rollKind(r);
   const li = el("li", "rentry" + (r.tier ? " tier-" + r.tier : "")
-    + (r.face === 20 ? " crit" : r.face === 1 ? " crat" : ""));
+    + (kind === "crit" ? " crit" : kind === "fumble" ? " crat" : ""));
   const face = el("span", "rface");
   face.setAttribute("aria-hidden", "true");
   face.append(el("span", "rfacen", r.face != null ? r.face : "\u00b7"));
@@ -2320,27 +2321,107 @@ function announceTownRoll(r, first) {
   }
 }
 
+// ---- H27: Tales of the Die. The night's rolls are kept the way H14 keeps the Chronicle:
+// per-browser, newest first, capped, day-divided. localStorage key `bellmire.rolls.v1`.
+// Stored rows are re-validated on every read (storage is attacker-reachable text that has
+// been through one round trip) and reach the DOM only through rollEntry() -> el()/textContent.
+// A crit is the 20 (or, face unknown, tier "crit"); a fumble is the 1 (or tier "fumble").
+// Nothing here writes to a network, a URL or a selector.
+const ROLL_HIST_KEY = "bellmire.rolls.v1";
+const ROLL_HIST_MAX = 100, ROLL_HIST_MS = 48 * 3600000, ROLL_HIST_BYTES = 60000;
+let rollMem = [], rollMemLoaded = false;
+function rollKind(r) {
+  if (r.face === 20 || (r.face == null && r.tier === "crit")) return "crit";
+  if (r.face === 1 || (r.face == null && r.tier === "fumble")) return "fumble";
+  return "";
+}
+const rollTs = (r) => { const a = Date.parse(r.at); return isFinite(a) ? a : (r.k || 0); };
+function rollsClean(a) {
+  const out = [];
+  for (const r of arr(a).slice(0, ROLL_HIST_MAX * 2)) {
+    if (!r || typeof r !== "object") continue;
+    const n = normalizeRolls([r], 1)[0];
+    if (!n) continue;
+    n.by = ctrlStrip(n.by); n.what = ctrlStrip(n.what); n.result = ctrlStrip(n.result); n.cost = ctrlStrip(n.cost);
+    n.at = typeof n.at === "string" && n.at.length <= 40 && CHRON_AT_OK.test(n.at) ? n.at : "";
+    n.k = typeof r.k === "number" && isFinite(r.k) && r.k > 0 && r.k <= Date.now() + 60000 ? r.k : Date.now();
+    out.push(n);
+  }
+  return out;
+}
+function rollMemEnsure() {
+  if (rollMemLoaded) return;
+  rollMemLoaded = true;
+  try {
+    const raw = localStorage.getItem(ROLL_HIST_KEY);
+    rollMem = raw && raw.length <= ROLL_HIST_BYTES * 2 ? rollsClean(JSON.parse(raw)) : [];
+  } catch (e) { rollMem = []; }
+}
+// fold the live rolls into the history; prune by age, count and bytes; persist. Returns the rows.
+function rollsRemember(live) {
+  rollMemEnsure();
+  const now = Date.now(), old = new Map();
+  for (const r of rollMem) if (!old.has(rollKey(r))) old.set(rollKey(r), r);
+  const seen = new Set(), fresh = [];
+  for (const r0 of rollsClean(live)) {
+    const key = rollKey(r0);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const prev = old.get(key);
+    fresh.push(prev ? Object.assign(r0, { k: prev.k }) : Object.assign(r0, { k: now }));
+  }
+  const rest = rollMem.filter((r) => !seen.has(rollKey(r)));
+  let rows = fresh.concat(rest).filter((r) => rollTs(r) >= now - ROLL_HIST_MS)
+    .sort((a, b) => rollTs(b) - rollTs(a)).slice(0, ROLL_HIST_MAX);
+  let json = "";
+  try {
+    json = JSON.stringify(rows);
+    while (json.length > ROLL_HIST_BYTES && rows.length) { rows.pop(); json = JSON.stringify(rows); }
+  } catch (e) { rows = []; }
+  rollMem = rows;
+  try { localStorage.setItem(ROLL_HIST_KEY, json || "[]"); } catch (e) { /* full or blocked: carry on in memory */ }
+  return rows;
+}
+
 function renderRolls(raw) {
-  const feed = $("rollFeed"), note = $("rollNote");
+  const feed = $("rollFeed"), note = $("rollNote"), tally = $("rollTally");
   if (!feed || !note) return;
-  const rolls = normalizeRolls(raw);
+  const live = normalizeRolls(raw);
+  let rows = [];
+  try { rows = rollsRemember(raw); } catch (e) { rows = live; }   // storage trouble never costs the live feed
+  if (!rows.length && live.length) rows = live;
   feed.replaceChildren();
-  if (!rolls.length) {
+  if (tally) tally.replaceChildren();
+  if (!rows.length) {
     lastRollKey = null;     // so the next real roll animates fresh
     note.className = "note quiet";
-    note.textContent = "No rolls from the town yet. When a viewer spends channel points or bits to roll the die for the town \u2014 to pass a law, set off an event or raise a building \u2014 the roll and how it turns out appear here. The die is thrown in the game; this page only reports it.";
+    note.textContent = "No rolls yet tonight. When a viewer spends channel points or bits to roll the die for the town — to pass a law, set off an event or raise a building — the roll and how it turns out will be kept here.";
     return;
   }
-  for (const r of rolls) feed.append(rollEntry(r));
-  note.className = "note";
-  note.textContent = rolls.length + (rolls.length === 1 ? " roll" : " rolls") + " from the town, newest first. The die above shows the latest.";
-  const top = rolls[0];
-  const key = rollKey(top);
-  if (key !== lastRollKey) {
-    const first = lastRollKey === null;
-    lastRollKey = key;
-    if (top.face != null) announceTownRoll(top, first);
+  let crits = 0, fumbles = 0, day = null;
+  for (const r of rows) {
+    const k = rollKind(r);
+    if (k === "crit") crits++; else if (k === "fumble") fumbles++;
+    const ts = rollTs(r), d = new Date(ts); d.setHours(0, 0, 0, 0);
+    if (day !== d.getTime()) { day = d.getTime(); feed.append(el("li", "rdiv", dayVoice(ts))); }
+    feed.append(rollEntry(r));
   }
+  if (tally) {
+    const chip = (cls, n, label) => { const c = el("span", "rtally " + cls); c.append(el("b", null, String(n)), document.createTextNode(" " + label)); return c; };
+    tally.append(chip("rtally-crit", crits, crits === 1 ? "crit" : "crits"), chip("rtally-fumble", fumbles, fumbles === 1 ? "fumble" : "fumbles"));
+  }
+  note.className = "note";
+  const liveBit = live.length ? " The die above shows the latest." : " The town has sent no rolls just now; these are the ones this browser remembers.";
+  note.textContent = rows.length + (rows.length === 1 ? " roll" : " rolls") + " kept, newest first." + liveBit;
+  const top = live[0];
+  if (top) {
+    const key = rollKey(top);
+    if (key !== lastRollKey) {
+      const first = lastRollKey === null;
+      lastRollKey = key;
+      if (top.face != null) announceTownRoll(top, first);
+    }
+  } else lastRollKey = null;
 }
 
 // ---------------------------------------------------------------- problem state

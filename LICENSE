@@ -1,0 +1,73 @@
+BELLMIRE HD - PROPRIETARY LICENCE
+Copyright (c) 2026 Jose Luis Estrada ("jestsayin96"). All rights reserved.
+
+This licence covers "Bellmire HD" (also "Jest's Medieval Adventure"): the game, its
+source code, its written content, and the original art, design and audio created for
+it. SECTION 6 CARVES OUT THIRD-PARTY ASSETS THAT ARE NOT THE AUTHOR'S TO LICENCE AND
+IS NOT OPTIONAL - READ IT.
+
+1. OWNERSHIP
+   Bellmire HD and every original part of it are the exclusive property of the author.
+   No ownership, and no licence beyond what Section 2 grants, passes to anyone for any
+   reason. The project's full git history is published and timestamped and establishes
+   authorship from the first commit forward.
+
+2. WHAT YOU MAY DO
+   a. WATCH AND PLAY. Anyone may watch Bellmire HD on the author's stream and take part
+      in it through Twitch chat, channel points and bits, as the author offers it.
+   b. READ THE CODE. The repository may be read and studied.
+   c. FORK TO CONTRIBUTE. The repository may be forked for the sole purpose of proposing
+      a change back to the author. Contributions, if merged, are licensed to the author
+      for use in this project.
+   Nothing else is granted. Rights not expressly granted here are reserved.
+
+3. WHAT YOU MAY NOT DO
+   Without the author's prior written permission, you may not:
+   a. sell, licence, rent, or otherwise commercialise this work in whole or in part;
+   b. redistribute, re-host, mirror or republish it, including running your own public
+      or private instance of it;
+   c. run it on another stream or channel, or operate it as a service for anyone;
+   d. extract, rip, re-texture, re-rig or reuse its original art, models, animations,
+      audio, written lore, character designs or user interface in any other work;
+   e. train, fine-tune or evaluate a machine-learning model on it, or include it in any
+      dataset for that purpose;
+   f. remove, obscure or alter this licence, the copyright notices, or the attribution
+      of third-party assets required by Section 6;
+   g. claim authorship of it or present it, or anything derived from it, as your own.
+
+4. ORIGINAL CHARACTERS, CREATURES AND DESIGNS
+   The named characters, creatures, lords, notables and locations of Bellmire are
+   original creative works. Each is a separate work, individually protected, and is not
+   part of any single asset or bundle. Copying one is an infringement on its own.
+
+5. ENFORCEMENT
+   The author will pursue infringement, which may include DMCA takedown notices to
+   hosts, repositories and platforms; reports to Twitch, YouTube and other services,
+   which may result in channel or account termination; and civil action. Under 17 U.S.C.
+   Section 504(c), statutory damages for wilful infringement may reach $150,000 per work
+   infringed, and under Section 505 a court may award costs and attorneys' fees. The
+   author's remedies are cumulative and no action taken waives any other.
+
+6. THIRD-PARTY ASSETS - NOT COVERED BY THIS LICENCE
+   Bellmire HD is built partly on third-party assets that the author does NOT own and
+   CANNOT licence to you. Nothing in Sections 1 through 5 applies to them, and nothing
+   here restricts your rights to them under their own terms.
+   These include CC0 / public-domain asset packs by Quaternius, KayKit and Kenney, and
+   other third-party material. Each is accompanied by its own licence file in this
+   repository (addons/*/LICENSE*, assets/**/LICENSE*). Those files govern that material
+   and must be kept with it.
+   Where this licence and a third-party licence conflict as to a given file, the
+   third-party licence controls for that file. The author's rights extend to his own
+   original work and to the particular selection, arrangement, modification and
+   combination of assets that constitutes Bellmire HD - not to the underlying CC0 assets
+   themselves, which remain free for anyone to use under their own terms.
+
+7. NO WARRANTY
+   This software is provided "AS IS", without warranty of any kind, express or implied,
+   including the warranties of merchantability, fitness for a particular purpose and
+   non-infringement. In no event shall the author be liable for any claim, damages or
+   other liability arising from this software or its use.
+
+8. CONTACT
+   Permission beyond this licence may be requested from the author through
+   twitch.tv/jestsayin96.

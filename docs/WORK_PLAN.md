@@ -1,5 +1,739 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
+
+"people are still overlapping eachother... animals, and characters and people literally walking
+through stuff and stacked on top of eachother is not okay. if we need to make dungeon hallways
+wider we can so they arent lined up in a narrow halway". He also sent a shot of a wizard standing
+INSIDE a bush in town.
+
+THE FINDING, AND IT IS BIGGER THAN THE SCREENSHOT: `crowd_push` IS A METHOD ON town.gd AND THE
+DUNGEON NEVER CALLS IT. Grep delve.gd, monster.gd and dungeon_hd.gd for crowd_push, body_r or any
+separation: there is NONE. The town got a whole local-avoidance system in D16a - a soft shove out
+to CROWD_R 0.75, a hard shove inside two bodies' width "faster than anyone walks, so nobody is
+ever walked through", yielding within CROWD_LOOK 2.2 m, passing on the correct side so two folk
+meeting in a gate step aside. The dungeon got none of it. Delvers and monsters below ground have
+ZERO body separation. They are free to stand in the same place, and they do.
+
+That is why Mr. E keeps seeing it underground, and why fixing town crowding never fixed it.
+
+AND HE IS RIGHT ABOUT THE HALLS. floorgen.gd builds ONE-CELL CORRIDORS (see its own comment,
+~819). A party of four to six, plus whatever meets them, in a one-cell corridor, with no avoidance
+at all, has nowhere to be except inside each other. Both halves need doing - avoidance alone in a
+one-cell hall just makes them shove each other down it.
+
+STAGED:
+  1. LIFT THE AVOIDANCE OUT OF town.gd. crowd_push, CROWD_R, CROWD_LOOK, CROWD_SOFT and the
+     yielding logic become a shared helper both the town and the dungeon call - NOT a second copy.
+     A copy will drift and then there are two bugs. Town behaviour must be byte-identical after
+     the move; that is the regression test.
+  2. WIRE IT INTO THE DUNGEON. Every delver body and every Monster gets a body_r and calls the
+     shared push each step, exactly as townsfolk and animals do. Monsters need it most - a pack
+     converging on one hero is the worst stack in the game.
+  3. WIDEN THE CORRIDORS TO THREE CELLS. Mr. E's call, Nov 15 16:50: "lets do 3 cells." Not two -
+     THREE. That is the number; do not quietly settle for two because the generator fights you.
+     Three is the right answer for what he is building: a six-hero party can walk three abreast
+     with a monster line meeting them and nobody has to clip through anyone, and the camera has
+     somewhere to sit that is not inside a wall.
+     IT IS A BIG CHANGE AND IT WILL PUSH BACK. floorgen's own comment (~1037) says rooms and
+     corridors occupy only about a third of the grid because "a plan of four to six rooms with
+     corridors between them needs space to breathe". Tripling corridor width spends that budget
+     fast. Expect to have to raise the grid size, or carry fewer rooms per floor, or both. MAKE
+     THAT TRADE DELIBERATELY AND SAY WHICH YOU TOOK - do not let floors silently become one big
+     open space with no rooms left in them, which would cost more than the crowding did.
+     Things that assume a corridor's width and must be re-checked: the portcullis (D88 - it must
+     span whatever the new width is, which is one more reason that item is about spanning and not
+     about a radius), the ambush trigger points, wall-drawing (floorgen walls any cell with no
+     neighbour), and any set piece placed by "an open cell with clearance".
+  4. FORMATION IN A CORRIDOR. A party that cannot walk abreast should walk in FILE - deliberately,
+     spaced, in an order - not pile into the same cell. A column of adventurers moving down a hall
+     in order is a better shot than a wide room full of them anyway.
+  5. THE BUSH. The town's prop footprints (town.gd ~5588) clearly do not include scatter like
+     bushes, so a body stands inside one. Register scatter props in the same footprint system, or
+     keep bodies out of them with the same hard ring. Audit which prop kinds are registered and
+     which are not - the answer is probably "the big ones are".
+  6. ANIMALS TOO. He named animals specifically. animal.gd already calls crowd_push in town; check
+     it is using a body_r that matches each animal's real size, since a 0.3 default for every
+     creature from a chicken to a cow is wrong in both directions.
+
+NAMES ARE EXPLICITLY FINE. Mr. E: "names overlappiong was fine because depending on the angle."
+Do NOT spend any part of this item on nameplate overlap. Bodies only.
+
+DONE TEST: a 20-minute delve soak and a 20-minute town soak, sampling every body pair every frame.
+Pass requires ZERO frames in which two bodies' centres are closer than the sum of their body_r,
+in the dungeon and in town; zero bodies inside a registered prop's footprint; and no increase in
+stuck walkers over the D44 baseline - this must not trade clipping for wedging. Shoot a six-hero
+party moving down a corridor and meeting monsters head-on, and put it in renders/cycles/d91/.
+
+### D90 - THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
+
+"the wagon is still trailing behind the person carrying it. you see the green hooded guy, the
+wagon is trailing behind him side ways hes not even touching it."
+
+THIS BUG HAS NOW BEEN FIXED TWICE AND COME BACK TWICE (D16c, then D53 off Mr. E's clip 14-31-18:
+"the cart is moving on its own ... supposed to be attached to this guy, but it wasn't"). THE
+PATCHES ARE THE PROBLEM. Stop adding corrections to a chase and make the thing rigid.
+
+WHY IT STILL HAPPENS, measured in townsfolk.gd ~796-836:
+  1. THE SNAP THRESHOLD IS BIGGER THAN THE TOW DISTANCE. The tow point is 2.6 m behind the hauler
+     (`global_position - basis.z * 2.6`) but `WAGON_SNAP := 5.0`, and the cart is only snapped
+     when the gap EXCEEDS 5.0. So any gap from 2.6 m up to 5.0 m is considered fine and is never
+     corrected - up to 2.4 m of open air between a person and the cart they are supposedly
+     pulling. That is precisely "hes not even touching it", and it is within tolerance by design.
+  2. THE SIDEWAYS POSE IS THE PARK POSE. When `_route.is_empty()` the cart takes `wagon_park`'s
+     position and yaw - "drawn up on open ground beside them", which is turned across the hauler's
+     facing on purpose. A hauler between legs of a route, or paused for a beat, has an empty
+     route for those frames, so the cart grabs a park yaw and swings sideways while the person is
+     plainly still walking. The lerp then carries it back slowly. That is the sideways.
+  3. THE CART IS A FREE BODY CHASING A TARGET. It is not parented and not constrained; every
+     frame it moves toward `back` at a capped speed and lerps toward a yaw. Any hitch - a frame
+     drop, a nav correction, an `off_wagons` shove, a park target going stale - shows as the cart
+     drifting off the hauler. A towed cart has ONE degree of freedom relative to its hauler. It
+     should not be able to drift at all.
+
+THE FIX - RIGID, NOT CHASED:
+  a. Attach the cart to the hauler's transform. Parent it, or hard-set its global transform from
+     the hauler's every frame; either way the position and yaw are DERIVED, never integrated.
+     Tow distance fixed, yaw equal to the hauler's, no lerp while moving.
+  b. Allow the ONE honest degree of freedom: the cart may trail its yaw slightly through a turn,
+     as a real towed cart does. A small clamped lag off the hauler's heading - NOT a free lerp
+     toward a separate target.
+  c. Parking becomes an EXPLICIT STATE with a transition, entered only when the hauler is
+     genuinely stopped - stood still for a real interval, not merely between route legs. Entering
+     and leaving it is an animated detach and re-attach, so a cart is never seen teleporting into
+     or out of a park pose.
+  d. DELETE WAGON_SNAP. With a derived transform there is no gap to snap. If a snap is still
+     needed for door and LOD cases, it triggers at centimetres, not 5 metres.
+  e. The hauler's hands. Mr. E's words were "hes not even touching it" - once the geometry is
+     right, check the hauler's arms actually meet the shafts and fix the hold if they do not.
+
+DONE TEST: a 20-minute town soak logging, every frame, each hauler's distance and relative yaw to
+its cart. Pass requires: distance never deviates from the tow distance by more than 0.15 m outside
+an explicit park state; relative yaw never exceeds the clamped turn lag outside a park; zero
+frames in which a cart is sideways while its hauler is moving; and the cart never crosses the
+hauler. Shoot the green-hooded carter specifically, moving and stopping, and put it in
+renders/cycles/d90/. Mr. E has reported this three times - the test must be able to prove it is
+gone, not merely that it looked better in one shot.
+
+## MR. E'S RULING (Nov 15 16:41) - A LICENCE FOR BELLMIRE, AND THE DAIS STAYS LOCAL
+
+He pointed at the fightoverlay licence another chat wrote ("Proprietary, all-rights-reserved with
+teeth") and asked for the same here, plus a pen test if the Dais security worries me.
+
+LICENCE: WRITTEN AND IN THE REPO ROOT (LICENSE, this commit). Proprietary, all rights reserved:
+watch/play/read/fork-to-contribute only; no selling, redistributing, re-hosting, running it on
+another channel, ripping the art, ML training or claiming authorship; named characters and
+creatures are each separate works; DMCA, platform termination and 17 U.S.C. 504(c) statutory
+damages up to $150,000 per wilfully infringed work spelled out; git history cited as proof of
+authorship.
+
+ONE THING THE FIGHTOVERLAY VERSION APPEARS TO LACK, AND OURS MUST HAVE - SECTION 6. Bellmire is
+built on CC0 packs from Quaternius, KayKit and Kenney, with their licence files already in
+addons/*/LICENSE* and assets/**/LICENSE*. Mr. E CANNOT licence those to anyone, because they are
+not his, and a blanket "all rights reserved" over the whole repository would claim rights over
+public-domain assets he does not hold. That is both wrong and the kind of overreach that makes a
+real claim easier to attack. Section 6 says plainly: his rights cover his ORIGINAL work and the
+particular selection, arrangement and combination that is Bellmire HD; the underlying CC0 assets
+stay free under their own terms, and where the two conflict for a given file the third-party
+licence wins. This makes the licence STRONGER, not weaker - everything it claims, it can hold.
+CORRECTION (16:49, same day): I ALSO TOLD MR. E TO SEND THAT CARVE-OUT TO FIGHTOVERLAY. THAT WAS
+WRONG AND IT HAS BEEN WITHDRAWN. I assumed fightoverlay carried the same CC0 packs as Bellmire
+without ever looking at that repository. It does not: its CC0 packs (0x72) and generated art were
+deleted months ago, all 56 characters are original, and its LICENSES.md already states that no
+asset there is stock, public domain, CC0 or third-party. Its only third-party dependency is two
+Google Fonts loaded from Google's CDN and not bundled. A carve-out for assets that do not exist
+would have WEAKENED that licence - it would imply some assets are not theirs when all of them are,
+and an infringer could point at the carve-out to argue the originals are CC0. Fightoverlay's
+licence is correct as it stands.
+THE LESSON IS FOR WHOEVER READS THIS NEXT: Bellmire's Section 6 is right BECAUSE Bellmire really
+does ship third-party CC0 packs - addons/kaykit_*, addons/quaternius_monsters,
+assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt and others are all present and were verified
+before the section was written. A carve-out is correct when the third-party assets exist and
+harmful when they do not. Check the repository, never the pattern.
+
+### D89 - LICENCE PLUMBING (any worker, small, do it alongside your next item)
+  1. A short licence line in README.md pointing at LICENSE, so it is seen before the code is.
+  2. A NOTICE or CREDITS file listing every third-party pack in use, its author and its licence,
+     gathered from the existing addons/*/LICENSE* and assets/**/LICENSE* files. CC0 asks for no
+     attribution; give it anyway. It costs nothing and it is how the carve-out in Section 6 is
+     shown to be true rather than merely asserted.
+  3. The viewer hub's footer gets a one-line copyright and a link to the licence.
+  4. NEVER move, rename or delete a third-party LICENSE file. They must travel with their assets.
+
+### THE DAIS IS STILL LAN-ONLY, AND A LICENCE DOES NOT CHANGE THAT
+Mr. E offered a pen test. Good instinct, wrong lever for this particular risk - and worth saying
+why plainly, because the two things get conflated.
+  - A LICENCE is a legal remedy AFTER someone copies the work. It is the right tool for art theft
+    and re-hosting, which is exactly what he wants it for, and it is now in place.
+  - THE DAIS RISK IS NOT COPYING, IT IS CONTROL. Anyone who reaches a public Dais endpoint can
+    seize the camera on a LIVE stream. A licence does not stop that, and a takedown notice the
+    next morning does not un-ruin the broadcast. The only reliable defence is for the endpoint
+    not to exist on the public internet.
+  - So: bind to the LAN. No port forward, no tunnel, no Supabase command channel. His phone on
+    the same WiFi still reaches it, which covers the second-screen case he actually described.
+  - A pen test is genuinely welcome on the PUBLIC viewer hub, which is a real attack surface and
+    already carries a strict CSP, textContent-only rendering and a hostile-name canary. Point it
+    there. If Mr. E later wants the Dais reachable from outside the house, that is a separate
+    build - auth, transport, rate limiting, an audit log and a kill switch - and he should ask for
+    it by name rather than have it appear quietly.
+
+### D88 - THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
+
+"one of the GATE traps that comes down to block the path was put in incorrectly, one of the
+adventures walked right around it, through a very small crack".
+
+THE ARITHMETIC IS THE BUG. DO NOT RE-DIAGNOSE IT.
+  - DungeonParts.portcullis() defaults to w = 4.0 and adds a stone frame on each side, so the
+    thing is 5.6 units wide on the floor (dungeon_parts.gd:263-269).
+  - dungeon_hd.gd:475 places it with `_place_solid(DungeonParts.portcullis(), c, 1.2)`.
+  - `_place_solid(node, c, r)` registers ONE obstacle: `[_cell_pos(c), r]` - a CIRCLE of radius
+    1.2, so 2.4 units across, centred on the cell (dungeon_hd.gd:390-392).
+
+A 5.6-unit gate is being blocked by a 2.4-unit disc. That leaves roughly 1.6 units of navigable
+floor on EACH side of the obstacle, still inside the gate's own footprint. The navmesh is correct
+and the pathfinder is correct: it walks round the little circle and straight through the iron bars.
+Mr. E's "very small crack" is 1.6 units wide and it is on both sides.
+
+THREE FAULTS, AND THE RADIUS IS ONLY THE FIRST:
+  1. The radius does not cover the prop. Fix the number and the crack closes - but see 2 and 3
+     before calling it done.
+  2. THE OBSTACLE SHAPE IS WRONG IN KIND. A portcullis is a WALL. `info["obstacles"]` only holds
+     (position, radius) pairs, so every solid prop in the dungeon is approximated by a disc. For a
+     cell or a statue that is fine. For anything wall-shaped it is not: enlarge the radius enough
+     to seal the gap and it now also blocks the floor to either side of the gate, which will wedge
+     walkers - and wedged walkers are D44, the bug we have been chasing for two days. Add a
+     SEGMENT or BOX obstacle kind and give the portcullis that. Audit every other `_place_solid`
+     caller against its prop's real footprint while in there; the prison cell at r = 1.9 for a
+     3.0-wide box has the same shape of error, smaller.
+  3. IT IS NOT IN A DOORWAY. It is placed by `take.call()`, which returns any open cell with
+     clearance. A gate standing free in the middle of a room blocks nothing even when its obstacle
+     is perfect - walking around it is the CORRECT behaviour for a free-standing object. A
+     portcullis belongs in a corridor or a door, spanning it wall to wall. Place it where the
+     geometry gives it two walls to meet, and make the span a condition of placing it at all: if
+     no such spot exists on the floor, DO NOT PLACE ONE.
+
+MR. E HAS RULED (Nov 15 16:41): "trap". IT IS A TRAP, NOT SCENERY. Today the grid runs on
+`create_tween().set_loops()` - a fixed 2.0 / 2.4 / 1.5 / 0.35 cycle that repeats forever whether
+or not anyone is near. KILL THAT LOOP. The gate hangs raised and still until a party crosses it.
+  - Add "Portcullis" to delve.gd's TRAPS table with a DC like every other trap (trap_dc()).
+  - It drops on the crossing. DEX save or take the fall; a success is a dive clear.
+  - IT SPLITS THE PARTY, and that is the whole point of it - whoever is on the far side is cut
+    off from the rest. Say who is on which side, by name, in the feed.
+  - Getting through it is a CHOICE with a cost: force it with a STR check (athletics, and the
+    strongest body present should matter - this is one of the few places STR earns its keep
+    besides D80), lift it with the winch if the floor has one, or go the long way round and let
+    the navmesh find another route. If there IS no other route, forcing it is the only way and
+    the party has to spend to do it.
+  - A rogue who SPOTS it before crossing gets the same treatment as any other trap: the party
+    steps round or wedges it open.
+  - Spotting, forcing and the split all go in trap_log so the delve summary can tell the story.
+This replaces the looping prop entirely. A gate that opens and shuts on a timer nobody can see is
+scenery pretending to be danger, and Mr. E read it as a trap because it should have been one.
+
+DONE TEST: build 50 floors of each theme that can spawn one ("crypt", "shrine", "treasury"), and
+for every portcullis assert (a) it spans wall to wall, (b) a straight-line path from one side to
+the other is blocked by the navmesh at every sample point across its width, and (c) no walkable
+cell within 3 m of it became unreachable. Then run a 20-minute delve soak and assert zero stuck
+walkers - this fix must not trade a crack for a wedge.
+
+## MR. E'S RULING (Nov 15 16:27) - THE DAIS: HIS OWN PRIVATE CONTROL PANEL
+
+Verbatim: "i am also going to need my own personal HUB my own Website for this game. so i can
+control the Director from time to time, look at specfied characters, NPCs. ETC."
+
+This is a NEW LANE and a new deliverable. It is NOT the viewer hub with extra buttons - the viewer
+hub is a public, read-only, static page on GitHub Pages and it must stay exactly that. Call this
+one THE DAIS. It is Mr. E's alone, it never goes on the public internet, and nothing a viewer can
+reach ever touches it.
+
+### HOW IT CONNECTS - decide this first, and the answer is LOCAL
+
+The viewer hub reads a Supabase snapshot the game pushes every 60 s (snapshot_pub.gd). That is a
+one-way pipe with a 60-second lag and it is useless for live direction.
+
+THE DAIS IS SERVED BY THE GAME ITSELF. A small TCPServer inside the Godot process, bound to
+127.0.0.1 and the LAN, serving one page and a tiny command endpoint. Reasons, and they are not
+close:
+  - Latency: a director cut has to happen NOW, not after a cloud round trip.
+  - Security: nothing is exposed to the internet, so there is no token to leak and no way for
+    anyone to seize control of a live stream. A control panel on a public URL is a stream-jacking
+    risk and we are not building one.
+  - It works when the net is down, and it needs no account, no auth flow and no backend.
+  - His phone on the same WiFi can open it. That covers "a second screen" without exposing
+    anything.
+BIND TO THE LAN ONLY. Never 0.0.0.0 with a port forward, never a tunnel, never Supabase as a
+command channel. If Mr. E later wants control from outside the house, that is a separate decision
+with its own security review - bring it to him, do not build it quietly.
+
+### D86 - THE DAIS, PART ONE: SEE (game build, after the RC bugs above)
+
+Read-only first. A panel that shows him the game better than the game window can.
+  1. The local server, the page, and a live feed (poll or server-sent events - polling at 4 Hz is
+     fine and simpler; do not add a websocket for this).
+  2. Every hero: name, viewer, class, gear tiers, gold, encumbrance band (D80), where they are,
+     what they are doing, satchel and vault. Searchable and sortable.
+  3. Every notable and NPC by name - which is how he would have found E3PO in D85. Where they
+     are, their schedule slot, their state.
+  4. Every live delve: floor, party, hp, flasks, haul, direction (D77's down/up).
+  5. The director's own thinking, which auto_director.gd ALREADY RECORDS and nothing displays:
+     `_cands` holds every scored candidate of the last pass and `log_lines` holds the history. Put
+     the candidate list on screen with its scores and the chosen shot. He will be able to see WHY
+     the camera went where it went, which is the thing that makes the next part usable.
+  6. The town: shop levels, stores, festival state, raid state.
+
+### D87 - THE DAIS, PART TWO: STEER (game build, after D86)
+
+Control, and only as much as a director needs.
+  1. Take the camera: cut to a named hero, NPC, building or delve, right now.
+  2. Hold a shot - pin the director off a subject for N seconds so a moment can play out.
+  3. Hand it back: resume automatic direction.
+  4. Nudge the pacing - auto_director's `_pace` already exists (0.6 in a raid, 1.4 when quiet);
+     expose it rather than inventing a second knob.
+  5. Exclude a subject for a while, for when something is misbehaving on stream.
+  6. EVERY COMMAND IS LOGGED with a timestamp, and every one is reversible by resuming automatic
+     direction. The director must never be left in a state he cannot get out of with one button.
+  7. What the Dais must NOT do: spend a viewer's gold, change a hero's gear, alter the roster, or
+     fake a roll. Mr. E directs the camera and the stream; he does not play other people's
+     characters. If he wants an admin action later he will ask for it by name.
+
+DONE TEST for both: start the game, open the Dais from a second machine on the LAN, and drive a
+full ten-minute session from it - find a named NPC, cut to them, hold, release, change pace, and
+confirm the director recovers automatic control every time. Assert the server refuses every
+connection from outside the LAN. Mr. E's eye on whether it is actually usable while streaming;
+that is the only test that matters in the end.
+
+### D84 - THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
+
+"this dude is GLOWING, its kinda funny but idk if thats what supposed to be happening". A knight in
+the town at night, rendered FEATURELESS PURE WHITE while every other body around him carries the
+night's blue. A second, smaller white figure is in the same shot, bottom right. A gold spotlight
+ring is under the big one.
+
+IT IS ALMOST CERTAINLY NOT A GLOW. A featureless white body is what Godot draws when a material is
+missing or a texture failed to load - no shading detail, no silhouette, just white. Two of them in
+one frame says asset pipeline, not effect. Start there.
+
+RULED OUT ALREADY, DO NOT RE-CHECK:
+  - Gear.ignite is NOT on this path. Its only live caller is town.gd:4468 and that is the WEAPON
+    RACK, not a hero body. rig.gd's _ignite is weapon-only too (rig.gd:298, inside equip()).
+  - Spotlight adds no light and no material: there is no OmniLight, SpotLight or DirectionalLight
+    anywhere in spotlight.gd, and it never touches a body's material. The gold ring is the
+    spotlight ring and is correct.
+  - The rank sash does emit at rank >= 6 (gear.gd ~507) but it is a 0.16 x 0.95 box. It cannot
+    make a whole body white.
+
+WHERE TO LOOK, in order:
+  1. Run the town headless and count material-nulls and failed resource loads. D18c had three of
+     these once and they were real; the fix then was to stop stacking material_override over
+     per-surface overrides. Something is stacking again, or a load is silently failing.
+  2. Gear.dress / gear.gd's per-surface duplication path (~340-470). It duplicates a surface's
+     ACTIVE material. If get_active_material returns null for a surface - a mesh that has not
+     finished importing, a model whose material lives on the mesh rather than the instance - the
+     duplicate is null and the surface renders white.
+  3. Identify WHO the two figures are. Log every body in town whose surfaces carry a null material,
+     with its uid, class, model path and gear tiers, every 5s for a minute. The pattern across the
+     two will name the cause faster than reading the code will.
+
+DONE TEST: headless town start reports 0 material-nulls and 0 failed loads; a 10-minute town soak
+with the null-surface logger attached reports zero bodies at any point; and a before/after shot of
+this exact scene - the knight by the barracks at night - in renders/cycles/d84/.
+
+### D85 - E3PO IS INVISIBLE IN A CROWD OF HIS OWN GUARDS (game build + art)
+
+Mr. E, Nov 15 16:25: "i also have not seen E3PO". He is in the Chronicle constantly - his lines
+were deepened only an hour ago in C-52 - and Mr. E has never laid eyes on him.
+
+HE IS ALMOST CERTAINLY PRESENT AND INDISTINGUISHABLE. notables.gd defines him with
+`"role": "guard", "gear": "guard", "near": "garrison"` and an all-day schedule (post 6-20, watch
+20-6), so he should exist at every hour. But town.gd:4622 gives EVERY guard the same body:
+`["guard", "garrison", "Knight.glb", 0.74, 0.82, 1.00, 5]`. The Commander of the Guards is wearing
+the same model, the same colours and the same kit as the men he commands, standing where they all
+stand. There is nothing to see.
+
+This is D75's problem again - a named character with no design of his own - and it is exactly what
+Mr. E's Nov 15 art principle forbids: "make sure they all have their designs not just spoken in
+name people want to see what they pay for not just a stat."
+
+  1. Confirm first, cheaply: log whether _e3po is non-null and where he is standing, once a minute
+     for ten minutes, with his _e3po_state. If he is null or stuck "withdrawn", that is a
+     different and simpler bug - fix that instead and say so.
+  2. Give him a body nobody else has. Commander's plate, a distinct cloak colour that is HIS, a
+     helm crest, a weapon the rank-and-file do not carry. Art lane's to build, against the real
+     Knight.glb so it reads at pane distance.
+  3. Give him a nameplate that says Commander of the Guards, like the notables code already does
+     for its named folk (notables.gd ~255), and make sure it is actually attached for him.
+  4. Put him somewhere the camera goes. A commander at a post nobody films is still invisible. The
+     director should have a reason to cut to the garrison - handed to the HUD worker as a subject,
+     not built here.
+  5. The same audit applies to EVERY notable: anyone with a name and a title in notables.gd needs a
+     silhouette of their own. List the ones that share a body and hand them to the art lane.
+
+DONE TEST: a shot of E3PO at his post, day and night, beside two ordinary guards in frame; pass
+requires that someone who has never seen the game can point at the commander. Mr. E's eye is final.
+
+### L71 - THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
+
+Mr. E, Nov 15 16:22, with a screenshot of the parchment strip: six of seven lines end in an
+ellipsis mid-sentence - "spots a swarm grate (Perception 20 vs ...", "steps on a grate - fire! DEX
+12 vs DC 13, ...", "searches the chest - Successfully found ...".
+
+THE CAUSE IS FOUND. DO NOT RE-DIAGNOSE IT. scripts/feed_hud.gd, the `if _chrome:` branch inside
+the line loop (around line 285) sets, for every line in the centre box:
+    lb.autowrap_mode   = TextServer.AUTOWRAP_OFF
+    lb.max_lines_visible = 1
+with OVERRUN_TRIM_WORD_ELLIPSIS already set above it. So any line wider than the box is truncated
+by design. The comment there says "the full text is in chat either way" - that reasoning was
+wrong. The Chronicle IS the story for anyone watching the stream rather than reading chat, and a
+D&D roll that gets cut off before its result ("Perception 20 vs ...") is worse than no line at
+all. It tells the viewer a check happened and refuses to say whether it passed.
+
+The fix is the HUD worker's, in its own file, and it is a design pass not a one-line flip:
+  1. Let a line WRAP in the centre box. Two lines an entry, as the side panel already allows.
+  2. Show fewer entries to pay for it. Six truncated lines are worth less than three whole ones.
+     Fewer, complete, and slower is the right trade and it suits the parchment.
+  3. Size the box to the text rather than the text to the box - the strip has room to grow
+     horizontally across the bottom, and widening it is cheaper than cutting sentences.
+  4. Go through the lines that actually appear and shorten the WRITING where it is the writing
+     that is long, in the HUD's own formatting - "Perception 20 vs DC 13" is tighter than
+     "(Perception 20 vs DC 13, ...)". Any line that belongs to another worker's file, list it for
+     them rather than reaching in.
+  5. A roll's RESULT must never be the part that gets cut. If a line has to be shortened, the
+     outcome survives and the detail goes.
+
+DONE TEST: a scripted run that emits the longest line of each kind the game produces (a hero
+sheet, a trap check with a save, a search result, an E3PO line) at UI scale 100/125/150%, shot at
+each; pass requires no ellipsis in the centre box at any scale, and no line overlapping the party
+frames. Put the shots in renders/cycles/l71/ with the before.
+
+### D83 - THE TRAPS ARE STUCK (game build - MEASURE FIRST, three candidates)
+
+Mr. E, Nov 15 16:22, with a screenshot of a dungeon floor: one plate ablaze, and beside it pale
+capsule shapes lying flat and motionless on the stone. "the traps are stuck".
+
+I did NOT find a confirmed cause. Three candidates are recorded so the owner starts from evidence
+instead of from the screenshot. MEASURE BEFORE CHANGING ANYTHING.
+
+  1. MOST LIKELY - the swarm trap's monsters never get nav. delve.gd `_trap_swarm` (~2467) builds
+     two Monsters, sets `mon.position` with a hard-coded `y = 0.0`, adds them to `dun`, and appends
+     them to `dun.monsters`. `_nav_reset()` runs at FLOOR START only (line ~118). Nothing re-runs
+     it for a creature added in the middle of a floor. A monster with no nav stands exactly where
+     it spawned - which is what "stuck" looks like, and the pale capsules may be these creatures
+     on an untextured fallback. This is the same family as D44's wedged walkers and should be
+     tested the same way: log each spawned monster's position every second for 20s and assert it
+     moves.
+  2. The hard-coded `y = 0.0` in that same function. Every other body on a floor is placed by the
+     floor's own height. If the walkable surface is not at 0 there, the swarm spawns inside or
+     above the stone, which would both freeze them AND make them read as strange flat shapes.
+     Check `height_at` for the floor and compare.
+  3. The trap props animate with tweens that must RUN TO COMPLETION to clean up after themselves.
+     dungeon_parts.gd `dart_trap`'s fire Callable spawns three dart boxes and relies on a final
+     `tween_callback(dart.queue_free)`; `spike_trap`'s relies on a third tween step to lower the
+     spikes back to -0.72. If either tween is interrupted - the node leaving the tree, the floor
+     being rebuilt under it, the trap firing twice - the darts stay lying on the floor forever and
+     the spikes stay up. Pale flat boxes lying on stone is exactly what orphaned darts look like.
+     Prove it or rule it out by counting the trap node's children before and after a fire.
+
+Whichever it is, the fix must also make the failure impossible rather than unlikely: a trap that
+fires must leave the floor in a known state whether or not its animation finished, and anything
+added to a floor mid-delve must get navigation the same way the floor's own creatures did.
+
+DONE TEST: a scripted floor that fires one of every trap kind in TRAPS, twice each. Assert: every
+spawned creature's position changes within 20s; no trap node retains child nodes from a previous
+firing; spike geometry returns to its armed offset; and a headless 10-minute delve ends with the
+same node count on each floor as it started with, plus the creatures that were meant to live.
+
+### D82 - THE WATERLINE (game build, art-critical - Mr. E, Nov 15 16:20)
+
+Mr. E, with a screenshot of the lake at night: "where the sand or gravel meets the water it looks
+bad, like how the grass was looking that needs fixing as well". He is right and the cause is
+measured, not guessed. THREE separate faults stack at that edge:
+
+  1. assets/shaders/water.gdshader IS 32 LINES AND HAS NO DEPTH AT ALL. No DEPTH_TEXTURE, no
+     shallow fade, no foam. ALPHA is `mix(0.82, 0.97, fres)` - effectively opaque everywhere. Real
+     water goes clear and light where it is shallow and you see the bottom through it. Ours is a
+     flat blue lid laid on top of the terrain, so the shore becomes a hard geometric cut. THIS IS
+     THE MAIN FAULT and it is why the screenshot reads as a painted plane rather than water.
+  2. ground.gdshader's wet shore (D18c, line 75) is a smoothstep on WORLD Y ONLY:
+     `smoothstep(water_y + 0.55, water_y - 0.2, wpos.y + ...)`. That is a 0.75-unit vertical band.
+     On the river's shallow bank it reads fine, which is why D18c passed. On the lake's steeper
+     bank the same band collapses into a thin ribbon and effectively disappears. The wet margin
+     must be driven by horizontal distance to the water's edge as well as height, so a steep bank
+     still gets a visible wet collar.
+  3. Nothing is authored AT the join. No pebble scatter breaking the silhouette, no darker wet
+     gravel, no foam or scum line. A real shoreline is a band of material, not a boundary.
+
+Staged parts:
+  a. Water shader: sample DEPTH_TEXTURE, derive water depth at the fragment, and drive BOTH alpha
+     and colour from it - clear and pale in the shallows, deep and saturated further out. This one
+     change fixes most of the screenshot on its own. Keep cull_disabled; the lake is viewed from
+     above and the camera can dip.
+  b. A foam/wet line where depth approaches zero: a soft bright band that follows the real
+     intersection, so the edge is drawn by the water rather than by geometry.
+  c. Gentle normal-map distortion of what is seen through the shallows, so the bottom reads as
+     being under water rather than behind glass.
+  d. ground.gdshader: add horizontal falloff to the wet band so a steep bank still darkens. Do NOT
+     break the river - D18c's bank is the regression case and must look the same or better.
+  e. Wet gravel at the join reads DARKER and SHINIER, not muddier. The lake shore is gravel and
+     sand, not river mud; mudc is the wrong colour there. Drive roughness down at the waterline.
+  f. A scatter of pebbles and reeds across the join to break the straight silhouette, on the same
+     pass that places other shore dressing.
+  g. The duck shadows in the screenshot land hard on the water surface. Once the water is depth-
+     aware, check them again - a shadow on clear shallow water should be on the BOTTOM, not on the
+     surface. If it still reads wrong, note it and hand it on rather than hacking the shader.
+
+DO THE SAME THING THE GRASS FIX DID: render it, LOOK at it, change it, look again. D56's grass was
+only fixed when someone actually looked at a render instead of trusting the material name. Take
+before/after shots of this exact view - the lake at night, camera high - plus the river bank as the
+regression, and put them in renders/cycles/d82/.
+
+DONE TEST: before/after renders of the lake shore (night AND day) and the river bank; headless
+start with 0 shader compile errors and 0 material-nulls; and Mr. E's eye on the after shot. His eye
+is final on this one - it is an art item and the test is whether it looks right to him.
+
+## MR. E'S RULING (Nov 15 16:19) - CARRY WEIGHT, AND HOW A VIEWER USES WHAT THEY OWN
+
+Verbatim: "has carry weight been a factor? DnD should have something on that correct?" and before it
+"how are people going to use their items: potions, equipment, teleport stone, etc.? should we make
+it on the hub that they can sort their own inventory, what they can sell, personal storage in the
+Guild/Adventurer Hall, and a way for them to use their items."
+
+MEASURED STATE (checked 16:19, do not re-derive):
+  - Abilities are proper D&D: roster.gd STATS = str/dex/con/int/wis/cha, 4d6-drop-lowest, 3-18.
+  - CARRY WEIGHT DOES NOT EXIST ANYWHERE. No weight field on any item in items.json (equipment,
+    230 accessories, 245 shop_stock, 147 trader_cargo - none), no encumbrance in any script. The
+    only thing ever counted as carried is flasks of oil, as a bare integer.
+  - STR currently does damage and little else. Three callings have str as primary and get no other
+    benefit from it.
+  - !inventory (inv/bag/items) EXISTS and so do !brew, !wear, !oil, !forge, !armoury. There is NO
+    way to USE an item, NO way to SELL one, and NO storage outside what a hero carries.
+  - THE HUB CAN ALREADY WRITE. H6's Twitch device-code sign-in is live, and the Guild chat tab
+    already sends a viewer's own chat line over wss://irc-ws.chat.twitch.tv (app.js ~2564) with
+    CR/LF stripped so no IRC command can be smuggled. So a hub button does not need a backend, an
+    API, a new scope or a CSP change - it sends the chat command the viewer would have typed.
+
+### D80 - CARRY WEIGHT (game build, with D77 - it is the ascent's teeth)
+
+5e's rule, the encumbrance variant, because graded consequences beat a hard wall:
+  - capacity = STR score x 15 lb
+  - over STR x 5: encumbered, speed -10 ft
+  - over STR x 10: heavily encumbered, speed -20 ft and disadvantage on attacks, and on checks and
+    saves using STR, DEX or CON
+  - push/drag/lift up to STR x 30, moving at 5 ft
+
+Why this is RC and not flavour: with no teleport out, what a party can carry up is the real limit
+on a delve, and greed becomes the drama. A band that strips floor nine bare cannot climb out of it.
+That is the best decision in the game and right now it cannot happen.
+
+Staged parts:
+  1. A `weight` field on every item in items.json - equipment, accessories, cargo, stock, flasks,
+     stones. Content worker's to author; game build's to consume. Use 5e's weights where an item
+     has an obvious counterpart (plate 65, chain mail 55, leather 10, longsword 3, potion 0.5) and
+     be consistent within a ladder: heavier armour is always heavier.
+  2. `Roster.capacity(uid)` and `Roster.carried(uid)` -> the band from the table above.
+  3. Speed penalties feed the SAME speed_scale D58 fixed, so an encumbered hero's gait reads as
+     laboured without a new animation. Do not add a new clip. Check D58's correlation test still
+     passes afterwards - that is the regression that matters.
+  4. Disadvantage at heavily encumbered, wired into the existing d20 path.
+  5. Loot picked up on a floor adds weight NOW, not at the end, so the party feels the floor it
+     just cleared. Haul is per-hero, not a party pool.
+  6. The choice must be sayable: when a party is over capacity at the stairs, they drop the lowest
+     value-per-pound first and the feed names what was left behind, by item, on that floor.
+  7. A dropped item stays on that floor for the rest of the delve. A party can come back for it on
+     the climb if they can afford the weight then. That single rule is worth more than any number.
+  8. The HUD needs the band, not the pounds. Hand it `Roster.encumbrance(uid)` -> ""/"encumbered"/
+     "heavily encumbered" and let the HUD worker own the display.
+
+DONE TEST: build parties at STR 6, 10 and 18, load them past each threshold, and assert capacity
+and band against the table by hand-computed expectation; log speed_scale and confirm the penalty
+lands in the gait; run a delve that forces a drop at the stairs and assert the dropped items are
+on the floor's loot list and named in the feed; re-run D58's gait test and require it still passes.
+
+### D81 - USING, SELLING, AND THE GUILD VAULT (game build, after D78)
+
+Mr. E's four asks, in the order they depend on each other.
+
+  1. STANDING ORDERS, NOT CLICKS. A potion is drunk by the HERO, in the fight, when their own rule
+     says to - "drink below half", "drink when the healer is down". The viewer sets the rule, the
+     character acts on it. This is the D&D answer and it is also the only one that works: the game
+     runs while Mr. E streams and a viewer clicking "heal now" from a web page at an arbitrary
+     moment breaks both the fiction and the autonomy. `!use <item>` exists for the deliberate
+     out-of-combat case; standing orders cover the rest.
+  2. THE STONE IS THE EXCEPTION. It is a panic button and it must be one click, right now, by the
+     viewer, mid-delve. That immediacy is what the 1,000 points buys. Everything else is orders.
+  3. SELLING. `!sell <item>` at the shop, as an errand like any purchase (D78): the hero walks the
+     goods there. Sell price is a fraction of shop price and the shop's level caps what it will
+     even take - a level 1 shop cannot buy a legendary piece, which is its own small tragedy and
+     should be said plainly. Equipped gear cannot be sold out from under a hero in a dungeon.
+  4. THE GUILD VAULT at the Adventurer Hall. Personal storage, in town, free, with a slot limit
+     that the Hall's own level raises (the same event-poll upgrade path as the shops). Stored items
+     weigh NOTHING against carry weight - that is the entire point of the vault and it is what
+     makes D80 a decision instead of a punishment. Depositing and withdrawing are errands: the
+     hero walks to the Hall.
+  5. A hero's death: carried items are LOST, vault items are NOT. The vault is the thing a viewer
+     builds across heroes, and it is why they come back after a wipe.
+  6. `!inventory` grows up: slots, weight, capacity band, what is in the vault, what orders are
+     outstanding.
+
+DONE TEST: a scripted stream that buys, equips, stores, withdraws, sells and dies; assert the gold
+ledger balances at every step, no item is ever in two places, vault contents survive the death,
+carried contents do not, and every transfer required a walk.
+
+### H30 - THE SATCHEL TAB (hub worker, after H29)
+
+A fourteenth tab: Satchel. A signed-in viewer's own things.
+
+  1. Their carried items with weight, their capacity, and their band - shown as a bar, because
+     "47 of 150 lb" is the number that makes D80 legible before a delve rather than during one.
+  2. Their vault at the Hall, their outstanding orders, and where the hero is walking.
+  3. Sort and filter their own items. By slot, weight, value, value-per-pound. Value-per-pound is
+     the one that teaches the game, so make it a first-class sort and not an afterthought.
+  4. Every action is a BUTTON THAT SENDS THE CHAT COMMAND over the IRC socket H6 already opened -
+     `!use`, `!sell`, `!store`, `!wear`, and the stone. No backend, no new scope, no CSP change.
+     Reuse the existing ctrlStrip path; an item name from a snapshot is untrusted input and must
+     never be able to smuggle an IRC command. Extend the hostile-name canary to cover it.
+  5. Signed out, the tab explains itself and shows nothing personal. Never guess who a viewer is.
+  6. Security invariants hold with no exceptions: el()/textContent only, ICON_SET whitelist, CSP
+     unchanged.
+
+DONE TEST: render signed out, signed in with an empty satchel, at each encumbrance band, and with
+a hostile item name; assert no innerHTML in the new code, CSP byte-identical, canary passes, and
+that every button produces exactly the chat command a viewer could have typed by hand.
+
+## MR. E'S RULING (Nov 15 16:05) - DISTANCE IS THE COST. NOTHING TELEPORTS.
+
+Verbatim: "we need to add a store tab as well to the hub if its not there already so people can go
+buy stuff from there as well. the caveat is that their character has to walk all the way back to
+the town to that specific shop to physically purchase it. also no more teleporting out of the
+dungeon. they have to physically walk out of the dungeon floor by floor, and fight their way back
+out. also we can add teleportation stones for 1,000 channel points."
+
+THIS IS BINDING AND IT IS THE SPINE OF THE ECONOMY. Gold is not the only price of a thing - the
+walk is. A hero eight floors down with a full satchel is carrying a decision, not an inventory.
+Every system below exists to make that walk matter. No worker may add a shortcut, a "go home"
+button, an instant collect, or any other quiet teleport to ANY of it.
+
+MEASURED STATE OF THE CODE (checked 16:05, do not re-derive it):
+  - delve.gd `_finish()` sets `state = "home"` and fires `ended`. The party blinks from the floor
+    it stood on to the town in one frame. THAT IS THE TELEPORT. It is one function, and D77 is
+    about what replaces it.
+  - delve.gd `_finish()` also calls `Roster.kit_up_after_delve()` - gear is fitted the instant the
+    delve ends, from nowhere, by no one. That contradicts the Nov 15 gear ruling (shops and the
+    blacksmith) and the shop caveat above. D78 ends it.
+  - The hub's twelve tabs are boards, state, heroes, bands, chronicle, dice, roll, fallen, lore,
+    bestiary, chat, commands. THERE IS NO SHOP TAB. H29 is new work, not a fix.
+
+### D77 - THE ASCENT (game build, after D44/D50 closes)
+
+No teleport out. A party that is done going down turns around and climbs. The floors they already
+cleared are not empty and are not a corridor: a scar closes behind an intruder.
+
+Staged parts, all of them:
+  1. `delve.gd` gains a `state = "ascending"` between the deepest floor and "home". `_finish()`
+     stops being the end of a delve and becomes the start of the climb.
+  2. The climb reuses the floors already generated, in reverse. A floor on the way up is NOT
+     rebuilt from scratch - it is the same room the party bled in, so the viewer recognises it.
+  3. Repopulation on the way up, and it must be thinner than the way down, not the same: a
+     fraction of the original floor budget, favouring the strains that scavenge (Bestiary already
+     bands these). A cleared floor that is as deadly as it was is not a climb, it is a second
+     delve, and nobody will ever go deep.
+  4. The stairs up are a real position the party walks to. Nav, not a signal.
+  5. Flasks and the satchel keep ticking on the way up. A party that spent everything getting down
+     is the one that does not come back - that is the whole drama and it must be real.
+  6. A wipe on the ascent is a wipe. `roster.kill` with the floor they fell on, and the haul is
+     LOST - it never reaches `town.receive_haul`. State that plainly in the feed.
+  7. The HUD must say which way they are going. Hand the direction to the HUD worker as a one-line
+     API (`Delve.direction` -> "down"/"up") rather than a HUD item; the HUD worker owns the panel.
+  8. The Chronicle and the hub payload need the climb: a delve's record now has a deepest floor AND
+     whether they got out. "Reached floor 9" and "came back from floor 9" are different sentences
+     and the hub must be able to tell them apart (payload v5).
+
+DONE TEST: start a delve with a scripted depth, let it turn around, and log every floor transition
+with a timestamp and the party's position. Pass requires: zero position discontinuities over 1.5
+units per frame across the whole climb, the party crossing every floor it descended, at least one
+fight on the way up, and a feed line naming the exit. Then run a wipe-on-ascent case and assert
+the town's stores did not change.
+
+### D78 - THE ERRAND (game build, with D77)
+
+A purchase is not a transaction, it is an errand. This is the caveat Mr. E named, and it applies to
+the shop, the blacksmith, and anything else bought in Bellmire.
+
+  1. A buy becomes an ORDER: who, which item, which building, placed when. It sits unfilled.
+  2. The hero walks to that building. The specific one - the armourer's order is not collectible at
+     the market stall. Existing town nav, existing building positions.
+  3. On arrival the gold moves and the item is theirs, and the feed says so by name and place.
+  4. Shop level gates the order at the moment of PLACING it (the Nov 15 ruling: a level 1 shop does
+     not stock epic). If the shop is upgraded between placing and collecting, the order does not
+     silently improve.
+  5. Gold is held when the order is placed, not when it is collected, so one purse cannot fund two
+     orders.
+  6. An order placed while the hero is in the dungeon waits. It is collectible after the ascent -
+     which is exactly how the walk becomes the price.
+  7. `kit_up_after_delve` is DELETED and replaced by orders. A hero who comes home with gold and no
+     order placed stays in the gear they wore. That is correct and it is the point: spending is a
+     choice a viewer makes, not something the game does for them.
+  8. Starting kits are untouched - everyone still begins in the basic gear of their calling.
+
+DONE TEST: place an order from each building type at two shop levels, log the hero's path and the
+gold ledger at placement and at arrival, and assert: no item ever appears in a satchel without a
+walk, no gold moves twice, a tier above the shop's level is refused at placement, and a hero
+interrupted mid-errand still has the order outstanding.
+
+### D79 - TELEPORTATION STONES (game build, after D77 - it is meaningless before the climb exists)
+
+Mr. E's idea, and it is the right shape: the stone is not a convenience, it is insurance that must
+be bought BEFORE the gamble. 1,000 channel points.
+
+  1. A stone is an item in the satchel. It is bought like anything else, which means D78's errand -
+     a stone cannot be conjured mid-delve, and it cannot be bought from the dark.
+  2. Using one ends the delve where the party stands and brings them home with what they carry.
+     This is the ONLY sanctioned teleport in the game and it exists because someone paid for it.
+  3. One stone, one hero. A party of four needs four to all get out, so the viewer with a stone
+     chooses between their own skin and the band's.
+  4. It is consumed. It is said aloud, loudly, with the floor number: "Stone shatters on floor 11.
+     <name> is home." The spectacle is the product.
+  5. A stone does NOT work on a lord's floor while the lord lives. There has to be one place the
+     stone cannot save you, or depth stops meaning anything.
+  6. Stock is the shop's: not always available at level 1, and the trader may carry them. Per
+     chance, per the trader ruling.
+
+THE REWARD EXISTS. Mr. E approved it at 16:15 and it was created on jestsayin96 at 16:16:
+  title: "Bellmire: Teleportation stone"   cost: 1000
+  id:    1af5cd91-eb0f-47ef-a63e-e8cb94d54463
+  is_enabled: FALSE - deliberately. Nothing consumes the redemption yet, and a viewer who spends
+  1,000 points on a no-op has been robbed. Mr. E flips it on when D79 ships; no worker enables it.
+  should_redemptions_skip_request_queue: FALSE, also deliberately, and this is load-bearing. The
+  redemption lands PENDING, so the game decides: FULFIL it when the stone is legitimately used, and
+  CANCEL it (which refunds the points automatically) when it is not - no hero, not in a delve, or a
+  lord's floor with the lord still alive. Never auto-fulfil. Match the reward by this permanent id,
+  never by title. Helix: PATCH /helix/channel_points/custom_reward_redemption/status with
+  status FULFILLED or CANCELED, broadcaster token, which already holds channel:manage:redemptions.
+Build the item, the stock, and the command path against that id. Do not re-create, rename or
+re-price the reward - that stays Mr. E's alone, as all rewards do.
+
+### H29 - THE SHOP TAB (hub worker, next item)
+
+A thirteenth tab: Shops. The hub is where a viewer decides what to spend on, so it has to show the
+shelf honestly.
+
+  1. Every shop and the blacksmith, each with its level, and what that level stocks RIGHT NOW.
+  2. Prices from the live snapshot, never from a hard-coded table in the hub.
+  3. The trader's cargo when a caravan is in town, marked as passing through - it is the only place
+     a higher tier shows up at a low level and the hub should make that feel like luck.
+  4. State the caveat on the tab itself, in one plain line: buying places an order and the hero has
+     to walk to that building to collect it. A viewer who does not know that will think the hub is
+     broken.
+  5. A viewer's own outstanding orders, where they are, and who is walking.
+  6. `data/items.json` already holds `shop_stock` (245) and `trader_cargo` (147), both marked "Dead
+     until wired" and read by NOTHING. Wiring them is part of this: the payload must carry them
+     (v5, with D77's direction field) before the tab can be honest.
+  7. Security invariants hold with no exceptions: `el()`/textContent only, the ICON_SET whitelist,
+     the strict CSP unchanged, and the hostile-name canary extended to cover item and shop names.
+
+DONE TEST: the tab renders from a snapshot with every shop at level 1, again with mixed levels and
+a caravan present, and again with a hostile item name; no innerHTML anywhere in the new code, CSP
+unchanged, and the canary passes.
+
 ## THE HUD WORKER'S QUEUE IS DRY - WRITE IT NEW WORK (supervisor, 2026-11-15 05:06)
 
 The HUD worker stood down at 04:55 with no item it is ALLOWED to build. Its reasoning was correct
@@ -531,10 +1265,12 @@ WHAT THIS MEANS FOR DESIGN:
     answer and is NOT being built now. It needs a real split: two instances cannot share one
     Supabase row or one pair of Twitch tokens without fighting. Do not start it.
 
-- [ ] D71. THE REWARDS MUST FOLLOW THE GAME. Owner: DESKTOP BUILD (twitch_eventsub.gd).
-      MR. E DECLINED THIS ONCE (Nov 15 ~03:00) when it was framed as a nice-to-have. His 14:38
-      ruling changes the case, so it is written now - but it is still HIS call whether it gets
-      built, and he may decline it again. Do not treat silence as approval.
+- [~] D71. DECIDED AGAINST - CLOSED, DO NOT BUILD, DO NOT RE-PROPOSE.
+      Mr. E, Nov 15 16:41: "i thought you said it would cause to many issues so we both said no".
+      He is right and this entry was wrong to leave it open. The reward auto-pause is OFF the
+      plan. Rewards stay as Mr. E sets them and the game never reaches in to pause or unpause
+      them. Any later worker that thinks this is a good idea: it was considered twice and
+      declined twice. Leave it.
       THE PROBLEM, which he hit himself: on Nov 15 viewers redeemed Bellmire channel-point rewards
       while he was streaming something else. He fixed the CONFUSION by prefixing every reward with
       "Bellmire:" - but the redemption still lands in a void whenever the game is down, and under
@@ -576,8 +1312,16 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE LOOP:        D52 (hero won't delve), D44/D50 (wedged walkers), D64, D65, D66, C7, T5, T4
   IT READS:        D61 (fights read), L36, L40, D41 (overlap), D48 (selection frame), L64 (director)
   IT SURVIVES:     D23 (FPS), L56 (delve soak)
-  THE CHANNEL:     L68, L69, D67, D69, D70, L70, D71 (D71 only if Mr. E approves it)
+  THE CHANNEL:     L68, L69, D67, D69, D70, L70   (D71 is CLOSED - decided against)
   THE SOUND:       D72
+  THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
+  THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
+  IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report), D91 (NO crowd avoidance in the dungeon at all)
+    These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
+    Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
+    the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and
+    H29 follow them and must not be started first.
 T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
 it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
 
@@ -589,6 +1333,14 @@ brief's first-unchecked rule. Say in your summary which RC item you took and why
 none and fell back.
 SUPERVISOR: each run, also physically move the open RC items toward the top of their sections, so
 a worker that misses this note still lands on the right work.
+
+### STATUS OF THAT BLOCK (supervisor, 2026-11-15 15:58 CT)
+Mr. E stood up a FIFTH worker on 15 Nov 15:41 - the ART lane, on branch `art`, worktree
+C:\hd adventure\bellmire-art. It does not run Godot, holds no RUN_LOCK, renders in parallel, and its
+queue is D75 (the eight lords), D73 (icons for all 454 items) and D76 (monster variety). That lane answers
+the art half of the gap. IT DOES NOT ANSWER THE LAPTOP-CODE HALF: L56, L68, L69, L70, L55 and D64.3/.4
+are still owned on paper by the retired jestai worker and are still unstartable. Three of the four
+"THE CHANNEL" RC items (L68, L69, L70) are in that set. The decision below is still outstanding.
 
 ### BLOCKED, NEEDS MR. E: FOUR PHASE RC ITEMS HAVE NO WORKER (supervisor, 2026-11-15 15:05 CT)
 This is a report, not a reassignment - the supervisor is not changing anyone's ownership here.
@@ -615,6 +1367,10 @@ Do not re-scope or renumber anything to fit this. IDs stay frozen.
       beds stay wired and streamable until this lands). Owner: DESKTOP BUILD (sfx.gd and the
       generator tool) with the music-studio repo READ-ONLY as always - run it in place, copy WAVs
       out, never modify it.
+      GREEN LIT. Mr. E confirmed Nov 15 16:41 that the studio upgrade is FINISHED and the
+      regeneration pass is to go ahead. This is no longer waiting on him - BUILD IT. His ear is
+      still final on the result: generate, wire, and bring him the tracks to judge. Do not tick
+      D72 until he has listened and said yes.
       MR. E UPGRADED THE TOOL (Nov 15, v3.5.2 -> v3.5.15) and everything that blocked the first
       attempt is fixed. Read its own docs first; do not assume the old API:
         - 3.5.3 a truly headless compose path - no vite, no CDP, no browser. Use it.
@@ -1838,6 +2594,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] D27. THE TOWN READS AS EMPTY AND DARK FROM THE STREAM CAMERA. The recordings show large flat grass expanses with nothing in them, panes that frame a bare field or a blank wall, and daytime shots (e.g. Day 11 08:40) that look like dusk. Two parts: (1) fill the town/valley so no camera angle lands on featureless grass - paths, hedges, crops, carts, clutter, people moving; (2) check the daylight curve and exposure - morning should read as morning, not gloom (this interacts with D24: fix the grain first, then re-judge brightness). DONE: a 12-shot sweep from the stream camera at 08:00/12:00/18:00/22:00 where every frame has something to look at and the daytime frames read as daylight. RESULT (desktop D-cycle 121): (1) BRIGHTNESS - the 'dusk' was overcast weather: it greyed the sky and dimmed the daytime fill to a gloom. daylight.gd overcast sun 0.76->0.88 and dark 0.55->0.42 (rain 0.55->0.66, 0.9->0.78), plus a daytime ambient boost scaled by weather darkness (env.ambient_light_energy *= 1 + dark*0.6*(1-nt)). Clear days and night unchanged. 08:00 overcast now reads as bright cloudy daylight. (2) FILL - new town.gd _dress_greens() dresses the bare grass islands with flower beds + bushes + the odd tree (644 flora), is_clear-gated, gate lanes/river kept clear; trees/bushes register as nav solids. FPS 128.2 avg/94 min (>120 D23 target); _townwalk 0 in_solid. Sweep in renders/cycles/20261112_d27/.
 
 ### CONTENT (laptop, branch `content`, data+lore only, NEVER runs Godot) - see COORDINATION 10
+SUPERVISOR NOTE (2026-11-15 15:58 CT): the content writer owns NO open PHASE RC item (C7 shipped and is
+ticked), so its brief's first-unchecked rule is back in force. C-52 landed this cycle off the standing
+backlog - E3PO deepened by 168 lines across 12 pools in lore_lines.json, merged to main. C1, C2 and C3 are
+the file's oldest entries and have been overtaken many times over by the C-cycles (C-34 through C-52);
+C4 is the one open CONTENT item written to the current "HOW BIG AN ITEM SHOULD BE" bar and the one the game
+build is waiting on - D35 and D39 read items.json `shop_stock` and `trader_cargo`, and D64's shop ladder
+now gates by level. CONTENT WRITER: TAKE C4 NEXT.
+
 - [ ] C1. COSMETICS & DYES CATALOGUE (data/items.json): items.json is only 3.7 KB - the cosmetic set is thin. Expand cosmetics and accessories a lot: cloaks, hats/hoods/helms-as-cosmetic, rings, amulets, boots, gloves, banners, pets, titles - each with the same fields the existing entries use, priced sensibly against the economy, and named from the lore (Bellmire, the scar, the Ford, the guild). Widen dyes beyond the current set and keep dye_cost coherent. Additive only; never rename or drop a key. DONE: json validates, every new entry carries the same fields as the existing ones, and a written list of what was added.
 - [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
       CYCLES LOGGED: C-41..C-46 (cosmetics/accessories/dyes, uniques, intro/forge, most-repeated, epitaph/descend/cleared, disaster variants). C-47 (2026-11-15, content 3d01748): +140 lines - forge, town_life, a wandering lord, and E3PO tier_up_alt. Standing item: stays open by design.
@@ -2313,6 +3077,14 @@ this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do no
       DONE: a viewer redemption rolls on stream, the town visibly changes, and the Chronicle explains
       why - with at least one failure outcome demonstrated, not only successes.
 
+  SUPERVISOR NOTE (2026-11-15 15:58 CT) - WHERE THE CRIT AND FUMBLE LINES ACTUALLY ARE. The hub shipped
+  H27's roll board this cycle and reported the field missing: there is NO top-level `viewer_roll` key in
+  data/lore_lines.json. The C-cycle 38 lines were written one level down, at `e3po.viewer_roll`, with four
+  pools (crit / high / low / fumble) - verified on main this run. Nothing is missing and the content writer
+  should NOT write a parallel top-level copy. GAME BUILD: when T5 resolves a roll, take the outcome line
+  from `e3po.viewer_roll` and PUBLISH IT as the roll's `result` string. The hub never reads lore_lines - it
+  renders exactly what the publisher sends - so a roll published without `result` shows a number and no
+  outcome, which is the one visible gap left in H27's board.
 - [x] H9. THE HUB DIE SHOWS THE ROLL. The hub's existing die section animates and displays rolls read
       FROM THE SNAPSHOT - individual rolls, and the outcome of a T5 viewer roll. Read-only: the page
       never initiates or submits a roll. Keep every HUB_SECURITY invariant (el()/textContent, no
@@ -2959,6 +3731,18 @@ laptop (the delve command path) - both must coordinate; repro before fixing.
       rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
       different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
       bugs, two owners, do not conflate.
+      PARTIAL D44c (game build, 2026-11-15 ~15:45 CT, townsfolk.gd): the recurring STUCK_EX hotspot at
+      (74,-63.5) - in every recent townwalk (d60, d63, d64) - NAMED AND FIXED. It was a RAID-FLIGHT knot, not a
+      prop: ~9 folk fleeing to one homeless refuge whose route ends on the navmesh ~2 m off the door. With the
+      0.9 m arrival they stopped 2.5-3 m from the door, failed the 2.5 m duck-in test, were re-routed to the
+      same end and arrived again, every frame, for the whole raid. Now a fleer whose route has run out within
+      2.5 m of its own route END tucks in (flee_end_tucks); plus a final open-ground leg that gets no nearer
+      within 2.5 m of a taken spot counts as arrived (crowd_arrivals). tools/_d44c_probe.gd: still-on-route
+      samples at the hotspot 43 -> 0. Three townwalks after: STUCK_ON_ROUTE_TOTAL 0 / 2 / 0 (hotspot gone from
+      all three), in_solid 0/21402, 2/18031, 2/15629. STILL OPEN: those in_solid 2s are the OLD flat D44b
+      residual - bodies on long routes (100+ waypoints) embedded in the south-market solid at (32.5,-64)/
+      (32.5,-69.4). Not the pumpkins either: no pumpkin prop exists in code (fields use Plant_1 greens), so
+      the clip's prop needs Mr. E to point at it again if it recurs.
 
 CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-cheer tiers (7cdc363), Rally my hero reward + combat buff (eb707ae), hero idle-wander + delve-scope fix (19b1893/e1c9c1f), subscriber-pane Helix seed (19b1893), Custom Power-up redemption -> bit tiers (510a2e9), E3PO D37 live + all voice hooks (4e59901 + laptop L-148 + trader_arrives a2dbd3a), laptop merge c08cc08 (trap variety L-147, monster telegraphs L-149). Full gate green. OPEN for Mr. E: create the 5 Custom Power-ups in the dashboard; decide E3PO v2 (fighting commander).
 
@@ -3034,6 +3818,19 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   STILL OPEN: .4 lane_held/_lane_owns was not re-verified against pane contents, and the 30-minute unattended recording
   the DONE line asks for has not been made - the worker also could not look at its own screenshots (folder grant). This
   item stays the HUD worker's first unchecked item.
+
+  PROGRESS (2026-11-15 15:14 CT, hud-ui 227f35b, U30): .4 HANDOFF IS DONE AND VERIFIED. spotlight.gd
+  `_amb_tick`: an idle pane (ambient, or resting on a redeemer) showing the body the director just cut to
+  yields at once to an ordinary ambient pick, counted in `handoff_swaps`; a PAID moment still holds its
+  hero and the director yields to it instead. tools/_l644_handoff.gd, WINDOWED 1080p via --script (with -s
+  the Town spawns its own eye and live Twitch and the test measures the wrong camera): 90 s director clock
+  at 4x, 4 delving viewer heroes, every frame comparing each pane's subject to the director's - 5,000+
+  frames, ZERO with a body in two panes, swaps 1-2, and a FORCED collision resolved. LOOKED:
+  renders/cycles/20261115_l644/panes_1080.png - Chronicle scroll centred and uncovered. The 12 lines that
+  sat uncommitted for two runs are now committed; nothing is dirty.
+  ALL FOUR STAGES (.1 .2 .3 .4) ARE NOW BUILT. THE ONLY THING LEFT IN L64 IS ITS DONE TEST: the 30-minute
+  unattended recording with at least one raid, one death and one quiet stretch, plus the director's own
+  decision log for the same window. HUD worker: that recording IS the item now - do not rebuild the stages.
 
 - [ ] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
       A static top five stops being interesting twenty minutes into a stream and never changes again
@@ -3346,7 +4143,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
 # Both are read-only, web/ only, no CSP change, no viewer write path, and both reuse machinery the
 # page already has rather than starting anything over.
 
-- [ ] H27. TALES OF THE DIE - THE NIGHT'S ROLLS DESERVE A BOARD, NOT JUST A FLICKER. Owner: HUB
+- [x] H27. TALES OF THE DIE - THE NIGHT'S ROLLS DESERVE A BOARD, NOT JUST A FLICKER. Owner: HUB
       BUILDER (web/index.html, web/app.js, web/style.css, web/NOTES.md). The d20 resolves in the
       game and the hub displays the current roll (H9), so a roll appears, matters for a minute and
       is gone - on a stream that runs all night the best moment of the evening scrolls away. Keep
@@ -3363,6 +4160,21 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       ?state=empty renders "no rolls yet tonight" rather than an empty frame; ?state=fail and
       ?state=stale stay honest; a hostile roller name renders as literal text; CSP unchanged and all
       six local checks still pass.
+
+      RESULT (hub 6901b60, 2026-11-15 15:40 CT): the board ships. `bellmire.rolls.v1` keeps up to 100
+      rolls / 48 h / 60 KB per browser, newest first, folded and de-duplicated on (at, by, face,
+      result) each pass and RE-VALIDATED on read (normalizeRolls + control-char strip + ISO regex on
+      `at`, tier only through the page-owned TIER_ALIAS whitelist, face an integer 1..20), so a
+      hand-tampered store cannot inject anything. Day dividers use the Chronicle's own `dayVoice`;
+      a crit is restrained gold, a fumble ink-soft and dashed - no new colour; a tally chip pair
+      counts the crits and fumbles SHOWN so it always matches the list. Empty says "No rolls yet
+      tonight."; storage absent/full/throwing degrades to live-only. CSP byte-identical, no new
+      fetch/origin, no write path, KNOWN_V unchanged - index.html gained only the page-owned
+      `<p id="rollTally">`. Checks: ?mock=roll (crit + fumble + two ordinary + a hostile roller
+      `<img src=x onerror=alert(1)>`), reload keeps all five, a multi-day store divides
+      Today/Yesterday, ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 - 0 dialogs,
+      0 injected nodes, no horizontal scroll at 390. Supervisor review: the diff adds no innerHTML/
+      outerHTML/insertAdjacentHTML/eval/new Function and no URL/src/href/style sink.
 
 - [ ] H28. A VIEWER MUST BE ABLE TO SEND A FRIEND STRAIGHT TO THEIR HERO. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). H20 built the character sheet and

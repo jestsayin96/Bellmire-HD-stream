@@ -703,6 +703,28 @@ a queue looked thin.
       stream distance; a crowd capture with 20+ equipped heroes holding D23's frame rate; and a
       stated list of which slots render at which distance.
 
+## THE ART LANE RUNS IN PARALLEL (Mr. E, Nov 15 15:35) - NEW OWNER, NEW BRANCH
+
+His observation, and he is right: making art needs BLENDER, not Godot. So an art worker does not
+compete for docs/RUN_LOCK.txt and can run at the same time as the game build and HUD workers.
+That roughly doubles throughput on the ~570-piece art backlog without slowing Phase RC.
+
+  OWNER:    ART WORKER
+  BRANCH:   `art`     WORKTREE: C:\hd adventure\bellmire-art     (both created 15 Nov)
+  OWNS:     assets/** (new art it generates), tools/ art generators, renders/art/**
+  NEVER:    launches Godot. Never reads, writes or respects RUN_LOCK - it is not in that queue.
+  QUEUE:    D75 (the eight lords) -> D73 (icons for all 454) -> D76 (monster variety). D74 waits
+            for Phase RC to close.
+
+THE ONE REAL CONFLICT, and it is not the lock: headless rendering is CPU/GPU heavy and CORRUPTS A
+PERFORMANCE MEASUREMENT. D23 (hold 100+ FPS) and L56 (delve soak) are measured on this same
+machine. The art worker reads RUN_LOCK READ-ONLY before a long batch and, if the live line says
+RUNNING and mentions a soak, FPS, D23 or L56, does file-only work instead and says so. It never
+writes to that file. GAME BUILD AND HUD: you do not need to do anything differently - the art lane
+yields to you, not the other way round.
+
+SUPERVISOR: merge `art` like any other branch, tick its items, and sync the plan to it each run.
+
 ## MR. E'S PRINCIPLE, Nov 15 15:33 - BINDING ON EVERY WORKER AND ON THE SUPERVISOR
 
   "go through everything - designs, game designs, bosses, monsters, items, equipment, cosmetics,

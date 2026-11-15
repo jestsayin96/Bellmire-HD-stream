@@ -1,1 +1,5 @@
 IDLE 2026-11-15T03:19:05-06:00 - D58 gait quality shipped (game build)
+RUNNING 2026-11-15T03:58:00-06:00 (HUD U26 fight banner)
+IDLE 2026-11-15T04:08:00-06:00 - HUD U26 fight banner shot taken, Godot closed
+RUNNING 2026-11-15T04:11:36-06:00 (game build D21b.4 cavalry charge)
+IDLE 2026-11-15T04:24:51-06:00 - D21b.4 cavalry charge + raid FPS soak shipped, D21b ticked (game build)

@@ -652,7 +652,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       TICKED (supervisor, Nov 15): shipped laptop e6a6812. D21b sub-parts landed on top the same
       night - D21b.1 hit FX parity (9d332ab), D21b.2 defender deaths read (5d420c2), D21b.3 guards
       form a muster line (29c5658).
-- [ ] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
+- [x] D21b. RAID COMBAT FEEL: hit reactions, impact FX, deaths that read, guard formations, a cavalry charge that lands. DONE: raid soak, FPS holds.
   - [x] D21b.1 defender hit FX parity: a Townsfolk/HeroBody taking a melee hit now flashes white and a floating damage number pops (matches raider side); townwalk in_solid 0/6172 (4 raid cycles).
   - [x] D21b.2 defender deaths read: a Townsfolk/HeroBody that is slain by a raider (and a non-Monster raider slain by the defenders) gets a red flash + FELLED! banner at the one real death point in raids.gd, so the stream reads who just dropped at pane distance. Parity with Monster.die()'s own readable death; KO/grace/CON-save paths unchanged. Headless gate: parse 0; _offfloor 0/1340 INPROP 0 MON_INPROP 0; TWITCH_PARSE OK; _delve_test rc 0 no SCRIPT ERROR; _townwalk runs clean (in_solid=1/10898 at T=70s = 0.009%, well under PASS<0.2%).
   - [x] D21b.3 guard muster line: before the garrison closes with the raiders, each
@@ -669,6 +669,16 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
     muster-eligible guards had left their posts, 4 had closed toward the raiders'
     centre, 2 stood on the line within 3.5 m). D21b REMAINDER: cavalry charge
     that lands, FPS soak.
+  - [x] D21b.4 the mounted watch's CHARGE LANDS (raids.gd): a rider >9 m from his mark lowers the lance and
+    gallops in at 1.3x; after >=6 m of run-up the blow is rolled twice (keep the better) +2d6, throws the raider
+    back 2.4 m, tramples every raider within 2.6 m (1d6 + 1.3 m push), dust burst + ground ring + horse neigh +
+    a gold CHARGE! banner, one Chronicle line per raid ("X's charge crashes into a bandit!"); then he wheels out
+    12 m and comes again. tools/_d21b4_test.gd D21B4 OK headless (4 riders, 2 charges, 2 landed, 4 trampled) and
+    windowed 1080p (6 charges, 5 landed; shot renders/cycles/d21b4/charge_A.png). FPS soak, same 30 s raid window
+    A/B: with charges avg 76.4, with charges disabled avg 75.5 -> FPS-neutral. Gate GREEN.
+  RESULT (D21b closed, 2026-11-15): all five parts shipped (hit FX, deaths, muster line, charge, FPS soak).
+  NOTE FOR MR. E: raid-time FPS on cruzader sits ~50-60 for the first ~14 s of a raid from the overview camera
+  WITH OR WITHOUT the charge (baseline min 48) - that is D23's job, not a D21b regression.
 # Phase G - audio polish (owns sfx.gd) [D22]
 - [ ] D22a. MIX & SPATIALISATION: layered ambience (market/smith/river/birds), footsteps, combat/spell sounds, GAP-throttled. Also bump the 3D pool 16->24 (D15 peaked 16/16). DONE: sound review + short audio soak, GAP holds, 0 audio errors.
 - [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.

@@ -1,5 +1,55 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### D90 - THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
+
+"the wagon is still trailing behind the person carrying it. you see the green hooded guy, the
+wagon is trailing behind him side ways hes not even touching it."
+
+THIS BUG HAS NOW BEEN FIXED TWICE AND COME BACK TWICE (D16c, then D53 off Mr. E's clip 14-31-18:
+"the cart is moving on its own ... supposed to be attached to this guy, but it wasn't"). THE
+PATCHES ARE THE PROBLEM. Stop adding corrections to a chase and make the thing rigid.
+
+WHY IT STILL HAPPENS, measured in townsfolk.gd ~796-836:
+  1. THE SNAP THRESHOLD IS BIGGER THAN THE TOW DISTANCE. The tow point is 2.6 m behind the hauler
+     (`global_position - basis.z * 2.6`) but `WAGON_SNAP := 5.0`, and the cart is only snapped
+     when the gap EXCEEDS 5.0. So any gap from 2.6 m up to 5.0 m is considered fine and is never
+     corrected - up to 2.4 m of open air between a person and the cart they are supposedly
+     pulling. That is precisely "hes not even touching it", and it is within tolerance by design.
+  2. THE SIDEWAYS POSE IS THE PARK POSE. When `_route.is_empty()` the cart takes `wagon_park`'s
+     position and yaw - "drawn up on open ground beside them", which is turned across the hauler's
+     facing on purpose. A hauler between legs of a route, or paused for a beat, has an empty
+     route for those frames, so the cart grabs a park yaw and swings sideways while the person is
+     plainly still walking. The lerp then carries it back slowly. That is the sideways.
+  3. THE CART IS A FREE BODY CHASING A TARGET. It is not parented and not constrained; every
+     frame it moves toward `back` at a capped speed and lerps toward a yaw. Any hitch - a frame
+     drop, a nav correction, an `off_wagons` shove, a park target going stale - shows as the cart
+     drifting off the hauler. A towed cart has ONE degree of freedom relative to its hauler. It
+     should not be able to drift at all.
+
+THE FIX - RIGID, NOT CHASED:
+  a. Attach the cart to the hauler's transform. Parent it, or hard-set its global transform from
+     the hauler's every frame; either way the position and yaw are DERIVED, never integrated.
+     Tow distance fixed, yaw equal to the hauler's, no lerp while moving.
+  b. Allow the ONE honest degree of freedom: the cart may trail its yaw slightly through a turn,
+     as a real towed cart does. A small clamped lag off the hauler's heading - NOT a free lerp
+     toward a separate target.
+  c. Parking becomes an EXPLICIT STATE with a transition, entered only when the hauler is
+     genuinely stopped - stood still for a real interval, not merely between route legs. Entering
+     and leaving it is an animated detach and re-attach, so a cart is never seen teleporting into
+     or out of a park pose.
+  d. DELETE WAGON_SNAP. With a derived transform there is no gap to snap. If a snap is still
+     needed for door and LOD cases, it triggers at centimetres, not 5 metres.
+  e. The hauler's hands. Mr. E's words were "hes not even touching it" - once the geometry is
+     right, check the hauler's arms actually meet the shafts and fix the hold if they do not.
+
+DONE TEST: a 20-minute town soak logging, every frame, each hauler's distance and relative yaw to
+its cart. Pass requires: distance never deviates from the tow distance by more than 0.15 m outside
+an explicit park state; relative yaw never exceeds the clamped turn lag outside a park; zero
+frames in which a cart is sideways while its hauler is moving; and the cart never crosses the
+hauler. Shoot the green-hooded carter specifically, moving and stopping, and put it in
+renders/cycles/d90/. Mr. E has reported this three times - the test must be able to prove it is
+gone, not merely that it looked better in one shot.
+
 ## MR. E'S RULING (Nov 15 16:41) - A LICENCE FOR BELLMIRE, AND THE DAIS STAYS LOCAL
 
 He pointed at the fightoverlay licence another chat wrote ("Proprietary, all-rights-reserved with
@@ -1190,7 +1240,7 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
   THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
   THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
   IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed)
+  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report)
     These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
     Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
     the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and

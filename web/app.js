@@ -122,7 +122,7 @@ function when(iso) {
 }
 // a hero's sigil: the first two letters of their own name, upper-cased. No image
 // (the payload has none, and building an <img> from snapshot data is forbidden).
-function sigil(name) {
+function initials(name) {
   const letters = String(name || "").replace(/[^A-Za-z0-9]/g, "");
   return (letters.slice(0, 2) || "?").toUpperCase();
 }
@@ -315,7 +315,7 @@ function renderNothing(failed) {
 // OUTSIDE this set is an honest "this page needs an update", never a guess. ACTION for
 // the desktop: publish the Satchel sell fields as v = "3" (or extend this set BEFORE
 // shipping a different number). See docs/HUB_SECURITY.md (H11).
-const KNOWN_V = new Set(["1", "2", "3"]);
+const KNOWN_V = new Set(["1", "2", "3", "4"]);   // v4 (H23): initiative, speed, gear by slot, status, per-hero last_seen + events
 function render(p) {
   if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
@@ -907,7 +907,7 @@ function heroCard(h, isOpen, isMine) {
   const det = el("details", "hero" + (isMine ? " mine" : ""));
   const sum = el("summary");
   // the crest: the hero's initials in a class-tinted ring, with the calling's icon
-  const sg = el("span", "hsigil cls-" + classIcon(h.class), sigil(h.name));
+  const sg = el("span", "hsigil cls-" + classIcon(h.class), initials(h.name));
   sg.title = (h.species ? cap(h.species) + " " : "") + cap(h.class || "adventurer");
   const crest = el("span", "hcrest");
   crest.setAttribute("aria-hidden", "true");
@@ -966,7 +966,13 @@ function namesIn(text, key) {
   return false;
 }
 // the H14 history (live + remembered in this browser), filtered to the lines naming THIS hero
-function personalLines(name) {
+function personalLines(name, ring) {
+  // H23.2: the publisher's own per-hero ring (h.events, newest first, [{t, s, at}]) wins when it
+  // carries anything; each row goes through the same chronShape as a live line. Else name-match.
+  if (Array.isArray(ring) && ring.length) {
+    const own = chronEntries(ring).slice(0, 8);
+    if (own.length) return own;
+  }
   const key = String(name || "").trim().toLowerCase();
   if (!key) return [];
   const p = sheetPayload();
@@ -1066,10 +1072,18 @@ function heroSheet(h, mode) {
   if (!fallen && last) {
     const a = ago(last.updated_at);
     const stale = TEST === "stale" || !a || a.s > STALE_MIN * 60;
-    conds.append(el("span", "sseen" + (stale ? " stale" : ""),
-      stale ? "Last word from the town " + (a ? a.text : "at an unknown time") + " \u2014 this sheet may be out of date"
-            : "As of the town's last word, " + a.text));
-    gaps.push("a per-hero 'last seen' time (the sheet can only say when the whole town last reported)");
+    // H23.2: a per-hero last_seen (ISO string, validated; never a URL/style) says when THIS hero
+    // last acted - distinct from the whole-town updated_at, which only says the town reported.
+    const ls = typeof h.last_seen === "string" && CHRON_AT_OK.test(h.last_seen) ? ago(h.last_seen) : null;
+    if (ls) {
+      conds.append(el("span", "sseen" + (stale ? " stale" : ""),
+        "Last seen " + ls.text + (stale ? " \u2014 but the town itself last reported " + (a ? a.text : "at an unknown time") + ", so this sheet may be out of date" : "")));
+    } else {
+      conds.append(el("span", "sseen" + (stale ? " stale" : ""),
+        stale ? "Last word from the town " + (a ? a.text : "at an unknown time") + " \u2014 this sheet may be out of date"
+              : "As of the town's last word, " + a.text));
+      gaps.push("a per-hero 'last seen' time (the sheet can only say when the whole town last reported)");
+    }
   }
   if (conds.childNodes.length) sheet.append(conds);
 
@@ -1156,6 +1170,7 @@ function heroSheet(h, mode) {
       cell.title = known ? label + " is empty." : "The town does not publish this slot yet.";
       if (!known) unpubSlots.push(label.toLowerCase());
     }
+    cell.append(tx);    // H23.3: the slot text block was built but never attached
     grid.append(cell);
   }
   if (unpubSlots.length) gaps.push("gear slots (" + unpubSlots.join(", ") + ")");
@@ -1202,7 +1217,7 @@ function heroSheet(h, mode) {
   sheet.append(rc);
 
   const life = sheetSec("Their own chronicle");
-  const lines = personalLines(h.name);
+  const lines = personalLines(h.name, fallen ? null : h.events);
   if (!lines.length) {
     life.append(el("p", "empty", "No line in the chronicle names them yet. (The hub remembers about two days of it, in this browser.)"));
   } else {
@@ -3114,14 +3129,20 @@ const MOCK_PARTIES = [
 // almost nothing, a kitted veteran carrying every optional field, and a fallen hero - plus a
 // hostile name that must render as literal text.
 const MOCK_SHEET_HEROES = [
-  { name: "Pip", class: "rogue", species: "human", level: 1, ac: 11, hp: 8, xp: 0, gold: 3, deepest: 0, kills: 0, delves: 0 },
+  { name: "Pip", class: "rogue", species: "human", level: 1, ac: 11, hp: 8, xp: 0, gold: 3, deepest: 0, kills: 0, delves: 0,
+    gear: { main_hand: "rusty dagger", body: "rags" }, last_seen: new Date(Date.now() - 4000).toISOString(),
+    events: [{ t: "town", s: "Pip signed the guild ledger.", at: new Date(Date.now() - 4000).toISOString() }] },
   { name: "Brum the Cooper", class: "knight", species: "dwarf", level: 9, rank: "Veteran", title: "the Bold", standing: 212,
     ac: 18, hp: 61, max_hp: 88, xp: 4200, xp_next: 5000, to_hit: 7, prof: 4, saves: "STR +7, CON +6", initiative: 1, speed: 25,
     stats: { str: 18, dex: 12, con: 16, int: 9, wis: 11, cha: 10 }, weapon: { name: "warhammer", dice: "1d10+4" }, armour: { name: "plate" },
     gear: { off_hand: "tower shield", head: "iron helm", hands: "gauntlets", feet: "greaves", ring: "Ring of the Ford" },
-    worn: "a corgi, a crown", dye: "teal", gold: 540, oil: 2, potions: 3, kills: 140, deepest: 31, delves: 22, status: "delving" },
+    worn: "a corgi, a crown", dye: "teal", gold: 540, oil: 2, potions: 3, kills: 140, deepest: 31, delves: 22, status: "delving",
+    last_seen: new Date(Date.now() - 55 * 60000).toISOString(),
+    events: [{ t: "delve", s: "Brum the Cooper led the Ford Wardens down to floor 7.", at: new Date(Date.now() - 600000).toISOString() },
+             { t: "fight", s: "Brum the Cooper broke a bone-knight on floor 6.", at: new Date(Date.now() - 3600000).toISOString() }] },
   { name: "<img src=x onerror=alert(1)>", class: "mage", species: "elf", level: 4, ac: 12, hp: 14, max_hp: 22, xp: 900, gold: 12, kills: 9, deepest: 5, delves: 4,
-    weapon: { name: "oak staff", dice: "1d6" } },
+    weapon: { name: "oak staff", dice: "1d6" }, last_seen: "<img src=x onerror=alert(1)>",
+    events: [{ t: "loot", s: "<img src=x onerror=alert(1)> found a scar-touched gem.", at: new Date(Date.now() - 900000).toISOString() }] },
 ];
 const MOCK_SHEET_FALLEN = [
   { name: "Grimhollow", class: "knight", species: "orc", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12, title: "the Grim", weapon: { name: "greatsword" }, armour: { name: "mail" } },

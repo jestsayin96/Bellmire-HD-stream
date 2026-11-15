@@ -1,5 +1,187 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### THE DUNGEON FALLBACK (Mr. E, Nov 15 16:59) - HELD IN RESERVE, NOT STARTED
+
+"if dungeons become an issue we can make those pre built as well. and just have around 200+
+versions so it seems like its always 'changing'".
+
+RECORDED AS A CONTINGENCY. Do NOT start authoring dungeon floors. D91 (crowd avoidance + three-
+cell corridors) is the current answer and it must be tried first: the dungeon's problem is bodies
+with no separation in halls too narrow to hold them, and that is fixable without touching
+generation. If D91 lands and floors still read as broken, this is the fallback and Mr. E has
+already approved the shape of it.
+
+IF IT IS EVER TRIGGERED, DO NOT HAND-AUTHOR 200 WHOLE FLOORS. Author CHUNKS instead - rooms,
+junctions, corridor runs, stair halls, set-piece chambers - each one hand-built, correct, and with
+declared exits, then assemble a floor by snapping chunks together at those exits. Fifty authored
+chunks give more than 200 floors' worth of variety, every square metre of every floor is still
+hand-laid, and a fix to one chunk fixes it everywhere it appears. A hand-drawn floor is a
+beautiful thing you get once; a hand-drawn chunk is a beautiful thing you get a hundred times.
+It also keeps the thing Mr. E actually wants from a dungeon - that it is different every delve -
+which 200 fixed maps would lose the moment a regular viewer recognised one.
+
+The authored-town work (D93) builds the layout format, the loader and the validator. If this
+fallback is ever triggered, the chunk format should reuse all three rather than invent a second
+way of describing a place.
+
+TWO ADDITIONS (supervisor dedupe, 17:00 - this section was written twice independently and the
+other copy was removed; these are the only points it had that this one did not):
+  - A BIOME AND DRESSING PASS ON TOP OF AN AUTHORED LAYOUT makes the same skeleton read as a
+    different place. It multiplies whatever library we build, chunks or floors, for very little
+    work - floorgen already remakes a floor's origin as another biome, so the mechanism exists.
+  - THE STANDING RULE HOLDS REGARDLESS: canon NEVER STATES A FLOOR COUNT. A library of 200 layouts
+    is not a statement that the dungeon has 200 floors, and nothing in the game, the hub, the bot
+    or the lore may imply that it does.
+
+## MR. E'S RULING (Nov 15 16:57) - BELLMIRE IS HAND-BUILT. NO MORE PROCEDURAL TOWN. **BINDING**
+
+Verbatim: "we need to make sure the roads are being built correctly and not overlapping. in my
+opnion we should just make the maps of the town. all the way to level 15. we have the buildings
+get placed in a specific fashion. for now this game is not an ever expanding world. we are keeping
+it to the one town. the lore can stay (if its in the lore at all) we will make a well built town.
+have it pre made for each level and however big the upgrades are. because right now its auto
+generating and causing collisions. so let make just one big map. lay out the roads correctly, the
+buildings, then town square."
+
+HE IS RIGHT AND THIS IS THE CORRECT CALL. Every town placement bug of the last two days - the
+overlapping farms (D92), the dirt patch cutting across the road in his 16:57 shot, the body in the
+bush (D91.5), props in lanes, wagons parked across paths - is the same bug wearing different
+clothes: a generator placing things by sampling and hoping. We have been writing better and better
+collision tests to referee a fight that should never happen. A town is a DESIGNED PLACE. Design it
+once, well, and the entire class of bug is gone by construction rather than by test.
+
+### WHAT THIS DECIDES, AND WHAT IT DOES NOT
+  - THE TOWN IS AUTHORED. One map, laid out by hand: roads first, then the square, then buildings
+    onto the blocks the roads make. No runtime placement, no seeded scatter deciding where a
+    building stands.
+  - THE DUNGEON STAYS PROCEDURAL. It must - it is a different floor every delve and that is the
+    point. D91's crowd avoidance and three-cell corridors are UNAFFECTED and still RC.
+  - THE VALLEY outside the town walls can stay generated; it is open ground and nothing there
+    needs to interlock. Keep the obstacle work honest there, but it is no longer urgent.
+  - D92 IS SUPERSEDED FOR THE TOWN. The oriented-rectangle test is still worth having for the
+    valley and for anything the dungeon places, but farms stop being a placement problem the
+    moment the farms are drawn by hand. Do not spend a big item on it now.
+  - LORE IS UNAFFECTED. He said the lore can stay. Nothing written is invalidated.
+
+### THE ARCHITECTURE ALREADY WANTS THIS - growth.gd is a layer system
+growth.gd keeps `_layers = {}  # level -> Array[Node3D], shown from that level on`, and
+`show_level()` SHOWS AND HIDES - it does not rebuild. Its own comment says a level change "costs
+nothing and the navmesh never moves". That is exactly the shape a hand-authored town needs. The
+only thing wrong today is that the nodes in those layers are generated at startup instead of
+authored. Keep the mechanism; replace its contents.
+
+### EACH LEVEL IS A SUPERSET OF THE ONE BEFORE - THIS IS THE RULE THAT MATTERS
+Level N+1 ADDS to level N. It never moves a road, never shifts a building, never re-plots the
+square. When the town levels up on stream, viewers must see something NEW APPEAR in a place that
+was empty - scaffolding becoming a shop, a dirt lane becoming cobbles, a wall extending. They must
+NEVER see the town they know rearrange itself around them. Author level 15 FIRST, as the finished
+town, then work backwards deciding what is absent at each earlier level. Authoring forwards
+guarantees a later level will want to move something an earlier one placed.
+
+### D93 - AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
+  1. A LAYOUT FORMAT, as data, not a scene: one file per level under data/town/ with roads as
+     polylines, the square as a polygon, and every building, prop and site as an entry with a
+     position, a rotation and an id. Data because it is diffable, editable by Mr. E and by any
+     worker, and reviewable in a PR. A .tscn is not.
+  2. ROADS FIRST. Lay the road network by hand, as a connected graph with real widths. Every road
+     a deliberate line. The ground patches (soil, dirt, cobble) are authored to the road polygons
+     so nothing is ever drawn across a road again - which is the dirt patch in his shot.
+  3. THE SQUARE. Then the blocks the roads enclose. Then buildings onto the blocks, each with its
+     door facing a road, by hand.
+  4. A LOADER that builds the town from the layout file and registers everything - navmesh,
+     obstacles, sites, doors - from authored data rather than discovering it. Delete the placement
+     code paths it replaces; do not leave both alive.
+  5. A VALIDATOR run in CI and headless: no two building footprints overlap, no footprint crosses
+     a road, every door touches a road, every site is reachable from every other, and no ground
+     patch overlaps a road polygon. It is cheap and it makes the authored town provably correct.
+  6. STAGE IT. Author level 15, get it right, then derive the earlier levels backwards. Ship the
+     loader against level 15 first so the town is playable the whole way through the work.
+
+### DECIDED: TWELVE LEVELS FOR NOW (Mr. E, Nov 15 17:10 - "aim for 12 for now")
+TWELVE. He said fifteen a minute earlier and changed it to twelve; TWELVE IS THE ANSWER and this
+line supersedes the other. Author the town to twelve levels.
+
+THIS COSTS NOTHING, WHICH IS WHY IT IS THE RIGHT CALL. Everything already agrees on twelve:
+  - items.json shop_stock (245 entries) and trader_cargo (147) each carry a "tier" 1-12
+  - items.json stock_by_tier: exactly 12 entries (shop_adds / cargo_adds)
+  - lore_lines.json growth_tiers: 12, and the above are generated to agree with it
+  - economy: 12 TOWN_LEVELS
+So no table has to be extended, no new lore has to be written, and the 16:05 gear ruling - a shop's
+level gates what is on its shelf - keeps working untouched. Fifteen would have meant extending all
+four in lockstep, and a level 13 shop with no stock table is a silent hole in the economy.
+
+"FOR NOW" IS HIS WORD AND IT IS LOAD-BEARING. Build so twelve is a NUMBER, not an assumption:
+  - the authored town is ONE map with per-level reveal tags (D93), so adding a thirteenth level
+    later means tagging a few buildings, not drawing a new map
+  - growth.gd's TOP_LEVEL and the tier mapping stay driven by data, never hard-coded in logic
+  - IF THE CAP EVER RISES, the stock, cargo, stock_by_tier and growth_tiers tables are extended IN
+    THE SAME CHANGE that raises it. Never after. That is the rule that keeps the economy whole.
+
+### THE ORIGINAL QUESTION, KEPT FOR THE REASONING:
+He said "all the way to level 15". The numbers in the code today do not have a 15 in them:
+  - growth.gd TOP_LEVEL = 6 (six visual build stages)
+  - economy has 12 TOWN_LEVELS, and growth maps two economy tiers per visual stage
+  - items.json's shop_stock, trader_cargo and stock_by_tier are all keyed to tiers 1-12, matching
+    lore_lines.growth_tiers
+So the shop stock ladder, the trader's cargo and the growth lore are ALL built on TWELVE. Going to
+fifteen means extending all three, and the 16:05 gear ruling (shop level gates what is on the
+shelf) is wired to that same ladder. Going to twelve means authoring twelve maps and the rest
+already lines up. ASK HIM. Do not guess, and do not quietly author 12 and call it 15, or 15 and
+leave the stock tables at 12 - a shop at level 13 with no stock table is a silent hole in the
+economy he will find on stream.
+
+### D92 - THE FARMS OVERLAP: RECTANGLES CHECKED AS CIRCLES, SAMPLED WITH GAPS (game build)
+
+Mr. E, Nov 15 16:53, with a shot of the livestock paddock: "the farms are being built so weirdly,
+ones overlapping theother". Fence lines at different angles run straight through one another.
+
+THE CAUSE IS A SHAPE MISMATCH, IN THREE PLACES. Fenced plots are ORIENTED RECTANGLES on the
+ground, and every test that is supposed to keep them apart is a CIRCLE or a sparse POINT SAMPLE.
+
+  1. SPARSE SAMPLING WITH HOLES. town.gd `_field_ok` (~2787) walks a 5x5 grid over the field and
+     calls `is_clear(q, 1.2)` at each point. The samples are spaced hw/2 and hd/2 apart - for the
+     9 x 7 fields valley.gd asks for, that is 4.5 m and 3.5 m between probes, each probe only 1.2 m
+     wide. That leaves roughly 2 m of COMPLETELY UNTESTED GROUND between adjacent samples in both
+     directions. A neighbouring fence line, or the edge of another plot, can sit entirely inside
+     one of those holes and the check passes.
+  2. EVERYTHING IS A CIRCLE IN `_objs`. `is_clear` is centre-distance versus the sum of two radii.
+     valley.gd `_field` registers a field as `[c, sqrt(hw*hw + hd*hd)]` - the half-DIAGONAL of the
+     rectangle. Two oriented rectangles cannot be kept apart by two circles: the circle is far too
+     big along the short axis and still says nothing about ROTATION, and the fences are drawn at
+     the rectangle's real edges with whatever `fw` that plot happened to get.
+  3. THE FARM CHECKS 3 POINTS AND THEN CLAIMS 14 METRES. town.gd `_build_farms` (~2967) tests
+     exactly three points - hp, hp +/- fw*8 - at radius 5.0, then after building appends
+     `_objs.append([hp, 14.0])`. It validated a thin line and then claimed a 14 m disc. Nothing on
+     the `sd` axis is tested at all, yet the haystacks go out to sd*9 and the barn to fw*-7.
+     Whatever it overlapped on that axis was never looked at.
+
+ALSO: the garden's paddock (valley.gd ~719) is fence-ringed AXIS-ALIGNED with a hard-coded
+`Vector3(0,0,1)` / `Vector3(1,0,0)`, while crop fields take an arbitrary `fw`. So an axis-aligned
+pen and a diagonal field sit side by side with no shared notion of orientation - which is exactly
+the crossing-at-an-angle Mr. E photographed.
+
+THE FIX - TEST THE SHAPE THAT IS ACTUALLY BUILT:
+  a. Add an ORIENTED RECTANGLE obstacle to `_objs` (centre, fw, sd, hw, hd) alongside the existing
+     circles, and an OBB-vs-OBB and OBB-vs-circle overlap test. Separating-axis test, four axes;
+     it is a dozen lines and it is exact.
+  b. Every fenced thing registers its REAL rectangle: crop fields, the kitchen garden's paddock,
+     and the farm steading's footprint. No more half-diagonal circles for rectangular plots.
+  c. `_field_ok` stops sampling a grid and asks the exact question: does this rectangle overlap
+     any registered obstacle, plus a margin. Keep a small margin (1.5-2 m) so fences never touch.
+  d. `_build_farms` tests the footprint it is about to occupy - the house, barn, haystack spread
+     and cart, out to the full 14 m it later claims - not three points on one axis. The claimed
+     radius and the tested area must be THE SAME AREA. That rule is the actual lesson here and it
+     applies to every placer in town.gd, so audit them while in there.
+  e. Give the garden paddock the steading's orientation instead of hard-coded world axes, so
+     neighbouring enclosures read as one farm laid out by one farmer rather than two unrelated
+     plots that happen to collide.
+
+DONE TEST: generate 200 towns from different seeds; for every pair of fenced plots assert their
+oriented rectangles do not overlap and are at least the margin apart; assert no fence segment
+intersects any other fence segment, which is the thing Mr. E can actually SEE; and assert every
+placer's claimed `_objs` radius covers everything it built. Shoot the livestock paddock and its
+neighbours before and after, in renders/cycles/d92/.
+
 ### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
 
 "people are still overlapping eachother... animals, and characters and people literally walking
@@ -35,12 +217,22 @@ STAGED:
      Three is the right answer for what he is building: a six-hero party can walk three abreast
      with a monster line meeting them and nobody has to clip through anyone, and the camera has
      somewhere to sit that is not inside a wall.
-     IT IS A BIG CHANGE AND IT WILL PUSH BACK. floorgen's own comment (~1037) says rooms and
-     corridors occupy only about a third of the grid because "a plan of four to six rooms with
-     corridors between them needs space to breathe". Tripling corridor width spends that budget
-     fast. Expect to have to raise the grid size, or carry fewer rooms per floor, or both. MAKE
-     THAT TRADE DELIBERATELY AND SAY WHICH YOU TOOK - do not let floors silently become one big
-     open space with no rooms left in them, which would cost more than the crowding did.
+     THERE IS NO TRADE TO MAKE - GROW THE GRID. Mr. E, Nov 15 16:52: "i never limited the
+     dungeons floor plan. idc how big they get or how small they are". The grid size in floorgen
+     is NOT a budget to spend and never was a constraint he set. Three-cell corridors need more
+     room, so TAKE MORE ROOM. Raise the grid until the rooms and the wider halls both fit.
+     DO NOT PAY FOR THE CORRIDORS WITH ROOMS. Fewer rooms per floor, smaller rooms, or floors
+     that drift into one open space are all the WRONG answer and all forbidden here. A floor is a
+     plan of rooms joined by halls; the halls got wider, so the plan gets bigger. That is all.
+     Floors may also vary in size from one to the next - he said so explicitly - so the generator
+     need not pick one grid and keep it. A small tight floor and a sprawling one are both fine
+     and the variety is worth having.
+     The limits that DO apply are performance, not layout: generation time per floor, draw calls
+     and the FPS gates in D23. Measure those, not the grid. His machine is not the bottleneck
+     ("i dont care if we go up to 200 fps... my computer hits close to 300+"), so if a bigger
+     floor costs frames, that is a D23 optimisation problem to solve, not a reason to build a
+     smaller floor. Nothing here changes the standing rule that canon NEVER STATES A FLOOR COUNT -
+     that is about how many floors there are, not how big one is.
      Things that assume a corridor's width and must be re-checked: the portcullis (D88 - it must
      span whatever the new width is, which is one more reason that item is about spanning and not
      about a radius), the ambush trigger points, wall-drawing (floorgen walls any cell with no
@@ -1307,23 +1499,77 @@ Concretely, all five must be true:
   4. IT SURVIVES THE SESSION. Four hours at frame rate, no stranded heroes, no silent stalls.
   5. THE CHANNEL WORKS. The bot answers, the polls run, the hub is current.
 
-### PHASE RC - THE CRITICAL PATH. Nothing else ships the game; everything else deepens it.
-Work these FIRST, in roughly this order, regardless of where they sit elsewhere in this file:
-  THE LOOP:        D52 (hero won't delve), D44/D50 (wedged walkers), D64, D65, D66, C7, T5, T4
-  IT READS:        D61 (fights read), L36, L40, D41 (overlap), D48 (selection frame), L64 (director)
-  IT SURVIVES:     D23 (FPS), L56 (delve soak)
-  THE CHANNEL:     L68, L69, D67, D69, D70, L70   (D71 is CLOSED - decided against)
-  THE SOUND:       D72
-  THE WALK:        D77 (the ascent), D78 (the errand), D79 (stones), H29 (shop tab)
-  THE WEIGHT:      D80 (carry weight), D81 (use/sell/vault), H30 (satchel tab)
-  IT LOOKS RIGHT:  D82 (the waterline) - art-critical, Mr. E raised it from a screenshot
-  MR. E IS WATCHING IT RIGHT NOW: L71 (Chronicle truncation, cause confirmed), D83 (traps stuck), D84 (white figures), D85 (E3PO unseen), D88 (portcullis, cause confirmed), D90 (wagon detached - THIRD report), D91 (NO crowd avoidance in the dungeon at all)
-    These two are LIVE BUGS he can see on his own screen. They outrank everything above them.
-    Added by Mr. E's 16:05 ruling, which overrides the no-new-RC-items rule. D77 and D78 are
-    the economy's spine - they go in the same band as THE LOOP once D44/D50 closes. D79 and
-    H29 follow them and must not be started first.
-T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
-it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
+### PHASE RC - THE ORDER OF WORK. Agreed with Mr. E, Nov 15 17:06: "do it start it, make it happen"
+REWRITTEN 17:10. This REPLACES every earlier RC ordering in this file. If you find an older RC list
+anywhere, it is dead - this is the one.
+
+THE PRINCIPLE BEHIND THE ORDER: a slightly ugly town costs us nothing with viewers. A missing loop
+costs us everything. Nobody ever left a stream because a fence overlapped; they leave because they
+redeemed something and nothing happened. So: stop it looking broken, then make the loop real, then
+make it beautiful.
+
+PHASE 1 - STOP IT LOOKING BROKEN. Visible wrongness, and most of these now have confirmed causes.
+  L71 Chronicle truncation (cause confirmed - a roll cut off before its result is the worst thing
+      on screen, and the Chronicle is what a non-chat viewer actually reads)
+  D91 crowd avoidance + three-cell corridors (the most obviously broken thing in the game)
+  D84 white figures · D90 the wagon (THIRD report) · D88 the gate · D83 the traps stuck
+  These do not make the game better. They stop it looking broken. That is a different job and it
+  comes first because Mr. E streams this.
+
+PHASE 2 - MAKE THE LOOP REAL. This is the phase that matters.
+  T5  THE VIEWER'S ROLL. FIRST IN THIS PHASE AND NOTHING JUMPS IT. Mr. E called it the heart of
+      viewer interaction. It is unblocked, its words were written in C-cycle 38, and it has sat
+      unbuilt since. It is the largest single gap in the game.
+  D77 + D78 + D80 THE ASCENT, THE ERRAND, CARRY WEIGHT. ONE SYSTEM, NOT THREE ITEMS - built
+      together or not at all. Nothing teleports out, buying is a walk to a specific building, and
+      what a party can carry is the real limit on how deep it goes.
+  D79 stones · H29 shop tab · H30 satchel tab · D81 use/sell/vault
+  WHEN PHASE 2 LANDS a viewer can enlist, roll, delve, fight their way back out, buy something,
+  carry it, store it and lose it. That is a game. Everything before it is scenery.
+  Also in this phase, where they block the loop: D64, D65, D66, C7, D61, L68, L69, L70, D67, D69,
+  D70, D23 (FPS), L56 (soak), L64 (director), D41, D48, L36, L40, T4, D44/D50.
+
+PHASE 3 - THE TOWN, AUTHORED ONCE. D93. Big, and no longer urgent once Phase 2 is in.
+  Build it as ONE map with per-level reveal states, not as 12-15 separate maps (see D93).
+
+PHASE 4 - THE ART PROGRAM. D75 the lords · D85 E3PO · D73 the icons · D76 monster variety ·
+  D82 the waterline. This is where "people want to see what they pay for" gets paid off - AFTER
+  the paying works.
+
+PHASE 5 - THE DAIS. D86, D87. Last, deliberately. It makes Mr. E's job easier; it does not make
+  the stream better. It waits.
+
+RUNNING ALONGSIDE, NO CONFLICT: D72 the music. Different worker, never touches Godot, already
+green lit. It proceeds through all five phases and comes to Mr. E for judgement when ready.
+
+SUPERSEDED / CLOSED, DO NOT WORK THEM: D71 (decided against, twice). D92 for the TOWN (D93's
+authored layout removes the problem; the oriented-rectangle test is still worth having for the
+valley and for anything the dungeon places, but it is not a big item any more).
+
+### YOUR LANE'S QUEUE - TAKE THE FIRST OPEN ITEM IN YOUR OWN ROW
+All six lanes run in parallel. Do not take another lane's item; if your row is empty, say so and
+stand down rather than reaching into someone else's files.
+  GAME BUILD:  D91 -> D84 -> D90 -> D88 -> D83 -> T5 -> (D77+D78+D80 as one) -> D79 -> D81
+  HUD:         L71 -> L64 -> D61 -> D41 -> D48
+  HUB:         H29 -> H30
+  CONTENT:     the words Phase 2 needs (T5's outcomes exist already - check before writing any),
+               then D81's feed lines, then C7
+  ART:         D75 -> D85 -> D73 -> D76 -> D82
+  SUPERVISOR:  merge, tick, and hold the freeze below
+
+### THE FREEZE - NO NEW ITEMS (Mr. E agreed, Nov 15 17:06)
+The open count must now go DOWN. On Nov 15 alone this plan gained D80-D93, H29, H30 and L71 -
+about fourteen items - while Phase RC existed specifically to stop the plan growing forever. Six
+workers closing roughly one item an hour cannot outrun that, and a plan that only grows is a plan
+nobody finishes.
+  - A NEW ITEM IS WRITTEN ONLY IF MR. E RAISES IT. A bug he reports goes in. Anything else does
+    not, however good it is.
+  - A good idea nobody asked for goes in a LATER list that no worker pulls from. It is not lost;
+    it is not work.
+  - BEFORE ADDING ANYTHING, CHECK IT IS NOT ALREADY HERE. The dungeon fallback got written twice
+    inside one minute on Nov 15. Search the file first.
+  - CLOSING COUNTS AS PROGRESS. A run that ticks a finished item, merges a duplicate or deletes a
+    dead one has done real work and should say so.
 
 ### WORKERS: THIS OVERRIDES YOUR BRIEF
 Your standing prompt tells you to take the FIRST unchecked item in your section. WHILE PHASE RC IS

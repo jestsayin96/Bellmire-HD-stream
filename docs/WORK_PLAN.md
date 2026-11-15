@@ -718,7 +718,8 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
   raid OK (peak 18/24 voices, 0 steals, GAP held for every kind, 0 silent callers, beds 9/9 playing, market -60 dB /
   river -8 dB under the raid). Windowed recording renders/cycles/d22a/soak.ogg + soak_review.png: discrete
   footfalls above the bed throughout, horn at the raid, 0 clipped samples, peak -8.6 dBFS. Needs Mr. E's ear.
-- [ ] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
+- [x] D22b. MUSIC MOODS: smooth day/night/raid transitions, victory/defeat sting; keep 24/7-safe (D15). DONE: transition review.
+  RESULT (game build, 2026-11-15 ~07:00 CT): sfx.gd - four moods (day/night/raid/delve; delve = a delve is live below), HOLD 2 s hysteresis (a raid moves at once), per-transition equal-power crossfades (raid in 1.5 s / out 6 s, day<->night 8 s, delve 5 s), beds RESUME where they left off, raid cue from the top; victory sting when a raid is driven off or a delve comes home, defeat sting when a delve has no survivors (20 s gap, -8 dB bed duck). tools/_d22b_test.gd D22B_TEST OK 18/18 headless AND windowed; transition review renders/cycles/d22b/moods_review.png + moods.ogg (112 s, peak -8.6 dBFS, 0 clipped).
       MR. E'S CALL (Nov 15): generate fresh from music-studio with the mapping below. Pairs with D38 -
       do them together; D38 renders the tracks, D22b wires the transitions and stings.
 # Phase H - performance (stretch) [D23]
@@ -1234,6 +1235,13 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       track. Still add the credit note in assets/audio/LICENSE.txt saying which version generated them.
       DONE: day/night/raid/delve beds + 2 stings in assets/audio/music/, wired through D22b's
       transitions, each one's mood.pass and speechRoom verdict recorded in PROGRESS.md.
+      RESULT (game build, 2026-11-15, LEFT OPEN for Mr. E's ear + two calls): beds + stings generated per the
+      mapping and wired (D22b). Tool's own report: day seed 1286 mood.pass TRUE 0.678, speech pass 0.23 |
+      night seed 2276 @74 BPM mood.pass FALSE 0.637 (threshold 0.65), speech pass 0.32 | delve seed 4737 mood.pass
+      FALSE 0.564, speech pass 0.20 | raid seed 3414 (role music, speech n/a) mood.pass FALSE 0.603 - epic_cinematic
+      tops out at 100 BPM, hype wants 140-160, so this cell CANNOT pass by construction. 66 candidates searched
+      (tools/_d38_music_gen.mjs; per-try numbers in renders/cycles/d38/*.d38.json). Night/delve: every seed that passed
+      mood FAILED or WARNED speechRoom even with the pocket at -12 dB; the speech-pass take was shipped (the voice wins).
 - [ ] D39. TRADERS MUST MATTER. Today they arrive and leave with no effect. Make them carry SUPPLIES the town actually receives - and let bandits intercept them, so a lost caravan means the town goes without. An in-game event with stakes. DONE: a caravan arrives and the town gains; a caravan is taken and the town visibly suffers.
 - [ ] D40. FISHING ANIMATIONS AND WATER both need work. DONE: before/after capture of a catch and the water surface.
 

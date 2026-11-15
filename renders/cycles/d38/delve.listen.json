@@ -1,0 +1,1153 @@
+{
+  "meta": {
+    "name": "bellmire_delve",
+    "role": "bed",
+    "requestedMood": "lowkey",
+    "seed": 4737,
+    "bpm": 70,
+    "bars": 16,
+    "loopSeconds": 54.857142857142854,
+    "sampleRate": 44100,
+    "appVersion": "3.5.2",
+    "timestamp": "2026-11-15T12:33:38.540Z"
+  },
+  "musical": {
+    "key": {
+      "root": 0,
+      "rootName": "C",
+      "scale": "dorian"
+    },
+    "instruments": [
+      {
+        "trackName": "kick",
+        "voice": "kick",
+        "kind": "drum",
+        "notes": 28
+      },
+      {
+        "trackName": "snare",
+        "voice": "snareTight",
+        "kind": "drum",
+        "notes": 42
+      },
+      {
+        "trackName": "hat",
+        "voice": "shaker",
+        "kind": "drum",
+        "notes": 112
+      },
+      {
+        "trackName": "bass",
+        "voice": "sub808",
+        "kind": "synth",
+        "notes": 56,
+        "wave": "sawtooth"
+      },
+      {
+        "trackName": "lead",
+        "voice": "bell",
+        "kind": "synth",
+        "notes": 61,
+        "wave": "sawtooth"
+      },
+      {
+        "trackName": "harmony",
+        "voice": "pizz",
+        "kind": "synth",
+        "notes": 48,
+        "wave": "triangle"
+      }
+    ],
+    "notesPerBar": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      23,
+      10,
+      6,
+      6,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "notesPerBarMean": 10.3125,
+    "synthNoteDensity": 3.0078125,
+    "drumHitsPerBar": 11.375,
+    "drumVoiceCounts": {
+      "kick": 28,
+      "shaker": 112,
+      "snareTight": 42
+    },
+    "rhythmicDensity": 6.325520833333334,
+    "onsetGridShare": {
+      "quarter": 0.7636887608069164,
+      "eighthOffbeat": 0.1729106628242075,
+      "sixteenth": 0.06340057636887608
+    },
+    "rhythmRegularity": 0.6153846153846154,
+    "pitchRange": {
+      "minMidi": 34,
+      "maxMidi": 79,
+      "minName": "Bb1",
+      "maxName": "G5",
+      "spanSemitones": 45,
+      "medianMidi": 63,
+      "register": "mid"
+    },
+    "pitchClassHistogram": [
+      0.23030303030303031,
+      0,
+      0.15757575757575756,
+      0.07878787878787878,
+      0,
+      0.22424242424242424,
+      0,
+      0.1393939393939394,
+      0,
+      0.03636363636363636,
+      0.13333333333333333,
+      0
+    ],
+    "inKeyShare": 1
+  },
+  "loudness": {
+    "integratedLufs": -20.34371672539843,
+    "truePeakDbtp": -1.2999598547642974,
+    "samplePeakDbfs": -1.3000000932331663,
+    "shortTerm": [
+      {
+        "t": 0,
+        "lufs": -21.707194003734433
+      },
+      {
+        "t": 1,
+        "lufs": -22.472495170995913
+      },
+      {
+        "t": 2,
+        "lufs": -24.423452952991987
+      },
+      {
+        "t": 3,
+        "lufs": -22.921944890631647
+      },
+      {
+        "t": 4,
+        "lufs": -22.771539008968947
+      },
+      {
+        "t": 5,
+        "lufs": -22.6673924983283
+      },
+      {
+        "t": 6,
+        "lufs": -22.668116898774315
+      },
+      {
+        "t": 7,
+        "lufs": -23.70408014873922
+      },
+      {
+        "t": 8,
+        "lufs": -22.957912911521497
+      },
+      {
+        "t": 9,
+        "lufs": -24.23723252398764
+      },
+      {
+        "t": 10,
+        "lufs": -21.691282789941134
+      },
+      {
+        "t": 11,
+        "lufs": -21.21363081303582
+      },
+      {
+        "t": 12,
+        "lufs": -21.26800062110421
+      },
+      {
+        "t": 13,
+        "lufs": -21.843746075615375
+      },
+      {
+        "t": 14,
+        "lufs": -22.978163000126848
+      },
+      {
+        "t": 15,
+        "lufs": -22.3835582443748
+      },
+      {
+        "t": 16,
+        "lufs": -22.18383075066755
+      },
+      {
+        "t": 17,
+        "lufs": -22.258969836748975
+      },
+      {
+        "t": 18,
+        "lufs": -22.67140925276642
+      },
+      {
+        "t": 19,
+        "lufs": -25.099205661508638
+      },
+      {
+        "t": 20,
+        "lufs": -23.520642744544883
+      },
+      {
+        "t": 21,
+        "lufs": -23.720444662924503
+      },
+      {
+        "t": 22,
+        "lufs": -21.77012826966683
+      },
+      {
+        "t": 23,
+        "lufs": -21.24707811561332
+      },
+      {
+        "t": 24,
+        "lufs": -20.905270704893493
+      },
+      {
+        "t": 25,
+        "lufs": -21.069199160666212
+      },
+      {
+        "t": 26,
+        "lufs": -22.533191003198326
+      },
+      {
+        "t": 27,
+        "lufs": -21.588180455284995
+      },
+      {
+        "t": 28,
+        "lufs": -22.50883070307434
+      },
+      {
+        "t": 29,
+        "lufs": -22.882130005226873
+      },
+      {
+        "t": 30,
+        "lufs": -26.56060188502658
+      },
+      {
+        "t": 31,
+        "lufs": -30.037978468231834
+      },
+      {
+        "t": 32,
+        "lufs": -29.334560188398616
+      },
+      {
+        "t": 33,
+        "lufs": -27.831732690657518
+      },
+      {
+        "t": 34,
+        "lufs": -27.691873672074788
+      },
+      {
+        "t": 35,
+        "lufs": -25.674138307552894
+      },
+      {
+        "t": 36,
+        "lufs": -25.019223813730893
+      },
+      {
+        "t": 37,
+        "lufs": -22.548302360697768
+      },
+      {
+        "t": 38,
+        "lufs": -23.050297560389037
+      },
+      {
+        "t": 39,
+        "lufs": -22.120183226327352
+      },
+      {
+        "t": 40,
+        "lufs": -21.498359021089396
+      },
+      {
+        "t": 41,
+        "lufs": -21.633551896233715
+      },
+      {
+        "t": 42,
+        "lufs": -21.81782597006009
+      },
+      {
+        "t": 43,
+        "lufs": -24.425530032399976
+      },
+      {
+        "t": 44,
+        "lufs": -22.92342256951004
+      },
+      {
+        "t": 45,
+        "lufs": -23.58000465416401
+      },
+      {
+        "t": 46,
+        "lufs": -22.676817580867382
+      },
+      {
+        "t": 47,
+        "lufs": -22.67755138681495
+      },
+      {
+        "t": 48,
+        "lufs": -22.875537594882214
+      },
+      {
+        "t": 49,
+        "lufs": -22.962514533376197
+      },
+      {
+        "t": 50,
+        "lufs": -24.34381062826868
+      },
+      {
+        "t": 51,
+        "lufs": -22.407632166349217
+      }
+    ],
+    "shortTermMin": -30.037978468231834,
+    "shortTermMax": -20.905270704893493,
+    "shortTermMedian": -22.677184483841167,
+    "loudnessMovement": 4.384618213495024,
+    "crestDb": 19.043756870634134,
+    "dynamicRangeDb": 19.043756870634134,
+    "rmsPerSecond": [
+      {
+        "t": 0,
+        "db": -19.3537064869161
+      },
+      {
+        "t": 1,
+        "db": -19.188513473056993
+      },
+      {
+        "t": 2,
+        "db": -25.04861725127954
+      },
+      {
+        "t": 3,
+        "db": -21.293798821210036
+      },
+      {
+        "t": 4,
+        "db": -24.94997050718737
+      },
+      {
+        "t": 5,
+        "db": -20.11984319835578
+      },
+      {
+        "t": 6,
+        "db": -21.115714116689066
+      },
+      {
+        "t": 7,
+        "db": -24.295557115049945
+      },
+      {
+        "t": 8,
+        "db": -20.122079177349743
+      },
+      {
+        "t": 9,
+        "db": -25.073876216887246
+      },
+      {
+        "t": 10,
+        "db": -21.34162072811803
+      },
+      {
+        "t": 11,
+        "db": -24.17738719488854
+      },
+      {
+        "t": 12,
+        "db": -18.119513930160615
+      },
+      {
+        "t": 13,
+        "db": -19.749009250336197
+      },
+      {
+        "t": 14,
+        "db": -24.731105748281013
+      },
+      {
+        "t": 15,
+        "db": -19.17892612808428
+      },
+      {
+        "t": 16,
+        "db": -24.094349200270955
+      },
+      {
+        "t": 17,
+        "db": -21.604038239000573
+      },
+      {
+        "t": 18,
+        "db": -18.893873770716645
+      },
+      {
+        "t": 19,
+        "db": -24.46806034706104
+      },
+      {
+        "t": 20,
+        "db": -23.374680892551417
+      },
+      {
+        "t": 21,
+        "db": -24.84396457148003
+      },
+      {
+        "t": 22,
+        "db": -20.121772119011755
+      },
+      {
+        "t": 23,
+        "db": -24.572179676002676
+      },
+      {
+        "t": 24,
+        "db": -18.99476319060318
+      },
+      {
+        "t": 25,
+        "db": -19.075473341450486
+      },
+      {
+        "t": 26,
+        "db": -22.67672902721791
+      },
+      {
+        "t": 27,
+        "db": -19.262643775905783
+      },
+      {
+        "t": 28,
+        "db": -24.730582212964684
+      },
+      {
+        "t": 29,
+        "db": -19.188592608366704
+      },
+      {
+        "t": 30,
+        "db": -22.15101811276332
+      },
+      {
+        "t": 31,
+        "db": -27.613563394407954
+      },
+      {
+        "t": 32,
+        "db": -180
+      },
+      {
+        "t": 33,
+        "db": -27.95132338861073
+      },
+      {
+        "t": 34,
+        "db": -26.204254118084197
+      },
+      {
+        "t": 35,
+        "db": -28.01089399717048
+      },
+      {
+        "t": 36,
+        "db": -27.3132088984536
+      },
+      {
+        "t": 37,
+        "db": -21.623314647968947
+      },
+      {
+        "t": 38,
+        "db": -24.76546658636487
+      },
+      {
+        "t": 39,
+        "db": -19.1970546941494
+      },
+      {
+        "t": 40,
+        "db": -24.149590292711196
+      },
+      {
+        "t": 41,
+        "db": -20.68616412634058
+      },
+      {
+        "t": 42,
+        "db": -18.126990204598783
+      },
+      {
+        "t": 43,
+        "db": -25.04853427927636
+      },
+      {
+        "t": 44,
+        "db": -21.339929909657865
+      },
+      {
+        "t": 45,
+        "db": -24.87950796542477
+      },
+      {
+        "t": 46,
+        "db": -20.11984319835578
+      },
+      {
+        "t": 47,
+        "db": -24.016530569973924
+      },
+      {
+        "t": 48,
+        "db": -21.322091033190922
+      },
+      {
+        "t": 49,
+        "db": -20.12208575030035
+      },
+      {
+        "t": 50,
+        "db": -25.111497932611403
+      },
+      {
+        "t": 51,
+        "db": -21.334499647933036
+      },
+      {
+        "t": 52,
+        "db": -24.52484655575236
+      },
+      {
+        "t": 53,
+        "db": -19.206688643537866
+      },
+      {
+        "t": 54,
+        "db": -23.22239901355922
+      }
+    ],
+    "windowSeconds": 3,
+    "hopSeconds": 1
+  },
+  "brightness": {
+    "centroidSeries": [
+      {
+        "t": 0,
+        "hz": 310.0265808752995
+      },
+      {
+        "t": 1,
+        "hz": 184.15811451642114
+      },
+      {
+        "t": 2,
+        "hz": 441.1525453756218
+      },
+      {
+        "t": 3,
+        "hz": 219.48568733985599
+      },
+      {
+        "t": 4,
+        "hz": 446.9785171619784
+      },
+      {
+        "t": 5,
+        "hz": 172.70619520233657
+      },
+      {
+        "t": 6,
+        "hz": 283.7317866398482
+      },
+      {
+        "t": 7,
+        "hz": 429.2575217552818
+      },
+      {
+        "t": 8,
+        "hz": 172.83828390276
+      },
+      {
+        "t": 9,
+        "hz": 468.33885540498727
+      },
+      {
+        "t": 10,
+        "hz": 220.32603848665593
+      },
+      {
+        "t": 11,
+        "hz": 452.8944274591932
+      },
+      {
+        "t": 12,
+        "hz": 301.77093647060366
+      },
+      {
+        "t": 13,
+        "hz": 214.700781581483
+      },
+      {
+        "t": 14,
+        "hz": 538.6449920443906
+      },
+      {
+        "t": 15,
+        "hz": 185.9103544094762
+      },
+      {
+        "t": 16,
+        "hz": 501.26208733342236
+      },
+      {
+        "t": 17,
+        "hz": 223.27459256536
+      },
+      {
+        "t": 18,
+        "hz": 181.16868178482645
+      },
+      {
+        "t": 19,
+        "hz": 487.16883968401635
+      },
+      {
+        "t": 20,
+        "hz": 268.01645329299527
+      },
+      {
+        "t": 21,
+        "hz": 452.05017941485903
+      },
+      {
+        "t": 22,
+        "hz": 173.96904803577854
+      },
+      {
+        "t": 23,
+        "hz": 429.9863944735247
+      },
+      {
+        "t": 24,
+        "hz": 403.79499959569995
+      },
+      {
+        "t": 25,
+        "hz": 306.80977336223623
+      },
+      {
+        "t": 26,
+        "hz": 591.9484120193091
+      },
+      {
+        "t": 27,
+        "hz": 248.62292061975646
+      },
+      {
+        "t": 28,
+        "hz": 540.5708875899876
+      },
+      {
+        "t": 29,
+        "hz": 183.85427293404118
+      },
+      {
+        "t": 30,
+        "hz": 441.1066851657441
+      },
+      {
+        "t": 31,
+        "hz": 569.6818118934636
+      },
+      {
+        "t": 32,
+        "hz": 0
+      },
+      {
+        "t": 33,
+        "hz": 652.478859929247
+      },
+      {
+        "t": 34,
+        "hz": 450.2623277803559
+      },
+      {
+        "t": 35,
+        "hz": 692.967118483388
+      },
+      {
+        "t": 36,
+        "hz": 509.8282678982994
+      },
+      {
+        "t": 37,
+        "hz": 198.82362054096274
+      },
+      {
+        "t": 38,
+        "hz": 435.29199981002915
+      },
+      {
+        "t": 39,
+        "hz": 186.43924953661818
+      },
+      {
+        "t": 40,
+        "hz": 471.52855853105996
+      },
+      {
+        "t": 41,
+        "hz": 224.46165309363607
+      },
+      {
+        "t": 42,
+        "hz": 194.15100241732097
+      },
+      {
+        "t": 43,
+        "hz": 441.14963142719864
+      },
+      {
+        "t": 44,
+        "hz": 216.67221690574735
+      },
+      {
+        "t": 45,
+        "hz": 463.87147229474596
+      },
+      {
+        "t": 46,
+        "hz": 172.7060102435895
+      },
+      {
+        "t": 47,
+        "hz": 461.2448799229607
+      },
+      {
+        "t": 48,
+        "hz": 366.9511512015727
+      },
+      {
+        "t": 49,
+        "hz": 172.82956262529464
+      },
+      {
+        "t": 50,
+        "hz": 460.14961398608494
+      },
+      {
+        "t": 51,
+        "hz": 221.2035511231934
+      },
+      {
+        "t": 52,
+        "hz": 443.12996717813786
+      },
+      {
+        "t": 53,
+        "hz": 184.37483880506082
+      }
+    ],
+    "centroidMedianHz": 338.4888660384361,
+    "centroidMinHz": 0,
+    "centroidMaxHz": 692.967118483388,
+    "bands": {
+      "sub": {
+        "fraction": 0.2249852553884274,
+        "dbBelowTotal": 6.478459428364992
+      },
+      "low": {
+        "fraction": 0.5731024019744917,
+        "dbBelowTotal": 2.4176777133272096
+      },
+      "speech": {
+        "fraction": 0.194483191967218,
+        "dbBelowTotal": 7.111179262216255
+      },
+      "presence": {
+        "fraction": 0.007066107554328087,
+        "dbBelowTotal": 21.50819756386639
+      },
+      "air": {
+        "fraction": 0.0003630431155347977,
+        "dbBelowTotal": 34.40041794448989
+      }
+    },
+    "brightnessMedianHz": 450.26735808645225,
+    "highShare": 0.007736630009621853
+  },
+  "stereo": {
+    "widthDb": -28.67984100140484,
+    "correlation": 0.9973110126902051,
+    "balanceDb": 0.05192935835785464,
+    "label": "mono-like"
+  },
+  "speechRoom": {
+    "speechShare": 0.20217926695976282,
+    "speechBandDbBelowTotal": 6.942633824079014,
+    "restShare": 0.7978207330402372,
+    "role": "bed",
+    "threshold": {
+      "pass": 0.4,
+      "warn": 0.55
+    },
+    "verdict": "pass",
+    "message": "Speech band (300-3000 Hz) is 20.2% of the energy, 6.9 dB below the total. That is at or under 40% for a bed."
+  },
+  "mood": {
+    "requested": "lowkey",
+    "role": "bed",
+    "best": "lowkey",
+    "scores": {
+      "hype": 0.4634615384615384,
+      "playful": 0.4,
+      "lowkey": 0.563873311690273
+    },
+    "pass": false,
+    "suggestions": [
+      "Too busy for lowkey: 6.3 onsets/s, ideal 1-3.5. Reduce density (fewer hat/pluck steps) or lower BPM.",
+      "Too dark for lowkey: centroid 338.5 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+      "Loudness movement is 4.4 dB for lowkey, ideal 0-2.5 dB.",
+      "Drum regularity is 0.6 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+    ],
+    "perMetric": {
+      "bpm": {
+        "value": 70,
+        "ideal": [
+          65,
+          90
+        ],
+        "outer": [
+          55,
+          105
+        ],
+        "score": 1
+      },
+      "density": {
+        "value": 6.325520833333334,
+        "ideal": [
+          1,
+          3.5
+        ],
+        "outer": [
+          0.3,
+          5
+        ],
+        "score": 0
+      },
+      "brightness": {
+        "value": 338.4888660384361,
+        "ideal": [
+          400,
+          1800
+        ],
+        "outer": [
+          200,
+          2800
+        ],
+        "score": 0.6924443301921803
+      },
+      "loudnessMovement": {
+        "value": 4.384618213495024,
+        "ideal": [
+          0,
+          2.5
+        ],
+        "outer": [
+          0,
+          5
+        ],
+        "score": 0.2461527146019904
+      },
+      "regularity": {
+        "value": 0.6153846153846154,
+        "ideal": [
+          0.3,
+          0.6
+        ],
+        "outer": [
+          0.1,
+          0.8
+        ],
+        "score": 0.9230769230769228
+      }
+    }
+  },
+  "seam": {
+    "joinStep": 1.3076034158604638e-18,
+    "p999Step": 0.06332181913638522,
+    "rmsDiffDb": 134.90202690247276,
+    "pass": true,
+    "windows": [
+      {
+        "ms": 50,
+        "firstRmsDb": -8.02353308118847,
+        "lastRmsDb": -142.92555998366123,
+        "diffDb": 134.90202690247276
+      },
+      {
+        "ms": 100,
+        "firstRmsDb": -10.965144073687,
+        "lastRmsDb": -68.63150524325626,
+        "diffDb": 57.66636116956926
+      },
+      {
+        "ms": 250,
+        "firstRmsDb": -14.943912064750764,
+        "lastRmsDb": -27.87373877927113,
+        "diffDb": 12.929826714520365
+      },
+      {
+        "ms": 500,
+        "firstRmsDb": -17.939909030042745,
+        "lastRmsDb": -30.610422432248463,
+        "diffDb": 12.670513402205717
+      }
+    ],
+    "clickScore": 0.04357868977913059,
+    "clickDetected": false,
+    "levelMismatch": false,
+    "baselineDiffDb": 161.26881584568926,
+    "status": "ok",
+    "reasons": [],
+    "summary": "Seam OK. 50 ms 134.90 dB, 500 ms 12.67 dB, click score 0.04."
+  },
+  "summary": {
+    "paragraph": "busy, mid-register arrangement at a slow dorian setting (measured: 70 BPM, 6.33 onsets/s, median pitch Eb4, centroid 338 Hz). Brightness reads dark. Loudness movement reads dynamic (4.38 dB). Stereo reads mono-like. Voices used: kick, snareTight, shaker, sub808, bell, pizz. Layering measured A:6, B:6, break:6, A:6, turnaround:6 active layers per section. These are measurements, not a judgment of how it sounds.",
+    "facts": [
+      "Tempo reads 70 BPM (slow).",
+      "Density reads 6.33 onsets/s (busy).",
+      "Register reads mid, median MIDI 63.0, span 45 semitones.",
+      "Centroid median reads 338 Hz (dark).",
+      "Integrated loudness reads -20.34 LUFS, true peak -1.30 dBTP.",
+      "Seam status reads ok. Speech-room verdict reads pass."
+    ]
+  },
+  "layers": {
+    "tracks": [
+      {
+        "name": "kick",
+        "group": null,
+        "kind": "drum",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "B",
+          "break",
+          "A",
+          "turnaround"
+        ],
+        "onsetsPerBar": 1.75,
+        "gainDb": -8
+      },
+      {
+        "name": "snare",
+        "group": null,
+        "kind": "drum",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "B",
+          "break",
+          "A",
+          "turnaround"
+        ],
+        "onsetsPerBar": 2.625,
+        "gainDb": -10
+      },
+      {
+        "name": "hat",
+        "group": null,
+        "kind": "drum",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "B",
+          "break",
+          "A",
+          "turnaround"
+        ],
+        "onsetsPerBar": 7,
+        "gainDb": -14
+      },
+      {
+        "name": "bass",
+        "group": null,
+        "kind": "synth",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "B",
+          "break",
+          "A",
+          "turnaround"
+        ],
+        "onsetsPerBar": 3.5,
+        "gainDb": -6
+      },
+      {
+        "name": "lead",
+        "group": null,
+        "kind": "synth",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "B",
+          "break",
+          "A",
+          "turnaround"
+        ],
+        "onsetsPerBar": 3.8125,
+        "gainDb": -8
+      },
+      {
+        "name": "harmony",
+        "group": null,
+        "kind": "synth",
+        "sampleId": null,
+        "missing": false,
+        "sectionsActive": [
+          "A",
+          "B",
+          "break",
+          "A",
+          "turnaround"
+        ],
+        "onsetsPerBar": 3,
+        "gainDb": -10
+      }
+    ],
+    "sections": [
+      {
+        "name": "A",
+        "bars": 5,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "dropped": [],
+        "shortTermLufs": -22.575141285571593,
+        "brightnessHz": 338.4888660384361
+      },
+      {
+        "name": "B",
+        "bars": 4,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -22.775100971107342,
+        "brightnessHz": 338.4888660384361
+      },
+      {
+        "name": "break",
+        "bars": 2,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -26.876829928763474,
+        "brightnessHz": 338.4888660384361
+      },
+      {
+        "name": "A",
+        "bars": 4,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": -22.785217058623733,
+        "brightnessHz": 338.4888660384361
+      },
+      {
+        "name": "turnaround",
+        "bars": 1,
+        "activeLayers": [
+          "kick",
+          "snare",
+          "hat",
+          "bass",
+          "lead",
+          "harmony"
+        ],
+        "entered": [],
+        "dropped": [],
+        "shortTermLufs": null,
+        "brightnessHz": 338.4888660384361
+      }
+    ],
+    "buildDrop": [],
+    "samples": {
+      "used": [],
+      "missing": [],
+      "licenses": []
+    }
+  }
+}

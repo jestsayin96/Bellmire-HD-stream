@@ -466,9 +466,10 @@ writing it: Bellmire can have disasters and losses, but not ones that cancel a p
          felled a lord. Address them by name, keep it to one line, and only for moments that
          actually matter - not every kill. A viewer who learns their hero died while they were at
          work is a viewer who comes back to see what happened next.
-      .3 KNOW WHEN THE ROOM IS EMPTY. The game runs 24/7; the stream does not. The bot should not
-         narrate to an offline channel - check stream state and stay quiet when nobody is there.
-         Queue nothing up to dump when it returns, either; stale news is worse than no news.
+      .3 KNOW WHEN THE ROOM IS EMPTY. SIMPLIFIED by Mr. E's ruling below (14:38): the game runs only
+         while he streams, so the game being up is itself the signal that someone is there. No
+         stream-state check is needed. Still never queue news to dump at the start of the next
+         session - stale news is worse than no news.
       .4 SAFETY - THIS ONE IS NOT OPTIONAL. The bot must NEVER echo attacker-controlled text back
          into chat. Hero titles, epitaphs, dye names and anything else a viewer can set are exactly
          the hostile input the hub defends against with el()/textContent - chat has no such
@@ -489,6 +490,48 @@ writing it: Bellmire can have disasters and losses, but not ones that cancel a p
       them how to get one.
       DONE: a hero with a busy history gets a short true summary; a hero with none gets the join
       line; the L68 drift test still passes; output never exceeds the cap.
+
+## MR. E'S RULING, Nov 15 14:38 - THE GAME RUNS ONLY WHILE HE STREAMS (BINDING)
+
+He chose this deliberately after weighing three options. Bellmire is NOT a 24/7 persistent world
+for now: the game runs when the stream runs, and stops when it stops.
+
+WHY IT MATTERS TO YOU, as a worker: cruzader is free for development whenever he is not live. That
+is the whole reason for the choice - a permanently running game would hold docs/RUN_LOCK.txt
+forever, every worker would see RUNNING and skip, and all development would stop. If you ever find
+the lock held by a session that is a LIVE STREAM rather than a test run, that is not a stale lock.
+Do not clear it. Stand down and say why.
+
+WHAT THIS MEANS FOR DESIGN:
+  - The hub is honest about it already and needs no change: it says "Last word from the town N
+    minutes ago. The game is probably not running right now."
+  - The bot can treat "the game is up" as "someone is watching" (see D70.3).
+  - A viewer redeeming a Bellmire reward while the game is DOWN gets nothing. That is the open
+    wound - see D71.
+  - Option 3 (a separate always-on instance, so the town lives between streams) is the long-term
+    answer and is NOT being built now. It needs a real split: two instances cannot share one
+    Supabase row or one pair of Twitch tokens without fighting. Do not start it.
+
+- [ ] D71. THE REWARDS MUST FOLLOW THE GAME. Owner: DESKTOP BUILD (twitch_eventsub.gd).
+      MR. E DECLINED THIS ONCE (Nov 15 ~03:00) when it was framed as a nice-to-have. His 14:38
+      ruling changes the case, so it is written now - but it is still HIS call whether it gets
+      built, and he may decline it again. Do not treat silence as approval.
+      THE PROBLEM, which he hit himself: on Nov 15 viewers redeemed Bellmire channel-point rewards
+      while he was streaming something else. He fixed the CONFUSION by prefixing every reward with
+      "Bellmire:" - but the redemption still lands in a void whenever the game is down, and under
+      the 14:38 ruling the game is down most of the day. The viewer spends; nothing happens.
+      THE FIX: pause the game's own rewards when it is not running and unpause them when it is.
+      Helix exposes `is_paused` on a custom reward, the game already holds every reward id in
+      `reward_ids`, and `_helix()` already does PATCH - so this is small.
+      FAIL SAFE, NOT FAIL OPEN: pause on STARTUP first, then unpause once EventSub is actually
+      connected, so a crash or a power cut leaves the rewards PAUSED rather than open on a town
+      nobody is simulating. A clean-exit-only hook is not good enough; this project has lost enough
+      time to sessions that died mid-run.
+      SCOPE LIMIT, state it in chat if asked: this covers only the SIX channel-point rewards the
+      game created and matches by id. The five Custom Power-ups have no API and stay manual, and
+      fightoverlay's rewards are not ours to touch.
+      DONE: rewards show paused on the dashboard within seconds of the game closing, unpaused once
+      it is live, a forced crash leaves them paused, and no fightoverlay reward is ever modified.
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 

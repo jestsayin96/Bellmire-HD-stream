@@ -1,0 +1,9 @@
+parse rc=0 20s
+offfloor rc=0 42s
+twitch rc=0 0s
+d60 rc=0 22s
+w1a rc=0 2s
+d20b rc=0 48s
+townwalk rc=0 82s
+delve rc=0 66s
+ALLDONE

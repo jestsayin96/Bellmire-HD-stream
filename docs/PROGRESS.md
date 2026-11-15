@@ -1392,3 +1392,30 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   delve.gd / chatcmd.gd / adventurers.gd (deaths below, kills, finds in the dark, homecomings) carry day but no
   who/kind until each adds `town.tag_feed("death", [name])` (etc.) next to its feed append. notables.gd ambient voice
   lines left untagged on purpose (townsfolk chatter, no event).
+
+## D-cycle - D63a the festival is an event, 2026-11-15 ~12:30 CT (game build)
+- Item: D63 (D59 is the first open DESKTOP item but its remainder is only the live-hub capture during a real stream run;
+  D63 is the next, Mr. E's 11:51 ask). All seven stages built; D63 left OPEN for the clip and the C6 words.
+- CHANGE scripts/town.gd: `start_festival(reason, who, buyer)` / `_end_festival` / `_dress_festival` replace the bare flag.
+  Reasons market (old timer) / raid / level / hero / gift, caused ones gated by FEST_GAP 240 s; square dressed with poles,
+  pennons, a 204-pennant MultiMesh bunting ring + spokes to a lantern crown (306 + gold for a gift), lanterns lit after
+  18:00 or always for a gift, non-solid; food sold off the stores into the treasury while it runs; the next caravan
+  called in within 6-15 s; a delve party coming home to one is cheered in (tagged who), or causes one 40% of the time.
+  Words from lore_lines "festivals" (C6) when present, short fallbacks until then.
+  scripts/townsfolk.gd: per-body festival act (dance/drink/haggle/cheer, acts fest_*), haggle spots at stall fronts.
+  scripts/hero_body.gd: heroes idling in town join and act (HeroBody.fest_acts/fest_joins). scripts/notables.gd:
+  chief, priest, bard (centre), children, pedlar, beggar, drunk sent to the square, day slot restored after.
+  scripts/sfx.gd: mood "festival" (CC0 minstrel dance), market bed +5 dB. scripts/raids.gd / economy.gd: raid driven
+  off (50%) and level up call start_festival. scripts/twitch_eventsub.gd: tier 3 -> start_festival("gift", [hero],
+  buyer); BUG FIXED - the old path set festival=true with no timer so a paid festival could end next frame; a gift
+  during a raid waits for it. Backups *.bak_d63.
+- TEST tools/_d63_fest.gd: D63_FEST OK 25/25 (dressing 204 pennants/21 nodes; mood festival -> day; acts dance 6 drink 5
+  haggle 1 cheer 9; 8 notables sent; a hero placed 38 m off walked to 12 m and acted; lots sold; caravan called; level
+  line names the reason; raid one refused in the gap; gift 173 s, 306 pennants, 7 lanterns lit, hostile buyer name
+  sanitised + capped and named in the Chronicle; gift under a raid waited and started after). LOOK tools/_d63_shot.gd ->
+  renders/cycles/d63/{1_square_before,2_festival_day,3_square_struck,4_viewer_festival_dusk}.png - looked at: bunting
+  reads at stream distance, crowd + both heroes in the square, dusk gift lit and gold.
+- GATES: parse 0 errors; OFFFLOOR 0/1433 INPROP 0 MON_INPROP 0/129; TWITCH_PARSE OK; D60_CHRON OK; W1A_TEST OK;
+  D20B_TEST PASS; TOWNWALK in_solid 0/17081 raid 0/8837 PASS; delve rc 0, 0 SCRIPT ERROR. Not re-run: D22b music test
+  (windowed, long) - the new mood only engages while a festival is on.
+- OPEN: a short clip of one festival start-to-finish; C6 words (shape the game reads is noted under C6 in WORK_PLAN).

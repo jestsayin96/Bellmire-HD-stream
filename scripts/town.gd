@@ -3419,30 +3419,321 @@ func tag_feed(kind: String, who: Array = []) -> void:
     while feed_tags.size() > FEED_TAG_MAX:
         feed_tags.erase(feed_tags.keys()[0])
 
+## D63: THE FESTIVAL IS AN EVENT, NOT A BOOLEAN. A festival has a REASON (the
+## quiet market-day timer stays as the baseline; a raid beaten back, the town
+## growing a level, a hero home from the scar and a viewer's gift cause one), it
+## DRESSES the square (bunting stall to stall and in over the well, pennons,
+## lanterns lit after dark - built here, struck when it ends, never solid, so the
+## navmesh is untouched), it TRADES (the market sells food off the stores into the
+## treasury while it runs) and it calls a caravan in (a festival is a good hour for
+## one - D39's chance, not a new mechanic). A festival a viewer PAID for is theirs:
+## named in the Chronicle, longer, and dressed bigger and in gold.
+## Words: lore_lines.json "festivals" (C6) when the content writer has written it -
+## openings.<reason>, closings, gift_openings, gift_closings, with {who} {buyer}
+## {town} - else the short fallbacks below. All reads go through _fest_pick.
+var fest_reason := ""            # market / raid / level / hero / gift
+var fest_who: Array = []         # the heroes it is for (D60 `who`)
+var fest_buyer := ""             # D63.7: the viewer who paid for it
+var fest_big := false
+var fest_trades := 0             # D63.5: lots sold on the square this festival
+var fest_gold := 0
+var fest_log: Array = []         # tools/_d63_fest.gd: [reason, big, buyer] per festival begun
+var _fest_pending := {}          # a paid festival waiting out a raid
+var _fest_dress: Node3D = null
+var _fest_lights: Array = []     # OmniLights: lit after dark (always for a gift)
+var _fest_trade_t := 0.0
+var _fest_gap := 999.0           # seconds since the last festival ended
+var _fest_lore := {}
+var _fest_lore_ok := false
+const FEST_GAP := 240.0          # a caused festival (not level/gift) needs this quiet first
+const FEST_LEN := {"market": [55.0, 85.0], "raid": [80.0, 110.0], "level": [100.0, 130.0],
+    "hero": [70.0, 95.0], "gift": [160.0, 200.0]}
+const FEST_OPEN := {
+    "market": ["A festival gathers in the market square - music, stalls, and a crowd!"],
+    "raid": ["The gates held. Bellmire pours into the square to drink to the Watch."],
+    "level": ["Bellmire is {town} now, and the square says so with music and bunting."],
+    "hero": ["{who} comes home from the scar, and the square turns out to welcome them."],
+    "gift": ["A Festival of Plenty, the gift of {buyer}! The square is strung with gold and the town drinks their health."],
+}
+const FEST_CLOSE := ["The festival in the square winds down; folk drift back to their work."]
+const FEST_GIFT_CLOSE := ["The lanterns of {buyer}'s festival burn down, and Bellmire will talk of it for days."]
+
+func _fest_pick(key: String, sub := "") -> String:
+    if not _fest_lore_ok:
+        _fest_lore_ok = true
+        var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+        if f:
+            var d = JSON.parse_string(f.get_as_text())
+            if d is Dictionary and (d as Dictionary).get("festivals") is Dictionary:
+                _fest_lore = d["festivals"]
+    var pool: Array = []
+    var src = _fest_lore.get(key)
+    if sub != "" and src is Dictionary:
+        src = (src as Dictionary).get(sub)
+    if src is Array:
+        for s in src:
+            if s is String and String(s) != "":
+                pool.append(s)
+    if pool.is_empty():
+        match key:
+            "openings": pool = FEST_OPEN.get(sub, FEST_OPEN["market"])
+            "closings": pool = FEST_CLOSE
+            "gift_openings": pool = FEST_OPEN["gift"]
+            "gift_closings": pool = FEST_GIFT_CLOSE
+    if pool.is_empty():
+        return ""
+    var who := ", ".join(fest_who.map(func(x) -> String: return str(x)))
+    var tn: String = String(economy.get("town_name")) if economy else "Bellmire"
+    return String(pool[randi() % pool.size()]).format({"who": who if who != "" else "a hero",
+        "buyer": fest_buyer if fest_buyer != "" else "a generous stranger", "town": tn})
+
+## Begin a festival. `who` = hero names it is for; `buyer` = a viewer who paid
+## (a gift is never refused: under a raid it waits, at night it is lit). A caused
+## festival respects FEST_GAP and the night; the market one is the old timer.
+func start_festival(reason: String, who: Array = [], buyer := "") -> bool:
+    if economy == null or _market_pos == Vector3.ZERO:
+        return false
+    var paid := reason == "gift"
+    if is_raid_on():
+        if paid:
+            _fest_pending = {"who": who.duplicate(), "buyer": buyer}
+        return false
+    if festival:
+        if not paid:
+            return false
+        # a viewer's gift lands on a festival already running: it becomes theirs
+        fest_reason = "gift"
+        fest_buyer = buyer
+        fest_who = who.duplicate()
+        fest_big = true
+        _fest_left = maxf(_fest_left, randf_range(160.0, 200.0))
+        _dress_festival(true)
+        feed.append(_fest_pick("gift_openings"))
+        tag_feed("festival", fest_who)
+        fest_log.append([reason, true, buyer])
+        return true
+    if not paid and economy.is_night():
+        return false
+    if reason in ["raid", "hero"] and _fest_gap < FEST_GAP:
+        return false
+    festival = true
+    festival_at = _market_pos
+    fest_reason = reason
+    fest_who = who.duplicate()
+    fest_buyer = buyer
+    fest_big = paid
+    fest_trades = 0
+    fest_gold = 0
+    _fest_trade_t = 4.0
+    var ln: Array = FEST_LEN.get(reason, FEST_LEN["market"])
+    _fest_left = randf_range(float(ln[0]), float(ln[1]))
+    _fest_t = randf_range(260.0, 420.0)     # a caused festival replaces the next timed one
+    fests += 1
+    _dress_festival(fest_big)
+    feed.append(_fest_pick("gift_openings") if paid else _fest_pick("openings", reason))
+    tag_feed("festival", fest_who)
+    fest_log.append([reason, fest_big, buyer])
+    # D63.5: a festival is a good hour for a caravan (D39's chance, sooner)
+    if _caravans.is_empty() and _caravan_t > 15.0:
+        _caravan_t = randf_range(6.0, 15.0)
+    return true
+
+func _end_festival() -> void:
+    festival = false
+    _strike_festival()
+    var ln := _fest_pick("gift_closings") if fest_reason == "gift" else _fest_pick("closings")
+    if fest_trades > 0:
+        ln += "  (%d lots sold on the square, %d gold to the treasury)" % [fest_trades, fest_gold]
+    feed.append(ln)
+    tag_feed("festival", fest_who)
+    _fest_gap = 0.0
+    fest_reason = ""
+    fest_who = []
+    fest_buyer = ""
+    fest_big = false
+
+## D63.5: goods change hands - the square sells food off the stores while it runs
+func _fest_trade(delta: float) -> void:
+    _fest_trade_t -= delta
+    if _fest_trade_t > 0.0:
+        return
+    _fest_trade_t = 3.0 if fest_big else 6.0
+    if economy.has_method("trade_blocked") and economy.trade_blocked():
+        return
+    if economy.take("food", 1.0):
+        var g := maxi(1, int(round(economy.price("food"))))
+        economy.treasury += g
+        fest_trades += 1
+        fest_gold += g
+
 func _festival_pass(delta: float) -> void:
     if economy == null:
         return
     if festival:
         _fest_left -= delta
+        _fest_trade(delta)
+        _fest_light_pass()
         if _fest_left <= 0.0 or is_raid_on():
-            festival = false
-            feed.append("The festival in the square winds down; folk drift back to their work.")
-            tag_feed("festival")
+            _end_festival()
+        return
+    _fest_gap += delta
+    if not _fest_pending.is_empty() and not is_raid_on():
+        var p: Dictionary = _fest_pending
+        _fest_pending = {}
+        start_festival("gift", p.get("who", []), String(p.get("buyer", "")))
         return
     if is_raid_on() or economy.is_night():
         return
     _fest_t -= delta
     if _fest_t <= 0.0:
         _fest_t = randf_range(260.0, 420.0)
-        var mk: Vector3 = _market_pos
-        if mk == Vector3.ZERO:
-            return
-        festival = true
-        festival_at = mk
-        _fest_left = randf_range(55.0, 85.0)
-        fests += 1
-        feed.append("A festival gathers in the market square - music, stalls, and a crowd!")
-        tag_feed("festival")
+        start_festival("market")
+
+## ---- D63.1: the square dresses itself
+const FEST_COLS := [Color(0.82, 0.16, 0.13), Color(0.95, 0.76, 0.20), Color(0.16, 0.36, 0.78),
+    Color(0.20, 0.58, 0.28), Color(0.93, 0.91, 0.84)]
+const FEST_GOLD := [Color(0.98, 0.80, 0.22), Color(0.86, 0.16, 0.14), Color(0.98, 0.92, 0.70)]
+
+func _strike_festival() -> void:
+    if is_instance_valid(_fest_dress):
+        _fest_dress.queue_free()
+    _fest_dress = null
+    _fest_lights = []
+
+func _fest_mat(col: Color, glow := 0.0) -> StandardMaterial3D:
+    var m := StandardMaterial3D.new()
+    m.albedo_color = col
+    m.cull_mode = BaseMaterial3D.CULL_DISABLED
+    m.vertex_color_use_as_albedo = true
+    if glow > 0.0:
+        m.emission_enabled = true
+        m.emission = col
+        m.emission_energy_multiplier = glow
+    return m
+
+func _fest_mesh(root: Node3D, mesh: Mesh, pos: Vector3, mat: Material, yaw := 0.0) -> MeshInstance3D:
+    var mi := MeshInstance3D.new()
+    mi.mesh = mesh
+    mi.material_override = mat
+    mi.position = pos
+    mi.rotation.y = yaw
+    mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    mi.visibility_range_end = 180.0
+    root.add_child(mi)
+    return mi
+
+## pennants hanging along a sagging line from a to b, into the multimesh lists
+func _bunting(xf: Array, cols: Array, a: Vector3, b: Vector3, palette: Array, sag: float) -> void:
+    var d := b - a
+    var n := maxi(3, int(Vector2(d.x, d.z).length() / 0.85))
+    var yaw := atan2(d.x, d.z) + PI * 0.5
+    for i in range(1, n):
+        var t := float(i) / float(n)
+        var p := a + d * t
+        p.y -= sag * 4.0 * t * (1.0 - t)
+        var bs := Basis(Vector3.UP, yaw) * Basis(Vector3(0, 0, 1), PI)   # point hangs down
+        xf.append(Transform3D(bs, p + Vector3(0, -0.22, 0)))
+        cols.append(palette[i % palette.size()])
+
+func _dress_festival(big: bool) -> void:
+    _strike_festival()
+    var root := Node3D.new()
+    root.name = "FestivalDressing"
+    add_child(root)
+    _fest_dress = root
+    var c := _market_pos
+    var g0 := height_at(c.x, c.z)
+    var pal: Array = FEST_GOLD if big else FEST_COLS
+    var wood := _fest_mat(Color(0.42, 0.29, 0.17))
+    var pole := CylinderMesh.new()
+    pole.top_radius = 0.07
+    pole.bottom_radius = 0.09
+    pole.height = 5.6 if big else 5.0
+    var tops: Array = []
+    var xf: Array = []
+    var cols: Array = []
+    var i := 0
+    for st in _stalls:
+        var sp: Vector3 = st[0]
+        var dir := Vector3(sp.x - c.x, 0.0, sp.z - c.z).normalized()
+        var side := Vector3(-dir.z, 0.0, dir.x)
+        var pp := sp + dir * 1.7 + side * 2.7
+        var g := height_at(pp.x, pp.z)
+        _fest_mesh(root, pole, Vector3(pp.x, g + pole.height * 0.5, pp.z), wood)
+        var top := Vector3(pp.x, g + pole.height - 0.1, pp.z)
+        tops.append(top)
+        # a pennon down each pole, in the festival's colour
+        var cloth := QuadMesh.new()
+        cloth.size = Vector2(0.9, 2.2) if big else Vector2(0.6, 1.5)
+        var col: Color = pal[i % pal.size()]
+        var pn := _fest_mesh(root, cloth, top + side * (0.5 if big else 0.35) - Vector3(0, cloth.size.y * 0.5 + 0.2, 0),
+            _fest_mat(col), atan2(side.x, side.z) + PI * 0.5)
+        pn.set_meta("cloth", true)
+        # a lantern at the top of every other pole (every pole for a gift)
+        if big or i % 2 == 0:
+            var lm := SphereMesh.new()
+            lm.radius = 0.18
+            lm.height = 0.36
+            _fest_mesh(root, lm, top + Vector3(0, -0.45, 0) - dir * 0.35, _fest_mat(Color(1.0, 0.78, 0.40), 3.0))
+            var ol := OmniLight3D.new()
+            ol.light_color = Color(1.0, 0.72, 0.38)
+            ol.omni_range = 11.0 if big else 9.0
+            ol.light_energy = 1.6
+            ol.shadow_enabled = false
+            ol.position = top + Vector3(0, -0.6, 0) - dir * 0.35
+            ol.visible = false
+            root.add_child(ol)
+            _fest_lights.append(ol)
+        i += 1
+    if tops.is_empty():
+        return
+    # bunting: stall pole to stall pole round the ring, and in to a crown over the well
+    var crown := Vector3(c.x, g0 + (7.4 if big else 6.6), c.z)
+    for k in range(tops.size()):
+        _bunting(xf, cols, tops[k], tops[(k + 1) % tops.size()], pal, 0.7)
+        _bunting(xf, cols, tops[k], crown, pal, 0.5)
+        if big:
+            _bunting(xf, cols, tops[k] - Vector3(0, 1.1, 0), tops[(k + 1) % tops.size()] - Vector3(0, 1.1, 0), FEST_COLS, 0.5)
+    var pm := PrismMesh.new()
+    pm.size = Vector3(0.34, 0.44, 0.02) * (1.25 if big else 1.0)
+    var mm := MultiMesh.new()
+    mm.transform_format = MultiMesh.TRANSFORM_3D
+    mm.use_colors = true
+    mm.mesh = pm
+    mm.instance_count = xf.size()
+    for k in range(xf.size()):
+        mm.set_instance_transform(k, xf[k])
+        mm.set_instance_color(k, cols[k])
+    var mmi := MultiMeshInstance3D.new()
+    mmi.multimesh = mm
+    mmi.material_override = _fest_mat(Color.WHITE)
+    mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    mmi.visibility_range_end = 180.0
+    root.add_child(mmi)
+    # the crown: a ring of lanterns hung where the lines meet
+    var lm2 := SphereMesh.new()
+    lm2.radius = 0.24
+    lm2.height = 0.48
+    _fest_mesh(root, lm2, crown - Vector3(0, 0.5, 0), _fest_mat(Color(1.0, 0.80, 0.45), 4.0))
+    var cl := OmniLight3D.new()
+    cl.light_color = Color(1.0, 0.70, 0.36)
+    cl.omni_range = 16.0 if big else 12.0
+    cl.light_energy = 2.0
+    cl.shadow_enabled = false
+    cl.position = crown - Vector3(0, 0.8, 0)
+    cl.visible = false
+    root.add_child(cl)
+    _fest_lights.append(cl)
+    fest_dress_n = xf.size()
+    _fest_light_pass()
+
+var fest_dress_n := 0            # pennants hung (tests)
+
+func _fest_light_pass() -> void:
+    var lit: bool = fest_big or (economy != null and (economy.is_night() or economy.hour() >= 18.0 or economy.hour() < 6.5))
+    for l in _fest_lights:
+        if is_instance_valid(l) and (l as OmniLight3D).visible != lit:
+            (l as OmniLight3D).visible = lit
 
 func _work_sounds(delta: float) -> void:
     # D29: a working town is never silent. The smith rings his anvil; the market
@@ -4994,6 +5285,19 @@ func _begin_delve() -> void:
                     people.erase(hb)
                     hb.queue_free()
                     heroes.erase(uid)
+        # D63.4: a party home from the scar is received by a festival that is on -
+        # or, now and then, the town throws one for them
+        var home_names: Array = []
+        for su in survivors:
+            if heroes.has(su):
+                home_names.append(String((heroes[su] as HeroBody).person_name))
+        if not home_names.is_empty():
+            if festival:
+                feed.append("%s come%s home from the scar to a festival, and the square cheers them in." \
+                    % [", ".join(home_names), "" if home_names.size() > 1 else "s"])
+                tag_feed("festival", home_names)
+            elif randf() < 0.4:
+                start_festival("hero", home_names)
         _at_mouth.clear()
         delve.queue_free()
         delve = null)

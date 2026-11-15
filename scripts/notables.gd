@@ -453,6 +453,7 @@ func _process(delta: float) -> void:
     var raids = town.get("raids")
     var raid_on: bool = raids != null and bool(raids.get("_live"))
     var h: float = eco.hour()
+    var fest_on: bool = bool(town.get("festival"))
     for c in cast:
         # D7: a notable killed in a raid is freed - test before typing it (a
         # typed assign of a freed body stopped this whole pass every tick)
@@ -463,8 +464,17 @@ func _process(delta: float) -> void:
             continue   # the E3PO controller holds him in the barracks while he mends
         if c.has("kit_due"):
             _kit(c)
+        # D63.3: a festival brings Bellmire's own people to the square - the bard plays
+        # in the middle, the chief, the priest, the children and the drunk join the crowd
+        var fkey := String((c["def"] as Dictionary)["key"])
+        if fest_on and not raid_on and FEST_KEYS.has(fkey) and not bool(c.get("fest", false)):
+            c["fest"] = true
+            _to_festival(c, fkey)
+        elif not fest_on and bool(c.get("fest", false)):
+            c["fest"] = false
+            c["slot"] = -2                     # the day's own slot re-applies below
         var i := slot_at((c["def"] as Dictionary)["day"], h)
-        if i != int(c["slot"]) and not raid_on:
+        if i != int(c["slot"]) and not raid_on and not bool(c.get("fest", false)):
             _apply(c, i)
         if not bool(c["hit"]):
             if who.inside:
@@ -487,6 +497,28 @@ func _process(delta: float) -> void:
     if _line_t <= 0.0:
         _line_t = rng.randf_range(28.0, 55.0)
         _say()
+
+## D63.3: who comes to a festival, and where they stand in it
+const FEST_KEYS := ["chief", "priest", "bard", "tove", "dunn", "drunk", "pedlar", "beggar"]
+var fest_sent := 0                 # tools/_d63_fest.gd
+
+func _to_festival(c: Dictionary, key: String) -> void:
+    var who: Townsfolk = c["who"]
+    var fp = town.get("festival_at")
+    if not (fp is Vector3) or (fp as Vector3) == Vector3.ZERO:
+        return
+    var a := rng.randf() * TAU
+    var r := 3.2 if key == "bard" else rng.randf_range(5.0, 9.5)
+    var spot: Vector3 = town.call("keep_walkable", (fp as Vector3) + Vector3(cos(a), 0.0, sin(a)) * r)
+    who.stay = false
+    who.leader = null
+    who.stops = [[spot, Vector3.ZERO, 999.0]]
+    who._stop_i = 0
+    who._route = []
+    who._wait = 0.0
+    c["goals"] = [spot]
+    c["hit"] = false
+    fest_sent += 1
 
 ## performers and the posted act while they stand at their spot
 func _gesture(c: Dictionary, dt: float) -> void:

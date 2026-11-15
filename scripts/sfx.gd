@@ -139,6 +139,8 @@ const MUSIC := {
     "night": ["music/bellmire_night.ogg"],
     "raid": ["music/bellmire_raid.ogg"],
     "delve": ["music/bellmire_delve.ogg"],
+    # D63.2: a festival lifts the music - the CC0 minstrel dance (RandomMind, assets/audio/LICENSE.txt)
+    "festival": ["music/day_minstrel_dance.ogg"],
 }
 ## the older CC0 loops (RandomMind) - used only if a generated file is missing
 const MUSIC_OLD := {
@@ -146,13 +148,16 @@ const MUSIC_OLD := {
     "night": ["music/night_bards_tale.ogg", "music/night_exploration.ogg"],
     "raid": ["music/raid_battle.ogg"],
     "delve": ["music/night_exploration.ogg"],
+    "festival": ["music/day_old_tower_inn.ogg"],
 }
 ## D22b: crossfade length per transition, real seconds ("from>to"; unlisted = FADE). A raid
 ## comes in fast and leaves slowly; day and night melt into each other.
 const FADES := {"day>raid": 1.5, "night>raid": 1.5, "delve>raid": 1.5,
     "raid>day": 6.0, "raid>night": 6.0, "raid>delve": 6.0,
     "day>night": 8.0, "night>day": 8.0,
-    "day>delve": 5.0, "night>delve": 5.0, "delve>day": 5.0, "delve>night": 5.0}
+    "day>delve": 5.0, "night>delve": 5.0, "delve>day": 5.0, "delve>night": 5.0,
+    "day>festival": 3.0, "night>festival": 3.0, "delve>festival": 3.0, "raid>festival": 4.0,
+    "festival>day": 6.0, "festival>night": 6.0, "festival>delve": 5.0, "festival>raid": 1.5}
 const HOLD := 2.0              # D22b: real seconds a new mood must be wanted before the music moves
 const STINGS := {"victory": "music/sting_victory.ogg", "defeat": "music/sting_defeat.ogg"}
 const STING_DB := 0.0          # the stings were made at -16 LUFS, 4 dB over the -20 LUFS beds already
@@ -488,6 +493,9 @@ func bed_target(kind: String) -> float:
     var eco = town.get("economy") if town else null
     var night: bool = eco != null and eco.is_night()
     var raid := mood == "raid"
+    var fest: bool = town != null and bool(town.get("festival"))
+    if kind == "market" and fest:
+        return 5.0                     # D63.2: trade chatter up while the square celebrates (day or night)
     if (night and bool(spec[3])) or (raid and bool(spec[4])):
         return SILENT
     return -6.0 if raid else 0.0       # the river runs on under a raid, a little lower
@@ -507,6 +515,9 @@ func want_mood() -> String:
     var r = town.get("raids") if town else null
     if r and not (r.raiders as Array).is_empty():
         return "raid"
+    # D63.2: a festival in the square outranks the delve bed and the time of day
+    if town and bool(town.get("festival")):
+        return "festival"
     var dv = town.get("delve") if town else null
     if dv != null and is_instance_valid(dv) and String(dv.get("state")) != "home":
         return "delve"

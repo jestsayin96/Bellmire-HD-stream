@@ -499,6 +499,7 @@ func _civic_flee() -> bool:
 func _maybe_gather() -> bool:
     if town == null or not town.has_method("is_festival") or not bool(town.call("is_festival")):
         _at_fest = false
+        _fest_act = ""
         return false
     if not _flee_ok() or _fleeing or _seat_i >= 0 or _sat:
         return false
@@ -507,7 +508,9 @@ func _maybe_gather() -> bool:
         return false
     var centre: Vector3 = fp
     if Vector2(centre.x - global_position.x, centre.z - global_position.z).length() < 12.0:
-        _at_fest = true                       # already here - mill about and cheer
+        _at_fest = true                       # already here - join in
+        if _fest_act == "":
+            _fest_act = _pick_fest_act()
         return false
     if _at_fest:
         return false
@@ -517,8 +520,22 @@ func _maybe_gather() -> bool:
         inside = false
         visible = true
         global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
+    # D63.3: each body comes to the festival to DO something - dance near the
+    # middle, drink and toast on the edge, haggle at a stall, or watch and cheer
+    _fest_act = _pick_fest_act()
     var a := randf() * TAU
-    var spot: Vector3 = town.call("keep_walkable", centre + Vector3(cos(a), 0.0, sin(a)) * randf_range(4.0, 11.0))
+    var rr := Vector2(4.0, 11.0)
+    match _fest_act:
+        "dance": rr = Vector2(3.5, 6.5)
+        "drink": rr = Vector2(8.0, 11.0)
+    var want := centre + Vector3(cos(a), 0.0, sin(a)) * randf_range(rr.x, rr.y)
+    var sts = town.get("_stalls")
+    if _fest_act == "haggle" and sts is Array and not (sts as Array).is_empty():
+        var st: Array = (sts as Array)[randi() % (sts as Array).size()]
+        var sp: Vector3 = st[0]
+        var inward := Vector3(centre.x - sp.x, 0.0, centre.z - sp.z).normalized()
+        want = sp + inward * randf_range(2.6, 3.6) + Vector3(-inward.z, 0.0, inward.x) * randf_range(-1.2, 1.2)
+    var spot: Vector3 = town.call("keep_walkable", want)
     var r: Array = town.call("route", global_position, spot)
     if r.is_empty():
         return false
@@ -1359,6 +1376,23 @@ var _sat := false
 # flee runs (the D17b gait picks the run clip from the real speed via _flee_k).
 var _fleeing := false
 var _at_fest := false
+## D63.3: a festival act per body, and the clips that play it (all KayKit adventurer clips)
+var _fest_act := ""
+const FEST_ACTS := {
+    "dance": ["Jump_Full_Short", "Cheer", "Jump_Full_Short", "Spellcast_Raise", "Jump_Full_Short"],
+    "drink": ["Use_Item", "Use_Item", "Cheer", "Spellcast_Raise"],
+    "haggle": ["Interact", "PickUp", "Interact", "Use_Item"],
+    "cheer": ["Cheer", "Spellcast_Raise", "Cheer", "Interact"],
+}
+func _pick_fest_act() -> String:
+    var r := randf()
+    if r < 0.30:
+        return "dance"
+    if r < 0.55:
+        return "drink"
+    if r < 0.75:
+        return "haggle"
+    return "cheer"
 var _flee_k := 1.0
 static var fled := 0             # tools/_d20b_test.gd
 static var gathered := 0
@@ -1465,8 +1499,13 @@ func _idle_acts(delta: float) -> void:
         var mk = town.get("_market_pos")
         var p := global_position
         if _at_fest and bool(town.get("festival")):
-            list = ["Cheer", "Interact", "Cheer"]
-            kind = "festival"
+            # D63.3: what this body came to the festival to do (FEST_ACTS)
+            if _fest_act == "":
+                _fest_act = _pick_fest_act()
+            list = FEST_ACTS.get(_fest_act, FEST_ACTS["cheer"])
+            kind = "fest_" + _fest_act
+            if _fest_act == "dance":
+                _act_t = randf_range(1.2, 2.4)          # a dance keeps moving
         elif (h >= 17.0 or h < 1.0 or _eve_drink) and tv is Vector3 and tv != Vector3.INF \
                 and Vector2(p.x - tv.x, p.z - tv.z).length() < 16.0:
             list = ["Use_Item", "Use_Item", "Cheer"]

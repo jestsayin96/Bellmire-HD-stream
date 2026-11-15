@@ -5847,5 +5847,2282 @@
         "see": "Dense districts, a second ring of homes outside the wall, traffic at every gate."
       }
     ]
+  },
+  "townsfolk": {
+    "_note": "C-48 / WORK_PLAN C5 - the townsfolk as a community (words half of D36). Dead until wired; content worker never touches code. Additive. KEY SHAPE: names{given_f,given_m,family,by_names} -> a townsperson = one given name (given_f or given_m by body) + EITHER one family OR one by_name (never both); trades{<trade_key>:{label,from_tier,bark[],morning[],midday[],evening[],night[]}} -> bind a trade whose from_tier <= current growth tier (1-12, see growth_tiers.tiers); speak bark[] as an ambient shout, and morning/midday/evening/night[] as the activity line for that part of the day; react{raid,disaster,festival,caravan,growth,hunger,hero_falls,hero_rich}[] -> a generic spoken line for any townsperson when the game raises that event; remember[] -> entries {when,n,[kind],lines[]} held back until the condition token is true (see _conditions); cast[] -> 10 fully written named townsfolk (id,name,trade,from_tier,bio, bark[] EXTRA to the trade's own bark[] so the cast speaks both, morning/midday/evening/night one activity line each, react{8 events: one line each}, remember[2] same shape as the top-level remember) to bind as notables if the game wants authored characters. No line states a dungeon floor count.",
+    "_conditions": {
+      "disaster_repeat_season": "the same disaster kind (entry.kind) has struck n times this season",
+      "disaster_streak": "n disasters of any kind in a row without a calm spell between",
+      "raid_survived_total": "the town has survived n raids in total",
+      "raid_streak": "n raids in a row without a quiet spell",
+      "long_peace_days": "n in-game days since the last raid",
+      "hunger_after_growth": "hunger event raised within one growth tier-up of the last stage change",
+      "festival_after_disaster": "a festival is raised within one day of a disaster ending",
+      "festival_after_raid": "a festival is raised within one day of a raid ending",
+      "hero_fell_repeat": "n heroes have fallen within the same in-game day",
+      "hero_fell_then_returned": "a fallen viewer hero has returned to roster",
+      "caravan_missed": "a scheduled caravan did not arrive",
+      "caravan_arrived_after_hunger": "a caravan arrives while the hunger event is active or just ended",
+      "tier_reached_recent": "the town reached a new growth tier within the last in-game day",
+      "e3po_withdrew_recent": "E3PO withdrew to barracks within the last in-game day",
+      "e3po_returned_recent": "E3PO returned from barracks within the last in-game day"
+    },
+    "names": {
+      "given_f": [
+        "Aldith",
+        "Brenna",
+        "Cora",
+        "Dunya",
+        "Edda",
+        "Fenna",
+        "Gytha",
+        "Hild",
+        "Isolde",
+        "Joan",
+        "Maud",
+        "Nell",
+        "Orla",
+        "Petra",
+        "Quenby",
+        "Rowan",
+        "Sibyl",
+        "Tamsin",
+        "Una",
+        "Vesta",
+        "Wynn",
+        "Yelda",
+        "Agnes",
+        "Bess",
+        "Cicely",
+        "Dove",
+        "Elspeth",
+        "Freya",
+        "Greta",
+        "Hazel",
+        "Imma",
+        "Jessamy",
+        "Kit",
+        "Lark",
+        "Marget",
+        "Nan",
+        "Osyth",
+        "Perrin",
+        "Rosamund",
+        "Sunniva"
+      ],
+      "given_m": [
+        "Alwyn",
+        "Bram",
+        "Cuth",
+        "Dunstan",
+        "Edric",
+        "Fulk",
+        "Garrick",
+        "Hob",
+        "Ivo",
+        "Jory",
+        "Kellan",
+        "Leofric",
+        "Morrow",
+        "Nob",
+        "Osric",
+        "Piers",
+        "Quill",
+        "Roderic",
+        "Sim",
+        "Tobyn",
+        "Ulf",
+        "Vance",
+        "Wat",
+        "Yorick",
+        "Aldous",
+        "Beorn",
+        "Cedd",
+        "Dob",
+        "Eadric",
+        "Finn",
+        "Godric",
+        "Hamo",
+        "Jankin",
+        "Lambert",
+        "Merrick",
+        "Nigel",
+        "Oswin",
+        "Pell",
+        "Rafe",
+        "Wulf"
+      ],
+      "family": [
+        "Ashwell",
+        "Brackwater",
+        "Cobb",
+        "Dunmere",
+        "Fenwick",
+        "Greyreed",
+        "Hartley",
+        "Ironside",
+        "Kettle",
+        "Loomer",
+        "Marshall",
+        "Nettleton",
+        "Oakes",
+        "Pickering",
+        "Quarrel",
+        "Rushworth",
+        "Saltmarsh",
+        "Thatcher",
+        "Underhill",
+        "Venn",
+        "Wickham",
+        "Yarrow",
+        "Ballard",
+        "Carter",
+        "Dyer",
+        "Fowler",
+        "Gatewood",
+        "Holloway",
+        "Kilbride",
+        "Lowry",
+        "Mapleton",
+        "Penhale",
+        "Ravensmere",
+        "Sedge",
+        "Tolliver",
+        "Wheelwright",
+        "Bellwether",
+        "Candlemas",
+        "Ferrier",
+        "Thistlewood"
+      ],
+      "by_names": [
+        "of the Ford",
+        "Reedwhistle",
+        "Two-Coin",
+        "the Younger",
+        "Short-Rope",
+        "Mireborn",
+        "Lampwick",
+        "Grainwise",
+        "Scarbrow",
+        "Half-Door",
+        "Saltlip",
+        "Tallow",
+        "Clapperless",
+        "Ladlehand",
+        "Fordbright",
+        "Nightbread",
+        "Wellspoke",
+        "Coldfingers",
+        "Brimful",
+        "Barrelbelly",
+        "Quickknot",
+        "Longwater",
+        "Hearthkeep",
+        "Mudboot",
+        "Keyring",
+        "Oldwall",
+        "Fishscale",
+        "Bluenail",
+        "the Loud",
+        "the Late"
+      ]
+    },
+    "trades": {
+      "ferryman": {
+        "label": "Ferryman",
+        "from_tier": 1,
+        "bark": [
+          "Mind the rope, it bites.",
+          "One copper across, two if you argue.",
+          "The Ford was here first. We just pay it.",
+          "River's up. Hold your hat and your tongue.",
+          "Never ferried a ghost. Ferried a few who looked it.",
+          "Careful - the scar's still warm under the water."
+        ],
+        "morning": [
+          "Checks the ferry rope for fray before the first crossing.",
+          "Bails last night's rain out of the flat boat."
+        ],
+        "midday": [
+          "Poles a cartload of turnips over, muttering the whole way.",
+          "Eats cold barley by the landing, one eye on the far bank."
+        ],
+        "evening": [
+          "Ties the ferry up and counts the day's coppers twice.",
+          "Sits on the jetty, feet dangling, naming the fish he missed."
+        ],
+        "night": [
+          "Sleeps in the boat so the river never forgets him.",
+          "Hangs a lantern at the landing for anyone still out on the road."
+        ]
+      },
+      "fishwife": {
+        "label": "Fishwife",
+        "from_tier": 1,
+        "bark": [
+          "Trout! Fresh as a slap and twice as honest!",
+          "Three coppers the carp, and the carp has opinions.",
+          "Buy a pike, hear a lie. Buy two, hear the truth.",
+          "Eels, love - they wriggle, so you know they're fresh.",
+          "The river gives, the river takes. I only sell what it gives.",
+          "Scales on my hands, silver in my purse. Fair trade."
+        ],
+        "morning": [
+          "Guts the morning catch on the landing stones, gulls circling.",
+          "Chalks the day's prices on a slate and underlines the carp twice."
+        ],
+        "midday": [
+          "Hawks trout across the market, voice like a rusty hinge.",
+          "Argues a copper off a cheese-monger, and wins."
+        ],
+        "evening": [
+          "Packs the unsold eels in wet reeds and curses the heat.",
+          "Scrubs her knife in the river and hums off-key."
+        ],
+        "night": [
+          "Smokes the last fish over a low fire, grumbling.",
+          "Counts silver by lamplight and does not share the total."
+        ]
+      },
+      "reed_cutter": {
+        "label": "Reed-Cutter",
+        "from_tier": 1,
+        "bark": [
+          "Reed's thick this year. Thatch will be cheap.",
+          "Don't walk the soft ground. The marsh keeps what it takes.",
+          "Cut at the root, not the tip. Everything worth knowing, that.",
+          "Frogs are loud tonight. Means rain, or means frogs.",
+          "The marsh hums if you stand quiet. I don't stand quiet.",
+          "Bundles for sale. Bring your own string."
+        ],
+        "morning": [
+          "Wades out at first light with a hooked knife and a bad back.",
+          "Stacks yesterday's reeds to dry against the north wall."
+        ],
+        "midday": [
+          "Binds reed bundles with a speed that shames the guild clerks.",
+          "Rests on a stump, chewing a stalk, watching the water."
+        ],
+        "evening": [
+          "Hauls the last bundles in as the midges rise.",
+          "Smears mud on his neck against the bites and swears at the sky."
+        ],
+        "night": [
+          "Listens to the marsh from his doorstep, one boot off.",
+          "Mends his cutting knife by the fire, murmuring to it."
+        ]
+      },
+      "farmer": {
+        "label": "Farmer",
+        "from_tier": 2,
+        "bark": [
+          "Measure the grain. Count the flasks. Keep the door. Plough the field.",
+          "Rain's late. Mutter to the sky, it helps nobody.",
+          "Good soil by the Ford. Bad luck by the scar.",
+          "My hands remember what the crop forgets.",
+          "Turnips again. Be glad it isn't thistles.",
+          "If it grows, it feeds Bellmire. If it doesn't, we argue."
+        ],
+        "morning": [
+          "Drives the ox out before the dew has dried.",
+          "Walks the furrows, kicking clods, finding fault."
+        ],
+        "midday": [
+          "Hoes the bean rows with a rhythm like a slow drum.",
+          "Eats bread and onion in the shade of a cart, sweating."
+        ],
+        "evening": [
+          "Hauls a sack to the granary and counts it into the ledger.",
+          "Leans on the fence rail, appraising a neighbour's wheat."
+        ],
+        "night": [
+          "Checks the ox, checks the gate, checks the sky, checks again.",
+          "Sits up with the lamp low, tallying the harvest and the debt."
+        ]
+      },
+      "well_keeper": {
+        "label": "Well-Keeper",
+        "from_tier": 2,
+        "bark": [
+          "Water's sweet this morning. Don't ask me why. I never do.",
+          "Queue's moving. It was a queue yesterday, too.",
+          "Wind the rope slow. The bucket remembers.",
+          "Second well dug and the first still gets the glory.",
+          "Sweeter than ale and half the price. Drink.",
+          "Never drop a coin down it. The bottom is listening."
+        ],
+        "morning": [
+          "Draws the first bucket and tastes it, solemn as a priest.",
+          "Sweeps the well-yard and shoos a goose off the stone lip."
+        ],
+        "midday": [
+          "Winds bucket after bucket for a line of grumbling housewives.",
+          "Mends a frayed rope with a tongue-clucking patience."
+        ],
+        "evening": [
+          "Rinses the lip stone and sets the lid against the evening dust.",
+          "Listens down the shaft for the old echo, then nods."
+        ],
+        "night": [
+          "Latches the well-gate, jingling the key like a small bell.",
+          "Sits near the shaft in the dark, claiming it hums."
+        ]
+      },
+      "herder": {
+        "label": "Herder",
+        "from_tier": 2,
+        "bark": [
+          "Easy, easy - they only look stupid.",
+          "Sheep go where the grass is. Folk go where the grain is.",
+          "Hup, you woolly fools! Mind the road!",
+          "Wolves in the hills? Not on my watch. Possibly on someone's.",
+          "Fleece is good this season. Ask about the price after.",
+          "A good dog is worth three hands. Two dogs, a miracle."
+        ],
+        "morning": [
+          "Counts the flock out through the gate, lips moving.",
+          "Checks a ewe's hoof and talks to her as if she'd understand."
+        ],
+        "midday": [
+          "Lounges on a hillock with a crook, eyes half-shut, ears fully open.",
+          "Shears a sheep with the unconcern of long practice."
+        ],
+        "evening": [
+          "Brings the flock home dusty and complaining, himself included.",
+          "Sits with the dog, sharing a heel of bread."
+        ],
+        "night": [
+          "Folds the sheep and counts them again, then once more for luck.",
+          "Whistles low through the dark so the flock knows he's there."
+        ]
+      },
+      "baker": {
+        "label": "Baker",
+        "from_tier": 2,
+        "bark": [
+          "Hot loaves! Hot loaves! The bell may have no clapper but my oven rings true!",
+          "Oat cake, rye cake, no cake - choose.",
+          "Bread for the Ford, bread for the road, bread for the dead.",
+          "Buy early. The guard buys the rest.",
+          "Burnt crust is free. Burnt pride costs extra.",
+          "Keep the door, keep the oven, keep the peace."
+        ],
+        "morning": [
+          "Fires the oven before dawn and swears at the flour sack.",
+          "Kneads dough on a table scarred by forty winters."
+        ],
+        "midday": [
+          "Slides loaves out on a long peel, face red as the coals.",
+          "Sells the heel to a child with a wink and nothing else."
+        ],
+        "evening": [
+          "Sweeps the oven floor and counts the unsold, grimly.",
+          "Slices a stale loaf for the beggar at the back door."
+        ],
+        "night": [
+          "Banks the coals low and sets the dough to rise for dawn.",
+          "Falls asleep on a flour sack, snoring like a bellows."
+        ]
+      },
+      "guild_clerk": {
+        "label": "Guild Clerk",
+        "from_tier": 3,
+        "bark": [
+          "Papers, please. And a coin, and your name, and the right door.",
+          "The guild keeps accounts. The guild always keeps accounts.",
+          "Heroes come, heroes go. The ledger stays.",
+          "Sign here. And here. Not there - that's the other contract.",
+          "Quills cost more than swords, this year.",
+          "The post has a door and the door is kept. By me."
+        ],
+        "morning": [
+          "Opens the guild post, unlocks the ledger and polishes a bronze seal.",
+          "Sharpens three quills and curses the ink."
+        ],
+        "midday": [
+          "Stamps a hero's contract with a thunk of finality.",
+          "Argues a clause with a merchant, tapping the ledger like scripture."
+        ],
+        "evening": [
+          "Totals the day's accounts and hums when the sum is good.",
+          "Locks the strongbox with a key on a string around his neck."
+        ],
+        "night": [
+          "Reads one more contract by candlelight, not trusting the first reading.",
+          "Locks the post door, checks it, then checks it again."
+        ]
+      },
+      "carter": {
+        "label": "Carter",
+        "from_tier": 3,
+        "bark": [
+          "Mind your toes! This ox has no brakes and one opinion!",
+          "Grain in, goods out, pay me what's owed.",
+          "Roads are rough. The Ford is rougher. Hold on.",
+          "Axle's fine. It always sounds like that.",
+          "I've hauled for the guild, the Chief, and once a dead man. He paid best.",
+          "Heave, ox. Heave, or be stew."
+        ],
+        "morning": [
+          "Greases the axle, whistling through the grease.",
+          "Harnesses the ox and speaks to it of delicate matters."
+        ],
+        "midday": [
+          "Hauls a heaped cart through the market, shouting at everyone.",
+          "Unloads sacks at the granary, shoulder first."
+        ],
+        "evening": [
+          "Unhitches the ox and rubs down its flanks.",
+          "Counts the day's loads into a battered tally book."
+        ],
+        "night": [
+          "Sleeps under his cart with the ox for company.",
+          "Checks wheel spokes by lamplight, murmuring prayers to the road."
+        ]
+      },
+      "smith": {
+        "label": "Smith",
+        "from_tier": 4,
+        "bark": [
+          "Iron wants hitting. So do some customers.",
+          "Hot work! Stand back or smell like bacon.",
+          "A blade is only as honest as the hand that quenched it.",
+          "Nails, hinges, hooks - the town runs on small iron.",
+          "Bring me ore and patience. I'll supply the noise.",
+          "The scar eats spells, not steel. Steel I can fix."
+        ],
+        "morning": [
+          "Rakes the forge awake and feeds it charcoal.",
+          "Sorts yesterday's bent nails for the scrap pile."
+        ],
+        "midday": [
+          "Hammers a glowing bar, sparks flying, ears long since ruined.",
+          "Dunks a blade in the trough with a hiss like a snake."
+        ],
+        "evening": [
+          "Banks the forge and wipes soot into a worse arrangement.",
+          "Counts the day's horseshoes into a clanking sack."
+        ],
+        "night": [
+          "Sleeps by the cooling anvil, ringing faintly in his ears.",
+          "Hangs the tongs on their hook, one by one, like a ritual."
+        ]
+      },
+      "brewer": {
+        "label": "Brewer",
+        "from_tier": 4,
+        "bark": [
+          "Ale! Thick enough to chew and strong enough to forget why!",
+          "The marsh makes the malt. The Ford makes the water. I make the mistakes.",
+          "Drink up. Tomorrow's problems are brewed by tomorrow.",
+          "Never trust a brewer who tastes his own work. Or one who doesn't.",
+          "Barley, hops, a prayer. Mostly the prayer.",
+          "Bellmire ale - bad for the liver, good for the legend."
+        ],
+        "morning": [
+          "Stirs the mash with a paddle taller than a child.",
+          "Skims the froth off a vat and flicks it at the cat."
+        ],
+        "midday": [
+          "Rolls casks to the cart, grunting rhythm.",
+          "Tastes a ladle, frowns, adds salt, tastes again."
+        ],
+        "evening": [
+          "Pours the first round at the tavern, thick fingers around the tankard.",
+          "Lets the apprentice sweep the cellar floor and watches for theft."
+        ],
+        "night": [
+          "Sleeps in the brewhouse, nose full of yeast and ambition.",
+          "Counts the barrels twice and the empties three times."
+        ]
+      },
+      "miller": {
+        "label": "Miller",
+        "from_tier": 4,
+        "bark": [
+          "Grain in, flour out, and the dust goes where it likes.",
+          "The wheel never stops. Neither do I. Neither does the bill.",
+          "A fair toll is one part in twelve. I take one in ten. Don't tell.",
+          "Flour on my hands, grievance in my heart.",
+          "Bring dry grain or bring a bucket.",
+          "Everyone eats my flour. Everyone complains about the bread."
+        ],
+        "morning": [
+          "Opens the sluice and lets the wheel groan awake.",
+          "Beats the flour dust from his apron in a pale cloud."
+        ],
+        "midday": [
+          "Weighs a farmer's sack and weighs it again, grinning.",
+          "Sweeps the millstone, humming a threshing song."
+        ],
+        "evening": [
+          "Closes the sluice and the wheel slows like a tired breath.",
+          "Tallies the day's toll in chalk on a beam."
+        ],
+        "night": [
+          "Sleeps on a flour sack, white as a ghost, and snores.",
+          "Listens to the wheel drip in the dark, content."
+        ]
+      },
+      "chandler": {
+        "label": "Chandler",
+        "from_tier": 5,
+        "bark": [
+          "Candles! Tallow for the poor, wax for the proud!",
+          "Lamp oil, wicks, a little hope. Light your way home.",
+          "Dark's coming. It always is. Buy light.",
+          "A candle burns once. A good one burns long.",
+          "The marsh is dark. The night is darker. My prices are fair.",
+          "Rush-lights for the thrifty. Wax for the chapel."
+        ],
+        "morning": [
+          "Dips a row of wicks into hot tallow, wrinkling her nose.",
+          "Hangs finished candles on the line to harden."
+        ],
+        "midday": [
+          "Sells candles to a queue of tired folk.",
+          "Trims wicks with sharp little scissors and sharper remarks."
+        ],
+        "evening": [
+          "Lights the street lamp outside her shop with ceremony.",
+          "Wipes tallow from her fingers and counts unsold stock."
+        ],
+        "night": [
+          "Pours the last of the wax by a single, well-guarded flame.",
+          "Reads a chapbook by her own light, smug."
+        ]
+      },
+      "weaver": {
+        "label": "Weaver",
+        "from_tier": 5,
+        "bark": [
+          "Wool and flax, warp and weft. Good cloth lasts a lifetime.",
+          "The loom clacks like a tongue at a tavern.",
+          "Dye's cheap. Colour's dear. Choose.",
+          "A cloak from my hands stays dry, even in the Mire.",
+          "I weave what the town wears. I know who owes me.",
+          "Thread's strong. Debt is stronger."
+        ],
+        "morning": [
+          "Warps the loom with threads in a pattern only she can read.",
+          "Shakes lint from her sleeves and starts the shuttle."
+        ],
+        "midday": [
+          "Throws the shuttle with the speed of a card sharp.",
+          "Haggles with a dyer over the price of madder."
+        ],
+        "evening": [
+          "Cuts the cloth from the loom and holds it to the window.",
+          "Folds the day's work with care and a long, tired sigh."
+        ],
+        "night": [
+          "Mends a torn cloak by lamplight, humming in the half-dark.",
+          "Dreams in warp and weft, they say, and wakes with knots."
+        ]
+      },
+      "innkeeper": {
+        "label": "Innkeeper",
+        "from_tier": 5,
+        "bark": [
+          "Beds, stew, ale. The beds are straw, the stew is mostly stew.",
+          "Heroes sleep upstairs. Heroes' purses stay downstairs.",
+          "Mind the third stair. It's judged better men than you.",
+          "Room's a silver. Breakfast's a lie. Both included.",
+          "Keep your boots on and your secrets off the table.",
+          "Another tale of dungeon glory? Pay first, boast after."
+        ],
+        "morning": [
+          "Changes the straw and sweeps up what the night left.",
+          "Counts the drunks asleep on the common room floor."
+        ],
+        "midday": [
+          "Ladles stew for a table of hungry delvers.",
+          "Wipes a tankard with a rag that has seen worse."
+        ],
+        "evening": [
+          "Fills the room with noise, steam, and a bard who can't sing.",
+          "Collects coins at the bar, glaring at a friendly dispute."
+        ],
+        "night": [
+          "Locks the cellar and the till, and sleeps with the keys under the pillow.",
+          "Hears boots on the stair and doesn't ask."
+        ]
+      },
+      "chapel_keeper": {
+        "label": "Chapel Keeper",
+        "from_tier": 6,
+        "bark": [
+          "Peace to the Ford, peace to the scar, peace to the dead.",
+          "Say a word for the fallen. They can't say it themselves.",
+          "The bell has no clapper and still it speaks, to those who listen.",
+          "Light a candle. Mind the draught. Mind the debt.",
+          "Heroes die. The chapel stays open. That is the whole sermon.",
+          "Every grave in Bellmire has a name. I check."
+        ],
+        "morning": [
+          "Sweeps the chapel floor and straightens the worn pews.",
+          "Lights the morning candle for those buried the day before."
+        ],
+        "midday": [
+          "Hears a confession in the doorway, hand on a nervous shoulder.",
+          "Reads the list of the fallen aloud, slow, unhurried."
+        ],
+        "evening": [
+          "Closes the chapel shutters against the evening wind.",
+          "Polishes the bell's silent lip with a respectful rag."
+        ],
+        "night": [
+          "Keeps vigil by one candle, speaking to no one.",
+          "Rings the clapperless bell with his knuckle - a hush, not a sound."
+        ]
+      },
+      "gravedigger": {
+        "label": "Gravedigger",
+        "from_tier": 6,
+        "bark": [
+          "Dig deep. They always come back up in the stories, never in the soil.",
+          "Spade and patience. That's the whole trade.",
+          "One more for the pile. Sorry, one more for the plot.",
+          "The scar's quiet tonight. So's my work. Pity.",
+          "I've never lost a customer. Never had a complaint.",
+          "Somebody has to. Might as well be cheerful."
+        ],
+        "morning": [
+          "Marks out a fresh plot with string and a surly look.",
+          "Sharpens his spade on a stone, whistling softly."
+        ],
+        "midday": [
+          "Digs in rhythmic silence, shirt dark with sweat.",
+          "Eats lunch on a headstone and apologises to it."
+        ],
+        "evening": [
+          "Fills in the day's work and pats the mound.",
+          "Cleans his boots at the chapel gate and nods to the dead."
+        ],
+        "night": [
+          "Sits among the stones with a flask, telling them the day's news.",
+          "Counts the graves, which is a habit rather than a hobby."
+        ]
+      },
+      "apothecary": {
+        "label": "Apothecary",
+        "from_tier": 6,
+        "bark": [
+          "Brews for what ails, and for what hasn't yet.",
+          "Mind the green bottle. Mind the blue. Mind everything.",
+          "Simples, salves, small mercies. Coin first.",
+          "The scar spoils the spells. It leaves the herbs alone.",
+          "A flask a day keeps the grave away. Mostly.",
+          "Hero's draught: half remedy, half marketing."
+        ],
+        "morning": [
+          "Grinds herbs in a mortar the size of a head.",
+          "Labels yesterday's bottles with a spidery hand."
+        ],
+        "midday": [
+          "Measures drops with a trembling, practised spoon.",
+          "Treats a hero's scraped knuckle with unwarranted gravity."
+        ],
+        "evening": [
+          "Wipes down the counter and corks the rest.",
+          "Sells one last flask to a stumbling hero, charging triple."
+        ],
+        "night": [
+          "Brews by candlelight, whispering rhymes to the pot.",
+          "Locks the poison shelf and hangs the key around his neck."
+        ]
+      },
+      "mason": {
+        "label": "Mason",
+        "from_tier": 7,
+        "bark": [
+          "Stone doesn't argue. Clients do.",
+          "Another course on the wall. Another reason to be proud.",
+          "Mortar, line, level. The rest is patience.",
+          "The wall keeps the town. I keep the wall.",
+          "Chisel marks last longer than names.",
+          "If it leans, I've been paid too little."
+        ],
+        "morning": [
+          "Mixes mortar in a trough and tests it with a thumb.",
+          "Chalks a line along the next course and squints."
+        ],
+        "midday": [
+          "Taps a block with a hammer and listens to the ring.",
+          "Lifts a stone with the sort of grunt that has a history."
+        ],
+        "evening": [
+          "Washes lime from his hands, wincing at the cracks.",
+          "Steps back to admire the day's work and finds a flaw."
+        ],
+        "night": [
+          "Sleeps like a stone, which is the highest praise he knows.",
+          "Drinks to the wall, the quarry, and the knee that quit."
+        ]
+      },
+      "cooper": {
+        "label": "Cooper",
+        "from_tier": 7,
+        "bark": [
+          "Barrels, buckets, tubs. If it holds liquid, I made it.",
+          "Hoop tight, stave true. Everything else is gossip.",
+          "Ale wants oak. Fish wants salt. Both want me.",
+          "Knock on the barrel. Hear that? That's honesty.",
+          "Leaky? Take it up with the brewer.",
+          "Wood remembers what it held. Don't ask what."
+        ],
+        "morning": [
+          "Shaves staves with a drawknife in long, curling strokes.",
+          "Steams a barrel to bend its belly."
+        ],
+        "midday": [
+          "Hammers hoops down with the rhythm of a heartbeat.",
+          "Tests a finished cask with water, narrowing his eyes."
+        ],
+        "evening": [
+          "Stacks the day's casks against the wall.",
+          "Sweeps shavings into a heap for the baker's fire."
+        ],
+        "night": [
+          "Sleeps among barrels, dreaming he's a cask.",
+          "Taps one gently on his way to bed, and listens."
+        ]
+      },
+      "tanner": {
+        "label": "Tanner",
+        "from_tier": 7,
+        "bark": [
+          "Leather! Smells like money, stains like sin.",
+          "Hides in, boots out, nose never recovers.",
+          "Ask me nothing about the pits. I'll tell you everything.",
+          "Good leather needs patience and an ugly smell.",
+          "Your boots were a cow's idea first.",
+          "Don't stand upwind. Stand elsewhere."
+        ],
+        "morning": [
+          "Scrapes a hide on a beam, face carefully blank.",
+          "Hangs the morning's work to dry, upwind of everyone."
+        ],
+        "midday": [
+          "Stirs the tanning pit with a pole and a martyr's face.",
+          "Cuts a strap and tests it between clenched teeth."
+        ],
+        "evening": [
+          "Washes his hands six times and still smells of work.",
+          "Sells a belt to a hero, haggling by principle."
+        ],
+        "night": [
+          "Sleeps outside the town gate, for everyone's sake.",
+          "Counts hides by moonlight, mourning each one."
+        ]
+      },
+      "stabler": {
+        "label": "Stabler",
+        "from_tier": 8,
+        "bark": [
+          "Hay, water, a warm stall. The horse pays, the rider complains.",
+          "Never stand behind a horse that likes you.",
+          "Cavalry horses - proud. Cart horses - wise.",
+          "Bridles, saddles, mended. No credit for dead horses.",
+          "This one bites. The others merely want to.",
+          "A good stable smells of honest work and dishonest horses."
+        ],
+        "morning": [
+          "Mucks the stalls with a pitchfork, whistling to the mares.",
+          "Fills the water trough and counts noses."
+        ],
+        "midday": [
+          "Brushes a destrier and whispers to it, as to a child.",
+          "Shoes a horse with the smith, trading insults."
+        ],
+        "evening": [
+          "Brings the horses in from the yard, one at a time, by name.",
+          "Checks the stall latches against a thieving wind."
+        ],
+        "night": [
+          "Sleeps in the loft, one ear tuned to hooves.",
+          "Sings a low lullaby to a nervous colt."
+        ]
+      },
+      "scribe": {
+        "label": "Scribe",
+        "from_tier": 9,
+        "bark": [
+          "Writs, deeds, letters - I write what you meant to say.",
+          "Ink is cheaper than a sword and does more damage.",
+          "Sign it before the ink dries, or the lawyer will.",
+          "Every name in Bellmire passes through my hands, and not all of them are spelled right.",
+          "Hush, I'm remembering something.",
+          "Legends are drafts until I copy them fair."
+        ],
+        "morning": [
+          "Cuts a quill and mixes fresh ink with a sigh.",
+          "Sits at the high desk, squinting at yesterday's ledger."
+        ],
+        "midday": [
+          "Copies a decree in an elegant hand, tongue between teeth.",
+          "Takes a hero's dictation and corrects the grammar."
+        ],
+        "evening": [
+          "Sands the day's pages and blows the dust away.",
+          "Packs his quills and counts the ink stains on his cuffs."
+        ],
+        "night": [
+          "Writes the Chronicle by a single, steady candle.",
+          "Dips his quill one more time, just to finish the thought."
+        ]
+      },
+      "glassblower": {
+        "label": "Glassblower",
+        "from_tier": 9,
+        "bark": [
+          "Glass! Fragile as a promise, twice as costly!",
+          "Breathe in, breathe out, the whole trade is breath.",
+          "Window panes for the proud. Bottles for the rest.",
+          "Careful - it was a vase a moment ago.",
+          "A flask of mine holds three brews and one regret.",
+          "Heat and patience. Mostly heat."
+        ],
+        "morning": [
+          "Fires the furnace to a roar and checks the blowpipe.",
+          "Gathers a glowing gob of glass on the end of an iron rod."
+        ],
+        "midday": [
+          "Blows a bubble, turns it, shapes it, lifts it to the window light.",
+          "Cracks a flawed flask, and starts again without complaint."
+        ],
+        "evening": [
+          "Cools the day's work on a rack and counts each piece.",
+          "Wraps a finished bottle in straw, with the care of a mother."
+        ],
+        "night": [
+          "Banks the furnace and sits beside it, face aglow.",
+          "Polishes a single lens, humming in dim light."
+        ]
+      },
+      "wallwright": {
+        "label": "Wallwright",
+        "from_tier": 10,
+        "bark": [
+          "The First Wall stands because I say it does.",
+          "Stone on stone, oath on oath. Not a gap tonight.",
+          "Raiders hate corners. Build corners.",
+          "Check the gate hinges. Check them again. Then pray.",
+          "If a crack shows, I'm told. Immediately. Loudly.",
+          "A good wall is an argument the enemy cannot win."
+        ],
+        "morning": [
+          "Walks the wall-top at dawn, tapping stones with a mallet.",
+          "Inspects the gate and its great, groaning hinges."
+        ],
+        "midday": [
+          "Oversees a crew raising a tower, shouting numbers.",
+          "Peers at a hairline crack and begins to sweat."
+        ],
+        "evening": [
+          "Marks the day's repairs in a battered notebook.",
+          "Stands at the gate and watches the road with a builder's pride."
+        ],
+        "night": [
+          "Does the night round, torch in hand, knuckles on stone.",
+          "Sleeps in the gatehouse with the wall at his back."
+        ]
+      },
+      "crier": {
+        "label": "Crier",
+        "from_tier": 11,
+        "bark": [
+          "Hear ye! Bellmire stands another day!",
+          "Grain counted, flasks measured, door kept!",
+          "News from the guild, news from the Ford, news from nobody in particular!",
+          "Heroes fall, heroes rise, the Chronicle writes all!",
+          "Market opens! Market closes! Market, in short, exists!",
+          "The bell has no clapper - so I must be louder!"
+        ],
+        "morning": [
+          "Clears his throat on the Market Cross like a man about to fight a goose.",
+          "Rehearses the morning proclamations in a whisper."
+        ],
+        "midday": [
+          "Bellows the news from the Market Cross to an unimpressed crowd.",
+          "Rings a hand-bell and recites the day's prices at speed."
+        ],
+        "evening": [
+          "Calls out the closing of the market, voice cracked and proud.",
+          "Reads the guild notices to a handful of listeners."
+        ],
+        "night": [
+          "Sits on the cross steps, sipping honey-water for his throat.",
+          "Mutters the next day's news until he forgets it."
+        ]
+      },
+      "guardsman": {
+        "label": "Guardsman",
+        "from_tier": 8,
+        "bark": [
+          "Halt! State your business. State it quickly.",
+          "The Commander sees all. The Commander sees me, now stand straight.",
+          "Gate's open till dusk. After that, knock politely.",
+          "Nothing to report. Nothing is how I like it.",
+          "Raiders come at dawn, mostly. They're early risers too.",
+          "Stay behind the line, citizen. The line is there for a reason."
+        ],
+        "morning": [
+          "Takes the morning watch with a yawn and a spear.",
+          "Polishes his helm and finds it dull anyway."
+        ],
+        "midday": [
+          "Stands at the gate, face stern, stomach complaining.",
+          "Drills with the Commander's voice cracking like a whip."
+        ],
+        "evening": [
+          "Hands the watch to the night guard, grumbling.",
+          "Shares a stew with the gate crew, swapping tall stories."
+        ],
+        "night": [
+          "Walks the dark wall with a lantern and a frown.",
+          "Sits in the gatehouse, listening to the Ford murmur."
+        ]
+      },
+      "bellkeeper": {
+        "label": "Bell-Keeper",
+        "from_tier": 12,
+        "bark": [
+          "The bell has no clapper. Do not tell it. It has feelings.",
+          "I wind nothing, I oil nothing, I keep it anyway.",
+          "It rings in the quiet places. You'll know when.",
+          "Every town has a bell. Ours remembers.",
+          "Ask the bell. It won't answer. That's why it's wise.",
+          "Keep the door, keep the bell. The rest takes care of itself."
+        ],
+        "morning": [
+          "Climbs the tower to look at a bell that cannot ring.",
+          "Dusts the bell's lip with a feather and a sigh."
+        ],
+        "midday": [
+          "Sits beneath the bell with a book, never reading it.",
+          "Answers a child's question about the clapper with a long, sad story."
+        ],
+        "evening": [
+          "Sweeps the tower stair with ceremony.",
+          "Looks up at the bell as the sun sets, nodding at some private joke."
+        ],
+        "night": [
+          "Stands very still below the bell, listening.",
+          "Locks the tower and leaves a candle in the window."
+        ]
+      }
+    },
+    "react": {
+      "raid": [
+        "Raiders! Get the children inside - my bread can burn, they can't!",
+        "Not the oven! Take the silver, leave the oven!",
+        "Bar the door! Bar it again! Is that barred? Bar it!",
+        "The Commander's at the gate. We'll be fine. We'll be fine. Won't we?",
+        "My boy's on the wall. Gods, let him keep his head down.",
+        "They always come when the dough is rising. Always.",
+        "Grab the ledger! The ledger, you fool, not the cat!",
+        "I've seen three raids. This one smells worse.",
+        "Shutters down! Water buckets up! Nobody be a hero!",
+        "If they break the gate I'm hiding in the barrel. The cooper knows.",
+        "Keep the lamps low and the voices lower!",
+        "They took half my stock last time. This time I'm armed with a ladle.",
+        "Is it over? It's over? Don't lie to me.",
+        "The wall held. Thank the wallwright. Thank anyone.",
+        "Count the children. Count them twice. Then count the sheep.",
+        "Smoke on the ridge - they're coming round the east side!",
+        "Hold the line, neighbours! Our roofs, our rules!",
+        "My knees say run. My pride says stay. Pride is losing.",
+        "Take the cart and go! I'll mind the shop!",
+        "Not today, you thieving sods. Not in Bellmire."
+      ],
+      "disaster": [
+        "It's the end! No - it's weather. It's only weather. Probably.",
+        "Move the grain! Higher! Higher still!",
+        "My roof's gone! My roof is simply gone!",
+        "The marsh has risen again, and the cat with it.",
+        "Everyone to the chapel! It has stone walls and a door!",
+        "Water's in the cellar. The ale! The ALE!",
+        "Pray if you've got the breath. Dig if you've got the arms.",
+        "I've lived here twenty years. Never seen a sky that colour.",
+        "Bring blankets! Bring bread! Bring anything that isn't wet!",
+        "The Ford's swallowed the ferry. The ferryman is furious.",
+        "Get the herds in! Get the herds in before they get ideas!",
+        "The scar's humming. It's never done that before.",
+        "Stay together and keep the lamps lit!",
+        "Will the wall hold the water? Will the water hold the wall?",
+        "It'll pass. Everything passes, except the bill.",
+        "My field! Look at my field!",
+        "Cover the well! Cover the well and save the sweet water!",
+        "The old folk said it would come. The old folk say everything.",
+        "If the sky wants war, the sky can have a queue.",
+        "We'll rebuild. We always rebuild. It's the Bellmire way, and the Bellmire curse."
+      ],
+      "festival": [
+        "Ale's on the house! Well - on the brewer, but he agreed!",
+        "Dance, you lumps! The day won't last!",
+        "Look at the lanterns! Aren't they fine?",
+        "Bread for all and a song for none - the bard's on strike!",
+        "A holiday! The first in a fortnight!",
+        "Mind the bonfire, children. And the bard. Both bite.",
+        "Come join the dance! Your wife already did. Your wife's very good.",
+        "Who brought the honey cakes? Marry me. Marry me now.",
+        "My feet hurt. My heart sings. A fair trade.",
+        "The Commander's smiling. It's frightening, but welcome.",
+        "No raids, no floods, no taxes - say it with me!",
+        "I'll sleep in tomorrow. Tomorrow's a promise.",
+        "A toast to the Ford, and the wall, and the clapperless bell!",
+        "Smell that roast? Don't ask where the pig came from.",
+        "Bellmire stands, and tonight she dances.",
+        "Pour another. The cellar's deep and the worries shallow.",
+        "Hang the garlands high. The wind will do the rest.",
+        "Even the guards are singing. Badly, but singing.",
+        "A good day, neighbours. Remember it when the grey comes back.",
+        "One more dance, then the dishes. Promise."
+      ],
+      "caravan": [
+        "Wagons! Wagons on the road! Open the gate!",
+        "What did they bring? Salt? Spice? Hope?",
+        "Mind the prices - they know we need it.",
+        "About time. My shelves are bare as a monk's purse.",
+        "Look at that silk! Look at the price! Look away!",
+        "The merchants smile as they take our coin. I smile as I haggle.",
+        "Grain! Real grain! The old sacks were mostly dust.",
+        "Iron at last. Smith's been sulking for a month.",
+        "They brought news from the south. None of it is good. All of it is interesting.",
+        "Bring the carts round! Unload before the rain!",
+        "Hide your daughters, the drovers are in town. No, hide your purses.",
+        "Spices for the stew pot! The Ford has flavour at last.",
+        "Count what they brought. Then count what they took.",
+        "A fair deal, a fair day, a fair road home to them.",
+        "Oil for the lamps! Light for the winter!",
+        "They say the road is bad. They say it every time.",
+        "Bellmire's on the map now - look, a caravan.",
+        "If they've brought dye, I'm closing the shop and weeping.",
+        "The guild clerk will want every sack inked.",
+        "Welcome, strangers! Spend freely and leave gently."
+      ],
+      "growth": [
+        "The wall's grown again. Lord, we're becoming something.",
+        "More houses. More neighbours. More complaints.",
+        "A new well, a new street - I'll need a new map.",
+        "Bellmire's no crossing any more. Say it with pride.",
+        "The market's wider! So are the queues.",
+        "They say we're a town now. I still feel like a hut.",
+        "New faces every week. I can't remember the old ones.",
+        "Rooms above the shop! Finally, a place to sleep.",
+        "They've raised the First Wall. I weep, I cheer, I pay the tax.",
+        "Another guildsman arrived. The smith nearly wept.",
+        "Business is good. Don't tell the guild, they'll raise the fee.",
+        "My grandmother wouldn't know the place. Neither do I.",
+        "The streets have names now. Mine is Muddy Lane.",
+        "We outgrew the old well. And the old ways. And the old boots.",
+        "More folk means more trade, more noise, more thieves, more of everything.",
+        "A day's walk, and you can see the walls from the road!",
+        "Bellmire, a city one day. I'll still sell the same loaves.",
+        "The masons are singing. Listen - they're singing!",
+        "Growth is good. Growing pains are cheaper than shrinking.",
+        "Stand tall, Bellmire. You're getting taller."
+      ],
+      "hunger": [
+        "The bin's empty. The bin was full yesterday.",
+        "Measure the grain, count the flasks, keep the door - and ration the lot.",
+        "I gave the heel of the loaf to the child. I'm fine.",
+        "My belly's louder than the bell. And the bell has no clapper.",
+        "Rations! Half rations! Quarter rations?",
+        "No bread today. Don't ask. I'll cry.",
+        "The fish have fled. The fishwife glares at the river.",
+        "I'd trade a sword for a sack of oats.",
+        "The stew's mostly water. The water's mostly mud.",
+        "Hunger's no dragon, but it breathes just as hot.",
+        "Who's hoarding grain? Don't look at me. Look at the miller.",
+        "Chew slowly. It tricks the stomach.",
+        "The herd's thin. The harvest's thinner.",
+        "We held the wall. Can't we hold the pantry?",
+        "Who saw the caravan? Where's the caravan?",
+        "A turnip is a feast tonight.",
+        "Pull the belts tight and the neighbours tighter.",
+        "We'll eat. We always eat. Eventually.",
+        "My daughter asked for cake. I told her the cake was on holiday.",
+        "The scar's greedy. So is winter."
+      ],
+      "hero_falls": [
+        "Another hero down. The chapel keeper's already sweeping.",
+        "Poor lad. He bought a round last week.",
+        "We'll dig the plot by dawn. The gravedigger won't charge.",
+        "They go so bravely and come back so rarely.",
+        "Say a word, neighbours. The Chronicle can't say it all.",
+        "Light a candle. Not for him - for his mother.",
+        "He owed me three coppers. I forgive them. Truly.",
+        "The dungeon takes what it takes.",
+        "I thought they were invincible. Silly of me.",
+        "Another name for the wall of the fallen.",
+        "It's quiet in the tavern tonight.",
+        "Gods keep him. Gods and the grave-lanterns.",
+        "Wasn't he the one with the lute? He was.",
+        "I'll miss the way she swore at the stairs.",
+        "Remember him as he went: grinning.",
+        "Even the guards took their helms off.",
+        "Who'll tell his family? Somebody has to.",
+        "A hero's death is a short story. A hero's life, a long one.",
+        "Bury him with his boots. He'd want that.",
+        "Bellmire remembers. That's what we do."
+      ],
+      "hero_rich": [
+        "Look at him! Pockets full, boots shining!",
+        "Spend it in Bellmire, love - and spend it fast!",
+        "Another delver rich. Another round on his tab.",
+        "He's come home laden like a mule. Good mule.",
+        "Clear the table - a hero with silver wants a seat!",
+        "Coin to the smith, coin to the tailor, coin to me.",
+        "Don't flaunt it. The raiders have ears.",
+        "If he's buying, I'm drinking.",
+        "He left a poor man and returned a lord. Lords drink more.",
+        "The innkeeper's already polishing the best tankard.",
+        "Look at the gem! Look at the size! Don't touch.",
+        "Delvers get rich. Townsfolk get richer.",
+        "That's the trouble with heroes: they're generous.",
+        "I'll sell him a hat. Then another. He can wear both.",
+        "The Chronicle will write this one up. The coin, not the man.",
+        "Treasure! And not a scratch on him. Suspicious.",
+        "Come, sit, tell us everything - and leave the purse on the bar.",
+        "Wealth's a fine thing till it's your neighbour's.",
+        "Rich now, dead tomorrow. Drink up, friend.",
+        "The guild clerk's smiling. Never trust a smiling clerk."
+      ]
+    },
+    "remember": [
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "flood",
+        "lines": [
+          "Second flood this season. The river's learned the way to my door.",
+          "Twice in one season. The marsh is courting us, and badly."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "fire",
+        "lines": [
+          "Another fire. Another bucket line. Another bad week for thatch.",
+          "Second blaze this season. Someone's been careless, or the sky has."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "drought",
+        "lines": [
+          "Dry again. The well-keeper's started talking to the bucket.",
+          "Second drought this season. The crops have given up apologising."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "coldsnap",
+        "lines": [
+          "Cold snap twice in a season. Winter's moved in without asking.",
+          "The frost came back for its hat. And my pipes."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "blight",
+        "lines": [
+          "Second blight this season. The turnips have started leaving notes.",
+          "Same black rot as before. We'd mourn it, but the mourning cost more."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "sickness",
+        "lines": [
+          "Sickness again. The apothecary's out of sage and patience.",
+          "Twice sick in a season. Even the chapel keeper's coughing."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "scarstorm",
+        "lines": [
+          "The scarstorm again. That scar has a temper.",
+          "Second scarstorm. My spoons are humming."
+        ]
+      },
+      {
+        "when": "disaster_repeat_season",
+        "n": 2,
+        "kind": "earthquake",
+        "lines": [
+          "Another quake. The wallwright's started praying to the foundations.",
+          "Ground's shaken twice now. The mason says it's showing off."
+        ]
+      },
+      {
+        "when": "disaster_streak",
+        "n": 3,
+        "lines": [
+          "Three disasters in a row. Either we're cursed or we're dull.",
+          "Flood, fire, famine - the gods are working through a list."
+        ]
+      },
+      {
+        "when": "raid_survived_total",
+        "n": 10,
+        "lines": [
+          "Ten raids we've weathered. The wall has more scars than I do.",
+          "Ten raids, and Bellmire still stands. Stubborn, aren't we?"
+        ]
+      },
+      {
+        "when": "raid_survived_total",
+        "n": 25,
+        "lines": [
+          "Twenty-five raids. I've stopped flinching. I haven't stopped swearing.",
+          "The old gate's seen twenty-five raids. It deserves a medal."
+        ]
+      },
+      {
+        "when": "raid_streak",
+        "n": 3,
+        "lines": [
+          "Three raids running. They're getting bold - and so are we.",
+          "Third raid this week. My nerves have retired."
+        ]
+      },
+      {
+        "when": "long_peace_days",
+        "n": 5,
+        "lines": [
+          "Quiet five days now. I don't trust it.",
+          "Peace for five days. The Commander's worried. That's how I know."
+        ]
+      },
+      {
+        "when": "long_peace_days",
+        "n": 12,
+        "lines": [
+          "Twelve days of peace. The children are learning to be bored.",
+          "Nothing for a fortnight, near enough. Even the guards have run out of gossip."
+        ]
+      },
+      {
+        "when": "hunger_after_growth",
+        "n": 1,
+        "lines": [
+          "We grew too fast. The larder didn't get the memo.",
+          "More mouths, same loaf. Growth tastes thin."
+        ]
+      },
+      {
+        "when": "festival_after_disaster",
+        "n": 1,
+        "lines": [
+          "After the flood, a feast. It tastes better, I'll say that.",
+          "We danced on the ashes, and the ashes didn't mind."
+        ]
+      },
+      {
+        "when": "festival_after_raid",
+        "n": 1,
+        "lines": [
+          "We drink to the wall because the wall drank first.",
+          "The dancing's wilder after a raid. Nobody counts the stumbles."
+        ]
+      },
+      {
+        "when": "hero_fell_repeat",
+        "n": 2,
+        "lines": [
+          "That's two heroes this week. The gravedigger's asked for a raise.",
+          "Another hero down. The chapel keeper's run out of candles."
+        ]
+      },
+      {
+        "when": "hero_fell_then_returned",
+        "n": 1,
+        "lines": [
+          "He came back! The same one we buried? No - another. It's confusing.",
+          "Last week we mourned her. Today she's on the ale bench. Bellmire!"
+        ]
+      },
+      {
+        "when": "caravan_missed",
+        "n": 1,
+        "lines": [
+          "No caravan this month. The merchants have forgotten us.",
+          "The road's empty. The smith has taken to stroking his anvil."
+        ]
+      },
+      {
+        "when": "caravan_arrived_after_hunger",
+        "n": 1,
+        "lines": [
+          "The caravan! Right when the bin was bare. I could kiss the oxen.",
+          "Grain on the road at last. Never been so pleased to see a merchant."
+        ]
+      },
+      {
+        "when": "tier_reached_recent",
+        "n": 1,
+        "lines": [
+          "A town now. And yet my hens still look at me like I'm a hut.",
+          "Walls grew. Folk grew. The mud, alas, grows too."
+        ]
+      },
+      {
+        "when": "e3po_withdrew_recent",
+        "n": 1,
+        "lines": [
+          "The Commander's in barracks. Don't worry. He never dies. He only sulks.",
+          "E3PO's resting. He'll be back, louder than ever."
+        ]
+      },
+      {
+        "when": "e3po_returned_recent",
+        "n": 1,
+        "lines": [
+          "The Commander's back on the wall. I feel taller.",
+          "Back at his post, and not a scratch left. I'd swear he'd lie."
+        ]
+      }
+    ],
+    "cast": [
+      {
+        "id": "maud_fishwife",
+        "name": "Maud Reedwhistle",
+        "trade": "fishwife",
+        "from_tier": 1,
+        "bio": "Widow of a ferryman who never came back from the Ford. Sells fish, sells opinions, and buys neither.",
+        "bark": [
+          "Trout, three coppers, and a free word of warning.",
+          "Eels! Slippery as a clerk!",
+          "My husband's river, my husband's fish. I just sell them.",
+          "Don't haggle with a woman who gutted a pike this morning."
+        ],
+        "morning": "Maud gutting trout on the landing stones, gulls already waiting.",
+        "midday": "Maud shouting the day's catch to the market, voice like a rusty hinge.",
+        "evening": "Maud scrubbing her knife in the river, humming her husband's song.",
+        "night": "Maud smoking the last eels over a low fire, whispering to the smoke.",
+        "react": {
+          "raid": "Maud grabs her knife and her children. 'Come on, we've gutted worse than raiders.'",
+          "disaster": "Maud eyes the river. 'It's taken one man from me. It'll not take the stall.'",
+          "festival": "Maud sells the last of her pike and dances once, badly, with a sack of salt.",
+          "caravan": "Maud eyes the wagons. 'Salt. At last. My fish and I are saved.'",
+          "growth": "Maud counts the new houses. 'More mouths. More fish. More river to blame.'",
+          "hunger": "Maud gives her own bread to a child. 'I'm not hungry. I'm cold. Different thing.'",
+          "hero_falls": "Maud lights a candle by her stall. 'The river took the ferryman. The dungeon takes heroes. Same hunger.'",
+          "hero_rich": "Maud sniffs. 'Rich, is he? Buy a trout, hero. You owe the river.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Maud, on the second flood: 'The river's pining for him. I can hear it from the stall.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Maud, after ten raids: 'Ten times they came. Ten times my knife stayed sharp.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tobyn_smith",
+        "name": "Tobyn Ironside",
+        "trade": "smith",
+        "from_tier": 4,
+        "bio": "Bellmire's smith, huge and soft-spoken. Mended the Commander's helm four times and has never once been thanked.",
+        "bark": [
+          "Hit it hot, hit it true, hit it again.",
+          "Don't touch the anvil. It's heavy and I'm proud.",
+          "Nails, hinges, hooks - small iron, big town.",
+          "The scar eats spells. It tastes of nothing on steel."
+        ],
+        "morning": "Tobyn raking the forge awake, soot to his elbows.",
+        "midday": "Tobyn hammering at a glowing bar, ears long since ruined.",
+        "evening": "Tobyn quenching a blade, the hiss like a slow snake.",
+        "night": "Tobyn banking the forge, humming a song about iron.",
+        "react": {
+          "raid": "Tobyn lifts the biggest hammer. 'Over my anvil, lads.'",
+          "disaster": "Tobyn shuts the forge and prays to iron. 'Hold, anvil. Hold.'",
+          "festival": "Tobyn nurses a mug. 'Tomorrow I'll hammer. Tonight I'm a lamb.'",
+          "caravan": "Tobyn eyes the ore. 'Finally. Real iron. Not that gravel from before.'",
+          "growth": "Tobyn grins at the new smithy. 'Room for two anvils. Room for two arguments.'",
+          "hunger": "Tobyn eats cold porridge. 'Metal doesn't need food. I do. Tragic.'",
+          "hero_falls": "Tobyn sets down a hammer. 'I've mended his armour. I couldn't mend him.'",
+          "hero_rich": "Tobyn winks. 'Rich hero? Good. My tongs need replacing.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Tobyn, on the second fire: 'Twice in a season. The forge feels slighted.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Tobyn, after ten raids: 'Ten times I've sharpened the guard's spears. They bring them back dull.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "elspeth_chapel",
+        "name": "Elspeth Hartley",
+        "trade": "chapel_keeper",
+        "from_tier": 6,
+        "bio": "Keeper of the chapel and the list of the fallen. Reads every name aloud, every morning, whether or not anyone listens.",
+        "bark": [
+          "The bell has no clapper and still it speaks."
+        ],
+        "morning": "Elspeth sweeping the chapel floor and reading yesterday's names.",
+        "midday": "Elspeth hearing a confession in the doorway, hand on a nervous shoulder.",
+        "evening": "Elspeth closing the shutters against the evening wind.",
+        "night": "Elspeth keeping vigil by one candle, speaking to no one.",
+        "react": {
+          "raid": "Elspeth locks the chapel door. 'Inside, all of you. Gods are less picky than raiders.'",
+          "disaster": "Elspeth lifts the candle. 'Pray if you have breath. Dig if you have arms.'",
+          "festival": "Elspeth smiles. 'Dance, my dears. The dead would want it, I think.'",
+          "caravan": "Elspeth nods at the wagons. 'Candles. Oil. Linen. Bless the road.'",
+          "growth": "Elspeth touches a new stone. 'Another course. Another name to carve one day.'",
+          "hunger": "Elspeth gives out bread. 'No sermon today. The bread is the sermon.'",
+          "hero_falls": "Elspeth writes a name in the book, slow. 'I know this one. He laughed at the door.'",
+          "hero_rich": "Elspeth lifts an eyebrow. 'Wealth is a gift. The giving back is the sermon.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Elspeth, on the second flood: 'Water is patient. The chapel is more so.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Elspeth, after ten raids: 'We've buried fewer than I feared. I thank the wall, and the Commander.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bram_brewer",
+        "name": "Bram Barrelbelly",
+        "trade": "brewer",
+        "from_tier": 4,
+        "bio": "Brewer of the thickest ale in the valley. Tastes every batch, swears he doesn't, and has not seen his own feet in years.",
+        "bark": [
+          "Ale! Thick enough to chew, strong enough to forget!"
+        ],
+        "morning": "Bram stirring the mash with a paddle taller than a child.",
+        "midday": "Bram rolling casks to the cart, grunting rhythm.",
+        "evening": "Bram pouring the first round at the tavern, thick fingers around the tankard.",
+        "night": "Bram snoring in the brewhouse, nose full of yeast and ambition.",
+        "react": {
+          "raid": "Bram hauls a cask to the gate. 'Roll it at them! Ale is heavy!'",
+          "disaster": "Bram clutches a barrel. 'My ale! My precious ale! Higher, higher!'",
+          "festival": "Bram bows to the crowd. 'Free round! It's on the house. Mine. I'm the house.'",
+          "caravan": "Bram sniffs the wagons. 'Hops! Real hops! I'll weep, I swear it.'",
+          "growth": "Bram slaps the new brewhouse wall. 'Bigger vats, bigger belly, bigger Bram.'",
+          "hunger": "Bram stares at the empty vat. 'I've never wanted water before. Now I do.'",
+          "hero_falls": "Bram lifts a tankard to the sky. 'To the empty chair. May he never run dry.'",
+          "hero_rich": "Bram laughs. 'Rich? Good! He can pay his tab.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Bram, on the second flood: 'Twice in a season, and the cellar still floats my ale. Hah!'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Bram, after ten raids: 'Ten raids. My vats are the best-defended place in town.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "nell_baker",
+        "name": "Nell Candlemas",
+        "trade": "baker",
+        "from_tier": 2,
+        "bio": "Bellmire's baker, up before dawn since she was twelve. Gives the burnt loaves to anyone who looks hungry and the good ones to anyone who looks rich.",
+        "bark": [
+          "Hot loaves! The bell may have no clapper but my oven rings true!",
+          "Bread for the Ford, bread for the road."
+        ],
+        "morning": "Nell firing the oven before dawn, swearing at the flour sack.",
+        "midday": "Nell sliding loaves from the peel, face red as the coals.",
+        "evening": "Nell sweeping the oven floor, counting the unsold.",
+        "night": "Nell banking the coals and setting the dough to rise.",
+        "react": {
+          "raid": "Nell flings a loaf at a raider. 'That's a day's bread, you thief!'",
+          "disaster": "Nell stacks her loaves high. 'Shelf them! Shelf them! Nothing wet!'",
+          "festival": "Nell dusts off her apron. 'Honey cakes for everyone. One each. One!'",
+          "caravan": "Nell eyes the sacks. 'Flour! Beautiful, dusty flour!'",
+          "growth": "Nell counts new customers. 'More ovens, more mouths, more me.'",
+          "hunger": "Nell halves each loaf. 'Chew slow. It tricks the belly.'",
+          "hero_falls": "Nell wipes a tear with a floury sleeve. 'He liked the heel. Always the heel.'",
+          "hero_rich": "Nell hums. 'Rich, is he? Then he'll buy the whole batch. Won't he?'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Nell, on the second flood: 'Dough doesn't rise in a wet cellar. I've tested it.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Nell, after ten raids: 'Ten raids and my oven's never gone cold. That's grit.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "wat_gravedigger",
+        "name": "Wat Mudboot",
+        "trade": "gravedigger",
+        "from_tier": 6,
+        "bio": "Gravedigger. Cheerful in the way of men who have seen everything and still enjoy a pie. Talks to the graves; the graves have never complained.",
+        "bark": [
+          "One more for the plot. Sorry, one more for the pile."
+        ],
+        "morning": "Wat marking out a fresh plot with string and a surly look.",
+        "midday": "Wat eating his lunch on a headstone, apologising to it.",
+        "evening": "Wat cleaning his boots at the chapel gate, nodding to the dead.",
+        "night": "Wat sitting among the stones, telling them the day's news.",
+        "react": {
+          "raid": "Wat shoulders his spade. 'Not today, raiders. Not here. I've paperwork.'",
+          "disaster": "Wat leans on the spade. 'Wet earth, dry jokes. A good day for it.'",
+          "festival": "Wat sits on a grave and watches the dancing. 'They'd approve. Mostly.'",
+          "caravan": "Wat leans on his spade. 'Wagons! More folk, eventually more work. Sorry.'",
+          "growth": "Wat grins at the new street. 'More folk, more customers. Eventually. Sorry.'",
+          "hunger": "Wat shrugs. 'Hunger's good for business. Which I regret saying aloud.'",
+          "hero_falls": "Wat pats the fresh mound. 'Rest well, lad. I did it nicely.'",
+          "hero_rich": "Wat tips his cap. 'Rich hero? I'll dig him a deeper hole. Just in case.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Wat, on the second flood: 'Water in the graves. I'll not say what I think of that.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Wat, after ten raids: 'Ten raids, and I buried fewer than I feared. Pity for business, joy for town.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sibyl_apothecary",
+        "name": "Sibyl Wickham",
+        "trade": "apothecary",
+        "from_tier": 6,
+        "bio": "Apothecary whose remedies mostly work, and whose bills always do. Keeps a green bottle on the top shelf that she has never been seen to open.",
+        "bark": [
+          "The green bottle is not for sale. Stop asking.",
+          "Fever, flux, or foolishness - I treat all three."
+        ],
+        "morning": "Sibyl grinding herbs in a mortar the size of a head.",
+        "midday": "Sibyl measuring drops with a trembling, practised spoon.",
+        "evening": "Sibyl corking bottles and wiping the counter.",
+        "night": "Sibyl brewing by candlelight, whispering rhymes to the pot.",
+        "react": {
+          "raid": "Sibyl slams the shutters. 'Bandages are at the back, children first!'",
+          "disaster": "Sibyl pulls out her good flasks. 'It'll be wet and sore tonight. Line up.'",
+          "festival": "Sibyl sips a cup. 'Medicinal. I'm entirely medicinal.'",
+          "caravan": "Sibyl eyes the crates. 'Sage! Valerian! Bless the road.'",
+          "growth": "Sibyl counts the new rooms. 'More folk, more coughs.'",
+          "hunger": "Sibyl rations the honey. 'Half a spoon each. Medicinal. Don't argue.'",
+          "hero_falls": "Sibyl lowers her voice. 'There was nothing in the bottle. That's what makes it hard.'",
+          "hero_rich": "Sibyl smiles. 'Rich? Wonderful. Let me sell you something for the nerves.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Sibyl, on the second sickness: 'I told the Chief it would come back. Do I get thanks? Never.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Sibyl, after ten raids: 'Ten raids, a hundred bandages. The green bottle remains full.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "godric_guardsman",
+        "name": "Godric Fordbright",
+        "trade": "guardsman",
+        "from_tier": 8,
+        "bio": "Guardsman at the gate. Idolises the Commander so thoroughly he salutes the Commander's boots.",
+        "bark": [
+          "The Commander sees all. The Commander sees me. Stand straight.",
+          "Stay behind the line, citizen."
+        ],
+        "morning": "Godric taking the morning watch with a yawn and a spear.",
+        "midday": "Godric standing at the gate, face stern, stomach complaining.",
+        "evening": "Godric swapping the watch, grumbling about the cold.",
+        "night": "Godric walking the dark wall with a lantern and a frown.",
+        "react": {
+          "raid": "Godric squares up. 'For the Commander! For the Ford! For breakfast!'",
+          "disaster": "Godric shouts orders. 'Citizens to the chapel! Move, move!'",
+          "festival": "Godric straightens his helm. 'Off duty. Mostly. Still watching you.'",
+          "caravan": "Godric checks the wagons with a stern eye. 'Papers. Papers! Hello, lovely.'",
+          "growth": "Godric salutes the new wall. 'Bigger wall, longer watch. Worth it.'",
+          "hunger": "Godric tightens his belt. 'The Commander eats little. So do I.'",
+          "hero_falls": "Godric lowers his spear. 'He fell on the stair. I'll remember.'",
+          "hero_rich": "Godric nods. 'Good for him. Gives us all something to aim at.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Godric, on the second fire: 'Twice in a season, and the gate's still standing. Gods bless stone.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Godric, after ten raids: 'Ten raids and not one past me. The Commander noticed. He nodded.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hob_reed",
+        "name": "Hob Coldfingers",
+        "trade": "reed_cutter",
+        "from_tier": 1,
+        "bio": "Reed-cutter who knows every pool of the marsh by sound alone. Distrusts anyone who walks the soft ground confidently.",
+        "bark": [
+          "The marsh hums if you stand quiet."
+        ],
+        "morning": "Hob wading out at first light with a hooked knife and a bad back.",
+        "midday": "Hob binding bundles with a speed that shames the guild clerks.",
+        "evening": "Hob smearing mud on his neck against the midges.",
+        "night": "Hob listening to the marsh from his doorstep, one boot off.",
+        "react": {
+          "raid": "Hob slips into the reeds. 'They'll never find me. I'm marsh.'",
+          "disaster": "Hob eyes the water. 'It's coming up. Ask the frogs. They agree.'",
+          "festival": "Hob taps a reed like a pipe. 'A tune, a tune, for the lads!'",
+          "caravan": "Hob counts the wagons. 'They'll buy my thatch. Eventually. Everyone does.'",
+          "growth": "Hob squints at the houses. 'More thatch, more reed. Good for me. Good for the frogs.'",
+          "hunger": "Hob chews a stalk. 'Reed is bitter. Hunger is worse.'",
+          "hero_falls": "Hob wipes his knife. 'The marsh kept him. I hope it's kind.'",
+          "hero_rich": "Hob snorts. 'Rich? Let him buy thatch. The roof is his future.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Hob, on the second flood: 'The water knows my name. I'd rather it forgot.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Hob, after ten raids: 'Ten raids, and none found my hut. That's craft.'"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "agnes_innkeeper",
+        "name": "Agnes Gatewood",
+        "trade": "innkeeper",
+        "from_tier": 5,
+        "bio": "Innkeeper of the only inn that matters. Has heard every hero's boast and settled every hero's tab, usually twice.",
+        "bark": [
+          "The stew has a name. I won't tell you what it is.",
+          "Tab's on the slate. The slate remembers."
+        ],
+        "morning": "Agnes changing the straw and sweeping up what the night left.",
+        "midday": "Agnes ladling stew for a table of hungry delvers.",
+        "evening": "Agnes filling the room with noise, steam and a bard who can't sing.",
+        "night": "Agnes locking the cellar and sleeping with the keys under her pillow.",
+        "react": {
+          "raid": "Agnes bars the inn door. 'Everyone upstairs! I'm charging double for the safety.'",
+          "disaster": "Agnes stacks the ale high. 'Cellar's flooding. Drink it first!'",
+          "festival": "Agnes tops every cup. 'Tonight I'm generous. Tomorrow, I'm Agnes.'",
+          "caravan": "Agnes counts barrels with greedy eyes. 'Wine! Spice! Now we're a proper inn.'",
+          "growth": "Agnes admires a new wing. 'More beds, more coin, more complaints.'",
+          "hunger": "Agnes stirs a thin stew. 'It's mostly stew. Today it's mostly water.'",
+          "hero_falls": "Agnes pours one for the empty seat. 'On the house. He'd never have paid it.'",
+          "hero_rich": "Agnes grins. 'Rich hero? Best room. Best price. Best behaviour.'"
+        },
+        "remember": [
+          {
+            "when": "disaster_repeat_season",
+            "n": 2,
+            "lines": [
+              "Agnes, on the second flood: 'My cellar's a pond. My drinkers are fish.'"
+            ]
+          },
+          {
+            "when": "raid_survived_total",
+            "n": 10,
+            "lines": [
+              "Agnes, after ten raids: 'Ten raids, and nobody's broken a window I couldn't bill.'"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "festivals": {
+    "_note": "C-49 / WORK_PLAN C6 - THE FESTIVAL HAS A VOICE. D63 reads these instead of town.gd's two hardcoded lines. Dead until wired; content worker never touches code. Additive. KEY SHAPE: reasons{harvest,raid_survived,lord_felled,hero_home,town_level,viewer_gift}[] -> the OPENING line, pick by the reason that triggered the festival; crowd[] -> ambient shout from any townsperson during it; toasts[] -> raised-cup lines; stalls[] -> what the stalls are selling (a ticker or a stall sign); notables[] -> {who,line} a named notable's line (who matches townsfolk.cast name); e3po[] -> the Commander's festival line (E3PO cannot die and never leaves his post); closings[] -> end-of-festival lines. viewer_paid{...} is a separate richer set for a festival a VIEWER paid for: every string there may carry the token {buyer} (the paying viewer's display name) - substitute it, or strip it with its comma if the name is unknown. Cost statement: a viewer festival is purchased with bits/points by the buyer; the lines promise nothing mechanical beyond 'the town celebrates'. No floor counts.",
+    "reasons": {
+      "harvest": [
+        "The last cart is in. Bellmire holds its Harvest Feast.",
+        "Grain counted, barns full. Light the long tables.",
+        "The reed-cutters and the millers call it: Harvest Feast tonight.",
+        "The scythes are hung up. The ale is not.",
+        "A good year in the field. The crier orders a feast.",
+        "Sacks to the rafters. Bellmire eats before it counts.",
+        "Harvest is home. The ovens have been lit since dawn.",
+        "Gold fields, full bellies. Feast on the green.",
+        "The mill ran dry of corn to grind. Time to eat what it ground.",
+        "The last sheaf is bound with a ribbon. The feast begins.",
+        "Even the crows are fat. Bellmire holds its Harvest Feast.",
+        "Bring a bowl and a stool - the harvest was kind this year."
+      ],
+      "raid_survived": [
+        "The walls held. Bellmire feasts the night it lived.",
+        "Bandits broken at the gate. Pour for the wall-walkers.",
+        "The raid is over and nobody left the count. Feast!",
+        "Smoke clears, the bell rings once, and the tables come out.",
+        "We were not taken. That is worth a festival.",
+        "The gate stands and so do we. Light the lanterns.",
+        "The raiders fled the Ford. The town dances on their tracks.",
+        "Wounds bound, shields stacked. Bellmire calls a Victory Night.",
+        "Survived is a fine reason. The crier declares a feast.",
+        "The guard held the line. The town returns the favour in ale.",
+        "Not a door lost, not a soul lost. Mark it: Gate-Holding Day.",
+        "The raid broke on the wall like surf. Now the tables go up."
+      ],
+      "lord_felled": [
+        "A dungeon lord is dead. Bellmire hangs the banners.",
+        "The scar is quieter tonight. The crier calls a Felling Feast.",
+        "A lord is down and the guild bell will not stop ringing.",
+        "They carried the proof up the stairs. The town will not sleep.",
+        "The lord that frightened the Ford is finished. Drink to it.",
+        "One less shadow under the hill. The lanterns go up.",
+        "The delvers did it. The town pays in meat and music.",
+        "The scar owes us one lord. We call it a feast.",
+        "A lord's crown on the guild table. Come see, come eat.",
+        "They said it could not be felled. Bellmire raises a cup to the liars.",
+        "The ground will not forget, but tonight it can be quiet. Feast.",
+        "Tell the children: a lord died. Then let them have cake."
+      ],
+      "hero_home": [
+        "A hero walks in from the scar. The town turns out.",
+        "Home from the dark, alive. That is a festival all by itself.",
+        "The gate opens on a face we feared lost. Fetch the fiddlers.",
+        "Bellmire welcomes its delver home. Hang the lanterns low.",
+        "They went down and they came back. Pour the good ale.",
+        "Mud to the knee and grinning: a hero is home. Feast!",
+        "The bell rings for one name tonight. Make way.",
+        "A delver returns with a full pack and a story. Clear a table.",
+        "The scar gave one back. Bellmire says thank you loudly.",
+        "Home again. The innkeeper has already set a place.",
+        "Another one comes up the stairs breathing. Celebrate it.",
+        "The road in is lined with townsfolk. A hero is home."
+      ],
+      "town_level": [
+        "Bellmire has grown a stage. The crier declares a Raising Day.",
+        "New roofs, new roads. The town throws itself a party.",
+        "A bigger Bellmire needs a bigger celebration. Tables out!",
+        "The town has outgrown its old name's pride. Feast the new walls.",
+        "Another rung up the long climb. Ring the bell twice.",
+        "The builders are paid and the rafters are up. Raise a cup.",
+        "Look how far the huts have come. Festival!",
+        "Growth has a taste, and tonight it is honey cake.",
+        "Bellmire is more than it was this morning. Mark the day.",
+        "The mason's stone is set. Come eat beneath it.",
+        "A new stage, a new banner. The crier is hoarse already.",
+        "The town stands taller. Let the music stand taller still."
+      ],
+      "viewer_gift": [
+        "A gift has come to Bellmire. The crier names a feast.",
+        "Someone far away sent a kindness. The town pays it forward.",
+        "A gift from the watchers! Light the lanterns.",
+        "The strongbox rattles with a stranger's generosity. Feast!",
+        "Word from beyond the Ford: a gift for the town. Tables out.",
+        "A kind hand reached in from the dark. Bellmire answers in song.",
+        "A gift lands on the green and the whole town hears it clink.",
+        "Generosity, unannounced. The crier makes it a festival.",
+        "The guild treasurer weeps, then orders a barrel.",
+        "A gift, and no ask attached. Bellmire does not forget that.",
+        "Someone remembered Bellmire. Bellmire remembers back.",
+        "A gift for the town. The innkeeper tallies it in ale."
+      ]
+    },
+    "crowd": [
+      "Make room at the long table!",
+      "Who stole my turnip tart?",
+      "Pass the cider, pass the cider!",
+      "Dance, you lumps! The day won't last!",
+      "Look at the lanterns! Aren't they fine?",
+      "Gate's shut and the cup's full!",
+      "Mind my toes, you great ox!",
+      "Another round for the wall-walkers!",
+      "Fiddler! Something with a stamp in it!",
+      "Save me a pie, I'm only going to dance.",
+      "Ha! Even the guard is smiling!",
+      "Somebody count the barrels. Then don't.",
+      "Where did the dog get a sausage?",
+      "A ribbon for the brave, a ribbon for the lucky!",
+      "Hold the cup, hold the cup, I'm going in!",
+      "Bellmire! Bellmire! Bellmire!",
+      "My feet are done. My hands are not.",
+      "Is that honey cake or is it a miracle?",
+      "Careful, the cider has opinions.",
+      "One more song and then the chores!",
+      "Tell it again, the bit with the goblin!",
+      "The little ones have the whole green for a race.",
+      "Somebody lend me a hat for the toast.",
+      "That fiddler is a wizard, I swear it.",
+      "If this is a dream, nobody wake me.",
+      "Bread, cheese, and nobody barking orders. Bliss.",
+      "Hoist me up, I want to see the lanterns!",
+      "Bring the barrel closer, my arm is short.",
+      "A kiss for the cook! A coin for the cook!",
+      "The reed-cutters are winning the tug-of-war!",
+      "Boots off, boots off, the grass is warm.",
+      "No raids tonight, say the stars.",
+      "Who knows the words to the Ford song?",
+      "Cheers to the hearth that kept us!",
+      "I will remember this at the bottom of the scar.",
+      "Leave the washing. It will wait.",
+      "Oh, what a night for it!",
+      "Single-file for the pie line, you savages!",
+      "Shh! The singing starts."
+    ],
+    "toasts": [
+      "To the wall, and the ones who walk it!",
+      "To the Ford, may it never run dry!",
+      "To the dead, who bought us the morning.",
+      "To the delvers: down, and back again!",
+      "To Bellmire - small, stubborn, ours!",
+      "To the guard, and the guard's bad jokes!",
+      "To the hearth, the ale, and the lock on the door!",
+      "To the bell: may it ring for joy, not for fear!",
+      "To the harvest, and the hands that brought it!",
+      "To whoever fixed the roof last night!",
+      "To the scar: may it stay quiet and stay down!",
+      "To the cook, who made one pot feed everyone!",
+      "To the road home, wherever it runs!",
+      "To lost friends and found coin!",
+      "To full cups and empty graves!",
+      "To the ones who stayed and held the gate!",
+      "To dawn, and the new day it owes us!",
+      "To the mud that made us what we are!",
+      "To the long climb. One stage at a time!",
+      "To the watchers beyond the Ford - may they never lack for supper!",
+      "To the lantern, the candle, and the spark!",
+      "To luck - the only guild we all joined!",
+      "To the child with the first sword, and the grandmother who hid it!",
+      "To the damp, the draught, and the drink that cures both!",
+      "To what we built, and to the beams that carry it!",
+      "To bread, to blood, to Bellmire!",
+      "To the fiddlers who never sleep!",
+      "To a quiet night. May it last a week!",
+      "To the gate - shut and proud!",
+      "To the ones we owe. Everyone!"
+    ],
+    "stalls": [
+      "Honey cakes, a copper each, and one is a coin in disguise.",
+      "Roast pork on a stick. The stick is free.",
+      "Cider by the cup, warm, with cloves.",
+      "Ribbons for the brave and a ribbon for the unbrave.",
+      "Smoked trout from the Ford, still smelling of the river.",
+      "Pies - mutton, apple, and 'ask me tomorrow'.",
+      "A brewer's barrel, tapped and sweating.",
+      "Candied turnip, a Bellmire horror and a Bellmire delight.",
+      "Wooden swords for the little ones. Splinters extra.",
+      "Fortune-telling: three coppers, no refunds.",
+      "Spiced wine, which is only half water.",
+      "Flat bread with soft cheese and a handful of herbs.",
+      "A ring toss. First to win a goose keeps the goose.",
+      "Lanterns, painted, for the walk home.",
+      "Roast chestnuts in a bucket of hot embers.",
+      "Barley-sugar twists, sticky and criminal.",
+      "Hot broth for the guard on shift. Pay what you can.",
+      "Ribbon-braiders at work. A plait costs a song.",
+      "Honeyed nuts, a pinch of salt, a pinch of luck.",
+      "Pewter charms: a cup, a coin, a crooked little sword.",
+      "The smith's stall - horseshoes, thumb-rings, a very small knife.",
+      "Lamp-oil, wicks, and a pack of cheap cards.",
+      "Bone dice and a table. The house is honest. Mostly.",
+      "A bakery of sticky buns, steaming under cloth.",
+      "Plums in a jar, sugared, from a cellar nobody names.",
+      "A potion stall that swears it only sells cordial.",
+      "Meat pasties wrapped in cloth, still hot from the oven.",
+      "Mulled apples for the cold-fingered.",
+      "Garlands of straw and wild flower, three for a copper.",
+      "The apothecary's penny tonic - for headaches tomorrow."
+    ],
+    "notables": [
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes: 'Tonight the tab is on the house. Tomorrow the tab is on you.'"
+      },
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes pours with both hands and counts with neither."
+      },
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes: 'Cups back by midnight. I know who took the last ones.'"
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn: 'No hammers tonight. Pretty near killed me to say it.'"
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn stands his anvil on the green as a table and no one has the nerve to mention it."
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn: 'A good fire and a good crowd. That's nearly forge weather.'"
+      },
+      {
+        "who": "Maud Reedwhistle",
+        "line": "Maud: 'The trout is fresh. The jokes are not. Take either.'"
+      },
+      {
+        "who": "Maud Reedwhistle",
+        "line": "Maud sells the last fish and the first story of the night."
+      },
+      {
+        "who": "Bram Barrelbelly",
+        "line": "Bram: 'This barrel was meant for winter. Winter can find its own.'"
+      },
+      {
+        "who": "Bram Barrelbelly",
+        "line": "Bram gives a toast, drinks it, and gives another."
+      },
+      {
+        "who": "Nell Candlemas",
+        "line": "Nell: 'If it's sweet and warm it's mine. Line up.'"
+      },
+      {
+        "who": "Nell Candlemas",
+        "line": "Nell hands out cakes faster than the oven can answer."
+      },
+      {
+        "who": "Elspeth Hartley",
+        "line": "Elspeth blesses the feast in under a minute, as promised."
+      },
+      {
+        "who": "Elspeth Hartley",
+        "line": "Elspeth: 'Be glad. The gods have seen worse nights and survived them.'"
+      },
+      {
+        "who": "Wat Mudboot",
+        "line": "Wat: 'Quiet job, this. Nice to see the living look lively.'"
+      },
+      {
+        "who": "Wat Mudboot",
+        "line": "Wat toasts the ones he has dug a bed for, and lingers a moment."
+      },
+      {
+        "who": "Sibyl Wickham",
+        "line": "Sibyl: 'Drink what you like. I have remedies for what you do not remember.'"
+      },
+      {
+        "who": "Sibyl Wickham",
+        "line": "Sibyl hands out cordial and a very small warning."
+      },
+      {
+        "who": "Godric Fordbright",
+        "line": "Godric: 'Stand easy tonight. Easy, not slack.'"
+      },
+      {
+        "who": "Godric Fordbright",
+        "line": "Godric keeps one eye on the road and one on the pie."
+      },
+      {
+        "who": "Hob Coldfingers",
+        "line": "Hob: 'Reed wreaths, fresh cut. For luck, or for hats.'"
+      },
+      {
+        "who": "Hob Coldfingers",
+        "line": "Hob has never danced. Tonight he stands very near the music."
+      },
+      {
+        "who": "Agnes Gatewood",
+        "line": "Agnes sings the first line of the Ford song and then lets the room finish it."
+      },
+      {
+        "who": "Tobyn Ironside",
+        "line": "Tobyn, flushed and happy, lifts a child up to touch the lantern."
+      }
+    ],
+    "e3po": [
+      "E3PO attends the feast in full harness and declines a chair.",
+      "'Enjoy it. I will count the doors.'",
+      "The Commander allows himself exactly one cup. He holds it for an hour.",
+      "E3PO walks the edge of the green while the town dances.",
+      "'Festival is a lull, not a lie. The wall stays manned.'",
+      "E3PO nods at a drunk guardsman and takes his post for him.",
+      "The children climb the Commander like a siege tower. He holds still.",
+      "'Revel. Someone has to be sober for you.'",
+      "E3PO inspects the pies and finds them in good order.",
+      "The Commander hangs a lantern on the barracks door himself.",
+      "'No raid tonight. I would know. I check every hour.'",
+      "E3PO is asked to dance. He asks for a drill instead.",
+      "E3PO taps his helm to the fiddler. It is the highest praise he has.",
+      "'The town is happy. This is what the wall is for.'",
+      "A child puts a flower in the Commander's gauntlet. He tucks it in his belt.",
+      "E3PO raises his cup to the dark, in case it is listening.",
+      "'Cakes are good. Posture is better.'",
+      "The Commander sits, briefly, on the barracks step, and watches the green.",
+      "E3PO assigns four guards to the feast and eight to the gates.",
+      "'Do not pull the lanterns down. They make good beacons.'",
+      "E3PO declines to name the age of the cheese he is eating.",
+      "The Commander knows every dancer by name and corrects none.",
+      "'Laugh louder. It carries. The enemy likes to hear it fail.'",
+      "E3PO stands before the feast like a statue that has been told it can smile.",
+      "The Commander's helm has a ribbon on it. No one saw who put it there.",
+      "E3PO sips his ale as if it were a duty. He seems to enjoy the duty.",
+      "'I have never lost a feast, either.'",
+      "E3PO hums the Ford song under his breath, off-key, and stops when noticed.",
+      "The Commander is stopped three times on his round for a toast. He accepts all three.",
+      "'Eat well. Tomorrow the walls need you.'"
+    ],
+    "closings": [
+      "The lanterns gutter. Bellmire goes home full.",
+      "The fiddler lays down the bow. The green is quiet.",
+      "The last barrel is dry. The last song is not.",
+      "Bellmire sleeps it off. E3PO does not.",
+      "The tables are stacked, the ribbons gathered. Dawn will want them.",
+      "The crier rings once more. Feast over, town fed.",
+      "Pie crumbs, ribbon ends, one lost boot. A good night.",
+      "The embers go grey. The bell keeps the quiet.",
+      "The children are asleep in a heap beneath the long table.",
+      "A last toast, whispered, and the lanterns come down.",
+      "The fiddler and the dog walk home together.",
+      "The green is trampled flat and smiling.",
+      "Dawn finds the stalls folded and the guard sharp-eyed.",
+      "The feast ends the way all Bellmire things do: with someone sweeping.",
+      "'Same again next year,' says the crier, and means 'sooner'.",
+      "The last cup is raised to the dark. The dark does not answer.",
+      "A lantern left burning on the green. Nobody will say who for.",
+      "Bellmire is tired, and it is the good kind.",
+      "The feast ends. The wall's lamps burn on.",
+      "The hearth gets the last of the wood and the last of the stories.",
+      "The fiddles go back in their cases. The green goes back to being a green.",
+      "The guard changes. The party goes quietly home beneath them.",
+      "The bell tolls once to say 'night.' It says it kindly.",
+      "Home, feet sore, belly warm. The scar can wait till morning."
+    ],
+    "viewer_paid": {
+      "_note": "A festival a VIEWER paid for. Richer than the ordinary set and every string may carry {buyer} - the paying viewer's display name. Cost statement: the buyer spends their bits/points to call it; the town celebrates for the festival's duration, and the lines credit the buyer by name. No guarantee of any other effect. No floor counts.",
+      "openings": [
+        "{buyer} has paid for a feast. The crier has been told to be loud about it.",
+        "By {buyer}'s coin, Bellmire feasts tonight. Tables out!",
+        "{buyer} stands the whole town a festival. Nobody argues.",
+        "The guild treasurer reads the name aloud: {buyer}. A feast is called.",
+        "A festival, courtesy of {buyer}. The innkeeper has stopped counting.",
+        "{buyer} wants the lanterns lit. The lanterns are lit.",
+        "Bellmire owes {buyer} a feast, and is paying it forward as a song.",
+        "{buyer} paid, the barrel was tapped, and the green filled.",
+        "On {buyer}'s say-so, the long tables come out and the fiddlers tune.",
+        "The bell rings thrice for {buyer}. That means a feast.",
+        "{buyer} has bought the town a night off. The wall can wait.",
+        "Word from {buyer} reaches the Ford: Feast! The town hears it all at once.",
+        "A toast to {buyer}, who bought the ale and the music both.",
+        "{buyer} bought Bellmire a good night and it shows already.",
+        "Not a coin spent by the town tonight. {buyer} has covered it all.",
+        "The crier hoists a banner: 'Feast of {buyer}'.",
+        "Ribbons are cut in {buyer}'s name. The festival is on.",
+        "{buyer}'s gift becomes a festival. Even the geese are excited.",
+        "The innkeeper chalks {buyer}'s name above the door: 'Paid in full.'",
+        "{buyer} lit the fuse; Bellmire brought the powder. Festival!",
+        "A feast of {buyer}'s making. The town only has to show up.",
+        "The guild hall rings with {buyer}'s name and a good deal of clatter.",
+        "The crier practised {buyer}'s name all morning. Tonight he gets to say it.",
+        "{buyer} has called a festival and Bellmire does not dither."
+      ],
+      "crowd": [
+        "Three cheers for {buyer}!",
+        "Who is {buyer}? Whoever they are, they're a saint!",
+        "Here's to {buyer} - and pass the pie!",
+        "{buyer}! {buyer}! {buyer}!",
+        "Somebody write {buyer} on the long table in flour.",
+        "I'd carry {buyer} home on my shoulders if I could find them!",
+        "A cup for {buyer}! A cup for the cup!",
+        "Is {buyer} here? Somebody find them and give them a cake!",
+        "Bless {buyer}'s open hands!",
+        "The brewer wants to meet {buyer}. For no reason. Except gratitude.",
+        "{buyer} bought the ale and the ale is good!",
+        "{buyer} the generous!",
+        "I'd march into the scar for {buyer} - after the cake.",
+        "Tell {buyer} the whole green says thank you!",
+        "Look - {buyer}'s ribbon is on the maypole!",
+        "Name a lantern for {buyer}!",
+        "The fiddlers know a song for {buyer} - it's the same song, but louder!",
+        "A kiss for whoever brought {buyer} to Bellmire!",
+        "They say {buyer} can hear us from beyond the Ford!",
+        "Say it again: {buyer}!"
+      ],
+      "toasts": [
+        "To {buyer}, who bought a night we won't forget!",
+        "To {buyer}: may your own table never be bare!",
+        "To {buyer}, and the good they send into the dark!",
+        "To {buyer} - Bellmire's friend beyond the Ford!",
+        "To {buyer}'s open hand, and the ale it poured!",
+        "To {buyer}, the patron of this evening!",
+        "To {buyer}: first cup is theirs, and so is the last!",
+        "To {buyer}, and may the road meet them kindly!",
+        "To {buyer}, the only guild we love more than our own!",
+        "To {buyer}'s name, now on the oldest wall we have!",
+        "To {buyer}: gold of the heart!",
+        "To {buyer}, whom the bell calls friend!",
+        "To {buyer}, who looked at Bellmire and said 'feast'.",
+        "To {buyer}'s health, wealth, and many a pie!",
+        "To {buyer} - may your luck run longer than our tabs!",
+        "To {buyer}, the reason for the crowd!"
+      ],
+      "stalls": [
+        "A cake iced with {buyer}'s name, wobbling slightly.",
+        "Mulled cider labelled 'The {buyer}' - warm and a little unwise.",
+        "Roast goose: 'by {buyer}'s leave', and nobody argues.",
+        "A honey-cake stall under {buyer}'s banner. Sold out in four minutes.",
+        "Free cups, tonight, thanks to {buyer}. Limit: all of them.",
+        "Painted lanterns, each with a small 'for {buyer}'.",
+        "Ribbon sellers have run out of {buyer}-coloured ribbon.",
+        "A sweet stall named in {buyer}'s honour: sticky, golden, famous.",
+        "The brewer's best barrel, tapped for {buyer}.",
+        "Pies marked with a crooked B, for 'buyer' - the baker's joke.",
+        "A lucky dip: every prize has {buyer}'s name on it, even the turnip.",
+        "A mulled-wine stall pours the first cup upright for {buyer}."
+      ],
+      "e3po": [
+        "E3PO raises his cup to {buyer}, once, and drinks it like an order.",
+        "'To {buyer}. The wall is grateful. So am I.'",
+        "The Commander posts a guard of honour at {buyer}'s banner.",
+        "E3PO reports to the crowd: 'Our patron tonight is {buyer}.' The crowd roars.",
+        "'I do not drink to many. I drink to {buyer}.'",
+        "E3PO salutes the empty air beyond the Ford, where {buyer} might be listening.",
+        "'{buyer} is welcome at my gate, any hour.'",
+        "The Commander allows a second cup. For {buyer}.",
+        "E3PO lifts a child up to see {buyer}'s banner and holds still for a very long time.",
+        "'The wall does not bow. But tonight it nods, {buyer}.'",
+        "E3PO personally unrolls the banner that says {buyer}.",
+        "'Patrons like {buyer} are why a gate stays shut.'",
+        "E3PO says one dry word of thanks to {buyer} and means ten.",
+        "The Commander's helm has {buyer}'s ribbon on it. He wears it into the night.",
+        "'To {buyer}. May the road rise to meet them - and be dry.'",
+        "E3PO stands guard over the {buyer} barrel. No one steals from the patron."
+      ],
+      "notables": [
+        {
+          "who": "Agnes Gatewood",
+          "line": "Agnes: '{buyer} paid for tonight. I only charge them for the next round.'"
+        },
+        {
+          "who": "Tobyn Ironside",
+          "line": "Tobyn: 'I'd forge {buyer} a medal if I knew what they'd done. Oh. That's it.'"
+        },
+        {
+          "who": "Maud Reedwhistle",
+          "line": "Maud: 'Fish for {buyer}, free as water. Take two.'"
+        },
+        {
+          "who": "Bram Barrelbelly",
+          "line": "Bram toasts {buyer} with the barrel itself."
+        },
+        {
+          "who": "Nell Candlemas",
+          "line": "Nell bakes a cake with {buyer}'s name on it and then eats a corner."
+        },
+        {
+          "who": "Elspeth Hartley",
+          "line": "Elspeth blesses {buyer} by name, in a voice the whole green can hear."
+        },
+        {
+          "who": "Wat Mudboot",
+          "line": "Wat: 'Whoever {buyer} is, they bought a better night than I have ever had.'"
+        },
+        {
+          "who": "Sibyl Wickham",
+          "line": "Sibyl: 'A toast to {buyer}. May their cups be full and their mornings kind.'"
+        },
+        {
+          "who": "Godric Fordbright",
+          "line": "Godric salutes {buyer}'s banner with a spoon."
+        },
+        {
+          "who": "Hob Coldfingers",
+          "line": "Hob weaves a reed wreath for {buyer} and sets it on the banner."
+        },
+        {
+          "who": "Agnes Gatewood",
+          "line": "Agnes carves {buyer}'s name into the bar with a hot nail."
+        },
+        {
+          "who": "Tobyn Ironside",
+          "line": "Tobyn: 'Say what you like about heroes. {buyer} pays for the music.'"
+        }
+      ],
+      "closings": [
+        "The feast ends. {buyer}'s banner stays up till morning.",
+        "Bellmire drinks a last cup to {buyer} and goes home.",
+        "The crier calls it: 'Thank {buyer}, and goodnight.'",
+        "The fiddlers play {buyer}'s song once more, softly.",
+        "The last toast belongs to {buyer}. Everyone remembers.",
+        "The lanterns are left lit for {buyer}'s sake.",
+        "The festival folds. {buyer}'s name stays on the lips of the sleepy.",
+        "The innkeeper wipes the bar, then wipes {buyer}'s name off the board - reluctantly.",
+        "The town sleeps well, thanks to {buyer}.",
+        "The banner of {buyer} is folded and kept in the guild chest.",
+        "'Same again,' says the crier. 'If {buyer} pays.'",
+        "A final cheer for {buyer} - and the green falls quiet.",
+        "The guard changes. E3PO tips his helm to the empty air, for {buyer}.",
+        "{buyer} bought the night. Bellmire gives it back in memory.",
+        "The ribbons come down. {buyer}'s stays on the maypole.",
+        "A sleepy child asks the crier who {buyer} is. 'A friend,' says the crier."
+      ]
+    }
   }
 }

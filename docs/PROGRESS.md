@@ -1392,3 +1392,58 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   delve.gd / chatcmd.gd / adventurers.gd (deaths below, kills, finds in the dark, homecomings) carry day but no
   who/kind until each adds `town.tag_feed("death", [name])` (etc.) next to its feed append. notables.gd ambient voice
   lines left untagged on purpose (townsfolk chatter, no event).
+
+## C-cycle - C-48 the townsfolk as a community (WORK_PLAN C5), 2026-11-15 (content)
+- Item: WORK_PLAN C5 (first CONTENT item with no cycle; C1-C4 already delivered by C-34..C-47, supervisor ticks).
+- data/lore_lines.json only, additive: NEW key `townsfolk` (906 lines + 40/40/40/30 name parts). names{given_f 40, given_m 40, family 40, by_names 30}; trades{28 trades, each 6 bark + 2 each morning/midday/evening/night = 14 lines; from_tier 1-12 gates the trade by growth stage}; react{raid, disaster, festival, caravan, growth, hunger, hero_falls, hero_rich: 20 each}; remember[24 conditional entries]; _conditions documents every condition token; cast[10 fully authored named townsfolk with bio, extra barks, 4 activity lines, 8 event reactions, 2 memory lines].
+- Trades: ferryman, fishwife, reed_cutter (t1); farmer, well_keeper, herder, baker (t2); guild_clerk, carter (t3); smith, brewer, miller (t4); chandler, weaver, innkeeper (t5); chapel_keeper, gravedigger, apothecary (t6); mason, cooper, tanner (t7); stabler, guardsman (t8); scribe, glassblower (t9); wallwright (t10); crier (t11); bellkeeper (t12).
+- CODE WIRING for the desktop (dead until wired, D36): pick given name (given_f/given_m by body) + EITHER one family OR one by_names entry; bind a trade whose from_tier <= current growth tier; ambient shout = random trade.bark; hour line = trade.morning/midday/evening/night; on a raised event pick react[<event>] (events: raid, disaster, festival, caravan, growth, hunger, hero_falls, hero_rich); remember[] entries fire only when their `when` token (see townsfolk._conditions; `n` and optional `kind` are the parameters) is true; cast[] are optional authored notables (cast.bark is EXTRA to the trade's bark; cast.react has one line per event).
+- Sample character read end to end: cast id `maud_fishwife` (Maud Reedwhistle, fishwife, widow of a ferryman lost at the Ford).
+- VALIDATION OK: all four data files json.load clean; every pre-existing top-level key of lore_lines.json equal to HEAD; diff numstat 1758 added / 0 removed; every trade has the same 7 keys and 6/2/2/2/2 line counts; no new line duplicates itself or any existing line; no dungeon floor count anywhere.
+## D-cycle - D63a the festival is an event, 2026-11-15 ~12:30 CT (game build)
+- Item: D63 (D59 is the first open DESKTOP item but its remainder is only the live-hub capture during a real stream run;
+  D63 is the next, Mr. E's 11:51 ask). All seven stages built; D63 left OPEN for the clip and the C6 words.
+- CHANGE scripts/town.gd: `start_festival(reason, who, buyer)` / `_end_festival` / `_dress_festival` replace the bare flag.
+  Reasons market (old timer) / raid / level / hero / gift, caused ones gated by FEST_GAP 240 s; square dressed with poles,
+  pennons, a 204-pennant MultiMesh bunting ring + spokes to a lantern crown (306 + gold for a gift), lanterns lit after
+  18:00 or always for a gift, non-solid; food sold off the stores into the treasury while it runs; the next caravan
+  called in within 6-15 s; a delve party coming home to one is cheered in (tagged who), or causes one 40% of the time.
+  Words from lore_lines "festivals" (C6) when present, short fallbacks until then.
+  scripts/townsfolk.gd: per-body festival act (dance/drink/haggle/cheer, acts fest_*), haggle spots at stall fronts.
+  scripts/hero_body.gd: heroes idling in town join and act (HeroBody.fest_acts/fest_joins). scripts/notables.gd:
+  chief, priest, bard (centre), children, pedlar, beggar, drunk sent to the square, day slot restored after.
+  scripts/sfx.gd: mood "festival" (CC0 minstrel dance), market bed +5 dB. scripts/raids.gd / economy.gd: raid driven
+  off (50%) and level up call start_festival. scripts/twitch_eventsub.gd: tier 3 -> start_festival("gift", [hero],
+  buyer); BUG FIXED - the old path set festival=true with no timer so a paid festival could end next frame; a gift
+  during a raid waits for it. Backups *.bak_d63.
+- TEST tools/_d63_fest.gd: D63_FEST OK 25/25 (dressing 204 pennants/21 nodes; mood festival -> day; acts dance 6 drink 5
+  haggle 1 cheer 9; 8 notables sent; a hero placed 38 m off walked to 12 m and acted; lots sold; caravan called; level
+  line names the reason; raid one refused in the gap; gift 173 s, 306 pennants, 7 lanterns lit, hostile buyer name
+  sanitised + capped and named in the Chronicle; gift under a raid waited and started after). LOOK tools/_d63_shot.gd ->
+  renders/cycles/d63/{1_square_before,2_festival_day,3_square_struck,4_viewer_festival_dusk}.png - looked at: bunting
+  reads at stream distance, crowd + both heroes in the square, dusk gift lit and gold.
+- GATES: parse 0 errors; OFFFLOOR 0/1433 INPROP 0 MON_INPROP 0/129; TWITCH_PARSE OK; D60_CHRON OK; W1A_TEST OK;
+  D20B_TEST PASS; TOWNWALK in_solid 0/17081 raid 0/8837 PASS; delve rc 0, 0 SCRIPT ERROR. Not re-run: D22b music test
+  (windowed, long) - the new mood only engages while a festival is on.
+- OPEN: a short clip of one festival start-to-finish; C6 words (shape the game reads is noted under C6 in WORK_PLAN).
+
+## D-cycle - D63b the festival talks in C6's words + the clip, 2026-11-15 ~13:30 CT (game build)
+- Item: D63 (first open DESKTOP-owned item; open for the clip and the C6 words). TICKED.
+- Found C6 on origin/content (bac1808, 365 lines) in a different shape from the one D63a guessed (reasons.* /
+  viewer_paid.* / notables {who,line}). scripts/town.gd: `_fest_pool` resolves C6's shape first, the D63a shape second,
+  code lines last; new `_fest_talk` - crowd/toast bubbles over festival-goers (Townsfolk.say_once) and a rotating
+  Chronicle line stalls -> notable -> E3PO. scripts/townsfolk.gd: bubble creation factored into `_shout_label`,
+  `say_once(line)` added (does not make anyone a crier). scripts/notables.gd: `e3po_line(line)`. Backups *.bak_d63b.
+- TEST tools/_d63b_talk.gd: D63B_TALK OK 17/17 with content's real lore_lines.json (env D63_LORE) AND with the inline
+  C6-shape fixture (every reason opening from its C6 key, 12 bubbles all C6 crowd/toast, stall+notable+E3PO in the
+  Chronicle, crowd kept off it, E3PO bubble, C6 closing; paid one opens/talks/closes from viewer_paid naming the buyer).
+  tools/_d63_fest.gd: D63_FEST OK on 2 of 2 re-runs after a test fix - A6 had failed 1 run in 3 (hero at 17 m, still on
+  its route: the D58 stroll is slower than the 45 s window); the check now waits up to 30 s more while the hero is still
+  routing, and A10 finds the closing by its trade tally so C6 closings (no word "festival") still pass.
+- CLIP tools/_d63_clip.gd -> renders/cycles/d63/d63_festival_clip.mp4 (75 s, 1152x648, not committed). Looked at a 3x3
+  contact sheet: dressed square, crowd bubbles ("Gate's shut and the cup's full!"), C6 lines in the Chronicle, gift at
+  dusk lit gold and named. Camera clips a roof twice; window stayed 1152x648 under the movie writer.
+- GATES: parse 0 errors (x2); OFFFLOOR 0/1317 INPROP 0 MON_INPROP 0/117; TWITCH_PARSE OK; TOWNWALK in_solid 3/16349
+  (0.018%) raid 0/8909 PASS; delve 0 SCRIPT ERROR.
+- FOR THE SUPERVISOR: merge `content` (C6) -> main -> laptop to make the words live; no code change needed after.
+

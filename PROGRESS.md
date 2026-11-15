@@ -5727,6 +5727,12 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - CODE WIRING: none new. The extra lines are plain strings in arrays the picker already reads (begin_alt/pass_alt/during on disasters, appears_alt/while_alt/cleared_alt on camps and the wandering boss). Confirm the picker uses len() of those arrays rather than a fixed 8/16/22 or 4. Still dead until wired, as the existing notes say.
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).
 
+## C-49 (2026-11-15) - WORK_PLAN C6: THE FESTIVAL HAS A VOICE (lore_lines.json)
+- Added a new top-level "festivals" key (365 lines; none existed before, the two festival lines lived in town.gd). reasons{harvest,raid_survived,lord_felled,hero_home,town_level,viewer_gift} 12 each (72); crowd 39; toasts 30; stalls 30; notables 24 ({who,line}, who = townsfolk.cast name); e3po 30; closings 24; viewer_paid{openings 24, crowd 20, toasts 16, stalls 12, e3po 16, notables 12, closings 16} (116), all carrying the {buyer} token.
+- VALIDATION OK: all four data files parse; every pre-existing lore_lines.json key is equal and the original file text is a byte-identical prefix (pure append); items/bosses/potions untouched; ASCII only; no floor count stated.
+- Note: C-48 (townsfolk community, commit 754d87b) had no PROGRESS entry; its work is in lore_lines.json "townsfolk".
+- CODE WIRING (D63/town.gd): read festivals.reasons[<reason>] for the opening, then crowd/toasts/stalls/notables/e3po/closings during and after; for a viewer-bought festival use festivals.viewer_paid.* and substitute {buyer} with the display name (strip the token if unknown). notables[] entries carry who = a townsfolk.cast name. Dead until wired. Confirm pickers use len() of each array.
+- Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).
 
 ## U29 - L64.1-L64.3 director tells a story (HUD, 2026-11-15, auto_director.gd)
 - L64.1 every candidate is scored with a reason note; each cut logs `CUT key shot pri why | top-5 candidates` to the console and user://director.log.
@@ -5735,3 +5741,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - L64.4 unchanged (lane_held / _lane_owns). Not re-verified against pane contents this cycle.
 - Test tools/_l64_test.gd, WINDOWED 1080p, 300 s director clock at 4x: 41 cuts, 0 repeat/hold/why violations, shots shoulder 24 / follow 15 / push 1 / hard_cut 1; raid covered, death was SYNTHETIC (no natural death in window).
 - NOT DONE: the 30-min unattended recording (L64 DONE) and my eyes on the screenshots (folder grant pending, see summary). L64 stays open.
+## D-cycle D59b - snapshot v=4 goes out (game build, 2026-11-15 ~11:20 CT)
+- scripts/snapshot_pub.gd: PAYLOAD_V 3 -> 4 (.bak_d59b kept); comment now says never bump past the hub's KNOWN_V. tools/_d59_sheet.gd check 1 now asserts v == 4. Nothing else changed - every v4 field has been on the wire since D59a.
+- Safety: read the LIVE github.io app.js before flipping - KNOWN_V = {"1","2","3","4"} (H23), so v4 cannot blank the hub.
+- LOOKED: the v4 _d59_dump payload through the current web/ page (headless Chromium, supabase fetch intercepted): renders/cycles/d59/sheet_render_v4.png. Veteran Brannoc and fresh Isolde both: Abilities + Combat numbers, Initiative/Speed, IN TOWN chip, "Last seen 3 minutes ago", gear slots that exist filled and the rest drawn empty, Their own chronicle from h.events (veteran 4 lines, fresh "Enlisted: elf mage."). 0 page errors. The H20 gear-text and [object SVGSVGElement] bugs are gone.
+- Hub-side note (not mine): the fresh hero's MAIN HAND cell reads "Bare Hands · 1d4" though the publisher omits main_hand for bare hands - the hub falls back to h.weapon. Truthful enough; flagging only.
+- Tests: parse 0 errors; D59_SHEET OK 20/20; D57_SATCHEL OK; D60_CHRON OK; W1A_TEST OK (offline; 202 heroes 189 KB); TWITCH_PARSE OK; OFFFLOOR 0/1547 INPROP 0 MON_INPROP 0; TOWNWALK 3/14867 raid 0/10703 PASS; _delve_test rc 0; 0 SCRIPT ERROR anywhere. Payload: 2 heroes 8.0 KB.
+- D59 NOT ticked: only the LIVE-hub capture after a real 10-min run remains; not run outside the stream (it would play roster.json live). The next stream session shows it with no further change.

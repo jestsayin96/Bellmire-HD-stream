@@ -134,6 +134,27 @@
   <ul class="town" id="town" aria-label="The town"></ul>
   <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
 
+  <!-- H25 Night watch: a page-owned toggle. It carries no snapshot data; app.js flips one class on <html>
+       and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
+  <div class="watchbar" id="watchbar">
+    <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
+    <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
+  </div>
+
+  <!-- H24: the finder. One field over everything the page already holds in memory (heroes,
+       the fallen, bands, lords, remembered Chronicle lines). Page-local: no fetch, no write
+       path. Results are built in app.js with el() only. -->
+  <div class="finder" id="finder" role="search">
+    <label class="finder-label" for="finderInput">Find</label>
+    <input class="finder-input" id="finderInput" type="search" maxlength="60" autocomplete="off" spellcheck="false"
+           placeholder="A hero, a lord, a band, a word from the Chronicle  (press / )"
+           role="combobox" aria-expanded="false" aria-controls="finderList" aria-autocomplete="list">
+    <div class="finder-panel hide" id="finderPanel">
+      <p class="finder-note" id="finderNote" role="status" aria-live="polite"></p>
+      <ul class="finder-list" id="finderList" role="listbox" aria-label="Places to go"></ul>
+    </div>
+  </div>
+
   <!-- H13: no-scroll, tabbed layout. A viewer picks one section at a time with a
        tab button here; app.js shows the matching tabpanel below and remembers the
        choice in localStorage (control-stripped, 25-cap, matched against a WHITELIST

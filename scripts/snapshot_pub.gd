@@ -38,11 +38,11 @@ const CHRON_TYPES := ["death", "raid", "loot", "delve", "town", "lore", "fight"]
 ## item's buy cost, so the hub quotes the same number and the two can never disagree.
 ## `sell` is PER UNIT - the hub multiplies by qty itself.
 const SELL_BACK := 0.4
-## D59: the H20 sheet fields are ADDITIVE and every v3 hub already reads most of them, but
-## the live hub (web/app.js KNOWN_V = {"1","2","3"}) refuses any other number outright -
-## "the page needs an update" instead of a town. So the number stays 3 until the hub
-## worker adds "4" to KNOWN_V; then flip this to 4. Shipping 4 first blanks the hub.
-const PAYLOAD_V := 3
+## D59: v4 = the H20 sheet fields (initiative, speed, gear by slot, status, per-hero
+## last_seen + events). Additive over v3. The hub's KNOWN_V took "4" in H23 (c19608c), so
+## v4 ships. NEVER bump this past what web/app.js KNOWN_V accepts - the hub refuses an
+## unknown number outright ("the page needs an update" instead of a town).
+const PAYLOAD_V := 4
 const SATCHEL_MAX := 40             # the hub stops reading rows at 40
 const NAME_MAX := 25                # W1a: every published name is capped here
 ## kind -> the hub's icon map (web/app.js SATCHEL_ICON). Only these words are sent;
@@ -154,7 +154,7 @@ func build_payload() -> Dictionary:
     var r: Roster = town.get("roster") if town else null
     var e: Economy = town.get("economy") if town else null
     var out := {
-        "v": PAYLOAD_V,         # see PAYLOAD_V (v3 the Satchel, v2 `parties`)
+        "v": PAYLOAD_V,         # see PAYLOAD_V (v4 the H20 sheet, v3 the Satchel, v2 `parties`)
         "game": "Bellmire HD",
         "generated_at": Time.get_datetime_string_from_system(true) + "Z",
         "town": _town_block(e),

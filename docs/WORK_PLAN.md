@@ -2812,6 +2812,18 @@ laptop (the delve command path) - both must coordinate; repro before fixing.
       rising in_solid count measures. Keep D44b's work on this. The hero-at-the-well (D52) is a
       different animal - a wedged agent is pinned to a prop, an idle hero sits in the open. Two
       bugs, two owners, do not conflate.
+      PARTIAL D44c (game build, 2026-11-15 ~15:45 CT, townsfolk.gd): the recurring STUCK_EX hotspot at
+      (74,-63.5) - in every recent townwalk (d60, d63, d64) - NAMED AND FIXED. It was a RAID-FLIGHT knot, not a
+      prop: ~9 folk fleeing to one homeless refuge whose route ends on the navmesh ~2 m off the door. With the
+      0.9 m arrival they stopped 2.5-3 m from the door, failed the 2.5 m duck-in test, were re-routed to the
+      same end and arrived again, every frame, for the whole raid. Now a fleer whose route has run out within
+      2.5 m of its own route END tucks in (flee_end_tucks); plus a final open-ground leg that gets no nearer
+      within 2.5 m of a taken spot counts as arrived (crowd_arrivals). tools/_d44c_probe.gd: still-on-route
+      samples at the hotspot 43 -> 0. Three townwalks after: STUCK_ON_ROUTE_TOTAL 0 / 2 / 0 (hotspot gone from
+      all three), in_solid 0/21402, 2/18031, 2/15629. STILL OPEN: those in_solid 2s are the OLD flat D44b
+      residual - bodies on long routes (100+ waypoints) embedded in the south-market solid at (32.5,-64)/
+      (32.5,-69.4). Not the pumpkins either: no pumpkin prop exists in code (fields use Plant_1 greens), so
+      the clip's prop needs Mr. E to point at it again if it recurs.
 
 CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-cheer tiers (7cdc363), Rally my hero reward + combat buff (eb707ae), hero idle-wander + delve-scope fix (19b1893/e1c9c1f), subscriber-pane Helix seed (19b1893), Custom Power-up redemption -> bit tiers (510a2e9), E3PO D37 live + all voice hooks (4e59901 + laptop L-148 + trader_arrives a2dbd3a), laptop merge c08cc08 (trap variety L-147, monster telegraphs L-149). Full gate green. OPEN for Mr. E: create the 5 Custom Power-ups in the dashboard; decide E3PO v2 (fighting commander).
 

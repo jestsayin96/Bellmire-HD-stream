@@ -5764,3 +5764,20 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - SHAPE the build worker reads: equipment.weapons[id] = {name, family, tier, tier_name, routes[], flavour}; equipment.armour[id] = {name, tier, tier_name, cut, routes[], flavour}; equipment.starting_kits[calling] = {weapon: id, armour: id, family}. `tier` is the index into gear.gd WEAPONS/ARMOUR; no cost/atk/hp/ac stated (those stay in gear.gd). Kit pieces are tier 0 so they never out-perform the first bought tier.
 - CODE WIRING (D64/D65, not done by content): gear.gd/roster.gd read `equipment` to pick a named piece within a tier by route and family; enlist reads starting_kits; monk family is "open", which is not in gear.gd FAMILIES and needs a mapping; shop stock should filter by `routes` containing shop and shop-level cap.
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. device_bash had no connected folder this run, so work went through the Blender bridge. WORK_PLAN.md conflict on merge resolved by taking main's copy (supervisor-owned). Not ticked (supervisor ticks).
+
+## D-cycle D44c - the raid-flight knot at (74,-63.5) (game build, 2026-11-15 ~15:45 CT)
+- RC ITEM TAKEN: D52 is first in Phase RC but LAPTOP-CODE owned (no worker) - skipped per the BLOCKED note;
+  next owned RC item is D44/D50 (wedging). Waited for the HUD's live lock (L64.4) to clear before launching.
+- CAUSE (tools/_d44c_probe.gd, new): every recent townwalk's STUCK_EX pointed at next=(74,-63.5). The probe
+  showed ~9 folk with _fleeing=true, enter=ZERO, door_out=(75.7,-64.6): a homeless refuge whose nav route
+  ends ~2 m off the door. 0.9 m arrival left them 2.5-3 m from the door, so the 2.5 m duck-in failed and
+  _civic_flee routed them to the same end again - arrive/re-route every frame for the whole raid.
+- FIX (townsfolk.gd only, .bak_d44c kept): _flee_end remembers the flight route's end; a fleer whose route
+  has run out within 2.5 m of it tucks in (flee_end_tucks). Also: a final open-ground leg that gets no
+  nearer within ARRIVE_CROWDED (2.5 m) counts as arrived (crowd_arrivals) - the same rule the D16b
+  watchdog's close branch uses, now reachable when crowd jitter defeats the watchdog.
+- TEST: probe still-on-route samples at the hotspot 43 -> 0. Townwalk x3: stuck_on_route total 0/2/0, hotspot
+  absent from all three STUCK_EX; in_solid 0/21402, 2/18031, 2/15629 (PASS). The 2s are the old D44b flat
+  residual at the south-market solid (32.5,-64..-69) on 100+-waypoint routes - left open, named in WORK_PLAN.
+- GATE GREEN: parse 0; _offfloor 0/1316 (INPROP 0, MON_INPROP 0/108); TWITCH_PARSE OK; _delve_test to floor 2,
+  0 SCRIPT ERROR. D44/D50 left UNTICKED (in_solid not yet 0 every run). No pumpkin prop exists in code.

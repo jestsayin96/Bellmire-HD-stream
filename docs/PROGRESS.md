@@ -2,6 +2,21 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## U-cycle - U26 L31 part 1: the "NOW FIGHTING" banner, 2026-11-15 (HUD)
+- Item: L31 (first unchecked item that is mine; L61 was already ticked by U25).
+- Built HudDock.FightBanner (hud_dock.gd, skin + watcher only): when a floor's lord rises
+  (Delve.lord_fighting(), same source as the boss card) a parchment banner reads
+  NOW FIGHTING / <lord> / "Lord of the deep" or "A rare one" - the town's band / the delvers,
+  in the lord's own colour, held 6 s real time, fades. Docked UNDER the boss card inside the
+  pane showing the fight via HudDock.put (so it can never cross a seam or the Chronicle); at
+  full screen it sits below the boss bar. Marked with a pane home so guard() leaves it alone.
+- Looked at: windowed 1920x1080 capture tools/_u26_shot.gd -> renders/cycles/20261115_u26
+  (1_full_crop.png: solid parchment, purple lord edge, 40 px name legible). Banner rect
+  measured clear of the Chronicle box (overlap=false). Parse 0 errors.
+- NOT DONE for L31 (so it stays unticked): damage numbers (Monster._number / Delve._float_text
+  are Label3D in files I do not own) and status icons (party_frames.gd shows words). Those need
+  an owner decision - see summary.
+
 ## D-cycle - D57 the Satchel goes live in the snapshot, 2026-11-15 08:30 (game build)
 - Item: D57 (first open DESKTOP item, Mr. E's direct ask). The hub's H11 Satchel
   panel has been shipped and dormant since it went up: it draws nothing until the
@@ -1237,3 +1252,13 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   - tools/_d21b_test.gd -> D21B_FX OK
 - Staged only the files this change touches (scripts/townsfolk.gd, scripts/raids.gd,
   tools/_d21b_test.gd, docs/WORK_PLAN, docs/PROGRESS, docs/RUN_LOCK).
+
+
+## D-cycle - D58 townsfolk gait quality, 2026-11-15 (game build)
+- MEASURED (tools/_d58_gait_probe.gd, 10 ordinary walkers, 30 s): feet planted (slip ~1.0), but Walking_A at
+  ~2.0x cadence (cruise 1.6-1.9 m/s vs the clip's 0.8) and 23 walk<->jog flips - cruise sat in the hysteresis band.
+- FIX townsfolk.gd: static `stroll` 0.66 + _step_v(); walkers under 2.4 m/s (not fleeing) step at 66%. Backup
+  townsfolk.gd.bak_d58 (not committed). Rig untouched.
+- AFTER: cadence 1.22-1.41x, corr(v,scale) 0.73, 0 flips, slip>25% 1/588. Shots renders/cycles/d58/ (19-24 walkers).
+- GATES: parse 0 errors; OFFFLOOR 0/1483; TWITCH_PARSE OK; TOWNWALK PASS (in_solid 0.012%); delve 0 SCRIPT ERROR.
+- NOTE: routes now take ~1.5x longer; if the town feels sleepy, raise Townsfolk.stroll toward 0.75 (stays out of the jog band up to ~0.9).

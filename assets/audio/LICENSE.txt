@@ -29,3 +29,9 @@ rpg/ (CC0 1.0 - https://creativecommons.org/publicdomain/zero/1.0/)
   insects...), magic (fire, ice, lightning, heal, buff, curse, shield, summon, teleport...),
   combat (sword, dagger, bow, shield, footsteps...) and ui (level_up, chest, coins, potion,
   menu...). The music-studio repo is left untouched; these files were copied in.
+
+D22a ambience beds - made for this game (2026-11-15) with numpy/scipy + ffmpeg from pure
+synthesised noise and sines, no source recordings; CC0 like the rest:
+  amb/river_flow.ogg     band-passed noise + low rumble + bubble chirps, 30 s seamless loop
+  amb/market_murmur.ogg  26 formant-filtered noise "voices" gated at syllable rate (crowd babble), 30 s loop
+  amb/forge_fire.ogg     low fire roar + bellows breaths every 4 s + crackle, 30 s loop

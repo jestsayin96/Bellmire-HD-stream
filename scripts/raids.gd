@@ -44,6 +44,27 @@ const LINE_HOLD := 14.0          # a guard beyond this from his mark forms up in
 const LINE_BREAK := 22.0         # ... and only while the raiders' centre is this far from the square
 const LINE_FROM_CENTRE := 11.0   # the muster line sits this far out from the square, toward the raiders
 const LINE_SPACING := 2.2        # arm-and-shield across
+## D21b.4: the mounted watch CHARGES - a rider further than CHARGE_FROM from his
+## mark lowers the lance and gallops in; if he covers CHARGE_RUNUP of ground
+## before contact the charge LANDS: the blow is rolled twice (the weight of the
+## horse - keep the better), adds CHARGE_DICE, throws the raider back CHARGE_PUSH
+## and tramples anyone within TRAMPLE_R of the impact. Then he WHEELS away
+## WHEEL_OUT and comes again - the stream sees a charge, not a horse in a scrum.
+const CHARGE_FROM := 9.0
+const CHARGE_RUNUP := 6.0
+const CHARGE_SPEED := 1.3        # on top of the engage pace
+const CHARGE_DICE := [2, 6]
+const CHARGE_PUSH := 2.4
+const TRAMPLE_R := 2.6
+const TRAMPLE_DICE := [1, 6]
+const TRAMPLE_PUSH := 1.3
+const WHEEL_OUT := 12.0
+const WHEEL_T := 2.6             # s at most spent wheeling before he turns in again
+const DUST := Color(0.72, 0.60, 0.42)
+var charges := 0                 # tests: charges that reached their mark
+var charges_landed := 0          # ... and struck home
+var tramples := 0                # raiders caught under the hooves
+var _charge_said := false
 const SKELETONS := ["warrior", "cutpurse", "minion"]
 var town: Node3D
 var economy: Economy
@@ -85,6 +106,7 @@ func raid(source := "") -> void:
     _init_raid = Dice.d20() + 1
     _init_watch = Dice.d20() + 2
     _big_said.clear()
+    _charge_said = false
     var spawn: Vector3
     var sc: Dictionary = town.get("_scar_info")
     if from_dungeon and sc.has("mouth"):
@@ -573,10 +595,25 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
         return
     var tn: Node3D = (tg["node"] as Node3D) if defending else (tg as Node3D)
     st["swing"] = float(st["swing"]) - delta
-    if _flat(me.global_position, tn.global_position) > 2.2:
-        _step(me, tn.global_position, _speed(st) * 1.15, delta)
+    var dist := _flat(me.global_position, tn.global_position)
+    var rider := defending and me is Cavalry
+    if rider and _wheel(me, st, delta):
+        return
+    if rider and not bool(st.get("charging", false)) and dist > CHARGE_FROM:
+        st["charging"] = true
+        st["charge_at"] = me.global_position
+    if dist > 2.2:
+        var sp := _speed(st) * 1.15
+        if rider and bool(st.get("charging", false)):
+            sp *= CHARGE_SPEED
+        _step(me, tn.global_position, sp, delta)
         _anim(me, "run")
         return
+    if rider and bool(st.get("charging", false)):
+        st["charging"] = false
+        if _flat(me.global_position, st.get("charge_at", me.global_position)) >= CHARGE_RUNUP:
+            _charge_lands(me, st, tg, tn)
+            return
     var to := tn.global_position - me.global_position
     me.rotation.y = atan2(to.x, to.z)
     if float(st["swing"]) > 0.0:
@@ -616,6 +653,108 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
             _defender_falls(tn, ts, killer)
     else:
         _reel(tn)
+
+## D21b.4: a rider who has just struck rides OUT past his mark before turning in
+## again. True while he is still wheeling.
+func _wheel(me: Node3D, st: Dictionary, delta: float) -> bool:
+    if not st.has("wheel"):
+        return false
+    st["wheel_t"] = float(st.get("wheel_t", 0.0)) - delta
+    var to: Vector3 = st["wheel"]
+    if float(st["wheel_t"]) <= 0.0 or _flat(me.global_position, to) < 1.5:
+        st.erase("wheel")
+        return false
+    _step(me, to, _speed(st) * 1.15 * CHARGE_SPEED, delta)
+    _anim(me, "run")
+    return true
+
+## D21b.4: the charge strikes home
+func _charge_lands(me: Node3D, st: Dictionary, tg: Dictionary, tn: Node3D) -> void:
+    charges += 1
+    st["swing"] = 1.4
+    _anim(me, "attack")
+    var fwd := Vector3(tn.global_position.x - me.global_position.x, 0, tn.global_position.z - me.global_position.z)
+    fwd = fwd.normalized() if fwd.length() > 0.01 else Vector3(sin(me.rotation.y), 0, cos(me.rotation.y))
+    me.rotation.y = atan2(fwd.x, fwd.z)
+    # the weight of the horse: roll the blow twice, keep the better
+    var dmg := _strike(st, int(tg["ac"]))
+    var nat := last_nat
+    var dmg2 := _strike(st, int(tg["ac"]))
+    if dmg2 > dmg:
+        dmg = dmg2
+    else:
+        last_nat = nat
+    var crit := last_nat == 20
+    var at := tn.global_position
+    Sfx.at("horse_neigh", me.global_position + Vector3(0, 1.4, 0), 1.0)
+    Spells._burst(town, at + Vector3(0, 0.35, 0), DUST, 1.4)
+    Spells._ground_ring(town, at, DUST, TRAMPLE_R + 0.6, 0.9, 0.5)
+    # then ride on through and out the far side, to come again
+    st["wheel"] = town.call("keep_walkable", me.global_position + fwd * WHEEL_OUT)
+    st["wheel_t"] = WHEEL_T
+    if dmg <= 0.0:
+        Sfx.at("swing", at, -2.0)
+        return
+    charges_landed += 1
+    dmg += Dice.damage(CHARGE_DICE, 0.0, false)
+    Sfx.at("hit_impact", at + Vector3(0, 1.1, 0), 4.0)
+    _shout(me, "CHARGE!", Color(1.0, 0.82, 0.35))
+    var who := _name_of(me, st)
+    if not _charge_said:
+        _charge_said = true
+        _say("%s's charge crashes into %s!" % [who, String(tg.get("name", "the raiders"))])
+    _hurt_raider(tg, dmg, crit, who, at + fwd * CHARGE_PUSH)
+    # the hooves: everyone else at the point of impact
+    for r in raiders.duplicate():
+        if r == tg or not is_instance_valid(r["node"]):
+            continue
+        var rn: Node3D = r["node"]
+        var off := Vector3(rn.global_position.x - at.x, 0, rn.global_position.z - at.z)
+        if off.length() > TRAMPLE_R:
+            continue
+        tramples += 1
+        var away := off.normalized() if off.length() > 0.05 else fwd
+        _hurt_raider(r, Dice.damage(TRAMPLE_DICE, 0.0, false), false, who, rn.global_position + away * TRAMPLE_PUSH)
+
+## D21b.4: a raider takes a blow that also throws him (to `push_to`)
+func _hurt_raider(r: Dictionary, dmg: float, crit: bool, killer: String, push_to: Vector3) -> void:
+    var n: Node3D = r["node"]
+    r["hp"] = float(r["hp"]) - dmg
+    if n is Monster:
+        (n as Monster).hp = float(r["hp"])
+        (n as Monster)._number(dmg, crit)
+        (n as Monster)._flash()
+    elif n is Townsfolk:
+        (n as Townsfolk)._number(dmg, crit)
+        (n as Townsfolk)._flash()
+    if float(r["hp"]) <= 0.0:
+        _raider_falls(r, killer)
+        return
+    var to: Vector3 = town.call("keep_walkable", push_to)
+    var tw := n.create_tween()
+    tw.tween_property(n, "global_position", to, 0.22).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+    _reel(n)
+
+## a word over a fighter's head - the FELLED! banner's shape, in another colour
+func _shout(n: Node3D, text: String, col: Color) -> void:
+    var lb := Label3D.new()
+    lb.text = text
+    lb.font_size = 112
+    lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 24
+    lb.outline_modulate = Color(0, 0, 0, 0.95)
+    lb.modulate = col
+    lb.top_level = true
+    n.add_child(lb)
+    var p := n.global_position + Vector3(0, 2.8, 0)
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.6, 0), 1.4).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 1.4).set_delay(0.5)
+    tw.chain().tween_callback(lb.queue_free)
 
 ## ------------------------------------------------------------ spells (D2)
 ## The arcane callings (mage, sage, cleric) fight a raid with spells from

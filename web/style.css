@@ -976,3 +976,37 @@ html.overlay #bands { display: none !important; }
 details.hero > summary { grid-template-columns: auto minmax(0, 1fr) auto; }
 .hcoa { margin-top: 1px; }
 .sheethead { justify-content: space-between; align-items: center; }
+
+/* H16: Hall of the Fallen - a memorial card per hero; blanks are simply absent */
+.fallen { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.grave { position: relative; padding: 12px 14px; border: 1px solid rgba(233,214,168,.14); border-left: 3px solid var(--dead); }
+.ghead { display: flex; align-items: center; gap: 10px; }
+.ghead .coa { flex: none; filter: grayscale(.55) brightness(.8); }
+.ghead .gwho { min-width: 0; }
+.ghead .gwho .grec { display: block; font-size: .88rem; color: var(--parch-dim); }
+.gepi { font-size: 1.02rem; line-height: 1.4; margin: 8px 0 2px; opacity: .95; overflow-wrap: anywhere; }
+.gfacts { margin-top: 8px; display: grid; gap: 3px; font-size: .9rem; border-top: 1px solid rgba(233,214,168,.1); padding-top: 7px; }
+.gfact { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.gfact .gk { flex: none; min-width: 5.2em; color: var(--parch-dim); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+.gfact .gv { color: var(--parch-hi); overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.gfact.gcause .gv { color: #d79a86; }
+.gico { width: 1.1em; height: 1.1em; flex: none; }
+
+
+/* ======================================================= H17 the hub on a phone
+   Refinement only: same palette, same Gloock wordmark, same tab model. The
+   tab strip is a thumb-sized, snap-scrolling rail (the lit tab is centred by
+   app.js); every tappable thing is >= 44px; small print steps up to 12px; text
+   fields are 16px so iOS does not zoom on focus. No new font, no CDN. */
+@media (max-width: 760px) {
+  nav { scroll-snap-type: x proximity; scroll-padding: 0 14px; overscroll-behavior-x: contain; }
+  nav button { min-height: 44px; padding: 8px 16px; scroll-snap-align: center; }
+  .chip { min-height: 44px; padding: 6px 15px; }
+  .linkbtn { min-height: 44px; display: inline-flex; align-items: center; padding: 6px 4px; }
+  .find { font-size: 16px; min-height: 44px; }
+  .signinbtn, .chatload, button.signinbtn, button.chatload { min-height: 44px; }
+  html body .eyebrow, html body .rnum2, html body .bunit, html body .ckind, html body .cwhen, html body .cnt, html body .gfact .gk, html body .hpk, html body .lvl, html body .title small, html body footer small, html body .bval .bunit, html body .chip .cnt, html body .stat .k, html body .gl { font-size: 12px; }
+  html body #retry, html body .pinbtn, html body button.pinbtn { min-height: 44px; min-width: 44px; }
+  details.hero > summary { min-height: 44px; }
+}
+html, body { overflow-x: clip; }

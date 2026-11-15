@@ -21,7 +21,7 @@ const HERO_PAGE = 60;          // heroes drawn at once (a busy night has 200+)
 
 const params = new URLSearchParams(location.search);
 const TEST = params.get("state");   // empty | fail | stale (local checks)
-const MOCK = params.get("mock");    // chronicle | crowd | roll | bands (local checks)
+const MOCK = params.get("mock");    // chronicle | crowd | roll | bands | fallen (local checks)
 const OVERLAY = params.has("overlay");  // ?overlay=1 : the thin on-stream (OBS) column
 // overlay mode: a narrow, dark, glanceable column over the stream. Same data, same
 // security - a body class the stylesheet reshapes; no separate code path for snapshot data.
@@ -908,23 +908,61 @@ function renderRoll(rows) {
   });
 }
 
-// ============================================================ THE FALLEN
+// ============================================================ THE FALLEN (H16: Hall of the Fallen)
+// A memorial, not a list. Every field is optional and defended: a missing one is simply
+// not drawn (an honest blank) - never "undefined", never a guess. All text goes through
+// el()/textContent; the crest is page-owned heraldry chosen by hashing the name (H15).
+// The epitaph is whatever the snapshot carries (the town writes it at the hero's death);
+// the frozen lore (H12) holds no epitaph set, so there is no parallel list here.
+function fallenText(v) {                       // string | {name} | null -> trimmed text or ""
+  if (v == null) return "";
+  if (typeof v === "object") return v.name != null ? String(v.name).trim() : "";
+  return String(v).trim();
+}
+function fallenRow(label, value, cls) {
+  const row = el("div", "gfact" + (cls ? " " + cls : ""));
+  row.append(el("span", "gk", label), el("span", "gv", value));
+  return row;
+}
 function renderFallen(fs) {
   $("nFallen").textContent = fs.length ? fs.length : "";
   const box = $("fallenList");
   box.replaceChildren();
   if (!fs.length) { box.append(el("p", "empty", "No one has fallen. Yet.")); return; }
   for (const f of fs) {
-    const g = el("div", "grave");
+    if (f == null || typeof f !== "object") continue;
+    const g = el("article", "grave");
+    const head = el("div", "ghead");
+    head.append(coat(nameOf(f), "md"));
     const who = el("div", "gwho");
     who.append(document.createTextNode(nameOf(f)));
-    who.append(el("span", "grec", `the ${f.class}, level ${f.level}`));
-    g.append(who);
+    const klass = f.class ? String(f.class) : "";
+    const lvl = Number.isFinite(+f.level) && +f.level > 0 ? "level " + num(f.level) : "";
+    const rec = [klass ? "the " + klass : "", lvl].filter(Boolean).join(", ");
+    if (rec) who.append(el("span", "grec", rec));
+    head.append(who);
+    g.append(head);
     // their earned title, if they carried one, kept with them on the memorial
     if (f.title) g.append(el("div", "gtitle", String(f.title)));
-    g.append(el("div", "ghow", `Slain by ${f.killed_by || "the dark"}` + (+f.day ? `, day ${f.day}` : "")));
-    g.append(el("div", "grec", `${num(f.kills)} kills  ·  deepest floor ${num(f.deepest)}`));
-    if (f.epitaph) g.append(el("div", "gepi", "“" + String(f.epitaph) + "”"));
+    if (f.epitaph) g.append(el("div", "gepi", "\u201c" + String(f.epitaph) + "\u201d"));
+    const facts = el("div", "gfacts");
+    const cause = f.killed_by ? String(f.killed_by) : "";
+    const day = +f.day > 0 ? "day " + num(f.day) : "";
+    if (cause || day) facts.append(fallenRow("Taken by", [cause, day].filter(Boolean).join(", "), "gcause"));
+    if (Number.isFinite(+f.deepest) && +f.deepest > 0) facts.append(fallenRow("Deepest", "floor " + num(f.deepest)));
+    if (Number.isFinite(+f.kills) && +f.kills > 0) facts.append(fallenRow("Slain", num(f.kills) + (+f.kills === 1 ? " foe" : " foes")));
+    const wep = fallenText(f.weapon), arm = fallenText(f.armour != null ? f.armour : f.armor);
+    if (wep || arm) {
+      const row = el("div", "gfact gwore");
+      row.append(el("span", "gk", "Wore"));
+      const gv = el("span", "gv");
+      if (wep) frag(gv, icon(weaponIcon(wep), "gico"), el("span", null, cap(wep)));
+      if (wep && arm) gv.append(el("span", "gsep", " \u00b7 "));
+      if (arm) frag(gv, icon("shield", "gico"), el("span", null, cap(arm)));
+      row.append(gv);
+      facts.append(row);
+    }
+    if (facts.childNodes.length) g.append(facts);
     box.append(g);
   }
 }
@@ -2270,11 +2308,20 @@ const MOCK_PARTIES = [
     { name: "Grey Pell", hp: 18, max_hp: 30, status: "ok", class: "cleric" },
   ] },
 ];
+// ?mock=fallen: a rich memorial row, a hostile name carrying every field, a bare name-only
+// row, and a row of odd types (nulls, NaN) - all must render cleanly, no "undefined".
+const MOCK_FALLEN = [
+  { name: "Grimhollow", class: "knight", level: 9, kills: 140, deepest: 31, killed_by: "a bone-knight", epitaph: "Went deepest. Came back once.", day: 12, title: "the Bold", weapon: { name: "Warhammer" }, armour: "Chain shirt" },
+  { name: "<img src=x onerror=alert(1)>", class: "mage", level: 4, kills: 1, deepest: 3, killed_by: "<b>a hostile</b>", epitaph: "<script>alert(1)</script>", day: 3, weapon: "oak staff", armour: { name: "<i>robe</i>" } },
+  { name: "Wren" },
+  { name: "Odd", class: null, level: "x", kills: NaN, deepest: null, killed_by: "", epitaph: "", weapon: null, armour: {} },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
+  if (MOCK === "fallen") out.fallen = MOCK_FALLEN;
   if (MOCK === "crowd") {
     const classes = ["knight", "rogue", "mage", "ranger"], species = ["dwarf", "human", "elf", "orc"];
     const weapons = ["sword", "oak staff", "shortbow", "warhammer"];
@@ -2387,6 +2434,14 @@ function setUpTabs() {
       else t.panel.classList.add("tab-hidden");
     }
     if (save) writeSaved(chosen.id);
+    // H17: on a phone the tab strip scrolls sideways - keep the lit tab in view
+    // (set scrollLeft directly so the page itself never scrolls sideways).
+    try {
+      const a = chosen.anchor;
+      if (navEl.scrollWidth > navEl.clientWidth) {
+        navEl.scrollLeft = Math.max(0, a.offsetLeft - (navEl.clientWidth - a.offsetWidth) / 2);
+      }
+    } catch (e) {}
     if (focusPanel) {
       try { chosen.panel.focus({ preventScroll: true }); } catch (e) { try { chosen.panel.focus(); } catch (e2) {} }
     }

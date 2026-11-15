@@ -2,6 +2,14 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## C-cycle - C-44 shop stock and caravan cargo per growth tier, 2026-11-15 (content)
+- Item: standing backlog 2 (SHOP STOCK AND TRADER CARGO PER GROWTH TIER). C1 in WORK_PLAN was already delivered by C-34/C-35/C-41; supervisor ticks.
+- data/items.json only, additive: shop_stock 123 -> 171 (+48, four per tier, tiers 1-12); trader_cargo 68 -> 101 (+33, three per tier, tiers 2-12; tier 1 stays caravan-free).
+- Same shape as the existing blocks: {name, cost, flavour, tier}. Each new key is also appended to its tier's shop_adds / cargo_adds in stock_by_tier so the two gates agree (checked by script).
+- Crossing goods stay under 10 gold (kindling, rush light, alder bowl, oat cake); the City tier adds velvet, crystal, perfume, ivory and southern wine. A crossing still cannot sell glass.
+- VALIDATION OK: json.load clean; every pre-existing key equal to HEAD; stock_by_tier lists are old-prefix + appended keys; no duplicate keys or display names; diff removes only trailing-comma lines.
+- CODE WIRING: none new. The loader that filters good.tier <= town_tier picks these up if it enumerates the dicts; no new key, slot or file.
+
 ## U-cycle - U26 L31 part 1: the "NOW FIGHTING" banner, 2026-11-15 (HUD)
 - Item: L31 (first unchecked item that is mine; L61 was already ticked by U25).
 - Built HudDock.FightBanner (hud_dock.gd, skin + watcher only): when a floor's lord rises
@@ -1262,3 +1270,46 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - AFTER: cadence 1.22-1.41x, corr(v,scale) 0.73, 0 flips, slip>25% 1/588. Shots renders/cycles/d58/ (19-24 walkers).
 - GATES: parse 0 errors; OFFFLOOR 0/1483; TWITCH_PARSE OK; TOWNWALK PASS (in_solid 0.012%); delve 0 SCRIPT ERROR.
 - NOTE: routes now take ~1.5x longer; if the town feels sleepy, raise Townsfolk.stroll toward 0.75 (stays out of the jog band up to ~0.9).
+
+## D-cycle - D21b.4 the cavalry charge lands + raid FPS soak, 2026-11-15 04:30 (game build)
+- Item: D21b remainder (first open DESKTOP item): a cavalry charge that lands, FPS holds. D21b now ticked.
+- CHANGE scripts/raids.gd (backup raids.gd.bak_d21b4, not committed): _engage arms a charge for a Cavalry
+  defender >CHARGE_FROM 9 m out (gallop x1.3); on contact after >=CHARGE_RUNUP 6 m -> _charge_lands: advantage
+  roll, +2d6, _hurt_raider knockback 2.4 m (tween, keep_walkable), trample 1d6/1.3 m within 2.6 m, Spells._burst
+  + _ground_ring in dust colour, horse_neigh + loud hit_impact, CHARGE! Label3D (_shout, FELLED! family), one
+  Chronicle line per raid; then _wheel rides 12 m out (max 2.6 s) and the rider re-arms. Telemetry: charges,
+  charges_landed, tramples. No new class_name, no new asset.
+- TEST tools/_d21b4_test.gd: headless D21B4 OK (riders 4, charges 2, landed 2, tramples 4); windowed 1080p
+  D21B4 OK (charges 6, landed 5, FPS avg 76.4 over 30 s) + shot renders/cycles/d21b4/charge_A.png - looked at:
+  CHARGE! banner, 24-dmg lance number, trample 1s, dust burst all read at pane distance.
+- FPS A/B (same script, CHARGE_FROM forced off): avg 75.5 min 48 -> the charge costs nothing. Raid frames sit
+  ~50-60 for the first ~14 s in BOTH runs; the A run's single 25 dip is the screenshot frame. D23 owns raid FPS.
+- GATES: --import clean; parse 0 errors; TWITCH_PARSE OK; OFFFLOOR 0/1402 INPROP 0 MON_INPROP 0/130; delve rc 0
+  no SCRIPT ERROR; TOWNWALK in_solid 3/17482 (0.017%) raid_in_solid 0/8089 PASS; D21B3 OK; D21B_FX OK.
+- MERGE NOTE: origin/main ff-merged via the Windows git (device_bash git cannot unlink files in the mount); an
+  untracked tools/_u26_shot.gd identical to main's was moved aside to tools/_u26_shot.gd.bak_premerge.
+
+## D-cycle - D22a mix & spatialisation, 2026-11-15 05:35 (game build)
+- Item: D22a (first open DESKTOP item). D57 was already done (snapshot v=3 shipped 08:41 cycle) - the brief's
+  "top priority" line is stale.
+- CHANGE scripts/sfx.gd (backup sfx.gd.bak_d22a): VOICES 24 (was 16); _voice_for = first free voice, else steal the
+  lowest-PRIO / farthest busy voice only if it ranks below the newcomer. Low-priority kinds (footstep_*, laughs,
+  grunts, efforts, GAP>=0.3 animal calls) are skipped beyond LOW_FAR 60 m and dropped when >=18 voices are busy or
+  the 8/0.25 s burst budget is spent. New Sfx.bed(kind,pos,db) + BEDS table (river/market/forge) on a "Beds" bus
+  (-12 dB), faded per frame by bed_target (night/raid rules). GAP entries for 21 animal + townsfolk voice kinds.
+  "roar" set added (delve.gd called Sfx.play("roar") into nothing). Telemetry: busy_peak, steals, dropped,
+  far_skips, missing, min_gap.
+- CHANGE scripts/town.gd (backup town.gd.bak_d22a): _lay_sound_beds (deferred from _ready) - 7 river emitters every
+  40 m along river_z_fast, market bed at _market_pos, forge bed at the blacksmith anvil.
+- ASSETS assets/audio/amb/river_flow.ogg, market_murmur.ogg, forge_fire.ogg - synthesised here (numpy/scipy +
+  ffmpeg, no source audio), 30 s seamless loops, CC0; LICENSE.txt updated. Spectra: renders/cycles/d22a/beds_spectra.png.
+- TEST tools/_d22a_test.gd headless 90 s @4x: OK 8/8 (pool 24, peak 18, steals 0, far_skips 13275, beds 9/9, before
+  raid river -2/market 0/forge -1 dB -> under raid river -8/market -60/forge -60, GAP held, 0 missing kinds).
+  Windowed WASAPI 50 s @1x with Master recorded: OK 8/8; soak.ogg + soak_review.png looked at - footfall transients
+  over the bed the whole clip, raid horn at 25 s, 0 clipped samples, RMS ~-29 dBFS, peak -8.6 dBFS.
+- GATES: --import clean; parse 0 errors; D42_TEST OK (616 footsteps); TWITCH_PARSE OK; OFFFLOOR 0/1368 INPROP 0
+  MON_INPROP 0/112; TOWNWALK in_solid 2/16367 raid_in_solid 0/9438 PASS; delve rc 0 no SCRIPT ERROR.
+- FOR MR. E: the beds are synthesised, not recorded - listen to soak.ogg; if the river reads as hiss or the market as
+  noise, a CC0 field recording can drop into the same BEDS slot with no code change. Overall mix sits ~-29 dBFS RMS
+  (bus levels predate this item) - OBS gain may want +6 dB.
+

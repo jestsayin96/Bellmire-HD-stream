@@ -3839,3 +3839,14 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
   3. TOWN_TALK vs TOWN_LIFE. e3po.town_talk is the "they say" channel ABOUT the Commander; lore_lines.town_life.crier/market/growth is the town's own ticker. The 20 new town_talk lines ride the existing e3po.town_talk path, not town_life. OWNER: whoever owns the ambient-town chatter window.
   4. SAYS is E3PO's own voice (first person / imperative); it is a different channel from town_talk and should not be mixed. The 16 new says lines inherit the existing says path unchanged.
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+## C-cycle 39: stream-repeat widening - epitaphs, descend, cleared (2026-11-15)
+
+- data/lore_lines.json: epitaphs 200 -> 240 (+40), descend 130 -> 150 (+20), cleared 130 -> 150 (+20). 80 new lines in the three pools that print the MOST on a long stream (every hero death, every delve dispatch, every floor cleared).
+- Voice held: the guild post, the tenth, the chalk-cross, the stair, the clapperless bell, the Chronicle writing the name, "measure the grain / count the flasks / keep the door". No floor count stated anywhere. No new category, no new key, no new placeholder: the new descend lines use the existing "%s %s ..." and bare-narrator shapes; the new cleared lines use the existing "Floor %d ..." and bare-narrator shapes; epitaphs are bare strings as before.
+- VALIDATION OK: python json.loads all four files clean. data/items.json, data/bosses.json, data/potions.json byte-identical to HEAD (git diff --numstat empty). data/lore_lines.json top-level key order unchanged (20 keys, identical to HEAD); every untouched top-level key deep-equal to HEAD; the three touched arrays keep their exact pre-existing values at indices 0..n-1, with the new lines strictly appended; zero duplicate line inside any of the three widened arrays and zero collision against the pre-existing contents. Trailing newline present. Bytes: 293,050 -> 297,295.
+- CODE WIRING THIS IMPLIES (supervisor to route - none of it is mine to write):
+  1. NOTHING NEW TO TEACH ANY LOADER. No new key name, no new list, no new file. Whatever reads lore_lines.epitaphs / lore_lines.descend / lore_lines.cleared today reads these 80 extra lines unchanged.
+  2. FORMAT CONTRACT KEPT. descend callers still see the mix of "%s %s ..." lines (hero name + verb) and bare narrator lines that was already in the pool; cleared callers still see the mix of "Floor %d ..." lines and bare narrator lines. Any caller already picking at random off these arrays is picked up automatically.
+  3. EPITAPHS are plain strings, as before - unchanged shape.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

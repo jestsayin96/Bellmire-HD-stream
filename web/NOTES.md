@@ -796,3 +796,22 @@ not restate. "Got it - don't show this again" stores `seen` under `bellmire.welc
 read); a small "What is Bellmire?" button in the watch bar brings it back for the visit without un-dismissing. It is an
 ordinary block in the flow - no overlay, no sticky, no gate - the doors stack on a phone and sit three-across from 680 px.
 Hidden in Night watch. `?welcome=1` forces it open for local checks.
+
+## H26 - the journal stops guessing
+
+D60 (the town's own calendar) means each Chronicle row may now carry `day`, and tagged rows carry `kind` and `who`.
+`chronShape` validates all three (`day` a whole number 0..999999, `kind` a bounded identifier, `who` at most 6 names of
+40 chars, control characters stripped) and the H14 browser memory stores and re-validates them (`histClean`).
+- **Days, not stretches (.1).** A row with a `day` is grouped by it ("Day 41"); a row without one (v=3-era payload, untagged
+  row) falls back to the H21 90-minute wall-clock heuristic. Every group says which basis it is on ("Grouped by the town's own
+  day" / "No town day on these lines - grouped by gaps in this browser's clock, a guess") and the footer note counts both.
+- **Who, from the payload (.2).** Hero filter and the sheet's "Their own chronicle" use `who` when a row has it; only a row
+  with no `who` falls back to the whole-word name match, and that row is marked "inferred from name" (the filter note counts them).
+- **Filter by kind (.3).** The Event select prefers `kind` (raid, disaster/hunger, festival, death, delve, find, growth, and
+  a new "Town life" for day/treasury/caravan/arrival/watch/rally). Untagged rows are matched by wording as before and the note
+  says how many lines carry no kind and how many of the shown ones were matched by wording.
+- **Honest (.4).** Everything through el()/textContent; no field becomes a URL/src/href/style. index.html untouched - CSP byte-identical. KNOWN_V unchanged.
+Local checks: `?mock=journal` (days + kind + who, hostile `<img>` in a `who` entry and a non-identifier `kind`, which is treated as
+untagged) and `?mock=journal3` (the same rows with the fields stripped = a v=3 payload, old grouping with the fallback labelled).
+Headless Chromium over a stubbed snapshot: 0 dialogs, 0 <img>, no horizontal overflow at 390; ?state=empty/fail/stale, ?mock=chronicle,
+?mock=crowd, ?open=1 and ?mock=sheets&open=all all render.

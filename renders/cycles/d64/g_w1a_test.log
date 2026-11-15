@@ -1,0 +1,48 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SNAPSHOT off: no service key in user://_w1a_no_such_file.json - the hub will not update
+PASS 1 no key file -> off, publish() refuses
+PASS 2 blob has every part
+PASS 3 heroes = the living two, best standing first
+PASS 4 sheet: stats, saves, weapon dice, armour, inventory, gear
+PASS 5 fallen = the rogue, with killer + epitaph
+PASS 6 guild roll lists all three (fallen too)
+PASS 7 commands from data/commands.json
+PASS 8 town block (level, souls, day)
+PASS 9 no Twitch ids in the blob
+PASS 10 plain JSON round trip
+PASS 18 chronicle present, one entry per line
+PASS 19 newest first
+PASS 20 each line typed by keyword
+W1A chronicle sample: { "t": "town", "s": "scriptalert(1)/script Bad line with controls from #", "at": "2026-11-15T20:14:54Z", "day": 1 }
+PASS 21 every entry {t, s, at} (+ D60 day/kind/who, typed): t allowed, ISO time, not HTML, no control chars, no ids, <= 200 chars
+PASS 22 capped at 50, newest first after more lines
+W1A chronicle: 50 entries, 3724 bytes
+PASS 23 chronicle under 16 KB
+W1A size 202 heroes: 188980 bytes, build 11.72 ms
+PASS 11 202 heroes: under 400 KB and 25 ms to build
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 60 s
+PASS 12 key file -> on, url is https
+W1A publish() call took 0.62 ms
+PASS 13 publish() starts and returns in under 15 ms (no waiting on the net)
+PASS 14 a second publish while one is in flight is skipped
+SNAPSHOT: first publish ok (200, 8035 bytes)
+W1A upsert answer: 200 (ok)
+PASS 15 upsert answered 2xx
+W1A read back: updated_at 2026-11-15T20:14:54+00:00, heroes ["W1aTestKnight", "W1aTestMage"]
+PASS 16 read back with the publishable key: our row
+W1A publishable-key write -> 401
+PASS 17 a write with the publishable key is refused
+W1A_TEST OK
+WARNING: SNAPSHOT: last publish still in flight - skipping this beat
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _note (res://scripts/snapshot_pub.gd:681)
+       [1] publish (res://scripts/snapshot_pub.gd:637)
+       [2] _run (res://tools/_w1a_test.gd:169)
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+
+RC=0

@@ -269,6 +269,18 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       Chronicle line that announced each piece, (c) one caravan that carried an above-cap piece and
       one that was intercepted and lost it, and (d) a 1080p capture of a shop pane where what is on
       the shelf matches what that shop's level allows. Gates green, parse 0 errors, payload under cap.
+      STAGE D64a DONE (game build, 2026-11-15 ~14:30 CT) - .1 + .2 in the game build's OWN files only
+      (economy.gd, town.gd, snapshot_pub.gd): Economy.RARITY ranks the unchanged ladders (0 none, 1
+      common, 2 uncommon, 3 rare, 4 epic, 5 legendary = found-only); the SMITHY is a building with a
+      level (shop_grown from town growth, today's curve unchanged + shop_raised from viewers) and that
+      level alone sets Roster.town_tier, the counter's ceiling; raise_shop(key, by, who) is D66's entry
+      point and cries the raise crediting who paid; a daily counter watch says plainly, once per hero per
+      level, when a hero with the gold is turned away by the cap; the rack's draped pegs read
+      "<rarity> / smithy lv N"; the snapshot town block gains `shops` [{name, level, sells_to}]
+      (additive, v stays 4). D64_TEST OK 17/17. OPEN: .2's per-shop cap for the other counters, .3
+      route-tagged Chronicle lines and .4 the caravan's above-cap piece all need roster.gd / chatcmd.gd /
+      gear.gd, which COORDINATION 11.2 gives to LAPTOP CODE and the game build's standing brief forbids
+      it to touch - the supervisor or Mr. E must reassign those files (or this item's remainder) first.
 
 - [ ] D65. EVERY CALLING STARTS AS ITSELF, AND TWO HEROES AT ONE TIER ARE NOT THE SAME OBJECT. Owner:
       DESKTOP BUILD (scripts/gear.gd, scripts/roster.gd, scripts/hero_body.gd). Mr. E's ruling 5 and
@@ -323,7 +335,7 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       upgraded building in the world; proof from the same run that the upgraded shop now stocks a tier
       it previously refused (ties D64); TWITCH_PARSE OK, W1A_TEST OK, gates green, payload under cap.
 
-- [ ] C7. THE EQUIPMENT CATALOGUE - NAMES, FLAVOUR AND CLASS KITS FOR GEAR THAT HAS STAKES. Owner:
+- [x] C7. THE EQUIPMENT CATALOGUE - NAMES, FLAVOUR AND CLASS KITS FOR GEAR THAT HAS STAKES. Owner:
       CONTENT WRITER (data/items.json ONLY - never code, never gear.gd). Mr. E's ruling 6: 6 weapon
       tiers and 6 armour tiers against 886 appearance items, and the thin one is the only one with
       mechanical stakes. Write the catalogue the gates will stock.
@@ -341,6 +353,13 @@ rescopes an existing item; D64-D66 and C7 are new IDs.
       DONE: json validates; every pre-existing key byte-identical; counts stated per family, per tier and
       per route; the fifteen starting kits listed in the summary as calling -> weapon + armour; and a
       plain statement of the exact keys and shape the game build worker reads.
+  RESULT (content C-51, merged 2026-11-15): data/items.json gains an `equipment` block - 86 named
+  weapons (blade 22, arcane 21, axe 17, ranged 16, open 10) and 33 armour pieces, each keyed by id with
+  {name, family, tier (0-5 index into gear.gd's unchanged ladder), tier_name, routes, flavour}, plus the
+  15 starting kits as calling -> {weapon, armour, family}. No cost/atk/hp/ac is stated anywhere - those
+  stay in gear.gd, so .1's "do not contradict the ladder" holds by construction. `routes` carries
+  looted/forged/shop/caravan, which is what gives D64.3's three routes and D64.4's above-cap caravan piece
+  real catalogue entries. JSON validates; pre-existing keys unchanged (additive block only).
 
 
 ## MR. E'S ASK, Nov 15 13:36 - UPDATE BELLMIREBRO
@@ -562,6 +581,29 @@ Work these FIRST, in roughly this order, regardless of where they sit elsewhere 
 T5 IS THE LARGEST SINGLE GAP. Mr. E called the viewer's roll "the heart" of viewer interaction and
 it is still unbuilt while its words have been written since C-cycle 38. Treat it as the headline.
 
+### WORKERS: THIS OVERRIDES YOUR BRIEF
+Your standing prompt tells you to take the FIRST unchecked item in your section. WHILE PHASE RC IS
+OPEN, THAT RULE IS SUSPENDED. Take the first PHASE RC item you own instead, wherever it sits in
+this file - search the file for its ID. Only if you own no open RC item do you fall back to your
+brief's first-unchecked rule. Say in your summary which RC item you took and why, or that you had
+none and fell back.
+SUPERVISOR: each run, also physically move the open RC items toward the top of their sections, so
+a worker that misses this note still lands on the right work.
+
+### BLOCKED, NEEDS MR. E: FOUR PHASE RC ITEMS HAVE NO WORKER (supervisor, 2026-11-15 15:05 CT)
+This is a report, not a reassignment - the supervisor is not changing anyone's ownership here.
+L56, L68, L69 and L70 sit in PHASE RC above, and the remainder of D64 (.3 and .4) depends on the
+same files. All of them are marked "Owner: LAPTOP CODE" - worker 3 in COORDINATION 11.1, which ran
+on the jestai laptop. jestai was retired on Nov 15 and only four workers were recreated on
+cruzader: game build, content writer, hub build and HUD. Worker 3 was never rebuilt, so the files
+it owns (floorgen, dungeon_parts, dungeon_hd, bestiary, monster, gear, roster, chatcmd, delve,
+Dungeon.tscn, and data/ except the four content files) have an owner on paper and nobody to do the
+work. These items are unstartable rather than merely unstarted, and the game build worker's own
+D64a note says so in as many words. L55's gear-tier bug has been unowned since the D28 census for
+the same reason. Mr. E's call: either widen the game build worker's ownership to cover those files
+(it already works on branch `laptop`, so no branch move is involved), or stand up a fifth worker
+for them. Until he decides, every worker should skip these and take the next RC item it does own.
+
 ### THE RULE THAT MAKES THIS WORK
 WHILE ANY PHASE RC ITEM IS OPEN, DO NOT WRITE NEW ITEMS unless a worker has NO RC item it can take
 AND no open item at all. The "write new work when a queue runs dry" instruction still stands - it is
@@ -598,6 +640,153 @@ Do not re-scope or renumber anything to fit this. IDs stay frozen.
       approves them. He declined to approve the first set precisely so they could be redone here.
       DONE: a project with key, tempo family and leitmotif; stem-wired transitions proven in a
       capture; variations shuffling; every bed's speech room passing; Mr. E's approval recorded.
+
+## MR. E'S ASK, Nov 15 15:30 - "GET ALL OF IT BUILT, HAVE ALL OF THEM BECOME THEIR OWN ITEM
+## INSTEAD OF A NAME"
+
+THE MEASURED PROBLEM (audited 15 Nov from the shipped data):
+  - 230 accessories have NO art at all - no model, no colour. Every ring, amulet, cloak, boot and
+    glove is a name, a cost and a stat. A viewer who buys the Ring of the Night Watch sees nothing.
+  - 224 hats and banners carry a COLOUR only, no mesh of their own.
+  - 183 titles are text, which is correct and not a gap.
+  - Weapons and armour SHARE geometry; gear.gd separates top tiers by size and glow, not by shape.
+  - The project holds 254 models and NONE of them is a ring, amulet, cloak, boot, glove or hat.
+    assets/gear has 32 weapons and tools; props, nature, fishing, dungeon and animals cover the
+    rest. There is no existing art to lean on for this.
+
+SEQUENCING - READ THIS BEFORE STARTING EITHER ITEM. Neither D73 nor D74 is in PHASE RC. Mr. E asked
+for completion at 14:50 and for this at 15:30; taken literally, doing these first DELAYS the
+finish line. So: D73 may be worked when its owner has NO open RC item. D74 does not start until
+Phase RC is closed, OR Mr. E says in writing to bring it forward. Do not quietly start D74 because
+a queue looked thin.
+
+- [ ] D73. EVERY ITEM GETS A FACE - PROCEDURAL ICONS FOR ALL 454 (the cheap half, do this one
+      first). Owner: DESKTOP BUILD, with a generator tool checked into tools/.
+      An icon is not a worn model. It is a small rendered image that identifies an item wherever it
+      is NAMED - the hub's Satchel and hero sheet, the shop, the Chronicle, chat's answer to a
+      !hero. It costs a fraction of D74 and removes most of the "it's just a name" problem.
+      HOW, and this is the point: generate them PARAMETRICALLY in headless Blender from each
+      item's OWN data, so 454 icons do not need 454 sculpts. A base shape per slot (ring, amulet,
+      cloak, boots, gloves, hat, banner), varied by the fields the item already carries - cost
+      drives ornateness and material, `colour` drives the palette where present, the slot drives
+      the silhouette, and a hash of the item key picks among a handful of shape variants so two
+      rings are not the same ring. Render on transparent, one PNG per item, checked in.
+      PROVEN APPROACH, use it: headless `blender -b -P <script>` in a SEPARATE process. Never
+      drive Mr. E's open Blender session. Two traps found the hard way on 15 Nov, both real:
+        - The animal models are authored at ~700-unit scale while gear sits near 2. A camera with
+          the default clip_end of 100 renders them as EMPTY transparent images and reports success.
+          Set clip_start/clip_end from the measured bounds, always.
+        - Do not embed the same image many times as base64 in one document; reference files.
+      DONE: a PNG for all 454, none blank (assert opaque pixel count > 0 for every file - that is
+      the check that would have caught the three empty renders), a contact sheet to look at, and
+      the hub showing an icon beside an item in a hero's Satchel.
+
+- [ ] D74. ITEMS YOU CAN SEE ON THE HERO (the expensive half - DO NOT START until Phase RC is
+      closed or Mr. E brings it forward in writing). Owner: DESKTOP BUILD (rig.gd, hero_body.gd)
+      with laptop code for the dungeon side.
+      This is what "their own item instead of a name" means in full: a cloak that hangs, a hat that
+      sits on the head, boots and gloves that move with the body, a ring that is visible when the
+      camera is close. It is a MUCH larger job than D73 and must be scoped honestly:
+      .1 BONES AND SLOTS FIRST. The rig already has EQUIP handslot bones (see L30a). Extend to
+         head, back/cloak, feet, hands, neck. One attachment system, driven by the item's slot.
+      .2 A MESH FAMILY PER SLOT, NOT 454 SCULPTS. Same parametric idea as D73 but producing real
+         game meshes: a handful of base shapes per slot, varied by material, colour and scale.
+         454 bespoke models is not a realistic target and should not be attempted.
+      .3 PERFORMANCE IS THE CONSTRAINT, NOT ART. Up to 24 heroes on screen, each potentially
+         wearing five accessories plus a hat. That is 144 extra meshes. D23 is already fighting
+         for frame rate. Budget it, LOD it, and hide accessories beyond a distance - measure
+         before and after against D23's numbers.
+      .4 IT MUST READ AT STREAM DISTANCE. A ring nobody can see at the normal camera height is
+         wasted work. Decide per slot what is worth rendering at all; cloaks and hats read, rings
+         may only read in a close pane.
+      DONE: a hero wearing a cloak, hat, boots and gloves, visible in a 1080p capture at normal
+      stream distance; a crowd capture with 20+ equipped heroes holding D23's frame rate; and a
+      stated list of which slots render at which distance.
+
+## THE ART LANE RUNS IN PARALLEL (Mr. E, Nov 15 15:35) - NEW OWNER, NEW BRANCH
+
+His observation, and he is right: making art needs BLENDER, not Godot. So an art worker does not
+compete for docs/RUN_LOCK.txt and can run at the same time as the game build and HUD workers.
+That roughly doubles throughput on the ~570-piece art backlog without slowing Phase RC.
+
+  OWNER:    ART WORKER
+  BRANCH:   `art`     WORKTREE: C:\hd adventure\bellmire-art     (both created 15 Nov)
+  OWNS:     assets/** (new art it generates), tools/ art generators, renders/art/**
+  NEVER:    launches Godot. Never reads, writes or respects RUN_LOCK - it is not in that queue.
+  QUEUE:    D75 (the eight lords) -> D73 (icons for all 454) -> D76 (monster variety). D74 waits
+            for Phase RC to close.
+
+MR. E'S RULING (15 Nov 15:40) - THE ART LANE NEVER THROTTLES ITSELF. "I don't care if we go up to
+200 fps, my machine can handle it." So the art worker renders whenever it likes, including while a
+performance soak is running. It does not read RUN_LOCK at all.
+THE MEASUREMENT POINT STILL STANDS, but it cuts the other way and belongs to the GAME BUILD worker,
+not to art: a soak that PASSES while Blender is rendering on the same box is a STRONGER result than
+a clean-room pass, because the game held frame rate under load. Only a FAILED soak is ambiguous -
+if D23 or L56 fails, the game build worker re-runs it when the machine is quiet BEFORE anyone acts
+on the number. Nobody idles waiting for anybody.
+
+SUPERVISOR: merge `art` like any other branch, tick its items, and sync the plan to it each run.
+
+## MR. E'S PRINCIPLE, Nov 15 15:33 - BINDING ON EVERY WORKER AND ON THE SUPERVISOR
+
+  "go through everything - designs, game designs, bosses, monsters, items, equipment, cosmetics,
+   animals, everything - and make sure they all have their designs, not just spoken in name.
+   PEOPLE WANT TO SEE WHAT THEY PAY FOR, NOT JUST A STAT."
+
+This is a product rule, not a task. From now on: NOTHING A VIEWER CAN SPEND ON OR MEET SHIPS AS A
+NAME AND A NUMBER. If a thing can be bought, worn, fought or found, it must be visible as itself.
+When you write a new item of content, say what it LOOKS like, not only what it does. When you
+write a new work item that adds content, include how it will be seen.
+
+### THE ART CENSUS, measured 15 Nov - this is the true scale of the ask
+| What | Entries in data | Distinct models | Gap |
+|---|---|---|---|
+| Accessories (ring/amulet/cloak/boots/gloves) | 230 | 0 | 230 |
+| Hats and banners | 224 | 0 (colour only) | 224 |
+| Monster families | ~109 | 10 | ~99 |
+| Lords (4 lesser + 4 greater) | 8 | 0 bespoke | 8 |
+| Lord uniques | 270 | variants of the above | - |
+| Pets | 30 | 9 | - |
+| Weapons / armour tiers | 12 | shared geometry, size+glow | - |
+| Buildings | ~16 kinds | 12 | a few |
+Roughly **570 distinct pieces of art** do not exist. The project holds 254 models in total today.
+
+### THE FINDING NOBODY HAD WRITTEN DOWN
+**Your bosses are wearing hero bodies.** bestiary.gd builds a lord's model as `ADVC + body + ".glb"`
+from the ADVENTURER character set - and falls back to `Roster.CLASSES[cls]["model"]`. The Hollow
+King, Grubmother, Rattling Host, Nightwing, Gravewyrm, Ossuary Lord, Pale Duchess and Mourncoil
+are all reskinned adventurers. Every one of the 270 uniques inherits that. The biggest moment in a
+delve - a lord rising - is a hero model with a different name over its head. Fixing those EIGHT is
+the highest value-per-unit art in the whole project, and it is a small number.
+
+### HONEST SEQUENCING - the supervisor must not pretend this is small
+Taken in full this is LARGER THAN EVERYTHING IN PHASE RC COMBINED. It is the rest of the project,
+not a sprint. So it is ordered by what a viewer actually sees, most-seen first:
+  1. D75 THE EIGHT LORDS - bespoke, bought with the most viewer attention per asset.
+  2. D73 ICONS FOR EVERYTHING NAMED - cheap, parametric, covers all 454 items at once.
+  3. D76 MONSTER VARIETY - ~109 families sharing 10 models is the most-repeated visual in a delve.
+  4. D74 WORN ITEMS ON THE HERO - the expensive one; after Phase RC.
+ASSET CONSTRAINT, do not forget it: CC0 only (Quaternius, KayKit, Kenney) with a LICENSE note, and
+**Quaternius Bestiary / QAL is FORBIDDEN** - which is exactly the pack that would have solved the
+monsters. Procedural generation in headless Blender is therefore the main route, not asset hunting.
+
+- [ ] D75. THE EIGHT LORDS MUST LOOK LIKE LORDS. Owner: DESKTOP BUILD (bestiary.gd model path,
+      rig.gd) + a generator in tools/. Eight bespoke silhouettes - Hollow King, Grubmother,
+      Rattling Host, Nightwing, Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil - each readable
+      as ITSELF at stream distance, built from their written canon in bosses.json and lore_lines.
+      Not a reskinned adventurer. Their 270 uniques then read as variants of a real thing.
+      This is the single highest-impact art item in the plan: eight assets, maximum viewer
+      attention, and it makes every boss encounter land.
+      DONE: eight 1080p captures at stream distance, each lord distinguishable from the others and
+      from any hero, with the Chronicle naming it; D23's frame rate held in a delve soak.
+
+- [ ] D76. ~109 MONSTER FAMILIES SHARE 10 MODELS. Owner: DESKTOP BUILD + laptop code (bestiary.gd).
+      A delve is the most-watched thing on the stream and it is ten creatures wearing many names.
+      Build a parametric creature system - body plans varied by size, limbs, colour, texture and
+      silhouette, driven by the family's own written description - so a scarrat is not a rat with
+      a different label. Do NOT attempt 109 sculpts.
+      DONE: a 10-floor soak capture where consecutive floors are visibly different; a contact sheet
+      of every family; frame rate held.
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
@@ -1910,6 +2099,23 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       categories are written + the picker already handles them - they just need their triggers to call
       notables._e3po_say(cat[,sub]). Also v2: let him ACTIVELY fight and intercept his fall->withdraw
       (v1 keeps him out of combat to guarantee he never dies). Flagged for Mr. E / laptop.
+- [ ] D38. ON HOLD BY MR. E (2026-11-15 13:34) - DO NOT WORK THIS ITEM, DO NOT REGENERATE THE BEDS,
+      DO NOT TICK IT. He listened to the four beds and both stings and said they "sound good", but he
+      is UPGRADING music-studio first and wants them REDONE on the upgraded tool before he approves
+      anything. The current files in assets/audio/music/ (bellmire_day/night/raid/delve + the two
+      stings) STAY as they are and stay wired - they are good enough to stream on. Leave them alone.
+      The three open questions (raid style vs the hype tempo gate, night's level, whether the delve
+      bed should be director-driven) are DEFERRED until after the regeneration - do not answer them
+      on his behalf and do not raise them with him again until he says the tool is ready.
+      HE WILL SAY WHEN. Until he does, this item is not available to any worker.
+      The upgrade he is making covers: a genuinely headless CLI, the compose() bias-knob bug, the
+      style/mood tempo conflict, STEMS/vertical layering, long-form variation, project key+tempo
+      coherence, leitmotif, transition cues, better seed search, and later procedural crowd/creature
+      vocalisations, ambience and impact SFX.
+      WHEN STEMS LAND, THE WIRING CHANGES: D22b's sfx.gd crossfades whole tracks. With stems it
+      should fade LAYERS instead - the same piece with more of it as the town fills or a raid builds.
+      That is a better system than what shipped; write it as a new item then, do not retrofit it now.
+
 - [ ] D38. MUSIC - AN RPG FEEL. Better music throughout. Source from music-studio (READ-ONLY; copy out, never modify). DONE: day/night/raid/delve themes Mr. E approves.
       MR. E APPROVED THIS RECIPE (Nov 15) - generate fresh, do not hand-pick existing files.
       TOOL: C:\Users\morta\music-studio (v3.5.2). READ-ONLY: run it in place, copy WAVs OUT into
@@ -3102,7 +3308,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       moments present, and the town's lines still there alongside them. State the payload KB before and
       after against D59a's 244 KB and the stated cap. W1A_TEST OK, TWITCH_PARSE OK, D60_CHRON OK, parse 0.
 
-- [ ] H26. THE JOURNAL STOPS GUESSING. Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md).
+- [x] H26. THE JOURNAL STOPS GUESSING. Owner: HUB BUILDER (web/app.js, web/style.css, web/NOTES.md).
       H21 built the campaign journal before the publisher could tell it anything, so it guesses twice: it
       splits the campaign into "stretches" on a 90-minute wall-clock gap because no line carried a date, and
       it decides which lines are about a hero by matching their name as a whole word in the text. D60 shipped
@@ -3124,6 +3330,13 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       whose lines never spell their name the same way, a v=3 payload pasted into a mock still rendering the
       old grouping with the fallback labelled, the hostile-name test passing on a `who` entry and a `kind`
       value, and all six query-string states passing.
+  RESULT (hub 41125a4, 2026-11-15): the journal groups by the town's own `day` and says so in the heading,
+  with H21's 90-minute wall-clock split kept as a LABELLED fallback for untagged rows; hero lines come from
+  `who` and the name-match fallback is marked inferred; the Event filter prefers `kind` and states how many
+  rows it could not classify. `day`/`kind`/`who` are validated as a bounded number / bounded identifier /
+  capped array before storage and before the DOM; every string still goes through el(); no snapshot field is
+  used as a URL, src, href or style; CSP byte-identical. Adds ?mock=journal and ?mock=journal3. Supervisor
+  review: the diff introduces no innerHTML/outerHTML/insertAdjacentHTML/eval/new Function and no URL sink.
 
 # Phase AG - the hub's queue was one item deep (supervisor, 2026-11-15 14:05, CORRECTED 14:12)
 # H26 is the hub's last unchecked item, so two were written to keep the builder fed. The first pair

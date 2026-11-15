@@ -70,12 +70,25 @@ WHAT THAT MEANS, stated so no worker has to guess:
      reliable route. That chance is what makes a caravan worth watching on stream - and it is why
      D39 (traders must matter) and bandits intercepting them have real stakes.
 
-CONSEQUENCE FOR THE PLAN: gear variety is useless without the gates above. Do NOT write "add more
-weapons" as an item. Write the SYSTEM - tiers, shop levels, the upgrade poll, the caravan chance -
-and let the content writer fill the catalogue into a structure that already enforces the rules.
-Today there are 12 gear tiers in scripts/gear.gd (6 weapon across blade/axe/arcane/ranged, 6
-armour) against 886 appearance items in data/items.json. The thing with mechanical stakes is the
-thin one. That is the imbalance to fix, in this order: gates first, then catalogue.
+  5. EVERY HERO STARTS WITH THE MOST BASIC GEAR OF THEIR CLASS (Mr. E, 11:47). Not nothing.
+     Today tier 0 is "bare hands" (1d4, atk 0) and "rags" (0 hp, 0 ac) for EVERY calling, so a
+     Knight and a Mage begin identically holding nothing. That is wrong. A calling's starting kit
+     must be the plain, humble version of what that calling actually carries - a knight's worn
+     sword and gambeson, a mage's walking staff and travelling robes, a ranger's hunting bow, a
+     rogue's knife. Cheap, weak, unglamorous, and UNMISTAKABLY that class. "Bare hands" stays only
+     as the genuinely-unarmed fallback, not as everyone's default.
+     There are 15 callings (blade 5, axe 2, ranged 1, arcane 6, 1 open) sharing 6 weapon tiers.
+
+  6. AND YES - WE DO NEED MORE EQUIPMENT (Mr. E, 11:47). This is not only a gating job. The
+     catalogue itself is too thin: 6 weapon tiers and 6 armour tiers against 886 appearance items.
+     Expand it. More weapons and armour per family and per tier, so two heroes of the same calling
+     at the same tier are not holding an identical object, and so loot, forge and shop each have
+     something of their own to offer.
+
+CONSEQUENCE FOR THE PLAN - BOTH HALVES, and the gates come first only because the catalogue needs
+somewhere to land. Write the SYSTEM (class starting kits, tiers, shop levels, the upgrade poll, the
+caravan chance), and expand the CATALOGUE into it. Do not do one and call the item done. Gear
+variety without the gates is noise; gates without variety is an empty shop. Mr. E asked for both.
 
 ## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
 

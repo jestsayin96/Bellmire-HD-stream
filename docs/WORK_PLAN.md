@@ -1,5 +1,50 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### C-55 - ONE RARITY LADDER FOR THE WHOLE GAME (content lane, Mr. E Nov 15 17:56)
+
+Mr. E listed "common, uncommon, rare, epic, legendary, s+, ss+, sss+. or however the DnD labels
+them" and asked for a recommendation. DECIDED: D&D's six. No S-tiers.
+
+MEASURED FIRST:
+  - A rarity ladder ALREADY EXISTS AND IS LIVE, but only for fishing: junk, common, uncommon,
+    rare, epic, legendary (chatcmd.gd ~69; angler.gd colours a catch by it; 21 "rarity" keys in
+    fishing.json).
+  - EQUIPMENT HAS NO RARITY AT ALL. 119 entries in items.json carry "tier_name" and NOT ONE
+    carries "rarity". The 230 accessories carry none either. So the fish in the river have
+    rarities and the sword in a hero's hand does not. That is the gap.
+
+THE LADDER, AND WHY THE LAST RUNG IS A MECHANIC AND NOT A WORD:
+    junk (fishing only) -> common -> uncommon -> rare -> very rare -> legendary -> artifact
+In D&D an ARTIFACT is unique and FOUND - it is never bought. gear.gd already says exactly that:
+scarforged and scarwoven mail are "found": true with cost 0. So "artifact" is not a fancier word
+for legendary, it is THE LABEL THAT ENCODES MR. E'S OWN ECONOMY RULING: a shop may stock a
+legendary at a high enough level; IT MAY NEVER STOCK AN ARTIFACT, at any level, and the trader
+may never carry one either. Enforce that in code, not just in the name.
+Six rarities map ONE-TO-ONE onto the six weapon and six armour tiers:
+  common bare hands/rags · uncommon plain steel/leather · rare fine steel/chainmail ·
+  very rare runed/plate · legendary dragontooth/warded plate · ARTIFACT scarforged/scarwoven
+"junk" stays below common for FISHING ONLY - a wet boot is not common, it is junk.
+
+NO S-TIERS, AND THE REASON IS THE REGISTER. S+/SS+/SSS+ is gacha convention. Bellmire's voice is
+plainness ("Measured the grain. Counted the flasks. Kept the door."). An "SSS+ Longsword" beside
+that line is a tonal collision, and it would say nothing "artifact" does not already say better.
+"Epic" goes too: it is MMO vocabulary, not D&D, and it is the one rung with no D&D meaning.
+
+THE WORK:
+  1. Rename epic -> very rare: five entries in fishing.json and the order array in chatcmd.gd.
+     Small, and it is the only thing viewers will notice changing.
+  2. Add "rarity" to all 119 equipment entries and all 230 accessories, derived from tier and cost
+     - do not hand-assign 349 values, derive them and spot-check.
+  3. One shared ladder constant, read by fishing, gear, shops, the trader and the hub. NOT three
+     copies that drift.
+  4. Shop stock and trader cargo honour it: the existing tier gate decides how high a shop reaches,
+     and ARTIFACT IS OUTSIDE THE GATE ENTIRELY - unreachable by purchase at any level, by anyone.
+  5. The hub and the icons use the rarity for colour, so a viewer learns the ladder by looking.
+     D73's icons already colour by stat for accessories; rarity is the better axis for a border
+     or a frame - keep both, they say different things.
+  6. Rarity is a LABEL ON EXISTING TIERS, not a new stat. It changes no numbers. If anyone finds
+     themselves balancing with it, stop - that is tier's job.
+
 ### WEAR IS A VARIABLE, NOT A STYLE (Mr. E, Nov 15 17:50) - READ THIS BEFORE ANY ART DECISION
 "just a reminder the town levels up so not everything is going to look used and abused just
 remember that".

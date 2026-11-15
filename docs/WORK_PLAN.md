@@ -641,6 +641,68 @@ Do not re-scope or renumber anything to fit this. IDs stay frozen.
       DONE: a project with key, tempo family and leitmotif; stem-wired transitions proven in a
       capture; variations shuffling; every bed's speech room passing; Mr. E's approval recorded.
 
+## MR. E'S ASK, Nov 15 15:30 - "GET ALL OF IT BUILT, HAVE ALL OF THEM BECOME THEIR OWN ITEM
+## INSTEAD OF A NAME"
+
+THE MEASURED PROBLEM (audited 15 Nov from the shipped data):
+  - 230 accessories have NO art at all - no model, no colour. Every ring, amulet, cloak, boot and
+    glove is a name, a cost and a stat. A viewer who buys the Ring of the Night Watch sees nothing.
+  - 224 hats and banners carry a COLOUR only, no mesh of their own.
+  - 183 titles are text, which is correct and not a gap.
+  - Weapons and armour SHARE geometry; gear.gd separates top tiers by size and glow, not by shape.
+  - The project holds 254 models and NONE of them is a ring, amulet, cloak, boot, glove or hat.
+    assets/gear has 32 weapons and tools; props, nature, fishing, dungeon and animals cover the
+    rest. There is no existing art to lean on for this.
+
+SEQUENCING - READ THIS BEFORE STARTING EITHER ITEM. Neither D73 nor D74 is in PHASE RC. Mr. E asked
+for completion at 14:50 and for this at 15:30; taken literally, doing these first DELAYS the
+finish line. So: D73 may be worked when its owner has NO open RC item. D74 does not start until
+Phase RC is closed, OR Mr. E says in writing to bring it forward. Do not quietly start D74 because
+a queue looked thin.
+
+- [ ] D73. EVERY ITEM GETS A FACE - PROCEDURAL ICONS FOR ALL 454 (the cheap half, do this one
+      first). Owner: DESKTOP BUILD, with a generator tool checked into tools/.
+      An icon is not a worn model. It is a small rendered image that identifies an item wherever it
+      is NAMED - the hub's Satchel and hero sheet, the shop, the Chronicle, chat's answer to a
+      !hero. It costs a fraction of D74 and removes most of the "it's just a name" problem.
+      HOW, and this is the point: generate them PARAMETRICALLY in headless Blender from each
+      item's OWN data, so 454 icons do not need 454 sculpts. A base shape per slot (ring, amulet,
+      cloak, boots, gloves, hat, banner), varied by the fields the item already carries - cost
+      drives ornateness and material, `colour` drives the palette where present, the slot drives
+      the silhouette, and a hash of the item key picks among a handful of shape variants so two
+      rings are not the same ring. Render on transparent, one PNG per item, checked in.
+      PROVEN APPROACH, use it: headless `blender -b -P <script>` in a SEPARATE process. Never
+      drive Mr. E's open Blender session. Two traps found the hard way on 15 Nov, both real:
+        - The animal models are authored at ~700-unit scale while gear sits near 2. A camera with
+          the default clip_end of 100 renders them as EMPTY transparent images and reports success.
+          Set clip_start/clip_end from the measured bounds, always.
+        - Do not embed the same image many times as base64 in one document; reference files.
+      DONE: a PNG for all 454, none blank (assert opaque pixel count > 0 for every file - that is
+      the check that would have caught the three empty renders), a contact sheet to look at, and
+      the hub showing an icon beside an item in a hero's Satchel.
+
+- [ ] D74. ITEMS YOU CAN SEE ON THE HERO (the expensive half - DO NOT START until Phase RC is
+      closed or Mr. E brings it forward in writing). Owner: DESKTOP BUILD (rig.gd, hero_body.gd)
+      with laptop code for the dungeon side.
+      This is what "their own item instead of a name" means in full: a cloak that hangs, a hat that
+      sits on the head, boots and gloves that move with the body, a ring that is visible when the
+      camera is close. It is a MUCH larger job than D73 and must be scoped honestly:
+      .1 BONES AND SLOTS FIRST. The rig already has EQUIP handslot bones (see L30a). Extend to
+         head, back/cloak, feet, hands, neck. One attachment system, driven by the item's slot.
+      .2 A MESH FAMILY PER SLOT, NOT 454 SCULPTS. Same parametric idea as D73 but producing real
+         game meshes: a handful of base shapes per slot, varied by material, colour and scale.
+         454 bespoke models is not a realistic target and should not be attempted.
+      .3 PERFORMANCE IS THE CONSTRAINT, NOT ART. Up to 24 heroes on screen, each potentially
+         wearing five accessories plus a hat. That is 144 extra meshes. D23 is already fighting
+         for frame rate. Budget it, LOD it, and hide accessories beyond a distance - measure
+         before and after against D23's numbers.
+      .4 IT MUST READ AT STREAM DISTANCE. A ring nobody can see at the normal camera height is
+         wasted work. Decide per slot what is worth rendering at all; cloaks and hats read, rings
+         may only read in a close pane.
+      DONE: a hero wearing a cloak, hat, boots and gloves, visible in a 1080p capture at normal
+      stream distance; a crowd capture with 20+ equipped heroes holding D23's frame rate; and a
+      stated list of which slots render at which distance.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.

@@ -1262,3 +1262,21 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - AFTER: cadence 1.22-1.41x, corr(v,scale) 0.73, 0 flips, slip>25% 1/588. Shots renders/cycles/d58/ (19-24 walkers).
 - GATES: parse 0 errors; OFFFLOOR 0/1483; TWITCH_PARSE OK; TOWNWALK PASS (in_solid 0.012%); delve 0 SCRIPT ERROR.
 - NOTE: routes now take ~1.5x longer; if the town feels sleepy, raise Townsfolk.stroll toward 0.75 (stays out of the jog band up to ~0.9).
+
+## D-cycle - D21b.4 the cavalry charge lands + raid FPS soak, 2026-11-15 04:30 (game build)
+- Item: D21b remainder (first open DESKTOP item): a cavalry charge that lands, FPS holds. D21b now ticked.
+- CHANGE scripts/raids.gd (backup raids.gd.bak_d21b4, not committed): _engage arms a charge for a Cavalry
+  defender >CHARGE_FROM 9 m out (gallop x1.3); on contact after >=CHARGE_RUNUP 6 m -> _charge_lands: advantage
+  roll, +2d6, _hurt_raider knockback 2.4 m (tween, keep_walkable), trample 1d6/1.3 m within 2.6 m, Spells._burst
+  + _ground_ring in dust colour, horse_neigh + loud hit_impact, CHARGE! Label3D (_shout, FELLED! family), one
+  Chronicle line per raid; then _wheel rides 12 m out (max 2.6 s) and the rider re-arms. Telemetry: charges,
+  charges_landed, tramples. No new class_name, no new asset.
+- TEST tools/_d21b4_test.gd: headless D21B4 OK (riders 4, charges 2, landed 2, tramples 4); windowed 1080p
+  D21B4 OK (charges 6, landed 5, FPS avg 76.4 over 30 s) + shot renders/cycles/d21b4/charge_A.png - looked at:
+  CHARGE! banner, 24-dmg lance number, trample 1s, dust burst all read at pane distance.
+- FPS A/B (same script, CHARGE_FROM forced off): avg 75.5 min 48 -> the charge costs nothing. Raid frames sit
+  ~50-60 for the first ~14 s in BOTH runs; the A run's single 25 dip is the screenshot frame. D23 owns raid FPS.
+- GATES: --import clean; parse 0 errors; TWITCH_PARSE OK; OFFFLOOR 0/1402 INPROP 0 MON_INPROP 0/130; delve rc 0
+  no SCRIPT ERROR; TOWNWALK in_solid 3/17482 (0.017%) raid_in_solid 0/8089 PASS; D21B3 OK; D21B_FX OK.
+- MERGE NOTE: origin/main ff-merged via the Windows git (device_bash git cannot unlink files in the mount); an
+  untracked tools/_u26_shot.gd identical to main's was moved aside to tools/_u26_shot.gd.bak_premerge.

@@ -21,12 +21,74 @@ and one coherent pass over ui_theme.gd so every panel reads as one designed inte
 
 RESOLVED 2026-11-15 12:05: the supervisor wrote that work - Phase AE at the END of this file,
 items L65, L64, L66, L67, in that order, all inside the HUD worker's own seven files. The HUD
-worker's queue is NO LONGER DRY. Take L65 first. L31, L36 and L40 stay unchecked and stay NOT the
-HUD worker's - that is still true and is still the reason below.
+worker's queue is NO LONGER DRY. L31, L36 and L40 stay unchecked and stay NOT the HUD worker's -
+that is still true and is still the reason below.
+
+HUD WORKER, READ THIS BEFORE YOU STAND DOWN (supervisor, 2026-11-15 11:05 CT - the 10:52 run stood
+down with "no item it is allowed to build", which is NOT TRUE and has now cost a cycle):
+  YOUR PROMPT'S QUEUE LIST IS STALE. It names L61, L31, L36 and L40 and stops there. It was written
+  before Phase AE existed and the supervisor cannot edit it - only Mr. E can. THIS FILE IS
+  CANONICAL, and this file gives you three open items in YOUR OWN SEVEN FILES, written to the
+  "HOW BIG AN ITEM SHOULD BE" bar, at the END of this file under Phase AE:
+      L64  THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS   (auto_director.gd)
+      L66  THE LEADERBOARD IS A SEASON, NOT A TOP FIVE                 (leaderboard_panel.gd)
+      L67  THE FEED MUST SURVIVE A RAID                                (feed_hud.gd)
+  L61 and L65 are ticked. TAKE L64 NOW, in that order after it. Scroll to Phase AE and read the
+  item's full staged text and its DONE test. You have work. Do not stand down, and do not re-derive
+  the L31/L36/L40 analysis - it is already written below and nothing about it has changed.
 
 DO NOT reassign boss_bar.gd, party_frames.gd, delve.gd or monster.gd to the HUD worker. Two workers
 in one file is how merges break. If Mr. E wants the L31 leftovers built, they go to their OWNER as
 a new item, not to the HUD worker.
+
+## MR. E'S GEAR AND ECONOMY RULING (2026-11-15 11:46 - BINDING, he designed this)
+
+His words, and the system they describe. Every gear, shop, trader and event item from here must
+obey it. This supersedes any earlier loose talk about "loot tables".
+
+  "gear can be obtained a number of ways, looting, buying in the shop, or forging at a blacksmith.
+   The only way progression would work is if they bought it in a shop. But reminder shops upgrade
+   depending on events. If people spend bits or channel points during an event poll to upgrade
+   specific shops and specific buildings or aspects of the town.
+   So a shop that is level 1 isn't going to sell epic or legendary equipment. Unless a trade
+   caravan comes along and per chance brings a higher tier item or equipment. All per chance when
+   it comes to the trader."
+
+WHAT THAT MEANS, stated so no worker has to guess:
+  1. THREE ROUTES TO GEAR, and they are NOT equivalent:
+     - LOOT from a delve: what the floor and the boss happened to drop. Chance.
+     - FORGE at the blacksmith: a hero spending their own gold, one step at a time (L55 shipped
+       this - Roster.kit_up_after_delve, armour first, KIT_RESERVE kept back).
+     - BUY at a shop: the ONLY reliable progression route. A hero who wants to climb, buys.
+  2. A SHOP'S LEVEL CAPS WHAT IT SELLS. A level 1 shop does not stock epic or legendary, no matter
+     how much gold a hero carries. Tier availability is a property of the BUILDING, not the buyer.
+  3. SHOPS AND BUILDINGS ARE UPGRADED BY VIEWERS, through an event poll, with bits or channel
+     points, naming the specific shop/building/aspect of the town to upgrade. This is the economic
+     spine of T4/T5 - the viewer roll is not decoration, it is how the town's ceiling rises.
+  4. THE TRADE CARAVAN IS THE ONLY WAY AROUND THE CAP, and it is PURE CHANCE. A caravan may
+     happen to carry one higher-tier piece. It is never guaranteed, never scheduled, never a
+     reliable route. That chance is what makes a caravan worth watching on stream - and it is why
+     D39 (traders must matter) and bandits intercepting them have real stakes.
+
+  5. EVERY HERO STARTS WITH THE MOST BASIC GEAR OF THEIR CLASS (Mr. E, 11:47). Not nothing.
+     Today tier 0 is "bare hands" (1d4, atk 0) and "rags" (0 hp, 0 ac) for EVERY calling, so a
+     Knight and a Mage begin identically holding nothing. That is wrong. A calling's starting kit
+     must be the plain, humble version of what that calling actually carries - a knight's worn
+     sword and gambeson, a mage's walking staff and travelling robes, a ranger's hunting bow, a
+     rogue's knife. Cheap, weak, unglamorous, and UNMISTAKABLY that class. "Bare hands" stays only
+     as the genuinely-unarmed fallback, not as everyone's default.
+     There are 15 callings (blade 5, axe 2, ranged 1, arcane 6, 1 open) sharing 6 weapon tiers.
+
+  6. AND YES - WE DO NEED MORE EQUIPMENT (Mr. E, 11:47). This is not only a gating job. The
+     catalogue itself is too thin: 6 weapon tiers and 6 armour tiers against 886 appearance items.
+     Expand it. More weapons and armour per family and per tier, so two heroes of the same calling
+     at the same tier are not holding an identical object, and so loot, forge and shop each have
+     something of their own to offer.
+
+CONSEQUENCE FOR THE PLAN - BOTH HALVES, and the gates come first only because the catalogue needs
+somewhere to land. Write the SYSTEM (class starting kits, tiers, shop levels, the upgrade poll, the
+caravan chance), and expand the CATALOGUE into it. Do not do one and call the item done. Gear
+variety without the gates is noise; gates without variety is an empty shop. Mr. E asked for both.
 
 ## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
 
@@ -53,13 +115,219 @@ what gets WRITTEN from now on, and the order they are offered: when several item
 substantial ones where a worker taking "the first unchecked item" will actually reach them, rather
 than leaving a queue that is all polish at the top.
 
+## MR. E'S ASK, Nov 15 11:51 - MAKE THE FESTIVAL ACTUALLY FEEL LIKE A FESTIVAL
+
+- [ ] D63. THE FESTIVAL MUST BE AN EVENT, NOT A BOOLEAN. Owner: DESKTOP BUILD (town.gd,
+      townsfolk.gd, sfx.gd, economy.gd, notables.gd, Town.tscn) with CONTENT writing the words
+      (see C6) and the HUD worker NOT involved - this happens in the world, not on a panel.
+      WHAT IT IS TODAY, measured: `_festival_pass` flips `festival = true` every 260-420 s for
+      55-85 s, points `festival_at` at the market square, and appends two feed lines. Idle
+      townsfolk walk there and mill about (`_maybe_gather`, `acts["festival"]`). That is the
+      entire feature. The feed line promises "music, stalls, and a crowd!" and the game delivers
+      a crowd. No stall is built, no music changes, nothing is sold, nobody gains anything, and
+      the heroes ignore it completely.
+      THIS IS NOT COSMETIC DEBT - IT IS SOLD. "Bellmire: Festival of Plenty" is a 500-bit
+      Custom Power-up. A viewer pays real money and gets bodies standing in a square for 70 s.
+      Fixing this is fixing a thing people have already bought.
+      .1 IT MUST LOOK LIKE ONE. The square dresses itself: stalls, bunting, banners, lanterns
+         after dark - built on the existing plot/landmark machinery, struck when it ends, CC0
+         assets only. A viewer glancing at the pane must know a festival is on without reading a
+         word of the feed.
+      .2 IT MUST SOUND LIKE ONE. D22a gave layered beds and a 24-voice pool; D22b gave music
+         moods. A festival gets its own: music lifts, crowd noise, a piper or a drum near the
+         square, trade chatter up. It returns to the ordinary day bed when the festival ends.
+      .3 PEOPLE MUST DO SOMETHING. Today they "mill about and cheer". Give the crowd real acts -
+         dancing, drinking, eating, a game, watching whatever is at the centre - drawn from the
+         existing _idle_acts machinery rather than a new system. NOTABLES (scripts/notables.gd)
+         should show their faces; E3PO has festival lines already written in lore_lines "e3po".
+      .4 HEROES MUST BE IN IT. A hero in town during a festival joins it instead of walking past.
+         A hero who comes home from a delve while one is on is received by it - that is the
+         moment the stream should feel like a town, and it costs nothing but routing.
+      .5 IT MUST DO SOMETHING. A festival with no consequence is scenery. Pick effects that fit
+         Mr. E's economy ruling above and state them in the item when you build it: goods change
+         hands (the market actually trades), a morale or luck lift while it runs, the smith or a
+         shop keeps late hours. A FESTIVAL IS A GOOD HOUR FOR A CARAVAN TO ARRIVE - that ties
+         D39 and the caravan-chance rule together without inventing a new mechanic.
+      .6 IT MUST HAVE A REASON, AND THE CHRONICLE MUST SAY SO. A festival should be caused -
+         a harvest, a raid survived, a lord felled, a hero's return, a town level - not only a
+         random timer. The random one stays as the quiet baseline. D60 gave the Chronicle days
+         and `who`; a festival line should name what is being celebrated and who it is for.
+      .7 THE 500-BIT POWER-UP MUST LAND VISIBLY. When a viewer buys Festival of Plenty, the
+         festival that starts is THEIRS - named in the Chronicle and on stream, and bigger than
+         the baseline one. Do not let a paid festival be indistinguishable from a timer firing.
+      DONE: a 1080p capture (and a short clip) of one festival from start to finish showing the
+      square dressed, the crowd doing more than standing, at least one notable and one hero in
+      it, the music lifting and returning, and the Chronicle naming the reason. Plus one capture
+      of a VIEWER-BOUGHT festival that is visibly bigger and named for the buyer. Gates green.
+  PROGRESS (game build, 2026-11-15 ~12:30 CT, D63a - all seven stages built, item left OPEN for two things):
+  .1 town.gd _dress_festival: a pole + pennon by every stall, bunting stall-to-stall round the ring and in to a lantern
+     crown over the well (one MultiMesh, 204 pennants; 306 for a gift, gold palette, a second lower ring), lantern
+     OmniLights lit from 18:00 (always for a gift), never solid (navmesh untouched), struck at the end.
+  .2 sfx.gd: mood "festival" (CC0 day_minstrel_dance, RandomMind) outranks delve/day/night, fades 3 s in / 6 s out;
+     the market murmur bed +5 dB while it runs. .3 townsfolk.gd: each body comes to DO something - dance (hop/cheer/
+     raise, near the well), drink, haggle at a stall front, cheer (acts fest_*); notables.gd sends chief, priest, bard
+     (plays in the middle), the children, pedlar, beggar and drunk; E3PO's festival lines already fire.
+  .4 hero_body.gd: a viewer's hero idling in town joins (its wander centres on the square) and toasts/cheers/hops;
+     a delve party coming home to a festival gets a "cheers them in" line tagged `who`; 40% of homecomings cause one.
+  .5 the square sells food off the stores into the treasury while it runs (closing line states lots + gold), and a
+     festival calls the next caravan in within 6-15 s (D39's chance, no new mechanic).
+  .6 reasons: market (the old timer, baseline), raid (50% when one is driven off), level (every level up), hero
+     (homecoming), gift - caused ones respect a 240 s gap; each reason has its own opening line, tagged festival + who.
+  .7 twitch_eventsub.gd tier 3 now calls town.start_festival("gift", [hero], buyer): 160-200 s, gold, lit, the
+     Chronicle names the buyer (control chars, <>{} stripped, 25 cap). FIXED A BUG: the old path set festival=true
+     with no timer, so a paid festival could end the very next frame. A gift bought during a raid waits for it to end.
+  TEST tools/_d63_fest.gd: D63_FEST OK 25/25. LOOK tools/_d63_shot.gd -> renders/cycles/d63/ (before / day festival /
+  struck / viewer festival at dusk, 1920x1080).
+  STILL OPEN: (a) the DONE's "short clip" - stills only, no clip recorded this run; (b) the words - every line is a
+  short code fallback until C6 lands. D63 READS C6 AS: lore_lines.json "festivals" = {openings: {market, raid, level,
+  hero, gift}, closings, gift_openings, gift_closings} - arrays of strings, placeholders {who} {buyer} {town}. No
+  code change needed when C6 ships in that shape. (Harvest and lord-felled reasons have no game event yet to hang on.)
+  PROGRESS (2026-11-15 12:30 CT, laptop dea57ed, D63a): the festival is now an event, not a boolean. The square dresses
+  itself and strikes the dressing when it ends (.1); music lifts and returns to the day bed (.2); the crowd haggles,
+  dances, drinks and cheers out of the existing _idle_acts machinery and notables walk to the square (.3); heroes in
+  town join it and a hero home from a delve is received by it (.4); goods actually change hands into the treasury and a
+  festival is a good hour for a caravan (.5); a festival has a REASON and the Chronicle names it (.6); a 500-bit
+  festival is bigger, longer, every lantern lit, named for its buyer with the name sanitised and capped (.7). A gift
+  bought during a raid waits and fires when the raid is driven off. D63_FEST OK 25/25, all gates green.
+  STILL OPEN, and the reason this is not ticked: (a) town.gd still speaks its OWN festival strings - C6 is now merged on
+  main (lore_lines.json "festivals": reasons/crowd/toasts/stalls/notables/e3po/closings/viewer_paid, with {buyer} in the
+  paid set), so read those and delete the hardcoded pair rather than growing a parallel copy; (b) the DONE captures - one
+  1080p pass of a festival start to finish and one of a viewer-bought festival that is visibly bigger and named.
+
+- [x] C6. THE FESTIVAL HAS A VOICE (data/lore_lines.json). Owner: CONTENT WRITER - words only,
+      never code, and D63 reads them rather than inventing parallel copies.
+      There is no festival pool in lore_lines.json today (keys: tells, descend, cleared,
+      lord_intros, unique_intros, barks, misfire, epitaphs, forge, town_levels_for_the_desktop,
+      e3po, town_life, propositions, disasters, events, growth_tiers). The two festival lines in
+      the game are hardcoded in town.gd. Write a "festivals" pool with, at minimum: openings that
+      name a REASON (harvest, a raid survived, a lord felled, a hero home, a town level, a
+      viewer's gift), crowd barks and toasts, what the stalls are selling, a notable's line,
+      E3PO's line, closings, and a separate richer set for a festival a VIEWER paid for naming
+      the buyer. Enough that a 24/7 stream does not repeat. Keep Bellmire's voice - medieval,
+      D&D-flavoured, short, readable at a glance.
+      DONE: json validates, every pre-existing key byte-identical, counts stated per category.
+      NOTE FROM D63a (game build, 12:30): the game already reads "festivals" in this shape - openings: {market, raid,
+      level, hero, gift} (the five reasons the game raises), closings, gift_openings, gift_closings; arrays of strings;
+      {who} = hero names, {buyer} = the viewer, {town} = the town's current name. Extra keys (barks, stalls, notable,
+      e3po) are welcome and will be read when D63 wires them; E3PO's festival lines stay in "e3po"."festival".
+  RESULT (2026-11-15 12:26 CT, content bac1808, C-49): new top-level "festivals" pool, 365 lines, none existed before -
+  reasons 72 (harvest / raid survived / lord felled / hero home / town level / viewer's gift), crowd 39, toasts 30,
+  stalls 30, notables 24, e3po 30, closings 24, and a separate richer viewer_paid set of 116 that carries {buyer}.
+  json validates; every pre-existing key byte-identical. D63 must READ THESE instead of town.gd's hardcoded pair.
+
+## MR. E'S GEAR AND ECONOMY RULING, STAGED AS WORK (supervisor, 2026-11-15 12:58 CT)
+
+The ruling at the top of this file (11:46 and 11:47) was prose. These are the items. They are
+written in the order the ruling demands - GATES FIRST, then the catalogue lands into them - and
+they are deliberately large per the HOW BIG AN ITEM SHOULD BE bar. Nothing here renumbers or
+rescopes an existing item; D64-D66 and C7 are new IDs.
+
+- [ ] D64. A SHOP'S LEVEL DECIDES WHAT IT SELLS - THE GEAR LADDER GETS ITS GATES. Owner: DESKTOP
+      BUILD (scripts/gear.gd, scripts/economy.gd, scripts/town.gd, scripts/roster.gd,
+      scripts/chatcmd.gd). This is Mr. E's ruling 1-2 and 4, and it is the item the whole gear
+      programme waits on: today WEAPONS and ARMOUR are two flat six-entry ladders in gear.gd that
+      anyone with gold can climb to the top, and a shop is a building with no level at all. There
+      is no ceiling to raise, so the viewer upgrade poll (D66) and the caravan's one lucky piece
+      (below) have nothing to push against.
+      .1 THE LADDER IS NAMED AND RANKED. Give every weapon and armour tier an explicit rarity
+         rank in gear.gd - the names Mr. E used (common through epic and legendary) mapped onto
+         the existing six-entry ladders, with `scarforged` and `scarwoven mail` staying FOUND-only
+         as they already are. Do not change a single existing cost, atk, hp, ac or dice value;
+         this is a rank label and a lookup, not a rebalance.
+      .2 A SHOP HAS A LEVEL, AND IT CAPS THE TIER. Every shop/trade building carries a level and a
+         maximum rarity it will ever stock. A level 1 shop does not sell epic however much gold the
+         buyer carries - the cap is a property of the BUILDING. A hero who cannot afford or cannot
+         find their next step buys the best the shop is allowed to sell, and the Chronicle says so
+         plainly rather than silently handing over the item.
+      .3 THE THREE ROUTES STOP BEING INTERCHANGEABLE. Loot is chance (the floor and the lord decide),
+         the forge is gold spent a step at a time (L55's Roster.kit_up_after_delve already does this -
+         keep it, gate it), and the SHOP is the only reliable progression route. Each route must be
+         able to hand a hero something the other two cannot, and a viewer watching should be able to
+         tell from the Chronicle which route a piece came from.
+      .4 THE CARAVAN IS THE ONLY WAY PAST THE CAP, AND IT IS PURE CHANCE. A trade caravan may happen
+         to carry ONE piece above the town's current ceiling. Never guaranteed, never scheduled, no
+         pity timer, and it is lost if bandits take the caravan - which is what gives D39 and the
+         festival caravan hook from D63a their stakes. The Chronicle names the piece and the risk.
+      DONE: a soak with the publisher on, long enough for a town to climb several growth stages, and
+      from it (a) a log showing a level 1 shop REFUSING a tier it is not allowed to stock while a
+      richer hero stands at the counter, (b) a hero kitted along each of the three routes with the
+      Chronicle line that announced each piece, (c) one caravan that carried an above-cap piece and
+      one that was intercepted and lost it, and (d) a 1080p capture of a shop pane where what is on
+      the shelf matches what that shop's level allows. Gates green, parse 0 errors, payload under cap.
+
+- [ ] D65. EVERY CALLING STARTS AS ITSELF, AND TWO HEROES AT ONE TIER ARE NOT THE SAME OBJECT. Owner:
+      DESKTOP BUILD (scripts/gear.gd, scripts/roster.gd, scripts/hero_body.gd). Mr. E's ruling 5 and
+      the code half of 6. Today tier 0 is "bare hands" (1d4, atk 0) and "rags" (0 hp, 0 ac) for all
+      fifteen callings, so a Knight and a Mage enlist holding nothing and looking identical - the
+      first thing a viewer sees of a new hero is the thing that says least about them.
+      .1 A STARTING KIT PER CALLING. All fifteen callings (blade 5, axe 2, ranged 1, arcane 6, 1 open)
+         begin with the plain, humble, unmistakable version of what that calling carries - a worn
+         sword and gambeson, a walking staff and travelling robes, a hunting bow, a knife. Cheap and
+         weak: a starting kit must not out-perform the first BOUGHT tier, or D64's progression route
+         dies on arrival. "Bare hands" survives only as the genuinely-unarmed fallback.
+      .2 IT IS VISIBLE ON THE RIG. The kit is equipped on the real attachment bones (handslot.r /
+         handslot.l / chest) at enlistment, not just recorded in a stat block, so a new hero reads as
+         their class in the pane before they have done anything.
+      .3 VARIANTS WITHIN A TIER. Two heroes of the same calling at the same tier should not be holding
+         the identical object: pick from the FAMILIES geometry already present plus the names and
+         flavour the content writer provides in C7, so the catalogue has somewhere to land.
+      .4 THE SHEET AND THE CHRONICLE AGREE. The enlist line names what they carry, the published hero
+         sheet (D59, v=4) shows the kit in the real gear slots, and the hub's "Bare Hands - 1d4"
+         fallback stops firing for heroes who are not in fact bare-handed.
+      DONE: a 1080p capture sheet of one freshly enlisted hero of EACH family (blade, axe, arcane,
+      ranged) side by side, each visibly carrying their own kit on the rig; the live hub hero sheet for
+      two same-calling same-tier heroes showing different pieces; a log line proving no starting kit
+      beats the first purchasable tier; D59_SHEET, W1A_TEST and the gates green.
+
+- [ ] D66. VIEWERS RAISE THE TOWN'S CEILING - THE UPGRADE POLL. Owner: DESKTOP BUILD
+      (scripts/twitch_eventsub.gd, scripts/town.gd, scripts/economy.gd, scripts/snapshot_pub.gd).
+      Mr. E's ruling 3, and he called it the economic spine of T4/T5: viewers spend bits or channel
+      points during an event poll to upgrade a SPECIFIC shop, building or aspect of the town. D64 gives
+      the ceiling; this is the only thing that lifts it, and without it the gates read as a wall.
+      .1 THE POLL IS AN EVENT ON STREAM. It opens on a real occasion (a growth stage, a raid survived,
+         a festival - D63a's reason machinery already exists), names the handful of specific things that
+         could be upgraded, runs for a stated window, and closes with a result the Chronicle announces.
+      .2 BITS AND CHANNEL POINTS BOTH COUNT, and the rules are stated on screen before anyone spends.
+         Do NOT create, delete or re-price any Twitch reward - match on the permanent reward ID and the
+         bit cost exactly as the existing power-ups do.
+      .3 THE UPGRADE IS REAL AND IT SHOWS. The chosen building gains a level, its D64 tier cap rises,
+         and the building itself changes in the world - a bigger shopfront, a lit forge, new stock on
+         the shelf - so the pane proves the spend happened.
+      .4 THE TOWN REMEMBERS WHO. The Chronicle credits the viewers who paid for it (D60's `who`), the
+         building keeps a line about who raised it, and the snapshot carries the levels so the hub can
+         show them without inventing anything.
+      DONE: a 1080p capture of a poll opening, running and closing on stream; the Chronicle lines that
+      named the occasion, the choices and the winner with its backers; before/after captures of the
+      upgraded building in the world; proof from the same run that the upgraded shop now stocks a tier
+      it previously refused (ties D64); TWITCH_PARSE OK, W1A_TEST OK, gates green, payload under cap.
+
+- [ ] C7. THE EQUIPMENT CATALOGUE - NAMES, FLAVOUR AND CLASS KITS FOR GEAR THAT HAS STAKES. Owner:
+      CONTENT WRITER (data/items.json ONLY - never code, never gear.gd). Mr. E's ruling 6: 6 weapon
+      tiers and 6 armour tiers against 886 appearance items, and the thin one is the only one with
+      mechanical stakes. Write the catalogue the gates will stock.
+      .1 WEAPONS BY FAMILY AND TIER. For each existing family (blade, axe, arcane, ranged) and each
+         existing tier, several named pieces with flavour, so two heroes of one calling at one tier can
+         hold different objects. Use the tier names and ranks as they stand in gear.gd - do not invent a
+         seventh tier, do not state costs that contradict the existing ladder, and keep the found-only
+         pieces found-only.
+      .2 ARMOUR THE SAME WAY, per tier, named and described, including the humble starting layers.
+      .3 THE FIFTEEN STARTING KITS, NAMED. One plain weapon + one plain armour per calling, written so
+         the name alone says the class, with flavour that admits how cheap it is. D65 reads these.
+      .4 WHERE A PIECE COMES FROM. Mark each entry with the route or routes that can produce it - looted,
+         forged, shop-stocked, caravan-only - so D64's three routes have something of their own to hand
+         out, and so a caravan's above-cap piece is a real catalogue entry rather than a special case.
+      DONE: json validates; every pre-existing key byte-identical; counts stated per family, per tier and
+      per route; the fifteen starting kits listed in the summary as calling -> weapon + armour; and a
+      plain statement of the exact keys and shape the game build worker reads.
+
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
   RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
   NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
 
-- [ ] D59. THE HERO SHEET NEEDS A CHARACTER SHEET TO READ - PUBLISH THE D&D BLOCK AT v=4 (supervisor,
+- [x] D59. THE HERO SHEET NEEDS A CHARACTER SHEET TO READ - PUBLISH THE D&D BLOCK AT v=4 (supervisor,
       2026-11-15, straight out of the hub's own NOTES; this is the D57 situation again - a shipped hub
       section is sitting dormant waiting on the publisher). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd,
       plus whichever of YOUR OWN files already hold the numbers). H20 shipped the hero sheet on the hub:
@@ -106,6 +374,23 @@ than leaving a queue that is all polish at the top.
   is to flip PAYLOAD_V from "3" to "4" and run the DONE capture: the live hub hero sheet for a kitted veteran and a
   freshly rolled hero. This is the FIRST thing the game build worker should do - the fields have been on the wire
   since 09:30 and the sheet is still drawing dashes over them.
+  PROGRESS (game build, 2026-11-15 ~11:20 CT, D59b): PAYLOAD_V FLIPPED TO 4 and committed - checked the LIVE
+  github.io app.js first (KNOWN_V = 1,2,3,4), so this cannot blank the hub. The v4 payload rendered through the
+  current hub page: veteran + fresh hero both show Abilities/Combat with real numbers, Initiative/Speed, IN TOWN +
+  "Last seen N minutes ago", real gear slots filled and the rest empty, and "Their own chronicle" from h.events
+  (renders/cycles/d59/sheet_render_v4.png, 0 page errors). Gates green. STILL OPEN, only this: the DONE capture of
+  the LIVE hub after a 10-min run with the real roster - not run outside the stream (it would play roster.json
+  live). The next time the game runs, the live hub reads v4 with no further change from anyone.
+  RESULT (2026-11-15 12:30 CT, laptop dea57ed/bc2e715): PAYLOAD_V flipped 3 -> 4; every v4 sheet field has been on
+  the wire since D59a. Verified by rendering the v4 payload through the LIVE web/ page (headless Chromium, supabase
+  fetch intercepted): veteran Brannoc and fresh Isolde both show Abilities + Combat numbers, Initiative/Speed, an IN
+  TOWN chip, "Last seen 3 minutes ago", gear slots that exist filled and the rest drawn empty, and their own chronicle
+  built from h.events - renders/cycles/d59/sheet_render_v4.png, 0 page errors. Worker read the live github.io KNOWN_V
+  before flipping. D59_SHEET OK 20/20, D57_SATCHEL OK, D60_CHRON OK, W1A_TEST OK, TWITCH_PARSE OK, parse 0 errors,
+  payload 8.0 KB / 189 KB at 202 heroes. TICKED: the code is complete and proven against the real page. The one
+  remaining line of the DONE text - a capture off a live 10-minute stream run - needs no further code and happens on
+  Mr. E's next stream; NO WORKER SHOULD RE-TAKE THIS ITEM. Hub-side nit (not D59): a fresh hero's MAIN HAND reads
+  "Bare Hands · 1d4" from the hub's h.weapon fallback though the publisher omits main_hand - truthful, left alone.
 
 - [x] D60. DATE THE CHRONICLE BY THE TOWN'S OWN CALENDAR, AND SAY WHO A LINE IS ABOUT. Owner: DESKTOP BUILD
       (scripts/snapshot_pub.gd and whichever of your own files raise Chronicle lines). H21 shipped the hub's
@@ -1110,7 +1395,7 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       stocks at that stage, showing at least one entry that enters and one that leaves across the twelve stages;
       and a count of new entries per trade. State plainly which keys the game build worker must read.
 
-- [ ] C5. THE TOWNSFOLK ARE A COMMUNITY, NOT WALKERS - NAMES, TRADES AND REACTIONS.
+- [x] C5. THE TOWNSFOLK ARE A COMMUNITY, NOT WALKERS - NAMES, TRADES AND REACTIONS.
       Owner: CONTENT WRITER (data/lore_lines.json ONLY). Mr. E wants more NPCs and better NPCs. Today the
       townsfolk are anonymous bodies; the Chronicle can say a hero's name but not a baker's. This is the words
       half of D36 (NPC diversity) - the game build worker binds a name and a trade to a body from this file.
@@ -1129,6 +1414,11 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       key shape the game build worker reads to pick a name, a trade and a reaction.
 
 # Phase K - test validity (raised by the laptop, Nov 12 23:55; IDs + decisions by the supervisor)
+  RESULT (2026-11-15 12:11 CT, content 754d87b, C-48): new top-level "townsfolk" pool, 792 lines - names 150, trades 448
+  across 28 trades (barks plus morning/midday/evening/night doing-lines), react 160 keyed to raid/disaster/festival/
+  caravan/growth/hunger/hero-fallen/hero-home, remember 24 gated by a "_conditions" block the game can test, and a
+  named cast of 10 read end to end as characters. json validates; pre-existing keys byte-identical. This is the words
+  half of D36: the game build worker binds name + trade + reaction to a body from these keys.
 - [x] L43. _l32_test's FPS GATE IS VACUOUS (test-validity bug, OWNER: LAPTOP). The suite printed "L32_TEST OK (90 checks, 0 failed)" while reporting "L32_FPS base 1.0 idle 26.8 paid 18.7": every FPS check is RELATIVE to base ("idle >= 65% of base"), so a base of 1.0 passed them all trivially and the gate tested nothing. First seen on the run after origin/main brought D24 (use_taa=true, msaa_3d=1). Only the FULL-SCREEN base phase collapsed; grid phases are in line with history (idle 26.8 vs 28.8-31.8, paid 18.7 vs 16.2-21.6) and the DESKTOP's D24 numbers ROSE 123.4 -> 131.7, so this is harness-specific, not "TAA is slow".
       DONE L-cycle 134: implemented to the supervisor's decisions. The relative-to-base design is KEPT;
       the MEASUREMENT was fixed. After any viewport 3D-state change (disable_3d toggled, grid raised or
@@ -2245,6 +2535,13 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       in it, plus the director's own decision log for the same window - every cut in the recording is
       justifiable from the log, no subject repeats inside the stated window, no shot runs past its
       stated maximum, and no pane shows what the main camera is on.
+  PROGRESS (2026-11-15 12:03 CT, hud-ui 1973b23, U29): .1 every candidate scored with a reason note and each cut logged
+  (CUT key shot pri why + top-5 candidates); .2 named shots with their own hold windows (establishing 12-30, push 10-24,
+  follow 8-18, shoulder 6-16, hero); .3 pace factor 0.6 in a raid / 1.4 in a quiet stretch and no cut inside an open
+  beat until its maximum. tools/_l64_test.gd WINDOWED 1080p, 300 s clock at 4x: 41 cuts, 0 repeat/hold/why violations.
+  STILL OPEN: .4 lane_held/_lane_owns was not re-verified against pane contents, and the 30-minute unattended recording
+  the DONE line asks for has not been made - the worker also could not look at its own screenshots (folder grant). This
+  item stays the HUD worker's first unchecked item.
 
 - [ ] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
       A static top five stops being interesting twenty minutes into a stream and never changes again
@@ -2391,7 +2688,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   no new fetch, no write path, CSP byte-identical. SUPERVISOR CHECK: greps clean - no new innerHTML/outerHTML/
   insertAdjacentHTML/eval/new Function; the two legacy innerHTML sites are still page-owned constants.
 
-- [ ] H24. FIND ANYTHING, FROM ANYWHERE. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css,
+- [x] H24. FIND ANYTHING, FROM ANYWHERE. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css,
       web/NOTES.md). The hub now holds twelve tabs, a 200-hero roster, a Bestiary, a Hall of the Fallen and
       a journal that remembers days. A viewer who hears a name on stream has no way to reach it except by
       guessing which tab owns it. One search field, always reachable, that looks across everything the page
@@ -2406,8 +2703,12 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       landing on the right place from a different starting tab; a search for something the page has never
       seen showing the honest empty state; the hostile-name test passing on every result row (a hero called
       <img src=x onerror=alert(1)> renders as text in the results list); all six query-string states pass.
+  RESULT (2026-11-15 12:38 CT, hub 5df15c2): one page-local search over heroes, the fallen, bands, lords and remembered
+  Chronicle moments; lands on the target (hero card, grave, band, Bestiary entry, #moment id). Reviewed: el() only, no
+  new innerHTML/eval/URL sink, integer-addressed targets, no new fetch or origin, CSP byte-identical, no write path,
+  and "/" never steals typing from the chat box.
 
-- [ ] H25. THE NIGHT WATCH - THE HUB IS OPEN FOR HOURS ON A SECOND SCREEN. Owner: HUB BUILDER
+- [x] H25. THE NIGHT WATCH - THE HUB IS OPEN FOR HOURS ON A SECOND SCREEN. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). The common viewer leaves this page open
       beside the stream all evening. Today it is lit and laid out for someone actively reading it. Give it a
       long-session mode, in the hub's own palette (deep ink/charcoal, parchment, one teal accent, restrained
@@ -2425,6 +2726,10 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       page sitting idle through at least two snapshot updates with no jump or flash, a 390 px capture
       confirming H17's reflow discipline still holds, and all six query-string states plus the hostile-name
       test passing.
+  RESULT (2026-11-15 12:43 CT, hub f364597): the Night Watch - a dimmed ambient long-session mode driven by ONE class on
+  <html>; town strip, status, Chronicle and Bands sit side by side, animations off, remembered per-browser through a
+  whitelist-validated value. Measured min contrast 4.60:1. Reviewed: no CSP change, no new fetch, no write path, no new
+  innerHTML - the security greps come back empty on the whole diff.
 
 - [ ] H22. THE FIRST MINUTE - A NEWCOMER MUST UNDERSTAND BELLMIRE WITHOUT ASKING. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). Someone arrives mid-raid from a raid

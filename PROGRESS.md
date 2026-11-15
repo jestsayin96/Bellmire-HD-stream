@@ -5792,3 +5792,25 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
   residual at the south-market solid (32.5,-64..-69) on 100+-waypoint routes - left open, named in WORK_PLAN.
 - GATE GREEN: parse 0; _offfloor 0/1316 (INPROP 0, MON_INPROP 0/108); TWITCH_PARSE OK; _delve_test to floor 2,
   0 SCRIPT ERROR. D44/D50 left UNTICKED (in_solid not yet 0 every run). No pumpkin prop exists in code.
+
+## C-53 (2026-11-15) - WORK_PLAN C4: stock and cargo by growth tier (items.json only)
+- Four NEW top-level blocks appended to data/items.json; every pre-existing key byte-identical (text appended after `equipment`). Not ticked - supervisor ticks C4.
+- `stock_retirement` (C4.1): last_tier + replaced_by for 36 shop goods and 19 cargo goods (clay_cups, rush_light, mud_clogs, torches, tally_sticks ... leave as the town grows; supersedes stock_by_tier "nothing removed" for listed keys only).
+- `trade_stock` (C4.2): 5 trades (General Goods opens 1, Guild Counter 3, Smithy 3, Apothecary 4, Stables 5); every shop_stock key carried by exactly one trade; per-trade `schedule` of enter/leave by tier. New own_goods: general 9, guild 9, smith 10, apothecary 10, stables 14 = 52.
+- `caravan_manifests` (C4.3): 7 supply_resources (grain, iron, salt, lamp_oil, physick, timber, cloth) with units_per_qty/unit_cost/restocks, 7 origins, 28 caravans (tiers 2-12) each with cargo qty, cargo_value, supply units and gold_value, guards. Taken caravan = town receives none of its supply units.
+- `price_ladders` (C4.4): 10 ladders, tier and cost non-decreasing (script-checked).
+- Stage table (+enter/-leave per trade):
+  tier 1: General Goods +24/-0
+  tier 2: General Goods +18/-0
+  tier 3: General Goods +9/-0; Guild Counter +12/-0; Smithy +3/-0
+  tier 4: General Goods +15/-1; Guild Counter +2/-0; Smithy +6/-0; Apothecary +3/-0
+  tier 5: General Goods +15/-5; Guild Counter +5/-0; Smithy +3/-0; Apothecary +2/-0; Stables +12/-0
+  tier 6: General Goods +16/-6; Guild Counter +5/-0; Apothecary +2/-0; Stables +3/-0
+  tier 7: General Goods +7/-10; Guild Counter +2/-0; Smithy +12/-1; Stables +4/-1
+  tier 8: General Goods +3/-6; Guild Counter +2/-0; Smithy +16/-0; Apothecary +2/-0; Stables +3/-0
+  tier 9: General Goods +8/-3; Guild Counter +1/-0; Apothecary +14/-0; Stables +0/-2
+  tier 10: General Goods +7/-3; Guild Counter +1/-1; Smithy +12/-0; Apothecary +2/-0
+  tier 11: General Goods +9/-1; Guild Counter +6/-1; Smithy +2/-0; Apothecary +5/-0
+  tier 12: General Goods +18/-0; Smithy +1/-0; Apothecary +3/-0
+- GAME BUILD MUST READ: items.json stock_retirement.{shop_goods,cargo}, trade_stock.trades.*.{opens_tier,carries,own_goods,schedule}, caravan_manifests.{supply_resources,caravans}. Existing shop_stock.tier / trader_cargo.tier / stock_by_tier unchanged.
+- VALIDATION OK: json.load passes; all pre-existing top-level values equal; keys resolve; ladders pass.

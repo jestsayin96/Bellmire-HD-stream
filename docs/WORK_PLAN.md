@@ -1,5 +1,30 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### MINIBOSSES NEED NO LORE (Mr. E, Nov 15 17:43) - A STANDING PERMISSION FOR THE ART LANE
+"you can always add mini bosses as well. that dont have to be lore mentioned".
+
+THIS UNBLOCKS THE ART LANE PERMANENTLY. Until now a new creature implied new canon - a name, a
+place in the bestiary, lore_lines to write, a content-lane dependency. Minibosses do not. The art
+worker may invent them outright and ship them without waiting on anybody.
+  - THE SET PIECE ALREADY EXISTS. dungeon_hd.gd's set-piece weights already include "miniboss"
+    (15 on a normal floor, 35 on the right theme). The slot is built and under-used; it just needs
+    better things to put in it.
+  - WHAT A MINIBOSS IS: a creature with a presence, a silhouette of its own and one idea that
+    makes the fight different - it summons, it splits, it armours itself, it drags people. NOT a
+    normal monster with more hit points. That is the only bar.
+  - NO LORE DEBT. No entry in the canon, no named history, no lore_lines. A line in the feed when
+    it appears is enough. If one turns out to be a favourite, lore can be written for it LATER -
+    earned, not assigned.
+  - THE ART LANE OWNS THEM END TO END: invent, build, render, ship. Same pipeline as the lords
+    (tools/art/), same bar - at most four meshes, silhouette-readable, no hero body.
+  - THEY ALSO FILL D76's HOLE CHEAPLY. Twelve creature types currently share a mesh with another
+    type; a miniboss built for one of those slots solves a duplicate AND adds a fight at once.
+  - Every miniboss still obeys the Grubmother rule above: if it cannot fit a corridor, it is
+    room-locked by construction, not by hoping.
+GOOD IDEAS ARE NOT WORK: under the freeze, minibosses are a PERMISSION, not a queue. The art lane
+takes its queued item first and builds a miniboss when that lane is otherwise dry - which it has
+now been twice this week.
+
 ## MR. E ANSWERS THE ART LANE (Nov 15 17:42) - FOUR RULINGS
 
 The art worker shipped D75 (eight lords) and D73 (454 icons) and held four questions. Answered:

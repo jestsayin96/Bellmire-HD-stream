@@ -2439,5 +2439,1329 @@
         ]
       }
     ]
+  },
+  "equipment": {
+    "_note": "C7 equipment catalogue. weapons/armour are named pieces keyed by id. 'tier' is the index into gear.gd WEAPONS / ARMOUR (0-5); 'tier_name' repeats that ladder's name for readability. NO costs/atk/hp/ac are stated here - those stay in gear.gd. 'routes' lists every way a piece can be produced: looted (floor/lord drop), forged (gold at the forge), shop (shop stock, gated by shop level), caravan (only ever carried by a trade caravan, may exceed the town cap), starting (a calling's kit, never purchasable). Tier 5 pieces are FOUND-only (routes = looted only). 'family' is blade/axe/arcane/ranged, or 'open' for the monk. Armour 'cut' is robe/light/heavy so casters and heavies can be dressed differently. starting_kits maps each of the fifteen callings to one plain weapon + one plain armour id; kit pieces sit at tier 0 so they never out-perform the first bought tier (D64/D65). Dead until wired.",
+    "weapons": {
+      "w_blade_ironmonger": {
+        "name": "Ironmonger's Blade",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Straight, grey, honest. Cut from the same bar as the town's hinges."
+      },
+      "w_blade_ford_cutlass": {
+        "name": "Ford Cutlass",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Shorter than a sword, longer than an excuse."
+      },
+      "w_blade_militia_sabre": {
+        "name": "Militia Sabre",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Issued by the guild in a hundred. Kept by about forty."
+      },
+      "w_blade_guildmarked": {
+        "name": "Guild-Marked Longsword",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "The stamp on the ricasso is the only thing about it that is showy."
+      },
+      "w_blade_heron_fold": {
+        "name": "Heron-Folded Blade",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "forged"
+        ],
+        "flavour": "Folded nine times by a smith who would not say why nine."
+      },
+      "w_blade_bellwright": {
+        "name": "Bellwright's Falchion",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Heavy at the tip, like a bell is heavy at the lip. It rings when it lands."
+      },
+      "w_blade_stonewick": {
+        "name": "Stonewick Backsword",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Taken from a dead captain's hand. One edge only, by design."
+      },
+      "w_blade_emberline": {
+        "name": "Emberline Sword",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "The runes sulk orange in the dark and brighten when something wants you dead."
+      },
+      "w_blade_lamplit": {
+        "name": "Lamplit Runeblade",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Warm to hold. The chandler swears it is only the lamp-oil in the grip."
+      },
+      "w_blade_stitchwound": {
+        "name": "Stitchwound Sabre",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Its edge leaves a line that looks sewn shut. It is not kind about it."
+      },
+      "w_blade_ferryman_rune": {
+        "name": "Ferryman's Rune-Blade",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "Runed in a southern yard. Carried north on the one wagon that did not turn back."
+      },
+      "w_blade_wyrmfang": {
+        "name": "Wyrmfang Longsword",
+        "family": "blade",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "looted",
+          "forged"
+        ],
+        "flavour": "Hilted around a tooth the length of a forearm. Cold-white when it swings."
+      },
+      "w_blade_ashdrake": {
+        "name": "Tooth of the Ash Drake",
+        "family": "blade",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Pulled from a jaw below. The dragon asked for it back. Nobody answered."
+      },
+      "w_blade_coldbrand": {
+        "name": "Cold-White Brand",
+        "family": "blade",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "No wagon-master would say where he bought it. All of them paid in full."
+      },
+      "w_blade_sunderfang": {
+        "name": "Sunderfang",
+        "family": "blade",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "forged",
+          "shop"
+        ],
+        "flavour": "Forged by a town that can finally afford to be afraid of its own sword."
+      },
+      "w_blade_scarfang": {
+        "name": "Scarfang",
+        "family": "blade",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Grew in the scar's wild magic. Violet at the edge, and it hums when the seam opens."
+      },
+      "w_blade_seamedge": {
+        "name": "Seam-Edge",
+        "family": "blade",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "It cuts along the line a thing was always going to break. The scar did the teaching."
+      },
+      "w_axe_woodsman": {
+        "name": "Woodsman's Hatchet",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Meant for kindling. Has opinions about skulls."
+      },
+      "w_axe_hewers_axe": {
+        "name": "Hewer's Axe",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "One bad winter's worth of firewood is stamped into the haft."
+      },
+      "w_axe_toll_cleaver": {
+        "name": "Toll Cleaver",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop"
+        ],
+        "flavour": "Square-bladed. Forgot what it was for and became a weapon."
+      },
+      "w_axe_millstone_axe": {
+        "name": "Millstone Axe",
+        "family": "axe",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Ground on the old mill-wheel. The edge never quite stops singing."
+      },
+      "w_axe_bearded_greataxe": {
+        "name": "Bearded Greataxe",
+        "family": "axe",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "The beard of the blade hooks. What it hooks, it keeps."
+      },
+      "w_axe_ferrywarden": {
+        "name": "Ferrywarden's Axe",
+        "family": "axe",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop"
+        ],
+        "flavour": "Carried by the man who kept the Ford. It still smells of river."
+      },
+      "w_axe_runed_hewer": {
+        "name": "Rune-Cut Hewer",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "The runes were carved after, with a chisel and a grudge. They took."
+      },
+      "w_axe_emberhaft": {
+        "name": "Emberhaft",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "The haft is warm all the way through. Do not ask the carpenter."
+      },
+      "w_axe_wallbreaker": {
+        "name": "Wallbreaker",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Brought down a stretch of palisade once. The palisade was rebuilt. The axe was not retired."
+      },
+      "w_axe_gutterlord": {
+        "name": "Gutterlord's Axe",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "A bandit's boast, forged to be carried openly. The bandit lost it on the road."
+      },
+      "w_axe_dragontooth_axe": {
+        "name": "Dragontooth Axe",
+        "family": "axe",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "A single curve of tooth for an edge. Burns white at the swing's peak."
+      },
+      "w_axe_wyrmsplitter": {
+        "name": "Wyrmsplitter",
+        "family": "axe",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Nothing has been split with it yet that was not larger than a house."
+      },
+      "w_axe_ashmaul": {
+        "name": "Ash-Maul Greataxe",
+        "family": "axe",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "Two-handed, two-fisted, two-faced. Respected on arrival."
+      },
+      "w_axe_scarcleaver": {
+        "name": "Scarcleaver",
+        "family": "axe",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Wild magic bent the head into something that was not drawn by any smith."
+      },
+      "w_axe_seamsplitter": {
+        "name": "Seamsplitter",
+        "family": "axe",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "The violet glow is the seam itself, not reflection. Hold it away from the face."
+      },
+      "w_arcane_hazel_wand": {
+        "name": "Hazel Wand",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Cut from a Bellmire hedge. A hedge-witch would call it generous."
+      },
+      "w_arcane_walking_staff": {
+        "name": "Hedge-Witch's Staff",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Mostly a staff. Occasionally something else, usually at night."
+      },
+      "w_arcane_tallow_rod": {
+        "name": "Tallow-Wrapped Rod",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop"
+        ],
+        "flavour": "The wrapping is candle-wax. The wizardry is a rumour."
+      },
+      "w_arcane_ashen_staff": {
+        "name": "Ashen Staff",
+        "family": "arcane",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Ash-wood, bound with ironwork the guild calls 'good enough'."
+      },
+      "w_arcane_reed_wand": {
+        "name": "Reed-Singer's Wand",
+        "family": "arcane",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "forged"
+        ],
+        "flavour": "Hums in a wind. The hum is the spell, they say, and the spell is polite."
+      },
+      "w_arcane_bellglass_staff": {
+        "name": "Bellglass Staff",
+        "family": "arcane",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "A shard of the old bell sits in the head. It chimes at the wrong moments, usefully."
+      },
+      "w_arcane_runewrapped_staff": {
+        "name": "Rune-Wrapped Staff",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Every rune a different handwriting. Nobody agrees who left them."
+      },
+      "w_arcane_emberwand": {
+        "name": "Emberwand",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "The tip is permanently, faintly hot. Mages call it comforting. Others stand clear."
+      },
+      "w_arcane_scarlamp_staff": {
+        "name": "Scarlamp Staff",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Lit from below, not above. The light is not any lamp's."
+      },
+      "w_arcane_ferryman_wand": {
+        "name": "Ferryman's Wand",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "A trader's gift to a customer who paid twice. It is not obvious the customer survived."
+      },
+      "w_arcane_dragontooth_staff": {
+        "name": "Dragontooth Staff",
+        "family": "arcane",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "A drake's tooth caps the head. It listens before it burns."
+      },
+      "w_arcane_coldflame_wand": {
+        "name": "Coldflame Wand",
+        "family": "arcane",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "Burns white, gives no heat, steals some. Wagon-masters hide it under sacks."
+      },
+      "w_arcane_ashdrake_rod": {
+        "name": "Ash-Drake's Rod",
+        "family": "arcane",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "It remembers the breath it was cut from. The remembering is the spell."
+      },
+      "w_arcane_scarwand": {
+        "name": "Scarwand",
+        "family": "arcane",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Grown, not carved. It points at wounds. Occasionally, at your own."
+      },
+      "w_arcane_seam_staff": {
+        "name": "Staff of the Open Seam",
+        "family": "arcane",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Violet at the knot, quiet everywhere else. Do not look into the knot."
+      },
+      "w_ranged_hunters_crossbow": {
+        "name": "Hunter's Crossbow",
+        "family": "ranged",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "A hunting bow's slow cousin. Reliable, slow, rude to rabbits."
+      },
+      "w_ranged_ford_stalker": {
+        "name": "Ford-Stalker's Crossbow",
+        "family": "ranged",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Spanned by hand, aimed by habit. Smells of reeds."
+      },
+      "w_ranged_lookout_arbalest": {
+        "name": "Lookout's Light Arbalest",
+        "family": "ranged",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop"
+        ],
+        "flavour": "The lookouts got these when they ran out of arrows and ideas."
+      },
+      "w_ranged_guild_arbalest": {
+        "name": "Guild Arbalest",
+        "family": "ranged",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Spanned with a goat's-foot lever. The goat is long dead; the lever endures."
+      },
+      "w_ranged_twin_stave": {
+        "name": "Twin-Staved Crossbow",
+        "family": "ranged",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Two staves, one trigger. Does not forgive a loose hand."
+      },
+      "w_ranged_reedcutter": {
+        "name": "Reedcutter",
+        "family": "ranged",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "forged"
+        ],
+        "flavour": "Slim bolt, thin string, quiet flight. Named by someone who sold it."
+      },
+      "w_ranged_runed_arbalest": {
+        "name": "Runed Arbalest",
+        "family": "ranged",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "The runes along the stock steady the aim. The aim was steady already. Nobody asked."
+      },
+      "w_ranged_emberbolt": {
+        "name": "Emberbolt Crossbow",
+        "family": "ranged",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Every bolt leaves with a spark. Drawers of kindling hope."
+      },
+      "w_ranged_warrens_thrum": {
+        "name": "Warren's Thrum",
+        "family": "ranged",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Strung with something that was not hemp. It thrums on its own."
+      },
+      "w_ranged_ferryman_bow": {
+        "name": "Ferryman's Heavy Crossbow",
+        "family": "ranged",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "Wound with a southern crank. The crank squeals, and the target takes notice."
+      },
+      "w_ranged_dragontooth_arbalest": {
+        "name": "Dragontooth Arbalest",
+        "family": "ranged",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Bolt-rail of drake-bone. Cold-white fletching ignites before it lands."
+      },
+      "w_ranged_wyrmstring": {
+        "name": "Wyrmstring",
+        "family": "ranged",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "A drake's sinew for a string. It is not hemp. It is not forgiving."
+      },
+      "w_ranged_ashbolt_great": {
+        "name": "Ash-Bolt Greatbow",
+        "family": "ranged",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "The size of a door, almost. It fires bolts the length of a forearm."
+      },
+      "w_ranged_scarbow": {
+        "name": "Scarbow",
+        "family": "ranged",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Limbs that bent in the wild magic and never straightened. Fires something not quite a bolt."
+      },
+      "w_ranged_seamstring": {
+        "name": "Seamstring",
+        "family": "ranged",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Strung along the line where the scar opened. The string sings the same note it did then."
+      },
+      "w_open_walking_quarterstaff": {
+        "name": "Pilgrim's Quarterstaff",
+        "family": "open",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Ash pole, iron ferrules. Hit things on the road; stay polite at the inn."
+      },
+      "w_open_hand_wraps": {
+        "name": "Road-Weathered Wraps",
+        "family": "open",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Linen, tight, stained. They know the shape of your knuckles."
+      },
+      "w_open_banded_staff": {
+        "name": "Banded Quarterstaff",
+        "family": "open",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Bound at four points. Each band is a different year of practice."
+      },
+      "w_open_ferry_knuckles": {
+        "name": "Ferrywatch Knuckles",
+        "family": "open",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Iron over the knuckles, brass over the guilt."
+      },
+      "w_open_runed_wraps": {
+        "name": "Rune-Stitched Wraps",
+        "family": "open",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "The stitching is a mantra. Say it wrong and the stitches know."
+      },
+      "w_open_emberstaff": {
+        "name": "Emberstaff Quarterstaff",
+        "family": "open",
+        "tier": 3,
+        "tier_name": "runed",
+        "routes": [
+          "shop"
+        ],
+        "flavour": "Warm at the end. Hotter, if you ask politely."
+      },
+      "w_open_dragontooth_staff_open": {
+        "name": "Dragontooth Quarterstaff",
+        "family": "open",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "looted",
+          "forged"
+        ],
+        "flavour": "Tooth-capped both ends. Burns white when the flurry builds."
+      },
+      "w_open_coldfist_wraps": {
+        "name": "Cold-White Wraps",
+        "family": "open",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "Wrapped in drake-silk. The silk bites. The fist bites back."
+      },
+      "w_open_scarstaff_open": {
+        "name": "Scar-Grown Quarterstaff",
+        "family": "open",
+        "tier": 5,
+        "tier_name": "scarforged",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Grown straight but never ordinary. The violet runs the length like a vein."
+      },
+      "w_kit_knight": {
+        "name": "Worn Arming Sword",
+        "family": "blade",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Notched, honest, a hand-me-down. It will do until you can buy better."
+      },
+      "w_kit_warden": {
+        "name": "Gatekeeper's Hatchet",
+        "family": "axe",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Meant for splitting door-bars, not skulls. It will learn."
+      },
+      "w_kit_barbarian": {
+        "name": "Rough Wood-Axe",
+        "family": "axe",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "A felled tree's whole biography, sharpened once."
+      },
+      "w_kit_rogue": {
+        "name": "Pawn-Shop Shortknife",
+        "family": "blade",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Bought by the pound. Sharp enough to be rude."
+      },
+      "w_kit_duelist": {
+        "name": "Borrowed Rapier",
+        "family": "blade",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Slightly bent. Straightened by confidence."
+      },
+      "w_kit_ranger": {
+        "name": "Hunting Crossbow",
+        "family": "ranged",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Rusted at the trigger. Never missed a thing it was pointed at, they say."
+      },
+      "w_kit_mage": {
+        "name": "Ink-Stained Wand",
+        "family": "arcane",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Cut from a hedge. The ink is a mark of study, not an accident."
+      },
+      "w_kit_sage": {
+        "name": "Pilgrim's Ash Staff",
+        "family": "arcane",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Taller than you. Carried for the walking, used for the praying."
+      },
+      "w_kit_cleric": {
+        "name": "Parish Iron Mace",
+        "family": "arcane",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "A dented lump of consecrated iron. Heavy on the prayer."
+      },
+      "w_kit_paladin": {
+        "name": "Oath-Sworn Longsword",
+        "family": "blade",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Second-hand. The oath is not; it was sworn fresh this morning."
+      },
+      "w_kit_necromancer": {
+        "name": "Grave-Wood Stick",
+        "family": "arcane",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "A stick from a grave, which is not the same as a staff."
+      },
+      "w_kit_monk": {
+        "name": "Plain Quarterstaff",
+        "family": "open",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Ash and ferrule. The discipline is the weapon."
+      },
+      "w_kit_druid": {
+        "name": "Hazel Gnarlstick",
+        "family": "arcane",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Alive, once. Does not seem to have noticed it is not."
+      },
+      "w_kit_warlock": {
+        "name": "Pact-Scratched Wand",
+        "family": "arcane",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "The scratches are the contract. Read them and weep."
+      },
+      "w_kit_bard": {
+        "name": "Stage Dagger",
+        "family": "blade",
+        "tier": 0,
+        "tier_name": "bare hands",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Looks fine from the back row. Cuts, if forced."
+      }
+    },
+    "armour": {
+      "a_reed_robe": {
+        "name": "Reed-Cloth Robe",
+        "tier": 1,
+        "tier_name": "leather",
+        "cut": "robe",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Woven for scholars with thin purses and thick patience."
+      },
+      "a_tanners_jerkin": {
+        "name": "Tanner's Jerkin",
+        "tier": 1,
+        "tier_name": "leather",
+        "cut": "light",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Stiff leather, smells of its trade. Stops a knife about half the time."
+      },
+      "a_ford_leathers": {
+        "name": "Ford Leathers",
+        "tier": 1,
+        "tier_name": "leather",
+        "cut": "light",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Oiled against river-damp. Creaks in cold."
+      },
+      "a_padded_gambeson": {
+        "name": "Padded Gambeson",
+        "tier": 1,
+        "tier_name": "leather",
+        "cut": "heavy",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Quilted wool under a layer of regret. Warm, bulky, forgiving."
+      },
+      "a_guild_vestments": {
+        "name": "Guild Vestments",
+        "tier": 2,
+        "tier_name": "chainmail",
+        "cut": "robe",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Stitched with the guild's thread. It means something, if you know what."
+      },
+      "a_studded_brigandine": {
+        "name": "Studded Brigandine",
+        "tier": 2,
+        "tier_name": "chainmail",
+        "cut": "light",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Rivets in the right places. The wrong places will teach you."
+      },
+      "a_militia_hauberk": {
+        "name": "Militia Hauberk",
+        "tier": 2,
+        "tier_name": "chainmail",
+        "cut": "heavy",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Issued in rows of identical rings. Fits no one equally."
+      },
+      "a_bellwright_mail": {
+        "name": "Bellwright's Mail",
+        "tier": 2,
+        "tier_name": "chainmail",
+        "cut": "heavy",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Taken from a captain. The rings are mismatched in a way that looks intended."
+      },
+      "a_runed_vestment": {
+        "name": "Rune-Hemmed Vestment",
+        "tier": 3,
+        "tier_name": "plate",
+        "cut": "robe",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "The hem wards. The cuff, you suspect, merely decorates."
+      },
+      "a_emberleather": {
+        "name": "Emberleather Coat",
+        "tier": 3,
+        "tier_name": "plate",
+        "cut": "light",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Cured over a slow fire. Smells like a hearth that loves you."
+      },
+      "a_plate_of_the_wall": {
+        "name": "Plate of the Wall",
+        "tier": 3,
+        "tier_name": "plate",
+        "cut": "heavy",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Hammered on the old forge, thick enough to have an opinion."
+      },
+      "a_ferryman_plate": {
+        "name": "Ferryman's Plate",
+        "tier": 3,
+        "tier_name": "plate",
+        "cut": "heavy",
+        "routes": [
+          "caravan"
+        ],
+        "flavour": "Fitted for a southern knight who stopped being one on the road north."
+      },
+      "a_dragonsilk_robe": {
+        "name": "Dragonsilk Robe",
+        "tier": 4,
+        "tier_name": "warded plate",
+        "cut": "robe",
+        "routes": [
+          "caravan",
+          "looted"
+        ],
+        "flavour": "Spun from something that was not a worm. It stays cool in a blaze."
+      },
+      "a_wyrmhide_coat": {
+        "name": "Wyrmhide Coat",
+        "tier": 4,
+        "tier_name": "warded plate",
+        "cut": "light",
+        "routes": [
+          "looted",
+          "forged"
+        ],
+        "flavour": "Scaled hide, hardened over a drake's own ember. Heavier than it looks."
+      },
+      "a_warded_plate_a": {
+        "name": "Wardplate of the Ash Gate",
+        "tier": 4,
+        "tier_name": "warded plate",
+        "cut": "heavy",
+        "routes": [
+          "forged",
+          "shop"
+        ],
+        "flavour": "The wards were etched by a priest who would not sign them."
+      },
+      "a_dragontooth_hauberk": {
+        "name": "Dragontooth Hauberk",
+        "tier": 4,
+        "tier_name": "warded plate",
+        "cut": "heavy",
+        "routes": [
+          "looted",
+          "caravan"
+        ],
+        "flavour": "Teeth for studs. White frost on the rings after a hard swing."
+      },
+      "a_scarwoven_hauberk": {
+        "name": "Scarwoven Hauberk",
+        "tier": 5,
+        "tier_name": "scarwoven mail",
+        "cut": "heavy",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Wild magic knit the rings itself. It grows, a little, each time it is worn."
+      },
+      "a_seamwoven_vestment": {
+        "name": "Seamwoven Vestment",
+        "tier": 5,
+        "tier_name": "scarwoven mail",
+        "cut": "robe",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Cloth that never frays. Threads the colour of a fresh bruise."
+      },
+      "a_kit_knight": {
+        "name": "Patched Gambeson",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "heavy",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Quilted wool and a smith's apology."
+      },
+      "a_kit_warden": {
+        "name": "Wall-Duty Jerkin",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "heavy",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Leather with the guild's tally scratched into the shoulder."
+      },
+      "a_kit_barbarian": {
+        "name": "Hide Scraps",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "light",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Stitched from three animals, none of them freely given."
+      },
+      "a_kit_rogue": {
+        "name": "Dark Wool Cloak and Tunic",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "light",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Dull colours, deep pockets, no questions."
+      },
+      "a_kit_duelist": {
+        "name": "Fencing Shirt and Waistcoat",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "light",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Starched cotton that lies about being armour."
+      },
+      "a_kit_ranger": {
+        "name": "Mossy Hunting Leathers",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "light",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Weathered to the colour of a thicket."
+      },
+      "a_kit_mage": {
+        "name": "Apprentice's Threadbare Robe",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "robe",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Three sizes too long. Learn to hem or learn to run."
+      },
+      "a_kit_sage": {
+        "name": "Scribe's Plain Habit",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "robe",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Wool the colour of old paper, with sleeves for pens."
+      },
+      "a_kit_cleric": {
+        "name": "Parish Vestments",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "robe",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Washed so often the dye has faded to hope."
+      },
+      "a_kit_paladin": {
+        "name": "Squire's Tabard and Padding",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "heavy",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "A white tabard over wool. It will not stay white."
+      },
+      "a_kit_necromancer": {
+        "name": "Black Mourning Robes",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "robe",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Bought secondhand from a funeral nobody remembers."
+      },
+      "a_kit_monk": {
+        "name": "Undyed Linen Wrap",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "light",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Simple. A little too simple. That is the point."
+      },
+      "a_kit_druid": {
+        "name": "Bramble-Woven Cloak",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "robe",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Burrs stay in it. So does the weather."
+      },
+      "a_kit_warlock": {
+        "name": "Patchwork Cloak",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "robe",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Stitched from other cloaks. All of them wanted something."
+      },
+      "a_kit_bard": {
+        "name": "Motley Jerkin",
+        "tier": 0,
+        "tier_name": "rags",
+        "cut": "light",
+        "routes": [
+          "starting"
+        ],
+        "flavour": "Colourful, cheap, and loud enough to cover for the fit."
+      }
+    },
+    "starting_kits": {
+      "knight": {
+        "weapon": "w_kit_knight",
+        "armour": "a_kit_knight",
+        "family": "blade"
+      },
+      "warden": {
+        "weapon": "w_kit_warden",
+        "armour": "a_kit_warden",
+        "family": "axe"
+      },
+      "barbarian": {
+        "weapon": "w_kit_barbarian",
+        "armour": "a_kit_barbarian",
+        "family": "axe"
+      },
+      "rogue": {
+        "weapon": "w_kit_rogue",
+        "armour": "a_kit_rogue",
+        "family": "blade"
+      },
+      "duelist": {
+        "weapon": "w_kit_duelist",
+        "armour": "a_kit_duelist",
+        "family": "blade"
+      },
+      "ranger": {
+        "weapon": "w_kit_ranger",
+        "armour": "a_kit_ranger",
+        "family": "ranged"
+      },
+      "mage": {
+        "weapon": "w_kit_mage",
+        "armour": "a_kit_mage",
+        "family": "arcane"
+      },
+      "sage": {
+        "weapon": "w_kit_sage",
+        "armour": "a_kit_sage",
+        "family": "arcane"
+      },
+      "cleric": {
+        "weapon": "w_kit_cleric",
+        "armour": "a_kit_cleric",
+        "family": "arcane"
+      },
+      "paladin": {
+        "weapon": "w_kit_paladin",
+        "armour": "a_kit_paladin",
+        "family": "blade"
+      },
+      "necromancer": {
+        "weapon": "w_kit_necromancer",
+        "armour": "a_kit_necromancer",
+        "family": "arcane"
+      },
+      "monk": {
+        "weapon": "w_kit_monk",
+        "armour": "a_kit_monk",
+        "family": "open"
+      },
+      "druid": {
+        "weapon": "w_kit_druid",
+        "armour": "a_kit_druid",
+        "family": "arcane"
+      },
+      "warlock": {
+        "weapon": "w_kit_warlock",
+        "armour": "a_kit_warlock",
+        "family": "arcane"
+      },
+      "bard": {
+        "weapon": "w_kit_bard",
+        "armour": "a_kit_bard",
+        "family": "blade"
+      }
+    }
   }
 }

@@ -1,0 +1,334 @@
+{
+ "ok": true,
+ "creatures": {
+  "sentinel": {
+   "title": "Bone Sentinel",
+   "shares": "Skeleton_Warrior.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1019,
+   "size": [
+    1.22,
+    0.9,
+    1.9
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.2159247725013538,
+    "ortho": 2.2501463890075684,
+    "clip": [
+     5.600756645202637,
+     15.07223129272461
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "hewer": {
+   "title": "Marrow Hewer",
+   "shares": "Skeleton_Warrior.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1248,
+   "size": [
+    1.0,
+    0.42,
+    1.85
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.0715325599541583,
+    "ortho": 2.0227911472320557,
+    "clip": [
+     5.143767833709717,
+     13.94595718383789
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "bowman": {
+   "title": "Bone Bowman",
+   "shares": "Skeleton_Minion.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 886,
+   "size": [
+    1.83,
+    1.63,
+    1.6
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.4633842419796577,
+    "ortho": 2.4997363090515137,
+    "clip": [
+     6.160492897033691,
+     16.614038467407227
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "cutthroat": {
+   "title": "Pale Cutthroat",
+   "shares": "Skeleton_Rogue.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 596,
+   "size": [
+    0.91,
+    1.64,
+    1.6
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.2322339127690651,
+    "ortho": 2.507977247238159,
+    "clip": [
+     5.844173908233643,
+     14.901949882507324
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "gravecaller": {
+   "title": "Gravecaller",
+   "shares": "Skeleton_Mage.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1197,
+   "size": [
+    1.65,
+    1.63,
+    1.85
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.4826233617588451,
+    "ortho": 2.5001742839813232,
+    "clip": [
+     6.379403591156006,
+     16.87419319152832
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "silkmother": {
+   "title": "Silk Mother",
+   "shares": "Spider.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2833,
+   "size": [
+    2.26,
+    1.52,
+    1.3
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5100974523916013,
+    "ortho": 2.3307151794433594,
+    "clip": [
+     6.296914577484131,
+     17.292516708374023
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "spiderling": {
+   "title": "Spiderling",
+   "shares": "Spider.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 548,
+   "size": [
+    0.87,
+    0.69,
+    0.35
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 0.5820169047053527,
+    "ortho": 1.0634856224060059,
+    "clip": [
+     3.6434309482574463,
+     10.948970794677734
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "slimeling": {
+   "title": "Slimeling",
+   "shares": "Slime.glb",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1074,
+   "size": [
+    1.32,
+    1.55,
+    0.5
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.0495138927737846,
+    "ortho": 2.3820741176605225,
+    "clip": [
+     5.066591262817383,
+     13.98647403717041
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "gloombat": {
+   "title": "Gloom Bat",
+   "shares": "Bat.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1172,
+   "size": [
+    1.19,
+    0.47,
+    1.2
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 0.8784206574819233,
+    "ortho": 1.417075514793396,
+    "clip": [
+     4.437232494354248,
+     12.863834381103516
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "scarrat": {
+   "title": "Scar Rat",
+   "shares": "Rat.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1194,
+   "size": [
+    0.37,
+    1.59,
+    0.8
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 0.9064938221341947,
+    "ortho": 2.4285595417022705,
+    "clip": [
+     4.978216648101807,
+     12.67090129852295
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "lurker": {
+   "title": "Fen Lurker",
+   "shares": "Frog.glb",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1654,
+   "size": [
+    1.33,
+    1.78,
+    1.5
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.3412743207498743,
+    "ortho": 2.7328040599823,
+    "clip": [
+     6.045371055603027,
+     15.824800491333008
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "pitwyrm": {
+   "title": "Pit Wyrm",
+   "shares": "Dragon.glb",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1684,
+   "size": [
+    1.68,
+    4.77,
+    4.0
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 3.2229571947550952,
+    "ortho": 7.301843166351318,
+    "clip": [
+     12.717130661010742,
+     27.507455825805664
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  }
+ },
+ "errors": [],
+ "blank_check": {
+  "files": 36,
+  "failures": []
+ }
+}

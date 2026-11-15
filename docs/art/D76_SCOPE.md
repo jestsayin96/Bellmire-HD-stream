@@ -1,8 +1,12 @@
 # D76 - MEASURED BEFORE BUILDING, AND THE PLAN'S NUMBER IS WRONG
 
-**Nothing was built for D76. This is the measurement that should decide how it
-is scoped, taken before any geometry, because the number in WORK_PLAN.md leads
-to the wrong plan.**
+> **STATUS, 15 Nov 23:50: D76 IS NOW BUILT to the measured scope below** - the
+> twelve bodies are in `assets/monsters/creatures/` and written up in
+> `docs/art/CREATURES.md`. The census line in WORK_PLAN.md still needs
+> correcting; this document is why.
+
+**This is the measurement that decided how the item was scoped, taken before any
+geometry, because the number in WORK_PLAN.md leads to the wrong plan.**
 
 WORK_PLAN.md and the art census say:
 

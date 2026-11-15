@@ -134,6 +134,13 @@
   <ul class="town" id="town" aria-label="The town"></ul>
   <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
 
+  <!-- H25 Night watch: a page-owned toggle. It carries no snapshot data; app.js flips one class on <html>
+       and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
+  <div class="watchbar" id="watchbar">
+    <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
+    <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
+  </div>
+
   <!-- H24: the finder. One field over everything the page already holds in memory (heroes,
        the fallen, bands, lords, remembered Chronicle lines). Page-local: no fetch, no write
        path. Results are built in app.js with el() only. -->

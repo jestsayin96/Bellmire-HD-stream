@@ -3061,6 +3061,36 @@ function setActiveTab(id) {
   });
 })();
 
+// ---------------------------------------------------------------- H25 night watch
+// A long-session mode for a page left open beside the stream: a dimmed palette and an ambient
+// layout (town strip, status line, Chronicle and Bands side by side; the finder, tabs, filters and
+// footer fold away). It is ONE class on <html> (CSS does all the work) - no snapshot value is
+// involved, nothing is fetched, and nothing about it touches the DOM the renderers build.
+// The choice is per-browser: localStorage under a page-owned key, and the value read back is
+// compared to a two-item whitelist before it decides anything (private windows throw: then the
+// page simply starts in the full layout). ?watch=1 turns it on for a visit without storing it.
+const WATCH_KEY = "bellmire.watch.v1";
+const WATCH_LABEL = { on: "Back to the full page", off: "Night watch" };
+const WATCH_HINT  = { on: "Dim and quiet: the town, the Chronicle and who is below.", off: "A dim, quiet page for a second screen." };
+function getStoredWatch() {
+  try { return ctrlStrip(localStorage.getItem(WATCH_KEY) || "").slice(0, 12) === "watch" ? "watch" : ""; }
+  catch (e) { return ""; }
+}
+function applyWatch(on, keep) {
+  const root = document.documentElement;
+  root.classList.toggle("watch", !!on);
+  const btn = $("watchBtn"), hint = $("watchHint");
+  if (btn) btn.textContent = on ? WATCH_LABEL.on : WATCH_LABEL.off;
+  if (hint) hint.textContent = on ? WATCH_HINT.on : WATCH_HINT.off;
+  if (keep) { try { if (on) localStorage.setItem(WATCH_KEY, "watch"); else localStorage.removeItem(WATCH_KEY); } catch (e) {} }
+}
+(function wireWatch() {
+  const btn = $("watchBtn");
+  if (!btn) return;
+  btn.addEventListener("click", () => applyWatch(!document.documentElement.classList.contains("watch"), true));
+  applyWatch(params.get("watch") === "1" || getStoredWatch() === "watch", false);
+})();
+
 load();
 setInterval(load, REFRESH_MS);
 setInterval(showStatus, 15000);

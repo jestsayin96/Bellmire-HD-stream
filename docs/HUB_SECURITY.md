@@ -589,3 +589,10 @@ No CSP change (meta byte-identical to HEAD), no new URL source, no fetch, no vie
 - A result chooses its target by integer (`data-fi`, `data-bi`, `#moment-<n>`); the only selector strings built are `[data-fi="<int>"]` / `[data-bi="<int>"]` from `| 0` integers. Snapshot strings are never used as URL, selector, src, href or style.
 - The `/` shortcut is ignored when the event target is INPUT/TEXTAREA/SELECT/contentEditable, so it cannot steal typing from the guild chat.
 
+## H25 - the Night Watch
+
+- Presentation only: one class on `<html>`, CSS does the work. No new fetch, origin, `connect-src`, or CSP change (CSP byte-identical).
+- New JS touches no snapshot value: `applyWatch()` sets `classList` and two fixed page-owned strings via `textContent`. No innerHTML/outerHTML/insertAdjacentHTML/eval/new Function added (counts unchanged from HEAD).
+- One new storage key, `bellmire.watch.v1`, per-browser, never sent anywhere. It is read through `ctrlStrip`, length-capped, and compared to the single literal `"watch"`; the stored value is never used as a URL, selector, src, href or style. Verified: a stored `<img src=x onerror=alert(1)>` is ignored; a throwing `localStorage` leaves the full page.
+- Hostile hero name `<img src=x onerror=alert(1)>` renders as literal text in the watch layout (Chronicle and Bands): 0 `<img>` elements, 0 alert calls, no page errors. `?state=empty|fail|stale`, `?mock=chronicle|crowd|bands|fallen`, `?open=1` all pass with and without `?watch=1`, at 1280 and 390, with no horizontal scroll.
+- The page remains read-only; the toggle writes nothing outside this browser.

@@ -5733,3 +5733,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Note: C-48 (townsfolk community, commit 754d87b) had no PROGRESS entry; its work is in lore_lines.json "townsfolk".
 - CODE WIRING (D63/town.gd): read festivals.reasons[<reason>] for the opening, then crowd/toasts/stalls/notables/e3po/closings during and after; for a viewer-bought festival use festivals.viewer_paid.* and substitute {buyer} with the display name (strip the token if unknown). notables[] entries carry who = a townsfolk.cast name. Dead until wired. Confirm pickers use len() of each array.
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).
+
+## C-50 (2026-11-15) - standing backlog item 5: epitaphs, barks, descend, cleared, tells, misfire (lore_lines.json)
+- data/lore_lines.json only, additive, appended at the end of each array. 256 new lines: epitaphs +49 (270 -> 319), descend +30 (170 -> 200), cleared +30 (168 -> 198), tells +6 on each of the 8 kinds (+48, 40 -> 46 each), barks +15 on each of enter/trap/hurt/drink/misfire and +14 on lord (+89), misfire format lines +10 (70 -> 80).
+- misfire keeps its 4-placeholder printf shape (name, spell, roll, DC) exactly as the existing lines. One duplicate (barks.lord "Keep it off the healer!") was filtered out rather than added twice.
+- VALIDATION OK: all four data files parse; every pre-existing key and array element is byte-equal to HEAD (new entries only appended); new entries match their blocks' shapes; items/bosses/potions untouched; ASCII only; no floor count stated.
+- CODE WIRING: none new. Plain strings in arrays the pickers already read; confirm they use len() of the array rather than a fixed count (tells 40, descend 170, cleared 168, epitaphs 270, barks 83/84, misfire 70).
+- Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Device_bash had no connected folders this run, so edits were made through the Blender bridge (Python on the Windows side), validated the same way. Not ticked in WORK_PLAN (supervisor ticks).

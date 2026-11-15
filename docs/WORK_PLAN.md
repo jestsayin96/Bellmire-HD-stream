@@ -97,7 +97,27 @@ guarantees a later level will want to move something an earlier one placed.
   6. STAGE IT. Author level 15, get it right, then derive the earlier levels backwards. Ship the
      loader against level 15 first so the town is playable the whole way through the work.
 
-### ONE THING MR. E MUST DECIDE: FIFTEEN LEVELS, OR TWELVE?
+### DECIDED: TWELVE LEVELS FOR NOW (Mr. E, Nov 15 17:10 - "aim for 12 for now")
+TWELVE. He said fifteen a minute earlier and changed it to twelve; TWELVE IS THE ANSWER and this
+line supersedes the other. Author the town to twelve levels.
+
+THIS COSTS NOTHING, WHICH IS WHY IT IS THE RIGHT CALL. Everything already agrees on twelve:
+  - items.json shop_stock (245 entries) and trader_cargo (147) each carry a "tier" 1-12
+  - items.json stock_by_tier: exactly 12 entries (shop_adds / cargo_adds)
+  - lore_lines.json growth_tiers: 12, and the above are generated to agree with it
+  - economy: 12 TOWN_LEVELS
+So no table has to be extended, no new lore has to be written, and the 16:05 gear ruling - a shop's
+level gates what is on its shelf - keeps working untouched. Fifteen would have meant extending all
+four in lockstep, and a level 13 shop with no stock table is a silent hole in the economy.
+
+"FOR NOW" IS HIS WORD AND IT IS LOAD-BEARING. Build so twelve is a NUMBER, not an assumption:
+  - the authored town is ONE map with per-level reveal tags (D93), so adding a thirteenth level
+    later means tagging a few buildings, not drawing a new map
+  - growth.gd's TOP_LEVEL and the tier mapping stay driven by data, never hard-coded in logic
+  - IF THE CAP EVER RISES, the stock, cargo, stock_by_tier and growth_tiers tables are extended IN
+    THE SAME CHANGE that raises it. Never after. That is the rule that keeps the economy whole.
+
+### THE ORIGINAL QUESTION, KEPT FOR THE REASONING:
 He said "all the way to level 15". The numbers in the code today do not have a 15 in them:
   - growth.gd TOP_LEVEL = 6 (six visual build stages)
   - economy has 12 TOWN_LEVELS, and growth maps two economy tiers per visual stage

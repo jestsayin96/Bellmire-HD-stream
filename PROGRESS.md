@@ -5771,3 +5771,8 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Shape unchanged: every pool is still a flat list of plain strings. E3PO still cannot die; no line states a floor count; no new mechanics are stated.
 - VALIDATION OK: file parses; every pre-existing key (and every pre-existing list prefix) equal to HEAD; no new line duplicates any existing string in the file; ASCII only. Authoring done via the Blender bridge because device_bash had no connected folder this run. Godot not run.
 - CODE WIRING: none new. Existing e3po pool keys are already read or pending wiring; the new lines just lengthen the pools.
+## U30 - L64.4 handoff verified (HUD, 2026-11-15, spotlight.gd)
+- spotlight.gd `_amb_tick`: an idle (ambient or resting-on-redeemer) pane that is showing the body the director cut to yields at once to an ordinary ambient pick; `handoff_swaps` counts it. A paid moment still holds its hero (the director yields to it, as before).
+- NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
+- LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
+- L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.

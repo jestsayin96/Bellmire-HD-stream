@@ -117,7 +117,7 @@ than leaving a queue that is all polish at the top.
 
 ## MR. E'S ASK, Nov 15 11:51 - MAKE THE FESTIVAL ACTUALLY FEEL LIKE A FESTIVAL
 
-- [ ] D63. THE FESTIVAL MUST BE AN EVENT, NOT A BOOLEAN. Owner: DESKTOP BUILD (town.gd,
+- [x] D63. THE FESTIVAL MUST BE AN EVENT, NOT A BOOLEAN. Owner: DESKTOP BUILD (town.gd,
       townsfolk.gd, sfx.gd, economy.gd, notables.gd, Town.tscn) with CONTENT writing the words
       (see C6) and the HUD worker NOT involved - this happens in the world, not on a panel.
       WHAT IT IS TODAY, measured: `_festival_pass` flips `festival = true` every 260-420 s for
@@ -193,6 +193,21 @@ than leaving a queue that is all polish at the top.
   main (lore_lines.json "festivals": reasons/crowd/toasts/stalls/notables/e3po/closings/viewer_paid, with {buyer} in the
   paid set), so read those and delete the hardcoded pair rather than growing a parallel copy; (b) the DONE captures - one
   1080p pass of a festival start to finish and one of a viewer-bought festival that is visibly bigger and named.
+  RESULT D63b (game build, 2026-11-15 ~13:30 CT) - both open points closed; ITEM TICKED:
+  (b) C6 shipped on `content` (bac1808) in its OWN shape, not the one noted above, so town.gd now reads it as written:
+     reasons{harvest,raid_survived,town_level,hero_home,viewer_gift,lord_felled} (game reasons market->harvest, raid->
+     raid_survived, level->town_level, hero->hero_home), closings, viewer_paid{openings,crowd,toasts,stalls,notables,
+     e3po,closings} for a paid one, notables as {who,line}; the D63a shape and the code lines stay as fallbacks. NEW: the
+     festival TALKS while it runs - festival-goers within 22 m raise crowd/toast lines in their own shout bubble every
+     6-10 s (4-7 s for a gift; Townsfolk.say_once, NOT the crier path, never the feed), and every 24-34 s (16-24 gift) the
+     Chronicle gets one line rotating stalls -> a notable -> E3PO (who says it in his own bubble, notables.e3po_line).
+     LIVE ONLY WHEN THE SUPERVISOR MERGES `content` -> main -> laptop: laptop's lore_lines.json has no "festivals" yet.
+  (a) CLIP: tools/_d63_clip.gd + movie writer -> renders/cycles/d63/d63_festival_clip.mp4 (75 s, h264+aac, 34 MB, NOT
+     committed - too big for git; it sits on cruzader). Market festival opens on a C6 harvest line, bunting + crowd +
+     both heroes + bubbles, closes on a C6 closing with the trade tally, square struck, dusk, a 500-bit Festival of
+     Plenty for "MrEsBestViewer" lit gold and named. CAVEATS: it recorded at 1152x648 (the movie writer kept the default
+     window, not 1920x1080 - the 1080p stills from D63a stand), and the slow orbit camera passes through a roof twice.
+     Words in the clip come from content's file injected via env D63_LORE (preview of the merge).
 
 - [x] C6. THE FESTIVAL HAS A VOICE (data/lore_lines.json). Owner: CONTENT WRITER - words only,
       never code, and D63 reads them rather than inventing parallel copies.

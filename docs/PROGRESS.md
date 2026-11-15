@@ -1341,3 +1341,18 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   -14 dB bus). (2) raid: epic_cinematic can never pass the hype mood check (style max 100 BPM vs hype 140-160) -
   keep it, or allow arcade_upbeat/retro_synthwave for the raid? (3) delve mood plays whenever a delve is live -
   on a busy stream that may be most of the time; say if it should be director-driven instead.
+
+## U-cycle - U28 L65.4: the legibility floor, measured, 2026-11-15 (HUD)
+- FLOOR (stated in ui_theme.gd): FLOOR_PX 17 at 1080p, FLOOR_CONTRAST 4.5:1 against the REAL backdrop.
+- TOOL tools/_l654_audit.gd (windowed 1920x1080): brings up the resting stream, freezes time, captures the
+  frame, hides every glyph, captures the backdrop, and for every on-screen Label/RichTextLabel reports px and the
+  WCAG ratio of its font colour vs the backdrop pixels under the text (mean and worst 10th percentile).
+- FOUND (before): BITS chip p10-mean 3.05, CHANNEL POINTS 4.00 (light text on a gold/teal chip darkened only 0.72x);
+  Chronicle first/last line p10 4.07 (scroll edge shade 0.5 alpha under the text).
+- CHANGE ui_theme.gd: new UiTheme.chip_bg(col, a, fg, ratio) darkens a kind colour until fg reads at 6:1;
+  SCROLL_EDGE_SHADE alpha 0.5 -> 0.34. spotlight.gd: both chips (now-watching, lane kind) use chip_bg.
+- AFTER (all 15 on-stream strings, 0 below floor): Chronicle 21 px p10 5.00-12.79; Now-watching 24 px p10 5.89-16.19;
+  lane titles 30 px (DIRECTOR 17.00, BITS 6.01, SUBSCRIBER 6.38, CHANNEL POINTS 6.23). Full table renders/cycles/20261115_l654/audit.txt.
+- LOOKED at renders/cycles/20261115_l654/1_live_1080.png: scroll text dark-on-vellum, lane chips readable, no overlap.
+- NOT DONE: lord card was not on screen when sampled (not measured); no pixel-exact before/after pair for the
+  DONE line (before is numbers only); the zero-literal grep of the four adopting files was not re-run. L65 stays OPEN.

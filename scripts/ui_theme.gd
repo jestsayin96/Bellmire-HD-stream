@@ -199,7 +199,7 @@ const SCROLL_GRAIN_HI := Color(1, 1, 1, 0.04)
 const SCROLL_STAIN := Color(0.55, 0.40, 0.22, 0.05)
 const SCROLL_STAIN_2 := Color(0.48, 0.34, 0.18, 0.05)
 const SCROLL_RULE := Color(0.16, 0.10, 0.05, 0.85)
-const SCROLL_EDGE_SHADE := Color(0.22, 0.14, 0.07, 0.5)
+const SCROLL_EDGE_SHADE := Color(0.22, 0.14, 0.07, 0.34)   # L65.4: was 0.5 - it dragged the first and last Chronicle line under 4.5:1
 const SCROLL_SHEET_SHADOW := Color(0, 0, 0, 0.30)
 const SCROLL_GLINT := Color(0.97, 0.90, 0.64, 0.75)
 const SCROLL_SEAL := Color(0.06, 0.40, 0.40)
@@ -254,6 +254,16 @@ static func _lum(c: Color) -> float:
 	var f := func(v: float) -> float:
 		return v / 12.92 if v <= 0.03928 else pow((v + 0.055) / 1.055, 2.4)
 	return 0.2126 * f.call(c.r) + 0.7152 * f.call(c.g) + 0.0722 * f.call(c.b)
+
+## L65.4: the fill behind light text on a kind-coloured chip. Darkens the kind colour until
+## `fg` reads at `ratio`:1 against it, so a gold BITS chip can never wash its own label out.
+static func chip_bg(col: Color, a := 0.95, fg := ON_KIND, ratio := 6.0) -> Color:
+	var c := Color(col.r * 0.72, col.g * 0.72, col.b * 0.72, 1.0)
+	var guard := 0
+	while contrast(fg, c) < ratio and guard < 24:
+		c = Color(c.r * 0.88, c.g * 0.88, c.b * 0.88, 1.0)
+		guard += 1
+	return Color(c.r, c.g, c.b, a)
 
 ## ---- L16 (phone test): speech in the world - a townsperson's bubble, the crier.
 ## Same house as the Chronicle: ink on parchment, a plate behind the words so they

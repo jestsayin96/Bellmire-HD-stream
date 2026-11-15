@@ -6,7 +6,7 @@
   RESULT (2026-11-15): snapshot_pub.gd publishes v=3 with per-hero `satchel` [{name,kind,qty,sell}], `satchel_total`, and the parallel `sellable`/`sell_prices`; worn weapon/armour carry a `sell` when their tier has a price. Price is the counter's own floor(cost*0.4) (leaderboard_panel Satchel.SELL_BACK), NOT half - see the note below. The live hub renders it: Satchel list + "Counter pays 576 gold" on a test hero, and nothing at all for a hero carrying nothing. D57_SATCHEL OK (23/23), W1A_TEST OK, TWITCH_PARSE OK, offfloor 0/1217, TOWNWALK PASS, delve 0 SCRIPT ERROR, parse 0 errors, payload 7.5 KB.
   NOTE FOR MR. E - the written spec and the shipped hub disagreed; the code follows the SHIPPED hub (web/app.js H11), which reads `h.satchel` rows and maps `kind` through SATCHEL_ICON (weapon/armour/potion/oil/gold/trinket/loot/gem). The ICON_SET named in the item (Chest/Vial/Scroll/Fish/...) does not exist anywhere in the hub, and `sellable`/ `sell_prices` alone would have rendered nothing. Both shapes are published, so either client works.
 
-- [ ] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
+- [x] D58. THE TOWNSFOLK LOOK LIKE THEY ARE STRUGGLING TO WALK (Mr. E, Nov 15, watching the stream:
       "all the characters in the game looked like they were having trouble walking"). Owner: DESKTOP
       BUILD (townsfolk.gd, rig.gd, hero_body.gd, town_nav.gd).
       THIS IS A DIFFERENT BUG FROM THE THREE ALREADY ON THE BOARD - do not close it by re-fixing those:
@@ -31,6 +31,16 @@
       logged check that animation speed tracks agent velocity (print velocity vs speed_scale for 10
       agents over 30 s - they must correlate, not sit flat). In the capture: no foot sliding, no
       snapping between clips, turns read as turns. Mr. E's bar for this one is WOW, not "oh".
+  RESULT (2026-11-15): measured first (tools/_d58_gait_probe.gd). Cause #1 was NOT it - speed_scale already
+  tracked velocity and feet were planted (slip ~1.0). The real cause: ordinary folk cruised at 1.6-1.9 m/s, so
+  the 0.8 m/s KayKit walk played at ~2.0x (476/481 walk samples over 1.5x - a frantic double-time shuffle),
+  and that cruise speed sat INSIDE the walk<->jog hysteresis band (23 walk/jog clip flips in 30 s, 10 agents).
+  Fix (townsfolk.gd only, rig untouched): walkers - not flees, not runners set over 2.4 m/s like the watch -
+  stroll at Townsfolk.stroll 0.66 of that (~1.1 m/s), via one _step_v() used by the step, the slide-round and
+  the stuck check. After: walk cadence 1.22-1.41x, corr(v, speed_scale) 0.73 (was -0.01, pinned at the cap),
+  slip>25% 1/588, 0 clip flips, 0 jog samples. 1080p market shots: 19-24 folk walking near the square
+  (renders/cycles/d58/). Gates: parse 0, offfloor 0/1483, TWITCH_PARSE OK, TOWNWALK PASS 0.012%, delve 0 SCRIPT ERROR.
+  Stills cannot show a stride - Mr. E's eye on the stream is the WOW check; Townsfolk.stroll is the one dial.
 
 - [x] D50. TOWNSFOLK FREEZE AND THEIR ANIMATION STUTTERS. Owner: DESKTOP BUILD (townsfolk.gd,
       town_nav.gd, rig.gd). Two joined symptoms Mr. E saw: (a) NPCs standing frozen - "hasn't moved

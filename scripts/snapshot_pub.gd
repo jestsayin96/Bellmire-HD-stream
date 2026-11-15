@@ -343,6 +343,13 @@ func _town_block(e: Economy) -> Dictionary:
     if dl != null and dl.has_method("day_phase"):
         out["day_phase"] = String(dl.day_phase())
         out["weather"] = String(dl.weather)
+    # D64: each shop's level and the best rarity it may sell (additive; v unchanged)
+    if e.has_method("shop_level"):
+        var shops: Array = []
+        for k in e.SHOP_NAMES.keys():
+            shops.append({"name": String(e.SHOP_NAMES[k]), "level": e.shop_level(k),
+                "sells_to": e.shop_sells_to(k)})
+        out["shops"] = shops
     return out
 
 ## D57: one hero's sell sheet for the hub's Satchel (H11). Plain data, no new fetch,

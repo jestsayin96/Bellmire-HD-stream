@@ -1,0 +1,64 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The stair counts itself out, if anyone is listening.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 giant rat.
+FEED A row of boots at the door, paired and empty.
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Bolt at giant rat.
+FEED The slime divides.
+FEED DawnCleric casts Smite at slimeling.
+T10s floor=1 state=fight foes=3 ["JestFan 98/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED MossyMage casts Chain Bolt at slimeling.
+FEED MossyMage's fire unspools in their hands (1 vs DC 10).
+FEED MossyMage searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Floor 1 holds. Measure the grain, mend the mail.
+FEED MossyMage finds a vial of The Alewife's Short Measure.
+T20s floor=1 state=search foes=0 ["JestFan 98/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+T30s floor=1 state=search foes=0 ["JestFan 98/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED MossyMage searches the chest - Successfully found loot!! 19 gold (Investigation 18 vs DC 10).
+T40s floor=1 state=search foes=0 ["JestFan 98/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T50s floor=1 state=descend foes=0 ["JestFan 108/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED JestFan steps on a slot in the floor - a blade! DEX 20 vs DC 10, 6 damage (halved).
+T60s floor=1 state=descend foes=0 ["JestFan 102/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+T70s floor=1 state=descend foes=0 ["JestFan 102/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 bog frog, 1 slime, 1 puglin.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED The oil is running low.
+FEED DawnCleric casts Smite at Gnawbone.
+T80s floor=2 state=fight foes=5 ["JestFan 102/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED MossyMage casts Bolt at Gnawbone.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED DawnCleric casts Smite at Gnawbone.
+FEED MossyMage casts Chain Bolt at Gnawbone.
+FEED Gnawbone's children come squealing.
+FEED Gnawbone falls to JestFan.
+FEED DawnCleric's smite goes wrong - the scar answers (10 vs DC 11).
+FEED MossyMage casts fire. The scar adds a verse of its own (7 vs DC 11).
+T90s floor=2 state=fight foes=5 ["JestFan 80/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED BigAxe rolls a 20 - and the giant rat is gone.
+FEED DawnCleric casts Smite at puglin.
+FEED MossyMage casts Bolt at bog frog.
+T100s floor=2 state=fight foes=2 ["JestFan 80/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED DawnCleric casts Bolt at bog frog.
+FEED The slime divides.
+FEED JestFan rolls a 20 - and the slimeling is gone.
+FEED MossyMage searches (Investigation 19) and turns up 27 gold on floor 2.
+FEED Floor 2 quiet - the kind of quiet that remembers.
+T110s floor=2 state=search foes=0 ["JestFan 74/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED MossyMage searches the chest - ...no loot... (Investigation 5 vs DC 11).
+T120s floor=2 state=search foes=0 ["JestFan 74/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+T130s floor=2 state=search foes=0 ["JestFan 74/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T140s floor=2 state=descend foes=0 ["JestFan 101/108", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 114/114"]
+FEED MossyMage steps on a plate - darts! DEX 10 vs DC 11, 6 damage.
+T150s floor=2 state=descend foes=0 ["JestFan 101/108", "MossyMage 67/73", "DawnCleric 86/86", "BigAxe 114/114"]
+
+RC=0

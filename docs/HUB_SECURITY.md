@@ -550,3 +550,13 @@ The Town tab adds no CSP change, no fetch and no URL sink. Town name, building n
 - `p.bestiary` is optional, looked up by own-property on page-owned keys, numbers coerced and capped, booleans only as typeof boolean.
 - Checked: ?state=empty/fail/stale, ?mock=chronicle/crowd/lore, ?open=1 and ?mock=bestiary; a hostile lord name
   (`<img src=x onerror=alert(1)>`) renders as literal text, no `<img>` or `[onerror]` element is created.
+
+## H20 - character sheet (Nov 15)
+
+No CSP change, no new URL source, no write path. The sheet and the personal chronicle read only
+the snapshot and the H14 localStorage history; every string (names, titles, epitaphs, gear names,
+band names, chronicle lines) reaches the DOM through `el()` / `createTextNode`. Slot icons come
+from ICON_SET; `gear`/`equipment` slot values are text only. Personal-history matching is a
+whole-word string compare, never a regex built from a name. The hostile name
+`<img src=x onerror=alert(1)>` is carried through `?mock=sheets` and renders as literal text.
+

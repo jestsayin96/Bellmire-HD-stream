@@ -1710,7 +1710,7 @@ Satchel is intentionally removed - a direction change, its work feeds the hub, n
       counter sell prices) and pin-your-hero, CSP unchanged, hostile-name test passes. Mr. E
       approved: "Yes - dormant until game publishes v=3, no downside." Code awaits game-build L63/D48
       to publish snapshot v=3; hub republish still Mr. E's call.
-- [ ] H12. LORE SECTION ON THE HUB (Mr. E's ask, Nov 14). Owner: HUB BUILDER (web/ only). The hub
+- [x] H12. LORE SECTION ON THE HUB (Mr. E's ask, Nov 14). Owner: HUB BUILDER (web/ only). The hub
       should carry the world's lore so a new viewer can get oriented without leaning on chat. Pull from
       data/lore_lines.json (READ from main; it is content-writer-owned, do not edit) and present the
       sections that read as world lore - town_life, growth_tiers.tiers (as the town's own history),
@@ -1720,8 +1720,9 @@ Satchel is intentionally removed - a direction change, its work feeds the hub, n
       a frozen copy with a visible last-updated. Icons from ICON_SET; no new URL/src/style. House
       palette (parchment/charcoal/teal, Gloock for section titles only).
       DONE: a viewer can read town/kingdom lore on the hub, hostile-name test still passes, invariants
-      intact, CSP unchanged.
-- [ ] H13. NO-SCROLL LAYOUT - the hub is one long page (Mr. E's ask, Nov 14). Owner: HUB BUILDER
+      intact, CSP unchanged.      TICKED (supervisor, Nov 15): shipped hub b470489, PUBLISHED LIVE gh-pages c926030. Mr. E reviewed the live page and signed off.
+
+- [x] H13. NO-SCROLL LAYOUT - the hub is one long page (Mr. E's ask, Nov 14). Owner: HUB BUILDER
       (web/ only). Reorganise the existing sections (Boards, Chronicle, Hero Sheets, Bands Below,
       Satchel, chat, lore from H12) so a viewer does not have to scroll one page end to end. Tabbed or
       sidebar-nav layout, remembers the last section the viewer picked (localStorage, control-stripped,
@@ -1731,6 +1732,7 @@ Satchel is intentionally removed - a direction change, its work feeds the hub, n
       DONE: no section is more than one viewport tall at 1080p; a viewer can reach every section in
       one click; hostile-name test passes across every tab; mobile/phone layout still works; invariants
       + CSP + hostile-name test all intact.
+      TICKED (supervisor, Nov 15): shipped hub 5c100ca + fix 8e248a5, PUBLISHED LIVE gh-pages c926030. Mr. E confirmed the tabs (Boards/Heroes/Bands/Chronicle) on the live page.
 
 # Phase AA - Mr. E's narrated clip 14-26-15 (transcribed) (2026-11-13 14:50)
 

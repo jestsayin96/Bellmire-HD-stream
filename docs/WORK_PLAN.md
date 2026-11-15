@@ -379,56 +379,19 @@ shop economy now being built (D64-D66).
       DONE: a chat log from a soak showing each announcement fired once, in voice, within the cap;
       and the cap proven by forcing a burst.
 
-## MR. E'S ASK, Nov 15 14:01 - THE RAZING: A 10,000-BIT TOWN RESET
+## DECIDED AGAINST: A TOWN RESET POWER-UP (Mr. E, 2026-11-15 14:12)
 
-- [ ] D68. THE RAZING - A PATRON CAN PUT BELLMIRE BACK TO LEVEL 1 FOR 10,000 BITS. Owner: DESKTOP
-      BUILD (twitch_eventsub.gd, town.gd, economy.gg/economy.gd, growth, notables.gd) with CONTENT
-      writing the words (C8). Mr. E's idea and his call. 10,000 bits is roughly $100 - this is the
-      single most expensive thing anyone can do to Bellmire and it must FEEL like it.
-      WHAT IT DOES: the town drops to level 1. Growth, treasury and the built plots go back to a
-      crossing. It is the biggest event the stream can have.
+He raised a 10,000-bit power-up that would put Bellmire back to level 1, considered it, and said
+no: "lets not do the reset". D68 and C8 were written and are now withdrawn - DO NOT rebuild them
+and DO NOT propose a town-wipe, a razing, a reset or a "start the age over" mechanic again unless
+he raises it himself.
 
-      THE ONE THING MR. E MUST DECIDE BEFORE THIS IS BUILT - DO NOT GUESS, DO NOT PICK A DEFAULT:
-      D66 lets viewers spend bits and channel points to upgrade SPECIFIC shops and buildings. A
-      razing deletes what OTHER patrons paid for. A viewer who spent 2,000 bits raising the armoury
-      watches a stranger erase it. That is the difference between glorious drama and a feature that
-      punishes the most invested people in the channel. Three ways to square it, his pick:
-        (a) TOTAL - everything goes, other patrons' upgrades included. Maximum stakes, maximum
-            drama, and the risk that generous viewers stop giving because it can be taken away.
-        (b) THE TOWN FALLS, THE GIFTS REMAIN - level, growth and treasury reset, but buildings a
-            viewer PAID to upgrade keep their level. The town is razed; what patrons built endures
-            in the ruins. Protects giving, still a huge event, and is better lore.
-        (c) TOTAL, BUT IT CAN BE RESISTED - the razing is announced with a countdown and chat can
-            rally against it (bits, points, or a mass of !commands). If the town holds, the razer
-            loses it anyway. The best stream moment of the three and the most work.
-      Until he answers, BUILD NOTHING. Write the plumbing only if (b) or (c) is chosen and he says
-      so in writing.
-
-      WHATEVER HE PICKS, THESE HOLD:
-      .1 THE CHRONICLE SURVIVES. The town resets; its memory does not. A razing is the end of an
-         age, not a deletion - the next Bellmire is built on the ruins of the last, and the
-         Chronicle says whose ruins they are. This is what makes it lore instead of a wipe.
-      .2 THE RAZER IS NAMED FOREVER. A landmark, a monument or a permanent Chronicle entry naming
-         who did it and when. Someone paying $100 to end an age should be remembered for it - and
-         being remembered is most of what they are buying.
-      .3 IT CANNOT HAPPEN BY ACCIDENT. Confirmation, a cooldown so it is an event and not a
-         mechanic, and a streamer kill-switch Mr. E can throw live. A bits redemption cannot be
-         undone by the game, so the guard has to be before it fires, not after.
-      .4 IT MUST BE SEEN. The razing plays out - it is not a number changing. Whatever D63 taught
-         about dressing the square applies in reverse here.
-      .5 THE BOT ANNOUNCES IT (pairs with D67). In chat, named, in voice.
-      DONE: a capture of a full razing from redemption to the new crossing, the Chronicle carrying
-      the old age across, the razer named in-world, the cooldown and kill-switch proven, and the
-      patron-upgrade rule behaving exactly as Mr. E chose. Gates green.
-      NOT YOURS TO CREATE: the 10,000-bit Custom Power-up itself is made in the Twitch dashboard by
-      Mr. E. Do not create, delete or re-price rewards.
-
-- [ ] C8. THE WORDS FOR AN ENDING (data/lore_lines.json). Owner: CONTENT WRITER - words only.
-      A "razing" pool: the announcement, the razing itself, the morning after, how the Chronicle
-      records the end of an age, how the new crossing speaks of the old one, and how the razer is
-      remembered - by those who hated it and those who cheered. This is the darkest thing that
-      happens in Bellmire and it should read like the end of a chapter, not an error message.
-      DONE: json validates, pre-existing keys byte-identical, counts per category stated.
+The reason is worth keeping, because it constrains other designs too: D66 lets viewers spend bits
+and channel points to upgrade SPECIFIC shops and buildings. Anything that wipes town progress also
+deletes what OTHER patrons paid for - a viewer who spent 2,000 bits raising the armoury would watch
+a stranger erase it. A feature that lets one person destroy another's contribution punishes the
+most invested people in the channel. Weigh any future "big destructive event" against that before
+writing it: Bellmire can have disasters and losses, but not ones that cancel a patron's gift.
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 

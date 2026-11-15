@@ -3805,3 +3805,17 @@ screen. A viewer could watch a whole delve and never see anyone find anything.
      new lines per category inherit that path with no change. OWNER: desktop build (town.gd /
      townsfolk.gd).
 - TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.
+
+# C-cycle 37 (content, laptop, branch `content`)
+- WHAT: the lines that repeat most, widened again - 206 new lines in data/lore_lines.json.
+  * tells: all eight dungeon biomes extended, each 28 -> 34 (warren, tomb, mine, works, prison, lair, fortress, temple). Six new tells per biome; voice and canon preserved (fortress still reads a garrison keeping something in, temple still reads a half-remembered rite, prison still reads work-shift tallies, mine still reads the shaft that outlasted the vein).
+  * descend 110 -> 130 (+20): new punchy lines for the long walk down.
+  * cleared 110 -> 130 (+20): new closers for the moment a lord goes down.
+  * epitaphs 160 -> 200 (+40): the stream's single most-repeated channel, now widest.
+  * misfire 50 -> 60 (+10): a d20 one away from the fumble is still viewer-facing text.
+  * barks: all SIX bark kinds widened 8 each - trap/drink/hurt/misfire 63 -> 71, enter/lord 64 -> 72 (lord is 64 and keeps its shape).
+  * town_life.crier 33 -> 37, market 32 -> 36, growth 32 -> 36 (+4 each): the town ticker the desktop reads between raids.
+- WHY this cycle: standing backlog item 5 (epitaphs, barks, descend and cleared lines - the ones that repeat most on a long stream). The stream test on Nov 13 showed the Chronicle re-hitting its lines inside one hour; this cycle widens every array that repeats fastest, while keeping each line short enough to read at a glance in the HUD panes.
+- VALIDATION OK: python json.loads data/lore_lines.json without error; items.json, bosses.json and potions.json byte-identical to HEAD; top-level key order unchanged (20 keys, identical to HEAD); every pre-existing list is an exact prefix of the new one and every pre-existing string is byte-identical (deep-walk, 0 fails); trailing newline restored; zero duplicate lines inside any widened array.
+- CODE WIRING implied by the new keys: NONE. This cycle only extends existing arrays that are already read on every path - tells by the dungeon's biome text, descend/cleared/epitaphs/misfire by the Chronicle, barks by the hero pop-ups, town_life.crier/market/growth by the desktop's town chatter. The new lines inherit the existing paths unchanged; no loader touches a new key.
+- TICKING: WORK_PLAN left UNTICKED for the supervisor (COORDINATION 6+11). Not a WIP commit.

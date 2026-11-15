@@ -63,7 +63,7 @@ const FLOOD := 8
 ## too big for a box at the centre of the grid. The FONT shrinks first; HudDock.centre is
 ## then sized to the smaller text. The full-screen panel keeps 28 - he did not complain
 ## about that one, and it is read from further back.
-const CHRON_PX := 18            # the centre box's line size at 1080p
+const CHRON_PX := 21            # the centre box's line size at 1080p (L61: 18 -> 21, Mr. E approved)
 const CARD_PX := 20             # a lord's card title in the box
 const CARD_SUB_PX := 14
 var _chrome := false            # "strip mode" (the name predates L32b: it was the chrome bar)

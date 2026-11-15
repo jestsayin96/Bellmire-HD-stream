@@ -524,3 +524,14 @@ If any of that is not true, do not republish.
 ## H14: stored chronicle history
 
 The hub now keeps up to 300 chronicle rows (48 h) in localStorage `bellmire.chron.v1`. Stored text is attacker-controlled Twitch input that has crossed a storage round-trip: it is re-cleaned (control chars stripped, 400-char cap, kind and timestamp regex-validated) on read and rendered only through el()/textContent. No snapshot or stored field becomes a URL, src, href or style. No CSP change, no new fetch, no write path to any server.
+
+## H15 - hero crests (coats of arms)
+
+Each hero card, opened sheet and top-5 board row shows a small heraldic shield built by `coat()` in app.js.
+The hero's name is hashed (FNV-1a, then a seeded mixer) and the hash only selects INDICES into page-owned
+constants: CREST_DIV (field division), CREST_TINCT (ink / parchment / teal / gold) and CREST_CHARGE (eight
+charges). Every path string and colour written to the SVG is a literal from app.js; no snapshot value is ever
+placed in an attribute, a URL, a style or markup, so a hostile name still yields a valid crest and renders as
+text beside it. SVG is built with createElementNS + setAttribute of constants (no innerHTML). The one shared
+`<clipPath id="coa-clip">` is added once. The only reference is the local fragment `url(#coa-clip)`. No new
+fetch, no image file, no new origin, no CSP change. Matching is case-insensitive, so Aldric and aldric share arms.

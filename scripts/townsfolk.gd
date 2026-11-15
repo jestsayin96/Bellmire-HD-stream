@@ -12,6 +12,23 @@ const ADV := "res://addons/kaykit_character_pack_adventures/Characters/gltf/"
 ## (D17b: 0.62 put a stroll at 2.6 m/s - a sprint for these short KayKit legs,
 ## whose walk covers 0.8 m/s. 0.40 is a brisk walk the gait can match.)
 static var pace := 0.40
+## D58: GAIT QUALITY. At pace 0.40 an ordinary stroll is 1.6-1.9 m/s - Rig.drive
+## kept the feet planted (slip ~1.0) but only by playing the 0.8 m/s KayKit walk
+## at ~2x, a frantic double-time shuffle, and that cruise speed sat inside the
+## walk<->jog hysteresis band so folk flicked between the two clips mid-street
+## (tools/_d58_gait_probe.gd: 476/481 walk samples over 1.5x, 23 flips in 30 s).
+## That is Mr. E's "having trouble walking". A walker (not a flee, not a runner
+## like the watch) now strolls at `stroll` of that: ~1.1-1.3 m/s, the walk at
+## ~1.4-1.6x - a relaxed step, clear of the jog band. 1.0 = the old pace.
+static var stroll := 0.66
+const STROLL_BELOW := 2.4       # m/s: anything set to move faster is a runner, left alone
+
+## the ground speed this body's walk steps at this frame
+func _step_v() -> float:
+    var v := speed * pace * _flee_k
+    if stroll < 1.0 and _flee_k <= 1.0 and v < STROLL_BELOW:
+        v *= stroll
+    return v
 ## On stream the names that matter are the viewers' heroes (HeroBody turns its
 ## own back on). Townsfolk names are off unless this is set.
 static var show_names := false
@@ -873,7 +890,7 @@ func _physics_process(delta: float) -> void:
     _wobble += delta * 1.7
     dir = (dir + Vector3(sin(_wobble), 0.0, cos(_wobble * 0.8)) * sway).normalized()
     var was := global_position
-    var p: Vector3 = global_position + dir * speed * pace * _flee_k * delta
+    var p: Vector3 = global_position + dir * _step_v() * delta
     # (D17c: the last step onto a seat is off the walkable ground too)
     var seat_leg: bool = _route.size() == 1 and _seat_i >= 0
     var ghost_leg: bool = _ghost_last != Vector3.INF and _route.has(_ghost_last)
@@ -893,7 +910,7 @@ func _physics_process(delta: float) -> void:
         if Vector2(p.x - want.x, p.z - want.z).length() > 0.005:
             # D14: pressed against a prop (a crate, a bench, a fence end) the
             # push-out only hands the foot back - step round it instead
-            p = _slide_round(was, dir, speed * pace * delta, p)
+            p = _slide_round(was, dir, _step_v() * delta, p)
     # D44b: never COMMIT a foot the walk audit (_solid_footprints: props +
     # houses) would read as inside one. keep_walkable + _slide_round can fail to
     # clear the dense south-market overlap, and a ghost brush or crowd nudge can
@@ -936,7 +953,7 @@ func _physics_process(delta: float) -> void:
                 _wd_n = 0
     # a waypoint that cannot be reached (off the ground, behind a crowd):
     # after a moment give it up and take the next
-    if Vector2(p.x - was.x, p.z - was.z).length() < speed * pace * delta * 0.3:
+    if Vector2(p.x - was.x, p.z - was.z).length() < _step_v() * delta * 0.3:
         _stuck_t += delta
         # a corner the walls will not let a foot onto: close enough is there
         if to.length() < 1.2 and _route.size() > 1:

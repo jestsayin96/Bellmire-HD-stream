@@ -580,3 +580,10 @@ an overlay all get the same ten-button row with the same one-click reach.
 ## H14: the Chronicle remembers
 
 A rolling per-browser history (localStorage key `bellmire.chron.v1`, newest first, capped at 300 rows / 48 h / ~120 KB, oldest dropped first) is folded in from every live snapshot. Live lines show first, then an "Earlier" divider and day dividers in the town's voice. De-duplication is by kind+text against the live set. Remembered rows are re-validated field by field on read and drawn through the same chronShape/el()/textContent path as live ones. No new fetch, origin, write path or CSP change; storage absent/full/throwing leaves the page working with no history.
+
+## H15 - every hero gets a crest
+- `coat(name, size)` in app.js (sizes sm/md/lg are page classes). Hero card: right of the summary. Opened sheet: large, left of the pin button. Boards: inline before the name for places 1-5.
+- Whitelists: 7 divisions x 4x3 tincture pairs x 2-3 charge tinctures x 8 charges. 200-hero mock: 187 distinct, 0 identical neighbours. Same name gives the same arms every load.
+- Local checks run (headless Edge, file://): ?mock=crowd, ?mock=crowd&open=1, ?mock=chronicle, ?state=empty, ?state=fail, ?state=stale. Hostile name renders as text with a valid crest and no <img> is created.
+- Hero first paint (crowd mock, headless virtual-time clock): before 1006.3 ms, after 1007.1 ms. That clock is quantised, so read it as no measurable change. Recipe cost is about 0.36 microseconds per name.
+- Not visually reviewed by me: no screenshot viewer was available on this run. Mr. E or the supervisor should eyeball the card and sheet at 390 and 1280.

@@ -1,5 +1,30 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
+
+Mr. E: "longer and bigger tasks need to be handed out."
+
+The workers are clearing items in 12-35 minutes. That is not speed, it is items that are too
+small. A queue of micro-fixes produces a game that is tidy and shallow. He wants depth.
+
+WHEN THE SUPERVISOR WRITES NEW WORK, the bar is now:
+  - An item should be a SUBSTANTIAL piece of work - a system, a feature, a whole subsystem
+    reworked - not a tweak, a number change, or a single-file polish pass. If a competent worker
+    would finish it in under an hour, it is too small to write as its own item.
+  - BUNDLE related small work into one larger item with staged parts (.1, .2, .3) under a single
+    ID, the way D21b was run. One item, several stages, one DONE test for the whole thing.
+  - Prefer DEPTH over breadth: a building type that NPCs actually use beats five new props; a
+    status-effect system beats one new icon; traps that interact with the party beat one new room
+    shape.
+  - Every item still needs its concrete DONE test. A bigger item needs a BIGGER test - a soak, a
+    timelapse, a capture with several things happening at once - not a single screenshot.
+  - Do NOT pad an item to look big. A real system with real stakes, or nothing.
+
+THIS DOES NOT CHANGE EXISTING ITEMS. IDs are frozen; nothing is renumbered or rescoped. It governs
+what gets WRITTEN from now on, and the order they are offered: when several items are open, put the
+substantial ones where a worker taking "the first unchecked item" will actually reach them, rather
+than leaving a queue that is all polish at the top.
+
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
 - [x] D57. PUBLISH HERO SATCHEL FIELDS IN SNAPSHOT v=3 (Mr. E's ask, Nov 15 - URGENT; blocks the hub Satchel from lighting up). Owner: DESKTOP BUILD (scripts/snapshot_pub.gd). The hub's H11 Satchel panel is live and dormant, waiting for the snapshot publisher to add per-hero sellable items with counter sell prices and bump the payload version to 3. Add two fields per hero to the published row: `sellable` (array of {kind, qty} - kinds from the existing ICON_SET whitelist Chest/Vial/Scroll/Fish/Coin/Gem/Herb/Bone/Cloth/Ore/Spark/Wood) and `sell_prices` (parallel array of ints, in gold, computed from the counter's buy curve, usually half). Keep the publisher's control-char strip and name cap on every string. Bump the published `v` field from "2" to "3". No new fetch, no secret exposed, additive only - older hub clients still render the hero sheet without the Satchel block (H11 is forward-compatible). DONE: the hub at https://jestsayin96.github.io/Bellmire-HD-stream/ shows a Satchel section under a signed-in viewer's hero with items + prices; W1a sanitization still green; snapshot_pub stays under the size cap.
@@ -770,7 +795,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
   NOT PROVEN: the 48 h and 300-row caps were read, not exercised by a long session. The code paths are
   simple and bounded, so this is a low-risk gap, but a future hub run should exercise them for real.
 
-- [ ] H15. EVERY HERO GETS A CREST (heraldry - the single cheapest way to make 200 names read as a guild). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). Give each hero a small coat of arms, drawn as inline SVG the page owns, derived deterministically from the hero's name: hash the name, then pick a field division, two tinctures and one charge from PAGE-OWNED whitelists (the same discipline as ICON_SET - the snapshot value chooses WHICH known shape, it never supplies one). Use the existing palette - deep ink, parchment, the one teal, restrained gold - so the crests read as one house, not a rainbow. Show the crest on the hero card, larger on the opened hero sheet, and beside the top entries on the boards. Keep it cheap: no image files, no new fetch, no CSP change, and the crest must not slow the 200-hero mock's first paint. DONE: the 200-hero mock shows visibly distinct crests with no two adjacent cards looking alike at a glance; the same name always yields the same crest across reloads; a hostile name renders as text AND still produces a valid crest; first paint on the 200-hero mock is no worse than before (state the before/after number).
+- [x] H15. EVERY HERO GETS A CREST (heraldry - the single cheapest way to make 200 names read as a guild). Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). Give each hero a small coat of arms, drawn as inline SVG the page owns, derived deterministically from the hero's name: hash the name, then pick a field division, two tinctures and one charge from PAGE-OWNED whitelists (the same discipline as ICON_SET - the snapshot value chooses WHICH known shape, it never supplies one). Use the existing palette - deep ink, parchment, the one teal, restrained gold - so the crests read as one house, not a rainbow. Show the crest on the hero card, larger on the opened hero sheet, and beside the top entries on the boards. Keep it cheap: no image files, no new fetch, no CSP change, and the crest must not slow the 200-hero mock's first paint. DONE: the 200-hero mock shows visibly distinct crests with no two adjacent cards looking alike at a glance; the same name always yields the same crest across reloads; a hostile name renders as text AND still produces a valid crest; first paint on the 200-hero mock is no worse than before (state the before/after number).
+  RESULT (2026-11-15, hub 2067316): page-owned inline SVG coat of arms, FNV-1a over the lowercased
+  name seeding indices into fixed whitelists (7 field divisions, 4 tinctures from the existing ink/
+  parchment/teal/gold palette, 8 charges). SUPERVISOR SECURITY REVIEW (passed): every path and colour
+  is a constant in app.js, elements are built with createElementNS, and no snapshot value reaches any
+  attribute - a hostile name only chooses WHICH known shape, so it still yields a valid crest and can
+  never become markup, a URL or a style. Memoised (cap 600) and shown at three page-chosen sizes: hero
+  card, opened sheet, and the top five board rows. No image files, no new fetch, CSP byte-identical.
 
 - [ ] H16. THE HALL OF THE FALLEN. Owner: HUB BUILDER (web/index.html, web/app.js, web/style.css). The Fallen list from H4 is a list of names; make it a memorial a viewer would stop and read. Per fallen hero: the crest (H15 if it has shipped), the epitaph, what took them, how deep they got, their level and the gear they were wearing when they fell - whichever of those the snapshot actually carries. The content writer has already written the words: epitaphs live in data/lore_lines.json and were frozen into the hub by H12 - read from what is already there, do not invent a parallel set. Fields the publisher does not send yet must degrade quietly to an honest blank, never to "undefined" and never to a guess; list in web/NOTES.md any field you wanted and the snapshot lacks, so the supervisor can raise it with the game build worker. DONE: a mock with fallen heroes shows the memorial with epitaph and cause; a mock whose fallen rows carry only a name still renders cleanly with no console error and no placeholder junk; the hostile-name test passes in the new section; the no-scroll H13 tab discipline still holds.
 

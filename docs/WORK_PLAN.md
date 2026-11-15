@@ -41,6 +41,55 @@ DO NOT reassign boss_bar.gd, party_frames.gd, delve.gd or monster.gd to the HUD 
 in one file is how merges break. If Mr. E wants the L31 leftovers built, they go to their OWNER as
 a new item, not to the HUD worker.
 
+## MR. E'S GEAR AND ECONOMY RULING (2026-11-15 11:46 - BINDING, he designed this)
+
+His words, and the system they describe. Every gear, shop, trader and event item from here must
+obey it. This supersedes any earlier loose talk about "loot tables".
+
+  "gear can be obtained a number of ways, looting, buying in the shop, or forging at a blacksmith.
+   The only way progression would work is if they bought it in a shop. But reminder shops upgrade
+   depending on events. If people spend bits or channel points during an event poll to upgrade
+   specific shops and specific buildings or aspects of the town.
+   So a shop that is level 1 isn't going to sell epic or legendary equipment. Unless a trade
+   caravan comes along and per chance brings a higher tier item or equipment. All per chance when
+   it comes to the trader."
+
+WHAT THAT MEANS, stated so no worker has to guess:
+  1. THREE ROUTES TO GEAR, and they are NOT equivalent:
+     - LOOT from a delve: what the floor and the boss happened to drop. Chance.
+     - FORGE at the blacksmith: a hero spending their own gold, one step at a time (L55 shipped
+       this - Roster.kit_up_after_delve, armour first, KIT_RESERVE kept back).
+     - BUY at a shop: the ONLY reliable progression route. A hero who wants to climb, buys.
+  2. A SHOP'S LEVEL CAPS WHAT IT SELLS. A level 1 shop does not stock epic or legendary, no matter
+     how much gold a hero carries. Tier availability is a property of the BUILDING, not the buyer.
+  3. SHOPS AND BUILDINGS ARE UPGRADED BY VIEWERS, through an event poll, with bits or channel
+     points, naming the specific shop/building/aspect of the town to upgrade. This is the economic
+     spine of T4/T5 - the viewer roll is not decoration, it is how the town's ceiling rises.
+  4. THE TRADE CARAVAN IS THE ONLY WAY AROUND THE CAP, and it is PURE CHANCE. A caravan may
+     happen to carry one higher-tier piece. It is never guaranteed, never scheduled, never a
+     reliable route. That chance is what makes a caravan worth watching on stream - and it is why
+     D39 (traders must matter) and bandits intercepting them have real stakes.
+
+  5. EVERY HERO STARTS WITH THE MOST BASIC GEAR OF THEIR CLASS (Mr. E, 11:47). Not nothing.
+     Today tier 0 is "bare hands" (1d4, atk 0) and "rags" (0 hp, 0 ac) for EVERY calling, so a
+     Knight and a Mage begin identically holding nothing. That is wrong. A calling's starting kit
+     must be the plain, humble version of what that calling actually carries - a knight's worn
+     sword and gambeson, a mage's walking staff and travelling robes, a ranger's hunting bow, a
+     rogue's knife. Cheap, weak, unglamorous, and UNMISTAKABLY that class. "Bare hands" stays only
+     as the genuinely-unarmed fallback, not as everyone's default.
+     There are 15 callings (blade 5, axe 2, ranged 1, arcane 6, 1 open) sharing 6 weapon tiers.
+
+  6. AND YES - WE DO NEED MORE EQUIPMENT (Mr. E, 11:47). This is not only a gating job. The
+     catalogue itself is too thin: 6 weapon tiers and 6 armour tiers against 886 appearance items.
+     Expand it. More weapons and armour per family and per tier, so two heroes of the same calling
+     at the same tier are not holding an identical object, and so loot, forge and shop each have
+     something of their own to offer.
+
+CONSEQUENCE FOR THE PLAN - BOTH HALVES, and the gates come first only because the catalogue needs
+somewhere to land. Write the SYSTEM (class starting kits, tiers, shop levels, the upgrade poll, the
+caravan chance), and expand the CATALOGUE into it. Do not do one and call the item done. Gear
+variety without the gates is noise; gates without variety is an empty shop. Mr. E asked for both.
+
 ## HOW BIG AN ITEM SHOULD BE (Mr. E, 2026-11-15 03:21 - BINDING ON THE SUPERVISOR)
 
 Mr. E: "longer and bigger tasks need to be handed out."
@@ -65,6 +114,64 @@ THIS DOES NOT CHANGE EXISTING ITEMS. IDs are frozen; nothing is renumbered or re
 what gets WRITTEN from now on, and the order they are offered: when several items are open, put the
 substantial ones where a worker taking "the first unchecked item" will actually reach them, rather
 than leaving a queue that is all polish at the top.
+
+## MR. E'S ASK, Nov 15 11:51 - MAKE THE FESTIVAL ACTUALLY FEEL LIKE A FESTIVAL
+
+- [ ] D63. THE FESTIVAL MUST BE AN EVENT, NOT A BOOLEAN. Owner: DESKTOP BUILD (town.gd,
+      townsfolk.gd, sfx.gd, economy.gd, notables.gd, Town.tscn) with CONTENT writing the words
+      (see C6) and the HUD worker NOT involved - this happens in the world, not on a panel.
+      WHAT IT IS TODAY, measured: `_festival_pass` flips `festival = true` every 260-420 s for
+      55-85 s, points `festival_at` at the market square, and appends two feed lines. Idle
+      townsfolk walk there and mill about (`_maybe_gather`, `acts["festival"]`). That is the
+      entire feature. The feed line promises "music, stalls, and a crowd!" and the game delivers
+      a crowd. No stall is built, no music changes, nothing is sold, nobody gains anything, and
+      the heroes ignore it completely.
+      THIS IS NOT COSMETIC DEBT - IT IS SOLD. "Bellmire: Festival of Plenty" is a 500-bit
+      Custom Power-up. A viewer pays real money and gets bodies standing in a square for 70 s.
+      Fixing this is fixing a thing people have already bought.
+      .1 IT MUST LOOK LIKE ONE. The square dresses itself: stalls, bunting, banners, lanterns
+         after dark - built on the existing plot/landmark machinery, struck when it ends, CC0
+         assets only. A viewer glancing at the pane must know a festival is on without reading a
+         word of the feed.
+      .2 IT MUST SOUND LIKE ONE. D22a gave layered beds and a 24-voice pool; D22b gave music
+         moods. A festival gets its own: music lifts, crowd noise, a piper or a drum near the
+         square, trade chatter up. It returns to the ordinary day bed when the festival ends.
+      .3 PEOPLE MUST DO SOMETHING. Today they "mill about and cheer". Give the crowd real acts -
+         dancing, drinking, eating, a game, watching whatever is at the centre - drawn from the
+         existing _idle_acts machinery rather than a new system. NOTABLES (scripts/notables.gd)
+         should show their faces; E3PO has festival lines already written in lore_lines "e3po".
+      .4 HEROES MUST BE IN IT. A hero in town during a festival joins it instead of walking past.
+         A hero who comes home from a delve while one is on is received by it - that is the
+         moment the stream should feel like a town, and it costs nothing but routing.
+      .5 IT MUST DO SOMETHING. A festival with no consequence is scenery. Pick effects that fit
+         Mr. E's economy ruling above and state them in the item when you build it: goods change
+         hands (the market actually trades), a morale or luck lift while it runs, the smith or a
+         shop keeps late hours. A FESTIVAL IS A GOOD HOUR FOR A CARAVAN TO ARRIVE - that ties
+         D39 and the caravan-chance rule together without inventing a new mechanic.
+      .6 IT MUST HAVE A REASON, AND THE CHRONICLE MUST SAY SO. A festival should be caused -
+         a harvest, a raid survived, a lord felled, a hero's return, a town level - not only a
+         random timer. The random one stays as the quiet baseline. D60 gave the Chronicle days
+         and `who`; a festival line should name what is being celebrated and who it is for.
+      .7 THE 500-BIT POWER-UP MUST LAND VISIBLY. When a viewer buys Festival of Plenty, the
+         festival that starts is THEIRS - named in the Chronicle and on stream, and bigger than
+         the baseline one. Do not let a paid festival be indistinguishable from a timer firing.
+      DONE: a 1080p capture (and a short clip) of one festival from start to finish showing the
+      square dressed, the crowd doing more than standing, at least one notable and one hero in
+      it, the music lifting and returning, and the Chronicle naming the reason. Plus one capture
+      of a VIEWER-BOUGHT festival that is visibly bigger and named for the buyer. Gates green.
+
+- [ ] C6. THE FESTIVAL HAS A VOICE (data/lore_lines.json). Owner: CONTENT WRITER - words only,
+      never code, and D63 reads them rather than inventing parallel copies.
+      There is no festival pool in lore_lines.json today (keys: tells, descend, cleared,
+      lord_intros, unique_intros, barks, misfire, epitaphs, forge, town_levels_for_the_desktop,
+      e3po, town_life, propositions, disasters, events, growth_tiers). The two festival lines in
+      the game are hardcoded in town.gd. Write a "festivals" pool with, at minimum: openings that
+      name a REASON (harvest, a raid survived, a lord felled, a hero home, a town level, a
+      viewer's gift), crowd barks and toasts, what the stalls are selling, a notable's line,
+      E3PO's line, closings, and a separate richer set for a festival a VIEWER paid for naming
+      the buyer. Enough that a 24/7 stream does not repeat. Keep Bellmire's voice - medieval,
+      D&D-flavoured, short, readable at a glance.
+      DONE: json validates, every pre-existing key byte-identical, counts stated per category.
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 

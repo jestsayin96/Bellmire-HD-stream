@@ -134,3 +134,47 @@ RUNNING 2026-11-16T11:56:10-06:00 (HUD L36 relaunch after fix: parse + windowed 
 IDLE 2026-11-16T11:58:10-06:00 - HUD L36 chat vs Chronicle fix + _l36_test, L36_TEST OK 6/6, Godot closed (HUD)
 RUNNING 2026-11-16T12:09:25-06:00 (game build D91e alcove settle fix: parse + one 20-min town soak + gates in parallel; expected finish 12:35)
 IDLE 2026-11-16T12:32:11-06:00 - game build D91e: parse 0, gates green, 20-min town soak D91_TOWN FAIL by 1 frame (alcove); checkpoint d91d-wip 526309a; Godot closed (game build)
+RUNNING 2026-11-16T12:48:00-06:00 (chat bot L56 run 2 - per-instance delve enumeration: parse + 3-min soak at 12x; expected finish ~12:52)
+RUNNING 2026-11-16T12:52:46-06:00 (chat bot L56 run 2 - the 3-min soak at 12x is the ONE thing in flight, boot pushed it past my named 12:52; expected finish ~12:54 and I start NOTHING after it)
+IDLE 2026-11-16T12:53:15-06:00 - L56 run 2: THE MEASUREMENT READS. Per-instance enumeration of all 8 live Delves: 11 trap events, 5 distinct lords, 6 floors held. Viewer-only would have shown spotted=0 - run 1's blindness confirmed. Parse 0 errors, L56_SOAK OK. Godot closed (chat bot)
+
+RUNNING 2026-11-16T12:54:06-06:00 (HUD L40 all-HUD zero-overlap audit: parse + windowed 4-config test; expected finish 13:03)
+RUNNING 2026-11-16T12:55:19-06:00 (HUD L40 relaunch after test fix: windowed 4-config test; expected finish 13:00)
+IDLE 2026-11-16T12:56:21-06:00 - HUD L40 all-HUD zero-overlap audit: L40_TEST OK 4/4 (grid+full, 100/150), parse 0 errors, Godot closed (HUD)RUNNING 2026-11-16T13:10:07-06:00 (game build D91f: probe + parse + one 20-min town soak + gates in parallel; expected finish 13:38)
+RUNNING 2026-11-16T13:13:15-06:00 (game build D91f relaunch: market-goods-off-door-step fix, parse 0 errors; one 20-min town soak + 4 gates in parallel + one windowed shot; expected finish 13:36)
+IDLE 2026-11-16T13:35:01-06:00 - game build D91f: market crate moved off the north store's door step, alcove CLEAR (0 events there); 20-min soak D91_TOWN FAIL by 2 frames at 0.6 mm, two peasants on the TAVERN door step (83.2,48.4) - a new spot, no prop; gates green; Godot closed (game build)
+RUNNING 2026-11-16T14:02:00-06:00 (chat bot D70.4 echo rule: parse + L14 drift + TWITCH_PARSE + D704_ECHO + commands doc no-op; expected finish ~14:14)
+RUNNING 2026-11-16T14:08:00-06:00 (chat bot D70.4 relaunch - echo gate fixed (GDScript refuses a direction-control literal), + _s2_test + commands doc; expected finish ~14:16)
+IDLE 2026-11-16T14:22:00-06:00 - B8/D70.4 echo rule shipped (chatbot ade76e5): one door in _reply declaws, un-commands and caps every chat line; the two paths that quoted viewer typing now go through safe_word. Parse 0 errors, L14_TEST OK, TWITCH_PARSE OK, D704_ECHO OK (334 checks), COMMANDS_DOC 26 with the doc unmodified. _l56_soak.gd retired. Godot closed (chat bot)
+RUNNING 2026-11-16T14:09:09-06:00 (game build D91 landing: merge d91d-wip 995f975 onto laptop; parse + offfloor + twitch_parse + townwalk + delve gates, no soak; expected finish 14:23)
+RUNNING 2026-11-16T14:11:45-06:00 (game build W-LIVE: one EventSub listener, no town, chat DRY RUN, waits <=5 min for one real channel-point redemption; expected finish 14:18)
+RUNNING 2026-11-16T14:13:27-06:00 (game build W-LIVE run 2: EventSub listener with raw-payload log, no town, chat DRY RUN, one Bellmire bits Power-up from JestSayin96; expected finish 14:20)
+IDLE 2026-11-16T14:15:03-06:00 - game build: D91 landed on laptop (80b46cf, merge of d91d-wip 995f975, gates green, no soak); W-LIVE run 1+2 OK (JestSayin96, fish reward fulfilled, Town Heal power-up, 0 bits). Godot closed (game build)
+RUNNING 2026-11-16T14:48:16-06:00 (chat bot W-LIVE chat half: errand/order flow - parse + L14 drift + TWITCH_PARSE + D704_ECHO + new errand gate + commands doc; expected finish 14:58)
+IDLE 2026-11-16T14:56:50-06:00 - B9/W-LIVE chat half: !muster reads the REAL muster (a point-redeemed errand never enters chat's delve_queue - town._on_delve sets away only; the read unions both). Parse 0 errors, L14_TEST OK, TWITCH_PARSE OK, WLIVE_CHAT OK 16 checks, COMMANDS_DOC 27. No chat posted, no redemption, 0 bits - he is offline and the browser is signed in as his own account. _wlive_chat.gd retired. Godot closed (chat bot)
+RUNNING 2026-11-16T14:58:47-06:00 (HUD L40 delve capture 1 of 1: parse + one windowed delve run, expected finish 15:05)
+IDLE 2026-11-16T15:00:33-06:00 - HUD L40 delve capture ran (one windowed run, no soak); Godot closed (HUD)
+
+RUNNING 2026-11-16T15:09:38-06:00 (game build D41: boss card docks beside the director plate; parse + L40 delve capture + 4 gates in parallel; expected finish 15:32)
+
+IDLE 2026-11-16T15:15:11-06:00 - game build D41: boss card docks beside the director plate, L40D_TEST OK overlaps=0 (was 6); town._on_delve writes chat.delve_queue, D41Q_TEST OK; gates green; pushed laptop b0ce9d8. Godot closed (game build)
+
+RUNNING 2026-11-16T15:48:05-06:00 (chat bot B10/W-LIVE live half: stream check then ONE bellmirebro line, + parse; expected finish 15:52)
+RUNNING 2026-11-16T15:49:18-06:00 (chat bot B10 gate battery: L14 drift + TWITCH_PARSE + D704_ECHO in tools/ + commands doc; expected finish 15:55)
+IDLE 2026-11-16T15:51:27-06:00 - B10/W-LIVE LIVE HALF DELIVERED: stream checked offline first, then ONE bellmirebro line in jestsayin96's chat from the engine (0 bits, no redemption, no reward touched); S2_TEST one-word fix; D704_ECHO now tools/_d704_echo.gd. Parse 0 errors, L14_TEST OK, TWITCH_PARSE OK, D704_ECHO OK 356, COMMANDS_DOC 27 doc unmodified; chatbot 2590da1. Godot closed (chat bot)
+
+RUNNING 2026-11-16T15:53:35-06:00 (HUD U40 chronicle top-pad before/after shots, expected finish 2026-11-16 15:59)
+
+IDLE 2026-11-16T15:55:27-06:00 - HUD U40 chronicle top-pad before/after captured, Godot closed
+
+RUNNING 2026-11-16T15:56:32-06:00 (HUD U40 re-shoot with balanced pad, expected finish 15:59)
+
+IDLE 2026-11-16T15:57:38-06:00 - HUD U40 re-shoot done, Godot closed
+
+RUNNING 2026-11-16T15:58:11-06:00 (HUD U40 final shots, pad 1.5, expected finish 16:01)
+
+IDLE 2026-11-16T15:59:18-06:00 - HUD U40 final shots done, Godot closed
+
+RUNNING 2026-11-16T16:11:02-06:00 (game build D70 .1/.2/.3, expected finish 2026-11-16 16:37)
+
+IDLE 2026-11-16T16:17:44-06:00 - game build D70 .1/.2/.3 gates done, Godot closed

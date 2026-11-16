@@ -6799,7 +6799,31 @@ and PROGRESS.md are touched.
 - NOT SEEN: no "Delvers - floor N" party-frames block appeared in the stills at 100% grid; only the BossCard and a "NOW FIGHTING" card (@PanelContainer, (244,167) 471x111, does not overlap anything). Whether party_frames.gd draws at all in this scene is the game build's to say; I did not widen the test.
 - LOOKED: renders/cycles/l40d/l40d_grid_100.png (card over DIRECTOR plate, visible), plus the five other stills exist. Side observation, not a fault gated here: the Chronicle's top line sits flush under the scroll rail at 100% grid.
 - Files: tools/_l40_delve_test.gd, PROGRESS.md, renders/cycles/l40d/*. Logs _l40d_*.log.
+## D41 - the boss card docks BESIDE the director plate; a point-redeemed errand writes chat.delve_queue at the source (game build, 2026-11-16 15:08-15:20 CT)
+- TAKE THIS NEXT gave GAME BUILD: D41 (first, Phase 1) and the town._on_delve -> chat.delve_queue fix (second). Lock was IDLE (HUD 15:00:33), no Godot alive; claimed 15:09:38-06:00, expected finish 15:32.
+- D41, boss_bar.gd _dock(): HudDock.put() steps round the Chronicle but never knew the pane's own label chips. The card now reads the union of the visible Labels on Pane_<k> (_plate_rect) and starts in the room BESIDE that plate, scaled to fit it; if the room would shrink it under 70% of the pane's own scale it drops UNDER the plate instead. No pane plate -> the old placement unchanged. Full screen untouched.
+- MEASURED, the HUD lane's own gate, tools/_l40_delve_test.gd at --resolution 1920x1080 (same as U39): L40D_TEST OK overlaps=0 (was FAIL 6). Card in the grid: 100% (322,12) 626x128 beside the plate, NOW FIGHTING caption (335,160) clear below it; 125% (404,15) 541x110 beside; 150% the plate grows to 451 px wide so the card drops under it, (149,174) 663x135. Full screen 100/125/150 unchanged at (570,140..210) 780x159.
+- NOTE: a first run WITHOUT --resolution came up 1152x648 and also read 0; that run and this one both wrote into renders/cycles/l40d/ (the HUD's committed stills). I restored the HUD's files from git and kept mine as renders/cycles/d41/shots/d41_{grid,full}_{100,125,150}.png. The HUD lane may want the test to take an output-dir argument.
+- LOOKED: d41_grid_100.png and d41_grid_150.png - DIRECTOR plate clear, card legible at both, NOW FIGHTING caption clear at 100%.
+- ONE RISK I CAN SEE AND DID NOT GATE: at 150% the card sits at y 174..309 under the plate. The NOW FIGHTING caption (an auto-director card, not mine) drew at (335,160) at 100% and was absent in the 150% frame; if it fires at 150% while the card is dropped they would share pixels. The caption is the one that should yield (or stack under the card); naming it for the HUD lane rather than moving their file.
+- THE PARTY-FRAMES QUESTION, ANSWERED: party_frames.gd does not draw on stream AT ALL, in the grid or full screen - const ON_STREAM := false since D46 ("the multi-member band board no longer draws on stream (hub: Bands below)"); refresh() hides it before docking. So L40 clause (a) as written was never real, and D41 is the boss-card dock alone.
+- QUEUE AT THE SOURCE, town.gd _on_delve: appends uid to chat.delve_queue if absent (the !delve path appended before it emitted, so never twice); town.gd's existing erase on delve end clears it. New gate tools/_d41_queue.gd: D41Q_TEST OK, 7 checks - errand hero in the queue once, !muster (1); a chat !delve for a second viewer; the errand viewer's own !delve -> "already waiting", still once; !muster (2), queue size 2. THE UNION NOW READS THE SAME COUNT AS THE QUEUE. chatcmd.gd's union read is left as it is (chat bot's file) - it is now redundant but harmless; their call whether to drop it.
+- Behaviour note for the supervisor: an errand-sent hero now counts toward QUEUE_MAX, so a full muster tells the next !delve "full". The redemption itself still is not refused at the cap (that would need a refund path) - unchanged from before.
+- GATES (run 2, after both edits): parse 0 SCRIPT ERROR / Parse Error; OFFFLOOR 0 of 1931; TWITCH_PARSE OK; TOWNWALK in_solid 0/16673 PASS; _delve_test ran to T150s, 0 SCRIPT ERROR. No soak (not asked for).
+- NO LIVE TWITCH TEST THIS SLOT: nothing in D41 or the queue fix needs one (the errand path is gated by calling town._on_delve the way twitch_eventsub.gd does). 0 bits, nothing redeemed, nothing posted.
+- Files: scripts/boss_bar.gd, scripts/town.gd, tools/_d41_queue.gd, PROGRESS.md, renders/cycles/d41/*. Not ticking D41 - the supervisor does.
 
+## C-70 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-69 ticked); told it to name the next-stalest backlog item inside its four files. Item 1 was freshest (C-69). Item 2 was last touched in C-65, before the Phase 2 words (C-66), miniboss feed (C-67) and bosses/potions (C-68), so it was stalest, and these lines repeat most on stream. Took it.
+- data/lore_lines.json: descend +39 (now 299), cleared +38 (299), epitaphs +60 (477), barks +68 (enter 12, lord 12, trap 12, hurt 11, drink 9, misfire 12). 205 lines, plain register, none duplicates any string already in the file. Descend lines starting '%s %s' keep the hero + verb pair; 'Floor %d' keeps the floor stood on only, never a total. No dungeon floor count anywhere. New `_note_c70` records it.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, new lines appended at array ends only); the file's one stray CR (before phase2_words_alt) preserved byte for byte; LF kept.
+- CODE WIRING: none new. Existing pickers for descend / cleared / epitaphs / barks draw from the wider pools. Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
+
+## C-71 (2026-11-16) - standing backlog, next-stalest file: items.json titles and dyes (items.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-70 ticked); told it to pick the next-stalest of items, bosses, potions on evidence. items.json last got real additions in C-54 (C-58 and C-61 only relabelled rarity); bosses and potions were last touched in C-68. Took items. Did NOT write more miniboss_feed lines; the reader is still unwritten.
+- data/items.json: cosmetics +48 titles (kind title, keys name/kind/cost/flavour, same as the 206 existing), dyes +35 (plain 6-hex, no hex repeats an existing dye). Titles cover Phase 2 (ascent, errand, Guild Vault, carry weight, teleportation stone: bought, one hero, dead weight on a lord's floor) plus a prosperous top band, cost 300-480 (slate roofs, Lamp Street, Guild Hall seat, charter, gilded bell, Father of the Town), so a late-game viewer's title reads as a rich town, not make-do. Low band stays patched and plain. New top-level `_note_c71`.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, order of existing keys preserved, new entries spliced at block ends as text so existing formatting is byte-identical); new entries match the existing title shape. LF kept. No artifact stocked anywhere; no equipment, accessory, rarity, stock or price changed; no floor count.
+- CODE WIRING: none new. Titles and dyes are read by the existing !title / !dye pickers; any code that caps the title list or the dye picker length should be rechecked (titles 254, dyes 281). Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
 ## B11 - THE AWAY-GUARD IS REAL, AND THE RULED DROP IS DEFERRED ON EVIDENCE (chat bot, 2026-11-16 16:45-17:05 CT)
 Lock: file read IDLE 16:17:44 (game build), no Godot alive. Claimed 16:45:00-06:00, refreshed
 16:50:30 for the battery and 16:57:40 for the re-run, released 17:04:30. Claim-first-read-second,
@@ -6919,3 +6943,47 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
 - ONE THING FOR THE RECORD AGAINST MYSELF: I spent :45 to :48 reading the plan, the ruling and the
   code before claiming, so the engine work started three minutes into a seven-minute window. The
   battery still ended inside it, but next slot the lock claim comes first and the reading second.
+
+
+## U40 - Chronicle top line no longer flush under the scroll rail (HUD, feed_hud.gd)
+- ITEM: the supervisor's 14:58 "YOUR NEXT" (the side observation from U39). Phase 1, "stop it looking broken".
+- MEASURED (tools/_u40_pad_test.gd, windowed 1920x1080, raid flood, grid): gap between the vellum top and the first line was 2.0 px at 100% (FAIL, flush), 32 px at 125%, 10 px at 150%.
+- FIX: feed_hud.gd `_vellum()` insets the open vellum 6 px (scaled) under the top rail and 1.5x that off the bottom; `_place_chrome`, `_chrome_lines`, `_chrome_h`, `_chrome_text_w` all use it so the height-fit still counts whole entries. hud_dock.gd untouched.
+- AFTER: 100% gap 6.0 px, 125% 34 px, 150% 12 px; U40_TEST OK. Tried a bottom pad of 2x: it pushed the two-line top entry out and left a 34 px hole at 100%, worse, so reverted to 1.5x. Bottom line at 100% sits ~0.4 px past the unpadded sheet_rect edge, still clear of the rail in the still.
+- LOOKED: renders/cycles/u40/u40_before_100.png vs u40_after_100.png (and 125/150).
+- Lock: three short claims (15:53, 15:56, 15:58), each under 6 min, all released well before :07.
+## D70 .1/.2/.3 - the bot knows who it is talking to: first-timer welcome, a hero's own moments told to its owner, nothing said late (game build, 2026-11-16 16:08-16:25 CT)
+- TAKE THIS NEXT gave the game build D70 .1/.2/.3 (Phase 2). .4 was already ticked (chatbot ade76e5).
+- .1 THE FIRST-TIMER. TwitchChat.parse now reads Twitch's own `first-msg` IRC tag (the flag Twitch sets on a
+  viewer's first message EVER in the channel), and accept() hands EVERY line - command or not - to
+  TwitchEventSub.saw_viewer(uid, login, first) before its "!" filter. A flagged viewer is welcomed ONCE, by
+  Twitch login: "@login welcome to Bellmire! Type !enlist and a hero of your own walks into this town - !help
+  shows the rest." Persisted per uid in user://d70_viewers.json (marked BEFORE the hero check, so it is never
+  re-tried - never chase). Not said to a first-timer who already has a hero, nor to the bot or Mr. E. Logins are
+  reduced to [a-z0-9_] before use. --script harnesses use user://d70_viewers_test.json, never the real file.
+- .2 THEIR HERO'S MOMENTS. roster.gd gains `signal hero_moment(uid, kind, text)`, emitted on a level-up that
+  UNLOCKS an ability ("learned"), a guild promotion ("rank") and a death ("fell") - not on every level, not on
+  kills. The text is game-made and NEVER carries the hero name (viewer-settable): "your hero fell on floor 4 to
+  a bog wight at level 7. !reroll to rise again." TwitchEventSub.on_hero_moment sends it to the owner's Twitch
+  login (learned from chat, kept per uid). Deaths always go; other moments are spaced 45 s per viewer, so a
+  burst of levels is ONE line. No login known -> nothing said, logged with the reason.
+- .3 THE ROOM. Per Mr. E's 14:38 ruling the game being up is the signal. Chat queue entries now carry their
+  enqueue time; a line older than CHAT_STALE (90 s) is dropped and logged, never sent late. Nothing about news is
+  persisted - the viewers file holds uids, logins and times only (checked by the test).
+- NEW GATE tools/_d70_test.gd: real TwitchChat parser + accept(), real Roster, real TwitchEventSub queue, dry-run
+  chat. D70_TEST OK 16 checks, 0 failed. Transcript (dry run):
+    @newcomer_a welcome to Bellmire! Type !enlist and a hero of your own walks into this town - !help shows the rest.
+    (second flagged line, a plain line, and a simulated restart: nothing)   (first-timer with a hero: not welcomed)
+    @regular_b your hero reached level 2 and learned Cleave.   (two more learns and a rank in the same burst: spaced out)
+    @regular_b your hero fell on floor 4 to a bog wight at level 257. !reroll to rise again.
+    hero named "/ban Mr.E\nPWNED": never reaches chat.   line queued 95 s ago: "chat skipped (stale 95s)".
+- GATES: parse 0 errors; TWITCH_PARSE OK; OFFFLOOR 0 of 2142; TOWNWALK PASS 0/17800; _delve_test 0 SCRIPT ERROR;
+  T3_TEST OK; D41Q_TEST OK. T1_TEST FAILS ONE CHECK - PRE-EXISTING AND NOT MINE: its FakeRoster has no add_brew, which
+  _do_bits_tier (untouched this cycle) calls on an anonymous cheer. Recorded, not fixed here.
+- KNOWN IMPERFECT: in a burst the FIRST moment wins the 45 s slot, so "learned Cleave" can beat a promotion in the
+  same award. Rare loot and "felled a lord" are not wired as moments yet - D70.2 names them, there is no single
+  roster hook for either; they are the remainder of .2.
+- NO LIVE TWITCH TEST THIS CYCLE: a first-msg flag cannot be produced on demand from JestSayin96 or bellmirebro (both
+  have spoken there), and a hero-moment line is chatty. 0 bits, nothing redeemed, no reward touched, nothing posted.
+- Files: scripts/twitch_eventsub.gd, scripts/roster.gd (signal + 3 emits), scripts/twitch_chat.gd (first-msg tag +
+  saw_viewer call - no other change), tools/_d70_test.gd. Backups *.bak_d70 (not committed).

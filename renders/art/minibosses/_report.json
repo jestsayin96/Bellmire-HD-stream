@@ -449,6 +449,38 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "tallyman_chibi": {
+   "title": "The Tallyman (chibi)",
+   "theme": "treasury",
+   "idea": "IT TAKES AND LEAVES - rebuilt in the game's own register",
+   "wear": 0.2,
+   "feed_line": "Something is counting what you carry.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1558,
+   "size": [
+    1.72,
+    1.62,
+    2.15
+   ],
+   "footprint_span": 1.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5974385455971487,
+    "ortho": 2.491278886795044,
+    "clip": [
+     6.803935527801514,
+     17.50223159790039
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],

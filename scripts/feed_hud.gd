@@ -179,10 +179,19 @@ func _place_chrome() -> void:
     _panel.position = r.position + Vector2(m, m)
     _panel.size = Vector2(r.size.x - 2.0 * m, r.size.y - 2.0 * m)
     if _content != null and _panel is HudDock.ChronicleScroll:
-        var sr := (_panel as HudDock.ChronicleScroll).sheet_rect()
+        var sr := _vellum()
         _content.position = sr.position
         _content.size = sr.size
         _content.custom_minimum_size = sr.size
+
+## U40: the open vellum with a breathing gap under the scroll rail and above the lower rail. A full stack
+## used to start FLUSH under the top rail at 100% grid (a flush line reads as clipped on stream).
+func _vellum() -> Rect2:
+    var sr := (_panel as HudDock.ChronicleScroll).sheet_rect()
+    var pad := float(UiTheme.px(6))
+    if sr.size.y <= pad * 3.0:
+        return sr
+    return Rect2(sr.position.x, sr.position.y + pad, sr.size.x, sr.size.y - pad * 1.5)
 
 ## L36: at full screen the Chronicle is the bottom-left panel and the chat box the bottom-right one;
 ## from 125% up their widths meet. While chat is up and they would share columns, the panel rides
@@ -206,7 +215,7 @@ func _clear_of_chat() -> void:
 func _chrome_lines() -> int:
     var inner: float
     if _panel is HudDock.ChronicleScroll:
-        inner = (_panel as HudDock.ChronicleScroll).sheet_rect().size.y
+        inner = _vellum().size.y
     else:
         var r := HudDock.centre(get_parent())
         inner = r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
@@ -362,14 +371,14 @@ func _rebuild() -> void:
 func _chrome_text_w() -> float:
     var w := 300.0
     if _panel is HudDock.ChronicleScroll:
-        w = (_panel as HudDock.ChronicleScroll).sheet_rect().size.x
+        w = _vellum().size.x
     if card_showing() and _card != null:
         w -= _card.get_combined_minimum_size().x + float(UiTheme.px(14))
     return maxf(w - 4.0, 120.0)
 
 func _chrome_h() -> float:
     if _panel is HudDock.ChronicleScroll:
-        return (_panel as HudDock.ChronicleScroll).sheet_rect().size.y
+        return _vellum().size.y
     return 200.0
 
 func _stack_h(lines: Array, font: Font, fs: int, w: float) -> float:

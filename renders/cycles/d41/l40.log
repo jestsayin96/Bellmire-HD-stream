@@ -1,0 +1,203 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+FEED JestFan takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED MossyMage takes the oath as an elf mage (out of the old woods past the fields; sees in the dark). Hits hardest. Dies hardest.
+FEED DawnCleric takes the oath as a human cleric (valley-born, like most of Bellmire). Keeps the party upright longer than it deserves.
+FEED BigAxe takes the oath as an orc barbarian (came over the west road and stayed; sees in the dark). The most meat. Swings heavy, guards nothing.
+FEED First step, second step. The third one is loud.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned risen bones, 1 cave spider, 2 drowned skeleton warriors, 1 bone sentinel.
+FEED A shop with its shutters up and its scales still balanced.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+DIRECTOR t=0.0 CUT lord_743968897905 shot=shoulder pri=101.0 why=start held_prev=0.0 pace=1.0 | lord_743968897905/shoulder=101.0(lord), fight_743968897905/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.8(chat 1s ago), hero_2101/follow=32.8(town life), tour_0/push=10.0(quiet baseline)
+L40D lord fighting: true frame 28
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+  [100% grid] 12 elements
+     Chronicle:Control [P: (350.0, 220.0), S: (452.0, 169.0)]
+     @LineEdit@7270:LineEdit [P: (788.0, 613.0), S: (360.0, 31.0)]
+     BossCard:VBoxContainer [P: (190.0, 7.0), S: (379.0, 77.74359)]
+     Pane_director/@Label@7285:Label [P: (6.0, 38.0), S: (177.0, 24.0)]
+     Pane_director/@Label@7286:Label [P: (6.0, 6.0), S: (104.0, 30.0)]
+     Pane_bits/@Label@7292:Label [P: (926.0, 38.0), S: (220.0, 24.0)]
+     Pane_bits/@Label@7293:Label [P: (1005.0, 6.0), S: (141.0, 30.0)]
+     Pane_subs/@Label@7299:Label [P: (6.0, 342.56), S: (220.0, 24.0)]
+     Pane_subs/@Label@7300:Label [P: (6.0, 310.56), S: (210.0, 30.0)]
+     Pane_points/@Label@7306:Label [P: (941.0, 342.56), S: (205.0, 24.0)]
+     Pane_points/@Label@7307:Label [P: (888.0, 310.56), S: (258.0, 30.0)]
+     @PanelContainer@7321:PanelContainer [P: (203.0, 97.0), S: (169.15, 68.0)]
+  [100% full] 4 elements
+     Chronicle:PanelContainer [P: (11.0, 393.0), S: (456.0, 244.0)]
+     @Label@7269:Label [P: (892.0, 12.0), S: (260.0, 28.0)]
+     @LineEdit@7270:LineEdit [P: (696.0, 606.0), S: (445.0, 31.0)]
+     BossCard:VBoxContainer [P: (342.0, 84.0), S: (468.0, 96.0)]
+DIRECTOR t=16.2 CUT fight_743968897905 shot=shoulder pri=87.8 why=max_hold held_prev=16.2 pace=1.0 | fight_743968897905/shoulder=87.8(delve start hurt 0.28), chat_2104/follow=47.9(chat 18s ago), hero_2103/follow=32.7(town life), tour_1/push=10.0(quiet baseline)
+DIRECTOR t=17.2 CUT lord_743968897905 shot=shoulder pri=101.0 why=lord_rises held_prev=1.0 pace=1.0 | lord_743968897905/shoulder=101.0(lord), fight_743968897905/shoulder=87.8(hurt 0.28), chat_2104/follow=47.8(chat 19s ago), hero_2104/follow=30.2(town life), tour_2/establishing=10.0(quiet baseline)
+  [125% grid] 11 elements
+     Chronicle:Control [P: (351.0, 221.0), S: (450.0, 167.0)]
+     @LineEdit@7270:LineEdit [P: (697.0, 614.0), S: (450.0, 29.0)]
+     BossCard:VBoxContainer [P: (243.0, 9.0), S: (324.0, 66.46154)]
+     Pane_director/@Label@7285:Label [P: (8.0, 47.0), S: (226.0, 32.0)]
+     Pane_director/@Label@7286:Label [P: (8.0, 8.0), S: (134.0, 36.0)]
+     Pane_bits/@Label@7292:Label [P: (862.0, 47.0), S: (282.0, 32.0)]
+     Pane_bits/@Label@7293:Label [P: (963.0, 8.0), S: (181.0, 36.0)]
+     Pane_subs/@Label@7299:Label [P: (8.0, 351.56), S: (282.0, 32.0)]
+     Pane_subs/@Label@7300:Label [P: (8.0, 312.56), S: (269.0, 36.0)]
+     Pane_points/@Label@7306:Label [P: (881.0, 350.56), S: (263.0, 32.0)]
+     Pane_points/@Label@7307:Label [P: (826.0, 312.56), S: (318.0, 35.0)]
+  [125% full] 4 elements
+     Chronicle:PanelContainer [P: (14.0, 316.0), S: (570.0, 273.0)]
+     @Label@7269:Label [P: (892.0, 12.0), S: (260.0, 36.0)]
+     @LineEdit@7270:LineEdit [P: (582.0, 595.0), S: (556.0, 39.0)]
+     BossCard:VBoxContainer [P: (342.0, 105.0), S: (468.0, 96.0)]
+  [150% grid] 11 elements
+     Chronicle:Control [P: (351.0, 221.0), S: (450.0, 167.0)]
+     @LineEdit@7270:LineEdit [P: (607.0, 614.0), S: (540.0, 34.0)]
+     BossCard:VBoxContainer [P: (89.0, 106.0), S: (397.8, 81.60001)]
+     Pane_director/@Label@7285:Label [P: (9.0, 56.0), S: (274.0, 39.0)]
+     Pane_director/@Label@7286:Label [P: (9.0, 9.0), S: (157.0, 43.0)]
+     Pane_bits/@Label@7292:Label [P: (801.0, 56.0), S: (342.0, 39.0)]
+     Pane_bits/@Label@7293:Label [P: (931.0, 9.0), S: (212.0, 43.0)]
+     Pane_subs/@Label@7299:Label [P: (9.0, 360.56), S: (328.0, 39.0)]
+     Pane_subs/@Label@7300:Label [P: (9.0, 313.56), S: (316.0, 43.0)]
+     Pane_points/@Label@7306:Label [P: (823.0, 354.56), S: (320.0, 39.0)]
+     Pane_points/@Label@7307:Label [P: (821.0, 313.56), S: (322.0, 37.0)]
+DIRECTOR t=33.3 CUT fish_558614207844 shot=follow pri=60.0 why=max_hold held_prev=16.1 pace=1.0 | fight_743968897905/shoulder=88.0(hurt 0.30 REPEAT-held-out), fish_558614207844/follow=60.0(catch), chat_2104/follow=45.9(chat 35s ago), hero_2104/follow=33.4(town life), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=34.3 CUT lord_743968897905 shot=shoulder pri=101.0 why=lord_rises held_prev=1.0 pace=1.0 | lord_743968897905/shoulder=101.0(lord), fight_743968897905/shoulder=88.8(hurt 0.38 REPEAT-held-out), chat_2104/follow=39.8(chat 36s ago same-shot-6), hero_2104/follow=25.3(town life same-shot-6), tour_4/push=10.0(quiet baseline)
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King shifts, and the fight changes with it.
+  [150% full] 4 elements
+     Chronicle:PanelContainer [P: (16.0, 377.0), S: (684.0, 201.0)]
+     @Label@7269:Label [P: (892.0, 12.0), S: (260.0, 41.0)]
+     @LineEdit@7270:LineEdit [P: (468.0, 585.0), S: (668.0, 47.0)]
+     BossCard:VBoxContainer [P: (342.0, 126.0), S: (468.0, 96.0)]
+L40D_TEST OK overlaps=0

@@ -2154,3 +2154,568 @@ def porter_chibi():
 
 
 BUILDERS.update({"porter_chibi": porter_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 7 OF 14 - THE TALLYMAN. Same rebuild in the game's own
+# register; see the block above drillmaster_chibi for the measured Knight
+# proportions and the one above snuffer_chibi for the rule that register is
+# MASS AND COUNT, not man-proportions.
+#
+# WHAT THE ORIGINAL ACTUALLY READS AS, looked at before anything was changed
+# (renders/art/minibosses/tallyman/hero_front|side|back.png):
+# A SURVEYOR'S TRIPOD WITH A WASHING LINE ON IT - and from the back, a clothes
+# horse. Measured off the builder, against a hero arm 0.29 thick and a hero
+# head 1.09 across:
+#     legs            0.072 / 0.056
+#     arms            0.062 / 0.040        fingers 0.020 / 0.012
+#     quill           0.020 / 0.008        a HAIR at stream distance
+#     frame uprights  0.08 boxes           bead wires 0.035
+#     hanging cords   0.014                five of them, 0.34-1.14 long
+#     torso           0.52 x 0.34 x 0.44   the one bold member, and HIDDEN
+#     head            0.26 x 0.30 box      a SIXTH of the hero's head
+# Five faults fall out of that, and only the first is the usual one:
+#  1. EVERY MEMBER EXCEPT THE TORSO IS A WIRE. Fourth conversion running.
+#  2. THE RECEIPT IS UNREADABLE, AND THAT IS THE WORST OF THE FIVE. This is the
+#     one creature in the file whose entire job is Mr. E's binding principle -
+#     what it has taken is HANGING ON IT, where the viewer who paid for that
+#     helm can see it. On the sheet the helm is a grey ball, the boot a dark
+#     chip, the satchel a chip, the blade a toothpick and the ring a wire hoop.
+#     NOTHING HANGING ON IT READS AS GEAR. The modelling was there; the SIZE
+#     and the VALUE BREAK were not.
+#  3. THE SPREADER BAR IS A SCAFFOLD. 1.86 m of horizontal bone at shoulder
+#     height with five vertical cords dropping off it is a drying rack, and it
+#     is what makes the whole creature read as architecture rather than as a
+#     man. It was pass 2's fix for the kit fusing with the torso and it worked
+#     - it bought visibility by turning him into a frame. Both can be had: the
+#     kit hangs off a RING HE WEARS, short and stout, not off a gantry.
+#  4. ZERO DEPTH - THE MECHANIC IS GONE AT AZIMUTH 90. Frame, beads, spreader
+#     and all five hangers sit in ONE Y PLANE (FY = -0.20, cords at FY-0.16),
+#     so from the side the creature is a fencepost with twigs and there is no
+#     tally and no loot on it at all. This is the Stoker's fault 6, the
+#     Gaoler's 7 and the Porter's 7 - value not separating the members - in its
+#     hardest form yet, because here there is nothing TO separate. It is the
+#     carried fault and this is the conversion that takes it: the loot is
+#     distributed AROUND him in plan, not strung across him in a plane, so
+#     every view has three or four pieces and no view has the lot.
+#  5. TWENTY-ONE BEADS IS NOT A COUNT. Four rows of 7/5/3/6 at 0.052 radius is
+#     a texture, not a tally. The Sexton's lesson in its own form - nine cells
+#     cut to six because a rising that cannot be counted from the doorway is a
+#     mechanic that cannot be read. SIX beads, one rod, 0.11 radius.
+#
+# AND ONE RULING APPLIED RATHER THAN A FAULT: THE HUNG RING IS GONE. Mr. E,
+# 04:56 - "i understand the rings but gloves can be seen so we dont have to
+# make new rings" - a ring is an inventory item a viewer reads in the hub, not
+# a silhouette on stream. A 0.065 wire hoop at pane distance was the proof of
+# his own point. Its slot goes to a SHIELD, which reads at any distance.
+# Authored at the same 2.15 m so the pair sheet compares ONE thing.
+# ===========================================================================
+CANON.update({
+    "tallyman_chibi": ("The Tallyman (chibi)", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
+                       "treasury",
+                       "IT TAKES AND LEAVES - rebuilt in the game's own register",
+                       0.20, "Something is counting what you carry."),
+})
+
+
+def tallyman_chibi():
+    """The Tallyman in the game's register. Same read - A NARROW UPRIGHT WITH A
+    COUNTING FRAME FOR A CHEST AND THE THINGS IT HAS TAKEN HANGING OFF IT -
+    with every wire member taken to a chibi weight, the strongbox promoted from
+    an add-on to the torso itself, twenty-one beads cut to six, and the stolen
+    kit taken off the gantry and hung on a ring he WEARS, spread around him in
+    plan so it is on him from every side.
+
+    THE VALUE PLAN, and it is the whole of the design: a DARK figure, a MID
+    brass strongbox, and the two pale things on the creature are THE COUNT and
+    THE LOOT - the two things a viewer has to read. The Porter put the pale
+    value on the mechanic; this one does the same and the mechanic is the
+    receipt."""
+    P = Parts("tallyman_chibi")
+    HIP = 0.45                                   # 21% of 2.15, off the Knight
+
+    # --- LEGS. Stubs, planted, slightly apart. A clerk stands and waits.
+    for s in (-1, 1):
+        limb(P, [(s * 0.19, 0.03, HIP), (s * 0.22, 0.00, 0.22),
+                 (s * 0.23, -0.03, 0.09)], 0.145, 0.132, 'dark')
+        P.add(L.box(0.29, 0.40, 0.12), 'dark', loc=(s * 0.23, -0.10, 0.06))
+
+    # --- THE TORSO IS THE STRONGBOX. In the original this was a 0.52 box
+    # STUCK ON a 0.150 spine and then hidden behind the counting frame, so the
+    # one bold member on the creature never appeared in the silhouette. It is
+    # now the body: a banded brass chest 0.80 across standing on the legs, with
+    # nothing in front of it but the tally rod.
+    BZ = 0.92
+    P.add(L.box(0.80, 0.46, 0.74), 'body', loc=(0.0, -0.04, BZ))
+    # PORTER'S CLOSED LESSON, KEPT: the bands WRAP. The Gaoler's fault 5 and
+    # the Stoker's fault 2 were decoration on the front face only; nothing in
+    # this file carries that any more.
+    for bz in (BZ - 0.26, BZ + 0.26):
+        P.add(L.box(0.86, 0.52, 0.10), 'dark', loc=(0.0, -0.04, bz))
+    for s in (-1, 1):
+        P.add(L.box(0.09, 0.52, 0.80), 'dark', loc=(s * 0.37, -0.04, BZ))
+    # the coin slot. ONE aperture, and it is a SLOT - the Porter's rule, and it
+    # is on the BELLY where it cannot be read as a face at all.
+    P.add(L.box(0.30, 0.05, 0.05), 'dark', loc=(0.0, -0.28, BZ - 0.16))
+    P.add(L.box(0.24, 0.04, 0.035), 'glow', loc=(0.0, -0.295, BZ - 0.16))
+    for s in (-1, 1):                                            # shoulders
+        P.add(L.sphere(0.215, 0.205, 0.185, 12, 8), 'body', loc=(s * 0.40, -0.04, 1.30))
+
+    # --- THE TALLY. One rod across the front of the box, SIX beads at 0.11,
+    # four shoved left and two right with a gap between - a count in progress,
+    # readable from the doorway. Twenty-one beads on four wires was a texture.
+    # PASS 4, FAULT 3 - THE TALLY AND THE LOOT WERE ON THE SAME LINE. Spacing
+    # the beads was necessary and not sufficient: at z 1.22 the rod sat level
+    # with the shoulders (1.30), the tally ring (1.22) and the hung helm, so
+    # four pale beads, two pale shoulder balls and a pale helm made ONE pale
+    # band straight across the creature at chest height and nothing in it could
+    # be told from anything else. Two mechanics cannot share a horizontal. The
+    # rod drops onto the clear brass face of the strongbox between its two
+    # wrapping bands, where the only thing behind a bead is the box, and the
+    # coin slot drops with it so the two do not simply swap the collision.
+    RY, RZ = -0.34, BZ + 0.10
+    # PASS 5, FAULT 4 - HALF THE BEADS WERE THREADED ON NOTHING AND A PIPE
+    # STUCK OUT OF HIS RIGHT SIDE. lordlib.cone is built along +Z WITH ITS BASE
+    # AT THE ORIGIN, not centred, so aiming it along +X from x=0 ran the whole
+    # 1.02 m of rod to the RIGHT: the two left beads hung in mid-air with no rod
+    # through them and 0.6 m of iron projected clear of the body like a spigot.
+    # On the crop it reads as a pipe, which is how it was caught. The Porter's
+    # pass-3 note says the same thing from the other side - seat the cone ON
+    # the end point - and it is the same primitive making the same fool of me.
+    # Base seated at the left end of the row.
+    P.add(aim(L.cone(0.040, 0.040, 1.02, 10), (-0.51, RY, RZ), (1.0, 0.0, 0.0)), 'dark')
+    for s in (-1, 1):
+        P.add(L.box(0.08, 0.13, 0.22), 'dark', loc=(s * 0.46, RY, RZ))
+    # PASS 3, FAULT 2 - SIX BEADS CAME OUT AS A BREAD ROLL. I cut twenty-one
+    # beads to six to make the count readable and then spaced them 0.14 apart
+    # at a radius of 0.11, so adjacent beads OVERLAP and the row fuses into one
+    # pale sausage across the chest. The count - the thing this creature is
+    # named for - was still unreadable, by my own hand, in the pass written to
+    # fix exactly that. THE LESSON IS ARITHMETIC AND IT IS GENERAL: a row of n
+    # spheres reads as n only while the gap exceeds twice the radius. It is
+    # measurable before rendering and I did not measure it.
+    # So FOUR beads at 0.25 apart against a 0.115 radius - 0.02 of clear air
+    # between each - shoved to the left of the rod with a bare run of iron to
+    # the right. Four is countable from the doorway and the empty rod says what
+    # the mechanic is: this is what it has had off you so far, and there is
+    # room for more.
+    for x in (-0.46, -0.21, 0.04, 0.29):
+        P.add(L.sphere(0.115, 0.100, 0.115, 11, 8), 'bone', loc=(x, RY, RZ))
+
+    # --- THE HEAD. A hooded counting lamp, dark end to end, with ONE lit slit
+    # under a shade that overhangs it. The Porter's two rules, applied without
+    # being walked through them: TWO apertures read as eyes however they are
+    # shaped, ONE reads as a slit; a PALE plate on a dark head is a face, a
+    # DARK plate is not. Nothing round stands in front of the slit's centre -
+    # that is the pass-4 lesson the Porter paid for and it is measured here:
+    # the dome bellies to y -0.30 and the plate's face sits at -0.38.
+    # PASS 2, FAULT 1 - THE SHADE WAS A FUNNEL AND THE HEAD WAS AN EGG. Pass 1
+    # gave the lamp an inverted cone for a hood, 0.30 at the top over a 0.33
+    # dome, and from the front it is a MARTINI GLASS, from the side a WINE
+    # GLASS, and from the back the pair reads as a PERFUME BOTTLE - the Sexton's
+    # pass-5 saucer and the Snuffer's pass-4 lampshade, walked into again in the
+    # same slot. The rule those two paid for is absolute: NOTHING ON A HEAD MAY
+    # BE WIDER THAN THE HEAD, and nothing round belongs on top of something
+    # round. So the lamp goes and the head becomes what this creature's head
+    # should always have been - A SECOND STRONGBOX, squared, banded, locked, the
+    # same object as its chest in miniature. A tallyman keeps his head the way
+    # he keeps his takings. The slit stays single and stays the only aperture,
+    # and the only thing in front of it is a peak that overhangs it from above.
+    HZ = 1.68
+    P.add(L.box(0.52, 0.42, 0.46), 'dark', loc=(0.0, -0.08, HZ))
+    P.add(L.box(0.56, 0.46, 0.07), 'dark', loc=(0.0, -0.08, HZ + 0.26))   # the cap band
+    P.add(L.box(0.40, 0.045, 0.050), 'glow', loc=(0.0, -0.295, HZ - 0.02))
+    P.add(L.box(0.50, 0.14, 0.075), 'dark', loc=(0.0, -0.33, HZ + 0.10))  # the peak
+    P.add(L.box(0.10, 0.44, 0.09), 'dark', loc=(0.0, -0.08, HZ + 0.31))   # the hasp
+    # the neck: a short collar, so the head's bottom edge is not lost in the
+    # shoulders - the Drillmaster's pass-3 fault 3 and it is not re-opened here.
+    P.add(aim(L.cone(0.145, 0.165, 0.18, 10), (0.0, -0.06, 1.36), (0.0, 0.0, 1.0)), 'body')
+
+    # --- THE TALLY RING HE WEARS, and this is fault 3 and fault 4 closed in
+    # one member. Not a gantry over his head: a stout hoop round his chest at
+    # 0.60, the loot hung off it on short thick chains at FIVE AZIMUTHS, so
+    # the front sees four pieces, the side sees three in profile and the back
+    # sees three - and no view of this creature is ever without its receipt.
+    RR, RGZ = 0.60, 1.22
+    ring = [Vector((RR * math.sin(TAU * i / 16.0), -0.04 - RR * math.cos(TAU * i / 16.0), RGZ))
+            for i in range(17)]
+    P.raw(L.tube(ring, 0.050, 7), 'dark')
+
+    def at(az, r, z):
+        a = math.radians(az)
+        return (r * math.sin(a), -0.04 - r * math.cos(a), z)
+
+    def hang(az, drop, kind):
+        """A short stout chain from the ring, and the thing on the end of it.
+        THE SIZES ARE THE POINT. The original's helm was a 0.125 sphere - a
+        grey pea on a 2.15 m creature. Every piece here is 0.34-0.62 across
+        and every piece carries a value break, because a single-value lump at
+        pane distance is cargo and not kit."""
+        top = at(az, RR, RGZ)
+        bot = at(az, RR + 0.04, RGZ - drop)
+        limb(P, [top, bot], 0.048, 0.042, 'dark')
+        x, y, z = at(az, RR + 0.06, RGZ - drop - 0.16)
+        if kind == 'helm':
+            # PASS 6, FAULT 5 - THE HELM WAS A MUSHROOM, and it is the piece
+            # that matters most: this creature exists so a viewer can see
+            # THEIR OWN HELM hanging on it. Pass 1 gave it a 0.46 pale dome
+            # with a 0.44 flat dark band directly under it - a disc exactly as
+            # wide as the thing above it, which is the shade's fault and the
+            # Sexton's saucer for the third time in one session. NOTHING ON A
+            # DOME MAY BE AS WIDE AS THE DOME. A helm does not read by being
+            # dome-shaped; it reads by having A SIGHT SLOT, A BROW OVER IT AND
+            # A NECK UNDER IT, and the original had none of the three. One
+            # dark slot, not two - the Porter's rule holds for a helm hanging
+            # off a hook exactly as it holds for a head.
+            P.add(L.sphere(0.235, 0.225, 0.215, 14, 9), 'bone', loc=(x, y, z))
+            P.add(L.box(0.30, 0.06, 0.065), 'dark', loc=(x, y - 0.185, z + 0.01))
+            P.add(L.box(0.34, 0.16, 0.055), 'dark', loc=(x, y - 0.145, z + 0.10))
+            P.add(aim(L.cone(0.185, 0.235, 0.12, 12), (x, y, z - 0.26),
+                      (0.0, 0.0, 1.0)), 'bone')
+            P.add(L.box(0.26, 0.26, 0.05), 'dark', loc=(x, y, z - 0.25))
+            P.add(L.box(0.07, 0.34, 0.20), 'dark', loc=(x, y, z + 0.17))   # the comb
+        elif kind == 'shield':
+            P.add(aim(L.cone(0.260, 0.215, 0.085, 14), (x, y, z), (0.30, -1.0, 0.18)), 'bone')
+            P.add(aim(L.cone(0.275, 0.275, 0.045, 14), (x, y, z), (0.30, -1.0, 0.18)), 'dark')
+            P.add(aim(L.sphere(0.085, 0.085, 0.075, 10, 7), (x, y, z), (0.30, -1.0, 0.18)), 'dark')
+        elif kind == 'sword':
+            P.raw(aim(L.box(0.115, 0.045, 0.62), (x, y, z - 0.08), (0.14, 0.0, 1.0)), 'bone')
+            P.add(L.box(0.34, 0.09, 0.075), 'dark', loc=(x + 0.03, y, z + 0.23))
+            P.add(L.box(0.085, 0.085, 0.20), 'dark', loc=(x + 0.035, y, z + 0.34))
+            P.add(L.sphere(0.075, 0.075, 0.070, 10, 7), 'bone', loc=(x + 0.04, y, z + 0.45))
+        elif kind == 'boot':
+            P.add(L.box(0.22, 0.24, 0.34), 'bone', loc=(x, y, z))
+            P.add(L.box(0.25, 0.44, 0.11), 'dark', loc=(x, y - 0.08, z - 0.20))   # the sole
+            P.add(L.box(0.26, 0.28, 0.08), 'dark', loc=(x, y, z + 0.16))          # the cuff
+        elif kind == 'purse':
+            P.add(L.sphere(0.200, 0.185, 0.215, 12, 8), 'body', loc=(x, y, z))
+            P.add(L.box(0.26, 0.26, 0.07), 'dark', loc=(x, y, z + 0.18))          # drawstring
+            P.add(L.sphere(0.065, 0.065, 0.030, 10, 7), 'glow', loc=(x + 0.14, y - 0.10, z - 0.10))
+
+    hang(-58.0, 0.26, 'helm')
+    hang(58.0, 0.34, 'shield')
+    hang(-120.0, 0.44, 'sword')
+    hang(120.0, 0.40, 'boot')
+    hang(180.0, 0.30, 'purse')
+
+    # --- ARMS. Short and thick, and they do the two halves of the idea: the
+    # near one holds the SLATE it writes the tally on, the far one is the open
+    # pinch that lifts. The original's quill was 0.020 thick - a hair - and its
+    # three 0.020 fingers were invisible at any distance; a chibi takes the
+    # count with a bold slate and TWO thick digits.
+    limb(P, [(-0.42, -0.08, 1.24), (-0.52, -0.26, 1.10), (-0.50, -0.42, 1.02)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.140, 10, 7), 'body', loc=(-0.50, -0.44, 1.00))
+    P.add(L.box(0.30, 0.055, 0.40), 'dark', loc=(-0.50, -0.50, 1.14))        # the slate
+    for i, sz in enumerate((0.30, 0.22, 0.26)):                              # chalk marks
+        P.add(L.box(sz, 0.02, 0.035), 'bone', loc=(-0.50, -0.532, 1.26 - i * 0.11))
+    limb(P, [(0.42, -0.08, 1.24), (0.58, -0.30, 1.14), (0.62, -0.50, 1.06)], 0.145, 0.120)
+    for d in (-1, 1):                                                        # the pinch
+        limb(P, [(0.62, -0.52, 1.06 + d * 0.055), (0.70, -0.70, 1.02 + d * 0.085)],
+             0.072, 0.052, 'body')
+    return P
+
+
+BUILDERS.update({"tallyman_chibi": tallyman_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 8 OF 14 - THE COOK.
+#
+# Same programme as the seven before it: the creature is rebuilt in the game's
+# register; see the block above drillmaster_chibi for the measured Knight
+# proportions and the one above snuffer_chibi for the rule that register is
+# MASS AND COUNT, not man-proportions.
+#
+# WHAT THE ORIGINAL ACTUALLY READS AS, looked at before anything was changed
+# (renders/art/minibosses/cook/hero_front|side|back.png):
+# A SANDWICH-BOARD MAN STANDING NEXT TO A WASHTUB. From the side it is worse -
+# it is a washtub, and the man is gone. Measured off the builder, against a
+# hero arm 0.29 thick and a hero head 1.09 across:
+#     legs            0.105 / 0.085        boots 0.26 x 0.40 x 0.10
+#     arms            0.072 / 0.054        ladle haft 0.034 / 0.028
+#     yoke            0.055 - 0.075        pot chains 0.026 / 0.022
+#     bowl cord       0.012                A HAIR
+#     apron           0.74 x 0.90 FLAT     the biggest member, one value
+#     head            0.30 x 0.33          a THIRD of the hero's head
+#     cauldron        0.96 across, bottom ON THE GROUND LINE
+# Seven faults fall out of that, and only the first is the usual one:
+#  1. EVERY MEMBER EXCEPT THE TORSO AND THE POT IS A WIRE. Fifth conversion
+#     running; it is the register and it is not news.
+#  2. THE POT IS A WOODEN TUB WITH A LID ON, AND THE POT IS THE WHOLE FIGHT.
+#     Two causes, both mine. (a) An 18-segment sphere under flat light shows
+#     its vertical facets, and vertical facets on a round brown vessel are
+#     STAVES - the thing reads as a barrel however black the material says it
+#     is. (b) The mouth is WIDER than the belly (rim cone 0.47 -> 0.49 under a
+#     0.50 pale flange), which is the proportion of a tub; a cauldron bellies
+#     OUT and narrows IN at the rim. And the pale flange with a lit disc under
+#     it reads as a LID, so the one thing a party has to spill is sealed.
+#  3. THE APRON IS A SANDWICH BOARD. 0.74 x 0.90 of flat pale panel at a
+#     single value, hung on the front plane only, is the largest thing on the
+#     creature and it says nothing. It also hides the torso, so the man has no
+#     body between his boots and his yoke.
+#  4. THE POT IS PARKED, NOT SLUNG. Its bottom sits on the ground line and its
+#     chains are 0.026 wires that vanish at pane distance, so it reads as a
+#     prop standing beside him. The entire idea - a man bent under a weight -
+#     needs CLEAR AIR UNDER THE POT and chains you can see, and had neither.
+#  5. THE MAN IS GONE AT AZIMUTH 90. The pot sits at x +0.86 with the man at
+#     x 0 and everything in one y plane, so from the side the camera looks
+#     straight down the line of the pair and the pot eclipses the creature.
+#     This is the Stoker's fault 6, the Gaoler's 7, the Porter's 7 and the
+#     Tallyman's 1 in a NEW form: not value failing to separate members, but
+#     one member physically swallowing the whole figure.
+#  6. THE LADLE IS A LOLLIPOP. A 0.034 haft with a 0.17 ball 1.2 m up in clear
+#     air above the head is a bubble wand, and from the side it is the only
+#     thing visible above the tub.
+#  7. THREE MESS BOWLS ON NOTHING. 0.115 cones spaced 0.075 on a 0.012 cord -
+#     the Tallyman's arithmetic, failed again before it was ever written down:
+#     a row of n reads as n only while the GAP exceeds TWICE the radius. These
+#     fuse into one pale sliver, and the cord holding them is invisible.
+# AND THE FACE IS INSIDE THE SKULL - eyes() is called at y 0.0 on a head
+# centred at y -0.18, so the pupils sit behind 0.16 m of scalp. That is the
+# Drillmaster's pass-2 fault verbatim, shipped in a second creature.
+#
+# THE CARRIED FAULT, AND THIS CONVERSION TAKES IT: the lit mechanic has been a
+# FRONT-ONLY FEATURE on every creature in this file - the Tallyman's coin slot,
+# the Porter's, the Sexton's niches. A party reads a set piece from whatever
+# door it came in by. So the Cook's fire is put UNDER the pot as a glow that is
+# radially symmetric: there is no azimuth from which the pot is not visibly ON.
+#
+# THE VALUE PLAN, and this one had to be measured rather than assumed. At the
+# Cook's wear of 0.60 the generator's 'body' lands at luminance 0.372 and its
+# 'bone' at 0.441 - a 19% separation, the weakest in the file, which is why the
+# original's apron, torso and head all read as one pale mass. SO NOTHING HERE
+# LEANS ON BODY-VERSUS-BONE. The figure is 'body', every break on it is 'dark'
+# (luminance 0.06), the pot is 'dark', and the two things the viewer must read
+# - THE FIRE and THE BROTH - are the only 'glow' on the creature.
+# Authored at the same 2.05 m so the pair sheet compares ONE thing.
+# ===========================================================================
+CANON.update({
+    "cook_chibi": ("The Cook (chibi)", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
+                   "mess",
+                   "IT KEEPS THE PACK ALIVE - rebuilt in the game's own register",
+                   0.60, "The pot is on."),
+})
+
+
+def cook_chibi():
+    """The Cook in the game's register. Same read - A SQUAT MAN UNDER A YOKE
+    WITH A BLACK POT SLUNG ON ONE END AND HIS KIT ON THE OTHER - with every
+    wire member taken to a chibi weight, the cauldron rebuilt so it is a
+    cauldron and not a tub, the pot lifted clear of the floor so it is CARRIED,
+    the fire moved UNDER it so the mechanic reads from every azimuth, and the
+    mess kit given enough mass to be a counterweight instead of three chips.
+
+    The balance is the silhouette: a heavy dark ball low on the right, a keg
+    and a stack of bowls low on the left, a bent man in the middle and a ladle
+    shouldered up and out. It is a weighing scale with a man under it, and it
+    is not the Drillmaster's thin high disc nor the Porter's drawbar."""
+    P = Parts("cook_chibi")
+    HIP = 0.43                                   # 21% of 2.05, off the Knight
+
+    # --- LEGS. Stubs, planted wide, the loaded side braced out further.
+    for s in (-1, 1):
+        limb(P, [(s * 0.19, 0.03, HIP), (s * 0.23, 0.00, 0.21),
+                 (s * 0.25, -0.03, 0.09)], 0.140, 0.128, 'dark')
+        P.add(L.box(0.28, 0.39, 0.12), 'dark', loc=(s * 0.25, -0.10, 0.06))
+
+    # --- TORSO. A wide low barrel of a man, 0.80 across. The original hung a
+    # flat panel in front of a 0.265 spine; there was no body behind the apron.
+    P.add(L.sphere(0.40, 0.32, 0.38, 18, 12), 'body', loc=(0.0, -0.02, 0.90))
+    # PASS 4, AND IT IS A BUILD FAULT, NOT A JUDGEMENT: from the BACK the legs
+    # were two stumps under a floating ball. The torso's bottom sits at 0.52
+    # and the hips at 0.43, and nothing bridged the 0.09 - the apron hid it
+    # from the front and there is no apron behind. A pelvis, and the legs meet
+    # the man from every side.
+    P.add(L.sphere(0.345, 0.285, 0.165, 16, 10), 'body', loc=(0.0, -0.02, 0.50))
+    # shoulders, and the POT SIDE IS LOWER - the lean is in the shoulders, not
+    # in a cant on the spine, because a chibi has no waist to bend at.
+    P.add(L.sphere(0.205, 0.195, 0.180, 12, 8), 'body', loc=(-0.40, -0.04, 1.22))
+    P.add(L.sphere(0.205, 0.195, 0.180, 12, 8), 'body', loc=(0.40, -0.04, 1.14))
+
+    # --- THE APRON. Fault 3. Narrower than the torso so the body reads AROUND
+    # it, and broken into three bands by the one slot that actually separates
+    # at this wear: a dark waist tie, a dark hem, and two scorch patches,
+    # because a mess cook's apron is burnt and Mr. E's second rule says the
+    # wear has to be justified by what the thing is.
+    # PASS 5 - THE APRON WAS A SIGNBOARD WITH TWO WINDOWS IN IT. A rectangle
+    # with a framed edge and two small dark rectangles on it is a notice, and
+    # the scorch patches - put there to carry Mr. E's wear rule - were the two
+    # windows. Cloth is not a rectangle: it is NARROW AT THE TIE AND WIDE AT
+    # THE HEM and its bottom edge is not straight. So the panel becomes a
+    # tapered membrane with a kicked hem, the scorch goes (wear is carried by
+    # the soot in the material and by the burnt hem band instead), and the tie
+    # gets two ENDS hanging, which is the detail that says somebody knotted it.
+    P.raw(L.membrane([(-0.21, -0.355, 1.05), (0.21, -0.355, 1.05),
+                      (0.31, -0.360, 0.76), (0.33, -0.368, 0.58),
+                      (0.12, -0.372, 0.52), (-0.16, -0.370, 0.54),
+                      (-0.32, -0.366, 0.60), (-0.30, -0.358, 0.80)], 0.045), 'bone')
+    P.add(L.box(0.70, 0.08, 0.09), 'dark', loc=(0.0, -0.345, 1.06))
+    for s_ in (-1, 1):
+        P.add(L.box(0.055, 0.05, 0.22), 'dark', loc=(s_ * 0.30, -0.345, 0.95))
+    P.raw(L.membrane([(-0.30, -0.372, 0.60), (-0.16, -0.376, 0.54),
+                      (0.12, -0.378, 0.52), (0.33, -0.374, 0.58),
+                      (0.31, -0.374, 0.50), (0.10, -0.380, 0.44),
+                      (-0.16, -0.378, 0.46), (-0.29, -0.374, 0.52)], 0.030), 'dark')
+
+    # --- THE HEAD. A cloth cap pulled down over a plain face. The cap is
+    # NARROWER than the skull (0.49 against 0.54) - the rule the Sexton's
+    # saucer, the Snuffer's lampshade and the Tallyman's martini glass each
+    # paid for separately, and nothing round sits on top of something round
+    # here either: the cap is a shallow dome set INTO the crown, not perched
+    # on it, with a dark band at the join doing the value break.
+    HZ = 1.56
+    P.add(aim(L.cone(0.135, 0.165, 0.16, 10), (0.0, -0.04, 1.24),
+              (0.0, 0.0, 1.0)), 'body')                       # the neck
+    P.add(L.box(0.46, 0.44, 0.05), 'dark', loc=(0.0, -0.05, 1.33))   # the collar
+    P.add(L.sphere(0.27, 0.25, 0.255, 16, 10), 'body', loc=(0.0, -0.05, HZ))
+    P.add(L.sphere(0.245, 0.23, 0.13, 16, 8), 'bone', loc=(0.0, -0.05, 1.70))
+    P.add(L.box(0.50, 0.47, 0.055), 'dark', loc=(0.0, -0.05, 1.63))
+    # THE EYES ARE ON THE FACE AND NOT IN THE SKULL, and they have pupils.
+    # The original called eyes() at y 0.0 on a head centred at y -0.18, so the
+    # face was blank from every angle - the Drillmaster's pass-2 fault, found
+    # once, written down once, and shipped again here. The skull's front face
+    # is at y -0.30; the sclera sits at -0.27 and the pupil at -0.305.
+    eyes(P, (0.0, -0.05, 1.57), 0.105, 0.058, -0.22, 'bone')
+    eyes(P, (0.0, -0.05, 1.575), 0.105, 0.029, -0.255, 'dark')
+
+    # --- THE YOKE. Fault 5's other half: it is NOT the Porter's drawbar,
+    # because it dips hard to the loaded side and carries a weight on each end,
+    # which is the shape of a balance and not of a bar. 1.70 long, and stout.
+    # PASS 2, AND IT IS THE FAULT THE WHOLE CONVERSION TURNS ON. Pass 1 pulled
+    # the pot in from x 0.86 to 0.78 and nudged it 0.12 in y, and AT AZIMUTH 90
+    # THE MAN WAS STILL GONE - the pot filled the cell and the creature behind
+    # it was a head and a lollipop. Of course it was: the side camera looks
+    # down the X axis, so an X offset is DEPTH, not separation, and no amount
+    # of it will ever move the pot off the man. THE LESSON IS GENERAL AND IT IS
+    # THE TALLYMAN'S, STATED PROPERLY: a load carried on ONE axis is invisible
+    # from that axis. The carry goes DIAGONAL IN PLAN - 40 degrees - so the pot
+    # is back-right, the kit is front-left and the man stands between them in
+    # EVERY view. Front sees a balance; side sees three masses in a row; back
+    # sees the balance from behind.
+    yoke = [Vector((-0.68, -0.58, 1.34)), Vector((-0.22, -0.20, 1.50)),
+            Vector((0.26, 0.20, 1.44)), Vector((0.70, 0.56, 1.24))]
+    P.raw(L.tube(yoke, [0.058, 0.082, 0.078, 0.062], 9), 'dark')
+
+    # --- THE CAULDRON. Fault 2 and fault 4. PX is pulled IN from the
+    # original's 0.86 and pushed OFF the y axis, so at azimuth 90 the pot no
+    # longer stands square in front of the man; and the whole assembly hangs
+    # with 0.17 m of clear air under it, which is the only thing that says
+    # CARRIED rather than PARKED.
+    PX, PY = 0.58, 0.49
+    PRX, PRY = -0.643, 0.766                      # the carry axis' perpendicular
+    limb(P, [(0.70, 0.56, 1.24), (PX + 0.02, PY + 0.02, 1.34)], 0.054, 0.048, 'dark')
+    # the belly: 24 segments, because the facet rhythm at 18 is what made the
+    # original read as a staved barrel, and the belly is WIDER than the mouth.
+    P.add(L.sphere(0.50, 0.47, 0.34, 24, 14), 'dark', loc=(PX, PY, 0.66))
+    P.raw(aim(L.cone(0.470, 0.370, 0.18, 24), (PX, PY, 0.78), (0.0, 0.0, 1.0)), 'dark')
+    # PASS 4 - THE BAIL, and it is the one cue that settles tub versus pot. An
+    # urn, a crock and a washtub all have a belly and a lip; NONE of them has a
+    # HANDLE ARCHING OVER THE MOUTH. Three passes were spent on proportion and
+    # facet count trying to argue the thing out of being a barrel, and one arc
+    # does it. The chains hang off the bail's crown, which is also how a real
+    # one is carried, so the chain run stops being decoration.
+    bail = [Vector((PX + PRX * 0.40, PY + PRY * 0.40, 1.08)),
+            Vector((PX + PRX * 0.26, PY + PRY * 0.26, 1.24)),
+            Vector((PX, PY, 1.34)),
+            Vector((PX - PRX * 0.26, PY - PRY * 0.26, 1.24)),
+            Vector((PX - PRX * 0.40, PY - PRY * 0.40, 0.96))]
+    P.raw(L.tube(bail, 0.060, 9), 'dark')
+    # PASS 6 - THE SCOURED RIM WAS EATING THE FIRE. The pale 'bone' lip was put
+    # there for Mr. E's wear rule - a cook keeps his pot - and it sat directly
+    # against the glow ring. At this aura the 'glow' slot normalises to very
+    # near white, so bright-next-to-pale is NO CONTRAST AT ALL and the burning
+    # mouth read as a polished one. A lit thing only reads lit against DARK.
+    # The bone lip goes; the pot is black iron end to end and the only pale
+    # thing on it is the fire. The wear rule is carried instead by the bail and
+    # the chain, which are clean iron on a sooted body.
+    # PASS 4 - THE FIRE COMES OFF THE FLOOR AND GOES ON THE RIM. Pass 3 fixed
+    # the sock by making the fire tapers, and the tapers came back POPCORN - a
+    # pale cluster in a cup sitting on the ground beside his boot, with no air
+    # under it, so the pot still did not read as hanging and the brightest
+    # thing on the creature was a bowl of rice. The brazier was costing eleven
+    # parts and buying a fault. IT IS GONE. What says "the pot is on" is the
+    # pot's own MOUTH: a glow ring sunk just inside the scoured lip, so from
+    # any azimuth, at any elevation this rig will shoot, the near half of it is
+    # a bright crescent against black iron. One part, radially symmetric, and
+    # it cannot be read as anything but something hot in a pot. And with the
+    # firebox gone the pot's bottom sits at 0.44 with CLEAR AIR under it, which
+    # is what pass 1's fault 4 asked for and never got.
+    # PASS 5 - THE LIT RIM WAS INSIDE THE POT, SO THERE WAS NO LIT RIM. Pass 4
+    # sank the glow ring 0.04 BELOW the scoured lip, which is exactly where a
+    # pot's contents sit and exactly where a camera at 6 degrees of elevation
+    # cannot see them: the lip's own outer edge occludes it from every azimuth
+    # at once. The pot came back beautiful and OFF. The ring has to be PROUD -
+    # level with the lip and 0.005 wider than it - so what the viewer reads is
+    # a black pot with a burning mouth, which is the whole mechanic in one
+    # silhouette. The lesson is the disc lesson a third time and it is finally
+    # stated as a rule: AT THIS ELEVATION A HORIZONTAL FEATURE ONLY READS IF IT
+    # IS THE TOPMOST THING AT ITS OWN RADIUS.
+    P.raw(aim(L.cone(0.400, 0.400, 0.060, 24), (PX, PY, 0.935), (0.0, 0.0, 1.0)), 'glow')
+    P.add(L.sphere(0.370, 0.370, 0.050, 22, 8), 'glow', loc=(PX, PY, 0.98))
+    # THE FIRE, AND IT IS THE CARRIED FAULT TAKEN: a glow directly under the
+    # pot, radially symmetric, and the LOWEST thing on the assembly - so there
+    # is no azimuth, and no elevation this rig will ever shoot at, from which
+    # the pot is not visibly ON. Front-only mechanics stop here.
+    # PASS 3 - THE FIRE CAME OUT AS A SOCK WITH TEETH IN IT. Pass 2 built the
+    # fire as a flat glow disc with three dark grate bars across it, and at the
+    # rig's 6 degrees of elevation a squashed disc is seen EDGE ON: a pale band,
+    # with the bars reading as teeth in it. From the side the pot had a mouth.
+    # The rule, and it is the shade's and the saucer's in a third costume: A
+    # FLAT DISC IS NOT A SHAPE AT THIS ELEVATION - it is a line. Fire is not a
+    # disc anyway; fire is TAPERS. So the brazier shrinks to a cup that cannot
+    # be mistaken for a foot, and the fire is six glow cones licking UP the
+    # belly, which read as flame from every azimuth and read as flame small.
+
+
+    # --- THE FREE END: A KEG AND A STACK OF BOWLS. Fault 7. Three 0.115 cones
+    # on a hair could never balance a 1.00 m cauldron, and they fused anyway.
+    # The keg is ALLOWED to read as a barrel because it IS one - and having one
+    # honest barrel on the creature is what makes the pot stop being the other.
+    KX, KY = -0.64, -0.44
+    limb(P, [(-0.66, -0.56, 1.32), (KX, KY, 1.14)], 0.046, 0.042, 'dark')
+    P.add(L.sphere(0.26, 0.25, 0.30, 16, 10), 'dark', loc=(KX, KY, 0.86))
+    for kz in (0.98, 0.74):
+        P.raw(aim(L.cone(0.252, 0.252, 0.045, 16), (KX, KY, kz),
+                  (0.0, 0.0, 1.0)), 'bone')
+    # the bowls: 0.165 radius, 0.20 apart. THE ARITHMETIC IS DONE BEFORE THE
+    # RENDER THIS TIME - a stack reads as a stack rather than as a row, so the
+    # test is not the Tallyman's gap-over-twice-the-radius but whether each
+    # bowl's own RIM is separated from the one below it. 0.20 of pitch against
+    # a 0.055 bowl height and a dark rim ring on each gives 0.09 of clear air
+    # under every rim.
+    BX, BY = -0.42, -0.74
+    limb(P, [(-0.44, -0.40, 1.42), (BX, BY, 0.72)], 0.030, 0.028, 'dark')
+    for bz in (1.12, 0.92, 0.72):
+        P.raw(aim(L.cone(0.165, 0.125, 0.055, 14), (BX, BY, bz), (0.0, 0.0, 1.0)), 'bone')
+        P.raw(aim(L.cone(0.178, 0.178, 0.024, 14), (BX, BY, bz + 0.052),
+                  (0.0, 0.0, 1.0)), 'dark')
+
+    # --- ARMS. Short and thick. The near one SHOULDERS THE LADLE and the mitt
+    # visibly wraps the haft; the far one is up on the pot chain, steadying it,
+    # which is the only pose that explains why the shoulder on that side is
+    # 0.08 lower than the other.
+    limb(P, [(-0.40, -0.06, 1.16), (-0.54, -0.24, 1.04),
+             (-0.58, -0.34, 0.96)], 0.140, 0.118, 'body')
+    P.add(L.sphere(0.155, 0.150, 0.140, 10, 7), 'body', loc=(-0.58, -0.36, 0.95))
+    # the haft is DARK and the bowl is BONE - the value break the original's
+    # all-pale lollipop never had. 0.060 of haft, not 0.034.
+    limb(P, [(-0.58, -0.38, 0.95), (-0.76, -0.12, 1.52),
+             (-0.86, 0.04, 1.90)], 0.060, 0.050, 'dark')
+    P.add(L.box(0.17, 0.17, 0.10), 'body', loc=(-0.60, -0.33, 1.02))    # the grip
+    # PASS 5 - THE LADLE WAS A LOLLIPOP THROUGH FOUR PASSES. A flat pale oval
+    # on a stick is a lollipop whatever the stick is made of, and thickening
+    # the haft in pass 1 only made it a bigger lollipop. A ladle reads by being
+    # a CUP: deep, with a dark hollow you can see into and a ferrule where the
+    # bowl is socketed onto the haft. The bowl is 0.16 deep now instead of
+    # 0.13 flat, the hollow is dark, and the join is a band - three parts and
+    # none of them is a disc.
+    P.add(L.sphere(0.205, 0.200, 0.165, 14, 9), 'bone', loc=(-0.90, 0.08, 1.95))
+    P.add(L.sphere(0.150, 0.145, 0.115, 12, 8), 'dark', loc=(-0.905, 0.075, 2.02))
+    P.add(L.box(0.115, 0.115, 0.10), 'dark', loc=(-0.845, 0.035, 1.845))
+    limb(P, [(0.40, -0.04, 1.12), (0.54, 0.10, 1.16),
+             (0.62, 0.24, 1.20)], 0.140, 0.118, 'body')
+    P.add(L.sphere(0.155, 0.150, 0.140, 10, 7), 'body', loc=(0.64, 0.27, 1.22))
+    return P
+
+
+BUILDERS.update({"cook_chibi": cook_chibi})

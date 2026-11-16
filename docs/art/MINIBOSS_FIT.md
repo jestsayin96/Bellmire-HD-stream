@@ -577,3 +577,254 @@ reinforce down the middle would cut it in two and hand the face straight back.
 
 Eight creatures still to convert, two of them the recorded skip - the Scrapwright and the
 Bellman, a machine and a shroud, neither with man-proportions.
+
+
+## REGISTER CONVERSION 7 OF 14 - THE TALLYMAN (`tallyman_chibi`)
+
+Sheet: `renders/art/minibosses/_tallyman_register.png` (original left, chibi right, a real
+2.45 m posed KayKit Knight beside each), plus
+`renders/art/minibosses/tallyman_chibi/hero_front|side|back.png`. All looked at, every pass -
+six passes, six renders, plus a 2x head-and-chest crop that is how three of the six faults
+were caught at all. Ratio 0.88, pair 3.58 m, fits the fixed frame, blank check 2 files 0
+failures, engine BLENDER_EEVEE. Mesh shipped: `assets/monsters/minibosses/tallyman_chibi.glb`,
+4 meshes, 1558 faces, static, no armature. CORRIDOR-SAFE - footprint span **1.72 m** against
+the 11.0 m three-cell clear span, and the NARROWEST of the fourteen, so if anything in this
+file is ever room-locked it will not be this one.
+
+### WHAT THE ORIGINAL ACTUALLY READS AS
+
+Looked at before anything was changed: **a surveyor's tripod with a washing line on it** -
+and from the back, a clothes horse. Measured off the builder, against a hero arm 0.29 thick
+and a hero head 1.09 across - legs 0.072/0.056, arms 0.062/0.040, fingers 0.020, quill
+0.020/0.008, frame uprights 0.08, bead wires 0.035, five hanging cords at 0.014, torso
+0.52x0.34x0.44 and a head 0.26x0.30 which is a SIXTH of the hero's. Five faults fall out of
+that, and only the first is the usual one:
+
+1. **Every member except the torso is a wire.** Fourth conversion running; it is the register.
+2. **The receipt is unreadable, and that is the worst of the five.** This is the one creature
+   in the file whose entire job is Mr. E's binding principle - what it has taken is HANGING
+   ON IT, where the viewer who paid for that helm can see it. On the sheet the helm is a grey
+   ball, the boot a dark chip, the satchel a chip, the blade a toothpick and the ring a wire
+   hoop. The modelling was there. The SIZE and the VALUE BREAK were not.
+3. **The spreader bar is a scaffold.** 1.86 m of horizontal bone at shoulder height with five
+   cords dropping off it is a drying rack, and it is what makes the creature read as
+   architecture. It was pass 2's fix for the kit fusing with the torso and it worked by
+   turning him into a frame. Both can be had: the kit hangs off a ring he WEARS.
+4. **Zero depth - the mechanic is gone at azimuth 90.** Frame, beads, spreader and all five
+   hangers sit in ONE Y plane, so from the side the creature is a fencepost with twigs and
+   there is no tally and no loot on it at all. This is the Stoker's fault 6, the Gaoler's 7
+   and the Porter's 7 in its hardest form, because here there is nothing TO separate. It is
+   the carried fault and this conversion takes it: the loot goes AROUND him in plan at five
+   azimuths, so every view has three or four pieces and no view has the lot.
+5. **Twenty-one beads is not a count.** Four rows of 7/5/3/6 at 0.052 is a texture. The
+   Sexton's lesson in its own form.
+
+**And one ruling applied rather than a fault: the hung RING is gone.** Mr. E, 04:56 - "i
+understand the rings but gloves can be seen so we dont have to make new rings." A 0.065 wire
+hoop at pane distance was the proof of his own point. Its slot goes to a SHIELD, which reads
+at any distance.
+
+### SIX PASSES, ONE CHANGE AND ONE RENDER EACH
+
+1. Build: every wire to a chibi weight, the strongbox PROMOTED from an add-on to the torso
+   itself, twenty-one beads to six, the gantry replaced by a hoop he wears with the loot at
+   five azimuths, and every stolen piece taken from 0.13-0.25 up to 0.34-0.62 with a value
+   break on each. The depth fix worked first time and is the one thing here that did.
+2. **THE SHADE WAS A FUNNEL AND THE HEAD WAS AN EGG.** An inverted cone 0.30 across over a
+   0.33 dome is a MARTINI GLASS from the front, a WINE GLASS from the side and, with the
+   dome, a PERFUME BOTTLE from the back - the Sexton's pass-5 saucer and the Snuffer's pass-4
+   lampshade, walked into again in the same slot. The rule those two paid for is absolute:
+   **nothing on a head may be wider than the head, and nothing round belongs on top of
+   something round.** The lamp goes; the head becomes a SECOND STRONGBOX, squared, banded,
+   hasped - the same object as its chest in miniature. A tallyman keeps his head the way he
+   keeps his takings.
+3. **SIX BEADS CAME OUT AS A BREAD ROLL.** I cut twenty-one to six to make the count readable
+   and then spaced them 0.14 apart at radius 0.11, so adjacent beads OVERLAP and the row
+   fuses into one pale sausage. The count was still unreadable, by my own hand, in the pass
+   written to fix exactly that. **The lesson is arithmetic and it is general: a row of n
+   spheres reads as n only while the gap exceeds twice the radius. It is measurable before
+   rendering and I did not measure it.** Four beads, 0.25 apart, 0.02 of clear air between.
+4. **THE TALLY AND THE LOOT WERE ON THE SAME LINE.** Spacing was necessary and not sufficient:
+   at z 1.22 the rod sat level with the shoulders, the tally ring and the hung helm, so four
+   pale beads, two pale shoulder balls and a pale helm made ONE pale band straight across the
+   creature and nothing in it could be told from anything else. **Two mechanics cannot share a
+   horizontal.** The rod drops onto the clear brass between the box's two wrapping bands, and
+   the coin slot drops with it so the two do not simply swap the collision.
+5. **HALF THE BEADS WERE THREADED ON NOTHING AND A PIPE STUCK OUT OF HIS RIGHT SIDE.**
+   `lordlib.cone` is built along +Z **with its base at the origin, not centred**, so aiming it
+   along +X from x=0 ran the whole 1.02 m of rod to the RIGHT: the two left beads hung in
+   mid-air and 0.6 m of iron projected clear of the body like a spigot. The Porter's pass-3
+   note says the same thing from the other side. Caught on the crop, not on the full sheet -
+   at cell size it was a thin dark line and looked like an arm. Pair width 3.77 -> 3.58 m.
+6. **THE HELM WAS A MUSHROOM**, and it is the piece that matters most, because this creature
+   exists so a viewer can see THEIR OWN HELM hanging on it. A 0.46 pale dome with a 0.44 flat
+   dark band directly under it is a disc exactly as wide as the thing above it - the shade's
+   fault for the third time in one session. **A helm does not read by being dome-shaped. It
+   reads by having a sight slot, a brow over it and a neck under it**, and it had none of the
+   three. One dark slot, not two: the Porter's rule holds for a helm on a hook exactly as it
+   holds for a head.
+
+### THIRTEEN FAULTS I CAN STILL SEE
+
+1. **From the SIDE the torso is a black void** - nothing separates box from ring from legs in
+   value, and the one lit thing (the coin slot) is a front-only feature. The Stoker's fault 6,
+   the Gaoler's 7 and the Porter's 7, carried. Worst remaining fault and the one I would take
+   next.
+2. **From the SIDE the head is a plain dark box.** The slit is front-only, so at azimuth 90 the
+   head has nothing on it at all. The Porter's fault 6 exactly, carried, and for the same
+   reason - it is the price of a deliberately dark head.
+3. **From the SIDE and the BACK the four beads vanish.** They sit flush to the box face, so the
+   count - the thing this creature is named for - is a front-only mechanic.
+4. **The tally ring reads as a round TRAY or a table-top**, worst from the back, where it is a
+   pale ellipse with things standing on it. It is meant to read as a hoop strapped round him.
+5. **The helm's outline is broken from the front** - it is crowded between the left shoulder
+   ball and the slate, so the piece a viewer most wants to recognise is the one piece with
+   something in front of it.
+6. **The slate merges with the strongbox** and reads as a drawer front, not as something held.
+   The hand holding it is behind it and invisible.
+7. **The pinch mitt is hidden behind the shield** from the front, so "it lifts, it does not
+   hook" is not visible in the view that matters.
+8. **The hung pieces are axis-aligned in world space** - none of them is turned to face its own
+   azimuth, so the sword and the boot at +/-120 are seen from an arbitrary angle rather than
+   presented. This is why the sword is only a pale sliver at the left edge.
+9. **The sword is the least visible piece on the creature** and for most viewers it is the item
+   they would most want to see on it.
+10. **The boots merge with the leg posts** - one dark mass from mid-shin down. The Sexton's
+    fault 9 and the Porter's 12, carried.
+11. **From the BACK the purse reads as a gourd or a water-skin**, not a coin purse, and the
+    glow coin that would have said "coin" is hidden behind it.
+12. **The shoulder balls read as pauldrons** on a creature wearing no other armour - two pale
+    domes with nothing to justify them.
+13. Ratio **0.88** - the Tallyman is SHORTER than a viewer's hero, which for a creature whose
+    whole threat is that it walks off with your kit is the wrong way round. That is
+    `bestiary.gd`'s `h`, not mine; same note as the Snuffer's 1.06, the Sexton's 1.00 and the
+    Porter's 0.94. The recommended `h` for this one is **3.45 m**.
+
+Seven creatures still to convert, two of them the recorded skip - the Scrapwright and the
+Bellman, a machine and a shroud, neither with man-proportions.
+
+---
+
+## REGISTER CONVERSION 8 OF 14 - THE COOK (`cook_chibi`)
+
+Sheet: `renders/art/minibosses/_cook_register.png` (original left, chibi right, a real
+2.45 m posed KayKit Knight beside each), plus
+`renders/art/minibosses/cook_chibi/hero_front|side|back.png`. All looked at, every pass - six
+passes, six renders. Ratio 0.84, pair 3.96 m, fits the fixed frame, blank check 2 files 0
+failures, engine BLENDER_EEVEE. Mesh shipped: `assets/monsters/minibosses/cook_chibi.glb`,
+4 meshes, **2539 faces** - the heaviest in the file and worth saying so; the 24-segment
+cauldron and the two apron membranes are where it went. Static, no armature.
+CORRIDOR-SAFE - footprint span **2.10 m**, which at the recommended `h` of 3.35 becomes
+3.43 m against the 11.0 m three-cell clear span.
+
+### WHAT THE ORIGINAL ACTUALLY READS AS
+
+Looked at before anything was changed: **a sandwich-board man standing next to a washtub** -
+and from the side it is worse, it is a washtub and the man is gone. Seven faults, and only
+the first is the usual one:
+
+1. **Every member except the torso and the pot is a wire.** Fifth conversion running.
+2. **The pot is a wooden tub with a lid on, and the pot is the whole fight.** Two causes,
+   both mine: an 18-segment sphere shows its vertical facets and vertical facets on a round
+   brown vessel are STAVES; and the mouth is wider than the belly, which is the proportion of
+   a tub. The pale flange with a lit disc under it reads as a LID, so the one thing a party
+   has to spill was sealed.
+3. **The apron is a sandwich board** - 0.74 x 0.90 of flat pale panel at one value, hung on
+   the front plane only, the largest member on the creature, saying nothing and hiding the
+   torso behind it.
+4. **The pot is parked, not slung.** Its bottom sat on the ground line and its chains were
+   0.026 wires. The whole idea is a man bent under a weight and nothing was bearing.
+5. **The man is gone at azimuth 90.** Pot at x +0.86, man at x 0, everything in one y plane.
+6. **The ladle is a lollipop** - a 0.034 haft with a 0.17 ball 1.2 m up in clear air.
+7. **Three mess bowls on nothing** - 0.115 cones spaced 0.075 on a 0.012 cord. The Tallyman's
+   arithmetic failed again: gap must exceed twice the radius.
+
+**And the face is inside the skull** - `eyes()` called at y 0.0 on a head centred at y -0.18,
+so the pupils sat behind 0.16 m of scalp. That is the Drillmaster's pass-2 fault verbatim,
+shipped a second time in this same file.
+
+### THE CARRIED FAULT, AND THIS CONVERSION TOOK IT
+
+The lit mechanic has been a **front-only feature** on every creature here - the Tallyman's
+coin slot, the Porter's, the Sexton's niches. A party reads a set piece from whichever door it
+came in by. The Cook's heat is now the **mouth of the pot**: a glow ring proud of the rim,
+radially symmetric, so there is no azimuth and no elevation this rig will ever shoot at from
+which the pot is not visibly ON.
+
+### SIX PASSES, ONE CHANGE AND ONE RENDER EACH
+
+1. Build: every wire to a chibi weight, a 0.80 barrel torso behind the apron instead of a
+   0.265 spine, the pot slung with visible chains, the mess kit given a keg for mass, and the
+   eyes put on the face with pupils in them.
+2. **AN X OFFSET IS DEPTH, NOT SEPARATION.** Pass 1 pulled the pot in from x 0.86 to 0.78 and
+   nudged it 0.12 in y, and at azimuth 90 the man was still gone - of course he was, the side
+   camera looks down the X axis. **The lesson is general: a load carried on ONE axis is
+   invisible from that axis.** The carry went DIAGONAL IN PLAN at 40 degrees - pot back-right,
+   kit front-left, the man between them in every view.
+3. **THE FIRE CAME OUT AS A SOCK WITH TEETH IN IT.** Pass 2's fire was a flat glow disc with
+   three dark grate bars across it. At 6 degrees of elevation a squashed disc is seen EDGE ON -
+   a pale band, with the bars reading as teeth. From the side the pot had a mouth, the wrong
+   way. **A flat disc is not a shape at this elevation, it is a line.**
+4. **THE BAIL IS THE ONE CUE THAT SETTLES TUB VERSUS POT.** An urn, a crock and a washtub all
+   have a belly and a lip; none of them has a handle arching over the mouth. Three passes went
+   on proportion and facet count trying to argue the thing out of being a barrel and one arc
+   did it. Same pass: a pelvis, because **from the BACK the legs were two stumps under a
+   floating ball** - the torso bottom at 0.52, the hips at 0.43 and nothing bridging the 0.09.
+   The apron hid it from the front and there is no apron behind.
+5. **THE TAPERS CAME BACK POPCORN.** Pass 3's flame cones read as a bowl of rice in a cup
+   sitting on the floor beside his boot - eleven parts buying a fault. The brazier was deleted
+   outright and the heat moved to the rim. Same pass: the apron stopped being a signboard
+   (a rectangle with a framed edge and two dark rectangles on it is a NOTICE, and the scorch
+   patches put there for Mr. E's wear rule were the two windows) and became a tapered membrane
+   with a kicked hem and two tie-ends; and the ladle got a deep bowl with a dark hollow and a
+   ferrule, because **a flat pale oval on a stick is a lollipop whatever the stick is made of.**
+6. **THE SCOURED RIM WAS EATING THE FIRE.** The pale `bone` lip - put there for the wear rule,
+   a cook keeps his pot - sat directly against the glow ring, and at this aura the `glow` slot
+   normalises to very near white. **Bright-next-to-pale is no contrast at all**, so the burning
+   mouth read as a polished one. The bone lip went; the pot is black iron end to end and the
+   only pale thing on it is the fire. The pot also dropped 0.12 so the man's head and shoulders
+   clear it at azimuth 90.
+
+### THE VALUE PLAN, MEASURED RATHER THAN ASSUMED
+
+At the Cook's wear of 0.60 the generator's `body` lands at luminance 0.372 and its `bone` at
+0.441 - **a 19% separation, the weakest in the file**, which is why the original's apron, torso
+and head all read as one pale mass. Nothing in this conversion leans on body-versus-bone: the
+figure is `body`, every break on it is `dark` (luminance 0.06), the pot is `dark`, and the fire
+is the only `glow`.
+
+### TEN FAULTS I CAN STILL SEE
+
+1. **The bail reads as two thin dark struts** - spider legs over the pot, worst from the front
+   and from the side, where the arc's near and far limbs separate. It wants to be a flat strap
+   rather than a tube, or thicker again.
+2. **The ladle bowl is a second head at azimuth 90.** It sits directly above and behind the
+   skull at a similar size, so from the side the creature has two balls stacked on it.
+3. **The ladle still reads as a mallet or a mushroom from the front**, deeper bowl and all.
+   Four passes have not made this member honest and it is the one I would take next.
+4. **The bowl stack is a fused dark cluster.** The arithmetic was done for the rims and not for
+   the silhouette: three 0.165 cones at 0.20 pitch merge into one ribbed blob at cell size, and
+   it reads as a stack of tyres or a concertina. The Tallyman's lesson, failed in a new way.
+5. **The keg is invisible from the front** - entirely behind the torso. The counterweight that
+   was built to justify the balance only exists in the side and back views.
+6. **The legs read as two dark blocks.** Boots and shins are one value from mid-shin down - the
+   Sexton's fault 9, the Porter's 12 and the Tallyman's 10, carried, and not taken here.
+7. **The apron is still slab-like at cell size.** The taper and the kicked hem read at 2x; at
+   the size a viewer sees it, it is a pale panel.
+8. **The lit mouth is a flat cream disc, not a fire.** It reads as something hot in a pot,
+   which was the brief, but it does not read as flame - the `glow` slot at this aura is near
+   white and EEVEE gives it no bloom to spread.
+9. **2539 faces** - 63% more than the Tallyman and the heaviest set piece in the file.
+10. Ratio **0.84** - the Cook is SHORTER than a viewer's hero, which for a creature the party
+    has to reach past its pack to kill is the wrong way round. That is `bestiary.gd`'s `h`, not
+    mine; recommended `h` for this one is **3.35 m**.
+
+Six creatures still to convert, two of them the recorded skip - the Scrapwright and the
+Bellman, a machine and a shroud, neither with man-proportions.
+
+**SUPERVISOR: I AM ASKING FOR THE SKIP RULING PLAINLY, AS YOU ASKED ME TO.** Please rule on
+whether the Scrapwright and the Bellman are skipped. Four genuine conversions remain either
+way (cook done; boiler, sower, snarer, sluicekeeper left), and the case for the skip is
+unchanged and is in this file above: the Scrapwright is a lopsided mound of plate with no man
+inside it and the Bellman is a shroud with a bell - neither has man-proportions to convert, so
+"chibi" has nothing to act on. If you rule skip, this lane is four conversions from done.

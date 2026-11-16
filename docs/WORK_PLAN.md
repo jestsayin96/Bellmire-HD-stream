@@ -92,40 +92,43 @@ colour, make them different, unique. that goes for all accessories. all equipmen
 and all the armour pieces should not be looking the same, again unless they are a set. fix this
 asap. shut everyone else down, this is the focus tonight."
 
-### D94 HALF DELIVERED / STILL OPEN - NOT TICKED (supervisor, 2026-11-16 02:05 CT)
-Both lanes shipped their half, both are merged to main, and the item STILL FAILS ITS OWN DONE
-BAR. That is the right outcome of a test built so that it could fail, and it is not a reason to
-tick anything.
-  SHIPPED - GAME BUILD (laptop f450bbe): dress_cosmetics() takes the ITEM, not the slot.
-  Gear.acc_ctx ports the D73 icon derivation (name-first variant, cost-driven metal, ornament and
-  wear, stat-coloured gem), five shapes per slot. The 119 named weapons and armour pieces in
-  items.json are live: the tier keeps every number, the named piece is its face, old saves derive
-  one. Gates green.
-  SHIPPED - ART (art 9a6feba): the proof sheet the DONE bar asked for. Eight rows, 48 heroes, 96
-  renders, renders/art/d94/_overview.png, written up in docs/art/D94_PROOF.md. Every pair in a row
-  is differenced by pixel, and DUPLICATE (one object - a build bug) is reported separately from
-  TOO SMALL ON STREAM (different, but a viewer cannot see it - a design answer).
-  THE VERDICT: two rows pass (boots, armour). SIX DO NOT. Whoever takes D94 next inherits exactly
-  this list and should not re-derive it:
-   1. FIVE PAIRS OF NAMED ITEMS RENDER AS ONE OBJECT - Gatehouse Whistle = Brewster's Charm,
-      Hurdler's Cloak = Osier-cutter's Cloak, Baker's Mitts = Millhand's Mitts, Straw Hat =
-      Miller's Cap, Scarbow = Seamstring. One cause for all five: the derivation is
-      name-variant x cost-quartile, so two items landing on the same variant and the same quartile
-      land on the same object. Weapons are worse - showcase.weapon() keys on family + tier ALONE,
-      so every tier-5 bow is the same bow. THE FIX: the item's own key must reach the GEOMETRY,
-      not just the material. Art owns tools/art/gearmodels.py and showcase.py; game build owns the
-      same derivation inside gear.gd and both have to move together or the hub icon and the thing
-      on the hero stop being the same object.
-   2. RING, AMULET AND GLOVES CANNOT BE TOLD APART AT STREAM DISTANCE AT ALL (ring: 0.00% worst
-      pair and 0.00% median). This is a DESIGN ANSWER, not a build bug - an oversize "readable"
-      ring, or accept that rings are an inventory item and not a silhouette. NEEDS MR. E.
-   3. The twelve faults in the game build's fit report (PROGRESS.md, D-cycle D94a) are the rest of
-      the list: all boots are still boxes; accessory boots are suppressed whenever armour boots
-      exist, so the paladin's Long Count Boots never show; "Parish Iron Mace" renders as a staff
-      because arcane has no mace kind; the KIT bow is tiny in the hand, so a "Greatbow" reads
-      small; amulet chains are buried in the chest under the head's overhang; cloaks differ by
-      shape far more than by colour; and the legendary accessory pool is only 16 deep, so the
-      showcase had to borrow very-rare pieces.
+### D94 - THE DUPLICATES ARE CLOSED. STILL OPEN ON TWO THINGS ONLY (supervisor, 2026-11-16 02:58 CT)
+The remainder named at 02:05 came back from BOTH lanes and both halves are merged to main. The
+build bug is gone. D94 is NOT ticked, because two of the five original faults are still standing
+and one of them is Mr. E's to answer.
+
+  [x] DONE AND TICKED - THE ITEM'S OWN KEY NOW REACHES THE GEOMETRY (both halves, 16 Nov)
+      ART (origin/art f349e0e): showcase.sig(key, name) returns twelve dials off the two things
+      only an item has, and they move PROPORTION and COUNT inside whatever the variant decided.
+      weapon() stops keying on family + tier. Four of the eight kinds of hat had no geometry at
+      all and fell through to the war helm - which is why a straw hat was made of steel. A hood
+      left no face. The name now overrides the family where they disagree. Re-ran d94proof.py,
+      96 renders: NO ROW REPORTS DUPLICATE, all 120 pairs are two objects (amulet 0.00 -> 0.52%
+      worst, cloak -> 15.96, hat -> 17.54, weapon -> 3.05). The sheets were looked at before
+      committing, which is what caught the hood and the brim across the eyes.
+      GAME BUILD (origin/laptop e9d95f5): accessories get a FORM index (slot|variant|metal|stat|
+      cloth), so 0 of 254 accessories share a signature where 30 groups did. Named weapons are
+      numbered among their siblings and Gear.deco_piece builds wrap / pennons / stone / collars
+      off the mesh's own bounds, so Scarbow and Seamstring differ ON THE BODY (0 of 86 duplicates).
+      D94B OK, gates green.
+      The two lanes moved together, so the hub icon and the thing on the hero are still the same
+      object. That was the condition on this fix and it held.
+
+  [x] DONE AND TICKED - FOUR OF THE TWELVE FIT FAULTS (game build, e9d95f5)
+      Boots are rounded, not boxes. Bought boots now replace armour-set boots, so the paladin's
+      Long Count Boots show. "Parish Iron Mace" is a mace (arcane gained a sceptre kind). The
+      KayKit bow is held at x0.92 so a Greatbow reads large.
+
+  [ ] STILL OPEN - NEEDS MR. E, NOT A BUILDER: RING, AMULET AND GLOVES AT STREAM DISTANCE.
+      Measured again after the fix: ring 0.00% worst pair AND 0.00% median; gloves PARTLY TOO
+      SMALL, 11 of 15 pairs. The items ARE different objects now - a viewer simply cannot see a
+      ring on a body at stream size. The answer is a design call: an oversize "readable" ring and
+      glove, or accept that these are inventory items and not silhouettes. NO WORKER TAKES THIS.
+
+  [ ] STILL OPEN - THE LAST THREE FIT FAULTS (game build leads, art moves with it)
+      Amulet chains are buried in the chest under the head's overhang. Cloaks differ by SHAPE far
+      more than by COLOUR. The legendary accessory pool is only 16 deep, so D95's showcase had to
+      borrow very-rare pieces. These are small and they finish the item Mr. E named tonight.
 
 ### THE MEASURED FAULT - do not re-derive it
 gear.gd `dress_cosmetics()` renders a worn accessory from the SLOT ONLY, never from the item:
@@ -188,43 +191,39 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 02:05 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 02:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
 down the file."
 
-  GAME BUILD   ->  *** D94 REMAINDER *** D95 is DELIVERED and TICKED - do not rebuild it. D83 is
-                   DONE and TICKED. What is left of D94 is the thing the proof sheet caught:
-                   THE ITEM'S OWN KEY HAS TO REACH THE GEOMETRY, NOT JUST THE MATERIAL. Five
-                   named pairs render as one object and the weapon derivation keys on family +
-                   tier alone, so every tier-5 bow is the same bow. Fix it in gear.gd, and move
-                   WITH the art lane's tools/art/gearmodels.py so the hub icon and the thing on
-                   the hero stay the same object. Then the cheap wins off your own fit report:
-                   boots are boxes, armour boots suppress accessory boots, "Parish Iron Mace"
-                   renders as a staff, the KIT bow is tiny in the hand.
+  GAME BUILD   ->  *** D94's LAST THREE FIT FAULTS *** The duplicates are CLOSED and TICKED on
+                   both sides - do not rebuild them, and do not re-render D95 or re-measure D83.
+                   What is left of D94 that a builder owns is three things off your own fit
+                   report: amulet chains are buried in the chest under the head's overhang;
+                   cloaks differ by SHAPE far more than by COLOUR; the legendary accessory pool
+                   is only 16 deep, so D95 had to borrow very-rare pieces. Small, and they
+                   finish the item Mr. E named tonight. Ring and glove size at stream distance
+                   is NOT yours - it is sitting with Mr. E.
                    AFTER D94: D91 stages 2-4 (three-cell corridors, monsters into the avoidance,
-                   party in file) is now the WHOLE of Phase 1's remainder.
-  HUD          ->  STAND DOWN. D94 shut this lane down (Mr. E, 00:55) and nothing has lifted it.
-                   L73's last step - the 30-minute capture in which a viewer can tell from the
-                   camera alone when something important happened - stays queued, then L74. Both
-                   wait. DO NOT rebuild the shot language. Do not reach into another lane's files
-                   to look busy.
-  HUB          ->  STAND DOWN. D94 shut this lane down. H29, H30 and H31 are shipped, merged and
-                   ticked, and the freeze forbids inventing more. Nothing is queued.
-  CONTENT      ->  STAND DOWN. D94 shut this lane down. C-60 (phase2_words) is merged to main and
-                   was the last thing this lane owed. C2 stays standing and open by design for
-                   when the shutdown lifts.
-  ART          ->  *** D94 REMAINDER - THE DUPLICATES ARE YOURS *** D95 is DELIVERED and TICKED;
-                   the showcase is done, do not re-render it. Your own proof sheet is what is
-                   still open: six of the eight rows fail the DONE bar. Take the five duplicate
-                   pairs first (Gatehouse Whistle = Brewster's Charm, Hurdler's = Osier-cutter's
-                   Cloak, Baker's = Millhand's Mitts, Straw Hat = Miller's Cap, Scarbow =
-                   Seamstring): the item's own key must reach the geometry in
-                   tools/art/gearmodels.py and showcase.py, and showcase.weapon() must stop
-                   keying on family + tier alone. Then RE-RUN tools/art/d94proof.py and let the
-                   numbers say whether it passed - no row may report DUPLICATE.
-                   Ring/amulet/gloves at stream distance is NOT yours to decide - it is a design
-                   call and it is sitting with Mr. E.
+                   party in file) is the WHOLE of Phase 1's remainder and is the next phase-order
+                   item in the plan.
+  ART          ->  *** MOVE WITH THE GAME BUILD ON THE SAME THREE *** Your proof sheet passed:
+                   no row reports DUPLICATE, so that half is TICKED - do not re-run the fix.
+                   Two of the three remaining faults are derivation work you own: spread the
+                   CLOAK PALETTE so cloaks differ by colour and not only by shape, and deepen
+                   the LEGENDARY ACCESSORY POOL past 16 so a showcase never borrows down a band.
+                   Re-run tools/art/d94proof.py when you change a derivation and let the numbers
+                   say it. Ring/glove stream size is Mr. E's call, not yours.
                    Minibosses are a PERMISSION and the lane is NOT dry - do not take one.
+  HUD          ->  STAND DOWN. Mr. E shut this lane down for D94 (00:55) and only he lifts it.
+                   D94's build half landing does not lift it. L73's last step - the 30-minute
+                   capture in which a viewer can tell from the camera alone when something
+                   important happened - stays queued, then L74. Both wait. DO NOT rebuild the
+                   shot language. Do not reach into another lane's files to look busy.
+  HUB          ->  STAND DOWN. Same shutdown, same rule. H29, H30 and H31 are shipped, merged
+                   and ticked, and the freeze forbids inventing more. Nothing is queued.
+  CONTENT      ->  STAND DOWN. Same shutdown, same rule. C-60 (phase2_words) is merged to main
+                   and was the last thing this lane owed. C2 stays standing and open by design
+                   for when the shutdown lifts.
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
@@ -5212,16 +5211,21 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
 ================================================================================
-## NEEDS MR. E (supervisor, updated 2026-11-16 02:05 CT). Five things, all short.
+## NEEDS MR. E (supervisor, updated 2026-11-16 02:58 CT). Six things, all short.
   0. THE D95 SHEETS ARE WAITING - this is the one you asked for by 09:00 and it is in early.
      renders/art/d95/_overview.png (all ten, front) and _sheet_<key>.png (four views each), plus
      the same ten inside the engine at renders/cycles/d95/sheet_overview_front.png. Both halves
      end in an honest fault list, as you asked. Your eye is the bar.
-  0b. RINGS, AMULETS AND GLOVES CANNOT BE TOLD APART AT STREAM DISTANCE - measured, not guessed
-     (rings: 0.00% of the hero's pixels change between six different rings). This is a design
-     call, not a bug: do you want an oversize "readable" ring on the hand, or do rings stay an
-     inventory item that is never meant to read at delve distance? Nothing else in D94 is
-     blocked on this, but the ring row cannot pass its DONE bar until you say.
+  0b. RINGS, AMULETS AND GLOVES CANNOT BE TOLD APART AT STREAM DISTANCE - measured again after
+     the fix, not guessed (rings: 0.00% of the hero's pixels change between six different rings;
+     gloves: 11 of 15 pairs). They ARE different objects now; they are just too small to see on a
+     body. A design call, not a bug: do you want an oversize "readable" ring and glove on the
+     hand, or do they stay inventory items never meant to read at delve distance? This is the
+     only thing in D94 no builder can take.
+  0c. THE D94 SHUTDOWN - DO YOU LIFT IT? You shut HUD, HUB and CONTENT down at 00:55 for D94.
+     The build bug is now fixed and ticked on both sides; what is left of D94 is your ring call
+     above and three small fit faults. Those three lanes are standing down and will keep standing
+     down until you say otherwise. One word either way.
   1. YOUR EYE ON THE LORD REVEAL (L72, shipped). renders/cycles/20261116_l72/sheet_reveal_mourncoil.png
      - the camera eases out as Mourncoil rises instead of cutting. Does the reveal land? The
      measurement says all eight lords are framed whole with the camera out of the walls; only you

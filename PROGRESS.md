@@ -6648,3 +6648,60 @@ released when Godot closed. Only my own three files and PROGRESS.md are touched.
 - NOT TICKED BY ME. D70's other three parts (.1 the first-timer, .2 their hero's moments, .3 the
   room) are twitch_eventsub.gd's and untouched. NEXT: whatever TAKE THIS NEXT says; nothing in my
   row is open that I can see.
+
+## B9 - W-LIVE, THE CHAT HALF: THE MUSTER CAN BE READ, AND THE ERRAND PATH WAS INVISIBLE TO IT (chat bot, 2026-11-16 14:45-15:00 CT)
+TAKE THIS NEXT gave CHAT BOT W-LIVE's chat half: "the reply, the queue read and the command
+surface" for a channel-point errand. Lock: file read IDLE 14:15:03 (game build), NO Godot process
+alive at 14:46 and again at 14:52 before launching; claimed 14:48:16-06:00, released when the
+battery ended. THE CLOCK WAS READ OFF THE MACHINE THIS TIME - the supervisor's 13:58 note about
+future-stamped lines is fixed, every stamp here is real CT with the offset. Only my own three files
+and PROGRESS.md are touched.
+- THERE WAS NO QUEUE READ AT ALL. A viewer could be put in the muster and have no way to see it.
+  !delve was the only thing that touched delve_queue and the only thing that reported it, and it
+  reports the count on the way IN, once. So !muster (!party, !mustered) now reads it out: who is at
+  the dungeon mouth, in the order the names went in, and where you stand. It needs no hero - a
+  bystander may ask who is going down - and that is what the data says too (needs_hero false).
+- THE DEFECT WORTH THE SLOT: A POINT-REDEEMED ERRAND NEVER ENTERS delve_queue. twitch_eventsub.gd's
+  "delve" and "join" rewards call town._on_delve(uid) directly (eventsub 660-667). town._on_delve
+  (town.gd 5420) walks the hero to the scar and sets chat.away[uid], but NOTHING appends to
+  chat.delve_queue - only !delve does (chatcmd 321), and town.gd 5468 erases from it when the party
+  departs. So a hero sent down by "Send my hero delving" is standing at the mouth while the queue
+  chat owns says the muster is empty. A read of delve_queue alone would have LIED on stream about
+  the exact flow Mr. E opened at 13:44.
+- SO THE READ IS OF THE REAL MUSTER, NOT OF MY ARRAY. _muster unions both: the names chat put in,
+  in that order, then anyone the town has "on the road to the scar" or "waiting at the mouth of the
+  scar". "below, in the scar" is a hero already down and is NOT counted - they are not mustering.
+  The union is by user id, so a redeemer who also types !delve is counted ONCE whatever the town
+  does with them.
+- I DID NOT GUARD !delve AGAINST away, DELIBERATELY. The comment at chatcmd 37 says an errand
+  command is refused rather than dragging a hero off, and delve is missing from that list (line 124
+  covers fish/forge/armoury/brew/wear/dye). Adding it is one word, but away is cleared in exactly
+  one place in town.gd (5467) and I could not read the whole lifecycle inside a :45 window; a wrong
+  guard would lock viewers out of !delve on stream. Named here, not changed. GAME BUILD: the double
+  count is yours - _on_delve should put the hero in chat.delve_queue, or the reward should route
+  through chat, so the party is assembled from one list.
+- GATES, ALL FIVE GREEN (one battery, 14:52-14:55): parse --quit-after 300 rc=0, 0 errors;
+  L14_TEST OK (64 verbs, no drift either way, and the doc check passes because the doc was
+  regenerated); TWITCH_PARSE OK; WLIVE_CHAT OK, 16 checks (empty muster, the chat path, the errand
+  path counted with delve_queue empty of it, a hero below excluded, the redeemer's own place, a
+  bystander, both aliases, the full muster, 122 chars); COMMANDS_DOC wrote 27 commands with the
+  REAL generator, tools/_commands_doc.gd. _wlive_chat.gd was written at the worktree root, passed,
+  and is retired in this commit, as _b2_ask.gd was.
+- D70.4 HOLDS ON THE NEW LINE WITHOUT BEING ASKED TO. The gate renamed a viewer "Bo<ZWSP>\nCHEER
+  100" and read the muster: the line came back equal to safe_line(itself), no newline, no
+  zero-width. Hero names ARE viewer-set (chatcmd 118 keeps the display name current), so the muster
+  is a names-echoing line and the door is what makes it safe.
+- NOT MY GATE, BUT RUN AND WORTH REPORTING: tools/_s2_test.gd FAILS 2 of 19 and NEITHER IS MINE.
+  (a) "chatcmd.gd: help" is a FALSE POSITIVE in the gate's own regex: it compiles
+  `(?:Sfx\.(?:at|play)|_snd)\("([a-z_]+)"` , which also matches `_ui_snd("help", out)` at
+  chatcmd 752 - and _ui_snd's first argument is a VERB, not a sound. ui_kinds("help", ..) returns
+  menu_select, which IS registered, so nothing plays an unregistered sound. The regex wants an
+  anchor (`[^_]_snd\(` or the Sfx. forms alone). (b) "new ashwight -> ''" is a creature with no
+  resolved voice. Both belong to the lane that owns sfx.gd and _s2_test.gd.
+- MR. E IS NOT LIVE - checked his channel at 14:50 CT before typing anything anywhere (offline, the
+  trailer is what the page shows). NO CHAT WAS POSTED THIS SLOT AND NO REDEMPTION WAS MADE, and the
+  reason is worth his ruling: the browser on cruzader is signed in as JestSayin96, HIS OWN ACCOUNT -
+  "Customize channel" and "Edit channel trailer" are on the page - and posting as his personal
+  account is forbidden. bellmirebro's own posting path is the Send Chat Message call inside
+  twitch_eventsub.gd, the GAME BUILD's file. NO BITS WERE SPENT. NOTHING WAS REDEEMED, CREATED,
+  RENAMED OR RE-PRICED. Nothing on Twitch was touched at all, so there is no state to leave clean.

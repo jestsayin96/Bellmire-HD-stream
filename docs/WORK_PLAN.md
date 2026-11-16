@@ -344,11 +344,20 @@ direction.
                    threshold must read the stored `rarity` key instead: the hub, the icon border
                    colour, the shop level gate, the D95 showcase legendary row. Boots are now
                    legendary at 390-420 and gloves at 320-380, so recheck any gate keyed to cost.
-                   (2) C-55's fishing arm - angler.gd, fishing.gd and economy.gd's RARITY const
-                   still say "epic" while items.json says "very rare". One ladder means one word.
-                   NOTED FOR LATER, NOT NOW: the fourteen minibosses need their bestiary.gd heights
-                   (h = authored + 1.30 m, table in docs/art/MINIBOSS_FIT.md) and Mr. E's
-                   wand_crystal.glb needs an attach - both after Phase 1, both yours.
+                   (2) C-55's fishing arm, AND THE DATA COMES WITH IT (moved to you 07:35 CT):
+                   angler.gd, fishing.gd and economy.gd's RARITY const still say "epic" while
+                   items.json says "very rare", and data/fishing.json says "epic" in its ladder
+                   array (line 23) and on three catches (111, 272, 283). fishing.json is not one of
+                   the content lane's four files, so the data arm is yours together with the code -
+                   one ladder means one word, and a viewer should never read "epic" on a fish and
+                   "very rare" on a ring. chatcmd.gd's order array is the chat bot's, not yours.
+                   NOTED FOR LATER, NOT NOW, AND ALL THREE ARE YOURS AFTER PHASE 1: the fourteen
+                   minibosses need their bestiary.gd heights (h = authored + 1.30 m, table in
+                   docs/art/MINIBOSS_FIT.md); Mr. E's wand_crystal.glb needs an attach; and as of
+                   07:22 the content lane has written their FEED LINES - data/lore_lines.json
+                   `miniboss_feed.by_key[<key>][arrive|act|broken|fall]`, 140 lines, one posted at
+                   random on set-piece spawn, mechanic firing, weakness broken and death, with
+                   {name} substituted for a hero. DO NOT start any of the three before D91 ticks.
   ART          ->  *** RE-SHOOT THE SEVEN OTHER D94 PROOF ROWS. GLOVES ARE OUT OF YOUR HANDS. ***
                    CORRECTED AT 07:28: your gloves work landed at 07:04 while I was mid-run and it
                    is merged. It is HALF DELIVERED, not ticked, and that is not a mark against you -
@@ -379,7 +388,22 @@ direction.
                    has `order := ["junk","common","uncommon","rare","epic","legendary"]`. "epic" was
                    retired from the game's ladder by C-55. Fix that word while you are in the file -
                    it is the chat bot's arm of C-55, named under that item.
-  CONTENT      ->  *** FINISH C-55'S LADDER IN THE DATA - data/fishing.json. *** C-61 is DELIVERED
+  CONTENT      ->  *** MY LAST ROW WAS WRONG AND YOU WERE RIGHT TO REFUSE IT. TAKE THE STALEST
+                   STANDING-BACKLOG ITEM, AS YOU DID AT 07:22. *** At 07:20 I handed you the fishing
+                   "epic" conversion in data/fishing.json. That is NOT one of your four files
+                   (items, lore_lines, bosses, potions) and you said so instead of reaching into it.
+                   Correct call. I have moved the fishing.json data arm to the GAME BUILD lane,
+                   which already owes angler.gd, fishing.gd and economy.gd on the same word, and the
+                   order array to the CHAT BOT lane, which owns chatcmd.gd. NOTHING in fishing is
+                   yours; do not touch it even if a later row says so.
+                   C-62 IS MERGED AND RECORDED: 140 miniboss feed lines across all fourteen, four
+                   states each, plain register, every pre-existing key byte-identical. Good work and
+                   exactly the right register - "Cold. First time in a long while." is the voice.
+                   SO: you have no WORK_PLAN item, and your standing backlog is the established
+                   answer to that - C-56, C-57, C-59 and C-62 all came from it with the supervisor's
+                   blessing, so it is not an invention under the freeze. Take the stalest item in it,
+                   name which one and why it was stalest, and stay inside your four files.
+                   FOR THE RECORD, THE OLD ROW SAID: C-61 is DELIVERED
                    (the data half) and merged: 254 accessories re-banded inside their own slot, 122
                    labels moved, every slot now holds a legendary, no price touched. NOT TICKED, and
                    that is not a complaint about your work - C-61 has a code half the game build owes

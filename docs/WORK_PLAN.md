@@ -378,11 +378,15 @@ data/commands.json exclusively, on branch `chatbot`.
 *** THE LOCK STATE AS I WRITE, 09:58, AND IT MATTERS TO THE NEXT TWO LANES TO FIRE. *** The last
 line in docs/RUN_LOCK.txt is the game build's "RUNNING 09:31:30 (D91d door-emerge fix + C-55
 fishing rarity - parse, 20-min town soak, gate battery; expected finish ~10:00)". That claim is
-28 minutes old, under 45, and inside its own named window, SO I DID NOT CLEAR IT. But I checked
-the process and there is NO GODOT ALIVE at 09:59. Both facts go in the record because the protocol
-says the process is ground truth and the file is only a claim: if no fresh RUNNING line has
-appeared by 10:00 and no Godot is alive when you look, that claim has expired on its own terms and
-you may take the lock - say in your cycle that you checked the process, not just the file.
+28 minutes old, under 45, and inside its own named window, SO I DID NOT CLEAR IT - and then the
+chat bot lane settled the question better than I could. It polled the PROCESS eighteen times across
+twenty minutes: Godot up from 09:31:59, dead 09:53-09:58, a ~20-second process at 09:58:30, dead
+again 09:59-10:01, and ALIVE AGAIN on all three checks at 10:02. It had the clear line composed and
+DID NOT WRITE IT, because the last check before writing came back alive. THAT IS THE RIGHT READ AND
+IT IS NOW THE RULE: a Godot process that keeps coming back means the lane is working in short
+batteries with gaps - which is what the protocol asked for - not that its named finish has lapsed.
+ONE DEAD POLL IS NOT A RELEASED LOCK. Check the process more than once, and check it again
+immediately before you write a clear line. VERIFY BEFORE YOU ACT CUTS BOTH WAYS.
 
 *** NEW PROTOCOL RULING, AND IT IS PROCESS NOT A WORK ITEM: THE :45 SLOT GETS A LANE THAT CAN USE
 IT. *** The chat bot has now been starved of the engine for FOUR CONSECUTIVE SLOTS and everything
@@ -445,27 +449,37 @@ minutes; this costs the engine lanes one battery's delay and unblocks three writ
                    The +1.30 m heights are NOT yours; they are a bestiary.gd number. Minibosses stay
                    a PERMISSION for when this lane is dry, not a queue that outranks your queued
                    item.
-  CHAT BOT     ->  *** NOTHING FROM YOUR 09:45 SLOT REACHED THE BRANCH, AND I BELIEVE YOU RATHER
-                   THAN THE SILENCE: THE LOCK WAS HELD FROM 09:31 WITH A ~10:00 FINISH, WHICH IS
-                   YOUR WHOLE SLOT, A FOURTH TIME. *** That is why the :45-to-:58 window is now
-                   yours by protocol - see the ruling at the top of this block. L68 is ticked; L69
+  CHAT BOT     ->  *** YOUR 09:45 SLOT LANDED WHILE I WAS WRITING THIS BLOCK AND IT IS THE BEST
+                   PIECE OF WORK IN THE FLEET THIS HOUR. MERGED AND RECORDED (chatbot aa51b00,
+                   cycle B4). *** The ruling landed and you closed it in the same slot:
+                   docs/COMMANDS.md carries 26 commands, ONE added row for !catchup, 289 bytes, in
+                   the place `order` puts it, and nothing else in the file moved. AND YOU COULD NOT
+                   RUN THE GENERATOR, SO YOU PROVED THE EMULATION BEFORE YOU TRUSTED IT: you
+                   reproduced _commands_doc.gd's composition in python - header, both cooldowns
+                   through Godot's str(), the six-column row, aliases as "!a, !b", args "|" -> "/",
+                   cost defaulting to "free", the " (no hero needed)" suffix, example defaulting to
+                   "!"+k, the join with its trailing empty element - ran it over the data with
+                   `catchup` REMOVED, and got the committed doc back BYTE-IDENTICAL at all 5188
+                   bytes before writing the 26-command file. That is how an engine-bound step gets
+                   done without the engine. YOUR OWN INSTRUCTION FOR THE NEXT LANE HOLDING THE LOCK
+                   IS CORRECT AND STANDS: `--script tools/_commands_doc.gd` SHOULD be a no-op that
+                   prints "COMMANDS_DOC wrote 26 commands"; if it changes the file, THE REAL
+                   GENERATOR WINS and the emulation was wrong - keep the generator's bytes, say so.
+                   The :45-to-:58 window is still yours by protocol - see the ruling at the top of
+                   this block - because this is the FIFTH slot the engine has been out of reach. L68 is ticked; L69
                    and L70 are both written, both merged to main and NEITHER is ticked, and what is
                    owed is the ENGINE GATES AND NOTHING ELSE. Do not rebuild or re-gate the
                    engine-free side: your B2 and B3 batteries were the most thorough thing any lane
                    ran this week - byte-identity at every level, drift proven in BOTH directions off
                    the source and the data with _l14_test's own regex, 26/26 cover, ask-table
                    shadowing checked all ten topics both ways, and the 320 cap MEASURED on five
-                   shapes rather than asserted. THE REMAINDER, IN ORDER: --headless --quit-after 300
-                   (parse), tools/_commands_doc.gd (now 26 commands, and docs/COMMANDS.md WILL
-                   change), tools/_l14_test.gd, tools/_twitch_parse.gd, and _b2_ask.gd at the
-                   worktree root - then delete it and the .b2_* logs.
-                   THE RULING YOU ASKED FOR STANDS AND IS STILL YOURS: docs/COMMANDS.md IS THIS
-                   LANE'S. It is GENERATED from data/commands.json by tools/_commands_doc.gd, every
-                   commit that has ever touched it is a chat-command commit from this lane, and
-                   _l14_test FAILS until it carries the new command - so it is output that travels
-                   with the data file, not a tools/ file you are reaching into. REGENERATE AND
-                   COMMIT IT IN THE SAME BREATH AS data/commands.json, in the slot where you hold
-                   the lock for the parse gate anyway. QUEUE AFTER THE GATES: L56.
+                   shapes rather than asserted. THE REMAINDER IS SHORTER BY ONE, IN ORDER:
+                   --headless --quit-after 300 (parse), tools/_l14_test.gd (which should now PASS -
+                   the doc no longer drifts, and the doc was the one drift it would have caught),
+                   tools/_twitch_parse.gd, _b2_ask.gd at the worktree root - then delete it and the
+                   .b2_* logs - and tools/_commands_doc.gd as the no-op confirmation above.
+                   QUEUE AFTER THE GATES: L56. L68 is ticked; L69 and L70 are written, merged and
+                   NOT ticked, and the engine gates are the only thing between them and a tick.
                    YOUR FOLDER-ACCESS ASK IS IN NEEDS MR. E AND HAS BEEN FOR FOUR RUNS. It is his
                    to grant and I cannot grant it; the Blender bridge is the workaround until he does.
   CONTENT      ->  *** C-64 IS MERGED AND RECORDED, AND THE THING THAT MATTERED YOU GOT RIGHT
@@ -2577,6 +2591,24 @@ writing it: Bellmire can have disasters and losses, but not ones that cancel a p
       them how to get one.
       DONE: a hero with a busy history gets a short true summary; a hero with none gets the join
       line; the L68 drift test still passes; output never exceeds the cap.
+      L70 HALF DELIVERED / STILL OPEN (supervisor, 2026-11-16 10:05 CT; chatbot 2f8145e and aa51b00,
+      both merged to main). THE CODE AND DATA ARE IN AND ARE NOT TO BE REBUILT: !catchup with the
+      aliases !mystory and !since reads SnapshotPublisher.chronicle() - the hub's own source, no
+      other lane's file touched - matches the hero on the row's tagged `who` AND its untagged text on
+      word boundaries, spends a hard 320-char budget in WEIGHT order (death > fight > loot >
+      delve/raid > town > lore) and only then restores chronological order, leaves out any row that
+      will not fit whole, and falls back to the join line with no hero and to the hub pointer with no
+      publisher. A dead hero still gets their story - it deliberately does not go through `_needs`.
+      The cap is MEASURED on five shapes, not asserted: 283/304/315/147/170 against a 320 cap. The
+      first draft printed oldest-first and spent the budget on the walk down the stair, dropping the
+      death; that was caught by measuring a four-row busy hero, not by reading the code.
+      docs/COMMANDS.md is regenerated and committed with the data (26 commands, one added row) with
+      the generator EMULATED IN PYTHON AND THE EMULATION PROVEN BYTE-IDENTICAL on the pre-change data
+      first - see cycle B4 in PROGRESS.md.
+      WHAT IS LEFT IS THE ENGINE GATES AND NOTHING ELSE, and the lane has been locked out of the
+      engine for five consecutive slots through no fault of its own: the parse run, _l14_test.gd,
+      _twitch_parse.gd, _b2_ask.gd, and _commands_doc.gd as a no-op confirmation of the emulation.
+      It ticks on those. Same for L69.
 
 ## MR. E'S RULING, Nov 15 14:38 - THE GAME RUNS ONLY WHILE HE STREAMS (BINDING)
 

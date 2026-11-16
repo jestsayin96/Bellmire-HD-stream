@@ -792,16 +792,29 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         #    each part rigidly on its own bone, so the cuff and the hand shell
         #    pulled apart in the idle pose and the sheet showed a bucket
         #    floating beside a box. One bone, one glove.
-        #    So the silhouette cannot come from REACH - a long cuff on the hand
-        #    bone swings through the hip - it comes from the BELL MOUTH, which
-        #    is radial and therefore stands outside the hip line from every
-        #    angle, which is the only clear air a hanging arm has.
         #    The cuff BASE starts inside the hand shell, not at the wrist
         #    bone: based at the bone it left a 0.028 m hole between cuff and
         #    shell and the sheet showed a tub floating over a box.
-        p.raw(aim(L.cone(hw * 0.99, mouth, cuff + handlen * 0.30, 14),
-                  (w.x + sgn * handlen * 0.30, w.y, w.z), (-sgn, 0, 0)),
-              'metal' if F['metal'] else 'leather')
+        #    WHAT CHANGED AT MR. E'S 10:24 RULING: the silhouette no longer
+        #    comes from the BELL MOUTH alone. Flare and shell are UNTOUCHED -
+        #    a wider mouth was tried and looked like dinner plates. It comes
+        #    from REACH up the forearm (a vambrace is a forearm piece, a wrap
+        #    is a wrist piece), from LAMES breaking that reach up, and from a
+        #    COP at the elbow end. Length along the arm costs no girth.
+        base = (w.x + sgn * handlen * 0.30, w.y, w.z)
+        axis = (-sgn, 0, 0)
+        if F['stepped']:
+            # a straight sleeve with ONE shoulder in it - a different outline
+            # from the bell, which is the point: same price, different glove.
+            mid = mouth * 0.62 + hw * 0.38
+            p.raw(aim(L.cone(hw * 0.99, mid, cuff * 0.55 + handlen * 0.30, 14),
+                      base, axis), 'metal' if F['metal'] else 'leather')
+            p.raw(aim(L.cone(mid * 1.04, mouth, cuff * 0.45, 14),
+                      (w.x - sgn * cuff * 0.55, w.y, w.z), axis),
+                  'metal' if F['metal'] else 'leather')
+        else:
+            p.raw(aim(L.cone(hw * 0.99, mouth, cuff + handlen * 0.30, 14),
+                      base, axis), 'metal' if F['metal'] else 'leather')
         if F['lip']:                               # a hard flared rim
             lipx = w.x - sgn * cuff
             ring = [Vector((lipx, mouth * 1.02 * math.cos(TAU * k / 16.0),
@@ -809,6 +822,26 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
                     for k in range(17)]
             p.raw(L.tube(ring, mouth * 0.13, 7, caps=False),
                   'metal' if F['metal'] else 'dark')
+        # 1b. LAMES - the segmentation. These are what tell two vambraces of
+        #     the same price apart: a 3-lame and a 6-lame are two outlines.
+        #     They used to be "straps counted off the plate count", which is
+        #     why every cheap glove wore exactly one.
+        for k in range(F['lames']):
+            f = (k + 0.7) / (F['lames'] + 0.4)
+            sx = w.x - sgn * (cuff * f)
+            rr = hw * 0.96 + (mouth - hw * 0.96) * f
+            ring = [Vector((sx, rr * 1.025 * math.cos(TAU * j / 14.0),
+                            w.z + rr * 1.025 * math.sin(TAU * j / 14.0)))
+                    for j in range(15)]
+            p.raw(L.tube(ring, max(0.004, rr * (0.075 if F['metal'] else 0.095)), 6,
+                         caps=False), 'metal' if F['metal'] else 'dark')
+        # 1c. THE COP at the elbow end - a long reach without it reads as a
+        #     tube; with it the piece reads as a FOREARM piece.
+        if F['cop']:
+            cx = w.x - sgn * cuff * 0.98
+            p.raw(aim(L.cone(mouth * 1.0, mouth * 1.16, cuff * 0.16, 14),
+                      (cx, w.y, w.z), axis),
+                  'metal' if F['metal'] else 'leather')
         # 2. THE HAND SHELL - wider than the hand it covers
         p.add(L.box(handlen * 0.62, hw * 1.42, hw * 1.26), 'cloth',
               loc=(hd.x + sgn * handlen * 0.12, hd.y, hd.z))
@@ -823,39 +856,76 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
                               Vector((hd.x + sgn * handlen * (0.44 if v != 4 else 0.34),
                                       hd.y + dy, hd.z + hw * 0.04))],
                              [hw * 0.20, hw * 0.16], 6), 'cloth')
+            # FPLATE - how far the plating runs down the fingers
+            for k in range(4):
+                dy = -hw * 0.52 + hw * 0.35 * k
+                for q in range(F['fplate']):
+                    p.add(L.box(handlen * 0.075, hw * 0.26, hw * 0.12),
+                          'metal' if F['metal'] else 'dark',
+                          loc=(hd.x + sgn * (handlen * (0.27 + 0.085 * q)),
+                               hd.y + dy, hd.z + hw * 0.22))
         # the thumb, so a glove reads as a glove from the side
         p.raw(L.tube([Vector((hd.x + sgn * handlen * 0.08, hd.y - hw * 0.62, hd.z)),
                       Vector((hd.x + sgn * handlen * 0.30, hd.y - hw * 0.80, hd.z - hw * 0.10))],
                      [hw * 0.24, hw * 0.17], 7), 'cloth')
-        # 3. THE KNUCKLE PLATE - stands OFF the back of the fist, riding cost
+        # 3. THE KNUCKLE TREATMENT - not just a height now. The kind comes off
+        #    the item's key inside what the cut allows, so the studded glove
+        #    and the wrap that were identical at stream size are a spiked
+        #    knuckle and a studded one.
         kn = hw * F['knuck'] * 0.55
-        if kn > 0.008:
+        kind = F['knuck_kind']
+        kz = hd.z + hw * 0.66
+        mat = 'metal' if F['metal'] else 'dark'
+        if kind == 'ridge' and kn > 0.008:
             for k in range(max(1, F['plates'])):
-                p.add(L.box(handlen * 0.13, hw * 1.34, max(0.010, kn * 0.52)),
-                      'metal' if F['metal'] else 'dark',
+                p.add(L.box(handlen * 0.13, hw * 1.34, max(0.010, kn * 0.52)), mat,
                       loc=(hd.x + sgn * (handlen * 0.06 + handlen * 0.15 * k),
-                           hd.y, hd.z + hw * 0.66 + kn * 0.46))
-            if F['metal']:
-                p.add(L.sphere(kn * 0.46, kn * 0.40, kn * 0.34, 10, 7), 'gem',
-                      loc=(hd.x + sgn * handlen * 0.08, hd.y,
-                           hd.z + hw * 0.70 + kn * 0.92))
-        elif orn > 0.45:
+                           hd.y, kz + kn * 0.46))
+            p.add(L.box(handlen * 0.40, hw * 0.30, max(0.012, kn * 1.05)), mat,
+                  loc=(hd.x + sgn * handlen * 0.16, hd.y, kz + kn * 0.80))
+        elif kind == 'dome':
+            r = max(0.010, kn * 1.30 + hw * 0.22)
+            p.add(L.sphere(r * 1.15, r * 1.30, r, 12, 8), mat,
+                  loc=(hd.x + sgn * handlen * 0.14, hd.y, kz + r * 0.30))
+        elif kind == 'spikes':
+            for k in range(max(2, min(4, 1 + F['plates'] // 2))):
+                dy = -hw * 0.46 + (hw * 0.92 / max(1, max(2, min(4, 1 + F['plates'] // 2)) - 1)) * k
+                p.raw(aim(L.cone(max(0.006, hw * 0.17), 0.0,
+                                 max(0.018, kn * 1.5 + hw * 0.30), 7),
+                          (hd.x + sgn * handlen * 0.16, hd.y + dy, kz), (0, 0, 1)), mat)
+            p.add(L.box(handlen * 0.34, hw * 1.20, max(0.010, kn * 0.40)), mat,
+                  loc=(hd.x + sgn * handlen * 0.16, hd.y, kz + kn * 0.10))
+        elif kind == 'studs':
+            for k in range(4):
+                for q in range(2):
+                    p.add(L.sphere(hw * 0.15, hw * 0.15, hw * 0.15, 7, 6), 'metal',
+                          loc=(hd.x + sgn * handlen * (0.10 + 0.14 * q),
+                               hd.y - hw * 0.46 + hw * 0.31 * k, kz + hw * 0.10))
+        if F['metal'] and kind in ('ridge', 'spikes'):
+            p.add(L.sphere(max(0.006, kn * 0.46), max(0.006, kn * 0.40),
+                           max(0.005, kn * 0.34), 10, 7), 'gem',
+                  loc=(hd.x + sgn * handlen * 0.04, hd.y, kz + kn * 0.92 + hw * 0.06))
+        elif kind == 'none' and orn > 0.45:
             p.add(L.sphere(hw * 0.20, hw * 0.17, hw * 0.15, 10, 7), 'gem',
-                  loc=(hd.x + sgn * handlen * 0.10, hd.y, hd.z + hw * 0.72))
+                  loc=(hd.x + sgn * handlen * 0.10, hd.y, kz + hw * 0.06))
         if v == 2:                                 # studs down the fingers
             for k in range(4):
                 p.add(L.sphere(hw * 0.11, hw * 0.11, hw * 0.11, 6, 5), 'metal',
                       loc=(hd.x + sgn * handlen * 0.38,
                            hd.y - hw * 0.52 + hw * 0.35 * k, hd.z + hw * 0.22))
-        # straps round the cuff, counted off the plate count so a dear
-        # gauntlet is strapped and a cheap wrap is tied once
-        for k in range(max(1, min(3, F['plates'] - 1))):
-            sx = w.x - sgn * (cuff * (0.28 + 0.30 * k))
-            rr = hw * 0.96 + (mouth - hw * 0.96) * (0.28 + 0.30 * k)
-            ring = [Vector((sx, rr * 1.03 * math.cos(TAU * j / 14.0),
-                            w.z + rr * 1.03 * math.sin(TAU * j / 14.0)))
-                    for j in range(15)]
-            p.raw(L.tube(ring, max(0.006, rr * 0.11), 6, caps=False), 'dark')
+        # 4. THE WRAP'S LOOSE END. A wrap is wound cloth and it has a tie; it
+        #    is the one cut whose reach cannot separate it from the studded
+        #    glove, so it takes the one direction nothing else occupies -
+        #    clear of the arm, soft, hanging.
+        if F['tail'] > 0.0:
+            tl = cuff * F['tail'] + handlen * 0.20
+            tx = w.x - sgn * cuff * 0.80
+            p.raw(L.tube([Vector((tx, w.y - mouth * 0.30, w.z - mouth * 0.60)),
+                          Vector((tx + sgn * tl * 0.22, w.y - mouth * 0.52,
+                                  w.z - mouth * 0.60 - tl * 0.70)),
+                          Vector((tx + sgn * tl * 0.10, w.y - mouth * 0.34,
+                                  w.z - mouth * 0.60 - tl))],
+                         [mouth * 0.26, mouth * 0.20, mouth * 0.11], 7), 'cloth')
         out.append(p)
     return out
 

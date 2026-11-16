@@ -232,9 +232,32 @@ GLOVE_CUTS = ("gauntlet", "mitt", "studded", "vambrace", "wrap")
 # the FOREARM RADIUS (0.055 m measured) and is what a viewer actually sees -
 # the lip stands clear of the arm whatever the body is doing with its hands.
 # SHELL is a multiple of the FIST RADIUS (0.075 m) and is never below 1.0.
+#
+# MR. E HAS RULED, 2026-11-16 10:24: "okay so fix them" - gloves must READ AT
+# STREAM DISTANCE, and the fix is MORE DERIVED VARIATION, NOT A BIGGER GLOVE.
+# A 2.0-3.3x bell mouth was already tried and backed out: it looked like
+# dinner plates. SO NOTHING BELOW RAISES FLARE OR SHELL. What was actually
+# wrong is measurable and was measured - d94g_front/side/back, 6 of 15 pairs
+# PARTLY TOO SMALL and the worst pair at 0.00% of hero pixels, i.e. LITERALLY
+# IDENTICAL at stream size. Every one of those pairs is a pair of the four
+# SMALL cuts (vambrace, vambrace, studded, wrap): all four put the same little
+# lump at the same place on the wrist, so at 1/3 scale only their COLOUR
+# differs, and colour is not shape.
+# THE FOUR DIALS THAT NOW SEPARATE THEM ARE SHAPE, AND ALL FOUR RIDE THE
+# ITEM'S OWN KEY AS WELL AS ITS COST (D94b's rule):
+#   REACH   how far up the forearm, and it is now a CUT IDENTITY - a vambrace
+#           is a FOREARM piece (0.58-0.88 of it) and a wrap is a wrist piece
+#           (0.20-0.40). Length along the arm costs no girth, so it buys
+#           silhouette without buying dinner plates.
+#   LAMES   segmentation: how many bands break the cuff up its length. Two
+#           vambraces of the same price are a 3-lame and a 6-lame.
+#   KNUCK_KIND  the treatment, not just the height: ridge / dome / spikes /
+#           studs / none, chosen per cut from the key.
+#   FPLATE  how far the plating runs down the fingers.
+GLOVE_KNUCKS = ("none", "dome", "ridge", "spikes", "studs")
 #            cut:  gauntlet  mitt  studded  vambrace  wrap
-_G_CUFF0   = (0.30, 0.13, 0.20, 0.42, 0.22)
-_G_CUFFK   = (0.26, 0.14, 0.20, 0.20, 0.18)
+_G_CUFF0   = (0.34, 0.14, 0.26, 0.58, 0.16)
+_G_CUFFK   = (0.30, 0.16, 0.26, 0.30, 0.14)
 _G_FLARE0  = (1.70, 1.25, 1.40, 1.55, 1.18)
 _G_FLAREK  = (0.95, 0.30, 0.55, 0.80, 0.26)
 _G_KNUCK0  = (0.34, 0.10, 0.21, 0.15, 0.06)
@@ -243,6 +266,13 @@ _G_SHELL0  = (1.46, 1.62, 1.38, 1.32, 1.26)
 _G_PLATES  = ((3, 6), (0, 1), (2, 5), (1, 3), (0, 2))
 _G_METAL   = (True, False, True, True, False)
 _G_FINGERS = (4, 0, 4, 4, 4)
+# segmentation up the cuff: (cheap, dear). A wrap is wound, not segmented.
+_G_LAMES   = ((2, 5), (0, 2), (1, 4), (3, 7), (1, 3))
+# which treatments this cut may wear. The key picks one; cost only decides
+# whether the dearest of them is allowed at all.
+_G_KNK     = ((2, 3, 1), (0, 1), (4, 3), (2, 0, 1), (0, 4))
+# how many finger segments carry plate
+_G_FPLATE  = ((2, 4), (0, 0), (1, 2), (0, 2), (0, 0))
 
 
 def glove_form(variant, orn, D=None):
@@ -255,14 +285,50 @@ def glove_form(variant, orn, D=None):
     # two gauntlets at the same price are not one gauntlet (D94b's rule).
     j = (lambda i, lo, hi: D.u(i, lo, hi)) if D is not None else (lambda i, lo, hi: 1.0)
     cuff = _G_CUFF0[v] + _G_CUFFK[v] * o
+    # REACH carries a wider key spread than anything else here, because reach
+    # is the dial that showed up at stream size and two same-cut gloves have
+    # to differ on it even at the same price.
+    reach = max(0.10, min(0.94, cuff * j(0, 0.78, 1.22)))
+    lo, hi = _G_LAMES[v]
+    lames = lo + int(round((hi - lo) * o))
+    if D is not None:                       # +-1 off the key, never below 0
+        lames = max(0, min(hi + 1, lames + D.n(8, -1, 1)))
+    # PASS 2, AND I FOUND IT BY LOOKING: seven thick rings up a flaring cone
+    # is a STACK OF PANCAKES, not a vambrace - a lamp shade with ribs. Bellmire
+    # is plain: a segmented forearm piece wears two to four bands, and they are
+    # thin. The dial still separates two same-price gloves; it no longer reads
+    # as machinery.
+    lames = min(4, lames)
+    kinds = _G_KNK[v]
+    if D is not None:
+        kind = kinds[D.d[9 % 12] % len(kinds)]
+    else:
+        kind = kinds[0]
+    if kind == 3 and o < 0.45:              # spikes are the dear treatment
+        kind = 2 if _G_METAL[v] else 4
+    flo, fhi = _G_FPLATE[v]
+    fplate = flo + int(round((fhi - flo) * o))
     return dict(
         cut=GLOVE_CUTS[v], variant=v,
-        cuff=max(0.10, min(0.94, cuff * j(0, 0.86, 1.14))),
+        cuff=reach, reach=reach,
         flare=max(1.0, (_G_FLARE0[v] + _G_FLAREK[v] * o) * j(1, 0.93, 1.09)),
         knuck=max(0.0, (_G_KNUCK0[v] + _G_KNUCKK[v] * o) * j(2, 0.86, 1.18)),
         shell=max(1.02, _G_SHELL0[v] * j(3, 0.96, 1.10)),
         plates=(_G_PLATES[v][0] + int(round((_G_PLATES[v][1] - _G_PLATES[v][0]) * o))),
         metal=_G_METAL[v], fingers=_G_FINGERS[v],
+        lames=lames, knuck_kind=GLOVE_KNUCKS[kind], fplate=fplate,
+        # a stepped cuff is a straight sleeve with one shoulder in it; a bell
+        # is the old profile. The key chooses, so same-cut pairs differ in
+        # OUTLINE and not only in how many bands they wear.
+        stepped=(D.bit(10, 0.45) if D is not None else False),
+        # A WRAP IS WOUND CLOTH AND IT HAS A LOOSE END. The wrap and the
+        # studded glove sat 0.02 of forearm apart in reach, which at stream
+        # size is nothing, so the wrap earns the one direction no other cut
+        # occupies: a tie hanging clear of the arm. Soft, not a plate.
+        tail=((0.34 + 0.62 * (D.u(11) if D is not None else 0.5)) if v == 4 else 0.0),
+        # a long reach gets a wider band at the elbow end - that is what makes
+        # a forearm piece read as a forearm piece and not as a long tube.
+        cop=(reach > 0.56),
         lip=(_G_FLARE0[v] + _G_FLAREK[v] * o) > 1.85)
 
 
@@ -270,7 +336,11 @@ def glove_form(variant, orn, D=None):
 def build_gloves(P, c):
     """The hub icon. Same dials as the worn piece; icon space is ~2.0 across,
     the body is ~0.15 at the fist, so everything here is the worn number x 4.6.
-    The cuff is the big silhouette - it runs DOWN the icon off the wrist."""
+    The cuff is the big silhouette - it runs DOWN the icon off the wrist.
+    MR. E'S 10:24 RULING IS MIRRORED HERE AND NOT ONLY ON THE HAND: the icon
+    carries the same reach, lames, cop, knuckle kind, finger plating and
+    wrap-tie, because the glove in the satchel must be the glove on the hero.
+    Flare and shell are untouched - the icon is not scaled up either."""
     F = glove_form(c['variant'], c['orn'], c.get('D'))
     orn = c['orn']
     K = 3.4                                   # icon units per metre of body
@@ -278,14 +348,31 @@ def build_gloves(P, c):
     hw = 0.074 * F['shell'] * K               # fist radius  = handlen x 0.50
     flare = 0.056 * F['flare'] * K            # forearm rad. = handlen x 0.38
     flen = (0.0, 0.30, 0.34, 0.30, 0.22)[F['variant']]
+    mat = 'metal' if F['metal'] else 'dark'
     for s in (-1, 1):
         x = 0.36 * s
+        top = -0.18
         # the cuff first and deepest: a tall cone running down off the wrist
-        P.raw(aim(L.cone(flare, hw * 0.92, cuff, 14), (x, 0, -0.18 - cuff),
-                  (0, 0, 1)), 'metal' if F['metal'] else 'dark')
+        if F['stepped']:                      # a sleeve with one shoulder
+            mid = flare * 0.62 + hw * 0.38
+            P.raw(aim(L.cone(flare, hw * 0.92, cuff * 0.55, 14),
+                      (x, 0, top - cuff * 0.55), (0, 0, 1)), mat)
+            P.raw(aim(L.cone(mid * 1.04, mid, cuff * 0.45, 14),
+                      (x, 0, top - cuff), (0, 0, 1)), mat)
+        else:
+            P.raw(aim(L.cone(flare, hw * 0.92, cuff, 14), (x, 0, top - cuff),
+                      (0, 0, 1)), mat)
         if F['lip']:                          # a hard flared lip at the mouth
-            P.raw(L.tube(ring_pts(flare * 1.02, 20, -0.18 - cuff), 0.055, 8),
-                  'metal' if F['metal'] else 'dark')
+            P.raw(L.tube(ring_pts(flare * 1.02, 20, top - cuff), 0.055, 8), mat)
+        # LAMES - the segmentation, the dial that tells two same-price gloves
+        # of one cut apart
+        for k in range(F['lames']):
+            f = (k + 0.7) / (F['lames'] + 0.4)
+            rr = hw * 0.96 + (flare - hw * 0.96) * f
+            P.raw(L.tube(ring_pts(rr * 1.025, 18, top - cuff * f), 0.026, 7), mat)
+        if F['cop']:                          # the elbow end of a long reach
+            P.raw(aim(L.cone(flare * 1.16, flare, cuff * 0.16,
+                             14), (x, 0, top - cuff * 1.14), (0, 0, 1)), mat)
         # the hand shell, always wider than the hand under it
         P.add(L.box(hw * 2.0, 0.17, 0.42), 'cloth', loc=(x, 0, -0.04))
         if F['fingers'] == 0:                 # a mitt: one pocket for four
@@ -296,6 +383,12 @@ def build_gloves(P, c):
                 fx = x + (-0.13 + 0.087 * k) * s
                 P.raw(L.tube([(fx, 0, 0.16), (fx, -0.01, 0.16 + flen)],
                              [0.048, 0.038], 7), 'cloth')
+                for q in range(F['fplate']):
+                    # SEATED ON THE FINGER, not floating in front of it - at
+                    # icon size a 0.045 standoff read as sugar cubes hanging
+                    # over the hand.
+                    P.add(L.box(0.072, 0.050, 0.055), mat,
+                          loc=(fx, -0.022, 0.20 + 0.088 * q))
             if F['variant'] == 4:             # fingerless: tips cut away
                 for k in range(4):
                     fx = x + (-0.13 + 0.087 * k) * s
@@ -303,22 +396,48 @@ def build_gloves(P, c):
                           loc=(fx, -0.01, 0.16 + flen))
         P.raw(L.tube([(x + hw * 0.95 * s, 0, 0.02), (x + hw * 1.5 * s, -0.02, 0.20)],
                      [0.055, 0.042], 7), 'cloth')
-        # THE KNUCKLE PLATE - the dial that stands off the back of the hand
+        # THE KNUCKLE TREATMENT - kind, not only height
         kn = 0.15 * F['knuck'] * K
-        if kn > 0.04:
+        kind = F['knuck_kind']
+        if kind == 'ridge':
             for k in range(max(1, F['plates'])):
                 z = 0.10 - 0.11 * k
-                P.add(L.box(hw * 1.9, 0.07 + kn * 0.30, 0.085),
-                      'metal' if F['metal'] else 'dark', loc=(x, -0.10 - kn, z))
-            if F['metal']:
-                P.add(L.sphere(0.075, 0.05, 0.075, 10, 7), 'gem',
-                      loc=(x, -0.12 - kn, -0.18))
-        elif orn > 0.45:
+                P.add(L.box(hw * 1.9, 0.07 + kn * 0.30, 0.085), mat,
+                      loc=(x, -0.10 - kn, z))
+            P.add(L.box(hw * 0.6, 0.06 + kn * 0.40, 0.34), mat,
+                  loc=(x, -0.12 - kn, -0.02))
+        elif kind == 'dome':
+            # a LOW dome across the knuckles, not an egg standing on the cuff.
+            r = max(0.045, kn * 0.38 + hw * 0.22)
+            P.add(L.sphere(r * 1.55, r * 0.62, r * 0.95, 12, 8), mat,
+                  loc=(x, -0.085 - r * 0.30, 0.02))
+        elif kind == 'spikes':
+            n = max(2, min(4, 1 + F['plates'] // 2))
+            for k in range(n):
+                fx = x + (-0.10 + (0.20 / max(1, n - 1)) * k) * s
+                P.raw(aim(L.cone(0.055, 0.0, max(0.10, kn * 0.55 + 0.12), 7),
+                          (fx, -0.10 - kn * 0.20, 0.02), (0, -1, 0)), mat)
+            P.add(L.box(hw * 1.7, 0.06, 0.26), mat, loc=(x, -0.09, 0.02))
+        elif kind == 'studs':
+            for k in range(4):
+                for q in range(2):
+                    P.add(L.sphere(0.042, 0.042, 0.042, 7, 6), 'metal',
+                          loc=(x + (-0.11 + 0.073 * k) * s, -0.095, 0.04 - 0.13 * q))
+        if F['metal'] and kind in ('ridge', 'spikes'):
+            P.add(L.sphere(0.075, 0.05, 0.075, 10, 7), 'gem',
+                  loc=(x, -0.12 - kn, -0.18))
+        elif kind == 'none' and orn > 0.45:
             P.add(L.sphere(0.06, 0.045, 0.06, 10, 7), 'gem', loc=(x, -0.10, -0.08))
         if F['variant'] == 2:                 # studs down the fingers
             for k in range(4):
                 P.add(L.sphere(0.030, 0.030, 0.030, 6, 5), 'metal',
                       loc=(x + (-0.13 + 0.087 * k) * s, -0.050, 0.32))
+        if F['tail'] > 0.0:                   # the wrap's loose end
+            tl = cuff * F['tail'] + 0.22
+            P.raw(L.tube([(x + 0.10 * s, 0.10, top - cuff * 0.75),
+                          (x + 0.20 * s, 0.17, top - cuff * 0.75 - tl * 0.65),
+                          (x + 0.13 * s, 0.11, top - cuff * 0.75 - tl)],
+                         [0.085, 0.065, 0.035], 7), 'cloth')
 
 
 # ------------------------------------------------------------------------- hat
@@ -474,6 +593,30 @@ STAT_GEM = {"ac": (0.52, 0.66, 0.92), "saves": (0.68, 0.46, 0.92),
 STAT_ORDER = ["ac", "saves", "hp", "speed", "hit", "dmg"]
 METALS = [(0.40, 0.42, 0.45), (0.56, 0.38, 0.20), (0.74, 0.76, 0.80), (0.87, 0.70, 0.28)]
 METAL_NAMES = ["iron", "bronze", "silver", "gold"]
+
+# ------------------------------------------------- C-61: THE BAND IS THE DATA
+# C-61's rule is that every reader bands an accessory by the rarity STORED on
+# the item, not by where its price happens to fall in its slot. Three readers
+# in this lane banded by the cost quartile - icongen.context (the hub icon's
+# metal AND its metal name), d94proof.acc_mats and showcasegen's worn mats -
+# so a 300-gold legendary in a slot whose dearest item costs 900 was rendered
+# in iron. All three now come through here.
+# SIX RARITIES, FOUR METALS: 'very rare' and 'legendary' BOTH land on gold.
+# A fifth metal would separate them, but METALS is mirrored in the game
+# build's scripts/gear.gd, so adding one is not this lane's to do alone.
+RARITY_LADDER = ("starting", "common", "uncommon", "rare", "very rare", "legendary")
+_RARITY_Q = {"starting": 0, "common": 0, "uncommon": 1,
+             "rare": 2, "very rare": 3, "legendary": 3}
+
+
+def rarity_q(rarity, orn=0.0):
+    """The metal band index 0..3 for one item. The STORED rarity decides it.
+    The cost quartile is the fallback ONLY for things that carry no rarity at
+    all - cosmetics do not have the key."""
+    r = str(rarity or "").strip().lower()
+    if r in _RARITY_Q:
+        return _RARITY_Q[r]
+    return min(3, int(max(0.0, min(1.0, float(orn))) * 4.0))
 
 
 def build(key, fam, ctx):

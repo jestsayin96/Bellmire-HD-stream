@@ -95,3 +95,25 @@ register. It is one constant and one re-run if he wants them darker.
 Original geometry, generated from raw vertex maths in `tools/art/`. No
 third-party asset is read, copied or derived from, so the CC0-only constraint is
 not engaged and the forbidden Quaternius Bestiary / QAL pack is not involved.
+
+## C-61, 16 Nov: THE METAL BAND IS THE STORED RARITY, NOT THE COST QUARTILE
+
+Three readers in this lane banded an accessory's METAL - iron / bronze / silver
+/ gold, which is the icon's rarity signal - by where its price fell inside its
+slot: `icongen.context` (the icon's metal AND its metal name),
+`d94proof.acc_mats` and `showcasegen`'s worn materials. The data has carried a
+per-slot `rarity` key on all 254 accessories since C-61's data half landed.
+
+All three now go through `icons.rarity_q(rarity, orn)`. The cost quartile
+survives only as the fallback for things that carry no rarity at all -
+cosmetics do not have the key.
+
+**99 of 254 accessories (39%) were being rendered in the wrong band.** Examples:
+`guild_cloak` (uncommon, 260 g) was iron and is bronze; `smith_gloves` (rare,
+280 g) was bronze and is silver; `nightwatch_ring` (uncommon, 380 g) was silver
+and is bronze - a cheap-for-its-slot uncommon was being dressed as a rare.
+
+**SIX RARITIES, FOUR METALS.** `very rare` and `legendary` BOTH land on gold.
+A fifth metal would separate them, but `METALS` is mirrored in the game build's
+`scripts/gear.gd`, so adding one is not this lane's to do alone - it is a
+decision plus a two-file change, not a quiet edit.

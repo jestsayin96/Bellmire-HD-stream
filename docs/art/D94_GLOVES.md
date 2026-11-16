@@ -146,3 +146,103 @@ owns the mirror, exactly as it did for the cloak shade step:
   was tried here and is wrong: each part is carried rigidly by its own bone, so
   the cuff and the hand shell pull apart in the idle pose and you get a bucket
   floating beside a box. There is a render of that mistake and it is ugly.
+
+================================================================================
+
+# THE 10:24 RULING - MORE DERIVED VARIATION, NOT A BIGGER GLOVE (ART, 16 Nov)
+
+Mr. E, 2026-11-16 10:24: *"okay so fix them"* - gloves must READ AT STREAM
+DISTANCE, and the fix is more derived variation off the item's own key. **NOT a
+bigger glove: FLARE AND SHELL ARE UNTOUCHED BY THIS PASS.** The 2.0-3.3x bell
+mouth that was tried and backed out is still backed out.
+
+## WHAT THE MEASUREMENT ACTUALLY SAID, BEFORE I CHANGED ANYTHING
+
+The baseline is `renders/art/d94/_report.json` (16 Nov 14:39) - the SAME SIX
+CELLS this re-shoot uses, so the numbers are comparable:
+
+    gloves  PARTLY TOO SMALL 5/15   worst 0.00%   median 0.70% of hero px
+
+`worst 0.00%` is the whole story: two gloves whose stream images are LITERALLY
+IDENTICAL. Every failing pair was a pair of the four SMALL cuts -
+carder (vambrace), bellrope (wrap), quarreller (studded), forge (vambrace).
+All four put the same little lump in the same place on the wrist, so at 1/3
+scale the only thing that differed was COLOUR. Colour is not shape.
+
+## THE FOUR DIALS ADDED, ALL OFF THE ITEM'S OWN KEY AND ITS COST
+
+| dial | what it does | why it is not "a bigger glove" |
+|---|---|---|
+| REACH | how far up the forearm. A vambrace is a FOREARM piece (0.58-0.88 of it), a wrap is a WRIST piece (0.16-0.30) | length along the arm costs no girth |
+| LAMES | 0-4 thin bands breaking the cuff up its length | two same-price vambraces are a 2-lame and a 4-lame |
+| KNUCK_KIND | ridge / dome / spikes / studs / none, picked per cut from the key | treatment, not height |
+| FPLATE | how far plating runs down the fingers | seated on the finger, not standing off it |
+
+Plus a COP at the elbow end of any long reach (a long tube is not a forearm
+piece until it has one) and the WRAP'S LOOSE END - the wrap and the studded
+glove sit 0.02 of forearm apart in reach, which at stream size is nothing, so
+the wrap takes the one direction nothing else occupies: a tie hanging clear of
+the arm. Soft, not a plate.
+
+## THE NUMBER MOVED. HERE IT IS, ALL THREE VIEWS
+
+| view | before | after | median before -> after |
+|---|---|---|---|
+| front | PARTLY TOO SMALL 5/15, worst 0.00% | **PARTLY TOO SMALL 3/15, worst 0.16%** | 0.70 -> **1.08** |
+| side  | PARTLY TOO SMALL 6/15, worst 0.00% | **TELLS APART, worst 0.40%** | 0.78 -> **1.37** |
+| back  | PARTLY TOO SMALL 6/15, worst 0.00% | **PARTLY TOO SMALL 3/15, worst 0.18%** | 0.53 -> **0.95** |
+
+Sheets: `renders/art/d94g3_{front,side,back}/_row_gloves.png`. Method unchanged -
+one outfit, same framing, same measurement, same six cells. Blank check 12 files
+per view, **0 failures**, three views. Engine `BLENDER_EEVEE`.
+
+## TWO PASSES, ONE CHANGE EACH, AND WHAT LOOKING AT IT CAUGHT
+
+1. The dials went in. The number moved (5/15 -> 3/15, median +56%) and the
+   sheet showed a new fault immediately: **seven thick rings up a flaring cone
+   is a STACK OF PANCAKES** - a lamp shade with ribs, which is machinery, not
+   Bellmire. Lames are now capped at 4 and the bands are thin (0.075 of the
+   local radius, was 0.13).
+2. The icon only: the knuckle dome was **an egg standing on the cuff** and the
+   finger plates were **sugar cubes floating in front of the fingers**. The
+   dome is now a low oval across the knuckles and the plates are seated on the
+   finger. The worn piece was not touched by pass 2, so the numbers above still
+   stand.
+
+## WHAT IS STILL WRONG - NAMED, NOT HIDDEN
+
+**Three pairs still fail from the front and the back**: carder | bellrope
+(0.16%), bellrope | forge (0.25%), carder | forge (0.28%). All three are
+mid-price, and from the FRONT a hanging arm puts the forearm against the hip,
+so reach - the dial that did the work - is the dial the front view cannot see.
+The side view, where the forearm is clear, is the one that now TELLS APART.
+That is the shape of the remaining problem and it is a framing fact, not a
+colour fact.
+
+Looked at and still visible, worn (`d94g3_*/_row_gloves.png`):
+- the cuff is **a wide open tub with a small hand box under it** - at item-alone
+  framing it reads as a bucket, and the hand is the smallest thing in the shot
+- on the body, both cuffs **merge into one pale mass at the belly** in the idle
+  pose, because the hands meet in front
+- the **mitt, the vambrace and the wrap are near-identical from the front** at
+  stream size, which is the 3/15 above, said in words
+- the **wrap's tie does not read on the body** - it is there in the icon and
+  behind the arm on the hero
+- **raidbreaker's gold bands sit beside the belt** and at a glance read as belt
+  furniture rather than as something on a hand
+
+Looked at and still visible, icon (`renders/art/d94g3_icons/_row_icons.png`):
+- the cuff reads as a **plant pot** below the hand; this is the icon's original
+  composition and predates this pass
+- the fingers read as **four organ pipes** standing out of a box
+- the wrap's ties read as **small flaps** near the base
+- left and right **fuse in the middle** of the frame
+- the mitt has **no cuff read at all**
+- a cloth-toned knuckle oval reads as **a pale pebble** rather than as leather
+
+## THE NEXT SINGLE CHANGE, IF THIS LANE COMES BACK TO IT
+
+Give the four cheap cuts mass in the ONE direction the front view can see -
+outboard of the hip line - WITHOUT widening the mouth. The candidate is an
+asymmetric cuff: a longer outboard lip and a shorter inboard one, so the
+silhouette gains on the side the body is not occluding. One change, one render.

@@ -1,0 +1,379 @@
+{
+ "Knight": {
+  "height": 3.5431,
+  "bounds": [
+   [
+    -0.9713,
+    -1.0,
+    -1.0
+   ],
+   [
+    0.9713,
+    1.0,
+    2.5431
+   ]
+  ],
+  "objs": [
+   "Icosphere",
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_HelmetVisor",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ],
+  "mats": [
+   "Dots Stroke",
+   "knight",
+   "Material"
+  ],
+  "nbones": 23
+ },
+ "_bones": {
+  "root": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4057
+  ],
+  "hips": [
+   0.0,
+   0.0,
+   0.4057,
+   0.0,
+   0.0,
+   0.5976
+  ],
+  "spine": [
+   0.0,
+   0.0,
+   0.5976,
+   0.0,
+   0.0,
+   0.9726
+  ],
+  "chest": [
+   0.0,
+   0.0,
+   0.9726,
+   0.0,
+   0.0,
+   1.2235
+  ],
+  "upperarm.l": [
+   0.212,
+   -0.0,
+   1.1068,
+   0.4535,
+   0.0139,
+   1.1068
+  ],
+  "lowerarm.l": [
+   0.4535,
+   0.0139,
+   1.1068,
+   0.7132,
+   -0.0,
+   1.1068
+  ],
+  "wrist.l": [
+   0.7132,
+   -0.0,
+   1.1068,
+   0.787,
+   -0.0,
+   1.1068
+  ],
+  "hand.l": [
+   0.787,
+   -0.0,
+   1.1068,
+   0.899,
+   -0.0,
+   1.1068
+  ],
+  "handslot.l": [
+   0.8831,
+   -0.0,
+   1.0493,
+   0.8831,
+   -0.112,
+   1.0493
+  ],
+  "upperarm.r": [
+   -0.212,
+   -0.0,
+   1.1068,
+   -0.4535,
+   0.0139,
+   1.1068
+  ],
+  "lowerarm.r": [
+   -0.4535,
+   0.0139,
+   1.1068,
+   -0.7132,
+   -0.0,
+   1.1068
+  ],
+  "wrist.r": [
+   -0.7132,
+   -0.0,
+   1.1068,
+   -0.787,
+   -0.0,
+   1.1068
+  ],
+  "hand.r": [
+   -0.787,
+   -0.0,
+   1.1068,
+   -0.899,
+   -0.0,
+   1.1068
+  ],
+  "handslot.r": [
+   -0.8831,
+   -0.0,
+   1.0493,
+   -0.8831,
+   -0.112,
+   1.0493
+  ],
+  "head": [
+   0.0,
+   0.0,
+   1.2414,
+   0.0,
+   0.0,
+   1.4923
+  ],
+  "upperleg.r": [
+   -0.1709,
+   0.0,
+   0.5193,
+   -0.1709,
+   -0.0079,
+   0.2923
+  ],
+  "lowerleg.r": [
+   -0.1709,
+   -0.0079,
+   0.2923,
+   -0.1709,
+   0.0186,
+   0.1452
+  ],
+  "foot.r": [
+   -0.1709,
+   0.0186,
+   0.1452,
+   -0.1709,
+   -0.0964,
+   0.026
+  ],
+  "toes.r": [
+   -0.1709,
+   -0.0964,
+   0.026,
+   -0.1709,
+   -0.262,
+   0.026
+  ],
+  "upperleg.l": [
+   0.1709,
+   0.0,
+   0.5193,
+   0.1709,
+   -0.0079,
+   0.2923
+  ],
+  "lowerleg.l": [
+   0.1709,
+   -0.0079,
+   0.2923,
+   0.1709,
+   0.0186,
+   0.1452
+  ],
+  "foot.l": [
+   0.1709,
+   0.0186,
+   0.1452,
+   0.1709,
+   -0.0964,
+   0.026
+  ],
+  "toes.l": [
+   0.1709,
+   -0.0964,
+   0.026,
+   0.1709,
+   -0.262,
+   0.026
+  ]
+ },
+ "Barbarian": {
+  "height": 3.3978,
+  "bounds": [
+   [
+    -0.9713,
+    -1.0,
+    -1.0
+   ],
+   [
+    0.9713,
+    1.0,
+    2.3978
+   ]
+  ],
+  "objs": [
+   "Barbarian_ArmLeft",
+   "Barbarian_ArmRight",
+   "Barbarian_BearHat",
+   "Barbarian_Body",
+   "Barbarian_Head",
+   "Barbarian_LegLeft",
+   "Barbarian_LegRight",
+   "Icosphere"
+  ],
+  "mats": [
+   "barbarian",
+   "Dots Stroke",
+   "Material"
+  ],
+  "nbones": 23
+ },
+ "Mage": {
+  "height": 3.6527,
+  "bounds": [
+   [
+    -0.9713,
+    -1.0,
+    -1.0
+   ],
+   [
+    0.9713,
+    1.0,
+    2.6527
+   ]
+  ],
+  "objs": [
+   "Icosphere",
+   "Mage_ArmLeft",
+   "Mage_ArmRight",
+   "Mage_Body",
+   "Mage_Cape",
+   "Mage_Hat",
+   "Mage_Head",
+   "Mage_LegLeft",
+   "Mage_LegRight"
+  ],
+  "mats": [
+   "Dots Stroke",
+   "mage",
+   "Material"
+  ],
+  "nbones": 23
+ },
+ "Ranger": {
+  "height": 3.2729,
+  "bounds": [
+   [
+    -0.9713,
+    -1.0,
+    -1.0
+   ],
+   [
+    0.9713,
+    1.0,
+    2.2729
+   ]
+  ],
+  "objs": [
+   "Icosphere",
+   "Ranger_ArmLeft",
+   "Ranger_ArmRight",
+   "Ranger_Body",
+   "Ranger_Cape",
+   "Ranger_Head",
+   "Ranger_LegLeft",
+   "Ranger_LegRight",
+   "Ranger_Quiver"
+  ],
+  "mats": [
+   "Dots Stroke",
+   "Material",
+   "ranger"
+  ],
+  "nbones": 23
+ },
+ "Rogue": {
+  "height": 3.1783,
+  "bounds": [
+   [
+    -0.9723,
+    -1.0,
+    -1.0
+   ],
+   [
+    0.9723,
+    1.0,
+    2.1783
+   ]
+  ],
+  "objs": [
+   "Icosphere",
+   "Rogue_ArmLeft",
+   "Rogue_ArmRight",
+   "Rogue_Body",
+   "Rogue_Cape",
+   "Rogue_Head",
+   "Rogue_LegLeft",
+   "Rogue_LegRight"
+  ],
+  "mats": [
+   "Dots Stroke",
+   "Material",
+   "rogue"
+  ],
+  "nbones": 23
+ },
+ "Rogue_Hooded": {
+  "height": 3.171,
+  "bounds": [
+   [
+    -0.9723,
+    -1.0,
+    -1.0
+   ],
+   [
+    0.9723,
+    1.0,
+    2.171
+   ]
+  ],
+  "objs": [
+   "Icosphere",
+   "RogueHooded_ArmLeft",
+   "RogueHooded_ArmRight",
+   "RogueHooded_Body",
+   "RogueHooded_Cape",
+   "RogueHooded_Head",
+   "RogueHooded_LegLeft",
+   "RogueHooded_LegRight",
+   "RogueHooded_Mask"
+  ],
+  "mats": [
+   "Dots Stroke",
+   "Material",
+   "rogue"
+  ],
+  "nbones": 23
+ }
+}

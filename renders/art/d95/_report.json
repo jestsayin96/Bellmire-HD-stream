@@ -1,0 +1,2683 @@
+{
+ "ok": true,
+ "errors": [],
+ "chars": [
+  {
+   "key": "knight",
+   "calling": "knight",
+   "body": "Knight",
+   "tier": 1,
+   "rarity": "common",
+   "wear": 0.82,
+   "weapon": {
+    "id": "w_blade_ironmonger",
+    "name": "Ironmonger's Blade",
+    "family": "blade",
+    "tier_name": "plain steel"
+   },
+   "armour": {
+    "id": "a_padded_gambeson",
+    "name": "Padded Gambeson",
+    "cut": "heavy",
+    "tier_name": "leather"
+   },
+   "accessories": [
+    {
+     "slot": "ring",
+     "id": "tally_ring",
+     "name": "Tallykeeper's Ring",
+     "cost": 210,
+     "stat": "hp",
+     "variant": 1
+    },
+    {
+     "slot": "amulet",
+     "id": "gate_whistle",
+     "name": "Gatehouse Whistle",
+     "cost": 230,
+     "stat": "saves",
+     "variant": 2
+    },
+    {
+     "slot": "boots",
+     "id": "quiet_boots",
+     "name": "Soft Boots",
+     "cost": 200,
+     "stat": "hit",
+     "variant": 4
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [],
+   "surf_misses": 0,
+   "height": 2.545,
+   "tris": 2391,
+   "pieces": 15,
+   "manifest": [
+    {
+     "part": "Armour_Cuirass",
+     "bone": "chest",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "mats": [
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronL",
+     "bone": "upperarm.l",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Armour_PauldronR",
+     "bone": "upperarm.r",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Armour_Tassets",
+     "bone": "hips",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Ironmonger's Blade",
+     "slot": "weapon",
+     "mats": [
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Acc_Ring",
+     "bone": "hand.l",
+     "item": "Tallykeeper's Ring",
+     "slot": "ring",
+     "mats": [
+      "dark",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Gatehouse Whistle",
+     "slot": "amulet",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Soft Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Soft Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Cuirass",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "verts": 667,
+     "inside_pct": 24.6,
+     "penetration_m": 0.0424,
+     "gap_m": 0.0001,
+     "min_z": 0.419
+    },
+    {
+     "part": "Armour_PauldronL",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "verts": 200,
+     "inside_pct": 52.5,
+     "penetration_m": 0.0823,
+     "gap_m": 0.0002,
+     "min_z": 0.8522
+    },
+    {
+     "part": "Armour_PauldronR",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "verts": 200,
+     "inside_pct": 51.0,
+     "penetration_m": 0.0794,
+     "gap_m": 0.0006,
+     "min_z": 0.8519
+    },
+    {
+     "part": "Armour_Tassets",
+     "item": "Padded Gambeson",
+     "slot": "armour",
+     "verts": 32,
+     "inside_pct": 68.8,
+     "penetration_m": 0.0556,
+     "gap_m": 0.0086,
+     "min_z": 0.1052
+    },
+    {
+     "part": "Weapon",
+     "item": "Ironmonger's Blade",
+     "slot": "weapon",
+     "verts": 134,
+     "inside_pct": 5.2,
+     "penetration_m": 0.0314,
+     "gap_m": 0.0086,
+     "min_z": 0.2929
+    },
+    {
+     "part": "Acc_Ring",
+     "item": "Tallykeeper's Ring",
+     "slot": "ring",
+     "verts": 168,
+     "inside_pct": 66.7,
+     "penetration_m": 0.0384,
+     "gap_m": 0.0039,
+     "min_z": 0.4761
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Gatehouse Whistle",
+     "slot": "amulet",
+     "verts": 310,
+     "inside_pct": 14.8,
+     "penetration_m": 0.0154,
+     "gap_m": 0.0003,
+     "min_z": 0.9894
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Soft Boots",
+     "slot": "boots",
+     "verts": 77,
+     "inside_pct": 18.2,
+     "penetration_m": 0.0481,
+     "gap_m": 0.0,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Soft Boots",
+     "slot": "boots",
+     "verts": 77,
+     "inside_pct": 18.2,
+     "penetration_m": 0.0481,
+     "gap_m": 0.0001,
+     "min_z": -0.002
+    }
+   ],
+   "faults": [
+    "Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
+    "Weapon (Ironmonger's Blade): PASSES THROUGH the body by 0.031 m",
+    "Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.038 m deep, 67% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.234,
+      12.542
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.391,
+      12.641
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.458,
+      12.766
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.728,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "ranger",
+   "calling": "ranger",
+   "body": "Ranger",
+   "tier": 1,
+   "rarity": "common",
+   "wear": 0.9,
+   "weapon": {
+    "id": "w_ranged_hunters_crossbow",
+    "name": "Hunter's Crossbow",
+    "family": "ranged",
+    "tier_name": "plain steel"
+   },
+   "armour": {
+    "id": "a_ford_leathers",
+    "name": "Ford Leathers",
+    "cut": "light",
+    "tier_name": "leather"
+   },
+   "accessories": [
+    {
+     "slot": "cloak",
+     "id": "orchard_cloak",
+     "name": "Orchardman's Cloak",
+     "cost": 220,
+     "stat": "speed",
+     "variant": 3
+    },
+    {
+     "slot": "gloves",
+     "id": "mill_mitts",
+     "name": "Millhand's Mitts",
+     "cost": 200,
+     "stat": "dmg",
+     "variant": 1
+    },
+    {
+     "slot": "boots",
+     "id": "chapel_clogs",
+     "name": "Chapel Clogs",
+     "cost": 200,
+     "stat": "ac",
+     "variant": 0
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [
+    "Ranger_Cape"
+   ],
+   "surf_misses": 0,
+   "height": 2.275,
+   "tris": 1744,
+   "pieces": 18,
+   "manifest": [
+    {
+     "part": "Armour_Jerkin",
+     "bone": "chest",
+     "item": "Ford Leathers",
+     "slot": "armour",
+     "mats": [
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Hunter's Crossbow",
+     "slot": "weapon",
+     "mats": [
+      "cloth",
+      "haft",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Orchardman's Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Millhand's Mitts",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Millhand's Mitts",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Chapel Clogs",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Chapel Clogs",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Jerkin",
+     "item": "Ford Leathers",
+     "slot": "armour",
+     "verts": 722,
+     "inside_pct": 31.6,
+     "penetration_m": 0.0298,
+     "gap_m": 0.0,
+     "min_z": 0.4938
+    },
+    {
+     "part": "Weapon",
+     "item": "Hunter's Crossbow",
+     "slot": "weapon",
+     "verts": 74,
+     "inside_pct": 8.1,
+     "penetration_m": 0.0274,
+     "gap_m": 0.0015,
+     "min_z": 0.3628
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Orchardman's Cloak",
+     "slot": "cloak",
+     "verts": 565,
+     "inside_pct": 41.2,
+     "penetration_m": 0.0484,
+     "gap_m": 0.0,
+     "min_z": 0.6754
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Millhand's Mitts",
+     "slot": "gloves",
+     "verts": 52,
+     "inside_pct": 50.0,
+     "penetration_m": 0.029,
+     "gap_m": 0.008,
+     "min_z": 0.3434
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Millhand's Mitts",
+     "slot": "gloves",
+     "verts": 52,
+     "inside_pct": 38.5,
+     "penetration_m": 0.029,
+     "gap_m": 0.0049,
+     "min_z": 0.3483
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Chapel Clogs",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 20.5,
+     "penetration_m": 0.0466,
+     "gap_m": 0.0005,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Chapel Clogs",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 20.5,
+     "penetration_m": 0.0466,
+     "gap_m": 0.0005,
+     "min_z": -0.002
+    }
+   ],
+   "faults": [
+    "Weapon (Hunter's Crossbow): PASSES THROUGH the body by 0.027 m",
+    "Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.048 m deep, 41% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.403,
+      12.514
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.457,
+      12.777
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.486,
+      12.597
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.008,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "rogue",
+   "calling": "rogue",
+   "body": "Rogue",
+   "tier": 2,
+   "rarity": "uncommon",
+   "wear": 0.59,
+   "weapon": {
+    "id": "w_blade_stonewick",
+    "name": "Stonewick Backsword",
+    "family": "blade",
+    "tier_name": "fine steel"
+   },
+   "armour": {
+    "id": "a_studded_brigandine",
+    "name": "Studded Brigandine",
+    "cut": "light",
+    "tier_name": "chainmail"
+   },
+   "accessories": [
+    {
+     "slot": "ring",
+     "id": "pilgrim_ring",
+     "name": "Pilgrim's Ring",
+     "cost": 300,
+     "stat": "saves",
+     "variant": 0
+    },
+    {
+     "slot": "cloak",
+     "id": "turbary_cloak",
+     "name": "Peat-cutter's Cloak",
+     "cost": 250,
+     "stat": "hp",
+     "variant": 3
+    },
+    {
+     "slot": "gloves",
+     "id": "mortar_gloves",
+     "name": "Mortarman's Gloves",
+     "cost": 230,
+     "stat": "dmg",
+     "variant": 1
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [
+    "Rogue_Cape"
+   ],
+   "surf_misses": 0,
+   "height": 2.18,
+   "tris": 2063,
+   "pieces": 16,
+   "manifest": [
+    {
+     "part": "Armour_Jerkin",
+     "bone": "chest",
+     "item": "Studded Brigandine",
+     "slot": "armour",
+     "mats": [
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Stonewick Backsword",
+     "slot": "weapon",
+     "mats": [
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Acc_Ring",
+     "bone": "hand.l",
+     "item": "Pilgrim's Ring",
+     "slot": "ring",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Peat-cutter's Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Mortarman's Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Mortarman's Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Jerkin",
+     "item": "Studded Brigandine",
+     "slot": "armour",
+     "verts": 842,
+     "inside_pct": 22.4,
+     "penetration_m": 0.0429,
+     "gap_m": 0.0002,
+     "min_z": 0.4931
+    },
+    {
+     "part": "Weapon",
+     "item": "Stonewick Backsword",
+     "slot": "weapon",
+     "verts": 162,
+     "inside_pct": 4.9,
+     "penetration_m": 0.0303,
+     "gap_m": 0.0009,
+     "min_z": 0.2997
+    },
+    {
+     "part": "Acc_Ring",
+     "item": "Pilgrim's Ring",
+     "slot": "ring",
+     "verts": 214,
+     "inside_pct": 45.3,
+     "penetration_m": 0.0423,
+     "gap_m": 0.0,
+     "min_z": 0.4747
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Peat-cutter's Cloak",
+     "slot": "cloak",
+     "verts": 565,
+     "inside_pct": 47.6,
+     "penetration_m": 0.0919,
+     "gap_m": 0.0012,
+     "min_z": 0.6767
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Mortarman's Gloves",
+     "slot": "gloves",
+     "verts": 52,
+     "inside_pct": 53.8,
+     "penetration_m": 0.0423,
+     "gap_m": 0.0011,
+     "min_z": 0.3434
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Mortarman's Gloves",
+     "slot": "gloves",
+     "verts": 52,
+     "inside_pct": 46.2,
+     "penetration_m": 0.0423,
+     "gap_m": 0.0048,
+     "min_z": 0.3483
+    }
+   ],
+   "faults": [
+    "Weapon (Stonewick Backsword): PASSES THROUGH the body by 0.030 m",
+    "Acc_Cloak (Peat-cutter's Cloak): CLIPS the body - 0.092 m deep, 48% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.437,
+      12.581
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.441,
+      12.707
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.419,
+      12.563
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.091,
+      13.282
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "warden",
+   "calling": "warden",
+   "body": "Barbarian",
+   "tier": 2,
+   "rarity": "uncommon",
+   "wear": 0.69,
+   "weapon": {
+    "id": "w_axe_ferrywarden",
+    "name": "Ferrywarden's Axe",
+    "family": "axe",
+    "tier_name": "fine steel"
+   },
+   "armour": {
+    "id": "a_militia_hauberk",
+    "name": "Militia Hauberk",
+    "cut": "heavy",
+    "tier_name": "chainmail"
+   },
+   "accessories": [
+    {
+     "slot": "amulet",
+     "id": "lamplight_amulet",
+     "name": "Lamplighter's Amulet",
+     "cost": 300,
+     "stat": "saves",
+     "variant": 1
+    },
+    {
+     "slot": "boots",
+     "id": "drover_boots",
+     "name": "Drover's Boots",
+     "cost": 220,
+     "stat": "speed",
+     "variant": 0
+    },
+    {
+     "slot": "gloves",
+     "id": "splintwrap_gloves",
+     "name": "Splint-wrap Gloves",
+     "cost": 230,
+     "stat": "hp",
+     "variant": 4
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [],
+   "surf_misses": 0,
+   "height": 2.4,
+   "tris": 2176,
+   "pieces": 22,
+   "manifest": [
+    {
+     "part": "Armour_Cuirass",
+     "bone": "chest",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "mats": [
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronL",
+     "bone": "upperarm.l",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "mats": [
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronR",
+     "bone": "upperarm.r",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "mats": [
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_Tassets",
+     "bone": "hips",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Ferrywarden's Axe",
+     "slot": "weapon",
+     "mats": [
+      "haft",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Lamplighter's Amulet",
+     "slot": "amulet",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Drover's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Drover's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Splint-wrap Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "dark",
+      "leather"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Splint-wrap Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "dark",
+      "leather"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Cuirass",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "verts": 667,
+     "inside_pct": 28.9,
+     "penetration_m": 0.0469,
+     "gap_m": 0.0001,
+     "min_z": 0.4187
+    },
+    {
+     "part": "Armour_PauldronL",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "verts": 262,
+     "inside_pct": 51.5,
+     "penetration_m": 0.0842,
+     "gap_m": 0.0001,
+     "min_z": 0.8522
+    },
+    {
+     "part": "Armour_PauldronR",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "verts": 262,
+     "inside_pct": 49.2,
+     "penetration_m": 0.084,
+     "gap_m": 0.0001,
+     "min_z": 0.8519
+    },
+    {
+     "part": "Armour_Tassets",
+     "item": "Militia Hauberk",
+     "slot": "armour",
+     "verts": 32,
+     "inside_pct": 68.8,
+     "penetration_m": 0.0597,
+     "gap_m": 0.0125,
+     "min_z": 0.1052
+    },
+    {
+     "part": "Weapon",
+     "item": "Ferrywarden's Axe",
+     "slot": "weapon",
+     "verts": 91,
+     "inside_pct": 6.6,
+     "penetration_m": 0.0175,
+     "gap_m": 0.011,
+     "min_z": 0.2469
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Lamplighter's Amulet",
+     "slot": "amulet",
+     "verts": 444,
+     "inside_pct": 35.6,
+     "penetration_m": 0.0235,
+     "gap_m": 0.0,
+     "min_z": 0.9916
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Drover's Boots",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 15.9,
+     "penetration_m": 0.0489,
+     "gap_m": 0.0005,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Drover's Boots",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 15.9,
+     "penetration_m": 0.0489,
+     "gap_m": 0.0005,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Splint-wrap Gloves",
+     "slot": "gloves",
+     "verts": 56,
+     "inside_pct": 62.5,
+     "penetration_m": 0.0329,
+     "gap_m": 0.0003,
+     "min_z": 0.4452
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Splint-wrap Gloves",
+     "slot": "gloves",
+     "verts": 56,
+     "inside_pct": 53.6,
+     "penetration_m": 0.0329,
+     "gap_m": 0.0045,
+     "min_z": 0.4501
+    }
+   ],
+   "faults": [
+    "Armour_Cuirass (Militia Hauberk): CLIPS the body - 0.047 m deep, 29% of it inside",
+    "Armour_Tassets (Militia Hauberk): CLIPS the body - 0.060 m deep, 69% of it inside",
+    "Acc_Amulet (Lamplighter's Amulet): CLIPS the body - 0.024 m deep, 36% of it inside",
+    "Acc_GloveL (Splint-wrap Gloves): CLIPS the body - 0.033 m deep, 62% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.261,
+      12.525
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.445,
+      12.639
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.475,
+      12.739
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.882,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "mage",
+   "calling": "mage",
+   "body": "Mage",
+   "tier": 3,
+   "rarity": "rare",
+   "wear": 0.35,
+   "weapon": {
+    "id": "w_arcane_runewrapped_staff",
+    "name": "Rune-Wrapped Staff",
+    "family": "arcane",
+    "tier_name": "runed"
+   },
+   "armour": {
+    "id": "a_runed_vestment",
+    "name": "Rune-Hemmed Vestment",
+    "cut": "robe",
+    "tier_name": "plate"
+   },
+   "accessories": [
+    {
+     "slot": "amulet",
+     "id": "chapel_amulet",
+     "name": "Chapel Candle Amulet",
+     "cost": 320,
+     "stat": "saves",
+     "variant": 2
+    },
+    {
+     "slot": "ring",
+     "id": "tithe_ring",
+     "name": "Tithe Ring",
+     "cost": 340,
+     "stat": "saves",
+     "variant": 4
+    },
+    {
+     "slot": "cloak",
+     "id": "saltboiler_cloak",
+     "name": "Saltboiler's Cloak",
+     "cost": 280,
+     "stat": "saves",
+     "variant": 3
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [
+    "Mage_Cape"
+   ],
+   "surf_misses": 84,
+   "height": 2.655,
+   "tris": 3290,
+   "pieces": 16,
+   "manifest": [
+    {
+     "part": "Armour_SleeveL",
+     "bone": "upperarm.l",
+     "item": "Rune-Hemmed Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth"
+     ]
+    },
+    {
+     "part": "Armour_SleeveR",
+     "bone": "upperarm.r",
+     "item": "Rune-Hemmed Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth"
+     ]
+    },
+    {
+     "part": "Armour_Robe",
+     "bone": "chest",
+     "item": "Rune-Hemmed Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "glow",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Rune-Wrapped Staff",
+     "slot": "weapon",
+     "mats": [
+      "glow",
+      "haft",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Chapel Candle Amulet",
+     "slot": "amulet",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Ring",
+     "bone": "hand.l",
+     "item": "Tithe Ring",
+     "slot": "ring",
+     "mats": [
+      "dark",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Saltboiler's Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_SleeveL",
+     "item": "Rune-Hemmed Vestment",
+     "slot": "armour",
+     "verts": 24,
+     "inside_pct": 58.3,
+     "penetration_m": 0.0419,
+     "gap_m": 0.0123,
+     "min_z": 0.5673
+    },
+    {
+     "part": "Armour_SleeveR",
+     "item": "Rune-Hemmed Vestment",
+     "slot": "armour",
+     "verts": 24,
+     "inside_pct": 62.5,
+     "penetration_m": 0.0475,
+     "gap_m": 0.0024,
+     "min_z": 0.5696
+    },
+    {
+     "part": "Armour_Robe",
+     "item": "Rune-Hemmed Vestment",
+     "slot": "armour",
+     "verts": 635,
+     "inside_pct": 13.2,
+     "penetration_m": 0.0449,
+     "gap_m": 0.0,
+     "min_z": 0.1681
+    },
+    {
+     "part": "Weapon",
+     "item": "Rune-Wrapped Staff",
+     "slot": "weapon",
+     "verts": 365,
+     "inside_pct": 7.1,
+     "penetration_m": 0.0203,
+     "gap_m": 0.0003,
+     "min_z": 0.3439
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Chapel Candle Amulet",
+     "slot": "amulet",
+     "verts": 310,
+     "inside_pct": 34.8,
+     "penetration_m": 0.0235,
+     "gap_m": 0.0002,
+     "min_z": 0.9894
+    },
+    {
+     "part": "Acc_Ring",
+     "item": "Tithe Ring",
+     "slot": "ring",
+     "verts": 380,
+     "inside_pct": 73.2,
+     "penetration_m": 0.0448,
+     "gap_m": 0.0012,
+     "min_z": 0.4741
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Saltboiler's Cloak",
+     "slot": "cloak",
+     "verts": 565,
+     "inside_pct": 14.5,
+     "penetration_m": 0.0455,
+     "gap_m": 0.0,
+     "min_z": 0.6772
+    }
+   ],
+   "faults": [
+    "Armour_SleeveR (Rune-Hemmed Vestment): CLIPS the body - 0.048 m deep, 62% of it inside",
+    "Weapon (Rune-Wrapped Staff): PASSES THROUGH the body by 0.020 m",
+    "Acc_Amulet (Chapel Candle Amulet): CLIPS the body - 0.023 m deep, 35% of it inside",
+    "Acc_Ring (Tithe Ring): CLIPS the body - 0.045 m deep, 73% of it inside",
+    "Acc_Cloak (Saltboiler's Cloak): CLIPS the body - 0.045 m deep, 14% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.0,
+      12.967
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.068,
+      12.931
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.033,
+      13.0
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.643,
+      13.282
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "duelist",
+   "calling": "duelist",
+   "body": "Rogue_Hooded",
+   "tier": 3,
+   "rarity": "rare",
+   "wear": 0.45,
+   "weapon": {
+    "id": "w_blade_stitchwound",
+    "name": "Stitchwound Sabre",
+    "family": "blade",
+    "tier_name": "runed"
+   },
+   "armour": {
+    "id": "a_emberleather",
+    "name": "Emberleather Coat",
+    "cut": "light",
+    "tier_name": "plate"
+   },
+   "accessories": [
+    {
+     "slot": "gloves",
+     "id": "soaper_gloves",
+     "name": "Lye-boiler's Gloves",
+     "cost": 240,
+     "stat": "hp",
+     "variant": 2
+    },
+    {
+     "slot": "boots",
+     "id": "carter_boots",
+     "name": "Carter's Boots",
+     "cost": 240,
+     "stat": "speed",
+     "variant": 2
+    },
+    {
+     "slot": "ring",
+     "id": "orchard_ring",
+     "name": "Orchard Ring",
+     "cost": 340,
+     "stat": "hp",
+     "variant": 2
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [],
+   "surf_misses": 0,
+   "height": 2.173,
+   "tris": 2011,
+   "pieces": 24,
+   "manifest": [
+    {
+     "part": "Armour_Jerkin",
+     "bone": "chest",
+     "item": "Emberleather Coat",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Stitchwound Sabre",
+     "slot": "weapon",
+     "mats": [
+      "glow",
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Lye-boiler's Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Lye-boiler's Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Carter's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Carter's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Ring",
+     "bone": "hand.l",
+     "item": "Orchard Ring",
+     "slot": "ring",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Jerkin",
+     "item": "Emberleather Coat",
+     "slot": "armour",
+     "verts": 887,
+     "inside_pct": 22.9,
+     "penetration_m": 0.0333,
+     "gap_m": 0.0,
+     "min_z": 0.4931
+    },
+    {
+     "part": "Weapon",
+     "item": "Stitchwound Sabre",
+     "slot": "weapon",
+     "verts": 174,
+     "inside_pct": 4.6,
+     "penetration_m": 0.0243,
+     "gap_m": 0.0071,
+     "min_z": 0.3095
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Lye-boiler's Gloves",
+     "slot": "gloves",
+     "verts": 146,
+     "inside_pct": 37.0,
+     "penetration_m": 0.0423,
+     "gap_m": 0.0021,
+     "min_z": 0.4223
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Lye-boiler's Gloves",
+     "slot": "gloves",
+     "verts": 146,
+     "inside_pct": 35.6,
+     "penetration_m": 0.0423,
+     "gap_m": 0.0016,
+     "min_z": 0.4271
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Carter's Boots",
+     "slot": "boots",
+     "verts": 138,
+     "inside_pct": 41.3,
+     "penetration_m": 0.0699,
+     "gap_m": 0.0004,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Carter's Boots",
+     "slot": "boots",
+     "verts": 138,
+     "inside_pct": 43.5,
+     "penetration_m": 0.0699,
+     "gap_m": 0.0004,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_Ring",
+     "item": "Orchard Ring",
+     "slot": "ring",
+     "verts": 290,
+     "inside_pct": 43.8,
+     "penetration_m": 0.0447,
+     "gap_m": 0.0003,
+     "min_z": 0.4737
+    }
+   ],
+   "faults": [
+    "Weapon (Stitchwound Sabre): PASSES THROUGH the body by 0.024 m"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.442,
+      12.541
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.478,
+      12.709
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.459,
+      12.558
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.107,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "barbarian",
+   "calling": "barbarian",
+   "body": "Barbarian",
+   "tier": 4,
+   "rarity": "very rare",
+   "wear": 0.14,
+   "weapon": {
+    "id": "w_axe_ashmaul",
+    "name": "Ash-Maul Greataxe",
+    "family": "axe",
+    "tier_name": "dragontooth"
+   },
+   "armour": {
+    "id": "a_wyrmhide_coat",
+    "name": "Wyrmhide Coat",
+    "cut": "light",
+    "tier_name": "warded plate"
+   },
+   "accessories": [
+    {
+     "slot": "cloak",
+     "id": "weaver_cloak",
+     "name": "Weaver's Long Cloak",
+     "cost": 300,
+     "stat": "saves",
+     "variant": 2
+    },
+    {
+     "slot": "amulet",
+     "id": "ferrybell_amulet",
+     "name": "Ferrybell Amulet",
+     "cost": 350,
+     "stat": "hp",
+     "variant": 3
+    },
+    {
+     "slot": "boots",
+     "id": "ashfoot_boots",
+     "name": "Ashfoot's Boots",
+     "cost": 280,
+     "stat": "speed",
+     "variant": 1
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [],
+   "surf_misses": 0,
+   "height": 2.4,
+   "tris": 2067,
+   "pieces": 17,
+   "manifest": [
+    {
+     "part": "Armour_Jerkin",
+     "bone": "chest",
+     "item": "Wyrmhide Coat",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Ash-Maul Greataxe",
+     "slot": "weapon",
+     "mats": [
+      "glow",
+      "haft",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Weaver's Long Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Ferrybell Amulet",
+     "slot": "amulet",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Ashfoot's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Ashfoot's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Jerkin",
+     "item": "Wyrmhide Coat",
+     "slot": "armour",
+     "verts": 1007,
+     "inside_pct": 17.2,
+     "penetration_m": 0.0441,
+     "gap_m": 0.0,
+     "min_z": 0.4912
+    },
+    {
+     "part": "Weapon",
+     "item": "Ash-Maul Greataxe",
+     "slot": "weapon",
+     "verts": 171,
+     "inside_pct": 3.5,
+     "penetration_m": 0.0399,
+     "gap_m": 0.0012,
+     "min_z": 0.3039
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Weaver's Long Cloak",
+     "slot": "cloak",
+     "verts": 173,
+     "inside_pct": 23.7,
+     "penetration_m": 0.0472,
+     "gap_m": 0.0014,
+     "min_z": 0.3807
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Ferrybell Amulet",
+     "slot": "amulet",
+     "verts": 382,
+     "inside_pct": 40.6,
+     "penetration_m": 0.0235,
+     "gap_m": 0.0,
+     "min_z": 1.0036
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Ashfoot's Boots",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 14.8,
+     "penetration_m": 0.0496,
+     "gap_m": 0.0004,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Ashfoot's Boots",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 14.8,
+     "penetration_m": 0.0496,
+     "gap_m": 0.0004,
+     "min_z": -0.002
+    }
+   ],
+   "faults": [
+    "Weapon (Ash-Maul Greataxe): PASSES THROUGH the body by 0.040 m",
+    "Acc_Cloak (Weaver's Long Cloak): CLIPS the body - 0.047 m deep, 24% of it inside",
+    "Acc_Amulet (Ferrybell Amulet): CLIPS the body - 0.024 m deep, 41% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.261,
+      12.525
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.445,
+      12.839
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.475,
+      12.739
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.882,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "sage",
+   "calling": "sage",
+   "body": "Mage",
+   "tier": 4,
+   "rarity": "very rare",
+   "wear": 0.22,
+   "weapon": {
+    "id": "w_arcane_dragontooth_staff",
+    "name": "Dragontooth Staff",
+    "family": "arcane",
+    "tier_name": "dragontooth"
+   },
+   "armour": {
+    "id": "a_dragonsilk_robe",
+    "name": "Dragonsilk Robe",
+    "cut": "robe",
+    "tier_name": "warded plate"
+   },
+   "accessories": [
+    {
+     "slot": "ring",
+     "id": "scar_ring",
+     "name": "Scarglass Ring",
+     "cost": 400,
+     "stat": "ac",
+     "variant": 2
+    },
+    {
+     "slot": "amulet",
+     "id": "boatwright_amulet",
+     "name": "Boatwright's Charm",
+     "cost": 350,
+     "stat": "saves",
+     "variant": 1
+    },
+    {
+     "slot": "gloves",
+     "id": "saddler_gloves",
+     "name": "Saddler's Gloves",
+     "cost": 260,
+     "stat": "saves",
+     "variant": 1
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [],
+   "surf_misses": 84,
+   "height": 2.655,
+   "tris": 2693,
+   "pieces": 20,
+   "manifest": [
+    {
+     "part": "Armour_SleeveL",
+     "bone": "upperarm.l",
+     "item": "Dragonsilk Robe",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "gem"
+     ]
+    },
+    {
+     "part": "Armour_SleeveR",
+     "bone": "upperarm.r",
+     "item": "Dragonsilk Robe",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "gem"
+     ]
+    },
+    {
+     "part": "Armour_Robe",
+     "bone": "chest",
+     "item": "Dragonsilk Robe",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "glow",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Dragontooth Staff",
+     "slot": "weapon",
+     "mats": [
+      "gem",
+      "glow",
+      "haft",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Ring",
+     "bone": "hand.l",
+     "item": "Scarglass Ring",
+     "slot": "ring",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Boatwright's Charm",
+     "slot": "amulet",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Saddler's Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Saddler's Gloves",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_SleeveL",
+     "item": "Dragonsilk Robe",
+     "slot": "armour",
+     "verts": 66,
+     "inside_pct": 71.2,
+     "penetration_m": 0.0434,
+     "gap_m": 0.0004,
+     "min_z": 0.5673
+    },
+    {
+     "part": "Armour_SleeveR",
+     "item": "Dragonsilk Robe",
+     "slot": "armour",
+     "verts": 66,
+     "inside_pct": 66.7,
+     "penetration_m": 0.0475,
+     "gap_m": 0.0007,
+     "min_z": 0.5696
+    },
+    {
+     "part": "Armour_Robe",
+     "item": "Dragonsilk Robe",
+     "slot": "armour",
+     "verts": 635,
+     "inside_pct": 22.7,
+     "penetration_m": 0.1314,
+     "gap_m": 0.0,
+     "min_z": 0.1681
+    },
+    {
+     "part": "Weapon",
+     "item": "Dragontooth Staff",
+     "slot": "weapon",
+     "verts": 491,
+     "inside_pct": 4.9,
+     "penetration_m": 0.0169,
+     "gap_m": 0.0004,
+     "min_z": 0.3454
+    },
+    {
+     "part": "Acc_Ring",
+     "item": "Scarglass Ring",
+     "slot": "ring",
+     "verts": 290,
+     "inside_pct": 62.1,
+     "penetration_m": 0.046,
+     "gap_m": 0.0002,
+     "min_z": 0.4732
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Boatwright's Charm",
+     "slot": "amulet",
+     "verts": 444,
+     "inside_pct": 50.5,
+     "penetration_m": 0.0249,
+     "gap_m": 0.0002,
+     "min_z": 0.9916
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Saddler's Gloves",
+     "slot": "gloves",
+     "verts": 52,
+     "inside_pct": 40.4,
+     "penetration_m": 0.0381,
+     "gap_m": 0.0003,
+     "min_z": 0.2484
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Saddler's Gloves",
+     "slot": "gloves",
+     "verts": 52,
+     "inside_pct": 48.1,
+     "penetration_m": 0.0383,
+     "gap_m": 0.0028,
+     "min_z": 0.2532
+    }
+   ],
+   "faults": [
+    "Armour_SleeveL (Dragonsilk Robe): CLIPS the body - 0.043 m deep, 71% of it inside",
+    "Armour_SleeveR (Dragonsilk Robe): CLIPS the body - 0.048 m deep, 67% of it inside",
+    "Armour_Robe (Dragonsilk Robe): CLIPS the body - 0.131 m deep, 23% of it inside",
+    "Acc_Ring (Scarglass Ring): CLIPS the body - 0.046 m deep, 62% of it inside",
+    "Acc_Amulet (Boatwright's Charm): CLIPS the body - 0.025 m deep, 50% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.0,
+      12.967
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.068,
+      12.931
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.033,
+      13.0
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.643,
+      13.282
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "paladin",
+   "calling": "paladin",
+   "body": "Knight",
+   "tier": 5,
+   "rarity": "legendary",
+   "wear": 0.05,
+   "weapon": {
+    "id": "w_blade_scarfang",
+    "name": "Scarfang",
+    "family": "blade",
+    "tier_name": "scarforged"
+   },
+   "armour": {
+    "id": "a_scarwoven_hauberk",
+    "name": "Scarwoven Hauberk",
+    "cut": "heavy",
+    "tier_name": "scarwoven mail"
+   },
+   "accessories": [
+    {
+     "slot": "boots",
+     "id": "gravepath_boots",
+     "name": "Sexton's Hobnails",
+     "cost": 300,
+     "stat": "ac",
+     "variant": 0
+    },
+    {
+     "slot": "gloves",
+     "id": "forge_grips",
+     "name": "Forgemaster's Grips",
+     "cost": 300,
+     "stat": "dmg",
+     "variant": 2
+    },
+    {
+     "slot": "cloak",
+     "id": "wakeward_cloak",
+     "name": "Wake-ward Cloak",
+     "cost": 360,
+     "stat": "saves",
+     "variant": 0
+    }
+   ],
+   "helm": {
+    "id": "raiders_bane_helm",
+    "name": "Raidbreaker's Helm",
+    "cost": 300
+   },
+   "set_name": "Scarwoven plate",
+   "hidden_body_meshes": [
+    "Knight_Cape",
+    "Knight_Helmet",
+    "Knight_HelmetVisor"
+   ],
+   "surf_misses": 0,
+   "height": 2.43,
+   "tris": 3562,
+   "pieces": 30,
+   "manifest": [
+    {
+     "part": "Armour_Cuirass",
+     "bone": "chest",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronL",
+     "bone": "upperarm.l",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronR",
+     "bone": "upperarm.r",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_Tassets",
+     "bone": "hips",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Scarfang",
+     "slot": "weapon",
+     "mats": [
+      "gem",
+      "glow",
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Sexton's Hobnails",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Sexton's Hobnails",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Forgemaster's Grips",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Forgemaster's Grips",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Wake-ward Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Helm",
+     "bone": "head",
+     "item": "Raidbreaker's Helm",
+     "slot": "hat",
+     "mats": [
+      "metal",
+      "trim"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Cuirass",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 787,
+     "inside_pct": 12.3,
+     "penetration_m": 0.0413,
+     "gap_m": 0.0001,
+     "min_z": 0.419
+    },
+    {
+     "part": "Armour_PauldronL",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 424,
+     "inside_pct": 46.2,
+     "penetration_m": 0.0848,
+     "gap_m": 0.0002,
+     "min_z": 0.7947
+    },
+    {
+     "part": "Armour_PauldronR",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 424,
+     "inside_pct": 46.2,
+     "penetration_m": 0.081,
+     "gap_m": 0.0006,
+     "min_z": 0.7906
+    },
+    {
+     "part": "Armour_Tassets",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 32,
+     "inside_pct": 68.8,
+     "penetration_m": 0.0556,
+     "gap_m": 0.0086,
+     "min_z": 0.1052
+    },
+    {
+     "part": "Weapon",
+     "item": "Scarfang",
+     "slot": "weapon",
+     "verts": 266,
+     "inside_pct": 1.9,
+     "penetration_m": 0.0111,
+     "gap_m": 0.0029,
+     "min_z": 0.3258
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Sexton's Hobnails",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 20.5,
+     "penetration_m": 0.0526,
+     "gap_m": 0.0,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Sexton's Hobnails",
+     "slot": "boots",
+     "verts": 88,
+     "inside_pct": 20.5,
+     "penetration_m": 0.0526,
+     "gap_m": 0.0001,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Forgemaster's Grips",
+     "slot": "gloves",
+     "verts": 146,
+     "inside_pct": 40.4,
+     "penetration_m": 0.0507,
+     "gap_m": 0.0006,
+     "min_z": 0.4223
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Forgemaster's Grips",
+     "slot": "gloves",
+     "verts": 146,
+     "inside_pct": 44.5,
+     "penetration_m": 0.0507,
+     "gap_m": 0.0005,
+     "min_z": 0.4271
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Wake-ward Cloak",
+     "slot": "cloak",
+     "verts": 301,
+     "inside_pct": 24.6,
+     "penetration_m": 0.1836,
+     "gap_m": 0.0005,
+     "min_z": 0.6379
+    },
+    {
+     "part": "Acc_Helm",
+     "item": "Raidbreaker's Helm",
+     "slot": "hat",
+     "verts": 563,
+     "inside_pct": 8.9,
+     "penetration_m": 0.3221,
+     "gap_m": 0.0008,
+     "min_z": 1.4487
+    }
+   ],
+   "faults": [
+    "Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
+    "Acc_Cloak (Wake-ward Cloak): CLIPS the body - 0.184 m deep, 25% of it inside",
+    "Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.373,
+      12.627
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.384,
+      12.712
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.373,
+      12.627
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.853,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "cleric",
+   "calling": "cleric",
+   "body": "Rogue_Hooded",
+   "tier": 5,
+   "rarity": "legendary",
+   "wear": 0.08,
+   "weapon": {
+    "id": "w_arcane_seam_staff",
+    "name": "Staff of the Open Seam",
+    "family": "arcane",
+    "tier_name": "scarforged"
+   },
+   "armour": {
+    "id": "a_seamwoven_vestment",
+    "name": "Seamwoven Vestment",
+    "cut": "robe",
+    "tier_name": "scarwoven mail"
+   },
+   "accessories": [
+    {
+     "slot": "amulet",
+     "id": "gaoler_amulet",
+     "name": "Gaoler's Keyring",
+     "cost": 360,
+     "stat": "ac",
+     "variant": 2
+    },
+    {
+     "slot": "cloak",
+     "id": "scarwatch_cloak",
+     "name": "Scarwatch Cloak",
+     "cost": 360,
+     "stat": "saves",
+     "variant": 2
+    },
+    {
+     "slot": "boots",
+     "id": "stairwalker_boots",
+     "name": "Stair-walker's Boots",
+     "cost": 300,
+     "stat": "speed",
+     "variant": 3
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [
+    "RogueHooded_Cape"
+   ],
+   "surf_misses": 95,
+   "height": 2.173,
+   "tris": 3479,
+   "pieces": 21,
+   "manifest": [
+    {
+     "part": "Armour_SleeveL",
+     "bone": "upperarm.l",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "gem"
+     ]
+    },
+    {
+     "part": "Armour_SleeveR",
+     "bone": "upperarm.r",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "gem"
+     ]
+    },
+    {
+     "part": "Armour_Robe",
+     "bone": "chest",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "glow",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Staff of the Open Seam",
+     "slot": "weapon",
+     "mats": [
+      "gem",
+      "glow",
+      "haft",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Gaoler's Keyring",
+     "slot": "amulet",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Scarwatch Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Stair-walker's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Stair-walker's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_SleeveL",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "verts": 66,
+     "inside_pct": 71.2,
+     "penetration_m": 0.0437,
+     "gap_m": 0.0004,
+     "min_z": 0.5673
+    },
+    {
+     "part": "Armour_SleeveR",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "verts": 66,
+     "inside_pct": 63.6,
+     "penetration_m": 0.0389,
+     "gap_m": 0.0007,
+     "min_z": 0.5696
+    },
+    {
+     "part": "Armour_Robe",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "verts": 635,
+     "inside_pct": 13.5,
+     "penetration_m": 0.2021,
+     "gap_m": 0.0005,
+     "min_z": 0.1681
+    },
+    {
+     "part": "Weapon",
+     "item": "Staff of the Open Seam",
+     "slot": "weapon",
+     "verts": 491,
+     "inside_pct": 1.0,
+     "penetration_m": 0.0085,
+     "gap_m": 0.0013,
+     "min_z": 0.3469
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Gaoler's Keyring",
+     "slot": "amulet",
+     "verts": 394,
+     "inside_pct": 30.7,
+     "penetration_m": 0.0219,
+     "gap_m": 0.0002,
+     "min_z": 0.9894
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Scarwatch Cloak",
+     "slot": "cloak",
+     "verts": 173,
+     "inside_pct": 34.1,
+     "penetration_m": 0.0164,
+     "gap_m": 0.0002,
+     "min_z": 0.3802
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Stair-walker's Boots",
+     "slot": "boots",
+     "verts": 316,
+     "inside_pct": 33.9,
+     "penetration_m": 0.0475,
+     "gap_m": 0.0001,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Stair-walker's Boots",
+     "slot": "boots",
+     "verts": 316,
+     "inside_pct": 34.8,
+     "penetration_m": 0.0475,
+     "gap_m": 0.0001,
+     "min_z": -0.002
+    }
+   ],
+   "faults": [
+    "Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.044 m deep, 71% of it inside",
+    "Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.039 m deep, 64% of it inside",
+    "Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 14% of it inside",
+    "Acc_Cloak (Scarwatch Cloak): CLIPS the body - 0.016 m deep, 34% of it inside"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.442,
+      12.541
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.478,
+      12.656
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.459,
+      12.558
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.107,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  }
+ ],
+ "fit_faults": [
+  "knight: Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
+  "knight: Weapon (Ironmonger's Blade): PASSES THROUGH the body by 0.031 m",
+  "knight: Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.038 m deep, 67% of it inside",
+  "ranger: Weapon (Hunter's Crossbow): PASSES THROUGH the body by 0.027 m",
+  "ranger: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.048 m deep, 41% of it inside",
+  "rogue: Weapon (Stonewick Backsword): PASSES THROUGH the body by 0.030 m",
+  "rogue: Acc_Cloak (Peat-cutter's Cloak): CLIPS the body - 0.092 m deep, 48% of it inside",
+  "warden: Armour_Cuirass (Militia Hauberk): CLIPS the body - 0.047 m deep, 29% of it inside",
+  "warden: Armour_Tassets (Militia Hauberk): CLIPS the body - 0.060 m deep, 69% of it inside",
+  "warden: Acc_Amulet (Lamplighter's Amulet): CLIPS the body - 0.024 m deep, 36% of it inside",
+  "warden: Acc_GloveL (Splint-wrap Gloves): CLIPS the body - 0.033 m deep, 62% of it inside",
+  "mage: Armour_SleeveR (Rune-Hemmed Vestment): CLIPS the body - 0.048 m deep, 62% of it inside",
+  "mage: Weapon (Rune-Wrapped Staff): PASSES THROUGH the body by 0.020 m",
+  "mage: Acc_Amulet (Chapel Candle Amulet): CLIPS the body - 0.023 m deep, 35% of it inside",
+  "mage: Acc_Ring (Tithe Ring): CLIPS the body - 0.045 m deep, 73% of it inside",
+  "mage: Acc_Cloak (Saltboiler's Cloak): CLIPS the body - 0.045 m deep, 14% of it inside",
+  "duelist: Weapon (Stitchwound Sabre): PASSES THROUGH the body by 0.024 m",
+  "barbarian: Weapon (Ash-Maul Greataxe): PASSES THROUGH the body by 0.040 m",
+  "barbarian: Acc_Cloak (Weaver's Long Cloak): CLIPS the body - 0.047 m deep, 24% of it inside",
+  "barbarian: Acc_Amulet (Ferrybell Amulet): CLIPS the body - 0.024 m deep, 41% of it inside",
+  "sage: Armour_SleeveL (Dragonsilk Robe): CLIPS the body - 0.043 m deep, 71% of it inside",
+  "sage: Armour_SleeveR (Dragonsilk Robe): CLIPS the body - 0.048 m deep, 67% of it inside",
+  "sage: Armour_Robe (Dragonsilk Robe): CLIPS the body - 0.131 m deep, 23% of it inside",
+  "sage: Acc_Ring (Scarglass Ring): CLIPS the body - 0.046 m deep, 62% of it inside",
+  "sage: Acc_Amulet (Boatwright's Charm): CLIPS the body - 0.025 m deep, 50% of it inside",
+  "paladin: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
+  "paladin: Acc_Cloak (Wake-ward Cloak): CLIPS the body - 0.184 m deep, 25% of it inside",
+  "paladin: Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
+  "cleric: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.044 m deep, 71% of it inside",
+  "cleric: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.039 m deep, 64% of it inside",
+  "cleric: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 14% of it inside",
+  "cleric: Acc_Cloak (Scarwatch Cloak): CLIPS the body - 0.016 m deep, 34% of it inside"
+ ],
+ "blank": {
+  "files": 40,
+  "failures": []
+ }
+}

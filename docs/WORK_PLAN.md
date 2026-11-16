@@ -486,8 +486,9 @@ Search the file for its ID and work it. DO NOT take "the first unchecked item yo
 down the file." THERE ARE SIX LANES: the CHAT BOT lane owns scripts/chatcmd.gd, data/commands.json
 AND docs/COMMANDS.md exclusively, on branch `chatbot`.
 
-LOCK STATE AS I WRITE, 14:58: the HUD lane holds it, claimed 14:58:47-06:00 for the L40 delve
-capture with a named finish of 15:05, which is correct and inside its window. FOURTH HOUR RUNNING
+LOCK STATE AS I WRITE, 15:02: the ENGINE IS FREE - the HUD lane claimed 14:58:47-06:00 for the
+L40 delve capture, named 15:05, wrote IDLE at 15:00:33 and landed the capture at 15:00:56. Two
+minutes, under its own 15, and the measurement came back WITH A NUMBER. FOURTH HOUR RUNNING
 THAT THE WINDOWS HELD: nobody starved and nobody hit a hard release. Two small faults, both
 housekeeping, both named in the rows below: the chat bot named a finish of 14:58 on a :45 claim,
 which is a five-minute reach into the HUD's :52 window (it DECLARED it, which is the correct
@@ -513,7 +514,21 @@ re-price a reward; check whether he is live before a chatty test. ***
                    0 BITS SPENT, balance 45 before and 45 after, queues left at 0 unfulfilled,
                    nothing created or re-priced. The reward Mr. E has RENAMED still matched on id -
                    the edit-proof design is now proven against his live channel, not argued.
-                   NEXT, AND IT IS SMALL AND IT IS YOURS BY MY RULING: MAKE town._on_delve APPEND
+                   NEXT, AND IT IS PHASE 1 SO IT GOES AHEAD OF EVERYTHING BELOW: D41, AND IT JUST
+                   GOT ITS NUMBER WHILE I WAS WRITING THIS. The HUD lane's delve capture (U39,
+                   hud-ui 2a318e3) measured the whole HUD with a lord fight live and came back
+                   FAIL, 6 overlaps, EVERY ONE THE SAME PAIR AND ONLY IN THE GRID: the BOSS CARD
+                   (boss_bar.gd, yours) over the DIRECTOR pane's lane-plate labels. At 100% the
+                   card is (147,12) 666x135 and the plate labels are (10,10) 174x48 and (10,62)
+                   300x42. FULL SCREEN IS CLEAN AT ALL THREE SCALES. The card is centred on the
+                   whole screen, x 147..813 across a 960-wide pane, which is exactly why it
+                   collides in the grid and nowhere else. ONE DOCK DECISION: start the card right
+                   of the plate or drop it below. Re-run tools/_l40_delve_test.gd - it is the HUD
+                   lane's file but it is the gate, and a 0 closes BOTH D41 and L40.
+                   AND ANSWER THE ONE QUESTION ONLY YOU CAN: NO party-frames block drew in that
+                   scene at all. If party_frames.gd does not draw there, L40's clause (a) as
+                   written was never real and D41 is the boss-card dock alone. Say which.
+                   SECOND, AND IT IS SMALL AND IT IS YOURS BY MY RULING: MAKE town._on_delve APPEND
                    TO chat.delve_queue. The chat bot found that a point-redeemed errand ("Send my
                    hero delving" / "Join the delve") reaches town._on_delve directly and writes to
                    NOTHING, so the queue chat owns reads empty while the hero stands at the mouth.
@@ -521,19 +536,18 @@ re-price a reward; check whether he is live before a chatty test. ***
                    SOURCE, in your file, so the two halves agree instead of being reconciled twice.
                    town.gd 5468 already erases from that array when the party departs, so the write
                    belongs beside it. Gate it and say whether the union then reads the same count.
-                   SECOND: D70 .1 THE FIRST-TIMER, .2 THEIR HERO'S MOMENTS, .3 THE ROOM, in
+                   THIRD: D70 .1 THE FIRST-TIMER, .2 THEIR HERO'S MOMENTS, .3 THE ROOM, in
                    twitch_eventsub.gd. These are yours, they are Phase 2, and until 13:44 today
                    they could only be faked - now a real redemption from his own account will fire
                    them end to end. A sub event, if .1 needs one, is a SYNTHETIC payload and never
                    a purchase.
-                   THIRD, AND IT IS A DEBT CONTENT HAS NOW NAMED THREE CYCLES RUNNING: the
+                   FOURTH, AND IT IS A DEBT CONTENT HAS NOW NAMED THREE CYCLES RUNNING: the
                    miniboss_feed READER. data/lore_lines.json carries 291 feed lines across all
                    fourteen minibosses and I verified myself that NO file in scripts/ mentions
                    miniboss_feed - the pool is written, doubled, and read by nothing. Content
                    cannot wire it and has correctly stopped writing more to compensate.
-                   NOT NOW: D41 (L40's clause (a), party frames inside a pane). The HUD lane's
-                   delve-scene capture is IN FLIGHT as I write - its number is your target and you
-                   would be aiming blind. Wait for it.
+                   NOTHING IS "NOT NOW" FOR YOU ANY MORE - D41 was the one item waiting on
+                   another lane's measurement and that measurement landed at 15:00.
                    CLOSED, SO STOP CARRYING IT: the "epic" -> "very rare" half is DONE. I grepped
                    it - data/fishing.json has no "epic" left and economy.gd, chatcmd.gd and the
                    ladder all read "very rare". C-55's artifact-never-stocked enforcement is the
@@ -613,24 +627,26 @@ re-price a reward; check whether he is live before a chatty test. ***
                    it. You were right to name it three cycles running and right not to write more
                    of the pool to compensate. C-55's artifact-never-stocked enforcement stays the
                    game build's too. You need no lock, so your slot is never blocked.
-  HUD          ->  YOUR CAPTURE IS IN FLIGHT AS I WRITE - you claimed 14:58:47 for the L40 delve
-                   capture with a named finish of 15:05, which is exactly the right shape, and I
-                   will read a split with a running total as progress rather than a miss.
-                   FINISH THE MEASUREMENT OF L40, AND MEASURE ONLY. L40 cannot tick on a plain-town
-                   capture - the item's own DONE line needs party frames and the Chronicle in the
-                   SAME frame, and you said plainly that your 4/4 did not speak for them. Party
-                   frames up, a boss card up, chat open, the Chronicle running, at 100/125/150 in
-                   the grid and at full screen, reported in NUMBERS and in a still. DO NOT TOUCH
-                   party_frames.gd - the fix is D41, it is the game build's, and your number is what
-                   tells it where to aim. THE GAME BUILD IS HOLDING D41 UNTIL YOUR NUMBER LANDS, on
-                   my instruction, so it does not aim blind: your capture is the gate on its third
-                   item, which is why this is measurement and not busywork. If the delve capture
-                   also comes back ZERO, SAY SO just as plainly - that closes clause (a) and shrinks
-                   D41 to nothing, which is a better result than any fix.
-                   CLAUSE (b) IS CLOSED ON OUR SIDE AND IS NOT COMING BACK. You proved by grep there
-                   is no in-game join alert at all, so it is an OBS overlay. OBS IS NEVER A
-                   DEPENDENCY - Mr. E, 13:42: "Obs has nothing to do with visuals. I can move alert
-                   boxes and everything around on obs. So make sure no one is waiting aroun for OBS."
+  HUD          ->  *** YOU FINISHED THE MEASUREMENT AND IT DID NOT COME BACK ZERO - U39 IS THE
+                   MOST USEFUL THING ANY LANE SHIPPED THIS HOUR (hud-ui 2a318e3). *** You waited
+                   out a live claim instead of clearing it, took two minutes of a fifteen-minute
+                   window, and brought back the one thing D41 could not be fixed without: SIX
+                   overlaps, all ONE pair, GRID ONLY - the boss card over the DIRECTOR pane's lane
+                   plate - with coordinates at all three scales, and FULL SCREEN CLEAN. You also
+                   said plainly that no party-frames block drew at all, which is the honest half of
+                   the answer and shrinks D41 further. You did not touch boss_bar.gd. That is the
+                   whole brief executed exactly.
+                   NOTHING HUD-OWNED IS LEFT ON L40. It does not tick, and that is not your miss:
+                   the fix is boss_bar.gd's dock and it is the game build's, and I have handed it
+                   your numbers as its FIRST item. Your _l40_delve_test.gd is the gate on both D41
+                   and L40, so expect it to be re-run against a fix.
+                   YOUR NEXT IS THE SIDE OBSERVATION YOU MADE AND CORRECTLY DID NOT GATE: the
+                   Chronicle's top line sits FLUSH under the scroll rail at 100% grid. That is in
+                   your own files, it is Phase 1 "stop it looking broken", a flush line reads as a
+                   clipped one on stream, and it is not a new item - it is L40/L61 legibility in
+                   the file you already own. Measure it the way you measured U39 (a number and a
+                   still at 100/125/150), fix the padding, and show the before and after.
+                   DO NOT TOUCH party_frames.gd OR boss_bar.gd - both are the game build's.
                    YOUR WINDOW IS :52-:07, no single claim over 15 minutes, hard release at :07, and
                    a long capture SPLITS across firings with the running total in PROGRESS.md.
   HUB          ->  FOURTH SLOT WITH NOTHING ON THE BRANCH AND THE ITEM IS UNCHANGED SINCE 11:58.
@@ -4462,6 +4478,14 @@ CHAT HALF IS HALF DELIVERED AND STAYS OPEN. ***
       spotlight.gd. The alert in Mr. E's recordings is the STREAM'S OWN overlay drawn over the game
       capture. It is not a node and cannot be docked from here, so where it sits is an OBS scene
       choice - that one line is in NEEDS MR. E and it is the only thing in L40 that is his.
+      *** THE HUD LANE'S MEASUREMENT IS NOW COMPLETE AND L40 STILL DOES NOT TICK (supervisor,
+      2026-11-16 15:00 CT; U39, hud-ui 2a318e3). *** It did exactly what I asked and measured only:
+      a delve-scene capture with party frames, a boss card, chat and the Chronicle all live, at
+      100/125/150% in grid and full screen. IT DID NOT COME BACK ZERO. Six overlaps, all one pair,
+      grid only: the BOSS CARD over the DIRECTOR pane's lane plate, with coordinates. Full screen
+      is clean. No party-frames block drew at all. NOTHING HUD-OWNED IS LEFT ON L40 - the remaining
+      fix is boss_bar.gd's dock, which is the game build's, and the numbers are in D41 below.
+      L40 TICKS when D41 lands and _l40_delve_test.gd re-runs at 0.
       WHAT STILL HOLDS L40 OPEN IS CLAUSE (a), THE PARTY FRAMES, AND IT IS D41 - THE GAME BUILD'S,
       in party_frames.gd, which the HUD lane does not own and correctly did not reach into. The HUD
       lane also said plainly that party frames and a boss card were NOT on screen in its plain-town
@@ -4934,7 +4958,29 @@ bolt 161, mend 131, ward 112, smite 85, frost 46, chain 35, renew 31, fire 12). 
 He is not seeing them - that is a READABILITY problem, not a content one. Do not build more of
 these; make the existing ones legible. D30 and L52 are reframed below accordingly.
 
-- [ ] D41. FINISH L40 - THE REST OF THE OVERLAP. The HUD worker made the Chronicle untouchable from
+- [ ] D41. FINISH L40 - THE REST OF THE OVERLAP.
+      *** D41 NOW HAS A NUMBER AND IT IS MUCH SMALLER THAN IT LOOKED (supervisor, 2026-11-16
+      15:00 CT; HUD U39, hud-ui 2a318e3, merged to main). *** The HUD lane built
+      tools/_l40_delve_test.gd - enlist 4, floor-5 delve, wait for the lord fight, chat open,
+      Chronicle at 18 lines, 1920x1080 windowed, 100/125/150% in grid AND full screen - and
+      MEASURED the whole HUD with a delve live. THE RESULT: L40D_TEST FAIL, 6 overlaps, EVERY ONE
+      THE SAME PAIR AND ONLY IN THE GRID - BossCard (boss_bar.gd) over the DIRECTOR pane's
+      lane-plate labels (Pane_director). At 100% the card is (147,12) 666x135 while the plate
+      labels are (10,10) 174x48 and (10,62) 300x42, so the card covers the right part of
+      "DIRECTOR" and "Now watching". FULL SCREEN IS CLEAN AT ALL THREE SCALES - 0 overlaps. The
+      Chronicle, the chat box and the bits/subs/points plates overlap NOTHING.
+      YOUR AIM, AND IT IS ONE DOCK DECISION: boss_bar.gd must keep its card clear of the pane's
+      lane plate - start it right of the plate, or drop it below. The card is currently centred on
+      the top of the WHOLE SCREEN (x 147..813 across a 960-wide pane), which is why it collides in
+      the grid and not at full screen. boss_bar.gd is YOURS (COORD 11.2), and the HUD lane
+      correctly did not touch it.
+      AND CLAUSE (a) AS WRITTEN - THE PARTY-FRAMES PANEL - DID NOT APPEAR AT ALL. No
+      "Delvers - floor N" block was in any still at 100% grid; only the BossCard and a "NOW
+      FIGHTING" card at (244,167) 471x111 that overlaps nothing. WHETHER party_frames.gd DRAWS IN
+      THAT SCENE IS YOURS TO SAY, and it is the one open question left in this item: if it does not
+      draw, clause (a) was never real and D41 is the boss-card dock alone.
+      Re-run tools/_l40_delve_test.gd after the fix - it is the HUD lane's file but it is the gate
+      on this item, and a 0 from it closes L40 as well as D41. The HUD worker made the Chronicle untouchable from
       HudDock.put(), but the two overlaps Mr. E actually flagged live in DESKTOP BUILD's files:
       party_frames.gd docks itself INTO a pane ("bl"), and rts_camera.gd owns the Twitch chat column
       and the chrome bar. Move the party frames and the chat column OUT of the panes. Owner: DESKTOP

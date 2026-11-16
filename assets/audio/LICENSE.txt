@@ -29,3 +29,21 @@ rpg/ (CC0 1.0 - https://creativecommons.org/publicdomain/zero/1.0/)
   insects...), magic (fire, ice, lightning, heal, buff, curse, shield, summon, teleport...),
   combat (sword, dagger, bow, shield, footsteps...) and ui (level_up, chest, coins, potion,
   menu...). The music-studio repo is left untouched; these files were copied in.
+
+D22a ambience beds - made for this game (2026-11-15) with numpy/scipy + ffmpeg from pure
+synthesised noise and sines, no source recordings; CC0 like the rest:
+  amb/river_flow.ogg     band-passed noise + low rumble + bubble chirps, 30 s seamless loop
+  amb/market_murmur.ogg  26 formant-filtered noise "voices" gated at syllable rate (crowd babble), 30 s loop
+  amb/forge_fire.ogg     low fire roar + bellows breaths every 4 s + crackle, 30 s loop
+
+D38/D22b music beds and stings (CC0 1.0) - GENERATED for this game on 2026-11-15 with Mr. E's own
+music-studio v3.5.2 (jestsayin96/music-studio), run in place and READ-ONLY (its own vite dev server
+driven headless by tools/_d38_music_gen.mjs; nothing in that repo was modified). Synthesized from
+seeds - original audio, not a sample of anyone's track. Converted WAV -> OGG (libvorbis q6) here.
+  music/bellmire_day.ogg     style playful_pizzicato x mood playful, role bed  (-20 LUFS), seed 1286
+  music/bellmire_night.ogg   style ambient_calm      x mood lowkey,  role bed  (-20 LUFS), seed 2276, 74 BPM
+  music/bellmire_raid.ogg    style epic_cinematic    x mood hype,    role music (-16 LUFS), seed 3414
+  music/bellmire_delve.ogg   style lofi_chill        x mood lowkey,  role bed  (-20 LUFS), seed 4737
+  music/sting_victory.ogg    the 2-5 s sting maker, preset riser, 3.2 s, seed 7
+  music/sting_defeat.ogg     the 2-5 s sting maker, preset hit, 3.8 s, seed 9
+Each one's listen report (mood.pass, speechRoom, seam) is in docs/PROGRESS.md (D-cycle D22b/D38).

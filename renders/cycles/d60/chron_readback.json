@@ -1,0 +1,84 @@
+{
+  "bytes_after": 7131,
+  "bytes_before": 6874,
+  "chronicle": [
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "s": "Something stirs in the valley tonight.",
+      "t": "lore"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "find",
+      "s": "D60Hero lands a Silver Trout (common)!",
+      "t": "town",
+      "who": [
+        "D60Hero",
+        "Bad NamebThatIsFarTooLon…"
+      ]
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "festival",
+      "s": "A festival gathers in the market square - music, stalls, and a crowd!",
+      "t": "town"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "day",
+      "s": "Day 1 begins  —  52 souls, 408 gold, a hamlet (lvl 2, standing 156/175)",
+      "t": "town"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "hunger",
+      "s": "Day 1  —  the granary is empty. Hunger bites (1 days).",
+      "t": "town"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "disaster",
+      "s": "No rain since the thaw. The river drops, and the wells go shy.",
+      "t": "town"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "raid",
+      "s": "Initiative: the raiders 20, the watch 17 - the raiders strike first.",
+      "t": "raid"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "raid",
+      "s": "4 bandits are riding on the west road!",
+      "t": "raid"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "s": "E3PO arrives with his helm under his arm and his opinion ready.",
+      "t": "town"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "kind": "growth",
+      "s": "Bellmire is a hamlet now - a well dug, and a reason to stay.",
+      "t": "town"
+    },
+    {
+      "at": "2026-11-15T18:25:33Z",
+      "day": 1,
+      "s": "52 souls live here.",
+      "t": "town"
+    }
+  ]
+}

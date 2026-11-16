@@ -4,7 +4,6 @@ extends SceneTree
 var _fail := 0
 var _f := 0
 var _feed := FeedHUD.new()
-var _board := LeaderboardPanel.new()
 var _bar := BossBar.new()
 
 func _ok(c: bool, what: String) -> void:
@@ -28,8 +27,6 @@ func _initialize() -> void:
 	r.fresh("a", "Ash", "knight", "human")
 	_feed.source = ["A line."]
 	root.add_child(_feed)
-	root.add_child(_board)
-	_board.setup(r)
 	root.add_child(_bar)
 	_bar.setup(null)
 
@@ -38,7 +35,7 @@ func _process(_d: float) -> bool:
 	if _f < 5:
 		return false
 	_ok(_parch(_feed._panel) and _has_teal(_feed._panel), "the Chronicle: parchment, a teal-ruled title")
-	_ok(_parch(_board._panel) and _has_teal(_board._panel), "the Guild Roll: parchment, a teal-ruled title")
+	# L58: the on-stream Guild Roll is gone; its parchment/teal check retires with it.
 	_ok(_parch(_bar._plate), "the boss bar: on a parchment plate")
 	var t := UiTheme.title("X")
 	_ok(_has_teal(t), "UiTheme.title carries the teal diamond and rule")

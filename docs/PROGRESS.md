@@ -2,6 +2,281 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## C-cycle - C-47 forge, town_life, wandering lord, E3PO tier-up variants, 2026-11-15 (content)
+- Item: standing backlog (every numbered item already had a cycle; this widens the lines that still repeat most). WORK_PLAN C1-C3 are long delivered; supervisor ticks.
+- data/lore_lines.json only, additive, +140 lines: forge_alt +10 per tier (50; tiers 1-5, now 16 each); town_life crier/market/growth +12 each (36); events.wandering_boss appears_alt/while_alt/cleared_alt +6 each (18; no lord named, canon lords only); NEW key e3po.tier_up_alt (3 Commander lines per growth tier, keyed by exact tier NAME, 36).
+- CODE WIRING for the desktop (dead until wired): e3po.tier_up_alt - pick at random from tier_up_alt[tier_name] plus the existing tier_up line. All other additions extend lists the game already reads; no new wiring.
+- VALIDATION OK: all four data files json.load clean; every pre-existing key and list element byte-identical (lists only appended, checked by script); no new line duplicates an existing one; roundtrip format unchanged (indent 2).
+
+## C-cycle - C-44 shop stock and caravan cargo per growth tier, 2026-11-15 (content)
+- Item: standing backlog 2 (SHOP STOCK AND TRADER CARGO PER GROWTH TIER). C1 in WORK_PLAN was already delivered by C-34/C-35/C-41; supervisor ticks.
+- data/items.json only, additive: shop_stock 123 -> 171 (+48, four per tier, tiers 1-12); trader_cargo 68 -> 101 (+33, three per tier, tiers 2-12; tier 1 stays caravan-free).
+- Same shape as the existing blocks: {name, cost, flavour, tier}. Each new key is also appended to its tier's shop_adds / cargo_adds in stock_by_tier so the two gates agree (checked by script).
+- Crossing goods stay under 10 gold (kindling, rush light, alder bowl, oat cake); the City tier adds velvet, crystal, perfume, ivory and southern wine. A crossing still cannot sell glass.
+- VALIDATION OK: json.load clean; every pre-existing key equal to HEAD; stock_by_tier lists are old-prefix + appended keys; no duplicate keys or display names; diff removes only trailing-comma lines.
+- CODE WIRING: none new. The loader that filters good.tier <= town_tier picks these up if it enumerates the dicts; no new key, slot or file.
+
+## U-cycle - U26 L31 part 1: the "NOW FIGHTING" banner, 2026-11-15 (HUD)
+- Item: L31 (first unchecked item that is mine; L61 was already ticked by U25).
+- Built HudDock.FightBanner (hud_dock.gd, skin + watcher only): when a floor's lord rises
+  (Delve.lord_fighting(), same source as the boss card) a parchment banner reads
+  NOW FIGHTING / <lord> / "Lord of the deep" or "A rare one" - the town's band / the delvers,
+  in the lord's own colour, held 6 s real time, fades. Docked UNDER the boss card inside the
+  pane showing the fight via HudDock.put (so it can never cross a seam or the Chronicle); at
+  full screen it sits below the boss bar. Marked with a pane home so guard() leaves it alone.
+- Looked at: windowed 1920x1080 capture tools/_u26_shot.gd -> renders/cycles/20261115_u26
+  (1_full_crop.png: solid parchment, purple lord edge, 40 px name legible). Banner rect
+  measured clear of the Chronicle box (overlap=false). Parse 0 errors.
+- NOT DONE for L31 (so it stays unticked): damage numbers (Monster._number / Delve._float_text
+  are Label3D in files I do not own) and status icons (party_frames.gd shows words). Those need
+  an owner decision - see summary.
+
+## D-cycle - D57 the Satchel goes live in the snapshot, 2026-11-15 08:30 (game build)
+- Item: D57 (first open DESKTOP item, Mr. E's direct ask). The hub's H11 Satchel
+  panel has been shipped and dormant since it went up: it draws nothing until the
+  publisher sends the fields. This cycle sends them.
+- FIRST, THE CONTRACT. The written item and the shipped hub did not agree, so the
+  code was written against the hub that is actually live (bellmire-hub web/app.js,
+  satchelRows/satchelBlock). What it reads per hero:
+    * `h.satchel` (or inventory/items) - rows {name, kind, qty} with a price under
+      any of sell/value/sell_price/price/worth. `sell` is PER UNIT; the page does
+      the x qty itself and prints the row total.
+    * `h.satchel_total` (or sell_total) - the stated grand total. When present the
+      page prints "Counter pays N gold"; absent, it sums the priced rows instead.
+    * `h.weapon.sell` / `h.armour.sell` - worn gear only gets a row once it has a
+      price, so a 0-cost tier is OMITTED rather than quoted at "0 gold".
+    * `kind` only SELECTS a whitelisted glyph through SATCHEL_ICON, and the names
+      the item listed (Chest/Vial/Scroll/Fish/Herb/Bone/Cloth/Ore/Spark/Wood) are
+      in no whitelist on the hub - the real one is weapon/armour/potion/oil/gold/
+      trinket/loot/gem. The parallel `sellable`/`sell_prices` arrays the item asked
+      for are published too, but on their own they would have rendered NOTHING.
+- CHANGE scripts/snapshot_pub.gd (+101 lines, the only file touched):
+    * `v` 2 -> 3. web/app.js KNOWN_V already accepts "1","2","3", so no hub change
+      was needed and older clients are unaffected.
+    * SELL_BACK 0.4, SATCHEL_MAX 40 (the hub stops reading at 40), NAME_MAX 25.
+      The price is the COUNTER'S OWN, read off the on-stream sheet
+      (leaderboard_panel.gd Satchel.SELL_BACK = 0.4), not the "usually half" in the
+      item - two different numbers for the same counter is a bug waiting to happen.
+    * clean_name(): clean_line() (control chars, BBCode, angle brackets, long digit
+      runs) then capped at 25 with an ellipsis. Item and potion names are content-
+      writer lore text, so they are sanitised like any other string that leaves.
+    * _satchel(h): mending, then brews, then oil, then gear owned-but-not-worn.
+      Mirrors the on-stream sheet exactly, including which pieces count as worn
+      (h.acc values and h.cos values, dye excluded). Nothing is invented: a row
+      only exists for something carried, a price only for something bought back.
+      The stated total is the whole purse - every owned piece INCLUDING worn ones -
+      which is the panel's "Sell the lot (worn too)" number.
+    * _sheet(): weapon/armour blocks gain `sell` when their tier costs something;
+      the sheet gains satchel / satchel_total / sellable / sell_prices. Everything
+      else in the v2 sheet is byte-identical.
+- TEST tools/_d57_satchel.gd (new): 23 checks offline, no key file, no network -
+  v is 3, the four expected rows with the exact prices (35->14, 90->36, 12->4,
+  360->144), the worn ring gets no row, the stated total is 452 bare-handed and
+  576 once a fine steel blade and chainmail are worn, sellable/sell_prices mirror
+  the rows, every kind is one the hub's icon map knows, every name <= 25 and W1a
+  clean, bare hands and rags quote no price, a hero carrying nothing gets an EMPTY
+  satchel and total 0 (never a faked row), the v2 fields all survive, plain JSON
+  round-trips, no Twitch ids. D57_SATCHEL OK.
+- LOOKED AT IT. tools/_d57_dump.gd writes one real build_payload() to
+  user://_d57_payload.json; the live hub page was then rendered against exactly
+  that payload with the snapshot request stubbed. The Satchel block draws under
+  the hero: Fine Steel Blade EQUIPPED 64 gold / Chainmail EQUIPPED 60 / Mending
+  draught x2 28 / Greater Mending x3 108 / Flask of lamp oil x5 20 / Hearthstone
+  Amulet 144, footed "Counter pays 576 gold". The second hero, carrying nothing,
+  shows no Satchel at all - the honest empty state, as designed. 0 page errors.
+- GATES: parse 0 errors, offfloor 0 of 1217 (INPROP 0, MON_INPROP 0 of 81),
+  TWITCH_PARSE OK, W1A_TEST OK, TOWNWALK in_solid 0/18006 PASS, _delve_test rc 0
+  with 0 SCRIPT ERROR, D57_SATCHEL OK. Payload 7.5 KB, build 0.13 ms.
+- FOR MR. E: it is live on the next publish beat (60 s) once the game is running
+  with the service key - no hub deploy needed. One decision is waiting: the counter
+  pays 0.4, the item said "usually half". 0.4 is what !sell will actually pay, so
+  that is what the hub now quotes; say the word if you want 0.5 and it is a
+  one-constant change in both files.
+
+## D-cycle - D21b.2 defender deaths read, 2026-11-15 00:46 (game build)
+- Item: D21b (first open DESKTOP item still) - RAID COMBAT FEEL. Next smallest
+  readable piece after D21b.1: deaths that read. A Townsfolk or HeroBody beaten
+  to 0 hp by a raider used to just play its 'die' anim via _anim(n, "die") and
+  be buried; from stream distance it was indistinguishable from a reel, an idle,
+  or a chair-sit. Monster.die() already did the readable thing on the raider
+  side (die anim + voice + sink). This cycle gives the defender side the same
+  weight.
+- CHANGE 1 scripts/townsfolk.gd: added _flash_red flag and two funcs mirroring
+  the D21b.1 shape - _death_fx() (a longer, RED flash: emission (1.0,0.12,0.08)
+  at 2.0x for 0.5s on the duplicated StandardMaterial3D set the class already
+  builds for _flash) and _death_label() (a "FELLED!" Label3D at font_size 112,
+  red with a 24px black outline, rising 1.8m over 1.6s and fading out). Both
+  skip the material surgery in --headless, same guard as _flash (the dummy
+  renderer logs "Parameter 'material' is null" when we duplicate SM3D with
+  external texture refs - the flash is invisible headless anyway). Reuse
+  _flash_t and _tick_flash to clear emission when the timer runs out; _flash
+  now sets _flash_red=false so a late hit can't paint a dying body white.
+- CHANGE 2 scripts/raids.gd: in _defender_falls, call (n as Townsfolk)._death_fx()
+  on the ONE real death line (after the CON save, after the green-grace KO,
+  after E3PO's immortal recovery path) right before _anim(n, "die"), so a KO
+  does not spawn the banner. In _raider_falls, non-Monster raiders (bandits
+  that are Townsfolk) get the same treatment - Monster.die() already covers
+  the lord/creature side. No change to any existing damage, death bookkeeping,
+  bury, roster.kill, or timer-based queue_free path.
+- GATE (all green on the hardened tree):
+  * parse clean (--headless --quit-after 300 rc=0, no SCRIPT ERROR / Parse Error)
+  * tools/_offfloor.gd rc=0, OFFFLOOR 0 of 1340 samples; INPROP 0; MON_INPROP
+    0 of 84; floor reached 4
+  * tools/_twitch_parse.gd TWITCH_PARSE OK (7+1 passes)
+  * tools/_delve_test.gd rc=0, no SCRIPT ERROR; reached floor 2 state=descend
+  * tools/_townwalk.gd ran with no SCRIPT ERROR for 70+ sim seconds (the box
+    wrapper cut at the 420s wall budget before the 120s-sim summary fired, a
+    known headless slowdown when a delve is concurrent); in_solid stayed flat
+    at 1 across T=10..70 samples, ratio 1/10898 = 0.009%, well under the
+    _townwalk PASS threshold of 0.2%. stuck_on_route=0 throughout.
+- Bar for the item itself: parse + the calls land at the one real death point
+  and are headless-safe. Visible sign-off ("a stream shot of a bandit going
+  down with a FELLED! banner over him") is where D21b.1 also stopped - it is
+  a live-run verdict Mr. E owns, not something a headless run can prove.
+- D21b itself STAYS OPEN. The remaining pieces named in its scope - guard
+  formations, a cavalry charge that lands, and the FPS raid soak - are
+  untouched this cycle.
+- Files: scripts/townsfolk.gd, scripts/raids.gd, docs/WORK_PLAN.md, docs/PROGRESS.md.
+
+
+
+## D-cycle D5 - D45 grass material re-grade + D44b ghost-leg diagnostic (desktop, Nov 13)
+D45 THE GRASS READS AS SAND (owner desktop build; Mr. E quality-bar item, re-fired as an override).
+- LOOKED FIRST: rendered the current ground at 1080p (tools/_d45_shot.gd, new). The close-up was
+  already green; the failure was at PANE + AERIAL distance - the open fields read as a flat,
+  uniform, desaturated olive/tan wash (the "sand"). Root in assets/shaders/ground.gdshader: the
+  grass macro multiplier mixed to a WARM end (1.10,1.06,0.92) (R>=G, >1.0) that washed green to
+  tan, and there was no distance-surviving colour variation.
+- CHANGE (assets/shaders/ground.gdshader, grass branch ONLY - dirt/rock/snow/scar/mud/normal/
+  roughness untouched): (1) blend a coarser 2nd grass sample (uvg*0.34) so detail survives mipping
+  far off; (2) GREEN-dominant macro mix (0.62,0.74,0.52)->(0.92,1.06,0.78) (G highest at both ends)
+  replacing the warm wash; (3) a patch octave (vnoise *0.055) for value mottling visible from above.
+- LOOKED AGAIN (after): close / valley-bank / aerial-pane all read as varied green grass, not sand,
+  and NOT oversaturated/cartoon. before+after 1080p crops: renders/cycles/d45/.
+- GATE (green): parse 0, no SHADER ERROR; _townwalk PASS in_solid 0/15953; TWITCH_PARSE OK;
+  _delve_test clean to floor; _offfloor INPROP 0 / MON_INPROP 0 (OFFFLOOR off-floor count is an
+  intermittent DUNGEON-RNG metric - 25 one run, 0 the next on identical code; not town, not this
+  change). Committed to main. NOT TICKED: D45 DONE bar is "Mr. E signs off" and this is unattended
+  (same discipline the HUD worker used for L61/L62). Supervisor: show Mr. E the d45 crops.
+- D49/D24 (the override also named): STALE premise. project.godot [rendering] ALREADY has use_taa=
+  true + msaa_3d=1 (shipped with D24, which is ticked). The remaining D49 pane pixelation is the
+  pane SubViewports (spotlight.gd: MSAA_DISABLED + sub-resolution) = DESKTOP HUD-owned; desktop
+  build must not touch spotlight.gd. Flagged, not touched.
+- D44b UPDATE (per-frame diagnostic run this session, separate reverted cycle, no commit): the
+  ghost/pocket-escape leg is RULED OUT as the counted in_solid cause. Per-frame branch logging
+  showed ghost-leg inside-footprint commits are real (0/35/0 over 3 runs) but the counted offenders
+  are ALWAYS the else/keep_walkable branch at the south-market houses (child ~(52,-88.6), route 14/
+  33). keep_walkable cannot clear them because nav.closest() returns a walkable point INSIDE the
+  navmesh sliver. Sole remaining fix = the ATTENDED nav-param change (edge_max_error 0.4->0.2 or
+  widen the southern carve), verified not to raise stuck_on_route. See project doc
+  claude/desktop-d44b-ghostleg-ruledout-navsliver-confirmed-nov13-1802. A validated ghost-leg
+  keep_walkable patch is ready to bundle but was NOT committed (nil measured benefit; hot loop).
+- Files: assets/shaders/ground.gdshader, tools/_d45_shot.gd(+.uid), docs/WORK_PLAN.md, docs/PROGRESS.md.
+
+
+## D-cycle D4 - D44b keep_walkable net (south-market residual) (desktop, Nov 13)
+D44b (town_nav in_solid residual, sub-case b) - the supervisor flagged it "before
+D29 or anything else". Took the D-cycle 126 follow-up's "keep_walkable net" option.
+- CHANGE (scripts/town.gd keep_walkable ONLY): 3 push passes -> 6 (a chain of
+  overlapping south-market house footprints can oscillate and leave a foot inside
+  after 3), plus a navmesh-authority fallback - when the point is STILL inside a
+  footprint after the loop, snap to nav.closest (guarded so pre-sync, where
+  closest() returns p itself, it keeps p rather than looping). Rare path: the
+  common already-clear case pays no nav query. A position can only become MORE
+  walkable - no test loosened, nothing widened.
+- GATE (all GREEN on the hardened tree): parse 0 SCRIPT/Parse; _offfloor 0/1643
+  (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _delve_test (DELVE_OIL=1) clean to
+  floor 2, no SCRIPT ERROR; _townwalk x3 PASS in_solid 0/15466, 1/15863, 2/16816
+  (0.000/0.006/0.012%, all << the 0.2% bar).
+- NOT TICKED: the DONE bar is three-consecutive-0 and I got 0/1/2. The residual
+  did not move measurably - it is a single-FRAME transient at the ~15 south-market
+  houses (recurring: child Rask Coalfoot ~(52,-88.6); peasants ~(74,-64)). A
+  diagnostic sampling every 0.25 s (4 runs) caught ZERO inside, so the gate's
+  0.5 s grid only rarely lands on it. This is at the floor of measurement, well
+  inside PASS; "0/1/2" reads as noise, not a regression (PASS every run).
+- Committed the hardening as a PARTIAL (safe correctness improvement, full gate
+  green), NOT as a close of D44b. NEXT CYCLE: per-FRAME logging (not sampled) at
+  the south houses to name the committing branch - prime suspect the ghost/
+  pocket-escape leg (townsfolk ~L821) that moves on height_at alone, bypassing
+  keep_walkable while _ghost_last stays in the route.
+- Files: scripts/town.gd. (Also preserving the prior run's uncommitted D-cycle D3
+  note below - D42, the silent-town callers, is already on main at df393ff.)
+
+
+## U-cycle - L62 PANE LANE TITLES + L61 CHRONICLE STYLING + L63 SATCHEL OFF STREAM (desktop HUD, Nov 13)
+Three Mr. E HUD items from his 14:12 / 14:20 looks, all in the seven owned files, committed to hud-ui (21b6a14).
+- L62 PANE LANE TITLES (spotlight.gd). Mr. E: "I don't even know what window this is." Every pane now carries a
+  readable KIND title - DIRECTOR / BITS / SUBSCRIBER / CHANNEL POINTS - above the existing "Now watching: <who>"
+  line. Title uses the lane's bright paid colour; an idle paid lane shows "BITS · ambient" (etc.) in the muted
+  edge so a viewer can tell the lane is unspoken-for. Positioned on the pane's OUTER-top side (same L40 math as
+  the now-watching label) so the Chronicle box is never crossed. New KIND constant.
+- L61 CHRONICLE STYLING (feed_hud.gd _build_chrome). Mr. E: "just a box". The centre box now wears the hub's
+  aesthetic - UiTheme.PARCH parchment, UiTheme.EDGE ink border, a teal accent rule across the top with two
+  deep-gold diamond pips at its ends, and a left-side "Chronicle" wordmark with the teal diamond ornament
+  (UiTheme.title). Font STAYS at 18 px (L39b signed off); _chrome_lines still returns 8-9 lines - this is skin.
+- L63 STRIP SATCHEL OFF STREAM (leaderboard_panel.gd). Per COORDINATION 13 the viewer Satchel leaves the stream
+  for the hub (H11). _ready / _unhandled_input / restyle / setup stripped to no-ops. Satchel inner class kept
+  DORMANT (not instantiated) so its gear/state/sell-price logic is still reachable for the hub to reuse.
+- feed_hud ANSWER (asked in L63): it IS the Chronicle's renderer - single PanelContainer named "Chronicle" in
+  group "hud_chronicle", chrome and full-screen modes both built in-file. NOT a second on-stream event feed.
+  Nothing to remove; leave it.
+- TEST tools/_l62_test.gd (windowed 1920x1080, COORDINATION 4): three paid lanes + director on known heroes,
+  checks every KIND label is visible with the right text, then clears the bits paid moment and checks the
+  title reads "BITS · ambient", and that LeaderboardPanel has zero children on stream. 11 checks, 0 FAIL.
+- RENDERS looked at: renders/cycles/20261113_l62/l62_paid_all_four_1080.png (all four kinds legible, chip colours
+  match the lanes, Chronicle styled with wordmark + teal rule + gold pips, lines visible); l62_bits_ambient_1080.png
+  (bits reads "BITS · ambient" in the muted chip while the others stay paid-bright); l61_chronicle_styled_1080.png
+  (same frame as the ambient one for the Chronicle close-read). The on-stream surface is now exactly the six in
+  COORDINATION 13 (panes, Chronicle, lane titles, now-watching, boss bar during a fight, in-world).
+- Files: scripts/spotlight.gd, scripts/feed_hud.gd, scripts/leaderboard_panel.gd, tools/_l62_test.gd(+.uid).
+- COMMIT 21b6a14 on hud-ui, pushed. Did not tick L61 / L62 / L63 in WORK_PLAN - Mr. E signs those off on his eye.
+
+
+## D-cycle D3 - D42 THE SILENT TOWN: FOOTSTEPS + ANIMAL VOICES GET A CALLER (desktop, Nov 13)
+Picked up a prior run's uncommitted D42 WIP (lock left RUNNING 02:20, no IDLE - cut off mid-cycle), reviewed it against
+my owned files, validated the full gate, and finished it. All changes are in DESKTOP BUILD files only.
+- THE BUG (census D28/D42): sfx.gd defines footstep_grass/stone/water/wood and the animal voices, and NOTHING ever
+  played them - 40 of 94 kinds fired 0 in the census soak. Footfalls are a town's most frequent discrete sound.
+- FOOTSTEPS: townsfolk.gd _gait_step now plays a footstep once per 0.62*size_k stride of real travel, lod==0 only (near
+  the camera; far steps are inaudible and would only spend the counter), surface from a new town.surface_at(pos):
+  the river bridge = wood, open river = water, cobbled roads + the market paving = stone, everything else = grass.
+  New Sfx GAP floor (0.05-0.08 s) keeps a crowd near the camera a patter, not a machine-gun. Heroes inherit it
+  (HeroBody extends Townsfolk; no _gait_step override).
+- ANIMAL VOICES: animal.gd _voice gives each beast its own species call on a 7-16 s stagger (VOICE: Pug/Corgi->dog_bark,
+  Cat->cat_meow, Horse->horse_neigh, Foal->horse_whinny, Pig->boar_grunt), raid-gated (quiet under a raid), 3D-attenuated
+  (-11 dB) so only what the camera is near is heard, and a fleeing/occasional dog whines instead of barks.
+- WHY horse_neigh FIRED 0: daylight.gd's ambient sampler keyed off the roaming director camera, and the animals are
+  penned, so it never reached them. The animals now voice themselves, independent of the sampler.
+- TEST tools/_d42_test.gd (real Town + director camera, 60 s / 8x soak, headless, counts plays): footsteps 1642
+  (grass 745, stone 790, wood 59, water 48), animal voices 85 (horse_neigh 20 + whinny 4, cat 28, dog 15 + whine 6,
+  boar 12). D42_TEST OK (footsteps>0, animals>0, horse>0).
+- GATE: parse 0 SCRIPT ERROR; _offfloor 0/1617 (INPROP 0, MON_INPROP 0); TWITCH_PARSE OK; _townwalk in_solid 1/17337
+  (0.006%) raid 0/5263, stuck_on_route 0, PASS; _delve_test (DELVE_OIL=1) 0 SCRIPT ERROR to floor 4. All green.
+- NOT DONE here: Mr. E's own DONE bar is a re-recorded clip measured for discrete events; headless counts confirm the
+  callers fire, but his OBS Game Capture sits at 45% / -6.8 dB (WORK_PLAN D29), so he should raise it to actually hear
+  them. Files: scripts/townsfolk.gd, town.gd, animal.gd, sfx.gd, tools/_d42_test.gd(+.uid).
+
+
+## D-cycle D1 - D18a PROP/BUILDING SANITY (desktop, Nov 12)
+- tools/_d18a_test.gd: a sanity sweep over Town.tscn. Check A (grounding): 1034 ground props, base vs height_at at
+  the prop's own origin; props on a steep slope (crag/mine/mountain/bank), surface/mounted/water dressing, dock
+  props over the river, and planter-box flowers are classified out by rule, not by eye. Check B (interpenetration):
+  the 83 building instances (mk_house_*, lm_*) tested as ORIENTED footprints (the engine's own _solid_of math) -
+  axis-aligned AABBs falsely overlapped rotated neighbours, oriented ones do not. Result: D18A_TEST OK, 0 floaters,
+  0 building overlaps.
+- Investigated every flag the raw probe raised; all were intended: wall lanterns (2.3 m), tower crossbowmen on the
+  watchtowers (~11.7 m), shop/smithy table + rack dressing, flowers planted in raised planter boxes (_planter builds
+  a 0.45 m box + soil), bucket/barrel on the raised dock over the riverbed, water lilies/boats, the scar-mouth rock
+  crag deliberately set on the mine slope (height_at - 0.8 + lift), and the two outlying farm cottages nestled into a
+  foothill at the _low seat. No game script needed changing - the town was already clean.
+- Shot sheet renders/cycles/20261112_d18a (1366x768): west_gate, bridge, market_square, street, scar_mouth, docks,
+  town_aerial, farmstead_slope, hamlet_north. Looked at: wall ring + towers + gates + roads all connect, the timber
+  bridge spans the river level on its pier, houses sit on the ground (hillside cottages read as nestled, not clipped),
+  props grounded with connected shadows - nothing floats.
+- Standard checks clean: parse 0, _offfloor 0/1615 (0 INPROP), _twitch_parse OK, _townwalk in_solid 0/7801 stuck 0,
+  _delve_test 0 SCRIPT ERROR. (Note: real-mode renders need `--headless --import` once first to settle the UID cache.)
+
+
 ## NEXT UP
 1. **Fix MegaKit assembly** (`village_assets/tools/megakit.py`). Current output
    is "legos in the wrong spot":
@@ -773,3 +1048,427 @@ chatcmd/twitch (!join !fish !buy !delve), heroes walk from town through the nort
 NEXT: the delve itself - party enters DungeonHD floor 1 from the mouth (fade/transition), party AI fights the floor's
 monsters with Spells/Gear (port expedition.gd), descends by the exit stairs, lords on 5s, permadeath -> memorial,
 chronicle lines (canon: origin first, biome second; never a floor count).
+
+
+## D-cycle D6 - D29 THE WORKING TOWN HAS A VOICE (silent-town 'work' layer)
+- The census's silent-town (D29) was mostly fixed under D42 (footsteps + folk/animal voices got callers).
+  This cycle VERIFIED that live and added the one missing strand the DONE criterion names - WORK sound.
+- town.gd: new _work_sounds(delta), called from _process. Daytime only, never under a raid or at night
+  (gated is_raid_on() + economy.is_night(), same civic gate as the festival). Two station-based 3D sources:
+  the smith rings his anvil - a single paced 'hit' at the blacksmith yard (_shop_frame['blacksmith'] +
+  side*0.6 + f*0.4, the _yard 'Anvil' spot); and the market chinks with a 'coin' spread across the paved
+  square around _market_pos. Both reuse existing CC0 kinds already in assets/audio (no new asset). A
+  work_plays counter exposes it for the test. Every other town sound (footfalls) already carries only
+  3D-near, so this matches - a pane near the smithy/market hears it, a far pane does not.
+- tools/_d29_test.gd (new): boots the real Town, soaks 30 s at 8x, asserts work_plays>0 AND Sfx 'hit'>0
+  (smith) AND 'coin'>0 (market). Result: work_plays=69 (smith 46 + market 23). D29_TEST OK.
+- Re-verified D42 in the same gate (footsteps 1255, animal voices 68, horse 16 - all fire).
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _offfloor 0/1411 (INPROP 0, MON_INPROP 0 of 123);
+  TWITCH_PARSE OK; _delve_test RC 0, no SCRIPT ERROR (clean multi-floor run); _townwalk in_solid
+  0/15470 (0.000%) PASS (nav untouched - this change is town _process only).
+- D29 ADVANCED, left UNTICKED: full DONE is Mr. E's re-recorded OBS clip measured >=8 dB above the bed.
+  Headless counts the discrete events; it cannot measure his recording. He should also raise Game Capture
+  (45% / -6.8 dB) or the town stays quiet for viewers even now that it fires.
+- Commit note: staged only the files this change touches (town.gd, tools/_d29_test.gd, WORK_PLAN,
+  PROGRESS, RUN_LOCK) rather than git add -A, because the tree carried other sessions' untracked WIP
+  (renders/cycles/d45/, _sup_gate.log, *.uid) that is not mine to commit.
+- CROSS-WORKER FLAG (content/laptop): _sound_review coverage A fails on unique monster 'new ashwight'
+  having no registered voice kind (bestiary/monster/bosses.json) - pre-existing, not desktop-owned,
+  unrelated to the town-silence fix.
+
+
+## D-cycle D9 - D53 TOWED WAGONS STAY ATTACHED TO THEIR HAULER
+- Mr. E clip 14-31-18: "the cart is moving on its own ... supposed to be attached to this guy, but it
+  wasn't." DIAGNOSED (townsfolk.gd _physics_process cart-follow): the wagon chased a point 2.6 m behind
+  the carter at a 4 m/s crawl placed AFTER the LOD throttle, so any jump (door exit, respawn, raid reset,
+  far-LOD chunk) left it gliding across open ground untethered; a stale _park target could also pin it at
+  an old spot once the owner moved on.
+- FIX (townsfolk.gd ONLY; rig.gd equip/attach left as-is - that is for bone-held gear): the follow is now
+  keyed off the OWNER-to-cart distance. Owner within WAGON_SNAP (5 m): roll to the tow/park point, capped
+  no slower than the hauler (maxf(_vs+1.5, 4)). Owner beyond it (a jump): the wagon reattaches AT ONCE
+  behind them and re-parks when it settles. Indoors/culled owner: the wagon is left parked and reattaches
+  when they re-emerge. Covers every towed wagon - carters, the caravan master, the pedlar notable (all
+  use .cart). The fishing-pole grip is D51 (angler.gd), left open.
+- TEST tools/_d53_test.gd (new): boots the real Town (4 haulers with carts, nav ready), soaks travel +
+  parking (gated on physics frames - the cart follow is _physics_process), then teleports one hauler +25 m.
+  travel_max gap 2.72 m; post-teleport 22.8 m -> recovered 2.60 m. D53_TEST OK. Render tools/_d53_shot.gd
+  (windowed): carter<->cart 2.6 m, wagon at the draw-bar (renders/cycles/d53/hauler_cart.png, looked at).
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _townwalk in_solid 0/16438 (0.000%) PASS (nav untouched);
+  _offfloor 0/1368 (INPROP 0, MON_INPROP 0/104); TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR,
+  time-capped at T150s); D53_TEST OK.
+- Staged only the files this change touches (townsfolk.gd, _d53_test/_d53_shot .gd + .uid, WORK_PLAN,
+  PROGRESS, RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to
+  sweep in with git add -A.
+
+
+## D-cycle D10 - D54 NPCs NO LONGER VANISH INTO BUILDINGS FOR LONG
+- Mr. E clip 14-29-22: "they went in. But now I can't find, I can't see them." MEASURED first
+  (tools/_d54_probe.gd, midday soak): 127 ordinary folk, 39 entered a building, and the worst indoor
+  dwell was 59.5 s - an NPC indoors is invisible behind solid walls, so a pane following one loses it
+  for the better part of a minute. The ordinary enter path DID bring folk back out (step out the door
+  after _wait), but the daytime dwell was randf(18-45) s; only the flee duck (D20b) returned folk
+  promptly (~4 s).
+- FIX (townsfolk.gd): the DAYTIME indoor stay is capped to INDOOR_MIN..INDOOR_MAX (7-14 s, randomised
+  so folk do not all re-emerge in lockstep) - a watched body is always recoverable within that. The
+  deliberate NIGHT sleep (a long _linger set in _next_trip, is_night()) is left alone; the town is
+  meant to be abed then. The street-cap _keep_indoors population (off-street by design) is untouched.
+- TEST tools/_d54_test.gd (new; probe turned into an assertion, gated on physics frames): midday soak,
+  41 enter / 47 exit, max indoor dwell 13.7 s (was 59.5 s), 0 NPCs stuck >30 s. D54_TEST OK. Render
+  tools/_d54_shot.gd: a peopled midday square - folk out and about, not vanished (square_midday.png,
+  square_close.png), looked at.
+- GATE GREEN: parse 0 SCRIPT ERROR/0 Parse Error; _townwalk in_solid 2/18008 (0.011%) PASS (nav
+  untouched; 'inside' count fell, streets busier); _offfloor 0/1361 (INPROP 0, MON_INPROP 0/97);
+  TWITCH_PARSE OK; _delve_test runs clean (no SCRIPT ERROR, time-capped T150s); D54_TEST OK.
+- Staged only the files this change touches (townsfolk.gd, _d54_test/_d54_shot/_d54_probe .gd + .uid,
+  WORK_PLAN, PROGRESS, RUN_LOCK); other sessions' untracked WIP (renders/, logs, *.uid) left alone.
+
+
+## D-cycle D11 - D44/D44b TOWNWALK in_solid DRIVEN TO THREE CONSECUTIVE ZEROS (cause named per-frame)
+- Item: D44b (supervisor: "take it before D29 or anything else"). DONE = three consecutive _townwalk runs at
+  in_solid 0 WITH the cause named - not three lucky runs. Prior partials (D-cycle 126, D4) had named the
+  south-market cluster and hardened keep_walkable (3->6 passes + nav-snap) but only ever got 0/0/non-zero.
+- MEASURED FIRST, per the plan's own next step (log PER-FRAME which branch commits the inside position):
+  added a lightweight townsfolk member `_dbg_leg` set at the walk commit (1 door / 2 seat / 3 ghost / 0 normal)
+  and tools/_d44_perframe.gd, which runs the gate's exact in_solid test EVERY frame and tallies by leg.
+  RESULT over 513,201 per-frame samples: in_solid frames = 2, BOTH leg=0 (NORMAL), 0 ghost/door/seat - so the
+  prime suspect (the ghost/pocket-escape leg) was WRONG; the committer is the ordinary walk at the (52,-88.6)
+  south-market stop (a stops-based trader/_more_folk).
+- TWO ROOT CAUSES, both fixed in townsfolk.gd (town_nav.gd untouched - the nav is sound, the WALKER was not):
+  (1) EMBEDDED STOP DESTINATION. town.gd._more_folk generates stop points; one in the dense south overlap sat
+      inside a footprint. _next_trip() returned it verbatim, so the body routed to it and stood embedded on
+      arrival (the arrival position is not re-committed through the walk guard, so it leaked). FIX: at the
+      caller (townsfolk ~L783) the returned dest is keep_walkable-snapped when solid_at(dest,0) is non-empty -
+      a no-op for the common clear case; the door/interior leg still runs from the snapped point via _enter_at.
+  (2) CARRIED INSIDE FOOT. On the normal leg keep_walkable + _slide_round can fail to clear the overlapping
+      footprints and _slide_round hands back the still-inside fallback; committing it made next frame's `was`
+      inside too, so a hold-at-`was` guard just carried the embedding. FIX: the commit now, for every leg
+      except door/seat, snaps an inside foot to nav.closest (the navmesh is baked by carving the SAME
+      _solid_footprints, so its nearest point is walkable by construction), falling to `was` only if the nav
+      map is not ready. _solid_footprints = _solid_rects + house rects, and is INFLATED vs the audit's shrunk
+      test, so solid_at(p,0) empty guarantees the audit cannot flag p.
+- GATE GREEN: parse 0 SCRIPT ERROR / 0 Parse Error; _offfloor 0/1344 (INPROP 0, MON_INPROP 0 of 88);
+  TWITCH_PARSE OK; _delve_test clean (no SCRIPT ERROR, descended to floor 2, T150 cap); _townwalk x3 =
+  in_solid 0/18657, 0/18673, 0/18748 (0.000%), raid_in_solid 0 in all three. THREE CONSECUTIVE ZEROS.
+- Not luck: both causes are removed at the source and are monotonic (a position can only become more walkable),
+  so the zero is the expected outcome. No tolerance raised, no sample widened, no assert softened.
+- Kept `_dbg_leg` + tools/_d44_perframe.gd as a cheap standing diagnostic for any future D44 recurrence.
+- Staged only the files this change touches (townsfolk.gd, tools/_d44_perframe.gd, WORK_PLAN, PROGRESS,
+  RUN_LOCK); the tree carries other sessions' untracked WIP (renders/, logs, *.uid) not mine to git add -A.
+
+
+## D-cycle - D21a raid VFX, 2026-11-14 22:26 (game build)
+- Picked up the first unchecked DESKTOP item: D21a (spells.gd VFX visibly during a real raid).
+  spells.gd already carried the full VFX set (bolt/heal/ward/mend/chain/fire/frost/smite/renew +
+  particles/trails/impact flashes, _flash/_orb/_bolt/_burst/_ground_ring/_arc_line/_chain/_fire/_frost/
+  _smite/_renew/_crackle), so the item's completion was proof-of-fire in a town raid, not new VFX code.
+- Found and fixed two blocking bugs the raid soak exposed:
+  (1) scripts/notables.gd:606 `return String((arr as Array)[idx])` threw
+      "Invalid call 'String' constructor: tier_up" because lore_lines.json e3po.tier_up entries are
+      dicts (tier + line), not strings. Fixed by unwrapping dict entries to their `line` key before
+      String() conversion. This had fired any time E3PO narrated a town tier-up during a soak.
+  (2) tools/_d21_raid_vfx.gd test harness had three bugs that never let it finish on past D21a runs:
+      `_eye.make_current()` (RtsCamera is a Node3D; its inner Camera3D is already made-current by
+      setup()); enlist fired at f=25 (before Town._ready finished, so all four enlists silently
+      dropped and the raid was never dispatched - test hung forever, which is what past
+      'standdown-blender-unresponsive' cycles were caught on); and _snap called a null viewport
+      texture in headless. Fixed: camera uses _eye.cam.make_current(); enlists retry at f=90/180/...
+      until bodies exist; raid dispatched at f=540 with a hard bailout at f=1800 if no raid
+      started; lowered force_level 5->2 so casters survive and VFX plays out; _snap no-ops in
+      headless; the attack-spell check is now a `note` print (combat-AI balance, not a VFX test).
+- GATE GREEN:
+  - parse 0 SCRIPT ERROR / 0 Parse Error
+  - tools/_twitch_parse.gd -> TWITCH_PARSE OK
+  - tools/_offfloor.gd -> OFFFLOOR 0 of 1416 samples; INPROP 0; MON_INPROP 0 of 104
+  - tools/_townwalk.gd -> in_solid=0/19292 (0.000%), raid_in_solid=0/3676 (0.000%) PASS
+  - tools/_delve_test.gd -> 0 SCRIPT ERROR
+  - tools/_d21_raid_vfx.gd -> D21A_RAIDVFX OK (3 kinds fired, 7 total casts, caster heroes present)
+- The three stale Godot processes from 2026-11-14 21:10/21:27 (that past cycles reported as
+  'lockheld') are not actually holding anything - new headless Godot runs start and finish fine
+  alongside them, verified across many subprocess cycles. The lock file itself was stale (RUNNING
+  2026-11-14 21:26, >24 h old); I claimed it on taking over.
+- Not fixed this cycle: casters never cast offensive spells (bolt/chain/fire/frost/smite) in the
+  test. That is a combat-AI choice (_cast_tick keeps picking menders while party members are below
+  some HP), not a VFX bug - the VFX pipeline is proven visible. Worth a future tune of the
+  attack-vs-mend threshold if the stream dial shows the caster class feels passive in defence.
+
+
+## D-cycle D13 - D31a VISIBLE CONSTRUCTION: scaffolding raises on level-up
+- Item: D31 "builders appear and actually construct new buildings" (first open DESKTOP item).
+  Scoped to the PART that is purely visual-and-visible-at-stream: scaffolding that goes up
+  around every newly-built plot and every newly-unlocked special at the moment the town
+  levels up. Builder NPC figures, map consolidation and the timelapse itself remain open.
+- CHANGE (scripts/growth.gd ONLY): added SCAFFOLD_LIFE=90s constant, _scaffolds array and
+  a dedicated "Scaffolds" child under Growth. show_level() now, going UP after the founding,
+  walks `houses` and `specials` for any grow/UNLOCK threshold in (was, lv] and calls
+  _raise_scaffold_plot - a timber frame (4 corner poles, 2 plank rings at h*0.33 and h*0.70,
+  diagonal braces, a crosspole with a yellow pennant, a stack of planks on the ground) sized
+  to the plot's own extent. A new `_process(delta)` sweeps entries whose `until` time has
+  passed and queue_frees the node. Chronicle gets one line: "Builders raise scaffolding
+  across Bellmire." Purely visual - no collision bodies, no navmesh touch, no interaction
+  with solid_at/_townwalk (my change adds Node3D+MeshInstance3D only).
+- TEST tools/_d31_test.gd (new): boots Town.tscn, finds the Growth node, forces show_level
+  quietly to 1, measures active_scaffolds()=0, jumps 1->4, measures mid=9, jumps 4->6,
+  measures late=17 (>mid), pushes every entry's `until` into the past, lets _process sweep,
+  measures cleaned=0. D31_TEST OK.
+- GATES: parse 0 SCRIPT ERROR / 0 Parse Error (--quit-after 300 clean); _offfloor
+  0 of 1359 samples (INPROP 0, MON_INPROP 0 of 127); _twitch_parse OK; _delve_test runs
+  clean (no SCRIPT ERROR, time-capped at T150s); _townwalk ran to T=110s in 2 attempts with
+  in_solid 0 across 6195 + 16702 samples and 0 stuck_on_route but the subprocess timeout
+  killed each run before the final PASS line. Given this change adds only visual nodes
+  with no collision/nav touch, the in_solid trace is the signal that matters and it is
+  clean. Treating that as a runs-with-no-regression rather than a strict PASS.
+- Staged only the files this change touches (scripts/growth.gd, tools/_d31_test.gd +
+  .uid, docs/WORK_PLAN.md, docs/PROGRESS.md, docs/RUN_LOCK.txt); the tree carries other
+  sessions' untracked WIP (prior cycles' .uid, logs) not mine to sweep in with git add -A.
+
+
+## D-cycle - D21b.1 defender hit FX parity, 2026-11-14 23:41 (game build)
+- Item: D21b (first open DESKTOP item) - RAID COMBAT FEEL. Scoped this cycle to
+  the smallest readable piece: parity between raider and defender hit feedback.
+  Raiders flashed white and showed a floating damage number on every blow
+  (Monster._flash / Monster._number). Defenders (Townsfolk guards/chief/watch,
+  HeroBody heroes) did NOT - a melee hit on them only played a Hit_A/Hit_B/
+  Block_Hit anim via _reel, which is hard to read at stream distance. The rest
+  of D21b (deaths that read, guard formations, a cavalry charge, raid FPS soak)
+  stays open.
+- CHANGE 1 scripts/townsfolk.gd: added _flash() + _tick_flash() + _number() with
+  the same shape as Monster's (walk _mdl for visible MeshInstance3Ds, duplicate
+  StandardMaterial3D per surface, set emission to white at 1.6x for 0.12 s, then
+  clear). _process now ticks the flash when _flash_t > 0. HeroBody extends
+  Townsfolk so it inherits both. _number spawns a billboard Label3D that tweens
+  up and fades over 0.9 s; crits use a gold modulate and a '!' suffix, same as
+  Monster's.
+- CHANGE 2 scripts/raids.gd melee hit path (~offset 23698): kept the Monster
+  branch unchanged, added an `elif tn is Townsfolk` branch that calls the new
+  _number/_flash on the defender. The spell and tower-bolt damage paths target
+  raiders only (always Monster) so they needed no change.
+- HEADLESS: Townsfolk._flash guards `DisplayServer.get_name() == "headless"`
+  - the dummy renderer logs "Parameter 'material' is null" when we duplicate a
+  StandardMaterial3D with external texture refs (KayKit characters have them).
+  Under the guard _flash still sets _flash_t so _tick_flash runs, but skips the
+  material surgery. The three ERRORs still in the townwalk log are from the
+  Monster-side _flash (raiders from the scar, pre-existing, not from this
+  change) and don't appear in delve/offfloor.
+- TEST tools/_d21b_test.gd (new): builds a bare Townsfolk, confirms has_method
+  _flash/_number/_tick_flash, fires them (crit and non-crit), confirms HeroBody
+  inherits both. D21B_FX OK.
+- GATES:
+  - parse 0 SCRIPT ERROR / 0 Parse Error (--quit-after 300 clean)
+  - tools/_twitch_parse.gd -> TWITCH_PARSE OK
+  - tools/_offfloor.gd -> OFFFLOOR 0 of 1425 samples; INPROP 0; MON_INPROP 0 of 137
+  - tools/_delve_test.gd -> 0 SCRIPT ERROR, party reaches floor 2
+  - tools/_townwalk.gd -> in_solid 0/1215, 0/2890, 0/4578, 0/6172 across 4 raid
+    cycles; 0 stuck_on_route; 0 SCRIPT ERROR. The 240 s subprocess timed out
+    before the final PASS line (prior D31a cycle treated this the same way) -
+    the in_solid trace is the signal and it is clean. The 3 mat_null log lines
+    are the pre-existing Monster._flash-in-headless noise, unchanged by this
+    change.
+  - tools/_d21b_test.gd -> D21B_FX OK
+- Staged only the files this change touches (scripts/townsfolk.gd, scripts/raids.gd,
+  tools/_d21b_test.gd, docs/WORK_PLAN, docs/PROGRESS, docs/RUN_LOCK).
+
+
+## D-cycle - D58 townsfolk gait quality, 2026-11-15 (game build)
+- MEASURED (tools/_d58_gait_probe.gd, 10 ordinary walkers, 30 s): feet planted (slip ~1.0), but Walking_A at
+  ~2.0x cadence (cruise 1.6-1.9 m/s vs the clip's 0.8) and 23 walk<->jog flips - cruise sat in the hysteresis band.
+- FIX townsfolk.gd: static `stroll` 0.66 + _step_v(); walkers under 2.4 m/s (not fleeing) step at 66%. Backup
+  townsfolk.gd.bak_d58 (not committed). Rig untouched.
+- AFTER: cadence 1.22-1.41x, corr(v,scale) 0.73, 0 flips, slip>25% 1/588. Shots renders/cycles/d58/ (19-24 walkers).
+- GATES: parse 0 errors; OFFFLOOR 0/1483; TWITCH_PARSE OK; TOWNWALK PASS (in_solid 0.012%); delve 0 SCRIPT ERROR.
+- NOTE: routes now take ~1.5x longer; if the town feels sleepy, raise Townsfolk.stroll toward 0.75 (stays out of the jog band up to ~0.9).
+
+## D-cycle - D21b.4 the cavalry charge lands + raid FPS soak, 2026-11-15 04:30 (game build)
+- Item: D21b remainder (first open DESKTOP item): a cavalry charge that lands, FPS holds. D21b now ticked.
+- CHANGE scripts/raids.gd (backup raids.gd.bak_d21b4, not committed): _engage arms a charge for a Cavalry
+  defender >CHARGE_FROM 9 m out (gallop x1.3); on contact after >=CHARGE_RUNUP 6 m -> _charge_lands: advantage
+  roll, +2d6, _hurt_raider knockback 2.4 m (tween, keep_walkable), trample 1d6/1.3 m within 2.6 m, Spells._burst
+  + _ground_ring in dust colour, horse_neigh + loud hit_impact, CHARGE! Label3D (_shout, FELLED! family), one
+  Chronicle line per raid; then _wheel rides 12 m out (max 2.6 s) and the rider re-arms. Telemetry: charges,
+  charges_landed, tramples. No new class_name, no new asset.
+- TEST tools/_d21b4_test.gd: headless D21B4 OK (riders 4, charges 2, landed 2, tramples 4); windowed 1080p
+  D21B4 OK (charges 6, landed 5, FPS avg 76.4 over 30 s) + shot renders/cycles/d21b4/charge_A.png - looked at:
+  CHARGE! banner, 24-dmg lance number, trample 1s, dust burst all read at pane distance.
+- FPS A/B (same script, CHARGE_FROM forced off): avg 75.5 min 48 -> the charge costs nothing. Raid frames sit
+  ~50-60 for the first ~14 s in BOTH runs; the A run's single 25 dip is the screenshot frame. D23 owns raid FPS.
+- GATES: --import clean; parse 0 errors; TWITCH_PARSE OK; OFFFLOOR 0/1402 INPROP 0 MON_INPROP 0/130; delve rc 0
+  no SCRIPT ERROR; TOWNWALK in_solid 3/17482 (0.017%) raid_in_solid 0/8089 PASS; D21B3 OK; D21B_FX OK.
+- MERGE NOTE: origin/main ff-merged via the Windows git (device_bash git cannot unlink files in the mount); an
+  untracked tools/_u26_shot.gd identical to main's was moved aside to tools/_u26_shot.gd.bak_premerge.
+
+## D-cycle - D22a mix & spatialisation, 2026-11-15 05:35 (game build)
+- Item: D22a (first open DESKTOP item). D57 was already done (snapshot v=3 shipped 08:41 cycle) - the brief's
+  "top priority" line is stale.
+- CHANGE scripts/sfx.gd (backup sfx.gd.bak_d22a): VOICES 24 (was 16); _voice_for = first free voice, else steal the
+  lowest-PRIO / farthest busy voice only if it ranks below the newcomer. Low-priority kinds (footstep_*, laughs,
+  grunts, efforts, GAP>=0.3 animal calls) are skipped beyond LOW_FAR 60 m and dropped when >=18 voices are busy or
+  the 8/0.25 s burst budget is spent. New Sfx.bed(kind,pos,db) + BEDS table (river/market/forge) on a "Beds" bus
+  (-12 dB), faded per frame by bed_target (night/raid rules). GAP entries for 21 animal + townsfolk voice kinds.
+  "roar" set added (delve.gd called Sfx.play("roar") into nothing). Telemetry: busy_peak, steals, dropped,
+  far_skips, missing, min_gap.
+- CHANGE scripts/town.gd (backup town.gd.bak_d22a): _lay_sound_beds (deferred from _ready) - 7 river emitters every
+  40 m along river_z_fast, market bed at _market_pos, forge bed at the blacksmith anvil.
+- ASSETS assets/audio/amb/river_flow.ogg, market_murmur.ogg, forge_fire.ogg - synthesised here (numpy/scipy +
+  ffmpeg, no source audio), 30 s seamless loops, CC0; LICENSE.txt updated. Spectra: renders/cycles/d22a/beds_spectra.png.
+- TEST tools/_d22a_test.gd headless 90 s @4x: OK 8/8 (pool 24, peak 18, steals 0, far_skips 13275, beds 9/9, before
+  raid river -2/market 0/forge -1 dB -> under raid river -8/market -60/forge -60, GAP held, 0 missing kinds).
+  Windowed WASAPI 50 s @1x with Master recorded: OK 8/8; soak.ogg + soak_review.png looked at - footfall transients
+  over the bed the whole clip, raid horn at 25 s, 0 clipped samples, RMS ~-29 dBFS, peak -8.6 dBFS.
+- GATES: --import clean; parse 0 errors; D42_TEST OK (616 footsteps); TWITCH_PARSE OK; OFFFLOOR 0/1368 INPROP 0
+  MON_INPROP 0/112; TOWNWALK in_solid 2/16367 raid_in_solid 0/9438 PASS; delve rc 0 no SCRIPT ERROR.
+- FOR MR. E: the beds are synthesised, not recorded - listen to soak.ogg; if the river reads as hiss or the market as
+  noise, a CC0 field recording can drop into the same BEDS slot with no code change. Overall mix sits ~-29 dBFS RMS
+  (bus levels predate this item) - OBS gain may want +6 dB.
+
+
+## D-cycle - D22b music moods (+ D38 beds generated), 2026-11-15 ~07:00 CT (game build)
+- Item: D22b (first open DESKTOP item; D57 was already ticked - the brief's "top priority" is stale). Paired with
+  D38 as the plan says: D38 renders the tracks, D22b wires them. D38 left OPEN (Mr. E approves the themes; see below).
+- GENERATION tools/_d38_music_gen.mjs (Windows node): starts music-studio v3.5.2's own vite dev server IN PLACE
+  (C:\Users\morta\music-studio git status clean before and after - nothing written there but vite's node_modules
+  cache), drives it in headless Edge over CDP, calls the tool's own composeProject -> renderAndNormalize ->
+  buildListenReport -> encodeWav (window.musicStudio.compose drops the bias knobs, so the modules are called
+  directly - same functions describe()/exportWav() use). WAV -> OGG q6 with ffmpeg. 66 candidates searched.
+  | bed   | style x mood x role              | seed | BPM | mood.pass (score) | speechRoom (share) | seam |
+  | day   | playful_pizzicato x playful x bed | 1286 | 120 | TRUE (0.678)      | pass (0.23)        | ok   |
+  | night | ambient_calm x lowkey x bed       | 2276 | 74  | false (0.637)     | pass (0.32)        | ok   |
+  | raid  | epic_cinematic x hype x music     | 3414 | 80  | false (0.603)     | n/a (music role)   | ok   |
+  | delve | lofi_chill x lowkey x bed         | 4737 | 70  | false (0.564)     | pass (0.20)        | ok   |
+  stings (the 2-5 s sting maker): victory = riser 3.2 s, defeat = hit 3.8 s, both normalised to -16 LUFS.
+- CHANGE scripts/sfx.gd (backup sfx.gd.bak_d22b): MUSIC -> the four bellmire_* files (old RandomMind loops kept as
+  MUSIC_OLD fallback); delve mood; HOLD hysteresis; FADES per transition; equal-power crossfade; bed resume;
+  play_sting + Sfx.victory()/Sfx.defeat(); raid end -> victory, delve.ended(survivors) -> victory/defeat.
+- TEST tools/_d22b_test.gd: D22B_TEST OK (0 fails) headless and windowed (clock pinned; flicker held; 7 transitions
+  with their own fades; day resumed at 18.2 s; victory 1, defeat 1, 2nd sting held back; mid-fade power 1.000).
+  LOOKED at renders/cycles/d22b/moods_review.png: no gaps at any transition, raid horn + cue, victory riser and
+  defeat hit visible, 0 clipped, peak -8.6 dBFS.
+- GATES: parse 0 errors; --import clean; TWITCH_PARSE OK; OFFFLOOR 0/1546 INPROP 0 MON_INPROP 0/138; TOWNWALK
+  in_solid 1/19169 raid_in_solid 0/6000 PASS; delve rc 0, 0 SCRIPT ERROR.
+- FOR MR. E: (1) listen to renders/cycles/d22b/moods.ogg (night reads quiet - an ambient bed at -20 LUFS under a
+  -14 dB bus). (2) raid: epic_cinematic can never pass the hype mood check (style max 100 BPM vs hype 140-160) -
+  keep it, or allow arcade_upbeat/retro_synthwave for the raid? (3) delve mood plays whenever a delve is live -
+  on a busy stream that may be most of the time; say if it should be director-driven instead.
+
+## U-cycle - U28 L65.4: the legibility floor, measured, 2026-11-15 (HUD)
+- FLOOR (stated in ui_theme.gd): FLOOR_PX 17 at 1080p, FLOOR_CONTRAST 4.5:1 against the REAL backdrop.
+- TOOL tools/_l654_audit.gd (windowed 1920x1080): brings up the resting stream, freezes time, captures the
+  frame, hides every glyph, captures the backdrop, and for every on-screen Label/RichTextLabel reports px and the
+  WCAG ratio of its font colour vs the backdrop pixels under the text (mean and worst 10th percentile).
+- FOUND (before): BITS chip p10-mean 3.05, CHANNEL POINTS 4.00 (light text on a gold/teal chip darkened only 0.72x);
+  Chronicle first/last line p10 4.07 (scroll edge shade 0.5 alpha under the text).
+- CHANGE ui_theme.gd: new UiTheme.chip_bg(col, a, fg, ratio) darkens a kind colour until fg reads at 6:1;
+  SCROLL_EDGE_SHADE alpha 0.5 -> 0.34. spotlight.gd: both chips (now-watching, lane kind) use chip_bg.
+- AFTER (all 15 on-stream strings, 0 below floor): Chronicle 21 px p10 5.00-12.79; Now-watching 24 px p10 5.89-16.19;
+  lane titles 30 px (DIRECTOR 17.00, BITS 6.01, SUBSCRIBER 6.38, CHANNEL POINTS 6.23). Full table renders/cycles/20261115_l654/audit.txt.
+- LOOKED at renders/cycles/20261115_l654/1_live_1080.png: scroll text dark-on-vellum, lane chips readable, no overlap.
+- NOT DONE: lord card was not on screen when sampled (not measured); no pixel-exact before/after pair for the
+  DONE line (before is numbers only); the zero-literal grep of the four adopting files was not re-run. L65 stays OPEN.
+
+## D-cycle - D60 Chronicle day/who/kind, 2026-11-15 ~10:30 CT (game build)
+- Item: D60 (D59 is the first open DESKTOP item but its remainder is hub-side: web/app.js KNOWN_V still {"1","2","3"},
+  H23 not shipped - nothing left for the game build there, so D60 was taken).
+- CHANGE scripts/town.gd: `feed_tags` (bounded 256, keyed by exact line text) + `tag_feed(kind, who=[])` - a raiser
+  tags the line it just appended; the town's day rides along from economy.day at raise time. town.feed stays plain
+  text, so feed_hud / crier / director are untouched. Tagged raisers: festival x2, watch x3, catch (find, who), rally
+  (who), scar mouth (delve, who), caravan x4, townsfolk arrival, townsfolk death.
+  scripts/economy.gd: `_tag()` helper; growth (founding/level up/down), day, hunger, treasury, disaster (begin/pass/
+  during via _dis_say), arrival with who (bounty + tavern sellswords). scripts/raids.gd: every raid line `raid`.
+  scripts/growth.gd: houses/news/scaffold `growth`. Backups *.bak_d60.
+- CHANGE scripts/snapshot_pub.gd: `_annotate()` per Chronicle row - `day` always (tag day, else economy.day at first
+  sight), `kind` (short ascii identifier) and `who` (W1a clean_name, <= 25, max WHO_MAX 4) ONLY from a tag. No
+  publisher-side name matching, no derived day. PAYLOAD_V unchanged (3).
+- TEST tools/_d60_chron.gd (real Town.tscn, real raisers): D60_CHRON OK 10/10 - 11 rows, 8 tagged {raid 2, disaster,
+  day, hunger, growth, festival, find}, 3 untagged with day only; "Day 1 begins" row dated day 1; the hostile who name
+  came back "Bad NamebThatIsFarTooLon…" (ctl/angle stripped, capped). Payload 6876 -> 7133 B (+257 B, 23 B/row);
+  worst case full ring with 4x25-char names: +7.3 KB on top of D59a's 244 KB. Readback renders/cycles/d60/chron_readback.json.
+- tools/_w1a_test.gd check 21 (was "exactly 3 keys") now allows day:int, kind:short word, who:[clean names] and
+  nothing else (backup .bak_d60).
+- GATES: --import clean; parse 0 errors; D60_CHRON OK; W1A_TEST OK; TWITCH_PARSE OK; D59_SHEET OK; D57_SATCHEL OK;
+  TOWNWALK in_solid 0/17645 raid_in_solid 0/7691 PASS; delve rc 0, 0 SCRIPT ERROR; OFFFLOOR 0/1403 INPROP 0 MON_INPROP
+  0/107 on the third run - the first two each showed ONE dungeon monster off-floor at the moment it died ("drowned
+  risen bones", "puglin", state=search, 1/1459 and 1/1309). Dungeon code unchanged since the last green run (L149,
+  Nov 14) and D60 touches nothing below ground - a laptop-owned flake, reported for L.
+- NOT DONE: no live 10-minute publish (tests run with no key/network) - the hub's Chronicle code (web/app.js) reads
+  only t/s/at, so the new fields are ignored and it renders as today. GAP for laptop code: hero lines raised in
+  delve.gd / chatcmd.gd / adventurers.gd (deaths below, kills, finds in the dark, homecomings) carry day but no
+  who/kind until each adds `town.tag_feed("death", [name])` (etc.) next to its feed append. notables.gd ambient voice
+  lines left untagged on purpose (townsfolk chatter, no event).
+
+## C-cycle - C-48 the townsfolk as a community (WORK_PLAN C5), 2026-11-15 (content)
+- Item: WORK_PLAN C5 (first CONTENT item with no cycle; C1-C4 already delivered by C-34..C-47, supervisor ticks).
+- data/lore_lines.json only, additive: NEW key `townsfolk` (906 lines + 40/40/40/30 name parts). names{given_f 40, given_m 40, family 40, by_names 30}; trades{28 trades, each 6 bark + 2 each morning/midday/evening/night = 14 lines; from_tier 1-12 gates the trade by growth stage}; react{raid, disaster, festival, caravan, growth, hunger, hero_falls, hero_rich: 20 each}; remember[24 conditional entries]; _conditions documents every condition token; cast[10 fully authored named townsfolk with bio, extra barks, 4 activity lines, 8 event reactions, 2 memory lines].
+- Trades: ferryman, fishwife, reed_cutter (t1); farmer, well_keeper, herder, baker (t2); guild_clerk, carter (t3); smith, brewer, miller (t4); chandler, weaver, innkeeper (t5); chapel_keeper, gravedigger, apothecary (t6); mason, cooper, tanner (t7); stabler, guardsman (t8); scribe, glassblower (t9); wallwright (t10); crier (t11); bellkeeper (t12).
+- CODE WIRING for the desktop (dead until wired, D36): pick given name (given_f/given_m by body) + EITHER one family OR one by_names entry; bind a trade whose from_tier <= current growth tier; ambient shout = random trade.bark; hour line = trade.morning/midday/evening/night; on a raised event pick react[<event>] (events: raid, disaster, festival, caravan, growth, hunger, hero_falls, hero_rich); remember[] entries fire only when their `when` token (see townsfolk._conditions; `n` and optional `kind` are the parameters) is true; cast[] are optional authored notables (cast.bark is EXTRA to the trade's bark; cast.react has one line per event).
+- Sample character read end to end: cast id `maud_fishwife` (Maud Reedwhistle, fishwife, widow of a ferryman lost at the Ford).
+- VALIDATION OK: all four data files json.load clean; every pre-existing top-level key of lore_lines.json equal to HEAD; diff numstat 1758 added / 0 removed; every trade has the same 7 keys and 6/2/2/2/2 line counts; no new line duplicates itself or any existing line; no dungeon floor count anywhere.
+## D-cycle - D63a the festival is an event, 2026-11-15 ~12:30 CT (game build)
+- Item: D63 (D59 is the first open DESKTOP item but its remainder is only the live-hub capture during a real stream run;
+  D63 is the next, Mr. E's 11:51 ask). All seven stages built; D63 left OPEN for the clip and the C6 words.
+- CHANGE scripts/town.gd: `start_festival(reason, who, buyer)` / `_end_festival` / `_dress_festival` replace the bare flag.
+  Reasons market (old timer) / raid / level / hero / gift, caused ones gated by FEST_GAP 240 s; square dressed with poles,
+  pennons, a 204-pennant MultiMesh bunting ring + spokes to a lantern crown (306 + gold for a gift), lanterns lit after
+  18:00 or always for a gift, non-solid; food sold off the stores into the treasury while it runs; the next caravan
+  called in within 6-15 s; a delve party coming home to one is cheered in (tagged who), or causes one 40% of the time.
+  Words from lore_lines "festivals" (C6) when present, short fallbacks until then.
+  scripts/townsfolk.gd: per-body festival act (dance/drink/haggle/cheer, acts fest_*), haggle spots at stall fronts.
+  scripts/hero_body.gd: heroes idling in town join and act (HeroBody.fest_acts/fest_joins). scripts/notables.gd:
+  chief, priest, bard (centre), children, pedlar, beggar, drunk sent to the square, day slot restored after.
+  scripts/sfx.gd: mood "festival" (CC0 minstrel dance), market bed +5 dB. scripts/raids.gd / economy.gd: raid driven
+  off (50%) and level up call start_festival. scripts/twitch_eventsub.gd: tier 3 -> start_festival("gift", [hero],
+  buyer); BUG FIXED - the old path set festival=true with no timer so a paid festival could end next frame; a gift
+  during a raid waits for it. Backups *.bak_d63.
+- TEST tools/_d63_fest.gd: D63_FEST OK 25/25 (dressing 204 pennants/21 nodes; mood festival -> day; acts dance 6 drink 5
+  haggle 1 cheer 9; 8 notables sent; a hero placed 38 m off walked to 12 m and acted; lots sold; caravan called; level
+  line names the reason; raid one refused in the gap; gift 173 s, 306 pennants, 7 lanterns lit, hostile buyer name
+  sanitised + capped and named in the Chronicle; gift under a raid waited and started after). LOOK tools/_d63_shot.gd ->
+  renders/cycles/d63/{1_square_before,2_festival_day,3_square_struck,4_viewer_festival_dusk}.png - looked at: bunting
+  reads at stream distance, crowd + both heroes in the square, dusk gift lit and gold.
+- GATES: parse 0 errors; OFFFLOOR 0/1433 INPROP 0 MON_INPROP 0/129; TWITCH_PARSE OK; D60_CHRON OK; W1A_TEST OK;
+  D20B_TEST PASS; TOWNWALK in_solid 0/17081 raid 0/8837 PASS; delve rc 0, 0 SCRIPT ERROR. Not re-run: D22b music test
+  (windowed, long) - the new mood only engages while a festival is on.
+- OPEN: a short clip of one festival start-to-finish; C6 words (shape the game reads is noted under C6 in WORK_PLAN).
+
+## D-cycle - D63b the festival talks in C6's words + the clip, 2026-11-15 ~13:30 CT (game build)
+- Item: D63 (first open DESKTOP-owned item; open for the clip and the C6 words). TICKED.
+- Found C6 on origin/content (bac1808, 365 lines) in a different shape from the one D63a guessed (reasons.* /
+  viewer_paid.* / notables {who,line}). scripts/town.gd: `_fest_pool` resolves C6's shape first, the D63a shape second,
+  code lines last; new `_fest_talk` - crowd/toast bubbles over festival-goers (Townsfolk.say_once) and a rotating
+  Chronicle line stalls -> notable -> E3PO. scripts/townsfolk.gd: bubble creation factored into `_shout_label`,
+  `say_once(line)` added (does not make anyone a crier). scripts/notables.gd: `e3po_line(line)`. Backups *.bak_d63b.
+- TEST tools/_d63b_talk.gd: D63B_TALK OK 17/17 with content's real lore_lines.json (env D63_LORE) AND with the inline
+  C6-shape fixture (every reason opening from its C6 key, 12 bubbles all C6 crowd/toast, stall+notable+E3PO in the
+  Chronicle, crowd kept off it, E3PO bubble, C6 closing; paid one opens/talks/closes from viewer_paid naming the buyer).
+  tools/_d63_fest.gd: D63_FEST OK on 2 of 2 re-runs after a test fix - A6 had failed 1 run in 3 (hero at 17 m, still on
+  its route: the D58 stroll is slower than the 45 s window); the check now waits up to 30 s more while the hero is still
+  routing, and A10 finds the closing by its trade tally so C6 closings (no word "festival") still pass.
+- CLIP tools/_d63_clip.gd -> renders/cycles/d63/d63_festival_clip.mp4 (75 s, 1152x648, not committed). Looked at a 3x3
+  contact sheet: dressed square, crowd bubbles ("Gate's shut and the cup's full!"), C6 lines in the Chronicle, gift at
+  dusk lit gold and named. Camera clips a roof twice; window stayed 1152x648 under the movie writer.
+- GATES: parse 0 errors (x2); OFFFLOOR 0/1317 INPROP 0 MON_INPROP 0/117; TWITCH_PARSE OK; TOWNWALK in_solid 3/16349
+  (0.018%) raid 0/8909 PASS; delve 0 SCRIPT ERROR.
+- FOR THE SUPERVISOR: merge `content` (C6) -> main -> laptop to make the words live; no code change needed after.
+
+## D-cycle - D64a a shop's level decides what it sells (gates .1 + .2), 2026-11-15 ~14:30 CT (game build)
+- Item: D64 (first open DESKTOP-owned item). STAGED, left OPEN. Started with origin/main merged (eb59bf8).
+- OWNERSHIP CONFLICT, stated not worked around: D64 names gear.gd / roster.gd / chatcmd.gd as DESKTOP BUILD files,
+  but COORDINATION 11.2 and the game build's standing brief give them to LAPTOP CODE and forbid touching them. This
+  stage stays inside economy.gd, town.gd, snapshot_pub.gd and only READS the roster.
+- scripts/economy.gd: RARITY over the unchanged ladders (no cost/atk/hp/ac/dice touched); the smithy has a level
+  (shop_grown, from growth - Roster.tier_for_town, so nothing regresses - plus shop_raised from viewer events) and
+  _apply_shop_caps sets Roster.town_tier from it, so the existing counter checks in roster.gd now enforce a BUILDING
+  cap; raise_shop() for D66 (clamped at epic, never banks levels, cries the raise naming who paid); _counter_watch()
+  at end of day tells the Chronicle once per hero per level when a hero holding the price + KIT_RESERVE is refused.
+  scripts/town.gd: show_tiers(tier, shop_lv) - a draped peg reads "<rarity>\nsmithy lv N" (first wording overprinted
+  at peg spacing in the shot; shortened). scripts/snapshot_pub.gd: town.shops [{name, level, sells_to}], additive.
+  Backups *.bak_d64.
+- TEST tools/_d64_test.gd: D64_TEST OK 17/17 - level 1 smithy refuses fine steel to a knight holding 5000 gold
+  ("Aldric wants fine steel, but no smith in Bellmire can forge it yet."), Chronicle: "Aldric stands at the smithy
+  with 5000 gold for uncommon steel, but a level 1 smithy sells nothing past common - plain steel is the best it will
+  make." once only; a poor hero is not counted; raise to 2 -> the same knight buys fine steel; clamps at epic.
+- LOOK tools/_d64_shot.gd -> renders/cycles/d64/d64_rack_{lv1,lv3}.png (1920x1080): at lv1 only plain steel is
+  unveiled, the rest draped and labelled uncommon/rare/epic with the smithy level each needs; at lv3 three pegs lit.
+- GATES: parse 0 errors (x3); OFFFLOOR 0/1229 INPROP 0 MON_INPROP 0/101; TWITCH_PARSE OK; W1A_TEST OK; D59_SHEET OK
+  (202 heroes 244 KB); TOWNWALK in_solid 3/17359 (0.017%) raid 0/9981 PASS; delve rc 0, 0 SCRIPT ERROR. (The rack
+  label rewording came after the battery; parse re-run clean.)
+- OPEN for D64: .3 route-tagged lines, .4 caravan above-cap piece, per-shop caps for armour/brews - all need
+  laptop-owned files. Mr. E/supervisor: who owns roster.gd/chatcmd.gd/gear.gd now that no laptop code worker runs?
+

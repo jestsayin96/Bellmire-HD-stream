@@ -25,6 +25,11 @@ var _aura: MeshInstance3D
 func _ready() -> void:
     _rng.randomize()
     home = global_position if home == Vector3.ZERO else home
+    # L29a: a lord's phase count is DATA, not decoration, so it is set before anything that can
+    # bail out. _ready returns early when the body model will not load, and a lord that lost its
+    # mesh should still fight in phases - the fight is not the model.
+    if bool(def.get("boss", false)):
+        phase_count = 3
     var ps: PackedScene = load(String(def.get("path", "")))
     if ps == null:
         return
@@ -64,6 +69,8 @@ func _ready() -> void:
     var glow: Color = def.get("glow", Color(0, 0, 0))
     if tint != Color(1, 1, 1) or glow != Color(0, 0, 0):
         _tint(_body, tint, glow)
+    if String(def.get("particle", "")) != "":
+        _strain_motes(String(def["particle"]), glow if glow != Color(0, 0, 0) else tint)
     if String(def.get("hand", "")) != "":
         Gear.equip(_body, String(def["hand"]), "handslot.r", "weapon", float(def.get("wscale", 1.0)), float(def.get("wglow", 0.0)))
     if String(def.get("off", "")) != "":
@@ -71,7 +78,7 @@ func _ready() -> void:
     max_hp = float(def.get("boss_hp", float(def.get("hp", 1.0)) * 30.0))
     hp = max_hp
     if bool(def.get("boss", false)):
-        _trappings()
+        _trappings()            # L29a sets phase_count at the top of _ready, before any bail-out
     _label()
     Monster.voice(self, false)            # S2: it makes itself known (one voice a beat, the biggest / nearest)
 
@@ -250,13 +257,70 @@ func _trappings() -> void:
     motes.draw_pass_1 = sm
     add_child(motes)
 
+## L27b: a strained creature's particle tell - ONE small cheap emitter per
+## monster. kind -> motion: ember rises, drip falls, wisp drifts sideways,
+## spark flickers fast and short, spore hangs slow. Colour from the strain.
+func _strain_motes(kind: String, col: Color) -> void:
+    var h := float(def.get("h", 1.8))
+    var p := GPUParticles3D.new()
+    p.name = "strain_motes"
+    p.amount = 10
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+    pm.emission_box_extents = Vector3(h * 0.22, h * 0.35, h * 0.22)
+    pm.gravity = Vector3.ZERO
+    pm.color = Color(col.r, col.g, col.b, 0.85)
+    var size := 0.05
+    match kind:
+        "ember":
+            p.lifetime = 1.6
+            pm.direction = Vector3(0, 1, 0); pm.spread = 15.0
+            pm.initial_velocity_min = 0.5; pm.initial_velocity_max = 1.0
+        "drip":
+            p.lifetime = 1.2
+            pm.direction = Vector3(0, -1, 0); pm.spread = 5.0
+            pm.initial_velocity_min = 0.4; pm.initial_velocity_max = 0.9
+            pm.gravity = Vector3(0, -2.0, 0)
+        "wisp":
+            p.lifetime = 2.4
+            pm.direction = Vector3(1, 0.15, 0); pm.spread = 180.0
+            pm.initial_velocity_min = 0.15; pm.initial_velocity_max = 0.45
+            size = 0.065
+        "spark":
+            p.lifetime = 0.5
+            pm.direction = Vector3(0, 1, 0); pm.spread = 180.0
+            pm.initial_velocity_min = 1.2; pm.initial_velocity_max = 2.2
+            size = 0.035
+        _:  # "spore" and anything new: slow hang
+            p.lifetime = 3.0
+            pm.direction = Vector3(0, -0.2, 0); pm.spread = 180.0
+            pm.initial_velocity_min = 0.05; pm.initial_velocity_max = 0.2
+            size = 0.06
+    p.process_material = pm
+    var sm := SphereMesh.new()
+    sm.radius = size
+    sm.height = size * 2.0
+    sm.radial_segments = 6
+    sm.rings = 3
+    var mat := StandardMaterial3D.new()
+    mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    mat.albedo_color = col
+    mat.emission_enabled = true
+    mat.emission = col
+    mat.emission_energy_multiplier = 1.6
+    mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    sm.material = mat
+    p.draw_pass_1 = sm
+    p.position = Vector3(0, h * 0.5, 0)
+    add_child(p)
+
 ## Anything outside (Delve, raids) drives the body through _play. The body's
 ## own idle (state IDLE) waits until nobody has driven it for a moment - it used
 ## to replay "idle" every frame, so every walk and every swing a fight asked for
 ## was undone the next frame and creatures glided frozen across the floor.
 ## A one-shot (attack, cast, hit, summon, rise) owns the body until it ends; only
 ## death cuts it short.
-const ONE_SHOTS := ["attack", "cast", "hit", "summon", "rise"]
+const ONE_SHOTS := ["attack", "attack2", "cast", "hit", "summon", "rise"]
 var _ext_t := -99.0
 var _hold_until := -1.0
 func _play(key: String) -> void:
@@ -269,19 +333,77 @@ func busy() -> bool:
 
 func _play_now(key: String) -> void:
     if _ap == null:
+        if key == "hit":
+            _flinch()
         return
     var an: Dictionary = def.get("anims", {})
-    var nm := String(an.get(key, ""))
-    if nm == "" or not _ap.has_animation(nm):
+    # L26a: a second swing where the body has one (bat, wyrm), now and then
+    if key == "attack" and an.has("attack2") and _rng.randf() < 0.4:
+        key = "attack2"
+    var nm := clip_for(key)
+    if nm == "":
+        if key == "hit":
+            _flinch()          # no reaction clip: the body itself recoils
         return
     if key != "die" and _t < _hold_until and not ONE_SHOTS.has(key):
         return
     if ONE_SHOTS.has(key):
         _ap.play(nm, 0.12)
         _ap.seek(0.0, true)
-        _hold_until = _t + clampf(_ap.get_animation(nm).length * 0.9, 0.3, 2.0)
+        var ln := _ap.get_animation(nm).length
+        _hold_until = _t + clampf(ln * 0.9, 0.3, 2.0)
+        if key in ["attack", "attack2", "cast"]:
+            _swing_len = ln
     elif _ap.current_animation != nm:
         _ap.play(nm, 0.2)
+
+## ---- L26a: no creature stands frozen for want of a clip
+## when the body lacks the asked-for clip, the nearest one it does have. A missing walk
+## falls to run then idle (never nothing - that is the glide); a missing hit has no
+## stand-in clip, Monster flinches procedurally instead.
+const FALLBACK := {"run": ["walk"], "walk": ["run", "idle"], "idle": ["walk"], "cast": ["attack"],
+    "summon": ["cast", "attack"], "rise": ["idle"], "attack": ["cast"], "attack2": ["attack"],
+    "hit": [], "die": []}
+func clip_for(key: String) -> String:
+    if _ap == null:
+        return ""
+    var an: Dictionary = def.get("anims", {})
+    var keys: Array = [key]
+    keys.append_array(FALLBACK.get(key, []))
+    for k in keys:
+        var nm := String(an.get(k, ""))
+        if nm != "" and _ap.has_animation(nm):
+            return nm
+    return ""
+
+## when a swing lands: the contact point of the clip just started (about 0.42 of a
+## melee swing - the blade comes down there), so Delve applies the blow then, not on the
+## swing's first frame
+const IMPACT_FRAC := 0.42
+var _swing_len := 0.8
+func impact() -> float:
+    return clampf(_swing_len * IMPACT_FRAC / maxf(0.1, _ap.speed_scale if _ap else 1.0), 0.12, 0.6)
+
+## the body recoils (no hit clip): tipped back and squashed for a beat, then home
+var _flinch_tw: Tween
+var _base_scale := Vector3.ZERO
+var flinches := 0
+func _flinch() -> void:
+    if _body == null or not is_inside_tree():
+        return
+    flinches += 1
+    # the rest size is read fresh unless a flinch is mid-way (enrage swells the body)
+    if _flinch_tw and _flinch_tw.is_valid() and _flinch_tw.is_running():
+        _flinch_tw.kill()
+    else:
+        _base_scale = _body.scale
+    _body.scale = _base_scale
+    _body.rotation.x = 0.0
+    _flinch_tw = create_tween()
+    _flinch_tw.tween_property(_body, "rotation:x", -0.22, 0.07).set_ease(Tween.EASE_OUT)
+    _flinch_tw.parallel().tween_property(_body, "scale", _base_scale * Vector3(1.08, 0.86, 1.08), 0.07)
+    _flinch_tw.tween_property(_body, "rotation:x", 0.0, 0.22).set_trans(Tween.TRANS_BACK)
+    _flinch_tw.parallel().tween_property(_body, "scale", _base_scale, 0.22).set_trans(Tween.TRANS_BACK)
 
 func _entering() -> bool:
     return _body.position.y < -0.05
@@ -311,7 +433,11 @@ func _process(delta: float) -> void:
     if crown:
         crown.rotation.y += delta * 0.8
     if _aura:
-        var k := 0.85 + sin(_t * 1.6) * 0.15
+        # L29a: the aura breathes faster and wider the deeper into its phases a lord is, so the
+        # phase reads off the lord ITSELF - a viewer watching a pane should not have to find a
+        # bar to see that something has changed.
+        var beat := 1.6 + 0.9 * float(phase - 1)
+        var k := (0.85 + 0.12 * float(phase - 1)) + sin(_t * beat) * (0.15 + 0.05 * float(phase - 1))
         _aura.scale = Vector3(k, 1, k)
     match state:
         S.IDLE:
@@ -516,11 +642,53 @@ var _flash_t := 0.0
 var _flash_mats: Array = []
 
 ## take a hit: white flash, hit animation, a number that floats up, death at 0
+## ---------------------------------------------------------------- L29a: a lord has PHASES
+## MEASURED BEFORE BUILDING: all eight canon lords already carry a real mechanic in
+## Bestiary.LORD_WAYS (summon, nova, breath, swoop, shed, ward, venom, grudge, enrage), so the
+## "each lord gets a mechanic" half of this item was already true. What did NOT exist was any
+## notion of a PHASE - only three of the eight had a threshold that changed anything, and
+## nothing exposed a phase for a bar to show. So that is what this adds, and nothing else: no
+## new mechanics were invented on top of canon ones that already work.
+## A lord stands in phase 1 at full health, 2 below PHASE_AT[0] and 3 below PHASE_AT[1]. Each
+## step is announced by Delve and shows on the lord itself (the aura brightens and widens), so
+## it reads on stream even for a viewer who never looks at a bar.
+const PHASE_AT := [0.66, 0.33]
+var phase := 1                      # 1..3; boss_bar and Delve read this
+var phase_count := 1                # 1 for an ordinary creature, 3 for a lord
+
+## L29a: the per-phase trapping. The aura brightens and the name tag follows it, so the change
+## is visible on the lord rather than only in a number somewhere.
+func _enter_phase() -> void:
+    if _aura and _aura.material_override is StandardMaterial3D:
+        var m := _aura.material_override as StandardMaterial3D
+        var c: Color = m.albedo_color
+        m.albedo_color = Color(c.r, c.g, c.b, minf(0.85, 0.35 + 0.18 * float(phase - 1)))
+    var lb := get_node_or_null("tag")
+    if lb is Label3D:
+        (lb as Label3D).modulate = (def.get("aura", Color(1, 0.8, 0.4)) as Color).lightened(0.3 + 0.2 * float(phase - 1))
+    phase_changed.emit(self, phase)
+
+signal phase_changed(who: Monster, to: int)
+
+## which phase this much health puts a lord in
+static func phase_for(frac: float) -> int:
+    if frac <= PHASE_AT[1]:
+        return 3
+    if frac <= PHASE_AT[0]:
+        return 2
+    return 1
+
 func hurt(amount: float, crit := false) -> void:
     if state == S.DEAD:
         return
     hp -= amount
-    Sfx.at("hit", global_position, 2.0 if crit else 0.0)
+    # L29a: a lord that crosses a threshold changes phase, visibly
+    if phase_count > 1 and hp > 0.0:
+        var now := phase_for(hp / maxf(1.0, max_hp))
+        if now > phase:
+            phase = now
+            _enter_phase()
+    Sfx.at("hit", global_position, HIT_DB + (3.0 if crit else 0.0))     # S3: under the weapon's own clash / impact
     _number(amount, crit)
     _flash()
     if hp <= 0.0:
@@ -668,6 +836,13 @@ func _tick_tag(delta: float) -> void:
 ## the frame's loudest claim wins - the biggest, the nearest the camera, a death over a
 ## spawn - and then nobody speaks for VOICE_GAP, nor that same kind for KIND_GAP. A lord's
 ## arrival roar goes straight through (and holds the rest off for a moment).
+## S3 (measured: file RMS against the music as heard, ~20 m off): the voices are not one
+## loudness - the dragon roars 10 dB hotter than a skeleton rattles - so each is trimmed to sit
+## near the music; a lord's roar is ROAR_DB over its own trimmed level
+const VOICE_TRIM := {"dragon_roar": -6.0, "demon_growl": -3.0, "wolf_growl": -3.0, "skeleton_rattle": 4.0, "spider_skitter": 4.0, "insect_buzz": 2.0}
+const ROAR_DB := 4.0
+const DEATH_DB := 2.0
+const HIT_DB := -4.0                 # the generic thud a blow lands with, under its weapon sound
 const VOICE_GAP := 900               # ms between any two creature voices
 const KIND_GAP := 3500               # ms before the same kind of voice again
 static var _vq: Array = []           # [score, kind, pos, db] claims this frame
@@ -685,7 +860,7 @@ static func voice(m: Monster, dying: bool) -> void:
     var cam := m.get_viewport().get_camera_3d() if m.get_viewport() else null
     var far := cam.global_position.distance_to(m.global_position) if cam else 30.0
     var score := m._height() * 2.0 - far * 0.08 + (3.0 if dying else 0.0) + (10.0 if bool(m.def.get("boss", false)) else 0.0)
-    _vq.append([score, kind, m.global_position + Vector3(0, m._height() * 0.6, 0), 2.0 if dying else 0.0])
+    _vq.append([score, kind, m.global_position + Vector3(0, m._height() * 0.6, 0), float(VOICE_TRIM.get(kind, 0.0)) + (DEATH_DB if dying else 0.0)])
 
 static func _voice_flush() -> void:
     var fr := Engine.get_process_frames()
@@ -717,4 +892,4 @@ static func roar(m: Monster) -> void:
     _v_any = now + 1500
     _v_kind[kind] = now
     voiced[kind] = int(voiced.get(kind, 0)) + 1
-    Sfx.at(kind, m.global_position + Vector3(0, m._height() * 0.6, 0), 6.0)
+    Sfx.at(kind, m.global_position + Vector3(0, m._height() * 0.6, 0), ROAR_DB + float(VOICE_TRIM.get(kind, 0.0)))

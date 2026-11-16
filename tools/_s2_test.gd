@@ -1,7 +1,7 @@
 extends SceneTree
 ## S2: the laptop's sound wiring uses only REGISTERED kinds (Sfx.SETS), and the events sound.
 ##  1. static: every kind named in the wired files (Sfx.at / Sfx.play / _snd string literals),
-##     every table (Bestiary.VOICES / FAMILY_VOICE, Delve.SPELL_SND / AMB_KINDS, the hero
+##     every table (Bestiary.VOICES / FAMILY_VOICE, Spells.SOUND, Delve.AMB_KINDS, the hero
 ##     voices, ChatCmd.ui_kinds' answers) and every creature's resolved voice - each ordinary
 ##     creature, every lord, every unique - is a key of Sfx.SETS. No creature is voiceless.
 ##  2. live: a real town (Sfx running) and a real delve on a lord floor with a knight, a ranger,
@@ -49,7 +49,7 @@ func _static() -> void:
 	for pair in Bestiary.VOICES:
 		tables.append(String(pair[1]))
 	tables.append_array(Bestiary.FAMILY_VOICE.values())
-	tables.append_array(Delve.SPELL_SND.values())
+	tables.append_array(Spells.SOUND.values())
 	tables.append_array(Delve.AMB_KINDS)
 	for v in ["male", "female"]:
 		for w in ["hurt", "death", "effort"]:
@@ -142,8 +142,8 @@ func _live_checks() -> void:
 	_ok(ds.has("hit_impact") or ds.has("sword_clash"), "a blow that lands is heard")
 	_ok(ds.has("arrow_shot") or int(ds.get("bow_draw", 0)) > 0, "the ranger looses")
 	var spells := 0
-	for k in ["lightning", "fireball", "ice_shard", "heal", "shield"]:
-		spells += int(ds.get(k, 0))
+	for k in ["lightning", "fireball", "ice_shard", "heal", "shield", "buff", "summon"]:
+		spells += int(played.get(k, 0))          # Spells.cast sounds them (S1); the delve no longer layers a copy (S3)
 	_ok(spells > 0, "a spell is heard (%d)" % spells)
 	var vox := 0
 	for k in ds:

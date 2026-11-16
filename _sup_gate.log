@@ -1,0 +1,104 @@
+
+===== parse =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+nt scope.
+   at: GDScript::reload (res://scripts/town.gd:5281)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "v" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://scripts/town.gd:5281)
+SCRIPT ERROR: Parse Error: Could not find type "Townsfolk" in the current scope.
+   at: GDScript::reload (res://scripts/town.gd:5304)
+SCRIPT ERROR: Parse Error: Identifier "Economy" not declared in the current scope.
+   at: GDScript::reload (res://scripts/town.gd:5330)
+SCRIPT ERROR: Parse Error: Identifier "Economy" not declared in the current scope.
+   at: GDScript::reload (res://scripts/town.gd:5332)
+SCRIPT ERROR: Parse Error: Identifier "Townsfolk" not declared in the current scope.
+   at: GDScript::reload (res://scripts/town.gd:5374)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "v" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://scripts/town.gd:5374)
+SCRIPT ERROR: Parse Error: Could not find type "Townsfolk" in the current scope.
+   at: GDScript::reload (res://scripts/town.gd:5442)
+SCRIPT ERROR: Parse Error: Identifier "Rig" not declared in the current scope.
+   at: GDScript::reload (res://scripts/town.gd:5461)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "vid" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://scripts/town.gd:5466)
+ERROR: Failed to load script "res://scripts/town.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+
+===== offfloor =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Could not find type "Delve" in the current scope.
+   at: GDScript::reload (res://tools/_offfloor.gd:5)
+SCRIPT ERROR: Parse Error: Could not find type "Roster" in the current scope.
+   at: GDScript::reload (res://tools/_offfloor.gd:6)
+SCRIPT ERROR: Parse Error: Identifier "Roster" not declared in the current scope.
+   at: GDScript::reload (res://tools/_offfloor.gd:14)
+SCRIPT ERROR: Parse Error: Identifier "Delve" not declared in the current scope.
+   at: GDScript::reload (res://tools/_offfloor.gd:22)
+SCRIPT ERROR: Parse Error: Could not find type "Monster" in the current scope.
+   at: GDScript::reload (res://tools/_offfloor.gd:51)
+SCRIPT ERROR: Parse Error: Could not find type "Monster" in the current scope.
+   at: GDScript::reload (res://tools/_offfloor.gd:55)
+ERROR: Failed to load script "res://tools/_offfloor.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+
+===== twitch =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Identifier "TwitchChat" not declared in the current scope.
+   at: GDScript::reload (res://tools/_twitch_parse.gd:19)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "tc" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://tools/_twitch_parse.gd:19)
+ERROR: Failed to load script "res://tools/_twitch_parse.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+
+===== townwalk =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+e (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+SCRIPT ERROR: Unable to iterate on object of type 'Nil'.
+   at: _process (res://tools/_townwalk.gd:138)
+   GDScript backtrace (most recent call first):
+       [0] _process (res://tools/_townwalk.gd:138)
+
+===== delve =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Could not find type "Delve" in the current scope.
+   at: GDScript::reload (res://tools/_delve_test.gd:2)
+SCRIPT ERROR: Parse Error: Could not find type "Roster" in the current scope.
+   at: GDScript::reload (res://tools/_delve_test.gd:3)
+SCRIPT ERROR: Parse Error: Identifier "Roster" not declared in the current scope.
+   at: GDScript::reload (res://tools/_delve_test.gd:6)
+SCRIPT ERROR: Parse Error: Identifier "Delve" not declared in the current scope.
+   at: GDScript::reload (res://tools/_delve_test.gd:16)
+ERROR: Failed to load script "res://tools/_delve_test.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+
+===== GATE_DONE =====

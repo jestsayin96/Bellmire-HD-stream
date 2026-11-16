@@ -171,6 +171,18 @@ func _ground(p: Vector3) -> float:
 		return Delve.DELVE_Y
 	return float(town.call("height_at", p.x, p.z))
 
+## L28b: below ground the camera sees the floor's own air (its fog, grade and light -
+## DungeonHD.env_at), not the town's blue sky; back in the open, the town's again (null)
+var _air_t := 0.0
+func _air_tick(real: float) -> void:
+	_air_t -= real
+	if _air_t > 0.0:
+		return
+	_air_t = 0.25
+	var e := DungeonHD.env_at(get_tree(), focus)
+	if cam.environment != e:
+		cam.environment = e
+
 func _process(delta: float) -> void:
 	if _chat == null:
 		return                  # setup() has not run yet (the town is still building)
@@ -180,6 +192,7 @@ func _process(delta: float) -> void:
 	_dock_hud()
 	_titles_tick(real)
 	_titles_follow()
+	_air_tick(real)
 	if not _chat.visible:
 		var mv := Vector2.ZERO
 		if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP): mv.y -= 1

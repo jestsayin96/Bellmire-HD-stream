@@ -26,3 +26,7 @@ Lore="*res://scripts/lore.gd"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+; D24: kill the grain - TAA resolves temporally dithered SSAO + volumetric fog;
+; MSAA 2x cleans geometric edges. Forward+ only (see [application] features).
+anti_aliasing/quality/use_taa=true
+anti_aliasing/quality/msaa_3d=1

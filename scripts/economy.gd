@@ -20,17 +20,74 @@ var _beat := {}            # townsfolk -> seconds to next produce
 var _chatter := 15.0
 signal changed
 
+# ---- D34 natural disasters -------------------------------------------------
+# The words (begin / during / pass + alt variants) are the content writer's,
+# in data/lore_lines.json "disasters"; the COST of each is a mechanic and lives
+# here, charged against the town's own stock, treasury and renown. Disasters are
+# OCCASIONAL and gated on town size (a four-hut Crossing is never struck by a
+# volcano), one at a time, and they leave a mark the stream can read.
+const DIS_MIN_LEVEL := 2          # nothing before the town is more than a founding
+const DIS_MIN_DAY := 6            # and not in the first days
+const DIS_DAYS := 2.5             # how long one lingers, in in-game days
+const DIS_COOL_DAYS := 7.0        # mean quiet span between disasters, jittered
+const DIS_DURING_GAP := 24.0      # seconds between "during" Chronicle lines
+# frac_* are fractions of CURRENT stock lost at onset (scale with the town, never
+# over-draw); gold is a flat treasury hit, renown a flat standing hit. workk damps
+# production while it lasts; no_growth halts hiring/settling; no_cast / trade_frozen
+# are exposed for spells / trade to honour. on_pass_gold is a rebuild cost (<0) or a
+# windfall (>0) applied when it ends.
+const DIS_SPECS := {
+    "volcano":    {"food": 0.45, "gold": 120, "renown": 1, "workk": 0.6, "on_pass_gold": -60},
+    "fire":       {"wood": 0.6, "gear": 0.5, "gold": 90, "workk": 0.5, "on_pass_gold": -80},
+    "drought":    {"food": 0.6, "renown": 1, "workk": 0.5},
+    "famine":     {"food": 0.5, "renown": 2, "no_growth": true},
+    "sickness":   {"renown": 2, "workk": 0.35, "trade_frozen": true, "no_growth": true},
+    "hurricane":  {"wood": 0.5, "food": 0.3, "gold": 80, "workk": 0.6, "on_pass_gold": -60},
+    "tornado":    {"wood": 0.45, "stone": 0.3, "gold": 70, "workk": 0.7},
+    "earthquake": {"stone": 0.55, "wood": 0.3, "gold": 110, "renown": 1, "workk": 0.6, "on_pass_gold": -70},
+    "meteor":     {"food": 0.3, "wood": 0.3, "workk": 0.7, "on_pass_gold": 260},
+    "scarstorm":  {"renown": 1, "workk": 0.6, "no_cast": true},
+    "flood":      {"food": 0.35, "wood": 0.3, "gold": 60, "workk": 0.6, "trade_frozen": true},
+    "blight":     {"food": 0.7, "potion": 0.4, "no_growth": true},
+    "coldsnap":   {"food": 0.4, "wood": 0.4, "workk": 0.3, "no_growth": true},
+}
+var _dis_lore := {}
+var _dis_lore_loaded := false
+var _dis_active := ""
+var _dis_t := 0.0
+var _dis_during_t := 0.0
+var _dis_cool := DIS_COOL_DAYS * DAY_SECONDS   # a quiet spell before the first
+var dis_work_k := 1.0             # production multiplier while a disaster lasts
+var _dis_no_growth := false
+var _dis_no_cast := false
+var _dis_trade_frozen := false
+var disasters_survived := 0
+
 ## ---- town level (old sim.gd). Earned by holding people and being worth
 ## talking about; gold left out on purpose. Checked once a day (90 s), and a
 ## town can fall back down. Raids are gated on it (from level 3).
 const DAY_SECONDS := 90.0
+## D32: TWELVE earned tiers. The town was levelling far too fast - it FOUNDED at
+## level 3 of 6 (score ~153) and auto-climbed to 5 on settlers alone. Names and
+## crier lines are the content writer's (data/lore_lines.json "growth_tiers").
+## The curve: founding sits at a HAMLET (tier 2); the first handful of tiers come
+## from settlers filling the housing (the pop-driven ceiling is ~pop_cap*3, here
+## ~315); every tier above that is renown-gated, so reaching a CITY is a long
+## delving grind, not a free gift. town_name keeps the lowercase grammatical form
+## that slots into the feed lines; the proper names live in the crier line.
 const TOWN_LEVELS := [
-    {"at": 0,   "name": "a hamlet"},
-    {"at": 46,  "name": "a village"},
-    {"at": 104, "name": "a market town"},
-    {"at": 190, "name": "a walled town"},
-    {"at": 310, "name": "a free city"},
-    {"at": 470, "name": "the seat of the valley"},
+    {"at": 0,    "name": "a crossing"},
+    {"at": 120,  "name": "a hamlet"},
+    {"at": 175,  "name": "a guild post"},
+    {"at": 230,  "name": "a village"},
+    {"at": 290,  "name": "a market-day town"},
+    {"at": 360,  "name": "a chapel town"},
+    {"at": 440,  "name": "a crafters' row"},
+    {"at": 540,  "name": "a garrison town"},
+    {"at": 660,  "name": "a market town"},
+    {"at": 800,  "name": "a walled heart"},
+    {"at": 960,  "name": "a walled town"},
+    {"at": 1140, "name": "a city in all but charter"},
 ]
 var renown := 0
 var day := 1
@@ -43,7 +100,10 @@ func is_night() -> bool:
     var h := hour()
     return h < 6.0 or h > 18.5
 var town_level := 1
-var town_name := "a hamlet"
+var town_name := "a crossing"
+# D32: the content writer's crier lines for reaching a tier (growth_tiers.tiers)
+var _gt_lore: Array = []
+var _gt_loaded := false
 var _day_t := DAY_SECONDS
 var _founded := false
 
@@ -75,6 +135,29 @@ func level_for(score: int) -> int:
             lv = i + 1
     return lv
 
+## D32: load the content writer's growth-tier crier lines once, lazily.
+func _ensure_growth_lore() -> void:
+    if _gt_loaded:
+        return
+    _gt_loaded = true
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return
+    var data: Variant = JSON.parse_string(f.get_as_text())
+    f.close()
+    if data is Dictionary and (data as Dictionary).has("growth_tiers"):
+        var gt: Variant = (data as Dictionary)["growth_tiers"]
+        if gt is Dictionary and (gt as Dictionary).has("tiers"):
+            _gt_lore = (gt as Dictionary)["tiers"]
+
+## the crier's line on reaching town level `level` (1-based), or "" if none.
+func _crier_for(level: int) -> String:
+    _ensure_growth_lore()
+    var i := level - 1
+    if i >= 0 and i < _gt_lore.size():
+        return String((_gt_lore[i] as Dictionary).get("crier", ""))
+    return ""
+
 func check_town_level(founding := false) -> int:
     var want := level_for(town_score())
     if want == town_level and not founding:
@@ -84,20 +167,39 @@ func check_town_level(founding := false) -> int:
     town_name = String(TOWN_LEVELS[town_level - 1]["name"])
     # WHAT THE TOWN CAN MAKE (old sim.sync_unlocks): the smiths forge up to the
     # town's own tier - one static for every roll, the viewers' and the band's
-    Roster.town_tier = Roster.tier_for_town(town_level)
-    if town.has_method("show_tiers"):
-        town.call("show_tiers", Roster.town_tier)
+    # D64: that ceiling is now a property of the SMITHY (a building with a level), not of the
+    # town at large. Growth still grants the smithy what the town can host; D66's viewer poll
+    # adds levels on top through raise_shop(). The counter honours Roster.town_tier, which is
+    # set from the smithy's level and nothing else.
+    shop_grown["smithy"] = Roster.tier_for_town(town_level)
+    _apply_shop_caps()
     # D3: Bellmire's buildings follow its level (scripts/growth.gd)
     if town.has_method("show_level"):
         town.call("show_level", town_level, founding)
     var feed: Array = town.get("feed")
     if founding:
         feed.append("%d souls live here." % population())
-        feed.append("Bellmire stands as %s.  (town level %d)" % [town_name, town_level])
+        var cf := _crier_for(town_level)
+        if cf != "":
+            feed.append(cf)
+        else:
+            feed.append("Bellmire stands as %s.  (town level %d)" % [town_name, town_level])
+        _tag("growth")
     elif want > was:
-        feed.append("Bellmire grows into %s.  (town level %d)" % [town_name, town_level])
+        # D32: cry the content writer's line for each tier crossed on the way up
+        for l in range(was + 1, town_level + 1):
+            var c := _crier_for(l)
+            if c != "":
+                feed.append(c)
+            else:
+                feed.append("Bellmire grows into %s.  (town level %d)" % [town_name, town_level])
+            _tag("growth")
+        # D63.6: the town growing a level is a reason for a festival
+        if town.has_method("start_festival"):
+            town.call_deferred("start_festival", "level")
     else:
         feed.append("Bellmire falls back to %s.  (town level %d)" % [town_name, town_level])
+        _tag("growth")
     return want - was
 
 func price(g: String) -> float:
@@ -206,7 +308,7 @@ func _process(delta: float) -> void:
             # old villager: _produce runs in the WORK state, which is the
             # daytime (the old clock: night is before 6:00 and after 18:30)
             if not is_night():
-                produce(String(f.role), work_roll())
+                produce(String(f.role), work_roll() * dis_work_k)
                 any = true
                 if last_work_d == 20 and _work_big_t <= 0.0 and f.person_name != "":
                     _work_big_t = 150.0
@@ -224,6 +326,7 @@ func _process(delta: float) -> void:
         day += 1
         _end_of_day()
     growth(delta)
+    _disaster_tick(delta)
     _work_big_t -= delta
     _chatter -= delta
     if _chatter <= 0.0:
@@ -263,6 +366,11 @@ func next_level_at() -> int:
         return -1
     return int(TOWN_LEVELS[town_level]["at"])
 
+## D60: tag the Chronicle line just raised (town.tag_feed) - kind, and the heroes it is about
+func _tag(kind: String, who: Array = []) -> void:
+    if town and town.has_method("tag_feed"):
+        town.call("tag_feed", kind, who)
+
 func _end_of_day() -> void:
     var pop := population()
     var feed: Array = town.get("feed")
@@ -271,6 +379,7 @@ func _end_of_day() -> void:
         stock["food"] = 0.0
         starving += 1
         feed.append("Day %d  —  the granary is empty. Hunger bites (%d days)." % [day, starving])
+        _tag("hunger")
     else:
         starving = 0
     for g in GOODS:
@@ -281,10 +390,13 @@ func _end_of_day() -> void:
     if treasury < 0:
         treasury = 0
         feed.append("The coffer is empty — wages go unpaid.")
+        _tag("treasury")
     check_town_level()
+    _counter_watch()
     var nxt := next_level_at()
     var standing := ("standing %d/%d" % [town_score(), nxt]) if nxt > 0 else ("standing %d, at its height" % town_score())
     feed.append("Day %d begins  —  %d souls, %d gold, %s (lvl %d, %s)" % [day, pop, treasury, town_name, town_level, standing])
+    _tag("day")
 
 ## --------------------------------------------------- growth and hardship
 ## old town._peril_pass timers: rebuild 22 s (Raids), chief spends 40 s,
@@ -305,11 +417,13 @@ func growth(delta: float) -> void:
     _hire_t -= delta
     if _hire_t <= 0.0:
         _hire_t = 40.0
-        _chief_spends()
+        if not _dis_no_growth:
+            _chief_spends()
     _settler_t -= delta
     if _settler_t <= 0.0:
         _settler_t = randf_range(45.0, 80.0)
-        _settlers()
+        if not _dis_no_growth:
+            _settlers()
     _hunger_t -= delta
     if _hunger_t <= 0.0:
         _hunger_t = 20.0
@@ -327,6 +441,7 @@ func _settlers() -> void:
         var b := adv.make("", true)
         var h := adv.npcs.get_hero(b.user_id)
         (town.get("feed") as Array).append("%s the %s arrives at the tavern, drawn by tales of the deep." % [b.person_name, h["class"]])
+        _tag("arrival", [b.person_name])
         renown -= 1
         return
     town.call("arrive", TRADES[randi() % TRADES.size()], "%s settles in Bellmire, looking for work.")
@@ -349,6 +464,7 @@ func _chief_spends() -> void:
         var b := adv.make("" if adv.has_healer() else "sage", true)
         var h := adv.npcs.get_hero(b.user_id)
         feed.append("A bounty is posted — %s the %s answers it." % [b.person_name, h["class"]])
+        _tag("arrival", [b.person_name])
         return
     # commission gear when the rack is bare
     if stock.get("gear", 0.0) < 4.0 and treasury >= 150:
@@ -381,3 +497,204 @@ func _hunger() -> void:
     if hp <= 0.0:
         renown = max(0, renown - 2)
         town.call("bury", v, "%s has starved." % v.person_name)
+
+
+## --------------------------------------------------- D34 natural disasters
+func _ensure_dis_lore() -> void:
+    if _dis_lore_loaded:
+        return
+    _dis_lore_loaded = true
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return
+    var data: Variant = JSON.parse_string(f.get_as_text())
+    f.close()
+    if data is Dictionary and (data as Dictionary).has("disasters"):
+        _dis_lore = (data as Dictionary)["disasters"]
+
+func disaster_active() -> String:
+    return _dis_active
+
+func casting_blocked() -> bool:
+    return _dis_no_cast
+
+func trade_blocked() -> bool:
+    return _dis_trade_frozen
+
+## the canonical line, or - 6 times in 10 - a random alt so a second disaster of
+## the same kind never reads word for word like the first
+func _dis_phrase(key: String, alt_key: String) -> String:
+    var d: Dictionary = _dis_lore.get(_dis_active, {})
+    if d.is_empty():
+        return ""
+    if alt_key != "" and d.has(alt_key):
+        var alt: Array = d[alt_key]
+        if alt.size() > 0 and randf() < 0.6:
+            return String(alt[randi() % alt.size()])
+    return String(d.get(key, ""))
+
+func _dis_say(line: String) -> void:
+    if line == "" or town == null:
+        return
+    var feed = town.get("feed")
+    if feed != null and (feed.is_empty() or String(feed.back()) != line):
+        feed.append(line)
+        _tag("disaster")
+
+## begin a named disaster: charge its onset cost, raise its flags, cry the line
+func trigger_disaster(name: String) -> bool:
+    if _dis_active != "" or not DIS_SPECS.has(name):
+        return false
+    _ensure_dis_lore()
+    _dis_active = name
+    _dis_t = DIS_DAYS * DAY_SECONDS
+    _dis_during_t = DIS_DURING_GAP
+    var spec: Dictionary = DIS_SPECS[name]
+    for g in GOODS:
+        if spec.has(g):
+            stock[g] = maxf(0.0, stock.get(g, 0.0) * (1.0 - float(spec[g])))
+    if spec.has("gold"):
+        treasury = max(0, treasury - int(spec["gold"]))
+    if spec.has("renown"):
+        renown = max(0, renown - int(spec["renown"]))
+    dis_work_k = float(spec.get("workk", 1.0))
+    _dis_no_growth = bool(spec.get("no_growth", false))
+    _dis_no_cast = bool(spec.get("no_cast", false))
+    _dis_trade_frozen = bool(spec.get("trade_frozen", false))
+    _dis_say(_dis_phrase("begin", "begin_alt"))
+    changed.emit()
+    return true
+
+func _end_disaster() -> void:
+    if _dis_active == "":
+        return
+    var spec: Dictionary = DIS_SPECS.get(_dis_active, {})
+    _dis_say(_dis_phrase("pass", "pass_alt"))
+    var og: int = int(spec.get("on_pass_gold", 0))
+    if og != 0:
+        treasury = max(0, treasury + og)
+    disasters_survived += 1
+    _dis_active = ""
+    _dis_t = 0.0
+    dis_work_k = 1.0
+    _dis_no_growth = false
+    _dis_no_cast = false
+    _dis_trade_frozen = false
+    _dis_cool = randf_range(DIS_COOL_DAYS * 0.7, DIS_COOL_DAYS * 1.3) * DAY_SECONDS
+    changed.emit()
+
+func _disaster_tick(delta: float) -> void:
+    if _dis_active != "":
+        _dis_t -= delta
+        _dis_during_t -= delta
+        if _dis_during_t <= 0.0:
+            _dis_during_t = DIS_DURING_GAP
+            var d: Dictionary = _dis_lore.get(_dis_active, {})
+            var during: Array = d.get("during", [])
+            if during.size() > 0:
+                _dis_say(String(during[randi() % during.size()]))
+        if _dis_t <= 0.0:
+            _end_disaster()
+        return
+    _dis_cool -= delta
+    if _dis_cool <= 0.0:
+        _dis_cool = randf_range(DIS_COOL_DAYS * 0.7, DIS_COOL_DAYS * 1.3) * DAY_SECONDS
+        if town_level >= DIS_MIN_LEVEL and day >= DIS_MIN_DAY:
+            _maybe_disaster()
+
+func _maybe_disaster() -> void:
+    _ensure_dis_lore()
+    var pool: Array = DIS_SPECS.keys()
+    if not pool.is_empty():
+        trigger_disaster(String(pool[randi() % pool.size()]))
+
+## ---------------------------------------------- D64: a shop's level decides what it sells
+## Mr. E's ruling (Nov 15 11:46): "a shop that is level 1 isn't going to sell epic or legendary
+## equipment". Tier availability is a property of the BUILDING, not the buyer.
+##   - RARITY names the existing gear ladders (gear.gd/roster.gd WEAPONS + ARMOUR, read only - no
+##     cost, atk, hp, ac or dice value changes). Index = tier: 0 is the unarmed/unarmoured
+##     fallback, 1-4 are what a smith can make, 5 (scarforged / scarwoven mail) stays FOUND-only.
+##   - A shop's level IS the highest tier it will sell (level 1 sells common and nothing else).
+##   - shop_grown is what the town's growth grants the building (today's curve, unchanged, so
+##     nothing regresses); shop_raised is what viewers paid for (D66 calls raise_shop). The
+##     level is the sum, clamped to what a smith can make at all.
+const RARITY := ["none", "common", "uncommon", "rare", "epic", "legendary"]
+const SHOP_MAX_LEVEL := 4
+const SHOP_NAMES := {"smithy": "the smithy"}
+var shop_grown := {"smithy": 1}
+var shop_raised := {"smithy": 0}
+var _counter_told := {}           # "user_id|level" -> true: the counter says it once per level
+var counter_refusals := 0         # tests: times a richer hero was turned away by the cap
+
+static func rarity_of(tier: int) -> String:
+    return String(RARITY[clampi(tier, 0, RARITY.size() - 1)])
+
+func shop_level(key := "smithy") -> int:
+    return clampi(int(shop_grown.get(key, 1)) + int(shop_raised.get(key, 0)), 1, SHOP_MAX_LEVEL)
+
+## the best tier this shop will ever put on the counter
+func shop_cap(key := "smithy") -> int:
+    return shop_level(key)
+
+func shop_sells_to(key := "smithy") -> String:
+    return rarity_of(shop_cap(key))
+
+func _apply_shop_caps() -> void:
+    Roster.town_tier = shop_cap("smithy")
+    if town and town.has_method("show_tiers"):
+        town.call("show_tiers", Roster.town_tier, shop_level("smithy"))
+
+## D66's entry point: an event raises a named shop. Returns the levels actually gained.
+func raise_shop(key: String, by := 1, who := "") -> int:
+    if not SHOP_NAMES.has(key):
+        return 0
+    var was := shop_level(key)
+    shop_raised[key] = int(shop_raised.get(key, 0)) + maxi(by, 0)
+    var now := shop_level(key)
+    shop_raised[key] = now - int(shop_grown.get(key, 1))   # never bank levels past the top
+    if now == was:
+        return 0
+    _apply_shop_caps()
+    if town:
+        var feed: Array = town.get("feed")
+        var nm := String(SHOP_NAMES[key])
+        var by_who := (" - paid for by %s" % who) if who != "" else ""
+        feed.append("%s is raised to level %d: it will now sell %s goods%s." % [nm.capitalize(), now, rarity_of(shop_cap(key)), by_who])
+        _tag("shop", [who] if who != "" else [])
+    return now - was
+
+## The counter, once a day: a hero who has the gold for the next piece but stands at a shop
+## that is not allowed to sell it is told so plainly in the Chronicle, instead of the smith
+## silently handing over nothing. Read-only on the roster (laptop-owned).
+func _counter_watch() -> void:
+    if town == null:
+        return
+    var r = town.get("roster")
+    if r == null:
+        return
+    var feed: Array = town.get("feed")
+    var cap := shop_cap("smithy")
+    var lv := shop_level("smithy")
+    for uid in (r.heroes as Dictionary).keys():
+        var h: Dictionary = r.heroes[uid]
+        if not bool(h.get("alive", true)):
+            continue
+        var w := int(h.get("weapon", 0))
+        var nxt := w + 1
+        if nxt >= Roster.WEAPONS.size() or bool((Roster.WEAPONS[nxt] as Dictionary).get("found", false)):
+            continue
+        if nxt <= cap:
+            continue                  # the shop may sell it; whether they buy is the forge's business
+        var price: int = r.cost_for(h, int((Roster.WEAPONS[nxt] as Dictionary)["cost"]))
+        if int(h.get("gold", 0)) < price + Roster.KIT_RESERVE:
+            continue                  # not a richer hero - the cap is not what stops them
+        var key := "%s|%d" % [uid, lv]
+        if _counter_told.has(key):
+            continue
+        _counter_told[key] = true
+        counter_refusals += 1
+        var best: Dictionary = Roster.WEAPONS[cap]
+        var nm := String(h.get("name", "A hero"))
+        feed.append("%s stands at the smithy with %d gold for %s steel, but a level %d smithy sells nothing past %s - %s is the best it will make." \
+            % [nm, int(h.get("gold", 0)), rarity_of(nxt), lv, rarity_of(cap), String(best["name"])])
+        _tag("shop", [nm])

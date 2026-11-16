@@ -1,0 +1,4557 @@
+{
+ "ok": true,
+ "n": 454,
+ "errors": [],
+ "by_family": {
+  "ring": 50,
+  "amulet": 46,
+  "cloak": 44,
+  "boots": 43,
+  "gloves": 47,
+  "hat": 122,
+  "banner": 102
+ },
+ "index": {
+  "nightwatch_ring": {
+   "name": "Ring of the Night Watch",
+   "fam": "ring",
+   "cost": 380,
+   "variant": 4,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 870
+  },
+  "ferryman_ring": {
+   "name": "Ferryman's Ring",
+   "fam": "ring",
+   "cost": 420,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 674
+  },
+  "hearth_amulet": {
+   "name": "Hearthstone Amulet",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1060
+  },
+  "lamplight_amulet": {
+   "name": "Lamplighter's Amulet",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 931
+  },
+  "guild_cloak": {
+   "name": "Guild Cloak",
+   "fam": "cloak",
+   "cost": 260,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 685
+  },
+  "mire_cloak": {
+   "name": "Mire-walker's Cloak",
+   "fam": "cloak",
+   "cost": 240,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 125
+  },
+  "road_boots": {
+   "name": "Boots of the West Road",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 756
+  },
+  "quiet_boots": {
+   "name": "Soft Boots",
+   "fam": "boots",
+   "cost": 200,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 130
+  },
+  "smith_gloves": {
+   "name": "Smith's Gauntlets",
+   "fam": "gloves",
+   "cost": 280,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 306
+  },
+  "archer_gloves": {
+   "name": "Fletcher's Gloves",
+   "fam": "gloves",
+   "cost": 260,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 270
+  },
+  "scar_ring": {
+   "name": "Scarglass Ring",
+   "fam": "ring",
+   "cost": 400,
+   "variant": 2,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 724
+  },
+  "mason_ring": {
+   "name": "Mason's Band",
+   "fam": "ring",
+   "cost": 380,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 502
+  },
+  "oath_ring": {
+   "name": "Oathkeeper's Ring",
+   "fam": "ring",
+   "cost": 420,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 274
+  },
+  "grain_amulet": {
+   "name": "Grainward Charm",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 4,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 923
+  },
+  "ward_pendant": {
+   "name": "Wardstone Pendant",
+   "fam": "amulet",
+   "cost": 320,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 964
+  },
+  "ferry_locket": {
+   "name": "Ferrywife's Locket",
+   "fam": "amulet",
+   "cost": 340,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 827
+  },
+  "watch_mantle": {
+   "name": "Watchman's Mantle",
+   "fam": "cloak",
+   "cost": 280,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 475
+  },
+  "lamp_cloak": {
+   "name": "Lamplighter's Cloak",
+   "fam": "cloak",
+   "cost": 260,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 361
+  },
+  "scarweave_cloak": {
+   "name": "Scarweave Cloak",
+   "fam": "cloak",
+   "cost": 320,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 685
+  },
+  "miller_clogs": {
+   "name": "Miller's Clogs",
+   "fam": "boots",
+   "cost": 210,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "ford_boots": {
+   "name": "Ford-wader's Boots",
+   "fam": "boots",
+   "cost": 230,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 112
+  },
+  "scout_boots": {
+   "name": "Scout's Boots",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 130
+  },
+  "mason_mitts": {
+   "name": "Mason's Mitts",
+   "fam": "gloves",
+   "cost": 280,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 226
+  },
+  "pick_gloves": {
+   "name": "Pickman's Gloves",
+   "fam": "gloves",
+   "cost": 290,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 270
+  },
+  "bowyer_wraps": {
+   "name": "Bowyer's Wraps",
+   "fam": "gloves",
+   "cost": 250,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 514
+  },
+  "hollow_ring": {
+   "name": "Hollowbone Ring",
+   "fam": "ring",
+   "cost": 400,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 274
+  },
+  "market_ring": {
+   "name": "Market Seal",
+   "fam": "ring",
+   "cost": 240,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 274
+  },
+  "bell_amulet": {
+   "name": "Clapperless Charm",
+   "fam": "amulet",
+   "cost": 340,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 964
+  },
+  "scribe_amulet": {
+   "name": "Guild Scribe's Seal",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 964
+  },
+  "raid_cloak": {
+   "name": "Raider's Trophy Cloak",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 685
+  },
+  "deep_cloak": {
+   "name": "Deepwarden's Cloak",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 125
+  },
+  "gate_boots": {
+   "name": "Gatewarden's Boots",
+   "fam": "boots",
+   "cost": 230,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 756
+  },
+  "fen_boots": {
+   "name": "Fen-strider's Boots",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 220
+  },
+  "forge_grips": {
+   "name": "Forgemaster's Grips",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 510
+  },
+  "tanner_gloves": {
+   "name": "Tanner's Gloves",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 370
+  },
+  "e3po_signet": {
+   "name": "E3PO's Signet",
+   "fam": "ring",
+   "cost": 420,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 274
+  },
+  "barracks_key": {
+   "name": "Barracks Key",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1060
+  },
+  "bellrope_wraps": {
+   "name": "Bellringer's Wraps",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 514
+  },
+  "drover_boots": {
+   "name": "Drover's Boots",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "chapel_amulet": {
+   "name": "Chapel Candle Amulet",
+   "fam": "amulet",
+   "cost": 320,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 1343
+  },
+  "sedge_ring": {
+   "name": "Sedge's Toll-Ring",
+   "fam": "ring",
+   "cost": 300,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 484
+  },
+  "harl_cloak": {
+   "name": "Red Harl's Cloak",
+   "fam": "cloak",
+   "cost": 360,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 685
+  },
+  "ashfoot_boots": {
+   "name": "Ashfoot's Boots",
+   "fam": "boots",
+   "cost": 280,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "weasel_gloves": {
+   "name": "The Weasel's Gloves",
+   "fam": "gloves",
+   "cost": 270,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "hit",
+   "colour": null,
+   "faces": 226
+  },
+  "carp_charm": {
+   "name": "Grinning Carp Charm",
+   "fam": "amulet",
+   "cost": 260,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 931
+  },
+  "scarward_ring": {
+   "name": "Scarward Ring",
+   "fam": "ring",
+   "cost": 440,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 550
+  },
+  "mourner_cloak": {
+   "name": "Mourner's Grey",
+   "fam": "cloak",
+   "cost": 250,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 125
+  },
+  "mill_mitts": {
+   "name": "Millhand's Mitts",
+   "fam": "gloves",
+   "cost": 200,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 86
+  },
+  "gate_whistle": {
+   "name": "Gatehouse Whistle",
+   "fam": "amulet",
+   "cost": 230,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 1343
+  },
+  "commander_mantle": {
+   "name": "Commander's Field Mantle",
+   "fam": "cloak",
+   "cost": 480,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 667
+  },
+  "tally_ring": {
+   "name": "Tallykeeper's Ring",
+   "fam": "ring",
+   "cost": 210,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 274
+  },
+  "thaw_ring": {
+   "name": "Ring of the Thaw",
+   "fam": "ring",
+   "cost": 340,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 484
+  },
+  "blight_charm": {
+   "name": "Blightward Charm",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1027
+  },
+  "bucketline_gloves": {
+   "name": "Bucket-line Gloves",
+   "fam": "gloves",
+   "cost": 260,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 270
+  },
+  "barracks_cloak": {
+   "name": "Barracks Watch-cloak",
+   "fam": "cloak",
+   "cost": 440,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 667
+  },
+  "crater_ring": {
+   "name": "Crater-glass Ring",
+   "fam": "ring",
+   "cost": 520,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "saves",
+   "colour": null,
+   "faces": 868
+  },
+  "drover_spurs": {
+   "name": "Drover's Spurs",
+   "fam": "boots",
+   "cost": 300,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "clapper_ring": {
+   "name": "Clapperless Ring",
+   "fam": "ring",
+   "cost": 460,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "saves",
+   "colour": null,
+   "faces": 772
+  },
+  "architect_ring": {
+   "name": "Architect's Ring",
+   "fam": "ring",
+   "cost": 500,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 274
+  },
+  "toll_ring": {
+   "name": "Toll Ring",
+   "fam": "ring",
+   "cost": 240,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 630
+  },
+  "chitin_ring": {
+   "name": "Brood-iron Ring",
+   "fam": "ring",
+   "cost": 430,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 550
+  },
+  "flaskcount_amulet": {
+   "name": "Flask-counter's Amulet",
+   "fam": "amulet",
+   "cost": 340,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 835
+  },
+  "doorkeep_amulet": {
+   "name": "Doorkeeper's Amulet",
+   "fam": "amulet",
+   "cost": 350,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 931
+  },
+  "thawbell_amulet": {
+   "name": "Thaw-bell Amulet",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 827
+  },
+  "mourncoil_amulet": {
+   "name": "Mourncoil Scale",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 931
+  },
+  "chronicle_cloak": {
+   "name": "Chronicler's Cloak",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 685
+  },
+  "gravewyrm_cloak": {
+   "name": "Gravewyrm Hide Cloak",
+   "fam": "cloak",
+   "cost": 480,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 357
+  },
+  "ossuary_cloak": {
+   "name": "Ossuary Mantle",
+   "fam": "cloak",
+   "cost": 440,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 667
+  },
+  "bucketline_cloak": {
+   "name": "Bucket-line Cloak",
+   "fam": "cloak",
+   "cost": 260,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 685
+  },
+  "tollgate_boots": {
+   "name": "Toll-gate Boots",
+   "fam": "boots",
+   "cost": 280,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 220
+  },
+  "nightwing_boots": {
+   "name": "Nightwing Boots",
+   "fam": "boots",
+   "cost": 300,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 220
+  },
+  "chapel_clogs": {
+   "name": "Chapel Clogs",
+   "fam": "boots",
+   "cost": 200,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 112
+  },
+  "craterglass_boots": {
+   "name": "Craterglass Boots",
+   "fam": "boots",
+   "cost": 290,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 756
+  },
+  "bellringer_gloves": {
+   "name": "Bell-ringer's Gloves",
+   "fam": "gloves",
+   "cost": 250,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 370
+  },
+  "duchess_gloves": {
+   "name": "Pale Duchess's Gloves",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 4,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 654
+  },
+  "physic_gloves": {
+   "name": "Apothecary's Gloves",
+   "fam": "gloves",
+   "cost": 220,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 86
+  },
+  "rattling_gauntlets": {
+   "name": "Rattling Gauntlets",
+   "fam": "gloves",
+   "cost": 280,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "hit",
+   "colour": null,
+   "faces": 306
+  },
+  "mortar_gloves": {
+   "name": "Mortarman's Gloves",
+   "fam": "gloves",
+   "cost": 230,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 86
+  },
+  "lampwright_ring": {
+   "name": "Lampwright's Ring",
+   "fam": "ring",
+   "cost": 330,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 262
+  },
+  "measure_amulet": {
+   "name": "Amulet of the Measure",
+   "fam": "amulet",
+   "cost": 410,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1027
+  },
+  "scarglass_ring": {
+   "name": "Scarglass Ring",
+   "fam": "ring",
+   "cost": 460,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 772
+  },
+  "crier_cloak": {
+   "name": "Crier's Cloak",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 475
+  },
+  "fordwarden_boots": {
+   "name": "Fordwarden Boots",
+   "fam": "boots",
+   "cost": 350,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "speed",
+   "colour": null,
+   "faces": 328
+  },
+  "quarry_gloves": {
+   "name": "Quarryman's Gloves",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 370
+  },
+  "host_amulet": {
+   "name": "Rattling Host Amulet",
+   "fam": "amulet",
+   "cost": 430,
+   "variant": 0,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1060
+  },
+  "tollkeep_ring": {
+   "name": "Tollkeep's Ring",
+   "fam": "ring",
+   "cost": 390,
+   "variant": 4,
+   "metal": "silver",
+   "stat": "hit",
+   "colour": null,
+   "faces": 870
+  },
+  "lampfast_ring": {
+   "name": "Lampfast Ring",
+   "fam": "ring",
+   "cost": 340,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 262
+  },
+  "chalkline_gloves": {
+   "name": "Chalkline Gloves",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 3,
+   "metal": "gold",
+   "stat": "hit",
+   "colour": null,
+   "faces": 270
+  },
+  "stairhold_boots": {
+   "name": "Stairhold Boots",
+   "fam": "boots",
+   "cost": 420,
+   "variant": 0,
+   "metal": "gold",
+   "stat": "speed",
+   "colour": null,
+   "faces": 436
+  },
+  "secondflask_amulet": {
+   "name": "Second Flask Amulet",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 931
+  },
+  "rollkeeper_ring": {
+   "name": "Roll-keeper's Ring",
+   "fam": "ring",
+   "cost": 410,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 502
+  },
+  "backstair_cloak": {
+   "name": "Backstair Cloak",
+   "fam": "cloak",
+   "cost": 450,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 667
+  },
+  "pitwalk_boots": {
+   "name": "Pitwalker's Boots",
+   "fam": "boots",
+   "cost": 380,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "saves",
+   "colour": null,
+   "faces": 328
+  },
+  "mender_wraps": {
+   "name": "Mender's Wraps",
+   "fam": "gloves",
+   "cost": 330,
+   "variant": 4,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 654
+  },
+  "deeplamp_amulet": {
+   "name": "Deep-lamp Amulet",
+   "fam": "amulet",
+   "cost": 470,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "saves",
+   "colour": null,
+   "faces": 1027
+  },
+  "warhorn_mantle": {
+   "name": "Warhorn Mantle",
+   "fam": "cloak",
+   "cost": 500,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 667
+  },
+  "tithe_ring": {
+   "name": "Tithe Ring",
+   "fam": "ring",
+   "cost": 340,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 630
+  },
+  "cartwright_ring": {
+   "name": "Cartwright's Ring",
+   "fam": "ring",
+   "cost": 290,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 262
+  },
+  "lastcoin_ring": {
+   "name": "Last Coin Ring",
+   "fam": "ring",
+   "cost": 460,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 274
+  },
+  "watchfire_ring": {
+   "name": "Watchfire Ring",
+   "fam": "ring",
+   "cost": 400,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 626
+  },
+  "oathwrong_ring": {
+   "name": "Wrong-hand Ring",
+   "fam": "ring",
+   "cost": 510,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 274
+  },
+  "ninthbell_amulet": {
+   "name": "Ninth Bell Amulet",
+   "fam": "amulet",
+   "cost": 420,
+   "variant": 0,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1060
+  },
+  "saltline_amulet": {
+   "name": "Saltline Amulet",
+   "fam": "amulet",
+   "cost": 310,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 835
+  },
+  "kindling_amulet": {
+   "name": "Kindling Amulet",
+   "fam": "amulet",
+   "cost": 280,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 835
+  },
+  "grainward_amulet": {
+   "name": "Grainward Amulet",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 931
+  },
+  "fogrun_cloak": {
+   "name": "Fog-run Cloak",
+   "fam": "cloak",
+   "cost": 330,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 165
+  },
+  "sparewall_cloak": {
+   "name": "Spare Wall Cloak",
+   "fam": "cloak",
+   "cost": 470,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 667
+  },
+  "wakeward_cloak": {
+   "name": "Wake-ward Cloak",
+   "fam": "cloak",
+   "cost": 360,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 361
+  },
+  "mudplank_boots": {
+   "name": "Mudplank Boots",
+   "fam": "boots",
+   "cost": 300,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "firstlight_boots": {
+   "name": "First Light Boots",
+   "fam": "boots",
+   "cost": 340,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "speed",
+   "colour": null,
+   "faces": 972
+  },
+  "longcount_boots": {
+   "name": "Long Count Boots",
+   "fam": "boots",
+   "cost": 390,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 328
+  },
+  "ropeburn_gloves": {
+   "name": "Rope-burn Gloves",
+   "fam": "gloves",
+   "cost": 250,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 514
+  },
+  "coldforge_mitts": {
+   "name": "Cold-forge Mitts",
+   "fam": "gloves",
+   "cost": 310,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 226
+  },
+  "splintwrap_gloves": {
+   "name": "Splint-wrap Gloves",
+   "fam": "gloves",
+   "cost": 230,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 514
+  },
+  "bellfounder_ring": {
+   "name": "Bellfounder's Ring",
+   "fam": "ring",
+   "cost": 330,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 274
+  },
+  "quarryman_ring": {
+   "name": "Quarryman's Ring",
+   "fam": "ring",
+   "cost": 270,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 274
+  },
+  "pilgrim_ring": {
+   "name": "Pilgrim's Ring",
+   "fam": "ring",
+   "cost": 300,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 262
+  },
+  "ferrybell_amulet": {
+   "name": "Ferrybell Amulet",
+   "fam": "amulet",
+   "cost": 350,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 835
+  },
+  "votive_amulet": {
+   "name": "Votive Amulet",
+   "fam": "amulet",
+   "cost": 290,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 964
+  },
+  "weighstone_amulet": {
+   "name": "Weighstone Amulet",
+   "fam": "amulet",
+   "cost": 310,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 827
+  },
+  "thatcher_cloak": {
+   "name": "Thatcher's Cloak",
+   "fam": "cloak",
+   "cost": 280,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 361
+  },
+  "crane_cloak": {
+   "name": "Cranesman's Cloak",
+   "fam": "cloak",
+   "cost": 440,
+   "variant": 3,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 877
+  },
+  "pilgrim_cloak": {
+   "name": "Pilgrim's Cloak",
+   "fam": "cloak",
+   "cost": 320,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 361
+  },
+  "towpath_boots": {
+   "name": "Towpath Boots",
+   "fam": "boots",
+   "cost": 310,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "pavers_boots": {
+   "name": "Paver's Boots",
+   "fam": "boots",
+   "cost": 360,
+   "variant": 4,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 346
+  },
+  "ferrystep_boots": {
+   "name": "Ferrystep Boots",
+   "fam": "boots",
+   "cost": 280,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 112
+  },
+  "glazier_gloves": {
+   "name": "Glazier's Gloves",
+   "fam": "gloves",
+   "cost": 290,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "hit",
+   "colour": null,
+   "faces": 306
+  },
+  "ropewalk_gloves": {
+   "name": "Ropewalk Gloves",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 306
+  },
+  "rivet_mitts": {
+   "name": "Rivet Mitts",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 226
+  },
+  "beeswax_gloves": {
+   "name": "Beeswax Gloves",
+   "fam": "gloves",
+   "cost": 210,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 370
+  },
+  "cooper_ring": {
+   "name": "Cooper's Ring",
+   "fam": "ring",
+   "cost": 360,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 274
+  },
+  "orchard_ring": {
+   "name": "Orchard Ring",
+   "fam": "ring",
+   "cost": 340,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 484
+  },
+  "reeve_ring": {
+   "name": "Reeve's Signet",
+   "fam": "ring",
+   "cost": 420,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 274
+  },
+  "collier_ring": {
+   "name": "Collier's Band",
+   "fam": "ring",
+   "cost": 320,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 262
+  },
+  "netmender_ring": {
+   "name": "Netmender's Ring",
+   "fam": "ring",
+   "cost": 300,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 274
+  },
+  "wellhead_ring": {
+   "name": "Wellhead Ring",
+   "fam": "ring",
+   "cost": 380,
+   "variant": 4,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 870
+  },
+  "sawyer_amulet": {
+   "name": "Sawyer's Token",
+   "fam": "amulet",
+   "cost": 340,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 827
+  },
+  "shepherd_charm": {
+   "name": "Shepherd's Charm",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 964
+  },
+  "ostler_amulet": {
+   "name": "Ostler's Amulet",
+   "fam": "amulet",
+   "cost": 320,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 827
+  },
+  "chandler_amulet": {
+   "name": "Chandler's Amulet",
+   "fam": "amulet",
+   "cost": 280,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 1343
+  },
+  "threshing_amulet": {
+   "name": "Threshing Charm",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 4,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 923
+  },
+  "hedgeward_cloak": {
+   "name": "Hedgeward's Cloak",
+   "fam": "cloak",
+   "cost": 260,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 165
+  },
+  "shingler_cloak": {
+   "name": "Shingler's Cloak",
+   "fam": "cloak",
+   "cost": 240,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 125
+  },
+  "winterwatch_cloak": {
+   "name": "Winterwatch Cloak",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 165
+  },
+  "orchard_cloak": {
+   "name": "Orchardman's Cloak",
+   "fam": "cloak",
+   "cost": 220,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 685
+  },
+  "saltboiler_cloak": {
+   "name": "Saltboiler's Cloak",
+   "fam": "cloak",
+   "cost": 280,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 685
+  },
+  "carter_boots": {
+   "name": "Carter's Boots",
+   "fam": "boots",
+   "cost": 240,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 220
+  },
+  "millrace_boots": {
+   "name": "Millrace Boots",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 112
+  },
+  "hayward_boots": {
+   "name": "Hayward's Boots",
+   "fam": "boots",
+   "cost": 200,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 130
+  },
+  "tinker_boots": {
+   "name": "Tinker's Boots",
+   "fam": "boots",
+   "cost": 260,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 112
+  },
+  "kennel_boots": {
+   "name": "Kennelman's Boots",
+   "fam": "boots",
+   "cost": 230,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 130
+  },
+  "plaster_gloves": {
+   "name": "Plasterer's Gloves",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 130
+  },
+  "wheelwright_gloves": {
+   "name": "Wheelwright's Gloves",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 4,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 654
+  },
+  "miner_grips": {
+   "name": "Miner's Grips",
+   "fam": "gloves",
+   "cost": 280,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 226
+  },
+  "baker_mitts": {
+   "name": "Baker's Mitts",
+   "fam": "gloves",
+   "cost": 200,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 86
+  },
+  "thresher_gloves": {
+   "name": "Thresher's Gloves",
+   "fam": "gloves",
+   "cost": 260,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 654
+  },
+  "tanner_ring": {
+   "name": "Tanner's Ring",
+   "fam": "ring",
+   "cost": 300,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 386
+  },
+  "fletcher_ring": {
+   "name": "Fletcher's Thumb-ring",
+   "fam": "ring",
+   "cost": 340,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 630
+  },
+  "lockkeep_ring": {
+   "name": "Lockkeeper's Ring",
+   "fam": "ring",
+   "cost": 400,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "hp",
+   "colour": null,
+   "faces": 274
+  },
+  "sexton_ring": {
+   "name": "Sexton's Ring",
+   "fam": "ring",
+   "cost": 440,
+   "variant": 2,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 772
+  },
+  "fuller_amulet": {
+   "name": "Fuller's Token",
+   "fam": "amulet",
+   "cost": 280,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 931
+  },
+  "skep_amulet": {
+   "name": "Skepward's Charm",
+   "fam": "amulet",
+   "cost": 320,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 827
+  },
+  "farrier_amulet": {
+   "name": "Farrier's Nail",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 1027
+  },
+  "potter_amulet": {
+   "name": "Potter's Thumbmark",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 827
+  },
+  "tanner_cloak": {
+   "name": "Tanner's Apron-cloak",
+   "fam": "cloak",
+   "cost": 260,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 125
+  },
+  "weaver_cloak": {
+   "name": "Weaver's Long Cloak",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 165
+  },
+  "sexton_cloak": {
+   "name": "Sexton's Black",
+   "fam": "cloak",
+   "cost": 280,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 165
+  },
+  "lockkeep_cloak": {
+   "name": "Lockkeeper's Oilcloth",
+   "fam": "cloak",
+   "cost": 240,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 685
+  },
+  "bowyer_cloak": {
+   "name": "Bowyer's Shoulder-cloak",
+   "fam": "cloak",
+   "cost": 320,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 475
+  },
+  "tanyard_boots": {
+   "name": "Tanyard Boots",
+   "fam": "boots",
+   "cost": 240,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 130
+  },
+  "lockkeep_waders": {
+   "name": "Lockkeeper's Waders",
+   "fam": "boots",
+   "cost": 260,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 220
+  },
+  "kiln_boots": {
+   "name": "Potter's Kiln Boots",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 130
+  },
+  "hive_boots": {
+   "name": "Skepward's Soft Boots",
+   "fam": "boots",
+   "cost": 280,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 756
+  },
+  "gravepath_boots": {
+   "name": "Sexton's Hobnails",
+   "fam": "boots",
+   "cost": 300,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 112
+  },
+  "currier_gloves": {
+   "name": "Currier's Gloves",
+   "fam": "gloves",
+   "cost": 260,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 510
+  },
+  "fletcher_tabs": {
+   "name": "Fletcher's Tabs",
+   "fam": "gloves",
+   "cost": 230,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 86
+  },
+  "farrier_mitts": {
+   "name": "Farrier's Mitts",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 226
+  },
+  "fuller_grips": {
+   "name": "Fuller's Grips",
+   "fam": "gloves",
+   "cost": 210,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 514
+  },
+  "lockkeep_gloves": {
+   "name": "Lockkeeper's Gloves",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 306
+  },
+  "hive_gloves": {
+   "name": "Skepward's Gloves",
+   "fam": "gloves",
+   "cost": 250,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 86
+  },
+  "maltster_ring": {
+   "name": "Maltster's Ring",
+   "fam": "ring",
+   "cost": 300,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 484
+  },
+  "cutler_ring": {
+   "name": "Cutler's Ring",
+   "fam": "ring",
+   "cost": 430,
+   "variant": 0,
+   "metal": "silver",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 550
+  },
+  "spurrier_ring": {
+   "name": "Spurrier's Ring",
+   "fam": "ring",
+   "cost": 280,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 484
+  },
+  "lorimer_ring": {
+   "name": "Lorimer's Ring",
+   "fam": "ring",
+   "cost": 260,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 484
+  },
+  "pewterer_ring": {
+   "name": "Pewterer's Ring",
+   "fam": "ring",
+   "cost": 240,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 484
+  },
+  "nailer_ring": {
+   "name": "Nailer's Ring",
+   "fam": "ring",
+   "cost": 220,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 630
+  },
+  "bridgeward_ring": {
+   "name": "Bridgeward's Ring",
+   "fam": "ring",
+   "cost": 460,
+   "variant": 3,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 674
+  },
+  "beadle_ring": {
+   "name": "Beadle's Ring",
+   "fam": "ring",
+   "cost": 350,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 822
+  },
+  "pinder_ring": {
+   "name": "Pinder's Ring",
+   "fam": "ring",
+   "cost": 230,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 630
+  },
+  "limner_ring": {
+   "name": "Limner's Ring",
+   "fam": "ring",
+   "cost": 320,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 274
+  },
+  "brewster_amulet": {
+   "name": "Brewster's Charm",
+   "fam": "amulet",
+   "cost": 260,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1343
+  },
+  "taverner_amulet": {
+   "name": "Taverner's Token",
+   "fam": "amulet",
+   "cost": 300,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 1343
+  },
+  "horner_amulet": {
+   "name": "Horner's Pendant",
+   "fam": "amulet",
+   "cost": 240,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 964
+  },
+  "chapman_amulet": {
+   "name": "Chapman's Charm",
+   "fam": "amulet",
+   "cost": 280,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 964
+  },
+  "falconer_amulet": {
+   "name": "Falconer's Vervel",
+   "fam": "amulet",
+   "cost": 440,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "hit",
+   "colour": null,
+   "faces": 1439
+  },
+  "weirkeep_amulet": {
+   "name": "Weir-keeper's Charm",
+   "fam": "amulet",
+   "cost": 390,
+   "variant": 2,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 1439
+  },
+  "sluice_amulet": {
+   "name": "Sluicekeeper's Amulet",
+   "fam": "amulet",
+   "cost": 330,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 931
+  },
+  "millwright_amulet": {
+   "name": "Millwright's Amulet",
+   "fam": "amulet",
+   "cost": 410,
+   "variant": 0,
+   "metal": "gold",
+   "stat": "hp",
+   "colour": null,
+   "faces": 1060
+  },
+  "gaoler_amulet": {
+   "name": "Gaoler's Keyring",
+   "fam": "amulet",
+   "cost": 360,
+   "variant": 2,
+   "metal": "silver",
+   "stat": "ac",
+   "colour": null,
+   "faces": 1439
+  },
+  "boatwright_amulet": {
+   "name": "Boatwright's Charm",
+   "fam": "amulet",
+   "cost": 350,
+   "variant": 1,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 931
+  },
+  "butcher_cloak": {
+   "name": "Butcher's Oilcloth",
+   "fam": "cloak",
+   "cost": 240,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 125
+  },
+  "limeburner_cloak": {
+   "name": "Limeburner's Mantle",
+   "fam": "cloak",
+   "cost": 300,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 475
+  },
+  "tiler_cloak": {
+   "name": "Tiler's Shoulder-cloak",
+   "fam": "cloak",
+   "cost": 260,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 165
+  },
+  "osier_cloak": {
+   "name": "Osier-cutter's Cloak",
+   "fam": "cloak",
+   "cost": 230,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 361
+  },
+  "turbary_cloak": {
+   "name": "Peat-cutter's Cloak",
+   "fam": "cloak",
+   "cost": 250,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 685
+  },
+  "woodward_cloak": {
+   "name": "Woodward's Green",
+   "fam": "cloak",
+   "cost": 420,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 877
+  },
+  "raftsman_cloak": {
+   "name": "Raftsman's Cloak",
+   "fam": "cloak",
+   "cost": 280,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 685
+  },
+  "lighterman_cloak": {
+   "name": "Lighterman's Mantle",
+   "fam": "cloak",
+   "cost": 310,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 475
+  },
+  "constable_cloak": {
+   "name": "Constable's Cloak",
+   "fam": "cloak",
+   "cost": 480,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 667
+  },
+  "hurdler_cloak": {
+   "name": "Hurdler's Cloak",
+   "fam": "cloak",
+   "cost": 220,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 361
+  },
+  "clogger_boots": {
+   "name": "Clogger's Clogs",
+   "fam": "boots",
+   "cost": 210,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 112
+  },
+  "cordwainer_boots": {
+   "name": "Cordwainer's Boots",
+   "fam": "boots",
+   "cost": 400,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "speed",
+   "colour": null,
+   "faces": 328
+  },
+  "eeler_boots": {
+   "name": "Eeler's Waders",
+   "fam": "boots",
+   "cost": 260,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 112
+  },
+  "reedcutter_boots": {
+   "name": "Reedcutter's Boots",
+   "fam": "boots",
+   "cost": 240,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 112
+  },
+  "brickmaker_boots": {
+   "name": "Brickmaker's Boots",
+   "fam": "boots",
+   "cost": 220,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 112
+  },
+  "dauber_boots": {
+   "name": "Dauber's Boots",
+   "fam": "boots",
+   "cost": 200,
+   "variant": 4,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 130
+  },
+  "warrener_boots": {
+   "name": "Warrener's Boots",
+   "fam": "boots",
+   "cost": 290,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "speed",
+   "colour": null,
+   "faces": 220
+  },
+  "bolter_boots": {
+   "name": "Bolter's Boots",
+   "fam": "boots",
+   "cost": 230,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 112
+  },
+  "creeler_boots": {
+   "name": "Creeler's Boots",
+   "fam": "boots",
+   "cost": 250,
+   "variant": 0,
+   "metal": "iron",
+   "stat": "ac",
+   "colour": null,
+   "faces": 112
+  },
+  "oarmaker_boots": {
+   "name": "Oar-maker's Boots",
+   "fam": "boots",
+   "cost": 270,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": "hit",
+   "colour": null,
+   "faces": 130
+  },
+  "armourer_gloves": {
+   "name": "Armourer's Gauntlets",
+   "fam": "gloves",
+   "cost": 320,
+   "variant": 0,
+   "metal": "gold",
+   "stat": "ac",
+   "colour": null,
+   "faces": 306
+  },
+  "chainsmith_gloves": {
+   "name": "Chainsmith's Mitts",
+   "fam": "gloves",
+   "cost": 300,
+   "variant": 1,
+   "metal": "gold",
+   "stat": "dmg",
+   "colour": null,
+   "faces": 226
+  },
+  "joiner_gloves": {
+   "name": "Joiner's Gloves",
+   "fam": "gloves",
+   "cost": 230,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "hit",
+   "colour": null,
+   "faces": 130
+  },
+  "bodger_gloves": {
+   "name": "Bodger's Gloves",
+   "fam": "gloves",
+   "cost": 210,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 86
+  },
+  "saddler_gloves": {
+   "name": "Saddler's Gloves",
+   "fam": "gloves",
+   "cost": 260,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "saves",
+   "colour": null,
+   "faces": 226
+  },
+  "quarreller_gloves": {
+   "name": "Quarreller's Tabs",
+   "fam": "gloves",
+   "cost": 280,
+   "variant": 3,
+   "metal": "silver",
+   "stat": "hit",
+   "colour": null,
+   "faces": 270
+  },
+  "soaper_gloves": {
+   "name": "Lye-boiler's Gloves",
+   "fam": "gloves",
+   "cost": 240,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": "hp",
+   "colour": null,
+   "faces": 370
+  },
+  "carder_gloves": {
+   "name": "Carder's Gloves",
+   "fam": "gloves",
+   "cost": 200,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 130
+  },
+  "spinner_gloves": {
+   "name": "Spinner's Gloves",
+   "fam": "gloves",
+   "cost": 205,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 130
+  },
+  "retter_gloves": {
+   "name": "Retter's Gloves",
+   "fam": "gloves",
+   "cost": 215,
+   "variant": 2,
+   "metal": "iron",
+   "stat": "saves",
+   "colour": null,
+   "faces": 370
+  },
+  "wide_hat": {
+   "name": "Wide-brimmed Hat",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "4a3a2a",
+   "faces": 254
+  },
+  "feather_cap": {
+   "name": "Feathered Cap",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a2a2a",
+   "faces": 394
+  },
+  "straw_hat": {
+   "name": "Straw Hat",
+   "fam": "hat",
+   "cost": 30,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d6b860",
+   "faces": 254
+  },
+  "crown_of_ash": {
+   "name": "Ash-wood Circlet",
+   "fam": "hat",
+   "cost": 150,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "b8a888",
+   "faces": 367
+  },
+  "banner_blue": {
+   "name": "Keep Banner (blue)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2a4a9a",
+   "faces": 45
+  },
+  "banner_red": {
+   "name": "Market Banner (red)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a2a2a",
+   "faces": 29
+  },
+  "banner_yellow": {
+   "name": "Craft Banner (yellow)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c8a028",
+   "faces": 37
+  },
+  "banner_green": {
+   "name": "Homes Banner (green)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2a7a3a",
+   "faces": 264
+  },
+  "guild_hood": {
+   "name": "Guild Hood",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a6a6e",
+   "faces": 334
+  },
+  "mire_hood": {
+   "name": "Mire Hood",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2e3a2c",
+   "faces": 334
+  },
+  "watch_helm": {
+   "name": "Watchman's Kettle-Helm",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 5,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "8a8a92",
+   "faces": 416
+  },
+  "miller_cap": {
+   "name": "Miller's Cap",
+   "fam": "hat",
+   "cost": 40,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d8cba0",
+   "faces": 394
+  },
+  "bell_coif": {
+   "name": "Bellringer's Coif",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "b0a070",
+   "faces": 394
+  },
+  "ford_circlet": {
+   "name": "Ford Circlet",
+   "fam": "hat",
+   "cost": 130,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "c8b86a",
+   "faces": 360
+  },
+  "banner_temple": {
+   "name": "Temple Banner (white)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "e8e4da",
+   "faces": 28
+  },
+  "banner_garrison": {
+   "name": "Garrison Banner (steel)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a7a8a",
+   "faces": 39
+  },
+  "banner_mill": {
+   "name": "Mill Banner (wheat)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d6b84a",
+   "faces": 36
+  },
+  "banner_ford": {
+   "name": "Ford Banner (river)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2a6a8a",
+   "faces": 264
+  },
+  "banner_guild": {
+   "name": "Guild Banner (grey)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a6a6e",
+   "faces": 39
+  },
+  "banner_scar": {
+   "name": "Scar Banner (violet)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "5a2a8a",
+   "faces": 36
+  },
+  "banner_watch": {
+   "name": "Watch Banner (black)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "1a1a1e",
+   "faces": 42
+  },
+  "banner_apothecary": {
+   "name": "Apothecary Banner (green)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a8a3a",
+   "faces": 47
+  },
+  "banner_memorial": {
+   "name": "Memorial Banner (grey-violet)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "5a4a6a",
+   "faces": 43
+  },
+  "banner_e3po": {
+   "name": "E3PO's Standard (guard blue)",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "2a3a7a",
+   "faces": 323
+  },
+  "guard_helm": {
+   "name": "Guard's Helm",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 5,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "3a4a6a",
+   "faces": 416
+  },
+  "plumed_helm": {
+   "name": "Plumed Helm",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 5,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "7a2a2a",
+   "faces": 416
+  },
+  "fisher_hood": {
+   "name": "Fisher's Oilskin Hood",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a4a3a",
+   "faces": 334
+  },
+  "mourner_veil": {
+   "name": "Mourner's Veil",
+   "fam": "hat",
+   "cost": 100,
+   "variant": 7,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "46404a",
+   "faces": 207
+  },
+  "crier_hat": {
+   "name": "Crier's Tall Hat",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "2a2a3a",
+   "faces": 254
+  },
+  "apothecary_cap": {
+   "name": "Apothecary's Cap",
+   "fam": "hat",
+   "cost": 95,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a6a4a",
+   "faces": 394
+  },
+  "drover_cap": {
+   "name": "Drover's Flat Cap",
+   "fam": "hat",
+   "cost": 50,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a5a3a",
+   "faces": 394
+  },
+  "scarglass_circlet": {
+   "name": "Scarglass Circlet",
+   "fam": "hat",
+   "cost": 200,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "8a6ac8",
+   "faces": 374
+  },
+  "commander_helm": {
+   "name": "Commander's Crested Helm",
+   "fam": "hat",
+   "cost": 240,
+   "variant": 5,
+   "metal": "gold",
+   "stat": null,
+   "colour": "2a3a7a",
+   "faces": 422
+  },
+  "carp_crown": {
+   "name": "Crown of Carp Scales",
+   "fam": "hat",
+   "cost": 180,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "9ac0a0",
+   "faces": 367
+  },
+  "toll_hood": {
+   "name": "Toll-taker's Hood",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "5a3a2a",
+   "faces": 334
+  },
+  "mason_dustcap": {
+   "name": "Mason's Dust Cap",
+   "fam": "hat",
+   "cost": 55,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "a89880",
+   "faces": 394
+  },
+  "banner_chronicle": {
+   "name": "Chronicle Banner (ink)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "1a2a3a",
+   "faces": 43
+  },
+  "banner_tavern": {
+   "name": "Tavern Banner (ale)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a6a2a",
+   "faces": 42
+  },
+  "banner_marketday": {
+   "name": "Market Day Banner (saffron)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d8a838",
+   "faces": 39
+  },
+  "banner_wall": {
+   "name": "Wall Banner (stone)",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "7a7a74",
+   "faces": 36
+  },
+  "banner_carp": {
+   "name": "Carp Banner (river-green)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a7a6a",
+   "faces": 42
+  },
+  "thaw_hood": {
+   "name": "Thaw Hood",
+   "fam": "hat",
+   "cost": 160,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9ac8e0",
+   "faces": 334
+  },
+  "rot_mask": {
+   "name": "Rotwarden's Mask",
+   "fam": "hat",
+   "cost": 200,
+   "variant": 6,
+   "metal": "silver",
+   "stat": null,
+   "colour": "4a5a3a",
+   "faces": 174
+  },
+  "crater_coronet": {
+   "name": "Crater-glass Coronet",
+   "fam": "hat",
+   "cost": 300,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "6a7a8a",
+   "faces": 388
+  },
+  "banner_barracks": {
+   "name": "Barracks Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 2,
+   "metal": "gold",
+   "stat": null,
+   "colour": "3a4a8a",
+   "faces": 312
+  },
+  "banner_bucketline": {
+   "name": "Bucket-line Banner",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "2a6a7a",
+   "faces": 101
+  },
+  "banner_thaw": {
+   "name": "Thaw Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "9ac8e0",
+   "faces": 95
+  },
+  "banner_harvest": {
+   "name": "Harvest-saved Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 4,
+   "metal": "gold",
+   "stat": null,
+   "colour": "c8a23a",
+   "faces": 90
+  },
+  "chronicle_cap": {
+   "name": "Chronicler's Cap",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a3a4a",
+   "faces": 394
+  },
+  "ferry_hood": {
+   "name": "Ferryman's Hood",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2e4a52",
+   "faces": 334
+  },
+  "flask_coif": {
+   "name": "Flask-counter's Coif",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a6a5a",
+   "faces": 394
+  },
+  "ossuary_circlet": {
+   "name": "Ossuary Circlet",
+   "fam": "hat",
+   "cost": 240,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "ded8c4",
+   "faces": 374
+  },
+  "gravewyrm_helm": {
+   "name": "Gravewyrm Helm",
+   "fam": "hat",
+   "cost": 280,
+   "variant": 5,
+   "metal": "gold",
+   "stat": null,
+   "colour": "4a4238",
+   "faces": 422
+  },
+  "pale_veil": {
+   "name": "Pale Veil",
+   "fam": "hat",
+   "cost": 200,
+   "variant": 7,
+   "metal": "silver",
+   "stat": null,
+   "colour": "e4e0e8",
+   "faces": 277
+  },
+  "nightwing_hood": {
+   "name": "Nightwing Hood",
+   "fam": "hat",
+   "cost": 180,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "2a2630",
+   "faces": 334
+  },
+  "toll_cap": {
+   "name": "Toll-keeper's Cap",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a5a3a",
+   "faces": 394
+  },
+  "bucketline_cap": {
+   "name": "Bucket-line Cap",
+   "fam": "hat",
+   "cost": 50,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "4a6a7a",
+   "faces": 394
+  },
+  "thaw_circlet": {
+   "name": "Thaw Circlet",
+   "fam": "hat",
+   "cost": 160,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9ac8d8",
+   "faces": 367
+  },
+  "memorial_veil": {
+   "name": "Memorial Veil",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 7,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "4a4450",
+   "faces": 277
+  },
+  "architect_hat": {
+   "name": "Architect's Hat",
+   "fam": "hat",
+   "cost": 300,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "8a7a5a",
+   "faces": 388
+  },
+  "banner_keepdoor": {
+   "name": "Keep the Door Banner",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 2,
+   "metal": "silver",
+   "stat": null,
+   "colour": "6a5a3a",
+   "faces": 76
+  },
+  "banner_clapper": {
+   "name": "Clapperless Bell Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "b8a060",
+   "faces": 95
+  },
+  "banner_architect": {
+   "name": "Architect's Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 2,
+   "metal": "gold",
+   "stat": null,
+   "colour": "8a7a5a",
+   "faces": 76
+  },
+  "banner_toll": {
+   "name": "Toll Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a5a3a",
+   "faces": 265
+  },
+  "banner_crater": {
+   "name": "Crater Banner",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 0,
+   "metal": "silver",
+   "stat": null,
+   "colour": "6a6a72",
+   "faces": 265
+  },
+  "banner_ossuary": {
+   "name": "Ossuary Banner",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 1,
+   "metal": "gold",
+   "stat": null,
+   "colour": "ded8c4",
+   "faces": 79
+  },
+  "banner_nightwing": {
+   "name": "Nightwing Banner",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 2,
+   "metal": "silver",
+   "stat": null,
+   "colour": "2a2630",
+   "faces": 76
+  },
+  "banner_mourncoil": {
+   "name": "Mourncoil Banner",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 1,
+   "metal": "gold",
+   "stat": null,
+   "colour": "3a4a46",
+   "faces": 315
+  },
+  "banner_ferry": {
+   "name": "Ferry Banner",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "2e4a52",
+   "faces": 265
+  },
+  "lampwright_cap": {
+   "name": "Lampwright's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a7a3a",
+   "faces": 394
+  },
+  "quarry_helm": {
+   "name": "Quarryman's Helm",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 5,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a6258",
+   "faces": 416
+  },
+  "crier_plume": {
+   "name": "Crier's Plume",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "b02a3a",
+   "faces": 254
+  },
+  "fen_hood": {
+   "name": "Fenwalker's Hood",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a4a32",
+   "faces": 334
+  },
+  "host_coif": {
+   "name": "Rattling Coif",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "cdbfa0",
+   "faces": 410
+  },
+  "banner_lamplight": {
+   "name": "Lamplight Banner (amber)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "d8a038",
+   "faces": 47
+  },
+  "banner_quarry": {
+   "name": "Quarry Banner (slate)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "5a5e66",
+   "faces": 28
+  },
+  "banner_grubmother": {
+   "name": "Grubmother Banner (pale)",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "9aa07a",
+   "faces": 95
+  },
+  "chalk_cap": {
+   "name": "Chalker's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d8d4c6",
+   "faces": 394
+  },
+  "stairhold_helm": {
+   "name": "Stairholder's Helm",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 5,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "6a6d72",
+   "faces": 416
+  },
+  "mender_coif": {
+   "name": "Mender's Coif",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "b8c0b2",
+   "faces": 394
+  },
+  "pitwalk_hood": {
+   "name": "Pitwalker's Hood",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "3a3630",
+   "faces": 334
+  },
+  "banner_stair": {
+   "name": "Stairhold Banner (grey-blue)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "5a6a78",
+   "faces": 28
+  },
+  "banner_chalk": {
+   "name": "Chalkline Banner (white)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "ded9c8",
+   "faces": 275
+  },
+  "banner_mender": {
+   "name": "Menders' Banner (pale green)",
+   "fam": "banner",
+   "cost": 95,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9fb49a",
+   "faces": 43
+  },
+  "tithe_cap": {
+   "name": "Tithe Cap",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c9bda0",
+   "faces": 394
+  },
+  "saltline_hood": {
+   "name": "Saltline Hood",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "cfd6d2",
+   "faces": 334
+  },
+  "watchfire_helm": {
+   "name": "Watchfire Helm",
+   "fam": "hat",
+   "cost": 220,
+   "variant": 5,
+   "metal": "silver",
+   "stat": null,
+   "colour": "8a5a30",
+   "faces": 422
+  },
+  "cartwright_cap": {
+   "name": "Cartwright's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a4a2a",
+   "faces": 394
+  },
+  "wakeward_veil": {
+   "name": "Wake-ward Veil",
+   "fam": "hat",
+   "cost": 160,
+   "variant": 7,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "4a4650",
+   "faces": 277
+  },
+  "fogrun_hood": {
+   "name": "Fog-run Hood",
+   "fam": "hat",
+   "cost": 130,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9aa6a8",
+   "faces": 334
+  },
+  "ninthbell_coif": {
+   "name": "Ninth Bell Coif",
+   "fam": "hat",
+   "cost": 180,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "b8a860",
+   "faces": 410
+  },
+  "ropeburn_cap": {
+   "name": "Rope-burn Cap",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a7a5a",
+   "faces": 394
+  },
+  "firstlight_circlet": {
+   "name": "First Light Circlet",
+   "fam": "hat",
+   "cost": 240,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "e4d6a0",
+   "faces": 374
+  },
+  "longcount_hood": {
+   "name": "Long Count Hood",
+   "fam": "hat",
+   "cost": 150,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "5a5248",
+   "faces": 334
+  },
+  "coldforge_mask": {
+   "name": "Cold-forge Mask",
+   "fam": "hat",
+   "cost": 200,
+   "variant": 6,
+   "metal": "silver",
+   "stat": null,
+   "colour": "3a3a3e",
+   "faces": 174
+  },
+  "kindling_crown": {
+   "name": "Kindling Crown",
+   "fam": "hat",
+   "cost": 260,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "a8642a",
+   "faces": 381
+  },
+  "banner_tithe": {
+   "name": "Tithe Banner (wax-white)",
+   "fam": "banner",
+   "cost": 95,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "ded6bc",
+   "faces": 42
+  },
+  "banner_saltline": {
+   "name": "Saltline Banner (pale blue)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "a8c4cc",
+   "faces": 31
+  },
+  "banner_watchfire": {
+   "name": "Watchfire Banner (ember)",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "d85a28",
+   "faces": 53
+  },
+  "banner_wakeward": {
+   "name": "Wake-ward Banner (slate)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "46505a",
+   "faces": 267
+  },
+  "banner_fogrun": {
+   "name": "Fog-run Banner (fog)",
+   "fam": "banner",
+   "cost": 95,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c0c4c8",
+   "faces": 28
+  },
+  "banner_ninthbell": {
+   "name": "Ninth Bell Banner (bronze)",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "a8803a",
+   "faces": 323
+  },
+  "banner_longcount": {
+   "name": "Long Count Banner (iron)",
+   "fam": "banner",
+   "cost": 105,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "44464a",
+   "faces": 36
+  },
+  "banner_coldforge": {
+   "name": "Cold-forge Banner (char)",
+   "fam": "banner",
+   "cost": 115,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "1f2024",
+   "faces": 39
+  },
+  "banner_kindling": {
+   "name": "Kindling Banner (first-beam gold)",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 1,
+   "metal": "gold",
+   "stat": null,
+   "colour": "c08a3a",
+   "faces": 87
+  },
+  "banner_ropeworks": {
+   "name": "Ropeworks Banner (hemp)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "bda97a",
+   "faces": 37
+  },
+  "thatcher_cap": {
+   "name": "Thatcher's Cap",
+   "fam": "hat",
+   "cost": 50,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c8a85a",
+   "faces": 394
+  },
+  "glazier_visor": {
+   "name": "Glazier's Visor",
+   "fam": "hat",
+   "cost": 190,
+   "variant": 6,
+   "metal": "silver",
+   "stat": null,
+   "colour": "7aa8b8",
+   "faces": 174
+  },
+  "pilgrim_hood": {
+   "name": "Pilgrim's Hood",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "6a5a4a",
+   "faces": 334
+  },
+  "votive_veil": {
+   "name": "Votive Veil",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 7,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "e8dcc0",
+   "faces": 277
+  },
+  "crane_helm": {
+   "name": "Cranesman's Helm",
+   "fam": "hat",
+   "cost": 210,
+   "variant": 5,
+   "metal": "silver",
+   "stat": null,
+   "colour": "6a6460",
+   "faces": 422
+  },
+  "paver_cap": {
+   "name": "Paver's Cap",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8e8a82",
+   "faces": 394
+  },
+  "towpath_hood": {
+   "name": "Towpath Hood",
+   "fam": "hat",
+   "cost": 100,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "5a6a58",
+   "faces": 334
+  },
+  "bellfounder_coif": {
+   "name": "Bellfounder's Coif",
+   "fam": "hat",
+   "cost": 230,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "a8803a",
+   "faces": 480
+  },
+  "quarry_cap": {
+   "name": "Quarryman's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "a89c88",
+   "faces": 394
+  },
+  "ferrybell_circlet": {
+   "name": "Ferrybell Circlet",
+   "fam": "hat",
+   "cost": 250,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "b8b0a0",
+   "faces": 381
+  },
+  "banner_thatch": {
+   "name": "Thatchers' Banner (reed gold)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c8a85a",
+   "faces": 53
+  },
+  "banner_glazier": {
+   "name": "Glaziers' Banner (glass blue)",
+   "fam": "banner",
+   "cost": 125,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "7aa8b8",
+   "faces": 101
+  },
+  "banner_pilgrim": {
+   "name": "Pilgrims' Banner (road brown)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a5a4a",
+   "faces": 265
+  },
+  "banner_crane": {
+   "name": "Cranesmen's Banner (rope grey)",
+   "fam": "banner",
+   "cost": 135,
+   "variant": 4,
+   "metal": "gold",
+   "stat": null,
+   "colour": "6a6460",
+   "faces": 90
+  },
+  "banner_paver": {
+   "name": "Pavers' Banner (stone)",
+   "fam": "banner",
+   "cost": 95,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8e8a82",
+   "faces": 264
+  },
+  "banner_towpath": {
+   "name": "Towpath Banner (bank green)",
+   "fam": "banner",
+   "cost": 105,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "5a6a58",
+   "faces": 275
+  },
+  "banner_bellfounder": {
+   "name": "Bellfounders' Banner (bronze)",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 2,
+   "metal": "gold",
+   "stat": null,
+   "colour": "a8803a",
+   "faces": 76
+  },
+  "banner_quarryman": {
+   "name": "Quarrymen's Banner (dust)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 0,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "a89c88",
+   "faces": 37
+  },
+  "cooper_cap": {
+   "name": "Cooper's Cap",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a5a32",
+   "faces": 394
+  },
+  "orchard_straw": {
+   "name": "Orchard Straw Hat",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c8a85a",
+   "faces": 254
+  },
+  "reeve_hat": {
+   "name": "Reeve's Hat",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "3a3a4a",
+   "faces": 410
+  },
+  "collier_hood": {
+   "name": "Collier's Hood",
+   "fam": "hat",
+   "cost": 100,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "2e2a28",
+   "faces": 334
+  },
+  "shepherd_hood": {
+   "name": "Shepherd's Hood",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a8470",
+   "faces": 334
+  },
+  "wellkeep_coif": {
+   "name": "Wellkeeper's Coif",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "4a6a76",
+   "faces": 394
+  },
+  "winterwatch_helm": {
+   "name": "Winterwatch Helm",
+   "fam": "hat",
+   "cost": 150,
+   "variant": 5,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "6a7482",
+   "faces": 416
+  },
+  "saltboiler_cap": {
+   "name": "Saltboiler's Cap",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "ded6c4",
+   "faces": 394
+  },
+  "banner_cooper": {
+   "name": "Cooper's Banner",
+   "fam": "banner",
+   "cost": 95,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a6232",
+   "faces": 28
+  },
+  "banner_orchard": {
+   "name": "Orchard Banner",
+   "fam": "banner",
+   "cost": 95,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a9a3a",
+   "faces": 265
+  },
+  "banner_reeve": {
+   "name": "Reeve's Banner",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 2,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "3a3a5a",
+   "faces": 36
+  },
+  "banner_collier": {
+   "name": "Collier's Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "32302e",
+   "faces": 39
+  },
+  "banner_shepherd": {
+   "name": "Shepherd's Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "a09a86",
+   "faces": 275
+  },
+  "banner_wellhead": {
+   "name": "Wellhead Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a6a7a",
+   "faces": 42
+  },
+  "banner_winterwatch": {
+   "name": "Winterwatch Banner",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "7a8696",
+   "faces": 39
+  },
+  "banner_saltline_works": {
+   "name": "Saltworks Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d8cebc",
+   "faces": 264
+  },
+  "tanner_cap": {
+   "name": "Tanner's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "5a3a26",
+   "faces": 394
+  },
+  "fletcher_hood": {
+   "name": "Fletcher's Hood",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a5a3a",
+   "faces": 334
+  },
+  "farrier_visor": {
+   "name": "Farrier's Visor",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 6,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "4a4a4e",
+   "faces": 54
+  },
+  "potter_wrap": {
+   "name": "Potter's Headwrap",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a6a4a",
+   "faces": 394
+  },
+  "sexton_hat": {
+   "name": "Sexton's Low Hat",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "22222a",
+   "faces": 360
+  },
+  "skep_veil": {
+   "name": "Skepward's Veil",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 7,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "d8d2b8",
+   "faces": 207
+  },
+  "lockkeep_cap": {
+   "name": "Lockkeeper's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a5a5a",
+   "faces": 394
+  },
+  "fuller_coif": {
+   "name": "Fuller's Coif",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "cfc8b4",
+   "faces": 394
+  },
+  "bowyer_cap": {
+   "name": "Bowyer's Cap",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a6a42",
+   "faces": 394
+  },
+  "currier_hood": {
+   "name": "Currier's Hood",
+   "fam": "hat",
+   "cost": 100,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "4a3228",
+   "faces": 334
+  },
+  "banner_tanner": {
+   "name": "Tanners' Banner (hide brown)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a4630",
+   "faces": 45
+  },
+  "banner_fuller": {
+   "name": "Fullers' Banner (cloth white)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "ddd6c2",
+   "faces": 264
+  },
+  "banner_fletcher": {
+   "name": "Fletchers' Banner (goose grey)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8e8e84",
+   "faces": 29
+  },
+  "banner_farrier": {
+   "name": "Farriers' Banner (anvil black)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2e2e32",
+   "faces": 37
+  },
+  "banner_potter": {
+   "name": "Potters' Banner (kiln red)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a4a2e",
+   "faces": 39
+  },
+  "banner_sexton": {
+   "name": "Sexton's Banner (grave black)",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "1e1e22",
+   "faces": 28
+  },
+  "banner_skep": {
+   "name": "Skepwards' Banner (wax gold)",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d8a93a",
+   "faces": 264
+  },
+  "banner_lockkeep": {
+   "name": "Lockkeepers' Banner (weir green)",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "35604a",
+   "faces": 28
+  },
+  "maltster_cap": {
+   "name": "Maltster's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "b08a3a",
+   "faces": 394
+  },
+  "brewster_coif": {
+   "name": "Brewster's Coif",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a4a2a",
+   "faces": 394
+  },
+  "taverner_cap": {
+   "name": "Taverner's Cap",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a2a2e",
+   "faces": 394
+  },
+  "butcher_cap": {
+   "name": "Butcher's Cap",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a3a2a",
+   "faces": 394
+  },
+  "pieman_hood": {
+   "name": "Pieman's Hood",
+   "fam": "hat",
+   "cost": 50,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c8963a",
+   "faces": 334
+  },
+  "soaper_wrap": {
+   "name": "Lye-boiler's Wrap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "e2ded0",
+   "faces": 394
+  },
+  "cutler_visor": {
+   "name": "Cutler's Visor",
+   "fam": "hat",
+   "cost": 150,
+   "variant": 6,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "6a6e72",
+   "faces": 54
+  },
+  "spurrier_cap": {
+   "name": "Spurrier's Cap",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9a8440",
+   "faces": 394
+  },
+  "lorimer_cap": {
+   "name": "Lorimer's Cap",
+   "fam": "hat",
+   "cost": 100,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "a8803a",
+   "faces": 394
+  },
+  "horner_hood": {
+   "name": "Horner's Hood",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "d8ccb0",
+   "faces": 334
+  },
+  "cordwainer_cap": {
+   "name": "Cordwainer's Cap",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "5a3c28",
+   "faces": 394
+  },
+  "clogger_cap": {
+   "name": "Clogger's Cap",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a6232",
+   "faces": 394
+  },
+  "saddler_hood": {
+   "name": "Saddler's Hood",
+   "fam": "hat",
+   "cost": 130,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "6a4a2e",
+   "faces": 334
+  },
+  "armourer_visor": {
+   "name": "Armourer's Visor",
+   "fam": "hat",
+   "cost": 220,
+   "variant": 6,
+   "metal": "silver",
+   "stat": null,
+   "colour": "44464a",
+   "faces": 174
+  },
+  "quarreller_cap": {
+   "name": "Quarreller's Cap",
+   "fam": "hat",
+   "cost": 140,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "7a6a3e",
+   "faces": 410
+  },
+  "bodger_hat": {
+   "name": "Bodger's Hat",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a9a3a",
+   "faces": 353
+  },
+  "joiner_cap": {
+   "name": "Joiner's Cap",
+   "fam": "hat",
+   "cost": 100,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9a6a3a",
+   "faces": 394
+  },
+  "nailer_hood": {
+   "name": "Nailer's Hood",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a6e72",
+   "faces": 334
+  },
+  "chainsmith_coif": {
+   "name": "Chainsmith's Coif",
+   "fam": "hat",
+   "cost": 190,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "26262a",
+   "faces": 410
+  },
+  "pewterer_cap": {
+   "name": "Pewterer's Cap",
+   "fam": "hat",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9a9ea2",
+   "faces": 394
+  },
+  "limeburner_mask": {
+   "name": "Limeburner's Mask",
+   "fam": "hat",
+   "cost": 120,
+   "variant": 6,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "eae6dc",
+   "faces": 54
+  },
+  "brickmaker_cap": {
+   "name": "Brickmaker's Cap",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a5a3a",
+   "faces": 394
+  },
+  "tiler_hood": {
+   "name": "Tiler's Hood",
+   "fam": "hat",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a4226",
+   "faces": 334
+  },
+  "osier_hat": {
+   "name": "Osier-cutter's Hat",
+   "fam": "hat",
+   "cost": 50,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c4a870",
+   "faces": 394
+  },
+  "hurdler_cap": {
+   "name": "Hurdler's Cap",
+   "fam": "hat",
+   "cost": 50,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "b8a070",
+   "faces": 394
+  },
+  "turbary_hood": {
+   "name": "Peat-cutter's Hood",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a2e22",
+   "faces": 334
+  },
+  "reedcutter_hat": {
+   "name": "Reedcutter's Hat",
+   "fam": "hat",
+   "cost": 60,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a9a58",
+   "faces": 394
+  },
+  "woodward_hood": {
+   "name": "Woodward's Hood",
+   "fam": "hat",
+   "cost": 230,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "1e3a2a",
+   "faces": 334
+  },
+  "falconer_hood": {
+   "name": "Falconer's Hood",
+   "fam": "hat",
+   "cost": 260,
+   "variant": 4,
+   "metal": "gold",
+   "stat": null,
+   "colour": "7a5a3a",
+   "faces": 334
+  },
+  "eeler_cap": {
+   "name": "Eeler's Cap",
+   "fam": "hat",
+   "cost": 70,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "2e3a34",
+   "faces": 394
+  },
+  "weirkeep_hood": {
+   "name": "Weir-keeper's Hood",
+   "fam": "hat",
+   "cost": 180,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "356048",
+   "faces": 334
+  },
+  "millwright_cap": {
+   "name": "Millwright's Cap",
+   "fam": "hat",
+   "cost": 200,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "5a3a1e",
+   "faces": 410
+  },
+  "pinder_hat": {
+   "name": "Pinder's Hat",
+   "fam": "hat",
+   "cost": 80,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "5a4234",
+   "faces": 353
+  },
+  "beadle_hat": {
+   "name": "Beadle's Hat",
+   "fam": "hat",
+   "cost": 210,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "3a3a5a",
+   "faces": 410
+  },
+  "gaoler_coif": {
+   "name": "Gaoler's Coif",
+   "fam": "hat",
+   "cost": 170,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "2f2b26",
+   "faces": 410
+  },
+  "bridgeward_helm": {
+   "name": "Bridgeward's Helm",
+   "fam": "hat",
+   "cost": 280,
+   "variant": 5,
+   "metal": "gold",
+   "stat": null,
+   "colour": "55606b",
+   "faces": 422
+  },
+  "banner_maltster": {
+   "name": "Maltster's Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "b08a3a",
+   "faces": 275
+  },
+  "banner_brewster": {
+   "name": "Brewster's Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a4a2a",
+   "faces": 31
+  },
+  "banner_taverner": {
+   "name": "Tavern Banner",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 4,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "7a2a2e",
+   "faces": 36
+  },
+  "banner_butcher": {
+   "name": "Shambles Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a3a2a",
+   "faces": 36
+  },
+  "banner_pieman": {
+   "name": "Pieman's Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 2,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c8963a",
+   "faces": 264
+  },
+  "banner_soaper": {
+   "name": "Lye-yard Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "e2ded0",
+   "faces": 267
+  },
+  "banner_cutler": {
+   "name": "Cutlers' Banner",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "6a6e72",
+   "faces": 76
+  },
+  "banner_spurrier": {
+   "name": "Spurriers' Banner",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "9a8440",
+   "faces": 267
+  },
+  "banner_lorimer": {
+   "name": "Lorimers' Banner",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "a8803a",
+   "faces": 28
+  },
+  "banner_horner": {
+   "name": "Horners' Banner",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 3,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "d8ccb0",
+   "faces": 39
+  },
+  "banner_cordwainer": {
+   "name": "Cordwainers' Banner",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "5a3c28",
+   "faces": 87
+  },
+  "banner_clogger": {
+   "name": "Cloggers' Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a6232",
+   "faces": 39
+  },
+  "banner_saddler": {
+   "name": "Saddlers' Banner",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 1,
+   "metal": "silver",
+   "stat": null,
+   "colour": "6a4a2e",
+   "faces": 79
+  },
+  "banner_armourer": {
+   "name": "Armourers' Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 2,
+   "metal": "gold",
+   "stat": null,
+   "colour": "44464a",
+   "faces": 84
+  },
+  "banner_quarreller": {
+   "name": "Quarrellers' Banner",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 0,
+   "metal": "gold",
+   "stat": null,
+   "colour": "7a6a3e",
+   "faces": 85
+  },
+  "banner_bodger": {
+   "name": "Bodgers' Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 0,
+   "metal": "iron",
+   "stat": null,
+   "colour": "7a9a3a",
+   "faces": 43
+  },
+  "banner_joiner": {
+   "name": "Joiners' Banner",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 3,
+   "metal": "silver",
+   "stat": null,
+   "colour": "9a6a3a",
+   "faces": 275
+  },
+  "banner_nailer": {
+   "name": "Nailers' Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "6a6e72",
+   "faces": 45
+  },
+  "banner_chainsmith": {
+   "name": "Chainsmiths' Banner",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 1,
+   "metal": "gold",
+   "stat": null,
+   "colour": "26262a",
+   "faces": 79
+  },
+  "banner_pewterer": {
+   "name": "Pewterers' Banner",
+   "fam": "banner",
+   "cost": 120,
+   "variant": 4,
+   "metal": "silver",
+   "stat": null,
+   "colour": "9a9ea2",
+   "faces": 36
+  },
+  "banner_limeburner": {
+   "name": "Limeburners' Banner",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "eae6dc",
+   "faces": 267
+  },
+  "banner_brickmaker": {
+   "name": "Brickfield Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "9a5a3a",
+   "faces": 42
+  },
+  "banner_tiler": {
+   "name": "Tilers' Banner",
+   "fam": "banner",
+   "cost": 110,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": null,
+   "colour": "9a4226",
+   "faces": 45
+  },
+  "banner_osier": {
+   "name": "Withy-bed Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "c4a870",
+   "faces": 39
+  },
+  "banner_hurdler": {
+   "name": "Hurdlers' Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 3,
+   "metal": "iron",
+   "stat": null,
+   "colour": "b8a070",
+   "faces": 47
+  },
+  "banner_turbary": {
+   "name": "Turbary Banner",
+   "fam": "banner",
+   "cost": 100,
+   "variant": 1,
+   "metal": "iron",
+   "stat": null,
+   "colour": "3a2e22",
+   "faces": 31
+  },
+  "banner_reedcutter": {
+   "name": "Reedcutters' Banner",
+   "fam": "banner",
+   "cost": 90,
+   "variant": 4,
+   "metal": "iron",
+   "stat": null,
+   "colour": "8a9a58",
+   "faces": 28
+  },
+  "banner_woodward": {
+   "name": "Woodward's Banner",
+   "fam": "banner",
+   "cost": 140,
+   "variant": 3,
+   "metal": "gold",
+   "stat": null,
+   "colour": "1e3a2a",
+   "faces": 87
+  },
+  "banner_falconer": {
+   "name": "Falconers' Banner",
+   "fam": "banner",
+   "cost": 150,
+   "variant": 4,
+   "metal": "gold",
+   "stat": null,
+   "colour": "7a5a3a",
+   "faces": 312
+  },
+  "banner_weirkeep": {
+   "name": "Weir Banner",
+   "fam": "banner",
+   "cost": 130,
+   "variant": 2,
+   "metal": "silver",
+   "stat": null,
+   "colour": "356048",
+   "faces": 90
+  }
+ },
+ "blank_failures": []
+}

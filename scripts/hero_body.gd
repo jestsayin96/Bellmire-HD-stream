@@ -46,21 +46,25 @@ func _ready() -> void:
         Gear.strip_props(_mdl)
         refresh()
     add_to_group("viewer_heroes")
-    # the town's own adventurers: a silver name (viewers' heroes are gold), no ring
+    # the town's own adventurers: a bold silver name (viewers' heroes are gold), no ring.
+    # Mr. E's rule: ONLY adventurers, notables, and shopkeepers get a floating name,
+    # and when they do it is big and bold so it reads from the stream cam.
     if npc:
         for c in get_children():
             if c is Label3D and c != _shout:
                 var lb: Label3D = c
                 lb.visibility_range_end = 0.0
                 lb.visible = true
-                lb.modulate = Color(0.84, 0.86, 0.92)
-                lb.font_size = 60
-                lb.pixel_size = 0.010
-                lb.position.y = 2.6
+                lb.modulate = Color(0.90, 0.92, 0.98)
+                lb.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+                lb.outline_size = 16
+                lb.font_size = 72
+                lb.pixel_size = 0.011
+                lb.position.y = 2.7
                 var hh := roster.get_hero(user_id)
                 lb.text = "%s\n%s" % [person_name, String(hh.get("class", "")).capitalize()]
         return
-    # viewers' heroes are what the stream watches: a gold name always shown,
+    # viewers' heroes are what the stream watches: a BOLD gold name always shown,
     # their class under it, and a soft ring of light at their feet
     for c in get_children():
         if c is Label3D:
@@ -68,8 +72,10 @@ func _ready() -> void:
             lb.visibility_range_end = 0.0
             lb.visible = true
             lb.modulate = Color(1.0, 0.84, 0.35)
-            lb.font_size = 72
-            lb.pixel_size = 0.011
+            lb.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+            lb.outline_size = 18
+            lb.font_size = 80
+            lb.pixel_size = 0.012
             lb.position.y = 2.7
             var h := roster.get_hero(user_id)
             lb.text = "%s\n%s" % [person_name, String(h["class"]).capitalize()]
@@ -97,7 +103,13 @@ func go(dest: Vector3, why: String, then: Callable = Callable()) -> void:
     _route = town.call("route", global_position, dest)
     _enter_at = Vector3.ZERO
     _wait = 99999.0
+    _idle_t = 99999.0          # no idle wander while on an errand
     _route_done = then
+
+## idle wander: heroes with no errand stroll near where they stand, so they
+## look alive instead of standing statue-still on the square.
+var _idle_t := 0.0             # seconds until next idle stroll
+var _idle_home := Vector3.ZERO # the spot they were first placed (wander centre)
 
 func _physics_process(delta: float) -> void:
     var had := not _route.is_empty()
@@ -109,6 +121,66 @@ func _physics_process(delta: float) -> void:
             var cb := _route_done
             _route_done = Callable()
             cb.call()
+    # idle wander: no errand, posted, route empty -> stroll nearby
+    if stay and errand == "" and _route.is_empty() and town != null:
+        _idle_t -= delta
+        if _idle_t <= 0.0:
+            _idle_wander()
+    # D63.4: a hero in town during a festival is IN it - joins the crowd (via the
+    # idle wander, centred on the square) and toasts, cheers and dances there
+    if stay and errand == "" and _route.is_empty() and _in_festival():
+        # a hero across town does not wait out a whole idle beat to go and join it
+        if not npc and _idle_t > 0.6 and _fest_c() != Vector3.ZERO \
+                and Vector2(global_position.x - _fest_c().x, global_position.z - _fest_c().z).length() > 14.0:
+            _idle_t = 0.5
+        _hfest_t -= delta
+        if _hfest_t <= 0.0:
+            _hfest_t = randf_range(3.0, 7.0)
+            var near: bool = Vector2(global_position.x - _fest_c().x, global_position.z - _fest_c().z).length() < 14.0
+            if near and _anim != null:
+                Rig.play(_anim, HERO_FEST[randi() % HERO_FEST.size()])
+                fest_acts += 1
+
+const HERO_FEST := ["Cheer", "Use_Item", "Spellcast_Raise", "Jump_Full_Short", "Cheer"]
+var _hfest_t := randf_range(1.0, 4.0)
+static var fest_acts := 0       # tools/_d63_fest.gd
+static var fest_joins := 0
+
+func _in_festival() -> bool:
+    return is_instance_valid(town) and town.has_method("is_festival") and bool(town.call("is_festival")) \
+        and town.has_method("keep_walkable")
+
+func _fest_c() -> Vector3:
+    var fp = town.get("festival_at")
+    return fp if fp is Vector3 else Vector3.ZERO
+
+func _idle_wander() -> void:
+    _idle_t = randf_range(8.0, 18.0)
+    # idle wander is a TOWN behaviour (town.keep_walkable / route); a delving
+    # hero's "town" is the Delve, which has neither - the delve drives its own
+    # movement, so skip wander there instead of calling a method it lacks.
+    if not is_instance_valid(town) or not town.has_method("keep_walkable"):
+        return
+    if _idle_home == Vector3.ZERO:
+        _idle_home = global_position
+    # pick a point 2-6 m from our home spot, on the navmesh
+    var angle := randf() * TAU
+    var dist := randf_range(2.0, 6.0)
+    var centre := _idle_home
+    if _in_festival() and _fest_c() != Vector3.ZERO and not npc:
+        centre = _fest_c()                 # D63.4: the festival is where a hero idles now
+        dist = randf_range(4.5, 10.0)
+        if Vector2(global_position.x - centre.x, global_position.z - centre.z).length() > 14.0:
+            fest_joins += 1
+    var dest := centre + Vector3(cos(angle), 0.0, sin(angle)) * dist
+    dest = town.call("keep_walkable", dest) as Vector3
+    var r: Array = town.call("route", global_position, dest)
+    if r.is_empty():
+        return   # nowhere to go; try again next tick
+    stay = false
+    _route = r
+    _enter_at = Vector3.ZERO
+    _route_done = Callable()
 
 ## underground the camera sits close and a party packs into corridors:
 ## one small line per hero so the fight stays readable. Off again in town.
@@ -131,6 +203,7 @@ var _crowded := false
 var _compact := false
 
 func _process(delta: float) -> void:
+    _gait_step(delta)            # D17b (Townsfolk._process is overridden here)
     if not visible:
         return
     if is_inside_tree():

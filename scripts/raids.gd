@@ -37,10 +37,44 @@ class_name Raids
 const RAIDS_FROM_LEVEL := 3
 const GREEN_BELOW := 3           # heroes under this level hang back
 const HOLD_REACH := 9.0          # a hanging-back hero fights only this close
+## D21b.3: before a guard reaches his mark, he takes his place in a line drawn
+## between the market and the raiders' centroid - shoulder-to-shield, facing
+## them. He breaks for the fight when a raider closes within LINE_HOLD.
+const LINE_HOLD := 14.0          # a guard beyond this from his mark forms up instead of charging
+const LINE_BREAK := 22.0         # ... and only while the raiders' centre is this far from the square
+const LINE_FROM_CENTRE := 11.0   # the muster line sits this far out from the square, toward the raiders
+const LINE_SPACING := 2.2        # arm-and-shield across
+## D21b.4: the mounted watch CHARGES - a rider further than CHARGE_FROM from his
+## mark lowers the lance and gallops in; if he covers CHARGE_RUNUP of ground
+## before contact the charge LANDS: the blow is rolled twice (the weight of the
+## horse - keep the better), adds CHARGE_DICE, throws the raider back CHARGE_PUSH
+## and tramples anyone within TRAMPLE_R of the impact. Then he WHEELS away
+## WHEEL_OUT and comes again - the stream sees a charge, not a horse in a scrum.
+const CHARGE_FROM := 9.0
+const CHARGE_RUNUP := 6.0
+const CHARGE_SPEED := 1.3        # on top of the engage pace
+const CHARGE_DICE := [2, 6]
+const CHARGE_PUSH := 2.4
+const TRAMPLE_R := 2.6
+const TRAMPLE_DICE := [1, 6]
+const TRAMPLE_PUSH := 1.3
+const WHEEL_OUT := 12.0
+const WHEEL_T := 2.6             # s at most spent wheeling before he turns in again
+const DUST := Color(0.72, 0.60, 0.42)
+var charges := 0                 # tests: charges that reached their mark
+var charges_landed := 0          # ... and struck home
+var tramples := 0                # raiders caught under the hooves
+var _charge_said := false
 const SKELETONS := ["warrior", "cutpurse", "minion"]
 var town: Node3D
 var economy: Economy
 var raids := 0
+## D19b (for the hub's "Raids turned back" pill): every attack driven off, counted
+## and kept across streams in user://town_stats.json (saved only when the game
+## persists, so tests never touch it).
+const STATS_FILE := "user://town_stats.json"
+var raids_turned := 0
+var _stats_loaded := false
 var _raid_t := randf_range(110.0, 190.0)
 var _breach := 0.0
 var _rebuild_t := 22.0
@@ -57,6 +91,8 @@ func _level() -> int:
 
 func _say(line: String) -> void:
     (town.get("feed") as Array).append(line)
+    if town.has_method("tag_feed"):
+        town.call("tag_feed", "raid")       # D60
     print("FEED ", line)
 
 ## ------------------------------------------------------------------ raid
@@ -72,6 +108,7 @@ func raid(source := "") -> void:
     _init_raid = Dice.d20() + 1
     _init_watch = Dice.d20() + 2
     _big_said.clear()
+    _charge_said = false
     var spawn: Vector3
     var sc: Dictionary = town.get("_scar_info")
     if from_dungeon and sc.has("mouth"):
@@ -164,6 +201,12 @@ func _defenders() -> Array:
         var role := String((p as Townsfolk).role)
         if not is_hero and role != "guard" and role != "chief":
             continue
+        if not is_hero and (p as Townsfolk).notable_title == "Commander of the Guards":
+            # D37 v2: the Commander FIGHTS - but is never killed. He sits a raid out
+            # only while recovering at the barracks (see _defender_falls / notables).
+            var _nb = town.get("notables")
+            if _nb != null and String(_nb.get("_e3po_state")) == "withdrawn":
+                continue
         if String((p as Townsfolk).gear_role) == "lookout":
             continue          # the tower lookouts keep their towers
         if not _fighters.has(p):
@@ -190,6 +233,11 @@ func _defenders() -> Array:
                 # D4: the mounted watch - horsed, harder to bring down, rides at them
                 st.merge({"hp": 80.0, "max": 80.0, "atk": 13.0, "ac": 13, "to_hit": 4, "speed": 9.0,
                           "dice": [2, 8], "dmod": 4, "dex": 1, "con": 3})       # the lance
+            elif (p as Townsfolk).notable_title == "Commander of the Guards":
+                # D37 v2: E3PO leads from the front - tough and hard-hitting, but at
+                # 0 hp he is dragged off to heal, never slain (_defender_falls).
+                st.merge({"hp": 140.0, "max": 140.0, "atk": 16.0, "ac": 15, "to_hit": 6, "speed": 4.8,
+                          "dice": [2, 8], "dmod": 5, "dex": 2, "con": 4})       # the Commander's blade
             elif role == "guard":
                 st.merge({"hp": 64.0, "max": 64.0, "atk": 11.0, "ac": 10, "to_hit": 2, "speed": 4.4,
                           "dice": [2, 6], "dmod": 4, "dex": 0, "con": 2})       # the watch's longsword
@@ -269,12 +317,67 @@ func _anim(n: Node3D, key: String) -> void:
         (n as Monster)._play({"walk": "walk", "run": "walk", "attack": "attack", "idle": "idle", "die": "die"}[key])
     elif n is Townsfolk:
         var ap: AnimationPlayer = (n as Townsfolk)._anim
-        Rig.play(ap, {"walk": "Walking_A", "run": "Running_A", "attack": "1H_Melee_Attack_Chop", "idle": "Idle", "die": "Death_A"}[key])
+        var nm: String = {"walk": "Walking_A", "run": "Running_A", "attack": "1H_Melee_Attack_Chop", "idle": "Idle", "die": "Death_A"}[key]
+        # D17c: blows and falls vary - the watch's longsword cuts three ways
+        # and thrusts, a barbarian's two hands chop and sweep; two ways to fall
+        if key == "attack":
+            var pool: Array = SWINGS_2H if String((n as Townsfolk).model).begins_with("Barbarian") and randf() < 0.5 else SWINGS
+            nm = pool[randi() % pool.size()]
+            swings[nm] = int(swings.get(nm, 0)) + 1
+        elif key == "die" and randf() < 0.5:
+            nm = "Death_B"
+        Rig.play(ap, nm)
+
+## D17c: a blow that does not drop a body still lands - it reels (Hit_A/B), and
+## a guard sometimes takes it on the shield (Block_Hit); a swing that misses a
+## guard is often a parry (Block). Monsters (the laptop's) flash and number
+## themselves; the mounted watch sits it out in the saddle.
+const SWINGS := ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Slice_Diagonal",
+    "1H_Melee_Attack_Slice_Horizontal", "1H_Melee_Attack_Stab"]
+const SWINGS_2H := ["2H_Melee_Attack_Chop", "2H_Melee_Attack_Slice", "2H_Melee_Attack_Stab"]
+var swings := {}
+var reels := 0
+var parries := 0
+
+func _reel(n: Node3D, missed := false) -> void:
+    if not is_instance_valid(n) or n is Cavalry or not (n is Townsfolk):
+        return
+    var ap: AnimationPlayer = (n as Townsfolk)._anim
+    if ap == null:
+        return
+    var guard := String((n as Townsfolk).role) == "guard"
+    if missed:
+        if guard and randf() < 0.45:
+            Rig.play(ap, "Block", 0.08)
+            parries += 1
+        return
+    var k := "Hit_A" if randf() < 0.5 else "Hit_B"
+    if guard and randf() < 0.3:
+        k = "Block_Hit"
+    Rig.play(ap, k, 0.08)
+    reels += 1
 
 ## ---------------------------------------------------------------- tick
+func _load_stats() -> void:
+    _stats_loaded = true
+    if not FileAccess.file_exists(STATS_FILE):
+        return
+    var j: Variant = JSON.parse_string(FileAccess.get_file_as_string(STATS_FILE))
+    if typeof(j) == TYPE_DICTIONARY:
+        raids_turned = int((j as Dictionary).get("raids_turned", 0))
+
+func _save_stats() -> void:
+    if town == null or not bool(town.get("persist")):
+        return
+    var f := FileAccess.open(STATS_FILE, FileAccess.WRITE)
+    if f:
+        f.store_string(JSON.stringify({"raids_turned": raids_turned}))
+
 func _process(delta: float) -> void:
     if town == null or economy == null:
         return
+    if not _stats_loaded:
+        _load_stats()
     _raid_t -= delta
     if _raid_t <= 0.0:
         _raid_t = randf_range(110.0, 190.0)
@@ -290,6 +393,11 @@ func _process(delta: float) -> void:
             _breach = 0.0
             breached = false
             _say("The attack is driven off. The gates hold.")
+            raids_turned += 1
+            # D63.6: a raid survived is a reason to celebrate (the town's FEST_GAP keeps it rare)
+            if randf() < 0.5 and town != null and town.has_method("start_festival"):
+                town.call_deferred("start_festival", "raid")
+            _save_stats()
         _stand_down(delta)
         if _paths.size() > 400:
             _paths.clear()
@@ -325,6 +433,16 @@ func _process(delta: float) -> void:
         HealthBar3D.on(dd, 2.05, false).set_hp(float(st0["hp"]), float(st0["max"]), st0["target"] != null)
     # defenders
     var hold_i := 0
+    # D21b.3: only muster while the raiders' centre is still well out
+    var cent_r := _raider_centroid()
+    var musterers: Array = []
+    if cent_r != Vector3.ZERO and _flat(cent_r, centre) > LINE_BREAK:
+        for d2 in defs:
+            var st2: Dictionary = _fighters[d2]
+            if st2.get("ko", false):
+                continue
+            if _musters(d2, st2):
+                musterers.append(d2)
     for d in defs:
         var st: Dictionary = _fighters[d]
         if st.get("ko", false):
@@ -335,6 +453,10 @@ func _process(delta: float) -> void:
             if _hangs_back(st):
                 _hold_square(d, st, centre, hold_i, delta)
                 hold_i += 1
+            continue
+        var mi := musterers.find(d)
+        if mi >= 0:
+            _line_up(d, st, mi, musterers.size(), centre, cent_r, delta)
             continue
         (d as Townsfolk).stay = true
         _engage(d, st, tg, delta, true)
@@ -403,6 +525,60 @@ func _targets(defs: Array) -> void:
 func _hangs_back(st: Dictionary) -> bool:
     return bool(st.get("green", false)) and not breached
 
+## D21b.3: raiders' centre of mass - the muster line runs between here and the market.
+func _raider_centroid() -> Vector3:
+    var c := Vector3.ZERO
+    var n := 0
+    for r in raiders:
+        var nd = r["node"]
+        if is_instance_valid(nd):
+            c += (nd as Node3D).global_position
+            n += 1
+    if n == 0:
+        return Vector3.ZERO
+    return c / float(n)
+
+## is this defender a plain town guard who should form up on the line?
+## (heroes keep their square-hold / charge rule; the mounted watch charges;
+## the Commander leads; the chief / fisherfolk / ordinary folk never reach
+## here since _defenders filters them out.)
+func _musters(d: Node3D, st: Dictionary) -> bool:
+    if breached:
+        return false
+    if d is HeroBody or d is Cavalry:
+        return false
+    if not (d is Townsfolk):
+        return false
+    if String((d as Townsfolk).role) != "guard":
+        return false
+    if String((d as Townsfolk).notable_title) != "":
+        return false
+    var tg = st["target"]
+    if tg == null:
+        return false
+    var tp: Vector3 = (tg["node"] as Node3D).global_position
+    return _flat((d as Node3D).global_position, tp) > LINE_HOLD
+
+## a guard's place on the muster line: slot i of n, facing the raiders.
+func _line_up(d: Node3D, st: Dictionary, i: int, n: int, centre: Vector3, cent_r: Vector3, delta: float) -> void:
+    (d as Townsfolk).stay = true
+    var v := Vector3(cent_r.x - centre.x, 0, cent_r.z - centre.z)
+    if v.length() < 0.5:
+        _anim(d, "idle")
+        return
+    var fwd := v.normalized()
+    var side := Vector3(-fwd.z, 0, fwd.x)
+    var mid := centre + fwd * LINE_FROM_CENTRE
+    var off := (float(i) - float(n - 1) * 0.5) * LINE_SPACING
+    var spot := mid + side * off
+    spot = town.call("keep_walkable", spot)
+    if _flat(d.global_position, spot) > 0.8:
+        _step(d, spot, float(st["speed"]), delta)
+        _anim(d, "run")
+        return
+    d.rotation.y = atan2(fwd.x, fwd.z)
+    _anim(d, "idle")
+
 ## a green hero's place: a ring on the market square, facing out
 func _hold_square(d: Node3D, st: Dictionary, centre: Vector3, i: int, delta: float) -> void:
     (d as Townsfolk).stay = true
@@ -424,10 +600,25 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
         return
     var tn: Node3D = (tg["node"] as Node3D) if defending else (tg as Node3D)
     st["swing"] = float(st["swing"]) - delta
-    if _flat(me.global_position, tn.global_position) > 2.2:
-        _step(me, tn.global_position, _speed(st) * 1.15, delta)
+    var dist := _flat(me.global_position, tn.global_position)
+    var rider := defending and me is Cavalry
+    if rider and _wheel(me, st, delta):
+        return
+    if rider and not bool(st.get("charging", false)) and dist > CHARGE_FROM:
+        st["charging"] = true
+        st["charge_at"] = me.global_position
+    if dist > 2.2:
+        var sp := _speed(st) * 1.15
+        if rider and bool(st.get("charging", false)):
+            sp *= CHARGE_SPEED
+        _step(me, tn.global_position, sp, delta)
         _anim(me, "run")
         return
+    if rider and bool(st.get("charging", false)):
+        st["charging"] = false
+        if _flat(me.global_position, st.get("charge_at", me.global_position)) >= CHARGE_RUNUP:
+            _charge_lands(me, st, tg, tn)
+            return
     var to := tn.global_position - me.global_position
     me.rotation.y = atan2(to.x, to.z)
     if float(st["swing"]) > 0.0:
@@ -441,6 +632,7 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
         dmg = _ward_soaks(ts, dmg)
     if dmg <= 0.0:
         Sfx.at("swing", tn.global_position, -4.0)
+        _reel(tn, true)
         return
     # S1: steel on steel when a blade meets the watch or a bandit; a dull blow on
     # the scar's dead; every 20 lands hard
@@ -450,6 +642,11 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
         (tn as Monster).hp = float(ts["hp"])
         (tn as Monster)._number(dmg, crit)
         (tn as Monster)._flash()
+    elif tn is Townsfolk:
+        # D21b: defenders (guards, chief, watch, heroes) show the same
+        # white flash + floating number as raiders when a blow lands.
+        (tn as Townsfolk)._number(dmg, crit)
+        (tn as Townsfolk)._flash()
     var killer := _name_of(me, st)
     if crit and me is HeroBody and defending:
         var tname := String(tg.get("name", "the raider"))
@@ -459,6 +656,110 @@ func _engage(me: Node3D, st: Dictionary, tg, delta: float, defending: bool) -> v
             _raider_falls(tg, killer)
         else:
             _defender_falls(tn, ts, killer)
+    else:
+        _reel(tn)
+
+## D21b.4: a rider who has just struck rides OUT past his mark before turning in
+## again. True while he is still wheeling.
+func _wheel(me: Node3D, st: Dictionary, delta: float) -> bool:
+    if not st.has("wheel"):
+        return false
+    st["wheel_t"] = float(st.get("wheel_t", 0.0)) - delta
+    var to: Vector3 = st["wheel"]
+    if float(st["wheel_t"]) <= 0.0 or _flat(me.global_position, to) < 1.5:
+        st.erase("wheel")
+        return false
+    _step(me, to, _speed(st) * 1.15 * CHARGE_SPEED, delta)
+    _anim(me, "run")
+    return true
+
+## D21b.4: the charge strikes home
+func _charge_lands(me: Node3D, st: Dictionary, tg: Dictionary, tn: Node3D) -> void:
+    charges += 1
+    st["swing"] = 1.4
+    _anim(me, "attack")
+    var fwd := Vector3(tn.global_position.x - me.global_position.x, 0, tn.global_position.z - me.global_position.z)
+    fwd = fwd.normalized() if fwd.length() > 0.01 else Vector3(sin(me.rotation.y), 0, cos(me.rotation.y))
+    me.rotation.y = atan2(fwd.x, fwd.z)
+    # the weight of the horse: roll the blow twice, keep the better
+    var dmg := _strike(st, int(tg["ac"]))
+    var nat := last_nat
+    var dmg2 := _strike(st, int(tg["ac"]))
+    if dmg2 > dmg:
+        dmg = dmg2
+    else:
+        last_nat = nat
+    var crit := last_nat == 20
+    var at := tn.global_position
+    Sfx.at("horse_neigh", me.global_position + Vector3(0, 1.4, 0), 1.0)
+    Spells._burst(town, at + Vector3(0, 0.35, 0), DUST, 1.4)
+    Spells._ground_ring(town, at, DUST, TRAMPLE_R + 0.6, 0.9, 0.5)
+    # then ride on through and out the far side, to come again
+    st["wheel"] = town.call("keep_walkable", me.global_position + fwd * WHEEL_OUT)
+    st["wheel_t"] = WHEEL_T
+    if dmg <= 0.0:
+        Sfx.at("swing", at, -2.0)
+        return
+    charges_landed += 1
+    dmg += Dice.damage(CHARGE_DICE, 0.0, false)
+    Sfx.at("hit_impact", at + Vector3(0, 1.1, 0), 4.0)
+    _shout(me, "CHARGE!", Color(1.0, 0.82, 0.35))
+    var who := _name_of(me, st)
+    if not _charge_said:
+        _charge_said = true
+        _say("%s's charge crashes into %s!" % [who, String(tg.get("name", "the raiders"))])
+    _hurt_raider(tg, dmg, crit, who, at + fwd * CHARGE_PUSH)
+    # the hooves: everyone else at the point of impact
+    for r in raiders.duplicate():
+        if r == tg or not is_instance_valid(r["node"]):
+            continue
+        var rn: Node3D = r["node"]
+        var off := Vector3(rn.global_position.x - at.x, 0, rn.global_position.z - at.z)
+        if off.length() > TRAMPLE_R:
+            continue
+        tramples += 1
+        var away := off.normalized() if off.length() > 0.05 else fwd
+        _hurt_raider(r, Dice.damage(TRAMPLE_DICE, 0.0, false), false, who, rn.global_position + away * TRAMPLE_PUSH)
+
+## D21b.4: a raider takes a blow that also throws him (to `push_to`)
+func _hurt_raider(r: Dictionary, dmg: float, crit: bool, killer: String, push_to: Vector3) -> void:
+    var n: Node3D = r["node"]
+    r["hp"] = float(r["hp"]) - dmg
+    if n is Monster:
+        (n as Monster).hp = float(r["hp"])
+        (n as Monster)._number(dmg, crit)
+        (n as Monster)._flash()
+    elif n is Townsfolk:
+        (n as Townsfolk)._number(dmg, crit)
+        (n as Townsfolk)._flash()
+    if float(r["hp"]) <= 0.0:
+        _raider_falls(r, killer)
+        return
+    var to: Vector3 = town.call("keep_walkable", push_to)
+    var tw := n.create_tween()
+    tw.tween_property(n, "global_position", to, 0.22).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+    _reel(n)
+
+## a word over a fighter's head - the FELLED! banner's shape, in another colour
+func _shout(n: Node3D, text: String, col: Color) -> void:
+    var lb := Label3D.new()
+    lb.text = text
+    lb.font_size = 112
+    lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01
+    lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    lb.no_depth_test = true
+    lb.outline_size = 24
+    lb.outline_modulate = Color(0, 0, 0, 0.95)
+    lb.modulate = col
+    lb.top_level = true
+    n.add_child(lb)
+    var p := n.global_position + Vector3(0, 2.8, 0)
+    lb.global_position = p
+    var tw := lb.create_tween()
+    tw.set_parallel(true)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.6, 0), 1.4).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, 1.4).set_delay(0.5)
+    tw.chain().tween_callback(lb.queue_free)
 
 ## ------------------------------------------------------------ spells (D2)
 ## The arcane callings (mage, sage, cleric) fight a raid with spells from
@@ -502,6 +803,7 @@ func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> v
         if hurt != null:
             var mk := Spells.cast(String(MENDERS[cls]), me, hurt, in_scar)
             Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(mk, "Spellcasting"))
+            Spells.name_over(me, mk)   # D30: the mend names itself over the caster
             _bless(hurt, mk, st)
             return
     var book: Array = BOOKS[cls]
@@ -528,6 +830,7 @@ func _cast_engage(me: Node3D, st: Dictionary, tg: Dictionary, delta: float) -> v
             at = (nx["node"] as Node3D).global_position
     var actual := Spells.cast(kind, me, tn, in_scar, more)
     Rig.play((me as Townsfolk)._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
+    Spells.name_over(me, actual)   # D30: the bolt/fire/frost/chain names itself over the caster
     if not Spells.HARM.has(actual):
         # a misfire into a mending spell mends the raider - wild magic
         if actual == "heal" or actual == "renew" or actual == "mend":
@@ -590,6 +893,8 @@ func _spell_hurt(r: Dictionary, dmg: float, crit: bool, who: String) -> void:
         (n as Monster)._flash()
     if float(r["hp"]) <= 0.0:
         _raider_falls(r, who)
+    else:
+        _reel(n)
 
 ## the defender within reach worst off (under 60%), not already blessed
 func _most_hurt(me: Node3D, reach: float):
@@ -661,6 +966,9 @@ func _raider_falls(r: Dictionary, _killer: String) -> void:
     if n is Monster:
         (n as Monster).die()
     else:
+        # D21b.2: a bandit's death reads too - red flash + FELLED! banner.
+        if n is Townsfolk:
+            (n as Townsfolk)._death_fx()
         _anim(n, "die")
         var nid := n.get_instance_id()       # D8: never capture a node that may be freed first
         get_tree().create_timer(25.0).timeout.connect(func() -> void:
@@ -669,6 +977,15 @@ func _raider_falls(r: Dictionary, _killer: String) -> void:
                 (o as Node).queue_free())
 
 func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
+    # D37 v2: the Commander cannot die. Beaten to 0 hp, he is dragged to the
+    # barracks, heals to full over 15 min, and returns to his post - no CON save,
+    # no bury, no body removed.
+    if n is Townsfolk and (n as Townsfolk).notable_title == "Commander of the Guards":
+        _fighters.erase(n)
+        var nb = town.get("notables")
+        if nb != null and nb.has_method("_e3po_felled"):
+            nb._e3po_felled(killer)
+        return
     # D9: anyone who goes down makes one CON save, DC 10 (heroes: the old
     # take_damage; now the watch, the riders and the chief too) - a 20 stands
     # them up with a quarter of their life, a 1 always fails
@@ -705,6 +1022,9 @@ func _defender_falls(n: Node3D, st: Dictionary, killer: String) -> void:
             _say("%s is knocked senseless, but lives. The guild's grace - once." % (n as Townsfolk).person_name)
             return
     _fighters.erase(n)
+    # D21b.2: the death reads at stream distance - red flash + FELLED! banner.
+    if n is Townsfolk:
+        (n as Townsfolk)._death_fx()
     _anim(n, "die")
     (town.get("people") as Array).erase(n)
     (n as Townsfolk).stay = true
@@ -756,6 +1076,7 @@ func _stand_down(delta: float) -> void:
             st.erase("ko")
             st["hp"] = 1.0
             _say("%s comes round." % (d as Townsfolk).person_name)
+            Rig.revive((d as Townsfolk)._anim)      # D17d: up off the ground
         var post: Vector3 = st["post"]
         var gap := _flat((d as Node3D).global_position, post)
         # D8: a post a prop now stands on (or one the push-out keeps them off) was
@@ -1091,3 +1412,5 @@ func _bolt_lands(r: Dictionary, who: String) -> void:
         (tn as Monster)._flash()
     if float(r["hp"]) <= 0.0:
         _raider_falls(r, who)
+    else:
+        _reel(tn)

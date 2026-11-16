@@ -137,7 +137,8 @@ func _regions() -> Dictionary:
 	for k in panes:
 		bottom = maxf(bottom, (panes[k] as Rect2).end.y)
 	var chrome := Rect2(0, bottom, sz.x, sz.y - bottom) if sz.y - bottom >= 1.0 else Rect2()
-	return {"panes": panes, "chrome": chrome}
+	# L32b: the Chronicle's centre strip at the cross of the four panes is a region too
+	return {"panes": panes, "chrome": chrome, "centre": HudDock.centre(_t)}
 
 static func _inside(r: Rect2, box: Rect2) -> bool:
 	return box.size.x > 0 and r.position.x >= box.position.x - 1.0 and r.position.y >= box.position.y - 1.0 \
@@ -150,6 +151,8 @@ func _home(r: Rect2, reg: Dictionary) -> String:
 			return k
 	if _inside(r, reg["chrome"]):
 		return "chrome"
+	if _inside(r, reg["centre"]):
+		return "centre"
 	return ""
 
 ## every HUD control that draws something, on the main screen (not inside a pane's viewport)
@@ -195,7 +198,8 @@ func _check(tag: String) -> void:
 	var s := Spotlight.of(_t)
 	_ok(root.size.x >= 1280 and root.size.y >= 700, "%s: a stream-sized screen to judge (%s) - windowed --resolution 1920x1080, or headless (pinned)" % [tag, root.size])
 	_ok((reg["panes"] as Dictionary).size() >= 2, "%s: %d panes up" % [tag, (reg["panes"] as Dictionary).size()])
-	_ok((reg["chrome"] as Rect2).size.y >= root.size.y * 0.10, "%s: a chrome bar outside the panes (%s)" % [tag, reg["chrome"]])
+	_ok((reg["chrome"] as Rect2).size.y >= root.size.y * 0.04, "%s: a (slim) chrome bar outside the panes (%s)" % [tag, reg["chrome"]])
+	_ok((reg["centre"] as Rect2).size.y >= root.size.y * 0.07, "%s: the Chronicle's centre strip at the cross (%s)" % [tag, reg["centre"]])
 	# 1. THE RULE, DEFAULT-DENY: every drawn control needs a home it was GIVEN (HudDock.mark on
 	# it or an ancestor) - a pane or the chrome bar - and must lie inside that home. Sitting
 	# inside some pane by luck is not enough; a panel nobody gave a home fails here.
@@ -205,7 +209,7 @@ func _check(tag: String) -> void:
 	var homeless: Array = []
 	for c: Control in drawn:
 		var home := HudDock.region_of(c)
-		var box: Rect2 = reg["chrome"] if home == "chrome" else (reg["panes"] as Dictionary).get(home, Rect2())
+		var box: Rect2 = reg["chrome"] if home == "chrome" else (reg["centre"] if home == "centre" else (reg["panes"] as Dictionary).get(home, Rect2()))
 		if home == "" or home == "none":
 			homeless.append("%s (home '%s')" % [_short(c), home])
 		elif not _inside(c.get_global_rect(), box):
@@ -223,7 +227,8 @@ func _check(tag: String) -> void:
 	for p: Control in chron:
 		var c := p.get_parent() as FeedHUD
 		if c and p.is_visible_in_tree():
-			_ok(HudDock.region_of(p) == "chrome" and _inside(p.get_global_rect(), reg["chrome"]), "%s: the Chronicle sits in the chrome bar (%s)" % [tag, p.get_global_rect()])
+			# L32b: the Chronicle lives on the centre strip at the cross of the four panes
+			_ok(HudDock.region_of(p) == "centre" and _inside(p.get_global_rect(), reg["centre"]), "%s: the Chronicle sits on the centre strip (%s)" % [tag, p.get_global_rect()])
 			var big := 0
 			var lines := 0
 			for lb in c._box.get_children():

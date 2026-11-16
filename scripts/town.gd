@@ -69,13 +69,13 @@ const KIT_MATS := "res://assets/kit/materials/"
 const KIT_MAT_NAMES := ["MI_Brick", "MI_UnevenBrick", "MI_Plaster", "MI_RockTrim",
                         "MI_RoundTiles", "MI_WoodTrim", "MI_WoodTrim_Wear",
                         "MI_WindowGlass", "MI_MetalOrnaments", "MI_Vine",
-                        "MI_Cobble", "MI_Grass"]
+                        "MI_Cobble", "MI_Grass", "MI_Dirt"]
 
 ## roof tint per livery. red is left neutral - the kit's tiles are already
 ## terracotta, so tinting it red would just oversaturate.
 const LIVERY_TINT := {
     "blue":   Color(0.58, 0.68, 0.95),
-    "green":  Color(0.62, 0.84, 0.60),
+    "green":  Color(0.78, 0.85, 0.74),   # D26: was (0.62,0.84,0.60) - read as bright green paint on terracotta; now a subtle weathered sage
     "red":    Color(1.00, 1.00, 1.00),
     "yellow": Color(1.00, 0.88, 0.52),
 }
@@ -141,6 +141,28 @@ var roster: Roster
 var chat: ChatCmd
 var heroes := {}             # user_id -> HeroBody
 var feed: Array = []
+## D60: the hub's Chronicle wants WHO a line is about and WHAT KIND of event it is. town.feed
+## stays plain text (feed_hud, the crier, the director and every raiser read strings), so a
+## raiser that KNOWS its subject tags the line it has just appended: tag_feed(kind, [hero
+## names]). Keyed by the exact text, bounded; snapshot_pub reads it when it stamps the line.
+## Untagged lines simply carry no who/kind - never a guess.
+var feed_tags: Dictionary = {}
+const FEED_TAG_MAX := 256
+# D20b: civic moods the townsfolk read. A raid clears the streets - ordinary
+# folk flee indoors (is_raid_on reads raids._live); a festival gathers them in
+# the market square. Market bustle is D20a's midday errands; the festival is new.
+var festival := false
+var festival_at := Vector3.ZERO
+var _fest_t := randf_range(150.0, 260.0)
+var _fest_left := 0.0
+static var fests := 0            # tools/_d20b_test.gd
+## D29: the working town has a VOICE. D42 gave footfalls and folk their voices;
+## a town also RINGS - the smith on his anvil, trade at the market. These fire
+## from the work STATIONS (not per-NPC), daytime only, never under a raid or at
+## night, and 3D so they carry only to a pane near the station like every other
+## town sound. The silent-town complaint (D29) named "work" among the missing.
+var _work_t := randf_range(1.5, 3.0)
+var work_plays := 0              # tools/_d29_test.gd (smith + market work sounds)
 ## D6: Bellmire's named people and their days (scripts/notables.gd)
 var notables: Notables
 ## the valley's stock (Economy: a port of the old Sim). Delves bring ore,
@@ -149,6 +171,7 @@ var economy: Economy
 ## the viewers' party goes in together: once nobody queued is still on the road
 ## to the scar (a few seconds after the last arrives), or 45 s after the first
 ## arrival with whoever is there - and never while their last delve is below
+const MUSTER_HOLD := 20.0    # Mr. E: min seconds to gather a party before a cleared road launches it
 var _muster_t := -1.0
 var _since_last := 0.0
 
@@ -161,7 +184,9 @@ func _viewer_muster(delta: float) -> void:
     for uid in chat.away:
         if String(chat.away[uid]) == "on the road to the scar":
             on_road += 1
-    if (on_road == 0 and _since_last > 4.0) or _muster_t > 45.0:
+    # Mr. E: hold the mouth open a short while so others can !delve / "Join the delve"
+    # and go in TOGETHER - a lone arrival no longer launches a party of one instantly.
+    if _muster_t > 45.0 or (on_road == 0 and _since_last > 4.0 and _muster_t >= MUSTER_HOLD):
         _muster_t = -1.0
         _begin_delve()
 var raids: Raids
@@ -261,6 +286,8 @@ func receive_haul(h: Dictionary) -> void:
 var delve: Delve = null
 var _at_mouth: Array = []
 var _birds := []
+var _herds := []             # D20c: Animal.HerdMind per grazing herd (drift + cohesion)
+var _flocks := []            # D20c: bird-flock state dicts (wheel + migrate together)
 var _pens := []
 var _pulses := []             # [light, base energy, speed, phase]
 var _furniture := {}
@@ -329,6 +356,7 @@ func _ready() -> void:
         add_child(board)
         board.call_deferred("setup", roster)
     call_deferred("_stock_piles")
+    call_deferred("_lay_sound_beds")
     roster.load_all() if roster and roster.has_method("load_all") else null
     var hud := FeedHUD.new()
     hud.source = feed
@@ -825,8 +853,22 @@ func _build() -> void:
     e.sky = sky
     e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
     e.ambient_light_energy = 0.85
+    # D24: TAA now resolves SSAO's temporal dither, so SSAO stays for contact
+    # shadow, but softened (lower intensity + detail) so it reads as shade, not grit.
     e.ssao_enabled = true
+    e.ssao_radius = 1.8
+    e.ssao_intensity = 1.3
+    e.ssao_detail = 0.3
+    e.ssao_power = 1.5
     e.tonemap_mode = Environment.TONE_MAPPER_AGX
+    # D19a night bloom: emissive windows, lamps and braziers glow after dark
+    e.glow_enabled = true
+    e.glow_normalized = true
+    e.glow_blend_mode = Environment.GLOW_BLEND_MODE_SCREEN
+    e.glow_hdr_threshold = 1.1
+    e.glow_intensity = 0.3
+    e.glow_strength = 1.0
+    e.glow_bloom = 0.03
     # distance haze: far ridges fade into the sky instead of ending hard
     e.fog_enabled = true
     e.fog_light_color = Color(0.70, 0.77, 0.84)
@@ -859,6 +901,7 @@ func _build() -> void:
     gsm.set_shader_parameter("scar_r", SCAR_R)
     gsm.set_shader_parameter("town_mask", _town_mask())
     gsm.set_shader_parameter("mask_half", MASK_HALF)
+    gsm.set_shader_parameter("water_y", WATER_Y)
     gnd.material_override = gsm
     add_child(gnd)
 
@@ -960,6 +1003,7 @@ func _build() -> void:
     _street_furniture()
     _dress_streets()
     _scatter_nature()
+    _dress_greens()
     _build_scar()
     _build_fields()
     _build_farms()
@@ -967,6 +1011,9 @@ func _build() -> void:
     valley = preload("res://scripts/valley.gd").new()
     add_child(valley)
     valley.setup(self)
+    # D25: the valley roads and the real south road are only laid now, so some
+    # houses placed clear in _resolve_overlaps now stand on a road - sweep again.
+    _final_road_sweep()
     _scatter_country()
     _meadow()
     # D3: the town grows with its level - lots, upgrades, new buildings, the wall
@@ -1031,7 +1078,9 @@ func _solid_of(n: Node3D) -> void:
         return
     var sc := n.scale.x
     var he := Vector2(box.size.x, box.size.z) * 0.5 * sc
-    if box.size.y * sc < 0.35 or maxf(he.x, he.y) < 0.2:
+    # D91: a bush is never walked through, however low and small it is - the
+    # flat-thing rule had let the smaller bushes go unregistered
+    if (box.size.y * sc < 0.35 or maxf(he.x, he.y) < 0.2) and not n.scene_file_path.get_file().begins_with("Bush"):
         return                  # rugs, mugs and flat things are walked over
     var yaw := n.rotation.y
     var ax := Vector2(cos(yaw), -sin(yaw))
@@ -1039,6 +1088,7 @@ func _solid_of(n: Node3D) -> void:
     var cen := box.get_center() * sc
     var c2 := Vector2(n.position.x, n.position.z) + ax * cen.x + az * cen.z
     _solid_rects.append([c2, ax, az, he + Vector2(0.1, 0.1)])
+    _sgrid_f = -100000          # D91: a new footprint is seen at once, not up to 600 frames late
 
 func _bake_nav() -> void:
     var rects: Array = _solid_rects.duplicate()
@@ -1238,6 +1288,56 @@ func _scatter_nature() -> void:
                 rng.randf_range(0.0, TAU),
                 rng.randf_range(0.8, 1.35) if is_tree else rng.randf_range(0.7, 1.1)))
 
+## D27: the grass islands between the radial roads read as bare lawns from the
+## stream camera. Fill them with tended greenery - flower beds, bushes and the
+## odd tree - so no angle lands on featureless grass. Grass cells only (no road,
+## square or plot); gate lanes and the river kept clear; trees/bushes register as
+## nav solids so walkers route round them and _townwalk stays at 0 in_solid.
+func _dress_greens() -> void:
+    var taken := {}
+    for plot in plots:
+        taken[plot["cell"]] = true
+    var rng := RandomNumberGenerator.new()
+    rng.seed = 909
+    var flowers := ["Flower_3_Group", "Flower_4_Group"]
+    var lane_end := Hex.pos(Hex.COLS - 2, int(Hex.ROWS / 2))
+    var greened := 0
+    for cell in district_of:
+        if road_cells.has(cell) or square.has(cell) or taken.has(cell):
+            continue
+        var c := Hex.pos(cell.x, cell.y)
+        if river_dist(c.x, c.z) < RIVER_W + 2.0:
+            continue
+        var n := rng.randi_range(3, 5)
+        for i in range(n):
+            var a := rng.randf_range(0.0, TAU)
+            var r := rng.randf_range(0.8, 5.0)
+            var tp := c + Vector3(cos(a) * r, 0.0, sin(a) * r)
+            if absf(tp.z - lane_end.z) < 9.0 and absf(tp.x) > absf(lane_end.x) - 8.0:
+                continue        # keep the gate lanes clear
+            if river_dist(tp.x, tp.z) < RIVER_W + 2.0:
+                continue
+            var roll := rng.randf()
+            var is_tree := roll < 0.16
+            var rad := 1.6 if is_tree else 0.65
+            if not is_clear(tp, rad):
+                continue
+            var nm: String
+            if is_tree:
+                nm = String(TREES[rng.randi() % TREES.size()])
+            elif roll < 0.55:
+                nm = String(BUSHES[rng.randi() % BUSHES.size()])
+            else:
+                nm = flowers[rng.randi() % flowers.size()]
+            var sc := rng.randf_range(0.85, 1.3) if is_tree else rng.randf_range(0.6, 1.0)
+            if bool(_spawn(NATURE, nm, tp, rng.randf_range(0.0, TAU), sc)):
+                _nature_made += 1
+                greened += 1
+                # trees and bushes block the navmesh; flower beds are walked over
+                if is_tree or nm.begins_with("Bush"):
+                    _objs.append([tp, rad])
+    print("D27_GREENS placed %d flora on the grass islands" % greened)
+
 ## The spine is carried out to the wall later, so nothing may stand on that
 ## line - a house had been built right across the inside of the west gate.
 func _clear_gate_lanes() -> void:
@@ -1306,7 +1406,7 @@ func _road_strip(pts_in: Array[Vector3], w: float, dirt := false) -> void:
     mi.mesh = m
     var mkey := "_path_strip" if dirt else "_road_strip"
     if not _mat.has(mkey):
-        var rm: StandardMaterial3D = (_mat.get("MI_Grass" if dirt else "MI_Cobble") as StandardMaterial3D).duplicate()
+        var rm: StandardMaterial3D = (_mat.get("MI_Dirt" if dirt else "MI_Cobble") as StandardMaterial3D).duplicate()
         rm.cull_mode = BaseMaterial3D.CULL_DISABLED
         if dirt:
             rm.albedo_color = Color(0.78, 0.66, 0.52)
@@ -1603,6 +1703,30 @@ func _resolve_overlaps() -> void:
     _road_segs.clear()      # rebuilt for real once the gate lanes are cut
 
 var _road_dropped := 0
+
+## D25: final sweep after ALL roads (gate lanes, scar, south, valley) are laid.
+## Any already-built house whose footprint now sits on a road is removed, exactly
+## as _resolve_overlaps drops on-road plots before build. Landmarks/shops/towers
+## are placed deliberately and are never swept. Runs before growth + nav + people,
+## so nothing references a dropped plot.
+func _final_road_sweep() -> void:
+    var kept: Array = []
+    var dropped := 0
+    for pl in plots:
+        if pl.has("landmark") or pl.has("shop") or pl.has("tower") or not pl.has("node"):
+            kept.append(pl)
+            continue
+        if _rect_on_road(_rect(pl)):
+            var h = pl["node"]
+            if is_instance_valid(h):
+                (h as Node3D).queue_free()
+            pl.erase("node")
+            dropped += 1
+        else:
+            kept.append(pl)
+    plots = kept
+    _road_dropped += dropped
+    print("D25_SWEEP dropped %d on-road houses after valley/south roads (road_dropped total %d)" % [dropped, _road_dropped])
 
 ## any part of a footprint (5x5 samples over the rect) on or within 0.4 m of a road
 func _rect_on_road(r: Array) -> bool:
@@ -2085,7 +2209,7 @@ func _build_mine(wood: Material) -> void:
         var tp := best + face * (0.0 + float(k) * 1.5)
         _box(Vector3(1.6, 0.08, 0.22), Vector3(tp.x, height_at(tp.x, tp.z) + 0.02, tp.z), wood, yaw)
     var cart := best + face * 7.0
-    _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), yaw + PI * 0.5, 0.7)
+    _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), yaw + PI * 0.5, 0.7, true)
     for i in range(10):
         var pb := best + face * rng.randf_range(4, 9) + side * rng.randf_range(3.0, 6.0)
         _spawn_raw(NATURE, "Pebble_Round_" + str([1, 3][rng.randi() % 2]), Vector3(pb.x, height_at(pb.x, pb.z), pb.z), rng.randf_range(0, TAU), rng.randf_range(3.0, 6.0))
@@ -2095,7 +2219,9 @@ func _build_mine(wood: Material) -> void:
     var start := ge + Vector3(1, 0, 0) * 20.0
     _road_strip([start, start.lerp(best + face * 12.0, 0.5), best + face * 12.0, best + face * 2.0], 3.4, true)
 
-func _spawn_raw(dir_path: String, nm: String, pos: Vector3, yaw: float, sc: float) -> Node3D:
+## D16c: solid=true leaves a footprint (navmesh + solid_at) like _spawn does -
+## a parked wagon, a crystal: anything with a body a foot must go round
+func _spawn_raw(dir_path: String, nm: String, pos: Vector3, yaw: float, sc: float, solid := false) -> Node3D:
     var path := dir_path + nm + ".gltf"
     if not ResourceLoader.exists(path):
         path = dir_path + nm + ".glb"
@@ -2110,6 +2236,8 @@ func _spawn_raw(dir_path: String, nm: String, pos: Vector3, yaw: float, sc: floa
     add_child(n)
     if dir_path == MKPROPS:
         _dress(n, "red")
+    if solid:
+        _solid_of(n)
     return n
 
 func _build_range(wood: Material) -> void:
@@ -2240,10 +2368,46 @@ func _lamp_post(p: Vector3, out: Vector3, lv: String, banner: bool) -> void:
 func _bench(p: Vector3, face: Vector3) -> void:
     _spawn(PROPS, "Bench", p, atan2(face.x, face.z))
     _objs.append([p, 1.2])
+    # D17c: room for two on it, facing the way the bench does
+    var fw := Vector3(face.x, 0.0, face.z).normalized()
+    var rt := Vector3(fw.z, 0.0, -fw.x)
+    for sx in [-0.42, 0.42]:
+        _seat(p + rt * float(sx), fw, "bench")
+
+## D17c: places a body can sit - the benches round the square, the tavern's
+## stools and chairs. {"p": the seat on the ground, "f": the way a sitter faces,
+## "kind", "by": the sitter's instance id (0 = free)}
+var seats: Array = []
+var tavern_at := Vector3.INF
+
+func _seat(p: Vector3, face: Vector3, kind: String) -> void:
+    face.y = 0.0
+    seats.append({"p": Vector3(p.x, height_at(p.x, p.z), p.z), "f": face.normalized(), "kind": kind, "by": 0})
+
+## the nearest free seat within r of `near` (-1 = none)
+func free_seat(near: Vector3, r: float) -> int:
+    var best := -1
+    var bd := r
+    for i in seats.size():
+        var s: Dictionary = seats[i]
+        var by := int(s["by"])
+        if by != 0:
+            var o := instance_from_id(by)
+            if o != null and is_instance_valid(o) and o is Townsfolk and int((o as Townsfolk)._seat_i) == i:
+                continue
+            s["by"] = 0
+        var sp: Vector3 = s["p"]
+        var d := Vector2(sp.x - near.x, sp.z - near.z).length()
+        if d < bd:
+            bd = d
+            best = i
+    return best
 
 func _planter(p: Vector3, yaw: float, wood: Material) -> void:
     var g := height_at(p.x, p.z)
-    _box(Vector3(1.1, 0.45, 0.45), Vector3(p.x, g + 0.22, p.z), wood, yaw)
+    # D91: the planter (and the bush in it) is a body's obstacle - a wizard
+    # had been standing inside one
+    _solid_of(_box(Vector3(1.1, 0.45, 0.45), Vector3(p.x, g + 0.22, p.z), wood, yaw))
     var soil := StandardMaterial3D.new()
     soil.albedo_color = Color(0.22, 0.15, 0.10)
     _box(Vector3(1.0, 0.04, 0.36), Vector3(p.x, g + 0.44, p.z), soil, yaw)
@@ -2458,6 +2622,9 @@ func _build_scar() -> void:
         n.rotation.x = rng.randf_range(-0.55, 0.55)
         n.rotation.z = rng.randf_range(-0.55, 0.55)
         _glow_crystal(n, cols[rng.randi() % cols.size()], rng.randf_range(0.8, 2.4))
+        # D16c: scar-glass is solid - folk walked through it on the Delvers'
+        # Road (the mouth itself lies beyond the glass, SCAR_R + 6 out)
+        _solid_of(n)
     # warped trees round the rim
     for i in range(30):
         var a := rng.randf() * TAU
@@ -2676,7 +2843,7 @@ func _build_fields() -> void:
     var az: float = float(_wall_info["az"])
     var rng := RandomNumberGenerator.new()
     rng.seed = 515
-    var soil: StandardMaterial3D = (_mat.get("MI_Grass") as StandardMaterial3D).duplicate()
+    var soil: StandardMaterial3D = (_mat.get("MI_Dirt") as StandardMaterial3D).duplicate()
     soil.albedo_color = Color(0.55, 0.42, 0.30)
     soil.cull_mode = BaseMaterial3D.CULL_DISABLED
     var wheat_mesh := _mesh_of(NATURE + "Grass_Wispy_Tall.gltf")
@@ -2839,7 +3006,7 @@ func _build_farms() -> void:
                 stack.position = Vector3(sp.x, height_at(sp.x, sp.z) + 1.1, sp.z)
                 add_child(stack)
             var cart := hp + to_road * 6.0 + fw * 2.0
-            _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), rng.randf() * TAU, 0.75)
+            _spawn_raw(MKPROPS, "Prop_Wagon", Vector3(cart.x, height_at(cart.x, cart.z), cart.z), rng.randf() * TAU, 0.75, true)
             var door := house_pos + to_road * (_depth_of("d") * 0.5 + 1.4)
             _road_strip([door, door.lerp(road, 0.5), road], 3.0, true)
             _objs.append([hp, 14.0])
@@ -2940,11 +3107,20 @@ func _spawn_animals() -> void:
         _pen(pc, fw, sd, hw, hd, (hp - pc).normalized())
         _objs.append([pc, 10.0])
         var hk: Array = herds[i % herds.size()]
+        var hm := Animal.HerdMind.new()
+        hm.centre = pc
+        hm.fwd = fw
+        hm.side = sd
+        hm.hw = hw - 1.4
+        hm.hd = hd - 1.4
+        hm.start()
+        _herds.append(hm)
         if String(hk[0]) == "Sheep":
-            _flock_pens.append([pc, fw, sd, hw - 1.4, hd - 1.4])
+            _flock_pens.append([pc, fw, sd, hw - 1.4, hd - 1.4, hm])
         for k in range(int(hk[1])):
             var at := pc + sd * rng.randf_range(-hw + 1.5, hw - 1.5) + fw * rng.randf_range(-hd + 1.5, hd - 1.5)
             _animal(String(hk[0]), pc, fw, sd, hw - 1.4, hd - 1.4, at)
+            (animals[animals.size() - 1] as Animal).herd = hm
     # horses + llamas grazing loose in the meadow by the first farm (a paddock)
     if not _farm_frames.is_empty():
         var hp0: Vector3 = _farm_frames[0][0]
@@ -2957,11 +3133,22 @@ func _spawn_animals() -> void:
             var psd := Vector3(-out.z, 0, out.x)
             _pen(pd, pfw, psd, 13.0, 10.0, -out)
             _paddock = [pd, pfw, psd]
+            var pm := Animal.HerdMind.new()
+            pm.centre = pd
+            pm.fwd = pfw
+            pm.side = psd
+            pm.hw = 11.5
+            pm.hd = 8.5
+            pm.start()
+            _herds.append(pm)
+            _paddock.append(pm)
             _objs.append([pd, 16.0])
             for k in range(3):
                 _animal("Horse", pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+                (animals[animals.size() - 1] as Animal).herd = pm
             for k in range(2):
                 _animal("Llama", pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+                (animals[animals.size() - 1] as Animal).herd = pm
     # ducks on the slow water, a little flotilla at a few spots
     for xx in [-80.0, 12.0, 95.0, -150.0]:
         var x: float = float(xx)
@@ -2976,38 +3163,19 @@ func _spawn_animals() -> void:
             var kind := "Pug" if k % 2 == 0 else "Corgi"
             _animal(kind, _market_pos, Vector3(0, 0, 1), Vector3(1, 0, 0), 9.0, 9.0,
                     _market_pos + Vector3(rng.randf_range(-6, 6), 0, rng.randf_range(-6, 6)))
+            (animals[animals.size() - 1] as Animal).follow = true
     # a fox at the edge of the lumber mill's woods
     if landmarks.has("lm_sawmill"):
         var sw: Vector3 = landmarks["lm_sawmill"][0]
         var fc := sw + Vector3(-18, 0, 30)
         _animal("Fox", fc, Vector3(0, 0, 1), Vector3(1, 0, 0), 10.0, 8.0, fc)
-    # birds: little dark shapes wheeling over the valley, crows over the scar
+    # birds: flocks that wheel and migrate over the valley, crows over the scar (D20c)
     var dark := StandardMaterial3D.new()
     dark.albedo_color = Color(0.08, 0.08, 0.1)
     dark.cull_mode = BaseMaterial3D.CULL_DISABLED
     var spots := [[Vector3(0, 42, 0), 70.0, 6], [Vector3(-160, 34, 70), 40.0, 4], [_scar + Vector3(0, 24, 0), 22.0, 5]]
     for sp in spots:
-        for k in range(int(sp[2])):
-            var b := Node3D.new()
-            for side_s in [-1.0, 1.0]:
-                var wing := MeshInstance3D.new()
-                var wm := BoxMesh.new()
-                wm.size = Vector3(0.55, 0.03, 0.22)
-                wing.mesh = wm
-                wing.material_override = dark
-                wing.position = Vector3(0.28 * float(side_s), 0, 0)
-                b.add_child(wing)
-            var body := MeshInstance3D.new()
-            var bm := BoxMesh.new()
-            bm.size = Vector3(0.12, 0.1, 0.35)
-            body.mesh = bm
-            body.material_override = dark
-            b.add_child(body)
-            b.scale = Vector3.ONE * 1.4
-            add_child(b)
-            var w := rng.randf_range(0.12, 0.25) * (1.0 if rng.randf() < 0.5 else -1.0)
-            _birds.append([b, sp[0] as Vector3 + Vector3(rng.randf_range(-8, 8), rng.randf_range(-4, 6), rng.randf_range(-8, 8)),
-                           float(sp[1]) * rng.randf_range(0.6, 1.1), w, rng.randf() * TAU])
+        _add_flock(sp[0] as Vector3, float(sp[1]) * 0.8, int(sp[2]), 1.4, dark, rng)
     _spawn_more_animals(dark)
 
 ## D5: hens in a fenced run by each farmhouse, a sheepdog walking the edge of
@@ -3047,14 +3215,21 @@ func _spawn_more_animals(dark: StandardMaterial3D) -> void:
     for fp in _flock_pens:
         var c: Vector3 = fp[0]
         _animal("Corgi", c, fp[1], fp[2], float(fp[3]), float(fp[4]), c + (fp[2] as Vector3) * float(fp[3]))
-        (animals[animals.size() - 1] as Animal).edge = true
+        var sdog := animals[animals.size() - 1] as Animal
+        sdog.edge = true
+        if fp.size() > 5 and fp[5] != null:      # D20c: work the flock, not the fence
+            sdog.herd = fp[5]
+            sdog.orbit = true
     # the paddock: two more horses and a foal (five grown horses in all)
     if not _paddock.is_empty():
         var pd: Vector3 = _paddock[0]
         var pfw: Vector3 = _paddock[1]
         var psd: Vector3 = _paddock[2]
+        var pm2 = _paddock[3] if _paddock.size() > 3 else null
         for kind in ["Horse", "Horse", "Foal"]:
             _animal(String(kind), pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+            if pm2 != null:
+                (animals[animals.size() - 1] as Animal).herd = pm2
     # cats about the streets and doorsteps inside the town
     if _market_pos != Vector3.ZERO:
         var cats := 0
@@ -3068,7 +3243,7 @@ func _spawn_more_animals(dark: StandardMaterial3D) -> void:
                 continue
             _animal("Cat", p, Vector3(0, 0, 1), Vector3(1, 0, 0), 4.0, 4.0, p)
             cats += 1
-    # crows over the fields
+    # crows over the fields - a small flock each (D20c)
     var fi := 0
     for f in _fields:
         if fi >= 5:
@@ -3077,27 +3252,40 @@ func _spawn_more_animals(dark: StandardMaterial3D) -> void:
         var fc: Vector3 = f[0]
         var top := fc + Vector3(0, height_at(fc.x, fc.z) + 15.0, 0)
         var rad := 8.0 + maxf(float(f[3]), float(f[4])) * 0.35
-        for k in range(3):
-            var b := Node3D.new()
-            for side_s in [-1.0, 1.0]:
-                var wing := MeshInstance3D.new()
-                var wm := BoxMesh.new()
-                wm.size = Vector3(0.55, 0.03, 0.22)
-                wing.mesh = wm
-                wing.material_override = dark
-                wing.position = Vector3(0.28 * float(side_s), 0, 0)
-                b.add_child(wing)
-            var body := MeshInstance3D.new()
-            var bm := BoxMesh.new()
-            bm.size = Vector3(0.12, 0.1, 0.35)
-            body.mesh = bm
-            body.material_override = dark
-            b.add_child(body)
-            b.scale = Vector3.ONE * 1.3
-            add_child(b)
-            var w := rng.randf_range(0.15, 0.3) * (1.0 if rng.randf() < 0.5 else -1.0)
-            _birds.append([b, top + Vector3(rng.randf_range(-4, 4), rng.randf_range(-2, 4), rng.randf_range(-4, 4)),
-                           rad * rng.randf_range(0.6, 1.1), w, rng.randf() * TAU])
+        _add_flock(top, rad * 0.85, 3, 1.3, dark, rng)
+
+## D20c: a flock of birds wheels AND migrates together - one shared centre that
+## ambles between waypoints (they travel as a group), one shared turn direction
+## (they bank the same way), and each bird a small angle offset so they bunch into
+## a loose knot instead of spreading evenly round a ring.
+func _add_flock(home: Vector3, rad: float, n: int, scl: float, dark: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+    var w := rng.randf_range(0.14, 0.26) * (1.0 if rng.randf() < 0.5 else -1.0)
+    var fl := {"home": home, "centre": home, "to": home, "t": 0.0, "w": w,
+               "phase": rng.randf() * TAU, "r": maxf(4.0, rad), "span": maxf(6.0, rad * 0.7), "moved": 0.0}
+    _flocks.append(fl)
+    for k in range(n):
+        var b := _make_bird(dark, scl)
+        add_child(b)
+        _birds.append([b, fl, rng.randf_range(-rad * 0.16, rad * 0.16), rng.randf_range(-0.7, 0.7), rng.randf() * TAU])
+
+func _make_bird(dark: StandardMaterial3D, scl: float) -> Node3D:
+    var b := Node3D.new()
+    for side_s in [-1.0, 1.0]:
+        var wing := MeshInstance3D.new()
+        var wm := BoxMesh.new()
+        wm.size = Vector3(0.55, 0.03, 0.22)
+        wing.mesh = wm
+        wing.material_override = dark
+        wing.position = Vector3(0.28 * float(side_s), 0, 0)
+        b.add_child(wing)
+    var body := MeshInstance3D.new()
+    var bm := BoxMesh.new()
+    bm.size = Vector3(0.12, 0.1, 0.35)
+    body.mesh = bm
+    body.material_override = dark
+    b.add_child(body)
+    b.scale = Vector3.ONE * scl
+    return b
 
 ## ---------------------------------------------------------------- fishing
 ## Timber docks on the town bank, a fisher on each. Fishing rules are in
@@ -3194,25 +3382,536 @@ func go_fish(hero_name: String, luck := 0, lure := 0, hook_bonus := Fishing.DOCK
         _on_caught(res["item"], hero_name)
     return res
 
+## D20b: the signals the townsfolk read each frame.
+func is_raid_on() -> bool:
+    return raids != null and bool(raids._live)
+
+func is_festival() -> bool:
+    return festival
+
+## the nearest house a frightened body with no home of its own can duck into -
+## a built residential plot's door + just-inside point
+func flee_refuge(pos: Vector3) -> Array:
+    var best := INF
+    var out: Array = []
+    for pl in plots:
+        if pl.has("back") or pl.has("shop") or pl.has("landmark") or pl.has("special") \
+                or pl.get("unbuilt", false) or not pl.has("door"):
+            continue
+        var d: Vector3 = pl["door"]
+        var dist := Vector2(d.x - pos.x, d.z - pos.z).length()
+        if dist < best:
+            best = dist
+            out = [d, pl.get("door_in", Vector3.ZERO)]
+    return out
+
+## D20b: a festival now and then draws the town to the square (never during a
+## raid or the deep night). Townsfolk._maybe_gather reads is_festival/festival_at.
+## D60: tag the line just appended to feed (see feed_tags). `who` = the HEROES the line is
+## about, by the name the hub shows; omit it for a line about townsfolk or about nobody.
+## The town's own day rides along, taken now, when the line is raised.
+func tag_feed(kind: String, who: Array = []) -> void:
+    if feed.is_empty():
+        return
+    var t := {"kind": kind}
+    if not who.is_empty():
+        t["who"] = who.duplicate()
+    if economy:
+        t["day"] = int(economy.day)
+    var k := str(feed.back())
+    feed_tags.erase(k)                  # re-insert: newest last, so the trim below drops the oldest
+    feed_tags[k] = t
+    while feed_tags.size() > FEED_TAG_MAX:
+        feed_tags.erase(feed_tags.keys()[0])
+
+## D63: THE FESTIVAL IS AN EVENT, NOT A BOOLEAN. A festival has a REASON (the
+## quiet market-day timer stays as the baseline; a raid beaten back, the town
+## growing a level, a hero home from the scar and a viewer's gift cause one), it
+## DRESSES the square (bunting stall to stall and in over the well, pennons,
+## lanterns lit after dark - built here, struck when it ends, never solid, so the
+## navmesh is untouched), it TRADES (the market sells food off the stores into the
+## treasury while it runs) and it calls a caravan in (a festival is a good hour for
+## one - D39's chance, not a new mechanic). A festival a viewer PAID for is theirs:
+## named in the Chronicle, longer, and dressed bigger and in gold.
+## Words: lore_lines.json "festivals" (C6, read by _fest_pool - see D63b below),
+## with {who} {buyer} {town}; else the short fallbacks. All reads go through _fest_pick.
+var fest_reason := ""            # market / raid / level / hero / gift
+var fest_who: Array = []         # the heroes it is for (D60 `who`)
+var fest_buyer := ""             # D63.7: the viewer who paid for it
+var fest_big := false
+var fest_trades := 0             # D63.5: lots sold on the square this festival
+var fest_gold := 0
+var fest_log: Array = []         # tools/_d63_fest.gd: [reason, big, buyer] per festival begun
+var _fest_pending := {}          # a paid festival waiting out a raid
+var _fest_dress: Node3D = null
+var _fest_lights: Array = []     # OmniLights: lit after dark (always for a gift)
+var _fest_trade_t := 0.0
+var _fest_gap := 999.0           # seconds since the last festival ended
+var _fest_lore := {}
+var _fest_lore_ok := false
+const FEST_GAP := 240.0          # a caused festival (not level/gift) needs this quiet first
+const FEST_LEN := {"market": [55.0, 85.0], "raid": [80.0, 110.0], "level": [100.0, 130.0],
+    "hero": [70.0, 95.0], "gift": [160.0, 200.0]}
+const FEST_OPEN := {
+    "market": ["A festival gathers in the market square - music, stalls, and a crowd!"],
+    "raid": ["The gates held. Bellmire pours into the square to drink to the Watch."],
+    "level": ["Bellmire is {town} now, and the square says so with music and bunting."],
+    "hero": ["{who} comes home from the scar, and the square turns out to welcome them."],
+    "gift": ["A Festival of Plenty, the gift of {buyer}! The square is strung with gold and the town drinks their health."],
+}
+const FEST_CLOSE := ["The festival in the square winds down; folk drift back to their work."]
+const FEST_GIFT_CLOSE := ["The lanterns of {buyer}'s festival burn down, and Bellmire will talk of it for days."]
+
+## D63b: C6 shipped in its own shape - reasons{harvest, raid_survived, lord_felled,
+## hero_home, town_level, viewer_gift}, crowd, toasts, stalls, notables[{who,line}],
+## e3po, closings, and viewer_paid{openings, crowd, toasts, stalls, e3po, notables,
+## closings} carrying {buyer}. The game's reasons map onto it (the timed market
+## festival is the harvest feast). The D63a shape (openings.<reason>, gift_*) is
+## still read, and the short code lines below are the last fallback.
+const FEST_REASON_KEY := {"market": "harvest", "raid": "raid_survived", "level": "town_level",
+    "hero": "hero_home", "gift": "viewer_gift", "lord": "lord_felled"}
+const FEST_CROWD := ["Make way for the dancers!", "Another round over here!"]
+const FEST_TOAST := ["To Bellmire!", "To the Watch, and the wall!"]
+
+func _fest_load() -> void:
+    if _fest_lore_ok:
+        return
+    _fest_lore_ok = true
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f:
+        var d = JSON.parse_string(f.get_as_text())
+        if d is Dictionary and (d as Dictionary).get("festivals") is Dictionary:
+            _fest_lore = d["festivals"]
+
+func _fest_arr(src) -> Array:
+    var out: Array = []
+    if src is Array:
+        for x in src:
+            if x is String and String(x) != "":
+                out.append(x)
+            elif x is Dictionary and String((x as Dictionary).get("line", "")) != "":
+                out.append(String(x["line"]))     # notables: {who, line}
+    return out
+
+func _fest_dig(path: Array):
+    var at = _fest_lore
+    for k in path:
+        if not (at is Dictionary):
+            return null
+        at = (at as Dictionary).get(k)
+    return at
+
+## the pool for one kind of line. A paid festival reads viewer_paid first.
+func _fest_pool(key: String, sub := "") -> Array:
+    _fest_load()
+    var vp := fest_reason == "gift" or key.begins_with("gift_")
+    var tries: Array = []
+    match key:
+        "openings":
+            tries = [["reasons", FEST_REASON_KEY.get(sub, "harvest")], ["openings", sub]]
+        "gift_openings":
+            tries = [["viewer_paid", "openings"], ["gift_openings"], ["reasons", "viewer_gift"]]
+        "closings":
+            tries = [["closings"]]
+        "gift_closings":
+            tries = [["viewer_paid", "closings"], ["gift_closings"], ["closings"]]
+        _:     # crowd, toasts, stalls, notables, e3po
+            tries = ([["viewer_paid", key]] if vp else []) + [[key]]
+    for t in tries:
+        var pool := _fest_arr(_fest_dig(t))
+        if not pool.is_empty():
+            return pool
+    match key:
+        "openings": return FEST_OPEN.get(sub, FEST_OPEN["market"])
+        "closings": return FEST_CLOSE
+        "gift_openings": return FEST_OPEN["gift"]
+        "gift_closings": return FEST_GIFT_CLOSE
+        "crowd": return FEST_CROWD
+        "toasts": return FEST_TOAST
+    return []
+
+func _fest_pick(key: String, sub := "") -> String:
+    var pool := _fest_pool(key, sub)
+    if pool.is_empty():
+        return ""
+    var who := ", ".join(fest_who.map(func(x) -> String: return str(x)))
+    var tn: String = String(economy.get("town_name")) if economy else "Bellmire"
+    return String(pool[randi() % pool.size()]).format({"who": who if who != "" else "a hero",
+        "buyer": fest_buyer if fest_buyer != "" else "a generous stranger", "town": tn})
+
+## D63b: the festival TALKS while it runs. Festival-goers in the square raise a
+## cup in their own bubble (crowd / toasts - never the feed, so the Chronicle is
+## not flooded); every 16-34 s the Chronicle gets one line that rotates stalls ->
+## a notable -> E3PO (who says his in his own bubble too).
+var fest_barks := 0
+var fest_news := 0
+var _fest_bark_t := 2.0
+var _fest_news_t := 12.0
+var _fest_news_i := 0
+const FEST_NEWS_ORDER := ["stalls", "notables", "e3po"]
+
+func _fest_talk(delta: float) -> void:
+    _fest_bark_t -= delta
+    if _fest_bark_t <= 0.0:
+        _fest_bark_t = randf_range(4.0, 7.0) if fest_big else randf_range(6.0, 10.0)
+        var near: Array = []
+        for p in people:
+            if is_instance_valid(p) and p.visible and not p.inside and p.rank < 0 \
+                    and p.shout_lines.is_empty() and p.global_position.distance_to(festival_at) < 22.0:
+                near.append(p)
+        if not near.is_empty():
+            var ln := _fest_pick("toasts" if randf() < 0.4 else "crowd")
+            if ln != "":
+                (near[randi() % near.size()] as Townsfolk).say_once(ln)
+                fest_barks += 1
+    _fest_news_t -= delta
+    if _fest_news_t <= 0.0:
+        _fest_news_t = randf_range(16.0, 24.0) if fest_big else randf_range(24.0, 34.0)
+        var k: String = FEST_NEWS_ORDER[_fest_news_i % FEST_NEWS_ORDER.size()]
+        _fest_news_i += 1
+        var ln := _fest_pick(k)
+        if ln == "":
+            return
+        if k == "e3po" and notables and notables.has_method("e3po_line") and notables.e3po_line(ln):
+            pass
+        else:
+            feed.append(ln)
+        tag_feed("festival", fest_who)
+        fest_news += 1
+
+## Begin a festival. `who` = hero names it is for; `buyer` = a viewer who paid
+## (a gift is never refused: under a raid it waits, at night it is lit). A caused
+## festival respects FEST_GAP and the night; the market one is the old timer.
+func start_festival(reason: String, who: Array = [], buyer := "") -> bool:
+    if economy == null or _market_pos == Vector3.ZERO:
+        return false
+    var paid := reason == "gift"
+    if is_raid_on():
+        if paid:
+            _fest_pending = {"who": who.duplicate(), "buyer": buyer}
+        return false
+    if festival:
+        if not paid:
+            return false
+        # a viewer's gift lands on a festival already running: it becomes theirs
+        fest_reason = "gift"
+        fest_buyer = buyer
+        fest_who = who.duplicate()
+        fest_big = true
+        _fest_left = maxf(_fest_left, randf_range(160.0, 200.0))
+        _dress_festival(true)
+        feed.append(_fest_pick("gift_openings"))
+        tag_feed("festival", fest_who)
+        fest_log.append([reason, true, buyer])
+        return true
+    if not paid and economy.is_night():
+        return false
+    if reason in ["raid", "hero"] and _fest_gap < FEST_GAP:
+        return false
+    festival = true
+    festival_at = _market_pos
+    fest_reason = reason
+    fest_who = who.duplicate()
+    fest_buyer = buyer
+    fest_big = paid
+    fest_trades = 0
+    fest_gold = 0
+    _fest_trade_t = 4.0
+    _fest_bark_t = 2.0
+    _fest_news_t = 8.0 if paid else 12.0
+    _fest_news_i = 0
+    var ln: Array = FEST_LEN.get(reason, FEST_LEN["market"])
+    _fest_left = randf_range(float(ln[0]), float(ln[1]))
+    _fest_t = randf_range(260.0, 420.0)     # a caused festival replaces the next timed one
+    fests += 1
+    _dress_festival(fest_big)
+    feed.append(_fest_pick("gift_openings") if paid else _fest_pick("openings", reason))
+    tag_feed("festival", fest_who)
+    fest_log.append([reason, fest_big, buyer])
+    # D63.5: a festival is a good hour for a caravan (D39's chance, sooner)
+    if _caravans.is_empty() and _caravan_t > 15.0:
+        _caravan_t = randf_range(6.0, 15.0)
+    return true
+
+func _end_festival() -> void:
+    festival = false
+    _strike_festival()
+    var ln := _fest_pick("gift_closings") if fest_reason == "gift" else _fest_pick("closings")
+    if fest_trades > 0:
+        ln += "  (%d lots sold on the square, %d gold to the treasury)" % [fest_trades, fest_gold]
+    feed.append(ln)
+    tag_feed("festival", fest_who)
+    _fest_gap = 0.0
+    fest_reason = ""
+    fest_who = []
+    fest_buyer = ""
+    fest_big = false
+
+## D63.5: goods change hands - the square sells food off the stores while it runs
+func _fest_trade(delta: float) -> void:
+    _fest_trade_t -= delta
+    if _fest_trade_t > 0.0:
+        return
+    _fest_trade_t = 3.0 if fest_big else 6.0
+    if economy.has_method("trade_blocked") and economy.trade_blocked():
+        return
+    if economy.take("food", 1.0):
+        var g := maxi(1, int(round(economy.price("food"))))
+        economy.treasury += g
+        fest_trades += 1
+        fest_gold += g
+
+func _festival_pass(delta: float) -> void:
+    if economy == null:
+        return
+    if festival:
+        _fest_left -= delta
+        _fest_trade(delta)
+        _fest_talk(delta)
+        _fest_light_pass()
+        if _fest_left <= 0.0 or is_raid_on():
+            _end_festival()
+        return
+    _fest_gap += delta
+    if not _fest_pending.is_empty() and not is_raid_on():
+        var p: Dictionary = _fest_pending
+        _fest_pending = {}
+        start_festival("gift", p.get("who", []), String(p.get("buyer", "")))
+        return
+    if is_raid_on() or economy.is_night():
+        return
+    _fest_t -= delta
+    if _fest_t <= 0.0:
+        _fest_t = randf_range(260.0, 420.0)
+        start_festival("market")
+
+## ---- D63.1: the square dresses itself
+const FEST_COLS := [Color(0.82, 0.16, 0.13), Color(0.95, 0.76, 0.20), Color(0.16, 0.36, 0.78),
+    Color(0.20, 0.58, 0.28), Color(0.93, 0.91, 0.84)]
+const FEST_GOLD := [Color(0.98, 0.80, 0.22), Color(0.86, 0.16, 0.14), Color(0.98, 0.92, 0.70)]
+
+func _strike_festival() -> void:
+    if is_instance_valid(_fest_dress):
+        _fest_dress.queue_free()
+    _fest_dress = null
+    _fest_lights = []
+
+func _fest_mat(col: Color, glow := 0.0) -> StandardMaterial3D:
+    var m := StandardMaterial3D.new()
+    m.albedo_color = col
+    m.cull_mode = BaseMaterial3D.CULL_DISABLED
+    m.vertex_color_use_as_albedo = true
+    if glow > 0.0:
+        m.emission_enabled = true
+        m.emission = col
+        m.emission_energy_multiplier = glow
+    return m
+
+func _fest_mesh(root: Node3D, mesh: Mesh, pos: Vector3, mat: Material, yaw := 0.0) -> MeshInstance3D:
+    var mi := MeshInstance3D.new()
+    mi.mesh = mesh
+    mi.material_override = mat
+    mi.position = pos
+    mi.rotation.y = yaw
+    mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    mi.visibility_range_end = 180.0
+    root.add_child(mi)
+    return mi
+
+## pennants hanging along a sagging line from a to b, into the multimesh lists
+func _bunting(xf: Array, cols: Array, a: Vector3, b: Vector3, palette: Array, sag: float) -> void:
+    var d := b - a
+    var n := maxi(3, int(Vector2(d.x, d.z).length() / 0.85))
+    var yaw := atan2(d.x, d.z) + PI * 0.5
+    for i in range(1, n):
+        var t := float(i) / float(n)
+        var p := a + d * t
+        p.y -= sag * 4.0 * t * (1.0 - t)
+        var bs := Basis(Vector3.UP, yaw) * Basis(Vector3(0, 0, 1), PI)   # point hangs down
+        xf.append(Transform3D(bs, p + Vector3(0, -0.22, 0)))
+        cols.append(palette[i % palette.size()])
+
+func _dress_festival(big: bool) -> void:
+    _strike_festival()
+    var root := Node3D.new()
+    root.name = "FestivalDressing"
+    add_child(root)
+    _fest_dress = root
+    var c := _market_pos
+    var g0 := height_at(c.x, c.z)
+    var pal: Array = FEST_GOLD if big else FEST_COLS
+    var wood := _fest_mat(Color(0.42, 0.29, 0.17))
+    var pole := CylinderMesh.new()
+    pole.top_radius = 0.07
+    pole.bottom_radius = 0.09
+    pole.height = 5.6 if big else 5.0
+    var tops: Array = []
+    var xf: Array = []
+    var cols: Array = []
+    var i := 0
+    for st in _stalls:
+        var sp: Vector3 = st[0]
+        var dir := Vector3(sp.x - c.x, 0.0, sp.z - c.z).normalized()
+        var side := Vector3(-dir.z, 0.0, dir.x)
+        var pp := sp + dir * 1.7 + side * 2.7
+        var g := height_at(pp.x, pp.z)
+        _fest_mesh(root, pole, Vector3(pp.x, g + pole.height * 0.5, pp.z), wood)
+        var top := Vector3(pp.x, g + pole.height - 0.1, pp.z)
+        tops.append(top)
+        # a pennon down each pole, in the festival's colour
+        var cloth := QuadMesh.new()
+        cloth.size = Vector2(0.9, 2.2) if big else Vector2(0.6, 1.5)
+        var col: Color = pal[i % pal.size()]
+        var pn := _fest_mesh(root, cloth, top + side * (0.5 if big else 0.35) - Vector3(0, cloth.size.y * 0.5 + 0.2, 0),
+            _fest_mat(col), atan2(side.x, side.z) + PI * 0.5)
+        pn.set_meta("cloth", true)
+        # a lantern at the top of every other pole (every pole for a gift)
+        if big or i % 2 == 0:
+            var lm := SphereMesh.new()
+            lm.radius = 0.18
+            lm.height = 0.36
+            _fest_mesh(root, lm, top + Vector3(0, -0.45, 0) - dir * 0.35, _fest_mat(Color(1.0, 0.78, 0.40), 3.0))
+            var ol := OmniLight3D.new()
+            ol.light_color = Color(1.0, 0.72, 0.38)
+            ol.omni_range = 11.0 if big else 9.0
+            ol.light_energy = 1.6
+            ol.shadow_enabled = false
+            ol.position = top + Vector3(0, -0.6, 0) - dir * 0.35
+            ol.visible = false
+            root.add_child(ol)
+            _fest_lights.append(ol)
+        i += 1
+    if tops.is_empty():
+        return
+    # bunting: stall pole to stall pole round the ring, and in to a crown over the well
+    var crown := Vector3(c.x, g0 + (7.4 if big else 6.6), c.z)
+    for k in range(tops.size()):
+        _bunting(xf, cols, tops[k], tops[(k + 1) % tops.size()], pal, 0.7)
+        _bunting(xf, cols, tops[k], crown, pal, 0.5)
+        if big:
+            _bunting(xf, cols, tops[k] - Vector3(0, 1.1, 0), tops[(k + 1) % tops.size()] - Vector3(0, 1.1, 0), FEST_COLS, 0.5)
+    var pm := PrismMesh.new()
+    pm.size = Vector3(0.34, 0.44, 0.02) * (1.25 if big else 1.0)
+    var mm := MultiMesh.new()
+    mm.transform_format = MultiMesh.TRANSFORM_3D
+    mm.use_colors = true
+    mm.mesh = pm
+    mm.instance_count = xf.size()
+    for k in range(xf.size()):
+        mm.set_instance_transform(k, xf[k])
+        mm.set_instance_color(k, cols[k])
+    var mmi := MultiMeshInstance3D.new()
+    mmi.multimesh = mm
+    mmi.material_override = _fest_mat(Color.WHITE)
+    mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    mmi.visibility_range_end = 180.0
+    root.add_child(mmi)
+    # the crown: a ring of lanterns hung where the lines meet
+    var lm2 := SphereMesh.new()
+    lm2.radius = 0.24
+    lm2.height = 0.48
+    _fest_mesh(root, lm2, crown - Vector3(0, 0.5, 0), _fest_mat(Color(1.0, 0.80, 0.45), 4.0))
+    var cl := OmniLight3D.new()
+    cl.light_color = Color(1.0, 0.70, 0.36)
+    cl.omni_range = 16.0 if big else 12.0
+    cl.light_energy = 2.0
+    cl.shadow_enabled = false
+    cl.position = crown - Vector3(0, 0.8, 0)
+    cl.visible = false
+    root.add_child(cl)
+    _fest_lights.append(cl)
+    fest_dress_n = xf.size()
+    _fest_light_pass()
+
+var fest_dress_n := 0            # pennants hung (tests)
+
+func _fest_light_pass() -> void:
+    var lit: bool = fest_big or (economy != null and (economy.is_night() or economy.hour() >= 18.0 or economy.hour() < 6.5))
+    for l in _fest_lights:
+        if is_instance_valid(l) and (l as OmniLight3D).visible != lit:
+            (l as OmniLight3D).visible = lit
+
+func _work_sounds(delta: float) -> void:
+    # D29: a working town is never silent. The smith rings his anvil; the market
+    # chinks with trade. Daytime only - under a raid the forge is banked and the
+    # stalls shut (is_raid_on), and at night the town is abed (economy.is_night).
+    if economy == null or is_raid_on() or economy.is_night():
+        return
+    _work_t -= delta
+    if _work_t > 0.0:
+        return
+    _work_t = randf_range(1.6, 3.4)
+    # the smith: a single hammer-ring on the anvil - one blow, paced, not a fight
+    if _shop_frame.has("blacksmith"):
+        var fr: Array = _shop_frame["blacksmith"]
+        var anv: Vector3 = fr[0] + fr[1] * 0.6 + fr[2] * 0.4   # the anvil (see _yard "Anvil")
+        anv.y = height_at(anv.x, anv.z) + 0.9
+        Sfx.at("hit", anv, -7.0)
+        work_plays += 1
+    # the market: coins and trade spread across the paved square, a touch less often
+    if _market_pos != Vector3.ZERO and randf() < 0.55:
+        var st: Vector3 = _market_pos + Vector3(randf_range(-7.0, 7.0), 1.0, randf_range(-7.0, 7.0))
+        Sfx.at("coin", st, -9.0)
+        work_plays += 1
+
+## D22a: the town's LAYERED AMBIENCE - looped beds that live in the world (Sfx.bed),
+## so the camera hears the place it is looking at. The river along its banks (one
+## emitter every 40 m of the reach the town sees), the market's murmur over the
+## paved square, the forge's fire at the smith's anvil. Sfx fades each by day,
+## night and raid; the discrete sounds (anvil rings, coins, footfalls) sit on top.
+func _lay_sound_beds() -> void:
+    var sfx := Sfx.live()
+    if sfx == null:
+        return
+    var x := -120.0
+    while x <= 120.0:
+        sfx.bed("river", Vector3(x, WATER_Y + 0.4, river_z_fast(x)), -2.0)
+        x += 40.0
+    if _market_pos != Vector3.ZERO:
+        var m := _market_pos
+        m.y = height_at(m.x, m.z) + 1.6
+        sfx.bed("market", m, 0.0)
+    if _shop_frame.has("blacksmith"):
+        var fr: Array = _shop_frame["blacksmith"]
+        var anv: Vector3 = fr[0] + fr[1] * 0.6 + fr[2] * 0.4
+        anv.y = height_at(anv.x, anv.z) + 1.0
+        sfx.bed("forge", anv, -1.0)
+
 func _process(delta: float) -> void:
     if economy:
         _caravan_pass(delta)
     if chat:
         _viewer_muster(delta)
+    _festival_pass(delta)
+    _work_sounds(delta)
     if persist:
         _save_t -= delta
         if _save_t <= 0.0:
             _save_t = 30.0
             roster.save_all()
     var tnow := Time.get_ticks_msec() / 1000.0
+    for fl in _flocks:
+        fl["phase"] = float(fl["phase"]) + float(fl["w"]) * delta
+        fl["t"] = float(fl["t"]) - delta
+        var fc: Vector3 = fl["centre"]
+        var fto: Vector3 = fl["to"]
+        if float(fl["t"]) <= 0.0 or fc.distance_to(fto) < 2.0:
+            fl["t"] = randf_range(5.0, 12.0)
+            var home: Vector3 = fl["home"]
+            var span: float = fl["span"]
+            fto = home + Vector3(randf_range(-span, span), randf_range(-span * 0.3, span * 0.3), randf_range(-span, span))
+            fl["to"] = fto
+        var step: Vector3 = fc.move_toward(fto, delta * 2.2)   # the flock drifts across the sky
+        fl["moved"] = float(fl["moved"]) + fc.distance_to(step)
+        fl["centre"] = step
     for b in _birds:
         var bn: Node3D = b[0]
-        var c: Vector3 = b[1]
-        var r: float = b[2]
-        var w: float = b[3]
-        var a := tnow * w + float(b[4])
-        bn.position = c + Vector3(cos(a) * r, sin(tnow * 0.7 + float(b[4])) * 2.0, sin(a) * r)
-        bn.rotation.y = -a + (PI if w > 0.0 else 0.0)
+        var fl2: Dictionary = b[1]
+        var r: float = float(fl2["r"]) + float(b[2])
+        var a := float(fl2["phase"]) + float(b[3])
+        var ctr: Vector3 = fl2["centre"]
+        bn.position = ctr + Vector3(cos(a) * r, sin(tnow * 0.7 + float(b[4])) * 1.6, sin(a) * r)
+        bn.rotation.y = -a + (PI if float(fl2["w"]) > 0.0 else 0.0)
         var flap := sin(tnow * 9.0 + float(b[4])) * 0.6
         (bn.get_child(0) as Node3D).rotation.z = flap
         (bn.get_child(1) as Node3D).rotation.z = -flap
@@ -3223,35 +3922,111 @@ func _process(delta: float) -> void:
     for sp in _spinners:
         var n: Node3D = sp[0]
         n.rotate_object_local(sp[1], float(sp[2]) * delta)
+    for h in _herds:
+        h.tick(delta)
     _lod_t -= delta
     if _lod_t <= 0.0:
-        _lod_t = 0.25
+        _lod_t = LOD_EVERY
         _lod_pass()
 
 ## ---- D7: far-away LOD. Townsfolk past LOD_NEAR from the camera step and
 ## animate every 2nd physics tick, past LOD_FAR every 4th (townsfolk.gd set_lod).
-## Viewers' heroes and the mounted watch always run full; so does everyone while
-## raiders are in the valley (raids.gd moves the fighters itself).
+## Viewers' heroes and the mounted watch always run full; so does every defender
+## raids.gd is moving in a fight (raids._fighters).
+## D23: "the camera" is every view that is actually DRAWING - the eye's own camera
+## when the main view draws 3D, plus each visible spotlight pane's camera (the L32
+## 2x2 grid is the resting state, and with it up the eye draws no 3D at all, so
+## the old eye-only distance was measuring from a camera nobody sees). A body in
+## no drawing camera's view (outside every frustum, past its far, behind it) is
+## LOD 3: logic and pose every 8th tick - unseen, so the cost buys nothing. The
+## near tiers go by how big the body is ON SCREEN (lod_px), not raw metres. The
+## pass runs every 0.15 s so a pane cut promotes its new subjects within ~9 frames.
+## Animals take the same LOD (animal.gd set_lod).
 const LOD_NEAR := 60.0
 const LOD_FAR := 120.0
+const LOD_EVERY := 0.15
 var _lod_t := 0.0
-var lod_counts := [0, 0, 0]
+var lod_counts := [0, 0, 0, 0]
 var lod_on := true          # tools compare FPS with it off
+var lod_unseen := true      # D23: tools A/B the unseen tier
+
+## D23: the cameras that are drawing right now: [cam, tan(v_half_fov), aspect, px high]
+func lod_cams() -> Array:
+    var out: Array = []
+    if not is_inside_tree():
+        return out
+    var vp := get_viewport()
+    var main := vp.get_camera_3d()
+    if main != null and not vp.disable_3d:
+        var sz := vp.get_visible_rect().size
+        out.append([main, tan(deg_to_rad(main.fov) * 0.5), sz.x / maxf(1.0, sz.y), sz.y])
+    for c in get_children():
+        if c is Spotlight:
+            var panes = c.get("_panes")
+            if not (panes is Dictionary):
+                break
+            for k in panes:
+                var pd: Dictionary = panes[k]
+                var box = pd.get("box")
+                var cam = pd.get("cam")
+                var sv = pd.get("vp")
+                if box == null or cam == null or sv == null or not is_instance_valid(cam):
+                    continue
+                if not (box as Control).is_visible_in_tree() or not (cam as Camera3D).is_inside_tree():
+                    continue
+                var ssz: Vector2i = (sv as SubViewport).size
+                out.append([cam, tan(deg_to_rad((cam as Camera3D).fov) * 0.5), float(ssz.x) / maxf(1.0, float(ssz.y)), float(ssz.y)])
+            break
+    return out
+
+## D23: how tall (px) the body stands in the drawing camera that shows it biggest;
+## -1 when no drawing camera can see it (a body near a frustum edge counts as seen:
+## 1.6 m of slack each side). A pane is ~960x540, so "60 m" was a 17 px figure.
+const LOD_PX_FULL := 60.0       # >= this many pixels tall: every tick (lod 0)
+const LOD_PX_MID := 12.0        # >= this: logic every 2nd tick, pose every tick (lod 1)
+static func lod_px(cams: Array, p: Vector3) -> float:
+    var best := -1.0
+    var q := p + Vector3(0, 0.9, 0)
+    for c in cams:
+        var cam: Camera3D = c[0]
+        var l: Vector3 = cam.global_transform.affine_inverse() * q
+        var z := -l.z
+        if l.length() < 6.0:
+            return 9999.0
+        if z <= 0.0 or z > cam.far:
+            continue
+        var tv: float = float(c[1])
+        if absf(l.y) <= z * tv + 1.6 and absf(l.x) <= z * tv * float(c[2]) + 1.6:
+            best = maxf(best, float(c[3]) * 1.8 / (2.0 * z * tv))
+    return best
+
+func _lod_level(cams: Array, p: Vector3) -> int:
+    var px := lod_px(cams, p)
+    if px < 0.0:
+        if lod_unseen:
+            return 3
+        px = 0.0
+    return 0 if px >= LOD_PX_FULL else (1 if px >= LOD_PX_MID else 2)
 
 func _lod_pass() -> void:
-    var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
-    var fight: bool = raids != null and not (raids as Raids).raiders.is_empty()
-    lod_counts = [0, 0, 0]
+    var cams := lod_cams()
+    var fighters: Dictionary = {}
+    if raids != null and not (raids as Raids).raiders.is_empty():
+        fighters = raids.get("_fighters")
+    lod_counts = [0, 0, 0, 0]
     for p in people:
         if not is_instance_valid(p) or not (p is Townsfolk):
             continue
         var v: Townsfolk = p
         var l := 0
-        if lod_on and cam != null and not fight and not (v is HeroBody) and not (v is Cavalry):
-            var d := cam.global_position.distance_to(v.global_position)
-            l = 2 if d > LOD_FAR else (1 if d > LOD_NEAR else 0)
+        if lod_on and not cams.is_empty() and not (v is HeroBody) and not (v is Cavalry) and not fighters.has(v):
+            l = _lod_level(cams, v.global_position)
         v.set_lod(l)
         lod_counts[l] += 1
+    for a in animals:
+        if not is_instance_valid(a) or not a.has_method("set_lod"):
+            continue
+        a.call("set_lod", _lod_level(cams, (a as Node3D).global_position) if lod_on and not cams.is_empty() else 0)
 
 ## ---------------------------------------------------------------- placement
 ## ONE rule for everything that stands on the ground: not in a carriageway,
@@ -3291,6 +4066,21 @@ func road_dist(p: Vector3) -> float:
         if d < best:
             best = d
     return best
+
+## D42: what a foot lands on here, for footstep sounds (Townsfolk._gait_step).
+## The river bridge is wood, the open water its own splash, the cobbled streets
+## and the market paving stone, everything else grass. Cheap - once a stride.
+func surface_at(p: Vector3) -> String:
+    var rd := river_dist(p.x, p.z)
+    if absf(p.z - _bridge_z) < RIVER_W + 2.0 and absf(p.x) < 6.0 and rd < RIVER_W + RIVER_BANK:
+        return "wood"
+    if rd < RIVER_W:
+        return "water"
+    if road_dist(p) < 0.4:
+        return "stone"
+    if _market_pos != Vector3.ZERO and Vector2(p.x - _market_pos.x, p.z - _market_pos.z).length() < 20.0:
+        return "stone"
+    return "grass"
 
 func _plot_r(plot: Dictionary) -> float:
     var sh: String = String(plot.get("shape", "a"))
@@ -3602,9 +4392,15 @@ func _dress_shops() -> void:
                     _on_top("Mug", tt, 0.4, 0.1, 1.0)
                     _yard("Stool", y, side, f, -2.2, float(tz))
                     _yard("Stool", y, side, f, 1.0, float(tz))
+                    # D17c: a stool either side of the table, each facing it
+                    _seat(y + side * -2.2 + f * float(tz), side, "tavern")
+                    _seat(y + side * 1.0 + f * float(tz), -side, "tavern")
                 # two chairs drawn up at the table ends (Fantasy Props MegaKit)
                 _yard("Chair_1", y, side, f, -0.6, 2.9, PI)
                 _yard("Chair_1", y, side, f, -0.6, -3.1)
+                _seat(y + side * -0.6 + f * 2.9, -f, "tavern")
+                _seat(y + side * -0.6 + f * -3.1, f, "tavern")
+                tavern_at = y
                 _yard("Barrel_Holder", y, side, f, 2.9, -2.6)
                 _yard("Barrel", y, side, f, 3.0, 0.4)
                 _yard("Barrel", y, side, f, 3.0, 1.6, 0.6)
@@ -3623,7 +4419,9 @@ var _cloth: StandardMaterial3D
 ## Tiers the town cannot make yet (Roster.town_tier, old sync_unlocks) hang on
 ## the rack under a dark cloth, unlit, marked "not yet made in Bellmire";
 ## when the town grows the cloth comes off.
-func show_tiers(tier: int) -> void:
+## D64: the rack is the smithy's counter. A locked peg now says WHY - the rarity of the piece
+## and the level the smithy would need - so what is on the shelf matches what its level allows.
+func show_tiers(tier: int, shop_lv := 0) -> void:
     if _cloth == null:
         _cloth = StandardMaterial3D.new()
         _cloth.albedo_color = Color(0.14, 0.12, 0.11)
@@ -3639,7 +4437,11 @@ func show_tiers(tier: int) -> void:
             (it["light"] as OmniLight3D).visible = not locked
         if it["label"] != null and is_instance_valid(it["label"]):
             var lb: Label3D = it["label"]
-            lb.text = (String(it["text"]).split("\n")[0] + "\nnot yet made in Bellmire") if locked else String(it["text"])
+            var why := "not yet made in Bellmire"
+            if shop_lv > 0:
+                # short lines: the pegs are a metre apart and the label is big (D64 shot)
+                why = "%s\nsmithy lv %d" % [Economy.rarity_of(int(it["t"])), int(it["t"])]
+            lb.text = (String(it["text"]).split("\n")[0] + "\n" + why) if locked else String(it["text"])
             lb.modulate = Color(0.55, 0.52, 0.5) if locked else (it["col"] as Color)
 
 func _tier_rack(p: Vector3, f: Vector3, side: Vector3, family: String) -> void:
@@ -3669,6 +4471,26 @@ func _tier_rack(p: Vector3, f: Vector3, side: Vector3, family: String) -> void:
         _rack_items.append(item)
         if float(w["glow"]) > 0.0:
             Gear.ignite(n, float(w["glow"]))
+            # D18c: ignite leaves per-surface overrides; show_tiers later drapes
+            # material_override (_cloth) over them, and that stacking is what
+            # threw the 3 headless "Parameter 'material' is null" errors (the
+            # dummy renderer, once per draped rack mesh). Bake the lit material
+            # into a unique mesh so rack weapons carry no surface overrides.
+            for m in ([n as Node] + n.find_children("*", "MeshInstance3D", true, false)):
+                if m is MeshInstance3D:
+                    var mi2 := m as MeshInstance3D
+                    if mi2.mesh == null:
+                        continue
+                    var baked: Mesh = null
+                    for si in range(mi2.mesh.get_surface_count()):
+                        var ov := mi2.get_surface_override_material(si)
+                        if ov != null:
+                            if baked == null:
+                                baked = mi2.mesh.duplicate()
+                            baked.surface_set_material(si, ov)
+                            mi2.set_surface_override_material(si, null)
+                    if baked != null:
+                        mi2.mesh = baked
             var l := OmniLight3D.new()
             l.light_color = Color(1.0, 0.62, 0.22).lerp(Color(0.65, 0.85, 1.0), clampf(float(w["glow"]) - 0.5, 0.0, 1.0) * 0.7)
             l.light_energy = 0.6 * float(w["glow"])
@@ -4029,6 +4851,12 @@ func _folk(role: String, model: String, tint: Color, rng: RandomNumberGenerator)
     return v
 
 func _put_folk(v: Townsfolk, at: Vector3) -> void:
+    # D44b: a stops-walker (home/work ZERO, so the walk audit cannot shield it
+    # by an endpoint) must never START life inside a carved solid: an embedded
+    # spawn breaks route() (off-mesh start -> fallback path into the valley) and
+    # the body then shoves itself clear over a second or two, counted the whole
+    # time. Snap the spawn out of any footprint first (pre-sync: geometric).
+    at = keep_walkable(at)
     at.y = height_at(at.x, at.z)
     v.position = at
     add_child(v)
@@ -4297,7 +5125,7 @@ func _spawn_garrison() -> void:
         c.gear_role = "guard"
         c.gear_seed = rng.randi() % 5
         c.livery = blue
-        c.speed = 7.5
+        c.speed = 11.6                  # D17b: x Townsfolk.pace 0.40 = the watch's old 4.65 m/s
         var loop: Array = ride.duplicate()
         if k % 2 == 1:
             loop.reverse()
@@ -4338,10 +5166,13 @@ func _show_garrison(lv: int, quiet := false) -> void:
         return
     for nm in sworn:
         feed.append("%s is sworn into the watch." % nm)
+        tag_feed("watch")
     if riders == 1:
         feed.append("Another rider joins the mounted watch on Bellmire's roads.")
+        tag_feed("watch")
     elif riders > 1:
         feed.append("The mounted watch rides out of the Town Stables: %d riders on Bellmire's roads." % riders)
+        tag_feed("watch")
 
 ## ---------------------------------------------------------------- the guild
 ## Viewers' heroes. Roster + ChatCmd are the old game's, ported verbatim (pure
@@ -4377,6 +5208,19 @@ func _start_guild() -> void:
 
 ## the one entry point for chat - a fake feed in tests, Twitch IRC in play
 func chat_line(user_id: String, display: String, msg: String) -> String:
+    # D52: raise an existing hero's body BEFORE chat.handle, not after. Signals
+    # fired inside handle (wants_delve / wants_fish / wants_shop) run their
+    # listeners synchronously, and every one guards on heroes.has(uid). At
+    # startup every hero loaded from the on-disk roster is call_deferred(_raise),
+    # so a viewer's first command of the session (very often !delve) arrived
+    # with heroes.has(uid) false - _on_delve returned silently, the hero stood
+    # idle at the well forever, and the chat reply still read "sets out for the
+    # dungeon mouth". Raise FIRST; !enlist (which creates the hero inside
+    # handle) is still covered by the post-handle raise below.
+    if not heroes.has(user_id):
+        var pre := roster.get_hero(user_id)
+        if not pre.is_empty() and roster.is_alive(user_id):
+            _raise(user_id)
     var out := chat.handle(user_id, display, msg)
     var h := roster.get_hero(user_id)
     if not h.is_empty() and roster.is_alive(user_id) and not heroes.has(user_id):
@@ -4444,9 +5288,31 @@ func _on_fish(uid: String) -> void:
             _on_caught(item, who)
             if int(item.get("strike", 0)) == 20:
                 feed.append("%s rolls a 20 on the strike - a perfect hook!" % who)
+                tag_feed("find", [who])
             feed.append("%s lands a %s (%s)!" % [who, item.get("name"), item.get("rarity")])
+            tag_feed("find", [who])
             print("FEED ", feed.back()))
         b.add_child(ang))
+
+## Rally (bits/points reward): a strong combat buff on the hero's next delve
+## (or their live delve if they are already below). Grants giant/haste/heroism/
+## regenerating for RALLY_SECS via the delve's state system.
+const RALLY_SECS := 90.0
+
+func _on_rally(uid: String) -> void:
+    if roster == null:
+        return
+    var h: Dictionary = roster.get_hero(uid)
+    if h.is_empty() or not bool(h.get("alive", true)):
+        return
+    var hname := String(h.get("name", "A hero"))
+    # already delving -> apply to the live combatant; else leave a pending flag
+    var live := delve != null and delve.has_method("apply_rally") and bool(delve.call("apply_rally", uid, RALLY_SECS))
+    if not live:
+        h["rally_secs"] = RALLY_SECS
+        feed.append("%s is rallied - strength, speed, courage, and a healer's touch wait for their next delve." % hname)
+        tag_feed("rally", [hname])
+        print("FEED ", feed.back())
 
 func _on_delve(uid: String) -> void:
     if not heroes.has(uid) or not _scar_info.has("post"):
@@ -4467,6 +5333,7 @@ func _on_delve(uid: String) -> void:
             b.face_yaw = atan2(-fw.x, -fw.z)
             b.rotation.y = b.face_yaw
             feed.append("%s stands at the mouth of the scar." % b.person_name)
+            tag_feed("delve", [b.person_name])
             chat.away[uid] = "waiting at the mouth of the scar"
             print("FEED ", feed.back())
             _at_mouth.append(uid)
@@ -4520,6 +5387,19 @@ func _begin_delve() -> void:
                     people.erase(hb)
                     hb.queue_free()
                     heroes.erase(uid)
+        # D63.4: a party home from the scar is received by a festival that is on -
+        # or, now and then, the town throws one for them
+        var home_names: Array = []
+        for su in survivors:
+            if heroes.has(su):
+                home_names.append(String((heroes[su] as HeroBody).person_name))
+        if not home_names.is_empty():
+            if festival:
+                feed.append("%s come%s home from the scar to a festival, and the square cheers them in." \
+                    % [", ".join(home_names), "" if home_names.size() > 1 else "s"])
+                tag_feed("festival", home_names)
+            elif randf() < 0.4:
+                start_festival("hero", home_names)
         _at_mouth.clear()
         delve.queue_free()
         delve = null)
@@ -4605,46 +5485,267 @@ func route(from: Vector3, to: Vector3) -> Array:
     return pts
 
 ## ---- D1: people give each other room. A coarse 2 m grid of everyone out on
-## the streets, rebuilt once a physics frame; crowd_push(v) is the shove away
-## from whoever stands closer than CROWD_R (posted folk count as obstacles).
-const CROWD_R := 0.75
-var _crowd_f := -1
-var _crowd: Dictionary = {}
+## the streets (and D16a: the town's animals), rebuilt once a physics frame;
+## crowd_push(v) is the shove away from whoever stands closer than CROWD_R
+## (posted folk count as obstacles).
+## D16a LOCAL AVOIDANCE: the shove is a velocity (m/s). Soft out to CROWD_R,
+## hard inside two bodies' width (faster than anyone walks, so nobody is ever
+## walked through). Given the walker's heading, it also YIELDS: someone in the
+## way within CROWD_LOOK m ahead is passed on the side away from them (dead
+## ahead: the walker's right) - the one coming the other way does the same, so
+## two folk meeting in a gate step aside and pass instead of walking into each
+## other. Someone ahead going the same way more slowly is followed, not shoved.
+## D91: the avoidance itself now lives in crowd.gd (class Crowd), shared with
+## the dungeon - ONE copy. The numbers are Crowd's; these names stay for the
+## wagon push below and anyone reading town.CROWD_*.
+const CROWD_R := Crowd.CROWD_R
+const CROWD_LOOK := Crowd.CROWD_LOOK
+const CROWD_SOFT := Crowd.CROWD_SOFT
+const CROWD_HARD := Crowd.CROWD_HARD
+const CROWD_YIELD := Crowd.CROWD_YIELD
+var crowd := Crowd.new()
 
-func crowd_push(v: Node3D) -> Vector3:
-    var f := Engine.get_physics_frames()
-    if f != _crowd_f:
-        _crowd_f = f
-        _crowd.clear()
+## how wide someone is (centre to shoulder): folk, children, riders, animals
+static func body_r(o: Node3D) -> float:
+    return Crowd.body_r(o)
+
+func crowd_push(v: Node3D, dir := Vector3.ZERO) -> Vector3:
+    if not crowd.fresh():
         for o in people:
             if not is_instance_valid(o) or not (o as Node3D).visible or bool(o.get("inside")):
                 continue
-            var op: Vector3 = (o as Node3D).global_position
-            var key := Vector2i(floori(op.x * 0.5), floori(op.z * 0.5))
-            if not _crowd.has(key):
-                _crowd[key] = []
-            (_crowd[key] as Array).append(o)
-    var p := v.global_position
-    var kx := floori(p.x * 0.5)
-    var kz := floori(p.z * 0.5)
-    var push := Vector3.ZERO
-    for dx in range(-1, 2):
-        for dz in range(-1, 2):
-            var cell = _crowd.get(Vector2i(kx + dx, kz + dz))
-            if cell == null:
-                continue
-            for o in cell:
-                if o == v:
-                    continue
-                var op: Vector3 = (o as Node3D).global_position
-                var d := Vector3(p.x - op.x, 0.0, p.z - op.z)
-                var L := d.length()
-                if L < CROWD_R:
-                    if L < 0.01:
-                        d = Vector3(cos(float(v.get_instance_id() % 628) * 0.01), 0.0, sin(float(v.get_instance_id() % 628) * 0.01))
-                        L = 0.01
-                    push += d / L * (CROWD_R - L) / CROWD_R
+            crowd.add(o)
+        for a in animals:
+            if is_instance_valid(a) and (a as Node3D).visible and float(a.get("float_y")) == INF:
+                crowd.add(a)
+    var push := crowd.push(v, dir)
+    if dyn_obstacles:
+        push += _wagon_push(v, v.global_position, body_r(v), dir)      # D16c
     return push
+
+## ---- D16c DYNAMIC OBSTACLES. Everything that stands still is carved out of
+## the navmesh and held off by solid_at (_solid_of, valley._solid); what MOVES
+## is not: the carters' and travellers' wagons, the caravan, the pedlar's cart.
+## Rebuilt once a physics frame from whoever has a .cart, each wagon is an
+## oriented footprint; crowd_push steers round it (a hard push out of it, and a
+## sidestep when it lies ahead) and off_wagons() puts a foot back out of it - a
+## wagon rolling into someone stood still shoves them aside. A carter is never
+## pushed off his own wagon. dyn_obstacles = false only for the before figure.
+var dyn_obstacles := true
+const WAGON_LOOK := 2.4
+var _wag_f := -1
+var _wag: Array = []               # [wagon, owner, centre (x,z), ax, az, half extents, y]
+var _wag_box: Dictionary = {}      # wagon id -> [local centre (x,z) at scale, half extents]
+
+func _wagon_box(w: Node3D) -> Array:
+    var id := w.get_instance_id()
+    if _wag_box.has(id):
+        return _wag_box[id]
+    var box := AABB()
+    var first := true
+    var inv := w.global_transform.affine_inverse()
+    var st: Array = [w]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var ab: AABB = (inv * (c as MeshInstance3D).global_transform) * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            st.append(g)
+    var sc := w.scale.x
+    var out: Array = [Vector2(box.get_center().x, box.get_center().z) * sc, Vector2(box.size.x, box.size.z) * 0.5 * sc] if not first else []
+    _wag_box[id] = out
+    return out
+
+func _wagons() -> Array:
+    var f := Engine.get_physics_frames()
+    if f == _wag_f:
+        return _wag
+    _wag_f = f
+    _wag.clear()
+    if not dyn_obstacles:
+        return _wag
+    for o in people:
+        if not is_instance_valid(o):
+            continue
+        var w = o.get("cart")
+        if w == null or not is_instance_valid(w) or not (w as Node3D).is_visible_in_tree():
+            continue
+        var wb := _wagon_box(w)
+        if wb.is_empty():
+            continue
+        var yaw: float = (w as Node3D).rotation.y
+        var ax := Vector2(cos(yaw), -sin(yaw))
+        var az := Vector2(sin(yaw), cos(yaw))
+        var wp: Vector3 = (w as Node3D).global_position
+        var lc: Vector2 = wb[0]
+        _wag.append([w, o, Vector2(wp.x, wp.z) + ax * lc.x + az * lc.y, ax, az, wb[1], wp.y])
+    return _wag
+
+## the wagons' share of crowd_push: out of any wagon (hard), and round one that
+## lies ahead (a sidestep, like the yield to a body coming the other way)
+func _wagon_push(v: Node3D, p: Vector3, rv: float, dir: Vector3) -> Vector3:
+    var push := Vector3.ZERO
+    var own = v.get("cart")
+    var p2 := Vector2(p.x, p.z)
+    var d2 := Vector2(dir.x, dir.z)
+    var side2 := Vector2(-dir.z, dir.x)
+    for e in _wagons():
+        if e[0] == own or e[1] == v or absf(float(e[6]) - p.y) > 3.0:
+            continue
+        var c: Vector2 = e[2]
+        var he: Vector2 = (e[5] as Vector2) + Vector2(rv + 0.1, rv + 0.1)
+        if p2.distance_to(c) > he.length() + WAGON_LOOK:
+            continue
+        var d := p2 - c
+        var lx := d.dot(e[3])
+        var lz := d.dot(e[4])
+        var gx := he.x - absf(lx)
+        var gz := he.y - absf(lz)
+        if gx > 0.0 and gz > 0.0:
+            var n: Vector2 = (e[3] as Vector2) * signf(lx if lx != 0.0 else 1.0) if gx < gz else (e[4] as Vector2) * signf(lz if lz != 0.0 else 1.0)
+            push += Vector3(n.x, 0.0, n.y) * CROWD_HARD
+            continue
+        if dir == Vector3.ZERO:
+            continue
+        for k in [0.6, 1.2, 1.8, 2.4]:
+            var q: Vector2 = p2 + d2 * float(k) - c
+            if absf(q.dot(e[3])) < he.x and absf(q.dot(e[4])) < he.y:
+                # pass on the side away from the wagon's middle
+                var s := -side2 if (c - p2).dot(side2) > 0.0 else side2
+                push += Vector3(s.x, 0.0, s.y) * CROWD_YIELD * (1.0 - float(k) / WAGON_LOOK * 0.7)
+                break
+    return push
+
+## p put back out of any wagon but `who`'s own (feet, with a body's margin,
+## plus `extra` - a spot to walk to is put clear of crowd_push's hard ring)
+func off_wagons(p: Vector3, who: Node3D = null, extra := 0.0) -> Vector3:
+    var own = who.get("cart") if who != null else null
+    var r := (body_r(who) if who != null else FOOT_R) + 0.05 + extra
+    for e in _wagons():
+        if e[0] == own or e[1] == who or absf(float(e[6]) - p.y) > 3.0:
+            continue
+        var c: Vector2 = e[2]
+        var he: Vector2 = (e[5] as Vector2) + Vector2(r, r)
+        var d := Vector2(p.x, p.z) - c
+        var lx := d.dot(e[3])
+        var lz := d.dot(e[4])
+        var gx := he.x - absf(lx)
+        var gz := he.y - absf(lz)
+        if gx <= 0.0 or gz <= 0.0:
+            continue
+        var mv: Vector2 = (e[3] as Vector2) * signf(lx if lx != 0.0 else 1.0) * (gx + 0.02) if gx < gz else (e[4] as Vector2) * signf(lz if lz != 0.0 else 1.0) * (gz + 0.02)
+        p.x += mv.x
+        p.z += mv.y
+    return p
+
+## Where `who` (stood still: a stop, a camp) draws their wagon up: on open
+## ground beside them with a clear metre all round, so a parked wagon never
+## plugs the lane between two stalls (the navmesh routes through that lane).
+## [centre, wagon yaw] - straight behind if that is clear, else the nearest
+## clear bearing round them; [] = nowhere better, leave it behind them.
+const PARK_CLEAR := 0.9
+func wagon_park(who: Node3D) -> Array:
+    var w = who.get("cart")
+    if w == null or not is_instance_valid(w):
+        return []
+    var wb := _wagon_box(w)
+    if wb.is_empty():
+        return []
+    var he: Vector2 = (wb[1] as Vector2) + Vector2(PARK_CLEAR, PARK_CLEAR)
+    var lc: Vector2 = wb[0]
+    var o := who.global_position
+    var face: float = who.rotation.y
+    for k in [0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6]:
+        var a := face + float(k) * PI / 6.0          # owner faces a; wagon behind
+        var back := Vector3(-sin(a), 0.0, -cos(a))
+        var yaw := a + PI * 0.5
+        var ax := Vector2(cos(yaw), -sin(yaw))
+        var az := Vector2(sin(yaw), cos(yaw))
+        var wp := o + back * 2.6
+        var c := Vector2(wp.x, wp.z) + ax * lc.x + az * lc.y
+        var ok := true
+        # not over a stallholder or a guard at their post
+        for pp in people:
+            if is_instance_valid(pp) and pp != who and bool(pp.get("stay")) and not bool(pp.get("inside")):
+                var dq := Vector2(pp.global_position.x, pp.global_position.z) - c
+                if absf(dq.dot(ax)) < he.x + 0.3 and absf(dq.dot(az)) < he.y + 0.3:
+                    ok = false
+                    break
+        for ix in (range(-3, 4) if ok else []):
+            for iz in range(-4, 5):
+                var q: Vector2 = c + ax * he.x * float(ix) / 3.0 + az * he.y * float(iz) / 4.0
+                var q3 := Vector3(q.x, 0.0, q.y)
+                if not solid_at(q3, 0.0).is_empty():
+                    ok = false
+                    break
+                if nav != null and nav.synced():
+                    var nc: Vector3 = nav.closest(q3)
+                    if Vector2(nc.x - q.x, nc.z - q.y).length() > 0.4:
+                        ok = false
+                        break
+            if not ok:
+                break
+        if ok:
+            return [Vector3(wp.x, height_at(wp.x, wp.z), wp.z), yaw]
+    return []
+
+## A walker's next leg p -> nx against the wagons (not who's own):
+## [] the way is clear; ["under", q] nx itself is under a wagon - q is the
+## nearest spot beside it; ["round", q] the leg crosses one - q is the corner to
+## go round by (the cheaper of the four, on open ground)
+func wagon_way(p: Vector3, nx: Vector3, who: Node3D = null) -> Array:
+    var own = who.get("cart") if who != null else null
+    var r := (body_r(who) if who != null else FOOT_R) + 0.15
+    var a := Vector2(p.x, p.z)
+    var b := Vector2(nx.x, nx.z)
+    var n := maxi(int(a.distance_to(b) / 0.3), 1)
+    for e in _wagons():
+        if e[0] == own or e[1] == who or absf(float(e[6]) - p.y) > 3.0:
+            continue
+        var c: Vector2 = e[2]
+        var he: Vector2 = (e[5] as Vector2) + Vector2(r, r)
+        var bd := b - c
+        if absf(bd.dot(e[3])) < he.x and absf(bd.dot(e[4])) < he.y:
+            var q := off_wagons(nx, who, 0.4)
+            return ["under", keep_walkable(q)]
+        var hit := false
+        for i in range(n + 1):
+            var d := a.lerp(b, float(i) / float(n)) - c
+            if absf(d.dot(e[3])) < he.x and absf(d.dot(e[4])) < he.y:
+                hit = true
+                break
+        if not hit:
+            continue
+        var best := Vector3.INF
+        var best_l := INF
+        var ho := he + Vector2(0.35, 0.35)
+        for sx in [-1.0, 1.0]:
+            for sz in [-1.0, 1.0]:
+                var k: Vector2 = c + (e[3] as Vector2) * ho.x * float(sx) + (e[4] as Vector2) * ho.y * float(sz)
+                var kp := Vector3(k.x, p.y, k.y)
+                if not solid_at(kp, FOOT_R).is_empty() or not _clear_line(p, kp):
+                    continue
+                # not the far corner: the way to it must not cross the wagon
+                var crosses := false
+                var m := maxi(int(a.distance_to(k) / 0.25), 1)
+                for j in range(2, m):
+                    var dj := a.lerp(k, float(j) / float(m)) - c
+                    if absf(dj.dot(e[3])) < he.x and absf(dj.dot(e[4])) < he.y:
+                        crosses = true
+                        break
+                if crosses:
+                    continue
+                # a corner the next leg can also be walked from is preferred
+                var l := a.distance_to(k) + k.distance_to(b) + (0.0 if _clear_line(kp, nx) else 6.0)
+                if l < best_l:
+                    best_l = l
+                    best = kp
+        if best != Vector3.INF:
+            best.y = height_at(best.x, best.z)
+            return ["round", best]
+    return []
 
 ## nothing solid on the straight line a -> b (feet only, no margin)
 func _clear_line(a: Vector3, b: Vector3) -> bool:
@@ -4719,7 +5820,11 @@ func solid_at(p: Vector3, m := 0.0) -> Array:
     return []
 
 func keep_walkable(p: Vector3) -> Vector3:
-    for i in range(3):
+    # D44b: a dense footprint cluster (the 15 south-market houses) overlaps, so
+    # pushing out of one rect can shove the foot into its neighbour; three
+    # passes left a walker ~1.5 m inside. More passes walk clear of a short
+    # chain of overlapping rects.
+    for i in range(6):
         var r := solid_at(p, FOOT_R)
         if r.is_empty():
             break
@@ -4734,6 +5839,17 @@ func keep_walkable(p: Vector3) -> Vector3:
         var mv := ax * signf(lx if lx != 0.0 else 1.0) * gx if gx < gz else az * signf(lz if lz != 0.0 else 1.0) * gz
         p.x += mv.x
         p.z += mv.y
+    # D44b: two overlapping rects can trap the push in an oscillation the loop
+    # above cannot resolve. The navmesh is the authority on walkable ground, so
+    # snap to its nearest point - but only when the point is STILL solid, so the
+    # common clear case pays no nav query. Pre-sync closest() returns p itself,
+    # which would still be solid; the second solid_at guard keeps p in that case
+    # rather than committing a point that has not actually left the footprint.
+    if nav != null and nav.ready_ok and not solid_at(p, FOOT_R).is_empty():
+        var q: Vector3 = nav.closest(p)
+        if solid_at(q, FOOT_R).is_empty():
+            p.x = q.x
+            p.z = q.z
     p.y = height_at(p.x, p.z)
     return p
 
@@ -4793,6 +5909,10 @@ func _caravan() -> void:
     v._linger = 99999.0
     _caravans.append({"v": v, "start": start, "phase": "in", "t": 0.0, "wagon": w})
     feed.append("A trade caravan is sighted on the west road.")
+    tag_feed("caravan")
+    # D37: E3PO greets an arriving caravan (notables is town-held, call it directly)
+    if notables and notables.has_method("_e3po_say"):
+        notables._e3po_say("trader_arrives")
 
 func _caravan_pass(delta: float) -> void:
     _caravan_t -= delta
@@ -4844,10 +5964,13 @@ func _settle_trade() -> void:
             bought.append(g)
     if not sold.is_empty():
         feed.append("Caravan sells the town %s for %d gold." % [", ".join(sold), spent])
+        tag_feed("caravan")
     if not bought.is_empty():
         feed.append("Caravan buys up surplus %s." % ", ".join(bought))
+        tag_feed("caravan")
     if sold.is_empty() and bought.is_empty():
         feed.append("The caravan finds nothing worth trading and moves on.")
+        tag_feed("caravan")
     _stock_piles()
 
 ## ================================ settlers =================================
@@ -4909,6 +6032,7 @@ func arrive(role: String, blurb: String) -> Townsfolk:
     if _on_streets() > STREET_CAP and role != "guard":
         _keep_indoors(v)
     feed.append(line)
+    tag_feed("arrival")
     print("FEED ", line)
     return v
 
@@ -4961,6 +6085,7 @@ func bury(v: Townsfolk, line: String) -> void:
     if economy:
         economy.dead += 1
     feed.append(line)
+    tag_feed("death")
     print("FEED ", line)
     var vid := v.get_instance_id()           # D8: never capture a node that may be freed first
     get_tree().create_timer(25.0).timeout.connect(func() -> void:

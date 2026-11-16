@@ -23,6 +23,12 @@ var _shots := 0
 var _minutes := 30
 var _proc_max := 0.0
 var _stats := {"descend": 0, "home": 0, "wiped": 0, "viewer_dead": 0, "caught": 0, "rerolls": 0, "cmds": 0}
+# D15 sound soak: audio snapshot state
+var _aud_prev := 0
+var _aud_prev_kinds := {}
+var _aud_busiest := 0
+var _aud_pool_max := 0
+var _aud_flat_max := 0
 var _cuts := {}
 var _last_cut := ""
 var V := [["1001", "JestFan", "knight"], ["1002", "MossyMage", "mage"], ["1003", "QuietArrow", "ranger"],
@@ -78,6 +84,38 @@ func _act() -> void:
             continue
         var pick := (i + eco.day + _f / 997) % 4
         _queue.append([i, ["!delve", "!fish", "!delve", "!forge"][pick]])
+
+func _audio() -> String:
+    var sx = Sfx.live()
+    if sx == null:
+        return "audio=off"
+    var pool: Array = sx._pool
+    var flat: Array = sx._flat
+    var pact := 0
+    for pp in pool:
+        if (pp as AudioStreamPlayer3D).playing:
+            pact += 1
+    var fact := 0
+    for ff in flat:
+        if (ff as AudioStreamPlayer).playing:
+            fact += 1
+    _aud_pool_max = maxi(_aud_pool_max, pact)
+    _aud_flat_max = maxi(_aud_flat_max, fact)
+    var plays: Dictionary = sx.plays
+    var total := 0
+    var busiest_kind := "-"
+    var busiest_d := 0
+    for k in plays:
+        total += int(plays[k])
+        var d := int(plays[k]) - int(_aud_prev_kinds.get(k, 0))
+        if d > busiest_d:
+            busiest_d = d
+            busiest_kind = String(k)
+    _aud_prev_kinds = plays.duplicate()
+    var this_min := total - _aud_prev
+    _aud_prev = total
+    _aud_busiest = maxi(_aud_busiest, busiest_d)
+    return "pool_active=%d/%d flat_active=%d/%d streams=%d plays_this_min=%d busiest=%s@%d/min" % [pact, pool.size(), fact, flat.size(), sx._streams.size(), this_min, busiest_kind, busiest_d]
 
 func _process(dt: float) -> bool:
     _f += 1
@@ -152,6 +190,7 @@ func _process(dt: float) -> bool:
             _stats["descend"], _stats["home"], _stats["wiped"], _stats["viewer_dead"], _stats["rerolls"], _stats["caught"],
             (_t.get("raids") as Raids).raids, _last_cut, int(Performance.get_monitor(Performance.OBJECT_NODE_COUNT)),
             Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0])
+        print("SOAK audio min=%d %s" % [(now - _t0) / 60000, _audio()])
         if ((now - _t0) / 60000) % 10 == 0:
             _shot()
     if _shots == 0 and now - _t0 > 20000:
@@ -165,5 +204,6 @@ func _process(dt: float) -> bool:
         _shot()
         print("SOAK cuts=", _cuts)
         print("SOAK done minutes=%d fps_min=%d fps_avg=%.1f samples=%d cmds=%d" % [_minutes, int(mn2), sm2 / maxf(1.0, float(_all_fps.size())), _all_fps.size(), _stats["cmds"]])
+        print("SOAK audio_summary pool_max_active=%d flat_max_active=%d busiest_kind_in_a_minute=%d streams_cached=%d" % [_aud_pool_max, _aud_flat_max, _aud_busiest, (Sfx.live()._streams.size() if Sfx.live() else 0)])
         return true
     return false

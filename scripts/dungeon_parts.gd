@@ -79,7 +79,7 @@ static func embers(col: Color, amount: int, radius: float, life := 2.5) -> GPUPa
     sm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
     sm.emission_enabled = true
     sm.emission = col
-    sm.emission_energy_multiplier = 3.0
+    sm.emission_energy_multiplier = 1.7      # L42: was 3.0
     s.material = sm
     gp.draw_pass_1 = s
     gp.visibility_aabb = AABB(Vector3(-radius - 1, -1, -radius - 1), Vector3(radius * 2 + 2, 8, radius * 2 + 2))
@@ -145,6 +145,42 @@ static func spike_trap() -> Node3D:
         t.tween_property(spikes, "position:y", -0.72, 0.6))
     return n
 
+## L49 (Mr. E: "no chests, no drops, nobody searching"): a CHEST - something physical on the
+## floor for a delver to walk to and search, so the loot roll that already existed has a place
+## and a moment instead of happening invisibly at floor's end.
+## set_meta("open") tips the lid and kills the glint; Delve calls it when the search finishes.
+static func chest() -> Node3D:
+    var n := Node3D.new()
+    n.name = "Chest"
+    var wood := _m(Color(0.33, 0.21, 0.11), 0.0, 0.85)
+    var iron := _m(Color(0.30, 0.30, 0.32), 0.8, 0.4)
+    _box(n, Vector3(1.0, 0.55, 0.65), Vector3(0, 0.275, 0), wood)
+    # the bands, so it reads as a chest and not a crate at pane distance
+    _box(n, Vector3(1.04, 0.10, 0.69), Vector3(0, 0.16, 0), iron)
+    _box(n, Vector3(0.12, 0.58, 0.69), Vector3(0, 0.28, 0), iron)
+    var lid := Node3D.new()
+    lid.name = "lid"
+    lid.position = Vector3(0, 0.55, -0.325)        # hinged at the back edge
+    n.add_child(lid)
+    _box(lid, Vector3(1.0, 0.14, 0.65), Vector3(0, 0.07, 0.325), wood)
+    _box(lid, Vector3(1.04, 0.06, 0.69), Vector3(0, 0.14, 0.325), iron)
+    # a small warm glint so a viewer can pick it out of a dark floor in a pane
+    var glint := OmniLight3D.new()
+    glint.name = "glint"
+    glint.light_color = Color(1.0, 0.85, 0.45)
+    glint.light_energy = 0.9
+    glint.omni_range = 3.2
+    glint.position = Vector3(0, 0.75, 0)
+    n.add_child(glint)
+    n.set_meta("open", func() -> void:
+        if not is_instance_valid(lid):
+            return
+        var t := lid.create_tween()
+        t.tween_property(lid, "rotation:x", deg_to_rad(-105.0), 0.45).set_trans(Tween.TRANS_BACK)
+        if is_instance_valid(glint):
+            t.parallel().tween_property(glint, "light_energy", 0.0, 0.45))
+    return n
+
 ## PRESSURE PLATE: a stone that sinks when stepped on (here: on a loop)
 static func pressure_plate() -> Node3D:
     var n := Node3D.new()
@@ -200,7 +236,7 @@ static func fire_trap() -> Node3D:
     sm.albedo_color = Color(1.0, 0.5, 0.12)
     sm.emission_enabled = true
     sm.emission = Color(1.0, 0.38, 0.06)
-    sm.emission_energy_multiplier = 4.0
+    sm.emission_energy_multiplier = 2.2      # L42: was 4.0
     s.material = sm
     f.draw_pass_1 = s
     f.position = Vector3(0, 0.1, 0)
@@ -346,7 +382,7 @@ static func scar_glass(seed_i := 1, count := 7) -> Node3D:
         m.albedo_color = c.darkened(0.3)
         m.emission_enabled = true
         m.emission = c
-        m.emission_energy_multiplier = rng.randf_range(1.0, 2.6)
+        m.emission_energy_multiplier = rng.randf_range(0.7, 1.5)   # L42: was 1.0-2.6
         m.roughness = 0.15
         cr.material_override = m
         cr.position = Vector3(rng.randf_range(-0.9, 0.9), hgt * 0.45, rng.randf_range(-0.9, 0.9))
@@ -362,6 +398,69 @@ static func scar_glass(seed_i := 1, count := 7) -> Node3D:
         var t := l.create_tween().set_loops()
         t.tween_property(l, "light_energy", 0.4, rng.randf_range(0.5, 1.2))
         t.tween_property(l, "light_energy", 2.0, rng.randf_range(0.3, 0.9)))
+    return n
+
+## L28c: a standing iron brazier - three legs, a bowl of glowing coals, a flame and a
+## flickering light (unshadowed). Its embers come from the floor's shared flame emitter
+## (FloorGen.flame_embers): the flame point is BRAZIER_FLAME above the node.
+const BRAZIER_FLAME := Vector3(0, 1.25, 0)
+static func brazier(col: Color, seed_i := 1) -> Node3D:
+    var n := Node3D.new()
+    n.name = "Brazier"
+    var iron := _m(Color(0.09, 0.085, 0.08), 0.85, 0.45)
+    for k in 3:
+        var a := float(k) * TAU / 3.0
+        _cyl(n, 0.045, 1.0, Vector3(cos(a) * 0.22, 0.48, sin(a) * 0.22), iron,
+             Vector3(sin(a) * 0.22, 0, -cos(a) * 0.22))
+    var bowl := MeshInstance3D.new()
+    var bm := CylinderMesh.new()
+    bm.top_radius = 0.5
+    bm.bottom_radius = 0.22
+    bm.height = 0.3
+    bm.radial_segments = 12
+    bowl.mesh = bm
+    bowl.material_override = iron
+    bowl.position = Vector3(0, 1.0, 0)
+    n.add_child(bowl)
+    var coal := _m(col.lerp(Color(1.0, 0.35, 0.08), 0.6), 0.0, 0.9)
+    coal.emission_enabled = true
+    coal.emission = col.lerp(Color(1.0, 0.35, 0.08), 0.6)
+    coal.emission_energy_multiplier = 2.2    # L42: was 3.0 (the flame itself is left bright - it IS the light source)
+    _cyl(n, 0.44, 0.06, Vector3(0, 1.13, 0), coal)
+    var flame := MeshInstance3D.new()
+    var fm := SphereMesh.new()
+    fm.radius = 0.26
+    fm.height = 0.7
+    fm.radial_segments = 10
+    fm.rings = 6
+    flame.mesh = fm
+    var fmat := StandardMaterial3D.new()
+    fmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    fmat.albedo_color = col
+    fmat.emission_enabled = true
+    fmat.emission = col
+    fmat.emission_energy_multiplier = 8.0
+    fm.material = fmat
+    flame.position = Vector3(0, 1.38, 0)
+    n.add_child(flame)
+    var l := OmniLight3D.new()
+    l.light_color = col
+    l.light_energy = 5.0
+    l.omni_range = 11.0
+    l.shadow_enabled = false
+    l.position = Vector3(0, 1.7, 0)
+    n.add_child(l)
+    var r := RandomNumberGenerator.new()
+    r.seed = seed_i
+    n.ready.connect(func() -> void:
+        var t := l.create_tween().set_loops()
+        t.tween_property(l, "light_energy", 3.8, r.randf_range(0.08, 0.16))
+        t.tween_property(l, "light_energy", 5.4, r.randf_range(0.10, 0.22))
+        t.tween_property(l, "light_energy", 4.4, r.randf_range(0.07, 0.14))
+        t.tween_property(l, "light_energy", 5.0, r.randf_range(0.12, 0.2))
+        var ft := flame.create_tween().set_loops()
+        ft.tween_property(flame, "scale", Vector3(1.0, 1.15, 1.0), r.randf_range(0.12, 0.2))
+        ft.tween_property(flame, "scale", Vector3(0.92, 0.9, 0.92), r.randf_range(0.12, 0.2)), CONNECT_ONE_SHOT)
     return n
 
 ## a lit wall torch with a flickering light
@@ -423,6 +522,52 @@ static func blade_trap() -> Node3D:
         var t := pivot.create_tween()
         t.tween_property(pivot, "rotation:x", PI * 0.5, 0.28).set_trans(Tween.TRANS_SINE)
         t.tween_property(pivot, "rotation:x", -PI * 0.5, 0.5).set_delay(0.2))
+    return n
+
+## POISON DART: same mounts as the plain dart trap, but the darts fire
+## sickly green and their hit stacks a venom DoT on the victim instead of a
+## one-shot sting. The resolver branch in delve._spring reads kind == "PoisonDart".
+static func poison_dart() -> Node3D:
+    var n := Node3D.new()
+    n.name = "PoisonDart"
+    _box(n, Vector3(1.4, 0.06, 1.4), Vector3(0, 0.03, 0), _m(Color(0.22, 0.30, 0.22), 0.0, 0.95))
+    var post := _m(Color(0.18, 0.26, 0.18), 0.2, 0.8)
+    for s in [-1.0, 1.0]:
+        _box(n, Vector3(0.22, 1.1, 0.22), Vector3(1.0 * s, 0.55, 0), post)
+        _box(n, Vector3(0.06, 0.06, 0.06), Vector3(0.88 * s, 0.9, 0), _m(Color(0.08, 0.14, 0.08)))
+    n.set_meta("fire", func() -> void:
+        var dm := _m(Color(0.42, 0.78, 0.36), 0.2, 0.3)
+        dm.emission_enabled = true
+        dm.emission = Color(0.18, 0.52, 0.22)
+        dm.emission_energy_multiplier = 1.4
+        for k in range(3):
+            var dart := _box(n, Vector3(0.36, 0.035, 0.035), Vector3(-0.9, 0.9 - 0.12 * float(k), -0.15 + 0.15 * float(k)), dm)
+            var t := dart.create_tween()
+            t.tween_interval(0.05 * float(k))
+            t.tween_property(dart, "position:x", 0.9, 0.16)
+            t.tween_interval(0.4)
+            t.tween_callback(dart.queue_free))
+    return n
+
+## SWARM TRAP: a grate in the floor; stepping on it springs the bars and
+## something small comes up through them. The resolver branch in delve._spring
+## reads kind == "SwarmTrap" and spawns a short pack at the trap - no damage
+## up front, the swarm itself is the hit.
+static func swarm_trap() -> Node3D:
+    var n := Node3D.new()
+    n.name = "SwarmTrap"
+    _box(n, Vector3(1.6, 0.04, 1.6), Vector3(0, 0.02, 0), _m(Color(0.11, 0.10, 0.08), 0.1, 0.9))
+    var bar := _m(Color(0.22, 0.20, 0.18), 0.5, 0.45)
+    for k in range(-2, 3):
+        _box(n, Vector3(0.06, 0.02, 1.35), Vector3(float(k) * 0.28, 0.045, 0), bar)
+    _box(n, Vector3(1.35, 0.02, 0.06), Vector3(0, 0.045, -0.55), bar)
+    _box(n, Vector3(1.35, 0.02, 0.06), Vector3(0, 0.045, 0.55), bar)
+    n.set_meta("fire", func() -> void:
+        for bar_mesh in n.find_children("*", "MeshInstance3D", false, false):
+            var mi: MeshInstance3D = bar_mesh
+            if mi.mesh is BoxMesh and (mi.mesh as BoxMesh).size.x < 0.1:
+                var t := mi.create_tween()
+                t.tween_property(mi, "position:y", -0.3, 0.12))
     return n
 
 ## PIT TRAP: two boards over a dark shaft; they drop open and close again

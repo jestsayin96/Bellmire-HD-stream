@@ -17,15 +17,15 @@ const ADV := "res://addons/kaykit_character_pack_adventures/Assets/gltf/"
 
 const A_KAY := {"idle": "Idle", "walk": "Walking_A", "run": "Running_A", "attack": "1H_Melee_Attack_Chop",
                 "cast": "Spellcast_Shoot", "die": "Death_A", "hit": "Hit_A"}
-const A_BAT := {"idle": "Bat_Flying", "walk": "Bat_Flying", "run": "Bat_Flying", "attack": "Bat_Attack", "die": "Bat_Death", "hit": "Bat_Hit"}
-const A_SLIME := {"idle": "Slime_Idle", "walk": "Slime_Walk", "run": "Slime_Walk", "attack": "Slime_Attack", "die": "Slime_Death", "hit": "Slime_Idle"}
-const A_BONES := {"idle": "Skeleton_Idle", "walk": "Skeleton_Running", "run": "Skeleton_Running", "attack": "Skeleton_Attack", "die": "Skeleton_Death", "hit": "Skeleton_Idle", "rise": "Skeleton_Spawn"}
-const A_DRAGON := {"idle": "Dragon_Flying", "walk": "Dragon_Flying", "run": "Dragon_Flying", "attack": "Dragon_Attack", "die": "Dragon_Death", "hit": "Dragon_Hit"}
-const A_RAT := {"idle": "Rat_Idle", "walk": "Rat_Walk", "run": "Rat_Run", "attack": "Rat_Attack", "die": "Rat_Death", "hit": "Rat_Idle"}
-const A_SPIDER := {"idle": "Spider_Idle", "walk": "Spider_Walk", "run": "Spider_Walk", "attack": "Spider_Attack", "die": "Spider_Death", "hit": "Spider_Idle"}
-const A_FROG := {"idle": "Frog_Idle", "walk": "Frog_Jump", "run": "Frog_Jump", "attack": "Frog_Attack", "die": "Frog_Death", "hit": "Frog_Idle"}
-const A_SNAKE := {"idle": "Snake_Idle", "walk": "Snake_Walk", "run": "Snake_Walk", "attack": "Snake_Attack", "die": "Snake_Death", "hit": "Snake_Idle"}
-const A_WASP := {"idle": "Wasp_Flying", "walk": "Wasp_Flying", "run": "Wasp_Flying", "attack": "Wasp_Attack", "die": "Wasp_Death", "hit": "Wasp_Flying"}
+const A_BAT := {"idle": "Bat_Flying", "walk": "Bat_Flying", "run": "Bat_Flying", "attack": "Bat_Attack", "attack2": "Bat_Attack2", "die": "Bat_Death", "hit": "Bat_Hit"}
+const A_SLIME := {"idle": "Slime_Idle", "walk": "Slime_Walk", "run": "Slime_Walk", "attack": "Slime_Attack", "die": "Slime_Death"}
+const A_BONES := {"idle": "Skeleton_Idle", "walk": "Skeleton_Running", "run": "Skeleton_Running", "attack": "Skeleton_Attack", "die": "Skeleton_Death", "rise": "Skeleton_Spawn"}
+const A_DRAGON := {"idle": "Dragon_Flying", "walk": "Dragon_Flying", "run": "Dragon_Flying", "attack": "Dragon_Attack", "attack2": "Dragon_Attack2", "die": "Dragon_Death", "hit": "Dragon_Hit"}
+const A_RAT := {"idle": "Rat_Idle", "walk": "Rat_Walk", "run": "Rat_Run", "attack": "Rat_Attack", "die": "Rat_Death"}
+const A_SPIDER := {"idle": "Spider_Idle", "walk": "Spider_Walk", "run": "Spider_Walk", "attack": "Spider_Attack", "die": "Spider_Death"}
+const A_FROG := {"idle": "Frog_Idle", "walk": "Frog_Jump", "run": "Frog_Jump", "attack": "Frog_Attack", "die": "Frog_Death"}
+const A_SNAKE := {"idle": "Snake_Idle", "walk": "Snake_Walk", "run": "Snake_Walk", "attack": "Snake_Attack", "die": "Snake_Death"}
+const A_WASP := {"idle": "Wasp_Flying", "walk": "Wasp_Flying", "run": "Wasp_Flying", "attack": "Wasp_Attack", "die": "Wasp_Death"}
 ## Imp and Puglin ship rigged but with NO animations. Their rig is the
 ## Quaternius Universal rig, so they borrow the owned Universal Animation
 ## Library (UAL1/UAL2 in assets/monsters) - Monster grafts it on at load.
@@ -83,6 +83,37 @@ const NEW_TYPES := {
                    "ways": {"breath": 2.8}, "homes": ["firepit", "crypt", "keep"]},
     "slimeling":  {"name": "slimeling", "path": QUAT + "Slime.glb", "anims": A_SLIME, "hp": 0.35, "atk": 0.5, "spd": 3.6, "h": 0.5, "lift": 0.0,
                    "family": "ooze", "homes": []},
+    # ---- L27a: the roster widened from the same owned CC0 bodies (KayKit Skeletons
+    # + its weapon set, KayKit Adventurers, Quaternius, assets/monsters). Variants
+    # earn their place with a different silhouette (height/weapons), a tint/glow the
+    # stream can read, and their own ways and homes. No lords; plain old-game voice.
+    "hewer":      {"name": "marrow hewer", "path": SKL + "Skeleton_Warrior.glb", "anims": A_SKL, "hp": 1.1, "atk": 1.3, "spd": 3.8, "h": 1.85, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Axe.gltf", "off": SKA + "Skeleton_Shield_Small_A.gltf", "family": "undead",
+                   "ways": {"pack": 1}, "homes": ["barracks", "firepit"]},
+    "cutthroat":  {"name": "pale cutthroat", "path": SKL + "Skeleton_Rogue.glb", "anims": A_SKL, "hp": 0.8, "atk": 1.5, "spd": 5.2, "h": 1.6, "lift": 0.0,
+                   "hand": SKA + "Skeleton_Blade.gltf", "off": SKA + "Skeleton_Blade.gltf", "family": "undead", "tint": Color(0.90, 0.86, 0.96), "glow": Color(0.10, 0.05, 0.18),
+                   "ways": {"grudge": true}, "homes": ["treasury", "prison"]},
+    "silkmother": {"name": "silk mother", "path": MON + "Spider.glb", "anims": A_SPIDER, "hp": 1.5, "atk": 1.2, "spd": 3.8, "h": 1.3, "lift": 0.0,
+                   "family": "beast", "tint": Color(0.45, 0.42, 0.50), "glow": Color(0.15, 0.45, 0.20),
+                   "ways": {"venom": 5.0, "summon": {"type": "spiderling", "every": 13.0, "most": 2, "line": "Spiderlings spill from the silk mother's back."}},
+                   "homes": ["wood", "fogbound"]},
+    "spiderling": {"name": "spiderling", "path": MON + "Spider.glb", "anims": A_SPIDER, "hp": 0.3, "atk": 0.5, "spd": 5.2, "h": 0.35, "lift": 0.0,
+                   "family": "beast", "homes": []},
+    "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,
+                   "family": "beast", "tint": Color(0.72, 0.88, 0.62), "glow": Color(0.20, 0.50, 0.12),
+                   "ways": {"venom": 4.0, "pack": 2}, "homes": ["mess", "prison", "flooded"]},
+    "lurker":     {"name": "fen lurker", "path": MON + "Frog.glb", "anims": A_FROG, "hp": 1.6, "atk": 1.2, "spd": 3.0, "h": 1.5, "lift": 0.0,
+                   "family": "beast", "tint": Color(0.45, 0.58, 0.40), "glow": Color(0.08, 0.25, 0.10),
+                   "ways": {"venom": 3.0}, "homes": ["flooded", "grassland"]},
+    "pitwyrm":    {"name": "pit wyrm", "path": QUAT + "Dragon.glb", "anims": A_DRAGON, "hp": 1.8, "atk": 1.5, "spd": 2.6, "h": 4.0, "lift": 0.6,
+                   "family": "wyrm", "tint": Color(0.70, 0.55, 0.45), "glow": Color(0.45, 0.15, 0.05),
+                   "ways": {"breath": 2.4}, "homes": ["firepit", "keep"]},
+    "ashwight":   {"name": "ash wight", "path": ADVC + "Mage.glb", "anims": A_KAY, "hp": 0.9, "atk": 1.4, "spd": 3.6, "h": 1.75, "lift": 0.0,
+                   "hand": ADV + "staff.gltf", "off": "", "casts": true, "family": "the fallen", "tint": Color(0.76, 0.74, 0.72), "glow": Color(0.28, 0.10, 0.03),
+                   "ways": {"ranged": 7.5}, "homes": ["shrine", "firepit"]},
+    "gloombat":   {"name": "gloom bat", "path": QUAT + "Bat.glb", "anims": A_BAT, "hp": 0.8, "atk": 1.1, "spd": 6.0, "h": 1.2, "lift": 1.8,
+                   "family": "beast", "tint": Color(0.40, 0.36, 0.55), "glow": Color(0.35, 0.20, 0.65),
+                   "ways": {"pack": 2}, "homes": ["fogbound", "crypt"]},
 }
 ## what the old creatures do and where they are at home (L1). `ways` are the
 ## creature's habits in a fight (Delve reads them): ranged = keeps this far
@@ -124,19 +155,69 @@ const DRAGON := {"name": "gravewyrm", "path": QUAT + "Dragon.glb", "anims": A_DR
 ## Strains (old game, numbers unchanged). Measured: they IMPROVED survival
 ## (83% vs 63%) - do not soften them. `glow` added: the strain is readable at
 ## stream distance, not only in the name.
-const STRAINS := {
+## L27b: the LIVE table is data/strains.json, loaded at class init; this const
+## is the fallback when the file is missing or broken. `particle` names a tell
+## Monster spawns (ember rises, drip falls, wisp drifts, spark flickers,
+## spore hangs slow).
+const STRAINS_FALLBACK := {
     "plain":        {"label": "", "hp": 1.00, "atk": 1.00, "spd": 1.00, "scale": 1.00, "tint": Color(1, 1, 1), "glow": Color(0, 0, 0)},
     "hollowed":     {"label": "hollowed", "hp": 0.75, "atk": 0.95, "spd": 1.10, "scale": 0.92, "tint": Color(0.86, 0.90, 0.84), "glow": Color(0, 0, 0)},
-    "drowned":      {"label": "drowned", "hp": 1.35, "atk": 0.90, "spd": 0.80, "scale": 1.05, "tint": Color(0.52, 0.78, 0.82), "glow": Color(0.2, 0.6, 0.7)},
-    "emberbound":   {"label": "emberbound", "hp": 0.90, "atk": 1.40, "spd": 1.15, "scale": 1.00, "tint": Color(1.00, 0.58, 0.32), "glow": Color(1.0, 0.4, 0.1)},
+    "drowned":      {"label": "drowned", "hp": 1.35, "atk": 0.90, "spd": 0.80, "scale": 1.05, "tint": Color(0.52, 0.78, 0.82), "glow": Color(0.2, 0.6, 0.7), "particle": "drip"},
+    "emberbound":   {"label": "emberbound", "hp": 0.90, "atk": 1.40, "spd": 1.15, "scale": 1.00, "tint": Color(1.00, 0.58, 0.32), "glow": Color(1.0, 0.4, 0.1), "particle": "ember"},
     "gorged":       {"label": "gorged", "hp": 1.60, "atk": 1.10, "spd": 0.75, "scale": 1.35, "tint": Color(0.86, 0.84, 0.46), "glow": Color(0, 0, 0)},
-    "wraithtouched":{"label": "wraithtouched", "hp": 0.85, "atk": 1.25, "spd": 1.30, "scale": 0.98, "tint": Color(0.68, 0.55, 0.95), "glow": Color(0.6, 0.4, 1.0)},
+    "wraithtouched":{"label": "wraithtouched", "hp": 0.85, "atk": 1.25, "spd": 1.30, "scale": 0.98, "tint": Color(0.68, 0.55, 0.95), "glow": Color(0.6, 0.4, 1.0), "particle": "wisp"},
     # L1: two strains the scar itself would make. Scarborn: grown too near the
     # wild magic - its glow wanders through every colour, as the scar's motes do.
     # Mossbacked: the drowned of the buried meadows and woods, grown over.
     "scarborn":     {"label": "scarborn", "hp": 0.95, "atk": 1.20, "spd": 1.10, "scale": 1.02, "tint": Color(0.92, 0.80, 1.00), "glow": Color(0.9, 0.3, 0.8), "wild": true},
     "mossbacked":   {"label": "mossbacked", "hp": 1.30, "atk": 0.95, "spd": 0.85, "scale": 1.08, "tint": Color(0.62, 0.82, 0.50), "glow": Color(0, 0, 0)},
+    # L27b deep strains (fallback copies of the json)
+    "duskforged":   {"label": "duskforged", "hp": 1.45, "atk": 1.35, "spd": 0.60, "scale": 1.15, "tint": Color(0.45, 0.42, 0.52), "glow": Color(0.3, 0.18, 0.5), "particle": "spark"},
+    "sporeblown":   {"label": "sporeblown", "hp": 1.25, "atk": 1.05, "spd": 0.90, "scale": 1.05, "tint": Color(0.78, 0.82, 0.58), "glow": Color(0.35, 0.5, 0.1), "particle": "spore"},
+    "veilstruck":   {"label": "veilstruck", "hp": 0.60, "atk": 1.15, "spd": 1.50, "scale": 0.95, "tint": Color(0.75, 0.80, 0.95), "glow": Color(0.4, 0.7, 0.9), "particle": "wisp"},
 }
+static var strains_from_json := false
+static var STRAINS: Dictionary = _load_strains()
+
+## data/strains.json is the authority; the const above only catches a missing
+## or broken file. Colors come as [r, g, b].
+static func _load_strains() -> Dictionary:
+    strains_from_json = false
+    var f := FileAccess.open("res://data/strains.json", FileAccess.READ)
+    if f == null:
+        return STRAINS_FALLBACK
+    var parsed: Variant = JSON.parse_string(f.get_as_text())
+    if typeof(parsed) != TYPE_DICTIONARY or not (parsed as Dictionary).has("strains"):
+        push_warning("Bestiary: data/strains.json unreadable - using the built-in strain table")
+        return STRAINS_FALLBACK
+    var out := {}
+    for e in ((parsed as Dictionary)["strains"] as Array):
+        var s: Dictionary = e
+        var id := String(s.get("id", ""))
+        if id == "":
+            continue
+        var d := {
+            "label": String(s.get("label", id)),
+            "hp": float(s.get("hp", 1.0)), "atk": float(s.get("atk", 1.0)),
+            "spd": float(s.get("spd", 1.0)), "scale": float(s.get("scale", 1.0)),
+            "tint": _col(s.get("tint", [1, 1, 1])), "glow": _col(s.get("glow", [0, 0, 0])),
+        }
+        if bool(s.get("wild", false)):
+            d["wild"] = true
+        if String(s.get("particle", "")) != "":
+            d["particle"] = String(s["particle"])
+        out[id] = d
+    if not out.has("plain"):
+        out["plain"] = STRAINS_FALLBACK["plain"]
+    strains_from_json = true
+    return out
+
+static func _col(v: Variant) -> Color:
+    if v is Array and (v as Array).size() >= 3:
+        var a: Array = v
+        return Color(float(a[0]), float(a[1]), float(a[2]))
+    return Color(1, 1, 1)
+
 static var no_strains := false
 
 ## the old bands, unchanged, then the scar's own strains: on a meadow or wood
@@ -161,17 +242,25 @@ static func strain_for(floor_no: int) -> String:
         if roll < 55: return "plain"
         if roll < 75: return "hollowed"
         return "drowned"
+    # L27b: the deep bands widened to roll the new strains. The plain share is
+    # untouched (30 / 15); the new strains' shares came out of the non-plain
+    # pool. BALANCE CHANGE flagged for Mr. E - the deep mix shifts.
     if floor_no <= 9:
         if roll < 30: return "plain"
-        if roll < 48: return "drowned"
-        if roll < 66: return "emberbound"
-        if roll < 84: return "wraithtouched"
-        return "gorged"
+        if roll < 44: return "drowned"
+        if roll < 58: return "emberbound"
+        if roll < 72: return "wraithtouched"
+        if roll < 84: return "gorged"
+        if roll < 93: return "duskforged"
+        return "sporeblown"
     if roll < 15: return "plain"
-    if roll < 40: return "emberbound"
-    if roll < 65: return "wraithtouched"
-    if roll < 85: return "gorged"
-    return "drowned"
+    if roll < 32: return "emberbound"
+    if roll < 49: return "wraithtouched"
+    if roll < 63: return "gorged"
+    if roll < 73: return "drowned"
+    if roll < 83: return "duskforged"
+    if roll < 91: return "sporeblown"
+    return "veilstruck"
 
 ## The eight lords (canon). Lesser hold floors ending in 5, greater every 10th.
 ## They rotate from two bags. `scale` multiplies the body's real-size scale.
@@ -215,6 +304,12 @@ static func next_boss(floor_no: int) -> Dictionary:
     _last_lord = pick_k
     var out: Dictionary = (BOSS_DEFS[pick_k] as Dictionary).duplicate()
     out["id"] = pick_k
+    # L29b: rarely the lord that rises is one of the written versions of ITSELF, not a new lord.
+    # A lord the crowd has already named keeps that name - a rare draw never overwrites it.
+    if pending_title == "":
+        var uq := lord_unique_for(pick_k, force_lord_unique if force_lord_unique >= 0.0 else randf())
+        if not uq.is_empty():
+            out["uniq"] = uq
     if pending_title != "":
         out["title"] = pending_title
         out["note"] = "named by the crowd above"
@@ -338,12 +433,19 @@ static func unique_def(u: Dictionary, floor_no: int) -> Dictionary:
 ## which creatures live at which depth (old bands, the new creatures woven in
 ## where they fit: vermin up top, venom in the middle, fiends deep)
 const DEPTHS := [
-    [1, 2,  ["slime", "bat", "minion", "rat", "frog"]],
+    # L50: the census found the repetition was ENTIRELY in the shallows - the deep bands
+    # average 5.7-6.6 distinct kinds a floor, but 1-2 managed only 3.5 from a pool of five,
+    # with one kind taking half the floor. That is the first thing any viewer ever sees.
+    # Widened with the two gentlest creatures already in the next band up (puglin 0.9/0.9,
+    # spider), NOT with anything from the deep roster: L27a's rule that the shallows stay
+    # innocent of pitwyrm/silkmother/ashwight/cutthroat, and that fodder is summon-only, is
+    # untouched and still enforced by _l27a_test.
+    [1, 2,  ["slime", "bat", "minion", "rat", "frog", "puglin", "spider"]],
     [3, 4,  ["minion", "bones", "bat", "slime", "rat", "spider", "puglin", "bowman"]],
     [5, 5,  ["warrior", "bones", "warlock", "spider", "bowman", "sentinel"]],
-    [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin", "bowman", "sentinel", "gravecaller"]],
-    [8, 9,  ["warrior", "warlock", "bones", "bat", "adder", "imp", "sentinel", "gravecaller", "lost"]],
-    [10, 99,["warrior", "warlock", "cutpurse", "bones", "adder", "imp", "wasp", "bowman", "sentinel", "gravecaller", "lost", "whelp"]],
+    [6, 7,  ["warrior", "cutpurse", "bones", "snake", "wasp", "puglin", "bowman", "sentinel", "gravecaller", "hewer", "scarrat", "lurker"]],
+    [8, 9,  ["warrior", "warlock", "bones", "bat", "adder", "imp", "sentinel", "gravecaller", "lost", "cutthroat", "ashwight", "gloombat", "silkmother", "scarrat"]],
+    [10, 99,["warrior", "warlock", "cutpurse", "bones", "adder", "imp", "wasp", "bowman", "sentinel", "gravecaller", "lost", "whelp", "hewer", "cutthroat", "silkmother", "pitwyrm", "ashwight", "gloombat"]],
 ]
 
 static func pool(floor_no: int) -> Array:
@@ -384,6 +486,8 @@ static func make(type_key: String, strain_key := "plain") -> Dictionary:
     if strain_key != "plain" or not out.has("glow"):
         out["glow"] = st["glow"]
     out["wild"] = bool(st.get("wild", false))
+    if st.has("particle"):
+        out["particle"] = String(st["particle"])
     if not out.has("ways"):
         out["ways"] = {}
     return out
@@ -392,8 +496,61 @@ static func pick(floor_no: int, theme := "") -> Dictionary:
     var p := pool_for(floor_no, theme)
     return make(String(p[randi() % p.size()]), strain_for_theme(floor_no, theme))
 
-## a boss as a spawnable def: its body, scaled up, armed, haloed, named
-static func boss_def(b: Dictionary) -> Dictionary:
+## ---- L45 (Mr. E): A LORD DEEP DOWN MUST BE MEANINGFULLY HARDER THAN A SHALLOW ONE.
+## Until now boss_def() never saw the floor, so the same lord hit exactly as hard wherever it
+## was met - only WHICH lord changed with depth. Uniques already scaled (unique_def); lords did
+## not. depth_step() is how many lord-floors deep we are, counting from the first one, so it is
+## open-ended by construction - no floor count is stated or implied anywhere.
+static func depth_step(floor_no: int) -> int:
+    return maxi(0, int(floor(float(floor_no) / 5.0)) - 1)
+
+## the curve, kept in one place so the test and the Chronicle read the same numbers
+const LORD_HP_PER_STEP := 0.28      # +28% hp a lord-floor deeper
+const LORD_ATK_PER_STEP := 0.22     # +22% damage
+const LORD_ADD_EVERY := 2           # one extra add per summon every 2 steps
+
+static func lord_hp_mult(floor_no: int) -> float:
+    return 1.0 + LORD_HP_PER_STEP * float(depth_step(floor_no))
+
+static func lord_atk_mult(floor_no: int) -> float:
+    return 1.0 + LORD_ATK_PER_STEP * float(depth_step(floor_no))
+
+## L45: the MECHANICS get worse with depth too, not just the numbers - more things crawl out of
+## it, they come faster, and what shields it holds harder. Mutated on a duplicate; the canon
+## table LORD_WAYS is never written to.
+static func scale_ways(ways: Dictionary, floor_no: int) -> Dictionary:
+    var step := depth_step(floor_no)
+    if step <= 0 or ways.is_empty():
+        return ways
+    for k in ["summon", "shed"]:
+        if ways.has(k):
+            var w: Dictionary = ways[k]
+            if w.has("most"):
+                w["most"] = int(w["most"]) + int(step / LORD_ADD_EVERY)
+            if w.has("n"):
+                w["n"] = int(w["n"]) + int(step / LORD_ADD_EVERY)
+            if w.has("every"):
+                w["every"] = maxf(3.0, float(w["every"]) * pow(0.92, float(step)))
+    for k in ["nova", "swoop"]:
+        if ways.has(k):
+            var w2: Dictionary = ways[k]
+            if w2.has("every"):
+                w2["every"] = maxf(3.0, float(w2["every"]) * pow(0.93, float(step)))
+            if w2.has("dmg"):
+                w2["dmg"] = float(w2["dmg"]) * (1.0 + 0.10 * float(step))
+    if ways.has("ward"):
+        ways["ward"] = minf(0.80, float(ways["ward"]) + 0.04 * float(step))
+    if ways.has("enrage"):
+        var en: Dictionary = ways["enrage"]
+        en["at"] = minf(0.55, float(en.get("at", 0.3)) + 0.03 * float(step))   # rages sooner
+    for k in ["breath", "venom", "ranged"]:
+        if ways.has(k):
+            ways[k] = maxf(2.0, float(ways[k]) * pow(0.95, float(step)))       # comes round faster
+    return ways
+
+## a boss as a spawnable def: its body, scaled up, armed, haloed, named.
+## L45: floor_no scales it - 0 keeps the canon numbers (the bestiary line-up tools pass nothing).
+static func boss_def(b: Dictionary, floor_no := 0) -> Dictionary:
     var out: Dictionary = (boss_body(b) as Dictionary).duplicate(true)
     out["name"] = b["title"]
     out["h"] = float(b["h"]) * LORD_SCALE
@@ -407,10 +564,131 @@ static func boss_def(b: Dictionary) -> Dictionary:
         out["off"] = b.get("off", "")
         out["wscale"] = b.get("wscale", 1.0)
         out["wglow"] = b.get("glow", 0.0)
-    out["boss_hp"] = b["hp"]
-    out["boss_atk"] = b["atk"]
+    # L45: hp, damage and the mechanics all take the depth curve
+    out["boss_hp"] = float(b["hp"]) * lord_hp_mult(floor_no)
+    out["boss_atk"] = float(b["atk"]) * lord_atk_mult(floor_no)
     out["id"] = b.get("id", "")
-    out["ways"] = (LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true)
+    out["depth_step"] = depth_step(floor_no)
+    out["ways"] = scale_ways((LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true), floor_no)
+    # L29b: if next_boss drew a written variant of this lord, it is applied LAST, over a lord
+    # that is otherwise complete - so a unique is always a real lord first.
+    var uq: Dictionary = (b.get("uniq", {}) as Dictionary)
+    if not uq.is_empty():
+        out = apply_lord_unique(out, b, uq, floor_no)
+    return out
+
+## ---- L29b: RARE UNIQUES. NOT new lords - modified versions of the EIGHT, and the content
+## writer has already WRITTEN all of them (data/bosses.json: lesser_uniques, greater_uniques).
+## That file is theirs: this READS it and never writes it, and keeps no second copy of a variant
+## anywhere in this script. A variant keeps its lord's shape - the same body, the same LORD_WAYS
+## mechanic, the same bag, the same L45 depth curve - and twists only what the writer skewed
+## (hp / speed / attack) plus how it LOOKS, so a rare one is recognisable on stream before
+## anybody has read the name card.
+const LORD_UNIQUE_CHANCE := 0.18
+const BOSSES_JSON := "res://data/bosses.json"
+## the cold scar-light every rare one carries, whatever lord it is a version of
+const UNIQ_LIGHT := Color(0.86, 0.93, 1.0)
+## test hooks: a roll below the chance forces one (negative = roll); a name pins the draw
+static var force_lord_unique := -1.0
+static var only_lord_unique := ""
+static var _last_uniq := ""
+static var _uniq_by_lord: Dictionary = {}
+static var _uniq_orphans: Array = []
+
+## every written variant, filed under the lord it modifies. Loaded once. A variant is matched to
+## its lord by that lord's own canon title, which is how the writer names them ("The Hollow King,
+## Thrice-Kindled"). No title is a prefix of another, so the match is unambiguous.
+static func lord_uniques() -> Dictionary:
+    if not _uniq_by_lord.is_empty():
+        return _uniq_by_lord
+    var f := FileAccess.open(BOSSES_JSON, FileAccess.READ)
+    if f == null:
+        push_warning("L29b: %s could not be read - no rare uniques will rise" % BOSSES_JSON)
+        return _uniq_by_lord
+    var raw = JSON.parse_string(f.get_as_text())
+    f.close()
+    if typeof(raw) != TYPE_DICTIONARY:
+        push_warning("L29b: %s did not parse - no rare uniques will rise" % BOSSES_JSON)
+        return _uniq_by_lord
+    for k in ["lesser_uniques", "greater_uniques"]:
+        for v in ((raw as Dictionary).get(k, []) as Array):
+            if typeof(v) != TYPE_DICTIONARY:
+                continue
+            var vd: Dictionary = v as Dictionary
+            var nm := String(vd.get("name", ""))
+            var lord_id := ""
+            for lk in BOSS_DEFS:
+                if nm.begins_with(String((BOSS_DEFS[lk] as Dictionary)["title"])):
+                    lord_id = String(lk)
+                    break
+            if lord_id == "":
+                # written for something that is not one of the eight: it is never spawned, and
+                # uniq_orphans() reports it so the miss is visible instead of silent.
+                _uniq_orphans.append(nm)
+                continue
+            if not _uniq_by_lord.has(lord_id):
+                _uniq_by_lord[lord_id] = []
+            (_uniq_by_lord[lord_id] as Array).append(vd)
+    return _uniq_by_lord
+
+## written variants that match no canon lord - should be empty; reported, not swallowed
+static func uniq_orphans() -> Array:
+    lord_uniques()
+    return _uniq_orphans
+
+## THE SPAWN RULE: rare, drawn only from this lord's own variants, and never the same one twice
+## running, so a repeat inside one session still looks like a different rare thing.
+static func lord_unique_for(lord_id: String, roll: float) -> Dictionary:
+    var pool: Array = (lord_uniques().get(lord_id, []) as Array)
+    if pool.is_empty():
+        return {}
+    if only_lord_unique != "":
+        for v in pool:
+            if String((v as Dictionary).get("name", "")) == only_lord_unique:
+                _last_uniq = only_lord_unique
+                return (v as Dictionary).duplicate(true)
+        return {}
+    if roll >= LORD_UNIQUE_CHANCE:
+        return {}
+    var fresh: Array = []
+    for v in pool:
+        if String((v as Dictionary).get("name", "")) != _last_uniq:
+            fresh.append(v)
+    if fresh.is_empty():
+        fresh = pool
+    var pick: Dictionary = fresh[randi() % fresh.size()] as Dictionary
+    _last_uniq = String(pick.get("name", ""))
+    return pick.duplicate(true)
+
+## Apply a written variant to an already-built lord def. The lord's shape is KEPT: same body,
+## same ways, same depth curve. Only the writer's own skew is applied, and the visible modifier.
+static func apply_lord_unique(out: Dictionary, b: Dictionary, uq: Dictionary, floor_no: int) -> Dictionary:
+    out["name"] = String(uq.get("name", out.get("name", "")))
+    out["note"] = String(uq.get("shape", out.get("note", "")))
+    out["rare"] = true                  # boss_bar ALREADY reads this - no UI file is touched
+    out["lord_unique"] = true
+    out["lord_title"] = String(b.get("title", ""))
+    var canon_hp := maxf(1.0, float(b.get("hp", 1.0)))
+    var ratio := 1.0
+    if uq.has("hp"):
+        ratio = float(uq["hp"]) / canon_hp
+        out["boss_hp"] = float(uq["hp"]) * lord_hp_mult(floor_no)
+    if uq.has("attack"):
+        out["boss_atk"] = float(uq["attack"]) * lord_atk_mult(floor_no)
+    if uq.has("speed"):
+        out["spd"] = float(uq["speed"])
+    # THE VISIBLE MODIFICATION, and it is two things so it reads at a glance and on a still:
+    # the skew is carried in its SIZE (a swollen one is bigger, a famished one leaner - a cube
+    # root so even the widest skew stays a believable version of the same lord), and every rare
+    # one takes a cold scar-light in its tint, its aura and its weapon that no plain lord has.
+    var size := clampf(pow(ratio, 0.34), 0.82, 1.18)
+    out["h"] = float(out.get("h", 1.0)) * size
+    out["lift"] = float(out.get("lift", 0.0)) * size
+    out["uniq_size"] = size
+    out["tint"] = (out.get("tint", Color(1, 1, 1)) as Color).lerp(UNIQ_LIGHT, 0.30)
+    out["aura"] = (out.get("aura", Color(1, 0.8, 0.4)) as Color).lerp(UNIQ_LIGHT, 0.40)
+    if out.has("hand"):
+        out["wglow"] = maxf(float(out.get("wglow", 0.0)), 1.1)
     return out
 
 ## ---- S2 (sound): each creature's voice from the RPG sound library (Sfx kinds), heard on

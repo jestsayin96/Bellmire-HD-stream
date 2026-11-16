@@ -11,7 +11,7 @@ const WIDTH := 760
 var source: Array = []
 var _seen := 0
 var _box: VBoxContainer
-var _panel: PanelContainer
+var _panel: Control            # L61: a ChronicleScroll on the grid, a parchment PanelContainer at full screen
 var _ages: Array = []
 ## the lord's name card: a dark gold-edged block at the head of the Chronicle
 ## when a lord rises (and again when one falls); held CARD_SECS real seconds
@@ -50,33 +50,91 @@ func restyle() -> void:
         _card.visible = true
     _rebuild()
 
-## ---- L21: with the spotlight panes up the Chronicle leaves the panes for the CHROME bar
-## along the bottom (HudDock): full width (less the clock / chat at its right end), one line
-## an entry, as many as fit (2-3) at the L15 size, a lord's card at its left. It is the
-## narration: it stays readable, it just never sits on a pane.
-var _chrome := false
+## ---- L32b (Mr. E's original ask): with the grid up - the stream's resting state, so in
+## effect always - the Chronicle lives on the CENTRE STRIP at the cross of the four panes
+## (HudDock.centre): full width, one line an entry at the L15 size, a lord's card at its
+## left. CALM PACING: a new line lands at most every PACE_S (no busy-moment scroll); a
+## flood skips ahead to the latest FLOOD lines instead of racing through the backlog;
+## each new line fades in.
+const PACE_S := 0.8
+const FLOOD := 8
+
+## ---- L67: THE FEED MUST SURVIVE A RAID. Everything below is the stated policy; the numbers
+## are the ones the DONE test measures against.
+## PRIORITY (L67.1): every line is classed once, on arrival. 3 = a death, a boss or lord, a
+## raid; 2 = a town-level event, or a line the town tagged with a named hero (a viewer's own
+## action); 1 = ordinary town life; 0 = a routine pickup / errand. Town tags (town.feed_tags,
+## D60) win over words; words only fill in for untagged lines.
+const P_ROUTINE := 0
+const P_NORMAL := 1
+const P_TOWN := 2
+const P_CRIT := 3
+const PROTECT_FROM := 2         # a line at this priority or above is never dropped for being routine
+## MERGING (L67.2): a repeat is the same line once digits are ignored, seen again within
+## MERGE_S real seconds of the earlier copy being raised. It becomes "<line>  x3", not a line.
+const MERGE_S := 30.0
+## RATE AND DECAY (L67.3): at most one line ADMITTED to the scroll every PACE_S (= 1.25
+## lines/s). Each line dwells on screen at least DWELL[priority] real seconds before a line
+## may take its place; a higher priority may displace a lower one after DWELL_FLOOR. What
+## waits is capped at QUEUE_MAX; overflow drops the LOWEST priority, oldest first, and a
+## routine line that waited STALE_S is dropped as stale. Every drop is in feed_log.
+const DWELL := [4.0, 7.0, 12.0, 18.0]
+const DWELL_FLOOR := 3.0
+const QUEUE_MAX := 10
+const STALE_S := 40.0
+const LOG_MAX := 900
+const RE_TOWN := "town level|grows into|falls back to|caravan|festival|bounty|raised to level|granary|coffer|hunger"
+const RE_CRIT := "\\b(dies|died|has fallen|fallen|slain|killed|falls|lord|boss|raid|raiders|raiding|besiege|besieged|ablaze|warband|scar)\\b"
+const RE_LOW := "picks up|gathers|finds a|sips|drinks|eats|sweeps|chops|fetches|fills|hauls|mends|sells a|buys a|harvest"
+var feed_log: Array = []        # every ADMIT / MERGE / DROP, with the clock, priority and text
+var stats := {"seen": 0, "admitted": 0, "merged": 0, "dropped": 0, "dropped_protected": 0,
+    "min_gap": 999.0, "by_pri": [0, 0, 0, 0]}
+var _clock := 0.0               # real seconds (time_scale divided out)
+var _cursor := 0                # how far into source the classifier has read
+var _pending: Array = []        # classed lines waiting for a slot: {text,key,pri,t,n}
+var _shown: Array = []          # the lines on the scroll: {text,key,pri,t,at,n}
+var _last_admit := -1.0
+var _re_town: RegEx
+var _re_crit: RegEx
+var _re_low: RegEx
+## L39 (Mr. E, Nov 13): "the letters are super huge". The on-stream Chronicle line was the
+## L15 reading size (28 px at 1080p) - right for the bottom-left panel at full screen, far
+## too big for a box at the centre of the grid. The FONT shrinks first; HudDock.centre is
+## then sized to the smaller text. The full-screen panel keeps 28 - he did not complain
+## about that one, and it is read from further back.
+const CHRON_PX := 21            # the centre box's line size at 1080p (L61: 18 -> 21, Mr. E approved)
+const CARD_PX := 20             # a lord's card title in the box
+const CARD_SUB_PX := 14
+var _chrome := false            # "strip mode" (the name predates L32b: it was the chrome bar)
+var _pace_t := 0.0
+var _content: HBoxContainer      # L61: the scroll's open-vellum text area, re-placed each frame
 
 func _build_chrome() -> void:
-    _panel = PanelContainer.new()
-    var sb := UiTheme.parchment()
-    sb.content_margin_top = UiTheme.px(6)
-    sb.content_margin_bottom = UiTheme.px(6)
-    _panel.add_theme_stylebox_override("panel", sb)
+    # L61 (Mr. E, Nov 13): the centre Chronicle reads as an UNFURLED SCROLL now, the stream's
+    # signature piece. The parchment / spindles / illuminated margin are drawn by
+    # HudDock.ChronicleScroll (one cheap procedural layer, no texture). This panel just
+    # supplies the live lines and a lord's card, docked inside the scroll's open vellum
+    # (sheet_rect) so ink never sits on a spindle. Line size (CHRON_PX = 18) and the 8-9
+    # line capacity (_chrome_lines) stay as Mr. E signed off in L39/L39b.
+    _panel = HudDock.ChronicleScroll.new()
     _panel.clip_contents = true
     _panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _panel.name = "Chronicle"
     _panel.add_to_group("hud_chronicle")
-    HudDock.mark(_panel, "chrome")
+    HudDock.mark(_panel, "centre")       # L32b: the strip at the cross of the panes
     add_child(_panel)
     var h := HBoxContainer.new()
-    h.add_theme_constant_override("separation", UiTheme.px(16))
+    h.set_anchors_preset(Control.PRESET_TOP_LEFT)
+    h.add_theme_constant_override("separation", UiTheme.px(14))
+    h.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _panel.add_child(h)
+    _content = h
     _card = PanelContainer.new()
     var cs := StyleBoxFlat.new()
-    cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
-    cs.border_color = Color(0.78, 0.62, 0.30)
-    cs.set_border_width_all(2)
-    cs.set_corner_radius_all(5)
+    cs.bg_color = UiTheme.PLATE
+    cs.border_color = UiTheme.EDGE_ON_DARK
+    cs.set_border_width_all(UiTheme.BORDER)
+    cs.set_corner_radius_all(UiTheme.RADIUS)
     cs.content_margin_left = UiTheme.px(12)
     cs.content_margin_right = UiTheme.px(12)
     cs.content_margin_top = UiTheme.px(2)
@@ -87,17 +145,17 @@ func _build_chrome() -> void:
     cv.add_theme_constant_override("separation", 0)
     _card.add_child(cv)
     _card_title = Label.new()
-    _card_title.add_theme_font_size_override("font_size", UiTheme.px(34))
-    _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-    _card_title.add_theme_constant_override("outline_size", 5)
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(CARD_PX))
+    _card_title.add_theme_color_override("font_outline_color", UiTheme.ON_DARK_SHADOW)
+    _card_title.add_theme_constant_override("outline_size", 4)
     cv.add_child(_card_title)
     _card_sub = Label.new()
-    _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-    _card_sub.max_lines_visible = 2
+    _card_sub.autowrap_mode = TextServer.AUTOWRAP_OFF
+    _card_sub.max_lines_visible = 1
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
-    _card_sub.custom_minimum_size = Vector2(UiTheme.px(500), 0)
-    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(24))
-    _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(240), 0)
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(CARD_SUB_PX))
+    _card_sub.add_theme_color_override("font_color", UiTheme.ON_DARK)
     cv.add_child(_card_sub)
     _card.visible = false
     h.add_child(_card)
@@ -109,24 +167,34 @@ func _build_chrome() -> void:
     _panel.visible = false
     _place_chrome()
 
-## the panel fills the chrome bar (a small margin), short of the right end the clock holds
+## the scroll fills the centre box (a small margin); the lines / lord card dock inside the
+## open vellum (ChronicleScroll.sheet_rect), clear of the spindles and the illuminated margin
 func _place_chrome() -> void:
-    var r := HudDock.chrome(get_parent())
+    var r := HudDock.centre(get_parent())
     if r.size.y <= 0.0 or _panel == null:
         return
     var m := float(UiTheme.px(6))
     _panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
     _panel.custom_minimum_size = Vector2.ZERO
     _panel.position = r.position + Vector2(m, m)
-    _panel.size = Vector2(r.size.x - 2.0 * m - HudDock.reserve_right, r.size.y - 2.0 * m)
+    _panel.size = Vector2(r.size.x - 2.0 * m, r.size.y - 2.0 * m)
+    if _content != null and _panel is HudDock.ChronicleScroll:
+        var sr := (_panel as HudDock.ChronicleScroll).sheet_rect()
+        _content.position = sr.position
+        _content.size = sr.size
+        _content.custom_minimum_size = sr.size
 
-## how many one-line entries fit the bar at the L15 size (2-3)
+## how many one-line entries fit the scroll's open vellum (L39b: up to 9)
 func _chrome_lines() -> int:
-    var r := HudDock.chrome(get_parent())
-    var fs := UiTheme.px(28)
+    var inner: float
+    if _panel is HudDock.ChronicleScroll:
+        inner = (_panel as HudDock.ChronicleScroll).sheet_rect().size.y
+    else:
+        var r := HudDock.centre(get_parent())
+        inner = r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
+    var fs := UiTheme.px(CHRON_PX)
     var lh := ThemeDB.fallback_font.get_height(fs) + 1.0
-    var inner := r.size.y - float(UiTheme.px(6)) * 2.0 - float(UiTheme.px(12))
-    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 3)
+    return clampi(int(floor(inner / maxf(lh, 1.0))), 2, 9)   # L39b: the taller box holds 8-9 lines
 
 func _build() -> void:
     if _chrome:
@@ -144,7 +212,7 @@ func _build() -> void:
     _panel.custom_minimum_size = Vector2(UiTheme.px(WIDTH), 0)
     _panel.name = "Chronicle"
     _panel.add_to_group("hud_chronicle")
-    HudDock.mark(_panel, "chrome")      # L21: with the panes up it is rebuilt in the chrome bar
+    HudDock.mark(_panel, "centre")      # L32b: with the panes up it is rebuilt on the centre strip
     add_child(_panel)
     var v := VBoxContainer.new()
     v.add_theme_constant_override("separation", 2)
@@ -152,10 +220,10 @@ func _build() -> void:
     v.add_child(UiTheme.title("The Chronicle", 26))       # L16: the house title
     _card = PanelContainer.new()
     var cs := StyleBoxFlat.new()
-    cs.bg_color = Color(0.10, 0.07, 0.06, 0.94)
-    cs.border_color = Color(0.78, 0.62, 0.30)
-    cs.set_border_width_all(2)
-    cs.set_corner_radius_all(5)
+    cs.bg_color = UiTheme.PLATE
+    cs.border_color = UiTheme.EDGE_ON_DARK
+    cs.set_border_width_all(UiTheme.BORDER)
+    cs.set_corner_radius_all(UiTheme.RADIUS)
     cs.content_margin_left = UiTheme.px(14)
     cs.content_margin_right = UiTheme.px(14)
     cs.content_margin_top = UiTheme.px(6)
@@ -165,15 +233,15 @@ func _build() -> void:
     cv.add_theme_constant_override("separation", 0)
     _card.add_child(cv)
     _card_title = Label.new()
-    _card_title.add_theme_font_size_override("font_size", UiTheme.px(46))
-    _card_title.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+    _card_title.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.T_WORDMARK))
+    _card_title.add_theme_color_override("font_outline_color", UiTheme.ON_DARK_SHADOW)
     _card_title.add_theme_constant_override("outline_size", 6)
     cv.add_child(_card_title)
     _card_sub = Label.new()
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
     _card_sub.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 70), 0)
-    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(28))
-    _card_sub.add_theme_color_override("font_color", Color(0.93, 0.86, 0.69))
+    _card_sub.add_theme_font_size_override("font_size", UiTheme.px(UiTheme.T_NUMERAL))
+    _card_sub.add_theme_color_override("font_color", UiTheme.ON_DARK)
     cv.add_child(_card_sub)
     _card.visible = false
     v.add_child(_card)
@@ -190,7 +258,7 @@ func card(title: String, sub: String, col: Color) -> void:
     _card_sub.text = sub
     var cs := _card.get_theme_stylebox("panel") as StyleBoxFlat
     if cs:
-        cs.border_color = col.lerp(Color(0.78, 0.62, 0.30), 0.4)
+        cs.border_color = col.lerp(UiTheme.EDGE_ON_DARK, 0.4)
     _card.visible = true
     _card_t = CARD_SECS
     _rebuild()
@@ -212,26 +280,26 @@ func _process(delta: float) -> void:
         restyle()
     if _chrome:
         _place_chrome()
-    if source.size() != _seen:
-        _seen = source.size()
-        _rebuild()
-    for i in _ages.size():
-        _ages[i] = float(_ages[i]) + delta
+    # L32b calm pacing, now L67: classify what arrived, merge repeats, admit by priority at
+    # no more than one line per PACE_S, hold each line its dwell
+    _tick_feed(delta / maxf(Engine.time_scale, 0.001))
     # the panel itself fades when the town has been quiet a while
-    var newest: float = _ages.back() if not _ages.is_empty() else 999.0
+    var newest: float = (_clock - _last_admit) if _last_admit >= 0.0 else 999.0
     _panel.modulate.a = 1.0 if _card_t > 0.0 else clampf(1.0 - (newest - 40.0) / 8.0, 0.0, 1.0)
+
+## how many lines the scroll holds right now (the card, the UI scale and the box all move it)
+func _cap() -> int:
+    var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
+    if _chrome:
+        show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
+    return maxi(1, show - 2 if card_showing() else show)
 
 func _rebuild() -> void:
     for c in _box.get_children():
         c.queue_free()
-    # with a card up, fewer lines, so the Chronicle does not climb into the party frames
-    # L15: bigger text, fewer lines (5 at 100%, 4 at 125%, 3 at 150%)
-    var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
-    if _chrome:
-        show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
-    var lines := source.slice(maxi(0, source.size() - maxi(1, show - 2 if card_showing() else show)))
-    while _ages.size() < source.size():
-        _ages.append(0.0)
+    var lines: Array = []
+    for e in _shown.slice(maxi(0, _shown.size() - _cap())):
+        lines.append(_text_of(e))
     for i in lines.size():
         var lb := Label.new()
         lb.text = String(lines[i])
@@ -242,15 +310,203 @@ func _rebuild() -> void:
         lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
         lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
         if _chrome:
-            # the bar: one line an entry, the full width
+            # L39 the centre box: one line an entry. The box is narrow, so a long line ends
+            # in an ellipsis rather than being cut mid-glyph (clip_text) - the full text is
+            # in chat either way.
             lb.autowrap_mode = TextServer.AUTOWRAP_OFF
             lb.max_lines_visible = 1
-            lb.clip_text = true
+            lb.clip_text = false
             lb.custom_minimum_size = Vector2.ZERO
             lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-        lb.add_theme_font_size_override("font_size", UiTheme.px(28))
+        lb.add_theme_font_size_override("font_size", UiTheme.px(CHRON_PX if _chrome else 28))
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
-        lb.add_theme_color_override("font_color", Color(0.16, 0.10, 0.06).lerp(Color(0.40, 0.30, 0.20), 1.0 - k))
+        lb.add_theme_color_override("font_color", UiTheme.INK.lerp(UiTheme.INK_SOFT, 1.0 - k))
         _box.add_child(lb)
     _panel.visible = not lines.is_empty() or card_showing()
+
+## L32b: a newly revealed line fades in instead of popping
+func _fade_in_newest() -> void:
+    var kids := _box.get_children()
+    if kids.is_empty():
+        return
+    var lb := kids[kids.size() - 1] as Label
+    if lb == null:
+        return
+    lb.modulate.a = 0.0
+    var tw := lb.create_tween()
+    tw.tween_property(lb, "modulate:a", 1.0, 0.3)
+
+
+## ================================================================ L67: THE FEED UNDER LOAD
+## one clock, real seconds: a 4x test and a 1x stream obey the same stated numbers
+func _tick_feed(dt: float) -> void:
+    _clock += dt
+    _ingest()
+    _pace_t = maxf(0.0, _pace_t - dt)
+    # a routine line that has waited past STALE_S is news no longer - drop it, in the log
+    for i in range(_pending.size() - 1, -1, -1):
+        var e: Dictionary = _pending[i]
+        if int(e["pri"]) < PROTECT_FROM and _clock - float(e["t"]) > STALE_S:
+            _drop(e, "stale")
+            _pending.remove_at(i)
+    if _pending.is_empty() or _pace_t > 0.0:
+        return
+    var i := _best_pending()
+    var e: Dictionary = _pending[i]
+    if _shown.size() >= _cap():
+        var v := _evict_index(int(e["pri"]))
+        if v < 0:
+            return                          # every line up is inside its dwell - the newcomer waits
+        _shown.remove_at(v)
+    _pending.remove_at(i)
+    _admit(e)
+
+## read what the town raised since last frame: class it, merge repeats, keep the queue bounded
+func _ingest() -> void:
+    if source.size() < _cursor:             # the source was cleared (a test, a new town)
+        _cursor = source.size()
+        _pending.clear()
+        _shown.clear()
+        _rebuild()
+    var tags: Dictionary = {}
+    var tv = get_parent().get("feed_tags") if get_parent() != null else null
+    if tv is Dictionary:
+        tags = tv
+    var touched := false
+    while _cursor < source.size():
+        var text := String(source[_cursor])
+        _cursor += 1
+        stats["seen"] = int(stats["seen"]) + 1
+        var key := _key_of(text)
+        var pri := classify(text, tags.get(text, {}))
+        if _merge_into(key, text):
+            touched = true
+            continue
+        _pending.append({"text": text, "key": key, "pri": pri, "t": _clock, "n": 1})
+    # overflow: the LOWEST priority goes first, oldest first within it
+    while _pending.size() > QUEUE_MAX:
+        var w := 0
+        for i in _pending.size():
+            var a: Dictionary = _pending[i]
+            var b: Dictionary = _pending[w]
+            if int(a["pri"]) < int(b["pri"]) or (int(a["pri"]) == int(b["pri"]) and float(a["t"]) < float(b["t"])):
+                w = i
+        _drop(_pending[w], "overflow")
+        _pending.remove_at(w)
+    if touched:
+        _rebuild()
+
+## a repeat: the same line, digits ignored, within MERGE_S of the earlier copy being raised
+func _merge_into(key: String, text: String) -> bool:
+    for e: Dictionary in _pending:
+        if e["key"] == key:
+            e["n"] = int(e["n"]) + 1
+            e["text"] = text
+            stats["merged"] = int(stats["merged"]) + 1
+            _flog("MERGE pending n=%d '%s'" % [int(e["n"]), text])
+            return true
+    for i in range(_shown.size() - 1, -1, -1):
+        var e: Dictionary = _shown[i]
+        if e["key"] == key and _clock - float(e["t"]) <= MERGE_S:
+            e["n"] = int(e["n"]) + 1
+            e["text"] = text
+            e["t"] = _clock                 # a live repeat keeps the window open
+            stats["merged"] = int(stats["merged"]) + 1
+            _flog("MERGE shown n=%d '%s'" % [int(e["n"]), text])
+            return true
+    return false
+
+## highest priority first, oldest first within it
+func _best_pending() -> int:
+    var w := 0
+    for i in _pending.size():
+        var a: Dictionary = _pending[i]
+        var b: Dictionary = _pending[w]
+        if int(a["pri"]) > int(b["pri"]) or (int(a["pri"]) == int(b["pri"]) and float(a["t"]) < float(b["t"])):
+            w = i
+    return w
+
+## the shown line a newcomer of priority `pri` may replace: one past its dwell, or a LOWER
+## priority one past DWELL_FLOOR; the lowest priority and the oldest of those. -1 = none may go
+func _evict_index(pri: int) -> int:
+    var w := -1
+    for i in _shown.size():
+        var e: Dictionary = _shown[i]
+        var age := _clock - float(e["at"])
+        var epri := int(e["pri"])
+        var ok: bool = age >= float(DWELL[epri]) or (pri > epri and age >= DWELL_FLOOR)
+        if not ok:
+            continue
+        if w < 0:
+            w = i
+            continue
+        var b: Dictionary = _shown[w]
+        if epri < int(b["pri"]) or (epri == int(b["pri"]) and float(e["at"]) < float(b["at"])):
+            w = i
+    return w
+
+func _admit(e: Dictionary) -> void:
+    e["at"] = _clock
+    _shown.append(e)
+    if _last_admit >= 0.0:
+        stats["min_gap"] = minf(float(stats["min_gap"]), _clock - _last_admit)
+    _last_admit = _clock
+    _pace_t = PACE_S
+    stats["admitted"] = int(stats["admitted"]) + 1
+    (stats["by_pri"] as Array)[int(e["pri"])] = int((stats["by_pri"] as Array)[int(e["pri"])]) + 1
+    _flog("ADMIT pri=%d q=%d '%s'" % [int(e["pri"]), _pending.size(), String(e["text"])])
+    _rebuild()
+    _fade_in_newest()
+
+func _drop(e: Dictionary, why: String) -> void:
+    stats["dropped"] = int(stats["dropped"]) + 1
+    if int(e["pri"]) >= PROTECT_FROM:
+        stats["dropped_protected"] = int(stats["dropped_protected"]) + 1
+    _flog("DROP %s pri=%d '%s'" % [why, int(e["pri"]), String(e["text"])])
+
+func _text_of(e: Dictionary) -> String:
+    var n := int(e["n"])
+    return String(e["text"]) if n <= 1 else "%s  x%d" % [String(e["text"]), n]
+
+func _flog(msg: String) -> void:
+    feed_log.append("t=%.1f %s" % [_clock, msg])
+    if feed_log.size() > LOG_MAX:
+        feed_log = feed_log.slice(feed_log.size() - LOG_MAX)
+
+func log_text() -> String:
+    return "\n".join(feed_log)
+
+## "A goblin falls (3)" and "A goblin falls (4)" are one line: digits do not make a new one
+func _key_of(text: String) -> String:
+    var out := ""
+    var in_num := false
+    for ch in text.to_lower():
+        var d: bool = ch >= "0" and ch <= "9"
+        if d and in_num:
+            continue                        # 89 and 149 are the same number as far as a repeat goes
+        out += "#" if d else ch
+        in_num = d
+    return out
+
+## L67.1: tag first (the raiser knew), words second (the raiser did not)
+func classify(text: String, tag: Dictionary) -> int:
+    if _re_town == null:
+        _re_town = RegEx.create_from_string(RE_TOWN)
+        _re_crit = RegEx.create_from_string(RE_CRIT)
+        _re_low = RegEx.create_from_string(RE_LOW)
+    var kind := String(tag.get("kind", ""))
+    if kind in ["raid", "death", "lord", "boss"]:
+        return P_CRIT
+    if kind != "" and kind != "misc" and not tag.has("who"):
+        return P_TOWN
+    if tag.has("who"):
+        return P_TOWN                       # a named hero's own action
+    var low := text.to_lower()
+    if _re_town.search(low) != null:
+        return P_TOWN
+    if _re_crit.search(low) != null:
+        return P_CRIT
+    if _re_low.search(low) != null:
+        return P_ROUTINE
+    return P_NORMAL

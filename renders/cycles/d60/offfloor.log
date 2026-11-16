@@ -1,0 +1,86 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Hero0 and 7 others descend down the guild stair as the clapperless bell does not count them off.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 3 slimes.
+FEED Grave goods laid out for the living: boots, bread, a lamp.
+FEED Hero2 casts Smite at slime.
+FEED Hero6 casts Frost at slime.
+FEED Hero1 casts Bolt at slime.
+FEED Hero6 reaches for bolt and the scar hands back something else (9 vs DC 10).
+FEED The slime divides.
+FEED Hero2's bolt goes wide, and the wall is unamused (9 vs DC 10).
+FEED Hero2 casts Smite at slimeling.
+FEED Hero6 casts Frost at slimeling.
+FEED Hero2 casts Bolt at slime.
+FEED Hero6 casts Bolt at slime.
+FEED Hero1 casts Chain Bolt at slime.
+FEED Hero1 searches (Investigation 23) and turns up 14 gold on floor 1.
+FEED The floor pays out. Count what came out of it.
+FEED Hero1 searches the chest - Successfully found loot!! 27 gold (Investigation 22 vs DC 10).
+FEED Hero1 spots a blade trap (Perception 12 vs DC 10) and steps round it.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 slimes, 1 cave spider, 1 hollowed slime.
+FEED Hero6 casts Frost at hollowed slime.
+FEED Hero2 reaches for smite and the scar reaches back (7 vs DC 11).
+FEED Hero2 casts Bolt at hollowed slime.
+FEED Hero1 casts Fire at hollowed slime.
+FEED The hollowed slime divides.
+FEED Hero6 casts Frost at cave spider.
+FEED Hero2 casts Bolt at slime.
+FEED Hero1's bolt goes wide, and the wall is unamused (8 vs DC 11).
+FEED Hero6's frost goes somewhere, and not where it was sent (10 vs DC 11).
+FEED Hero1 casts Bolt at slimeling.
+FEED Hero1 turns on the wounded slimeling to finish it.
+FEED Hero2 turns on the wounded slimeling to finish it.
+FEED Hero4 turns on the wounded slimeling to finish it.
+FEED Hero6 turns on the wounded slimeling to finish it.
+FEED Hero1 searches (Investigation 23) and turns up 29 gold on floor 2.
+FEED Finished - and the next door has gone from shut to merely closed.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 slimes, 1 bone bowman, 1 cave spider.
+FEED Hero1 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2's smite goes wide, and the wall is unamused (9 vs DC 11).
+FEED The slime divides.
+FEED Hero7 steps on a grate - fire! DEX 18 vs DC 11, 6 damage (halved).
+FEED Hero6 tries bolt and the ground gives it back wrong (10 vs DC 11).
+FEED Hero3 turns on the wounded slimeling to finish it.
+FEED Hero5 turns on the wounded slimeling to finish it.
+FEED Hero7 turns on the wounded slimeling to finish it.
+FEED Hero6 casts Bolt at cave spider.
+FEED Hero2 casts Smite at slime.
+FEED Hero1 casts Bolt at slime.
+FEED Hero6 casts Frost at slime.
+FEED Hero1 searches (Investigation 6) and turns up 19 gold on floor 3.
+FEED The floor pays out. Count what came out of it.
+FEED Hero1 searches the chest - Successfully found loot!! 52 gold (Investigation 25 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero0 spots a pressure plate (Perception 18 vs DC 11) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 bone bowman, 1 drowned cave spider, 1 slime, 1 cave spider, 1 skeleton minion.
+FEED The oil is running low.
+FEED Hero0 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2's bolt folds in on itself - wild magic (8 vs DC 12).
+FEED Hero6's renew bends away from them - the scar has opinions (1 vs DC 12).
+FEED The slime divides.
+FEED Hero1's chain splits in two, and neither half works (9 vs DC 12).
+FEED Hero1 searches (Investigation 10) and turns up 35 gold on floor 4.
+FEED Done. Count the living, then count the flasks.
+FEED Shadows peel off the walls - an ambush! 1 slime, 1 drowned risen bones surges in.
+FEED Hero1 spots a spike trap (Perception 14 vs DC 12) and steps round it.
+OFF monster drowned risen bones state=search
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 176 gold, 6 ore, 4 stone, 2 pieces of salvaged gear and 3 potions. 34 kills between them.
+FEED Hero1 is fitted with leather. (+10 hp) Haggled 10% off (12).
+FEED Hero2 is fitted with leather. (+10 hp)
+FEED Hero7 is fitted with leather. (+10 hp) Haggled 10% off (12).
+OFFFLOOR 1 of 1459 samples; INPROP 0; MON_INPROP 0 of 115; floor reached 4 frames 5061 obstacles 28
+
+RC 0

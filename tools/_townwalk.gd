@@ -12,6 +12,12 @@ var _r_samples := 0
 var _r_in := 0
 var _houses: Array = []
 var _stuck_ex: Array = []
+## D16b: every stuck_on_route over the whole run (120 s)
+var _stuck_total := 0
+## D16b: who was off a route (none, indoors) at any 0.5 s sample since the last
+## 10 s snapshot - a walker who stood idle 9 s and set off just now is not stuck
+var _broke := {}
+var _raw_total := 0
 func _initialize() -> void:
     _t = (load("res://Town.tscn") as PackedScene).instantiate()
     root.add_child(_t)
@@ -128,6 +134,10 @@ func _process(_d: float) -> bool:
                     _r_in += 1
                     if _bad.size() < 12:
                         _bad.append("RAID %s (%.1f,%.1f)" % [n.name, p2.x, p2.z])
+    if _f % 30 == 0:
+        for v in _t.get("people"):
+            if v._route.is_empty() or v.inside:
+                _broke[v] = true
     if _f > 120 and _f % 30 == 0:
         var houses: Array = []
         var hb: Dictionary = _t.get("_house_box")
@@ -178,6 +188,12 @@ func _process(_d: float) -> bool:
         var walking := 0
         var inside := 0
         var stuck := 0
+        var raw := 0
+        for v in _t.get("people"):
+            var p0: Vector3 = v.global_position
+            if not v.inside and _last.has(v) and (_last[v] as Vector3).distance_to(p0) < 0.3 and not v.stay and not v._route.is_empty():
+                raw += 1
+        _raw_total += raw
         for v in _t.get("people"):
             var p: Vector3 = v.global_position
             if v.inside:
@@ -186,7 +202,7 @@ func _process(_d: float) -> bool:
                 still += 1
                 if v.stay:
                     stays += 1
-                elif not v._route.is_empty():
+                elif not v._route.is_empty() and not _broke.get(v, false):
                     stuck += 1
                     if _stuck_ex.size() < 6:
                         var sr: Array = _t.call("solid_at", p, 0.25)
@@ -196,9 +212,20 @@ func _process(_d: float) -> bool:
             else:
                 walking += 1
             _last[v] = p
+        _broke.clear()
+        _stuck_total += stuck
         print("T=", _f / 60, "s walking=", walking, " still=", still, " (posted=", stays, ") inside=", inside,
               " in_solid=", _in_solid, "/", _samples, " stuck_on_route=", stuck)
-    if _f >= 4800:
+    if _f >= 7200:
+        var wd := [0, 0, 0, 0, 0]
+        for v in _t.get("people"):
+            if "wd_fires" in v:
+                wd[0] += v.wd_fires
+                wd[1] += v.wd_close
+                wd[2] += v.wd_repaths
+                wd[3] += v.wd_nudges
+                wd[4] += v.wd_giveups
+        print("STUCK_ON_ROUTE_TOTAL %d over %d s (raw still-with-a-route-now %d)  watchdog fires=%d close=%d repath=%d nudge=%d giveup=%d" % [_stuck_total, _f / 60, _raw_total, wd[0], wd[1], wd[2], wd[3], wd[4]])
         var pct := 100.0 * float(_in_solid) / maxf(float(_samples), 1.0)
         var rpct := 100.0 * float(_r_in) / maxf(float(_r_samples), 1.0)
         print("TOWNWALK in_solid=%d/%d (%.3f%%) raid_in_solid=%d/%d (%.3f%%) %s" % [_in_solid, _samples, pct, _r_in, _r_samples, rpct,

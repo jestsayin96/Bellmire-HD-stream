@@ -65,8 +65,9 @@ func make(cls := "", from_gate := false) -> HeroBody:
     b.role = "adventurer"
     b.town = town
     var tav := _tavern()
-    b.home = tav + Vector3(randf_range(-3, 3), 0, randf_range(-3, 3))
-    b.work = tav + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
+    # D16c: never a spot inside the tavern yard's tables and stools
+    b.home = town.call("keep_walkable", tav + Vector3(randf_range(-3, 3), 0, randf_range(-3, 3)))
+    b.work = town.call("keep_walkable", tav + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4)))
     var at := b.work
     if from_gate:
         var gw: Vector3 = town.call("_gate", -1.0)

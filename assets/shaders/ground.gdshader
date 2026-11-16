@@ -14,6 +14,8 @@ uniform float town_fade = 0.22;
 // HD: where feet go (red = trodden), painted by town.gd from streets and plots
 uniform sampler2D town_mask : filter_linear, repeat_disable;
 uniform float mask_half = 200.0;
+// D18c: the river surface height, so the ground dips into a wet muddy shore
+uniform float water_y = -0.9;
 varying vec3 wpos;
 varying vec3 wnrm;
 // the valley is ringed by mountains: steep ground is bare rock, high ground snow
@@ -48,10 +50,17 @@ void fragment() {
         g = max(g, 1.0 - trod);
     }
     vec3 dc = texture(dirt_tex, uvd).rgb * vec3(0.72, 0.66, 0.52);
-    vec3 gc = texture(grass_tex, uvg).rgb * grass_tint;
-    // large-scale variation so the meadow does not read as one tiled carpet
+    // D45: grass read as a flat olive/tan wash at pane + aerial distance. Fix:
+    // (1) a coarser second sample adds detail that survives mipping far off;
+    // (2) macro + patch mottling are GREEN-dominant (G highest), no warm
+    //     desaturation, so open fields vary in green instead of washing to tan.
+    vec3 gtex = texture(grass_tex, uvg).rgb;
+    vec3 gtexC = texture(grass_tex, uvg * 0.34).rgb;
+    vec3 gc = mix(gtex, gtexC, 0.45) * grass_tint;
     float macro = vnoise(wpos.xz * 0.008) * 0.5 + vnoise(wpos.xz * 0.023) * 0.5;
-    gc *= mix(vec3(0.82, 0.86, 0.70), vec3(1.10, 1.06, 0.92), macro);
+    float patch = vnoise(wpos.xz * 0.055 + 3.3);
+    gc *= mix(vec3(0.62, 0.74, 0.52), vec3(0.92, 1.06, 0.78), macro);
+    gc *= mix(0.84, 1.12, patch);
     vec3 col = mix(dc, gc, g);
     float slope = 1.0 - clamp(wnrm.y, 0.0, 1.0);
     float rk = smoothstep(rock_slope_lo, rock_slope_hi, slope + (n - 0.5) * 0.12);
@@ -60,6 +69,13 @@ void fragment() {
     col = mix(col, rockc, rk);
     float sn = smoothstep(snow_lo, snow_hi, wpos.y + (n - 0.5) * 14.0) * (1.0 - rk * 0.55);
     col = mix(col, vec3(0.90, 0.92, 0.95), sn);
+    // D18c: a damp, muddy shore where the valley ground dips to the waterline,
+    // so the bank reads as wet earth sliding under the river instead of a hard
+    // grass/water seam. Driven by world height only - no UVs, no bank distance.
+    float wet = smoothstep(water_y + 0.55, water_y - 0.2, wpos.y + (n - 0.5) * 0.3);
+    vec3 mudc = mix(dc, vec3(0.26, 0.21, 0.15), 0.55);
+    col = mix(col, mudc, wet);
+    float rough = mix(0.92, 0.38, wet);
     float sd = length(wpos.xz - scar_c.xz);
     float smk = 1.0 - smoothstep(scar_r * 0.55, scar_r * 1.25, sd + (n - 0.5) * 12.0);
     vec3 scorch = vec3(0.09, 0.06, 0.11) * (0.6 + 0.8 * vnoise(wpos.xz * 0.35));
@@ -73,5 +89,5 @@ void fragment() {
     col = mix(col, vc * 0.35, max(vein, vein2 * 0.7) * smk * 0.6);
     ALBEDO = col;
     NORMAL_MAP = mix(texture(dirt_nrm, uvd).rgb, texture(grass_nrm, uvg).rgb, g);
-    ROUGHNESS = 0.92;
+    ROUGHNESS = rough;
 }

@@ -1,0 +1,316 @@
+{
+  "name": "night",
+  "mapping": {
+    "style": "ambient_calm",
+    "mood": "lowkey",
+    "role": "bed"
+  },
+  "brief": {
+    "role": "bed",
+    "mood": "lowkey",
+    "seconds": 52,
+    "seed": 2276,
+    "style": "ambient_calm",
+    "brightnessBias": 0,
+    "densityBias": 0,
+    "targetBpm": 74,
+    "name": "bellmire_night"
+  },
+  "pocket": false,
+  "project": {
+    "bpm": 74,
+    "bars": 16,
+    "key": {
+      "root": 0,
+      "scale": "dorian"
+    },
+    "style": {
+      "id": "ambient_calm",
+      "mood": "lowkey",
+      "progressionId": "I-iii-IV-V",
+      "drumId": "kick-sparse+snare-late+hat-sparse+perc-off",
+      "bassId": "root-5",
+      "motifId": "m10-2-AABA",
+      "lengthMode": "loop",
+      "structure": [
+        {
+          "name": "swell",
+          "bars": 5
+        },
+        {
+          "name": "A",
+          "bars": 5
+        },
+        {
+          "name": "swell",
+          "bars": 5
+        },
+        {
+          "name": "turnaround",
+          "bars": 1
+        }
+      ],
+      "fingerprint": "fpbj7qqr",
+      "requestedSeed": 2276,
+      "usedSeed": 2276,
+      "reseeds": 0,
+      "titleWords": "Neon Meadow Loop 5",
+      "similarity": {
+        "nearestDistance": 1,
+        "nearestId": "",
+        "nearestName": "",
+        "threshold": 0.16,
+        "requestedSeed": 2276,
+        "usedSeed": 2276,
+        "reseeds": 0
+      }
+    },
+    "master": {
+      "gainDb": 0,
+      "speechPocket": true,
+      "speechDipDb": -6,
+      "targetLufs": -20,
+      "ceilingDbtp": -1
+    },
+    "seed": 2276
+  },
+  "norm": {
+    "before": {
+      "lufs": -47.28558516813834,
+      "shortTermMax": -47.32681811309218,
+      "samplePeak": -17.49206407354917,
+      "truePeak": -17.410270163340304
+    },
+    "after": {
+      "lufs": -23.030104023669253,
+      "shortTermMax": -24.20102150941401,
+      "samplePeak": -1.29999949192874,
+      "truePeak": -1.299888086901971
+    },
+    "passes": 6,
+    "note": "limited by ceiling"
+  },
+  "searched": 8,
+  "strictPass": false,
+  "moodPass": false,
+  "moodScore": 0.6368221534367808,
+  "moodBest": "lowkey",
+  "suggestions": [
+    "Too dark for lowkey: centroid 241.6 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+    "Loudness movement is 3.4 dB for lowkey, ideal 0-2.5 dB.",
+    "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+  ],
+  "speechRoom": {
+    "speechShare": 0.3186283736703378,
+    "speechBandDbBelowTotal": 4.967155531432182,
+    "restShare": 0.6813716263296622,
+    "role": "bed",
+    "threshold": {
+      "pass": 0.4,
+      "warn": 0.55
+    },
+    "verdict": "pass",
+    "message": "Speech band (300-3000 Hz) is 31.9% of the energy, 5.0 dB below the total. That is at or under 40% for a bed."
+  },
+  "seam": "ok",
+  "paragraph": "sparse, low-register arrangement at a slow dorian setting (measured: 74 BPM, 2.39 onsets/s, median pitch G2, centroid 242 Hz). Brightness reads dark. Loudness movement reads moving (3.41 dB). Stereo reads mono-like. Voices used: sub808, bell, strings. Layering measured swell:4, A:4, swell:4, turnaround:4 active layers per section. These are measurements, not a judgment of how it sounds.",
+  "tries": [
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2202,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5816840572806317,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 248.6 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.77,
+        "brightness": 248.55,
+        "loudnessMovement": 4.45,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2239,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": true,
+      "score": 0.7,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Loudness movement is 10 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.58,
+        "brightness": 476.02,
+        "loudnessMovement": 9.98,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2276,
+      "pocket": false,
+      "bpm": 74,
+      "bars": 16,
+      "pass": false,
+      "score": 0.6368221534367808,
+      "best": "lowkey",
+      "speech": "pass",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 241.6 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 3.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 2.39,
+        "brightness": 241.64,
+        "loudnessMovement": 3.41,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2313,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5747156453600616,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 249 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.6 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.77,
+        "brightness": 249.01,
+        "loudnessMovement": 4.57,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2350,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": false,
+      "score": 0.5,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 76 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 8.3 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.46,
+        "brightness": 75.96,
+        "loudnessMovement": 8.3,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2387,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": true,
+      "score": 0.7,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Loudness movement is 7 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.89,
+        "brightness": 431.39,
+        "loudnessMovement": 6.95,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2424,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": true,
+      "score": 0.7,
+      "best": "lowkey",
+      "speech": "fail",
+      "seam": "ok",
+      "sugg": [
+        "Loudness movement is 9.9 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.58,
+        "brightness": 473.35,
+        "loudnessMovement": 9.88,
+        "regularity": 0
+      }
+    },
+    {
+      "bb": 0,
+      "db": 0,
+      "seed": 2461,
+      "pocket": true,
+      "bpm": 74,
+      "bars": 16,
+      "pass": false,
+      "score": 0.582231668114815,
+      "best": "lowkey",
+      "speech": "warn",
+      "seam": "ok",
+      "sugg": [
+        "Too dark for lowkey: centroid 248.7 Hz, ideal 400-1800 Hz. Open the filter or add a higher pluck.",
+        "Loudness movement is 4.4 dB for lowkey, ideal 0-2.5 dB.",
+        "Drum regularity is 0 for lowkey, ideal 0.3-0.6 (share of drum hits on quarter notes)."
+      ],
+      "pm": {
+        "bpm": 74,
+        "density": 1.77,
+        "brightness": 248.72,
+        "loudnessMovement": 4.44,
+        "regularity": 0
+      }
+    }
+  ]
+}

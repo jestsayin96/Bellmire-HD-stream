@@ -1,0 +1,40 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SNAPSHOT off: no service key in user://_d59_no_such_file.json - the hub will not update
+PASS 0 off without a key file (no network in this test)
+PASS 1 payload v = PAYLOAD_V (3 until the hub KNOWN_V takes 4), never below 3
+PASS 2 veteran carries every v4 sheet field
+PASS 3 veteran seeded silently: no events, no last_seen yet
+veteran gear: { "main_hand": "runed blade", "body": "chainmail", "ring": "Ring of the Night Watch", "neck": "Hearthstone Amulet" }  init 1  speed 4.4  status in town
+PASS 4 veteran gear: main_hand, body, ring, neck real; no off_hand; no empty string
+PASS 5 initiative = the delve's DEX bonus
+PASS 6 speed = Roster.speed
+PASS 7 status in town
+fresh: stats { "str": 5, "dex": 7, "con": 7, "int": 15, "wis": 12, "cha": 10 } gear { "body": "rags" } events [{ "t": "enlist", "s": "Enlisted: elf mage.", "at": "2026-11-15T16:16:06Z" }]
+PASS 8 fresh hero carries every v4 sheet field
+PASS 9 fresh hero: bare hands = no main_hand; body = rags
+PASS 10 fresh hero: enlist event + last_seen
+   event { "t": "find", "s": "Got Ferryman\'s Ring.", "at": "2026-11-15T16:16:06Z" }
+   event { "t": "gear", "s": "Now wears plate.", "at": "2026-11-15T16:16:06Z" }
+   event { "t": "delve", "s": "Came home from a delve with 4 kills.", "at": "2026-11-15T16:16:06Z" }
+   event { "t": "depth", "s": "New deepest: floor 5.", "at": "2026-11-15T16:16:06Z" }
+   event { "t": "level", "s": "Reached level 7.", "at": "2026-11-15T16:16:06Z" }
+PASS 11 veteran: level, depth, delve, gear, find events
+PASS 12 veteran last_seen set (ISO)
+PASS 13 events capped at 6, newest first
+PASS 14 gear names and event lines W1a clean and capped
+PASS 15 v3 Satchel fields still there
+PASS 16 v2 sheet + blocks untouched
+SNAPSHOT off: no service key in user://_d59_no_such_file.json - the hub will not update
+PASS 17 restart keeps last_seen and events, no spurious new ones
+D59 size 202 heroes, full event rings: 250169 bytes (244.3 KB), build 10.40 ms
+PASS 18 202 heroes under the W1a 400 KB bar
+PASS 19 no Twitch ids, no id key
+D59 size 2 heroes: 8177 bytes
+D59_SHEET OK
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+
+RC 0

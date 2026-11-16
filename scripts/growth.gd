@@ -51,6 +51,12 @@ var _copper: StandardMaterial3D
 var _dark: StandardMaterial3D
 var _paper: StandardMaterial3D
 var _scenes := {}
+# D31a: visible scaffolding that goes up around newly-built plots/specials
+# when the town levels. Lives in real seconds then auto-removes. Nothing
+# the navmesh or collision cares about - purely visual.
+const SCAFFOLD_LIFE := 90.0
+var _scaffolds: Array = []  # [{"node": Node3D, "until": float, "kind": String}]
+var _scaffold_parent: Node3D
 
 func setup(t) -> void:
     town = t
@@ -84,7 +90,10 @@ func setup(t) -> void:
 
 ## ---------------------------------------------------------------- levels
 func show_level(lv: int, quiet := false) -> void:
-    lv = clampi(lv, 1, TOP_LEVEL)
+    # D32: economy now has 12 tiers but the visual build has 6 stages. Map two
+    # tiers per stage so construction spreads across the longer climb, and keep
+    # `level` in 1..6 - the contract town.gd's garrison sizing reads.
+    lv = clampi((lv + 1) / 2, 1, TOP_LEVEL)
     var was := level
     level = lv
     for k in _layers:
@@ -132,10 +141,30 @@ func show_level(lv: int, quiet := false) -> void:
             built += 1
     if built > 0:
         feed.append("%d new houses go up in Bellmire." % built)
+        if town.has_method("tag_feed"): town.tag_feed("growth")     # D60
     for l in range(was + 1, lv + 1):
         for line in NEWS.get(l, []):
             feed.append(String(line))
+            if town.has_method("tag_feed"): town.tag_feed("growth")     # D60
 
+    # D31a: visible construction. For every plot/special that newly turned
+    # on this level-up, raise a scaffolding frame around it; _process clears
+    # it after SCAFFOLD_LIFE real seconds.
+    if was > 0 and lv > was:
+        var scaffold_count := 0
+        for plot in houses:
+            var g := int(plot["grow"])
+            if g > was and g <= lv:
+                _raise_scaffold_plot(plot, "house")
+                scaffold_count += 1
+        for key in specials:
+            var ul := int(UNLOCK[key])
+            if ul > was and ul <= lv:
+                _raise_scaffold_plot((specials[key] as Dictionary)["plot"], key)
+                scaffold_count += 1
+        if scaffold_count > 0:
+            feed.append("Builders raise scaffolding across Bellmire.")
+            if town.has_method("tag_feed"): town.tag_feed("growth")     # D60
 func stats() -> Dictionary:
     var built := 0
     for plot in houses:
@@ -470,6 +499,11 @@ func _stables(nd: Node3D, plot: Dictionary) -> void:
         if horse:
             horse.name = "StableHorse"
             horse.rotation.y = PI * (0.5 if i % 4 == 0 else -0.5)    # stood side-on in the stall
+            var hap := Rig.find(horse)          # D17a: idling in the stall, not frozen in the bind pose
+            if hap:
+                Rig.prep(hap)
+                Rig.play(hap, "Idle", 0.0)
+                hap.seek(randf() * 2.0, true)
     for i in range(stalls):
         _prop(nd, PROPS, "FarmCrate_Empty", Vector3(c.x - hx + w * (float(i) + 0.5) + w * 0.3, 0.1, c.y - hz + 0.6), 0.0, 1.3)
     _prop(nd, PROPS, "Bucket_Wooden_1", Vector3(c.x + hx - 0.8, 0.1, c.y + hz - 0.9), 0.0, 1.45)
@@ -617,3 +651,81 @@ func _mage_tower(nd: Node3D, plot: Dictionary) -> void:
     _box(nd, Vector3(1.4, 2.4, 0.3), Vector3(c.x, 1.3, c.y + r + 0.05), _dark)
     _box(nd, Vector3(0.22, 0.3, 0.22), Vector3(c.x - 1.0, 2.4, c.y + r + 0.25), _arcane)
     _label(nd, NAMES["mage_tower"], Vector3(c.x, 3.1, c.y + r + 0.3), 50, Color(0.85, 0.75, 1.0))
+
+
+## ---------------------------------------------------------------- D31a scaffolding
+func _process(delta: float) -> void:
+    if _scaffolds.is_empty():
+        return
+    var now := float(Time.get_ticks_msec()) * 0.001
+    var keep: Array = []
+    for s in _scaffolds:
+        if now >= float(s["until"]):
+            var nd: Node = s["node"]
+            if is_instance_valid(nd):
+                nd.queue_free()
+        else:
+            keep.append(s)
+    _scaffolds = keep
+
+func _ensure_scaffold_parent() -> Node3D:
+    if _scaffold_parent == null or not is_instance_valid(_scaffold_parent):
+        _scaffold_parent = Node3D.new()
+        _scaffold_parent.name = "Scaffolds"
+        add_child(_scaffold_parent)
+    return _scaffold_parent
+
+func _raise_scaffold_plot(plot: Dictionary, kind: String) -> void:
+    if plot == null or not (plot is Dictionary):
+        return
+    if not plot.has("pos"):
+        return
+    var bx := _shape_box(plot)
+    var he: Vector2 = bx[0]
+    var top: float = float(bx[2])
+    var p: Vector3 = plot["pos"]
+    var yaw: float = float(plot.get("yaw", 0.0))
+    _raise_scaffold_at(Vector3(p.x, town.height_at(p.x, p.z), p.z), yaw, he, top, kind)
+
+func _raise_scaffold_at(origin: Vector3, yaw: float, extent: Vector2, top: float, kind: String) -> void:
+    var parent := _ensure_scaffold_parent()
+    var nd := Node3D.new()
+    nd.name = "Scaffold_" + kind
+    nd.position = origin
+    nd.rotation.y = yaw
+    parent.add_child(nd)
+    var hx := maxf(extent.x + 0.35, 1.8)
+    var hz := maxf(extent.y + 0.35, 1.8)
+    var h := maxf(top * 0.95, 2.6)
+    # 4 corner poles
+    for sx in [-1.0, 1.0]:
+        for sz in [-1.0, 1.0]:
+            _cyl(nd, 0.07, 0.07, h, Vector3(sx * hx, h * 0.5, sz * hz), _wood, 6)
+    # 2 plank layers around the perimeter (front and back + sides, thin boxes)
+    for ring_h in [h * 0.33, h * 0.70]:
+        for sz in [-1.0, 1.0]:
+            _box(nd, Vector3(hx * 2.0, 0.12, 0.28), Vector3(0.0, ring_h, sz * hz), _wood)
+        for sx in [-1.0, 1.0]:
+            _box(nd, Vector3(0.28, 0.12, hz * 2.0), Vector3(sx * hx, ring_h, 0.0), _wood)
+    # a diagonal brace on each long side (just a thin box rotated a touch; stays axis-aligned to keep it cheap)
+    for sz in [-1.0, 1.0]:
+        var br := _box(nd, Vector3(hx * 1.4, 0.08, 0.18), Vector3(0.0, h * 0.5, sz * hz), _wood)
+        br.rotation.z = 0.35 * sz
+    # a crosspole at the top with a little pennant so Mr. E can see it at a glance
+    _cyl(nd, 0.06, 0.06, 1.4, Vector3(0.0, h + 0.7, 0.0), _wood, 6)
+    var cloth := StandardMaterial3D.new()
+    cloth.albedo_color = Color(0.85, 0.70, 0.22)
+    cloth.roughness = 0.9
+    _box(nd, Vector3(0.6, 0.35, 0.03), Vector3(0.3, h + 1.1, 0.0), cloth)
+    # a stack of planks on the ground (the builder's pile)
+    for i in range(3):
+        _box(nd, Vector3(1.6, 0.08, 0.26), Vector3(hx * 0.6, 0.06 + 0.1 * i, hz * 0.4), _wood)
+    var until := float(Time.get_ticks_msec()) * 0.001 + SCAFFOLD_LIFE
+    _scaffolds.append({"node": nd, "until": until, "kind": kind})
+
+func active_scaffolds() -> int:
+    var n := 0
+    for s in _scaffolds:
+        if is_instance_valid(s["node"]):
+            n += 1
+    return n

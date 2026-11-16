@@ -226,8 +226,25 @@ signal announced(line: String, colour: Color)
 func _init() -> void:
     rng.randomize()
 
+## D37: E3PO voice hook. The town-held Notables carries _e3po_say; Roster is
+## a child of town in live play (town.gd:_start_guild adds it), so get_parent()
+## reaches it. In the harness Roster is standalone and this no-ops, which keeps
+## the tests that build a bare Roster unaffected.
+func _e3po(cat: String, sub := "") -> void:
+    var p := get_parent()
+    if p == null:
+        return
+    var n = p.get("notables") if p.get("notables") != null else null
+    if n != null and n.has_method("_e3po_say"):
+        n._e3po_say(cat, sub)
+
 # ----------------------------------------------------------------- lifecycle
 func fresh(user_id: String, display: String, cls := "", species := "") -> Dictionary:
+    # D37: a returning viewer - uid was in the roster already and their old hero
+    # fell - is Mr. E's favourite tell for E3PO. A first-time enlist is NOT
+    # "returns"; check before the write so "already had an entry" means a true
+    # re-enlist after a death.
+    var returning := heroes.has(user_id) and not bool(heroes[user_id].get("alive", true))
     if cls == "" or not CLASSES.has(cls):
         cls = CLASSES.keys()[rng.randi() % CLASSES.size()]
     if not SPECIES.has(species):
@@ -240,6 +257,8 @@ func fresh(user_id: String, display: String, cls := "", species := "") -> Dictio
         "delves": 0, "kills": 0, "deepest": 0, "alive": true,
     }
     heroes[user_id] = h
+    if returning:
+        _e3po("viewer_returns")
     return h
 
 # 4d6 drop lowest, the way a tabletop roll goes. Range 3-18, centred near 12.
@@ -379,15 +398,24 @@ func haggle(h: Dictionary, list_price: int) -> int:
     var total := d + mod(h, "cha") + (prof(h) if String(h["class"]) in TALKERS else 0)
     var k := 1.0
     last_haggle = ""
+    var roll_kind := ""
     if d == 20:
         k = 0.75
         last_haggle = " A natural 20 at the counter - a quarter off."
+        roll_kind = "crit"
     elif d == 1:
         k = 1.1
         last_haggle = " A natural 1 - the smith takes offence and charges a tenth over."
+        roll_kind = "fumble"
     elif total >= HAGGLE_DC:
         k = 1.0 - clampf(0.10 + 0.01 * float(total - HAGGLE_DC), 0.10, 0.20)
         last_haggle = " Haggled %d%% off (%d)." % [int(round((1.0 - k) * 100.0)), total]
+        roll_kind = "high"
+    else:
+        roll_kind = "low"
+    # D37: E3PO calls out a viewer d20 (the haggle is the one viewer-triggered d20
+    # that already lives on the Roster - crit/high/low/fumble are the written subs)
+    _e3po("viewer_roll", roll_kind)
     return maxi(1, int(round(float(list_price) * k)))
 
 # ------------------------------------------------------------------ spending
@@ -448,6 +476,45 @@ func buy_weapon(user_id: String, kind := "") -> String:
         h["wkind"] = kind
     changed.emit(user_id)
     return "%s takes up %s %s. (+%d atk, %dd%d) %s%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), forge_flavour(nxt), last_haggle]
+
+## ---- L55: the smith fits out a hero who comes home with coin in their purse.
+## FOUND BY THE CENSUS, reported by nobody: weapon and armour sat at w0/a0 for every hero through
+## a soak. Measured here before changing anything, and NEITHER of the two suspected causes was it:
+## buy_weapon/buy_armour raise a tier perfectly well when called with gold, and death does not
+## strip the record (coming back is a FRESH hero, which is canon). The real fault is that nothing
+## ever CALLED the forge for a viewer's hero. The town's own band kits up in Adventurers._kit_up,
+## but a viewer's hero only ever forged if that viewer typed !forge. So heroes earned and never
+## spent: survivors came home with 69-115 gold, tier 1 costs 52, and not one of them climbed.
+## Deliberately conservative, because this is a VIEWER'S gold and not mine to empty:
+##   - at most ONE step a delve, so nobody's purse is drained in a single run
+##   - a RESERVE is always left (oil money and then some), so coming home never strands a hero
+##     without the means to re-supply
+##   - armour first while it trails the weapon, which is Adventurers._kit_up's own rule
+##   - a viewer who is saving can still outpace it by hand with !forge
+## Returns the smith's line, or "" when nothing was bought.
+const KIT_RESERVE := OIL_COST * 3      # always leave at least this behind
+
+func kit_up_after_delve(user_id: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty() or not bool(h.get("alive", true)):
+        return ""
+    var w := int(h.get("weapon", 0))
+    var a := int(h.get("armour", 0))
+    var want_armour := a <= w
+    var nxt: int = (a + 1) if want_armour else (w + 1)
+    var table: Array = ARMOUR if want_armour else WEAPONS
+    if nxt >= table.size() or bool((table[nxt] as Dictionary).get("found", false)):
+        return ""                                   # nothing the smith can make
+    if nxt > town_tier:
+        return ""                                   # the town cannot forge it yet
+    # the UN-haggled price on purpose: haggle() rolls dice and sets last_haggle, so calling it
+    # here and again inside buy_* would charge a different number than this check tested and
+    # burn a roll for nothing. Haggling only ever reduces the price, so testing the full price
+    # is the conservative side of the line.
+    var price := cost_for(h, int((table[nxt] as Dictionary)["cost"]))
+    if int(h.get("gold", 0)) - price < KIT_RESERVE:
+        return ""                                   # not without leaving them skint
+    return buy_armour(user_id) if want_armour else buy_weapon(user_id, "")
 
 func _an(word: String) -> String:
     return "an" if word.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a"
@@ -563,15 +630,112 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
         Sfx.play("level_up", -4.0)          # S2
         announced.emit("%s reaches level %d (+1 %s)." % [h["name"], int(h["level"]), s],
             Color(0.95, 0.86, 0.45))
+        # L48: a level-up that unlocks something SAYS so, by name and by what it does. A stat
+        # bump nobody can see was the whole complaint; an unlock nobody can see would be the
+        # same bug wearing a better hat.
+        for key in unlocked_at(h, int(h["level"])):
+            announced.emit("%s learns %s - %s." % [h["name"], ability_word(key), ability_blurb(key)],
+                Color(0.70, 0.92, 1.0))
     # A promotion is a story beat, so it is said out loud like a level-up.
     var rank_now := rank_of(h)
     if rank_now != rank_was:
         announced.emit("%s is raised to %s of the Bellmire Guild."
             % [h["name"], rank_now], Color(0.98, 0.90, 0.52))
+        _e3po("rank_up")       # D37: the Commander of the Guards notes the promotion
     changed.emit(user_id)
 
 func _xp_needed(level: int) -> int:
     return 40 + level * 30
+
+## ---- L48: LEVELLING UNLOCKS, BY CLASS **AND** SPECIES.
+## A level-up used to be "+1 to a random stat" and nothing else - nothing was unlocked, nothing
+## was named, and two heroes of different blood levelled identically. Mr. E asked for unlocks
+## that depend on BOTH, with tiers rather than a single step.
+## Two TRACKS, deliberately, instead of one table of 15 classes x 6 species = 90 hand-written
+## rows nobody could keep true: a hero draws from their CLASS track and their SPECIES track, so
+## the combination is what makes them, and adding a class or a species costs one row, not six
+## or fifteen. A dwarf knight and an orc knight share the knight line and differ by blood.
+## Every ability named here is USED - each one resolves in delve.gd through the seams that
+## already existed (_ability_mult and _ability_hit for what a hero deals, _soak for what they
+## take). Nothing here is a label with no effect behind it.
+const CLASS_UNLOCKS := {
+    "knight":      {2: "cleave", 5: "bulwark"},
+    "warden":      {2: "thorns", 5: "cleave"},
+    "barbarian":   {2: "cleave", 5: "rage"},
+    "rogue":       {2: "backstab", 5: "flurry"},
+    "duelist":     {2: "riposte", 5: "backstab"},
+    "ranger":      {2: "deadeye", 5: "cleave"},
+    "mage":        {2: "arcane_surge", 5: "hex"},
+    "sage":        {2: "arcane_surge", 5: "drain"},
+    "cleric":      {2: "smite", 5: "bulwark"},
+    "paladin":     {2: "smite", 5: "bulwark"},
+    "necromancer": {2: "drain", 5: "hex"},
+    "monk":        {2: "flurry", 5: "riposte"},
+    "druid":       {2: "thorns", 5: "rage"},
+    "warlock":     {2: "hex", 5: "drain"},
+    "bard":        {2: "riposte", 5: "arcane_surge"},
+}
+const SPECIES_UNLOCKS := {
+    "human":    {3: "resolve"},
+    "elf":      {3: "keen"},
+    "dwarf":    {3: "stoneblood"},
+    "halfling": {3: "luck"},
+    "orc":      {3: "rage"},
+    "scarkin":  {3: "scarborn"},
+}
+## what each one is called out loud, and what it actually does - the Chronicle says both, so a
+## viewer learns the hero's kit by watching rather than by reading a wiki that does not exist
+const ABILITY_WORDS := {
+    "cleave":       ["Cleave", "their blow carries into a second foe"],
+    "bulwark":      ["Bulwark", "they take less from every blow"],
+    "thorns":       ["Thorns", "what strikes them bleeds for it"],
+    "rage":         ["Rage", "they hit markedly harder"],
+    "backstab":     ["Backstab", "their telling blows cut deeper"],
+    "flurry":       ["Flurry", "they strike faster, and lighter"],
+    "riposte":      ["Riposte", "every blow is turned to advantage"],
+    "deadeye":      ["Deadeye", "their aim tells at any range"],
+    "arcane_surge": ["Arcane Surge", "their spells bite harder"],
+    "hex":          ["Hex", "what they mark is easier for everyone to hurt"],
+    "drain":        ["Drain", "they drink back a share of what they deal"],
+    "smite":        ["Smite", "the dead and the fallen take double"],
+    "resolve":      ["Resolve", "they give a little more than most"],
+    "keen":         ["Keen Eye", "elf-sight finds the gap"],
+    "stoneblood":   ["Stoneblood", "dwarf-stock shrugs off a share of it"],
+    "luck":         ["Halfling Luck", "now and then a blow lands twice"],
+    "scarborn":     ["Scarborn", "the scar's own are death to the undead"],
+}
+
+static func ability_word(key: String) -> String:
+    return String((ABILITY_WORDS.get(key, [key, ""]) as Array)[0])
+
+static func ability_blurb(key: String) -> String:
+    return String((ABILITY_WORDS.get(key, [key, ""]) as Array)[1])
+
+## every ability a hero has RIGHT NOW: what their class was born with, plus everything their
+## level has unlocked down both tracks. Deduplicated - a monk whose class grants flurry and
+## whose blood grants it again is not twice as fast.
+static func abilities_of(h: Dictionary) -> Array:
+    var out: Array = []
+    var base := String(CLASSES.get(String(h.get("class", "")), {}).get("ability", ""))
+    if base != "":
+        out.append(base)
+    var lvl := int(h.get("level", 1))
+    for src in [CLASS_UNLOCKS.get(String(h.get("class", "")), {}), SPECIES_UNLOCKS.get(species_of(h), {})]:
+        for at in (src as Dictionary):
+            if lvl >= int(at):
+                var k := String((src as Dictionary)[at])
+                if not out.has(k):
+                    out.append(k)
+    return out
+
+## what a level-up hands over at THIS level, so the announcement can name it
+static func unlocked_at(h: Dictionary, level: int) -> Array:
+    var out: Array = []
+    for src in [CLASS_UNLOCKS.get(String(h.get("class", "")), {}), SPECIES_UNLOCKS.get(species_of(h), {})]:
+        var d: Dictionary = src
+        if d.has(level):
+            out.append(String(d[level]))
+    return out
 
 func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String:
     var h := get_hero(user_id)
@@ -588,6 +752,7 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
     if fallen.size() > 200:
         fallen.resize(200)
     changed.emit(user_id)
+    _e3po("viewer_down")       # D37: a viewer's hero fell - E3PO notes it
     # A hero cut down in the town by a raider was being announced as "falls on
     # floor 0", because this line assumed every death happens underground.
     # Raids account for 3-5 deaths per ten days, so that nonsense was on screen
@@ -980,6 +1145,7 @@ func wear(user_id: String, words: String) -> String:
             h["cos"] = {}
         h["cos"][String(it["kind"])] = key
     changed.emit(user_id)
+    _e3po("viewer_cosmetic")   # D37: a viewer kitted out - E3PO comments on the style
     var what := String(it["name"])
     if String(it.get("kind", "")) == "title":
         return "%s is known now as %s, %s.%s" % [h["name"], h["name"], what, note]
@@ -1001,6 +1167,7 @@ func dye(user_id: String, colour: String) -> String:
         h["cos"] = {}
     h["cos"]["dye"] = c
     changed.emit(user_id)
+    _e3po("viewer_cosmetic")   # D37: a dye is a cosmetic change too
     return "%s's armour and cloak are dyed %s.%s" % [h["name"], c, last_haggle]
 
 ## what a hero wears, for the sheet: "Guild Cloak, Soft Boots | a corgi | the Lamplighter"

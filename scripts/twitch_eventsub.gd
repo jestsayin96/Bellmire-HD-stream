@@ -40,9 +40,24 @@ const FORBIDDEN := ["boss", "monster", "spawn", "raid", "mob", "goblin", "horde"
         "drop", "chest", "treasure", "invade", "titan"]
 ## Bellmire's rewards: key -> settings. The key is ours; Twitch gives the id.
 const REWARDS := {
-    "spotlight": {"title": "Spotlight my hero", "cost": 500,
+    "spotlight": {"title": "Spotlight my hero", "cost": 500, "action": "spotlight",
         "prompt": "The eye of Bellmire turns to your hero for a while. Raise one first with !enlist.",
         "background_color": "#2AA198", "lane": "points", "seconds": 15.0},
+    "delve": {"title": "Send my hero delving", "cost": 400, "action": "delve",
+        "prompt": "Your hero sets out for the scar with the next party. Raise one first with !enlist.",
+        "background_color": "#B5462E"},
+    "fish": {"title": "Send my hero fishing", "cost": 150, "action": "fish",
+        "prompt": "Your hero heads to the docks to fish. Raise one first with !enlist.",
+        "background_color": "#2E7DB5"},
+    "join": {"title": "Join the delve", "cost": 300, "action": "join",
+        "prompt": "Your hero joins the party forming at the scar mouth. Raise one first with !enlist.",
+        "background_color": "#B58E2E"},
+    "patch": {"title": "Patch up my hero", "cost": 250, "action": "patch",
+        "prompt": "Your hero is handed a healing potion for the next delve. Raise one first with !enlist.",
+        "background_color": "#4BB54B"},
+    "rally": {"title": "Rally my hero", "cost": 600, "action": "rally",
+        "prompt": "Your hero is rallied - stronger, swifter, fearless, and mending - for their next delve. Raise one first with !enlist.",
+        "background_color": "#9B59B6", "lane": "points", "seconds": 15.0},
 }
 
 var town: Node                       # spotlight(uid, lane, seconds, reason), feed, roster, chat
@@ -61,6 +76,7 @@ var _validate_t := VALIDATE_EVERY
 var reward_ids := {}                 # key -> Twitch reward id (ours)
 var rewards_ok := false
 var rewards_note := ""
+var rewards_resync := false          # cfg [twitch] rewards_resync: force (re)adopt/create missing rewards this run
 
 var _ws := WebSocketPeer.new()
 var _ws_next: WebSocketPeer = null   # session_reconnect: the new socket until it says welcome
@@ -90,6 +106,8 @@ func setup(t: Node) -> void:
         var c: Object = town.get("chat")
         if c.has_signal("twitch_reply") and not c.is_connected("twitch_reply", _on_twitch_reply):
             c.connect("twitch_reply", _on_twitch_reply)
+        if "bits_tier_fn" in c:
+            c.set("bits_tier_fn", Callable(self, "_do_bits_tier"))
     if not enabled or offline:
         return
     if client_id == "":
@@ -112,6 +130,8 @@ func _start() -> void:
         return
     await ensure_rewards()
     _open()
+    # L35: seed the subscriber pane with real channel subs
+    _fetch_subs()
 
 func _load_cfg() -> void:
     for path in CFGS:
@@ -124,6 +144,8 @@ func _load_cfg() -> void:
                 enabled = false
             if not bool(c.get_value("twitch", "eventsub", true)):
                 enabled = false
+            if bool(c.get_value("twitch", "rewards_resync", false)):
+                rewards_resync = true
 
 func _say_log(s: String) -> void:
     print(s)
@@ -287,9 +309,14 @@ static func title_ok(title: String) -> bool:
             return false
     return true
 
-## Finds Bellmire's own rewards (only_manageable_rewards = made by this client id) and
-## makes any that are missing. Matching is by id; a title is only used to adopt a reward
-## this same client id already made (a lost rewards file).
+## EDIT-PROOF reward handling. Bellmire's own rewards are matched BY STORED ID, so Mr. E
+## can freely edit a reward's title, cost, colour, icon or prompt on Twitch and the game
+## stays connected to it (the id never changes). What the game will NOT do is resurrect a
+## reward he removed: once we hold saved ids, a reward whose id has vanished is left OFF
+## (not recreated as a duplicate). The game only CREATES or re-ADOPTS rewards when it is
+## bootstrapping - the first run with no saved ids file, or an explicit resync
+## ([twitch] rewards_resync=true in local/twitch.cfg or user://twitch.cfg). On a resync it
+## adopts an existing reward by exact title before making a new one, so it never dupes.
 func ensure_rewards() -> void:
     if offline:
         return
@@ -300,18 +327,34 @@ func ensure_rewards() -> void:
         rewards_note = _err_text(r)
         _say_log("TWITCH_EVENTSUB rewards unavailable (%d %s). Spotlight-by-points is off; bits, subs and follows still work. The broadcaster token needs channel:manage:redemptions." % [int(r["code"]), rewards_note])
         return
-    var mine := {}                  # id -> title
+    var mine := {}                  # id -> title (our client's current rewards on the channel)
     for rw in (r["json"] as Dictionary).get("data", []):
         mine[String(rw["id"])] = String(rw["title"])
+    # bootstrap = we may adopt/create missing rewards this run; otherwise we touch nothing
+    # the broadcaster has changed. First ever run (no file) or an explicit resync bootstraps.
+    var bootstrap := reward_ids.is_empty() or rewards_resync
     for key in REWARDS:
         var want: Dictionary = REWARDS[key]
+        # a stored id that is still on the channel -> keep it as-is, whatever its title/cost/
+        # colour are now. This is what makes editing a reward on Twitch safe.
         if reward_ids.has(key) and mine.has(String(reward_ids[key])):
             continue
+        var had_saved := reward_ids.has(key)
         reward_ids.erase(key)
+        # steady state (not bootstrapping): a reward we knew is gone -> the broadcaster deleted
+        # it on purpose. Leave it off; do NOT recreate a ghost duplicate.
+        if had_saved and not bootstrap:
+            _say_log("TWITCH_EVENTSUB reward '%s' is no longer on the channel - its redemptions are off. Set [twitch] rewards_resync=true to remake it." % want["title"])
+            continue
+        # bootstrap/resync: adopt an existing reward by exact title (recovers a lost ids file
+        # without duplicating), else fall through and make it.
         for id in mine:
             if mine[id] == String(want["title"]):
                 reward_ids[key] = id
         if reward_ids.has(key):
+            continue
+        # no saved id and not bootstrapping -> never spawn a reward on our own
+        if not bootstrap:
             continue
         if not title_ok(String(want["title"])):
             _say_log("TWITCH_EVENTSUB reward title %s uses a fightoverlay word - not made" % want["title"])
@@ -326,6 +369,9 @@ func ensure_rewards() -> void:
         else:
             rewards_note = _err_text(c)
             _say_log("TWITCH_EVENTSUB could not make reward %s (%d %s)" % [want["title"], int(c["code"]), rewards_note])
+    if rewards_resync:
+        _say_log("TWITCH_EVENTSUB rewards resync done - set rewards_resync back to false to keep edits safe.")
+    rewards_resync = false
     rewards_ok = not reward_ids.is_empty()
     _save_rewards()
 
@@ -372,6 +418,7 @@ func _process(delta: float) -> void:
         return
     _tick_tokens(delta)
     _tick_chat(delta)
+    _tick_subs_refresh(delta)
     if _token_dead["broadcaster"] or not _opened:
         return
     if _ws_next:
@@ -456,6 +503,9 @@ func _sub_list() -> Array:
         ["channel.subscription.gift", "1", b],
         ["channel.follow", "2", {"broadcaster_user_id": broadcaster_id, "moderator_user_id": broadcaster_id}],
         ["channel.channel_points_custom_reward_redemption.add", "1", b],
+        # Custom Power-ups (bit-cost rewards): fire the town-wide tier for the bits spent.
+        # v1, needs bits:read (already held). Payload: event.custom_power_up.{id,title,bits}.
+        ["channel.custom_power_up_redemption.add", "1", b],
     ]
 
 func subscribe_all() -> void:
@@ -475,6 +525,53 @@ func subscribe_all() -> void:
     _say_log("TWITCH_EVENTSUB subscribed %d of %d%s" % [subs_ok.size(), _sub_list().size(),
             "" if subs_failed.is_empty() else " - failed: " + ", ".join(subs_failed)])
 
+# ---------------------------------------------------------------- channel subscribers
+## L35: fetch the real subscriber list from the Helix API so the subs pane has
+## bodies to cycle through even before anyone subs this session.
+var _subs_refresh_t := 0.0
+const SUBS_REFRESH := 600.0      # re-fetch every 10 min
+
+func _fetch_subs() -> void:
+    if offline or _token_dead["broadcaster"]:
+        return
+    var all_uids: Array = []
+    var cursor := ""
+    for page in 5:     # cap at 5 pages (~500 subs max)
+        var url := "/subscriptions?broadcaster_id=%s&first=100" % broadcaster_id
+        if cursor != "":
+            url += "&after=" + cursor
+        var r := await _helix("broadcaster", HTTPClient.METHOD_GET, url)
+        if int(r["code"]) != 200:
+            _say_log("TWITCH_EVENTSUB sub list unavailable (%d)" % int(r["code"]))
+            break
+        var j: Dictionary = r["json"] if typeof(r["json"]) == TYPE_DICTIONARY else {}
+        var data: Array = j.get("data", []) if typeof(j.get("data")) == TYPE_ARRAY else []
+        for s in data:
+            var uid := String((s as Dictionary).get("user_id", ""))
+            if uid != "" and uid != broadcaster_id:
+                all_uids.append(uid)
+        var pag: Dictionary = j.get("pagination", {}) if typeof(j.get("pagination")) == TYPE_DICTIONARY else {}
+        cursor = String(pag.get("cursor", ""))
+        if cursor == "" or data.size() < 100:
+            break
+    if all_uids.is_empty():
+        _say_log("TWITCH_EVENTSUB no channel subs found (or affiliate not reached)")
+        return
+    _say_log("TWITCH_EVENTSUB seeded subs pane with %d subscriber(s)" % all_uids.size())
+    # feed into Spotlight._subs_seen (oldest first so newest is at front)
+    if town:
+        var spot := Spotlight.of(town)
+        if spot:
+            for uid in all_uids:
+                spot._subs_note(uid)
+    _subs_refresh_t = SUBS_REFRESH
+
+func _tick_subs_refresh(delta: float) -> void:
+    _subs_refresh_t -= delta
+    if _subs_refresh_t <= 0.0:
+        _subs_refresh_t = SUBS_REFRESH
+        _fetch_subs()
+
 # ---------------------------------------------------------------- events -> the town
 
 static func bits_seconds(bits: int) -> float:
@@ -493,9 +590,23 @@ func handle_event(kind: String, e: Dictionary) -> void:
             var bits := int(e.get("bits", 0))
             if bool(e.get("is_anonymous", false)) or uid == "":
                 _feed_line("A stranger tosses %d bits into Bellmire's well." % bits)
+                _do_bits_tier("", bits)
                 return
             _feed_line("%s cheers %d bits for Bellmire!" % [who, bits])
             _spot(uid, "bits", bits_seconds(bits), "cheered %d bits" % bits)
+            _do_bits_tier(uid, bits, who)
+        "channel.custom_power_up_redemption.add":
+            # a bought Power-up: its bit cost drives the same town-wide tier as a cheer
+            var pu: Dictionary = e.get("custom_power_up", {}) if typeof(e.get("custom_power_up")) == TYPE_DICTIONARY else {}
+            var pbits := int(pu.get("bits", 0))
+            var ptitle := String(pu.get("title", "a Power-up"))
+            if uid == "":
+                _feed_line("A stranger spends %d bits on %s for Bellmire." % [pbits, ptitle])
+                _do_bits_tier("", pbits)
+                return
+            _feed_line("%s redeems %s (%d bits) for Bellmire!" % [who, ptitle, pbits])
+            _spot(uid, "bits", bits_seconds(pbits), "redeemed %s" % ptitle)
+            _do_bits_tier(uid, pbits, who)
         "channel.subscribe":
             if bool(e.get("is_gift", false)):
                 _feed_line("%s is gifted a place in the guild." % who)    # the gifter has the pane
@@ -528,8 +639,38 @@ func handle_event(kind: String, e: Dictionary) -> void:
                     _on_twitch_reply(login, "you need a hero first - type !enlist. Your points were returned.")
                 _settle(String(e.get("id", "")), rid, false)
                 return
-            _spot(uid, String(want["lane"]), float(want["seconds"]), "redeemed " + String(rw.get("title", want["title"])))
+            _do_reward(uid, want, String(rw.get("title", want["title"])))
             _settle(String(e.get("id", "")), rid, true)
+
+## Mr. E: a redeemed reward -> the right action. Every one also spotlights the
+## hero so viewers watch what they paid for (the points pane then rests on them).
+func _do_reward(uid: String, want: Dictionary, title: String) -> void:
+    match String(want.get("action", "spotlight")):
+        "delve":
+            if town and town.has_method("_on_delve"):
+                town.call("_on_delve", uid)
+            _spot(uid, "points", 15.0, "sent their hero delving")
+        "join":
+            if town and town.has_method("_on_delve"):
+                town.call("_on_delve", uid)
+            _spot(uid, "points", 15.0, "joined the delve party")
+        "fish":
+            if town and town.has_method("_on_fish"):
+                town.call("_on_fish", uid)
+            _spot(uid, "points", 15.0, "sent their hero fishing")
+        "patch":
+            var r = town.get("roster") if town else null
+            if r and r.has_method("get_hero"):
+                var h: Dictionary = r.call("get_hero", uid)
+                if not h.is_empty():
+                    h["potions"] = int(h.get("potions", 0)) + 1
+            _spot(uid, "points", 10.0, "is handed a healing potion")
+        "rally":
+            if town and town.has_method("_on_rally"):
+                town.call("_on_rally", uid)
+            _spot(uid, "points", 15.0, "rallies their hero for the next delve")
+        _:
+            _spot(uid, String(want.get("lane", "points")), float(want.get("seconds", 15.0)), "redeemed " + title)
 
 func _has_hero(uid: String) -> bool:
     if town == null or town.get("roster") == null:
@@ -542,8 +683,181 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
     spotlight_wanted.emit(uid, lane, seconds, reason)
     if town and town.has_method("spotlight"):
         town.call("spotlight", uid, lane, seconds, reason)
+    elif town:
+        Spotlight.spotlight(town, uid, lane, seconds, reason)
     else:
-        print("SPOTLIGHT %s %s %.0fs %s (town.spotlight not built yet - L17)" % [uid, lane, seconds, reason])
+        print("SPOTLIGHT %s %s %.0fs %s (no town)" % [uid, lane, seconds, reason])
+
+# ---------------------------------------------------------------- bit tiers
+## Mr. E: cheered bits -> town-wide effects. Five tiers; the buyer's hero gets
+## personal bonuses at tier 3+. Anonymous cheers still fire the town-wide part
+## (uid == "" means no personal bonus). All tiers include the lower ones.
+
+const BIT_TIERS := [
+    {"min": 1,    "name": "Town Heal"},
+    {"min": 50,   "name": "Blessed Supplies"},
+    {"min": 150,  "name": "Fortune's Favour"},
+    {"min": 500,  "name": "Festival of Plenty"},
+    {"min": 1000, "name": "Summon the Host"},
+]
+
+## Which tier index (0-4) does this cheer land in?
+static func bits_tier(bits: int) -> int:
+    var t := 0
+    for i in BIT_TIERS.size():
+        if bits >= int(BIT_TIERS[i]["min"]):
+            t = i
+    return t
+
+## D63.7: the name a paid festival is given - the viewer's display name (control chars
+## stripped, capped at 25 like every W1a string), else their hero's, else nobody
+static func _buyer_name(buyer: String, hero: String) -> String:
+    var n := buyer if buyer != "" else hero
+    var out := ""
+    for ch in n:
+        if ch.unicode_at(0) >= 32 and ch != "<" and ch != ">" and ch != "{" and ch != "}":
+            out += ch
+    return out.strip_edges().left(25)
+
+func _do_bits_tier(uid: String, bits: int, buyer := "") -> void:
+    if town == null:
+        return
+    var tier := bits_tier(bits)
+    var r = town.get("roster") if town else null
+    var eco = town.get("economy") if town else null
+    var who := ""
+    var h := {}
+    if uid != "" and r and r.has_method("get_hero"):
+        h = r.call("get_hero", uid) as Dictionary
+        who = String(h.get("name", "")) if not h.is_empty() else ""
+
+    # ---- Tier 0 (1-49): Town Heal
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 0, 1)
+    if eco:
+        _restock_half(eco)
+    _feed_line("Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.")
+
+    if tier < 1:
+        return
+
+    # ---- Tier 1 (50-149): Blessed Supplies
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 0, 3)    # +3 more (4 total with tier 0)
+    if eco:
+        _restock_full(eco)
+    # +1 random brew to the buyer's hero
+    if not h.is_empty() and r:
+        var brew_key := _random_brew_key()
+        if brew_key != "":
+            r.call("add_brew", h, brew_key, 1)
+            var brew_name: String = String(Roster.potion(brew_key).get("name", brew_key))
+            _feed_line("%s is given a %s from the grateful apothecary." % [who, brew_name])
+    _feed_line("Blessed supplies arrive - the stores overflow with fresh goods!")
+
+    if tier < 2:
+        return
+
+    # ---- Tier 2 (150-499): Fortune's Favour
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 10, 4)   # +10 gold +4 more potions (8 total)
+    # +2 random brews to buyer
+    if not h.is_empty() and r:
+        for i in 2:
+            var brew_key := _random_brew_key()
+            if brew_key != "":
+                r.call("add_brew", h, brew_key, 1)
+        # free forge upgrade
+        if r.has_method("buy_weapon"):
+            # give gold to cover the cost, then forge
+            var old_gold: int = int(h.get("gold", 0))
+            h["gold"] = old_gold + 9999
+            r.call("buy_weapon", uid)
+            r.call("buy_armour", uid)
+            h["gold"] = old_gold      # refund what wasn't spent
+    _feed_line("Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime.")
+
+    if tier < 3:
+        return
+
+    # ---- Tier 3 (500-999): Festival of Plenty
+    # D63.7: the festival that starts is THEIRS - named for the buyer, longer, dressed in
+    # gold (town.start_festival "gift"). The old path set the flag with no timer, so a paid
+    # festival could end the very next frame. Under a raid it waits for the raid to end.
+    if town.has_method("start_festival"):
+        var heroes_for: Array = [who] if who != "" else []
+        town.call("start_festival", "gift", heroes_for, _buyer_name(buyer, who))
+    # production boost 4x for 30 min
+    if eco:
+        eco.set("dis_work_k", 4.0)
+        _create_timer(1800.0, func(): if eco: eco.set("dis_work_k", 1.0))
+    # top tier forge for buyer
+    if not h.is_empty() and r:
+        var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
+        if int(h.get("weapon", 0)) < top:
+            h["weapon"] = top
+        top = mini(Roster.forged_max(Roster.ARMOUR), Roster.town_tier)
+        if int(h.get("armour", 0)) < top:
+            h["armour"] = top
+    _feed_line("A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!")
+
+    if tier < 4:
+        return
+
+    # ---- Tier 4 (1000+): Summon the Host
+    # trigger a raid immediately
+    var raids_node = town.get("raids") if town else null
+    if raids_node and raids_node.has_method("raid"):
+        raids_node.call("raid", "bits_summon")
+    # if town survives, the grant comes when the raid ends (wired separately);
+    # for now, give the upfront bonus
+    if r and r.has_method("grant_all"):
+        r.call("grant_all", 50, 4)
+    # top everything for buyer
+    if not h.is_empty() and r:
+        var top: int = mini(Roster.forged_max(Roster.WEAPONS), Roster.town_tier)
+        h["weapon"] = top
+        top = mini(Roster.forged_max(Roster.ARMOUR), Roster.town_tier)
+        h["armour"] = top
+    _feed_line("THE HOST IS SUMMONED! A mighty force marches on Bellmire - every hero to the walls!")
+
+func _restock_half(eco: Node) -> void:
+    var caps := {"food": 200.0, "wood": 120.0, "stone": 80.0, "ore": 50.0, "gear": 30.0, "potion": 20.0}
+    for g in caps:
+        var target: float = float(caps[g]) * 0.5
+        if float(eco.stock.get(g, 0.0)) < target:
+            eco.stock[g] = target
+
+func _restock_full(eco: Node) -> void:
+    var caps := {"food": 200.0, "wood": 120.0, "stone": 80.0, "ore": 50.0, "gear": 30.0, "potion": 20.0}
+    for g in caps:
+        if float(eco.stock.get(g, 0.0)) < float(caps[g]):
+            eco.stock[g] = float(caps[g])
+
+func _random_brew_key() -> String:
+    var ps: Dictionary = Roster.potions().get("potions", {})
+    if ps.is_empty():
+        return "mending"
+    var keys: Array = ps.keys()
+    # filter to brews the town can actually make
+    var valid: Array = []
+    for k in keys:
+        if int((ps[k] as Dictionary).get("tier", 1)) <= Roster.town_tier:
+            valid.append(k)
+    if valid.is_empty():
+        return "mending"
+    return String(valid[randi() % valid.size()])
+
+func _create_timer(secs: float, cb: Callable) -> void:
+    var t := Timer.new()
+    t.wait_time = secs
+    t.one_shot = true
+    t.autostart = true
+    add_child(t)
+    t.timeout.connect(func():
+        cb.call()
+        t.queue_free()
+    )
 
 # ---------------------------------------------------------------- chat replies
 
@@ -551,9 +865,11 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
 func _on_twitch_reply(user_login: String, text: String) -> void:
     var t := text.strip_edges()
     if t == "" or user_login == "":
+        _say_log("TWITCH_EVENTSUB chat skipped (empty reply) login='%s' text='%s'" % [user_login, text])
         return
     if _chat_q.size() >= CHAT_QUEUE_MAX:
-        _chat_q.pop_front()              # oldest answer is the stalest
+        var dropped: Array = _chat_q.pop_front()   # oldest answer is the stalest
+        _say_log("TWITCH_EVENTSUB chat skipped (queue full, dropped oldest) @%s: %s" % [String(dropped[0]), String(dropped[1])])
     _chat_q.append([user_login, t])
 
 func chat_line_for(user_login: String, text: String) -> String:
@@ -567,19 +883,41 @@ func _tick_chat(delta: float) -> void:
     if _chat_t > 0.0 or _chat_q.is_empty():
         return
     var q: Array = _chat_q.pop_front()
-    var m := chat_line_for(String(q[0]), String(q[1]))
+    var login := String(q[0])
+    var text := String(q[1])
+    var m := chat_line_for(login, text)
     var now := Time.get_unix_time_from_system()
-    if _chat_recent.has(m) and now - float(_chat_recent[m]) < 30.0:
-        return                           # Twitch drops a repeat inside 30 s anyway
-    _chat_recent[m] = now
+    # Per-user duplicate guard, keyed on (login, text): one viewer's repeat must
+    # never mute another viewer's identical answer. Twitch itself drops a repeat
+    # of the bot's own previous message inside 30 s; this mirrors that, per user.
+    var key := login + "\u0001" + text
+    if _chat_recent.has(key) and now - float(_chat_recent[key]) < 30.0:
+        _say_log("TWITCH_EVENTSUB chat skipped (duplicate within 30s) @%s: %s" % [login, text])
+        return
+    _chat_recent[key] = now
     for k in _chat_recent.keys():
         if now - float(_chat_recent[k]) > 60.0:
             _chat_recent.erase(k)
     _chat_t = CHAT_GAP
     sent_chat.append(m)
-    if dry_run_chat or offline or tokens["bot"].is_empty() or _token_dead["bot"]:
+    var hold := _send_hold_reason()
+    if hold != "":
+        _say_log("TWITCH_EVENTSUB chat not sent (%s) @%s: %s" % [hold, login, text])
         return
     _send_chat(m)
+
+## The reason the current chat line cannot go out, or "" if it can. Named so every
+## suppressed reply is logged with its cause instead of returning silently (T3).
+func _send_hold_reason() -> String:
+    if dry_run_chat:
+        return "dry_run_chat"
+    if offline:
+        return "offline"
+    if tokens["bot"].is_empty():
+        return "no bot token"
+    if _token_dead["bot"]:
+        return "bot token dead"
+    return ""
 
 func _send_chat(m: String) -> void:
     var r := await _helix("bot", HTTPClient.METHOD_POST, "/chat/messages",

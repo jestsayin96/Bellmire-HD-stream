@@ -28,6 +28,7 @@ var seat_h := 1.2
 var ridden := 0.0                   # metres covered (tests)
 
 func _ready() -> void:
+    body_r = 0.6                    # D16a: a horse takes more room than a man
     super._ready()
     var ps: PackedScene = load(HORSE)
     if ps:

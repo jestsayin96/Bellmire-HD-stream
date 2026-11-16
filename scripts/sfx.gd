@@ -4,10 +4,25 @@ extends Node
 ## can call the static helpers - Sfx.at("hit", pos), Sfx.play("horn"),
 ## Sfx.sting() - and they do nothing when no Sfx is live (bare test tools).
 ##  - sounds in the world are 3D (a pool of players): far fights are quiet;
-##  - music: day / night / raid, crossfaded over 3 s, on its own bus at -14 dB
-##    (a stream has a voice over it); a hero's death ducks it for a few seconds;
+##  - music: day / night / raid / delve, on its own bus at -14 dB (a stream has a
+##    voice over it); a hero's death ducks it for a few seconds;
+##  - D22b MUSIC MOODS: the four beds were GENERATED for Bellmire with Mr. E's
+##    music-studio v3.5.2 (tools/_d38_music_gen.mjs, his approved style x mood x
+##    role mapping). A mood must be wanted HOLD seconds before the music moves (a
+##    raid moves it at once); each transition has its own equal-power crossfade
+##    length (FADES); a bed RESUMES where it left off instead of restarting; a
+##    raid driven off plays the victory sting, a delve that comes home plays it
+##    too, a delve with no survivors plays the defeat sting - each ducks the bed;
 ##  - a bell tolls three times at dawn and at dusk; a horn when a raid comes;
 ##  - a low wind under the town.
+##  - D22a: LAYERED BEDS - looped, positional ambience laid by the town: the river
+##    along its banks, the market's murmur, the forge's fire. Each fades by day /
+##    night / raid on its own (market and forge sleep at night and shut for a raid);
+##  - D22a: a 24-voice pool that hands out a FREE voice first and, when all are busy,
+##    steals the quietest-ranked (farthest, lowest-priority) one - never round-robin
+##    cuts a hit to start a footstep. Low-priority kinds (footfalls, animal and town
+##    voices) are dropped outright when the pool is nearly full or a burst budget is
+##    spent, so a raid's blows always find a voice.
 ## Files: assets/audio (all CC0 or made here - see assets/audio/LICENSE.txt).
 
 const DIR := "res://assets/audio/"
@@ -22,6 +37,8 @@ const SETS := {
     "horn": ["sfx/raid_horn.ogg"],
     "death": ["sfx/death_sting.ogg"],
     "ui": ["sfx/click1.ogg", "sfx/switch2.ogg"],
+    # D22a: delve.gd plays "roar" for a lord's rising - it had no set, so it was silent
+    "roar": ["rpg/orc_roar_0.ogg", "rpg/troll_roar_0.ogg", "rpg/minotaur_bellow_0.ogg", "rpg/dragon_roar_0.ogg"],
     # ===== RPG sound library (generated from music-studio v3.5.2, CC0 - see rpg/LICENSE note in LICENSE.txt) =====
     # voices
     "female_attack_yell": ["rpg/female_attack_yell_0.ogg", "rpg/female_attack_yell_1.ogg"],
@@ -115,19 +132,74 @@ const SETS := {
     "quest_complete": ["rpg/quest_complete_0.ogg", "rpg/quest_complete_1.ogg"],
     "unlock": ["rpg/unlock_0.ogg", "rpg/unlock_1.ogg"],
 }
+## D22b/D38: generated with music-studio v3.5.2 - day playful_pizzicato x playful (bed), night
+## ambient_calm x lowkey (bed), raid epic_cinematic x hype (music), delve lofi_chill x lowkey (bed)
 const MUSIC := {
+    "day": ["music/bellmire_day.ogg"],
+    "night": ["music/bellmire_night.ogg"],
+    "raid": ["music/bellmire_raid.ogg"],
+    "delve": ["music/bellmire_delve.ogg"],
+    # D63.2: a festival lifts the music - the CC0 minstrel dance (RandomMind, assets/audio/LICENSE.txt)
+    "festival": ["music/day_minstrel_dance.ogg"],
+}
+## the older CC0 loops (RandomMind) - used only if a generated file is missing
+const MUSIC_OLD := {
     "day": ["music/day_old_tower_inn.ogg", "music/day_minstrel_dance.ogg"],
     "night": ["music/night_bards_tale.ogg", "music/night_exploration.ogg"],
     "raid": ["music/raid_battle.ogg"],
+    "delve": ["music/night_exploration.ogg"],
+    "festival": ["music/day_old_tower_inn.ogg"],
 }
+## D22b: crossfade length per transition, real seconds ("from>to"; unlisted = FADE). A raid
+## comes in fast and leaves slowly; day and night melt into each other.
+const FADES := {"day>raid": 1.5, "night>raid": 1.5, "delve>raid": 1.5,
+    "raid>day": 6.0, "raid>night": 6.0, "raid>delve": 6.0,
+    "day>night": 8.0, "night>day": 8.0,
+    "day>delve": 5.0, "night>delve": 5.0, "delve>day": 5.0, "delve>night": 5.0,
+    "day>festival": 3.0, "night>festival": 3.0, "delve>festival": 3.0, "raid>festival": 4.0,
+    "festival>day": 6.0, "festival>night": 6.0, "festival>delve": 5.0, "festival>raid": 1.5}
+const HOLD := 2.0              # D22b: real seconds a new mood must be wanted before the music moves
+const STINGS := {"victory": "music/sting_victory.ogg", "defeat": "music/sting_defeat.ogg"}
+const STING_DB := 0.0          # the stings were made at -16 LUFS, 4 dB over the -20 LUFS beds already
+const STING_GAP := 20.0        # real seconds between two stings, at least
+const STING_DUCK := -8.0       # the bed dips this much under a sting
 const AMBIENCE := "amb/town_wind.ogg"
-const BUS_DB := {"Music": -14.0, "Sfx": -6.0, "Ambience": -20.0}
+## D22a beds: kind -> [file, unit_size, max_distance, sleeps at night, shuts for a raid]
+## (made for this game with numpy + ffmpeg, CC0 - see assets/audio/LICENSE.txt)
+const BEDS := {
+    "river": ["amb/river_flow.ogg", 10.0, 60.0, false, false],
+    "market": ["amb/market_murmur.ogg", 11.0, 75.0, true, true],
+    "forge": ["amb/forge_fire.ogg", 5.0, 40.0, true, true],
+}
+const BUS_DB := {"Music": -14.0, "Sfx": -6.0, "Ambience": -20.0, "Beds": -12.0}
+const VOICES := 24             # D22a: the 3D pool (was 16; D15 peaked 16/16)
+const LOW_BUSY := 18           # D22a: at or above this many busy voices, low-priority kinds are dropped
+const BURST_WIN := 0.25        # D22a: a low-priority burst budget, per this many real seconds...
+const BURST_MAX := 8           # ...at most this many low-priority starts
+const LOW_FAR := 60.0          # D22a: low-priority sounds farther than this from the ear are skipped
+## priority of a kind when the pool is full: higher keeps its voice. Unlisted = 2.
+const PRIO := {"horn": 5, "death": 5, "bell": 5, "roar": 4, "level_up": 4,
+    "hit": 3, "hit_impact": 3, "sword_clash": 3, "fireball": 3, "lightning": 3, "dragon_fire_breath": 3,
+    "dragon_roar": 3, "orc_roar": 3, "troll_roar": 3}
 const FADE := 3.0
 const SILENT := -60.0
 const GAP := {"hit": 0.06, "swing": 0.06, "spell": 0.1, "coin": 0.15, "splash": 0.2,
     # S1 town casts + S2 dungeon/chat - merged union so a floor of blows (or a spam of commands) cannot machine-gun a sound
     "sword_swing": 0.07, "dagger_stab": 0.07, "sword_clash": 0.08, "hit_impact": 0.06, "bow_draw": 0.1, "arrow_shot": 0.08,
-    "block": 0.1, "shield_bash": 0.15, "mana_charge": 0.12, "menu_select": 0.25, "error": 0.4, "coins_stack": 0.2}
+    "block": 0.1, "shield_bash": 0.15, "mana_charge": 0.12, "menu_select": 0.25, "error": 0.4, "coins_stack": 0.2,
+    # D42: footfalls finally have a caller (Townsfolk._gait_step). A town-wide floor so a crowd near the camera patters, not machine-guns.
+    "footstep_grass": 0.05, "footstep_stone": 0.05, "footstep_wood": 0.06, "footstep_water": 0.08,
+    # D22a: animal and townsfolk voices - one bark is a dog, a bark every frame is a glitch
+    "dog_bark": 0.35, "dog_whine": 0.5, "cat_meow": 0.6, "horse_neigh": 0.5, "horse_whinny": 0.5,
+    "boar_grunt": 0.4, "bird_chirp": 0.3, "crow_caw": 0.6, "owl_hoot": 1.0, "cricket_chirp": 0.3,
+    "wolf_howl": 1.0, "wolf_growl": 0.4, "eagle_cry": 1.0,
+    "male_laugh": 0.3, "female_laugh": 0.3, "male_grunt": 0.12, "female_grunt": 0.12,
+    "male_effort": 0.1, "female_effort": 0.1, "male_hurt": 0.12, "female_hurt": 0.12}
+
+## low priority: dropped first when the pool is crowded (PRIO 1)
+static func _low(kind: String) -> bool:
+    return kind.begins_with("footstep_") or GAP.get(kind, 0.0) >= 0.3 or kind.ends_with("_laugh") \
+        or kind.ends_with("_grunt") or kind.ends_with("_effort")
 
 static var _i: Sfx = null
 
@@ -147,6 +219,29 @@ var _check := 0.0
 var _night := false
 var _night_known := false
 var _duck := 0.0
+var _fade_len := FADE          # D22b: the running crossfade's own length
+var _want := ""                # D22b: the mood being asked for, and for how long (HOLD)
+var _want_t := 0.0
+var _paths := ["", ""]         # D22b: the file each music player holds
+var _resume := {}              # D22b: path -> playback position when it was faded out
+var _sting_p: AudioStreamPlayer
+var _sting_duck := 0.0
+var _last_sting := -100000
+var _delve_seen: Object = null
+var transitions: Array = []    # D22b tests: [{from, to, fade, at, resumed}]
+var stings := {}               # D22b tests: which -> times played
+var stings_skipped := 0
+## D22a: measured for the audio soak
+var busy_peak := 0             # most 3D voices playing at once
+var steals := 0                # a busy voice was taken for a higher-priority sound
+var dropped := {}              # kind -> starts dropped (pool crowded / burst spent)
+var far_skips := 0             # low-priority starts skipped as out of earshot
+var missing := {}              # kind -> plays of a kind with no set (a silent caller)
+var beds: Array = []           # [{kind, player, base_db}]
+var min_gap := {}              # kind -> shortest msec between two starts (the GAP check)
+var _prio_of: Array = []       # pool index -> priority of what it is playing
+var _burst_t := 0.0
+var _burst_n := 0
 
 ## ------------------------------------------------------------ static API
 static func live() -> Sfx:
@@ -162,6 +257,16 @@ static func play(kind: String, db := 0.0) -> void:
     if _i and is_instance_valid(_i):
         _i._play2d(kind, db)
 
+## D22b: the musical stings (anyone may call these; the town's own raid/delve
+## endings call them from here)
+static func victory() -> void:
+    if _i and is_instance_valid(_i):
+        _i.play_sting("victory")
+
+static func defeat() -> void:
+    if _i and is_instance_valid(_i):
+        _i.play_sting("defeat")
+
 ## a hero has died: the sting, the music ducks under it
 static func sting() -> void:
     if _i and is_instance_valid(_i):
@@ -173,7 +278,7 @@ func setup(t: Node3D) -> void:
     town = t
     _i = self
     _buses()
-    for i in range(16):
+    for i in range(VOICES):
         var p := AudioStreamPlayer3D.new()
         p.bus = "Sfx"
         p.unit_size = 9.0
@@ -181,6 +286,7 @@ func setup(t: Node3D) -> void:
         p.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE
         add_child(p)
         _pool.append(p)
+        _prio_of.append(0)
     for i in range(6):
         var q := AudioStreamPlayer.new()
         q.bus = "Sfx"
@@ -192,6 +298,9 @@ func setup(t: Node3D) -> void:
         m.volume_db = SILENT
         add_child(m)
         _music.append(m)
+    _sting_p = AudioStreamPlayer.new()
+    _sting_p.bus = "Music"
+    add_child(_sting_p)
     _amb = AudioStreamPlayer.new()
     _amb.bus = "Ambience"
     _amb.stream = _load(AMBIENCE, true)
@@ -236,31 +345,99 @@ func _load(rel: String, loop := false) -> AudioStream:
 func _pick(kind: String) -> AudioStream:
     var lst: Array = SETS.get(kind, [])
     if lst.is_empty():
+        missing[kind] = int(missing.get(kind, 0)) + 1
         return null
     return _load(String(lst[randi() % lst.size()]))
 
 func _ok_now(kind: String) -> bool:
     var now := Time.get_ticks_msec()
     var gap := int(float(GAP.get(kind, 0.0)) * 1000.0)
-    if gap > 0 and now - int(_last.get(kind, -100000)) < gap:
+    var prev := int(_last.get(kind, -100000))
+    if gap > 0 and now - prev < gap:
         return false
+    if prev > -100000:
+        min_gap[kind] = mini(int(min_gap.get(kind, 1 << 30)), now - prev)
     _last[kind] = now
     plays[kind] = int(plays.get(kind, 0)) + 1
     return true
 
+func _busy() -> int:
+    var n := 0
+    for p in _pool:
+        if (p as AudioStreamPlayer3D).playing:
+            n += 1
+    return n
+
+func _drop(kind: String) -> void:
+    dropped[kind] = int(dropped.get(kind, 0)) + 1
+
+func _ear() -> Vector3:
+    var vp := get_viewport()
+    var cam: Camera3D = vp.get_camera_3d() if vp else null
+    return cam.global_position if cam else Vector3.ZERO
+
+## a voice for a new sound: the first free one after _next; else the busy voice
+## with the lowest priority (farthest from the ear breaks a tie), if it ranks
+## below the newcomer; else -1 (the newcomer is the least of them and is dropped)
+func _voice_for(prio: int) -> int:
+    var n := _pool.size()
+    for k in range(n):
+        var i := (_next + k) % n
+        if not (_pool[i] as AudioStreamPlayer3D).playing:
+            _next = (i + 1) % n
+            return i
+    var ear := _ear()
+    var best := -1
+    var best_p := prio
+    var best_d := -1.0
+    for i in range(n):
+        var pr := int(_prio_of[i])
+        var d := (_pool[i] as AudioStreamPlayer3D).global_position.distance_to(ear)
+        if pr < best_p or (pr == best_p and best >= 0 and d > best_d):
+            best = i
+            best_p = pr
+            best_d = d
+    if best >= 0:
+        steals += 1
+    return best
+
 func _play3d(kind: String, pos: Vector3, db: float) -> void:
+    var low := _low(kind)
+    var prio: int = 1 if low else int(PRIO.get(kind, 2))
+    if low:
+        # GAP throttle on top of the per-kind gap: a crowded pool or a spent burst drops footfalls & chatter
+        var now := Time.get_ticks_msec() * 0.001
+        if now - _burst_t > BURST_WIN:
+            _burst_t = now
+            _burst_n = 0
+        # a footfall or a bark past LOW_FAR is all but inaudible (-13 dB under a 9 m unit
+        # size): it never takes a voice, so the burst budget goes to the near ones
+        if pos.distance_to(_ear()) > LOW_FAR:
+            far_skips += 1
+            return
+        if _burst_n >= BURST_MAX or _busy() >= LOW_BUSY:
+            _drop(kind)
+            return
     if not _ok_now(kind):
         return
     var s := _pick(kind)
     if s == null or _pool.is_empty():
         return
-    var p: AudioStreamPlayer3D = _pool[_next]
-    _next = (_next + 1) % _pool.size()
+    var vi := _voice_for(prio)
+    if vi < 0:
+        _drop(kind)
+        return
+    if low:
+        _burst_n += 1
+    var p: AudioStreamPlayer3D = _pool[vi]
+    _prio_of[vi] = prio
+    p.stop()
     p.stream = s
     p.volume_db = db
     p.pitch_scale = randf_range(0.92, 1.08)
     p.global_position = pos
     p.play()
+    busy_peak = maxi(busy_peak, _busy())
 
 func _play2d(kind: String, db: float) -> void:
     if not _ok_now(kind):
@@ -280,11 +457,70 @@ func _play2d(kind: String, db: float) -> void:
     q.pitch_scale = 1.0 if kind in ["death", "horn"] else randf_range(0.95, 1.05)
     q.play()
 
+## ----------------------------------------------------------- D22a beds
+## lay one looped ambience bed at a place (the town calls this once it is built).
+## db is the bed's own level on the Beds bus; it then fades with day/night/raid.
+func bed(kind: String, pos: Vector3, db := 0.0) -> AudioStreamPlayer3D:
+    var spec: Array = BEDS.get(kind, [])
+    if spec.is_empty():
+        missing["bed:" + kind] = 1
+        return null
+    var s := _load(String(spec[0]), true)
+    if s == null:
+        missing["bed:" + kind] = 1
+        return null
+    var p := AudioStreamPlayer3D.new()
+    p.name = "Bed_" + kind + str(beds.size())
+    p.bus = "Beds"
+    p.stream = s
+    p.unit_size = float(spec[1])
+    p.max_distance = float(spec[2])
+    p.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE
+    p.volume_db = SILENT
+    add_child(p)
+    p.global_position = pos
+    # start each bed of a kind somewhere different in the loop, so three river
+    # emitters do not comb-filter into one phasey voice
+    p.play(randf() * 25.0)
+    beds.append({"kind": kind, "player": p, "base_db": db})
+    return p
+
+## what a bed's level should be now
+func bed_target(kind: String) -> float:
+    var spec: Array = BEDS.get(kind, [])
+    if spec.is_empty():
+        return SILENT
+    var eco = town.get("economy") if town else null
+    var night: bool = eco != null and eco.is_night()
+    var raid := mood == "raid"
+    var fest: bool = town != null and bool(town.get("festival"))
+    if kind == "market" and fest:
+        return 5.0                     # D63.2: trade chatter up while the square celebrates (day or night)
+    if (night and bool(spec[3])) or (raid and bool(spec[4])):
+        return SILENT
+    return -6.0 if raid else 0.0       # the river runs on under a raid, a little lower
+
+func _beds(real: float) -> void:
+    var step := real * 20.0             # dB per real second: a 3 s fade, about
+    for b in beds:
+        var p: AudioStreamPlayer3D = b["player"]
+        if not is_instance_valid(p):
+            continue
+        var want := bed_target(String(b["kind"]))
+        var tgt := SILENT if want <= SILENT else want + float(b["base_db"])
+        p.volume_db = move_toward(p.volume_db, tgt, step)
+
 ## ------------------------------------------------------------ music mood
 func want_mood() -> String:
     var r = town.get("raids") if town else null
     if r and not (r.raiders as Array).is_empty():
         return "raid"
+    # D63.2: a festival in the square outranks the delve bed and the time of day
+    if town and bool(town.get("festival")):
+        return "festival"
+    var dv = town.get("delve") if town else null
+    if dv != null and is_instance_valid(dv) and String(dv.get("state")) != "home":
+        return "delve"
     var eco = town.get("economy") if town else null
     if eco and eco.is_night():
         return "night"
@@ -299,7 +535,19 @@ func _process(delta: float) -> void:
         _check = 0.5
         var w := want_mood()
         if w != mood:
-            _switch(w)
+            # D22b hysteresis: a raid moves the music at once; anything else must be
+            # wanted HOLD seconds, so a mood flickering at a boundary never flaps it
+            if w == _want:
+                _want_t += 0.5
+            else:
+                _want = w
+                _want_t = 0.0
+            if mood == "" or w == "raid" or _want_t >= HOLD:
+                _switch(w)
+        else:
+            _want = w
+            _want_t = 0.0
+        _watch_delve()
         var eco = town.get("economy")
         if eco:
             var n: bool = eco.is_night()
@@ -308,36 +556,97 @@ func _process(delta: float) -> void:
             _night = n
             _night_known = true
     _duck = maxf(0.0, _duck - real)
+    _sting_duck = maxf(0.0, _sting_duck - real)
     if _fade > 0.0:
         _fade = maxf(0.0, _fade - real)
-    var k := 1.0 - _fade / FADE
-    var duck_db := -10.0 if _duck > 0.0 else 0.0
+    var k := clampf(1.0 - _fade / maxf(_fade_len, 0.01), 0.0, 1.0)
+    var duck_db := minf(-10.0 if _duck > 0.0 else 0.0, STING_DUCK if _sting_duck > 0.0 else 0.0)
     var a: AudioStreamPlayer = _music[_cur]
     var b: AudioStreamPlayer = _music[1 - _cur]
-    a.volume_db = lerpf(SILENT, 0.0, sqrt(k)) + duck_db
-    b.volume_db = lerpf(0.0, SILENT, sqrt(k)) + duck_db
+    # D22b: an equal-power crossfade - the sum stays level through the middle
+    a.volume_db = maxf(SILENT, linear_to_db(maxf(sin(k * PI * 0.5), 0.00001))) + duck_db
+    b.volume_db = maxf(SILENT, linear_to_db(maxf(cos(k * PI * 0.5), 0.00001))) + duck_db
     if _fade <= 0.0 and b.playing:
+        if _paths[1 - _cur] != "":
+            _resume[_paths[1 - _cur]] = b.get_playback_position()
         b.stop()
+    _beds(real)
     # the wind drops under a raid's music
     if _amb:
         _amb.volume_db = -8.0 if mood == "raid" else 0.0
 
+func _music_list(w: String) -> Array:
+    var out: Array = []
+    for f in MUSIC.get(w, []):
+        if ResourceLoader.exists(DIR + String(f)):
+            out.append(f)
+    return out if not out.is_empty() else MUSIC_OLD.get(w, [])
+
 func _switch(w: String) -> void:
-    var list: Array = MUSIC.get(w, [])
+    var list: Array = _music_list(w)
     if list.is_empty():
         return
+    var from := mood
     if w == "raid" and mood != "raid":
         _play2d("horn", 0.0)
+    if from == "raid" and w != "raid":
+        play_sting("victory")            # the only way a raid ends is driven off
     mood = w
-    var s := _load(String(list[randi() % list.size()]), true)
+    _want = w
+    _want_t = 0.0
+    var path := String(list[randi() % list.size()])
+    var s := _load(path, true)
     if s == null:
         return
+    # the player going out remembers where it was, so its bed resumes rather than restarts
+    var out_p: AudioStreamPlayer = _music[_cur]
+    if out_p.playing and _paths[_cur] != "":
+        _resume[_paths[_cur]] = out_p.get_playback_position()
     _cur = 1 - _cur
     var m: AudioStreamPlayer = _music[_cur]
+    if m.playing and _paths[_cur] != "":
+        _resume[_paths[_cur]] = m.get_playback_position()
     m.stream = s
+    _paths[_cur] = path
     m.volume_db = SILENT
-    m.play()
-    _fade = FADE
+    # a raid cue always starts at its top; a bed picks up where it was left
+    var at := 0.0 if w == "raid" else float(_resume.get(path, 0.0))
+    if s.get_length() > 0.0:
+        at = fmod(at, s.get_length())
+    m.play(at)
+    _fade_len = float(FADES.get("%s>%s" % [from, w], FADE)) if from != "" else 1.0
+    _fade = _fade_len
+    transitions.append({"from": from, "to": w, "fade": _fade_len, "at": Time.get_ticks_msec(), "resumed": at})
+    if transitions.size() > 64:
+        transitions.pop_front()
+
+## ------------------------------------------------------------ D22b stings
+func play_sting(which: String) -> void:
+    var now := Time.get_ticks_msec()
+    if now - _last_sting < int(STING_GAP * 1000.0):
+        stings_skipped += 1
+        return
+    var s := _load(String(STINGS.get(which, "")), false)
+    if s == null or _sting_p == null:
+        return
+    _last_sting = now
+    stings[which] = int(stings.get(which, 0)) + 1
+    _sting_p.stream = s
+    _sting_p.volume_db = STING_DB
+    _sting_p.play()
+    _sting_duck = maxf(1.0, s.get_length())
+
+## a delve that comes home with anyone is a victory; one with no survivors, a defeat
+func _watch_delve() -> void:
+    var dv = town.get("delve") if town else null
+    if dv == null or not is_instance_valid(dv) or dv == _delve_seen:
+        return
+    _delve_seen = dv
+    if dv.has_signal("ended"):
+        dv.connect("ended", _on_delve_ended)
+
+func _on_delve_ended(survivors: Array) -> void:
+    play_sting("defeat" if survivors.is_empty() else "victory")
 
 ## the town bell: n strokes, 1.4 s apart (dawn and dusk)
 func _toll(n: int) -> void:

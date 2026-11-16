@@ -22,6 +22,7 @@ var float_y := INF            # set for ducks: ride the water surface
 var yaw_off := 0.0            # models that face -Z get PI
 var kind := ""
 var edge := false             # a sheepdog: walks the edge of its flock's pen
+var body_r := 0.3             # D16a: room it takes in town.crowd_push (D91: measured per model)
 var _proc := ""
 var _parts := {}
 var _moving := false
@@ -33,11 +34,101 @@ var _idle := ""
 var _target := Vector3.ZERO
 var _wait := 0.0
 var _rng := RandomNumberGenerator.new()
+## D17c: the beasts graze (head down in the grass, chewing - the CC0 farm pack
+## has no eating clip, so the neck is bent over the clip by a SkeletonModifier3D)
+## and FLEE: a raider within FLEE_R sends a beast running for the far side of
+## its own pen or field (Run, else the walk played fast) for a few seconds.
+const FLEE_R := 14.0
+static var graze_on := true
+static var flee_on := true
+static var flees := 0
+var _run := ""
+var _graze: Graze = null
+var _flee_t := 0.0
+var _scan_t := 0.0
+## D42: the beasts have voices. Sfx defines dog/cat/horse/pig calls but nothing
+## ever played them - the ambient sampler in daylight.gd keys off the roaming
+## director camera and the animals are penned, so the census read horse_neigh
+## (and the dog voices) at zero. Each animal gives its own species call now and
+## then: raid-gated, 3D-attenuated so far ones fade, never the whole yard at once.
+const VOICE := {"Pug": "dog_bark", "Corgi": "dog_bark", "Cat": "cat_meow",
+    "Horse": "horse_neigh", "Foal": "horse_whinny", "Pig": "boar_grunt"}
+static var voice_on := true
+static var voices := {}          # kind sounded -> count (tests)
+var _voice_t := -1.0
+## D20c: herds drift and cluster, dogs follow, the sheepdog works its flock.
+var herd: HerdMind = null         # cow/sheep/pig/horse: graze near the herd's drifting centre
+var follow := false               # a town dog: trots after whoever is nearest
+var orbit := false                # the sheepdog: circles its flock's centre
+const COHERE := 3.2               # how far a herd beast strays from the herd centre
+const LEASH := 4.0                # how close a following dog keeps
+static var follows := 0           # (tests) times a town dog took up after someone
+var _follow_t := 0.0
+var _follow: Node3D = null
+
+class Graze extends SkeletonModifier3D:
+    var neck := -1
+    var head := -1
+    var axis := Vector3.RIGHT
+    var amount := 0.0
+    var target := 0.0
+    var t := 0.0
+    func _process_modification() -> void:
+        var sk := get_skeleton()
+        if sk == null or neck < 0:
+            return
+        var dt := get_process_delta_time()
+        amount = move_toward(amount, target, dt * 0.8)
+        if amount <= 0.001:
+            return
+        t += dt
+        var e := amount * amount * (3.0 - 2.0 * amount)
+        sk.set_bone_pose_rotation(neck, sk.get_bone_pose_rotation(neck) * Quaternion(axis, -1.0 * e))
+        if head >= 0:
+            var chew := sin(t * 5.5) * 0.10 * e
+            sk.set_bone_pose_rotation(head, sk.get_bone_pose_rotation(head) * Quaternion(axis, -0.35 * e + chew))
+
+## D20c: one mind per herd - a centre that drifts slowly across the pen so the
+## whole herd grazes its way along together, not each beast on its own patch.
+class HerdMind extends RefCounted:
+    var centre := Vector3.ZERO
+    var fwd := Vector3(0, 0, 1)
+    var side := Vector3(1, 0, 0)
+    var hw := 5.0
+    var hd := 5.0
+    var drift := Vector3.ZERO
+    var _to := Vector3.ZERO
+    var _t := 0.0
+    var moved := 0.0
+    var rng := RandomNumberGenerator.new()
+    func start() -> void:
+        rng.randomize()
+        drift = centre
+        _to = centre
+    func _newspot() -> Vector3:
+        return centre + side * rng.randf_range(-hw * 0.7, hw * 0.7) + fwd * rng.randf_range(-hd * 0.7, hd * 0.7)
+    func tick(delta: float) -> void:
+        _t -= delta
+        if _t <= 0.0 or drift.distance_to(_to) < 1.0:
+            _t = rng.randf_range(6.0, 14.0)
+            _to = _newspot()
+        var step: Vector3 = drift.move_toward(_to, delta * 0.6)   # a slow amble
+        moved += drift.distance_to(step)
+        drift = step
+
+func grazing() -> bool:
+    if _proc == "hen":
+        return not _moving and _peck < 0.0
+    return _graze != null and _graze.target > 0.5 and not _moving
+
+func fleeing() -> bool:
+    return _flee_t > 0.0
 
 func _ready() -> void:
     _rng.randomize()
     if model.begins_with("proc:"):
         _proc = model.substr(5)
+        body_r = 0.15                       # a hen, a cat
         var pm := _build_hen() if _proc == "hen" else _build_cat()
         pm.scale = Vector3.ONE * scale_f
         add_child(pm)
@@ -53,11 +144,14 @@ func _ready() -> void:
     m.scale = Vector3.ONE * scale_f
     m.rotation.y = yaw_off
     add_child(m)
+    body_r = _measure_r(m)
     var st: Array = [m]
     while not st.is_empty():
         var c: Node = st.pop_back()
         if c is AnimationPlayer:
             _ap = c
+            # D23: posed on the physics tick it moves on, not every render frame
+            _ap.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
         for g in c.get_children():
             st.append(g)
     if _ap:
@@ -69,34 +163,91 @@ func _ready() -> void:
                 _walk = s                     # grazing pace reads better
             if s.begins_with("Idle"):
                 _idle = s
+            if s == "Run":
+                _run = s
             if s == "clip":
                 _walk = s
                 _idle = s
-        for a in [_walk, _idle]:
+        for a in [_walk, _idle, _run]:
             if a != "" and _ap.has_animation(a):
                 _ap.get_animation(a).loop_mode = Animation.LOOP_LINEAR
+        # D17c: a neck to bend for grazing (the four-legged farm beasts)
+        var sk: Skeleton3D = null
+        var st2: Array = [m]
+        while not st2.is_empty() and sk == null:
+            var c2: Node = st2.pop_back()
+            if c2 is Skeleton3D:
+                sk = c2
+            for g2 in c2.get_children():
+                st2.append(g2)
+        if graze_on and sk != null and sk.find_bone("Neck") >= 0 \
+                and kind in ["Cow", "Horse", "Foal", "Sheep", "Llama", "Pig"]:
+            _graze = Graze.new()
+            _graze.neck = sk.find_bone("Neck")
+            _graze.head = sk.find_bone("Head")
+            sk.add_child(_graze)
         _play(_idle)
         _ap.seek(_rng.randf() * 1.5, true)
     _wait = _rng.randf_range(0.0, 6.0)
 
+## D91: a 0.3 for every creature from a hen to a cow was wrong both ways. The
+## room an animal takes is measured off its own model, scaled as it stands:
+## the mean of its half-length and half-width (a cow is long and narrow, so a
+## circle the size of its half-length would shove folk a body-length off its
+## flank), kept between a hen's 0.12 and 0.75.
+func _measure_r(m: Node3D) -> float:
+    var box := AABB()
+    var first := true
+    var inv := global_transform.affine_inverse()
+    var st: Array = [m]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var ab: AABB = (inv * (c as MeshInstance3D).global_transform) * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            st.append(g)
+    if first:
+        return body_r
+    return clampf((box.size.x + box.size.z) * 0.25, 0.12, 0.75)
+
 func _play(a: String) -> void:
-    _moving = a == _walk
+    _moving = a == _walk or (a == _run and a != "")
+    if _graze != null and _moving:
+        _graze.target = 0.0
+    if _ap and _ap.speed_scale != 1.0 and not (_flee_t > 0.0 and _run == ""):
+        _ap.speed_scale = 1.0
     if _ap and a != "" and _ap.current_animation != a:
         _ap.play(a, 0.25)
 
 func _pick() -> Vector3:
     for i in range(10):
-        var p := centre + side * _rng.randf_range(-hw, hw) + fwd * _rng.randf_range(-hd, hd)
-        if edge:
+        var p: Vector3
+        if orbit and herd != null:
+            var ang := _rng.randf() * TAU
+            var rr := maxf(hw, hd) * _rng.randf_range(0.7, 1.0)
+            p = _clamp_pen(herd.drift + side * (cos(ang) * rr) + fwd * (sin(ang) * rr))
+        elif herd != null:
+            p = _clamp_pen(herd.drift + side * _rng.randf_range(-COHERE, COHERE) + fwd * _rng.randf_range(-COHERE, COHERE))
+        elif edge:
             var u := _rng.randf_range(-1.0, 1.0)
             var sg := 1.0 if _rng.randf() < 0.5 else -1.0
             if _rng.randf() < 0.5:
                 p = centre + side * (hw * u) + fwd * (hd * sg)
             else:
                 p = centre + side * (hw * sg) + fwd * (hd * u)
+        else:
+            p = centre + side * _rng.randf_range(-hw, hw) + fwd * _rng.randf_range(-hd, hd)
         if _open(p):
             return p
     return Vector3.ZERO
+
+## keep a point inside this animal's pen/field rect
+func _clamp_pen(p: Vector3) -> Vector3:
+    var dx := clampf((p - centre).dot(side), -hw, hw)
+    var dz := clampf((p - centre).dot(fwd), -hd, hd)
+    return centre + side * dx + fwd * dz
 
 func _blocked(p: Vector3) -> bool:
     return town.has_method("solid_at") and not (town.call("solid_at", p, 0.15) as Array).is_empty()
@@ -117,11 +268,50 @@ func _ground(p: Vector3) -> float:
         return float_y + sin(Time.get_ticks_msec() * 0.002 + p.x) * 0.03
     return float(town.call("height_at", p.x, p.z))
 
+## D23: the same far/unseen LOD as the townsfolk (town._lod_pass): past 0 the
+## beast thinks, moves and is posed every 2nd/4th/8th physics tick with the summed
+## time, so nobody walks slower - 3 is "no drawing camera can see it".
+const LOD_TICKS := [1, 2, 4, 8]
+var lod := 0
+var _lod_n := 0
+var _lod_acc := 0.0
+
+func set_lod(l: int) -> void:
+    if l == lod:
+        return
+    lod = l
+    _lod_n = 0
+    _lod_acc = 0.0
+    if _ap:
+        _ap.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL if l > 0 \
+                else AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
+
 func _physics_process(delta: float) -> void:
+    if lod > 0:
+        _lod_acc += delta
+        _lod_n += 1
+        if _lod_n < LOD_TICKS[lod]:
+            return
+        _lod_n = 0
+        delta = _lod_acc
+        _lod_acc = 0.0
+        if _ap and visible:
+            _ap.advance(delta)
     if _proc != "":
         _anim(delta)
     if town == null:
         return
+    if voice_on:
+        _voice(delta)
+    # D16c: a wagon rolling up shoves a grazing beast aside too
+    if float_y == INF and town.has_method("off_wagons"):
+        var wq: Vector3 = town.call("off_wagons", global_position, self)
+        if wq != global_position:
+            wq.y = _ground(wq)
+            global_position = wq
+    _flee_scan(delta)
+    if follow and _flee_t <= 0.0:
+        _follow_scan(delta)
     if _target == Vector3.ZERO:
         _wait -= delta
         if _wait <= 0.0:
@@ -138,19 +328,150 @@ func _physics_process(delta: float) -> void:
         _wait = _rng.randf_range(3.0, 12.0)
         if _proc == "cat":
             _wait = _rng.randf_range(8.0, 30.0)     # cats nap
+        _flee_t = 0.0
         _play(_idle)
+        # D17c: most stops are a mouthful of grass (longer, head down)
+        if _graze != null and _rng.randf() < 0.65:
+            _graze.target = 1.0
+            _wait += _rng.randf_range(4.0, 10.0)
         return
     var d := to.normalized()
-    var p := global_position + d * speed * delta
+    var spd := speed * (3.0 if _flee_t > 0.0 else 1.0)
+    var p := global_position + d * spd * delta
+    if float_y == INF and town.has_method("crowd_push"):
+        # D16a: room for folk and each other, and step round whoever is ahead
+        p += (town.call("crowd_push", self, d) as Vector3) * delta
     if float_y == INF and _blocked(p) and not _blocked(global_position):
         _target = Vector3.ZERO                  # a stall or a wall in the way: stop, pick again
         _wait = _rng.randf_range(0.5, 2.0)
         _play(_idle)
         return
+    if float_y == INF and town.has_method("off_wagons"):
+        p = town.call("off_wagons", p, self)     # D16c: never under a wagon
     p.y = _ground(p)
     global_position = p
-    rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * 4.0)
-    _play(_walk)
+    rotation.y = lerp_angle(rotation.y, atan2(d.x, d.z), delta * (8.0 if _flee_t > 0.0 else 4.0))
+    if _flee_t > 0.0 and _run != "":
+        _play(_run)
+    else:
+        _play(_walk)
+        if _flee_t > 0.0 and _ap:
+            _ap.speed_scale = 2.2                  # no run clip: the walk, fast
+
+## D17c: a raider near - off to the far side of its own ground from it
+func _flee_scan(delta: float) -> void:
+    if _flee_t > 0.0:
+        _flee_t -= delta
+    _scan_t -= delta
+    if _scan_t > 0.0 or not flee_on or float_y != INF:
+        return
+    _scan_t = 0.5
+    var rd = town.get("raids")
+    if rd == null:
+        return
+    var rs = rd.get("raiders")
+    if not (rs is Array) or (rs as Array).is_empty():
+        return
+    var me := global_position
+    var near := Vector3.INF
+    var nd := FLEE_R
+    for r in rs:
+        var n = (r as Dictionary).get("node")
+        if n == null or not is_instance_valid(n):
+            continue
+        var q: Vector3 = (n as Node3D).global_position
+        var d := Vector2(q.x - me.x, q.z - me.z).length()
+        if d < nd:
+            nd = d
+            near = q
+    if near == Vector3.INF:
+        return
+    if _flee_t > 0.8:
+        return                                     # already running
+    var best := Vector3.ZERO
+    var bd := -1.0
+    for i in 8:
+        var c := _pick()
+        if c == Vector3.ZERO:
+            continue
+        var dc := Vector2(c.x - near.x, c.z - near.z).length()
+        if dc > bd:
+            bd = dc
+            best = c
+    if best == Vector3.ZERO:
+        return
+    _target = best
+    _flee_t = 3.5
+    _wait = 0.0
+    if _graze != null:
+        _graze.target = 0.0
+    flees += 1
+
+## D42: this animal's own voice, now and then. Far ones are emitted too but fade
+## on Sfx's 3D attenuation, so whatever the camera is near is what is heard.
+func _voice(delta: float) -> void:
+    var vk := String(VOICE.get(kind, ""))
+    if vk == "":
+        return
+    if _voice_t < 0.0:
+        _voice_t = _rng.randf_range(3.0, 16.0)        # stagger the first calls
+    _voice_t -= delta / maxf(Engine.time_scale, 0.001)
+    if _voice_t > 0.0:
+        return
+    _voice_t = _rng.randf_range(7.0, 16.0)
+    var r = town.get("raids")
+    if r and not (r.raiders as Array).is_empty():
+        return                                         # quiet under a raid
+    if _flee_t > 0.0 and vk == "dog_bark":
+        vk = "dog_whine"                               # a frightened dog whines
+    elif vk == "dog_bark" and _rng.randf() < 0.25:
+        vk = "dog_whine"
+    voices[vk] = int(voices.get(vk, 0)) + 1
+    Sfx.at(vk, global_position + Vector3(0, 0.5, 0), -11.0)
+
+## D20c: a town dog trots after whoever is nearest, keeping a short leash, and
+## picks someone new when it loses them (they go indoors, or walk out of range).
+func _follow_scan(delta: float) -> void:
+    _follow_t -= delta
+    if is_instance_valid(_follow) and _follow.visible and not bool(_follow.get("inside")) \
+            and global_position.distance_to(_follow.global_position) < 26.0:
+        pass
+    else:
+        _follow = null
+    if _follow == null and _follow_t <= 0.0:
+        _follow_t = _rng.randf_range(1.5, 4.0)
+        _acquire_follow()
+    if _follow == null:
+        return
+    var fp: Vector3 = _follow.global_position
+    var away := global_position - fp
+    away.y = 0.0
+    if away.length() < 0.01:
+        away = Vector3(1, 0, 0)
+    if global_position.distance_to(fp) > LEASH + 0.8:
+        var want := fp + away.normalized() * LEASH
+        if _target == Vector3.ZERO or Vector2(_target.x - want.x, _target.z - want.z).length() > 2.0:
+            _target = want
+            _wait = 0.0
+
+func _acquire_follow() -> void:
+    if town == null:
+        return
+    var pl = town.get("people")
+    if not (pl is Array):
+        return
+    var best: Node3D = null
+    var bd := 22.0
+    for v in pl:
+        if not is_instance_valid(v) or not v.visible or bool(v.get("inside")):
+            continue
+        var d := global_position.distance_to((v as Node3D).global_position)
+        if d < bd:
+            bd = d
+            best = v
+    _follow = best
+    if best != null:
+        follows += 1
 
 ## ------------------------------------------------ hand-built hen and cat
 func _m(c: Color) -> StandardMaterial3D:

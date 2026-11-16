@@ -39,6 +39,16 @@ var start_floor := 1
 var npc_party := false           # the town's own band: no viewer gold
 var lane := 0                    # parallel delves sit side by side, 700 m apart
 
+## D37: E3PO voice hook. The town-held Notables carries _e3po_say. In a live
+## delve `town` is the Town node; in a bare test rig it may be a stub without a
+## notables ref, so this no-ops safely.
+func _e3po(cat: String, sub := "") -> void:
+	if town == null:
+		return
+	var n = town.get("notables") if town.get("notables") != null else null
+	if n != null and n.has_method("_e3po_say"):
+		n._e3po_say(cat, sub)
+
 func start(uids: Array) -> void:
 	_rng.randomize()
 	for uid in uids:
@@ -52,10 +62,18 @@ func start(uids: Array) -> void:
 		b.stay = true
 		add_child(b)
 		var mx := roster.max_hp(h)
-		party.append({"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()})
+		var mem := {"uid": uid, "h": h, "body": b, "hp": mx, "max": mx, "saved": false, "swing": _rng.randf()}
+		party.append(mem)
+		# Rally (bits/points reward): a pending rally seeds this delver's combat states
+		var rs := float(h.get("rally_secs", 0.0))
+		if rs > 0.0:
+			_rally_states(mem, rs)
+			h.erase("rally_secs")
+			_say("%s descends rallied - strong, swift, and fearless." % String(h["name"]))
 		if b.has_method("compact"):
 			b.call_deferred("compact", true)
-	_say(_pick_line("descend", "%s %s into the scar.") % [_names(), "descends" if party.size() == 1 else "descend"])
+	_say(_fmt_line(_pick_line("descend", "%s %s into the scar."), [_names(), "descends" if party.size() == 1 else "descend"]))
+	_e3po("delve_dispatch")         # D37: the Commander sees the party off
 	for m in party:
 		oil += float(int(m["h"].get("oil", 0)))
 		m["h"]["oil"] = 0
@@ -95,7 +113,14 @@ func _alive() -> Array:
 			out.append(m)
 	return out
 
+## L25c: forget the routes and the progress clocks (they are timed on _t, which restarts when a
+## floor is cleared - a clock from the fight read as "no progress for ages" on the way down)
+func _nav_reset() -> void:
+	_paths.clear()
+	_prog.clear()
+
 func _next_floor() -> void:
+	_nav_reset()
 	floor_no += 1
 	if dun:
 		dun.queue_free()
@@ -127,6 +152,9 @@ func _next_floor() -> void:
 	if dun.lord:
 		dun.lord.max_hp = float(dun.lord.def.get("boss_hp", 200.0))
 		dun.lord.hp = dun.lord.max_hp
+		# L29a: a lord crossing a phase threshold is a story beat - say it
+		if not dun.lord.phase_changed.is_connected(_lord_phase):
+			dun.lord.phase_changed.connect(_lord_phase)
 	# a floor costs one flask per two bodies
 	var alive_now := _alive().size()
 	oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))
@@ -150,6 +178,10 @@ func _next_floor() -> void:
 			note = note.substr(0, 1).to_upper() + note.substr(1) + "."
 		var uniq := bool(dun.lord.def.get("unique", false))
 		_say(("%s is down here. %s" if uniq else "%s rises. %s") % [dun.lord.def.get("name", "A lord"), note])
+		_e3po("lord_sighted")   # D37: a lord has risen - the Commander calls it out
+		# L29b: the guild knows this lord. It does not know THIS one.
+		if bool(dun.lord.def.get("lord_unique", false)):
+			_say("The guild has put down %s before. Not this one." % String(dun.lord.def.get("lord_title", "its like")))
 		var intro := String((lore().get("unique_intros" if uniq else "lord_intros", {}) as Dictionary).get(String(dun.lord.def.get("id", "")), ""))
 		if intro != "":
 			_say(intro)
@@ -169,6 +201,246 @@ func _next_floor() -> void:
 	_lamp_lit = false
 	_light_check()
 	state = "fight"
+
+## ---------------------------------------------------------------- L29c: set pieces
+## A floor's AMBUSH goes off here: as the party walks past a trigger point one short
+## pack of theme-matched creatures peels out of the dark, named in the Chronicle so a
+## viewer who looks up from chat knows what just dropped on them. One resolution per
+## set piece per floor, and the ambush's own creatures are counted into the floor's
+## foes so every other system (the fight loop, the lord's roar, boss_bar) picks them
+## up for free. The data is laid by dungeon_hd._set_pieces; this is the ONLY code
+## that resolves it, so the test can count resolutions straight off setpieces_fired.
+static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd)
+const _AMBUSH_LINE := [
+	"Shadows peel off the walls - an ambush! %s surges in.",
+	"A grate shifts, and %s is already upon them.",
+	"%s was waiting in the dark, and now it isn't.",
+]
+
+func _setpieces_tick() -> void:
+	if dun == null or not dun.info.has("set_pieces"):
+		return
+	var sps: Array = dun.info["set_pieces"]
+	if sps.is_empty():
+		return
+	for sp_v in sps:
+		var sp: Dictionary = sp_v
+		if bool(sp.get("resolved", false)):
+			continue
+		var at: Vector3 = (sp["pos"] as Vector3) + dun.global_position
+		var r: float = float(sp.get("r", 3.0))
+		var triggered := false
+		for m in _alive():
+			if _flat((m["body"] as Node3D).global_position, at) <= r:
+				triggered = true
+				break
+		if not triggered:
+			continue
+		sp["resolved"] = true
+		var kind := String(sp.get("kind", ""))
+		Delve.setpieces_fired[kind] = int(Delve.setpieces_fired.get(kind, 0)) + 1
+		match kind:
+			"ambush":
+				_setpiece_ambush(sp, at)
+			"prisoner":
+				_setpiece_prisoner(sp, at)
+			"shrine":
+				_setpiece_shrine(sp, at)
+			"miniboss":
+				_setpiece_miniboss(sp, at)
+
+func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
+	var names: Array = []
+	var pack: Array = sp.get("pack", [])
+	var i := 0
+	for d_v in pack:
+		var d: Dictionary = d_v
+		var m := Monster.new()
+		m.def = d
+		m.state = Monster.S.PATROL
+		m.roam = 2.5
+		var off := Vector3(cos(float(i) * 2.1), 0.0, sin(float(i) * 2.1)) * 1.3 if i > 0 else Vector3.ZERO
+		m.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
+		dun.add_child(m)
+		(dun.monsters as Array).append(m)
+		# scale to this floor the same way _next_floor does for ordinary spawns
+		m.max_hp = (14.0 + float(floor_no) * 6.0) * float(m.def.get("hp", 1.0))
+		m.hp = m.max_hp
+		names.append(String(d.get("name", "something")))
+		i += 1
+	# "2 ghouls and a skeleton" rather than "ghoul, ghoul, skeleton"
+	var counts := {}
+	for nm in names:
+		counts[nm] = int(counts.get(nm, 0)) + 1
+	var parts: Array = []
+	for k in counts:
+		var ks := String(k)
+		var n: int = counts[k]
+		parts.append("%d %s" % [n, ks if n == 1 or ks.ends_with("s") else ks + "s"])
+	var who := ", ".join(parts) if not parts.is_empty() else "something"
+	_say(_AMBUSH_LINE[_rng.randi() % _AMBUSH_LINE.size()] % who)
+	# an ambush is a roar: Monster.roar would also fire when the pack enters
+	# its FIGHT state, but a single tell lands harder than three in a row
+	if not names.is_empty():
+		Sfx.play("roar", -4.0)
+
+## PRISONER: a captive was down here before the party was. A hero within reach
+## cracks the chain off; the captive slips a purse into the party's hands before
+## making for the stairs. Gold is split among the alive, same rule as a chest.
+## argument order on every line: [finder_name, purse, alive.size()] - keep it
+## uniform so a random pick never trips a String-format error at play
+const _PRISONER_LINE := [
+	"%s cracks the chain off a captive - %d gold passes to the party, split %d ways.",
+	"%s finds a man in a cage still alive. He slips %d gold to them on the way out, %d ways to split it.",
+	"%s gets a captive free. %d gold, %d ways - small thanks for a poor life.",
+]
+
+func _setpiece_prisoner(sp: Dictionary, at: Vector3) -> void:
+	var alive := _alive()
+	if alive.is_empty():
+		return
+	# the nearest alive hero does the freeing (the one who tripped the trigger)
+	var finder: Dictionary = alive[0]
+	var best := 1.0e9
+	for m in alive:
+		var d := _flat((m["body"] as Node3D).global_position, at)
+		if d < best:
+			best = d
+			finder = m
+	var purse := int(sp.get("purse", 50))
+	var share := maxi(1, purse / alive.size())
+	for m in alive:
+		roster.award(String(m["uid"]), share, 0, 0, floor_no)
+		_float_text(m, "+%d" % share, Color(1.0, 0.85, 0.35))
+	var finder_name := String(finder["h"].get("name", "A delver"))
+	_say(_PRISONER_LINE[_rng.randi() % _PRISONER_LINE.size()] % [finder_name, purse, alive.size()])
+	Sfx.play("coin", -4.0)
+
+## SHRINE: an altar older than the floor. A hero touches it; the die is already
+## cast in the data (dungeon_hd.gd rolls boon/curse at build). A BOON fills
+## everybody's hp; a CURSE takes a bite out of each - small and survivable, the
+## point is the risk of the touch, not the hit.
+const SHRINE_BOON_FRAC := 1.0           # a boon mends the party back to full
+const SHRINE_CURSE_HP := 12.0           # a curse takes this many hp from each
+
+func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
+	var alive := _alive()
+	if alive.is_empty():
+		return
+	var toucher: Dictionary = alive[0]
+	var best := 1.0e9
+	for m in alive:
+		var d := _flat((m["body"] as Node3D).global_position, at)
+		if d < best:
+			best = d
+			toucher = m
+	var who := String(toucher["h"].get("name", "A delver"))
+	var is_boon := bool(sp.get("boon", true))
+	if is_boon:
+		for m in alive:
+			m["hp"] = float(m["max"])       # the boon is a mend (max_hp of this delver)
+			_float_text(m, "+boon", Color(0.5, 1.0, 0.7))
+		_say("%s touches the altar - a boon. The light steadies; the party is mended." % who)
+	else:
+		for m in alive:
+			m["hp"] = maxf(1.0, float(m["hp"]) - SHRINE_CURSE_HP)
+			_float_text(m, "-%d" % int(SHRINE_CURSE_HP), Color(1.0, 0.45, 0.42))
+			_hero_hit(m)
+		_say("%s touches the altar - a curse. Something older than the floor takes a bite." % who)
+
+## MINIBOSS: an elite theme creature standing alone in its own chamber - 2x hp
+## and +20% atk on top of the floor's depth scaling, so it reads as a real
+## fight and not another spawn. The Chronicle names it when the party crosses
+## the trigger, and when it falls _on_kill drops the purse carried on its meta
+## (set here) across the alive party - same split rule as a chest. Kept off
+## floors 1-3 by the picker in dungeon_hd._set_pieces.
+##
+## Round 4 (RALLY): at half hp the elite "finds its second wind" - its atk
+## climbs by MINIBOSS_RALLY_MULT and the Chronicle writes a tell so a viewer
+## reading the panes or the Chronicle sees the beat land. One rally per
+## miniboss; the meta flag below gates it so it never fires twice.
+const MINIBOSS_HP_MULT := 2.0
+const MINIBOSS_ATK_MULT := 1.2
+const MINIBOSS_RALLY_FRAC := 0.5          # hp fraction that triggers the rally
+const MINIBOSS_RALLY_MULT := 1.5          # atk multiplier applied on rally
+
+func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
+	var def: Dictionary = sp.get("def", {})
+	if def.is_empty():
+		return
+	var purse := int(sp.get("purse", 50))
+	var pos: Vector3 = sp["pos"]
+	var m := Monster.new()
+	m.def = def
+	m.state = Monster.S.PATROL
+	m.roam = 2.0
+	m.position = Vector3(pos.x, 0.0, pos.z)
+	dun.add_child(m)
+	(dun.monsters as Array).append(m)
+	# scale to this floor exactly like _next_floor does for ordinary spawns, then
+	# the mini-boss multipliers on top
+	m.max_hp = (14.0 + float(floor_no) * 6.0) * float(def.get("hp", 1.0)) * MINIBOSS_HP_MULT
+	m.hp = m.max_hp
+	m.set_meta("l29c_miniboss_purse", purse)
+	m.set_meta("l29c_miniboss_rallied", false)
+	var nm := String(def.get("name", "an elite"))
+	_say("%s holds this chamber alone - a mini-boss stands between you and the way deeper." % nm)
+	Sfx.play("roar", -2.0)
+	# the atk bump rides on the meta the hit code already reads nowhere, so set
+	# the def value directly: a copy of the pick with "atk" scaled
+	var def2 := def.duplicate()
+	def2["atk"] = float(def.get("atk", 4.0)) * MINIBOSS_ATK_MULT
+	m.def = def2
+
+## L-cycle 149 (bestiary depth): a boss or elite about to swing something big
+## writes a one-line TELL to the Chronicle so the stream sees it coming - the
+## "watch the wind-up" beat Mr. E has asked for in bits. Gated on boss=true so
+## ordinary foes do not spam. Rate-limited per-monster (BOSS_TELL_EVERY) in case
+## a boss's swing window is tight: one line per cadence, not one per tick.
+const BOSS_TELL_EVERY := 3.5
+func _boss_tell(mon: Monster, templ: String) -> void:
+	if not is_instance_valid(mon):
+		return
+	if not bool(mon.def.get("boss", false)):
+		return
+	var last := float(mon.get_meta("boss_tell_t", -99.0))
+	if _t - last < BOSS_TELL_EVERY:
+		return
+	mon.set_meta("boss_tell_t", _t)
+	_say(templ % String(mon.def.get("name", "the lord")))
+	Delve.bestiary_tells = int(Delve.bestiary_tells) + 1
+## Static counter so the test can read telegraph firings without reaching into a
+## live delve. Reset by tools that want deterministic counts.
+static var bestiary_tells := 0
+
+## R4 rally tick: scan the floor for any wounded miniboss still carrying the
+## "rallied == false" meta and, once its hp dips below half, bump its atk and
+## write the Chronicle line. Called from _fight() alongside the other per-tick
+## reads - every fight is a handful of monsters, so the scan cost is nothing.
+func _miniboss_rally_tick() -> void:
+	if dun == null or not is_instance_valid(dun):
+		return
+	# iterate on INSTANCE-ID so a Monster that was queue_free'd earlier this
+	# tick never gets typecast back to Monster (that throws "invalid freed
+	# instance" on a cast, before any has_meta / state check can run)
+	for mon_v in dun.monsters:
+		if not is_instance_valid(mon_v):
+			continue
+		var mon: Monster = mon_v
+		if mon.state == Monster.S.DEAD:
+			continue
+		if not mon.has_meta("l29c_miniboss_rallied") or bool(mon.get_meta("l29c_miniboss_rallied")):
+			continue
+		if mon.hp / maxf(1.0, mon.max_hp) > MINIBOSS_RALLY_FRAC:
+			continue
+		mon.set_meta("l29c_miniboss_rallied", true)
+		Delve.setpieces_fired["miniboss_rally"] = int(Delve.setpieces_fired.get("miniboss_rally", 0)) + 1
+		var d: Dictionary = mon.def.duplicate()
+		d["atk"] = float(d.get("atk", 4.0)) * MINIBOSS_RALLY_MULT
+		mon.def = d
+		var nm := String(mon.def.get("name", "the elite"))
+		_say("%s finds its second wind - its strikes land harder." % nm)
+		Sfx.play("roar", -4.0)
 
 ## ---- the wizard's lamp-stand (old expedition._check_lamp / _light_check).
 ## Dead centre of every floor (FloorGen puts it there). A hero who reaches it
@@ -311,7 +583,123 @@ func _cell_world(c: Vector2i) -> Vector3:
 	var hh := (float(dun.info["h"]) - 1.0) * G * 0.5
 	return dun.global_position + Vector3(float(c.x) * G - hw, 0.05, float(c.y) * G - hh)
 
+## L25c: the cells a body cannot stand in the middle of (an obstacle covers the centre),
+## worked out once a floor
+var _blocked_for: Node = null
+var _blocked := {}
+func _blocked_cells() -> Dictionary:
+	if _blocked_for == dun:
+		return _blocked
+	_blocked_for = dun
+	_blocked = {}
+	var cells: Dictionary = dun.info["cells"]
+	for c: Vector2i in cells:
+		var w := _cell_world(c) - dun.global_position
+		for o in dun.info.get("obstacles", []):
+			if Vector2(w.x - (o[0] as Vector3).x, w.z - (o[0] as Vector3).z).length() < float(o[1]) + 0.45:
+				_blocked[c] = true
+				break
+	return _blocked
+
+## L25c: the clear cells labelled by which connected patch of them they belong to (a body can
+## walk between two cells of one patch without crossing furniture), worked out once a floor
+var _comp_for: Node = null
+var _comp := {}
+func _patches() -> Dictionary:
+	if _comp_for == dun:
+		return _comp
+	_comp_for = dun
+	_comp = {}
+	var cells: Dictionary = dun.info["cells"]
+	var bl := _blocked_cells()
+	var id := 0
+	for s: Vector2i in cells:
+		if bl.has(s) or _comp.has(s):
+			continue
+		_comp[s] = id
+		var q: Array[Vector2i] = [s]
+		while not q.is_empty():
+			var c: Vector2i = q.pop_back()
+			for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var n: Vector2i = c + d
+				if cells.has(n) and not bl.has(n) and not _comp.has(n):
+					_comp[n] = id
+					q.append(n)
+		id += 1
+	return _comp
+
+## L25c: a body (half-width 0.45) can stand at p: a clear floor cell, off every obstacle and
+## a body's width clear of the walls (kit walls reach 0.5 m into the cell)
+func _standable(p: Vector3) -> bool:
+	var cells: Dictionary = dun.info["cells"]
+	var c := _cell_of(p)
+	if not cells.has(c) or _blocked_cells().has(c):
+		return false
+	var G: float = dun.info["grid"]
+	var ctr := _cell_world(c)
+	for dir: Vector2i in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		if cells.has(c + dir):
+			continue
+		var off := (p.x - ctr.x) * float(dir.x) + (p.z - ctr.z) * float(dir.y)
+		if off > G * 0.5 - 0.95:
+			return false
+	var o0 := dun.global_position
+	for o in dun.info.get("obstacles", []):
+		var oc: Vector3 = (o[0] as Vector3) + o0
+		if Vector2(p.x - oc.x, p.z - oc.z).length() < float(o[1]) + 0.5:
+			return false
+	return true
+
+## L25c: where a delver stands to fight tgt. Its own side of the ring first (idx of n, turned
+## by slot_off), then the nearest side round from it, then nearer in / further out - only a
+## point the delver can stand on and walk to (the old fixed ring put slots round a big lord in
+## the wall or the hoard, and the delver pushed at them the whole fight). Kept for half a second
+## while the target holds still. Melee rings sit INSIDE reach (a tall lord's old ring did not).
+func _fight_slot(m: Dictionary, b: Node3D, tgt: Monster, idx: int, n: int, ranged: bool, reach: float) -> Vector3:
+	var tp := tgt.global_position
+	var sp = m.get("slot_pt")
+	if sp != null and _t - float(m.get("slot_t", -9.0)) < 0.5 and _flat(tp, m.get("slot_at", tp)) < 0.8 \
+			and int(m.get("slot_tgt", 0)) == tgt.get_instance_id():
+		return sp
+	var base := float(idx) * TAU / float(maxi(n, 1)) + float(m.get("slot_off", 0.0))
+	var trad := clampf(tgt._height() * 0.2, 0.3, 1.8)
+	var radii: Array
+	if ranged:
+		radii = [5.0, 4.0, 6.5, 3.0, 8.0]
+	else:
+		var r0 := clampf(trad + 0.75, 1.1, reach - 0.35)
+		radii = [r0, clampf(r0 - 0.4, trad + 0.45, reach - 0.35), reach - 0.2]
+	var pat := _patches()
+	var mine := int(pat.get(_cell_of(b.global_position), -1))
+	var pick = null
+	for k in range(0, 17):
+		var a := base + floorf((k + 1) / 2.0) * (1.0 if k % 2 == 1 else -1.0) * TAU / 16.0
+		for r in radii:
+			var p := tp + Vector3(cos(a), 0, sin(a)) * float(r)
+			if not _standable(p):
+				continue
+			if mine >= 0 and int(pat.get(_cell_of(p), -2)) != mine:
+				continue
+			pick = p
+			break
+		if pick != null:
+			break
+	if pick == null:
+		var r_old: float = 5.0 if ranged else clampf(trad + 0.75, 1.1, reach - 0.35)
+		pick = tp + Vector3(cos(base), 0, sin(base)) * r_old
+	m["slot_pt"] = pick
+	m["slot_at"] = tp
+	m["slot_t"] = _t
+	m["slot_tgt"] = tgt.get_instance_id()
+	return pick
+
+## the route through the floor's cells, around the cells furniture blocks (the plain grid if
+## that leaves no way through)
 func _bfs(a: Vector2i, b: Vector2i) -> Array:
+	var r := _bfs_on(a, b, _blocked_cells())
+	return r if not r.is_empty() or a == b else _bfs_on(a, b, {})
+
+func _bfs_on(a: Vector2i, b: Vector2i, avoid: Dictionary) -> Array:
 	var cells: Dictionary = dun.info["cells"]
 	if not cells.has(a) or not cells.has(b):
 		return []
@@ -323,7 +711,7 @@ func _bfs(a: Vector2i, b: Vector2i) -> Array:
 			break
 		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
 			var n: Vector2i = c + d
-			if cells.has(n) and not prev.has(n):
+			if cells.has(n) and not prev.has(n) and (not avoid.has(n) or n == b):
 				prev[n] = c
 				q.append(n)
 	if not prev.has(b):
@@ -361,13 +749,42 @@ func _snap_cell(c: Vector2i) -> Vector2i:
 ## only ever walk floor cells: a goal off the floor (a ring slot behind a wall,
 ## a point in the void between rooms) is moved to the nearest floor cell, and
 ## nobody takes a straight line across anything that is not floor.
+## L25: who is on the move this frame (body -> frame), and how often a party was carried to the
+## stairs because someone could not get there (tests read both - a stuck delver used to be hidden
+## by the descent timeout)
+var travel := {}
+var forced := 0
+var _prog := {}            # body -> [the nearest it has got to its goal, when]
+
+## L25: no closer to where it is going for `secs` (it is pressed against something)
+func stuck_on(n: Node3D, secs := 1.2) -> bool:
+	var p: Array = _prog.get(n, [])
+	return not p.is_empty() and _t - float(p[1]) > secs
+
 func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
+	travel[n] = Engine.get_process_frames()
 	var cells: Dictionary = dun.info["cells"]
 	var cb_raw := _cell_of(to)
 	var cb := _snap_cell(cb_raw)
 	if cb != cb_raw:
 		to = Vector3(_cell_world(cb).x, to.y, _cell_world(cb).z)
-	if _flat(n.global_position, to) <= stop:
+	# L25c: a goal inside furniture can never be reached (a ranged delver's side of a lord
+	# beside the hoard) - the nearest clear cell instead
+	if n is HeroBody and _blocked_cells().has(cb):
+		var bd2 := 1e9
+		var alt := cb
+		for c: Vector2i in dun.info["cells"]:
+			if not _blocked_cells().has(c):
+				var d2 := Vector2(c - cb).length()
+				if d2 < bd2:
+					bd2 = d2
+					alt = c
+		cb = alt
+		to = Vector3(_cell_world(cb).x, to.y, _cell_world(cb).z)
+	var dist_to := _flat(n.global_position, to)
+	if dist_to <= stop:
+		travel.erase(n)           # arrived: not on the move
+		_prog.erase(n)
 		return true
 	var ca_raw := _cell_of(n.global_position)
 	var ca := _snap_cell(ca_raw)
@@ -375,14 +792,33 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
 		# somehow off the floor: step straight back onto the nearest cell
 		_step(n, _cell_world(ca), spd, delta)
 		return false
+	var pts: Array = []
+	var left := dist_to
+	if ca != cb:
+		var e: Array = _paths.get(n, [])
+		if e.is_empty() or _t - float(e[1]) > 0.5 or (e[0] as Array).is_empty():
+			e = [_bfs(ca, cb), _t]
+			_paths[n] = e
+		pts = e[0]
+		if not pts.is_empty():
+			# L25c: progress is the way LEFT along the route, not the straight line - a route that
+			# bends away from a far stair or target is not being stuck
+			left = _flat(n.global_position, pts[0]) + _flat(pts[-1], to)
+			for i in range(1, pts.size()):
+				left += _flat(pts[i - 1], pts[i])
+	var pg: Array = _prog.get(n, [])
+	# (a goal that moves - a delver backing off, a beast circling - starts the clock again, if the
+	# body is following it and not pressed against something)
+	if pg.is_empty() or left < float(pg[0]) - 0.2 or absf(left - float(pg[0])) > 12.0 \
+			or (_flat(to, pg[2]) > 1.0 and _flat(n.global_position, pg[3]) > 0.5):
+		_prog[n] = [left, _t, to, n.global_position]     # progress (or a new goal far from the old one)
+	elif _t - float(pg[1]) > 2.0:
+		unstick_log.append("f%d %s %s %s at %s -> %s (%.1f m left, %s)" % [floor_no, state, n.name, ("hero" if n is HeroBody else "mon"), n.global_position.snappedf(0.1), to.snappedf(0.1), left, "same" if ca == cb else "diff"] + _why(n, pts))
+		_unstick(n, cb)
+		return false
 	if ca == cb:
 		_step(n, to, spd, delta)
 		return false
-	var e: Array = _paths.get(n, [])
-	if e.is_empty() or _t - float(e[1]) > 0.5 or (e[0] as Array).is_empty():
-		e = [_bfs(ca, cb), _t]
-		_paths[n] = e
-	var pts: Array = e[0]
 	if pts.is_empty():
 		return false          # no way through: wait rather than walk a wall
 	var nxt: Vector3 = pts[0]
@@ -417,6 +853,29 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 			if dd.length() >= need:
 				continue
 			var dir := dd.normalized() if dd.length() > 0.01 else Vector2(d.z, -d.x).normalized()
+			# L25c: walking INTO it, slide round its rim instead of being pushed straight back (a
+			# body heading dead at a table on its route stood pressed against it for good). Dead
+			# on, it keeps the side it took last, so it does not dither; a side that runs into
+			# stone is swapped for the other.
+			var mv := Vector2(d.x, d.z).normalized()
+			if dir.dot(mv) < -0.2:
+				var tg := Vector2(-dir.y, dir.x)
+				var side := tg.dot(mv)
+				if absf(side) < 0.35:
+					side = float(n.get_meta("slide", 1.0))
+				var sgn := 1.0 if side >= 0.0 else -1.0
+				var took := false
+				for s in [sgn, -sgn]:
+					var a2 := (dir + tg * float(s) * (step_len / need)).normalized()
+					var rim := Vector3(c.x + a2.x * need, p.y, c.z + a2.y * need)
+					if cells.has(_cell_of(rim)):
+						n.set_meta("slide", float(s))
+						p = rim
+						took = true
+						break
+				if not took:
+					p = n.global_position       # hold rather than go through stone
+				continue
 			var pushed := Vector3(c.x + dir.x * need, p.y, c.z + dir.y * need)
 			if cells.has(_cell_of(pushed)):
 				p = pushed
@@ -468,7 +927,18 @@ func _process(delta: float) -> void:
 	match state:
 		"fight":
 			_fight(delta)
+		"search":
+			# L49: the floor is clear - someone is going through the chests before they move on
+			_traps_tick()
+			_setpieces_tick()           # L29c: a seeker walking to a chest can trip an ambush
+			_search_tick(delta)
 		"descend":
+			# L46: traps were only ever checked inside _fight(), so the whole walk to the stairs
+			# - where most of the floor is actually crossed - was trap-free. Measured: 6 of 6
+			# traps were walked within reach of, but only 2 were ever MET. They are live now
+			# wherever the party is moving.
+			_traps_tick()
+			_setpieces_tick()           # L29c: ambushes trigger on the walk too, not just mid-fight
 			var ex: Vector3 = dun.info["exit"] + dun.global_position
 			var all_there := true
 			for m in _alive():
@@ -476,14 +946,157 @@ func _process(delta: float) -> void:
 				if not _go(b, ex, 5.0, delta, 0.8):
 					all_there = false
 					Rig.play(b._anim, "Walking_A")
-			if all_there or _t > 6.0:
+			# L25: on to the next floor when all are at the stairs; a delver who has truly stopped
+			# getting closer (3 s) is carried, and counted - the old flat 6 s cut off a long walk
+			var stopped := false
+			for m in _alive():
+				if stuck_on(m["body"], 3.0):
+					stopped = true
+			if all_there or stopped or _t > 45.0:
+				if not all_there:
+					forced += 1
 				_next_floor()
+		"flee":
+			# L47: the party broke off a losing fight. They RUN for the way up, visibly, and
+			# the delve ends when they are there (or when they plainly cannot get there).
+			_traps_tick()      # L46: and a panicked run out is no safer than the walk in
+			var up: Vector3 = dun.info["entry"] + dun.global_position
+			var all_up := true
+			for m in _alive():
+				var fb: HeroBody = m["body"]
+				if not _go(fb, up, roster.speed(m["h"]) * 1.15, delta, 0.9):
+					all_up = false
+					Rig.play(fb._anim, "Running_A")
+			var jammed := false
+			for m in _alive():
+				if stuck_on(m["body"], 3.0):
+					jammed = true
+			if _alive().is_empty():
+				_say("The scar keeps them all. No one comes home from floor %d." % floor_no)
+				_finish()
+			elif all_up or jammed or _t > 45.0:
+				_say("%s get out alive, and come home with what they carried." % _names())
+				_finish()
 		"home":
 			pass
+
+## ---------------------------------------------------------------- L47: delvers think
+## Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule
+## here is that a decision is only worth making if a VIEWER CAN SEE IT. So every branch below
+## does two things together - the body does something visible (breaks off and runs for the way
+## up, falls back to the others, drinks, switches target) AND the Chronicle says WHY. A silent
+## stat change is not a decision as far as this item is concerned.
+## Announcements are rate-limited per hero so a long fight reads as a few deliberate choices
+## rather than a wall of chatter; the decision itself is never rate-limited, only the line.
+const DECIDE_EVERY := 3.0        # s between one hero's announced decisions
+const FLEE_AT := 0.22            # hp fraction at which a hero breaks off alone
+const REGROUP_M := 15.0          # further than this from the party's centre is isolated
+var decisions := 0               # every announced decision (the L47 test counts these)
+var _fleeing_party := false      # L47: the party has broken off a losing fight
+var decided := {}                # kind -> count, so the test can see a RANGE of decisions
+
+func _decide(m: Dictionary, kind: String, line: String) -> void:
+	decided[kind] = int(decided.get(kind, 0)) + 1
+	decisions += 1
+	if _t < float(m.get("decide_t", -99.0)) + DECIDE_EVERY:
+		return                                  # thought it, acted on it, just does not say so
+	m["decide_t"] = _t
+	_say(line)
+
+func _party_centre(alive: Array) -> Vector3:
+	var c := Vector3.ZERO
+	var n := 0
+	for o in alive:
+		var ob = o["body"]
+		if is_instance_valid(ob):
+			c += (ob as Node3D).global_position
+			n += 1
+	return c / maxf(1.0, float(n))
+
+## L47: a target that makes sense instead of whatever is nearest. Finish the one that is nearly
+## down, shut up the one that casts or spits from range, and otherwise take the near one.
+func _pick_target(b: Node3D, foes: Array) -> Monster:
+	var best: Monster = null
+	var best_s := -1.0e9
+	for f in foes:
+		if not is_instance_valid(f):
+			continue
+		var mon := f as Monster
+		var d := _flat((mon as Node3D).global_position, b.global_position)
+		# distance is a WEIGHT, not the whole score - at 1.0/m it swamped everything and the
+		# pick was just "nearest" again with extra steps
+		var s := -d * 0.35
+		var frac := mon.hp / maxf(1.0, mon.max_hp)
+		s += (1.0 - frac) * 20.0                        # the nearer it is to down, the better
+		var ways: Dictionary = mon.def.get("ways", {})
+		if ways.has("cast") or ways.has("spit") or ways.has("shoot"):
+			s += 14.0                                   # the one hurting us from range
+		if s > best_s:
+			best_s = s
+			best = mon
+	return best
+
+## L47: one hero's own call, taken before they swing. Returns true when the decision has used
+## their action this tick (so the attack path below is skipped).
+func _think(m: Dictionary, foes: Array, alive: Array, delta: float) -> bool:
+	var b = m["body"]
+	if not is_instance_valid(b):
+		return false
+	var h: Dictionary = m["h"]
+	var nm := String(h.get("name", "A delver"))
+	var frac := float(m["hp"]) / maxf(1.0, float(m["max"]))
+
+	# ALREADY RUNNING: keep going for the way up until out of the fight
+	if bool(m.get("fleeing", false)):
+		var up: Vector3 = dun.info["entry"] + dun.global_position
+		_go(b, up, roster.speed(h) * 1.15, delta)
+		Rig.play((b as HeroBody)._anim, "Running_A")
+		if frac > 0.55:                                  # mended enough to turn and fight again
+			m["fleeing"] = false
+			_decide(m, "rejoin", "%s has the wind back and turns to fight." % nm)
+		return true
+
+	# BREAK OFF: badly hurt, nothing left to drink - get out rather than die in place
+	if frac < FLEE_AT and not _has_heal_brew(h):
+		m["fleeing"] = true
+		_decide(m, "flee", "%s is badly hurt and breaks off, making for the way up." % nm)
+		return true
+
+	# REGROUP: cut off from the others with foes about - fall back to them
+	if alive.size() > 1 and not foes.is_empty():
+		var c := _party_centre(alive)
+		if _flat((b as Node3D).global_position, c) > REGROUP_M:
+			_go(b, c, roster.speed(h), delta)
+			Rig.play((b as HeroBody)._anim, "Running_A")
+			_decide(m, "regroup", "%s is cut off and falls back to the others." % nm)
+			return true
+	return false
+
+func _has_heal_brew(h: Dictionary) -> bool:
+	for k in HEAL_ORDER:
+		if roster.brew_count(h, k) > 0:
+			return true
+	return false
+
+## L47: the party's own call. A fight that is plainly lost is broken off as a party - they run
+## for the way up instead of standing there being killed one by one (Mr. E's "a hurt party
+## retreats rather than dying in place").
+func _losing(alive: Array, foes: Array) -> bool:
+	if alive.is_empty() or foes.is_empty():
+		return false
+	var frac := 0.0
+	for m in alive:
+		frac += float(m["hp"]) / maxf(1.0, float(m["max"]))
+	frac /= float(alive.size())
+	# badly hurt AND outnumbered, or on the brink whatever the count
+	return frac < 0.18 or (frac < turn_back_at and foes.size() >= alive.size() * 2)
 
 func _fight(delta: float) -> void:
 	_check_lamp()
 	_traps_tick()
+	_setpieces_tick()                       # L29c: AMBUSH triggers as the party walks past
+	_miniboss_rally_tick()                  # L29c r4: half-hp rally on the mini-boss
+	_blows_tick(delta)
 	var foes := _foes()
 	_bars(foes)
 	var alive := _alive()
@@ -492,25 +1105,170 @@ func _fight(delta: float) -> void:
 		_finish()
 		return
 	if foes.is_empty() and not (dun.lord and dun.lord._entering()):
-		# floor won: pay out, decide whether to press on
+		# floor won: pay out, then SEARCH what is on the floor before deciding (L49)
 		_loot(alive)
+		if not _unsearched().is_empty():
+			state = "search"
+			_t = 0.0
+			_nav_reset()
+			return
+		_floor_decision(alive)
+		return
+
+	# venom keeps working after the bite (spider, snake, adder, wasp)
+	_fight_body(delta, alive, foes)
+
+## ---- L29a: a lord changing phase, in the Chronicle. The mechanics themselves were already
+## canon (Bestiary.LORD_WAYS gives all eight a real one); what was missing was any sense that a
+## lord gets WORSE as it is worn down. The aura does it on the lord; this does it in words.
+var lord_phases := 0                # the L29a test counts these
+
+func _lord_phase(who: Monster, to: int) -> void:
+	if not is_instance_valid(who):
+		return
+	lord_phases += 1
+	var nm := String(who.def.get("name", "The lord"))
+	if to >= 3:
+		_say("%s is driven to its last - whatever it has been holding back, it is not holding it now." % nm)
+	else:
+		_say("%s shifts, and the fight changes with it." % nm)
+	FeedHUD.card_on(town, nm, "phase %d of %d" % [to, who.phase_count],
+		who.def.get("aura", Color(1, 0.8, 0.4)) as Color)
+
+## ---------------------------------------------------------------- L49: searching, visibly
+## Mr. E: "no chests, no drops, nobody searching". The loot ROLL already existed - it just
+## happened invisibly the instant a floor was cleared, with no chest, nobody walking anywhere
+## and nothing to watch. Now a delver walks to the chest, kneels over it for a beat, and the
+## Chronicle says which way it went - BOTH outcomes, in his words.
+const SEARCH_S := 1.8               # how long a delver spends over a chest
+const SEARCH_REACH := 1.6
+var chests_found := 0               # the L49 test / census counts these
+var chests_empty := 0
+var chests_unreachable := 0     # L49 regression guard: chests abandoned rather than pinning a delver
+var _search_i := -1                 # which chest is being worked on
+var _search_t := 0.0
+
+func _unsearched() -> Array:
+	var out: Array = []
+	if dun == null or not dun.info.has("chests"):
+		return out
+	for c in dun.info["chests"]:
+		var cd: Dictionary = c
+		if not bool(cd.get("searched", false)) and is_instance_valid(cd["node"]):
+			out.append(cd)
+	return out
+
+## the party's sharpest eye does the searching, as _loot already decides
+func _seeker(alive: Array) -> Dictionary:
+	var s: Dictionary = alive[0]
+	for m in alive:
+		if _search_bonus(m["h"]) > _search_bonus(s["h"]):
+			s = m
+	return s
+
+func _search_tick(delta: float) -> void:
+	var alive := _alive()
+	var left := _unsearched()
+	# L49 REGRESSION, caught by _l25_test: a chest can sit somewhere the party cannot actually
+	# path to, and the seeker then ground against it for the whole 30 s window - _l25 reported
+	# "floor 10 Bree ... (search)" as a stuck delver. A chest is a nice-to-have, never a reason
+	# to pin someone to the floor, so an unreachable one is abandoned (see stuck_on below) and
+	# the whole searching phase is capped far shorter.
+	if alive.is_empty() or left.is_empty() or _t > 12.0:
+		_search_t = 0.0
+		_floor_decision(_alive())
+		return
+	var cd: Dictionary = left[0]
+	var node: Node3D = cd["node"]
+	var m := _seeker(alive)
+	var b: HeroBody = m["body"]
+	if not is_instance_valid(b):
+		cd["searched"] = true
+		return
+	var at := node.global_position
+	if _flat(b.global_position, at) > SEARCH_REACH:
+		# give up on a chest we are plainly not getting to, rather than grinding at it
+		if stuck_on(b, 2.0):
+			cd["searched"] = true
+			chests_unreachable += 1
+			_prog.erase(b)
+			_say("%s cannot get to the chest and leaves it." % m["h"]["name"])
+			return
+		_go(b, at, roster.speed(m["h"]), delta, SEARCH_REACH * 0.8)
+		Rig.play(b._anim, "Walking_A")
+		_search_t = 0.0
+		return
+	# at the chest: kneel over it for a beat so the search is something you can WATCH
+	b.rotation.y = atan2(at.x - b.global_position.x, at.z - b.global_position.z)
+	Rig.play(b._anim, "Use_Item")
+	_search_t += delta
+	if _search_t < SEARCH_S:
+		return
+	_search_t = 0.0
+	cd["searched"] = true
+	_open_chest(m, cd)
+
+## the find itself: an Investigation check, the chest opens, and the Chronicle reads BOTH ways
+func _open_chest(m: Dictionary, cd: Dictionary) -> void:
+	var h: Dictionary = m["h"]
+	var node: Node3D = cd["node"]
+	if is_instance_valid(node) and node.has_meta("open"):
+		(node.get_meta("open") as Callable).call()
+	var sd := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
+	var st := sd + _search_bonus(h)
+	var dc := mini(20, 10 + floor_no / 2)
+	# not every chest pays out - "Not every monster drops" applies here too, and an empty one
+	# is what makes a find worth watching
+	if sd != 1 and (sd == 20 or st >= dc):
+		var gold := int(float(floor_no) * 9.0 * (1.6 if sd == 20 else 1.0)) + _rng.randi_range(4, 18)
+		chests_found += 1
+		roster.award(String(m["uid"]), gold, 0, 0, floor_no)
+		_gold += gold
+		_snd("chest_open", node.global_position if is_instance_valid(node) else b_pos(m), -2.0)
+		Sfx.play("coin", -4.0)
+		_float_text(m, "+%d" % gold, Color(1.0, 0.85, 0.35))
+		_say("%s searches the chest - Successfully found loot!! %d gold (Investigation %d vs DC %d)."
+			% [h["name"], gold, st, dc])
+	else:
+		chests_empty += 1
+		_float_text(m, "empty", Color(0.75, 0.75, 0.78))
+		_say("%s searches the chest - ...no loot... (Investigation %d vs DC %d)." % [h["name"], st, dc])
+
+func b_pos(m: Dictionary) -> Vector3:
+	var b = m["body"]
+	return (b as Node3D).global_position if is_instance_valid(b) else Vector3.ZERO
+
+## L47: press on or climb out - the party's biggest standing decision. Split out of _fight() for
+## L49 so the same call can be reached after the floor has been searched as well as straight away.
+func _floor_decision(alive: Array) -> void:
+		if alive.is_empty():
+			return
 		var frac := 0.0
 		for m in alive:
 			frac += float(m["hp"]) / float(m["max"])
 		frac /= float(alive.size())
 		if oil < 1.0:
+			decided["turn_back_oil"] = int(decided.get("turn_back_oil", 0)) + 1
+			decisions += 1
 			_say("Out of oil, the party feels its way back up from floor %d." % floor_no)
 			_finish()
 		elif frac < turn_back_at or floor_no >= max_floors:
+			decided["turn_back_hurt"] = int(decided.get("turn_back_hurt", 0)) + 1
+			decisions += 1
 			_say("Battered, the party climbs back out from floor %d." % floor_no)
 			_finish()
 		else:
+			decided["press_on"] = int(decided.get("press_on", 0)) + 1
+			decisions += 1
+			_say("%s take a breather, and press on deeper." % _names())
 			# a breather: clerics and sages mend between floors
 			for m in alive:
 				m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m["max"]) * 0.25)
 			state = "descend"
 			_t = 0.0
-		return
+			_nav_reset()
+
+func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 	# venom keeps working after the bite (spider, snake, adder, wasp)
 	for m in alive:
 		if float(m.get("venom", 0.0)) > 0.0:
@@ -532,11 +1290,26 @@ func _fight(delta: float) -> void:
 			m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m.get("hot_rate", 0.0)) * delta)
 		if float(m.get("ward_t", 0.0)) > 0.0:
 			m["ward_t"] = float(m["ward_t"]) - delta
+	# L47: before anyone swings, does the PARTY still want this fight? A lost one is broken off
+	# as a party and they run for the way up - they no longer die standing in place.
+	if not bool(_fleeing_party) and _losing(alive, foes):
+		_fleeing_party = true
+		decisions += 1
+		decided["party_retreat"] = int(decided.get("party_retreat", 0)) + 1
+		_say("The fight is going badly - the party breaks off and runs for the way up from floor %d." % floor_no)
+		state = "flee"
+		_t = 0.0
+		_nav_reset()
+		return
+
 	for m in alive:
 		var b: HeroBody = m["body"]
 		var h: Dictionary = m["h"]
 		# L12: a potion first, if one is called for (it costs the swing)
 		if _quaff(m):
+			continue
+		# L47: then their own call - break off, fall back, keep running
+		if _think(m, foes, alive, delta):
 			continue
 		# healers mend whoever is lowest first
 		var hp_pow := roster.heal_power(h)
@@ -550,11 +1323,24 @@ func _fight(delta: float) -> void:
 			m["swing"] = float(m["swing"]) - delta * _pace(m)
 			if low != null and float(m["swing"]) <= 0.0:
 				m["swing"] = 2.4
+				# L47: choosing WHO to mend is a decision - say so when it is a close call
+				if float(low["hp"]) < float(low["max"]) * 0.35:
+					_decide(m, "mend", "%s breaks off to mend %s, who is nearly down." % [h["name"], low["h"]["name"]])
+				else:
+					decided["mend"] = int(decided.get("mend", 0)) + 1
+					decisions += 1
 				# D2 spells: a sage lays renew, a cleric a ward, a paladin its hands
 				var mk := String(MENDERS.get(String(h["class"]), "heal"))
 				var got := Spells.cast(mk, b, low["body"], _scar_check(m, mk))
-				_snd(String(SPELL_SND.get(got, "")), (low["body"] as Node3D).global_position + Vector3(0, 1.2, 0))     # S2
 				Rig.play(b._anim, Spells.CAST_ANIM.get(got, "Spellcasting"))
+				# L52: the menders were the quietest of all - name them too
+				_spell_said(m, mk, got, String(low["h"]["name"]))
+				# L54: the data says "its next SPELL", not "its next attack" - a mender who
+				# drinks Scarwater gets the doubling too, or loses the mending to the scar
+				if bool(m.get("scar_double", false)):
+					m["scar_double"] = false
+					hp_pow *= 2.0
+
 				if Spells.HARM.has(got):
 					# L8: the scar turned the mending into a blow - it lands on the friend
 					low["hp"] = float(low["hp"]) - hp_pow * 0.5
@@ -562,31 +1348,54 @@ func _fight(delta: float) -> void:
 				else:
 					_bless(low, got, hp_pow)
 				continue
-		var tgt: Monster = null
-		var bd := 1e9
-		for f in foes:
-			var d := _flat((f as Node3D).global_position, b.global_position)
-			if d < bd:
-				bd = d
-				tgt = f
+		# L47: a target chosen on sense, not just proximity (finish the nearly-dead, shut up
+		# the ranged one). The switch is announced the first time a hero changes their mind.
+		var tgt: Monster = _pick_target(b, foes)
 		if tgt == null:
 			continue
+		if m.get("tgt_was") != tgt and is_instance_valid(tgt):
+			if m.has("tgt_was") and is_instance_valid(m.get("tgt_was")):
+				var tn := String(tgt.def.get("name", "it"))
+				var frac2 := tgt.hp / maxf(1.0, tgt.max_hp)
+				if frac2 < 0.34:
+					_decide(m, "finish", "%s turns on the wounded %s to finish it." % [h["name"], tn])
+				else:
+					var w: Dictionary = tgt.def.get("ways", {})
+					if w.has("cast") or w.has("spit") or w.has("shoot"):
+						_decide(m, "silence", "%s goes for the %s before it strikes again from range." % [h["name"], tn])
+			m["tgt_was"] = tgt
+		var bd := _flat((tgt as Node3D).global_position, b.global_position)
 		var caster := String(h["class"]) in Roster.CASTERS
-		var ability := String(Roster.CLASSES[String(h["class"])].get("ability", ""))
+		# L48: the hero's whole unlocked kit, class birthright + class track + species track.
+		# L43 FOUND THE COST OF THIS: abilities_of() allocates an Array and walks two tables, and
+		# I had it running every frame for every delver in the fight loop. The paid phase fell
+		# from 16-18 fps to 14.3-14.7, under _l32_test's catastrophe floor - which is exactly
+		# the regression the repaired FPS gate was supposed to start catching, caught on its
+		# first honest run, on my own code. The kit only changes when the hero LEVELS, so it is
+		# worked out once and kept until then.
+		if int(m.get("abil_lvl", -1)) != int(h.get("level", 1)):
+			m["abil_lvl"] = int(h.get("level", 1))
+			m["abil"] = Roster.abilities_of(h)
+		var ability: Array = m["abil"]
 		var ranged := caster or String(h["class"]) == "ranger"
 		var reach := 9.0 if ranged else REACH + tgt._height() * 0.15
 		if bd > reach:
 			# each hero takes their own side of the target instead of one point
-			var slot := float(party.find(m)) * TAU / float(maxi(party.size(), 1))
-			var ring := Vector3(cos(slot), 0, sin(slot)) * (1.4 + tgt._height() * 0.25 if not ranged else 5.0)
-			_go(b, tgt.global_position + ring, roster.speed(h) * 0.9, delta)
+			# L25: a delver pressed against a hoard or a wall on the way to its side of the target
+			# goes round to another side instead of pushing at it for the rest of the fight
+			if stuck_on(b):
+				m["slot_off"] = float(m.get("slot_off", 0.0)) + 1.1
+				m["slot_t"] = -9.0       # pick again from the new side
+				_prog.erase(b)
+			var spot := _fight_slot(m, b, tgt, party.find(m), party.size(), ranged, reach)
+			_go(b, spot, roster.speed(h) * 0.9, delta)
 			Rig.play(b._anim, "Running_A")
 			continue
 		b.rotation.y = atan2(tgt.global_position.x - b.global_position.x, tgt.global_position.z - b.global_position.z)
 		m["swing"] = float(m["swing"]) - delta * _pace(m)
 		if float(m["swing"]) > 0.0:
 			continue
-		m["swing"] = (1.3 + _rng.randf() * 0.4) * (0.6 if ability == "flurry" else 1.0) * (0.66 if has_st(m, "haste") else 1.0)
+		m["swing"] = (1.3 + _rng.randf() * 0.4) * (0.6 if ability.has("flurry") else 1.0) * (0.66 if has_st(m, "haste") else 1.0)
 		# 5e: d20 + attack bonus vs the creature's AC (10 + depth band)
 		# L5: darkvision shrugs off the dark; a lucky halfling rolls a natural 1 again
 		var adv := _hero_adv(m)
@@ -659,8 +1468,10 @@ func _fight(delta: float) -> void:
 			# a creature mid-swing, mid-rise or reeling from a hit stands until it is done - no gliding
 			if mon.busy():
 				continue
-			_go(mon, (near["body"] as Node3D).global_position, float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon), delta)
-			mon._play("walk")
+			var chase := float(mon.def.get("spd", 3.0)) * 0.7 * _mon_pace(mon)
+			_go(mon, (near["body"] as Node3D).global_position, chase, delta)
+			# L26a: a fast chaser runs (its run clip, or its walk where it has none)
+			mon._play("run" if chase >= RUN_AT else "walk")
 			continue
 		var nb: Node3D = near["body"]
 		mon.rotation.y = atan2(nb.global_position.x - mon.global_position.x, nb.global_position.z - mon.global_position.z)
@@ -675,15 +1486,50 @@ func _fight(delta: float) -> void:
 			fury = float(en.get("atk", 1.3))
 		var chest := nb.global_position + Vector3(0, 1.1, 0)
 		if ways.has("breath"):
+			_boss_tell(mon, "%s draws breath - brace.")
 			mon._swing = 2.6
 			mon.breathe(chest)
 		elif shots > 0.0:
+			if ways.has("volley"):
+				_boss_tell(mon, "%s nocks a volley - cover!")
 			mon._swing = 2.2
 			mon.shoot(chest)
 			if ways.has("volley"):
 				_volley(mon, alive, near, shots)
 		else:
+			# L26a: a melee blow lands at the swing's contact frame, not as the swing begins
 			mon._play("attack")
+			_blows.append({"t": mon.impact(), "mon": mon, "near": near, "fury": fury})
+			continue
+		_mon_blow(mon, near, fury, shots, ways, alive)
+
+## ---- L26a: blows in flight. A creature's melee swing is rolled when its blade comes
+## down (Monster.impact(): ~0.42 of the clip), so the hero's flinch matches the swing.
+## A blow whose creature died or whose mark fell meanwhile is dropped.
+const RUN_AT := 3.0            # chase speed (m/s) from which a creature runs instead of walks
+var _blows: Array = []
+var blows_landed := 0
+func _blows_tick(delta: float) -> void:
+	if _blows.is_empty():
+		return
+	var keep: Array = []
+	for b in _blows:
+		b["t"] = float(b["t"]) - delta
+		if float(b["t"]) > 0.0:
+			keep.append(b)
+			continue
+		var mon = b["mon"]
+		var near: Dictionary = b["near"]
+		if not is_instance_valid(mon) or (mon as Monster).state == Monster.S.DEAD or float(near["hp"]) <= 0.0 \
+				or not is_instance_valid(near["body"]):
+			continue
+		blows_landed += 1
+		_mon_blow(mon, near, float(b["fury"]), 0.0, (mon as Monster).def.get("ways", {}), _alive())
+	_blows = keep
+
+## a creature's blow resolved: d20 against the delver's armour, damage, venom, breath splash
+func _mon_blow(mon: Monster, near: Dictionary, fury: float, shots: float, ways: Dictionary, alive: Array) -> void:
+		var nb: Node3D = near["body"]
 		# L9: d20 + its to-hit vs the delver's AC; a natural 1 always misses, a natural 20 always hits and doubles the dice
 		var nat := _d20(1 if dark or has_st(near, "blinded") else 0)
 		var hit := nat + 2 + floor_no / 2
@@ -734,6 +1580,24 @@ func _on_kill(tgt: Monster) -> void:
 		if _split_said != floor_no:
 			_split_said = floor_no
 			_say("The %s divides." % String(tgt.def.get("name", "ooze")))
+	# L29c miniboss: the elite that stands in a chamber alone carries a purse on
+	# its meta. On death it pays out across every alive hero, Chronicle names
+	# the kill, Delve.setpieces_fired counts a "miniboss_down" so the test can
+	# see that resolve + bonus actually fired.
+	if tgt.has_meta("l29c_miniboss_purse"):
+		var purse := int(tgt.get_meta("l29c_miniboss_purse"))
+		tgt.remove_meta("l29c_miniboss_purse")
+		var alive := _alive()
+		if not alive.is_empty():
+			var share := maxi(1, purse / alive.size())
+			for m in alive:
+				roster.award(String(m["uid"]), share, 0, 0, floor_no)
+				_float_text(m, "+%d" % share, Color(1.0, 0.85, 0.35))
+			_gold += share * alive.size()
+			_say("The %s is down. The chamber keeps a purse of %d gold - %d a share, %d ways."
+				% [String(tgt.def.get("name", "elite")), purse, share, alive.size()])
+			Delve.setpieces_fired["miniboss_down"] = int(Delve.setpieces_fired.get("miniboss_down", 0)) + 1
+			Sfx.play("coin", -4.0)
 
 func _raise_tick(mon: Monster, most: int, delta: float) -> void:
 	_call_tick(mon, {"type": "minion", "strain": "hollowed", "name": "risen dead", "every": 9.0, "most": most,
@@ -874,12 +1738,36 @@ func _volley(mon: Monster, alive: Array, near: Dictionary, reach: float) -> void
 			o["hp"] = float(o["hp"]) - _soak(o, _mdice(base, false))
 			_hero_hit(o)
 
+## L29b: a WRITTEN line need not carry the format tokens the code assumes it does. Formatting one
+## that does not throws "String formatting error" and the line is LOST from the Chronicle. Two sites
+## did this - the descend line in start() and the cleared line in _loot - and both threw on ordinary
+## runs, every run, for as long as the offending lines have been in the content file. The content
+## file is not at fault and is not mine; the assumption here was. So: format only what asks to be
+## formatted, and otherwise print the writer's line exactly as written.
+func _fmt_line(line: String, args: Array) -> String:
+	var want := line.count("%") - 2 * line.count("%%")
+	if want != args.size():
+		return line
+	return line % args
+
+## L29b: what a floor pays is multiplied by this. Kept in ONE place so a test reads the same
+## number the Chronicle actually pays out, instead of a second copy of the arithmetic that can
+## drift. A rare unique is a lord AND THEN SOME; a floor-unique is less than a lord.
+static func boss_loot_mult(boss: bool, uniq: bool, rare_lord: bool) -> float:
+	if not boss:
+		return 1.0
+	if rare_lord:
+		return 4.5
+	return 2.0 if uniq else 3.0
+
 ## Gold is PERSONAL (old rule): a lord's hoard is split between the heroes who
 ## brought it down; anything else found belongs to whoever prised it open, and
 ## searching costs half a flask. Materials go home to the town.
 func _loot(alive: Array) -> void:
 	var boss := dun.lord != null
 	var uniq := boss and bool(dun.lord.def.get("unique", false))
+	# L29b: a rare unique IS a lord, not a floor-unique - it pays better than one, not worse
+	var rare_lord := boss and bool(dun.lord.def.get("lord_unique", false))
 	# L9: the party's sharpest eye searches - an Investigation check (d20 + INT,
 	# + proficiency for the trained, disadvantage in the dark without darkvision)
 	# vs DC 10 + floor/2: it sets how much is found, what is salvaged, and whether
@@ -899,7 +1787,7 @@ func _loot(alive: Array) -> void:
 		mult = 0.6
 	elif st >= sdc:
 		mult = minf(1.35, 1.0 + 0.03 * float(st - sdc))
-	var found := int(float(floor_no) * 11.0 * ((2.0 if uniq else 3.0) if boss else 1.0) * mult)
+	var found := int(float(floor_no) * 11.0 * boss_loot_mult(boss, uniq, rare_lord) * mult)
 	Sfx.play("coin", -4.0)
 	_snd("chest_open", (seeker["body"] as Node3D).global_position, -2.0)      # S2: a find
 	if boss:
@@ -910,8 +1798,11 @@ func _loot(alive: Array) -> void:
 			took.append(String(m["h"]["name"]))
 		_gold += share * alive.size()
 		_say("%s is slain on floor %d!" % [dun.lord.def.get("name", "The lord"), floor_no])
+		_e3po("lord_cleared")   # D37: a lord is down - the Commander marks the beat
 		FeedHUD.card_on(town, String(dun.lord.def.get("name", "The lord")),
 			"Slain on floor %d by %s." % [floor_no, _names_of(_party_uids(alive))], dun.lord.def.get("aura", Color(1, 0.8, 0.4)))
+		if rare_lord:
+			_say("A hoard that size does not come off an ordinary %s." % String(dun.lord.def.get("lord_title", "lord")))
 		_say("The hoard is split %d ways - %d gold each to %s." % [took.size(), share, ", ".join(took)])
 	else:
 		var f: Dictionary = seeker
@@ -919,7 +1810,7 @@ func _loot(alive: Array) -> void:
 		_gold += found
 		oil = maxf(0.0, oil - 0.5)
 		_say("%s searches (Investigation %d) and turns up %d gold on floor %d." % [f["h"]["name"], st, found, floor_no])
-		_say(_pick_line("cleared", "Floor %d cleared.") % floor_no)
+		_say(_fmt_line(_pick_line("cleared", "Floor %d cleared."), [floor_no]))
 	# renown (old rule): a floor cleared +1, a lord slain +6
 	var eco = town.get("economy") if town else null
 	if eco:
@@ -1013,6 +1904,15 @@ func _finish() -> void:
 		_say("%s %s home to Bellmire with %s. %d %s." % [_names_of(out), "comes" if out.size() == 1 else "come", _haul_line(), _kills, ("kill" if _kills == 1 else "kills") + ("" if out.size() == 1 and party.size() == 1 else " between them")])
 		if town and town.has_method("receive_haul"):
 			town.receive_haul(haul)
+		# L55: they are home with their takings - the smith fits them out. Before this nothing
+		# ever called the forge for a viewer's hero, so they earned and never spent: tiers sat at
+		# w0/a0 all stream while gold piled up. One step each at most, and only with a reserve
+		# left (Roster.kit_up_after_delve). It is said aloud so the viewer sees what their gold
+		# bought - an upgrade nobody can see is the same bug over again.
+		for uid in out:
+			var line := roster.kit_up_after_delve(String(uid))
+			if line != "":
+				_say(line)
 	ended.emit(out)
 
 ## ---- L4: what the newer callings do in a fight
@@ -1023,23 +1923,81 @@ func _inspired() -> int:
 			return 1
 	return 0
 
-func _ability_mult(ability: String, tgt: Monster) -> float:
+## L48: `ability` is now the hero's WHOLE unlocked kit (Roster.abilities_of), not the single
+## thing their class was born with - a level-5 orc knight brings knight's cleave and bulwark
+## AND orc rage. Every unlock resolves through this seam or _ability_hit/_soak, so nothing in
+## the levelling table is a name with no effect behind it.
+func _ability_mult(ability, tgt: Monster) -> float:
 	var k := 1.0
-	match ability:
-		"smite":    # a paladin hits the dead twice as hard
-			if String(tgt.def.get("family", "")) in ["undead", "the fallen"]:
-				k = 2.0
-		"flurry":   # a monk hits often and light
-			k = 0.7
+	var list: Array = ability if ability is Array else [String(ability)]
+	var undead := String(tgt.def.get("family", "")) in ["undead", "the fallen"]
+	for a in list:
+		match String(a):
+			"smite":    # a paladin hits the dead twice as hard
+				if undead:
+					k *= 2.0
+			"scarborn": # the scar's own are death to the same
+				if undead:
+					k *= 1.25
+			"flurry":   # a monk hits often and light
+				k *= 0.7
+			"rage":
+				k *= 1.20
+			"keen":
+				k *= 1.10
+			"resolve":
+				k *= 1.08
+			"riposte":
+				k *= 1.12
+			"deadeye":
+				k *= 1.15
+			"arcane_surge":
+				k *= 1.15
+			"backstab": # a telling blow cuts deeper once the thing is already hurt
+				if tgt.hp < tgt.max_hp * 0.5:
+					k *= 1.40
 	# a warlock's hex: everyone's blows land harder on the marked thing
 	if float(tgt.get_meta("hex_t", -1.0)) > _t:
 		k *= 1.25
 	return k
 
-func _ability_hit(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
+func _ability_hit(ability, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
+	# L48: every unlocked ability gets its turn, not just the class's birthright
+	var list: Array = ability if ability is Array else [String(ability)]
+	for a in list:
+		_ability_hit_one(String(a), m, tgt, dmg, foes)
+
+func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes: Array) -> void:
 	match ability:
 		"drain":    # the necromancer drinks back a share of what it spends
 			m["hp"] = minf(float(m["max"]), float(m["hp"]) + dmg * 0.3)
+		"cleave":   # L48: the blow carries into ONE other foe standing close
+			var best: Monster = null
+			var bd := 3.0
+			for f in foes:
+				var o: Monster = f
+				if o == tgt or not is_instance_valid(o) or o.state == Monster.S.DEAD:
+					continue
+				var d := _flat(o.global_position, tgt.global_position)
+				if d < bd:
+					bd = d
+					best = o
+			if best != null:
+				var was_dead := best.state == Monster.S.DEAD
+				best.hurt(dmg * 0.35)
+				if not was_dead and best.state == Monster.S.DEAD:
+					_kills += 1
+					_on_kill(best)
+					roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
+		"luck":     # L48: halfling luck - now and then the blow lands twice
+			if is_instance_valid(tgt) and tgt.state != Monster.S.DEAD and _rng.randf() < 0.12:
+				var was2 := tgt.state == Monster.S.DEAD
+				tgt.hurt(dmg * 0.5)
+				_float_text(m, "lucky!", Color(0.95, 0.85, 0.40), 56, 2.6)
+				if not was2 and tgt.state == Monster.S.DEAD:
+					_kills += 1
+					_on_kill(tgt)
+					roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 		"hex":
 			if float(tgt.get_meta("hex_t", -1.0)) <= _t:
 				Spells._burst(tgt.get_parent(), tgt.global_position + Vector3(0, tgt._height() * 0.6, 0), Color(0.6, 0.2, 0.9))
@@ -1061,6 +2019,47 @@ func _ability_hit(ability: String, m: Dictionary, tgt: Monster, dmg: float, foes
 const BOOKS := {"mage": ["bolt", "bolt", "chain", "fire"], "sage": ["frost", "bolt"], "cleric": ["smite", "bolt"],
 				"necromancer": ["bolt", "chain"], "druid": ["frost", "bolt"], "warlock": ["bolt", "fire"]}
 const MENDERS := {"sage": "renew", "cleric": "ward", "paladin": "heal"}
+
+## ---------------------------------------------------------------- L52: spells that name themselves
+## REFRAMED by the census, and the census was right. Mr. E reported "only one spell", but a 7-minute
+## soak measured NINE distinct spells firing with a good spread (heal 295, bolt 161, mend 131,
+## ward 112, smite 85, frost 46, chain 35, renew 31, fire 12). Nothing is missing: the viewer simply
+## cannot TELL them apart in a pane. So this adds no spells. It makes the choice legible - every
+## cast says its own name over the caster's head in that spell's own colour (Spells.COL), and the
+## Chronicle names it in words.
+## A scar misfire is the most readable moment in the game and was completely silent before: when the
+## scar turns one spell into another, it is now called out by name, both ways.
+const SPELL_WORDS := {
+	"bolt": "Bolt", "heal": "Heal", "ward": "Ward", "mend": "Mend", "chain": "Chain Bolt",
+	"fire": "Fire", "frost": "Frost", "smite": "Smite", "renew": "Renew",
+}
+const SPELL_SAY_EVERY := 2.5        # s between one caster's Chronicle lines (the float is every cast)
+var spells_cast := {}               # kind -> count, for the L52 test and a census
+
+## every cast, wherever it is cast from: the name over the caster, the count, and a calm line
+func _spell_said(m: Dictionary, wanted: String, actual: String, at_whom := "") -> void:
+	spells_cast[actual] = int(spells_cast.get(actual, 0)) + 1
+	var word := String(SPELL_WORDS.get(actual, actual.capitalize()))
+	var col: Color = Spells.COL.get(actual, Color.WHITE)
+	var misfired := actual != wanted
+	# the name over the caster's head, in the spell's own colour - this is the bit that makes a
+	# pane readable at a glance, without reading the Chronicle at all
+	_float_text(m, word if not misfired else "%s!" % word, col, 64, 3.0)
+	if misfired:
+		# _scar_check has ALREADY put a misfire line in the Chronicle (a lore_lines template,
+		# gated to one per caster per floor). Adding a second line for the same event would be
+		# exactly the feed noise L32b's pacing work set out to kill, and lore_lines.json is the
+		# content writer's file, not mine to reword. So the float above carries the naming - it
+		# shows what the spell BECAME, in that spell's colour - and the Chronicle keeps one line.
+		return
+	if _t < float(m.get("spell_say_t", -99.0)) + SPELL_SAY_EVERY:
+		return                      # cast freely, just do not narrate every single one
+	m["spell_say_t"] = _t
+	var who := String(m["h"]["name"])
+	if at_whom != "":
+		_say("%s casts %s at %s." % [who, word, at_whom])
+	else:
+		_say("%s casts %s." % [who, word])
 const CHAIN_R := 5.0        # the chain leaps to a creature this near the last
 const FIRE_R := 2.6         # the fire burst catches everything this near its mark
 const FROST_SLOW := 4.0     # s a frosted creature moves and swings at half pace
@@ -1068,7 +2067,7 @@ const SMITE_DEAD := 1.5     # smite on the dead and the lost
 const WARD_SOAK := 0.35     # of the warded delver's max, soaked for WARD_T s
 const WARD_T := 8.0
 
-func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) -> void:
+func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability) -> void:
 	var b: HeroBody = m["body"]
 	var h: Dictionary = m["h"]
 	var book: Array = BOOKS.get(String(h["class"]), ["bolt"])
@@ -1094,21 +2093,30 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability: String) 
 			more.append(nx)
 			at = nx.global_position
 	var actual := Spells.cast(kind, b, tgt, _scar_check(m, kind), more)
-	_snd(String(SPELL_SND.get(actual, "")), b.global_position + Vector3(0, 1.4, 0))      # S2
 	Rig.play(b._anim, Spells.CAST_ANIM.get(actual, "Spellcast_Shoot"))
+	# L52: say which spell this was - the viewer could never tell them apart
+	_spell_said(m, kind, actual, String(tgt.def.get("name", "it")) if is_instance_valid(tgt) else "")
+	# L54: take the doubling NOW and clear it, before any path can return early. Consuming it
+	# after the to-hit check (as the first version did) meant a spell that MISSED left the flag
+	# standing and doubled the next cast instead - one draught paying twice, which is not what
+	# "its next spell is doubled" says. The scar decided; a fumble spends it just the same.
+	var scar_dbl := bool(m.get("scar_double", false))
+	m["scar_double"] = false
 	if not Spells.HARM.has(actual):
 		# L8: the scar turned the blow into a mending - wild magic mends the creature
 		if actual in ["heal", "renew", "mend"] and is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
-			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * 0.5)
+			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * (1.0 if scar_dbl else 0.5))
 		return
 	if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
 		return
 	var dmg := _hero_damage(h, roll == 20)
 	dmg *= _ability_mult(ability, tgt)
+	if scar_dbl:
+		dmg *= 2.0
 	var t := Spells.flight(actual, b, tgt)
 	get_tree().create_timer(t).timeout.connect(_spell_lands.bind(actual, m, hit, dmg, roll == 20, ability))
 
-func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: bool, ability: String) -> void:
+func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: bool, ability) -> void:
 	if state != "fight" or dun == null or not is_instance_valid(dun):
 		return
 	var first: Monster = hit[0] if is_instance_valid(hit[0]) else null
@@ -1171,6 +2179,18 @@ func _bless(o: Dictionary, kind: String, pow: float) -> void:
 			o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow)
 
 func _soak(o: Dictionary, dmg: float) -> float:
+	# L48: the defensive unlocks live here, because this is already the one place a hero's
+	# incoming damage is reduced. Bulwark is trained, stoneblood is bred; they stack, but
+	# gently, and the floor keeps a blow from ever being soaked away to nothing.
+	if o.has("h"):
+		var kit := Roster.abilities_of(o["h"] as Dictionary)
+		var cut := 1.0
+		if kit.has("bulwark"):
+			cut *= 0.85
+		if kit.has("stoneblood"):
+			cut *= 0.88
+		if cut < 1.0:
+			dmg = maxf(1.0, dmg * cut)
 	if float(o.get("ward_t", 0.0)) <= 0.0 or float(o.get("ward", 0.0)) <= 0.0:
 		return dmg
 	var s := minf(float(o["ward"]), dmg)
@@ -1192,6 +2212,8 @@ const CAST_STAT := {"mage": "int", "necromancer": "int",
 					"warlock": "cha", "bard": "cha", "paladin": "cha"}
 var scar_casts := 0
 var scar_misfires := 0
+var scar_touched_spells := 0    # L54: Scarwater casts the scar decided
+var scar_doubles := 0           # L54: of those, the ones it doubled
 var _misfire_said := {}
 
 static func scar_dc(floor_no: int) -> int:
@@ -1199,6 +2221,30 @@ static func scar_dc(floor_no: int) -> int:
 
 func _scar_check(m: Dictionary, kind: String) -> bool:
 	var h: Dictionary = m["h"]
+	# ---- L54 (raised by the content writer): SCARWATER. data/potions.json has given the state
+	# "scar_touched" for a while - "its next spell is doubled, or misfires; the scar decides" -
+	# and NOTHING in the scripts ever read it. Verified before writing a line: the only
+	# scar_touched in code was fishing.gd's unrelated scar_touched_chance. So the draught was
+	# bought, drunk, displayed on the hero, and did exactly nothing.
+	# It resolves here because this is already where the scar decides a cast's fate, so a
+	# scar-touched hero skips the usual check entirely: the scar has their spell either way.
+	# One cast, decided once, and the draught is spent whichever way it falls.
+	if has_st(m, "scar_touched"):
+		(m.get("st", {}) as Dictionary).erase("scar_touched")
+		scar_casts += 1
+		scar_touched_spells += 1
+		if _rng.randi() % 2 == 0:
+			scar_misfires += 1
+			m["scar_double"] = false
+			_float_text(m, "SCAR", Spells.SCAR, 64, 3.2)
+			_say("%s's Scarwater turns on them - the scar takes the spell." % h["name"])
+			_bark(m, "misfire")
+			return true
+		m["scar_double"] = true
+		scar_doubles += 1
+		_float_text(m, "DOUBLED", Spells.SCAR, 72, 3.2)
+		_say("%s's Scarwater holds - the scar doubles the spell." % h["name"])
+		return false
 	var stat := String(CAST_STAT.get(String(h["class"]), String(Roster.CLASSES[String(h["class"])].get("primary", "int"))))
 	var d := _rng.randi_range(1, 20)
 	var total := d + roster.mod(h, stat) + roster.prof(h)
@@ -1299,6 +2345,10 @@ func _mon_saves(mon: Monster, m: Dictionary, _kind: int) -> bool:
 const SPOTTERS := ["rogue", "ranger", "monk"]
 const TOOLS := ["rogue", "bard"]
 const TRAP_REACH := 0.9
+## L29c r5 added PoisonDart (status, not spike) and SwarmTrap (a creature spawn,
+## not damage up front). PoisonDart carries a tiny immediate hit AND stacks a
+## venom DoT (6 s, dps 1 + floor/4). SwarmTrap deals no immediate damage - its
+## damage is whatever the pack it lets up does once the party sees it.
 const TRAPS := {
 	"SpikeTrap":     {"noun": "a spiked plate", "what": "spikes!", "dice": [2, 6], "sfx": "swing", "name": "a spike trap"},
 	"PressurePlate": {"noun": "a plate", "what": "darts!", "dice": [3, 4], "sfx": "ui", "name": "a pressure plate"},
@@ -1306,6 +2356,8 @@ const TRAPS := {
 	"DartTrap":      {"noun": "a loose flagstone", "what": "darts!", "dice": [3, 4], "sfx": "swing", "name": "a dart trap"},
 	"BladeTrap":     {"noun": "a slot in the floor", "what": "a blade!", "dice": [2, 8], "sfx": "swing", "name": "a blade trap"},
 	"PitTrap":       {"noun": "rotten boards", "what": "the floor drops away!", "dice": [2, 6], "sfx": "hit", "name": "a pit"},
+	"PoisonDart":    {"noun": "a loose flagstone", "what": "green darts!", "dice": [1, 4], "sfx": "swing", "name": "a poison-dart trap"},
+	"SwarmTrap":     {"noun": "a grated floor", "what": "the bars drop open - something is coming up through them!", "dice": [1, 1], "sfx": "swing", "name": "a swarm grate"},
 }
 var trap_log := {"spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0}
 
@@ -1379,14 +2431,72 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 	if saved:
 		trap_log["saved"] += 1
 		dmg = floorf(dmg * 0.5)
-	var took := _soak(m, dmg)
+	# L46: a trap that has actually SPRUNG must hurt. Measured: 2d6 halved by a good save floors
+	# to 0, and a fire grate against a fire-resistant delver multiplies to 0 - so a trap could
+	# land, play its sound, print its line and take nothing at all. That is the "traps are inert"
+	# Mr. E reported. A save halves it and resistance blunts it, but neither nullifies it now.
+	var took := maxf(1.0, _soak(m, dmg))
 	trap_log["damage"] += took
 	m["hp"] = float(m["hp"]) - took
 	_say("%s steps on %s - %s DEX %d vs DC %d, %d damage%s." % [h["name"], spec["noun"], what, sv, dc, int(took), " (halved)" if saved else ""])
 	_float_text(m, "-%d" % int(took), Color(1.0, 0.35, 0.25) if not saved else Color(1.0, 0.75, 0.3))
 	if String(tr.get("kind", "")) == "FireTrap" and not saved:
 		_give(m, "burning", 3.0)
+	# L29c r5 trap variety: PoisonDart stacks a venom DoT on a failed save; the
+	# dart itself only grazes (1d4) but the venom carries the hit over the next
+	# few seconds, same mechanic a snake or spider bite uses, so the fight-loop
+	# venom tick reads it for free.
+	if String(tr.get("kind", "")) == "PoisonDart" and not saved:
+		m["venom"] = maxf(float(m.get("venom", 0.0)), 6.0)
+		m["venom_dps"] = maxf(float(m.get("venom_dps", 0.0)), 1.0 + float(floor_no) / 4.0)
+		trap_log["venomed"] = int(trap_log.get("venomed", 0)) + 1
+		_say("%s is venomed - the poison works over the next few seconds." % h["name"])
+	# SwarmTrap lets a small pack up through the grate right where the hero stepped.
+	# The plain damage above is the one-point tally so the "a trap must hurt" rule
+	# from L46 stays honoured; the real teeth are the pack. Count a SEPARATE
+	# telemetry key so the test can see swarm-ups fire in a soak without conflating
+	# them with the ordinary trap tally.
+	if String(tr.get("kind", "")) == "SwarmTrap":
+		trap_log["swarms"] = int(trap_log.get("swarms", 0)) + 1
+		_trap_swarm(tr)
 	_hero_hit(m)
+
+## L29c r5: a SwarmTrap springs up a short pack of theme-matched creatures
+## RIGHT WHERE THE PARTY STANDS, like an AMBUSH set piece but wired from the
+## trap pool. Reuses dun.monsters so the fight loop picks it up for free.
+func _trap_swarm(tr: Dictionary) -> void:
+	if dun == null or not is_instance_valid(dun):
+		return
+	var node = tr.get("node")
+	if not is_instance_valid(node):
+		return
+	var at: Vector3 = (node as Node3D).global_position
+	var theme := String(dun.info.get("theme", ""))
+	var names: Array = []
+	for k in range(2):
+		var d := Bestiary.pick(floor_no, theme)
+		var mon := Monster.new()
+		mon.def = d
+		mon.state = Monster.S.PATROL
+		mon.roam = 2.0
+		var off := Vector3(cos(float(k) * 2.1), 0.0, sin(float(k) * 2.1)) * 1.2
+		mon.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
+		dun.add_child(mon)
+		(dun.monsters as Array).append(mon)
+		mon.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
+		mon.hp = mon.max_hp
+		names.append(String(d.get("name", "something")))
+	# "2 rats", not "rat, rat"
+	var counts := {}
+	for nm in names:
+		counts[nm] = int(counts.get(nm, 0)) + 1
+	var parts: Array = []
+	for k in counts:
+		var ks := String(k)
+		var nc: int = counts[k]
+		parts.append("%d %s" % [nc, ks if nc == 1 or ks.ends_with("s") else ks + "s"])
+	_say("The grate pops - %s comes up through it." % ", ".join(parts))
+	Sfx.play("roar", -5.0)
 
 ## a number or word floating up off a delver's head
 func _float_text(m: Dictionary, text: String, col: Color, size := 84, lift := 2.4) -> void:
@@ -1426,6 +2536,30 @@ func has_st(m, name: String) -> bool:
 		"slowed":
 			return float(m.get("slow", 0.0)) > 0.0
 	return float((m.get("st", {}) as Dictionary).get(name, 0.0)) > 0.0
+
+## Rally (bits/points reward): the working combat states a rallied hero carries -
+## +2 to-hit & +4 damage (giant), faster swings (haste), no fear (heroism).
+## Mending over time is set separately via hot_t/hot_rate (the engine's own HoT).
+const RALLY_STATES := ["giant", "haste", "heroism"]
+const RALLY_HOT_FRAC := 0.015      # heal this fraction of max hp per second
+
+## Apply the rally package to one delver dict (live or just-formed).
+func _rally_states(m: Dictionary, secs: float) -> void:
+	for s in RALLY_STATES:
+		_give(m, s, secs)
+	# mend over time: top them up while the rally lasts (capped at max each tick)
+	m["hot_t"] = maxf(float(m.get("hot_t", 0.0)), secs)
+	m["hot_rate"] = maxf(float(m.get("hot_rate", 0.0)), float(m["max"]) * RALLY_HOT_FRAC)
+
+## Apply a rally to a live delver right now. Returns true if the hero was found
+## alive in this delve (so the caller knows not to leave a pending flag).
+func apply_rally(uid: String, secs: float) -> bool:
+	for m in party:
+		if String(m["uid"]) == uid and float(m.get("hp", 0.0)) > 0.0:
+			_rally_states(m, secs)
+			_say("%s is rallied mid-delve - strength, speed, and courage surge." % String(m["h"]["name"]))
+			return true
+	return false
 
 func _give(m: Dictionary, name: String, secs: float) -> void:
 	if float(m.get("hp", 0.0)) <= 0.0:
@@ -1510,9 +2644,24 @@ func _quaff(m: Dictionary) -> bool:
 				break
 	if want == "":
 		return false
+	# L47: reaching for a brew IS a decision, and it already has a visible tell (Use_Item, the
+	# bark, the float). It just was not legible AS a decision - so it is counted and reasoned
+	# like the rest now. drink() already announces a heal, so only the quieter cases speak here.
+	var h2: Dictionary = m["h"]
+	var why := "brew"
+	if float(m["hp"]) < float(m["max"]) * 0.34:
+		why = "brew_hurt"
+		decided[why] = int(decided.get(why, 0)) + 1
+		decisions += 1
+	elif lord_fighting() != null and bool(m.get("buffed", false)):
+		why = "brew_lord"
+		_decide(m, why, "%s steels themself for the lord." % h2["name"])
+	else:
+		why = "brew_cure"
+		_decide(m, why, "%s drinks off what is on them." % h2["name"])
 	drink(m, want)
 	if is_instance_valid(m.get("body")):
-		_snd("potion_drink", (m["body"] as Node3D).global_position + Vector3(0, 1.5, 0))     # S2
+		_snd("potion_drink", (m["body"] as Node3D).global_position + Vector3(0, 1.5, 0), POTION_DB)     # S2 (S3: up - it was buried)
 	return true
 
 func drink(m: Dictionary, key: String) -> void:
@@ -1670,16 +2819,20 @@ func _say_bubble(m: Dictionary, text: String) -> void:
 ##                     blow; a delver's cries and efforts share one HURT_GAP s), effort on a big swing (a 20, or one
 ##                     in EFFORT_ODDS), death when they fall (the death sting already ducks
 ##                     the music)
-##   spells            SPELL_SND: the caster's spell, whatever the scar made of it
+##   spells            Spells.cast sounds every cast itself (S1: mana_charge + its SOUND) - S3
+##                     found S2 layering a second copy here and took it out
 ##   below             a quiet bed (AMB_KINDS) somewhere off in the dark every AMB_MIN-AMB_MAX s
-const SPELL_SND := {"bolt": "lightning", "chain": "lightning", "fire": "fireball", "frost": "ice_shard", "smite": "lightning",
-					"renew": "heal", "heal": "heal", "mend": "heal", "ward": "shield"}
 const HURT_GAP := 2.5
 const EFFORT_ODDS := 8
 const AMB_KINDS := ["bat_screech", "spider_skitter", "skeleton_rattle", "ghost_wail"]
 const AMB_MIN := 9.0
 const AMB_MAX := 22.0
 const AMB_DB := -16.0
+## S3 (measured): the spider and skeleton files are ~10 dB quieter than the bat and the ghost -
+## at one level two of the four were 25 dB under the music, i.e. never heard. Trimmed so the
+## whole bed sits quiet but present, 12-24 dB under the music.
+const AMB_TRIM := {"spider_skitter": 8.0, "skeleton_rattle": 8.0}
+const POTION_DB := 4.0
 var _amb_t := 6.0
 var sounds := {}                   # kind -> times this delve asked for it (tests read it)
 
@@ -1748,4 +2901,60 @@ func _amb_tick(delta: float) -> void:
 	if not is_instance_valid(b):
 		return
 	var a := _rng.randf() * TAU
-	_snd(String(AMB_KINDS[_rng.randi() % AMB_KINDS.size()]), b.global_position + Vector3(cos(a), 0.3, sin(a)) * _rng.randf_range(10.0, 18.0), AMB_DB)
+	var k := String(AMB_KINDS[_rng.randi() % AMB_KINDS.size()])
+	_snd(k, b.global_position + Vector3(cos(a), 0.3, sin(a)) * _rng.randf_range(10.0, 18.0), AMB_DB + float(AMB_TRIM.get(k, 0.0)))
+
+## L25c: the watchdog. A body that has not got closer to its goal for 2 s (held by a wall and a
+## table at once) is set down in the middle of the nearest clear cell and routes afresh.
+var unsticks := 0
+var unstick_log: Array = []      # tests read it: where the watchdog fired
+func _unstick(n: Node3D, goal := Vector2i(-9999, -9999)) -> void:
+	var cells: Dictionary = dun.info["cells"]
+	var blocked := _blocked_cells()
+	var here := _cell_of(n.global_position)
+	# L25c: set it down where its goal can be walked to (the nearest clear cell could be a pocket
+	# walled in by furniture - it was set back in the same pocket again and again)
+	var pat := _patches()
+	var want := int(pat.get(goal, -1))
+	if want < 0 and goal.x != -9999:
+		var gd := 1e9
+		for c: Vector2i in pat:
+			var d0 := Vector2(c - goal).length()
+			if d0 < gd:
+				gd = d0
+				want = int(pat[c])
+	var best := Vector2i(-9999, -9999)
+	var bd := 1e9
+	for c: Vector2i in cells:
+		if blocked.has(c) or (want >= 0 and int(pat.get(c, -1)) != want) or (c == here and _flat(n.global_position, _cell_world(c)) < 0.5):
+			continue          # (not where it already stands - that was a loop)
+		var d := Vector2(c - here).length()
+		if d < bd:
+			bd = d
+			best = c
+	if best.x == -9999:
+		return
+	var w := _cell_world(best)
+	n.global_position = Vector3(w.x, n.global_position.y, w.z)
+	_paths.erase(n)
+	_prog.erase(n)
+	unsticks += 1
+
+## debug for the L25 test: what is round a body the watchdog had to free
+func _why(n: Node3D, pts: Array) -> String:
+	var o0 := dun.global_position
+	var near: Array = []
+	for o in dun.info.get("obstacles", []):
+		var c: Vector3 = (o[0] as Vector3) + o0
+		var d := _flat(c, n.global_position)
+		if d < float(o[1]) + 2.0:
+			near.append("(%.1f,%.1f r%.2f d%.2f)" % [c.x, c.z, float(o[1]), d])
+	var here := _cell_of(n.global_position)
+	var nb := ""
+	for dd in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var c2: Vector2i = here + dd
+		nb += ("#" if not (dun.info["cells"] as Dictionary).has(c2) else ("B" if _blocked_cells().has(c2) else "."))
+	var wp := ""
+	for i in range(mini(3, pts.size())):
+		wp += str((pts[i] as Vector3).snappedf(0.1)) + " "
+	return " cell %s%s nb(+x-x+z-z)=%s wps=%s obst=%s" % [here, (" B" if _blocked_cells().has(here) else ""), nb, wp, ", ".join(near)]

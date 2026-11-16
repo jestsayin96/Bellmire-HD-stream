@@ -143,7 +143,7 @@ const BIOMES := {
         "wall_tint": Color(0.60, 0.34, 0.28),
         "banners": ["banner_patternA_red", "banner_red"],
         "clusters": ["collapse", "collapse", "old_arms"],
-        "scatter": [["rubble_large", 0.14, 0.8, 1.3],
+        "scatter": [["rubble_large", 0.14, 0.3, 0.45],
                     ["hex:decoration/nature/rock_single_D", 0.10, 0.6, 1.1]],
         "prop_tint": Color(0.70, 0.38, 0.30),
         # He asked for LAVA PITS and got red-lit rock. Checked it with a
@@ -164,7 +164,7 @@ const BIOMES := {
         "banners": ["banner_thin_white", "banner_white"],
         "clusters": ["collapse", "grave_candles", "old_arms"],
         "scatter": [["pillar", 0.07, 0.9, 1.1],
-                    ["rubble_half", 0.09, 0.7, 1.0]],
+                    ["rubble_half", 0.09, 0.35, 0.5]],
         "prop_tint": Color(0.74, 0.78, 0.84),
     },
     "confection": {
@@ -212,20 +212,20 @@ const CLUSTERS := {
               ["candle_triple", 0, 0, 0, 1], ["bottle_B_brown", 1.5, 0.3, 0, 1]],
     "kegs": [["keg_decorated", 0, 0, 0, 1], ["keg", 1.3, 0.5, 30, 1],
              ["barrel_large", -1.4, 0.4, 0, 1], ["plate_stack", 0.3, -1.2, 0, 1]],
-    "shelf_stock": [["shelf_large", 0, 0, 0, 1], ["box_small", 1.5, 0.4, 18, 1],
+    "shelf_stock": [["crates_stacked", 0, 0, 0, 1], ["box_small", 1.5, 0.4, 18, 1],
                     ["bottle_A_labeled_brown", -1.2, 0.5, 0, 1],
                     ["bottle_C_green", -0.8, 0.7, 0, 1]],
     "grave_candles": [["candle_thin_lit", 0, 0, 0, 1], ["candle_thin_lit", 0.7, 0.5, 0, 1],
-                      ["candle_melted", -0.6, 0.4, 0, 1], ["rubble_half", 1.6, -0.8, 40, 1],
+                      ["candle_melted", -0.6, 0.4, 0, 1], ["rubble_half", 1.0, -0.8, 40, 0.5],
                       ["coin_stack_small", -1.2, -0.7, 0, 1]],
-    "collapse": [["rubble_large", 0, 0, 0, 1], ["rubble_half", 1.8, 0.7, 55, 1],
+    "collapse": [["rubble_large", 0, 0, 0, 0.45], ["rubble_half", 1.0, 0.7, 55, 0.5],
                  ["barrier_half", -1.7, 0.5, 15, 1]],
-    "old_arms": [["sword_shield_broken", 0, 0, 20, 1], ["rubble_half", 1.2, 0.6, 0, 1],
+    "old_arms": [["sword_shield_broken", 0, 0, 20, 1], ["rubble_half", 0.8, 0.6, 0, 0.5],
                  ["banner_shield_white", -1.3, 0.3, 0, 1]],
     "cell": [["barrier_column", 0, 0, 0, 1], ["barrier", 1.6, 0, 0, 1],
              ["barrier_corner", -1.6, 0, 0, 1], ["bed_floor", 0.4, 1.8, 0, 1],
              ["plate_small", -0.6, 1.6, 0, 1]],
-    "keyring_post": [["keyring_hanging", 0, 0, 0, 1], ["key", 0.8, 0.5, 25, 1],
+    "keyring_post": [["keyring", 0, 0, 0, 1], ["key", 0.8, 0.5, 25, 1],
                      ["stool", -1.2, 0.4, 0, 1], ["candle_lit", 1.0, -0.6, 0, 1]],
     "hoard": [["coin_stack_large", 0, 0, 0, 1], ["coin_stack_medium", 1.1, 0.6, 0, 1],
               ["coin_stack_small", -0.9, 0.7, 0, 1], ["chest_gold", 0.3, -1.4, 15, 1],
@@ -247,8 +247,8 @@ const CLUSTERS := {
                   ["candle_lit", -0.4, 0.2, 0, 1]],
     "stores": [["crates_stacked", 0, 0, 0, 1], ["box_stacked", 1.5, 0.5, 25, 1],
                ["barrel_large", -1.5, 0.4, 0, 1], ["box_small_decorated", 0.4, -1.3, 10, 1]],
-    "overgrowth": [["rubble_large", 0, 0, 0, 1], ["barrel_large", 1.7, 0.5, 0, 1],
-                   ["rubble_half", -1.5, 0.8, 70, 1]],
+    "overgrowth": [["rubble_large", 0, 0, 0, 0.45], ["barrel_large", 1.7, 0.5, 0, 1],
+                   ["rubble_half", -1.5, 0.8, 70, 0.5]],
 }
 
 # An asset name prefixed "hex:" comes from the HEX kit instead of the dungeon
@@ -286,11 +286,405 @@ static func _put(parent: Node3D, asset: String, pos: Vector3, rz := 0.0,
     var k: float = sc * (2.5 if asset.begins_with("hex:") else 1.0)
     n.scale = Vector3(k, k, k)
     parent.add_child(n)
+    # L25: what this piece is, for the placement rules and the overlap probe
+    n.set_meta("fg_kind", _tag)
+    n.set_meta("fg_grp", _grp)
+    n.set_meta("fg_asset", asset)
+    if _tag in REST_KINDS:
+        # rest it ON the floor: a wall-mounted piece (a sword-and-shield plaque, a hanging
+        # keyring, a shelf) has its origin at the mount, and set down at y 0 it sank to the hilt
+        var lb := _local_box(asset, n)
+        var low := lb.position.y * k
+        if low < -0.03:
+            n.position.y -= low
+    if _tag in CHECK_KINDS:
+        var bx := _box_of(n, asset)
+        if fit_checks and _blocked(bx) > PEN_MAX:
+            if not _try_table_top(n, asset, bx):
+                n.free()
+                return null
+            bx = _box_of(n, asset)
+        _boxes.append(bx)
+    elif _tag in SOLID_KINDS:
+        _boxes.append(_box_of(n, asset))
     # Tint is what turns one kit into many worlds - the same trick that made
     # five creature strains out of eight models.
-    if tint != Color(1, 1, 1):
-        Rig.tint(n, tint)
+    # L28a: dungeon-kit pieces get the shared kit surface (tint included); the hex kit keeps
+    # its own materials and the plain tint
+    if asset.begins_with("hex:") or not kit_look:
+        if tint != Color(1, 1, 1):
+            Rig.tint(n, tint)
+    else:
+        _skin(n, asset, tint)
     return n
+
+## ---------------------------------------------------------------- L28a: the kit surface
+## How a theme's surfaces behave: roughness scale (wet / glazed / dry), detail relief,
+## how much the slow world-space variation breaks the tiling, and standing water on floors.
+const LOOK := {
+    "_":          {"rough": 1.0,  "relief": 0.6,  "vary": 0.18, "wet": 0.0},
+    "barracks":   {"rough": 1.0,  "relief": 0.6,  "vary": 0.20, "wet": 0.0},
+    "mess":       {"rough": 0.95, "relief": 0.5,  "vary": 0.16, "wet": 0.0},
+    "crypt":      {"rough": 1.05, "relief": 0.75, "vary": 0.26, "wet": 0.15},
+    "prison":     {"rough": 1.0,  "relief": 0.7,  "vary": 0.28, "wet": 0.25},
+    "treasury":   {"rough": 0.8,  "relief": 0.45, "vary": 0.12, "wet": 0.0},
+    "shrine":     {"rough": 0.85, "relief": 0.5,  "vary": 0.14, "wet": 0.0},
+    "workshop":   {"rough": 1.0,  "relief": 0.65, "vary": 0.24, "wet": 0.0},
+    "flooded":    {"rough": 0.7,  "relief": 0.7,  "vary": 0.30, "wet": 0.85},
+    "grassland":  {"rough": 1.1,  "relief": 0.55, "vary": 0.30, "wet": 0.1},
+    "wood":       {"rough": 1.1,  "relief": 0.65, "vary": 0.30, "wet": 0.2},
+    "firepit":    {"rough": 1.1,  "relief": 0.8,  "vary": 0.32, "wet": 0.0},
+    "fogbound":   {"rough": 0.9,  "relief": 0.55, "vary": 0.14, "wet": 0.35},
+    "confection": {"rough": 0.45, "relief": 0.3,  "vary": 0.10, "wet": 0.0},
+    "keep":       {"rough": 0.8,  "relief": 0.5,  "vary": 0.12, "wet": 0.0},
+}
+## the 8x4 swatch atlas, per swatch [roughness, metalness, detail: 0 none / .5 stone / 1 wood]
+## (measured: walls/stairs/columns r0c1+r0c0, tile + dirt floors r0c5, wood r0c4/r0c2,
+## gold chests + coins r2c7, rubble r0c7)
+const SWATCH := [
+    [[0.86, 0.0, 0.5], [0.84, 0.0, 0.5], [0.72, 0.0, 1.0], [0.50, 0.55, 0.0],
+     [0.74, 0.0, 1.0], [0.88, 0.0, 0.5], [0.90, 0.0, 0.0], [0.90, 0.0, 0.5]],
+    [[0.70, 0.0, 0.0], [0.78, 0.0, 1.0], [0.60, 0.30, 0.5], [0.85, 0.0, 0.0],
+     [0.85, 0.0, 0.0], [0.85, 0.0, 0.0], [0.88, 0.0, 0.0], [0.85, 0.0, 0.0]],
+    [[0.95, 0.0, 0.5], [0.90, 0.0, 0.0], [0.85, 0.0, 0.0], [0.90, 0.0, 0.0],
+     [0.80, 0.0, 0.0], [0.35, 0.85, 0.0], [0.80, 0.0, 0.0], [0.30, 0.90, 0.0]],
+    [[0.60, 0.0, 0.0], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5],
+     [0.86, 0.0, 0.5], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5], [0.86, 0.0, 0.5]],
+]
+## pieces whose greys are steel, not stone (blades, keys, torch brackets, plates, chests)
+const STEEL := ["sword_", "key", "torch", "coin", "chest", "plate", "candle_triple"]
+const KIT_ATLAS := "res://addons/kaykit_dungeon_remastered/Assets/texture/dungeon_texture.png"
+const MK_TEX := "res://assets/kit/textures/"
+static var _look_theme := "_"
+static var kit_look := true          # shot tools switch it off for "before"
+static var _kit_mats := {}
+static var _pbr := {}
+
+static func _pbr_map(steel: bool) -> ImageTexture:
+    if _pbr.has(steel):
+        return _pbr[steel]
+    var img := Image.create(8, 4, false, Image.FORMAT_RGB8)
+    for r in 4:
+        for c in 8:
+            var s: Array = SWATCH[r][c]
+            if steel and r == 0 and c in [1, 7]:
+                s = [0.40, 0.70, 0.0]
+            img.set_pixel(c, r, Color(float(s[0]), float(s[1]), float(s[2])))
+    var t := ImageTexture.create_from_image(img)
+    _pbr[steel] = t
+    return t
+
+## ---- L41: NEVER SHOW MAGENTA ON STREAM.
+## In Mr. E's 19-17-57 recording an entire dungeon floor rendered hot magenta. That colour is
+## Godot's, not ours: a ShaderMaterial whose shader is NULL draws magenta, and a shader load
+## fails whenever the .gdshader is missing from the import cache on the machine that is running
+## - which is exactly the sort of thing that differs between this laptop and the desktop and
+## shows up only on stream. Probed all eight themes here and every one binds correctly, so the
+## binding is not broken on this machine; what was missing was any guard for when it IS.
+## So the kit material is now built defensively: if the shader will not load, or a texture it
+## needs is missing, the floor comes back as plain grey stone instead of screaming magenta.
+## Grey is dull and nobody will enjoy it - but a dull floor is a bad half-hour, and a magenta
+## one is a clip.
+static var kit_fail_count := 0          # how many times the guard has caught a failure
+static var force_kit_fail := false      # test hook: pretend the shader will not load
+
+static func _grey_kit_mat() -> StandardMaterial3D:
+    var g := StandardMaterial3D.new()
+    g.albedo_color = Color(0.46, 0.46, 0.48)
+    g.roughness = 0.95
+    g.metallic = 0.0
+    return g
+
+static func _kit_mat(tint: Color, steel: bool, ground := false) -> Material:
+    var key := "%s|%s|%s|%s" % [_look_theme, tint.to_html(), steel, ground]
+    if _kit_mats.has(key):
+        return _kit_mats[key]
+    var L: Dictionary = LOOK.get(_look_theme, LOOK["_"])
+    var sh = null if force_kit_fail else load("res://assets/shaders/dungeon_kit.gdshader")
+    var atlas = null if force_kit_fail else load(KIT_ATLAS)
+    if sh == null or atlas == null:
+        # L41: the guard. A ShaderMaterial with a null shader is the magenta - so never make one.
+        kit_fail_count += 1
+        push_warning("L41: dungeon kit material unavailable (shader %s, atlas %s) - falling back to grey stone"
+            % ["null" if sh == null else "ok", "null" if atlas == null else "ok"])
+        var g := _grey_kit_mat()
+        _kit_mats[key] = g
+        return g
+    var m := ShaderMaterial.new()
+    m.shader = sh
+    m.set_shader_parameter("albedo_tex", atlas)
+    m.set_shader_parameter("tint", tint)
+    m.set_shader_parameter("pbr_map", _pbr_map(steel))
+    m.set_shader_parameter("stone_n", load(MK_TEX + "T_Plaster_Normal.png"))
+    m.set_shader_parameter("stone_r", load(MK_TEX + "T_Plaster_ORM.png"))
+    m.set_shader_parameter("wood_n", load(MK_TEX + "T_WoodTrim_Normal.png"))
+    m.set_shader_parameter("wood_r", load(MK_TEX + "T_WoodTrim_Roughness.png"))
+    m.set_shader_parameter("vary_tex", load(MK_TEX + "T_Noise_Terrain.png"))
+    m.set_shader_parameter("rough_mult", float(L["rough"]))
+    m.set_shader_parameter("normal_strength", float(L["relief"]))
+    m.set_shader_parameter("vary", float(L["vary"]))
+    m.set_shader_parameter("wet", float(L["wet"]))
+    # L28b: the biome's ground lies over the floor tiles only (not table tops)
+    var gr: Array = look(_look_theme).get("ground", ["#808080", 0.0])
+    m.set_shader_parameter("patch_col", Color(String(gr[0])))
+    m.set_shader_parameter("patch_amt", float(gr[1]) if ground else 0.0)
+    _kit_mats[key] = m
+    return m
+
+## ---------------------------------------------------------------- L28b: each floor's own air
+## data/biomes.json "looks", by theme: ambient, fog, colour grade, glow, motes, ground
+static var _looks := {}
+static func look(theme: String) -> Dictionary:
+    if _looks.is_empty():
+        var f := FileAccess.open("res://data/biomes.json", FileAccess.READ)
+        if f:
+            var d = JSON.parse_string(f.get_as_text())
+            if d is Dictionary:
+                _looks = (d as Dictionary).get("looks", {})
+        if _looks.is_empty():
+            _looks = {"_": {}}
+    return _looks.get(theme, {})
+
+## the environment a camera looking into this floor uses instead of the town's sky: a dark
+## ground, the theme's ambient light, depth haze plus a heavier layer near the floor, the
+## colour grade as a per-channel LUT, and glow for the flames. `floor_y` = the floor's world
+## height (the height fog sits on it). Lanes ask with cheap = true (no SSAO / SSIL).
+const AMBIENT_L28C := 0.7
+static func make_env(theme: String, floor_y: float, boss: bool, cheap := false) -> Environment:
+    var L := look(theme)
+    var e := Environment.new()
+    var gr: Array = L.get("grade", ["#000000", "#808080", "#ffffff"])
+    var fog: Array = L.get("fog", ["#202020", 0.01, 0.1])
+    var amb: Array = L.get("ambient", ["#808080", 0.55])
+    e.background_mode = Environment.BG_COLOR
+    e.background_color = Color(String(gr[0])).darkened(0.4)
+    e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+    e.ambient_light_color = Color(String(amb[0]))
+    # L28c: the flat ambient steps back so the key, torches and braziers make pools of light
+    e.ambient_light_energy = float(amb[1]) * AMBIENT_L28C
+    e.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED   # no blue sky in the gold
+    e.tonemap_mode = Environment.TONE_MAPPER_AGX
+    e.fog_enabled = true
+    e.fog_light_color = Color(String(fog[0]))
+    e.fog_light_energy = 1.0
+    e.fog_density = float(fog[1]) * (1.25 if boss else 1.0)
+    e.fog_sky_affect = 0.0
+    e.fog_height = floor_y + 1.2
+    e.fog_height_density = float(fog[2])
+    e.glow_enabled = true
+    e.glow_intensity = float(L.get("glow", 0.4)) * (1.3 if boss else 1.0)
+    e.glow_bloom = 0.05
+    e.glow_hdr_threshold = 1.1
+    e.adjustment_enabled = true
+    e.adjustment_saturation = float(L.get("sat", 1.0))
+    e.adjustment_contrast = float(L.get("contrast", 1.0)) * (1.06 if boss else 1.0)
+    e.adjustment_brightness = 1.0
+    var g := Gradient.new()
+    g.set_color(0, Color(String(gr[0])))
+    g.set_color(1, Color(String(gr[2])))
+    g.add_point(0.5, Color(String(gr[1])))
+    var gt := GradientTexture1D.new()
+    gt.gradient = g
+    gt.width = 256
+    e.adjustment_color_correction = gt
+    e.ssao_enabled = not cheap
+    e.ssao_intensity = 1.6
+    # L28c: a lord's floor is graded harder - deeper shadows pulled toward the lord's colour,
+    # a little more contrast and colour, the haze tinted by it
+    if boss and L.has("boss"):
+        var bc := Color(String(L["boss"]))
+        e.fog_light_color = Color(String(fog[0])).lerp(bc.darkened(0.5), 0.35)
+        e.adjustment_contrast = float(L.get("contrast", 1.0)) * 1.10
+        e.adjustment_saturation = float(L.get("sat", 1.0)) * 1.08
+        g.set_color(0, Color(String(gr[0])).lerp(bc.darkened(0.85), 0.5))
+        e.ssao_intensity = 2.0
+    return e
+
+## the floor's ambient particles: ONE emitter over the whole grid (capped), what floats in
+## the air of that world - dust in the halls, embers over the firepits, spores in the buried
+## wood, fireflies, drips, sugar glints. [amount, colour, size, energy, up-speed, gravity, lifetime]
+const MOTES := {
+    "dust":      [90,  Color(1.0, 0.92, 0.78), 0.05, 1.2, 0.05, -0.01, 9.0],
+    "ash":       [110, Color(0.78, 0.80, 0.88), 0.06, 0.8, -0.10, -0.03, 10.0],
+    "embers":    [120, Color(1.0, 0.45, 0.12), 0.06, 6.0, 0.65, 0.05, 5.0],
+    "pollen":    [100, Color(1.0, 0.96, 0.55), 0.05, 2.0, 0.08, 0.0, 9.0],
+    "fireflies": [60,  Color(0.70, 1.0, 0.45), 0.07, 7.0, 0.06, 0.0, 7.0],
+    "drips":     [80,  Color(0.75, 0.85, 0.80), 0.035, 1.0, -2.6, -6.0, 1.6],
+    "mist":      [40,  Color(0.80, 0.88, 0.92), 0.9, 0.12, 0.03, 0.0, 12.0],
+    "sparkles":  [90,  Color(1.0, 0.92, 0.70), 0.045, 6.5, 0.04, 0.0, 4.0],
+}
+static func _motes(root: Node3D, kind: String, half_w: float, half_h: float) -> void:
+    if not MOTES.has(kind):
+        return
+    var s: Array = MOTES[kind]
+    var p := GPUParticles3D.new()
+    p.name = "Motes_" + kind
+    p.amount = int(s[0])
+    p.lifetime = float(s[6])
+    p.preprocess = float(s[6])
+    p.randomness = 0.6
+    var top := 5.5 if kind != "mist" else 1.2
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+    pm.emission_box_extents = Vector3(half_w, top * 0.5, half_h)
+    pm.direction = Vector3(0, signf(float(s[4])) if float(s[4]) != 0.0 else 1.0, 0)
+    pm.spread = 35.0 if kind != "drips" else 2.0
+    pm.initial_velocity_min = absf(float(s[4])) * 0.5
+    pm.initial_velocity_max = absf(float(s[4])) * 1.2
+    pm.gravity = Vector3(0, float(s[5]), 0)
+    pm.turbulence_enabled = kind in ["dust", "ash", "pollen", "fireflies", "mist", "embers"]
+    pm.turbulence_noise_strength = 0.6
+    pm.turbulence_noise_scale = 4.0
+    pm.scale_min = 0.6
+    pm.scale_max = 1.4
+    var fade := Gradient.new()
+    fade.set_color(0, Color(1, 1, 1, 0))
+    fade.set_color(1, Color(1, 1, 1, 0))
+    fade.add_point(0.2, Color(1, 1, 1, 1))
+    fade.add_point(0.8, Color(1, 1, 1, 1))
+    var ft := GradientTexture1D.new()
+    ft.gradient = fade
+    pm.color_ramp = ft
+    p.process_material = pm
+    var q := QuadMesh.new()
+    q.size = Vector2(float(s[2]), float(s[2]) * (3.0 if kind == "drips" else 1.0))
+    var mat := StandardMaterial3D.new()
+    mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD if kind != "mist" else BaseMaterial3D.BLEND_MODE_MIX
+    mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+    mat.vertex_color_use_as_albedo = true
+    var c: Color = s[1]
+    mat.albedo_color = Color(c.r * float(s[3]), c.g * float(s[3]), c.b * float(s[3]), 0.16 if kind == "mist" else 0.9)
+    if kind == "mist":
+        mat.albedo_color = Color(c.r, c.g, c.b, 0.10)
+    mat.no_depth_test = false
+    q.material = mat
+    p.draw_pass_1 = q
+    p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    p.position = Vector3(0, top * 0.5 + 0.2, 0)
+    p.visibility_aabb = AABB(Vector3(-half_w - 2, -top, -half_h - 2), Vector3(half_w * 2 + 4, top * 3, half_h * 2 + 4))
+    root.add_child(p)
+
+## ---------------------------------------------------------------- L28c: light and fire
+## a flame's light breathes: a looping tween of three random dips around `base` (no script,
+## no per-frame cost on the GDScript side). Starts when the light enters the tree.
+static func _flicker(l: Light3D, base: float, seed_i: int, depth := 0.18) -> void:
+    var r := RandomNumberGenerator.new()
+    r.seed = seed_i
+    var go := func() -> void:
+        var t := l.create_tween().set_loops()
+        for k in 3:
+            t.tween_property(l, "light_energy", base * (1.0 - depth * r.randf_range(0.3, 1.0)), r.randf_range(0.07, 0.19))
+            t.tween_property(l, "light_energy", base * (1.0 + depth * 0.4 * r.randf()), r.randf_range(0.09, 0.23))
+    if l.is_inside_tree():
+        go.call()
+    else:
+        l.ready.connect(go, CONNECT_ONE_SHOT)
+
+## the floor's key: a shadowed spot under the lid, off to one corner of the lamp-stand, so
+## the light rakes and the room's pieces throw shadows across the floor the party fights on
+static func _key_light(root: Node3D, at: Vector3, col: Color, energy: float, span: float) -> SpotLight3D:
+    var s := SpotLight3D.new()
+    s.name = "KeyLight"
+    var pos := at + Vector3(-3.4, 6.2, -2.6)
+    s.transform = Transform3D(Basis.looking_at(at + Vector3(0, 0.4, 0) - pos, Vector3.UP), pos)
+    s.light_color = col
+    s.light_energy = energy
+    s.spot_range = clampf(span * 1.4, 18.0, 34.0)
+    s.spot_angle = 52.0
+    s.spot_attenuation = 0.9
+    s.spot_angle_attenuation = 1.6
+    s.shadow_enabled = true
+    s.shadow_blur = 1.6
+    s.shadow_bias = 0.04
+    s.light_specular = 0.6
+    root.add_child(s)
+    return s
+
+## ONE ember emitter for every flame on a floor (torches, braziers, lava): GPU particles
+## that spawn at a list of points, so twenty torches cost one draw and one emitter.
+static func flame_embers(root: Node3D, pts: Array, col: Color, half_w: float, half_h: float) -> GPUParticles3D:
+    if pts.is_empty():
+        return null
+    var n := pts.size()
+    var img := Image.create(n, 1, false, Image.FORMAT_RGBF)
+    for i in n:
+        var p: Vector3 = pts[i]
+        img.set_pixel(i, 0, Color(p.x, p.y, p.z))
+    var gp := GPUParticles3D.new()
+    gp.name = "Embers_flames"
+    gp.amount = clampi(n * 6, 24, 150)
+    gp.lifetime = 1.7
+    gp.preprocess = 1.7
+    gp.randomness = 0.5
+    var pm := ParticleProcessMaterial.new()
+    pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINTS
+    pm.emission_point_texture = ImageTexture.create_from_image(img)
+    pm.emission_point_count = n
+    pm.direction = Vector3(0, 1, 0)
+    pm.spread = 28.0
+    pm.initial_velocity_min = 0.35
+    pm.initial_velocity_max = 1.1
+    pm.gravity = Vector3(0, 0.45, 0)
+    pm.damping_min = 0.2
+    pm.damping_max = 0.6
+    pm.turbulence_enabled = true
+    pm.turbulence_noise_strength = 0.5
+    pm.turbulence_noise_scale = 2.0
+    pm.scale_min = 0.5
+    pm.scale_max = 1.3
+    var g := Gradient.new()
+    g.set_color(0, Color(1, 1, 1, 1))
+    g.add_point(0.6, Color(1, 0.7, 0.5, 0.8))
+    g.set_color(g.get_point_count() - 1, Color(1, 0.4, 0.2, 0))
+    var gt := GradientTexture1D.new()
+    gt.gradient = g
+    pm.color_ramp = gt
+    gp.process_material = pm
+    var q := QuadMesh.new()
+    q.size = Vector2(0.045, 0.045)
+    var m := StandardMaterial3D.new()
+    m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+    m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+    m.vertex_color_use_as_albedo = true
+    var c := col.lerp(Color(1.0, 0.55, 0.2), 0.5)
+    m.albedo_color = Color(c.r * 3.5, c.g * 3.5, c.b * 3.5, 1.0)
+    q.material = m
+    gp.draw_pass_1 = q
+    gp.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+    gp.visibility_aabb = AABB(Vector3(-half_w - 4, -2, -half_h - 4), Vector3(half_w * 2 + 8, 12, half_h * 2 + 8))
+    root.add_child(gp)
+    return gp
+
+## every kit surface on n gets the shared kit material for this theme / tint (one material
+## per combination, not a copy per piece as the old tint made)
+static func _skin(n: Node, asset: String, tint: Color) -> void:
+    var steel := false
+    for p in STEEL:
+        if asset.begins_with(p):
+            steel = true
+            break
+    var mat := _kit_mat(tint, steel, _tag == "floor")
+    var st: Array = [n]
+    while st.size() > 0:
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var mi: MeshInstance3D = c
+            if mi.mesh:
+                for i in range(mi.mesh.get_surface_count()):
+                    var src: Material = mi.get_active_material(i)
+                    if src is StandardMaterial3D and (src as StandardMaterial3D).albedo_texture \
+                            and String((src as StandardMaterial3D).albedo_texture.resource_path).contains("kaykit_dungeon_remastered"):
+                        mi.set_surface_override_material(i, mat)
+                    elif src is StandardMaterial3D and tint != Color(1, 1, 1):
+                        var d: StandardMaterial3D = src.duplicate()
+                        d.albedo_color = tint
+                        mi.set_surface_override_material(i, d)
+        for g in c.get_children():
+            st.append(g)
 
 ## ---- HD: everything that stands on the floor is an OBSTACLE the party and
 ## the creatures walk around (they used to walk straight through tables).
@@ -305,18 +699,36 @@ static func _free_at(at: Vector3, r: float) -> bool:
             return false
     return true
 
-static func _cluster(root: Node3D, key: String, at: Vector3, facing: float) -> void:
+## L25: a cluster is placed only if its first (anchor) piece fits; the rest go where they fit
+static func _cluster(root: Node3D, key: String, at: Vector3, facing: float) -> bool:
     if not CLUSTERS.has(key):
-        return
-    _obs.append([at, float(CLUSTER_R.get(key, 1.5))])
+        return false
+    _grp += 1
+    _tag = "prop"
     var c := cos(deg_to_rad(facing))
     var s := sin(deg_to_rad(facing))
+    var first := true
     for item: Array in CLUSTERS[key]:
-        var dx := float(item[1])
-        var dz := float(item[2])
-        _put(root, String(item[0]),
-             at + Vector3(dx * c - dz * s, 0, dx * s + dz * c),
-             facing + float(item[3]), float(item[4]))
+        # L25: an item that does not fit where the cluster puts it tries closer in, then mirrored
+        var got: Node3D = null
+        for f in ([1.0] if first else [1.0, 0.7, 0.45]):
+            for mir in ([1.0] if first else [1.0, -1.0]):
+                var dx: float = float(item[1]) * f * mir
+                var dz: float = float(item[2]) * f
+                got = _put(root, String(item[0]),
+                     at + Vector3(dx * c - dz * s, 0, dx * s + dz * c),
+                     facing + float(item[3]) * mir, float(item[4]))
+                if got:
+                    break
+            if got:
+                break
+        if got == null:
+            if first:
+                return false          # the caller counts a cluster that never found room
+            _rejected += 1
+        first = false
+    _obs.append([at, float(CLUSTER_R.get(key, 1.5))])
+    return true
 
 # Drawn from a shuffled bag rather than picked at random, so a descent never
 # meets the same room type twice in a row - picking randomly gave three prison
@@ -617,6 +1029,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var theme_key := theme_for(floor_no)
     var origin_key := origin_for(floor_no)
     var T: Dictionary = all_themes()[theme_key]
+    _look_theme = theme_key       # L28a: the kit surface follows the theme
     var floor_tint: Color = T.get("floor_tint", Color(1, 1, 1))
     var wall_tint: Color = T.get("wall_tint", Color(1, 1, 1))
 
@@ -700,6 +1113,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             pool_cells[c] = true
             made += 1
 
+    # L25: the floor's footprints start empty; tiles are floor (flat, not registered)
+    _boxes.clear()
+    _pool_obs.clear()
+    _rejected = 0
+    _grp = 0
+    _tag = "floor"
     var bag: Array = T["floors"]
     var acc: Array = T["accents"]
     var main := String(bag[0])
@@ -752,7 +1171,15 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                   [Vector2i(0, 1), 180.0, Vector3(0, 0, G * 0.5)],
                   [Vector2i(1, 0), 90.0, Vector3(G * 0.5, 0, 0)],
                   [Vector2i(-1, 0), 270.0, Vector3(-G * 0.5, 0, 0)]]
+    # L25: the stair cells are chosen FIRST, so the walls behind and beside a flight are plain
+    # walls (a wall pillar reaches 0.75 m into the cell, a plain wall 0.5) and no column stands
+    # in one. The entry is the most southerly cell, the exit the most northerly.
+    var occupied := cells.keys()
+    occupied.sort_custom(func(x, y): return (x as Vector2i).y > (y as Vector2i).y)
+    var near: Vector2i = occupied[0]
+    var far: Vector2i = occupied[occupied.size() - 1]
     var n_wall := 0
+    _tag = "wall"
     for c: Vector2i in cells:
         var base: Vector3 = cell_pos.call(c.x, c.y)
         for sd: Array in sides:
@@ -761,22 +1188,97 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                 continue
             n_wall += 1
             var k := "wall_pillar" if n_wall % 4 == 1 else String(wall_bag[rng.randi() % wall_bag.size()])
+            if c == near or c == far:
+                k = "wall"
             var at: Vector3 = base + (sd[2] as Vector3)
             _put(root, k, at, float(sd[1]), 1.0, wall_tint)
             if n_wall % 4 == 1:
                 var inward: Vector3 = (base - at).normalized() * 0.45
                 torch_spots.append(Vector3(at.x + inward.x, 2.35, at.z + inward.z))
 
+    # (L25b: the lamp's cell is chosen before the dressing, so the route can go round it)
+    var lamp_cell: Vector2i = Vector2i(int(w / 2), int(h / 2))
+    # The lamp-stand must stand in a ROOM for the same reason as the pillars.
+    # It is a piece of furniture a party fights around, not a cork in a pipe.
+    var lamp_ok := false
+    for r: Rect2i in rooms:
+        if r.has_point(lamp_cell):
+            lamp_ok = true
+            break
+    if not lamp_ok:
+        var best := 1e9
+        for r2: Rect2i in rooms:
+            var c2: Vector2i = r2.get_center()
+            var d2 := Vector2(c2 - lamp_cell).length()
+            if d2 < best and cells.has(c2):
+                best = d2
+                lamp_cell = c2
+                lamp_ok = true
+    if not lamp_ok and not cells.has(lamp_cell):
+        var best3 := 1e9
+        for c: Vector2i in cells:
+            var d := Vector2(c - lamp_cell).length()
+            if d < best3:
+                best3 = d
+                lamp_cell = c
+    # L25b: KEEP CLEAR. The way from the stairs down to the stairs out (around the lamp's cell)
+    # and every corridor cell are registered as zones no furniture may stand in: props kept
+    # landing on the route and in doorways, and the party had to push through them.
+    var route_prev := {near: near}
+    var rq: Array = [near]
+    while not rq.is_empty():
+        var rc: Vector2i = rq.pop_front()
+        if rc == far:
+            break
+        for dv in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+            var rn: Vector2i = rc + dv
+            if cells.has(rn) and not route_prev.has(rn) and (rn != lamp_cell or rn == far):
+                route_prev[rn] = rc
+                rq.append(rn)
+    if not route_prev.has(far):
+        route_prev = {near: near}          # the lamp cell is the only way through: go by it
+        rq = [near]
+        while not rq.is_empty():
+            var rc2: Vector2i = rq.pop_front()
+            for dv2 in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+                var rn2: Vector2i = rc2 + dv2
+                if cells.has(rn2) and not route_prev.has(rn2):
+                    route_prev[rn2] = rc2
+                    rq.append(rn2)
+    var keep_clear := {}
+    var rcur := far
+    while route_prev.has(rcur) and rcur != near:
+        keep_clear[rcur] = true
+        rcur = route_prev[rcur]
+    keep_clear[near] = true
+    for c: Vector2i in cells:
+        if _is_corridor(cells, c):
+            keep_clear[c] = true
+    keep_clear.erase(lamp_cell)
+    for c: Vector2i in keep_clear:
+        var kp: Vector3 = cell_pos.call(c.x, c.y)
+        _boxes.append({"o": Vector2(kp.x, kp.z), "ux": Vector2(1, 0), "uz": Vector2(0, 1), "hx": CLEAR_HALF, "hz": CLEAR_HALF,
+            "y0": 0.0, "y1": 2.0, "kind": "clear", "grp": -1, "asset": "", "node": null})
+    _cells = cells
+    _half_v = Vector2(half_w, half_h)
+
     # ---- torches, tinted by theme
     var lit: Color = T["light"]
+    var LK := look(theme_key)
+    var flames: Array = []          # L28c: every flame on the floor (floor-local), for the embers
+    _tag = "torch"
     for t in torch_spots:
         _put(root, "torch_mounted", Vector3(t.x, t.y, t.z))
         var l := OmniLight3D.new()
         l.light_color = lit
         l.light_energy = 9.0
         l.omni_range = 19.0
+        l.shadow_enabled = false
         l.position = Vector3(t.x, t.y + 0.35, t.z)
         root.add_child(l)
+        flames.append(Vector3(t.x, t.y + 0.42, t.z))
+        if kit_look:
+            _flicker(l, 9.0, rng.randi())
         var flame := MeshInstance3D.new()
         var fm := SphereMesh.new()
         fm.radius = 0.22
@@ -811,6 +1313,10 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             fill.position = Vector3(fx, 8.0, fz)
             fill.light_color = lit.lerp(Color(1, 1, 1), 0.35)
             fill.light_energy = 3.4 / sqrt(float(nx * nz))
+            if kit_look and LK.has("fill"):
+                # L28c: the fill is the floor's own cool/warm under-light, not the torch colour
+                fill.light_color = Color(String(LK["fill"][0]))
+                fill.light_energy *= float(LK["fill"][1])
             fill.omni_range = span * 1.6 + 16.0
             fill.omni_attenuation = 1.0
             fill.shadow_enabled = false
@@ -823,6 +1329,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     bounce.omni_attenuation = 1.0
     bounce.shadow_enabled = false
     root.add_child(bounce)
+    # L28c: the KEY. One shadowed spot from under the lid, raking across the lamp-stand's room
+    # from a corner so walls, pillars and furniture throw long shadows over the fighting floor -
+    # the one light on a floor that casts them (torches and fills stay unshadowed for cost).
+    if kit_look and LK.has("key"):
+        _key_light(root, cell_pos.call(lamp_cell.x, lamp_cell.y), Color(String(LK["key"][0])),
+                   float(LK["key"][1]) * (0.8 if boss else 1.0), span)
 
     # a lid so the overworld sun doesn't flood it
     var lid := MeshInstance3D.new()
@@ -836,6 +1348,10 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     lid.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
     root.add_child(lid)
 
+    # L28b: what floats in this world's air (one capped emitter a floor)
+    if kit_look:
+        _motes(root, String(look(theme_key).get("motes", "dust")), half_w, half_h)
+
     # ---- interior structure. "pillared" earns a full colonnade; the others
     # get something lighter so they don't fight the room's own shape.
     # PILLARS BELONG IN ROOMS, NEVER IN A CORRIDOR. A pillar dropped in a
@@ -848,14 +1364,15 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             if r.has_point(c):
                 return true
         return false
+    _tag = "struct"
     if shape == "pillared":
         for c: Vector2i in cells:
-            if c.x % 3 == 1 and c.y % 3 == 1 and in_room.call(c):
+            if c.x % 3 == 1 and c.y % 3 == 1 and in_room.call(c) and c != near and c != far and not keep_clear.has(c):
                 _put(root, "pillar_decorated", cell_pos.call(c.x, c.y))
     else:
         var structural := []
         for c: Vector2i in cells:
-            if c.x % 4 == 2 and c.y % 4 == 2 and in_room.call(c):
+            if c.x % 4 == 2 and c.y % 4 == 2 and in_room.call(c) and c != near and c != far and not keep_clear.has(c):
                 structural.append(c)
         for c: Vector2i in structural:
             _put(root, "column" if rng.randf() < 0.5 else "pillar",
@@ -879,12 +1396,18 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             mi.position = at + Vector3(0, -0.38, 0)
             root.add_child(mi)
             _obs.append([at, G * 0.5])      # nobody strolls across molten rock
+            _pool_obs.append([at, G * 0.5])
             var gl := OmniLight3D.new()
             gl.light_color = Color(1.0, 0.42, 0.12)
             gl.light_energy = 4.2
             gl.omni_range = G * 2.6
             gl.position = at + Vector3(0, 0.9, 0)
+            gl.shadow_enabled = false
             root.add_child(gl)
+            if kit_look:
+                _flicker(gl, 4.2, rng.randi(), 0.25)
+                for k in 3:      # embers lift off the molten face too (same shared emitter)
+                    flames.append(at + Vector3(rng.randf_range(-1.2, 1.2), -0.3, rng.randf_range(-1.2, 1.2)))
 
     # ---- THE LAMP-STAND, dead centre of every floor.
     #
@@ -900,43 +1423,23 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     # by PLAYING rather than by purchasing, which is the better half of the
     # curve. It sits in the middle because that is where a party has to fight
     # its way to, not somewhere safe.
-    var lamp_cell: Vector2i = Vector2i(int(w / 2), int(h / 2))
-    # The lamp-stand must stand in a ROOM for the same reason as the pillars.
-    # It is a piece of furniture a party fights around, not a cork in a pipe.
-    var lamp_ok := false
-    for r: Rect2i in rooms:
-        if r.has_point(lamp_cell):
-            lamp_ok = true
-            break
-    if not lamp_ok:
-        var best := 1e9
-        for r2: Rect2i in rooms:
-            var c2: Vector2i = r2.get_center()
-            var d2 := Vector2(c2 - lamp_cell).length()
-            if d2 < best and cells.has(c2):
-                best = d2
-                lamp_cell = c2
-                lamp_ok = true
-    if not lamp_ok and not cells.has(lamp_cell):
-        var best3 := 1e9
-        for c: Vector2i in cells:
-            var d := Vector2(c - lamp_cell).length()
-            if d < best3:
-                best3 = d
-                lamp_cell = c
     var lamp: Vector3 = cell_pos.call(lamp_cell.x, lamp_cell.y)
     _cluster(root, "lampstand", lamp, float(rng.randi() % 4) * 90.0)
 
     # ---- entry and exit must be cells that EXIST. On an L-room or a cross the
     # old fixed coordinates landed in empty space outside the floor.
-    var occupied := cells.keys()
-    occupied.sort_custom(func(x, y): return (x as Vector2i).y > (y as Vector2i).y)
-    var near: Vector2i = occupied[0]
-    var far: Vector2i = occupied[occupied.size() - 1]
+    # (L25: near / far are chosen before the walls go up - see there)
     var entry: Vector3 = cell_pos.call(near.x, near.y)
     var exit_p: Vector3 = cell_pos.call(far.x, far.y)
-    _put(root, "stairs_wide", entry + Vector3(0, 0, G * 0.55), 180.0)
-    _put(root, "stairs_wide", exit_p - Vector3(0, 0, G * 0.55), 0.0)
+    # L25: the stairs. The old ones were "stairs_wide" - 7 m across on a 4 m cell - set with
+    # their HIGH end buried in the middle of the wall. Now a narrow flight at 3/4 size (3 m wide,
+    # 3 m deep, 3.8 m up, under the 4 m wall top), its high end flush on the INNER face of the
+    # wall it backs onto (walls reach 0.5 m into the cell), its foot on the floor of the room.
+    # The entry is the most southerly cell (a wall on its +z side), the exit the most northerly.
+    _tag = "stairs"
+    var wall_face := G * 0.5 - WALL_IN
+    _put(root, STAIRS, entry + Vector3(0, 0, wall_face), 180.0, STAIRS_K)
+    _put(root, STAIRS, exit_p - Vector3(0, 0, wall_face), 0.0, STAIRS_K)
 
     # ---- dressing. Clusters go in occupied cells near a wall, keeping the
     # middle clear to fight in.
@@ -968,15 +1471,30 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             continue
         var at: Vector3 = cell_pos.call(ec.x, ec.y)
         # pull the cluster toward its wall so the room's middle stays open
+        var pull := Vector3.ZERO
         for sd3: Array in sides:
             if not cells.has(ec + (sd3[0] as Vector2i)):
-                at += (sd3[2] as Vector3).normalized() * G * 0.18
+                pull += (sd3[2] as Vector3).normalized()
+        if pull != Vector3.ZERO:
+            pull = pull.normalized()
+        at += pull * G * 0.18
         var key := String(cl[rng.randi() % cl.size()])
         if not _free_at(at, float(CLUSTER_R.get(key, 1.5))) or at.distance_to(entry) < G * 1.2 or at.distance_to(exit_p) < G * 1.2:
             continue
         var facing := rad_to_deg(atan2(-at.x, -at.z)) + rng.randf_range(-25.0, 25.0)
-        _cluster(root, key, at, facing)
-        placed += 1
+        # L25: an anchor that does not fit tries further off its wall, then turned
+        var done := false
+        for nudge in [0.0, 0.6, 1.2]:
+            for turn in [0.0, 90.0, -90.0]:
+                if _cluster(root, key, at - pull * nudge, facing + turn):
+                    done = true
+                    break
+            if done:
+                break
+        if done:
+            placed += 1
+        else:
+            _rejected += (CLUSTERS[key] as Array).size()
 
     # A few loose things away from the walls so the middle is not bare floor.
     # Kept sparse and off-centre: the party still needs room to fight.
@@ -995,12 +1513,21 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var n_loose: int = mini(inner.size(), clampi(int(float(cells.size()) / 11.0), 2, 8))
     for i in range(n_loose):
         var ip: Vector3 = cell_pos.call(inner[i].x, inner[i].y)
-        _put(root, String(ac[rng.randi() % ac.size()]), ip)
+        var ak := String(ac[rng.randi() % ac.size()])
+        _tag = "floor" if ak.begins_with("floor_") else "prop"
+        _grp += 1
+        _put(root, ak, ip)
         # (HD: no furniture clusters dropped in the middle - the party fights there)
 
     # banners near the far end
     var bn: Array = T["banners"]
+    _tag = "banner"
     for sx: int in [-1, 1]:
+        _grp += 1
+        # L25: only where that spot is floor with a wall behind it - one used to hang in the void
+        var bc := far + Vector2i(sx, 0)
+        if not cells.has(bc) or cells.has(bc + Vector2i(0, -1)):
+            continue
         _put(root, String(bn[rng.randi() % bn.size()]),
              exit_p + Vector3(float(sx) * G, 0, -G * 0.45))
     if boss:
@@ -1069,10 +1596,32 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
                 var r2 := 0.75 * sc2
                 if not _free_at(at2, r2) or at2.distance_to(entry) < G or at2.distance_to(exit_p) < G or at2.distance_to(lamp) < G:
                     continue
-                _put(root, String(spec[0]), at2, rng.randf_range(0.0, 360.0), sc2, prop_tint)
-                _obs.append([at2, r2])
+                _tag = "scatter"
+                _grp += 1
+                if _put(root, String(spec[0]), at2, rng.randf_range(0.0, 360.0), sc2, prop_tint) != null:
+                    _obs.append([at2, r2])
+                else:
+                    _rejected += 1
 
-    return {"root": root, "entry": origin + entry, "exit": origin + exit_p, "obstacles": _obs.duplicate(),
+    # L25c: a creature never waits inside furniture (the party could not reach it and stood
+    # pressing at the table) - one in an obstacle goes to the nearest clear cell
+    var wob := walk_obstacles()
+    for si in spawns.size():
+        var sp: Vector3 = spawns[si]
+        if _in_obstacle(sp, wob):
+            var bestc := Vector3.ZERO
+            var bd := 1e9
+            for c: Vector2i in cells:
+                var cp: Vector3 = cell_pos.call(c.x, c.y)
+                if not _in_obstacle(cp, wob) and cp.distance_to(sp) < bd and cp.distance_to(entry) > G * 2.0:
+                    bd = cp.distance_to(sp)
+                    bestc = cp
+            if bd < 1e8:
+                spawns[si] = bestc
+    _cells = {}
+    _tag = ""
+    return {"root": root, "entry": origin + entry, "exit": origin + exit_p, "obstacles": walk_obstacles(),
+            "rejected": _rejected, "boxes": _boxes.size(), "keep_clear": keep_clear,
             "spawns": spawns, "origin": origin, "boss": boss,
             "theme": theme_key, "theme_name": String(T["name"]), "shape": shape,
             # The occupancy grid goes home with the floor so the party can be
@@ -1082,6 +1631,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             "cells": cells, "w": w, "h": h, "grid": G,
             "half": Vector2(half_w, half_h),
             "lamp": origin + lamp,
+            "flames": flames, "flame_col": lit,
             "origin_key": origin_key,
             "origin_name": String(ORIGINS[origin_key]["of"]),
             "origin_tell": String(ORIGINS[origin_key]["tell"])}
@@ -1096,4 +1646,137 @@ static func _is_corridor(cells: Dictionary, c: Vector2i) -> bool:
         return true
     if n == 2:
         return (cells.has(c + Vector2i(1, 0)) and cells.has(c + Vector2i(-1, 0))) or (cells.has(c + Vector2i(0, 1)) and cells.has(c + Vector2i(0, -1)))
+    return false
+
+## ---- L25 (Mr. E: "looks like shit - stairs, objects clipping, people get stuck"). Every piece
+## the floor places has a real footprint - an oriented box from its own meshes (cached per
+## asset) - and furniture is only set down where it fits: not into a wall (walls are 1 m thick
+## and reach 0.5 m into every cell), not into a pillar, the stairs or another cluster. A small
+## thing that lands on a plain table goes ON it; anything else that does not fit is left out,
+## and a cluster whose anchor piece does not fit is not placed at all. tools/_l25_test.gd probes it.
+const PEN_MAX := 0.15                # m a piece may touch another (the probe allows 0.2)
+const WALL_IN := 0.5                 # a wall reaches this far into its cell (kit walls are 1 m thick, centred on the edge)
+const STAIRS := "stairs_narrow"
+const STAIRS_K := 0.75
+const SOLID_KINDS := ["wall", "struct", "stairs"]       # registered, placed regardless (the shape)
+const CHECK_KINDS := ["prop", "scatter", "banner"]      # registered only where they fit
+const REST_KINDS := ["prop", "scatter", "struct"]
+static var _tag := ""
+static var _grp := 0
+static var _boxes: Array = []
+static var _box_cache := {}
+static var _rejected := 0
+static var _pool_obs: Array = []
+static var _cells := {}
+static var _half_v := Vector2.ZERO
+const CLEAR_HALF := 0.6              # m round a keep-clear cell centre (the route, the corridors)
+static var fit_checks := true        # tests switch it off to measure what placement does without it
+
+## the asset's own bounds, in its node's space at scale 1 (meshes merged, cached)
+static func _local_box(asset: String, n: Node3D) -> AABB:
+    if _box_cache.has(asset):
+        return _box_cache[asset]
+    var out := AABB()
+    var first := true
+    var st: Array = [[n, Transform3D.IDENTITY]]
+    while not st.is_empty():
+        var it: Array = st.pop_back()
+        var c: Node = it[0]
+        var xf: Transform3D = it[1]
+        if c is MeshInstance3D and (c as MeshInstance3D).mesh:
+            var a: AABB = xf * (c as MeshInstance3D).get_aabb()
+            out = a if first else out.merge(a)
+            first = false
+        for g in c.get_children():
+            if g is Node3D:
+                st.append([g, xf * (g as Node3D).transform])
+    _box_cache[asset] = out
+    return out
+
+## a placed piece's footprint on the floor: centre, axes, half sizes, height range
+static func _box_of(n: Node3D, asset: String) -> Dictionary:
+    var lb := _local_box(asset, n)
+    var k := n.scale.x
+    var a := n.rotation.y
+    var ux := Vector2(cos(a), -sin(a))
+    var uz := Vector2(sin(a), cos(a))
+    var lc := lb.get_center() * k
+    var o := Vector2(n.position.x, n.position.z) + ux * lc.x + uz * lc.z
+    return {"o": o, "ux": ux, "uz": uz, "hx": lb.size.x * k * 0.5, "hz": lb.size.z * k * 0.5,
+        "y0": n.position.y + lb.position.y * k, "y1": n.position.y + lb.end.y * k,
+        "kind": _tag, "grp": _grp, "asset": asset, "node": n}
+
+## how deep two footprints interpenetrate (0 = apart): the separating-axis test on the floor,
+## and the height ranges
+static func pen(a: Dictionary, b: Dictionary) -> float:
+    var dy := minf(float(a["y1"]), float(b["y1"])) - maxf(float(a["y0"]), float(b["y0"]))
+    if dy <= 0.0:
+        return 0.0
+    var best := dy
+    var d: Vector2 = b["o"] - a["o"]
+    for ax: Vector2 in [a["ux"], a["uz"], b["ux"], b["uz"]]:
+        var ra := float(a["hx"]) * absf((a["ux"] as Vector2).dot(ax)) + float(a["hz"]) * absf((a["uz"] as Vector2).dot(ax))
+        var rb := float(b["hx"]) * absf((b["ux"] as Vector2).dot(ax)) + float(b["hz"]) * absf((b["uz"] as Vector2).dot(ax))
+        var ov := ra + rb - absf(d.dot(ax))
+        if ov <= 0.0:
+            return 0.0
+        best = minf(best, ov)
+    return best
+
+## the deepest this footprint would sit in anything already placed
+static func _blocked(bx: Dictionary) -> float:
+    var worst := 0.0
+    # L25b: off the floor (a cluster reaching past a doorway into the void) is never a fit
+    if not _cells.is_empty():
+        var o: Vector2 = bx["o"]
+        if not _cells.has(Vector2i(roundi((o.x + _half_v.x) / G), roundi((o.y + _half_v.y) / G))):
+            return 99.0
+    for b: Dictionary in _boxes:
+        if String(b["kind"]) == "clear":
+            if pen(bx, b) > 0.0:
+                return 99.0            # nothing stands on the route or in a doorway
+            continue
+        worst = maxf(worst, pen(bx, b))
+        if worst > PEN_MAX:
+            return worst
+    return worst
+
+## a small thing (a plate, a candle, a bottle) that lands on a plain table of its own cluster
+## goes on its top instead; a decorated table already has its own and the thing is left out
+static func _try_table_top(n: Node3D, asset: String, bx: Dictionary) -> bool:
+    if float(bx["y1"]) - float(bx["y0"]) > 1.0 or _tag != "prop":
+        return false
+    for b: Dictionary in _boxes:
+        if int(b["grp"]) != _grp or not String(b["asset"]).begins_with("table") or String(b["asset"]).contains("decorated"):
+            continue
+        if pen(bx, b) <= 0.0:
+            continue
+        n.position.y = float(b["y1"])
+        var on := _box_of(n, asset)
+        var others := 0.0
+        for c: Dictionary in _boxes:
+            if c != b:
+                others = maxf(others, pen(on, c))
+        return others <= PEN_MAX
+    return false
+
+## L25c: what a delver walks AROUND - one circle per real piece that stands in the way (furniture,
+## columns, growth: anything taller than a shin), sized from its measured footprint, plus the lava
+## pools. (It was one fixed 1.5-2 m circle per cluster, which covered cell centres the route ran
+## through, while pillars and columns were not obstacles at all.)
+static func walk_obstacles() -> Array:
+    var out: Array = _pool_obs.duplicate()
+    for b: Dictionary in _boxes:
+        if not (String(b["kind"]) in ["prop", "scatter", "struct"]):
+            continue
+        if float(b["y1"]) - maxf(0.0, float(b["y0"])) < 0.4 or float(b["y0"]) > 1.0:
+            continue
+        var o: Vector2 = b["o"]
+        out.append([Vector3(o.x, 0, o.y), maxf(float(b["hx"]), float(b["hz"])) * 0.85])
+    return out
+
+static func _in_obstacle(p: Vector3, obs: Array) -> bool:
+    for o in obs:
+        if Vector2(p.x - (o[0] as Vector3).x, p.z - (o[0] as Vector3).z).length() < float(o[1]) + 0.6:
+            return true
     return false

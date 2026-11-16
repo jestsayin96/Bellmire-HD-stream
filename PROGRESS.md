@@ -6157,3 +6157,10 @@ Two files touched and no others: scripts/chatcmd.gd and data/commands.json.
 - Took backlog item 5 instead. New top-level `miniboss_feed` in data/lore_lines.json: all fourteen art-lane minibosses (drillmaster, scrapwright, gaoler, snuffer, sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker, bellman, boiler), each with arrive / act / broken / fall lines, 140 lines total, plain register, plus a `_note`. {name} marks a hero where used.
 - VALIDATION OK: all four data files parse; every pre-existing key and value identical, key order and CRLF preserved; only addition is `miniboss_feed`.
 - CODE WIRING: the game build reads miniboss_feed.by_key[<miniboss key>][arrive|act|broken|fall] and posts one at random to the feed on set-piece spawn, each mechanic firing, the weakness being broken, and death. Lines containing {name} need a hero substituted. Also still owed by code: "epic" -> "very rare" in fishing.json, angler.gd, fishing.gd, economy.gd and chatcmd.gd's order array.
+
+## C-63 (2026-11-16) - standing backlog item 4: bosses and potions (bosses.json, potions.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-62 merged); told it to take the stalest standing-backlog item. That is bosses and potions: last touched in C-55, while disasters (C-56), epitaphs/barks (C-57), Phase 2 words (C-60) and miniboss feed (C-62) all came after. Fishing stays with the game build.
+- data/bosses.json: +12 lesser_uniques (3 each: Hollow King, Grubmother, Rattling Host, Nightwing) and +12 greater_uniques (3 each: Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified lords, not new lords; each keeps its lord's shape and sits inside that lord's existing hp/speed/attack range. Now 166 lesser, 160 greater.
+- data/potions.json: +16 brews (3 tier 1, 5 tier 2, 4 tier 3, 4 tier 4), trade-named, using only existing states. Now 192 potions.
+- VALIDATION OK: both files parse; every pre-existing entry and key unchanged (text insertion only, LF kept); no duplicate names, keys or aliases; every gives/cures resolves in `states`.
+- CODE WIRING: none - same keys and shapes as existing entries.

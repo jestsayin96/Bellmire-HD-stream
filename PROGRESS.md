@@ -5883,3 +5883,9 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Note: the plan says 230 accessories; the file holds 254 (the C-54 additions), all labelled.
 - VALIDATION OK: file parses; every pre-existing key/value compared against HEAD and identical; the only additions are "rarity" on the 119+254 entries and `_note_c58`; git diff shows 'deletions' only because single-line accessory entries and the last tier_name line were rewritten to carry the new key.
 - CODE WIRING: the shared ladder constant (junk<common<uncommon<rare<very rare<legendary<artifact) is still to be written, and "epic" -> "very rare" in fishing.json/chatcmd.gd (C-55 step 1/3); shops and trader must treat "artifact" as outside the stock gate (step 4); hub/icons read items.json `rarity` for border colour (step 5). Loaders that ignore unknown keys need no change.
+
+C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only)
+- WORK_PLAN has no unchecked CONTENT-owned item (all open items are DESKTOP/LAPTOP/HUD), so the standing backlog applied; item 3 (E3PO) was the longest-untouched pool (last C-52).
+- data/lore_lines.json e3po: +102 lines appended to existing lists: raid, disaster, festival, town_talk +12 each; viewer_roll crit/high/low/fumble +10 each; intro +6; says +8. New key `_note_c59`. No duplicates of existing lines. He still cannot die.
+- VALIDATION OK: all four data files parse; every pre-existing key/value in lore_lines.json is identical (existing lists are strict prefixes of the new ones); items.json, bosses.json, potions.json untouched. git diff shows 'deletions' only where a list's last line gained a trailing comma.
+- CODE WIRING: none new - same e3po keys as before; viewer_roll outcome pools feed T5 and simply have more choices. Loaders that pick a random entry need no change.

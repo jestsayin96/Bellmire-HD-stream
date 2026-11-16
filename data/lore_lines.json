@@ -2341,7 +2341,13 @@
       "'You will know me by the helm and the sigh. Both are standard issue.'",
       "'I hold the door. That is the whole title. Everything else is paperwork.'",
       "E3PO inspects you, finds nothing wrong, and is faintly disappointed.",
-      "'The Ford is safe because it is boring to attack. I make it boring.'"
+      "'The Ford is safe because it is boring to attack. I make it boring.'",
+      "E3PO arrives with the sound of a decision being made.",
+      "The Commander lets the gate swing wide behind him, as if it had been waiting.",
+      "E3PO takes the high ground, which has quietly become his by habit.",
+      "The guard parts in two, and E3PO fills the gap without being asked.",
+      "E3PO checks the rooftops, the road and the sky, in that order. All are his problem.",
+      "The Commander appears at the front, and the front finally feels like one."
     ],
     "withdraw": [
       "E3PO is hauled to the barracks, swearing he is fine.",
@@ -2507,7 +2513,15 @@
       "The Commander glances at the sky, the road, the wall, and the cooks, in order of likely disaster.",
       "'If you ever wonder why we drill, it is the same reason you wear boots.'",
       "'Nobody is ever ready. We are merely prepared, and that is better.'",
-      "E3PO sniffs the wind like a hound and writes nothing down."
+      "E3PO sniffs the wind like a hound and writes nothing down.",
+      "'A guard that waits is a guard that wins. Mostly I wait. Loudly.'",
+      "'I cannot fall. It is not arrogance; it is paperwork.'",
+      "'Discipline is just courage with a schedule.'",
+      "'If you are afraid, stand behind me. If you are not, stand beside me and prove it.'",
+      "'Bellmire stands. That is the entire plan. Most plans are longer and fail sooner.'",
+      "'I have been wounded. I have not been defeated. The bed rests are different things.'",
+      "'No retreat. Only repositioning, with enthusiasm.'",
+      "'Look sharp. The town is watching the wall, and the wall is watching me.'"
     ],
     "town_talk": [
       "They say E3PO has held the gate since before there was a gate.",
@@ -2591,7 +2605,19 @@
       "'Whatever we build, we build it so that the old can sit and the young can run.'",
       "E3PO tugs a loose shutter back into place on his way past. He did not stop walking.",
       "'A town is a promise and a roof. Keep both good.'",
-      "'The people talk more than the wall does. Both tell me something.'"
+      "'The people talk more than the wall does. Both tell me something.'",
+      "They say E3PO has never once been late, and the sun has noticed.",
+      "A cooper swears E3PO walked through a wall of arrows and straightened his collar afterward.",
+      "Children play 'Commander' and the loser always has to be the raider.",
+      "Old Margit says E3PO taught her mother to curtsey. Nobody asks which of them was nervous.",
+      "The tavern keeper holds a stool for E3PO. He has never sat on it. It is polished anyway.",
+      "Someone carved E3PO's boot-print into the gate flagstone. It is the best-kept stone in town.",
+      "They say the raiders' camp whispers his name and goes quiet.",
+      "The blacksmith claims E3PO's armour dents flatten themselves overnight.",
+      "A merchant asked E3PO the time. He is still not sure whether he was answered or inspected.",
+      "The bell-ringer says E3PO is the only man who can make the morning hour arrive on schedule.",
+      "Travellers ask who commands the guard. The answer is always a long, proud pause.",
+      "They say E3PO once outstared a winter storm. The storm blinked first."
     ],
     "_note_extras": "Added keys (C-cycle 5): raid / disaster / festival lines, and viewer_roll keyed by outcome (crit, high, low, fumble) for the d20. Same voice as 'says'. Additive; dead until wired.",
     "raid": [
@@ -2674,7 +2700,19 @@
       "'Steady. Steady. Now.' The line moves as one.",
       "E3PO sets his boots and the whole front rank seems to set with them.",
       "'Nobody falls back until I say. I shall not say.'",
-      "'The scar has its raiders. We have the Ford. We have also dinner waiting.'"
+      "'The scar has its raiders. We have the Ford. We have also dinner waiting.'",
+      "E3PO takes the first blow on his shield and mentions it was a poor one.",
+      "'Archers on the left, spears on the right, and nobody on my front, please. I have it.'",
+      "The Commander holds the breach with one foot on a fallen ladder and a lecture ready.",
+      "E3PO rolls a barrel across the gate road and calls it strategy. It works.",
+      "'They came for the bell. They may leave with a headache.'",
+      "The Commander counts the raiders aloud, finds the number acceptable, and advances.",
+      "E3PO catches a thrown axe by the haft and returns it with interest.",
+      "'Hold the line! If the line breaks, I am the new line.'",
+      "The Commander wades into the thick of it and the thick of it rearranges itself.",
+      "E3PO shouts the watchword once. The whole wall answers it.",
+      "Torches at the treeline, and E3PO already walking toward them with his helm unlaced.",
+      "'Steel is cheap. Nerve is dear. Spend the nerve.'"
     ],
     "disaster": [
       "E3PO has the bucket line running before anyone thinks to ask him.",
@@ -2756,7 +2794,19 @@
       "'It is only a disaster if we let it be the last thing that happens.'",
       "E3PO carries a stranger's grandmother on one arm and a ladder on the other.",
       "'Everyone to the chapel square. Count off. I shall find you the stragglers.'",
-      "'It is not the first. It shall not be the last. It shall not be the worst, if I have my way.'"
+      "'It is not the first. It shall not be the last. It shall not be the worst, if I have my way.'",
+      "E3PO stands waist-deep in the flood, passing sandbags like they owe him money.",
+      "'Lightning is only a loud neighbour. Back to work.'",
+      "The Commander hauls a roof beam clear and sets it down as though it were polite.",
+      "E3PO organises the scattered townsfolk into lines before the dust has settled.",
+      "'No panic in my town. Panic is not on the roster.'",
+      "The Commander walks the smoking street at a measured pace, and doors open behind him.",
+      "E3PO lifts a collapsed cart off a baker and waves off the thanks.",
+      "'The sky is falling in places. Pick a place that is not one of them.'",
+      "The Commander posts guards at every well and turns his back on the fire. He trusts them.",
+      "E3PO carries the chapel bell back up the tower himself, grumbling about the weight of sin.",
+      "'Calamity has a schedule. I have a bigger one.'",
+      "The Commander takes the roll after the storm. Every name answers. He nods once."
     ],
     "festival": [
       "E3PO attends the feast in full harness and declines a chair, as always.",
@@ -2830,7 +2880,19 @@
       "E3PO claps the beat for exactly four bars, then resumes patrol.",
       "'Sing it loud. The scar listens, and the scar can hear that we are happy.'",
       "The Commander has a small garland on his helm and has declined to remark on it.",
-      "'The festival is a duty. Drink it responsibly, but drink it.'"
+      "'The festival is a duty. Drink it responsibly, but drink it.'",
+      "E3PO stands at the edge of the dance floor, tapping his boot a half-beat behind.",
+      "'I am off duty. I am simply on duty somewhere nearby.'",
+      "The Commander carves the roast with a ceremonial sword and sets it down before it gets ideas.",
+      "E3PO accepts a flower crown and wears it through the whole feast without comment.",
+      "'Drink to the guard! I will pour. I will not drink. Someone must stay sharp.'",
+      "The Commander lifts a laughing child to his shoulders and keeps one hand on his sword anyway.",
+      "E3PO judges the archery contest and quietly corrects everyone's stance.",
+      "'A town that cannot celebrate is not worth defending. Pass the bread.'",
+      "The Commander salutes the fiddler. The fiddler nearly drops the fiddle.",
+      "E3PO stays until the last lantern goes out, then walks the streets once more.",
+      "'Merry? I am merry. Do not tell the recruits.'",
+      "The Commander wins the tug-of-war single-handed, then insists on a rematch for fairness."
     ],
     "viewer_roll": {
       "crit": [
@@ -2879,7 +2941,17 @@
         "'A natural twenty. I have been waiting years to say that I saw it.'",
         "The Commander stands, salutes, and means every inch of it.",
         "'Print it. Frame it. Show it to the recruits.'",
-        "E3PO does a small, practised smile. It is the one he saves."
+        "E3PO does a small, practised smile. It is the one he saves.",
+        "'Perfect. I will remember this when I am tired.'",
+        "The Commander removes his helm for you. Witnesses fall silent.",
+        "'That is what the drill book dreams of. Well struck.'",
+        "E3PO claps once, and the whole wall remembers how.",
+        "'Magnificent. Nobody tell the recruits it can be done; they would expect it.'",
+        "The Commander bows his head a fraction. In the barracks it becomes a legend by supper.",
+        "'Flawless. I am entering this in the ledger in ink.'",
+        "E3PO nods slowly, the way mountains agree.",
+        "'Take a bow. A short one. We are still at work.'",
+        "The Commander says your name aloud, once, with feeling. The guard cheers."
       ],
       "high": [
         "'Adequate. High praise, from me.'",
@@ -2927,7 +2999,17 @@
         "'Good throw. The dice are with you. Stay with them.'",
         "'Better than most. I mention it so you will not ask me twice.'",
         "E3PO nods approval and does not use the word 'approval'.",
-        "'You are doing what the book says. Do it again, with a little more swagger.'"
+        "'You are doing what the book says. Do it again, with a little more swagger.'",
+        "'Good. Do that again and I will call it habit.'",
+        "The Commander grants you a half-smile. It is the best on offer.",
+        "'Solid work. Solid is my favourite word.'",
+        "E3PO tips his helm an inch. The inch counts.",
+        "'That will do nicely. I do not say that twice a year.'",
+        "The Commander rates it above average and below perfect, which is where he keeps most things.",
+        "'Steady hand. The guard could use more of those.'",
+        "E3PO nods approval and moves on before it can go to your head.",
+        "'Well rolled. Even I could not have done better. Almost.'",
+        "The Commander files it under 'commendable' and locks the drawer."
       ],
       "low": [
         "'Luck is a resource and you have spent yours. Use skill.'",
@@ -2975,7 +3057,17 @@
         "'A poor throw. A poor throw is only a lesson that has not yet been spent.'",
         "E3PO nudges the die back toward you. 'Try again, with feeling.'",
         "'The dice were cold. Be warm. It balances.'",
-        "'Noted. Forgotten. Next.'"
+        "'Noted. Forgotten. Next.'",
+        "'Not your best. Not your worst. Mostly it was loud.'",
+        "The Commander studies your result, sighs, and offers a spare shield.",
+        "'Rough. Tomorrow is also a day.'",
+        "E3PO pats your shoulder with a gauntlet. It rattles your teeth and your pride.",
+        "'You had the right idea. The dice had other plans.'",
+        "The Commander says nothing, which carries a full sentence.",
+        "'Dust off. Look forward. Do not look at me.'",
+        "E3PO adjusts your stance without a word and steps back.",
+        "'It happens to the best of us. It happens often to the rest.'",
+        "The Commander writes 'tried' in his book, and underlines it generously."
       ],
       "fumble": [
         "'I have seen worse. I have not seen worse today.'",
@@ -3023,7 +3115,17 @@
         "'A one. A glorious, thundering one. We shall be telling it at breakfast.'",
         "E3PO covers his mouth with a gauntlet and visibly fails to cover the smile.",
         "'The dice have opinions, and today they are rude.'",
-        "The Commander says 'Well' and then nothing for several seconds, which is its own sort of kindness."
+        "The Commander says 'Well' and then nothing for several seconds, which is its own sort of kindness.",
+        "'I will pretend I did not see that. The wall saw it. I cannot speak for the wall.'",
+        "The Commander stares into the middle distance for a very long time.",
+        "'Remarkable. I did not know a sword could go that direction.'",
+        "E3PO closes his eyes and counts to ten. He reaches fourteen.",
+        "'We will call it a training exercise. For you. For the rest of us it is a story.'",
+        "The Commander hands you a mop, gently, as if it were a medal.",
+        "'Disaster is a strong word. I am using three of them.'",
+        "E3PO looks at the sky and asks it, quietly, why.",
+        "'Never mind. The guard has seen worse. Last Tuesday, for instance.'",
+        "The Commander writes your name in the book, then crosses it out, then writes it again, smaller."
       ]
     },
     "_note_c17": "Added keys (C-cycle 17): tier_up (one line per growth_tiers stage, matched by name), night_watch, recruit, viewer_down, viewer_returns, lord_sighted. Same voice as 'says'. Additive; dead until wired.",
@@ -3714,7 +3816,8 @@
         "'Bellmire. A city by every measure save the clerk's. I stand on the same gate I started on.'"
       ]
     },
-    "_note_c52": "Widened C-cycle 52: 12 thinner pools gain 14 lines each (168 total): rank_up, trader_arrives, dispute, delve_dispatch, lord_cleared, drill, hurt, viewer_cosmetic, recruit, viewer_down, viewer_returns, lord_sighted. Same string shape as before; additive; dead until wired."
+    "_note_c52": "Widened C-cycle 52: 12 thinner pools gain 14 lines each (168 total): rank_up, trader_arrives, dispute, delve_dispatch, lord_cleared, drill, hurt, viewer_cosmetic, recruit, viewer_down, viewer_returns, lord_sighted. Same string shape as before; additive; dead until wired.",
+    "_note_c59": "Added lines (C-cycle 59): E3PO raid, disaster, festival, town_talk +12 each; viewer_roll crit/high/low/fumble +10 each; intro +6; says +8 (102 total). Appended to the existing lists, same string shape and voice. He still cannot die. Additive; dead until wired."
   },
   "town_life": {
     "_note": "Ambient Bellmire flavour as the town grows - crier calls, market and guild chatter, building news. For the desktop's town.gd if it wires a ticker; content worker never touches code. Additive; dead until wired.",

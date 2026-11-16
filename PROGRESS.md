@@ -5868,3 +5868,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Every `cost` statement and every `begin`/`pass` untouched; no new mechanics implied.
 - VALIDATION OK: file parses; new entries match existing list shapes; every pre-existing key/entry compared against the pre-edit copy and unchanged (git diff deletions are only trailing-comma changes on former list ends); no duplicate lines.
 - CODE WIRING: none needed - same keys and shapes (the loader's random pick over during/begin_alt/pass_alt widens automatically).
+
+## C-57 (2026-11-16) - standing backlog item 5: epitaphs, descend, cleared, barks (lore_lines.json only)
+- WORK_PLAN CONTENT items C1-C5 all ticked; standing backlog applied. Item 5 was the stalest (last C-50) and the most repeated on stream.
+- data/lore_lines.json: +58 epitaphs (now 377), +40 descend (240; 16 keep the "%s %s" name+verb shape, the rest are bare narration like the existing mix), +40 cleared (238; "Floor %d" only where the existing lines use it), +58 barks across enter/lord/trap/hurt/drink/misfire (9/10/10/10/9/10). 196 lines total.
+- No dungeon floor count is stated anywhere; no new mechanics implied.
+- VALIDATION OK: file parses; every pre-existing key/entry compared against HEAD and unchanged (existing lists are an exact prefix of the new ones; git diff deletions are only trailing-comma changes on former list ends); format specifiers checked (descend 0 or 2 %s, cleared 0 or 1 %d, epitaphs none); no new duplicates (a few duplicates already in descend/enter/trap/hurt/misfire pre-date this cycle and were left alone, additive only).
+- CODE WIRING: none needed - same keys and shapes (the loaders' random pick widens automatically).

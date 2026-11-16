@@ -6576,3 +6576,34 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
   byte-identical to b04e266's state. L56 is a measurement, not a bot change, so there is no command drift
   to re-check in either direction and the 26-command doc still matches the data.
 - NOTHING FOR THE GAME BUILD LANE in twitch_eventsub.gd this cycle, and nothing for Mr. E to decide.
+## D-cycle D91f - THE ALCOVE IS GONE; THE GATE IS STILL NOT ZERO, AND I AM STOPPING AS TOLD (game build, 2026-11-16 13:08-13:35 CT)
+TAKE THIS NEXT (12:58) gave game build D91, fifth slot: take origin/d91d-wip (526309a), MOVE THE PROP instead of
+the settle, ONE 20-minute soak, and if it still reads non-zero STOP and say so.
+- LOCK: read by process (none alive) and file (IDLE 12:56:21, HUD). Claimed 13:10:07 (named finish 13:38),
+  refreshed 13:13:15 on relaunch, released IDLE 13:35:01 with no Godot alive. One claim, 25 min, inside :07-:40.
+- TOOK 526309a: merged origin/d91d-wip into the worktree (the D91e settle work came with it, unchanged).
+- WHAT THE POCKET ACTUALLY WAS (tools/_d91f_probe.gd, read-only): NOT a store yard. There is one store in the
+  town and it is at (58,9). The north door at (32.47,-69.38) belongs to a plain house standing ON THE MARKET'S
+  STALL RING (13.3 m from the well), and the FarmCrate_Apple 2.5 m off its step is a stall's GOODS, set by
+  _dress_square at sp + side*4.2 - with a Bench 1.7 m off the other hand. Door, bench, crate and the stall
+  cart's traders made the pocket. The D91d comment calling it "the north store's yard" was wrong.
+- THE FIX (scripts/town.gd, _dress_square, backup town.gd.bak_d91f): a stall's good may not stand within
+  MARKET_DOOR_CLEAR = 3.6 m of any house door step; it is moved along the line away from the door to exactly
+  3.6 m, or dropped if nothing clear (none were). The dice are drawn exactly as before (good, offset, yaw),
+  so every other good in the square keeps its place. ONE good moved (D91F_SQUARE goods moved: 1): the crate
+  went (34.91,-69.94) -> (35.97,-70.19). Nothing else in the town changed.
+- LOOKED AT: renders/cycles/d91f/door_high.png and door_eye.png - the step opens onto the street with the bench
+  on one hand and open ground on the other; the crate sits back by the stall.
+- THE ONE 20-MINUTE SOAK (renders/cycles/d91f/town_soak20.log): 1200 s, 90987 frames, up to 231 bodies.
+  NOTHING AT THE ALCOVE - zero overlap events anywhere near (33.4,-71.1) for the first time in five slots.
+  0 body-frames in a footprint of 17,350,860. >1 cm overlaps: 0 (ok). ANY overlap: 2 frames, worst 0.6 mm -
+  D91_TOWN FAIL (1 failed). Both frames are two peasants at (83.2,48.4), 0.5 m off the TAVERN's door step
+  (83.15,48.92); probe_8348.log shows no prop within 5 m but the tavern itself - open street, five townsfolk
+  standing on the step at boot. That is a door crowd, not a pocket, and moving a prop cannot fix it.
+- GATES (run in parallel with the soak): parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR 0 of
+  2044, INPROP 0, MON_INPROP 0 of 252; TWITCH_PARSE OK; TOWNWALK in_solid 0/17567 PASS, raid 0/3249, and
+  stuck_on_route 0 (Cort's bench did not show this run); _delve_test 0 SCRIPT ERROR, party fighting on floor 2.
+- NOT ON laptop: the gate is zero and 2 frames is not zero. Checkpointed on origin/d91d-wip. PER THE RULING I
+  AM NOT SPENDING A SIXTH SLOT. What the supervisor/Mr. E must decide: whether a 0.6 mm touch for 2 frames of
+  91k on an open tavern step meets D91 (every >1 cm criterion passed), or whether D91 needs the door-step
+  crowd spread (townsfolk.gd) as a new, separately-named item.

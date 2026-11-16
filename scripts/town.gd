@@ -1195,6 +1195,22 @@ func river_z_fast(x: float) -> float:
 ## The square is LAID OUT, not scattered: a well in the middle, stalls on a
 ## ring facing it, set between the streets that run into the square so no
 ## stall blocks a way in.
+## D91f: the nearest house door step within r of p (2D), or INF
+const MARKET_DOOR_CLEAR := 3.6
+var _square_goods_moved := 0
+func _door_near(p: Vector3, r: float) -> Vector3:
+    var best := Vector3.INF
+    var bd := r
+    for plot in plots:
+        if not plot.has("door"):
+            continue
+        var d: Vector3 = plot["door"]
+        var l := Vector2(d.x - p.x, d.z - p.z).length()
+        if l < bd:
+            bd = l
+            best = d
+    return best
+
 func _dress_square() -> void:
     if not centre_of.has("market"):
         return
@@ -1229,11 +1245,29 @@ func _dress_square() -> void:
         for k in range(2):
             var g: String = goods[rng.randi() % goods.size()]
             var off := side * (4.2 if k == 0 else -4.2) + dir * rng.randf_range(-0.6, 0.6)
-            _props_made += int(_spawn(PROPS, g, sp + off, rng.randf_range(0.0, TAU)))
+            var gyaw := rng.randf_range(0.0, TAU)     # drawn either way: the other goods keep their dice
+            # D91f: a good on the stall ring must not stand in front of a house door. The north
+            # store's door (32.5,-69.4) opened onto a FarmCrate_Apple 2.5 m off, with a bench on the
+            # other hand - a pocket every soak since D91c ended in (the five-body crush at
+            # (33.4,-71.1)). Move the good along the ring, away from the door, until the step is clear.
+            var gp := sp + off
+            var away := side * (1.0 if k == 0 else -1.0)
+            for _try in range(3):
+                if _door_near(gp, MARKET_DOOR_CLEAR) == Vector3.INF:
+                    break
+                var dn := _door_near(gp, MARKET_DOOR_CLEAR)
+                var push := Vector3(gp.x - dn.x, 0.0, gp.z - dn.z)
+                away = push.normalized() if push.length() > 0.01 else away
+                gp = Vector3(dn.x, gp.y, dn.z) + away * MARKET_DOOR_CLEAR   # keep the ring's y: _spawn adds the ground
+                _square_goods_moved += 1
+            if _door_near(gp, MARKET_DOOR_CLEAR) != Vector3.INF:
+                continue                              # nowhere clear: the stall keeps one good
+            _props_made += int(_spawn(PROPS, g, gp, gyaw))
         if i % 2 == 1:
             _props_made += int(_spawn(PROPS, "Bench", c + dir * 5.0, atan2(dir.x, dir.z)))
         if i % 3 == 0:
             _props_made += int(_spawn(PROPS, "Banner_1", c + dir * 8.0 + side * 1.5, face))
+    print("D91F_SQUARE goods moved off a door step: %d" % _square_goods_moved)
 
 func _stone() -> StandardMaterial3D:
     if _mat.has("_stone_tp"):

@@ -6274,3 +6274,10 @@ spent polling.
 - Every new while_alt restates the SAME cost as that camp's canonical `while`, reworded and never widened. name, leader, of, appears, while, cleared and note untouched. No new camp, no new named leader, no floor count.
 - VALIDATION OK: file parses; every pre-existing key and list prefix byte-identical against HEAD (parsed-value compare, per camp); key sets per camp unchanged; no duplicate lines among camp alts; CRLF kept; nothing outside `events` changed.
 - CODE WIRING: none needed - same keys and shapes; the random pick over appears_alt/while_alt/cleared_alt widens automatically.
+## U27 - L73 CAPTURE DONE, L73_LONG OK (HUD, 2026-11-16 ~09:55 CT, file-only; engine lock held by game build)
+- The 12-min director-clock capture from the 08:58 claim finished: L73_LONG events=5 cuts_logged=103 fails=0, L73_LONG OK.
+  Each of raid t=100/520, death t=220/620, delve_start t=400 produced a first cut within 1.0-7.0 s and told=true (a viewer can tell from the camera alone).
+  quiet_samples=1044 quiet_median_dist=20.3. Pace seen at 0.6 (raid) / 1.0 / 1.4 (quiet) in director_decision_log.txt.
+- LOOKED AT: renders/cycles/20261116_l73long/l73_raid_100_a.png and l73_death_620_a.png. Raid frame: boss title card AND the NOW FIGHTING banner both show the same name at once (duplicate, boss_bar/other file - not mine to edit) and the boss card covers the DIRECTOR pane label; a Chronicle tooltip sits on the scroll. Death frame reads quiet and wide as intended.
+- Did NOT launch Godot: RUN_LOCK shows game build RUNNING 09:31 (finish ~10:00), no Godot process alive at 09:54 but under 45 min and inside its named window.
+- NEXT: L74 (feed/theme at 100/125/150% during a raid) on the next free engine slot. Mr. E decision: none.

@@ -283,3 +283,95 @@ touched. The keys read cleanly on the right hip.
 
 Eleven creatures still to convert. The Scrapwright and the Bellman remain the
 recorded skip - a machine and a shroud, neither with man-proportions.
+
+
+## REGISTER CONVERSION 4 OF 14 - THE SNUFFER (`snuffer_chibi`)
+
+Sheet: `renders/art/minibosses/_snuffer_register.png` (original left, chibi
+right, a real 2.45 m posed KayKit Knight beside each), plus
+`renders/art/minibosses/snuffer_chibi/hero_front|side|back.png`. All three
+looked at. Ratio 1.06, pair 4.21 m, fits the fixed frame, blank check 2 files
+0 failures, engine BLENDER_EEVEE.
+
+### WHY IT IS CONVERTED AND NOT SKIPPED
+
+The first three were MEN. The Snuffer is a lamp-stand, and the easy call was to
+put it with the Scrapwright and the Bellman in the recorded skip. That would
+have been wrong, because **register is not man-proportions - it is how much
+mass a shape carries and how many shapes there are.** The Scrapwright (a
+lopsided mound) and the Bellman (a hanging shroud) are already bold masses and
+read beside a chibi knight untouched. **The Snuffer was made of wire**: tripod
+legs r 0.070, column r 0.105, cross-arms r 0.042, four PALE flute ribs at
+r 0.016, and eighteen candles at r 0.040-0.045. A hero's arm is 0.29 thick. At
+pane distance that is not eighteen candles, it is lint, and the creature reads
+as one dark hat floating on a cloud of it. Same failure as the pipe-cleaner
+men, in the one form a non-humanoid can have it.
+
+Two things this one forced that the three men did not: **the fix is COUNT, not
+only thickness** (eighteen candles thickened would weld into a hedge, so
+eighteen become six and the six ring-candles are dropped outright - and the
+count IS the mechanic, so a candle that cannot be counted is a mechanic that
+cannot be read); and **the pale is a budget the ribs were spending** (the
+Stoker's fault 4 in object form - pale hairlines spread over the whole body
+while the one lit candle, the only colour and the whole point, was a 0.045
+stub). The ribs are gone and the lit candle is now the biggest on the creature.
+
+### FOUR PASSES, ONE CHANGE AND ONE RENDER EACH
+
+1. Build: every member to a chibi weight, 18 candles -> 6, ribs removed.
+2. **I OVERCORRECTED AND PUT THE MASS AT THE BOTTOM.** Legs at 0.180 splayed to
+   0.56 made the base the heaviest thing on it - a camera tripod walking - and
+   the cone at 0.58 had stopped dominating, so the "snuffer cone where a head
+   belongs" read went with it. One read (where the mass sits), bought in three
+   places: legs to 0.138 and drawn in to 0.47, cone to 0.74 x 0.56, column left
+   exactly as it was so the change is legible as a ratio. Dropping the cone to
+   keep the top at 2.60 also closed **a clip found in the pass 1 sheet**: the
+   upper arm's candles topped out at 2.22, inside the cone's flare.
+3. **THE CONE ATE THE CANDLES AND IT BECAME A MUSHROOM.** A 0.78 cap over 0.70
+   and 0.46 arms puts every candle in its shade and hides the upper two
+   outright; a wide cap on a stubby stem is a toadstool. Arms to 1.12 / 0.94 so
+   every cup clears the rim. Nothing else touched.
+4. **FROM THE SIDE IT WAS A MAN IN A STRAW HAT.** Both arms ran on X only, so at
+   azimuth 90 the candles collapsed onto the column and what was left was a
+   conical hat over a stumpy body with legs, holding a light - a FIGURE, the one
+   thing a miniboss may never read as. Inherited, not introduced (the original's
+   arms are X-only too), but a bolder body has more to be mistaken for a torso.
+   The lower tier becomes a CROSS (one candle at each of four ends) and the
+   upper bar turns onto Y. **Still six candles** - the count did not move.
+
+### Faults I can still see - named, not hidden (eleven)
+
+1. **The cone's dark rim reads as a separate SAUCER** with a visible seam - a
+   lampshade sitting on a plate rather than one piece of sooted tin. Front and
+   side both.
+2. **The soot streaks read as UMBRELLA RIBS.** Five dark ribs down a smooth
+   cone make a parasol, which is the opposite of what they are for.
+3. **The cross-bars end in flat cut-offs** and read as scaffolding planks, not
+   as wrought iron. The ends want a boss or a curl.
+4. **Each candle reads as a BOLLARD.** The cup at 0.165 is nearly as wide as
+   the candle is tall, and the dead wick (a 0.040 sphere) is invisible at this
+   distance. They are countable shapes; they are not legibly candles.
+5. **The six dead candles are nearly the body's own value.** `bone` at wear 0.90
+   dulls to within a shade of `body`, so the pale budget saved from the ribs did
+   not actually land anywhere except the lit one.
+6. **From the front the two front legs read as a pair of legs.** The side view
+   kills the figure read; the front does not, and the tripod's third leg hides
+   behind the column there, so it looks like two.
+7. **The column's two dark collars read as rings on a mushroom stem**, the
+   lower one especially, sitting at an odd height with nothing meeting it.
+8. **The held arm merges with the lower cross-bar from the front** - the lit
+   candle looks like it is standing on the bar rather than being held. The mitt
+   only reads from the side.
+9. **The cone is smoother than anything on the hero.** 22 segments against a
+   KayKit body's hard facets; it is the one surface that does not belong.
+10. **The tripod pads are small** relative to the legs above them and read as
+    rubber feet rather than as iron.
+11. **Ratio 1.06**: it stands 6% taller than a hero, and a set piece the party
+    does not look up at is not a set piece. That is `bestiary.gd`'s `h`, a GAME
+    BUILD number (h = authored + 1.30 m), not mine.
+
+Corridor: the pair is 4.21 m wide and the creature's own footprint is well
+inside the 11.0 m clear span of a three-cell corridor. **CORRIDOR-SAFE** - no
+spawn gate needed for it.
+
+Ten creatures still to convert after this one.

@@ -1633,3 +1633,166 @@ def gaoler_chibi():
 
 
 BUILDERS.update({"gaoler_chibi": gaoler_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 4 OF 14 - THE SNUFFER
+#
+# The first three conversions were MEN: seven-head realistic figures with 0.10 m
+# limbs, rebuilt on the Knight's measured proportions. THE SNUFFER IS NOT A MAN.
+# It is a lamp-stand that walks, and it would be easy to call it skipped on that
+# ground the way the Scrapwright (a machine) and the Bellman (a shroud) are
+# skipped - MY OWN SKIP PROPOSAL, recorded 16 Nov, and it stands for those two.
+#
+# IT IS NOT SKIPPED, AND HERE IS WHY: register is not the same thing as
+# man-proportions. Register is HOW MUCH MASS A SHAPE CARRIES AND HOW MANY SHAPES
+# THERE ARE. The Scrapwright and the Bellman are already bold masses - a lopsided
+# mound and a hanging shroud - so they read beside a chibi knight without being
+# touched. THE SNUFFER IS MADE OF WIRE. Measured off its own builder:
+#     tripod legs   r 0.070 -> 0.055
+#     column        r 0.105 -> 0.075
+#     cross-arms    r 0.042 tubes
+#     flute ribs    r 0.016, and PALE ('bone')
+#     candles       r 0.040 - 0.045, EIGHTEEN of them
+# A hero's arm is about 0.29 thick. A 0.042 bar beside it is a hairline, and
+# eighteen pale 0.04 spikes are not eighteen candles at pane distance, they are
+# FUZZ. So the creature reads as one big dark hat floating on a cloud of lint -
+# the same failure as the pipe-cleaner men, arriving in the one form a
+# non-humanoid can have it.
+#
+# TWO THINGS THIS CONVERSION FORCED THAT THE THREE MEN DID NOT:
+#
+#  1. THE FIX IS COUNT, NOT ONLY THICKNESS. On a man you thicken a limb and the
+#     limb is still one limb. Here, thickening eighteen candles to read at pane
+#     distance would weld them into a hedge. So eighteen become SIX, each one
+#     twice as thick, and the six ring-candles round the column are dropped
+#     outright. Fewer, bigger, countable - and the thing a player must count is
+#     how many lights are left, so a candle that cannot be counted is a
+#     mechanic that cannot be read.
+#  2. THE PALE IS A BUDGET AND THE RIBS WERE SPENDING IT. The Stoker's fault 4
+#     was limb() defaulting to 'bone' and making a pale stick-figure. The same
+#     fault is here in object form: four PALE flute ribs up a dark column, plus
+#     eighteen pale candles, so the pale was spread as hairlines over the whole
+#     body while the ONE LIT CANDLE - the only colour, the mechanic, the whole
+#     point - was a 0.045 stub. The ribs are gone, the pale is concentrated in
+#     six fat stubs, and the lit one is the biggest candle on the creature.
+#
+# NOTHING ABOUT THE IDEA CHANGES: a tripod lamp-stand with a snuffer cone where
+# a head belongs, dead candles on two cross-arms, and one live flame held out in
+# its own grip. Authored at the same 2.60 m so the pair sheet compares ONE thing.
+# ===========================================================================
+CANON.update({
+    "snuffer_chibi": ("The Snuffer (chibi)", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
+                      "shrine",
+                      "IT TAKES THE LIGHT - rebuilt in the game's own register",
+                      0.90, "The nearest lamp has gone out."),
+})
+
+
+def snuffer_chibi():
+    """The Snuffer in the game's register. Same silhouette read - A LAMP-STAND
+    THAT WALKS, WIDE CONE ON TOP, ONE LIT CANDLE OUT TO ONE SIDE - with every
+    member thickened into something a chibi knight can stand beside, and the
+    candle count cut from eighteen to six so they can be counted."""
+    P = Parts("snuffer_chibi")
+    # --- THE TRIPOD. Three thick legs on bold pads. It is still furniture, not
+    # a man, so there are three of them and they splay - but each is a stub the
+    # weight of a chibi leg, not a wire.
+    for k in range(3):
+        a = 0.52 + TAU * k / 3.0
+        x, y = math.cos(a), math.sin(a)
+        limb(P, [(x * 0.09, y * 0.09, 0.74), (x * 0.32, y * 0.32, 0.38),
+                 (x * 0.47, y * 0.47, 0.11)], 0.138, 0.112, 'body')
+        P.add(aim(L.cone(0.215, 0.175, 0.11, 12), (x * 0.47, y * 0.47, 0.0),
+                  (0.0, 0.0, 1.0)), 'dark')
+    # --- THE COLUMN. One bold mass hip-to-head, 0.26 at the foot. The four pale
+    # flute ribs are GONE (see 2 above); two dark collars give the joints the
+    # read the ribs were meant to give, as mass instead of as hairlines.
+    limb(P, [(0.0, 0.0, 0.58), (0.0, 0.0, 1.24), (0.0, 0.0, 1.92)], 0.26, 0.19, 'body')
+    _ring(P, (0.0, 0.0, 0.64), 0.270, axis='z', slot='dark', rad=0.055, n=20)
+    _ring(P, (0.0, 0.0, 1.46), 0.225, axis='z', slot='dark', rad=0.050, n=20)
+    # --- TWO CROSS-ARMS, a T then a t, both thick enough to read. FOUR candles
+    # on the wide arm and TWO on the narrow: six, countable, each a fat stub.
+    c = 0
+    for z, half, brad, axes in ((1.26, 1.12, 0.098, ('x', 'y')), (1.62, 0.94, 0.086, ('y',))):
+        for axis in axes:
+            ends = [(-half, 0.0), (half, 0.0)] if axis == 'x' else [(0.0, -half), (0.0, half)]
+            bar = [Vector((ends[0][0], ends[0][1], z)), Vector((0.0, 0.0, z + 0.06)),
+                   Vector((ends[1][0], ends[1][1], z))]
+            P.raw(L.tube(bar, brad, 8), 'body')
+            for ex, ey in ends:
+                x, y = ex * 0.90, ey * 0.90
+                P.add(aim(L.cone(0.165, 0.115, 0.085, 12), (x, y, z - 0.02),
+                          (0.0, 0.0, 1.0)), 'dark')                   # the cup
+                stub = 0.34 - (0.09 if c % 2 else 0.0) - 0.04 * (c % 3)   # burnt unevenly
+                P.add(aim(L.cone(0.090, 0.078, stub, 10), (x, y, z + 0.04),
+                          (0.0, 0.0, 1.0)), 'bone')
+                P.add(L.sphere(0.040, 0.040, 0.034, 8, 6), 'dark',
+                      loc=(x, y, z + 0.04 + stub))                    # dead wick
+                c += 1
+    # --- THE HEAD: the snuffer cone, apex up, on a short thick neck. A dark RIM
+    # round its mouth, which is the Stoker's cap lesson in another slot - a big
+    # smooth cone needs an edge or it is a beanie.
+    limb(P, [(0.0, 0.0, 1.88), (0.0, -0.04, 2.02)], 0.150, 0.170, 'body')
+    P.raw(aim(L.cone(0.74, 0.03, 0.56, 22), (0.0, -0.04, 1.99), (0.0, 0.0, 1.0)), 'body')
+    P.raw(aim(L.cone(0.78, 0.74, 0.080, 22), (0.0, -0.04, 1.99), (0.0, 0.0, 1.0)), 'dark')
+    P.add(L.sphere(0.075, 0.075, 0.070, 10, 7), 'dark', loc=(0.0, -0.04, 2.53))
+    for k in range(5):                     # soot streaks, now ribs not threads
+        a = -0.9 + 0.45 * k
+        P.raw(L.tube([Vector((0.68 * math.cos(a), -0.04 + 0.68 * math.sin(a), 2.03)),
+                      Vector((0.24 * math.cos(a), -0.04 + 0.24 * math.sin(a), 2.42))],
+                     0.030, 6), 'dark')
+    # --- THE ONE LIGHT IT HAS TAKEN. A chibi arm is SHORT, so the reach comes
+    # from the elbow being real rather than from length, and the grip is a mitt
+    # the size of the hero's own. This is the biggest candle on the creature and
+    # the only colour in the outline - it is the mechanic, so it gets the pale.
+    limb(P, [(0.10, -0.12, 1.30), (0.42, -0.40, 1.22),
+             (0.58, -0.52, 1.30)], 0.130, 0.105, 'body')
+    P.add(L.sphere(0.145, 0.140, 0.130, 10, 7), 'dark', loc=(0.60, -0.54, 1.31))
+    P.add(aim(L.cone(0.19, 0.13, 0.085, 12), (0.60, -0.54, 1.38), (0.0, 0.0, 1.0)), 'dark')
+    P.add(aim(L.cone(0.095, 0.082, 0.22, 10), (0.60, -0.54, 1.44), (0.0, 0.0, 1.0)), 'bone')
+    P.add(L.sphere(0.072, 0.072, 0.110, 10, 8), 'glow', loc=(0.60, -0.54, 1.73))
+    return P
+# PASS 2, FAULT 1 - I OVERCORRECTED AND PUT THE MASS AT THE BOTTOM. Pass 1 took
+# every wire member to a chibi weight at once, so the three splayed legs (0.180,
+# out to 0.56) became the heaviest thing on the creature and it read as a CAMERA
+# TRIPOD or a three-legged stool walking - bottom-heavy, when a lamp-stand's
+# whole read is a heavy light held up on a slim stand. The cone had also stopped
+# dominating: at 0.58 it was no wider than the body under it, so the "snuffer
+# cone where a head belongs" read went with it. This is ONE read, not three
+# changes - WHERE THE MASS SITS - so it is bought in the three places that make
+# it: legs thinner (0.138) and drawn in (0.47), cone up to 0.74 and 0.56 tall,
+# and the column kept exactly as it was so the change is legible as a ratio.
+# Lowering the cone to 1.99 to keep the top at 2.60 also CLOSED A CLIP I found
+# in the pass 1 sheet: the upper arm's two candles topped out at 2.22 inside the
+# cone's flare. The arms drop to 1.30 / 1.66 and the cone now overhangs them,
+# which is the head-over-shoulders read the original had and pass 1 lost.
+#
+# PASS 3, FAULT 2 - THE CONE ATE THE CANDLES AND THE THING BECAME A MUSHROOM.
+# Pass 2 bought the top-heavy read and paid for it with the mechanic: a 0.78 cap
+# over 0.70 and 0.46 cross-arms puts EVERY candle inside the cone's overhang, in
+# its shade, and the upper two vanish behind it from the front. You cannot count
+# them - and by my own argument in note 1 above, a candle that cannot be counted
+# is a mechanic that cannot be read. The silhouette had gone with it: a wide cap
+# on a fat stubby stem is a TOADSTOOL, not a lamp-stand.
+# ONE change closes both, because they are one fact: THE ARMS MUST REACH PAST
+# THE RIM. Half-spans 0.70 / 0.46 -> 1.12 / 0.94, so every cup sits outside the
+# 0.78 cap with air above it, the six candles are countable from the front, and
+# the outline is a CANDELABRA with a snuffer for a head again. Nothing else is
+# touched: not the cone, not the legs, not the column.
+#
+# PASS 4, FAULT 3 - FROM THE SIDE IT WAS A MAN IN A STRAW HAT. Both cross-arms
+# ran on X only, so at azimuth 90 every candle collapsed onto the column and the
+# candelabra read vanished: what was left was a conical hat over a stumpy body
+# with legs, holding a light - which is a FIGURE, and the one thing a miniboss
+# may never read as. This fault is INHERITED, not introduced - the original's
+# arms are X-only too - but the chibi register makes it worse, because a bolder
+# body has more to be mistaken for a torso.
+# ONE change, and it costs NO extra candles: the lower tier becomes a CROSS (two
+# bars, one candle at each of its four ends) and the upper bar is turned onto Y.
+# Still six, still countable, but now every view has a wide pair standing clear
+# of the column - front reads off the lower X bar, side off the lower Y bar and
+# the upper one together. The count is the mechanic, so the count did not move.
+
+
+BUILDERS.update({"snuffer_chibi": snuffer_chibi})

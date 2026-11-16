@@ -183,6 +183,7 @@ def acc_rows(items):
             stat = next((s for s in IC.STAT_ORDER if s in v), None)
             ctx = dict(variant=IC.variant_for(slot, k, v["name"], khash(k)),
                        orn=(cost - lo[slot]) / max(1.0, float(hi[slot] - lo[slot])),
+                       rarity=v.get("rarity"),
                        gem=IC.STAT_GEM.get(stat, (0.72, 0.72, 0.76)))
             cells.append(dict(kind="acc", slot=slot, key=k, rec=v, ctx=ctx,
                               stat=stat, cost=cost, name=v["name"]))
@@ -250,10 +251,11 @@ def armour_row(items):
 
 # ------------------------------------------------------------- build one cell
 def acc_mats(key, ctx, tag, slot="", name=""):
-    """D73's derivation, as D95 uses it: metal from the COST QUARTILE, gem
+    """D73's derivation, as D95 uses it: metal from the item's STORED RARITY
+    (C-61 - it was the cost quartile and that disagreed with the data), gem
     from the STAT, and WEAR RIDING COST - cheap is handled, dear is kept.
     Cloth colour comes from icons.cloth_tone (D94c): a cloak takes a dye."""
-    q = min(3, int(ctx["orn"] * 4.0))
+    q = IC.rarity_q(ctx.get("rarity"), ctx["orn"])
     aw = max(0.08, min(0.92, 0.95 - 0.85 * ctx["orn"]))
     return SC.materials(max(1, min(5, 1 + q)), aw, gem=ctx["gem"],
                         cloth=IC.cloth_tone(slot or ctx.get("slot", ""), key, name),

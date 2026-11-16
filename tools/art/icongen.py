@@ -49,7 +49,8 @@ def records(repo):
             continue
         stat = next((s for s in IC.STAT_ORDER if s in e), None)
         recs.append(dict(key=key, name=e["name"], fam=e["slot"], cost=e["cost"],
-                         colour=None, stat=stat, group="accessory"))
+                         colour=None, stat=stat, group="accessory",
+                         rarity=e.get("rarity")))
     for key, e in d["cosmetics"].items():
         if not isinstance(e, dict) or "colour" not in e:
             continue
@@ -70,7 +71,9 @@ def context(r):
     for ch in r["key"]:
         h = (h * 131 + ord(ch)) & 0xFFFFFFFF
     orn = r["orn"]
-    metal = IC.METALS[min(3, int(orn * 4.0))]
+    # C-61: the band is the item's STORED rarity, not its cost quartile.
+    q = IC.rarity_q(r.get("rarity"), orn)
+    metal = IC.METALS[q]
     if r["colour"]:
         cloth = srgb(r["colour"])
         gem = tuple(min(1.0, c * 1.5 + 0.12) for c in cloth)
@@ -83,7 +86,7 @@ def context(r):
     return dict(variant=IC.variant_for(r["fam"], r["key"], r["name"], h),
                 orn=orn, metal=metal, cloth=cloth, gem=gem,
                 D=IC.sig(r["key"], r["name"]),
-                metal_name=IC.METAL_NAMES[min(3, int(orn * 4.0))])
+                metal_name=IC.METAL_NAMES[q])
 
 
 def make_icon(r, ctx, outdir, res):

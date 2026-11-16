@@ -420,6 +420,7 @@ def main():
                     h = (h * 131 + ord(ch)) & 0xFFFFFFFF
                 ctx = dict(variant=IC.variant_for(slot, ak, av["name"], h),
                            orn=(av["cost"] - lo[slot]) / max(1.0, float(hi[slot] - lo[slot])),
+                           rarity=av.get("rarity"),
                            gem=IC.STAT_GEM.get(stat, (0.72, 0.72, 0.76)))
                 accs.append((slot, ak, av, ctx, stat))
             helm = None
@@ -482,7 +483,8 @@ def main():
                 mantle is kept."""
                 if setpiece:            # a declared set shares its look. Mr E's
                     return mats         # one named exception.
-                q = min(3, int(ctx['orn'] * 4.0))
+                # C-61: the STORED rarity bands it, not the cost quartile.
+                q = IC.rarity_q(ctx.get('rarity'), ctx['orn'])
                 aw = max(0.08, min(0.92, 0.95 - 0.85 * ctx['orn']))
                 # D94c: a cloak wears a DYE, leather keeps its tone. One rule,
                 # in icons.cloth_tone, mirrored from gear.gd.

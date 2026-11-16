@@ -139,6 +139,7 @@ stale until Mr. E or an authorised session edits it. The same note applies to th
 brief, which still lists L61/L31/L36/L40 as its queue while Phase RC gives it L71 -> L64 -> D61 ->
 D41 -> D48.
 
+- [ ] C-55. ONE RARITY LADDER FOR THE WHOLE GAME (content lane) - see the block below.
 ### C-55 - ONE RARITY LADDER FOR THE WHOLE GAME (content lane, Mr. E Nov 15 17:56)
   DATA HALF DELIVERED AND VERIFIED (supervisor, 2026-11-15 23:10 CT; content d097b9e, merged to main).
   Landed as the content lane's cycle C-58, NOT as a commit called C-55 - the ruling's ID collided with the

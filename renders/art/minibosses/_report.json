@@ -1,10 +1,459 @@
 {
  "ok": true,
  "corridor_clear_m": 11.0,
- "minibosses": {},
+ "minibosses": {
+  "snarer": {
+   "title": "The Snarer",
+   "theme": "wood",
+   "idea": "IT HAS ALREADY SET THE ROOM - it drives you onto its own lines",
+   "wear": 0.55,
+   "feed_line": "The lines were here before you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1529,
+   "size": [
+    3.25,
+    1.29,
+    2.3
+   ],
+   "footprint_span": 3.25,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.091396232868839,
+    "ortho": 3.138418674468994,
+    "clip": [
+     7.942865371704102,
+     21.35800552368164
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "drillmaster": {
+   "title": "The Drillmaster",
+   "theme": "barracks",
+   "idea": "IT SUMMONS - it beats the muster and the garrison forms up",
+   "wear": 0.15,
+   "feed_line": "Someone is beating the muster.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1366,
+   "size": [
+    1.39,
+    0.71,
+    2.2
+   ],
+   "footprint_span": 1.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.347687566089279,
+    "ortho": 2.426368236541748,
+    "clip": [
+     5.84868860244751,
+     15.926436424255371
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "scrapwright": {
+   "title": "The Scrapwright",
+   "theme": "workshop",
+   "idea": "IT ARMOURS ITSELF - every plate knocked off is replaced from the floor",
+   "wear": 0.3,
+   "feed_line": "It is wearing the workshop.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 975,
+   "size": [
+    2.76,
+    2.03,
+    2.0
+   ],
+   "footprint_span": 2.76,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9847607575574417,
+    "ortho": 3.1297194957733154,
+    "clip": [
+     7.766417980194092,
+     20.32151222229004
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "gaoler": {
+   "title": "The Gaoler",
+   "theme": "prison",
+   "idea": "IT DRAGS - the hook takes one out of the line and reels them in",
+   "wear": 0.8,
+   "feed_line": "A chain is paying out in the dark.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1816,
+   "size": [
+    3.72,
+    2.37,
+    2.35
+   ],
+   "footprint_span": 3.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.498403492422347,
+    "ortho": 3.6511456966400146,
+    "clip": [
+     8.932880401611328,
+     24.024639129638672
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "snuffer": {
+   "title": "The Snuffer",
+   "theme": "shrine",
+   "idea": "IT TAKES THE LIGHT - it puts out the lamps one at a time",
+   "wear": 0.9,
+   "feed_line": "The nearest lamp has gone out.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1107,
+   "size": [
+    1.51,
+    1.2,
+    2.6
+   ],
+   "footprint_span": 1.51,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6183924585745597,
+    "ortho": 3.0667364597320557,
+    "clip": [
+     6.90521240234375,
+     17.56277084350586
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "sexton": {
+   "title": "The Sexton",
+   "theme": "crypt",
+   "idea": "IT WILL NOT STAY DOWN - it carries its own graves; empty the lit niches",
+   "wear": 0.85,
+   "feed_line": "A spade is working somewhere in the dark.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1292,
+   "size": [
+    2.14,
+    1.44,
+    2.45
+   ],
+   "footprint_span": 2.14,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7781781093127815,
+    "ortho": 3.087711811065674,
+    "clip": [
+     7.381783485412598,
+     18.764556884765625
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "porter": {
+   "title": "The Porter",
+   "theme": "keep",
+   "idea": "IT BARS THE WAY - it drops a leaf across the door: no retreat, no help",
+   "wear": 0.45,
+   "feed_line": "A bar has dropped behind you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1094,
+   "size": [
+    3.52,
+    1.69,
+    2.3
+   ],
+   "footprint_span": 3.52,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.267138468910848,
+    "ortho": 2.6596944332122803,
+    "clip": [
+     8.12244987487793,
+     22.35848617553711
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "tallyman": {
+   "title": "The Tallyman",
+   "theme": "treasury",
+   "idea": "IT TAKES AND LEAVES - it lifts your gear, wears it and withdraws",
+   "wear": 0.2,
+   "feed_line": "Something is counting what you carry.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1722,
+   "size": [
+    1.89,
+    0.82,
+    2.15
+   ],
+   "footprint_span": 1.89,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.4890037044673772,
+    "ortho": 2.436251401901245,
+    "clip": [
+     6.175800323486328,
+     16.859132766723633
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "cook": {
+   "title": "The Cook",
+   "theme": "mess",
+   "idea": "IT KEEPS THE PACK ALIVE - the pot heals the room; spill the pot",
+   "wear": 0.6,
+   "feed_line": "The pot is on.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1324,
+   "size": [
+    2.39,
+    0.87,
+    2.05
+   ],
+   "footprint_span": 2.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6348626120542995,
+    "ortho": 2.7088701725006104,
+    "clip": [
+     6.585079193115234,
+     17.807273864746094
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "sluicekeeper": {
+   "title": "The Sluicekeeper",
+   "theme": "flooded",
+   "idea": "IT RAISES THE WATER - it winds the sluice open a step at a time",
+   "wear": 0.95,
+   "feed_line": "The water is coming up.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1166,
+   "size": [
+    2.66,
+    1.09,
+    2.5
+   ],
+   "footprint_span": 2.66,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9040444387721582,
+    "ortho": 3.0861074924468994,
+    "clip": [
+     7.227842330932617,
+     19.791120529174805
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "sower": {
+   "title": "The Sower",
+   "theme": "grassland",
+   "idea": "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
+   "wear": 0.4,
+   "feed_line": "Something is broadcasting seed.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1029,
+   "size": [
+    3.43,
+    1.52,
+    2.25
+   ],
+   "footprint_span": 3.43,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.187709566704543,
+    "ortho": 3.087007761001587,
+    "clip": [
+     8.021000862121582,
+     21.908794403076172
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "stoker": {
+   "title": "The Stoker",
+   "theme": "firepit",
+   "idea": "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
+   "wear": 0.7,
+   "feed_line": "The pit has been fed.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 864,
+   "size": [
+    3.0,
+    1.8,
+    2.4
+   ],
+   "footprint_span": 3.0,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.122195553057247,
+    "ortho": 3.221266508102417,
+    "clip": [
+     8.183976173400879,
+     21.247154235839844
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "bellman": {
+   "title": "The Bellman",
+   "theme": "fogbound",
+   "idea": "IT RINGS FROM WHERE IT IS NOT - the sound comes from the wrong place",
+   "wear": 0.65,
+   "feed_line": "A bell, and not where you thought.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 842,
+   "size": [
+    2.72,
+    1.2,
+    2.7
+   ],
+   "footprint_span": 2.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.0081936886292464,
+    "ortho": 3.2157962322235107,
+    "clip": [
+     7.775533676147461,
+     20.267324447631836
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "boiler": {
+   "title": "The Boiler",
+   "theme": "confection",
+   "idea": "IT POURS AND IT SETS - the floor hardens around your feet",
+   "wear": 0.25,
+   "feed_line": "Something is pouring.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1426,
+   "size": [
+    3.65,
+    1.67,
+    2.1
+   ],
+   "footprint_span": 3.65,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.265581696195129,
+    "ortho": 2.9870188236236572,
+    "clip": [
+     8.32926082611084,
+     22.216764450073242
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  }
+ },
  "errors": [],
  "blank_check": {
-  "files": 24,
+  "files": 42,
   "failures": []
  }
 }

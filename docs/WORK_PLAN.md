@@ -261,6 +261,10 @@ NEVER see the town they know rearrange itself around them. Author level 15 FIRST
 town, then work backwards deciding what is absent at each earlier level. Authoring forwards
 guarantees a later level will want to move something an earlier one placed.
 
+- [ ] D93. AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D93 - AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
   1. A LAYOUT FORMAT, as data, not a scene: one file per level under data/town/ with roads as
      polylines, the square as a polygon, and every building, prop and site as an entry with a
@@ -365,6 +369,10 @@ intersects any other fence segment, which is the thing Mr. E can actually SEE; a
 placer's claimed `_objs` radius covers everything it built. Shoot the livestock paddock and its
 neighbours before and after, in renders/cycles/d92/.
 
+- [ ] D91. THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
 
 "people are still overlapping eachother... animals, and characters and people literally walking
@@ -434,11 +442,30 @@ STAGED:
 NAMES ARE EXPLICITLY FINE. Mr. E: "names overlappiong was fine because depending on the angle."
 Do NOT spend any part of this item on nameplate overlap. Bodies only.
 
+STATUS D91a (game build, 2026-11-15 ~17:35 CT) - stages 1, 5, 6 DONE; 2, 3, 4 BLOCKED (owner):
+  1. scripts/crowd.gd (class Crowd) now holds the avoidance; town.crowd_push fills it once a physics
+     frame and asks it. tools/_d91_crowd.gd keeps the OLD town maths verbatim: 4000 samples, 0
+     mismatches - town behaviour identical. Crowd.overlaps() is the done-test's pair counter.
+  5. Bushes: every Bush_* now a footprint (town 189/189 + 202/202 registered, was 154+156 of 391).
+     Causes: planter boxes were not solid; valley bushes/verge bushes spawned with solid=false; and
+     solid_at's grid cache hid footprints added after the first query for up to 600 frames.
+  6. Animal body_r measured per model (mean half-extent, 0.12-0.75): Cow .71, Horse .75, Sheep .45,
+     Pig .47, Llama .58, Corgi .36, Fox .43, Pug .12, Hen/Cat .15.
+  TOWN BASELINE (90 s, 180 samples): 3.4 overlapping body pairs per sample, worst 0.97 m - NOT ZERO.
+  STAGES 2-4 (wire Crowd into delvers + monsters, three-cell corridors, file formation) live in
+  delve.gd / monster.gd / floorgen.gd - LAPTOP CODE files with no worker (see BLOCKED, NEEDS MR. E).
+  Crowd is ready for them: `var crowd := Crowd.new()`; each step `if not crowd.fresh(): add bodies`,
+  then `p += crowd.push(self, dir) * delta`.
+
 DONE TEST: a 20-minute delve soak and a 20-minute town soak, sampling every body pair every frame.
 Pass requires ZERO frames in which two bodies' centres are closer than the sum of their body_r,
 in the dungeon and in town; zero bodies inside a registered prop's footprint; and no increase in
 stuck walkers over the D44 baseline - this must not trade clipping for wedging. Shoot a six-hero
 party moving down a corridor and meeting monsters head-on, and put it in renders/cycles/d91/.
+
+- [ ] D90. THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### D90 - THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
 
@@ -552,6 +579,10 @@ why plainly, because the two things get conflated.
     build - auth, transport, rate limiting, an audit log and a kill switch - and he should ask for
     it by name rather than have it appear quietly.
 
+- [ ] D88. THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D88 - THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
 
 "one of the GATE traps that comes down to block the path was put in incorrectly, one of the
@@ -640,6 +671,10 @@ BIND TO THE LAN ONLY. Never 0.0.0.0 with a port forward, never a tunnel, never S
 command channel. If Mr. E later wants control from outside the house, that is a separate decision
 with its own security review - bring it to him, do not build it quietly.
 
+- [ ] D86. THE DAIS, PART ONE: SEE (game build, after the RC bugs above)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D86 - THE DAIS, PART ONE: SEE (game build, after the RC bugs above)
 
 Read-only first. A panel that shows him the game better than the game window can.
@@ -655,6 +690,10 @@ Read-only first. A panel that shows him the game better than the game window can
      the candidate list on screen with its scores and the chosen shot. He will be able to see WHY
      the camera went where it went, which is the thing that makes the next part usable.
   6. The town: shop levels, stores, festival state, raid state.
+
+- [ ] D87. THE DAIS, PART TWO: STEER (game build, after D86)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### D87 - THE DAIS, PART TWO: STEER (game build, after D86)
 
@@ -676,6 +715,10 @@ full ten-minute session from it - find a named NPC, cut to them, hold, release, 
 confirm the director recovers automatic control every time. Assert the server refuses every
 connection from outside the LAN. Mr. E's eye on whether it is actually usable while streaming;
 that is the only test that matters in the end.
+
+- [ ] D84. THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### D84 - THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
 
@@ -713,6 +756,10 @@ DONE TEST: headless town start reports 0 material-nulls and 0 failed loads; a 10
 with the null-surface logger attached reports zero bodies at any point; and a before/after shot of
 this exact scene - the knight by the barracks at night - in renders/cycles/d84/.
 
+- [ ] D85. E3PO IS INVISIBLE IN A CROWD OF HIS OWN GUARDS (game build + art)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D85 - E3PO IS INVISIBLE IN A CROWD OF HIS OWN GUARDS (game build + art)
 
 Mr. E, Nov 15 16:25: "i also have not seen E3PO". He is in the Chronicle constantly - his lines
@@ -745,6 +792,10 @@ name people want to see what they pay for not just a stat."
 
 DONE TEST: a shot of E3PO at his post, day and night, beside two ordinary guards in frame; pass
 requires that someone who has never seen the game can point at the commander. Mr. E's eye is final.
+
+- [ ] L71. THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### L71 - THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
 
@@ -779,6 +830,10 @@ DONE TEST: a scripted run that emits the longest line of each kind the game prod
 sheet, a trap check with a save, a search result, an E3PO line) at UI scale 100/125/150%, shot at
 each; pass requires no ellipsis in the centre box at any scale, and no line overlapping the party
 frames. Put the shots in renders/cycles/l71/ with the before.
+
+- [ ] D83. THE TRAPS ARE STUCK (game build - MEASURE FIRST, three candidates)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### D83 - THE TRAPS ARE STUCK (game build - MEASURE FIRST, three candidates)
 
@@ -816,6 +871,10 @@ DONE TEST: a scripted floor that fires one of every trap kind in TRAPS, twice ea
 spawned creature's position changes within 20s; no trap node retains child nodes from a previous
 firing; spike geometry returns to its armed offset; and a headless 10-minute delve ends with the
 same node count on each floor as it started with, plus the creatures that were meant to live.
+
+- [ ] D82. THE WATERLINE (game build, art-critical - Mr. E, Nov 15 16:20)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### D82 - THE WATERLINE (game build, art-critical - Mr. E, Nov 15 16:20)
 
@@ -886,6 +945,10 @@ MEASURED STATE (checked 16:19, do not re-derive):
     CR/LF stripped so no IRC command can be smuggled. So a hub button does not need a backend, an
     API, a new scope or a CSP change - it sends the chat command the viewer would have typed.
 
+- [ ] D80. CARRY WEIGHT (game build, with D77 - it is the ascent's teeth)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D80 - CARRY WEIGHT (game build, with D77 - it is the ascent's teeth)
 
 5e's rule, the encumbrance variant, because graded consequences beat a hard wall:
@@ -923,6 +986,10 @@ and band against the table by hand-computed expectation; log speed_scale and con
 lands in the gait; run a delve that forces a drop at the stairs and assert the dropped items are
 on the floor's loot list and named in the feed; re-run D58's gait test and require it still passes.
 
+- [ ] D81. USING, SELLING, AND THE GUILD VAULT (game build, after D78)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D81 - USING, SELLING, AND THE GUILD VAULT (game build, after D78)
 
 Mr. E's four asks, in the order they depend on each other.
@@ -952,6 +1019,12 @@ Mr. E's four asks, in the order they depend on each other.
 DONE TEST: a scripted stream that buys, equips, stores, withdraws, sells and dies; assert the gold
 ledger balances at every step, no item is ever in two places, vault contents survive the death,
 carried contents do not, and every transfer required a walk.
+
+- [ ] H30. THE SATCHEL TAB (hub worker, after H29)
+      HUB WORKER: TAKE H29 FIRST. It sits LOWER in this file than H30, so "first unchecked" would land
+      you here by accident; the lane queue is H29 -> H30. Search this file for "### H29".
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### H30 - THE SATCHEL TAB (hub worker, after H29)
 
@@ -997,6 +1070,10 @@ MEASURED STATE OF THE CODE (checked 16:05, do not re-derive it):
   - The hub's twelve tabs are boards, state, heroes, bands, chronicle, dice, roll, fallen, lore,
     bestiary, chat, commands. THERE IS NO SHOP TAB. H29 is new work, not a fix.
 
+- [ ] D77. THE ASCENT (game build, after D44/D50 closes)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D77 - THE ASCENT (game build, after D44/D50 closes)
 
 No teleport out. A party that is done going down turns around and climbs. The floors they already
@@ -1028,6 +1105,10 @@ units per frame across the whole climb, the party crossing every floor it descen
 fight on the way up, and a feed line naming the exit. Then run a wipe-on-ascent case and assert
 the town's stores did not change.
 
+- [ ] D78. THE ERRAND (game build, with D77)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+
 ### D78 - THE ERRAND (game build, with D77)
 
 A purchase is not a transaction, it is an errand. This is the caveat Mr. E named, and it applies to
@@ -1053,6 +1134,10 @@ DONE TEST: place an order from each building type at two shop levels, log the he
 gold ledger at placement and at arrival, and assert: no item ever appears in a satchel without a
 walk, no gold moves twice, a tier above the shop's level is refused at placement, and a hero
 interrupted mid-errand still has the order outstanding.
+
+- [ ] D79. TELEPORTATION STONES (game build, after D77 - it is meaningless before the climb exists)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### D79 - TELEPORTATION STONES (game build, after D77 - it is meaningless before the climb exists)
 
@@ -1085,6 +1170,10 @@ THE REWARD EXISTS. Mr. E approved it at 16:15 and it was created on jestsayin96 
   status FULFILLED or CANCELED, broadcaster token, which already holds channel:manage:redemptions.
 Build the item, the stock, and the command path against that id. Do not re-create, rename or
 re-price the reward - that stays Mr. E's alone, as all rewards do.
+
+- [ ] H29. THE SHOP TAB (hub worker, next item)
+      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
+      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
 ### H29 - THE SHOP TAB (hub worker, next item)
 
@@ -1865,6 +1954,10 @@ a queue looked thin.
       DONE: a PNG for all 454, none blank (assert opaque pixel count > 0 for every file - that is
       the check that would have caught the three empty renders), a contact sheet to look at, and
       the hub showing an icon beside an item in a hero's Satchel.
+  ART HALF DELIVERED (art lane, 2026-11-15, commit 61df0e8): 454 procedural icons generated in headless
+  Blender from each item's own fields, every PNG re-opened and asserted non-blank, contact sheet looked at.
+  STILL OPEN, and it is the rest of this item's DONE line: an icon shown beside an item in a hero's Satchel.
+  That is publisher + hub work and it waits for Phase 4 / its lane, not for the art worker.
 
 - [ ] D74. ITEMS YOU CAN SEE ON THE HERO (the expensive half - DO NOT START until Phase RC is
       closed or Mr. E brings it forward in writing). Owner: DESKTOP BUILD (rig.gd, hero_body.gd)
@@ -1964,6 +2057,13 @@ monsters. Procedural generation in headless Blender is therefore the main route,
       attention, and it makes every boss encounter land.
       DONE: eight 1080p captures at stream distance, each lord distinguishable from the others and
       from any hero, with the Chronicle naming it; D23's frame rate held in a delve soak.
+  ART HALF DELIVERED (art lane, 2026-11-15, commit 82a3463): eight bespoke lord meshes built from their own
+  canon, each at most four meshes/materials (727-6343 faces) so one boss is not 107 draw calls, camera clip and
+  distance taken from evaluated world bounds, every render asserted non-blank. See renders/art/lords/ and
+  docs/art/LORDS.md, which states the BOSS_DEFS model-path change for the owner of bestiary.gd.
+  STILL OPEN: the in-game half - wire the model paths, then the eight stream-distance captures with the
+  Chronicle naming each lord, and D23's frame rate held in a delve soak. These meshes are static and carry no
+  armature, which the wiring owner must plan for.
 
 - [ ] D76. ~109 MONSTER FAMILIES SHARE 10 MODELS. Owner: DESKTOP BUILD + laptop code (bestiary.gd).
       A delve is the most-watched thing on the stream and it is ten creatures wearing many names.
@@ -1972,6 +2072,11 @@ monsters. Procedural generation in headless Blender is therefore the main route,
       a different label. Do NOT attempt 109 sculpts.
       DONE: a 10-floor soak capture where consecutive floors are visibly different; a contact sheet
       of every family; frame rate held.
+  ART HALF STARTED (art lane, 2026-11-15, commit 96af851): twelve families that were another creature with a
+  label now have their own bodies, from a parametric creature generator in tools/art/ (no sculpts). The lane's
+  own census corrected this item's headline number - see its note.
+  STILL OPEN: the remaining families, and the in-game half of the DONE line (a delve capture where consecutive
+  floors read as different, a contact sheet per family, frame rate held).
 
 ## DESKTOP PRIORITY — VISIBLE JANK (Mr. E: do these FIRST, before any other D-item)
 
@@ -3031,12 +3136,20 @@ C4 is the one open CONTENT item written to the current "HOW BIG AN ITEM SHOULD B
 build is waiting on - D35 and D39 read items.json `shop_stock` and `trader_cargo`, and D64's shop ladder
 now gates by level. CONTENT WRITER: TAKE C4 NEXT.
 
-- [ ] C1. COSMETICS & DYES CATALOGUE (data/items.json): items.json is only 3.7 KB - the cosmetic set is thin. Expand cosmetics and accessories a lot: cloaks, hats/hoods/helms-as-cosmetic, rings, amulets, boots, gloves, banners, pets, titles - each with the same fields the existing entries use, priced sensibly against the economy, and named from the lore (Bellmire, the scar, the Ford, the guild). Widen dyes beyond the current set and keep dye_cost coherent. Additive only; never rename or drop a key. DONE: json validates, every new entry carries the same fields as the existing ones, and a written list of what was added.
-- [ ] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
+- [x] C1. COSMETICS & DYES CATALOGUE (data/items.json): items.json is only 3.7 KB - the cosmetic set is thin. Expand cosmetics and accessories a lot: cloaks, hats/hoods/helms-as-cosmetic, rings, amulets, boots, gloves, banners, pets, titles - each with the same fields the existing entries use, priced sensibly against the economy, and named from the lore (Bellmire, the scar, the Ford, the guild). Widen dyes beyond the current set and keep dye_cost coherent. Additive only; never rename or drop a key. DONE: json validates, every new entry carries the same fields as the existing ones, and a written list of what was added.
+  RESULT (ticked 2026-11-16 by the supervisor): delivered over C-41..C-46 and C-54 - the 321-entry
+  cosmetic pass plus +71 cosmetics (23 hats, 18 banners, 23 titles, 6 pets), +24 accessories and +27 dyes,
+  every entry priced against the economy and flavoured. items.json parses; no pre-existing key touched.
+- [x] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
       CYCLES LOGGED: C-41..C-46 (cosmetics/accessories/dyes, uniques, intro/forge, most-repeated, epitaph/descend/cleared, disaster variants). C-47 (2026-11-15, content 3d01748): +140 lines - forge, town_life, a wandering lord, and E3PO tier_up_alt. Standing item: stays open by design.
-- [ ] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
+  RESULT (ticked 2026-11-16 by the supervisor): delivered over C-37, C-39, C-50 and C-52 - roughly 750 new
+  lines across tells, descend/cleared, epitaphs, barks, lord and unique intros and the E3PO pools (12 thinnest
+  pools raised to 38-48 each). lore_lines.json parses; every pre-existing line byte-equal.
+- [x] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
+  RESULT (ticked 2026-11-16 by the supervisor): delivered in C-35 - 32 rare unique variants (modified lords,
+  no new lords) in bosses.json plus 20 brews/states in potions.json, each naming its modifier and effect.
 
-- [ ] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
+- [x] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
       Owner: CONTENT WRITER (data/items.json ONLY). The town grows through twelve stages from Crossing to City
       and every shop sells the same list the whole way, which makes growth invisible in the one place a viewer
       spends their points. This is the data half of D35 (visible stock) and D39 (traders must matter) - the game
@@ -3054,6 +3167,10 @@ now gates by level. CONTENT WRITER: TAKE C4 NEXT.
       DONE: json validates; every pre-existing key byte-identical; a written table of stage -> what each trade
       stocks at that stage, showing at least one entry that enters and one that leaves across the twelve stages;
       and a count of new entries per trade. State plainly which keys the game build worker must read.
+  RESULT (ticked 2026-11-16 by the supervisor): delivered in C-53 (items.json only) - `stock_retirement`
+  (36 shop goods + 19 cargo goods with last_tier/replaced_by), `trade_stock` (5 trades, per-stage enter/leave
+  across the twelve growth stages), `caravan_manifests` (7 supply resources) and `price_ladders` (10 ladders,
+  tier and cost non-decreasing, script-checked). The game build reads these for D35/D39/D64.
 
 - [x] C5. THE TOWNSFOLK ARE A COMMUNITY, NOT WALKERS - NAMES, TRADES AND REACTIONS.
       Owner: CONTENT WRITER (data/lore_lines.json ONLY). Mr. E wants more NPCs and better NPCs. Today the
@@ -4212,7 +4329,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   all 15 now clear 4.5:1 at 1080p, via a chip_bg token and a softer scroll edge (renders/cycles/
   20261115_l654/audit.txt). Next for this worker: L64.
 
-- [ ] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS.
+- [x] L64. THE DIRECTOR MUST TELL A STORY, NOT CYCLE THROUGH CAMERAS.
       SUPERVISOR NOTE (2026-11-15 14:05): there are 12 UNCOMMITTED lines of L64.4 in
       scripts/spotlight.gd in your worktree (a `handoff_swaps` counter + an _amb_tick handoff so an
       idle pane yields the body the director just cut to, meaning one body is never on screen
@@ -4260,6 +4377,11 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   ALL FOUR STAGES (.1 .2 .3 .4) ARE NOW BUILT. THE ONLY THING LEFT IN L64 IS ITS DONE TEST: the 30-minute
   unattended recording with at least one raid, one death and one quiet stretch, plus the director's own
   decision log for the same window. HUD worker: that recording IS the item now - do not rebuild the stages.
+  RESULT (ticked 2026-11-16 by the supervisor): U31 ran the DONE test - tools/_l64_long.gd, windowed 1080p,
+  1800 s of director clock with two raids, a death and a quiet stretch. Run 1 exposed a real fault (the quiet
+  tour re-cut the same stop within 1-20 s); auto_director.gd `_tour_pick`/`_tour_seen` made the tour a lap.
+  Run 2: 183 cuts (follow 59, shoulder 75, push 41, hard_cut 2, establishing 6), 0 repeats, 0 holds past max,
+  every cut carries a why, 138,053 frames with 0 body-in-two-panes. LOOKED: l64_raid.png, l64_death.png.
 
 - [ ] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
       A static top five stops being interesting twenty minutes into a stream and never changes again
@@ -4280,7 +4402,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       hero entering the board, at least two full board rotations with their titles, and the same
       panel at session start with only two heroes in it looking finished rather than empty.
 
-- [ ] L67. THE FEED MUST SURVIVE A RAID. Owner: DESKTOP HUD (feed_hud.gd). When everything happens
+- [x] L67. THE FEED MUST SURVIVE A RAID. Owner: DESKTOP HUD (feed_hud.gd). When everything happens
       at once - a raid, a delve, chat, redemptions - the feed becomes a scroll of noise that nobody
       can read, which is exactly the moment a viewer most wants to know what is going on. Staged:
       L67.1 PRIORITY. Classify what the feed carries and let the important survive the flood: a
@@ -4297,6 +4419,11 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       are merged, nothing above the stated priority was dropped, and the measured line rate is at or
       under the stated maximum.
 
+  RESULT (ticked 2026-11-16 by the supervisor): U32 - feed_hud.gd classes every line on arrival (P3 death/
+  boss/lord/raid, P2 town-level or named-hero, below that routine), merges repeats, and enforces a stated rate
+  and dwell with priority-ordered drops written to a log. tools/_l67_test.gd windowed 1080p under a forced raid
+  at ~12 lines/s for 30 s: 376 seen, 210 merged, 33 admitted, 133 dropped and all of them P0/P1 overflow.
+  LOOKED: renders/cycles/20261115_l67/l67_flood.png + feed_log.txt - 21 px lines legible over the live panes.
 
 # Phase AF - THE HUB'S QUEUE GOES THIN (supervisor, 2026-11-15 13:10 CT). IDs frozen as ever.
 # H18 shipped this cycle and only H19 (the Bestiary) was left. These three are written to the
@@ -4605,7 +4732,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       0 injected nodes, no horizontal scroll at 390. Supervisor review: the diff adds no innerHTML/
       outerHTML/insertAdjacentHTML/eval/new Function and no URL/src/href/style sink.
 
-- [ ] H28. A VIEWER MUST BE ABLE TO SEND A FRIEND STRAIGHT TO THEIR HERO. Owner: HUB BUILDER
+- [x] H28. A VIEWER MUST BE ABLE TO SEND A FRIEND STRAIGHT TO THEIR HERO. Owner: HUB BUILDER
       (web/index.html, web/app.js, web/style.css, web/NOTES.md). H20 built the character sheet and
       H24's finder lands on a hero by id, but a viewer who wants to show someone their hero can only
       send the hub's front door and say "now search for me". Give the page a deep link: opening the
@@ -4621,3 +4748,11 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
       landing on the roster with the plain message; a capture of an address built from a hostile
       hero name resolving as text and executing nothing; the deep link working at 390 wide as well
       as 1920; CSP unchanged and all six local checks still pass.
+
+  RESULT (ticked 2026-11-16 by the supervisor, hub a971e85): `#hero-<n>` opens that hero's sheet, where n is
+  a 32-bit FNV-1a of the lower-cased name computed by the page - no name ever enters the URL. A "copy a link to
+  this hero" control on a living hero's sheet writes the address (address bar as fallback). An address matching
+  nobody, or a malformed one, lands on Heroes with "That hero is not on tonight's roll". Applied only when the
+  fragment changes, so the 60 s refresh never re-lands the viewer. Hostile-name address resolves as text and
+  executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
+  per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.

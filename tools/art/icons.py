@@ -360,3 +360,114 @@ def build(key, fam, ctx):
     P = Parts(key)
     FAMILIES[fam](P, ctx)
     return P
+
+
+# --------------------------------------------------------------- D94c: CLOTH
+# ONE SOURCE OF TRUTH FOR CLOTH COLOUR, mirrored from scripts/gear.gd so the hub
+# icon, the showcase hero and the proof sheet all land on the same object. The
+# eight TONES below were copy-pasted into three generators; they live here now.
+#
+# A cloak does NOT take a leather tone. It is the largest single area of colour
+# on a hero and 49 of them were reading as one brown-grey cape with a different
+# collar, so it wears a DYE of its own: twelve period dyes, kept below full
+# saturation so they sit in the HD palette. THE SHARED RULE, bit for bit:
+#   hay   = (name + " " + key).lower()
+#   dye_i = the FIRST entry of CLOAK_WORDS (in list order) whose word is in hay,
+#           else (khash(key) >> 8) % 12   (the same bits the TONES used)
+# Gloves and boots keep the TONES - they are leather. Values are Blender LINEAR;
+# gear.gd holds the identical numbers and calls linear_to_srgb() on them.
+TONES = ((0.30, 0.25, 0.20), (0.22, 0.19, 0.17), (0.36, 0.28, 0.20),
+         (0.24, 0.26, 0.29), (0.31, 0.22, 0.22), (0.21, 0.26, 0.23),
+         (0.38, 0.34, 0.27), (0.26, 0.23, 0.30))
+
+CLOAK_DYES = ((0.42, 0.08, 0.07),    # 0  madder red
+              (0.08, 0.14, 0.36),    # 1  woad blue
+              (0.06, 0.20, 0.08),    # 2  woodland green
+              (0.04, 0.035, 0.035),  # 3  walnut black
+              (0.30, 0.29, 0.27),    # 4  grey wool
+              (0.62, 0.56, 0.42),    # 5  undyed cream
+              (0.52, 0.30, 0.04),    # 6  weld ochre
+              (0.22, 0.06, 0.20),    # 7  wine / mulberry
+              (0.04, 0.20, 0.20),    # 8  river teal
+              (0.28, 0.10, 0.03),    # 9  russet
+              (0.12, 0.08, 0.30),    # 10 scar violet (a dear dye)
+              (0.18, 0.17, 0.06))    # 11 oilcloth / peat olive
+
+CLOAK_DYE_NAMES = ["madder", "woad", "green", "walnut", "grey", "cream",
+                   "ochre", "wine", "teal", "russet", "violet", "olive"]
+
+CLOAK_WORDS = [
+    ("scar", 10), ("red", 0), ("harl", 0), ("raid", 0), ("warhorn", 0),
+    ("feast", 7), ("chronicl", 7), ("backstair", 7),
+    ("caravan", 9), ("hurdl", 9), ("bowyer", 9),
+    ("mourn", 4), ("grey", 4), ("fog", 4), ("ash", 4),
+    ("sexton", 3), ("black", 3), ("ossuary", 3), ("grave", 3),
+    ("green", 2), ("wood", 2), ("hedge", 2), ("orchard", 2), ("osier", 2),
+    ("oilcloth", 11), ("peat", 11), ("turbary", 11), ("mire", 11),
+    ("tanner", 9), ("butcher", 9),
+    ("winter", 5), ("salt", 5), ("pilgrim", 5), ("lime", 5),
+    ("lamp", 6), ("guild", 6), ("thatch", 6), ("crier", 6),
+    ("commander", 1), ("constable", 1), ("watch", 1), ("wall", 1),
+    ("ferry", 8), ("raft", 8), ("lighter", 8), ("lock", 8), ("crane", 8),
+    ("wake", 8), ("deep", 8),
+]
+
+
+def khash(key):
+    """gear.gd's d94_hash, bit for bit - the dial every derivation turns."""
+    h = 0
+    for ch in key:
+        h = (h * 131 + ord(ch)) & 0xFFFFFFFF
+    return h
+
+
+def cloak_dye_i(key, name=""):
+    hay = (name + " " + key).lower()
+    for word, i in CLOAK_WORDS:
+        if word in hay:
+            return i
+    return (khash(key) >> 8) % len(CLOAK_DYES)
+
+
+# D94c-2: THE DYE IS NOT ENOUGH ON ITS OWN. Looked at the row - six cells came
+# back russet, green, wine, GREEN, olive, GREEN, and the two greens with the same
+# cut were one object again. Measured over all 49: fifteen cloaks share BOTH a dye
+# and a cut with another cloak, six of them woad+mantle (every watch and wall
+# cloak in Bellmire). That is correct in the world - a hedgeward and an orchardman
+# both wear green, and the watch wears blue - so the answer is not to scatter the
+# dyes. It is a SHADE STEP inside the dye, and it is assigned the way D94b assigned
+# form: by POSITION IN THE COLLIDING GROUP, so it cannot collide by construction.
+#   group = every cloak sharing (dye_i, variant), keys sorted as plain strings
+#   shade_i = the key's index in that group, capped at 7; 0 leaves the dye alone
+#   dye * CLOAK_SHADES[shade_i], clamped - same dye, lighter or darker bolt of it
+# THE GAME LANE MUST MIRROR THIS in gear.gd beside cloak_dye_i, exactly as this
+# lane mirrored the dye. Until it does, the first cloak of every group still
+# matches the hero and the rest are off by a value step, never by a hue.
+CLOAK_SHADES = (1.00, 0.72, 1.34, 0.56, 1.62, 0.88, 1.16, 0.44)
+
+_cloak_shade = {}
+
+
+def register_cloaks(accessories):
+    """Build the shade table once from the whole accessory list. Callers that
+    have items.json open call this before deriving any cloak."""
+    _cloak_shade.clear()
+    cloaks = sorted(k for k, v in accessories.items()
+                    if isinstance(v, dict) and v.get("slot") == "cloak")
+    groups = {}
+    for k in cloaks:
+        nm = accessories[k].get("name", "")
+        sig = (cloak_dye_i(k, nm), variant_for("cloak", k, nm, khash(k)))
+        n = groups.get(sig, 0)
+        _cloak_shade[k] = min(n, len(CLOAK_SHADES) - 1)
+        groups[sig] = n + 1
+    return len(_cloak_shade)
+
+
+def cloth_tone(fam, key, name=""):
+    """The cloth colour for one accessory: a cloak takes a dye, leather a tone."""
+    if fam == "cloak":
+        c = CLOAK_DYES[cloak_dye_i(key, name)]
+        k = CLOAK_SHADES[_cloak_shade.get(key, 0)]
+        return tuple(min(0.95, max(0.02, v * k)) for v in c)
+    return TONES[(khash(key) >> 8) % len(TONES)]

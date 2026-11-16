@@ -1082,18 +1082,18 @@
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 15.957,
+    "worst": 19.114,
     "worst_pair": [
-     "Hurdler's Cloak",
-     "Butcher's Oilcloth"
+     "Feast-night Cloak",
+     "Hedgeward's Cloak"
     ],
-    "worst_peak_pct": 51.93,
-    "best": 35.643,
+    "worst_peak_pct": 41.12,
+    "best": 35.092,
     "best_pair": [
      "Osier-cutter's Cloak",
      "Hedgeward's Cloak"
     ],
-    "median": 29.591,
+    "median": 31.245,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -3086,7 +3086,7 @@
  "verdict": [
   "ring    TOO SMALL ON STREAM  worst  0.00% median  0.00% of hero px   ",
   "amulet  TELLS APART          worst  0.52% median  0.97% of hero px   ",
-  "cloak   TELLS APART          worst 15.96% median 29.59% of hero px   ",
+  "cloak   TELLS APART          worst 19.11% median 31.25% of hero px   ",
   "boots   TELLS APART          worst  1.72% median  4.47% of hero px   ",
   "gloves  PARTLY TOO SMALL 11/15 worst  0.00% median  0.33% of hero px   ",
   "hat     TELLS APART          worst 17.54% median 36.07% of hero px   ",

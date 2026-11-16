@@ -383,6 +383,10 @@ guarantees a later level will want to move something an earlier one placed.
 - [ ] D93. AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      D93a DONE (game build, Nov 15 22:30): steps 1 + 5 - format "bellmire-town/1" (data/town/README.md),
+      VALIDATOR tools/_d93_validate.gd (PASS on a good fixture, catches all 6 defect kinds on a bad one),
+      and the GENERATED town measured: overlap 0, on_road 8 (all landmarks), on_square 3, DOOR 61/66
+      houses not within 2 m of a road, 5 road islands. OPEN: 2 roads, 3 square+buildings, 4 loader, 6 levels.
 
 ### D93 - AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
   1. A LAYOUT FORMAT, as data, not a scene: one file per level under data/town/ with roads as
@@ -561,30 +565,23 @@ STAGED:
 NAMES ARE EXPLICITLY FINE. Mr. E: "names overlappiong was fine because depending on the angle."
 Do NOT spend any part of this item on nameplate overlap. Bodies only.
 
-STATUS D91a (game build, 2026-11-15 ~17:35 CT) - stages 1, 5, 6 DONE; 2, 3, 4 BLOCKED (owner):
-  1. scripts/crowd.gd (class Crowd) now holds the avoidance; town.crowd_push fills it once a physics
-     frame and asks it. tools/_d91_crowd.gd keeps the OLD town maths verbatim: 4000 samples, 0
-     mismatches - town behaviour identical. Crowd.overlaps() is the done-test's pair counter.
-  5. Bushes: every Bush_* now a footprint (town 189/189 + 202/202 registered, was 154+156 of 391).
-     Causes: planter boxes were not solid; valley bushes/verge bushes spawned with solid=false; and
-     solid_at's grid cache hid footprints added after the first query for up to 600 frames.
-  6. Animal body_r measured per model (mean half-extent, 0.12-0.75): Cow .71, Horse .75, Sheep .45,
-     Pig .47, Llama .58, Corgi .36, Fox .43, Pug .12, Hen/Cat .15.
-  TOWN BASELINE (90 s, 180 samples): 3.4 overlapping body pairs per sample, worst 0.97 m - NOT ZERO.
-  STAGES 2-4 (wire Crowd into delvers + monsters, three-cell corridors, file formation) live in
-  delve.gd / monster.gd / floorgen.gd - LAPTOP CODE files with no worker (see BLOCKED, NEEDS MR. E).
-  Crowd is ready for them: `var crowd := Crowd.new()`; each step `if not crowd.fresh(): add bodies`,
-  then `p += crowd.push(self, dir) * delta`.
-
 DONE TEST: a 20-minute delve soak and a 20-minute town soak, sampling every body pair every frame.
 Pass requires ZERO frames in which two bodies' centres are closer than the sum of their body_r,
 in the dungeon and in town; zero bodies inside a registered prop's footprint; and no increase in
 stuck walkers over the D44 baseline - this must not trade clipping for wedging. Shoot a six-hero
 party moving down a corridor and meeting monsters head-on, and put it in renders/cycles/d91/.
 
-- [ ] D90. THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
+- [x] D90. THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      DONE (game build, Nov 15 ~20:55 CT): a FOURTH cause nobody had found - every towed cart was turned a
+      quarter round. Prop_Wagon's shafts run along its own +z; D16c/D53 gave it the hauler's yaw +PI/2, so it
+      rolled SIDE-ON beside its hauler with the shafts pointing into the street (the green-hooded caravan
+      master, exactly). Now: yaw = hauler heading, shaft tips at his hips and lifted to hand height, pose
+      DERIVED every drawn frame (a-b), park an explicit animated state (c), WAGON_SNAP deleted (d), shafts
+      meet his hands (e). tools/_d90_tow.gd 20-min soak: D90_TOW OK - 23 haulers (14 caravans), 829k towed
+      samples, tip deviation max 0.001 m, yaw lag max 20.1 deg (clamp 20), 0 sideways-while-moving, 0
+      crossings, 49 parks/49 re-hitches, teleport re-hitched. Shots renders/cycles/d90/. Gates green.
 
 ### D90 - THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
 
@@ -835,9 +832,15 @@ confirm the director recovers automatic control every time. Assert the server re
 connection from outside the LAN. Mr. E's eye on whether it is actually usable while streaming;
 that is the only test that matters in the end.
 
-- [ ] D84. THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
+- [x] D84. THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      DONE (game build, Nov 15 ~18:25 CT): NOT a material/load fault - the raid HIT-FLASH (white emission
+      1.6) never switched off on HeroBody and Cavalry: both override Townsfolk._process and never called
+      _tick_flash, so one raid hit left a hero or a mounted knight lit white all night. The flash now also
+      ends on a SceneTree timer no override can starve (townsfolk.gd). D84_TEST OK (windowed): hero, rider
+      and guard lit 1 frame, dark by 0.6 s; _death_fx dark by 0.9 s; null-surface logger 0 bodies in 12 scans
+      over 60 s (not the 10 min asked - the null-material path is ruled out). Shots: renders/cycles/d84/.
 
 ### D84 - THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
 
@@ -3720,7 +3723,17 @@ the game -> the GAME rolls the d20 and applies the outcome -> it is Chronicled a
 60 s snapshot -> the hub DISPLAYS the roll and its result. The hub therefore stays READ-ONLY and
 this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do not design one.
 
-- [ ] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+- [x] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+      RESULT (game build, 2026-11-15 ~21:20 CT): SHIPPED. New channel-point reward "Roll for Bellmire" (750,
+      viewer types build / festival / a law by name, else fate picks; NO hero needed). twitch_eventsub.gd
+      viewer_roll(): d20 in the game -> 20 triumph / 13-19 goes well / 8-12 mixed / 2-7 badly / 1 backfires;
+      build = smithy raise_shop (rack lights up), event = a festival in the viewer's name, law = a
+      propositions entry whose good/bad line comes true and moves renown (half the town score). Chronicle:
+      "<name> rolls a N to <do> - <band>. <what happened>" + E3PO's verdict from e3po.viewer_roll (shouted).
+      snapshot_pub publishes `rolls` [{n,by,what,result,tier,cost,at}] (v stays 4, additive; result capped
+      at 400 never 200). tools/_t5_roll.gd T5_ROLL OK 23/23 incl. 5 failure outcomes and a real redemption
+      payload through handle_event; shots renders/cycles/t5/. MR. E: the reward is only CREATED on a resync -
+      set [twitch] rewards_resync=true in user://twitch.cfg for ONE launch, then back to false.
       UNBLOCKED (Nov 15): Mr. E re-authorized the broadcaster token via device-code grant. The game's
       Twitch app (client s4lpypbhumi34uocr0jqrscsxmjz2u) now holds channel:manage:polls AND
       channel:read:polls alongside the original five (bits:read, channel:manage:redemptions,

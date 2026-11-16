@@ -143,3 +143,159 @@ func overlaps() -> Array:
                             n += 1
                             worst = maxf(worst, o)
     return [n, worst]
+
+## ---- D91 THE SETTLE, shared by the dungeon and the town (one copy - it began in delve.gd).
+## Run LATE in the frame, after every walker has taken its step: parts any pair of bodies still
+## closer than the sum of their body_r (the done test's line), the smaller body giving way, and
+## only ever to a spot ok(p, r) accepts - the dungeon's "on a floor cell, clear of the wall and
+## every obstacle", the town's "outside every solid footprint". A pinned body (instance id in
+## `pinned` - a townsman sat on a bench, at his post at a stall) is never moved; the other one
+## steps out of it. Pinned against stone on both sides, a pair slides sideways along it.
+## D91c: one side's half-step fits but its full step does not (a body with stone at its back):
+## it slides along the stone instead of giving up - the one 1.9 cm frame the 20-minute dungeon
+## re-soak of D91b's loop found in 165k. Four passes, not three, for a pack of sixteen; up to
+## ten for a street crowd (the festival puts a hundred folk on the green in one frame, and four
+## rounds of half-steps do not untangle that). A pass that finds nobody truly inside anybody ends
+## it, so a quiet frame costs one pass.
+## Up to SETTLE_SMALL bodies every pair is checked (the dungeon);
+## more than that (the town's streets) are bucketed on a 2 m grid, rebuilt every pass.
+## Returns the deepest overlap the last pass found.
+const SETTLE_PASSES := 4
+const SETTLE_PASSES_BIG := 10     # a street crowd: the whole town poured onto the green at once
+const SETTLE_PAD := 0.02
+const SETTLE_SMALL := 48
+static var passes_run := 0        # D91c: how many passes the settles have taken (perf probe)
+
+static func settle(bodies: Array, ok: Callable, pinned := {}) -> float:
+    var n := bodies.size()
+    if n < 2:
+        return 0.0
+    var worst := 0.0
+    var rs: Array[float] = []
+    for _pass in range(SETTLE_PASSES if n <= SETTLE_SMALL else SETTLE_PASSES_BIG):
+        passes_run += 1
+        var moved := false
+        worst = 0.0
+        if n <= SETTLE_SMALL:
+            for i in range(n):
+                for j in range(i + 1, n):
+                    var r := _settle_pair(bodies[i], bodies[j], ok, pinned)
+                    worst = maxf(worst, r[0])
+                    moved = moved or r[1]
+        else:
+            # (the pair test is inlined as a cheap distance check first - only a pair that
+            # actually overlaps pays for _settle_pair; it returns nothing for the rest anyway)
+            var grid := {}
+            var ps: Array[Vector3] = []
+            ps.resize(n)
+            for i in range(n):
+                var p: Vector3 = (bodies[i] as Node3D).global_position
+                ps[i] = p
+                var k := Vector2i(floori(p.x * 0.5), floori(p.z * 0.5))
+                if not grid.has(k):
+                    grid[k] = []
+                (grid[k] as Array).append(i)
+            if rs.is_empty():
+                rs.resize(n)
+                for i in range(n):
+                    rs[i] = body_r(bodies[i])
+            for i in range(n):
+                var p: Vector3 = ps[i]
+                var ri: float = rs[i]
+                var k := Vector2i(floori(p.x * 0.5), floori(p.z * 0.5))
+                for dx in range(-1, 2):
+                    for dz in range(-1, 2):
+                        var cell = grid.get(Vector2i(k.x + dx, k.y + dz))
+                        if cell == null:
+                            continue
+                        for j in cell:
+                            if int(j) <= i:
+                                continue
+                            var q: Vector3 = ps[j]
+                            var reach: float = ri + rs[j] + SETTLE_PAD
+                            if (p.x - q.x) * (p.x - q.x) + (p.z - q.z) * (p.z - q.z) >= reach * reach:
+                                continue
+                            var r := _settle_pair(bodies[i], bodies[j], ok, pinned)
+                            worst = maxf(worst, r[0])
+                            if r[1]:
+                                moved = true
+                                ps[i] = (bodies[i] as Node3D).global_position
+                                ps[j] = (bodies[j] as Node3D).global_position
+                                p = ps[i]
+        if not moved:
+            break
+        # a street crowd: a pass that found nobody truly inside anybody (only the 2 cm pad) has
+        # done the job - walkers held at arm's length by crowd_push sit on that pad all day, and
+        # nudging them round it ten times a frame cost 3 ms (6.3 passes a run, D91c perf probe)
+        if n > SETTLE_SMALL and worst <= 0.0:
+            break
+    return worst
+
+## one pair: [how deep they overlapped (0 if not), whether anyone was moved]
+static func _settle_pair(a: Node3D, b: Node3D, ok: Callable, pinned: Dictionary) -> Array:
+    var pa := a.global_position
+    var pb := b.global_position
+    if absf(pa.y - pb.y) > 3.0:
+        return [0.0, false]
+    var ra := body_r(a)
+    var rb := body_r(b)
+    var d := Vector3(pa.x - pb.x, 0.0, pa.z - pb.z)
+    var L := d.length()
+    var over := ra + rb + SETTLE_PAD - L
+    if over <= 0.0:
+        return [0.0, false]
+    var deep := over - SETTLE_PAD
+    if L < 0.01:
+        var ang := float((a.get_instance_id() + b.get_instance_id()) % 628) * 0.01
+        d = Vector3(cos(ang), 0.0, sin(ang))
+        L = 1.0
+    var nrm := d / L
+    var pin_a := pinned.has(a.get_instance_id())
+    var pin_b := pinned.has(b.get_instance_id())
+    if pin_a and pin_b:
+        return [deep, false]
+    # the smaller body gives way: a lord is not shouldered aside by a halfling
+    var ka := rb / (ra + rb)
+    var kb := ra / (ra + rb)
+    var na := pa + nrm * over * ka
+    var nb := pb - nrm * over * kb
+    var oka: bool = not pin_a and ok.call(na, ra, a)
+    var okb: bool = not pin_b and ok.call(nb, rb, b)
+    if oka and okb:
+        a.global_position = na
+        b.global_position = nb
+    elif oka or (pin_b and not pin_a):
+        na = pa + nrm * over
+        if ok.call(na, ra, a):
+            a.global_position = na
+        else:
+            var sa := Vector3(-nrm.z, 0.0, nrm.x) * over
+            if ok.call(pa + sa, ra, a):
+                a.global_position = pa + sa
+            elif ok.call(pa - sa, ra, a):
+                a.global_position = pa - sa
+            else:
+                return [deep, false]
+    elif okb or (pin_a and not pin_b):
+        nb = pb - nrm * over
+        if ok.call(nb, rb, b):
+            b.global_position = nb
+        else:
+            var sb := Vector3(-nrm.z, 0.0, nrm.x) * over
+            if ok.call(pb - sb, rb, b):
+                b.global_position = pb - sb
+            elif ok.call(pb + sb, rb, b):
+                b.global_position = pb + sb
+            else:
+                return [deep, false]
+    else:
+        # pinned between stone on both sides: slide sideways along the wall
+        var side := Vector3(-nrm.z, 0.0, nrm.x) * over
+        if ok.call(pa + side, ra, a):
+            a.global_position = pa + side
+        elif ok.call(pb - side, rb, b):
+            b.global_position = pb - side
+        else:
+            return [deep, false]
+    return [deep, true]
+

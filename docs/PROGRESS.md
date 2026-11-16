@@ -2,6 +2,73 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D91c FINISH D91: the town half and the 20-minute re-soaks, 2026-11-16 ~08:55 CT (game build) - NOT PUSHED TO laptop, town soak 2 frames short
+TAKE THIS NEXT gave GAME BUILD "FINISH D91": (a) the TOWN half, (b) the 20-minute re-soak. Stages 1-4 not
+rebuilt, halls not re-measured. Not ticked - supervisor's call.
+- MEASURED FIRST (new tools/_d91_town.gd: EVERY body pair EVERY frame, every body against town.solid_at,
+  every fault attributed by who/doing what/inside what). 120 s of town on D91b's code: overlap in 13,751
+  of 14,770 frames (54,393 pair-samples, worst 1.06 m), 15,937 body-frames inside a footprint.
+  WHO: two horses in one paddock and the horses+llama were 33k of the 54k - crowd_push only shoves a body
+  that is WALKING, so beasts grazing side by side, folk stood chatting, a horse turned out on top of
+  another NEVER moved and stood inside each other for good. 14,770 of the footprint frames were ONE man:
+  the tavern keeper, posted INSIDE the large table (keeper at yard + f*2.2, table at f*1.4).
+  Bushes were already registered (D91a); the bush itself was not the leak - nobody stood in one.
+- THE FIX, ONE COPY. The dungeon's settle (delve.gd _crowd_settle) moved into crowd.gd as Crowd.settle(
+  bodies, ok, pinned) - delve now calls it (exact pair loop up to 48 bodies, 2 m buckets past that) and the
+  town calls the SAME function. town.gd gains a _TownSettler child run after every walker's physics step
+  (process_physics_priority 1000) AND at the end of the drawn frame (process_priority 1000 - a raid moves
+  defenders and runners in _process). ok() = never into a solid footprint, never down a bank (ground vs
+  ground, so guards on the keep steps still settle - the first try compared body height and froze them),
+  a beast stays on its own pen/field (animal.gd on_ground_ok). Only a body SAT on a seat is pinned.
+  _settle_out: anyone standing still inside a footprint (not on a door/seat leg) is set back out of it -
+  the hard ring for footprints a walker gets from keep_walkable on every step but a stander never did.
+  Keepers are set down clear of their own yard props (_post_clear). Crowd.settle also slides a body with
+  stone at its back instead of giving up (the dungeon's one bad frame, below), 4 passes (10 for a street
+  crowd, stopping at the first pass that finds nobody truly inside anybody).
+- 20-MINUTE DUNGEON RE-SOAK (owed by D91b): on D91b's loop as merged, 1243 s / 10 delves / 21 floors /
+  179,756 frames: ONE frame at 1.9 cm - D91_SOAK FAIL, so the 619 s pass was not the whole story. With the
+  shared settle (slide instead of give up, 4 passes): 1350 s, 7 delves, 20 floors, 195,229 frames,
+  7.37 M pair-samples, 0 overlap frames, 0 in an obstacle, 28 unsticks, 0 forced, 28,969 frames in file.
+  D91_SOAK OK. renders/cycles/d91c/soak20.log (fail) and soak20b.log (pass).
+- 20-MINUTE TOWN SOAKS (tools/_d91_town.gd, every pair every frame). Before: 13,751 of 14,770 frames
+  overlapping in 120 s. Run by run, each fix answering the last run's attribution:
+    20b (killed at 766 s): 102 frames - posted guards/chief on the keep steps never settled (the bank
+        check compared body height to terrain; a guard on a step is 0.9 m up) -> ground vs ground.
+    20c (killed at 569 s): 17 frames - a chief and a fleeing priest during a raid (_process movers)
+        -> the end-of-frame settle.
+    20d 1200 s, 23,748 frames: 3 overlap frames (32 pair-samples, worst 0.205 m, festival start) and
+        4 footprint frames (a cat) -> more passes for a street crowd, _post_clear fallback.
+    20e 1200 s, 32,450 frames: D91_TOWN OK - 0 overlap frames, 0 footprint body-frames in 6.2 M - BUT the
+        settle cost 14 ms a frame (see cost below).
+    20f (FINAL CODE) 1200 s, 82,148 frames, 16.4 M body-checks: 0 footprint body-frames; 2 overlap frames
+        (2 pair-samples, ONE over 1 cm, worst 0.026 m), both two peasants at (33.0..33.3, -70.7..-71.2) -
+        the north-houses pocket where townwalk's old BAD list also sat. D91_TOWN FAIL by those 2 frames.
+    TRIED AND BACKED OUT: a "crevice" fallback (longer and opposite slides when every short step hits a
+        wall) - 20g still had 1 frame (festival start: ten folk out of the north houses onto ONE door
+        spot), a dungeon re-soak with it showed a 1.24 m frame, and townwalk went stuck_on_route 3, then
+        5 (24 passes). Removed; crowd.gd is back to exactly the code 20f, soak20b and the f_ gates ran.
+- SHOTS renders/cycles/d91c/ (windowed 1600x900, LOOKED AT): a/b the paddock - settle OFF two horses
+  1.06 m inside each other, settle ON 0.80 m apart, same camera; c the tavern yard crowd, keeper not in a
+  footprint; d a healer in a blue wizard's hat 1.66 m from a flowering bush, standing BESIDE it - Mr. E's
+  shot, the other way round; e a lumberjack walking past a bush 2.15 m off.
+- WHAT IT COSTS (D23): the first working settle cost 4.4 ms a run, 14 ms a frame - it was nudging folk
+  held at arm's length round the 2 cm pad up to ten times a frame (6.3 passes a run). A street crowd now
+  stops at the first pass with nobody truly inside anybody, and the pair test is a cheap distance check
+  before the full one: 0.81 ms a run, 1.19 ms a frame, 1.03 passes a run (town_perf3.log, 240 s, 31,698
+  frames, 0 overlaps). Under the expensive version townwalk's watchdog fired 17-18 times; on the final
+  code it fires 3 (D91b's run: 2) - the extra fires were the frame time, not wedging.
+- Gates on the FINAL code (renders/cycles/d91c/f_*.log): parse 0 errors, _offfloor 0 of 2067 (INPROP 0,
+  MON_INPROP 0), TWITCH_PARSE OK, _townwalk stuck_on_route 0, in_solid 0/13,482 (D91b: 3/18,584), giveup 0,
+  _delve_test no SCRIPT ERROR, D91_CROWD_TEST OK (D91_EQ 0 mismatches - the town's push is untouched).
+- NOT PUSHED. The item's own test is zero frames and the town is 2 frames short in 82k, so by the
+  run rules this is NOT on laptop. It is pushed to a SIDE BRANCH, origin/d91c-wip (commit built from the
+  working tree without touching laptop), and the same changes sit uncommitted in the laptop worktree.
+  NEXT RUN: the north-houses pocket at (33, -71) - houses whose footprints overlap leave a gap a body
+  can be in but two cannot, and the folk all leave by one door spot there. Fix the SOURCE (spread the
+  door-out spot / the plot spacing) rather than a cleverer settle; then one 20-minute town soak.
+- STILL OPEN: the floor change costs 3.3-3.9 s headless (D23 item, unchanged); the dungeon has no
+  pre-D91 stuck baseline (unsticks 28 here, 30/1/73 in other runs - it wanders with the floors).
+
 ## D-cycle - D91b stages 2-4: three-cell halls, the dungeon in the shared Crowd, the party in file, 2026-11-16 ~05:55 CT (game build)
 TAKE THIS NEXT gave GAME BUILD "D91 stages 2-4" (the cloak shade step it named earlier is D94d, already merged).
 - STAGE 3 - THREE-CELL HALLS, GRID GROWN (floorgen.gd). _corridor carves the 3x3 block round every

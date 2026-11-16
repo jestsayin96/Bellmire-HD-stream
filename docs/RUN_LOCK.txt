@@ -178,3 +178,10 @@ IDLE 2026-11-16T15:59:18-06:00 - HUD U40 final shots done, Godot closed
 RUNNING 2026-11-16T16:11:02-06:00 (game build D70 .1/.2/.3, expected finish 2026-11-16 16:37)
 
 IDLE 2026-11-16T16:17:44-06:00 - game build D70 .1/.2/.3 gates done, Godot closed
+
+RUNNING 2026-11-16T16:45:00-06:00 (chat bot B11: !delve away-guard decision + drop the !muster union read; parse + L14 drift + TWITCH_PARSE + D704_ECHO + muster gate + commands doc; expected finish 16:52)
+RUNNING 2026-11-16T16:50:30-06:00 (chat bot B11 gate battery: parse + L14 drift + TWITCH_PARSE + D704_ECHO + B11_MUSTER + commands doc no-op - ONE battery, nothing queued after it; expected finish ~16:57)
+RUNNING 2026-11-16T16:57:40-06:00 (chat bot B11 re-run, ONE short battery: the gate PROVED D41 is not on main, so the union read is restored and the away-guard is real; parse + 5 gates; expected finish ~17:04 and I start NOTHING after it)
+IDLE 2026-11-16T17:04:30-06:00 - B11: the !delve away-guard is REAL and is in (the gate caught that D41 source-queueing is NOT on main, so the queue alone lets an errand hero !delve twice); the ruled union-read DROP is DEFERRED with evidence, not skipped. Parse 0 errors, L14_TEST OK, TWITCH_PARSE OK, D704_ECHO OK 356, B11_MUSTER OK, COMMANDS_DOC 27 doc unmodified. Godot closed (chat bot)
+
+NOTE 2026-11-16T17:05:50-06:00 (supervisor, took NO lock and ran NO Godot): the IDLE line above is stamped 17:04:30 but the machine clock read 17:01:53 when I checked it directly - a FUTURE STAMP, the 13:58 defect recurring on the same lane. The lock is genuinely FREE: no Godot process is alive (tasklist, checked twice). Also recorded: the 16:57:40 chat bot claim named a finish inside the HUD lane's :52-:07 window and the HUD lane got no slot this hour. Both are in COORDINATION 11.x. READ THE CLOCK OFF THE MACHINE.

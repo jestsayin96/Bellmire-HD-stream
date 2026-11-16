@@ -1,0 +1,46 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend into the scar with the lamps trimmed low.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 puglin, 1 cave spider.
+FEED A row of boots at the door, paired and empty.
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage works bolt and the scar gives it back inside out (1 vs DC 10).
+FEED MossyMage searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED Held, and the door is still ours.
+T10s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED MossyMage steps on a slot in the floor - a blade! DEX 19 vs DC 10, 6 damage (halved).
+T20s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 62/68", "DawnCleric 96/96", "BigAxe 104/104"]
+T30s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 62/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T40s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+T50s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+T60s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+T70s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 puglin, 2 cave bats, 1 cave spider.
+FEED The oil is running low.
+FEED DawnCleric casts Bolt at cave bat.
+FEED DawnCleric speaks smite. The scar spells it backwards (1 vs DC 11).
+T80s floor=2 state=fight foes=3 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED MossyMage's bolt goes off a breath early - the scar is impatient (10 vs DC 11).
+FEED MossyMage casts Chain Bolt at cave spider.
+T90s floor=2 state=fight foes=2 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED DawnCleric casts Bolt at cave bat.
+FEED DawnCleric casts Bolt at puglin.
+FEED MossyMage casts Fire at puglin.
+FEED MossyMage searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED Floor 2 done - the door is still kept.
+T100s floor=2 state=search foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+T110s floor=2 state=search foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED MossyMage searches the chest - Successfully found loot!! 35 gold (Investigation 19 vs DC 11).
+T120s floor=2 state=search foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T130s floor=2 state=descend foes=0 ["JestFan 98/98", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED MossyMage steps on a plate - darts! DEX 17 vs DC 11, 2 damage (halved).
+T140s floor=2 state=descend foes=0 ["JestFan 98/98", "MossyMage 66/68", "DawnCleric 96/96", "BigAxe 104/104"]
+FEED MossyMage finds a man in a cage still alive. He slips 42 gold to them on the way out, 4 ways to split it.
+T150s floor=2 state=descend foes=0 ["JestFan 98/98", "MossyMage 66/68", "DawnCleric 96/96", "BigAxe 104/104"]

@@ -36,6 +36,7 @@ var _held := 0.0
 var _tick := 0.0
 var _paused_for := 0.0
 var _tour_i := 0
+var _tour_seen := {}            # L64.3: tour stop key -> director clock of its last cut (oldest is shown next)
 var _rng := RandomNumberGenerator.new()
 var _clock := 0.0               # real seconds the director has been on
 var _pace := 1.0                # L64.3: 0.6 in a raid (faster cuts), 1.4 in a quiet stretch (calmer holds)
@@ -306,6 +307,8 @@ func _cut(s: Dictionary, why: String = "") -> void:
         if _clock - float(m["t"]) < REPEAT_WINDOW:
             m2.append(m)
     _mem = m2
+    if s.get("tour", false):
+        _tour_seen[String(s["key"])] = _clock
     _last_shot = String(s.get("shot", ""))
     _cur = s
     _held = 0.0
@@ -353,15 +356,27 @@ func tour_stops() -> Array:
 ## or dead), so it always has somewhere live to point. It rotates, so two empty ticks running
 ## do not re-pick the same view.
 func _fallback_shot(avoid: String = "") -> Dictionary:
+    return _tour_pick(avoid)
+
+## L64.3: the tour is a set of PLACES, so the anti-repeat memory is a lap: always the stop that was
+## shown longest ago (never one cut a moment ago), the current stop excluded.
+func _tour_pick(avoid: String = "") -> Dictionary:
     var tour := tour_stops()
     if tour.is_empty():
         return {}
+    var best := {}
+    var best_t := INF
     for i in tour.size():
         var s: Dictionary = tour[(_tour_i + i) % tour.size()]
-        if String(s["key"]) != avoid:
-            _tour_i = (_tour_i + i + 1) % tour.size()
-            return s
-    return {}
+        if String(s["key"]) == avoid:
+            continue
+        var t := float(_tour_seen.get(String(s["key"]), -1.0e9))
+        if t < best_t:
+            best_t = t
+            best = s
+    if not best.is_empty():
+        _tour_i = (_tour_i + 1) % tour.size()
+    return best
 
 ## every shot worth showing right now, best first; `avoid` skips one story
 func _best(avoid: String = "") -> Dictionary:
@@ -440,10 +455,9 @@ func _best(avoid: String = "") -> Dictionary:
     for e in _deaths:
         c.append({"key": String(e["key"]), "shot": "hard_cut", "pri": 90.0, "pos": e["pos"], "dist": 16.0, "pitch": -50.0, "note": "death"})
     # 6. the town itself: a slow tour of its best views
-    var tour := tour_stops()
-    c.append(tour[_tour_i % tour.size()])
-    if _cur.get("tour", false) and _held >= HOLD_MAX:
-        _tour_i += 1
+    var tp := _tour_pick(String(_cur.get("key", "")) if _cur.get("tour", false) else "")
+    if not tp.is_empty():
+        c.append(tp)
     # L64.1/.3: score, with the reason for every adjustment kept in the note so the log explains it
     var hottest := 0.0
     for s in c:

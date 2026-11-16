@@ -22,7 +22,7 @@ var float_y := INF            # set for ducks: ride the water surface
 var yaw_off := 0.0            # models that face -Z get PI
 var kind := ""
 var edge := false             # a sheepdog: walks the edge of its flock's pen
-var body_r := 0.3             # D16a: room it takes in town.crowd_push
+var body_r := 0.3             # D16a: room it takes in town.crowd_push (D91: measured per model)
 var _proc := ""
 var _parts := {}
 var _moving := false
@@ -144,6 +144,7 @@ func _ready() -> void:
     m.scale = Vector3.ONE * scale_f
     m.rotation.y = yaw_off
     add_child(m)
+    body_r = _measure_r(m)
     var st: Array = [m]
     while not st.is_empty():
         var c: Node = st.pop_back()
@@ -188,6 +189,28 @@ func _ready() -> void:
         _play(_idle)
         _ap.seek(_rng.randf() * 1.5, true)
     _wait = _rng.randf_range(0.0, 6.0)
+
+## D91: a 0.3 for every creature from a hen to a cow was wrong both ways. The
+## room an animal takes is measured off its own model, scaled as it stands:
+## the mean of its half-length and half-width (a cow is long and narrow, so a
+## circle the size of its half-length would shove folk a body-length off its
+## flank), kept between a hen's 0.12 and 0.75.
+func _measure_r(m: Node3D) -> float:
+    var box := AABB()
+    var first := true
+    var inv := global_transform.affine_inverse()
+    var st: Array = [m]
+    while not st.is_empty():
+        var c: Node = st.pop_back()
+        if c is MeshInstance3D:
+            var ab: AABB = (inv * (c as MeshInstance3D).global_transform) * (c as MeshInstance3D).get_aabb()
+            box = ab if first else box.merge(ab)
+            first = false
+        for g in c.get_children():
+            st.append(g)
+    if first:
+        return body_r
+    return clampf((box.size.x + box.size.z) * 0.25, 0.12, 0.75)
 
 func _play(a: String) -> void:
     _moving = a == _walk or (a == _run and a != "")

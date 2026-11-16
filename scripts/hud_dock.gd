@@ -32,7 +32,7 @@ const CHROME := 0.06           # L32b: slim - the Chronicle left it for the cent
 ## old height). The font STAYS 18 px - the extra height buys MORE LINES on screen at once
 ## (feed_hud._chrome_lines), so a viewer can read back what just happened.
 const STRIP := 0.273           # L39b: the box's height - ~0.27 of the screen (~295 px at 1080p)
-const CENTRE_W := 0.372        # L39b: the box's width - ~0.37, a touch wider, still under half
+const CENTRE_W := 0.40         # L39b: the box's width - ~0.37, a touch wider, still under half
 const L_WORLD := 1
 const L_FLOAT := 1 << 10
 const L_HTAG := 1 << 11

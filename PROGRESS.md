@@ -6519,3 +6519,47 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - NOT DONE THIS SLOT: (2) D91 from origin/d91d-wip - the 20-minute soak cannot start and finish before
   :40 after the gloves gates. Next slot: take d91d-wip (46f6b85), fix the alcove (bench/crate or the
   perpendicular _settle_pair), one 20-minute soak with a named finish.
+
+
+## ART - the two skip measurements and REGISTER CONVERSION 9 OF 14, the Sluicekeeper (2026-11-16)
+- THE SKIP RULING'S CONDITION IS MET. The Scrapwright and the Bellman went through the existing
+  fit harness ONCE, at the fixed frame, beside a chibi Knight: scrapwright ratio 0.82, pair
+  4.62 m, footprint 2.76 m; bellman ratio 1.10, pair 4.58 m, footprint 2.72 m; both fit the
+  frame, both CORRIDOR-SAFE, blank check 2 files 0 failures. Recorded in docs/art/
+  MINIBOSS_FIT.md marked SKIPPED, MEASURED. The converted eight sit at ratio 0.84-1.06, so the
+  two skips are 0.02 and 0.04 outside that band's ends - a difference that is bestiary.gd's `h`
+  and not geometry. Nothing argues for converting either. Sheet: renders/art/minibosses/
+  _skipmeasure.png. The one thing the numbers do not cover is written down beside them: both
+  carry members that are wire by the converted twelve's standard, which is member thickness and
+  not proportion, and is not what this register exists to fix.
+- REGISTER CONVERSION 9 OF 14 - sluicekeeper_chibi. Eight passes, one change and one render
+  each, each looked at. Ratio 1.02, pair 5.36 m, fits the frame, blank check 0 failures,
+  footprint 3.50 m CORRIDOR-SAFE, 4 meshes / 2623 faces, static, BLENDER_EEVEE.
+- THREE RULES CAME OUT OF IT AND THEY ARE METHOD, NOT THIS CREATURE:
+  (a) A WEAK PAIR IN THE PALETTE IS NOT A REASON TO USE ONE VALUE FOR EVERYTHING. Measuring
+      bone at 14% off body, I built the machine entirely in body/dark and the handwheel - the
+      whole silhouette - vanished into its own frame. Find the pair that IS strong (bone/dark,
+      0.342 vs 0.060) and build on it.
+  (b) A FIGURE OPERATING A MACHINE MUST STAND IN THE MACHINE'S OWN PLANE. Off to one side, the
+      near rim was 0.85 m across the wheel, both arms had to span it and they merged into one
+      plank. This is the Cook's diagonal rule's other half.
+  (c) AT THIS ELEVATION A RAISED SURFACE HIDES WHAT STANDS IN IT ONLY IF IT REACHES
+      (height - object top) / 0.105 METRES TOWARD THE CAMERA. A 0.30 m waterline needs 1.62 m
+      of water between lens and boot; widening to that broke the fixed frame, so the waterline
+      came down to 0.15 m instead.
+- A STRAIGHT BUG FOUND AND NAMED: the rim-point scan searched a near pi, which is the quadrant
+  pointing AWAY from the man, so four passes of arm work were finding the nearest point of the
+  wrong half of the wheel.
+- THE CARRIED LEG FAULT IS TAKEN (shins `body`, boot `dark`, so the leg breaks in value at the
+  ankle) - and it cannot be seen on this creature, because the waterline covers the legs. The
+  fix is in the file; the next conversion shows it.
+- Twelve faults named in MINIBOSS_FIT.md, the first being that the lower arm merges into the
+  torso so "two hands turning" reads as one hand in two views out of three.
+- NEW TOOL: tools/art/_footprint.py - the corridor span as a measurement, so a SKIP can be
+  measured the same way a conversion is.
+- THE REGISTER IS NOW 9 CONVERTED + 2 MEASURED-AND-SKIPPED. THREE REMAIN: the BOILER, the SOWER
+  and the SNARER.
+- WIRING FOR THE GAME BUILD LANE (no .gd touched): scripts/bestiary.gd - if sluicekeeper_chibi
+  is adopted, model = assets/monsters/minibosses/sluicekeeper_chibi.glb, no `anims` entry
+  (static), h = 3.20.
+- STILL OPEN AND STILL MINE, NOT TAKEN THIS RUN: the gloves _G_FLARE0/_G_FLAREK re-tune.

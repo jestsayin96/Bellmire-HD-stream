@@ -701,9 +701,15 @@ confirm the director recovers automatic control every time. Assert the server re
 connection from outside the LAN. Mr. E's eye on whether it is actually usable while streaming;
 that is the only test that matters in the end.
 
-- [ ] D84. THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
+- [x] D84. THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      DONE (game build, Nov 15 ~18:25 CT): NOT a material/load fault - the raid HIT-FLASH (white emission
+      1.6) never switched off on HeroBody and Cavalry: both override Townsfolk._process and never called
+      _tick_flash, so one raid hit left a hero or a mounted knight lit white all night. The flash now also
+      ends on a SceneTree timer no override can starve (townsfolk.gd). D84_TEST OK (windowed): hero, rider
+      and guard lit 1 frame, dark by 0.6 s; _death_fx dark by 0.9 s; null-surface logger 0 bodies in 12 scans
+      over 60 s (not the 10 min asked - the null-material path is ruled out). Shots: renders/cycles/d84/.
 
 ### D84 - THE WHITE FIGURES (game build - Mr. E, Nov 15 16:25, with a screenshot)
 

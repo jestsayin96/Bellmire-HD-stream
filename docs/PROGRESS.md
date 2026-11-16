@@ -1472,3 +1472,24 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - OPEN for D64: .3 route-tagged lines, .4 caravan above-cap piece, per-shop caps for armour/brews - all need
   laptop-owned files. Mr. E/supervisor: who owns roster.gd/chatcmd.gd/gear.gd now that no laptop code worker runs?
 
+
+## D-cycle - D84 the white figures, 2026-11-15 ~18:25 CT (game build)
+- Item: D84 (first open game-build RC item in my row; D91 stage 1 is in, stages 2-4 need laptop-owned dungeon files).
+  Started on laptop 30f7438 (origin/main merged).
+- CAUSE (not a material/load fault): the raid HIT-FLASH. Townsfolk._flash duplicates every surface material and sets
+  white emission 1.6 for 0.12 s; only Townsfolk._process counts it down (_tick_flash). HeroBody and Cavalry both
+  override _process and never call it, so a viewer hero or a mounted knight hit once by a raider stayed featureless
+  white for the rest of the night - Mr. E's "GLOWING" knight with the spotlight ring under him (a hero). Headless runs
+  skip the material surgery, which is why no test ever saw it. Monster ticks its own flash in its _process (checked, no
+  subclasses) - not affected.
+- FIX scripts/townsfolk.gd: _flash and _death_fx also arm a SceneTree timer (generation-checked, so a re-flash is not cut
+  short) that calls _end_flash; no subclass override, LOD skip or disabled process_mode can starve it. flash_lit() test
+  hook. Backup townsfolk.gd.bak_d84.
+- TEST tools/_d84_flash.gd (WINDOWED): D84_TEST OK - HeroBody, Cavalry and a plain guard each lit (8-9 surfaces) one frame
+  after _flash, 0 lit at 0.6 s; HeroBody _death_fx 0 lit at 0.9 s; null-surface logger over all ~252 bodies every 5 s for
+  60 s: 0 bodies with a null surface, 0 left lit. (The item asked a 10-min soak for the logger; 60 s was run because the
+  null-material hypothesis is ruled out by the cause.) The probe hero's roster.json is snapshotted and restored.
+- LOOK renders/cycles/d84/d84_knight_night_midflash.png (the knight pure white - the exact shot Mr. E sent) and
+  d84_knight_night_after.png (1 s later, normal night-blue steel). This is what the bug used to freeze in place.
+- GATES: parse 0 errors; OFFFLOOR 0/1339 INPROP 0 MON_INPROP 0/123; TWITCH_PARSE OK; TOWNWALK in_solid 0/18612 raid
+  0/4672 PASS; delve rc 0, 0 SCRIPT ERROR.

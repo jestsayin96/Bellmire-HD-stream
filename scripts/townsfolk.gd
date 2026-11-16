@@ -111,6 +111,8 @@ static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_te
 ## stream distance, matching the raider side (Monster._flash/_number).
 var _flash_t := 0.0
 var _flash_mats: Array = []
+## D84: which flash is live - a timer only ends the flash it was armed for
+var _flash_gen := 0
 var _flash_red := false
 var _lod_n := 0
 var _lod_acc := 0.0
@@ -1615,16 +1617,43 @@ func _flash() -> void:
         mm.emission = Color(1, 1, 1)
         mm.emission_energy_multiplier = 1.6
     _flash_t = 0.12
+    _arm_flash_end(_flash_t)
 
 func _tick_flash(delta: float) -> void:
     if _flash_t <= 0.0:
         return
     _flash_t -= delta
     if _flash_t <= 0.0:
-        for d in _flash_mats:
-            var mm: StandardMaterial3D = d
-            mm.emission_enabled = false
-            mm.emission_energy_multiplier = 0.0
+        _end_flash()
+
+## D84 "the white figures": HeroBody and Cavalry override _process without
+## calling _tick_flash, so a hero or a rider hit once in a raid kept the white
+## hit-flash emission (1.6, unshaded-looking) for the rest of the night - the
+## "GLOWING" knight. The flash now ends on a SceneTree timer as well, which no
+## subclass override, LOD skip or disabled process_mode can starve.
+func _arm_flash_end(t: float) -> void:
+    _flash_gen += 1
+    if is_inside_tree():
+        get_tree().create_timer(t + 0.05, false).timeout.connect(_flash_timeout.bind(_flash_gen))
+
+func _flash_timeout(gen: int) -> void:
+    if gen == _flash_gen and _flash_t > 0.0:
+        _end_flash()
+
+func _end_flash() -> void:
+    _flash_t = 0.0
+    for d in _flash_mats:
+        var mm: StandardMaterial3D = d
+        mm.emission_enabled = false
+        mm.emission_energy_multiplier = 0.0
+
+## D84 test hook: how many of this body's flash materials are still lit
+func flash_lit() -> int:
+    var n := 0
+    for d in _flash_mats:
+        if (d as StandardMaterial3D).emission_enabled:
+            n += 1
+    return n
 
 func _number(amount: float, crit: bool) -> void:
     var lb := Label3D.new()
@@ -1682,6 +1711,7 @@ func _death_fx() -> void:
         mm.emission = Color(1.0, 0.12, 0.08)
         mm.emission_energy_multiplier = 2.0
     _flash_t = 0.5
+    _arm_flash_end(_flash_t)
     _death_label()
 
 ## The FELLED! banner. Shape mirrors _number() so the stream reads them as one

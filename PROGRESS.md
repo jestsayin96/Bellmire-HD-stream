@@ -6535,3 +6535,12 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - NOT SEEN: no "Delvers - floor N" party-frames block appeared in the stills at 100% grid; only the BossCard and a "NOW FIGHTING" card (@PanelContainer, (244,167) 471x111, does not overlap anything). Whether party_frames.gd draws at all in this scene is the game build's to say; I did not widen the test.
 - LOOKED: renders/cycles/l40d/l40d_grid_100.png (card over DIRECTOR plate, visible), plus the five other stills exist. Side observation, not a fault gated here: the Chronicle's top line sits flush under the scroll rail at 100% grid.
 - Files: tools/_l40_delve_test.gd, PROGRESS.md, renders/cycles/l40d/*. Logs _l40d_*.log.
+
+
+## U40 - Chronicle top line no longer flush under the scroll rail (HUD, feed_hud.gd)
+- ITEM: the supervisor's 14:58 "YOUR NEXT" (the side observation from U39). Phase 1, "stop it looking broken".
+- MEASURED (tools/_u40_pad_test.gd, windowed 1920x1080, raid flood, grid): gap between the vellum top and the first line was 2.0 px at 100% (FAIL, flush), 32 px at 125%, 10 px at 150%.
+- FIX: feed_hud.gd `_vellum()` insets the open vellum 6 px (scaled) under the top rail and 1.5x that off the bottom; `_place_chrome`, `_chrome_lines`, `_chrome_h`, `_chrome_text_w` all use it so the height-fit still counts whole entries. hud_dock.gd untouched.
+- AFTER: 100% gap 6.0 px, 125% 34 px, 150% 12 px; U40_TEST OK. Tried a bottom pad of 2x: it pushed the two-line top entry out and left a 34 px hole at 100%, worse, so reverted to 1.5x. Bottom line at 100% sits ~0.4 px past the unpadded sheet_rect edge, still clear of the rail in the still.
+- LOOKED: renders/cycles/u40/u40_before_100.png vs u40_after_100.png (and 125/150).
+- Lock: three short claims (15:53, 15:56, 15:58), each under 6 min, all released well before :07.

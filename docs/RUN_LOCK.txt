@@ -114,3 +114,4 @@ RUNNING 2026-11-16T08:54:12-06:00 (HUD L73 30-min director capture, windowed; ex
 RUNNING 2026-11-16T08:58:26-06:00 (HUD L73 capture relaunch, 12-min director clock, expected finish ~09:30)
 IDLE 2026-11-16T09:31:30-06:00 - HUD L73 08:58 claim passed its named finish (~09:30) with NO Godot process alive (checked 09:29 and 09:31) - treated as released (game build)
 RUNNING 2026-11-16T09:31:30-06:00 (game build D91d door-emerge fix + C-55 fishing rarity - parse, 20-min town soak, gate battery; expected finish ~10:00)
+RUNNING 2026-11-16T10:12:08-06:00 (game build D91d crevice fill - 20-min town soak + full gate battery; expected finish ~10:52)

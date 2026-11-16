@@ -1349,3 +1349,76 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .rentry.crat .rtier { color: var(--parch-hi); background: var(--ink-soft); }
 .herolink-note { margin: 8px 0; padding: 8px 12px; border: 1px dashed var(--gold); border-radius: 8px; font-style: normal; color: var(--ink); }
 .linkcopy { margin-left: 6px; }
+
+/* H29: the Shops tab. Palette tokens only; a rarity is a left border, never a recolour of stat colours. */
+#shopsBody { max-height: max(320px, calc(100vh - 340px)); max-height: max(320px, calc(100dvh - 340px)); overflow-y: auto; overscroll-behavior: contain; }
+.shop-caveat { margin: 0 0 10px; font-style: normal; }
+.shop-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); margin-bottom: 10px; }
+.shop-card { border: 1px solid var(--line, rgba(128,128,128,.35)); border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; background: rgba(255,255,255,.03); }
+.shop-grid .shop-card { margin-bottom: 0; }
+.shop-head { display: flex; align-items: center; gap: 8px; }
+.shop-head .ic { width: 18px; height: 18px; flex: none; }
+.shop-name { margin: 0; font-size: 1rem; flex: 1; overflow-wrap: anywhere; }
+.shop-lvl { font-size: .8rem; opacity: .85; white-space: nowrap; }
+.shop-sells { margin: 4px 0 6px; font-size: .85rem; opacity: .9; }
+.shop-empty { margin: 6px 0 0; font-size: .85rem; font-style: italic; opacity: .75; }
+.shop-stock { list-style: none; margin: 6px 0 0; padding: 0; }
+.shop-good { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding: 3px 0 3px 8px; border-left: 3px solid transparent; font-size: .88rem; }
+.shop-good .gname { flex: 1 1 8rem; overflow-wrap: anywhere; }
+.shop-good .gqty, .shop-good .grar { font-size: .75rem; opacity: .75; }
+.shop-good .gcost { white-space: nowrap; }
+.shop-good .gcost .ic { width: 13px; height: 13px; vertical-align: -2px; color: var(--gold, #c9a54a); }
+.shop-good.passing { background: rgba(201,165,74,.08); }
+.shop-good.mine { border-left-color: var(--accent, #3aa6a0); }
+.rar-uncommon { border-left-color: #6aa84f; } .rar-rare { border-left-color: #4a86c8; }
+.rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }
+
+/* ===== H30: the Satchel tab (reuses .shop-card / .hpbar / .chip; the bar width is a CSSOM number) ===== */
+.sat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 10px; }
+.sat-lab { font-size: .85rem; display: inline-flex; align-items: center; gap: 6px; }
+.sat-lab select { font: inherit; padding: 4px 6px; }
+.sat-controls .find { flex: 1 1 10rem; min-width: 8rem; }
+.sat-controls .chips { flex-basis: 100%; margin: 0; }
+.sat-card { margin-bottom: 10px; }
+.sat-bar { margin: 8px 0 4px; }
+.sat-bar .hptrack { position: relative; }
+.sat-tick { position: absolute; top: 0; bottom: 0; left: calc(var(--at, .33) * 100%); width: 1px; background: rgba(42,28,16,.55); }
+.sat-band { margin: 2px 0 4px; font-size: .88rem; }
+.sat-band.b1 b { color: #8a5a0a; } .sat-band.b2 b { color: #8a2a1a; }
+.sat-src { margin: 3px 0 0; font-size: .75rem; opacity: .75; }
+.sat-list { list-style: none; margin: 6px 0 0; padding: 0; }
+.sat-item { display: grid; grid-template-columns: 18px minmax(6rem, 1fr) 4.5rem 4.5rem 4.5rem 5rem 15rem; align-items: center; gap: 4px 8px;
+  padding: 5px 0 5px 8px; border-left: 3px solid transparent; border-bottom: 1px solid rgba(128,128,128,.2); font-size: .85rem; }
+.sat-item .ic { width: 16px; height: 16px; }
+.sat-item.worn { background: rgba(58,166,160,.07); }
+.sat-name { overflow-wrap: anywhere; }
+.sat-qty, .sat-tag { font-size: .72rem; opacity: .8; }
+.sat-tag.drop { color: #8a2a1a; font-weight: 700; opacity: 1; }
+.sat-slot { font-size: .75rem; opacity: .75; text-transform: capitalize; }
+.sat-num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sat-num .ic { width: 12px; height: 12px; vertical-align: -2px; color: var(--gold, #c9a54a); }
+.sat-vpp { font-weight: 700; }
+.sat-acts { display: inline-flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.sat-btn { font: inherit; font-size: .75rem; padding: 3px 8px; border: 1px solid var(--edge-2, #8a7a55); border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
+.sat-btn:hover { border-color: var(--teal, #3aa6a0); }
+.sat-btn:focus-visible { outline: 2px solid var(--teal-ink, #1f6f6a); outline-offset: 2px; }
+.sat-btn.stone { margin-top: 6px; }
+@media (max-width: 640px) {
+  .sat-item { grid-template-columns: 18px 1fr auto; }
+  .sat-slot, .sat-num { text-align: left; }
+  .sat-acts { grid-column: 1 / -1; justify-content: flex-start; }
+}
+
+/* ===== H31: the Season tab (reuses .shop-card / .shop-grid; the bar fill is a CSSOM number) ===== */
+.sea-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.sea-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.sea-row { display: grid; grid-template-columns: 2.4rem 1fr auto; gap: 2px 8px; align-items: center; padding: 5px 4px; position: relative; border-bottom: 1px solid rgba(128,128,128,.18); }
+.sea-row::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: calc(var(--fill, 0) * 100%); background: var(--accent, #3aa6a0); opacity: .7; }
+.sea-row.lead::after { background: var(--gold, #c9a54a); opacity: 1; }
+.sea-row.gone .sea-name { opacity: .8; }
+.sea-rank { font-size: .85rem; opacity: .8; }
+.sea-mid { display: flex; flex-direction: column; min-width: 0; }
+.sea-name { overflow-wrap: anywhere; font-size: .92rem; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.sea-sub { font-size: .75rem; opacity: .7; overflow-wrap: anywhere; }
+.sea-val { white-space: nowrap; text-align: right; }
+.sea-val .bunit { margin-left: 4px; font-size: .75rem; opacity: .75; }

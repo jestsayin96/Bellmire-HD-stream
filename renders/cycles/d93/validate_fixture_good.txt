@@ -1,0 +1,1 @@
+D93_VALIDATE PASS overlap=0 on_road=0 on_square=0 door=0 unreached=0 patch=0 | roads=2 buildings=3 sites=1 no_door=0 components=1

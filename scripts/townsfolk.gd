@@ -59,7 +59,15 @@ var leader: Node3D = null            # watch pairs: the second man walks at the 
 var shout_lines: Array = []          # town crier
 var _shout_t := 4.0
 var _shout: Label3D
-var cart: Node3D = null              # carters pull a wagon
+var cart: Node3D = null:            # carters pull a wagon
+    set(v):
+        cart = v
+        # D90: hitched the moment it is handed over - never one frame side-on
+        # where it was spawned
+        if v != null and town != null and is_inside_tree() and v.is_inside_tree():
+            _tow_h = rotation.y
+            tow_state = TOW_TOWED
+            _put_cart(_tow_pose(rotation.y, 1.0), rotation.y, 1.0)
 var size_k := 1.0                    # children are smaller
 ## D6: Bellmire's named people (Notables): a title under the name, the tag shown
 ## up close even with names off, and how far they weave as they walk (the drunk)
@@ -111,6 +119,8 @@ static var steps := 0          # walker steps taken, all townsfolk (tools/_d7_te
 ## stream distance, matching the raider side (Monster._flash/_number).
 var _flash_t := 0.0
 var _flash_mats: Array = []
+## D84: which flash is live - a timer only ends the flash it was armed for
+var _flash_gen := 0
 var _flash_red := false
 var _lod_n := 0
 var _lod_acc := 0.0
@@ -129,6 +139,7 @@ var _gait_n := 0
 var _gait_acc := 0.0
 
 func _process(delta: float) -> void:
+    var fd := delta
     if _flash_t > 0.0:
         _tick_flash(delta)
     if lod >= 3:
@@ -137,11 +148,15 @@ func _process(delta: float) -> void:
         _gait_acc += delta
         _gait_n += 1
         if _gait_n < LOD_TICKS[3]:
+            if cart != null:
+                _tow_cart(delta)    # D90: the cart is posed every drawn frame, whatever the LOD
             return
         delta = _gait_acc
     _gait_n = 0
     _gait_acc = 0.0
     _gait_step(delta)
+    if cart != null:
+        _tow_cart(fd)               # D90: after the facing is settled for this frame
 
 func _gait_step(delta: float) -> void:
     if _anim == null or delta <= 0.0 or not Rig.gait:
@@ -765,8 +780,170 @@ const ARRIVE_CROWDED := 2.5
 # a walker went round one
 var _wag_t := randf() * 0.5
 var wag_detours := 0
-var _park: Array = []           # D16c: where the wagon is drawn up while stood still
-const WAGON_SNAP := 5.0         # D53: gap (m) past which a towed wagon snaps to its hauler, not crawls
+var _park: Array = []           # D16c: where the wagon is drawn up while stood still [pos, yaw]
+
+## D90: THE TOW IS RIGID (Mr. E, third report: "the wagon is still trailing
+## behind the person carrying it ... sideways, hes not even touching it").
+## THREE faults, all fixed here:
+##  1. THE CART WAS TURNED A QUARTER ROUND, ALWAYS. Prop_Wagon's shafts run along
+##     its own +z (tips at z +0.87, the wheels at z -2.5, measured from the
+##     .gltf with tools/_d90_probe.gd). D16c/D53 set its yaw to the hauler's
+##     +PI/2, so every towed cart in Bellmire rolled along SIDEWAYS beside its
+##     hauler with the shafts pointing off into the street - the green-hooded
+##     caravan master in Mr. E's shot exactly. Now the cart's +z points at the
+##     hauler and the SHAFT TIPS are put at his hips, lifted to hand height
+##     (TILT, pivoting on the axle so the wheels stay on the ground).
+##  2. IT WAS A FREE BODY CHASING A TARGET: snapped only past a 5 m gap (so up
+##     to 2.4 m of open air was "fine"), otherwise crawling and lerping. Now its
+##     pose is DERIVED from the hauler every drawn frame, never integrated. The
+##     one honest degree of freedom: its heading trails a turn (swinging in at
+##     speed / TOW_LEVER, like a towed cart), clamped to TOW_LAG.
+##  3. IT GRABBED THE PARK POSE ANY FRAME THE ROUTE WAS EMPTY, even between legs.
+##     Parking is now an explicit STATE, entered only once the hauler has really
+##     stood still PARK_AFTER s: the shafts are set down and the cart rolls back
+##     a step (animated); leaving it, the hauler turns his back to the cart,
+##     takes the shafts up where they lie and waits UNPARK_T s while it lifts.
+## WAGON_SNAP is gone: there is no gap to snap.
+const CART_TIP := Vector3(0.0, 0.08, 0.87)     # shaft tips, mesh space (unscaled)
+const CART_AXLE := Vector3(0.0, 0.75, -2.5)    # wheel axle, mesh space; 0.75 = wheel radius
+const CART_BODY := Vector3(0.0, 0.7, -1.6)     # the bed's middle (the tests' "is it ahead of him")
+const HITCH_BACK := 0.1         # m: the shaft tips sit this far behind the hauler's centre, at his hips
+const TILT := 0.16              # rad: shafts lifted from the ground to hand height
+const PARK_STEP := 0.5          # m: a parked cart is set down this far back, clear of his heels
+const TOW_LEVER := 2.8          # m: tips to axle, the turn-trail lever
+const TOW_LAG := 0.35           # rad (~20 deg): the most a cart trails a turn
+const PARK_AFTER := 1.5         # s stood still before the cart is drawn up
+const PARK_T := 1.2             # s: setting it down
+const UNPARK_T := 0.9           # s: taking it up again, the hauler waits for it
+const TOW_FAR := 8.0            # a parked cart this far from its hauler (a door, a respawn) is re-hitched at once
+enum { TOW_TOWED, TOW_PARKING, TOW_PARKED, TOW_UNPARKING }
+var tow_state := TOW_TOWED
+var tow_hold := 0.0             # > 0: the hauler waits for its cart to re-hitch
+var _tow_h := INF               # the cart's heading (= its mesh yaw: +z points at the hauler)
+var _still_t := 0.0
+var _tow_t := 0.0
+var _tow_unh := 0.0             # the heading the hauler takes up the shafts on
+var _tow_from: Array = []       # [pos, yaw, lift] where a park / re-hitch started
+var _tow_lift := 1.0
+var _park_at := Vector3.ZERO    # where the hauler stood when the cart was drawn up
+
+## the cart's origin for heading h, shafts lifted `lift` (0 down .. 1 in hand),
+## tips `back` m behind the hauler's centre: tips placed, axle on the ground
+func _tow_pose(h: float, lift: float, back := HITCH_BACK) -> Vector3:
+    var sc := cart.scale.x
+    var bs := Basis.from_euler(Vector3(-TILT * lift, h, 0.0)) * sc
+    var tip := bs * CART_TIP
+    var ax := bs * CART_AXLE
+    var f := Vector3(sin(h), 0.0, cos(h))
+    var o := global_position - f * back - Vector3(tip.x, 0.0, tip.z)
+    var ag := Vector2(o.x + ax.x, o.z + ax.z)
+    o.y = float(town.call("height_at", ag.x, ag.y)) + CART_AXLE.y * sc - ax.y
+    return o
+
+func _put_cart(o: Vector3, yaw: float, lift: float) -> void:
+    _tow_lift = lift
+    cart.global_position = o
+    cart.rotation = Vector3(-TILT * lift, yaw, 0.0)
+
+## D90 test hooks: the shaft tips and the bed's middle in the world
+func cart_tip() -> Vector3:
+    return cart.global_transform * CART_TIP
+
+func cart_body() -> Vector3:
+    return cart.global_transform * CART_BODY
+
+func _tow_cart(delta: float) -> void:
+    if cart == null or not is_instance_valid(cart) or town == null:
+        return
+    var ry := rotation.y
+    if inside or not visible:
+        # indoors or culled: the cart stays where it stands
+        if tow_state != TOW_PARKED:
+            tow_state = TOW_PARKED
+            _park_at = global_position
+            tow_hold = 0.0
+        return
+    if tow_state == TOW_TOWED:
+        if _tow_h == INF:
+            _tow_h = ry
+        if _route.is_empty() and _vs < 0.2:
+            _still_t += delta
+        else:
+            _still_t = 0.0
+        _tow_h += angle_difference(_tow_h, ry) * clampf(_vs * delta / TOW_LEVER, 0.0, 1.0)
+        _tow_h = ry + clampf(angle_difference(ry, _tow_h), -TOW_LAG, TOW_LAG)
+        _put_cart(_tow_pose(_tow_h, 1.0), _tow_h, 1.0)
+        if _still_t >= PARK_AFTER:
+            var d := CART_TIP.z * cart.scale.x + HITCH_BACK + PARK_STEP
+            _park = town.call("wagon_park", self, 2, d) if town.has_method("wagon_park") else []
+            if _park.is_empty():
+                _park = [_tow_pose(_tow_h, 0.0, HITCH_BACK + PARK_STEP), _tow_h]
+            else:
+                # the park spot's origin at the right height for the shafts down
+                var pa: float = _park[1]
+                _park = [_tow_pose_at(_park[0], pa), pa]
+            _tow_from = [cart.global_position, cart.rotation.y, _tow_lift]
+            _park_at = global_position
+            _tow_t = 0.0
+            tow_state = TOW_PARKING
+        return
+    if tow_state == TOW_PARKING or tow_state == TOW_PARKED:
+        var flat := Vector2(global_position.x - _park_at.x, global_position.z - _park_at.z).length()
+        if not _route.is_empty() or _vs > 0.3 or flat > 0.4:
+            var tgt := _tow_pose(ry, 1.0)
+            if Vector2(tgt.x - cart.global_position.x, tgt.z - cart.global_position.z).length() > TOW_FAR:
+                # out of a door far from where the cart stood, a respawn: re-hitch now
+                _tow_h = ry
+                _put_cart(tgt, ry, 1.0)
+                tow_state = TOW_TOWED
+                _still_t = 0.0
+                return
+            _tow_from = [cart.global_position, cart.rotation.y, _tow_lift]
+            # the hauler turns his back to the cart and takes up the shafts
+            # where they lie (they point at him); the walk off then swings the
+            # cart round behind him through the clamped tow lag - it is never
+            # dragged sideways or through him
+            var tp := cart_tip()
+            var bd := cart_body()
+            _tow_unh = atan2(tp.x - bd.x, tp.z - bd.z)
+            _tow_t = 0.0
+            _park_at = global_position
+            tow_state = TOW_UNPARKING
+            tow_hold = UNPARK_T
+            return
+        if tow_state == TOW_PARKING:
+            _tow_t += delta
+            var k := smoothstep(0.0, 1.0, _tow_t / PARK_T)
+            _put_cart((_tow_from[0] as Vector3).lerp(_park[0], k), lerp_angle(float(_tow_from[1]), float(_park[1]), k), lerpf(float(_tow_from[2]), 0.0, k))
+            if _tow_t >= PARK_T:
+                tow_state = TOW_PARKED
+        return
+    # TOW_UNPARKING: the shafts come up and the cart rolls in behind him
+    if Vector2(global_position.x - _park_at.x, global_position.z - _park_at.z).length() > 0.3:
+        # something stronger than the hold is moving him (a raid's flight, a
+        # shove): the cart is hitched NOW, behind him, rather than dragged
+        # sideways through the swing
+        _tow_h = ry
+        _put_cart(_tow_pose(ry, 1.0), ry, 1.0)
+        tow_state = TOW_TOWED
+        tow_hold = 0.0
+        _still_t = 0.0
+        return
+    _tow_t += delta
+    var k2 := smoothstep(0.0, 1.0, _tow_t / UNPARK_T)
+    _put_cart((_tow_from[0] as Vector3).lerp(_tow_pose(_tow_unh, 1.0), k2), lerp_angle(float(_tow_from[1]), _tow_unh, k2), lerpf(float(_tow_from[2]), 1.0, k2))
+    if _tow_t >= UNPARK_T:
+        _tow_h = _tow_unh
+        tow_state = TOW_TOWED
+        tow_hold = 0.0
+        _still_t = 0.0
+
+## a park spot's origin (from town.wagon_park) set on the ground, shafts down
+func _tow_pose_at(o: Vector3, yaw: float) -> Vector3:
+    var sc := cart.scale.x
+    var ax := Basis.from_euler(Vector3(0.0, yaw, 0.0)) * sc * CART_AXLE
+    o.y = float(town.call("height_at", o.x + ax.x, o.z + ax.z)) + CART_AXLE.y * sc - ax.y
+    return o
 
 func _physics_process(delta: float) -> void:
     # D16c: a wagon is not in the navmesh - one rolling into someone (walking
@@ -793,48 +970,6 @@ func _physics_process(delta: float) -> void:
         _try_cast(delta)
         _cry(delta)
         _voice(delta)
-    if cart and is_instance_valid(cart):
-        if inside or not visible:
-            # D53: the hauler is indoors or culled - leave the wagon parked where it
-            # stands; when they re-emerge the owner-gap snap below reattaches it, so it
-            # is never seen chasing a body that is not there.
-            _park = []
-        else:
-            var tow := global_position - global_transform.basis.z * 2.6
-            tow.y = float(town.call("height_at", tow.x, tow.z))
-            var tyaw := rotation.y + PI * 0.5
-            # D53: a towed wagon is ATTACHED to its hauler, not a free body. If the
-            # HAULER itself has got far from the wagon - it stepped out of a door,
-            # respawned, a raid reset it, its stop moved, or a far-LOD body jumped a
-            # chunk - the wagon is reattached AT ONCE behind them and re-parks when it
-            # settles, so a cart is never seen gliding across open ground with no one
-            # on it (Mr. E clip 14-31-18: "the cart is moving on its own ... supposed
-            # to be attached to this guy, but it wasn't"). Keyed off the owner-to-cart
-            # distance, not the (possibly stale) park target, so a jump can never hide.
-            var owner_gap := Vector2(global_position.x - cart.global_position.x, global_position.z - cart.global_position.z).length()
-            if owner_gap > WAGON_SNAP:
-                cart.global_position = tow
-                cart.rotation.y = tyaw
-                _park = []
-            else:
-                var back := tow
-                var cy := tyaw
-                # D16c: stood still (a stop, a camp) the wagon is drawn up on open
-                # ground beside them, never left across a lane between two props
-                if _route.is_empty() and town.has_method("wagon_park"):
-                    if _park.is_empty():
-                        _park = town.call("wagon_park", self)
-                        if _park.is_empty():
-                            _park = [back, cy]
-                    back = _park[0]
-                    cy = _park[1]
-                else:
-                    _park = []
-                # (D16c: rolls no faster than a wagon should, so nobody is swept up by
-                # one; but never slower than the hauler, so it cannot be left behind)
-                var cap: float = maxf(_vs + 1.5, 4.0)
-                cart.global_position += (back - cart.global_position).limit_length(cap * delta)
-                cart.rotation.y = lerp_angle(cart.rotation.y, cy, minf(delta * 6.0, 1.0))
     if town != null and not inside and visible and town.has_method("off_wagons"):
         # on a route, twice a second: a waypoint under a parked wagon is moved
         # beside it, a leg across one goes round its corner (the navmesh does
@@ -849,6 +984,13 @@ func _physics_process(delta: float) -> void:
                     _route[0] = ww[1]
                 elif _route.size() < 400:
                     _route.insert(0, ww[1])
+    # D90: a hauler leaving a park waits while its cart swings back in behind
+    # it (the re-hitch), so the cart is never left sideways while they walk off
+    if tow_hold > 0.0:
+        tow_hold -= delta
+        move_dir = Vector3.ZERO
+        rotation.y = _tow_unh       # turned to the shafts, back to the cart
+        return
     if _route_presync and funnel_fix and town != null:
         _resync_route()
     if leader != null and town != null:
@@ -1615,16 +1757,43 @@ func _flash() -> void:
         mm.emission = Color(1, 1, 1)
         mm.emission_energy_multiplier = 1.6
     _flash_t = 0.12
+    _arm_flash_end(_flash_t)
 
 func _tick_flash(delta: float) -> void:
     if _flash_t <= 0.0:
         return
     _flash_t -= delta
     if _flash_t <= 0.0:
-        for d in _flash_mats:
-            var mm: StandardMaterial3D = d
-            mm.emission_enabled = false
-            mm.emission_energy_multiplier = 0.0
+        _end_flash()
+
+## D84 "the white figures": HeroBody and Cavalry override _process without
+## calling _tick_flash, so a hero or a rider hit once in a raid kept the white
+## hit-flash emission (1.6, unshaded-looking) for the rest of the night - the
+## "GLOWING" knight. The flash now ends on a SceneTree timer as well, which no
+## subclass override, LOD skip or disabled process_mode can starve.
+func _arm_flash_end(t: float) -> void:
+    _flash_gen += 1
+    if is_inside_tree():
+        get_tree().create_timer(t + 0.05, false).timeout.connect(_flash_timeout.bind(_flash_gen))
+
+func _flash_timeout(gen: int) -> void:
+    if gen == _flash_gen and _flash_t > 0.0:
+        _end_flash()
+
+func _end_flash() -> void:
+    _flash_t = 0.0
+    for d in _flash_mats:
+        var mm: StandardMaterial3D = d
+        mm.emission_enabled = false
+        mm.emission_energy_multiplier = 0.0
+
+## D84 test hook: how many of this body's flash materials are still lit
+func flash_lit() -> int:
+    var n := 0
+    for d in _flash_mats:
+        if (d as StandardMaterial3D).emission_enabled:
+            n += 1
+    return n
 
 func _number(amount: float, crit: bool) -> void:
     var lb := Label3D.new()
@@ -1682,6 +1851,7 @@ func _death_fx() -> void:
         mm.emission = Color(1.0, 0.12, 0.08)
         mm.emission_energy_multiplier = 2.0
     _flash_t = 0.5
+    _arm_flash_end(_flash_t)
     _death_label()
 
 ## The FELLED! banner. Shape mirrors _number() so the stream reads them as one

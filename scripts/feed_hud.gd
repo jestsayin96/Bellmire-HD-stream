@@ -291,7 +291,7 @@ func _process(delta: float) -> void:
 func _cap() -> int:
     var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
     if _chrome:
-        show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
+        show = mini(_chrome_lines(), 5) + (2 if card_showing() else 0)   # L71: fewer, whole entries; height-fit trims further
     return maxi(1, show - 2 if card_showing() else show)
 
 func _rebuild() -> void:
@@ -300,6 +300,22 @@ func _rebuild() -> void:
     var lines: Array = []
     for e in _shown.slice(maxi(0, _shown.size() - _cap())):
         lines.append(_text_of(e))
+    var fs := UiTheme.px(CHRON_PX if _chrome else 28)
+    var wrap_w := 0.0
+    if _chrome:
+        # L71: the Chronicle never ends a sentence in an ellipsis. Lines WRAP (two lines an entry,
+        # three at the outside), fewer entries are shown, and the OLDEST are dropped until the
+        # whole text fits the vellum's height. The roll's outcome is never the part that is cut.
+        var avail := _chrome_text_w()
+        wrap_w = avail
+        var font: Font = ThemeDB.fallback_font
+        var budget := _chrome_h()
+        for i in lines.size():
+            lines[i] = tidy(String(lines[i]))
+        while lines.size() > 1 and _stack_h(lines, font, fs, avail) > budget:
+            lines.remove_at(0)
+        if lines.size() == 1 and _stack_h(lines, font, fs, avail) > budget:
+            lines[0] = tidy(String(lines[0]), true)       # last resort: detail goes, outcome stays
     for i in lines.size():
         var lb := Label.new()
         lb.text = String(lines[i])
@@ -310,20 +326,50 @@ func _rebuild() -> void:
         lb.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
         lb.custom_minimum_size = Vector2(UiTheme.px(WIDTH - 40), 0)
         if _chrome:
-            # L39 the centre box: one line an entry. The box is narrow, so a long line ends
-            # in an ellipsis rather than being cut mid-glyph (clip_text) - the full text is
-            # in chat either way.
-            lb.autowrap_mode = TextServer.AUTOWRAP_OFF
-            lb.max_lines_visible = 1
+            lb.max_lines_visible = -1                     # L71: no ellipsis in the centre box, ever
+            lb.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
             lb.clip_text = false
-            lb.custom_minimum_size = Vector2.ZERO
+            lb.custom_minimum_size = Vector2(wrap_w, 0)
             lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-        lb.add_theme_font_size_override("font_size", UiTheme.px(CHRON_PX if _chrome else 28))
+        lb.add_theme_font_size_override("font_size", fs)
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
         lb.add_theme_color_override("font_color", UiTheme.INK.lerp(UiTheme.INK_SOFT, 1.0 - k))
         _box.add_child(lb)
     _panel.visible = not lines.is_empty() or card_showing()
+
+## L71: width the wrapped lines have inside the vellum (less the lord's card when it is up)
+func _chrome_text_w() -> float:
+    var w := 300.0
+    if _panel is HudDock.ChronicleScroll:
+        w = (_panel as HudDock.ChronicleScroll).sheet_rect().size.x
+    if card_showing() and _card != null:
+        w -= _card.get_combined_minimum_size().x + float(UiTheme.px(14))
+    return maxf(w - 4.0, 120.0)
+
+func _chrome_h() -> float:
+    if _panel is HudDock.ChronicleScroll:
+        return (_panel as HudDock.ChronicleScroll).sheet_rect().size.y
+    return 200.0
+
+func _stack_h(lines: Array, font: Font, fs: int, w: float) -> float:
+    var h := 0.0
+    for t in lines:
+        h += font.get_multiline_string_size(String(t), HORIZONTAL_ALIGNMENT_LEFT, w, fs).y + 1.0
+    return h
+
+## L71: the HUD's own tightening of the Chronicle's WORDING. Roll detail is kept ("Perception 20
+## vs DC 13") but padded phrasing goes; with `hard` the bracketed detail goes and the outcome stays.
+static func tidy(t: String, hard := false) -> String:
+    var s := t.replace("!!", "!").replace("Successfully found", "Found").replace("...no loot...", "no loot")
+    s = s.replace("(halved)", "halved")
+    if s.ends_with(" -"):
+        s = s.substr(0, s.length() - 2)
+    if hard:
+        var re := RegEx.new()
+        re.compile("\\s*\\([^)]*\\)")
+        s = re.sub(s, "", true)
+    return s
 
 ## L32b: a newly revealed line fades in instead of popping
 func _fade_in_newest() -> void:

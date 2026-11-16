@@ -289,6 +289,9 @@ func _flat(a: Vector3, b: Vector3) -> float:
 var _paths := {}
 
 func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> void:
+    var th = n.get("tow_hold")
+    if th != null and float(th) > 0.0:
+        return      # D90: a hauler takes up its cart's shafts (under a second) before it runs
     var goal := to
     var nv = town.get("nav")
     if nv != null and nv.ready_ok:

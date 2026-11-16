@@ -1,0 +1,12 @@
+D93_VALIDATE FAIL overlap=1 on_road=1 on_square=1 door=2 unreached=4 patch=2 | roads=3 buildings=8 sites=2 no_door=0 components=2
+OVERLAP h1(a) x bad_overlap(a) by 4.00 m
+ON_ROAD bad_road(a) on r1 by 4.00 m
+ON_SQUARE bad_square(a)
+DOOR bad_square(a) door 7.00 m from a road
+DOOR bad_door(a) door 27.27 m from a road
+UNREACHED bad_square (nearest road r1, 7.0 m)
+UNREACHED bad_door (nearest road r2, 27.3 m)
+UNREACHED bad_island (nearest road r_island, 0.5 m)
+UNREACHED bad_site (nearest road r_island, 20.4 m)
+PATCH bad_patch on r1
+PATCH bad_patch on r2

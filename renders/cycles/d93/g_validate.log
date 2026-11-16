@@ -1,0 +1,40 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D93_VALIDATE FAIL overlap=0 on_road=8 on_square=3 door=61 unreached=63 patch=0 | roads=191 buildings=66 sites=6 no_door=0 components=5
+  ON_ROAD b001(lm_hall) on road_044 by 3.69 m
+  ON_ROAD b002(lm_chapel) on road_101 by 3.46 m
+  ON_ROAD b002(lm_chapel) on road_139 by 0.42 m
+  ON_ROAD b002(lm_chapel) on road_163 by 0.42 m
+  ON_ROAD b003(lm_barracks) on road_013 by 3.36 m
+  ON_ROAD b003(lm_barracks) on road_016 by 3.36 m
+  ON_ROAD b003(lm_barracks) on road_017 by 4.50 m
+  ON_ROAD b004(lm_windmill) on road_167 by 0.72 m
+  ON_SQUARE b008(c)
+  ON_SQUARE b014(c)
+  ON_SQUARE b050(a)
+  DOOR b006(a) door 6.81 m from a road
+  DOOR b007(c) door 5.04 m from a road
+  DOOR b008(c) door 4.66 m from a road
+  DOOR b009(c) door 5.35 m from a road
+  DOOR b010(a) door 6.59 m from a road
+  DOOR b011(a) door 5.66 m from a road
+  DOOR b012(d) door 6.47 m from a road
+  DOOR b013(c) door 5.48 m from a road
+  DOOR b014(c) door 4.90 m from a road
+  DOOR b015(c) door 7.83 m from a road
+  DOOR b016(c) door 4.77 m from a road
+  DOOR b017(a) door 5.64 m from a road
+  UNREACHED b006 (nearest road road_118, 6.8 m)
+  UNREACHED b007 (nearest road road_099, 5.0 m)
+  UNREACHED b008 (nearest road road_099, 4.7 m)
+  UNREACHED b009 (nearest road road_102, 5.3 m)
+  UNREACHED b010 (nearest road road_104, 6.6 m)
+  UNREACHED b011 (nearest road road_104, 5.7 m)
+  UNREACHED b012 (nearest road road_118, 6.5 m)
+  UNREACHED b013 (nearest road road_109, 5.5 m)
+  UNREACHED b014 (nearest road road_099, 4.9 m)
+  UNREACHED b015 (nearest road road_119, 7.8 m)
+  UNREACHED b016 (nearest road road_094, 4.8 m)
+  UNREACHED b017 (nearest road road_112, 5.6 m)
+
+EXIT 1

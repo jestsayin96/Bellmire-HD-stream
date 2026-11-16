@@ -730,3 +730,556 @@ BUILDERS.update({
     "tallyman": tallyman,
     "cook": cook,
 })
+
+
+# =====================================================================
+# THIRD SET, 16 Nov 2026 - THE SIX BIOME THEMES.
+#
+# floorgen.gd THEMES has fourteen entries. The first eight minibosses cover the
+# eight built, indoor ones (barracks, workshop, prison, shrine, crypt, keep,
+# treasury, mess). The other SIX - flooded, grassland, wood, firepit, fogbound,
+# confection - are the outdoor and the strange ones, they roll "miniboss" at the
+# normal weight 15, and they had NOTHING theme-matched to put in the slot, so it
+# fell back to Bestiary.pick() returning an ordinary creature with 2x hp. That
+# is precisely the thing Mr. E's bar forbids, and it is the whole reason for
+# these six. After them every theme in the game has its own set piece.
+#
+# Each idea had to be new, not a sixth coat of the eight already built (summon /
+# self-armour / drag / snuff / rise / bar the way / steal / heal). These six:
+#   SLUICEKEEPER  it RAISES THE WATER - the room floods a step at a time
+#   SOWER         it PLANTS THE GROUND - what it broadcasts stands up as thorn
+#   SNARER        it HAS ALREADY SET THE ROOM - it drives, it does not chase
+#   STOKER        it IS ONLY AS BIG AS THE FIRE - starve the pit and it starves
+#   BELLMAN       it RINGS FROM WHERE IT IS NOT - the sound is a lie
+#   BOILER        it POURS AND IT SETS - the floor hardens round your feet
+#
+# SILHOUETTE IS STILL THE ACCEPTANCE TEST, and this set had to clear two
+# specific collisions with the first eight: a big disc reads as the Drillmaster's
+# gong, and a long horizontal reads as the Porter's drawbar. So the
+# Sluicekeeper's wheel is a SPOKED RING you see through, and the Stoker's rake
+# goes DOWN to the floor on one side instead of across.
+# =====================================================================
+
+CANON.update({
+    "sluicekeeper": ("The Sluicekeeper", 2.50, (0.46, 0.54, 0.56), (0.40, 0.80, 1.00),
+                     "flooded", "IT RAISES THE WATER - it winds the sluice open a step at a time",
+                     0.95, "The water is coming up."),
+    "sower":        ("The Sower", 2.25, (0.72, 0.68, 0.44), (0.55, 1.00, 0.42),
+                     "grassland", "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
+                     0.40, "Something is broadcasting seed."),
+    "snarer":       ("The Snarer", 2.30, (0.50, 0.42, 0.32), (0.80, 0.90, 0.40),
+                     "wood", "IT HAS ALREADY SET THE ROOM - it drives you onto its own lines",
+                     0.55, "The lines were here before you."),
+    "stoker":       ("The Stoker", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
+                     "firepit", "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
+                     0.70, "The pit has been fed."),
+    "bellman":      ("The Bellman", 2.70, (0.66, 0.68, 0.72), (0.80, 0.92, 1.00),
+                     "fogbound", "IT RINGS FROM WHERE IT IS NOT - the sound comes from the wrong place",
+                     0.65, "A bell, and not where you thought."),
+    "boiler":       ("The Boiler", 2.10, (0.86, 0.60, 0.34), (1.00, 0.78, 0.60),
+                     "confection", "IT POURS AND IT SETS - the floor hardens around your feet",
+                     0.25, "Something is pouring."),
+})
+ORDER = ORDER + ["sluicekeeper", "sower", "snarer", "stoker", "bellman", "boiler"]
+
+
+def _legs(P, x, y=0.0, hip=0.92, stance=0.21, r0=0.105, r1=0.085, boot=(0.26, 0.42, 0.11)):
+    """The planted two-leg base the whole set shares. A set piece is seen from
+    the doorway and a stance that reads PLANTED is worth more than feet."""
+    for s in (-1, 1):
+        limb(P, [(x + s * stance, y + 0.06, hip), (x + s * (stance + 0.06), y + 0.02, hip * 0.54),
+                 (x + s * (stance + 0.10), y - 0.06, 0.09)], r0, r1)
+        P.add(L.box(*boot), 'dark', loc=(x + s * (stance + 0.10), y - 0.14, boot[2] / 2.0))
+
+
+def _ring(P, c, r, axis='y', slot='dark', rad=0.045, n=26):
+    """A closed ring of iron. `axis` is the ring's own axis, so axis='y' stands
+    the ring UP facing the camera and axis='z' lays it on the floor."""
+    pts = []
+    for i in range(n + 1):
+        t = TAU * i / n
+        if axis == 'y':
+            pts.append(Vector((c[0] + r * math.cos(t), c[1], c[2] + r * math.sin(t))))
+        elif axis == 'x':
+            pts.append(Vector((c[0], c[1] + r * math.cos(t), c[2] + r * math.sin(t))))
+        else:
+            pts.append(Vector((c[0] + r * math.cos(t), c[1] + r * math.sin(t), c[2])))
+    P.raw(L.tube(pts, [rad] * len(pts), 7), slot)
+
+
+# ------------------------------------------- 9 THE SLUICEKEEPER: a spoked ring
+def sluicekeeper():
+    """IT RAISES THE WATER. He does not fight for the room, he drowns it: the
+    screw gate goes up one notch at a time and the floor the party is standing
+    on goes under.
+
+    The read had to clear the DRILLMASTER. A disc at this size IS the muster
+    gong, so the handwheel is a SPOKED RING with air through it - six spokes, a
+    crank peg standing off the rim, and the screw thread climbing behind it.
+    Reads MAN, OPEN WHEEL HIGH ON HIS RIGHT, SCREW, BOARD UNDER THE ARM.
+
+    Wear 0.95, the highest in the whole set and justified: this is the one
+    thing down there that is never dry. Nothing on him is kept."""
+    P = Parts("sluicekeeper")
+    X = -0.42
+    _legs(P, X, hip=0.88, stance=0.22)
+    limb(P, [(X, 0.10, 0.82), (X - 0.04, 0.00, 1.14), (X - 0.10, -0.10, 1.40)], 0.25, 0.26)
+    P.add(L.box(0.58, 0.28, 0.09), 'dark', loc=(X - 0.02, -0.06, 1.02))
+    for s in (-1, 1):
+        P.add(L.sphere(0.165, 0.155, 0.135, 12, 8), 'body', loc=(X - 0.10 + s * 0.28, -0.10, 1.40))
+    # a sodden hood, no face - the one thing a gate-keeper owns is a hood
+    P.add(L.sphere(0.145, 0.160, 0.158, 14, 9), 'bone', loc=(X - 0.14, -0.14, 1.64))
+    P.raw(aim(L.cone(0.235, 0.075, 0.30, 14), (X - 0.14, -0.12, 1.56), (0.06, -0.10, 1.0)), 'dark')
+    eyes(P, (X - 0.14, 0.0, 1.62), 0.050, 0.025, -0.24)
+    # THE SLUICE FRAME on his right: two posts, a head beam, the screw between
+    FX = X + 1.02
+    for s in (-1, 1):
+        limb(P, [(FX + s * 0.30, 0.16, 0.02), (FX + s * 0.31, 0.18, 1.20),
+                 (FX + s * 0.32, 0.18, 2.06)], 0.065, 0.050, 'bone')
+    P.add(L.box(0.78, 0.11, 0.10), 'bone', loc=(FX, 0.18, 2.06))
+    # the threaded stem, eight collars so it reads as a SCREW and not a pole
+    limb(P, [(FX, 0.16, 0.36), (FX, 0.16, 2.02)], 0.055, 0.048, 'dark')
+    for k in range(8):
+        P.add(aim(L.cone(0.095, 0.095, 0.022, 10), (FX, 0.16, 0.52 + k * 0.17),
+                  (0.0, 0.0, 1.0)), 'dark')
+    # THE HANDWHEEL - 1.06 m across, open, standing up facing the room
+    WZ = 1.78
+    _ring(P, (FX, 0.14, WZ), 0.53, 'y', 'dark', 0.055, 28)
+    for k in range(6):
+        a = TAU * k / 6.0 + 0.2
+        P.raw(aim(L.cone(0.034, 0.030, 0.52, 7), (FX, 0.14, WZ),
+                  (math.cos(a), 0.0, math.sin(a))), 'dark')
+    P.add(L.sphere(0.105, 0.105, 0.105, 12, 8), 'dark', loc=(FX, 0.14, WZ))
+    # the crank peg, standing off the rim toward the room - you can see it turn
+    limb(P, [(FX + 0.46, 0.14, WZ + 0.26), (FX + 0.50, -0.20, WZ + 0.28)], 0.040, 0.034, 'body')
+    # THE GATE BOARD, drawn up behind the frame, with water light under its lip
+    P.raw(L.membrane([(FX - 0.28, 0.30, 0.46), (FX + 0.28, 0.30, 0.46),
+                      (FX + 0.28, 0.30, 1.42), (FX - 0.28, 0.30, 1.42)], 0.07), 'bone')
+    P.add(L.box(0.60, 0.10, 0.055), 'glow', loc=(FX, 0.30, 0.44))
+    # the tide line he carries with him: a shallow lit pool at his feet
+    P.add(L.sphere(0.72, 0.52, 0.035, 20, 6), 'glow', loc=(X + 0.18, 0.04, 0.022))
+    # his own hand on the stem, and a drag-board tucked under the far arm
+    limb(P, [(X + 0.16, -0.12, 1.34), (FX - 0.22, 0.04, 1.44)], 0.072, 0.052)
+    P.raw(L.membrane([(X - 0.92, -0.22, 0.86), (X - 0.30, -0.26, 1.04),
+                      (X - 0.26, -0.26, 1.24), (X - 0.88, -0.22, 1.06)], 0.05), 'bone')
+    limb(P, [(X - 0.34, -0.20, 1.32), (X - 0.60, -0.24, 1.08)], 0.070, 0.050)
+    return P
+
+
+# ------------------------------------------------ 10 THE SOWER: a box and shoots
+def sower():
+    """IT PLANTS THE GROUND AGAINST YOU. It walks a line and casts, and what it
+    casts comes up behind it - thorn that splits the party and takes the open
+    field away. The grassland floors are the open ones; this is the thing that
+    closes them.
+
+    The mechanic is in the outline twice over: the SEED HOPPER slung across the
+    chest (a box, deliberately - a box cannot be mistaken for the gong) and
+    THREE SHOOTS ALREADY STANDING behind him, crooked and diverging and at
+    three different heights, so the viewer can see it has been working before
+    the fight starts. Wear 0.40: a farm tool, used hard and kept."""
+    P = Parts("sower")
+    X = -0.18
+    _legs(P, X, hip=0.90, stance=0.26, boot=(0.28, 0.44, 0.10))
+    limb(P, [(X, 0.10, 0.84), (X + 0.02, 0.00, 1.16), (X + 0.04, -0.12, 1.42)], 0.255, 0.255)
+    for s in (-1, 1):
+        P.add(L.sphere(0.170, 0.160, 0.140, 12, 8), 'body', loc=(X + 0.04 + s * 0.29, -0.12, 1.42))
+    # a wide straw hat, because a man in a field wears one and it reads instantly
+    P.add(L.sphere(0.145, 0.160, 0.158, 14, 9), 'bone', loc=(X + 0.02, -0.16, 1.66))
+    P.raw(aim(L.cone(0.44, 0.17, 0.055, 18), (X + 0.02, -0.16, 1.74), (0.0, 0.10, 1.0)), 'bone')
+    P.add(aim(L.cone(0.17, 0.05, 0.14, 14), (X + 0.02, -0.16, 1.76), (0.0, 0.10, 1.0)), 'bone')
+    eyes(P, (X + 0.02, 0.0, 1.64), 0.052, 0.026, -0.26)
+    # THE HOPPER - a slanted open box across the chest on a broad strap
+    P.add(L.box(0.72, 0.34, 0.40), 'bone', loc=(X - 0.14, -0.34, 1.08), rot=(0.0, 0.22, 0.0))
+    P.add(L.box(0.66, 0.28, 0.05), 'dark', loc=(X - 0.14, -0.34, 1.29), rot=(0.0, 0.22, 0.0))
+    P.add(aim(L.cone(0.27, 0.25, 0.045, 16), (X - 0.14, -0.36, 1.30), (0.22, 0.0, 1.0)), 'glow')
+    P.raw(L.membrane([(X + 0.16, -0.24, 1.44), (X + 0.26, -0.18, 1.40),
+                      (X - 0.30, -0.44, 0.96), (X - 0.40, -0.48, 1.00)], 0.035), 'dark')
+    # THE CAST: the far arm thrown wide and open, low, palm turned out
+    limb(P, [(X - 0.25, -0.12, 1.40), (X - 0.72, -0.26, 1.18), (X - 1.06, -0.34, 1.02)],
+         0.085, 0.060)
+    P.add(L.sphere(0.115, 0.095, 0.075, 10, 7), 'body', loc=(X - 1.12, -0.36, 0.98))
+    for k in range(4):   # four seeds already in the air, clear of the hand
+        P.add(L.sphere(0.042, 0.042, 0.042, 7, 5), 'glow',
+              loc=(X - 1.30 - k * 0.17, -0.40 - k * 0.04, 0.92 - k * 0.14))
+    # the near arm steadying the hopper
+    limb(P, [(X + 0.33, -0.14, 1.40), (X + 0.30, -0.30, 1.16), (X + 0.14, -0.40, 1.08)],
+         0.080, 0.056)
+    # THREE SHOOTS ALREADY UP, behind him, crooked, diverging, three heights
+    for s, (dx, dy, hh, bend) in enumerate(((0.62, 0.42, 1.74, 0.26),
+                                            (1.05, 0.30, 1.18, -0.20),
+                                            (0.30, 0.56, 1.46, 0.14))):
+        base = (X + dx, dy, 0.0)
+        tip = (X + dx + bend, dy + 0.10, hh)
+        limb(P, arc(base, tip, 0.0, 6, side=bend * 0.8), 0.075, 0.022, 'bone')
+        for k in range(5):      # thorns, alternating, out of the stem's own line
+            t = 0.30 + 0.16 * k
+            z = hh * t
+            sx = X + dx + bend * t + (0.16 if k % 2 else -0.16)
+            P.raw(aim(L.cone(0.030, 0.0, 0.17, 6), (X + dx + bend * t, dy + 0.10 * t, z),
+                      (sx - (X + dx + bend * t), 0.06, 0.34)), 'bone')
+    return P
+
+
+# -------------------------------------------- 11 THE SNARER: a row of open loops
+def snarer():
+    """IT HAS ALREADY SET THE ROOM. It does not chase - it stands in its own
+    lines and beats you onto them. The fight is about where you are allowed to
+    walk, which is the opposite of every other set piece in the file.
+
+    Pass 1 hung five loops off a SPREADER BAR across his shoulders, and on the
+    sheet that is THE TALLYMAN - who is two cells away carrying a spreader bar
+    with things hanging off it. A mechanic that reads as another miniboss is no
+    better than one that reads as nothing. The snares are now rooted where a
+    real snare is rooted: THREE BENT SPRINGPOLES standing out of the floor,
+    arcing over at three different heights with a noose at each tip. Curves -
+    the only curved lines in the fourteen, against a file of bars and discs.
+    A long beating-pole takes the low diagonal. Wear 0.55: woodsman's kit."""
+    P = Parts("snarer")
+    X = 0.0
+    _legs(P, X, hip=0.86, stance=0.20, boot=(0.24, 0.40, 0.10))
+    # hunched: a man who works bent over, so the torso leans forward and down
+    limb(P, [(X, 0.12, 0.80), (X + 0.02, -0.04, 1.08), (X + 0.04, -0.20, 1.30)], 0.235, 0.245)
+    for s in (-1, 1):
+        P.add(L.sphere(0.160, 0.150, 0.130, 12, 8), 'body', loc=(X + 0.04 + s * 0.27, -0.20, 1.30))
+    P.add(L.sphere(0.140, 0.155, 0.150, 14, 9), 'bone', loc=(X + 0.06, -0.30, 1.50))
+    P.add(L.sphere(0.165, 0.150, 0.095, 14, 8), 'dark', loc=(X + 0.06, -0.28, 1.60))
+    eyes(P, (X + 0.06, 0.0, 1.48), 0.050, 0.025, -0.30)
+    # THREE BENT SPRINGPOLES, rooted in the floor, arcing over and inward. Each
+    # is a sapling under load: thick at the root, whippy at the tip, and the
+    # bend carries past vertical so the tip hangs OVER the walking ground.
+    # (root x, root y, apex height, how far the tip reaches inward, noose r)
+    for rx, ry, apex, reach, rr in ((-1.34, 0.26, 1.98, 0.62, 0.20),
+                                    (1.12, 0.12, 2.32, -0.66, 0.23),
+                                    (1.62, -0.40, 1.54, -0.40, 0.17)):
+        sgn = 1.0 if reach > 0 else -1.0
+        # a smooth quarter-bend: pass 2's five points put a sharp elbow at the
+        # apex and the poles read as bent girders. Seven points and a thin
+        # whippy taper, because a loaded sapling is a CURVE and curves are the
+        # whole reason this shape is not the Tallyman's bar.
+        arc = []
+        for t in (0.0, 0.22, 0.44, 0.63, 0.79, 0.92, 1.0):
+            a = (math.pi / 2.0) * t
+            arc.append((X + rx + reach * (1.0 - math.cos(a)),
+                        ry - 0.12 * t, apex * math.sin(a)))
+        limb(P, arc, 0.052, 0.014, 'bone')
+        # the cord straight down off the loaded tip, and the noose on its end
+        tipx, tipy, tipz = X + rx + reach, ry - 0.12, apex
+        cz = tipz - 0.40 - rr
+        limb(P, [(tipx, tipy, tipz), (tipx, tipy, cz + rr)], 0.013, 0.013, 'dark')
+        _ring(P, (tipx, tipy, cz), rr, 'y', 'bone', 0.019, 16)
+        P.add(L.sphere(0.038, 0.038, 0.038, 8, 6), 'glow', loc=(tipx, tipy, cz + rr))
+        # the trigger peg at the root, leaning the way the pole is pulled
+        P.raw(aim(L.cone(0.034, 0.020, 0.34, 7), (X + rx - sgn * 0.14, ry + 0.06, 0.0),
+                  (sgn * 0.26, 0.0, 1.0)), 'dark')
+    # THE BEATING POLE - a long clear diagonal low and to the front
+    limb(P, [(X - 0.34, -0.40, 1.22), (X + 0.46, -0.66, 0.78), (X + 1.22, -0.88, 0.22)],
+         0.045, 0.030, 'bone')
+    limb(P, [(X - 0.22, -0.30, 1.26), (X - 0.36, -0.42, 1.20)], 0.072, 0.052)
+    P.add(L.sphere(0.075, 0.065, 0.065, 10, 7), 'dark', loc=(X + 1.26, -0.90, 0.19))
+    # two pegs and a coil of cord on the ground beside him - he has been working
+    for k in range(2):
+        P.raw(aim(L.cone(0.030, 0.018, 0.30, 7), (X - 0.74 + k * 0.22, -0.46, 0.0),
+                  (0.10, 0.0, 1.0)), 'bone')
+    _ring(P, (X - 0.62, -0.52, 0.055), 0.21, 'z', 'dark', 0.028, 18)
+    return P
+
+
+# ------------------------------------------------ 12 THE STOKER: a lit grate
+def stoker():
+    """IT IS ONLY AS BIG AS THE FIRE. The pit feeds it and it feeds the pit, so
+    the fight is not about the thing, it is about the fuel: starve the pit and
+    it comes apart. A grate burns in its chest where the heart would be and the
+    stream can see it brighten.
+
+    The read had to clear the PORTER, whose whole silhouette is the widest
+    horizontal in the dungeon. So the rake does NOT go across - it goes DOWN,
+    a long diagonal into the floor on one side, and the vertical is a flue
+    standing off the far shoulder. Reads FIGURE, TALL FLUE, RAKE TO THE FLOOR.
+    Wear 0.70: scorched iron. Nothing scorched is also bright."""
+    P = Parts("stoker")
+    X = -0.10
+    _legs(P, X, hip=0.94, stance=0.23, boot=(0.28, 0.46, 0.13))
+    # a squat heavy frame, square-shouldered. The chest is a box, not a barrel,
+    # because the grate has to be a flat lit face and not a glowing belly.
+    limb(P, [(X, 0.10, 0.88), (X - 0.02, 0.02, 1.12), (X - 0.04, -0.06, 1.30)], 0.24, 0.27)
+    P.add(L.box(0.62, 0.40, 0.56), 'dark', loc=(X - 0.04, -0.10, 1.26))
+    for s in (-1, 1):
+        P.add(L.sphere(0.180, 0.165, 0.145, 12, 8), 'body', loc=(X - 0.04 + s * 0.32, -0.08, 1.48))
+    # THE GRATE: a lit face set into the chest behind five iron bars
+    P.add(L.box(0.46, 0.05, 0.40), 'glow', loc=(X - 0.04, -0.31, 1.26))
+    for k in range(5):
+        P.add(L.box(0.035, 0.07, 0.42), 'dark', loc=(X - 0.22 + k * 0.09, -0.33, 1.26))
+    P.add(L.box(0.56, 0.08, 0.055), 'bone', loc=(X - 0.04, -0.32, 1.48))
+    # head low between the shoulders, hidden in its own heat
+    P.add(L.sphere(0.135, 0.150, 0.145, 14, 9), 'bone', loc=(X - 0.06, -0.16, 1.68))
+    P.add(aim(L.cone(0.205, 0.145, 0.12, 14), (X - 0.06, -0.16, 1.70), (0.0, 0.04, 1.0)), 'dark')
+    eyes(P, (X - 0.06, 0.0, 1.66), 0.052, 0.030, -0.22)
+    # THE FLUE off the far shoulder: a tall narrow pipe, two bands, a lit mouth
+    FX = X - 0.60
+    limb(P, [(FX, 0.22, 1.30), (FX - 0.06, 0.24, 2.16)], 0.105, 0.088, 'dark')
+    for k in range(2):
+        P.add(aim(L.cone(0.135, 0.135, 0.035, 12), (FX - 0.02 * k, 0.23, 1.58 + k * 0.34),
+                  (-0.07, 0.0, 1.0)), 'bone')
+    P.add(aim(L.cone(0.115, 0.145, 0.10, 12), (FX - 0.06, 0.24, 2.14), (-0.07, 0.0, 1.0)), 'dark')
+    P.add(L.sphere(0.115, 0.115, 0.045, 12, 6), 'glow', loc=(FX - 0.07, 0.24, 2.23))
+    limb(P, [(FX + 0.14, 0.18, 1.40), (FX + 0.02, 0.22, 1.32)], 0.050, 0.040, 'bone')
+    # THE RAKE - 1.9 m of haft running down into the floor on his right
+    haft = [Vector((X + 0.36, -0.20, 1.52)), Vector((X + 0.92, -0.42, 0.98)),
+            Vector((X + 1.48, -0.64, 0.42)), Vector((X + 1.78, -0.76, 0.12))]
+    P.raw(L.tube(haft, [0.046, 0.040, 0.036, 0.034], 8), 'bone')
+    P.add(L.box(0.52, 0.10, 0.07), 'dark', loc=(X + 1.80, -0.78, 0.11), rot=(0.0, -0.34, 0.0))
+    for k in range(4):                        # four short teeth, biting the floor
+        P.raw(aim(L.cone(0.030, 0.0, 0.20, 6), (X + 1.64 + k * 0.14, -0.78, 0.10),
+                  (0.42, -0.10, -1.0)), 'dark')
+    limb(P, [(X + 0.26, -0.10, 1.46), (X + 0.40, -0.22, 1.50)], 0.074, 0.054)
+    # the fuel basket at his heels - the thing the party has to get to
+    P.raw(aim(L.cone(0.34, 0.40, 0.42, 14, cap=False), (X - 0.30, 0.52, 0.0),
+              (0.0, 0.08, 1.0)), 'bone')
+    for k in range(3):
+        P.add(L.box(0.10, 0.10, 0.34), 'dark', loc=(X - 0.34 + k * 0.10, 0.54, 0.46),
+              rot=(0.0, 0.18 - 0.16 * k, 0.0))
+    P.add(L.sphere(0.30, 0.26, 0.05, 14, 6), 'glow', loc=(X - 0.30, 0.52, 0.06))
+    return P
+
+
+# ------------------------------------------- 13 THE BELLMAN: two bells, two heights
+def bellman():
+    """IT RINGS FROM WHERE IT IS NOT. On a fogbound floor you fight what you can
+    hear, and this thing is built to be heard in the wrong place: two bells on
+    two long arms at two different heights, and a third on a pole behind it. The
+    party swings at a bell. Only one of the three is ever on it.
+
+    Tallest of the fourteen at 2.70 and the thinnest - a narrow shroud and
+    nothing inside it to hit. The ASYMMETRY IS THE LIE and so it is the whole
+    silhouette: one arm high left, one low right, neither mirroring the other.
+    Wear 0.65: river damp, not ruin."""
+    P = Parts("bellman")
+    X = 0.0
+    # no boots and no stance - a shroud reaching the floor. It does not walk
+    # like the others and it should not stand like them either.
+    P.raw(aim(L.cone(0.52, 0.17, 1.48, 18), (X, 0.0, 0.0), (0.0, 0.0, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.56, 0.50, 0.085, 18), (X, 0.0, 0.015), (0.0, 0.0, 1.0)), 'dark')
+    limb(P, [(X, -0.02, 1.40), (X - 0.02, -0.06, 1.74), (X - 0.03, -0.10, 1.96)], 0.155, 0.125)
+    # a deep hood with nothing in it but two lights
+    P.add(L.sphere(0.135, 0.150, 0.165, 14, 9), 'dark', loc=(X - 0.04, -0.12, 2.06))
+    P.raw(aim(L.cone(0.245, 0.055, 0.40, 16), (X - 0.04, -0.08, 1.92), (0.04, -0.14, 1.0)), 'bone')
+    eyes(P, (X - 0.04, 0.0, 2.04), 0.048, 0.024, -0.22)
+    # ARM ONE - high, to its left, bell up and well clear of the hood
+    limb(P, [(X - 0.14, -0.06, 1.88), (X - 0.58, -0.16, 2.08), (X - 1.02, -0.22, 2.26)],
+         0.065, 0.044)
+    BX, BZ = X - 1.10, 2.16
+    P.raw(aim(L.cone(0.07, 0.26, 0.34, 16, cap=False), (BX, -0.22, BZ - 0.34), (0.0, 0.0, 1.0)), 'body')
+    _ring(P, (BX, -0.22, BZ - 0.345), 0.265, 'z', 'dark', 0.030, 16)
+    P.add(L.sphere(0.055, 0.055, 0.075, 8, 6), 'glow', loc=(BX, -0.22, BZ - 0.42))
+    limb(P, [(X - 1.04, -0.22, 2.24), (BX, -0.22, BZ)], 0.028, 0.024, 'dark')
+    # ARM TWO - LOW, to its right, a smaller bell swinging by the hem. The two
+    # arms are deliberately not a pair; a symmetrical pair reads as a posture
+    # and this has to read as a TRICK.
+    limb(P, [(X + 0.13, -0.08, 1.80), (X + 0.52, -0.22, 1.44), (X + 0.84, -0.30, 1.14)],
+         0.062, 0.042)
+    CX, CZ = X + 0.90, 1.00
+    P.raw(aim(L.cone(0.05, 0.185, 0.25, 14, cap=False), (CX, -0.30, CZ - 0.25), (0.0, 0.0, 1.0)), 'body')
+    _ring(P, (CX, -0.30, CZ - 0.255), 0.19, 'z', 'dark', 0.026, 14)
+    P.add(L.sphere(0.042, 0.042, 0.058, 8, 6), 'glow', loc=(CX, -0.30, CZ - 0.31))
+    limb(P, [(X + 0.86, -0.30, 1.12), (CX, -0.30, CZ)], 0.024, 0.020, 'dark')
+    # THE THIRD BELL, on a pole raked back over the far shoulder - the decoy
+    limb(P, [(X + 0.26, 0.34, 0.10), (X + 0.10, 0.30, 1.40), (X - 0.10, 0.26, 2.46)],
+         0.042, 0.030, 'bone')
+    P.add(L.box(0.40, 0.08, 0.06), 'bone', loc=(X - 0.26, 0.26, 2.44), rot=(0.0, 0.10, 0.0))
+    DX, DZ = X - 0.44, 2.34
+    P.raw(aim(L.cone(0.045, 0.165, 0.23, 14, cap=False), (DX, 0.26, DZ - 0.23), (0.0, 0.0, 1.0)), 'body')
+    _ring(P, (DX, 0.26, DZ - 0.235), 0.17, 'z', 'dark', 0.024, 14)
+    limb(P, [(DX, 0.26, DZ + 0.08), (DX, 0.26, DZ)], 0.020, 0.018, 'dark')
+    return P
+
+
+# --------------------------------------- 14 THE BOILER: a tilted pan and a pour
+def boiler():
+    """IT POURS AND IT SETS. The confection floors are the strange sweet ones;
+    this is the thing that makes them a trap. It tips the pan, the floor takes
+    a skin, and whoever is standing in it is standing in it for good.
+
+    The read had to clear the COOK, who also carries a pot. The Cook's is a deep
+    black sphere slung LOW on chains behind him; the Boiler's is a WIDE SHALLOW
+    DISH on a trunnion in FRONT of him, ROLLED OFF ITS RIGHT LIP, and the pour
+    runs out sideways to the floor in one thick unbroken line clear of the pan. Nothing else in the
+    fourteen has a line from a held thing down to the ground - that line is the
+    whole creature. Wear 0.25: a sugar man scours his copper or it burns."""
+    P = Parts("boiler")
+    X = -0.44
+    _legs(P, X, hip=0.80, stance=0.24, r0=0.115, r1=0.095, boot=(0.28, 0.44, 0.12))
+    # short, wide, braced back against the weight of a full pan
+    limb(P, [(X - 0.02, 0.14, 0.74), (X - 0.08, 0.06, 1.02), (X - 0.14, -0.02, 1.26)], 0.265, 0.250)
+    P.add(L.box(0.60, 0.30, 0.09), 'dark', loc=(X - 0.05, 0.02, 0.94))
+    for s in (-1, 1):
+        P.add(L.sphere(0.170, 0.160, 0.140, 12, 8), 'body', loc=(X - 0.14 + s * 0.29, -0.02, 1.26))
+    P.add(L.sphere(0.140, 0.155, 0.152, 14, 9), 'bone', loc=(X - 0.16, -0.08, 1.50))
+    P.add(L.sphere(0.168, 0.172, 0.100, 14, 8), 'bone', loc=(X - 0.16, -0.06, 1.60))
+    eyes(P, (X - 0.16, 0.0, 1.48), 0.052, 0.026, -0.26)
+    # the apron, one flat panel, scoured pale
+    P.raw(L.membrane([(X - 0.46, -0.28, 1.06), (X + 0.18, -0.28, 1.06),
+                      (X + 0.14, -0.34, 0.50), (X - 0.42, -0.34, 0.50)], 0.03), 'bone')
+    # THE TRUNNION: two short posts in front of him carrying the pan's pivot
+    for s in (-1, 1):
+        limb(P, [(X + 1.00, -0.42 + s * 0.34, 0.02), (X + 1.06, -0.40 + s * 0.32, 1.36)],
+             0.070, 0.050, 'dark')
+    limb(P, [(X + 1.06, -0.74, 1.36), (X + 1.06, -0.08, 1.36)], 0.034, 0.034, 'dark')
+    # THE PAN - 1.18 m across, SHALLOW, ROLLED SIDEWAYS over its far lip.
+    # Pass 1 tipped it forward, toward the camera, and the pour fell on the
+    # pan's own centre line: pan + stream + pool stacked into A ROUND TABLE and
+    # the one line that IS the creature was a dot. The roll is about Y now, so
+    # the lip is off to his right and the stream crosses open air.
+    # Pass 3. A 1.18 m dish is a TABLE TOP at this camera height whatever you
+    # tilt it, and anything falling off it lands inside its own footprint, so
+    # pan + stream + pool kept stacking into a pedestal table. The pan is now
+    # SMALL (0.80 m) and HIGH, and the stream travels 0.9 m sideways before it
+    # reaches the floor - a long diagonal nothing else in the fourteen has.
+    PX, PY, PZ = X + 1.06, -0.42, 1.42
+    P.add(L.sphere(0.40, 0.38, 0.15, 20, 9), 'body', loc=(PX, PY, PZ), rot=(-0.30, 0.52, 0.0))
+    P.raw(aim(L.cone(0.41, 0.42, 0.065, 20), (PX + 0.07, PY - 0.04, PZ + 0.11), (0.52, -0.30, 1.0)), 'bone')
+    P.add(aim(L.cone(0.31, 0.32, 0.03, 18), (PX + 0.05, PY - 0.03, PZ + 0.09), (0.52, -0.30, 1.0)), 'glow')
+    # THE POUR - one thick unbroken line from the lip, well clear of the pan
+    pour = [Vector((PX + 0.34, PY - 0.20, PZ - 0.10)), Vector((PX + 0.60, PY - 0.28, 0.86)),
+            Vector((PX + 0.80, PY - 0.34, 0.38)), Vector((PX + 0.88, PY - 0.37, 0.03))]
+    P.raw(L.tube(pour, [0.125, 0.112, 0.104, 0.118], 10), 'glow')
+    P.add(L.sphere(0.44, 0.38, 0.030, 20, 6), 'glow', loc=(PX + 0.94, PY - 0.39, 0.018))
+    _ring(P, (PX + 0.94, PY - 0.39, 0.030), 0.45, 'z', 'bone', 0.026, 20)
+    # THE SKIMMER - a long haft back over the shoulder, a flat perforated blade
+    limb(P, [(X - 0.42, -0.14, 1.20), (X - 0.78, 0.04, 1.62), (X - 1.02, 0.16, 2.02)],
+         0.038, 0.030, 'bone')
+    P.add(aim(L.cone(0.27, 0.26, 0.05, 16), (X - 1.06, 0.18, 2.06), (-0.22, 0.12, 1.0)), 'body')
+    for k in range(6):
+        a = TAU * k / 6.0
+        P.add(L.sphere(0.052, 0.052, 0.07, 7, 5), 'dark',
+              loc=(X - 1.06 + 0.15 * math.cos(a), 0.18 + 0.15 * math.sin(a), 2.07))
+    limb(P, [(X - 0.44, -0.04, 1.22), (X - 0.56, -0.06, 1.34)], 0.072, 0.052)
+    # the near arm on the pan's tipping handle
+    limb(P, [(X + 0.15, -0.10, 1.22), (X + 0.62, -0.22, 1.28)], 0.080, 0.056)
+    limb(P, [(X + 0.66, -0.22, 1.28), (X + 0.98, -0.16, 1.34)], 0.034, 0.030, 'dark')
+    return P
+
+
+BUILDERS.update({
+    "sluicekeeper": sluicekeeper,
+    "sower": sower,
+    "snarer": snarer,
+    "stoker": stoker,
+    "bellman": bellman,
+    "boiler": boiler,
+})
+
+
+# ===========================================================================
+# THE FIT EXPERIMENT, 16 Nov - DO THE FOURTEEN FIT THE GAME'S OWN CHARACTERS?
+#
+# Rendered beside a real KayKit adventurer at scale 1.0 for the first time
+# (tools/art/minibossfit.py), the whole set failed on two counts at once:
+#
+#   SCALE.       A hero is 2.45 m - the bodies are CHIBI and the head alone
+#                runs 1.2 to 2.3. Authored at 2.00-2.70 m, TEN OF THE FOURTEEN
+#                STAND SHORTER THAN THE PARTY. A floor-4 set piece that the
+#                heroes look down on is not a set piece.
+#   PROPORTION.  The men inside these creatures are seven-head realistic
+#                figures with 0.10 m limbs. Beside a chibi knight they read as
+#                pipe-cleaner men from a different game.
+#
+# Scale is one number in bestiary.gd and belongs to the game build lane.
+# PROPORTION IS OURS. These two builders are the worked example of the fix on
+# one creature - same creature, same props, same idea, rebuilt in the game's
+# own register - so the comparison sheet decides it rather than an argument.
+#
+# Measured off Knight.glb in the idle pose (not guessed):
+#   total 2.45 | sole-to-hip 0.52 (21%) | torso 0.36-1.28 | head+helm 1.09-2.45
+#   head about 1.09 across, i.e. the head is 55% of the whole height.
+# ===========================================================================
+CANON.update({
+    "drillmaster_chibi": ("The Drillmaster (chibi)", 2.20, (0.86, 0.72, 0.38),
+                          (1.00, 0.78, 0.34), "barracks",
+                          "IT SUMMONS - rebuilt in the game's own proportions",
+                          0.15, "Someone is beating the muster."),
+    "drillmaster_tall": ("The Drillmaster (3.60m)", 3.60, (0.86, 0.72, 0.38),
+                         (1.00, 0.78, 0.34), "barracks",
+                         "IT SUMMONS - same body, the recommended in-game height",
+                         0.15, "Someone is beating the muster."),
+    "drillmaster_chibi_tall": ("The Drillmaster (chibi, 3.60m)", 3.60, (0.86, 0.72, 0.38),
+                               (1.00, 0.78, 0.34), "barracks",
+                               "IT SUMMONS - both changes together",
+                               0.15, "Someone is beating the muster."),
+})
+
+
+def drillmaster_chibi():
+    """The Drillmaster in the game's register: short thick legs, a barrel
+    torso, a head the size of the torso, mitts for hands. Nothing about the
+    IDEA changes - gong behind him on its frame, mallet up, baton down - only
+    the proportions of the man carrying it.
+
+    Authored to the same 2.20 m as the original so the comparison sheet is a
+    comparison of ONE thing. The proportions are lifted off the measured
+    Knight: legs to 21% of height, head 55%, shoulders 0.80 wide."""
+    P = Parts("drillmaster_chibi")
+    X = -0.30
+    H = 2.20
+    HIP = 0.46                                  # 21% of the body's height
+    # LEGS - stubs, not limbs. Boots almost as wide as the leg is long.
+    for s in (-1, 1):
+        limb(P, [(X + s * 0.17, 0.04, HIP), (X + s * 0.19, 0.00, 0.22),
+                 (X + s * 0.20, -0.04, 0.10)], 0.145, 0.135)
+        P.add(L.box(0.30, 0.40, 0.13), 'dark', loc=(X + s * 0.20, -0.12, 0.065))
+    # TORSO - one barrel from hip to shoulder, wider than it is tall
+    limb(P, [(X, 0.08, HIP - 0.02), (X - 0.04, 0.00, 0.72), (X - 0.08, -0.08, 1.00)],
+         0.36, 0.38)
+    P.add(L.box(0.80, 0.34, 0.13), 'dark', loc=(X - 0.02, -0.06, 0.70))      # belt
+    for s in (-1, 1):                                                        # shoulders
+        P.add(L.sphere(0.22, 0.21, 0.19, 12, 8), 'body', loc=(X - 0.08 + s * 0.38, -0.08, 1.02))
+    # THE HEAD - the whole point. 0.96 across, sitting straight on the shoulders
+    # with no neck, topped by the kettle helm. Head top lands at 1.74 of 2.20.
+    P.add(L.sphere(0.46, 0.44, 0.40, 18, 12), 'bone', loc=(X - 0.10, -0.12, 1.34))
+    # PASS 2 on the head, after looking: the first one read as a MUSHROOM. A
+    # 1.24 m brim sitting at mid-head height covered the dome and the face
+    # both, so the one thing that says soldier - a kettle helm - said farmer.
+    # The dome is taller and narrower and now clears the brim; the brim is
+    # 1.08 m and sits high on the skull, where a helmet's does.
+    P.add(aim(L.cone(0.44, 0.17, 0.44, 16), (X - 0.10, -0.12, 1.50), (0.0, 0.0, 1.0)), 'dark')
+    P.add(aim(L.cone(0.54, 0.50, 0.05, 18), (X - 0.10, -0.12, 1.52), (0.0, 0.06, 1.0)), 'dark')
+    # and the eyes were INSIDE THE SKULL. The head is 0.44 deep and they sat at
+    # 0.40, so the face was blank from every angle. Measured, not nudged.
+    eyes(P, (X - 0.10, 0.0, 1.30), 0.150, 0.072, -0.545)
+    # ARMS - short, thick, ending in mitts. Right arm up on the mallet.
+    limb(P, [(X + 0.26, -0.10, 1.00), (X + 0.52, -0.16, 1.14)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.145, 10, 7), 'body', loc=(X + 0.56, -0.16, 1.16))
+    limb(P, [(X - 0.44, -0.10, 1.00), (X - 0.60, -0.16, 0.68)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.145, 10, 7), 'body', loc=(X - 0.62, -0.18, 0.62))
+    # THE FRAME AND THE GONG - unchanged in idea, lowered to the new shoulder
+    P.add(L.box(0.84, 0.12, 0.08), 'dark', loc=(X + 0.34, 0.26, 0.64), rot=(0.0, -0.12, 0.0))
+    for s in (-1, 1):
+        limb(P, [(X + 0.34 + s * 0.34, 0.28, 0.66), (X + 0.38 + s * 0.34, 0.30, 1.26),
+                 (X + 0.40 + s * 0.32, 0.30, 1.62)], 0.055, 0.042, 'dark')
+    P.add(L.box(0.86, 0.09, 0.09), 'dark', loc=(X + 0.40, 0.30, 1.62))
+    for s in (-1, 1):
+        limb(P, [(X + 0.40 + s * 0.26, 0.30, 1.60), (X + 0.40 + s * 0.24, 0.24, 1.46)],
+             0.028, 0.024, 'dark')
+    GX, GZ = X + 0.42, 0.96
+    P.raw(aim(L.cone(0.70, 0.70, 0.055, 28), (GX, 0.22, GZ), (0.10, 1.0, -0.12)), 'body')
+    P.raw(aim(L.cone(0.74, 0.70, 0.085, 28), (GX, 0.28, GZ), (0.10, 1.0, -0.12)), 'body')
+    P.add(L.sphere(0.18, 0.09, 0.18, 16, 10), 'body', loc=(GX - 0.02, 0.17, GZ + 0.01))
+    for k in range(3):
+        r = 0.30 + k * 0.15
+        ring = [Vector((GX + r * math.cos(TAU * i / 26.0), 0.19,
+                        GZ + r * math.sin(TAU * i / 26.0))) for i in range(27)]
+        P.raw(L.tube(ring, 0.016, 6), 'dark')
+    # THE MALLET - heavier head, shorter haft, still the clear diagonal
+    limb(P, [(X + 0.58, -0.14, 1.18), (X + 0.86, 0.06, 1.78)], 0.052, 0.044, 'bone')
+    P.raw(aim(L.cone(0.21, 0.21, 0.44, 12), (X + 0.86, 0.06, 1.78), (0.50, 0.30, 1.0)), 'dark')
+    P.raw(aim(L.cone(0.22, 0.215, 0.05, 12), (X + 0.86, 0.06, 1.78), (0.50, 0.30, 1.0)), 'bone')
+    # THE BATON down at his left - the parade tool
+    limb(P, [(X - 0.62, -0.20, 0.58), (X - 0.66, -0.24, 0.22)], 0.034, 0.026, 'bone')
+    return P
+
+
+BUILDERS.update({
+    "drillmaster_chibi": drillmaster_chibi,
+    "drillmaster_tall": drillmaster,
+    "drillmaster_chibi_tall": drillmaster_chibi,
+})

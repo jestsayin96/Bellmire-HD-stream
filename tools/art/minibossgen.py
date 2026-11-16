@@ -121,7 +121,14 @@ def sheets(repo, resx, resy):
     # the grid follows the set size: 2x2 for four, 4x2 for eight. A fixed 2x2
     # silently dropped everything past the fourth when the second set landed.
     ch, cw = resy // 2, resx // 2
-    lab = 54
+    # draw_text advances 6*scale px per character, so a cell fits (cw-16)//12
+    # characters at scale 2. The third set's hooks are longer than that and ran
+    # straight over the neighbouring cell's label - "IT PLANTS THE GROUND
+    # AGAINST YOU" collided with "IT HAS ALREADY SET THE ROOM" and the firepit
+    # hook was cut off by the sheet edge. The hook is the one line that says
+    # what the thing DOES, so it wraps rather than shrinks.
+    maxc = max(8, (cw - 16) // 12)
+    lab = 74
     n = len(cells)
     cols = 2 if n <= 4 else 4
     rows = (n + cols - 1) // cols
@@ -142,14 +149,25 @@ def sheets(repo, resx, resy):
             cell = sil[cy:cy + ch, cx:cx + cw, 0:3]
             cell[m] = np.array((0.06, 0.06, 0.08))
         tag = "%s  %.2fM" % (title, height)
-        hook = idea.split(" - ")[0]
         meta = "%s THEME   WEAR %.2f" % (theme.upper(), wear)
+        words, hook_lines, cur = idea.split(" - ")[0].split(), [], ""
+        for w in words:
+            trial = (cur + " " + w).strip()
+            if len(trial) > maxc and cur:
+                hook_lines.append(cur)
+                cur = w
+            else:
+                cur = trial
+        if cur:
+            hook_lines.append(cur)
+        hook_lines = hook_lines[:2]
         for s, c1, c2, c3 in ((sheet, (0.85, 0.80, 0.68), (1.00, 0.86, 0.52), (0.46, 0.52, 0.60)),
                               (sil, (0.15, 0.15, 0.20), (0.30, 0.30, 0.38), (0.45, 0.45, 0.52))):
             s[cy + ch:cy + ch + 2, cx:cx + cw, 0:3] = np.array(c1) * 0.35
-            G.draw_text(s, tag, cx + 8, cy + ch + 7, 2, c1)
-            G.draw_text(s, hook, cx + 8, cy + ch + 25, 2, c2)
-            G.draw_text(s, meta, cx + 8, cy + ch + 43, 1, c3)
+            G.draw_text(s, tag[:maxc], cx + 8, cy + ch + 7, 2, c1)
+            for li, hl in enumerate(hook_lines):
+                G.draw_text(s, hl, cx + 8, cy + ch + 25 + li * 18, 2, c2)
+            G.draw_text(s, meta, cx + 8, cy + ch + 61, 1, c3)
     G.write_png(os.path.join(root, "_contact_sheet.png"), sheet)
     G.write_png(os.path.join(root, "_silhouettes.png"), sil)
     return bad, checked
@@ -165,9 +183,23 @@ def main():
     args = ap.parse_args(argv)
     resx, resy = (int(x) for x in args.res.split("x"))
     report = {"ok": True, "corridor_clear_m": CORRIDOR_CLEAR, "minibosses": {}, "errors": []}
+    out = os.path.join(args.repo, "renders", "art", "minibosses", "_report.json")
+
+    # a --sheet-only pass used to start from an empty report and overwrite the
+    # file, so the last run's report shipped with "minibosses": {} - every
+    # span, face count and corridor verdict for all fourteen gone. Carry the
+    # per-creature half forward and merge whatever this pass rebuilds over it.
+    if os.path.isfile(out):
+        try:
+            with open(out) as f:
+                report["minibosses"] = dict(json.load(f).get("minibosses", {}))
+        except Exception:
+            pass
 
     if not args.sheet:
-        keys = [args.only] if args.only else list(M.ORDER)
+        # --only takes a COMMA LIST: the third set is six keys and one blender
+        # launch per key threw away the report of the five before it.
+        keys = [k for k in args.only.split(",") if k] if args.only else list(M.ORDER)
         for key in keys:
             G.purge()
             try:
@@ -210,7 +242,6 @@ def main():
         report["ok"] = False
         report["errors"].append("sheets: %s" % traceback.format_exc()[-900:])
 
-    out = os.path.join(args.repo, "renders", "art", "minibosses", "_report.json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w") as f:
         json.dump(report, f, indent=1)

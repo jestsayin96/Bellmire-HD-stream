@@ -72,3 +72,4 @@ RUNNING 2026-11-15T23:03:12-06:00 (HUD L73 shot-language test relaunch, windowed
 RUNNING 2026-11-15T23:10:00-06:00 (HUD L73 test relaunch 3, windowed ~6 min)
 IDLE 2026-11-15T23:16:31-06:00 - HUD L73 director shot language shipped on hud-ui, L73_TEST ok, Godot closed (HUD)
 RUNNING 2026-11-15T23:20:32-06:00 (game build D88 portcullis)
+IDLE 2026-11-15T23:55:24-06:00 - D88 portcullis shipped: probe 150/150 gates OK, flow 24/24, 20-min soak 0 stuck, gates green (game build)

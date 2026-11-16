@@ -91,7 +91,7 @@
     "order": ["missed", "myhero", "join", "real", "what", "gear", "gold", "bits", "commands", "hub"],
     "topics": {
       "missed":   {"cmd": "catchup",
-                   "phrases": ["what did i miss", "did i miss", "catch me up", "what happened to my", "miss+anything", "what+miss+hero", "hero+been", "hero+doing", "hero+up+to"]},
+                   "phrases": ["what did i miss", "did i miss", "catch me up", "what happened to my", "miss+anything", "what+miss+hero", "hero+been", "hero+up+to"]},
       "myhero":   {"cmd": "hero",
                    "phrases": ["my hero", "my stats", "my sheet", "my character", "my guy", "my knight", "hero+mine"]},
       "join":     {"reply": "Anyone can play. Type !enlist and you have a hero in Bellmire - name a calling and a people if you want them, or the valley picks. Then !oil, then !delve.",
@@ -109,7 +109,7 @@
       "commands": {"cmd": "help",
                    "phrases": ["what commands", "what can i type", "list of commands", "what are the commands", "what can i do", "how+commands"]},
       "hub":      {"cmd": "hub",
-                   "phrases": ["is there a website", "is there a site", "is there a page", "wheres the page", "where+website", "where+site", "link+site", "website+link"]}
+                   "phrases": ["is there a website", "is there a site", "is there a page", "wheres the page", "where+website", "where+site", "wheres+website", "wheres+site", "wheres+page", "link+site", "website+link"]}
     }
   },
   "foreign": {

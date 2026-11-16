@@ -1,0 +1,483 @@
+{
+ "ok": true,
+ "errors": [],
+ "knight": {
+  "helmet_top": 2.3979,
+  "helmet_r": 0.5699,
+  "cape_top": 1.236,
+  "cape_bottom": 0.094,
+  "body_height": 2.5431,
+  "foot_z": -0.0
+ },
+ "wear": {
+  "w12": {
+   "wear": 0.12,
+   "parts": 12,
+   "manifest": [
+    {
+     "part": "E3PO_Crest",
+     "bone": "head",
+     "anchor": [
+      0.0,
+      0.0,
+      1.2414
+     ],
+     "slots": [
+      "brass",
+      "cloth"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_PauldronL",
+     "bone": "upperarm.l",
+     "anchor": [
+      0.212,
+      -0.0,
+      1.1068
+     ],
+     "slots": [
+      "brass",
+      "steel"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_PauldronR",
+     "bone": "upperarm.r",
+     "anchor": [
+      -0.212,
+      -0.0,
+      1.1068
+     ],
+     "slots": [
+      "brass",
+      "steel"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_Mantle",
+     "bone": "chest",
+     "anchor": [
+      0.0,
+      0.0,
+      0.9726
+     ],
+     "slots": [
+      "brass",
+      "cloth"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_Halberd",
+     "bone": "handslot.r",
+     "anchor": [
+      -0.8831,
+      -0.0,
+      1.0493
+     ],
+     "slots": [
+      "cloth",
+      "haft",
+      "leather",
+      "steel"
+     ],
+     "follows_bone_rotation": false
+    }
+   ],
+   "tris": 1158,
+   "cams": {
+    "front": {
+     "ortho": 3.696,
+     "clip": [
+      8.16,
+      19.463
+     ]
+    },
+    "three_quarter": {
+     "ortho": 3.663,
+     "clip": [
+      7.984,
+      19.708
+     ]
+    },
+    "back": {
+     "ortho": 3.704,
+     "clip": [
+      8.165,
+      19.329
+     ]
+    }
+   },
+   "height": 3.372
+  },
+  "w45": {
+   "wear": 0.45,
+   "parts": 12,
+   "manifest": [
+    {
+     "part": "E3PO_Crest",
+     "bone": "head",
+     "anchor": [
+      0.0,
+      0.0,
+      1.2414
+     ],
+     "slots": [
+      "brass",
+      "cloth"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_PauldronL",
+     "bone": "upperarm.l",
+     "anchor": [
+      0.212,
+      -0.0,
+      1.1068
+     ],
+     "slots": [
+      "brass",
+      "steel"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_PauldronR",
+     "bone": "upperarm.r",
+     "anchor": [
+      -0.212,
+      -0.0,
+      1.1068
+     ],
+     "slots": [
+      "brass",
+      "steel"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_Mantle",
+     "bone": "chest",
+     "anchor": [
+      0.0,
+      0.0,
+      0.9726
+     ],
+     "slots": [
+      "brass",
+      "cloth"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_Halberd",
+     "bone": "handslot.r",
+     "anchor": [
+      -0.8831,
+      -0.0,
+      1.0493
+     ],
+     "slots": [
+      "cloth",
+      "haft",
+      "leather",
+      "steel"
+     ],
+     "follows_bone_rotation": false
+    }
+   ],
+   "tris": 1158,
+   "cams": {
+    "front": {
+     "ortho": 3.696,
+     "clip": [
+      8.16,
+      19.463
+     ]
+    },
+    "three_quarter": {
+     "ortho": 3.663,
+     "clip": [
+      7.984,
+      19.708
+     ]
+    },
+    "back": {
+     "ortho": 3.704,
+     "clip": [
+      8.165,
+      19.329
+     ]
+    }
+   },
+   "height": 3.372
+  },
+  "w85": {
+   "wear": 0.85,
+   "parts": 13,
+   "manifest": [
+    {
+     "part": "E3PO_Crest",
+     "bone": "head",
+     "anchor": [
+      0.0,
+      0.0,
+      1.2414
+     ],
+     "slots": [
+      "brass",
+      "cloth"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_PauldronL",
+     "bone": "upperarm.l",
+     "anchor": [
+      0.212,
+      -0.0,
+      1.1068
+     ],
+     "slots": [
+      "brass",
+      "steel"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_PauldronR",
+     "bone": "upperarm.r",
+     "anchor": [
+      -0.212,
+      -0.0,
+      1.1068
+     ],
+     "slots": [
+      "brass",
+      "steel"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_Mantle",
+     "bone": "chest",
+     "anchor": [
+      0.0,
+      0.0,
+      0.9726
+     ],
+     "slots": [
+      "brass",
+      "cloth",
+      "leather"
+     ],
+     "follows_bone_rotation": true
+    },
+    {
+     "part": "E3PO_Halberd",
+     "bone": "handslot.r",
+     "anchor": [
+      -0.8831,
+      -0.0,
+      1.0493
+     ],
+     "slots": [
+      "cloth",
+      "haft",
+      "leather",
+      "steel"
+     ],
+     "follows_bone_rotation": false
+    }
+   ],
+   "tris": 1164,
+   "cams": {
+    "front": {
+     "ortho": 3.696,
+     "clip": [
+      8.16,
+      19.463
+     ]
+    },
+    "three_quarter": {
+     "ortho": 3.663,
+     "clip": [
+      7.984,
+      19.708
+     ]
+    },
+    "back": {
+     "ortho": 3.704,
+     "clip": [
+      8.165,
+      19.329
+     ]
+    }
+   },
+   "height": 3.372
+  }
+ },
+ "pane": {
+  "day": {
+   "dist": 9.93,
+   "clip": [
+    1.127,
+    33.129
+   ]
+  },
+  "night": {
+   "dist": 9.93,
+   "clip": [
+    1.127,
+    33.129
+   ]
+  }
+ },
+ "export": {
+  "ok": true,
+  "msg": "",
+  "objects": [
+   "E3PO_Crest_brass",
+   "E3PO_Crest_cloth",
+   "E3PO_PauldronL_steel",
+   "E3PO_PauldronL_brass",
+   "E3PO_PauldronR_steel",
+   "E3PO_PauldronR_brass",
+   "E3PO_Mantle_cloth",
+   "E3PO_Mantle_brass",
+   "E3PO_Halberd_haft",
+   "E3PO_Halberd_leather",
+   "E3PO_Halberd_steel",
+   "E3PO_Halberd_cloth"
+  ],
+  "tris": 1158,
+  "manifest": [
+   {
+    "part": "E3PO_Crest",
+    "bone": "head",
+    "anchor": [
+     0.0,
+     0.0,
+     1.2414
+    ],
+    "slots": [
+     "brass",
+     "cloth"
+    ],
+    "follows_bone_rotation": true
+   },
+   {
+    "part": "E3PO_PauldronL",
+    "bone": "upperarm.l",
+    "anchor": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "slots": [
+     "brass",
+     "steel"
+    ],
+    "follows_bone_rotation": true
+   },
+   {
+    "part": "E3PO_PauldronR",
+    "bone": "upperarm.r",
+    "anchor": [
+     -0.212,
+     -0.0,
+     1.1068
+    ],
+    "slots": [
+     "brass",
+     "steel"
+    ],
+    "follows_bone_rotation": true
+   },
+   {
+    "part": "E3PO_Mantle",
+    "bone": "chest",
+    "anchor": [
+     0.0,
+     0.0,
+     0.9726
+    ],
+    "slots": [
+     "brass",
+     "cloth"
+    ],
+    "follows_bone_rotation": true
+   },
+   {
+    "part": "E3PO_Halberd",
+    "bone": "handslot.r",
+    "anchor": [
+     -0.8831,
+     -0.0,
+     1.0493
+    ],
+    "slots": [
+     "cloth",
+     "haft",
+     "leather",
+     "steel"
+    ],
+    "follows_bone_rotation": false
+   }
+  ]
+ },
+ "blank_check": {
+  "files": 11,
+  "failures": [],
+  "checked": [
+   [
+    "renders\\art\\e3po\\w12\\front.png",
+    171441
+   ],
+   [
+    "renders\\art\\e3po\\w12\\three_quarter.png",
+    188686
+   ],
+   [
+    "renders\\art\\e3po\\w12\\back.png",
+    177647
+   ],
+   [
+    "renders\\art\\e3po\\w45\\front.png",
+    171345
+   ],
+   [
+    "renders\\art\\e3po\\w45\\three_quarter.png",
+    187894
+   ],
+   [
+    "renders\\art\\e3po\\w45\\back.png",
+    177559
+   ],
+   [
+    "renders\\art\\e3po\\w85\\front.png",
+    171237
+   ],
+   [
+    "renders\\art\\e3po\\w85\\three_quarter.png",
+    186929
+   ],
+   [
+    "renders\\art\\e3po\\w85\\back.png",
+    177460
+   ],
+   [
+    "renders\\art\\e3po\\_done_test_day.png",
+    921600
+   ],
+   [
+    "renders\\art\\e3po\\_done_test_night.png",
+    921600
+   ]
+  ]
+ }
+}

@@ -110,7 +110,40 @@ func _dock() -> void:
 		return
 	_docked = k
 	HudDock.mark(self, k)
-	HudDock.put(self, HudDock.pane(town, k), HudDock.pane_k(town, k), "tc", float(UiTheme.px(54)) if k != "director" else 0.0)
+	var r := HudDock.pane(town, k)
+	var pk := HudDock.pane_k(town, k)
+	# D41: the pane's own label chips (its plate) are not the Chronicle, so put() does not
+	# step round them. Start the card BESIDE the plate, scaled down to the room there; if
+	# that room would shrink it below 70% of the pane's own scale, drop it UNDER the plate.
+	var plate := _plate_rect(k)
+	if plate.size.x <= 0.0:
+		HudDock.put(self, r, pk, "tc", float(UiTheme.px(54)) if k != "director" else 0.0)
+		return
+	var m := float(UiTheme.px(12))
+	var w0 := maxf(get_combined_minimum_size().x, 1.0)
+	var room := Rect2(Vector2(plate.end.x, r.position.y), Vector2(r.end.x - plate.end.x, r.size.y))
+	if plate.get_center().x > r.get_center().x:
+		room = Rect2(r.position, Vector2(plate.position.x - r.position.x, r.size.y))
+	var kk := minf(pk, (room.size.x - 2.0 * m) / w0)
+	if kk >= pk * 0.7:
+		HudDock.put(self, room, kk, "tc", 0.0)
+	else:
+		HudDock.put(self, r, pk, "tc", plate.end.y - r.position.y)
+
+## D41: the union of the label chips the spotlight draws across the top of pane k (global px)
+func _plate_rect(k: String) -> Rect2:
+	var s := HudDock.spot(town)
+	if s == null:
+		return Rect2()
+	var box := s.get_node_or_null("Pane_" + k)
+	if box == null:
+		return Rect2()
+	var u := Rect2()
+	for c in box.get_children():
+		if c is Label and (c as Label).is_visible_in_tree():
+			var cr := (c as Label).get_global_rect()
+			u = cr if u.size.x <= 0.0 else u.merge(cr)
+	return u
 
 ## L15: F11 changed the UI scale - build again
 func restyle() -> void:

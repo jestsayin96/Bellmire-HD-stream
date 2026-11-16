@@ -1,6 +1,133 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## *** HARD DELIVERABLE, DUE 09:00 MON 16 NOV *** D95 - THE TEN-CHARACTER SHOWCASE
+Mr. E, 00:59, verbatim: "non negotiable i want 10 characters with different equipment and armor
+and accessories as a show case for me in 8 hours. i want to see front, side, back, top down
+profile views i want to make sure everything that is made for these characters actually fit.
+people are not going to waste money on slop."
+
+WHAT HE IS ACTUALLY CHECKING: whether the gear FITS THE BODY. Not whether the pieces are pretty
+in isolation - whether a helm sits on the head, a ring is on a finger and not through it, a cloak
+hangs off the shoulders, boots meet the ankle, a pauldron does not float. Four views exist so
+nothing can hide. A piece that looks right from the front and clips through the chest from the
+side is a FAILURE and must be listed as one, not quietly cropped out.
+
+### THE DELIVERABLE
+TEN characters. Each one:
+  - a DIFFERENT calling, and a different body where the roster offers one
+  - a DIFFERENT weapon, DIFFERENT armour, and at least THREE accessories nobody else has
+  - FOUR views, same framing and lighting for every character: FRONT, SIDE, BACK, TOP-DOWN
+  - full body, feet to crown, nothing cropped
+One contact sheet per character (four views in a row) plus one overview sheet of all ten.
+Put them in renders/art/d95/ and SHOW MR. E THE SHEETS.
+Spread them across the rarity ladder: two common, two uncommon, two rare, two very rare, two
+legendary - so he sees the whole range of what a viewer can earn, not ten variations of the same
+tier. At least ONE of the ten wears a declared SET (matching chest, boots, helm, gauntlets),
+because Mr. E named that as the legitimate exception and it must be visible alongside the rest.
+
+### SAY WHAT IS WRONG
+End with an explicit FIT REPORT: every clip, float, gap, wrong scale or bad anchor you can see,
+per character and per view. An honest list of twelve faults is worth more than a clean-looking
+sheet that hides three. He will spot them on stream if you do not spot them now.
+
+### MR. E HAS WIDENED THE ASSET PERMISSION (00:59)
+"look for free CC packs online you have acces to everything download stuff, use designs from
+others and tweak them to fit our needs, as long as its legal we are good. i give you this
+permission."
+SO: you may DOWNLOAD and MODIFY third-party packs. HIS MACHINE CAN REACH THEM - verified 00:58:
+itch.io, quaternius.com, kenney.nl, opengameart.org, poly.pizza and github.com all answer 200
+from the Blender (Windows) side. The Linux bridge CANNOT - its proxy blocks all but GitHub and
+package registries - so do downloads through the Blender bridge with urllib or requests.
+
+THE LEGAL LINE, AND IT IS NOT NEGOTIABLE - "as long as its legal" is the condition he set:
+  - CC0 / public domain: always fine. Prefer it.
+  - CC-BY: fine, BUT the attribution must be recorded in a LICENSE/CREDITS file next to the asset,
+    naming the author, the work and the licence. No attribution = not legal = do not ship it.
+  - **CC-BY-NC (NonCommercial) IS FORBIDDEN.** Bellmire takes bits and channel points; it is a
+    commercial stream. NC assets would make the whole game unshippable.
+  - **CC-BY-ND (NoDerivatives) IS FORBIDDEN** - the whole point here is tweaking them to fit.
+  - "Free to download" is NOT a licence. If a pack does not state its licence plainly, DO NOT USE
+    IT. There is enough CC0 out there that guessing is never necessary.
+  - Record every pack used in docs/art/ASSET_SOURCES.md: pack, author, URL, licence, date.
+The old blanket ban on Quaternius Bestiary / QAL stands until Mr. E lifts it by name.
+
+### DO NOT LET THIS BLOCK ON DOWNLOADS
+Procedural generation has already produced eight lords, 454 icons, twelve creature bodies and
+eight minibosses in a day. Downloaded packs are an ACCELERANT, not a dependency. If a pack is
+slow to find, awkward to licence or does not fit the rig, GENERATE the piece instead and move on.
+The deadline is 09:00 and the deliverable is ten characters, not a perfect sourcing exercise.
+
+### HOW THIS SITS WITH D94
+D95 is the PROOF of D94. D94 says every item must look like itself; D95 is Mr. E seeing whether
+that is true and whether it fits. Build the variety (D94), then show it on ten bodies (D95).
+If D94 is not finished by 09:00, STILL SHIP D95 with whatever exists - ten characters wearing the
+best available gear, with an honest fit report. A partial showcase he can judge beats a complete
+one he never sees.
+================================================================================
+
+================================================================================
+## *** TONIGHT'S ONLY JOB *** D94 - EVERY ITEM MUST LOOK LIKE ITSELF (Mr. E, 16 Nov 00:55)
+HUD, HUB and CONTENT lanes are SHUT DOWN for this. Only GAME BUILD, ART and the SUPERVISOR run.
+Mr. E, verbatim: "this is unacceptable, unless they are a set example: metal armor chest, boots,
+helm, and gauntlets. ring should not at all be looking the same at all. change the gemstones, the
+colour, make them different, unique. that goes for all accessories. all equipment aka, the weapons
+and all the armour pieces should not be looking the same, again unless they are a set. fix this
+asap. shut everyone else down, this is the focus tonight."
+
+### THE MEASURED FAULT - do not re-derive it
+gear.gd `dress_cosmetics()` renders a worn accessory from the SLOT ONLY, never from the item:
+  - every ring is the same TorusMesh (inner 0.07, outer 0.11)
+  - the colour comes from `ACC_COL`, a four-entry dict keyed ring/amulet/gloves/boots
+  - so all ~50 rings are one gold torus; all gloves, amulets and boots likewise
+254 accessories with distinct names, prices, flavour and icons render as FOUR shapes in four
+colours. Only hats, banners and titles vary per item today.
+The weapons and armour are worse: the game runs on the 12-step GENERIC ladder in gear.gd
+(bare hands/plain steel/fine steel/runed/dragontooth/scarforged, rags/leather/chainmail/plate/
+warded plate/scarwoven mail). The 86 named weapons and 33 named armour pieces in items.json are
+read by NO SCRIPT AT ALL. A hero cannot hold "Ironmonger's Blade" - only "fine steel".
+
+### THE RULE
+EVERY ITEM LOOKS LIKE ITSELF. A viewer who paid for a specific thing must be able to SEE that
+specific thing on their hero and tell it apart from the one next to it.
+THE ONE EXCEPTION MR. E NAMED: a SET may share a look - a metal armour set whose chest, boots,
+helm and gauntlets match is correct and good. Sets are deliberate and declared; sameness that
+falls out of lazy code is not.
+
+### DIVISION OF WORK
+**ART LANE - build the variety.** You already solved this exact problem for D73: the icon
+generator derives silhouette from slot/kind, ornateness and metal from COST QUARTILE, palette
+from the stored colour, and FOR THE 230 ACCESSORIES WITH NO COLOUR IT DERIVES THE GEM FROM THE
+STAT (ac steel, saves violet, hp red, speed green, hit amber, dmg orange). Reuse that derivation
+for the 3D piece so THE ICON ON THE HUB AND THE THING ON THE HERO MATCH. That coherence is worth
+more than either alone.
+  - Rings: band profile, setting, gem shape and gem colour all vary. Cheap rings are a plain
+    band; expensive rings are worked, with a real stone.
+  - Amulets, gloves, boots, cloaks: same treatment - shape family from the item's NAME first
+    (a Guard Helm is a helm, a Straw Hat is a wide brim), hash only as a fallback, exactly as
+    D73's hats did.
+  - WEAR RIDES COST, per the 15 Nov ruling: cheap reads handled and worn, expensive reads new and
+    well kept. Never one wear value for a whole slot.
+  - Weapons and armour: the 119 named pieces need looks of their own, grouped into SETS where the
+    data says they belong together.
+  - Budget: these are worn by many bodies at once, so keep them CHEAP - low poly, few materials,
+    merged by material like the lords. A ring is seen at arm's length on a moving body.
+
+**GAME BUILD - wire it.** `dress_cosmetics()` must take the ITEM, not just the slot. Then the
+harder half: the 119 named weapons and armour pieces are dead data, and making them real is the
+point of this item - a hero holds a NAMED piece, the forge and the shop deal in named pieces, and
+gear.gd's generic ladder becomes the tier BEHIND the name rather than the thing itself.
+  - Keep the numbers. The 12-step ladder's atk/hp/ac values are balanced and stay; a named piece
+    carries a tier and inherits that tier's numbers.
+  - Do not break saves: a hero carrying "fine steel" today must still be valid tomorrow.
+
+### DONE
+A single render, one row per slot, showing SIX DIFFERENT items of that slot side by side on real
+hero bodies at stream distance. If a viewer cannot tell them apart in that shot, it is not done.
+Then the same for weapons and armour. Mr. E's eye is final.
+================================================================================
+
+================================================================================
 ## RESOLVED - THE MISLABELLED COMMIT ON `laptop` (closed by the supervisor 2026-11-15 23:58)
 Commit b3fbd16 on `laptop` carried the game build worker's in-progress D88 code under a
 documentation message. Mr. E ruled: leave it. The worker then committed finished, gated D88 on
@@ -9,28 +136,38 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-15 23:58 CT. If you own a lane, your next item is named here. Search the file
+Updated 2026-11-16 01:05 CT. If you own a lane, your next item is named here. Search the file
 for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."
 
-  GAME BUILD   ->  D83   (the traps are stuck - MEASURE FIRST), then D91 stages 2-4.
-                   D88 is DONE and ticked. D83 and D91 stages 2-4 are the whole of Phase 1's
-                   remainder - finish them before anything in Phase 2 or 3.
-  HUD          ->  L73's LAST STEP ONLY, then L74. The shot language itself is shipped, merged
-                   and verified (L73_TEST ok, six stills) but L73's DONE gate is a 30-MINUTE
-                   CAPTURE in which a viewer can tell from the camera alone when something
-                   important happened. Do that one run - same shape as the L64 30-minute
-                   director run - and the item ticks. DO NOT rebuild the shot language.
-  HUB          ->  STAND DOWN. H29, H30 and H31 are all shipped, merged and ticked, and the
-                   freeze forbids inventing more. Nothing is queued for this lane - do not
-                   reach into another lane's files.
-  CONTENT      ->  C2 (standing, open by design), scoped to THE WORDS PHASE 2 NEEDS: the ascent
-                   (D77), the errand (D78), carry weight (D80), selling and the guild vault
-                   (D81), and the upgrade poll (D66). The C-55 rarity ladder is delivered - it
-                   landed as the lane's cycle C-58, see the C-55 block.
-  ART          ->  more minibosses (standing permission). Shipped: barracks (Drillmaster),
-                   workshop (Scrapwright), prison (Gaoler), shrine (Snuffer). Themes with none
-                   yet: crypt, keep, treasury, mess, and the biome themes (wood, grassland,
-                   flooded).
+  GAME BUILD   ->  *** D94 *** EVERY ITEM MUST LOOK LIKE ITSELF - the WIRING half. Mr. E's
+                   00:55 order; it outranks everything. `dress_cosmetics()` must take the ITEM,
+                   not the slot, and the 119 named weapons and armour pieces in items.json must
+                   become real (tier behind the name, numbers kept, saves not broken).
+                   THEN the in-engine half of D95: ten dressed heroes standing up in Godot and
+                   an honest fit report - clips, floats, gaps, bad anchors. Art renders the
+                   sheets; only this lane can prove the gear fits on the real bodies.
+                   Finish D83 only if it is mid-flight. D91 stages 2-4 wait.
+                   D88 is DONE and ticked. D83 and D91 stages 2-4 are Phase 1's remainder.
+  HUD          ->  STAND DOWN. D94 shut this lane down (Mr. E, 00:55) and D95 did not reopen it.
+                   L73's last step - the 30-minute capture in which a viewer can tell from the
+                   camera alone when something important happened - stays queued, then L74. Both
+                   wait for the shutdown to lift. DO NOT rebuild the shot language. Do not
+                   reach into another lane's files to look busy.
+  HUB          ->  STAND DOWN. D94 shut this lane down. H29, H30 and H31 are shipped, merged and
+                   ticked, and the freeze forbids inventing more. Nothing is queued.
+  CONTENT      ->  STAND DOWN. D94 shut this lane down. C-60 (phase2_words: ascent, errand,
+                   carry, sell, vault, stone, upgrade poll - 182 lines) is merged to main and is
+                   the last thing this lane owed. C2 stays standing and open by design for when
+                   the shutdown lifts.
+  ART          ->  *** D95 *** TEN-CHARACTER SHOWCASE, DUE 09:00 MON - then D94. D95 is the proof
+                   of D94: ten characters, different calling/weapon/armour and three accessories
+                   nobody else has, four views each (front, side, back, top-down), same framing
+                   and lighting, nothing cropped, spread two per rarity tier with at least one
+                   declared SET. Sheets in renders/art/d95/. END WITH THE FIT REPORT - an honest
+                   list of twelve faults beats a clean sheet hiding three. If D94's variety is
+                   not finished, SHIP D95 ANYWAY with the best gear that exists.
+                   Minibosses are a PERMISSION and the lane is NOT dry - do not take one this
+                   run. Eight exist; only the biome themes (wood, grassland, flooded) lack one.
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
@@ -281,7 +418,20 @@ three views each and a wear value per creature in renders/art/minibosses/; gener
 docs/art/MINIBOSSES.md carries the write-ups. THE GAME-BUILD HALF IS NOT DONE and is not claimed here: the
 art lane never runs Godot, so none of the four is wired into dungeon_hd.gd's existing "miniboss" set-piece
 weight yet, and none has been seen in a fight. That wiring belongs to the game build, after Phase 1.
-THEMES STILL WITHOUT ONE: crypt, keep, treasury, mess, and the biome themes (wood, grassland, flooded).
+SECOND SET OF FOUR (supervisor, 2026-11-16 01:05 CT; art 42179ee, merged to main): the Sexton
+(crypt, 2.45 m - it will not stay down; four lit niches are four risings, countable from the
+doorway), the Porter (keep, 2.30 m - it bars the way: no retreat, no reinforcement), the Tallyman
+(treasury, 2.15 m - it takes gear off the party, wears it where the viewer who paid for that helm
+can see it, and withdraws) and the Cook (mess, 2.05 m - the pot heals the room; spill the pot).
+These four cover the themes where dungeon_hd.gd rolls the miniboss set piece at 15 and 10 and had
+nothing theme-matched to put in the slot. All four merged by material, 1094-1722 faces, feet on
+z=0, corridor-safe against the 11.0 m clear span; none room-locked. Wear spreads across all eight
+and no two share a value (tallyman 0.20 up to snuffer 0.90). The art worker's own write-up records
+three silhouettes the pictures overruled before it shipped - that is the bar working.
+THE GAME-BUILD HALF IS STILL NOT DONE FOR ANY OF THE EIGHT: the art lane never runs Godot, so
+none is wired into dungeon_hd.gd's "miniboss" set-piece weight and none has been seen in a fight.
+That wiring belongs to the game build, after Phase 1.
+THEMES STILL WITHOUT ONE: only the biome themes (wood, grassland, flooded).
 
 GOOD IDEAS ARE NOT WORK: under the freeze, minibosses are a PERMISSION, not a queue. The art lane
 takes its queued item first and builds a miniboss when that lane is otherwise dry - which it has

@@ -1472,3 +1472,121 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - OPEN for D64: .3 route-tagged lines, .4 caravan above-cap piece, per-shop caps for armour/brews - all need
   laptop-owned files. Mr. E/supervisor: who owns roster.gd/chatcmd.gd/gear.gd now that no laptop code worker runs?
 
+
+## D-cycle - D84 the white figures, 2026-11-15 ~18:25 CT (game build)
+- Item: D84 (first open game-build RC item in my row; D91 stage 1 is in, stages 2-4 need laptop-owned dungeon files).
+  Started on laptop 30f7438 (origin/main merged).
+- CAUSE (not a material/load fault): the raid HIT-FLASH. Townsfolk._flash duplicates every surface material and sets
+  white emission 1.6 for 0.12 s; only Townsfolk._process counts it down (_tick_flash). HeroBody and Cavalry both
+  override _process and never call it, so a viewer hero or a mounted knight hit once by a raider stayed featureless
+  white for the rest of the night - Mr. E's "GLOWING" knight with the spotlight ring under him (a hero). Headless runs
+  skip the material surgery, which is why no test ever saw it. Monster ticks its own flash in its _process (checked, no
+  subclasses) - not affected.
+- FIX scripts/townsfolk.gd: _flash and _death_fx also arm a SceneTree timer (generation-checked, so a re-flash is not cut
+  short) that calls _end_flash; no subclass override, LOD skip or disabled process_mode can starve it. flash_lit() test
+  hook. Backup townsfolk.gd.bak_d84.
+- TEST tools/_d84_flash.gd (WINDOWED): D84_TEST OK - HeroBody, Cavalry and a plain guard each lit (8-9 surfaces) one frame
+  after _flash, 0 lit at 0.6 s; HeroBody _death_fx 0 lit at 0.9 s; null-surface logger over all ~252 bodies every 5 s for
+  60 s: 0 bodies with a null surface, 0 left lit. (The item asked a 10-min soak for the logger; 60 s was run because the
+  null-material hypothesis is ruled out by the cause.) The probe hero's roster.json is snapshotted and restored.
+- LOOK renders/cycles/d84/d84_knight_night_midflash.png (the knight pure white - the exact shot Mr. E sent) and
+  d84_knight_night_after.png (1 s later, normal night-blue steel). This is what the bug used to freeze in place.
+- GATES: parse 0 errors; OFFFLOOR 0/1339 INPROP 0 MON_INPROP 0/123; TWITCH_PARSE OK; TOWNWALK in_solid 0/18612 raid
+  0/4672 PASS; delve rc 0, 0 SCRIPT ERROR.
+
+
+## D-cycle - D90 the wagon, rigid tow, 2026-11-15 ~20:55 CT (game build)
+- Item: D90. Phase RC game-build row is D91 -> D84 -> D90: D91 is still open but stages 2-4 need laptop-owned
+  dungeon files (unchanged from D91a), D84 shipped last run, so D90 is the first RC item this lane can work.
+  Started on laptop 261a372 (origin/main merged).
+- THE CAUSE MR. E WAS LOOKING AT WAS NOT IN THE ITEM'S LIST. Prop_Wagon's shafts run along its own +z (tips z +0.87,
+  axle z -2.5, measured from the .gltf). D16c/D53 set the towed yaw to the hauler's +PI/2, so EVERY towed cart in
+  Bellmire rolled along side-on, beside its hauler, shafts pointing off into the street - "trailing behind him
+  sideways, hes not even touching it". renders/cycles/d90/ first shot this run showed it on the caravan master
+  before the fix (not kept); a_/b_caravan_moving.png are after.
+- FIX scripts/townsfolk.gd (bak_d90): the cart pose is DERIVED from the hauler every drawn frame (in _process, after
+  the facing settles, every LOD), never integrated - yaw = the hauler's heading, shaft tips 0.1 m behind his centre,
+  shafts lifted TILT 0.16 rad about the axle to hand height (wheels stay on the ground). One degree of freedom: the
+  heading trails a turn at speed/2.8 m, clamped to 0.35 rad. Parking is a state machine TOWED -> PARKING (1.2 s,
+  shafts set down, cart rolls back 0.5 m) -> PARKED -> UNPARKING (hauler turns his back to the shafts and is held
+  0.9 s while they lift), entered only after 1.5 s truly stood still. WAGON_SNAP deleted; a parked cart > 8 m from a
+  re-emerging hauler (door/respawn) is re-hitched at once; a hauler dragged > 0.3 m mid-re-hitch (raid flight)
+  re-hitches at once. The cart is posed the moment it is assigned (no spawn frame side-on).
+  scripts/town.gd (bak_d90): wagon_park(who, max_k, dist) - park yaw corrected to the bearing (was +PI/2), within
+  60 deg of behind so a cart is never swung through its owner. scripts/raids.gd (bak_d90): _step waits out tow_hold.
+  scripts/valley.gd: traveller carts spawn behind, not ahead.
+- TEST tools/_d90_tow.gd (headless --fixed-fps 60, 1200 s sim, raids and day running, caravans forced): D90_TOW OK -
+  23 haulers incl. 14 caravan masters, 829,440 towed samples / 876,782 total, shaft-tip distance deviation max
+  0.001 m (limit 0.15), relative yaw max 20.1 deg (clamp 20.05), 0 frames sideways while moving, 0 frames bed ahead
+  of the hauler, 49 parks / 49 re-hitches, 25 m teleport re-hitched within 3 frames. Earlier runs this cycle failed
+  and drove the fixes: parks swung through the hauler (park bearings limited), a re-hitch dragged by a raid flight
+  (24 frames; raids now wait), a spawn frame side-on (setter).
+- LOOK tools/_d90_shot.gd (windowed 1080p) -> renders/cycles/d90/a_caravan_moving, b_caravan_moving2 (caravan master
+  walking, shafts in his hands, 0.11 m), c_caravan_stopped (drawn up behind him at the market), f_carter_stopped.
+  The re-hitch shot did not come inside the 6-min window (the caravan trades then leaves later) - the soak covers it.
+- GATES: parse 0 errors; OFFFLOOR 0/708 INPROP 0 MON_INPROP 0/76; TWITCH_PARSE OK; TOWNWALK in_solid 0/20233 raid
+  0/2477 PASS (stuck 1); delve ENDED 4 survivors, 0 SCRIPT ERROR.
+- NOTE: the shafts are ~1.2 m apart and the hauler stands between them; his arms are the stock walk swing, not a
+  grip pose - the tips reach his hands at the hips in the shots, but a dedicated "pulling" arm pose would be art.
+
+
+## D-cycle - T5 the viewer's roll, 2026-11-15 ~21:20 CT (game build)
+- Item: T5. Phase RC game-build row is D91 -> D84 -> D90 -> D88 -> D83 -> T5. D84 and D90 are shipped; D91 (stages
+  2-4), D88 (dungeon_parts/dungeon_hd/delve) and D83 (delve/dungeon_parts) live entirely in laptop-owned dungeon
+  files this lane's brief forbids, and nobody owns them since jestai was retired - so T5 is the first RC item this
+  lane can work. Started on laptop df1f98c (origin/main merged).
+- BUILT scripts/twitch_eventsub.gd (bak_t5): reward "roll" - "Roll for Bellmire", 750 points, user input (build /
+  festival / a law by title; anything else and fate picks). A roll is for the TOWN, so it needs no hero and never
+  answers "!enlist first". viewer_roll(uid, who, text, face, cost) rolls the d20 IN THE GAME:
+  20 triumph (crit) . 13-19 goes well (good) . 8-12 mixed . 2-7 badly (bad) . 1 backfires (fumble).
+  Every band CHANGES something: BUILD -> economy.raise_shop("smithy") +2/+1/+1 and 60 gold over / a third of the
+  timber wasted / half the timber burns and 40 gold; EVENT -> town.start_festival("gift", buyer) (+ full restock on
+  a 20) / a small market fair / the feast food spoils / a brawl, 60 gold and 1 renown; LAW -> a propositions entry
+  passes, its own good or bad line comes true, renown +2/+1/0/-1/-1 (renown is half the town score). Chronicle:
+  "<name> rolls a N to <do> - <band>. <what happened>", then E3PO shouts his verdict (e3po.viewer_roll pools,
+  C-cycle 38 - mixed and bad use "low"). Words read from lore_lines, no parallel copies.
+  scripts/snapshot_pub.gd (bak_t5): `rolls` [{n, by, what, result, tier, cost, at}] newest first, max 20, in
+  web/app.js normalizeRolls' contract; tier only one of the five whitelisted words; names W1a-cleaned at 25;
+  result capped at 400 (clean_line gained an optional cap - the hub reads 400, so a verdict is never cut at 200).
+  PAYLOAD_V stays 4 (additive). scripts/town.gd (bak_t5): var viewer_rolls.
+- TEST tools/_t5_roll.gd (real Town.tscn, offline EventSub): T5_ROLL OK 23/23 - bands, intent parsing, build 20
+  smithy 1->3 and counter ceiling 3, build 1 backfires (wood 100->50, treasury 500->460, level unchanged), build 5
+  badly, event 15 festival paid for by Marigold, event 4 food 100->80, law 17/3 renown 5->6->5 with the law's own
+  lines, a real EventSub redemption payload rolls for a viewer with no hero, payload v4 carries rolls, hostile name
+  cleaned, 5 failure outcomes. Windowed same 23/23.
+- LOOK renders/cycles/t5/: t5_smithy_before (rack silhouetted above common) -> t5_smithy_after_crit (fine steel and
+  runed axes lit after CoffeeCat's 20) and t5_square_festival (bunting over the square, the Chronicle line shown).
+- GATES: parse 0 errors; OFFFLOOR 0/1216 INPROP 0 MON_INPROP 0/120; TWITCH_PARSE OK; TOWNWALK in_solid 0/20694 raid
+  0/3956 PASS (stuck 1); delve ran 150 s to floor 2, 0 SCRIPT ERROR.
+- MR. E: the reward is created only on a resync (the edit-proof rule). Set [twitch] rewards_resync=true in
+  user://twitch.cfg for ONE launch, then false again. Seen in the shots: the HUD-dock Chronicle on this branch still
+  ends lines in "..." - that is L71 (HUD's feed_hud.gd), not this item.
+
+## D-cycle - D93a the town layout format + validator, and the generated town measured, 2026-11-15 ~22:30 CT (game build)
+- Item: D93 AUTHOR THE TOWN (first unchecked game-build item; LARGE, so staged). This cycle is steps 1 + 5 and a
+  measurement. Nothing the game runs is changed - no scripts/ file touched. On laptop ff5bceb (main merged, up to date).
+- FORMAT "bellmire-town/1", one map with per-level tags (economy levels 1..12), documented in data/town/README.md:
+  roads as polylines with width, the square as a polygon, buildings {shape, pos, yaw, half, off, door, level,
+  landmark/shop/special}, sites, ground patches.
+- VALIDATOR tools/_d93_validate.gd - pure data, ~1 s: OVERLAP (exact oriented-rectangle SAT), ON_ROAD, ON_SQUARE,
+  DOOR (within 2 m of a road edge), UNREACHED (every door/site in the square's road component), PATCH.
+  JESTS_D93_IN / JESTS_D93_LEVEL. Self-test: renders/cycles/d93/fixture_good.json PASS (and PASS at level<=1);
+  fixture_bad.json FAIL with every planted defect caught (overlap 1, on_road 1, on_square 1, door 2, unreached 4
+  incl. a road island, patch 2).
+- EXPORTER tools/_d93_export.gd snapshots the town the GENERATOR builds into the format -> data/town/bellmire.json
+  (191 roads, 66 buildings, 6 sites). It is the BEFORE picture, not the authored town.
+- MEASURED (renders/cycles/d93/validate_generated_town.txt, d93a_generated_town_validated.png):
+  D93_VALIDATE FAIL overlap=0 on_road=8 on_square=3 door=61 unreached=63 patch=0, components=5.
+  * on_road: the hall, chapel, barracks and windmill all stand on a road by 0.4-4.5 m (landmarks are exempt from
+    the generator's road sweep).
+  * on_square: 3 houses stand on the paved square.
+  * DOOR 61/66: the generator's roads are every hex-to-hex link of the road cells - a triangle lattice - and the
+    house sweep drops every frontage house the lattice touches, so the ones that survive stand mid-block, 4.5-8 m
+    from any road, front doors facing nothing. That is the clearest single argument for authoring: the generator
+    cannot produce a street frontage.
+  * 5 road networks that do not touch (the valley/scar/south roads vs the town lattice).
+- NEXT (D93b): author the level-12 road network by hand in bellmire.json (real streets, not the lattice), then
+  the square and buildings onto the blocks, until D93_VALIDATE PASS; then the loader (D93.4). The exporter must
+  not be rerun over hand edits (JESTS_D93_OUT).
+- GATES: parse 0 errors (import clean); OFFFLOOR 0/1125 INPROP 0 MON_INPROP 0/101; TWITCH_PARSE OK; TOWNWALK
+  in_solid 1/18987 (0.005%) raid 0/4830 PASS; delve_test ran, 0 SCRIPT ERROR.

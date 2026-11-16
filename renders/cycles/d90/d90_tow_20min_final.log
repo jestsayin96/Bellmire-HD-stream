@@ -1,0 +1,520 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D90 soak 1200 s sim
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Rogue_Hooded - playing its idle
+D90 t=59 s haulers=7 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=6 unparks=6
+FEED Talen Rivers settles in Bellmire, looking for work.
+D90 t=119 s haulers=7 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=7 unparks=7
+FEED Garm Ashwood settles in Bellmire, looking for work.
+D90 t=179 s haulers=8 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=8 unparks=8
+FEED Garm Fenwick settles in Bellmire, looking for work.
+D90 t=239 s haulers=9 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=10 unparks=10
+FEED Wren of the Ford settles in Bellmire, looking for work.
+MUSTER timed out: dists=[92, 6, 71, 21, 67, 68, 66, 14] vis=true stay=false route=66 inside=false
+D90 t=299 s haulers=9 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=11 unparks=11
+FEED Osric Thatcher settles in Bellmire, looking for work.
+FEED Chalk the wall. Trust the chalk.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 2 slimes.
+FEED A mourner's cup, full, on a step nobody uses.
+FEED The slime divides.
+FEED Ingrid Stonehand rolls a 20 - and the slime is gone.
+FEED Garm Coalfoot searches (Investigation 6) and turns up 8 gold on floor 1.
+FEED Floor 1 cleared.
+D90 t=359 s haulers=10 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=15 unparks=14
+FEED Garm Coalfoot searches the chest - Successfully found loot!! 14 gold (Investigation 20 vs DC 10).
+FEED Ingrid Stonehand and 2 others take a breather, and press on deeper.
+FEED Ingrid Stonehand steps on a slot in the floor - a blade! DEX 13 vs DC 10, 3 damage (halved).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 2 bog frogs, 1 puglin.
+FEED Ingrid Stonehand turns on the wounded giant rat to finish it.
+FEED Garm Coalfoot turns on the wounded giant rat to finish it.
+FEED Garm Coalfoot searches (Investigation 16) and turns up 25 gold on floor 2.
+FEED The last of it falls, and the stillness has a weight.
+FEED Garm Coalfoot finds a vial of Field Dressing.
+FEED Garm Coalfoot searches the chest - ...no loot... (Investigation 6 vs DC 11).
+FEED Dunn of the Ford settles in Bellmire, looking for work.
+FEED Ingrid Stonehand and 2 others take a breather, and press on deeper.
+FEED Garm Coalfoot gets a captive free. 42 gold, 3 ways - small thanks for a poor life.
+FEED Garm Coalfoot spots a pressure plate (Perception 11 vs DC 11) and steps round it.
+D90 t=419 s haulers=11 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=17 unparks=16
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 drowned slime, 1 hollowed giant rat, 1 slime.
+FEED The oil is running low.
+FEED The slime divides.
+FEED Garm Coalfoot searches (Investigation 15) and turns up 36 gold on floor 3.
+FEED Held. The door is kept, and so is everyone standing.
+FEED The handrail is new. Nobody in Bellmire fits new handrails.
+FEED They carry 15 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 cave spider, 1 slime.
+FEED Somebody kept bringing flowers long after the names went.
+FEED Talen Bramble casts Frost at cave spider.
+FEED Dunn Hollow's frost goes out like a lamp in a draught (9 vs DC 10).
+FEED Edda of the Ford casts Smite at cave spider.
+FEED Dunn Hollow casts Bolt at skeleton minion.
+FEED The slime divides.
+FEED Edda of the Ford turns on the wounded slimeling to finish it.
+FEED Dunn Hollow searches (Investigation 11) and turns up 11 gold on floor 1.
+FEED The dark withdraws a pace and sulks.
+FEED Garm Coalfoot spots a fire grate (Perception 11 vs DC 11) and steps round it.
+FEED Ingrid Stonehand and 2 others take a breather, and press on deeper.
+FEED Garm Coalfoot touches the altar - a curse. Something older than the floor takes a bite.
+FEED Dunn Hollow searches the chest - ...no loot... (Investigation 9 vs DC 10).
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED Talen Bramble steps on a slot in the floor - a blade! DEX 6 vs DC 10, 11 damage.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 cave spiders, 1 slime, 2 drowned slimes.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Ingrid the Younger settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 hollowed bog frog, 1 bog frog, 1 skeleton minion.
+FEED Cort Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Dunn Hollow casts Frost at hollowed bog frog.
+FEED Edda of the Ford casts Smite at hollowed bog frog.
+FEED Talen Bramble casts Frost at hollowed bog frog.
+FEED Garm Coalfoot should be dead - and stands back up (14).
+FEED Ingrid Stonehand should be dead - and stands back up (19).
+FEED Garm Coalfoot the duelist falls on floor 4 to the dark below. Level 2, 8 kills. !reroll to rise again.
+FEED Ingrid Stonehand the monk falls on floor 4 to the dark below. Level 2, 6 kills. !reroll to rise again.
+FEED Dunn Hollow works bolt; the scar does the last line for them (9 vs DC 11).
+FEED Talen Bramble casts Frost at slime.
+FEED Dunn Hollow casts Frost at slime.
+FEED Edda of the Ford casts Smite at slime.
+FEED The slime divides.
+FEED Dunn Hollow searches (Investigation 19) and turns up 27 gold on floor 2.
+FEED Quiet. The bell with no clapper rang anyway.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Ingrid Stonehand and 2 others get out alive, and come home with what they carried.
+FEED Edda of the Ford comes home to Bellmire with 83 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 21 kills between them.
+FEED Edda of the Ford is fitted with leather. (+10 hp)
+D90 t=479 s haulers=11 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=20 unparks=18
+FEED Dunn Hollow gets a captive free. 42 gold, 5 ways - small thanks for a poor life.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED 5 creatures boil out of the dungeon!
+FEED Initiative: the raiders 12, the watch 20 - the watch is ready for them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned slime, 1 puglin, 1 giant rat, 1 hollowed puglin.
+FEED The oil is running low.
+FEED Dunn Hollow casts Frost at giant rat.
+FEED Talen Bramble casts Frost at giant rat.
+FEED Edda of the Ford casts Smite at giant rat.
+FEED Talen Bramble's bolt goes out like a lamp in wind - wild magic (10 vs DC 11).
+FEED Dunn Hollow starts frost, loses the thread, and finishes it badly (1 vs DC 11).
+FEED Edda of the Ford calls bolt down and the scar answers up (10 vs DC 11).
+FEED Edda of the Ford casts Smite at drowned slime.
+FEED Talen Bramble casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Dunn Hollow casts Frost at drowned slimeling.
+FEED Dunn Hollow searches (Investigation 8) and turns up 26 gold on floor 3.
+FEED Last one down, and it took its time about it.
+FEED Cort Ashwood settles in Bellmire, looking for work.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED The townsfolk raise the ruin again.
+FEED Dunn Hollow spots a pressure plate (Perception 13 vs DC 11) and steps round it.
+D90 t=539 s haulers=14 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=21 unparks=21
+FEED Hilda Hollow spots a fire grate (Perception 13 vs DC 11) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 1 skeleton minion, 1 drowned skeleton minion, 2 cave bats.
+FEED Dunn Hollow spots a dart trap (Perception 14 vs DC 12) and steps round it.
+FEED Talen Bramble calls frost down and the scar answers up (9 vs DC 12).
+FEED Dunn Hollow's frost is swallowed whole by the scar (8 vs DC 12).
+FEED Edda of the Ford's bolt comes apart like wet rope (11 vs DC 12).
+FEED Talen Bramble casts Bolt at hollowed bone bowman.
+FEED Dunn Hollow searches (Investigation 17) and turns up 50 gold on floor 4.
+FEED Whatever lived here, doesn't.
+FEED Aldric of the Ford settles in Bellmire, looking for work.
+FEED Dunn Hollow searches the chest - Successfully found loot!! 46 gold (Investigation 18 vs DC 12).
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed bone bowman, 1 skeleton warrior, 2 risen bones, 1 drowned bone sentinel.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Dunn Hollow spots a poison-dart trap (Perception 12 vs DC 12) and steps round it.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Cort Hollow sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Talen Bramble's bolt doubles back and finds them first (9 vs DC 12).
+FEED Dunn Hollow steps on a spiked plate - spikes! DEX 11 vs DC 12, 5 damage.
+FEED Dunn Hollow's bolt unspools in their hands (8 vs DC 12).
+D90 t=599 s haulers=15 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=26 unparks=26
+D90 teleported Ysolde Hollow +25 m; gap 3 frames later 0.08 m (state 0)
+FEED Edda of the Ford casts Smite at Nightwing.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dunn Hollow casts Frost at Nightwing.
+FEED Nightwing falls to Hilda Hollow.
+FEED Edda of the Ford casts Bolt at drowned bone sentinel.
+FEED Edda of the Ford reaches for bolt and the scar reaches back (7 vs DC 12).
+FEED Dunn Hollow casts Bolt at drowned bone sentinel.
+FEED Talen Bramble casts Frost at drowned bone sentinel.
+FEED Edda of the Ford casts Bolt at skeleton warrior.
+FEED Dunn Hollow searches (Investigation 17) and turns up 63 gold on floor 5.
+FEED The lamps come back brighter than they went down.
+FEED Dunn Hollow searches the chest - Successfully found loot!! 52 gold (Investigation 13 vs DC 12).
+FEED Mira Hollow settles in Bellmire, looking for work.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Dunn Hollow and 4 others come home to Bellmire with 275 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 4 potions. 28 kills between them.
+FEED Dunn Hollow is fitted with leather. (+10 hp) Haggled 14% off (16).
+FEED Edda of the Ford is fitted with leather. (+10 hp) Haggled 17% off (19).
+FEED 5 creatures boil out of the dungeon!
+FEED Initiative: the raiders 5, the watch 4 - the raiders strike first.
+D90 t=659 s haulers=15 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=28 unparks=26
+FEED The attack is driven off. The gates hold.
+FEED Harl Bramble settles in Bellmire, looking for work.
+D90 t=719 s haulers=16 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=29 unparks=29
+FEED A draught from a door nobody opened.
+FEED They carry 15 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 1 slime, 1 cave spider.
+FEED A tomb with a doorbell. It has been rung.
+FEED Cort Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Talen Bramble's frost comes apart like wet rope (9 vs DC 10).
+FEED Edda of the Ford casts Smite at cave spider.
+FEED Dunn Hollow casts Frost at cave spider.
+FEED Talen Bramble casts Bolt at bog frog.
+FEED Dunn Hollow casts Bolt at bog frog.
+FEED Edda of the Ford casts Bolt at bog frog.
+FEED The slime divides.
+FEED Rolf Stonehand settles in Bellmire, looking for work.
+FEED Edda of the Ford casts bolt. The scar adds a verse of its own (7 vs DC 10).
+FEED Dunn Hollow searches (Investigation 21) and turns up 14 gold on floor 1.
+FEED Floor 1 is quiet. The chalk goes on the wall.
+FEED Dunn Hollow finds a vial of Tallow Cup.
+FEED Dunn Hollow steps on a slot in the floor - a blade! DEX 10 vs DC 10, 3 damage (halved).
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+D90 t=779 s haulers=16 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=33 unparks=32
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 giant rat, 1 cave bat, 1 bog frog.
+FEED Dunn Hollow fumbles frost and the words come out as soup (1 vs DC 11).
+FEED Talen Bramble casts Frost at cave bat.
+FEED Edda of the Ford casts Smite at cave bat.
+FEED Talen Bramble's bolt goes out sideways into the stone (8 vs DC 11).
+FEED Dunn Hollow casts Bolt at giant rat.
+FEED Edda of the Ford's bolt curves like a drunk arrow (8 vs DC 11).
+FEED Dunn Hollow searches (Investigation 7) and turns up 17 gold on floor 2.
+FEED Floor 2: the dark steps back a pace.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED Edda Stonehand settles in Bellmire, looking for work.
+FEED Dunn Hollow spots a pressure plate (Perception 11 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 hollowed slime, 1 bone bowman, 1 drowned puglin.
+FEED The oil is running low.
+FEED Talen Bramble casts Frost at drowned puglin.
+FEED Dunn Hollow offers frost to the scar, and the scar keeps it (1 vs DC 11).
+FEED Edda of the Ford casts Smite at drowned puglin.
+FEED Edda of the Ford casts Bolt at hollowed slime.
+FEED Dunn Hollow casts Bolt at hollowed slime.
+FEED Talen Bramble casts Bolt at hollowed slime.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 16, the watch 17 - the watch is ready for them.
+FEED The hollowed slime divides.
+FEED Hilda Hollow rolls a 20 - and the hollowed slimeling is gone.
+FEED Edda of the Ford casts Bolt at slime.
+FEED Talen Bramble casts Bolt at slime.
+FEED Dunn Hollow casts Bolt at slimeling.
+FEED Dunn Hollow searches (Investigation 17) and turns up 38 gold on floor 3.
+FEED Floor 3 finished, and the architect takes a note.
+FEED Dunn Hollow finds a vial of Almshouse Broth.
+D90 t=839 s haulers=17 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=33 unparks=33
+FEED Dunn Hollow searches the chest - Successfully found loot!! 40 gold (Investigation 18 vs DC 11).
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED Hilda Hollow steps on a grate - fire! DEX 15 vs DC 11, 6 damage (halved).
+FEED Dunn Hollow spots a pressure plate (Perception 19 vs DC 11) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 1 slime, 1 skeleton minion, 1 bone bowman, 1 drowned cave spider.
+FEED Edda of the Ford rolls a 20 for initiative and is moving before anything else.
+FEED Edda of the Ford reaches for smite; the scar reaches back (10 vs DC 12).
+FEED Talen Bramble speaks bolt too quickly and the magic falls behind (10 vs DC 12).
+FEED The slime divides.
+FEED Dunn Hollow's frost lands on the wrong word entirely (9 vs DC 12).
+FEED Dunn Hollow searches (Investigation 8) and turns up 35 gold on floor 4.
+FEED Held. The gap kept, the party kept with it.
+FEED Cort Coalfoot settles in Bellmire, looking for work.
+FEED The attack is driven off. The gates hold.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED A grate shifts, and 2 drowned skeleton minions is already upon them.
+FEED Dunn Hollow steps on a loose flagstone - darts! DEX 17 vs DC 12, 4 damage (halved).
+D90 t=899 s haulers=17 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=36 unparks=36
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 3 drowned skeleton warriors, 1 hollowed skeleton warrior, 1 bone sentinel.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Cort Hollow steps on a loose flagstone - green darts! DEX 14 vs DC 12, 1 damage (halved).
+FEED Cort Hollow sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Edda of the Ford's smite spends itself on the stone instead (11 vs DC 12).
+FEED Talen Bramble speaks bolt too quickly and the magic falls behind (8 vs DC 12).
+FEED Edda of the Ford steps on a spiked plate - spikes! DEX 22 vs DC 12, 2 damage (halved).
+FEED Dunn Hollow's bolt curdles on the tongue and comes out wrong (11 vs DC 12).
+FEED Edda of the Ford casts Bolt at bone sentinel.
+FEED Talen Bramble casts Bolt at The Grubmother.
+FEED Dunn Hollow casts Bolt at The Grubmother.
+FEED Edda of the Ford casts Smite at The Grubmother.
+FEED The Grubmother's brood spills out of her.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED Talen Bramble casts Bolt at The Grubmother.
+FEED Dunn Hollow casts Bolt at The Grubmother.
+FEED Edda of the Ford casts Smite at The Grubmother.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Cort Hollow rolls a 20 - The Grubmother reels.
+FEED The Grubmother falls to Talen Bramble.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 5 ways - 40 gold each to Dunn Hollow, Hilda Hollow, Talen Bramble, Cort Hollow, Edda of the Ford.
+FEED Dunn Hollow finds a vial of The Thatcher's Cup.
+FEED Dunn Hollow searches the chest - Successfully found loot!! 50 gold (Investigation 13 vs DC 12).
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Dunn Hollow and 4 others come home to Bellmire with 394 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 3 potions. 31 kills between them.
+FEED Talen Bramble takes up a plain steel focus. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 13% off (15).
+FEED Maela Quarryman settles in Bellmire, looking for work.
+D90 t=959 s haulers=19 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=42 unparks=39
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 5, the watch 19 - the watch is ready for them.
+FEED The attack is driven off. The gates hold.
+D90 t=1019 s haulers=20 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=43 unparks=43
+FEED Hilda of the Ford settles in Bellmire, looking for work.
+FEED The stair counts down. The counting is honest, which is the trouble.
+FEED They carry 19 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 giant rat, 1 skeleton minion.
+FEED One grave dug recently. Nothing in it yet.
+FEED Talen Bramble casts Frost at cave bat.
+FEED Dunn Hollow casts Frost at cave bat.
+FEED Edda of the Ford casts Smite at cave bat.
+FEED Dunn Hollow's bolt goes out sideways into the stone (7 vs DC 10).
+FEED Edda of the Ford's bolt spends itself on the stone instead (8 vs DC 10).
+FEED Dunn Hollow searches (Investigation 21) and turns up 14 gold on floor 1.
+FEED The shadows relax, and so do we. A little.
+FEED Dunn Hollow finds a vial of Bargeman's Draught.
+FEED Dunn Hollow spots a blade trap (Perception 14 vs DC 10) and steps round it.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 2 bog frogs, 1 giant rat.
+FEED Talen Bramble casts Bolt at bog frog.
+FEED Edda of the Ford casts Bolt at bog frog.
+FEED Dunn Hollow casts Bolt at bog frog.
+FEED Talen Bramble casts Frost at giant rat.
+FEED Edda of the Ford's smite goes out sideways into the stone (8 vs DC 11).
+FEED Dunn Hollow casts Frost at giant rat.
+D90 t=1079 s haulers=21 dev_max=0.001 yaw_max=20deg side=0 cross=0 parks=46 unparks=45
+FEED Dunn Hollow searches (Investigation 7) and turns up 17 gold on floor 2.
+FEED A breath, a sip, a sigh. Then on.
+FEED Dunn Hollow spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 9, the watch 7 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 2 riders.
+FEED Talen Ashwood settles in Bellmire, looking for work.
+FEED A raider fumbles the torch - it hisses out in the mud.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned risen bones, 1 hollowed cave spider, 1 drowned bone bowman, 1 hollowed skeleton minion.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED Cort Ashwood rolls a 20 on the save - and is up again, sword in hand.
+FEED Cort Ashwood is killed by a bandit.
+FEED A building is burning!
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Edda of the Ford starts bolt, loses the thread, and finishes it badly (10 vs DC 11).
+FEED Talen Bramble works frost and the room takes the benefit (9 vs DC 11).
+FEED Dunn Hollow pays for frost in the wrong coin (9 vs DC 11).
+FEED Edda of the Ford casts Bolt at hollowed cave spider.
+FEED Talen Bramble casts Frost at hollowed cave spider.
+FEED Dunn Hollow casts Frost at Gnawbone.
+FEED Edda of the Ford casts Bolt at Gnawbone.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Cort Hollow rolls a 20 - Gnawbone reels.
+FEED The townsfolk raise the ruin again.
+FEED Gnawbone's children come squealing.
+FEED Talen Bramble casts Frost at Gnawbone.
+FEED A building is burning!
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Ingrid Fenwick's charge crashes into a bandit!
+FEED Dunn Hollow casts Frost at Gnawbone.
+FEED Gnawbone falls to Talen Bramble.
+FEED Edda of the Ford casts Bolt at giant rat.
+FEED Talen Bramble casts Bolt at drowned risen bones.
+FEED Dunn Hollow casts Bolt at drowned risen bones.
+FEED The attack is driven off. The gates hold.
+FEED Edda of the Ford casts Smite at drowned bone bowman.
+FEED Dunn Hollow searches (Investigation 16) and turns up 37 gold on floor 3.
+FEED Floor 3 done, and nothing below is pretending otherwise.
+FEED Dunn Hollow finds a vial of Pennymend.
+FEED Dunn Hollow searches the chest - Successfully found loot!! 41 gold (Investigation 13 vs DC 11).
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+FEED Hilda Hollow steps on a plate - darts! DEX 4 vs DC 11, 9 damage.
+D90 t=1139 s haulers=22 dev_max=0.001 yaw_max=20deg side=0 cross=0 parks=47 unparks=47
+FEED Hilda Hollow steps on a grate - fire! DEX 6 vs DC 11, 8 damage.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 hollowed puglins, 1 hollowed slime, 1 drowned slime, 1 risen bones.
+FEED Dunn Hollow spots a dart trap (Perception 21 vs DC 12) and steps round it.
+FEED Edda of the Ford reaches for bolt and the scar reaches back (11 vs DC 12).
+FEED The new frame slips. The townsfolk will try again. (10 vs DC 12)
+FEED Talen Bramble reaches for frost and the scar hands back something else (11 vs DC 12).
+FEED The hollowed slime divides.
+FEED Harl Rivers settles in Bellmire, looking for work.
+FEED Dunn Hollow searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED The room empties. The lamps steady.
+FEED Dunn Hollow steps on a spiked plate - spikes! DEX 6 vs DC 12, 9 damage.
+FEED Dunn Hollow and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton warrior, 1 hollowed bone sentinel, 1 drowned skeleton warrior, 1 bone sentinel, 1 cave spider.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED The oil is running low.
+FEED Edda of the Ford rolls a 20 for initiative and is moving before anything else.
+FEED Dunn Hollow speaks frost; something else finishes it (9 vs DC 12).
+D90 t=1199 s haulers=23 dev_max=0.001 yaw_max=20deg side=0 cross=0 parks=49 unparks=49
+D90 haulers=23 caravans=14 samples towed=829440 all=876782 dev_max=0.001 m yaw_max=20.1 deg side=0 cross=0 parks=49 unparks=49 tp=true
+D90 haulers seen: ["Ysolde Hollow(carter)", "Osric Quarryman(carter)", "Dunn Quarryman(carter)", "Petra Fenwick(pedlar)", "Caravan master(caravan)", "Caravan master(caravan)", "Edda Quarryman(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Edda Hollow(carter)", "Petra Coalfoot(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Sable Fenwick(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Rask Hollow(carter)", "Caravan master(caravan)"]
+D90_TOW OK

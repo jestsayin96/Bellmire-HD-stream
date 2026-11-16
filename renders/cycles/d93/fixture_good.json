@@ -1,0 +1,9 @@
+{"format":"bellmire-town/1","levels":12,
+ "roads":[{"id":"r1","pts":[[-40,0],[40,0]],"width":8,"level":1},{"id":"r2","pts":[[0,0],[0,40]],"width":6,"level":1}],
+ "square":{"id":"square","poly":[[-10,-24],[10,-24],[10,-6],[-10,-6]],"centre":[0,-15],"level":1},
+ "buildings":[
+  {"id":"h1","shape":"a","pos":[-20,10],"yaw":180,"half":[4,4],"off":[0,0],"door":[-20,5],"level":1},
+  {"id":"h2","shape":"a","pos":[20,10],"yaw":180,"half":[4,4],"off":[0,0],"door":[20,5],"level":3},
+  {"id":"h3","shape":"a","pos":[10,25],"yaw":-90,"half":[3,4],"off":[0,0],"door":[4.5,25],"level":5}],
+ "sites":[{"id":"s1","landmark":"farm","door":[0,41],"level":1}],
+ "patches":[{"id":"p1","kind":"soil","poly":[[-30,15],[-25,15],[-25,20],[-30,20]],"level":1}]}

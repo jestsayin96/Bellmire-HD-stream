@@ -1,0 +1,139 @@
+{
+ "ok": true,
+ "corridor_clear_m": 11.0,
+ "minibosses": {
+  "drillmaster": {
+   "title": "The Drillmaster",
+   "theme": "barracks",
+   "idea": "IT SUMMONS - it beats the muster and the garrison forms up",
+   "wear": 0.15,
+   "feed_line": "Someone is beating the muster.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1366,
+   "size": [
+    1.39,
+    0.71,
+    2.2
+   ],
+   "footprint_span": 1.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.347687566089279,
+    "ortho": 2.426368236541748,
+    "clip": [
+     5.84868860244751,
+     15.926436424255371
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "scrapwright": {
+   "title": "The Scrapwright",
+   "theme": "workshop",
+   "idea": "IT ARMOURS ITSELF - every plate knocked off is replaced from the floor",
+   "wear": 0.3,
+   "feed_line": "It is wearing the workshop.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 975,
+   "size": [
+    2.76,
+    2.03,
+    2.0
+   ],
+   "footprint_span": 2.76,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9847607575574417,
+    "ortho": 3.1297194957733154,
+    "clip": [
+     7.766417980194092,
+     20.32151222229004
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "gaoler": {
+   "title": "The Gaoler",
+   "theme": "prison",
+   "idea": "IT DRAGS - the hook takes one out of the line and reels them in",
+   "wear": 0.8,
+   "feed_line": "A chain is paying out in the dark.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1816,
+   "size": [
+    3.72,
+    2.37,
+    2.35
+   ],
+   "footprint_span": 3.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.498403492422347,
+    "ortho": 3.6511456966400146,
+    "clip": [
+     8.932880401611328,
+     24.024639129638672
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "snuffer": {
+   "title": "The Snuffer",
+   "theme": "shrine",
+   "idea": "IT TAKES THE LIGHT - it puts out the lamps one at a time",
+   "wear": 0.9,
+   "feed_line": "The nearest lamp has gone out.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1107,
+   "size": [
+    1.51,
+    1.2,
+    2.6
+   ],
+   "footprint_span": 1.51,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6183924585745597,
+    "ortho": 3.0667364597320557,
+    "clip": [
+     6.90521240234375,
+     17.56277084350586
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  }
+ },
+ "errors": [],
+ "blank_check": {
+  "files": 12,
+  "failures": []
+ }
+}

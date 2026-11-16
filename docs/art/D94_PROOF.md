@@ -234,3 +234,88 @@ today.
 Original geometry, generated from raw vertex maths in `tools/art/`, on the
 KayKit CC0 adventurer bodies already in the repo. No third-party asset is read
 by any of it.
+
+---
+
+# D94c - THE CLOAK TAKES A DYE (art half, 16 Nov)
+
+The game build lane changed `gear.gd` so a cloak wears one of twelve period dyes
+instead of a leather tone, and handed this lane one line: *"mirror this rule in
+the icon/showcase derivation so the hub icon and the hero match."* If only one
+side changes, a viewer buys a cloak, sees a green one in the Satchel and a brown
+one on the hero, and the receipt is a lie. So this is mirrored bit for bit.
+
+## One source of truth, because it was copied three times
+
+`TONES` - the eight leather colours - was pasted into `icongen.context`,
+`showcasegen.acc_mats` and `d94proof.acc_mats`. Three copies of one rule is how
+two sides drift. All three now call **`icons.cloth_tone(slot, key, name)`**, and
+that function, `CLOAK_DYES`, `CLOAK_WORDS`, `cloak_dye_i` and `khash` are the
+only copy. The numbers are identical to `gear.gd`'s, in Blender linear - Godot
+holds the same literals and calls `linear_to_srgb()` on them.
+
+    hay   = (name + " " + key).lower()
+    dye_i = first CLOAK_WORDS entry (in list order) whose word is in hay,
+            else (khash(key) >> 8) % 12
+    gloves and boots keep the TONES - they are leather
+
+Measured over all 49 cloaks: **all twelve dyes used, 45 assigned by name and 4
+by hash, no dye on more than 7.** The same spread the build half reports, which
+is the point.
+
+## Then the sheet failed, which is what it is for
+
+The first render came back **russet, green, wine, GREEN, olive, GREEN** - three
+of six cells green, and the two with the same cut were one object again. Counted
+over all 49: **fifteen cloaks shared BOTH a dye and a cut with another cloak,
+six of them woad-and-mantle** - every watch, wall and constable cloak in
+Bellmire.
+
+That is not a bug in the word list. A hedgeward and an orchardman both wear
+green, and the watch wears the town's blue; things look like what they are for.
+Scattering the dyes to make a prettier sheet would be a lie about the town. So
+the dye stays and a **SHADE STEP** was added inside it, assigned exactly the way
+D94b assigned form - **by position in the colliding group, so it cannot collide
+by construction**:
+
+    group   = every cloak sharing (dye_i, variant), keys sorted as plain strings
+    shade_i = the key's index in that group, capped at 7 - 0 leaves the dye alone
+    cloth   = dye * CLOAK_SHADES[shade_i], clamped to [0.02, 0.95]
+
+Same dye, a lighter or darker bolt of it. Result over the 49: **49 distinct
+(colour, cut) pairs out of 49 - zero collisions**, from 25 distinct colours.
+Thirty-four cloaks are on shade 0, so most of them are the dye untouched.
+
+## What the renders say
+
+- `renders/art/icons/_cloak.png` - all 49 hub icons on one sheet. **Looked at.**
+  Twelve colours where there were eight browns. 49/49 rendered, **0 blanks**.
+- `renders/art/d94/_row_cloak.png` - six on real bodies, three strips. **Looked
+  at, twice: the first version is what failed above.** Cloak verdict TELLS APART,
+  worst pair 15.96% -> **19.11%** of hero pixels, median 29.59% -> **31.25%**.
+- Whole proof sheet re-run: `ok true`, 8 rows, **blank list empty**, and the
+  duplicate check still reports **no row DUPLICATE**.
+
+Honest note on that row: it still shows three greens, because three of the six
+the test picks are countryside trades. They are now three different greens on
+three different cuts, and the two that were indistinguishable are not - but if
+Mr. E wants the greens further apart, that is a change to the WORD LIST on both
+sides, not to this lane's derivation.
+
+## THE GAME LANE OWES ONE MIRROR BACK
+
+The shade step is this lane's addition and `gear.gd` does not have it yet. Until
+it is mirrored beside `cloak_dye_i`, **the first cloak of each group matches the
+hero exactly and the other fifteen are off by a value step - never by a hue**,
+so nothing reads as the wrong item in the meantime. The rule to copy is the
+three lines above.
+
+## The legendary accessory pool is still 16 deep, and it is not an art fix
+
+Re-measured from `data/items.json`, since the showcase had to borrow very-rare
+pieces: legendary (441+) holds **8 rings, 6 cloaks, 2 amulets, 0 boots, 0
+gloves**. Boots top out at 420 and gloves at 380 against a 441 band that is the
+same for every slot, so **those two slots cannot hold a legendary piece at all**.
+No derivation can mint one; the fix is in `items.json` - either band rarity per
+slot (a cost quantile within the slot) or write dearer boots and gloves. That is
+content-lane data and content is shut down, so it is Mr. E's call which.

@@ -198,18 +198,15 @@ def armour_row(items):
 
 
 # ------------------------------------------------------------- build one cell
-def acc_mats(key, ctx, tag):
+def acc_mats(key, ctx, tag, slot="", name=""):
     """D73's derivation, as D95 uses it: metal from the COST QUARTILE, gem
-    from the STAT, and WEAR RIDING COST - cheap is handled, dear is kept."""
+    from the STAT, and WEAR RIDING COST - cheap is handled, dear is kept.
+    Cloth colour comes from icons.cloth_tone (D94c): a cloak takes a dye."""
     q = min(3, int(ctx["orn"] * 4.0))
-    tone = ((0.30, 0.25, 0.20), (0.22, 0.19, 0.17), (0.36, 0.28, 0.20),
-            (0.24, 0.26, 0.29), (0.31, 0.22, 0.22), (0.21, 0.26, 0.23),
-            (0.38, 0.34, 0.27), (0.26, 0.23, 0.30))
-    h = khash(key)
     aw = max(0.08, min(0.92, 0.95 - 0.85 * ctx["orn"]))
     return SC.materials(max(1, min(5, 1 + q)), aw, gem=ctx["gem"],
-                        cloth=tone[(h >> 8) % len(tone)], tag=tag,
-                        metal=IC.METALS[q])
+                        cloth=IC.cloth_tone(slot or ctx.get("slot", ""), key, name),
+                        tag=tag, metal=IC.METALS[q])
 
 
 def render_detail(objs, focus, ortho, az, el, path, resx, resy):
@@ -304,7 +301,8 @@ def build_cell(repo, cell, resx, resy, full_path, det_path):
             parts.append(q)
     else:
         mats = SC.materials(2, 0.4, tag=tag)
-        am = acc_mats(cell["key"], cell["ctx"], tag)
+        am = acc_mats(cell["key"], cell["ctx"], tag,
+                      slot=cell.get("slot", ""), name=cell.get("name", ""))
         if cell["kind"] == "hat":
             headobjs = [ob for ob in meshes if "_Head" in ob.name or "Hair" in ob.name]
             headbox = None

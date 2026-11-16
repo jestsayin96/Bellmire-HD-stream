@@ -99,7 +99,10 @@ BODY_TINT = {"knight": (0.80, 0.86, 1.00), "ranger": (0.74, 0.92, 0.70),
 
 # ------------------------------------------------------------------ item data
 def load_items(repo):
-    return json.load(open(os.path.join(repo, "data", "items.json"), encoding="utf-8"))
+    d = json.load(open(os.path.join(repo, "data", "items.json"), encoding="utf-8"))
+    # D94c-2: the cloak shade step needs the whole list to assign (see icons.py)
+    IC.register_cloaks(d.get("accessories", {}))
+    return d
 
 
 def acc_pick(items, slot, tier, used):
@@ -460,16 +463,13 @@ def main():
                 if setpiece:            # a declared set shares its look. Mr E's
                     return mats         # one named exception.
                 q = min(3, int(ctx['orn'] * 4.0))
-                tone = SC.TIER_CLOTH[0:1] and ((0.30, 0.25, 0.20), (0.22, 0.19, 0.17),
-                                               (0.36, 0.28, 0.20), (0.24, 0.26, 0.29),
-                                               (0.31, 0.22, 0.22), (0.21, 0.26, 0.23),
-                                               (0.38, 0.34, 0.27), (0.26, 0.23, 0.30))
-                h = 0
-                for c in ak:
-                    h = (h * 131 + ord(c)) & 0xFFFFFFFF
                 aw = max(0.08, min(0.92, 0.95 - 0.85 * ctx['orn']))
+                # D94c: a cloak wears a DYE, leather keeps its tone. One rule,
+                # in icons.cloth_tone, mirrored from gear.gd.
                 return SC.materials(max(1, min(5, 1 + q)), aw, gem=ctx['gem'],
-                                    cloth=tone[(h >> 8) % len(tone)], tag="_%s_%s" % (key, ak),
+                                    cloth=IC.cloth_tone(av.get("slot", ""), ak,
+                                                        av.get("name", "")),
+                                    tag="_%s_%s" % (key, ak),
                                     metal=IC.METALS[q])
 
             # how big is this body's foot and hand? six bodies, six answers.

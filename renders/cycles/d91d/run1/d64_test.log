@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D64_TEST start
+  ok   ranks: none/common/../very rare
+  ok   legendary = the found-only tier on both ladders
+  ok   ladder values unchanged
+  ok   level 1 smithy -> counter ceiling 1 (town_tier 1)
+  ok   the rack is told the ceiling and the shop level
+  ok   a level 1 smithy sells common
+    counter: Aldric wants fine steel, but no smith in Bellmire can forge it yet.
+  ok   level 1 smithy REFUSES uncommon to a hero holding 5000 gold
+    chronicle: Aldric stands at the smithy with 5000 gold for uncommon steel, but a level 1 smithy sells nothing past common - plain steel is the best it will make.
+  ok   the Chronicle says so plainly
+  ok   said once per hero per shop level, not every day
+  ok   a hero without the gold is not counted as refused by the cap
+    raise: The Smithy is raised to level 2: it will now sell uncommon goods - paid for by MrE.
+  ok   raise_shop lifts the smithy to 2 and the counter follows
+  ok   the raise is cried, crediting who paid
+    counter: Aldric takes up a Stonewick Backsword. (+9 atk, 1d8) Folded twice; the smith signs it. Haggled 15% off (17).
+  ok   the same hero now buys uncommon
+  ok   never past what a smith can make (very rare)
+  ok   a raise at the top gains nothing
+  ok   an unknown shop cannot be raised
+  ok   growth: town level 3 grants a level 3 smithy
+D64_TEST OK (17 checks, 0 fail)

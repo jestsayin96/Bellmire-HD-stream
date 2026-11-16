@@ -396,6 +396,7 @@ func _ready() -> void:
     _pick_shops()
     _pick_towers()
     _build()
+    _close_crevices()                                 # D91d: before the navmesh sees the props
     if OS.get_environment("JESTS_NO_NAV") != "1":     # test hook: old street routing
         _bake_nav()
     _spawn_people()
@@ -1097,6 +1098,65 @@ func _solid_of(n: Node3D) -> void:
     var c2 := Vector2(n.position.x, n.position.z) + ax * cen.x + az * cen.z
     _solid_rects.append([c2, ax, az, he + Vector2(0.1, 0.1)])
     _sgrid_f = -100000          # D91: a new footprint is seen at once, not up to 600 frames late
+    var fnm := n.scene_file_path.get_file().get_basename()
+    for gp in CREVICE_GOODS:
+        if fnm.begins_with(gp):
+            _crevice_goods.append([_solid_rects.back(), n])
+            break
+
+## ---- D91d: NO CREVICES. A crate, barrel or bucket set down a hand's breadth off a wall leaves a
+## sliver one body wide: room for one, never two, and nowhere to go - the last overlap frame of
+## the 20-minute town soak was two peasants in exactly that sliver (34.2,-69.8), between the north
+## store's house and the FarmCrate_Apple its yard sets 0.1-0.4 m off the wall (at a slant, so it
+## is a wedge). Fix the SOURCE, not the settle: once the town is dressed and before the navmesh is
+## baked, every loose good (never a seat, table, stall or tree) looks out from each of its four
+## sides. Where another solid stands closer than a person is wide (CREVICE_W, padded footprint to
+## padded footprint) along at least two of the side's five probe lines, the sliver is a channel
+## nobody should be in, and it is FILLED with a footprint of its own - nothing visible moves, the
+## crate stays where the yard put it. A gap a person can use is left alone.
+const CREVICE_GOODS := ["Barrel", "Bucket", "FarmCrate", "Crate_", "Bag", "Pot_", "Vase_",
+    "Chest_Wood", "Anvil_Log", "Whetstone"]
+const CREVICE_W := 0.8
+var _crevice_goods: Array = []
+var crevices_closed := 0
+func _close_crevices() -> void:
+    var fill: Array = []
+    for e in _crevice_goods:
+        var r: Array = e[0]
+        if not is_instance_valid(e[1]):
+            continue
+        var c: Vector2 = r[0]
+        var ax: Vector2 = r[1]
+        var az: Vector2 = r[2]
+        var he: Vector2 = r[3]
+        for side in [[ax, he.x, az, he.y, 0], [-ax, he.x, az, he.y, 0], [az, he.y, ax, he.x, 1], [-az, he.y, ax, he.x, 1]]:
+            var dv: Vector2 = side[0]
+            var lat: Vector2 = side[2]
+            var lw: float = float(side[3]) - 0.05
+            var hits := 0
+            var gmax := 0.0
+            # the side's two ends, its middle, and a step PAST each corner - a slanted good
+            # leaves its sliver at the corner, diagonally off the side (the (34.0,-69.9) cell)
+            for lo in [-lw - 0.3, -lw, 0.0, lw, lw + 0.3]:
+                var t := 0.02
+                while t <= CREVICE_W:
+                    var q: Vector2 = c + dv * (float(side[1]) + t) + lat * float(lo)
+                    if not solid_at(Vector3(q.x, 0.0, q.y), 0.0).is_empty():
+                        hits += 1
+                        gmax = maxf(gmax, t)
+                        break
+                    t += 0.04
+            if hits < 2 or gmax <= 0.02:
+                continue                # open, a passing corner, or already touching
+            var d := gmax * 0.5 + 0.03
+            var fc: Vector2 = c + dv * (float(side[1]) + d - 0.03)
+            var fhe := Vector2(d, he.y + 0.3) if int(side[4]) == 0 else Vector2(he.x + 0.3, d)
+            fill.append([fc, ax, az, fhe])
+    for f in fill:
+        _solid_rects.append(f)
+    crevices_closed = fill.size()
+    _sgrid_key = ""
+    _sgrid_f = -100000
 
 func _bake_nav() -> void:
     var rects: Array = _solid_rects.duplicate()
@@ -5943,6 +6003,43 @@ func _post_clear(p: Vector3, m: float) -> Vector3:
             if solid_at(q, m).is_empty():
                 return q
     return p
+
+## D91d: WHERE A BODY STEPS OUT OF A DOOR. Every exit used to set the body down on the door spot
+## itself, so when the festival or dusk emptied a row of houses at once (the north houses at
+## (33,-71), whose footprints overlap and leave a pocket one body wide) everyone landed on ONE
+## point, exactly on top of each other, and the settle had no direction to part them in and only
+## a wall to slide into - the last 2 overlap frames of D91c's 82k-frame town soak. Fix the source:
+## pick the first spot on rings round the door that is clear of every footprint, on the door's own
+## ground, and not already taken by somebody standing there. The door spot itself when it is free.
+func door_emerge(door: Vector3, who: Node3D = null) -> Vector3:
+    var wr := body_r(who) if who != null else Crowd.BODY_R
+    var g0 := height_at(door.x, door.z)
+    var best := door
+    for ring in range(0, 5):
+        var rr := 0.55 * float(ring)
+        var n := 1 if ring == 0 else 8
+        var a0 := randf() * TAU
+        for k in range(n):
+            var a := a0 + TAU * float(k) / float(n)
+            var q := door + Vector3(cos(a) * rr, 0.0, sin(a) * rr)
+            if ring > 0:
+                if not solid_at(q, FOOT_R).is_empty():
+                    continue
+                if absf(height_at(q.x, q.z) - g0) > 0.6:
+                    continue
+            var taken := false
+            for o in people:
+                if o == who or not is_instance_valid(o) or not (o as Node3D).visible or bool(o.get("inside")):
+                    continue
+                var op: Vector3 = (o as Node3D).global_position
+                if Vector2(op.x - q.x, op.z - q.z).length() < wr + body_r(o) + 0.05:
+                    taken = true
+                    break
+            if not taken:
+                q.y = height_at(q.x, q.z)
+                return q
+    best.y = g0
+    return best
 
 func keep_walkable(p: Vector3) -> Vector3:
     # D44b: a dense footprint cluster (the 15 south-market houses) overlaps, so

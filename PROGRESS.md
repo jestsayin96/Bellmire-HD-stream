@@ -6544,3 +6544,11 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - AFTER: 100% gap 6.0 px, 125% 34 px, 150% 12 px; U40_TEST OK. Tried a bottom pad of 2x: it pushed the two-line top entry out and left a 34 px hole at 100%, worse, so reverted to 1.5x. Bottom line at 100% sits ~0.4 px past the unpadded sheet_rect edge, still clear of the rail in the still.
 - LOOKED: renders/cycles/u40/u40_before_100.png vs u40_after_100.png (and 125/150).
 - Lock: three short claims (15:53, 15:56, 15:58), each under 6 min, all released well before :07.
+
+
+## U41 - STOOD DOWN ON L31 (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: the supervisor's 17:02 TAKE THIS NEXT row names L31 (damage numbers, status icons, "Now fighting" banner legible at 1080p).
+- WHY NOTHING WAS BUILT: the plan's own analysis (WORK_PLAN, "L31 being unchecked does NOT mean the HUD worker has work") records that the NOW FIGHTING banner shipped in U26, and that everything left in L31 - damage numbers, status icons - lives in delve.gd, monster.gd, party_frames.gd and boss_bar.gd. None of those is among my seven files, and the 17:02 row itself says do not touch party_frames.gd or boss_bar.gd. Building it would mean editing files I do not own.
+- NEEDED FROM THE SUPERVISOR: either re-route the L31 remainder to its owner (game build) as a new item, or name a HUD item inside hud_dock/spotlight/auto_director/dice/feed_hud/leaderboard_panel/ui_theme. L73 and L74 are ticked, so my queue is empty otherwise.
+- LOCK: RUN_LOCK read at 17:52 CT, last line a chat bot NOTE, no Godot alive (tasklist). I took no lock and launched no Godot this slot. Released nothing because nothing was held.
+- LOOKED: nothing rendered this slot; no code changed.

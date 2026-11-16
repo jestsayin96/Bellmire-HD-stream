@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The draught up the shaft smells of nothing that grows above.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave bat, 1 bog frog.
+FEED Dust on everything but the handles.
+FEED DawnCleric casts Smite at bog frog.
+FEED MossyMage casts Bolt at bog frog.
+FEED DawnCleric casts Smite at cave bat.
+FEED MossyMage works bolt and the room takes the benefit (1 vs DC 10).
+FEED MossyMage searches (Investigation 22) and turns up 14 gold on floor 1.
+FEED Held - and the healer sits down for the first time since the stair.
+T10s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+FEED MossyMage steps on a slot in the floor - a blade! DEX 9 vs DC 10, 7 damage.
+T20s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 71/78", "DawnCleric 96/96", "BigAxe 114/114"]
+T30s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 71/78", "DawnCleric 96/96", "BigAxe 114/114"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T40s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+T50s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+T60s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+T70s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed puglin, 2 slimes, 1 hollowed bog frog.
+FEED The oil is running low.
+FEED MossyMage rolls a 20 for initiative and is moving before anything else.
+FEED MossyMage's chain slips the words - wild magic (10 vs DC 11).
+FEED DawnCleric casts Smite at slime.
+T80s floor=2 state=fight foes=4 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+FEED MossyMage casts Fire at slime.
+FEED The slime divides.
+FEED DawnCleric casts Smite at slimeling.
+T90s floor=2 state=fight foes=3 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+FEED MossyMage casts Bolt at hollowed puglin.
+FEED DawnCleric's smite breaks apart over the stone (7 vs DC 11).
+FEED DawnCleric casts Bolt at hollowed bog frog.
+FEED JestFan turns on the wounded hollowed bog frog to finish it.
+FEED MossyMage turns on the wounded hollowed bog frog to finish it.
+FEED BigAxe turns on the wounded hollowed bog frog to finish it.
+T100s floor=2 state=fight foes=1 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 106/114"]
+FEED DawnCleric casts Smite at slimeling.
+FEED DawnCleric turns on the wounded slimeling to finish it.
+FEED MossyMage searches (Investigation 16) and turns up 25 gold on floor 2.
+FEED Held. Measure the grain, count the flasks, keep the door.
+FEED MossyMage finds a vial of The Thatcher's Cup.
+T110s floor=2 state=search foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 106/114"]
+FEED MossyMage searches the chest - Successfully found loot!! 42 gold (Investigation 25 vs DC 11).
+T120s floor=2 state=search foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 106/114"]
+T130s floor=2 state=search foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 106/114"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T140s floor=2 state=descend foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]
+T150s floor=2 state=descend foes=0 ["JestFan 113/113", "MossyMage 78/78", "DawnCleric 96/96", "BigAxe 114/114"]

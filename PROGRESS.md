@@ -5980,3 +5980,60 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
 - ADDED one new top-level key `phase2_words` (182 lines) in lore_lines.json: ascent, errand (collected lines keyed by town band patched 1-4 / mended 5-8 / prosperous 9-12), carry, sell, vault, stone, upgrade_poll. Plain register; no floor total stated anywhere. Pre-existing text is byte-identical (the file prefix is unchanged; the key is appended at the end).
 - CODE WIRING (for the code lane, content never edits .gd): fill tokens {name} {item} {building} {shop} {hall} {floor} {n} {m} {w} {v} {who}; errand.collected is chosen by town level band; chronicle_reached vs chronicle_came_back is the D77 payload-v5 split; stone.lords_floor is shown when a lord floor's lord is alive - the stone is NOT said to be consumed there, code decides; vault.death_kept and ascent.wipe state the loss rules plainly.
 - VALIDATION OK: json.load passes, all 22 pre-existing top-level keys equal, 182 new strings.
+
+## D-cycle D94a - every item looks like itself: the WIRING half (game build, 2026-11-16 ~01:20-01:45 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> D94 wiring, then the in-engine half of D95). NOT ticked.
+- Concurrency note: the 00:58 "UNCLAIMED" lock line was the previous game-build firing, still live on D83 with
+  uncommitted delve.gd/monster.gd. I did NOT launch Godot or touch that worktree until it committed 3125caa and
+  set IDLE (01:19); code was written in a detached side worktree (C:\hd adventure\jhd-d94) and applied after.
+- ACCESSORIES (gear.gd dress_cosmetics): built from the ITEM via Gear.acc_ctx(key), a line-for-line port of the
+  D73 icon generator's derivation (tools/art/icongen.py context + icons.py variant_for/STAT_GEM/METALS/TONES,
+  same key hash), so the hub icon and the worn piece agree: variant from the NAME first (signet, twist, vial,
+  locket, gauntlet, mitten, fur, hood...), hash only as fallback; metal + ornateness + WEAR from cost within the
+  slot (cheap = dull/rough, dear = bright/kept); gem from the stat. Five shapes each:
+  ring (plain/signet/twisted/claw-set stone/engraved, +band stones when dear), amulet (teardrop/disc/crescent/
+  vial/locket on the breastbone), gloves (gauntlet/mitten/studded/bracer/fingerless wraps), boots (shoe/ankle/
+  riding/fur-cuffed/pointed toe), cloak (hood/mantle/long sweep/fur collar/tattered + clasp; the cape takes the
+  cloak's cloth - CLOAK_COL's two entries for 49 cloaks are gone from the path).
+- NAMED WEAPONS AND ARMOUR (the 119 dead pieces in items.json equipment): h.weapon / h.armour stay the tier and
+  ALL the numbers. Gear.weapon_id / armour_id give the named piece of that tier (family-matched; armour cut by
+  calling: robe/light/heavy); stamped as h.wname / h.aname by buy_weapon, rework, buy_armour, find_gear; an old
+  save with no stamp, or a stamp that no longer fits its tier, DERIVES a stable piece from the hero's name - no
+  save breaks. Tier 0 = the calling's starting kit piece (a knight now holds a Worn Arming Sword, not nothing).
+  A piece's kind comes from its name (Cutlass->sword, Hatchet->axe, Arbalest->crossbow...), pieces sharing a
+  tier+kind take neighbouring meshes, and its MATERIAL is read from its name (ember, cold-white, scar, seam,
+  rune, dragontooth, wyrm, ash, bell-bronze, hazel, ferry...) as tint + glow (Gear.tint_piece, hero_body.gd).
+  Armour: one material across boots/shoulders/helm/bracers = the declared SET; plus a trim axis (plain/riveted/
+  banded) and helm axis (crest/nasal/plume); robes get a skirt, light cuts small shoulders + bracers.
+  Names a viewer sees: weapon_name -> the piece's name; new Roster.armour_name used by chatcmd, rts_camera,
+  snapshot_pub (hub main_hand/body/sell sheet/gear events) and the forge lines.
+- FIT, MEASURED not eyeballed: tools/_d94_bones.gd prints every KayKit bone and body-mesh AABB in rest and idle.
+  It caught that the fist is ~0.15 across (not the 0.29 the arm AABB suggests): the first ring was a hoop round
+  the waist. Feet and cloak are now laid out in MODEL axes (Gear._align undoes the bone's 45-degree rest pitch),
+  which also fixes the OLD tier boots that stood tipped off the ground.
+- TESTS: tools/_d95_fit.gd. D95_MODE=ten: ten callings, two per rarity tier, each a named weapon + armour + three
+  accessories nobody else wears, FRONT/SIDE/BACK/TOP each -> renders/cycles/d95/NN_<calling>_{1front,2side,
+  3back,4top}.png + sheet_NN_*.png + sheet_overview_front.png. D95_MODE=slots: the D94 DONE shot, six different
+  items per slot row (ring, amulet, gloves, boots, cloak, weapon, armour) -> d94_row_*.png. D95_FIT OK both
+  (0 attach failures). Looked at, four passes.
+- FIT REPORT (honest, from the renders):
+  1. RINGS are near-invisible at stream distance: correct size now (they hug the fist) but the fist is tiny and
+     usually behind a weapon grip or a glove. Needs a call: an oversize "readable" ring, or accept it.
+  2. Accessory BOOTS are suppressed whenever armour boots exist (tier >= 1) - the paladin's Long Count Boots
+     never show. Rule predates D94; Mr. E should say which wins.
+  3. All boots (armour and accessory) are still BOXES - flat on the ground now, but blocky; read as bricks at
+     close range.
+  4. HELMS from armour never show on the knight/paladin/warden bodies (KayKit helmet already on the head - by
+     design, so the armour set reads as boots/shoulders/bracers only on those bodies).
+  5. Amulet CHAIN strands are buried in the chest under the head's overhang; only the pendant reads.
+  6. Robe skirt pokes out under the back of the cape (mage, back view) - small clip.
+  7. The bow kind (KIT bow x0.62) is tiny in the hand - Ash-Bolt "Greatbow" reads as a small bow.
+  8. "Parish Iron Mace" (cleric kit) renders as a staff: arcane has no mace kind. Name and mesh disagree.
+  9. Cloak tones are all dark leather/cloth (the icon generator's eight TONES); cloaks differ by shape more than
+     colour. Cloak hood/fur collar sit behind the head and are mostly seen from side/back only.
+  10. Gloves at stream distance read as a colour change on the fist more than a shape.
+  11. The legendary accessory pool is small (16) - the ten-hero showcase had to borrow very-rare pieces.
+  12. Species faces (the brown beak-like triangle on some bodies) cut across helms - pre-existing species_look,
+     not D94, but it shows in every lineup.
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1695, MON_INPROP 0/135; _twitch_parse TWITCH_PARSE OK;
+  _delve_test no SCRIPT ERROR; _townwalk see commit. The art lane's own D95 sheets (renders/art/d95) are separate.

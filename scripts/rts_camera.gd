@@ -594,7 +594,7 @@ func _fill_frame() -> void:
 		if chat and chat.catches_of.is_valid():
 			cs = chat.catches_of.call(String(h.get("name", "")))
 		_f_body.text = "%s  ·  %s  ·  AC %d\n%d potions · %d oil · %d gold · %d kills · deepest floor %d%s" % [
-			r.weapon_name(h), String(Roster.ARMOUR[int(h["armour"])]["name"]), r.armour_class(h),
+			r.weapon_name(h), r.armour_name(h), r.armour_class(h),
 			int(h.get("potions", 0)), int(h.get("oil", 0)), int(h.get("gold", 0)), int(h.get("kills", 0)), int(h.get("deepest", 0)),
 			("  ·  %d catches" % cs.size()) if not cs.is_empty() else ""]
 	elif selected is Monster:

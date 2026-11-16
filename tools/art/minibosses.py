@@ -1168,3 +1168,118 @@ BUILDERS.update({
     "bellman": bellman,
     "boiler": boiler,
 })
+
+
+# ===========================================================================
+# THE FIT EXPERIMENT, 16 Nov - DO THE FOURTEEN FIT THE GAME'S OWN CHARACTERS?
+#
+# Rendered beside a real KayKit adventurer at scale 1.0 for the first time
+# (tools/art/minibossfit.py), the whole set failed on two counts at once:
+#
+#   SCALE.       A hero is 2.45 m - the bodies are CHIBI and the head alone
+#                runs 1.2 to 2.3. Authored at 2.00-2.70 m, TEN OF THE FOURTEEN
+#                STAND SHORTER THAN THE PARTY. A floor-4 set piece that the
+#                heroes look down on is not a set piece.
+#   PROPORTION.  The men inside these creatures are seven-head realistic
+#                figures with 0.10 m limbs. Beside a chibi knight they read as
+#                pipe-cleaner men from a different game.
+#
+# Scale is one number in bestiary.gd and belongs to the game build lane.
+# PROPORTION IS OURS. These two builders are the worked example of the fix on
+# one creature - same creature, same props, same idea, rebuilt in the game's
+# own register - so the comparison sheet decides it rather than an argument.
+#
+# Measured off Knight.glb in the idle pose (not guessed):
+#   total 2.45 | sole-to-hip 0.52 (21%) | torso 0.36-1.28 | head+helm 1.09-2.45
+#   head about 1.09 across, i.e. the head is 55% of the whole height.
+# ===========================================================================
+CANON.update({
+    "drillmaster_chibi": ("The Drillmaster (chibi)", 2.20, (0.86, 0.72, 0.38),
+                          (1.00, 0.78, 0.34), "barracks",
+                          "IT SUMMONS - rebuilt in the game's own proportions",
+                          0.15, "Someone is beating the muster."),
+    "drillmaster_tall": ("The Drillmaster (3.60m)", 3.60, (0.86, 0.72, 0.38),
+                         (1.00, 0.78, 0.34), "barracks",
+                         "IT SUMMONS - same body, the recommended in-game height",
+                         0.15, "Someone is beating the muster."),
+    "drillmaster_chibi_tall": ("The Drillmaster (chibi, 3.60m)", 3.60, (0.86, 0.72, 0.38),
+                               (1.00, 0.78, 0.34), "barracks",
+                               "IT SUMMONS - both changes together",
+                               0.15, "Someone is beating the muster."),
+})
+
+
+def drillmaster_chibi():
+    """The Drillmaster in the game's register: short thick legs, a barrel
+    torso, a head the size of the torso, mitts for hands. Nothing about the
+    IDEA changes - gong behind him on its frame, mallet up, baton down - only
+    the proportions of the man carrying it.
+
+    Authored to the same 2.20 m as the original so the comparison sheet is a
+    comparison of ONE thing. The proportions are lifted off the measured
+    Knight: legs to 21% of height, head 55%, shoulders 0.80 wide."""
+    P = Parts("drillmaster_chibi")
+    X = -0.30
+    H = 2.20
+    HIP = 0.46                                  # 21% of the body's height
+    # LEGS - stubs, not limbs. Boots almost as wide as the leg is long.
+    for s in (-1, 1):
+        limb(P, [(X + s * 0.17, 0.04, HIP), (X + s * 0.19, 0.00, 0.22),
+                 (X + s * 0.20, -0.04, 0.10)], 0.145, 0.135)
+        P.add(L.box(0.30, 0.40, 0.13), 'dark', loc=(X + s * 0.20, -0.12, 0.065))
+    # TORSO - one barrel from hip to shoulder, wider than it is tall
+    limb(P, [(X, 0.08, HIP - 0.02), (X - 0.04, 0.00, 0.72), (X - 0.08, -0.08, 1.00)],
+         0.36, 0.38)
+    P.add(L.box(0.80, 0.34, 0.13), 'dark', loc=(X - 0.02, -0.06, 0.70))      # belt
+    for s in (-1, 1):                                                        # shoulders
+        P.add(L.sphere(0.22, 0.21, 0.19, 12, 8), 'body', loc=(X - 0.08 + s * 0.38, -0.08, 1.02))
+    # THE HEAD - the whole point. 0.96 across, sitting straight on the shoulders
+    # with no neck, topped by the kettle helm. Head top lands at 1.74 of 2.20.
+    P.add(L.sphere(0.46, 0.44, 0.40, 18, 12), 'bone', loc=(X - 0.10, -0.12, 1.34))
+    # PASS 2 on the head, after looking: the first one read as a MUSHROOM. A
+    # 1.24 m brim sitting at mid-head height covered the dome and the face
+    # both, so the one thing that says soldier - a kettle helm - said farmer.
+    # The dome is taller and narrower and now clears the brim; the brim is
+    # 1.08 m and sits high on the skull, where a helmet's does.
+    P.add(aim(L.cone(0.44, 0.17, 0.44, 16), (X - 0.10, -0.12, 1.50), (0.0, 0.0, 1.0)), 'dark')
+    P.add(aim(L.cone(0.54, 0.50, 0.05, 18), (X - 0.10, -0.12, 1.52), (0.0, 0.06, 1.0)), 'dark')
+    # and the eyes were INSIDE THE SKULL. The head is 0.44 deep and they sat at
+    # 0.40, so the face was blank from every angle. Measured, not nudged.
+    eyes(P, (X - 0.10, 0.0, 1.30), 0.150, 0.072, -0.545)
+    # ARMS - short, thick, ending in mitts. Right arm up on the mallet.
+    limb(P, [(X + 0.26, -0.10, 1.00), (X + 0.52, -0.16, 1.14)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.145, 10, 7), 'body', loc=(X + 0.56, -0.16, 1.16))
+    limb(P, [(X - 0.44, -0.10, 1.00), (X - 0.60, -0.16, 0.68)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.145, 10, 7), 'body', loc=(X - 0.62, -0.18, 0.62))
+    # THE FRAME AND THE GONG - unchanged in idea, lowered to the new shoulder
+    P.add(L.box(0.84, 0.12, 0.08), 'dark', loc=(X + 0.34, 0.26, 0.64), rot=(0.0, -0.12, 0.0))
+    for s in (-1, 1):
+        limb(P, [(X + 0.34 + s * 0.34, 0.28, 0.66), (X + 0.38 + s * 0.34, 0.30, 1.26),
+                 (X + 0.40 + s * 0.32, 0.30, 1.62)], 0.055, 0.042, 'dark')
+    P.add(L.box(0.86, 0.09, 0.09), 'dark', loc=(X + 0.40, 0.30, 1.62))
+    for s in (-1, 1):
+        limb(P, [(X + 0.40 + s * 0.26, 0.30, 1.60), (X + 0.40 + s * 0.24, 0.24, 1.46)],
+             0.028, 0.024, 'dark')
+    GX, GZ = X + 0.42, 0.96
+    P.raw(aim(L.cone(0.70, 0.70, 0.055, 28), (GX, 0.22, GZ), (0.10, 1.0, -0.12)), 'body')
+    P.raw(aim(L.cone(0.74, 0.70, 0.085, 28), (GX, 0.28, GZ), (0.10, 1.0, -0.12)), 'body')
+    P.add(L.sphere(0.18, 0.09, 0.18, 16, 10), 'body', loc=(GX - 0.02, 0.17, GZ + 0.01))
+    for k in range(3):
+        r = 0.30 + k * 0.15
+        ring = [Vector((GX + r * math.cos(TAU * i / 26.0), 0.19,
+                        GZ + r * math.sin(TAU * i / 26.0))) for i in range(27)]
+        P.raw(L.tube(ring, 0.016, 6), 'dark')
+    # THE MALLET - heavier head, shorter haft, still the clear diagonal
+    limb(P, [(X + 0.58, -0.14, 1.18), (X + 0.86, 0.06, 1.78)], 0.052, 0.044, 'bone')
+    P.raw(aim(L.cone(0.21, 0.21, 0.44, 12), (X + 0.86, 0.06, 1.78), (0.50, 0.30, 1.0)), 'dark')
+    P.raw(aim(L.cone(0.22, 0.215, 0.05, 12), (X + 0.86, 0.06, 1.78), (0.50, 0.30, 1.0)), 'bone')
+    # THE BATON down at his left - the parade tool
+    limb(P, [(X - 0.62, -0.20, 0.58), (X - 0.66, -0.24, 0.22)], 0.034, 0.026, 'bone')
+    return P
+
+
+BUILDERS.update({
+    "drillmaster_chibi": drillmaster_chibi,
+    "drillmaster_tall": drillmaster,
+    "drillmaster_chibi_tall": drillmaster_chibi,
+})

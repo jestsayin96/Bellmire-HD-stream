@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TWITCH_EVENTSUB broadcaster token valid (jestsayin96), 237 min left
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+TWITCH_EVENTSUB bot token valid (bellmirebro), 187 min left
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQHJ5g, keepalive 10 s
+W_LIVE socket=true subs_ok=6 subs_failed=[] rewards_ok=true keys=["delve", "fish", "join", "patch", "rally", "spotlight"]
+W_LIVE READY at 2.2 s - redeem one of Bellmire's rewards now
+TWITCH_EVENTSUB subscribed 7 of 7
+W_LIVE notification ids seen: 1
+W_LIVE notification ids seen: 1
+W_LIVE notification ids seen: 1
+W_LIVE notification ids seen: 1
+W_LIVE EVENT channel.custom_power_up_redemption.add {"broadcaster_user_id":"138821183","broadcaster_user_login":"jestsayin96","broadcaster_user_name":"JestSayin96","custom_power_up":{"bits":25.0,"id":"21b72e23-9403-495d-a81b-2bfcec85a7b4","prompt":"Every hero is handed a healing potion and Bellmire's stores are restocked.","title":"Bellmire: Town Heal"},"id":"032985ef-6656-4106-994c-44d76495b737","redeemed_at":"2026-11-16T20:14:12.86244632Z","status":"fulfilled","user_id":"138821183","user_input":"","user_login":"jestsayin96","user_name":"JestSayin96"}
+FEED JestSayin96 redeems Bellmire: Town Heal (25 bits) for Bellmire!
+SPOTLIGHT 138821183 bits 15s redeemed Bellmire: Town Heal (no town)
+W_LIVE notification ids seen: 1
+W_LIVE ACTION uid=138821183 lane=bits secs=15 reason=redeemed Bellmire: Town Heal
+W_LIVE queue delve: code=200 unfulfilled=0
+W_LIVE queue fish: code=200 unfulfilled=0
+W_LIVE queue join: code=200 unfulfilled=0
+W_LIVE queue patch: code=200 unfulfilled=0
+W_LIVE queue rally: code=200 unfulfilled=0
+W_LIVE queue spotlight: code=200 unfulfilled=0
+W_LIVE dry-run chat lines: 0
+W_LIVE OK

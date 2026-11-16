@@ -6697,3 +6697,36 @@ no sixth slot; carry the 0.6 mm reading verbatim.
   ("subscribed 7 of 7") on the real tokens - every lane's parse check does this. It posted nothing in 300 frames, but it is a
   live connection, so do not run a parse check while Mr. E is live and expect it to be invisible.
 - NOT TICKED BY ME.
+
+## D-cycle D-WLIVE1 - FIRST REAL REDEMPTIONS THROUGH twitch_eventsub.gd: ONE CHANNEL-POINT REWARD, ONE BITS POWER-UP, 0 BITS SPENT (game build, 2026-11-16 14:11-14:16 CT)
+TAKE THIS NEXT (13:58), second for game build: W-LIVE - redeem an EXISTING reward on Mr. E's own account and watch it fire
+end to end off the REAL EventSub payload.
+- STREAM STATUS FIRST: jestsayin96 OFFLINE (decapi uptime, 14:09). Test was silent anyway: chat DRY RUN, the bot posted nothing.
+- NEW TOOL tools/_wlive.gd: opens Bellmire's EventSub socket exactly as the game does, no town (so no hero, roster or store
+  changes anywhere), logs every notification's type + event body BEFORE the game handles it (LoggedSub), waits <=5 min for a
+  redemption, then reads each Bellmire reward's UNFULFILLED queue. Creates, renames, re-prices and deletes NOTHING - the run
+  read the six saved reward ids, rewards_resync was confirmed off in both twitch.cfg files first.
+- ACCOUNT: JestSayin96 (Mr. E's own), in jestsayin96's own popout chat, in the Claude browser pane. bellmirebro did nothing.
+- RUN 1 (renders/cycles/wlive/wlive.log): redeemed "Bellmire: Send my hero fishing" (150 channel points - the broadcaster's
+  balance is unlimited, so nothing was actually spent). Arrived as channel.channel_points_custom_reward_redemption.add,
+  MATCHED BY REWARD ID to key `fish` (the title on Twitch is now "Bellmire: Send my hero fishing" - Mr. E renamed it, and the
+  id match carried it, which is exactly what the edit-proof design was for), action fired (SPOTLIGHT 138821183 points 15s "sent
+  their hero fishing"), and _settle marked it FULFILLED: all six queues read 0 unfulfilled afterwards. W_LIVE OK.
+- RUN 2 (wlive2.log): redeemed the bits Power-up "Bellmire: Town Heal". Twitch's own panel said "No charge since this is your
+  channel - viewers pay 25 Bits"; the bits balance read 45 before AND after. BITS SPENT: 0. It arrived as
+  channel.custom_power_up_redemption.add and the REAL payload is now on record - custom_power_up.{bits:25.0, id, prompt, title},
+  status "fulfilled", user_id/login/name, user_input "". The handler's assumed shape was RIGHT (custom_power_up.bits), bits come
+  as a float and int() takes it. FEED "JestSayin96 redeems Bellmire: Town Heal (25 bits) for Bellmire!", SPOTLIGHT bits 15s.
+  _do_bits_tier returned early (no town), so nothing was granted anywhere. W_LIVE OK.
+- ONE THING MR. E MAY WANT TO DECIDE: the payload reports bits:25 even when the BROADCASTER redeems it free. In the live game
+  his own free Town Heal would therefore fire the full tier-0 effect (every hero +1 Draught of Mending, stores half-restocked),
+  same as a paying viewer. Handy for testing on stream; if he does not want his own free power-ups to grant, the handler can
+  skip user_id == broadcaster_id. NOT changed - his call.
+- STATE LEFT AS FOUND: no hero exists for these redemptions (no town loaded), no order or power-up is held by anyone, the
+  points queue is empty, both chat lines in jestsayin96's chat are the TWO TEST REDEMPTIONS ABOVE (14:12 fishing, 14:14 Town
+  Heal), not a viewer's. No subscription of any kind was touched. No token, secret or refresh token is in any log.
+- NOT DONE THIS SLOT: a plain chat cheer (Cheer1) - it would be a chat POST as Mr. E's personal account, which is forbidden, so
+  the channel.cheer path stays synthetic; the power-up path above is the bits path that does not require him to speak. The
+  full town reacting to a real redemption (a windowed game run with a hero for 138821183) is the next step.
+- Gates: tree identical to D91g's apart from the new --script tool (parse 0, OFFFLOOR 0/2127, TWITCH_PARSE OK, TOWNWALK PASS,
+  delve 0 script errors, run minutes earlier); the tool itself ran twice with no SCRIPT ERROR. NOT TICKED BY ME.

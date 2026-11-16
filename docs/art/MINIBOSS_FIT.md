@@ -375,3 +375,83 @@ inside the 11.0 m clear span of a three-cell corridor. **CORRIDOR-SAFE** - no
 spawn gate needed for it.
 
 Ten creatures still to convert after this one.
+
+
+## REGISTER CONVERSION 5 OF 14 - THE SEXTON (`sexton_chibi`)
+
+Sheet: `renders/art/minibosses/_sexton_register.png` (original left, chibi right, a real
+2.45 m posed KayKit Knight beside each), plus
+`renders/art/minibosses/sexton_chibi/hero_front|side|back.png`. All four looked at, every
+pass. Ratio 1.00, pair 3.93 m, fits the fixed frame, blank check 2 files 0 failures, engine
+BLENDER_EEVEE. CORRIDOR-SAFE - the whole footprint is about 2.4 m, well inside the 11.0 m
+three-cell span.
+
+### WHAT THE ORIGINAL ACTUALLY READS AS
+
+Looked at before anything was changed: **a post office sorting rack with a wire man under
+it.** Measured off the builder, against a hero arm 0.29 thick - legs 0.100/0.082, hod
+uprights 0.055/0.042, cell collars 0.075 slabs, arms 0.072/0.054, spade haft 0.055/0.048,
+and the torso at 0.235 the only bold member on it. Three faults fall out of that:
+
+1. **Every member except the torso is a wire**, so the man is a pipe-cleaner holding a
+   window frame, and from the SIDE he disappears - a flat board on two threads.
+2. **Nine thin cells are a grid, not graves.** At pane distance 0.075 collars round 0.40
+   holes are glazing bars: a window, or a bookcase, and the lit plugs read as ENVELOPES.
+3. **The count is the mechanic and nine is too many to count.** Four lit among nine is a
+   pattern to be scanned. The Snuffer's lesson in its own form: a rising that cannot be
+   counted from the doorway is a mechanic that cannot be read.
+
+So this is the Snuffer's conversion, not the Drillmaster's - fattening the man is not
+enough. **Six cells, not nine**, each big enough that the hole is a niche, and the lit count
+stays **four**, because four risings is the fight.
+
+### FIVE PASSES, ONE CHANGE AND ONE RENDER EACH
+
+1. Build: every wire to a chibi weight (legs 0.150, hod uprights 0.105, cell members 0.145,
+   spade haft 0.085), nine cells -> six, stoop and spade kept.
+2. **IT WAS A CHEST OF DRAWERS.** The plug filled the cell face, a horizontal glow strip
+   across it read as the drawer LABEL and the dark knob as the PULL. One read, bought where
+   it was made: the plug becomes a rough stopper 0.60 of the mouth standing 0.34 proud, the
+   light becomes a RIM leaking round it, the knob goes.
+3. **THE MAN WAS BEHIND HIS OWN LOAD.** Head, shoulders and frame all sat inside the wall's
+   outline - a cabinet with legs, which is the Porter's read. Not fixed by shrinking the
+   wall (the wall is the mechanic): the stoop is deepened until the head breaks the outline
+   below it.
+4. **I OVERCORRECTED AND BUILT A QUADRUPED.** Pass 3 laid the spine almost flat, so from the
+   side the barrel ran horizontal with the head hung off the front and both mitts near the
+   floor - a dog. A miniboss may not read as a hero; it may not read as somebody's wolfhound
+   either. Half the stoop back; the head still clears the wall, the spine is a diagonal again.
+5. **THE COWL WAS A SAUCER.** A 0.44 brim cone over a dark dome on a neckless chibi is a
+   lampshade from the front and a conical straw hat from the side - the Snuffer's pass-4
+   fault in the one slot where it does most harm. A cowl is cloth drawn BACK over the skull
+   onto the shoulders with a short peak over the face; no disc, nothing wider than the head.
+
+### TWELVE FAULTS I CAN STILL SEE
+
+1. The empty niches are holes from the BACK but read as dark panels from the FRONT, so the
+   wall is still a slab there and keeps a cabinet quality.
+2. The lit plug's glow is a flat square plate - it reads as a lit WINDOW PANE, not as light
+   leaking round a stone. The worst remaining front fault and the one I would take next.
+3. The wall's outline is a plain regular rectangle. It reads as masonry furniture, not as
+   something strapped to a back; a hod is lashed and uneven.
+4. The hod uprights are completely hidden behind the wall from the front, so the wall looks
+   attached to nothing.
+5. From the SIDE the wall is a thin plank edge-on and the whole mechanic disappears at
+   azimuth 90 - inherited from the original, not introduced, but the bolder wall makes the
+   loss bigger.
+6. The spade reads as a shovel lying on the ground rather than one held: the blade meets the
+   floor at the same angle the haft runs, with no wrist in it.
+7. The near mitt merges with the torso from the front.
+8. The hood cuts a dark band across the pale face plate, so the eyes barely read at pane
+   distance.
+9. The boots merge with the spoil mounds at that distance - two dark lumps and two dark
+   boots in one silhouette.
+10. From the back, his own shoulders show THROUGH the two lower cells, which half-fills two
+    of the holes the pass-2 fix opened.
+11. Ratio **1.00** - a set piece the party looks level at, not up at. Same note as the
+    Snuffer's 1.06; that is the game build's `h`, not mine.
+12. The two dark cells read as missing panels rather than spent graves - nothing says a
+    grave was ever there.
+
+Ten creatures still to convert. The Scrapwright and the Bellman remain the recorded skip -
+a machine and a shroud, neither with man-proportions.

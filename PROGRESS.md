@@ -6432,3 +6432,50 @@ VALIDATION OK: lore_lines.json parses, every pre-existing top-level key identica
 - AFTER: L36_TEST OK at all 6 configs, parse clean (0 SCRIPT ERROR / Parse Error). LOOKED: renders/cycles/l36/l36_after_full_150.png (Chronicle sits above the chat box, no shared pixels) and l36_after_grid_150.png (strip and chrome-bar chat clear).
 - Seen, NOT mine: the "Hear ye!" town speech bubble at full screen 150% is half-hidden behind the Chronicle (world-space label, not a HUD file).
 - NEXT: L40 - name the halves: chat column + alert dock = hud_dock.gd (mine); party-frames half = party_frames.gd (game build). Mr. E decision: none.
+## B6 - L56 RUN 1 OF A SPLIT: THE SUSTAINED DESCENT WORKS, AND THE UNDERCOUNT HAS A SECOND CAUSE NOBODY HAD WRITTEN DOWN (chat bot, 2026-11-16 11:45-11:58 CT)
+Took L56, the delve-heavy soak, as the supervisor's 10:52 TAKE THIS NEXT directed, and SPLIT it the
+way that row told me to: claim at :45 with a named finish, run what fits inside the protected short
+window, checkpoint-commit, carry the running total. Lock claimed 11:48:32-06:00, named finish 11:54,
+IDLE written 11:52:44-06:00. Godot closed. Nothing ran into the supervisor's slot.
+
+- LOCK WAS FREE AND I CHECKED BY PROCESS, NOT BY THE FILE. The last line read IDLE 11:17:12 (game
+  build, D94e gloves). Both Godot image names returned "No tasks are running" before I claimed. The
+  file and the process agreed, so no clear-and-claim line was needed this slot.
+- THE HARNESS: _l56_soak.gd at the worktree root, committed on `chatbot` only (NOT main). It boots the
+  real Town, enlists six viewers, and sends every living idle hero straight back to the mouth every 8 s
+  instead of the census's 60 s tick. Env L56_MIN / L56_SCALE. Run 1 was L56_MIN=3 L56_SCALE=8.
+  SUPERVISOR: this is a root-level harness like B2's _b2_ask.gd, and tools/ is not mine. I am keeping
+  it rather than retiring it because L56 is a SPLIT item and run 2 needs it. Say the word and it moves
+  to tools/ or goes.
+- WHAT I CHANGED AND WHAT I DELIBERATELY DID NOT. Raids are held off (raids._raid_t pushed out; that
+  is the cause L56 names). turn_back_at, oil, max_floors and every other delve dial are LEFT AT CANON.
+  Flattening them would have manufactured the descent the run exists to measure, and the number would
+  have been worthless.
+- RUN 1 RESULT, parse clean, 0 script errors, L56_SOAK OK:
+    descend_lines=1  redelve_cmds=13  raids_fired=0 (raid timer pushed out once)
+    DEPTH deepest=4, floors held 1-4, floor frames { 1: 1664, 2: 911, 3: 645, 4: 397 }
+    TRAPS spotted=0 disarmed=0 sprung=0 saved=0 damage=0 venomed=0 swarms=0
+    BOSSES distinct=0 killed=0   MINIBOSSES distinct=0
+- THE HALF THAT IS PROVEN: the sustained descent L56 asked for HAPPENS. The census managed ~1 descent
+  because raids pulled parties home; with raids held off, one party held four floors in three wall
+  minutes, descending the whole time. That premise is no longer in doubt.
+- THE FINDING, AND IT IS MEASURED, NOT GUESSED. The run printed trap_log all zeros WHILE THE FEED
+  SHOWED A TRAP BEING MET: "Ingrid of the Ford spots a fire grate (Perception 15 vs DC 11) and steps
+  round it." Ingrid is not one of my six viewers. So I read the code instead of theorising:
+    * scripts/town.gd:5350 makes the VIEWER party's `delve`, and nulls it at 5408 when that delve ends.
+    * scripts/adventurers.gd:248 makes its OWN `Delve.new()` for each NPC party - same Delve class.
+    * `var trap_log` (delve.gd:2609) is a PER-INSTANCE var, not a static counter.
+  Therefore any harness that polls `town.get("delve")` - WHICH IS EXACTLY WHAT tools/_d28_census.gd
+  DOES - is blind to every trap and every boss met by an NPC party. The census's undercount was never
+  only the raids. Half of the dungeon's traffic was never in the sample.
+  dungeon_hd.gd:522 confirms the traps were THERE to be met: `for i in range(1 + mini(floor_no / 3, 3))`
+  places 1 on floors 1-2 and 2 on floors 3-5, on route cells. They exist; this party's path missed them
+  and the other party's hit was counted on an instance nobody was watching.
+- L45 AND L46 ARE NEITHER CLEARED NOR CONDEMNED, which is the instruction. L56 says do not "fix" either
+  until the run says they are actually broken. It does not say that. It says the INSTRUMENT was wrong.
+  Nobody touches L45/L46 on the strength of this slot.
+- RUN 2, NAMED NOW SO IT IS NOT REDERIVED: enumerate EVERY live Delve (walk the tree for nodes carrying
+  trap_log, the way rts_camera.gd:_delve_at already finds delves) and sum per instance, instead of
+  polling the single `town.delve`. Then go longer. Running total carried here: 3 wall-min at 8x done, 0
+  trap events seen on the polled instance.
+- NOT TICKED BY ME. The supervisor ticks; this lane reports. L56 stays open.

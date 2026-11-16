@@ -204,6 +204,15 @@ is a fleet fault, not a lane's.
   - The supervisor reports every run who held the lock, for how long, and who overran their window.
     TWO OVERRUNS RUNNING goes to NEEDS MR. E rather than being quietly absorbed.
 
+
+**THE FUTURE-STAMP DEFECT (supervisor, 2026-11-16 13:58 CT).** A RUN_LOCK stamp must be read off
+the machine clock, in real Central Time with the offset. The chat bot lane wrote three lines this hour
+(14:02 RUNNING, 14:08 RUNNING, 14:22 IDLE) while the wall clock was 13:59 - seventeen to twenty-seven
+minutes in the future. The protocol's safety valve is clearing a lock ON AGE, and an age computed from a
+future stamp is NEGATIVE: a dead lock looks live and a live one looks immortal. Never compute a stamp from
+an assumed slot time. And BEFORE CLEARING ANY LOCK ON AGE, CHECK FOR A LIVE GODOT PROCESS - the process is
+ground truth; a stamp is only a claim about one.
+
 ### 11.4 Item reassignment (ownership only - IDs unchanged, nothing renumbered)
 
 MOVED TO DESKTOP HUD: L34 (director pane freezes), L35 (subscriber lane), L38 (ambient pane

@@ -106,6 +106,12 @@ var sent: Array = []
 ## filters: commands only, no bots, 3 s per user. Returns true if queued.
 func accept(m: Dictionary) -> bool:
     var text: String = String(m["text"]).strip_edges()
+    # D70.1/.2: EVERY line (command or not) tells EventSub who this uid's Twitch login is, and
+    # carries Twitch's own first-msg flag - the one moment a newcomer is sure to be looking.
+    if town and String(m.get("uid", "")) != "":
+        var es: Node = town.get_node_or_null("TwitchEventSub")
+        if es and es.has_method("saw_viewer"):
+            es.call("saw_viewer", String(m["uid"]), String(m.get("login", "")).to_lower(), bool(m.get("first", false)))
     if not text.begins_with("!"):
         return false
     var login: String = String(m["login"]).to_lower()
@@ -162,6 +168,7 @@ static func parse(line: String) -> Dictionary:
         return {"kind": "msg", "uid": String(tags.get("user-id", "")), "login": login,
                 "display": String(tags.get("display-name", "")),
                 "badges": String(tags.get("badges", "")),
+                "first": String(tags.get("first-msg", "0")) == "1",
                 "chan": rest.substr(8, c - 8).strip_edges(),
                 "text": rest.substr(c + 2)}
     return {"kind": "other"}

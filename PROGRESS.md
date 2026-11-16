@@ -6309,3 +6309,112 @@ spent polling.
   still, both in boss_bar.gd which it does not own, neither invented as an item. Raised to Mr. E as NEEDS
   MR. E 6, a yes/no.
 - SYNCED docs/WORK_PLAN.md from main to all six lane branches, md5-verified.
+## B4 - docs/COMMANDS.md regenerated for !catchup; the engine gates are still locked out (chat bot, 2026-11-16 09:45-10:05 CT)
+THE RULING LANDED AND IT IS DONE. The 08:58 TAKE THIS NEXT answered B3's question: docs/COMMANDS.md IS
+this lane's - generated output that travels with data/commands.json, not a tools/ file being reached
+into - and it is to be regenerated and committed in the same breath as the data. Done, in this cycle.
+- docs/COMMANDS.md now carries 26 commands; the only change is ONE added row, the `!catchup` row,
+  289 bytes, in the place `order` puts it. 5188 -> 5477 bytes. Nothing else in the file moved.
+- THE GENERATOR COULD NOT BE RUN (no lock, see below), so it was EMULATED IN PYTHON AND THE
+  EMULATION WAS PROVEN FIRST: tools/_commands_doc.gd's own composition - header, the two cooldowns
+  through Godot's str(), the six-column row, aliases as "!a, !b", args with "|" -> "/", cost
+  defaulting to "free", the " (no hero needed)" suffix, example defaulting to "!"+k, "\n".join with
+  the trailing empty element - was reproduced and run over the data with `catchup` REMOVED. It came
+  back BYTE-IDENTICAL to the committed doc, all 5188 bytes, first differing index None. Only then
+  was the full 26-command file written. LF only, 26 table rows, no command missing its "!" entry -
+  which is the assertion _l14_test makes on this file.
+- SO WHEN A LANE NEXT HOLDS THE LOCK, `--script tools/_commands_doc.gd` SHOULD BE A NO-OP that
+  prints "COMMANDS_DOC wrote 26 commands" and leaves the file unchanged. If it does change the file,
+  the real generator wins and the emulation was wrong - say so and keep the generator's bytes.
+- Engine-free gates re-run on the MERGED tree (origin/main merged into chatbot clean, cc237eb):
+  json.load clean, 26 commands / 26 order entries covering each other exactly; drift BOTH ways off
+  the source with _l14_test's own 8-space match-arm regex - 61 arm words, 0 undocumented, 0
+  unanswered; 22 aliases routing; 0 tabs in chatcmd.gd. The one drift the test would have caught was
+  the doc itself (`catchup` missing), and that is what this cycle closed.
+- NO code change this cycle. scripts/chatcmd.gd and data/commands.json are untouched since 2f8145e.
+
+THE LOCK, FIFTH SLOT RUNNING. Held by another lane for the whole of this slot as well, and it was
+checked BY PROCESS, not by the file, eighteen times across twenty minutes:
+- RUNNING 09:31:30 (game build D91d + C-55 fishing, named finish ~10:00) with Godot 4960/27328 up
+  from 09:31:59. Dead from 09:53:14 through 09:58:20; a ~20 s process at 09:58:30; dead again
+  09:59-10:01; ALIVE AGAIN on all three checks at 10:02.
+- So this lock is NOT stale and was NOT cleared. The claim is live - short batteries with gaps, which
+  is what the protocol asks for - and the right read of a Godot process that keeps coming back is
+  that the lane is still working, not that its named finish has passed. The clear line was composed
+  and then NOT written, because the last check before writing it came back alive. Verify before you
+  act cuts both ways.
+- STILL OWED, AND IT IS NOW SHORTER BY ONE: --headless --quit-after 300 (parse), tools/_l14_test.gd
+  (L14_TEST OK - should now pass, the doc no longer drifts), tools/_twitch_parse.gd (TWITCH_PARSE
+  OK), _b2_ask.gd at the worktree root (B2_ASK OK, then delete it and the .b2_* logs), and
+  tools/_commands_doc.gd as the no-op confirmation above.
+- NEXT: those gates the moment the lock is free, then L56. L68, L69 and L70 are all written and none
+  is ticked.
+
+## S-cycle addendum 2026-11-16 10:05 CT (supervisor) - the chat bot's B4 landed mid-run
+- The 09:45 chat bot slot pushed WHILE I was writing the plan (chatbot aa51b00, cycle B4). My first
+  TAKE THIS NEXT draft said nothing had reached its branch; that was wrong and is CORRECTED, not
+  left standing. Merged to main; PROGRESS conflicted again at the same append point and BOTH SIDES
+  WERE KEPT, markers only stripped.
+- B4 closed the docs/COMMANDS.md ruling in the same slot it was given: 26 commands, one added row for
+  !catchup, 289 bytes, nothing else in the file moved. The generator needs Godot and the lock was
+  held, so the lane EMULATED tools/_commands_doc.gd in python and PROVED the emulation first - ran it
+  over the data with `catchup` removed and got the committed doc back byte-identical at all 5188
+  bytes before writing the new file. Its own instruction to the next lane holding the lock stands:
+  the generator should be a no-op, and if it is not, the generator's bytes win.
+- L70 HALF DELIVERED recorded on the item itself, so the engine remainder is inherited and not
+  rebuilt. L69 is the same shape. Neither is ticked.
+- LOCK, CORRECTED BY THE BOT'S OWN POLLING AND NOW A RULE: I read no Godot alive at 09:59 and left
+  the 09:31 claim standing on its named window. The bot polled the process eighteen times across
+  twenty minutes - alive 09:31:59, dead 09:53-09:58, a ~20 s process at 09:58:30, dead 09:59-10:01,
+  ALIVE on all three checks at 10:02 - had the clear line composed and did NOT write it because the
+  last check came back alive. ONE DEAD POLL IS NOT A RELEASED LOCK. That is in the plan now.
+
+## C-65 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT: check C-61 data half, then the next-stalest standing-backlog item. C-61 CHECKED against the file: all 254 accessories carry per-slot `rarity`, `_note_c61` present, every slot has a legendary, zero artifacts in any shop_stock/trader_cargo/caravan list - the data half is in, nothing to redo. Stalest item is backlog 2 (last C-57; C-64 item 1, C-63 item 4, C-62 item 5, C-60 item 3 are all newer), and it is the most repeated text on stream.
+- data/lore_lines.json: +40 epitaphs (417), +20 descend (260; 8 keep the "%s %s" name+verb shape), +23 cleared (261; "Floor %d" only where existing lines use it), +46 barks (enter +8, lord +7, trap +8, hurt +8, drink +7, misfire +8). 129 lines. Plain, terse, no dungeon floor count anywhere, no mechanics implied. Duplicates of existing lines were skipped.
+- VALIDATION OK: all four owned files parse; every pre-existing key and value identical (existing lists are exact prefixes); descend 0 or 2 %s, cleared 0 or 1 %d, epitaphs no format specifiers.
+- CODE WIRING: none - same keys and shapes, loaders' random pick widens automatically. Still the code lane's: fishing.json "epic" -> "very rare", and enforcing no-artifact in shop/trader readers.
+## U36 - L74 the feed and the theme under raid load (HUD, 2026-11-16 ~10:57 CT, spotlight.gd + tools/_l74_test.gd)
+- TAKE THIS NEXT gave HUD: L74. Lock read by process (none alive) and file (IDLE 10:52); claimed 10:54 with expected finish 11:05, relaunched 10:55:53 (finish 11:03), released 10:57:05.
+- tools/_l74_test.gd WINDOWED 1080p: 36 raid lines (routine chatter mixed with crit/town lines) in 3 s into the LIVE feed at UI scale 100/125/150. L74_TEST OK at all three: no ellipsis, stack fits the vellum (box 220/225, 151/216, 187/208 px), dropped_protected=0 (routine chores dropped, raid/fall/granary lines kept; 112 seen, 63 dropped, 28 merged, min admit gap 0.80 s).
+- FOUND by looking at l74_after_150.png: the "CHANNEL POINTS . ambient" lane chip ran off the right edge of the screen. spotlight.gd (kind chip): its font now steps down until the whole chip fits the room beside the Chronicle box. l74_fix_150.png: fits, nothing overlaps. (spotlight.gd is HUD-owned.)
+- LOOKED: renders/cycles/l74/l74_after_100.png, l74_after_150.png (before), l74_fix_150.png (after). At 100% the first Chronicle line sits tight against the top of the vellum (readable, not clipped) - left alone.
+- NOT DONE: the test's synthetic "(32)" suffix defeats the feed's dedupe so two near-identical lines show with x2/x3; that is the test, not the feed. At 150% only 2 whole entries fit during a flood - by design (L71 fewer-whole-entries rule).
+- Mr. E decision: none.
+## B5 - L69 AND L70's ENGINE GATES ALL RAN AND ALL PASSED (chat bot, 2026-11-16 10:45-10:55 CT)
+- THE :45 WINDOW WAS REAL AND THE LANE USED IT. The lock read IDLE 10:34:15 (game build, D91d not on
+  laptop + C-55 shipped), no Godot process alive on either image name at 10:45:51, and the supervisor's
+  09:58 ruling gives :45-:58 to this lane while it still owes engine gates. Claimed at 10:46:32,
+  refreshed at 10:49:01 on relaunch. Five slots of starvation end here.
+- ALL FIVE GATES GREEN, first engine run this lane has had since 06:03:
+  parse `--headless --quit-after 300` rc=0, ZERO ERROR lines; L14_TEST OK (23 checks, 61 verbs, both
+  drift directions clean, "docs/COMMANDS.md carries every command from the data"); TWITCH_PARSE OK
+  (8/8, PASS 1-7b); B2_ASK OK; COMMANDS_DOC wrote 26 commands.
+- THE COMMANDS DOC: the real generator is a NO-OP over the 26-command data. It rewrote
+  docs/COMMANDS.md and git reports the file unmodified, so B4's python emulation was byte-correct and
+  the ruling it wrote for this slot needed no overriding. The generator and the emulation agree.
+- B2_ASK FAILED FIRST, AND THE FAULT WAS DATA, NOT THE HARNESS. Two of forty phrasings missed:
+  * "how is my hero doing" reached `missed` (catchup) instead of `myhero`. `missed` sits first in
+    `order` and carried the phrase `hero+doing`, which is too greedy - a viewer asking how their hero
+    is doing wants the sheet, not the Chronicle. `hero+doing` REMOVED from `missed`; `hero+been` and
+    `hero+up+to` still carry the away-and-back sense, which is what that topic is for.
+  * "wheres the site" was answered with SILENCE. `hub` had `where+site`, and the flattener leaves
+    "wheres" as its own word, so the possessive-less contraction never matched. Added `wheres+site`,
+    `wheres+website` and `wheres+page` alongside the existing literal "wheres the page".
+  Both are data/commands.json only - no code changed, no reply text changed, no command added or
+  removed. Re-ran: B2_ASK OK, and L14_TEST and COMMANDS_DOC still green over the edited data.
+- THE PARSE ERRORS WERE THIS WORKTREE'S IMPORT CACHE, NOT ANY LANE'S CODE. The first parse run threw
+  ERROR lines for res://assets/characters/kaykit_adv2/Knight_knight_texture.png - the png and its
+  .import are both on disk, but .godot/imported never got the .ctex when B1 first imported this
+  worktree on 16 Nov 05:59. One `--headless --import` (rc=0, 0 errors) built it, and the parse run is
+  clean. Nothing tracked was touched; the leftover generated .import/.uid files are asset metadata
+  belonging to other lanes' files and are deliberately LEFT UNTRACKED, not committed.
+  The remaining parse output is WARNING-only: "invalid UID" on the kit materials (MI_Plaster,
+  MI_RockTrim, MI_RoundTiles, MI_WoodTrim, MI_Cobble), pre-existing and not this lane's.
+- HARNESS RETIRED AS THE CONTRACT ASKED: _b2_ask.gd, _b2_ask.gd.uid, .b2_gates.log and this slot's
+  .b5_gates*.log are deleted now that B2_ASK has passed on the real engine. L69's proof lives in this
+  entry and in the gate output, not in an uncommitted file at the worktree root.
+- DRIFT CHECKED BOTH DIRECTIONS after the edit, by L14_TEST (the real check) and by json.load: 26
+  commands, every pre-existing key byte-identical, file still ends 0a 7d 0a as before.
+- NOT TICKED BY ME. L69 and L70 now have every gate they were owed. L68 is already ticked. The
+  supervisor ticks; this lane only reports. NEXT: L56, the delve-heavy soak - engine and lock.

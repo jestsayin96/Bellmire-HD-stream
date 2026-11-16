@@ -202,3 +202,84 @@ the bone. The single pale thing above the ground is the face.
 
 Twelve creatures still to convert. The Scrapwright and the Bellman are a machine
 and a shroud with no man-proportions, and should be skipped.
+
+---
+
+## REGISTER CONVERSION 3 OF 14 - THE GAOLER (16 Nov, three passes)
+
+`gaoler_chibi` in `tools/art/minibosses.py`. In CANON and BUILDERS, **keyed OUT
+of `ORDER`** like the other two, so the shipped fourteen are untouched and
+nothing in `bestiary.gd` should point at it until Mr. E picks the register.
+Authored at the original's **2.35 m** so the pair sheet compares ONE thing.
+
+Proof: `renders/art/minibosses/_gaoler_register.png` (original left, chibi
+right, a real 2.45 m posed KayKit Knight beside each), plus
+`gaoler_chibi/hero_side.png` and `hero_back.png`. Ratio **0.96**, pair width
+**5.58 m**, fits the fixed frame. Blank check **2 files, 0 failures** on the
+final pass and on every intermediate one. Engine `BLENDER_EEVEE`.
+
+### What this creature forced that the first two did not
+
+- **The stoop cannot be paid for in height.** The original's character is a man
+  bent double, and a bent man is shorter - but both halves of the pair must be
+  2.35 m or the sheet compares two things. So the stoop is bought in LEAN and
+  CLOTH, in four places at once (torso axis, dropped shoulder, tilted mantle,
+  head out over the toes with the face low on the hood). If Mr. E wants him
+  standing shorter than the party, that is `bestiary.gd`'s `h`, not mine.
+- **The hood is the head**, which makes this one EASIER than the Stoker. The
+  Stoker's pass-3 register fault was a dark cap on a pale skull reading as a
+  bowl cut; the Gaoler never has a pale skull to put a cap on. The one pale
+  thing above the ground is the iron faceplate.
+- **The apron is dropped.** The original says it existed "so the legs read as
+  thin". Chibi legs are thick stubs, so the reason is gone, and any value it
+  could take merges with the torso, merges with the boots, or outshines the
+  face. The belt carries the hip read instead.
+
+### The three passes, one change each, looked at every time
+
+1. **The hood point was a WIZARD'S HAT.** A cone standing on the dome with a
+   seam across the crown is a pointed hat whatever the comment calls it - the
+   Drillmaster's kettle-helm mushroom in a third form. Replaced with a head
+   deeper in y than wide and the point falling backward.
+2. **The stoop was absent.** Pass 1 leant the torso 0.34 m over an 0.81 m rise,
+   which on a chibi is nothing: he stood bolt upright, the one thing the
+   original's own docstring forbids. Fixed in the four places above together,
+   because the stoop is one read and no single one of them produces it.
+3. **The hood's tail was a RABBIT EAR** - a flat paddle from the side, a dark V
+   from the back; the wizard's hat lying down. Cloth over a head does not
+   project, it gathers at the nape, so the point is now a bunched mass behind
+   and below the skull, doubling as the hump a stooped figure wants.
+
+### Faults I can still see - named, not hidden (ten)
+
+1. **The faceplate reads as an ANGRY CARTOON MASK.** Two dark slots on a pale
+   oval, with the low-poly facets slanting them, come out as a scowl. That is
+   theatrical and Bellmire's register is not. The worst remaining front fault.
+2. **The plate is a large bright oval** and is the loudest thing on the figure
+   at pane distance - right by the value rule, wrong in degree.
+3. **The nape cloth reads as a BUN OF HAIR** from the side - better than the
+   ear it replaced, but still a second distinct sphere rather than gathered
+   cloth. Fault 3 is improved, not closed.
+4. **The brow cone reads as a flat-cap peak** across the top of the hood from
+   the side, a hard brim line where cloth should round over.
+5. **The back is bare** - a flat tan slab with nothing on it. The Stoker's
+   fault 2 exactly; this is now a register fault shared by every conversion.
+6. **The legs do not read from the SIDE.** From the front and back they are two
+   stubs with boots; from the side the torso runs straight down into the boot
+   with no hip or knee break at all, so he reads as a sack.
+7. From the side the **torso is a shallow slab** against a round chibi knight -
+   the Stoker's fault 6, carried.
+8. **The hook is `bone` and is the brightest long shape after the face.** This
+   is the Stoker's rake-haft fault, taken DELIBERATELY here: the hook is the
+   mechanic and must be the second thing the eye finds. Judge it, do not
+   assume it is an oversight.
+9. **The belt is invisible from the front** - dark on brown. Third conversion
+   running; it is the register, not the creature.
+10. **The mantle's rim is a hard polygonal edge**, 20 segments showing plainly
+    on a 0.62 m cone.
+
+The chain coil is the best thing in the file from every view and was not
+touched. The keys read cleanly on the right hip.
+
+Eleven creatures still to convert. The Scrapwright and the Bellman remain the
+recorded skip - a machine and a shroud, neither with man-proportions.

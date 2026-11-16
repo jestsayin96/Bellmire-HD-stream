@@ -6095,6 +6095,13 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
   _townwalk in_solid 5/15840 (0.032%) raid 0 PASS, stuck_on_route 0; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
 - NEXT: D91 stages 2-4.
 
+## C-61 (2026-11-16) - WORK_PLAN D94 remainder / TAKE-THIS-NEXT CONTENT row: rarity banded PER SLOT (items.json only)
+- TAKE THIS NEXT gave CONTENT the item C-61. C-55/C-58 were already done. Fault: one global cost scale (441+ = legendary) meant boots (cap 420) and gloves (cap 380) could never hold a legendary.
+- data/items.json: the `rarity` key on all 254 accessories is re-derived inside each slot: midrank cost percentile among that slot's own pieces (equal costs share a rung), cut at the C-58 population proportions - below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above legendary. 122 of 254 labels moved. No cost, stat, tier or price changed; no rung added, renamed or doubled; equipment rarity untouched. New top-level `_note_c61` records the rule (the C-58 note is left as written and is superseded for accessories).
+- PER-SLOT BAND COUNTS (common/uncommon/rare/very rare/legendary): ring 9/23/11/8/4 (legendary 500,500,510,520); amulet 9/20/12/7/3 (440,470,480); cloak 8/21/10/6/4 (480,480,480,500); boots 6/21/11/7/3 (390,400,420); gloves 8/24/8/8/3 (320,330,380). Every slot has at least one legendary.
+- ARTIFACT unchanged: zero accessories are artifact; checked no artifact equipment id appears in shop_stock, trader_cargo or caravan_manifests.
+- VALIDATION OK: all four data files parse; every pre-existing key and value is identical except accessory `rarity` (compared against HEAD, key order preserved); only addition is `_note_c61`.
+- CODE WIRING: any reader that bands accessories by the global 441+ cost threshold (hub, icon border colour, shop gate, D95 showcase legendary row) must read the stored `rarity` key instead - never a cost threshold. Boots and gloves can now be legendary at costs 390-420 / 320-380, so any shop level gate keyed to rarity should be rechecked against those costs; the D95 showcase no longer needs to borrow very-rare pieces. "epic" -> "very rare" in fishing.json and chatcmd.gd order array is still the code lane's.
 ## B1 - L68: BellmireBro knows what the game has become (chat bot, 2026-11-16 ~05:45-06:10 CT)
 OWNER NOTE: L68 was "Owner: LAPTOP CODE" and the jestai laptop was retired on 15 Nov, so this item had an
 owner on paper and nobody to do it. This lane (worktree bellmire-bot, branch `chatbot`) is that owner now.
@@ -6145,6 +6152,18 @@ Two files touched and no others: scripts/chatcmd.gd and data/commands.json.
   Nothing to do with chat; flagged for whoever owns assets/kit.
 - NEXT: L69 (the bot carries the chat - plain questions, not just commands), then L70 (!catchup), then L56.
 
+## C-62 (2026-11-16) - standing backlog item 5: miniboss feed lines (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT the fishing "epic" -> "very rare" conversion in data/fishing.json. NOT DONE: fishing.json is not one of the four files this lane owns, and the standing rule is edit only items, lore_lines, bosses, potions. Mr. E or the supervisor must either grant fishing.json to content explicitly or hand it to the game build, which already owes angler.gd/fishing.gd/economy.gd. Counts as found: "epic" appears 4 times in fishing.json (ladder array plus three catches).
+- Took backlog item 5 instead. New top-level `miniboss_feed` in data/lore_lines.json: all fourteen art-lane minibosses (drillmaster, scrapwright, gaoler, snuffer, sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker, bellman, boiler), each with arrive / act / broken / fall lines, 140 lines total, plain register, plus a `_note`. {name} marks a hero where used.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical, key order and CRLF preserved; only addition is `miniboss_feed`.
+- CODE WIRING: the game build reads miniboss_feed.by_key[<miniboss key>][arrive|act|broken|fall] and posts one at random to the feed on set-piece spawn, each mechanic firing, the weakness being broken, and death. Lines containing {name} need a hero substituted. Also still owed by code: "epic" -> "very rare" in fishing.json, angler.gd, fishing.gd, economy.gd and chatcmd.gd's order array.
+
+## C-63 (2026-11-16) - standing backlog item 4: bosses and potions (bosses.json, potions.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-62 merged); told it to take the stalest standing-backlog item. That is bosses and potions: last touched in C-55, while disasters (C-56), epitaphs/barks (C-57), Phase 2 words (C-60) and miniboss feed (C-62) all came after. Fishing stays with the game build.
+- data/bosses.json: +12 lesser_uniques (3 each: Hollow King, Grubmother, Rattling Host, Nightwing) and +12 greater_uniques (3 each: Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified lords, not new lords; each keeps its lord's shape and sits inside that lord's existing hp/speed/attack range. Now 166 lesser, 160 greater.
+- data/potions.json: +16 brews (3 tier 1, 5 tier 2, 4 tier 3, 4 tier 4), trade-named, using only existing states. Now 192 potions.
+- VALIDATION OK: both files parse; every pre-existing entry and key unchanged (text insertion only, LF kept); no duplicate names, keys or aliases; every gives/cures resolves in `states`.
+- CODE WIRING: none - same keys and shapes as existing entries.
 ## B2 - L69's gates owed, and the retired "epic" out of the catch ladder (chat bot, 2026-11-16 07:45-08:35 CT)
 THE ENGINE HALF OF THIS CYCLE DID NOT RUN. The Godot lock was held by the game build for the whole
 slot, so per the CHAT BOT row in TAKE THIS NEXT ("if the lock is held, say so in your cycle and gate

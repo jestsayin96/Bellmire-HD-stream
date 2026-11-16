@@ -106,19 +106,39 @@ def load_items(repo):
 
 
 def acc_pick(items, slot, tier, used):
-    """Rarity has to be VISIBLE, so an accessory is drawn from the cost band
-    that matches the character's tier: a common hero does not get the 520-gold
-    crater-glass ring. Cheapest unused in the band, so it is deterministic."""
-    pool = sorted(((v["cost"], k) for k, v in items["accessories"].items()
-                   if v["slot"] == slot), key=lambda q: q[0])
-    n = len(pool)
-    band = max(1, n // 5)
-    lo = min(n - 1, (tier - 1) * band)
-    hi = n if tier >= 5 else min(n, lo + band)
-    for cost, k in pool[lo:hi] + pool:
-        if k not in used:
-            used.add(k)
-            return k, items["accessories"][k]
+    """Rarity has to be VISIBLE, so an accessory is drawn from the character's
+    own RARITY BAND - and the band is the one STORED on the item, not one
+    guessed from a cost quintile. C-61 re-banded all 254 accessories per slot
+    (boots are legendary at 390-420, gloves at 320-380), so a cost threshold
+    now disagrees with the item's own word for itself. Cheapest unused inside
+    the band, so it is deterministic; if a band is exhausted we walk OUTWARD
+    one rung at a time rather than falling back to the whole list, so a
+    legendary hero never silently drops to a common ring."""
+    want = RARITY[tier] if tier < len(RARITY) else RARITY[-1]
+    if want == "starting":
+        want = "common"
+    byband = {}
+    for k, v in items["accessories"].items():
+        if v["slot"] != slot:
+            continue
+        byband.setdefault(v.get("rarity", "common"), []).append((v["cost"], k))
+    for b in byband:
+        byband[b].sort()
+    ladder = RARITY[1:]
+    try:
+        i = ladder.index(want)
+    except ValueError:
+        i = 0
+    order = [ladder[i]]
+    for d in range(1, len(ladder)):
+        for j in (i - d, i + d):
+            if 0 <= j < len(ladder):
+                order.append(ladder[j])
+    for b in order:
+        for cost, k in byband.get(b, ()):
+            if k not in used:
+                used.add(k)
+                return k, items["accessories"][k]
     raise RuntimeError("no accessory left for " + slot)
 
 
@@ -476,11 +496,8 @@ def main():
             fL = anchors["foot.l"]
             fw = max(ray_out(body_trees, Vector((fL.x, fL.y, 0.075)), (1, 0, 0)) or 0.055,
                      ray_out(body_trees, Vector((fL.x, fL.y, 0.075)), (-1, 0, 0)) or 0.055)
-            hL = anchors["hand.l"]
-            hr = max(ray_out(body_trees, hL, (0, 0, 1)) or 0.045,
-                     ray_out(body_trees, hL, (0, -1, 0)) or 0.045)
+
             boot_k = max(0.80, min(1.9, (fw + 0.016) / 0.058))
-            glove_k = max(0.80, min(1.9, (hr + 0.012) / 0.044))
 
             # the head, measured: centre and radius of the body's own skull
             headobjs = [ob for ob in meshes if "_Head" in ob.name or "Hair" in ob.name]
@@ -511,9 +528,6 @@ def main():
                     if q.name.startswith("Acc_Boot"):
                         f = anchors["foot." + q.name[-1].lower()]
                         scale_part(q, (f.x, f.y, 0.0), boot_k, boot_k, 1.0)
-                    elif q.name.startswith("Acc_Glove"):
-                        h = anchors["hand." + q.name[-1].lower()]
-                        scale_part(q, h, glove_k, glove_k, glove_k)
                     parts.append(q)
             if helm:
                 for q in SC.acc_helm(helm[1]["name"], helm[0], helm[1]["cost"], helm[2],

@@ -49,6 +49,11 @@ from mathutils import Vector
 import lordlib as L
 import icons as IC
 
+# Dial and sig LIVE IN icons.py - the lower layer - so the hub icon takes the
+# same per-item dials as the worn piece. One copy, not two (D94).
+Dial = IC.Dial
+sig = IC.sig
+
 TAU = math.pi * 2.0
 
 TIER_NAME = ["rags", "plain steel", "fine steel", "runed", "dragontooth", "scarforged"]
@@ -149,15 +154,6 @@ class Dial(object):
 
     def bit(self, i, p=0.5):
         return self.u(i) < p
-
-
-def sig(key, name=""):
-    """FNV-1a over the item's key AND name - the two things only this item has."""
-    hay = (str(key or "") + "|" + str(name or "")).lower()
-    h = 2166136261
-    for c in hay:
-        h = ((h ^ ord(c)) * 16777619) & 0xFFFFFFFF
-    return Dial(h)
 
 
 class Part(object):
@@ -753,51 +749,113 @@ def acc_ring(name, key, cost, ctx, anchors, S):
 
 
 def acc_gloves(name, key, cost, ctx, anchors, S):
+    """D94: GLOVES MUST READ ON A BODY. Mr. E, 16 Nov 04:56: "gloves can be
+    seen". The dials come from icons.glove_form - THE SAME CALL THE HUB ICON
+    MAKES - so the glove in the satchel is the glove on the hand.
+
+    Everything is measured off this body, not guessed:
+      forearm   lowerarm -> wrist          (0.26 on the KayKit adventurer)
+      hand      wrist -> fingertip         (0.258)
+      fist      ray cast out of the hand   (~0.15 across)
+    The cuff runs UP THE FOREARM towards the elbow, the lip flares past the
+    arm, and the knuckle plate stands off the back of the fist. All three ride
+    COST. The shell is never smaller than the hand under it - that was the
+    whole fault: 0.085 of glove on 0.15 of fist.
+    """
     v, orn = ctx['variant'], ctx['orn']
     D = sig(key, name)
+    F = IC.glove_form(v, orn, D)
     out = []
-    cuff = (0.20 if v == 3 else 0.095) * D.u(0, 0.72, 1.45)      # the big dial
-    flare = D.u(1, 0.86, 1.30)
-    bulk = D.u(2, 0.88, 1.18)
-    straps = D.n(3, 2, 4)
     for side in ('l', 'r'):
         sgn = 1.0 if side == 'l' else -1.0
         w = anchors['wrist.' + side]
         hd = anchors['hand.' + side]
+        lo = anchors.get('lowerarm.' + side, w)
+        # MEASURED, not assumed. The arm lies along +-X in rest, so the
+        # forearm is the span from the elbow bone to the wrist bone.
+        forearm = max(0.12, abs(w.x - lo.x))
+        handlen = max(0.12, abs(hd.x - w.x) * 2.0)
+        # THE RADII COME FROM THE BONES, NOT FROM A MESH SCAN. Scanning the
+        # arm mesh for a radius returned 0.154 at the wrist on a body whose
+        # whole fist is 0.15 across, and that number is what turned the first
+        # pass of these gloves into dinner plates. Bone spacing is exact and
+        # scales with any body: on the KayKit adventurer handlen is 0.1477 and
+        # the fist measures 0.15 across (x0.50) and the forearm 0.11 (x0.38).
+        fist = handlen * 1.00                      # across, = 2 x 0.50
+        ar = handlen * 0.38                        # forearm RADIUS
         p = Part("Acc_Glove" + side.upper(), "hand." + side, item=name, slot="gloves")
-        p.raw(aim(L.cone(0.070 * flare, 0.060, cuff, 12),
-                  (w.x - sgn * cuff * 0.35, w.y, w.z), (sgn, 0, 0)), 'leather')
-        p.add(L.box(0.085 * bulk, 0.072 * bulk, 0.070 * bulk), 'cloth',
-              loc=(hd.x + sgn * 0.030, hd.y, hd.z))
-        if v == 1:
-            p.raw(aim(L.cone(0.040 * bulk, 0.028, 0.065 * D.u(4, 0.78, 1.40),
-                             10), (hd.x + sgn * 0.090, hd.y, hd.z), (sgn, 0, 0)), 'cloth')
-        elif v == 4:
-            for k in range(straps):
-                p.add(L.box(0.016, 0.016, 0.018), 'dark',
-                      loc=(hd.x + sgn * 0.072, hd.y - 0.020 + 0.020 * k, hd.z + 0.012))
+        cuff = forearm * F['cuff']                 # up the forearm: 0.04 -> 0.24
+        mouth = ar * F['flare']                    # the lip, CLEAR of the arm
+        hw = fist * 0.5 * F['shell']               # ALWAYS > the fist
+        # 1. THE CUFF - the readable mass. IT STAYS ON THE HAND BONE. Moving
+        #    it to lowerarm.<side> was tried and is wrong: merge_parts carries
+        #    each part rigidly on its own bone, so the cuff and the hand shell
+        #    pulled apart in the idle pose and the sheet showed a bucket
+        #    floating beside a box. One bone, one glove.
+        #    So the silhouette cannot come from REACH - a long cuff on the hand
+        #    bone swings through the hip - it comes from the BELL MOUTH, which
+        #    is radial and therefore stands outside the hip line from every
+        #    angle, which is the only clear air a hanging arm has.
+        #    The cuff BASE starts inside the hand shell, not at the wrist
+        #    bone: based at the bone it left a 0.028 m hole between cuff and
+        #    shell and the sheet showed a tub floating over a box.
+        p.raw(aim(L.cone(hw * 0.99, mouth, cuff + handlen * 0.30, 14),
+                  (w.x + sgn * handlen * 0.30, w.y, w.z), (-sgn, 0, 0)),
+              'metal' if F['metal'] else 'leather')
+        if F['lip']:                               # a hard flared rim
+            lipx = w.x - sgn * cuff
+            ring = [Vector((lipx, mouth * 1.02 * math.cos(TAU * k / 16.0),
+                            w.z + mouth * 1.02 * math.sin(TAU * k / 16.0)))
+                    for k in range(17)]
+            p.raw(L.tube(ring, mouth * 0.13, 7, caps=False),
+                  'metal' if F['metal'] else 'dark')
+        # 2. THE HAND SHELL - wider than the hand it covers
+        p.add(L.box(handlen * 0.62, hw * 1.42, hw * 1.26), 'cloth',
+              loc=(hd.x + sgn * handlen * 0.12, hd.y, hd.z))
+        if F['fingers'] == 0:                      # a mitt: one pocket
+            p.raw(aim(L.cone(hw * 0.86, hw * 0.56, handlen * 0.46,
+                             12), (hd.x + sgn * handlen * 0.34, hd.y, hd.z),
+                      (sgn, 0, 0)), 'cloth')
         else:
-            for k in range(straps):
-                p.raw(L.tube([Vector((hd.x + sgn * 0.058, hd.y - 0.020 + 0.020 * k, hd.z + 0.010)),
-                              Vector((hd.x + sgn * 0.098, hd.y - 0.020 + 0.020 * k, hd.z + 0.006))],
-                             [0.011, 0.009], 6), 'cloth')
-        if v == 0:
-            for k in range(D.n(5, 2, 4)):
-                p.add(L.box(0.020, 0.080, 0.020), 'metal',
-                      loc=(hd.x + sgn * (0.010 + 0.030 * k), hd.y, hd.z + 0.042))
-            p.add(L.sphere(0.017, 0.015, 0.012, 10, 7), 'gem',
-                  loc=(hd.x + sgn * 0.050, hd.y, hd.z + 0.050))
-        elif v == 2:
-            for k in range(D.n(5, 2, 5)):
-                p.add(L.sphere(0.009, 0.009, 0.009, 6, 5), 'metal',
-                      loc=(hd.x + sgn * (0.020 + 0.028 * k), hd.y, hd.z + 0.040))
+            for k in range(4):
+                dy = -hw * 0.52 + hw * 0.35 * k
+                p.raw(L.tube([Vector((hd.x + sgn * handlen * 0.26, hd.y + dy, hd.z + hw * 0.08)),
+                              Vector((hd.x + sgn * handlen * (0.44 if v != 4 else 0.34),
+                                      hd.y + dy, hd.z + hw * 0.04))],
+                             [hw * 0.20, hw * 0.16], 6), 'cloth')
+        # the thumb, so a glove reads as a glove from the side
+        p.raw(L.tube([Vector((hd.x + sgn * handlen * 0.08, hd.y - hw * 0.62, hd.z)),
+                      Vector((hd.x + sgn * handlen * 0.30, hd.y - hw * 0.80, hd.z - hw * 0.10))],
+                     [hw * 0.24, hw * 0.17], 7), 'cloth')
+        # 3. THE KNUCKLE PLATE - stands OFF the back of the fist, riding cost
+        kn = hw * F['knuck'] * 0.55
+        if kn > 0.008:
+            for k in range(max(1, F['plates'])):
+                p.add(L.box(handlen * 0.13, hw * 1.34, max(0.010, kn * 0.52)),
+                      'metal' if F['metal'] else 'dark',
+                      loc=(hd.x + sgn * (handlen * 0.06 + handlen * 0.15 * k),
+                           hd.y, hd.z + hw * 0.66 + kn * 0.46))
+            if F['metal']:
+                p.add(L.sphere(kn * 0.46, kn * 0.40, kn * 0.34, 10, 7), 'gem',
+                      loc=(hd.x + sgn * handlen * 0.08, hd.y,
+                           hd.z + hw * 0.70 + kn * 0.92))
         elif orn > 0.45:
-            p.add(L.sphere(0.015, 0.013, 0.011, 10, 7), 'gem',
-                  loc=(hd.x + sgn * 0.030, hd.y, hd.z + 0.044))
-        for k in range(D.n(6, 0, 2)):      # a wrist strap over the cuff
-            p.raw(L.tube([Vector((w.x - sgn * (0.010 + 0.030 * k), w.y - 0.055, w.z)),
-                          Vector((w.x - sgn * (0.010 + 0.030 * k), w.y + 0.055, w.z))],
-                         0.010, 7), 'dark')
+            p.add(L.sphere(hw * 0.20, hw * 0.17, hw * 0.15, 10, 7), 'gem',
+                  loc=(hd.x + sgn * handlen * 0.10, hd.y, hd.z + hw * 0.72))
+        if v == 2:                                 # studs down the fingers
+            for k in range(4):
+                p.add(L.sphere(hw * 0.11, hw * 0.11, hw * 0.11, 6, 5), 'metal',
+                      loc=(hd.x + sgn * handlen * 0.38,
+                           hd.y - hw * 0.52 + hw * 0.35 * k, hd.z + hw * 0.22))
+        # straps round the cuff, counted off the plate count so a dear
+        # gauntlet is strapped and a cheap wrap is tied once
+        for k in range(max(1, min(3, F['plates'] - 1))):
+            sx = w.x - sgn * (cuff * (0.28 + 0.30 * k))
+            rr = hw * 0.96 + (mouth - hw * 0.96) * (0.28 + 0.30 * k)
+            ring = [Vector((sx, rr * 1.03 * math.cos(TAU * j / 14.0),
+                            w.z + rr * 1.03 * math.sin(TAU * j / 14.0)))
+                    for j in range(15)]
+            p.raw(L.tube(ring, max(0.006, rr * 0.11), 6, caps=False), 'dark')
         out.append(p)
     return out
 

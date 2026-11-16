@@ -1228,8 +1228,14 @@ def drillmaster_chibi():
                  (X + s * 0.20, -0.04, 0.10)], 0.145, 0.135)
         P.add(L.box(0.30, 0.40, 0.13), 'dark', loc=(X + s * 0.20, -0.12, 0.065))
     # TORSO - one barrel from hip to shoulder, wider than it is tall
+    # FAULT 3 OF THE THREE: head and torso were the SAME pale value with no
+    # neck, so the man read as one blank column. The torso takes the mid tone
+    # ('body') and the head keeps the pale one ('bone'), and a dark collar
+    # sits in the seam between them - the break a chibi head needs to read as
+    # a head. Same three values the hero uses: dark legs, mid body, pale face.
     limb(P, [(X, 0.08, HIP - 0.02), (X - 0.04, 0.00, 0.72), (X - 0.08, -0.08, 1.00)],
-         0.36, 0.38)
+         0.36, 0.38, 'body')
+    P.add(aim(L.cone(0.36, 0.30, 0.11, 18), (X - 0.09, -0.10, 0.94), (0.0, 0.0, 1.0)), 'dark')
     P.add(L.box(0.80, 0.34, 0.13), 'dark', loc=(X - 0.02, -0.06, 0.70))      # belt
     for s in (-1, 1):                                                        # shoulders
         P.add(L.sphere(0.22, 0.21, 0.19, 12, 8), 'body', loc=(X - 0.08 + s * 0.38, -0.08, 1.02))
@@ -1241,11 +1247,23 @@ def drillmaster_chibi():
     # both, so the one thing that says soldier - a kettle helm - said farmer.
     # The dome is taller and narrower and now clears the brim; the brim is
     # 1.08 m and sits high on the skull, where a helmet's does.
-    P.add(aim(L.cone(0.44, 0.17, 0.44, 16), (X - 0.10, -0.12, 1.50), (0.0, 0.0, 1.0)), 'dark')
-    P.add(aim(L.cone(0.54, 0.50, 0.05, 18), (X - 0.10, -0.12, 1.52), (0.0, 0.06, 1.0)), 'dark')
+    # PASS 3, and this is the first of the three register faults being closed:
+    # a cone with a point on it is a FARMER'S HAT whatever you call it. A
+    # kettle helm is a BOWL - rounded crown, no apex - with a brim that is
+    # widest at its outer edge and droops. So the dome is a squashed sphere
+    # and the brim is a cone whose BOTTOM radius is the larger one.
+    P.add(aim(L.cone(0.60, 0.44, 0.09, 20), (X - 0.10, -0.12, 1.50), (0.0, 0.05, 1.0)), 'dark')
+    P.add(L.sphere(0.45, 0.43, 0.33, 18, 12), 'dark', loc=(X - 0.10, -0.12, 1.54))
     # and the eyes were INSIDE THE SKULL. The head is 0.44 deep and they sat at
     # 0.40, so the face was blank from every angle. Measured, not nudged.
-    eyes(P, (X - 0.10, 0.0, 1.30), 0.150, 0.072, -0.545)
+    # FAULT 2 OF THE THREE: pale glowing DISCS read as a mummy, not a man, and
+    # nothing else in the game has them - a KayKit face is two dark ovals,
+    # taller than they are wide, sunk just under the surface of the skull.
+    # Head centre y -0.12, depth radius 0.44, so the face is at y -0.56: the
+    # ovals sit at -0.535 and stand 0.015 proud, not floating in front of it.
+    for s in (-1, 1):
+        P.add(L.sphere(0.058, 0.040, 0.088, 12, 8), 'dark',
+              loc=(X - 0.10 + s * 0.150, -0.535, 1.30))
     # ARMS - short, thick, ending in mitts. Right arm up on the mallet.
     limb(P, [(X + 0.26, -0.10, 1.00), (X + 0.52, -0.16, 1.14)], 0.145, 0.120)
     P.add(L.sphere(0.155, 0.150, 0.145, 10, 7), 'body', loc=(X + 0.56, -0.16, 1.16))
@@ -1283,3 +1301,116 @@ BUILDERS.update({
     "drillmaster_tall": drillmaster,
     "drillmaster_chibi_tall": drillmaster_chibi,
 })
+
+# ===========================================================================
+# REGISTER CONVERSION, CREATURE 2 OF 14 - THE STOKER
+# The Drillmaster above is the worked example and this follows it exactly:
+# legs to 21% of the height, head 55% across, no neck, a dark collar in the
+# seam, mitts for hands, and a face of two DARK ovals sunk under the skull.
+# Measured off Knight.glb in the idle pose, as that one was.
+# NOTHING ABOUT THE IDEA CHANGES - box chest with a lit grate in it, tall
+# flue off the far shoulder, rake running down into the floor on the other
+# side, fuel basket at the heels. Only the man carrying them is rebuilt.
+# Authored to the same 2.40 m as the original so the pair sheet compares ONE
+# thing. The height in bestiary.gd is the GAME BUILD lane's number, not mine.
+# ===========================================================================
+CANON.update({
+    "stoker_chibi": ("The Stoker (chibi)", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
+                     "firepit",
+                     "IT IS ONLY AS BIG AS THE FIRE - rebuilt in the game's own proportions",
+                     0.70, "The pit has been fed."),
+})
+
+
+def stoker_chibi():
+    """The Stoker in the game's register. The original was a seven-head man
+    with 0.105 m legs standing on a 0.94 m hip - beside a chibi knight he read
+    as a pipe-cleaner holding a rake. Same fight, same props, same read
+    (FIGURE, TALL FLUE, RAKE TO THE FLOOR), rebuilt on the Knight's measured
+    proportions: hip at 21% of height, head 55% across, shoulders 0.86 wide.
+
+    One decision that is NOT just proportion, and it is the Drillmaster's
+    fault 2 applied here: the original gave him GLOWING eyes. Pale lit discs
+    read as a mummy, and this creature already has the best lit face in the
+    set - the grate in its chest. So the eyes go dark and the fire stays where
+    the idea put it. There is now exactly one light on the body and it is the
+    thing you have to starve."""
+    P = Parts("stoker_chibi")
+    X = -0.10
+    H = 2.40
+    HIP = 0.50                                  # 21% of the body's height
+    # LEGS - stubs. The boot is nearly as wide as the leg is long.
+    for s in (-1, 1):
+        limb(P, [(X + s * 0.185, 0.04, HIP), (X + s * 0.205, 0.00, 0.24),
+                 (X + s * 0.215, -0.04, 0.11)], 0.155, 0.145)
+        P.add(L.box(0.32, 0.44, 0.14), 'dark', loc=(X + s * 0.215, -0.13, 0.07))
+    # THE TORSO - still a BOX, not a barrel: the grate has to be a flat lit
+    # face and not a glowing belly. That was the original's own reasoning and
+    # it survives the conversion; only the box's proportions change.
+    P.add(L.box(0.82, 0.48, 0.66), 'body', loc=(X - 0.04, -0.06, 0.86))
+    P.add(L.box(0.86, 0.52, 0.14), 'dark', loc=(X - 0.02, -0.06, 0.60))       # belt
+    P.add(aim(L.cone(0.40, 0.34, 0.12, 18), (X - 0.05, -0.08, 1.12),
+              (0.0, 0.0, 1.0)), 'dark')                                       # collar
+    for s in (-1, 1):                                                         # shoulders
+        P.add(L.sphere(0.24, 0.23, 0.20, 12, 8), 'body',
+              loc=(X - 0.04 + s * 0.42, -0.08, 1.14))
+    # THE GRATE - five bars over a lit face, set into the front of the box.
+    # PASS 2, FAULT 1: at 0.88 it sat on the WAIST of a chibi torso and read
+    # as a lantern being carried, and it buried the belt. A chibi torso is
+    # short, so the grate has to be smaller as well as higher or it is the
+    # whole front of the creature. Up to 0.98, down to 0.46 x 0.36, which
+    # leaves the belt at 0.60 clear below it and the collar clear above.
+    P.add(L.box(0.46, 0.06, 0.36), 'glow', loc=(X - 0.04, -0.31, 0.98))
+    for k in range(5):
+        P.add(L.box(0.036, 0.08, 0.38), 'dark', loc=(X - 0.22 + k * 0.094, -0.33, 0.98))
+    P.add(L.box(0.56, 0.09, 0.055), 'bone', loc=(X - 0.04, -0.33, 1.19))
+    # THE HEAD - 1.00 across, straight on the shoulders, no neck.
+    P.add(L.sphere(0.50, 0.48, 0.44, 18, 12), 'bone', loc=(X - 0.06, -0.12, 1.52))
+    # the heat cap: a BOWL, not a cone with a point on it - the Drillmaster's
+    # kettle-helm lesson. Rounded crown, no apex, sitting low over the brow.
+    P.add(L.sphere(0.49, 0.47, 0.30, 18, 12), 'dark', loc=(X - 0.06, -0.12, 1.70))
+    # eyes: head depth radius 0.48 at centre y -0.12, so the face is at -0.60.
+    # The ovals sit at -0.575 and stand proud of it, not floating in front.
+    for s in (-1, 1):
+        P.add(L.sphere(0.062, 0.042, 0.095, 12, 8), 'dark',
+              loc=(X - 0.06 + s * 0.160, -0.575, 1.47))
+    # ARMS - short, thick, mitts. Right hand on the rake, left down by the flue.
+    # PASS 2, FAULT 2: the right mitt sat at x 0.50 against a torso whose
+    # edge is at 0.27 and the lit grate beside it ate the contrast, so the
+    # rake appeared to start in mid-air. The arm goes OUT and FORWARD until
+    # the hand is clear of the body by a third of a metre, and the haft now
+    # starts inside the mitt instead of beside it.
+    limb(P, [(X + 0.34, -0.12, 1.10), (X + 0.68, -0.26, 1.22)], 0.155, 0.130)
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'body', loc=(X + 0.72, -0.27, 1.24))
+    # PASS 2, FAULT 3: the left mitt was 0.06 below the end of its own arm and
+    # read as a detached ball beside the flue. It sits ON the joint now.
+    limb(P, [(X - 0.46, -0.10, 1.08), (X - 0.63, -0.15, 0.86)], 0.155, 0.130)
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'body', loc=(X - 0.64, -0.16, 0.85))
+    # THE FLUE off the far shoulder - the tall vertical of the silhouette
+    FX = X - 0.64
+    limb(P, [(FX, 0.24, 1.08), (FX - 0.06, 0.26, 2.30)], 0.115, 0.095, 'dark')
+    for k in range(2):
+        P.add(aim(L.cone(0.148, 0.148, 0.038, 12), (FX - 0.02 * k, 0.25, 1.50 + k * 0.38),
+                  (-0.05, 0.0, 1.0)), 'bone')
+    P.add(aim(L.cone(0.125, 0.158, 0.11, 12), (FX - 0.06, 0.26, 2.28), (-0.05, 0.0, 1.0)), 'dark')
+    P.add(L.sphere(0.125, 0.125, 0.048, 12, 6), 'glow', loc=(FX - 0.07, 0.26, 2.37))
+    limb(P, [(FX + 0.16, 0.18, 1.18), (FX + 0.02, 0.24, 1.10)], 0.054, 0.044, 'bone')
+    # THE RAKE - 1.9 m of haft running down into the floor on his right
+    haft = [Vector((X + 0.70, -0.27, 1.24)), Vector((X + 1.08, -0.48, 0.88)),
+            Vector((X + 1.48, -0.66, 0.46)), Vector((X + 1.76, -0.78, 0.14))]
+    P.raw(L.tube(haft, [0.050, 0.044, 0.038, 0.036], 8), 'bone')
+    P.add(L.box(0.54, 0.11, 0.075), 'dark', loc=(X + 1.78, -0.80, 0.13), rot=(0.0, -0.34, 0.0))
+    for k in range(4):
+        P.raw(aim(L.cone(0.032, 0.0, 0.21, 6), (X + 1.62 + k * 0.145, -0.80, 0.11),
+                  (0.42, -0.10, -1.0)), 'dark')
+    # the fuel basket at his heels - the thing the party has to get to
+    P.raw(aim(L.cone(0.36, 0.42, 0.44, 14, cap=False), (X - 0.34, 0.56, 0.0),
+              (0.0, 0.08, 1.0)), 'bone')
+    for k in range(3):
+        P.add(L.box(0.11, 0.11, 0.36), 'dark', loc=(X - 0.38 + k * 0.11, 0.58, 0.48),
+              rot=(0.0, 0.18 - 0.16 * k, 0.0))
+    P.add(L.sphere(0.32, 0.28, 0.05, 14, 6), 'glow', loc=(X - 0.34, 0.56, 0.06))
+    return P
+
+
+BUILDERS.update({"stoker_chibi": stoker_chibi})

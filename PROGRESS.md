@@ -6309,3 +6309,43 @@ spent polling.
   still, both in boss_bar.gd which it does not own, neither invented as an item. Raised to Mr. E as NEEDS
   MR. E 6, a yes/no.
 - SYNCED docs/WORK_PLAN.md from main to all six lane branches, md5-verified.
+## B4 - docs/COMMANDS.md regenerated for !catchup; the engine gates are still locked out (chat bot, 2026-11-16 09:45-10:05 CT)
+THE RULING LANDED AND IT IS DONE. The 08:58 TAKE THIS NEXT answered B3's question: docs/COMMANDS.md IS
+this lane's - generated output that travels with data/commands.json, not a tools/ file being reached
+into - and it is to be regenerated and committed in the same breath as the data. Done, in this cycle.
+- docs/COMMANDS.md now carries 26 commands; the only change is ONE added row, the `!catchup` row,
+  289 bytes, in the place `order` puts it. 5188 -> 5477 bytes. Nothing else in the file moved.
+- THE GENERATOR COULD NOT BE RUN (no lock, see below), so it was EMULATED IN PYTHON AND THE
+  EMULATION WAS PROVEN FIRST: tools/_commands_doc.gd's own composition - header, the two cooldowns
+  through Godot's str(), the six-column row, aliases as "!a, !b", args with "|" -> "/", cost
+  defaulting to "free", the " (no hero needed)" suffix, example defaulting to "!"+k, "\n".join with
+  the trailing empty element - was reproduced and run over the data with `catchup` REMOVED. It came
+  back BYTE-IDENTICAL to the committed doc, all 5188 bytes, first differing index None. Only then
+  was the full 26-command file written. LF only, 26 table rows, no command missing its "!" entry -
+  which is the assertion _l14_test makes on this file.
+- SO WHEN A LANE NEXT HOLDS THE LOCK, `--script tools/_commands_doc.gd` SHOULD BE A NO-OP that
+  prints "COMMANDS_DOC wrote 26 commands" and leaves the file unchanged. If it does change the file,
+  the real generator wins and the emulation was wrong - say so and keep the generator's bytes.
+- Engine-free gates re-run on the MERGED tree (origin/main merged into chatbot clean, cc237eb):
+  json.load clean, 26 commands / 26 order entries covering each other exactly; drift BOTH ways off
+  the source with _l14_test's own 8-space match-arm regex - 61 arm words, 0 undocumented, 0
+  unanswered; 22 aliases routing; 0 tabs in chatcmd.gd. The one drift the test would have caught was
+  the doc itself (`catchup` missing), and that is what this cycle closed.
+- NO code change this cycle. scripts/chatcmd.gd and data/commands.json are untouched since 2f8145e.
+
+THE LOCK, FIFTH SLOT RUNNING. Held by another lane for the whole of this slot as well, and it was
+checked BY PROCESS, not by the file, eighteen times across twenty minutes:
+- RUNNING 09:31:30 (game build D91d + C-55 fishing, named finish ~10:00) with Godot 4960/27328 up
+  from 09:31:59. Dead from 09:53:14 through 09:58:20; a ~20 s process at 09:58:30; dead again
+  09:59-10:01; ALIVE AGAIN on all three checks at 10:02.
+- So this lock is NOT stale and was NOT cleared. The claim is live - short batteries with gaps, which
+  is what the protocol asks for - and the right read of a Godot process that keeps coming back is
+  that the lane is still working, not that its named finish has passed. The clear line was composed
+  and then NOT written, because the last check before writing it came back alive. Verify before you
+  act cuts both ways.
+- STILL OWED, AND IT IS NOW SHORTER BY ONE: --headless --quit-after 300 (parse), tools/_l14_test.gd
+  (L14_TEST OK - should now pass, the doc no longer drifts), tools/_twitch_parse.gd (TWITCH_PARSE
+  OK), _b2_ask.gd at the worktree root (B2_ASK OK, then delete it and the .b2_* logs), and
+  tools/_commands_doc.gd as the no-op confirmation above.
+- NEXT: those gates the moment the lock is free, then L56. L68, L69 and L70 are all written and none
+  is ticked.

@@ -101,6 +101,11 @@ THAT WERE HOLDING D94 OPEN at 04:56. RINGS ARE ACCEPTED AS THEY ARE. The legenda
 his, so the pool is no longer a decision - it is work, written up as C-61 below on the content lane.
 What is left of D94 is ONE buildable half: GLOVES MUST READ ON A BODY, because he says gloves can be
 seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves half and C-61 land.
+*** BOTH LANDED IN THE SAME HOUR AND D94 IS TICKED (supervisor, 2026-11-16 11:58 CT). *** The gloves
+half is ticked below on the numbers - re-shot by the method that produced them, 5/15 -> 3/15 front,
+TELLS APART on the side - and C-61 is ticked below with no reader disagreeing with the data anywhere.
+NOTHING IN D94 IS OPEN AND NOTHING IN IT WAITS ON MR. E. The faults that remain are named in place
+and are queued on nobody.
 
   [x] DONE AND TICKED - THE ITEM'S OWN KEY NOW REACHES THE GEOMETRY (both halves, 16 Nov)
       ART (origin/art f349e0e): showcase.sig(key, name) returns twelve dials off the two things
@@ -131,7 +136,28 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
       stands and is no longer a fault. Amulets came back 0.52% worst / 0.97% median once the chain
       landed and are not in question either. DO NOT reopen this. DO NOT re-measure rings.
 
-  [ ] STILL OPEN - GLOVES ONLY, AND IT IS A BUILDER'S JOB NOW (re-pointed 2026-11-16 05:58 CT)
+  [x] DONE AND TICKED - THE GLOVES READ AT STREAM DISTANCE, AND THE SILHOUETTE IS DERIVED, NOT
+      SCALED (both arms, 2026-11-16 11:58 CT; art 7c9b90f and game build laptop 88748e9, both merged
+      to main). MR. E'S OWN GATE FROM 10:24 IS MET: the method did not change, the row was RE-SHOT,
+      and the number MOVED on all three views.
+        front  PARTLY TOO SMALL 5/15 -> 3/15, worst pair 0.00% -> 0.16%, median 0.60% -> 1.08%
+        side   6/15 -> TELLS APART,          worst pair 0.00% -> 0.40%, median 0.78% -> 1.37%
+        back   6/15 -> 3/15,                 worst pair 0.00% -> 0.18%, median 0.53% -> 0.95%
+      ART (7c9b90f) added four dials to icons.glove_form off the item's own key and its cost - REACH
+      up the forearm (a vambrace is a forearm piece, a wrap is a wrist piece), LAMES as thin bands
+      capped at 4, KNUCK_KIND (ridge/dome/spikes/studs/none) and FPLATE - plus a COP at the elbow end
+      of a long reach and the wrap's loose tie. FLARE AND SHELL WERE LEFT UNTOUCHED: this is not a
+      bigger glove, and the 2.0-3.3x bell mouth that looked like dinner plates was not re-run. Two
+      passes, one change each, and both faults were found BY LOOKING. Blank check 12 files a view, 0
+      failures. GAME BUILD (88748e9) ports showcase.sig, icons.glove_form and acc_gloves into
+      scripts/gear.gd with the D94_G_* tables verbatim, so the icon and the thing on the hand are ONE
+      object - dial parity against python 0 mismatches, D94E OK, parse 0 errors, OFFFLOOR 0/2163,
+      TWITCH_PARSE OK, TOWNWALK PASS, delve 0 script errors.
+      WHAT IS STILL IMPERFECT, SAID PLAINLY RATHER THAN CROPPED: 3 of 15 pairs are still PARTLY TOO
+      SMALL on front and back, and the game build reports the top-cost flare reading as a bucket on a
+      body. Both are RECORDED (art's docs name the rest by name) and neither is queued - the gate Mr.
+      E wrote was re-measure and move the number, and it moved. WHETHER 3/15 IS READ ENOUGH FOR HIM
+      IS IN NEEDS MR. E, as a question, not as work for anyone.
       *** HALF DELIVERED AND NOT TICKED - IT IS BETTER AND IT STILL FAILS, AND THE REST IS A
       RULING, NOT A BUILD. *** (supervisor, 2026-11-16 07:28 CT; art eb518ce, merged to main.)
       The ART lane built the derivation and reported it honestly. icons.glove_form() is now the
@@ -284,7 +310,23 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
       scale bands rarity for every slot while boots cap at 420 and gloves lower still. Written up as
       C-61 directly below and given to the CONTENT lane.
 
-  [ ] C-61. RARITY IS BANDED PER SLOT, SO EVERY SLOT HAS A TOP BAND (content lane, data/items.json;
+  [x] C-61. RARITY IS BANDED PER SLOT, SO EVERY SLOT HAS A TOP BAND (content lane, data/items.json;
+      *** DONE AND TICKED - NO READER DISAGREES WITH THE DATA ANYWHERE (supervisor, 2026-11-16 11:58
+      CT; the last two arms landed in the same hour: hub ac1dd06 and art 7c9b90f, both merged to
+      main). *** The condition this item set for itself is met. THE HUB now reads the stored `rarity`
+      key and nothing else - no cost threshold, including the rarity frame and border colour - and it
+      says so in its own file so the next reader does not have to re-derive it. THE ICON BORDER
+      COLOUR in tools/art/icons.py now takes its METAL BAND from the stored rarity key instead of the
+      cost quartile, through icons.rarity_q: 99 of 254 accessories were in the wrong band and are not
+      any more. Those were the two arms named at 08:58; the game build had already MEASURED at 10:35
+      that none of its own readers used the global 441+ rule, and the content lane's data half and the
+      showcase arm were in before that. ONE HONEST REMAINDER, RECORDED AND NOT QUEUED ON ANYONE: very
+      rare and legendary still SHARE gold, because a fifth metal step would need gear.gd's mirror
+      moved in the same breath, and gear.gd's `orn` is a continuous cost-in-slot dial, not a band, so
+      2 of 17 legendaries (mender_wraps, armourer_gloves at 320/330) sit one metal step below the top.
+      Changing either alone would break the icon = worn match the whole of D94 is built on. It is an
+      ART + GAME call together and neither lane took it unilaterally, which was right. That is a
+      finding, NOT a new item, and nobody is queued on it.
       the GAME BUILD mirrors whatever reads rarity).
       *** DATA HALF AND ART ARM BOTH DELIVERED - NOT TICKED. THE GAME BUILD'S CODE MIRROR IS THE
       LAST ARM OPEN. *** (supervisor, 2026-11-16 06:58 and 08:58 CT; content 60ca2d2 and art
@@ -439,140 +481,120 @@ NEEDS MR. E rather than being quietly absorbed.
 
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 10:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 11:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
 down the file." THERE ARE SIX LANES: the CHAT BOT lane owns scripts/chatcmd.gd, data/commands.json
 AND docs/COMMANDS.md exclusively, on branch `chatbot`.
 
-LOCK STATE AS I WRITE, 10:58: docs/RUN_LOCK.txt's last line is IDLE 10:57:05 (HUD, fixed-chip
-capture done, Godot closed). THE ENGINE IS FREE. The windows above are now in force - read them
-before you claim.
+LOCK STATE AS I WRITE, 11:58: docs/RUN_LOCK.txt's last line is IDLE 11:58:10 (HUD, L36 test done,
+Godot closed) and no Godot process is alive. THE ENGINE IS FREE. THE WINDOWS WORKED THIS HOUR -
+four Godot lanes, six claims, every one named an expected finish, nobody overran and nobody was
+starved. That is the whole point of 11.3a, so keep claiming the same way.
 
-  GAME BUILD   ->  TWO THINGS, IN THIS ORDER, AND THE FIRST ONE IS MR. E'S OWN RULING FROM 10:24.
-                   (1) THE GLOVES ARM IN scripts/gear.gd. He ruled "okay so fix them": gloves must
-                   READ AT STREAM DISTANCE, and the fix is MORE DERIVED VARIATION, NOT A BIGGER
-                   GLOVE - cuff flare, plate count and segmentation, knuckle treatment, length up
-                   the forearm, all driven off the item's own key the way D94b drives everything
-                   else. Search the file for "MR. E HAS RULED, 2026-11-16 10:24" and read it. YOURS
-                   IS THE WORN PIECE; the ART lane has the icon arm and the proof row in the same
-                   breath, so the icon and the thing on the hand stay ONE object. Do not scale the
-                   glove up - a 2.0-3.3x bell mouth was already tried and backed out because it
-                   looked like dinner plates. It is a short code change, not a soak, so it fits
-                   inside your :07-:40 window with room for (2).
-                   (2) D91 - FINISH THE ALCOVE, FROM YOUR OWN CHECKPOINT. D91d is on origin/d91d-wip
-                   (46f6b85), NOT on laptop, and that was the right call: the item's gate is ZERO
-                   overlap frames and you measured 2, both at (33.37,-70.22) and (33.32,-71.21) in
-                   the ~1 m alcove the north store's front makes between the house, the bench and
-                   the yard crate. TAKE d91d-wip, do not rebuild it: the 93 crevice fillers and the
-                   door-emerge ring are real work and _d91d_pocket.gd is a keeper. Your own two ways
-                   forward are the right ones - move the store-front bench or the yard crate so the
-                   door opens onto open street, or make _settle_pair try the PERPENDICULAR for both
-                   bodies when the pair axis is stone both ways. Then ONE 20-minute town soak. Name
-                   your expected finish and release by :40. Also recorded and not forgotten:
-                   townwalk's stuck_on_route 7 is ALL ONE GUARD (Cort the Younger) on a bench at
-                   (-137.5,-15.1) with no filler within 9 m, so not the fillers - but D91c had 0.
-                   STILL YOURS AFTER D91 TICKS, NOT NOW: C-55's artifact enforcement (no shop stocks
-                   an artifact at any level, no trader carries one - that half has been open since
-                   15 Nov and is why C-55 cannot tick); the fourteen minibosses' bestiary.gd heights
+  GAME BUILD   ->  *** D94 IS TICKED AND YOUR ARM IS WHY (laptop 88748e9). *** gear.gd ports
+                   showcase.sig (Gear.d94_dials), icons.glove_form (Gear.glove_form, the D94_G_*
+                   tables verbatim) and showcase.acc_gloves, so the worn glove is the art lane's
+                   glove bit for bit: dial parity vs python 0 mismatches, D94E OK, parse 0 errors,
+                   OFFFLOOR 0/2163, TWITCH_PARSE OK, TOWNWALK PASS, delve 0 script errors. And you
+                   named the fault you could see - the top-cost flare reads as a bucket - instead of
+                   cropping it out. That is recorded for the art lane's tables, NOT queued on you.
+                   NEXT: D91 - FINISH THE ALCOVE, FROM YOUR OWN CHECKPOINT. D91d is on
+                   origin/d91d-wip (46f6b85), NOT on laptop, and that was the right call: the item's
+                   gate is ZERO overlap frames and you measured 2, both at (33.37,-70.22) and
+                   (33.32,-71.21) in the ~1 m alcove the north store's front makes between the
+                   house, the bench and the yard crate. TAKE d91d-wip, do not rebuild it - the 93
+                   crevice fillers and the door-emerge ring are real work and _d91d_pocket.gd is a
+                   keeper. Your own two ways forward are the right ones: move the store-front bench
+                   or the yard crate so the door opens onto open street, or make _settle_pair try
+                   the PERPENDICULAR for both bodies when the pair axis is stone both ways. Then ONE
+                   20-minute town soak. YOUR WINDOW IS :07-:40, no single claim over 25 minutes,
+                   hard release at :40, and the claim line names its expected finish.
+                   SECOND, AND ONLY IF D91 TICKS INSIDE YOUR WINDOW: C-55's ARTIFACT ENFORCEMENT -
+                   no shop stocks an artifact at any level, no trader carries one. That half has
+                   been open since 15 Nov and is now the ONLY thing holding C-55, because the hub
+                   closed its SHOP_RARITY arm this hour. Search the file for "C-55" and read it.
+                   STILL YOURS AFTER THAT, NOT NOW: the fourteen minibosses' bestiary.gd heights
                    (h = authored + 1.30 m, table in docs/art/MINIBOSS_FIT.md); Mr. E's
-                   wand_crystal.glb attach; and the miniboss FEED LINES waiting in
-                   data/lore_lines.json `miniboss_feed.by_key[<key>][arrive|act|broken|fall]`.
-  ART          ->  *** THE GAOLER IS IN - REGISTER CONVERSION 3 OF 14, MERGED AND RECORDED (art
-                   ee8aea7). *** Three passes again, and all three faults were found BY LOOKING: the
-                   hood point was a wizard's hat (the Drillmaster's mushroom in a third form), the
-                   stoop was simply ABSENT - 0.34 m of lean over an 0.81 m rise is nothing on a
-                   chibi and he stood bolt upright, which is the one thing the original forbids -
-                   and the hood's tail was a rabbit ear from the side. Dropping the apron and SAYING
-                   it was a register decision, with the reason, is exactly how this queue should
-                   read. Ratio 0.96 against a real 2.45 m KayKit Knight, ten faults still listed by
-                   name. THE FACEPLATE READING AS AN ANGRY CARTOON MASK IS YOUR OWN WORST FAULT AND
-                   IT IS YOURS TO CARRY INTO 4 OF 14.
-                   BUT TAKE THE GLOVES ARM FIRST - IT IS MR. E'S RULING FROM 10:24 AND IT OUTRANKS
-                   THE QUEUE. icons.glove_form is the single source for a glove's silhouette and it
-                   is yours: drive CUFF FLARE, PLATE COUNT AND SEGMENTATION, KNUCKLE TREATMENT and
-                   LENGTH UP THE FOREARM off the item's key so the pairs separate on SHAPE, not only
-                   on colour. Do NOT scale the glove up. KEEP d94proof's gloves row method EXACTLY
-                   as it is - one outfit, same framing, same measurement - and RE-SHOOT it, because
-                   the whole point is that the number is comparable: 5 of 15 PARTLY TOO SMALL,
-                   median 0.60/0.78/0.53%, and it has to actually move. The game build mirrors you
-                   in gear.gd in the same hour.
-                   SECOND, AND IT IS C-61's LAST ART ARM: the ICON BORDER COLOUR in
-                   tools/art/icons.py - if it bands an accessory by cost rather than by the stored
-                   `rarity` key, switch it. C-61 cannot tick while any reader disagrees with the
-                   data, and the game build has now measured that none of ITS readers do.
-                   THEN register conversion 4 of 14. Your skip proposal for the Scrapwright and the
+                   wand_crystal.glb attach; the miniboss FEED LINES waiting in data/lore_lines.json
+                   `miniboss_feed.by_key[<key>][arrive|act|broken|fall]`; and townwalk's
+                   stuck_on_route 7, which is ALL ONE GUARD (Cort the Younger) on a bench at
+                   (-137.5,-15.1) with no filler within 9 m - not the fillers, and D91c had 0.
+  ART          ->  *** THE GLOVES ARM IS IN AND D94 IS TICKED ON THE BACK OF IT (art 7c9b90f). ***
+                   You did exactly what the ruling said: FLARE AND SHELL UNTOUCHED, four new dials
+                   off the item's own key and cost - REACH up the forearm, LAMES (capped at 4),
+                   KNUCK_KIND and FPLATE, plus a COP at the elbow end and the wrap's loose tie - the
+                   method left alone, the row RE-SHOT, and the number moved on all three views
+                   (front 5/15 -> 3/15, worst 0.00 -> 0.16%; side 6/15 -> TELLS APART, worst 0.00 ->
+                   0.40%; back 6/15 -> 3/15). Two passes, one change each, and both faults found BY
+                   LOOKING - seven thick rings was a stack of pancakes and the icon's knuckle dome
+                   was an egg with sugar cubes. You also closed C-61's last art arm in the same
+                   breath: the icon's METAL BAND now comes from the stored rarity key, not the cost
+                   quartile, and 99 of 254 accessories were in the wrong band.
+                   RECORDED, NOT QUEUED: the game build says the top-cost flare reads as a bucket on
+                   a body, and your own docs name the faults that remain. If you are in those tables
+                   again anyway, they are there to read - but they do not outrank the queue.
+                   NEXT: REGISTER CONVERSION 4 OF 14. The Gaoler is in (3 of 14, ee8aea7) and THE
+                   FACEPLATE READING AS AN ANGRY CARTOON MASK IS YOUR OWN WORST FAULT AND IT IS
+                   YOURS TO CARRY INTO 4 OF 14. Your skip proposal for the Scrapwright and the
                    Bellman stands and is yours to act on - say so in the cycle so nobody re-derives
-                   it. Minibosses stay a PERMISSION for when this lane is dry, not a queue that
-                   outranks a written item.
-  CHAT BOT     ->  *** L69 AND L70 ARE TICKED. FIVE SLOTS OF STARVATION ENDED IN ONE SLOT. *** All
-                   five gates green on the first engine run since 06:03, and the two things that
-                   make it a good slot rather than a lucky one: B2_ASK failed FIRST and you proved
-                   the fault was DATA not the harness (`missed` carrying the too-greedy `hero+doing`,
-                   and the flattener leaving "wheres" whole), and the REAL generator came back a
-                   no-op over docs/COMMANDS.md, which means B4's python emulation was byte-correct
-                   and your own instruction for this slot needed no overriding. You also stopped
-                   rather than starting L56's soak at 10:52 because it would have run into the next
-                   lane's slot - THAT IS THE PROTOCOL WORKING, and it is now written above.
-                   NEXT: L56, THE DELVE-HEAVY SOAK. It needs the engine and your window is :45, which
-                   is short by design. So SPLIT IT: claim at :45 with a named expected finish, run
-                   what fits, CHECKPOINT-COMMIT, and carry the running total in PROGRESS.md the way
-                   the HUD lane is told to for long captures. Do not try to fit a long soak into a
-                   protected short window and do not run past :58 into the supervisor's slot.
-                   YOUR FOLDER-ACCESS ASK IS STILL IN NEEDS MR. E, five runs now. It is his alone;
-                   the Blender bridge is the workaround until he grants it.
-  CONTENT      ->  *** C-65 IS IN AND YOU DID THE PLAN'S JOB FOR IT AGAIN (content 95bc829, merged
-                   and recorded). *** You CHECKED C-61's data half against the file instead of
-                   trusting my note - all 254 accessories carry per-slot `rarity`, `_note_c61`
-                   present, every slot has a legendary, zero artifacts in any shop_stock/
-                   trader_cargo/caravan list - and then named the stalest item and WHY (backlog 2,
-                   last touched at C-57) before taking it. 129 lines: +40 epitaphs, +20 descend,
-                   +23 cleared, +46 barks, every pre-existing list an exact prefix, descend 0 or 2
-                   %s, cleared 0 or 1 %d, no dungeon floor count anywhere, no code wiring needed and
-                   you said so.
+                   it. You take the lock only to prove fit, which is short, so it fits in any gap.
+                   Minibosses stay a PERMISSION for when this lane is dry, not a queue.
+  CHAT BOT     ->  *** L56 RUN 1 IS IN AND IT IS THE BEST KIND OF HALF (chatbot 065c995). *** You
+                   split the item the way the row told you to, claimed 11:48:32 with a named finish,
+                   released at 11:52:44, and when trap_log read all zeros you READ THE CODE instead
+                   of guessing: adventurers.gd:248 gives every NPC party its OWN Delve, trap_log is
+                   per-instance, so polling town.get("delve") is blind to every trap and boss an NPC
+                   party meets. The instrument was wrong, not L45/L46, and you touched neither.
+                   NEXT: L56 RUN 2, THE REMAINDER. Enumerate every live Delve, sum trap_log and the
+                   boss counts PER INSTANCE, then go longer. L45 and L46 stay gated until it reads.
+                   Your window is :45 and it is PROTECTED - short gates, a few minutes, named finish,
+                   and split again rather than running into :52.
+                   SUPERVISOR'S RULING ON YOUR HARNESS, SO YOU DO NOT HAVE TO ASK AGAIN: KEEP
+                   _l56_soak.gd at the root of `chatbot` while L56 is split - you were right that
+                   tools/ is not yours, and a root-level harness is the same shape as _b2_ask.gd.
+                   RETIRE IT when L56 ticks, exactly as you retired _b2_ask.gd. It does not go to
+                   tools/ and it does not go to main.
+  CONTENT      ->  *** C-66 IS IN AND RECORDED (content 842d130 + 685a350). *** You named the
+                   stalest item and why before taking it - the Phase 2 words, untouched since C-60 -
+                   added second pools for ascent, errand, carry, sell, vault, stone and the upgrade
+                   poll (298 lines), and then caught your own CRLF blob and normalised it back to LF
+                   with the content unchanged. No code wiring needed and you said so.
                    NEXT: the NEXT-STALEST item in your standing backlog, chosen the same way - name
                    which one and why it is now the stalest - and stay inside your four files (items,
-                   lore_lines, bosses, potions). NOTHING IN FISHING WAS EVER YOURS and the game
-                   build has now closed it. NOT YOURS EITHER, so do not pick them up: the artifact
-                   enforcement in shop/trader readers is the game build's code half of C-55, and the
-                   hub's SHOP_RARITY whitelist is the hub's.
-  HUD          ->  *** L74 IS TICKED - L74_TEST OK at 100/125/150, dropped_protected=0, and you
-                   caught the lane chip running off the right edge at 150% by LOOKING at your own
-                   still and then fixed it in your own file. *** That is the second run in a row you
-                   have reported a fault from a render rather than cropping it out.
-                   NEXT: L36 - THE CHAT OVERLAY AND THE CENTRE CHRONICLE MUST NOT SHARE PIXELS. It
-                   is an existing written item from Mr. E's own 19:34 recording, not a new one, and I
-                   am assigning it to this lane on OWNERSHIP grounds (COORDINATION 11.4, ownership
-                   only, ID unchanged): it lives in hud_dock.gd, which is yours. Give the centre
-                   strip a reserved band the chat column is docked clear of, or move chat into a
-                   side lane. DONE is the item's own gate: a 1080p capture with chat busy AND the
-                   Chronicle running showing ZERO overlapping text.
-                   NOTE ON L40, WHICH IS NEXT AFTER IT AND IS ONLY PARTLY YOURS: its chat-column and
-                   alert-dock halves are hud_dock.gd and yours; its party-frames half is
-                   party_frames.gd and the GAME BUILD's. Name the halves when you get there rather
-                   than reaching into a file you do not own.
-                   YOUR WINDOW IS :52-:07 WITH A 15-MINUTE CAP AND A HARD RELEASE AT :07. A longer
-                   capture is SPLIT across firings with the running total in PROGRESS.md. Your 08:58
-                   named-finish claim is the model; keep doing that.
-  HUB          ->  *** YOUR STAND-DOWN ENDS. TWO REAL PIECES OF WORK, BOTH REMAINDERS OF EXISTING
-                   ITEMS IN YOUR OWN FILE - web/app.js - SO NEITHER IS A NEW ITEM UNDER THE FREEZE,
-                   AND BOTH WERE FOUND BY OTHER LANES WHO REPORTED THEM RATHER THAN REACHING IN. ***
-                   (1) C-55: SHOP_RARITY still whitelists "epic" and has no "very rare". The game
-                   build retired "epic" from every game-build script and data file this hour, so a
-                   very-rare shelf item or catch now gets NO rarity frame at all. Mind the CSS:
-                   "rar-very rare" is not one class - it needs a slug (e.g. very-rare), so check the
-                   stylesheet and the whitelist together, and check a catch as well as a shelf item.
-                   (2) C-61: the hub is NAMED in C-61 as a reader that bands an accessory by the
-                   GLOBAL 441+ cost threshold. It must read the stored `rarity` key instead - never
-                   a cost threshold - including whatever draws the rarity frame or border colour.
-                   The game build has MEASURED that the global rule disagrees with the data on 13 of
-                   254 accessories, so this is a live fault, not a tidy-up. C-61 ticks when no
-                   reader disagrees with the data anywhere, and you are one of the last two arms.
-                   Search the file for "C-55" and "C-61" and read both. Same security invariants as
-                   every tab: el()/textContent only, ICON_SET whitelist, CSP unchanged, hostile
-                   names as text. Still open and still useful if you finish early: re-verify the
-                   live-data version gate (KNOWN_V v4) lights the Shop and Satchel tabs by itself.
-                   DO NOT publish to gh-pages - that is MR. E'S CALL ALONE.
-
+                   lore_lines, bosses, potions). You need no lock, so your slot is never blocked.
+                   NOT YOURS, DO NOT PICK THEM UP: C-55's artifact enforcement is the game build's
+                   code half, and the hub's SHOP_RARITY arm is already done by the hub.
+  HUD          ->  *** L36 IS TICKED (hud-ui d782aa9) - L36_TEST OK at all 6 configs, and you found
+                   a REAL fault before fixing it: at full screen the Chronicle overlapped the chat
+                   box at 125% and 150%, 2 lines overprinted at 150%. The fix stayed inside your own
+                   files - HudDock.chat_rect reads the eye's rect read-only, FeedHUD lifts the
+                   full-screen Chronicle above the chat box - and nothing shrinks or is cut. Third
+                   run in a row you have reported a fault from your own still rather than cropping
+                   it. The "Hear ye!" bubble you flagged is a world-space label and is not yours. ***
+                   NEXT: L40 - HUD AND ALERTS MUST STAY OUT OF THE PANES AND OFF THE CHRONICLE. It is
+                   an existing written item from Mr. E's own recordings, not a new one, and I am
+                   assigning you the HALF YOU OWN, exactly as with L36: the CHAT COLUMN AND THE ALERT
+                   DOCK in hud_dock.gd - the "Joined The Court" follower/sub alert drawing across the
+                   Chronicle, and the chat column overprinting the Chronicle and the lower-left pane.
+                   The PARTY-FRAMES half (party_frames.gd docking inside a pane) is the game build's
+                   and is D41 - name it, do not reach into it. Your gate is the same shape that just
+                   worked: a 1080p capture with alerts firing and the Chronicle running, zero
+                   overlapping text, in the grid AND at full screen, at 100/125/150.
+                   YOUR WINDOW IS :52-:07, no single claim over 15 minutes, hard release at :07, and
+                   a long capture SPLITS across firings with the running total in PROGRESS.md.
+  HUB          ->  *** BOTH YOUR ITEMS LANDED IN ONE SLOT (hub ac1dd06) AND ONE OF THEM TICKED C-61.
+                   *** SHOP_RARITY is now a map to a page-owned slug, so the class can never be the
+                   two-word string "very rare" again; .rar-very-rare and .rar-artifact are in the
+                   stylesheet; epic is kept only as a legacy alias so an old snapshot still frames;
+                   and the mock's epic catch and cargo were updated so the test data matches the
+                   ladder. You also made the hub read the STORED rarity key and nothing else, which
+                   was the last hub arm of C-61 - and you wrote down that the hub bands nothing by
+                   cost, which is the sentence the next reader needs. Security invariants unchanged.
+                   NEXT: RE-VERIFY THE LIVE-DATA VERSION GATE BY ITSELF - KNOWN_V v4 must light the
+                   Shop and Satchel tabs with no hand-holding, on a real snapshot, and the stale-data
+                   notice must behave when the payload is older. Same invariants as every tab:
+                   el()/textContent only, ICON_SET whitelist, CSP unchanged, hostile names as text.
+                   You need no lock. DO NOT publish to gh-pages - that is MR. E'S CALL ALONE.
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
 REVERSE CHRONOLOGICAL order and "the first unchecked item in the file" is simply the most
@@ -724,6 +746,15 @@ brief, which still lists L61/L31/L36/L40 as its queue while Phase RC gives it L7
 D41 -> D48.
 
 - [ ] C-55. ONE RARITY LADDER FOR THE WHOLE GAME (content lane) - see the block below.
+      HUB ARM DELIVERED (supervisor, 2026-11-16 11:58 CT; hub ac1dd06, merged to main). SHOP_RARITY
+      was a Set that still whitelisted "epic" and had no "very rare", so a very-rare shelf item or
+      catch got NO rarity frame at all once the game build retired "epic". It is now a MAP from the
+      snapshot string to a PAGE-OWNED SLUG (very rare / very-rare / very_rare -> very-rare, epic kept
+      only as a legacy alias so an old snapshot still frames, artifact added), so the class can never
+      be the two-word string again; .rar-very-rare and .rar-artifact added to the stylesheet and the
+      mock's "epic" catch and cargo updated so the test data matches the ladder. Security invariants
+      unchanged. STILL NOT TICKED - the GAME BUILD's artifact enforcement (no shop stocks an artifact
+      at any level, no trader carries one) has been open since 15 Nov and is still what holds C-55.
 ### C-55 - ONE RARITY LADDER FOR THE WHOLE GAME (content lane, Mr. E Nov 15 17:56)
   DATA HALF DELIVERED AND VERIFIED (supervisor, 2026-11-15 23:10 CT; content d097b9e, merged to main).
   Landed as the content lane's cycle C-58, NOT as a commit called C-55 - the ruling's ID collided with the
@@ -4062,7 +4093,19 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
 - [x] L35. SUBSCRIBER LANE follows subscribers (Mr. E, Nov 12): the subs lane should always be showing a SUBSCRIBER's hero, not sit idle. Priority: a NEW subscriber (sub/resub/gift) takes the lane immediately for their purchased seconds (the existing paid queue and ordering stay exactly as they are - first payer gets their full time, then the next in line). When no paid sub moment is queued, the lane ROTATES through known subscribers' heroes, changing subject every 15 s. If no subscriber hero is available, fall back to ambient (never blank, per L32a). DONE: with no paid events, the subs lane cycles a different subscriber every 15 s; a new sub interrupts and holds their full time; the queue order is unchanged.
 - [x] D24. GRAPHICS - KILL THE GRAIN (Mr. E: "everything feels grainy... like someone sprinkled sand all over it", town worst). ROOT CAUSE FOUND: project.godot has an EMPTY [rendering] section - no TAA, no MSAA, no FXAA anywhere in the project. SSAO (town.gd:828) and volumetric fog (daylight.gd:58-62, 245) are BOTH temporally dithered in Godot 4; with no TAA to resolve them they show as fine static noise over the whole image, worst on cluttered town geometry, and the god-rays/glow add to it. FIX: enable TAA (rendering/anti_aliasing/quality/use_taa), add MSAA 3D 2x-4x for edges, then re-tune SSAO (radius/intensity/detail - or drop it if TAA alone looks right) and re-check volumetric fog density now that it resolves cleanly. Watch FPS: measure before/after. DONE: side-by-side town stills at 1080p before/after showing the grain gone, FPS still >= the D23 target, and Mr. E's eye on it. RESULT (desktop D-cycle 118): project.godot [rendering] now use_taa=true + msaa_3d=1 (2x); SSAO softened (intensity 1.3, detail 0.3, radius 1.8) in town.gd; volumetric fog resolves cleanly, left as-is. Grain gone in 1080p before/after; uncapped FPS at the resting stream cam ROSE 123.4->131.7 avg (min 81->90), >= 120 target. Stills in renders/cycles/20261112_d24. Awaiting Mr. E's eye.
 - [x] D25. TOWN REWORK - LAYOUT AND COLLISIONS (Mr. E: the farm, the streets, all of it needs revamping; "things are colliding, structures are overlapping"). NOTE: D18a reported "town placement already clean" yet the running build clearly shows overlaps - so D18a's probe is too narrow (it checked props, not buildings/farm/fence/road footprints). FIX: (1) widen the placement probe to test BUILDING and farm/fence/road footprints against each other, not just scatter props; (2) rework the town layout - real street topology that buildings face and do not block, a farm that reads as fields+barn+fences rather than scattered pieces, no structure intersecting another, nothing floating or sunk; (3) keep walkability - re-bake nav and keep _townwalk at 0 in_solid. DONE: the widened probe reports 0 overlapping footprints, a 1080p shot sheet of the town and farm from the stream camera, _townwalk PASS, and Mr. E's eye on it. RESULT (desktop D-cycle 120): tools/_d25_probe.gd tests footprints of houses, growth SPECIALS, valley structures AND field rects vs each other + roads (game's own _rect/_rect_on_road authority; plaza-fronting landmarks/shops/towers exempt). Town is geometrically CLEAN (BLD=0, FLD=0 at lvl 3+6); the one real defect was 1 house a later road was cut through, now removed by town.gd _final_road_sweep() after all roads are laid. D25_PROBE OK; _townwalk PASS (in_solid 0/18777); shot sheet renders/cycles/20261112_d25/. Farm reads as fields+cottages+fences+garden+hayricks.
-- [ ] L36. CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (seen in Mr. E's 19:34 recording): the in-game Twitch chat box draws over the L32b Chronicle strip - "A trade caravan is sighted on the west road." is overprinted by chat lines and both become unreadable. The chat and the Chronicle must not share pixels: give the centre strip its own reserved band that chat is docked clear of (HudDock), or move chat into a lane/side column. DONE: a 1080p capture with chat busy AND the Chronicle running shows zero overlapping text.
+- [x] L36. CHAT OVERLAY COLLIDES WITH THE CENTRE CHRONICLE (seen in Mr. E's 19:34 recording): the in-game Twitch chat box draws over the L32b Chronicle strip - "A trade caravan is sighted on the west road." is overprinted by chat lines and both become unreadable. The chat and the Chronicle must not share pixels: give the centre strip its own reserved band that chat is docked clear of (HudDock), or move chat into a lane/side column. DONE: a 1080p capture with chat busy AND the Chronicle running shows zero overlapping text.
+      DONE AND TICKED (supervisor, 2026-11-16 11:58 CT; hud-ui d782aa9, merged to main). ASSIGNED TO
+      THE HUD LANE ON OWNERSHIP GROUNDS and its gate is MET: tools/_l36_test.gd, windowed 1080p, chat
+      box up with text and 24 lines into the live Chronicle, at UI scale 100/125/150, in the 2x2 grid
+      AND at full screen - L36_TEST OK at all 6 configs, parse clean. The lane MEASURED a real fault
+      first (at full screen the Chronicle panel overlapped the chat box at 125% and 150%, 2 lines
+      overprinted at 150%) and fixed it in its own files only: HudDock.chat_rect(t) reads the eye's
+      chat box rect read-only (rts_camera.gd untouched) and FeedHUD._clear_of_chat() lifts the
+      full-screen Chronicle ABOVE the chat box when their columns would meet. Nothing shrinks and
+      nothing is cut. It LOOKED at its own stills and reported one thing that is NOT its file: the
+      "Hear ye!" town speech bubble is half-hidden behind the Chronicle at full screen 150% (a
+      world-space label). THE TWITCH CHAT COLUMN AND PARTY FRAMES DOCKING INTO A PANE WERE NEVER L36 -
+      they are D41, the game build's, and that is unchanged by this tick.
 - [x] L37. DUNGEON SCAR-VEINS ARE OVERDONE (seen in the 19:27 recording): the L28d glowing vein decals read as bright purple/cyan neon spaghetti looping across the floor rather than cracks in stone. Cut emission strength and coverage hard, break up the continuous curves, and keep them as a subtle tell. DONE: before/after floor shots; the veins read as glowing cracks, not neon piping.
       DONE L-cycle 138: L42 had already cut vein EMISSION (2.4 -> 1.1), which is why this was left
       unticked then - the item also wants COVERAGE cut, the continuous curves broken, and before/after
@@ -4191,6 +4234,14 @@ now gates by level. CONTENT WRITER: TAKE C4 NEXT.
       parses, every pre-existing key and list prefix byte-identical on a parsed-value compare, no
       duplicate line among a camp's alts, CRLF kept, nothing outside `events` touched. No code
       wiring needed - same keys and shapes, so the existing random pick widens by itself.
+
+      C-66 (content 842d130 + 685a350, merged and RECORDED by the supervisor 2026-11-16 11:58 CT) -
+      standing-backlog pick, and the lane again named WHICH item was stalest and WHY before taking it:
+      the Phase 2 words (C-60), untouched since. phase2_words_alt - second pools for ascent, errand,
+      carry, sell, vault, stone and the upgrade poll, 298 new lines in data/lore_lines.json. The lane
+      then caught its own fault without being asked: the blob had gone out CRLF, and 685a350
+      normalises lore_lines.json back to LF with the content unchanged. No code wiring needed - same
+      keys and shapes, so the existing random pick widens by itself. No floor count anywhere.
 
 - [x] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
       Owner: CONTENT WRITER (data/items.json ONLY). The town grows through twelve stages from Crossing to City
@@ -4620,6 +4671,21 @@ these; make the existing ones legible. D30 and L52 are reframed below accordingl
       worker's ownership list in COORDINATION 11.2 - read, not touched; it needs an owner.
 
 - [ ] L56. DELVE-HEAVY SOAK before L45 and L46 are trusted. The census could not confirm bosses or
+      *** RUN 1 OF A SPLIT DELIVERED - HALF DELIVERED / STILL OPEN, NOT TICKED (supervisor,
+      2026-11-16 11:58 CT; chatbot 065c995, merged to main). *** The chat bot took it inside its
+      protected :45 window, split it as the row told it to, claimed 11:48:32 with a named finish of
+      11:54 and wrote IDLE at 11:52:44. A 3-min bounded soak at 8x with raids held off and every
+      other delve dial at canon: parse clean, L56_SOAK OK, and ONE party held floors 1-4 descending
+      throughout - so the SUSTAINED DESCENT this item asked for is no longer in doubt (the census
+      managed ~1). WHAT IS STILL OPEN IS THE MEASUREMENT, and the lane found out why rather than
+      guessing: trap_log printed all zeros while the feed showed an NPC party spotting a fire grate.
+      town.gd:5350 makes the viewer party's delve and nulls it at 5408; adventurers.gd:248 makes its
+      OWN Delve.new() per NPC party; delve.gd:2609 trap_log is per-instance. So polling
+      town.get("delve") - which is what tools/_d28_census.gd does - is BLIND to every trap and boss
+      met by an NPC party. THE INSTRUMENT WAS WRONG, NOT L45/L46, and neither was touched. RUN 2 IS
+      THE REMAINDER: enumerate every live Delve, sum trap_log and boss counts per instance, then go
+      longer. L45 AND L46 STAY GATED until run 2 reads them. Harness _l56_soak.gd stays at the root
+      of `chatbot` only while this item is split - see the CHAT BOT row.
       trap damage: raids kept pulling parties back to town and only ~1 sustained descent happened,
       so the dungeon-side counters undercounted. Seed a party straight to the mouth (or raise
       CENSUS_MIN) and read Delve.trap_log directly. This GATES L45 and L46 - do not "fix" either
@@ -5816,8 +5882,18 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
 ================================================================================
-## NEEDS MR. E (supervisor, updated 2026-11-16 10:58 CT). SIX things, all short - the gloves
-## decision is ANSWERED and is now work on two lanes.
+## NEEDS MR. E (supervisor, updated 2026-11-16 11:58 CT). SIX things, all short - the gloves
+## ruling is BUILT on both arms and D94 is ticked; what is left of it is one question in 5a.
+  5a. THE GLOVES ARE BUILT AND D94 IS TICKED - ONE QUESTION, AND IT IS A LOOK, NOT WORK. You said
+     "okay so fix them" at 10:24 and both lanes did it the way you ruled: derived variation off the
+     item's own key, not a bigger glove, flare and shell untouched, the proof row re-shot by the
+     same method. The number moved - front 5 of 15 PARTLY TOO SMALL down to 3 of 15 (worst pair
+     0.00% -> 0.16%), the SIDE row now TELLS APART outright, back 6 of 15 down to 3. Pictures:
+     renders/art/d94g3_front/_row_gloves.png, _side and _back beside it. THE QUESTION: three pairs
+     out of fifteen still read small from the front and back. Your gate was re-measure and move the
+     number and it moved, so I have ticked it rather than sitting on it - but if 3 of 15 is still
+     not read enough on stream, say so and it is another derived pass on the same two arms. Say
+     nothing and it stays ticked. Nobody is waiting on this either way.
   5. ANSWERED AND CLOSED, 2026-11-16 10:24 - NOT A QUESTION ANY MORE. You said "okay so fix them",
      so the three ways forward are withdrawn and the gloves are a BUILD on two lanes: ART owns
      icons.glove_form and the proof row, GAME BUILD owns gear.gd's glove branch, and the fix is

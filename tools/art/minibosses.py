@@ -1354,11 +1354,16 @@ def stoker_chibi():
     for s in (-1, 1):                                                         # shoulders
         P.add(L.sphere(0.24, 0.23, 0.20, 12, 8), 'body',
               loc=(X - 0.04 + s * 0.42, -0.08, 1.14))
-    # THE GRATE - five bars over a lit face, set into the front of the box
-    P.add(L.box(0.52, 0.06, 0.44), 'glow', loc=(X - 0.04, -0.31, 0.88))
+    # THE GRATE - five bars over a lit face, set into the front of the box.
+    # PASS 2, FAULT 1: at 0.88 it sat on the WAIST of a chibi torso and read
+    # as a lantern being carried, and it buried the belt. A chibi torso is
+    # short, so the grate has to be smaller as well as higher or it is the
+    # whole front of the creature. Up to 0.98, down to 0.46 x 0.36, which
+    # leaves the belt at 0.60 clear below it and the collar clear above.
+    P.add(L.box(0.46, 0.06, 0.36), 'glow', loc=(X - 0.04, -0.31, 0.98))
     for k in range(5):
-        P.add(L.box(0.040, 0.08, 0.46), 'dark', loc=(X - 0.25 + k * 0.105, -0.33, 0.88))
-    P.add(L.box(0.62, 0.09, 0.06), 'bone', loc=(X - 0.04, -0.33, 1.13))
+        P.add(L.box(0.036, 0.08, 0.38), 'dark', loc=(X - 0.22 + k * 0.094, -0.33, 0.98))
+    P.add(L.box(0.56, 0.09, 0.055), 'bone', loc=(X - 0.04, -0.33, 1.19))
     # THE HEAD - 1.00 across, straight on the shoulders, no neck.
     P.add(L.sphere(0.50, 0.48, 0.44, 18, 12), 'bone', loc=(X - 0.06, -0.12, 1.52))
     # the heat cap: a BOWL, not a cone with a point on it - the Drillmaster's
@@ -1370,10 +1375,17 @@ def stoker_chibi():
         P.add(L.sphere(0.062, 0.042, 0.095, 12, 8), 'dark',
               loc=(X - 0.06 + s * 0.160, -0.575, 1.47))
     # ARMS - short, thick, mitts. Right hand on the rake, left down by the flue.
-    limb(P, [(X + 0.30, -0.10, 1.08), (X + 0.56, -0.18, 1.20)], 0.155, 0.130)
-    P.add(L.sphere(0.170, 0.165, 0.155, 10, 7), 'body', loc=(X + 0.60, -0.18, 1.22))
-    limb(P, [(X - 0.46, -0.10, 1.08), (X - 0.62, -0.14, 0.86)], 0.155, 0.130)
-    P.add(L.sphere(0.170, 0.165, 0.155, 10, 7), 'body', loc=(X - 0.64, -0.16, 0.80))
+    # PASS 2, FAULT 2: the right mitt sat at x 0.50 against a torso whose
+    # edge is at 0.27 and the lit grate beside it ate the contrast, so the
+    # rake appeared to start in mid-air. The arm goes OUT and FORWARD until
+    # the hand is clear of the body by a third of a metre, and the haft now
+    # starts inside the mitt instead of beside it.
+    limb(P, [(X + 0.34, -0.12, 1.10), (X + 0.68, -0.26, 1.22)], 0.155, 0.130)
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'body', loc=(X + 0.72, -0.27, 1.24))
+    # PASS 2, FAULT 3: the left mitt was 0.06 below the end of its own arm and
+    # read as a detached ball beside the flue. It sits ON the joint now.
+    limb(P, [(X - 0.46, -0.10, 1.08), (X - 0.63, -0.15, 0.86)], 0.155, 0.130)
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'body', loc=(X - 0.64, -0.16, 0.85))
     # THE FLUE off the far shoulder - the tall vertical of the silhouette
     FX = X - 0.64
     limb(P, [(FX, 0.24, 1.08), (FX - 0.06, 0.26, 2.30)], 0.115, 0.095, 'dark')
@@ -1384,7 +1396,7 @@ def stoker_chibi():
     P.add(L.sphere(0.125, 0.125, 0.048, 12, 6), 'glow', loc=(FX - 0.07, 0.26, 2.37))
     limb(P, [(FX + 0.16, 0.18, 1.18), (FX + 0.02, 0.24, 1.10)], 0.054, 0.044, 'bone')
     # THE RAKE - 1.9 m of haft running down into the floor on his right
-    haft = [Vector((X + 0.56, -0.20, 1.26)), Vector((X + 1.02, -0.44, 0.90)),
+    haft = [Vector((X + 0.70, -0.27, 1.24)), Vector((X + 1.08, -0.48, 0.88)),
             Vector((X + 1.48, -0.66, 0.46)), Vector((X + 1.76, -0.78, 0.14))]
     P.raw(L.tube(haft, [0.050, 0.044, 0.038, 0.036], 8), 'bone')
     P.add(L.box(0.54, 0.11, 0.075), 'dark', loc=(X + 1.78, -0.80, 0.13), rot=(0.0, -0.34, 0.0))

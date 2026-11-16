@@ -284,7 +284,8 @@ def build_cell(repo, cell, resx, resy, full_path, det_path):
     if cell["kind"] == "weapon":
         tier = cell["rec"]["tier"]
         mats = SC.materials(tier, SC.wear_for(tier), tag=tag)
-        wp = SC.weapon(cell["rec"]["name"], cell["rec"]["family"], tier, cell["key"])
+        wp = SC.weapon(cell["rec"]["name"], cell["rec"]["family"], tier,
+                       cell["key"], key=cell["key"])
         hs = anchors["handslot.r"]
         hs0 = Vector((hs.x - 0.135, hs.y - 0.115, hs.z))
         wp.items = [([v + (hs0 - Vector((0, 0, 0))) for v in verts], f, m)

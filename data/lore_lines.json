@@ -9306,5 +9306,290 @@
         "The ceiling is raised. The shop can stock finer now."
       ]
     }
+  },
+  "miniboss_feed": {
+    "_note": "C-62. Miniboss feed lines, one block per art-lane miniboss key (fourteen). Written under the permission that minibosses need no lore entry; these are feed lines only. Phases: arrive (set piece announced), act (the signature mechanic fires), broken (the weakness is hit and the mechanic stops), fall (death). Pick one line per event at random. {name} is a hero and may be absent from the choice of lines - substitute only where present. The game build wires them; nothing here changes a mechanic.",
+    "by_key": {
+      "drillmaster": {
+        "arrive": [
+          "Someone is beating the muster.",
+          "The gong is struck once. Somewhere a door opens.",
+          "A man in a dun coat stands in the barracks, mallet up."
+        ],
+        "act": [
+          "The gong again. The garrison falls in.",
+          "Boots on stone. More of them than before.",
+          "He calls the muster, and they answer."
+        ],
+        "broken": [
+          "The gong is cracked. Nobody falls in.",
+          "The mallet drops. The drill is over."
+        ],
+        "fall": [
+          "The Drillmaster is down. The barracks is quiet.",
+          "No more muster. The gong hangs still."
+        ]
+      },
+      "scrapwright": {
+        "arrive": [
+          "It is wearing the workshop.",
+          "Plate on plate on an old dark core. It is not done yet.",
+          "Something is bolted together out of everything on the floor."
+        ],
+        "act": [
+          "A plate comes off. It takes another from the floor.",
+          "It reaches down and mends itself.",
+          "The shell is thicker than it was."
+        ],
+        "broken": [
+          "The floor is bare. It has nothing left to wear.",
+          "Down to the core, and nothing to put on."
+        ],
+        "fall": [
+          "The Scrapwright comes apart where it stands.",
+          "Scrap, all of it. The workshop keeps the pieces."
+        ]
+      },
+      "gaoler": {
+        "arrive": [
+          "A chain is paying out in the dark.",
+          "Iron on stone. Something is checking the cells.",
+          "The Gaoler keeps the door and has not been relieved."
+        ],
+        "act": [
+          "The hook takes {name} out of the line.",
+          "{name} is dragged in on the chain.",
+          "One of the file is gone. The chain is short."
+        ],
+        "broken": [
+          "The hook is off its chain. Nobody else gets reeled in.",
+          "The chain goes slack."
+        ],
+        "fall": [
+          "The Gaoler is down. The keys are still warm.",
+          "The chain lies where it fell. The cells are open."
+        ]
+      },
+      "snuffer": {
+        "arrive": [
+          "The nearest lamp has gone out.",
+          "A tall shape moves between the lamps.",
+          "Soot, and dead wax, and no light on the far wall."
+        ],
+        "act": [
+          "Another lamp out. The room is smaller.",
+          "The Snuffer takes the next light.",
+          "Fewer lamps. Closer shadows."
+        ],
+        "broken": [
+          "The lamp stays lit. It has to take the next one.",
+          "Someone relights the wick. The Snuffer turns."
+        ],
+        "fall": [
+          "The Snuffer is down. One lamp is still burning.",
+          "Dark, then a spark. Someone has a flint."
+        ]
+      },
+      "sexton": {
+        "arrive": [
+          "A spade is working somewhere in the dark.",
+          "Lit niches on a man's back. Count them.",
+          "The Sexton carries his own graves."
+        ],
+        "act": [
+          "A niche goes dark. The dead stand up.",
+          "The spade turns earth that is not there.",
+          "One more risen. One fewer lit."
+        ],
+        "broken": [
+          "The niches are empty. There is nothing left to raise.",
+          "Every grave open and nothing in them."
+        ],
+        "fall": [
+          "The Sexton is down and stays down.",
+          "Back in the ground. He knows the way."
+        ]
+      },
+      "porter": {
+        "arrive": [
+          "A bar has dropped behind you.",
+          "The leaf is across the door. The Porter is in front of it.",
+          "Oak and greased iron, and a man under them."
+        ],
+        "act": [
+          "The drawbar goes into the brackets.",
+          "Nobody leaves. Nobody comes in.",
+          "The door is shut. Fight the one in front."
+        ],
+        "broken": [
+          "The bar is knocked out. The door is only a door.",
+          "The leaf is off its hinge. The way is open."
+        ],
+        "fall": [
+          "The Porter is down. The bar comes up.",
+          "He kept the door. It is open now."
+        ]
+      },
+      "tallyman": {
+        "arrive": [
+          "Something is counting what you carry.",
+          "A frame hung with other people's kit.",
+          "The Tallyman keeps a very good ledger."
+        ],
+        "act": [
+          "{name}'s kit comes off and goes on the frame.",
+          "It takes one thing and steps back toward the exit.",
+          "Another piece strung up. It is not done."
+        ],
+        "broken": [
+          "The frame breaks. Everything it took hits the floor.",
+          "It lets go of the lot to save itself."
+        ],
+        "fall": [
+          "The Tallyman is down. Take your things back.",
+          "What it wore is on the floor. Count it twice."
+        ]
+      },
+      "cook": {
+        "arrive": [
+          "The pot is on.",
+          "Steam, and the smell of a meal nobody asked for.",
+          "A yoke, a black pot, and a man who has been cooking a long time."
+        ],
+        "act": [
+          "The pot rolls. The room is back on its feet.",
+          "Another ladle, and they are whole again.",
+          "The pack eats first."
+        ],
+        "broken": [
+          "The pot is spilled. The pack is only a pack.",
+          "Nothing hot left in it. Nothing left to heal."
+        ],
+        "fall": [
+          "The Cook is down. The fire goes out.",
+          "Supper is cancelled."
+        ]
+      },
+      "sluicekeeper": {
+        "arrive": [
+          "The water is coming up.",
+          "A wheel turning somewhere, and the floor wet.",
+          "The Sluicekeeper winds the gate a notch at a time."
+        ],
+        "act": [
+          "Another notch. Water to the ankle.",
+          "The gate gives a little more. Knee-deep.",
+          "Higher. The wheel is still turning."
+        ],
+        "broken": [
+          "The wheel is jammed. The water holds where it is.",
+          "The gate drops shut. The floor begins to drain."
+        ],
+        "fall": [
+          "The Sluicekeeper is down. The water goes out slow.",
+          "The wheel stops. So does the flood."
+        ]
+      },
+      "sower": {
+        "arrive": [
+          "Something is broadcasting seed.",
+          "Wherever it walks, the ground is a little greener.",
+          "The Sower comes across the grass with a full hand."
+        ],
+        "act": [
+          "What it casts stands up as thorn.",
+          "The ground has teeth where it was bare.",
+          "Thorn where {name} was about to step."
+        ],
+        "broken": [
+          "The seed bag is empty. The thorn stops coming.",
+          "Out of seed. It has only its hands."
+        ],
+        "fall": [
+          "The Sower is down. The thorn will not last.",
+          "Nothing more planted. The field starts to go back."
+        ]
+      },
+      "snarer": {
+        "arrive": [
+          "The lines were here before you.",
+          "Cord at ankle height, set a long time ago.",
+          "Nothing in the wood is where it looks."
+        ],
+        "act": [
+          "It herds the party onto its own lines.",
+          "A snare takes {name} at the ankle.",
+          "The room closes. Every step was chosen for you."
+        ],
+        "broken": [
+          "The lines are cut. The room is only a room.",
+          "Cord in pieces. The Snarer has nowhere to drive you."
+        ],
+        "fall": [
+          "The Snarer is down, caught in its own set.",
+          "Pull the lines up before anyone else walks them."
+        ]
+      },
+      "stoker": {
+        "arrive": [
+          "The pit has been fed.",
+          "Heat, and a shape as big as the fire it keeps.",
+          "The Stoker has not let the pit go out."
+        ],
+        "act": [
+          "Another log in. It stands taller.",
+          "The fire climbs, and so does he.",
+          "Fed again. Hotter."
+        ],
+        "broken": [
+          "The fuel is scattered. It is smaller already.",
+          "Starve the pit. It is the same size as the fire, and the fire is going."
+        ],
+        "fall": [
+          "The Stoker is down. The pit goes to ash.",
+          "Cold. First time in a long while."
+        ]
+      },
+      "bellman": {
+        "arrive": [
+          "A bell, and not where you thought.",
+          "Fog, and a note from the wrong side of the room.",
+          "The Bellman is in the fog, and the sound is somewhere else."
+        ],
+        "act": [
+          "The bell rings behind you. It is in front.",
+          "A stroke from the left. He is on the right.",
+          "The sound is a lie. Do not go toward it."
+        ],
+        "broken": [
+          "The bell is cracked. It is only a man now.",
+          "One flat note, and it comes from where he stands."
+        ],
+        "fall": [
+          "The Bellman is down. The last note rings out and stops.",
+          "Silence in the fog. The right kind."
+        ]
+      },
+      "boiler": {
+        "arrive": [
+          "Something is pouring.",
+          "Sugar and heat, and the smell of a kitchen with no cook.",
+          "The Boiler stirs, and the floor is stickier than it was."
+        ],
+        "act": [
+          "It pours. The floor goes hard round {name}'s feet.",
+          "Set fast. Nobody is going anywhere.",
+          "Another pour, another stuck boot."
+        ],
+        "broken": [
+          "The pan is empty. Nothing left to set.",
+          "The pour stops. The floor cracks free."
+        ],
+        "fall": [
+          "The Boiler is down. The floor stays hard for a while.",
+          "Cooled and done. Chip your boots loose."
+        ]
+      }
+    }
   }
 }

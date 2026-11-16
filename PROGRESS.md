@@ -6151,3 +6151,9 @@ Two files touched and no others: scripts/chatcmd.gd and data/commands.json.
   assets/kit/materials/MI_*.tres pointing at assets/kit/textures/T_*_BaseColor.png that are not in the repo.
   Nothing to do with chat; flagged for whoever owns assets/kit.
 - NEXT: L69 (the bot carries the chat - plain questions, not just commands), then L70 (!catchup), then L56.
+
+## C-62 (2026-11-16) - standing backlog item 5: miniboss feed lines (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT the fishing "epic" -> "very rare" conversion in data/fishing.json. NOT DONE: fishing.json is not one of the four files this lane owns, and the standing rule is edit only items, lore_lines, bosses, potions. Mr. E or the supervisor must either grant fishing.json to content explicitly or hand it to the game build, which already owes angler.gd/fishing.gd/economy.gd. Counts as found: "epic" appears 4 times in fishing.json (ladder array plus three catches).
+- Took backlog item 5 instead. New top-level `miniboss_feed` in data/lore_lines.json: all fourteen art-lane minibosses (drillmaster, scrapwright, gaoler, snuffer, sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker, bellman, boiler), each with arrive / act / broken / fall lines, 140 lines total, plain register, plus a `_note`. {name} marks a hero where used.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical, key order and CRLF preserved; only addition is `miniboss_feed`.
+- CODE WIRING: the game build reads miniboss_feed.by_key[<miniboss key>][arrive|act|broken|fall] and posts one at random to the feed on set-piece spawn, each mechanic firing, the weakness being broken, and death. Lines containing {name} need a hero substituted. Also still owed by code: "epic" -> "very rare" in fishing.json, angler.gd, fishing.gd, economy.gd and chatcmd.gd's order array.

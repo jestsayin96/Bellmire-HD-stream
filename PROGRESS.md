@@ -6275,3 +6275,11 @@ spent polling.
 - LOOKED AT: renders/cycles/20261116_l73long/l73_raid_100_a.png and l73_death_620_a.png. Raid frame: boss title card AND the NOW FIGHTING banner both show the same name at once (duplicate, boss_bar/other file - not mine to edit) and the boss card covers the DIRECTOR pane label; a Chronicle tooltip sits on the scroll. Death frame reads quiet and wide as intended.
 - Did NOT launch Godot: RUN_LOCK shows game build RUNNING 09:31 (finish ~10:00), no Godot process alive at 09:54 but under 45 min and inside its named window.
 - NEXT: L74 (feed/theme at 100/125/150% during a raid) on the next free engine slot. Mr. E decision: none.
+
+## U36 - L74 the feed and the theme under raid load (HUD, 2026-11-16 ~10:57 CT, spotlight.gd + tools/_l74_test.gd)
+- TAKE THIS NEXT gave HUD: L74. Lock read by process (none alive) and file (IDLE 10:52); claimed 10:54 with expected finish 11:05, relaunched 10:55:53 (finish 11:03), released 10:57:05.
+- tools/_l74_test.gd WINDOWED 1080p: 36 raid lines (routine chatter mixed with crit/town lines) in 3 s into the LIVE feed at UI scale 100/125/150. L74_TEST OK at all three: no ellipsis, stack fits the vellum (box 220/225, 151/216, 187/208 px), dropped_protected=0 (routine chores dropped, raid/fall/granary lines kept; 112 seen, 63 dropped, 28 merged, min admit gap 0.80 s).
+- FOUND by looking at l74_after_150.png: the "CHANNEL POINTS . ambient" lane chip ran off the right edge of the screen. spotlight.gd (kind chip): its font now steps down until the whole chip fits the room beside the Chronicle box. l74_fix_150.png: fits, nothing overlaps. (spotlight.gd is HUD-owned.)
+- LOOKED: renders/cycles/l74/l74_after_100.png, l74_after_150.png (before), l74_fix_150.png (after). At 100% the first Chronicle line sits tight against the top of the vellum (readable, not clipped) - left alone.
+- NOT DONE: the test's synthetic "(32)" suffix defeats the feed's dedupe so two near-identical lines show with x2/x3; that is the test, not the feed. At 150% only 2 whole entries fit during a flood - by design (L71 fewer-whole-entries rule).
+- Mr. E decision: none.

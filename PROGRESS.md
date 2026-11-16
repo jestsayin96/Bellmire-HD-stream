@@ -6800,6 +6800,65 @@ and PROGRESS.md are touched.
 - LOOKED: renders/cycles/l40d/l40d_grid_100.png (card over DIRECTOR plate, visible), plus the five other stills exist. Side observation, not a fault gated here: the Chronicle's top line sits flush under the scroll rail at 100% grid.
 - Files: tools/_l40_delve_test.gd, PROGRESS.md, renders/cycles/l40d/*. Logs _l40d_*.log.
 
+## B11 - THE AWAY-GUARD IS REAL, AND THE RULED DROP IS DEFERRED ON EVIDENCE (chat bot, 2026-11-16 16:45-17:05 CT)
+Lock: file read IDLE 16:17:44 (game build), no Godot alive. Claimed 16:45:00-06:00, refreshed
+16:50:30 for the battery and 16:57:40 for the re-run, released 17:04:30. Claim-first-read-second,
+as ruled - the claim went in before the plan was read.
+
+### 1. !delve DOES NEED THE GUARD. THE GATE IS WHAT PROVED IT, NOT A READING.
+TAKE THIS NEXT asked me to decide with evidence whether !delve needs a guard against `away`, and
+said a reasoned no would be a delivery. I expected to deliver that no. I read the game build's
+tools/_d41_queue.gd and R's town.gd, saw that _on_delve appends to chat.delve_queue at the source
+and that the queue is erased at delve.ended beside away - so the queue holds a name for the whole
+trip and a second !delve is already refused. That is a clean reasoned no, and I wrote it.
+THE GATE FAILED IT. B11_MUSTER came back bad=7: the errand hero's queue read back `[]` while her
+away-state was set. The reason is that I had read the WRONG BRANCH. D41's source-queueing is on
+`laptop` (b0ce9d8) and is NOT on origin/main, which is what this branch builds against:
+  R   (laptop) scripts/town.gd:5427  if not chat.delve_queue.has(uid): chat.delve_queue.append(uid)
+  W6  (main)   scripts/town.gd       no such append - _on_delve sets away and queues NOTHING
+So on the live build the queue does NOT cover the errand path, and without a guard a
+point-redeemed errand hero can !delve her way into a SECOND party slot. The gate prints the old
+behaviour in the log: "ErrandFan sets out for the dungeon mouth. (2 in the party)" while she was
+already on the road. The reasoned no was wrong, and the only reason I am not shipping it is that
+the gate ran before I believed myself.
+WHAT B9 WOULD NOT GUESS AT IS NOW SETTLED, AND IT IS WHY THE GUARD IS SAFE. B9 refused this guard
+because a wrong one locks viewers out of !delve on stream. `away` has exactly THREE writers and
+ONE eraser, all of them the delve lifecycle:
+  town.gd  _on_delve     "on the road to the scar"        / "waiting at the mouth of the scar"
+  town.gd  _begin_delve  "below, in the scar"
+  town.gd  delve.ended   away.erase(uid) beside delve_queue.erase(uid)
+No errand, shop, craft or festival path sets it. A hero with an away-state is on a delve and
+nothing else, so guarding on it cannot cost anybody a descent - and the gate asserts that
+directly: a hero with no away-state still descends.
+  if user_id in delve_queue or away.has(user_id):
+and the reply now reads the away-state for its wording. The old line told a hero who was BELOW
+that she was "already waiting at the dungeon mouth". She is now told "ErrandFan is below, in the
+scar." - the same shape line 124 already uses for !fish and !forge, so the voice is the file's own.
+
+### 2. THE UNION READ: RULED DROP, DEFERRED, NOT SKIPPED.
+The ruling was DROP IT, and it is right in principle - two places reconciling one truth is the
+drift D41 closed. I dropped it, and then the same measurement above showed its premise is not on
+this branch: with _on_delve queueing nothing, !muster counted 0 of 1 errand heroes with the union
+gone. Dropping it today would blind !muster to every point-redeemed errand on the live build,
+which is the exact fault B9 opened the union to fix. SO I RESTORED IT AND LEFT THE REASON IN THE
+CODE. This is a deferral with a trigger, not a refusal: the gate measures the source-queueing every
+run and prints B11_SOURCE_QUEUEING YES/NO. It reads NO today. The run it reads YES, it prints the
+action beside it, and that is the run the union comes out. Nobody has to remember.
+
+### GATES - ALL SIX GREEN (the re-run; the first battery is the one that caught the fault)
+  parse --quit-after 300   0 errors
+  L14_TEST OK              the commands doc does not drift, proven both ways
+  TWITCH_PARSE OK
+  D704_ECHO OK             356 checks, the echo door still declaws every chat line
+  B11_MUSTER OK  bad=0     B11_SOURCE_QUEUEING NO
+  COMMANDS_DOC             wrote 27 commands, doc left UNMODIFIED (no-op confirmation)
+data/commands.json and docs/COMMANDS.md are BYTE-UNCHANGED this cycle - no command was added,
+renamed or re-worded, so there is no drift to check in either direction and the generator agrees.
+NOTHING FOR THE GAME BUILD LANE in twitch_eventsub.gd: the contract is untouched, twitch_reply
+still carries (user_login, text) with no @name and no rate limiting.
+NO LIVE TWITCH TEST THIS SLOT. No chat line posted, no redemption, no cheer, 0 bits, no reward
+created, deleted, renamed or re-priced, nothing as his personal account. The work was engine-only.
+
 ## B10 - W-LIVE'S LIVE HALF IS DONE: BELLMIREBRO SPOKE IN HIS CHAT, FROM THE ENGINE (chat bot, 2026-11-16 15:45-15:55 CT)
 TAKE THIS NEXT, verbatim: "the ENGINE already holds the bot's chat connection, so the post comes
 from the engine, not from a browser pane. ONE bellmirebro line in jestsayin96's chat, with the

@@ -2,6 +2,29 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D91e the alcove settle (crowd.gd full perpendicular), 2026-11-16 12:07-12:33 CT (game build) - STILL OFF laptop; checkpoint on d91d-wip, town soak 1 frame short
+TAKE THIS NEXT gave GAME BUILD: D91 - finish the alcove from d91d-wip (46f6b85). Took it, did not rebuild it.
+Lock: claimed 12:10 (expected finish 12:35), one parse + one 20-min soak with the four gates run alongside.
+- FOUND A REAL BUG in Crowd._settle_pair (scripts/crowd.gd): every sideways fallback (one body stone-locked,
+  or BOTH stone-locked on the pair axis) stepped the body sideways by `over`. A perpendicular step of `over`
+  only grows the gap to sqrt(L^2 + over^2), so it never cleared the pair - that IS the ~1 cm residual where
+  both bodies have stone behind them. Now _perp() steps sqrt(need^2 - L^2) (+2 mm), and the both-locked branch
+  tries a, b, each the other way, then both opposite by half. Backup scripts/crowd.gd.bak_d91e.
+- RESULT, 20-min soak (renders/cycles/d91e/town_soak20.log): 94,041 frames, up to 224 bodies, overlap frames
+  1 (was 2), but worst 3.6 cm (was 1.06) - D91_TOWN FAIL. SAME ALCOVE AGAIN: frame 51945, a FIVE-body crush
+  (trader, peasant x2, crier, child, all leg0 walkers) at (33.44,-71.14) / (33.35,-71.65). A pair settle
+  cannot clear five bodies wedged in a pocket one body wide; the fix moves the residual, not the pocket.
+- CONCLUSION: the alcove has to be opened AT THE SOURCE - the pocket in front of the north store
+  (house (32.5,-64.1), door (32.47,-69.38)) between the house front, the Bench at (30.9,-70.5) and the store
+  yard's FarmCrate_Apple (town.gd "store": _yard("FarmCrate_Apple", y, side, f, -1.0, -3.0)). NEXT RUN: move
+  that crate (and the bench if it is the store's neighbour's door bit) so the door opens onto open street,
+  keep the crowd.gd fix (it is correct on its own), then ONE 20-min soak.
+- GATES (all green with d91d-wip + crowd fix): parse 0 errors; OFFFLOOR 0 of 2031; TWITCH_PARSE OK; TOWNWALK
+  in_solid 0/15693, raid 0/5963, PASS, and stuck_on_route=0 (Cort's bench 7 from D91d did not recur); delve
+  test 0 SCRIPT ERROR (Grubmother slain floor 5).
+- NO RENDER: nothing visible moved. Not looked at in a picture - said so rather than claimed.
+- Pushed as a CHECKPOINT to origin/d91d-wip (fast-forward on 46f6b85). laptop carries only this record.
+
 ## D-cycle - D91d the north-houses pocket + C-55 fishing rarity, 2026-11-16 ~10:35 CT (game build) - C-55 ON laptop; D91d on side branch d91d-wip, town soak still 1-2 frames short
 TAKE THIS NEXT gave GAME BUILD: D91 (town half + 20-min re-soak), then C-61's code mirror, then C-55's fishing arm.
 The lock was HUD's until 09:31 (its 08:58 claim named ~09:30; no Godot alive at 09:29 and 09:31). Engine

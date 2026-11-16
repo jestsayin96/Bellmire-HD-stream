@@ -2,15 +2,22 @@
 
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-15 22:22 CT. If you own a lane, your next item is named here. Search the file
+Updated 2026-11-15 23:10 CT. If you own a lane, your next item is named here. Search the file
 for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."
 
   GAME BUILD   ->  D88   (the portcullis), then D83 (the traps), then D91 stages 2-4
-  HUD          ->  L72   (the lord camera pull-back), then L73, then L74
-  HUB          ->  H31   (the Season tab)
-  CONTENT      ->  C-55  (the rarity ladder) if not finished, else the words Phase 2 needs
-  ART          ->  more minibosses (standing permission). Themes with none yet: crypt, keep,
-                   treasury, mess, and the biome themes (wood, grassland, flooded).
+  HUD          ->  L73   (the director's shot language), then L74
+  HUB          ->  STAND DOWN. H29, H30 and H31 are all shipped, merged and ticked, and the
+                   freeze forbids inventing more. Nothing is queued for this lane - do not
+                   reach into another lane's files.
+  CONTENT      ->  C2 (standing, open by design), scoped to THE WORDS PHASE 2 NEEDS: the ascent
+                   (D77), the errand (D78), carry weight (D80), selling and the guild vault
+                   (D81), and the upgrade poll (D66). The C-55 rarity ladder is delivered - it
+                   landed as the lane's cycle C-58, see the C-55 block.
+  ART          ->  more minibosses (standing permission). Shipped: barracks (Drillmaster),
+                   workshop (Scrapwright), prison (Gaoler), shrine (Snuffer). Themes with none
+                   yet: crypt, keep, treasury, mess, and the biome themes (wood, grassland,
+                   flooded).
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan is now in
@@ -26,9 +33,10 @@ PHASE ORDER IS UNCHANGED AND STILL BINDING: Phase 1 stop it looking broken -> Ph
 loop real -> Phase 3 the authored town -> Phase 4 the art -> Phase 5 the Dais. The full
 breakdown is in the PHASE RC section further down. This block is just the pointer.
 
-PHASE 1 IS NOT FINISHED. Built on branches but NOT YET MERGED OR TICKED: L71, D84, D90, D91a,
-T5 (Phase 2's headline, done early - that is fine, it was the largest gap). STILL OPEN AND NEXT:
-D88, D83, and D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party in file).
+PHASE 1 IS NOT FINISHED, BUT THE BACKLOG OF UNMERGED WORK IS GONE. All five lanes were merged
+to main on 2026-11-15 at 23:10 CT and L71, L72, D84, D90, D91a and T5 are now TICKED. STILL OPEN
+AND NEXT: D88, D83, and D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party
+in file). Those three are the whole of Phase 1's remainder.
 Nothing in this plan is DONE until the supervisor ticks its checkbox. A commit on a branch is
 not a tick.
 ================================================================================
@@ -41,7 +49,14 @@ leaderboard_panel.gd, ui_theme.gd. D41/D48/D61 stay with GAME BUILD where they a
 The HUD worker was right to stand down rather than reach into files it does not own. Its real
 queue is below, all three inside its own seven files.
 
-- [ ] L72. THE CAMERA PULLS BACK FOR A GREATER LORD (HUD, auto_director.gd) - see the block below.
+- [x] L72. THE CAMERA PULLS BACK FOR A GREATER LORD (HUD, auto_director.gd) - see the block below.
+      RESULT (ticked 2026-11-15 23:10 CT by the supervisor; hud-ui 4b2b61d, merged to main): the shot
+      frames by MEASURED mesh bounds and by the LARGER of height and width, so the 8.3 m-wide room-locked
+      Grubmother fits as well as the 10 m Mourncoil; the reveal is an ease-out move, not a cut; the eye is
+      clamped out of geometry. _l72_test.gd walks all eight lords and measures every subject point against
+      the real frame plus a cam_in_solid probe: L72_TEST DONE fails=0. CAVEAT, not a reason to reopen: the
+      test writes a frame per lord but only the Mourncoil reveal sheet and a three-pane sheet were committed
+      (renders/cycles/20261116_l72/), so Mr. E has one reveal to look at rather than eight.
 ### L72 - THE CAMERA PULLS BACK FOR A GREATER LORD (HUD, auto_director.gd) - FIRST
 Mr. E already approved this at 17:42 ("yes it should pull back"); it just never got an ID. The
 art lane shipped eight lord meshes and two of them are enormous - Mourncoil 10 m, Gravewyrm 9 m -
@@ -84,7 +99,12 @@ unlimited room and is where a viewer goes to look things up. So L66 does not get
 it moves. L66 is CLOSED as an on-stream item. The HUD exposes the standings data and nothing
 more; the board itself becomes H31 on the hub.
 
-- [ ] H31. THE SEASON LEADERBOARD, ON THE HUB (hub lane, after H29) - see the block below.
+- [x] H31. THE SEASON LEADERBOARD, ON THE HUB (hub lane, after H29) - see the block below.
+      RESULT (ticked 2026-11-15 23:10 CT by the supervisor; hub a08c499, merged to main): the fifteenth tab
+      ("Season"), four boards of ten - deepest, earned most, died hardest, lived longest - living and fallen.
+      Honest gaps stated on the page rather than faked: "Earned most" ranks gold HELD because the publisher
+      sends only current gold, and "Lived longest" shows an explanatory empty state until an age/born_day
+      field exists. Both light up by themselves when the fields arrive (names in docs/HUB_SECURITY.md).
 ### H31 - THE SEASON LEADERBOARD, ON THE HUB (hub lane, after H29)
 Standings over a season, from the snapshot: who went deepest, who earned most, who died hardest,
 who kept a hero alive longest. The hub can afford the space and the detail the stream cannot.
@@ -120,6 +140,16 @@ brief, which still lists L61/L31/L36/L40 as its queue while Phase RC gives it L7
 D41 -> D48.
 
 ### C-55 - ONE RARITY LADDER FOR THE WHOLE GAME (content lane, Mr. E Nov 15 17:56)
+  DATA HALF DELIVERED AND VERIFIED (supervisor, 2026-11-15 23:10 CT; content d097b9e, merged to main).
+  Landed as the content lane's cycle C-58, NOT as a commit called C-55 - the ruling's ID collided with the
+  lane's own cycle counter, which had already used C-55 for the boss uniques. IDs are frozen; this note is
+  the pointer. MEASURED on main: 380 entries now carry "rarity" across equipment and accessories, spread
+  common 77 / uncommon 125 / rare 74 / very rare 58 / legendary 35 / artifact 11. No "epic" and no S-tier
+  survives anywhere in items.json, and every one of the 11 artifacts has cost 0 - none is priced.
+  STILL OPEN, AND IT IS THE GAME BUILD'S HALF, NOT THE WRITER'S: the economy ruling is a label so far, not
+  a rule. Code must refuse to let a shop stock an artifact at any level and refuse to let the trader carry
+  one (shop_stock / trader_cargo / stock_by_tier readers, with D64's level gate). Do not tick C-55 until
+  that is enforced in code.
 
 Mr. E listed "common, uncommon, rare, epic, legendary, s+, ss+, sss+. or however the DnD labels
 them" and asked for a recommendation. DECIDED: D&D's six. No S-tiers.
@@ -221,6 +251,18 @@ worker may invent them outright and ship them without waiting on anybody.
     type; a miniboss built for one of those slots solves a duplicate AND adds a fight at once.
   - Every miniboss still obeys the Grubmother rule above: if it cannot fit a corridor, it is
     room-locked by construction, not by hoping.
+SHIPPED UNDER THIS PERMISSION (supervisor, 2026-11-15 23:10 CT; art e606fe7, merged to main): four set
+pieces, each with one idea that changes the fight, all four measured CORRIDOR-SAFE against the 11.0 m clear
+and all four under D91's three-cell width. The Drillmaster (barracks, 1.4 m - it summons, beats the muster
+and the garrison forms up), the Scrapwright (workshop, 2.8 m - it armours itself, every plate knocked off is
+replaced from the floor), the Gaoler (prison, 3.7 m - it drags, the hook takes one hero out of the line) and
+the Snuffer (shrine, 1.5 m - it takes the light, it puts out the lamps). Silhouette sheet, contact sheet,
+three views each and a wear value per creature in renders/art/minibosses/; generator tools/art/minibossgen.py;
+docs/art/MINIBOSSES.md carries the write-ups. THE GAME-BUILD HALF IS NOT DONE and is not claimed here: the
+art lane never runs Godot, so none of the four is wired into dungeon_hd.gd's existing "miniboss" set-piece
+weight yet, and none has been seen in a fight. That wiring belongs to the game build, after Phase 1.
+THEMES STILL WITHOUT ONE: crypt, keep, treasury, mess, and the biome themes (wood, grassland, flooded).
+
 GOOD IDEAS ARE NOT WORK: under the freeze, minibosses are a PERMISSION, not a queue. The art lane
 takes its queued item first and builds a miniboss when that lane is otherwise dry - which it has
 now been twice this week.
@@ -881,6 +923,12 @@ this exact scene - the knight by the barracks at night - in renders/cycles/d84/.
 - [ ] D85. E3PO IS INVISIBLE IN A CROWD OF HIS OWN GUARDS (game build + art)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      D85 ART HALF DELIVERED / STILL OPEN (art c3c3fc6, merged to main 2026-11-15 23:10 CT). The art lane
+      built E3PO a Commander's kit of his own at three wear levels (w12/w45/w85), three views each, contact
+      sheet and day/night done-tests in renders/art/e3po/, generator in tools/art/e3pogen.py. NOT TICKED:
+      the art lane never runs Godot, so the GAME BUILD half is untouched - wire the kit onto E3PO's rig,
+      make him read as the commander in a crowd of his own guards, and capture him in that crowd. GAME
+      BUILD: inherit this, do not rebuild the meshes.
 
 ### D85 - E3PO IS INVISIBLE IN A CROWD OF HIS OWN GUARDS (game build + art)
 
@@ -915,7 +963,10 @@ name people want to see what they pay for not just a stat."
 DONE TEST: a shot of E3PO at his post, day and night, beside two ordinary guards in frame; pass
 requires that someone who has never seen the game can point at the commander. Mr. E's eye is final.
 
-- [ ] L71. THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
+- [x] L71. THE CHRONICLE IS CUTTING ITS OWN LINES OFF (HUD worker, NEXT - cause is confirmed)
+      RESULT (ticked 2026-11-15 23:10 CT by the supervisor; hud-ui ab4199d, merged to main): the Chronicle
+      wraps on whole sentences instead of truncating - fewer entries held, tidier wording, no mid-word cut.
+      Before/after at three widths in renders/cycles/l71/ (100/125/150), _l71_test.gd clean, Godot closed.
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
@@ -1142,7 +1193,13 @@ DONE TEST: a scripted stream that buys, equips, stores, withdraws, sells and die
 ledger balances at every step, no item is ever in two places, vault contents survive the death,
 carried contents do not, and every transfer required a walk.
 
-- [ ] H30. THE SATCHEL TAB (hub worker, after H29)
+- [x] H30. THE SATCHEL TAB (hub worker, after H29)
+      RESULT (ticked 2026-11-15 23:10 CT by the supervisor; hub b840c71, merged to main): fourteenth tab,
+      signed-in viewer only, hero matched by exact login. Carried items with weight/value/value-per-pound
+      sort, slot chips and filter; a carry bar with 1/3 and 2/3 ticks for 5e encumbered/heavy; vault, own
+      orders, stone. Buttons go through a fixed verb table plus ONE argument stripped of C0/C1/U+2028-9 and
+      capped at 80, so a hostile name cannot carry a second command. OPEN, not blocking the tick: the lane
+      ASSUMED the command names !withdraw and !stone - the game build must confirm them against D81.
       HUB WORKER: TAKE H29 FIRST. It sits LOWER in this file than H30, so "first unchecked" would land
       you here by accident; the lane queue is H29 -> H30. Search this file for "### H29".
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
@@ -1293,7 +1350,10 @@ THE REWARD EXISTS. Mr. E approved it at 16:15 and it was created on jestsayin96 
 Build the item, the stock, and the command path against that id. Do not re-create, rename or
 re-price the reward - that stays Mr. E's alone, as all rewards do.
 
-- [ ] H29. THE SHOP TAB (hub worker, next item)
+- [x] H29. THE SHOP TAB (hub worker, next item)
+      RESULT (ticked 2026-11-15 23:10 CT by the supervisor; hub 5b1739b, merged to main): thirteenth tab,
+      stock read from the snapshot through the same el()/textContent path as every other string, no
+      snapshot-derived src/href/style, CSP untouched.
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
 
@@ -3264,12 +3324,19 @@ now gates by level. CONTENT WRITER: TAKE C4 NEXT.
   every entry priced against the economy and flavoured. items.json parses; no pre-existing key touched.
 - [x] C2. LORE LINES (data/lore_lines.json): many more tells, descend/cleared lines, lord and unique intros, barks and epitaphs, in the established voice, so the Chronicle and the barks stop repeating on a long stream. DONE: json validates; counts per category before/after; no line contradicts canon.
       CYCLES LOGGED: C-41..C-46 (cosmetics/accessories/dyes, uniques, intro/forge, most-repeated, epitaph/descend/cleared, disaster variants). C-47 (2026-11-15, content 3d01748): +140 lines - forge, town_life, a wandering lord, and E3PO tier_up_alt. Standing item: stays open by design.
+      C-56 (content cba6724, merged 2026-11-15 23:10): +156 disaster variants - during/begin_alt/pass_alt across all 13 disasters.
+      C-57 (content 0c93743, merged 2026-11-15 23:10): +196 epitaph, descend, cleared and bark lines.
+      C-59 (content 9060522, merged 2026-11-15 23:10): E3PO deepened again, +102 lines; he is now named 371 times across lore_lines.json.
+      NEXT FOR THIS LANE (supervisor, 2026-11-15 23:10): the words PHASE 2 needs and does not have - the ascent (D77), the errand (D78), carry weight (D80), selling and the guild vault (D81), the upgrade poll (D66). Plain register, wear is a variable.
   RESULT (ticked 2026-11-16 by the supervisor): delivered over C-37, C-39, C-50 and C-52 - roughly 750 new
   lines across tells, descend/cleared, epitaphs, barks, lord and unique intros and the E3PO pools (12 thinnest
   pools raised to 38-48 each). lore_lines.json parses; every pre-existing line byte-equal.
 - [x] C3. RARE UNIQUES + BREWS (data/bosses.json lesser/greater/draw/rule, data/potions.json): more rare unique variants (modified lords, NOT new lords) and more brews/states, all within the existing schema. DONE: json validates; the new entries name their modifier and effect.
   RESULT (ticked 2026-11-16 by the supervisor): delivered in C-35 - 32 rare unique variants (modified lords,
   no new lords) in bosses.json plus 20 brews/states in potions.json, each naming its modifier and effect.
+      FURTHER CYCLE LOGGED: C-55-the-cycle (content d91ea57, merged 2026-11-15 23:10) - a second pass of +32
+      boss uniques (lesser/greater) and +24 brews, still modified lords and no new lords. Note the cycle
+      number collides with the C-55 RARITY LADDER ruling block above; they are different things.
 
 - [x] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
       Owner: CONTENT WRITER (data/items.json ONLY). The town grows through twelve stages from Crossing to City
@@ -4515,7 +4582,13 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   Run 2: 183 cuts (follow 59, shoulder 75, push 41, hard_cut 2, establishing 6), 0 repeats, 0 holds past max,
   every cut carries a why, 138,053 frames with 0 body-in-two-panes. LOOKED: l64_raid.png, l64_death.png.
 
-- [ ] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
+- [x] L66. THE LEADERBOARD IS A SEASON, NOT A TOP FIVE. Owner: DESKTOP HUD (leaderboard_panel.gd).
+      CLOSED 2026-11-15 23:10 CT by the supervisor - DELIVERED ELSEWHERE, NOT ABANDONED. COORDINATION 13
+      says the stream keeps no leaderboard; this item asked the HUD to build one in-game, so it contradicted
+      a standing ruling and the HUD lane was right to stand down rather than build it. All three stages -
+      movement, moments, more than one board - shipped on the hub as H31 (four rotating boards, change
+      marks, the town's own words from lore_lines.json). Nothing is owed here. Do not reopen it for the
+      in-game panel without Mr. E reversing COORDINATION 13.
       A static top five stops being interesting twenty minutes into a stream and never changes again
       for a viewer who just arrived. Make the board tell the story of the run. Staged:
       L66.1 MOVEMENT. Remember each hero's placing over the session and show the change - who is
@@ -4888,3 +4961,15 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   fragment changes, so the 60 s refresh never re-lands the viewer. Hostile-name address resolves as text and
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
+================================================================================
+## NEEDS MR. E (supervisor, 2026-11-15 23:10 CT). Three things, all short.
+  1. YOUR EYE ON THE LORD REVEAL (L72, shipped). renders/cycles/20261116_l72/sheet_reveal_mourncoil.png
+     - the camera eases out as Mourncoil rises instead of cutting. Does the reveal land? The
+     measurement says all eight lords are framed whole with the camera out of the walls; only you
+     can say whether it reads.
+  2. HUB ITEM ICONS - YOUR CALL (raised by H30). The 454 D73 item icons live outside web/, and a
+     snapshot value may never choose an image path, so the Satchel tab draws glyphs instead. To use
+     the real icons, a curated set must be COPIED into web/ and whitelisted by name. Yes or no.
+  3. H30 ASSUMED TWO CHAT COMMANDS, !withdraw and !stone, because D81 is not built yet. If those
+     are not the names you want, say so now - they are cheap to change today and expensive once
+     viewers have learned them.

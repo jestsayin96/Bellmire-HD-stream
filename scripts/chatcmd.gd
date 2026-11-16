@@ -315,8 +315,20 @@ func _delve(user_id: String) -> String:
     var gate := _needs(user_id, func(): return "ok")
     if gate != "ok":
         return gate
-    if user_id in delve_queue:
-        return "%s is already waiting at the dungeon mouth." % roster.get_hero(user_id)["name"]
+    # B11: THE AWAY-GUARD IS REAL, AND THE GATE IS WHAT PROVED IT. B9 would not guess at this
+    # because a wrong guard locks viewers out of !delve on stream. The evidence settles it:
+    # `away` has exactly THREE writers (town._on_delve on the road, at the mouth, and
+    # _begin_delve below) and ONE eraser, at delve.ended beside the queue's own erase. There
+    # is no errand, shop or craft that sets it, so a hero with an away-state is on a delve and
+    # nothing else - guarding on it cannot cost anyone a descent.
+    # It is not redundant with the queue either: on `main` town._on_delve sets away WITHOUT
+    # queueing (D41 moved the append to the source on `laptop` only), so the queue alone lets
+    # a point-redeemed errand hero !delve her way into a SECOND slot. Checked both ways.
+    if user_id in delve_queue or away.has(user_id):
+        var qn := String(roster.get_hero(user_id)["name"])
+        if away.has(user_id):
+            return "%s is %s." % [qn, away[user_id]]
+        return "%s is already waiting at the dungeon mouth." % qn
     if delve_queue.size() >= QUEUE_MAX:
         return "The muster is full - %s waits for the next party." \
             % roster.get_hero(user_id)["name"]
@@ -325,12 +337,22 @@ func _delve(user_id: String) -> String:
     return "%s sets out for the dungeon mouth. (%d in the party)" \
         % [roster.get_hero(user_id)["name"], delve_queue.size()]
 
-## W-LIVE: THE QUEUE READ. A channel-point errand ("Send my hero delving", "Join the delve")
-## sends a hero to the scar through the town, NOT through !delve, so delve_queue never hears
-## of it. The muster a viewer can see must be the real one, so this reads BOTH: the names
-## chat put in, in that order, then anyone the town has on the road or at the mouth. "below,
-## in the scar" is a hero already down - they are not mustering. Needs no hero of its own:
-## a bystander may ask who is going down.
+## THE QUEUE READ. A channel-point errand ("Send my hero delving") sends a hero to the scar
+## through the town, NOT through !delve, so delve_queue never hears of it. This reads BOTH:
+## the names chat put in, in that order, then anyone the town has on the road or at the mouth.
+## "below, in the scar" is a hero already down - they are not mustering. Needs no hero of its
+## own: a bystander may ask who is going down.
+##
+## B11 WAS RULED TO DROP THIS UNION AND DID NOT, BECAUSE THE RULING'S PREMISE IS NOT ON MAIN
+## YET. The ruling is right in principle - two places reconciling one truth is the drift D41
+## closed - and it rests on town._on_delve appending to delve_queue at the source. That append
+## exists on `laptop` (D41, b0ce9d8) and NOT on origin/main, which is what this branch builds
+## against: here _on_delve sets away and queues nothing. The B11 gate measured it rather than
+## trusting it - the errand hero's queue read back [] and !muster counted 0 of 1. Dropping the
+## union today would blind !muster to every point-redeemed errand on the live build.
+## DROP IT THE SLOT AFTER D41 REACHES MAIN. tools/_b11_muster.gd measures the source-queueing
+## every run and prints the verdict either way, so nobody has to remember: the run it starts
+## printing B11_SOURCE_QUEUEING YES is the run this union comes out.
 const LINE_WORDS := ["first", "second", "third", "fourth", "fifth", "sixth"]
 
 ## is this away-state a hero waiting to go down (not one already below)?

@@ -6819,6 +6819,70 @@ and PROGRESS.md are touched.
 - VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, new lines appended at array ends only); the file's one stray CR (before phase2_words_alt) preserved byte for byte; LF kept.
 - CODE WIRING: none new. Existing pickers for descend / cleared / epitaphs / barks draw from the wider pools. Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
 
+## C-71 (2026-11-16) - standing backlog, next-stalest file: items.json titles and dyes (items.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-70 ticked); told it to pick the next-stalest of items, bosses, potions on evidence. items.json last got real additions in C-54 (C-58 and C-61 only relabelled rarity); bosses and potions were last touched in C-68. Took items. Did NOT write more miniboss_feed lines; the reader is still unwritten.
+- data/items.json: cosmetics +48 titles (kind title, keys name/kind/cost/flavour, same as the 206 existing), dyes +35 (plain 6-hex, no hex repeats an existing dye). Titles cover Phase 2 (ascent, errand, Guild Vault, carry weight, teleportation stone: bought, one hero, dead weight on a lord's floor) plus a prosperous top band, cost 300-480 (slate roofs, Lamp Street, Guild Hall seat, charter, gilded bell, Father of the Town), so a late-game viewer's title reads as a rich town, not make-do. Low band stays patched and plain. New top-level `_note_c71`.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, order of existing keys preserved, new entries spliced at block ends as text so existing formatting is byte-identical); new entries match the existing title shape. LF kept. No artifact stocked anywhere; no equipment, accessory, rarity, stock or price changed; no floor count.
+- CODE WIRING: none new. Titles and dyes are read by the existing !title / !dye pickers; any code that caps the title list or the dye picker length should be rechecked (titles 254, dyes 281). Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
+## B11 - THE AWAY-GUARD IS REAL, AND THE RULED DROP IS DEFERRED ON EVIDENCE (chat bot, 2026-11-16 16:45-17:05 CT)
+Lock: file read IDLE 16:17:44 (game build), no Godot alive. Claimed 16:45:00-06:00, refreshed
+16:50:30 for the battery and 16:57:40 for the re-run, released 17:04:30. Claim-first-read-second,
+as ruled - the claim went in before the plan was read.
+
+### 1. !delve DOES NEED THE GUARD. THE GATE IS WHAT PROVED IT, NOT A READING.
+TAKE THIS NEXT asked me to decide with evidence whether !delve needs a guard against `away`, and
+said a reasoned no would be a delivery. I expected to deliver that no. I read the game build's
+tools/_d41_queue.gd and R's town.gd, saw that _on_delve appends to chat.delve_queue at the source
+and that the queue is erased at delve.ended beside away - so the queue holds a name for the whole
+trip and a second !delve is already refused. That is a clean reasoned no, and I wrote it.
+THE GATE FAILED IT. B11_MUSTER came back bad=7: the errand hero's queue read back `[]` while her
+away-state was set. The reason is that I had read the WRONG BRANCH. D41's source-queueing is on
+`laptop` (b0ce9d8) and is NOT on origin/main, which is what this branch builds against:
+  R   (laptop) scripts/town.gd:5427  if not chat.delve_queue.has(uid): chat.delve_queue.append(uid)
+  W6  (main)   scripts/town.gd       no such append - _on_delve sets away and queues NOTHING
+So on the live build the queue does NOT cover the errand path, and without a guard a
+point-redeemed errand hero can !delve her way into a SECOND party slot. The gate prints the old
+behaviour in the log: "ErrandFan sets out for the dungeon mouth. (2 in the party)" while she was
+already on the road. The reasoned no was wrong, and the only reason I am not shipping it is that
+the gate ran before I believed myself.
+WHAT B9 WOULD NOT GUESS AT IS NOW SETTLED, AND IT IS WHY THE GUARD IS SAFE. B9 refused this guard
+because a wrong one locks viewers out of !delve on stream. `away` has exactly THREE writers and
+ONE eraser, all of them the delve lifecycle:
+  town.gd  _on_delve     "on the road to the scar"        / "waiting at the mouth of the scar"
+  town.gd  _begin_delve  "below, in the scar"
+  town.gd  delve.ended   away.erase(uid) beside delve_queue.erase(uid)
+No errand, shop, craft or festival path sets it. A hero with an away-state is on a delve and
+nothing else, so guarding on it cannot cost anybody a descent - and the gate asserts that
+directly: a hero with no away-state still descends.
+  if user_id in delve_queue or away.has(user_id):
+and the reply now reads the away-state for its wording. The old line told a hero who was BELOW
+that she was "already waiting at the dungeon mouth". She is now told "ErrandFan is below, in the
+scar." - the same shape line 124 already uses for !fish and !forge, so the voice is the file's own.
+
+### 2. THE UNION READ: RULED DROP, DEFERRED, NOT SKIPPED.
+The ruling was DROP IT, and it is right in principle - two places reconciling one truth is the
+drift D41 closed. I dropped it, and then the same measurement above showed its premise is not on
+this branch: with _on_delve queueing nothing, !muster counted 0 of 1 errand heroes with the union
+gone. Dropping it today would blind !muster to every point-redeemed errand on the live build,
+which is the exact fault B9 opened the union to fix. SO I RESTORED IT AND LEFT THE REASON IN THE
+CODE. This is a deferral with a trigger, not a refusal: the gate measures the source-queueing every
+run and prints B11_SOURCE_QUEUEING YES/NO. It reads NO today. The run it reads YES, it prints the
+action beside it, and that is the run the union comes out. Nobody has to remember.
+
+### GATES - ALL SIX GREEN (the re-run; the first battery is the one that caught the fault)
+  parse --quit-after 300   0 errors
+  L14_TEST OK              the commands doc does not drift, proven both ways
+  TWITCH_PARSE OK
+  D704_ECHO OK             356 checks, the echo door still declaws every chat line
+  B11_MUSTER OK  bad=0     B11_SOURCE_QUEUEING NO
+  COMMANDS_DOC             wrote 27 commands, doc left UNMODIFIED (no-op confirmation)
+data/commands.json and docs/COMMANDS.md are BYTE-UNCHANGED this cycle - no command was added,
+renamed or re-worded, so there is no drift to check in either direction and the generator agrees.
+NOTHING FOR THE GAME BUILD LANE in twitch_eventsub.gd: the contract is untouched, twitch_reply
+still carries (user_login, text) with no @name and no rate limiting.
+NO LIVE TWITCH TEST THIS SLOT. No chat line posted, no redemption, no cheer, 0 bits, no reward
+created, deleted, renamed or re-priced, nothing as his personal account. The work was engine-only.
+
 ## B10 - W-LIVE'S LIVE HALF IS DONE: BELLMIREBRO SPOKE IN HIS CHAT, FROM THE ENGINE (chat bot, 2026-11-16 15:45-15:55 CT)
 TAKE THIS NEXT, verbatim: "the ENGINE already holds the bot's chat connection, so the post comes
 from the engine, not from a browser pane. ONE bellmirebro line in jestsayin96's chat, with the
@@ -6880,6 +6944,14 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
   code before claiming, so the engine work started three minutes into a seven-minute window. The
   battery still ended inside it, but next slot the lock claim comes first and the reading second.
 
+
+## U40 - Chronicle top line no longer flush under the scroll rail (HUD, feed_hud.gd)
+- ITEM: the supervisor's 14:58 "YOUR NEXT" (the side observation from U39). Phase 1, "stop it looking broken".
+- MEASURED (tools/_u40_pad_test.gd, windowed 1920x1080, raid flood, grid): gap between the vellum top and the first line was 2.0 px at 100% (FAIL, flush), 32 px at 125%, 10 px at 150%.
+- FIX: feed_hud.gd `_vellum()` insets the open vellum 6 px (scaled) under the top rail and 1.5x that off the bottom; `_place_chrome`, `_chrome_lines`, `_chrome_h`, `_chrome_text_w` all use it so the height-fit still counts whole entries. hud_dock.gd untouched.
+- AFTER: 100% gap 6.0 px, 125% 34 px, 150% 12 px; U40_TEST OK. Tried a bottom pad of 2x: it pushed the two-line top entry out and left a 34 px hole at 100%, worse, so reverted to 1.5x. Bottom line at 100% sits ~0.4 px past the unpadded sheet_rect edge, still clear of the rail in the still.
+- LOOKED: renders/cycles/u40/u40_before_100.png vs u40_after_100.png (and 125/150).
+- Lock: three short claims (15:53, 15:56, 15:58), each under 6 min, all released well before :07.
 ## D70 .1/.2/.3 - the bot knows who it is talking to: first-timer welcome, a hero's own moments told to its owner, nothing said late (game build, 2026-11-16 16:08-16:25 CT)
 - TAKE THIS NEXT gave the game build D70 .1/.2/.3 (Phase 2). .4 was already ticked (chatbot ade76e5).
 - .1 THE FIRST-TIMER. TwitchChat.parse now reads Twitch's own `first-msg` IRC tag (the flag Twitch sets on a

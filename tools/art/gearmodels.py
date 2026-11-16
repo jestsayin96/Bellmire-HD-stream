@@ -34,52 +34,89 @@ import lordlib as L
 ADV = os.path.join("addons", "kaykit_character_pack_adventures", "Assets", "gltf")
 GEAR = os.path.join("assets", "gear")
 
-# family -> tier -> (pack, file). Five tiers, five different shapes wherever the
-# packs can give five, so the ladder is visible as SHAPE and not only as colour.
-BLADE = {1: (GEAR, "sword_A"), 2: (GEAR, "sword_B"), 3: (ADV, "sword_1handed"),
-         4: (GEAR, "sword_D"), 5: (GEAR, "sword_E")}
-AXE = {1: (ADV, "axe_1handed"), 2: (GEAR, "axe_A"), 3: (GEAR, "axe_B"),
-       4: (ADV, "axe_2handed"), 5: (ADV, "axe_2handed")}
-HAMMER = {1: (GEAR, "hammer_A"), 2: (GEAR, "hammer_A"), 3: (GEAR, "hammer_B"),
-          4: (GEAR, "hammer_B"), 5: (GEAR, "hammer_B")}
-STAFF = {1: (GEAR, "staff_A"), 2: (ADV, "staff"), 3: (GEAR, "staff_B"),
-         4: (GEAR, "staff_B"), 5: (GEAR, "staff_B")}
-WAND = {1: (ADV, "wand"), 2: (ADV, "wand"), 3: (GEAR, "wand_A"),
-        4: (GEAR, "wand_A"), 5: (GEAR, "wand_A")}
-CROSSBOW = {1: (ADV, "crossbow_1handed"), 2: (ADV, "crossbow_1handed"),
-            3: (ADV, "crossbow_2handed"), 4: (ADV, "crossbow_2handed"),
-            5: (ADV, "crossbow_2handed")}
-BOW = {t: (GEAR, "bow_A_withString") for t in range(1, 6)}
-DAGGER = {t: (ADV, "dagger") for t in range(1, 6)}
-SHIELDS = {1: (GEAR, "shield_A"), 2: (ADV, "shield_square"), 3: (GEAR, "shield_B"),
-           4: (ADV, "shield_round"), 5: (ADV, "shield_spikes")}
+# family -> tier -> CANDIDATE MODELS. Five tiers, five different shapes wherever
+# the packs can give five, so the ladder is visible as SHAPE and not only as
+# colour - and more than one candidate per tier wherever the packs have one,
+# because D94's proof sheet caught every tier-5 bow coming back as the same
+# bow. Which candidate an item gets is its OWN KEY's business, not its tier's.
+BLADE = {1: [(GEAR, "sword_A")], 2: [(GEAR, "sword_B"), (GEAR, "sword_A")],
+         3: [(ADV, "sword_1handed"), (GEAR, "sword_C")],
+         4: [(GEAR, "sword_D"), (GEAR, "sword_C")],
+         5: [(GEAR, "sword_E"), (ADV, "sword_2handed")]}
+AXE = {1: [(ADV, "axe_1handed"), (GEAR, "axe")], 2: [(GEAR, "axe_A"), (GEAR, "axe")],
+       3: [(GEAR, "axe_B"), (GEAR, "axe_A")],
+       4: [(ADV, "axe_2handed"), (GEAR, "halberd")],
+       5: [(ADV, "axe_2handed"), (GEAR, "halberd")]}
+HAMMER = {1: [(GEAR, "hammer_A"), (GEAR, "mallet")], 2: [(GEAR, "hammer_A"), (GEAR, "hammer")],
+          3: [(GEAR, "hammer_B"), (GEAR, "hammer")],
+          4: [(GEAR, "hammer_B"), (GEAR, "hammer_A")],
+          5: [(GEAR, "hammer_B"), (GEAR, "hammer")]}
+POLE = {t: [(GEAR, "halberd"), (GEAR, "spear_A")] for t in range(1, 6)}
+STAFF = {1: [(GEAR, "staff_A")], 2: [(ADV, "staff"), (GEAR, "staff_A")],
+         3: [(GEAR, "staff_B"), (ADV, "staff")], 4: [(GEAR, "staff_B"), (ADV, "staff")],
+         5: [(GEAR, "staff_B"), (ADV, "staff")]}
+WAND = {1: [(ADV, "wand")], 2: [(ADV, "wand")], 3: [(GEAR, "wand_A"), (ADV, "wand")],
+        4: [(GEAR, "wand_A")], 5: [(GEAR, "wand_A")]}
+CROSSBOW = {1: [(ADV, "crossbow_1handed")], 2: [(ADV, "crossbow_1handed")],
+            3: [(ADV, "crossbow_2handed"), (ADV, "crossbow_1handed")],
+            4: [(ADV, "crossbow_2handed")], 5: [(ADV, "crossbow_2handed")]}
+# ONE bow model exists in the repo, so a bow's identity cannot come from the
+# file. It comes from ornament(), which is per-item for this family.
+BOW = {t: [(GEAR, "bow_A_withString")] for t in range(1, 6)}
+DAGGER = {t: [(ADV, "dagger"), (GEAR, "knife")] for t in range(1, 6)}
+SHIELDS = {1: [(GEAR, "shield_A")], 2: [(ADV, "shield_square"), (GEAR, "shield_C")],
+           3: [(GEAR, "shield_B"), (GEAR, "shield_C")],
+           4: [(ADV, "shield_round")], 5: [(ADV, "shield_spikes")]}
+
+
+def ihash(s):
+    """FNV-1a. The same dial showcase.sig turns, so the hub icon, the proof
+    sheet and the model path move together for one item."""
+    h = 2166136261
+    for c in str(s or "").lower():
+        h = ((h ^ ord(c)) * 16777619) & 0xFFFFFFFF
+    return h
+
+
+def _one(table, t, key):
+    cand = table[max(1, min(5, t))]
+    return cand[ihash(key) % len(cand)]
 
 
 def pick(family, name, tier, key=""):
-    """The item's NAME first, its family second - exactly as D73's hats do."""
+    """The item's NAME first, its family second - exactly as D73's hats do -
+    and then the item's own KEY picks between candidates, so two items of one
+    family and one tier are not forced to be the same model."""
     hay = (name + " " + key).lower()
     t = max(1, min(5, tier))
+    sel = key or name
     if family == "blade":
         if any(w in hay for w in ("dagger", "knife", "dirk", "stiletto")):
-            return DAGGER[t]
-        return BLADE[t]
+            return _one(DAGGER, t, sel)
+        if any(w in hay for w in ("spear", "pike", "lance", "halberd", "glaive")):
+            return _one(POLE, t, sel)
+        return _one(BLADE, t, sel)
     if family == "axe":
         if any(w in hay for w in ("hammer", "maul", "mallet")):
-            return HAMMER[t]
-        return AXE[t]
+            return _one(HAMMER, t, sel)
+        if any(w in hay for w in ("halberd", "poleaxe", "glaive")):
+            return _one(POLE, t, sel)
+        return _one(AXE, t, sel)
     if family == "arcane":
         if any(w in hay for w in ("wand", "rod")):
-            return WAND[t]
-        return STAFF[t]
+            return _one(WAND, t, sel)
+        if any(w in hay for w in ("mace", "club", "cudgel", "hammer", "flail")):
+            return _one(HAMMER, t, sel)
+        return _one(STAFF, t, sel)
     if family == "ranged":
         if "crossbow" in hay or "arbalest" in hay:
-            return CROSSBOW[t]
-        return BOW[t]
-    return STAFF[t]
+            return _one(CROSSBOW, t, sel)
+        return _one(BOW, t, sel)
+    return _one(STAFF, t, sel)
 
 
-def shield_for(tier):
-    return SHIELDS[max(1, min(5, tier))]
+def shield_for(tier, key=""):
+    return _one(SHIELDS, max(1, min(5, tier)), key)
 
 
 def load(repo, pack, stem, tag):
@@ -199,31 +236,58 @@ def tint(objs, rgb, tag, rough=0.5):
             ob.data.materials[i] = nm
 
 
-def ornament(objs, tier, mats, tag):
-    """What makes it THIS item and not the pack's stock model: a lit collar at
-    the grip from runed upward, and a seam of light up the length at scarforged.
-    Both are measured off the model's own bounds."""
+def ornament(objs, tier, mats, tag, key=""):
+    """What makes it THIS item and not the pack's stock model. From runed
+    upward: a lit collar at the grip, and a seam of light up the length at
+    scarforged. Both measured off the model's own bounds.
+
+    AND, at EVERY tier, a per-item band or two round the grip. The repo holds
+    exactly one bow model, so for a bow the file cannot be the difference - and
+    D94's proof sheet caught both tier-5 bows as one object. The item's own key
+    turns these dials, so two items on one model are still two objects."""
     out = []
-    if tier < 3:
-        return out
     mn, mx = bounds(objs)
     if mn is None:
         return out
+    h = ihash(key or tag)
     cx = (mn.x + mx.x) * 0.5
     cy = (mn.y + mx.y) * 0.5
     rr = max(0.035, min(0.085, max(mx.x - mn.x, mx.y - mn.y) * 0.22))
-    z0 = mn.z + (mx.z - mn.z) * 0.18
-    ring = [Vector((cx + rr * math.cos(math.tau * i / 14.0),
-                    cy + rr * math.sin(math.tau * i / 14.0), z0)) for i in range(15)]
-    v, f = L.tube(ring, 0.012, 6, caps=False)
-    out.append(L.make("Model_collar_" + tag, [p - Vector((cx, cy, z0)) for p in v], f, mats['glow']))
-    out[-1].location = (cx, cy, z0)
+    span = max(0.05, mx.z - mn.z)
+
+    # per-item grip bands - plain leather-and-iron, the way a thing that gets
+    # held is actually bound
+    nb = 1 + (h >> 3) % 3
+    for k in range(nb):
+        u = 0.10 + 0.10 * k + 0.06 * (((h >> (7 + k)) % 5) / 4.0)
+        zz = mn.z + span * u
+        br = rr * (0.92 + 0.36 * (((h >> (11 + k)) % 4) / 3.0))
+        ring = [Vector((cx + br * math.cos(math.tau * i / 12.0),
+                        cy + br * math.sin(math.tau * i / 12.0), zz)) for i in range(13)]
+        v, f = L.tube(ring, 0.009 + 0.005 * (((h >> (17 + k)) % 3) / 2.0), 6, caps=False)
+        out.append(L.make("Model_band%d_%s" % (k, tag),
+                          [p - Vector((cx, cy, zz)) for p in v], f, mats['dark']))
+        out[-1].location = (cx, cy, zz)
+
+    if tier >= 3:
+        z0 = mn.z + span * 0.18
+        ring = [Vector((cx + rr * math.cos(math.tau * i / 14.0),
+                        cy + rr * math.sin(math.tau * i / 14.0), z0)) for i in range(15)]
+        v, f = L.tube(ring, 0.012, 6, caps=False)
+        out.append(L.make("Model_collar_" + tag,
+                          [p - Vector((cx, cy, z0)) for p in v], f, mats['glow']))
+        out[-1].location = (cx, cy, z0)
     if tier >= 5:
-        za, zb = mn.z + (mx.z - mn.z) * 0.30, mn.z + (mx.z - mn.z) * 0.92
-        pts = [Vector((cx + (0.016 if k % 2 else -0.016), cy - rr * 0.55,
-                       za + (zb - za) * k / 5.0)) for k in range(6)]
+        # the seam's own weave is per-item too - three legs or five, leaning
+        # one way or the other
+        legs = 4 + (h >> 23) % 3
+        amp = 0.012 + 0.008 * (((h >> 27) % 3) / 2.0)
+        za, zb = mn.z + span * 0.30, mn.z + span * 0.92
+        pts = [Vector((cx + (amp if k % 2 else -amp), cy - rr * 0.55,
+                       za + (zb - za) * k / float(legs))) for k in range(legs + 1)]
         v, f = L.tube(pts, 0.010, 5)
-        out.append(L.make("Model_seam_" + tag, [p - Vector((cx, cy, za)) for p in v], f, mats['glow']))
+        out.append(L.make("Model_seam_" + tag,
+                          [p - Vector((cx, cy, za)) for p in v], f, mats['glow']))
         out[-1].location = (cx, cy, za)
     bpy.context.view_layer.update()
     return out

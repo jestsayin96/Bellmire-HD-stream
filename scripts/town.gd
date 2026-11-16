@@ -311,6 +311,11 @@ var people: Array[Townsfolk] = []
 var _market_pos := Vector3.ZERO
 
 func _ready() -> void:
+    _settler = _TownSettler.new()           # D91c: after every walker's physics step
+    _settler.t = self
+    _settler.process_physics_priority = 1000
+    _settler.process_priority = 1000
+    add_child(_settler)
     economy = Economy.new()
     economy.town = self
     add_child(economy)
@@ -4778,6 +4783,7 @@ func _spawn_people() -> void:
         v2.face_yaw = atan2(sf.x, sf.z)
         var yp: Vector3 = sh[1]
         yp += sf * 2.2
+        yp = _post_clear(yp, 0.4)       # D91c: the tavern keeper stood INSIDE the large table
         v2.position = Vector3(yp.x, height_at(yp.x, yp.z), yp.z)
         add_child(v2)
         people.append(v2)
@@ -5526,6 +5532,103 @@ func crowd_push(v: Node3D, dir := Vector3.ZERO) -> Vector3:
         push += _wagon_push(v, v.global_position, body_r(v), dir)      # D16c
     return push
 
+## ---- D91c THE TOWN'S LATE SETTLE (the dungeon has had one since D91b). crowd_push only shoves
+## a body that is WALKING - two beasts grazing side by side, a pair stood chatting, a horse
+## turned out on top of another never moved, so they stood inside each other for good (two
+## horses in one paddock were 17k of the 54k overlapping pair-samples in two minutes). After
+## every walker's physics step this parts any pair closer than the sum of their body_r with
+## the SAME Crowd.settle the dungeon runs (one copy), never into a solid footprint, never off a
+## beast's own ground, never up or down a bank. Somebody sat on a seat is pinned: the other one
+## steps out of him.
+## settle_on = false only for a before figure.
+var settle_on := true
+var settle_worst := 0.0
+var _settler: Node = null
+
+class _TownSettler extends Node:
+    var t: Node
+    func _physics_process(_dt: float) -> void:
+        if t.settle_on:
+            t._town_settle()
+    # and once more at the END of the drawn frame: a raid moves its defenders and the folk it
+    # sends running in _process, after the physics settle (a chief and a fleeing priest 3 cm
+    # into each other, 17 frames of a 20-minute soak)
+    func _process(_dt: float) -> void:
+        if t.settle_on:
+            t._town_settle()
+
+func _settle_bodies(pinned: Dictionary) -> Array:
+    var out: Array = []
+    for o in people:
+        if not is_instance_valid(o) or not (o as Node3D).visible or bool(o.get("inside")):
+            continue
+        if o.get("_sat") == true:
+            pinned[o.get_instance_id()] = true
+        out.append(o)
+    for a in animals:
+        if is_instance_valid(a) and (a as Node3D).visible and float(a.get("float_y")) == INF:
+            out.append(a)
+    return out
+
+## where the settle may set a body down: centre outside every solid footprint, on the same
+## ground (not down a bank or off a bridge), and a beast inside its own pen or field
+func _settle_ok(p: Vector3, _r: float, b: Node3D = null) -> bool:
+    if b == null:
+        return solid_at(p, 0.0).is_empty()
+    # (one already inside a footprint on purpose - the step through a door, onto a seat - may
+    # be moved inside it; anyone else is never set down in one)
+    if not solid_at(p, 0.0).is_empty() and solid_at(b.global_position, 0.0).is_empty():
+        return false
+    # the GROUND under the new spot against the ground under the old one, not the body's own
+    # height - a guard on the keep's steps stands above the terrain and must still be settled
+    var bp := b.global_position
+    if absf(height_at(p.x, p.z) - height_at(bp.x, bp.z)) > 0.6:
+        return false
+    if b.has_method("on_ground_ok") and not bool(b.call("on_ground_ok", p)):
+        return false
+    return true
+
+var settle_us := 0               # D91c: what the settle costs (tools/_d91_town.gd prints it)
+var settle_n := 0
+var settle_prep_us := 0
+func _town_settle() -> void:
+    var t0 := Time.get_ticks_usec()
+    var pinned := {}
+    var bodies := _settle_bodies(pinned)
+    _settle_out(bodies, pinned)
+    var t1 := Time.get_ticks_usec()
+    settle_prep_us += t1 - t0
+    settle_worst = Crowd.settle(bodies, _settle_ok, pinned)
+    settle_us += Time.get_ticks_usec() - t0
+    settle_n += 1
+
+## D91c: the HARD RING for footprints. A walker's every step goes through keep_walkable, but a
+## body STANDING STILL never steps - set down at its spawn, a door or a stall inside a house's,
+## a crate's or a bush's footprint, it stood there until its next walk (four folk in the north
+## houses for 25 s, a corgi in a crate). Anyone not on a door or seat leg and not sat whose
+## centre is inside a solid footprint is set back out of it here, every physics frame.
+var settled_out := 0
+func _settle_out(bodies: Array, pinned: Dictionary) -> void:
+    for b in bodies:
+        if pinned.has(b.get_instance_id()):
+            continue
+        var leg = b.get("_dbg_leg")
+        if leg == 1 or leg == 2:
+            continue
+        var p: Vector3 = (b as Node3D).global_position
+        if solid_at(p, 0.0).is_empty():
+            continue
+        var q := keep_walkable(p)
+        if not solid_at(q, 0.0).is_empty():
+            q = _post_clear(p, 0.05)        # a chain of footprints keep_walkable cannot clear
+            q.y = height_at(q.x, q.z)
+            if not solid_at(q, 0.0).is_empty():
+                continue
+        if b.has_method("on_ground_ok") and not bool(b.call("on_ground_ok", q)):
+            continue
+        (b as Node3D).global_position = q
+        settled_out += 1
+
 ## ---- D16c DYNAMIC OBSTACLES. Everything that stands still is carved out of
 ## the navmesh and held off by solid_at (_solid_of, valley._solid); what MOVES
 ## is not: the carters' and travellers' wagons, the caravan, the pedlar's cart.
@@ -5826,6 +5929,20 @@ func solid_at(p: Vector3, m := 0.0) -> Array:
         if absf(d.dot(r[1])) < he.x + m and absf(d.dot(r[2])) < he.y + m:
             return r
     return []
+
+## D91c: the nearest point to p whose centre is m clear of every solid footprint (a posted
+## keeper is never pushed by anyone, so he must be SET DOWN clear - rings of 0.3 m out to 3 m)
+func _post_clear(p: Vector3, m: float) -> Vector3:
+    if solid_at(p, m).is_empty():
+        return p
+    for ring in range(1, 11):
+        var rr := 0.3 * float(ring)
+        for k in range(16):
+            var a := TAU * float(k) / 16.0
+            var q := p + Vector3(cos(a) * rr, 0.0, sin(a) * rr)
+            if solid_at(q, m).is_empty():
+                return q
+    return p
 
 func keep_walkable(p: Vector3) -> Vector3:
     # D44b: a dense footprint cluster (the 15 south-market houses) overlaps, so

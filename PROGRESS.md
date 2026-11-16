@@ -6369,6 +6369,18 @@ checked BY PROCESS, not by the file, eighteen times across twenty minutes:
   ALIVE on all three checks at 10:02 - had the clear line composed and did NOT write it because the
   last check came back alive. ONE DEAD POLL IS NOT A RELEASED LOCK. That is in the plan now.
 
+## C-65 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT: check C-61 data half, then the next-stalest standing-backlog item. C-61 CHECKED against the file: all 254 accessories carry per-slot `rarity`, `_note_c61` present, every slot has a legendary, zero artifacts in any shop_stock/trader_cargo/caravan list - the data half is in, nothing to redo. Stalest item is backlog 2 (last C-57; C-64 item 1, C-63 item 4, C-62 item 5, C-60 item 3 are all newer), and it is the most repeated text on stream.
+- data/lore_lines.json: +40 epitaphs (417), +20 descend (260; 8 keep the "%s %s" name+verb shape), +23 cleared (261; "Floor %d" only where existing lines use it), +46 barks (enter +8, lord +7, trap +8, hurt +8, drink +7, misfire +8). 129 lines. Plain, terse, no dungeon floor count anywhere, no mechanics implied. Duplicates of existing lines were skipped.
+- VALIDATION OK: all four owned files parse; every pre-existing key and value identical (existing lists are exact prefixes); descend 0 or 2 %s, cleared 0 or 1 %d, epitaphs no format specifiers.
+- CODE WIRING: none - same keys and shapes, loaders' random pick widens automatically. Still the code lane's: fishing.json "epic" -> "very rare", and enforcing no-artifact in shop/trader readers.
+## U36 - L74 the feed and the theme under raid load (HUD, 2026-11-16 ~10:57 CT, spotlight.gd + tools/_l74_test.gd)
+- TAKE THIS NEXT gave HUD: L74. Lock read by process (none alive) and file (IDLE 10:52); claimed 10:54 with expected finish 11:05, relaunched 10:55:53 (finish 11:03), released 10:57:05.
+- tools/_l74_test.gd WINDOWED 1080p: 36 raid lines (routine chatter mixed with crit/town lines) in 3 s into the LIVE feed at UI scale 100/125/150. L74_TEST OK at all three: no ellipsis, stack fits the vellum (box 220/225, 151/216, 187/208 px), dropped_protected=0 (routine chores dropped, raid/fall/granary lines kept; 112 seen, 63 dropped, 28 merged, min admit gap 0.80 s).
+- FOUND by looking at l74_after_150.png: the "CHANNEL POINTS . ambient" lane chip ran off the right edge of the screen. spotlight.gd (kind chip): its font now steps down until the whole chip fits the room beside the Chronicle box. l74_fix_150.png: fits, nothing overlaps. (spotlight.gd is HUD-owned.)
+- LOOKED: renders/cycles/l74/l74_after_100.png, l74_after_150.png (before), l74_fix_150.png (after). At 100% the first Chronicle line sits tight against the top of the vellum (readable, not clipped) - left alone.
+- NOT DONE: the test's synthetic "(32)" suffix defeats the feed's dedupe so two near-identical lines show with x2/x3; that is the test, not the feed. At 150% only 2 whole entries fit during a flood - by design (L71 fewer-whole-entries rule).
+- Mr. E decision: none.
 ## B5 - L69 AND L70's ENGINE GATES ALL RAN AND ALL PASSED (chat bot, 2026-11-16 10:45-10:55 CT)
 - THE :45 WINDOW WAS REAL AND THE LANE USED IT. The lock read IDLE 10:34:15 (game build, D91d not on
   laptop + C-55 shipped), no Godot process alive on either image name at 10:45:51, and the supervisor's

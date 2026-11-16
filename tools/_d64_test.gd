@@ -34,7 +34,7 @@ func _initialize() -> void:
 	var feed: Array = stub.feed
 
 	# .1 the ladder is named and ranked; values untouched
-	_ok(Economy.rarity_of(0) == "none" and Economy.rarity_of(1) == "common" and Economy.rarity_of(4) == "epic", "ranks: none/common/../epic")
+	_ok(Economy.rarity_of(0) == "none" and Economy.rarity_of(1) == "common" and Economy.rarity_of(4) == "very rare", "ranks: none/common/../very rare")
 	_ok(Economy.rarity_of(5) == "legendary" and bool(Roster.WEAPONS[5].get("found", false)) and bool(Roster.ARMOUR[5].get("found", false)), "legendary = the found-only tier on both ladders")
 	_ok(int(Roster.WEAPONS[1]["cost"]) == 60 and int(Roster.WEAPONS[4]["atk"]) == 26 and int(Roster.ARMOUR[4]["ac"]) == 7, "ladder values unchanged")
 
@@ -76,7 +76,7 @@ func _initialize() -> void:
 	print("    counter: ", said)
 	_ok(int(h["weapon"]) == 2 and int(h["gold"]) < before_gold, "the same hero now buys uncommon")
 	eco.raise_shop("smithy", 9, "MrE")
-	_ok(eco.shop_level() == Economy.SHOP_MAX_LEVEL and Roster.town_tier == 4, "never past what a smith can make (epic)")
+	_ok(eco.shop_level() == Economy.SHOP_MAX_LEVEL and Roster.town_tier == 4, "never past what a smith can make (very rare)")
 	_ok(eco.raise_shop("smithy", 1, "MrE") == 0, "a raise at the top gains nothing")
 	_ok(eco.raise_shop("nowhere", 1) == 0, "an unknown shop cannot be raised")
 

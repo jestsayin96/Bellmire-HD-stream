@@ -34,6 +34,9 @@ const CHAT_GAP := 1.6               # s between bot messages (mod limit is 100 /
 const CHAT_QUEUE_MAX := 15
 const CHAT_MAX_LEN := 480
 const SEEN_MAX := 300
+const CHAT_STALE := 90.0            # D70.3: s a queued line may wait before it is too old to say
+const VIEWERS_FILE := "user://d70_viewers.json"   # D70: who was welcomed, uid -> Twitch login
+const MOMENT_GAP := 45.0            # D70.2: s between two non-death moments for one viewer
 
 ## words fightoverlay acts on - no Bellmire reward title may contain one
 const FORBIDDEN := ["boss", "monster", "spawn", "raid", "mob", "goblin", "horde", "loot",
@@ -112,6 +115,13 @@ func setup(t: Node) -> void:
             c.connect("twitch_reply", _on_twitch_reply)
         if "bits_tier_fn" in c:
             c.set("bits_tier_fn", Callable(self, "_do_bits_tier"))
+    if OS.get_cmdline_args().has("--script"):
+        viewers_path = "user://d70_viewers_test.json"   # harnesses never touch the real list
+    _viewers_load()
+    if town and town.get("roster") != null:
+        var ro: Object = town.get("roster")
+        if ro.has_signal("hero_moment") and not ro.is_connected("hero_moment", on_hero_moment):
+            ro.connect("hero_moment", on_hero_moment)
     if not enabled or offline:
         return
     if client_id == "":
@@ -1106,7 +1116,7 @@ func _on_twitch_reply(user_login: String, text: String) -> void:
     if _chat_q.size() >= CHAT_QUEUE_MAX:
         var dropped: Array = _chat_q.pop_front()   # oldest answer is the stalest
         _say_log("TWITCH_EVENTSUB chat skipped (queue full, dropped oldest) @%s: %s" % [String(dropped[0]), String(dropped[1])])
-    _chat_q.append([user_login, t])
+    _chat_q.append([user_login, t, Time.get_unix_time_from_system()])
 
 func chat_line_for(user_login: String, text: String) -> String:
     var m := "@%s %s" % [user_login, text]
@@ -1123,6 +1133,11 @@ func _tick_chat(delta: float) -> void:
     var text := String(q[1])
     var m := chat_line_for(login, text)
     var now := Time.get_unix_time_from_system()
+    # D70.3: news goes out while the room is there or not at all. A line that sat in the queue
+    # past CHAT_STALE (a stall, a token refresh, a long pause) is dropped, never dumped late.
+    if q.size() > 2 and now - float(q[2]) > CHAT_STALE:
+        _say_log("TWITCH_EVENTSUB chat skipped (stale %.0fs) @%s: %s" % [now - float(q[2]), login, text])
+        return
     # Per-user duplicate guard, keyed on (login, text): one viewer's repeat must
     # never mute another viewer's identical answer. Twitch itself drops a repeat
     # of the bot's own previous message inside 30 s; this mirrors that, per user.
@@ -1166,3 +1181,96 @@ func _send_chat(m: String) -> void:
         var d: Array = r["json"].get("data", [])
         if not d.is_empty() and not bool(d[0].get("is_sent", true)):
             _say_log("TWITCH_EVENTSUB chat dropped: " + str(d[0].get("drop_reason")))
+
+# ---------------------------------------------------------------- D70 who the bot is talking to
+## .1 THE FIRST-TIMER: Twitch flags a viewer's first message EVER in this channel (IRC tag
+## first-msg=1). That viewer - and only that viewer, exactly once, ever - is told they can have a
+## hero and how. Persisted per uid in VIEWERS_FILE, so a restart, a second flagged line or a
+## reconnect never says it twice. A viewer who already has a hero is not told (they found it).
+## .2 THEIR HERO'S MOMENTS: roster.hero_moment(uid, kind, text) -> one line to the OWNER by login.
+## The login is the one Twitch gave us (IRC prefix), kept per uid so a viewer who is away still
+## hears it the next time the game is up AND the moment happens - nothing is ever saved for later.
+## .3 THE ROOM: the game only runs while Mr. E streams (his ruling, 14:38), so being up is the
+## signal; CHAT_STALE drops anything that waited too long. No news is queued across sessions.
+## .4 holds: every line here is game-made text after "@<twitch login> "; no viewer-set string.
+var viewers_path := VIEWERS_FILE
+var welcomed := {}                  # uid -> unix time welcomed
+var logins := {}                    # uid -> twitch login (Twitch-issued, [a-z0-9_] only)
+var _moment_t := {}                 # uid -> unix time of the last non-death moment
+var welcome_line := "welcome to Bellmire! Type !enlist and a hero of your own walks into this town - !help shows the rest."
+
+func _viewers_load() -> void:
+    welcomed = {}
+    logins = {}
+    if not FileAccess.file_exists(viewers_path):
+        return
+    var j: Variant = JSON.parse_string(FileAccess.get_file_as_string(viewers_path))
+    if typeof(j) == TYPE_DICTIONARY:
+        if typeof(j.get("welcomed")) == TYPE_DICTIONARY:
+            welcomed = j["welcomed"]
+        if typeof(j.get("logins")) == TYPE_DICTIONARY:
+            logins = j["logins"]
+
+func _viewers_save() -> void:
+    var f := FileAccess.open(viewers_path, FileAccess.WRITE)
+    if f:
+        f.store_string(JSON.stringify({"welcomed": welcomed, "logins": logins}))
+        f.close()
+
+static func clean_login(s: String) -> String:
+    var out := ""
+    for ch in s.to_lower():
+        if (ch >= "a" and ch <= "z") or (ch >= "0" and ch <= "9") or ch == "_":
+            out += ch
+    return out.left(25)
+
+## Called by TwitchChat for EVERY chat line. Returns true if a welcome was queued.
+func saw_viewer(uid: String, login: String, first := false) -> bool:
+    var lg := clean_login(login)
+    if uid == "" or lg == "":
+        return false
+    if String(logins.get(uid, "")) != lg:
+        logins[uid] = lg
+        _viewers_save()
+    if not first or welcomed.has(uid):
+        return false
+    if uid == broadcaster_id or uid == bot_id:
+        return false
+    welcomed[uid] = Time.get_unix_time_from_system()   # marked BEFORE the check below: never chase
+    _viewers_save()
+    if _has_hero_strict(uid):
+        _say_log("TWITCH_EVENTSUB D70 first-timer %s already has a hero - not welcomed" % lg)
+        return false
+    _on_twitch_reply(lg, welcome_line)
+    _say_log("TWITCH_EVENTSUB D70 welcomed first-timer %s" % lg)
+    return true
+
+func _has_hero_strict(uid: String) -> bool:
+    if town == null or town.get("roster") == null:
+        return false
+    var r: Object = town.get("roster")
+    return r.has_method("get_hero") and not (r.call("get_hero", uid) as Dictionary).is_empty()
+
+static func _declaw(s: String, cap := 200) -> String:
+    var out := ""
+    for ch in s:
+        var c := ch.unicode_at(0)
+        out += " " if (c < 32 or (c >= 127 and c < 160) or c == 0x2028 or c == 0x2029 or (c >= 0x200B and c <= 0x200F) or (c >= 0x202A and c <= 0x202E) or c == 0xFEFF) else ch
+    return out.strip_edges().left(cap)
+
+## roster.hero_moment -> one line to the hero's owner. Deaths always go; other moments are spaced
+## MOMENT_GAP per viewer so a three-level delve is one line, not three. Returns true if queued.
+func on_hero_moment(uid: String, kind: String, text: String) -> bool:
+    var lg := String(logins.get(uid, ""))
+    if lg == "":
+        _say_log("TWITCH_EVENTSUB D70 moment for %s not told (no Twitch login known): %s" % [uid, kind])
+        return false
+    var now := Time.get_unix_time_from_system()
+    if kind != "fell":
+        if _moment_t.has(uid) and now - float(_moment_t[uid]) < MOMENT_GAP:
+            _say_log("TWITCH_EVENTSUB D70 moment for %s spaced out (%s)" % [lg, kind])
+            return false
+    _moment_t[uid] = now
+    _on_twitch_reply(lg, _declaw(text))
+    return true
+

@@ -5755,6 +5755,11 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - CODE WIRING: none new. Plain strings in arrays the pickers already read; confirm they use len() of the array rather than a fixed count (tells 40, descend 170, cleared 168, epitaphs 270, barks 83/84, misfire 70).
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Device_bash had no connected folders this run, so edits were made through the Blender bridge (Python on the Windows side), validated the same way. Not ticked in WORK_PLAN (supervisor ticks).
 
+## U30 - L64.4 handoff verified (HUD, 2026-11-15, spotlight.gd)
+- spotlight.gd `_amb_tick`: an idle (ambient or resting-on-redeemer) pane that is showing the body the director cut to yields at once to an ordinary ambient pick; `handoff_swaps` counts it. A paid moment still holds its hero (the director yields to it, as before).
+- NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
+- LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
+- L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.
 ## C-51 (2026-11-15) - WORK_PLAN C7: THE EQUIPMENT CATALOGUE (items.json only)
 - Added ONE new top-level key to data/items.json: `equipment` = {_note, weapons, armour, starting_kits}. Nothing else touched; every pre-existing key parses equal to HEAD and the file's prior text is a byte prefix of the new one (only the closing brace gained a comma).
 - WEAPONS 86 = 71 catalogue + 15 kit. By family: blade 17, axe 15, arcane 15, ranged 15, open (monk) 9, plus kit pieces (blade 5, axe 2, ranged 1, arcane 6, open 1). By tier: t0 15 (kits only), t1 14, t2 15, t3 18, t4 15, t5 9 (scarforged, found-only).
@@ -5771,11 +5776,6 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Shape unchanged: every pool is still a flat list of plain strings. E3PO still cannot die; no line states a floor count; no new mechanics are stated.
 - VALIDATION OK: file parses; every pre-existing key (and every pre-existing list prefix) equal to HEAD; no new line duplicates any existing string in the file; ASCII only. Authoring done via the Blender bridge because device_bash had no connected folder this run. Godot not run.
 - CODE WIRING: none new. Existing e3po pool keys are already read or pending wiring; the new lines just lengthen the pools.
-## U30 - L64.4 handoff verified (HUD, 2026-11-15, spotlight.gd)
-- spotlight.gd `_amb_tick`: an idle (ambient or resting-on-redeemer) pane that is showing the body the director cut to yields at once to an ordinary ambient pick; `handoff_swaps` counts it. A paid moment still holds its hero (the director yields to it, as before).
-- NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
-- LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
-- L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.
 ## D-cycle D44c - the raid-flight knot at (74,-63.5) (game build, 2026-11-15 ~15:45 CT)
 - RC ITEM TAKEN: D52 is first in Phase RC but LAPTOP-CODE owned (no worker) - skipped per the BLOCKED note;
   next owned RC item is D44/D50 (wedging). Waited for the HUD's live lock (L64.4) to clear before launching.
@@ -5793,6 +5793,49 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - GATE GREEN: parse 0; _offfloor 0/1316 (INPROP 0, MON_INPROP 0/108); TWITCH_PARSE OK; _delve_test to floor 2,
   0 SCRIPT ERROR. D44/D50 left UNTICKED (in_solid not yet 0 every run). No pumpkin prop exists in code.
 
+## C-53 (2026-11-15) - WORK_PLAN C4: stock and cargo by growth tier (items.json only)
+- Four NEW top-level blocks appended to data/items.json; every pre-existing key byte-identical (text appended after `equipment`). Not ticked - supervisor ticks C4.
+- `stock_retirement` (C4.1): last_tier + replaced_by for 36 shop goods and 19 cargo goods (clay_cups, rush_light, mud_clogs, torches, tally_sticks ... leave as the town grows; supersedes stock_by_tier "nothing removed" for listed keys only).
+- `trade_stock` (C4.2): 5 trades (General Goods opens 1, Guild Counter 3, Smithy 3, Apothecary 4, Stables 5); every shop_stock key carried by exactly one trade; per-trade `schedule` of enter/leave by tier. New own_goods: general 9, guild 9, smith 10, apothecary 10, stables 14 = 52.
+- `caravan_manifests` (C4.3): 7 supply_resources (grain, iron, salt, lamp_oil, physick, timber, cloth) with units_per_qty/unit_cost/restocks, 7 origins, 28 caravans (tiers 2-12) each with cargo qty, cargo_value, supply units and gold_value, guards. Taken caravan = town receives none of its supply units.
+- `price_ladders` (C4.4): 10 ladders, tier and cost non-decreasing (script-checked).
+- Stage table (+enter/-leave per trade):
+  tier 1: General Goods +24/-0
+  tier 2: General Goods +18/-0
+  tier 3: General Goods +9/-0; Guild Counter +12/-0; Smithy +3/-0
+  tier 4: General Goods +15/-1; Guild Counter +2/-0; Smithy +6/-0; Apothecary +3/-0
+  tier 5: General Goods +15/-5; Guild Counter +5/-0; Smithy +3/-0; Apothecary +2/-0; Stables +12/-0
+  tier 6: General Goods +16/-6; Guild Counter +5/-0; Apothecary +2/-0; Stables +3/-0
+  tier 7: General Goods +7/-10; Guild Counter +2/-0; Smithy +12/-1; Stables +4/-1
+  tier 8: General Goods +3/-6; Guild Counter +2/-0; Smithy +16/-0; Apothecary +2/-0; Stables +3/-0
+  tier 9: General Goods +8/-3; Guild Counter +1/-0; Apothecary +14/-0; Stables +0/-2
+  tier 10: General Goods +7/-3; Guild Counter +1/-1; Smithy +12/-0; Apothecary +2/-0
+  tier 11: General Goods +9/-1; Guild Counter +6/-1; Smithy +2/-0; Apothecary +5/-0
+  tier 12: General Goods +18/-0; Smithy +1/-0; Apothecary +3/-0
+- GAME BUILD MUST READ: items.json stock_retirement.{shop_goods,cargo}, trade_stock.trades.*.{opens_tier,carries,own_goods,schedule}, caravan_manifests.{supply_resources,caravans}. Existing shop_stock.tier / trader_cargo.tier / stock_by_tier unchanged.
+- VALIDATION OK: json.load passes; all pre-existing top-level values equal; keys resolve; ladders pass.
+
+## C-cycle 54: cosmetics, accessories and dyes - 71 cosmetics, 24 accessories, 27 dyes (standing backlog item 1) (2026-11-15)
+
+- data/items.json only, additive. cosmetics +71 (23 hats, 18 banners, 23 titles, 6 pets reusing the existing Corgi/Pug/Llama models and scales); accessories +24 (4 per slot-ish: rings, amulets, cloaks, boots, gloves; every stat is an existing key at an existing magnitude: ac/saves/hit 1, hp 8-14, speed 0.5-0.6, dmg 2); dyes +27 colours at the flat dye_cost. Themes: guild post, scar stair, the wall, the feast, the harvest, the caravan road, the Commander. One `_note_c54` key added.
+- Names that collided with existing entries were dropped or renamed rather than overwritten. Nothing reworded or removed.
+- VALIDATION OK: all four data files parse; every pre-existing key in cosmetics, accessories, dyes and every other top-level key equals HEAD; the original lines are untouched (pure insertion); every new entry matches its kind's field set; lore_lines, bosses, potions untouched. No floor count stated. ASCII only.
+- CODE WIRING: none new. Pets use existing model paths and scales. Confirm the shop lists read all of cosmetics/accessories by key (no fixed count) and dyes are read as name -> hex.
+- Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).
+
+## U31 - L64 30-minute director run + tour lap fix (HUD, 2026-11-15, auto_director.gd)
+- NEW tools/_l64_long.gd, WINDOWED 1080p `--script`: 1800 s of DIRECTOR clock at time_scale 6, 4 viewer delvers, raids at 300 and 1250, a death (synthetic at 800: none happened naturally), a quiet stretch. Saves renders/cycles/20261115_l64long/ (director_decision_log.txt + raid/death/quiet shots).
+- RUN 1 found real faults: the quiet-baseline tour re-cut the same stop within 1-20 s (tour_1 at 851.5 then 868.8, tour_2 at 903.2 then 906.2, ...) because the fallback rotated by index while other candidates were held out. Four "hold" over-runs (70-75 s) were manual-input pauses (someone touched the machine during the run; the director resumes with why=start) - the audit now ignores gaps closed by "start".
+- FIX auto_director.gd: `_tour_pick` / `_tour_seen` - the tour is a lap, the stop shown LONGEST AGO is next, never the current one; used by both the fallback and the quiet-baseline candidate.
+- RUN 2 (same test): 183 cuts (follow 59, shoulder 75, push 41, hard_cut 2, establishing 6), 0 repeats, 0 holds past max, every cut has a why, 138,053 frames with 0 frames of any ambient pane on the director's body. L64_LONG OK.
+- LOOKED: l64_raid.png, l64_death.png - director pane + three ambient panes on four different subjects, Chronicle scroll centred and uncovered, wordmark Gloock, 21 px text.
+- Raid beat held ~every 2-12 s (pace 0.6) per the log; first run had natural raid at t=83.
+
+## U32 - L67 the feed survives a raid (HUD, 2026-11-15, feed_hud.gd)
+- QUEUE: L61 ticked; L64's 30-min run was U31; L66 NOT built - it asks for an on-stream leaderboard, which COORDINATION 13 / L58 / L63 forbid (Mr. E: hub only). Flagged for Mr. E. Took L67.
+- feed_hud.gd: town.feed stays plain strings; FeedHUD now classes each line on arrival (P3 death/boss/lord/raid, P2 town-level or a line tagged with a named hero via town.feed_tags, P1 ordinary, P0 routine pickup), MERGES repeats (digits ignored, 30 s window -> "line  x3"), admits at most 1 line per 0.8 s (1.25/s), holds each line 4/7/12/18 s by priority (a higher priority may displace a lower one after 3 s), caps the wait queue at 10 (overflow drops lowest priority, oldest first; routine lines stale after 40 s), and logs every ADMIT / MERGE / DROP in `feed_log` (`log_text()`), with `stats`.
+- tools/_l67_test.gd WINDOWED 1080p `--script`: raid forced + ~12 lines/s flood for 30 s. Result: 376 seen, 210 merged, 33 admitted, 133 dropped (all P0/P1 overflow), 0 protected drops, min admit gap 0.80 s (max rate 1.25/s). L67_TEST OK.
+- LOOKED: renders/cycles/20261115_l67/l67_flood.png (+ feed_log.txt) - Chronicle scroll centred, 21 px lines legible over the live panes, "x6" merges visible.
 ## D-cycle D91a - one crowd for town and dungeon; bushes are solid; animals measured (game build, 2026-11-15 ~17:35 CT)
 - RC ITEM TAKEN: D91, first in the GAME BUILD row of the rewritten Phase RC queue. Did the stages in my own
   files (1, 5, 6). Stages 2-4 (delvers/monsters call it, three-cell corridors, file formation) are in

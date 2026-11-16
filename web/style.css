@@ -1347,3 +1347,5 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .rentry.crat { border-left-color: var(--ink-soft); opacity: .86; }
 .rentry.crat .rface { border-color: var(--ink-soft); border-style: dashed; background: var(--parch-lo); color: var(--ink-soft); box-shadow: none; }
 .rentry.crat .rtier { color: var(--parch-hi); background: var(--ink-soft); }
+.herolink-note { margin: 8px 0; padding: 8px 12px; border: 1px dashed var(--gold); border-radius: 8px; font-style: normal; color: var(--ink); }
+.linkcopy { margin-left: 6px; }

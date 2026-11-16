@@ -58,6 +58,45 @@ func restyle() -> void:
 ## each new line fades in.
 const PACE_S := 0.8
 const FLOOD := 8
+
+## ---- L67: THE FEED MUST SURVIVE A RAID. Everything below is the stated policy; the numbers
+## are the ones the DONE test measures against.
+## PRIORITY (L67.1): every line is classed once, on arrival. 3 = a death, a boss or lord, a
+## raid; 2 = a town-level event, or a line the town tagged with a named hero (a viewer's own
+## action); 1 = ordinary town life; 0 = a routine pickup / errand. Town tags (town.feed_tags,
+## D60) win over words; words only fill in for untagged lines.
+const P_ROUTINE := 0
+const P_NORMAL := 1
+const P_TOWN := 2
+const P_CRIT := 3
+const PROTECT_FROM := 2         # a line at this priority or above is never dropped for being routine
+## MERGING (L67.2): a repeat is the same line once digits are ignored, seen again within
+## MERGE_S real seconds of the earlier copy being raised. It becomes "<line>  x3", not a line.
+const MERGE_S := 30.0
+## RATE AND DECAY (L67.3): at most one line ADMITTED to the scroll every PACE_S (= 1.25
+## lines/s). Each line dwells on screen at least DWELL[priority] real seconds before a line
+## may take its place; a higher priority may displace a lower one after DWELL_FLOOR. What
+## waits is capped at QUEUE_MAX; overflow drops the LOWEST priority, oldest first, and a
+## routine line that waited STALE_S is dropped as stale. Every drop is in feed_log.
+const DWELL := [4.0, 7.0, 12.0, 18.0]
+const DWELL_FLOOR := 3.0
+const QUEUE_MAX := 10
+const STALE_S := 40.0
+const LOG_MAX := 900
+const RE_TOWN := "town level|grows into|falls back to|caravan|festival|bounty|raised to level|granary|coffer|hunger"
+const RE_CRIT := "\\b(dies|died|has fallen|fallen|slain|killed|falls|lord|boss|raid|raiders|raiding|besiege|besieged|ablaze|warband|scar)\\b"
+const RE_LOW := "picks up|gathers|finds a|sips|drinks|eats|sweeps|chops|fetches|fills|hauls|mends|sells a|buys a|harvest"
+var feed_log: Array = []        # every ADMIT / MERGE / DROP, with the clock, priority and text
+var stats := {"seen": 0, "admitted": 0, "merged": 0, "dropped": 0, "dropped_protected": 0,
+    "min_gap": 999.0, "by_pri": [0, 0, 0, 0]}
+var _clock := 0.0               # real seconds (time_scale divided out)
+var _cursor := 0                # how far into source the classifier has read
+var _pending: Array = []        # classed lines waiting for a slot: {text,key,pri,t,n}
+var _shown: Array = []          # the lines on the scroll: {text,key,pri,t,at,n}
+var _last_admit := -1.0
+var _re_town: RegEx
+var _re_crit: RegEx
+var _re_low: RegEx
 ## L39 (Mr. E, Nov 13): "the letters are super huge". The on-stream Chronicle line was the
 ## L15 reading size (28 px at 1080p) - right for the bottom-left panel at full screen, far
 ## too big for a box at the centre of the grid. The FONT shrinks first; HudDock.centre is
@@ -241,39 +280,26 @@ func _process(delta: float) -> void:
         restyle()
     if _chrome:
         _place_chrome()
-    # L32b calm pacing: _seen is the reveal cursor into source - it advances one line
-    # per PACE_S at most; a flood (a busy moment) skips the cursor to the latest FLOOD
-    # lines rather than racing the strip through the backlog
-    if source.size() < _seen:
-        _seen = source.size()
-        _rebuild()
-    _pace_t = maxf(0.0, _pace_t - delta / maxf(Engine.time_scale, 0.001))
-    if source.size() > _seen and _pace_t <= 0.0:
-        if source.size() - _seen > FLOOD:
-            _seen = source.size() - FLOOD
-        _seen += 1
-        _pace_t = PACE_S
-        _rebuild()
-        _fade_in_newest()
-    for i in _ages.size():
-        _ages[i] = float(_ages[i]) + delta
+    # L32b calm pacing, now L67: classify what arrived, merge repeats, admit by priority at
+    # no more than one line per PACE_S, hold each line its dwell
+    _tick_feed(delta / maxf(Engine.time_scale, 0.001))
     # the panel itself fades when the town has been quiet a while
-    var newest: float = _ages.back() if not _ages.is_empty() else 999.0
+    var newest: float = (_clock - _last_admit) if _last_admit >= 0.0 else 999.0
     _panel.modulate.a = 1.0 if _card_t > 0.0 else clampf(1.0 - (newest - 40.0) / 8.0, 0.0, 1.0)
+
+## how many lines the scroll holds right now (the card, the UI scale and the box all move it)
+func _cap() -> int:
+    var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
+    if _chrome:
+        show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
+    return maxi(1, show - 2 if card_showing() else show)
 
 func _rebuild() -> void:
     for c in _box.get_children():
         c.queue_free()
-    # with a card up, fewer lines, so the Chronicle does not climb into the party frames
-    # L15: bigger text, fewer lines (5 at 100%, 4 at 125%, 3 at 150%)
-    var show := SHOW - int(round((UiTheme.scale - 1.0) * 4.0))
-    if _chrome:
-        show = _chrome_lines() + (2 if card_showing() else 0)     # the card sits beside the lines there
-    # L32b: only lines the pacing cursor has revealed (_seen), newest-revealed last
-    var upto := source.slice(0, mini(_seen, source.size()))
-    var lines := upto.slice(maxi(0, upto.size() - maxi(1, show - 2 if card_showing() else show)))
-    while _ages.size() < source.size():
-        _ages.append(0.0)
+    var lines: Array = []
+    for e in _shown.slice(maxi(0, _shown.size() - _cap())):
+        lines.append(_text_of(e))
     for i in lines.size():
         var lb := Label.new()
         lb.text = String(lines[i])
@@ -310,3 +336,177 @@ func _fade_in_newest() -> void:
     lb.modulate.a = 0.0
     var tw := lb.create_tween()
     tw.tween_property(lb, "modulate:a", 1.0, 0.3)
+
+
+## ================================================================ L67: THE FEED UNDER LOAD
+## one clock, real seconds: a 4x test and a 1x stream obey the same stated numbers
+func _tick_feed(dt: float) -> void:
+    _clock += dt
+    _ingest()
+    _pace_t = maxf(0.0, _pace_t - dt)
+    # a routine line that has waited past STALE_S is news no longer - drop it, in the log
+    for i in range(_pending.size() - 1, -1, -1):
+        var e: Dictionary = _pending[i]
+        if int(e["pri"]) < PROTECT_FROM and _clock - float(e["t"]) > STALE_S:
+            _drop(e, "stale")
+            _pending.remove_at(i)
+    if _pending.is_empty() or _pace_t > 0.0:
+        return
+    var i := _best_pending()
+    var e: Dictionary = _pending[i]
+    if _shown.size() >= _cap():
+        var v := _evict_index(int(e["pri"]))
+        if v < 0:
+            return                          # every line up is inside its dwell - the newcomer waits
+        _shown.remove_at(v)
+    _pending.remove_at(i)
+    _admit(e)
+
+## read what the town raised since last frame: class it, merge repeats, keep the queue bounded
+func _ingest() -> void:
+    if source.size() < _cursor:             # the source was cleared (a test, a new town)
+        _cursor = source.size()
+        _pending.clear()
+        _shown.clear()
+        _rebuild()
+    var tags: Dictionary = {}
+    var tv = get_parent().get("feed_tags") if get_parent() != null else null
+    if tv is Dictionary:
+        tags = tv
+    var touched := false
+    while _cursor < source.size():
+        var text := String(source[_cursor])
+        _cursor += 1
+        stats["seen"] = int(stats["seen"]) + 1
+        var key := _key_of(text)
+        var pri := classify(text, tags.get(text, {}))
+        if _merge_into(key, text):
+            touched = true
+            continue
+        _pending.append({"text": text, "key": key, "pri": pri, "t": _clock, "n": 1})
+    # overflow: the LOWEST priority goes first, oldest first within it
+    while _pending.size() > QUEUE_MAX:
+        var w := 0
+        for i in _pending.size():
+            var a: Dictionary = _pending[i]
+            var b: Dictionary = _pending[w]
+            if int(a["pri"]) < int(b["pri"]) or (int(a["pri"]) == int(b["pri"]) and float(a["t"]) < float(b["t"])):
+                w = i
+        _drop(_pending[w], "overflow")
+        _pending.remove_at(w)
+    if touched:
+        _rebuild()
+
+## a repeat: the same line, digits ignored, within MERGE_S of the earlier copy being raised
+func _merge_into(key: String, text: String) -> bool:
+    for e: Dictionary in _pending:
+        if e["key"] == key:
+            e["n"] = int(e["n"]) + 1
+            e["text"] = text
+            stats["merged"] = int(stats["merged"]) + 1
+            _flog("MERGE pending n=%d '%s'" % [int(e["n"]), text])
+            return true
+    for i in range(_shown.size() - 1, -1, -1):
+        var e: Dictionary = _shown[i]
+        if e["key"] == key and _clock - float(e["t"]) <= MERGE_S:
+            e["n"] = int(e["n"]) + 1
+            e["text"] = text
+            e["t"] = _clock                 # a live repeat keeps the window open
+            stats["merged"] = int(stats["merged"]) + 1
+            _flog("MERGE shown n=%d '%s'" % [int(e["n"]), text])
+            return true
+    return false
+
+## highest priority first, oldest first within it
+func _best_pending() -> int:
+    var w := 0
+    for i in _pending.size():
+        var a: Dictionary = _pending[i]
+        var b: Dictionary = _pending[w]
+        if int(a["pri"]) > int(b["pri"]) or (int(a["pri"]) == int(b["pri"]) and float(a["t"]) < float(b["t"])):
+            w = i
+    return w
+
+## the shown line a newcomer of priority `pri` may replace: one past its dwell, or a LOWER
+## priority one past DWELL_FLOOR; the lowest priority and the oldest of those. -1 = none may go
+func _evict_index(pri: int) -> int:
+    var w := -1
+    for i in _shown.size():
+        var e: Dictionary = _shown[i]
+        var age := _clock - float(e["at"])
+        var epri := int(e["pri"])
+        var ok: bool = age >= float(DWELL[epri]) or (pri > epri and age >= DWELL_FLOOR)
+        if not ok:
+            continue
+        if w < 0:
+            w = i
+            continue
+        var b: Dictionary = _shown[w]
+        if epri < int(b["pri"]) or (epri == int(b["pri"]) and float(e["at"]) < float(b["at"])):
+            w = i
+    return w
+
+func _admit(e: Dictionary) -> void:
+    e["at"] = _clock
+    _shown.append(e)
+    if _last_admit >= 0.0:
+        stats["min_gap"] = minf(float(stats["min_gap"]), _clock - _last_admit)
+    _last_admit = _clock
+    _pace_t = PACE_S
+    stats["admitted"] = int(stats["admitted"]) + 1
+    (stats["by_pri"] as Array)[int(e["pri"])] = int((stats["by_pri"] as Array)[int(e["pri"])]) + 1
+    _flog("ADMIT pri=%d q=%d '%s'" % [int(e["pri"]), _pending.size(), String(e["text"])])
+    _rebuild()
+    _fade_in_newest()
+
+func _drop(e: Dictionary, why: String) -> void:
+    stats["dropped"] = int(stats["dropped"]) + 1
+    if int(e["pri"]) >= PROTECT_FROM:
+        stats["dropped_protected"] = int(stats["dropped_protected"]) + 1
+    _flog("DROP %s pri=%d '%s'" % [why, int(e["pri"]), String(e["text"])])
+
+func _text_of(e: Dictionary) -> String:
+    var n := int(e["n"])
+    return String(e["text"]) if n <= 1 else "%s  x%d" % [String(e["text"]), n]
+
+func _flog(msg: String) -> void:
+    feed_log.append("t=%.1f %s" % [_clock, msg])
+    if feed_log.size() > LOG_MAX:
+        feed_log = feed_log.slice(feed_log.size() - LOG_MAX)
+
+func log_text() -> String:
+    return "\n".join(feed_log)
+
+## "A goblin falls (3)" and "A goblin falls (4)" are one line: digits do not make a new one
+func _key_of(text: String) -> String:
+    var out := ""
+    var in_num := false
+    for ch in text.to_lower():
+        var d: bool = ch >= "0" and ch <= "9"
+        if d and in_num:
+            continue                        # 89 and 149 are the same number as far as a repeat goes
+        out += "#" if d else ch
+        in_num = d
+    return out
+
+## L67.1: tag first (the raiser knew), words second (the raiser did not)
+func classify(text: String, tag: Dictionary) -> int:
+    if _re_town == null:
+        _re_town = RegEx.create_from_string(RE_TOWN)
+        _re_crit = RegEx.create_from_string(RE_CRIT)
+        _re_low = RegEx.create_from_string(RE_LOW)
+    var kind := String(tag.get("kind", ""))
+    if kind in ["raid", "death", "lord", "boss"]:
+        return P_CRIT
+    if kind != "" and kind != "misc" and not tag.has("who"):
+        return P_TOWN
+    if tag.has("who"):
+        return P_TOWN                       # a named hero's own action
+    var low := text.to_lower()
+    if _re_town.search(low) != null:
+        return P_TOWN
+    if _re_crit.search(low) != null:
+        return P_CRIT
+    if _re_low.search(low) != null:
+        return P_ROUTINE
+    return P_NORMAL

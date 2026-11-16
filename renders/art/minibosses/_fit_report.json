@@ -1,0 +1,194 @@
+{
+ "ok": true,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "drillmaster": {
+   "creature_h": 2.2,
+   "hero_h": 2.45,
+   "ratio": 0.9,
+   "pair_w": 3.25,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "gaoler": {
+   "creature_h": 2.35,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 5.58,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "scrapwright": {
+   "creature_h": 2.0,
+   "hero_h": 2.45,
+   "ratio": 0.82,
+   "pair_w": 4.62,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "snuffer": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 3.37,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "sexton": {
+   "creature_h": 2.45,
+   "hero_h": 2.45,
+   "ratio": 1.0,
+   "pair_w": 4.0,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "porter": {
+   "creature_h": 2.3,
+   "hero_h": 2.45,
+   "ratio": 0.94,
+   "pair_w": 5.39,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "tallyman": {
+   "creature_h": 2.15,
+   "hero_h": 2.45,
+   "ratio": 0.88,
+   "pair_w": 3.75,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "cook": {
+   "creature_h": 2.05,
+   "hero_h": 2.45,
+   "ratio": 0.84,
+   "pair_w": 4.26,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "sluicekeeper": {
+   "creature_h": 2.5,
+   "hero_h": 2.45,
+   "ratio": 1.02,
+   "pair_w": 4.52,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "sower": {
+   "creature_h": 2.25,
+   "hero_h": 2.45,
+   "ratio": 0.92,
+   "pair_w": 5.29,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "snarer": {
+   "creature_h": 2.3,
+   "hero_h": 2.45,
+   "ratio": 0.94,
+   "pair_w": 5.11,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "stoker": {
+   "creature_h": 2.4,
+   "hero_h": 2.45,
+   "ratio": 0.98,
+   "pair_w": 4.86,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "bellman": {
+   "creature_h": 2.7,
+   "hero_h": 2.45,
+   "ratio": 1.1,
+   "pair_w": 4.58,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  },
+  "boiler": {
+   "creature_h": 2.1,
+   "hero_h": 2.45,
+   "ratio": 0.86,
+   "pair_w": 5.51,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png"
+   ]
+  }
+ },
+ "errors": [],
+ "blank_check": {
+  "files": 14,
+  "failures": []
+ }
+}

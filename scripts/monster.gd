@@ -21,6 +21,8 @@ var _t := 0.0
 var _swing := 1.0
 var _rng := RandomNumberGenerator.new()
 var _aura: MeshInstance3D
+var body_r := 0.3                  # D91: centre to shoulder in the shared Crowd (Delve sets it from the mesh)
+var move_dir := Vector3.ZERO       # D91: this step's heading, so the Crowd's yield can read it
 
 func _ready() -> void:
     _rng.randomize()

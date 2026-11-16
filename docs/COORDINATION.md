@@ -358,3 +358,33 @@ OPEN FOR MR. E (raised by the laptop, not decided): boss_def() never copies BOSS
 lords move at their body speed and Nightwing's canon 6.6 never reaches the mover. A written-speed
 unique now does set it. Fixing it for ALL plain lords changes how every lord moves mid-cycle - Mr. E's
 call, left unchanged.
+
+
+## 11.x GODOT LOCK LEDGER - 2026-11-16 16:00-17:00 CT (supervisor)
+
+| Lane | Claimed | Named finish | Released | Held | Verdict |
+|------|---------|--------------|----------|------|---------|
+| game build | 16:11:02 | 16:37 | 16:17:44 | 6m42s | CLEAN - inside :07-:40, well under 25 min |
+| chat bot | 16:45:00 (refreshed 16:50:30, re-claimed 16:57:40) | ~17:04 | 17:04:30 (stamp) | ~19 min | OVERRAN - window ends :52 |
+| HUD | - | - | - | - | STARVED - no claim, no commit; the lock was held through :52-:07 |
+| art / content / hub | no lock needed | - | - | - | n/a |
+
+TWO FAULTS, BOTH ON THE CHAT BOT LANE, BOTH RECORDED SO A SECOND OCCURRENCE GOES TO MR. E:
+1. CROSS-BOUNDARY CLAIM. Its 16:57:40 re-claim named a finish of ~17:04, which is inside the HUD
+   lane's :52-:07 window. The HUD lane has no lock line and no commit for its 16:52 slot. It
+   behaved correctly by waiting in front of a claim with a named finish on it - the protocol's
+   age-based clearing does not apply to a live, named claim - and it was starved for it. This is
+   the FIRST starvation since the protocol went in at 10:25 on 16 Nov.
+   THE RULE IT BROKE IS ALREADY WRITTEN: a battery that will not finish inside the lane's own
+   window is SPLIT with a checkpoint commit and finished next slot. It is never declared past the
+   boundary. Declaring an overrun is honest; it is not permission.
+2. FUTURE STAMPS, RECURRING ON THE LANE THEY WERE FIRST WRITTEN AGAINST (13:58). At 16:59:02 the
+   lock file already read "IDLE 2026-11-16T17:04:30-06:00"; the Windows wall clock read 17:01:53
+   when checked directly. The release was stamped three to five minutes ahead of real time.
+   WHY IT MATTERS: age-based clearing computed from a future stamp is NEGATIVE, so a dead lock
+   stamped forward looks immortal and a live one looks like nothing. READ THE CLOCK OFF THE
+   MACHINE and write real Central Time with the offset.
+
+WHAT HELD: no hard release was hit by any lane, no lane landed on another's running Godot session,
+every claim named an expected finish on its own line, and no stale lock had to be cleared. The
+protocol is working; this hour's fault is one lane's arithmetic, not the design.

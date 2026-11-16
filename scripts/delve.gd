@@ -371,6 +371,15 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 		return
 	var purse := int(sp.get("purse", 50))
 	var pos: Vector3 = sp["pos"]
+	# miniboss_feed: the chamber's art-lane key (dungeon_hd THEME_MINIBOSS). With one,
+	# the elite takes that miniboss's NAME so the content writer's lines ("The
+	# Drillmaster is down.") match what the Chronicle has been calling it.
+	var mb_key := String(sp.get("mb_key", ""))
+	if mb_key != "" and not miniboss_lines(mb_key, "arrive").is_empty():
+		def = def.duplicate()
+		def["name"] = mb_key.capitalize()
+	else:
+		mb_key = ""
 	var m := Monster.new()
 	m.def = def
 	m.state = Monster.S.PATROL
@@ -385,6 +394,11 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	m.set_meta("l29c_miniboss_purse", purse)
 	m.set_meta("l29c_miniboss_rallied", false)
 	var nm := String(def.get("name", "an elite"))
+	if mb_key != "":
+		m.set_meta("mb_key", mb_key)
+		_say(_miniboss_say(mb_key, "arrive"))
+		Delve.setpieces_fired["miniboss_feed_arrive"] = int(Delve.setpieces_fired.get("miniboss_feed_arrive", 0)) + 1
+		nm = "The " + nm
 	_say("%s holds this chamber alone - a mini-boss stands between you and the way deeper." % nm)
 	Sfx.play("roar", -2.0)
 	# the atk bump rides on the meta the hit code already reads nowhere, so set
@@ -1776,8 +1790,15 @@ func _on_kill(tgt: Monster) -> void:
 				roster.award(String(m["uid"]), share, 0, 0, floor_no)
 				_float_text(m, "+%d" % share, Color(1.0, 0.85, 0.35))
 			_gold += share * alive.size()
-			_say("The %s is down. The chamber keeps a purse of %d gold - %d a share, %d ways."
-				% [String(tgt.def.get("name", "elite")), purse, share, alive.size()])
+			var mbk := String(tgt.get_meta("mb_key", ""))
+			if mbk != "":
+				# the content writer's fall line says it is down; the purse line follows plainly
+				_say(_miniboss_say(mbk, "fall"))
+				_say("The chamber keeps a purse of %d gold - %d a share, %d ways." % [purse, share, alive.size()])
+				Delve.setpieces_fired["miniboss_feed_fall"] = int(Delve.setpieces_fired.get("miniboss_feed_fall", 0)) + 1
+			else:
+				_say("The %s is down. The chamber keeps a purse of %d gold - %d a share, %d ways."
+					% [String(tgt.def.get("name", "elite")), purse, share, alive.size()])
 			Delve.setpieces_fired["miniboss_down"] = int(Delve.setpieces_fired.get("miniboss_down", 0)) + 1
 			Sfx.play("coin", -4.0)
 
@@ -3296,6 +3317,29 @@ static func lore() -> Dictionary:
 		if f:
 			_lore = JSON.parse_string(f.get_as_text())
 	return _lore
+
+## ---- miniboss_feed reader (data/lore_lines.json "miniboss_feed".by_key[key][phase]).
+## Phases: arrive / act / broken / fall. arrive and fall are wired (spawn, death);
+## act and broken belong to each miniboss's own mechanic, which is not built yet -
+## they are readable here so that mechanic only has to call _miniboss_say.
+static func miniboss_lines(key: String, phase: String) -> Array:
+	var mf: Dictionary = lore().get("miniboss_feed", {})
+	var bk: Dictionary = mf.get("by_key", {})
+	return (bk.get(key, {}) as Dictionary).get(phase, [])
+
+## one line for the event, {name} filled with an alive delver (lines that need a
+## hero and have none are skipped in favour of ones that do not)
+func _miniboss_say(key: String, phase: String) -> String:
+	var opts: Array = miniboss_lines(key, phase)
+	var al := _alive()
+	if al.is_empty():
+		opts = opts.filter(func(l): return not String(l).contains("{name}"))
+	if opts.is_empty():
+		return ""
+	var line := String(opts[_rng.randi() % opts.size()])
+	if line.contains("{name}"):
+		line = line.replace("{name}", String(al[_rng.randi() % al.size()]["h"]["name"]))
+	return line
 
 ## a variant of a stock line (same format arguments), or the stock line
 func _pick_line(key: String, stock: String) -> String:

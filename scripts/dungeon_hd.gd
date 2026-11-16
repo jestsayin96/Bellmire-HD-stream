@@ -96,6 +96,12 @@ func build(n: int) -> void:
 const DECAL_CAP := 24
 var _vein_at: Array = []               # L37: vein positions placed on this floor
 const DECAL_TEX := "res://assets/dungeon_look/decal_%s.png"
+## miniboss_feed: theme -> the art lane's miniboss key (docs/art/MINIBOSSES.md, one per
+## floorgen theme). The key picks the feed lines in data/lore_lines.json miniboss_feed.
+const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "prison": "gaoler",
+    "shrine": "snuffer", "crypt": "sexton", "keep": "porter", "treasury": "tallyman", "mess": "cook",
+    "flooded": "sluicekeeper", "grassland": "sower", "wood": "snarer", "firepit": "stoker",
+    "fogbound": "bellman", "confection": "boiler"}
 const THEME_DECAL := {"wood": "moss", "grassland": "moss", "flooded": "moss",
     "firepit": "soot", "workshop": "soot", "prison": "blood", "barracks": "blood", "crypt": "blood"}
 const SCAR_VEIN := Color(0.62, 0.32, 1.0)
@@ -786,7 +792,10 @@ func _set_pieces() -> void:
             # content writer's row.
             var def := Bestiary.pick(floor_no, theme)
             var purse: int = 40 + floor_no * 12 + _rng.randi() % 25
+            # the miniboss_feed reader: which of the art lane's fourteen this
+            # chamber holds, by theme (MINIBOSSES.md) - delve reads the feed lines by it
+            var mb_key := String(THEME_MINIBOSS.get(theme, ""))
             (info["set_pieces"] as Array).append({
                 "kind": "miniboss", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false,
-                "def": def, "purse": purse,
+                "def": def, "purse": purse, "mb_key": mb_key,
             })

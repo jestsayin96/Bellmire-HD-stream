@@ -6987,3 +6987,39 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
   have spoken there), and a hero-moment line is chatty. 0 bits, nothing redeemed, no reward touched, nothing posted.
 - Files: scripts/twitch_eventsub.gd, scripts/roster.gd (signal + 3 emits), scripts/twitch_chat.gd (first-msg tag +
   saw_viewer call - no other change), tools/_d70_test.gd. Backups *.bak_d70 (not committed).
+## D-MBF - the miniboss_feed READER: the fourteen minibosses' feed lines are finally read (game build, 2026-11-16 17:08-17:30 CT)
+- TAKE THIS NEXT gave the game build the miniboss_feed reader FIRST (then D70.2's remainder, publisher fields, S2 (b), T1/C-71).
+- THE GAP: data/lore_lines.json miniboss_feed.by_key carries 291 lines for all fourteen art-lane minibosses and no script read them -
+  and the miniboss set piece could not have used them anyway: dungeon_hd rolls `Bestiary.pick(floor, theme)`, an ordinary creature
+  with no miniboss key.
+- dungeon_hd.gd: `THEME_MINIBOSS` - one key per theme, all fourteen (FloorGen.all_themes(), the MINIBOSSES.md table: barracks/drillmaster,
+  workshop/scrapwright, prison/gaoler, shrine/snuffer, crypt/sexton, keep/porter, treasury/tallyman, mess/cook, flooded/sluicekeeper,
+  grassland/sower, wood/snarer, firepit/stoker, fogbound/bellman, confection/boiler). The miniboss set piece now carries `mb_key`.
+- delve.gd: `static func miniboss_lines(key, phase)` reads by_key[key][phase]; `_miniboss_say` picks one, fills {name} with an alive
+  delver (drops {name} lines when nobody is alive). On spawn: an ARRIVE line, then the hold line, and the elite takes the miniboss's
+  NAME ("The Stoker holds this chamber alone ...") so the writer's fall lines ("The Stoker is down.") match what the Chronicle called
+  it. On the kill: a FALL line, then the purse line without its own "is down" (no double obituary). Counted in setpieces_fired as
+  miniboss_feed_arrive / miniboss_feed_fall. No key (or no lines) -> exactly the old behaviour.
+- NOT WIRED, SAID PLAINLY: ACT and BROKEN. Those are each miniboss's signature mechanic firing and being broken (summon, re-plate,
+  hook-drag, snuff the lamps), and none of those mechanics exists yet - firing "The gong again. The garrison falls in." with no
+  garrison would be a lie in the feed. They are readable through the same reader, so a mechanic needs one `_say(_miniboss_say(k, "act"))`.
+  The rally (half hp) is NOT the mechanic and was deliberately not borrowed for "act". The body is still the bestiary creature's -
+  the miniboss .glb wiring (BOSS_DEFS `model`) is a separate item.
+- NEW GATE tools/_mbfeed_test.gd: MBFEED_TEST OK 80 checks - 14 themes -> 14 distinct keys, 14 x 4 phases readable, a real floor's
+  miniboss set piece carries its theme's key, a real spawn + kill through Delve writes an arrive line and a fall line FROM THE POOL to
+  the feed, counted once each, purse still pays, no unfilled {name}. Transcript (floor 6, firepit):
+    The heat comes before the man. | The Stoker holds this chamber alone - a mini-boss stands between you and the way deeper. |
+    The Stoker is down. The furnace is cold. | The chamber keeps a purse of 113 gold - 113 a share, 1 ways.
+- ALSO (TAKE THIS NEXT fifth, C-71's recheck - the one-grep answer): nothing in my files CAPS the title or dye list, but roster.gd
+  `dye()` answered an unknown colour with ALL dye names - 281 names, ~2800 chars, cut by CHAT_MAX_LEN at 480 mid-word. Now:
+  "The dyer has 281 colours - try brick, ferrybell, gaoleriron, northwood, ninthdusk, ledgerink." (93 chars, DYE_LIST OK,
+  tools/_dye_list_check.gd). Titles: no list-dump reply found in my files; chatcmd.gd is the chat bot's and was not touched.
+- L29C_TEST: 33 checks, ONE FAIL, "C: at least one set piece of any kind fired during the soak (0)" - the 10801-frame soak only
+  reached floor 2 and met no set piece at all (fired={}), so it never entered the miniboss path this cycle touched; its B.miniboss
+  section passes in full and now prints the arrive/fall lines. Not a commit gate; recorded, not fixed here.
+- GATES: see the commit line. LOOKED: the feed transcript above is the on-screen text verbatim (the feed shows these strings); no
+  separate render this cycle - no visual changed.
+- NO LIVE TWITCH TEST: nothing here is Twitch-facing except the dye reply, a reply string. 0 bits, nothing redeemed, nothing posted,
+  no reward touched.
+- Files: scripts/delve.gd, scripts/dungeon_hd.gd, scripts/roster.gd, tools/_mbfeed_test.gd, tools/_dye_list_check.gd.
+  Backups *.bak_mbfeed (not committed).

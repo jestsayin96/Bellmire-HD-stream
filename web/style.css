@@ -1371,7 +1371,8 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .shop-good.passing { background: rgba(201,165,74,.08); }
 .shop-good.mine { border-left-color: var(--accent, #3aa6a0); }
 .rar-uncommon { border-left-color: #6aa84f; } .rar-rare { border-left-color: #4a86c8; }
-.rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }
+.rar-very-rare, .rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }
+.rar-artifact { border-left-color: #d9643a; }
 
 /* ===== H30: the Satchel tab (reuses .shop-card / .hpbar / .chip; the bar width is a CSSOM number) ===== */
 .sat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 10px; }

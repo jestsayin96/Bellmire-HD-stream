@@ -648,3 +648,10 @@ Buttons send a chat command over the existing H6/H8 IRC socket. Built only by sa
   `born_day|joined_day|enlisted_day`); a board without data says so instead of guessing.
 - Tested: `?mock=season` (full season, hostile name/class/killer), `season0` (empty), `season3` (v3, no age fields).
   Hostile `<img onerror>` renders as literal text, no dialog, no page errors.
+
+## C-55 / C-61 rarity frame (2026-11-16)
+`SHOP_RARITY` is now a Map from known rarity strings to page-owned class slugs
+(common, uncommon, rare, very-rare, legendary, artifact; legacy "epic" aliases to very-rare).
+"very rare" contains a space, so the snapshot string is never used as a class: only the slug
+from the map is. Unknown values (including `<x>`) produce no class and render as text only.
+The hub reads the stored `rarity` key and never bands anything by cost (C-61). No CSP change.

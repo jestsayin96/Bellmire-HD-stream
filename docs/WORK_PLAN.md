@@ -189,7 +189,23 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
       C-61 directly below and given to the CONTENT lane.
 
   [ ] C-61. RARITY IS BANDED PER SLOT, SO EVERY SLOT HAS A TOP BAND (content lane, data/items.json;
-      the GAME BUILD mirrors whatever reads rarity). Written 2026-11-16 05:58 CT on Mr. E's ruling
+      the GAME BUILD mirrors whatever reads rarity).
+      *** DATA HALF DELIVERED - NOT TICKED. THE CODE MIRROR IS STILL OPEN. *** (supervisor,
+      2026-11-16 06:58 CT; content 60ca2d2, merged to main.) The content lane re-derived `rarity` on
+      all 254 accessories INSIDE each slot: midrank cost percentile among that slot's own pieces (equal
+      costs share a rung), cut at the C-58 population proportions. 122 of 254 labels moved. No cost,
+      stat, tier or price changed, no rung added or renamed, equipment rarity untouched; a top-level
+      `_note_c61` records the rule. PER-SLOT BANDS (common/uncommon/rare/very rare/legendary): ring
+      9/23/11/8/4, amulet 9/20/12/7/3, cloak 8/21/10/6/4, boots 6/21/11/7/3, gloves 8/24/8/8/3 - so
+      EVERY slot now has a legendary, boots at 390-420 and gloves at 320-380, and the D95 showcase no
+      longer needs to borrow very-rare pieces. Artifact unchanged: zero accessories are artifact, and
+      no artifact id appears in shop_stock, trader_cargo or caravan_manifests. All four data files
+      parse; every other key and value is byte-identical to HEAD with key order preserved.
+      WHAT IS OWED, AND IT IS THE GAME BUILD'S: every reader that still bands an accessory by the
+      GLOBAL 441+ cost threshold must read the stored `rarity` key instead - never a cost threshold.
+      Named by the writer: the hub, the icon border colour, the shop level gate and the D95 showcase
+      legendary row. tools/art/showcasegen.py line ~109 still picks "from the cost band" and is the ART
+      lane's own arm of the same mirror. C-61 ticks when a reader disagrees with the data nowhere. Written 2026-11-16 05:58 CT on Mr. E's ruling
       above - he told us to figure it out, so this is not an invented item under the freeze.
       THE FAULT: one global cost scale decides rarity for every slot, so the two cheapest-topping
       slots can NEVER hold a legendary piece at any price a viewer can reach. That is why D95's
@@ -268,66 +284,98 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 05:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 06:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
-down the file." THERE ARE SIX LANES NOW: the CHAT BOT lane was created on Mr. E's word at 04:56
-and owns scripts/chatcmd.gd and data/commands.json exclusively, on branch `chatbot`.
+down the file." THERE ARE SIX LANES: the CHAT BOT lane owns scripts/chatcmd.gd and
+data/commands.json exclusively, on branch `chatbot`, and delivered L68 on its first slot.
 
-  GAME BUILD   ->  *** FINISH D91. IT IS HALF DELIVERED AND NOT TICKED. *** Your D91b landed and is
-                   merged: three-cell halls on a grown grid (290/290 rooms), the dungeon in the
-                   shared Crowd helper with a late settle, the party in file. D91_PLAN OK, D91_SOAK
-                   OK, gates green. IT IS NOT TICKED, and you owe the two things you named yourself:
-                   (a) the TOWN half - the wizard standing inside a bush is Mr. E's own screenshot
-                   and it is half of what he reported; (b) the 20-MINUTE RE-SOAK, because the soak
-                   that passed ran 619 s. Do NOT rebuild stages 1-4 and do not re-measure the halls.
-                   D91 is the WHOLE of Phase 1's remainder, so this finishes Phase 1.
+*** THE RUN_LOCK ONLY WARNS PEOPLE IF IT IS COMMITTED AND PUSHED. *** Found 07:21 CT, and it is a
+real hazard, not a nit: the game build claimed the lock at 06:29, 06:44, 06:55 and 07:19, and every
+one of those lines sat UNCOMMITTED in its worktree. From origin - which is where the other three
+lock-sharing lanes read it - docs/RUN_LOCK.txt still said IDLE 05:58 while a 20-minute soak was in
+flight. Any of HUD, ART or CHAT BOT could have launched straight into it. So: whoever claims the
+lock COMMITS AND PUSHES THAT LINE IN THE SAME BREATH as claiming it, and whoever reads the lock
+treats a LIVE GODOT PROCESS as ground truth and the file as a claim that may be stale in either
+direction.
+
+  GAME BUILD   ->  *** STILL D91, AND YOU ARE ALREADY ON IT - KEEP GOING. *** CORRECTED AT 07:21 CT:
+                   I first read your 06:07 slot as silent, because from origin it was. It was not.
+                   You merged main at 06:08 and have been soaking since 06:29 (town soak relaunched
+                   twice, delve 20-min soak PASSED), Godot PID 22484 is live as I write this, and the
+                   lock is properly claimed. Nothing below is a complaint. D91b is merged and NOT
+                   ticked. What is owed is what you named yourself: (a) the
+                   TOWN half - the wizard standing inside a bush is Mr. E's own screenshot and it is
+                   half of what he reported; (b) the 20-MINUTE RE-SOAK, because the soak that passed
+                   ran 619 s. Do NOT rebuild stages 1-4 and do not re-measure the halls.
+                   THEN, IN THIS ORDER, AND BOTH ARE NOW UNBLOCKED BY DATA THAT LANDED AT 06:22:
+                   (1) C-61's CODE MIRROR - the content lane has re-banded all 254 accessories per
+                   slot in data/items.json, so every reader that still bands by the GLOBAL 441+ cost
+                   threshold must read the stored `rarity` key instead: the hub, the icon border
+                   colour, the shop level gate, the D95 showcase legendary row. Boots are now
+                   legendary at 390-420 and gloves at 320-380, so recheck any gate keyed to cost.
+                   (2) C-55's fishing arm - angler.gd, fishing.gd and economy.gd's RARITY const
+                   still say "epic" while items.json says "very rare". One ladder means one word.
                    NOTED FOR LATER, NOT NOW: the fourteen minibosses need their bestiary.gd heights
                    (h = authored + 1.30 m, table in docs/art/MINIBOSS_FIT.md) and Mr. E's
                    wand_crystal.glb needs an attach - both after Phase 1, both yours.
-  ART          ->  *** D94 GLOVES. MR. E RULED AT 04:56 AND THIS IS THE LAST BUILDABLE HALF OF
-                   D94. *** Verbatim: "i understand the rings but gloves can be seen so we dont have
-                   to make new rings." RINGS ARE CLOSED - do not build an oversize ring and do not
-                   re-measure rings. GLOVES ARE NOT: 11 of 15 pairs are too small to tell apart on a
-                   body. Give the glove derivation real silhouette - cuff depth, knuckle plate,
+  ART          ->  *** D94 GLOVES - UNCHANGED, AND IT IS NOW THE OLDEST THING ON YOUR ROW. *** You
+                   spent 05:34 and 06:34 on minibosses and the FIT proof, which was useful (the
+                   fourteen are shorter than the party and built in the wrong register, and that is
+                   now written down) - but the gloves half is Mr. E's own 04:56 ruling and it has not
+                   been started. Verbatim: "i understand the rings but gloves can be seen so we dont
+                   have to make new rings." RINGS ARE CLOSED - do not build an oversize ring and do
+                   not re-measure rings. GLOVES ARE NOT: 11 of 15 pairs are too small to tell apart
+                   on a body. Give the glove derivation real silhouette - cuff depth, knuckle plate,
                    gauntlet flare riding COST, name first and hash as a fallback - and keep the hub
                    icon and the thing on the hand ONE object, the condition that has held through
                    every D94 fix. FIT IS THE TEST: six different gloves on real hero bodies, front,
                    side and back. The game build mirrors gear.gd after you - name that half, do not
-                   reach into it. THEN, and only then: finish the miniboss REGISTER conversion you
-                   proved was needed (drillmaster_chibi is your own worked example, seven faults
-                   listed; the other thirteen wait on the head/register three). The +1.30 m heights
-                   are NOT yours - they are a bestiary.gd number.
-  CHAT BOT     ->  *** L68 - BELLMIREBRO MUST KNOW WHAT THE GAME HAS BECOME. *** You are a NEW lane
-                   (created 04:56 on Mr. E's word: "assign a worker for the desktop"). L68, L69, L70
-                   and L56 were marked "Owner: LAPTOP CODE" - a worker on the retired jestai laptop
-                   that was never rebuilt here, so they had an owner on paper and nobody to do them.
-                   They are yours. QUEUE: L68 -> L69 -> L70 -> L56. You own scripts/chatcmd.gd and
-                   data/commands.json EXCLUSIVELY on branch `chatbot`; the game build has given them
-                   up and keeps twitch_eventsub.gd. Touch nothing else. You share the Godot RUN_LOCK
-                   with three other lanes - read docs/RUN_LOCK.txt and claim it before you launch.
-                   Your PROGRESS.md cycles are B-prefixed.
-  CONTENT      ->  *** BACK ON - THE SHUTDOWN IS LIFTED (Mr. E, 04:56). YOUR ITEM IS C-61. ***
-                   Mr. E on the legendary cap: "i never gave you a cap so you figure it out." So the
-                   441+ threshold was never his ruling and the fix is ours. C-61: band rarity PER
-                   SLOT, against each slot's OWN cost range, so the top of every slot's range is
-                   legendary. Boots cap at 420 and gloves lower, so today those two slots can never
-                   hold a legendary piece - which is why D95's legendary row had to borrow very-rare
-                   pieces. It changes NO price and keeps C-55's six-rarity ladder exactly as it is.
-                   Do NOT instead write dearer boots and gloves - that re-prices gear viewers have
-                   already paid for. Full item and DONE test under D94's remainder, search "C-61".
-  HUD          ->  *** BACK ON - THE SHUTDOWN IS LIFTED (Mr. E, 04:56). *** Your STAND DOWN row is
-                   gone. L72 is ticked. L73 is HALF DELIVERED and still open: the shot language
-                   itself is in and L73_TEST passes, so DO NOT REBUILD IT - what is owed is the one
-                   capture it was specified with, a 30-minute run in which a viewer can tell FROM
-                   THE CAMERA ALONE when something important happened. Take that, then L74 (the feed
-                   and the theme under load, shots at all three scales during a raid).
-  HUB          ->  STAND DOWN - and this time it is not the shutdown. The shutdown is lifted, but
-                   H29, H30 and H31 are all shipped, merged and TICKED, the stale "queue is EMPTY"
-                   brief has been overtaken by the work actually landing, and the freeze forbids
-                   inventing more. Nothing is queued for this lane. If you want to be useful without
-                   writing a new item: re-verify the live-data version gate (KNOWN_V is at v4) still
-                   lights the Shop and Satchel tabs by themselves, and report what you find. Do not
-                   reach into another lane's files to look busy.
+                   reach into it. ALSO: your worktree is DIRTY - twenty-four miniboss PNGs under
+                   renders/art/minibosses/ and five files under tools/art/ are modified and
+                   uncommitted. Commit them or revert them; do not leave a slot's work unpushed.
+                   THEN, and only then: the miniboss REGISTER conversion you proved was needed
+                   (drillmaster_chibi is your own worked example, seven faults listed; the other
+                   thirteen wait on the head/register three). The +1.30 m heights are NOT yours -
+                   they are a bestiary.gd number.
+  CHAT BOT     ->  *** L69 - THE BOT CARRIES THE CHAT, NOT JUST THE COMMANDS. *** L68 is DELIVERED,
+                   MERGED AND TICKED - the first lane to land its first item inside one slot. Proving
+                   the drift test instead of writing a second one was the right call and is recorded.
+                   QUEUE UNCHANGED: L69 -> L70 -> L56. L69 is Mr. E's "handle a lot of the chat":
+                   today a viewer gets an answer only if they type the exact command, so widen it.
+                   You still own scripts/chatcmd.gd and data/commands.json EXCLUSIVELY; touch nothing
+                   else. ONE SMALL THING THAT IS YOURS AND IS NOT NEW WORK: chatcmd.gd line ~69 still
+                   has `order := ["junk","common","uncommon","rare","epic","legendary"]`. "epic" was
+                   retired from the game's ladder by C-55. Fix that word while you are in the file -
+                   it is the chat bot's arm of C-55, named under that item.
+  CONTENT      ->  *** FINISH C-55'S LADDER IN THE DATA - data/fishing.json. *** C-61 is DELIVERED
+                   (the data half) and merged: 254 accessories re-banded inside their own slot, 122
+                   labels moved, every slot now holds a legendary, no price touched. NOT TICKED, and
+                   that is not a complaint about your work - C-61 has a code half the game build owes
+                   and I do not tick an item while half of it is open. Your next item is NOT new:
+                   C-55 said ONE rarity ladder for the WHOLE game, and fishing was never converted.
+                   data/fishing.json still carries "epic" in the ladder array (line 23) and on three
+                   catches (111, 272, 283), so a viewer reads "epic" on a fish and "very rare" on a
+                   ring. Convert the data, keep every id, name, weight and price byte-identical, and
+                   print the before/after counts. The code arms are not yours: angler.gd, fishing.gd
+                   and economy.gd are the game build's, chatcmd.gd's order array is the chat bot's.
+  HUD          ->  *** L73'S ONE CAPTURE. IT IS THE ONLY THING BETWEEN YOU AND A TICK. *** Nothing
+                   landed from you at 05:52 or 06:52. L72 is ticked. L73's shot language is in and
+                   L73_TEST passes, so DO NOT REBUILD IT - what is owed is the single capture it was
+                   specified with: a 30-minute run in which a viewer can tell FROM THE CAMERA ALONE
+                   when something important happened. *** DO NOT LAUNCH GODOT RIGHT NOW WITHOUT
+                   CHECKING: THE GAME BUILD IS LIVE. *** As of 07:21 CT it is running D91 town/delve
+                   soaks (Godot PID 22484). origin's docs/RUN_LOCK.txt read IDLE for the whole of it
+                   because the claims were written locally and not committed - see the note at the
+                   top of this block. CHECK FOR A LIVE GODOT PROCESS, not the file. Then L74 (the feed and
+                   the theme under load, shots at all three scales during a raid).
+  HUB          ->  STAND DOWN - second run in a row, and it is still not the shutdown. H29, H30 and
+                   H31 are all shipped, merged and TICKED; the freeze forbids inventing more; nothing
+                   is queued for this lane. If you want to be useful without writing a new item:
+                   re-verify the live-data version gate (KNOWN_V is at v4) still lights the Shop and
+                   Satchel tabs by themselves, and report what you find. Do not reach into another
+                   lane's files to look busy. THE ONE THING THAT WOULD FEED YOU IS MR. E'S: he is the
+                   only one who can publish the hub to gh-pages, and he is the only one who can raise
+                   a new hub item under the freeze.
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
@@ -470,6 +518,14 @@ D41 -> D48.
   a rule. Code must refuse to let a shop stock an artifact at any level and refuse to let the trader carry
   one (shop_stock / trader_cargo / stock_by_tier readers, with D64's level gate). Do not tick C-55 until
   that is enforced in code.
+  AND THERE IS A SECOND REMAINDER, MEASURED 2026-11-16 06:58 CT: "ONE RARITY LADDER FOR THE WHOLE GAME"
+  is not true yet, because FISHING STILL RUNS ON "epic". data/fishing.json carries "epic" in the ladder
+  array (line 23) and on three catches (lines 111, 272, 283), and the word is still live in angler.gd,
+  fishing.gd, economy.gd's RARITY const and chatcmd.gd's order array. items.json was cleaned by C-58;
+  fishing was not, so a viewer sees "epic" on a fish and "very rare" on a ring - the exact split the
+  ruling was written to end. ARMS: data/fishing.json is the CONTENT lane's; angler.gd / fishing.gd /
+  economy.gd are the GAME BUILD's; chatcmd.gd's order array is the CHAT BOT lane's now that it owns
+  that file. This is not a new item - it is the unfinished part of C-55, recorded against it.
 
 Mr. E listed "common, uncommon, rare, epic, legendary, s+, ss+, sss+. or however the DnD labels
 them" and asked for a recommendation. DECIDED: D&D's six. No S-tiers.
@@ -2151,7 +2207,24 @@ and a viewer in chat has no way to learn it exists. Everything shipped since Nov
 to the bot: the festival (D63), the Satchel (D57), the character sheet (D59), and the gear and
 shop economy now being built (D64-D66).
 
-- [ ] L68. BELLMIREBRO MUST KNOW WHAT THE GAME HAS BECOME. Owner: LAPTOP CODE (chatcmd.gd,
+- [x] L68. BELLMIREBRO MUST KNOW WHAT THE GAME HAS BECOME. CHAT BOT LANE (was "Owner: LAPTOP CODE").
+      RESULT (ticked 2026-11-16 06:58 CT by the supervisor; chatbot 876ed5e, merged to main): all three
+      parts in, and the lane's first delivery. .1 !hub / !site / !guildhall answer with the live URL,
+      which lives in `hub_url` in data/commands.json and NOT in code, so chat, !help and the hub's own
+      Commands tab cannot disagree; !hero ends "| Full sheet: <url>" and !help / !commands end "All of
+      it: <url>". .2 !satchel / !sell / !prices state the two-fifths sell-back read off SELL_BACK = 0.4
+      rather than invented, !festival / !feast cover D63 and !bestiary / !beasts / !monsters the
+      Bestiary; no dungeon floor count anywhere. .3 THE DRIFT TEST ALREADY EXISTED and nobody had
+      noticed - tools/_l14_test.gd reads ChatCmd's own `match verb:` block out of the source and checks
+      both directions - so .3 needed PROVING, not writing: pulling the !hub entry gives "missing [hub,
+      site, guildhall]", pulling the code arm gives "unanswered [hub]", both L14_TEST FAIL 1, both
+      reverted byte-identical. No new test was written and tools/ was not touched, which was right - a
+      new one would have duplicated a working test in a directory this lane does not own.
+      Every pre-existing key in data/commands.json is byte-identical; the four entries and four `order`
+      slots are additive. THE CONTRACT IS UNTOUCHED: twitch_reply(user_login, text) still emits plain,
+      no @name, no rate limiting; twitch_eventsub.gd still owns the queue, the prefix and the send.
+      GATES: parse 0 errors, COMMANDS_DOC 25 commands, L14_TEST OK, TWITCH_PARSE OK, replies 148-329
+      of 500. ORIGINAL ITEM TEXT KEPT BELOW. (chatcmd.gd,
       data/commands.json - both laptop-owned; data/ except the four content files). The DESKTOP
       side of the chat contract is untouched: chatcmd.gd emits twitch_reply(user_login, text) with
       no @name and no rate limiting, and twitch_eventsub.gd owns the queue, the prefix and the

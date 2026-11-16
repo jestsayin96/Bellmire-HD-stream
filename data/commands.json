@@ -3,7 +3,7 @@
   "hub_url": "https://jestsayin96.github.io/Bellmire-HD-stream/",
   "cooldown_s": 1.5,
   "twitch_cooldown_s": 3.0,
-  "order": ["enlist", "hero", "inventory", "delve", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "festival", "bestiary", "help"],
+  "order": ["enlist", "hero", "catchup", "inventory", "delve", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "festival", "bestiary", "help"],
   "commands": {
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order (see !help in docs/COMMANDS.md).",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
@@ -11,6 +11,9 @@
     "hero":      {"aliases": ["stats", "sheet"], "args": "", "cost": "free", "needs_hero": true, "short": "Your hero's sheet.",
                   "what": "Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record.",
                   "example": "!hero"},
+    "catchup":   {"aliases": ["mystory", "since"], "args": "", "cost": "free", "needs_hero": false, "short": "What your hero did while you were away, in a line.",
+                  "what": "What happened to your hero while you were away: what they did, how it went, and where they stand now. One line, kept short on purpose - the Chronicle of every day in full, and the sheet behind it, are on the hub.",
+                  "example": "!catchup"},
     "inventory": {"aliases": ["inv", "bag", "items"], "args": "", "cost": "free", "needs_hero": true,
                   "what": "What your hero carries: title, weapon, armour, accessories, dye, brews, oil, gold, and the best fish caught.",
                   "example": "!inventory"},
@@ -80,6 +83,34 @@
     "help":      {"aliases": ["commands"], "args": "[command]", "cost": "free", "needs_hero": false,
                   "what": "The command list; !help <command> for one in detail.",
                   "example": "!help forge"}
+  },
+  "ask": {
+    "_why": "L69: a viewer who does not know the commands still gets an answer. A line with NO leading ! is flattened to words and matched against these phrases; the first topic in `order` that matches answers. A topic with `reply` is a shared answer and is said to the channel at most once every `gap_s` seconds, so twelve people asking the same thing in a burst get one answer instead of twelve. A topic with `cmd` runs that command for the asker instead - their own sheet differs per viewer, so those are never held back. A pattern with + wants every one of those words present; any other pattern is the phrase itself, matched on a word boundary. A new answer is an edit here, not in code.",
+    "gap_s": 45.0,
+    "max_len": 140,
+    "order": ["missed", "myhero", "join", "real", "what", "gear", "gold", "bits", "commands", "hub"],
+    "topics": {
+      "missed":   {"cmd": "catchup",
+                   "phrases": ["what did i miss", "did i miss", "catch me up", "what happened to my", "miss+anything", "what+miss+hero", "hero+been", "hero+doing", "hero+up+to"]},
+      "myhero":   {"cmd": "hero",
+                   "phrases": ["my hero", "my stats", "my sheet", "my character", "my guy", "my knight", "hero+mine"]},
+      "join":     {"reply": "Anyone can play. Type !enlist and you have a hero in Bellmire - name a calling and a people if you want them, or the valley picks. Then !oil, then !delve.",
+                   "phrases": ["how do i join", "how to join", "how do i play", "how to play", "can i play", "can i join", "how do i get in", "can i get a hero", "how+get+hero", "how+make+hero", "how+create+hero", "how+join", "join+game"]},
+      "real":     {"reply": "Real game. Bellmire is built in Godot and runs on this machine while the stream is up. Every hero, every delve and every death is written down.",
+                   "phrases": ["is this a real game", "real game", "is this real", "actual game", "this+real+game"]},
+      "what":     {"reply": "Bellmire is a town with a hole under it. Viewers each get a hero, send them down for gold and gear, and the town grows or buries them. !enlist to get one.",
+                   "phrases": ["what is this", "whats this", "what game", "what are we playing", "what is bellmire", "what am i watching", "whats going on", "what+this+game"]},
+      "gear":     {"reply": "Gold buys it in town: !forge for a weapon, !armoury for armour, !wear for rings, cloaks and the like. The best steel is only found below.",
+                   "phrases": ["how do i get gear", "how do i buy", "get better gear", "how+get+gear", "how+get+weapon", "how+get+armour", "how+get+armor", "how+get+sword", "how+buy+gear", "how+upgrade"]},
+      "gold":     {"reply": "Two ways: !delve and bring something back, or !fish at the docks. The counter also pays two fifths of shop cost for anything you own and are not wearing - !satchel.",
+                   "phrases": ["how do i get gold", "how+get+gold", "how+make+gold", "how+get+money", "how+make+money", "how+earn", "need gold"]},
+      "bits":     {"reply": "Cheering lights a pane on your hero for the channel to watch - the bigger the cheer, the longer it holds. Subs and point redeems get their own pane.",
+                   "phrases": ["what are the bits for", "what do bits do", "what do the bits do", "bits+for", "bits+do", "bits+what", "why+cheer"]},
+      "commands": {"cmd": "help",
+                   "phrases": ["what commands", "what can i type", "list of commands", "what are the commands", "what can i do", "how+commands"]},
+      "hub":      {"cmd": "hub",
+                   "phrases": ["is there a website", "is there a site", "is there a page", "wheres the page", "where+website", "where+site", "link+site", "website+link"]}
+    }
   },
   "foreign": {
     "_why": "Other apps reading the same chat (Mr. E, Nov 11). Bellmire never answers these, and never nudges a word that is one of them, starts with one of their prefixes, or is a near miss of one - a viewer's !hug works in the overlay, and a 'No !hug here' in the Chronicle would read as a broken game. A new overlay command is an edit here, not in code. Never add a Bellmire command that matches one.",

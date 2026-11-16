@@ -179,7 +179,23 @@
     {"name": "Nightwing, Pelt-Torn", "shape": "its hide in ribbons - lighter and louder, and it screams the whole way in", "hp": 90, "speed": 7.2},
     {"name": "Nightwing, Chapel-Roosted", "shape": "it roosts among the old bells - every toll sends it spinning off the wall", "hp": 140, "speed": 5.0},
     {"name": "Nightwing, Weighted", "shape": "carrying a stolen purse - slower and heavier, and it refuses to let go of it", "hp": 170, "speed": 3.6},
-    {"name": "Nightwing, Night-Blooded", "shape": "bled by the night itself - quick and pale, and it heals by dark alone", "hp": 115, "speed": 6.4}
+    {"name": "Nightwing, Night-Blooded", "shape": "bled by the night itself - quick and pale, and it heals by dark alone", "hp": 115, "speed": 6.4},
+    {"name": "The Hollow King, Bell-Hollow", "shape": "the toll rings through its ribs - every swing is heard before it lands, if you listen", "hp": 190, "speed": 3.0},
+    {"name": "The Hollow King, Thorn-Crowned", "shape": "its crown has grown inward - slower, and every blow it lands costs it dearly", "hp": 200, "speed": 2.2, "attack": 24},
+    {"name": "The Hollow King, Ferry-Lit", "shape": "it carries a cold lantern for the dead - quick on a straight line, helpless at a corner", "hp": 140, "speed": 4.2},
+    {"name": "The Hollow King, Nine-Candled", "shape": "nine small flames ring it, and they gutter one at a time as it is struck", "hp": 185, "speed": 2.6, "attack": 24},
+    {"name": "The Grubmother, Rot-Ripe", "shape": "so ripe she bursts - slow and stinking, and the brood spills out when she falls", "hp": 270, "speed": 1.4},
+    {"name": "The Grubmother, Hive-Lidded", "shape": "she keeps the brood under a lid - open it and they swarm, close it and she barely moves", "hp": 250, "speed": 1.2},
+    {"name": "The Grubmother, Wick-Spun", "shape": "spun thin on candle-silk - lighter than she looks, and twice as quick", "hp": 160, "speed": 3.0},
+    {"name": "The Grubmother, Pantry-Sleeping", "shape": "woken from the larder - she barely stirs until struck, and then does not stop", "hp": 290, "speed": 1.0, "attack": 24},
+    {"name": "The Rattling Host, Cart-Hauled", "shape": "it drags a death-cart behind it - slow, but the cart is a wall and the wall moves", "hp": 220, "speed": 1.9},
+    {"name": "The Rattling Host, Sleep-Walking", "shape": "it never stopped marching - fast, vague, and it hits whoever stands nearest", "hp": 150, "speed": 4.4},
+    {"name": "The Rattling Host, Banner-Torn", "shape": "the standard hangs in rags - fewer of them, no order, and no mercy", "hp": 160, "speed": 3.6},
+    {"name": "The Rattling Host, Fife-Led", "shape": "a bone-fife calls the step - break the piper and the march falls apart", "hp": 175, "speed": 3.0},
+    {"name": "Nightwing, Candle-Drunk", "shape": "it chases flame and forgets the hand that holds it - fast, and easily led", "hp": 100, "speed": 6.2},
+    {"name": "Nightwing, Bellrope-Tangled", "shape": "snarled in an old bellrope - clumsy in the air, and the rope lashes whoever is close", "hp": 120, "speed": 4.0, "attack": 24},
+    {"name": "Nightwing, Moon-Pale", "shape": "it only strikes in clear light - quicker than thought and gone before it is seen", "hp": 90, "speed": 7.4, "attack": 22},
+    {"name": "Nightwing, Stone-Perched", "shape": "it hangs from the roof like a gargoyle - slow to drop, but it drops hard", "hp": 165, "speed": 3.4, "attack": 25}
   ],
   "greater_uniques": [
     {"name": "The Gravewyrm, Half-Woken", "shape": "only half risen - slower and softer in the body, but its breath comes deep and ill-tempered", "hp": 230, "attack": 26},
@@ -314,6 +330,22 @@
     {"name": "Mourncoil, Snow-Blind", "shape": "blind in the white and striking by sound - silence confuses it", "hp": 280, "speed": 2.8, "attack": 28},
     {"name": "Mourncoil, Cradle-Cold", "shape": "gentle until woken - a long slow start and a long sure finish", "hp": 340, "speed": 1.8, "attack": 25},
     {"name": "Mourncoil, Melt-Run", "shape": "meltwater streams from every coil - the floor floods and the cold runs deep", "hp": 270, "speed": 3.0, "attack": 26},
-    {"name": "Mourncoil, Cellar-Cold", "shape": "it hunts the damp - quick along the walls, slow in the open", "hp": 260, "speed": 3.4, "attack": 27}
+    {"name": "Mourncoil, Cellar-Cold", "shape": "it hunts the damp - quick along the walls, slow in the open", "hp": 260, "speed": 3.4, "attack": 27},
+    {"name": "The Gravewyrm, Barrow-Coiled", "shape": "coiled about a barrow mound - it will not leave the mound, so the mound is the fight", "hp": 380, "speed": 1.6, "attack": 28},
+    {"name": "The Gravewyrm, Ash-Lunged", "shape": "it breathes ash, not fire - the air thickens and no one sees past arm's length", "hp": 280, "speed": 3.2, "attack": 27},
+    {"name": "The Gravewyrm, Gravel-Scaled", "shape": "scales of gravel and slate - the first blow glances and the rest land softer", "hp": 360, "speed": 1.5, "attack": 29},
+    {"name": "The Gravewyrm, Dusk-Waking", "shape": "it wakes as the light ends - sluggish all day, and everything it does comes quicker after dark", "hp": 300, "speed": 3.8, "attack": 26},
+    {"name": "The Ossuary Lord, Reliquary-Locked", "shape": "it hugs a locked reliquary - strike the box before the lord, or the lord does not stagger", "hp": 350, "speed": 1.7, "attack": 25},
+    {"name": "The Ossuary Lord, Pilgrim-Piled", "shape": "a heap of pilgrim bones walking as one - big, slow, and it throws the pile", "hp": 330, "speed": 2.0},
+    {"name": "The Ossuary Lord, Bell-Boned", "shape": "every bone chimes as it moves - loud, quick, and it cannot ambush anyone", "hp": 260, "speed": 3.6, "attack": 26},
+    {"name": "The Ossuary Lord, Last-Rites", "shape": "it mutters the last rites and every word is a blow - slow to start, merciless once the prayer runs on", "hp": 300, "speed": 2.4, "attack": 28},
+    {"name": "The Pale Duchess, Mirror-Masked", "shape": "she wears a mirror for a face - what you swing at her, she shows back", "hp": 220, "speed": 3.4, "attack": 29},
+    {"name": "The Pale Duchess, Waltz-Bound", "shape": "she will not stop dancing - quick and light, hard to pin, and she tires before you do", "hp": 200, "speed": 4.6, "attack": 27},
+    {"name": "The Pale Duchess, Ledger-Keeping", "shape": "she tallies every slight - slow to anger, but she repays each one in full", "hp": 250, "speed": 2.0, "attack": 31},
+    {"name": "The Pale Duchess, Veil-Drawn", "shape": "a veil hides her hands - you see the strike only after it has landed", "hp": 190, "speed": 4.0, "attack": 30},
+    {"name": "Mourncoil, Icicle-Hung", "shape": "spears of ice hang from every coil - they fall on whoever stands beneath", "hp": 300, "speed": 2.2, "attack": 26},
+    {"name": "Mourncoil, Hearth-Starved", "shape": "it hunts the last warm thing in the room - and that is always you", "hp": 280, "speed": 3.0, "attack": 27},
+    {"name": "Mourncoil, Thaw-Sick", "shape": "half thawed and furious - fast and brittle, and the floor is slick behind it", "hp": 240, "speed": 4.2, "attack": 25},
+    {"name": "Mourncoil, Wellspring-Fed", "shape": "drawn from a deep cold spring - slow to hurt, and impossible to wear down", "hp": 350, "speed": 1.6, "attack": 28}
   ]
 }

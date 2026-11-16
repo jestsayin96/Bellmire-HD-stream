@@ -5872,3 +5872,37 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - tools/_l72_test.gd WINDOWED 1920x1080: all eight lords, five shots each over 8 s. Final frames: every bound point inside the frame for all eight, camera never inside geometry (camera_solid false), fails=0. Fitted distances: Pale Duchess 14, Hollow King 15, Rattling Host 16, Nightwing 20, Grubmother 23 (wide, 10 m), Ossuary Lord 32, Gravewyrm 35, Mourncoil 39. Pitch stayed -55 throughout.
 - LOOKED: renders/cycles/20261116_l72/sheet_panes3.png (director pane of Mourncoil, Gravewyrm, Grubmother, Nightwing: whole lord, ground under it, boss bar clear) and sheet_reveal_mourncoil.png (the five-step reveal).
 - FOR MR. E / OTHERS: (1) the NOW FIGHTING banner (not a HUD file) sits at the pane centre and covers a lord in the first seconds of the reveal. (2) At full-frame the 15 m wyrms read small because the pivot is at the feet; rts_camera.gd forces focus.y to the ground, a look-at height offset there would let them fill the frame. (3) Mr. E's eye on whether the reveal lands.
+## C-55 (2026-11-16) - standing backlog item 6: bosses and potions (bosses.json, potions.json only)
+- WORK_PLAN CONTENT items all ticked, so the standing backlog applied. Item 6 was the longest-untouched (last C-35).
+- data/bosses.json: +16 lesser_uniques (4 each: Hollow King, Grubmother, Rattling Host, Nightwing) and +16 greater_uniques (4 each: Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified lords, not new lords; stats skewed to the shape and kept inside each lord's existing hp/speed/attack range. Now 154 lesser, 148 greater.
+- data/potions.json: +24 brews (5 tier 1, 8 tier 2, 6 tier 3, 5 tier 4), trade-named, using only existing states in `states` (gives/cures all resolve). Now 176 potions.
+- VALIDATION OK: both files parse; every new entry matches its block's shape; every pre-existing key/entry compared against HEAD and unchanged; no duplicate names, keys or aliases.
+- CODE WIRING: none needed - same keys and shapes as existing entries (lesser/greater pools, !brew <key> by alias).
+
+## C-56 (2026-11-16) - standing backlog item 4: disaster and event variants (lore_lines.json only)
+- WORK_PLAN CONTENT items all ticked; standing backlog applied. Item 4 was the stalest (last C-47).
+- data/lore_lines.json `disasters`: +156 lines across all 13 disasters (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor, scarstorm, flood, blight, coldsnap): +6 `during`, +3 `begin_alt`, +3 `pass_alt` each. Now 36 during, 25 begin_alt, 25 pass_alt per disaster. Added note key `_note_variants_c56`.
+- Every `cost` statement and every `begin`/`pass` untouched; no new mechanics implied.
+- VALIDATION OK: file parses; new entries match existing list shapes; every pre-existing key/entry compared against the pre-edit copy and unchanged (git diff deletions are only trailing-comma changes on former list ends); no duplicate lines.
+- CODE WIRING: none needed - same keys and shapes (the loader's random pick over during/begin_alt/pass_alt widens automatically).
+
+## C-57 (2026-11-16) - standing backlog item 5: epitaphs, descend, cleared, barks (lore_lines.json only)
+- WORK_PLAN CONTENT items C1-C5 all ticked; standing backlog applied. Item 5 was the stalest (last C-50) and the most repeated on stream.
+- data/lore_lines.json: +58 epitaphs (now 377), +40 descend (240; 16 keep the "%s %s" name+verb shape, the rest are bare narration like the existing mix), +40 cleared (238; "Floor %d" only where the existing lines use it), +58 barks across enter/lord/trap/hurt/drink/misfire (9/10/10/10/9/10). 196 lines total.
+- No dungeon floor count is stated anywhere; no new mechanics implied.
+- VALIDATION OK: file parses; every pre-existing key/entry compared against HEAD and unchanged (existing lists are an exact prefix of the new ones; git diff deletions are only trailing-comma changes on former list ends); format specifiers checked (descend 0 or 2 %s, cleared 0 or 1 %d, epitaphs none); no new duplicates (a few duplicates already in descend/enter/trap/hurt/misfire pre-date this cycle and were left alone, additive only).
+- CODE WIRING: none needed - same keys and shapes (the loaders' random pick widens automatically).
+
+## C-58 (2026-11-16) - WORK_PLAN C-55 step 2: one rarity ladder on every piece of gear (items.json only)
+- WORK_PLAN CONTENT checkboxes C1-C5 all ticked; the newest content-lane directive is C-55 (rarity ladder). Only its step 2 is the content writer's (data); steps 1, 3-6 touch fishing.json, chatcmd.gd, shops and the hub and are NOT mine - left for the code lane.
+- data/items.json: every equipment piece (86 weapons + 33 armour = 119) and every accessory (254) gained a `"rarity"` key. Equipment: tier read straight across - 0 common (30), 1 uncommon (18), 2 rare (19), 3 very rare (22), 4 legendary (19), 5 artifact (11, the found-only scarforged/scarwoven). Accessories are all bought, so they stop at legendary, banded by cost: <=230 common (40), 231-300 uncommon (107), 301-360 rare (55), 361-440 very rare (36), 441+ legendary (16). Plus one top-level `_note_c58` stating the rule. Cosmetics and dyes carry no rarity (out of scope in C-55).
+- Rarity is a label only: no stat, cost or tier changed. No artifact piece is in a shop/caravan/starting route (checked).
+- Note: the plan says 230 accessories; the file holds 254 (the C-54 additions), all labelled.
+- VALIDATION OK: file parses; every pre-existing key/value compared against HEAD and identical; the only additions are "rarity" on the 119+254 entries and `_note_c58`; git diff shows 'deletions' only because single-line accessory entries and the last tier_name line were rewritten to carry the new key.
+- CODE WIRING: the shared ladder constant (junk<common<uncommon<rare<very rare<legendary<artifact) is still to be written, and "epic" -> "very rare" in fishing.json/chatcmd.gd (C-55 step 1/3); shops and trader must treat "artifact" as outside the stock gate (step 4); hub/icons read items.json `rarity` for border colour (step 5). Loaders that ignore unknown keys need no change.
+
+C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only)
+- WORK_PLAN has no unchecked CONTENT-owned item (all open items are DESKTOP/LAPTOP/HUD), so the standing backlog applied; item 3 (E3PO) was the longest-untouched pool (last C-52).
+- data/lore_lines.json e3po: +102 lines appended to existing lists: raid, disaster, festival, town_talk +12 each; viewer_roll crit/high/low/fumble +10 each; intro +6; says +8. New key `_note_c59`. No duplicates of existing lines. He still cannot die.
+- VALIDATION OK: all four data files parse; every pre-existing key/value in lore_lines.json is identical (existing lists are strict prefixes of the new ones); items.json, bosses.json, potions.json untouched. git diff shows 'deletions' only where a list's last line gained a trailing comma.
+- CODE WIRING: none new - same e3po keys as before; viewer_roll outcome pools feed T5 and simply have more choices. Loaders that pick a random entry need no change.

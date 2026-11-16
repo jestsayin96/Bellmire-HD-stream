@@ -5861,3 +5861,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - data/potions.json: +24 brews (5 tier 1, 8 tier 2, 6 tier 3, 5 tier 4), trade-named, using only existing states in `states` (gives/cures all resolve). Now 176 potions.
 - VALIDATION OK: both files parse; every new entry matches its block's shape; every pre-existing key/entry compared against HEAD and unchanged; no duplicate names, keys or aliases.
 - CODE WIRING: none needed - same keys and shapes as existing entries (lesser/greater pools, !brew <key> by alias).
+
+## C-56 (2026-11-16) - standing backlog item 4: disaster and event variants (lore_lines.json only)
+- WORK_PLAN CONTENT items all ticked; standing backlog applied. Item 4 was the stalest (last C-47).
+- data/lore_lines.json `disasters`: +156 lines across all 13 disasters (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor, scarstorm, flood, blight, coldsnap): +6 `during`, +3 `begin_alt`, +3 `pass_alt` each. Now 36 during, 25 begin_alt, 25 pass_alt per disaster. Added note key `_note_variants_c56`.
+- Every `cost` statement and every `begin`/`pass` untouched; no new mechanics implied.
+- VALIDATION OK: file parses; new entries match existing list shapes; every pre-existing key/entry compared against the pre-edit copy and unchanged (git diff deletions are only trailing-comma changes on former list ends); no duplicate lines.
+- CODE WIRING: none needed - same keys and shapes (the loader's random pick over during/begin_alt/pass_alt widens automatically).

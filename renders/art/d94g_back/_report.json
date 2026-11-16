@@ -1,0 +1,471 @@
+{
+ "ok": true,
+ "errors": [],
+ "rows": [
+  {
+   "slot": "gloves",
+   "view": "back",
+   "cells": [
+    {
+     "key": "baker_mitts",
+     "name": "Baker's Mitts",
+     "slot": "gloves",
+     "cost": 200,
+     "stat": "saves",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 258,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.245,
+      "clip": [
+       7.151,
+       10.344
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      0.0,
+      0.543
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Baker's Mitts",
+       "slot": "gloves",
+       "verts": 164,
+       "inside_pct": 69.5,
+       "penetration_m": 0.0564,
+       "gap_m": 0.0004,
+       "min_z": 0.4195
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Baker's Mitts",
+       "slot": "gloves",
+       "verts": 164,
+       "inside_pct": 75.0,
+       "penetration_m": 0.0564,
+       "gap_m": 0.0004,
+       "min_z": 0.4244
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
+      "Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside"
+     ]
+    },
+    {
+     "key": "carder_gloves",
+     "name": "Carder's Gloves",
+     "slot": "gloves",
+     "cost": 200,
+     "stat": "hp",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 446,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.171,
+      "clip": [
+       7.186,
+       10.34
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.611
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Carder's Gloves",
+       "slot": "gloves",
+       "verts": 258,
+       "inside_pct": 87.6,
+       "penetration_m": 0.045,
+       "gap_m": 0.0009,
+       "min_z": 0.4749
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Carder's Gloves",
+       "slot": "gloves",
+       "verts": 258,
+       "inside_pct": 78.7,
+       "penetration_m": 0.045,
+       "gap_m": 0.0003,
+       "min_z": 0.4797
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
+      "Acc_GloveR (Carder's Gloves): CLIPS the body - 0.045 m deep, 79% of it inside"
+     ]
+    },
+    {
+     "key": "plaster_gloves",
+     "name": "Plasterer's Gloves",
+     "slot": "gloves",
+     "cost": 240,
+     "stat": "ac",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 446,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.177,
+      "clip": [
+       7.177,
+       10.345
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.62
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Plasterer's Gloves",
+       "slot": "gloves",
+       "verts": 258,
+       "inside_pct": 86.0,
+       "penetration_m": 0.0423,
+       "gap_m": 0.0001,
+       "min_z": 0.4747
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Plasterer's Gloves",
+       "slot": "gloves",
+       "verts": 258,
+       "inside_pct": 78.7,
+       "penetration_m": 0.0413,
+       "gap_m": 0.0001,
+       "min_z": 0.4795
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Plasterer's Gloves): CLIPS the body - 0.042 m deep, 86% of it inside",
+      "Acc_GloveR (Plasterer's Gloves): CLIPS the body - 0.041 m deep, 79% of it inside"
+     ]
+    },
+    {
+     "key": "currier_gloves",
+     "name": "Currier's Gloves",
+     "slot": "gloves",
+     "cost": 260,
+     "stat": "dmg",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 878,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.205,
+      "clip": [
+       7.176,
+       10.347
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.589
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Currier's Gloves",
+       "slot": "gloves",
+       "verts": 468,
+       "inside_pct": 66.5,
+       "penetration_m": 0.0508,
+       "gap_m": 0.0004,
+       "min_z": 0.4741
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Currier's Gloves",
+       "slot": "gloves",
+       "verts": 468,
+       "inside_pct": 50.0,
+       "penetration_m": 0.0499,
+       "gap_m": 0.0002,
+       "min_z": 0.4789
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Currier's Gloves): CLIPS the body - 0.051 m deep, 66% of it inside"
+     ]
+    },
+    {
+     "key": "duchess_gloves",
+     "name": "Pale Duchess's Gloves",
+     "slot": "gloves",
+     "cost": 300,
+     "stat": "dmg",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 306,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.165,
+      "clip": [
+       7.189,
+       10.333
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.595
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Pale Duchess's Gloves",
+       "slot": "gloves",
+       "verts": 196,
+       "inside_pct": 80.1,
+       "penetration_m": 0.0631,
+       "gap_m": 0.0002,
+       "min_z": 0.4751
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Pale Duchess's Gloves",
+       "slot": "gloves",
+       "verts": 196,
+       "inside_pct": 69.4,
+       "penetration_m": 0.0631,
+       "gap_m": 0.0005,
+       "min_z": 0.4799
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Pale Duchess's Gloves): CLIPS the body - 0.063 m deep, 80% of it inside",
+      "Acc_GloveR (Pale Duchess's Gloves): CLIPS the body - 0.063 m deep, 69% of it inside"
+     ]
+    },
+    {
+     "key": "armourer_gloves",
+     "name": "Armourer's Gauntlets",
+     "slot": "gloves",
+     "cost": 320,
+     "stat": "ac",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 1054,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.274,
+      "clip": [
+       7.128,
+       10.381
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.615
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Armourer's Gauntlets",
+       "slot": "gloves",
+       "verts": 589,
+       "inside_pct": 61.5,
+       "penetration_m": 0.0454,
+       "gap_m": 0.0001,
+       "min_z": 0.4532
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Armourer's Gauntlets",
+       "slot": "gloves",
+       "verts": 589,
+       "inside_pct": 59.9,
+       "penetration_m": 0.0328,
+       "gap_m": 0.0001,
+       "min_z": 0.4581
+      }
+     ],
+     "faults": []
+    }
+   ],
+   "faults": [
+    "baker_mitts: Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
+    "baker_mitts: Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside",
+    "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
+    "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.045 m deep, 79% of it inside",
+    "plaster_gloves: Acc_GloveL (Plasterer's Gloves): CLIPS the body - 0.042 m deep, 86% of it inside",
+    "plaster_gloves: Acc_GloveR (Plasterer's Gloves): CLIPS the body - 0.041 m deep, 79% of it inside",
+    "currier_gloves: Acc_GloveL (Currier's Gloves): CLIPS the body - 0.051 m deep, 66% of it inside",
+    "duchess_gloves: Acc_GloveL (Pale Duchess's Gloves): CLIPS the body - 0.063 m deep, 80% of it inside",
+    "duchess_gloves: Acc_GloveR (Pale Duchess's Gloves): CLIPS the body - 0.063 m deep, 69% of it inside"
+   ],
+   "verdict": "PARTLY TOO SMALL 6/15",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 0.0,
+    "worst_pair": [
+     "Carder's Gloves",
+     "Plasterer's Gloves"
+    ],
+    "worst_peak_pct": 0.64,
+    "best": 1.441,
+    "best_pair": [
+     "Baker's Mitts",
+     "Armourer's Gauntlets"
+    ],
+    "median": 0.527,
+    "duplicate_pairs": [],
+    "too_small_pairs": [
+     {
+      "a": "Carder's Gloves",
+      "b": "Plasterer's Gloves",
+      "detail": 78.235,
+      "stream": 0.0
+     },
+     {
+      "a": "Carder's Gloves",
+      "b": "Pale Duchess's Gloves",
+      "detail": 99.348,
+      "stream": 0.0
+     },
+     {
+      "a": "Plasterer's Gloves",
+      "b": "Pale Duchess's Gloves",
+      "detail": 93.338,
+      "stream": 0.0
+     },
+     {
+      "a": "Carder's Gloves",
+      "b": "Currier's Gloves",
+      "detail": 98.991,
+      "stream": 0.138
+     },
+     {
+      "a": "Plasterer's Gloves",
+      "b": "Currier's Gloves",
+      "detail": 99.683,
+      "stream": 0.138
+     },
+     {
+      "a": "Currier's Gloves",
+      "b": "Pale Duchess's Gloves",
+      "detail": 96.438,
+      "stream": 0.138
+     }
+    ]
+   }
+  }
+ ],
+ "blank": {
+  "files": 12,
+  "failures": []
+ },
+ "verdict": [
+  "gloves  PARTLY TOO SMALL 6/15 worst  0.00% median  0.53% of hero px   "
+ ],
+ "fit_faults": [
+  "baker_mitts: Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
+  "baker_mitts: Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside",
+  "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
+  "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.045 m deep, 79% of it inside",
+  "plaster_gloves: Acc_GloveL (Plasterer's Gloves): CLIPS the body - 0.042 m deep, 86% of it inside",
+  "plaster_gloves: Acc_GloveR (Plasterer's Gloves): CLIPS the body - 0.041 m deep, 79% of it inside",
+  "currier_gloves: Acc_GloveL (Currier's Gloves): CLIPS the body - 0.051 m deep, 66% of it inside",
+  "duchess_gloves: Acc_GloveL (Pale Duchess's Gloves): CLIPS the body - 0.063 m deep, 80% of it inside",
+  "duchess_gloves: Acc_GloveR (Pale Duchess's Gloves): CLIPS the body - 0.063 m deep, 69% of it inside"
+ ]
+}

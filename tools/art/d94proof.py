@@ -116,14 +116,43 @@ def spread(pool, variant_of, n=N):
     # left to right as a ladder once it is sorted by cost below
     order = sorted(groups, key=lambda g: (groups[g][0][0], str(g)))
     lo, hi = pool[0][0], pool[-1][0]
-    picked, used = [], set()
-    for i, g in enumerate(order[:n]):
+    picked, used, spent = [], set(), set()
+    # AND THE ROW MUST REACH BOTH ENDS OF THE LADDER. Walking the variants in
+    # cheapest-first order and handing cell i the i-th variant cannot do that:
+    # if the dearest item of the slot belongs to a variant that order already
+    # spent on a cheap cell, the top of the ladder never appears, and the top
+    # is exactly the piece a viewer saves months of points for. Measured on
+    # the 07:37 re-shoot: ring stopped at 460 of 520, cloak 440 of 500, boots
+    # 340 of 420, gloves 320 of 380 - four rows that never showed a legendary.
+    # So match CELLS TO VARIANTS instead of indexing: for each target cost,
+    # take the unused variant that can get nearest to it, so the dearest cell
+    # can land on the variant that owns the dearest item at distance zero.
+    # Still deterministic, still one variant per cell.
+    # ORDER OF SERVICE MATTERS, and getting this wrong is how the first
+    # attempt at this fix made ring WORSE (top cell 460 -> 420 of 520): if the
+    # cells are served cheapest-first, an early cell can spend the very
+    # variant that owns the dearest item. So the two ENDS of the ladder are
+    # served first - the dearest cell, then the cheapest - and the middle
+    # fills in afterwards.
+    cells = [n - 1, 0] + [i for i in range(1, n - 1)] if n > 2 else list(range(n))
+    for i in cells:
         frac = (i / float(n - 1)) if n > 1 else 0.0
         want = lo + (hi - lo) * frac
-        cand = [q for q in groups[g] if q[1] not in used]
-        if not cand:
+        best = None
+        for g in order:
+            if g in spent:
+                continue
+            cand = [q for q in groups[g] if q[1] not in used]
+            if not cand:
+                continue
+            q = min(cand, key=lambda q: (abs(q[0] - want), q[1]))
+            score = (abs(q[0] - want), q[1])
+            if best is None or score < best[0]:
+                best = (score, g, q)
+        if best is None:
             continue
-        pick = min(cand, key=lambda q: (abs(q[0] - want), q[1]))
+        _, g, pick = best
+        spent.add(g)
         used.add(pick[1])
         picked.append(pick)
     if len(picked) < n:        # fewer variants than cells: fill by cost spread

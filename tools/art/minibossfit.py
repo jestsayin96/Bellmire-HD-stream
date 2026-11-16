@@ -112,10 +112,17 @@ def import_hero(repo):
                                   parts=[o.name for o in meshes])
 
 
-def place(roots, dx):
+def place(roots, dx, dy=0.0):
+    """THE SIDE VIEW WAS ONE BODY HIDING ANOTHER. The hero used to be offset
+    along X only, so at azimuth 90 the camera looked straight down the line of
+    the pair and the hero stood in front of the creature - a fit shot in which
+    you can see neither of them. Offsetting in Y as well separates them on
+    screen in BOTH views: X apart for front and back, Y apart for the side,
+    and the two never overlap because they are apart on the other axis each
+    time."""
     for o in roots:
         if o.parent is None:
-            o.location = (o.location.x + dx, o.location.y, o.location.z)
+            o.location = (o.location.x + dx, o.location.y + dy, o.location.z)
     bpy.context.view_layer.update()
 
 
@@ -257,14 +264,15 @@ def main():
                 rep["hero"] = hero
                 mn, mx, _ = G.world_bounds(objs)
                 # hero to the creature's left, clear of its footprint
-                place(hroots, mn.x - GAP - hero["w"] / 2.0 - 0.10)
+                place(hroots, mn.x - GAP - hero["w"] / 2.0 - 0.10,
+                      mn.y - GAP - hero["d"] / 2.0 - 0.10)
                 allo = objs + hmesh
                 bpy.context.view_layer.update()
                 amn, amx, pts = G.world_bounds(allo)
                 outdir = os.path.join(args.repo, "renders", "art", "minibosses", key)
                 os.makedirs(outdir, exist_ok=True)
                 written, eng = shoot(allo, pts, outdir,
-                                     (("front", 0.0), ("side", 90.0)), info["aura"])
+                                     (("front", 0.0), ("side", 90.0), ("back", 180.0)), info["aura"])
                 rep["pairs"][key] = dict(
                     creature_h=round(mx.z - mn.z, 3), hero_h=hero["h"],
                     ratio=round((mx.z - mn.z) / max(0.01, hero["h"]), 2),

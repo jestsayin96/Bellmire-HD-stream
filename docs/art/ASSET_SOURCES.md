@@ -30,3 +30,14 @@ Downloaded 2026-11-16 by the supervisor lane for D94 / D95.
    need a headless Blender batch convert to .glb before Godot can load them.
 3. KayKit files carry a double extension (`axe_common.gltf.glb`). Rename on import.
 4. Licence text ships inside each zip. Keep it with the converted assets.
+
+## Assets supplied by Mr. E
+
+| Asset | Source | Licence | Notes |
+|---|---|---|---|
+| `assets/gear/wand_crystal.glb` | Supplied by Mr. E, 2026-11-16 05:03 | Mr. E's own — no third-party rights | Crystal-headed wand: dark tapered shaft, silver collar, blue faceted crystal. Raw drop was 306,024 tris / 24 MB with two 4096 and one 2048 map. Shipped version is decimated to 8,000 tris with three 1024 maps, 2.38 MB; silhouette, facets and collar all survive — checked on screen before commit. Origin moved to the BASE OF THE GRIP so it hangs off a hand bone. 0.147 x 0.218 x 0.921 units. The untouched original is kept OUT of git at `C:\hd adventure\_packs\_generated\wand_raw.glb`. |
+
+**NOT YET FITTED TO A BODY.** It has not been rendered on a KayKit hero, so by the FIT IS THE
+ACCEPTANCE TEST rule it is not finished. At 0.921 long against a hero whose head sits at y
+1.05-1.22, this reads closer to a short staff than a wand — Mr. E should say which he wants
+before anyone scales it. The game build lane owns the attach (handslot.r) and the gear.gd entry.

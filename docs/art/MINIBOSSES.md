@@ -213,3 +213,147 @@ Same four points as the first set, extended:
   sealed for the duration. If that is expensive, the cheap honest version is
   "no fleeing this set piece and no wandering spawns join it" - the mesh already
   promises that much and no more.
+
+---
+
+# THIRD SET - 16 Nov 2026: flooded, grassland, wood, firepit, fogbound, confection
+
+The first eight covered the themes `dungeon_hd.gd` names in its set-piece weight
+table (barracks, workshop, prison, shrine, crypt, keep, treasury, mess). These
+six cover the **six remaining `floorgen.gd` themes**, which fall through to the
+default row `{"ambush": 45, "prisoner": 20, "shrine": 20, "miniboss": 15}` and
+had nothing theme-matched to put in the slot. **All fourteen themes now have
+one.**
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `sluicekeeper` | The Sluicekeeper | 2.50 | flooded | **IT RAISES THE WATER** - winds the gate open a notch at a time and the floor you are standing on goes under | 0.95 | 2.66 |
+| `sower` | The Sower | 2.25 | grassland | **IT PLANTS THE GROUND AGAINST YOU** - what it casts stands up as thorn and closes the open field | 0.40 | 3.43 |
+| `snarer` | The Snarer | 2.30 | wood | **IT HAS ALREADY SET THE ROOM** - it does not chase, it beats you onto its own lines | 0.55 | 3.25 |
+| `stoker` | The Stoker | 2.40 | firepit | **IT IS ONLY AS BIG AS THE FIRE** - starve the pit and it starves | 0.70 | 3.00 |
+| `bellman` | The Bellman | 2.70 | fogbound | **IT RINGS FROM WHERE IT IS NOT** - the sound comes from the wrong place | 0.65 | 2.72 |
+| `boiler` | The Boiler | 2.10 | confection | **IT POURS AND IT SETS** - the floor hardens around your feet | 0.25 | 3.46 |
+
+Four meshes merged by material, 842-1529 faces, static, no armature, feet on
+z=0. All **CORRIDOR-SAFE** against the 11.0 m clear span of a D91 three-cell
+corridor. **None of the fourteen is room-locked.** Blank check **42 files, 0
+failures**; `_report.json` now carries all fourteen (see the regression below).
+
+## What the pictures overruled in this set
+
+**The Snarer was the Tallyman.** Pass 1 hung five snare loops off a spreader
+bar across his shoulders - which is, exactly, the Tallyman's outline, two cells
+away on the same sheet. A mechanic that reads as *another miniboss* is no
+better than one that reads as nothing. The snares are now rooted where a real
+snare is rooted: **three bent springpoles standing out of the floor**, arcing
+over at three heights with a noose at each tip. Pass 2 made them too thick and
+bent them at a sharp elbow, so they came back as scaffold girders; seven arc
+points and a whippy taper made them curves. **They are the only curved lines in
+the fourteen**, against a file of bars and discs.
+
+**The Boiler was a round table, three times.** The pan, the pour and the set
+pool on the floor kept stacking into tabletop, pedestal and base - and the pour
+is the entire creature. Pass 1 tipped the pan forward, so the stream fell
+toward the camera and foreshortened to a dot on its own centre line. Pass 2
+rolled the pan hard sideways, which moved the stream clear but turned the dish
+away so we read its blank underside and it ate his torso. Pass 3 is the real
+fix: a dish **1.18 m -> 0.80 m across and higher**, so nothing falling off it
+lands inside its own footprint, and the stream travels 0.9 m sideways before it
+reaches the floor. Pass 4 thickened the stream and pushed the whole trunnion
+further out to put air between the man and the pan. It is still the weakest
+silhouette of the fourteen and that is said plainly below, not hidden.
+
+**The sheet itself was broken.** `draw_text` advances 6*scale px per character,
+so a cell fits 27 characters at scale 2 - and this set's hooks are longer than
+that. "IT PLANTS THE GROUND AGAINST YOU" ran straight over "IT HAS ALREADY SET
+THE ROOM", and the firepit hook was cut off by the sheet edge. The hook is the
+one line that says what the thing DOES, so it now **wraps to two lines** rather
+than shrinking, and the label band grew 54 -> 74 px.
+
+## A regression in the report, found and closed
+
+A `--sheet`-only pass started from an empty report and overwrote
+`_report.json`, so the previous run shipped `"minibosses": {}` - every span,
+face count, engine and corridor verdict for all fourteen, gone, while `"ok":
+true` sat on top of it. The report file is now read back and merged before a
+pass writes it. The blank-pixel assertion was never affected; this was the
+bookkeeping around it, which is exactly where a silent loss hides.
+
+## THE HONEST FAULT LIST - every one of these is visible on the sheets
+
+**Sluicekeeper.** The lit pool at his feet reads as a white spotlight disc, not
+water. The gate board's under-lip glow is hidden behind the frame, so the one
+lit thing that says "water is coming" is invisible from the front. At wear 0.95
+- the highest in the file - he is still among the palest; the wear number is
+not legible on the model. The drag-board under his far arm fuses with the torso
+from the front view.
+
+**Sower.** The thorn shoots are the same pale wood colour as his hat and read
+as loose sticks rather than something that grew. The cast seed is four small
+spheres that will vanish at pane distance. His wide hat is the second wide cone
+in the file after the Snuffer's, though the posture separates them.
+
+**Snarer.** The left-hand noose overlaps his hat and shoulder from
+three-quarter. The two right-hand poles cross near their roots and read as one
+forked pole from that angle. The beating pole passes through his left forearm.
+The pole roots are flat-cut and sit slightly proud of the floor. His hunch is
+the same posture as the Sower's - hat and poles are what separate them, not the
+body.
+
+**Stoker.** The strongest of the six: dark soot body, lit firebox grate on the
+chest, long rake down to the floor. But the rake head nearly leaves the cell at
+bottom right; his head is lost against the dark body; and the chimney's lit cap
+is the brightest thing on him, pulling the eye **above** the grate, which is
+the actual idea.
+
+**Bellman.** Unique in the file - the only full-skirted silhouette, and the two
+bells sell "from where it is not". But the robe is a smooth cone with almost no
+value break, and at wear 0.65 it reads clean and new, which contradicts its own
+number. The offset second bell overlaps the hem. He has no feet by
+construction; the cone runs to the floor.
+
+**Boiler.** The pour now reads. The pan still overlaps his right shoulder from
+three-quarter with no clean air gap; the near trunnion post crosses in front of
+his right leg; the lit inner surface of the pan reads as a pale loaf sitting in
+the dish rather than molten sugar; the stream's top emerges from behind the rim
+instead of visibly over a lip; and at wear 0.25 the figure, apron, pan and
+stream are all within a narrow value range - the stream only separates because
+it is lit.
+
+## WIRING - THE ART LANE DOES NOT DO THIS
+
+`scripts/bestiary.gd` and `scripts/dungeon_hd.gd` belong to the game build
+lane. **All fourteen miniboss meshes are still completely unwired**:
+`bestiary.gd` contains no reference to `minibosses` at all, so every miniboss
+set piece in the game today is still an ordinary creature with 2x hp.
+
+1. **`scripts/bestiary.gd`** - add fourteen entries with
+   `model = "res://assets/monsters/minibosses/<key>.glb"` and **no `anims`
+   entry** (static meshes, no armature; idle motion is a rig job and belongs
+   with D74).
+2. **`scripts/dungeon_hd.gd` (~line 655)** - the weight table has rows for
+   `prison`, `shrine`/`crypt` and `barracks`/`workshop` only; the other six
+   themes fall through to the default and `Bestiary.pick(floor_no, theme)`
+   returns an ordinary creature. A theme -> miniboss map is now possible for
+   **every** theme: barracks/drillmaster, workshop/scrapwright,
+   prison/gaoler, shrine/snuffer, crypt/sexton, keep/porter,
+   treasury/tallyman, mess/cook, flooded/sluicekeeper, grassland/sower,
+   wood/snarer, firepit/stoker, fogbound/bellman, confection/boiler.
+   Note `shrine` and `crypt` still share one weight row and should split -
+   the Snuffer was built for shrine and the Sexton for crypt.
+3. **Each idea is a behaviour.** Shipping these as reskins with 2x hp and
+   +20% atk wastes them; the mesh is the promise that something different is
+   about to happen.
+4. **Feed lines**, in `minibosses.CANON` and in `_report.json` (`feed_line`):
+   *"The water is coming up." / "Something is broadcasting seed." / "The lines
+   were here before you." / "The pit has been fed." / "A bell, and not where
+   you thought." / "Something is pouring."*
+5. **The Stoker's idea touches the room, like the Porter's.** "It is only as
+   big as the fire" wants the firepit floor's own light sources to be
+   damageable, or the cheap honest version: it loses attack as the floor's
+   braziers are put out. The mesh promises that much and no more.
+
+## Licence
+
+Original geometry, generated from raw vertex maths in `tools/art/`. No
+third-party asset is read by any of it.

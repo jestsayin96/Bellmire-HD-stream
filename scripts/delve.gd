@@ -842,14 +842,214 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
 		pts.remove_at(0)
 	return false
 
+## ---------------------------------------------------------------- D91 stage 4: in file
+## A party that cannot walk abreast walks in FILE - deliberately, spaced, in an order - instead
+## of piling into one cell. In a hall the delvers fall into a column: whoever is nearest the
+## goal (by the route, not the crow's flight) leads, and each of the rest walks behind the one
+## ahead of it, FILE_GAP back. In a room they go for the goal as before. The order is worked
+## out twice a second so it does not shuffle every frame.
+const FILE_GAP := 1.7
+const FILE_NEAR := 7.0           # further behind than this and a delver just catches up
+var _file_order: Array = []
+var _file_t := -9.0
+var _file_goal := Vector3.ZERO
+var file_frames := 0             # frames in which someone walked in file (the D91 test reads it)
+var _file_frame := -1
+
+func _halls() -> Dictionary:
+	return dun.info.get("halls", {})
+
+func _route_len(b: Node3D, goal: Vector3) -> int:
+	var r := _bfs(_snap_cell(_cell_of(b.global_position)), _snap_cell(_cell_of(goal)))
+	return r.size()
+
+func _file_of(goal: Vector3) -> Array:
+	if _t - _file_t < 0.5 and _flat(goal, _file_goal) < 0.5 and _file_order.size() == _alive().size():
+		return _file_order
+	_file_t = _t
+	_file_goal = goal
+	var keyed: Array = []
+	for m in _alive():
+		var b: Node3D = m["body"]
+		keyed.append([_route_len(b, goal) * 100.0 + _flat(b.global_position, goal), m])
+	keyed.sort_custom(func(x, y): return float(x[0]) < float(y[0]))
+	_file_order = []
+	for k in keyed:
+		_file_order.append(k[1])
+	return _file_order
+
+func _go_file(m: Dictionary, goal: Vector3, spd: float, delta: float, stop: float) -> bool:
+	var b: Node3D = m["body"]
+	var order := _file_of(goal)
+	var i := order.find(m)
+	if i > 0 and _halls().has(_snap_cell(_cell_of(b.global_position))):
+		var ahead: Node3D = (order[i - 1] as Dictionary)["body"]
+		var dd := _flat(b.global_position, ahead.global_position)
+		if dd < FILE_NEAR and _flat(ahead.global_position, goal) > stop + FILE_GAP:
+			if _file_frame != Engine.get_process_frames():
+				_file_frame = Engine.get_process_frames()
+				file_frames += 1
+			# behind the one ahead: close up to FILE_GAP, never past them
+			if dd <= FILE_GAP + 0.15:
+				travel.erase(b)
+				_prog.erase(b)
+				return false
+			_go(b, ahead.global_position, minf(spd, spd * (dd / (FILE_GAP * 2.0)) + 0.5), delta, FILE_GAP)
+			return false
+	return _go(b, goal, spd, delta, stop)
+
 func _flat(a: Vector3, b: Vector3) -> float:
 	return Vector2(a.x - b.x, a.z - b.z).length()
+
+## ---------------------------------------------------------------- D91: bodies below ground
+## The dungeon had NO body separation at all - delvers and monsters stood in each other. Every
+## delver and every live monster now goes into the SAME Crowd the town uses (scripts/crowd.gd,
+## one copy, not a second), filled once a frame. _step takes its shove (soft ring, hard inside
+## two bodies' width, and the yield that makes two meeting in a hall pass on the side); and
+## _crowd_settle, at the end of every frame, parts any pair still closer than the sum of their
+## body_r - which is the done test's line - so a pack converging on one hero ends as a ring.
+var _crowd := Crowd.new()
+var _crowd_f := -1
+var crowd_worst := 0.0           # the deepest overlap the settle pass found (the D91 test reads it)
+
+func _mrad(mon: Monster) -> float:
+	var rad := float(mon.get_meta("rad", -1.0))
+	if rad < 0.0:
+		rad = clampf(mon._height() * 0.2, 0.3, 1.8)
+		mon.set_meta("rad", rad)
+	mon.body_r = rad
+	return rad
+
+func _crowd_bodies() -> Array:
+	var out: Array = []
+	for m in _alive():
+		var b = m.get("body")
+		if b != null and is_instance_valid(b):
+			out.append(b)
+	if dun and is_instance_valid(dun):
+		for mon in _foes():
+			if (mon as Monster)._entering():
+				continue
+			_mrad(mon)
+			out.append(mon)
+	return out
+
+func _crowd_fill() -> void:
+	var f := Engine.get_process_frames()
+	if f == _crowd_f:
+		return
+	_crowd_f = f
+	_crowd.reset()
+	for b in _crowd_bodies():
+		_crowd.add(b)
+
+## where a body of radius r may be set down: on a floor cell, r + the wall's 0.5 m clear of any
+## wall, and out of every obstacle
+func _settle_ok(p: Vector3, r: float) -> bool:
+	var cells: Dictionary = dun.info["cells"]
+	var c := _cell_of(p)
+	if not cells.has(c):
+		return false
+	var G: float = dun.info["grid"]
+	var ctr := _cell_world(c)
+	var keep := minf(r + 0.5, G * 0.5 - 0.05)
+	for dir: Vector2i in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		if cells.has(c + dir):
+			continue
+		var off := (p.x - ctr.x) * float(dir.x) + (p.z - ctr.z) * float(dir.y)
+		if off > G * 0.5 - keep:
+			return false
+	var o0 := dun.global_position
+	for o in dun.info.get("obstacles", []):
+		if FloorGen.obst_gap(o, p.x - o0.x, p.z - o0.z) < 0.3:
+			return false
+	return true
+
+const SETTLE_PASSES := 3
+const SETTLE_PAD := 0.02
+func _crowd_settle() -> void:
+	var bodies := _crowd_bodies()
+	var n := bodies.size()
+	if n < 2:
+		crowd_worst = 0.0
+		return
+	var worst := 0.0
+	for _pass in range(SETTLE_PASSES):
+		var moved := false
+		worst = 0.0
+		for i in range(n):
+			var a: Node3D = bodies[i]
+			var ra := Crowd.body_r(a)
+			for j in range(i + 1, n):
+				var b: Node3D = bodies[j]
+				var pa := a.global_position
+				var pb := b.global_position
+				if absf(pa.y - pb.y) > 3.0:
+					continue
+				var d := Vector3(pa.x - pb.x, 0.0, pa.z - pb.z)
+				var L := d.length()
+				var rb := Crowd.body_r(b)
+				var over := ra + rb + SETTLE_PAD - L
+				if over <= 0.0:
+					continue
+				worst = maxf(worst, over - SETTLE_PAD)
+				if L < 0.01:
+					var ang := float((a.get_instance_id() + b.get_instance_id()) % 628) * 0.01
+					d = Vector3(cos(ang), 0.0, sin(ang))
+					L = 1.0
+				var nrm := d / L
+				# the smaller body gives way: a lord is not shouldered aside by a halfling
+				var ka := rb / (ra + rb)
+				var kb := ra / (ra + rb)
+				var na := pa + nrm * over * ka
+				var nb := pb - nrm * over * kb
+				var oka := _settle_ok(na, ra)
+				var okb := _settle_ok(nb, rb)
+				if oka and okb:
+					a.global_position = na
+					b.global_position = nb
+				elif oka:
+					na = pa + nrm * over
+					if _settle_ok(na, ra):
+						a.global_position = na
+					else:
+						continue
+				elif okb:
+					nb = pb - nrm * over
+					if _settle_ok(nb, rb):
+						b.global_position = nb
+					else:
+						continue
+				else:
+					# pinned between stone on both sides: slide sideways along the wall
+					var side := Vector3(-nrm.z, 0.0, nrm.x) * over
+					if _settle_ok(pa + side, ra):
+						a.global_position = pa + side
+					elif _settle_ok(pb - side, rb):
+						b.global_position = pb - side
+					else:
+						continue
+				moved = true
+		if not moved:
+			break
+	crowd_worst = worst
 
 func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	var d := Vector3(to.x - n.global_position.x, 0, to.z - n.global_position.z)
 	if d.length() < 0.05:
 		return true
 	var p := n.global_position + d.normalized() * minf(spd * delta, d.length())
+	# D91: the shared Crowd's shove and yield - the same maths the town walks by
+	var md := d.normalized()
+	if n is Monster:
+		(n as Monster).move_dir = md
+	elif n is Townsfolk:
+		(n as Townsfolk).move_dir = md
+	_crowd_fill()
+	var shove := _crowd.push(n, md) * delta
+	if shove.length() > spd * delta * 1.5:
+		shove = shove.normalized() * spd * delta * 1.5
+	p += Vector3(shove.x, 0.0, shove.z)
 	# bodies go AROUND what stands on the floor: pushed out of every table,
 	# barrel, pillar and tree they would walk into - so they slide past it
 	if dun and dun.info.has("obstacles"):
@@ -913,10 +1113,7 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	# a creature has a body, not a point: it keeps its own half-width off any
 	# wall (big lords and wide beasts were walking half into the stone)
 	if n is Monster and dun and dun.info.has("cells"):
-		var rad := float(n.get_meta("rad", -1.0))
-		if rad < 0.0:
-			rad = clampf((n as Monster)._height() * 0.2, 0.3, 1.8)
-			n.set_meta("rad", rad)
+		var rad := _mrad(n as Monster)
 		var G: float = dun.info["grid"]
 		var cl: Dictionary = dun.info["cells"]
 		var cc := _cell_of(p)
@@ -964,16 +1161,19 @@ func _process(delta: float) -> void:
 			var all_there := true
 			for m in _alive():
 				var b: HeroBody = m["body"]
-				if not _go(b, ex, 5.0, delta, 0.8):
+				if not _go_file(m, ex, 5.0, delta, 0.8):
 					all_there = false
-					Rig.play(b._anim, "Walking_A")
+					if int(travel.get(b, -1)) == Engine.get_process_frames():
+						Rig.play(b._anim, "Walking_A")
+					else:
+						Rig.play(b._anim, "Idle")
 			# L25: on to the next floor when all are at the stairs; a delver who has truly stopped
 			# getting closer (3 s) is carried, and counted - the old flat 6 s cut off a long walk
 			var stopped := false
 			for m in _alive():
 				if stuck_on(m["body"], 3.0):
 					stopped = true
-			if all_there or stopped or _t > 45.0:
+			if all_there or stopped or _t > 90.0:          # D91: floors grew - the walk is longer
 				if not all_there:
 					forced += 1
 				_next_floor()
@@ -985,7 +1185,7 @@ func _process(delta: float) -> void:
 			var all_up := true
 			for m in _alive():
 				var fb: HeroBody = m["body"]
-				if not _go(fb, up, roster.speed(m["h"]) * 1.15, delta, 0.9):
+				if not _go_file(m, up, roster.speed(m["h"]) * 1.15, delta, 0.9):
 					all_up = false
 					Rig.play(fb._anim, "Running_A")
 			var jammed := false
@@ -995,11 +1195,27 @@ func _process(delta: float) -> void:
 			if _alive().is_empty():
 				_say("The scar keeps them all. No one comes home from floor %d." % floor_no)
 				_finish()
-			elif all_up or jammed or _t > 45.0:
+			elif all_up or jammed or _t > 90.0:
 				_say("%s get out alive, and come home with what they carried." % _names())
 				_finish()
 		"home":
 			pass
+	# D91: nobody ends a frame inside anybody. The settle runs LATE in the frame (a child node
+	# at a high process_priority), after every Monster has taken its own patrol step - settled
+	# here, a pack's wander could still put two in one spot before the frame was drawn.
+	if _settler == null:
+		_settler = _Settler.new()
+		_settler.d = self
+		_settler.process_priority = 1000
+		add_child(_settler)
+
+class _Settler extends Node:
+	var d: Node
+	func _process(_dt: float) -> void:
+		if d.state != "home" and d.dun != null and is_instance_valid(d.dun):
+			d._crowd_settle()
+
+var _settler: Node = null
 
 ## ---------------------------------------------------------------- L47: delvers think
 ## Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule

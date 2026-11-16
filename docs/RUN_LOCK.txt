@@ -61,3 +61,5 @@ RUNNING 2026-11-15T20:13:16-06:00 (game build D90 - cart was turned 90 deg; re-s
 RUNNING 2026-11-15T20:17:33-06:00 (game build D90 final: 20-min tow soak, shot, gate battery ~30 min)
 RUNNING 2026-11-15T20:30:20-06:00 (game build D90 final 20-min tow soak, gates already green)
 IDLE 2026-11-15T20:50:46-06:00 - D90 rigid tow shipped (cart was turned 90 deg + chased; now derived, park state): D90_TOW OK 20-min soak, gates green (game build)
+RUNNING 2026-11-15T21:14:11-06:00 (game build T5 viewer's roll)
+IDLE 2026-11-15T21:22:24-06:00 - T5 viewer's roll shipped: T5_ROLL OK 23/23, gates green (game build)

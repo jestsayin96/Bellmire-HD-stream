@@ -3686,7 +3686,17 @@ the game -> the GAME rolls the d20 and applies the outcome -> it is Chronicled a
 60 s snapshot -> the hub DISPLAYS the roll and its result. The hub therefore stays READ-ONLY and
 this does NOT trip the Phase 3 RLS gate. No viewer write path to Supabase. Do not design one.
 
-- [ ] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+- [x] T5. THE VIEWER'S ROLL (this is the heart of T4 and supersedes its vague "voting"). A viewer
+      RESULT (game build, 2026-11-15 ~21:20 CT): SHIPPED. New channel-point reward "Roll for Bellmire" (750,
+      viewer types build / festival / a law by name, else fate picks; NO hero needed). twitch_eventsub.gd
+      viewer_roll(): d20 in the game -> 20 triumph / 13-19 goes well / 8-12 mixed / 2-7 badly / 1 backfires;
+      build = smithy raise_shop (rack lights up), event = a festival in the viewer's name, law = a
+      propositions entry whose good/bad line comes true and moves renown (half the town score). Chronicle:
+      "<name> rolls a N to <do> - <band>. <what happened>" + E3PO's verdict from e3po.viewer_roll (shouted).
+      snapshot_pub publishes `rolls` [{n,by,what,result,tier,cost,at}] (v stays 4, additive; result capped
+      at 400 never 200). tools/_t5_roll.gd T5_ROLL OK 23/23 incl. 5 failure outcomes and a real redemption
+      payload through handle_event; shots renders/cycles/t5/. MR. E: the reward is only CREATED on a resync -
+      set [twitch] rewards_resync=true in user://twitch.cfg for ONE launch, then back to false.
       UNBLOCKED (Nov 15): Mr. E re-authorized the broadcaster token via device-code grant. The game's
       Twitch app (client s4lpypbhumi34uocr0jqrscsxmjz2u) now holds channel:manage:polls AND
       channel:read:polls alongside the original five (bits:read, channel:manage:redemptions,

@@ -147,6 +147,9 @@ var feed: Array = []
 ## names]). Keyed by the exact text, bounded; snapshot_pub reads it when it stamps the line.
 ## Untagged lines simply carry no who/kind - never a guess.
 var feed_tags: Dictionary = {}
+## T5: the viewer rolls, newest first - TwitchEventSub.viewer_roll writes it, snapshot_pub
+## publishes it as `rolls` for the hub's die (H9/H27). The hub only displays; the game rolls.
+var viewer_rolls: Array = []
 const FEED_TAG_MAX := 256
 # D20b: civic moods the townsfolk read. A raid clears the streets - ordinary
 # folk flee indoors (is_raid_on reads raids._live); a festival gathers them in

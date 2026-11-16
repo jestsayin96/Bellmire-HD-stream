@@ -164,6 +164,7 @@ func build_payload() -> Dictionary:
         "commands": _commands,
         "parties": _parties(),
         "chronicle": chronicle(),
+        "rolls": _rolls(),
     }
     if r:
         out["guild_roll"] = r.leaderboard("standing", ROLL_MAX)
@@ -184,6 +185,38 @@ func build_payload() -> Dictionary:
         sheets.sort_custom(func(a, b): return int(a["standing"]) > int(b["standing"]))
         out["heroes"] = sheets
     last_build_ms = (Time.get_ticks_usec() - t0) / 1000.0
+    return out
+
+# ---------------------------------------------------------------- T5 the viewer's roll
+
+const ROLLS_MAX := 20
+const ROLL_RESULT_MAX := 400
+const ROLL_TIERS := ["crit", "good", "mixed", "bad", "fumble"]
+
+## T5: the town's d20 rolls for the hub's die and roll board (H9/H27), newest first, in the
+## contract web/app.js normalizeRolls reads: n (1-20), by, what, result, cost, tier, at.
+## ADDITIVE - an empty array until a viewer rolls, and the hub shows its honest empty state.
+## by/what/result/cost are W1a-cleaned (control chars stripped, capped); tier is only ever
+## one of the five words the hub's TIER_ALIAS whitelists.
+func _rolls() -> Array:
+    var out: Array = []
+    var src = town.get("viewer_rolls") if town else null
+    if typeof(src) != TYPE_ARRAY:
+        return out
+    for r in (src as Array).slice(0, ROLLS_MAX):
+        if typeof(r) != TYPE_DICTIONARY:
+            continue
+        var d: Dictionary = r
+        var row := {"n": clampi(int(d.get("n", 0)), 1, 20),
+            "by": clean_name(str(d.get("by", ""))),
+            "what": clean_line(str(d.get("what", ""))),
+            "result": clean_line(str(d.get("result", "")), ROLL_RESULT_MAX),   # the hub reads 400 - never cut a verdict
+            "cost": clean_name(str(d.get("cost", ""))),
+            "at": str(d.get("at", ""))}
+        var t := str(d.get("tier", ""))
+        if ROLL_TIERS.has(t):
+            row["tier"] = t
+        out.append(row)
     return out
 
 # ---------------------------------------------------------------- the bands below (D46)
@@ -290,7 +323,7 @@ func chronicle() -> Array:
 ## plain text for the hub: no control chars, no BBCode or angle brackets (it is not
 ## HTML), no long digit runs (a Twitch user id is 7+ digits; days, gold, floors are
 ## shorter), one line, at most LINE_MAX characters
-static func clean_line(raw: String) -> String:
+static func clean_line(raw: String, cap := LINE_MAX) -> String:
     if _strip_re == null:
         _strip_re = RegEx.new()
         _strip_re.compile("[\\x00-\\x1F\\x7F]+")
@@ -305,8 +338,8 @@ static func clean_line(raw: String) -> String:
     while s.contains("   "):
         s = s.replace("   ", "  ")
     s = s.strip_edges()
-    if s.length() > LINE_MAX:
-        s = s.left(LINE_MAX - 1).strip_edges() + "\u2026"
+    if s.length() > cap:
+        s = s.left(cap - 1).strip_edges() + "\u2026"
     return s
 
 ## W1a for a short published name: the same control-char strip as clean_line, no

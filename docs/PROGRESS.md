@@ -1529,3 +1529,35 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - NOTE: the shafts are ~1.2 m apart and the hauler stands between them; his arms are the stock walk swing, not a
   grip pose - the tips reach his hands at the hips in the shots, but a dedicated "pulling" arm pose would be art.
 
+
+## D-cycle - T5 the viewer's roll, 2026-11-15 ~21:20 CT (game build)
+- Item: T5. Phase RC game-build row is D91 -> D84 -> D90 -> D88 -> D83 -> T5. D84 and D90 are shipped; D91 (stages
+  2-4), D88 (dungeon_parts/dungeon_hd/delve) and D83 (delve/dungeon_parts) live entirely in laptop-owned dungeon
+  files this lane's brief forbids, and nobody owns them since jestai was retired - so T5 is the first RC item this
+  lane can work. Started on laptop df1f98c (origin/main merged).
+- BUILT scripts/twitch_eventsub.gd (bak_t5): reward "roll" - "Roll for Bellmire", 750 points, user input (build /
+  festival / a law by title; anything else and fate picks). A roll is for the TOWN, so it needs no hero and never
+  answers "!enlist first". viewer_roll(uid, who, text, face, cost) rolls the d20 IN THE GAME:
+  20 triumph (crit) . 13-19 goes well (good) . 8-12 mixed . 2-7 badly (bad) . 1 backfires (fumble).
+  Every band CHANGES something: BUILD -> economy.raise_shop("smithy") +2/+1/+1 and 60 gold over / a third of the
+  timber wasted / half the timber burns and 40 gold; EVENT -> town.start_festival("gift", buyer) (+ full restock on
+  a 20) / a small market fair / the feast food spoils / a brawl, 60 gold and 1 renown; LAW -> a propositions entry
+  passes, its own good or bad line comes true, renown +2/+1/0/-1/-1 (renown is half the town score). Chronicle:
+  "<name> rolls a N to <do> - <band>. <what happened>", then E3PO shouts his verdict (e3po.viewer_roll pools,
+  C-cycle 38 - mixed and bad use "low"). Words read from lore_lines, no parallel copies.
+  scripts/snapshot_pub.gd (bak_t5): `rolls` [{n, by, what, result, tier, cost, at}] newest first, max 20, in
+  web/app.js normalizeRolls' contract; tier only one of the five whitelisted words; names W1a-cleaned at 25;
+  result capped at 400 (clean_line gained an optional cap - the hub reads 400, so a verdict is never cut at 200).
+  PAYLOAD_V stays 4 (additive). scripts/town.gd (bak_t5): var viewer_rolls.
+- TEST tools/_t5_roll.gd (real Town.tscn, offline EventSub): T5_ROLL OK 23/23 - bands, intent parsing, build 20
+  smithy 1->3 and counter ceiling 3, build 1 backfires (wood 100->50, treasury 500->460, level unchanged), build 5
+  badly, event 15 festival paid for by Marigold, event 4 food 100->80, law 17/3 renown 5->6->5 with the law's own
+  lines, a real EventSub redemption payload rolls for a viewer with no hero, payload v4 carries rolls, hostile name
+  cleaned, 5 failure outcomes. Windowed same 23/23.
+- LOOK renders/cycles/t5/: t5_smithy_before (rack silhouetted above common) -> t5_smithy_after_crit (fine steel and
+  runed axes lit after CoffeeCat's 20) and t5_square_festival (bunting over the square, the Chronicle line shown).
+- GATES: parse 0 errors; OFFFLOOR 0/1216 INPROP 0 MON_INPROP 0/120; TWITCH_PARSE OK; TOWNWALK in_solid 0/20694 raid
+  0/3956 PASS (stuck 1); delve ran 150 s to floor 2, 0 SCRIPT ERROR.
+- MR. E: the reward is created only on a resync (the edit-proof rule). Set [twitch] rewards_resync=true in
+  user://twitch.cfg for ONE launch, then false again. Seen in the shots: the HUD-dock Chronicle on this branch still
+  ends lines in "..." - that is L71 (HUD's feed_hud.gd), not this item.

@@ -3194,8 +3194,14 @@ let lastBeastPayload = null;
 //   p.orders[] = {who, item, shop, status?, walker?}                                       (v5)
 // A snapshot value only ever chooses WHICH known glyph / rarity frame; it is never a URL, src,
 // href, class name or style. Rarity is matched to a page-owned whitelist before it picks a class.
-const SHOP_RARITY = new Set(["common", "uncommon", "rare", "epic", "legendary"]);
-function rarityClass(r) { const k = String(r == null ? "" : r).toLowerCase().trim(); return SHOP_RARITY.has(k) ? "rar-" + k : ""; }
+// C-55: the game's ladder is common < uncommon < rare < very rare < legendary < artifact (economy.gd RARITY).
+// "very rare" has a space, so the CLASS is a page-owned slug from this map - never the snapshot string.
+// "epic" was retired by the game build; it is kept only as a legacy alias so an old snapshot still frames.
+// C-61: this reads the STORED rarity key and nothing else - the hub never bands anything by cost.
+const SHOP_RARITY = new Map([["common", "common"], ["uncommon", "uncommon"], ["rare", "rare"],
+  ["very rare", "very-rare"], ["very-rare", "very-rare"], ["very_rare", "very-rare"], ["epic", "very-rare"],
+  ["legendary", "legendary"], ["artifact", "artifact"]]);
+function rarityClass(r) { const k = String(r == null ? "" : r).toLowerCase().trim(); return SHOP_RARITY.has(k) ? "rar-" + SHOP_RARITY.get(k) : ""; }
 function shopIconFor(name) { return /smith|forge|anvil/i.test(String(name || "")) ? "anvil" : "stall"; }
 let lastShopP = null;
 function shopGood(g, passing) {
@@ -4085,9 +4091,9 @@ function withMock(p) {
         { name: "The Provisioner", level: 3, sells_to: "uncommon", stock: [{ name: "Loaf", cost: 2 }, { name: bad + " Ale", cost: 5, rarity: "common" }, { name: "Flask of Oil", cost: 6, qty: 4 }] },
         { name: bad + " Smithy", level: 2, sells_to: "rare", stock: [{ name: "<b>Iron sword</b>", cost: 90, rarity: "uncommon" }, { name: "Moonlit dagger", cost: 400, rarity: "rare" }] },
         { name: "The Apothecary", level: 1, sells_to: "<script>x</script>", stock: [] },
-        { name: "The Stables", level: 4, sells_to: "epic" },
+        { name: "The Stables", level: 4, sells_to: "very rare" },
       ];
-      out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "epic" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
+      out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "very rare" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
       out.orders = [{ who: "viewer1", item: bad, shop: "The Smithy", walker: "Brum" }, { who: bad, item: "Loaf", shop: "The Provisioner", status: "ready" }];
     }
     out.v = "5";

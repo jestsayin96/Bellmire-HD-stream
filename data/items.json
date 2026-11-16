@@ -231,7 +231,31 @@
     "soaper_gloves":    {"name": "Lye-boiler's Gloves", "slot": "gloves", "cost": 240, "hp": 8, "flavour": "Lye takes the skin off a hand in a season. It never took his."},
     "carder_gloves":    {"name": "Carder's Gloves", "slot": "gloves", "cost": 200, "hp": 8, "flavour": "Tooth-scratched through at the palm, and still worn."},
     "spinner_gloves":   {"name": "Spinner's Gloves", "slot": "gloves", "cost": 205, "speed": 0.4, "flavour": "Fingerless, for the thread. The thread never slipped."},
-    "retter_gloves":    {"name": "Retter's Gloves", "slot": "gloves", "cost": 215, "saves": 1, "flavour": "Flax rotted in the pond until it let go. He pulled it out by hand."}
+    "retter_gloves":    {"name": "Retter's Gloves", "slot": "gloves", "cost": 215, "saves": 1, "flavour": "Flax rotted in the pond until it let go. He pulled it out by hand."},
+    "scar_guard_ring": {"name": "Ring of the Scar-guard", "slot": "ring", "cost": 420, "ac": 1, "flavour": "A guard's iron, worn on the hand that holds the lantern."},
+    "doorkeeper_ring": {"name": "Doorkeeper's Band", "slot": "ring", "cost": 340, "saves": 1, "flavour": "Kept the door through the night. The door remembers."},
+    "ledger_ring": {"name": "Ledger-keeper's Ring", "slot": "ring", "cost": 300, "hit": 1, "flavour": "A signet worn smooth. It stamped every name that went below."},
+    "hearth_ring": {"name": "Hearthwarden's Ring", "slot": "ring", "cost": 360, "hp": 12, "flavour": "Warm brass. It has never been cold, whatever floor it has been on."},
+    "lanternman_amulet": {"name": "Lanternman's Amulet", "slot": "amulet", "cost": 380, "saves": 1, "flavour": "A tin lantern the size of a thumb. It does not give light. It gives nerve."},
+    "grainmeasure_charm": {"name": "Grainmeasure Charm", "slot": "amulet", "cost": 260, "hp": 10, "flavour": "A wheat-ear in resin. Measure the grain, and it will measure back."},
+    "flask_amulet": {"name": "Flask-count Pendant", "slot": "amulet", "cost": 330, "hit": 1, "flavour": "Seven little flasks on a cord. The eighth is yours to supply."},
+    "clapperless_amulet": {"name": "Clapperless Bell Amulet", "slot": "amulet", "cost": 400, "ac": 1, "flavour": "A bell with no clapper. It rings in the mind and nowhere else."},
+    "wall_cloak": {"name": "Wall-walker's Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Wind-faded, rain-stiff. The wall has taught it to stand up straight."},
+    "scarwatch_cloak": {"name": "Scarwatch Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Grey as the stair-head at dusk. The dark does not notice it, which is the point."},
+    "feast_cloak": {"name": "Feast-night Cloak", "slot": "cloak", "cost": 230, "hp": 8, "flavour": "Stained with three toasts and a stew. Warm, and well-loved."},
+    "caravan_cloak": {"name": "Caravan Cloak", "slot": "cloak", "cost": 280, "speed": 0.5, "flavour": "Waxed against the road. It has been to places Bellmire does not have names for."},
+    "barracks_boots": {"name": "Barracks Boots", "slot": "boots", "cost": 260, "ac": 1, "flavour": "Hobnailed, guard-issue. They stamp in step, even when empty."},
+    "stairwalker_boots": {"name": "Stair-walker's Boots", "slot": "boots", "cost": 300, "speed": 0.6, "flavour": "Worn on one side from a stair that curls the same way every time."},
+    "fordwader_boots": {"name": "Ford-wader's Tarred Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Tarred to the knee. The Ford takes everything but these."},
+    "delvers_boots": {"name": "Delver's Boots", "slot": "boots", "cost": 340, "saves": 1, "flavour": "Re-soled four times and not once at the scar. It tries to avoid the scar."},
+    "raidbreaker_gloves": {"name": "Raidbreaker's Gauntlets", "slot": "gloves", "cost": 380, "dmg": 2, "flavour": "Heavy, scored with raider steel. Somebody argued with them once, with an axe."},
+    "bellringer_mitts": {"name": "Bell-ringer's Mitts", "slot": "gloves", "cost": 240, "hp": 8, "flavour": "Padded to the wrist. The rope bites hands, and these have been bitten."},
+    "ledger_gloves": {"name": "Ledger-keeper's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Ink at the fingertips. The hand that wrote the dead's names is steady."},
+    "harvest_gloves": {"name": "Harvest Gloves", "slot": "gloves", "cost": 210, "hp": 8, "flavour": "Cut-down and patched. The last cart comes in on hands like these."},
+    "scarforged_ring": {"name": "Scarforged Ring", "slot": "ring", "cost": 500, "dmg": 2, "flavour": "Warm when the dark is near. It has never once been wrong, and has never once been wrong in your favour."},
+    "oath_amulet": {"name": "Oathkeeper's Amulet", "slot": "amulet", "cost": 480, "ac": 1, "flavour": "An oath stamped in tin. The wearer says they will not break it. The amulet is listening."},
+    "commander_cloak": {"name": "Commander's Cloak", "slot": "cloak", "cost": 440, "saves": 1, "flavour": "Red, E3PO's colours. He has not endorsed it. He has not objected, either."},
+    "hero_home_boots": {"name": "Homecomer's Boots", "slot": "boots", "cost": 350, "hp": 14, "flavour": "Walked out of the scar once. They are not eager to go back, but they will."}
   },
   "cosmetics": {
     "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a", "flavour": "Rain runs off the brim instead of your collar. That is the whole of it."},
@@ -671,7 +695,78 @@
     "title_boatwright": {"name": "the Boatwright", "kind": "title", "cost": 180, "flavour": "The first hull you put in the water is still in it."},
     "title_oarmaker":   {"name": "the Oar-maker", "kind": "title", "cost": 120, "flavour": "A day at the shaving horse. Balance is a habit you can hand to someone else."},
     "title_creeler":    {"name": "the Creeler", "kind": "title", "cost": 80, "flavour": "Mud, withy and fish-scale, and a full basket every tide of the mire."},
-    "title_beadle":     {"name": "the Beadle", "kind": "title", "cost": 200, "flavour": "Tall hat, long memory, and the parish knew both."}
+    "title_beadle":     {"name": "the Beadle", "kind": "title", "cost": 200, "flavour": "Tall hat, long memory, and the parish knew both."},
+    "scarwatch_hood": {"name": "Scarwatch Hood", "kind": "hat", "cost": 150, "colour": "2a2e36", "flavour": "Grey wool, deep cowl. The watch at the scar mouth wear them so the dark cannot read their faces."},
+    "lanternman_cap": {"name": "Lanternman's Cap", "kind": "hat", "cost": 90, "colour": "d8a850", "flavour": "Brass-buttoned, soot at the brim. He lit the stair every dusk and never once went down it."},
+    "flaskcounter_cap": {"name": "Flask-counter's Cap", "kind": "hat", "cost": 110, "colour": "7a4a3a", "flavour": "Count the flasks, the guild says. This cap has counted more than most."},
+    "hearthwarden_hat": {"name": "Hearthwarden's Hat", "kind": "hat", "cost": 120, "colour": "a86a3a", "flavour": "Felt, ember-scorched. Somebody had to keep the guild-post fire in, and it was a hat like this."},
+    "ledger_cowl": {"name": "Ledger-keeper's Cowl", "kind": "hat", "cost": 140, "colour": "3a4a5a", "flavour": "Ink on the hem. The guild clerk wrote down who went below, and who did not come back."},
+    "grainmeasure_hat": {"name": "Grainmeasurer's Hat", "kind": "hat", "cost": 70, "colour": "c8a860", "flavour": "Straw-pale and dusty. Measure the grain. The grain has never lied to this hat."},
+    "doorkeeper_helm": {"name": "Doorkeeper's Helm", "kind": "hat", "cost": 260, "colour": "5a626c", "flavour": "Plain iron, dented from the inside. Keep the door, the Commander says, and some do."},
+    "ford_wader_hat": {"name": "Ford-wader's Hat", "kind": "hat", "cost": 60, "colour": "5a6a58", "flavour": "Oilcloth, green at the seams. Dry head, wet boots, and a good day at the Ford."},
+    "bellmire_felt": {"name": "Bellmire Felt", "kind": "hat", "cost": 50, "colour": "6a5a4a", "flavour": "The town's plain felt cap. Ugly, warm, and you will see forty of them at the feast."},
+    "pilgrims_wide": {"name": "Pilgrim's Wide Hat", "kind": "hat", "cost": 100, "colour": "8a7a5a", "flavour": "Brim wide enough to hide a prayer in. The scar draws pilgrims, and they are never sure why."},
+    "raiders_bane_helm": {"name": "Raidbreaker's Helm", "kind": "hat", "cost": 300, "colour": "4a4a52", "flavour": "Dented at the crown by a thrown axe. The wearer says it was a very bad throw."},
+    "festival_garland": {"name": "Festival Garland", "kind": "hat", "cost": 65, "colour": "a0b858", "flavour": "Green leaves, red ribbon, wilting by the third toast. Bellmire wears it anyway."},
+    "harvest_crown": {"name": "Harvest Crown", "kind": "hat", "cost": 180, "colour": "d0a838", "flavour": "Braided wheat, gilded at the tips. Worn by whoever brings in the last cart."},
+    "delvers_lamp_cap": {"name": "Delver's Lamp Cap", "kind": "hat", "cost": 160, "colour": "8a6a30", "flavour": "A cap with a lamp-hook sewn to it. The wearer has been below, and wants you to know it."},
+    "scarmarked_hood": {"name": "Scar-marked Hood", "kind": "hat", "cost": 230, "colour": "4a2a3a", "flavour": "Dyed with something dredged from the scar. It looks black in the sun and purple in the torchlight."},
+    "wall_walker_cap": {"name": "Wall-walker's Cap", "kind": "hat", "cost": 95, "colour": "5a6a7a", "flavour": "Chin-strapped against the wind. Walkers of the new wall wear it, and do not look down."},
+    "barracks_cap": {"name": "Barracks Cap", "kind": "hat", "cost": 75, "colour": "7a3a3a", "flavour": "Red wool, guard-issue. E3PO has been seen to approve of it, which is rare."},
+    "miller_felt": {"name": "Miller's Felt", "kind": "hat", "cost": 55, "colour": "d8d0b8", "flavour": "White with flour to the elbow. This hat never goes to the scar and is proud of it."},
+    "beekeepers_veil": {"name": "Beekeeper's Veil", "kind": "hat", "cost": 85, "colour": "c8c0a0", "flavour": "Net, brim and a smoker pot's worth of patience. The bees have never once been rushed."},
+    "tithe_collector_hat": {"name": "Tithe-collector's Hat", "kind": "hat", "cost": 175, "colour": "2e2a3a", "flavour": "Stiff and square. People cross the road when they see it, and it takes that as a compliment."},
+    "watchfire_hood": {"name": "Watchfire Hood", "kind": "hat", "cost": 120, "colour": "9a3a2a", "flavour": "Red as a beacon. Seen from the wall, it means somebody is awake who should be."},
+    "cartwright_flat_cap": {"name": "Cartwright's Flat Cap", "kind": "hat", "cost": 70, "colour": "6a4a2a", "flavour": "Wheel-grease on the peak. Every caravan that reaches Bellmire owes someone in this cap."},
+    "bell_ringer_hat": {"name": "Bell-ringer's Hat", "kind": "hat", "cost": 130, "colour": "8a8a4a", "flavour": "Padded against the din. The great bell has no clapper, the ringer says, and rings it anyway."},
+    "mourners_black_veil": {"name": "Mourner's Black Veil", "kind": "hat", "cost": 135, "colour": "1e1e26", "flavour": "Black gauze, light as breath. The chapel bell rings for a hero, and this comes out."},
+    "banner_scar_mouth": {"name": "Scar-mouth Banner", "kind": "banner", "cost": 160, "colour": "2a1e2e", "flavour": "Hung over the stair-head. It flaps toward the dark, though there is no wind below."},
+    "banner_guild_post": {"name": "Guild Post Banner", "kind": "banner", "cost": 120, "colour": "a02a26", "flavour": "Red, with the guild's open door. The hinge is stitched in gold, because it is the part that matters."},
+    "banner_flask_count": {"name": "Flask-count Banner", "kind": "banner", "cost": 110, "colour": "2a4aa0", "flavour": "A tally of little flasks, stitched in rows. Count them. Then count them again."},
+    "banner_door_kept": {"name": "Door-kept Banner", "kind": "banner", "cost": 140, "colour": "5a626c", "flavour": "Grey, one door, one bar. Keep the door."},
+    "banner_grain_measured": {"name": "Grain-measure Banner", "kind": "banner", "cost": 90, "colour": "c8a860", "flavour": "A bushel in tawny thread. It is the first thing stitched on the first flag of the first day."},
+    "banner_ford_crossing": {"name": "Ford Crossing Banner", "kind": "banner", "cost": 85, "colour": "4a6a74", "flavour": "Blue, one wavering line. The river is the oldest road in Bellmire."},
+    "banner_wall_first": {"name": "First Wall Banner", "kind": "banner", "cost": 220, "colour": "7a7468", "flavour": "A wall, unfinished, drawn in a hurry by someone who was afraid it would not be finished."},
+    "banner_commander": {"name": "Commander's Banner", "kind": "banner", "cost": 260, "colour": "8a2a2a", "flavour": "A raised fist, a helm, and a long list of things E3PO is not impressed by."},
+    "banner_raid_held": {"name": "Raid-held Banner", "kind": "banner", "cost": 200, "colour": "3a3a44", "flavour": "Scorch along the hem, flown the morning after a raid. The walls held, it says."},
+    "banner_feast_night": {"name": "Feast-night Banner", "kind": "banner", "cost": 100, "colour": "a8602a", "flavour": "Torch-orange, cup and loaf. Hung at the long table, dripped on by the third toast."},
+    "banner_harvest_cart": {"name": "Harvest-cart Banner", "kind": "banner", "cost": 95, "colour": "d0a838", "flavour": "The last cart, drawn heavy. A good year, plainly, and a hungry one to come."},
+    "banner_caravan_road": {"name": "Caravan Road Banner", "kind": "banner", "cost": 105, "colour": "6a5a3a", "flavour": "Wheels and a long road. Hung on the gate when the carts are due."},
+    "banner_lord_felled": {"name": "Lord-felled Banner", "kind": "banner", "cost": 340, "colour": "1e1a22", "flavour": "A crown, struck through. Raised the day a dungeon lord goes down."},
+    "banner_hero_home": {"name": "Hero-home Banner", "kind": "banner", "cost": 150, "colour": "3a7a5a", "flavour": "A cloak walking out of a dark door. The town hangs it for anyone who comes back."},
+    "banner_chapel_bell": {"name": "Chapel Bell Banner", "kind": "banner", "cost": 125, "colour": "8a8a4a", "flavour": "One bell, no clapper. The town has an opinion about this, and it is stitched in thread."},
+    "banner_smiths_mark": {"name": "Smith's Mark Banner", "kind": "banner", "cost": 135, "colour": "a04a2a", "flavour": "A hammer in an ember field. Steel is the only argument that wins."},
+    "banner_scarforged": {"name": "Scarforged Banner", "kind": "banner", "cost": 320, "colour": "4a2a4a", "flavour": "Purple-black, thread that hums faintly when the scar is near. Do not hang it indoors."},
+    "banner_ledger_black": {"name": "Ledger Banner", "kind": "banner", "cost": 115, "colour": "1c1c20", "flavour": "Plain black, a white quill. The guild writes down every name, and every name is on this."},
+    "title_flaskcounting": {"name": "the Flask-counter", "kind": "title", "cost": 90, "flavour": "He counted the flasks, and the flasks added up, which is rarer than it sounds."},
+    "title_doorkeeper": {"name": "the Doorkeeper", "kind": "title", "cost": 160, "flavour": "Kept the door when something leaned on it from the other side."},
+    "title_grainmeasurer": {"name": "the Grainmeasurer", "kind": "title", "cost": 70, "flavour": "Measured the grain honestly through three lean winters. The town noticed."},
+    "title_lanternman": {"name": "the Lanternman", "kind": "title", "cost": 100, "flavour": "Lit the stair at dusk. Somebody had to be the first to see what came up."},
+    "title_scarwatcher": {"name": "the Scarwatcher", "kind": "title", "cost": 190, "flavour": "Watched the scar until it began to watch back."},
+    "title_ledgerkeeper": {"name": "the Ledger-keeper", "kind": "title", "cost": 120, "flavour": "Wrote down every name that went below. The ink never ran."},
+    "title_wallwalker": {"name": "the Wall-walker", "kind": "title", "cost": 110, "flavour": "Walked the wall at the dead hour, because doors open at the dead hour."},
+    "title_gatebreaker": {"name": "the Gate-holder", "kind": "title", "cost": 300, "flavour": "Stood in the gateway when the raiders came, and the gateway held."},
+    "title_feastmaster": {"name": "the Feastmaster", "kind": "title", "cost": 80, "flavour": "Declared the feast, filled the cups, and was not seen sober until morning."},
+    "title_harvestlord": {"name": "the Harvest-lord", "kind": "title", "cost": 150, "flavour": "Brought in the last cart. Bellmire ate, and remembered who drove."},
+    "title_homecomer": {"name": "the Homecomer", "kind": "title", "cost": 140, "flavour": "Walked out of the scar when the town had stopped lighting the lamp for them."},
+    "title_lordfeller": {"name": "the Lordfeller", "kind": "title", "cost": 330, "flavour": "A dungeon lord has a past tense now, and this is why."},
+    "title_fordkeeper": {"name": "the Ford-keeper", "kind": "title", "cost": 70, "flavour": "Knew which stones held and which did not, and said so before the flood."},
+    "title_caravaneer": {"name": "the Caravaneer", "kind": "title", "cost": 130, "flavour": "Brought wagons to a town that was not sure it deserved them."},
+    "title_hearthwarden": {"name": "the Hearthwarden", "kind": "title", "cost": 90, "flavour": "The guild-post fire never went out on this one's watch."},
+    "title_tithewarden": {"name": "the Tithe-warden", "kind": "title", "cost": 180, "flavour": "Collected honestly, which made them very lonely."},
+    "title_scarmarked": {"name": "the Scar-marked", "kind": "title", "cost": 250, "flavour": "Marked by the scar, and not entirely sorry for it."},
+    "title_stairwalker": {"name": "the Stair-walker", "kind": "title", "cost": 120, "flavour": "Down and up, and down again. The stair knows the tread by now."},
+    "title_candlewright": {"name": "the Candlewright", "kind": "title", "cost": 75, "flavour": "A candle is a promise to be back before it burns out."},
+    "title_wellwisher": {"name": "the Well-wisher", "kind": "title", "cost": 60, "flavour": "Dropped a coin in the well and meant it, which is all the well asks."},
+    "title_oathkeeper": {"name": "the Oathkeeper", "kind": "title", "cost": 240, "flavour": "Swore on the guild post's door and did not come off the oath."},
+    "title_crosswarden": {"name": "the Crosswarden", "kind": "title", "cost": 200, "flavour": "Held the crossing on the day it became a town."},
+    "title_bellmirian": {"name": "the Bellmirian", "kind": "title", "cost": 50, "flavour": "A plain word, with a plain pride in it. Count the flasks."},
+    "pet_gatehound": {"name": "a gate hound", "kind": "pet", "cost": 220, "model": "res://assets/animals/Corgi.glb", "scale": 0.0017, "flavour": "Barks once at strangers and twice at strangers carrying cheese."},
+    "pet_guildpup": {"name": "a guild pup", "kind": "pet", "cost": 190, "model": "res://assets/animals/Corgi.glb", "scale": 0.0017, "flavour": "Born under the guild post's table. It has opinions on the ledger."},
+    "pet_stoutpug": {"name": "a stout pug", "kind": "pet", "cost": 200, "model": "res://assets/animals/Pug.glb", "scale": 0.15, "flavour": "Snores through raids. The Commander says that is discipline."},
+    "pet_scarpug": {"name": "a scar-sniffing pug", "kind": "pet", "cost": 240, "model": "res://assets/animals/Pug.glb", "scale": 0.15, "flavour": "Sits at the stair-head and sneezes at the dark. The dark has never replied."},
+    "pet_packllama": {"name": "a pack llama", "kind": "pet", "cost": 300, "model": "res://assets/animals/Llama.glb", "scale": 0.18, "flavour": "Carries the caravan's grudges and most of its salt."},
+    "pet_festivalllama": {"name": "a festival llama", "kind": "pet", "cost": 330, "model": "res://assets/animals/Llama.glb", "scale": 0.18, "flavour": "Wears ribbons to the feast and spits only at the deserving."}
   },
   "dyes": {
     "black": "2a2a2e", "white": "e8e4da", "red": "a02a26", "blue": "2a4aa0", "green": "2a7a3a",
@@ -818,7 +913,34 @@
     "weirgate": "356048", "sluicebrass": "7a8a6a", "millrace": "4a6a74", "bolterwhite": "eee8d8", "spunwool": "c8bca4",
     "carderblue": "4a5a7a", "rettedflax": "9a9a72", "chapman": "8a6a4a", "limnergold": "d8b040", "gaoleriron": "2f2b26",
     "parishblack": "1c1c20", "bridgestone": "55606b", "pinderfold": "5a4234", "beadleblue": "3a3a5a", "boatpitch": "2a2420",
-    "oarash": "b4a884", "creelreed": "a89060", "warrenbrown": "6a5440", "lighterlamp": "d8b060", "raftpine": "6a5a3a"
+    "oarash": "b4a884", "creelreed": "a89060", "warrenbrown": "6a5440", "lighterlamp": "d8b060", "raftpine": "6a5a3a",
+    "scarpurple": "4a2a4a",
+    "lanternbrass": "c89a40",
+    "flaskglass": "6a8a7a",
+    "hearthember": "b8502a",
+    "doorbar": "4a4238",
+    "ledgerink": "20202a",
+    "grainstraw": "d8c070",
+    "fordgreen": "4a6a54",
+    "barracksred": "8a2e2a",
+    "feastwine": "6a2a36",
+    "harvestgold": "d0a030",
+    "mournblack": "18181e",
+    "commanderred": "a02a2a",
+    "caravandust": "b09a70",
+    "gateoak": "5a4630",
+    "scarmoss": "3a4a3a",
+    "ashfall": "8a8a8a",
+    "emberwick": "d86a30",
+    "guildblue": "2e4a7a",
+    "waxcream": "e0d4b0",
+    "thawwater": "7aa0b0",
+    "cinderrose": "b86a70",
+    "nightwatchblue": "1e2a4a",
+    "riverlilac": "8a7a9a",
+    "pilgrimdust": "a89870",
+    "tallowyellow": "d8c880",
+    "scartwilight": "3a2a4a"
   },
   "dye_cost": 25,
   "shop_stock": {
@@ -3763,5 +3885,2625 @@
         "family": "blade"
       }
     }
-  }
+  },
+  "stock_retirement": {
+    "_note": "C-53 (C4.1). Goods that STOP being stocked as the town grows. The two earlier blocks (shop_stock.tier, trader_cargo.tier) say when a good FIRST appears; this block says the LAST growth tier (1-12, inclusive) at which it is still on a shelf or in a caravan. A good listed here is stocked for tiers first_tier..last_tier and absent from last_tier+1 onward. This SUPERSEDES the 'nothing is ever removed' line in stock_by_tier._note for the keys listed here, and for no others; unlisted goods are stocked from their first tier to tier 12. replaced_by is the good that takes its place on the same shelf (null = nothing replaces it). Every key exists in shop_stock / trader_cargo; every replaced_by costs at least as much as the good it replaces. Dead until wired.",
+    "shop_goods": {
+      "clay_cups": {
+        "last_tier": 6,
+        "replaced_by": "pottery",
+        "why": "A chapel town drinks from fired pottery; the crossing's soft clay cups stop coming off the shelf."
+      },
+      "rush_light": {
+        "last_tier": 4,
+        "replaced_by": "candles",
+        "why": "Rush lights drip and stink. Once the guild sells wick and wax nobody buys one."
+      },
+      "reed_thatch": {
+        "last_tier": 6,
+        "replaced_by": null,
+        "why": "Thatch bundles give way to slate and tile once Craft Row can cut them."
+      },
+      "wooden_bowl": {
+        "last_tier": 5,
+        "replaced_by": "pottery",
+        "why": "Pottery bowls arrive with Market Day; carved wood fades out."
+      },
+      "mud_clogs": {
+        "last_tier": 4,
+        "replaced_by": "boots",
+        "why": "The last pair of clogs sells before boots reach the shelf at Market Day."
+      },
+      "wading_staff": {
+        "last_tier": 6,
+        "replaced_by": null,
+        "why": "Once the Chapel stands the Ford is crossed on a laid plank, not a wading staff."
+      },
+      "straw": {
+        "last_tier": 6,
+        "replaced_by": null,
+        "why": "The stable lane takes over bedding straw by the bale."
+      },
+      "oat_cake": {
+        "last_tier": 5,
+        "replaced_by": "rye_loaf",
+        "why": "The oat cake is a crossing's bread; a village bakes rye."
+      },
+      "barley_broth": {
+        "last_tier": 4,
+        "replaced_by": "mutton_pie",
+        "why": "A bowl of broth gives way to the Market Day pie."
+      },
+      "bramble_jam": {
+        "last_tier": 5,
+        "replaced_by": "preserves",
+        "why": "Hedge jam is what a crossing has; fruit preserves outsell it."
+      },
+      "reed_basket": {
+        "last_tier": 4,
+        "replaced_by": "market_basket",
+        "why": "The market basket replaces the reed one the week the first stall opens."
+      },
+      "tinderbox": {
+        "last_tier": 6,
+        "replaced_by": "lantern",
+        "why": "Craft Row sells a lantern that keeps its flame; the tinderbox is a crossing's tool."
+      },
+      "clay_pot": {
+        "last_tier": 6,
+        "replaced_by": "pottery",
+        "why": "Glazed pots from the potter's row outlast the crossing's clay."
+      },
+      "hurdle": {
+        "last_tier": 6,
+        "replaced_by": null,
+        "why": "Hurdles are for sheep. The pens go to stone and rail."
+      },
+      "wattle_panel": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "Wattle fences give way to timber and Craft Row joinery."
+      },
+      "oak_pail": {
+        "last_tier": 8,
+        "replaced_by": null,
+        "why": "Coopers' hooped pails replace the plain oak bucket."
+      },
+      "goose": {
+        "last_tier": 6,
+        "replaced_by": "smoked_ham",
+        "why": "Live geese leave the shelf once Market Day has a pie stall."
+      },
+      "butter_churn": {
+        "last_tier": 5,
+        "replaced_by": null,
+        "why": "The hamlet churn is a household job; by Market Day butter comes in tubs."
+      },
+      "sack_beans": {
+        "last_tier": 5,
+        "replaced_by": "pot_barley",
+        "why": "Dry beans fade as the market stocks barley and bacon."
+      },
+      "pot_barley": {
+        "last_tier": 7,
+        "replaced_by": "oat_flour",
+        "why": "A barley pot is a hamlet's supper; the Garrison feeds on flour and hardtack."
+      },
+      "smoked_eel": {
+        "last_tier": 6,
+        "replaced_by": "smoked_ham",
+        "why": "The ford's eel is dear to a hamlet; a chapel town eats ham."
+      },
+      "laying_hen": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "Hens move to the town's own coops; the shelf stops selling them at Craft Row."
+      },
+      "travel_satchel": {
+        "last_tier": 6,
+        "replaced_by": "chapmans_pack",
+        "why": "The chapman's pack outsells the satchel once the road is busy."
+      },
+      "scarecrow": {
+        "last_tier": 8,
+        "replaced_by": null,
+        "why": "The fields are walled in at the Garrison; there is no call for a scarecrow."
+      },
+      "pattens": {
+        "last_tier": 7,
+        "replaced_by": "boots",
+        "why": "Pattens lift a shoe out of the mud; the streets are laid by Craft Row."
+      },
+      "stall_canvas": {
+        "last_tier": 8,
+        "replaced_by": "pavilion_canvas",
+        "why": "Stall canvas gives way to the guild's own pavilion cloth."
+      },
+      "toy_horse": {
+        "last_tier": 8,
+        "replaced_by": "tin_whistle",
+        "why": "The wooden horse is a Market Day toy; the Garrison children play at drill."
+      },
+      "juggling_balls": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "The jugglers move on; the dice-men stay."
+      },
+      "chapmans_pack": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "A pedlar's pack has no place on the shelf once the town has shops of its own."
+      },
+      "tally_sticks": {
+        "last_tier": 10,
+        "replaced_by": "counting_frame",
+        "why": "Tally sticks are for illiterate counters; the guild teaches the counting frame."
+      },
+      "torches": {
+        "last_tier": 9,
+        "replaced_by": "street_lamp",
+        "why": "Pitch torches go out when the street lamps are lit."
+      },
+      "cider_jug": {
+        "last_tier": 9,
+        "replaced_by": "honey_mead",
+        "why": "Cider is a village drink; Market Town prefers mead and wine."
+      },
+      "sheepskin": {
+        "last_tier": 8,
+        "replaced_by": "blanket",
+        "why": "Sheepskin is a hamlet's coat; a garrison town buys wool and sentry cloaks."
+      },
+      "bunting": {
+        "last_tier": 10,
+        "replaced_by": null,
+        "why": "Bunting belongs to Market Day; walled towns hang banners instead."
+      },
+      "bale_tags": {
+        "last_tier": 9,
+        "replaced_by": "waybill_book",
+        "why": "Hand-tied tags give way to the guild's stamped waybill."
+      },
+      "hand_bell": {
+        "last_tier": 9,
+        "replaced_by": "alms_bowl",
+        "why": "The hand bell is a crier's tool; a walled town has a crier and a bell-tower."
+      }
+    },
+    "cargo": {
+      "seedcorn": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "The town grows its own seed by Craft Row; the caravans stop carrying it."
+      },
+      "plough_irons": {
+        "last_tier": 6,
+        "replaced_by": null,
+        "why": "The smiths forge ploughshares locally once Craft Row smokes."
+      },
+      "sickles": {
+        "last_tier": 5,
+        "replaced_by": null,
+        "why": "Sickles are forged in town from Market Day."
+      },
+      "oatmeal": {
+        "last_tier": 6,
+        "replaced_by": null,
+        "why": "A chapel town mills its own oats."
+      },
+      "rough_cloth": {
+        "last_tier": 5,
+        "replaced_by": null,
+        "why": "Rough cloth is a hamlet's lack; Market Day buys linen."
+      },
+      "bee_skeps": {
+        "last_tier": 4,
+        "replaced_by": null,
+        "why": "The town keeps its own bees from the Village on."
+      },
+      "flax_sheaves": {
+        "last_tier": 5,
+        "replaced_by": null,
+        "why": "Flax is grown near; the loom frames take over."
+      },
+      "hurdle_bundles": {
+        "last_tier": 4,
+        "replaced_by": null,
+        "why": "Hurdles are made in the pens at the Village."
+      },
+      "barley_seed": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "Seed is saved from the town's own fields once the Garrison stands."
+      },
+      "ox_yokes": {
+        "last_tier": 7,
+        "replaced_by": "cartwheels",
+        "why": "Yokes are carved in town; wheels still come in."
+      },
+      "tar_barrels": {
+        "last_tier": 8,
+        "replaced_by": null,
+        "why": "Pitch is boiled in town from Craft Row on."
+      },
+      "hemp_bundles": {
+        "last_tier": 9,
+        "replaced_by": "crane_cordage",
+        "why": "Hemp goes in by the bundle till the ropewalk opens."
+      },
+      "live_poultry": {
+        "last_tier": 7,
+        "replaced_by": null,
+        "why": "Market Town has its own poultry yard."
+      },
+      "caged_songbirds": {
+        "last_tier": 8,
+        "replaced_by": null,
+        "why": "The songbird fashion fades once the Garrison drills."
+      },
+      "wool_fleeces": {
+        "last_tier": 9,
+        "replaced_by": "dyed_wool",
+        "why": "Raw fleeces give way to dyed wool."
+      },
+      "hide_bales": {
+        "last_tier": 7,
+        "replaced_by": "tanned_hides",
+        "why": "Tanneries open at Craft Row; raw hides stop coming."
+      },
+      "rawhides": {
+        "last_tier": 7,
+        "replaced_by": "tanned_hides",
+        "why": "Raw hides stop at Craft Row."
+      },
+      "salt_fish": {
+        "last_tier": 9,
+        "replaced_by": null,
+        "why": "Salt fish gives way to barrelled herring."
+      },
+      "cider_casks": {
+        "last_tier": 9,
+        "replaced_by": "honey_mead",
+        "why": "Cider casks stop when mead and wine come in."
+      }
+    }
+  },
+  "trade_stock": {
+    "_note": "C-53 (C4.2). Which SHOP sells what. Five trades. Every shop_stock key is carried by exactly one trade (listed in that trade's 'carries'); a trade also sells its own_goods (new goods that exist ONLY here, keyed {name,cost,flavour,tier} plus optional last_tier). A trade's shelf at growth tier N = the keys in 'carries' and 'own_goods' where max(good.tier, trade.opens_tier) <= N and (no stock_retirement.shop_goods last_tier, or N <= last_tier). own_goods carry their own last_tier where they leave. 'schedule' lists, per tier, what ENTERS and what LEAVES that trade's shelf at that tier (precomputed from the rule above; they agree). A trade does not exist before opens_tier: no smithy before tier 3, no apothecary before 4, no stables before 5. Dead until wired.",
+    "trades": {
+      "general": {
+        "name": "General Goods",
+        "opens_tier": 1,
+        "voice": "Bread, rope, and whatever the cart brought.",
+        "carries": [
+          "grain",
+          "lampoil",
+          "bread",
+          "ale",
+          "rope",
+          "torches",
+          "salt",
+          "wool",
+          "candles",
+          "lantern",
+          "firewood",
+          "turnips",
+          "fish",
+          "cheese",
+          "blanket",
+          "pottery",
+          "boots",
+          "glass_pane",
+          "mirror",
+          "sandglass",
+          "silk_kerchief",
+          "eggs",
+          "waterskin",
+          "butter",
+          "net",
+          "tallow",
+          "preserves",
+          "besom",
+          "ribbon",
+          "mourning_cloth",
+          "psalter",
+          "hide_glue",
+          "brass_lamp",
+          "carpet",
+          "altar_oil",
+          "pewter_set",
+          "glass_goblets",
+          "clay_cups",
+          "onions",
+          "milk",
+          "honey",
+          "flax",
+          "pitch",
+          "lamp_wick",
+          "bacon",
+          "stall_canvas",
+          "bell_rope",
+          "grave_marker",
+          "censer",
+          "potters_clay",
+          "tin_whistle",
+          "dyed_sash",
+          "gate_tar",
+          "street_lamp",
+          "kid_gloves",
+          "lute",
+          "tapestry",
+          "silver_spoons",
+          "reed_thatch",
+          "clay_pot",
+          "laying_hen",
+          "sack_beans",
+          "beeswax_cake",
+          "stall_bell",
+          "votive_candle",
+          "prayer_beads",
+          "glue_pot",
+          "sealed_crock",
+          "wall_chalk",
+          "gilt_frame",
+          "kindling",
+          "rush_light",
+          "wooden_bowl",
+          "oat_cake",
+          "cabbage",
+          "smoked_eel",
+          "oak_pail",
+          "hurdle",
+          "waxed_thread",
+          "travel_satchel",
+          "oat_flour",
+          "pickled_eggs",
+          "pattens",
+          "mutton_pie",
+          "market_basket",
+          "toy_horse",
+          "font_water",
+          "chapel_wafers",
+          "hardtack",
+          "bone_dice",
+          "embroidered_cushion",
+          "velvet_cap",
+          "crystal_decanter",
+          "ivory_horn",
+          "perfumed_gloves",
+          "tinderbox",
+          "wading_staff",
+          "barley_broth",
+          "mud_clogs",
+          "reed_basket",
+          "bramble_jam",
+          "goose",
+          "butter_churn",
+          "seed_packet",
+          "wattle_panel",
+          "pot_barley",
+          "smoked_ham",
+          "cider_jug",
+          "dried_apples",
+          "rye_loaf",
+          "gingerbread",
+          "market_stool",
+          "juggling_balls",
+          "bunting",
+          "hand_bell",
+          "chapmans_pack",
+          "taper_box",
+          "hymn_sheet",
+          "alms_bowl",
+          "linen_shroud",
+          "pilgrim_badge",
+          "cassock",
+          "loom_shuttle",
+          "thimble",
+          "barracks_blanket",
+          "coral_beads",
+          "painted_fan",
+          "plumb_bob",
+          "whitewash_bucket",
+          "watchman_rattle",
+          "silver_thimble",
+          "folding_stool",
+          "satin_ribbon",
+          "candle_snuffer",
+          "jewel_casket",
+          "silk_slippers",
+          "pearl_pin",
+          "ermine_trim",
+          "harp_strings",
+          "gilt_candlestick"
+        ],
+        "own_goods": {
+          "dried_fish": {
+            "name": "String of Dried Fish",
+            "cost": 2,
+            "flavour": "Hard as a boot. Sold by the string.",
+            "tier": 1,
+            "last_tier": 5
+          },
+          "bad_rope": {
+            "name": "Knotted Rope",
+            "cost": 3,
+            "flavour": "More knots than rope. It holds a boat, mostly.",
+            "tier": 1,
+            "last_tier": 4
+          },
+          "tallow_dip": {
+            "name": "Tallow Dip",
+            "cost": 1,
+            "flavour": "Smokes, stinks, lasts an evening.",
+            "tier": 1,
+            "last_tier": 3
+          },
+          "reed_mat": {
+            "name": "Reed Mat",
+            "cost": 3,
+            "flavour": "Sleeps one. Smells of the marsh.",
+            "tier": 1,
+            "last_tier": 6
+          },
+          "oiled_rain_cape": {
+            "name": "Oiled Rain Cape",
+            "cost": 26,
+            "flavour": "Keeps off the Bellmire drizzle for one wet winter.",
+            "tier": 4
+          },
+          "street_pie": {
+            "name": "Hot Street Pie",
+            "cost": 5,
+            "flavour": "Sold from a tray. Do not ask what is in it.",
+            "tier": 7
+          },
+          "tarred_cable": {
+            "name": "Coil of Tarred Cable",
+            "cost": 24,
+            "flavour": "A city's rope. It will hold a barge and an argument.",
+            "tier": 8
+          },
+          "festival_lantern": {
+            "name": "Painted Festival Lantern",
+            "cost": 18,
+            "flavour": "Lit for feast days and lost by the morning.",
+            "tier": 9
+          },
+          "stoppered_bottle": {
+            "name": "Stoppered Glass Bottle",
+            "cost": 9,
+            "flavour": "Glass, so you pay for the stopper too.",
+            "tier": 9
+          }
+        },
+        "schedule": {
+          "1": {
+            "enter": [
+              "bread",
+              "ale",
+              "firewood",
+              "turnips",
+              "eggs",
+              "waterskin",
+              "clay_cups",
+              "onions",
+              "reed_thatch",
+              "clay_pot",
+              "kindling",
+              "rush_light",
+              "wooden_bowl",
+              "oat_cake",
+              "tinderbox",
+              "wading_staff",
+              "barley_broth",
+              "mud_clogs",
+              "reed_basket",
+              "bramble_jam",
+              "dried_fish",
+              "bad_rope",
+              "tallow_dip",
+              "reed_mat"
+            ],
+            "leave": []
+          },
+          "2": {
+            "enter": [
+              "grain",
+              "fish",
+              "butter",
+              "net",
+              "milk",
+              "honey",
+              "flax",
+              "laying_hen",
+              "sack_beans",
+              "cabbage",
+              "smoked_eel",
+              "oak_pail",
+              "hurdle",
+              "goose",
+              "butter_churn",
+              "seed_packet",
+              "wattle_panel",
+              "pot_barley"
+            ],
+            "leave": []
+          },
+          "3": {
+            "enter": [
+              "lampoil",
+              "rope",
+              "torches",
+              "wool",
+              "tallow",
+              "pitch",
+              "lamp_wick",
+              "waxed_thread",
+              "travel_satchel"
+            ],
+            "leave": []
+          },
+          "4": {
+            "enter": [
+              "salt",
+              "cheese",
+              "blanket",
+              "preserves",
+              "besom",
+              "bacon",
+              "beeswax_cake",
+              "oat_flour",
+              "pickled_eggs",
+              "pattens",
+              "smoked_ham",
+              "cider_jug",
+              "dried_apples",
+              "rye_loaf",
+              "oiled_rain_cape"
+            ],
+            "leave": [
+              "tallow_dip"
+            ]
+          },
+          "5": {
+            "enter": [
+              "candles",
+              "pottery",
+              "boots",
+              "ribbon",
+              "stall_canvas",
+              "stall_bell",
+              "mutton_pie",
+              "market_basket",
+              "toy_horse",
+              "gingerbread",
+              "market_stool",
+              "juggling_balls",
+              "bunting",
+              "hand_bell",
+              "chapmans_pack"
+            ],
+            "leave": [
+              "rush_light",
+              "barley_broth",
+              "mud_clogs",
+              "reed_basket",
+              "bad_rope"
+            ]
+          },
+          "6": {
+            "enter": [
+              "mourning_cloth",
+              "psalter",
+              "altar_oil",
+              "bell_rope",
+              "grave_marker",
+              "censer",
+              "votive_candle",
+              "prayer_beads",
+              "font_water",
+              "chapel_wafers",
+              "taper_box",
+              "hymn_sheet",
+              "alms_bowl",
+              "linen_shroud",
+              "pilgrim_badge",
+              "cassock"
+            ],
+            "leave": [
+              "sack_beans",
+              "wooden_bowl",
+              "oat_cake",
+              "bramble_jam",
+              "butter_churn",
+              "dried_fish"
+            ]
+          },
+          "7": {
+            "enter": [
+              "lantern",
+              "hide_glue",
+              "potters_clay",
+              "glue_pot",
+              "loom_shuttle",
+              "thimble",
+              "street_pie"
+            ],
+            "leave": [
+              "clay_cups",
+              "reed_thatch",
+              "clay_pot",
+              "smoked_eel",
+              "hurdle",
+              "travel_satchel",
+              "tinderbox",
+              "wading_staff",
+              "goose",
+              "reed_mat"
+            ]
+          },
+          "8": {
+            "enter": [
+              "hardtack",
+              "barracks_blanket",
+              "tarred_cable"
+            ],
+            "leave": [
+              "laying_hen",
+              "pattens",
+              "wattle_panel",
+              "pot_barley",
+              "juggling_balls",
+              "chapmans_pack"
+            ]
+          },
+          "9": {
+            "enter": [
+              "tin_whistle",
+              "dyed_sash",
+              "sealed_crock",
+              "bone_dice",
+              "coral_beads",
+              "painted_fan",
+              "festival_lantern",
+              "stoppered_bottle"
+            ],
+            "leave": [
+              "stall_canvas",
+              "oak_pail",
+              "toy_horse"
+            ]
+          },
+          "10": {
+            "enter": [
+              "glass_pane",
+              "gate_tar",
+              "street_lamp",
+              "wall_chalk",
+              "plumb_bob",
+              "whitewash_bucket",
+              "watchman_rattle"
+            ],
+            "leave": [
+              "torches",
+              "cider_jug",
+              "hand_bell"
+            ]
+          },
+          "11": {
+            "enter": [
+              "mirror",
+              "brass_lamp",
+              "pewter_set",
+              "kid_gloves",
+              "embroidered_cushion",
+              "silver_thimble",
+              "folding_stool",
+              "satin_ribbon",
+              "candle_snuffer"
+            ],
+            "leave": [
+              "bunting"
+            ]
+          },
+          "12": {
+            "enter": [
+              "sandglass",
+              "silk_kerchief",
+              "carpet",
+              "glass_goblets",
+              "lute",
+              "tapestry",
+              "silver_spoons",
+              "gilt_frame",
+              "velvet_cap",
+              "crystal_decanter",
+              "ivory_horn",
+              "perfumed_gloves",
+              "jewel_casket",
+              "silk_slippers",
+              "pearl_pin",
+              "ermine_trim",
+              "harp_strings",
+              "gilt_candlestick"
+            ],
+            "leave": []
+          }
+        }
+      },
+      "guild": {
+        "name": "Guild Counter",
+        "opens_tier": 3,
+        "voice": "Ink, seals, and the kept door.",
+        "carries": [
+          "ledger",
+          "ink",
+          "parchment",
+          "sealing_wax",
+          "guild_chit",
+          "guild_sash",
+          "waybill_book",
+          "brass_dividers",
+          "letter_case",
+          "inkhorn",
+          "chalk_line",
+          "slate_chalk",
+          "tally_sticks",
+          "handscales",
+          "market_weight",
+          "coin_purse",
+          "muster_roll",
+          "wax_tablet",
+          "quill_bundle",
+          "pewter_inkstand",
+          "counting_frame",
+          "seal_ring",
+          "quill_knife",
+          "writing_desk",
+          "lampblack",
+          "measuring_rod",
+          "bale_tags"
+        ],
+        "own_goods": {
+          "contract_form": {
+            "name": "Contract Form",
+            "cost": 5,
+            "flavour": "Blank, ruled, ready to be regretted.",
+            "tier": 3
+          },
+          "toll_tokens": {
+            "name": "String of Toll Tokens",
+            "cost": 8,
+            "flavour": "Pay the Ford. Keep the string.",
+            "tier": 4
+          },
+          "bonded_satchel": {
+            "name": "Bonded Satchel",
+            "cost": 18,
+            "flavour": "Locks twice. The guild keeps the other key.",
+            "tier": 4
+          },
+          "pass_writ": {
+            "name": "Writ of Passage",
+            "cost": 35,
+            "flavour": "A caravan's name and a guild's seal on it.",
+            "tier": 5
+          },
+          "escort_writ": {
+            "name": "Writ of Escort",
+            "cost": 60,
+            "flavour": "Names the guards a caravan is owed.",
+            "tier": 6
+          },
+          "guild_ring": {
+            "name": "Guild Signet Ring",
+            "cost": 75,
+            "flavour": "Sealing wax and standing, in one.",
+            "tier": 8
+          },
+          "arbiters_gavel": {
+            "name": "Arbiter's Gavel",
+            "cost": 40,
+            "flavour": "Settles things. Loudly.",
+            "tier": 9
+          },
+          "charter_copy": {
+            "name": "Charter Copy",
+            "cost": 90,
+            "flavour": "Sealed, witnessed, framed.",
+            "tier": 10
+          },
+          "master_stamp": {
+            "name": "Master's Stamp",
+            "cost": 85,
+            "flavour": "The last word, in ink.",
+            "tier": 11
+          }
+        },
+        "schedule": {
+          "3": {
+            "enter": [
+              "ledger",
+              "sealing_wax",
+              "guild_chit",
+              "guild_sash",
+              "waybill_book",
+              "brass_dividers",
+              "letter_case",
+              "inkhorn",
+              "chalk_line",
+              "slate_chalk",
+              "bale_tags",
+              "contract_form"
+            ],
+            "leave": []
+          },
+          "4": {
+            "enter": [
+              "toll_tokens",
+              "bonded_satchel"
+            ],
+            "leave": []
+          },
+          "5": {
+            "enter": [
+              "tally_sticks",
+              "handscales",
+              "market_weight",
+              "coin_purse",
+              "pass_writ"
+            ],
+            "leave": []
+          },
+          "6": {
+            "enter": [
+              "ink",
+              "parchment",
+              "wax_tablet",
+              "quill_bundle",
+              "escort_writ"
+            ],
+            "leave": []
+          },
+          "7": {
+            "enter": [
+              "lampblack",
+              "measuring_rod"
+            ],
+            "leave": []
+          },
+          "8": {
+            "enter": [
+              "muster_roll",
+              "guild_ring"
+            ],
+            "leave": []
+          },
+          "9": {
+            "enter": [
+              "arbiters_gavel"
+            ],
+            "leave": []
+          },
+          "10": {
+            "enter": [
+              "charter_copy"
+            ],
+            "leave": [
+              "bale_tags"
+            ]
+          },
+          "11": {
+            "enter": [
+              "pewter_inkstand",
+              "counting_frame",
+              "seal_ring",
+              "quill_knife",
+              "writing_desk",
+              "master_stamp"
+            ],
+            "leave": [
+              "tally_sticks"
+            ]
+          }
+        }
+      },
+      "smith": {
+        "name": "Smithy",
+        "opens_tier": 3,
+        "voice": "Iron by the pound and no credit.",
+        "carries": [
+          "nails",
+          "whetstone",
+          "bellows",
+          "smith_file",
+          "smith_hammer",
+          "forge_apron",
+          "rivet_box",
+          "iron_hinges",
+          "iron_spade",
+          "shears",
+          "scythe",
+          "pit_saw",
+          "lock",
+          "door_bar",
+          "gate_bolt",
+          "shutter_lock",
+          "helm",
+          "shield",
+          "arrows",
+          "bowstrings",
+          "caltrops",
+          "drill_pike",
+          "gambeson",
+          "gorget",
+          "sword_belt",
+          "practice_sword",
+          "sharpened_stakes",
+          "sentry_cloak",
+          "guard_whistle",
+          "watch_horn",
+          "signal_flag",
+          "mason_trowel",
+          "stone_chisel",
+          "chisel_set",
+          "wood_plane",
+          "spokeshave",
+          "mallet",
+          "paving_maul",
+          "coopers_hoops",
+          "hooks",
+          "wall_brazier",
+          "crane_rope",
+          "hay_fork",
+          "arrow_loop_shutter",
+          "portcullis_grease"
+        ],
+        "own_goods": {
+          "bog_iron_knife": {
+            "name": "Bog-Iron Knife",
+            "cost": 8,
+            "flavour": "Soft marsh iron. Takes an edge for an afternoon.",
+            "tier": 3,
+            "last_tier": 6
+          },
+          "ploughshare": {
+            "name": "Ploughshare",
+            "cost": 24,
+            "flavour": "Bites the bank-soil. Heavier than it looks.",
+            "tier": 4
+          },
+          "hoe_head": {
+            "name": "Hoe Head",
+            "cost": 9,
+            "flavour": "Wants a handle and a patient back.",
+            "tier": 4
+          },
+          "cleaver": {
+            "name": "Butcher's Cleaver",
+            "cost": 18,
+            "flavour": "Chops bone, wood, and arguments.",
+            "tier": 5
+          },
+          "kettle_hook": {
+            "name": "Kettle Hook",
+            "cost": 8,
+            "flavour": "Iron S for a pot over a fire.",
+            "tier": 5
+          },
+          "steel_dagger": {
+            "name": "Steel Dagger",
+            "cost": 32,
+            "flavour": "Real steel. The smith is proud of it.",
+            "tier": 7
+          },
+          "mail_coif": {
+            "name": "Mail Coif",
+            "cost": 58,
+            "flavour": "A thousand rings, each closed by hand.",
+            "tier": 8
+          },
+          "mail_hauberk": {
+            "name": "Mail Hauberk",
+            "cost": 120,
+            "flavour": "Heavy. Counts the cost of every blow it stops.",
+            "tier": 8
+          },
+          "plate_gauntlets": {
+            "name": "Plate Gauntlets",
+            "cost": 62,
+            "flavour": "The first plate a Bellmire smith will sign.",
+            "tier": 10
+          },
+          "plate_cuirass": {
+            "name": "Plate Cuirass",
+            "cost": 180,
+            "flavour": "A city's armour. More than a crossing's mail, and worth it.",
+            "tier": 12
+          }
+        },
+        "schedule": {
+          "3": {
+            "enter": [
+              "scythe",
+              "hooks",
+              "bog_iron_knife"
+            ],
+            "leave": []
+          },
+          "4": {
+            "enter": [
+              "whetstone",
+              "iron_spade",
+              "shears",
+              "hay_fork",
+              "ploughshare",
+              "hoe_head"
+            ],
+            "leave": []
+          },
+          "5": {
+            "enter": [
+              "nails",
+              "cleaver",
+              "kettle_hook"
+            ],
+            "leave": []
+          },
+          "7": {
+            "enter": [
+              "bellows",
+              "smith_file",
+              "smith_hammer",
+              "forge_apron",
+              "rivet_box",
+              "pit_saw",
+              "chisel_set",
+              "wood_plane",
+              "spokeshave",
+              "mallet",
+              "coopers_hoops",
+              "steel_dagger"
+            ],
+            "leave": [
+              "bog_iron_knife"
+            ]
+          },
+          "8": {
+            "enter": [
+              "helm",
+              "shield",
+              "arrows",
+              "bowstrings",
+              "caltrops",
+              "drill_pike",
+              "gambeson",
+              "gorget",
+              "sword_belt",
+              "practice_sword",
+              "sentry_cloak",
+              "guard_whistle",
+              "watch_horn",
+              "signal_flag",
+              "mail_coif",
+              "mail_hauberk"
+            ],
+            "leave": []
+          },
+          "10": {
+            "enter": [
+              "iron_hinges",
+              "lock",
+              "door_bar",
+              "gate_bolt",
+              "sharpened_stakes",
+              "mason_trowel",
+              "stone_chisel",
+              "wall_brazier",
+              "crane_rope",
+              "arrow_loop_shutter",
+              "portcullis_grease",
+              "plate_gauntlets"
+            ],
+            "leave": []
+          },
+          "11": {
+            "enter": [
+              "shutter_lock",
+              "paving_maul"
+            ],
+            "leave": []
+          },
+          "12": {
+            "enter": [
+              "plate_cuirass"
+            ],
+            "leave": []
+          }
+        }
+      },
+      "apothecary": {
+        "name": "Apothecary",
+        "opens_tier": 4,
+        "voice": "Tell me where it hurts and what you can pay.",
+        "carries": [
+          "physic",
+          "mortar",
+          "apothecary_jar",
+          "apothecary_scales",
+          "soap",
+          "lavender_sachet",
+          "pomander",
+          "field_bandages",
+          "vinegar",
+          "spice_twist",
+          "pepper",
+          "cinnamon",
+          "nutmeg",
+          "ginger_knob",
+          "pepper_mill",
+          "sweets",
+          "marzipan",
+          "figs",
+          "almonds",
+          "raisins",
+          "comb",
+          "hair_pins",
+          "spectacles"
+        ],
+        "own_goods": {
+          "willow_bark": {
+            "name": "Willow Bark Twist",
+            "cost": 5,
+            "flavour": "Chew it for the ache. Bitter on purpose.",
+            "tier": 4
+          },
+          "comfrey_salve": {
+            "name": "Comfrey Salve",
+            "cost": 9,
+            "flavour": "Knits bruises. Smells of the hedge.",
+            "tier": 4
+          },
+          "honey_cough_syrup": {
+            "name": "Honey Cough Syrup",
+            "cost": 11,
+            "flavour": "Syrup and a promise.",
+            "tier": 5
+          },
+          "bone_splint": {
+            "name": "Bone-Setting Splint",
+            "cost": 12,
+            "flavour": "Two slats, one strap, a firm word.",
+            "tier": 5
+          },
+          "poppy_milk": {
+            "name": "Poppy Milk",
+            "cost": 24,
+            "flavour": "Sold by the thimble to people who can pay by the thimble.",
+            "tier": 6
+          },
+          "leech_jar": {
+            "name": "Jar of Leeches",
+            "cost": 16,
+            "flavour": "Lively. Do not inspect.",
+            "tier": 6
+          },
+          "smelling_salts": {
+            "name": "Smelling Salts",
+            "cost": 22,
+            "flavour": "For fainting, for fights, for festival days.",
+            "tier": 8
+          },
+          "rosewater": {
+            "name": "Rosewater Flask",
+            "cost": 26,
+            "flavour": "The apothecary's one concession to beauty.",
+            "tier": 10
+          },
+          "spirit_of_wine": {
+            "name": "Spirit of Wine",
+            "cost": 60,
+            "flavour": "Cleans wounds. Burns throats. Both are use.",
+            "tier": 11
+          },
+          "theriac": {
+            "name": "Theriac",
+            "cost": 75,
+            "flavour": "Sixty ingredients and a cure for most things.",
+            "tier": 12
+          }
+        },
+        "schedule": {
+          "4": {
+            "enter": [
+              "vinegar",
+              "willow_bark",
+              "comfrey_salve"
+            ],
+            "leave": []
+          },
+          "5": {
+            "enter": [
+              "honey_cough_syrup",
+              "bone_splint"
+            ],
+            "leave": []
+          },
+          "6": {
+            "enter": [
+              "poppy_milk",
+              "leech_jar"
+            ],
+            "leave": []
+          },
+          "8": {
+            "enter": [
+              "field_bandages",
+              "smelling_salts"
+            ],
+            "leave": []
+          },
+          "9": {
+            "enter": [
+              "soap",
+              "lavender_sachet",
+              "spice_twist",
+              "cinnamon",
+              "nutmeg",
+              "ginger_knob",
+              "pepper_mill",
+              "sweets",
+              "marzipan",
+              "figs",
+              "almonds",
+              "raisins",
+              "comb",
+              "hair_pins"
+            ],
+            "leave": []
+          },
+          "10": {
+            "enter": [
+              "mortar",
+              "rosewater"
+            ],
+            "leave": []
+          },
+          "11": {
+            "enter": [
+              "physic",
+              "apothecary_jar",
+              "apothecary_scales",
+              "spectacles",
+              "spirit_of_wine"
+            ],
+            "leave": []
+          },
+          "12": {
+            "enter": [
+              "pomander",
+              "pepper",
+              "theriac"
+            ],
+            "leave": []
+          }
+        }
+      },
+      "stables": {
+        "name": "Stables",
+        "opens_tier": 5,
+        "voice": "Hay, harness, and horses with opinions.",
+        "carries": [
+          "straw",
+          "leather",
+          "leather_belt",
+          "leather_awl",
+          "oilcloth",
+          "sheepskin",
+          "sentry_lantern",
+          "scarecrow"
+        ],
+        "own_goods": {
+          "horseshoe_set": {
+            "name": "Set of Horseshoes",
+            "cost": 12,
+            "flavour": "Four shoes, forty nails, one patient horse.",
+            "tier": 5
+          },
+          "halter": {
+            "name": "Rope Halter",
+            "cost": 6,
+            "flavour": "Leads a cow, a pony, or a drunk.",
+            "tier": 5
+          },
+          "bridle": {
+            "name": "Leather Bridle",
+            "cost": 25,
+            "flavour": "Bit, reins, and a brass boss.",
+            "tier": 5
+          },
+          "saddle_blanket": {
+            "name": "Saddle Blanket",
+            "cost": 14,
+            "flavour": "Keeps the sweat off the leather.",
+            "tier": 5
+          },
+          "oat_nosebag": {
+            "name": "Oat Nosebag",
+            "cost": 4,
+            "flavour": "A horse's lunch, strapped to its face.",
+            "tier": 5
+          },
+          "hay_bale": {
+            "name": "Bale of Hay",
+            "cost": 6,
+            "flavour": "Sweet, dry, and already half eaten.",
+            "tier": 5
+          },
+          "curry_comb": {
+            "name": "Curry Comb",
+            "cost": 6,
+            "flavour": "Teeth like a small rake.",
+            "tier": 5
+          },
+          "pack_saddle": {
+            "name": "Pack Saddle",
+            "cost": 34,
+            "flavour": "Carries salt and sacks and the blame.",
+            "tier": 6
+          },
+          "stable_lantern": {
+            "name": "Stable Lantern",
+            "cost": 20,
+            "flavour": "Hooded, so the hay stays hay.",
+            "tier": 6
+          },
+          "pony": {
+            "name": "Marsh Pony",
+            "cost": 160,
+            "flavour": "Short, stubborn, and sure on a wet bank.",
+            "tier": 6
+          },
+          "riding_saddle": {
+            "name": "Riding Saddle",
+            "cost": 85,
+            "flavour": "Seat, girth, and stirrup. Built for a rider's weight.",
+            "tier": 7
+          },
+          "carthorse": {
+            "name": "Carthorse",
+            "cost": 200,
+            "flavour": "A wall of horse. Pulls the load and the mood.",
+            "tier": 7
+          },
+          "farrier_rasp": {
+            "name": "Farrier's Rasp",
+            "cost": 18,
+            "flavour": "Takes a hoof back to honest horn.",
+            "tier": 7
+          },
+          "riding_horse": {
+            "name": "Riding Horse",
+            "cost": 260,
+            "flavour": "Quick, tall, and not for a crossing's purse.",
+            "tier": 8
+          }
+        },
+        "schedule": {
+          "5": {
+            "enter": [
+              "straw",
+              "leather_belt",
+              "leather_awl",
+              "sheepskin",
+              "scarecrow",
+              "horseshoe_set",
+              "halter",
+              "bridle",
+              "saddle_blanket",
+              "oat_nosebag",
+              "hay_bale",
+              "curry_comb"
+            ],
+            "leave": []
+          },
+          "6": {
+            "enter": [
+              "pack_saddle",
+              "stable_lantern",
+              "pony"
+            ],
+            "leave": []
+          },
+          "7": {
+            "enter": [
+              "leather",
+              "riding_saddle",
+              "carthorse",
+              "farrier_rasp"
+            ],
+            "leave": [
+              "straw"
+            ]
+          },
+          "8": {
+            "enter": [
+              "oilcloth",
+              "sentry_lantern",
+              "riding_horse"
+            ],
+            "leave": []
+          },
+          "9": {
+            "enter": [],
+            "leave": [
+              "sheepskin",
+              "scarecrow"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "caravan_manifests": {
+    "_note": "C-53 (C4.3). What a caravan ARRIVES carrying. A tier-1 crossing has no caravans. At growth tier N the town can receive any caravan with first_tier <= N (cumulative; a caravan never stops coming). One arrival delivers: (a) its 'cargo' lines - qty of each trader_cargo good, worth cargo_value gold in all, which is what bandits are after - and (b) its 'supply' lines - the units of each supply resource the town RECEIVES when the caravan arrives. units = qty of the source cargo x supply_resources[resource].units_per_qty, summed over the cargo lines that feed that resource; gold_value = units x supply_resources[resource].unit_cost; supply_gold_value is the sum. If the caravan is TAKEN instead of arriving, the town receives none of its supply units (cargo lines are lost with it): the whole supply list is the cost of losing it. A unit is one shelf unit of the goods named in supply_resources[resource].restocks (e.g. 6 units of grain = 6 shelf units across Sack of Grain and Loaf). guards = armed men riding with it. Cargo lines with no 'from' source in supply_resources (spice, silk, glassware...) are trade goods only: they enrich the town but restock no shelf. Dead until wired.",
+    "supply_resources": {
+      "grain": {
+        "name": "Grain",
+        "from_cargo": [
+          "seedcorn",
+          "oatmeal",
+          "barley_seed",
+          "tithe_barley",
+          "wafer_flour",
+          "hardtack_sacks"
+        ],
+        "units_per_qty": 6,
+        "unit_cost": 8,
+        "restocks": [
+          "grain",
+          "bread"
+        ],
+        "unit": "sack"
+      },
+      "iron": {
+        "name": "Iron",
+        "from_cargo": [
+          "plough_irons",
+          "pigiron",
+          "nail_kegs",
+          "ironmongery",
+          "rivet_stock",
+          "steelbar",
+          "iron_grating"
+        ],
+        "units_per_qty": 8,
+        "unit_cost": 14,
+        "restocks": [
+          "nails",
+          "iron_hinges"
+        ],
+        "unit": "bar"
+      },
+      "salt": {
+        "name": "Salt",
+        "from_cargo": [
+          "salt_fish",
+          "herring_barrels",
+          "saltblock",
+          "salt_barrels"
+        ],
+        "units_per_qty": 6,
+        "unit_cost": 12,
+        "restocks": [
+          "salt"
+        ],
+        "unit": "measure"
+      },
+      "lamp_oil": {
+        "name": "Lamp Oil",
+        "from_cargo": [
+          "tallow_casks",
+          "oiljars",
+          "candlewax",
+          "votive_wax"
+        ],
+        "units_per_qty": 8,
+        "unit_cost": 6,
+        "restocks": [
+          "lampoil",
+          "candles"
+        ],
+        "unit": "flask"
+      },
+      "physick": {
+        "name": "Physick",
+        "from_cargo": [
+          "holy_oil",
+          "simples"
+        ],
+        "units_per_qty": 4,
+        "unit_cost": 9,
+        "restocks": [
+          "comfrey_salve",
+          "physic"
+        ],
+        "unit": "dose"
+      },
+      "timber": {
+        "name": "Timber",
+        "from_cargo": [
+          "timber",
+          "wheel_rims",
+          "oak_hoarding",
+          "gate_beams"
+        ],
+        "units_per_qty": 5,
+        "unit_cost": 3,
+        "restocks": [
+          "firewood"
+        ],
+        "unit": "bundle"
+      },
+      "cloth": {
+        "name": "Cloth",
+        "from_cargo": [
+          "wool_fleeces",
+          "linen_bales",
+          "dyed_wool"
+        ],
+        "units_per_qty": 5,
+        "unit_cost": 18,
+        "restocks": [
+          "wool",
+          "blanket"
+        ],
+        "unit": "bolt"
+      }
+    },
+    "origins": {
+      "downriver": "The river towns below the Ford: grain, wine, cloth, and what the barges pick up on the way.",
+      "the_hills": "The hill diggings: ore, iron, stone, coal, and timber on the haul.",
+      "the_coast": "The salt coast: salt, herring, lime, and anything that rides in brine.",
+      "the_guild_road": "The guild's own road: sealed bags, ledgers, canvas, and market gear.",
+      "the_chapter_house": "The chapter house road: oil, wax, bells, cloth, and tithe grain.",
+      "the_garrison_road": "The muster road: steel, horses, harness, and hard bread.",
+      "the_southern_road": "The long southern road: spice, silk, amber, and gold - and the guards to match."
+    },
+    "caravans": [
+      {
+        "id": "cv01",
+        "name": "The First Cart",
+        "first_tier": 2,
+        "origin": "downriver",
+        "guards": 1,
+        "cargo": [
+          {
+            "good": "seedcorn",
+            "qty": 4
+          },
+          {
+            "good": "oatmeal",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 590,
+        "supply": [
+          {
+            "resource": "grain",
+            "units": 42,
+            "from": [
+              "seedcorn",
+              "oatmeal"
+            ],
+            "gold_value": 336
+          }
+        ],
+        "supply_gold_value": 336
+      },
+      {
+        "id": "cv02",
+        "name": "Ploughirons from the Hills",
+        "first_tier": 2,
+        "origin": "the_hills",
+        "guards": 1,
+        "cargo": [
+          {
+            "good": "plough_irons",
+            "qty": 2
+          },
+          {
+            "good": "sickles",
+            "qty": 3
+          },
+          {
+            "good": "bee_skeps",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 645,
+        "supply": [
+          {
+            "resource": "iron",
+            "units": 16,
+            "from": [
+              "plough_irons"
+            ],
+            "gold_value": 224
+          }
+        ],
+        "supply_gold_value": 224
+      },
+      {
+        "id": "cv03",
+        "name": "The Pig-Iron Waggon",
+        "first_tier": 3,
+        "origin": "the_hills",
+        "guards": 2,
+        "cargo": [
+          {
+            "good": "pigiron",
+            "qty": 3
+          },
+          {
+            "good": "nail_kegs",
+            "qty": 2
+          },
+          {
+            "good": "charcoal",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 560,
+        "supply": [
+          {
+            "resource": "iron",
+            "units": 40,
+            "from": [
+              "pigiron",
+              "nail_kegs"
+            ],
+            "gold_value": 560
+          }
+        ],
+        "supply_gold_value": 560
+      },
+      {
+        "id": "cv04",
+        "name": "The Guild Post Bag",
+        "first_tier": 3,
+        "origin": "the_guild_road",
+        "guards": 2,
+        "cargo": [
+          {
+            "good": "guild_post_bag",
+            "qty": 2
+          },
+          {
+            "good": "hemp_bundles",
+            "qty": 2
+          },
+          {
+            "good": "tar_barrels",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 510,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv05",
+        "name": "The Timber Train",
+        "first_tier": 3,
+        "origin": "the_hills",
+        "guards": 2,
+        "cargo": [
+          {
+            "good": "timber",
+            "qty": 4
+          },
+          {
+            "good": "wheel_rims",
+            "qty": 2
+          },
+          {
+            "good": "ox_yokes",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 730,
+        "supply": [
+          {
+            "resource": "timber",
+            "units": 30,
+            "from": [
+              "timber",
+              "wheel_rims"
+            ],
+            "gold_value": 90
+          }
+        ],
+        "supply_gold_value": 90
+      },
+      {
+        "id": "cv06",
+        "name": "The Herring Cart",
+        "first_tier": 4,
+        "origin": "the_coast",
+        "guards": 2,
+        "cargo": [
+          {
+            "good": "salt_fish",
+            "qty": 4
+          },
+          {
+            "good": "herring_barrels",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 775,
+        "supply": [
+          {
+            "resource": "salt",
+            "units": 42,
+            "from": [
+              "salt_fish",
+              "herring_barrels"
+            ],
+            "gold_value": 504
+          }
+        ],
+        "supply_gold_value": 504
+      },
+      {
+        "id": "cv07",
+        "name": "The Farm Road String",
+        "first_tier": 4,
+        "origin": "downriver",
+        "guards": 2,
+        "cargo": [
+          {
+            "good": "cheese_wheels",
+            "qty": 3
+          },
+          {
+            "good": "tallow_casks",
+            "qty": 3
+          },
+          {
+            "good": "wool_fleeces",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 795,
+        "supply": [
+          {
+            "resource": "lamp_oil",
+            "units": 24,
+            "from": [
+              "tallow_casks"
+            ],
+            "gold_value": 144
+          },
+          {
+            "resource": "cloth",
+            "units": 15,
+            "from": [
+              "wool_fleeces"
+            ],
+            "gold_value": 270
+          }
+        ],
+        "supply_gold_value": 414
+      },
+      {
+        "id": "cv08",
+        "name": "The Hide-and-Fur Train",
+        "first_tier": 4,
+        "origin": "the_hills",
+        "guards": 2,
+        "cargo": [
+          {
+            "good": "furs",
+            "qty": 2
+          },
+          {
+            "good": "rawhides",
+            "qty": 3
+          },
+          {
+            "good": "tanbark",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 745,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv09",
+        "name": "The Market Day Barges",
+        "first_tier": 5,
+        "origin": "downriver",
+        "guards": 3,
+        "cargo": [
+          {
+            "good": "wine",
+            "qty": 3
+          },
+          {
+            "good": "strong_ale",
+            "qty": 3
+          },
+          {
+            "good": "oiljars",
+            "qty": 4
+          }
+        ],
+        "cargo_value": 1015,
+        "supply": [
+          {
+            "resource": "lamp_oil",
+            "units": 32,
+            "from": [
+              "oiljars"
+            ],
+            "gold_value": 192
+          }
+        ],
+        "supply_gold_value": 192
+      },
+      {
+        "id": "cv10",
+        "name": "The Salt Mules",
+        "first_tier": 5,
+        "origin": "the_coast",
+        "guards": 3,
+        "cargo": [
+          {
+            "good": "saltblock",
+            "qty": 3
+          },
+          {
+            "good": "salt_barrels",
+            "qty": 4
+          }
+        ],
+        "cargo_value": 760,
+        "supply": [
+          {
+            "resource": "salt",
+            "units": 42,
+            "from": [
+              "saltblock",
+              "salt_barrels"
+            ],
+            "gold_value": 504
+          }
+        ],
+        "supply_gold_value": 504
+      },
+      {
+        "id": "cv11",
+        "name": "The Stallholders' Wagons",
+        "first_tier": 5,
+        "origin": "the_guild_road",
+        "guards": 3,
+        "cargo": [
+          {
+            "good": "market_scales",
+            "qty": 2
+          },
+          {
+            "good": "pavilion_canvas",
+            "qty": 2
+          },
+          {
+            "good": "lace_ribbon",
+            "qty": 2
+          },
+          {
+            "good": "crockery_crates",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 965,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv12",
+        "name": "The Chapter Mules",
+        "first_tier": 6,
+        "origin": "the_chapter_house",
+        "guards": 3,
+        "cargo": [
+          {
+            "good": "holy_oil",
+            "qty": 3
+          },
+          {
+            "good": "candlewax",
+            "qty": 3
+          },
+          {
+            "good": "votive_wax",
+            "qty": 2
+          },
+          {
+            "good": "wafer_flour",
+            "qty": 3
+          },
+          {
+            "good": "tithe_barley",
+            "qty": 4
+          }
+        ],
+        "cargo_value": 1850,
+        "supply": [
+          {
+            "resource": "physick",
+            "units": 12,
+            "from": [
+              "holy_oil"
+            ],
+            "gold_value": 108
+          },
+          {
+            "resource": "lamp_oil",
+            "units": 40,
+            "from": [
+              "candlewax",
+              "votive_wax"
+            ],
+            "gold_value": 240
+          },
+          {
+            "resource": "grain",
+            "units": 42,
+            "from": [
+              "wafer_flour",
+              "tithe_barley"
+            ],
+            "gold_value": 336
+          }
+        ],
+        "supply_gold_value": 684
+      },
+      {
+        "id": "cv13",
+        "name": "The Bell-Cart",
+        "first_tier": 6,
+        "origin": "the_chapter_house",
+        "guards": 4,
+        "cargo": [
+          {
+            "good": "chapel_bell",
+            "qty": 1
+          },
+          {
+            "good": "black_cloth",
+            "qty": 2
+          },
+          {
+            "good": "altar_cloths",
+            "qty": 2
+          },
+          {
+            "good": "psalter_crates",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 1200,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv14",
+        "name": "The Craft Row Ironline",
+        "first_tier": 7,
+        "origin": "the_hills",
+        "guards": 4,
+        "cargo": [
+          {
+            "good": "anvils",
+            "qty": 1
+          },
+          {
+            "good": "bar_copper",
+            "qty": 2
+          },
+          {
+            "good": "ironmongery",
+            "qty": 3
+          },
+          {
+            "good": "rivet_stock",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 1260,
+        "supply": [
+          {
+            "resource": "iron",
+            "units": 48,
+            "from": [
+              "ironmongery",
+              "rivet_stock"
+            ],
+            "gold_value": 672
+          }
+        ],
+        "supply_gold_value": 672
+      },
+      {
+        "id": "cv15",
+        "name": "The Loom-and-Hide Barges",
+        "first_tier": 7,
+        "origin": "downriver",
+        "guards": 3,
+        "cargo": [
+          {
+            "good": "loom_frames",
+            "qty": 2
+          },
+          {
+            "good": "tanned_hides",
+            "qty": 3
+          },
+          {
+            "good": "cartwheels",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 1285,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv16",
+        "name": "The Muster Convoy",
+        "first_tier": 8,
+        "origin": "the_garrison_road",
+        "guards": 5,
+        "cargo": [
+          {
+            "good": "steelbar",
+            "qty": 3
+          },
+          {
+            "good": "mail_shirts",
+            "qty": 2
+          },
+          {
+            "good": "crossbows",
+            "qty": 1
+          },
+          {
+            "good": "helm_plate",
+            "qty": 2
+          },
+          {
+            "good": "hardtack_sacks",
+            "qty": 4
+          }
+        ],
+        "cargo_value": 2320,
+        "supply": [
+          {
+            "resource": "iron",
+            "units": 24,
+            "from": [
+              "steelbar"
+            ],
+            "gold_value": 336
+          },
+          {
+            "resource": "grain",
+            "units": 24,
+            "from": [
+              "hardtack_sacks"
+            ],
+            "gold_value": 192
+          }
+        ],
+        "supply_gold_value": 528
+      },
+      {
+        "id": "cv17",
+        "name": "The Remount String",
+        "first_tier": 8,
+        "origin": "the_garrison_road",
+        "guards": 4,
+        "cargo": [
+          {
+            "good": "warhorses",
+            "qty": 2
+          },
+          {
+            "good": "war_harness",
+            "qty": 2
+          },
+          {
+            "good": "garrison_tents",
+            "qty": 3
+          },
+          {
+            "good": "saddle_leather",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 2100,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv18",
+        "name": "The Spice Caravan",
+        "first_tier": 9,
+        "origin": "the_southern_road",
+        "guards": 5,
+        "cargo": [
+          {
+            "good": "spice",
+            "qty": 2
+          },
+          {
+            "good": "sugarloaf",
+            "qty": 2
+          },
+          {
+            "good": "saffron_threads",
+            "qty": 1
+          },
+          {
+            "good": "linen_bales",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 1395,
+        "supply": [
+          {
+            "resource": "cloth",
+            "units": 15,
+            "from": [
+              "linen_bales"
+            ],
+            "gold_value": 270
+          }
+        ],
+        "supply_gold_value": 270
+      },
+      {
+        "id": "cv19",
+        "name": "The Dye-Barges",
+        "first_tier": 9,
+        "origin": "downriver",
+        "guards": 4,
+        "cargo": [
+          {
+            "good": "dyed_wool",
+            "qty": 4
+          },
+          {
+            "good": "parchment_bales",
+            "qty": 2
+          },
+          {
+            "good": "dried_fruit",
+            "qty": 3
+          },
+          {
+            "good": "raisin_casks",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 1680,
+        "supply": [
+          {
+            "resource": "cloth",
+            "units": 20,
+            "from": [
+              "dyed_wool"
+            ],
+            "gold_value": 360
+          }
+        ],
+        "supply_gold_value": 360
+      },
+      {
+        "id": "cv20",
+        "name": "The Brine Train",
+        "first_tier": 9,
+        "origin": "the_coast",
+        "guards": 4,
+        "cargo": [
+          {
+            "good": "salt_barrels",
+            "qty": 5
+          },
+          {
+            "good": "herring_barrels",
+            "qty": 3
+          },
+          {
+            "good": "honey_mead",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 1190,
+        "supply": [
+          {
+            "resource": "salt",
+            "units": 48,
+            "from": [
+              "salt_barrels",
+              "herring_barrels"
+            ],
+            "gold_value": 576
+          }
+        ],
+        "supply_gold_value": 576
+      },
+      {
+        "id": "cv21",
+        "name": "The Wall-Stone Convoy",
+        "first_tier": 10,
+        "origin": "the_hills",
+        "guards": 5,
+        "cargo": [
+          {
+            "good": "ashlar_blocks",
+            "qty": 4
+          },
+          {
+            "good": "cut_stone",
+            "qty": 3
+          },
+          {
+            "good": "slate_tiles",
+            "qty": 3
+          },
+          {
+            "good": "iron_grating",
+            "qty": 2
+          },
+          {
+            "good": "oak_hoarding",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 2490,
+        "supply": [
+          {
+            "resource": "iron",
+            "units": 16,
+            "from": [
+              "iron_grating"
+            ],
+            "gold_value": 224
+          },
+          {
+            "resource": "timber",
+            "units": 15,
+            "from": [
+              "oak_hoarding"
+            ],
+            "gold_value": 45
+          }
+        ],
+        "supply_gold_value": 269
+      },
+      {
+        "id": "cv22",
+        "name": "The Gate-Iron Train",
+        "first_tier": 10,
+        "origin": "the_hills",
+        "guards": 5,
+        "cargo": [
+          {
+            "good": "gate_chain",
+            "qty": 2
+          },
+          {
+            "good": "gate_beams",
+            "qty": 3
+          },
+          {
+            "good": "crane_cordage",
+            "qty": 2
+          },
+          {
+            "good": "scarglass",
+            "qty": 1
+          },
+          {
+            "good": "lime",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 1670,
+        "supply": [
+          {
+            "resource": "timber",
+            "units": 15,
+            "from": [
+              "gate_beams"
+            ],
+            "gold_value": 45
+          }
+        ],
+        "supply_gold_value": 45
+      },
+      {
+        "id": "cv23",
+        "name": "The Physick Wagons",
+        "first_tier": 11,
+        "origin": "the_chapter_house",
+        "guards": 5,
+        "cargo": [
+          {
+            "good": "simples",
+            "qty": 3
+          },
+          {
+            "good": "copper_stills",
+            "qty": 1
+          },
+          {
+            "good": "glassware",
+            "qty": 2
+          },
+          {
+            "good": "window_panes",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 1585,
+        "supply": [
+          {
+            "resource": "physick",
+            "units": 12,
+            "from": [
+              "simples"
+            ],
+            "gold_value": 108
+          }
+        ],
+        "supply_gold_value": 108
+      },
+      {
+        "id": "cv24",
+        "name": "The Scholars' Barges",
+        "first_tier": 11,
+        "origin": "downriver",
+        "guards": 5,
+        "cargo": [
+          {
+            "good": "pewterware",
+            "qty": 2
+          },
+          {
+            "good": "brocade",
+            "qty": 2
+          },
+          {
+            "good": "ink_barrels",
+            "qty": 2
+          },
+          {
+            "good": "map_rolls",
+            "qty": 1
+          },
+          {
+            "good": "lens_blanks",
+            "qty": 1
+          }
+        ],
+        "cargo_value": 1630,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv25",
+        "name": "The Lime-and-Salt Train",
+        "first_tier": 11,
+        "origin": "the_coast",
+        "guards": 4,
+        "cargo": [
+          {
+            "good": "salt_barrels",
+            "qty": 6
+          },
+          {
+            "good": "lime",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 750,
+        "supply": [
+          {
+            "resource": "salt",
+            "units": 36,
+            "from": [
+              "salt_barrels"
+            ],
+            "gold_value": 432
+          }
+        ],
+        "supply_gold_value": 432
+      },
+      {
+        "id": "cv26",
+        "name": "The Silk Road Caravan",
+        "first_tier": 12,
+        "origin": "the_southern_road",
+        "guards": 6,
+        "cargo": [
+          {
+            "good": "silk",
+            "qty": 2
+          },
+          {
+            "good": "spiced_wine",
+            "qty": 2
+          },
+          {
+            "good": "velvet_bolts",
+            "qty": 2
+          },
+          {
+            "good": "books",
+            "qty": 1
+          },
+          {
+            "good": "amber",
+            "qty": 1
+          }
+        ],
+        "cargo_value": 2100,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv27",
+        "name": "The Gold Train",
+        "first_tier": 12,
+        "origin": "the_southern_road",
+        "guards": 8,
+        "cargo": [
+          {
+            "good": "goldwork",
+            "qty": 1
+          },
+          {
+            "good": "coin_chest",
+            "qty": 1
+          },
+          {
+            "good": "pearl_strings",
+            "qty": 1
+          },
+          {
+            "good": "cut_gems",
+            "qty": 1
+          },
+          {
+            "good": "ermine_pelts",
+            "qty": 2
+          }
+        ],
+        "cargo_value": 2580,
+        "supply": [],
+        "supply_gold_value": 0
+      },
+      {
+        "id": "cv28",
+        "name": "The Charter Wagons",
+        "first_tier": 12,
+        "origin": "the_chapter_house",
+        "guards": 6,
+        "cargo": [
+          {
+            "good": "simples",
+            "qty": 4
+          },
+          {
+            "good": "books",
+            "qty": 1
+          },
+          {
+            "good": "pewterware",
+            "qty": 3
+          }
+        ],
+        "cargo_value": 1390,
+        "supply": [
+          {
+            "resource": "physick",
+            "units": 16,
+            "from": [
+              "simples"
+            ],
+            "gold_value": 144
+          }
+        ],
+        "supply_gold_value": 144
+      }
+    ]
+  },
+  "price_ladders": {
+    "_note": "C-53 (C4.4). Price sanity, checked by script. Each ladder is a class of goods listed in order of tier; cost and tier are both non-decreasing down the list, so a later (grander) good is never cheaper than an earlier one - a city's plate is never cheaper than a crossing's mail, a lord's saddle never cheaper than a halter. Keys may be shop_stock, trader_cargo or trade_stock own_goods. Costs are flat across tiers: the same good costs the same at tier 2 and tier 12. Dead until wired.",
+    "ladders": {
+      "lighting": [
+        "rush_light",
+        "tallow_dip",
+        "torches",
+        "candles",
+        "lantern",
+        "street_lamp",
+        "brass_lamp"
+      ],
+      "drinkware": [
+        "clay_cups",
+        "pottery",
+        "pewter_set",
+        "glass_goblets",
+        "crystal_decanter"
+      ],
+      "footwear": [
+        "mud_clogs",
+        "pattens",
+        "boots",
+        "silk_slippers"
+      ],
+      "rope": [
+        "bad_rope",
+        "rope",
+        "tarred_cable",
+        "crane_rope"
+      ],
+      "body_armour": [
+        "gambeson",
+        "mail_coif",
+        "mail_hauberk",
+        "plate_cuirass"
+      ],
+      "healing": [
+        "willow_bark",
+        "comfrey_salve",
+        "field_bandages",
+        "physic",
+        "theriac"
+      ],
+      "writing": [
+        "quill_bundle",
+        "wax_tablet",
+        "parchment",
+        "writing_desk"
+      ],
+      "tack": [
+        "halter",
+        "saddle_blanket",
+        "bridle",
+        "pack_saddle",
+        "riding_saddle"
+      ],
+      "mounts": [
+        "pony",
+        "carthorse",
+        "riding_horse",
+        "warhorses"
+      ],
+      "writs": [
+        "contract_form",
+        "pass_writ",
+        "escort_writ",
+        "charter_copy"
+      ]
+    }
+  },
+  "_note_c54": "C-cycle 54: more cosmetics, accessories and dyes themed on the guild post, the scar stair, the wall, the feast, the harvest and the Commander. Additive only."
 }

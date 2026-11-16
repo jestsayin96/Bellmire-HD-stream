@@ -378,8 +378,10 @@ func _forest(c: Vector3) -> void:
         n += 1
         if _rng.randf() < 0.35:
             var fp := tp + Vector3(_rng.randf_range(-2.5, 2.5), 0, _rng.randf_range(-2.5, 2.5))
-            town._spawn_raw(NATURE, ["Fern_1", "Mushroom_Common", "Bush_Common"][_rng.randi() % 3],
-                Vector3(fp.x, float(town.height_at(fp.x, fp.z)), fp.z), _rng.randf() * TAU, 1.0)
+            var un: String = ["Fern_1", "Mushroom_Common", "Bush_Common"][_rng.randi() % 3]
+            # D91: a bush is a footprint a body keeps out of; ferns are walked through
+            town._spawn_raw(NATURE, un,
+                Vector3(fp.x, float(town.height_at(fp.x, fp.z)), fp.z), _rng.randf() * TAU, 1.0, un.begins_with("Bush"))
     made["trees"] += n
 
 ## ---------------------------------------------------------------- the Old Footing
@@ -796,7 +798,8 @@ func _copse(center: Vector3, count: int) -> void:
         n += 1
         if _rng.randf() < 0.3:
             var fp := tp + Vector3(_rng.randf_range(-2.0, 2.0), 0, _rng.randf_range(-2.0, 2.0))
-            town._spawn_raw(NATURE, ["Bush_Common", "Fern_1", "Flower_3_Group"][_rng.randi() % 3], Vector3(fp.x, float(town.height_at(fp.x, fp.z)), fp.z), _rng.randf() * TAU, 1.0)
+            var un: String = ["Bush_Common", "Fern_1", "Flower_3_Group"][_rng.randi() % 3]
+            town._spawn_raw(NATURE, un, Vector3(fp.x, float(town.height_at(fp.x, fp.z)), fp.z), _rng.randf() * TAU, 1.0, un.begins_with("Bush"))   # D91
     made["trees"] += n
 
 ## wildflowers, clover and tall grass along the valley lanes
@@ -826,7 +829,7 @@ func _verges() -> void:
             if not bool(town.is_clear(q, 0.6)) or bool(town._in_field(q, 1.0)):
                 continue
             var nm: String = ["Grass_Common_Tall", "Grass_Wispy_Tall", "Clover_1", "Flower_3_Group", "Flower_4_Group", "Bush_Common_Flowers"][_rng.randi() % 6]
-            if town._spawn_raw(NATURE, nm, Vector3(q.x, float(town.height_at(q.x, q.z)), q.z), _rng.randf() * TAU, _rng.randf_range(0.9, 1.5)):
+            if town._spawn_raw(NATURE, nm, Vector3(q.x, float(town.height_at(q.x, q.z)), q.z), _rng.randf() * TAU, _rng.randf_range(0.9, 1.5), nm.begins_with("Bush")):   # D91
                 placed += 1
     print("VALLEY verges ", placed)
 

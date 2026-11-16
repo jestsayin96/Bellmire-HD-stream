@@ -341,6 +341,7 @@ function render(p) {
   renderLore();
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
   try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
+  try { applyHeroLink(p); } catch (e) { /* a bad link must never break the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -1066,6 +1067,12 @@ function heroSheet(h, mode) {
     pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
     pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
     sid.append(pin);
+    // H28: put a link straight to this hero on the clipboard
+    const cp = el("button", "pinbtn linkcopy", "Copy a link to this hero");
+    cp.type = "button";
+    cp.title = "Copies an address that opens this hero's sheet. The address holds a number, not the name.";
+    cp.addEventListener("click", () => heroLinkCopy(h, cp));
+    sid.append(cp);
   }
   sheet.append(sid);
 
@@ -1772,6 +1779,57 @@ document.addEventListener("visibilitychange", () => {
   chronHiddenAt = 0;
 });
 window.addEventListener("pagehide", () => { if (chronAwayDone) chronMarkSeen(true); });
+// ---- H28 a hero you can point at
+// "#hero-<n>" opens that hero's sheet. n is an integer: FNV-1a (32-bit) of the lower-cased
+// name, computed by THIS page. The fragment is the only thing read from the URL, it must match
+// the strict pattern below, and n is only ever COMPARED to the same number computed for each
+// hero in the snapshot - never a selector, URL, src, href, style or markup. A hostile name just
+// yields a number. No match -> the roster and a constant message; nothing is fetched or written.
+function heroAddr(name) {
+  const key = String(name == null ? "" : name).toLowerCase();
+  let a = 2166136261;
+  for (let i = 0; i < key.length; i++) { a ^= key.charCodeAt(i); a = Math.imul(a, 16777619) >>> 0; }
+  return a >>> 0;
+}
+function heroLinkFrom() {
+  const m = /^hero-(\d{1,10})$/.exec(String(location.hash || "").replace(/^#/, ""));
+  if (!m) return /^hero-/.test(String(location.hash || "").replace(/^#/, "")) ? 4294967296 : -1;   // a malformed hero address matches nobody
+  const n = +m[1];
+  return n <= 4294967295 ? n : 4294967296;
+}
+let heroLinkHandled = -1;
+function applyHeroLink(p, force) {
+  const n = heroLinkFrom();
+  const note = $("heroLinkNote");
+  if (n < 0) { heroLinkHandled = -1; if (note) { note.classList.add("hide"); note.textContent = ""; } return; }
+  if (!force && n === heroLinkHandled) return;            // the 60 s refresh must not re-land the viewer
+  if (!p || typeof p !== "object") return;                // no report yet: try again when one arrives
+  heroLinkHandled = n;
+  const hs = arr(p.heroes);
+  const idx = hs.findIndex((h) => { const nm = nameOf(h); return nm && heroAddr(nm) === n; });
+  setActiveTab("heroes");
+  if (idx < 0) {
+    if (note) { note.textContent = "That hero is not on tonight\u2019s roll."; note.classList.remove("hide"); }
+    return;
+  }
+  if (note) { note.classList.add("hide"); note.textContent = ""; }
+  heroFilter = ""; const f = $("find"); if (f) f.value = "";
+  heroShown = Math.max(heroShown, Math.ceil((idx + 2) / HERO_PAGE) * HERO_PAGE);
+  renderHeroes(hs);
+  const want = nameOf(hs[idx]);
+  const card = [...$("heroList").querySelectorAll("details.hero")].find((d) => (d.querySelector(".hname") || {}).textContent === want);
+  if (card) { card.open = true; finderLand(card); }
+}
+window.addEventListener("hashchange", () => { try { applyHeroLink(welcomeP, true); } catch (e) {} });
+function heroLinkCopy(h, btn) {
+  const nm = nameOf(h);
+  const label = "Copy a link to this hero";
+  const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = label; }, 2000); };
+  if (!nm) { flash("No link for this hero"); return; }
+  const url = location.href.replace(/[#?].*$/, "") + "#hero-" + heroAddr(nm);
+  try { history.replaceState(null, "", "#hero-" + heroAddr(nm)); heroLinkHandled = heroAddr(nm); } catch (e) {}
+  try { navigator.clipboard.writeText(url).then(() => flash("Link copied"), () => flash("Link is in the address bar")); } catch (e) { flash("Link is in the address bar"); }
+}
 // ---- H21.4 a moment you can point at
 function momentLink(n, btn) {
   const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = "Link"; }, 1800); };
@@ -3216,7 +3274,7 @@ function setActiveTab(id) {
   const momentFrom = () => { const m = /^moment-(\d{1,9})$/.exec(String(location.hash || "").replace(/^#/, "")); return m && +m[1] > 0 ? +m[1] : 0; };
   const mid = momentFrom();
   if (mid) chronFocusId = mid;
-  const initial = (mid ? "chronicle" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  const initial = (mid ? "chronicle" : "") || (heroLinkFrom() >= 0 ? "heroes" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
   setActiveTab(initial);
   window.addEventListener("hashchange", () => {
     const n = momentFrom();

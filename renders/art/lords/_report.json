@@ -1,0 +1,218 @@
+{
+ "ok": true,
+ "lords": {
+  "hollow_king": {
+   "title": "The Hollow King",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "tris": 1421,
+   "size": [
+    2.74,
+    1.43,
+    4.2
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.60788069556444,
+    "ortho": 4.993363857269287,
+    "clip": [
+     9.473471641540527,
+     24.231801986694336
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "grubmother": {
+   "title": "The Grubmother",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "tris": 6343,
+   "size": [
+    8.28,
+    7.35,
+    4.5
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 5.973801876592394,
+    "ortho": 11.228803634643555,
+    "clip": [
+     18.631004333496094,
+     46.688507080078125
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "rattling_host": {
+   "title": "The Rattling Host",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "tris": 4198,
+   "size": [
+    3.9,
+    1.98,
+    4.4
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 3.1008501267706725,
+    "ortho": 4.968704700469971,
+    "clip": [
+     10.719709396362305,
+     27.788747787475586
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "nightwing": {
+   "title": "Nightwing",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "tris": 727,
+   "size": [
+    6.24,
+    3.43,
+    3.2
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 3.9032421891614355,
+    "ortho": 5.244084358215332,
+    "clip": [
+     12.490574836730957,
+     33.37332534790039
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "gravewyrm": {
+   "title": "The Gravewyrm",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "tris": 2004,
+   "size": [
+    4.35,
+    4.86,
+    9.0
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 5.556432093242166,
+    "ortho": 10.315837860107422,
+    "clip": [
+     20.03611183166504,
+     42.97015380859375
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "ossuary_lord": {
+   "title": "The Ossuary Lord",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "tris": 4881,
+   "size": [
+    3.67,
+    2.41,
+    7.0
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 4.1326596496814965,
+    "ortho": 8.10397720336914,
+    "clip": [
+     14.394325256347656,
+     33.68526077270508
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "pale_duchess": {
+   "title": "The Pale Duchess",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "tris": 1338,
+   "size": [
+    4.03,
+    3.58,
+    4.6
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 3.545298524293551,
+    "ortho": 5.475783824920654,
+    "clip": [
+     12.796250343322754,
+     30.619050979614258
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "mourncoil": {
+   "title": "Mourncoil",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "tris": 2066,
+   "size": [
+    6.68,
+    7.01,
+    10.0
+   ],
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 6.961860569847269,
+    "ortho": 11.768172264099121,
+    "clip": [
+     23.413002014160156,
+     52.708168029785156
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  }
+ },
+ "errors": [],
+ "blank_check": {
+  "files": 24,
+  "failures": []
+ }
+}

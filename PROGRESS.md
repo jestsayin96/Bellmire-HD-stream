@@ -6519,3 +6519,47 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - NOT DONE THIS SLOT: (2) D91 from origin/d91d-wip - the 20-minute soak cannot start and finish before
   :40 after the gloves gates. Next slot: take d91d-wip (46f6b85), fix the alcove (bench/crate or the
   perpendicular _settle_pair), one 20-minute soak with a named finish.
+
+## B7 - L56 RUN 2: THE MEASUREMENT READS, AND IT READS BECAUSE THE INSTRUMENT WAS REBUILT (chat bot, 2026-11-16 12:46-12:53 CT)
+- TOOK: L56 run 2, the remainder, exactly as the CHAT BOT row set it: "enumerate every live Delve, sum
+  trap_log and the boss counts PER INSTANCE, then go longer". Claimed 12:48:00-06:00 with a named finish
+  of 12:52, refreshed at 12:52:46 when boot pushed the soak past it (saying it was the ONE thing in
+  flight and that I would start nothing after it), released IDLE 12:53:15-06:00. Lock was IDLE from the
+  game build's 12:32:11 D91e release and no Godot process was alive when I claimed.
+- THE INSTRUMENT FIX, all inside _l56_soak.gd at the root of `chatbot` (the supervisor's ruling, 12:45):
+  Delve extends Node3D and BOTH kinds are add_child'd to town - the viewer's at town.gd:5353 (nulled at
+  5413) and every NPC band's at adventurers.gd:248 - so the live population IS town's Delve children.
+  _delves() walks them; _poll_delve keeps the LATEST trap_log per instance_id. trap_log only ever climbs
+  (delve.gd:2545-2653), so the sum of the final per-instance readings is the true total, and an instance
+  that ends keeps the last reading taken before it was freed. No double counting, nothing lost on
+  queue_free. Lords are credited per instance and a lord MET is counted once per party, not once per
+  frame. Minibosses now come off Delve.setpieces_fired, which is static and already cross-instance.
+- THE NUMBERS (3 wall-min at 12x, raids held off, every other delve dial at canon):
+  DELVES SEEN 8 = 2 viewer + 6 npc. TRAPS all delves: spotted=2 disarmed=0 sprung=9 saved=6 damage=53
+  venomed=1. DEPTH deepest=6, best single party held 6 floors, floor_frames {1:2163, 2:2799, 3:1912,
+  4:1582, 5:727, 6:304}. BOSSES distinct=5 (Gnawbone, The Hollow King, The Weeping Bowman, Nightwing,
+  The Rattling Host). SETPIECES {prisoner:5, shrine:3}. raids_fired=0.
+  VERDICT: COUNTERS LIVE - 11 trap events and 5 distinct lords over 8 instances. L45/L46 ARE MEASURABLE.
+- THE DIAGNOSIS IS CONFIRMED BY THE SPLIT, not just by the total. Viewer-only reads spotted=0 sprung=2
+  damage=15 - that is ALL run 1 could ever have counted, and it is why run 1 printed zeros while the feed
+  showed an NPC party spotting a fire grate. The NPC parties carried spotted=2 sprung=7 damage=38, and
+  every one of those was invisible to town.get("delve"). The instrument was the fault. L45 and L46 were
+  never touched and still have not been.
+- MY OWN HARNESS'S REMAINING FAULT, NAMED NOT HIDDEN: descend_lines=0 printed while a party demonstrably
+  held six floors. The scan keys on the literal "into the scar", which is only the FALLBACK in
+  delve.gd:75 - _pick_line("descend", ...) now draws from the content lane's second pools (C-65/C-66), so
+  the canonical phrase is no longer in most descend lines. The content pools are right; my string match is
+  wrong. floor_frames is the ground truth for descent and it is unambiguous, so the counter is redundant
+  rather than load-bearing. NOT PATCHED BLIND this slot - a fix would need the soak to prove it and the
+  window was closing. Run 3, or whoever retires the harness, should count descents off floor_no
+  transitions instead of feed text.
+- ALSO NOT CLAIMED: bosses_killed=0 against 5 lords met. That is consistent with parties turning back at
+  canon turn_back_at, but this run does NOT prove a lord can be put down. The BOSS DAMAGE side of L45/L46
+  is measurable now; it is not yet measured.
+- GATES: parse --headless --quit-after 300 -> 0 SCRIPT ERROR / 0 Parse Error (rc 0); L56_SOAK OK (rc 0),
+  0 SCRIPT ERROR in the soak. The .tres UID warnings in the parse log are the worktree's asset-import
+  noise, unchanged since B5's reimport, not errors.
+- MY THREE FILES ARE UNTOUCHED THIS CYCLE: scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md are
+  byte-identical to b04e266's state. L56 is a measurement, not a bot change, so there is no command drift
+  to re-check in either direction and the 26-command doc still matches the data.
+- NOTHING FOR THE GAME BUILD LANE in twitch_eventsub.gd this cycle, and nothing for Mr. E to decide.

@@ -6479,3 +6479,43 @@ IDLE written 11:52:44-06:00. Godot closed. Nothing ran into the supervisor's slo
   polling the single `town.delve`. Then go longer. Running total carried here: 3 wall-min at 8x done, 0
   trap events seen on the polled instance.
 - NOT TICKED BY ME. The supervisor ticks; this lane reports. L56 stays open.
+## D-cycle D94e - the GLOVES arm: the worn glove is now the art lane's shared glove, bit for bit (game build, 2026-11-16 ~11:08-11:30 CT)
+TAKE THIS NEXT (10:58) gave game build (1) the gloves arm of Mr. E's 10:24 ruling ("okay so fix them":
+read at stream distance through MORE DERIVED VARIATION, not a bigger glove), then (2) D91 from d91d-wip.
+- WHAT WAS WRONG IN GAME: scripts/gear.gd's _build_glove was the pre-D94 glove - one sphere shell
+  and a fixed-length cylinder per cut, cuff/flare/knuckle off nothing but the cut. The ART lane's
+  eb518ce had already written ONE shared derivation (tools/art/icons.py glove_form, used by the hub
+  icon AND by showcase.acc_gloves, the worn piece the proof sheet measures) - but the game never
+  read it, so the glove on the hero in game was a THIRD object. That is the half this cycle closes.
+- PORTED, BIT FOR BIT: Gear.d94_dials(key, name) = showcase.sig (FNV-1a over "key|name" lower-cased,
+  twelve LCG dials); Gear.glove_form = icons.glove_form (the D94_G_* tables are a verbatim copy -
+  CUFF up the forearm, FLARE of the bell mouth, KNUCK stand-off, SHELL over the fist, PLATES count, all
+  riding cost and moved by the item's own key on dials 0-3). _build_glove now builds
+  showcase.acc_gloves part for part in hand-bone space (measured HANDLEN 0.1477, FOREARM 0.26): bell
+  cuff, hard lip when flare > 1.85, rounded shell, mitt pocket or four fingers (shorter on wraps),
+  thumb, 1..6 knuckle plates + stone on metal cuts, finger studs on studded, and the cuff STRAPS
+  counted off the plate count. D94b's collision FORM is kept as geometry (wrist band / knuckle spine).
+- PARITY CHECKED, NOT ASSUMED: tools/_d94e_gloves.gd carries showcase.sig's first four dials for six
+  gloves, computed by python off tools/art/icons.py, and fails on any mismatch: 0 mismatches. The
+  printed forms match python's glove_form (smith cuff .359/.357 - orn rounding only; raidbreaker
+  .559/2.706/.815/6 plates identical).
+- LOOKED AT: renders/cycles/d94e/gloves_front|side|back|close_l|close_r.png, six knights, one glove
+  each. The pairs now separate on SHAPE: Raidbreaker's (top cost) is a wide lipped bell with six plates
+  and straps, Rattling a narrower bell, Smith's strapped with a knuckle stack (reads clearly from the
+  side), the mitts and wraps sit close to the hand. FAULT, SEEN AND NAMED FOR THE ART LANE'S TABLES, NOT
+  PATCHED HERE (patching would split icon and hand again): at the top of the gauntlet range the bell
+  mouth is 0.056 x 2.7 = 0.15 m radius - on a chibi it reads as a bucket at the wrist. That is
+  icons.glove_form's _G_FLARE0/_G_FLAREK, which the ART arm of the same ruling is re-tuning now; when it
+  lands, copy the tables into gear.gd's D94_G_* block (one const block, same order) and re-run
+  _d94e_gloves.gd. If the art arm ADDS dials (segmentation / knuckle treatment off dials 4+), the same
+  holds - mirror them here in the same breath.
+- NOT MEASURED HERE: the % pixel row is d94proof's (art lane, Blender, showcase.acc_gloves). This port
+  makes the in-game glove the same object as that row, so whatever number the re-shot row gives is the
+  game's number too. D94 does NOT tick on this cycle alone - the supervisor's condition is the re-shot
+  row moving off PARTLY TOO SMALL 5 of 15.
+- GATES: parse 0 SCRIPT ERROR / Parse Error; D94E OK (5 shots, 0 failures); OFFFLOOR 0 of 2163;
+  TWITCH_PARSE OK; TOWNWALK in_solid 0/16099 PASS (the one stuck watch is still Cort the Younger on
+  the (-137.5,-15.1) bench, recorded under D91); _delve_test 0 SCRIPT ERROR, party fighting on floor 2.
+- NOT DONE THIS SLOT: (2) D91 from origin/d91d-wip - the 20-minute soak cannot start and finish before
+  :40 after the gloves gates. Next slot: take d91d-wip (46f6b85), fix the alcove (bench/crate or the
+  perpendicular _settle_pair), one 20-minute soak with a named finish.

@@ -6283,3 +6283,11 @@ spent polling.
 - LOOKED: renders/cycles/l74/l74_after_100.png, l74_after_150.png (before), l74_fix_150.png (after). At 100% the first Chronicle line sits tight against the top of the vellum (readable, not clipped) - left alone.
 - NOT DONE: the test's synthetic "(32)" suffix defeats the feed's dedupe so two near-identical lines show with x2/x3; that is the test, not the feed. At 150% only 2 whole entries fit during a flood - by design (L71 fewer-whole-entries rule).
 - Mr. E decision: none.
+
+## U37 - L36 chat box and Chronicle share zero pixels (HUD, 2026-11-16 ~12:00 CT, hud_dock.gd + feed_hud.gd + tools/_l36_test.gd)
+- TAKE THIS NEXT gave HUD: L36 (assigned on ownership grounds; its gate is "chat busy AND Chronicle running, zero overlapping text"). Lock read by process (none alive) and file (IDLE); claimed 11:54 (expected finish ~12:00), relaunched ~11:56, released ~11:59.
+- tools/_l36_test.gd, WINDOWED 1080p: chat box up with text + 24 lines into the live Chronicle, at UI scale 100/125/150, in the 2x2 grid AND at full screen (Spotlight.suspend). BEFORE: grid clean at all three scales; FULL SCREEN the Chronicle panel overlapped the chat box at 125% and 150% (the two bottom panels' widths meet), 2 lines overprinted at 150%.
+- FIX (my files only): HudDock.chat_rect(t) reads the eye's chat box rect (read-only, rts_camera.gd untouched); FeedHUD._clear_of_chat() lifts the full-screen Chronicle panel ABOVE the chat box while chat is up and their columns would meet. Nothing shrinks, nothing cut. Grid unchanged (centre strip and chrome bar are separate bands by construction).
+- AFTER: L36_TEST OK at all 6 configs, parse clean (0 SCRIPT ERROR / Parse Error). LOOKED: renders/cycles/l36/l36_after_full_150.png (Chronicle sits above the chat box, no shared pixels) and l36_after_grid_150.png (strip and chrome-bar chat clear).
+- Seen, NOT mine: the "Hear ye!" town speech bubble at full screen 150% is half-hidden behind the Chronicle (world-space label, not a HUD file).
+- NEXT: L40 - name the halves: chat column + alert dock = hud_dock.gd (mine); party-frames half = party_frames.gd (game build). Mr. E decision: none.

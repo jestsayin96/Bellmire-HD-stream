@@ -138,6 +138,19 @@ static func centre(t: Node) -> Rect2:
 	var w := floorf(s.x * CENTRE_W)
 	return Rect2(floorf((s.x - w) * 0.5), top, w, ceilf(s.y * STRIP))
 
+## L36: the local chat box's rect on screen (px) while it is showing, else empty. The box is the
+## eye's (rts_camera.gd); this only READS it so the Chronicle can keep clear of it. Nothing may
+## draw over chat and chat may not draw over the Chronicle - they must share ZERO pixels.
+static func chat_rect(t: Node) -> Rect2:
+	if t == null:
+		return Rect2()
+	for c in t.get_children():
+		if c is RtsCamera:
+			var ch = (c as Node).get("_chat")
+			if ch is Control and (ch as Control).is_visible_in_tree():
+				return (ch as Control).get_global_rect()
+	return Rect2()
+
 ## a pane's rect on screen (px), or an empty rect if it is not up
 static func pane(t: Node, k: String) -> Rect2:
 	var s := spot(t)

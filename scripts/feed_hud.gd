@@ -184,6 +184,24 @@ func _place_chrome() -> void:
         _content.size = sr.size
         _content.custom_minimum_size = sr.size
 
+## L36: at full screen the Chronicle is the bottom-left panel and the chat box the bottom-right one;
+## from 125% up their widths meet. While chat is up and they would share columns, the panel rides
+## ABOVE the chat box instead of under it (nothing shrinks, nothing is cut). In the grid the strip
+## and the chrome bar are separate bands by construction (HudDock.centre / chrome).
+func _clear_of_chat() -> void:
+    if _panel == null:
+        return
+    var base := -UiTheme.px(18)
+    var cr := HudDock.chat_rect(get_parent())
+    var want := base
+    if cr.size.x > 0.0 and cr.size.y > 0.0:
+        var left_x := _panel.offset_left + _panel.get_parent_area_size().x * _panel.anchor_left
+        var right_x := left_x + maxf(_panel.size.x, float(UiTheme.px(WIDTH)))
+        if right_x + float(UiTheme.px(8)) > cr.position.x:
+            want = -(HudDock.screen().y - cr.position.y) - float(UiTheme.px(8))
+    if absf(_panel.offset_bottom - want) > 0.5:
+        _panel.offset_bottom = want
+
 ## how many one-line entries fit the scroll's open vellum (L39b: up to 9)
 func _chrome_lines() -> int:
     var inner: float
@@ -280,6 +298,8 @@ func _process(delta: float) -> void:
         restyle()
     if _chrome:
         _place_chrome()
+    else:
+        _clear_of_chat()
     # L32b calm pacing, now L67: classify what arrived, merge repeats, admit by priority at
     # no more than one line per PACE_S, hold each line its dwell
     _tick_feed(delta / maxf(Engine.time_scale, 0.001))

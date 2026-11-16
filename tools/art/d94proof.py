@@ -92,20 +92,42 @@ def khash(k):
 
 
 def spread(pool, variant_of, n=N):
-    """Six that are actually different. Distinct variants first (the NAME
-    decides the silhouette), then fill by cost spread. Deterministic."""
+    """Six that are actually different - distinct silhouettes AND spread across
+    the cost ladder.
+
+    THE TEST WAS COST-BLIND AND IT HID THE GLOVE FAULT. The old version walked
+    the pool cheapest-first and took the first item of each new variant, so
+    with five variants and six cells every glove in the row cost 200-240 out of
+    a range topping 420: `orn` was ~0.00 in all six cells, and every dial that
+    rides COST sat on its floor. A row that cannot see the cost ladder cannot
+    test Mr. E's receipt. Now the variants are kept - a Guard Helm must still
+    not render as a hood - but each one is filled by the member nearest its
+    share of the cost range, so the row is six silhouettes AND six prices.
+    Deterministic, and it falls back exactly as before when a slot has fewer
+    variants than cells.
+    """
     pool = sorted(pool, key=lambda q: (q[0], q[1]))      # (cost, key, rec)
-    picked, seen = [], set()
+    if not pool:
+        return []
+    groups = {}
     for cost, k, v in pool:
-        var = variant_of(k, v)
-        if var not in seen:
-            seen.add(var)
-            picked.append((cost, k, v))
-        if len(picked) >= n:
-            break
-    if len(picked) < n:
-        have = set(k for _, k, _ in picked)
-        rest = [q for q in pool if q[1] not in have]
+        groups.setdefault(variant_of(k, v), []).append((cost, k, v))
+    # order the variants by their own cheapest member, so the row still reads
+    # left to right as a ladder once it is sorted by cost below
+    order = sorted(groups, key=lambda g: (groups[g][0][0], str(g)))
+    lo, hi = pool[0][0], pool[-1][0]
+    picked, used = [], set()
+    for i, g in enumerate(order[:n]):
+        frac = (i / float(n - 1)) if n > 1 else 0.0
+        want = lo + (hi - lo) * frac
+        cand = [q for q in groups[g] if q[1] not in used]
+        if not cand:
+            continue
+        pick = min(cand, key=lambda q: (abs(q[0] - want), q[1]))
+        used.add(pick[1])
+        picked.append(pick)
+    if len(picked) < n:        # fewer variants than cells: fill by cost spread
+        rest = [q for q in pool if q[1] not in used]
         need = n - len(picked)
         for i in range(need):
             if not rest:
@@ -319,20 +341,13 @@ def build_cell(repo, cell, resx, resy, full_path, det_path):
             fL = anchors["foot.l"]
             fw = max(SG.ray_out(body_trees, Vector((fL.x, fL.y, 0.075)), (1, 0, 0)) or 0.055,
                      SG.ray_out(body_trees, Vector((fL.x, fL.y, 0.075)), (-1, 0, 0)) or 0.055)
-            hL = anchors["hand.l"]
-            hr = max(SG.ray_out(body_trees, hL, (0, 0, 1)) or 0.045,
-                     SG.ray_out(body_trees, hL, (0, -1, 0)) or 0.045)
             boot_k = max(0.80, min(1.9, (fw + 0.016) / 0.058))
-            glove_k = max(0.80, min(1.9, (hr + 0.012) / 0.044))
             for q in SC.ACC_BUILDERS[cell["slot"]](cell["rec"]["name"], cell["key"],
                                                    cell["cost"], cell["ctx"], anchors, S):
                 q.mats = am
                 if q.name.startswith("Acc_Boot"):
                     f = anchors["foot." + q.name[-1].lower()]
                     SG.scale_part(q, (f.x, f.y, 0.0), boot_k, boot_k, 1.0)
-                elif q.name.startswith("Acc_Glove"):
-                    h = anchors["hand." + q.name[-1].lower()]
-                    SG.scale_part(q, h, glove_k, glove_k, glove_k)
                 parts.append(q)
 
     objs, manifest = SG.merge_parts(parts, mats, anchors, arm, cell["key"][:28], posed=True)
@@ -454,10 +469,15 @@ def main():
     ap.add_argument("--repo", required=True)
     ap.add_argument("--res", default="840x1200")
     ap.add_argument("--only", default="")
+    # D94 gloves: the item's own done bar asks for FRONT, SIDE AND BACK, so a
+    # row can be re-shot from another angle into its own folder. Defaults are
+    # unchanged - with neither flag this is the same test it has always been.
+    ap.add_argument("--view", default="")
+    ap.add_argument("--tag", default="")
     args = ap.parse_args(argv)
     resx, resy = (int(x) for x in args.res.split("x"))
     repo = args.repo
-    outdir = os.path.join(repo, "renders", "art", "d94")
+    outdir = os.path.join(repo, "renders", "art", "d94" + (args.tag or ""))
     os.makedirs(outdir, exist_ok=True)
     items = SG.load_items(repo)
 
@@ -465,6 +485,9 @@ def main():
     if args.only:
         want = args.only.split(",")
         rows = [r for r in rows if r["slot"] in want]
+    if args.view:
+        for r in rows:
+            r["view"] = args.view
 
     report = {"ok": True, "errors": [], "rows": [], "blank": {}, "verdict": []}
     checked, bad = [], []

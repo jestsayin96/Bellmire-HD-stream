@@ -82,6 +82,7 @@ def context(r):
         gem = IC.STAT_GEM.get(r["stat"], (0.70, 0.70, 0.74))
     return dict(variant=IC.variant_for(r["fam"], r["key"], r["name"], h),
                 orn=orn, metal=metal, cloth=cloth, gem=gem,
+                D=IC.sig(r["key"], r["name"]),
                 metal_name=IC.METAL_NAMES[min(3, int(orn * 4.0))])
 
 

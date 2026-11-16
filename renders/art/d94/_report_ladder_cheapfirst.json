@@ -1,0 +1,3095 @@
+{
+ "ok": true,
+ "errors": [],
+ "rows": [
+  {
+   "slot": "ring",
+   "view": "front",
+   "cells": [
+    {
+     "key": "tally_ring",
+     "name": "Tallykeeper's Ring",
+     "slot": "ring",
+     "cost": 210,
+     "stat": "hp",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 158,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.195,
+      "clip": [
+       7.437,
+       10.072
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.349,
+      -0.0,
+      0.5
+     ],
+     "fit": [
+      {
+       "part": "Acc_Ring",
+       "item": "Tallykeeper's Ring",
+       "slot": "ring",
+       "verts": 168,
+       "inside_pct": 66.1,
+       "penetration_m": 0.0394,
+       "gap_m": 0.0027,
+       "min_z": 0.4756
+      }
+     ],
+     "faults": [
+      "Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.039 m deep, 66% of it inside"
+     ]
+    },
+    {
+     "key": "nailer_ring",
+     "name": "Nailer's Ring",
+     "slot": "ring",
+     "cost": 220,
+     "stat": "hit",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 632,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.186,
+      "clip": [
+       7.435,
+       10.066
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.344,
+      -0.0,
+      0.496
+     ],
+     "fit": [
+      {
+       "part": "Acc_Ring",
+       "item": "Nailer's Ring",
+       "slot": "ring",
+       "verts": 636,
+       "inside_pct": 53.1,
+       "penetration_m": 0.0403,
+       "gap_m": 0.0004,
+       "min_z": 0.4717
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "spurrier_ring",
+     "name": "Spurrier's Ring",
+     "slot": "ring",
+     "cost": 280,
+     "stat": "speed",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 290,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.175,
+      "clip": [
+       7.443,
+       10.066
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.35,
+      -0.0,
+      0.495
+     ],
+     "fit": [
+      {
+       "part": "Acc_Ring",
+       "item": "Spurrier's Ring",
+       "slot": "ring",
+       "verts": 290,
+       "inside_pct": 63.1,
+       "penetration_m": 0.038,
+       "gap_m": 0.0004,
+       "min_z": 0.4728
+      }
+     ],
+     "faults": [
+      "Acc_Ring (Spurrier's Ring): CLIPS the body - 0.038 m deep, 63% of it inside"
+     ]
+    },
+    {
+     "key": "lampwright_ring",
+     "name": "Lampwright's Ring",
+     "slot": "ring",
+     "cost": 330,
+     "stat": "saves",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 568,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.214,
+      "clip": [
+       7.43,
+       10.076
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.348,
+      -0.0,
+      0.496
+     ],
+     "fit": [
+      {
+       "part": "Acc_Ring",
+       "item": "Lampwright's Ring",
+       "slot": "ring",
+       "verts": 570,
+       "inside_pct": 55.6,
+       "penetration_m": 0.0504,
+       "gap_m": 0.0004,
+       "min_z": 0.4509
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "watchfire_ring",
+     "name": "Watchfire Ring",
+     "slot": "ring",
+     "cost": 400,
+     "stat": "ac",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 628,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.191,
+      "clip": [
+       7.436,
+       10.074
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.351,
+      -0.0,
+      0.496
+     ],
+     "fit": [
+      {
+       "part": "Acc_Ring",
+       "item": "Watchfire Ring",
+       "slot": "ring",
+       "verts": 342,
+       "inside_pct": 55.6,
+       "penetration_m": 0.0479,
+       "gap_m": 0.0,
+       "min_z": 0.4494
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "scar_guard_ring",
+     "name": "Ring of the Scar-guard",
+     "slot": "ring",
+     "cost": 420,
+     "stat": "ac",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 366,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.159,
+      "clip": [
+       7.445,
+       10.055
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.344,
+      -0.0,
+      0.496
+     ],
+     "fit": [
+      {
+       "part": "Acc_Ring",
+       "item": "Ring of the Scar-guard",
+       "slot": "ring",
+       "verts": 380,
+       "inside_pct": 72.6,
+       "penetration_m": 0.0383,
+       "gap_m": 0.0009,
+       "min_z": 0.4786
+      }
+     ],
+     "faults": [
+      "Acc_Ring (Ring of the Scar-guard): CLIPS the body - 0.038 m deep, 73% of it inside"
+     ]
+    }
+   ],
+   "faults": [
+    "tally_ring: Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.039 m deep, 66% of it inside",
+    "spurrier_ring: Acc_Ring (Spurrier's Ring): CLIPS the body - 0.038 m deep, 63% of it inside",
+    "scar_guard_ring: Acc_Ring (Ring of the Scar-guard): CLIPS the body - 0.038 m deep, 73% of it inside"
+   ],
+   "verdict": "TOO SMALL ON STREAM",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 0.0,
+    "worst_pair": [
+     "Tallykeeper's Ring",
+     "Nailer's Ring"
+    ],
+    "worst_peak_pct": 0.0,
+    "best": 0.0,
+    "best_pair": [
+     "Watchfire Ring",
+     "Ring of the Scar-guard"
+    ],
+    "median": 0.0,
+    "duplicate_pairs": [],
+    "too_small_pairs": [
+     {
+      "a": "Tallykeeper's Ring",
+      "b": "Nailer's Ring",
+      "detail": 82.346,
+      "stream": 0.0
+     },
+     {
+      "a": "Tallykeeper's Ring",
+      "b": "Spurrier's Ring",
+      "detail": 86.244,
+      "stream": 0.0
+     },
+     {
+      "a": "Tallykeeper's Ring",
+      "b": "Lampwright's Ring",
+      "detail": 99.878,
+      "stream": 0.0
+     },
+     {
+      "a": "Tallykeeper's Ring",
+      "b": "Watchfire Ring",
+      "detail": 99.352,
+      "stream": 0.0
+     },
+     {
+      "a": "Tallykeeper's Ring",
+      "b": "Ring of the Scar-guard",
+      "detail": 99.058,
+      "stream": 0.0
+     },
+     {
+      "a": "Nailer's Ring",
+      "b": "Spurrier's Ring",
+      "detail": 85.097,
+      "stream": 0.0
+     },
+     {
+      "a": "Nailer's Ring",
+      "b": "Lampwright's Ring",
+      "detail": 99.925,
+      "stream": 0.0
+     },
+     {
+      "a": "Nailer's Ring",
+      "b": "Watchfire Ring",
+      "detail": 99.447,
+      "stream": 0.0
+     },
+     {
+      "a": "Nailer's Ring",
+      "b": "Ring of the Scar-guard",
+      "detail": 99.604,
+      "stream": 0.0
+     },
+     {
+      "a": "Spurrier's Ring",
+      "b": "Lampwright's Ring",
+      "detail": 99.912,
+      "stream": 0.0
+     },
+     {
+      "a": "Spurrier's Ring",
+      "b": "Watchfire Ring",
+      "detail": 97.953,
+      "stream": 0.0
+     },
+     {
+      "a": "Spurrier's Ring",
+      "b": "Ring of the Scar-guard",
+      "detail": 98.149,
+      "stream": 0.0
+     },
+     {
+      "a": "Lampwright's Ring",
+      "b": "Watchfire Ring",
+      "detail": 99.92,
+      "stream": 0.0
+     },
+     {
+      "a": "Lampwright's Ring",
+      "b": "Ring of the Scar-guard",
+      "detail": 99.875,
+      "stream": 0.0
+     },
+     {
+      "a": "Watchfire Ring",
+      "b": "Ring of the Scar-guard",
+      "detail": 86.323,
+      "stream": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "slot": "amulet",
+   "view": "front",
+   "cells": [
+    {
+     "key": "gate_whistle",
+     "name": "Gatehouse Whistle",
+     "slot": "amulet",
+     "cost": 230,
+     "stat": "saves",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 487,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.004,
+      "clip": [
+       7.374,
+       10.112
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.167,
+      1.107
+     ],
+     "fit": [
+      {
+       "part": "Acc_Amulet",
+       "item": "Gatehouse Whistle",
+       "slot": "amulet",
+       "verts": 438,
+       "inside_pct": 16.4,
+       "penetration_m": 0.0106,
+       "gap_m": 0.0001,
+       "min_z": 0.9997
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "horner_amulet",
+     "name": "Horner's Pendant",
+     "slot": "amulet",
+     "cost": 240,
+     "stat": "hp",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 692,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.014,
+      "clip": [
+       7.375,
+       10.12
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.169,
+      1.096
+     ],
+     "fit": [
+      {
+       "part": "Acc_Amulet",
+       "item": "Horner's Pendant",
+       "slot": "amulet",
+       "verts": 610,
+       "inside_pct": 28.5,
+       "penetration_m": 0.027,
+       "gap_m": 0.0,
+       "min_z": 0.9721
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "chapman_amulet",
+     "name": "Chapman's Charm",
+     "slot": "amulet",
+     "cost": 280,
+     "stat": "speed",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 416,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.024,
+      "clip": [
+       7.372,
+       10.12
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.168,
+      1.078
+     ],
+     "fit": [
+      {
+       "part": "Acc_Amulet",
+       "item": "Chapman's Charm",
+       "slot": "amulet",
+       "verts": 370,
+       "inside_pct": 38.1,
+       "penetration_m": 0.0477,
+       "gap_m": 0.0002,
+       "min_z": 0.9352
+      }
+     ],
+     "faults": [
+      "Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 38% of it inside"
+     ]
+    },
+    {
+     "key": "flask_amulet",
+     "name": "Flask-count Pendant",
+     "slot": "amulet",
+     "cost": 330,
+     "stat": "hit",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 544,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.027,
+      "clip": [
+       7.375,
+       10.127
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.171,
+      1.102
+     ],
+     "fit": [
+      {
+       "part": "Acc_Amulet",
+       "item": "Flask-count Pendant",
+       "slot": "amulet",
+       "verts": 492,
+       "inside_pct": 32.3,
+       "penetration_m": 0.0273,
+       "gap_m": 0.0005,
+       "min_z": 0.9812
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "blight_charm",
+     "name": "Blightward Charm",
+     "slot": "amulet",
+     "cost": 360,
+     "stat": "hp",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 582,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.015,
+      "clip": [
+       7.375,
+       10.121
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.168,
+      1.111
+     ],
+     "fit": [
+      {
+       "part": "Acc_Amulet",
+       "item": "Blightward Charm",
+       "slot": "amulet",
+       "verts": 528,
+       "inside_pct": 20.1,
+       "penetration_m": 0.0151,
+       "gap_m": 0.0001,
+       "min_z": 1.0027
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "oath_amulet",
+     "name": "Oathkeeper's Amulet",
+     "slot": "amulet",
+     "cost": 480,
+     "stat": "ac",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 596,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.034,
+      "clip": [
+       7.37,
+       10.122
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.164,
+      1.101
+     ],
+     "fit": [
+      {
+       "part": "Acc_Amulet",
+       "item": "Oathkeeper's Amulet",
+       "slot": "amulet",
+       "verts": 528,
+       "inside_pct": 26.5,
+       "penetration_m": 0.021,
+       "gap_m": 0.0,
+       "min_z": 0.9769
+      }
+     ],
+     "faults": []
+    }
+   ],
+   "faults": [
+    "chapman_amulet: Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 38% of it inside"
+   ],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 0.477,
+    "worst_pair": [
+     "Horner's Pendant",
+     "Chapman's Charm"
+    ],
+    "worst_peak_pct": 24.1,
+    "best": 1.08,
+    "best_pair": [
+     "Gatehouse Whistle",
+     "Oathkeeper's Amulet"
+    ],
+    "median": 0.804,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  },
+  {
+   "slot": "cloak",
+   "view": "back",
+   "cells": [
+    {
+     "key": "hurdler_cloak",
+     "name": "Hurdler's Cloak",
+     "slot": "cloak",
+     "cost": 220,
+     "stat": "speed",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 280,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.361,
+      "clip": [
+       7.066,
+       10.495
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.021,
+      0.006,
+      1.038
+     ],
+     "fit": [
+      {
+       "part": "Acc_Cloak",
+       "item": "Hurdler's Cloak",
+       "slot": "cloak",
+       "verts": 290,
+       "inside_pct": 40.0,
+       "penetration_m": 0.1985,
+       "gap_m": 0.0008,
+       "min_z": 0.6049
+      }
+     ],
+     "faults": [
+      "Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 40% of it inside"
+     ]
+    },
+    {
+     "key": "orchard_cloak",
+     "name": "Orchardman's Cloak",
+     "slot": "cloak",
+     "cost": 220,
+     "stat": "speed",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 4,
+     "tris": 535,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.55,
+      "clip": [
+       7.032,
+       10.527
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.03,
+      0.01,
+      0.905
+     ],
+     "fit": [
+      {
+       "part": "Acc_Cloak",
+       "item": "Orchardman's Cloak",
+       "slot": "cloak",
+       "verts": 509,
+       "inside_pct": 27.3,
+       "penetration_m": 0.0508,
+       "gap_m": 0.0,
+       "min_z": 0.6147
+      }
+     ],
+     "faults": [
+      "Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.051 m deep, 27% of it inside"
+     ]
+    },
+    {
+     "key": "caravan_cloak",
+     "name": "Caravan Cloak",
+     "slot": "cloak",
+     "cost": 280,
+     "stat": "speed",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 637,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.407,
+      "clip": [
+       7.092,
+       10.469
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.02,
+      0.035,
+      0.887
+     ],
+     "fit": [
+      {
+       "part": "Acc_Cloak",
+       "item": "Caravan Cloak",
+       "slot": "cloak",
+       "verts": 592,
+       "inside_pct": 20.9,
+       "penetration_m": 0.0293,
+       "gap_m": 0.0,
+       "min_z": 0.5889
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "deep_cloak",
+     "name": "Deepwarden's Cloak",
+     "slot": "cloak",
+     "cost": 300,
+     "stat": "saves",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 244,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.374,
+      "clip": [
+       7.056,
+       10.507
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.026,
+      0.011,
+      0.975
+     ],
+     "fit": [
+      {
+       "part": "Acc_Cloak",
+       "item": "Deepwarden's Cloak",
+       "slot": "cloak",
+       "verts": 264,
+       "inside_pct": 21.2,
+       "penetration_m": 0.0147,
+       "gap_m": 0.0016,
+       "min_z": 0.642
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "fogrun_cloak",
+     "name": "Fog-run Cloak",
+     "slot": "cloak",
+     "cost": 330,
+     "stat": "speed",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 169,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.187,
+      "clip": [
+       7.099,
+       10.474
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.019,
+      0.034,
+      0.812
+     ],
+     "fit": [
+      {
+       "part": "Acc_Cloak",
+       "item": "Fog-run Cloak",
+       "slot": "cloak",
+       "verts": 189,
+       "inside_pct": 24.9,
+       "penetration_m": 0.0192,
+       "gap_m": 0.0009,
+       "min_z": 0.4601
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "barracks_cloak",
+     "name": "Barracks Watch-cloak",
+     "slot": "cloak",
+     "cost": 440,
+     "stat": "ac",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 4,
+     "tris": 715,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.458,
+       12.766
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.279,
+      "clip": [
+       7.076,
+       10.451
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.026,
+      0.015,
+      1.048
+     ],
+     "fit": [
+      {
+       "part": "Acc_Cloak",
+       "item": "Barracks Watch-cloak",
+       "slot": "cloak",
+       "verts": 671,
+       "inside_pct": 18.5,
+       "penetration_m": 0.0289,
+       "gap_m": 0.0002,
+       "min_z": 0.9092
+      }
+     ],
+     "faults": []
+    }
+   ],
+   "faults": [
+    "hurdler_cloak: Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 40% of it inside",
+    "orchard_cloak: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.051 m deep, 27% of it inside"
+   ],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 25.849,
+    "worst_pair": [
+     "Orchardman's Cloak",
+     "Caravan Cloak"
+    ],
+    "worst_peak_pct": 43.37,
+    "best": 33.833,
+    "best_pair": [
+     "Orchardman's Cloak",
+     "Fog-run Cloak"
+    ],
+    "median": 30.702,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  },
+  {
+   "slot": "boots",
+   "view": "front",
+   "cells": [
+    {
+     "key": "chapel_clogs",
+     "name": "Chapel Clogs",
+     "slot": "boots",
+     "cost": 200,
+     "stat": "ac",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 4,
+     "tris": 112,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.897,
+      "clip": [
+       7.155,
+       10.406
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.105,
+      0.113
+     ],
+     "fit": [
+      {
+       "part": "Acc_BootL",
+       "item": "Chapel Clogs",
+       "slot": "boots",
+       "verts": 88,
+       "inside_pct": 18.2,
+       "penetration_m": 0.0527,
+       "gap_m": 0.0,
+       "min_z": -0.002
+      },
+      {
+       "part": "Acc_BootR",
+       "item": "Chapel Clogs",
+       "slot": "boots",
+       "verts": 88,
+       "inside_pct": 18.2,
+       "penetration_m": 0.0527,
+       "gap_m": 0.0001,
+       "min_z": -0.002
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "dauber_boots",
+     "name": "Dauber's Boots",
+     "slot": "boots",
+     "cost": 200,
+     "stat": "hp",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 4,
+     "tris": 106,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.984,
+      "clip": [
+       7.122,
+       10.47
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.171,
+      0.141
+     ],
+     "fit": [
+      {
+       "part": "Acc_BootL",
+       "item": "Dauber's Boots",
+       "slot": "boots",
+       "verts": 77,
+       "inside_pct": 15.6,
+       "penetration_m": 0.0482,
+       "gap_m": 0.0,
+       "min_z": -0.002
+      },
+      {
+       "part": "Acc_BootR",
+       "item": "Dauber's Boots",
+       "slot": "boots",
+       "verts": 77,
+       "inside_pct": 15.6,
+       "penetration_m": 0.0482,
+       "gap_m": 0.0001,
+       "min_z": -0.002
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "carter_boots",
+     "name": "Carter's Boots",
+     "slot": "boots",
+     "cost": 240,
+     "stat": "speed",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 208,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.854,
+      "clip": [
+       7.184,
+       10.43
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.095,
+      0.246
+     ],
+     "fit": [
+      {
+       "part": "Acc_BootL",
+       "item": "Carter's Boots",
+       "slot": "boots",
+       "verts": 126,
+       "inside_pct": 54.8,
+       "penetration_m": 0.0583,
+       "gap_m": 0.0,
+       "min_z": -0.002
+      },
+      {
+       "part": "Acc_BootR",
+       "item": "Carter's Boots",
+       "slot": "boots",
+       "verts": 126,
+       "inside_pct": 52.4,
+       "penetration_m": 0.0583,
+       "gap_m": 0.0001,
+       "min_z": -0.002
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "craterglass_boots",
+     "name": "Craterglass Boots",
+     "slot": "boots",
+     "cost": 290,
+     "stat": "saves",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 648,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.923,
+      "clip": [
+       7.172,
+       10.417
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.092,
+      0.209
+     ],
+     "fit": [
+      {
+       "part": "Acc_BootL",
+       "item": "Craterglass Boots",
+       "slot": "boots",
+       "verts": 304,
+       "inside_pct": 41.4,
+       "penetration_m": 0.0485,
+       "gap_m": 0.0,
+       "min_z": -0.002
+      },
+      {
+       "part": "Acc_BootR",
+       "item": "Craterglass Boots",
+       "slot": "boots",
+       "verts": 304,
+       "inside_pct": 42.1,
+       "penetration_m": 0.0472,
+       "gap_m": 0.0001,
+       "min_z": -0.002
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "pavers_boots",
+     "name": "Paver's Boots",
+     "slot": "boots",
+     "cost": 360,
+     "stat": "ac",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 322,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.015,
+      "clip": [
+       7.113,
+       10.486
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.0,
+      -0.186,
+      0.15
+     ],
+     "fit": [
+      {
+       "part": "Acc_BootL",
+       "item": "Paver's Boots",
+       "slot": "boots",
+       "verts": 177,
+       "inside_pct": 54.8,
+       "penetration_m": 0.0686,
+       "gap_m": 0.0,
+       "min_z": -0.002
+      },
+      {
+       "part": "Acc_BootR",
+       "item": "Paver's Boots",
+       "slot": "boots",
+       "verts": 177,
+       "inside_pct": 54.2,
+       "penetration_m": 0.0686,
+       "gap_m": 0.0001,
+       "min_z": -0.002
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "pitwalk_boots",
+     "name": "Pitwalker's Boots",
+     "slot": "boots",
+     "cost": 380,
+     "stat": "saves",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 328,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.846,
+      "clip": [
+       7.172,
+       10.423
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.0,
+      -0.111,
+      0.16
+     ],
+     "fit": [
+      {
+       "part": "Acc_BootL",
+       "item": "Pitwalker's Boots",
+       "slot": "boots",
+       "verts": 188,
+       "inside_pct": 54.3,
+       "penetration_m": 0.0697,
+       "gap_m": 0.0,
+       "min_z": -0.002
+      },
+      {
+       "part": "Acc_BootR",
+       "item": "Pitwalker's Boots",
+       "slot": "boots",
+       "verts": 188,
+       "inside_pct": 54.3,
+       "penetration_m": 0.0697,
+       "gap_m": 0.0001,
+       "min_z": -0.002
+      }
+     ],
+     "faults": []
+    }
+   ],
+   "faults": [],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 3.19,
+    "worst_pair": [
+     "Dauber's Boots",
+     "Paver's Boots"
+    ],
+    "worst_peak_pct": 59.07,
+    "best": 4.801,
+    "best_pair": [
+     "Dauber's Boots",
+     "Pitwalker's Boots"
+    ],
+    "median": 4.082,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  },
+  {
+   "slot": "gloves",
+   "view": "front",
+   "cells": [
+    {
+     "key": "baker_mitts",
+     "name": "Baker's Mitts",
+     "slot": "gloves",
+     "cost": 200,
+     "stat": "saves",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 258,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.245,
+      "clip": [
+       7.151,
+       10.344
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      0.0,
+      0.543
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Baker's Mitts",
+       "slot": "gloves",
+       "verts": 164,
+       "inside_pct": 69.5,
+       "penetration_m": 0.0564,
+       "gap_m": 0.0004,
+       "min_z": 0.4195
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Baker's Mitts",
+       "slot": "gloves",
+       "verts": 164,
+       "inside_pct": 75.0,
+       "penetration_m": 0.0564,
+       "gap_m": 0.0004,
+       "min_z": 0.4244
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
+      "Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside"
+     ]
+    },
+    {
+     "key": "carder_gloves",
+     "name": "Carder's Gloves",
+     "slot": "gloves",
+     "cost": 200,
+     "stat": "hp",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 446,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.171,
+      "clip": [
+       7.186,
+       10.34
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.611
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Carder's Gloves",
+       "slot": "gloves",
+       "verts": 258,
+       "inside_pct": 87.6,
+       "penetration_m": 0.045,
+       "gap_m": 0.0009,
+       "min_z": 0.4749
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Carder's Gloves",
+       "slot": "gloves",
+       "verts": 258,
+       "inside_pct": 78.7,
+       "penetration_m": 0.045,
+       "gap_m": 0.0003,
+       "min_z": 0.4797
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
+      "Acc_GloveR (Carder's Gloves): CLIPS the body - 0.045 m deep, 79% of it inside"
+     ]
+    },
+    {
+     "key": "bellrope_wraps",
+     "name": "Bellringer's Wraps",
+     "slot": "gloves",
+     "cost": 240,
+     "stat": "hit",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 294,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.175,
+      "clip": [
+       7.186,
+       10.333
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      0.0,
+      0.586
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Bellringer's Wraps",
+       "slot": "gloves",
+       "verts": 188,
+       "inside_pct": 84.0,
+       "penetration_m": 0.0685,
+       "gap_m": 0.0012,
+       "min_z": 0.4748
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Bellringer's Wraps",
+       "slot": "gloves",
+       "verts": 188,
+       "inside_pct": 68.1,
+       "penetration_m": 0.0685,
+       "gap_m": 0.0007,
+       "min_z": 0.4796
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.068 m deep, 84% of it inside",
+      "Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.068 m deep, 68% of it inside"
+     ]
+    },
+    {
+     "key": "quarreller_gloves",
+     "name": "Quarreller's Tabs",
+     "slot": "gloves",
+     "cost": 280,
+     "stat": "hit",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 682,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.185,
+      "clip": [
+       7.148,
+       10.349
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.629
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Quarreller's Tabs",
+       "slot": "gloves",
+       "verts": 385,
+       "inside_pct": 73.5,
+       "penetration_m": 0.0409,
+       "gap_m": 0.0,
+       "min_z": 0.4745
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Quarreller's Tabs",
+       "slot": "gloves",
+       "verts": 385,
+       "inside_pct": 67.8,
+       "penetration_m": 0.0361,
+       "gap_m": 0.0004,
+       "min_z": 0.4793
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.041 m deep, 74% of it inside",
+      "Acc_GloveR (Quarreller's Tabs): CLIPS the body - 0.036 m deep, 68% of it inside"
+     ]
+    },
+    {
+     "key": "forge_grips",
+     "name": "Forgemaster's Grips",
+     "slot": "gloves",
+     "cost": 300,
+     "stat": "dmg",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 1058,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.21,
+      "clip": [
+       7.165,
+       10.358
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.602
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Forgemaster's Grips",
+       "slot": "gloves",
+       "verts": 566,
+       "inside_pct": 71.7,
+       "penetration_m": 0.0533,
+       "gap_m": 0.0,
+       "min_z": 0.4742
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Forgemaster's Grips",
+       "slot": "gloves",
+       "verts": 566,
+       "inside_pct": 58.5,
+       "penetration_m": 0.0411,
+       "gap_m": 0.0001,
+       "min_z": 0.479
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.053 m deep, 72% of it inside"
+     ]
+    },
+    {
+     "key": "armourer_gloves",
+     "name": "Armourer's Gauntlets",
+     "slot": "gloves",
+     "cost": 320,
+     "stat": "ac",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 8,
+     "tris": 1054,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.274,
+      "clip": [
+       7.128,
+       10.381
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.0,
+      0.615
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Armourer's Gauntlets",
+       "slot": "gloves",
+       "verts": 589,
+       "inside_pct": 61.5,
+       "penetration_m": 0.0454,
+       "gap_m": 0.0001,
+       "min_z": 0.4532
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Armourer's Gauntlets",
+       "slot": "gloves",
+       "verts": 589,
+       "inside_pct": 59.9,
+       "penetration_m": 0.0328,
+       "gap_m": 0.0001,
+       "min_z": 0.4581
+      }
+     ],
+     "faults": []
+    }
+   ],
+   "faults": [
+    "baker_mitts: Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
+    "baker_mitts: Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside",
+    "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
+    "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.045 m deep, 79% of it inside",
+    "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.068 m deep, 84% of it inside",
+    "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.068 m deep, 68% of it inside",
+    "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.041 m deep, 74% of it inside",
+    "quarreller_gloves: Acc_GloveR (Quarreller's Tabs): CLIPS the body - 0.036 m deep, 68% of it inside",
+    "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.053 m deep, 72% of it inside"
+   ],
+   "verdict": "PARTLY TOO SMALL 6/15",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 0.0,
+    "worst_pair": [
+     "Carder's Gloves",
+     "Bellringer's Wraps"
+    ],
+    "worst_peak_pct": 0.0,
+    "best": 1.616,
+    "best_pair": [
+     "Baker's Mitts",
+     "Armourer's Gauntlets"
+    ],
+    "median": 0.603,
+    "duplicate_pairs": [],
+    "too_small_pairs": [
+     {
+      "a": "Carder's Gloves",
+      "b": "Bellringer's Wraps",
+      "detail": 99.744,
+      "stream": 0.0
+     },
+     {
+      "a": "Carder's Gloves",
+      "b": "Forgemaster's Grips",
+      "detail": 96.719,
+      "stream": 0.126
+     },
+     {
+      "a": "Bellringer's Wraps",
+      "b": "Forgemaster's Grips",
+      "detail": 99.483,
+      "stream": 0.126
+     },
+     {
+      "a": "Carder's Gloves",
+      "b": "Quarreller's Tabs",
+      "detail": 99.771,
+      "stream": 0.289
+     },
+     {
+      "a": "Bellringer's Wraps",
+      "b": "Quarreller's Tabs",
+      "detail": 99.757,
+      "stream": 0.289
+     },
+     {
+      "a": "Quarreller's Tabs",
+      "b": "Forgemaster's Grips",
+      "detail": 95.125,
+      "stream": 0.364
+     }
+    ]
+   }
+  },
+  {
+   "slot": "hat",
+   "view": "front",
+   "cells": [
+    {
+     "key": "straw_hat",
+     "name": "Straw Hat",
+     "slot": "hat",
+     "cost": 30,
+     "stat": "ac",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 444,
+     "hidden": [
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.138,
+       12.862
+      ]
+     },
+     "detail_cam": {
+      "ortho": 2.327,
+      "clip": [
+       6.658,
+       10.872
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.0,
+      0.0,
+      2.003
+     ],
+     "fit": [
+      {
+       "part": "Acc_Helm",
+       "item": "Straw Hat",
+       "slot": "hat",
+       "verts": 481,
+       "inside_pct": 18.9,
+       "penetration_m": 0.3161,
+       "gap_m": 0.0009,
+       "min_z": 1.8449
+      }
+     ],
+     "faults": [
+      "Acc_Helm (Straw Hat): CLIPS the body - 0.316 m deep, 19% of it inside"
+     ]
+    },
+    {
+     "key": "beekeepers_veil",
+     "name": "Beekeeper's Veil",
+     "slot": "hat",
+     "cost": 85,
+     "stat": "ac",
+     "variant": 7,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 378,
+     "hidden": [
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.416,
+       12.629
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.639,
+      "clip": [
+       6.884,
+       10.636
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.009,
+      0.022,
+      1.665
+     ],
+     "fit": [
+      {
+       "part": "Acc_Helm",
+       "item": "Beekeeper's Veil",
+       "slot": "hat",
+       "verts": 407,
+       "inside_pct": 14.3,
+       "penetration_m": 0.2874,
+       "gap_m": 0.0142,
+       "min_z": 1.3519
+      }
+     ],
+     "faults": [
+      "Acc_Helm (Beekeeper's Veil): CLIPS the body - 0.287 m deep, 14% of it inside"
+     ]
+    },
+    {
+     "key": "host_coif",
+     "name": "Rattling Coif",
+     "slot": "hat",
+     "cost": 140,
+     "stat": "ac",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 3,
+     "tris": 444,
+     "hidden": [
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.397,
+       12.603
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.641,
+      "clip": [
+       6.916,
+       10.615
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.005,
+      0.0,
+      2.062
+     ],
+     "fit": [
+      {
+       "part": "Acc_Helm",
+       "item": "Rattling Coif",
+       "slot": "hat",
+       "verts": 481,
+       "inside_pct": 17.5,
+       "penetration_m": 0.3161,
+       "gap_m": 0.0009,
+       "min_z": 1.8988
+      }
+     ],
+     "faults": [
+      "Acc_Helm (Rattling Coif): CLIPS the body - 0.316 m deep, 18% of it inside"
+     ]
+    },
+    {
+     "key": "glazier_visor",
+     "name": "Glazier's Visor",
+     "slot": "hat",
+     "cost": 190,
+     "stat": "ac",
+     "variant": 6,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 32,
+     "hidden": [
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.446,
+       12.482
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.384,
+      "clip": [
+       7.44,
+       10.015
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.0,
+      -0.49,
+      1.75
+     ],
+     "fit": [
+      {
+       "part": "Acc_Helm",
+       "item": "Glazier's Visor",
+       "slot": "hat",
+       "verts": 52,
+       "inside_pct": 0.0,
+       "penetration_m": 0.0,
+       "gap_m": 0.0444,
+       "min_z": 1.2476
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "ferrybell_circlet",
+     "name": "Ferrybell Circlet",
+     "slot": "hat",
+     "cost": 250,
+     "stat": "ac",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 231,
+     "hidden": [
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.405,
+       12.595
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.605,
+      "clip": [
+       6.915,
+       10.597
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      0.0,
+      1.909
+     ],
+     "fit": [
+      {
+       "part": "Acc_Helm",
+       "item": "Ferrybell Circlet",
+       "slot": "hat",
+       "verts": 230,
+       "inside_pct": 0.0,
+       "penetration_m": 0.0,
+       "gap_m": 0.0638,
+       "min_z": 1.8242
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "raiders_bane_helm",
+     "name": "Raidbreaker's Helm",
+     "slot": "hat",
+     "cost": 300,
+     "stat": "ac",
+     "variant": 5,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 2,
+     "tris": 510,
+     "hidden": [
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.366,
+       12.634
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.711,
+      "clip": [
+       6.88,
+       10.641
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      0.0,
+      1.899
+     ],
+     "fit": [
+      {
+       "part": "Acc_Helm",
+       "item": "Raidbreaker's Helm",
+       "slot": "hat",
+       "verts": 563,
+       "inside_pct": 9.2,
+       "penetration_m": 0.3221,
+       "gap_m": 0.0052,
+       "min_z": 1.3781
+      }
+     ],
+     "faults": [
+      "Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside"
+     ]
+    }
+   ],
+   "faults": [
+    "straw_hat: Acc_Helm (Straw Hat): CLIPS the body - 0.316 m deep, 19% of it inside",
+    "beekeepers_veil: Acc_Helm (Beekeeper's Veil): CLIPS the body - 0.287 m deep, 14% of it inside",
+    "host_coif: Acc_Helm (Rattling Coif): CLIPS the body - 0.316 m deep, 18% of it inside",
+    "raiders_bane_helm: Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside"
+   ],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 17.777,
+    "worst_pair": [
+     "Beekeeper's Veil",
+     "Ferrybell Circlet"
+    ],
+    "worst_peak_pct": 83.3,
+    "best": 50.062,
+    "best_pair": [
+     "Glazier's Visor",
+     "Raidbreaker's Helm"
+    ],
+    "median": 34.56,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  },
+  {
+   "slot": "weapon",
+   "view": "front",
+   "cells": [
+    {
+     "key": "w_arcane_hazel_wand",
+     "name": "Hazel Wand",
+     "slot": "weapon",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 1,
+     "cut": null,
+     "family": "arcane",
+     "pieces": 3,
+     "tris": 176,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.119,
+      "clip": [
+       7.418,
+       10.068
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.493,
+      -0.115,
+      0.681
+     ],
+     "fit": [
+      {
+       "part": "Weapon",
+       "item": "Hazel Wand",
+       "slot": "weapon",
+       "verts": 188,
+       "inside_pct": 0.0,
+       "penetration_m": 0.0,
+       "gap_m": 0.032,
+       "min_z": 0.2661
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "w_axe_bearded_greataxe",
+     "name": "Bearded Greataxe",
+     "slot": "weapon",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 2,
+     "cut": null,
+     "family": "axe",
+     "pieces": 3,
+     "tris": 73,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.524,
+      "clip": [
+       7.317,
+       10.068
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.581,
+      -0.115,
+      0.856
+     ],
+     "fit": [
+      {
+       "part": "Weapon",
+       "item": "Bearded Greataxe",
+       "slot": "weapon",
+       "verts": 109,
+       "inside_pct": 4.6,
+       "penetration_m": 0.0124,
+       "gap_m": 0.0029,
+       "min_z": 0.2912
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "w_blade_emberline",
+     "name": "Emberline Sword",
+     "slot": "weapon",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 3,
+     "cut": null,
+     "family": "blade",
+     "pieces": 5,
+     "tris": 149,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.524,
+      "clip": [
+       7.438,
+       10.126
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.476,
+      -0.115,
+      0.875
+     ],
+     "fit": [
+      {
+       "part": "Weapon",
+       "item": "Emberline Sword",
+       "slot": "weapon",
+       "verts": 192,
+       "inside_pct": 9.9,
+       "penetration_m": 0.1303,
+       "gap_m": 0.0001,
+       "min_z": 0.3109
+      }
+     ],
+     "faults": [
+      "Weapon (Emberline Sword): PASSES THROUGH the body by 0.130 m"
+     ]
+    },
+    {
+     "key": "w_open_coldfist_wraps",
+     "name": "Cold-White Wraps",
+     "slot": "weapon",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 4,
+     "cut": null,
+     "family": "open",
+     "pieces": 3,
+     "tris": 606,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 0.242,
+      "clip": [
+       7.442,
+       10.06
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.442,
+      -0.115,
+      0.456
+     ],
+     "fit": [
+      {
+       "part": "Weapon",
+       "item": "Cold-White Wraps",
+       "slot": "weapon",
+       "verts": 351,
+       "inside_pct": 13.7,
+       "penetration_m": 0.0317,
+       "gap_m": 0.0,
+       "min_z": 0.3732
+      }
+     ],
+     "faults": [
+      "Weapon (Cold-White Wraps): PASSES THROUGH the body by 0.032 m"
+     ]
+    },
+    {
+     "key": "w_ranged_scarbow",
+     "name": "Scarbow",
+     "slot": "weapon",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 5,
+     "cut": null,
+     "family": "ranged",
+     "pieces": 6,
+     "tris": 332,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.544,
+      "clip": [
+       7.444,
+       10.072
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.442,
+      -0.111,
+      0.448
+     ],
+     "fit": [
+      {
+       "part": "Weapon",
+       "item": "Scarbow",
+       "slot": "weapon",
+       "verts": 388,
+       "inside_pct": 0.0,
+       "penetration_m": 0.0,
+       "gap_m": 0.0042,
+       "min_z": -0.1237
+      }
+     ],
+     "faults": [
+      "Weapon (Scarbow): stands 0.124 m BELOW the feet - sunk in the floor"
+     ]
+    },
+    {
+     "key": "w_ranged_seamstring",
+     "name": "Seamstring",
+     "slot": "weapon",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 5,
+     "cut": null,
+     "family": "ranged",
+     "pieces": 5,
+     "tris": 264,
+     "hidden": [
+      "Knight_Cape"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.524,
+      "clip": [
+       7.433,
+       10.082
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.442,
+      -0.112,
+      0.448
+     ],
+     "fit": [
+      {
+       "part": "Weapon",
+       "item": "Seamstring",
+       "slot": "weapon",
+       "verts": 284,
+       "inside_pct": 1.4,
+       "penetration_m": 0.0035,
+       "gap_m": 0.0058,
+       "min_z": -0.1162
+      }
+     ],
+     "faults": [
+      "Weapon (Seamstring): stands 0.116 m BELOW the feet - sunk in the floor"
+     ]
+    }
+   ],
+   "faults": [
+    "w_blade_emberline: Weapon (Emberline Sword): PASSES THROUGH the body by 0.130 m",
+    "w_open_coldfist_wraps: Weapon (Cold-White Wraps): PASSES THROUGH the body by 0.032 m",
+    "w_ranged_scarbow: Weapon (Scarbow): stands 0.124 m BELOW the feet - sunk in the floor",
+    "w_ranged_seamstring: Weapon (Seamstring): stands 0.116 m BELOW the feet - sunk in the floor"
+   ],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 3.049,
+    "worst_pair": [
+     "Scarbow",
+     "Seamstring"
+    ],
+    "worst_peak_pct": 47.99,
+    "best": 10.344,
+    "best_pair": [
+     "Bearded Greataxe",
+     "Emberline Sword"
+    ],
+    "median": 7.647,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  },
+  {
+   "slot": "armour",
+   "view": "front",
+   "cells": [
+    {
+     "key": "a_padded_gambeson",
+     "name": "Padded Gambeson",
+     "slot": "armour",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 1,
+     "cut": "heavy",
+     "family": null,
+     "pieces": 5,
+     "tris": 1302,
+     "hidden": [],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.558,
+      "clip": [
+       7.083,
+       10.392
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.001,
+      -0.027,
+      0.682
+     ],
+     "fit": [
+      {
+       "part": "Armour_Cuirass",
+       "item": "Padded Gambeson",
+       "slot": "armour",
+       "verts": 667,
+       "inside_pct": 24.6,
+       "penetration_m": 0.0424,
+       "gap_m": 0.0001,
+       "min_z": 0.419
+      },
+      {
+       "part": "Armour_PauldronL",
+       "item": "Padded Gambeson",
+       "slot": "armour",
+       "verts": 200,
+       "inside_pct": 52.5,
+       "penetration_m": 0.0823,
+       "gap_m": 0.0002,
+       "min_z": 0.8522
+      },
+      {
+       "part": "Armour_PauldronR",
+       "item": "Padded Gambeson",
+       "slot": "armour",
+       "verts": 200,
+       "inside_pct": 51.0,
+       "penetration_m": 0.0794,
+       "gap_m": 0.0006,
+       "min_z": 0.8519
+      },
+      {
+       "part": "Armour_Tassets",
+       "item": "Padded Gambeson",
+       "slot": "armour",
+       "verts": 32,
+       "inside_pct": 68.8,
+       "penetration_m": 0.0556,
+       "gap_m": 0.0086,
+       "min_z": 0.1052
+      }
+     ],
+     "faults": [
+      "Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside"
+     ]
+    },
+    {
+     "key": "a_scarwoven_hauberk",
+     "name": "Scarwoven Hauberk",
+     "slot": "armour",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 5,
+     "cut": "heavy",
+     "family": null,
+     "pieces": 10,
+     "tris": 2140,
+     "hidden": [],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.558,
+      "clip": [
+       7.066,
+       10.418
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.0,
+      -0.026,
+      0.682
+     ],
+     "fit": [
+      {
+       "part": "Armour_Cuirass",
+       "item": "Scarwoven Hauberk",
+       "slot": "armour",
+       "verts": 787,
+       "inside_pct": 20.6,
+       "penetration_m": 0.0556,
+       "gap_m": 0.0001,
+       "min_z": 0.419
+      },
+      {
+       "part": "Armour_PauldronL",
+       "item": "Scarwoven Hauberk",
+       "slot": "armour",
+       "verts": 424,
+       "inside_pct": 46.5,
+       "penetration_m": 0.0848,
+       "gap_m": 0.0002,
+       "min_z": 0.7947
+      },
+      {
+       "part": "Armour_PauldronR",
+       "item": "Scarwoven Hauberk",
+       "slot": "armour",
+       "verts": 424,
+       "inside_pct": 46.0,
+       "penetration_m": 0.081,
+       "gap_m": 0.0006,
+       "min_z": 0.7906
+      },
+      {
+       "part": "Armour_Tassets",
+       "item": "Scarwoven Hauberk",
+       "slot": "armour",
+       "verts": 32,
+       "inside_pct": 68.8,
+       "penetration_m": 0.0556,
+       "gap_m": 0.0086,
+       "min_z": 0.1052
+      }
+     ],
+     "faults": [
+      "Armour_Cuirass (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 21% of it inside",
+      "Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside"
+     ]
+    },
+    {
+     "key": "a_ford_leathers",
+     "name": "Ford Leathers",
+     "slot": "armour",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 1,
+     "cut": "light",
+     "family": null,
+     "pieces": 3,
+     "tris": 915,
+     "hidden": [],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.087,
+      "clip": [
+       7.12,
+       10.416
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.0,
+      -0.018,
+      0.839
+     ],
+     "fit": [
+      {
+       "part": "Armour_Jerkin",
+       "item": "Ford Leathers",
+       "slot": "armour",
+       "verts": 722,
+       "inside_pct": 24.4,
+       "penetration_m": 0.0379,
+       "gap_m": 0.0005,
+       "min_z": 0.494
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "a_wyrmhide_coat",
+     "name": "Wyrmhide Coat",
+     "slot": "armour",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 4,
+     "cut": "light",
+     "family": null,
+     "pieces": 4,
+     "tris": 1235,
+     "hidden": [],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.09,
+      "clip": [
+       7.12,
+       10.416
+      ],
+      "item_only": true
+     },
+     "focus": [
+      0.0,
+      -0.018,
+      0.839
+     ],
+     "fit": [
+      {
+       "part": "Armour_Jerkin",
+       "item": "Wyrmhide Coat",
+       "slot": "armour",
+       "verts": 1007,
+       "inside_pct": 18.5,
+       "penetration_m": 0.0379,
+       "gap_m": 0.0,
+       "min_z": 0.494
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "a_reed_robe",
+     "name": "Reed-Cloth Robe",
+     "slot": "armour",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 1,
+     "cut": "robe",
+     "family": null,
+     "pieces": 4,
+     "tris": 1118,
+     "hidden": [],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.41,
+      "clip": [
+       7.073,
+       10.456
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.013,
+      0.022,
+      0.658
+     ],
+     "fit": [
+      {
+       "part": "Armour_SleeveL",
+       "item": "Reed-Cloth Robe",
+       "slot": "armour",
+       "verts": 24,
+       "inside_pct": 58.3,
+       "penetration_m": 0.0174,
+       "gap_m": 0.0082,
+       "min_z": 0.5673
+      },
+      {
+       "part": "Armour_SleeveR",
+       "item": "Reed-Cloth Robe",
+       "slot": "armour",
+       "verts": 24,
+       "inside_pct": 62.5,
+       "penetration_m": 0.0337,
+       "gap_m": 0.0011,
+       "min_z": 0.5696
+      },
+      {
+       "part": "Armour_Robe",
+       "item": "Reed-Cloth Robe",
+       "slot": "armour",
+       "verts": 473,
+       "inside_pct": 19.7,
+       "penetration_m": 0.0909,
+       "gap_m": 0.0001,
+       "min_z": 0.2232
+      }
+     ],
+     "faults": [
+      "Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside",
+      "Armour_Robe (Reed-Cloth Robe): CLIPS the body - 0.091 m deep, 20% of it inside"
+     ]
+    },
+    {
+     "key": "a_seamwoven_vestment",
+     "name": "Seamwoven Vestment",
+     "slot": "armour",
+     "cost": 0,
+     "stat": null,
+     "variant": null,
+     "tier": 5,
+     "cut": "robe",
+     "family": null,
+     "pieces": 7,
+     "tris": 1370,
+     "hidden": [],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.234,
+       12.542
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.41,
+      "clip": [
+       7.073,
+       10.456
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.013,
+      0.022,
+      0.654
+     ],
+     "fit": [
+      {
+       "part": "Armour_SleeveL",
+       "item": "Seamwoven Vestment",
+       "slot": "armour",
+       "verts": 66,
+       "inside_pct": 78.8,
+       "penetration_m": 0.0476,
+       "gap_m": 0.0004,
+       "min_z": 0.5673
+      },
+      {
+       "part": "Armour_SleeveR",
+       "item": "Seamwoven Vestment",
+       "slot": "armour",
+       "verts": 66,
+       "inside_pct": 72.7,
+       "penetration_m": 0.0429,
+       "gap_m": 0.001,
+       "min_z": 0.5696
+      },
+      {
+       "part": "Armour_Robe",
+       "item": "Seamwoven Vestment",
+       "slot": "armour",
+       "verts": 635,
+       "inside_pct": 20.3,
+       "penetration_m": 0.1177,
+       "gap_m": 0.0001,
+       "min_z": 0.1681
+      }
+     ],
+     "faults": [
+      "Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.048 m deep, 79% of it inside",
+      "Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside",
+      "Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.118 m deep, 20% of it inside"
+     ]
+    }
+   ],
+   "faults": [
+    "a_padded_gambeson: Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
+    "a_scarwoven_hauberk: Armour_Cuirass (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 21% of it inside",
+    "a_scarwoven_hauberk: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
+    "a_reed_robe: Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside",
+    "a_reed_robe: Armour_Robe (Reed-Cloth Robe): CLIPS the body - 0.091 m deep, 20% of it inside",
+    "a_seamwoven_vestment: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.048 m deep, 79% of it inside",
+    "a_seamwoven_vestment: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside",
+    "a_seamwoven_vestment: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.118 m deep, 20% of it inside"
+   ],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 19.647,
+    "worst_pair": [
+     "Ford Leathers",
+     "Wyrmhide Coat"
+    ],
+    "worst_peak_pct": 31.29,
+    "best": 36.743,
+    "best_pair": [
+     "Scarwoven Hauberk",
+     "Reed-Cloth Robe"
+    ],
+    "median": 35.173,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  }
+ ],
+ "blank": {
+  "files": 96,
+  "failures": []
+ },
+ "verdict": [
+  "ring    TOO SMALL ON STREAM  worst  0.00% median  0.00% of hero px   ",
+  "amulet  TELLS APART          worst  0.48% median  0.80% of hero px   ",
+  "cloak   TELLS APART          worst 25.85% median 30.70% of hero px   ",
+  "boots   TELLS APART          worst  3.19% median  4.08% of hero px   ",
+  "gloves  PARTLY TOO SMALL 6/15 worst  0.00% median  0.60% of hero px   ",
+  "hat     TELLS APART          worst 17.78% median 34.56% of hero px   ",
+  "weapon  TELLS APART          worst  3.05% median  7.65% of hero px   ",
+  "armour  TELLS APART          worst 19.65% median 35.17% of hero px   "
+ ],
+ "fit_faults": [
+  "tally_ring: Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.039 m deep, 66% of it inside",
+  "spurrier_ring: Acc_Ring (Spurrier's Ring): CLIPS the body - 0.038 m deep, 63% of it inside",
+  "scar_guard_ring: Acc_Ring (Ring of the Scar-guard): CLIPS the body - 0.038 m deep, 73% of it inside",
+  "chapman_amulet: Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 38% of it inside",
+  "hurdler_cloak: Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 40% of it inside",
+  "orchard_cloak: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.051 m deep, 27% of it inside",
+  "baker_mitts: Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
+  "baker_mitts: Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside",
+  "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
+  "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.045 m deep, 79% of it inside",
+  "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.068 m deep, 84% of it inside",
+  "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.068 m deep, 68% of it inside",
+  "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.041 m deep, 74% of it inside",
+  "quarreller_gloves: Acc_GloveR (Quarreller's Tabs): CLIPS the body - 0.036 m deep, 68% of it inside",
+  "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.053 m deep, 72% of it inside",
+  "straw_hat: Acc_Helm (Straw Hat): CLIPS the body - 0.316 m deep, 19% of it inside",
+  "beekeepers_veil: Acc_Helm (Beekeeper's Veil): CLIPS the body - 0.287 m deep, 14% of it inside",
+  "host_coif: Acc_Helm (Rattling Coif): CLIPS the body - 0.316 m deep, 18% of it inside",
+  "raiders_bane_helm: Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
+  "w_blade_emberline: Weapon (Emberline Sword): PASSES THROUGH the body by 0.130 m",
+  "w_open_coldfist_wraps: Weapon (Cold-White Wraps): PASSES THROUGH the body by 0.032 m",
+  "w_ranged_scarbow: Weapon (Scarbow): stands 0.124 m BELOW the feet - sunk in the floor",
+  "w_ranged_seamstring: Weapon (Seamstring): stands 0.116 m BELOW the feet - sunk in the floor",
+  "a_padded_gambeson: Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
+  "a_scarwoven_hauberk: Armour_Cuirass (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 21% of it inside",
+  "a_scarwoven_hauberk: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
+  "a_reed_robe: Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside",
+  "a_reed_robe: Armour_Robe (Reed-Cloth Robe): CLIPS the body - 0.091 m deep, 20% of it inside",
+  "a_seamwoven_vestment: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.048 m deep, 79% of it inside",
+  "a_seamwoven_vestment: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside",
+  "a_seamwoven_vestment: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.118 m deep, 20% of it inside"
+ ]
+}

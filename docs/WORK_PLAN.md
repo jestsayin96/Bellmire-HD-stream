@@ -86,17 +86,21 @@ one he never sees.
 ================================================================================
 ## *** TONIGHT'S ONLY JOB *** D94 - EVERY ITEM MUST LOOK LIKE ITSELF (Mr. E, 16 Nov 00:55)
 HUD, HUB and CONTENT lanes are SHUT DOWN for this. Only GAME BUILD, ART and the SUPERVISOR run.
+SHUTDOWN LIFTED BY MR. E, 2026-11-16 04:56. All three lanes are back on. Their STAND DOWN rows in
+TAKE THIS NEXT are gone and each has its real next item again. The line above is kept as the record
+of what he asked for at 00:55 - do not read it as current.
 Mr. E, verbatim: "this is unacceptable, unless they are a set example: metal armor chest, boots,
 helm, and gauntlets. ring should not at all be looking the same at all. change the gemstones, the
 colour, make them different, unique. that goes for all accessories. all equipment aka, the weapons
 and all the armour pieces should not be looking the same, again unless they are a set. fix this
 asap. shut everyone else down, this is the focus tonight."
 
-### D94 - THE DUPLICATES ARE CLOSED. STILL OPEN ON TWO THINGS ONLY (supervisor, 2026-11-16 02:58 CT)
-The remainder named at 02:05 came back from BOTH lanes and both halves are merged to main. The
-build bug is gone. As of 04:58 CT every BUILDABLE fault is closed and ticked. D94 is NOT ticked
-only because the two faults still standing are BOTH DECISIONS FOR MR. E - ring/glove size at
-stream distance, and the 16-deep legendary pool. No worker is queued on D94.
+### D94 - BOTH HIS DECISIONS ARE IN. ONE BUILDABLE HALF LEFT (supervisor, 2026-11-16 05:58 CT)
+Every BUILDABLE fault named on 15-16 Nov is closed and ticked, and MR. E ANSWERED THE TWO QUESTIONS
+THAT WERE HOLDING D94 OPEN at 04:56. RINGS ARE ACCEPTED AS THEY ARE. The legendary cap was never
+his, so the pool is no longer a decision - it is work, written up as C-61 below on the content lane.
+What is left of D94 is ONE buildable half: GLOVES MUST READ ON A BODY, because he says gloves can be
+seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves half and C-61 land.
 
   [x] DONE AND TICKED - THE ITEM'S OWN KEY NOW REACHES THE GEOMETRY (both halves, 16 Nov)
       ART (origin/art f349e0e): showcase.sig(key, name) returns twelve dials off the two things
@@ -120,11 +124,27 @@ stream distance, and the 16-deep legendary pool. No worker is queued on D94.
       Long Count Boots show. "Parish Iron Mace" is a mace (arcane gained a sceptre kind). The
       KayKit bow is held at x0.92 so a Greatbow reads large.
 
-  [ ] STILL OPEN - NEEDS MR. E, NOT A BUILDER: RING, AMULET AND GLOVES AT STREAM DISTANCE.
-      Measured again after the fix: ring 0.00% worst pair AND 0.00% median; gloves PARTLY TOO
-      SMALL, 11 of 15 pairs. The items ARE different objects now - a viewer simply cannot see a
-      ring on a body at stream size. The answer is a design call: an oversize "readable" ring and
-      glove, or accept that these are inventory items and not silhouettes. NO WORKER TAKES THIS.
+  [x] CLOSED BY MR. E - RINGS ARE ACCEPTED AS THEY ARE (2026-11-16 04:56)
+      Verbatim: "i understand the rings but gloves can be seen so we dont have to make new rings."
+      So there is NO oversize "readable" ring to build and nobody is queued on one. A ring is an
+      inventory item a viewer reads in the hub, not a silhouette on stream. The 0.00% measurement
+      stands and is no longer a fault. Amulets came back 0.52% worst / 0.97% median once the chain
+      landed and are not in question either. DO NOT reopen this. DO NOT re-measure rings.
+
+  [ ] STILL OPEN - GLOVES ONLY, AND IT IS A BUILDER'S JOB NOW (re-pointed 2026-11-16 05:58 CT)
+      Mr. E, same sentence: "gloves can be seen". The measurement agrees - gloves are PARTLY TOO
+      SMALL, 11 of 15 pairs, so eleven pairs do not read as two objects on a body at stream size.
+      This has stopped being a design call: he has ruled that gloves must be visible, so the
+      derivation that makes a glove must give it silhouette enough to tell apart - cuff depth,
+      knuckle plate, gauntlet flare riding COST the way the rest of D94 already does, name first and
+      hash only as a fallback.
+      OWNER: the ART lane owns the derivation and takes this first (shape family and the icon, so
+      the hub icon and the thing on the hand stay ONE object - that condition has held through every
+      D94 fix and must hold through this one). The GAME BUILD owns what gear.gd actually puts on the
+      hand and mirrors it, exactly as it did for the cloak shade step. Whoever moves first names the
+      other half rather than reaching into files it does not own.
+      FIT IS THE ACCEPTANCE TEST (Mr. E, 04:43): a row of SIX DIFFERENT gloves on real hero bodies
+      at stream distance, front, side and back. Rings are NOT part of this any more.
 
   [x] DONE AND TICKED - THE AMULET CHAIN SHOWS (game build, origin/laptop e7dccae, 16 Nov)
       The chain was two thin rods running straight up under the chin, so the head's overhang hid
@@ -160,13 +180,32 @@ stream distance, and the 16-deep legendary pool. No worker is queued on D94.
       gear.gd now HAS that shade step (see above) - closed 16 Nov 04:58 CT. Do not re-derive the
       dyes, do not re-run the art fix and do not re-shoot the cloak row.
 
-  [ ] STILL OPEN - NEEDS MR. E, NOT A BUILDER: THE LEGENDARY ACCESSORY POOL IS ONLY 16 DEEP.
-      Both lanes measured this independently and both hand it back, which is the right call: the 16
-      are 8 rings, 6 cloaks, 2 amulets, ZERO boots and ZERO gloves. ONE cost scale bands rarity for
-      every slot (441+ = legendary) while boots cap at 420 and gloves lower still, so those two
-      slots can never hold a legendary piece - which is why D95's showcase had to borrow very-rare
-      pieces. The two ways out are in NEEDS MR. E and both change what a viewer paid for, so neither
-      a builder nor the supervisor takes it. NO WORKER TAKES THIS.
+  [x] CLOSED AS A DECISION - THE CAP WAS NEVER HIS, SO THE FIX IS OURS (Mr. E, 2026-11-16 04:56)
+      Verbatim: "i never gave you a cap so you figure it out." The 441+ = legendary threshold was an
+      inference, not a ruling, so this stops being a question for him and becomes work. The
+      measurement that found it stands and is not to be re-derived: the legendary accessory pool is
+      16 deep - 8 rings, 6 cloaks, 2 amulets, ZERO boots, ZERO gloves - because ONE global cost
+      scale bands rarity for every slot while boots cap at 420 and gloves lower still. Written up as
+      C-61 directly below and given to the CONTENT lane.
+
+  [ ] C-61. RARITY IS BANDED PER SLOT, SO EVERY SLOT HAS A TOP BAND (content lane, data/items.json;
+      the GAME BUILD mirrors whatever reads rarity). Written 2026-11-16 05:58 CT on Mr. E's ruling
+      above - he told us to figure it out, so this is not an invented item under the freeze.
+      THE FAULT: one global cost scale decides rarity for every slot, so the two cheapest-topping
+      slots can NEVER hold a legendary piece at any price a viewer can reach. That is why D95's
+      legendary row had to borrow very-rare pieces.
+      THE FIX, AND THE REASONING, SO NOBODY RE-DERIVES IT: band each slot against ITS OWN cost
+      range - cost quantile inside the slot, the way the icon generator already derives ornateness -
+      so the top of every slot's range is legendary and the ladder reads the same in every slot.
+      This keeps C-55's six-rarity ladder exactly as it is, CHANGES NO EXISTING PRICE, and takes
+      nothing away from a viewer: it only stops two slots sitting permanently below the top band.
+      THE REJECTED ALTERNATIVE, and do not quietly do it instead: writing dearer boots and gloves.
+      That invents new prices for gear viewers have already paid for, and re-prices the shop.
+      DO NOT add a rarity, rename one, change a cost, or give one slot more bands than another.
+      ARTIFACT STAYS WHAT IT IS - found only, never stocked by a shop at any level (C-55).
+      DONE: every slot has at least one legendary entry; the per-slot band counts are printed and
+      recorded in the cycle write-up; the hub and the icons still colour off the same rarity key;
+      and the game build's reader agrees with the data - the slot's own band, never the global 441+.
 
 ### THE MEASURED FAULT - do not re-derive it
 gear.gd `dress_cosmetics()` renders a worn accessory from the SLOT ONLY, never from the item:
@@ -229,41 +268,66 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 04:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 05:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
-down the file."
+down the file." THERE ARE SIX LANES NOW: the CHAT BOT lane was created on Mr. E's word at 04:56
+and owns scripts/chatcmd.gd and data/commands.json exclusively, on branch `chatbot`.
 
-  GAME BUILD   ->  *** D91 STAGES 2-4. D94 IS OFF YOUR DESK. *** Your D94d landed: the cloak
-                   shade step is mirrored into gear.gd, verified 49/49 against the art lane's own
-                   table, merged and TICKED. Do NOT re-derive the dyes, re-shoot the cloak row,
-                   re-render D95 or re-measure D83. The walnut-black pair reading as near one
-                   object is NOTED under D94 and nobody is queued on it - a value step on black is
-                   invisible and the fix would belong in the shared table, which is Mr. E's call.
-                   What is left of D94 is both HIS, not yours: the ring/glove size at stream
-                   distance, and the legendary pool being 16 deep with zero boots and zero gloves.
-                   YOUR ITEM IS NOW D91 STAGES 2-4 - three-cell corridors, monsters into the
-                   avoidance, party in file. That is the WHOLE of Phase 1's remainder and the next
-                   phase-order item. Stage 1 (the shared Crowd helper, solid bushes, measured
-                   animal radii) is already in; build on it, do not rebuild it.
-  ART          ->  *** YOUR D94 HALF IS FINISHED - MINIBOSSES ARE NOW LIVE FOR YOU *** Both
-                   derivation faults you owned are closed: the proof sheet reports no DUPLICATE on
-                   any row, and the cloak dye plus your shade step give 49 distinct (colour, cut)
-                   pairs out of 49. Do not re-run either. The legendary pool is data, not a
-                   derivation - you measured it and handed it back correctly; it is with Mr. E.
-                   That leaves this lane GENUINELY DRY, and a dry art lane has Mr. E's standing
-                   permission to invent a MINIBOSS (no lore needed). Take one. Do not reach into
-                   another lane's files, do not re-render D95, and do not write new plan items.
-  HUD          ->  STAND DOWN. Mr. E shut this lane down for D94 (00:55) and only he lifts it.
-                   D94's build half landing does not lift it, and neither does this merge. L73's
-                   last step - the 30-minute capture in which a viewer can tell from the camera
-                   alone when something important happened - stays queued, then L74. Both wait.
-                   DO NOT rebuild the shot language. Do not reach into another lane's files to
-                   look busy. The lift is in NEEDS MR. E and has been since 02:58.
-  HUB          ->  STAND DOWN. Same shutdown, same rule. H29, H30 and H31 are shipped, merged
-                   and ticked, and the freeze forbids inventing more. Nothing is queued.
-  CONTENT      ->  STAND DOWN. Same shutdown, same rule. C-60 (phase2_words) is merged to main
-                   and was the last thing this lane owed. C2 stays standing and open by design
-                   for when the shutdown lifts.
+  GAME BUILD   ->  *** FINISH D91. IT IS HALF DELIVERED AND NOT TICKED. *** Your D91b landed and is
+                   merged: three-cell halls on a grown grid (290/290 rooms), the dungeon in the
+                   shared Crowd helper with a late settle, the party in file. D91_PLAN OK, D91_SOAK
+                   OK, gates green. IT IS NOT TICKED, and you owe the two things you named yourself:
+                   (a) the TOWN half - the wizard standing inside a bush is Mr. E's own screenshot
+                   and it is half of what he reported; (b) the 20-MINUTE RE-SOAK, because the soak
+                   that passed ran 619 s. Do NOT rebuild stages 1-4 and do not re-measure the halls.
+                   D91 is the WHOLE of Phase 1's remainder, so this finishes Phase 1.
+                   NOTED FOR LATER, NOT NOW: the fourteen minibosses need their bestiary.gd heights
+                   (h = authored + 1.30 m, table in docs/art/MINIBOSS_FIT.md) and Mr. E's
+                   wand_crystal.glb needs an attach - both after Phase 1, both yours.
+  ART          ->  *** D94 GLOVES. MR. E RULED AT 04:56 AND THIS IS THE LAST BUILDABLE HALF OF
+                   D94. *** Verbatim: "i understand the rings but gloves can be seen so we dont have
+                   to make new rings." RINGS ARE CLOSED - do not build an oversize ring and do not
+                   re-measure rings. GLOVES ARE NOT: 11 of 15 pairs are too small to tell apart on a
+                   body. Give the glove derivation real silhouette - cuff depth, knuckle plate,
+                   gauntlet flare riding COST, name first and hash as a fallback - and keep the hub
+                   icon and the thing on the hand ONE object, the condition that has held through
+                   every D94 fix. FIT IS THE TEST: six different gloves on real hero bodies, front,
+                   side and back. The game build mirrors gear.gd after you - name that half, do not
+                   reach into it. THEN, and only then: finish the miniboss REGISTER conversion you
+                   proved was needed (drillmaster_chibi is your own worked example, seven faults
+                   listed; the other thirteen wait on the head/register three). The +1.30 m heights
+                   are NOT yours - they are a bestiary.gd number.
+  CHAT BOT     ->  *** L68 - BELLMIREBRO MUST KNOW WHAT THE GAME HAS BECOME. *** You are a NEW lane
+                   (created 04:56 on Mr. E's word: "assign a worker for the desktop"). L68, L69, L70
+                   and L56 were marked "Owner: LAPTOP CODE" - a worker on the retired jestai laptop
+                   that was never rebuilt here, so they had an owner on paper and nobody to do them.
+                   They are yours. QUEUE: L68 -> L69 -> L70 -> L56. You own scripts/chatcmd.gd and
+                   data/commands.json EXCLUSIVELY on branch `chatbot`; the game build has given them
+                   up and keeps twitch_eventsub.gd. Touch nothing else. You share the Godot RUN_LOCK
+                   with three other lanes - read docs/RUN_LOCK.txt and claim it before you launch.
+                   Your PROGRESS.md cycles are B-prefixed.
+  CONTENT      ->  *** BACK ON - THE SHUTDOWN IS LIFTED (Mr. E, 04:56). YOUR ITEM IS C-61. ***
+                   Mr. E on the legendary cap: "i never gave you a cap so you figure it out." So the
+                   441+ threshold was never his ruling and the fix is ours. C-61: band rarity PER
+                   SLOT, against each slot's OWN cost range, so the top of every slot's range is
+                   legendary. Boots cap at 420 and gloves lower, so today those two slots can never
+                   hold a legendary piece - which is why D95's legendary row had to borrow very-rare
+                   pieces. It changes NO price and keeps C-55's six-rarity ladder exactly as it is.
+                   Do NOT instead write dearer boots and gloves - that re-prices gear viewers have
+                   already paid for. Full item and DONE test under D94's remainder, search "C-61".
+  HUD          ->  *** BACK ON - THE SHUTDOWN IS LIFTED (Mr. E, 04:56). *** Your STAND DOWN row is
+                   gone. L72 is ticked. L73 is HALF DELIVERED and still open: the shot language
+                   itself is in and L73_TEST passes, so DO NOT REBUILD IT - what is owed is the one
+                   capture it was specified with, a 30-minute run in which a viewer can tell FROM
+                   THE CAMERA ALONE when something important happened. Take that, then L74 (the feed
+                   and the theme under load, shots at all three scales during a raid).
+  HUB          ->  STAND DOWN - and this time it is not the shutdown. The shutdown is lifted, but
+                   H29, H30 and H31 are all shipped, merged and TICKED, the stale "queue is EMPTY"
+                   brief has been overtaken by the work actually landing, and the freeze forbids
+                   inventing more. Nothing is queued for this lane. If you want to be useful without
+                   writing a new item: re-verify the live-data version gate (KNOWN_V is at v4) still
+                   lights the Shop and Satchel tabs by themselves, and report what you find. Do not
+                   reach into another lane's files to look busy.
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
@@ -530,7 +594,42 @@ three silhouettes the pictures overruled before it shipped - that is the bar wor
 THE GAME-BUILD HALF IS STILL NOT DONE FOR ANY OF THE EIGHT: the art lane never runs Godot, so
 none is wired into dungeon_hd.gd's "miniboss" set-piece weight and none has been seen in a fight.
 That wiring belongs to the game build, after Phase 1.
-THEMES STILL WITHOUT ONE: only the biome themes (wood, grassland, flooded).
+THIRD SET - SIX MORE, AND EVERY THEME IS NOW COVERED (supervisor, 2026-11-16 05:58 CT; art 92e62f7,
+merged to main): the six themes dungeon_hd.gd's weight table does not name - flooded, grassland,
+wood, firepit, fogbound, confection - fell through to the default row, which put an ordinary
+creature with doubled hit points in the slot. Fourteen themes now have fourteen minibosses, none
+room-locked in a three-cell corridor; the Sluicekeeper raises the water. Write-ups in
+docs/art/MINIBOSSES.md, bodies in assets/monsters/minibosses/. THEMES STILL WITHOUT ONE: none.
+
+AND THE ART LANE THEN PROVED ITS OWN FOURTEEN DO NOT FIT (art 4118f99, merged to main; write-up
+docs/art/MINIBOSS_FIT.md). It applied Mr. E's own acceptance test to a creature for the first time -
+how big does it read standing next to a hero - by rendering all fourteen beside a real KayKit
+adventurer at one ortho scale on one ground line (renders/art/minibosses/_hero_scale.png). TWO
+FAULTS, and this is the bar working rather than a regression:
+  1. SCALE - THE GAME BUILD'S TO TYPE IN. A hero is 2.45 m, not the 1.30 m gear.gd measures, which
+     is the TORSO mesh; heroes are never normalised (townsfolk.gd size_k=1.0) while monsters are
+     (bestiary.gd h). Authored at 2.00-2.70 m, TEN OF THE FOURTEEN STAND SHORTER THAN THE PARTY,
+     0.82-1.10x. A set piece the heroes look down on is not a set piece. It costs NO geometry: the
+     recommendation is h = authored + 1.30 m, table in the doc, order and spacing preserved, all
+     still corridor-safe. A bestiary.gd number - it goes with the rest of the miniboss wiring.
+  2. PROPORTION / REGISTER - THE ART LANE'S. The men inside are seven-head realistic figures with
+     0.10 m limbs and read as pipe-cleaner men beside a chibi knight. drillmaster_chibi is the
+     worked example - same creature, same idea, the game's own proportions - with a four-cell sheet
+     changing one thing per cell. Seven remaining faults on it are listed honestly in the doc, and
+     the other thirteen are NOT converted until the head/register three are solved. QUEUED for the
+     art lane AFTER the D94 gloves half.
+THE GAME-BUILD HALF IS STILL NOT DONE FOR ANY OF THE FOURTEEN: none is wired into dungeon_hd.gd's
+"miniboss" set-piece weight and none has been seen in a fight. That wiring, plus the +1.30 m
+heights, belongs to the game build after Phase 1.
+
+MR. E'S WAND IS IN THE REPO AND NOT YET FITTED (art d9a6a3d, merged to main): he dropped a
+crystal-headed wand at 05:03 and the art lane made it game-weight - 306,024 tris and 24 MB with two
+4096 maps down to 8,000 tris and 2.38 MB with three 1024 maps, origin moved to the base of the grip
+so it hangs off a hand bone - looked at before and after, logged in docs/art/ASSET_SOURCES.md, and
+committed as assets/gear/wand_crystal.glb. It has NEVER been rendered on a body, so by the fit rule
+it is NOT finished. The attach and the gear.gd entry are the GAME BUILD's. One question for him is
+in NEEDS MR. E: at 0.921 long it reads as a short staff rather than a wand, and nobody rescales his
+own asset without him saying which he meant.
 
 GOOD IDEAS ARE NOT WORK: under the freeze, minibosses are a PERMISSION, not a queue. The art lane
 takes its queued item first and builds a miniboss when that lane is otherwise dry - which it has
@@ -806,6 +905,15 @@ neighbours before and after, in renders/cycles/d92/.
 - [ ] D91. THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      D91 STAGES 2-4 HALF DELIVERED / STILL OPEN (supervisor, 2026-11-16 05:58 CT; laptop 47c1747,
+      merged to main, DELIBERATELY NOT TICKED). THE DUNGEON HALF IS IN: three-cell halls on a grown
+      grid (290/290 rooms), the dungeon's bodies into the SHARED Crowd helper with a late settle, and
+      the party moving IN FILE down a corridor. D91_PLAN OK, D91_SOAK OK (619 s, 0 overlap frames),
+      gates green, four hall shots in renders/cycles/d91/.
+      STILL OWED BY THIS LANE, IN ITS OWN WORDS: (a) the TOWN half - the wizard standing inside a
+      bush is Mr. E's actual screenshot and it is half of what he reported; and (b) the 20-MINUTE
+      RE-SOAK - the soak that passed ran 619 s, not twenty minutes. Do NOT rebuild stages 1-4 and do
+      not re-measure the halls. Finish those two and D91 gets ticked.
 
 ### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
 
@@ -5252,31 +5360,14 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
 ================================================================================
-## NEEDS MR. E (supervisor, updated 2026-11-16 03:58 CT). Seven things, all short.
+## NEEDS MR. E (supervisor, updated 2026-11-16 05:58 CT). Four things, all short.
+  Your 04:56 answers closed three that were sitting here - the ring/glove call, the D94
+  shutdown, and the legendary cap. Rings are accepted, the three lanes are back on, and the
+  cap is now C-61 on the content lane. Nothing below is a repeat of those.
   0. THE D95 SHEETS ARE WAITING - this is the one you asked for by 09:00 and it is in early.
      renders/art/d95/_overview.png (all ten, front) and _sheet_<key>.png (four views each), plus
      the same ten inside the engine at renders/cycles/d95/sheet_overview_front.png. Both halves
      end in an honest fault list, as you asked. Your eye is the bar.
-  0b. RINGS, AMULETS AND GLOVES CANNOT BE TOLD APART AT STREAM DISTANCE - measured again after
-     the fix, not guessed (rings: 0.00% of the hero's pixels change between six different rings;
-     gloves: 11 of 15 pairs). They ARE different objects now; they are just too small to see on a
-     body. A design call, not a bug: do you want an oversize "readable" ring and glove on the
-     hand, or do they stay inventory items never meant to read at delve distance? This is the
-     only thing in D94 no builder can take.
-  0c. THE D94 SHUTDOWN - DO YOU LIFT IT? You shut HUD, HUB and CONTENT down at 00:55 for D94.
-     The build bug is now fixed and ticked on both sides; what is left of D94 is your ring call
-     above, one small mirror the game build lane already owns, and the pool question below. Those
-     three lanes are standing down and will keep standing down until you say otherwise. One word
-     either way.
-  0d. BOOTS AND GLOVES CAN NEVER BE LEGENDARY - WHICH WAY DO YOU WANT IT? Measured twice, by both
-     lanes separately. The legendary accessory pool is 16 deep: 8 rings, 6 cloaks, 2 amulets, and
-     no boots and no gloves at all. One cost scale decides rarity for every slot (441+ =
-     legendary), but boots top out at 420 and gloves lower, so those two slots are shut out of the
-     band - which is why D95's showcase had to borrow very-rare pieces to fill its legendary row.
-     Two ways out, and both change what a viewer paid for, so neither is ours to pick: (a) band
-     rarity PER SLOT, by cost quantile inside the slot, the way ornateness already works - nothing
-     gets dearer, but a 420 boot starts reading as legendary; or (b) leave the band alone and write
-     dearer boots and gloves, which is items.json and needs the content lane lifted. Your call.
   1. YOUR EYE ON THE LORD REVEAL (L72, shipped). renders/cycles/20261116_l72/sheet_reveal_mourncoil.png
      - the camera eases out as Mourncoil rises instead of cutting. Does the reveal land? The
      measurement says all eight lords are framed whole with the camera out of the walls; only you
@@ -5287,3 +5378,10 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   3. H30 ASSUMED TWO CHAT COMMANDS, !withdraw and !stone, because D81 is not built yet. If those
      are not the names you want, say so now - they are cheap to change today and expensive once
      viewers have learned them.
+  4. THE WAND YOU SENT AT 05:03 - IS IT A WAND OR A SHORT STAFF? It is in the repo and made
+     game-weight (24 MB and 306k tris down to 2.38 MB and 8k tris; the facets, silver collar and
+     shaft taper all survive). But it measures 0.921 long, which on a 2.45 m hero reads as a short
+     staff rather than something held in one hand, and nobody rescales YOUR asset without you
+     saying which you meant. One word - wand (shorten it) or staff (leave it) - and the game build
+     puts it in a hand. It has not been rendered on a body yet, so by your own fit rule it is not
+     finished either way.

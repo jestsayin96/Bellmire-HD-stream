@@ -942,6 +942,44 @@ static func cloak_dye_i(key: String, name: String) -> int:
             return int(e[1])
     return (d94_hash(key) >> 8) % D94_CLOAK_DYES.size()
 
+## D94d - THE SHADE STEP (mirrors tools/art/icons.py register_cloaks / cloth_tone, bit for bit).
+## The dye alone left fifteen cloaks sharing BOTH a dye and a cut (six woad mantles - every watch
+## and wall cloak). The answer is not to scatter the dyes; it is a lighter or darker bolt of the
+## same dye, assigned by POSITION IN THE COLLIDING GROUP so it cannot collide by construction:
+##   group   = every cloak sharing (dye_i, variant), keys sorted as plain strings
+##   shade_i = the key's index in that group, capped at 7; 0 leaves the dye alone
+##   cloth   = clamp(dye * D94_CLOAK_SHADES[shade_i], 0.02, 0.95) per channel, in LINEAR (then _lin)
+## cloth_i stays the dye index - the shade is a value step, never a new hue.
+const D94_CLOAK_SHADES := [1.00, 0.72, 1.34, 0.56, 1.62, 0.88, 1.16, 0.44]
+static var _cloak_shade := {}
+static func cloak_shade_i(key: String) -> int:
+    if _cloak_shade.is_empty():
+        var all: Dictionary = Roster.items().get("accessories", {})
+        var keys: Array = all.keys()
+        keys.sort()
+        var groups := {}
+        for k in keys:
+            var e = all[k]
+            if not (e is Dictionary) or String(e.get("slot", "")) != "cloak":
+                continue
+            var nm := String(e.get("name", ""))
+            var sig := "%d|%d" % [cloak_dye_i(String(k), nm), _acc_variant("cloak", String(k), nm)]
+            var n := int(groups.get(sig, 0))
+            _cloak_shade[String(k)] = mini(n, D94_CLOAK_SHADES.size() - 1)
+            groups[sig] = n + 1
+    return int(_cloak_shade.get(key, 0))
+
+## the item's own name first; its hash only when the name says nothing (icons.variant_for)
+static func _acc_variant(slot: String, key: String, name: String) -> int:
+    var variant := d94_hash(key) % 5
+    var hay := (name + " " + key).to_lower()
+    var hints: Dictionary = D94_NAME_HINTS.get(slot, {})
+    for word in hints:
+        if hay.contains(word):
+            variant = int(hints[word])
+            break
+    return variant
+
 static var _acc_span := {}          # slot -> [lo, hi] cost over the accessories
 
 ## icongen.context()'s hash, bit for bit
@@ -1011,19 +1049,15 @@ static func _acc_base(key: String) -> Dictionary:
         if it.has(s):
             stat = s
             break
-    var variant := h % 5
-    var hay := (String(it.get("name", "")) + " " + key).to_lower()
-    var hints: Dictionary = D94_NAME_HINTS.get(slot, {})
-    for word in hints:
-        if hay.contains(word):
-            variant = int(hints[word])
-            break
+    var variant := _acc_variant(slot, key, String(it.get("name", "")))
     var mi := mini(3, int(orn * 4.0))
     var ti := (h >> 8) % D94_TONES.size()
     var cloth: Color = D94_TONES[ti]
     if slot == "cloak":                        # D94c: a cloak wears a dye, not a leather tone
         ti = cloak_dye_i(key, String(it.get("name", "")))
-        cloth = D94_CLOAK_DYES[ti]
+        var dye: Color = D94_CLOAK_DYES[ti]
+        var k := float(D94_CLOAK_SHADES[cloak_shade_i(key)])    # D94d: the shade step
+        cloth = Color(clampf(dye.r * k, 0.02, 0.95), clampf(dye.g * k, 0.02, 0.95), clampf(dye.b * k, 0.02, 0.95))
     return {"slot": slot, "variant": variant, "orn": orn, "stat": stat,
             "metal": _lin(D94_METALS[mi]), "metal_i": mi,
             "cloth": _lin(cloth), "cloth_i": ti,

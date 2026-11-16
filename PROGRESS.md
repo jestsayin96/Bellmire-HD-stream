@@ -6070,3 +6070,27 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
   (its renders need a window - run headless here only for the signature check).
 - GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1510, MON_INPROP 0 of 126; _twitch_parse TWITCH_PARSE OK;
   _townwalk in_solid 0/20823 PASS; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
+
+
+## D-cycle D94d - the cloak SHADE STEP mirrored into gear.gd, icon and hero one object again (game build, 2026-11-16 ~04:08-04:25 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> "ONE SMALL MIRROR, THEN D91"). NOT ticked. D95 not re-rendered,
+  D83 and the legendary pool not touched, ring/glove size left with Mr. E.
+- gear.gd: D94_CLOAK_SHADES (1.00, 0.72, 1.34, 0.56, 1.62, 0.88, 1.16, 0.44) and cloak_shade_i(key), ported bit for
+  bit from tools/art/icons.py register_cloaks/cloth_tone: group = cloaks sharing (dye_i, variant), keys sorted as
+  plain strings, shade_i = index in the group capped at 7; cloth = clamp(dye * shade, 0.02, 0.95) in LINEAR, then
+  _lin(). cloth_i stays the dye index (a value step, never a new hue), so acc_form's signature is unchanged. The
+  variant derivation moved into _acc_variant() so _acc_base and the shade table share one copy.
+- PROOF: tools/_d94d_shade.gd. renders/cycles/d94d/expected_cloaks.json is written by the ART LANE'S OWN CODE
+  (icons.py imported under stubbed bpy/mathutils, register_cloaks + cloth_tone over data/items.json). Godot matches
+  it for all 49 cloaks - dye, variant, shade and cloth to 1e-4. D94D cloaks 49, 15 shaded, 49 distinct (dye, cut,
+  shade). D94D OK (10 shots, 0 failures).
+- LOOKED AT: 0_woad_mantles_back.png - the six watch/wall mantles are now six bolts of woad, light to dark;
+  1_green_furs_back.png - three greens, plainly three; 3_pairs_b_back.png - Red Harl / Raider, Hedgeward / Tiler
+  each a clear value step apart.
+- HONEST FAULT, NOT MINE TO CHANGE ALONE: the walnut-black pair (Gravewyrm Hide / Sexton's Black) is still near one
+  object - 0.035 linear * 0.72 is a step nobody sees on a black. It is the shared rule's table (art owns it; the
+  game mirrors it exactly), so the fix belongs in icons.py first: e.g. a black group steps UP only (1.62, 2.4) or
+  takes a lighter base. Flagged for the supervisor/art lane.
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1752, MON_INPROP 0 of 208; _twitch_parse TWITCH_PARSE OK;
+  _townwalk in_solid 5/15840 (0.032%) raid 0 PASS, stuck_on_route 0; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
+- NEXT: D91 stages 2-4.

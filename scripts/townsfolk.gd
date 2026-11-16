@@ -568,7 +568,7 @@ func _maybe_gather() -> bool:
             return false
         inside = false
         visible = true
-        global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
+        global_position = town.call("door_emerge", _door_out, self)    # D91d: not all on one spot
     # D63.3: each body comes to the festival to DO something - dance near the
     # middle, drink and toast on the edge, haggle at a stall, or watch and cheer
     _fest_act = _pick_fest_act()
@@ -653,7 +653,7 @@ func _maybe_errand() -> bool:
     if inside:
         inside = false
         visible = true
-        global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
+        global_position = town.call("door_emerge", _door_out, self)    # D91d: not all on one spot
     # already there (work or home by the square/tavern): count it done, no trip
     if Vector2(centre.x - global_position.x, centre.z - global_position.z).length() < 8.0:
         if dest_key == "market":
@@ -1024,7 +1024,7 @@ func _physics_process(delta: float) -> void:
                 inside = false
                 visible = true
                 if _door_out != Vector3.ZERO:
-                    global_position = Vector3(_door_out.x, float(town.call("height_at", _door_out.x, _door_out.z)), _door_out.z)
+                    global_position = town.call("door_emerge", _door_out, self)    # D91d: not all on one spot
             var dest: Vector3 = _next_trip()
             # D44b: a generated stop point can sit inside a footprint in the
             # dense south-market overlap (the (52,-88.6) hotspot) - route to the

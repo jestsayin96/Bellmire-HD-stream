@@ -455,3 +455,125 @@ stays **four**, because four risings is the fight.
 
 Ten creatures still to convert. The Scrapwright and the Bellman remain the recorded skip -
 a machine and a shroud, neither with man-proportions.
+
+
+## REGISTER CONVERSION 6 OF 14 - THE PORTER (`porter_chibi`)
+
+Sheet: `renders/art/minibosses/_porter_register.png` (original left, chibi right, a real
+2.45 m posed KayKit Knight beside each), plus
+`renders/art/minibosses/porter_chibi/hero_front|side|back.png`. All looked at, every pass -
+six passes, six renders. Ratio 0.94, pair 5.52 m, fits the fixed frame, blank check 2 files
+0 failures, engine BLENDER_EEVEE. CORRIDOR-SAFE - the bar runs 3.66 m tip to tip after
+normalisation and the whole footprint is under 3.7 m, well inside the 11.0 m three-cell span.
+It is the WIDEST of the fourteen and the only one where that is worth saying out loud.
+
+### WHAT THE ORIGINAL ACTUALLY READS AS
+
+Looked at before anything was changed: **a man standing in a wardrobe holding three separate
+planks.** Measured off the builder, against a hero arm 0.29 thick and a hero head 1.09
+across - legs 0.115/0.092, arms 0.090/0.068, torso 0.270/0.280 the one bold member, head a
+0.155 sphere (0.31 across, a FIFTH of the hero's), drawbar 0.19 square and built out of five
+separate boxes. Four faults fall out of that:
+
+1. **Every member except the torso is a wire.** Third conversion running; it is the register.
+2. **The widest horizontal in the dungeon is not a horizontal.** The original raked the bar
+   by building it from a centre box plus two offset end boxes plus two detached shoes, each
+   nudged in y and z. On the sheet those read as THREE SEPARATE PLANKS with iron rubble
+   floating off the left end. The rake was meant to stop either end hiding; what it did was
+   break the one member the creature is named for. **A bar is ONE PIECE.**
+3. **The leaf is a sentry box.** Square-on behind a man of the same width it stops being a
+   door he carries and becomes a cabinet he stands in - and from the SIDE the same slab is
+   edge-on, a plank, and the mechanic is gone from that view entirely.
+4. **The back of the leaf is bare** - every band and boss on the front face only. That is the
+   Gaoler's fault 5 and the Stoker's fault 2, and this is the conversion that stops carrying it.
+
+### AND THE CARRIED FAULT, TAKEN HERE BECAUSE 6 OF 14 HAS A HEAD
+
+The supervisor's 13:58 instruction: the Gaoler's faceplate reading as an ANGRY CARTOON MASK
+has travelled three conversions, fix it where there is a head. The Porter had the same plate
+in miniature - a pale `bone` slab on a dark helm, a dark slot across it, two glowing eyes
+behind - and at pane distance it is a TOY ROBOT. The diagnosis is not brightness, it is
+**count and value**:
+
+- **TWO apertures read as EYES however they are shaped. ONE reads as a SLIT.**
+- **A PALE plate on a dark head is a FACE. A DARK plate is a DOOR.**
+
+So the Porter's helm is dark iron end to end, with one unbroken sight slit under a brow
+shelf and no eyes at all - "a door has no face either" is the original's own line and this is
+it kept. The pale value the three-value stack wants does not vanish, it MOVES TO THE OAK: the
+bar is the palest thing on the creature, which is also the mechanic, so the brightest member
+and the dangerous one are now the same object. Nothing vertical crosses the slit; a helm
+reinforce down the middle would cut it in two and hand the face straight back.
+
+### SIX PASSES, ONE CHANGE AND ONE RENDER EACH
+
+1. Build: every wire to a chibi weight (legs 0.150, arms 0.150/0.125, torso 0.38, head 0.80
+   across), the leaf YAWED 22 degrees in plan so it reads broad from the side and narrow from
+   the front, the bands and bosses wrapped onto both faces, the bar rebuilt as one member,
+   and the helm turned into a door.
+2. **HE WAS STILL STANDING IN IT.** The yaw fixed the side, but a 2.16 m leaf anchored at
+   chest height still runs above the helm, so from the front the head was a dark lump inside
+   the door's outline and from the back he was gone altogether. A man does not carry a door
+   over his head: the leaf is slung LOW, standing on its own bottom edge behind his heels,
+   and the helm clears the top of it - which is also the only way a deliberately dark helm
+   gets a silhouette at all.
+3. **THE BAR CAME APART AT BOTH ENDS AGAIN, and the frame proved it in numbers.** The iron
+   shoe's taper was seated 0.10 OUTSIDE the end of the oak - the original's exact fault
+   rebuilt by accident, visible on the back sheet as a wedge floating clear. And dropping the
+   leaf made the helm the tallest thing, so the normaliser scaled the creature up by a
+   quarter and a 3.24 m bar came out 4.05 m: the pair burst the fixed frame at 6.69 m against
+   5.60. Cone seated ON the end point, bar authored at 2.48.
+4. **THE ONE SLIT CAME OUT AS TWO EYES, AND I DID NOT DECIDE THAT - THE GEOMETRY DID.** The
+   head crop of pass 3 shows two bright rectangles with a dark gap between them: a face, the
+   exact read this conversion exists to kill. Cause, measured: the dome was 0.42 deep in y
+   and bellied to -0.54 while the plate's face sat at -0.51, so the dome covered the MIDDLE
+   of the slit and left its two ends showing. **The lesson is general: one aperture becomes
+   two whenever anything round stands in front of its centre. It has to be measured against
+   everything forward of it, not declared.** Dome shallowed to 0.30, slit 0.04 proud of the
+   plate, brow shelf the only thing in front of it and above it.
+5. **THE BAR WAS CARRIED ACROSS HIS OWN FACE.** At a mid height of 1.23 the near end stood
+   above the shoulder and the oak ran under the chin and through the slit's line, so the two
+   loudest things on the creature - the mechanic and the one lit aperture - fought each other
+   at pane distance. Dropped to chest height, rake halved. A drawbar is carried at the height
+   of the brackets it goes into, which is where the belt sockets already are.
+6. **FROM THE SIDE THE BAR WAS A POINT.** Square across the body, the side camera sees 2.48 m
+   of oak end-on: three boxes stacked at the lens, reading as a chimney, and the member the
+   creature is named for contributed nothing to a third of its views. Same fix as the leaf
+   got in pass 1 - 16 degrees of plan yaw, 4% of the front width spent, 0.72 m of visible
+   length bought.
+
+### THIRTEEN FAULTS I CAN STILL SEE
+
+1. **The arms do not read from the front.** Between the shoulder and the bar there is no
+   visible limb, so the two fists appear to sit ON the oak with nothing joining them to him.
+   The worst remaining front fault and the one I would take next.
+2. **The torso is almost entirely hidden** between the helm and the bar - the man is a helm,
+   two shoulder lumps, a bar and a pair of boots.
+3. **The grips read as crates hung on the bar**, not as closed fists: a 0.21 x 0.32 dark box
+   at that distance is cargo.
+4. **The leaf's front bands cross his hips** as three horizontal stripes, so from the front
+   he reads as wearing a ladder.
+5. **From the SIDE the bar is a battering ram** - it points at the lens at chest height and
+   the man reads as standing behind a weapon rather than carrying a bar. The yaw bought
+   length; it did not buy a held read.
+6. **From the SIDE the helm is a featureless dark egg.** The slit is a front-only feature, so
+   the head has nothing at azimuth 90 - the inverse of the Gaoler's fault, and arguably the
+   price of killing the face.
+7. **From the SIDE the whole figure is a pile of boxes** - nothing separates torso from leaf
+   from bar in value. The Stoker's fault 6 and the Gaoler's fault 7, carried.
+8. **The leaf reads as a banded packing crate, not a door.** Bands and bosses on both faces
+   and hinge straps on both edges is not how a door is built: a door hinges on ONE edge and
+   has a lock plate on the other, and this one has neither.
+9. **From the BACK the man is still mostly gone** - a dark dome above a crate. Better than
+   the original, where he was gone completely, but not fixed.
+10. **The slit is a flat glow plate with no depth** - at crop scale it reads as a sticker
+    rather than light standing in a gap. There is no recess behind it.
+11. **The brow shelf floats** above the slit as a separate band instead of overhanging it.
+12. **The boots and the leaf's bottom rail merge** into one dark mass at the floor from the
+    front.
+13. Ratio **0.94** - the Porter is still SHORTER than a viewer's hero, which for a creature
+    whose whole idea is that it closes the room is the wrong way round. That is `bestiary.gd`'s
+    `h`, not mine; same note as the Snuffer's 1.06 and the Sexton's 1.00.
+
+Eight creatures still to convert, two of them the recorded skip - the Scrapwright and the
+Bellman, a machine and a shroud, neither with man-proportions.

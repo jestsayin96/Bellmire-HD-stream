@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend below with the guild's coin and the guild's warning.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 hollowed slime, 1 slime.
+FEED Dust on everything but the handles.
+FEED JestFan rolls a 20 for initiative and is moving before anything else.
+FEED MossyMage rolls a 20 for initiative and is moving before anything else.
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Bolt at giant rat.
+FEED DawnCleric asks for smite. The scar is not taking requests (1 vs DC 10).
+T10s floor=1 state=fight foes=2 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED MossyMage asks for bolt. The scar is not taking requests (7 vs DC 10).
+FEED The hollowed slime divides.
+FEED DawnCleric casts Smite at hollowed slimeling.
+FEED MossyMage casts Chain Bolt at slime.
+FEED MossyMage searches (Investigation 15) and turns up 12 gold on floor 1.
+FEED Cleared, and the floor below heard every bit of it.
+FEED MossyMage finds a vial of The Baker's Pennyworth.
+T20s floor=1 state=search foes=0 ["JestFan 78/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED MossyMage spots a blade trap (Perception 18 vs DC 10) and steps round it.
+T30s floor=1 state=search foes=0 ["JestFan 78/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+T40s floor=1 state=search foes=0 ["JestFan 78/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T50s floor=1 state=descend foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+T60s floor=1 state=descend foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+T70s floor=1 state=descend foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+T80s floor=1 state=descend foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 puglin, 1 slime, 1 skeleton minion.
+FEED The oil is running low.
+T90s floor=2 state=fight foes=4 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED DawnCleric casts Smite at puglin.
+T100s floor=2 state=fight foes=4 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED MossyMage casts Bolt at skeleton minion.
+FEED DawnCleric casts Smite at slime.
+FEED The slime divides.
+FEED MossyMage's bolt slips the words - wild magic (8 vs DC 11).
+T110s floor=2 state=fight foes=1 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED DawnCleric casts Smite at bog frog.
+T120s floor=2 state=fight foes=1 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED DawnCleric's smite fizzles into a belch of ash (1 vs DC 11).
+FEED MossyMage searches (Investigation 24) and turns up 29 gold on floor 2.
+FEED Floor 2 holds its peace for now. Take it.
+FEED MossyMage finds a vial of Stillblood Tincture.
+T130s floor=2 state=search foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+T140s floor=2 state=search foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+FEED MossyMage searches the chest - ...no loot... (Investigation 10 vs DC 11).
+T150s floor=2 state=search foes=0 ["JestFan 83/83", "MossyMage 68/68", "DawnCleric 81/81", "BigAxe 114/114"]
+
+RC=0

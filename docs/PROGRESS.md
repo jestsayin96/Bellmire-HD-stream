@@ -2,6 +2,43 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D94b the item's own key reaches the GEOMETRY, plus four fit-report fixes, 2026-11-16 02:30 (game build)
+- Item: D94 REMAINDER (TAKE THIS NEXT, game build row). Not ticked - supervisor ticks.
+- THE DUPLICATES, game side (scripts/gear.gd). Measured first: in gear.gd's own derivation 30
+  groups of accessories (24 pairs, 6 trios) shared slot+variant+metal+stat+cloth, i.e. were ONE
+  object - Hurdler's = Osier-cutter's Cloak among them. The art lane's Gatehouse Whistle /
+  Brewster's and Baker's / Millhand's pairs already differed in-game (gem colour, cloth), and
+  Straw Hat / Miller's Cap have separate hand-built cases in _hat(); those three are art-side only.
+- THE FIX - a FORM index, and THE SHARED RULE THE ART LANE MUST MATCH (tools/art/gearmodels.py,
+  showcase.py), written at Gear.acc_form():
+      sig  = slot | variant | metal_i | stat | cloth_i   (cloth_i = -1 for ring and amulet)
+      form = index of the item key inside its sig group, keys sorted as plain strings (0,1,2)
+  form > 0 changes GEOMETRY: ring 1 broad second band / 2 three palm-side stones; amulet 1 a
+  second stone on a link below / 2 a metal halo; gloves 1 flared metal cuff / 2 knuckle plate;
+  boots 1 buckled instep strap / 2 turned-down light cuff; cloak 1 pale hem band across the back
+  / 2 metal shoulder rondels. 36 of 254 accessories carry a form > 0.
+- WEAPONS: siblings (same tier, family, effective kind - a piece with no kind word now counts as
+  the hero's kind, which un-hid two duplicates: Coldbrand=Ashdrake, Gutterlord=Emberhaft) are
+  numbered in key order -> look.form. New Gear.deco_piece() builds furniture measured off the
+  instanced mesh's own bounds: a grip wrap in the piece's tone, form 1 pennons off the far end
+  (colour from the key, never the piece's own tint), 2 a lit stone at the head, 3 two collars,
+  4 pennons + stone. Wired in hero_body.gd (and _d95_fit.gd). Scarbow (plain) vs Seamstring
+  (pennons) now differ on the body. SAME RULE for the art lane: form = sorted-key index among
+  siblings of (family, tier, kind); the art's weapon() must stop keying on family + tier.
+- FIT-REPORT CHEAP WINS: boots are no longer boxes (accessory and armour boots: flattened capsule
+  foot + rounded sole); BOUGHT boots now replace the armour's set boots (Long Count Boots show
+  on the paladin; pauldrons/helm/bracers stay); "Parish Iron Mace" is a mace - new arcane kind
+  `sceptre` (noun "mace", hammer meshes; !forge sceptre now offered to casters); the KayKit bow
+  is held at x0.92 not x0.62.
+- NOT DONE here: ring/amulet/gloves at stream distance (Mr. E's design call - gloves on the
+  knight body are still invisible in the close render); amulet chain under the head overhang;
+  legendary pool depth (data, content lane).
+- TEST tools/_d94b_pairs.gd -> renders/cycles/d94b/ (13 shots, LOOKED AT: amulet trio halo /
+  drop / plain; cloak pair hem band from behind; rounded boots, strap on the form-1 pair; paladin
+  in cloth Long Count Boots beside one in plate boots; bows with/without pennons; cleric holding
+  a mace). Numbers: 254 accessories 0 duplicate signatures, 86 weapons 0 duplicates, mace kind =
+  sceptre, paladin boots swap correct -> D94B OK.
+
 ## C-cycle - C-47 forge, town_life, wandering lord, E3PO tier-up variants, 2026-11-15 (content)
 - Item: standing backlog (every numbered item already had a cycle; this widens the lines that still repeat most). WORK_PLAN C1-C3 are long delivered; supervisor ticks.
 - data/lore_lines.json only, additive, +140 lines: forge_alt +10 per tier (50; tiers 1-5, now 16 each); town_life crier/market/growth +12 each (36); events.wandering_boss appears_alt/while_alt/cleared_alt +6 each (18; no lord named, canon lords only); NEW key e3po.tier_up_alt (3 Commander lines per growth tier, keyed by exact tier NAME, 36).

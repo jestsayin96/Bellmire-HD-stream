@@ -615,6 +615,7 @@ static func dress_cosmetics(model_root: Node, h: Dictionary) -> void:
     if acc.has("gloves"):
         var gc := acc_ctx(String(acc["gloves"]))
         if not gc.is_empty():
+            gc["key"] = String(acc["gloves"])
             for s in ["l", "r"]:
                 var g := _piece(sk, "hand." + s, "eq_glove_" + s, null)
                 if g:
@@ -1247,43 +1248,127 @@ static func _build_amulet(root: MeshInstance3D, c: Dictionary) -> void:
         2:  # a metal halo framing the pendant
             _part(root, _tor(0.095, 0.12), mm, Vector3(0, 0, -0.005), Vector3(PI * 0.5, 0, 0))
 
-## GLOVES, one hand: the mitt is wrapped in a shell just larger than the hand (never the old
-## box with corners standing off it), plus a cuff up the forearm.
-## gauntlet / mitten / studded / bracer / fingerless wraps.
+## ---------------------------------------------------------------- D94e: THE GLOVE'S SILHOUETTE
+## Mr. E, 16 Nov 10:24: "okay so fix them" - gloves must READ AT STREAM DISTANCE, and the fix is
+## MORE DERIVED VARIATION, NOT A BIGGER GLOVE. This is a bit-for-bit port of the ART lane's ONE
+## shared derivation - tools/art/icons.py glove_form() (the hub icon calls it) and
+## tools/art/showcase.py acc_gloves() (the worn piece the proof sheet measures) - so the glove in
+## the satchel, the glove on the proof sheet and the glove on the hero in game are ONE object.
+## If icons.glove_form's tables change, change D94_G_* here in the same breath.
+##            cut:  gauntlet  mitt  studded  vambrace  wrap
+const D94_G_CUFF0 := [0.30, 0.13, 0.20, 0.42, 0.22]
+const D94_G_CUFFK := [0.26, 0.14, 0.20, 0.20, 0.18]
+const D94_G_FLARE0 := [1.70, 1.25, 1.40, 1.55, 1.18]
+const D94_G_FLAREK := [0.95, 0.30, 0.55, 0.80, 0.26]
+const D94_G_KNUCK0 := [0.34, 0.10, 0.21, 0.15, 0.06]
+const D94_G_KNUCKK := [0.52, 0.26, 0.44, 0.30, 0.22]
+const D94_G_SHELL0 := [1.46, 1.62, 1.38, 1.32, 1.26]
+const D94_G_PLATES := [[3, 6], [0, 1], [2, 5], [1, 3], [0, 2]]
+const D94_G_METAL := [true, false, true, true, false]
+const D94_G_FINGERS := [4, 0, 4, 4, 4]
+## measured on the KayKit adventurer (showcase.acc_gloves): wrist -> hand bone x2, wrist -> elbow
+const D94_G_HANDLEN := 0.1477
+const D94_G_FOREARM := 0.26
+
+## showcase.sig: FNV-1a over "key|name" lower-cased, then twelve LCG dials (showcase.Dial)
+static func d94_dials(key: String, name: String) -> Array:
+    var hay := (key + "|" + name).to_lower()
+    var h := 2166136261
+    for i in range(hay.length()):
+        h = ((h ^ hay.unicode_at(i)) * 16777619) & 0xFFFFFFFF
+    var out: Array = []
+    var x := h | 1
+    for _k in range(12):
+        x = (x * 1103515245 + 12345) & 0x7FFFFFFF
+        out.append(x)
+    return out
+
+static func _dial_u(d: Array, i: int, lo: float, hi: float) -> float:
+    return lo + (hi - lo) * (float(d[i % 12]) / 2147483648.0)
+
+## icons.glove_form, ported: the dials for one glove off its cut, its cost quantile and its key
+static func glove_form(variant: int, orn: float, d: Array) -> Dictionary:
+    var v := clampi(variant, 0, 4)
+    var o := clampf(orn, 0.0, 1.0)
+    var cuff := float(D94_G_CUFF0[v]) + float(D94_G_CUFFK[v]) * o
+    var fl0 := float(D94_G_FLARE0[v]) + float(D94_G_FLAREK[v]) * o
+    var pl: Array = D94_G_PLATES[v]
+    return {"variant": v,
+        "cuff": clampf(cuff * _dial_u(d, 0, 0.86, 1.14), 0.10, 0.94),
+        "flare": maxf(1.0, fl0 * _dial_u(d, 1, 0.93, 1.09)),
+        "knuck": maxf(0.0, (float(D94_G_KNUCK0[v]) + float(D94_G_KNUCKK[v]) * o) * _dial_u(d, 2, 0.86, 1.18)),
+        "shell": maxf(1.02, float(D94_G_SHELL0[v]) * _dial_u(d, 3, 0.96, 1.10)),
+        "plates": int(pl[0]) + int(round((int(pl[1]) - int(pl[0])) * o)),
+        "metal": bool(D94_G_METAL[v]), "fingers": int(D94_G_FINGERS[v]),
+        "lip": fl0 > 1.85}
+
+## GLOVES, one hand, on the hand bone (+Y down the fingers, +Z the back of the hand, the wrist
+## at -HANDLEN/2). showcase.acc_gloves part for part: the bell cuff up the forearm, the hard lip,
+## the hand shell wider than the fist, a mitt pocket or four fingers, the thumb, the KNUCKLE
+## PLATES standing off the fist (count rides cost), studs, and the STRAPS round the cuff.
 static func _build_glove(root: MeshInstance3D, c: Dictionary) -> void:
-    var v := int(c["variant"])
     var orn := float(c["orn"])
+    var key := String(c.get("key", ""))
+    var nm := String(Roster.items().get("accessories", {}).get(key, {}).get("name", ""))
+    var F := glove_form(int(c["variant"]), orn, d94_dials(key, nm))
+    var v := int(F["variant"])
     var cm := _m_cloth(c["cloth"] as Color, float(c["rough"]))
     var dm := _m_cloth((c["cloth"] as Color).darkened(0.35), 0.9)
     var mm := _m_metal(c)
-    var reach: float = [0.17, 0.18, 0.17, 0.16, 0.10][v]     # how far over the mitt it runs
-    root.mesh = _sph(0.5, 1.0)
-    root.material_override = mm if v == 0 else cm
-    root.scale = Vector3(0.185, reach, 0.185)    # just over the ~0.15 fist
-    root.position = Vector3(0, reach * 0.5 - 0.01, 0)
-    var cuff: float = [0.08, 0.05, 0.06, 0.20, 0.05][v]      # a bracer runs up the forearm
-    var cf := MeshInstance3D.new()                             # not under the scaled shell
-    cf.mesh = _cyl(0.10, 0.092, cuff, 10)
-    cf.material_override = mm if v == 3 else dm
-    cf.position = Vector3(0, -cuff * 0.5 + 0.02, 0)
-    root.get_parent().add_child(cf)
-    match v:
-        0:
-            for k in range(3):
-                _part(root.get_parent() as Node3D, _box(0.13, 0.025, 0.03), mm, Vector3(0, 0.03 + 0.04 * k, 0.085))
-        2:
-            for k in range(4):
-                _part(root.get_parent() as Node3D, _sph(0.014), mm, Vector3(-0.05 + 0.033 * k, 0.13, 0.08))
-        4:
-            for k in range(3):     # the wrap's bands
-                _part(root.get_parent() as Node3D, _cyl(0.096, 0.096, 0.014, 10), dm, Vector3(0, 0.02 + 0.03 * k, 0))
-    if v == 0 or orn > 0.45:
-        _part(root.get_parent() as Node3D, _sph(0.022, 0.03), _m_gem(c), Vector3(0, 0.05, 0.095))
-    match int(c.get("form", 0)):
-        1:  # a flared metal cuff at the wrist
-            _part(root.get_parent() as Node3D, _cyl(0.14, 0.10, 0.06, 10), mm, Vector3(0, -0.02, 0))
-        2:  # a plate over the knuckles
-            _part(root.get_parent() as Node3D, _box(0.16, 0.055, 0.04), mm, Vector3(0, 0.15, 0.09))
+    var hard: Material = mm if bool(F["metal"]) else dm
+    var hl := D94_G_HANDLEN
+    var wy := -hl * 0.5                                  # the wrist
+    var ar := hl * 0.38                                  # forearm radius
+    var cuff := D94_G_FOREARM * float(F["cuff"])
+    var mouth := ar * float(F["flare"])
+    var hw := hl * 0.5 * float(F["shell"])
+    var side := -1.0 if root.name.ends_with("_r") else 1.0
+    root.mesh = null
+    root.scale = Vector3.ONE
+    root.position = Vector3.ZERO
+    # 1. THE CUFF - the readable mass, a cone from inside the shell down past the wrist
+    var L := cuff + hl * 0.30
+    _part(root, _cyl(hw * 0.99, mouth, L, 14), hard, Vector3(0, wy + hl * 0.30 - L * 0.5, 0))
+    if bool(F["lip"]):
+        _part(root, _tor(mouth * 0.89, mouth * 1.15), hard, Vector3(0, wy - cuff, 0))
+    # 2. THE HAND SHELL - wider than the hand it covers (rounded, never a box)
+    _part(root, _sph(0.5, 1.0), cm, Vector3(0, hl * 0.12, 0), Vector3.ZERO,
+        Vector3(hw * 1.42 * 1.12, hl * 0.62 * 1.12, hw * 1.26 * 1.12))
+    if int(F["fingers"]) == 0:                           # a mitt: one pocket
+        _part(root, _cyl(hw * 0.56, hw * 0.86, hl * 0.46, 12), cm, Vector3(0, hl * 0.34 + hl * 0.23, 0))
+    else:
+        var tip := 0.34 if v == 4 else 0.44
+        for k in range(4):
+            var dx := (-hw * 0.52 + hw * 0.35 * k) * side
+            var ln := hl * (tip - 0.26)
+            _part(root, _cyl(hw * 0.16, hw * 0.20, ln, 6), cm, Vector3(dx, hl * 0.26 + ln * 0.5, hw * 0.06))
+    # the thumb, so a glove reads as a glove from the side
+    _part(root, _cyl(hw * 0.17, hw * 0.24, hl * 0.25, 7), cm, Vector3(-hw * 0.71 * side, hl * 0.19, -hw * 0.05),
+        Vector3(0, 0, 0.6 * side))
+    # 3. THE KNUCKLE PLATES - stand OFF the back of the fist, count riding cost
+    var kn := hw * float(F["knuck"]) * 0.55
+    if kn > 0.008:
+        for k in range(maxi(1, int(F["plates"]))):
+            _part(root, _box(hw * 1.34, hl * 0.13, maxf(0.010, kn * 0.52)), hard,
+                Vector3(0, hl * (0.06 + 0.15 * k), hw * 0.66 + kn * 0.46))
+        if bool(F["metal"]):
+            _part(root, _sph(kn * 0.40, kn * 0.92), _m_gem(c), Vector3(0, hl * 0.08, hw * 0.70 + kn * 0.92))
+    elif orn > 0.45:
+        _part(root, _sph(hw * 0.17, hw * 0.40), _m_gem(c), Vector3(0, hl * 0.10, hw * 0.72))
+    if v == 2:                                           # studs down the fingers
+        for k in range(4):
+            _part(root, _sph(hw * 0.11), mm, Vector3((-hw * 0.52 + hw * 0.35 * k) * side, hl * 0.38, hw * 0.22))
+    # 4. THE STRAPS round the cuff: a dear gauntlet is strapped, a cheap wrap tied once
+    for k in range(maxi(1, mini(3, int(F["plates"]) - 1))):
+        var t := 0.28 + 0.30 * k
+        var rr := hw * 0.96 + (mouth - hw * 0.96) * t
+        var tr := maxf(0.006, rr * 0.11)
+        _part(root, _tor(rr * 1.03 - tr, rr * 1.03 + tr), dm, Vector3(0, wy - cuff * t, 0))
+    match int(c.get("form", 0)):     # D94b's collision form, kept: geometry, never colour
+        1:  # a metal band hard at the wrist
+            _part(root, _tor(hw * 0.92, hw * 1.10), mm, Vector3(0, wy, 0))
+        2:  # a raised spine down the knuckle plates
+            _part(root, _box(hw * 0.22, hl * 0.50, 0.03), mm, Vector3(0, hl * 0.20, hw * 0.80 + kn))
 
 ## BOOTS, one foot, in model axes (sole flat): low shoe / ankle boot / tall riding boot /
 ## fur-cuffed / pointed toe. Shafts are short because a KayKit knee is at y 0.29.

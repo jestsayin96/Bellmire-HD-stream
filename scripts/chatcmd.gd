@@ -131,6 +131,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         "inventory", "inv", "bag", "items":
                     out = _needs(user_id, func(): return inventory(user_id))
         "delve":    out = _delve(user_id)
+        "muster", "party", "mustered":
+                    out = _muster(user_id)
         "fish":     out = _needs(user_id, func():
                         wants_fish.emit(user_id)
                         return "%s heads for the docks with a rod." % roster.get_hero(user_id)["name"])
@@ -322,6 +324,48 @@ func _delve(user_id: String) -> String:
     wants_delve.emit(user_id)
     return "%s sets out for the dungeon mouth. (%d in the party)" \
         % [roster.get_hero(user_id)["name"], delve_queue.size()]
+
+## W-LIVE: THE QUEUE READ. A channel-point errand ("Send my hero delving", "Join the delve")
+## sends a hero to the scar through the town, NOT through !delve, so delve_queue never hears
+## of it. The muster a viewer can see must be the real one, so this reads BOTH: the names
+## chat put in, in that order, then anyone the town has on the road or at the mouth. "below,
+## in the scar" is a hero already down - they are not mustering. Needs no hero of its own:
+## a bystander may ask who is going down.
+const LINE_WORDS := ["first", "second", "third", "fourth", "fifth", "sixth"]
+
+## is this away-state a hero waiting to go down (not one already below)?
+static func _mustering(state: String) -> bool:
+    var t := state.to_lower()
+    return t.contains("scar") and not t.contains("below")
+
+func _muster(user_id: String) -> String:
+    var uids: Array = []
+    for uid in delve_queue:
+        uids.append(String(uid))
+    for uid in away:
+        var u := String(uid)
+        if not uids.has(u) and _mustering(String(away[u])):
+            uids.append(u)
+    if uids.is_empty():
+        return "Nobody at the dungeon mouth. !delve puts your name in."
+    var names: Array = []
+    var mine := -1
+    for i in uids.size():
+        var h := roster.get_hero(String(uids[i]))
+        var nm := String(h.get("name", ""))
+        names.append(nm if nm != "" else "someone")
+        if String(uids[i]) == user_id:
+            mine = i
+    var out := "At the dungeon mouth (%d): %s." % [uids.size(), ", ".join(names)]
+    if mine >= 0 and mine < LINE_WORDS.size():
+        out += " You are %s in line." % LINE_WORDS[mine]
+    elif mine >= 0:
+        out += " Your name is in."
+    elif delve_queue.size() >= QUEUE_MAX:
+        out += " The muster is full - the next party takes you."
+    else:
+        out += " !delve to go with them."
+    return out
 
 # Oil is the cheapest thing on the board and the one most worth buying. A
 # viewer who keeps three flasks in the satchel will out-live a better-armed

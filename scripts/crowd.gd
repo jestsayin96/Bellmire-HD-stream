@@ -269,7 +269,7 @@ static func _settle_pair(a: Node3D, b: Node3D, ok: Callable, pinned: Dictionary)
         if ok.call(na, ra, a):
             a.global_position = na
         else:
-            var sa := Vector3(-nrm.z, 0.0, nrm.x) * over
+            var sa := _perp(nrm, L, ra + rb + SETTLE_PAD)
             if ok.call(pa + sa, ra, a):
                 a.global_position = pa + sa
             elif ok.call(pa - sa, ra, a):
@@ -281,7 +281,7 @@ static func _settle_pair(a: Node3D, b: Node3D, ok: Callable, pinned: Dictionary)
         if ok.call(nb, rb, b):
             b.global_position = nb
         else:
-            var sb := Vector3(-nrm.z, 0.0, nrm.x) * over
+            var sb := _perp(nrm, L, ra + rb + SETTLE_PAD)
             if ok.call(pb - sb, rb, b):
                 b.global_position = pb - sb
             elif ok.call(pb + sb, rb, b):
@@ -289,13 +289,34 @@ static func _settle_pair(a: Node3D, b: Node3D, ok: Callable, pinned: Dictionary)
             else:
                 return [deep, false]
     else:
-        # pinned between stone on both sides: slide sideways along the wall
-        var side := Vector3(-nrm.z, 0.0, nrm.x) * over
+        # pinned between stone on both sides: slide sideways along the wall.
+        # D91e: the slide must be the FULL perpendicular that clears the pair
+        # (sqrt(need^2 - L^2)), not `over` - a sideways step of `over` only
+        # grows the gap to sqrt(L^2 + over^2) and left a ~1 cm residual in
+        # the north store's alcove. Try one body, then the other, then both
+        # going opposite ways by half each.
+        var side := _perp(nrm, L, ra + rb + SETTLE_PAD)
         if ok.call(pa + side, ra, a):
             a.global_position = pa + side
         elif ok.call(pb - side, rb, b):
             b.global_position = pb - side
+        elif ok.call(pa - side, ra, a):
+            a.global_position = pa - side
+        elif ok.call(pb + side, rb, b):
+            b.global_position = pb + side
+        elif ok.call(pa + side * 0.5, ra, a) and ok.call(pb - side * 0.5, rb, b):
+            a.global_position = pa + side * 0.5
+            b.global_position = pb - side * 0.5
+        elif ok.call(pa - side * 0.5, ra, a) and ok.call(pb + side * 0.5, rb, b):
+            a.global_position = pa - side * 0.5
+            b.global_position = pb + side * 0.5
         else:
             return [deep, false]
     return [deep, true]
+
+## D91e: the sideways step that clears a pair at axis distance L, needing `need`
+## between centres: sqrt(need^2 - L^2) along the perpendicular (plus a hair).
+static func _perp(nrm: Vector3, L: float, need: float) -> Vector3:
+    var s := sqrt(maxf(need * need - L * L, 0.0)) + 0.002
+    return Vector3(-nrm.z, 0.0, nrm.x) * s
 

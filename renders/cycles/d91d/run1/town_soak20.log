@@ -1,0 +1,578 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:819)
+       [1] _ready (res://scripts/town.gd:375)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+  t=26s frames=3000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Corvin of the Ford settles in Bellmire, looking for work.
+  t=81s frames=6000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Petra Fenwick settles in Bellmire, looking for work.
+  t=165s frames=9000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Nessa Fenwick settles in Bellmire, looking for work.
+  t=245s frames=12000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+MUSTER timed out: dists=[67, 58, 48, 48, 89, 60, 11, 55] vis=true stay=false route=58 inside=false
+FEED Hilda Stonehand settles in Bellmire, looking for work.
+FEED Behind us, the guild bell. Ahead, nothing that rings.
+FEED They carry 15 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 3 giant rats.
+FEED Every niche has a name scratched out of it.
+FEED Dunn Thatcher casts Smite at giant rat.
+FEED Dunn Coalfoot searches (Investigation 17) and turns up 13 gold on floor 1.
+FEED Floor 1 holds, for now.
+FEED Dunn Coalfoot finds a vial of The Gleaner's Cup.
+FEED Dunn Thatcher and 4 others take a breather, and press on deeper.
+FEED Corvin Stonehand settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 cave bat, 1 skeleton minion, 1 bog frog.
+FEED Dunn Thatcher casts smite; the scar casts something else (7 vs DC 11).
+FEED Dunn Thatcher casts Smite at skeleton minion.
+FEED The air thickens early. That always means something.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 cave spider.
+FEED The slabs were lifted from beneath - the chips all fell outward.
+FEED Dunn Thatcher casts Bolt at cave bat.
+FEED Osric Bramble casts Frost at cave spider.
+FEED Dunn Thatcher casts Smite at cave spider.
+FEED Corvin Quarryman searches (Investigation 10) and turns up 11 gold on floor 1.
+FEED A ledger closed in red and rust.
+  t=347s frames=15000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Dunn Coalfoot searches (Investigation 5) and turns up 17 gold on floor 2.
+FEED Floor 2 held, flasks counted, nobody owed.
+FEED Osric Bramble and 2 others take a breather, and press on deeper.
+FEED Dunn Coalfoot searches the chest - Successfully found loot!! 25 gold (Investigation 18 vs DC 11).
+FEED Dunn Thatcher and 4 others take a breather, and press on deeper.
+FEED Dunn Coalfoot finds a man in a cage still alive. He slips 42 gold to them on the way out, 5 ways to split it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 hollowed puglin, 1 giant rat.
+FEED Mira Ashwood settles in Bellmire, looking for work.
+FEED Osric Bramble casts Frost at hollowed puglin.
+FEED Osric Bramble casts Frost at giant rat.
+FEED Corvin Quarryman casts Bolt at bog frog.
+FEED Osric Bramble casts frost and gets weather for it (10 vs DC 11).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 hollowed skeleton minion, 1 hollowed puglin, 1 hollowed bone bowman.
+FEED The oil is running low.
+FEED Osric Bramble casts Frost at bog frog.
+FEED Corvin Quarryman casts Chain Bolt at bog frog.
+FEED Corvin Quarryman searches (Investigation 17) and turns up 25 gold on floor 2.
+FEED Held. The door is kept, which was the whole job.
+FEED Corvin Quarryman finds a vial of Reedcutter's Brew.
+FEED Dunn Thatcher speaks bolt. The scar spells it backwards (1 vs DC 11).
+FEED Dunn Thatcher casts Smite at hollowed puglin.
+FEED Osric Bramble and 2 others take a breather, and press on deeper.
+FEED Dunn Thatcher casts Bolt at hollowed skeleton minion.
+FEED Dunn Coalfoot searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED Floor 3 is done. The lamps climb back up.
+  t=422s frames=18000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Maela Stonehand settles in Bellmire, looking for work.
+FEED Dunn Coalfoot searches the chest - Successfully found loot!! 40 gold (Investigation 16 vs DC 11).
+FEED Dunn Thatcher and 4 others take a breather, and press on deeper.
+FEED Tove the Younger finds a man in a cage still alive. He slips 42 gold to them on the way out, 3 ways to split it.
+FEED 3 creatures boil out of the dungeon!
+FEED Initiative: the raiders 8, the watch 14 - the watch is ready for them.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned slime, 1 slime, 1 skeleton minion, 2 hollowed puglins.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned risen bones, 1 slime, 1 puglin, 1 hollowed skeleton minion.
+FEED The oil is running low.
+FEED Osric Bramble casts Frost at puglin.
+FEED The drowned slime divides.
+FEED Tove the Younger rolls a 20 - and the puglin is gone.
+FEED Harl Quarryman rolls a 20 - and the slime is gone.
+FEED Dunn Thatcher's bolt goes out sideways into the stone (10 vs DC 12).
+FEED Dunn Coalfoot searches (Investigation 6) and turns up 35 gold on floor 4.
+FEED Not a sound but boots. Floor 4 is theirs.
+  t=459s frames=21000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Tove the Younger steps on a grate - fire! DEX 14 vs DC 11, 7 damage (halved).
+FEED Dunn Coalfoot searches the chest - ...no loot... (Investigation 5 vs DC 12).
+FEED The attack is driven off. The gates hold.
+FEED Osric Bramble's bolt goes off wrong - that is the scar's toll (8 vs DC 11).
+FEED Dunn Thatcher and 4 others take a breather, and press on deeper.
+FEED Osric Bramble casts Frost at slime.
+FEED The slime divides.
+FEED Corvin Quarryman searches (Investigation 22) and turns up 43 gold on floor 3.
+FEED Swept, chalked, and nobody short a limb.
+FEED Dunn Coalfoot touches the altar - a curse. Something older than the floor takes a bite.
+FEED Maela Thatcher settles in Bellmire, looking for work.
+FEED Corvin Quarryman searches the chest - Successfully found loot!! 42 gold (Investigation 25 vs DC 11).
+FEED Osric Bramble and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 skeleton minions, 1 slime, 2 cave bats.
+FEED Mother Silk is down here. Every thread in the dark is hers.
+FEED The threads across the doorway are new.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  t=488s frames=24000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone sentinel, 1 risen bones, 1 hollowed bone sentinel, 1 drowned skeleton warrior, 1 skeleton warrior.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Tove the Younger spots a spike trap (Perception 12 vs DC 12) and steps round it.
+FEED Osric Bramble's frost fires off behind them (10 vs DC 12).
+FEED Dunn Thatcher's bolt takes a step and sits down (9 vs DC 12).
+FEED Corvin Quarryman's chain unravels mid-word - wild magic (1 vs DC 12).
+FEED Tove the Younger spots a dart trap (Perception 20 vs DC 12) and steps round it.
+FEED Spiders drop from Mother Silk's threads.
+FEED Mother Silk shifts, and the fight changes with it.
+FEED Tove the Younger is badly hurt and breaks off, making for the way up.
+FEED Corvin Quarryman casts Bolt at Mother Silk.
+FEED Osric Bramble breaks off to mend Tove the Younger, who is nearly down.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Harl Quarryman sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Tove the Younger the paladin falls on floor 4 to the dark below. Level 2, 11 kills. !reroll to rise again.
+FEED Dunn Thatcher casts Smite at drowned bone sentinel.
+FEED Corvin Quarryman casts Bolt at Mother Silk.
+FEED Mother Silk is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dunn Coalfoot rolls a 20 - The Rattling Host reels.
+FEED Dead men drop out of the harness.
+FEED Dunn Thatcher casts Smite at The Rattling Host.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED Corvin Quarryman casts Bolt at Mother Silk.
+FEED Dunn Thatcher breaks off to mend Harl Coalfoot, who is nearly down.
+FEED The Rattling Host falls to Dunn Coalfoot.
+FEED Mother Silk falls to Corvin Quarryman.
+FEED Osric Bramble turns on the wounded slime to finish it.
+FEED Corvin Quarryman turns on the wounded slime to finish it.
+FEED Corvin Quarryman casts Bolt at slime.
+FEED The slime divides.
+FEED Corvin Quarryman searches (Investigation 12) and turns up 44 gold on floor 4.
+FEED Clear, and the quiet sounds like a favour owed.
+FEED Corvin Quarryman finds a vial of Ropewalk Dram.
+  t=529s frames=27000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Dunn Thatcher casts Bolt at risen bones.
+FEED Dunn Coalfoot searches (Investigation 10) and turns up 44 gold on floor 5.
+FEED Floor 5 ends, as every floor does, with someone's sigh.
+FEED Out of oil, the party feels its way back up from floor 4.
+FEED Osric Bramble, Corvin Quarryman come home to Bellmire with 165 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 23 kills between them.
+FEED Osric Bramble is fitted with Reed-Cloth Robe. (+10 hp) Haggled 20% off (22).
+FEED Corvin Quarryman is fitted with Reed-Cloth Robe. (+10 hp)
+FEED Garm Hollow settles in Bellmire, looking for work.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Dunn Thatcher and 4 others come home to Bellmire with 209 gold, 9 ore, 6 stone, 2 pieces of salvaged gear and 3 potions. 30 kills between them.
+FEED Dunn Thatcher is fitted with Reed-Cloth Robe. (+10 hp) A natural 1 - the smith takes offence and charges a tenth over.
+FEED Harl Coalfoot is fitted with Ford Leathers. (+10 hp)
+FEED Dunn Coalfoot is fitted with Ford Leathers. (+10 hp) Haggled 15% off (17).
+FEED The air thickens early. That always means something.
+FEED They carry 22 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 giant rat, 1 slime.
+FEED Candle stubs by the dozen, burned down in a single night.
+FEED Dunn Thatcher says smite and the floor says something back (8 vs DC 10).
+FEED Osric Bramble casts Frost at giant rat.
+FEED Dunn Thatcher casts Bolt at cave bat.
+  t=559s frames=30000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Dunn Thatcher casts Smite at slime.
+FEED The slime divides.
+FEED Osric Bramble's frost unravels mid-word - wild magic (8 vs DC 10).
+FEED Corvin Quarryman searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED Cleared, and the dust is already settling on the fallen.
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+  t=588s frames=33000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED 4 bandits are riding on the west road!
+FEED Initiative: the raiders 21, the watch 11 - the raiders strike first.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed bog frog, 3 bog frogs.
+FEED Osric Bramble's bolt goes wrong - the scar answers (7 vs DC 11).
+FEED Dunn Thatcher's smite goes wrong - the scar answers (10 vs DC 11).
+FEED Dunn Thatcher casts Bolt at bog frog.
+FEED A building is burning!
+FEED Osric Bramble casts Bolt at bog frog.
+FEED Dunn Thatcher casts Smite at bog frog.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED Dunn Thatcher casts Bolt at hollowed bog frog.
+FEED Osric Bramble casts Frost at hollowed bog frog.
+FEED Corvin Quarryman casts Bolt at hollowed bog frog.
+FEED Mira Bramble settles in Bellmire, looking for work.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+FEED Dunn Thatcher casts Smite at bog frog.
+FEED Osric Bramble casts Bolt at bog frog.
+FEED Corvin Quarryman casts Chain Bolt at bog frog.
+FEED Corvin Quarryman searches (Investigation 7) and turns up 13 gold on floor 2.
+FEED The last echo dies, and no new one rises.
+  t=621s frames=36000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Corvin Quarryman searches the chest - Successfully found loot!! 24 gold (Investigation 13 vs DC 11).
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+FEED Harl Coalfoot spots a pressure plate (Perception 20 vs DC 11) and steps round it.
+FEED Harl Coalfoot gets a captive free. 42 gold, 7 ways - small thanks for a poor life.
+  t=656s frames=39000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed slime, 1 drowned bone bowman, 1 hollowed skeleton minion, 1 drowned giant rat.
+FEED The hollowed slime divides.
+FEED Dunn Thatcher says smite and the floor says something back (10 vs DC 11).
+  t=690s frames=42000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Dunn Thatcher casts Bolt at drowned bone bowman.
+FEED Corvin Quarryman searches (Investigation 12) and turns up 33 gold on floor 3.
+FEED Floor 3 holds, and the roll gets a tick, not a dagger.
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 hollowed puglins, 1 drowned slime, 1 drowned cave spider, 1 cave bat.
+FEED The oil is running low.
+FEED 7 bandits are riding on the west road!
+FEED Initiative: the raiders 12, the watch 20 - the watch is ready for them.
+FEED Dunn Coalfoot turns on the wounded hollowed puglin to finish it.
+FEED Dunn Thatcher turns on the wounded hollowed puglin to finish it.
+FEED Harl Coalfoot turns on the wounded hollowed puglin to finish it.
+FEED Harl Quarryman turns on the wounded hollowed puglin to finish it.
+FEED Corvin Quarryman turns on the wounded hollowed puglin to finish it.
+  t=722s frames=45000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED A building is burning!
+FEED Ysolde Coalfoot rolls a 20 on the save - and is up again, sword in hand.
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED The drowned slime divides.
+FEED Cort Ashwood is killed by a bandit.
+FEED A building is burning!
+FEED Harl Coalfoot turns on the wounded drowned slimeling to finish it.
+FEED Harl Quarryman turns on the wounded drowned slimeling to finish it.
+FEED Corvin Quarryman turns on the wounded drowned slimeling to finish it.
+FEED Corvin Quarryman searches (Investigation 22) and turns up 57 gold on floor 4.
+FEED Floor 4 held. Bellmire will hear about it.
+FEED Corvin Quarryman steps on a spiked plate - spikes! DEX 6 vs DC 12, 8 damage.
+FEED A building is burning!
+FEED Corvin Quarryman searches the chest - Successfully found loot!! 52 gold (Investigation 20 vs DC 12).
+  t=746s frames=48000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone bowman, 1 skeleton warrior, 1 drowned cave spider, 1 bone sentinel, 1 cave spider.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED Corvin Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Dunn Thatcher's bolt bends away from them - the scar has opinions (9 vs DC 12).
+FEED Dunn Coalfoot rolls a 20 - and the cave spider is gone.
+FEED Ingrid Ashwood steps on a loose flagstone - green darts! DEX 24 vs DC 12, 2 damage (halved).
+  t=781s frames=51000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Osric Bramble's renew unravels mid-word - wild magic (11 vs DC 12).
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Dunn Coalfoot sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Bats pour out of the dark around Nightwing.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Dunn Thatcher.
+FEED Osric Bramble casts Bolt at cave bat.
+FEED Corvin Quarryman casts Chain Bolt at cave bat.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 7 ways - 37 gold each to Osric Bramble, Dunn Thatcher, Harl Coalfoot, Harl Quarryman, Corvin Quarryman, Ingrid Ashwood, Dunn Coalfoot.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Osric Bramble and 6 others come home to Bellmire with 446 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 4 potions. 29 kills between them.
+FEED Corvin Quarryman takes up a Reed-Singer's Wand. (+9 atk, 1d8) Folded twice; the smith signs it.
+  t=813s frames=54000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=225
+FEED Our shadows go ahead of us, and look back.
+FEED They carry 27 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 skeleton minion.
+FEED The dead here were laid out in rows, and the rows were counted.
+FEED Dunn Thatcher casts Smite at giant rat.
+FEED Dunn Thatcher's bolt goes out like a lamp in wind - wild magic (9 vs DC 10).
+FEED Osric Bramble casts Frost at giant rat.
+FEED Corvin Quarryman searches (Investigation 13) and turns up 11 gold on floor 1.
+FEED Nothing moves on floor 1 but the dust.
+FEED Corvin Quarryman finds a vial of Ember Dregs.
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+  t=845s frames=57000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=225
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed slime, 1 cave bat, 1 bog frog, 1 skeleton minion.
+FEED Ysolde Hollow settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 11, the watch 12 - the watch is ready for them.
+FEED Osric Bramble calls bolt and the wall calls back (8 vs DC 11).
+FEED Dunn Thatcher speaks bolt. The scar spells it backwards (1 vs DC 11).
+FEED Corvin Quarryman casts Bolt at bog frog.
+FEED Osric Bramble casts Frost at bog frog.
+FEED Dunn Thatcher casts Smite at bog frog.
+FEED Osric Bramble casts Bolt at skeleton minion.
+FEED Corvin Quarryman casts Chain Bolt at skeleton minion.
+FEED Dunn Thatcher casts Smite at skeleton minion.
+FEED Corvin Quarryman says bolt and the floor says something back (8 vs DC 11).
+FEED Dunn Thatcher casts Smite at hollowed slime.
+FEED Osric Bramble casts Bolt at hollowed slime.
+FEED The hollowed slime divides.
+FEED Corvin Quarryman casts Chain Bolt at hollowed slimeling.
+FEED Corvin Quarryman searches (Investigation 20) and turns up 27 gold on floor 2.
+FEED Floor 2 holds; the band counts fingers, then flasks.
+  t=881s frames=60000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=225
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+FEED Aldric Ashwood goes down and claws back up. (CON save 14)
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton warrior.
+FEED A building is burning!
+  t=903s frames=63000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=225
+FEED A building is burning!
+FEED Tove Ashwood goes down and claws back up. (CON save 13)
+FEED Tove Ashwood is killed by skeleton rogue.
+FEED The attack is driven off. The gates hold.
+D91T_OV f=64837 peasant(leg0) + peasant(leg0) at (34.20516, 0.89289, -69.79208) over 0.01
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 skeleton minion, 1 drowned skeleton minion, 1 drowned slime.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+  t=935s frames=66000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+FEED Petra Quarryman settles in Bellmire, looking for work.
+FEED Corvin Quarryman is cut off and falls back to the others.
+FEED Corvin Quarryman is cut off and falls back to the others.
+FEED Dunn Thatcher casts Smite at drowned slime.
+FEED Corvin Quarryman is cut off and falls back to the others.
+FEED Dunn Thatcher works smite; the scar does the last line for them (1 vs DC 11).
+FEED Osric Bramble casts Frost at drowned slime.
+FEED Dunn Thatcher casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Dunn Coalfoot turns on the wounded drowned slimeling to finish it.
+FEED Harl Coalfoot turns on the wounded skeleton minion to finish it.
+FEED Harl Quarryman turns on the wounded skeleton minion to finish it.
+FEED Ingrid Ashwood turns on the wounded skeleton minion to finish it.
+FEED Osric Bramble casts Frost at skeleton minion.
+FEED Dunn Thatcher casts Bolt at skeleton minion.
+FEED Osric Bramble shapes bolt and the scar bends it (10 vs DC 11).
+FEED Corvin Quarryman casts Bolt at slimeling.
+FEED Osric Bramble casts Bolt at drowned slimeling.
+FEED Corvin Quarryman searches (Investigation 9) and turns up 26 gold on floor 3.
+FEED Floor 3 lets go. The party does not, not yet.
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+  t=967s frames=69000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 hollowed puglins, 1 risen bones, 1 drowned cave spider, 1 hollowed slime.
+FEED Dunn Thatcher starts bolt, loses the thread, and finishes it badly (9 vs DC 12).
+FEED Osric Bramble speaks bolt too quickly and the magic falls behind (8 vs DC 12).
+FEED The hollowed slime divides.
+FEED Ysolde Ashwood settles in Bellmire, looking for work.
+FEED Corvin Quarryman searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED The floor pays out. Count what came out of it.
+FEED Corvin Quarryman searches the chest - Successfully found loot!! 54 gold (Investigation 20 vs DC 12).
+FEED 7 bandits are riding on the west road!
+FEED Initiative: the raiders 18, the watch 21 - the watch is ready for them.
+  t=1002s frames=72000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED Harl Coalfoot touches the altar - a curse. Something older than the floor takes a bite.
+FEED Harl Coalfoot steps on a loose flagstone - darts! DEX 21 vs DC 12, 4 damage (halved).
+FEED A building is burning!
+FEED A building is burning!
+  t=1025s frames=75000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 1 skeleton mage, 2 skeleton warriors, 1 bone bowman.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED The oil is running low.
+FEED Harl Coalfoot rolls a 20 for initiative and is moving before anything else.
+FEED Dunn Coalfoot rolls a 20 for initiative and is moving before anything else.
+FEED Dunn Thatcher's ward comes out sideways - wild magic (1 vs DC 12).
+FEED Hilda Fenwick is killed by a bandit.
+FEED A building is burning!
+FEED Edda Stonehand settles in Bellmire, looking for work.
+FEED Nessa Fenwick rolls a 20 on the save - and is up again, sword in hand.
+FEED Nessa Fenwick is killed by a bandit.
+FEED The attack is driven off. The gates hold.
+  t=1047s frames=78000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+FEED Osric Bramble pays for frost and the scar keeps the receipt (1 vs DC 12).
+FEED Corvin Quarryman's bolt splits in two, and neither half works (9 vs DC 12).
+FEED The Hollow King shifts, and the fight changes with it.
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Hollow King falls to Dunn Coalfoot.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 7 ways - 31 gold each to Osric Bramble, Dunn Thatcher, Harl Coalfoot, Harl Quarryman, Corvin Quarryman, Ingrid Ashwood, Dunn Coalfoot.
+FEED Corvin Quarryman finds a vial of Smith's Dram.
+FEED Corvin Quarryman searches the chest - Successfully found loot!! 59 gold (Investigation 13 vs DC 12).
+FEED Osric Bramble and 6 others take a breather, and press on deeper.
+  t=1073s frames=81000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 5; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 sporeblown fen lurker, 1 emberbound bone sentinel, 2 wraithtouched marrow hewers, 1 gorged skeleton rogue, 1 drowned fen lurker.
+FEED gorged gravecaller holds this chamber alone - a mini-boss stands between you and the way deeper.
+FEED Osric Bramble's frost turns to smoke a breath too early (10 vs DC 13).
+FEED gorged gravecaller finds its second wind - its strikes land harder.
+FEED The gorged gravecaller is down. The chamber keeps a purse of 113 gold - 16 a share, 7 ways.
+FEED Dunn Thatcher fumbles ward and the words come out as soup (8 vs DC 13).
+FEED Corvin Quarryman's chain flares, sputters, and lands on the chalk (11 vs DC 13).
+FEED Harl Coalfoot the duelist falls on floor 6 to the dark below. Level 5, 21 kills. !reroll to rise again.
+FEED Petra Quarryman settles in Bellmire, looking for work.
+FEED Dunn Coalfoot fumbles the thieves' tools on a poison-dart trap (1 vs DC 13) -
+FEED Dunn Coalfoot steps on a loose flagstone - green darts! DEX 16 vs DC 13, 2 damage (halved).
+FEED Corvin Quarryman searches (Investigation 8) and turns up 52 gold on floor 6.
+FEED Floor 6 yields. The stair down is right there.
+  t=1115s frames=84000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+FEED Out of oil, the party feels its way back up from floor 6.
+FEED Osric Bramble and 5 others come home to Bellmire with 607 gold, 12 ore, 9 stone, 4 pieces of salvaged gear and 5 potions. 37 kills between them.
+FEED Corvin Quarryman is fitted with Rune-Hemmed Vestment. (+48 hp)
+  t=1145s frames=87000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+FEED Rolf Fenwick settles in Bellmire, looking for work.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 6, the watch 21 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 2 riders.
+FEED Dunn Thatcher's charge crashes into a bandit!
+FEED Dunn Thatcher is killed by a bandit.
+  t=1180s frames=90000 overlap_frames=1 (>1cm 0, worst 0.007) in_footprint=0 bodies<=225
+FEED Ingrid Fenwick is killed by a bandit.
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Edda Stonehand goes down and claws back up. (CON save 12)
+FEED Edda Stonehand is killed by a bandit.
+FEED A building is burning!
+D91 TOWN: 1200 s, 92646 frames, up to 225 bodies on the street
+  overlap frames 1 (>1 cm: 0), overlapping pair-samples 1, worst 0.007 m
+  body-frames inside a footprint 0 of 17174393 (apart: 86120 on a seat, 29204 on a door leg)
+  the late settle: 164878 runs, 0.892 ms a run, 1.58 ms a frame (256 set out of a footprint)
+  of which gathering + footprint sweep 0.310 ms a run; 2.02 passes a run
+  OVERLAPS BY WHO:
+         1  peasant + peasant
+  IN A FOOTPRINT BY WHO:
+  IN A FOOTPRINT BY WHAT:
+  ok   the soak ran (92646 frames)
+  ok   no frame with two bodies closer than the sum of their body_r by more than 1 cm (0)
+  FAIL no frame with any overlap at all (1, worst 0.0072 m)
+  ok   no body inside a registered footprint (0 body-frames)
+D91_TOWN FAIL (1 failed)

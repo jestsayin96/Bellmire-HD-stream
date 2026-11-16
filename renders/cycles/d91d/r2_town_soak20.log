@@ -1,0 +1,634 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+FEED Dunn Rivers settles in Bellmire, looking for work.
+  t=75s frames=3000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Garm Coalfoot settles in Bellmire, looking for work.
+  t=167s frames=6000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Rolf of the Ford settles in Bellmire, looking for work.
+MUSTER timed out: dists=[70, 86, 13, 84, 57, 83, 8, 56] vis=true stay=false route=58 inside=false
+  t=248s frames=9000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+FEED Cort Bramble settles in Bellmire, looking for work.
+  t=279s frames=12000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+FEED They go down as they came in: together, and a little afraid.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 slime, 1 hollowed slime.
+FEED A mourner's bench, worn shiny, facing the wrong wall.
+FEED Cort Bramble steps on a slot in the floor - a blade! DEX 10 vs DC 10, 6 damage (halved).
+FEED Nessa Thatcher casts Bolt at slime.
+FEED The slime divides.
+FEED Rolf Rivers turns on the wounded slimeling to finish it.
+FEED Nessa Thatcher works fire and the room takes the benefit (8 vs DC 10).
+FEED Nessa Thatcher casts Bolt at hollowed slimeling.
+FEED Rolf Rivers searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED The walls stop leaning in. The stone is merely stone again.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED Petra Ashwood settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 cave bat, 2 giant rats.
+FEED Nessa Thatcher casts Bolt at bog frog.
+FEED Rolf Rivers searches (Investigation 17) and turns up 25 gold on floor 2.
+FEED Floor 2 is swept, which here is a figure of speech.
+FEED The lamp at the top of the stair is new; the one at the bottom is older than Bellmire.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 cave bat, 1 hollowed giant rat.
+FEED They buried the lamps with them, and the oil is still good.
+FEED Sable Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED Sable Fenwick casts Smite at cave bat.
+FEED Maela Bramble casts Frost at cave bat.
+FEED Rolf Rivers searches the chest - ...no loot... (Investigation 4 vs DC 11).
+FEED Ysolde Thatcher's bolt goes wide, and the wall is unamused (6 vs DC 10).
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED Sable Fenwick casts Smite at cave spider.
+FEED Maela Bramble's bolt comes out sideways - wild magic (7 vs DC 10).
+FEED Maela Bramble casts Frost at cave spider.
+FEED Sable Fenwick casts Smite at hollowed giant rat.
+FEED Maela Bramble casts Bolt at hollowed giant rat.
+FEED Ysolde Thatcher casts Bolt at hollowed giant rat.
+FEED Ysolde Thatcher searches (Investigation 10) and turns up 11 gold on floor 1.
+FEED Floor 1 is taken and the lamps are lit.
+  t=383s frames=15000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+FEED Ysolde Thatcher steps on a slot in the floor - a blade! DEX 6 vs DC 10, 7 damage.
+FEED Ysolde Thatcher searches the chest - ...no loot... (Investigation 7 vs DC 10).
+FEED Maela Bramble and 3 others take a breather, and press on deeper.
+FEED Mira Bramble settles in Bellmire, looking for work.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 hollowed cave spider, 1 slime, 1 cave spider.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave bats, 1 giant rat, 1 slime.
+FEED Maela Bramble casts Frost at cave bat.
+FEED Sable Fenwick fumbles bolt and the words come out as soup (6 vs DC 11).
+FEED Sable Fenwick casts Smite at cave bat.
+FEED Ysolde Thatcher casts Chain Bolt at cave bat.
+FEED The slime divides.
+FEED Nessa Thatcher speaks fire; something else finishes it (9 vs DC 11).
+FEED Nessa Thatcher turns on the wounded slimeling to finish it.
+FEED Cort Bramble turns on the wounded slimeling to finish it.
+FEED Osric Stonehand turns on the wounded slimeling to finish it.
+FEED Maela Bramble casts Bolt at giant rat.
+FEED Sable Fenwick casts Bolt at giant rat.
+FEED Rolf Rivers rolls a 20 - and the drowned giant rat is gone.
+FEED Maela Bramble casts Bolt at cave bat.
+FEED Nessa Thatcher casts Bolt at hollowed cave spider.
+FEED Rolf Rivers searches (Investigation 19) and turns up 40 gold on floor 3.
+FEED Floor 3 yields. The bell can rest.
+FEED Rolf Rivers finds a vial of Turner's Oil.
+FEED Maela Bramble casts Frost at slime.
+FEED Maela Bramble's bolt goes off a breath early - the scar is impatient (9 vs DC 11).
+FEED Rolf Rivers searches the chest - Successfully found loot!! 43 gold (Investigation 19 vs DC 11).
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED Ysolde Thatcher casts Fire at slime.
+FEED Sable Fenwick casts Bolt at slime.
+FEED Maela Bramble casts Frost at slime.
+FEED The slime divides.
+FEED Ysolde Thatcher's bolt lands somewhere nobody aimed (8 vs DC 11).
+FEED Ysolde Thatcher rolls a 20 searching the floor!
+FEED Ysolde Thatcher searches (Investigation 24) and turns up 35 gold on floor 2.
+FEED Clear. Bind the wounds, then check behind the door.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 2 drowned giant rats, 1 slime, 1 hollowed cave bat.
+FEED The oil is running low.
+FEED Maela Bramble and 3 others take a breather, and press on deeper.
+  t=454s frames=18000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+FEED Nessa Thatcher casts bolt and the scar spends it elsewhere (1 vs DC 12).
+FEED Rolf Rivers rolls a 20 - and the slime is gone.
+FEED The slime divides.
+FEED Rolf Rivers turns on the wounded slimeling to finish it.
+FEED Rolf Rivers searches (Investigation 5) and turns up 35 gold on floor 4.
+FEED Floor 4 is done, and the guild writes it down.
+FEED Cort of the Ford settles in Bellmire, looking for work.
+FEED Rolf Rivers searches the chest - ...no loot... (Investigation 7 vs DC 12).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed bone bowman, 1 hollowed puglin, 1 skeleton minion, 1 puglin.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED Maela Bramble speaks frost too quickly and the magic falls behind (1 vs DC 11).
+FEED Sable Fenwick's smite rebounds off a stone that was not there (9 vs DC 11).
+  t=493s frames=21000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 bone sentinels, 1 hollowed bone bowman, 1 drowned cave spider, 1 skeleton mage.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Maela Bramble casts Bolt at hollowed bone bowman.
+FEED Sable Fenwick turns on the wounded hollowed bone bowman to finish it.
+FEED Ysolde Thatcher turns on the wounded hollowed bone bowman to finish it.
+FEED Nessa Thatcher calls fire and something older takes the call (1 vs DC 12).
+FEED Maela Bramble casts Frost at hollowed puglin.
+FEED Cort Rivers rolls a 20 - and the hollowed puglin is gone.
+FEED Ysolde Thatcher searches (Investigation 7) and turns up 26 gold on floor 3.
+FEED Silence, except for flasks being counted.
+FEED Ysolde Thatcher searches the chest - Successfully found loot!! 33 gold (Investigation 11 vs DC 11).
+FEED Maela Bramble and 3 others take a breather, and press on deeper.
+FEED Rolf Rivers should be dead - and stands back up (19).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 5; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed slime, 4 drowned cave bats.
+FEED Mother Silk is down here. Every thread in the dark is hers.
+FEED The threads across the doorway are new.
+FEED The oil is running low.
+FEED Maela Bramble rolls a 20 for initiative and is moving before anything else.
+FEED Nessa Thatcher steps on a loose flagstone - green darts! DEX 9 vs DC 12, 6 damage.
+FEED Nessa Thatcher is venomed - the poison works over the next few seconds.
+FEED Cort Bramble sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED The hollowed slime divides.
+FEED Ysolde Thatcher's bolt goes sideways and takes a candle with it (6 vs DC 12).
+FEED Sable Fenwick casts bolt and the scar spends it elsewhere (10 vs DC 12).
+FEED Maela Bramble casts frost and gets weather for it (11 vs DC 12).
+FEED Osric Stonehand the duelist falls on floor 5 to the dark below. Level 2, 2 kills. !reroll to rise again.
+FEED Harl Thatcher settles in Bellmire, looking for work.
+  t=531s frames=24000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Maela Bramble turns on the wounded drowned cave bat to finish it.
+FEED Cort Rivers turns on the wounded drowned cave bat to finish it.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Spiders drop from Mother Silk's threads.
+FEED Mother Silk shifts, and the fight changes with it.
+FEED Mother Silk is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Maela Bramble breaks off to mend Cort Rivers, who is nearly down.
+FEED Cort Rivers is badly hurt and breaks off, making for the way up.
+FEED Cort Rivers the knight falls on floor 4 to the dark below. Level 2, 6 kills. !reroll to rise again.
+FEED Cort Bramble and 3 others get out alive, and come home with what they carried.
+FEED Cort Bramble and 2 others come home to Bellmire with 156 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 3 potions. 29 kills between them.
+FEED Cort Bramble is fitted with Tanner's Jerkin. (+10 hp)
+FEED Rolf Rivers is fitted with Ford Leathers. (+10 hp)
+FEED The party goes quiet at the third landing, as parties do.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed cave bat, 1 cave bat, 1 bog frog.
+FEED Somebody has been leaving fresh flowers. Nothing down here grows flowers.
+FEED Sable Fenwick casts Ward at Sable Fenwick.
+FEED Maela Bramble turns on the wounded cave spider to finish it.
+FEED Nessa Thatcher casts Bolt at bog frog.
+FEED Sable Fenwick casts Bolt at Mother Silk.
+FEED Ysolde Thatcher casts Bolt at Mother Silk.
+FEED Sable Fenwick breaks off to mend Sable Fenwick, who is nearly down.
+FEED Cort Bramble rolls a 20 - and the hollowed cave bat is gone.
+FEED Rolf Rivers searches (Investigation 22) and turns up 14 gold on floor 1.
+FEED Floor 1 is swept, and the broom was not theirs.
+FEED Rolf Rivers finds a vial of Gatewater.
+FEED Ysolde Thatcher casts Chain Bolt at Mother Silk.
+  t=564s frames=27000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=220
+FEED Maela Bramble casts Bolt at Mother Silk.
+FEED Sable Fenwick casts Smite at Mother Silk.
+FEED Maela Bramble is badly hurt and breaks off, making for the way up.
+FEED Sable Fenwick casts Smite at Mother Silk.
+FEED Ysolde Thatcher casts Bolt at Mother Silk.
+FEED Maela Bramble spots a dart trap (Perception 17 vs DC 12) and steps round it.
+FEED Sable Fenwick breaks off to mend Maela Bramble, who is nearly down.
+FEED Sable Fenwick should be dead - and stands back up (15).
+FEED Sable Fenwick the cleric falls on floor 4 to the dark below. Level 2, 7 kills. !reroll to rise again.
+FEED Ysolde Thatcher casts Fire at Mother Silk.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED 5 creatures boil out of the dungeon!
+FEED Initiative: the raiders 6, the watch 6 - the watch is ready for them.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Maela Bramble and 3 others get out alive, and come home with what they carried.
+FEED Maela Bramble, Ysolde Thatcher come home to Bellmire with 105 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 21 kills between them.
+FEED Ysolde Thatcher is fitted with Reed-Cloth Robe. (+10 hp)
+FEED Ysolde Thatcher fails the save. (CON 2)
+FEED Ysolde Thatcher is knocked senseless, but lives. The guild's grace - once.
+FEED Talen Thatcher settles in Bellmire, looking for work.
+FEED Maela Bramble fails the save. (CON 1)
+FEED Maela Bramble is knocked senseless, but lives. The guild's grace - once.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 skeleton minions, 1 puglin.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+  t=596s frames=30000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=220
+FEED Nessa Thatcher casts Fire at skeleton minion.
+FEED Something below has already counted the party.
+FEED They carry 7 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 3 slimes.
+FEED The oldest name on the wall is wet.
+FEED Maela Bramble casts Frost at slime.
+FEED Maela Bramble's bolt lands somewhere between a spell and a hiccup (7 vs DC 10).
+FEED Ysolde Thatcher casts Bolt at slime.
+FEED The slime divides.
+FEED Maela Bramble casts Frost at slimeling.
+FEED Nessa Thatcher's bolt fizzles into a damp little hiss (7 vs DC 11).
+FEED The attack is driven off. The gates hold.
+FEED Maela Bramble comes round.
+FEED Ysolde Thatcher comes round.
+FEED Nessa Thatcher casts Fire at puglin.
+FEED Rolf Rivers rolls a 20 - and the puglin is gone.
+FEED Ysolde Thatcher casts Chain Bolt at slime.
+D91T_OV f=32597 peasant(leg0) + peasant(leg0) at (33.3708, 0.90668, -70.21862) over 0.01
+D91T_OV f=32684 peasant(leg0) + child(leg0) at (33.31631, 0.918955, -71.20528) over 0.00
+FEED Maela Bramble casts Frost at slime.
+FEED Ysolde Thatcher casts Bolt at slime.
+FEED Maela Bramble casts Frost at slimeling.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone's children come squealing.
+FEED Ysolde Thatcher's chain goes sideways and takes a candle with it (7 vs DC 10).
+  t=623s frames=33000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED Ysolde Thatcher searches (Investigation 16) and turns up 12 gold on floor 1.
+FEED Floor 1 won. Count the flasks; one is always short.
+FEED Nessa Thatcher casts Fire at Gnawbone.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Cort Bramble is badly hurt and breaks off, making for the way up.
+FEED Gnawbone falls to Rolf Rivers.
+FEED Nessa Thatcher casts Bolt at giant rat.
+FEED Nessa Thatcher turns on the wounded giant rat to finish it.
+FEED Gnawbone is slain on floor 2!
+FEED The hoard is split 3 ways - 11 gold each to Cort Bramble, Rolf Rivers, Nessa Thatcher.
+FEED Maela Bramble, Ysolde Thatcher take a breather, and press on deeper.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Cort Bramble gets a captive free. 42 gold, 3 ways - small thanks for a poor life.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 cave bat, 1 puglin, 1 hollowed skeleton minion.
+FEED Maela Bramble rolls a 20 for initiative and is moving before anything else.
+FEED Maela Bramble's frost slips the words - wild magic (1 vs DC 11).
+  t=659s frames=36000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED Maela Bramble casts Bolt at giant rat.
+FEED Ysolde Thatcher casts Fire at giant rat.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned cave spider, 1 drowned slime, 1 drowned bone bowman, 1 hollowed risen bones.
+FEED Ysolde Thatcher searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED The scar eases its grip, for now.
+FEED Ysolde Thatcher finds a vial of The Wickmender's Sip.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Maela Bramble, Ysolde Thatcher take a breather, and press on deeper.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Maela Bramble gets a captive free. 42 gold, 2 ways - small thanks for a poor life.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+  t=695s frames=39000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Maela Bramble spots a pressure plate (Perception 19 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 hollowed bone bowman, 1 puglin, 1 hollowed puglin.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher works fire and the room takes the benefit (6 vs DC 11).
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher casts Bolt at drowned cave spider.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Sable of the Ford settles in Bellmire, looking for work.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Maela Bramble casts Bolt at puglin.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Ysolde Thatcher casts Bolt at puglin.
+FEED Maela Bramble casts Bolt at puglin.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Maela Bramble casts Frost at cave bat.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Maela Bramble casts Frost at hollowed bone bowman.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Maela Bramble pays for bolt in the wrong coin (8 vs DC 11).
+FEED Nessa Thatcher is cut off and falls back to the others.
+  t=728s frames=42000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED Maela Bramble casts Bolt at hollowed bone bowman.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Ysolde Thatcher steps on a grate - fire! DEX 2 vs DC 11, 14 damage.
+FEED Maela Bramble casts Frost at hollowed puglin.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Ysolde Thatcher casts Bolt at hollowed puglin.
+FEED Maela Bramble casts Frost at hollowed puglin.
+FEED Ysolde Thatcher searches (Investigation 11) and turns up 33 gold on floor 3.
+FEED Done and dusted, and dust is the right word.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Maela Bramble, Ysolde Thatcher take a breather, and press on deeper.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed risen bones, 1 bone bowman, 1 drowned slime, 1 hollowed bone bowman, 1 slime.
+FEED Cort Rivers, Kept by the Scar is down here. A knight of the guild who fell below, and the scar did not let go.
+FEED A voice the guild knew calls a name the guild remembers.
+FEED The oil is running low.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Osric Thatcher settles in Bellmire, looking for work.
+FEED 7 bandits are riding on the west road!
+FEED Initiative: the raiders 6, the watch 5 - the raiders strike first.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Ysolde Thatcher's chain rebounds off a stone that was not there (6 vs DC 12).
+FEED Maela Bramble mouths bolt and the scar answers in a rival tongue (10 vs DC 12).
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher is cut off and falls back to the others.
+  t=765s frames=45000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher casts Bolt at drowned slime.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher casts Bolt at drowned slime.
+FEED The slime divides.
+FEED Nessa Thatcher casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Rolf Rivers is cut off and falls back to the others.
+FEED Nessa Thatcher turns on the wounded drowned slimeling to finish it.
+FEED Cort Ashwood is killed by a bandit.
+FEED Maela Bramble turns on the wounded slimeling to finish it.
+FEED Ysolde Thatcher turns on the wounded slimeling to finish it.
+FEED Rolf Rivers rolls a 20 - and the drowned slimeling is gone.
+FEED Rolf Rivers searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED The room exhales. So do we.
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Rolf Rivers searches the chest - Successfully found loot!! 38 gold (Investigation 13 vs DC 11).
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Cort Rivers, Kept by the Scar shifts, and the fight changes with it.
+FEED A building is burning!
+FEED Cort Rivers, Kept by the Scar is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Cort Rivers, Kept by the Scar is enraged.
+FEED Ysolde Thatcher should be dead - and stands back up (13).
+FEED Ysolde Thatcher is badly hurt and breaks off, making for the way up.
+FEED The attack is driven off. The gates hold.
+FEED Maela Bramble breaks off to mend Ysolde Thatcher, who is nearly down.
+FEED The townsfolk raise the ruin again.
+FEED Cort Rivers, Kept by the Scar falls to Maela Bramble.
+FEED Maela Bramble breaks off to mend Ysolde Thatcher, who is nearly down.
+FEED Maela Bramble is cut off and falls back to the others.
+FEED Ysolde Thatcher has the wind back and turns to fight.
+  t=797s frames=48000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned giant rats, 1 cave spider, 2 hollowed giant rats.
+FEED The Weeping Bowman is down here. It never stops drawing.
+FEED A string twangs in the dark, and something weeps after it.
+FEED The oil is running low.
+FEED Maela Bramble casts Bolt at drowned slimeling.
+FEED Maela Bramble casts Bolt at drowned slimeling.
+FEED Ysolde Thatcher searches (Investigation 6) and turns up 35 gold on floor 4.
+FEED Done. The dark takes a step back and starts counting.
+FEED Tove Bramble settles in Bellmire, looking for work.
+FEED Ysolde Thatcher searches the chest - Successfully found loot!! 54 gold (Investigation 14 vs DC 12).
+FEED Maela Bramble, Ysolde Thatcher take a breather, and press on deeper.
+FEED The Weeping Bowman nocks a volley - cover!
+FEED The Weeping Bowman shifts, and the fight changes with it.
+FEED Nessa Thatcher's fire comes out sideways - wild magic (9 vs DC 12).
+FEED The Weeping Bowman nocks a volley - cover!
+FEED The Weeping Bowman is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Weeping Bowman nocks a volley - cover!
+  t=833s frames=51000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED The Weeping Bowman falls to Cort Bramble.
+FEED The Weeping Bowman is slain on floor 4!
+FEED The hoard is split 3 ways - 32 gold each to Cort Bramble, Rolf Rivers, Nessa Thatcher.
+FEED Rolf Rivers touches the altar - a curse. Something older than the floor takes a bite.
+FEED Rolf Rivers searches the chest - ...no loot... (Investigation 10 vs DC 12).
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 3 skeleton warriors, 1 hollowed bone bowman, 1 bone sentinel.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Maela Bramble's frost comes out as heat, light and nothing useful (7 vs DC 12).
+FEED Rolf Rivers searches the chest - ...no loot... (Investigation 4 vs DC 12).
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Ysolde Thatcher's fire spends itself on the stone instead (8 vs DC 12).
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 bone bowman, 1 risen bones, 1 hollowed bone sentinel.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Nessa Thatcher's fire is swallowed whole by the scar (1 vs DC 12).
+FEED Corvin Fenwick settles in Bellmire, looking for work.
+  t=870s frames=54000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED Bats pour out of the dark around Nightwing.
+FEED Ysolde Thatcher casts Bolt at The Grubmother.
+FEED Cort Bramble the monk falls on floor 5 to the dark below. Level 3, 15 kills. !reroll to rise again.
+FEED The Grubmother's brood spills out of her.
+FEED Maela Bramble casts Bolt at slimeling.
+FEED Ysolde Thatcher casts Chain Bolt at The Grubmother.
+FEED Ysolde Thatcher casts Bolt at The Grubmother.
+FEED Maela Bramble casts Bolt at The Grubmother.
+FEED Maela Bramble breaks off to mend Maela Bramble, who is nearly down.
+FEED Ysolde Thatcher casts Chain Bolt at The Grubmother.
+FEED Rolf Rivers should be dead - and stands back up (18).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Ysolde Thatcher casts Bolt at The Grubmother.
+FEED Ysolde Thatcher turns on the wounded slimeling to finish it.
+FEED Ysolde Thatcher casts Fire at slimeling.
+FEED Ysolde Thatcher steps on a loose flagstone - green darts! DEX 10 vs DC 12, 3 damage.
+FEED Ysolde Thatcher is venomed - the poison works over the next few seconds.
+FEED Cort Bramble and 2 others get out alive, and come home with what they carried.
+FEED Rolf Rivers, Nessa Thatcher come home to Bellmire with 216 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 3 potions. 28 kills between them.
+FEED Rolf Rivers takes up a Banded Quarterstaff. (+9 atk, 1d8) Folded twice; the smith signs it.
+FEED Nessa Thatcher takes up a Hazel Wand. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 20% off (22).
+FEED Ysolde Thatcher the mage falls on floor 5 to the dark below. Level 3, 14 kills. !reroll to rise again.
+  t=903s frames=57000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=220
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Maela Bramble, Ysolde Thatcher get out alive, and come home with what they carried.
+FEED Maela Bramble comes home to Bellmire with 156 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 3 potions. 34 kills between them.
+FEED Maela Bramble takes up a Tallow-Wrapped Rod. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 14% off (16).
+  t=933s frames=60000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=223
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 8, the watch 19 - the watch is ready for them.
+FEED A building is burning!
+FEED Osric Ashwood rolls a 20 - and a bandit falls.
+FEED Osric Ashwood goes down and claws back up. (CON save 16)
+FEED Osric Ashwood is knocked senseless, but lives. The guild's grace - once.
+FEED The townsfolk raise the ruin again.
+  t=967s frames=63000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=223
+FEED A building is burning!
+FEED A building is burning!
+FEED The new frame slips. The townsfolk will try again. (7 vs DC 12)
+  t=988s frames=66000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=223
+FEED The attack is driven off. The gates hold.
+FEED Osric Ashwood comes round.
+FEED The townsfolk raise the ruin again.
+  t=1025s frames=69000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=223
+FEED The new frame slips. The townsfolk will try again. (7 vs DC 12)
+FEED The new frame slips. The townsfolk will try again. (6 vs DC 12)
+  t=1055s frames=72000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=226
+FEED Ysolde Fenwick settles in Bellmire, looking for work.
+FEED The townsfolk raise the ruin again.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 2, the watch 20 - the watch is ready for them.
+FEED Maela Bramble goes down and claws back up. (CON save 16)
+FEED Maela Bramble the sage is cut down defending Bellmire by skeleton rogue. Level 4, 28 kills. !reroll to rise again.
+FEED Nessa Thatcher rolls a 20 on skeleton minion!
+  t=1091s frames=75000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=226
+FEED The attack is driven off. The gates hold.
+  t=1128s frames=78000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=228
+MUSTER timed out: dists=[27, 26, 176] vis=true stay=true route=0 inside=false
+  t=1158s frames=81000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=228
+FEED Dunn Coalfoot settles in Bellmire, looking for work.
+  t=1192s frames=84000 overlap_frames=2 (>1cm 1, worst 0.011) in_footprint=0 bodies<=229
+D91 TOWN: 1200 s, 84676 frames, up to 229 bodies on the street
+  overlap frames 2 (>1 cm: 1), overlapping pair-samples 2, worst 0.011 m
+  body-frames inside a footprint 0 of 17190154 (apart: 75405 on a seat, 25565 on a door leg)
+  the late settle: 156957 runs, 0.981 ms a run, 1.82 ms a frame (217 set out of a footprint)
+  of which gathering + footprint sweep 0.332 ms a run; 1.84 passes a run
+  OVERLAPS BY WHO:
+         1  peasant + peasant
+         1  child + peasant
+  IN A FOOTPRINT BY WHO:
+  IN A FOOTPRINT BY WHAT:
+  ok   the soak ran (84676 frames)
+  FAIL no frame with two bodies closer than the sum of their body_r by more than 1 cm (1)
+  FAIL no frame with any overlap at all (2, worst 0.0106 m)
+  ok   no body inside a registered footprint (0 body-frames)
+D91_TOWN FAIL (2 failed)

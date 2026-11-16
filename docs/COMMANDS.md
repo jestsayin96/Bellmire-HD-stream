@@ -8,6 +8,7 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 |---|---|---|---|---|---|
 | `!enlist` |  | [class] [people] | free | Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks. (no hero needed) | `!enlist knight dwarf` |
 | `!hero` | !stats, !sheet |  | free | Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record. | `!hero` |
+| `!catchup` | !mystory, !since |  | free | What happened to your hero while you were away: what they did, how it went, and where they stand now. One line, kept short on purpose - the Chronicle of every day in full, and the sheet behind it, are on the hub. (no hero needed) | `!catchup` |
 | `!inventory` | !inv, !bag, !items |  | free | What your hero carries: title, weapon, armour, accessories, dye, brews, oil, gold, and the best fish caught. | `!inventory` |
 | `!delve` |  |  | free (bring oil) | Walk to the scar and go down with the next party. Everyone carries their own oil; out of oil, the dark wins. | `!delve` |
 | `!fish` |  |  | free | Walk to a dock and fish: junk to rare catches. | `!fish` |

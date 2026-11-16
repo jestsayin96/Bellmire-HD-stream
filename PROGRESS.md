@@ -6281,3 +6281,31 @@ spent polling.
 - LOOKED AT: renders/cycles/20261116_l73long/l73_raid_100_a.png and l73_death_620_a.png. Raid frame: boss title card AND the NOW FIGHTING banner both show the same name at once (duplicate, boss_bar/other file - not mine to edit) and the boss card covers the DIRECTOR pane label; a Chronicle tooltip sits on the scroll. Death frame reads quiet and wide as intended.
 - Did NOT launch Godot: RUN_LOCK shows game build RUNNING 09:31 (finish ~10:00), no Godot process alive at 09:54 but under 45 min and inside its named window.
 - NEXT: L74 (feed/theme at 100/125/150% during a raid) on the next free engine slot. Mr. E decision: none.
+
+## S-cycle 2026-11-16 09:58 CT (supervisor) - three lanes merged, L73 TICKED, the :45 window ruled to the chat bot
+- MERGED to main: art (6f04d2a, 0c24620, 7e17df5 - Stoker chibi pass 3, the heat cap, the unconverted
+  Stoker's three fit views re-shot in the same pair run), content (6e053ff - C-64 event camp variants),
+  hud-ui (49cc0ef - U27, the L73 long director capture). PROGRESS.md conflicted between content's C-64 and
+  HUD's U27 at the same append point: BOTH SIDES KEPT, only the marker lines stripped, no cycle renumbered.
+- TICKED: L73 (the director's shot language). Its own DONE gate was the long capture and it came back
+  L73_LONG OK - events=5, cuts_logged=103, fails=0, first cut within 1.0-7.0 s on all five events with
+  told=true. Mr. E's eye stays final on whether the language reads; the measurement is what ticks.
+- RECORDED, NOT TICKED: C-64 (content has no WORK_PLAN item of its own; this is standing-backlog work,
+  logged beside C-63) and the Stoker's pass 3 (the register conversion is a standing permission, not a
+  numbered item - 2 of 14 now, both having taken three passes).
+- NOT TICKED AND WHY: D91 (the game build is MID-SLOT on D91d as I write and has not pushed); C-61 (the
+  content lane's data half is described as merged but the game build's code mirror is the last arm and
+  D94 waits on it); L69 and L70 (both written and merged, both owed engine gates only); L74 (not started).
+- LOCK: game build RUNNING 09:31:30, expected finish ~10:00. 28 minutes old, under 45, inside its own
+  named window - NOT CLEARED. But checked by process too: NO Godot alive at 09:59. Both facts are in the
+  plan so the next engine lane can act on the protocol (process is ground truth) without guessing.
+- PROTOCOL RULING, process not a new item: the chat bot has been starved of the engine FOUR CONSECUTIVE
+  SLOTS and everything it has left needs Godot - it has run out of engine-free work to be diligent with.
+  From now on a lane holding the lock at :38 starts no new battery and writes IDLE as soon as its current
+  battery ends; :45 to :58 belongs to the chat bot while it still owes engine gates. A running battery is
+  never chopped. Cost: one battery's delay. Gain: three written items can finally be gated.
+- LATER LIST OPENED (the freeze's own promise, finally given a place): the boss name on screen twice in a
+  raid, and the boss card covering the DIRECTOR pane label - both seen by the HUD lane in its own L73
+  still, both in boss_bar.gd which it does not own, neither invented as an item. Raised to Mr. E as NEEDS
+  MR. E 6, a yes/no.
+- SYNCED docs/WORK_PLAN.md from main to all six lane branches, md5-verified.

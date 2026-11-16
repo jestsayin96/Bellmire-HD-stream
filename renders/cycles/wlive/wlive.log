@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TWITCH_EVENTSUB broadcaster token valid (jestsayin96), 238 min left
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+TWITCH_EVENTSUB bot token valid (bellmirebro), 189 min left
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQ13YJ, keepalive 10 s
+W_LIVE socket=true subs_ok=6 subs_failed=[] rewards_ok=true keys=["delve", "fish", "join", "patch", "rally", "spotlight"]
+W_LIVE READY at 2.3 s - redeem one of Bellmire's rewards now
+TWITCH_EVENTSUB subscribed 7 of 7
+W_LIVE notification ids seen: 1
+W_LIVE notification ids seen: 1
+W_LIVE notification ids seen: 1
+W_LIVE notification ids seen: 1
+SPOTLIGHT 138821183 points 15s sent their hero fishing (no town)
+W_LIVE notification ids seen: 1
+W_LIVE ACTION uid=138821183 lane=points secs=15 reason=sent their hero fishing
+W_LIVE queue delve: code=200 unfulfilled=0
+W_LIVE queue fish: code=200 unfulfilled=0
+W_LIVE queue join: code=200 unfulfilled=0
+W_LIVE queue patch: code=200 unfulfilled=0
+W_LIVE queue rally: code=200 unfulfilled=0
+W_LIVE queue spotlight: code=200 unfulfilled=0
+W_LIVE dry-run chat lines: 0
+W_LIVE OK

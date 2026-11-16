@@ -1,0 +1,720 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Knight - playing its idle
+  t=28s frames=3000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Dunn Rivers settles in Bellmire, looking for work.
+  t=111s frames=6000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Rolf of the Ford settles in Bellmire, looking for work.
+FEED Sable of the Ford settles in Bellmire, looking for work.
+  t=226s frames=9000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=218
+FEED Corvin Ashwood settles in Bellmire, looking for work.
+MUSTER timed out: dists=[49, 88, 19, 71, 25, 79, 31, 87] vis=true stay=false route=40 inside=false
+  t=306s frames=12000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Cort Stonehand and 3 others descend into the dark and does not look back.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 cave spider.
+FEED The dead here were laid out in rows, and the rows were counted.
+FEED Bran Thatcher settles in Bellmire, looking for work.
+FEED The slime divides.
+FEED Hilda the Younger turns on the wounded slimeling to finish it.
+FEED Cort Stonehand casts Frost at slime.
+FEED Cort Stonehand searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Floor 1 is done, and the guild writes it down.
+FEED Cort Stonehand searches the chest - ...no loot... (Investigation 7 vs DC 10).
+  t=336s frames=15000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Cort Stonehand and 3 others take a breather, and press on deeper.
+FEED The last torch-bracket is empty, as if it knew.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 cave spider.
+FEED A tally of visitors, chalked by the dead, in our number.
+FEED Bran Quarryman reaches for frost; the scar reaches back (1 vs DC 10).
+FEED Bran Quarryman casts Bolt at giant rat.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 hollowed slime, 2 cave spiders.
+FEED Bran Quarryman casts Frost at cave spider.
+FEED Harl Stonehand casts Bolt at cave spider.
+FEED Harl Stonehand searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Floor 1 gives up its gold and keeps its grudge.
+FEED Cort Stonehand casts Frost at cave spider.
+FEED Cort Stonehand's bolt is swallowed whole by the scar (7 vs DC 11).
+FEED Cort Stonehand casts Renew at Hilda the Younger.
+  t=369s frames=18000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Cort Stonehand casts Bolt at hollowed slime.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 16 gold (Investigation 16 vs DC 10).
+FEED Harl Stonehand and 3 others take a breather, and press on deeper.
+FEED The hollowed slime divides.
+FEED Cort Stonehand searches (Investigation 7) and turns up 13 gold on floor 2.
+FEED Cleared, and the torches burn steady again.
+FEED Rask the Younger settles in Bellmire, looking for work.
+FEED Cort Stonehand searches the chest - Successfully found loot!! 31 gold (Investigation 20 vs DC 11).
+FEED Cort Stonehand and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed giant rat, 1 cave spider, 2 cave bats.
+FEED Cort Stonehand cracks the chain off a captive - 42 gold passes to the party, split 4 ways.
+FEED Bran Quarryman casts Frost at cave bat.
+FEED Harl Stonehand casts Chain Bolt at cave bat.
+FEED Wren Hollow pays for bolt and the scar keeps the receipt (7 vs DC 11).
+FEED Bran Quarryman casts Bolt at cave spider.
+  t=402s frames=21000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Harl Stonehand casts bolt and the scar spends it elsewhere (10 vs DC 11).
+FEED Bran Quarryman calls frost and the wall calls back (9 vs DC 11).
+FEED Wren Hollow casts Chain Bolt at cave spider.
+FEED Bran Quarryman casts Frost at hollowed giant rat.
+FEED Harl Stonehand casts Chain Bolt at hollowed giant rat.
+FEED Wren Hollow casts Bolt at cave bat.
+FEED Bran Quarryman casts Frost at cave bat.
+FEED Harl Stonehand searches (Investigation 25) and turns up 29 gold on floor 2.
+FEED Floor 2 falls silent.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 25 gold (Investigation 12 vs DC 11).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 puglins, 1 slime, 1 giant rat.
+FEED Harl Stonehand and 3 others take a breather, and press on deeper.
+FEED Harl Stonehand gets a captive free. 42 gold, 4 ways - small thanks for a poor life.
+FEED Rask Stonehand rolls a 20 - and the puglin is gone.
+FEED Rask Stonehand spots a pressure plate (Perception 17 vs DC 11) and steps round it.
+  t=433s frames=24000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Cort Stonehand is cut off and falls back to the others.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 1 skeleton minion, 1 hollowed bone bowman, 1 drowned giant rat.
+FEED The slime divides.
+FEED Cort Stonehand is cut off and falls back to the others.
+FEED Rask Quarryman settles in Bellmire, looking for work.
+FEED Hilda the Younger turns on the wounded slimeling to finish it.
+FEED Cort Stonehand searches (Investigation 21) and turns up 42 gold on floor 3.
+FEED Silence, except for flasks being counted.
+FEED Bran Quarryman casts Bolt at hollowed bone bowman.
+FEED Harl Stonehand casts Bolt at hollowed bone bowman.
+FEED Cort Stonehand and 3 others take a breather, and press on deeper.
+  t=466s frames=27000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Wren Hollow casts Chain Bolt at skeleton minion.
+FEED Bran Quarryman casts Frost at drowned puglin.
+FEED Harl Stonehand casts Chain Bolt at drowned puglin.
+FEED Harl Stonehand turns on the wounded skeleton minion to finish it.
+FEED Bran Thatcher turns on the wounded skeleton minion to finish it.
+FEED Bran Quarryman turns on the wounded skeleton minion to finish it.
+FEED Wren Hollow turns on the wounded skeleton minion to finish it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 2 hollowed giant rats, 1 cave spider, 1 drowned puglin.
+FEED The oil is running low.
+FEED Bran Quarryman casts Frost at drowned puglin.
+FEED Harl Stonehand casts Chain Bolt at drowned puglin.
+FEED Harl Stonehand searches (Investigation 9) and turns up 26 gold on floor 3.
+FEED Held, and the door is still ours.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 32 gold (Investigation 12 vs DC 11).
+FEED Harl Stonehand and 3 others take a breather, and press on deeper.
+FEED Cort Stonehand shapes frost and the floor finishes the shape (10 vs DC 12).
+FEED The slime divides.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 skeleton minion, 1 slime, 2 giant rats, 1 hollowed slime.
+FEED The oil is running low.
+FEED Cort Stonehand searches (Investigation 11) and turns up 35 gold on floor 4.
+FEED The way back is chalked and clear.
+FEED Bran Quarryman fumbles frost and the words come out as soup (11 vs DC 12).
+  t=500s frames=30000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED The hollowed slime divides.
+FEED Wren Hollow says bolt and the floor says something back (1 vs DC 12).
+FEED Cort Stonehand and 3 others take a breather, and press on deeper.
+FEED Cort Stonehand spots a dart trap (Perception 15 vs DC 12) and steps round it.
+FEED Bran Thatcher rolls a 20 - and the slimeling is gone.
+FEED Harl Stonehand searches (Investigation 24) and turns up 59 gold on floor 4.
+FEED The room gives up and the lamps steady.
+FEED Harl Stonehand finds a vial of Tiler's Draught.
+FEED Ingrid Thatcher settles in Bellmire, looking for work.
+FEED 4 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 14 - the watch is ready for them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 1 drowned skeleton warrior, 1 drowned bone bowman, 1 bone sentinel, 1 risen bones.
+FEED The Hollow King, Scoured rises. The scarstorm stripped the fire off it - nothing burns now, and everything cuts.
+FEED The guild has put down The Hollow King before. Not this one.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Harl Stonehand searches the chest - ...no loot... (Investigation 7 vs DC 12).
+FEED Harl Stonehand and 3 others take a breather, and press on deeper.
+FEED Bran Thatcher touches the altar - a curse. Something older than the floor takes a bite.
+  t=532s frames=33000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Cort Stonehand's bolt slips the words - wild magic (1 vs DC 12).
+FEED Cort Stonehand casts Bolt at bone sentinel.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone sentinel, 1 cave spider, 1 bone bowman, 1 bone sentinel, 1 skeleton warrior.
+FEED The Rattling Host, Standard-Bearing rises. One bearer holds the banner high - drop it and the rest fall to pieces.
+FEED The guild has put down The Rattling Host before. Not this one.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Bran Quarryman's renew rebounds off a stone that was not there (1 vs DC 12).
+FEED Harl Stonehand casts bolt and the scar sneezes (1 vs DC 12).
+FEED Cort Stonehand casts Frost at skeleton warrior.
+FEED Cort Stonehand casts Renew at Hilda the Younger.
+FEED Rask Stonehand rolls a 20 - The Hollow King, Scoured reels.
+  t=559s frames=36000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King, Scoured shifts, and the fight changes with it.
+FEED Cort Stonehand casts Frost at The Hollow King, Scoured.
+FEED Rask Stonehand is badly hurt and breaks off, making for the way up.
+FEED The attack is driven off. The gates hold.
+FEED Cort Stonehand casts Frost at The Hollow King, Scoured.
+FEED Osric Coalfoot is cut off and falls back to the others.
+FEED The Hollow King, Scoured is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Osric Coalfoot is cut off and falls back to the others.
+FEED Wren Hollow casts chain; the scar casts something else (8 vs DC 12).
+FEED Osric Coalfoot is cut off and falls back to the others.
+FEED Rask Stonehand should be dead - and stands back up (15).
+FEED Osric Coalfoot is cut off and falls back to the others.
+FEED Rask Stonehand the ranger falls on floor 5 to the dark below. Level 3, 12 kills. !reroll to rise again.
+FEED Cort Stonehand breaks off to mend Hilda the Younger, who is nearly down.
+FEED Cort Stonehand casts Renew at Hilda the Younger.
+FEED Corvin Bramble settles in Bellmire, looking for work.
+FEED Cort Stonehand casts Bolt at The Hollow King, Scoured.
+FEED The Hollow King, Scoured falls to Cort Stonehand.
+FEED The Hollow King, Scoured is slain on floor 5!
+FEED A hoard that size does not come off an ordinary The Hollow King.
+FEED The hoard is split 3 ways - 109 gold each to Cort Stonehand, Osric Coalfoot, Hilda the Younger.
+FEED Bran Thatcher is cut off and falls back to the others.
+FEED Harl Stonehand casts Chain Bolt at drowned bone sentinel.
+FEED Bran Thatcher is badly hurt and breaks off, making for the way up.
+FEED Harl Stonehand casts Chain Bolt at drowned bone sentinel.
+FEED Wren Hollow casts Bolt at drowned bone sentinel.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Cort Stonehand and 2 others come home to Bellmire with 461 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 4 potions. 32 kills between them.
+FEED Cort Stonehand is fitted with Reed-Cloth Robe. (+10 hp) Haggled 20% off (23).
+FEED Osric Coalfoot is fitted with Tanner's Jerkin. (+10 hp) Haggled 19% off (21).
+FEED Hilda the Younger is fitted with Ford Leathers. (+10 hp)
+FEED Harl Stonehand casts Chain Bolt at drowned bone sentinel.
+FEED Wren Hollow is cut off and falls back to the others.
+FEED Harl Stonehand is cut off and falls back to the others.
+FEED Wren Hollow is cut off and falls back to the others.
+FEED Harl Stonehand is cut off and falls back to the others.
+FEED Wren Hollow casts Bolt at drowned bone sentinel.
+FEED Harl Stonehand casts Chain Bolt at drowned bone sentinel.
+  t=600s frames=39000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Harl Stonehand casts Chain Bolt at drowned bone sentinel.
+FEED Wren Hollow casts Chain Bolt at drowned bone sentinel.
+FEED The Rattling Host, Standard-Bearing shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED Harl Stonehand casts Bolt at The Rattling Host, Standard-Bearing.
+FEED Wren Hollow casts Chain Bolt at The Rattling Host, Standard-Bearing.
+FEED Wren Hollow the necromancer falls on floor 5 to the dark below. Level 2, 8 kills. !reroll to rise again.
+FEED Harl Stonehand is cut off and falls back to the others.
+FEED Harl Stonehand casts Bolt at The Rattling Host, Standard-Bearing.
+FEED The Rattling Host, Standard-Bearing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Harl Stonehand and 3 others get out alive, and come home with what they carried.
+FEED Harl Stonehand and 2 others come home to Bellmire with 195 gold, 6 ore, 4 stone, 2 pieces of salvaged gear and 4 potions. 25 kills between them.
+FEED Harl Stonehand is fitted with Reed-Cloth Robe. (+10 hp)
+  t=629s frames=42000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Wet steps, bare walls, a long way to the first door.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 bog frog.
+FEED A tally of visitors, chalked by the dead, in our number.
+FEED Hilda the Younger rolls a 20 - and the slime is gone.
+FEED The slime divides.
+FEED Cort Stonehand casts Frost at slimeling.
+FEED Cort Stonehand's frost curdles on the tongue and comes out wrong (7 vs DC 10).
+FEED Cort Stonehand casts Bolt at slimeling.
+FEED Cort Stonehand searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED The rubble settles and the roll can have its tick.
+FEED Down past the last marker anyone bothered to carve.
+FEED They carry 10 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 skeleton minion, 1 cave spider.
+FEED Grave goods, left where they lay. Nobody down here needs a comb.
+FEED Bran Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Bran Quarryman casts Frost at cave spider.
+  t=661s frames=45000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Harl Stonehand casts Bolt at cave spider.
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Bran Quarryman casts Frost at skeleton minion.
+FEED Harl Stonehand casts Chain Bolt at skeleton minion.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 10 - the watch is ready for them.
+FEED Bran Quarryman casts Bolt at slime.
+FEED The slime divides.
+FEED Harl Stonehand's bolt splits in two, and neither half works (8 vs DC 10).
+FEED Harl Stonehand searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Done. The dark takes a step back and starts counting.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 bog frogs, 1 cave bat.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 22 gold (Investigation 21 vs DC 10).
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+FEED Cort Stonehand casts Frost at bog frog.
+  t=694s frames=48000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED Hilda the Younger spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED Cort Stonehand works frost and the scar gives it back inside out (7 vs DC 11).
+FEED Cort Stonehand casts Bolt at bog frog.
+FEED Hilda the Younger cracks the chain off a captive - 42 gold passes to the party, split 3 ways.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 giant rats, 1 bog frog, 1 puglin.
+FEED Gnawbone's children come squealing.
+FEED Cort Stonehand casts Bolt at Gnawbone.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Bran Quarryman casts Frost at giant rat.
+FEED Gnawbone falls to Cort Stonehand.
+FEED Harl Stonehand casts Chain Bolt at giant rat.
+FEED Cort Stonehand casts Bolt at giant rat.
+FEED Bran Quarryman shapes frost and the floor finishes the shape (8 vs DC 11).
+FEED Cort Stonehand rolls a 20 searching the floor!
+FEED Gnawbone is slain on floor 2!
+FEED The hoard is split 3 ways - 23 gold each to Cort Stonehand, Osric Coalfoot, Hilda the Younger.
+FEED Cort Stonehand finds a vial of Salter's Cure.
+  t=716s frames=51000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+FEED The attack is driven off. The gates hold.
+FEED Harl Stonehand casts Bolt at bog frog.
+FEED Bran Quarryman casts Bolt at bog frog.
+FEED Harl Stonehand casts Chain Bolt at giant rat.
+FEED Bran Quarryman casts Bolt at giant rat.
+D91T_OV f=51945 trader(leg0) + peasant(leg0) at (33.44487, 0.90945, -71.13824) over 0.00
+D91T_OV f=51945 trader(leg0) + peasant(leg0) at (33.44487, 0.90945, -71.13824) over 0.04
+D91T_OV f=51945 trader(leg0) + peasant(leg0) at (33.44487, 0.90945, -71.13824) over 0.02
+D91T_OV f=51945 trader(leg0) + crier(leg0) at (33.44487, 0.90945, -71.13824) over 0.03
+D91T_OV f=51945 peasant(leg0) + child(leg0) at (33.34846, 0.921928, -71.65304) over 0.02
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Bran Quarryman casts Frost at puglin.
+FEED Harl Stonehand casts Bolt at puglin.
+FEED Harl Stonehand searches (Investigation 25) and turns up 29 gold on floor 2.
+FEED The torch burns steady again.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 34 gold (Investigation 14 vs DC 11).
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+  t=752s frames=54000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned bone bowman, 1 drowned slime, 1 puglin, 1 skeleton minion.
+FEED Osric Coalfoot rolls a 20 - and the puglin is gone.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 2 risen bones, 1 bone bowman.
+FEED Rask Stonehand, Kept by the Scar is down here. A ranger of the guild who fell below, and the scar did not let go.
+FEED A voice the guild knew calls a name the guild remembers.
+FEED The oil is running low.
+FEED Cort Stonehand is cut off and falls back to the others.
+FEED Cort Stonehand is cut off and falls back to the others.
+FEED Bran Quarryman asks for bolt. The scar is not taking requests (1 vs DC 11).
+FEED Hilda the Younger is cut off and falls back to the others.
+FEED Rask Stonehand, Kept by the Scar shifts, and the fight changes with it.
+FEED Rask Stonehand, Kept by the Scar is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Rask Stonehand, Kept by the Scar is enraged.
+FEED Harl Stonehand's chain comes out sideways - wild magic (10 vs DC 11).
+  t=790s frames=57000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED Cort Stonehand casts Renew at Hilda the Younger.
+FEED Rask Stonehand, Kept by the Scar falls to Bran Quarryman.
+FEED The drowned slime divides.
+FEED Bran Quarryman casts Frost at puglin.
+FEED Harl Stonehand casts Chain Bolt at puglin.
+FEED Hilda the Younger turns on the wounded drowned slimeling to finish it.
+FEED Cort Stonehand searches (Investigation 13) and turns up 34 gold on floor 3.
+FEED Floor 3: counted, corked, kept.
+FEED Cort Stonehand finds a vial of Foxfire Drops.
+FEED Harl Stonehand casts Bolt at bone bowman.
+FEED Bran Quarryman breaks off to mend Bran Thatcher, who is nearly down.
+FEED Bran Quarryman casts Renew at Bran Thatcher.
+FEED Harl Stonehand searches (Investigation 12) and turns up 33 gold on floor 3.
+FEED Done and dusted, and dust is the right word.
+FEED Cort Stonehand searches the chest - Successfully found loot!! 44 gold (Investigation 20 vs DC 11).
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 32 gold (Investigation 14 vs DC 11).
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+FEED 6 bandits are riding on the west road!
+FEED Initiative: the raiders 19, the watch 22 - the watch is ready for them.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 1 drowned slime, 1 bone bowman, 1 hollowed skeleton minion, 1 cave spider.
+FEED Bran Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 risen bones, 1 skeleton minion, 1 hollowed cave spider, 1 hollowed slime, 1 bone bowman.
+FEED The oil is running low.
+FEED Hilda the Younger rolls a 20 for initiative and is moving before anything else.
+  t=825s frames=60000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED Bran Thatcher steps on a loose flagstone - darts! DEX 3 vs DC 12, 10 damage.
+FEED The hollowed slime divides.
+FEED The slime divides.
+FEED Bran Quarryman's bolt goes wide, and the wall is unamused (10 vs DC 12).
+FEED A building is burning!
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 10)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Cort Stonehand's bolt goes wrong - the scar answers (7 vs DC 12).
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Cort Ashwood rolls a 20 on the save - and is up again, sword in hand.
+FEED Cort Stonehand searches (Investigation 13) and turns up 45 gold on floor 4.
+FEED Cleared. The dark moves back a pace, and no further.
+FEED The attack is driven off. The gates hold.
+FEED Harl Stonehand's chain fizzles into a damp little hiss (11 vs DC 12).
+FEED Cort Stonehand steps on a spiked plate - spikes! DEX 13 vs DC 12, 4 damage (halved).
+FEED Cort Stonehand touches the altar - a curse. Something older than the floor takes a bite.
+  t=853s frames=63000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED The new frame slips. The townsfolk will try again. (10 vs DC 12)
+FEED Cort Stonehand searches the chest - Successfully found loot!! 45 gold (Investigation 13 vs DC 12).
+FEED Harl Stonehand turns on the wounded drowned slimeling to finish it.
+FEED Bran Thatcher turns on the wounded drowned slimeling to finish it.
+FEED Harl Stonehand searches (Investigation 20) and turns up 54 gold on floor 4.
+FEED Held. The door is kept, which means the whole thing was.
+FEED Harl Stonehand finds a vial of Chalk Draught.
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Harl Stonehand touches the altar - a curse. Something older than the floor takes a bite.
+FEED Out of oil, the party feels its way back up from floor 4.
+FEED Harl Stonehand and 2 others come home to Bellmire with 212 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 4 potions. 23 kills between them.
+FEED Harl Stonehand takes up a Reed-Singer's Wand. (+9 atk, 1d8) Folded twice; the smith signs it.
+FEED Wren Ashwood settles in Bellmire, looking for work.
+FEED The new frame slips. The townsfolk will try again. (7 vs DC 12)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned cave spider, 2 skeleton warriors, 1 bone bowman, 1 hollowed bone sentinel.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Hilda the Younger rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Cort Stonehand's frost lands somewhere between a spell and a hiccup (10 vs DC 12).
+  t=888s frames=66000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED Harl Stonehand and 2 others descend under the arch where the lamplight gives up.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 puglin, 1 hollowed giant rat.
+FEED The dead here were laid out in rows, and the rows were counted.
+FEED Hilda the Younger sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Bran Quarryman casts Frost at puglin.
+FEED Harl Stonehand shapes bolt and the floor finishes the shape (8 vs DC 10).
+FEED Bran Quarryman casts Bolt at cave bat.
+FEED The townsfolk raise the ruin again.
+FEED The Grubmother's brood spills out of her.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Grubmother falls to Osric Coalfoot.
+FEED Harl Stonehand searches (Investigation 15) and turns up 12 gold on floor 1.
+FEED The fight's out of the walls, and the walls know it.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 3 ways - 74 gold each to Cort Stonehand, Osric Coalfoot, Hilda the Younger.
+  t=917s frames=69000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED Harl Stonehand searches the chest - Successfully found loot!! 18 gold (Investigation 26 vs DC 10).
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Cort Stonehand and 2 others come home to Bellmire with 467 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 5 potions. 33 kills between them.
+FEED Cort Stonehand takes up an Ashen Staff. (+9 atk, 1d8) Folded twice; the smith signs it. Haggled 13% off (15).
+FEED Osric Coalfoot is fitted with Studded Brigandine. (+26 hp) Haggled 11% off (13).
+FEED Hilda the Younger is fitted with Studded Brigandine. (+26 hp)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 puglin, 1 bog frog, 1 cave bat, 1 hollowed bog frog.
+FEED Harl Stonehand rolls a 20 for initiative and is moving before anything else.
+FEED Bran Thatcher rolls a 20 for initiative and is moving before anything else.
+FEED Harl Stonehand casts Chain Bolt at cave bat.
+FEED Harl Stonehand turns on the wounded hollowed bog frog to finish it.
+FEED Bran Thatcher turns on the wounded hollowed bog frog to finish it.
+FEED Bran Quarryman turns on the wounded hollowed bog frog to finish it.
+FEED Bran Quarryman casts Frost at bog frog.
+FEED Harl Stonehand casts Chain Bolt at bog frog.
+FEED Bran Quarryman's bolt answers to the ground instead (8 vs DC 11).
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 14, the watch 21 - the watch is ready for them.
+FEED Bran Quarryman casts Frost at puglin.
+FEED Harl Stonehand casts Bolt at puglin.
+FEED Harl Stonehand searches (Investigation 20) and turns up 27 gold on floor 2.
+FEED The air smells of smoke and settled debts.
+FEED Harl Stonehand finds a vial of Dewcap Drops.
+  t=949s frames=72000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED Harl Stonehand searches the chest - Successfully found loot!! 31 gold (Investigation 15 vs DC 11).
+FEED The attack is driven off. The gates hold.
+FEED Aldric Hollow settles in Bellmire, looking for work.
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+FEED Cort Stonehand and 2 others descend down, shield first.
+FEED They carry 15 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave bat, 1 slime.
+FEED A tomb cut for one, filled by a hundred.
+  t=977s frames=75000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=219
+FEED Cort Stonehand casts Frost at giant rat.
+FEED The slime divides.
+FEED Cort Stonehand casts Bolt at slimeling.
+FEED Cort Stonehand searches (Investigation 24) and turns up 14 gold on floor 1.
+FEED The room exhales. So do we.
+FEED Cort Stonehand searches the chest - Successfully found loot!! 27 gold (Investigation 25 vs DC 10).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 drowned slime, 2 cave spiders.
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Harl Stonehand casts Chain Bolt at cave spider.
+FEED Bran Quarryman casts Frost at cave spider.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 slimes, 1 skeleton minion.
+FEED Harl Stonehand calls bolt and the wall calls back (10 vs DC 11).
+FEED Bran Quarryman spots a fire grate (Perception 24 vs DC 11) and steps round it.
+  t=1013s frames=78000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=222
+FEED Harl Stonehand casts Chain Bolt at drowned giant rat.
+FEED Bran Quarryman casts Bolt at cave spider.
+FEED Cort Stonehand calls bolt and something older takes the call (7 vs DC 11).
+FEED The slime divides.
+FEED Hilda the Younger turns on the wounded slimeling to finish it.
+FEED Wren the Younger settles in Bellmire, looking for work.
+FEED Osric Coalfoot rolls a 20 - and the slimeling is gone.
+FEED Cort Stonehand casts Bolt at slimeling.
+FEED Harl Stonehand casts Chain Bolt at drowned slime.
+FEED Bran Quarryman casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Bran Quarryman turns on the wounded drowned slimeling to finish it.
+FEED Harl Stonehand turns on the wounded drowned slimeling to finish it.
+FEED Harl Stonehand searches (Investigation 19) and turns up 40 gold on floor 3.
+FEED Quiet. The bell with no clapper rang anyway.
+FEED Harl Stonehand finds a vial of Tinker's Phial.
+FEED Cort Stonehand casts Bolt at slimeling.
+FEED Cort Stonehand searches (Investigation 8) and turns up 17 gold on floor 2.
+FEED Floor 2 quiets, and something deeper takes notice.
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+FEED Cort Stonehand searches the chest - Successfully found loot!! 24 gold (Investigation 25 vs DC 11).
+  t=1048s frames=81000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=223
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned giant rats, 1 drowned slime, 1 bone bowman, 1 hollowed slime.
+FEED The oil is running low.
+FEED Bran Quarryman's frost unspools in their hands (8 vs DC 12).
+FEED The hollowed slime divides.
+FEED Harl Stonehand's bolt fizzles into a belch of ash (11 vs DC 12).
+FEED Bran Thatcher steps on a spiked plate - spikes! DEX 9 vs DC 12, 9 damage.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 bone bowman, 1 drowned skeleton minion, 1 risen bones, 1 cave bat.
+FEED Osric the Younger settles in Bellmire, looking for work.
+  t=1082s frames=84000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=224
+FEED Bran Thatcher spots a dart trap (Perception 16 vs DC 12) and steps round it.
+FEED Harl Stonehand searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED Clear, and the only sound left is the lamps.
+FEED Harl Stonehand searches the chest - Successfully found loot!! 53 gold (Investigation 21 vs DC 12).
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 18 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 2 riders.
+FEED Cort Stonehand turns on the wounded cave bat to finish it.
+FEED Osric Coalfoot turns on the wounded cave bat to finish it.
+FEED Hilda the Younger turns on the wounded cave bat to finish it.
+FEED Harl Stonehand and 2 others take a breather, and press on deeper.
+FEED Hilda the Younger steps on a plate - a stone from the ceiling! DEX 25 vs DC 11, 4 damage (halved).
+FEED Cort Stonehand searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED Held. The door is kept, and so is everyone standing.
+FEED Dunn Thatcher's charge crashes into skeleton minion!
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 2 drowned skeleton warriors, 1 bone bowman, 1 skeleton warrior.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Dunn Thatcher goes down and claws back up. (CON save 16)
+FEED Dunn Thatcher is killed by skeleton minion.
+FEED Harl Stonehand's bolt curdles on the tongue and comes out wrong (10 vs DC 12).
+  t=1122s frames=87000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=224
+FEED Bran Quarryman asks for bolt. The scar is not taking requests (11 vs DC 12).
+FEED Ingrid Fenwick goes down and claws back up. (CON save 11)
+FEED Ingrid Fenwick is killed by skeleton warrior.
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton minion.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 1 hollowed slime, 2 giant rats, 1 drowned cave bat.
+FEED Corvin Ashwood settles in Bellmire, looking for work.
+FEED Cort Stonehand loses the shape of bolt halfway (8 vs DC 12).
+FEED The attack is driven off. The gates hold.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Bats pour out of the dark around Nightwing.
+FEED Nightwing falls to Bran Quarryman.
+FEED The hollowed slime divides.
+FEED Cort Stonehand searches (Investigation 15) and turns up 47 gold on floor 4.
+FEED Floor 4 theirs. Bellmire does not know yet.
+  t=1153s frames=90000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=224
+FEED Harl Stonehand rolls a 20 searching the floor!
+FEED Harl Stonehand searches (Investigation 27) and turns up 88 gold on floor 5.
+FEED One more room the dark has lost.
+FEED Cort Stonehand searches the chest - Successfully found loot!! 53 gold (Investigation 15 vs DC 12).
+FEED Cort Stonehand and 2 others take a breather, and press on deeper.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Harl Stonehand and 2 others come home to Bellmire with 318 gold, 9 ore, 6 stone, 5 pieces of salvaged gear and 5 potions. 29 kills between them.
+FEED Harl Stonehand is fitted with Rune-Hemmed Vestment. (+48 hp)
+FEED Harl Stonehand and 2 others descend into the scar at the hour the bell does not ring.
+FEED They carry 13 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 slime, 1 giant rat.
+FEED The lids were moved from the inside, and then put back.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 1 drowned bone bowman, 1 hollowed skeleton warrior, 1 risen bones, 1 bone sentinel.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED The oil is running low.
+FEED Bran Quarryman casts Frost at hollowed giant rat.
+FEED Harl Stonehand casts Bolt at hollowed giant rat.
+  t=1188s frames=93000 overlap_frames=1 (>1cm 1, worst 0.036) in_footprint=0 bodies<=224
+FEED The slime divides.
+FEED Bran Quarryman casts Bolt at slimeling.
+FEED Harl Stonehand's chain comes out as heat, light and nothing useful (9 vs DC 10).
+FEED Bran Quarryman casts Frost at giant rat.
+FEED Harl Stonehand rolls a 20 searching the floor!
+FEED Harl Stonehand searches (Investigation 27) and turns up 17 gold on floor 1.
+FEED Floor 1 is swept, which here is a figure of speech.
+FEED Corvin the Younger settles in Bellmire, looking for work.
+D91 TOWN: 1200 s, 94041 frames, up to 224 bodies on the street
+  overlap frames 1 (>1 cm: 1), overlapping pair-samples 5, worst 0.036 m
+  body-frames inside a footprint 0 of 18354381 (apart: 96463 on a seat, 31031 on a door leg)
+  the late settle: 166270 runs, 0.891 ms a run, 1.57 ms a frame (342 set out of a footprint)
+  of which gathering + footprint sweep 0.320 ms a run; 2.22 passes a run
+  OVERLAPS BY WHO:
+         3  peasant + trader
+         1  crier + trader
+         1  child + peasant
+  IN A FOOTPRINT BY WHO:
+  IN A FOOTPRINT BY WHAT:
+  ok   the soak ran (94041 frames)
+  FAIL no frame with two bodies closer than the sum of their body_r by more than 1 cm (1)
+  FAIL no frame with any overlap at all (1, worst 0.0362 m)
+  ok   no body inside a registered footprint (0 body-frames)
+D91_TOWN FAIL (2 failed)

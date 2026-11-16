@@ -6884,3 +6884,12 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
 - ONE THING FOR THE RECORD AGAINST MYSELF: I spent :45 to :48 reading the plan, the ruling and the
   code before claiming, so the engine work started three minutes into a seven-minute window. The
   battery still ended inside it, but next slot the lock claim comes first and the reading second.
+
+
+## U40 - Chronicle top line no longer flush under the scroll rail (HUD, feed_hud.gd)
+- ITEM: the supervisor's 14:58 "YOUR NEXT" (the side observation from U39). Phase 1, "stop it looking broken".
+- MEASURED (tools/_u40_pad_test.gd, windowed 1920x1080, raid flood, grid): gap between the vellum top and the first line was 2.0 px at 100% (FAIL, flush), 32 px at 125%, 10 px at 150%.
+- FIX: feed_hud.gd `_vellum()` insets the open vellum 6 px (scaled) under the top rail and 1.5x that off the bottom; `_place_chrome`, `_chrome_lines`, `_chrome_h`, `_chrome_text_w` all use it so the height-fit still counts whole entries. hud_dock.gd untouched.
+- AFTER: 100% gap 6.0 px, 125% 34 px, 150% 12 px; U40_TEST OK. Tried a bottom pad of 2x: it pushed the two-line top entry out and left a 34 px hole at 100%, worse, so reverted to 1.5x. Bottom line at 100% sits ~0.4 px past the unpadded sheet_rect edge, still clear of the rail in the still.
+- LOOKED: renders/cycles/u40/u40_before_100.png vs u40_after_100.png (and 125/150).
+- Lock: three short claims (15:53, 15:56, 15:58), each under 6 min, all released well before :07.

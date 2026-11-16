@@ -136,30 +136,38 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-15 23:58 CT. If you own a lane, your next item is named here. Search the file
+Updated 2026-11-16 01:05 CT. If you own a lane, your next item is named here. Search the file
 for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."
 
-  GAME BUILD   ->  *** D94 *** EVERY ITEM MUST LOOK LIKE ITSELF. Mr. E's 00:55 order; it
-                   outranks everything. Finish D83 only if it is mid-flight, then D94.
-                   D91 stages 2-4 wait. HUD, HUB and CONTENT are shut down for this.
-                   D88 is DONE and ticked. D83 and D91 stages 2-4 are the whole of Phase 1's
-                   remainder - finish them before anything in Phase 2 or 3.
-  HUD          ->  L73's LAST STEP ONLY, then L74. The shot language itself is shipped, merged
-                   and verified (L73_TEST ok, six stills) but L73's DONE gate is a 30-MINUTE
-                   CAPTURE in which a viewer can tell from the camera alone when something
-                   important happened. Do that one run - same shape as the L64 30-minute
-                   director run - and the item ticks. DO NOT rebuild the shot language.
-  HUB          ->  STAND DOWN. H29, H30 and H31 are all shipped, merged and ticked, and the
-                   freeze forbids inventing more. Nothing is queued for this lane - do not
-                   reach into another lane's files.
-  CONTENT      ->  C2 (standing, open by design), scoped to THE WORDS PHASE 2 NEEDS: the ascent
-                   (D77), the errand (D78), carry weight (D80), selling and the guild vault
-                   (D81), and the upgrade poll (D66). The C-55 rarity ladder is delivered - it
-                   landed as the lane's cycle C-58, see the C-55 block.
-  ART          ->  *** D95 *** TEN-CHARACTER SHOWCASE, DUE 09:00 - then D94 (every item must look like itself) - was: more minibosses (standing permission). Shipped: barracks (Drillmaster),
-                   workshop (Scrapwright), prison (Gaoler), shrine (Snuffer). Themes with none
-                   yet: crypt, keep, treasury, mess, and the biome themes (wood, grassland,
-                   flooded).
+  GAME BUILD   ->  *** D94 *** EVERY ITEM MUST LOOK LIKE ITSELF - the WIRING half. Mr. E's
+                   00:55 order; it outranks everything. `dress_cosmetics()` must take the ITEM,
+                   not the slot, and the 119 named weapons and armour pieces in items.json must
+                   become real (tier behind the name, numbers kept, saves not broken).
+                   THEN the in-engine half of D95: ten dressed heroes standing up in Godot and
+                   an honest fit report - clips, floats, gaps, bad anchors. Art renders the
+                   sheets; only this lane can prove the gear fits on the real bodies.
+                   Finish D83 only if it is mid-flight. D91 stages 2-4 wait.
+                   D88 is DONE and ticked. D83 and D91 stages 2-4 are Phase 1's remainder.
+  HUD          ->  STAND DOWN. D94 shut this lane down (Mr. E, 00:55) and D95 did not reopen it.
+                   L73's last step - the 30-minute capture in which a viewer can tell from the
+                   camera alone when something important happened - stays queued, then L74. Both
+                   wait for the shutdown to lift. DO NOT rebuild the shot language. Do not
+                   reach into another lane's files to look busy.
+  HUB          ->  STAND DOWN. D94 shut this lane down. H29, H30 and H31 are shipped, merged and
+                   ticked, and the freeze forbids inventing more. Nothing is queued.
+  CONTENT      ->  STAND DOWN. D94 shut this lane down. C-60 (phase2_words: ascent, errand,
+                   carry, sell, vault, stone, upgrade poll - 182 lines) is merged to main and is
+                   the last thing this lane owed. C2 stays standing and open by design for when
+                   the shutdown lifts.
+  ART          ->  *** D95 *** TEN-CHARACTER SHOWCASE, DUE 09:00 MON - then D94. D95 is the proof
+                   of D94: ten characters, different calling/weapon/armour and three accessories
+                   nobody else has, four views each (front, side, back, top-down), same framing
+                   and lighting, nothing cropped, spread two per rarity tier with at least one
+                   declared SET. Sheets in renders/art/d95/. END WITH THE FIT REPORT - an honest
+                   list of twelve faults beats a clean sheet hiding three. If D94's variety is
+                   not finished, SHIP D95 ANYWAY with the best gear that exists.
+                   Minibosses are a PERMISSION and the lane is NOT dry - do not take one this
+                   run. Eight exist; only the biome themes (wood, grassland, flooded) lack one.
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
@@ -410,7 +418,20 @@ three views each and a wear value per creature in renders/art/minibosses/; gener
 docs/art/MINIBOSSES.md carries the write-ups. THE GAME-BUILD HALF IS NOT DONE and is not claimed here: the
 art lane never runs Godot, so none of the four is wired into dungeon_hd.gd's existing "miniboss" set-piece
 weight yet, and none has been seen in a fight. That wiring belongs to the game build, after Phase 1.
-THEMES STILL WITHOUT ONE: crypt, keep, treasury, mess, and the biome themes (wood, grassland, flooded).
+SECOND SET OF FOUR (supervisor, 2026-11-16 01:05 CT; art 42179ee, merged to main): the Sexton
+(crypt, 2.45 m - it will not stay down; four lit niches are four risings, countable from the
+doorway), the Porter (keep, 2.30 m - it bars the way: no retreat, no reinforcement), the Tallyman
+(treasury, 2.15 m - it takes gear off the party, wears it where the viewer who paid for that helm
+can see it, and withdraws) and the Cook (mess, 2.05 m - the pot heals the room; spill the pot).
+These four cover the themes where dungeon_hd.gd rolls the miniboss set piece at 15 and 10 and had
+nothing theme-matched to put in the slot. All four merged by material, 1094-1722 faces, feet on
+z=0, corridor-safe against the 11.0 m clear span; none room-locked. Wear spreads across all eight
+and no two share a value (tallyman 0.20 up to snuffer 0.90). The art worker's own write-up records
+three silhouettes the pictures overruled before it shipped - that is the bar working.
+THE GAME-BUILD HALF IS STILL NOT DONE FOR ANY OF THE EIGHT: the art lane never runs Godot, so
+none is wired into dungeon_hd.gd's "miniboss" set-piece weight and none has been seen in a fight.
+That wiring belongs to the game build, after Phase 1.
+THEMES STILL WITHOUT ONE: only the biome themes (wood, grassland, flooded).
 
 GOOD IDEAS ARE NOT WORK: under the freeze, minibosses are a PERMISSION, not a queue. The art lane
 takes its queued item first and builds a miniboss when that lane is otherwise dry - which it has

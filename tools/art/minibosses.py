@@ -1963,3 +1963,194 @@ def sexton_chibi():
 
 
 BUILDERS.update({"sexton_chibi": sexton_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 6 OF 14 - THE PORTER. Sixth of the fourteen rebuilt in
+# the game's own register; see the block above drillmaster_chibi for the
+# measured Knight proportions and the one above snuffer_chibi for the rule
+# that register is MASS AND COUNT, not man-proportions.
+#
+# WHAT THE ORIGINAL ACTUALLY READS AS, looked at before anything was changed
+# (renders/art/minibosses/porter/hero_front|side|back.png):
+# A MAN STANDING IN A WARDROBE HOLDING THREE SEPARATE PLANKS. Measured off the
+# builder, against a hero arm 0.29 thick and a hero head 1.09 across:
+#     legs            0.115 / 0.092
+#     arms            0.090 / 0.068
+#     torso           0.270 / 0.280   (the ONE bold member again)
+#     head            0.155 sphere -> 0.31 across. A FIFTH of the hero's head.
+#     drawbar         0.19 square, then BROKEN into five separate boxes
+# Four faults fall out of that, and only the first is the usual one:
+#  1. EVERY MEMBER EXCEPT THE TORSO IS A WIRE. Third conversion running.
+#  2. THE WIDEST HORIZONTAL IN THE DUNGEON IS NOT A HORIZONTAL. The original
+#     raked the bar by building it from a centre box plus two offset end boxes
+#     plus two detached shoes, each nudged in y and z. On the sheet those read
+#     as THREE SEPARATE PLANKS with iron rubble floating off the left end. The
+#     rake was meant to stop either end hiding; what it actually did was break
+#     the one member the whole creature is named for. A bar is ONE PIECE.
+#  3. THE LEAF IS A SENTRY BOX. Square-on behind a man of the same width, it
+#     stops being a door he carries and becomes a cabinet he stands in - and
+#     from the SIDE the same slab is edge-on, a plank, and the mechanic is
+#     gone from that view entirely. The fix is one change: YAW THE LEAF. Turned
+#     22 degrees in plan it still reads narrow from the front, so the bar keeps
+#     the width, and it shows a broad banded face from the side, where there
+#     was nothing.
+#  4. THE BACK OF THE LEAF IS BARE - a flat tan slab, every band and boss on
+#     the front face only. That is the Gaoler's fault 5 and the Stoker's fault
+#     2, and this is the conversion that stops carrying it: the bands wrap.
+#
+# AND THE CARRIED FAULT, TAKEN HERE BECAUSE 6 OF 14 HAS A HEAD (supervisor,
+# 13:58): THE GAOLER'S FACEPLATE READS AS AN ANGRY CARTOON MASK. The Porter had
+# the same plate in miniature - a pale `bone` slab on a dark helm with a dark
+# slot across it and two glowing eyes behind - and at pane distance it is a toy
+# robot. The diagnosis is not brightness, it is COUNT AND VALUE:
+#     TWO apertures read as EYES however they are shaped. ONE reads as a SLIT.
+#     A PALE plate on a dark head is a FACE. A DARK plate is a DOOR.
+# So the Porter's helm is dark iron end to end with ONE unbroken sight slit
+# under a brow shelf, and no eyes at all - "a door has no face either" is the
+# original's own line and this is it kept. The pale value the three-value stack
+# wants does not vanish, it MOVES to the oak: the bar is the pale thing, which
+# is also the mechanic, so the brightest member and the dangerous one are the
+# same object. Nothing vertical crosses the slit - a helm reinforce down the
+# middle would cut it in two and hand the face straight back.
+# Authored at the same 2.30 m so the pair sheet compares ONE thing.
+# ===========================================================================
+CANON.update({
+    "porter_chibi": ("The Porter (chibi)", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
+                     "keep",
+                     "IT BARS THE WAY - rebuilt in the game's own register",
+                     0.45, "A bar has dropped behind you."),
+})
+
+
+def porter_chibi():
+    """The Porter in the game's register. Same read - THE WIDEST HORIZONTAL IN
+    THE DUNGEON, A TALL BANDED LEAF BEHIND IT - with every wire member taken to
+    a chibi weight, the drawbar rebuilt as ONE piece instead of five, the leaf
+    yawed so it reads from the side, and the helm turned into a door."""
+    P = Parts("porter_chibi")
+    HIP = 0.48                                   # 21% of 2.30, off the Knight
+    # --- LEGS. Stubs planted square. He is a post and he does not stoop: the
+    # Sexton bends under his load, this one stands under his.
+    for s in (-1, 1):
+        limb(P, [(s * 0.21, 0.04, HIP), (s * 0.25, 0.00, 0.24),
+                 (s * 0.26, -0.04, 0.10)], 0.150, 0.138)
+        P.add(L.box(0.32, 0.44, 0.13), 'dark', loc=(s * 0.26, -0.12, 0.065))
+    # --- TORSO. One upright barrel, wider than it is tall, no lean anywhere.
+    limb(P, [(0.0, 0.06, HIP - 0.02), (0.0, 0.02, 0.80), (0.0, -0.02, 1.08)],
+         0.38, 0.35, 'body')
+    P.add(L.box(0.84, 0.36, 0.14), 'dark', loc=(0.0, 0.00, 0.76))             # belt
+    for s in (-1, 1):
+        P.add(L.sphere(0.235, 0.225, 0.200, 12, 8), 'body', loc=(s * 0.40, -0.02, 1.08))
+    # --- THE HELM, AND IT IS THE CARRIED FAULT BEING CLOSED. Dark iron dome,
+    # flat dark front, a brow shelf standing proud of it, and ONE slit. No pale
+    # plate, no second aperture, nothing crossing the slit.
+    # PASS 4, FAULT 3 - THE ONE SLIT CAME OUT AS TWO EYES, AND I DID NOT DECIDE
+    # THAT, THE GEOMETRY DID. The head crop of pass 3 shows two bright
+    # rectangles with a dark gap between them: a face, the exact read this
+    # conversion exists to kill. Cause, measured rather than guessed: the dome
+    # was 0.42 deep in y and bellied out to -0.54, while the plate's front face
+    # sat at -0.51 and the slit at -0.52 - so the dome covered the MIDDLE of
+    # the slit and left its two ends showing. THE LESSON, and it is general:
+    # ONE APERTURE BECOMES TWO WHENEVER ANYTHING ROUND STANDS IN FRONT OF ITS
+    # CENTRE. It has to be measured against everything forward of it, not
+    # declared. The dome is shallowed to 0.30 so the flat plate is the forward
+    # face of the helm, the slit stands 0.04 proud of the plate, and the brow
+    # shelf is the only thing in front of it - above it, overhanging, where a
+    # brow belongs and where it cannot cut the slit in half.
+    P.add(L.sphere(0.400, 0.300, 0.380, 16, 11), 'dark', loc=(0.0, -0.10, 1.42))
+    P.add(L.box(0.58, 0.14, 0.56), 'dark', loc=(0.0, -0.46, 1.40))
+    P.add(L.box(0.64, 0.11, 0.13), 'dark', loc=(0.0, -0.60, 1.53))            # brow shelf
+    P.add(L.box(0.46, 0.05, 0.055), 'glow', loc=(0.0, -0.545, 1.44))          # THE slit
+    P.add(L.box(0.09, 0.44, 0.11), 'dark', loc=(0.0, -0.18, 1.78))            # crown comb
+    # --- THE LEAF. Yawed 22 degrees in plan: narrow from the front so the bar
+    # owns the width, a broad banded face from the side where there was a bare
+    # plank, and the bands and bosses WRAP so the back is not a blank slab.
+    # PASS 2, FAULT 1 - HE WAS STILL STANDING IN IT. Pass 1 bought the mass and
+    # the yaw, and the leaf stopped being edge-on from the side - but a 2.16 m
+    # slab anchored at chest height still runs ABOVE the man's helm, so from the
+    # front his head is a dark lump inside the door's outline and from the back
+    # he is gone altogether. A man does not carry a door over his head. It is
+    # slung LOW, standing on its own bottom edge behind his heels, and his helm
+    # clears the top of it - which is also the only way the helm gets a
+    # silhouette, since this conversion's helm is dark on purpose.
+    LX, LY, LZ = 0.0, 0.44, 0.86
+    YAW, TIL = 0.38, 0.10
+
+    def LP(lx, ly, lz):
+        """A point in the leaf's own frame, tilted then yawed, then anchored."""
+        y2 = ly * math.cos(TIL) - lz * math.sin(TIL)
+        z2 = ly * math.sin(TIL) + lz * math.cos(TIL)
+        return (LX + lx * math.cos(YAW) - y2 * math.sin(YAW),
+                LY + lx * math.sin(YAW) + y2 * math.cos(YAW),
+                LZ + z2)
+
+    LR = (TIL, 0.0, YAW)
+    P.add(L.box(0.92, 0.16, 1.76), 'body', loc=LP(0.0, 0.0, 0.0), rot=LR)
+    for lz in (-0.62, -0.16, 0.30, 0.74):
+        for ly in (-0.115, 0.115):
+            P.add(L.box(1.00, 0.08, 0.13), 'dark', loc=LP(0.0, ly, lz), rot=LR)
+            for s in (-1, 1):
+                P.add(L.sphere(0.060, 0.050, 0.060, 8, 6), 'dark',
+                      loc=LP(s * 0.32, ly * 1.42, lz))
+    for s in (-1, 1):                                        # hinge straps, both faces
+        for ly in (-0.105, 0.105):
+            P.add(L.box(0.13, 0.09, 1.62), 'dark', loc=LP(s * 0.38, ly, 0.0), rot=LR)
+    P.add(L.box(0.26, 0.10, 0.10), 'dark', loc=LP(0.0, -0.16, 0.62), rot=LR)  # pull ring bar
+    for s in (-1, 1):                                        # the slung strap
+        limb(P, [LP(s * 0.26, -0.14, 0.78), (s * 0.36, -0.12, 1.14)], 0.070, 0.058, 'dark')
+    # --- THE DRAWBAR. ONE squared member, end to end, raked as a single piece
+    # so neither shoe hides and nothing comes apart. 3.3 m of oak and the
+    # palest thing on the creature, because it is the mechanic.
+    # PASS 3, FAULT 2 - THE BAR CAME APART AT BOTH ENDS AGAIN, and the frame
+    # proved it in numbers. Two things, one member: (a) the iron shoe's taper
+    # was seated 0.10 OUTSIDE the end of the oak, so on the back sheet there is
+    # a dark wedge floating clear of the bar - the original's exact fault
+    # rebuilt by accident. The cone now starts ON the end point. (b) dropping
+    # the leaf in pass 2 made the HELM the tallest thing, so the normaliser
+    # scales the whole creature up by a quarter to reach 2.30 m and a 3.24 m
+    # bar came out 4.05 m - the pair burst the fixed frame (6.69 m against
+    # 5.60). Authored at 2.48 it lands at 3.10 m and is still, by a long way,
+    # the widest horizontal down there.
+    # PASS 5, FAULT 4 - THE BAR WAS CARRIED ACROSS HIS OWN FACE. At a mid
+    # height of 1.23 with a 0.46 rake, the near end stood above the shoulder
+    # and the oak ran under the chin and through the slit's line - so the two
+    # loudest things on the creature, the mechanic and the one lit aperture,
+    # fought each other at pane distance, and the arms and torso were hidden
+    # behind the bar as well. Dropped to chest height and the rake halved: the
+    # head keeps the top of the figure to itself, the bar keeps the width, and
+    # the two reads stop overlapping. A drawbar is carried at the height of the
+    # brackets it goes into, which is where the belt sockets already are.
+    # PASS 6, FAULT 5 - FROM THE SIDE THE BAR WAS A POINT. Square across the
+    # body it is 2.48 m of oak that the side camera sees end-on: three boxes
+    # stacked at the lens, reading as a chimney, and the one member this
+    # creature is named for contributes NOTHING to a third of its views. The
+    # leaf's yaw fixed the same fault for the door in pass 1; the bar gets the
+    # same treatment and for the same reason. 16 degrees in plan costs 4% of
+    # the front width - it is still the widest horizontal down there - and buys
+    # 0.72 m of visible length from the side, where there was none.
+    A = Vector((-1.24, -1.14, 1.12))
+    B = Vector((1.24, -0.42, 0.88))
+    MIDP, DIR = (A + B) / 2.0, (B - A)
+    P.raw(aim(L.box(0.26, 0.26, 2.56), MIDP, DIR), 'bone')
+    for t, e in ((0.0, A), (1.0, B)):
+        P.raw(aim(L.box(0.31, 0.31, 0.34), A + DIR * (0.94 if t else 0.06), DIR), 'dark')
+        P.raw(aim(L.cone(0.155, 0.105, 0.22, 10), e, DIR if t else -DIR), 'dark')
+    # --- ARMS. Short, thick, both mitts closed on the bar well forward of the
+    # body, each at the height the bar actually is at that x - the original's
+    # hands floated because the bar moved and they did not.
+    for s in (-1, 1):
+        bz = 1.00 - 0.24 * (s * 0.62 / 2.48)
+        by = -0.78 + 0.72 * (s * 0.62 / 2.48)
+        limb(P, [(s * 0.42, -0.06, 1.06), (s * 0.56, by * 0.52, (1.06 + bz) / 2.0 + 0.02),
+                 (s * 0.62, by + 0.06, bz)], 0.150, 0.125)
+        P.add(L.sphere(0.165, 0.160, 0.150, 10, 7), 'body', loc=(s * 0.63, by, bz))
+        P.add(L.box(0.21, 0.32, 0.32), 'dark', loc=(s * 0.63, by - 0.02, bz))
+    # --- the socket brackets he will drive the bar into, carried on the belt
+    for s in (-1, 1):
+        P.add(aim(L.cone(0.145, 0.115, 0.26, 10), (s * 0.44, -0.30, 0.84),
+                  (0.0, -0.25, -1.0)), 'dark')
+    return P
+
+
+BUILDERS.update({"porter_chibi": porter_chibi})

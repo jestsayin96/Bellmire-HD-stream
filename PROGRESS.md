@@ -6094,3 +6094,11 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
 - GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1752, MON_INPROP 0 of 208; _twitch_parse TWITCH_PARSE OK;
   _townwalk in_solid 5/15840 (0.032%) raid 0 PASS, stuck_on_route 0; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
 - NEXT: D91 stages 2-4.
+
+## C-61 (2026-11-16) - WORK_PLAN D94 remainder / TAKE-THIS-NEXT CONTENT row: rarity banded PER SLOT (items.json only)
+- TAKE THIS NEXT gave CONTENT the item C-61. C-55/C-58 were already done. Fault: one global cost scale (441+ = legendary) meant boots (cap 420) and gloves (cap 380) could never hold a legendary.
+- data/items.json: the `rarity` key on all 254 accessories is re-derived inside each slot: midrank cost percentile among that slot's own pieces (equal costs share a rung), cut at the C-58 population proportions - below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above legendary. 122 of 254 labels moved. No cost, stat, tier or price changed; no rung added, renamed or doubled; equipment rarity untouched. New top-level `_note_c61` records the rule (the C-58 note is left as written and is superseded for accessories).
+- PER-SLOT BAND COUNTS (common/uncommon/rare/very rare/legendary): ring 9/23/11/8/4 (legendary 500,500,510,520); amulet 9/20/12/7/3 (440,470,480); cloak 8/21/10/6/4 (480,480,480,500); boots 6/21/11/7/3 (390,400,420); gloves 8/24/8/8/3 (320,330,380). Every slot has at least one legendary.
+- ARTIFACT unchanged: zero accessories are artifact; checked no artifact equipment id appears in shop_stock, trader_cargo or caravan_manifests.
+- VALIDATION OK: all four data files parse; every pre-existing key and value is identical except accessory `rarity` (compared against HEAD, key order preserved); only addition is `_note_c61`.
+- CODE WIRING: any reader that bands accessories by the global 441+ cost threshold (hub, icon border colour, shop gate, D95 showcase legendary row) must read the stored `rarity` key instead - never a cost threshold. Boots and gloves can now be legendary at costs 390-420 / 320-380, so any shop level gate keyed to rarity should be rechecked against those costs; the D95 showcase no longer needs to borrow very-rare pieces. "epic" -> "very rare" in fishing.json and chatcmd.gd order array is still the code lane's.

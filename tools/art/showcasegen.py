@@ -106,19 +106,39 @@ def load_items(repo):
 
 
 def acc_pick(items, slot, tier, used):
-    """Rarity has to be VISIBLE, so an accessory is drawn from the cost band
-    that matches the character's tier: a common hero does not get the 520-gold
-    crater-glass ring. Cheapest unused in the band, so it is deterministic."""
-    pool = sorted(((v["cost"], k) for k, v in items["accessories"].items()
-                   if v["slot"] == slot), key=lambda q: q[0])
-    n = len(pool)
-    band = max(1, n // 5)
-    lo = min(n - 1, (tier - 1) * band)
-    hi = n if tier >= 5 else min(n, lo + band)
-    for cost, k in pool[lo:hi] + pool:
-        if k not in used:
-            used.add(k)
-            return k, items["accessories"][k]
+    """Rarity has to be VISIBLE, so an accessory is drawn from the character's
+    own RARITY BAND - and the band is the one STORED on the item, not one
+    guessed from a cost quintile. C-61 re-banded all 254 accessories per slot
+    (boots are legendary at 390-420, gloves at 320-380), so a cost threshold
+    now disagrees with the item's own word for itself. Cheapest unused inside
+    the band, so it is deterministic; if a band is exhausted we walk OUTWARD
+    one rung at a time rather than falling back to the whole list, so a
+    legendary hero never silently drops to a common ring."""
+    want = RARITY[tier] if tier < len(RARITY) else RARITY[-1]
+    if want == "starting":
+        want = "common"
+    byband = {}
+    for k, v in items["accessories"].items():
+        if v["slot"] != slot:
+            continue
+        byband.setdefault(v.get("rarity", "common"), []).append((v["cost"], k))
+    for b in byband:
+        byband[b].sort()
+    ladder = RARITY[1:]
+    try:
+        i = ladder.index(want)
+    except ValueError:
+        i = 0
+    order = [ladder[i]]
+    for d in range(1, len(ladder)):
+        for j in (i - d, i + d):
+            if 0 <= j < len(ladder):
+                order.append(ladder[j])
+    for b in order:
+        for cost, k in byband.get(b, ()):
+            if k not in used:
+                used.add(k)
+                return k, items["accessories"][k]
     raise RuntimeError("no accessory left for " + slot)
 
 

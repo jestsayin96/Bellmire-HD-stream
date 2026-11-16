@@ -195,7 +195,19 @@
     {"name": "Nightwing, Candle-Drunk", "shape": "it chases flame and forgets the hand that holds it - fast, and easily led", "hp": 100, "speed": 6.2},
     {"name": "Nightwing, Bellrope-Tangled", "shape": "snarled in an old bellrope - clumsy in the air, and the rope lashes whoever is close", "hp": 120, "speed": 4.0, "attack": 24},
     {"name": "Nightwing, Moon-Pale", "shape": "it only strikes in clear light - quicker than thought and gone before it is seen", "hp": 90, "speed": 7.4, "attack": 22},
-    {"name": "Nightwing, Stone-Perched", "shape": "it hangs from the roof like a gargoyle - slow to drop, but it drops hard", "hp": 165, "speed": 3.4, "attack": 25}
+    {"name": "Nightwing, Stone-Perched", "shape": "it hangs from the roof like a gargoyle - slow to drop, but it drops hard", "hp": 165, "speed": 3.4, "attack": 25},
+    {"name": "The Hollow King, Reed-Torched", "shape": "it carries a burning reed bundle and sets the floor smouldering - quick to swing, thin to kill", "hp": 140, "speed": 3.6, "attack": 24},
+    {"name": "The Hollow King, Pall-Draped", "shape": "a funeral pall hangs over the crown - the cloth soaks the first blows, then it tears", "hp": 205, "speed": 2.2, "attack": 23},
+    {"name": "The Hollow King, Beggar-Crowned", "shape": "a tin crown and an open hand - it takes alms in blows and is gone before change is given", "hp": 120, "speed": 4.4, "attack": 23},
+    {"name": "The Grubmother, Flour-Dusted", "shape": "she walks out of the mill white to the elbow - the dust stings the eyes and the brood comes in behind it", "hp": 190, "speed": 2.2, "attack": 24},
+    {"name": "The Grubmother, Lamp-Oil-Fat", "shape": "fat on spilled lamp oil - she goes up like a wick if the flame reaches her", "hp": 160, "speed": 2.6, "attack": 24},
+    {"name": "The Grubmother, Beam-Bred", "shape": "she hangs from the rafters and lets the brood drop on the file below", "hp": 150, "speed": 3.2, "attack": 24},
+    {"name": "The Rattling Host, Plague-Cart", "shape": "it drags a cart of the old dead - slow, and the cart never empties", "hp": 220, "speed": 1.9, "attack": 23},
+    {"name": "The Rattling Host, Drum-Skinned", "shape": "a drum of stretched hide sets the pace - silence it and the ranks lose the beat", "hp": 170, "speed": 3.0, "attack": 23},
+    {"name": "The Rattling Host, Straw-Stuffed", "shape": "stuffed with straw where the flesh was - quick on its feet, and it burns like a rick", "hp": 140, "speed": 4.6, "attack": 23},
+    {"name": "Nightwing, Weathervane-Struck", "shape": "it turns on the wind like a vane - never quite where you aimed", "hp": 100, "speed": 6.8, "attack": 22},
+    {"name": "Nightwing, Ash-Choked", "shape": "coughing chimney ash - slow and half blind, it strikes at the sound of you", "hp": 150, "speed": 3.8, "attack": 24},
+    {"name": "Nightwing, Cage-Hung", "shape": "it drags a rusted bird cage and swings it like a flail - the swing hurts more than the bite", "hp": 130, "speed": 4.4, "attack": 25}
   ],
   "greater_uniques": [
     {"name": "The Gravewyrm, Half-Woken", "shape": "only half risen - slower and softer in the body, but its breath comes deep and ill-tempered", "hp": 230, "attack": 26},
@@ -346,6 +358,18 @@
     {"name": "Mourncoil, Icicle-Hung", "shape": "spears of ice hang from every coil - they fall on whoever stands beneath", "hp": 300, "speed": 2.2, "attack": 26},
     {"name": "Mourncoil, Hearth-Starved", "shape": "it hunts the last warm thing in the room - and that is always you", "hp": 280, "speed": 3.0, "attack": 27},
     {"name": "Mourncoil, Thaw-Sick", "shape": "half thawed and furious - fast and brittle, and the floor is slick behind it", "hp": 240, "speed": 4.2, "attack": 25},
-    {"name": "Mourncoil, Wellspring-Fed", "shape": "drawn from a deep cold spring - slow to hurt, and impossible to wear down", "hp": 350, "speed": 1.6, "attack": 28}
+    {"name": "Mourncoil, Wellspring-Fed", "shape": "drawn from a deep cold spring - slow to hurt, and impossible to wear down", "hp": 350, "speed": 1.6, "attack": 28},
+    {"name": "The Gravewyrm, Well-Shaft-Coiled", "shape": "coiled down a dry well - only the head moves, and the head reaches the whole room", "hp": 390, "speed": 1.4, "attack": 29},
+    {"name": "The Gravewyrm, Slag-Heated", "shape": "warm from the old smelting - the scales glow, and whatever it touches burns", "hp": 300, "speed": 2.8, "attack": 27},
+    {"name": "The Gravewyrm, Chain-Dragged", "shape": "it hauls a toll chain behind it - the links sweep the floor, then it surges", "hp": 340, "speed": 2.0, "attack": 26},
+    {"name": "The Ossuary Lord, Stair-Piled", "shape": "the bones pile up the stair behind it and spill down on the file", "hp": 330, "speed": 2.0, "attack": 26},
+    {"name": "The Ossuary Lord, Lime-Whitened", "shape": "bleached and brittle - quick to break, and the lime dust burns the eyes", "hp": 250, "speed": 3.4, "attack": 25},
+    {"name": "The Ossuary Lord, Door-Wardened", "shape": "it holds one doorway and will not leave it - and nothing passes it standing", "hp": 380, "speed": 1.6, "attack": 28},
+    {"name": "The Pale Duchess, Glove-Slapped", "shape": "she names one guest and ignores the rest until the quarrel is settled", "hp": 220, "speed": 3.0, "attack": 31},
+    {"name": "The Pale Duchess, Moth-Gowned", "shape": "a gown of moths bursts into a cloud whenever she is struck", "hp": 190, "speed": 3.8, "attack": 28},
+    {"name": "The Pale Duchess, Stair-Descending", "shape": "she comes down the stair one slow step at a time - nothing hurries her, and nothing is spared", "hp": 260, "speed": 1.8, "attack": 32},
+    {"name": "Mourncoil, Ice-Hulled", "shape": "wrapped in a shell of rime that has to be cracked before it can be hurt", "hp": 340, "speed": 1.8, "attack": 25},
+    {"name": "Mourncoil, Sleet-Tongued", "shape": "it spits sleet in the face - the eyes stream, and the coil closes in", "hp": 250, "speed": 3.6, "attack": 26},
+    {"name": "Mourncoil, Pond-Dwelling", "shape": "it rises from under the ice and drags down whoever stands on the thin part", "hp": 310, "speed": 2.2, "attack": 27}
   ]
 }

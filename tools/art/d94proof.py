@@ -305,13 +305,19 @@ def build_cell(repo, cell, resx, resy, full_path, det_path):
     # the body's own hat/cape comes off where we replace it, or the test is a
     # lie: two capes stacked tell you nothing about either one.
     hidden = []
-    sfx = list(SG.HIDE_FOR.get(cell["slot"], ()))
-    # the Knight's own red cape hangs past the hands and fills a tight detail
-    # shot with red cloth - pass 2 of this sheet "proved" all six rings were
-    # one object when what it had photographed was the cape. It comes off for
-    # every row that is not about a cape.
-    if cell["slot"] in ("ring", "gloves", "amulet", "boots", "weapon"):
-        sfx.append("_Cape")
+    # ONE OUTFIT FOR EVERY ROW. Until now the body's own red cape was stripped
+    # for five slots and LEFT ON for hat, armour and cloak, so the rows were
+    # not comparable: a hat row carried a metre of red cloth into the same
+    # difference measurement that a ring row did not, and two rows' numbers
+    # could not be put side by side. The cape also fills a tight detail shot
+    # with red - pass 2 of this sheet "proved" all six rings were one object
+    # when what it had photographed was the cape. So the body's own hat AND
+    # cape now come off on EVERY row, whatever the slot under test, and the
+    # only thing that varies between rows is the piece we are testing.
+    sfx = ["_Helmet", "_HelmetVisor", "_Hat", "_BearHat", "_Cape"]
+    for x in SG.HIDE_FOR.get(cell["slot"], ()):
+        if x not in sfx:
+            sfx.append(x)
     for ob in list(meshes):
         if sfx and any(ob.name.split('.')[0].endswith(x) for x in sfx):
             hidden.append(ob.name)

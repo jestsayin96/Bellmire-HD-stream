@@ -19,14 +19,16 @@
      "pieces": 2,
      "tris": 158,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -71,14 +73,16 @@
      "pieces": 3,
      "tris": 632,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -121,14 +125,16 @@
      "pieces": 2,
      "tris": 276,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -171,14 +177,16 @@
      "pieces": 2,
      "tris": 524,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -223,14 +231,16 @@
      "pieces": 2,
      "tris": 628,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -273,14 +283,16 @@
      "pieces": 2,
      "tris": 290,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -443,14 +455,16 @@
      "pieces": 2,
      "tris": 487,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -472,7 +486,7 @@
        "item": "Gatehouse Whistle",
        "slot": "amulet",
        "verts": 438,
-       "inside_pct": 16.4,
+       "inside_pct": 15.5,
        "penetration_m": 0.0106,
        "gap_m": 0.0001,
        "min_z": 0.9997
@@ -493,14 +507,16 @@
      "pieces": 2,
      "tris": 692,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -522,7 +538,7 @@
        "item": "Horner's Pendant",
        "slot": "amulet",
        "verts": 610,
-       "inside_pct": 28.5,
+       "inside_pct": 27.9,
        "penetration_m": 0.027,
        "gap_m": 0.0,
        "min_z": 0.9721
@@ -543,14 +559,16 @@
      "pieces": 2,
      "tris": 416,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -572,14 +590,14 @@
        "item": "Chapman's Charm",
        "slot": "amulet",
        "verts": 370,
-       "inside_pct": 38.1,
+       "inside_pct": 37.0,
        "penetration_m": 0.0477,
        "gap_m": 0.0002,
        "min_z": 0.9352
       }
      ],
      "faults": [
-      "Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 38% of it inside"
+      "Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 37% of it inside"
      ]
     },
     {
@@ -595,14 +613,16 @@
      "pieces": 2,
      "tris": 544,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -624,7 +644,7 @@
        "item": "Flask-count Pendant",
        "slot": "amulet",
        "verts": 492,
-       "inside_pct": 32.3,
+       "inside_pct": 31.5,
        "penetration_m": 0.0273,
        "gap_m": 0.0005,
        "min_z": 0.9812
@@ -645,14 +665,16 @@
      "pieces": 2,
      "tris": 582,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -674,7 +696,7 @@
        "item": "Blightward Charm",
        "slot": "amulet",
        "verts": 528,
-       "inside_pct": 20.1,
+       "inside_pct": 19.3,
        "penetration_m": 0.0151,
        "gap_m": 0.0001,
        "min_z": 1.0027
@@ -695,14 +717,16 @@
      "pieces": 2,
      "tris": 596,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -724,7 +748,7 @@
        "item": "Oathkeeper's Amulet",
        "slot": "amulet",
        "verts": 528,
-       "inside_pct": 26.5,
+       "inside_pct": 25.8,
        "penetration_m": 0.021,
        "gap_m": 0.0,
        "min_z": 0.9769
@@ -734,24 +758,24 @@
     }
    ],
    "faults": [
-    "chapman_amulet: Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 38% of it inside"
+    "chapman_amulet: Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 37% of it inside"
    ],
    "verdict": "TELLS APART",
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 0.477,
+    "worst": 1.16,
     "worst_pair": [
      "Horner's Pendant",
      "Chapman's Charm"
     ],
-    "worst_peak_pct": 24.1,
-    "best": 1.08,
+    "worst_peak_pct": 23.37,
+    "best": 2.245,
     "best_pair": [
      "Gatehouse Whistle",
      "Oathkeeper's Amulet"
     ],
-    "median": 0.804,
+    "median": 1.717,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -773,14 +797,16 @@
      "pieces": 3,
      "tris": 280,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.458,
-       12.766
+       6.518,
+       12.532
       ]
      },
      "detail_cam": {
@@ -802,14 +828,14 @@
        "item": "Hurdler's Cloak",
        "slot": "cloak",
        "verts": 290,
-       "inside_pct": 40.0,
+       "inside_pct": 23.8,
        "penetration_m": 0.1985,
-       "gap_m": 0.0008,
+       "gap_m": 0.0035,
        "min_z": 0.6049
       }
      ],
      "faults": [
-      "Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 40% of it inside"
+      "Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 24% of it inside"
      ]
     },
     {
@@ -825,14 +851,16 @@
      "pieces": 4,
      "tris": 535,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.458,
-       12.766
+       6.49,
+       12.532
       ]
      },
      "detail_cam": {
@@ -854,15 +882,13 @@
        "item": "Orchardman's Cloak",
        "slot": "cloak",
        "verts": 509,
-       "inside_pct": 27.3,
-       "penetration_m": 0.0508,
+       "inside_pct": 13.9,
+       "penetration_m": 0.0339,
        "gap_m": 0.0,
        "min_z": 0.6147
       }
      ],
-     "faults": [
-      "Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.051 m deep, 27% of it inside"
-     ]
+     "faults": []
     },
     {
      "key": "caravan_cloak",
@@ -877,14 +903,16 @@
      "pieces": 3,
      "tris": 637,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.458,
-       12.766
+       6.518,
+       12.532
       ]
      },
      "detail_cam": {
@@ -906,7 +934,7 @@
        "item": "Caravan Cloak",
        "slot": "cloak",
        "verts": 592,
-       "inside_pct": 20.9,
+       "inside_pct": 10.3,
        "penetration_m": 0.0293,
        "gap_m": 0.0,
        "min_z": 0.5889
@@ -927,14 +955,16 @@
      "pieces": 3,
      "tris": 244,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.458,
-       12.766
+       6.514,
+       12.532
       ]
      },
      "detail_cam": {
@@ -956,13 +986,15 @@
        "item": "Deepwarden's Cloak",
        "slot": "cloak",
        "verts": 264,
-       "inside_pct": 21.2,
-       "penetration_m": 0.0147,
-       "gap_m": 0.0016,
+       "inside_pct": 4.5,
+       "penetration_m": 0.0649,
+       "gap_m": 0.007,
        "min_z": 0.642
       }
      ],
-     "faults": []
+     "faults": [
+      "Acc_Cloak (Deepwarden's Cloak): CLIPS the body - 0.065 m deep, 4% of it inside"
+     ]
     },
     {
      "key": "fogrun_cloak",
@@ -977,14 +1009,16 @@
      "pieces": 3,
      "tris": 169,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.458,
-       12.766
+       6.518,
+       12.532
       ]
      },
      "detail_cam": {
@@ -1006,9 +1040,9 @@
        "item": "Fog-run Cloak",
        "slot": "cloak",
        "verts": 189,
-       "inside_pct": 24.9,
-       "penetration_m": 0.0192,
-       "gap_m": 0.0009,
+       "inside_pct": 4.8,
+       "penetration_m": 0.0189,
+       "gap_m": 0.0014,
        "min_z": 0.4601
       }
      ],
@@ -1027,14 +1061,16 @@
      "pieces": 4,
      "tris": 583,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.458,
-       12.766
+       6.518,
+       12.532
       ]
      },
      "detail_cam": {
@@ -1056,35 +1092,38 @@
        "item": "Warhorn Mantle",
        "slot": "cloak",
        "verts": 551,
-       "inside_pct": 22.3,
-       "penetration_m": 0.0268,
+       "inside_pct": 17.8,
+       "penetration_m": 0.07,
        "gap_m": 0.0001,
        "min_z": 0.8958
       }
      ],
-     "faults": []
+     "faults": [
+      "Acc_Cloak (Warhorn Mantle): CLIPS the body - 0.070 m deep, 18% of it inside"
+     ]
     }
    ],
    "faults": [
-    "hurdler_cloak: Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 40% of it inside",
-    "orchard_cloak: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.051 m deep, 27% of it inside"
+    "hurdler_cloak: Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 24% of it inside",
+    "deep_cloak: Acc_Cloak (Deepwarden's Cloak): CLIPS the body - 0.065 m deep, 4% of it inside",
+    "warhorn_mantle: Acc_Cloak (Warhorn Mantle): CLIPS the body - 0.070 m deep, 18% of it inside"
    ],
    "verdict": "TELLS APART",
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 25.849,
+    "worst": 30.068,
     "worst_pair": [
      "Orchardman's Cloak",
      "Caravan Cloak"
     ],
-    "worst_peak_pct": 43.37,
-    "best": 33.833,
+    "worst_peak_pct": 43.38,
+    "best": 39.351,
     "best_pair": [
-     "Orchardman's Cloak",
+     "Deepwarden's Cloak",
      "Fog-run Cloak"
     ],
-    "median": 31.046,
+    "median": 36.158,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -1106,14 +1145,16 @@
      "pieces": 4,
      "tris": 106,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.465,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1166,14 +1207,16 @@
      "pieces": 4,
      "tris": 112,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1226,14 +1269,16 @@
      "pieces": 8,
      "tris": 208,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1286,14 +1331,16 @@
      "pieces": 6,
      "tris": 648,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1346,14 +1393,16 @@
      "pieces": 4,
      "tris": 112,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1406,14 +1455,16 @@
      "pieces": 8,
      "tris": 436,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1459,18 +1510,18 @@
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 1.788,
+    "worst": 2.087,
     "worst_pair": [
      "Chapel Clogs",
      "Mudplank Boots"
     ],
     "worst_peak_pct": 47.28,
-    "best": 4.706,
+    "best": 5.492,
     "best_pair": [
      "Dauber's Boots",
      "Craterglass Boots"
     ],
-    "median": 4.242,
+    "median": 4.95,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -1492,14 +1543,16 @@
      "pieces": 6,
      "tris": 258,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1555,14 +1608,16 @@
      "pieces": 8,
      "tris": 446,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1618,14 +1673,16 @@
      "pieces": 6,
      "tris": 294,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1681,14 +1738,16 @@
      "pieces": 8,
      "tris": 682,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1744,14 +1803,16 @@
      "pieces": 8,
      "tris": 1058,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1806,14 +1867,16 @@
      "pieces": 8,
      "tris": 1066,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -1865,7 +1928,7 @@
     "quarreller_gloves: Acc_GloveR (Quarreller's Tabs): CLIPS the body - 0.036 m deep, 68% of it inside",
     "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.053 m deep, 72% of it inside"
    ],
-   "verdict": "PARTLY TOO SMALL 6/15",
+   "verdict": "PARTLY TOO SMALL 5/15",
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
@@ -1875,12 +1938,12 @@
      "Bellringer's Wraps"
     ],
     "worst_peak_pct": 0.0,
-    "best": 3.044,
+    "best": 3.555,
     "best_pair": [
      "Baker's Mitts",
      "Raidbreaker's Gauntlets"
     ],
-    "median": 0.603,
+    "median": 0.705,
     "duplicate_pairs": [],
     "too_small_pairs": [
      {
@@ -1893,31 +1956,25 @@
       "a": "Carder's Gloves",
       "b": "Forgemaster's Grips",
       "detail": 96.719,
-      "stream": 0.126
+      "stream": 0.147
      },
      {
       "a": "Bellringer's Wraps",
       "b": "Forgemaster's Grips",
       "detail": 99.483,
-      "stream": 0.126
+      "stream": 0.147
      },
      {
       "a": "Carder's Gloves",
       "b": "Quarreller's Tabs",
       "detail": 99.771,
-      "stream": 0.289
+      "stream": 0.338
      },
      {
       "a": "Bellringer's Wraps",
       "b": "Quarreller's Tabs",
       "detail": 99.757,
-      "stream": 0.289
-     },
-     {
-      "a": "Quarreller's Tabs",
-      "b": "Forgemaster's Grips",
-      "detail": 95.125,
-      "stream": 0.364
+      "stream": 0.338
      }
     ]
    }
@@ -1939,6 +1996,7 @@
      "pieces": 3,
      "tris": 444,
      "hidden": [
+      "Knight_Cape",
       "Knight_Helmet",
       "Knight_HelmetVisor"
      ],
@@ -1992,6 +2050,7 @@
      "pieces": 2,
      "tris": 378,
      "hidden": [
+      "Knight_Cape",
       "Knight_Helmet",
       "Knight_HelmetVisor"
      ],
@@ -2045,6 +2104,7 @@
      "pieces": 3,
      "tris": 444,
      "hidden": [
+      "Knight_Cape",
       "Knight_Helmet",
       "Knight_HelmetVisor"
      ],
@@ -2098,6 +2158,7 @@
      "pieces": 2,
      "tris": 32,
      "hidden": [
+      "Knight_Cape",
       "Knight_Helmet",
       "Knight_HelmetVisor"
      ],
@@ -2149,6 +2210,7 @@
      "pieces": 2,
      "tris": 510,
      "hidden": [
+      "Knight_Cape",
       "Knight_Helmet",
       "Knight_HelmetVisor"
      ],
@@ -2202,6 +2264,7 @@
      "pieces": 2,
      "tris": 238,
      "hidden": [
+      "Knight_Cape",
       "Knight_Helmet",
       "Knight_HelmetVisor"
      ],
@@ -2254,18 +2317,18 @@
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 17.856,
+    "worst": 19.198,
     "worst_pair": [
      "Beekeeper's Veil",
      "Architect's Hat"
     ],
     "worst_peak_pct": 87.3,
-    "best": 49.359,
+    "best": 52.966,
     "best_pair": [
      "Glazier's Visor",
      "Commander's Crested Helm"
     ],
-    "median": 33.108,
+    "median": 35.519,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -2287,14 +2350,16 @@
      "pieces": 3,
      "tris": 176,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2337,14 +2402,16 @@
      "pieces": 3,
      "tris": 73,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2366,8 +2433,8 @@
        "item": "Bearded Greataxe",
        "slot": "weapon",
        "verts": 109,
-       "inside_pct": 4.6,
-       "penetration_m": 0.0124,
+       "inside_pct": 2.8,
+       "penetration_m": 0.01,
        "gap_m": 0.0029,
        "min_z": 0.2912
       }
@@ -2387,14 +2454,16 @@
      "pieces": 5,
      "tris": 149,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2416,14 +2485,14 @@
        "item": "Emberline Sword",
        "slot": "weapon",
        "verts": 192,
-       "inside_pct": 9.9,
-       "penetration_m": 0.1303,
+       "inside_pct": 9.4,
+       "penetration_m": 0.0296,
        "gap_m": 0.0001,
        "min_z": 0.3109
       }
      ],
      "faults": [
-      "Weapon (Emberline Sword): PASSES THROUGH the body by 0.130 m"
+      "Weapon (Emberline Sword): PASSES THROUGH the body by 0.030 m"
      ]
     },
     {
@@ -2439,14 +2508,16 @@
      "pieces": 3,
      "tris": 606,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2491,14 +2562,16 @@
      "pieces": 6,
      "tris": 332,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2543,14 +2616,16 @@
      "pieces": 5,
      "tris": 264,
      "hidden": [
-      "Knight_Cape"
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
      ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2584,7 +2659,7 @@
     }
    ],
    "faults": [
-    "w_blade_emberline: Weapon (Emberline Sword): PASSES THROUGH the body by 0.130 m",
+    "w_blade_emberline: Weapon (Emberline Sword): PASSES THROUGH the body by 0.030 m",
     "w_open_coldfist_wraps: Weapon (Cold-White Wraps): PASSES THROUGH the body by 0.032 m",
     "w_ranged_scarbow: Weapon (Scarbow): stands 0.124 m BELOW the feet - sunk in the floor",
     "w_ranged_seamstring: Weapon (Seamstring): stands 0.116 m BELOW the feet - sunk in the floor"
@@ -2593,18 +2668,18 @@
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 3.049,
+    "worst": 3.538,
     "worst_pair": [
      "Scarbow",
      "Seamstring"
     ],
     "worst_peak_pct": 47.99,
-    "best": 10.344,
+    "best": 12.966,
     "best_pair": [
      "Bearded Greataxe",
      "Emberline Sword"
     ],
-    "median": 7.647,
+    "median": 9.66,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -2625,13 +2700,17 @@
      "family": null,
      "pieces": 5,
      "tris": 1302,
-     "hidden": [],
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2653,8 +2732,8 @@
        "item": "Padded Gambeson",
        "slot": "armour",
        "verts": 667,
-       "inside_pct": 24.6,
-       "penetration_m": 0.0424,
+       "inside_pct": 21.3,
+       "penetration_m": 0.0353,
        "gap_m": 0.0001,
        "min_z": 0.419
       },
@@ -2663,7 +2742,7 @@
        "item": "Padded Gambeson",
        "slot": "armour",
        "verts": 200,
-       "inside_pct": 52.5,
+       "inside_pct": 52.0,
        "penetration_m": 0.0823,
        "gap_m": 0.0002,
        "min_z": 0.8522
@@ -2673,7 +2752,7 @@
        "item": "Padded Gambeson",
        "slot": "armour",
        "verts": 200,
-       "inside_pct": 51.0,
+       "inside_pct": 51.5,
        "penetration_m": 0.0794,
        "gap_m": 0.0006,
        "min_z": 0.8519
@@ -2705,13 +2784,17 @@
      "family": null,
      "pieces": 10,
      "tris": 2140,
-     "hidden": [],
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2733,8 +2816,8 @@
        "item": "Scarwoven Hauberk",
        "slot": "armour",
        "verts": 787,
-       "inside_pct": 20.6,
-       "penetration_m": 0.0556,
+       "inside_pct": 12.3,
+       "penetration_m": 0.0413,
        "gap_m": 0.0001,
        "min_z": 0.419
       },
@@ -2743,7 +2826,7 @@
        "item": "Scarwoven Hauberk",
        "slot": "armour",
        "verts": 424,
-       "inside_pct": 46.5,
+       "inside_pct": 46.2,
        "penetration_m": 0.0848,
        "gap_m": 0.0002,
        "min_z": 0.7947
@@ -2753,7 +2836,7 @@
        "item": "Scarwoven Hauberk",
        "slot": "armour",
        "verts": 424,
-       "inside_pct": 46.0,
+       "inside_pct": 46.2,
        "penetration_m": 0.081,
        "gap_m": 0.0006,
        "min_z": 0.7906
@@ -2770,7 +2853,6 @@
       }
      ],
      "faults": [
-      "Armour_Cuirass (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 21% of it inside",
       "Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside"
      ]
     },
@@ -2786,13 +2868,17 @@
      "family": null,
      "pieces": 3,
      "tris": 915,
-     "hidden": [],
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2814,8 +2900,8 @@
        "item": "Ford Leathers",
        "slot": "armour",
        "verts": 722,
-       "inside_pct": 24.4,
-       "penetration_m": 0.0379,
+       "inside_pct": 19.3,
+       "penetration_m": 0.0309,
        "gap_m": 0.0005,
        "min_z": 0.494
       }
@@ -2834,13 +2920,17 @@
      "family": null,
      "pieces": 4,
      "tris": 1235,
-     "hidden": [],
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2862,8 +2952,8 @@
        "item": "Wyrmhide Coat",
        "slot": "armour",
        "verts": 1007,
-       "inside_pct": 18.5,
-       "penetration_m": 0.0379,
+       "inside_pct": 14.6,
+       "penetration_m": 0.0364,
        "gap_m": 0.0,
        "min_z": 0.494
       }
@@ -2882,13 +2972,17 @@
      "family": null,
      "pieces": 4,
      "tris": 1118,
-     "hidden": [],
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -2930,15 +3024,14 @@
        "item": "Reed-Cloth Robe",
        "slot": "armour",
        "verts": 473,
-       "inside_pct": 19.7,
-       "penetration_m": 0.0909,
-       "gap_m": 0.0001,
+       "inside_pct": 9.3,
+       "penetration_m": 0.0302,
+       "gap_m": 0.0003,
        "min_z": 0.2232
       }
      ],
      "faults": [
-      "Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside",
-      "Armour_Robe (Reed-Cloth Robe): CLIPS the body - 0.091 m deep, 20% of it inside"
+      "Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside"
      ]
     },
     {
@@ -2953,13 +3046,17 @@
      "family": null,
      "pieces": 7,
      "tris": 1370,
-     "hidden": [],
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
      "cam": {
       "ortho": 3.3,
       "outside": 0,
       "clip": [
-       6.234,
-       12.542
+       6.468,
+       12.482
       ]
      },
      "detail_cam": {
@@ -3001,45 +3098,41 @@
        "item": "Seamwoven Vestment",
        "slot": "armour",
        "verts": 635,
-       "inside_pct": 20.3,
-       "penetration_m": 0.1177,
-       "gap_m": 0.0001,
+       "inside_pct": 6.9,
+       "penetration_m": 0.0302,
+       "gap_m": 0.0003,
        "min_z": 0.1681
       }
      ],
      "faults": [
       "Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.048 m deep, 79% of it inside",
-      "Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside",
-      "Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.118 m deep, 20% of it inside"
+      "Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside"
      ]
     }
    ],
    "faults": [
     "a_padded_gambeson: Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
-    "a_scarwoven_hauberk: Armour_Cuirass (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 21% of it inside",
     "a_scarwoven_hauberk: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
     "a_reed_robe: Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside",
-    "a_reed_robe: Armour_Robe (Reed-Cloth Robe): CLIPS the body - 0.091 m deep, 20% of it inside",
     "a_seamwoven_vestment: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.048 m deep, 79% of it inside",
-    "a_seamwoven_vestment: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside",
-    "a_seamwoven_vestment: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.118 m deep, 20% of it inside"
+    "a_seamwoven_vestment: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside"
    ],
    "verdict": "TELLS APART",
    "stream_difference": {
     "metric": "percent of the hero's own stream pixels that change",
     "pairs": 15,
-    "worst": 19.647,
+    "worst": 25.32,
     "worst_pair": [
      "Ford Leathers",
      "Wyrmhide Coat"
     ],
-    "worst_peak_pct": 31.29,
-    "best": 36.743,
+    "worst_peak_pct": 31.31,
+    "best": 44.417,
     "best_pair": [
      "Scarwoven Hauberk",
      "Reed-Cloth Robe"
     ],
-    "median": 35.173,
+    "median": 41.969,
     "duplicate_pairs": [],
     "too_small_pairs": []
    }
@@ -3051,20 +3144,21 @@
  },
  "verdict": [
   "ring    TOO SMALL ON STREAM  worst  0.00% median  0.00% of hero px   ",
-  "amulet  TELLS APART          worst  0.48% median  0.80% of hero px   ",
-  "cloak   TELLS APART          worst 25.85% median 31.05% of hero px   ",
-  "boots   TELLS APART          worst  1.79% median  4.24% of hero px   ",
-  "gloves  PARTLY TOO SMALL 6/15 worst  0.00% median  0.60% of hero px   ",
-  "hat     TELLS APART          worst 17.86% median 33.11% of hero px   ",
-  "weapon  TELLS APART          worst  3.05% median  7.65% of hero px   ",
-  "armour  TELLS APART          worst 19.65% median 35.17% of hero px   "
+  "amulet  TELLS APART          worst  1.16% median  1.72% of hero px   ",
+  "cloak   TELLS APART          worst 30.07% median 36.16% of hero px   ",
+  "boots   TELLS APART          worst  2.09% median  4.95% of hero px   ",
+  "gloves  PARTLY TOO SMALL 5/15 worst  0.00% median  0.70% of hero px   ",
+  "hat     TELLS APART          worst 19.20% median 35.52% of hero px   ",
+  "weapon  TELLS APART          worst  3.54% median  9.66% of hero px   ",
+  "armour  TELLS APART          worst 25.32% median 41.97% of hero px   "
  ],
  "fit_faults": [
   "tally_ring: Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.039 m deep, 66% of it inside",
   "fletcher_ring: Acc_Ring (Fletcher's Thumb-ring): CLIPS the body - 0.044 m deep, 70% of it inside",
-  "chapman_amulet: Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 38% of it inside",
-  "hurdler_cloak: Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 40% of it inside",
-  "orchard_cloak: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.051 m deep, 27% of it inside",
+  "chapman_amulet: Acc_Amulet (Chapman's Charm): CLIPS the body - 0.048 m deep, 37% of it inside",
+  "hurdler_cloak: Acc_Cloak (Hurdler's Cloak): CLIPS the body - 0.199 m deep, 24% of it inside",
+  "deep_cloak: Acc_Cloak (Deepwarden's Cloak): CLIPS the body - 0.065 m deep, 4% of it inside",
+  "warhorn_mantle: Acc_Cloak (Warhorn Mantle): CLIPS the body - 0.070 m deep, 18% of it inside",
   "baker_mitts: Acc_GloveL (Baker's Mitts): CLIPS the body - 0.056 m deep, 70% of it inside",
   "baker_mitts: Acc_GloveR (Baker's Mitts): CLIPS the body - 0.056 m deep, 75% of it inside",
   "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.045 m deep, 88% of it inside",
@@ -3079,17 +3173,14 @@
   "host_coif: Acc_Helm (Rattling Coif): CLIPS the body - 0.316 m deep, 18% of it inside",
   "commander_helm: Acc_Helm (Commander's Crested Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
   "architect_hat: Acc_Helm (Architect's Hat): FLOATS - nearest body surface 0.081 m away",
-  "w_blade_emberline: Weapon (Emberline Sword): PASSES THROUGH the body by 0.130 m",
+  "w_blade_emberline: Weapon (Emberline Sword): PASSES THROUGH the body by 0.030 m",
   "w_open_coldfist_wraps: Weapon (Cold-White Wraps): PASSES THROUGH the body by 0.032 m",
   "w_ranged_scarbow: Weapon (Scarbow): stands 0.124 m BELOW the feet - sunk in the floor",
   "w_ranged_seamstring: Weapon (Seamstring): stands 0.116 m BELOW the feet - sunk in the floor",
   "a_padded_gambeson: Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
-  "a_scarwoven_hauberk: Armour_Cuirass (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 21% of it inside",
   "a_scarwoven_hauberk: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
   "a_reed_robe: Armour_SleeveR (Reed-Cloth Robe): CLIPS the body - 0.034 m deep, 62% of it inside",
-  "a_reed_robe: Armour_Robe (Reed-Cloth Robe): CLIPS the body - 0.091 m deep, 20% of it inside",
   "a_seamwoven_vestment: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.048 m deep, 79% of it inside",
-  "a_seamwoven_vestment: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside",
-  "a_seamwoven_vestment: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.118 m deep, 20% of it inside"
+  "a_seamwoven_vestment: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.043 m deep, 73% of it inside"
  ]
 }

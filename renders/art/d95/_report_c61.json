@@ -1,0 +1,686 @@
+{
+ "ok": true,
+ "errors": [],
+ "chars": [
+  {
+   "key": "paladin",
+   "calling": "paladin",
+   "body": "Knight",
+   "tier": 5,
+   "rarity": "legendary",
+   "wear": 0.05,
+   "weapon": {
+    "id": "w_blade_scarfang",
+    "name": "Scarfang",
+    "family": "blade",
+    "tier_name": "scarforged"
+   },
+   "armour": {
+    "id": "a_scarwoven_hauberk",
+    "name": "Scarwoven Hauberk",
+    "cut": "heavy",
+    "tier_name": "scarwoven mail"
+   },
+   "accessories": [
+    {
+     "slot": "boots",
+     "id": "longcount_boots",
+     "name": "Long Count Boots",
+     "cost": 390,
+     "stat": "hp",
+     "variant": 1
+    },
+    {
+     "slot": "gloves",
+     "id": "armourer_gloves",
+     "name": "Armourer's Gauntlets",
+     "cost": 320,
+     "stat": "ac",
+     "variant": 0
+    },
+    {
+     "slot": "cloak",
+     "id": "commander_mantle",
+     "name": "Commander's Field Mantle",
+     "cost": 480,
+     "stat": "ac",
+     "variant": 1
+    }
+   ],
+   "helm": {
+    "id": "raiders_bane_helm",
+    "name": "Raidbreaker's Helm",
+    "cost": 300
+   },
+   "set_name": "Scarwoven plate",
+   "hidden_body_meshes": [
+    "Knight_Cape",
+    "Knight_Helmet",
+    "Knight_HelmetVisor"
+   ],
+   "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Scarfang",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/sword_2handed.gltf"
+    },
+    {
+     "slot": "offhand",
+     "item": "shield (shield_spikes)",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/shield_spikes.gltf"
+    }
+   ],
+   "height": 2.414,
+   "tris": 4288,
+   "pieces": 31,
+   "manifest": [
+    {
+     "part": "Armour_Cuirass",
+     "bone": "chest",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronL",
+     "bone": "upperarm.l",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_PauldronR",
+     "bone": "upperarm.r",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "glow",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Armour_Tassets",
+     "bone": "hips",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "mats": [
+      "metal"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Scarfang",
+     "slot": "weapon",
+     "mats": [
+      "dark",
+      "gem",
+      "glow",
+      "leather",
+      "metal",
+      "trim"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Long Count Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Long Count Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveL",
+     "bone": "hand.l",
+     "item": "Armourer's Gauntlets",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_GloveR",
+     "bone": "hand.r",
+     "item": "Armourer's Gauntlets",
+     "slot": "gloves",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Commander's Field Mantle",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Helm",
+     "bone": "head",
+     "item": "Raidbreaker's Helm",
+     "slot": "hat",
+     "mats": [
+      "metal",
+      "trim"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_Cuirass",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 787,
+     "inside_pct": 12.3,
+     "penetration_m": 0.0413,
+     "gap_m": 0.0001,
+     "min_z": 0.419
+    },
+    {
+     "part": "Armour_PauldronL",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 424,
+     "inside_pct": 46.2,
+     "penetration_m": 0.0848,
+     "gap_m": 0.0002,
+     "min_z": 0.7947
+    },
+    {
+     "part": "Armour_PauldronR",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 424,
+     "inside_pct": 46.2,
+     "penetration_m": 0.081,
+     "gap_m": 0.0006,
+     "min_z": 0.7906
+    },
+    {
+     "part": "Armour_Tassets",
+     "item": "Scarwoven Hauberk",
+     "slot": "armour",
+     "verts": 32,
+     "inside_pct": 68.8,
+     "penetration_m": 0.0556,
+     "gap_m": 0.0086,
+     "min_z": 0.1052
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Long Count Boots",
+     "slot": "boots",
+     "verts": 176,
+     "inside_pct": 57.4,
+     "penetration_m": 0.0673,
+     "gap_m": 0.0,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Long Count Boots",
+     "slot": "boots",
+     "verts": 176,
+     "inside_pct": 57.4,
+     "penetration_m": 0.0673,
+     "gap_m": 0.0001,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_GloveL",
+     "item": "Armourer's Gauntlets",
+     "slot": "gloves",
+     "verts": 589,
+     "inside_pct": 61.5,
+     "penetration_m": 0.0454,
+     "gap_m": 0.0001,
+     "min_z": 0.4532
+    },
+    {
+     "part": "Acc_GloveR",
+     "item": "Armourer's Gauntlets",
+     "slot": "gloves",
+     "verts": 589,
+     "inside_pct": 59.9,
+     "penetration_m": 0.0328,
+     "gap_m": 0.0001,
+     "min_z": 0.4581
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Commander's Field Mantle",
+     "slot": "cloak",
+     "verts": 271,
+     "inside_pct": 9.2,
+     "penetration_m": 0.07,
+     "gap_m": 0.0134,
+     "min_z": 0.8595
+    },
+    {
+     "part": "Acc_Helm",
+     "item": "Raidbreaker's Helm",
+     "slot": "hat",
+     "verts": 563,
+     "inside_pct": 9.2,
+     "penetration_m": 0.3221,
+     "gap_m": 0.0052,
+     "min_z": 1.3781
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Scarfang",
+     "slot": "weapon",
+     "verts": 232,
+     "inside_pct": 13.4,
+     "penetration_m": 0.0362,
+     "gap_m": 0.0019,
+     "min_z": 0.232
+    },
+    {
+     "part": "Model_Shield",
+     "item": "shield (shield_spikes)",
+     "slot": "offhand",
+     "verts": 246,
+     "inside_pct": 4.5,
+     "penetration_m": 0.042,
+     "gap_m": 0.0031,
+     "min_z": 0.1917
+    }
+   ],
+   "faults": [
+    "Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
+    "Acc_Cloak (Commander's Field Mantle): CLIPS the body - 0.070 m deep, 9% of it inside",
+    "Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
+    "Model_Weapon (Scarfang): PASSES THROUGH the body by 0.036 m",
+    "Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.042 m"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.366,
+      12.634
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.273,
+      12.772
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.366,
+      12.634
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      5.869,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  },
+  {
+   "key": "cleric",
+   "calling": "cleric",
+   "body": "Rogue_Hooded",
+   "tier": 5,
+   "rarity": "legendary",
+   "wear": 0.08,
+   "weapon": {
+    "id": "w_arcane_seam_staff",
+    "name": "Staff of the Open Seam",
+    "family": "arcane",
+    "tier_name": "scarforged"
+   },
+   "armour": {
+    "id": "a_seamwoven_vestment",
+    "name": "Seamwoven Vestment",
+    "cut": "robe",
+    "tier_name": "scarwoven mail"
+   },
+   "accessories": [
+    {
+     "slot": "amulet",
+     "id": "falconer_amulet",
+     "name": "Falconer's Vervel",
+     "cost": 440,
+     "stat": "hit",
+     "variant": 2
+    },
+    {
+     "slot": "cloak",
+     "id": "constable_cloak",
+     "name": "Constable's Cloak",
+     "cost": 480,
+     "stat": "ac",
+     "variant": 1
+    },
+    {
+     "slot": "boots",
+     "id": "cordwainer_boots",
+     "name": "Cordwainer's Boots",
+     "cost": 400,
+     "stat": "speed",
+     "variant": 2
+    }
+   ],
+   "helm": null,
+   "set_name": null,
+   "hidden_body_meshes": [
+    "RogueHooded_Cape"
+   ],
+   "surf_misses": 95,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Staff of the Open Seam",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/staff.gltf"
+    },
+    {
+     "slot": "offhand",
+     "item": "shield (shield_spikes)",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/shield_spikes.gltf"
+    }
+   ],
+   "height": 2.173,
+   "tris": 2862,
+   "pieces": 20,
+   "manifest": [
+    {
+     "part": "Armour_SleeveL",
+     "bone": "upperarm.l",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "gem"
+     ]
+    },
+    {
+     "part": "Armour_SleeveR",
+     "bone": "upperarm.r",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "gem"
+     ]
+    },
+    {
+     "part": "Armour_Robe",
+     "bone": "chest",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "mats": [
+      "cloth",
+      "glow",
+      "trim"
+     ]
+    },
+    {
+     "part": "Weapon",
+     "bone": "handslot.r",
+     "item": "Staff of the Open Seam",
+     "slot": "weapon",
+     "mats": [
+      "gem",
+      "glow",
+      "haft",
+      "leather",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Amulet",
+     "bone": "chest",
+     "item": "Falconer's Vervel",
+     "slot": "amulet",
+     "mats": [
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_Cloak",
+     "bone": "chest",
+     "item": "Constable's Cloak",
+     "slot": "cloak",
+     "mats": [
+      "cloth",
+      "dark",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootL",
+     "bone": "foot.l",
+     "item": "Cordwainer's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    },
+    {
+     "part": "Acc_BootR",
+     "bone": "foot.r",
+     "item": "Cordwainer's Boots",
+     "slot": "boots",
+     "mats": [
+      "cloth",
+      "dark",
+      "gem",
+      "metal"
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Armour_SleeveL",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "verts": 66,
+     "inside_pct": 71.2,
+     "penetration_m": 0.0437,
+     "gap_m": 0.0004,
+     "min_z": 0.5673
+    },
+    {
+     "part": "Armour_SleeveR",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "verts": 66,
+     "inside_pct": 63.6,
+     "penetration_m": 0.0389,
+     "gap_m": 0.0007,
+     "min_z": 0.5696
+    },
+    {
+     "part": "Armour_Robe",
+     "item": "Seamwoven Vestment",
+     "slot": "armour",
+     "verts": 635,
+     "inside_pct": 7.2,
+     "penetration_m": 0.2021,
+     "gap_m": 0.0006,
+     "min_z": 0.1681
+    },
+    {
+     "part": "Acc_Amulet",
+     "item": "Falconer's Vervel",
+     "slot": "amulet",
+     "verts": 407,
+     "inside_pct": 25.6,
+     "penetration_m": 0.0198,
+     "gap_m": 0.0001,
+     "min_z": 0.9159
+    },
+    {
+     "part": "Acc_Cloak",
+     "item": "Constable's Cloak",
+     "slot": "cloak",
+     "verts": 338,
+     "inside_pct": 42.6,
+     "penetration_m": 0.0257,
+     "gap_m": 0.0,
+     "min_z": 0.931
+    },
+    {
+     "part": "Acc_BootL",
+     "item": "Cordwainer's Boots",
+     "slot": "boots",
+     "verts": 176,
+     "inside_pct": 59.1,
+     "penetration_m": 0.0787,
+     "gap_m": 0.0004,
+     "min_z": -0.002
+    },
+    {
+     "part": "Acc_BootR",
+     "item": "Cordwainer's Boots",
+     "slot": "boots",
+     "verts": 176,
+     "inside_pct": 60.8,
+     "penetration_m": 0.0787,
+     "gap_m": 0.0004,
+     "min_z": -0.002
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Staff of the Open Seam",
+     "slot": "weapon",
+     "verts": 478,
+     "inside_pct": 9.2,
+     "penetration_m": 0.056,
+     "gap_m": 0.0025,
+     "min_z": 0.005
+    },
+    {
+     "part": "Model_Shield",
+     "item": "shield (shield_spikes)",
+     "slot": "offhand",
+     "verts": 246,
+     "inside_pct": 3.3,
+     "penetration_m": 0.0306,
+     "gap_m": 0.0025,
+     "min_z": 0.1917
+    }
+   ],
+   "faults": [
+    "Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.044 m deep, 71% of it inside",
+    "Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.039 m deep, 64% of it inside",
+    "Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 7% of it inside",
+    "Acc_Cloak (Constable's Cloak): CLIPS the body - 0.026 m deep, 43% of it inside",
+    "Model_Weapon (Staff of the Open Seam): PASSES THROUGH the body by 0.056 m",
+    "Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.031 m"
+   ],
+   "cams": {
+    "front": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.442,
+      12.541
+     ]
+    },
+    "side": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.273,
+      12.761
+     ]
+    },
+    "back": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.459,
+      12.558
+     ]
+    },
+    "top": {
+     "ortho": 3.3,
+     "outside": 0,
+     "clip": [
+      6.107,
+      13.288
+     ]
+    }
+   },
+   "export": {
+    "ok": true,
+    "msg": ""
+   }
+  }
+ ],
+ "fit_faults": [
+  "paladin: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
+  "paladin: Acc_Cloak (Commander's Field Mantle): CLIPS the body - 0.070 m deep, 9% of it inside",
+  "paladin: Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
+  "paladin: Model_Weapon (Scarfang): PASSES THROUGH the body by 0.036 m",
+  "paladin: Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.042 m",
+  "cleric: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.044 m deep, 71% of it inside",
+  "cleric: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.039 m deep, 64% of it inside",
+  "cleric: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 7% of it inside",
+  "cleric: Acc_Cloak (Constable's Cloak): CLIPS the body - 0.026 m deep, 43% of it inside",
+  "cleric: Model_Weapon (Staff of the Open Seam): PASSES THROUGH the body by 0.056 m",
+  "cleric: Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.031 m"
+ ],
+ "blank": {
+  "files": 8,
+  "failures": []
+ }
+}

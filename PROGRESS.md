@@ -6267,3 +6267,10 @@ spent polling.
   the worktree root (B2_ASK OK, then delete it and the .b2_* logs).
 - NEXT: those gates the moment the lock is free, then L56 (the delve-heavy soak, which needs the
   engine and the lock), nothing else - L68, L69 and L70 are all written and none is ticked.
+
+## C-64 (2026-11-16) - standing backlog item 1: event camp variants (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no item (C-63 ticked; fishing is the game build's). Took the stalest backlog item: event variants. Camp appears/while/cleared alts were last touched in C-47 and sat at 5 each, while disasters (C-56), epitaphs (C-57), Phase 2 words (C-60), miniboss feed (C-62) and bosses/potions (C-63) all came after.
+- data/lore_lines.json `events`: +2 appears_alt, +2 while_alt, +2 cleared_alt on all 20 bandit camps and all 19 monster camps (now 7 each), and +3 each on wandering_boss (now 29 each). 243 lines. Added note key `_note_variants_c64`.
+- Every new while_alt restates the SAME cost as that camp's canonical `while`, reworded and never widened. name, leader, of, appears, while, cleared and note untouched. No new camp, no new named leader, no floor count.
+- VALIDATION OK: file parses; every pre-existing key and list prefix byte-identical against HEAD (parsed-value compare, per camp); key sets per camp unchanged; no duplicate lines among camp alts; CRLF kept; nothing outside `events` changed.
+- CODE WIRING: none needed - same keys and shapes; the random pick over appears_alt/while_alt/cleared_alt widens automatically.

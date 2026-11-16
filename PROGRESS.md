@@ -6648,3 +6648,9 @@ released when Godot closed. Only my own three files and PROGRESS.md are touched.
 - NOT TICKED BY ME. D70's other three parts (.1 the first-timer, .2 their hero's moments, .3 the
   room) are twitch_eventsub.gd's and untouched. NEXT: whatever TAKE THIS NEXT says; nothing in my
   row is open that I can see.
+
+## C-69 (2026-11-16) - standing backlog item 1: disaster variants (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-68 ticked); told it to name the next-stalest standing-backlog item. Item 1 (disasters and events) was last touched in C-64 (event camps) and the disasters themselves in C-56, while epitaphs/barks (C-65), Phase 2 words (C-66), miniboss feed (C-67) and bosses/potions (C-68) all came after. Took the disasters. Not mine: C-55 artifact enforcement and fishing.json "epic" -> "very rare" stay with the game build.
+- data/lore_lines.json `disasters`: +4 `during`, +3 `begin_alt`, +3 `pass_alt` on each of the 13 disasters (volcano, fire, drought, famine, sickness, hurricane, tornado, earthquake, meteor, scarstorm, flood, blight, coldsnap) = 130 new lines, plain register, no line repeats any existing string in the file. New `_note_variants_c69` records it. `begin`, `pass` and `cost` untouched; cost is still the one statement the desktop implements from.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, new items appended at the end of each array only); LF preserved; no floor count anywhere.
+- CODE WIRING: none new. The existing picker for begin_alt / pass_alt / during now draws from 28 begin_alt / 28 pass_alt / 40 during lines per disaster (was 25 / 25 / 36). Still owed by the game build: miniboss_feed reader, "epic" -> "very rare" in fishing.json / angler.gd / fishing.gd / economy.gd / chatcmd.gd order array, and artifact-never-stocked enforcement.

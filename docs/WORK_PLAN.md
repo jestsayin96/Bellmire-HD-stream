@@ -1,4 +1,37 @@
-#
+# WORK PLAN - Bellmire HD
+
+================================================================================
+## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-15 22:22 CT. If you own a lane, your next item is named here. Search the file
+for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."
+
+  GAME BUILD   ->  D88   (the portcullis), then D83 (the traps), then D91 stages 2-4
+  HUD          ->  L72   (the lord camera pull-back), then L73, then L74
+  HUB          ->  H31   (the Season tab)
+  CONTENT      ->  C-55  (the rarity ladder) if not finished, else the words Phase 2 needs
+  ART          ->  more minibosses (standing permission). Themes with none yet: crypt, keep,
+                   treasury, mess, and the biome themes (wood, grassland, flooded).
+
+WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
+Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan is now in
+REVERSE CHRONOLOGICAL order: D93 (written last, 16:57) sits at line ~350, above D91 (~458),
+D90 (~552), D88 (~668) and D84 (~805). A worker taking "the first unchecked item in the file"
+therefore takes THE MOST RECENTLY WRITTEN ONE, which is the opposite of the phase order. That is
+how D93 (Phase 3) got built while D88 and D83 (Phase 1) sat untouched, and it is nobody's fault
+but the plan's. No worker misbehaved.
+D93a was NOT wasted - the town layout format, loader and validator are Phase 3's foundation and
+are good work. It was simply out of turn.
+
+PHASE ORDER IS UNCHANGED AND STILL BINDING: Phase 1 stop it looking broken -> Phase 2 make the
+loop real -> Phase 3 the authored town -> Phase 4 the art -> Phase 5 the Dais. The full
+breakdown is in the PHASE RC section further down. This block is just the pointer.
+
+PHASE 1 IS NOT FINISHED. Built on branches but NOT YET MERGED OR TICKED: L71, D84, D90, D91a,
+T5 (Phase 2's headline, done early - that is fine, it was the largest gap). STILL OPEN AND NEXT:
+D88, D83, and D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party in file).
+Nothing in this plan is DONE until the supervisor ticks its checkbox. A commit on a branch is
+not a tick.
+================================================================================
 ### THE HUD LANE ROW WAS WRONG - CORRECTED (20:58). D41, D48 AND D61 ARE NOT THE HUD'S.
 I wrote "HUD: L71 -> L64 -> D61 -> D41 -> D48" at 17:10. That was an error and it stranded the
 HUD worker: L71 and L64 are both shipped, and D41, D48 and D61 live in party_frames.gd,

@@ -1228,8 +1228,14 @@ def drillmaster_chibi():
                  (X + s * 0.20, -0.04, 0.10)], 0.145, 0.135)
         P.add(L.box(0.30, 0.40, 0.13), 'dark', loc=(X + s * 0.20, -0.12, 0.065))
     # TORSO - one barrel from hip to shoulder, wider than it is tall
+    # FAULT 3 OF THE THREE: head and torso were the SAME pale value with no
+    # neck, so the man read as one blank column. The torso takes the mid tone
+    # ('body') and the head keeps the pale one ('bone'), and a dark collar
+    # sits in the seam between them - the break a chibi head needs to read as
+    # a head. Same three values the hero uses: dark legs, mid body, pale face.
     limb(P, [(X, 0.08, HIP - 0.02), (X - 0.04, 0.00, 0.72), (X - 0.08, -0.08, 1.00)],
-         0.36, 0.38)
+         0.36, 0.38, 'body')
+    P.add(aim(L.cone(0.36, 0.30, 0.11, 18), (X - 0.09, -0.10, 0.94), (0.0, 0.0, 1.0)), 'dark')
     P.add(L.box(0.80, 0.34, 0.13), 'dark', loc=(X - 0.02, -0.06, 0.70))      # belt
     for s in (-1, 1):                                                        # shoulders
         P.add(L.sphere(0.22, 0.21, 0.19, 12, 8), 'body', loc=(X - 0.08 + s * 0.38, -0.08, 1.02))
@@ -1241,11 +1247,23 @@ def drillmaster_chibi():
     # both, so the one thing that says soldier - a kettle helm - said farmer.
     # The dome is taller and narrower and now clears the brim; the brim is
     # 1.08 m and sits high on the skull, where a helmet's does.
-    P.add(aim(L.cone(0.44, 0.17, 0.44, 16), (X - 0.10, -0.12, 1.50), (0.0, 0.0, 1.0)), 'dark')
-    P.add(aim(L.cone(0.54, 0.50, 0.05, 18), (X - 0.10, -0.12, 1.52), (0.0, 0.06, 1.0)), 'dark')
+    # PASS 3, and this is the first of the three register faults being closed:
+    # a cone with a point on it is a FARMER'S HAT whatever you call it. A
+    # kettle helm is a BOWL - rounded crown, no apex - with a brim that is
+    # widest at its outer edge and droops. So the dome is a squashed sphere
+    # and the brim is a cone whose BOTTOM radius is the larger one.
+    P.add(aim(L.cone(0.60, 0.44, 0.09, 20), (X - 0.10, -0.12, 1.50), (0.0, 0.05, 1.0)), 'dark')
+    P.add(L.sphere(0.45, 0.43, 0.33, 18, 12), 'dark', loc=(X - 0.10, -0.12, 1.54))
     # and the eyes were INSIDE THE SKULL. The head is 0.44 deep and they sat at
     # 0.40, so the face was blank from every angle. Measured, not nudged.
-    eyes(P, (X - 0.10, 0.0, 1.30), 0.150, 0.072, -0.545)
+    # FAULT 2 OF THE THREE: pale glowing DISCS read as a mummy, not a man, and
+    # nothing else in the game has them - a KayKit face is two dark ovals,
+    # taller than they are wide, sunk just under the surface of the skull.
+    # Head centre y -0.12, depth radius 0.44, so the face is at y -0.56: the
+    # ovals sit at -0.535 and stand 0.015 proud, not floating in front of it.
+    for s in (-1, 1):
+        P.add(L.sphere(0.058, 0.040, 0.088, 12, 8), 'dark',
+              loc=(X - 0.10 + s * 0.150, -0.535, 1.30))
     # ARMS - short, thick, ending in mitts. Right arm up on the mallet.
     limb(P, [(X + 0.26, -0.10, 1.00), (X + 0.52, -0.16, 1.14)], 0.145, 0.120)
     P.add(L.sphere(0.155, 0.150, 0.145, 10, 7), 'body', loc=(X + 0.56, -0.16, 1.16))

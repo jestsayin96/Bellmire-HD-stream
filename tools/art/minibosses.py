@@ -1796,3 +1796,170 @@ def snuffer_chibi():
 
 
 BUILDERS.update({"snuffer_chibi": snuffer_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 5 OF 14 - THE SEXTON. Fifth of the fourteen rebuilt in
+# the game's own register; see the block above drillmaster_chibi for the
+# measured Knight proportions and the one above snuffer_chibi for the rule
+# that register is MASS AND COUNT, not man-proportions.
+#
+# WHAT THE ORIGINAL ACTUALLY READS AS, looked at before anything was changed
+# (renders/art/minibosses/sexton/hero_front.png, hero_side.png):
+# A POST OFFICE SORTING RACK WITH A WIRE MAN UNDER IT. Measured off the
+# builder, against a hero arm 0.29 thick:
+#     legs            0.100 / 0.082
+#     torso           0.235 / 0.215   (the ONE bold member it has)
+#     hod uprights    0.055 / 0.042
+#     cell collars    0.075 slabs, 0.13 deep, NINE cells
+#     arms            0.072 / 0.054
+#     spade haft      0.055 / 0.048
+# Three faults fall straight out of that:
+#  1. EVERY MEMBER EXCEPT THE TORSO IS A WIRE, so the man is a pipe-cleaner
+#     holding a window frame, and from the SIDE he disappears altogether -
+#     a flat board on two threads.
+#  2. NINE THIN CELLS ARE A GRID, NOT GRAVES. At pane distance 0.075 collars
+#     with 0.40 holes read as glazing bars: it is a window, or a bookcase, and
+#     the lit plugs read as ENVELOPES in pigeonholes. The crypt read is gone.
+#  3. THE COUNT IS THE MECHANIC AND NINE IS TOO MANY TO COUNT. Four lit among
+#     nine is a pattern to be scanned; the Snuffer's lesson applies in its own
+#     form - a rising that cannot be counted from the doorway is a mechanic
+#     that cannot be read.
+#
+# SO THE CONVERSION IS THE SNUFFER'S, NOT THE DRILLMASTER'S: it is not enough
+# to fatten the man. SIX CELLS, not nine, each one big enough that the hole is
+# a NICHE - and the lit count stays FOUR, because four risings is the fight.
+# The silhouette read is kept exactly: a tall tilted rectangle of cells carried
+# high, a deep stoop under it, the spade a long diagonal to the floor the other
+# way. Nothing in this file is a grid and nothing else is, still.
+# Authored at the same 2.45 m so the pair sheet compares ONE thing.
+# ===========================================================================
+CANON.update({
+    "sexton_chibi": ("The Sexton (chibi)", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
+                     "crypt",
+                     "IT WILL NOT STAY DOWN - rebuilt in the game's own register",
+                     0.85, "A spade is working somewhere in the dark."),
+})
+
+
+def sexton_chibi():
+    """The Sexton in the game's register. Same read - A WALL OF LIT GRAVES
+    CARRIED ON A STOOPED BACK, SPADE DOWN TO THE FLOOR - with every wire member
+    taken to a chibi weight and the niches cut from nine to six so the four lit
+    ones can be COUNTED from the doorway."""
+    P = Parts("sexton_chibi")
+    HIP = 0.52                                   # 21% of 2.45, off the Knight
+    # --- LEGS. Stubs planted wide, boots almost as wide as the leg is long.
+    # Everything above him is heavy and he is braced, not walking.
+    for s in (-1, 1):
+        limb(P, [(s * 0.21, 0.08, HIP), (s * 0.25, 0.00, 0.26),
+                 (s * 0.26, -0.06, 0.11)], 0.150, 0.138)
+        P.add(L.box(0.32, 0.44, 0.13), 'dark', loc=(s * 0.26, -0.14, 0.065))
+    # --- TORSO. One barrel, bowed hard FORWARD under the load - the stoop is
+    # the whole posture and a chibi has no waist to bend at, so the barrel
+    # itself leans and the shoulders come down and forward over the toes.
+    # PASS 3, FAULT 2 - THE MAN WAS BEHIND HIS OWN LOAD. Pass 2 killed the
+    # drawers but left a solid rectangle with a dark blob under it: head,
+    # shoulders and hod frame all sat INSIDE the wall's outline, so from the
+    # front there was no man carrying anything - there was a cabinet with legs,
+    # which is the Porter's read, not the Sexton's. The fix is not to shrink
+    # the wall (the wall is the mechanic). IT IS TO DEEPEN THE STOOP until the
+    # head comes out from under the load and breaks the outline below it. One
+    # read - where the man is relative to what he carries - bought in the spine,
+    # the shoulders and the head together, because they are one chain.
+    # PASS 4, FAULT 3 - I OVERCORRECTED AND BUILT A QUADRUPED. Pass 3 bought
+    # the head out from under the load by laying the spine almost flat: from
+    # the SIDE the barrel ran horizontal at shoulder height with the head hung
+    # off the front of it and both mitts on the floor, and what stood there was
+    # a DOG, not a man under a hod. A miniboss may not read as a hero; it may
+    # not read as somebody's wolfhound either. Half the stoop back: the head
+    # still clears the wall's bottom edge from the front, and from the side the
+    # spine is a diagonal again.
+    limb(P, [(0.0, 0.10, HIP - 0.02), (0.0, -0.14, 0.88), (0.0, -0.38, 1.12)],
+         0.37, 0.33, 'body')
+    P.add(L.box(0.82, 0.36, 0.14), 'dark', loc=(0.0, -0.06, 0.82))            # belt
+    for s in (-1, 1):
+        P.add(L.sphere(0.225, 0.215, 0.195, 12, 8), 'body', loc=(s * 0.38, -0.36, 1.12))
+    # --- THE HEAD. A leather cowl bowed low over a blank plate - he is a
+    # working sexton, not a wraith, so there is no skull. Dark cowl, pale
+    # plate, the same three-value break the hero's head uses. Hung FORWARD of
+    # the shoulders and below them, the way a head hangs off a bowed back.
+    # PASS 5, FAULT 4 - THE COWL WAS A SAUCER. A 0.44 brim cone over a dark
+    # dome, on a chibi with no neck, is a lampshade from the front and a
+    # conical straw hat from the side - the Snuffer's pass-4 fault arriving in
+    # the slot where it does most harm, because the head is the one place a
+    # viewer looks to tell a man from a thing. A cowl is not a brim: it is
+    # cloth drawn BACK over the skull, falling onto the shoulders behind, with
+    # a short peak forward over the face. No disc, nothing wider than the head.
+    P.add(L.sphere(0.300, 0.300, 0.270, 16, 11), 'bone', loc=(0.0, -0.62, 1.14))
+    P.add(L.sphere(0.335, 0.345, 0.300, 16, 11), 'dark', loc=(0.0, -0.50, 1.22))
+    P.raw(aim(L.cone(0.265, 0.165, 0.26, 14), (0.0, -0.64, 1.26), (0.0, -0.80, -0.26)), 'dark')
+    P.add(L.sphere(0.290, 0.250, 0.175, 14, 9), 'dark', loc=(0.0, -0.26, 1.16))
+    for s in (-1, 1):
+        P.add(L.sphere(0.052, 0.036, 0.080, 12, 8), 'dark',
+              loc=(s * 0.112, -0.895, 1.11))
+    # --- THE HOD FRAME. Two uprights off the hips raked back over the
+    # shoulders, at a chibi weight: these carry a wall of stone and at 0.055
+    # they were string.
+    for s in (-1, 1):
+        limb(P, [(s * 0.30, 0.18, 0.86), (s * 0.34, 0.30, 1.46),
+                 (s * 0.36, 0.40, 2.12)], 0.105, 0.082, 'dark')
+    P.add(L.box(0.86, 0.15, 0.15), 'dark', loc=(0.0, 0.24, 0.98))
+    # --- THE NICHE WALL. SIX cells, 2 across x 3 up - the tall tilted
+    # rectangle, kept - with members three times the original's and holes big
+    # enough to be graves. FOUR are plugged and LIT: four risings left, and the
+    # plugs stand proud so the count dents the outline from the front.
+    LIT = {(0, 0), (1, 1), (0, 2), (1, 2)}
+    cw, chh = 0.50, 0.46
+    tk = 0.145                                   # was 0.075. A glazing bar -> a slab.
+    pitch_x, pitch_z = cw + tk, chh + tk
+    for i in range(2):
+        for j in range(3):
+            x = (i - 0.5) * pitch_x
+            z = 1.06 + j * pitch_z
+            y = 0.34 + j * 0.060                 # the rake, as a carried thing
+            for dx, dz, sx, sz in ((0.0, (chh + tk) * 0.5, cw + tk, tk),
+                                   (0.0, -(chh + tk) * 0.5, cw + tk, tk),
+                                   ((cw + tk) * 0.5, 0.0, tk, chh),
+                                   (-(cw + tk) * 0.5, 0.0, tk, chh)):
+                P.add(L.box(sx, 0.26, sz), 'bone', loc=(x + dx, y, z + dz),
+                      rot=(-0.14, 0.0, 0.0))
+            if (i, j) in LIT:
+                # PASS 2, FAULT 1 - IT WAS A CHEST OF DRAWERS. One read, bought
+                # in the three places that made it: the plug filled the cell
+                # face (a drawer front), a horizontal glow strip across it read
+                # as the DRAWER LABEL, and a dark knob in the corner read as
+                # the PULL. A grave plug is a rough stone STOPPER driven into a
+                # hole: narrower than the mouth it blocks, standing well proud,
+                # and the light is what leaks round it - so the glow becomes a
+                # RIM in the gap, not a plate on the front, and the knob goes.
+                P.add(L.box(cw * 0.60, 0.34, chh * 0.60), 'body',
+                      loc=(x, y - 0.30, z), rot=(-0.14, 0.0, 0.0))
+                P.add(L.box(cw * 0.70, 0.07, chh * 0.70), 'glow',
+                      loc=(x, y - 0.05, z), rot=(-0.14, 0.0, 0.0))
+    # frame edges, so the six read as ONE carried hod and not a stack
+    for j, z in ((0, 1.06 - pitch_z * 0.56), (3, 1.06 + 2.56 * pitch_z)):
+        P.add(L.box(2 * pitch_x + 0.14, 0.18, 0.12), 'dark',
+              loc=(0.0, 0.34 + 0.060 * j, z))
+    for s in (-1, 1):
+        P.add(L.box(0.12, 0.18, 3 * pitch_z + 0.14), 'dark',
+              loc=(s * (pitch_x + 0.05), 0.42, 1.06 + pitch_z))
+    # --- THE SPADE. A chibi arm is SHORT, so the long diagonal comes from the
+    # HAFT, not from the reach: both mitts on it low and forward, the blade on
+    # the floor well out to his right. Haft 0.085 - at 0.055 it was a wire and
+    # the diagonal, which is half the silhouette, was not there at all.
+    limb(P, [(0.38, -0.36, 1.10), (0.52, -0.46, 0.88)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.140, 10, 7), 'body', loc=(0.55, -0.48, 0.85))
+    limb(P, [(-0.38, -0.36, 1.10), (-0.10, -0.52, 0.82)], 0.145, 0.120)
+    P.add(L.sphere(0.155, 0.150, 0.140, 10, 7), 'body', loc=(-0.06, -0.54, 0.80))
+    limb(P, [(-0.12, -0.54, 0.86), (0.96, -0.44, 0.28)], 0.085, 0.072, 'bone')
+    P.raw(aim(L.box(0.46, 0.085, 0.56), (1.10, -0.39, 0.10), (0.52, -0.04, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.24, 0.018, 0.17, 4), (1.19, -0.39, -0.08), (0.52, -0.04, 1.0)), 'bone')
+    # --- the spoil heap. There is a hole here, and it is bolder than three
+    # pebbles: two mounds a chibi knight could trip on.
+    for dx, dy, r in ((1.12, -0.66, 0.40), (1.40, -0.30, 0.27)):
+        P.add(L.sphere(r, r * 0.86, r * 0.44, 10, 7), 'dark', loc=(dx, dy, r * 0.20))
+    return P
+
+
+BUILDERS.update({"sexton_chibi": sexton_chibi})

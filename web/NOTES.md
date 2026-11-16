@@ -855,3 +855,10 @@ Four cards, top ten each, living + fallen: Went deepest (`deepest`), Earned most
 floor), Lived longest. Honest gaps: the publisher sends only current `gold` today, so "Earned most" ranks gold held and
 says so; no age/born_day fields exist yet, so "Lived longest" shows an explanatory empty state. Both light up by
 themselves when the fields arrive (names in HUB_SECURITY.md). Checks: ?mock=season | season0 | season3.
+
+## Version-gate re-verification (hub run, 2026-11-16 ~21:40 UTC)
+Headless Chromium, real-shaped snapshots (publisher v4 shape: shops[{name,level,sells_to}] with no stock/caravan/orders yet), hostile name `<img src=x onerror=alert(1)>` in hero, satchel row and shop name.
+- v4 and v5 payloads: Shops tab lights up by itself (levels, "sells up to" with rarity slug incl. "very rare"); Satchel renders; no page errors; 0 dialogs; hostile names are text (no injected <img>).
+- Stale (30 min old): "Last word from the town 30 minutes ago ... may be out of date". ?state=stale, ?state=empty, ?state=fail, ?mock=chronicle, ?mock=crowd, ?open=1 all behave.
+- Unknown v9: honest "needs an update" problem, no tab content.
+- Still open on the GAME BUILD side: snapshot_pub.gd sends shops WITHOUT `stock`, and no `caravan`/`trader`/`orders` yet, so each shelf honestly reads "The shelf has not been published yet." The hub needs no change; it lights up when those fields arrive (items.json shop_stock / trader_cargo wiring in the publisher).

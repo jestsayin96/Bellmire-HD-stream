@@ -6799,9 +6799,83 @@ and PROGRESS.md are touched.
 - NOT SEEN: no "Delvers - floor N" party-frames block appeared in the stills at 100% grid; only the BossCard and a "NOW FIGHTING" card (@PanelContainer, (244,167) 471x111, does not overlap anything). Whether party_frames.gd draws at all in this scene is the game build's to say; I did not widen the test.
 - LOOKED: renders/cycles/l40d/l40d_grid_100.png (card over DIRECTOR plate, visible), plus the five other stills exist. Side observation, not a fault gated here: the Chronicle's top line sits flush under the scroll rail at 100% grid.
 - Files: tools/_l40_delve_test.gd, PROGRESS.md, renders/cycles/l40d/*. Logs _l40d_*.log.
+## D41 - the boss card docks BESIDE the director plate; a point-redeemed errand writes chat.delve_queue at the source (game build, 2026-11-16 15:08-15:20 CT)
+- TAKE THIS NEXT gave GAME BUILD: D41 (first, Phase 1) and the town._on_delve -> chat.delve_queue fix (second). Lock was IDLE (HUD 15:00:33), no Godot alive; claimed 15:09:38-06:00, expected finish 15:32.
+- D41, boss_bar.gd _dock(): HudDock.put() steps round the Chronicle but never knew the pane's own label chips. The card now reads the union of the visible Labels on Pane_<k> (_plate_rect) and starts in the room BESIDE that plate, scaled to fit it; if the room would shrink it under 70% of the pane's own scale it drops UNDER the plate instead. No pane plate -> the old placement unchanged. Full screen untouched.
+- MEASURED, the HUD lane's own gate, tools/_l40_delve_test.gd at --resolution 1920x1080 (same as U39): L40D_TEST OK overlaps=0 (was FAIL 6). Card in the grid: 100% (322,12) 626x128 beside the plate, NOW FIGHTING caption (335,160) clear below it; 125% (404,15) 541x110 beside; 150% the plate grows to 451 px wide so the card drops under it, (149,174) 663x135. Full screen 100/125/150 unchanged at (570,140..210) 780x159.
+- NOTE: a first run WITHOUT --resolution came up 1152x648 and also read 0; that run and this one both wrote into renders/cycles/l40d/ (the HUD's committed stills). I restored the HUD's files from git and kept mine as renders/cycles/d41/shots/d41_{grid,full}_{100,125,150}.png. The HUD lane may want the test to take an output-dir argument.
+- LOOKED: d41_grid_100.png and d41_grid_150.png - DIRECTOR plate clear, card legible at both, NOW FIGHTING caption clear at 100%.
+- ONE RISK I CAN SEE AND DID NOT GATE: at 150% the card sits at y 174..309 under the plate. The NOW FIGHTING caption (an auto-director card, not mine) drew at (335,160) at 100% and was absent in the 150% frame; if it fires at 150% while the card is dropped they would share pixels. The caption is the one that should yield (or stack under the card); naming it for the HUD lane rather than moving their file.
+- THE PARTY-FRAMES QUESTION, ANSWERED: party_frames.gd does not draw on stream AT ALL, in the grid or full screen - const ON_STREAM := false since D46 ("the multi-member band board no longer draws on stream (hub: Bands below)"); refresh() hides it before docking. So L40 clause (a) as written was never real, and D41 is the boss-card dock alone.
+- QUEUE AT THE SOURCE, town.gd _on_delve: appends uid to chat.delve_queue if absent (the !delve path appended before it emitted, so never twice); town.gd's existing erase on delve end clears it. New gate tools/_d41_queue.gd: D41Q_TEST OK, 7 checks - errand hero in the queue once, !muster (1); a chat !delve for a second viewer; the errand viewer's own !delve -> "already waiting", still once; !muster (2), queue size 2. THE UNION NOW READS THE SAME COUNT AS THE QUEUE. chatcmd.gd's union read is left as it is (chat bot's file) - it is now redundant but harmless; their call whether to drop it.
+- Behaviour note for the supervisor: an errand-sent hero now counts toward QUEUE_MAX, so a full muster tells the next !delve "full". The redemption itself still is not refused at the cap (that would need a refund path) - unchanged from before.
+- GATES (run 2, after both edits): parse 0 SCRIPT ERROR / Parse Error; OFFFLOOR 0 of 1931; TWITCH_PARSE OK; TOWNWALK in_solid 0/16673 PASS; _delve_test ran to T150s, 0 SCRIPT ERROR. No soak (not asked for).
+- NO LIVE TWITCH TEST THIS SLOT: nothing in D41 or the queue fix needs one (the errand path is gated by calling town._on_delve the way twitch_eventsub.gd does). 0 bits, nothing redeemed, nothing posted.
+- Files: scripts/boss_bar.gd, scripts/town.gd, tools/_d41_queue.gd, PROGRESS.md, renders/cycles/d41/*. Not ticking D41 - the supervisor does.
 
 ## C-70 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
 - TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-69 ticked); told it to name the next-stalest backlog item inside its four files. Item 1 was freshest (C-69). Item 2 was last touched in C-65, before the Phase 2 words (C-66), miniboss feed (C-67) and bosses/potions (C-68), so it was stalest, and these lines repeat most on stream. Took it.
 - data/lore_lines.json: descend +39 (now 299), cleared +38 (299), epitaphs +60 (477), barks +68 (enter 12, lord 12, trap 12, hurt 11, drink 9, misfire 12). 205 lines, plain register, none duplicates any string already in the file. Descend lines starting '%s %s' keep the hero + verb pair; 'Floor %d' keeps the floor stood on only, never a total. No dungeon floor count anywhere. New `_note_c70` records it.
 - VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, new lines appended at array ends only); the file's one stray CR (before phase2_words_alt) preserved byte for byte; LF kept.
 - CODE WIRING: none new. Existing pickers for descend / cleared / epitaphs / barks draw from the wider pools. Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
+
+## B10 - W-LIVE'S LIVE HALF IS DONE: BELLMIREBRO SPOKE IN HIS CHAT, FROM THE ENGINE (chat bot, 2026-11-16 15:45-15:55 CT)
+TAKE THIS NEXT, verbatim: "the ENGINE already holds the bot's chat connection, so the post comes
+from the engine, not from a browser pane. ONE bellmirebro line in jestsayin96's chat, with the
+stream checked FIRST, closes this item." That is what happened. Lock: file read IDLE 15:15:11
+(game build), NO Godot process alive at 15:47:54 CT; claimed 15:48:05-06:00 and refreshed
+15:49:18-06:00 for the gate battery, released when it ended. All stamps real CT off the machine.
+- THE LIVE POST LANDED. The stream was checked FIRST and it is the only thing that could have
+  vetoed the post: helix /streams?user_id=138821183 returned 0 entries, so he is OFFLINE and no
+  viewer saw the bot talk to itself. Then ONE line, through twitch_eventsub.gd's own _send_chat as
+  bellmirebro: "Lamps lit. Bellmire's door is open." Sender read back from /users?id= and it is
+  bellmirebro; channel 138821183 (jestsayin96). WPOST OK.
+  NOT ONE BIT WAS SPENT. No cheer, no cheer dialog, no subscription, no redemption, no reward
+  created, deleted, renamed or re-priced, and nothing posted as his personal account. The browser
+  was never used - the engine holds the connection, which is exactly why the earlier browser
+  reading ("signed in as his own account") was never the blocker it looked like.
+- I DID NOT TOUCH twitch_eventsub.gd. The posting tool was a throwaway at the worktree root
+  (_wpost.gd), run once, then deleted, like _b2_ask.gd and _wlive_chat.gd before it. The contract
+  with the game build is unchanged: chatcmd.gd still emits twitch_reply(user_login, text) with no
+  @name and no rate limiting, and the queue, prefix and Send Chat Message call stay theirs.
+- THE ONE-WORD FIX IS IN (S2_TEST FAIL (a), assigned to me at 15:02). _ask_line called
+  _ui_snd("help", out). _s2_test scans the wired files for `_snd("<literal>"` and asserts every
+  such literal is a key of Sfx.SETS - but _ui_snd's FIRST ARGUMENT IS A COMMAND VERB, not a Sfx
+  kind, so "help" was flagged while the sound played was fine. The literal is now "menu_select".
+  BEHAVIOUR IS BYTE-IDENTICAL: ui_kinds() matches the verb against inventory/brew/forge/oil and
+  falls through to ["menu_select"] for anything else, so "help" and "menu_select" both resolved to
+  ["menu_select"] already, and the error-shaped early returns read `out`, not the verb. The line
+  now says what it does - play the menu_select sound for this ask reply - and the scan is honest.
+  FAIL (b) ("new ashwight -> ''") is the game build's and I did not go near it.
+- THE ECHO GATE IS IN tools/ ON THE SUPERVISOR'S RULING (15:02: "D704_ECHO is a standing safety
+  gate, not a one-off measurement... Put it in tools/ as tools/_d704_echo.gd on `chatbot` - I am
+  granting you that one path for this file only"). It is the only file outside my three that this
+  lane has ever written, and the grant is on the record above. It had to be WRITTEN AGAIN, not
+  recovered: B8 ran it from the worktree root and deleted it, so no commit on any branch ever
+  carried it (git log --all over _d704_echo.gd and _wlive_chat.gd returns nothing).
+  It now proves four things over all 32 declawed control characters and all four command prefixes,
+  then once more through the live door: no control character survives either safe_word or
+  safe_line (an injected newline JOINS the line, so no viewer can make the bot post two lines);
+  nothing leaves reading as a command or a mention, however the prefixes are stacked and even when
+  a zero-width hides one; REPLY_MAX and VIEWER_MAX hold, a clean line is returned whole, and
+  nothing survivable means "" rather than half a line; and both doors are IDEMPOTENT, which is the
+  check that catches a second pass being added to _reply later. Stage 5 drives ChatCmd._reply
+  itself and asserts what it EMITS equals what it RETURNS, that the login is declawed and capped at
+  40, and that a local_ user never reaches chat at all. D704_ECHO OK, 356 checks (B8's root copy
+  reported 334; the extra 22 are the idempotence block).
+  GDScript REFUSES a direction-control literal in source, the same refusal B8 hit - the \u202e,
+  \u200b and \u200a probes are built with String.chr() instead, and no line of the file carries a
+  non-ASCII byte.
+- GATES, ALL FIVE GREEN, run in this worktree after the edits:
+  parse (--headless --quit-after 300) 0 errors; L14_TEST OK (the doc does not drift, neither way);
+  TWITCH_PARSE OK; D704_ECHO OK 356 checks IN ITS NEW HOME; _commands_doc.gd printed
+  "COMMANDS_DOC wrote 27 commands" and LEFT docs/COMMANDS.md UNMODIFIED (git status does not list
+  it), so the generated doc still matches the data file byte for byte.
+  data/commands.json is UNCHANGED this cycle - json.load parses, 27 commands, no key touched - and
+  so is docs/COMMANDS.md. The one word changed is in scripts/chatcmd.gd and nowhere else.
+- FOR THE GAME BUILD: nothing is owed to me in twitch_eventsub.gd. _send_chat posts a bare line
+  with no @name when it is called directly, which is how the live post was made; the @name prefix
+  lives in the queue path and is correct there. No signature changed.
+- ONE THING FOR THE RECORD AGAINST MYSELF: I spent :45 to :48 reading the plan, the ruling and the
+  code before claiming, so the engine work started three minutes into a seven-minute window. The
+  battery still ended inside it, but next slot the lock claim comes first and the reading second.

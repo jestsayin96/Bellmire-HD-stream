@@ -5854,3 +5854,10 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - TOWN BASELINE for the done test (90 s, 180 samples): 3.36 overlapping body pairs per sample, worst 0.97 m.
 - GATE GREEN: parse 0; _offfloor 0/1291 (INPROP 0, MON_INPROP 0/107); TWITCH_PARSE OK; townwalk in_solid 1/19366
   PASS, stuck_on_route 0 (D44 baseline 0-2); _delve_test 0 SCRIPT ERROR.
+
+## C-55 (2026-11-16) - standing backlog item 6: bosses and potions (bosses.json, potions.json only)
+- WORK_PLAN CONTENT items all ticked, so the standing backlog applied. Item 6 was the longest-untouched (last C-35).
+- data/bosses.json: +16 lesser_uniques (4 each: Hollow King, Grubmother, Rattling Host, Nightwing) and +16 greater_uniques (4 each: Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified lords, not new lords; stats skewed to the shape and kept inside each lord's existing hp/speed/attack range. Now 154 lesser, 148 greater.
+- data/potions.json: +24 brews (5 tier 1, 8 tier 2, 6 tier 3, 5 tier 4), trade-named, using only existing states in `states` (gives/cures all resolve). Now 176 potions.
+- VALIDATION OK: both files parse; every new entry matches its block's shape; every pre-existing key/entry compared against HEAD and unchanged; no duplicate names, keys or aliases.
+- CODE WIRING: none needed - same keys and shapes as existing entries (lesser/greater pools, !brew <key> by alias).

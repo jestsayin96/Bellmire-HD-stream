@@ -1453,3 +1453,183 @@ def stoker_chibi():
 
 
 BUILDERS.update({"stoker_chibi": stoker_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION, CREATURE 3 OF 14 - THE GAOLER
+# The Drillmaster is the worked example and the Stoker is the second; this
+# follows both. Legs to 21% of the height, head 0.42 of the height across,
+# NO NECK with a dark collar in the seam, mitts for hands, LIMBS IN THE MID
+# TONE (the Stoker's fault 4 - limb() defaults to 'bone' and makes a pale
+# stick-figure), and THREE-POINT arms with a real elbow (its fault 8).
+#
+# NOTHING ABOUT THE IDEA CHANGES - a hook on a chain, the chain coiled flat on
+# the floor behind him, keys on the hip, no face. Only the man is rebuilt.
+#
+# THREE DECISIONS THIS CREATURE FORCED THAT THE FIRST TWO DID NOT:
+#
+#  1. THE STOOP CANNOT BE PAID FOR IN HEIGHT. The original's whole character
+#     is a man bent double over years of hauling, and a bent man is SHORTER.
+#     But the pair sheet only means anything if both are authored at the same
+#     2.35 m, so the chibi one must still top out at 2.35. The stoop therefore
+#     reads as LEAN and as CLOTH: the torso's axis runs forward, the head sits
+#     forward of the shoulders, and the hood's mantle falls over them. If Mr. E
+#     wants him to stand shorter than the party that is bestiary.gd's `h`, a
+#     game build number, and not mine.
+#  2. THE HOOD IS THE HEAD, which is the one place this creature is EASIER
+#     than the other two. The Stoker's pass-3 register fault was a dark cap on
+#     a pale skull reading as a bowl cut; the Gaoler never has a pale skull to
+#     put a cap on. The head is dark cloth all through and the single pale
+#     thing above the ground is the iron faceplate - exactly the value stack
+#     the hero's own face uses, arrived at by the creature's own design.
+#  3. THE APRON IS DROPPED, AND THAT IS A REGISTER DECISION. The original's
+#     flat leather panel existed for one stated reason: "so the legs read as
+#     thin". Chibi legs are thick stubs, so the reason is gone - and any value
+#     it could take now either merges with the torso ('body'), merges with the
+#     boots ('dark'), or becomes the brightest large shape on the creature
+#     ('bone') and competes with the face. The belt keeps the hip read instead.
+# ===========================================================================
+CANON.update({
+    "gaoler_chibi": ("The Gaoler (chibi)", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
+                     "prison",
+                     "IT DRAGS - rebuilt in the game's own proportions",
+                     0.80, "A chain is paying out in the dark."),
+})
+
+
+def gaoler_chibi():
+    """The Gaoler in the game's register. The original was a seven-head man on
+    0.085 m legs with a 1.16 m hip, stooped over them - beside a chibi knight
+    he read as a pipe-cleaner in an apron. Same fight, same props, same read
+    (HOODED FIGURE, HOOK OUT ON ONE SIDE, CHAIN COILED ON THE FLOOR), rebuilt
+    on the Knight's measured proportions: hip at 21% of height, head 0.99
+    across, shoulders 0.80 wide.
+
+    The hook is the mechanic and a chibi arm is SHORT, which is the real
+    problem here: the original bought the hook's reach with a 1.22 m arm and
+    that arm no longer exists. The reach is bought back by the shank - the
+    hook's own shaft runs THROUGH the fist and past it, so the iron carries
+    the silhouette out to 1.66 where the arm only gets to 1.07, and the haft
+    above the hand is what says HELD rather than attached at the wrist."""
+    P = Parts("gaoler_chibi")
+    H = 2.35
+    HIP = 0.49                                  # 21% of the body's height
+    # LEGS - stubs in the MID tone, boots dark and nearly as wide as the leg
+    # is long. Not limb()'s default 'bone': that is the Stoker's fault 4.
+    for s in (-1, 1):
+        limb(P, [(s * 0.185, 0.08, HIP), (s * 0.205, 0.02, 0.23),
+                 (s * 0.215, -0.04, 0.10)], 0.155, 0.145, 'body')
+        P.add(L.box(0.32, 0.44, 0.14), 'dark', loc=(s * 0.215, -0.13, 0.07))
+    # THE TORSO - one mass hip to shoulder, and its axis LEANS FORWARD: hip at
+    # y +0.16, shoulder at y -0.18. That lean is the whole stoop, because the
+    # height cannot be spent on it (decision 1 above).
+    # PASS 2, FAULT 2 - THE STOOP WAS GONE AND THE STOOP IS THE CHARACTER.
+    # Pass 1 leant the torso 0.34 m over an 0.81 m rise and on a chibi that is
+    # nothing: he stood bolt upright, which the original's own docstring says
+    # he must never do ("never reads as an adventurer standing up straight").
+    # A chibi cannot be bent at the waist - there is no waist - so the stoop is
+    # bought in four places AT ONCE, which is why this is one change and not
+    # four: the torso axis runs further forward and the shoulder drops, the
+    # mantle tilts so its BACK rim stands higher than its front (the hump), the
+    # head moves out over the toes, and the face sits LOW on the hood instead
+    # of centred. The height cannot pay for it - the pair sheet needs both at
+    # 2.35 - so the hood's crown and its tail keep the top of the silhouette
+    # while everything a player reads as a face goes down and forward.
+    limb(P, [(0.0, 0.22, 0.47), (0.0, 0.04, 0.86), (0.0, -0.28, 1.24)],
+         0.36, 0.38, 'body')
+    P.add(L.box(0.86, 0.46, 0.14), 'dark', loc=(0.0, 0.10, 0.70))            # belt
+    P.add(aim(L.cone(0.40, 0.33, 0.12, 18), (0.0, -0.30, 1.26),
+              (0.0, -0.34, 1.0)), 'dark')                                    # collar
+    # SHOULDERS kept DELIBERATELY SMALL. The Stoker's standing fault list says
+    # its shoulder spheres overhang the upper arms; here the sphere is 0.19 and
+    # the upper arm 0.165, so the arm leaves the shoulder almost flush.
+    for s in (-1, 1):
+        P.add(L.sphere(0.19, 0.185, 0.175, 12, 8), 'body',
+              loc=(s * 0.40, -0.28, 1.25))
+    # THE MANTLE - the hood's cloth continuing down over the shoulders. This is
+    # what gives a dark head a base to grow out of instead of balancing on a
+    # neck it does not have.
+    P.add(aim(L.cone(0.62, 0.34, 0.36, 20, cap=False), (0.0, -0.26, 1.08),
+              (0.0, -0.40, 1.0)), 'dark')
+    # THE HEAD IS THE HOOD - 0.99 across, sitting forward of the shoulders,
+    # and topped by a hood POINT falling backward so nothing can read it as a
+    # helmet. Head top plus the point lands at 2.33 of 2.35.
+    # PASS 2, FAULT 1 - THE HOOD POINT WAS A WIZARD'S HAT. A cone standing on
+    # top of the dome, with a seam across the crown where the two met, is a
+    # POINTED HAT whatever the comment calls it - the Drillmaster's kettle-helm
+    # mushroom arriving here in a third form. A hood's point does not stand up,
+    # it FALLS BACKWARD: the cloth is one piece that bulges back over the skull
+    # and tapers away down the spine. So the head is deeper in y than it is
+    # wide, and the point is a tapering tail hanging down the back.
+    P.add(L.sphere(0.47, 0.54, 0.46, 18, 12), 'dark', loc=(0.0, -0.40, 1.76))
+    # PASS 3, FAULT 3 - THE TAIL WAS A RABBIT EAR. A tapering tube leaving the
+    # crown and standing back from it is a flat paddle from the side and a dark
+    # V from the back: the wizard's hat of pass 1 lying down. Cloth over a head
+    # does not project anywhere. It GATHERS AT THE NAPE, which is also where
+    # the weight of a hood actually hangs, so the point becomes a bunched mass
+    # behind and below the skull - and that mass doubles as the hump this
+    # stooped figure wants at the top of its spine.
+    P.add(L.sphere(0.34, 0.30, 0.26, 14, 10), 'dark', loc=(0.0, 0.14, 1.66))
+    # THE FACEPLATE - a dished plate of iron where a face should be, set INTO
+    # the hood (hood front is y -0.81, the plate sits at -0.76) so the cloth
+    # overhangs it. The single pale thing above the ground.
+    P.add(L.sphere(0.29, 0.060, 0.26, 16, 10), 'bone', loc=(0.0, -0.860, 1.62))
+    # the hood's brow edge, 0.04 clear of the plate's top: the Stoker's cap
+    # lesson, which is that a dark dome needs an EDGE or it is hair.
+    P.add(aim(L.cone(0.50, 0.43, 0.075, 20), (0.0, -0.38, 1.92),
+              (0.0, -0.30, 1.0)), 'dark')
+    # EYE SLOTS, and they are NOT the three-value eye the Stoker ended with.
+    # That stack - dark socket, pale eye, dark pupil - is how you build an EYE.
+    # This creature has no eye: it has a plate with two slots cut in it, and
+    # the slots are horizontal because that is what a slot in a plate is. Two
+    # dark bars standing a little proud of the pale plate, nothing inside them.
+    for s in (-1, 1):
+        P.add(L.box(0.13, 0.06, 0.045), 'dark', loc=(s * 0.135, -0.930, 1.68))
+    # ARMS - three-point with a real elbow: the upper arm out and down, the
+    # forearm forward and in. A chibi arm is short enough that the elbow IS
+    # the read, and without it the arm is a spoke (the Stoker's fault 8).
+    limb(P, [(-0.38, -0.26, 1.20), (-0.52, -0.38, 0.98),
+             (-0.46, -0.52, 0.78)], 0.160, 0.130, 'body')
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'dark', loc=(-0.44, -0.54, 0.73))
+    limb(P, [(0.38, -0.26, 1.20), (0.72, -0.36, 1.08),
+             (1.00, -0.42, 0.96)], 0.165, 0.135, 'body')
+    P.add(L.sphere(0.190, 0.185, 0.175, 10, 7), 'dark', loc=(1.07, -0.44, 0.94))
+    # THE SHANK through the fist, carrying the reach the arm lost
+    limb(P, [(0.90, -0.36, 0.98), (1.26, -0.52, 0.90)], 0.060, 0.052, 'bone')
+    # THE HOOK - a C of iron 0.68 across, heavier than the original's because
+    # a chibi silhouette is bolder everywhere else and a hairline would vanish
+    # again. The mechanic, kept readable at pane distance.
+    hook = [Vector((1.32 + 0.34 * math.cos(a), -0.50 + 0.07 * math.cos(a),
+                    0.56 + 0.34 * math.sin(a)))
+            for a in [1.75 - 4.3 * (i / 10.0) for i in range(11)]]
+    P.raw(L.tube(hook, [0.085, 0.082, 0.078, 0.072, 0.068, 0.062,
+                        0.056, 0.050, 0.042, 0.032, 0.016], 8), 'bone')
+    P.add(L.sphere(0.085, 0.085, 0.085, 9, 6), 'dark', loc=(1.26, -0.52, 0.93))
+    # THE CHAIN: the flat spiral on the floor is the thing nothing else in the
+    # dungeon has and it is unchanged in idea, moved back and out so the chibi
+    # boots do not stand in it.
+    coil = L.helix(2.6, 0.055, 0.14, 0.92, 0.26, steps=84, phase=0.4)
+    coil = [Vector((p.x - 0.92, p.y + 0.56, p.z)) for p in coil]
+    P.raw(L.tube(coil, 0.055, 6), 'dark')
+    for i in range(0, len(coil) - 3, 9):
+        P.add(L.sphere(0.072, 0.072, 0.034, 8, 6), 'dark',
+              loc=(coil[i].x, coil[i].y, coil[i].z + 0.016))
+    # the run from the coil up to the shank, routed OUTSIDE the left boot and
+    # then across in FRONT of the figure at knee height - the Stoker's fault 9
+    # in general form: never put a limb or a chain inside another object's
+    # column in the front silhouette.
+    run = [Vector((-0.66, 0.54, 0.14)), Vector((-0.52, -0.18, 0.16)),
+           Vector((0.06, -0.60, 0.22)), Vector((0.70, -0.66, 0.50)),
+           Vector((1.12, -0.56, 0.84))]
+    P.raw(L.tube(run, 0.052, 6), 'dark')
+    # THE KEYS on the right hip - plain working kit, and small on purpose so
+    # they do not become a second pale thing competing with the face.
+    ring = [Vector((0.40 + 0.10 * math.cos(TAU * i / 14.0), -0.34,
+                    0.60 + 0.10 * math.sin(TAU * i / 14.0))) for i in range(15)]
+    P.raw(L.tube(ring, 0.016, 6), 'bone')
+    for k in range(3):
+        P.add(L.box(0.035, 0.02, 0.16), 'bone', loc=(0.36 + k * 0.045, -0.35, 0.44))
+    return P
+
+
+BUILDERS.update({"gaoler_chibi": gaoler_chibi})

@@ -6368,3 +6368,9 @@ checked BY PROCESS, not by the file, eighteen times across twenty minutes:
   twenty minutes - alive 09:31:59, dead 09:53-09:58, a ~20 s process at 09:58:30, dead 09:59-10:01,
   ALIVE on all three checks at 10:02 - had the clear line composed and did NOT write it because the
   last check came back alive. ONE DEAD POLL IS NOT A RELEASED LOCK. That is in the plan now.
+
+## C-65 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT: check C-61 data half, then the next-stalest standing-backlog item. C-61 CHECKED against the file: all 254 accessories carry per-slot `rarity`, `_note_c61` present, every slot has a legendary, zero artifacts in any shop_stock/trader_cargo/caravan list - the data half is in, nothing to redo. Stalest item is backlog 2 (last C-57; C-64 item 1, C-63 item 4, C-62 item 5, C-60 item 3 are all newer), and it is the most repeated text on stream.
+- data/lore_lines.json: +40 epitaphs (417), +20 descend (260; 8 keep the "%s %s" name+verb shape), +23 cleared (261; "Floor %d" only where existing lines use it), +46 barks (enter +8, lord +7, trap +8, hurt +8, drink +7, misfire +8). 129 lines. Plain, terse, no dungeon floor count anywhere, no mechanics implied. Duplicates of existing lines were skipped.
+- VALIDATION OK: all four owned files parse; every pre-existing key and value identical (existing lists are exact prefixes); descend 0 or 2 %s, cleared 0 or 1 %d, epitaphs no format specifiers.
+- CODE WIRING: none - same keys and shapes, loaders' random pick widens automatically. Still the code lane's: fishing.json "epic" -> "very rare", and enforcing no-artifact in shop/trader readers.

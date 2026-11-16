@@ -5925,3 +5925,53 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
   - SHOT renders/cycles/d88/d88_1_raised, _2_dropped, _3_other_side, _4_after (+ d88_sheet.png): floor 13 crypt, one-cell passage, grid post to post, party at it, then down with the crosser hurt (-22) and the party behind the bars.
 - tools/_l11_test.gd: its kind->part table lacked PoisonDart/SwarmTrap (it crashed on them already) - added those and Portcullis. The portcullis node also carries a "fire" meta for it.
 - Known, not fixed: raised, the grid hangs at h-0.4 as the old loop's top did, so from the RTS camera (no ceiling) its bars stand ~3.6 m above the lintel. A taller housing or a shorter grid would hide it - a look call for Mr. E. Monster PATROL wandering (monster.gd, home +/- roam) does not consult obstacles at all, gate or not - pre-existing.
+
+## D-cycle D83 - the traps are stuck: MEASURED, and it was the creatures, not the traps (game build, 2026-11-16 ~00:10 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> D83, "MEASURE FIRST"). NOT ticked (supervisor's job).
+- MEASURED FIRST with tools/_d83_test.gd (new). A REAL delve (Delve.start, real floor 4, real party); one of every
+  kind in Delve.TRAPS laid where the lead stands and SPRUNG TWICE, the second 0.2 s into the first animation.
+  The first run, against the unchanged code, settled the three candidates in the item:
+  - CANDIDATE 3 (tweens orphaning darts / spikes left up) - RULED OUT. Every kind came back to the node count
+    it started with (spike 19/19, plate 4/4, fire 9/9, dart 6/6, blade 6/6, pit 10/10, poison 6/6, swarm 9/9,
+    portcullis 30/30) and to its armed pose (spikes -0.72, plate 0.08, blade -PI/2, boards 0, jet off).
+  - CANDIDATE 1 (no nav for a mid-floor creature) - RULED OUT. _nav_reset only clears a lazy route cache; a
+    swarm sprung mid-fight is chased and killed like any other foe (12/12 in the fight trial).
+  - THE REAL FAULT, a neighbour of CANDIDATE 2: sprung while the party was SEARCHING or WALKING TO THE STAIRS
+    (where most traps are met - L46), the swarm's creatures were logged at **400.00 m above their floor**,
+    every one, every second, for 20 s. Nothing fights outside state "fight", so they stayed in Monster PATROL,
+    and PATROL set y from ground_fn - which nobody in the dungeon ever sets - falling back to a flat 0.0 in
+    WORLD space, while floors sit at DELVE_Y = -400. They hovered in the void, walked to the x/z of a goal 400 m
+    below them, and stood there for good (cave bat 0.02 m, hollowed slime 0.00 m in 20 s), and the party walked
+    off to the next floor without them. Ambush set pieces met on the walk did exactly the same (risen bones,
+    drowned slime: +400 m). 32 of 91 checks failed. The `y = 0.0` in _trap_swarm itself is floor-local and fine.
+- FIX, made impossible rather than unlikely:
+  - monster.gd `_gy`: with no ground given, a creature KEEPS ITS OWN HEIGHT (was: world 0.0). No creature anywhere
+    can be teleported to a height nobody gave it.
+  - delve.gd `_admit(mon)`: every creature added to a floor after it is built (swarm, ambush, miniboss, the
+    split/raise spawns) comes through one door: ground_fn = this floor, appended to dun.monsters once, and if the
+    party had stopped fighting ("search"/"descend") they TURN AND FIGHT it (state "fight", `rejoined` counted).
+    When it is dead they go back to what it interrupted (`_back_to`) - no second payout, no second breather.
+    _next_floor clears `_back_to`.
+  - Delve.force_trap_spot (test hook, like force_gate_spot): 0 = every ordinary trap is missed and springs.
+- RESULTS after the fix:
+  - D83_MODE=fire: D83_FIRE OK (109 checks, 0 failed). Swarm in fight/search/descend: every creature on its floor
+    (height 0.00 above it until it dies and sinks on purpose), every one fought and killed, rejoined 1 in search
+    and in descend.
+  - D83_MODE=soak (the DONE test's 10-minute headless delve, time_scale 4, every trap forced to spring):
+    16 floors, 28 traps sprung, 1 swarm, 1 mid-walk fight; 0 floors whose trap nodes drifted between build and
+    leave, 0 creatures under a floor the fight loop did not know. D83_SOAK OK.
+  - D83_MODE=shot (windowed, looked at): renders/cycles/d83/d83_1_up_through_the_grate, _2_turned_to_fight,
+    _3_back_on_the_walk - a swarm grate sprung on the walk to the stairs, bars down, a puglin and skeleton
+    minions on the stone beside it, the party turned on them; then back to "descend" with foes=0. Creature
+    heights above the floor in the last frame: -1.71..0.00 (the negative one is a corpse sinking, by design).
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1425, MON_INPROP 0/105; _twitch_parse TWITCH_PARSE OK;
+  _townwalk PASS 0/19779; _delve_test no SCRIPT ERROR; _trap_variety OK 13/13; _l11 OK; _d88 flow D88_FLOW OK 24/24.
+  _l29c: C (a set piece fires in a 180 s soak) failed once with fired=0 at floor 4 when the frame limit hit - the
+  known flake recorded in its own cycle. MEASURED so it is not taken on trust: 13 runs in all - with this change
+  2 of 9 passed (the last four run side by side: 2 of 4), on the pre-change code (delve.gd/monster.gd .bak_d83
+  swapped in) 2 of 3 passed. Floors 2-3 carry ONE prisoner between them and whether the party walks within 5 m
+  of it depends on which chest they went to first; a 180 s soak reaches floor 3-4. It is a coin toss on both
+  codes, not a regression - the check wants a longer soak or a forced walk past a set piece (not this lane's
+  call to rewrite today; flagged for the supervisor).
+- Known, not fixed: a sprung swarm grate's bars stay down (by design - it is open). The portcullis's wheel rotation
+  accumulates (cosmetic, D88's).

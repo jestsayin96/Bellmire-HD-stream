@@ -341,6 +341,7 @@ function render(p) {
   renderLore();
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
   try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
+  try { applyHeroLink(p); } catch (e) { /* a bad link must never break the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -1066,6 +1067,12 @@ function heroSheet(h, mode) {
     pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
     pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
     sid.append(pin);
+    // H28: put a link straight to this hero on the clipboard
+    const cp = el("button", "pinbtn linkcopy", "Copy a link to this hero");
+    cp.type = "button";
+    cp.title = "Copies an address that opens this hero's sheet. The address holds a number, not the name.";
+    cp.addEventListener("click", () => heroLinkCopy(h, cp));
+    sid.append(cp);
   }
   sheet.append(sid);
 
@@ -1772,6 +1779,57 @@ document.addEventListener("visibilitychange", () => {
   chronHiddenAt = 0;
 });
 window.addEventListener("pagehide", () => { if (chronAwayDone) chronMarkSeen(true); });
+// ---- H28 a hero you can point at
+// "#hero-<n>" opens that hero's sheet. n is an integer: FNV-1a (32-bit) of the lower-cased
+// name, computed by THIS page. The fragment is the only thing read from the URL, it must match
+// the strict pattern below, and n is only ever COMPARED to the same number computed for each
+// hero in the snapshot - never a selector, URL, src, href, style or markup. A hostile name just
+// yields a number. No match -> the roster and a constant message; nothing is fetched or written.
+function heroAddr(name) {
+  const key = String(name == null ? "" : name).toLowerCase();
+  let a = 2166136261;
+  for (let i = 0; i < key.length; i++) { a ^= key.charCodeAt(i); a = Math.imul(a, 16777619) >>> 0; }
+  return a >>> 0;
+}
+function heroLinkFrom() {
+  const m = /^hero-(\d{1,10})$/.exec(String(location.hash || "").replace(/^#/, ""));
+  if (!m) return /^hero-/.test(String(location.hash || "").replace(/^#/, "")) ? 4294967296 : -1;   // a malformed hero address matches nobody
+  const n = +m[1];
+  return n <= 4294967295 ? n : 4294967296;
+}
+let heroLinkHandled = -1;
+function applyHeroLink(p, force) {
+  const n = heroLinkFrom();
+  const note = $("heroLinkNote");
+  if (n < 0) { heroLinkHandled = -1; if (note) { note.classList.add("hide"); note.textContent = ""; } return; }
+  if (!force && n === heroLinkHandled) return;            // the 60 s refresh must not re-land the viewer
+  if (!p || typeof p !== "object") return;                // no report yet: try again when one arrives
+  heroLinkHandled = n;
+  const hs = arr(p.heroes);
+  const idx = hs.findIndex((h) => { const nm = nameOf(h); return nm && heroAddr(nm) === n; });
+  setActiveTab("heroes");
+  if (idx < 0) {
+    if (note) { note.textContent = "That hero is not on tonight\u2019s roll."; note.classList.remove("hide"); }
+    return;
+  }
+  if (note) { note.classList.add("hide"); note.textContent = ""; }
+  heroFilter = ""; const f = $("find"); if (f) f.value = "";
+  heroShown = Math.max(heroShown, Math.ceil((idx + 2) / HERO_PAGE) * HERO_PAGE);
+  renderHeroes(hs);
+  const want = nameOf(hs[idx]);
+  const card = [...$("heroList").querySelectorAll("details.hero")].find((d) => (d.querySelector(".hname") || {}).textContent === want);
+  if (card) { card.open = true; finderLand(card); }
+}
+window.addEventListener("hashchange", () => { try { applyHeroLink(welcomeP, true); } catch (e) {} });
+function heroLinkCopy(h, btn) {
+  const nm = nameOf(h);
+  const label = "Copy a link to this hero";
+  const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = label; }, 2000); };
+  if (!nm) { flash("No link for this hero"); return; }
+  const url = location.href.replace(/[#?].*$/, "") + "#hero-" + heroAddr(nm);
+  try { history.replaceState(null, "", "#hero-" + heroAddr(nm)); heroLinkHandled = heroAddr(nm); } catch (e) {}
+  try { navigator.clipboard.writeText(url).then(() => flash("Link copied"), () => flash("Link is in the address bar")); } catch (e) { flash("Link is in the address bar"); }
+}
 // ---- H21.4 a moment you can point at
 function momentLink(n, btn) {
   const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = "Link"; }, 1800); };
@@ -2227,7 +2285,7 @@ function rollTierOf(r) {
 }
 function firstStr(...vals) { for (const v of vals) if (v != null && String(v).trim() !== "") return String(v); return ""; }
 
-function normalizeRolls(raw) {
+function normalizeRolls(raw, cap) {
   return arr(raw)
     .filter((r) => r && typeof r === "object")
     .map((r) => ({
@@ -2240,7 +2298,7 @@ function normalizeRolls(raw) {
       at: typeof r.at === "string" ? r.at : (typeof r.time === "string" ? r.time : ""),
     }))
     .filter((r) => r.face != null || r.result || r.what)   // drop entries with nothing to show
-    .slice(0, ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
+    .slice(0, cap || ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
 }
 
 // throw the die to a KNOWN value and settle on that face. Used by the town-roll
@@ -2278,8 +2336,9 @@ function rollKey(r) { return JSON.stringify([r.at, r.by, r.face, r.result]); }
 // one entry in the rolls feed. Mirrors a chronicle row: a die-face badge, a head
 // (who / what / tier / when) and the plain-language outcome line.
 function rollEntry(r) {
+  const kind = rollKind(r);
   const li = el("li", "rentry" + (r.tier ? " tier-" + r.tier : "")
-    + (r.face === 20 ? " crit" : r.face === 1 ? " crat" : ""));
+    + (kind === "crit" ? " crit" : kind === "fumble" ? " crat" : ""));
   const face = el("span", "rface");
   face.setAttribute("aria-hidden", "true");
   face.append(el("span", "rfacen", r.face != null ? r.face : "\u00b7"));
@@ -2320,27 +2379,107 @@ function announceTownRoll(r, first) {
   }
 }
 
+// ---- H27: Tales of the Die. The night's rolls are kept the way H14 keeps the Chronicle:
+// per-browser, newest first, capped, day-divided. localStorage key `bellmire.rolls.v1`.
+// Stored rows are re-validated on every read (storage is attacker-reachable text that has
+// been through one round trip) and reach the DOM only through rollEntry() -> el()/textContent.
+// A crit is the 20 (or, face unknown, tier "crit"); a fumble is the 1 (or tier "fumble").
+// Nothing here writes to a network, a URL or a selector.
+const ROLL_HIST_KEY = "bellmire.rolls.v1";
+const ROLL_HIST_MAX = 100, ROLL_HIST_MS = 48 * 3600000, ROLL_HIST_BYTES = 60000;
+let rollMem = [], rollMemLoaded = false;
+function rollKind(r) {
+  if (r.face === 20 || (r.face == null && r.tier === "crit")) return "crit";
+  if (r.face === 1 || (r.face == null && r.tier === "fumble")) return "fumble";
+  return "";
+}
+const rollTs = (r) => { const a = Date.parse(r.at); return isFinite(a) ? a : (r.k || 0); };
+function rollsClean(a) {
+  const out = [];
+  for (const r of arr(a).slice(0, ROLL_HIST_MAX * 2)) {
+    if (!r || typeof r !== "object") continue;
+    const n = normalizeRolls([r], 1)[0];
+    if (!n) continue;
+    n.by = ctrlStrip(n.by); n.what = ctrlStrip(n.what); n.result = ctrlStrip(n.result); n.cost = ctrlStrip(n.cost);
+    n.at = typeof n.at === "string" && n.at.length <= 40 && CHRON_AT_OK.test(n.at) ? n.at : "";
+    n.k = typeof r.k === "number" && isFinite(r.k) && r.k > 0 && r.k <= Date.now() + 60000 ? r.k : Date.now();
+    out.push(n);
+  }
+  return out;
+}
+function rollMemEnsure() {
+  if (rollMemLoaded) return;
+  rollMemLoaded = true;
+  try {
+    const raw = localStorage.getItem(ROLL_HIST_KEY);
+    rollMem = raw && raw.length <= ROLL_HIST_BYTES * 2 ? rollsClean(JSON.parse(raw)) : [];
+  } catch (e) { rollMem = []; }
+}
+// fold the live rolls into the history; prune by age, count and bytes; persist. Returns the rows.
+function rollsRemember(live) {
+  rollMemEnsure();
+  const now = Date.now(), old = new Map();
+  for (const r of rollMem) if (!old.has(rollKey(r))) old.set(rollKey(r), r);
+  const seen = new Set(), fresh = [];
+  for (const r0 of rollsClean(live)) {
+    const key = rollKey(r0);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const prev = old.get(key);
+    fresh.push(prev ? Object.assign(r0, { k: prev.k }) : Object.assign(r0, { k: now }));
+  }
+  const rest = rollMem.filter((r) => !seen.has(rollKey(r)));
+  let rows = fresh.concat(rest).filter((r) => rollTs(r) >= now - ROLL_HIST_MS)
+    .sort((a, b) => rollTs(b) - rollTs(a)).slice(0, ROLL_HIST_MAX);
+  let json = "";
+  try {
+    json = JSON.stringify(rows);
+    while (json.length > ROLL_HIST_BYTES && rows.length) { rows.pop(); json = JSON.stringify(rows); }
+  } catch (e) { rows = []; }
+  rollMem = rows;
+  try { localStorage.setItem(ROLL_HIST_KEY, json || "[]"); } catch (e) { /* full or blocked: carry on in memory */ }
+  return rows;
+}
+
 function renderRolls(raw) {
-  const feed = $("rollFeed"), note = $("rollNote");
+  const feed = $("rollFeed"), note = $("rollNote"), tally = $("rollTally");
   if (!feed || !note) return;
-  const rolls = normalizeRolls(raw);
+  const live = normalizeRolls(raw);
+  let rows = [];
+  try { rows = rollsRemember(raw); } catch (e) { rows = live; }   // storage trouble never costs the live feed
+  if (!rows.length && live.length) rows = live;
   feed.replaceChildren();
-  if (!rolls.length) {
+  if (tally) tally.replaceChildren();
+  if (!rows.length) {
     lastRollKey = null;     // so the next real roll animates fresh
     note.className = "note quiet";
-    note.textContent = "No rolls from the town yet. When a viewer spends channel points or bits to roll the die for the town \u2014 to pass a law, set off an event or raise a building \u2014 the roll and how it turns out appear here. The die is thrown in the game; this page only reports it.";
+    note.textContent = "No rolls yet tonight. When a viewer spends channel points or bits to roll the die for the town — to pass a law, set off an event or raise a building — the roll and how it turns out will be kept here.";
     return;
   }
-  for (const r of rolls) feed.append(rollEntry(r));
-  note.className = "note";
-  note.textContent = rolls.length + (rolls.length === 1 ? " roll" : " rolls") + " from the town, newest first. The die above shows the latest.";
-  const top = rolls[0];
-  const key = rollKey(top);
-  if (key !== lastRollKey) {
-    const first = lastRollKey === null;
-    lastRollKey = key;
-    if (top.face != null) announceTownRoll(top, first);
+  let crits = 0, fumbles = 0, day = null;
+  for (const r of rows) {
+    const k = rollKind(r);
+    if (k === "crit") crits++; else if (k === "fumble") fumbles++;
+    const ts = rollTs(r), d = new Date(ts); d.setHours(0, 0, 0, 0);
+    if (day !== d.getTime()) { day = d.getTime(); feed.append(el("li", "rdiv", dayVoice(ts))); }
+    feed.append(rollEntry(r));
   }
+  if (tally) {
+    const chip = (cls, n, label) => { const c = el("span", "rtally " + cls); c.append(el("b", null, String(n)), document.createTextNode(" " + label)); return c; };
+    tally.append(chip("rtally-crit", crits, crits === 1 ? "crit" : "crits"), chip("rtally-fumble", fumbles, fumbles === 1 ? "fumble" : "fumbles"));
+  }
+  note.className = "note";
+  const liveBit = live.length ? " The die above shows the latest." : " The town has sent no rolls just now; these are the ones this browser remembers.";
+  note.textContent = rows.length + (rows.length === 1 ? " roll" : " rolls") + " kept, newest first." + liveBit;
+  const top = live[0];
+  if (top) {
+    const key = rollKey(top);
+    if (key !== lastRollKey) {
+      const first = lastRollKey === null;
+      lastRollKey = key;
+      if (top.face != null) announceTownRoll(top, first);
+    }
+  } else lastRollKey = null;
 }
 
 // ---------------------------------------------------------------- problem state
@@ -3135,7 +3274,7 @@ function setActiveTab(id) {
   const momentFrom = () => { const m = /^moment-(\d{1,9})$/.exec(String(location.hash || "").replace(/^#/, "")); return m && +m[1] > 0 ? +m[1] : 0; };
   const mid = momentFrom();
   if (mid) chronFocusId = mid;
-  const initial = (mid ? "chronicle" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  const initial = (mid ? "chronicle" : "") || (heroLinkFrom() >= 0 ? "heroes" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
   setActiveTab(initial);
   window.addEventListener("hashchange", () => {
     const n = momentFrom();

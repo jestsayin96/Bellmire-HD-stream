@@ -5854,3 +5854,13 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - TOWN BASELINE for the done test (90 s, 180 samples): 3.36 overlapping body pairs per sample, worst 0.97 m.
 - GATE GREEN: parse 0; _offfloor 0/1291 (INPROP 0, MON_INPROP 0/107); TWITCH_PARSE OK; townwalk in_solid 1/19366
   PASS, stuck_on_route 0 (D44 baseline 0-2); _delve_test 0 SCRIPT ERROR.
+
+## U33 - L71 the Chronicle stops cutting its own lines off (HUD, 2026-11-15 ~19:00 CT, feed_hud.gd + hud_dock.gd)
+- QUEUE: dispatch prompt lists L61/L31/L36/L40 (L61 ticked U25; L31/L36/L40 not the HUD worker's per WORK_PLAN). WORK_PLAN's first HUD item is L71 (pointer line 822) - took it.
+- feed_hud.gd `_rebuild`: centre-box lines now WRAP (no AUTOWRAP_OFF, no max_lines_visible, OVERRUN_NO_TRIMMING). At most 5 entries; the OLDEST are dropped until the measured wrapped stack fits the vellum height (`_stack_h` / `_chrome_h` / `_chrome_text_w`, card width subtracted when a lord card is up). Fewer, whole entries.
+- NEW `FeedHUD.tidy()`: wording tightened in the HUD (", " "!!"->"!", "Successfully found"->"Found", "...no loot..."->"no loot", "(halved)"->"halved", trailing " -" dropped). Last resort if one entry alone still overflows: bracketed roll detail goes, the outcome stays.
+- hud_dock.gd: CENTRE_W 0.372 -> 0.40 (still under half the screen) so the wrap needs fewer rows.
+- tools/_l71_test.gd WINDOWED 1080p: five longest line kinds (hero sheet, trap save, search, spot+disarm, E3PO) each alone and all stacked at UI scale 100/125/150. BEFORE (HEAD): L71_TEST FAIL, 29 ellipsis hits. AFTER: L71_TEST OK, zero ellipsis, box height <= sheet height at every scale.
+- LOOKED: renders/cycles/l71/l71_before_125.png (every line ends "...") vs l71_after_125.png (whole sentences, 2-3 wrapped rows, scroll centred, panes clear). Shots at 100/150 saved too.
+- NOT DONE / FOR OTHERS: lines are authored in town.gd/delve.gd (owners: game build); a shorter source wording would let more entries fit - not touched. "no line overlapping the party frames": party frames were removed from the stream (L63) so n/a.
+- Environment note: .godot class cache was stale (Crowd class, D91a) -> 12 false parse errors; fixed by one `--import`; parse check then 0 errors.

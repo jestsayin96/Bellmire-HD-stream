@@ -26,4 +26,8 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 | `!richest` |  |  | free | Who carries the most gold. (no hero needed) | `!richest` |
 | `!patrons` | !benefactors |  | free | Those who have kept the valley going. (no hero needed) | `!patrons` |
 | `!look` | !spotlight, !watch |  | free | Ask for a look at your hero: a 10-second pane in the channel-points lane (teal), only when nobody has redeemed it or is waiting. Cheers, subs and redeems get their own longer panes. | `!look` |
+| `!hub` | !site, !guildhall |  | free | Bellmire's own page. Your hero's full sheet, the Chronicle of every day, the Satchel and what the counter pays, crests, the Hall of the Fallen, the Bestiary and the Night Watch. Search it by name. (no hero needed) | `!hub` |
+| `!satchel` | !sell, !prices |  | free | What the counter would pay for what your hero carries. Anything you own and are not wearing is priced at two fifths of its shop cost, per item. Your own Satchel, priced row by row, is on the hub. (no hero needed) | `!satchel` |
+| `!festival` | !feast |  | free | A festival gathers Bellmire in the market square - music, stalls, a crowd, and a caravan is likelier while it runs. The town growing a level calls one. A festival a viewer paid for is theirs: the square is strung with gold in their name. (no hero needed) | `!festival` |
+| `!bestiary` | !beasts, !monsters |  | free | What haunts the dark, depth by depth: each beast's real size, its habits in a fight, where it is at home, and the eight lords that hold the deep. The whole Bestiary is on the hub. (no hero needed) | `!bestiary` |
 | `!help` | !commands | [command] | free | The command list; !help <command> for one in detail. (no hero needed) | `!help forge` |

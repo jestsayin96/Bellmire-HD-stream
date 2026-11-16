@@ -171,9 +171,17 @@ the bone. The single pale thing above the ground is the face.
 
 ### What is still wrong - looked at, front, side and back
 
-1. The heat cap reads as a **bowl-cut of hair** from the front: a dark dome with
-   no brim and no band. The band does read in the side and back views, which is
-   why pass 2 did not catch it. It wants a brim.
+1. ~~The heat cap reads as a bowl-cut of hair.~~ **FIXED IN THE SAME PASS, and
+   deliberately so: this is the register fault the other twelve would have
+   inherited**, and converting them over a cap that reads as hair is the
+   expensive way to find that out. A dark dome on a pale skull has no edge
+   between them. It now has a brim 0.08 proud of the skull sitting 0.11 above
+   the eyes - the Drillmaster's mushroom is what that clearance is for - and a
+   bone band in the seam for the cap to end at. Two things to watch in the
+   picture as it stands: the brim's front edge runs **close to the eye line**
+   and the eyes now sit in its shade (a gain in grimness, a hair from being
+   fault 2 of the Drillmaster all over again), and the **bone band is the
+   brightest ring on the head**, competing with the face it was meant to serve.
 2. **The back is bare** - a flat slab with nothing on it but the flue passing.
    The knight has a cape there; this has nothing that says furnace from behind.
 3. The pupils are **small and wide-set with no brow**, so the face reads doll-ish

@@ -1377,6 +1377,17 @@ def stoker_chibi():
     # the heat cap: a BOWL, not a cone with a point on it - the Drillmaster's
     # kettle-helm lesson. Rounded crown, no apex, sitting low over the brow.
     P.add(L.sphere(0.49, 0.47, 0.30, 18, 12), 'dark', loc=(X - 0.06, -0.12, 1.70))
+    # PASS 3: the bowl alone read as a BOWL CUT OF HAIR from the front - a dark
+    # dome resting on a pale skull with no edge between them. This is the
+    # register fault the other twelve would have inherited, so it is solved
+    # here before any of them are converted. Two parts, and the Drillmaster's
+    # mushroom is the thing to avoid: the brim is only 0.08 proud of the skull
+    # and sits 0.11 ABOVE the eyes, so it shades the brow without covering the
+    # face, and a bone band in the seam gives the cap an edge to end at.
+    P.add(aim(L.cone(0.575, 0.545, 0.055, 20), (X - 0.06, -0.14, 1.585),
+              (0.0, -0.13, 1.0)), 'dark')
+    P.add(aim(L.cone(0.505, 0.500, 0.050, 20), (X - 0.06, -0.12, 1.625),
+              (0.0, 0.0, 1.0)), 'bone')
     # EYES, PASS 3. A single dark oval on a pale head is a HOLE, not an eye -
     # it read as blank goggles, which is the Drillmaster's fault 2 arriving
     # here in the opposite direction (his were pale discs, these were dark

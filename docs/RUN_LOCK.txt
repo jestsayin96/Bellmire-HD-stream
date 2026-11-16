@@ -63,3 +63,7 @@ RUNNING 2026-11-15T20:30:20-06:00 (game build D90 final 20-min tow soak, gates a
 IDLE 2026-11-15T20:50:46-06:00 - D90 rigid tow shipped (cart was turned 90 deg + chased; now derived, park state): D90_TOW OK 20-min soak, gates green (game build)
 RUNNING 2026-11-15T21:14:11-06:00 (game build T5 viewer's roll)
 IDLE 2026-11-15T21:22:24-06:00 - T5 viewer's roll shipped: T5_ROLL OK 23/23, gates green (game build)
+RUNNING 2026-11-15T21:56:13-06:00 (HUD L72 director lord framing)
+IDLE 2026-11-15T22:08:39-06:00 - HUD L72 lord framing/pull-back shipped on hud-ui 4b2b61d: L72_TEST fails=0 (HUD)
+RUNNING 2026-11-15T22:11:28-06:00 (game build D93 stage 1 - town layout export + validator)
+IDLE 2026-11-15T22:19:18-06:00 - D93a town layout format + validator + generated town measured (FAIL: door 61/66, on_road 8, on_square 3), gates green; D93 open (game build)

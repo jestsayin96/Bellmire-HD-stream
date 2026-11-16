@@ -1561,3 +1561,32 @@ chronicle lines (canon: origin first, biome second; never a floor count).
 - MR. E: the reward is created only on a resync (the edit-proof rule). Set [twitch] rewards_resync=true in
   user://twitch.cfg for ONE launch, then false again. Seen in the shots: the HUD-dock Chronicle on this branch still
   ends lines in "..." - that is L71 (HUD's feed_hud.gd), not this item.
+
+## D-cycle - D93a the town layout format + validator, and the generated town measured, 2026-11-15 ~22:30 CT (game build)
+- Item: D93 AUTHOR THE TOWN (first unchecked game-build item; LARGE, so staged). This cycle is steps 1 + 5 and a
+  measurement. Nothing the game runs is changed - no scripts/ file touched. On laptop ff5bceb (main merged, up to date).
+- FORMAT "bellmire-town/1", one map with per-level tags (economy levels 1..12), documented in data/town/README.md:
+  roads as polylines with width, the square as a polygon, buildings {shape, pos, yaw, half, off, door, level,
+  landmark/shop/special}, sites, ground patches.
+- VALIDATOR tools/_d93_validate.gd - pure data, ~1 s: OVERLAP (exact oriented-rectangle SAT), ON_ROAD, ON_SQUARE,
+  DOOR (within 2 m of a road edge), UNREACHED (every door/site in the square's road component), PATCH.
+  JESTS_D93_IN / JESTS_D93_LEVEL. Self-test: renders/cycles/d93/fixture_good.json PASS (and PASS at level<=1);
+  fixture_bad.json FAIL with every planted defect caught (overlap 1, on_road 1, on_square 1, door 2, unreached 4
+  incl. a road island, patch 2).
+- EXPORTER tools/_d93_export.gd snapshots the town the GENERATOR builds into the format -> data/town/bellmire.json
+  (191 roads, 66 buildings, 6 sites). It is the BEFORE picture, not the authored town.
+- MEASURED (renders/cycles/d93/validate_generated_town.txt, d93a_generated_town_validated.png):
+  D93_VALIDATE FAIL overlap=0 on_road=8 on_square=3 door=61 unreached=63 patch=0, components=5.
+  * on_road: the hall, chapel, barracks and windmill all stand on a road by 0.4-4.5 m (landmarks are exempt from
+    the generator's road sweep).
+  * on_square: 3 houses stand on the paved square.
+  * DOOR 61/66: the generator's roads are every hex-to-hex link of the road cells - a triangle lattice - and the
+    house sweep drops every frontage house the lattice touches, so the ones that survive stand mid-block, 4.5-8 m
+    from any road, front doors facing nothing. That is the clearest single argument for authoring: the generator
+    cannot produce a street frontage.
+  * 5 road networks that do not touch (the valley/scar/south roads vs the town lattice).
+- NEXT (D93b): author the level-12 road network by hand in bellmire.json (real streets, not the lattice), then
+  the square and buildings onto the blocks, until D93_VALIDATE PASS; then the loader (D93.4). The exporter must
+  not be rerun over hand edits (JESTS_D93_OUT).
+- GATES: parse 0 errors (import clean); OFFFLOOR 0/1125 INPROP 0 MON_INPROP 0/101; TWITCH_PARSE OK; TOWNWALK
+  in_solid 1/18987 (0.005%) raid 0/4830 PASS; delve_test ran, 0 SCRIPT ERROR.

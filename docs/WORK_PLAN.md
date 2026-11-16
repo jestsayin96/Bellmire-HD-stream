@@ -350,6 +350,10 @@ guarantees a later level will want to move something an earlier one placed.
 - [ ] D93. AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      D93a DONE (game build, Nov 15 22:30): steps 1 + 5 - format "bellmire-town/1" (data/town/README.md),
+      VALIDATOR tools/_d93_validate.gd (PASS on a good fixture, catches all 6 defect kinds on a bad one),
+      and the GENERATED town measured: overlap 0, on_road 8 (all landmarks), on_square 3, DOOR 61/66
+      houses not within 2 m of a road, 5 road islands. OPEN: 2 roads, 3 square+buildings, 4 loader, 6 levels.
 
 ### D93 - AUTHOR THE TOWN (game build + art, LARGE, supersedes town generation)
   1. A LAYOUT FORMAT, as data, not a scene: one file per level under data/town/ with roads as

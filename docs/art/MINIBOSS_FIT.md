@@ -136,3 +136,69 @@ the fourteen, and the worked example says roughly a pass per creature. Worth
 doing, worth doing later, or leave them realistic and let the dungeon be a
 different register from the town? The height fix is free either way and should
 happen regardless.
+
+---
+
+## REGISTER CONVERSION 2 OF 14 - THE STOKER, PASS 3
+
+`renders/art/minibosses/_stoker_register.png` - original left, chibi right, a
+real 2.45 m KayKit Knight standing beside each. Front, side and back per cell.
+Ratio 0.98, pair 4.74 m, fits the fixed frame, blank check 2 files 0 failures,
+`BLENDER_EEVEE`. Four faults closed, and the fourth was not where it looked.
+
+**8 - THE T-POSE.** Both arms were TWO-POINT polylines leaving the shoulder
+level or rising, so each read as a ball on a stick held straight out. Both are
+three-point now with a real elbow: upper arm out and down, forearm forward and
+in. A chibi arm is short enough that the elbow IS the read; without one there is
+no arm, only a spoke.
+
+**9 - THE LEFT MITT IN THE FLUE.** The mitt sat at x -0.64 and the flue stands
+at -0.74 with a 0.115 radius, so the hand was inside the chimney's column in the
+front silhouette and the two merged. The forearm now comes to the hip, mitt at
+-0.44, clear of the flue's near edge and reading against the body.
+
+**THE EYES.** A single dark oval on a pale skull is a HOLE, not an eye - the
+Drillmaster's fault 2 arriving from the opposite direction. The hero's face has
+three values and so does this one now: dark socket, pale eye sunk in it, dark
+pupil, each standing slightly proud of the last. No glow - this creature's one
+light is the grate, which is the thing the party has to starve.
+
+**4 - THE VALUE BREAK, AND IT WAS THE LIMBS, NOT THE HEAD.** `limb()` defaults
+to the `bone` slot. Every arm and leg was therefore PALER than the torso: a bone
+stick-figure in a brown box, with the lightest things on the creature at its
+ankles. Limbs now take the mid tone, boots and mitts the dark, the skull keeps
+the bone. The single pale thing above the ground is the face.
+
+### What is still wrong - looked at, front, side and back
+
+1. ~~The heat cap reads as a bowl-cut of hair.~~ **FIXED IN THE SAME PASS, and
+   deliberately so: this is the register fault the other twelve would have
+   inherited**, and converting them over a cap that reads as hair is the
+   expensive way to find that out. A dark dome on a pale skull has no edge
+   between them. It now has a brim 0.08 proud of the skull sitting 0.11 above
+   the eyes - the Drillmaster's mushroom is what that clearance is for - and a
+   bone band in the seam for the cap to end at. Two things to watch in the
+   picture as it stands: the brim's front edge runs **close to the eye line**
+   and the eyes now sit in its shade (a gain in grimness, a hair from being
+   fault 2 of the Drillmaster all over again), and the **bone band is the
+   brightest ring on the head**, competing with the face it was meant to serve.
+2. **The back is bare** - a flat slab with nothing on it but the flue passing.
+   The knight has a cape there; this has nothing that says furnace from behind.
+3. The pupils are **small and wide-set with no brow**, so the face reads doll-ish
+   rather than grim. The value structure is right; the expression is not.
+4. **The belt is invisible from the front** - dark on brown, and both forearms
+   now cross it.
+5. **Boots are dark blocks nearly as wide as the leg is long** - the Drillmaster's
+   fault 7, shared by every chibi conversion so far.
+6. From the side the **torso is a shallow slab**, 0.48 deep against a chibi
+   knight who is round. Depth, not height, is what is missing.
+7. The **fuel basket reads as a flat plank from the FRONT only** - from side and
+   back it is plainly a bucket. It is a front-view presentation fault, not the
+   geometry fault pass 2 recorded.
+8. The **rake haft is `bone`** and is the brightest long line on the figure after
+   the grate; it competes slightly with the face.
+9. The **shoulder spheres overhang the upper arms** and float a little at the
+   joint.
+
+Twelve creatures still to convert. The Scrapwright and the Bellman are a machine
+and a shroud with no man-proportions, and should be skipped.

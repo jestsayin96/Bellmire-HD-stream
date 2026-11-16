@@ -37,6 +37,7 @@ import icons as IC             # noqa: E402
 import showcase as SC          # noqa: E402
 import lordgen as G            # noqa: E402
 import e3pogen as EG           # noqa: E402
+import gearmodels as GM        # noqa: E402
 
 VIEWS = (("front", 0.0, 0.0), ("side", 90.0, 0.0), ("back", 180.0, 0.0), ("top", 0.0, 88.0))
 FRAME_H = 3.30          # metres of ortho height - IDENTICAL for all ten
@@ -50,7 +51,7 @@ RARITY = ["starting", "common", "uncommon", "rare", "very rare", "legendary"]
 ROSTER = [
     dict(key="knight", calling="knight", body="Knight", tier=1, nudge=-0.04,
          weapon="w_blade_ironmonger", armour="a_padded_gambeson",
-         slots=["ring", "amulet", "boots"]),
+         slots=["ring", "amulet", "boots"], shield=True),
     dict(key="ranger", calling="ranger", body="Ranger", tier=1, nudge=+0.04,
          weapon="w_ranged_hunters_crossbow", armour="a_ford_leathers",
          slots=["cloak", "gloves", "boots"]),
@@ -74,11 +75,11 @@ ROSTER = [
          slots=["ring", "amulet", "gloves"]),
     dict(key="paladin", calling="paladin", body="Knight", tier=5, nudge=0.00,
          weapon="w_blade_scarfang", armour="a_scarwoven_hauberk",
-         slots=["boots", "gloves", "cloak"], helm=True,
+         slots=["boots", "gloves", "cloak"], helm=True, shield=True,
          set_name="Scarwoven plate"),
     dict(key="cleric", calling="cleric", body="Rogue_Hooded", tier=5, nudge=+0.03,
          weapon="w_arcane_seam_staff", armour="a_seamwoven_vestment",
-         slots=["amulet", "cloak", "boots"]),
+         slots=["amulet", "cloak", "boots"], shield=True),
 ]
 
 # the body's own hat/cape must come off when we put our own on, or the sheet
@@ -250,7 +251,10 @@ def fit_check(parts, body_trees, body_min_z):
             mw = ob.matrix_world
             vs = [mw @ v.co for v in ob.data.vertices]
             step = max(1, len(vs) // 260)
+            near = getattr(part, "ignore_near", None)
             for v in vs[::step]:
+                if near is not None and (v - near[0]).length < near[1]:
+                    continue        # the grip is inside the fist BY DESIGN
                 nv += 1
                 minz = min(minz, v.z)
                 best = None
@@ -426,6 +430,9 @@ def main():
             torso = [ob for ob in meshes if any(w in ob.name for w in ("_Body", "_Head"))]
             S = Surf(bvh_for(torso or meshes))
             body_trees = bvh_for(meshes)
+            # the torso sampler deliberately ignores arms and legs; a skirt and
+            # a cloak have to clear the LEGS, so they get a whole-body sampler
+            S.full = Surf(body_trees)
             bmn, bmx, _ = EG.mesh_bounds(meshes)
 
             # --- the gear
@@ -434,6 +441,7 @@ def main():
             parts = []
             for q in SC.armour(arec["name"], arec["cut"], tier, S, anchors):
                 parts.append(q)
+            use_model = GM.pick(wrec["family"], wrec["name"], tier, rec["weapon"])
             wp = SC.weapon(wrec["name"], wrec["family"], tier, rec["weapon"])
             # authored about its grip at the origin: carry it to the hand slot,
             # and out from the hip so the hand is not inside the blade
@@ -513,10 +521,65 @@ def main():
                     parts.append(q)
 
             objs, manifest = merge_parts(parts, mats, anchors, arm, key, posed=True)
-            allobjs = meshes + objs
+
+            # ---- the carried model. Dropped at the POSED hand, scaled to the
+            # body, tinted up the tier ladder, and given its lit collar/seam.
+            models, model_notes, model_groups = [], [], []
+            tint_rgb = SC.worn(tuple(0.45 + 0.55 * c for c in SC.TIER_METAL[tier]), wear)
+            hs_posed = hand_delta(arm, "handslot.r") @ anchors["handslot.r"]
+            target = anchors["upperarm.l"].z * 1.30
+            mobjs = GM.load(repo, use_model[0], use_model[1], key)
+            if mobjs:
+                # held clear of the hip, leaned out: a carried weapon that
+                # crosses its owner's chest is the fault the fit test shouts
+                # about, and pass 5's models are twice the size of pass 4's
+                GM.place(mobjs, hs_posed + Vector((-0.135, -0.085, 0.02)), target, lean=-0.24)
+                mmn, mmx = GM.bounds(mobjs)
+                if mmx is not None and (mmx.z - mmn.z) > anchors["upperarm.l"].z:
+                    GM.ground(mobjs)        # a staff stands on the floor
+                GM.tint(mobjs, tint_rgb, "w_" + key, 0.42 + 0.34 * wear)
+                orn = GM.ornament(mobjs, tier, mats, "w_" + key)
+                models += mobjs + orn
+                model_groups.append(("Model_Weapon", wrec["name"], "weapon", mobjs,
+                                     (hs_posed, 0.17)))
+                model_notes.append(dict(slot="weapon", item=wrec["name"],
+                                        path="%s/%s.gltf" % (use_model[0].replace("\\", "/"),
+                                                             use_model[1])))
+                parts = [q for q in parts if q.slot != "weapon"]
+                objs = [o for o in objs if not o.name.startswith("Weapon_")]
+                for o in list(bpy.data.objects):
+                    if o.name.startswith("Weapon_"):
+                        bpy.data.objects.remove(o, do_unlink=True)
+            if rec.get("shield"):
+                sp = GM.shield_for(tier)
+                sobjs = GM.load(repo, sp[0], sp[1], key + "_sh")
+                if sobjs:
+                    hl = hand_delta(arm, "handslot.l") @ anchors["handslot.l"]
+                    # a shield is carried on the arm, not worn as a table: it
+                    # is HALF the body's shoulder height and it stands clear of
+                    # the belly, which pass 5 did not
+                    GM.place(sobjs, hl + Vector((0.135, -0.105, 0.075)),
+                             anchors["upperarm.l"].z * 0.55, lean=0.16)
+                    GM.tint(sobjs, tint_rgb, "s_" + key, 0.42 + 0.34 * wear)
+                    models += sobjs + GM.ornament(sobjs, tier, mats, "s_" + key)
+                    model_groups.append(("Model_Shield", "shield (" + sp[1] + ")",
+                                         "offhand", sobjs, (hl, 0.19)))
+                    model_notes.append(dict(slot="offhand", item="shield (" + sp[1] + ")",
+                                            path="%s/%s.gltf" % (sp[0].replace("\\", "/"), sp[1])))
+            allobjs = meshes + objs + models
             EG.add_lights(Vector((0.0, 0.0, 1.20)), 1.65)
 
-            rows, faults = fit_check(parts, body_trees, bmn.z)
+            class _Shim(object):
+                """A carried model is not one of our Parts, but it is judged by
+                the same fit test - a bought sword through the owner's hip is a
+                fault whoever modelled it."""
+                def __init__(self, name, item, slot, objs, near=None):
+                    self.name, self.item, self.slot = name, item, slot
+                    self.objs, self.touches = objs, False
+                    self.ignore_near = near
+            fitparts = list(parts) + [_Shim(n, it, sl, og, nr)
+                                      for n, it, sl, og, nr in model_groups]
+            rows, faults = fit_check(fitparts, body_trees, bmn.z)
             cams = {}
             d = os.path.join(outdir, key)
             os.makedirs(d, exist_ok=True)
@@ -538,6 +601,7 @@ def main():
                       helm=(dict(id=helm[0], name=helm[1]["name"], cost=helm[1]["cost"]) if helm else None),
                       set_name=rec.get("set_name"),
                       hidden_body_meshes=hidden, surf_misses=S.misses,
+                      models=model_notes,
                       height=round(amx.z - amn.z, 3),
                       tris=sum(len(o.data.polygons) for o in objs),
                       pieces=len(objs), manifest=manifest, fit=rows, faults=faults, cams=cams)
@@ -546,7 +610,7 @@ def main():
 
             # --- export the kit in REST space for the game build worker
             kit_objs = objs
-            for ob in list(meshes) + [arm]:
+            for ob in list(meshes) + list(models) + [arm]:
                 try:
                     bpy.data.objects.remove(ob, do_unlink=True)
                 except Exception:

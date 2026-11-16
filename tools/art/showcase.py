@@ -291,6 +291,18 @@ def _shell(p, S, z0, z1, rings, clear, mat, arc=TAU, arc0=0.0, bulge=1.0, prof=N
             p.raw(L.membrane(quad, 0.022), mat)
 
 
+def r_clear(S, z, a, clear):
+    """Radius that clears EVERYTHING at this height, legs included. The torso
+    sampler ignores arms and legs on purpose (a ray at shoulder height that hit
+    a hanging arm would make the cuirass a barrel), so a skirt or a cloak, which
+    hangs past the legs, asks the whole-body sampler as well."""
+    r = S.r(z, a)
+    full = getattr(S, "full", None)
+    if full is not None:
+        r = max(r, full.r(z, a))
+    return r + clear
+
+
 def _band(p, S, z, clear, rad, mat, arc=TAU, arc0=0.0):
     pts = []
     n = 22
@@ -408,7 +420,7 @@ def armour(name, cut, tier, S, anchors):
                 quad = []
                 for z, a, f in ((za, a0, fa), (za, a1, fa), (zb, a1, fb), (zb, a0, fb)):
                     fold = 1.0 + 0.045 * math.cos(6.0 * a)   # folds, not a cone
-                    r = (S.r(max(z, z1), a) + 0.030) * f * fold
+                    r = max((S.r(z0, a) + 0.030) * f, r_clear(S, z, a, 0.034)) * fold
                     quad.append(Vector((r * math.cos(a), r * math.sin(a), z)))
                 p.raw(L.membrane(quad, 0.020), 'cloth')
         _band(p, S, hip + 0.14, 0.032, 0.022, 'trim')
@@ -583,7 +595,9 @@ def acc_cloak(name, key, cost, ctx, anchors, S):
         quad = []
         for a, z, f in ((a0, sh, 1.0), (a1, sh, 1.0), (a1, hem, 1.30), (a0, hem, 1.30)):
             jag = 0.06 if (v == 4 and k % 2 and z == hem) else 0.0
-            r = (S.r(min(z, sh), a) + 0.040) * f
+            # hangs from the measured shoulder AND clears whatever the body is
+            # doing at the hem's own height - hips and legs included
+            r = max((S.r(min(z, sh), a) + 0.040) * f, r_clear(S, z, a, 0.042))
             quad.append(Vector((r * math.cos(a), r * math.sin(a), z - jag)))
         p.raw(L.membrane(quad, 0.022), 'cloth')
     if v == 0:

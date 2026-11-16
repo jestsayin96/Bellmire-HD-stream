@@ -51,9 +51,21 @@
    "set_name": null,
    "hidden_body_meshes": [],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Ironmonger's Blade",
+     "path": "assets/gear/sword_A.gltf"
+    },
+    {
+     "slot": "offhand",
+     "item": "shield (shield_A)",
+     "path": "assets/gear/shield_A.gltf"
+    }
+   ],
    "height": 2.545,
-   "tris": 2391,
-   "pieces": 15,
+   "tris": 2279,
+   "pieces": 12,
    "manifest": [
     {
      "part": "Armour_Cuirass",
@@ -185,16 +197,6 @@
      "min_z": 0.1052
     },
     {
-     "part": "Weapon",
-     "item": "Ironmonger's Blade",
-     "slot": "weapon",
-     "verts": 134,
-     "inside_pct": 5.2,
-     "penetration_m": 0.0314,
-     "gap_m": 0.0086,
-     "min_z": 0.2929
-    },
-    {
      "part": "Acc_Ring",
      "item": "Tallykeeper's Ring",
      "slot": "ring",
@@ -233,12 +235,33 @@
      "penetration_m": 0.0481,
      "gap_m": 0.0001,
      "min_z": -0.002
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Ironmonger's Blade",
+     "slot": "weapon",
+     "verts": 342,
+     "inside_pct": 16.1,
+     "penetration_m": 0.0698,
+     "gap_m": 0.0018,
+     "min_z": 0.187
+    },
+    {
+     "part": "Model_Shield",
+     "item": "shield (shield_A)",
+     "slot": "offhand",
+     "verts": 309,
+     "inside_pct": 6.1,
+     "penetration_m": 0.032,
+     "gap_m": 0.0,
+     "min_z": 0.1815
     }
    ],
    "faults": [
     "Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
-    "Weapon (Ironmonger's Blade): PASSES THROUGH the body by 0.031 m",
-    "Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.038 m deep, 67% of it inside"
+    "Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.038 m deep, 67% of it inside",
+    "Model_Weapon (Ironmonger's Blade): PASSES THROUGH the body by 0.070 m",
+    "Model_Shield (shield (shield_A)): PASSES THROUGH the body by 0.032 m"
    ],
    "cams": {
     "front": {
@@ -253,8 +276,8 @@
      "ortho": 3.3,
      "outside": 0,
      "clip": [
-      6.391,
-      12.641
+      6.295,
+      12.759
      ]
     },
     "back": {
@@ -330,9 +353,16 @@
     "Ranger_Cape"
    ],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Hunter's Crossbow",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/crossbow_1handed.gltf"
+    }
+   ],
    "height": 2.275,
-   "tris": 1744,
-   "pieces": 18,
+   "tris": 1689,
+   "pieces": 15,
    "manifest": [
     {
      "part": "Armour_Jerkin",
@@ -421,21 +451,11 @@
      "min_z": 0.4938
     },
     {
-     "part": "Weapon",
-     "item": "Hunter's Crossbow",
-     "slot": "weapon",
-     "verts": 74,
-     "inside_pct": 8.1,
-     "penetration_m": 0.0274,
-     "gap_m": 0.0015,
-     "min_z": 0.3628
-    },
-    {
      "part": "Acc_Cloak",
      "item": "Orchardman's Cloak",
      "slot": "cloak",
      "verts": 565,
-     "inside_pct": 41.2,
+     "inside_pct": 41.6,
      "penetration_m": 0.0484,
      "gap_m": 0.0,
      "min_z": 0.6754
@@ -479,18 +499,27 @@
      "penetration_m": 0.0466,
      "gap_m": 0.0005,
      "min_z": -0.002
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Hunter's Crossbow",
+     "slot": "weapon",
+     "verts": 289,
+     "inside_pct": 0.7,
+     "penetration_m": 0.0001,
+     "gap_m": 0.0019,
+     "min_z": 0.3469
     }
    ],
    "faults": [
-    "Weapon (Hunter's Crossbow): PASSES THROUGH the body by 0.027 m",
-    "Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.048 m deep, 41% of it inside"
+    "Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.048 m deep, 42% of it inside"
    ],
    "cams": {
     "front": {
      "ortho": 3.3,
      "outside": 0,
      "clip": [
-      6.403,
+      6.226,
       12.514
      ]
     },
@@ -499,7 +528,7 @@
      "outside": 0,
      "clip": [
       6.457,
-      12.777
+      12.781
      ]
     },
     "back": {
@@ -507,7 +536,7 @@
      "outside": 0,
      "clip": [
       6.486,
-      12.597
+      12.774
      ]
     },
     "top": {
@@ -575,9 +604,16 @@
     "Rogue_Cape"
    ],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Stonewick Backsword",
+     "path": "assets/gear/sword_B.gltf"
+    }
+   ],
    "height": 2.18,
-   "tris": 2063,
-   "pieces": 16,
+   "tris": 1933,
+   "pieces": 13,
    "manifest": [
     {
      "part": "Armour_Jerkin",
@@ -656,16 +692,6 @@
      "min_z": 0.4931
     },
     {
-     "part": "Weapon",
-     "item": "Stonewick Backsword",
-     "slot": "weapon",
-     "verts": 162,
-     "inside_pct": 4.9,
-     "penetration_m": 0.0303,
-     "gap_m": 0.0009,
-     "min_z": 0.2997
-    },
-    {
      "part": "Acc_Ring",
      "item": "Pilgrim's Ring",
      "slot": "ring",
@@ -683,7 +709,7 @@
      "inside_pct": 47.6,
      "penetration_m": 0.0919,
      "gap_m": 0.0012,
-     "min_z": 0.6767
+     "min_z": 0.6768
     },
     {
      "part": "Acc_GloveL",
@@ -704,11 +730,21 @@
      "penetration_m": 0.0423,
      "gap_m": 0.0048,
      "min_z": 0.3483
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Stonewick Backsword",
+     "slot": "weapon",
+     "verts": 223,
+     "inside_pct": 13.9,
+     "penetration_m": 0.0614,
+     "gap_m": 0.0035,
+     "min_z": 0.182
     }
    ],
    "faults": [
-    "Weapon (Stonewick Backsword): PASSES THROUGH the body by 0.030 m",
-    "Acc_Cloak (Peat-cutter's Cloak): CLIPS the body - 0.092 m deep, 48% of it inside"
+    "Acc_Cloak (Peat-cutter's Cloak): CLIPS the body - 0.092 m deep, 48% of it inside",
+    "Model_Weapon (Stonewick Backsword): PASSES THROUGH the body by 0.061 m"
    ],
    "cams": {
     "front": {
@@ -724,7 +760,7 @@
      "outside": 0,
      "clip": [
       6.441,
-      12.707
+      12.735
      ]
     },
     "back": {
@@ -798,9 +834,16 @@
    "set_name": null,
    "hidden_body_meshes": [],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Ferrywarden's Axe",
+     "path": "assets/gear/axe_A.gltf"
+    }
+   ],
    "height": 2.4,
-   "tris": 2176,
-   "pieces": 22,
+   "tris": 2116,
+   "pieces": 19,
    "manifest": [
     {
      "part": "Armour_Cuirass",
@@ -947,16 +990,6 @@
      "min_z": 0.1052
     },
     {
-     "part": "Weapon",
-     "item": "Ferrywarden's Axe",
-     "slot": "weapon",
-     "verts": 91,
-     "inside_pct": 6.6,
-     "penetration_m": 0.0175,
-     "gap_m": 0.011,
-     "min_z": 0.2469
-    },
-    {
      "part": "Acc_Amulet",
      "item": "Lamplighter's Amulet",
      "slot": "amulet",
@@ -1005,13 +1038,24 @@
      "penetration_m": 0.0329,
      "gap_m": 0.0045,
      "min_z": 0.4501
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Ferrywarden's Axe",
+     "slot": "weapon",
+     "verts": 300,
+     "inside_pct": 7.3,
+     "penetration_m": 0.0977,
+     "gap_m": 0.0004,
+     "min_z": 0.014
     }
    ],
    "faults": [
     "Armour_Cuirass (Militia Hauberk): CLIPS the body - 0.047 m deep, 29% of it inside",
     "Armour_Tassets (Militia Hauberk): CLIPS the body - 0.060 m deep, 69% of it inside",
     "Acc_Amulet (Lamplighter's Amulet): CLIPS the body - 0.024 m deep, 36% of it inside",
-    "Acc_GloveL (Splint-wrap Gloves): CLIPS the body - 0.033 m deep, 62% of it inside"
+    "Acc_GloveL (Splint-wrap Gloves): CLIPS the body - 0.033 m deep, 62% of it inside",
+    "Model_Weapon (Ferrywarden's Axe): PASSES THROUGH the body by 0.098 m"
    ],
    "cams": {
     "front": {
@@ -1027,7 +1071,7 @@
      "outside": 0,
      "clip": [
       6.445,
-      12.639
+      13.128
      ]
     },
     "back": {
@@ -1103,9 +1147,16 @@
     "Mage_Cape"
    ],
    "surf_misses": 84,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Rune-Wrapped Staff",
+     "path": "assets/gear/staff_B.gltf"
+    }
+   ],
    "height": 2.655,
-   "tris": 3290,
-   "pieces": 16,
+   "tris": 2951,
+   "pieces": 12,
    "manifest": [
     {
      "part": "Armour_SleeveL",
@@ -1206,20 +1257,10 @@
      "item": "Rune-Hemmed Vestment",
      "slot": "armour",
      "verts": 635,
-     "inside_pct": 13.2,
-     "penetration_m": 0.0449,
+     "inside_pct": 7.4,
+     "penetration_m": 0.0286,
      "gap_m": 0.0,
      "min_z": 0.1681
-    },
-    {
-     "part": "Weapon",
-     "item": "Rune-Wrapped Staff",
-     "slot": "weapon",
-     "verts": 365,
-     "inside_pct": 7.1,
-     "penetration_m": 0.0203,
-     "gap_m": 0.0003,
-     "min_z": 0.3439
     },
     {
      "part": "Acc_Amulet",
@@ -1250,11 +1291,20 @@
      "penetration_m": 0.0455,
      "gap_m": 0.0,
      "min_z": 0.6772
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Rune-Wrapped Staff",
+     "slot": "weapon",
+     "verts": 298,
+     "inside_pct": 2.3,
+     "penetration_m": 0.0148,
+     "gap_m": 0.0075,
+     "min_z": 0.005
     }
    ],
    "faults": [
     "Armour_SleeveR (Rune-Hemmed Vestment): CLIPS the body - 0.048 m deep, 62% of it inside",
-    "Weapon (Rune-Wrapped Staff): PASSES THROUGH the body by 0.020 m",
     "Acc_Amulet (Chapel Candle Amulet): CLIPS the body - 0.023 m deep, 35% of it inside",
     "Acc_Ring (Tithe Ring): CLIPS the body - 0.045 m deep, 73% of it inside",
     "Acc_Cloak (Saltboiler's Cloak): CLIPS the body - 0.045 m deep, 14% of it inside"
@@ -1347,9 +1397,16 @@
    "set_name": null,
    "hidden_body_meshes": [],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Stitchwound Sabre",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/sword_1handed.gltf"
+    }
+   ],
    "height": 2.173,
-   "tris": 2011,
-   "pieces": 24,
+   "tris": 1873,
+   "pieces": 20,
    "manifest": [
     {
      "part": "Armour_Jerkin",
@@ -1444,16 +1501,6 @@
      "min_z": 0.4931
     },
     {
-     "part": "Weapon",
-     "item": "Stitchwound Sabre",
-     "slot": "weapon",
-     "verts": 174,
-     "inside_pct": 4.6,
-     "penetration_m": 0.0243,
-     "gap_m": 0.0071,
-     "min_z": 0.3095
-    },
-    {
      "part": "Acc_GloveL",
      "item": "Lye-boiler's Gloves",
      "slot": "gloves",
@@ -1502,10 +1549,20 @@
      "penetration_m": 0.0447,
      "gap_m": 0.0003,
      "min_z": 0.4737
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Stitchwound Sabre",
+     "slot": "weapon",
+     "verts": 287,
+     "inside_pct": 9.1,
+     "penetration_m": 0.0684,
+     "gap_m": 0.0009,
+     "min_z": 0.1803
     }
    ],
    "faults": [
-    "Weapon (Stitchwound Sabre): PASSES THROUGH the body by 0.024 m"
+    "Model_Weapon (Stitchwound Sabre): PASSES THROUGH the body by 0.068 m"
    ],
    "cams": {
     "front": {
@@ -1521,7 +1578,7 @@
      "outside": 0,
      "clip": [
       6.478,
-      12.709
+      12.797
      ]
     },
     "back": {
@@ -1595,9 +1652,16 @@
    "set_name": null,
    "hidden_body_meshes": [],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Ash-Maul Greataxe",
+     "path": "assets/gear/hammer_B.gltf"
+    }
+   ],
    "height": 2.4,
-   "tris": 2067,
-   "pieces": 17,
+   "tris": 1922,
+   "pieces": 13,
    "manifest": [
     {
      "part": "Armour_Jerkin",
@@ -1677,23 +1741,13 @@
      "min_z": 0.4912
     },
     {
-     "part": "Weapon",
-     "item": "Ash-Maul Greataxe",
-     "slot": "weapon",
-     "verts": 171,
-     "inside_pct": 3.5,
-     "penetration_m": 0.0399,
-     "gap_m": 0.0012,
-     "min_z": 0.3039
-    },
-    {
      "part": "Acc_Cloak",
      "item": "Weaver's Long Cloak",
      "slot": "cloak",
      "verts": 173,
-     "inside_pct": 23.7,
-     "penetration_m": 0.0472,
-     "gap_m": 0.0014,
+     "inside_pct": 26.6,
+     "penetration_m": 0.0485,
+     "gap_m": 0.003,
      "min_z": 0.3807
     },
     {
@@ -1725,12 +1779,22 @@
      "penetration_m": 0.0496,
      "gap_m": 0.0004,
      "min_z": -0.002
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Ash-Maul Greataxe",
+     "slot": "weapon",
+     "verts": 352,
+     "inside_pct": 3.1,
+     "penetration_m": 0.0267,
+     "gap_m": 0.0011,
+     "min_z": 0.0293
     }
    ],
    "faults": [
-    "Weapon (Ash-Maul Greataxe): PASSES THROUGH the body by 0.040 m",
-    "Acc_Cloak (Weaver's Long Cloak): CLIPS the body - 0.047 m deep, 24% of it inside",
-    "Acc_Amulet (Ferrybell Amulet): CLIPS the body - 0.024 m deep, 41% of it inside"
+    "Acc_Cloak (Weaver's Long Cloak): CLIPS the body - 0.048 m deep, 27% of it inside",
+    "Acc_Amulet (Ferrybell Amulet): CLIPS the body - 0.024 m deep, 41% of it inside",
+    "Model_Weapon (Ash-Maul Greataxe): PASSES THROUGH the body by 0.027 m"
    ],
    "cams": {
     "front": {
@@ -1746,7 +1810,7 @@
      "outside": 0,
      "clip": [
       6.445,
-      12.839
+      12.929
      ]
     },
     "back": {
@@ -1820,9 +1884,16 @@
    "set_name": null,
    "hidden_body_meshes": [],
    "surf_misses": 84,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Dragontooth Staff",
+     "path": "assets/gear/staff_B.gltf"
+    }
+   ],
    "height": 2.655,
-   "tris": 2693,
-   "pieces": 20,
+   "tris": 2210,
+   "pieces": 15,
    "manifest": [
     {
      "part": "Armour_SleeveL",
@@ -1935,20 +2006,10 @@
      "item": "Dragonsilk Robe",
      "slot": "armour",
      "verts": 635,
-     "inside_pct": 22.7,
-     "penetration_m": 0.1314,
+     "inside_pct": 15.3,
+     "penetration_m": 0.1179,
      "gap_m": 0.0,
      "min_z": 0.1681
-    },
-    {
-     "part": "Weapon",
-     "item": "Dragontooth Staff",
-     "slot": "weapon",
-     "verts": 491,
-     "inside_pct": 4.9,
-     "penetration_m": 0.0169,
-     "gap_m": 0.0004,
-     "min_z": 0.3454
     },
     {
      "part": "Acc_Ring",
@@ -1989,12 +2050,22 @@
      "penetration_m": 0.0383,
      "gap_m": 0.0028,
      "min_z": 0.2532
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Dragontooth Staff",
+     "slot": "weapon",
+     "verts": 298,
+     "inside_pct": 2.3,
+     "penetration_m": 0.0148,
+     "gap_m": 0.0075,
+     "min_z": 0.005
     }
    ],
    "faults": [
     "Armour_SleeveL (Dragonsilk Robe): CLIPS the body - 0.043 m deep, 71% of it inside",
     "Armour_SleeveR (Dragonsilk Robe): CLIPS the body - 0.048 m deep, 67% of it inside",
-    "Armour_Robe (Dragonsilk Robe): CLIPS the body - 0.131 m deep, 23% of it inside",
+    "Armour_Robe (Dragonsilk Robe): CLIPS the body - 0.118 m deep, 15% of it inside",
     "Acc_Ring (Scarglass Ring): CLIPS the body - 0.046 m deep, 62% of it inside",
     "Acc_Amulet (Boatwright's Charm): CLIPS the body - 0.025 m deep, 50% of it inside"
    ],
@@ -2094,9 +2165,21 @@
     "Knight_HelmetVisor"
    ],
    "surf_misses": 0,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Scarfang",
+     "path": "assets/gear/sword_E.gltf"
+    },
+    {
+     "slot": "offhand",
+     "item": "shield (shield_spikes)",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/shield_spikes.gltf"
+    }
+   ],
    "height": 2.43,
-   "tris": 3562,
-   "pieces": 30,
+   "tris": 3327,
+   "pieces": 25,
    "manifest": [
     {
      "part": "Armour_Cuirass",
@@ -2259,16 +2342,6 @@
      "min_z": 0.1052
     },
     {
-     "part": "Weapon",
-     "item": "Scarfang",
-     "slot": "weapon",
-     "verts": 266,
-     "inside_pct": 1.9,
-     "penetration_m": 0.0111,
-     "gap_m": 0.0029,
-     "min_z": 0.3258
-    },
-    {
      "part": "Acc_BootL",
      "item": "Sexton's Hobnails",
      "slot": "boots",
@@ -2315,7 +2388,7 @@
      "verts": 301,
      "inside_pct": 24.6,
      "penetration_m": 0.1836,
-     "gap_m": 0.0005,
+     "gap_m": 0.0002,
      "min_z": 0.6379
     },
     {
@@ -2327,12 +2400,34 @@
      "penetration_m": 0.3221,
      "gap_m": 0.0008,
      "min_z": 1.4487
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Scarfang",
+     "slot": "weapon",
+     "verts": 226,
+     "inside_pct": 11.1,
+     "penetration_m": 0.0467,
+     "gap_m": 0.0007,
+     "min_z": 0.2813
+    },
+    {
+     "part": "Model_Shield",
+     "item": "shield (shield_spikes)",
+     "slot": "offhand",
+     "verts": 246,
+     "inside_pct": 4.5,
+     "penetration_m": 0.042,
+     "gap_m": 0.0031,
+     "min_z": 0.1917
     }
    ],
    "faults": [
     "Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
     "Acc_Cloak (Wake-ward Cloak): CLIPS the body - 0.184 m deep, 25% of it inside",
-    "Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside"
+    "Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
+    "Model_Weapon (Scarfang): PASSES THROUGH the body by 0.047 m",
+    "Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.042 m"
    ],
    "cams": {
     "front": {
@@ -2347,8 +2442,8 @@
      "ortho": 3.3,
      "outside": 0,
      "clip": [
-      6.384,
-      12.712
+      6.273,
+      12.739
      ]
     },
     "back": {
@@ -2424,9 +2519,21 @@
     "RogueHooded_Cape"
    ],
    "surf_misses": 95,
+   "models": [
+    {
+     "slot": "weapon",
+     "item": "Staff of the Open Seam",
+     "path": "assets/gear/staff_B.gltf"
+    },
+    {
+     "slot": "offhand",
+     "item": "shield (shield_spikes)",
+     "path": "addons/kaykit_character_pack_adventures/Assets/gltf/shield_spikes.gltf"
+    }
+   ],
    "height": 2.173,
-   "tris": 3479,
-   "pieces": 21,
+   "tris": 2996,
+   "pieces": 16,
    "manifest": [
     {
      "part": "Armour_SleeveL",
@@ -2540,20 +2647,10 @@
      "item": "Seamwoven Vestment",
      "slot": "armour",
      "verts": 635,
-     "inside_pct": 13.5,
+     "inside_pct": 7.2,
      "penetration_m": 0.2021,
-     "gap_m": 0.0005,
+     "gap_m": 0.0006,
      "min_z": 0.1681
-    },
-    {
-     "part": "Weapon",
-     "item": "Staff of the Open Seam",
-     "slot": "weapon",
-     "verts": 491,
-     "inside_pct": 1.0,
-     "penetration_m": 0.0085,
-     "gap_m": 0.0013,
-     "min_z": 0.3469
     },
     {
      "part": "Acc_Amulet",
@@ -2570,10 +2667,10 @@
      "item": "Scarwatch Cloak",
      "slot": "cloak",
      "verts": 173,
-     "inside_pct": 34.1,
-     "penetration_m": 0.0164,
+     "inside_pct": 35.8,
+     "penetration_m": 0.0191,
      "gap_m": 0.0002,
-     "min_z": 0.3802
+     "min_z": 0.3801
     },
     {
      "part": "Acc_BootL",
@@ -2594,13 +2691,35 @@
      "penetration_m": 0.0475,
      "gap_m": 0.0001,
      "min_z": -0.002
+    },
+    {
+     "part": "Model_Weapon",
+     "item": "Staff of the Open Seam",
+     "slot": "weapon",
+     "verts": 298,
+     "inside_pct": 2.0,
+     "penetration_m": 0.1118,
+     "gap_m": 0.0001,
+     "min_z": 0.005
+    },
+    {
+     "part": "Model_Shield",
+     "item": "shield (shield_spikes)",
+     "slot": "offhand",
+     "verts": 246,
+     "inside_pct": 3.3,
+     "penetration_m": 0.0306,
+     "gap_m": 0.0025,
+     "min_z": 0.1917
     }
    ],
    "faults": [
     "Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.044 m deep, 71% of it inside",
     "Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.039 m deep, 64% of it inside",
-    "Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 14% of it inside",
-    "Acc_Cloak (Scarwatch Cloak): CLIPS the body - 0.016 m deep, 34% of it inside"
+    "Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 7% of it inside",
+    "Acc_Cloak (Scarwatch Cloak): CLIPS the body - 0.019 m deep, 36% of it inside",
+    "Model_Weapon (Staff of the Open Seam): PASSES THROUGH the body by 0.112 m",
+    "Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.031 m"
    ],
    "cams": {
     "front": {
@@ -2615,8 +2734,8 @@
      "ortho": 3.3,
      "outside": 0,
      "clip": [
-      6.478,
-      12.656
+      6.273,
+      12.789
      ]
     },
     "back": {
@@ -2644,37 +2763,41 @@
  ],
  "fit_faults": [
   "knight: Armour_Tassets (Padded Gambeson): CLIPS the body - 0.056 m deep, 69% of it inside",
-  "knight: Weapon (Ironmonger's Blade): PASSES THROUGH the body by 0.031 m",
   "knight: Acc_Ring (Tallykeeper's Ring): CLIPS the body - 0.038 m deep, 67% of it inside",
-  "ranger: Weapon (Hunter's Crossbow): PASSES THROUGH the body by 0.027 m",
-  "ranger: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.048 m deep, 41% of it inside",
-  "rogue: Weapon (Stonewick Backsword): PASSES THROUGH the body by 0.030 m",
+  "knight: Model_Weapon (Ironmonger's Blade): PASSES THROUGH the body by 0.070 m",
+  "knight: Model_Shield (shield (shield_A)): PASSES THROUGH the body by 0.032 m",
+  "ranger: Acc_Cloak (Orchardman's Cloak): CLIPS the body - 0.048 m deep, 42% of it inside",
   "rogue: Acc_Cloak (Peat-cutter's Cloak): CLIPS the body - 0.092 m deep, 48% of it inside",
+  "rogue: Model_Weapon (Stonewick Backsword): PASSES THROUGH the body by 0.061 m",
   "warden: Armour_Cuirass (Militia Hauberk): CLIPS the body - 0.047 m deep, 29% of it inside",
   "warden: Armour_Tassets (Militia Hauberk): CLIPS the body - 0.060 m deep, 69% of it inside",
   "warden: Acc_Amulet (Lamplighter's Amulet): CLIPS the body - 0.024 m deep, 36% of it inside",
   "warden: Acc_GloveL (Splint-wrap Gloves): CLIPS the body - 0.033 m deep, 62% of it inside",
+  "warden: Model_Weapon (Ferrywarden's Axe): PASSES THROUGH the body by 0.098 m",
   "mage: Armour_SleeveR (Rune-Hemmed Vestment): CLIPS the body - 0.048 m deep, 62% of it inside",
-  "mage: Weapon (Rune-Wrapped Staff): PASSES THROUGH the body by 0.020 m",
   "mage: Acc_Amulet (Chapel Candle Amulet): CLIPS the body - 0.023 m deep, 35% of it inside",
   "mage: Acc_Ring (Tithe Ring): CLIPS the body - 0.045 m deep, 73% of it inside",
   "mage: Acc_Cloak (Saltboiler's Cloak): CLIPS the body - 0.045 m deep, 14% of it inside",
-  "duelist: Weapon (Stitchwound Sabre): PASSES THROUGH the body by 0.024 m",
-  "barbarian: Weapon (Ash-Maul Greataxe): PASSES THROUGH the body by 0.040 m",
-  "barbarian: Acc_Cloak (Weaver's Long Cloak): CLIPS the body - 0.047 m deep, 24% of it inside",
+  "duelist: Model_Weapon (Stitchwound Sabre): PASSES THROUGH the body by 0.068 m",
+  "barbarian: Acc_Cloak (Weaver's Long Cloak): CLIPS the body - 0.048 m deep, 27% of it inside",
   "barbarian: Acc_Amulet (Ferrybell Amulet): CLIPS the body - 0.024 m deep, 41% of it inside",
+  "barbarian: Model_Weapon (Ash-Maul Greataxe): PASSES THROUGH the body by 0.027 m",
   "sage: Armour_SleeveL (Dragonsilk Robe): CLIPS the body - 0.043 m deep, 71% of it inside",
   "sage: Armour_SleeveR (Dragonsilk Robe): CLIPS the body - 0.048 m deep, 67% of it inside",
-  "sage: Armour_Robe (Dragonsilk Robe): CLIPS the body - 0.131 m deep, 23% of it inside",
+  "sage: Armour_Robe (Dragonsilk Robe): CLIPS the body - 0.118 m deep, 15% of it inside",
   "sage: Acc_Ring (Scarglass Ring): CLIPS the body - 0.046 m deep, 62% of it inside",
   "sage: Acc_Amulet (Boatwright's Charm): CLIPS the body - 0.025 m deep, 50% of it inside",
   "paladin: Armour_Tassets (Scarwoven Hauberk): CLIPS the body - 0.056 m deep, 69% of it inside",
   "paladin: Acc_Cloak (Wake-ward Cloak): CLIPS the body - 0.184 m deep, 25% of it inside",
   "paladin: Acc_Helm (Raidbreaker's Helm): CLIPS the body - 0.322 m deep, 9% of it inside",
+  "paladin: Model_Weapon (Scarfang): PASSES THROUGH the body by 0.047 m",
+  "paladin: Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.042 m",
   "cleric: Armour_SleeveL (Seamwoven Vestment): CLIPS the body - 0.044 m deep, 71% of it inside",
   "cleric: Armour_SleeveR (Seamwoven Vestment): CLIPS the body - 0.039 m deep, 64% of it inside",
-  "cleric: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 14% of it inside",
-  "cleric: Acc_Cloak (Scarwatch Cloak): CLIPS the body - 0.016 m deep, 34% of it inside"
+  "cleric: Armour_Robe (Seamwoven Vestment): CLIPS the body - 0.202 m deep, 7% of it inside",
+  "cleric: Acc_Cloak (Scarwatch Cloak): CLIPS the body - 0.019 m deep, 36% of it inside",
+  "cleric: Model_Weapon (Staff of the Open Seam): PASSES THROUGH the body by 0.112 m",
+  "cleric: Model_Shield (shield (shield_spikes)): PASSES THROUGH the body by 0.031 m"
  ],
  "blank": {
   "files": 40,

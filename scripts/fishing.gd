@@ -10,7 +10,7 @@ extends RefCounted
 ## rarity higher, worth triple, glowing (lore: the river runs past the scar).
 
 const RARITY_COLOR := {"common": Color(0.92, 0.92, 0.90), "uncommon": Color(0.45, 0.95, 0.45),
-    "rare": Color(0.40, 0.65, 1.00), "epic": Color(0.80, 0.45, 1.00), "legendary": Color(1.00, 0.66, 0.20)}
+    "rare": Color(0.40, 0.65, 1.00), "very rare": Color(0.80, 0.45, 1.00), "legendary": Color(1.00, 0.66, 0.20)}
 
 static var _t: Dictionary = {}
 

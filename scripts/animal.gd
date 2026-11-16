@@ -243,6 +243,17 @@ func _pick() -> Vector3:
             return p
     return Vector3.ZERO
 
+## D91c: may town's late settle set this beast down at p? A beast on its own ground (pen,
+## paddock, field - within half a metre of its rect) stays on it; one already off it (a dog
+## at heel, a cat about town) only has to stay out of the solids, which town checks.
+func on_ground_ok(p: Vector3) -> bool:
+    var m := 0.5
+    var cur := global_position - centre
+    if absf(cur.dot(side)) > hw + m or absf(cur.dot(fwd)) > hd + m:
+        return true
+    var q := p - centre
+    return absf(q.dot(side)) <= hw + m and absf(q.dot(fwd)) <= hd + m
+
 ## keep a point inside this animal's pen/field rect
 func _clamp_pen(p: Vector3) -> Vector3:
     var dx := clampf((p - centre).dot(side), -hw, hw)

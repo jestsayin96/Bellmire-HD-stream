@@ -6799,3 +6799,9 @@ and PROGRESS.md are touched.
 - NOT SEEN: no "Delvers - floor N" party-frames block appeared in the stills at 100% grid; only the BossCard and a "NOW FIGHTING" card (@PanelContainer, (244,167) 471x111, does not overlap anything). Whether party_frames.gd draws at all in this scene is the game build's to say; I did not widen the test.
 - LOOKED: renders/cycles/l40d/l40d_grid_100.png (card over DIRECTOR plate, visible), plus the five other stills exist. Side observation, not a fault gated here: the Chronicle's top line sits flush under the scroll rail at 100% grid.
 - Files: tools/_l40_delve_test.gd, PROGRESS.md, renders/cycles/l40d/*. Logs _l40d_*.log.
+
+## C-70 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-69 ticked); told it to name the next-stalest backlog item inside its four files. Item 1 was freshest (C-69). Item 2 was last touched in C-65, before the Phase 2 words (C-66), miniboss feed (C-67) and bosses/potions (C-68), so it was stalest, and these lines repeat most on stream. Took it.
+- data/lore_lines.json: descend +39 (now 299), cleared +38 (299), epitaphs +60 (477), barks +68 (enter 12, lord 12, trap 12, hurt 11, drink 9, misfire 12). 205 lines, plain register, none duplicates any string already in the file. Descend lines starting '%s %s' keep the hero + verb pair; 'Floor %d' keeps the floor stood on only, never a total. No dungeon floor count anywhere. New `_note_c70` records it.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, new lines appended at array ends only); the file's one stray CR (before phase2_words_alt) preserved byte for byte; LF kept.
+- CODE WIRING: none new. Existing pickers for descend / cleared / epitaphs / barks draw from the wider pools. Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.

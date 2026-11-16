@@ -13,7 +13,7 @@ var state: int = S.PATROL
 var home := Vector3.ZERO
 var roam := 6.0
 var target: Node3D = null
-var ground_fn: Callable            # (x, z) -> y; flat 0 when unset
+var ground_fn: Callable            # (x, z) -> y; keeps its own height when unset (D83)
 var _ap: AnimationPlayer
 var _body: Node3D
 var _goal := Vector3.ZERO
@@ -408,8 +408,10 @@ func _flinch() -> void:
 func _entering() -> bool:
     return _body.position.y < -0.05
 
+## D83: with no ground given, a creature keeps the height it was put at. The old flat 0.0 sent
+## every dungeon creature left in PATROL to world y 0 - 400 m above its floor.
 func _gy(x: float, z: float) -> float:
-    return float(ground_fn.call(x, z)) if ground_fn.is_valid() else 0.0
+    return float(ground_fn.call(x, z)) if ground_fn.is_valid() else global_position.y
 
 func _process(delta: float) -> void:
     _t += delta

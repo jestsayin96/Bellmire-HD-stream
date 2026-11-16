@@ -82,3 +82,6 @@ RUNNING 2026-11-16T01:26:43-06:00 (game build D94 fit pass 2 - parse + ten/slots
 RUNNING 2026-11-16T01:29:57-06:00 (game build D94 fit pass 3 - renders)
 RUNNING 2026-11-16T01:32:25-06:00 (game build D94 robe fix render + gate battery)
 IDLE 2026-11-16T01:37:10-06:00 - D94a wiring shipped (items look like themselves: accessories from the item, 119 named weapons/armour live, tier keeps numbers) + D95 in-engine fit renders; D95_FIT OK, gates green (game build)
+RUNNING 2026-11-16T02:13:30-06:00 (game build D94 remainder - item key into geometry)
+RUNNING 2026-11-16T02:18:00-06:00 (game build D94 remainder - gate battery)
+IDLE 2026-11-16T02:22:46-06:00 - D94b item key into geometry (acc form, weapon deco, round boots, bought boots win, arcane mace, bow scale); D94B OK, gates green (game build)

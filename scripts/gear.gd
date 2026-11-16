@@ -165,6 +165,8 @@ const KINDS := {
     "axe":        {"family": "axe", "noun": "axe", "kit": [ADV + "axe_1handed.gltf", KIT + "axe_A.gltf", ADV + "axe_2handed.gltf", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
     "mace":       {"family": "axe", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
     "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    # D94b: an arcane MACE ("Parish Iron Mace") had no kind and fell back to a staff
+    "sceptre":    {"family": "arcane", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
     "wand":       {"family": "arcane", "noun": "wand", "kit": [ADV + "wand.gltf", KIT + "wand_A.gltf", ADV + "wand.gltf", KIT + "wand_A.gltf", KIT + "wand_A.gltf"]},
     "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [ADV + "crossbow_1handed.gltf", ADV + "crossbow_1handed.gltf", ADV + "crossbow_2handed.gltf", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
     "bow":        {"family": "ranged", "noun": "bow", "kit": [KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf"]},
@@ -188,7 +190,10 @@ static func kind_path(kind: String, tier: int) -> String:
     return String(l[clampi(tier - 1, 0, l.size() - 1)])
 
 ## the KayKit weapon bits are modelled ~1.6x a KayKit hand
+## D94b: except the bow - at x0.62 the KayKit bow was a toy in the fist and a "Greatbow" read small
 static func hand_scale(path: String) -> float:
+    if path.ends_with("bow_A_withString.gltf"):
+        return 0.92
     return 0.62 if path.begins_with(KIT) else 1.0
 
 ## ---------------------------------------------------------------- L3 armour, worn
@@ -237,7 +242,7 @@ static func dress_armour(model_root: Node, tier: int, piece := "") -> void:
                 # D94/D95 fit: laid out in model axes (the foot bone is pitched 45 deg, which
                 # tipped the old box off the ground), sized from the measured KayKit foot
                 _align(b, sk, "foot." + s)
-                _part(b, _box(0.29, 0.17, 0.46), m, Vector3(0, -0.065, 0.10))
+                _part(b, _cap(0.145, 0.46), m, Vector3(0, -0.065, 0.10), Vector3(PI * 0.5, 0, 0), Vector3(1, 1, 0.59))
                 _part(b, _cyl(0.14, 0.145, 0.12, 10), m, Vector3(0, 0.03, 0.0))
     var trim := int(look.get("trim", 0))
     var trim_m := StandardMaterial3D.new()
@@ -614,6 +619,13 @@ static func dress_cosmetics(model_root: Node, h: Dictionary) -> void:
                 var g := _piece(sk, "hand." + s, "eq_glove_" + s, null)
                 if g:
                     _build_glove(g, gc)
+    # D94b: BOUGHT boots win over the armour's set boots (the paladin's Long Count Boots were
+    # suppressed whenever any armour was worn). The armour keeps its pauldrons, helm and bracers.
+    if acc.has("boots") and not acc_ctx(String(acc["boots"])).is_empty():
+        for s in ["eq_boot_l", "eq_boot_r"]:
+            var ob := sk.get_node_or_null(NodePath(s))
+            if ob:
+                ob.free()
     if acc.has("boots") and sk.get_node_or_null("eq_boot_l") == null:
         var bc := acc_ctx(String(acc["boots"]))
         if not bc.is_empty():
@@ -900,8 +912,40 @@ static func d94_hash(key: String) -> int:
 static func _lin(c: Color) -> Color:
     return c.linear_to_srgb()
 
-## the look of one accessory, derived from the item exactly as its icon was
+## the look of one accessory, derived from the item exactly as its icon was, PLUS its FORM
+## (D94b): two items that land on the same variant, metal, stat and cloth would otherwise be
+## ONE object (the proof sheet's DUPLICATE). Every such collision group is sorted by item KEY
+## and numbered 0, 1, 2 - that number is the item's form, and form > 0 changes the GEOMETRY
+## (a drop under a pendant, a flared cuff, a buckle strap, a hem band), never just the colour.
+## THE SHARED RULE (tools/art must derive the same number so the hub icon and the hero match):
+##   sig  = slot | variant | metal_i | stat | cloth_i (cloth_i = -1 for ring and amulet)
+##   form = index of the key within its sig group, keys sorted as plain strings
+static var _acc_forms := {}
+const D94_CLOTH_SLOTS := ["gloves", "boots", "cloak"]
+static func acc_form(key: String) -> int:
+    if _acc_forms.is_empty():
+        var all: Dictionary = Roster.items().get("accessories", {})
+        var keys: Array = all.keys()
+        keys.sort()
+        var groups := {}
+        for k in keys:
+            var c := _acc_base(String(k))
+            if c.is_empty():
+                continue
+            var ci := int(c["cloth_i"]) if D94_CLOTH_SLOTS.has(String(c["slot"])) else -1
+            var sig := "%s|%d|%d|%s|%d" % [c["slot"], int(c["variant"]), int(c["metal_i"]), c["stat"], ci]
+            var n := int(groups.get(sig, 0))
+            _acc_forms[String(k)] = n
+            groups[sig] = n + 1
+    return int(_acc_forms.get(key, 0))
+
 static func acc_ctx(key: String) -> Dictionary:
+    var c := _acc_base(key)
+    if not c.is_empty():
+        c["form"] = acc_form(key)
+    return c
+
+static func _acc_base(key: String) -> Dictionary:
     var all: Dictionary = Roster.items().get("accessories", {})
     var it: Dictionary = all.get(key, {})
     if it.is_empty():
@@ -934,7 +978,7 @@ static func acc_ctx(key: String) -> Dictionary:
     var mi := mini(3, int(orn * 4.0))
     return {"slot": slot, "variant": variant, "orn": orn, "stat": stat,
             "metal": _lin(D94_METALS[mi]), "metal_i": mi,
-            "cloth": _lin(D94_TONES[(h >> 8) % D94_TONES.size()]),
+            "cloth": _lin(D94_TONES[(h >> 8) % D94_TONES.size()]), "cloth_i": (h >> 8) % D94_TONES.size(),
             "gem": _lin(D94_STAT_GEM.get(stat, Color(0.70, 0.70, 0.74))),
             # WEAR RIDES COST: a cheap piece is dull and handled, an expensive one bright and kept
             "rough": lerpf(0.82, 0.28, orn), "sheen": lerpf(0.45, 0.95, orn)}
@@ -995,6 +1039,15 @@ static func _cyl(top: float, bot: float, h: float, seg := 10) -> CylinderMesh:
     c.rings = 1
     return c
 
+## a rounded foot: a capsule laid along model Z (rotate PI/2 about X), flattened by scale.z
+static func _cap(r: float, h: float) -> CapsuleMesh:
+    var c := CapsuleMesh.new()
+    c.radius = r
+    c.height = h
+    c.radial_segments = 10
+    c.rings = 3
+    return c
+
 static func _tor(inner: float, outer: float) -> TorusMesh:
     var t := TorusMesh.new()
     t.inner_radius = inner
@@ -1052,6 +1105,13 @@ static func _build_ring(root: MeshInstance3D, c: Dictionary) -> void:
             var a2 := TAU * k / float(n) + 0.4
             var rr := RING_R + band * 2.0
             _part(root, _sph(0.010), gm, Vector3(rr * cos(a2), 0.0, rr * sin(a2)))
+    match int(c.get("form", 0)):
+        1:  # a broad cigar band beside the first
+            _part(root, _tor(RING_R + band * 1.6, RING_R + band * 2.8), mm, Vector3(0, -band * 2.4, 0), Vector3.ZERO, Vector3(1, 2.4, 1))
+        2:  # three stones set across the palm side
+            for k in range(3):
+                var a3 := PI + (k - 1) * 0.45
+                _part(root, _sph(0.016), gm, Vector3((RING_R + band * 2.0) * cos(a3 + PI * 0.5), 0.0, (RING_R + band * 2.0) * sin(a3 + PI * 0.5)))
 
 ## AMULET: a pendant on the breastbone, below the overhang of the head where the camera sees
 ## it, hung from two short chain strands that run up under the chin.
@@ -1087,6 +1147,12 @@ static func _build_amulet(root: MeshInstance3D, c: Dictionary) -> void:
     if orn > 0.5:
         for s in [-1.0, 1.0]:
             _part(root, _sph(0.018), gm, Vector3(0.05 * s, 0.07, 0.0))
+    match int(c.get("form", 0)):
+        1:  # a second stone hung on a short link below the pendant
+            _part(root, _cyl(0.008, 0.008, 0.07, 5), mm, Vector3(0, -0.12, 0))
+            _part(root, _sph(0.034, 0.05), gm, Vector3(0, -0.17, 0.0))
+        2:  # a metal halo framing the pendant
+            _part(root, _tor(0.095, 0.12), mm, Vector3(0, 0, -0.005), Vector3(PI * 0.5, 0, 0))
 
 ## GLOVES, one hand: the mitt is wrapped in a shell just larger than the hand (never the old
 ## box with corners standing off it), plus a cuff up the forearm.
@@ -1120,6 +1186,11 @@ static func _build_glove(root: MeshInstance3D, c: Dictionary) -> void:
                 _part(root.get_parent() as Node3D, _cyl(0.096, 0.096, 0.014, 10), dm, Vector3(0, 0.02 + 0.03 * k, 0))
     if v == 0 or orn > 0.45:
         _part(root.get_parent() as Node3D, _sph(0.022, 0.03), _m_gem(c), Vector3(0, 0.05, 0.095))
+    match int(c.get("form", 0)):
+        1:  # a flared metal cuff at the wrist
+            _part(root.get_parent() as Node3D, _cyl(0.14, 0.10, 0.06, 10), mm, Vector3(0, -0.02, 0))
+        2:  # a plate over the knuckles
+            _part(root.get_parent() as Node3D, _box(0.16, 0.055, 0.04), mm, Vector3(0, 0.15, 0.09))
 
 ## BOOTS, one foot, in model axes (sole flat): low shoe / ankle boot / tall riding boot /
 ## fur-cuffed / pointed toe. Shafts are short because a KayKit knee is at y 0.29.
@@ -1132,8 +1203,9 @@ static func _build_boot(root: MeshInstance3D, c: Dictionary) -> void:
     foot.position = Vector3(0, -0.15, 0.02)            # from the ankle bone to the ground under it
     root.add_child(foot)
     root.mesh = null
-    _part(foot, _box(0.28, 0.20, 0.44), cm, Vector3(0, 0.115, 0.08))          # the foot, over the body's own
-    _part(foot, _box(0.30, 0.035, 0.47), dm, Vector3(0, 0.017, 0.08))         # sole
+    # the foot, over the body's own - ROUNDED (D94b: "all boots are boxes"), a flattened capsule
+    _part(foot, _cap(0.14, 0.46), cm, Vector3(0, 0.115, 0.08), Vector3(PI * 0.5, 0, 0), Vector3(1, 1, 0.72))
+    _part(foot, _cap(0.15, 0.47), dm, Vector3(0, 0.017, 0.08), Vector3(PI * 0.5, 0, 0), Vector3(1, 1, 0.12))   # sole, rounded to the foot
     var shaft: float = [0.0, 0.10, 0.24, 0.16, 0.05][v]
     if shaft > 0.0:
         _part(foot, _cyl(0.135, 0.14, shaft, 10), cm, Vector3(0, 0.21 + shaft * 0.5, -0.02))
@@ -1151,6 +1223,12 @@ static func _build_boot(root: MeshInstance3D, c: Dictionary) -> void:
             _part(foot, _box(0.29, 0.03, 0.03), mm, Vector3(0, y, 0.30 if y < 0.21 else 0.13))
         if orn > 0.6:
             _part(foot, _sph(0.022), _m_gem(c), Vector3(0.0, 0.16, 0.31))
+    match int(c.get("form", 0)):
+        1:  # a buckled strap across the instep
+            _part(foot, _box(0.30, 0.045, 0.10), dm, Vector3(0, 0.19, 0.17))
+            _part(foot, _box(0.07, 0.06, 0.025), _m_metal(c), Vector3(0.09, 0.19, 0.225))
+        2:  # a turned-down cuff in a lighter lining
+            _part(foot, _cyl(0.17, 0.165, 0.075, 10), _m_cloth((c["cloth"] as Color).lightened(0.30), 0.9), Vector3(0, 0.20 + shaft, -0.02))
 
 ## CLOAK, in model axes about the chest bone: the body's own cape takes the cloak's cloth; the
 ## clasp, collar, hood, mantle or hanging rags are built. hood / mantle / long / fur / tattered.
@@ -1179,6 +1257,12 @@ static func _build_cloak(root: MeshInstance3D, c: Dictionary) -> void:
     if orn > 0.55:
         for k in range(4):
             _part(clasp, _sph(0.018), mm, Vector3(-0.12 + 0.08 * k, -0.04, 0.02))
+    match int(c.get("form", 0)):
+        1:  # a pale border band across the back of the cape near the hem
+            _part(root, _box(0.82, 0.08, 0.04), _m_cloth((c["cloth"] as Color).lightened(0.40), 0.85), Vector3(0, -0.56, -0.46))
+        2:  # metal rondels on both shoulders
+            for s in [-1.0, 1.0]:
+                _part(root, _cyl(0.075, 0.075, 0.025, 12), mm, Vector3(0.34 * s, 0.13, 0.20), Vector3(PI * 0.5, 0, 0))
 
 ## ---------------------------------------------------------------- D94: named weapons
 ## A piece's KIND, read from its name. Constrained to the family's kinds by the caller.
@@ -1187,7 +1271,7 @@ const D94_KIND_WORDS := [
     ["rapier", "sword"], ["cutlass", "sword"], ["sabre", "sword"], ["falchion", "sword"],
     ["backsword", "sword"], ["longsword", "sword"], ["brand", "sword"], ["sword", "sword"], ["blade", "sword"],
     ["fang", "sword"], ["edge", "sword"],
-    ["mace", "mace"], ["maul", "axe"], ["hatchet", "axe"], ["cleaver", "axe"], ["splitter", "axe"],
+    ["mace", "mace"], ["mace", "sceptre"], ["maul", "axe"], ["hatchet", "axe"], ["cleaver", "axe"], ["splitter", "axe"],
     ["greataxe", "axe"], ["hewer", "axe"], ["breaker", "axe"], ["axe", "axe"],
     ["quarterstaff", "quarterstaff"], ["wraps", "wraps"], ["knuckles", "wraps"], ["fist", "wraps"],
     ["wand", "wand"], ["rod", "wand"], ["stick", "wand"], ["staff", "staff"],
@@ -1355,7 +1439,10 @@ static func weapon_piece_look(id: String, family: String, tier: int, fallback_ki
     var sib: Array = []
     for oid in (equipment().get("weapons", {}) as Dictionary):
         var o: Dictionary = weapon_piece(oid)
-        if int(o.get("tier", -1)) == tier and String(o.get("family", "")) == family and piece_kind(oid, family) == kind:
+        var ok_kind := piece_kind(oid, family)
+        if ok_kind == "":
+            ok_kind = fallback_kind      # D94b: a piece with no kind word IS the hero's kind - a sibling too
+        if int(o.get("tier", -1)) == tier and String(o.get("family", "")) == family and ok_kind == kind:
             sib.append(oid)
     sib.sort()
     var j := maxi(0, sib.find(id))
@@ -1377,7 +1464,96 @@ static func weapon_piece_look(id: String, family: String, tier: int, fallback_ki
         out["glow_col"] = st[3]
     var h := d94_hash(id)
     out["scale_mul"] = 0.94 + 0.12 * float(h % 100) / 99.0
+    # D94b: the piece's own key reaches the GEOMETRY. Siblings (same tier, family and kind) are
+    # numbered in key order; that number picks the furniture deco_piece() builds on the mesh,
+    # so two tier-5 bows that share the pack's one bow mesh are still two bows.
+    out["form"] = j
+    out["accent"] = _lin(D94_TONES[(h >> 8) % D94_TONES.size()]).lightened(0.12)
+    out["named"] = not p.is_empty()
+    out["id"] = id
     return out
+
+## the bounds of every mesh under n, in n's own space
+static func _local_aabb(n: Node3D) -> AABB:
+    var out := AABB()
+    var first := true
+    var st: Array = [[n, Transform3D.IDENTITY]]
+    while not st.is_empty():
+        var e: Array = st.pop_back()
+        var c: Node = e[0]
+        var t: Transform3D = e[1]
+        if c is MeshInstance3D and (c as MeshInstance3D).mesh:
+            var b: AABB = t * (c as MeshInstance3D).mesh.get_aabb()
+            out = b if first else out.merge(b)
+            first = false
+        for g in c.get_children():
+            if g is Node3D:
+                st.append([g, t * (g as Node3D).transform])
+    return out
+
+## D94b: the named piece's furniture, built on the instanced mesh and measured off its bounds:
+##   every named piece  a grip wrap in the piece's own tone (the hub icon's cloth)
+##   form 1             ribbons trailing from the butt / lower limb
+##   form 2             a stone at the head / upper limb, in the piece's glow or amber
+##   form 3             two dark collars a third and two thirds along
+##   form 4             ribbons AND a stone
+const D94_PENNON := [Color(0.80, 0.16, 0.14), Color(0.92, 0.78, 0.25), Color(0.92, 0.92, 0.88),
+    Color(0.20, 0.50, 0.85), Color(0.25, 0.62, 0.30), Color(0.55, 0.25, 0.70)]
+static func deco_piece(n: Node3D, look: Dictionary) -> void:
+    if n == null or not bool(look.get("named", false)):
+        return
+    var bb := _local_aabb(n)
+    if bb.size == Vector3.ZERO:
+        return
+    var ax := 1                                  # the long axis: up the blade, or across a bow
+    if bb.size.x > bb.size.y and bb.size.x >= bb.size.z:
+        ax = 0
+    elif bb.size.z > bb.size.y:
+        ax = 2
+    var rot: Vector3 = [Vector3(0, 0, PI * 0.5), Vector3.ZERO, Vector3(PI * 0.5, 0, 0)][ax]
+    var dir := Vector3.ZERO
+    dir[ax] = 1.0
+    var lo := bb.position[ax]
+    var hi := bb.position[ax] + bb.size[ax]
+    var span := hi - lo
+    var thick := 0.0                                # the narrower cross-section, so a wrap hugs it
+    for i in range(3):
+        if i != ax:
+            thick = bb.size[i] if thick == 0.0 else minf(thick, bb.size[i])
+    var r := clampf(thick * 0.30, 0.035, 0.07)
+    var accent: Color = look.get("accent", Color(0.5, 0.4, 0.3))
+    var gc: Color = look.get("glow_col", Color(0, 0, 0, 0))
+    var wrap := _part(n, _cyl(r, r, clampf(span * 0.11, 0.08, 0.20), 8), _m_cloth(accent, 0.8), Vector3.ZERO, rot)
+    wrap.name = "d94_wrap"
+    var f := int(look.get("form", 0))
+    # the pennon's colour: from the key, but never the colour the piece is already tinted (a
+    # purple ribbon on a scar-purple bow is no ribbon at all)
+    var pi := (d94_hash(String(look.get("id", ""))) >> 4) % D94_PENNON.size()
+    var tc: Color = look.get("tint", Color(1, 1, 1))
+    for _t in range(D94_PENNON.size()):
+        var pc: Color = D94_PENNON[pi]
+        if float(look.get("tint_amt", 0.0)) <= 0.0 or Vector3(pc.r - tc.r, pc.g - tc.g, pc.b - tc.b).length() > 0.35:
+            break
+        pi = (pi + 1) % D94_PENNON.size()
+    if f == 1 or f == 4:
+        for k in [-1.0, 1.0]:
+            var rib := _part(n, _box(0.07, 0.045, 0.02), _m_cloth(D94_PENNON[pi], 0.7), dir * (lo - span * 0.14) + Vector3(0.05 * k, 0, 0.05 * k) * (Vector3.ONE - dir), rot)
+            rib.scale = Vector3(1, maxf(2.0, span * 0.30 / 0.045), 1)
+            rib.name = "d94_ribbon"
+    if f == 2 or f == 4:
+        var sm := StandardMaterial3D.new()
+        var sc: Color = gc if gc.a > 0.0 else Color(0.95, 0.72, 0.30)
+        sm.albedo_color = sc
+        sm.emission_enabled = true
+        sm.emission = sc
+        sm.emission_energy_multiplier = 0.6
+        sm.roughness = 0.2
+        var stone := _part(n, _sph(clampf(span * 0.03, 0.03, 0.055)), sm, dir * (hi - span * 0.03))
+        stone.name = "d94_stone"
+    if f == 3:
+        for t in [0.36, 0.68]:
+            var col := _part(n, _tor(r * 1.0, r * 1.7), _m_cloth(accent.darkened(0.45), 0.5), dir * (lo + span * t), rot)
+            col.name = "d94_collar"
 
 ## tint an instanced weapon's materials toward its piece's stuff, and give it the piece's glow
 static func tint_piece(n: Node, look: Dictionary) -> void:

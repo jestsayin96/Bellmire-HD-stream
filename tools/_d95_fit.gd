@@ -167,6 +167,7 @@ func _dress(h: Dictionary, p: Vector3) -> Node3D:
     var look := _r.weapon_look(h)
     var held := Gear.equip(m, _adv(_r.weapon_mesh(h)), "handslot.r", "weapon", float(look["scale"]), float(look["glow"]))
     Gear.tint_piece(held, look.get("piece", {}))
+    Gear.deco_piece(held, look.get("piece", {}))
     Gear.equip(m, _adv(_r.offhand_mesh(h)), _r.offhand_bone(h), "offhand")
     Gear.rank_trim(m, 0)
     var ap := Rig.find(m)

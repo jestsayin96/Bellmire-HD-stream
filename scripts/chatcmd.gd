@@ -749,7 +749,7 @@ func _ask_line(user_id: String, display: String, login: String, msg: String) -> 
     out += _hub_tail()
     out = safe_line(out)              # D70.4
     say.emit(out, _tone(out))
-    _ui_snd("help", out)
+    _ui_snd("menu_select", out)
     return _reply(user_id, display, login, out)
 
 ## the nearest command to a typo (edit distance 2 or less), or ""

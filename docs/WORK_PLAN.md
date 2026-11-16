@@ -94,8 +94,9 @@ asap. shut everyone else down, this is the focus tonight."
 
 ### D94 - THE DUPLICATES ARE CLOSED. STILL OPEN ON TWO THINGS ONLY (supervisor, 2026-11-16 02:58 CT)
 The remainder named at 02:05 came back from BOTH lanes and both halves are merged to main. The
-build bug is gone. D94 is NOT ticked, because two of the five original faults are still standing
-and one of them is Mr. E's to answer.
+build bug is gone. As of 04:58 CT every BUILDABLE fault is closed and ticked. D94 is NOT ticked
+only because the two faults still standing are BOTH DECISIONS FOR MR. E - ring/glove size at
+stream distance, and the 16-deep legendary pool. No worker is queued on D94.
 
   [x] DONE AND TICKED - THE ITEM'S OWN KEY NOW REACHES THE GEOMETRY (both halves, 16 Nov)
       ART (origin/art f349e0e): showcase.sig(key, name) returns twelve dials off the two things
@@ -133,8 +134,17 @@ and one of them is Mr. E's to answer.
       front on helmed and bare bodies, pendant still at the breastbone. The proof row moved from
       0.00% (a DUPLICATE) to 0.52% worst pair, 0.97% median: amulets TELL APART.
 
-  [ ] HALF DELIVERED / STILL OPEN - CLOAKS DIFFER BY COLOUR NOW, BUT THE TWO SIDES ARE NOT YET ONE
-      OBJECT (supervisor, 2026-11-16 03:58 CT). GAME BUILD owns the remainder; ART is finished here.
+  [x] DONE AND TICKED - THE CLOAK IS ONE OBJECT ON BOTH SIDES (both halves, 16 Nov 04:58 CT)
+      THE SHADE STEP LANDED: game build 47bc80f ports tools/art/icons.py's step into gear.gd
+      (_acc_variant factored out so the shade table and _acc_base share one copy; D94_CLOAK_SHADES,
+      clamped 0.02..0.95 in linear; cloth_i stays the dye, so the step is a value, never a hue).
+      tools/_d94d_shade.gd checks all 49 cloaks against a table written by the ART lane's own
+      icons.py: dye, variant, shade and cloth agree to 1e-4 and 49 of 49 are distinct. D94D OK over
+      ten shots, parse 0, OFFFLOOR 0/1752, TOWNWALK PASS, TWITCH_PARSE OK, delve 0 script errors.
+      The hub icon and the thing on the hero are the same object again - the condition on this fix.
+      NOTED, NOT A NEW ITEM: the walnut-black pair still reads as near one object, because a value
+      step on black is invisible. It belongs in the SHARED table (icons.py + gear.gd together) if
+      Mr. E ever calls it worth a pass; nobody is queued on it.
       DONE, BOTH SIDES: gear.gd gives a cloak one of TWELVE period dyes (D94_CLOAK_DYES - madder,
       woad, woodland green, walnut black, grey wool, undyed cream, weld ochre, wine, river teal,
       russet, scar violet, oilcloth olive), picked from the item's NAME first (D94_CLOAK_WORDS) and
@@ -143,15 +153,12 @@ and one of them is Mr. E's to answer.
       leather TONES, which had been pasted into three generators, into one icons.cloth_tone
       (origin/art a11cd62). Cloak proof row: worst pair 15.96 -> 19.11% of the hero's own pixels,
       median 29.59 -> 31.25, verdict TELLS APART, no row DUPLICATE.
-      STILL OPEN - ONE MIRROR BACK, AND IT IS THE GAME BUILD'S: the art sheet FAILED on the dye
+      WHAT WAS LEFT, AND IS NOW CLOSED: the art sheet FAILED on the dye
       alone. Fifteen cloaks shared BOTH a dye and a cut, six of them woad-and-mantle, so art added a
       SHADE STEP inside the dye, assigned by position in the colliding group the way D94b assigned
       form - it cannot collide by construction - giving 49 distinct (colour, cut) pairs out of 49.
-      gear.gd has the dye but NOT the shade step. So today the first cloak of each colliding group
-      matches its icon exactly and the other fifteen are off by a value step, never by a hue. Port
-      the shade step out of tools/art/icons.py into gear.gd's _acc_base. THE CONDITION ON THIS WHOLE
-      FIX WAS THAT THE HUB ICON AND THE THING ON THE HERO STAY ONE OBJECT, and until this lands it
-      is not met. Small. Do not re-derive the dyes and do not re-run the art fix.
+      gear.gd now HAS that shade step (see above) - closed 16 Nov 04:58 CT. Do not re-derive the
+      dyes, do not re-run the art fix and do not re-shoot the cloak row.
 
   [ ] STILL OPEN - NEEDS MR. E, NOT A BUILDER: THE LEGENDARY ACCESSORY POOL IS ONLY 16 DEEP.
       Both lanes measured this independently and both hand it back, which is the right call: the 16
@@ -222,23 +229,22 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 03:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 04:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
 down the file."
 
-  GAME BUILD   ->  *** ONE SMALL MIRROR, THEN D91 *** Your D94c landed and two of the three faults
-                   are CLOSED AND TICKED: the amulet chain shows, and cloaks take twelve dyes. Do
-                   NOT rebuild either, do not re-render D95, do not re-measure D83 or the pool.
-                   WHAT IS LEFT OF D94 FOR YOU IS ONE THING: the art lane found that the dye alone
-                   still left fifteen cloaks sharing both a dye and a cut, and added a SHADE STEP
-                   inside the dye, assigned by position in the colliding group. gear.gd does not
-                   have it, so fifteen heroes are a value step off their own icon. Port the shade
-                   step from tools/art/icons.py into gear.gd's _acc_base, re-shoot the cloak row,
-                   and the icon and the hero are one object again. Small.
-                   The legendary pool is NOT yours - both lanes measured it and it is with Mr. E.
-                   Ring and glove size at stream distance is NOT yours either - also with him.
-                   THEN: D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party
-                   in file) is the WHOLE of Phase 1's remainder and the next phase-order item.
+  GAME BUILD   ->  *** D91 STAGES 2-4. D94 IS OFF YOUR DESK. *** Your D94d landed: the cloak
+                   shade step is mirrored into gear.gd, verified 49/49 against the art lane's own
+                   table, merged and TICKED. Do NOT re-derive the dyes, re-shoot the cloak row,
+                   re-render D95 or re-measure D83. The walnut-black pair reading as near one
+                   object is NOTED under D94 and nobody is queued on it - a value step on black is
+                   invisible and the fix would belong in the shared table, which is Mr. E's call.
+                   What is left of D94 is both HIS, not yours: the ring/glove size at stream
+                   distance, and the legendary pool being 16 deep with zero boots and zero gloves.
+                   YOUR ITEM IS NOW D91 STAGES 2-4 - three-cell corridors, monsters into the
+                   avoidance, party in file. That is the WHOLE of Phase 1's remainder and the next
+                   phase-order item. Stage 1 (the shared Crowd helper, solid bushes, measured
+                   animal radii) is already in; build on it, do not rebuild it.
   ART          ->  *** YOUR D94 HALF IS FINISHED - MINIBOSSES ARE NOW LIVE FOR YOU *** Both
                    derivation faults you owned are closed: the proof sheet reports no DUPLICATE on
                    any row, and the cloak dye plus your shade step give 49 distinct (colour, cut)
@@ -274,8 +280,9 @@ breakdown is in the PHASE RC section further down. This block is just the pointe
 PHASE 1 IS DOWN TO ONE ITEM. All five lanes were merged to main again on 2026-11-16 at 02:05,
 D88 and D83 are both TICKED, and the traps turned out to be creatures hung 400 m above the floor.
 STILL OPEN AND NEXT: D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party in
-file). That is the whole of Phase 1's remainder. D94's remainder sits outside the phase ladder -
-it is Mr. E's standing order and it outranks the queue until he lifts it.
+file). That is the whole of Phase 1's remainder. D94's remainder sits outside the phase ladder,
+and as of 04:58 CT every BUILDABLE part of it is closed - what is left of D94 is two decisions in
+NEEDS MR. E. So D91 stages 2-4 is now the game build's actual next item, unblocked.
 Nothing in this plan is DONE until the supervisor ticks its checkbox. A commit on a branch is
 not a tick.
 ================================================================================

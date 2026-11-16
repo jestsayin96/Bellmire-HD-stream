@@ -175,6 +175,35 @@ cost us a corrupted run. Both MUST use docs/RUN_LOCK.txt (canonical, in R, on ma
   - Never start a second battery while any thread of a previous one may still be alive.
   - If Mr. E is at the machine, say so before launching Godot - he may be playing or streaming.
 
+#### 11.3a THE HOUR IS DIVIDED - FOUR GODOT LANES, WRITTEN WINDOWS (Mr. E, 2026-11-16 10:24, "okay
+#### so fix them"). BINDING ON EVERY LANE. Mirrored in docs/WORK_PLAN.md above TAKE THIS NEXT.
+
+The fleet grew to FOUR lanes that launch Godot and the lock became the bottleneck rather than the
+work. Observed, and it is why this exists: the CHAT BOT lane was starved of the engine for FIVE
+CONSECUTIVE SLOTS and could not tick two written items for want of a parse run; and the GAME BUILD
+twice fired on top of its own still-running session, so a 09:31 battery was alive at 10:08 and the
+firing that arrived then stood down and did nothing. Four lanes sharing one engine with no windows
+is a fleet fault, not a lane's.
+
+  :07-:40   GAME BUILD. No single Godot claim over 25 MINUTES. HARD RELEASE AT :40.
+  :45       CHAT BOT. A PROTECTED ENGINE WINDOW - short gates, a few minutes. No other lane queues
+            a battery into it.
+  :52-:07   HUD. No single claim over 15 MINUTES. HARD RELEASE AT :07. A long capture is SPLIT
+            across firings, with the running total recorded in PROGRESS.md.
+  ART takes the lock only to PROVE FIT, which is short, and fits in any gap.
+
+  - EVERY CLAIM NAMES ITS EXPECTED FINISH, in the RUN_LOCK line itself:
+      RUNNING 2026-11-16T10:07:00-06:00 (game build D91d, expected finish 10:32)
+  - A JOB TOO LONG FOR ITS WINDOW IS SPLIT ACROSS RUNS with a checkpoint commit. It is never run
+    over. A battery already in flight is NOT chopped - nobody interrupts a 20-minute soak - but no
+    lane STARTS one it cannot finish inside its own window, and the IDLE line is written the moment
+    the battery it is already in finishes.
+  - ONE DEAD GODOT POLL IS NOT A RELEASED LOCK. A lane running short batteries with gaps looks dead
+    between them and is not. Check the process more than once, and check it again immediately
+    before writing a clear line. VERIFY BEFORE YOU ACT CUTS BOTH WAYS.
+  - The supervisor reports every run who held the lock, for how long, and who overran their window.
+    TWO OVERRUNS RUNNING goes to NEEDS MR. E rather than being quietly absorbed.
+
 ### 11.4 Item reassignment (ownership only - IDs unchanged, nothing renumbered)
 
 MOVED TO DESKTOP HUD: L34 (director pane freezes), L35 (subscriber lane), L38 (ambient pane

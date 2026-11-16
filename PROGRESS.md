@@ -6519,3 +6519,9 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - NOT DONE THIS SLOT: (2) D91 from origin/d91d-wip - the 20-minute soak cannot start and finish before
   :40 after the gloves gates. Next slot: take d91d-wip (46f6b85), fix the alcove (bench/crate or the
   perpendicular _settle_pair), one 20-minute soak with a named finish.
+
+## C-67 (2026-11-16) - standing backlog item 5: miniboss feed lines, second pool (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-66 recorded; told to take the next-stalest backlog item and name it). Stalest is the miniboss feed: last touched in C-62, while bosses/potions (C-63), events (C-64), epitaphs/barks (C-65) and Phase 2 words (C-66) all came after, and each key had only 3/3/2/2 lines, so a repeat Drillmaster or Stoker reads identically.
+- data/lore_lines.json `miniboss_feed.by_key`: +151 lines across all fourteen minibosses (+2 arrive, +3-4 act, +2 broken, +2 fall each). Plain register, {name} used only on act lines. Now 291 lines, no duplicates. `_note` updated to say C-67 second pool. Nothing else changed.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical except the `_note` string (intended); text insertion only, LF kept.
+- CODE WIRING: none - same keys and shape as C-62. Pick one line at random per event from the longer lists. Still owed by code, not content: fishing.json "epic" -> "very rare" and C-55 artifact enforcement.

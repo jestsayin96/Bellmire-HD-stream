@@ -41,6 +41,8 @@ def srgb(h):
 
 def records(repo):
     d = json.load(open(os.path.join(repo, "data", "items.json"), encoding="utf-8"))
+    # D94c-2: the cloak shade step needs the whole list to assign (see icons.py)
+    IC.register_cloaks(d.get("accessories", {}))
     recs = []
     for key, e in d["accessories"].items():
         if not isinstance(e, dict):
@@ -73,12 +75,10 @@ def context(r):
         cloth = srgb(r["colour"])
         gem = tuple(min(1.0, c * 1.5 + 0.12) for c in cloth)
     else:
-        # accessories carry no colour, so the key picks a leather or cloth tone -
-        # one flat brown across 230 items reads as one item repeated
-        TONES = ((0.30, 0.25, 0.20), (0.22, 0.19, 0.17), (0.36, 0.28, 0.20),
-                 (0.24, 0.26, 0.29), (0.31, 0.22, 0.22), (0.21, 0.26, 0.23),
-                 (0.38, 0.34, 0.27), (0.26, 0.23, 0.30))
-        cloth = TONES[(h >> 8) % len(TONES)]
+        # accessories carry no colour, so the key picks a leather tone - and a
+        # CLOAK picks a dye instead (D94c). One shared rule in icons.cloth_tone,
+        # mirrored in gear.gd, or the hub icon and the hero are two objects.
+        cloth = IC.cloth_tone(r["fam"], r["key"], r["name"])
         gem = IC.STAT_GEM.get(r["stat"], (0.70, 0.70, 0.74))
     return dict(variant=IC.variant_for(r["fam"], r["key"], r["name"], h),
                 orn=orn, metal=metal, cloth=cloth, gem=gem,

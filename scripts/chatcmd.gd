@@ -57,7 +57,7 @@ func inventory(user_id: String) -> String:
     var h := roster.get_hero(user_id)
     if h.is_empty():
         return "No hero yet - type !enlist to join the valley."
-    var armour := String(Roster.ARMOUR[int(h["armour"])]["name"])
+    var armour := roster.armour_name(h)
     var worn := roster.worn_line(h)
     var title := roster.title_of(h)
     var line := "%s%s carries %s and wears %s%s  |  %s, %d oil, %d gold" % [

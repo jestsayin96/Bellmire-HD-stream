@@ -5925,3 +5925,172 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
   - SHOT renders/cycles/d88/d88_1_raised, _2_dropped, _3_other_side, _4_after (+ d88_sheet.png): floor 13 crypt, one-cell passage, grid post to post, party at it, then down with the crosser hurt (-22) and the party behind the bars.
 - tools/_l11_test.gd: its kind->part table lacked PoisonDart/SwarmTrap (it crashed on them already) - added those and Portcullis. The portcullis node also carries a "fire" meta for it.
 - Known, not fixed: raised, the grid hangs at h-0.4 as the old loop's top did, so from the RTS camera (no ceiling) its bars stand ~3.6 m above the lintel. A taller housing or a shorter grid would hide it - a look call for Mr. E. Monster PATROL wandering (monster.gd, home +/- roam) does not consult obstacles at all, gate or not - pre-existing.
+
+## D-cycle D83 - the traps are stuck: MEASURED, and it was the creatures, not the traps (game build, 2026-11-16 ~00:10 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> D83, "MEASURE FIRST"). NOT ticked (supervisor's job).
+- MEASURED FIRST with tools/_d83_test.gd (new). A REAL delve (Delve.start, real floor 4, real party); one of every
+  kind in Delve.TRAPS laid where the lead stands and SPRUNG TWICE, the second 0.2 s into the first animation.
+  The first run, against the unchanged code, settled the three candidates in the item:
+  - CANDIDATE 3 (tweens orphaning darts / spikes left up) - RULED OUT. Every kind came back to the node count
+    it started with (spike 19/19, plate 4/4, fire 9/9, dart 6/6, blade 6/6, pit 10/10, poison 6/6, swarm 9/9,
+    portcullis 30/30) and to its armed pose (spikes -0.72, plate 0.08, blade -PI/2, boards 0, jet off).
+  - CANDIDATE 1 (no nav for a mid-floor creature) - RULED OUT. _nav_reset only clears a lazy route cache; a
+    swarm sprung mid-fight is chased and killed like any other foe (12/12 in the fight trial).
+  - THE REAL FAULT, a neighbour of CANDIDATE 2: sprung while the party was SEARCHING or WALKING TO THE STAIRS
+    (where most traps are met - L46), the swarm's creatures were logged at **400.00 m above their floor**,
+    every one, every second, for 20 s. Nothing fights outside state "fight", so they stayed in Monster PATROL,
+    and PATROL set y from ground_fn - which nobody in the dungeon ever sets - falling back to a flat 0.0 in
+    WORLD space, while floors sit at DELVE_Y = -400. They hovered in the void, walked to the x/z of a goal 400 m
+    below them, and stood there for good (cave bat 0.02 m, hollowed slime 0.00 m in 20 s), and the party walked
+    off to the next floor without them. Ambush set pieces met on the walk did exactly the same (risen bones,
+    drowned slime: +400 m). 32 of 91 checks failed. The `y = 0.0` in _trap_swarm itself is floor-local and fine.
+- FIX, made impossible rather than unlikely:
+  - monster.gd `_gy`: with no ground given, a creature KEEPS ITS OWN HEIGHT (was: world 0.0). No creature anywhere
+    can be teleported to a height nobody gave it.
+  - delve.gd `_admit(mon)`: every creature added to a floor after it is built (swarm, ambush, miniboss, the
+    split/raise spawns) comes through one door: ground_fn = this floor, appended to dun.monsters once, and if the
+    party had stopped fighting ("search"/"descend") they TURN AND FIGHT it (state "fight", `rejoined` counted).
+    When it is dead they go back to what it interrupted (`_back_to`) - no second payout, no second breather.
+    _next_floor clears `_back_to`.
+  - Delve.force_trap_spot (test hook, like force_gate_spot): 0 = every ordinary trap is missed and springs.
+- RESULTS after the fix:
+  - D83_MODE=fire: D83_FIRE OK (109 checks, 0 failed). Swarm in fight/search/descend: every creature on its floor
+    (height 0.00 above it until it dies and sinks on purpose), every one fought and killed, rejoined 1 in search
+    and in descend.
+  - D83_MODE=soak (the DONE test's 10-minute headless delve, time_scale 4, every trap forced to spring):
+    16 floors, 28 traps sprung, 1 swarm, 1 mid-walk fight; 0 floors whose trap nodes drifted between build and
+    leave, 0 creatures under a floor the fight loop did not know. D83_SOAK OK.
+  - D83_MODE=shot (windowed, looked at): renders/cycles/d83/d83_1_up_through_the_grate, _2_turned_to_fight,
+    _3_back_on_the_walk - a swarm grate sprung on the walk to the stairs, bars down, a puglin and skeleton
+    minions on the stone beside it, the party turned on them; then back to "descend" with foes=0. Creature
+    heights above the floor in the last frame: -1.71..0.00 (the negative one is a corpse sinking, by design).
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1425, MON_INPROP 0/105; _twitch_parse TWITCH_PARSE OK;
+  _townwalk PASS 0/19779; _delve_test no SCRIPT ERROR; _trap_variety OK 13/13; _l11 OK; _d88 flow D88_FLOW OK 24/24.
+  _l29c: C (a set piece fires in a 180 s soak) failed once with fired=0 at floor 4 when the frame limit hit - the
+  known flake recorded in its own cycle. MEASURED so it is not taken on trust: 13 runs in all - with this change
+  2 of 9 passed (the last four run side by side: 2 of 4), on the pre-change code (delve.gd/monster.gd .bak_d83
+  swapped in) 2 of 3 passed. Floors 2-3 carry ONE prisoner between them and whether the party walks within 5 m
+  of it depends on which chest they went to first; a 180 s soak reaches floor 3-4. It is a coin toss on both
+  codes, not a regression - the check wants a longer soak or a forced walk past a set piece (not this lane's
+  call to rewrite today; flagged for the supervisor).
+- Known, not fixed: a sprung swarm grate's bars stay down (by design - it is open). The portcullis's wheel rotation
+  accumulates (cosmetic, D88's).
+## C-60 (2026-11-16) - WORK_PLAN C2 / TAKE-THIS-NEXT CONTENT row: the words Phase 2 needs (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT: C2, scoped to the ascent (D77), errand (D78), carry weight (D80), selling and the Guild vault (D81), the upgrade poll (D66). C-55 rarity ladder was already delivered as C-58, not redone. D79 stone words added too.
+- ADDED one new top-level key `phase2_words` (182 lines) in lore_lines.json: ascent, errand (collected lines keyed by town band patched 1-4 / mended 5-8 / prosperous 9-12), carry, sell, vault, stone, upgrade_poll. Plain register; no floor total stated anywhere. Pre-existing text is byte-identical (the file prefix is unchanged; the key is appended at the end).
+- CODE WIRING (for the code lane, content never edits .gd): fill tokens {name} {item} {building} {shop} {hall} {floor} {n} {m} {w} {v} {who}; errand.collected is chosen by town level band; chronicle_reached vs chronicle_came_back is the D77 payload-v5 split; stone.lords_floor is shown when a lord floor's lord is alive - the stone is NOT said to be consumed there, code decides; vault.death_kept and ascent.wipe state the loss rules plainly.
+- VALIDATION OK: json.load passes, all 22 pre-existing top-level keys equal, 182 new strings.
+
+## D-cycle D94a - every item looks like itself: the WIRING half (game build, 2026-11-16 ~01:20-01:45 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> D94 wiring, then the in-engine half of D95). NOT ticked.
+- Concurrency note: the 00:58 "UNCLAIMED" lock line was the previous game-build firing, still live on D83 with
+  uncommitted delve.gd/monster.gd. I did NOT launch Godot or touch that worktree until it committed 3125caa and
+  set IDLE (01:19); code was written in a detached side worktree (C:\hd adventure\jhd-d94) and applied after.
+- ACCESSORIES (gear.gd dress_cosmetics): built from the ITEM via Gear.acc_ctx(key), a line-for-line port of the
+  D73 icon generator's derivation (tools/art/icongen.py context + icons.py variant_for/STAT_GEM/METALS/TONES,
+  same key hash), so the hub icon and the worn piece agree: variant from the NAME first (signet, twist, vial,
+  locket, gauntlet, mitten, fur, hood...), hash only as fallback; metal + ornateness + WEAR from cost within the
+  slot (cheap = dull/rough, dear = bright/kept); gem from the stat. Five shapes each:
+  ring (plain/signet/twisted/claw-set stone/engraved, +band stones when dear), amulet (teardrop/disc/crescent/
+  vial/locket on the breastbone), gloves (gauntlet/mitten/studded/bracer/fingerless wraps), boots (shoe/ankle/
+  riding/fur-cuffed/pointed toe), cloak (hood/mantle/long sweep/fur collar/tattered + clasp; the cape takes the
+  cloak's cloth - CLOAK_COL's two entries for 49 cloaks are gone from the path).
+- NAMED WEAPONS AND ARMOUR (the 119 dead pieces in items.json equipment): h.weapon / h.armour stay the tier and
+  ALL the numbers. Gear.weapon_id / armour_id give the named piece of that tier (family-matched; armour cut by
+  calling: robe/light/heavy); stamped as h.wname / h.aname by buy_weapon, rework, buy_armour, find_gear; an old
+  save with no stamp, or a stamp that no longer fits its tier, DERIVES a stable piece from the hero's name - no
+  save breaks. Tier 0 = the calling's starting kit piece (a knight now holds a Worn Arming Sword, not nothing).
+  A piece's kind comes from its name (Cutlass->sword, Hatchet->axe, Arbalest->crossbow...), pieces sharing a
+  tier+kind take neighbouring meshes, and its MATERIAL is read from its name (ember, cold-white, scar, seam,
+  rune, dragontooth, wyrm, ash, bell-bronze, hazel, ferry...) as tint + glow (Gear.tint_piece, hero_body.gd).
+  Armour: one material across boots/shoulders/helm/bracers = the declared SET; plus a trim axis (plain/riveted/
+  banded) and helm axis (crest/nasal/plume); robes get a skirt, light cuts small shoulders + bracers.
+  Names a viewer sees: weapon_name -> the piece's name; new Roster.armour_name used by chatcmd, rts_camera,
+  snapshot_pub (hub main_hand/body/sell sheet/gear events) and the forge lines.
+- FIT, MEASURED not eyeballed: tools/_d94_bones.gd prints every KayKit bone and body-mesh AABB in rest and idle.
+  It caught that the fist is ~0.15 across (not the 0.29 the arm AABB suggests): the first ring was a hoop round
+  the waist. Feet and cloak are now laid out in MODEL axes (Gear._align undoes the bone's 45-degree rest pitch),
+  which also fixes the OLD tier boots that stood tipped off the ground.
+- TESTS: tools/_d95_fit.gd. D95_MODE=ten: ten callings, two per rarity tier, each a named weapon + armour + three
+  accessories nobody else wears, FRONT/SIDE/BACK/TOP each -> renders/cycles/d95/NN_<calling>_{1front,2side,
+  3back,4top}.png + sheet_NN_*.png + sheet_overview_front.png. D95_MODE=slots: the D94 DONE shot, six different
+  items per slot row (ring, amulet, gloves, boots, cloak, weapon, armour) -> d94_row_*.png. D95_FIT OK both
+  (0 attach failures). Looked at, four passes.
+- FIT REPORT (honest, from the renders):
+  1. RINGS are near-invisible at stream distance: correct size now (they hug the fist) but the fist is tiny and
+     usually behind a weapon grip or a glove. Needs a call: an oversize "readable" ring, or accept it.
+  2. Accessory BOOTS are suppressed whenever armour boots exist (tier >= 1) - the paladin's Long Count Boots
+     never show. Rule predates D94; Mr. E should say which wins.
+  3. All boots (armour and accessory) are still BOXES - flat on the ground now, but blocky; read as bricks at
+     close range.
+  4. HELMS from armour never show on the knight/paladin/warden bodies (KayKit helmet already on the head - by
+     design, so the armour set reads as boots/shoulders/bracers only on those bodies).
+  5. Amulet CHAIN strands are buried in the chest under the head's overhang; only the pendant reads.
+  6. Robe skirt pokes out under the back of the cape (mage, back view) - small clip.
+  7. The bow kind (KIT bow x0.62) is tiny in the hand - Ash-Bolt "Greatbow" reads as a small bow.
+  8. "Parish Iron Mace" (cleric kit) renders as a staff: arcane has no mace kind. Name and mesh disagree.
+  9. Cloak tones are all dark leather/cloth (the icon generator's eight TONES); cloaks differ by shape more than
+     colour. Cloak hood/fur collar sit behind the head and are mostly seen from side/back only.
+  10. Gloves at stream distance read as a colour change on the fist more than a shape.
+  11. The legendary accessory pool is small (16) - the ten-hero showcase had to borrow very-rare pieces.
+  12. Species faces (the brown beak-like triangle on some bodies) cut across helms - pre-existing species_look,
+     not D94, but it shows in every lineup.
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1695, MON_INPROP 0/135; _twitch_parse TWITCH_PARSE OK;
+  _delve_test no SCRIPT ERROR; _townwalk see commit. The art lane's own D95 sheets (renders/art/d95) are separate.
+
+## D-cycle D94c - D94's last three fit faults: amulet chain, cloak colour, legendary pool (game build, 2026-11-16 ~03:08-03:30 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> D94's last three fit faults, game build leads, art moves with
+  it). NOT ticked. Ring/glove stream size left with Mr. E as instructed. D95 not re-rendered (re-shot goes to d94c/).
+- FAULT 5, AMULET CHAIN BURIED - FIXED (gear.gd _build_amulet). The chain was two thin rods running straight up
+  under the chin, so the head's overhang hid them. It is now eight links a side draped wide across the upper chest
+  out to the collarbones (x +-0.235, following the chest's barrel back as it climbs), link size rides cost, with a
+  faint emission so it catches the light. Looked at: renders/cycles/d94c/d94_row_1_amulet_close.png - the V of
+  links reads from the front on helmed and bare bodies; the pendant still hangs at the breastbone.
+- FAULT 9, CLOAKS DIFFER BY SHAPE NOT COLOUR - FIXED ON THE BODY (gear.gd _acc_base). A cloak no longer takes one
+  of the eight dark leather TONES; it takes one of TWELVE period dyes, D94_CLOAK_DYES (madder red, woad blue,
+  woodland green, walnut black, grey wool, undyed cream, weld ochre, wine, river teal, russet, scar violet,
+  oilcloth olive). Picked from the NAME first via D94_CLOAK_WORDS (Red Harl -> madder, Sexton's Black -> black,
+  Woodward's Green -> green, Lockkeeper's Oilcloth -> olive, Commander/Constable/Watch -> woad...), else
+  (d94_hash(key) >> 8) % 12. Spread over the 49 cloaks: 3/7/7/3/2/4/5/3/5/4/2/4 - no dye holds more than 7.
+  cloth_i for a cloak is now the dye index, so acc_form's signature uses it; gloves and boots keep the TONES.
+  Looked at: d94_row_4_cloak.png / _close.png - teal, ochre, violet, grey side by side, plainly different capes.
+  ** ART LANE MUST MIRROR THIS ** so the hub icon and the hero stay one object: port D94_CLOAK_DYES,
+  D94_CLOAK_WORDS (first match in LIST ORDER, substring of (name + " " + key).lower()) and the hash fallback
+  into the icon/showcase derivation for slot == cloak, and use the dye index as cloth_i in the form signature.
+  The colours are linear (like TONES); Godot applies _lin().
+- FAULT 11, LEGENDARY ACCESSORY POOL 16 DEEP - NOT A BUILDER FIX, MEASURED AND HANDED BACK. The 16 are 8 rings,
+  6 cloaks, 2 amulets and ZERO boots and ZERO gloves. The cause is the C-58 banding: accessory rarity is cut by
+  ONE cost scale for every slot (441+ = legendary), but boots top out at 420 and gloves at 330, so those two slots
+  can never hold a legendary piece. The fix is data, not code - either band rarity per slot (by cost quantile
+  within the slot, as orn already does) or write dearer boots/gloves. items.json is the content writer's file
+  (lane shut down); this needs a supervisor ruling. No script reads the band in a way I could widen honestly.
+- TOOL: tools/_d95_fit.gd takes D95_OUT=<dir> so a re-shot never overwrites the D95 sheets.
+- TESTS: D95_MODE=slots D95_OUT=renders/cycles/d94c -> D95_FIT OK (14 shots, 0 attach failures).
+  _d94b_pairs.gd signatures: D94B accessories 254, 37 given a form > 0, 0 duplicates; weapons 86, 0 duplicates
+  (its renders need a window - run headless here only for the signature check).
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1510, MON_INPROP 0 of 126; _twitch_parse TWITCH_PARSE OK;
+  _townwalk in_solid 0/20823 PASS; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
+
+
+## D-cycle D94d - the cloak SHADE STEP mirrored into gear.gd, icon and hero one object again (game build, 2026-11-16 ~04:08-04:25 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> "ONE SMALL MIRROR, THEN D91"). NOT ticked. D95 not re-rendered,
+  D83 and the legendary pool not touched, ring/glove size left with Mr. E.
+- gear.gd: D94_CLOAK_SHADES (1.00, 0.72, 1.34, 0.56, 1.62, 0.88, 1.16, 0.44) and cloak_shade_i(key), ported bit for
+  bit from tools/art/icons.py register_cloaks/cloth_tone: group = cloaks sharing (dye_i, variant), keys sorted as
+  plain strings, shade_i = index in the group capped at 7; cloth = clamp(dye * shade, 0.02, 0.95) in LINEAR, then
+  _lin(). cloth_i stays the dye index (a value step, never a new hue), so acc_form's signature is unchanged. The
+  variant derivation moved into _acc_variant() so _acc_base and the shade table share one copy.
+- PROOF: tools/_d94d_shade.gd. renders/cycles/d94d/expected_cloaks.json is written by the ART LANE'S OWN CODE
+  (icons.py imported under stubbed bpy/mathutils, register_cloaks + cloth_tone over data/items.json). Godot matches
+  it for all 49 cloaks - dye, variant, shade and cloth to 1e-4. D94D cloaks 49, 15 shaded, 49 distinct (dye, cut,
+  shade). D94D OK (10 shots, 0 failures).
+- LOOKED AT: 0_woad_mantles_back.png - the six watch/wall mantles are now six bolts of woad, light to dark;
+  1_green_furs_back.png - three greens, plainly three; 3_pairs_b_back.png - Red Harl / Raider, Hedgeward / Tiler
+  each a clear value step apart.
+- HONEST FAULT, NOT MINE TO CHANGE ALONE: the walnut-black pair (Gravewyrm Hide / Sexton's Black) is still near one
+  object - 0.035 linear * 0.72 is a step nobody sees on a black. It is the shared rule's table (art owns it; the
+  game mirrors it exactly), so the fix belongs in icons.py first: e.g. a black group steps UP only (1.62, 2.4) or
+  takes a lighter base. Flagged for the supervisor/art lane.
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1752, MON_INPROP 0 of 208; _twitch_parse TWITCH_PARSE OK;
+  _townwalk in_solid 5/15840 (0.032%) raid 0 PASS, stuck_on_route 0; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
+- NEXT: D91 stages 2-4.

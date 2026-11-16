@@ -474,9 +474,17 @@ in the dungeon and in town; zero bodies inside a registered prop's footprint; an
 stuck walkers over the D44 baseline - this must not trade clipping for wedging. Shoot a six-hero
 party moving down a corridor and meeting monsters head-on, and put it in renders/cycles/d91/.
 
-- [ ] D90. THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
+- [x] D90. THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+      DONE (game build, Nov 15 ~20:55 CT): a FOURTH cause nobody had found - every towed cart was turned a
+      quarter round. Prop_Wagon's shafts run along its own +z; D16c/D53 gave it the hauler's yaw +PI/2, so it
+      rolled SIDE-ON beside its hauler with the shafts pointing into the street (the green-hooded caravan
+      master, exactly). Now: yaw = hauler heading, shaft tips at his hips and lifted to hand height, pose
+      DERIVED every drawn frame (a-b), park an explicit animated state (c), WAGON_SNAP deleted (d), shafts
+      meet his hands (e). tools/_d90_tow.gd 20-min soak: D90_TOW OK - 23 haulers (14 caravans), 829k towed
+      samples, tip deviation max 0.001 m, yaw lag max 20.1 deg (clamp 20), 0 sideways-while-moving, 0
+      crossings, 49 parks/49 re-hitches, teleport re-hitched. Shots renders/cycles/d90/. Gates green.
 
 ### D90 - THE WAGON IS STILL NOT ATTACHED (game build - Mr. E, Nov 15 16:44, THIRD TIME)
 

@@ -5646,7 +5646,7 @@ func off_wagons(p: Vector3, who: Node3D = null, extra := 0.0) -> Vector3:
 ## [centre, wagon yaw] - straight behind if that is clear, else the nearest
 ## clear bearing round them; [] = nowhere better, leave it behind them.
 const PARK_CLEAR := 0.9
-func wagon_park(who: Node3D) -> Array:
+func wagon_park(who: Node3D, max_k := 6, dist := 2.6) -> Array:
     var w = who.get("cart")
     if w == null or not is_instance_valid(w):
         return []
@@ -5658,12 +5658,17 @@ func wagon_park(who: Node3D) -> Array:
     var o := who.global_position
     var face: float = who.rotation.y
     for k in [0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6]:
+        if absi(k) > max_k:
+            continue        # D90: a towed cart parks within max_k*30 deg of straight behind - never swung through its hauler
         var a := face + float(k) * PI / 6.0          # owner faces a; wagon behind
         var back := Vector3(-sin(a), 0.0, -cos(a))
-        var yaw := a + PI * 0.5
+        # D90: Prop_Wagon's shafts run along its own +z, so a cart drawn up
+        # behind its owner, shafts toward them, has yaw a (it was a + PI/2 -
+        # side-on to them, the bug Mr. E reported three times)
+        var yaw := a
         var ax := Vector2(cos(yaw), -sin(yaw))
         var az := Vector2(sin(yaw), cos(yaw))
-        var wp := o + back * 2.6
+        var wp := o + back * dist
         var c := Vector2(wp.x, wp.z) + ax * lc.x + az * lc.y
         var ok := true
         # not over a stallholder or a guard at their post

@@ -1493,3 +1493,39 @@ chronicle lines (canon: origin first, biome second; never a floor count).
   d84_knight_night_after.png (1 s later, normal night-blue steel). This is what the bug used to freeze in place.
 - GATES: parse 0 errors; OFFFLOOR 0/1339 INPROP 0 MON_INPROP 0/123; TWITCH_PARSE OK; TOWNWALK in_solid 0/18612 raid
   0/4672 PASS; delve rc 0, 0 SCRIPT ERROR.
+
+
+## D-cycle - D90 the wagon, rigid tow, 2026-11-15 ~20:55 CT (game build)
+- Item: D90. Phase RC game-build row is D91 -> D84 -> D90: D91 is still open but stages 2-4 need laptop-owned
+  dungeon files (unchanged from D91a), D84 shipped last run, so D90 is the first RC item this lane can work.
+  Started on laptop 261a372 (origin/main merged).
+- THE CAUSE MR. E WAS LOOKING AT WAS NOT IN THE ITEM'S LIST. Prop_Wagon's shafts run along its own +z (tips z +0.87,
+  axle z -2.5, measured from the .gltf). D16c/D53 set the towed yaw to the hauler's +PI/2, so EVERY towed cart in
+  Bellmire rolled along side-on, beside its hauler, shafts pointing off into the street - "trailing behind him
+  sideways, hes not even touching it". renders/cycles/d90/ first shot this run showed it on the caravan master
+  before the fix (not kept); a_/b_caravan_moving.png are after.
+- FIX scripts/townsfolk.gd (bak_d90): the cart pose is DERIVED from the hauler every drawn frame (in _process, after
+  the facing settles, every LOD), never integrated - yaw = the hauler's heading, shaft tips 0.1 m behind his centre,
+  shafts lifted TILT 0.16 rad about the axle to hand height (wheels stay on the ground). One degree of freedom: the
+  heading trails a turn at speed/2.8 m, clamped to 0.35 rad. Parking is a state machine TOWED -> PARKING (1.2 s,
+  shafts set down, cart rolls back 0.5 m) -> PARKED -> UNPARKING (hauler turns his back to the shafts and is held
+  0.9 s while they lift), entered only after 1.5 s truly stood still. WAGON_SNAP deleted; a parked cart > 8 m from a
+  re-emerging hauler (door/respawn) is re-hitched at once; a hauler dragged > 0.3 m mid-re-hitch (raid flight)
+  re-hitches at once. The cart is posed the moment it is assigned (no spawn frame side-on).
+  scripts/town.gd (bak_d90): wagon_park(who, max_k, dist) - park yaw corrected to the bearing (was +PI/2), within
+  60 deg of behind so a cart is never swung through its owner. scripts/raids.gd (bak_d90): _step waits out tow_hold.
+  scripts/valley.gd: traveller carts spawn behind, not ahead.
+- TEST tools/_d90_tow.gd (headless --fixed-fps 60, 1200 s sim, raids and day running, caravans forced): D90_TOW OK -
+  23 haulers incl. 14 caravan masters, 829,440 towed samples / 876,782 total, shaft-tip distance deviation max
+  0.001 m (limit 0.15), relative yaw max 20.1 deg (clamp 20.05), 0 frames sideways while moving, 0 frames bed ahead
+  of the hauler, 49 parks / 49 re-hitches, 25 m teleport re-hitched within 3 frames. Earlier runs this cycle failed
+  and drove the fixes: parks swung through the hauler (park bearings limited), a re-hitch dragged by a raid flight
+  (24 frames; raids now wait), a spawn frame side-on (setter).
+- LOOK tools/_d90_shot.gd (windowed 1080p) -> renders/cycles/d90/a_caravan_moving, b_caravan_moving2 (caravan master
+  walking, shafts in his hands, 0.11 m), c_caravan_stopped (drawn up behind him at the market), f_carter_stopped.
+  The re-hitch shot did not come inside the 6-min window (the caravan trades then leaves later) - the soak covers it.
+- GATES: parse 0 errors; OFFFLOOR 0/708 INPROP 0 MON_INPROP 0/76; TWITCH_PARSE OK; TOWNWALK in_solid 0/20233 raid
+  0/2477 PASS (stuck 1); delve ENDED 4 survivors, 0 SCRIPT ERROR.
+- NOTE: the shafts are ~1.2 m apart and the hauler stands between them; his arms are the stock walk swing, not a
+  grip pose - the tips reach his hands at the hips in the shots, but a dedicated "pulling" arm pose would be art.
+

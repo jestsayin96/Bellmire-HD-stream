@@ -1,0 +1,658 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D90 soak 1200 s sim
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+D90 t=59 s haulers=7 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=6 unparks=6
+FEED Nessa Bramble settles in Bellmire, looking for work.
+FEED Harl Quarryman settles in Bellmire, looking for work.
+D90 t=119 s haulers=8 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=7 unparks=7
+FEED Hilda Ashwood settles in Bellmire, looking for work.
+D90 t=179 s haulers=8 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=8 unparks=8
+FEED Aldric Ashwood settles in Bellmire, looking for work.
+D90 t=239 s haulers=9 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=10 unparks=10
+MUSTER timed out: dists=[75, 14, 78, 54, 8, 32, 8, 12] vis=true stay=false route=59 inside=false
+D90 t=299 s haulers=9 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=12 unparks=11
+FEED Ysolde Hollow settles in Bellmire, looking for work.
+FEED Osric the Younger and 5 others descend on the guild's coin, and the guild wants a return.
+FEED They carry 18 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 puglin, 1 giant rat.
+FEED The oldest stone here is newer than the one beside it.
+FEED Osric the Younger rolls a 20 - and the puglin is gone.
+FEED Hilda the Younger searches (Investigation 12) and turns up 11 gold on floor 1.
+FEED Floor 1 cleared, and the Chronicle spells the name right.
+FEED Hilda the Younger spots a blade trap (Perception 24 vs DC 10) and disarms it with thieves' tools (19).
+FEED Hilda the Younger searches the chest - Successfully found loot!! 14 gold (Investigation 14 vs DC 10).
+FEED Osric the Younger and 5 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 bog frog, 1 skeleton minion, 1 cave bat.
+FEED Dunn the Younger, Hilda of the Ford descend down where the mountain starts under the meadow.
+FEED They carry 6 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave bat, 1 puglin.
+FEED A mourner's bench, worn shiny, facing the wrong wall.
+FEED Dunn the Younger shapes frost and the floor finishes the shape (7 vs DC 10).
+FEED Dunn the Younger casts Bolt at giant rat.
+FEED Hilda of the Ford casts Bolt at giant rat.
+FEED Hilda of the Ford searches (Investigation 18) and turns up 13 gold on floor 1.
+FEED Floor 1 stands down. Reload, rebind, relight.
+FEED Hilda of the Ford finds a vial of Orchard Water.
+FEED The slime divides.
+FEED Hilda of the Ford spots a blade trap (Perception 18 vs DC 10) and steps round it.
+FEED Hilda the Younger searches (Investigation 23) and turns up 29 gold on floor 2.
+FEED The ground is quiet underfoot, and honest.
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED Hilda the Younger searches the chest - ...no loot... (Investigation 8 vs DC 11).
+D90 t=359 s haulers=10 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=15 unparks=14
+FEED Osric the Younger and 5 others take a breather, and press on deeper.
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+FEED Hilda the Younger cracks the chain off a captive - 42 gold passes to the party, split 6 ways.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 cave spider, 2 slimes.
+FEED Hilda the Younger spots a pressure plate (Perception 20 vs DC 11) and disarms it with thieves' tools (17).
+FEED Dunn the Younger steps on a plate - a stone from the ceiling! DEX 4 vs DC 11, 11 damage.
+FEED Dunn the Younger casts Frost at cave spider.
+FEED Hilda of the Ford's chain is swallowed whole by the scar (10 vs DC 11).
+FEED Dunn the Younger casts frost and the scar spends it elsewhere (10 vs DC 11).
+FEED Dunn the Younger casts Bolt at slime.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 skeleton minion, 1 bone bowman, 1 drowned slime.
+FEED Hilda of the Ford casts Fire at slime.
+FEED The slime divides.
+FEED Dunn the Younger casts Bolt at slimeling.
+FEED Hilda of the Ford casts Bolt at slimeling.
+FEED Dunn Rivers settles in Bellmire, looking for work.
+FEED The drowned slime divides.
+FEED Hilda of the Ford casts Fire at slime.
+FEED Hilda the Younger searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED Floor 3 done, and nothing below is pretending otherwise.
+FEED Hilda the Younger finds a vial of Bitterleaf Tincture.
+FEED Dunn the Younger casts Bolt at slime.
+FEED Dunn the Younger casts Frost at slimeling.
+FEED Hilda of the Ford searches (Investigation 13) and turns up 23 gold on floor 2.
+FEED Floor 2 breathes easy. Briefly.
+FEED Hilda of the Ford finds a vial of Woundwort Water.
+FEED Hilda the Younger searches the chest - Successfully found loot!! 39 gold (Investigation 13 vs DC 11).
+FEED Osric the Younger and 5 others take a breather, and press on deeper.
+FEED Osric the Younger spots a pressure plate (Perception 19 vs DC 11) and disarms it with thieves' tools (16).
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED Osric the Younger spots a fire grate (Perception 11 vs DC 11) and disarms it with thieves' tools (11).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned skeleton minion, 1 drowned slime, 1 drowned risen bones, 2 cave bats.
+FEED The oil is running low.
+FEED Petra Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED Osric the Younger fumbles the thieves' tools on a dart trap (7 vs DC 12) -
+FEED Osric the Younger steps on a loose flagstone - darts! DEX 11 vs DC 12, 9 damage.
+D90 t=419 s haulers=10 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=17 unparks=17
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 4 slimes.
+FEED The oil is running low.
+FEED The drowned slime divides.
+FEED Dunn the Younger spots a fire grate (Perception 15 vs DC 11) and steps round it.
+FEED Hilda the Younger searches (Investigation 12) and turns up 44 gold on floor 4.
+FEED Finished. Bind the wounds in the order they were earned.
+FEED Hilda the Younger finds a vial of Mirethistle Tincture.
+FEED Dunn the Younger's frost comes out sideways - wild magic (1 vs DC 11).
+FEED The slime divides.
+FEED Hilda the Younger searches the chest - Successfully found loot!! 47 gold (Investigation 20 vs DC 12).
+FEED Hilda of the Ford's chain goes wrong - the scar answers (10 vs DC 11).
+FEED A grate shifts, and 1 bone bowman, 1 slime is already upon them.
+FEED Dunn the Younger is badly hurt and breaks off, making for the way up.
+FEED Osric the Younger and 5 others take a breather, and press on deeper.
+FEED Ysolde of the Ford settles in Bellmire, looking for work.
+FEED Hilda of the Ford casts Chain Bolt at slime.
+FEED 3 bandits are riding on the west road!
+FEED Initiative: the raiders 2, the watch 14 - the watch is ready for them.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 3.
+FEED Dunn the Younger, Hilda of the Ford get out alive, and come home with what they carried.
+FEED Dunn the Younger, Hilda of the Ford come home to Bellmire with 36 gold, 1 ore, 1 stone, 2 pieces of salvaged gear and 2 potions. 15 kills between them.
+FEED Hilda of the Ford is fitted with leather. (+10 hp) Haggled 10% off (12).
+FEED Dunn the Younger, Hilda of the Ford descend below Bellmire, where the meadow turns to mountain.
+FEED They carry 6 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 skeleton minion.
+FEED Fresh flowers on a grave a hundred years older than flowers.
+FEED Osric the Younger spots a spike trap (Perception 15 vs DC 12) and disarms it with thieves' tools (19).
+FEED Dunn the Younger starts frost, loses the thread, and finishes it badly (1 vs DC 10).
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 46 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone bowman, 1 skeleton warrior, 2 drowned bone sentinels, 1 hollowed skeleton mage.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Hilda of the Ford casts Bolt at slime.
+FEED Dunn the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED Hilda of the Ford casts Chain Bolt at slime.
+FEED Dunn the Younger casts Bolt at slimeling.
+FEED Hilda of the Ford searches (Investigation 21) and turns up 14 gold on floor 1.
+FEED Floor 1 silent. Nobody is missing - yet.
+FEED Corvin Thatcher spots a spike trap (Perception 22 vs DC 12) and steps round it.
+FEED Hilda of the Ford spots a blade trap (Perception 16 vs DC 10) and steps round it.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED The new frame slips. The townsfolk will try again. (8 vs DC 12)
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED Hilda the Younger rolls a 20 - and the skeleton warrior is gone.
+FEED Cold fire rolls off the Hollow King.
+FEED Petra Fenwick rolls a 20 - The Hollow King reels.
+FEED The Hollow King shifts, and the fight changes with it.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Hollow King falls to Corvin Thatcher.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 6 ways - 22 gold each to Osric the Younger, Petra Fenwick, Hilda the Younger, Rolf Thatcher, Corvin Thatcher, Tove Rivers.
+D90 t=479 s haulers=11 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=18 unparks=18
+FEED The townsfolk raise the ruin again.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 cave spider, 1 bog frog, 1 slime.
+FEED Hilda the Younger searches the chest - ...no loot... (Investigation 8 vs DC 12).
+FEED Osric the Younger and 5 others take a breather, and press on deeper.
+FEED Dunn the Younger casts Frost at cave spider.
+FEED Hilda of the Ford's fire goes out sideways into the stone (1 vs DC 11).
+FEED Dunn the Younger casts Frost at bog frog.
+FEED Hilda of the Ford casts Chain Bolt at bog frog.
+FEED Osric the Younger steps on a loose flagstone - green darts! DEX 17 vs DC 12, 2 damage (halved).
+FEED Dunn the Younger casts Bolt at giant rat.
+FEED Rask the Younger settles in Bellmire, looking for work.
+FEED Dunn the Younger casts Bolt at slime.
+FEED Hilda of the Ford casts Fire at slime.
+FEED Dunn the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED Hilda of the Ford casts Bolt at slimeling.
+FEED Dunn the Younger's frost lands on the wrong word entirely (8 vs DC 11).
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 4; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 drowned marrow hewers, 2 drowned blood wasps, 1 skeleton warrior, 1 gravecaller.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Hilda of the Ford searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Floor 2 finished, and the architect takes a note.
+FEED Osric the Younger steps on a loose flagstone - green darts! DEX 8 vs DC 13, 7 damage.
+FEED Osric the Younger is venomed - the poison works over the next few seconds.
+FEED Osric the Younger is badly hurt and breaks off, making for the way up.
+FEED Hilda the Younger drinks off what is on them.
+FEED Hilda the Younger drinks Bitterleaf Tincture.
+FEED Osric the Younger should be dead - and stands back up (17).
+FEED A gravecaller raises the dead on floor 6.
+FEED Hilda of the Ford searches the chest - ...no loot... (Investigation 10 vs DC 11).
+FEED Corvin Thatcher the monk falls on floor 6 to the dark below. Level 2, 4 kills. !reroll to rise again.
+FEED Tove Rivers should be dead - and stands back up (13).
+FEED Tove Rivers is badly hurt and breaks off, making for the way up.
+FEED Tove Rivers the rogue falls on floor 6 to the dark below. Level 3, 7 kills. !reroll to rise again.
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED Hilda of the Ford spots a pressure plate (Perception 15 vs DC 11) and steps round it.
+FEED Rolf Thatcher is badly hurt and breaks off, making for the way up.
+FEED Hilda the Younger is badly hurt and breaks off, making for the way up.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Hilda of the Ford cracks the chain off a captive - 42 gold passes to the party, split 2 ways.
+FEED Osric the Younger and 5 others get out alive, and come home with what they carried.
+FEED Osric the Younger and 3 others come home to Bellmire with 351 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 4 potions. 34 kills between them.
+FEED Osric the Younger is fitted with leather. (+10 hp)
+FEED Petra Fenwick is fitted with leather. (+10 hp)
+FEED Hilda the Younger is fitted with leather. (+10 hp) Haggled 19% off (21).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 2 puglins, 1 cave bat.
+FEED The oil is running low.
+FEED The air changes hands here - theirs for the scar's.
+FEED They carry 13 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 cave bat, 1 giant rat.
+FEED Every niche has a name scratched out of it.
+D90 t=539 s haulers=11 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=19 unparks=19
+FEED Dunn the Younger's bolt is swallowed whole by the scar (7 vs DC 11).
+FEED The slime divides.
+FEED Osric the Younger turns on the wounded slimeling to finish it.
+FEED Petra Fenwick turns on the wounded slimeling to finish it.
+FEED Hilda the Younger turns on the wounded slimeling to finish it.
+FEED Rolf Thatcher turns on the wounded slimeling to finish it.
+FEED Hilda the Younger searches (Investigation 5) and turns up 6 gold on floor 1.
+FEED Floor 1 is swept, chalked, and kept.
+FEED Hilda the Younger spots a blade trap (Perception 18 vs DC 10) and steps round it.
+FEED Hilda of the Ford searches (Investigation 23) and turns up 44 gold on floor 3.
+FEED Cleared to the last stone. Chalk the way back.
+FEED Hilda the Younger searches the chest - Successfully found loot!! 25 gold (Investigation 16 vs DC 10).
+FEED Osric the Younger and 3 others take a breather, and press on deeper.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 13, the watch 15 - the watch is ready for them.
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+FEED Harl Hollow settles in Bellmire, looking for work.
+FEED Dunn the Younger spots a pressure plate (Perception 13 vs DC 11) and steps round it.
+FEED Hilda of the Ford spots a fire grate (Perception 20 vs DC 11) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 cave spider, 1 hollowed puglin, 1 puglin.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned cave bats, 1 drowned risen bones, 2 giant rats.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED The slime divides.
+FEED Dunn the Younger steps on a loose flagstone - darts! DEX 2 vs DC 12, 11 damage.
+FEED Hilda the Younger searches (Investigation 18) and turns up 26 gold on floor 2.
+FEED Clear. The draught is honest again.
+FEED Hilda the Younger finds a vial of Gatewater.
+FEED Dunn the Younger works frost and the room takes the benefit (9 vs DC 12).
+FEED Hilda of the Ford shapes fire and the scar unshapes it (7 vs DC 12).
+FEED Dunn the Younger breaks off to mend Dunn the Younger, who is nearly down.
+FEED Dunn the Younger should be dead - and stands back up (17).
+FEED Osric the Younger and 3 others take a breather, and press on deeper.
+FEED Hilda the Younger steps on a plate - darts! DEX 12 vs DC 11, 3 damage (halved).
+FEED Hilda of the Ford is badly hurt and breaks off, making for the way up.
+D90 t=599 s haulers=12 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=24 unparks=23
+D90 teleported Ysolde Hollow +25 m; gap 3 frames later 2.59 m (state 0)
+FEED The attack is driven off. The gates hold.
+FEED Hilda of the Ford should be dead - and stands back up (15).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Dunn the Younger, Hilda of the Ford get out alive, and come home with what they carried.
+FEED Dunn the Younger, Hilda of the Ford come home to Bellmire with 75 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 3 potions. 21 kills between them.
+FEED Hilda of the Ford is fitted with chainmail. (+26 hp)
+FEED Somewhere below, a door we did not open opens.
+FEED They carry 7 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 1 bog frog, 1 slime.
+FEED The dead here were laid out in rows, and the rows were counted.
+FEED Dunn the Younger casts Frost at puglin.
+FEED Hilda of the Ford's bolt splits in two, and neither half works (7 vs DC 10).
+FEED Dunn the Younger's frost goes wrong - the scar answers (8 vs DC 10).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 2 slimes, 1 hollowed slime.
+FEED Mother Silk is down here. Every thread in the dark is hers.
+FEED The threads across the doorway are new.
+FEED Dunn the Younger casts Bolt at bog frog.
+FEED The slime divides.
+FEED Hilda of the Ford searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Clear. Count the flasks; the count tells the same lie it always does.
+FEED The slime divides.
+FEED Spiders drop from Mother Silk's threads.
+FEED Mother Silk shifts, and the fight changes with it.
+FEED Mother Silk is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Hilda of the Ford spots a blade trap (Perception 11 vs DC 10) and steps round it.
+FEED Osric the Younger is badly hurt and breaks off, making for the way up.
+FEED Mother Silk falls to Hilda the Younger.
+FEED Osric the Younger the rogue falls on floor 3 to the dark below. Level 3, 8 kills. !reroll to rise again.
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED Hilda the Younger searches (Investigation 15) and turns up 36 gold on floor 3.
+FEED Swept, and the sweepings are worth the delve.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 puglin, 2 bog frogs.
+FEED Dunn the Younger rolls a 20 for initiative and is moving before anything else.
+FEED Osric the Younger and 3 others take a breather, and press on deeper.
+FEED Petra Fenwick steps on a plate - a stone from the ceiling! DEX 15 vs DC 11, 2 damage (halved).
+FEED Dunn the Younger casts Bolt at giant rat.
+FEED Hilda of the Ford casts Fire at giant rat.
+FEED Dunn the Younger's frost spends itself on the stone instead (8 vs DC 11).
+FEED Dunn the Younger casts Bolt at bog frog.
+FEED Hilda of the Ford casts Bolt at bog frog.
+FEED Hilda of the Ford searches (Investigation 23) and turns up 29 gold on floor 2.
+FEED Floor 2 holds. Measure the grain, mend the mail.
+D90 t=659 s haulers=13 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=25 unparks=24
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 hollowed slimes, 2 puglins, 1 hollowed cave spider.
+FEED Petra Fenwick steps on a loose flagstone - darts! DEX 12 vs DC 12, 6 damage (halved).
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED The hollowed slime divides.
+FEED Rolf Thatcher turns on the wounded hollowed slimeling to finish it.
+FEED Hilda the Younger searches (Investigation 22) and turns up 57 gold on floor 4.
+FEED Held. The gap kept, the party kept with it.
+FEED Hilda of the Ford spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED Hilda the Younger searches the chest - ...no loot... (Investigation 8 vs DC 12).
+FEED Osric the Younger and 3 others take a breather, and press on deeper.
+FEED Hilda the Younger steps on a spiked plate - spikes! DEX 16 vs DC 12, 1 damage (halved).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 slime, 1 hollowed puglin, 1 cave bat.
+FEED Dunn the Younger spots a fire grate (Perception 22 vs DC 11) and steps round it.
+FEED Dunn the Younger casts Bolt at cave bat.
+FEED Dunn the Younger casts Frost at slime.
+FEED Hilda of the Ford calls chain down and the scar answers up (7 vs DC 11).
+FEED The slime divides.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 2 bone sentinels, 1 skeleton warrior, 1 bone bowman.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED The oil is running low.
+FEED Hilda of the Ford casts Fire at slimeling.
+FEED Dunn the Younger casts Frost at slimeling.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Dunn the Younger's bolt lands somewhere between a spell and a hiccup (7 vs DC 11).
+FEED Hilda of the Ford casts Bolt at puglin.
+FEED Dunn the Younger casts Frost at puglin.
+FEED Rolf Thatcher spots a spike trap (Perception 17 vs DC 12) and steps round it.
+FEED Hilda of the Ford searches (Investigation 5) and turns up 19 gold on floor 3.
+FEED Floor 3 is theirs, and it cost.
+FEED Hilda of the Ford steps on a plate - a stone from the ceiling! DEX 6 vs DC 11, 11 damage.
+D90 t=719 s haulers=13 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=27 unparks=27
+FEED Bats pour out of the dark around Nightwing.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Dunn the Younger, Hilda of the Ford take a breather, and press on deeper.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Hilda the Younger is badly hurt and breaks off, making for the way up.
+FEED Nightwing falls to Petra Fenwick.
+FEED Hilda of the Ford touches the altar - a curse. Something older than the floor takes a bite.
+FEED Hilda the Younger searches (Investigation 8) and turns up 44 gold on floor 5.
+FEED Floor 5 is behind them. So is the way out.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 puglins, 1 drowned slime, 1 slime, 1 cave spider.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED The oil is running low.
+FEED Dunn the Younger reaches for frost and the scar hands back something else (7 vs DC 12).
+FEED Dunn the Younger is badly hurt and breaks off, making for the way up.
+FEED Hilda of the Ford turns on the wounded puglin to finish it.
+FEED Dunn the Younger the sage falls on floor 4 to the dark below. Level 4, 25 kills. !reroll to rise again.
+FEED Hilda of the Ford's bolt comes out sideways - wild magic (10 vs DC 12).
+FEED Rask Fenwick settles in Bellmire, looking for work.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Dunn the Younger, Hilda of the Ford get out alive, and come home with what they carried.
+FEED Hilda of the Ford comes home to Bellmire with 60 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 16 kills between them.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Petra Fenwick and 2 others come home to Bellmire with 194 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 3 potions. 39 kills between them.
+FEED Rolf Thatcher takes up a plain steel axe. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 15% off (17).
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 18, the watch 21 - the watch is ready for them.
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 21)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Cort Ashwood is killed by a bandit.
+FEED Harl Thatcher goes down and claws back up. (CON save 19)
+FEED Harl Thatcher is knocked senseless, but lives. The guild's grace - once.
+FEED A building is burning!
+D90 t=779 s haulers=15 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=30 unparks=29
+FEED The attack is driven off. The gates hold.
+FEED Harl Thatcher comes round.
+FEED The townsfolk raise the ruin again.
+D90 t=839 s haulers=15 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=32 unparks=31
+FEED Harl Hollow settles in Bellmire, looking for work.
+FEED Hilda of the Ford and 3 others descend past the memorial, and do not stop reading it.
+FEED They carry 17 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 slime.
+FEED Footprints cross the dust, and every pair is bare.
+FEED Hilda of the Ford calls bolt down and the scar answers up (8 vs DC 10).
+FEED Hilda of the Ford casts Bolt at giant rat.
+FEED Hilda of the Ford casts Fire at slime.
+FEED Petra Fenwick rolls a 20 - and the slime is gone.
+FEED The slime divides.
+FEED Hilda the Younger turns on the wounded slimeling to finish it.
+FEED Rolf Thatcher turns on the wounded slimeling to finish it.
+FEED Hilda the Younger searches (Investigation 25) and turns up 14 gold on floor 1.
+FEED Quiet enough to hear the wall drip again.
+FEED Hilda the Younger finds a vial of Steadynerve.
+FEED Hilda the Younger spots a blade trap (Perception 22 vs DC 10) and disarms it with thieves' tools (17).
+FEED Hilda of the Ford and 3 others take a breather, and press on deeper.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 19, the watch 7 - the raiders strike first.
+D90 t=899 s haulers=16 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=33 unparks=33
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 puglin, 1 bog frog, 1 skeleton minion, 1 giant rat.
+FEED Hilda of the Ford shapes bolt and the scar unshapes it (7 vs DC 11).
+FEED Hilda the Younger rolls a 20 - and the giant rat is gone.
+FEED Hilda the Younger finds a man in a cage still alive. He slips 42 gold to them on the way out, 4 ways to split it.
+FEED Hilda Bramble settles in Bellmire, looking for work.
+FEED Rolf Thatcher rolls a 20 - and the puglin is gone.
+FEED Hilda the Younger searches (Investigation 14) and turns up 23 gold on floor 2.
+FEED Floor 2 is swept, chalked, and kept.
+FEED Hilda the Younger finds a vial of Stillblood Tincture.
+FEED Hilda the Younger searches the chest - ...no loot... (Investigation 8 vs DC 11).
+FEED Hilda of the Ford and 3 others take a breather, and press on deeper.
+FEED Petra Fenwick spots a pressure plate (Perception 15 vs DC 11) and steps round it.
+FEED Aldric Ashwood goes down and claws back up. (CON save 16)
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton rogue.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 hollowed puglin, 1 cave bat, 1 hollowed bone bowman.
+FEED Petra Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED The attack is driven off. The gates hold.
+FEED Hilda of the Ford casts Fire at hollowed puglin.
+D90 t=959 s haulers=19 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=38 unparks=36
+FEED Hilda of the Ford casts Bolt at puglin.
+FEED Hilda the Younger searches (Investigation 13) and turns up 34 gold on floor 3.
+FEED Floor 3 cleared - the guild will want its cut.
+FEED Hilda of the Ford and 3 others take a breather, and press on deeper.
+FEED Petra Fenwick spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED Petra Fenwick spots a fire grate (Perception 11 vs DC 11) and steps round it.
+FEED Ingrid Quarryman settles in Bellmire, looking for work.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned cave spider, 4 hollowed giant rats.
+FEED Petra Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED Hilda the Younger searches (Investigation 14) and turns up 46 gold on floor 4.
+FEED Finished. Bind the wounds in the order they were earned.
+FEED Hilda the Younger finds a vial of The Drover's Brace.
+FEED Hilda the Younger cannot get to the chest and leaves it.
+FEED Hilda the Younger cannot get to the chest and leaves it.
+FEED Hilda of the Ford and 3 others take a breather, and press on deeper.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 10, the watch 9 - the raiders strike first.
+D90 t=1019 s haulers=19 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=40 unparks=39
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone bowman, 1 bone sentinel, 2 skeleton warriors, 1 drowned bone sentinel.
+FEED The Rattling Host, Unburdened rises. Sheds its dead early and often - a thinning crowd that will not thin.
+FEED The guild has put down The Rattling Host before. Not this one.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Hilda of the Ford rolls a 20 for initiative and is moving before anything else.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Hilda of the Ford speaks chain. The scar spells it backwards (6 vs DC 12).
+FEED A building is burning!
+FEED The Rattling Host, Unburdened shifts, and the fight changes with it.
+FEED Petra Fenwick rolls a 20 - The Rattling Host, Unburdened reels.
+FEED Dead men drop out of the harness.
+FEED Hilda of the Ford casts Bolt at The Rattling Host, Unburdened.
+FEED The Rattling Host, Unburdened is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host, Unburdened falls to Petra Fenwick.
+FEED Petra Fenwick is badly hurt and breaks off, making for the way up.
+FEED Hilda of the Ford casts Chain Bolt at bone sentinel.
+FEED Maela Rivers settles in Bellmire, looking for work.
+FEED A building is burning!
+FEED Hilda of the Ford turns on the wounded risen bones to finish it.
+FEED The townsfolk raise the ruin again.
+FEED The attack is driven off. The gates hold.
+FEED Hilda of the Ford casts Bolt at risen bones.
+FEED Hilda the Younger searches (Investigation 10) and turns up 44 gold on floor 5.
+FEED Clear. The lamps stop shaking first, then the hands.
+FEED Hilda the Younger searches the chest - ...no loot... (Investigation 8 vs DC 12).
+FEED Hilda of the Ford and 3 others take a breather, and press on deeper.
+FEED Rolf Thatcher spots a spike trap (Perception 15 vs DC 12) and steps round it.
+FEED Rolf Thatcher spots a poison-dart trap (Perception 13 vs DC 12) and steps round it.
+FEED The new frame slips. The townsfolk will try again. (7 vs DC 12)
+D90 t=1079 s haulers=20 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=42 unparks=42
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 2; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 emberbound pit viper, 2 marrow hewers, 2 gorged blood wasps, 1 drowned skeleton rogue.
+FEED The oil is running low.
+FEED Rolf Thatcher steps on a loose flagstone - green darts! DEX 16 vs DC 13, 3 damage (halved).
+FEED Rolf Thatcher rolls a 20 - and the marrow hewer is gone.
+FEED Hilda of the Ford's bolt lands on the wrong foe - the scar edits it (9 vs DC 13).
+FEED Hilda the Younger is badly hurt and breaks off, making for the way up.
+FEED Rolf Thatcher turns on the wounded gorged blood wasp to finish it.
+FEED Hilda the Younger the rogue falls on floor 6 to the dark below. Level 6, 37 kills. !reroll to rise again.
+FEED Hilda of the Ford searches (Investigation 24) and turns up 87 gold on floor 6.
+FEED Floor 6 lies still, as if ashamed.
+FEED Hilda of the Ford prises a fine steel wand from the dead on floor 6.
+FEED Hilda of the Ford finds a vial of Quarrymend.
+FEED Hilda of the Ford and 3 others take a breather, and press on deeper.
+FEED Hilda of the Ford spots a spike trap (Perception 22 vs DC 13) and steps round it.
+FEED Ysolde Fenwick settles in Bellmire, looking for work.
+MUSTER timed out: dists=[151, 195] vis=true stay=false route=89 inside=false
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 0; lights 50 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED Floor 7 - a workshop, remade as a workshop: 4 gorged puglins, 2 puglins.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Rolf Thatcher steps on a grated floor - the bars drop open - something is coming up through them! DEX 5 vs DC 13, 4 damage.
+FEED The grate pops - 1 wraithtouched marrow hewer, 1 wraithtouched puglin comes up through it.
+D90 t=1139 s haulers=20 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=44 unparks=43
+FEED Hilda of the Ford reaches for bolt; the scar reaches back (8 vs DC 13).
+FEED Rolf Thatcher the barbarian falls on floor 7 to the dark below. Level 5, 26 kills. !reroll to rise again.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 7.
+FEED Hilda of the Ford steps on a spiked plate - spikes! DEX 3 vs DC 13, 10 damage.
+FEED Hilda of the Ford and 3 others get out alive, and come home with what they carried.
+FEED Hilda of the Ford, Petra Fenwick come home to Bellmire with 248 gold, 12 ore, 9 stone, 5 pieces of salvaged gear and 6 potions. 35 kills between them.
+FEED Ingrid the Younger settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 6, the watch 5 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 2 riders.
+FEED Petra Fenwick rolls a 20 - and skeleton warrior falls.
+FEED Hilda of the Ford goes down and claws back up. (CON save 19)
+FEED Hilda of the Ford the mage is cut down defending Bellmire by skeleton rogue. Level 5, 36 kills. !reroll to rise again.
+FEED The attack is driven off. The gates hold.
+FEED The townsfolk raise the ruin again.
+D90 t=1199 s haulers=22 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=45 unparks=45
+D90 haulers=22 caravans=13 samples towed=761160 all=802335 dev_max=0.000 m yaw_max=20.1 deg side=0 cross=0 parks=45 unparks=45 tp=true
+D90 haulers seen: ["Ysolde Hollow(carter)", "Osric Quarryman(carter)", "Dunn Quarryman(carter)", "Petra Fenwick(pedlar)", "Caravan master(caravan)", "Caravan master(caravan)", "Edda the Younger(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Cort the Younger(carter)", "Caravan master(caravan)", "Talen Rivers(carter)", "Caravan master(caravan)", "Wren Fenwick(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Ingrid of the Ford(carter)"]
+D90_TOW OK

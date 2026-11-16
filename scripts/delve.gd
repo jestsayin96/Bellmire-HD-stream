@@ -121,6 +121,7 @@ func _nav_reset() -> void:
 
 func _next_floor() -> void:
 	_nav_reset()
+	_back_to = ""                  # D83: whatever pulled them back into a fight was on the last floor
 	floor_no += 1
 	if dun:
 		dun.queue_free()
@@ -262,7 +263,7 @@ func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
 		var off := Vector3(cos(float(i) * 2.1), 0.0, sin(float(i) * 2.1)) * 1.3 if i > 0 else Vector3.ZERO
 		m.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
 		dun.add_child(m)
-		(dun.monsters as Array).append(m)
+		_admit(m)
 		# scale to this floor the same way _next_floor does for ordinary spawns
 		m.max_hp = (14.0 + float(floor_no) * 6.0) * float(m.def.get("hp", 1.0))
 		m.hp = m.max_hp
@@ -376,7 +377,7 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	m.roam = 2.0
 	m.position = Vector3(pos.x, 0.0, pos.z)
 	dun.add_child(m)
-	(dun.monsters as Array).append(m)
+	_admit(m)
 	# scale to this floor exactly like _next_floor does for ordinary spawns, then
 	# the mini-boss multipliers on top
 	m.max_hp = (14.0 + float(floor_no) * 6.0) * float(def.get("hp", 1.0)) * MINIBOSS_HP_MULT
@@ -596,7 +597,7 @@ func _blocked_cells() -> Dictionary:
 	for c: Vector2i in cells:
 		var w := _cell_world(c) - dun.global_position
 		for o in dun.info.get("obstacles", []):
-			if Vector2(w.x - (o[0] as Vector3).x, w.z - (o[0] as Vector3).z).length() < float(o[1]) + 0.45:
+			if FloorGen.obst_gap(o, w.x, w.z) < 0.45:
 				_blocked[c] = true
 				break
 	return _blocked
@@ -645,8 +646,7 @@ func _standable(p: Vector3) -> bool:
 			return false
 	var o0 := dun.global_position
 	for o in dun.info.get("obstacles", []):
-		var oc: Vector3 = (o[0] as Vector3) + o0
-		if Vector2(p.x - oc.x, p.z - oc.z).length() < float(o[1]) + 0.5:
+		if FloorGen.obst_gap(o, p.x - o0.x, p.z - o0.z) < 0.5:
 			return false
 	return true
 
@@ -703,6 +703,9 @@ func _bfs_on(a: Vector2i, b: Vector2i, avoid: Dictionary) -> Array:
 	var cells: Dictionary = dun.info["cells"]
 	if not cells.has(a) or not cells.has(b):
 		return []
+	# D88: a dropped portcullis's cells are HARD - never walked, not even by the fallback that
+	# ignores furniture (that fallback is how a body would otherwise be routed through the bars)
+	var hard: Dictionary = dun.info.get("hard", {})
 	var prev := {a: a}
 	var q: Array[Vector2i] = [a]
 	while not q.is_empty():
@@ -711,7 +714,7 @@ func _bfs_on(a: Vector2i, b: Vector2i, avoid: Dictionary) -> Array:
 			break
 		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
 			var n: Vector2i = c + d
-			if cells.has(n) and not prev.has(n) and (not avoid.has(n) or n == b):
+			if cells.has(n) and not prev.has(n) and not hard.has(n) and (not avoid.has(n) or n == b):
 				prev[n] = c
 				q.append(n)
 	if not prev.has(b):
@@ -800,6 +803,13 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
 			e = [_bfs(ca, cb), _t]
 			_paths[n] = e
 		pts = e[0]
+		# D88: no way through because a portcullis is down - this body is cut off and waiting for
+		# the gate to be forced or wound up. That is a deliberate wait, not a wedge: hold still
+		# and keep the watchdog's clock at zero (it would otherwise lift the body over the bars).
+		if pts.is_empty() and not (dun.info.get("hard", {}) as Dictionary).is_empty():
+			_prog[n] = [dist_to, _t, to, n.global_position]
+			gate_held[n] = Engine.get_process_frames()
+			return false
 		if not pts.is_empty():
 			# L25c: progress is the way LEFT along the route, not the straight line - a route that
 			# bends away from a far stair or target is not being stuck
@@ -832,14 +842,214 @@ func _go(n: Node3D, to: Vector3, spd: float, delta: float, stop := 0.3) -> bool:
 		pts.remove_at(0)
 	return false
 
+## ---------------------------------------------------------------- D91 stage 4: in file
+## A party that cannot walk abreast walks in FILE - deliberately, spaced, in an order - instead
+## of piling into one cell. In a hall the delvers fall into a column: whoever is nearest the
+## goal (by the route, not the crow's flight) leads, and each of the rest walks behind the one
+## ahead of it, FILE_GAP back. In a room they go for the goal as before. The order is worked
+## out twice a second so it does not shuffle every frame.
+const FILE_GAP := 1.7
+const FILE_NEAR := 7.0           # further behind than this and a delver just catches up
+var _file_order: Array = []
+var _file_t := -9.0
+var _file_goal := Vector3.ZERO
+var file_frames := 0             # frames in which someone walked in file (the D91 test reads it)
+var _file_frame := -1
+
+func _halls() -> Dictionary:
+	return dun.info.get("halls", {})
+
+func _route_len(b: Node3D, goal: Vector3) -> int:
+	var r := _bfs(_snap_cell(_cell_of(b.global_position)), _snap_cell(_cell_of(goal)))
+	return r.size()
+
+func _file_of(goal: Vector3) -> Array:
+	if _t - _file_t < 0.5 and _flat(goal, _file_goal) < 0.5 and _file_order.size() == _alive().size():
+		return _file_order
+	_file_t = _t
+	_file_goal = goal
+	var keyed: Array = []
+	for m in _alive():
+		var b: Node3D = m["body"]
+		keyed.append([_route_len(b, goal) * 100.0 + _flat(b.global_position, goal), m])
+	keyed.sort_custom(func(x, y): return float(x[0]) < float(y[0]))
+	_file_order = []
+	for k in keyed:
+		_file_order.append(k[1])
+	return _file_order
+
+func _go_file(m: Dictionary, goal: Vector3, spd: float, delta: float, stop: float) -> bool:
+	var b: Node3D = m["body"]
+	var order := _file_of(goal)
+	var i := order.find(m)
+	if i > 0 and _halls().has(_snap_cell(_cell_of(b.global_position))):
+		var ahead: Node3D = (order[i - 1] as Dictionary)["body"]
+		var dd := _flat(b.global_position, ahead.global_position)
+		if dd < FILE_NEAR and _flat(ahead.global_position, goal) > stop + FILE_GAP:
+			if _file_frame != Engine.get_process_frames():
+				_file_frame = Engine.get_process_frames()
+				file_frames += 1
+			# behind the one ahead: close up to FILE_GAP, never past them
+			if dd <= FILE_GAP + 0.15:
+				travel.erase(b)
+				_prog.erase(b)
+				return false
+			_go(b, ahead.global_position, minf(spd, spd * (dd / (FILE_GAP * 2.0)) + 0.5), delta, FILE_GAP)
+			return false
+	return _go(b, goal, spd, delta, stop)
+
 func _flat(a: Vector3, b: Vector3) -> float:
 	return Vector2(a.x - b.x, a.z - b.z).length()
+
+## ---------------------------------------------------------------- D91: bodies below ground
+## The dungeon had NO body separation at all - delvers and monsters stood in each other. Every
+## delver and every live monster now goes into the SAME Crowd the town uses (scripts/crowd.gd,
+## one copy, not a second), filled once a frame. _step takes its shove (soft ring, hard inside
+## two bodies' width, and the yield that makes two meeting in a hall pass on the side); and
+## _crowd_settle, at the end of every frame, parts any pair still closer than the sum of their
+## body_r - which is the done test's line - so a pack converging on one hero ends as a ring.
+var _crowd := Crowd.new()
+var _crowd_f := -1
+var crowd_worst := 0.0           # the deepest overlap the settle pass found (the D91 test reads it)
+
+func _mrad(mon: Monster) -> float:
+	var rad := float(mon.get_meta("rad", -1.0))
+	if rad < 0.0:
+		rad = clampf(mon._height() * 0.2, 0.3, 1.8)
+		mon.set_meta("rad", rad)
+	mon.body_r = rad
+	return rad
+
+func _crowd_bodies() -> Array:
+	var out: Array = []
+	for m in _alive():
+		var b = m.get("body")
+		if b != null and is_instance_valid(b):
+			out.append(b)
+	if dun and is_instance_valid(dun):
+		for mon in _foes():
+			if (mon as Monster)._entering():
+				continue
+			_mrad(mon)
+			out.append(mon)
+	return out
+
+func _crowd_fill() -> void:
+	var f := Engine.get_process_frames()
+	if f == _crowd_f:
+		return
+	_crowd_f = f
+	_crowd.reset()
+	for b in _crowd_bodies():
+		_crowd.add(b)
+
+## where a body of radius r may be set down: on a floor cell, r + the wall's 0.5 m clear of any
+## wall, and out of every obstacle
+func _settle_ok(p: Vector3, r: float) -> bool:
+	var cells: Dictionary = dun.info["cells"]
+	var c := _cell_of(p)
+	if not cells.has(c):
+		return false
+	var G: float = dun.info["grid"]
+	var ctr := _cell_world(c)
+	var keep := minf(r + 0.5, G * 0.5 - 0.05)
+	for dir: Vector2i in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		if cells.has(c + dir):
+			continue
+		var off := (p.x - ctr.x) * float(dir.x) + (p.z - ctr.z) * float(dir.y)
+		if off > G * 0.5 - keep:
+			return false
+	var o0 := dun.global_position
+	for o in dun.info.get("obstacles", []):
+		if FloorGen.obst_gap(o, p.x - o0.x, p.z - o0.z) < 0.3:
+			return false
+	return true
+
+const SETTLE_PASSES := 3
+const SETTLE_PAD := 0.02
+func _crowd_settle() -> void:
+	var bodies := _crowd_bodies()
+	var n := bodies.size()
+	if n < 2:
+		crowd_worst = 0.0
+		return
+	var worst := 0.0
+	for _pass in range(SETTLE_PASSES):
+		var moved := false
+		worst = 0.0
+		for i in range(n):
+			var a: Node3D = bodies[i]
+			var ra := Crowd.body_r(a)
+			for j in range(i + 1, n):
+				var b: Node3D = bodies[j]
+				var pa := a.global_position
+				var pb := b.global_position
+				if absf(pa.y - pb.y) > 3.0:
+					continue
+				var d := Vector3(pa.x - pb.x, 0.0, pa.z - pb.z)
+				var L := d.length()
+				var rb := Crowd.body_r(b)
+				var over := ra + rb + SETTLE_PAD - L
+				if over <= 0.0:
+					continue
+				worst = maxf(worst, over - SETTLE_PAD)
+				if L < 0.01:
+					var ang := float((a.get_instance_id() + b.get_instance_id()) % 628) * 0.01
+					d = Vector3(cos(ang), 0.0, sin(ang))
+					L = 1.0
+				var nrm := d / L
+				# the smaller body gives way: a lord is not shouldered aside by a halfling
+				var ka := rb / (ra + rb)
+				var kb := ra / (ra + rb)
+				var na := pa + nrm * over * ka
+				var nb := pb - nrm * over * kb
+				var oka := _settle_ok(na, ra)
+				var okb := _settle_ok(nb, rb)
+				if oka and okb:
+					a.global_position = na
+					b.global_position = nb
+				elif oka:
+					na = pa + nrm * over
+					if _settle_ok(na, ra):
+						a.global_position = na
+					else:
+						continue
+				elif okb:
+					nb = pb - nrm * over
+					if _settle_ok(nb, rb):
+						b.global_position = nb
+					else:
+						continue
+				else:
+					# pinned between stone on both sides: slide sideways along the wall
+					var side := Vector3(-nrm.z, 0.0, nrm.x) * over
+					if _settle_ok(pa + side, ra):
+						a.global_position = pa + side
+					elif _settle_ok(pb - side, rb):
+						b.global_position = pb - side
+					else:
+						continue
+				moved = true
+		if not moved:
+			break
+	crowd_worst = worst
 
 func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	var d := Vector3(to.x - n.global_position.x, 0, to.z - n.global_position.z)
 	if d.length() < 0.05:
 		return true
 	var p := n.global_position + d.normalized() * minf(spd * delta, d.length())
+	# D91: the shared Crowd's shove and yield - the same maths the town walks by
+	var md := d.normalized()
+	if n is Monster:
+		(n as Monster).move_dir = md
+	elif n is Townsfolk:
+		(n as Townsfolk).move_dir = md
+	_crowd_fill()
+	var shove := _crowd.push(n, md) * delta
+	if shove.length() > spd * delta * 1.5:
+		shove = shove.normalized() * spd * delta * 1.5
+	p += Vector3(shove.x, 0.0, shove.z)
 	# bodies go AROUND what stands on the floor: pushed out of every table,
 	# barrel, pillar and tree they would walk into - so they slide past it
 	if dun and dun.info.has("obstacles"):
@@ -847,6 +1057,16 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 		var cells: Dictionary = dun.info["cells"]
 		var step_len := minf(spd * delta, d.length())
 		for o in dun.info["obstacles"]:
+			# D88: a wall-shaped obstacle (a dropped portcullis, a cell) is a box: out through the
+			# face the body came from, never round a rim and never through to the far side
+			if (o as Array).size() >= 5:
+				if FloorGen.obst_gap(o, p.x - o0.x, p.z - o0.z) >= 0.45:
+					continue
+				var was := n.global_position
+				var q := FloorGen.obst_push(o, p.x - o0.x, p.z - o0.z, 0.45, was.x - o0.x, was.z - o0.z)
+				var outp := Vector3(q.x + o0.x, p.y, q.y + o0.z)
+				p = outp if cells.has(_cell_of(outp)) else n.global_position
+				continue
 			var c: Vector3 = (o[0] as Vector3) + o0
 			var need := float(o[1]) + 0.45
 			var dd := Vector2(p.x - c.x, p.z - c.z)
@@ -893,10 +1113,7 @@ func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	# a creature has a body, not a point: it keeps its own half-width off any
 	# wall (big lords and wide beasts were walking half into the stone)
 	if n is Monster and dun and dun.info.has("cells"):
-		var rad := float(n.get_meta("rad", -1.0))
-		if rad < 0.0:
-			rad = clampf((n as Monster)._height() * 0.2, 0.3, 1.8)
-			n.set_meta("rad", rad)
+		var rad := _mrad(n as Monster)
 		var G: float = dun.info["grid"]
 		var cl: Dictionary = dun.info["cells"]
 		var cc := _cell_of(p)
@@ -924,6 +1141,7 @@ func _process(delta: float) -> void:
 	_tags_tick(delta)
 	_amb_tick(delta)          # S2: the quiet bed below
 	_t += delta
+	_gt += delta
 	match state:
 		"fight":
 			_fight(delta)
@@ -943,16 +1161,19 @@ func _process(delta: float) -> void:
 			var all_there := true
 			for m in _alive():
 				var b: HeroBody = m["body"]
-				if not _go(b, ex, 5.0, delta, 0.8):
+				if not _go_file(m, ex, 5.0, delta, 0.8):
 					all_there = false
-					Rig.play(b._anim, "Walking_A")
+					if int(travel.get(b, -1)) == Engine.get_process_frames():
+						Rig.play(b._anim, "Walking_A")
+					else:
+						Rig.play(b._anim, "Idle")
 			# L25: on to the next floor when all are at the stairs; a delver who has truly stopped
 			# getting closer (3 s) is carried, and counted - the old flat 6 s cut off a long walk
 			var stopped := false
 			for m in _alive():
 				if stuck_on(m["body"], 3.0):
 					stopped = true
-			if all_there or stopped or _t > 45.0:
+			if all_there or stopped or _t > 90.0:          # D91: floors grew - the walk is longer
 				if not all_there:
 					forced += 1
 				_next_floor()
@@ -964,7 +1185,7 @@ func _process(delta: float) -> void:
 			var all_up := true
 			for m in _alive():
 				var fb: HeroBody = m["body"]
-				if not _go(fb, up, roster.speed(m["h"]) * 1.15, delta, 0.9):
+				if not _go_file(m, up, roster.speed(m["h"]) * 1.15, delta, 0.9):
 					all_up = false
 					Rig.play(fb._anim, "Running_A")
 			var jammed := false
@@ -974,11 +1195,27 @@ func _process(delta: float) -> void:
 			if _alive().is_empty():
 				_say("The scar keeps them all. No one comes home from floor %d." % floor_no)
 				_finish()
-			elif all_up or jammed or _t > 45.0:
+			elif all_up or jammed or _t > 90.0:
 				_say("%s get out alive, and come home with what they carried." % _names())
 				_finish()
 		"home":
 			pass
+	# D91: nobody ends a frame inside anybody. The settle runs LATE in the frame (a child node
+	# at a high process_priority), after every Monster has taken its own patrol step - settled
+	# here, a pack's wander could still put two in one spot before the frame was drawn.
+	if _settler == null:
+		_settler = _Settler.new()
+		_settler.d = self
+		_settler.process_priority = 1000
+		add_child(_settler)
+
+class _Settler extends Node:
+	var d: Node
+	func _process(_dt: float) -> void:
+		if d.state != "home" and d.dun != null and is_instance_valid(d.dun):
+			d._crowd_settle()
+
+var _settler: Node = null
 
 ## ---------------------------------------------------------------- L47: delvers think
 ## Mr. E marked this the priority of the whole list: the delvers "read as mindless". The rule
@@ -1105,6 +1342,15 @@ func _fight(delta: float) -> void:
 		_finish()
 		return
 	if foes.is_empty() and not (dun.lord and dun.lord._entering()):
+		# D83: a creature that came up mid-search or on the walk to the stairs has been dealt
+		# with - back to what it interrupted. The floor was already paid for and the breather
+		# already taken; neither happens twice.
+		if _back_to != "":
+			state = _back_to
+			_back_to = ""
+			_t = 0.0
+			_nav_reset()
+			return
 		# floor won: pay out, then SEARCH what is on the floor before deciding (L49)
 		_loot(alive)
 		if not _unsearched().is_empty():
@@ -1565,7 +1811,7 @@ func _spawn_on_floor(d: Dictionary, at: Vector3) -> Monster:
 	root.add_child(m)
 	m.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
 	m.hp = m.max_hp
-	dun.monsters.append(m)
+	_admit(m)
 	return m
 
 var _split_said := -1
@@ -2357,6 +2603,7 @@ const TRAPS := {
 	"BladeTrap":     {"noun": "a slot in the floor", "what": "a blade!", "dice": [2, 8], "sfx": "swing", "name": "a blade trap"},
 	"PitTrap":       {"noun": "rotten boards", "what": "the floor drops away!", "dice": [2, 6], "sfx": "hit", "name": "a pit"},
 	"PoisonDart":    {"noun": "a loose flagstone", "what": "green darts!", "dice": [1, 4], "sfx": "swing", "name": "a poison-dart trap"},
+	"Portcullis":    {"noun": "a portcullis", "what": "the portcullis crashes down!", "dice": [2, 8], "sfx": "hit", "name": "a portcullis"},
 	"SwarmTrap":     {"noun": "a grated floor", "what": "the bars drop open - something is coming up through them!", "dice": [1, 1], "sfx": "swing", "name": "a swarm grate"},
 }
 var trap_log := {"spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0}
@@ -2367,19 +2614,29 @@ func trap_dc() -> int:
 func _traps_tick() -> void:
 	if dun == null or not dun.info.has("traps"):
 		return
+	_gates_tick()
 	for t in dun.info["traps"]:
 		var tr: Dictionary = t
 		if bool(tr.get("done", false)) or not is_instance_valid(tr["node"]):
 			continue
 		var tp: Vector3 = (tr["node"] as Node3D).global_position
+		var gate := tr.has("cells")
 		for m in _alive():
-			if _flat((m["body"] as Node3D).global_position, tp) > TRAP_REACH:
+			if gate:
+				# D88: a portcullis is met on its LINE, anywhere across the passage's width
+				var l := _gate_l(tr, (m["body"] as Node3D).global_position)
+				if absf(l.y) > TRAP_REACH or absf(l.x) > float(tr["span"]) * 0.5 + 0.5:
+					continue
+			elif _flat((m["body"] as Node3D).global_position, tp) > TRAP_REACH:
 				continue
 			tr["done"] = true
-			_meet_trap(m, tr)
+			_meet_trap(m, tr, force_trap_spot if not gate else -1)
 			break
 
 func _meet_trap(m: Dictionary, tr: Dictionary, force_spot := -1) -> void:
+	if tr.has("cells"):
+		_meet_gate(m, tr, force_spot)
+		return
 	var h: Dictionary = m["h"]
 	var spec: Dictionary = TRAPS.get(String(tr.get("kind", "SpikeTrap")), TRAPS["SpikeTrap"])
 	var dc := trap_dc()
@@ -2461,6 +2718,340 @@ func _spring(m: Dictionary, tr: Dictionary, spec: Dictionary, dc: int) -> void:
 		_trap_swarm(tr)
 	_hero_hit(m)
 
+## ---------------------------------------------------------------- D88: the portcullis
+## Mr. E (Nov 15 16:41): "trap". It hangs raised and still over a passage, wall to wall, until a
+## party crosses its line. Spotted first (Perception vs trap_dc), it is wedged open and nobody
+## is cut off. Missed, it DROPS on the one crossing: a DEX save is a dive clear to the far side,
+## a failure takes the fall and is thrown back. Down, it is a box obstacle across the passage and
+## its cells are hard - and it SPLITS THE PARTY, by name, in the feed. Then a choice with a cost:
+## wind it up with the winch if there is one on someone's side (slow, free), go the long way round
+## if the floor still joins up without it, or - when there is no other route, or someone is cut
+## off from the stairs or the fight - the strongest body present forces it with Athletics (STR),
+## each heave costing the lifter strain. All of it is counted in trap_log for the summary.
+const ATHLETES := ["knight", "barbarian", "paladin", "warden"]
+const GATE_DECIDE := 2.5          # seconds the party takes to see where it stands
+const GATE_WINCH := 5.0           # winding a grid up by hand
+const GATE_HEAVE := 2.0           # one heave at the bars
+const GATE_TRIES := 8             # after this many heaves the whole party gets it up
+var _gt := 0.0                    # a clock that does not restart with a floor (the gate's waits)
+var gate_story: Array = []        # tests and the summary read it: what each gate did, in words
+var gate_held := {}               # body -> frame it last waited at a dropped gate (tests read it)
+static var force_trap_spot := -1  # D83 test hook: 0 = every ordinary trap is missed and springs
+static var force_gate_spot := -1  # test hook: 0 = every portcullis is missed and drops, 1 = spotted
+
+## where p stands in the gate's own frame: x across the passage, y (its local z) along the way
+## through - the sign of y is the SIDE
+func _gate_l(g: Dictionary, p: Vector3) -> Vector2:
+	var c: Vector3 = (g["at"] as Vector3) + dun.global_position
+	var y := float(g["yaw"])
+	var dx := p.x - c.x
+	var dz := p.z - c.z
+	return Vector2(dx * cos(y) - dz * sin(y), dx * sin(y) + dz * cos(y))
+
+func _gate_w(g: Dictionary, lx: float, lz: float, y0: float) -> Vector3:
+	var c: Vector3 = (g["at"] as Vector3) + dun.global_position
+	var y := float(g["yaw"])
+	return Vector3(c.x + lx * cos(y) + lz * sin(y), y0, c.z - lx * sin(y) + lz * cos(y))
+
+## the routes, patches and reach all change when a gate goes down or up
+func _gate_nav_changed() -> void:
+	_blocked_for = null
+	_comp_for = null
+	_paths.clear()
+	_prog.clear()
+	if dun and "_reach" in dun:
+		dun._reach = {}
+
+## every floor cell that can be walked to from c without crossing a hard (dropped-gate) cell
+func _gate_flood(c: Vector2i) -> Dictionary:
+	var cells: Dictionary = dun.info["cells"]
+	var hard: Dictionary = dun.info.get("hard", {})
+	var seen := {}
+	if not cells.has(c) or hard.has(c):
+		return seen
+	seen[c] = true
+	var q: Array[Vector2i] = [c]
+	while not q.is_empty():
+		var a: Vector2i = q.pop_back()
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var n: Vector2i = a + d
+			if cells.has(n) and not hard.has(n) and not seen.has(n):
+				seen[n] = true
+				q.append(n)
+	return seen
+
+func _gate_side_names(g: Dictionary) -> Array:
+	var neg: Array = []
+	var pos: Array = []
+	for m in _alive():
+		var l := _gate_l(g, (m["body"] as Node3D).global_position)
+		(pos if l.y >= 0.0 else neg).append(String(m["h"]["name"]))
+	return [neg, pos]
+
+func _meet_gate(m: Dictionary, tr: Dictionary, force_spot := -1) -> void:
+	var h: Dictionary = m["h"]
+	var dc := trap_dc()
+	var pd := _d20(-1 if dark and not Roster.has_trait(h, "darkvision") else 0)
+	var per := pd + roster.mod(h, "wis") + (roster.prof(h) if String(h["class"]) in SPOTTERS else 0)
+	var spotted := pd != 1 and (pd == 20 or per >= dc)
+	if force_spot < 0:
+		force_spot = force_gate_spot
+	if force_spot >= 0:
+		spotted = force_spot == 1
+	if spotted:
+		trap_log["spotted"] += 1
+		trap_log["gate_wedged"] = int(trap_log.get("gate_wedged", 0)) + 1
+		tr["state"] = "wedged"
+		if String(h["class"]) in TOOLS:
+			trap_log["disarmed"] += 1
+			_say("%s spots a portcullis hanging over the passage (Perception %d vs DC %d) and wedges its gear with thieves' tools - the grid stays up." % [h["name"], per, dc])
+		else:
+			_say("%s spots a portcullis hanging over the passage (Perception %d vs DC %d) and jams a haft into its gear - the party passes under it." % [h["name"], per, dc])
+		gate_story.append("%s spotted the portcullis and wedged it" % h["name"])
+		_bark(m, "trap")
+		_float_text(m, "spotted", Color(0.85, 0.95, 1.0))
+		return
+	_gate_drop(m, tr, dc)
+
+func _gate_drop(m: Dictionary, tr: Dictionary, dc: int) -> void:
+	var h: Dictionary = m["h"]
+	var spec: Dictionary = TRAPS["Portcullis"]
+	trap_log["sprung"] += 1
+	trap_log["gate_drops"] = int(trap_log.get("gate_drops", 0)) + 1
+	var node: Node3D = tr["node"]
+	if node.has_meta("drop"):
+		(node.get_meta("drop") as Callable).call()
+	node.set_meta("fired", int(node.get_meta("fired", 0)) + 1)
+	if node.is_inside_tree():
+		Sfx.at(String(spec["sfx"]), node.global_position, 2.0)
+	tr["state"] = "down"
+	tr["decide_at"] = _gt + GATE_DECIDE
+	# down: a wall-to-wall box, and its cells off the grid for every route
+	(dun.info["obstacles"] as Array).append(tr["box"])
+	var hard: Dictionary = dun.info.get("hard", {})
+	for c: Vector2i in tr["cells"]:
+		hard[c] = true
+	dun.info["hard"] = hard
+	_gate_nav_changed()
+	# which way was the crosser going? the rest of the party is behind it
+	var me: Node3D = m["body"]
+	var lme := _gate_l(tr, me.global_position)
+	var behind := 0.0
+	for o in _alive():
+		if o != m:
+			behind += signf(_gate_l(tr, (o["body"] as Node3D).global_position).y)
+	var near := signf(behind)
+	if near == 0.0:
+		near = signf(lme.y) if absf(lme.y) > 0.05 else -1.0
+	var sd := _rng.randi_range(1, 20)
+	var sv := sd + roster.save_bonus(h, "dex")
+	var saved := sd != 1 and (sd == 20 or sv >= dc)
+	# off the gate's cells altogether (a body left inside one could be routed out the far side)
+	var G: float = dun.info["grid"]
+	var clear := G * 0.5 + 0.6
+	var wx := float(tr["span"]) * 0.5 - 0.6
+	var side := -near if saved else near
+	me.global_position = _gate_w(tr, clampf(lme.x, -wx, wx), side * clear, me.global_position.y)
+	_paths.erase(me)
+	if saved:
+		trap_log["saved"] += 1
+		_say("%s crosses under a portcullis - it crashes down! DEX %d vs DC %d: a dive clear, rolling out on the far side." % [h["name"], sv, dc])
+		_float_text(m, "dive!", Color(0.6, 1.0, 0.7))
+	else:
+		var dmg := float(_dice(int(spec["dice"][0]), int(spec["dice"][1])) + floor_no / 2)
+		var took := maxf(1.0, _soak(m, dmg))
+		trap_log["damage"] += took
+		m["hp"] = float(m["hp"]) - took
+		_say("%s crosses under a portcullis - it crashes down on them! DEX %d vs DC %d, %d damage, and they are thrown back." % [h["name"], sv, dc, int(took)])
+		_float_text(m, "-%d" % int(took), Color(1.0, 0.35, 0.25))
+		_hero_hit(m)
+	# anyone else under the line is shoved to the side they stood on - and so is any creature
+	for o in _alive():
+		if o == m:
+			continue
+		var ob: Node3D = o["body"]
+		var l := _gate_l(tr, ob.global_position)
+		if absf(l.y) < clear and absf(l.x) < wx + 1.2:
+			ob.global_position = _gate_w(tr, clampf(l.x, -wx, wx), (signf(l.y) if l.y != 0.0 else near) * clear, ob.global_position.y)
+	for f in _foes():
+		var fb: Node3D = f
+		var l2 := _gate_l(tr, fb.global_position)
+		if absf(l2.y) < clear and absf(l2.x) < wx + 1.2:
+			fb.global_position = _gate_w(tr, clampf(l2.x, -wx, wx), (signf(l2.y) if l2.y != 0.0 else -near) * clear, fb.global_position.y)
+	# IT SPLITS THE PARTY - say who is on which side, by name
+	var sides := _gate_side_names(tr)
+	var far: Array = sides[1] if near < 0.0 else sides[0]
+	var here: Array = sides[0] if near < 0.0 else sides[1]
+	if not far.is_empty() and not here.is_empty():
+		trap_log["gate_splits"] = int(trap_log.get("gate_splits", 0)) + 1
+		_say("The portcullis splits the party: %s on the far side, %s cut off behind the bars." % [", ".join(far), ", ".join(here)])
+		gate_story.append("a portcullis split the party (%s | %s)" % [", ".join(far), ", ".join(here)])
+	else:
+		gate_story.append("a portcullis came down in front of %s" % ", ".join(far + here))
+
+func _gates_tick() -> void:
+	for g in dun.info.get("gates", []):
+		var tr: Dictionary = g
+		match String(tr.get("state", "up")):
+			"down":
+				if _gt >= float(tr["decide_at"]):
+					_gate_decide(tr)
+			"forcing":
+				if _gt >= float(tr["next_at"]):
+					_gate_heave(tr)
+			"winching":
+				if _gt >= float(tr["next_at"]):
+					trap_log["gate_winched"] = int(trap_log.get("gate_winched", 0)) + 1
+					_say("The winch catches - the portcullis is up, and wedged there.")
+					gate_story.append("the winch raised it")
+					_gate_lift(tr, 0.0)
+
+## the gate is down: what does the party do about it?
+func _gate_decide(tr: Dictionary) -> void:
+	var al := _alive()
+	if al.is_empty():
+		tr["state"] = "shut"
+		return
+	# 1. the winch, if it stands on someone's side: slow, but it costs nobody anything
+	var w := int(tr.get("winch", 0))
+	if w != 0:
+		for o in al:
+			if signf(_gate_l(tr, (o["body"] as Node3D).global_position).y) == float(w):
+				tr["state"] = "winching"
+				tr["next_at"] = _gt + GATE_WINCH
+				var node: Node3D = tr["node"]
+				if node.has_meta("raise"):
+					(node.get_meta("raise") as Callable).call(GATE_WINCH)
+				_say("%s finds the winch beside the gate and starts winding - the grid groans up a hand at a time." % o["h"]["name"])
+				return
+	# 2. is the floor still one piece without it? (the long way round)
+	var d: Vector2i = tr["d"]
+	var c0: Vector2i = (tr["cells"] as Array)[0]
+	var reach := _gate_flood(c0 - d)
+	if reach.has(c0 + d):
+		tr["state"] = "shut"
+		trap_log["gate_longway"] = int(trap_log.get("gate_longway", 0)) + 1
+		_say("The portcullis will not be lifted here - the party goes the long way round.")
+		gate_story.append("the party went the long way round")
+		return
+	# 3. no other route. Does anyone NEED to cross? Not if every delver, the stairs and every
+	# creature still standing are on one side.
+	var side := {}
+	for o in al:
+		side[_cell_of((o["body"] as Node3D).global_position)] = true
+	var ex: Vector3 = dun.info["exit"] + dun.global_position
+	var want: Array = [_cell_of(ex)]
+	for f in _foes():
+		want.append(_cell_of((f as Node3D).global_position))
+	var first: Vector2i = side.keys()[0]
+	var one := _gate_flood(first)
+	var together := true
+	for c in side.keys() + want:
+		if not one.has(c):
+			together = false
+			break
+	if together:
+		tr["state"] = "shut"
+		trap_log["gate_behind"] = int(trap_log.get("gate_behind", 0)) + 1
+		_say("The portcullis stays down behind them - the way on lies ahead.")
+		gate_story.append("it stayed down behind the party")
+		return
+	tr["state"] = "forcing"
+	tr["tries"] = 0
+	tr["next_at"] = _gt + 0.5
+	var who := _gate_lifter(al)
+	_say("There is no other way through. %s sets their shoulders to the bars." % who["h"]["name"])
+
+## the strongest body present: STR, and Athletics for the classes trained in it
+func _gate_lifter(al: Array) -> Dictionary:
+	var best: Dictionary = al[0]
+	var bb := -99
+	for o in al:
+		var h: Dictionary = o["h"]
+		var b := roster.mod(h, "str") + (roster.prof(h) if String(h["class"]) in ATHLETES else 0)
+		if b > bb:
+			bb = b
+			best = o
+	return best
+
+func _gate_heave(tr: Dictionary) -> void:
+	var al := _alive()
+	if al.is_empty():
+		tr["state"] = "shut"
+		return
+	var m := _gate_lifter(al)
+	var h: Dictionary = m["h"]
+	var dc := trap_dc()
+	tr["tries"] = int(tr["tries"]) + 1
+	var bonus := roster.mod(h, "str") + (roster.prof(h) if String(h["class"]) in ATHLETES else 0)
+	# after the first heave the others on that side lend their weight (advantage)
+	var mine := signf(_gate_l(tr, (m["body"] as Node3D).global_position).y)
+	var helpers := 0
+	for o in al:
+		if o != m and signf(_gate_l(tr, (o["body"] as Node3D).global_position).y) == mine:
+			helpers += 1
+	var d1 := _d20(1 if int(tr["tries"]) > 1 and helpers > 0 else 0)
+	var tot := d1 + bonus
+	# every heave costs the lifter: the price of the only way through
+	var strain := float(_dice(1, 4))
+	m["hp"] = maxf(1.0, float(m["hp"]) - strain)
+	trap_log["gate_heaves"] = int(trap_log.get("gate_heaves", 0)) + 1
+	trap_log["gate_strain"] = float(trap_log.get("gate_strain", 0.0)) + strain
+	_float_text(m, "-%d" % int(strain), Color(1.0, 0.75, 0.3))
+	if d1 != 1 and (d1 == 20 or tot >= dc):
+		trap_log["gate_forced"] = int(trap_log.get("gate_forced", 0)) + 1
+		_say("%s heaves the portcullis up (Athletics %d vs DC %d) and wedges it - %d strain for it." % [h["name"], tot, dc, int(strain)])
+		gate_story.append("%s forced it on heave %d" % [h["name"], int(tr["tries"])])
+		_gate_lift(tr, 0.6)
+	elif int(tr["tries"]) >= GATE_TRIES:
+		trap_log["gate_forced"] = int(trap_log.get("gate_forced", 0)) + 1
+		_say("Every hand on the bars at once - the portcullis grinds up at last, and they wedge it.")
+		gate_story.append("the whole party forced it after %d heaves" % int(tr["tries"]))
+		_gate_lift(tr, 0.8)
+	else:
+		_say("%s strains at the bars (Athletics %d vs DC %d) - it will not shift. %d strain." % [h["name"], tot, dc, int(strain)])
+		tr["next_at"] = _gt + GATE_HEAVE
+
+## the gate is up for good: its box and its hard cells go, the routes are worked out afresh
+func _gate_lift(tr: Dictionary, secs: float) -> void:
+	tr["state"] = "wedged"
+	(dun.info["obstacles"] as Array).erase(tr["box"])
+	var hard: Dictionary = dun.info.get("hard", {})
+	for c: Vector2i in tr["cells"]:
+		hard.erase(c)
+	var node: Node3D = tr["node"]
+	if secs > 0.0 and node.has_meta("raise"):
+		(node.get_meta("raise") as Callable).call(secs)
+	_gate_nav_changed()
+
+## ---------------------------------------------------------------- D83: admitting a creature
+## Mr. E (Nov 15 16:22): "the traps are stuck". MEASURED (tools/_d83_test.gd), not guessed: the
+## trap props all reset cleanly and leave nothing behind, and nav is not the fault (routes are a
+## lazy cache, built on first use). The fault was the creatures a trap or an ambush lets up while
+## the party is SEARCHING or WALKING TO THE STAIRS - which is where most traps are met. Nothing
+## fights them outside "fight", so they stayed in Monster PATROL, and PATROL set their height
+## from an unset ground_fn - flat 0.0 in world space, 400 m above a floor at DELVE_Y. They hung
+## in the void, walked to the x/z of a goal 400 m below them and stood there for good, and the
+## party walked off to the next floor without them. Every creature added to a floor after it is
+## built now comes through here: it stands on THIS floor, it is a foe the fight loop knows, and
+## if the party had stopped fighting, they turn and fight it, then go back to what they were doing.
+var _back_to := ""                  # the state a mid-floor creature pulled the party out of
+var rejoined := 0                   # the D83 test counts these
+
+func _floor_y(_x: float, _z: float) -> float:
+	return dun.global_position.y if dun != null and is_instance_valid(dun) else DELVE_Y
+
+func _admit(mon: Monster) -> void:
+	mon.ground_fn = Callable(self, "_floor_y")
+	if not (dun.monsters as Array).has(mon):
+		(dun.monsters as Array).append(mon)
+	if state in ["search", "descend"]:
+		rejoined += 1
+		_back_to = state if _back_to == "" else _back_to
+		state = "fight"
+		_t = 0.0
+		_nav_reset()
+
 ## L29c r5: a SwarmTrap springs up a short pack of theme-matched creatures
 ## RIGHT WHERE THE PARTY STANDS, like an AMBUSH set piece but wired from the
 ## trap pool. Reuses dun.monsters so the fight loop picks it up for free.
@@ -2482,7 +3073,7 @@ func _trap_swarm(tr: Dictionary) -> void:
 		var off := Vector3(cos(float(k) * 2.1), 0.0, sin(float(k) * 2.1)) * 1.2
 		mon.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
 		dun.add_child(mon)
-		(dun.monsters as Array).append(mon)
+		_admit(mon)
 		mon.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
 		mon.hp = mon.max_hp
 		names.append(String(d.get("name", "something")))
@@ -2915,6 +3506,10 @@ func _unstick(n: Node3D, goal := Vector2i(-9999, -9999)) -> void:
 	# L25c: set it down where its goal can be walked to (the nearest clear cell could be a pocket
 	# walled in by furniture - it was set back in the same pocket again and again)
 	var pat := _patches()
+	# D88: with a portcullis down the goal's patch may lie beyond the bars - set the body down on
+	# ITS OWN side (the patch nearest where it stands), never lifted across the gate
+	if not (dun.info.get("hard", {}) as Dictionary).is_empty():
+		goal = here
 	var want := int(pat.get(goal, -1))
 	if want < 0 and goal.x != -9999:
 		var gd := 1e9
@@ -2947,7 +3542,7 @@ func _why(n: Node3D, pts: Array) -> String:
 	for o in dun.info.get("obstacles", []):
 		var c: Vector3 = (o[0] as Vector3) + o0
 		var d := _flat(c, n.global_position)
-		if d < float(o[1]) + 2.0:
+		if FloorGen.obst_gap(o, n.global_position.x - o0.x, n.global_position.z - o0.z) < 2.0:
 			near.append("(%.1f,%.1f r%.2f d%.2f)" % [c.x, c.z, float(o[1]), d])
 	var here := _cell_of(n.global_position)
 	var nb := ""

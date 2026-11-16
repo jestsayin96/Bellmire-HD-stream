@@ -1,0 +1,55 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend below, and the lamplight gets smaller behind them.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 2 giant rats.
+FEED Fresh flowers on a grave nobody has visited in years.
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Bolt at giant rat.
+FEED MossyMage searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED The scar eases its grip, for now.
+T10s floor=1 state=search foes=0 ["JestFan 108/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T20s floor=1 state=search foes=0 ["JestFan 108/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T30s floor=1 state=search foes=0 ["JestFan 108/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T40s floor=1 state=descend foes=0 ["JestFan 108/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED JestFan steps on a slot in the floor - a blade! DEX 18 vs DC 10, 4 damage (halved).
+T50s floor=1 state=descend foes=0 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T60s floor=1 state=descend foes=0 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T70s floor=1 state=descend foes=0 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 2 giant rats.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED The oil is running low.
+T80s floor=2 state=fight foes=4 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric spots a pressure plate (Perception 19 vs DC 11) and steps round it.
+FEED DawnCleric starts bolt, loses the thread, and finishes it badly (9 vs DC 11).
+FEED MossyMage casts Bolt at giant rat.
+FEED DawnCleric casts Bolt at giant rat.
+T90s floor=2 state=fight foes=5 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]
+FEED DawnCleric casts Smite at giant rat.
+T100s floor=2 state=fight foes=2 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]
+FEED DawnCleric casts Smite at Gnawbone.
+FEED MossyMage casts Fire at Gnawbone.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Gnawbone's children come squealing.
+T110s floor=2 state=fight foes=3 ["JestFan 104/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]
+FEED DawnCleric casts Smite at Gnawbone.
+FEED MossyMage casts Bolt at Gnawbone.
+FEED Gnawbone falls to BigAxe.
+T120s floor=2 state=fight foes=1 ["JestFan 86/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]
+FEED MossyMage casts Fire at bog frog.
+FEED DawnCleric casts Bolt at bog frog.
+FEED JestFan rolls a 20 - and the bog frog is gone.
+FEED Gnawbone is slain on floor 2!
+FEED The hoard is split 4 ways - 12 gold each to JestFan, MossyMage, DawnCleric, BigAxe.
+FEED MossyMage finds a vial of Ratcatcher's Nip.
+T130s floor=2 state=search foes=0 ["JestFan 86/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]
+FEED MossyMage searches the chest - Successfully found loot!! 32 gold (Investigation 25 vs DC 11).
+T140s floor=2 state=search foes=0 ["JestFan 86/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]
+T150s floor=2 state=search foes=0 ["JestFan 86/108", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 112/119"]

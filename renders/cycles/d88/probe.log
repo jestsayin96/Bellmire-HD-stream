@@ -1,0 +1,611 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 6; lights 52 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+  ok  f8 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f8 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 9 shrine: 2 (cap 12), creatures 4; lights 44 (shadowed 1)
+L28D_DECALS floor 9 shrine: 17 (cap 24)
+  ok  f9 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f9 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 13 crypt: 3 (cap 12), creatures 6; lights 53 (shadowed 1)
+L28D_DECALS floor 13 crypt: 17 (cap 24)
+  ok  f13 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f13 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 19 treasury: 2 (cap 12), creatures 7; lights 58 (shadowed 1)
+L28D_DECALS floor 19 treasury: 18 (cap 24)
+  ok  f19 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f19 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 20 shrine: 3 (cap 12), creatures 5; lights 43 (shadowed 2)
+L28D_DECALS floor 20 shrine: 18 (cap 24)
+  ok  f20 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f20 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 24 crypt: 3 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 24 crypt: 18 (cap 24)
+  ok  f24 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f24 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 30 treasury: 4 (cap 12), creatures 4; lights 48 (shadowed 2)
+L28D_DECALS floor 30 treasury: 17 (cap 24)
+  ok  f30 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f30 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 31 shrine: 2 (cap 12), creatures 5; lights 50 (shadowed 1)
+L28D_DECALS floor 31 shrine: 18 (cap 24)
+  ok  f31 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f31 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 35 crypt: 3 (cap 12), creatures 9; lights 46 (shadowed 2)
+L28D_DECALS floor 35 crypt: 17 (cap 24)
+  ok  f35 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f35 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 46 crypt: 2 (cap 12), creatures 5; lights 49 (shadowed 1)
+L28D_DECALS floor 46 crypt: 18 (cap 24)
+  ok  f46 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f46 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 55 treasury: 3 (cap 12), creatures 8; lights 51 (shadowed 2)
+L28D_DECALS floor 55 treasury: 18 (cap 24)
+  ok  f55 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f55 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 56 shrine: 4 (cap 12), creatures 9; lights 45 (shadowed 1)
+L28D_DECALS floor 56 shrine: 18 (cap 24)
+  ok  f56 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f56 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 57 crypt: 2 (cap 12), creatures 6; lights 58 (shadowed 1)
+L28D_DECALS floor 57 crypt: 18 (cap 24)
+  ok  f57 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f57 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 66 treasury: 3 (cap 12), creatures 8; lights 52 (shadowed 1)
+L28D_DECALS floor 66 treasury: 17 (cap 24)
+  ok  f66 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f66 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 67 shrine: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 67 shrine: 18 (cap 24)
+  ok  f67 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f67 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 77 treasury: 3 (cap 12), creatures 8; lights 43 (shadowed 1)
+L28D_DECALS floor 77 treasury: 17 (cap 24)
+  ok  f77 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f77 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 78 shrine: 3 (cap 12), creatures 7; lights 46 (shadowed 1)
+L28D_DECALS floor 78 shrine: 18 (cap 24)
+  ok  f78 shrine: spans wall to wall (2 cells, 7.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f78 dropped: 72 straight walks at it (every 0.2 m across 7.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 82 crypt: 2 (cap 12), creatures 8; lights 52 (shadowed 1)
+L28D_DECALS floor 82 crypt: 18 (cap 24)
+  ok  f82 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f82 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 88 treasury: 3 (cap 12), creatures 5; lights 47 (shadowed 1)
+L28D_DECALS floor 88 treasury: 18 (cap 24)
+  ok  f88 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f88 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 89 shrine: 3 (cap 12), creatures 5; lights 57 (shadowed 1)
+L28D_DECALS floor 89 shrine: 18 (cap 24)
+  ok  f89 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f89 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 93 crypt: 2 (cap 12), creatures 6; lights 37 (shadowed 1)
+L28D_DECALS floor 93 crypt: 18 (cap 24)
+  ok  f93 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f93 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 99 treasury: 2 (cap 12), creatures 4; lights 37 (shadowed 1)
+L28D_DECALS floor 99 treasury: 17 (cap 24)
+  ok  f99 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f99 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 100 shrine: 3 (cap 12), creatures 9; lights 53 (shadowed 2)
+L28D_DECALS floor 100 shrine: 17 (cap 24)
+  ok  f100 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f100 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 104 crypt: 2 (cap 12), creatures 7; lights 51 (shadowed 1)
+L28D_DECALS floor 104 crypt: 17 (cap 24)
+  ok  f104 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f104 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 115 crypt: 4 (cap 12), creatures 10; lights 46 (shadowed 2)
+L28D_DECALS floor 115 crypt: 17 (cap 24)
+  ok  f115 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f115 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 124 treasury: 3 (cap 12), creatures 5; lights 38 (shadowed 1)
+L28D_DECALS floor 124 treasury: 18 (cap 24)
+  ok  f124 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f124 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 125 shrine: 3 (cap 12), creatures 6; lights 53 (shadowed 2)
+L28D_DECALS floor 125 shrine: 18 (cap 24)
+  ok  f125 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f125 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 135 treasury: 4 (cap 12), creatures 9; lights 46 (shadowed 2)
+L28D_DECALS floor 135 treasury: 18 (cap 24)
+  ok  f135 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f135 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 136 shrine: 3 (cap 12), creatures 8; lights 43 (shadowed 1)
+L28D_DECALS floor 136 shrine: 18 (cap 24)
+  ok  f136 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f136 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 140 crypt: 3 (cap 12), creatures 7; lights 48 (shadowed 2)
+L28D_DECALS floor 140 crypt: 18 (cap 24)
+  ok  f140 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f140 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 146 treasury: 3 (cap 12), creatures 6; lights 34 (shadowed 1)
+L28D_DECALS floor 146 treasury: 17 (cap 24)
+  ok  f146 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f146 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 147 shrine: 3 (cap 12), creatures 5; lights 44 (shadowed 1)
+L28D_DECALS floor 147 shrine: 18 (cap 24)
+  ok  f147 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f147 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 151 crypt: 3 (cap 12), creatures 5; lights 53 (shadowed 1)
+L28D_DECALS floor 151 crypt: 18 (cap 24)
+  ok  f151 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f151 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 157 treasury: 2 (cap 12), creatures 7; lights 53 (shadowed 1)
+L28D_DECALS floor 157 treasury: 18 (cap 24)
+  ok  f157 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f157 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 158 shrine: 4 (cap 12), creatures 6; lights 45 (shadowed 1)
+L28D_DECALS floor 158 shrine: 18 (cap 24)
+  ok  f158 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f158 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 162 crypt: 3 (cap 12), creatures 8; lights 44 (shadowed 1)
+L28D_DECALS floor 162 crypt: 17 (cap 24)
+  ok  f162 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f162 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 169 shrine: 2 (cap 12), creatures 8; lights 49 (shadowed 1)
+L28D_DECALS floor 169 shrine: 17 (cap 24)
+  ok  f169 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f169 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 173 crypt: 2 (cap 12), creatures 7; lights 55 (shadowed 1)
+L28D_DECALS floor 173 crypt: 18 (cap 24)
+  ok  f173 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f173 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 182 treasury: 3 (cap 12), creatures 6; lights 45 (shadowed 1)
+L28D_DECALS floor 182 treasury: 18 (cap 24)
+  ok  f182 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f182 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 184 crypt: 3 (cap 12), creatures 7; lights 50 (shadowed 1)
+L28D_DECALS floor 184 crypt: 18 (cap 24)
+  ok  f184 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f184 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 193 treasury: 2 (cap 12), creatures 6; lights 40 (shadowed 1)
+L28D_DECALS floor 193 treasury: 18 (cap 24)
+  ok  f193 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f193 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 194 shrine: 4 (cap 12), creatures 5; lights 40 (shadowed 1)
+L28D_DECALS floor 194 shrine: 17 (cap 24)
+  ok  f194 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f194 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 204 treasury: 2 (cap 12), creatures 9; lights 49 (shadowed 1)
+L28D_DECALS floor 204 treasury: 18 (cap 24)
+  ok  f204 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f204 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 205 shrine: 3 (cap 12), creatures 7; lights 58 (shadowed 2)
+L28D_DECALS floor 205 shrine: 17 (cap 24)
+  ok  f205 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f205 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 209 crypt: 2 (cap 12), creatures 6; lights 48 (shadowed 1)
+L28D_DECALS floor 209 crypt: 18 (cap 24)
+  ok  f209 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f209 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 215 treasury: 3 (cap 12), creatures 10; lights 49 (shadowed 2)
+L28D_DECALS floor 215 treasury: 18 (cap 24)
+  ok  f215 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f215 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 216 shrine: 2 (cap 12), creatures 6; lights 46 (shadowed 1)
+L28D_DECALS floor 216 shrine: 18 (cap 24)
+  ok  f216 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f216 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 220 crypt: 4 (cap 12), creatures 5; lights 54 (shadowed 2)
+L28D_DECALS floor 220 crypt: 18 (cap 24)
+  ok  f220 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f220 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 226 treasury: 3 (cap 12), creatures 8; lights 53 (shadowed 1)
+L28D_DECALS floor 226 treasury: 18 (cap 24)
+  ok  f226 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f226 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 227 shrine: 2 (cap 12), creatures 7; lights 38 (shadowed 1)
+L28D_DECALS floor 227 shrine: 18 (cap 24)
+  ok  f227 shrine: spans wall to wall (2 cells, 7.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f227 dropped: 72 straight walks at it (every 0.2 m across 7.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 231 crypt: 3 (cap 12), creatures 5; lights 51 (shadowed 1)
+L28D_DECALS floor 231 crypt: 17 (cap 24)
+  ok  f231 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f231 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 242 crypt: 2 (cap 12), creatures 9; lights 43 (shadowed 1)
+L28D_DECALS floor 242 crypt: 18 (cap 24)
+  ok  f242 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f242 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 251 treasury: 3 (cap 12), creatures 7; lights 49 (shadowed 1)
+L28D_DECALS floor 251 treasury: 17 (cap 24)
+  ok  f251 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f251 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 252 shrine: 2 (cap 12), creatures 7; lights 35 (shadowed 1)
+L28D_DECALS floor 252 shrine: 18 (cap 24)
+  ok  f252 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f252 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 253 crypt: 2 (cap 12), creatures 9; lights 52 (shadowed 1)
+L28D_DECALS floor 253 crypt: 18 (cap 24)
+  ok  f253 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f253 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 262 treasury: 3 (cap 12), creatures 9; lights 44 (shadowed 1)
+L28D_DECALS floor 262 treasury: 18 (cap 24)
+  ok  f262 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f262 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 263 shrine: 3 (cap 12), creatures 8; lights 48 (shadowed 1)
+L28D_DECALS floor 263 shrine: 18 (cap 24)
+  ok  f263 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f263 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 273 treasury: 3 (cap 12), creatures 5; lights 50 (shadowed 1)
+L28D_DECALS floor 273 treasury: 17 (cap 24)
+  ok  f273 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f273 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 274 shrine: 2 (cap 12), creatures 5; lights 56 (shadowed 1)
+L28D_DECALS floor 274 shrine: 18 (cap 24)
+  ok  f274 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f274 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 278 crypt: 2 (cap 12), creatures 6; lights 44 (shadowed 1)
+L28D_DECALS floor 278 crypt: 17 (cap 24)
+  ok  f278 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f278 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 284 treasury: 3 (cap 12), creatures 8; lights 41 (shadowed 1)
+L28D_DECALS floor 284 treasury: 18 (cap 24)
+  ok  f284 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f284 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 285 shrine: 5 (cap 12), creatures 8; lights 60 (shadowed 2)
+L28D_DECALS floor 285 shrine: 18 (cap 24)
+  ok  f285 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f285 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 289 crypt: 2 (cap 12), creatures 6; lights 51 (shadowed 1)
+L28D_DECALS floor 289 crypt: 17 (cap 24)
+  ok  f289 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f289 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 295 treasury: 4 (cap 12), creatures 7; lights 54 (shadowed 2)
+L28D_DECALS floor 295 treasury: 18 (cap 24)
+  ok  f295 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f295 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 296 shrine: 2 (cap 12), creatures 7; lights 43 (shadowed 1)
+L28D_DECALS floor 296 shrine: 17 (cap 24)
+  ok  f296 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f296 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 300 crypt: 4 (cap 12), creatures 8; lights 52 (shadowed 2)
+L28D_DECALS floor 300 crypt: 17 (cap 24)
+  ok  f300 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f300 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 311 crypt: 2 (cap 12), creatures 3; lights 50 (shadowed 1)
+L28D_DECALS floor 311 crypt: 17 (cap 24)
+  ok  f311 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f311 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 320 treasury: 4 (cap 12), creatures 7; lights 42 (shadowed 2)
+L28D_DECALS floor 320 treasury: 18 (cap 24)
+  ok  f320 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f320 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 321 shrine: 2 (cap 12), creatures 5; lights 59 (shadowed 1)
+L28D_DECALS floor 321 shrine: 17 (cap 24)
+  ok  f321 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f321 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 331 treasury: 2 (cap 12), creatures 5; lights 32 (shadowed 1)
+L28D_DECALS floor 331 treasury: 16 (cap 24)
+  ok  f331 treasury: spans wall to wall (2 cells, 7.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f331 dropped: 72 straight walks at it (every 0.2 m across 7.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 332 shrine: 2 (cap 12), creatures 4; lights 45 (shadowed 1)
+L28D_DECALS floor 332 shrine: 18 (cap 24)
+  ok  f332 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f332 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 336 crypt: 3 (cap 12), creatures 6; lights 45 (shadowed 1)
+L28D_DECALS floor 336 crypt: 17 (cap 24)
+  ok  f336 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f336 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 342 treasury: 2 (cap 12), creatures 9; lights 40 (shadowed 1)
+L28D_DECALS floor 342 treasury: 17 (cap 24)
+  ok  f342 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f342 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 343 shrine: 2 (cap 12), creatures 7; lights 33 (shadowed 1)
+L28D_DECALS floor 343 shrine: 18 (cap 24)
+  ok  f343 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f343 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 347 crypt: 3 (cap 12), creatures 7; lights 50 (shadowed 1)
+L28D_DECALS floor 347 crypt: 18 (cap 24)
+  ok  f347 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f347 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 353 treasury: 2 (cap 12), creatures 8; lights 41 (shadowed 1)
+L28D_DECALS floor 353 treasury: 18 (cap 24)
+  ok  f353 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f353 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 354 shrine: 3 (cap 12), creatures 9; lights 50 (shadowed 1)
+L28D_DECALS floor 354 shrine: 18 (cap 24)
+  ok  f354 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f354 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 358 crypt: 3 (cap 12), creatures 8; lights 41 (shadowed 1)
+L28D_DECALS floor 358 crypt: 17 (cap 24)
+  ok  f358 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f358 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 365 shrine: 3 (cap 12), creatures 5; lights 36 (shadowed 2)
+L28D_DECALS floor 365 shrine: 18 (cap 24)
+  ok  f365 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f365 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 369 crypt: 2 (cap 12), creatures 8; lights 38 (shadowed 1)
+L28D_DECALS floor 369 crypt: 18 (cap 24)
+  ok  f369 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f369 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 378 treasury: 2 (cap 12), creatures 6; lights 50 (shadowed 1)
+L28D_DECALS floor 378 treasury: 18 (cap 24)
+  ok  f378 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f378 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 380 crypt: 3 (cap 12), creatures 6; lights 62 (shadowed 2)
+L28D_DECALS floor 380 crypt: 18 (cap 24)
+  ok  f380 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f380 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 389 treasury: 2 (cap 12), creatures 5; lights 40 (shadowed 1)
+L28D_DECALS floor 389 treasury: 18 (cap 24)
+  ok  f389 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f389 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 390 shrine: 3 (cap 12), creatures 8; lights 51 (shadowed 2)
+L28D_DECALS floor 390 shrine: 18 (cap 24)
+  ok  f390 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f390 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 400 treasury: 3 (cap 12), creatures 10; lights 55 (shadowed 2)
+L28D_DECALS floor 400 treasury: 18 (cap 24)
+  ok  f400 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f400 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 401 shrine: 2 (cap 12), creatures 5; lights 41 (shadowed 1)
+L28D_DECALS floor 401 shrine: 18 (cap 24)
+  ok  f401 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f401 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 405 crypt: 3 (cap 12), creatures 7; lights 54 (shadowed 2)
+L28D_DECALS floor 405 crypt: 18 (cap 24)
+  ok  f405 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f405 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 411 treasury: 3 (cap 12), creatures 7; lights 45 (shadowed 1)
+L28D_DECALS floor 411 treasury: 18 (cap 24)
+  ok  f411 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f411 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 412 shrine: 2 (cap 12), creatures 8; lights 45 (shadowed 1)
+L28D_DECALS floor 412 shrine: 18 (cap 24)
+  ok  f412 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f412 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 416 crypt: 2 (cap 12), creatures 7; lights 48 (shadowed 1)
+L28D_DECALS floor 416 crypt: 18 (cap 24)
+  ok  f416 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f416 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 422 treasury: 3 (cap 12), creatures 6; lights 48 (shadowed 1)
+L28D_DECALS floor 422 treasury: 18 (cap 24)
+  ok  f422 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f422 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 423 shrine: 3 (cap 12), creatures 5; lights 45 (shadowed 1)
+L28D_DECALS floor 423 shrine: 18 (cap 24)
+  ok  f423 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f423 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 427 crypt: 2 (cap 12), creatures 8; lights 47 (shadowed 1)
+L28D_DECALS floor 427 crypt: 17 (cap 24)
+  ok  f427 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f427 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 438 crypt: 3 (cap 12), creatures 7; lights 41 (shadowed 1)
+L28D_DECALS floor 438 crypt: 17 (cap 24)
+  ok  f438 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f438 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 447 treasury: 2 (cap 12), creatures 7; lights 53 (shadowed 1)
+L28D_DECALS floor 447 treasury: 17 (cap 24)
+  ok  f447 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f447 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 448 shrine: 2 (cap 12), creatures 7; lights 53 (shadowed 1)
+L28D_DECALS floor 448 shrine: 18 (cap 24)
+  ok  f448 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f448 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 449 crypt: 2 (cap 12), creatures 6; lights 39 (shadowed 1)
+L28D_DECALS floor 449 crypt: 18 (cap 24)
+  ok  f449 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f449 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 458 treasury: 2 (cap 12), creatures 8; lights 40 (shadowed 1)
+L28D_DECALS floor 458 treasury: 17 (cap 24)
+  ok  f458 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f458 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 459 shrine: 5 (cap 12), creatures 8; lights 49 (shadowed 1)
+L28D_DECALS floor 459 shrine: 18 (cap 24)
+  ok  f459 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f459 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 469 treasury: 3 (cap 12), creatures 9; lights 45 (shadowed 1)
+L28D_DECALS floor 469 treasury: 18 (cap 24)
+  ok  f469 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f469 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 470 shrine: 3 (cap 12), creatures 8; lights 64 (shadowed 2)
+L28D_DECALS floor 470 shrine: 18 (cap 24)
+  ok  f470 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f470 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 474 crypt: 2 (cap 12), creatures 6; lights 38 (shadowed 1)
+L28D_DECALS floor 474 crypt: 18 (cap 24)
+  ok  f474 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f474 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 480 treasury: 4 (cap 12), creatures 8; lights 51 (shadowed 2)
+L28D_DECALS floor 480 treasury: 17 (cap 24)
+  ok  f480 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f480 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 481 shrine: 3 (cap 12), creatures 6; lights 44 (shadowed 1)
+L28D_DECALS floor 481 shrine: 18 (cap 24)
+  ok  f481 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f481 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 485 crypt: 3 (cap 12), creatures 6; lights 51 (shadowed 2)
+L28D_DECALS floor 485 crypt: 18 (cap 24)
+  ok  f485 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f485 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 491 treasury: 4 (cap 12), creatures 5; lights 45 (shadowed 1)
+L28D_DECALS floor 491 treasury: 17 (cap 24)
+  ok  f491 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f491 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 492 shrine: 3 (cap 12), creatures 6; lights 43 (shadowed 1)
+L28D_DECALS floor 492 shrine: 18 (cap 24)
+  ok  f492 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f492 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 496 crypt: 2 (cap 12), creatures 8; lights 43 (shadowed 1)
+L28D_DECALS floor 496 crypt: 17 (cap 24)
+  ok  f496 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f496 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 507 crypt: 2 (cap 12), creatures 6; lights 40 (shadowed 1)
+L28D_DECALS floor 507 crypt: 16 (cap 24)
+  ok  f507 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f507 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 516 treasury: 2 (cap 12), creatures 6; lights 38 (shadowed 1)
+L28D_DECALS floor 516 treasury: 18 (cap 24)
+  ok  f516 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f516 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 517 shrine: 2 (cap 12), creatures 8; lights 49 (shadowed 1)
+L28D_DECALS floor 517 shrine: 18 (cap 24)
+  ok  f517 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f517 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 527 treasury: 2 (cap 12), creatures 5; lights 37 (shadowed 1)
+L28D_DECALS floor 527 treasury: 18 (cap 24)
+  ok  f527 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f527 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 528 shrine: 2 (cap 12), creatures 6; lights 49 (shadowed 1)
+L28D_DECALS floor 528 shrine: 18 (cap 24)
+  ok  f528 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f528 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 532 crypt: 2 (cap 12), creatures 7; lights 47 (shadowed 1)
+L28D_DECALS floor 532 crypt: 17 (cap 24)
+  ok  f532 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f532 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 538 treasury: 2 (cap 12), creatures 7; lights 44 (shadowed 1)
+L28D_DECALS floor 538 treasury: 17 (cap 24)
+  ok  f538 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f538 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 539 shrine: 2 (cap 12), creatures 7; lights 39 (shadowed 1)
+L28D_DECALS floor 539 shrine: 17 (cap 24)
+  ok  f539 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f539 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 543 crypt: 3 (cap 12), creatures 4; lights 48 (shadowed 1)
+L28D_DECALS floor 543 crypt: 18 (cap 24)
+  ok  f543 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f543 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 549 treasury: 3 (cap 12), creatures 8; lights 53 (shadowed 1)
+L28D_DECALS floor 549 treasury: 18 (cap 24)
+  ok  f549 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f549 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 550 shrine: 4 (cap 12), creatures 5; lights 50 (shadowed 2)
+L28D_DECALS floor 550 shrine: 18 (cap 24)
+  ok  f550 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f550 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 554 crypt: 3 (cap 12), creatures 6; lights 47 (shadowed 1)
+L28D_DECALS floor 554 crypt: 18 (cap 24)
+  ok  f554 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f554 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 561 shrine: 2 (cap 12), creatures 8; lights 50 (shadowed 1)
+L28D_DECALS floor 561 shrine: 17 (cap 24)
+  ok  f561 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f561 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 565 crypt: 4 (cap 12), creatures 9; lights 52 (shadowed 2)
+L28D_DECALS floor 565 crypt: 17 (cap 24)
+  ok  f565 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f565 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 574 treasury: 4 (cap 12), creatures 7; lights 44 (shadowed 1)
+L28D_DECALS floor 574 treasury: 18 (cap 24)
+  ok  f574 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f574 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 576 crypt: 2 (cap 12), creatures 6; lights 48 (shadowed 1)
+L28D_DECALS floor 576 crypt: 17 (cap 24)
+  ok  f576 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f576 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 585 treasury: 3 (cap 12), creatures 6; lights 59 (shadowed 2)
+L28D_DECALS floor 585 treasury: 18 (cap 24)
+  ok  f585 treasury: spans wall to wall (2 cells, 7.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f585 dropped: 72 straight walks at it (every 0.2 m across 7.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 586 shrine: 5 (cap 12), creatures 5; lights 50 (shadowed 1)
+L28D_DECALS floor 586 shrine: 18 (cap 24)
+  ok  f586 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f586 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 596 treasury: 3 (cap 12), creatures 7; lights 55 (shadowed 1)
+L28D_DECALS floor 596 treasury: 18 (cap 24)
+  ok  f596 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f596 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 597 shrine: 2 (cap 12), creatures 7; lights 52 (shadowed 1)
+L28D_DECALS floor 597 shrine: 17 (cap 24)
+  ok  f597 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f597 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 601 crypt: 2 (cap 12), creatures 8; lights 50 (shadowed 1)
+L28D_DECALS floor 601 crypt: 17 (cap 24)
+  ok  f601 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f601 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 607 treasury: 2 (cap 12), creatures 6; lights 41 (shadowed 1)
+L28D_DECALS floor 607 treasury: 17 (cap 24)
+  ok  f607 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f607 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 608 shrine: 2 (cap 12), creatures 7; lights 52 (shadowed 1)
+L28D_DECALS floor 608 shrine: 17 (cap 24)
+  ok  f608 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f608 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 612 crypt: 2 (cap 12), creatures 7; lights 45 (shadowed 1)
+L28D_DECALS floor 612 crypt: 18 (cap 24)
+  ok  f612 crypt: spans wall to wall (3 cells, 11.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f612 dropped: 112 straight walks at it (every 0.2 m across 11.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 618 treasury: 2 (cap 12), creatures 8; lights 31 (shadowed 1)
+L28D_DECALS floor 618 treasury: 18 (cap 24)
+  ok  f618 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f618 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 619 shrine: 2 (cap 12), creatures 5; lights 55 (shadowed 1)
+L28D_DECALS floor 619 shrine: 18 (cap 24)
+  ok  f619 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f619 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 623 crypt: 3 (cap 12), creatures 7; lights 45 (shadowed 1)
+L28D_DECALS floor 623 crypt: 18 (cap 24)
+  ok  f623 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f623 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 634 crypt: 2 (cap 12), creatures 7; lights 46 (shadowed 1)
+L28D_DECALS floor 634 crypt: 17 (cap 24)
+  ok  f634 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f634 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 643 treasury: 3 (cap 12), creatures 7; lights 55 (shadowed 1)
+L28D_DECALS floor 643 treasury: 18 (cap 24)
+  ok  f643 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f643 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 644 shrine: 3 (cap 12), creatures 8; lights 60 (shadowed 1)
+L28D_DECALS floor 644 shrine: 17 (cap 24)
+  ok  f644 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f644 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 645 crypt: 3 (cap 12), creatures 9; lights 53 (shadowed 2)
+L28D_DECALS floor 645 crypt: 18 (cap 24)
+  ok  f645 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f645 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 654 treasury: 4 (cap 12), creatures 9; lights 55 (shadowed 1)
+L28D_DECALS floor 654 treasury: 18 (cap 24)
+  ok  f654 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f654 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 655 shrine: 4 (cap 12), creatures 8; lights 48 (shadowed 2)
+L28D_DECALS floor 655 shrine: 18 (cap 24)
+  ok  f655 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f655 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 665 treasury: 4 (cap 12), creatures 7; lights 53 (shadowed 2)
+L28D_DECALS floor 665 treasury: 18 (cap 24)
+  ok  f665 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f665 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 666 shrine: 2 (cap 12), creatures 8; lights 46 (shadowed 1)
+L28D_DECALS floor 666 shrine: 17 (cap 24)
+  ok  f666 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f666 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 670 crypt: 3 (cap 12), creatures 9; lights 53 (shadowed 2)
+L28D_DECALS floor 670 crypt: 18 (cap 24)
+  ok  f670 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f670 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 676 treasury: 2 (cap 12), creatures 4; lights 55 (shadowed 1)
+L28D_DECALS floor 676 treasury: 17 (cap 24)
+  ok  f676 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f676 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 677 shrine: 2 (cap 12), creatures 6; lights 46 (shadowed 1)
+L28D_DECALS floor 677 shrine: 18 (cap 24)
+  ok  f677 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f677 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 681 crypt: 2 (cap 12), creatures 5; lights 44 (shadowed 1)
+L28D_DECALS floor 681 crypt: 18 (cap 24)
+  ok  f681 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f681 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 687 treasury: 2 (cap 12), creatures 7; lights 45 (shadowed 1)
+L28D_DECALS floor 687 treasury: 18 (cap 24)
+  ok  f687 treasury: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f687 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 688 shrine: 3 (cap 12), creatures 7; lights 44 (shadowed 1)
+L28D_DECALS floor 688 shrine: 18 (cap 24)
+  ok  f688 shrine: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f688 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+L28C_EMITTERS floor 692 crypt: 2 (cap 12), creatures 8; lights 46 (shadowed 1)
+L28D_DECALS floor 692 crypt: 18 (cap 24)
+  ok  f692 crypt: spans wall to wall (1 cell, 3.0 m clear, stone both ends true, floor both sides true, turned across true)
+  ok  f692 dropped: 32 straight walks at it (every 0.2 m across 3.0 m, both ways) - 0 got through, 0 into the bars
+D88 probe: 150 floors (crypt/shrine/treasury), 150 portcullises, 0 floors with no fit spot; widths 1/2/3 cells = 145/4/1; on the way through 150; a long way round exists 101, a true choke 49; 246.3 s
+  ok  most crypt/shrine/treasury floors get a portcullis (150 of 150)
+D88_PROBE OK (1051 checks, 0 failed)
+ERROR: 1 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 52 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+WARNING: 54 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

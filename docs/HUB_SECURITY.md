@@ -625,3 +625,26 @@ tally is computed counts rendered as text. No CSP change, no new fetch/origin, n
 ## H28 - hero deep link (#hero-N)
 - Only the URL fragment is read, and only if it matches `^hero-\d{1,10}$` (anything else beginning `hero-` simply matches nobody). The integer is only COMPARED to the same hash computed for each hero in the snapshot: never a selector, URL, src, href, style or markup. A hostile hero name yields a number; its sheet renders through el()/textContent (verified with `<img src=x onerror=alert(1)>`: no img element, no dialog, 0 page errors).
 - The copy control writes a page-built string (page address + `#hero-` + integer) to the clipboard. No new fetch, origin or write path. CSP unchanged.
+
+## H29 - the Shops tab (2026-11-16)
+
+New surface: `renderShops(p)` in `web/app.js`, panel `#shops` in `web/index.html`, CSS appended to `style.css`.
+
+- Every shop, item, cargo, order, walker and rarity string reaches the DOM only through `el()` (textContent). No innerHTML in the new code.
+- No snapshot value is a URL, src, href, selector or style. A rarity string is matched to the page-owned set `SHOP_RARITY` before it picks a CSS class (`rar-<name>`); anything else gets no class and is shown as text. The shop glyph is chosen by a regex on the name but only from the `ICON_SET` whitelist (anvil or stall).
+- CSP unchanged. No new fetch, no new origin. Item icons (D73, `assets/icons/items/`) are NOT used yet: they are not under `web/`, and drawing one means building an image path from a snapshot key. That would need a page-owned key whitelist and copied assets - flagged for supervisor review, not done.
+- Payload gate: `KNOWN_V` now accepts "5". Contract read defensively: `p.shops[].stock`, `p.caravan` (or `p.trader`), `p.orders`. Absent fields give an honest "not published yet" state.
+- Canary: `?mock=shops` (mixed levels, caravan present, hostile shop/item/cargo/order/rarity strings) and `?mock=shops1` (every shop level 1). The `<img onerror>`, `<b>` and `<script>` strings render as literal text; verified headless with zero dialogs and zero injected elements.
+
+## H30 - Satchel tab: the only place a snapshot string LEAVES the page
+Buttons send a chat command over the existing H6/H8 IRC socket. Built only by satCommand(): verb from a fixed table + one argument with all control chars (C0, DEL, C1, U+2028/9) replaced by spaces, whitespace collapsed, capped 80. No CR/LF can reach the socket, the message always starts with our verb (never "/" or a bare IRC line). Rate-limited 1.2 s; requires sign-in; stone needs a double press. Canary: ?mock=satchel has <img onerror> names and a name with CRLF + "PRIVMSG"; verified as text and single-line. CSP unchanged (byte-identical), no new scope, no innerHTML in the new code.
+
+## H31 - the Season tab (2026-11-16)
+- A fifteenth tab, read-only. It ranks `p.heroes` + `p.fallen` four ways (deepest, earned, died hardest,
+  lived longest). No new fetch, no storage, no network, no CSP change, no new icon (reuses delve/coin/death/town).
+- Every name, class, killer and number reaches the DOM only via `el()`/`textContent`; `coat()` takes the name as a
+  hash input only. The bar fill is a CSSOM number clamped 0..1. No snapshot value is a URL, src, href, class or style.
+- Optional fields read defensively (`earned|gold_earned|total_gold|lifetime_gold`, `days_alive|age_days|lived_days|age`,
+  `born_day|joined_day|enlisted_day`); a board without data says so instead of guessing.
+- Tested: `?mock=season` (full season, hostile name/class/killer), `season0` (empty), `season3` (v3, no age fields).
+  Hostile `<img onerror>` renders as literal text, no dialog, no page errors.

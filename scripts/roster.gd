@@ -452,6 +452,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
             if not spend(h, rework):
                 return "%s needs %d gold to have it reworked into a %s - you have %d." % [h["name"], rework, kind, int(h["gold"])]
             h["wkind"] = kind
+            _stamp(h)
             changed.emit(user_id)
             return "The smith reworks %s's steel into %s %s.%s" % [h["name"], _an(weapon_name(h)), weapon_name(h), last_haggle]
     var nxt: int = int(h["weapon"]) + 1
@@ -474,6 +475,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
     h["weapon"] = nxt
     if kind != "":
         h["wkind"] = kind
+    _stamp(h)
     changed.emit(user_id)
     return "%s takes up %s %s. (+%d atk, %dd%d) %s%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), forge_flavour(nxt), last_haggle]
 
@@ -534,8 +536,9 @@ func buy_armour(user_id: String) -> String:
         return "%s needs %d gold for %s - you have %d." \
             % [h["name"], aprice, a["name"], int(h["gold"])]
     h["armour"] = nxt
+    _stamp(h)
     changed.emit(user_id)
-    return "%s is fitted with %s. (+%d hp)%s" % [h["name"], a["name"], int(a["hp"]), last_haggle]
+    return "%s is fitted with %s. (+%d hp)%s" % [h["name"], armour_name(h), int(a["hp"]), last_haggle]
 
 func buy_potion(user_id: String, n := 1) -> String:
     var h := get_hero(user_id)
@@ -821,6 +824,10 @@ func leaderboard(kind := "deepest", n := 10) -> Array:
 # what this hero is holding, for Rig.equip()
 func weapon_mesh(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
+    # D94: the NAMED piece decides the mesh (its kind from its name, its own mesh among its siblings)
+    var pl := piece_look(h)
+    if String(pl.get("path", "")) != "":
+        return String(pl["path"])
     if t <= 0:
         return ""
     # L3: a chosen kind (!forge <kind>) has its own mesh per tier
@@ -843,13 +850,49 @@ func offhand_bone(h: Dictionary) -> String:
 func weapon_look(h: Dictionary) -> Dictionary:
     var w: Dictionary = WEAPONS[clampi(int(h["weapon"]), 0, WEAPONS.size() - 1)]
     var path := weapon_mesh(h)
-    return {"scale": float(w["scale"]) * Gear.hand_scale(path), "glow": float(w["glow"])}
+    var pl := piece_look(h)
+    # D94: the tier sets the size and the smoulder (the numbers); the piece adds its own stuff.
+    # A starting-kit piece at tier 0 is held at the plain tier's size (the ladder's 0.0 is "no mesh")
+    var sc := float(w["scale"]) if int(h["weapon"]) > 0 else 0.92
+    return {"scale": sc * float(pl.get("scale_mul", 1.0)) * Gear.hand_scale(path), "glow": float(w["glow"]), "piece": pl}
+
+## ---- D94: the named piece a hero holds / wears (the tier's face; see Gear.weapon_id)
+func weapon_piece_id(h: Dictionary) -> String:
+    var fam := String(CLASSES.get(String(h.get("class", "")), {}).get("family", "blade"))
+    var kind := String(h.get("wkind", CLASSES.get(String(h.get("class", "")), {}).get("kind", "")))
+    return Gear.weapon_id(h, fam, kind)
+
+func piece_look(h: Dictionary) -> Dictionary:
+    var id := weapon_piece_id(h)
+    if id == "":
+        return {}
+    var cls: Dictionary = CLASSES.get(String(h.get("class", "")), {})
+    var fam := String(cls.get("family", "blade"))
+    var kind := String(h.get("wkind", cls.get("kind", "")))
+    if kind == "":
+        var ks := Gear.kinds_of(fam)
+        kind = String(ks[0]) if not ks.is_empty() else ""
+    return Gear.weapon_piece_look(id, fam, int(h.get("weapon", 0)), kind)
+
+func armour_name(h: Dictionary) -> String:
+    var a := Gear.armour_piece(Gear.armour_id(h))
+    if not a.is_empty():
+        return String(a["name"])
+    return String(ARMOUR[clampi(int(h.get("armour", 0)), 0, ARMOUR.size() - 1)]["name"])
+
+func _stamp(h: Dictionary) -> void:
+    var cls: Dictionary = CLASSES.get(String(h.get("class", "")), {})
+    Gear.stamp(h, String(cls.get("family", "blade")), String(h.get("wkind", cls.get("kind", ""))))
 
 # the full name a viewer sees: tier adjective + family noun
 const FAMILY_NOUN := {"blade": "blade", "axe": "axe", "arcane": "focus", "ranged": "bow"}
 
 func weapon_name(h: Dictionary) -> String:
     var t: int = int(h["weapon"])
+    # D94: a viewer sees the NAME of the piece they hold, not the tier adjective
+    var wp := Gear.weapon_piece(weapon_piece_id(h))
+    if not wp.is_empty():
+        return String(wp["name"])
     if t <= 0:
         return "bare hands"
     var kind := String(h.get("wkind", CLASSES[h["class"]].get("kind", "")))
@@ -891,8 +934,9 @@ func find_gear(user_id: String, floor_no: int, roll: float, lord := false) -> St
         var kinds := Gear.kinds_of(String(CLASSES[h["class"]]["family"]))
         if not kinds.is_empty():
             h["wkind"] = kinds[randi() % kinds.size()]
+    _stamp(h)
     changed.emit(user_id)
-    var what := weapon_name(h) if not arm else String(ARMOUR[nxt]["name"])
+    var what := weapon_name(h) if not arm else armour_name(h)
     return "%s prises %s %s from the dead on floor %d." % [h["name"], _an(what), what, floor_no] if not arm \
         else "%s strips a set of %s off the dead on floor %d." % [h["name"], what, floor_no]
 

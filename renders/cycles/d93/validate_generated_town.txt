@@ -1,0 +1,136 @@
+D93_VALIDATE FAIL overlap=0 on_road=8 on_square=3 door=61 unreached=63 patch=0 | roads=191 buildings=66 sites=6 no_door=0 components=5
+ON_ROAD b001(lm_hall) on road_044 by 3.69 m
+ON_ROAD b002(lm_chapel) on road_101 by 3.46 m
+ON_ROAD b002(lm_chapel) on road_139 by 0.42 m
+ON_ROAD b002(lm_chapel) on road_163 by 0.42 m
+ON_ROAD b003(lm_barracks) on road_013 by 3.36 m
+ON_ROAD b003(lm_barracks) on road_016 by 3.36 m
+ON_ROAD b003(lm_barracks) on road_017 by 4.50 m
+ON_ROAD b004(lm_windmill) on road_167 by 0.72 m
+ON_SQUARE b008(c)
+ON_SQUARE b014(c)
+ON_SQUARE b050(a)
+DOOR b006(a) door 6.81 m from a road
+DOOR b007(c) door 5.04 m from a road
+DOOR b008(c) door 4.66 m from a road
+DOOR b009(c) door 5.35 m from a road
+DOOR b010(a) door 6.59 m from a road
+DOOR b011(a) door 5.66 m from a road
+DOOR b012(d) door 6.47 m from a road
+DOOR b013(c) door 5.48 m from a road
+DOOR b014(c) door 4.90 m from a road
+DOOR b015(c) door 7.83 m from a road
+DOOR b016(c) door 4.77 m from a road
+DOOR b017(a) door 5.64 m from a road
+DOOR b018(a) door 5.99 m from a road
+DOOR b019(d) door 4.93 m from a road
+DOOR b020(a) door 5.28 m from a road
+DOOR b021(a) door 5.88 m from a road
+DOOR b022(apothecary) door 5.14 m from a road
+DOOR b023(b) door 3.81 m from a road
+DOOR b024(armorer) door 3.70 m from a road
+DOOR b025(d) door 4.48 m from a road
+DOOR b026(d) door 4.92 m from a road
+DOOR b027(store) door 4.30 m from a road
+DOOR b028(b) door 3.56 m from a road
+DOOR b029(a) door 5.24 m from a road
+DOOR b030(c) door 4.68 m from a road
+DOOR b031(a) door 5.22 m from a road
+DOOR b032(b) door 3.79 m from a road
+DOOR b033(blacksmith) door 5.59 m from a road
+DOOR b034(c) door 4.64 m from a road
+DOOR b035(a) door 6.09 m from a road
+DOOR b036(blacksmith) door 4.28 m from a road
+DOOR b037(d) door 4.25 m from a road
+DOOR b038(b) door 5.12 m from a road
+DOOR b039(tavern) door 3.64 m from a road
+DOOR b040(a) door 5.43 m from a road
+DOOR b041(d) door 4.58 m from a road
+DOOR b042(c) door 4.75 m from a road
+DOOR b043(d) door 4.93 m from a road
+DOOR b044(a) door 5.65 m from a road
+DOOR b045(a) door 6.94 m from a road
+DOOR b046(b) door 3.44 m from a road
+DOOR b047(c) door 25.59 m from a road
+DOOR b048(b) door 26.17 m from a road
+DOOR b049(a) door 13.47 m from a road
+DOOR b050(a) door 22.16 m from a road
+DOOR b051(a) door 13.89 m from a road
+DOOR b052(b) door 24.38 m from a road
+DOOR b053(a) door 20.04 m from a road
+DOOR b054(b) door 19.42 m from a road
+DOOR b055(b) door 19.94 m from a road
+DOOR b056(d) door 5.29 m from a road
+DOOR b057(a) door 16.55 m from a road
+DOOR b058(b) door 21.80 m from a road
+DOOR b059(a) door 25.01 m from a road
+DOOR b060(d) door 9.74 m from a road
+DOOR b061(a) door 23.30 m from a road
+DOOR b062(b) door 22.82 m from a road
+DOOR b063(d) door 21.25 m from a road
+DOOR b064(a) door 24.93 m from a road
+DOOR b065(d) door 31.18 m from a road
+DOOR b066(b) door 15.51 m from a road
+UNREACHED b006 (nearest road road_118, 6.8 m)
+UNREACHED b007 (nearest road road_099, 5.0 m)
+UNREACHED b008 (nearest road road_099, 4.7 m)
+UNREACHED b009 (nearest road road_102, 5.3 m)
+UNREACHED b010 (nearest road road_104, 6.6 m)
+UNREACHED b011 (nearest road road_104, 5.7 m)
+UNREACHED b012 (nearest road road_118, 6.5 m)
+UNREACHED b013 (nearest road road_109, 5.5 m)
+UNREACHED b014 (nearest road road_099, 4.9 m)
+UNREACHED b015 (nearest road road_119, 7.8 m)
+UNREACHED b016 (nearest road road_094, 4.8 m)
+UNREACHED b017 (nearest road road_112, 5.6 m)
+UNREACHED b018 (nearest road road_121, 6.0 m)
+UNREACHED b019 (nearest road road_163, 4.9 m)
+UNREACHED b020 (nearest road road_115, 5.3 m)
+UNREACHED b021 (nearest road road_001, 5.9 m)
+UNREACHED b022 (nearest road road_147, 5.1 m)
+UNREACHED b023 (nearest road road_117, 3.8 m)
+UNREACHED b024 (nearest road road_016, 3.7 m)
+UNREACHED b025 (nearest road road_025, 4.5 m)
+UNREACHED b026 (nearest road road_027, 4.9 m)
+UNREACHED b027 (nearest road road_035, 4.3 m)
+UNREACHED b028 (nearest road road_044, 3.6 m)
+UNREACHED b029 (nearest road road_044, 5.2 m)
+UNREACHED b030 (nearest road road_142, 4.7 m)
+UNREACHED b031 (nearest road road_142, 5.2 m)
+UNREACHED b032 (nearest road road_046, 3.8 m)
+UNREACHED b033 (nearest road road_077, 5.6 m)
+UNREACHED b034 (nearest road road_142, 4.6 m)
+UNREACHED b035 (nearest road road_161, 6.1 m)
+UNREACHED b036 (nearest road road_074, 4.3 m)
+UNREACHED b037 (nearest road road_142, 4.2 m)
+UNREACHED b038 (nearest road road_062, 5.1 m)
+UNREACHED b039 (nearest road road_058, 3.6 m)
+UNREACHED b040 (nearest road road_070, 5.4 m)
+UNREACHED b041 (nearest road road_070, 4.6 m)
+UNREACHED b042 (nearest road road_068, 4.8 m)
+UNREACHED b043 (nearest road road_064, 4.9 m)
+UNREACHED b044 (nearest road road_061, 5.7 m)
+UNREACHED b045 (nearest road road_073, 6.9 m)
+UNREACHED b046 (nearest road road_066, 3.4 m)
+UNREACHED b047 (nearest road road_104, 25.6 m)
+UNREACHED b048 (nearest road road_094, 26.2 m)
+UNREACHED b049 (nearest road road_094, 13.5 m)
+UNREACHED b050 (nearest road road_099, 22.2 m)
+UNREACHED b051 (nearest road road_001, 13.9 m)
+UNREACHED b052 (nearest road road_117, 24.4 m)
+UNREACHED b053 (nearest road road_170, 20.0 m)
+UNREACHED b054 (nearest road road_044, 19.4 m)
+UNREACHED b055 (nearest road road_171, 19.9 m)
+UNREACHED b056 (nearest road road_142, 5.3 m)
+UNREACHED b057 (nearest road road_051, 16.6 m)
+UNREACHED b058 (nearest road road_048, 21.8 m)
+UNREACHED b059 (nearest road road_160, 25.0 m)
+UNREACHED b060 (nearest road road_164, 9.7 m)
+UNREACHED b061 (nearest road road_058, 23.3 m)
+UNREACHED b062 (nearest road road_058, 22.8 m)
+UNREACHED b063 (nearest road road_169, 21.3 m)
+UNREACHED b064 (nearest road road_138, 24.9 m)
+UNREACHED b065 (nearest road road_073, 31.2 m)
+UNREACHED b066 (nearest road road_169, 15.5 m)
+UNREACHED site_002 (nearest road road_175, 0.0 m)
+UNREACHED site_003 (nearest road road_178, 11.5 m)

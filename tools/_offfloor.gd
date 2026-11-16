@@ -34,7 +34,7 @@ func _process(_dt: float) -> bool:
         for m in _d._alive():
             var bp: Vector3 = (m["body"] as Node3D).global_position
             for o in _d.dun.info.get("obstacles", []):
-                if Vector2(bp.x - (o[0] as Vector3).x - o0.x, bp.z - (o[0] as Vector3).z - o0.z).length() < float(o[1]) - 0.05:
+                if FloorGen.obst_gap(o, bp.x - o0.x, bp.z - o0.z) < -0.05:
                     _inprop += 1
                     break
             _n += 1
@@ -46,7 +46,7 @@ func _process(_dt: float) -> bool:
             _mon_n += 1
             var mp: Vector3 = (mo as Node3D).global_position
             for o in _d.dun.info.get("obstacles", []):
-                if Vector2(mp.x - (o[0] as Vector3).x - o0.x, mp.z - (o[0] as Vector3).z - o0.z).length() < float(o[1]) - 0.05:
+                if FloorGen.obst_gap(o, mp.x - o0.x, mp.z - o0.z) < -0.05:
                     _mon_inprop += 1
                     print("INPROP monster ", (mo as Monster).def.get("name"))
                     break

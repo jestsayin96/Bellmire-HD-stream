@@ -1,0 +1,75 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The party goes quiet at the third landing, as parties do.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 puglin, 1 hollowed bog frog.
+FEED The dead here were laid out in rows, and the rows were counted.
+FEED Hero2 casts Smite at hollowed giant rat.
+FEED Hero6 casts Frost at hollowed giant rat.
+FEED Hero1 casts Bolt at puglin.
+FEED Hero1 searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED Held. The gap kept, the party kept with it.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero3 steps on a slot in the floor - a blade! DEX 20 vs DC 10, 3 damage (halved).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 puglin, 1 skeleton minion, 1 cave spider.
+FEED Hero0 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 casts Bolt at cave spider.
+FEED Hero6's bolt fires off behind them (7 vs DC 11).
+FEED Hero1 casts Bolt at cave spider.
+FEED Hero2 casts Smite at puglin.
+FEED Hero6 casts Frost at puglin.
+FEED Hero1 casts Chain Bolt at puglin.
+FEED Hero5 turns on the wounded skeleton minion to finish it.
+FEED Hero6 turns on the wounded skeleton minion to finish it.
+FEED Hero7 turns on the wounded skeleton minion to finish it.
+FEED Hero2 works smite and the room takes the benefit (1 vs DC 11).
+FEED Hero6 casts Frost at bog frog.
+FEED Hero1 searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Floor 2 cleared, and the chalk marks glow a shade less red.
+FEED Hero1 searches the chest - ...no loot... (Investigation 9 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero2 spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+FEED Hero2 gets a captive free. 42 gold, 8 ways - small thanks for a poor life.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 drowned puglin, 1 cave spider, 1 bone bowman.
+FEED Hero2 casts Bolt at drowned puglin.
+FEED Hero1 casts Fire at cave spider.
+FEED Hero5 spots a pressure plate (Perception 16 vs DC 11) and disarms it with thieves' tools (19).
+FEED Hero2 casts Bolt at bone bowman.
+FEED Hero6 casts Bolt at slime.
+FEED Hero1 casts Bolt at slime.
+FEED The slime divides.
+FEED Hero4 turns on the wounded slimeling to finish it.
+FEED Hero6 turns on the wounded slimeling to finish it.
+FEED Hero2 casts Smite at slimeling.
+FEED Hero1 searches (Investigation 22) and turns up 43 gold on floor 3.
+FEED The floor pays out. Count what came out of it.
+FEED Hero1 searches the chest - Successfully found loot!! 37 gold (Investigation 14 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero0 steps on a grate - fire! DEX 20 vs DC 11, 4 damage (halved).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 4; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned risen bones, 2 drowned puglins, 1 drowned slime, 1 slime.
+FEED The oil is running low.
+FEED Hero0 rolls a 20 for initiative and is moving before anything else.
+FEED Hero1 casts chain. The scar adds a verse of its own (8 vs DC 12).
+FEED Hero6 reaches for frost; the scar reaches back (8 vs DC 12).
+FEED The slime divides.
+FEED Hero5 turns on the wounded drowned slimeling to finish it.
+FEED Hero7 turns on the wounded drowned slimeling to finish it.
+FEED Hero1 searches (Investigation 19) and turns up 53 gold on floor 4.
+FEED The dark withdraws a pace and sulks.
+FEED Hero1 finds a vial of Ford Water.
+FEED A grate shifts, and 1 skeleton minion, 1 drowned giant rat is already upon them.
+FEED Hero1 is cut off and falls back to the others.
+FEED Hero1 steps on a loose flagstone - darts! DEX 21 vs DC 12, 4 damage (halved).
+FEED Hero1 searches the chest - ...no loot... (Investigation 10 vs DC 12).
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 158 gold, 6 ore, 4 stone, 2 pieces of salvaged gear and 4 potions. 24 kills between them.
+FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp)
+OFFFLOOR 0 of 1695 samples; INPROP 0; MON_INPROP 0 of 135; floor reached 4 frames 5853 obstacles 28

@@ -1,261 +1,261 @@
 {
   "_source": "L13 (work plan 2). Accessories carry small 5e bonuses (ac, saves, hp, speed, hit, dmg); cosmetics change only the look. Bought with gold (!wear <item>, !dye <colour>); later with channel points (T1). Names in Bellmire's plain voice.",
   "accessories": {
-    "nightwatch_ring":  {"name": "Ring of the Night Watch", "slot": "ring", "cost": 380, "ac": 1, "flavour": "Iron, worn thin by the watch that wore it before you."},
-    "ferryman_ring":    {"name": "Ferryman's Ring", "slot": "ring", "cost": 420, "saves": 1, "flavour": "Paid once, to cross back."},
-    "hearth_amulet":    {"name": "Hearthstone Amulet", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "Warm to the touch on the coldest floor."},
-    "lamplight_amulet": {"name": "Lamplighter's Amulet", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "The guild gives these to the ones who keep the lamps."},
-    "guild_cloak":      {"name": "Guild Cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Grey wool, the guild's stitch at the collar."},
-    "mire_cloak":       {"name": "Mire-walker's Cloak", "slot": "cloak", "cost": 240, "saves": 1, "flavour": "Never quite dry."},
-    "road_boots":       {"name": "Boots of the West Road", "slot": "boots", "cost": 220, "speed": 0.6, "flavour": "They have walked further than you have."},
-    "quiet_boots":      {"name": "Soft Boots", "slot": "boots", "cost": 200, "hit": 1, "flavour": "Felt soles. The dark does not hear you coming."},
-    "smith_gloves":     {"name": "Smith's Gauntlets", "slot": "gloves", "cost": 280, "dmg": 2, "flavour": "Scorched at the fingertips."},
-    "archer_gloves":    {"name": "Fletcher's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Three fingers stitched, two bare."},
-    "scar_ring":        {"name": "Scarglass Ring", "slot": "ring", "cost": 400, "ac": 1, "flavour": "A sliver of the scar, set in iron. Cold, and a little wrong."},
-    "mason_ring":       {"name": "Mason's Band", "slot": "ring", "cost": 380, "ac": 1, "flavour": "Guild iron, squared at the shoulders like everything the masons make."},
-    "oath_ring":        {"name": "Oathkeeper's Ring", "slot": "ring", "cost": 420, "saves": 1, "flavour": "Sworn on the door, and kept on the hand."},
-    "grain_amulet":     {"name": "Grainward Charm", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "A seed from the first harvest, sealed in wax."},
-    "ward_pendant":     {"name": "Wardstone Pendant", "slot": "amulet", "cost": 320, "saves": 1, "flavour": "It hums when a spell goes wrong nearby."},
-    "ferry_locket":     {"name": "Ferrywife's Locket", "slot": "amulet", "cost": 340, "ac": 1, "flavour": "A keepsake from the Ford. She is still waiting for the boat."},
-    "watch_mantle":     {"name": "Watchman's Mantle", "slot": "cloak", "cost": 280, "ac": 1, "flavour": "Heavy at the shoulders, cut for the long walls."},
-    "lamp_cloak":       {"name": "Lamplighter's Cloak", "slot": "cloak", "cost": 260, "saves": 1, "flavour": "Smells of lamp-oil and late nights."},
-    "scarweave_cloak":  {"name": "Scarweave Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Woven from thread the scar touched. It never sits quite still."},
-    "miller_clogs":     {"name": "Miller's Clogs", "slot": "boots", "cost": 210, "speed": 0.6, "flavour": "Flour worked into every seam."},
-    "ford_boots":       {"name": "Ford-wader's Boots", "slot": "boots", "cost": 230, "saves": 1, "flavour": "Wet to the knee, always."},
-    "scout_boots":      {"name": "Scout's Boots", "slot": "boots", "cost": 220, "hit": 1, "flavour": "Quiet on gravel, quieter on stone."},
-    "mason_mitts":      {"name": "Mason's Mitts", "slot": "gloves", "cost": 280, "dmg": 2, "flavour": "Stone-callused, and two sizes too big."},
-    "pick_gloves":      {"name": "Pickman's Gloves", "slot": "gloves", "cost": 290, "dmg": 2, "flavour": "They know the weight of a swing better than you do."},
-    "bowyer_wraps":     {"name": "Bowyer's Wraps", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "Linen, chalked white."},
-    "hollow_ring":      {"name": "Hollowbone Ring", "slot": "ring", "cost": 400, "saves": 1, "flavour": "Carved from a lord's knuckle. It was not asked."},
-    "market_ring":      {"name": "Market Seal", "slot": "ring", "cost": 240, "hit": 1, "flavour": "The trade-master's ring - it opens purses, not doors."},
-    "bell_amulet":      {"name": "Clapperless Charm", "slot": "amulet", "cost": 340, "hp": 12, "flavour": "Shaped like the bell that never rings. It keeps you quiet too."},
-    "scribe_amulet":    {"name": "Guild Scribe's Seal", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "The roll is written in this hand."},
-    "raid_cloak":       {"name": "Raider's Trophy Cloak", "slot": "cloak", "cost": 300, "ac": 1, "flavour": "Taken off a raider who will not miss it."},
-    "deep_cloak":       {"name": "Deepwarden's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "The deeper you go, the colder it keeps you honest."},
-    "gate_boots":       {"name": "Gatewarden's Boots", "slot": "boots", "cost": 230, "hit": 1, "flavour": "They have stood a long watch at the Keep door."},
-    "fen_boots":        {"name": "Fen-strider's Boots", "slot": "boots", "cost": 220, "speed": 0.6, "flavour": "Mud slides off them like it was never there."},
-    "forge_grips":      {"name": "Forgemaster's Grips", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "The last pair the old smith wore."},
-    "tanner_gloves":    {"name": "Tanner's Gloves", "slot": "gloves", "cost": 240, "hit": 1, "flavour": "Supple, and they never let go."},
-    "e3po_signet":      {"name": "E3PO's Signet", "slot": "ring", "cost": 420, "ac": 1, "flavour": "The Commander's own seal. He always comes back for it - he comes back for everything."},
-    "barracks_key":     {"name": "Barracks Key", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "The guard's own door. Hurt enough and E3PO walks through it, then walks back out whole."},
-    "bellrope_wraps":        {"name": "Bellringer's Wraps", "slot": "gloves", "cost": 240, "hit": 1, "flavour": "Rope-burn calluses, lent to you with the rope."},
-    "drover_boots":          {"name": "Drover's Boots", "slot": "boots", "cost": 220, "speed": 1, "flavour": "Twenty miles a day behind cattle. They remember the pace."},
-    "chapel_amulet":         {"name": "Chapel Candle Amulet", "slot": "amulet", "cost": 320, "saves": 1, "flavour": "A stub of chapel wax in a tin cage. Lit once, for you."},
-    "sedge_ring":            {"name": "Sedge's Toll-Ring", "slot": "ring", "cost": 300, "ac": 1, "flavour": "Taken off the hand that took the toll."},
-    "harl_cloak":            {"name": "Red Harl's Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Red where it was always red. Harl has no further use for it."},
-    "ashfoot_boots":         {"name": "Ashfoot's Boots", "slot": "boots", "cost": 280, "speed": 1, "flavour": "Cob walked quiet. You will walk quieter."},
-    "weasel_gloves":         {"name": "The Weasel's Gloves", "slot": "gloves", "cost": 270, "hit": 1, "flavour": "Thin fingers, quick work. The guild asked no questions."},
-    "carp_charm":            {"name": "Grinning Carp Charm", "slot": "amulet", "cost": 260, "saves": 1, "flavour": "River-bone, grinning. The Carp itself is still down there."},
-    "scarward_ring":         {"name": "Scarward Ring", "slot": "ring", "cost": 440, "saves": 1, "flavour": "Turned against the scar. The scar notices being refused."},
-    "mourner_cloak":         {"name": "Mourner's Grey", "slot": "cloak", "cost": 250, "hp": 10, "flavour": "Worn once for every name the Chronicle keeps."},
-    "mill_mitts":            {"name": "Millhand's Mitts", "slot": "gloves", "cost": 200, "dmg": 1, "flavour": "Hands that shift full sacks all day hit like full sacks."},
-    "gate_whistle":          {"name": "Gatehouse Whistle", "slot": "amulet", "cost": 230, "saves": 1, "flavour": "One blast for bandits. Two for the scar. Nobody blows it twice."},
-    "commander_mantle":      {"name": "Commander's Field Mantle", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "E3PO wore one to the wall and walked back. He always walks back."},
-    "tally_ring":            {"name": "Tallykeeper's Ring", "slot": "ring", "cost": 210, "hp": 8, "flavour": "Notched once a season. The notches go a long way round."},
-    "thaw_ring": {"name": "Ring of the Thaw", "slot": "ring", "cost": 340, "saves": 1, "flavour": "Cut from the Ford's ice the morning it broke. Cold, and glad to be."},
-    "blight_charm": {"name": "Blightward Charm", "slot": "amulet", "cost": 360, "hp": 10, "flavour": "A rot-black ear of grain set in glass. Worn as a warning, not a trophy."},
-    "bucketline_gloves": {"name": "Bucket-line Gloves", "slot": "gloves", "cost": 260, "ac": 1, "flavour": "Scorched to the palm. In Bellmire that counts as a qualification."},
-    "barracks_cloak": {"name": "Barracks Watch-cloak", "slot": "cloak", "cost": 440, "ac": 1, "flavour": "Issued by the Commander himself, which means it was counted first."},
-    "crater_ring": {"name": "Crater-glass Ring", "slot": "ring", "cost": 520, "saves": 1, "flavour": "Glass from the night the sky fell. It hums when the scar does."},
-    "drover_spurs": {"name": "Drover's Spurs", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Walked cattle through a hurricane and did not lose one. Ask him about it. He will tell you."},
-    "clapper_ring": {"name": "Clapperless Ring", "slot": "ring", "cost": 460, "saves": 1, "flavour": "Cast from the bell's missing tongue. It keeps whatever it takes."},
-    "architect_ring": {"name": "Architect's Ring", "slot": "ring", "cost": 500, "ac": 1, "flavour": "One of his toys, sized for a finger. It fits nobody properly and everybody anyway."},
-    "toll_ring": {"name": "Toll Ring", "slot": "ring", "cost": 240, "hit": 1, "flavour": "Two coins hammered flat. Paid going down, paid coming up."},
-    "chitin_ring": {"name": "Brood-iron Ring", "slot": "ring", "cost": 430, "hp": 10, "flavour": "Chitin set in iron. The walls down there wear rings too."},
-    "flaskcount_amulet": {"name": "Flask-counter's Amulet", "slot": "amulet", "cost": 340, "saves": 1, "flavour": "COUNT THE FLASKS, engraved small, so he would have to lean in."},
-    "doorkeep_amulet": {"name": "Doorkeeper's Amulet", "slot": "amulet", "cost": 350, "ac": 1, "flavour": "KEEP THE DOOR, in letters worn smooth by one thumb."},
-    "thawbell_amulet": {"name": "Thaw-bell Amulet", "slot": "amulet", "cost": 300, "hp": 12, "flavour": "Rung the morning the ice let go. Warm ever since, or near enough."},
-    "mourncoil_amulet": {"name": "Mourncoil Scale", "slot": "amulet", "cost": 360, "saves": 1, "flavour": "A single scale, still turning when nothing turns it."},
-    "chronicle_cloak": {"name": "Chronicler's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Ink to the cuffs. Everything that happens to you gets written down."},
-    "gravewyrm_cloak": {"name": "Gravewyrm Hide Cloak", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "Heavy as a kept promise and about as comfortable."},
-    "ossuary_cloak": {"name": "Ossuary Mantle", "slot": "cloak", "cost": 440, "hp": 14, "flavour": "Bone buttons. They were going spare."},
-    "bucketline_cloak": {"name": "Bucket-line Cloak", "slot": "cloak", "cost": 260, "saves": 1, "flavour": "Soaked a hundred times and never once burned."},
-    "tollgate_boots": {"name": "Toll-gate Boots", "slot": "boots", "cost": 280, "speed": 1, "flavour": "They know the short way round the gate. Soon you will too."},
-    "nightwing_boots": {"name": "Nightwing Boots", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Light enough to be mistaken for the thing overhead."},
-    "chapel_clogs": {"name": "Chapel Clogs", "slot": "boots", "cost": 200, "ac": 1, "flavour": "Blessed once, cheaply, and it appears to have taken."},
-    "craterglass_boots": {"name": "Craterglass Boots", "slot": "boots", "cost": 290, "saves": 1, "flavour": "Soles glassed by whatever landed. Nothing cuts up through them now."},
-    "bellringer_gloves": {"name": "Bell-ringer's Gloves", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "No clapper left to pull, so the hands found other work."},
-    "duchess_gloves": {"name": "Pale Duchess's Gloves", "slot": "gloves", "cost": 300, "dmg": 1, "flavour": "Far too fine for you. They do not appear to mind."},
-    "physic_gloves": {"name": "Apothecary's Gloves", "slot": "gloves", "cost": 220, "saves": 1, "flavour": "Stained to the wrist in colours the guild will not write down."},
-    "rattling_gauntlets": {"name": "Rattling Gauntlets", "slot": "gloves", "cost": 280, "hit": 1, "flavour": "They clatter. So does the Host, and it never slowed them."},
-    "mortar_gloves": {"name": "Mortarman's Gloves", "slot": "gloves", "cost": 230, "dmg": 1, "flavour": "The new wall went up in these. Something hit the old one first."}
+    "nightwatch_ring":  {"name": "Ring of the Night Watch", "slot": "ring", "cost": 380, "ac": 1, "flavour": "Iron, worn thin by the watch that wore it before you.", "rarity": "uncommon"},
+    "ferryman_ring":    {"name": "Ferryman's Ring", "slot": "ring", "cost": 420, "saves": 1, "flavour": "Paid once, to cross back.", "rarity": "rare"},
+    "hearth_amulet":    {"name": "Hearthstone Amulet", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "Warm to the touch on the coldest floor.", "rarity": "rare"},
+    "lamplight_amulet": {"name": "Lamplighter's Amulet", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "The guild gives these to the ones who keep the lamps.", "rarity": "uncommon"},
+    "guild_cloak":      {"name": "Guild Cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Grey wool, the guild's stitch at the collar.", "rarity": "uncommon"},
+    "mire_cloak":       {"name": "Mire-walker's Cloak", "slot": "cloak", "cost": 240, "saves": 1, "flavour": "Never quite dry.", "rarity": "common"},
+    "road_boots":       {"name": "Boots of the West Road", "slot": "boots", "cost": 220, "speed": 0.6, "flavour": "They have walked further than you have.", "rarity": "uncommon"},
+    "quiet_boots":      {"name": "Soft Boots", "slot": "boots", "cost": 200, "hit": 1, "flavour": "Felt soles. The dark does not hear you coming.", "rarity": "common"},
+    "smith_gloves":     {"name": "Smith's Gauntlets", "slot": "gloves", "cost": 280, "dmg": 2, "flavour": "Scorched at the fingertips.", "rarity": "rare"},
+    "archer_gloves":    {"name": "Fletcher's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Three fingers stitched, two bare.", "rarity": "uncommon"},
+    "scar_ring":        {"name": "Scarglass Ring", "slot": "ring", "cost": 400, "ac": 1, "flavour": "A sliver of the scar, set in iron. Cold, and a little wrong.", "rarity": "rare"},
+    "mason_ring":       {"name": "Mason's Band", "slot": "ring", "cost": 380, "ac": 1, "flavour": "Guild iron, squared at the shoulders like everything the masons make.", "rarity": "uncommon"},
+    "oath_ring":        {"name": "Oathkeeper's Ring", "slot": "ring", "cost": 420, "saves": 1, "flavour": "Sworn on the door, and kept on the hand.", "rarity": "rare"},
+    "grain_amulet":     {"name": "Grainward Charm", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "A seed from the first harvest, sealed in wax.", "rarity": "rare"},
+    "ward_pendant":     {"name": "Wardstone Pendant", "slot": "amulet", "cost": 320, "saves": 1, "flavour": "It hums when a spell goes wrong nearby.", "rarity": "uncommon"},
+    "ferry_locket":     {"name": "Ferrywife's Locket", "slot": "amulet", "cost": 340, "ac": 1, "flavour": "A keepsake from the Ford. She is still waiting for the boat.", "rarity": "uncommon"},
+    "watch_mantle":     {"name": "Watchman's Mantle", "slot": "cloak", "cost": 280, "ac": 1, "flavour": "Heavy at the shoulders, cut for the long walls.", "rarity": "uncommon"},
+    "lamp_cloak":       {"name": "Lamplighter's Cloak", "slot": "cloak", "cost": 260, "saves": 1, "flavour": "Smells of lamp-oil and late nights.", "rarity": "uncommon"},
+    "scarweave_cloak":  {"name": "Scarweave Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Woven from thread the scar touched. It never sits quite still.", "rarity": "rare"},
+    "miller_clogs":     {"name": "Miller's Clogs", "slot": "boots", "cost": 210, "speed": 0.6, "flavour": "Flour worked into every seam.", "rarity": "common"},
+    "ford_boots":       {"name": "Ford-wader's Boots", "slot": "boots", "cost": 230, "saves": 1, "flavour": "Wet to the knee, always.", "rarity": "uncommon"},
+    "scout_boots":      {"name": "Scout's Boots", "slot": "boots", "cost": 220, "hit": 1, "flavour": "Quiet on gravel, quieter on stone.", "rarity": "uncommon"},
+    "mason_mitts":      {"name": "Mason's Mitts", "slot": "gloves", "cost": 280, "dmg": 2, "flavour": "Stone-callused, and two sizes too big.", "rarity": "rare"},
+    "pick_gloves":      {"name": "Pickman's Gloves", "slot": "gloves", "cost": 290, "dmg": 2, "flavour": "They know the weight of a swing better than you do.", "rarity": "rare"},
+    "bowyer_wraps":     {"name": "Bowyer's Wraps", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "Linen, chalked white.", "rarity": "uncommon"},
+    "hollow_ring":      {"name": "Hollowbone Ring", "slot": "ring", "cost": 400, "saves": 1, "flavour": "Carved from a lord's knuckle. It was not asked.", "rarity": "rare"},
+    "market_ring":      {"name": "Market Seal", "slot": "ring", "cost": 240, "hit": 1, "flavour": "The trade-master's ring - it opens purses, not doors.", "rarity": "common"},
+    "bell_amulet":      {"name": "Clapperless Charm", "slot": "amulet", "cost": 340, "hp": 12, "flavour": "Shaped like the bell that never rings. It keeps you quiet too.", "rarity": "uncommon"},
+    "scribe_amulet":    {"name": "Guild Scribe's Seal", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "The roll is written in this hand.", "rarity": "uncommon"},
+    "raid_cloak":       {"name": "Raider's Trophy Cloak", "slot": "cloak", "cost": 300, "ac": 1, "flavour": "Taken off a raider who will not miss it.", "rarity": "uncommon"},
+    "deep_cloak":       {"name": "Deepwarden's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "The deeper you go, the colder it keeps you honest.", "rarity": "uncommon"},
+    "gate_boots":       {"name": "Gatewarden's Boots", "slot": "boots", "cost": 230, "hit": 1, "flavour": "They have stood a long watch at the Keep door.", "rarity": "uncommon"},
+    "fen_boots":        {"name": "Fen-strider's Boots", "slot": "boots", "cost": 220, "speed": 0.6, "flavour": "Mud slides off them like it was never there.", "rarity": "uncommon"},
+    "forge_grips":      {"name": "Forgemaster's Grips", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "The last pair the old smith wore.", "rarity": "very rare"},
+    "tanner_gloves":    {"name": "Tanner's Gloves", "slot": "gloves", "cost": 240, "hit": 1, "flavour": "Supple, and they never let go.", "rarity": "uncommon"},
+    "e3po_signet":      {"name": "E3PO's Signet", "slot": "ring", "cost": 420, "ac": 1, "flavour": "The Commander's own seal. He always comes back for it - he comes back for everything.", "rarity": "rare"},
+    "barracks_key":     {"name": "Barracks Key", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "The guard's own door. Hurt enough and E3PO walks through it, then walks back out whole.", "rarity": "rare"},
+    "bellrope_wraps":        {"name": "Bellringer's Wraps", "slot": "gloves", "cost": 240, "hit": 1, "flavour": "Rope-burn calluses, lent to you with the rope.", "rarity": "uncommon"},
+    "drover_boots":          {"name": "Drover's Boots", "slot": "boots", "cost": 220, "speed": 1, "flavour": "Twenty miles a day behind cattle. They remember the pace.", "rarity": "uncommon"},
+    "chapel_amulet":         {"name": "Chapel Candle Amulet", "slot": "amulet", "cost": 320, "saves": 1, "flavour": "A stub of chapel wax in a tin cage. Lit once, for you.", "rarity": "uncommon"},
+    "sedge_ring":            {"name": "Sedge's Toll-Ring", "slot": "ring", "cost": 300, "ac": 1, "flavour": "Taken off the hand that took the toll.", "rarity": "uncommon"},
+    "harl_cloak":            {"name": "Red Harl's Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Red where it was always red. Harl has no further use for it.", "rarity": "rare"},
+    "ashfoot_boots":         {"name": "Ashfoot's Boots", "slot": "boots", "cost": 280, "speed": 1, "flavour": "Cob walked quiet. You will walk quieter.", "rarity": "rare"},
+    "weasel_gloves":         {"name": "The Weasel's Gloves", "slot": "gloves", "cost": 270, "hit": 1, "flavour": "Thin fingers, quick work. The guild asked no questions.", "rarity": "rare"},
+    "carp_charm":            {"name": "Grinning Carp Charm", "slot": "amulet", "cost": 260, "saves": 1, "flavour": "River-bone, grinning. The Carp itself is still down there.", "rarity": "common"},
+    "scarward_ring":         {"name": "Scarward Ring", "slot": "ring", "cost": 440, "saves": 1, "flavour": "Turned against the scar. The scar notices being refused.", "rarity": "very rare"},
+    "mourner_cloak":         {"name": "Mourner's Grey", "slot": "cloak", "cost": 250, "hp": 10, "flavour": "Worn once for every name the Chronicle keeps.", "rarity": "uncommon"},
+    "mill_mitts":            {"name": "Millhand's Mitts", "slot": "gloves", "cost": 200, "dmg": 1, "flavour": "Hands that shift full sacks all day hit like full sacks.", "rarity": "common"},
+    "gate_whistle":          {"name": "Gatehouse Whistle", "slot": "amulet", "cost": 230, "saves": 1, "flavour": "One blast for bandits. Two for the scar. Nobody blows it twice.", "rarity": "common"},
+    "commander_mantle":      {"name": "Commander's Field Mantle", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "E3PO wore one to the wall and walked back. He always walks back.", "rarity": "legendary"},
+    "tally_ring":            {"name": "Tallykeeper's Ring", "slot": "ring", "cost": 210, "hp": 8, "flavour": "Notched once a season. The notches go a long way round.", "rarity": "common"},
+    "thaw_ring": {"name": "Ring of the Thaw", "slot": "ring", "cost": 340, "saves": 1, "flavour": "Cut from the Ford's ice the morning it broke. Cold, and glad to be.", "rarity": "uncommon"},
+    "blight_charm": {"name": "Blightward Charm", "slot": "amulet", "cost": 360, "hp": 10, "flavour": "A rot-black ear of grain set in glass. Worn as a warning, not a trophy.", "rarity": "rare"},
+    "bucketline_gloves": {"name": "Bucket-line Gloves", "slot": "gloves", "cost": 260, "ac": 1, "flavour": "Scorched to the palm. In Bellmire that counts as a qualification.", "rarity": "uncommon"},
+    "barracks_cloak": {"name": "Barracks Watch-cloak", "slot": "cloak", "cost": 440, "ac": 1, "flavour": "Issued by the Commander himself, which means it was counted first.", "rarity": "very rare"},
+    "crater_ring": {"name": "Crater-glass Ring", "slot": "ring", "cost": 520, "saves": 1, "flavour": "Glass from the night the sky fell. It hums when the scar does.", "rarity": "legendary"},
+    "drover_spurs": {"name": "Drover's Spurs", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Walked cattle through a hurricane and did not lose one. Ask him about it. He will tell you.", "rarity": "rare"},
+    "clapper_ring": {"name": "Clapperless Ring", "slot": "ring", "cost": 460, "saves": 1, "flavour": "Cast from the bell's missing tongue. It keeps whatever it takes.", "rarity": "very rare"},
+    "architect_ring": {"name": "Architect's Ring", "slot": "ring", "cost": 500, "ac": 1, "flavour": "One of his toys, sized for a finger. It fits nobody properly and everybody anyway.", "rarity": "legendary"},
+    "toll_ring": {"name": "Toll Ring", "slot": "ring", "cost": 240, "hit": 1, "flavour": "Two coins hammered flat. Paid going down, paid coming up.", "rarity": "common"},
+    "chitin_ring": {"name": "Brood-iron Ring", "slot": "ring", "cost": 430, "hp": 10, "flavour": "Chitin set in iron. The walls down there wear rings too.", "rarity": "very rare"},
+    "flaskcount_amulet": {"name": "Flask-counter's Amulet", "slot": "amulet", "cost": 340, "saves": 1, "flavour": "COUNT THE FLASKS, engraved small, so he would have to lean in.", "rarity": "uncommon"},
+    "doorkeep_amulet": {"name": "Doorkeeper's Amulet", "slot": "amulet", "cost": 350, "ac": 1, "flavour": "KEEP THE DOOR, in letters worn smooth by one thumb.", "rarity": "rare"},
+    "thawbell_amulet": {"name": "Thaw-bell Amulet", "slot": "amulet", "cost": 300, "hp": 12, "flavour": "Rung the morning the ice let go. Warm ever since, or near enough.", "rarity": "uncommon"},
+    "mourncoil_amulet": {"name": "Mourncoil Scale", "slot": "amulet", "cost": 360, "saves": 1, "flavour": "A single scale, still turning when nothing turns it.", "rarity": "rare"},
+    "chronicle_cloak": {"name": "Chronicler's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Ink to the cuffs. Everything that happens to you gets written down.", "rarity": "uncommon"},
+    "gravewyrm_cloak": {"name": "Gravewyrm Hide Cloak", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "Heavy as a kept promise and about as comfortable.", "rarity": "legendary"},
+    "ossuary_cloak": {"name": "Ossuary Mantle", "slot": "cloak", "cost": 440, "hp": 14, "flavour": "Bone buttons. They were going spare.", "rarity": "very rare"},
+    "bucketline_cloak": {"name": "Bucket-line Cloak", "slot": "cloak", "cost": 260, "saves": 1, "flavour": "Soaked a hundred times and never once burned.", "rarity": "uncommon"},
+    "tollgate_boots": {"name": "Toll-gate Boots", "slot": "boots", "cost": 280, "speed": 1, "flavour": "They know the short way round the gate. Soon you will too.", "rarity": "rare"},
+    "nightwing_boots": {"name": "Nightwing Boots", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Light enough to be mistaken for the thing overhead.", "rarity": "rare"},
+    "chapel_clogs": {"name": "Chapel Clogs", "slot": "boots", "cost": 200, "ac": 1, "flavour": "Blessed once, cheaply, and it appears to have taken.", "rarity": "common"},
+    "craterglass_boots": {"name": "Craterglass Boots", "slot": "boots", "cost": 290, "saves": 1, "flavour": "Soles glassed by whatever landed. Nothing cuts up through them now.", "rarity": "rare"},
+    "bellringer_gloves": {"name": "Bell-ringer's Gloves", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "No clapper left to pull, so the hands found other work.", "rarity": "uncommon"},
+    "duchess_gloves": {"name": "Pale Duchess's Gloves", "slot": "gloves", "cost": 300, "dmg": 1, "flavour": "Far too fine for you. They do not appear to mind.", "rarity": "very rare"},
+    "physic_gloves": {"name": "Apothecary's Gloves", "slot": "gloves", "cost": 220, "saves": 1, "flavour": "Stained to the wrist in colours the guild will not write down.", "rarity": "uncommon"},
+    "rattling_gauntlets": {"name": "Rattling Gauntlets", "slot": "gloves", "cost": 280, "hit": 1, "flavour": "They clatter. So does the Host, and it never slowed them.", "rarity": "rare"},
+    "mortar_gloves": {"name": "Mortarman's Gloves", "slot": "gloves", "cost": 230, "dmg": 1, "flavour": "The new wall went up in these. Something hit the old one first.", "rarity": "uncommon"}
   ,
-    "lampwright_ring": {"name": "Lampwright's Ring", "slot": "ring", "cost": 330, "saves": 1, "flavour": "Turned on a wick-trimmer's bench. It keeps a flame honest."},
-    "measure_amulet": {"name": "Amulet of the Measure", "slot": "amulet", "cost": 410, "hp": 14, "flavour": "Grain-weight in silver. It settles whoever wears it."},
-    "scarglass_ring": {"name": "Scarglass Ring", "slot": "ring", "cost": 460, "ac": 1, "flavour": "Only slightly cursed, the market swears. The market swears a great deal."},
-    "crier_cloak": {"name": "Crier's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Loud cloth. Nobody shoves a man who has been shouting all morning."},
-    "fordwarden_boots": {"name": "Fordwarden Boots", "slot": "boots", "cost": 350, "speed": 1, "flavour": "Wet to the knee for thirty years and never once lost."},
-    "quarry_gloves": {"name": "Quarryman's Gloves", "slot": "gloves", "cost": 240, "dmg": 1, "flavour": "Stone taught these hands, and stone does not teach gently."},
-    "host_amulet": {"name": "Rattling Host Amulet", "slot": "amulet", "cost": 430, "hp": 16, "flavour": "Strung with teeth that stopped chattering when the Host did."},
-    "tollkeep_ring": {"name": "Tollkeep's Ring", "slot": "ring", "cost": 390, "hit": 1, "flavour": "Sedge took a toll on that road. Somebody took the ring."},
-    "lampfast_ring": {"name": "Lampfast Ring", "slot": "ring", "cost": 340, "ac": 1, "flavour": "Lamplighters learned early that steady hands outlive quick ones."},
-    "chalkline_gloves": {"name": "Chalkline Gloves", "slot": "gloves", "cost": 300, "hit": 1, "flavour": "Chalk in every seam. The marks they left are still saving strangers."},
-    "stairhold_boots": {"name": "Stairhold Boots", "slot": "boots", "cost": 420, "speed": 1, "flavour": "They held a stair long enough for four people to use it."},
-    "secondflask_amulet": {"name": "Second Flask Amulet", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "For the flask you keep back. There is always a second flask."},
-    "rollkeeper_ring": {"name": "Roll-keeper's Ring", "slot": "ring", "cost": 410, "saves": 1, "flavour": "The guild wears one to write the names. It is heavier than it looks."},
-    "backstair_cloak": {"name": "Backstair Cloak", "slot": "cloak", "cost": 450, "ac": 1, "flavour": "Grey as a wall and twice as uninteresting. That is the whole trick."},
-    "pitwalk_boots": {"name": "Pitwalker's Boots", "slot": "boots", "cost": 380, "saves": 1, "flavour": "Thin soles on purpose - you want to feel the floor lie to you."},
-    "mender_wraps": {"name": "Mender's Wraps", "slot": "gloves", "cost": 330, "hp": 10, "flavour": "Stained past washing, and every stain walked back out of the scar."},
-    "deeplamp_amulet": {"name": "Deep-lamp Amulet", "slot": "amulet", "cost": 470, "saves": 1, "flavour": "A thumb of lamp-glass that has been down further than most men."},
-    "warhorn_mantle": {"name": "Warhorn Mantle", "slot": "cloak", "cost": 500, "dmg": 1, "flavour": "Cut from a gate banner the raiders never got to take down."},
-    "tithe_ring": {"name": "Tithe Ring", "slot": "ring", "cost": 340, "saves": 1, "flavour": "The chapel takes a tenth of everything. This is the tenth it gave back."},
-    "cartwright_ring": {"name": "Cartwright's Ring", "slot": "ring", "cost": 290, "hit": 1, "flavour": "A wheelwright's hands are steady or a wheelwright's hands are short."},
-    "lastcoin_ring": {"name": "Last Coin Ring", "slot": "ring", "cost": 460, "dmg": 1, "flavour": "Hammered flat from the coin he would not spend to leave."},
-    "watchfire_ring": {"name": "Watchfire Ring", "slot": "ring", "cost": 400, "ac": 1, "flavour": "Turned on the finger when the fire on the wall goes out."},
-    "oathwrong_ring": {"name": "Wrong-hand Ring", "slot": "ring", "cost": 510, "dmg": 1, "flavour": "Worn on the wrong hand on purpose, so the oath knows you meant it."},
-    "ninthbell_amulet": {"name": "Ninth Bell Amulet", "slot": "amulet", "cost": 420, "hp": 12, "flavour": "The ninth bell means come home. Nobody has ever needed telling twice."},
-    "saltline_amulet": {"name": "Saltline Amulet", "slot": "amulet", "cost": 310, "saves": 1, "flavour": "Mire salt in a glass thumb. The rot does not like the taste of you."},
-    "kindling_amulet": {"name": "Kindling Amulet", "slot": "amulet", "cost": 280, "hp": 10, "flavour": "A splinter of the first beam of the first hall, still warm. That is not a story."},
-    "grainward_amulet": {"name": "Grainward Amulet", "slot": "amulet", "cost": 300, "ac": 1, "flavour": "Barley set in wax. Starve the town and the town stops holding the wall."},
-    "fogrun_cloak": {"name": "Fog-run Cloak", "slot": "cloak", "cost": 330, "speed": 1, "flavour": "Cut short at the knee, because the fen does not forgive a long hem."},
-    "sparewall_cloak": {"name": "Spare Wall Cloak", "slot": "cloak", "cost": 470, "ac": 1, "flavour": "Oiled canvas, three thicknesses. Men have called it a wall and not been joking."},
-    "wakeward_cloak": {"name": "Wake-ward Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Worn by whoever sits up with the body. Nothing gets past the one who sits up."},
-    "mudplank_boots": {"name": "Mudplank Boots", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Flat as a plank, and the fen holds a plank far worse than a heel."},
-    "firstlight_boots": {"name": "First Light Boots", "slot": "boots", "cost": 340, "speed": 1, "flavour": "On the feet of whoever walks the wall before the sun gets to it."},
-    "longcount_boots": {"name": "Long Count Boots", "slot": "boots", "cost": 390, "hp": 10, "flavour": "Resoled four times. Four is a number that means something down there."},
-    "ropeburn_gloves": {"name": "Rope-burn Gloves", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "Leather over the palm, where the rope already took the skin once."},
-    "coldforge_mitts": {"name": "Cold-forge Mitts", "slot": "gloves", "cost": 310, "dmg": 1, "flavour": "For the work the smith does with the fire out. You do not ask what work."},
-    "splintwrap_gloves": {"name": "Splint-wrap Gloves", "slot": "gloves", "cost": 230, "hp": 10, "flavour": "Two fingers of hard cane sewn in. Hands break first and heal slowest."},
-    "bellfounder_ring": {"name": "Bellfounder's Ring", "slot": "ring", "cost": 330, "hit": 1, "flavour": "Cast from the spill of a bell that came out true. He kept the spill."},
-    "quarryman_ring": {"name": "Quarryman's Ring", "slot": "ring", "cost": 270, "dmg": 1, "flavour": "Stone splits where you tell it to or it splits where it likes. Learn which."},
-    "pilgrim_ring": {"name": "Pilgrim's Ring", "slot": "ring", "cost": 300, "saves": 1, "flavour": "Worn down to a thread of iron by a road walked twice in one life."},
-    "ferrybell_amulet": {"name": "Ferrybell Amulet", "slot": "amulet", "cost": 350, "hp": 12, "flavour": "A thumbnail of the ferry bell. Ring it and someone comes. Someone always has."},
-    "votive_amulet": {"name": "Votive Amulet", "slot": "amulet", "cost": 290, "saves": 1, "flavour": "A candle stub in wax glass, lit once for somebody who came back up."},
-    "weighstone_amulet": {"name": "Weighstone Amulet", "slot": "amulet", "cost": 310, "ac": 1, "flavour": "A market weight, true to the grain. The market hangs men for a false one."},
-    "thatcher_cloak": {"name": "Thatcher's Cloak", "slot": "cloak", "cost": 280, "hp": 10, "flavour": "Reed-oiled and stiff as a roof. Rain gives up on it."},
-    "crane_cloak": {"name": "Cranesman's Cloak", "slot": "cloak", "cost": 440, "ac": 1, "flavour": "Doubled at the shoulder, where the rope goes when the rope goes wrong."},
-    "pilgrim_cloak": {"name": "Pilgrim's Cloak", "slot": "cloak", "cost": 320, "speed": 1, "flavour": "Light, patched, and it has out-walked three better cloaks."},
-    "towpath_boots": {"name": "Towpath Boots", "slot": "boots", "cost": 310, "speed": 1, "flavour": "Cut for the bank, not the road. The bank is where the work is."},
-    "pavers_boots": {"name": "Paver's Boots", "slot": "boots", "cost": 360, "ac": 1, "flavour": "Iron under the toe, because the stone always lands the same way."},
-    "ferrystep_boots": {"name": "Ferrystep Boots", "slot": "boots", "cost": 280, "hp": 10, "flavour": "For standing on a deck that will not stand still. You learn or you swim."},
-    "glazier_gloves": {"name": "Glazier's Gloves", "slot": "gloves", "cost": 290, "hit": 1, "flavour": "Three thicknesses at the fingertip. Glass takes the careless hand first."},
-    "ropewalk_gloves": {"name": "Ropewalk Gloves", "slot": "gloves", "cost": 240, "speed": 1, "flavour": "Palms slick with tallow so the rope runs instead of taking you with it."},
-    "rivet_mitts": {"name": "Rivet Mitts", "slot": "gloves", "cost": 300, "dmg": 1, "flavour": "Scorched through in four places. The fifth is the one that counts."},
-    "beeswax_gloves": {"name": "Beeswax Gloves", "slot": "gloves", "cost": 210, "saves": 1, "flavour": "Rubbed down with the chapel's own wax. The rot slides off them."},
-    "cooper_ring": {"name": "Cooper's Ring", "slot": "ring", "cost": 360, "ac": 1, "flavour": "Banded like the barrels he hoops. Nothing he closes leaks."},
-    "orchard_ring": {"name": "Orchard Ring", "slot": "ring", "cost": 340, "hp": 10, "flavour": "Applewood set in tin. It smells of a better autumn."},
-    "reeve_ring": {"name": "Reeve's Signet", "slot": "ring", "cost": 420, "saves": 1, "flavour": "He counts the town twice a year and is wrong once."},
-    "collier_ring": {"name": "Collier's Band", "slot": "ring", "cost": 320, "dmg": 1, "flavour": "Charcoal under the stone, and it will not come out."},
-    "netmender_ring": {"name": "Netmender's Ring", "slot": "ring", "cost": 300, "hit": 1, "flavour": "Worn smooth by forty winters of knots."},
-    "wellhead_ring": {"name": "Wellhead Ring", "slot": "ring", "cost": 380, "saves": 1, "flavour": "Dropped in once. The well gave it back, which it rarely does."},
-    "sawyer_amulet": {"name": "Sawyer's Token", "slot": "amulet", "cost": 340, "hp": 12, "flavour": "A tooth off the pit saw, filed blunt so it only bites wood now."},
-    "shepherd_charm": {"name": "Shepherd's Charm", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "Horn and hair. It keeps the flock calm and does the same for you."},
-    "ostler_amulet": {"name": "Ostler's Amulet", "slot": "amulet", "cost": 320, "speed": 0.5, "flavour": "A bit-ring from a horse that outran a raid."},
-    "chandler_amulet": {"name": "Chandler's Amulet", "slot": "amulet", "cost": 280, "saves": 1, "flavour": "Wax-dipped nine times. It burns last and longest."},
-    "threshing_amulet": {"name": "Threshing Charm", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "Straw bound in a figure eight. Harvest luck, and nothing more."},
-    "hedgeward_cloak": {"name": "Hedgeward's Cloak", "slot": "cloak", "cost": 260, "saves": 1, "flavour": "Thorn-torn at the hem and proud of every hole."},
-    "shingler_cloak": {"name": "Shingler's Cloak", "slot": "cloak", "cost": 240, "ac": 1, "flavour": "Oiled against the rain the roof has not stopped yet."},
-    "winterwatch_cloak": {"name": "Winterwatch Cloak", "slot": "cloak", "cost": 300, "hp": 10, "flavour": "Two fleeces thick. The wall is colder than the dungeon."},
-    "orchard_cloak": {"name": "Orchardman's Cloak", "slot": "cloak", "cost": 220, "speed": 0.4, "flavour": "Deep pockets, still sticky from the pressing."},
-    "saltboiler_cloak": {"name": "Saltboiler's Cloak", "slot": "cloak", "cost": 280, "saves": 1, "flavour": "Stiff with brine. It has stopped worse than weather."},
-    "carter_boots": {"name": "Carter's Boots", "slot": "boots", "cost": 240, "speed": 0.6, "flavour": "They know the road's ruts better than the carter does."},
-    "millrace_boots": {"name": "Millrace Boots", "slot": "boots", "cost": 220, "saves": 1, "flavour": "Wet to the ankle for twenty years and never rotted."},
-    "hayward_boots": {"name": "Hayward's Boots", "slot": "boots", "cost": 200, "speed": 0.5, "flavour": "He walks the fences at night so the fields keep their edges."},
-    "tinker_boots": {"name": "Tinker's Boots", "slot": "boots", "cost": 260, "hit": 1, "flavour": "Resoled in three towns. None of them his."},
-    "kennel_boots": {"name": "Kennelman's Boots", "slot": "boots", "cost": 230, "speed": 0.5, "flavour": "The hounds follow these, whoever is in them."},
-    "plaster_gloves": {"name": "Plasterer's Gloves", "slot": "gloves", "cost": 240, "ac": 1, "flavour": "Set hard at the knuckles. He stopped noticing years ago."},
-    "wheelwright_gloves": {"name": "Wheelwright's Gloves", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "Shaped to a spoke. Your grip is a wheel's grip now."},
-    "miner_grips": {"name": "Miner's Grips", "slot": "gloves", "cost": 280, "dmg": 1, "flavour": "Leather over knuckle-iron, for rock that argues."},
-    "baker_mitts": {"name": "Baker's Mitts", "slot": "gloves", "cost": 200, "saves": 1, "flavour": "They have been in a hotter mouth than anything down there."},
-    "thresher_gloves": {"name": "Thresher's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Flail-worn at the heel of the hand. The swing is already in them."},
-    "tanner_ring":       {"name": "Tanner's Ring", "slot": "ring", "cost": 300, "saves": 1, "flavour": "Horn, cut from a beast that argued. It argues still."},
-    "fletcher_ring":     {"name": "Fletcher's Thumb-ring", "slot": "ring", "cost": 340, "hit": 1, "flavour": "Bone, for the string. Your aim is older than you are."},
-    "lockkeep_ring":     {"name": "Lockkeeper's Ring", "slot": "ring", "cost": 400, "hp": 10, "flavour": "Brass, green at the seam. It has held a gate shut all night."},
-    "sexton_ring":       {"name": "Sexton's Ring", "slot": "ring", "cost": 440, "saves": 1, "flavour": "He wore it to every burial in Bellmire and walked home from each one."},
-    "fuller_amulet":     {"name": "Fuller's Token", "slot": "amulet", "cost": 280, "hp": 10, "flavour": "Lead, stamped at the cloth hall. Proof the work was done right."},
-    "skep_amulet":       {"name": "Skepward's Charm", "slot": "amulet", "cost": 320, "saves": 1, "flavour": "Wax, with one dead bee in it. The hive forgave him."},
-    "farrier_amulet":    {"name": "Farrier's Nail", "slot": "amulet", "cost": 360, "dmg": 1, "flavour": "Hung on a thong. Driven once, into something that kicked."},
-    "potter_amulet":     {"name": "Potter's Thumbmark", "slot": "amulet", "cost": 300, "hp": 12, "flavour": "Fired clay with his print still in it. Someone made this on purpose."},
-    "tanner_cloak":      {"name": "Tanner's Apron-cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Hide cured hard. It smells of the yard and it stops a knife."},
-    "weaver_cloak":      {"name": "Weaver's Long Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Cloth woven so tight the rain gives up on it."},
-    "sexton_cloak":      {"name": "Sexton's Black", "slot": "cloak", "cost": 280, "ac": 1, "flavour": "Worn at every grave on the hill. It knows the way back down."},
-    "lockkeep_cloak":    {"name": "Lockkeeper's Oilcloth", "slot": "cloak", "cost": 240, "saves": 1, "flavour": "Oiled against the Ford. Water runs off it like it was told to."},
-    "bowyer_cloak":      {"name": "Bowyer's Shoulder-cloak", "slot": "cloak", "cost": 320, "hit": 1, "flavour": "Cut away at the right shoulder so the string never catches."},
-    "tanyard_boots":     {"name": "Tanyard Boots", "slot": "boots", "cost": 240, "saves": 1, "flavour": "They have stood in worse than blood, and for longer."},
-    "lockkeep_waders":   {"name": "Lockkeeper's Waders", "slot": "boots", "cost": 260, "speed": 0.5, "flavour": "Stiff at the knee, dry at the toe, quick on wet stone."},
-    "kiln_boots":        {"name": "Potter's Kiln Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Soles baked hard. A hot floor is just a floor."},
-    "hive_boots":        {"name": "Skepward's Soft Boots", "slot": "boots", "cost": 280, "speed": 0.6, "flavour": "He learned to walk so nothing woke. So did these."},
-    "gravepath_boots":   {"name": "Sexton's Hobnails", "slot": "boots", "cost": 300, "ac": 1, "flavour": "Shod for the hill path in the rain. Nothing slips them."},
-    "currier_gloves":    {"name": "Currier's Gloves", "slot": "gloves", "cost": 260, "dmg": 1, "flavour": "Thick at the palm, for a blade you draw toward yourself."},
-    "fletcher_tabs":     {"name": "Fletcher's Tabs", "slot": "gloves", "cost": 230, "hit": 1, "flavour": "Two fingers of hard leather. The string takes them instead of you."},
-    "farrier_mitts":     {"name": "Farrier's Mitts", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "Hoof-scorched. The hand inside has been stepped on and kept working."},
-    "fuller_grips":      {"name": "Fuller's Grips", "slot": "gloves", "cost": 210, "hp": 8, "flavour": "Lime-burnt and lime-proof. They have handled worse cloth than yours."},
-    "lockkeep_gloves":   {"name": "Lockkeeper's Gloves", "slot": "gloves", "cost": 240, "saves": 1, "flavour": "Hemp at the palm. The rope goes nowhere you did not send it."},
-    "hive_gloves":       {"name": "Skepward's Gloves", "slot": "gloves", "cost": 250, "speed": 0.4, "flavour": "Smoke-cured and gentle. Quick hands that wake nothing."},
-    "maltster_ring":    {"name": "Maltster's Ring", "slot": "ring", "cost": 300, "hp": 10, "flavour": "Turned the floor every four hours for thirty years. The ring kept the count."},
-    "cutler_ring":      {"name": "Cutler's Ring", "slot": "ring", "cost": 430, "dmg": 1, "flavour": "He set the edge. You only have to carry it."},
-    "spurrier_ring":    {"name": "Spurrier's Ring", "slot": "ring", "cost": 280, "speed": 0.5, "flavour": "Rowelled on the inside. You do not sit still wearing it."},
-    "lorimer_ring":     {"name": "Lorimer's Ring", "slot": "ring", "cost": 260, "saves": 1, "flavour": "Buckles, bits and bridle-rings. Nothing he made ever came loose."},
-    "pewterer_ring":    {"name": "Pewterer's Ring", "slot": "ring", "cost": 240, "ac": 1, "flavour": "Soft metal, hard habit. He never once poured short."},
-    "nailer_ring":      {"name": "Nailer's Ring", "slot": "ring", "cost": 220, "hit": 1, "flavour": "Four thousand a day, every one straight. Your aim could be worse."},
-    "bridgeward_ring":  {"name": "Bridgeward's Ring", "slot": "ring", "cost": 460, "ac": 1, "flavour": "He counted every cart across and every cart back. The numbers matched."},
-    "beadle_ring":      {"name": "Beadle's Ring", "slot": "ring", "cost": 350, "saves": 1, "flavour": "Worn where the parish could see it. That was the point of it."},
-    "pinder_ring":      {"name": "Pinder's Ring", "slot": "ring", "cost": 230, "hp": 8, "flavour": "Keeper of the pound. Strays went in; owners paid to get them out."},
-    "limner_ring":      {"name": "Limner's Ring", "slot": "ring", "cost": 320, "saves": 1, "flavour": "Gold leaf still in the setting. He painted saints and charged for them."},
-    "brewster_amulet":  {"name": "Brewster's Charm", "slot": "amulet", "cost": 260, "hp": 10, "flavour": "Hung over the mash tun. The ale never soured while it hung."},
-    "taverner_amulet":  {"name": "Taverner's Token", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "Good for one bed and one bowl. Honoured at the Ford, nowhere else."},
-    "horner_amulet":    {"name": "Horner's Pendant", "slot": "amulet", "cost": 240, "hp": 8, "flavour": "Scraped thin enough to see a candle through. He never broke one."},
-    "chapman_amulet":   {"name": "Chapman's Charm", "slot": "amulet", "cost": 280, "speed": 0.5, "flavour": "A pedlar's luck: cheap, loud, and somehow always on the road ahead of you."},
-    "falconer_amulet":  {"name": "Falconer's Vervel", "slot": "amulet", "cost": 440, "hit": 1, "flavour": "A leg-ring off a bird that came back every time it was loosed."},
-    "weirkeep_amulet":  {"name": "Weir-keeper's Charm", "slot": "amulet", "cost": 390, "saves": 1, "flavour": "The water came up. He opened the gate at the right hour, and it went down."},
-    "sluice_amulet":    {"name": "Sluicekeeper's Amulet", "slot": "amulet", "cost": 330, "ac": 1, "flavour": "Brass, green with it. Turned the same handle for forty winters."},
-    "millwright_amulet":{"name": "Millwright's Amulet", "slot": "amulet", "cost": 410, "hp": 12, "flavour": "He set the great wheel true. It has not wandered since."},
-    "gaoler_amulet":    {"name": "Gaoler's Keyring", "slot": "amulet", "cost": 360, "ac": 1, "flavour": "Three keys, two locks. He never said which one did nothing."},
-    "boatwright_amulet":{"name": "Boatwright's Charm", "slot": "amulet", "cost": 350, "saves": 1, "flavour": "A nail from the first hull he put in the water. It came back dry."},
-    "butcher_cloak":    {"name": "Butcher's Oilcloth", "slot": "cloak", "cost": 240, "hp": 10, "flavour": "Scrubbed daily and never once clean. Nothing soaks through it."},
-    "limeburner_cloak": {"name": "Limeburner's Mantle", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Lime-pocked and lime-proof. He stood at that kiln mouth for years."},
-    "tiler_cloak":      {"name": "Tiler's Shoulder-cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Roof-shaped at the shoulder from carrying them up. It sheds rain like one."},
-    "osier_cloak":      {"name": "Osier-cutter's Cloak", "slot": "cloak", "cost": 230, "speed": 0.5, "flavour": "Willow-stained to the elbow. Light enough to work the withy-beds in."},
-    "turbary_cloak":    {"name": "Peat-cutter's Cloak", "slot": "cloak", "cost": 250, "hp": 10, "flavour": "Smells of the turbary. Dries by a fire in half the time wool should."},
-    "woodward_cloak":   {"name": "Woodward's Green", "slot": "cloak", "cost": 420, "saves": 1, "flavour": "He kept the lord's wood. Poachers learned his colour and went elsewhere."},
-    "raftsman_cloak":   {"name": "Raftsman's Cloak", "slot": "cloak", "cost": 280, "ac": 1, "flavour": "Timber downriver, man on top of it. Wet to the knee and no further."},
-    "lighterman_cloak": {"name": "Lighterman's Mantle", "slot": "cloak", "cost": 310, "hp": 12, "flavour": "Loaded and unloaded by lamplight. The cloak worked the same hours."},
-    "constable_cloak":  {"name": "Constable's Cloak", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "Parish black with a watch-clasp. You are expected to be visible in it."},
-    "hurdler_cloak":    {"name": "Hurdler's Cloak", "slot": "cloak", "cost": 220, "speed": 0.4, "flavour": "Hazel-scratched all over. He fenced the fold in a morning."},
-    "clogger_boots":    {"name": "Clogger's Clogs", "slot": "boots", "cost": 210, "ac": 1, "flavour": "Alder soles, iron-rimmed. Loud on stone, dry in anything."},
-    "cordwainer_boots": {"name": "Cordwainer's Boots", "slot": "boots", "cost": 400, "speed": 0.6, "flavour": "Cut to the foot, not to the last. You will notice the difference by noon."},
-    "eeler_boots":      {"name": "Eeler's Waders", "slot": "boots", "cost": 260, "saves": 1, "flavour": "He set the traps at dusk and lifted them at dawn. Mire never got in."},
-    "reedcutter_boots": {"name": "Reedcutter's Boots", "slot": "boots", "cost": 240, "speed": 0.5, "flavour": "Flat and wide. They keep you up where the ground has given up."},
-    "brickmaker_boots": {"name": "Brickmaker's Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Clay to the ankle, baked on. They are nearly brick themselves now."},
-    "dauber_boots":     {"name": "Dauber's Boots", "slot": "boots", "cost": 200, "hp": 8, "flavour": "Wattle and daub, and most of the daub on these."},
-    "warrener_boots":   {"name": "Warrener's Boots", "slot": "boots", "cost": 290, "speed": 0.6, "flavour": "Soft over the burrows. The coneys never heard him coming."},
-    "bolter_boots":     {"name": "Bolter's Boots", "slot": "boots", "cost": 230, "saves": 1, "flavour": "White to the shin with flour. He sifted the whole town's bread."},
-    "creeler_boots":    {"name": "Creeler's Boots", "slot": "boots", "cost": 250, "ac": 1, "flavour": "Mud, withy and fish-scale. Worth more than they look."},
-    "oarmaker_boots":   {"name": "Oar-maker's Boots", "slot": "boots", "cost": 270, "hit": 1, "flavour": "He stood to the shaving horse all day. Balance is a habit you can wear."},
-    "armourer_gloves":  {"name": "Armourer's Gauntlets", "slot": "gloves", "cost": 320, "ac": 1, "flavour": "Scarred on the knuckle from other men's mistakes."},
-    "chainsmith_gloves":{"name": "Chainsmith's Mitts", "slot": "gloves", "cost": 300, "dmg": 1, "flavour": "A thousand rings closed by hand. The grip stayed."},
-    "joiner_gloves":    {"name": "Joiner's Gloves", "slot": "gloves", "cost": 230, "hit": 1, "flavour": "He cut a tenon that needed no glue. Steady is the whole trade."},
-    "bodger_gloves":    {"name": "Bodger's Gloves", "slot": "gloves", "cost": 210, "speed": 0.4, "flavour": "Green wood, pole lathe, a chair by dusk. Fast hands, cheap gloves."},
-    "saddler_gloves":   {"name": "Saddler's Gloves", "slot": "gloves", "cost": 260, "saves": 1, "flavour": "Waxed thread has gone through these more often than through leather."},
-    "quarreller_gloves":{"name": "Quarreller's Tabs", "slot": "gloves", "cost": 280, "hit": 1, "flavour": "He spanned a windlass all day and never pinched a thumb."},
-    "soaper_gloves":    {"name": "Lye-boiler's Gloves", "slot": "gloves", "cost": 240, "hp": 8, "flavour": "Lye takes the skin off a hand in a season. It never took his."},
-    "carder_gloves":    {"name": "Carder's Gloves", "slot": "gloves", "cost": 200, "hp": 8, "flavour": "Tooth-scratched through at the palm, and still worn."},
-    "spinner_gloves":   {"name": "Spinner's Gloves", "slot": "gloves", "cost": 205, "speed": 0.4, "flavour": "Fingerless, for the thread. The thread never slipped."},
-    "retter_gloves":    {"name": "Retter's Gloves", "slot": "gloves", "cost": 215, "saves": 1, "flavour": "Flax rotted in the pond until it let go. He pulled it out by hand."},
-    "scar_guard_ring": {"name": "Ring of the Scar-guard", "slot": "ring", "cost": 420, "ac": 1, "flavour": "A guard's iron, worn on the hand that holds the lantern."},
-    "doorkeeper_ring": {"name": "Doorkeeper's Band", "slot": "ring", "cost": 340, "saves": 1, "flavour": "Kept the door through the night. The door remembers."},
-    "ledger_ring": {"name": "Ledger-keeper's Ring", "slot": "ring", "cost": 300, "hit": 1, "flavour": "A signet worn smooth. It stamped every name that went below."},
-    "hearth_ring": {"name": "Hearthwarden's Ring", "slot": "ring", "cost": 360, "hp": 12, "flavour": "Warm brass. It has never been cold, whatever floor it has been on."},
-    "lanternman_amulet": {"name": "Lanternman's Amulet", "slot": "amulet", "cost": 380, "saves": 1, "flavour": "A tin lantern the size of a thumb. It does not give light. It gives nerve."},
-    "grainmeasure_charm": {"name": "Grainmeasure Charm", "slot": "amulet", "cost": 260, "hp": 10, "flavour": "A wheat-ear in resin. Measure the grain, and it will measure back."},
-    "flask_amulet": {"name": "Flask-count Pendant", "slot": "amulet", "cost": 330, "hit": 1, "flavour": "Seven little flasks on a cord. The eighth is yours to supply."},
-    "clapperless_amulet": {"name": "Clapperless Bell Amulet", "slot": "amulet", "cost": 400, "ac": 1, "flavour": "A bell with no clapper. It rings in the mind and nowhere else."},
-    "wall_cloak": {"name": "Wall-walker's Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Wind-faded, rain-stiff. The wall has taught it to stand up straight."},
-    "scarwatch_cloak": {"name": "Scarwatch Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Grey as the stair-head at dusk. The dark does not notice it, which is the point."},
-    "feast_cloak": {"name": "Feast-night Cloak", "slot": "cloak", "cost": 230, "hp": 8, "flavour": "Stained with three toasts and a stew. Warm, and well-loved."},
-    "caravan_cloak": {"name": "Caravan Cloak", "slot": "cloak", "cost": 280, "speed": 0.5, "flavour": "Waxed against the road. It has been to places Bellmire does not have names for."},
-    "barracks_boots": {"name": "Barracks Boots", "slot": "boots", "cost": 260, "ac": 1, "flavour": "Hobnailed, guard-issue. They stamp in step, even when empty."},
-    "stairwalker_boots": {"name": "Stair-walker's Boots", "slot": "boots", "cost": 300, "speed": 0.6, "flavour": "Worn on one side from a stair that curls the same way every time."},
-    "fordwader_boots": {"name": "Ford-wader's Tarred Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Tarred to the knee. The Ford takes everything but these."},
-    "delvers_boots": {"name": "Delver's Boots", "slot": "boots", "cost": 340, "saves": 1, "flavour": "Re-soled four times and not once at the scar. It tries to avoid the scar."},
-    "raidbreaker_gloves": {"name": "Raidbreaker's Gauntlets", "slot": "gloves", "cost": 380, "dmg": 2, "flavour": "Heavy, scored with raider steel. Somebody argued with them once, with an axe."},
-    "bellringer_mitts": {"name": "Bell-ringer's Mitts", "slot": "gloves", "cost": 240, "hp": 8, "flavour": "Padded to the wrist. The rope bites hands, and these have been bitten."},
-    "ledger_gloves": {"name": "Ledger-keeper's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Ink at the fingertips. The hand that wrote the dead's names is steady."},
-    "harvest_gloves": {"name": "Harvest Gloves", "slot": "gloves", "cost": 210, "hp": 8, "flavour": "Cut-down and patched. The last cart comes in on hands like these."},
-    "scarforged_ring": {"name": "Scarforged Ring", "slot": "ring", "cost": 500, "dmg": 2, "flavour": "Warm when the dark is near. It has never once been wrong, and has never once been wrong in your favour."},
-    "oath_amulet": {"name": "Oathkeeper's Amulet", "slot": "amulet", "cost": 480, "ac": 1, "flavour": "An oath stamped in tin. The wearer says they will not break it. The amulet is listening."},
-    "commander_cloak": {"name": "Commander's Cloak", "slot": "cloak", "cost": 440, "saves": 1, "flavour": "Red, E3PO's colours. He has not endorsed it. He has not objected, either."},
-    "hero_home_boots": {"name": "Homecomer's Boots", "slot": "boots", "cost": 350, "hp": 14, "flavour": "Walked out of the scar once. They are not eager to go back, but they will."}
+    "lampwright_ring": {"name": "Lampwright's Ring", "slot": "ring", "cost": 330, "saves": 1, "flavour": "Turned on a wick-trimmer's bench. It keeps a flame honest.", "rarity": "uncommon"},
+    "measure_amulet": {"name": "Amulet of the Measure", "slot": "amulet", "cost": 410, "hp": 14, "flavour": "Grain-weight in silver. It settles whoever wears it.", "rarity": "very rare"},
+    "scarglass_ring": {"name": "Scarglass Ring", "slot": "ring", "cost": 460, "ac": 1, "flavour": "Only slightly cursed, the market swears. The market swears a great deal.", "rarity": "very rare"},
+    "crier_cloak": {"name": "Crier's Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Loud cloth. Nobody shoves a man who has been shouting all morning.", "rarity": "uncommon"},
+    "fordwarden_boots": {"name": "Fordwarden Boots", "slot": "boots", "cost": 350, "speed": 1, "flavour": "Wet to the knee for thirty years and never once lost.", "rarity": "very rare"},
+    "quarry_gloves": {"name": "Quarryman's Gloves", "slot": "gloves", "cost": 240, "dmg": 1, "flavour": "Stone taught these hands, and stone does not teach gently.", "rarity": "uncommon"},
+    "host_amulet": {"name": "Rattling Host Amulet", "slot": "amulet", "cost": 430, "hp": 16, "flavour": "Strung with teeth that stopped chattering when the Host did.", "rarity": "very rare"},
+    "tollkeep_ring": {"name": "Tollkeep's Ring", "slot": "ring", "cost": 390, "hit": 1, "flavour": "Sedge took a toll on that road. Somebody took the ring.", "rarity": "rare"},
+    "lampfast_ring": {"name": "Lampfast Ring", "slot": "ring", "cost": 340, "ac": 1, "flavour": "Lamplighters learned early that steady hands outlive quick ones.", "rarity": "uncommon"},
+    "chalkline_gloves": {"name": "Chalkline Gloves", "slot": "gloves", "cost": 300, "hit": 1, "flavour": "Chalk in every seam. The marks they left are still saving strangers.", "rarity": "very rare"},
+    "stairhold_boots": {"name": "Stairhold Boots", "slot": "boots", "cost": 420, "speed": 1, "flavour": "They held a stair long enough for four people to use it.", "rarity": "legendary"},
+    "secondflask_amulet": {"name": "Second Flask Amulet", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "For the flask you keep back. There is always a second flask.", "rarity": "rare"},
+    "rollkeeper_ring": {"name": "Roll-keeper's Ring", "slot": "ring", "cost": 410, "saves": 1, "flavour": "The guild wears one to write the names. It is heavier than it looks.", "rarity": "rare"},
+    "backstair_cloak": {"name": "Backstair Cloak", "slot": "cloak", "cost": 450, "ac": 1, "flavour": "Grey as a wall and twice as uninteresting. That is the whole trick.", "rarity": "very rare"},
+    "pitwalk_boots": {"name": "Pitwalker's Boots", "slot": "boots", "cost": 380, "saves": 1, "flavour": "Thin soles on purpose - you want to feel the floor lie to you.", "rarity": "very rare"},
+    "mender_wraps": {"name": "Mender's Wraps", "slot": "gloves", "cost": 330, "hp": 10, "flavour": "Stained past washing, and every stain walked back out of the scar.", "rarity": "legendary"},
+    "deeplamp_amulet": {"name": "Deep-lamp Amulet", "slot": "amulet", "cost": 470, "saves": 1, "flavour": "A thumb of lamp-glass that has been down further than most men.", "rarity": "legendary"},
+    "warhorn_mantle": {"name": "Warhorn Mantle", "slot": "cloak", "cost": 500, "dmg": 1, "flavour": "Cut from a gate banner the raiders never got to take down.", "rarity": "legendary"},
+    "tithe_ring": {"name": "Tithe Ring", "slot": "ring", "cost": 340, "saves": 1, "flavour": "The chapel takes a tenth of everything. This is the tenth it gave back.", "rarity": "uncommon"},
+    "cartwright_ring": {"name": "Cartwright's Ring", "slot": "ring", "cost": 290, "hit": 1, "flavour": "A wheelwright's hands are steady or a wheelwright's hands are short.", "rarity": "uncommon"},
+    "lastcoin_ring": {"name": "Last Coin Ring", "slot": "ring", "cost": 460, "dmg": 1, "flavour": "Hammered flat from the coin he would not spend to leave.", "rarity": "very rare"},
+    "watchfire_ring": {"name": "Watchfire Ring", "slot": "ring", "cost": 400, "ac": 1, "flavour": "Turned on the finger when the fire on the wall goes out.", "rarity": "rare"},
+    "oathwrong_ring": {"name": "Wrong-hand Ring", "slot": "ring", "cost": 510, "dmg": 1, "flavour": "Worn on the wrong hand on purpose, so the oath knows you meant it.", "rarity": "legendary"},
+    "ninthbell_amulet": {"name": "Ninth Bell Amulet", "slot": "amulet", "cost": 420, "hp": 12, "flavour": "The ninth bell means come home. Nobody has ever needed telling twice.", "rarity": "very rare"},
+    "saltline_amulet": {"name": "Saltline Amulet", "slot": "amulet", "cost": 310, "saves": 1, "flavour": "Mire salt in a glass thumb. The rot does not like the taste of you.", "rarity": "uncommon"},
+    "kindling_amulet": {"name": "Kindling Amulet", "slot": "amulet", "cost": 280, "hp": 10, "flavour": "A splinter of the first beam of the first hall, still warm. That is not a story.", "rarity": "common"},
+    "grainward_amulet": {"name": "Grainward Amulet", "slot": "amulet", "cost": 300, "ac": 1, "flavour": "Barley set in wax. Starve the town and the town stops holding the wall.", "rarity": "uncommon"},
+    "fogrun_cloak": {"name": "Fog-run Cloak", "slot": "cloak", "cost": 330, "speed": 1, "flavour": "Cut short at the knee, because the fen does not forgive a long hem.", "rarity": "rare"},
+    "sparewall_cloak": {"name": "Spare Wall Cloak", "slot": "cloak", "cost": 470, "ac": 1, "flavour": "Oiled canvas, three thicknesses. Men have called it a wall and not been joking.", "rarity": "very rare"},
+    "wakeward_cloak": {"name": "Wake-ward Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Worn by whoever sits up with the body. Nothing gets past the one who sits up.", "rarity": "rare"},
+    "mudplank_boots": {"name": "Mudplank Boots", "slot": "boots", "cost": 300, "speed": 1, "flavour": "Flat as a plank, and the fen holds a plank far worse than a heel.", "rarity": "rare"},
+    "firstlight_boots": {"name": "First Light Boots", "slot": "boots", "cost": 340, "speed": 1, "flavour": "On the feet of whoever walks the wall before the sun gets to it.", "rarity": "very rare"},
+    "longcount_boots": {"name": "Long Count Boots", "slot": "boots", "cost": 390, "hp": 10, "flavour": "Resoled four times. Four is a number that means something down there.", "rarity": "legendary"},
+    "ropeburn_gloves": {"name": "Rope-burn Gloves", "slot": "gloves", "cost": 250, "hit": 1, "flavour": "Leather over the palm, where the rope already took the skin once.", "rarity": "uncommon"},
+    "coldforge_mitts": {"name": "Cold-forge Mitts", "slot": "gloves", "cost": 310, "dmg": 1, "flavour": "For the work the smith does with the fire out. You do not ask what work.", "rarity": "very rare"},
+    "splintwrap_gloves": {"name": "Splint-wrap Gloves", "slot": "gloves", "cost": 230, "hp": 10, "flavour": "Two fingers of hard cane sewn in. Hands break first and heal slowest.", "rarity": "uncommon"},
+    "bellfounder_ring": {"name": "Bellfounder's Ring", "slot": "ring", "cost": 330, "hit": 1, "flavour": "Cast from the spill of a bell that came out true. He kept the spill.", "rarity": "uncommon"},
+    "quarryman_ring": {"name": "Quarryman's Ring", "slot": "ring", "cost": 270, "dmg": 1, "flavour": "Stone splits where you tell it to or it splits where it likes. Learn which.", "rarity": "common"},
+    "pilgrim_ring": {"name": "Pilgrim's Ring", "slot": "ring", "cost": 300, "saves": 1, "flavour": "Worn down to a thread of iron by a road walked twice in one life.", "rarity": "uncommon"},
+    "ferrybell_amulet": {"name": "Ferrybell Amulet", "slot": "amulet", "cost": 350, "hp": 12, "flavour": "A thumbnail of the ferry bell. Ring it and someone comes. Someone always has.", "rarity": "rare"},
+    "votive_amulet": {"name": "Votive Amulet", "slot": "amulet", "cost": 290, "saves": 1, "flavour": "A candle stub in wax glass, lit once for somebody who came back up.", "rarity": "uncommon"},
+    "weighstone_amulet": {"name": "Weighstone Amulet", "slot": "amulet", "cost": 310, "ac": 1, "flavour": "A market weight, true to the grain. The market hangs men for a false one.", "rarity": "uncommon"},
+    "thatcher_cloak": {"name": "Thatcher's Cloak", "slot": "cloak", "cost": 280, "hp": 10, "flavour": "Reed-oiled and stiff as a roof. Rain gives up on it.", "rarity": "uncommon"},
+    "crane_cloak": {"name": "Cranesman's Cloak", "slot": "cloak", "cost": 440, "ac": 1, "flavour": "Doubled at the shoulder, where the rope goes when the rope goes wrong.", "rarity": "very rare"},
+    "pilgrim_cloak": {"name": "Pilgrim's Cloak", "slot": "cloak", "cost": 320, "speed": 1, "flavour": "Light, patched, and it has out-walked three better cloaks.", "rarity": "rare"},
+    "towpath_boots": {"name": "Towpath Boots", "slot": "boots", "cost": 310, "speed": 1, "flavour": "Cut for the bank, not the road. The bank is where the work is.", "rarity": "very rare"},
+    "pavers_boots": {"name": "Paver's Boots", "slot": "boots", "cost": 360, "ac": 1, "flavour": "Iron under the toe, because the stone always lands the same way.", "rarity": "very rare"},
+    "ferrystep_boots": {"name": "Ferrystep Boots", "slot": "boots", "cost": 280, "hp": 10, "flavour": "For standing on a deck that will not stand still. You learn or you swim.", "rarity": "rare"},
+    "glazier_gloves": {"name": "Glazier's Gloves", "slot": "gloves", "cost": 290, "hit": 1, "flavour": "Three thicknesses at the fingertip. Glass takes the careless hand first.", "rarity": "rare"},
+    "ropewalk_gloves": {"name": "Ropewalk Gloves", "slot": "gloves", "cost": 240, "speed": 1, "flavour": "Palms slick with tallow so the rope runs instead of taking you with it.", "rarity": "uncommon"},
+    "rivet_mitts": {"name": "Rivet Mitts", "slot": "gloves", "cost": 300, "dmg": 1, "flavour": "Scorched through in four places. The fifth is the one that counts.", "rarity": "very rare"},
+    "beeswax_gloves": {"name": "Beeswax Gloves", "slot": "gloves", "cost": 210, "saves": 1, "flavour": "Rubbed down with the chapel's own wax. The rot slides off them.", "rarity": "common"},
+    "cooper_ring": {"name": "Cooper's Ring", "slot": "ring", "cost": 360, "ac": 1, "flavour": "Banded like the barrels he hoops. Nothing he closes leaks.", "rarity": "uncommon"},
+    "orchard_ring": {"name": "Orchard Ring", "slot": "ring", "cost": 340, "hp": 10, "flavour": "Applewood set in tin. It smells of a better autumn.", "rarity": "uncommon"},
+    "reeve_ring": {"name": "Reeve's Signet", "slot": "ring", "cost": 420, "saves": 1, "flavour": "He counts the town twice a year and is wrong once.", "rarity": "rare"},
+    "collier_ring": {"name": "Collier's Band", "slot": "ring", "cost": 320, "dmg": 1, "flavour": "Charcoal under the stone, and it will not come out.", "rarity": "uncommon"},
+    "netmender_ring": {"name": "Netmender's Ring", "slot": "ring", "cost": 300, "hit": 1, "flavour": "Worn smooth by forty winters of knots.", "rarity": "uncommon"},
+    "wellhead_ring": {"name": "Wellhead Ring", "slot": "ring", "cost": 380, "saves": 1, "flavour": "Dropped in once. The well gave it back, which it rarely does.", "rarity": "uncommon"},
+    "sawyer_amulet": {"name": "Sawyer's Token", "slot": "amulet", "cost": 340, "hp": 12, "flavour": "A tooth off the pit saw, filed blunt so it only bites wood now.", "rarity": "uncommon"},
+    "shepherd_charm": {"name": "Shepherd's Charm", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "Horn and hair. It keeps the flock calm and does the same for you.", "rarity": "uncommon"},
+    "ostler_amulet": {"name": "Ostler's Amulet", "slot": "amulet", "cost": 320, "speed": 0.5, "flavour": "A bit-ring from a horse that outran a raid.", "rarity": "uncommon"},
+    "chandler_amulet": {"name": "Chandler's Amulet", "slot": "amulet", "cost": 280, "saves": 1, "flavour": "Wax-dipped nine times. It burns last and longest.", "rarity": "common"},
+    "threshing_amulet": {"name": "Threshing Charm", "slot": "amulet", "cost": 360, "hp": 12, "flavour": "Straw bound in a figure eight. Harvest luck, and nothing more.", "rarity": "rare"},
+    "hedgeward_cloak": {"name": "Hedgeward's Cloak", "slot": "cloak", "cost": 260, "saves": 1, "flavour": "Thorn-torn at the hem and proud of every hole.", "rarity": "uncommon"},
+    "shingler_cloak": {"name": "Shingler's Cloak", "slot": "cloak", "cost": 240, "ac": 1, "flavour": "Oiled against the rain the roof has not stopped yet.", "rarity": "common"},
+    "winterwatch_cloak": {"name": "Winterwatch Cloak", "slot": "cloak", "cost": 300, "hp": 10, "flavour": "Two fleeces thick. The wall is colder than the dungeon.", "rarity": "uncommon"},
+    "orchard_cloak": {"name": "Orchardman's Cloak", "slot": "cloak", "cost": 220, "speed": 0.4, "flavour": "Deep pockets, still sticky from the pressing.", "rarity": "common"},
+    "saltboiler_cloak": {"name": "Saltboiler's Cloak", "slot": "cloak", "cost": 280, "saves": 1, "flavour": "Stiff with brine. It has stopped worse than weather.", "rarity": "uncommon"},
+    "carter_boots": {"name": "Carter's Boots", "slot": "boots", "cost": 240, "speed": 0.6, "flavour": "They know the road's ruts better than the carter does.", "rarity": "uncommon"},
+    "millrace_boots": {"name": "Millrace Boots", "slot": "boots", "cost": 220, "saves": 1, "flavour": "Wet to the ankle for twenty years and never rotted.", "rarity": "uncommon"},
+    "hayward_boots": {"name": "Hayward's Boots", "slot": "boots", "cost": 200, "speed": 0.5, "flavour": "He walks the fences at night so the fields keep their edges.", "rarity": "common"},
+    "tinker_boots": {"name": "Tinker's Boots", "slot": "boots", "cost": 260, "hit": 1, "flavour": "Resoled in three towns. None of them his.", "rarity": "uncommon"},
+    "kennel_boots": {"name": "Kennelman's Boots", "slot": "boots", "cost": 230, "speed": 0.5, "flavour": "The hounds follow these, whoever is in them.", "rarity": "uncommon"},
+    "plaster_gloves": {"name": "Plasterer's Gloves", "slot": "gloves", "cost": 240, "ac": 1, "flavour": "Set hard at the knuckles. He stopped noticing years ago.", "rarity": "uncommon"},
+    "wheelwright_gloves": {"name": "Wheelwright's Gloves", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "Shaped to a spoke. Your grip is a wheel's grip now.", "rarity": "very rare"},
+    "miner_grips": {"name": "Miner's Grips", "slot": "gloves", "cost": 280, "dmg": 1, "flavour": "Leather over knuckle-iron, for rock that argues.", "rarity": "rare"},
+    "baker_mitts": {"name": "Baker's Mitts", "slot": "gloves", "cost": 200, "saves": 1, "flavour": "They have been in a hotter mouth than anything down there.", "rarity": "common"},
+    "thresher_gloves": {"name": "Thresher's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Flail-worn at the heel of the hand. The swing is already in them.", "rarity": "uncommon"},
+    "tanner_ring":       {"name": "Tanner's Ring", "slot": "ring", "cost": 300, "saves": 1, "flavour": "Horn, cut from a beast that argued. It argues still.", "rarity": "uncommon"},
+    "fletcher_ring":     {"name": "Fletcher's Thumb-ring", "slot": "ring", "cost": 340, "hit": 1, "flavour": "Bone, for the string. Your aim is older than you are.", "rarity": "uncommon"},
+    "lockkeep_ring":     {"name": "Lockkeeper's Ring", "slot": "ring", "cost": 400, "hp": 10, "flavour": "Brass, green at the seam. It has held a gate shut all night.", "rarity": "rare"},
+    "sexton_ring":       {"name": "Sexton's Ring", "slot": "ring", "cost": 440, "saves": 1, "flavour": "He wore it to every burial in Bellmire and walked home from each one.", "rarity": "very rare"},
+    "fuller_amulet":     {"name": "Fuller's Token", "slot": "amulet", "cost": 280, "hp": 10, "flavour": "Lead, stamped at the cloth hall. Proof the work was done right.", "rarity": "common"},
+    "skep_amulet":       {"name": "Skepward's Charm", "slot": "amulet", "cost": 320, "saves": 1, "flavour": "Wax, with one dead bee in it. The hive forgave him.", "rarity": "uncommon"},
+    "farrier_amulet":    {"name": "Farrier's Nail", "slot": "amulet", "cost": 360, "dmg": 1, "flavour": "Hung on a thong. Driven once, into something that kicked.", "rarity": "rare"},
+    "potter_amulet":     {"name": "Potter's Thumbmark", "slot": "amulet", "cost": 300, "hp": 12, "flavour": "Fired clay with his print still in it. Someone made this on purpose.", "rarity": "uncommon"},
+    "tanner_cloak":      {"name": "Tanner's Apron-cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Hide cured hard. It smells of the yard and it stops a knife.", "rarity": "uncommon"},
+    "weaver_cloak":      {"name": "Weaver's Long Cloak", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Cloth woven so tight the rain gives up on it.", "rarity": "uncommon"},
+    "sexton_cloak":      {"name": "Sexton's Black", "slot": "cloak", "cost": 280, "ac": 1, "flavour": "Worn at every grave on the hill. It knows the way back down.", "rarity": "uncommon"},
+    "lockkeep_cloak":    {"name": "Lockkeeper's Oilcloth", "slot": "cloak", "cost": 240, "saves": 1, "flavour": "Oiled against the Ford. Water runs off it like it was told to.", "rarity": "common"},
+    "bowyer_cloak":      {"name": "Bowyer's Shoulder-cloak", "slot": "cloak", "cost": 320, "hit": 1, "flavour": "Cut away at the right shoulder so the string never catches.", "rarity": "rare"},
+    "tanyard_boots":     {"name": "Tanyard Boots", "slot": "boots", "cost": 240, "saves": 1, "flavour": "They have stood in worse than blood, and for longer.", "rarity": "uncommon"},
+    "lockkeep_waders":   {"name": "Lockkeeper's Waders", "slot": "boots", "cost": 260, "speed": 0.5, "flavour": "Stiff at the knee, dry at the toe, quick on wet stone.", "rarity": "uncommon"},
+    "kiln_boots":        {"name": "Potter's Kiln Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Soles baked hard. A hot floor is just a floor.", "rarity": "uncommon"},
+    "hive_boots":        {"name": "Skepward's Soft Boots", "slot": "boots", "cost": 280, "speed": 0.6, "flavour": "He learned to walk so nothing woke. So did these.", "rarity": "rare"},
+    "gravepath_boots":   {"name": "Sexton's Hobnails", "slot": "boots", "cost": 300, "ac": 1, "flavour": "Shod for the hill path in the rain. Nothing slips them.", "rarity": "rare"},
+    "currier_gloves":    {"name": "Currier's Gloves", "slot": "gloves", "cost": 260, "dmg": 1, "flavour": "Thick at the palm, for a blade you draw toward yourself.", "rarity": "uncommon"},
+    "fletcher_tabs":     {"name": "Fletcher's Tabs", "slot": "gloves", "cost": 230, "hit": 1, "flavour": "Two fingers of hard leather. The string takes them instead of you.", "rarity": "uncommon"},
+    "farrier_mitts":     {"name": "Farrier's Mitts", "slot": "gloves", "cost": 300, "dmg": 2, "flavour": "Hoof-scorched. The hand inside has been stepped on and kept working.", "rarity": "very rare"},
+    "fuller_grips":      {"name": "Fuller's Grips", "slot": "gloves", "cost": 210, "hp": 8, "flavour": "Lime-burnt and lime-proof. They have handled worse cloth than yours.", "rarity": "common"},
+    "lockkeep_gloves":   {"name": "Lockkeeper's Gloves", "slot": "gloves", "cost": 240, "saves": 1, "flavour": "Hemp at the palm. The rope goes nowhere you did not send it.", "rarity": "uncommon"},
+    "hive_gloves":       {"name": "Skepward's Gloves", "slot": "gloves", "cost": 250, "speed": 0.4, "flavour": "Smoke-cured and gentle. Quick hands that wake nothing.", "rarity": "uncommon"},
+    "maltster_ring":    {"name": "Maltster's Ring", "slot": "ring", "cost": 300, "hp": 10, "flavour": "Turned the floor every four hours for thirty years. The ring kept the count.", "rarity": "uncommon"},
+    "cutler_ring":      {"name": "Cutler's Ring", "slot": "ring", "cost": 430, "dmg": 1, "flavour": "He set the edge. You only have to carry it.", "rarity": "very rare"},
+    "spurrier_ring":    {"name": "Spurrier's Ring", "slot": "ring", "cost": 280, "speed": 0.5, "flavour": "Rowelled on the inside. You do not sit still wearing it.", "rarity": "common"},
+    "lorimer_ring":     {"name": "Lorimer's Ring", "slot": "ring", "cost": 260, "saves": 1, "flavour": "Buckles, bits and bridle-rings. Nothing he made ever came loose.", "rarity": "common"},
+    "pewterer_ring":    {"name": "Pewterer's Ring", "slot": "ring", "cost": 240, "ac": 1, "flavour": "Soft metal, hard habit. He never once poured short.", "rarity": "common"},
+    "nailer_ring":      {"name": "Nailer's Ring", "slot": "ring", "cost": 220, "hit": 1, "flavour": "Four thousand a day, every one straight. Your aim could be worse.", "rarity": "common"},
+    "bridgeward_ring":  {"name": "Bridgeward's Ring", "slot": "ring", "cost": 460, "ac": 1, "flavour": "He counted every cart across and every cart back. The numbers matched.", "rarity": "very rare"},
+    "beadle_ring":      {"name": "Beadle's Ring", "slot": "ring", "cost": 350, "saves": 1, "flavour": "Worn where the parish could see it. That was the point of it.", "rarity": "uncommon"},
+    "pinder_ring":      {"name": "Pinder's Ring", "slot": "ring", "cost": 230, "hp": 8, "flavour": "Keeper of the pound. Strays went in; owners paid to get them out.", "rarity": "common"},
+    "limner_ring":      {"name": "Limner's Ring", "slot": "ring", "cost": 320, "saves": 1, "flavour": "Gold leaf still in the setting. He painted saints and charged for them.", "rarity": "uncommon"},
+    "brewster_amulet":  {"name": "Brewster's Charm", "slot": "amulet", "cost": 260, "hp": 10, "flavour": "Hung over the mash tun. The ale never soured while it hung.", "rarity": "common"},
+    "taverner_amulet":  {"name": "Taverner's Token", "slot": "amulet", "cost": 300, "saves": 1, "flavour": "Good for one bed and one bowl. Honoured at the Ford, nowhere else.", "rarity": "uncommon"},
+    "horner_amulet":    {"name": "Horner's Pendant", "slot": "amulet", "cost": 240, "hp": 8, "flavour": "Scraped thin enough to see a candle through. He never broke one.", "rarity": "common"},
+    "chapman_amulet":   {"name": "Chapman's Charm", "slot": "amulet", "cost": 280, "speed": 0.5, "flavour": "A pedlar's luck: cheap, loud, and somehow always on the road ahead of you.", "rarity": "common"},
+    "falconer_amulet":  {"name": "Falconer's Vervel", "slot": "amulet", "cost": 440, "hit": 1, "flavour": "A leg-ring off a bird that came back every time it was loosed.", "rarity": "legendary"},
+    "weirkeep_amulet":  {"name": "Weir-keeper's Charm", "slot": "amulet", "cost": 390, "saves": 1, "flavour": "The water came up. He opened the gate at the right hour, and it went down.", "rarity": "very rare"},
+    "sluice_amulet":    {"name": "Sluicekeeper's Amulet", "slot": "amulet", "cost": 330, "ac": 1, "flavour": "Brass, green with it. Turned the same handle for forty winters.", "rarity": "uncommon"},
+    "millwright_amulet":{"name": "Millwright's Amulet", "slot": "amulet", "cost": 410, "hp": 12, "flavour": "He set the great wheel true. It has not wandered since.", "rarity": "very rare"},
+    "gaoler_amulet":    {"name": "Gaoler's Keyring", "slot": "amulet", "cost": 360, "ac": 1, "flavour": "Three keys, two locks. He never said which one did nothing.", "rarity": "rare"},
+    "boatwright_amulet":{"name": "Boatwright's Charm", "slot": "amulet", "cost": 350, "saves": 1, "flavour": "A nail from the first hull he put in the water. It came back dry.", "rarity": "rare"},
+    "butcher_cloak":    {"name": "Butcher's Oilcloth", "slot": "cloak", "cost": 240, "hp": 10, "flavour": "Scrubbed daily and never once clean. Nothing soaks through it.", "rarity": "common"},
+    "limeburner_cloak": {"name": "Limeburner's Mantle", "slot": "cloak", "cost": 300, "saves": 1, "flavour": "Lime-pocked and lime-proof. He stood at that kiln mouth for years.", "rarity": "uncommon"},
+    "tiler_cloak":      {"name": "Tiler's Shoulder-cloak", "slot": "cloak", "cost": 260, "ac": 1, "flavour": "Roof-shaped at the shoulder from carrying them up. It sheds rain like one.", "rarity": "uncommon"},
+    "osier_cloak":      {"name": "Osier-cutter's Cloak", "slot": "cloak", "cost": 230, "speed": 0.5, "flavour": "Willow-stained to the elbow. Light enough to work the withy-beds in.", "rarity": "common"},
+    "turbary_cloak":    {"name": "Peat-cutter's Cloak", "slot": "cloak", "cost": 250, "hp": 10, "flavour": "Smells of the turbary. Dries by a fire in half the time wool should.", "rarity": "uncommon"},
+    "woodward_cloak":   {"name": "Woodward's Green", "slot": "cloak", "cost": 420, "saves": 1, "flavour": "He kept the lord's wood. Poachers learned his colour and went elsewhere.", "rarity": "rare"},
+    "raftsman_cloak":   {"name": "Raftsman's Cloak", "slot": "cloak", "cost": 280, "ac": 1, "flavour": "Timber downriver, man on top of it. Wet to the knee and no further.", "rarity": "uncommon"},
+    "lighterman_cloak": {"name": "Lighterman's Mantle", "slot": "cloak", "cost": 310, "hp": 12, "flavour": "Loaded and unloaded by lamplight. The cloak worked the same hours.", "rarity": "rare"},
+    "constable_cloak":  {"name": "Constable's Cloak", "slot": "cloak", "cost": 480, "ac": 1, "flavour": "Parish black with a watch-clasp. You are expected to be visible in it.", "rarity": "legendary"},
+    "hurdler_cloak":    {"name": "Hurdler's Cloak", "slot": "cloak", "cost": 220, "speed": 0.4, "flavour": "Hazel-scratched all over. He fenced the fold in a morning.", "rarity": "common"},
+    "clogger_boots":    {"name": "Clogger's Clogs", "slot": "boots", "cost": 210, "ac": 1, "flavour": "Alder soles, iron-rimmed. Loud on stone, dry in anything.", "rarity": "common"},
+    "cordwainer_boots": {"name": "Cordwainer's Boots", "slot": "boots", "cost": 400, "speed": 0.6, "flavour": "Cut to the foot, not to the last. You will notice the difference by noon.", "rarity": "legendary"},
+    "eeler_boots":      {"name": "Eeler's Waders", "slot": "boots", "cost": 260, "saves": 1, "flavour": "He set the traps at dusk and lifted them at dawn. Mire never got in.", "rarity": "uncommon"},
+    "reedcutter_boots": {"name": "Reedcutter's Boots", "slot": "boots", "cost": 240, "speed": 0.5, "flavour": "Flat and wide. They keep you up where the ground has given up.", "rarity": "uncommon"},
+    "brickmaker_boots": {"name": "Brickmaker's Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Clay to the ankle, baked on. They are nearly brick themselves now.", "rarity": "uncommon"},
+    "dauber_boots":     {"name": "Dauber's Boots", "slot": "boots", "cost": 200, "hp": 8, "flavour": "Wattle and daub, and most of the daub on these.", "rarity": "common"},
+    "warrener_boots":   {"name": "Warrener's Boots", "slot": "boots", "cost": 290, "speed": 0.6, "flavour": "Soft over the burrows. The coneys never heard him coming.", "rarity": "rare"},
+    "bolter_boots":     {"name": "Bolter's Boots", "slot": "boots", "cost": 230, "saves": 1, "flavour": "White to the shin with flour. He sifted the whole town's bread.", "rarity": "uncommon"},
+    "creeler_boots":    {"name": "Creeler's Boots", "slot": "boots", "cost": 250, "ac": 1, "flavour": "Mud, withy and fish-scale. Worth more than they look.", "rarity": "uncommon"},
+    "oarmaker_boots":   {"name": "Oar-maker's Boots", "slot": "boots", "cost": 270, "hit": 1, "flavour": "He stood to the shaving horse all day. Balance is a habit you can wear.", "rarity": "uncommon"},
+    "armourer_gloves":  {"name": "Armourer's Gauntlets", "slot": "gloves", "cost": 320, "ac": 1, "flavour": "Scarred on the knuckle from other men's mistakes.", "rarity": "legendary"},
+    "chainsmith_gloves":{"name": "Chainsmith's Mitts", "slot": "gloves", "cost": 300, "dmg": 1, "flavour": "A thousand rings closed by hand. The grip stayed.", "rarity": "very rare"},
+    "joiner_gloves":    {"name": "Joiner's Gloves", "slot": "gloves", "cost": 230, "hit": 1, "flavour": "He cut a tenon that needed no glue. Steady is the whole trade.", "rarity": "uncommon"},
+    "bodger_gloves":    {"name": "Bodger's Gloves", "slot": "gloves", "cost": 210, "speed": 0.4, "flavour": "Green wood, pole lathe, a chair by dusk. Fast hands, cheap gloves.", "rarity": "common"},
+    "saddler_gloves":   {"name": "Saddler's Gloves", "slot": "gloves", "cost": 260, "saves": 1, "flavour": "Waxed thread has gone through these more often than through leather.", "rarity": "uncommon"},
+    "quarreller_gloves":{"name": "Quarreller's Tabs", "slot": "gloves", "cost": 280, "hit": 1, "flavour": "He spanned a windlass all day and never pinched a thumb.", "rarity": "rare"},
+    "soaper_gloves":    {"name": "Lye-boiler's Gloves", "slot": "gloves", "cost": 240, "hp": 8, "flavour": "Lye takes the skin off a hand in a season. It never took his.", "rarity": "uncommon"},
+    "carder_gloves":    {"name": "Carder's Gloves", "slot": "gloves", "cost": 200, "hp": 8, "flavour": "Tooth-scratched through at the palm, and still worn.", "rarity": "common"},
+    "spinner_gloves":   {"name": "Spinner's Gloves", "slot": "gloves", "cost": 205, "speed": 0.4, "flavour": "Fingerless, for the thread. The thread never slipped.", "rarity": "common"},
+    "retter_gloves":    {"name": "Retter's Gloves", "slot": "gloves", "cost": 215, "saves": 1, "flavour": "Flax rotted in the pond until it let go. He pulled it out by hand.", "rarity": "uncommon"},
+    "scar_guard_ring": {"name": "Ring of the Scar-guard", "slot": "ring", "cost": 420, "ac": 1, "flavour": "A guard's iron, worn on the hand that holds the lantern.", "rarity": "rare"},
+    "doorkeeper_ring": {"name": "Doorkeeper's Band", "slot": "ring", "cost": 340, "saves": 1, "flavour": "Kept the door through the night. The door remembers.", "rarity": "uncommon"},
+    "ledger_ring": {"name": "Ledger-keeper's Ring", "slot": "ring", "cost": 300, "hit": 1, "flavour": "A signet worn smooth. It stamped every name that went below.", "rarity": "uncommon"},
+    "hearth_ring": {"name": "Hearthwarden's Ring", "slot": "ring", "cost": 360, "hp": 12, "flavour": "Warm brass. It has never been cold, whatever floor it has been on.", "rarity": "uncommon"},
+    "lanternman_amulet": {"name": "Lanternman's Amulet", "slot": "amulet", "cost": 380, "saves": 1, "flavour": "A tin lantern the size of a thumb. It does not give light. It gives nerve.", "rarity": "very rare"},
+    "grainmeasure_charm": {"name": "Grainmeasure Charm", "slot": "amulet", "cost": 260, "hp": 10, "flavour": "A wheat-ear in resin. Measure the grain, and it will measure back.", "rarity": "common"},
+    "flask_amulet": {"name": "Flask-count Pendant", "slot": "amulet", "cost": 330, "hit": 1, "flavour": "Seven little flasks on a cord. The eighth is yours to supply.", "rarity": "uncommon"},
+    "clapperless_amulet": {"name": "Clapperless Bell Amulet", "slot": "amulet", "cost": 400, "ac": 1, "flavour": "A bell with no clapper. It rings in the mind and nowhere else.", "rarity": "very rare"},
+    "wall_cloak": {"name": "Wall-walker's Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Wind-faded, rain-stiff. The wall has taught it to stand up straight.", "rarity": "rare"},
+    "scarwatch_cloak": {"name": "Scarwatch Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Grey as the stair-head at dusk. The dark does not notice it, which is the point.", "rarity": "rare"},
+    "feast_cloak": {"name": "Feast-night Cloak", "slot": "cloak", "cost": 230, "hp": 8, "flavour": "Stained with three toasts and a stew. Warm, and well-loved.", "rarity": "common"},
+    "caravan_cloak": {"name": "Caravan Cloak", "slot": "cloak", "cost": 280, "speed": 0.5, "flavour": "Waxed against the road. It has been to places Bellmire does not have names for.", "rarity": "uncommon"},
+    "barracks_boots": {"name": "Barracks Boots", "slot": "boots", "cost": 260, "ac": 1, "flavour": "Hobnailed, guard-issue. They stamp in step, even when empty.", "rarity": "uncommon"},
+    "stairwalker_boots": {"name": "Stair-walker's Boots", "slot": "boots", "cost": 300, "speed": 0.6, "flavour": "Worn on one side from a stair that curls the same way every time.", "rarity": "rare"},
+    "fordwader_boots": {"name": "Ford-wader's Tarred Boots", "slot": "boots", "cost": 220, "hp": 8, "flavour": "Tarred to the knee. The Ford takes everything but these.", "rarity": "uncommon"},
+    "delvers_boots": {"name": "Delver's Boots", "slot": "boots", "cost": 340, "saves": 1, "flavour": "Re-soled four times and not once at the scar. It tries to avoid the scar.", "rarity": "very rare"},
+    "raidbreaker_gloves": {"name": "Raidbreaker's Gauntlets", "slot": "gloves", "cost": 380, "dmg": 2, "flavour": "Heavy, scored with raider steel. Somebody argued with them once, with an axe.", "rarity": "legendary"},
+    "bellringer_mitts": {"name": "Bell-ringer's Mitts", "slot": "gloves", "cost": 240, "hp": 8, "flavour": "Padded to the wrist. The rope bites hands, and these have been bitten.", "rarity": "uncommon"},
+    "ledger_gloves": {"name": "Ledger-keeper's Gloves", "slot": "gloves", "cost": 260, "hit": 1, "flavour": "Ink at the fingertips. The hand that wrote the dead's names is steady.", "rarity": "uncommon"},
+    "harvest_gloves": {"name": "Harvest Gloves", "slot": "gloves", "cost": 210, "hp": 8, "flavour": "Cut-down and patched. The last cart comes in on hands like these.", "rarity": "common"},
+    "scarforged_ring": {"name": "Scarforged Ring", "slot": "ring", "cost": 500, "dmg": 2, "flavour": "Warm when the dark is near. It has never once been wrong, and has never once been wrong in your favour.", "rarity": "legendary"},
+    "oath_amulet": {"name": "Oathkeeper's Amulet", "slot": "amulet", "cost": 480, "ac": 1, "flavour": "An oath stamped in tin. The wearer says they will not break it. The amulet is listening.", "rarity": "legendary"},
+    "commander_cloak": {"name": "Commander's Cloak", "slot": "cloak", "cost": 440, "saves": 1, "flavour": "Red, E3PO's colours. He has not endorsed it. He has not objected, either.", "rarity": "very rare"},
+    "hero_home_boots": {"name": "Homecomer's Boots", "slot": "boots", "cost": 350, "hp": 14, "flavour": "Walked out of the scar once. They are not eager to go back, but they will.", "rarity": "very rare"}
   },
   "cosmetics": {
     "wide_hat":     {"name": "Wide-brimmed Hat", "kind": "hat", "cost": 60, "colour": "4a3a2a", "flavour": "Rain runs off the brim instead of your collar. That is the whole of it."},
@@ -264,7 +264,7 @@
     "crown_of_ash": {"name": "Ash-wood Circlet", "kind": "hat", "cost": 150, "colour": "b8a888", "flavour": "Ash-wood bent in a circle. The old way of saying this one leads."},
     "banner_blue":  {"name": "Keep Banner (blue)", "kind": "banner", "cost": 90, "colour": "2a4a9a", "flavour": "Keep blue. Flown where the orders come from."},
     "banner_red":   {"name": "Market Banner (red)", "kind": "banner", "cost": 90, "colour": "9a2a2a", "flavour": "Market red. Up on stall days, down when the stalls are."},
-    "banner_yellow":{"name": "Craft Banner (yellow)", "kind": "banner", "cost": 90, "colour": "c8a028", "flavour": "Craft yellow. Every trade on the row claims it invented the colour."},
+    "banner_yellow":{"name": "Craft Banner (yellow)", "kind": "banner", "cost": 90, "colour": "c8a028", "flavour": "Craft yellow. Every trade on the row claims it invented the colour.", "rarity": "common"},
     "banner_green": {"name": "Homes Banner (green)", "kind": "banner", "cost": 90, "colour": "2a7a3a", "flavour": "Homes green. Nobody important, everybody necessary."},
     "pet_corgi":    {"name": "a corgi", "kind": "pet", "cost": 250, "model": "res://assets/animals/Corgi.glb", "scale": 0.0017, "flavour": "Short, loud, and convinced it is a guard dog. Nobody corrects it."},
     "pet_pug":      {"name": "a pug", "kind": "pet", "cost": 220, "model": "res://assets/animals/Pug.glb", "scale": 0.15, "flavour": "Breathes like a bellows with a hole in it. Devoted anyway."},
@@ -626,23 +626,23 @@
     "banner_spurrier":  {"name": "Spurriers' Banner", "kind": "banner", "cost": 120, "colour": "9a8440", "flavour": "Brass on grey. It makes a noise the wind likes."},
     "banner_lorimer":   {"name": "Lorimers' Banner", "kind": "banner", "cost": 120, "colour": "a8803a", "flavour": "Buckles, bits and bridle-rings on a plain field."},
     "banner_horner":    {"name": "Horners' Banner", "kind": "banner", "cost": 110, "colour": "d8ccb0", "flavour": "Pale as a lantern pane, which is half of what they made."},
-    "banner_cordwainer":{"name": "Cordwainers' Banner", "kind": "banner", "cost": 130, "colour": "5a3c28", "flavour": "Not the cobblers' banner. Do not hang them on the same pole."},
+    "banner_cordwainer":{"name": "Cordwainers' Banner", "kind": "banner", "cost": 130, "colour": "5a3c28", "flavour": "Not the cobblers' banner. Do not hang them on the same pole.", "rarity": "common"},
     "banner_clogger":   {"name": "Cloggers' Banner", "kind": "banner", "cost": 90, "colour": "8a6232", "flavour": "Alder on brown. Loud trade, quiet flag."},
     "banner_saddler":   {"name": "Saddlers' Banner", "kind": "banner", "cost": 130, "colour": "6a4a2e", "flavour": "Stitched, not painted. It has outlasted three painted ones."},
     "banner_armourer":  {"name": "Armourers' Banner", "kind": "banner", "cost": 150, "colour": "44464a", "flavour": "Flown over the forge row on muster days."},
-    "banner_quarreller":{"name": "Quarrellers' Banner", "kind": "banner", "cost": 140, "colour": "7a6a3e", "flavour": "Bolts in a sheaf. Counted before the gate opens."},
+    "banner_quarreller":{"name": "Quarrellers' Banner", "kind": "banner", "cost": 140, "colour": "7a6a3e", "flavour": "Bolts in a sheaf. Counted before the gate opens.", "rarity": "common"},
     "banner_bodger":    {"name": "Bodgers' Banner", "kind": "banner", "cost": 90, "colour": "7a9a3a", "flavour": "Hung in the coppice, taken down when the coppice moves."},
     "banner_joiner":    {"name": "Joiners' Banner", "kind": "banner", "cost": 120, "colour": "9a6a3a", "flavour": "A joint that needs no glue, painted plain so you can see it."},
     "banner_nailer":    {"name": "Nailers' Banner", "kind": "banner", "cost": 100, "colour": "6a6e72", "flavour": "Four thousand a day, and one on the flag."},
-    "banner_chainsmith":{"name": "Chainsmiths' Banner", "kind": "banner", "cost": 140, "colour": "26262a", "flavour": "Closed rings, every one. Nobody has found the open one yet."},
+    "banner_chainsmith":{"name": "Chainsmiths' Banner", "kind": "banner", "cost": 140, "colour": "26262a", "flavour": "Closed rings, every one. Nobody has found the open one yet.", "rarity": "common"},
     "banner_pewterer":  {"name": "Pewterers' Banner", "kind": "banner", "cost": 120, "colour": "9a9ea2", "flavour": "Grey on grey. You have to be close to read it, which suits them."},
-    "banner_limeburner":{"name": "Limeburners' Banner", "kind": "banner", "cost": 110, "colour": "eae6dc", "flavour": "White, and it stays white. Nothing else at that kiln does."},
-    "banner_brickmaker":{"name": "Brickfield Banner", "kind": "banner", "cost": 100, "colour": "9a5a3a", "flavour": "Raised over the drying rows. It comes down before the rain, if they are lucky."},
+    "banner_limeburner":{"name": "Limeburners' Banner", "kind": "banner", "cost": 110, "colour": "eae6dc", "flavour": "White, and it stays white. Nothing else at that kiln does.", "rarity": "common"},
+    "banner_brickmaker":{"name": "Brickfield Banner", "kind": "banner", "cost": 100, "colour": "9a5a3a", "flavour": "Raised over the drying rows. It comes down before the rain, if they are lucky.", "rarity": "common"},
     "banner_tiler":     {"name": "Tilers' Banner", "kind": "banner", "cost": 110, "colour": "9a4226", "flavour": "Flown from the ridge, where they are anyway."},
     "banner_osier":     {"name": "Withy-bed Banner", "kind": "banner", "cost": 90, "colour": "c4a870", "flavour": "Woven, not sewn. It frays beautifully."},
     "banner_hurdler":   {"name": "Hurdlers' Banner", "kind": "banner", "cost": 90, "colour": "b8a070", "flavour": "A fold a morning. The banner moves with the fold."},
     "banner_turbary":   {"name": "Turbary Banner", "kind": "banner", "cost": 100, "colour": "3a2e22", "flavour": "Dark, and the only clean thing on the cutting."},
-    "banner_reedcutter":{"name": "Reedcutters' Banner", "kind": "banner", "cost": 90, "colour": "8a9a58", "flavour": "Cut from the crop. It will be thatch by winter."},
+    "banner_reedcutter":{"name": "Reedcutters' Banner", "kind": "banner", "cost": 90, "colour": "8a9a58", "flavour": "Cut from the crop. It will be thatch by winter.", "rarity": "common"},
     "banner_woodward":  {"name": "Woodward's Banner", "kind": "banner", "cost": 140, "colour": "1e3a2a", "flavour": "The lord's wood, the lord's colour, the woodward's eye."},
     "banner_falconer":  {"name": "Falconers' Banner", "kind": "banner", "cost": 150, "colour": "7a5a3a", "flavour": "A vervel on a green field. Flown when the birds are flying."},
     "banner_weirkeep":  {"name": "Weir Banner", "kind": "banner", "cost": 130, "colour": "356048", "flavour": "Up means the gate is shut. Down means run."},
@@ -2570,6 +2570,7 @@
         "family": "blade",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "forged"
@@ -2581,6 +2582,7 @@
         "family": "blade",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "looted"
@@ -2592,6 +2594,7 @@
         "family": "blade",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "forged"
@@ -2603,6 +2606,7 @@
         "family": "blade",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "forged"
@@ -2614,6 +2618,7 @@
         "family": "blade",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "forged"
         ],
@@ -2624,6 +2629,7 @@
         "family": "blade",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "looted"
@@ -2635,6 +2641,7 @@
         "family": "blade",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "looted"
         ],
@@ -2645,6 +2652,7 @@
         "family": "blade",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "forged",
           "looted"
@@ -2656,6 +2664,7 @@
         "family": "blade",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "shop",
           "forged"
@@ -2667,6 +2676,7 @@
         "family": "blade",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "looted"
         ],
@@ -2677,6 +2687,7 @@
         "family": "blade",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "caravan"
         ],
@@ -2687,6 +2698,7 @@
         "family": "blade",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "looted",
           "forged"
@@ -2698,6 +2710,7 @@
         "family": "blade",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "looted"
         ],
@@ -2708,6 +2721,7 @@
         "family": "blade",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "caravan"
         ],
@@ -2718,6 +2732,7 @@
         "family": "blade",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "forged",
           "shop"
@@ -2729,6 +2744,7 @@
         "family": "blade",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -2739,6 +2755,7 @@
         "family": "blade",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -2749,6 +2766,7 @@
         "family": "axe",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "forged"
@@ -2760,6 +2778,7 @@
         "family": "axe",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "looted"
@@ -2771,6 +2790,7 @@
         "family": "axe",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop"
         ],
@@ -2781,6 +2801,7 @@
         "family": "axe",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "forged"
@@ -2792,6 +2813,7 @@
         "family": "axe",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "forged",
           "looted"
@@ -2803,6 +2825,7 @@
         "family": "axe",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop"
         ],
@@ -2813,6 +2836,7 @@
         "family": "axe",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "forged",
           "looted"
@@ -2824,6 +2848,7 @@
         "family": "axe",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "shop",
           "forged"
@@ -2835,6 +2860,7 @@
         "family": "axe",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "looted"
         ],
@@ -2845,6 +2871,7 @@
         "family": "axe",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "caravan"
         ],
@@ -2855,6 +2882,7 @@
         "family": "axe",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "forged",
           "looted"
@@ -2866,6 +2894,7 @@
         "family": "axe",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "looted"
         ],
@@ -2876,6 +2905,7 @@
         "family": "axe",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "caravan"
         ],
@@ -2886,6 +2916,7 @@
         "family": "axe",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -2896,6 +2927,7 @@
         "family": "axe",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -2906,6 +2938,7 @@
         "family": "arcane",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "forged"
@@ -2917,6 +2950,7 @@
         "family": "arcane",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "looted"
@@ -2928,6 +2962,7 @@
         "family": "arcane",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop"
         ],
@@ -2938,6 +2973,7 @@
         "family": "arcane",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "forged"
@@ -2949,6 +2985,7 @@
         "family": "arcane",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "forged"
         ],
@@ -2959,6 +2996,7 @@
         "family": "arcane",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "looted"
@@ -2970,6 +3008,7 @@
         "family": "arcane",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "forged",
           "looted"
@@ -2981,6 +3020,7 @@
         "family": "arcane",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "shop",
           "forged"
@@ -2992,6 +3032,7 @@
         "family": "arcane",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "looted"
         ],
@@ -3002,6 +3043,7 @@
         "family": "arcane",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "caravan"
         ],
@@ -3012,6 +3054,7 @@
         "family": "arcane",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "forged",
           "looted"
@@ -3023,6 +3066,7 @@
         "family": "arcane",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "caravan"
         ],
@@ -3033,6 +3077,7 @@
         "family": "arcane",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "looted"
         ],
@@ -3043,6 +3088,7 @@
         "family": "arcane",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -3053,6 +3099,7 @@
         "family": "arcane",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -3063,6 +3110,7 @@
         "family": "ranged",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "forged"
@@ -3074,6 +3122,7 @@
         "family": "ranged",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "looted"
@@ -3085,6 +3134,7 @@
         "family": "ranged",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop"
         ],
@@ -3095,6 +3145,7 @@
         "family": "ranged",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "forged"
@@ -3106,6 +3157,7 @@
         "family": "ranged",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "forged",
           "looted"
@@ -3117,6 +3169,7 @@
         "family": "ranged",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "forged"
         ],
@@ -3127,6 +3180,7 @@
         "family": "ranged",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "forged",
           "looted"
@@ -3138,6 +3192,7 @@
         "family": "ranged",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "shop",
           "forged"
@@ -3149,6 +3204,7 @@
         "family": "ranged",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "looted"
         ],
@@ -3159,6 +3215,7 @@
         "family": "ranged",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "caravan"
         ],
@@ -3169,6 +3226,7 @@
         "family": "ranged",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "forged",
           "looted"
@@ -3180,6 +3238,7 @@
         "family": "ranged",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "caravan"
         ],
@@ -3190,6 +3249,7 @@
         "family": "ranged",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "looted"
         ],
@@ -3200,6 +3260,7 @@
         "family": "ranged",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -3210,6 +3271,7 @@
         "family": "ranged",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -3220,6 +3282,7 @@
         "family": "open",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "forged"
@@ -3231,6 +3294,7 @@
         "family": "open",
         "tier": 1,
         "tier_name": "plain steel",
+        "rarity": "uncommon",
         "routes": [
           "shop",
           "looted"
@@ -3242,6 +3306,7 @@
         "family": "open",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "shop",
           "forged"
@@ -3253,6 +3318,7 @@
         "family": "open",
         "tier": 2,
         "tier_name": "fine steel",
+        "rarity": "rare",
         "routes": [
           "forged",
           "looted"
@@ -3264,6 +3330,7 @@
         "family": "open",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "forged",
           "looted"
@@ -3275,6 +3342,7 @@
         "family": "open",
         "tier": 3,
         "tier_name": "runed",
+        "rarity": "very rare",
         "routes": [
           "shop"
         ],
@@ -3285,6 +3353,7 @@
         "family": "open",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "looted",
           "forged"
@@ -3296,6 +3365,7 @@
         "family": "open",
         "tier": 4,
         "tier_name": "dragontooth",
+        "rarity": "legendary",
         "routes": [
           "caravan"
         ],
@@ -3306,6 +3376,7 @@
         "family": "open",
         "tier": 5,
         "tier_name": "scarforged",
+        "rarity": "artifact",
         "routes": [
           "looted"
         ],
@@ -3316,6 +3387,7 @@
         "family": "blade",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3326,6 +3398,7 @@
         "family": "axe",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3336,6 +3409,7 @@
         "family": "axe",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3346,6 +3420,7 @@
         "family": "blade",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3356,6 +3431,7 @@
         "family": "blade",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3366,6 +3442,7 @@
         "family": "ranged",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3376,6 +3453,7 @@
         "family": "arcane",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3386,6 +3464,7 @@
         "family": "arcane",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3396,6 +3475,7 @@
         "family": "arcane",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3406,6 +3486,7 @@
         "family": "blade",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3416,6 +3497,7 @@
         "family": "arcane",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3426,6 +3508,7 @@
         "family": "open",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3436,6 +3519,7 @@
         "family": "arcane",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3446,6 +3530,7 @@
         "family": "arcane",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3456,6 +3541,7 @@
         "family": "blade",
         "tier": 0,
         "tier_name": "bare hands",
+        "rarity": "common",
         "routes": [
           "starting"
         ],
@@ -3467,6 +3553,7 @@
         "name": "Reed-Cloth Robe",
         "tier": 1,
         "tier_name": "leather",
+        "rarity": "uncommon",
         "cut": "robe",
         "routes": [
           "shop",
@@ -3478,6 +3565,7 @@
         "name": "Tanner's Jerkin",
         "tier": 1,
         "tier_name": "leather",
+        "rarity": "uncommon",
         "cut": "light",
         "routes": [
           "shop",
@@ -3489,6 +3577,7 @@
         "name": "Ford Leathers",
         "tier": 1,
         "tier_name": "leather",
+        "rarity": "uncommon",
         "cut": "light",
         "routes": [
           "shop",
@@ -3500,6 +3589,7 @@
         "name": "Padded Gambeson",
         "tier": 1,
         "tier_name": "leather",
+        "rarity": "uncommon",
         "cut": "heavy",
         "routes": [
           "shop",
@@ -3511,6 +3601,7 @@
         "name": "Guild Vestments",
         "tier": 2,
         "tier_name": "chainmail",
+        "rarity": "rare",
         "cut": "robe",
         "routes": [
           "shop",
@@ -3522,6 +3613,7 @@
         "name": "Studded Brigandine",
         "tier": 2,
         "tier_name": "chainmail",
+        "rarity": "rare",
         "cut": "light",
         "routes": [
           "shop",
@@ -3533,6 +3625,7 @@
         "name": "Militia Hauberk",
         "tier": 2,
         "tier_name": "chainmail",
+        "rarity": "rare",
         "cut": "heavy",
         "routes": [
           "shop",
@@ -3544,6 +3637,7 @@
         "name": "Bellwright's Mail",
         "tier": 2,
         "tier_name": "chainmail",
+        "rarity": "rare",
         "cut": "heavy",
         "routes": [
           "looted"
@@ -3554,6 +3648,7 @@
         "name": "Rune-Hemmed Vestment",
         "tier": 3,
         "tier_name": "plate",
+        "rarity": "very rare",
         "cut": "robe",
         "routes": [
           "forged",
@@ -3565,6 +3660,7 @@
         "name": "Emberleather Coat",
         "tier": 3,
         "tier_name": "plate",
+        "rarity": "very rare",
         "cut": "light",
         "routes": [
           "shop",
@@ -3576,6 +3672,7 @@
         "name": "Plate of the Wall",
         "tier": 3,
         "tier_name": "plate",
+        "rarity": "very rare",
         "cut": "heavy",
         "routes": [
           "shop",
@@ -3587,6 +3684,7 @@
         "name": "Ferryman's Plate",
         "tier": 3,
         "tier_name": "plate",
+        "rarity": "very rare",
         "cut": "heavy",
         "routes": [
           "caravan"
@@ -3597,6 +3695,7 @@
         "name": "Dragonsilk Robe",
         "tier": 4,
         "tier_name": "warded plate",
+        "rarity": "legendary",
         "cut": "robe",
         "routes": [
           "caravan",
@@ -3608,6 +3707,7 @@
         "name": "Wyrmhide Coat",
         "tier": 4,
         "tier_name": "warded plate",
+        "rarity": "legendary",
         "cut": "light",
         "routes": [
           "looted",
@@ -3619,6 +3719,7 @@
         "name": "Wardplate of the Ash Gate",
         "tier": 4,
         "tier_name": "warded plate",
+        "rarity": "legendary",
         "cut": "heavy",
         "routes": [
           "forged",
@@ -3630,6 +3731,7 @@
         "name": "Dragontooth Hauberk",
         "tier": 4,
         "tier_name": "warded plate",
+        "rarity": "legendary",
         "cut": "heavy",
         "routes": [
           "looted",
@@ -3641,6 +3743,7 @@
         "name": "Scarwoven Hauberk",
         "tier": 5,
         "tier_name": "scarwoven mail",
+        "rarity": "artifact",
         "cut": "heavy",
         "routes": [
           "looted"
@@ -3651,6 +3754,7 @@
         "name": "Seamwoven Vestment",
         "tier": 5,
         "tier_name": "scarwoven mail",
+        "rarity": "artifact",
         "cut": "robe",
         "routes": [
           "looted"
@@ -3661,6 +3765,7 @@
         "name": "Patched Gambeson",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "heavy",
         "routes": [
           "starting"
@@ -3671,6 +3776,7 @@
         "name": "Wall-Duty Jerkin",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "heavy",
         "routes": [
           "starting"
@@ -3681,6 +3787,7 @@
         "name": "Hide Scraps",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "light",
         "routes": [
           "starting"
@@ -3691,6 +3798,7 @@
         "name": "Dark Wool Cloak and Tunic",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "light",
         "routes": [
           "starting"
@@ -3701,6 +3809,7 @@
         "name": "Fencing Shirt and Waistcoat",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "light",
         "routes": [
           "starting"
@@ -3711,6 +3820,7 @@
         "name": "Mossy Hunting Leathers",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "light",
         "routes": [
           "starting"
@@ -3721,6 +3831,7 @@
         "name": "Apprentice's Threadbare Robe",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "robe",
         "routes": [
           "starting"
@@ -3731,6 +3842,7 @@
         "name": "Scribe's Plain Habit",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "robe",
         "routes": [
           "starting"
@@ -3741,6 +3853,7 @@
         "name": "Parish Vestments",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "robe",
         "routes": [
           "starting"
@@ -3751,6 +3864,7 @@
         "name": "Squire's Tabard and Padding",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "heavy",
         "routes": [
           "starting"
@@ -3761,6 +3875,7 @@
         "name": "Black Mourning Robes",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "robe",
         "routes": [
           "starting"
@@ -3771,6 +3886,7 @@
         "name": "Undyed Linen Wrap",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "light",
         "routes": [
           "starting"
@@ -3781,6 +3897,7 @@
         "name": "Bramble-Woven Cloak",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "robe",
         "routes": [
           "starting"
@@ -3791,6 +3908,7 @@
         "name": "Patchwork Cloak",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "robe",
         "routes": [
           "starting"
@@ -3801,6 +3919,7 @@
         "name": "Motley Jerkin",
         "tier": 0,
         "tier_name": "rags",
+        "rarity": "common",
         "cut": "light",
         "routes": [
           "starting"
@@ -6505,5 +6624,7 @@
       ]
     }
   },
-  "_note_c54": "C-cycle 54: more cosmetics, accessories and dyes themed on the guild post, the scar stair, the wall, the feast, the harvest and the Commander. Additive only."
+  "_note_c54": "C-cycle 54: more cosmetics, accessories and dyes themed on the guild post, the scar stair, the wall, the feast, the harvest and the Commander. Additive only.",
+  "_note_c58": "C-58 (WORK_PLAN C-55 step 2): every equipment piece and every accessory now carries \"rarity\", one rung of the shared ladder junk(fishing only) < common < uncommon < rare < very rare < legendary < artifact. Equipment rarity is its tier read straight across (0 common, 1 uncommon, 2 rare, 3 very rare, 4 legendary, 5 artifact - the found-only scarforged and scarwoven pieces). Accessories are all bought, so they stop at legendary and are banded by cost: up to 230 common, 231-300 uncommon, 301-360 rare, 361-440 very rare, 441 and over legendary. Rarity is a label on existing tiers and costs: it changes no number. ARTIFACT is never stocked by a shop and never carried by a trader. Cosmetics and dyes carry no rarity.",
+  "_note_c61": "C-61 (WORK_PLAN D94 remainder): accessory rarity is now banded PER SLOT, superseding the single global 441+ cut in _note_c58 for accessories. Within each slot (ring, amulet, cloak, boots, gloves) a piece takes its midrank cost percentile among that slot's own pieces (equal costs share a rung) and the same cuts as the C-58 population: below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above that legendary. Every slot therefore has a legendary band. No cost, stat, price or tier changed; no rung was added, renamed or doubled. Equipment rarity is unchanged. ARTIFACT is still found-only: no shop at any level and no trader may ever stock one, and no accessory is an artifact. Readers must use the stored rarity key, never a global cost threshold."
 }

@@ -58,6 +58,10 @@ const REWARDS := {
     "rally": {"title": "Rally my hero", "cost": 600, "action": "rally",
         "prompt": "Your hero is rallied - stronger, swifter, fearless, and mending - for their next delve. Raise one first with !enlist.",
         "background_color": "#9B59B6", "lane": "points", "seconds": 15.0},
+    # T5: the viewer's roll - a d20 for the town, resolved in the game (see viewer_roll)
+    "roll": {"title": "Roll for Bellmire", "cost": 750, "action": "roll",
+        "prompt": "A d20 for the town. Type build, festival, or a law by name - anything else and fate picks. 20 is a triumph; 1 backfires.",
+        "background_color": "#C9A227", "user_input": true},
 }
 
 var town: Node                       # spotlight(uid, lane, seconds, reason), feed, roster, chat
@@ -362,7 +366,8 @@ func ensure_rewards() -> void:
         var c := await _helix("broadcaster", HTTPClient.METHOD_POST,
                 "/channel_points/custom_rewards?broadcaster_id=%s" % broadcaster_id,
                 {"title": want["title"], "cost": want["cost"], "prompt": want["prompt"],
-                 "background_color": want["background_color"], "is_enabled": true})
+                 "background_color": want["background_color"], "is_enabled": true,
+                 "is_user_input_required": bool(want.get("user_input", false))})
         if int(c["code"]) == 200:
             reward_ids[key] = String(c["json"]["data"][0]["id"])
             _say_log("TWITCH_EVENTSUB made reward %s (%s)" % [want["title"], reward_ids[key]])
@@ -633,6 +638,12 @@ func handle_event(kind: String, e: Dictionary) -> void:
             if key == "":
                 return                   # not ours (fightoverlay's or any other) - leave it alone
             var want: Dictionary = REWARDS[key]
+            if String(want.get("action", "")) == "roll":
+                # T5: a roll is for the TOWN - no hero needed to cast it
+                viewer_roll(uid, who, String(e.get("user_input", "")) if e.get("user_input") != null else "",
+                        0, "%d points" % int(rw.get("cost", want["cost"])))
+                _settle(String(e.get("id", "")), rid, true)
+                return
             if not _has_hero(uid):
                 _feed_line("%s calls for the spotlight, but has no hero yet - !enlist first. Points returned." % who)
                 if login != "":
@@ -687,6 +698,231 @@ func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
         Spotlight.spotlight(town, uid, lane, seconds, reason)
     else:
         print("SPOTLIGHT %s %s %.0fs %s (no town)" % [uid, lane, seconds, reason])
+
+# ---------------------------------------------------------------- T5 the viewer's roll
+## Mr. E: "the heart of viewer interaction". A viewer spends points to attempt something for
+## the town - raise a building, call a festival, push a law - and a d20 decides how it goes.
+## The roll resolves HERE, in the game; the hub only DISPLAYS it (snapshot `rolls`, H9/H27).
+## The words are the content writer's: lore_lines "propositions".entries (the laws, each with
+## its good and bad consequence) and "e3po".viewer_roll crit/high/low/fumble (the Commander's
+## verdict, published as part of the roll's `result`). The bands, readable without D&D:
+##   20 a triumph (crit) . 13-19 it goes well (good) . 8-12 a mixed result (mixed)
+##   2-7 it goes badly (bad) . 1 a fumble - it backfires (fumble)
+const ROLL_MAX := 20
+const ROLL_WORDS := {"crit": "a triumph", "good": "it goes well", "mixed": "a mixed result",
+        "bad": "it goes badly", "fumble": "a fumble, and it backfires"}
+const ROLL_VERDICT := {"crit": "crit", "good": "high", "mixed": "low", "bad": "low", "fumble": "fumble"}
+var rolls: Array = []                # newest first: {n, by, what, result, tier, cost, at, kind}
+var laws_passed: Array = []          # [title, tier] - what the town has voted in by the die
+var _roll_lore := {}
+
+static func roll_tier(face: int) -> String:
+    if face >= 20:
+        return "crit"
+    if face >= 13:
+        return "good"
+    if face >= 8:
+        return "mixed"
+    if face >= 2:
+        return "bad"
+    return "fumble"
+
+func _roll_lore_load() -> void:
+    if not _roll_lore.is_empty():
+        return
+    _roll_lore = {"verdict": {}, "laws": []}
+    var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+    if f == null:
+        return
+    var j = JSON.parse_string(f.get_as_text())
+    if typeof(j) != TYPE_DICTIONARY:
+        return
+    var e3 = (j as Dictionary).get("e3po", {})
+    if typeof(e3) == TYPE_DICTIONARY and typeof((e3 as Dictionary).get("viewer_roll")) == TYPE_DICTIONARY:
+        _roll_lore["verdict"] = (e3 as Dictionary)["viewer_roll"]
+    var pr = (j as Dictionary).get("propositions", {})
+    if typeof(pr) == TYPE_DICTIONARY and typeof((pr as Dictionary).get("entries")) == TYPE_ARRAY:
+        _roll_lore["laws"] = (pr as Dictionary)["entries"]
+
+func _random_law() -> Dictionary:
+    _roll_lore_load()
+    var laws: Array = _roll_lore["laws"]
+    if laws.is_empty():
+        return {}
+    return laws[randi() % laws.size()]
+
+## what the viewer typed -> {kind: build|event|law, law: {...}}. A law named by its title wins;
+## then a keyword; anything else (or nothing) and fate chooses.
+func roll_intent(text: String) -> Dictionary:
+    _roll_lore_load()
+    var t := text.to_lower().strip_edges()
+    if t != "":
+        for law in (_roll_lore["laws"] as Array):
+            var bare := String((law as Dictionary).get("title", "")).to_lower().trim_prefix("the ")
+            if bare.length() >= 4 and t.contains(bare):
+                return {"kind": "law", "law": law}
+        for w in ["build", "raise", "upgrade", "smith", "forge", "shop"]:
+            if t.contains(w):
+                return {"kind": "build"}
+        for w in ["festival", "feast", "fair", "event", "celebrat"]:
+            if t.contains(w):
+                return {"kind": "event"}
+        for w in ["law", "decree", "proposition", "vote"]:
+            if t.contains(w):
+                return {"kind": "law", "law": _random_law()}
+    var k := String(["build", "event", "law"][randi() % 3])
+    return {"kind": "law", "law": _random_law()} if k == "law" else {"kind": k}
+
+## one line from e3po.viewer_roll.<pool>
+func _roll_verdict(tier: String) -> String:
+    _roll_lore_load()
+    var pool = (_roll_lore["verdict"] as Dictionary).get(String(ROLL_VERDICT.get(tier, "low")), [])
+    if typeof(pool) != TYPE_ARRAY or (pool as Array).is_empty():
+        return ""
+    var entry = (pool as Array)[randi() % (pool as Array).size()]
+    return String((entry as Dictionary).get("line", "")) if typeof(entry) == TYPE_DICTIONARY else String(entry)
+
+## Resolve one viewer roll and apply it to the town. face 1-20 forces the die (tests); 0 rolls.
+## Returns the published row. Every outcome CHANGES something - nothing is flavour only.
+func viewer_roll(uid: String, who: String, text := "", face := 0, cost := "") -> Dictionary:
+    var n := face if face >= 1 and face <= 20 else randi_range(1, 20)
+    var tier := roll_tier(n)
+    var intent := roll_intent(text)
+    var nm := who.strip_edges() if who.strip_edges() != "" else "A viewer"
+    var out := {}
+    match String(intent["kind"]):
+        "build":
+            out = _roll_build(nm, tier)
+        "event":
+            out = _roll_event(nm, tier)
+        _:
+            out = _roll_law(nm, tier, intent.get("law", {}))
+    var verdict := _roll_verdict(tier)
+    _feed_line("%s rolls a %d to %s - %s. %s" % [nm, n, String(out["doing"]), String(ROLL_WORDS[tier]), String(out["line"])])
+    if town and town.has_method("tag_feed"):
+        town.call("tag_feed", "town", [nm])
+    var nb = town.get("notables") if town else null
+    if verdict != "" and nb and nb.has_method("e3po_line"):
+        nb.call("e3po_line", verdict)            # shouted above the Commander and to the Chronicle
+    var row := {"n": n, "by": nm, "what": String(out["what"]),
+        "result": String(out["line"]) + ((" " + verdict) if verdict != "" else ""),
+        "tier": tier, "cost": cost, "kind": String(intent["kind"]),
+        "at": Time.get_datetime_string_from_system(true) + "Z"}
+    rolls.push_front(row)
+    if rolls.size() > ROLL_MAX:
+        rolls.resize(ROLL_MAX)
+    if town and "viewer_rolls" in town:
+        town.set("viewer_rolls", rolls)
+    if uid != "":
+        _spot(uid, "points", 15.0, "rolled a %d for the town" % n)
+    return row
+
+func _eco() -> Economy:
+    return town.get("economy") as Economy if town and town.get("economy") != null else null
+
+func _treasury(eco: Economy, d: int) -> void:
+    if eco:
+        eco.treasury = maxi(0, eco.treasury + d)
+        eco.changed.emit()
+
+func _renown(eco: Economy, d: int) -> void:
+    if eco:
+        eco.renown = maxi(0, eco.renown + d)
+        eco.changed.emit()
+
+func _stock_cut(eco: Economy, g: String, frac: float) -> void:
+    if eco:
+        eco.stock[g] = maxf(0.0, float(eco.stock.get(g, 0.0)) * (1.0 - frac))
+
+## BUILD: raise the smithy (D64a's raise_shop - the counter's ceiling, and the rack shows it)
+func _roll_build(nm: String, tier: String) -> Dictionary:
+    var eco := _eco()
+    var o := {"what": "Raise the smithy", "doing": "raise the smithy"}
+    match tier:
+        "crit", "good", "mixed":
+            var want := 2 if tier == "crit" else 1
+            var got := eco.raise_shop("smithy", want, nm) if eco else 0
+            if got == 0:
+                _treasury(eco, 120)
+                o["line"] = "The smithy is already the finest Bellmire can build, so the guild banks 120 gold instead."
+            elif tier == "crit":
+                o["line"] = "The smithy goes up %d level%s in a single day - rarer steel on the counter from now on." % [got, "" if got == 1 else "s"]
+            elif tier == "good":
+                o["line"] = "The smithy is raised a level, on time and square."
+            else:
+                _treasury(eco, -60)
+                o["line"] = "The smithy goes up a level, but the builders run long and the treasury pays 60 gold more for it."
+        "bad":
+            _stock_cut(eco, "wood", 0.3)
+            o["line"] = "The scaffold goes up crooked and has to come down again. The smithy stays as it was, and a third of the timber is wasted."
+        _:
+            _stock_cut(eco, "wood", 0.5)
+            _treasury(eco, -40)
+            o["line"] = "A forge spark catches the scaffold. Half the timber burns, and the town pays 40 gold to put it out."
+    return o
+
+## EVENT: call a festival (town.start_festival - the square is dressed and the stalls come out)
+func _roll_event(nm: String, tier: String) -> Dictionary:
+    var eco := _eco()
+    var o := {"what": "Call a festival", "doing": "call a festival"}
+    var raid := town != null and town.has_method("is_raid_on") and bool(town.call("is_raid_on"))
+    match tier:
+        "crit", "good":
+            if town and town.has_method("start_festival"):
+                town.call("start_festival", "gift", [], nm)
+            if tier == "crit" and eco:
+                _restock_full(eco)
+            if raid:
+                o["line"] = "The town agrees to a festival in their name - it starts the moment the raid is beaten."
+            elif tier == "crit":
+                o["line"] = "Bellmire throws a festival in their name, and the stores are filled to the brim for it."
+            else:
+                o["line"] = "Bellmire throws a festival in their name."
+        "mixed":
+            var ok := town != null and town.has_method("start_festival") and bool(town.call("start_festival", "market", [], ""))
+            if ok:
+                o["line"] = "A small market fair gets going - not the festival they wanted, but the square is busy."
+            else:
+                if eco:
+                    eco.stock["food"] = float(eco.stock.get("food", 0.0)) + 20.0
+                o["line"] = "The festival is called off, but the stalls sell what they brought - a little more food in the stores."
+        "bad":
+            _stock_cut(eco, "food", 0.2)
+            o["line"] = "Nobody comes. The food laid out for the feast spoils in the sun."
+        _:
+            _treasury(eco, -60)
+            _renown(eco, -1)
+            o["line"] = "The feast turns into a brawl. The guard breaks it up and the town pays 60 gold in damages."
+    return o
+
+## LAW: push a proposition. Renown moves - and renown is half of the town's score, so a law can
+## lift Bellmire a level or pull it back down.
+func _roll_law(nm: String, tier: String, law: Dictionary) -> Dictionary:
+    var eco := _eco()
+    var title := String(law.get("title", "A new law"))
+    var good := String(law.get("good", "The town is pleased."))
+    var bad := String(law.get("bad", "The town grumbles."))
+    var o := {"what": "Push " + title, "doing": "push " + title}
+    match tier:
+        "crit":
+            _renown(eco, 2)
+            _treasury(eco, 50)
+            o["line"] = "%s passes by acclaim. %s" % [title, good]
+        "good":
+            _renown(eco, 1)
+            o["line"] = "%s passes. %s" % [title, good]
+        "mixed":
+            o["line"] = "%s passes, and both sides of it come true. %s %s" % [title, good, bad]
+        "bad":
+            _renown(eco, -1)
+            o["line"] = "%s passes, and it goes wrong. %s" % [title, bad]
+        _:
+            _renown(eco, -1)
+            _treasury(eco, -40)
+            o["line"] = "%s is shouted down, and the backlash comes anyway. %s" % [title, bad]
+    if tier != "fumble":
+        laws_passed.append([title, tier])
+    return o
 
 # ---------------------------------------------------------------- bit tiers
 ## Mr. E: cheered bits -> town-wide effects. Five tiers; the buyer's hero gets

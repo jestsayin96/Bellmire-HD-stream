@@ -840,27 +840,37 @@ static func _rect_cells(r: Rect2i, into: Dictionary) -> void:
         for i in range(r.position.x, r.end.x):
             into[Vector2i(i, j)] = true
 
-# An L-shaped passage one cell wide. Corridors are what make a monster
-# something you meet around a corner instead of something you can see from
-# the doorway.
+# An L-shaped passage THREE cells wide (D91, Mr. E Nov 15 16:50: "lets do 3 cells" - not two).
+# Every cell on the centre line carves the 3x3 block round it, so a straight run is exactly three
+# across and a bend is filled at the corner instead of pinching to a diagonal. A six-hero party
+# walks three abreast with a monster line meeting it and nobody has to clip through anyone.
+# Corridors are still what make a monster something you meet around a corner.
+const HALL_W := 3
+static func _carve3(c: Vector2i, into: Dictionary) -> void:
+    var k := int(HALL_W / 2)
+    for dy in range(-k, k + 1):
+        for dx in range(-k, k + 1):
+            into[c + Vector2i(dx, dy)] = true
+
 static func _corridor(a: Vector2i, b: Vector2i, into: Dictionary,
                       rng: RandomNumberGenerator) -> void:
     var x := a.x
     var y := a.y
+    _carve3(Vector2i(x, y), into)
     if rng.randi() % 2 == 0:
         while x != b.x:
             x += signi(b.x - x)
-            into[Vector2i(x, y)] = true
+            _carve3(Vector2i(x, y), into)
         while y != b.y:
             y += signi(b.y - y)
-            into[Vector2i(x, y)] = true
+            _carve3(Vector2i(x, y), into)
     else:
         while y != b.y:
             y += signi(b.y - y)
-            into[Vector2i(x, y)] = true
+            _carve3(Vector2i(x, y), into)
         while x != b.x:
             x += signi(b.x - x)
-            into[Vector2i(x, y)] = true
+            _carve3(Vector2i(x, y), into)
 
 static func _layout(kind: String, w: int, h: int,
                     rng: RandomNumberGenerator) -> Dictionary:
@@ -872,19 +882,20 @@ static func _layout(kind: String, w: int, h: int,
     var want: int = int(plan["rooms"])
     var lo: int = int(plan["min"])
     var hi: int = int(plan["max"])
-    # Rejection sampling with a one-cell margin, so two rooms never share a
-    # wall and every join is a corridor you can actually see.
+    # Rejection sampling with a two-cell margin (D91: one cell with three-wide
+    # halls let a passage fuse two rooms), so two rooms never share a wall and
+    # every join is a corridor you can actually see.
     var tries := 0
     while rooms.size() < want and tries < 240:
         tries += 1
         var rw: int = rng.randi_range(lo, hi)
         var rh: int = rng.randi_range(lo, hi)
-        var rx: int = rng.randi_range(1, maxi(1, w - rw - 1))
-        var ry: int = rng.randi_range(1, maxi(1, h - rh - 1))
+        var rx: int = rng.randi_range(2, maxi(2, w - rw - 2))
+        var ry: int = rng.randi_range(2, maxi(2, h - rh - 2))
         var cand := Rect2i(rx, ry, rw, rh)
         var clash := false
         for other: Rect2i in rooms:
-            if cand.grow(1).intersects(other):
+            if cand.grow(2).intersects(other):
                 clash = true
                 break
         if clash:
@@ -912,8 +923,8 @@ static func _layout(kind: String, w: int, h: int,
         hid_tries += 1
         var hw: int = rng.randi_range(2, 3)
         var hh: int = rng.randi_range(2, 3)
-        var hx: int = rng.randi_range(1, maxi(1, w - hw - 1))
-        var hy: int = rng.randi_range(1, maxi(1, h - hh - 1))
+        var hx: int = rng.randi_range(2, maxi(2, w - hw - 2))
+        var hy: int = rng.randi_range(2, maxi(2, h - hh - 2))
         var cand2 := Rect2i(hx, hy, hw, hh)
         var bad := false
         for other2: Rect2i in rooms:
@@ -932,7 +943,25 @@ static func _layout(kind: String, w: int, h: int,
                   rooms[rng.randi_range(0, rooms.size() - 1)].get_center(),
                   cells, rng)
 
-    return {"cells": cells, "rooms": rooms, "hidden": hidden}
+    # D91: the HALLS - every carved cell that is in no room. With three-wide passages the old
+    # "open on two opposite sides" test no longer finds a corridor (the middle lane is open on
+    # four), so the plan says which cells are halls and _is_corridor asks it.
+    var halls := {}
+    for c0 in cells:
+        var c: Vector2i = c0
+        var inside := false
+        for r: Rect2i in rooms:
+            if r.has_point(c):
+                inside = true
+                break
+        if not inside:
+            for r2: Rect2i in hidden:
+                if r2.has_point(c):
+                    inside = true
+                    break
+        if not inside:
+            halls[c] = true
+    return {"cells": cells, "rooms": rooms, "hidden": hidden, "halls": halls}
 
 static func _carve(kind: String, w: int, h: int, rng: RandomNumberGenerator) -> Dictionary:
     var cells := {}
@@ -1037,8 +1066,14 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     # a plan of four to six rooms with corridors between them needs space to
     # breathe. Rooms and corridors only occupy about a third of it, so the
     # built geometry is comparable to the old solid 9x9 despite the size.
-    var w: int = 19 if not boss else 21
-    var h: int = 19 if not boss else 21
+    # D91: GROW THE GRID, do not pay for three-wide halls with rooms (Mr. E Nov 15 16:52: "i never
+    # limited the dungeons floor plan. idc how big they get or how small they are"). The room plans
+    # are unchanged; the halls got three times wider, so the grid gets bigger. Floors vary in size
+    # from one to the next (he said so), from their own seed so the plan's stream is untouched.
+    var srng := RandomNumberGenerator.new()
+    srng.seed = hash("floorsize:%d" % floor_no)
+    var w: int = srng.randi_range(27, 33) if not boss else srng.randi_range(31, 35)
+    var h: int = srng.randi_range(27, 33) if not boss else srng.randi_range(31, 35)
     var half_w := (w - 1) * G * 0.5
     var half_h := (h - 1) * G * 0.5
 
@@ -1069,6 +1104,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var cells: Dictionary = plan["cells"]
     var rooms: Array = plan["rooms"]
     var hidden_rooms: Array = plan["hidden"]
+    _halls = plan["halls"]
     var cell_pos := func(i: int, j: int) -> Vector3:
         return Vector3(float(i) * G - half_w, 0.0, float(j) * G - half_h)
 
@@ -1628,7 +1664,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             # PATHED through it. Straight-line movement was fine when a floor
             # was one convex room; across a plan of rooms and corridors it
             # walks people through walls and over the void between them.
-            "cells": cells, "w": w, "h": h, "grid": G,
+            "cells": cells, "w": w, "h": h, "grid": G, "halls": _halls,
             "half": Vector2(half_w, half_h),
             "lamp": origin + lamp,
             "flames": flames, "flame_col": lit,
@@ -1636,8 +1672,12 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
             "origin_name": String(ORIGINS[origin_key]["of"]),
             "origin_tell": String(ORIGINS[origin_key]["tell"])}
 
-## a corridor cell: open on exactly two OPPOSITE sides (or a dead end)
+## a corridor cell: one of the plan's halls (D91: three wide), or open on exactly two OPPOSITE
+## sides (or a dead end)
+static var _halls := {}
 static func _is_corridor(cells: Dictionary, c: Vector2i) -> bool:
+    if _halls.has(c):
+        return true
     var n := 0
     for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
         if cells.has(c + d):
@@ -1780,3 +1820,45 @@ static func _in_obstacle(p: Vector3, obs: Array) -> bool:
         if Vector2(p.x - (o[0] as Vector3).x, p.z - (o[0] as Vector3).z).length() < float(o[1]) + 0.6:
             return true
     return false
+
+## ---------------------------------------------------------------- D88: obstacle shapes
+## An obstacle is [floor-local centre, radius] - a DISC, right for a table, a pillar, a statue -
+## or, for anything wall-shaped, [centre, bounding radius, half-width, half-depth, yaw] - a BOX
+## (a dropped portcullis, a prison cell). Every consumer asks obst_gap instead of reading o[1]
+## as a radius, so a wall is never approximated by a disc again: a 5.6 m gate was registered as
+## a 2.4 m disc and the party walked round it through the bars. (o[1] stays the bounding radius,
+## so anything still reading it as a disc errs on the side of blocking, never of a crack.)
+static func obst_gap(o: Array, x: float, z: float) -> float:
+    var c: Vector3 = o[0]
+    var dx := x - c.x
+    var dz := z - c.z
+    if o.size() < 5:
+        return Vector2(dx, dz).length() - float(o[1])
+    var cy := cos(float(o[4]))
+    var sy := sin(float(o[4]))
+    var qx := absf(dx * cy - dz * sy) - float(o[2])
+    var qz := absf(dx * sy + dz * cy) - float(o[3])
+    if qx <= 0.0 and qz <= 0.0:
+        return maxf(qx, qz)
+    return Vector2(maxf(qx, 0.0), maxf(qz, 0.0)).length()
+
+## D88: (x, z) moved `pad` clear of obstacle o, out through the face that (px, pz) - where the
+## body stood a moment ago - was on. A box only ever pushes a body back the way it came, so a
+## gate can never shove someone THROUGH itself to the far side.
+static func obst_push(o: Array, x: float, z: float, pad: float, px: float, pz: float) -> Vector2:
+    var c: Vector3 = o[0]
+    if o.size() < 5:
+        var d := Vector2(x - c.x, z - c.z)
+        var dir := d.normalized() if d.length() > 0.01 else Vector2(1, 0)
+        return Vector2(c.x, c.z) + dir * (float(o[1]) + pad)
+    var cy := cos(float(o[4]))
+    var sy := sin(float(o[4]))
+    var lx := (x - c.x) * cy - (z - c.z) * sy
+    var lz := (x - c.x) * sy + (z - c.z) * cy
+    var plx := (px - c.x) * cy - (pz - c.z) * sy
+    var plz := (px - c.x) * sy + (pz - c.z) * cy
+    if absf(plz) - float(o[3]) >= absf(plx) - float(o[2]):
+        lz = (float(o[3]) + pad) * (1.0 if plz >= 0.0 else -1.0)
+    else:
+        lx = (float(o[2]) + pad) * (1.0 if plx >= 0.0 else -1.0)
+    return Vector2(c.x + lx * cy + lz * sy, c.z - lx * sy + lz * cy)

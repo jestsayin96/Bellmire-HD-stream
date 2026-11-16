@@ -1,0 +1,662 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D90 soak 1200 s sim
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+D90 t=59 s haulers=7 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=7 unparks=7
+FEED Ysolde the Younger settles in Bellmire, looking for work.
+D90 t=119 s haulers=8 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=8 unparks=8
+FEED Aldric of the Ford settles in Bellmire, looking for work.
+D90 t=179 s haulers=8 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=9 unparks=9
+FEED Tove Bramble settles in Bellmire, looking for work.
+D90 t=239 s haulers=9 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=11 unparks=11
+MUSTER timed out: dists=[79, 10, 67, 30, 86, 8, 48, 78] vis=true stay=false route=59 inside=false
+FEED Corvin Thatcher settles in Bellmire, looking for work.
+D90 t=299 s haulers=10 dev_max=0.000 yaw_max=20deg side=0 cross=0 parks=13 unparks=13
+FEED Aldric Bramble and 3 others descend into the scar, boots light and lamps high.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 cave spider, 1 hollowed skeleton minion.
+FEED The rows end in a row that was never filled.
+FEED Dunn Ashwood searches (Investigation 17) and turns up 13 gold on floor 1.
+FEED Floor 1 cleared, and the Chronicle spells the name right.
+FEED Dunn Ashwood finds a vial of The Baker's Pennyworth.
+FEED Dunn Ashwood searches the chest - Successfully found loot!! 24 gold (Investigation 12 vs DC 10).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED Aldric Bramble spots a blade trap (Perception 11 vs DC 10) and steps round it.
+FEED Edda Coalfoot settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 puglin, 1 slime, 1 hollowed bog frog.
+FEED The slime divides.
+FEED Dunn Ashwood turns on the wounded slimeling to finish it.
+FEED Hilda Rivers turns on the wounded slimeling to finish it.
+FEED Dunn Ashwood searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED Measured, counted, kept. The guild writes it down twice.
+FEED Cort the Younger and 3 others descend below, and the bell above does not ring for them yet.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 hollowed cave bat, 1 puglin.
+FEED Grave goods laid out for the living: boots, bread, a lamp.
+FEED Cort the Younger sets frost loose and it forgets who sent it (8 vs DC 10).
+FEED Nessa Ashwood casts Frost at giant rat.
+FEED Rask Bramble casts Bolt at giant rat.
+FEED Cort the Younger casts Bolt at giant rat.
+D90 t=359 s haulers=10 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=18 unparks=16
+FEED Dunn Ashwood searches the chest - Successfully found loot!! 31 gold (Investigation 13 vs DC 11).
+FEED Dunn Ashwood searches the chest - ...no loot... (Investigation 7 vs DC 11).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED Nessa Ashwood casts Bolt at puglin.
+FEED Rask Bramble casts Fire at puglin.
+FEED Corvin Bramble searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Held. Measure the grain, count the flasks, keep the door.
+FEED Corvin Bramble finds a vial of Ember Dregs.
+FEED Corvin Bramble searches the chest - ...no loot... (Investigation 6 vs DC 10).
+FEED Cort the Younger and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed giant rat, 1 hollowed bone bowman, 1 cave spider, 1 drowned risen bones.
+FEED Edda Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Corvin Bramble steps on a slot in the floor - a blade! DEX 13 vs DC 10, 3 damage (halved).
+FEED Dunn Ashwood searches (Investigation 7) and turns up 26 gold on floor 3.
+FEED Floor 3 won. Count the flasks; one is always short.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 bog frog, 1 cave bat, 1 skeleton minion.
+FEED Dunn Ashwood searches the chest - ...no loot... (Investigation 7 vs DC 11).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED Cort the Younger casts Bolt at cave bat.
+FEED Rask Bramble casts Bolt at cave bat.
+FEED Nessa Ashwood casts Frost at cave bat.
+FEED Rask Bramble's fire lands somewhere nobody aimed (1 vs DC 11).
+FEED Nessa Ashwood casts Bolt at bog frog.
+FEED Cort the Younger casts frost. The scar adds a verse of its own (7 vs DC 11).
+FEED Rask Bramble casts Bolt at bog frog.
+FEED Dunn Ashwood spots a fire grate (Perception 12 vs DC 11) and steps round it.
+FEED Nessa Ashwood casts Bolt at skeleton minion.
+FEED Rask Bramble casts Bolt at cave spider.
+FEED Aldric Bramble spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+FEED Cort the Younger casts Frost at cave spider.
+FEED Corvin Bramble searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Floor 2 holds. Measure the grain, mend the mail.
+FEED Rolf of the Ford settles in Bellmire, looking for work.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned slime, 1 slime, 2 drowned puglins, 1 skeleton minion.
+FEED The oil is running low.
+FEED Hilda Rivers steps on a spiked plate - spikes! DEX 20 vs DC 12, 6 damage (halved).
+D90 t=419 s haulers=11 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=20 unparks=20
+FEED Cort the Younger and 3 others take a breather, and press on deeper.
+FEED Shadows peel off the walls - an ambush! 1 hollowed risen bones, 1 drowned slime surges in.
+FEED Dunn Ashwood spots a dart trap (Perception 20 vs DC 12) and steps round it.
+FEED Corvin Bramble gets a captive free. 42 gold, 4 ways - small thanks for a poor life.
+FEED The drowned slime divides.
+FEED Aldric Bramble turns on the wounded drowned slimeling to finish it.
+FEED Edda Hollow turns on the wounded drowned slimeling to finish it.
+FEED Dunn Ashwood turns on the wounded drowned slimeling to finish it.
+FEED Corvin Bramble steps on a plate - a stone from the ceiling! DEX 1 vs DC 11, 3 damage.
+FEED Edda Hollow turns on the wounded drowned slimeling to finish it.
+FEED Dunn Ashwood turns on the wounded drowned slimeling to finish it.
+FEED Hilda Rivers turns on the wounded drowned slimeling to finish it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed skeleton minion, 1 drowned slime, 1 slime, 1 skeleton minion.
+FEED Dunn Ashwood searches (Investigation 10) and turns up 35 gold on floor 4.
+FEED Floor 4 quiets. The next stair listens.
+FEED Nessa Ashwood works bolt and the scar gives it back inside out (9 vs DC 11).
+FEED Cort the Younger shapes bolt and the floor finishes the shape (8 vs DC 11).
+FEED Rask Bramble casts fire and the scar spends it elsewhere (8 vs DC 11).
+FEED Dunn Ashwood searches the chest - Successfully found loot!! 67 gold (Investigation 22 vs DC 12).
+FEED Rask Bramble casts Fire at drowned slime.
+FEED The drowned slime divides.
+FEED Cort the Younger turns on the wounded drowned slimeling to finish it.
+FEED Rask Bramble turns on the wounded drowned slimeling to finish it.
+FEED Corvin Bramble turns on the wounded drowned slimeling to finish it.
+FEED Nessa Ashwood turns on the wounded drowned slimeling to finish it.
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED Corvin Bramble steps on a grate - fire! DEX 16 vs DC 11, 4 damage (halved).
+FEED Nessa Ashwood casts Bolt at slime.
+FEED Cort the Younger casts Frost at slime.
+FEED Rask Bramble casts Fire at slimeling.
+FEED Corvin Bramble searches (Investigation 10) and turns up 26 gold on floor 3.
+FEED Floor 3 is the guild's now. Mind the chalk.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone bowman, 1 hollowed skeleton warrior, 1 skeleton mage, 2 drowned bone bowmans.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Dunn Ashwood rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Aldric Bramble sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Osric Quarryman settles in Bellmire, looking for work.
+FEED Cort the Younger searches the chest - Successfully found loot!! 37 gold (Investigation 17 vs DC 11).
+FEED Cort the Younger and 3 others take a breather, and press on deeper.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 4, the watch 22 - the watch is ready for them.
+FEED Corvin Bramble steps on a plate - darts! DEX 3 vs DC 11, 10 damage.
+FEED Edda Hollow spots a poison-dart trap (Perception 15 vs DC 12) and disarms it with thieves' tools (20).
+D90 t=479 s haulers=12 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=21 unparks=21
+FEED The Hollow King shifts, and the fight changes with it.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Edda Hollow rolls a 20 - The Hollow King reels.
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King falls to Hilda Rivers.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 4 ways - 48 gold each to Aldric Bramble, Edda Hollow, Dunn Ashwood, Hilda Rivers.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 2 slimes, 2 hollowed cave bats.
+FEED The oil is running low.
+FEED Cort the Younger spots a spike trap (Perception 16 vs DC 12) and steps round it.
+FEED Cort the Younger's frost curdles before it leaves the hand (11 vs DC 12).
+FEED Rask Bramble's bolt flares, sputters, and lands on the chalk (9 vs DC 12).
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Aldric Bramble and 3 others come home to Bellmire with 410 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 4 potions. 32 kills between them.
+FEED Aldric Bramble is fitted with leather. (+10 hp) Haggled 14% off (16).
+FEED Edda Hollow is fitted with leather. (+10 hp)
+FEED Dunn Ashwood is fitted with leather. (+10 hp) Haggled 11% off (13).
+FEED Hilda Rivers is fitted with leather. (+10 hp) Haggled 13% off (15).
+FEED Nessa Ashwood's frost goes off a beat late and a foot wide (1 vs DC 12).
+FEED The slime divides.
+FEED 1 cave spider, 1 drowned risen bones was waiting in the dark, and now it isn't.
+FEED Corvin Bramble steps on a loose flagstone - darts! DEX 15 vs DC 12, 4 damage (halved).
+FEED Cort the Younger casts Bolt at drowned risen bones.
+FEED Rask Bramble casts Bolt at drowned risen bones.
+FEED Nessa Ashwood casts Frost at slime.
+FEED Cort the Younger casts Frost at cave spider.
+FEED Rask Bramble casts Bolt at cave spider.
+FEED Nessa Ashwood casts Frost at slimeling.
+FEED Cort the Younger searches (Investigation 4) and turns up 35 gold on floor 4.
+FEED Floor 4 cleared.
+FEED The attack is driven off. The gates hold.
+FEED Corvin Fenwick settles in Bellmire, looking for work.
+FEED Cort the Younger searches the chest - Successfully found loot!! 48 gold (Investigation 17 vs DC 12).
+FEED Cort the Younger and 3 others take a breather, and press on deeper.
+FEED Down past the water-line, where the stone remembers being wet.
+FEED They carry 13 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 cave spider, 1 hollowed giant rat.
+FEED The oldest name on the wall is wet.
+FEED Dunn Ashwood rolls a 20 for initiative and is moving before anything else.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 1 drowned skeleton warrior, 1 drowned bone bowman, 1 skeleton warrior, 1 hollowed risen bones.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+D90 t=539 s haulers=14 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=23 unparks=23
+FEED Cort the Younger speaks frost too quickly and the magic falls behind (6 vs DC 12).
+FEED Aldric Bramble rolls a 20 - and the cave spider is gone.
+FEED Corvin Bramble sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Nessa Ashwood shapes bolt and the scar bends it (10 vs DC 12).
+FEED Edda Hollow searches (Investigation 12) and turns up 11 gold on floor 1.
+FEED The lamps come back brighter than they went down.
+FEED Rask Bramble's fire fires off behind them (11 vs DC 12).
+FEED Rask Bramble steps on a spiked plate - spikes! DEX 20 vs DC 12, 5 damage (halved).
+FEED Edda Hollow searches the chest - ...no loot... (Investigation 6 vs DC 10).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED Aldric Bramble spots a blade trap (Perception 23 vs DC 10) and steps round it.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED Cort the Younger breaks off to mend Corvin Bramble, who is nearly down.
+FEED The Rattling Host falls to Nessa Ashwood.
+FEED Dunn Quarryman settles in Bellmire, looking for work.
+FEED Rask Bramble is badly hurt and breaks off, making for the way up.
+FEED Cort the Younger breaks off to mend Rask Bramble, who is nearly down.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 2 giant rats, 1 cave bat.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED Nessa Ashwood turns on the wounded risen bones to finish it.
+FEED Cort the Younger breaks off to mend Nessa Ashwood, who is nearly down.
+FEED Gnawbone's children come squealing.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Edda Hollow rolls a 20 - Gnawbone reels.
+FEED Gnawbone falls to Hilda Rivers.
+FEED Aldric Bramble turns on the wounded giant rat to finish it.
+FEED Edda Hollow turns on the wounded giant rat to finish it.
+FEED Dunn Ashwood turns on the wounded giant rat to finish it.
+FEED Hilda Rivers turns on the wounded giant rat to finish it.
+FEED Gnawbone is slain on floor 2!
+FEED The hoard is split 4 ways - 8 gold each to Aldric Bramble, Edda Hollow, Dunn Ashwood, Hilda Rivers.
+FEED Corvin Bramble should be dead - and stands back up (14).
+FEED Corvin Bramble the warden falls on floor 5 to the dark below. Level 2, 3 kills. !reroll to rise again.
+FEED Rask Bramble the warlock falls on floor 5 to the dark below. Level 2, 7 kills. !reroll to rise again.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Cort the Younger and 3 others get out alive, and come home with what they carried.
+FEED Cort the Younger, Nessa Ashwood come home to Bellmire with 175 gold, 6 ore, 4 stone, 2 pieces of salvaged gear and 3 potions. 32 kills between them.
+FEED Cort the Younger is fitted with leather. (+10 hp) Haggled 15% off (17).
+FEED Nessa Ashwood is fitted with leather. (+10 hp)
+FEED Edda Hollow searches the chest - Successfully found loot!! 24 gold (Investigation 15 vs DC 11).
+D90 t=599 s haulers=14 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=28 unparks=28
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+D90 teleported Ysolde Hollow +25 m; gap 3 frames later 2.59 m (state 0)
+FEED Dunn Ashwood finds a man in a cage still alive. He slips 42 gold to them on the way out, 4 ways to split it.
+FEED Aldric Bramble spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 risen bones, 1 cave spider, 1 slime.
+FEED Mother Silk is down here. Every thread in the dark is hers.
+FEED The threads across the doorway are new.
+FEED Mother Silk shifts, and the fight changes with it.
+FEED Mother Silk is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dunn Ashwood rolls a 20 - and the Mother Silk is gone.
+FEED Mother Silk falls to Dunn Ashwood.
+FEED The slime divides.
+FEED Edda Hollow searches (Investigation 15) and turns up 36 gold on floor 3.
+FEED Held. The gap kept, the party kept with it.
+FEED Edda Hollow finds a vial of The Ferryman's Nip.
+FEED Cort the Younger, Nessa Ashwood descend below, boots loud on the first stair and quiet after.
+FEED They carry 6 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 giant rat, 1 slime.
+FEED Grave goods, left where they lay. Nobody down here needs a comb.
+FEED Cort the Younger calls frost and the scar calls louder (8 vs DC 10).
+FEED Nessa Ashwood speaks frost too quickly and the magic falls behind (8 vs DC 10).
+FEED Cort the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED Nessa Ashwood casts Bolt at cave spider.
+FEED Edda Hollow steps on a grate - fire! DEX 13 vs DC 11, 5 damage (halved).
+FEED Cort the Younger casts Bolt at cave spider.
+FEED Cort the Younger rolls a 20 searching the floor!
+FEED Cort the Younger searches (Investigation 22) and turns up 17 gold on floor 1.
+FEED Last one down, and it took its time about it.
+FEED Edda Hollow spots a pressure plate (Perception 17 vs DC 11) and disarms it with thieves' tools (14).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED Cort the Younger searches the chest - Successfully found loot!! 13 gold (Investigation 10 vs DC 10).
+FEED Cort the Younger, Nessa Ashwood take a breather, and press on deeper.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 19, the watch 8 - the raiders strike first.
+FEED Cort the Younger spots a blade trap (Perception 21 vs DC 10) and steps round it.
+D90 t=659 s haulers=15 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=29 unparks=29
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 2 drowned risen bones, 1 bone bowman.
+FEED The oil is running low.
+FEED Hilda Rivers spots a dart trap (Perception 21 vs DC 12) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 skeleton minions, 1 giant rat, 1 bog frog.
+FEED Shadows peel off the walls - an ambush! 1 slime, 1 hollowed giant rat surges in.
+FEED Dunn Ashwood spots a spike trap (Perception 15 vs DC 12) and steps round it.
+FEED Cort the Younger casts Frost at giant rat.
+FEED Nessa Ashwood casts Bolt at giant rat.
+FEED Nessa Ashwood's frost comes apart like wet rope (9 vs DC 11).
+FEED Cort the Younger casts Bolt at skeleton minion.
+FEED The slime divides.
+FEED Cort the Younger searches (Investigation 7) and turns up 17 gold on floor 2.
+FEED The last echo dies, and no new one rises.
+FEED Hilda Rivers turns on the wounded slimeling to finish it.
+FEED Edda Hollow searches (Investigation 15) and turns up 47 gold on floor 4.
+FEED Floor 4 quiet - the kind that means finished.
+FEED Edda Hollow finds a vial of Tanner's Bitters.
+FEED Cort the Younger, Nessa Ashwood take a breather, and press on deeper.
+FEED Edda Hollow searches the chest - Successfully found loot!! 49 gold (Investigation 15 vs DC 12).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED The attack is driven off. The gates hold.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone bowman, 1 bone sentinel, 1 bone bowman, 1 skeleton mage, 1 hollowed cave spider.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed puglin, 2 puglins, 1 hollowed skeleton minion.
+FEED The oil is running low.
+FEED Cort the Younger spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED Cort the Younger casts Bolt at hollowed puglin.
+FEED Nessa Ashwood casts Bolt at hollowed skeleton minion.
+FEED Bats pour out of the dark around Nightwing.
+FEED Cort the Younger reaches for bolt and the scar hands back something else (8 vs DC 11).
+FEED Nightwing shifts, and the fight changes with it.
+D90 t=719 s haulers=17 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=32 unparks=31
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Cort the Younger casts Frost at puglin.
+FEED Nessa Ashwood casts Bolt at puglin.
+FEED Nightwing falls to Aldric Bramble.
+FEED Cort the Younger turns on the wounded puglin to finish it.
+FEED Nessa Ashwood turns on the wounded puglin to finish it.
+FEED Cort the Younger searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED The way ahead is open, and it knows it.
+FEED Dunn Ashwood rolls a 20 - and the bone sentinel is gone.
+FEED Edda Hollow searches (Investigation 5) and turns up 44 gold on floor 5.
+FEED Floor 5 yields. The stair down is right there.
+FEED Edda Hollow searches the chest - Successfully found loot!! 54 gold (Investigation 21 vs DC 12).
+FEED Cort the Younger, Nessa Ashwood take a breather, and press on deeper.
+FEED Edda Hollow searches the chest - Successfully found loot!! 61 gold (Investigation 12 vs DC 12).
+FEED Aldric Bramble and 3 others take a breather, and press on deeper.
+FEED Aldric Bramble steps on a spiked plate - spikes! DEX 14 vs DC 12, 4 damage (halved).
+FEED Aldric Bramble steps on a loose flagstone - green darts! DEX 16 vs DC 12, 1 damage (halved).
+FEED Nessa Ashwood spots a fire grate (Perception 21 vs DC 11) and steps round it.
+FEED Cort the Younger touches the altar - a curse. Something older than the floor takes a bite.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 6; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned bone bowman, 1 duskforged bone bowman, 2 drowned marrow hewers, 2 emberbound marrow hewers.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Aldric Bramble spots a poison-dart trap (Perception 15 vs DC 13) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 1 slime, 2 puglins, 1 drowned slime.
+FEED Cort the Younger rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Nessa Ashwood's bolt answers to the ground instead (10 vs DC 12).
+FEED Cort the Younger's bolt comes apart like wet rope (11 vs DC 12).
+FEED Aldric Bramble should be dead - and stands back up (17).
+FEED Aldric Bramble the duelist falls on floor 6 to the dark below. Level 4, 14 kills. !reroll to rise again.
+FEED Cort the Younger should be dead - and stands back up (15).
+FEED Cort the Younger the sage falls on floor 4 to the dark below. Level 3, 16 kills. !reroll to rise again.
+FEED Hilda Rivers should be dead - and stands back up (20).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Cort the Younger, Nessa Ashwood get out alive, and come home with what they carried.
+FEED Nessa Ashwood comes home to Bellmire with 82 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 15 kills between them.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Aldric Bramble and 3 others get out alive, and come home with what they carried.
+FEED Edda Hollow and 2 others come home to Bellmire with 358 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 4 potions. 38 kills between them.
+FEED Edda Hollow is fitted with chainmail. (+26 hp)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 15, the watch 19 - the watch is ready for them.
+FEED The attack is driven off. The gates hold.
+D90 t=779 s haulers=17 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=34 unparks=34
+FEED Edda Hollow and 3 others descend below, flasks counted twice and short both times.
+FEED They carry 18 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 1 hollowed slime, 1 giant rat.
+FEED The lids are heavy, and some have been moved from the inside.
+FEED Nessa Ashwood casts Frost at giant rat.
+FEED Nessa Ashwood casts Bolt at puglin.
+FEED Dunn Ashwood rolls a 20 - and the puglin is gone.
+FEED The hollowed slime divides.
+FEED Hilda Rivers turns on the wounded hollowed slimeling to finish it.
+FEED Nessa Ashwood turns on the wounded hollowed slimeling to finish it.
+FEED Edda Hollow searches (Investigation 11) and turns up 11 gold on floor 1.
+FEED Floor 1: the last echo dies.
+FEED Edda Hollow searches the chest - Successfully found loot!! 21 gold (Investigation 16 vs DC 10).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+FEED Edda Rivers has starved.
+FEED Dunn Ashwood spots a blade trap (Perception 15 vs DC 10) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 cave bat, 1 hollowed slime, 1 bog frog.
+FEED Dunn Ashwood steps on a plate - darts! DEX 25 vs DC 11, 3 damage (halved).
+FEED Nessa Ashwood casts Bolt at cave bat.
+FEED The hollowed slime divides.
+FEED Nessa Ashwood casts Frost at hollowed slimeling.
+FEED Nessa Ashwood casts Bolt at bog frog.
+FEED Edda Hollow rolls a 20 searching the floor!
+FEED Edda Hollow searches (Investigation 22) and turns up 35 gold on floor 2.
+FEED What was loud is quiet. What was ours, is ours.
+D90 t=839 s haulers=18 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=36 unparks=36
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+FEED Edda Hollow gets a captive free. 42 gold, 4 ways - small thanks for a poor life.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 1 hollowed slime, 1 skeleton minion, 1 drowned cave bat.
+FEED Dunn Ashwood steps on a grate - fire! DEX 13 vs DC 11, 3 damage (halved).
+FEED The hollowed slime divides.
+FEED Hilda Rivers turns on the wounded hollowed slimeling to finish it.
+FEED Nessa Ashwood turns on the wounded hollowed slimeling to finish it.
+FEED Edda Hollow searches (Investigation 7) and turns up 26 gold on floor 3.
+FEED Floor 3 cleared - the guild will want its cut.
+FEED Edda Hollow steps on a plate - a stone from the ceiling! DEX 21 vs DC 11, 5 damage (halved).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+D90 t=899 s haulers=19 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=39 unparks=39
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 5, the watch 6 - the watch is ready for them.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 1 risen bones, 1 cave spider, 1 hollowed bone bowman, 1 skeleton minion.
+FEED Nessa Ashwood's frost rebounds off a stone that was not there (9 vs DC 12).
+FEED The slime divides.
+FEED Edda Hollow turns on the wounded slimeling to finish it.
+FEED Dunn Ashwood turns on the wounded slimeling to finish it.
+FEED Edda Hollow searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED Over, and the room has stopped listening for the moment.
+FEED A grate shifts, and 1 hollowed bone bowman, 1 hollowed slime is already upon them.
+FEED Edda Hollow steps on a spiked plate - spikes! DEX 13 vs DC 12, 5 damage (halved).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 2 skeleton warriors, 2 bone bowmans.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Nessa Ashwood spots a spike trap (Perception 16 vs DC 12) and steps round it.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Nessa Ashwood spends frost and the scar keeps the change (1 vs DC 12).
+FEED A building is burning!
+FEED Hilda Rivers rolls a 20 - and the bone sentinel is gone.
+FEED The Grubmother's brood spills out of her.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton warrior.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Grubmother falls to Hilda Rivers.
+FEED Edda Hollow rolls a 20 - and the skeleton warrior is gone.
+FEED Nessa Ashwood casts Bolt at bone bowman.
+FEED Nessa Ashwood is badly hurt and breaks off, making for the way up.
+FEED The attack is driven off. The gates hold.
+D90 t=959 s haulers=19 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=42 unparks=40
+FEED Edda Hollow searches (Investigation 6) and turns up 44 gold on floor 5.
+FEED The room exhales. So do we.
+FEED The townsfolk raise the ruin again.
+FEED Edda Hollow searches the chest - ...no loot... (Investigation 7 vs DC 12).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+FEED Nessa Ashwood steps on a loose flagstone - green darts! DEX 6 vs DC 12, 3 damage.
+FEED Nessa Ashwood is venomed - the poison works over the next few seconds.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 3; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 emberbound fen lurker, 1 bone sentinel, 2 gorged blood wasps, 2 wraithtouched scar rats.
+FEED The oil is running low.
+FEED Dunn Ashwood spots a poison-dart trap (Perception 14 vs DC 13) and steps round it.
+FEED Dunn Ashwood is badly hurt and breaks off, making for the way up.
+FEED Edda Hollow searches (Investigation 14) and turns up 67 gold on floor 6.
+FEED Held. The door is kept, which was the whole job.
+FEED Edda Hollow fumbles the thieves' tools on a spike trap (6 vs DC 13) -
+FEED Edda Hollow steps on a spiked plate - spikes! DEX 8 vs DC 13, 12 damage.
+FEED Battered, the party climbs back out from floor 6.
+FEED Edda Hollow and 3 others come home to Bellmire with 253 gold, 12 ore, 9 stone, 4 pieces of salvaged gear and 4 potions. 37 kills between them.
+FEED Edda Hollow is fitted with plate. (+48 hp) Haggled 20% off (25).
+D90 t=1019 s haulers=21 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=46 unparks=45
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 6, the watch 6 - the watch is ready for them.
+FEED Talen Stonehand settles in Bellmire, looking for work.
+FEED The attack is driven off. The gates hold.
+FEED Edda Hollow and 3 others descend under Bellmire, boots light and breath shorter.
+FEED They carry 20 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 1 hollowed slime, 1 slime.
+FEED A second bench, built facing the first - and the first is not empty.
+FEED Nessa Ashwood casts Frost at hollowed slime.
+FEED The hollowed slime divides.
+FEED Nessa Ashwood casts Bolt at bog frog.
+FEED Hilda Rivers turns on the wounded slimeling to finish it.
+FEED Edda Hollow searches (Investigation 16) and turns up 12 gold on floor 1.
+FEED Floor 1 holds, and the stone is listening.
+D90 t=1079 s haulers=22 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=48 unparks=48
+FEED Edda Hollow searches the chest - Successfully found loot!! 23 gold (Investigation 13 vs DC 10).
+FEED Edda Hollow steps on a slot in the floor - a blade! DEX 17 vs DC 10, 7 damage (halved).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed slime, 1 puglin, 1 skeleton minion, 1 giant rat.
+FEED Nessa Ashwood casts Bolt at skeleton minion.
+FEED Edda Hollow turns on the wounded giant rat to finish it.
+FEED Dunn Ashwood turns on the wounded giant rat to finish it.
+FEED Hilda Rivers turns on the wounded giant rat to finish it.
+FEED Nessa Ashwood turns on the wounded giant rat to finish it.
+FEED The hollowed slime divides.
+FEED Edda Hollow searches (Investigation 20) and turns up 27 gold on floor 2.
+FEED Floor 2 holds, for now.
+FEED Edda Hollow searches the chest - Successfully found loot!! 35 gold (Investigation 15 vs DC 11).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+FEED Edda Hollow steps on a plate - a stone from the ceiling! DEX 22 vs DC 11, 4 damage (halved).
+D90 t=1139 s haulers=22 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=51 unparks=49
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 bone bowman, 1 drowned slime, 1 skeleton minion, 1 cave bat.
+FEED Dunn Ashwood rolls a 20 - and the cave bat is gone.
+FEED Nessa Ashwood casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Edda Hollow turns on the wounded skeleton minion to finish it.
+FEED Dunn Ashwood turns on the wounded skeleton minion to finish it.
+FEED Hilda Rivers turns on the wounded skeleton minion to finish it.
+FEED Nessa Ashwood turns on the wounded skeleton minion to finish it.
+FEED Dunn Ashwood steps on a grate - fire! DEX 11 vs DC 11, 2 damage (halved).
+FEED Nessa Ashwood casts Bolt at bone bowman.
+FEED Edda Hollow searches (Investigation 3) and turns up 19 gold on floor 3.
+FEED One more room the dark has lost.
+FEED Edda Hollow searches the chest - Successfully found loot!! 34 gold (Investigation 15 vs DC 11).
+FEED Edda Hollow and 3 others take a breather, and press on deeper.
+FEED Dunn Ashwood spots a pressure plate (Perception 17 vs DC 11) and steps round it.
+FEED Harl Fenwick settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 18, the watch 18 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 2 riders.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 1 drowned skeleton minion, 2 drowned giant rats.
+FEED The slime divides.
+FEED Ingrid Fenwick's charge crashes into skeleton warrior!
+FEED Edda Hollow searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED Floor 4 lies still, as if ashamed.
+D90 t=1199 s haulers=23 dev_max=0.000 yaw_max=20deg side=24 cross=0 parks=54 unparks=53
+D90 haulers=23 caravans=15 samples towed=853577 all=901611 dev_max=0.000 m yaw_max=20.1 deg side=24 cross=0 parks=54 unparks=53 tp=true
+D90 haulers seen: ["Ysolde Hollow(carter)", "Osric Quarryman(carter)", "Dunn Quarryman(carter)", "Petra Fenwick(pedlar)", "Caravan master(caravan)", "Caravan master(caravan)", "Corvin Ashwood(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Garm Ashwood(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Cort Quarryman(carter)", "Caravan master(caravan)", "Caravan master(caravan)", "Caravan master(caravan)", "Rolf Ashwood(carter)", "Caravan master(caravan)", "Caravan master(caravan)"]
+  FAIL 24 frames sideways while moving ["t=337.5 Petra Fenwick(pedlar) st=3 sp=1.91 rel=52deg", "t=337.5 Petra Fenwick(pedlar) st=3 sp=1.98 rel=58deg", "t=337.5 Petra Fenwick(pedlar) st=3 sp=2.04 rel=63deg", "t=337.5 Petra Fenwick(pedlar) st=3 sp=2.09 rel=68deg", "t=337.6 Petra Fenwick(pedlar) st=3 sp=2.13 rel=72deg", "t=337.6 Petra Fenwick(pedlar) st=3 sp=2.16 rel=75deg"]
+D90_TOW FAIL

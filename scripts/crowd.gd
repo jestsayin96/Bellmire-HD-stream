@@ -45,6 +45,11 @@ func fresh() -> bool:
     _cells.clear()
     return false
 
+## D91: empty the grid for an owner that keeps its own frame clock (the Delve runs on process
+## frames, not physics frames)
+func reset() -> void:
+    _cells.clear()
+
 func add(o: Node3D) -> void:
     var op: Vector3 = o.global_position
     var key := Vector2i(floori(op.x * 0.5), floori(op.z * 0.5))

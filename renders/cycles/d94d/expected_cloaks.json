@@ -1,0 +1,492 @@
+{
+ "backstair_cloak": {
+  "dye": 7,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.22,
+   0.06,
+   0.2
+  ]
+ },
+ "barracks_cloak": {
+  "dye": 1,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.08,
+   0.14,
+   0.36
+  ]
+ },
+ "bowyer_cloak": {
+  "dye": 9,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.28,
+   0.1,
+   0.03
+  ]
+ },
+ "bucketline_cloak": {
+  "dye": 2,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.06,
+   0.2,
+   0.08
+  ]
+ },
+ "butcher_cloak": {
+  "dye": 11,
+  "variant": 4,
+  "shade": 0,
+  "cloth": [
+   0.18,
+   0.17,
+   0.06
+  ]
+ },
+ "caravan_cloak": {
+  "dye": 9,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.28,
+   0.1,
+   0.03
+  ]
+ },
+ "chronicle_cloak": {
+  "dye": 7,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.22,
+   0.06,
+   0.2
+  ]
+ },
+ "commander_cloak": {
+  "dye": 1,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.08,
+   0.14,
+   0.36
+  ]
+ },
+ "commander_mantle": {
+  "dye": 1,
+  "variant": 1,
+  "shade": 1,
+  "cloth": [
+   0.0576,
+   0.1008,
+   0.2592
+  ]
+ },
+ "constable_cloak": {
+  "dye": 1,
+  "variant": 1,
+  "shade": 2,
+  "cloth": [
+   0.1072,
+   0.18760000000000002,
+   0.4824
+  ]
+ },
+ "crane_cloak": {
+  "dye": 8,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.04,
+   0.2,
+   0.2
+  ]
+ },
+ "crier_cloak": {
+  "dye": 6,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.52,
+   0.3,
+   0.04
+  ]
+ },
+ "deep_cloak": {
+  "dye": 8,
+  "variant": 4,
+  "shade": 0,
+  "cloth": [
+   0.04,
+   0.2,
+   0.2
+  ]
+ },
+ "feast_cloak": {
+  "dye": 7,
+  "variant": 1,
+  "shade": 1,
+  "cloth": [
+   0.15839999999999999,
+   0.043199999999999995,
+   0.144
+  ]
+ },
+ "fogrun_cloak": {
+  "dye": 4,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.3,
+   0.29,
+   0.27
+  ]
+ },
+ "gravewyrm_cloak": {
+  "dye": 3,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.04,
+   0.035,
+   0.035
+  ]
+ },
+ "guild_cloak": {
+  "dye": 6,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.52,
+   0.3,
+   0.04
+  ]
+ },
+ "harl_cloak": {
+  "dye": 0,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.42,
+   0.08,
+   0.07
+  ]
+ },
+ "hedgeward_cloak": {
+  "dye": 2,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.06,
+   0.2,
+   0.08
+  ]
+ },
+ "hurdler_cloak": {
+  "dye": 9,
+  "variant": 0,
+  "shade": 0,
+  "cloth": [
+   0.28,
+   0.1,
+   0.03
+  ]
+ },
+ "lamp_cloak": {
+  "dye": 6,
+  "variant": 0,
+  "shade": 0,
+  "cloth": [
+   0.52,
+   0.3,
+   0.04
+  ]
+ },
+ "lighterman_cloak": {
+  "dye": 8,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.04,
+   0.2,
+   0.2
+  ]
+ },
+ "limeburner_cloak": {
+  "dye": 5,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.62,
+   0.56,
+   0.42
+  ]
+ },
+ "lockkeep_cloak": {
+  "dye": 11,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.18,
+   0.17,
+   0.06
+  ]
+ },
+ "mire_cloak": {
+  "dye": 11,
+  "variant": 4,
+  "shade": 1,
+  "cloth": [
+   0.1296,
+   0.12240000000000001,
+   0.043199999999999995
+  ]
+ },
+ "mourner_cloak": {
+  "dye": 4,
+  "variant": 4,
+  "shade": 0,
+  "cloth": [
+   0.3,
+   0.29,
+   0.27
+  ]
+ },
+ "orchard_cloak": {
+  "dye": 2,
+  "variant": 3,
+  "shade": 1,
+  "cloth": [
+   0.043199999999999995,
+   0.144,
+   0.0576
+  ]
+ },
+ "osier_cloak": {
+  "dye": 2,
+  "variant": 0,
+  "shade": 0,
+  "cloth": [
+   0.06,
+   0.2,
+   0.08
+  ]
+ },
+ "ossuary_cloak": {
+  "dye": 3,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.04,
+   0.035,
+   0.035
+  ]
+ },
+ "pilgrim_cloak": {
+  "dye": 5,
+  "variant": 0,
+  "shade": 0,
+  "cloth": [
+   0.62,
+   0.56,
+   0.42
+  ]
+ },
+ "raftsman_cloak": {
+  "dye": 8,
+  "variant": 3,
+  "shade": 1,
+  "cloth": [
+   0.0288,
+   0.144,
+   0.144
+  ]
+ },
+ "raid_cloak": {
+  "dye": 0,
+  "variant": 3,
+  "shade": 1,
+  "cloth": [
+   0.3024,
+   0.0576,
+   0.0504
+  ]
+ },
+ "saltboiler_cloak": {
+  "dye": 5,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.62,
+   0.56,
+   0.42
+  ]
+ },
+ "scarwatch_cloak": {
+  "dye": 10,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.12,
+   0.08,
+   0.3
+  ]
+ },
+ "scarweave_cloak": {
+  "dye": 10,
+  "variant": 3,
+  "shade": 0,
+  "cloth": [
+   0.12,
+   0.08,
+   0.3
+  ]
+ },
+ "sexton_cloak": {
+  "dye": 3,
+  "variant": 2,
+  "shade": 1,
+  "cloth": [
+   0.0288,
+   0.0252,
+   0.0252
+  ]
+ },
+ "shingler_cloak": {
+  "dye": 2,
+  "variant": 4,
+  "shade": 0,
+  "cloth": [
+   0.06,
+   0.2,
+   0.08
+  ]
+ },
+ "sparewall_cloak": {
+  "dye": 1,
+  "variant": 1,
+  "shade": 3,
+  "cloth": [
+   0.044800000000000006,
+   0.07840000000000001,
+   0.2016
+  ]
+ },
+ "tanner_cloak": {
+  "dye": 9,
+  "variant": 4,
+  "shade": 0,
+  "cloth": [
+   0.28,
+   0.1,
+   0.03
+  ]
+ },
+ "thatcher_cloak": {
+  "dye": 6,
+  "variant": 0,
+  "shade": 1,
+  "cloth": [
+   0.3744,
+   0.216,
+   0.0288
+  ]
+ },
+ "tiler_cloak": {
+  "dye": 2,
+  "variant": 2,
+  "shade": 1,
+  "cloth": [
+   0.043199999999999995,
+   0.144,
+   0.0576
+  ]
+ },
+ "turbary_cloak": {
+  "dye": 11,
+  "variant": 3,
+  "shade": 1,
+  "cloth": [
+   0.1296,
+   0.12240000000000001,
+   0.043199999999999995
+  ]
+ },
+ "wakeward_cloak": {
+  "dye": 8,
+  "variant": 0,
+  "shade": 0,
+  "cloth": [
+   0.04,
+   0.2,
+   0.2
+  ]
+ },
+ "wall_cloak": {
+  "dye": 1,
+  "variant": 1,
+  "shade": 4,
+  "cloth": [
+   0.12960000000000002,
+   0.22680000000000003,
+   0.5832
+  ]
+ },
+ "warhorn_mantle": {
+  "dye": 0,
+  "variant": 1,
+  "shade": 0,
+  "cloth": [
+   0.42,
+   0.08,
+   0.07
+  ]
+ },
+ "watch_mantle": {
+  "dye": 1,
+  "variant": 1,
+  "shade": 5,
+  "cloth": [
+   0.0704,
+   0.12320000000000002,
+   0.31679999999999997
+  ]
+ },
+ "weaver_cloak": {
+  "dye": 6,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.52,
+   0.3,
+   0.04
+  ]
+ },
+ "winterwatch_cloak": {
+  "dye": 5,
+  "variant": 2,
+  "shade": 0,
+  "cloth": [
+   0.62,
+   0.56,
+   0.42
+  ]
+ },
+ "woodward_cloak": {
+  "dye": 2,
+  "variant": 3,
+  "shade": 2,
+  "cloth": [
+   0.0804,
+   0.268,
+   0.1072
+  ]
+ }
+}

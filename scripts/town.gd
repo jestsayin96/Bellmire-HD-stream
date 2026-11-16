@@ -5421,6 +5421,11 @@ func _on_delve(uid: String) -> void:
     if not heroes.has(uid) or not _scar_info.has("post"):
         return
     var b: HeroBody = heroes[uid]
+    # W-LIVE: a point-redeemed errand comes straight here, not through !delve - put it in
+    # chat's queue at the SOURCE so !muster and the party count read one list, not a union
+    # reconciled twice. The !delve path already appended before it emitted: never twice.
+    if not chat.delve_queue.has(uid):
+        chat.delve_queue.append(uid)
     chat.away[uid] = "on the road to the scar"
     var post: Vector3 = _scar_info["post"]
     var mouth: Vector3 = _scar_info["mouth"]

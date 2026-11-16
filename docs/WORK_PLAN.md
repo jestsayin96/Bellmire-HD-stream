@@ -170,10 +170,23 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
       swallowed by the collar), a cloak hangs from the WAIST and reads as a mini-skirt, the 300 g
       Architect's Hat is a bare wire hoop with no crown floating 0.081 m off the head, and the
       Glazier's Visor is a dinner plate over the face.
-      ONE MEASUREMENT FAULT IS STILL OPEN AND IT IS THE ART LANE'S OWN FINDING: the hero wears a
-      RED CAPE in the hat, weapon and armour rows and not in the other four, so percentages are
-      NOT comparable between rows. One outfit for every row before any of these numbers is quoted
-      again. Not a new item - it is this proof's own validity.
+      THAT LAST MEASUREMENT FAULT IS NOW CLOSED - ONE OUTFIT FOR EVERY ROW (supervisor,
+      2026-11-16 08:58 CT; art aba8f4c, merged to main). The art lane found it and then fixed it:
+      d94proof.py stripped the body's own red cape for ring, gloves, amulet, boots and weapon and
+      LEFT IT ON for hat, cloak and armour, and only ever stripped the body's helmet on the hat
+      row - so a hat row carried a metre of red cloth and a bare skull into the same "% of hero
+      pixels that change" measurement a ring row did not. The body's own hat AND cape now come off
+      on EVERY row, so the only thing varying between rows is the piece under test. Re-ran the
+      whole sheet, 96 renders, blank check 0 failures.
+      THESE ARE THE NUMBERS. QUOTE THESE AND NOT THE OLDER ONES, which were measured against three
+      different outfits: ring 0.00/0.00 TOO SMALL (unchanged); amulet 0.48 -> 1.16/1.72; cloak
+      25.85 -> 30.07/36.16; boots 1.79 -> 2.09/4.95; gloves PARTLY TOO SMALL 6/15 -> 5/15; hat
+      17.86 -> 19.20/35.52; weapon 3.05 -> 3.54/9.66; armour 19.65 -> 25.32/41.97. Every row moved
+      because the hero's own pixel count moved, NO row's verdict got worse, and gloves improved by
+      one pair. The lane looked at _row_hat.png and _row_armour.png before committing and reports
+      two near-twin pairs it can see in the armour row (Ford Leathers / Wyrmhide Coat, Reed-Cloth
+      Robe / Seamwoven Vestment). Not a new item - it was this proof's own validity, and it means
+      the gloves decision in NEEDS MR. E is now being made on comparable measurements.
       NOT A NEW ITEM EITHER, AND NOBODY IS QUEUED ON IT: the cloak row was re-shot against the
       earlier instruction not to, and that was correct - the instruction was about re-deriving the
       dyes, not about the ladder. No dye or cut was touched.
@@ -249,8 +262,9 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
 
   [ ] C-61. RARITY IS BANDED PER SLOT, SO EVERY SLOT HAS A TOP BAND (content lane, data/items.json;
       the GAME BUILD mirrors whatever reads rarity).
-      *** DATA HALF DELIVERED - NOT TICKED. THE CODE MIRROR IS STILL OPEN. *** (supervisor,
-      2026-11-16 06:58 CT; content 60ca2d2, merged to main.) The content lane re-derived `rarity` on
+      *** DATA HALF AND ART ARM BOTH DELIVERED - NOT TICKED. THE GAME BUILD'S CODE MIRROR IS THE
+      LAST ARM OPEN. *** (supervisor, 2026-11-16 06:58 and 08:58 CT; content 60ca2d2 and art
+      ce72fbc, both merged to main.) The content lane re-derived `rarity` on
       all 254 accessories INSIDE each slot: midrank cost percentile among that slot's own pieces (equal
       costs share a rung), cut at the C-58 population proportions. 122 of 254 labels moved. No cost,
       stat, tier or price changed, no rung added or renamed, equipment rarity untouched; a top-level
@@ -260,6 +274,19 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
       longer needs to borrow very-rare pieces. Artifact unchanged: zero accessories are artifact, and
       no artifact id appears in shop_stock, trader_cargo or caravan_manifests. All four data files
       parse; every other key and value is byte-identical to HEAD with key order preserved.
+      ART ARM DELIVERED (supervisor, 2026-11-16 08:58 CT; art ce72fbc, merged to main), AND IT
+      CORRECTED THE DELIVERABLE MR. E IS LOOKING AT. showcasegen.acc_pick() banded accessories by
+      splitting the slot's cost-sorted list into five, which stopped agreeing with the data the
+      moment C-61 re-banded per slot. It now reads the stored `rarity` key and walks OUTWARD one
+      rung when a band is exhausted, so a legendary hero can never silently drop to a common ring.
+      MEASURED over the ten showcase heroes, 30 picks: 18 WERE IN THE WRONG BAND, 0 ARE NOW. The
+      two legendary heroes were the worst of it - the paladin wore RARE boots and a RARE cloak and
+      the cleric a RARE amulet, cloak and boots. They now wear stored-legendary pieces (Long Count
+      Boots, Armourer's Gauntlets, Commander's Field Mantle / Falconer's Vervel, Constable's Cloak,
+      Cordwainer's Boots) and the paladin and cleric sheets were re-rendered, 8 renders, blank check
+      0 failures. _overview.png and _report.json are the originals untouched; the two-hero run is
+      kept beside them as _report_c61.json. So D95 no longer borrows very-rare pieces in fact, not
+      just in principle - "condition is the receipt" held.
       WHAT IS OWED, AND IT IS THE GAME BUILD'S: every reader that still bands an accessory by the
       GLOBAL 441+ cost threshold must read the stored `rarity` key instead - never a cost threshold.
       Named by the writer: the hub, the icon border colour, the shop level gate and the D95 showcase
@@ -343,111 +370,118 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 07:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 08:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
 down the file." THERE ARE SIX LANES: the CHAT BOT lane owns scripts/chatcmd.gd and
 data/commands.json exclusively, on branch `chatbot`.
 
-*** THE GODOT LOCK HAS BEEN HELD BY ONE LANE FOR 103 MINUTES AND IT IS STARVING THE OTHER THREE.
-*** Measured at 07:58, not guessed: docs/RUN_LOCK.txt in the game build's worktree carries eight
-RUNNING lines from 06:17 to 07:59 with no IDLE between them, and every one of them is still
-UNCOMMITTED, so from origin - where HUD, ART and the CHAT BOT read it - the lock has said
-IDLE 05:58 for two hours. The cost is already on the board: the CHAT BOT polled from 06:59 and
-gave up at 07:19 ("GAVE UP - lock still held"), so its L69 has sat written-but-ungated since
-06:51; the HUD lane has landed nothing in three slots and the one thing it owes is a 30-minute
-capture. Neither lane did anything wrong. SO, BOTH HALVES, AND THEY ARE NOT NEW ITEMS, THEY ARE
-THE LOCK PROTOCOL WE ALREADY HAVE: (a) whoever claims the lock COMMITS AND PUSHES THAT LINE IN
-THE SAME BREATH, and writes IDLE the same way when the run ends; (b) a lane that needs more than
-one battery LEAVES A GAP - release the lock between soaks and name your expected finish in the
-claim, so a lane with a six-minute capture can take its turn. Whoever reads the lock still
-treats a LIVE GODOT PROCESS as ground truth and the file as a claim that may be stale either way.
+THE LOCK IS BEING HELD HONESTLY AGAIN AND THE PROTOCOL IS WORKING. The game build released it at
+08:49 with an IDLE line; the HUD lane claimed it at 08:54 and again at 08:58 for L73's capture AND
+NAMED ITS EXPECTED FINISH (~09:30), which is exactly part (b) of what was written at 07:58. No lane
+is starved as I write this. The protocol is unchanged and is not new work: whoever claims the lock
+COMMITS AND PUSHES that line in the same breath and writes IDLE the same way; a lane needing more
+than one battery LEAVES A GAP and names its expected finish; and whoever reads the lock treats a
+LIVE GODOT PROCESS as ground truth and the file as a claim that may be stale in either direction.
+THAT CUTS BOTH WAYS TODAY: the lock is legitimately held until about 09:30, so the game build's
+:07 and the chat bot's :45 may find it busy. Do the part that needs no engine, say so in your
+cycle, and take the engine next slot. DO NOT clear a lock while a Godot process is alive.
 
-  GAME BUILD   ->  *** STILL D91, AND YOU ARE LIVE ON IT RIGHT NOW - FINISH IT. *** At 07:59 you
-                   claimed the final 20-minute town soak on the final settle plus full gates, with
-                   scripts/animal.gd, crowd.gd, delve.gd and town.gd modified in the worktree. That
-                   is the town half and the re-soak, which is exactly what D91 is still owed, so
-                   nothing here redirects you. COMMIT AND PUSH when the gates come back, and commit
-                   docs/RUN_LOCK.txt with its IDLE line in the same breath - see the note above;
-                   that file has been eight claims behind origin since 06:17.
-                   THEN, IN THIS ORDER, BOTH ALREADY UNBLOCKED BY DATA ON MAIN:
-                   (1) C-61's CODE MIRROR - all 254 accessories are re-banded per slot in
-                   data/items.json, so every reader that still bands by the GLOBAL 441+ cost
-                   threshold must read the stored `rarity` key instead: the hub, the icon border
-                   colour, the shop level gate, the D95 showcase legendary row. Boots are legendary
-                   at 390-420 and gloves at 320-380, so recheck any gate keyed to cost. C-61 is
-                   half of what D94 is waiting on, so it is worth more than anything else you own.
+  GAME BUILD   ->  *** YOUR D91c WORK IS SAFE - I COMMITTED IT FOR YOU (laptop 0a68ddf). DO NOT
+                   REWRITE IT, BUILD ON IT. *** Your 08:07 slot ended IDLE at 08:49 with the final
+                   settle, the crevice fix and the 24-pass door work live in animal.gd, crowd.gd,
+                   delve.gd and town.gd and NOT committed - the second slot in a row. Holding it
+                   back was the right call on the merits (the town 20-minute soak came back 2
+                   overlap frames in 82k, 0 in footprints) but uncommitted is not the way to hold
+                   work back; a CHECKPOINT commit on your own branch is. It is not merged and not
+                   ticked. D91 is STILL YOUR ITEM: the town half and the 20-minute re-soak.
+                   THEN, IN THIS ORDER, BOTH UNBLOCKED AND ONE OF THEM NOW THE LAST ARM:
+                   (1) C-61's CODE MIRROR - the data half and the ART arm are both in and merged,
+                   so YOURS IS THE ONLY ARM LEFT AND D94 IS WAITING ON IT. Every reader that still
+                   bands an accessory by the GLOBAL 441+ cost threshold must read the stored
+                   `rarity` key instead: the hub, the icon border colour, the shop level gate.
+                   Boots are legendary at 390-420 and gloves at 320-380, so recheck any gate keyed
+                   to cost. The art lane's own arm measured 18 of 30 showcase picks in the WRONG
+                   band before the switch and 0 after - expect the same class of fault in yours.
                    (2) C-55's fishing arm, DATA AND CODE TOGETHER: angler.gd, fishing.gd and
                    economy.gd's RARITY const still say "epic" while items.json says "very rare",
                    and data/fishing.json says "epic" in its ladder array (line 23) and on three
-                   catches (111, 272, 283). fishing.json is not one of the content lane's four
-                   files, so its data arm is yours. chatcmd.gd's order array is the chat bot's.
+                   catches (111, 272, 283). fishing.json is yours, not the content lane's.
+                   chatcmd.gd's order array was the chat bot's and is already fixed.
                    NOTED FOR LATER, NOT NOW, ALL THREE YOURS AFTER D91 TICKS: the fourteen
                    minibosses need their bestiary.gd heights (h = authored + 1.30 m, table in
                    docs/art/MINIBOSS_FIT.md); Mr. E's wand_crystal.glb needs an attach; and the
                    miniboss FEED LINES are waiting in data/lore_lines.json
                    `miniboss_feed.by_key[<key>][arrive|act|broken|fall]` - 140 lines, one posted at
                    random on set-piece spawn, mechanic firing, weakness broken and death.
-  ART          ->  *** THE RE-SHOOT IS MERGED AND RECORDED - AND YOU WERE RIGHT TO NARROW MY ROW.
-                   *** Weapon and armour never called spread(), you measured that instead of
-                   accepting it, and the correction is written into D94 above. The ends-of-ladder
-                   walk is the real fix and the honest conclusion is recorded too: showing the
-                   legendary rescued no failing row.
-                   NEXT, AND IT IS SMALL AND IT UNBLOCKS A TICK: C-61's ART ARM -
-                   tools/art/showcasegen.py line ~109 still picks the legendary row "from the cost
-                   band". Read the stored `rarity` key in data/items.json instead. C-61 is one of
-                   the two things holding D94 open and this is your whole share of it.
-                   THEN YOUR OWN FINDING, BEFORE ANY OF THESE PERCENTAGES IS QUOTED AGAIN: the hero
-                   wears a RED CAPE in the hat, weapon and armour rows and not in the other four,
-                   so the rows are not comparable. One outfit for every row.
-                   THEN the miniboss REGISTER conversion for the other thirteen - drillmaster_chibi
-                   pass 3 and the fourteen re-shot fit pairs (side view fixed, back view added) are
-                   merged, so the worked example and the measurement both exist now. The +1.30 m
-                   heights are NOT yours; they are a bestiary.gd number.
-  CHAT BOT     ->  *** YOUR L69 IS SAFE - I COMMITTED IT FOR YOU. DO NOT REWRITE IT. *** Your 06:45
-                   slot wrote L69 into scripts/chatcmd.gd and data/commands.json (25 commands, an
-                   `ask` block) and then spent twenty minutes waiting for the Godot lock and gave up
-                   at 07:19 without being able to gate it. It then sat uncommitted through two
-                   supervisor runs, one keystroke from being lost, so I have committed it on
-                   `chatbot` as a CHECKPOINT - ungated, NOT merged to main and NOT ticked. That is
-                   not a judgement on the work; it is just that nothing is shipped until the gates
-                   have run on it. WHAT IS OWED IS THE GATES AND NOTHING ELSE: parse, _l14_test,
-                   _twitch_parse, _commands_doc, json.load, and the drift proof in both directions
-                   the way B1 ran them. Check for a LIVE GODOT PROCESS first - the game build is
-                   live as I write this - and if the lock is held, say so in your cycle and gate the
-                   parts that do not need the engine rather than burning the slot polling.
-                   ONE SMALL THING THAT IS YOURS AND IS NOT NEW WORK: chatcmd.gd line ~69 still has
-                   `order := ["junk","common","uncommon","rare","epic","legendary"]`. "epic" was
-                   retired from the ladder by C-55. Fix that word while you are in the file.
-                   QUEUE AFTER L69: L70 (!catchup) -> L56.
-  CONTENT      ->  *** C-62 IS MERGED AND RECORDED - 140 miniboss feed lines, four states across all
-                   fourteen, plain register, every pre-existing key byte-identical. *** "Cold. First
-                   time in a long while." is exactly the voice. You have no WORK_PLAN item again, and
-                   your standing backlog is the established answer to that - C-56, C-57, C-59 and
-                   C-62 all came out of it with the supervisor's blessing, so it is not an invention
-                   under the freeze. TAKE THE STALEST ITEM IN IT, name which one and why it was the
-                   stalest, and stay inside your four files (items, lore_lines, bosses, potions).
-                   NOTHING IN FISHING IS YOURS - data/fishing.json went to the game build at 07:35
-                   and you were right to refuse it. If your backlog is genuinely empty, say that
-                   plainly rather than reaching into another lane's files.
-  HUD          ->  *** L73'S ONE CAPTURE, AND THE REASON YOU HAVE LANDED NOTHING FOR THREE SLOTS IS
-                   THE LOCK, NOT YOU. *** L72 is ticked. L73's shot language is in and L73_TEST
-                   passes, so DO NOT REBUILD IT. What is owed is the single capture it was specified
-                   with: a 30-minute run in which a viewer can tell FROM THE CAMERA ALONE when
-                   something important happened. THE GAME BUILD IS LIVE AS I WRITE THIS (Godot
-                   running from 07:59, final D91 town soak) and origin's RUN_LOCK still lies about
-                   it - CHECK FOR A LIVE PROCESS, not the file. If it is held at :52: do not poll
-                   the slot away. Say so in your cycle, and do the part that needs no engine -
-                   confirm the capture harness and what it will measure - then take the engine on
-                   your next slot. Then L74 (the feed and the theme under load, shots at all three
-                   scales during a raid).
-  HUB          ->  STAND DOWN - third run in a row, and it is still not a shutdown. H29, H30 and H31
-                   are shipped, merged and TICKED; the freeze forbids inventing more; nothing is
-                   queued for this lane. If you want to be useful without writing a new item:
-                   re-verify the live-data version gate (KNOWN_V is at v4) still lights the Shop and
-                   Satchel tabs by themselves, and report what you find. Do not reach into another
-                   lane's files to look busy. THE ONE THING THAT WOULD FEED YOU IS MR. E'S: he alone
-                   can publish the hub to gh-pages, and he alone can raise a new hub item under the
-                   freeze.
+  ART          ->  *** BOTH THINGS YOU WERE POINTED AT ARE IN, MERGED AND RECORDED, AND ONE OF THEM
+                   DID MORE THAN UNBLOCK A TICK. *** C-61's art arm: showcasegen.acc_pick() reads
+                   the stored `rarity` key and walks outward a rung when a band is empty, and the
+                   measurement is the story - 18 of 30 showcase picks were in the WRONG band, 0 are
+                   now, and D95's two LEGENDARY heroes were wearing RARE boots and cloaks. They now
+                   wear legendary pieces and the paladin and cleric sheets are re-rendered. The man
+                   looking at those sheets is looking at a corrected ladder because of this.
+                   ONE OUTFIT FOR EVERY ROW is in too, and it closed the last measurement fault in
+                   the D94 proof: the body's own hat AND cape now come off on every row, so for the
+                   first time two rows' percentages can be put side by side. Every number moved and
+                   NO verdict got worse; gloves improved to 5 of 15. The new numbers are the only
+                   ones anybody quotes from here on - they are recorded under D94 above.
+                   NEXT, AND IT IS THE QUEUE YOU ARE ALREADY IN: THE STOKER IS 2 OF 14 AND PASS 2
+                   BOUGHT TWO NEW FAULTS. You said it yourself - moving both arms out to put the
+                   rake in a hand left both mitts reading as balls on sticks held straight out (8)
+                   and the left mitt overlapping the flue (9), with the value break (4) and the eye
+                   value still open from pass 1. TAKE STOKER PASS 3: 4, 8, 9 and the eyes, the same
+                   three-pass shape the Drillmaster needed. THEN the register conversion for the
+                   remaining twelve. The +1.30 m heights are NOT yours; they are a bestiary.gd
+                   number. Minibosses stay a PERMISSION for when this lane is dry, not a queue that
+                   outranks your queued item.
+  CHAT BOT     ->  *** L69 AND L70 ARE BOTH WRITTEN, BOTH MERGED TO MAIN AND NEITHER IS TICKED.
+                   WHAT IS OWED IS THE ENGINE GATES AND NOTHING ELSE. *** Your engine-free battery
+                   is the most thorough thing any lane ran this hour - json.load with a parsed-value
+                   byte-identity check at every level, the drift test in both directions off the
+                   source and the data with _l14_test's own regex (61 arm words, 26/26 cover),
+                   ask-table shadowing checked all ten topics both ways, and the 320 cap PROVEN on
+                   five shapes rather than asserted. The lock was held through your whole slot
+                   again and that is not your fault. The engine-side remainder is unchanged:
+                   --headless --quit-after 300 (parse), _commands_doc.gd, _l14_test.gd,
+                   _twitch_parse.gd, and _b2_ask.gd at the worktree root (then delete it and the
+                   .b2_* logs). "epic" is out of the order array - that one is done.
+                   *** THE RULING YOU ASKED FOR, AND IT IS YOURS: docs/COMMANDS.md IS THIS LANE'S.
+                   *** It is GENERATED from data/commands.json by tools/_commands_doc.gd, every
+                   commit that has ever touched it is a chat-command commit from this lane, and
+                   _l14_test fails until it carries the new command - so it is output that travels
+                   with the data file, not a tools/ file you are reaching into. Running a tool that
+                   reads your own file is not owning tools/. REGENERATE IT AND COMMIT IT IN THE SAME
+                   BREATH AS data/commands.json, in the slot where you hold the lock for the parse
+                   gate anyway. You were right not to assume it; now you have the answer.
+                   QUEUE AFTER THE GATES: L56.
+  CONTENT      ->  *** C-63 IS MERGED AND TICKED - and you did the thing that was actually asked:
+                   you named the stalest backlog item and WHY it was the stalest (bosses and potions,
+                   last touched in C-55, while C-56, C-57, C-60 and C-62 all came after). *** +12
+                   lesser and +12 greater uniques across eight lords and +16 brews across four
+                   tiers, modified lords inside each lord's own hp/speed/attack range, 166/160/192
+                   now, every pre-existing entry unchanged, every gives/cures resolving in `states`.
+                   No code wiring needed and you said so.
+                   NEXT: you have no WORK_PLAN item again. Take the NEXT STALEST item in your
+                   standing backlog, name which one and why it is now the stalest, and stay inside
+                   your four files (items, lore_lines, bosses, potions). NOTHING IN FISHING IS
+                   YOURS - it went to the game build at 07:35 and refusing it was correct. If the
+                   backlog is genuinely empty, say that plainly rather than reaching into another
+                   lane's files.
+  HUD          ->  *** YOU HOLD THE LOCK RIGHT NOW AND YOU CLAIMED IT THE WAY THE PROTOCOL ASKS -
+                   with an expected finish (~09:30). FINISH THE CAPTURE. *** L72 is ticked, L73's
+                   shot language is in and L73_TEST passes, so DO NOT REBUILD IT. The single thing
+                   L73 is owed is the capture it was specified with: a 30-minute run in which a
+                   viewer can tell FROM THE CAMERA ALONE when something important happened. When it
+                   comes back, COMMIT, PUSH, and write the IDLE line in the same breath. Then L74
+                   (the feed and the theme under load, shots at all three scales during a raid).
+  HUB          ->  STAND DOWN - fourth run in a row, and it is still not a shutdown. H29, H30 and
+                   H31 are shipped, merged and TICKED; the freeze forbids inventing more; nothing is
+                   queued for this lane. The one useful thing that invents no item is still open and
+                   would genuinely help: re-verify the live-data version gate (KNOWN_V is at v4)
+                   still lights the Shop and Satchel tabs by themselves, and report what you find.
+                   Do not reach into another lane's files to look busy. THE ONE THING THAT WOULD
+                   FEED YOU IS MR. E'S: he alone can publish the hub to gh-pages, and he alone can
+                   raise a new hub item under the freeze.
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
 Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
@@ -759,6 +793,21 @@ it is NOT finished. The attach and the gear.gd entry are the GAME BUILD's. One q
 in NEEDS MR. E: at 0.921 long it reads as a short staff rather than a wand, and nobody rescales his
 own asset without him saying which he meant.
 
+THE REGISTER CONVERSION IS NOW 2 OF 14, AND THE SECOND ONE COST SOMETHING (supervisor, 2026-11-16
+08:58 CT; art 0e51246 and 6f9af0f, merged to main). The STOKER went through the Drillmaster's worked
+example: rebuilt on the Knight's measured proportions (hip at 21% of height, was 39%; head 1.00
+across; shoulders 0.86; mitts for hands) at the same authored 2.40 m so the pair sheet compares ONE
+thing, with the original's GLOWING eyes taken out on purpose - the grate in its chest is the one
+light on the body and it is the thing the party has to starve. renders/art/minibosses/
+_stoker_register.png puts original beside chibi beside a real 2.45 m KayKit Knight at scale 1.0.
+Pass 1 listed seven faults it could see; pass 2 took the three that are PLACEMENT not taste and
+closed them (grate up to the chest and smaller, so it reads as a chest furnace with the belt below
+it rather than a carried lantern; the rake is actually in a hand; the left mitt sits on its own arm)
+- and reported honestly that moving both arms out BOUGHT TWO NEW FAULTS: both mitts now read as
+balls on sticks held straight out (T-pose), and the left mitt overlaps the flue. With the value
+break and the eye value still open from pass 1, STOKER PASS 3 is the art lane's queued item. The
+Drillmaster took three passes too, so this is the shape of the work, not a regression.
+
 GOOD IDEAS ARE NOT WORK: under the freeze, minibosses are a PERMISSION, not a queue. The art lane
 takes its queued item first and builds a miniboss when that lane is otherwise dry - which it has
 now been twice this week.
@@ -1044,6 +1093,17 @@ neighbours before and after, in renders/cycles/d92/.
       not re-measure the halls. Finish those two and D91 gets ticked.
 
 ### D91 - THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
+
+*** STATUS 2026-11-16 08:58 CT (supervisor). THE DUNGEON HALF IS DONE AND PASSED; THE TOWN HALF IS
+NOT, AND THE WORK FOR IT IS CHECKPOINTED, NOT LOST. *** D91b (merged, recorded) grew the grid to
+three-cell halls across 290/290 rooms, put the dungeon into the shared Crowd and fixed the late
+settle; the dungeon 20-minute re-soak PASSED. The town 20-minute soak came back 2 overlap frames in
+82,000 (a pocket in the north houses), 0 in footprints, so the lane held it back - correct on the
+merits. But it left the work UNCOMMITTED in the laptop worktree through a second slot, so the
+supervisor committed it as laptop 0a68ddf: a CHECKPOINT only, NOT merged to main, NOT ticked, and
+D91 stays open on exactly that town half plus its re-soak. Game build: build on that commit, do not
+rewrite it. The rule this cost us twice is simple - hold work back with a checkpoint commit on your
+own branch, never by leaving it in the worktree.
 
 "people are still overlapping eachother... animals, and characters and people literally walking
 through stuff and stacked on top of eachother is not okay. if we need to make dungeon hallways
@@ -2378,6 +2438,20 @@ writing it: Bellmire can have disasters and losses, but not ones that cancel a p
       alongside, closed with both totals stated and the Chronicle naming the winner; the cap proven by
       forcing a burst; and a restart mid-poll proven to recover rather than deadlock.
 
+  *** HALF DELIVERED, MERGED TO MAIN, NOT TICKED - THE ENGINE GATES ARE WHAT IS MISSING AND THE
+  LOCK IS WHY (supervisor, 2026-11-16 08:58 CT; chatbot 4b47504, merged to main). *** L69 is
+  written in scripts/chatcmd.gd and data/commands.json (25 commands, an `ask` block of ten topics)
+  and its engine-free gates are all green and unusually thorough: json.load with a parsed-value
+  byte-identity check against HEAD at every level, the drift test run in both directions off the
+  source and the data with tools/_l14_test.gd's own match-arm regex, the ask table checked for
+  shadowing across all ten topics in both directions, 0 tabs, no duplicate function or constant.
+  "epic" is also out of chatcmd.gd's order array, which C-55 had retired. WHAT IS OWED IS ONLY THE
+  ENGINE SIDE: parse (--headless --quit-after 300), _commands_doc.gd, _l14_test.gd, _twitch_parse.gd
+  and _b2_ask.gd. The Godot lock has been held across this lane's last three slots and it gated
+  what it could instead of burning them polling, which was right. SUPERVISOR RULING, 08:58:
+  docs/COMMANDS.md belongs to THIS LANE - it is generated from data/commands.json by
+  tools/_commands_doc.gd, every commit that ever touched it is a chat-command commit from here, and
+  _l14_test fails until it carries the new command. Regenerate and commit it with the data file.
 - [ ] L69. THE BOT CARRIES THE CHAT, NOT JUST THE COMMANDS. Owner: LAPTOP CODE (chatcmd.gd,
       data/commands.json). Builds on L68. Mr. E: the bot needs to "handle a lot of the chat".
       Today a viewer gets an answer only if they type the exact command. Widen it:
@@ -2423,6 +2497,19 @@ writing it: Bellmire can have disasters and losses, but not ones that cancel a p
       its owner; the bot silent while the stream is offline; and a hostile hero title proven inert -
       it either never reaches chat or reaches it declawed. Gates green.
 
+  *** HALF DELIVERED, MERGED TO MAIN, NOT TICKED - SAME REASON AS L69: THE ENGINE GATES
+  (supervisor, 2026-11-16 08:58 CT; chatbot 2f8145e, merged to main). *** !catchup is written, with
+  !mystory, !since and !catchups routed through canonical(). The budget is spent in WEIGHT order
+  (death > fight > loot > delve/raid > town > lore) and the kept rows are only then put back into
+  the order they happened - the first draft picked by weight but PRINTED oldest-first, which spent
+  the budget on the walk down the stair and dropped the death, the one line that mattered; measured
+  on a four-row busy hero, not guessed. The hero's name comes off the front of each quoted row
+  because the answer has already said whose story it is. A dead hero still gets their story
+  ("Dead now; the memorial keeps the name. !reroll raises another.") because !catchup deliberately
+  does not go through _needs. The 320-character cap is PROVEN on five shapes - busy dead 283, same
+  hero alive 304, three 200-char rows 315, one short row 147, nothing at all 170 - not asserted.
+  L69's ask table gained a "missed" topic pointing at it. Engine-free gates green; parse,
+  _commands_doc (now 26 commands, so docs/COMMANDS.md changes), _l14_test, _twitch_parse owed.
 - [ ] L70. WHAT HAPPENED WHILE I WAS AWAY. Owner: LAPTOP CODE (chatcmd.gd, data/commands.json).
       A viewer who looks in after two days has no way to find out what became of their hero. The
       Chronicle knows - D60 gave it days and `who`, so the lines about a given hero are already
@@ -3880,6 +3967,17 @@ now gates by level. CONTENT WRITER: TAKE C4 NEXT.
       FURTHER CYCLE LOGGED: C-55-the-cycle (content d91ea57, merged 2026-11-15 23:10) - a second pass of +32
       boss uniques (lesser/greater) and +24 brews, still modified lords and no new lords. Note the cycle
       number collides with the C-55 RARITY LADDER ruling block above; they are different things.
+      C-63 (content c78f285, merged and TICKED by the supervisor 2026-11-16 08:58 CT) - standing
+      backlog item 4, and the lane named WHY it was the stalest: bosses and potions were last
+      touched in C-55 while disasters (C-56), epitaphs/barks (C-57), Phase 2 words (C-60) and the
+      miniboss feed (C-62) all came after it. +12 lesser_uniques and +12 greater_uniques, three
+      each across Hollow King, Grubmother, Rattling Host, Nightwing, Gravewyrm, Ossuary Lord, Pale
+      Duchess and Mourncoil - modified lords, never new lords, each keeping its lord's shape and
+      sitting inside that lord's existing hp/speed/attack range (166 lesser, 160 greater now).
+      +16 brews across tiers 1-4, trade-named, using only existing `states` (192 potions now).
+      Both files parse; every pre-existing entry and key unchanged, LF kept; no duplicate name, key
+      or alias; every gives/cures resolves in `states`. No code wiring needed and the lane said so
+      rather than leaving it to be discovered.
 
 - [x] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
       Owner: CONTENT WRITER (data/items.json ONLY). The town grows through twelve stages from Crossing to City
@@ -5505,7 +5603,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
 ================================================================================
-## NEEDS MR. E (supervisor, updated 2026-11-16 07:28 CT). Five things, all short.
+## NEEDS MR. E (supervisor, updated 2026-11-16 08:58 CT). Five things, all short.
   5. GLOVES - THE ONE NEW DECISION, AND IT IS THE LAST THING IN D94. You ruled at 04:56 that
      gloves can be seen, so the art lane built the silhouette: 11 of 15 pairs too small is now 6
      of 15, and the glove in the satchel is still the glove on the hand. It still does not clear
@@ -5530,6 +5628,11 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
      whole class at once, for every item in those slots forever. (a) and (b) are still yours to
      take; this is just the honest news that making small things dearer or bigger has now been
      tried and measured twice.
+     AND AS OF 08:58 THE MEASUREMENTS YOU ARE DECIDING ON ARE FINALLY COMPARABLE. The art lane
+     found that its own proof sheet stripped the hero's red cape on five rows and left it on three,
+     so two rows' percentages could never honestly be put side by side. One outfit now, every row,
+     96 renders re-run: NO verdict got worse and gloves improved to 5 of 15. Nothing about the
+     three ways forward changes - it just means (a), (b) and (c) are being weighed on one body.
   Your 04:56 answers closed three that were sitting here - the ring/glove call, the D94
   shutdown, and the legendary cap. Rings are accepted, the three lanes are back on, and the
   cap is now C-61 on the content lane. Nothing below is a repeat of those.

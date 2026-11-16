@@ -131,3 +131,85 @@ here. What is needed:
 Original geometry, generated from raw vertex maths in `tools/art/`. No
 third-party asset is read by any of it. Quaternius Bestiary / QAL is forbidden
 on this project, which is why these are generated and not bought.
+
+---
+
+# SECOND SET - 16 Nov 2026: crypt, keep, treasury, mess
+
+The first four were built for the two themes where `dungeon_hd.gd` rolls the
+miniboss set piece at **35** (barracks, workshop). The four below cover the
+themes where it rolls at **15** (keep, treasury, mess) and **10** (crypt) and
+had nothing theme-matched to put in the slot, so it fell back to
+`Bestiary.pick()` returning an ordinary creature with doubled hit points -
+exactly the thing Mr. E's bar forbids.
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `sexton`   | The Sexton   | 2.45 | crypt    | **IT WILL NOT STAY DOWN** - it carries its own graves; four lit niches are four risings | 0.85 | 2.14 |
+| `porter`   | The Porter   | 2.30 | keep     | **IT BARS THE WAY** - a leaf across the chamber mouth: no retreat, no reinforcement | 0.45 | 3.52 |
+| `tallyman` | The Tallyman | 2.15 | treasury | **IT TAKES AND LEAVES** - it lifts gear off the party, wears it, and withdraws | 0.20 | 1.89 |
+| `cook`     | The Cook     | 2.05 | mess     | **IT KEEPS THE PACK ALIVE** - the pot heals the room; spill the pot | 0.60 | 2.39 |
+
+All four: four meshes merged by material, 1094-1722 faces, static, feet on z=0,
+and **CORRIDOR-SAFE** against the 11.0 m clear span of a D91 three-cell corridor
+(`floorgen.gd` G = 4.0, WALL_IN = 0.5). **None of the eight is room-locked.**
+
+## Two of these are countable from the doorway, on purpose
+
+The Sexton's four **lit** niches are his remaining risings and the viewer can
+count them without being told; the Tallyman wears what it has already taken,
+where the viewer who paid for that helm can see it. Mr. E's receipt rule cuts
+both ways - a mechanic the stream can read off the model is worth more than the
+same mechanic in a number.
+
+## WEAR across the whole eight, lowest to highest
+
+`tallyman 0.20` (the treasury is kept and this is the only bright thing in the
+file) → `drillmaster 0.15` gong aside, `scrapwright 0.30` → `porter 0.45` (the
+keep is maintained; sound oak, greased iron) → `cook 0.60` (greasy, long-used,
+but the pot rim is scoured bright because a cook keeps his pot) → `gaoler 0.80`
+→ `sexton 0.85` → `snuffer 0.90`. Nothing in the set shares a value.
+
+## What the pictures overruled - again, three times
+
+The blank check passed on every bad version. Only looking caught these:
+
+1. **Sexton, twice.** Twelve flush cells fused into one banded slab - the thing
+   you are meant to COUNT was invisible, and at pane distance he was the Porter.
+   Rebuilt at nine bigger cells with air between them; that came back *worse*,
+   a bigger solid slab, because each empty niche had a dark back plate closing
+   it. An empty grave has to be **a hole you see through**. Back plates deleted,
+   lit plugs pushed 0.16 proud, spade haft thickened.
+2. **Porter.** A 1.02 m leaf directly behind him ate the far half of the
+   drawbar from three-quarters, so "the widest horizontal in the dungeon" came
+   out a stub and what remained read as the Sexton. Leaf narrowed and raised,
+   bar lengthened to 2.84 m, pushed forward of the leaf and raked so both iron
+   shoes clear the body from any angle.
+3. **Tallyman.** The stolen kit hung on short cords inside the body's own
+   width and fused with the torso - the receipt was not in the outline at all.
+   A 1.86 m spreader bar now carries all five pieces wide of the body on long
+   cords with air around each.
+4. **Cook** (colour sheet, not silhouette). The pot was built from the body
+   material and came back **a wooden tub**; and three thin glow tapers meant as
+   steam read as pale spikes. The cauldron is black iron now with a scoured
+   bright rim, the heat is a lit surface inside the rim, and the modelled steam
+   is gone - geometry cannot do steam at this silhouette weight, so the delve's
+   own particles can carry it.
+
+## Handed to the GAME BUILD worker
+
+Same four points as the first set, extended:
+
+- `assets/monsters/minibosses/{sexton,porter,tallyman,cook}.glb`, static, no
+  armature.
+- The set-piece roll can now cover **crypt, keep, treasury, mess** with a
+  theme-matched piece instead of an elite ordinary creature. Note `dungeon_hd.gd`
+  currently lumps **shrine and crypt** into one weight row - the Snuffer was
+  built for shrine and the Sexton for crypt, and the two should split.
+- Feed lines: *"A spade is working somewhere in the dark." / "A bar has dropped
+  behind you." / "Something is counting what you carry." / "The pot is on."*
+- **The Porter's idea needs a door to exist.** It is the one of the eight whose
+  behaviour touches the floor rather than the party: it wants the chamber mouth
+  sealed for the duration. If that is expensive, the cheap honest version is
+  "no fleeing this set piece and no wandering spawns join it" - the mesh already
+  promises that much and no more.

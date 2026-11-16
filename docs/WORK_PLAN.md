@@ -125,10 +125,41 @@ and one of them is Mr. E's to answer.
       ring on a body at stream size. The answer is a design call: an oversize "readable" ring and
       glove, or accept that these are inventory items and not silhouettes. NO WORKER TAKES THIS.
 
-  [ ] STILL OPEN - THE LAST THREE FIT FAULTS (game build leads, art moves with it)
-      Amulet chains are buried in the chest under the head's overhang. Cloaks differ by SHAPE far
-      more than by COLOUR. The legendary accessory pool is only 16 deep, so D95's showcase had to
-      borrow very-rare pieces. These are small and they finish the item Mr. E named tonight.
+  [x] DONE AND TICKED - THE AMULET CHAIN SHOWS (game build, origin/laptop e7dccae, 16 Nov)
+      The chain was two thin rods running straight up under the chin, so the head's overhang hid
+      them. It is now eight links a side draped wide out to the collarbones, following the chest's
+      barrel as it climbs, link size riding cost, with a faint emission so it catches the light.
+      Looked at: renders/cycles/d94c/d94_row_1_amulet_close.png - the V of links reads from the
+      front on helmed and bare bodies, pendant still at the breastbone. The proof row moved from
+      0.00% (a DUPLICATE) to 0.52% worst pair, 0.97% median: amulets TELL APART.
+
+  [ ] HALF DELIVERED / STILL OPEN - CLOAKS DIFFER BY COLOUR NOW, BUT THE TWO SIDES ARE NOT YET ONE
+      OBJECT (supervisor, 2026-11-16 03:58 CT). GAME BUILD owns the remainder; ART is finished here.
+      DONE, BOTH SIDES: gear.gd gives a cloak one of TWELVE period dyes (D94_CLOAK_DYES - madder,
+      woad, woodland green, walnut black, grey wool, undyed cream, weld ochre, wine, river teal,
+      russet, scar violet, oilcloth olive), picked from the item's NAME first (D94_CLOAK_WORDS) and
+      hashed only as a fallback; spread 3/7/7/3/2/4/5/3/5/4/2/4 over the 49 cloaks, none over 7
+      (origin/laptop e7dccae). The art lane mirrored the rule bit for bit and collapsed the eight
+      leather TONES, which had been pasted into three generators, into one icons.cloth_tone
+      (origin/art a11cd62). Cloak proof row: worst pair 15.96 -> 19.11% of the hero's own pixels,
+      median 29.59 -> 31.25, verdict TELLS APART, no row DUPLICATE.
+      STILL OPEN - ONE MIRROR BACK, AND IT IS THE GAME BUILD'S: the art sheet FAILED on the dye
+      alone. Fifteen cloaks shared BOTH a dye and a cut, six of them woad-and-mantle, so art added a
+      SHADE STEP inside the dye, assigned by position in the colliding group the way D94b assigned
+      form - it cannot collide by construction - giving 49 distinct (colour, cut) pairs out of 49.
+      gear.gd has the dye but NOT the shade step. So today the first cloak of each colliding group
+      matches its icon exactly and the other fifteen are off by a value step, never by a hue. Port
+      the shade step out of tools/art/icons.py into gear.gd's _acc_base. THE CONDITION ON THIS WHOLE
+      FIX WAS THAT THE HUB ICON AND THE THING ON THE HERO STAY ONE OBJECT, and until this lands it
+      is not met. Small. Do not re-derive the dyes and do not re-run the art fix.
+
+  [ ] STILL OPEN - NEEDS MR. E, NOT A BUILDER: THE LEGENDARY ACCESSORY POOL IS ONLY 16 DEEP.
+      Both lanes measured this independently and both hand it back, which is the right call: the 16
+      are 8 rings, 6 cloaks, 2 amulets, ZERO boots and ZERO gloves. ONE cost scale bands rarity for
+      every slot (441+ = legendary) while boots cap at 420 and gloves lower still, so those two
+      slots can never hold a legendary piece - which is why D95's showcase had to borrow very-rare
+      pieces. The two ways out are in NEEDS MR. E and both change what a viewer paid for, so neither
+      a builder nor the supervisor takes it. NO WORKER TAKES THIS.
 
 ### THE MEASURED FAULT - do not re-derive it
 gear.gd `dress_cosmetics()` renders a worn accessory from the SLOT ONLY, never from the item:
@@ -191,34 +222,37 @@ LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live
 exact file.
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 02:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 03:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
 down the file."
 
-  GAME BUILD   ->  *** D94's LAST THREE FIT FAULTS *** The duplicates are CLOSED and TICKED on
-                   both sides - do not rebuild them, and do not re-render D95 or re-measure D83.
-                   What is left of D94 that a builder owns is three things off your own fit
-                   report: amulet chains are buried in the chest under the head's overhang;
-                   cloaks differ by SHAPE far more than by COLOUR; the legendary accessory pool
-                   is only 16 deep, so D95 had to borrow very-rare pieces. Small, and they
-                   finish the item Mr. E named tonight. Ring and glove size at stream distance
-                   is NOT yours - it is sitting with Mr. E.
-                   AFTER D94: D91 stages 2-4 (three-cell corridors, monsters into the avoidance,
-                   party in file) is the WHOLE of Phase 1's remainder and is the next phase-order
-                   item in the plan.
-  ART          ->  *** MOVE WITH THE GAME BUILD ON THE SAME THREE *** Your proof sheet passed:
-                   no row reports DUPLICATE, so that half is TICKED - do not re-run the fix.
-                   Two of the three remaining faults are derivation work you own: spread the
-                   CLOAK PALETTE so cloaks differ by colour and not only by shape, and deepen
-                   the LEGENDARY ACCESSORY POOL past 16 so a showcase never borrows down a band.
-                   Re-run tools/art/d94proof.py when you change a derivation and let the numbers
-                   say it. Ring/glove stream size is Mr. E's call, not yours.
-                   Minibosses are a PERMISSION and the lane is NOT dry - do not take one.
+  GAME BUILD   ->  *** ONE SMALL MIRROR, THEN D91 *** Your D94c landed and two of the three faults
+                   are CLOSED AND TICKED: the amulet chain shows, and cloaks take twelve dyes. Do
+                   NOT rebuild either, do not re-render D95, do not re-measure D83 or the pool.
+                   WHAT IS LEFT OF D94 FOR YOU IS ONE THING: the art lane found that the dye alone
+                   still left fifteen cloaks sharing both a dye and a cut, and added a SHADE STEP
+                   inside the dye, assigned by position in the colliding group. gear.gd does not
+                   have it, so fifteen heroes are a value step off their own icon. Port the shade
+                   step from tools/art/icons.py into gear.gd's _acc_base, re-shoot the cloak row,
+                   and the icon and the hero are one object again. Small.
+                   The legendary pool is NOT yours - both lanes measured it and it is with Mr. E.
+                   Ring and glove size at stream distance is NOT yours either - also with him.
+                   THEN: D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party
+                   in file) is the WHOLE of Phase 1's remainder and the next phase-order item.
+  ART          ->  *** YOUR D94 HALF IS FINISHED - MINIBOSSES ARE NOW LIVE FOR YOU *** Both
+                   derivation faults you owned are closed: the proof sheet reports no DUPLICATE on
+                   any row, and the cloak dye plus your shade step give 49 distinct (colour, cut)
+                   pairs out of 49. Do not re-run either. The legendary pool is data, not a
+                   derivation - you measured it and handed it back correctly; it is with Mr. E.
+                   That leaves this lane GENUINELY DRY, and a dry art lane has Mr. E's standing
+                   permission to invent a MINIBOSS (no lore needed). Take one. Do not reach into
+                   another lane's files, do not re-render D95, and do not write new plan items.
   HUD          ->  STAND DOWN. Mr. E shut this lane down for D94 (00:55) and only he lifts it.
-                   D94's build half landing does not lift it. L73's last step - the 30-minute
-                   capture in which a viewer can tell from the camera alone when something
-                   important happened - stays queued, then L74. Both wait. DO NOT rebuild the
-                   shot language. Do not reach into another lane's files to look busy.
+                   D94's build half landing does not lift it, and neither does this merge. L73's
+                   last step - the 30-minute capture in which a viewer can tell from the camera
+                   alone when something important happened - stays queued, then L74. Both wait.
+                   DO NOT rebuild the shot language. Do not reach into another lane's files to
+                   look busy. The lift is in NEEDS MR. E and has been since 02:58.
   HUB          ->  STAND DOWN. Same shutdown, same rule. H29, H30 and H31 are shipped, merged
                    and ticked, and the freeze forbids inventing more. Nothing is queued.
   CONTENT      ->  STAND DOWN. Same shutdown, same rule. C-60 (phase2_words) is merged to main
@@ -5211,7 +5245,7 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
 ================================================================================
-## NEEDS MR. E (supervisor, updated 2026-11-16 02:58 CT). Six things, all short.
+## NEEDS MR. E (supervisor, updated 2026-11-16 03:58 CT). Seven things, all short.
   0. THE D95 SHEETS ARE WAITING - this is the one you asked for by 09:00 and it is in early.
      renders/art/d95/_overview.png (all ten, front) and _sheet_<key>.png (four views each), plus
      the same ten inside the engine at renders/cycles/d95/sheet_overview_front.png. Both halves
@@ -5224,8 +5258,18 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
      only thing in D94 no builder can take.
   0c. THE D94 SHUTDOWN - DO YOU LIFT IT? You shut HUD, HUB and CONTENT down at 00:55 for D94.
      The build bug is now fixed and ticked on both sides; what is left of D94 is your ring call
-     above and three small fit faults. Those three lanes are standing down and will keep standing
-     down until you say otherwise. One word either way.
+     above, one small mirror the game build lane already owns, and the pool question below. Those
+     three lanes are standing down and will keep standing down until you say otherwise. One word
+     either way.
+  0d. BOOTS AND GLOVES CAN NEVER BE LEGENDARY - WHICH WAY DO YOU WANT IT? Measured twice, by both
+     lanes separately. The legendary accessory pool is 16 deep: 8 rings, 6 cloaks, 2 amulets, and
+     no boots and no gloves at all. One cost scale decides rarity for every slot (441+ =
+     legendary), but boots top out at 420 and gloves lower, so those two slots are shut out of the
+     band - which is why D95's showcase had to borrow very-rare pieces to fill its legendary row.
+     Two ways out, and both change what a viewer paid for, so neither is ours to pick: (a) band
+     rarity PER SLOT, by cost quantile inside the slot, the way ornateness already works - nothing
+     gets dearer, but a 420 boot starts reading as legendary; or (b) leave the band alone and write
+     dearer boots and gloves, which is items.json and needs the content lane lifted. Your call.
   1. YOUR EYE ON THE LORD REVEAL (L72, shipped). renders/cycles/20261116_l72/sheet_reveal_mourncoil.png
      - the camera eases out as Mourncoil rises instead of cutting. Does the reveal land? The
      measurement says all eight lords are framed whole with the camera out of the walls; only you

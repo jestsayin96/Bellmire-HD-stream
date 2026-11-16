@@ -718,3 +718,140 @@ Note: the older `setUpTabs()` in app.js is dead code (the nav uses buttons now; 
 - Fix: each gear slot's text block (`.stx`) was built but never appended to its cell, so every slot drew as just an icon. Now attached.
 - Fix: the heroCard crest printed "[object SVGSVGElement]" because the H19 Bestiary's `sigil()` (returns an SVG) silently shadowed the initials helper of the same name. The initials helper is now `initials()`.
 - No CSP change, no new fetch/origin, no write path. `?mock=sheets` now carries last_seen, events and slot names (including a hostile `last_seen` that must be ignored).
+
+## H24 - the finder (find anything, from anywhere)
+
+One search field under the status line, over everything the page already holds in memory: living heroes, the fallen, bands (and their members), the Bestiary's lords and kin, and remembered Chronicle lines (the H14 browser history). Page-local only - no fetch, no origin, no write path, CSP untouched.
+
+- Opens a result by landing on the thing itself: a hero's own card (opened), the grave in The Fallen, the band card, the lord's Bestiary entry (filter reset to All), or the remembered moment in the journal via the H21.4 `#moment-<n>` id.
+- Results address their target by an INTEGER the page owns (`data-fi`, `data-bi`, the moment's `n`). No snapshot string goes into a selector, URL, href, src or style. Every result row is built with `el()`.
+- Honest empty state: says the finder only knows what this browser has seen (the live town + about two days of remembered Chronicle), and says so plainly when the town has not reported at all.
+- Keyboard: `/` focuses the field (never while typing in another input - the guild chat is safe), Up/Down choose, Enter opens, Escape closes (a second Escape clears). Min 2 characters, query capped at 60, control characters stripped.
+- Ranking: names that START with the query first, then word-start, then anywhere; stable across kinds (hero, fallen, band, lord, moment). 6 per kind, 24 total.
+- `beastBook()` was factored out of `renderBestiary` so the Bestiary and the finder read the same list.
+
+## H25 - the Night Watch (long-session mode)
+
+A button under the status line (`#watchBtn`, "Night watch" / "Back to the full page") flips ONE class, `watch`, on `<html>`; every change is CSS. It never touches the DOM the renderers build.
+
+- **Dimmed watch (.1)**: redefines the same tokens (parchment pulled back, ink kept dark, teal and gold toned down, night ground deeper). Faded rows (`opacity` .55-.88) return to full opacity in this mode; the three small status tags carry their own fixed colour pairs.
+- **Ambient layout (.2)**: shows only the town strip, the status line, the Chronicle and Bands below, side by side from 900 px and stacked under it. The finder, tab bar, Chronicle filters/search/away card, footer and the harlequin band fold away. The other tabs stay in the DOM (hidden), so the Back button restores everything.
+- **Quiet (.3)**: all animation/transition is off in this mode (the 60 s refresh re-runs `feedin` on every row in the full page, which reads as a flash). Chronicle and Bands scroll inside fixed-height boxes, the status and town rows keep a minimum height. Nothing in the page calls `focus()` on a refresh; the watch button keeps focus through updates. `prefers-reduced-motion` is therefore honoured by construction.
+- **Remembered (.4)**: key `bellmire.watch.v1`, value `watch` only. Read back through `ctrlStrip`, capped at 12 chars and compared to the single literal; anything else (including `<img src=x onerror=alert(1)>`) is ignored. Storage that throws leaves the full page. `?watch=1` turns it on for one visit without storing.
+- Known limit: the class is applied when `app.js` runs (CSP forbids an inline pre-paint script), so a remembered watch mode can show one frame of the full page before dimming.
+
+Measured (headless Chrome, 1280x800, `?watch=1` with `?mock=bands`, `?mock=chronicle`, `?mock=crowd`, `?state=stale|empty|fail`; worst colour stop vs the effective background, element opacity included; threshold 4.5:1, 3:1 for large text). 0 failures; lowest is 4.60:1.
+
+| text style | worst ratio |
+|---|---|
+| `h2.title fg=rgb(79, 26, 12)` | 4.60 |
+| `p.eyebrow fg=rgb(79, 26, 12)` | 4.60 |
+| `span.bmtag.st-other fg=rgb(23, 15, 8)` | 5.05 |
+| `small fg=rgb(42, 27, 12)` | 5.43 |
+| `span.bmcls fg=rgb(42, 27, 12)` | 5.43 |
+| `span.hpk fg=rgb(42, 27, 12)` | 5.43 |
+| `p.note fg=rgb(42, 27, 12)` | 5.43 |
+| `p.note.quiet fg=rgb(42, 27, 12)` | 5.43 |
+| `p.empty fg=rgb(42, 27, 12)` | 5.43 |
+| `button.watchbtn fg=rgb(7, 16, 15)` | 5.64 |
+| `span.cep-title fg=rgb(79, 26, 12)` | 5.69 |
+| `span.bandfloor fg=rgb(220, 207, 169)` | 6.05 |
+| `span.bmname fg=rgb(23, 15, 8)` | 6.17 |
+| `span.hpv fg=rgb(23, 15, 8)` | 6.17 |
+| `span.tk fg=rgb(173, 154, 114)` | 6.53 |
+| `span fg=rgb(173, 154, 114)` | 6.59 |
+| `span.bmtag.st-burning fg=rgb(239, 226, 191)` | 6.60 |
+| `p.sub fg=rgb(173, 154, 114)` | 6.60 |
+| `span.tv fg=rgb(170, 156, 120)` | 6.61 |
+| `span.tv.growv fg=rgb(170, 156, 120)` | 6.61 |
+| `b fg=rgb(170, 156, 120)` | 6.68 |
+| `h1.wordmark fg=rgb(170, 156, 120)` | 6.68 |
+| `span.cep-when fg=rgb(42, 27, 12)` | 6.70 |
+| `span.cep-sense fg=rgb(34, 22, 11)` | 7.11 |
+| `span.watchhint fg=rgb(173, 154, 114)` | 7.27 |
+| `button.cmoment fg=rgb(11, 79, 76)` | 7.33 |
+| `span.hd fg=rgb(11, 8, 5)` | 7.85 |
+| `span.bmtag.st-fallen fg=rgb(230, 217, 184)` | 8.04 |
+| `span.ckind fg=rgb(79, 26, 12)` | 11.03 |
+| `span.bandmeta fg=rgb(42, 27, 12)` | 13.00 |
+| `time.cwhen fg=rgb(42, 27, 12)` | 13.00 |
+| `span.bandname fg=rgb(23, 15, 8)` | 14.79 |
+| `p.cline fg=rgb(23, 15, 8)` | 14.79 |
+
+Quiet-update check: with `?watch=1&mock=bands` and `?mock=chronicle`, `load()` called twice with the page idle: 0 layout-shift entries, 0 running animations, every section's top/height identical before and after, scroll position unchanged, focus stays on `#watchBtn`. (Mock data is constant, so this proves the render path is geometry-stable, not that real changes are small.)
+
+Gaps, honestly: no desktop recording was made (headless capture only, no video); screenshots of full vs watch at 1280 and watch at 390 were taken but are not committed.
+
+## H22 - the first minute (newcomer welcome)
+
+A short welcome block sits between the status line and the finder: what Bellmire is (static copy, town's voice, about
+sixty words), ONE live line, and three doors. The live line is built in `paintWelcome()` from the payload `render()`
+last drew plus the same `last` / `lastError` / `STALE_MIN` the status line uses, so it is honest in every state: live
+("Live, updated N min ago"), stale or failed-refresh (the numbers are kept but prefixed "As of ..."), empty ("has not
+reported in yet") and failed fetch ("out of reach just now"). It says only what the snapshot carries - town stage from
+the lore tier names, heroes on the roll, heroes abroad (only when a bands field exists), and the newest Chronicle line.
+The doors (Get a hero / Watch what is happening / Learn the rules) switch to the Commands, Chronicle and die tabs via
+`setActiveTab()`; the markup only carries a page-owned `data-door` id that is matched against `TABS`. They link, they do
+not restate. "Got it - don't show this again" stores `seen` under `bellmire.welcome.v1` (per browser, whitelist-checked on
+read); a small "What is Bellmire?" button in the watch bar brings it back for the visit without un-dismissing. It is an
+ordinary block in the flow - no overlay, no sticky, no gate - the doors stack on a phone and sit three-across from 680 px.
+Hidden in Night watch. `?welcome=1` forces it open for local checks.
+
+## H26 - the journal stops guessing
+
+D60 (the town's own calendar) means each Chronicle row may now carry `day`, and tagged rows carry `kind` and `who`.
+`chronShape` validates all three (`day` a whole number 0..999999, `kind` a bounded identifier, `who` at most 6 names of
+40 chars, control characters stripped) and the H14 browser memory stores and re-validates them (`histClean`).
+- **Days, not stretches (.1).** A row with a `day` is grouped by it ("Day 41"); a row without one (v=3-era payload, untagged
+  row) falls back to the H21 90-minute wall-clock heuristic. Every group says which basis it is on ("Grouped by the town's own
+  day" / "No town day on these lines - grouped by gaps in this browser's clock, a guess") and the footer note counts both.
+- **Who, from the payload (.2).** Hero filter and the sheet's "Their own chronicle" use `who` when a row has it; only a row
+  with no `who` falls back to the whole-word name match, and that row is marked "inferred from name" (the filter note counts them).
+- **Filter by kind (.3).** The Event select prefers `kind` (raid, disaster/hunger, festival, death, delve, find, growth, and
+  a new "Town life" for day/treasury/caravan/arrival/watch/rally). Untagged rows are matched by wording as before and the note
+  says how many lines carry no kind and how many of the shown ones were matched by wording.
+- **Honest (.4).** Everything through el()/textContent; no field becomes a URL/src/href/style. index.html untouched - CSP byte-identical. KNOWN_V unchanged.
+Local checks: `?mock=journal` (days + kind + who, hostile `<img>` in a `who` entry and a non-identifier `kind`, which is treated as
+untagged) and `?mock=journal3` (the same rows with the fields stripped = a v=3 payload, old grouping with the fallback labelled).
+Headless Chromium over a stubbed snapshot: 0 dialogs, 0 <img>, no horizontal overflow at 390; ?state=empty/fail/stale, ?mock=chronicle,
+?mock=crowd, ?open=1 and ?mock=sheets&open=all all render.
+
+## H27 - Tales of the Die (the night's rolls get a board)
+The town's rolls (H9, `p.rolls`) are now kept the way H14 keeps the Chronicle: per-browser, newest first, capped. localStorage key
+`bellmire.rolls.v1`, at most 100 rows / 48 h / 60 KB (oldest dropped first). Each pass folds the live rolls into the memory, de-duplicates on
+(at, by, face, result), keeps a roll's first-seen time `k` for rolls the publisher sends without `at`, and persists. Every stored row is
+re-validated on read (`rollsClean`: normalizeRolls + control-char strip + timestamp regex), so a tampered store cannot inject anything.
+- Board: day dividers in the town's own voice (`dayVoice`, same as the Chronicle), each roll = roller, what they paid for (`what`, `cost`),
+  the number, the tier tag and the outcome line (`result`, exactly what the publisher sent).
+- A crit is the 20 (or, face unknown, tier crit); a fumble is the 1 (or tier fumble). Crit = restrained gold (field, face, tier tag); fumble =
+  ink-soft, dashed face, no red - no new colour. A tally chip pair above the list counts crits/fumbles in the rolls SHOWN, so it always matches.
+- Empty (nothing live, nothing remembered): "No rolls yet tonight." With the town silent but rolls remembered, the board shows them and says so.
+- Storage absent/full/throwing: renders from the live rolls only. No new fetch/origin, no write path, CSP untouched (index.html only gained the
+  page-owned `<p id="rollTally">`). KNOWN_V unchanged.
+- FIELD WANTED, NOT PRESENT: the brief says crit/fumble outcome lines are `viewer_roll` in lore_lines.json (C-cycle 38). `data/lore_lines.json` on
+  hub/main has NO `viewer_roll` key, so nothing is frozen into the hub for them; the board shows the publisher's own `result` and draws no line
+  when it is absent. If the publisher omits `result` for crit/fumble, ask the game build to send it (or land the lines and a later H item freezes them).
+Local check: `?mock=roll` (crit, fumble, two ordinary, one hostile-name roller `<img src=x onerror=alert(1)>`). Headless Chromium over a stubbed
+snapshot: 5 rows, 1 crit + 1 fumble matching the chips, reload with no mock keeps all 5, a multi-day store divides Today/Yesterday, a tampered
+store (hostile strings, junk rows, bad timestamp) renders as text, 0 dialogs, 0 <img>/<script> in the feed, no horizontal scroll at 390,
+?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd and ?open=1 all render with 0 page errors.
+
+## H28 - a hero you can point at (deep link)
+- `#hero-<n>` opens that hero's sheet. n is an integer the PAGE computes: 32-bit FNV-1a of the lower-cased name (`heroAddr`). No name is ever in the URL.
+- The "Copy a link to this hero" control on a living hero's sheet writes `<page address>#hero-<n>` to the clipboard (falls back to the address bar when the clipboard is refused). Fallen heroes have no link control (the finder and Fallen tab cover them).
+- An address that matches nobody on the roll (or is malformed, e.g. `#hero-abc`, too many digits) lands on Heroes with the plain note "That hero is not on tonight's roll." No error, no blank page.
+- Applied after each render only when the address changes, so the 60 s refresh never re-lands the viewer. Two heroes whose names collide on the 32-bit hash would open the first one on the roll (vanishingly unlikely).
+- Known limit: the link is per NAME; a renamed hero's old link goes to the note. The snapshot carries no stable hero id (a field the hub would prefer).
+
+## H30 - the Satchel tab (fourteenth)
+Signed-in viewer only (twLogin from H6; hero matched by exact login; the H11 pin is NOT used). Carried items with weight/value/value-per-pound sort (default), slot chips, text filter; carry bar (hpbar, CSSOM number) with 1/3 and 2/3 ticks = 5e encumbered/heavy; vault; own orders; stone (double press). Buttons send chat commands via satSend() -> satCommand(): fixed verb table + ONE argument stripped of C0/C1/U+2028/9 and capped at 80, so a name cannot carry a second line or command. Mocks: ?mock=satchel (derived from STR) satchel0 (empty) satchel1 (light) satchel3 (encumbered) satchel2 (heavy) satchelout (signed out); mock buttons print the command instead of sending.
+ASSUMED command names (not in the plan, confirm with D81): !withdraw (vault take-out), !stone. Edit SAT_VERBS / SAT_STONE only.
+Publisher contract read (v5+): hero.satchel[{name,qty,weight,sell,slot,rarity,worn}], hero.carry{weight,cap,band}|hero.encumbrance, hero.vault[]|{items,slots}, hero.where. Missing = "not published", never faked.
+Item icons (D73 PNGs) NOT used: they live outside web/ and a snapshot value cannot choose a src; glyphs from ICON_SET instead. Needs Mr. E's call (copy a curated set into web/ + whitelist).
+
+## H31 - the Season tab
+Fifteenth tab ("Season"), the hub home of the L66 leaderboard (the stream keeps no leaderboard, COORDINATION 13).
+Four cards, top ten each, living + fallen: Went deepest (`deepest`), Earned most, Died hardest (fallen only, by deepest
+floor), Lived longest. Honest gaps: the publisher sends only current `gold` today, so "Earned most" ranks gold held and
+says so; no age/born_day fields exist yet, so "Lived longest" shows an explanatory empty state. Both light up by
+themselves when the fields arrive (names in HUB_SECURITY.md). Checks: ?mock=season | season0 | season3.

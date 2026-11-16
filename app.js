@@ -252,6 +252,7 @@ function showStatus() {
   st.innerHTML = html;    // page-owned strings only; never snapshot data
   const r = $("retry");
   if (r) r.onclick = () => { r.disabled = true; r.textContent = "Asking…"; load(); };
+  try { paintWelcome(); } catch (e) { /* the welcome must never break the status line */ }
 }
 
 // ---------------------------------------------------------------- the fetch
@@ -289,7 +290,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "season", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -315,7 +316,7 @@ function renderNothing(failed) {
 // OUTSIDE this set is an honest "this page needs an update", never a guess. ACTION for
 // the desktop: publish the Satchel sell fields as v = "3" (or extend this set BEFORE
 // shipping a different number). See docs/HUB_SECURITY.md (H11).
-const KNOWN_V = new Set(["1", "2", "3", "4"]);   // v4 (H23): initiative, speed, gear by slot, status, per-hero last_seen + events
+const KNOWN_V = new Set(["1", "2", "3", "4", "5"]);   // v4 (H23): initiative, speed, gear by slot, status, per-hero last_seen + events
 function render(p) {
   if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
@@ -324,6 +325,7 @@ function render(p) {
   }
   $("nothing").classList.add("hide");
   for (const id of SECTIONS) $(id).classList.remove("hide");
+  welcomeP = p;
   const t = p.town || {};
   $("townName").textContent = t.name ? String(t.name) : "the Guild Hall";
   renderTown(t);
@@ -338,6 +340,11 @@ function render(p) {
   renderRolls(p.rolls);
   renderLore();
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
+  try { renderShops(p); } catch (e) { /* the Shops tab must never break the rest of the page */ }
+  try { renderSatchel(p); } catch (e) { /* the Satchel tab must never break the rest of the page */ }
+  try { renderSeason(p); } catch (e) { /* the Season tab must never break the rest of the page */ }
+  try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
+  try { applyHeroLink(p); } catch (e) { /* a bad link must never break the page */ }
 }
 
 // The town-status strip (H4): the day, the population, the treasury and - the day
@@ -980,7 +987,12 @@ function personalLines(name, ring) {
   const live = p ? chronEntries(p.chronicle) : [];
   const liveKeys = new Set(live.map(histKey));
   const rem = chronMem.filter((r) => !liveKeys.has(histKey(r))).map((r) => Object.assign(chronShape(r), { ts: histTs(r) }));
-  return live.concat(rem).filter((e) => namesIn(e.s, key)).slice(0, 8);
+  const out = [];
+  for (const e of live.concat(rem)) {
+    const m = heroMatch(e, key);          // H26.2: the town's `who` first, the name guess only for untagged lines
+    if (m) { if (m === 2) e.inf = true; out.push(e); }
+  }
+  return out.slice(0, 8);
 }
 // where is this hero right now, in the town's own voice. Returns chips + any honest gap.
 function heroConditions(h, fallen, gaps) {
@@ -1058,6 +1070,12 @@ function heroSheet(h, mode) {
     pin.title = "Remembered in this browser only, so your hero is easy to find next time.";
     pin.addEventListener("click", () => setMyHero(mineNow ? "" : (h.name || "")));
     sid.append(pin);
+    // H28: put a link straight to this hero on the clipboard
+    const cp = el("button", "pinbtn linkcopy", "Copy a link to this hero");
+    cp.type = "button";
+    cp.title = "Copies an address that opens this hero's sheet. The address holds a number, not the name.";
+    cp.addEventListener("click", () => heroLinkCopy(h, cp));
+    sid.append(cp);
   }
   sheet.append(sid);
 
@@ -1226,11 +1244,13 @@ function heroSheet(h, mode) {
       const li = el("li", "pl kind-" + e.key);
       li.append(icon(e.icon, "chipic"));
       li.append(el("span", "pls", e.s));
+      if (e.inf) li.append(el("span", "pinf", "inferred from name"));
       const a = e.at ? ago(e.at) : (e.ts ? ago(new Date(e.ts).toISOString()) : null);
       if (a) li.append(el("span", "plw", a.text));
       ul.append(li);
     }
     life.append(ul);
+    if (lines.some((e) => e.inf)) life.append(el("p", "plnote", "Lines marked \u201cinferred from name\u201d were matched by this page from the wording; the rest are tagged to this hero by the town."));
     const deaths = lines.filter((e) => e.t === "death").length;
     if (deaths) life.append(el("p", "plnote", deaths === 1 ? "The chronicle records one death." : "The chronicle records " + deaths + " deaths."));
   }
@@ -1285,9 +1305,11 @@ function renderFallen(fs) {
   const box = $("fallenList");
   box.replaceChildren();
   if (!fs.length) { box.append(el("p", "empty", "No one has fallen. Yet.")); return; }
-  for (const f of fs) {
+  for (let fi = 0; fi < fs.length; fi++) {
+    const f = fs[fi];
     if (f == null || typeof f !== "object") continue;
     const g = el("article", "grave");
+    g.dataset.fi = String(fi);            // H24: integer the page owns, so the finder can land here
     const head = el("div", "ghead");
     head.append(coat(nameOf(f), "md"));
     const who = el("div", "gwho");
@@ -1463,7 +1485,7 @@ function renderBands(raw) {
     if (note) note.textContent = "";
     return;
   }
-  for (const p of parties) box.append(partyCard(p));
+  parties.forEach((p, bi) => { const cardEl = partyCard(p); cardEl.dataset.bi = String(bi); box.append(cardEl); });   // H24: integer index
   const heads = parties.reduce((a, p) => a + p.members.length, 0);
   if (count) count.textContent = parties.length + (parties.length === 1 ? " band" : " bands");
   if (note) note.textContent = parties.length + (parties.length === 1 ? " band" : " bands")
@@ -1504,6 +1526,20 @@ function chronEntries(raw) {
     .slice(0, CHRON_MAX)
     .map(chronShape);
 }
+// H26: the town's own tags (D60). Each is validated to a bounded shape before it is stored or drawn:
+// `day` a whole number 0..999999, `kind` a bounded identifier, `who` at most 6 names of 40 characters.
+// All three are optional; absent or malformed means "untagged" and the page falls back, visibly.
+const chronDay = (v) => { const n = typeof v === "number" ? v : (typeof v === "string" && /^\d{1,6}$/.test(v) ? +v : NaN); return Number.isInteger(n) && n >= 0 && n <= 999999 ? n : null; };
+const chronKind = (v) => { const k = String(v == null ? "" : v).toLowerCase().trim(); return /^[a-z0-9][a-z0-9_-]{0,23}$/.test(k) ? k : ""; };
+const chronWho = (v) => {
+  const out = [];
+  for (const w of (typeof v === "string" ? [v] : arr(v)).slice(0, 8)) {
+    if (typeof w !== "string") continue;
+    const n = ctrlStrip(w).slice(0, 40);
+    if (n && !out.includes(n)) out.push(n);
+  }
+  return out.slice(0, 6);
+};
 function chronShape(e) {
       const rawT = String(e.t == null ? "" : e.t).toLowerCase().trim();
       const t = /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rawT) ? rawT : "other";   // sane key, else "other"
@@ -1511,7 +1547,14 @@ function chronShape(e) {
       return { t, known: !!known, label: known ? known.one : (t === "other" ? "Other" : titleCase(t)),
                 icon: CHRON_ICON.has(t) ? t : "other",
                key: t.replace(/[^a-z0-9]+/g, "-"),           // for the CSS class only
-               s: String(e.s), at: typeof e.at === "string" ? e.at : "" };
+               s: String(e.s), at: typeof e.at === "string" ? e.at : "",
+               day: chronDay(e.day), kd: chronKind(e.kind), who: chronWho(e.who) };
+}
+// copy the validated tags from a shaped line onto a remembered row (only the ones it has)
+function chronCarry(r, e) {
+  if (r.day == null && e.day != null) r.day = e.day;
+  if (!r.kind && e.kd) r.kind = e.kd;
+  if ((!r.who || !r.who.length) && e.who && e.who.length) r.who = e.who.slice();
 }
 
 // ---- H14: the chronicle remembers. A small rolling history lives in THIS browser only
@@ -1538,9 +1581,14 @@ function histClean(a) {
     if (!s) continue;
     const rt = String(r.t == null ? "" : r.t).toLowerCase().trim();
     const at = typeof r.at === "string" && r.at.length <= 40 && CHRON_AT_OK.test(r.at) ? r.at : "";
-    out.push({ t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
+    const row = { t: /^[a-z0-9][a-z0-9 _-]{0,23}$/.test(rt) ? rt : "other", s, at,
                k: typeof r.k === "number" && isFinite(r.k) ? r.k : Date.now(),
-               n: Number.isInteger(r.n) && r.n > 0 && r.n < 2e9 ? r.n : 0 });
+               n: Number.isInteger(r.n) && r.n > 0 && r.n < 2e9 ? r.n : 0 };
+    const d = chronDay(r.day), kd = chronKind(r.kind), w = chronWho(r.who);    // H26: re-validated after the storage round trip
+    if (d != null) row.day = d;
+    if (kd) row.kind = kd;
+    if (w.length) row.who = w;
+    out.push(row);
   }
   return out;
 }
@@ -1566,8 +1614,9 @@ function chronRemember(live) {
   for (const e of live) {
     const r = { t: e.t, s: ctrlStrip(e.s).slice(0, CHRON_S_CAP), at: CHRON_AT_OK.test(e.at) ? e.at : "", k: now };
     if (!r.s) continue;
+    chronCarry(r, e);
     const old = by.get(histKey(r));
-    if (old) { if (!old.at && r.at) old.at = r.at; } else { r.n = ++chronSeq; by.set(histKey(r), r); }
+    if (old) { if (!old.at && r.at) old.at = r.at; chronCarry(old, e); } else { r.n = ++chronSeq; by.set(histKey(r), r); }
   }
   let rows = [...by.values()].filter((r) => histTs(r) >= now - CHRON_HIST_MS)
     .sort((a, b) => histTs(b) - histTs(a)).slice(0, CHRON_HIST_MAX);
@@ -1596,15 +1645,27 @@ function dayVoice(ts) {
 // line - no snapshot string is ever written into a URL, src, href or style.
 const CHRON_DISASTER = /disaster|\bfire\b|burn|drought|famine|sickness|plague|hurricane|tornado|earthquake|meteor|scarstorm|flood|blight|volcano|cold ?snap/i;
 const CHRON_FESTIVAL = /festival|\bfair\b|harvest|feast|celebrat|revel|tournament|carnival/i;
+// H26: a topic prefers the town's own `kind` tag when a line has one; only an untagged line is
+// matched by its wording (the old guess), and the Event filter says how many lines that was.
+const topicOf = (k, label, kinds, guess) => ({ k, label, kinds, test: (e) => (e.kd ? kinds.includes(e.kd) : guess(e)) });
 const CHRON_TOPICS = [
-  { k: "all", label: "Every kind of event", test: () => true },
-  { k: "raid", label: "Raids", test: (e) => e.t === "raid" || /\braid|bandit|siege/i.test(e.s) },
-  { k: "disaster", label: "Disasters", test: (e) => CHRON_DISASTER.test(e.s) },
-  { k: "festival", label: "Festivals", test: (e) => CHRON_FESTIVAL.test(e.s) },
-  { k: "death", label: "Deaths", test: (e) => e.t === "death" },
-  { k: "delve", label: "Delves", test: (e) => e.t === "delve" },
-  { k: "growth", label: "Town growth", test: (e) => e.t === "town" || /grows into|town level|\bbuilt\b|raised/i.test(e.s) },
+  { k: "all", label: "Every kind of event", kinds: [], test: () => true },
+  topicOf("raid", "Raids", ["raid"], (e) => e.t === "raid" || /\braid|bandit|siege/i.test(e.s)),
+  topicOf("disaster", "Disasters", ["disaster", "hunger"], (e) => CHRON_DISASTER.test(e.s)),
+  topicOf("festival", "Festivals", ["festival"], (e) => CHRON_FESTIVAL.test(e.s)),
+  topicOf("death", "Deaths", ["death"], (e) => e.t === "death"),
+  topicOf("delve", "Delves", ["delve"], (e) => e.t === "delve"),
+  topicOf("find", "Finds", ["find"], (e) => e.t === "loot"),
+  topicOf("growth", "Town growth", ["growth"], (e) => e.t === "town" || /grows into|town level|\bbuilt\b|raised/i.test(e.s)),
+  topicOf("town", "Town life", ["day", "treasury", "caravan", "arrival", "watch", "rally"], (e) => e.t === "town"),
 ];
+// H26.2: does this line belong to this hero (key lower-cased)? 1 = the town's own `who` tag says so,
+// 2 = inferred by the page from the name in the wording (only for a line with no `who`), 0 = no.
+function heroMatch(e, key) {
+  if (!key) return 1;
+  if (e.who && e.who.length) return e.who.some((n) => n.toLowerCase() === key) ? 1 : 0;
+  return namesIn(e.s, key) ? 2 : 0;
+}
 function chronFiltLoad() {
   try {
     const raw = localStorage.getItem(CHRON_F_KEY);
@@ -1721,6 +1782,57 @@ document.addEventListener("visibilitychange", () => {
   chronHiddenAt = 0;
 });
 window.addEventListener("pagehide", () => { if (chronAwayDone) chronMarkSeen(true); });
+// ---- H28 a hero you can point at
+// "#hero-<n>" opens that hero's sheet. n is an integer: FNV-1a (32-bit) of the lower-cased
+// name, computed by THIS page. The fragment is the only thing read from the URL, it must match
+// the strict pattern below, and n is only ever COMPARED to the same number computed for each
+// hero in the snapshot - never a selector, URL, src, href, style or markup. A hostile name just
+// yields a number. No match -> the roster and a constant message; nothing is fetched or written.
+function heroAddr(name) {
+  const key = String(name == null ? "" : name).toLowerCase();
+  let a = 2166136261;
+  for (let i = 0; i < key.length; i++) { a ^= key.charCodeAt(i); a = Math.imul(a, 16777619) >>> 0; }
+  return a >>> 0;
+}
+function heroLinkFrom() {
+  const m = /^hero-(\d{1,10})$/.exec(String(location.hash || "").replace(/^#/, ""));
+  if (!m) return /^hero-/.test(String(location.hash || "").replace(/^#/, "")) ? 4294967296 : -1;   // a malformed hero address matches nobody
+  const n = +m[1];
+  return n <= 4294967295 ? n : 4294967296;
+}
+let heroLinkHandled = -1;
+function applyHeroLink(p, force) {
+  const n = heroLinkFrom();
+  const note = $("heroLinkNote");
+  if (n < 0) { heroLinkHandled = -1; if (note) { note.classList.add("hide"); note.textContent = ""; } return; }
+  if (!force && n === heroLinkHandled) return;            // the 60 s refresh must not re-land the viewer
+  if (!p || typeof p !== "object") return;                // no report yet: try again when one arrives
+  heroLinkHandled = n;
+  const hs = arr(p.heroes);
+  const idx = hs.findIndex((h) => { const nm = nameOf(h); return nm && heroAddr(nm) === n; });
+  setActiveTab("heroes");
+  if (idx < 0) {
+    if (note) { note.textContent = "That hero is not on tonight\u2019s roll."; note.classList.remove("hide"); }
+    return;
+  }
+  if (note) { note.classList.add("hide"); note.textContent = ""; }
+  heroFilter = ""; const f = $("find"); if (f) f.value = "";
+  heroShown = Math.max(heroShown, Math.ceil((idx + 2) / HERO_PAGE) * HERO_PAGE);
+  renderHeroes(hs);
+  const want = nameOf(hs[idx]);
+  const card = [...$("heroList").querySelectorAll("details.hero")].find((d) => (d.querySelector(".hname") || {}).textContent === want);
+  if (card) { card.open = true; finderLand(card); }
+}
+window.addEventListener("hashchange", () => { try { applyHeroLink(welcomeP, true); } catch (e) {} });
+function heroLinkCopy(h, btn) {
+  const nm = nameOf(h);
+  const label = "Copy a link to this hero";
+  const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = label; }, 2000); };
+  if (!nm) { flash("No link for this hero"); return; }
+  const url = location.href.replace(/[#?].*$/, "") + "#hero-" + heroAddr(nm);
+  try { history.replaceState(null, "", "#hero-" + heroAddr(nm)); heroLinkHandled = heroAddr(nm); } catch (e) {}
+  try { navigator.clipboard.writeText(url).then(() => flash("Link copied"), () => flash("Link is in the address bar")); } catch (e) { flash("Link is in the address bar"); }
+}
 // ---- H21.4 a moment you can point at
 function momentLink(n, btn) {
   const flash = (m) => { btn.textContent = m; setTimeout(() => { btn.textContent = "Link"; }, 1800); };
@@ -1830,7 +1942,7 @@ function paintChronicle() {
   const q = chronText.trim().toLowerCase();
   const hkey = chronHero.trim().toLowerCase();
   const topic = CHRON_TOPICS.find((x) => x.k === chronTopic) || CHRON_TOPICS[0];
-  const pass = (e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)) && (!hkey || namesIn(e.s, hkey)) && topic.test(e);
+  const pass = (e) => !chronOff.has(e.t) && (!q || e.s.toLowerCase().includes(q)) && heroMatch(e, hkey) > 0 && topic.test(e);
   const anyFilter = !!(q || hkey || chronOff.size || chronTopic !== "all");
   const shownAll = entries.filter(pass);
   if (!shownAll.length) {
@@ -1841,19 +1953,25 @@ function paintChronicle() {
     return;
   }
 
-  // ---- H21.1 episodes: stretches split by a long quiet gap or by length
+  // ---- H26.1 days, not stretches: a line that carries the town's own `day` is grouped by it; a line
+  // without one (a v=3-era payload, an untagged row) falls back to the H21 wall-clock heuristic,
+  // and every group says which basis it is on.
   const eps = [];
   for (const e of entries) {
     const cur = eps[eps.length - 1];
-    if (cur && cur.last - e.ts <= CHRON_EP_GAP && cur.first - e.ts <= CHRON_EP_SPAN) { cur.items.push(e); cur.last = e.ts; }
-    else eps.push({ first: e.ts, last: e.ts, items: [e] });
+    if (e.day != null) {
+      if (cur && cur.day === e.day) { cur.items.push(e); cur.last = e.ts; }
+      else eps.push({ day: e.day, first: e.ts, last: e.ts, items: [e] });
+    } else if (cur && cur.day == null && cur.last - e.ts <= CHRON_EP_GAP && cur.first - e.ts <= CHRON_EP_SPAN) { cur.items.push(e); cur.last = e.ts; }
+    else eps.push({ day: null, first: e.ts, last: e.ts, items: [e] });
   }
-  let drawn = 0, sawEarlier = false;
+  let drawn = 0, sawEarlier = false, dayGroups = 0, clockGroups = 0;
   for (const ep of eps) {
     const items = ep.items.filter(pass);
     if (!items.length) continue;
     const hasLive = ep.items.some((e) => !e.rem);
-    const key = "e" + ep.last;
+    const key = (ep.day != null ? "d" + ep.day + "-" : "e") + ep.last;
+    if (ep.day != null) dayGroups++; else clockGroups++;
     const focusIn = chronFocusId != null && ep.items.some((e) => e.n === chronFocusId);
     const dflt = drawn === 0 || anyFilter;     // the newest stretch (or any filter hit) is open; older ones fold
     let open = focusIn ? true : (chronOpen.has(key) ? chronOpen.get(key) : dflt);
@@ -1864,8 +1982,12 @@ function paintChronicle() {
     head.type = "button";
     head.setAttribute("aria-expanded", open ? "true" : "false");
     head.setAttribute("aria-controls", hid);
-    head.append(el("span", "cep-title", drawn === 0 && now - ep.first < CHRON_EP_GAP ? "Now, as the town tells it" : dayVoice(ep.first)),
+    const fresh = drawn === 0 && now - ep.first < CHRON_EP_GAP;
+    const title = ep.day != null ? "Day " + num(ep.day) + (fresh ? " \u2013 now, as the town tells it" : "")
+      : fresh ? "Now, as the town tells it" : dayVoice(ep.first);
+    head.append(el("span", "cep-title", title),
       el("span", "cep-when", chronRange(ep.first, ep.last) + " \u00b7 " + plural(items.length, "line", "lines")),
+      el("span", "cep-basis", ep.day != null ? "Grouped by the town\u2019s own day." : "No town day on these lines - grouped by gaps in this browser\u2019s clock, a guess."),
       el("span", "cep-sense", chronSense(items)));
     const body = el("ol", "cep-list");
     body.id = hid;
@@ -1889,6 +2011,12 @@ function paintChronicle() {
       const cb = el("div", "cbody");
       const ch = el("div", "chead");
       ch.append(el("span", "ckind", e.label));    // textContent; a novel kind shows its own name, escaped
+      if (e.who && e.who.length) ch.append(el("span", "cwho", e.who.join(", ")));   // the town's `who` tag, textContent
+      if (hkey && heroMatch(e, hkey) === 2) {
+        const inf = el("span", "cinf", "inferred from name");
+        inf.title = "This line carries no hero tag from the town; the page matched the name in its wording.";
+        ch.append(inf);
+      }
       const a = ago(e.at);
       if (a) {
         const time = el("time", "cwhen", a.text);
@@ -1913,8 +2041,26 @@ function paintChronicle() {
   note.className = "note";
   note.textContent = (shownAll.length === entries.length
     ? entries.length + (entries.length === 1 ? " entry" : " entries")
-    : "Showing " + shownAll.length + " of " + entries.length) + ", newest first, in " + plural(drawn, "stretch", "stretches") +
+    : "Showing " + shownAll.length + " of " + entries.length) + ", newest first, in " +
+    (clockGroups === 0 ? plural(drawn, "day", "days") + " by the town\u2019s own calendar"
+      : dayGroups === 0 ? plural(drawn, "stretch", "stretches") + " guessed from gaps in the clock (these lines carry no town day)"
+      : plural(dayGroups, "town day", "town days") + " and " + plural(clockGroups, "clock-guessed stretch", "clock-guessed stretches")) +
     (drawn > 1 ? " - tap one to fold or open it." : ".");
+  {
+    const extra = [];
+    if (chronTopic !== "all") {
+      const noKind = entries.filter((e) => !e.kd).length, shownNoKind = shownAll.filter((e) => !e.kd).length;
+      extra.push(noKind ? plural(noKind, "line", "lines") + " in the journal carry no kind from the town and could not be classified; " +
+        (shownNoKind ? (shownNoKind === 1 ? "1 of them was" : num(shownNoKind) + " of them were") + " matched by wording." : "none was matched by wording.")
+        : "Every line carries the town\u2019s own kind.");
+    }
+    if (hkey) {
+      const inferred = shownAll.filter((e) => heroMatch(e, hkey) === 2).length;
+      extra.push(inferred ? plural(inferred, "line is", "lines are") + " inferred from the hero\u2019s name" + (shownAll.length > inferred ? "; the other " + (shownAll.length - inferred) + " are tagged to them by the town." : ".")
+        : "Every line shown is tagged to this hero by the town.");
+    }
+    if (extra.length) note.textContent += " " + extra.join(" ");
+  }
   if (chronFocusId != null) {
     const target = document.getElementById("moment-" + chronFocusId);   // id built from an integer we own
     chronFocusId = null;
@@ -2142,7 +2288,7 @@ function rollTierOf(r) {
 }
 function firstStr(...vals) { for (const v of vals) if (v != null && String(v).trim() !== "") return String(v); return ""; }
 
-function normalizeRolls(raw) {
+function normalizeRolls(raw, cap) {
   return arr(raw)
     .filter((r) => r && typeof r === "object")
     .map((r) => ({
@@ -2155,7 +2301,7 @@ function normalizeRolls(raw) {
       at: typeof r.at === "string" ? r.at : (typeof r.time === "string" ? r.time : ""),
     }))
     .filter((r) => r.face != null || r.result || r.what)   // drop entries with nothing to show
-    .slice(0, ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
+    .slice(0, cap || ROLL_FEED_MAX);   // cap AFTER dropping empties, so a padded publisher array still fills the feed
 }
 
 // throw the die to a KNOWN value and settle on that face. Used by the town-roll
@@ -2193,8 +2339,9 @@ function rollKey(r) { return JSON.stringify([r.at, r.by, r.face, r.result]); }
 // one entry in the rolls feed. Mirrors a chronicle row: a die-face badge, a head
 // (who / what / tier / when) and the plain-language outcome line.
 function rollEntry(r) {
+  const kind = rollKind(r);
   const li = el("li", "rentry" + (r.tier ? " tier-" + r.tier : "")
-    + (r.face === 20 ? " crit" : r.face === 1 ? " crat" : ""));
+    + (kind === "crit" ? " crit" : kind === "fumble" ? " crat" : ""));
   const face = el("span", "rface");
   face.setAttribute("aria-hidden", "true");
   face.append(el("span", "rfacen", r.face != null ? r.face : "\u00b7"));
@@ -2235,27 +2382,107 @@ function announceTownRoll(r, first) {
   }
 }
 
+// ---- H27: Tales of the Die. The night's rolls are kept the way H14 keeps the Chronicle:
+// per-browser, newest first, capped, day-divided. localStorage key `bellmire.rolls.v1`.
+// Stored rows are re-validated on every read (storage is attacker-reachable text that has
+// been through one round trip) and reach the DOM only through rollEntry() -> el()/textContent.
+// A crit is the 20 (or, face unknown, tier "crit"); a fumble is the 1 (or tier "fumble").
+// Nothing here writes to a network, a URL or a selector.
+const ROLL_HIST_KEY = "bellmire.rolls.v1";
+const ROLL_HIST_MAX = 100, ROLL_HIST_MS = 48 * 3600000, ROLL_HIST_BYTES = 60000;
+let rollMem = [], rollMemLoaded = false;
+function rollKind(r) {
+  if (r.face === 20 || (r.face == null && r.tier === "crit")) return "crit";
+  if (r.face === 1 || (r.face == null && r.tier === "fumble")) return "fumble";
+  return "";
+}
+const rollTs = (r) => { const a = Date.parse(r.at); return isFinite(a) ? a : (r.k || 0); };
+function rollsClean(a) {
+  const out = [];
+  for (const r of arr(a).slice(0, ROLL_HIST_MAX * 2)) {
+    if (!r || typeof r !== "object") continue;
+    const n = normalizeRolls([r], 1)[0];
+    if (!n) continue;
+    n.by = ctrlStrip(n.by); n.what = ctrlStrip(n.what); n.result = ctrlStrip(n.result); n.cost = ctrlStrip(n.cost);
+    n.at = typeof n.at === "string" && n.at.length <= 40 && CHRON_AT_OK.test(n.at) ? n.at : "";
+    n.k = typeof r.k === "number" && isFinite(r.k) && r.k > 0 && r.k <= Date.now() + 60000 ? r.k : Date.now();
+    out.push(n);
+  }
+  return out;
+}
+function rollMemEnsure() {
+  if (rollMemLoaded) return;
+  rollMemLoaded = true;
+  try {
+    const raw = localStorage.getItem(ROLL_HIST_KEY);
+    rollMem = raw && raw.length <= ROLL_HIST_BYTES * 2 ? rollsClean(JSON.parse(raw)) : [];
+  } catch (e) { rollMem = []; }
+}
+// fold the live rolls into the history; prune by age, count and bytes; persist. Returns the rows.
+function rollsRemember(live) {
+  rollMemEnsure();
+  const now = Date.now(), old = new Map();
+  for (const r of rollMem) if (!old.has(rollKey(r))) old.set(rollKey(r), r);
+  const seen = new Set(), fresh = [];
+  for (const r0 of rollsClean(live)) {
+    const key = rollKey(r0);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const prev = old.get(key);
+    fresh.push(prev ? Object.assign(r0, { k: prev.k }) : Object.assign(r0, { k: now }));
+  }
+  const rest = rollMem.filter((r) => !seen.has(rollKey(r)));
+  let rows = fresh.concat(rest).filter((r) => rollTs(r) >= now - ROLL_HIST_MS)
+    .sort((a, b) => rollTs(b) - rollTs(a)).slice(0, ROLL_HIST_MAX);
+  let json = "";
+  try {
+    json = JSON.stringify(rows);
+    while (json.length > ROLL_HIST_BYTES && rows.length) { rows.pop(); json = JSON.stringify(rows); }
+  } catch (e) { rows = []; }
+  rollMem = rows;
+  try { localStorage.setItem(ROLL_HIST_KEY, json || "[]"); } catch (e) { /* full or blocked: carry on in memory */ }
+  return rows;
+}
+
 function renderRolls(raw) {
-  const feed = $("rollFeed"), note = $("rollNote");
+  const feed = $("rollFeed"), note = $("rollNote"), tally = $("rollTally");
   if (!feed || !note) return;
-  const rolls = normalizeRolls(raw);
+  const live = normalizeRolls(raw);
+  let rows = [];
+  try { rows = rollsRemember(raw); } catch (e) { rows = live; }   // storage trouble never costs the live feed
+  if (!rows.length && live.length) rows = live;
   feed.replaceChildren();
-  if (!rolls.length) {
+  if (tally) tally.replaceChildren();
+  if (!rows.length) {
     lastRollKey = null;     // so the next real roll animates fresh
     note.className = "note quiet";
-    note.textContent = "No rolls from the town yet. When a viewer spends channel points or bits to roll the die for the town \u2014 to pass a law, set off an event or raise a building \u2014 the roll and how it turns out appear here. The die is thrown in the game; this page only reports it.";
+    note.textContent = "No rolls yet tonight. When a viewer spends channel points or bits to roll the die for the town — to pass a law, set off an event or raise a building — the roll and how it turns out will be kept here.";
     return;
   }
-  for (const r of rolls) feed.append(rollEntry(r));
-  note.className = "note";
-  note.textContent = rolls.length + (rolls.length === 1 ? " roll" : " rolls") + " from the town, newest first. The die above shows the latest.";
-  const top = rolls[0];
-  const key = rollKey(top);
-  if (key !== lastRollKey) {
-    const first = lastRollKey === null;
-    lastRollKey = key;
-    if (top.face != null) announceTownRoll(top, first);
+  let crits = 0, fumbles = 0, day = null;
+  for (const r of rows) {
+    const k = rollKind(r);
+    if (k === "crit") crits++; else if (k === "fumble") fumbles++;
+    const ts = rollTs(r), d = new Date(ts); d.setHours(0, 0, 0, 0);
+    if (day !== d.getTime()) { day = d.getTime(); feed.append(el("li", "rdiv", dayVoice(ts))); }
+    feed.append(rollEntry(r));
   }
+  if (tally) {
+    const chip = (cls, n, label) => { const c = el("span", "rtally " + cls); c.append(el("b", null, String(n)), document.createTextNode(" " + label)); return c; };
+    tally.append(chip("rtally-crit", crits, crits === 1 ? "crit" : "crits"), chip("rtally-fumble", fumbles, fumbles === 1 ? "fumble" : "fumbles"));
+  }
+  note.className = "note";
+  const liveBit = live.length ? " The die above shows the latest." : " The town has sent no rolls just now; these are the ones this browser remembers.";
+  note.textContent = rows.length + (rows.length === 1 ? " roll" : " rolls") + " kept, newest first." + liveBit;
+  const top = live[0];
+  if (top) {
+    const key = rollKey(top);
+    if (key !== lastRollKey) {
+      const first = lastRollKey === null;
+      lastRollKey = key;
+      if (top.face != null) announceTownRoll(top, first);
+    }
+  } else lastRollKey = null;
 }
 
 // ---------------------------------------------------------------- problem state
@@ -2520,6 +2747,8 @@ async function spotlightMe() {
     const login = String((j.data && j.data[0] && j.data[0].login) || "").toLowerCase();
     twLogin = login || null;
     highlightMyHero(login);
+    try { if (lastShopP) renderShops(lastShopP); } catch (e) {}
+    try { if (lastSatP) renderSatchel(lastSatP); } catch (e) {}
     if (chatOpened) chatConnect();                 // reconnect the guild chat with their own voice
   } catch (e) {
     signinSay("Signed in, but couldn't read your Twitch name just now.", "bad");
@@ -2900,6 +3129,24 @@ function beastCard(b, rows, stats) {
   card.append(facts);
   return card;
 }
+// H24: the whole book as a list (page-owned lore constants), so the Bestiary and the finder agree
+function beastBook() {
+  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
+  const beasts = [];
+  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
+  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
+  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
+  const fam = new Map();
+  for (const c of arr(src && src.events && src.events.monster_camps)) {
+    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
+    let f = fam.get(c.of);
+    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
+    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
+    for (const t of beastTerms(c.name)) f.terms.push(t);
+  }
+  for (const f of fam.values()) beasts.push(f);
+  return beasts;
+}
 function renderBestiary(p) {
   const box = $("bestiaryBody");
   if (!box) return;
@@ -2918,23 +3165,10 @@ function renderBestiary(p) {
     b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
   }
   box.textContent = "";
-  const src = (MOCK === "lore" || MOCK === "bestiary") ? LORE_FROZEN_MOCK : LORE_FROZEN;
   let rows = chronMem.slice();
   const snap = p && p.bestiary && typeof p.bestiary === "object" ? p.bestiary : null;
   const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
-  const beasts = [];
-  const li = (src && src.lord_intros) || {}, ui = (src && src.unique_intros) || {};
-  for (const k of Object.keys(li)) if (typeof li[k] === "string") beasts.push({ kind: "lord", key: k, name: beastTitle(k), terms: beastTerms(k), intro: li[k] });
-  for (const k of Object.keys(ui)) if (typeof ui[k] === "string") beasts.push({ kind: "named", key: k, name: beastTitle(k), terms: beastTerms(k), intro: ui[k] });
-  const fam = new Map();
-  for (const c of arr(src && src.events && src.events.monster_camps)) {
-    if (!c || typeof c.of !== "string" || typeof c.name !== "string") continue;
-    let f = fam.get(c.of);
-    if (!f) { f = { kind: "kin", key: "kin:" + c.of, name: beastTitle(c.of), terms: beastTerms(c.of), camps: [] }; fam.set(c.of, f); }
-    f.camps.push({ name: c.name, while: typeof c.while === "string" ? c.while : "" });
-    for (const t of beastTerms(c.name)) f.terms.push(t);
-  }
-  for (const f of fam.values()) beasts.push(f);
+  const beasts = beastBook();
   const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
   const metN = shown.filter((b) => beastMentions(rows, b.terms).n).length;
   const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
@@ -2943,11 +3177,400 @@ function renderBestiary(p) {
   // met first, then rumours; stable inside each group
   const ordered = shown.map((b, i) => ({ b, i, met: beastMentions(rows, b.terms).n ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
   for (const o of ordered) {
-    try { grid.append(beastCard(o.b, rows, statOf(o.b.key))); } catch (e) { /* one bad entry never blanks the book */ }
+    try { const bc = beastCard(o.b, rows, statOf(o.b.key)); bc.dataset.bi = String(beasts.indexOf(o.b)); grid.append(bc); } catch (e) { /* one bad entry never blanks the book */ }
   }
   box.append(grid);
 }
 let lastBeastPayload = null;
+
+// ---------------------------------------------------------------- H29 the Shops tab
+// Every shop and the blacksmith: level, what that level may sell, and - when the publisher
+// sends it - the shelf itself. NOTHING is hard-coded: names, levels, prices, cargo and orders
+// all come from the snapshot, every string through el()/textContent. Contract (payload v5, read
+// defensively so the tab lights up by itself the day the publisher sends it; v<5 shows the shops
+// and levels it already has and says plainly that the shelf is not published yet):
+//   p.shops[]  = {name, level, sells_to, stock?: [{name, cost, qty?, tier?, rarity?}]}   (D64 + v5)
+//   p.caravan  = {present, leaves_in?, cargo: [{name, cost, qty?, rarity?}]}               (v5; p.trader accepted)
+//   p.orders[] = {who, item, shop, status?, walker?}                                       (v5)
+// A snapshot value only ever chooses WHICH known glyph / rarity frame; it is never a URL, src,
+// href, class name or style. Rarity is matched to a page-owned whitelist before it picks a class.
+const SHOP_RARITY = new Set(["common", "uncommon", "rare", "epic", "legendary"]);
+function rarityClass(r) { const k = String(r == null ? "" : r).toLowerCase().trim(); return SHOP_RARITY.has(k) ? "rar-" + k : ""; }
+function shopIconFor(name) { return /smith|forge|anvil/i.test(String(name || "")) ? "anvil" : "stall"; }
+let lastShopP = null;
+function shopGood(g, passing) {
+  const row = el("li", "shop-good" + (passing ? " passing" : ""));
+  const rc = rarityClass(g && g.rarity);
+  if (rc) row.classList.add(rc);
+  const nm = g && g.name != null && String(g.name).trim() ? ctrlStrip(g.name).slice(0, 60) : "(unnamed)";
+  row.append(el("span", "gname", nm));
+  if (g && g.qty != null && Number.isFinite(+g.qty)) row.append(el("span", "gqty", "x" + num(g.qty)));
+  if (g && g.rarity && !rc) row.append(el("span", "grar", ctrlStrip(g.rarity).slice(0, 16)));
+  else if (rc) row.append(el("span", "grar", ctrlStrip(g.rarity).slice(0, 16)));
+  const price = el("span", "gcost");
+  price.append(icon("coin"), document.createTextNode(" " + (g && Number.isFinite(+g.cost) ? num(g.cost) : "-")));
+  row.append(price);
+  return row;
+}
+function renderShops(p) {
+  const box = $("shopsBody");
+  if (!box) return;
+  lastShopP = p;
+  box.textContent = "";
+  const shops = arr(p && p.shops).filter((s) => s && typeof s === "object");
+  const caravan = p && (p.caravan || p.trader);
+  const orders = arr(p && p.orders).filter((o) => o && typeof o === "object");
+  if (!shops.length && !caravan) {
+    box.append(el("p", "shop-empty", "Bellmire has not reported its shops yet. Once the town's records carry them, every shop and the blacksmith appear here with their level and shelf."));
+    return;
+  }
+  const grid = el("div", "shop-grid");
+  for (const s of shops) {
+    const card = el("article", "shop-card");
+    const head = el("header", "shop-head");
+    head.append(icon(shopIconFor(s.name)));
+    head.append(el("h3", "shop-name", s.name != null && String(s.name).trim() ? ctrlStrip(s.name).slice(0, 48) : "(unnamed shop)"));
+    head.append(el("span", "shop-lvl", "Lv " + (Number.isFinite(+s.level) ? num(s.level) : "?")));
+    card.append(head);
+    if (s.sells_to != null && String(s.sells_to).trim()) {
+      const st = el("p", "shop-sells", "Sells up to ");
+      const rc = rarityClass(s.sells_to);
+      st.append(el("b", rc, ctrlStrip(s.sells_to).slice(0, 20)));
+      card.append(st);
+    }
+    const stock = Array.isArray(s.stock) ? s.stock.filter((g) => g && typeof g === "object") : null;
+    if (stock && stock.length) {
+      const ul = el("ul", "shop-stock");
+      stock.slice().sort((a, b) => (+a.cost || 0) - (+b.cost || 0)).slice(0, 80).forEach((g) => ul.append(shopGood(g, false)));
+      card.append(ul);
+    } else if (stock) {
+      card.append(el("p", "shop-empty", "The shelf is bare."));
+    } else {
+      card.append(el("p", "shop-empty", "The shelf has not been published yet."));
+    }
+    grid.append(card);
+  }
+  box.append(grid);
+  // the trader: marked as passing through - the only place a higher tier shows at a low level
+  const tr = el("section", "shop-card shop-trader");
+  const th = el("header", "shop-head");
+  th.append(icon("coin"), el("h3", "shop-name", "The trader's caravan"));
+  const here = !!(caravan && caravan.present);
+  th.append(el("span", "shop-lvl", here ? "In town" : "Away"));
+  tr.append(th);
+  if (here) {
+    tr.append(el("p", "shop-sells", "Passing through" + (caravan.leaves_in != null && Number.isFinite(+caravan.leaves_in) ? ", leaves in " + num(caravan.leaves_in) + " min" : "") + ". What it carries is worth a look."));
+    const cargo = arr(caravan.cargo).filter((g) => g && typeof g === "object");
+    if (cargo.length) { const ul = el("ul", "shop-stock"); cargo.slice(0, 80).forEach((g) => ul.append(shopGood(g, true))); tr.append(ul); }
+    else tr.append(el("p", "shop-empty", "The cargo list has not been published yet."));
+  } else {
+    tr.append(el("p", "shop-empty", "No caravan is in town. When one arrives its cargo is listed here."));
+  }
+  box.append(tr);
+  // orders: public, drawn as text; the signed-in viewer's own are marked
+  const ord = el("section", "shop-card shop-orders");
+  const oh = el("header", "shop-head");
+  oh.append(icon("loot"), el("h3", "shop-name", "Orders waiting to be collected"));
+  oh.append(el("span", "shop-lvl", num(orders.length)));
+  ord.append(oh);
+  if (orders.length) {
+    const ul = el("ul", "shop-stock");
+    for (const o of orders.slice(0, 60)) {
+      const li = el("li", "shop-good");
+      const mine = !!(twLogin && String(o.who || "").toLowerCase() === twLogin);
+      if (mine) li.classList.add("mine");
+      li.append(el("span", "gname", ctrlStrip(o.item).slice(0, 60) || "(an order)"));
+      li.append(el("span", "gqty", (mine ? "yours - " : "") + (ctrlStrip(o.who).slice(0, 30) || "someone")));
+      li.append(el("span", "grar", (ctrlStrip(o.shop).slice(0, 40) || "a shop") + (o.walker ? " - " + ctrlStrip(o.walker).slice(0, 30) + " walking" : o.status ? " - " + ctrlStrip(o.status).slice(0, 20) : "")));
+      ul.append(li);
+    }
+    ord.append(ul);
+  } else ord.append(el("p", "shop-empty", "No orders are waiting."));
+  box.append(ord);
+}
+
+// ---------------------------------------------------------------- H30 the Satchel tab
+// A signed-in viewer's OWN things: what the hero carries (weight against capacity, shown as a
+// bar), the vault at the Adventurer Hall, the viewer's outstanding orders, and where the hero is
+// walking. Sort by slot / weight / value / VALUE-PER-POUND (the sort that teaches the game: the
+// party drops the lowest value-per-pound first, D80). Every action is a button that sends the
+// CHAT COMMAND over the IRC socket H6 already opened - no backend, no new scope, no CSP change.
+//
+// Who is the viewer: ONLY the Twitch login from H6's sign-in (twLogin). A hero is the viewer's
+// only if its name equals that login exactly. Signed out the tab shows nothing personal and the
+// page never guesses (the H11 "my hero" pin is a browser convenience and is deliberately NOT used).
+//
+// Contract, read defensively so the tab lights up by itself when the publisher sends it (v5+):
+//   hero.satchel[] = {name, qty?, weight? (per unit, lb), sell|value? (per unit), slot|kind?, rarity?, worn?}
+//   hero.carry     = {weight?, cap|capacity?, band?}   (or hero.encumbrance = ""/"encumbered"/"heavily encumbered")
+//   hero.vault     = [items] | {items: [...], slots?}
+//   hero.where | hero.doing   - where the hero is walking / what they are doing (free text)
+//   p.orders[]     - the same list H29 shows; the viewer's own are the rows whose `who` is their login
+// Missing weight / capacity / band are shown as "not published" - never faked. Capacity falls back
+// to 5e's STR x 15 lb ONLY when the hero's STR is published, and says it is derived.
+//
+// SECURITY: every snapshot string reaches the DOM through el()/textContent. A snapshot value never
+// becomes a URL, src, href, class name or style: slot/rarity only choose a known glyph / frame
+// class; the bar is a CSSOM number. The ONE place a snapshot string leaves the page is the chat
+// command a viewer presses a button for, and it is built by satCommand() from a fixed verb table
+// plus ONE argument with every control / line-separator character removed, so an item name can
+// never carry a second IRC line or a second command.
+const SAT_VERBS = { use: "!use", sell: "!sell", store: "!store", wear: "!wear", take: "!withdraw" };
+const SAT_STONE = "!stone";                    // the teleportation stone (1,000 channel points): fixed, takes no argument
+const SAT_NAME_MAX = 80;
+let lastSatP = null, satSort = "vpp", satDesc = true, satSlot = "all", satText = "", satLastAt = 0, satStoneArm = 0;
+function satArg(s) {
+  return String(s == null ? "" : s).replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g, " ").replace(/\s+/g, " ").trim().slice(0, SAT_NAME_MAX);
+}
+// The ONLY way a command string is made. verb must be a key of SAT_VERBS; returns "" otherwise.
+function satCommand(verb, name) {
+  if (verb === "stone") return SAT_STONE;
+  const v = Object.prototype.hasOwnProperty.call(SAT_VERBS, verb) ? SAT_VERBS[verb] : "";
+  const a = satArg(name);
+  return v && a ? v + " " + a : "";
+}
+function satSay(text, cls) {
+  const s = $("satStatus"); if (!s) return;
+  s.className = "chatstatus" + (cls ? " " + cls : "");
+  s.textContent = text;                         // page-authored text + the (already stripped) command
+}
+function satIsMock() { return !!(MOCK && /^satchel/.test(MOCK)); }
+function satViewer() {                          // the signed-in login, or "" - never a guess
+  if (MOCK === "satchelout") return "";
+  if (satIsMock()) return "mockviewer";
+  return twToken && twLogin ? twLogin : "";
+}
+function satSend(verb, name) {
+  const cmd = satCommand(verb, name);
+  if (!cmd) { satSay("That item has no name the game could be told.", "warn"); return false; }
+  if (satIsMock()) { satSay("Mock - would send: " + cmd, ""); return true; }
+  if (!(twToken && twLogin)) { satSay("Sign in with Twitch (under Heroes) first.", "warn"); return false; }
+  if (!chatWS || chatWS.readyState !== 1) {
+    if (!chatOpened) openGuildChat();           // opens the socket H6/H8 already use; nothing new is contacted
+    satSay("Connecting to the guild hall - press it again in a moment.", "warn");
+    return false;
+  }
+  const now = Date.now();
+  if (now - satLastAt < 1200) { satSay("Easy - one command a breath.", "warn"); return false; }
+  satLastAt = now;
+  chatWS.send("PRIVMSG #" + TWITCH_CHANNEL + " :" + cmd);
+  chatLine(twLogin, cmd, "me", "", twLogin);    // Twitch does not echo your own line back
+  satSay("Sent: " + cmd + " - your hero acts on it when they can; the Chronicle will say.", "ok");
+  return true;
+}
+function satN(v) { if (v == null || v === "") return null; const n = +v; return Number.isFinite(n) ? n : null; }
+function satLb(n) { return (Math.round(n * 10) / 10).toLocaleString("en"); }
+function satBandKey(s) {                        // -> "" | "encumbered" | "heavily encumbered" | null (unknown); constants only
+  if (s == null) return null;
+  const k = String(s).toLowerCase().replace(/[^a-z ]/g, "").trim();
+  if (k === "heavily encumbered" || k === "heavy") return "heavily encumbered";
+  if (k === "encumbered") return "encumbered";
+  if (k === "" || k === "none" || k === "light" || k === "unencumbered" || k === "normal") return "";
+  return null;
+}
+function satRow(it) {
+  if (typeof it === "string") it = { name: it };
+  if (!it || typeof it !== "object") return null;
+  const name = ctrlStrip(firstStr(it.name, it.item)).slice(0, SAT_NAME_MAX) || "(unnamed)";
+  const qty = Math.max(1, Math.floor(satN(it.qty) || 1));
+  const weight = satN(it.weight != null ? it.weight : it.wt != null ? it.wt : it.lb);
+  const value = satN(it.sell != null ? it.sell : it.value != null ? it.value : it.worth);
+  const slot = ctrlStrip(firstStr(it.slot, it.kind, it.type, it.cat)).toLowerCase().slice(0, 16) || "other";
+  let vpp = null;
+  if (value != null && weight != null) vpp = weight > 0 ? value / weight : (value > 0 ? Infinity : null);
+  return { name, qty, weight, value, slot, vpp, rarity: it.rarity, worn: !!(it.worn || it.equipped), raw: it };
+}
+function satRows(list) { const out = []; for (const it of arr(list)) { const r = satRow(it); if (r) out.push(r); } return out; }
+// capacity + band + carried, with an honest note about where each number came from
+function satCarry(h, rows) {
+  const c = h && typeof h.carry === "object" && h.carry ? h.carry : {};
+  const str = satN(h && h.stats && h.stats.str);
+  let weight = satN(c.weight != null ? c.weight : c.carried != null ? c.carried : h && h.carried), wnote = "";
+  if (weight == null) {
+    const known = rows.filter((r) => r.weight != null);
+    if (known.length) { weight = known.reduce((a, r) => a + r.weight * r.qty, 0); wnote = known.length < rows.length ? "from the items that publish a weight" : "summed from the items below"; }
+  }
+  let cap = satN(c.cap != null ? c.cap : c.capacity != null ? c.capacity : h && h.capacity), cnote = "";
+  if (cap == null && str != null) { cap = str * 15; cnote = "STR " + num(str) + " x 15 lb (5e), worked out here"; }
+  let band = satBandKey(c.band != null ? c.band : h && h.encumbrance), bnote = "";
+  if (band == null && weight != null && str != null) {
+    band = weight > str * 10 ? "heavily encumbered" : weight > str * 5 ? "encumbered" : "";
+    bnote = "worked out from STR";
+  }
+  return { weight, cap, band, wnote, cnote, bnote, str };
+}
+function satCmp(a, b) {
+  const key = (r) => satSort === "slot" ? r.slot : satSort === "weight" ? (r.weight == null ? null : r.weight * r.qty)
+    : satSort === "value" ? (r.value == null ? null : r.value * r.qty) : satSort === "name" ? r.name.toLowerCase() : r.vpp;
+  const x = key(a), y = key(b);
+  if (x == null && y == null) return a.name.localeCompare(b.name);
+  if (x == null) return 1;                       // unknowns last, whichever way it sorts
+  if (y == null) return -1;
+  if (x === y) return a.name.localeCompare(b.name);
+  const d = x < y ? -1 : 1;
+  return satDesc ? -d : d;
+}
+function satBtn(label, verb, name, title) {
+  const b = el("button", "sat-btn", label); b.type = "button";
+  b.title = title;
+  b.addEventListener("click", () => satSend(verb, name));
+  return b;
+}
+function satItemRow(r, where, dropFirst) {
+  const li = el("li", "sat-item");
+  const rc = rarityClass(r.rarity); if (rc) li.classList.add(rc);
+  if (r.worn) li.classList.add("worn");
+  li.append(icon(satchelIconId(r.slot)));
+  const nm = el("span", "sat-name", r.name);
+  if (r.qty > 1) nm.append(el("small", "sat-qty", " x" + num(r.qty)));
+  if (r.worn) nm.append(el("small", "sat-tag", " worn"));
+  if (dropFirst) nm.append(el("small", "sat-tag drop", " drop first"));
+  li.append(nm, el("span", "sat-slot", r.slot));
+  li.append(el("span", "sat-num", r.weight == null ? "- lb" : satLb(r.weight * r.qty) + " lb"));
+  const v = el("span", "sat-num"); v.append(icon("coin"), document.createTextNode(" " + (r.value == null ? "-" : num(r.value * r.qty)))); li.append(v);
+  li.append(el("span", "sat-num sat-vpp", r.vpp == null ? "- /lb" : r.vpp === Infinity ? "free" : (Math.round(r.vpp * 10) / 10).toLocaleString("en") + " /lb"));
+  const act = el("span", "sat-acts");
+  if (where === "vault") act.append(satBtn("Take out", "take", r.name, "Sends: " + satCommand("take", r.name)));
+  else {
+    act.append(satBtn("Use", "use", r.name, "Sends: " + satCommand("use", r.name)));
+    if (!r.worn) act.append(satBtn("Wear", "wear", r.name, "Sends: " + satCommand("wear", r.name)));
+    act.append(satBtn("Store", "store", r.name, "Sends: " + satCommand("store", r.name)));
+    act.append(satBtn("Sell", "sell", r.name, "Sends: " + satCommand("sell", r.name)));
+  }
+  li.append(act);
+  return li;
+}
+function satCard(title, glyph, count) {
+  const card = el("section", "shop-card sat-card");
+  const hd = el("header", "shop-head");
+  hd.append(icon(glyph), el("h3", "shop-name", title));
+  if (count != null) hd.append(el("span", "shop-lvl", count));
+  card.append(hd);
+  return card;
+}
+function satNote(box, text) { box.append(el("p", "shop-empty", text)); }
+function renderSatchel(p) {
+  const box = $("satBody"), ctl = $("satControls");
+  if (!box) return;
+  lastSatP = p;
+  box.textContent = "";
+  const viewer = satViewer();
+  if (ctl) ctl.classList.add("hide");
+  if (!viewer) {
+    const c = satCard("Sign in to see your satchel", "loot", null);
+    satNote(c, "This tab is only ever about YOUR hero, so it shows nothing until you sign in with Twitch. Nothing here is guessed from a name you typed.");
+    c.append(el("p", "shop-sells", "Once signed in you will see what you carry, how heavy it is against what you can bear, your vault at the Adventurer Hall, and your orders - and every button sends the chat command you could have typed yourself."));
+    const go = el("button", "sat-btn", "Sign in (under Heroes)"); go.type = "button";
+    go.addEventListener("click", () => setActiveTab("heroes"));
+    c.append(go);
+    box.append(c);
+    return;
+  }
+  const hero = arr(p && p.heroes).find((h) => h && String(h.name || "").toLowerCase() === viewer);
+  if (!hero) {
+    const c = satCard("No hero under your name yet", "loot", null);
+    satNote(c, "You are signed in as " + viewer + ", but no living hero carries that name. Type !enlist in chat to raise one; if your hero has fallen, what they carried is gone, but the vault is not.");
+    box.append(c);
+    return;
+  }
+  if (ctl) ctl.classList.remove("hide");
+  const rows = satRows(hero.satchel != null ? hero.satchel : hero.inventory != null ? hero.inventory : hero.items);
+  const cy = satCarry(hero, rows);
+  // ---- who, where, and the weight bar
+  const top = satCard(ctrlStrip(hero.name).slice(0, 40) + "'s satchel", "loot", num(rows.length) + (rows.length === 1 ? " item" : " items"));
+  const where = firstStr(hero.where, hero.walking_to, hero.doing);
+  if (where) top.append(el("p", "shop-sells", "Right now: " + ctrlStrip(where).slice(0, 120)));
+  if (cy.weight != null && cy.cap != null && cy.cap > 0) {
+    const ratio = Math.max(0.02, Math.min(1, cy.weight / cy.cap));
+    const grade = cy.band === "heavily encumbered" ? "low" : cy.band === "encumbered" ? "mid" : cy.band === "" ? "ok" : "flat";
+    const bar = el("div", "hpbar sat-bar " + grade);
+    bar.setAttribute("role", "img");
+    bar.setAttribute("aria-label", "Carrying " + satLb(cy.weight) + " of " + satLb(cy.cap) + " pounds");
+    const track = el("div", "hptrack");
+    const fill = el("span", "hpfill"); fill.style.setProperty("--hp", ratio);      // CSSOM number only
+    track.append(fill);
+    for (const t of [1 / 3, 2 / 3]) { const tk = el("i", "sat-tick"); tk.style.setProperty("--at", t); track.append(tk); }
+    bar.append(el("span", "hpk", "Carry"), track, el("span", "hpv", satLb(cy.weight) + " of " + satLb(cy.cap) + " lb"));
+    top.append(bar);
+    const bandName = cy.band === "heavily encumbered" ? "Heavily encumbered" : cy.band === "encumbered" ? "Encumbered" : cy.band === "" ? "Unencumbered" : "Band not published";
+    const bp = el("p", "sat-band " + (cy.band === "heavily encumbered" ? "b2" : cy.band === "encumbered" ? "b1" : "b0"));
+    bp.append(el("b", null, bandName));
+    bp.append(document.createTextNode(cy.band === "heavily encumbered" ? " - speed -20 ft, disadvantage on attacks and on STR, DEX and CON checks and saves."
+      : cy.band === "encumbered" ? " - speed -10 ft." : cy.band === "" ? " - no penalty." : "."));
+    top.append(bp);
+    const notes = [cy.wnote && "weight " + cy.wnote, cy.cnote && "capacity " + cy.cnote, cy.bnote && "band " + cy.bnote].filter(Boolean);
+    if (notes.length) top.append(el("p", "sat-src", notes.join("; ") + "."));
+    top.append(el("p", "sat-src", "Encumbered past a third of capacity, heavily past two thirds (the ticks on the bar). Stored items weigh nothing."));
+  } else {
+    satNote(top, "Carry weight is not published yet - the bar appears when the game reports weight and capacity (or your STR, from which capacity is worked out).");
+  }
+  box.append(top);
+  // ---- the list, filtered and sorted
+  const slots = []; for (const r of rows) if (slots.indexOf(r.slot) < 0) slots.push(r.slot);
+  slots.sort();
+  if (satSlot !== "all" && slots.indexOf(satSlot) < 0) satSlot = "all";
+  const chips = $("satChips");
+  if (chips) {
+    chips.textContent = "";
+    for (const s of ["all"].concat(slots)) {
+      const b = el("button", "chip" + (satSlot === s ? " on" : ""), s === "all" ? "All" : s); b.type = "button";
+      b.setAttribute("aria-pressed", satSlot === s ? "true" : "false");
+      b.addEventListener("click", () => { satSlot = s; if (lastSatP) renderSatchel(lastSatP); });
+      chips.append(b);
+    }
+  }
+  const q = satText.toLowerCase();
+  const shown = rows.filter((r) => (satSlot === "all" || r.slot === satSlot) && (!q || r.name.toLowerCase().indexOf(q) >= 0)).sort(satCmp);
+  // the "drop first" hint: the lowest value-per-pound carried item, only when the hero is over a band
+  let dropRow = null;
+  if (cy.band) for (const r of rows) if (!r.worn && r.vpp != null && r.vpp !== Infinity && r.weight > 0 && (!dropRow || r.vpp < dropRow.vpp)) dropRow = r;
+  const list = satCard("Carried", "loot", null);
+  list.classList.add("sat-list-card");
+  if (!rows.length) satNote(list, "Your satchel is empty. Buy something at a shop (it is an order - your hero walks to collect it) or bring something up from the delve.");
+  else if (!shown.length) satNote(list, "Nothing matches that filter.");
+  else {
+    const ul = el("ul", "sat-list");
+    shown.slice(0, 120).forEach((r) => ul.append(satItemRow(r, "satchel", r === dropRow)));
+    list.append(ul);
+    if (dropRow && shown.indexOf(dropRow) >= 0) list.append(el("p", "sat-src", "When a band is over capacity at the stairs, it drops the lowest value-per-pound first - that is the row marked \"drop first\"."));
+  }
+  box.append(list);
+  // ---- the vault
+  const vraw = hero.vault;
+  const vrows = satRows(Array.isArray(vraw) ? vraw : vraw && typeof vraw === "object" ? vraw.items : null);
+  const vslots = vraw && typeof vraw === "object" && !Array.isArray(vraw) ? satN(vraw.slots != null ? vraw.slots : vraw.cap) : null;
+  const vc = satCard("Your vault at the Adventurer Hall", "tower", vraw == null ? null : num(vrows.length) + (vslots != null ? " of " + num(vslots) : ""));
+  if (vraw == null) satNote(vc, "The vault is not published yet.");
+  else if (!vrows.length) satNote(vc, "Your vault is empty. Store something and your hero walks it to the Hall; stored items weigh nothing and survive a death.");
+  else { const ul = el("ul", "sat-list"); vrows.slice(0, 120).sort(satCmp).forEach((r) => ul.append(satItemRow(r, "vault", false))); vc.append(ul); }
+  box.append(vc);
+  // ---- orders
+  const mine = arr(p && p.orders).filter((o) => o && typeof o === "object" && String(o.who || "").toLowerCase() === viewer);
+  const oc = satCard("Your outstanding orders", "stall", num(mine.length));
+  if (!mine.length) satNote(oc, "No orders are waiting for you.");
+  else {
+    const ul = el("ul", "shop-stock");
+    for (const o of mine.slice(0, 40)) {
+      const li = el("li", "shop-good mine");
+      li.append(el("span", "gname", ctrlStrip(o.item).slice(0, 60) || "(an order)"));
+      li.append(el("span", "grar", (ctrlStrip(o.shop).slice(0, 40) || "a shop") + (o.walker ? " - " + ctrlStrip(o.walker).slice(0, 30) + " walking" : o.status ? " - " + ctrlStrip(o.status).slice(0, 20) : "")));
+      ul.append(li);
+    }
+    oc.append(ul);
+  }
+  box.append(oc);
+  // ---- the stone: a panic button, one deliberate double-press, never an argument
+  const sc = satCard("The teleportation stone", "flask", "1,000 points");
+  sc.append(el("p", "shop-sells", "Cashed in with channel points; this sends " + SAT_STONE + " to chat. Press twice to be sure - the second press must come within four seconds."));
+  const stone = el("button", "sat-btn stone", "Use the stone"); stone.type = "button";
+  stone.addEventListener("click", () => {
+    const now = Date.now();
+    if (now - satStoneArm < 4000) { satStoneArm = 0; stone.textContent = "Use the stone"; satSend("stone", ""); }
+    else { satStoneArm = now; stone.textContent = "Really? Press again"; setTimeout(() => { if (satStoneArm === now) { satStoneArm = 0; stone.textContent = "Use the stone"; } }, 4000); }
+  });
+  sc.append(stone);
+  box.append(sc);
+}
 
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
@@ -2981,8 +3604,125 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
   sec.addEventListener("focusout", (e) => { if (!sec.contains(e.relatedTarget)) leave(); });
 })();
 
+// ============================================================ SEASON (H31)
+// The Season tab: standings over the whole season, from the snapshot only - who went deepest, who
+// earned most, who died hardest, who kept a hero alive longest. Heroes + fallen are the data; nothing
+// is stored or invented. Fields are read DEFENSIVELY and the tab says plainly which board has no data:
+//   earned   : hero.earned | gold_earned | total_gold | lifetime_gold   (else current gold, labelled "held")
+//   lifespan : hero.days_alive | age_days | lived_days | age            (else day - born_day for the fallen,
+//              town.day - born_day for the living)
+//   hardest  : fallen only - deepest floor reached, then level, then kills; killed_by / day shown
+// Every name/killer/epitaph goes through el()/textContent; the bar width is a CSSOM number.
+const SEASON_TOP = 10;
+function seaPick(r, keys) { for (const k of keys) { const v = r && r[k]; if (v != null && v !== "" && Number.isFinite(+v)) return +v; } return null; }
+function seaName(r) { const n = r && r.name != null ? ctrlStrip(r.name).slice(0, 40) : ""; return n || "(no name)"; }
+function seaBoards(heroes, fallen, townDay) {
+  const live = heroes.filter((h) => h && typeof h === "object").map((r) => ({ r, dead: false }));
+  const gone = fallen.filter((f) => f && typeof f === "object").map((r) => ({ r, dead: true }));
+  const all = live.concat(gone);
+  const rank = (rows, tie) => {
+    rows.sort((a, b) => b.v - a.v || tie(b) - tie(a) || seaName(a.r).localeCompare(seaName(b.r), "en", { sensitivity: "base" }));
+    let place = 0, prev = null;
+    rows.forEach((e, i) => { if (e.v !== prev) { place = i + 1; prev = e.v; } e.place = place; });
+    return rows;
+  };
+  const deep = rank(all.map((e) => Object.assign({}, e, { v: n0(e.r.deepest) })).filter((e) => e.v > 0), (e) => n0(e.r.level));
+  let earnedReal = false;
+  const rich = rank(all.map((e) => {
+    const x = seaPick(e.r, ["earned", "gold_earned", "total_gold", "lifetime_gold"]);
+    if (x != null) earnedReal = true;
+    return Object.assign({}, e, { v: x != null ? x : n0(e.r.gold), held: x == null });
+  }).filter((e) => e.v > 0), (e) => n0(e.r.level));
+  const hard = rank(gone.map((e) => Object.assign({}, e, { v: n0(e.r.deepest) })).filter((e) => e.v > 0), (e) => n0(e.r.level) * 1000 + n0(e.r.kills));
+  let lifeData = false;
+  const lived = rank(all.map((e) => {
+    let d = seaPick(e.r, ["days_alive", "age_days", "lived_days", "age"]);
+    if (d == null) {
+      const born = seaPick(e.r, ["born_day", "joined_day", "enlisted_day"]);
+      const end = e.dead ? seaPick(e.r, ["day"]) : (Number.isFinite(+townDay) ? +townDay : null);
+      if (born != null && end != null) d = Math.max(0, end - born);
+    }
+    if (d != null) lifeData = true;
+    return Object.assign({}, e, { v: d == null ? 0 : d });
+  }).filter((e) => e.v > 0), (e) => n0(e.r.level));
+  return { deep, rich, hard, lived, earnedReal, lifeData, total: all.length };
+}
+function seaRow(e, max, unit, sub) {
+  const li = el("li", "sea-row" + (e.dead ? " gone" : "") + (e.place === 1 ? " lead" : ""));
+  li.style.setProperty("--fill", max > 0 ? Math.max(0, Math.min(1, e.v / max)) : 0);
+  li.append(el("span", "sea-rank", "#" + e.place));
+  const mid = el("span", "sea-mid");
+  const nm = el("span", "sea-name");
+  if (e.place <= 5) nm.append(coat(seaName(e.r), "sm"));
+  nm.append(document.createTextNode(seaName(e.r)));
+  if (e.dead) nm.append(el("span", "tag", "fallen"));
+  mid.append(nm);
+  if (sub) mid.append(el("span", "sea-sub", sub));
+  li.append(mid);
+  const val = el("span", "sea-val");
+  val.append(el("b", null, num(e.v)), el("span", "bunit", unit));
+  li.append(val);
+  return li;
+}
+function seaCard(title, ic, rows, unit, subFn, emptyMsg, note) {
+  const card = el("article", "shop-card sea-card");
+  const head = el("header", "shop-head");
+  head.append(icon(ic), el("h3", "shop-name", title));
+  if (rows.length) head.append(el("span", "shop-lvl", rows.length > SEASON_TOP ? "top " + SEASON_TOP + " of " + num(rows.length) : num(rows.length) + " ranked"));
+  card.append(head);
+  if (note) card.append(el("p", "shop-empty", note));
+  if (!rows.length) { card.append(el("p", "shop-empty", emptyMsg)); return card; }
+  const ol = el("ol", "sea-list");
+  const max = rows[0].v;
+  rows.slice(0, SEASON_TOP).forEach((e) => ol.append(seaRow(e, max, unit, subFn(e))));
+  card.append(ol);
+  return card;
+}
+function renderSeason(p) {
+  const box = $("seasonBody");
+  if (!box) return;
+  box.textContent = "";
+  const heroes = arr(p && p.heroes), fallen = arr(p && p.fallen);
+  const day = p && p.town ? seaPick(p.town, ["day"]) : null;
+  const b = seaBoards(heroes, fallen, day);
+  const sub = (e) => {
+    const r = e.r, bits = [];
+    if (r.class) bits.push(cap(ctrlStrip(r.class).slice(0, 16)));
+    if (r.level != null && Number.isFinite(+r.level)) bits.push("level " + num(r.level));
+    return bits.join(", ");
+  };
+  if (!b.total) {
+    box.append(el("p", "shop-empty", "No heroes have been published this season yet. Type !enlist in chat to raise one; the standings fill in as the town reports."));
+    return;
+  }
+  const grid = el("div", "shop-grid sea-grid");
+  grid.append(seaCard("Went deepest", "delve", b.deep, "floor", (e) => sub(e), "Nobody has been below the first floor yet."));
+  grid.append(seaCard("Earned most", "coin", b.rich, "gold",
+    (e) => (e.held ? "held now" : "earned") + (sub(e) ? "  ·  " + sub(e) : ""),
+    "Nobody has gold to their name yet.",
+    b.earnedReal ? "" : "The town publishes only gold in hand for now, so this ranks what heroes hold, not what they earned."));
+  grid.append(seaCard("Died hardest", "death", b.hard, "floor", (e) => {
+    const bits = [];
+    if (e.r.killed_by != null && String(e.r.killed_by).trim()) bits.push("to " + ctrlStrip(e.r.killed_by).slice(0, 40));
+    if (e.r.day != null && Number.isFinite(+e.r.day)) bits.push("day " + num(e.r.day));
+    const s = sub(e); if (s) bits.push(s);
+    return bits.join("  ·  ");
+  }, "Nobody has fallen yet - or the fallen have not reported a floor.", "Ranked by the deepest floor reached before the end."));
+  grid.append(seaCard("Lived longest", "town", b.lived, "days", (e) => (e.dead ? "fell" : "still living") + (sub(e) ? "  ·  " + sub(e) : ""),
+    "The town has not published how long a hero has lived yet.",
+    b.lifeData ? "" : "No hero carries an age or a birth day in the town's records yet; this fills in by itself when they do."));
+  box.append(grid);
+}
+
+(function () {   // H30 controls: the select / direction / filter live outside the re-rendered body so typing keeps focus
+  const sel = $("satSort"), dir = $("satDir"), find = $("satFind");
+  const again = () => { if (lastSatP) renderSatchel(lastSatP); };
+  if (sel) sel.addEventListener("change", () => { satSort = ["vpp", "value", "weight", "slot", "name"].indexOf(sel.value) >= 0 ? sel.value : "vpp"; again(); });
+  if (dir) dir.addEventListener("click", () => { satDesc = !satDesc; dir.textContent = satDesc ? "Highest first" : "Lowest first"; again(); });
+  if (find) find.addEventListener("input", () => { satText = find.value.slice(0, 40); again(); });
+})();
 // ---------------------------------------------------------------- H13 tabs
-// No-scroll, tabbed layout: one section at a time. The viewer picks with a nav
+// Every nav// No-scroll, tabbed layout: one section at a time. The viewer picks with a nav
 // button and the chosen panel's `.active` class makes it visible (see style.css).
 //
 // Storage is per-browser and best-effort: the last-picked tab id is kept in
@@ -2991,7 +3731,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -3045,13 +3785,131 @@ function setActiveTab(id) {
   const momentFrom = () => { const m = /^moment-(\d{1,9})$/.exec(String(location.hash || "").replace(/^#/, "")); return m && +m[1] > 0 ? +m[1] : 0; };
   const mid = momentFrom();
   if (mid) chronFocusId = mid;
-  const initial = (mid ? "chronicle" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
+  const initial = (mid ? "chronicle" : "") || (heroLinkFrom() >= 0 ? "heroes" : "") || (params.get("open") ? "heroes" : "") || getStoredTab() || TABS[0];
   setActiveTab(initial);
   window.addEventListener("hashchange", () => {
     const n = momentFrom();
     if (!n) return;
     chronFocusId = n; setActiveTab("chronicle"); if (chronData) paintChronicle();
   });
+})();
+
+// ---------------------------------------------------------------- H25 night watch
+// A long-session mode for a page left open beside the stream: a dimmed palette and an ambient
+// layout (town strip, status line, Chronicle and Bands side by side; the finder, tabs, filters and
+// footer fold away). It is ONE class on <html> (CSS does all the work) - no snapshot value is
+// involved, nothing is fetched, and nothing about it touches the DOM the renderers build.
+// The choice is per-browser: localStorage under a page-owned key, and the value read back is
+// compared to a two-item whitelist before it decides anything (private windows throw: then the
+// page simply starts in the full layout). ?watch=1 turns it on for a visit without storing it.
+const WATCH_KEY = "bellmire.watch.v1";
+const WATCH_LABEL = { on: "Back to the full page", off: "Night watch" };
+const WATCH_HINT  = { on: "Dim and quiet: the town, the Chronicle and who is below.", off: "A dim, quiet page for a second screen." };
+function getStoredWatch() {
+  try { return ctrlStrip(localStorage.getItem(WATCH_KEY) || "").slice(0, 12) === "watch" ? "watch" : ""; }
+  catch (e) { return ""; }
+}
+function applyWatch(on, keep) {
+  const root = document.documentElement;
+  root.classList.toggle("watch", !!on);
+  const btn = $("watchBtn"), hint = $("watchHint");
+  if (btn) btn.textContent = on ? WATCH_LABEL.on : WATCH_LABEL.off;
+  if (hint) hint.textContent = on ? WATCH_HINT.on : WATCH_HINT.off;
+  if (keep) { try { if (on) localStorage.setItem(WATCH_KEY, "watch"); else localStorage.removeItem(WATCH_KEY); } catch (e) {} }
+}
+(function wireWatch() {
+  const btn = $("watchBtn");
+  if (!btn) return;
+  btn.addEventListener("click", () => applyWatch(!document.documentElement.classList.contains("watch"), true));
+  applyWatch(params.get("watch") === "1" || getStoredWatch() === "watch", false);
+})();
+
+// ---------------------------------------------------------------- H22 the first minute
+// A short welcome for someone who arrives mid-raid knowing nothing. The copy is static markup in
+// index.html. The ONE live line is built here from the snapshot the page already holds: no new
+// fetch, no new origin, no write path. Every value reaches the DOM through el()/textContent; the
+// three doors carry a page-owned data-door id that is matched against TABS before it does anything.
+// Honest by construction: it reads the same `last` / lastError / STALE_MIN the status line reads, so
+// an empty, stale or failed snapshot says so here too instead of showing numbers as if they were live.
+// Dismissal is per-browser: localStorage under a page-owned key, compared to a one-item whitelist.
+const WELCOME_KEY = "bellmire.welcome.v1";
+let welcomeP = null;       // the payload render() last drew (internal only)
+let welcomeShow = true;
+function getWelcomeSeen() {
+  try { return ctrlStrip(localStorage.getItem(WELCOME_KEY) || "").slice(0, 8) === "seen" ? "seen" : ""; }
+  catch (e) { return ""; }
+}
+function setWelcome(show, keep) {
+  welcomeShow = !!show;
+  const box = $("welcome"), btn = $("welcomeBtn");
+  if (box) box.classList.toggle("hide", !welcomeShow);
+  if (btn) btn.classList.toggle("hide", welcomeShow);
+  if (keep) { try { if (!welcomeShow) localStorage.setItem(WELCOME_KEY, "seen"); } catch (e) {} }
+}
+function paintWelcome() {
+  const box = $("welcomeLive");
+  if (!box) return;
+  box.replaceChildren();
+  box.classList.remove("stale");
+  if (!last) {
+    box.classList.add("stale");
+    box.append(el("p", null, lastError
+      ? "The town's records are out of reach just now, so there are no live numbers here yet. The page asks again every minute."
+      : "Bellmire has not reported in yet, so there are no live numbers to show. They appear here the moment the game is running."));
+    return;
+  }
+  if (!welcomeP || typeof welcomeP !== "object") {     // the version gate refused the payload: say so, show no numbers
+    box.classList.add("stale");
+    box.append(el("p", null, "The town's latest report is in a format this page does not understand yet, so there are no live numbers here."));
+    return;
+  }
+  const p = welcomeP;
+  const t = p.town && typeof p.town === "object" ? p.town : {};
+  const a = ago(last.updated_at);
+  const age = a ? a.text : "at an unknown time";
+  const stale = TEST === "stale" || !a || a.s > STALE_MIN * 60;
+  const tiers = arr(LORE_FROZEN && LORE_FROZEN.growth_tiers && LORE_FROZEN.growth_tiers.tiers).filter((x) => x && typeof x === "object" && x.name);
+  const lvl = t.level != null && t.level !== "" && Number.isFinite(+t.level) && tiers.length ? Math.max(1, Math.min(tiers.length, Math.floor(+t.level))) : 0;
+  const bits = [];
+  if (lvl) bits.push("The town stands at stage " + lvl + " of " + tiers.length + " - " + String(tiers[lvl - 1].name) + ".");
+  const heroes = arr(p.heroes).filter((h) => h && typeof h === "object").length;
+  const hasBands = p.parties != null || p.bands != null;
+  const bands = hasBands ? normalizeParties(p.parties != null ? p.parties : p.bands) : [];
+  const abroad = bands.reduce((n, b) => n + b.members.length, 0);
+  if (heroes > 0) {
+    let s = num(heroes) + (heroes === 1 ? " hero is" : " heroes are") + " on the roll";
+    if (hasBands) s += abroad > 0 ? ", " + num(abroad) + " abroad in " + bands.length + (bands.length === 1 ? " band." : " bands.") : ", none abroad just now.";
+    else s += ".";
+    bits.push(s);
+  } else if (Array.isArray(p.heroes)) bits.push("No hero has signed the guild post yet.");
+  if (!bits.length) bits.push("The town has not sent its numbers yet.");
+  let lead;
+  if (lastError) { lead = "Couldn't reach the town just now; as of " + age + ":"; box.classList.add("stale"); }
+  else if (stale) { lead = "As of " + age + " (the game is probably not running now):"; box.classList.add("stale"); }
+  else lead = "Live, updated " + age + ":";
+  const line = el("p", "wl-line");
+  line.append(el("b", "wl-lead", lead + " "), el("span", null, bits.join(" ")));
+  box.append(line);
+  const first = chronEntries(p.chronicle)[0];
+  if (first) box.append(el("p", "wl-last", "The latest word in the Chronicle: \u201c" + first.s.slice(0, 140) + (first.s.length > 140 ? "\u2026" : "") + "\u201d"));
+}
+(function wireWelcome() {
+  const box = $("welcome");
+  if (!box) return;
+  box.addEventListener("click", (e) => {
+    const b = e.target && e.target.closest ? e.target.closest("button[data-door]") : null;
+    if (!b || !box.contains(b)) return;
+    const id = cleanTab(b.getAttribute("data-door") || "");
+    if (TABS.indexOf(id) < 0) return;
+    setActiveTab(id);
+    const tab = $("tab-" + id);
+    if (tab) { try { tab.scrollIntoView({ block: "start" }); tab.focus({ preventScroll: true }); } catch (err) {} }
+  });
+  const d = $("welcomeDismiss");
+  if (d) d.addEventListener("click", () => setWelcome(false, true));
+  const r = $("welcomeBtn");
+  if (r) r.addEventListener("click", () => setWelcome(true, false));
+  setWelcome(params.get("welcome") === "1" || !getWelcomeSeen(), false);
 })();
 
 load();
@@ -3167,6 +4025,22 @@ const MOCK_TOWN_CHRON = [
   { t: "town", s: "Bellmire grows into Village.  (town level 3)", at: new Date(Date.now() - 27 * 3600000).toISOString() },
   { t: "raid", s: "Bandits tested the west road; the caravans came through bled.", at: new Date(Date.now() - 52 * 3600000).toISOString() },
 ];
+// ?mock=journal (H26): a D60-era payload - rows carry the town's `day`, and tagged rows carry `kind` and
+// `who`. "The Cooper" / "Brum" never spell the roster name "Brum the Cooper", so only `who` finds them.
+// Hostile strings sit in a `who` entry and in a `kind` value (the kind is not a bounded identifier, so
+// it must be treated as untagged). ?mock=journal3 is the SAME rows with the new fields stripped - a v=3 payload.
+const MOCK_JOURNAL = [
+  { t: "death", s: "The Cooper fell on floor 7, run through by a bone-knight.", at: new Date(Date.now() - 4 * 60000).toISOString(), day: 41, kind: "death", who: ["Brum the Cooper"] },
+  { t: "fight", s: "Brum's hammer rang true on floor 6.", at: new Date(Date.now() - 12 * 60000).toISOString(), day: 41, kind: "delve", who: ["Brum the Cooper"] },
+  { t: "loot", s: "A teal-dyed cloak came up out of the scar.", at: new Date(Date.now() - 30 * 60000).toISOString(), day: 41, kind: "find", who: ["<img src=x onerror=alert(1)>"] },
+  { t: "raid", s: "Bandits tested the west gate and were turned back.", at: new Date(Date.now() - 50 * 60000).toISOString(), day: 41, kind: "raid" },
+  { t: "town", s: "A line the town sent with a malformed kind.", at: new Date(Date.now() - 70 * 60000).toISOString(), day: 41, kind: "<img src=x onerror=alert(1)>", who: [7, null, "Pip"] },
+  { t: "town", s: "Day 40 begins - 48 souls, 1280 gold.", at: new Date(Date.now() - 20 * 3600000).toISOString(), day: 40, kind: "day" },
+  { t: "town", s: "Pip signed the guild ledger, and Brum the Cooper stood witness.", at: new Date(Date.now() - 21 * 3600000).toISOString(), day: 40 },
+  { t: "town", s: "Fire in Craft Row - a forge banked wrong.", at: new Date(Date.now() - 22 * 3600000).toISOString(), day: 40, kind: "disaster" },
+  { t: "delve", s: "Four delvers went down together and three came back up.", at: new Date(Date.now() - 44 * 3600000).toISOString(), day: 39, kind: "delve", who: ["Pip", "Brum the Cooper"] },
+  { t: "lore", s: "An old line with no day, no kind, no who.", at: new Date(Date.now() - 46 * 3600000).toISOString() },
+];
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
@@ -3177,9 +4051,73 @@ function withMock(p) {
   if (MOCK === "sheets") {            // H20: bare L1 hero, kitted veteran, a fallen hero; hostile strings throughout
     out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN; out.parties = MOCK_SHEET_PARTIES; out.chronicle = MOCK_SHEET_CHRON;
   }
+  if (MOCK === "journal" || MOCK === "journal3") {
+    out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN;
+    out.chronicle = MOCK === "journal" ? MOCK_JOURNAL : MOCK_JOURNAL.map((r) => ({ t: r.t, s: r.s, at: r.at }));
+    if (MOCK === "journal3") out.v = "3";
+  }
+  if (MOCK === "season" || MOCK === "season0" || MOCK === "season3") {   // H31: full season / empty season / a v3 payload with no age fields. Hostile strings on purpose
+    const bad = "<img src=x onerror=alert(1)>";
+    if (MOCK === "season0") { out.heroes = []; out.fallen = []; }
+    else {
+      out.town = Object.assign({}, out.town, { day: 20 });
+      out.heroes = [
+        { name: "Brum the Cooper", class: "knight", level: 9, deepest: 31, gold: 540, earned: 4100, born_day: 3 },
+        { name: bad, class: "mage", level: 4, deepest: 12, gold: 90, earned: 700, days_alive: 11 },
+        { name: "Pip", class: "rogue", level: 2, deepest: 5, gold: 15, earned: 60, born_day: 18 },
+      ];
+      out.fallen = [
+        { name: "Grimhollow", class: "knight", level: 9, deepest: 31, kills: 140, killed_by: "a bone-knight", day: 12, born_day: 2, earned: 3000 },
+        { name: "<b>Ash</b>", class: "<i>mage</i>", level: 6, deepest: 22, kills: 40, killed_by: bad, day: 9, age_days: 4, earned: 900 },
+      ];
+      if (MOCK === "season3") { for (const r of out.heroes.concat(out.fallen)) { delete r.earned; delete r.born_day; delete r.days_alive; delete r.age_days; } out.v = "3"; }
+    }
+  }
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "fallen") out.fallen = MOCK_FALLEN;
+  if (MOCK === "shops" || MOCK === "shops1") {   // H29: shelf states; every string below is hostile-ish on purpose
+    const bad = "<img src=x onerror=alert(1)>";
+    if (MOCK === "shops1") {
+      out.shops = ["The Provisioner", "The Chandler", "The Blacksmith"].map((n) => ({ name: n, level: 1, sells_to: "common", stock: [{ name: "Loaf", cost: 2 }, { name: "Jug of Ale", cost: 5 }] }));
+    } else {
+      out.shops = [
+        { name: "The Provisioner", level: 3, sells_to: "uncommon", stock: [{ name: "Loaf", cost: 2 }, { name: bad + " Ale", cost: 5, rarity: "common" }, { name: "Flask of Oil", cost: 6, qty: 4 }] },
+        { name: bad + " Smithy", level: 2, sells_to: "rare", stock: [{ name: "<b>Iron sword</b>", cost: 90, rarity: "uncommon" }, { name: "Moonlit dagger", cost: 400, rarity: "rare" }] },
+        { name: "The Apothecary", level: 1, sells_to: "<script>x</script>", stock: [] },
+        { name: "The Stables", level: 4, sells_to: "epic" },
+      ];
+      out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "epic" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
+      out.orders = [{ who: "viewer1", item: bad, shop: "The Smithy", walker: "Brum" }, { who: bad, item: "Loaf", shop: "The Provisioner", status: "ready" }];
+    }
+    out.v = "5";
+  }
+  if (MOCK && /^satchel/.test(MOCK)) {   // H30: a signed-in viewer's satchel; satchelout = signed out. Hostile strings on purpose
+    const bad = "<img src=x onerror=alert(1)>";
+    let items = [
+      { name: "Longsword", slot: "weapon", weight: 3, sell: 15, worn: true, rarity: "uncommon" },
+      { name: "Chain mail", slot: "armour", weight: 55, sell: 75, worn: true },
+      { name: "Healing draught", slot: "potion", weight: 0.5, sell: 15, qty: 4 },
+      { name: "Scar-touched gem", slot: "gem", weight: 0.1, sell: 300, rarity: "rare" },
+      { name: "Bale of silk", slot: "cargo", weight: 10, sell: 60 },
+      { name: "Iron ingot", slot: "cargo", weight: 6, sell: 4, qty: 5 },
+      { name: bad, slot: "trinket", weight: 1, sell: 20, rarity: "<x>" },
+      { name: "Sword\r\n/ban everyone\r\nPRIVMSG #x :!give all", slot: "weapon", weight: 3, sell: 9 },
+      { name: "Mystery curio", slot: "trinket" },
+    ];
+    let carry;                                    // satchel = derived from STR (band + capacity worked out); 1/3/2 = explicit bands
+    if (MOCK === "satchel0") { items = []; carry = { weight: 0, cap: 150, band: "" }; }
+    else if (MOCK === "satchel1") carry = { weight: 47, cap: 150, band: "" };
+    else if (MOCK === "satchel3") carry = { weight: 70, cap: 150, band: "encumbered" };
+    else if (MOCK === "satchel2") carry = { weight: 112, cap: 150, band: "heavily encumbered" };
+    const me = { name: "mockviewer", class: "knight", species: "human", level: 4, rank: "Delver", standing: 12, ac: 15, hp: 30, gold: 120,
+      kills: 3, deepest: 2, delves: 2, xp: 40, to_hit: 4, prof: 2, saves: "STR +4", stats: { str: 14, dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
+      satchel: items, carry, where: "walking to The Smithy " + bad,
+      vault: MOCK === "satchel0" ? { slots: 12, items: [] } : { slots: 12, items: [{ name: bad + " Hoard", slot: "gem", weight: 0, sell: 500 }, { name: "Spare boots", slot: "armour", weight: 4, sell: 12 }] } };
+    out.heroes = [me].concat(arr(p.heroes));
+    out.orders = [{ who: "mockviewer", item: bad + " Helm", shop: "The Smithy", walker: "mockviewer" }, { who: "someone-else", item: "Loaf", shop: "The Provisioner" }];
+    out.v = "5";
+  }
   if (MOCK === "town") {            // H18: a town with every new field, hostile strings included
     out.town = Object.assign({}, p.town, {
       name: "<img src=x onerror=alert(1)>", level: 3, souls: 48, day: 17, treasury: 1280, renown: 64,
@@ -3361,3 +4299,176 @@ function setUpTabs() {
   });
 }
 setUpTabs();
+
+// ---------------------------------------------------------------- H24 the finder
+// One search field that looks across everything this page already holds in memory:
+// living heroes, the fallen, bands, the Bestiary's lords and remembered Chronicle
+// lines. PAGE-LOCAL ONLY: no fetch, no new origin, no write path. Every result row is
+// built with el() (textContent) - a hero called <img src=x onerror=alert(1)> shows as
+// text. A result addresses its target by an INTEGER index/id the page owns (data-fi,
+// data-bi, #moment-n); no snapshot string is ever put in a URL, selector, src, href or
+// style. It never captures keys while the viewer is typing in another field.
+const FIND_MIN = 2, FIND_PER = 6, FIND_MAX = 24;
+const FIND_KIND = { hero: "Hero", fallen: "Fallen", band: "Band", lord: "Lord", moment: "Moment" };
+let finderRes = [], finderSel = -1;
+function finderPayload() { return last ? (MOCK ? withMock(last.payload) : last.payload) : null; }
+function finderQuery() { const i = $("finderInput"); return i ? ctrlStrip(i.value).slice(0, 60).trim().toLowerCase() : ""; }
+function finderRank(text, q) {
+  const t = String(text).toLowerCase();
+  const at = t.indexOf(q);
+  if (at < 0) return -1;
+  if (at === 0) return 0;
+  return /[^a-z0-9]/.test(t.charAt(at - 1)) ? 1 : 2;
+}
+function finderSearch(q) {
+  const p = finderPayload();
+  const groups = { hero: [], fallen: [], band: [], lord: [], moment: [] };
+  const add = (g, r, rank) => { r.g = g; r.rank = rank; groups[g].push(r); };
+  if (p && typeof p === "object") {
+    arr(p.heroes).forEach((h, i) => {
+      const n = nameOf(h); const k = n ? finderRank(n, q) : -1; if (k < 0) return;
+      const lvl = Number.isFinite(+h.level) && +h.level > 0 ? "level " + num(h.level) : "";
+      add("hero", { text: n, sub: [h.class ? cap(String(h.class)) : "", lvl].filter(Boolean).join(", "), i }, k);
+    });
+    arr(p.fallen).forEach((f, i) => {
+      if (f == null || typeof f !== "object") return;
+      const n = nameOf(f); const k = n ? finderRank(n, q) : -1; if (k < 0) return;
+      add("fallen", { text: n, sub: f.killed_by ? "taken by " + String(f.killed_by) : "in The Fallen", i }, k);
+    });
+    normalizeParties(p.parties != null ? p.parties : p.bands).forEach((b, i) => {
+      const k = b.name ? finderRank(b.name, q) : -1;
+      if (k >= 0) add("band", { text: b.name, sub: "a band in the scar", i }, k);
+      for (const m of b.members) {
+        const mk = m.name ? finderRank(m.name, q) : -1;
+        if (mk >= 0) add("band", { text: m.name, sub: "delving with " + (b.name || "a band"), i }, mk);
+      }
+    });
+  }
+  try {
+    beastBook().forEach((b, i) => {
+      let k = finderRank(b.name, q);
+      for (const t of arr(b.terms)) { const kk = finderRank(t, q); if (kk >= 0 && (k < 0 || kk < k)) k = kk; }
+      if (k >= 0) add("lord", { text: b.name, sub: BEAST_KINDS[b.kind] || "", i }, k);
+    });
+  } catch (e) { /* the book must never break the finder */ }
+  chronMemEnsure();
+  for (const r of chronMem) {
+    if (!r || !r.n || typeof r.s !== "string") continue;
+    const k = finderRank(r.s, q); if (k < 0) continue;
+    const a2 = r.at ? ago(r.at) : null;
+    add("moment", { text: r.s.length > 120 ? r.s.slice(0, 117) + "\u2026" : r.s, sub: a2 ? a2.text : "remembered", n: r.n | 0, ts: histTs(r) }, k);
+  }
+  const out = [];
+  for (const g of ["hero", "fallen", "band", "lord", "moment"]) {
+    groups[g].sort((x, y) => x.rank - y.rank || (g === "moment" ? y.ts - x.ts : 0));
+    for (const r of groups[g].slice(0, FIND_PER)) out.push(r);
+  }
+  // best match first across every group (a name that STARTS with the query beats a word buried in a line);
+  // the sort is stable, so ties keep the hero > fallen > band > lord > moment order
+  out.sort((x, y) => x.rank - y.rank);
+  return out.slice(0, FIND_MAX);
+}
+function finderOpenState(on) {
+  const panel = $("finderPanel"), inp = $("finderInput");
+  if (panel) panel.classList.toggle("hide", !on);
+  if (inp) { inp.setAttribute("aria-expanded", on ? "true" : "false"); if (!on) inp.removeAttribute("aria-activedescendant"); }
+}
+function finderSelect(i) {
+  const rows = $("finderList").children;
+  if (!rows.length) { finderSel = -1; return; }
+  finderSel = (i + rows.length) % rows.length;
+  for (let j = 0; j < rows.length; j++) rows[j].setAttribute("aria-selected", j === finderSel ? "true" : "false");
+  $("finderInput").setAttribute("aria-activedescendant", rows[finderSel].id);
+  try { rows[finderSel].scrollIntoView({ block: "nearest" }); } catch (e) {}
+}
+function finderPaint() {
+  const box = $("finderList"), note = $("finderNote");
+  if (!box || !note) return;
+  box.replaceChildren(); finderSel = -1; finderRes = [];
+  const q = finderQuery();
+  if (q.length < FIND_MIN) { note.textContent = ""; finderOpenState(false); return; }
+  finderRes = finderSearch(q);
+  finderOpenState(true);
+  if (!finderRes.length) {
+    const nothing = !finderPayload();
+    note.className = "finder-note finder-none";
+    note.textContent = nothing
+      ? "The town has not reported yet, so there is nothing here to search."
+      : "Nothing this page has seen matches \u201c" + q + "\u201d. The finder searches only what is in this browser: the town as last reported and about two days of remembered Chronicle. A name it has never seen cannot be found here.";
+    return;
+  }
+  note.className = "finder-note";
+  note.textContent = finderRes.length + (finderRes.length === 1 ? " place" : " places") + " to go. Up and down to choose, Enter to open, Escape to close.";
+  finderRes.forEach((r, i) => {
+    const li = el("li", "finder-row finder-" + r.g);
+    li.id = "finder-opt-" + i;
+    li.setAttribute("role", "option"); li.setAttribute("aria-selected", "false");
+    li.append(el("span", "fkind", FIND_KIND[r.g]), el("span", "ftext", r.text));
+    if (r.sub) li.append(el("span", "fsub", r.sub));
+    li.addEventListener("mousedown", (ev) => ev.preventDefault());      // keep focus in the field
+    li.addEventListener("click", () => finderOpen(r));
+    box.append(li);
+  });
+  finderSelect(0);
+}
+function finderLand(node) {
+  if (!node) return;
+  node.classList.add("finder-hit");
+  node.setAttribute("tabindex", "-1");
+  const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try { node.scrollIntoView({ block: "center", behavior: calm ? "auto" : "smooth" }); } catch (e) {}
+  try { node.focus({ preventScroll: true }); } catch (e) {}
+  setTimeout(() => node.classList.remove("finder-hit"), 3200);
+}
+function finderOpen(r) {
+  const p = finderPayload();
+  const inp = $("finderInput");
+  finderOpenState(false);
+  if (inp) inp.value = "";
+  if (!r || !p) return;
+  if (r.g === "hero") {
+    heroFilter = r.text; heroShown = HERO_PAGE;
+    const f = $("find"); if (f) f.value = r.text;
+    renderHeroes(arr(p.heroes));
+    setActiveTab("heroes");
+    const card = [...$("heroList").querySelectorAll("details.hero")].find((d) => (d.querySelector(".hname") || {}).textContent === r.text);
+    if (card) { card.open = true; finderLand(card); }
+  } else if (r.g === "fallen") {
+    setActiveTab("fallen");
+    finderLand($("fallenList").querySelector('[data-fi="' + (r.i | 0) + '"]'));
+  } else if (r.g === "band") {
+    setActiveTab("bands");
+    finderLand($("bandList").querySelector('[data-bi="' + (r.i | 0) + '"]'));
+  } else if (r.g === "lord") {
+    beastFilter = "all";
+    try { renderBestiary(p); } catch (e) {}
+    setActiveTab("bestiary");
+    finderLand($("bestiaryBody").querySelector('[data-bi="' + (r.i | 0) + '"]'));
+  } else if (r.g === "moment") {
+    chronFocusId = r.n | 0;
+    setActiveTab("chronicle");
+    paintChronicle();
+    try { history.replaceState(null, "", "#moment-" + (r.n | 0)); } catch (e) {}
+  }
+}
+(function setUpFinder() {
+  const inp = $("finderInput"), panel = $("finderPanel");
+  if (!inp || !panel) return;
+  inp.addEventListener("input", finderPaint);
+  inp.addEventListener("focus", () => { if (finderQuery().length >= FIND_MIN) finderPaint(); });
+  inp.addEventListener("keydown", (ev) => {
+    const open = !panel.classList.contains("hide");
+    if (ev.key === "ArrowDown") { ev.preventDefault(); if (!open) finderPaint(); else finderSelect(finderSel + 1); }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); if (open) finderSelect(finderSel - 1); }
+    else if (ev.key === "Enter") { if (open && finderRes[finderSel]) { ev.preventDefault(); finderOpen(finderRes[finderSel]); } }
+    else if (ev.key === "Escape") { ev.preventDefault(); if (open) finderOpenState(false); else { inp.value = ""; inp.blur(); } }
+  });
+  document.addEventListener("click", (ev) => { if (!ev.target || !ev.target.closest || !ev.target.closest("#finder")) finderOpenState(false); });
+  // "/" jumps to the field - but never while the viewer is typing somewhere else (the guild chat above all)
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key !== "/" || ev.ctrlKey || ev.metaKey || ev.altKey || ev.defaultPrevented) return;
+    const t = ev.target, tag = t && t.tagName ? t.tagName : "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    ev.preventDefault(); inp.focus();
+  });
+})();

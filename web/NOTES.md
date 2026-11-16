@@ -842,3 +842,16 @@ store (hostile strings, junk rows, bad timestamp) renders as text, 0 dialogs, 0 
 - An address that matches nobody on the roll (or is malformed, e.g. `#hero-abc`, too many digits) lands on Heroes with the plain note "That hero is not on tonight's roll." No error, no blank page.
 - Applied after each render only when the address changes, so the 60 s refresh never re-lands the viewer. Two heroes whose names collide on the 32-bit hash would open the first one on the roll (vanishingly unlikely).
 - Known limit: the link is per NAME; a renamed hero's old link goes to the note. The snapshot carries no stable hero id (a field the hub would prefer).
+
+## H30 - the Satchel tab (fourteenth)
+Signed-in viewer only (twLogin from H6; hero matched by exact login; the H11 pin is NOT used). Carried items with weight/value/value-per-pound sort (default), slot chips, text filter; carry bar (hpbar, CSSOM number) with 1/3 and 2/3 ticks = 5e encumbered/heavy; vault; own orders; stone (double press). Buttons send chat commands via satSend() -> satCommand(): fixed verb table + ONE argument stripped of C0/C1/U+2028/9 and capped at 80, so a name cannot carry a second line or command. Mocks: ?mock=satchel (derived from STR) satchel0 (empty) satchel1 (light) satchel3 (encumbered) satchel2 (heavy) satchelout (signed out); mock buttons print the command instead of sending.
+ASSUMED command names (not in the plan, confirm with D81): !withdraw (vault take-out), !stone. Edit SAT_VERBS / SAT_STONE only.
+Publisher contract read (v5+): hero.satchel[{name,qty,weight,sell,slot,rarity,worn}], hero.carry{weight,cap,band}|hero.encumbrance, hero.vault[]|{items,slots}, hero.where. Missing = "not published", never faked.
+Item icons (D73 PNGs) NOT used: they live outside web/ and a snapshot value cannot choose a src; glyphs from ICON_SET instead. Needs Mr. E's call (copy a curated set into web/ + whitelist).
+
+## H31 - the Season tab
+Fifteenth tab ("Season"), the hub home of the L66 leaderboard (the stream keeps no leaderboard, COORDINATION 13).
+Four cards, top ten each, living + fallen: Went deepest (`deepest`), Earned most, Died hardest (fallen only, by deepest
+floor), Lived longest. Honest gaps: the publisher sends only current `gold` today, so "Earned most" ranks gold held and
+says so; no age/born_day fields exist yet, so "Lived longest" shows an explanatory empty state. Both light up by
+themselves when the fields arrive (names in HUB_SECURITY.md). Checks: ?mock=season | season0 | season3.

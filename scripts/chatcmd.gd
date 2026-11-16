@@ -185,20 +185,72 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
             var guess := _closest(verb)
             if guess == "":
                 return ""
-            out = "No !%s here - did you mean !%s? (!help lists them all)" % [verb, guess]
+            # D70.4: this is the one answer that quotes a viewer's own word - declaw and cap it,
+            # and if nothing of it survives, stay silent instead of printing "No ! here"
+            var shown := safe_word(verb)
+            if shown == "":
+                return ""
+            out = "No !%s here - did you mean !%s? (!help lists them all)" % [shown, guess]
 
     _last[user_id] = now
     last_cmd[user_id] = now
+    out = safe_line(out)              # D70.4: the feed is published too, and _reply is idempotent
     if out != "":
         say.emit(out, _tone(out))
         _ui_snd(verb, out, _gold_moved(user_id, gold0))
     return _reply(user_id, display, login, out)
 
+## ---- D70.4: THE ECHO RULE. The bot must NEVER echo attacker-controlled text back into chat.
+## The hub defends itself with el()/textContent; chat has no such protection, and a line the bot
+## repeats is a line Mr. E's channel published. So every answer leaves through _reply and _reply
+## is THE ONE DOOR: control characters and the invisible marks are declawed, the whole line is
+## capped, and it can never OPEN with a character Twitch itself reads as a command (a leading
+## / or .). Where a viewer's own word has to be quoted at all - a typo nudge, !help <word> - it
+## goes through safe_word first, which caps it short so their four hundred characters cannot
+## crowd ours out inside the line cap. Echo only what the GAME made or what Twitch gave us.
+const REPLY_MAX := 440          # characters leaving for chat. Twitch's own cap is 500 and the
+                                # desktop's twitch_eventsub.gd puts its prefix in front of this.
+const VIEWER_MAX := 24          # of a viewer's OWN word, where one must be quoted at all
+
+## C0 and C1 controls, DEL, and the invisible marks that can hide text or turn a line round
+static func _is_bad(o: int) -> bool:
+    return o < 32 or o == 127 or (o >= 0x80 and o <= 0x9f) \
+        or (o >= 0x200b and o <= 0x200f) or (o >= 0x202a and o <= 0x202e) \
+        or (o >= 0x2066 and o <= 0x2069) or o == 0x2028 or o == 0x2029 or o == 0xfeff
+
+## every one of them becomes a single space, so an injected newline joins the line
+## instead of starting a second one
+static func _declaw(s: String) -> String:
+    var out := ""
+    for c in s:
+        out += " " if _is_bad(c.unicode_at(0)) else c
+    return out
+
+## a viewer's word, fit to be quoted inside one of our lines: declawed, the whitespace
+## collapsed, nothing left that reads as a command or a mention, and capped short.
+## "" means nothing survived - and then the bot says nothing at all rather than half a line.
+static func safe_word(s: String, cap := VIEWER_MAX) -> String:
+    var out := " ".join(_declaw(s).split(" ", false))
+    while out != "" and (out.begins_with("/") or out.begins_with(".") or out.begins_with("!") or out.begins_with("@")):
+        out = out.substr(1).strip_edges()
+    return _cut(out, cap).strip_edges()
+
+## the whole line as it will leave for chat. Spacing is left as the answer wrote it -
+## "  |  " and "  -  " are how these lines read - so this only declaws, caps and un-commands.
+static func safe_line(s: String) -> String:
+    var out := _declaw(s)
+    while out.strip_edges().begins_with("/") or out.strip_edges().begins_with("."):
+        out = out.strip_edges().substr(1)
+    out = out.strip_edges()
+    return _cut(out, REPLY_MAX) if out.length() > REPLY_MAX else out
+
 ## T1: hand a command's answer to Twitch chat (via the desktop's twitch_eventsub.gd)
 func _reply(user_id: String, display: String, login: String, out: String) -> String:
-    if out != "" and not user_id.begins_with("local_"):
-        twitch_reply.emit(login if login != "" else display.to_lower(), out)
-    return out
+    # D70.4: the last thing that happens to any answer, whatever path built it
+    var line := safe_line(out)
+    if line != "" and not user_id.begins_with("local_"):
+        twitch_reply.emit(safe_word(login if login != "" else display.to_lower(), 40), line)
+    return line
 
 # a command that requires a living hero
 func _needs(user_id: String, fn: Callable) -> String:
@@ -225,7 +277,7 @@ func _test_spot(user_id: String, verb: String, arg: String, arg2: String) -> Str
                 uid = k
                 break
         if uid == "":
-            return "No hero named %s." % who
+            return "No hero named %s." % safe_word(who)      # D70.4
     match verb:
         "testbits":
             var n := maxi(1, int(arg)) if arg.is_valid_int() else 100
@@ -561,7 +613,9 @@ static func help_line(arg := "") -> String:
     if arg != "":
         var k := canonical(arg.trim_prefix("!").to_lower())
         if not cs.has(k):
-            return "No !%s. !help lists them all." % arg.trim_prefix("!")
+            # D70.4: the viewer's own word again - capped, and dropped entirely if nothing survives
+            var shown := safe_word(arg.trim_prefix("!"))
+            return "!help lists them all." if shown == "" else "No !%s. !help lists them all." % shown
         var c: Dictionary = cs[k]
         var al := ""
         if not (c.get("aliases", []) as Array).is_empty():
@@ -649,6 +703,7 @@ func _ask_line(user_id: String, display: String, login: String, msg: String) -> 
     _last[user_id] = now
     last_cmd[user_id] = now
     out += _hub_tail()
+    out = safe_line(out)              # D70.4
     say.emit(out, _tone(out))
     _ui_snd("help", out)
     return _reply(user_id, display, login, out)

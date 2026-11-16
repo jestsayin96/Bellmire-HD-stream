@@ -6576,3 +6576,75 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
   byte-identical to b04e266's state. L56 is a measurement, not a bot change, so there is no command drift
   to re-check in either direction and the 26-command doc still matches the data.
 - NOTHING FOR THE GAME BUILD LANE in twitch_eventsub.gd this cycle, and nothing for Mr. E to decide.
+## C-68 (2026-11-16) - standing backlog item 4: bosses and potions again (bosses.json, potions.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-67 merged); told it to take the next-stalest standing-backlog item. That is bosses and potions: last touched in C-63, while C-64 (events), C-65 (epitaphs/barks), C-66 (Phase 2 words) and C-67 (miniboss feed) all came after. Fishing stays with the game build.
+- data/bosses.json: +12 lesser_uniques (3 each: Hollow King, Grubmother, Rattling Host, Nightwing) and +12 greater_uniques (3 each: Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified lords, not new lords; each keeps its lord's shape and sits inside that lord's existing hp/speed/attack range. Now 178 lesser, 172 greater.
+- data/potions.json: +16 brews (3 tier 1, 5 tier 2, 4 tier 3, 4 tier 4), trade-named, existing states only. Now 208 potions.
+- VALIDATION OK: both files parse; every pre-existing entry and key unchanged (text insertion, LF kept); no duplicate boss names; no key, name or alias collides with an existing potion; every gives/cures resolves in `states`.
+- CODE WIRING: none - same keys and shapes as existing entries.
+
+## B8 - D70.4 THE ECHO RULE: ONE DOOR, AND NOTHING HOSTILE GETS THROUGH IT (chat bot, 2026-11-16 13:46-14:20 CT)
+TAKE THIS NEXT gave CHAT BOT: retire _l56_soak.gd now that L56 is ticked, then D70.4 - the half of
+D70 that lives in scripts/chatcmd.gd. Both done. Lock: file read IDLE 13:35:01 (game build D91f),
+NO Godot process alive on either image name at 13:46; claimed 14:02, refreshed 14:08 on relaunch,
+released when Godot closed. Only my own three files and PROGRESS.md are touched.
+- THE AUDIT FIRST, THE CODE SECOND. Every reply path in chatcmd.gd was read for a viewer-settable
+  string reaching an outgoing line. What is actually attacker-controlled turned out to be SMALL and
+  worth naming exactly, because two of the four things D70.4 lists are NOT viewer-set in this build:
+  * HERO TITLES come from items.json through Roster.title_of - an item NAME, game data.
+  * EPITAPHS come from data/lore_lines.json through Roster._epitaph - game data.
+  * DYE NAMES are checked against items.json "dyes" BEFORE being echoed (roster.gd:1200), and
+    `!wear off <slot>` only echoes a slot that is already a key on the hero.
+  * What IS the viewer's own typing, echoed verbatim: the L14 typo nudge ("No !%s here") and
+    !help <word> ("No !%s."). Both took the word straight off the message, uncapped, with whatever
+    characters were in it. Those two were the holes.
+- THE FIX IS A DOOR, NOT A PATCH PER LINE. Auditing today's paths does not protect tomorrow's, so
+  _reply - which every answer already goes through on its way to twitch_reply - is now the one place
+  a line is made safe. safe_line() declaws C0/C1 controls, DEL, the zero-width marks and the
+  direction overrides (each becomes ONE SPACE, so an injected newline JOINS the line instead of
+  starting a second IRC line), strips a leading / or . so a line can never open as a chat command,
+  and caps the whole thing at REPLY_MAX 440 on a word (Twitch's cap is 500 and twitch_eventsub.gd
+  puts its prefix in front of ours). safe_word() is the short form for a viewer's own word:
+  VIEWER_MAX 24, mentions and command characters stripped off the front, and "" meaning the bot says
+  NOTHING rather than half a line. The two holes now go through safe_word; the local-only
+  !test* name echo does too, for nothing.
+- OUR OWN SPACING IS LEFT ALONE, DELIBERATELY. The first draft collapsed runs of whitespace, which
+  would have quietly rewritten every "  |  " and "  -  " in the bot's voice and moved L70's measured
+  caps. safe_line only declaws, un-commands and caps; only safe_word collapses.
+- THE CONTRACT IS UNCHANGED. twitch_reply(user_login, text) still emits with no @name and no rate
+  limiting. The login handed to the desktop is now passed through safe_word(.., 40) so it is one
+  plain word - the desktop's queue and prefix are untouched and nothing in twitch_eventsub.gd needs
+  to change for this.
+- GATE: _d704_echo.gd at the worktree root, 334 checks, D704_ECHO OK. Eleven hostile strings (a
+  newline + PRIVMSG, CRLF + /ban, \u0001ACTION, /timeout, .me, @everyone, zero-width + LRM + RLO,
+  600 a's, 40 tabs, an RLO reversal, a pop-isolate + BOM) fed through EVERY path chat can reach:
+  the typo nudge, !help <word>, the L69 plain-ask table, !dye, !wear, !brew, !enlist, !respec, !oil,
+  then a HOSTILE HERO NAME through !hero !inventory !delve !catchup !deepest !guild !patrons !reroll,
+  a hostile epitaph and fallen name through !memorial, and hostile Chronicle rows through !catchup.
+  Every outgoing line asserted: no control or invisible character, no newline, within 440, never
+  opening as a command, and - on the paths that quote the viewer - no run of their text surviving
+  whole. Plus the other direction: the ordinary answers are byte-for-byte what they were, including
+  the nudge line S2 asserts.
+  GDScript REFUSES a direction-control character inside a string literal ("escape it to avoid
+  confusion"), which is why the invisible cases are built with String.chr() - the engine makes the
+  same point the rule does.
+- ENGINE GATES, ALL GREEN: parse `--headless --quit-after 300` rc=0 with ZERO SCRIPT ERROR / Parse
+  Error lines; L14_TEST OK; TWITCH_PARSE OK; D704_ECHO OK; COMMANDS_DOC wrote 26 commands and git
+  reports docs/COMMANDS.md UNMODIFIED - a proven no-op again, as the ruling asks.
+- _s2_test.gd was run too, since I touched the line it asserts: S2_TEST FAIL 2, BOTH PRE-EXISTING
+  AND NEITHER MINE. (a) "chatcmd.gd: help" - _ask_line's `_ui_snd("help", out)`, present at HEAD
+  (verified with git show), is L69's: "help" is a verb, not a registered Sfx kind, so the literal
+  scan flags it. The fix is one word in a file I own and I am NOT taking it in this slot without it
+  being assigned. (b) "new ashwight -> ''" has no registered creature voice - content/game build.
+  The typo-nudge assertion itself passes.
+- DRIFT CHECKED BOTH DIRECTIONS after the edit: no command in code without an entry, no entry no
+  command answers; data/commands.json parses, 26 commands, 26 in `order`, 10 ask topics, sha
+  ab64c7f1, 14265 bytes, still ends 0a 7d 0a - UNTOUCHED this slot.
+- HARNESS RETIRED, AS THE RULING SETS: _l56_soak.gd (and its .uid) deleted now that L56 is ticked,
+  and _d704_echo.gd deleted now that D704_ECHO has passed on the real engine. Neither goes to tools/
+  and neither goes to main. The gate logs (.b8_gates*.log) are deleted too.
+  FOR THE SUPERVISOR: this one is a standing safety gate, not a one-off measurement. If you want it
+  kept, it belongs in tools/ and tools/ is not mine to add to - say so and I will hand it over.
+- NOT TICKED BY ME. D70's other three parts (.1 the first-timer, .2 their hero's moments, .3 the
+  room) are twitch_eventsub.gd's and untouched. NEXT: whatever TAKE THIS NEXT says; nothing in my
+  row is open that I can see.

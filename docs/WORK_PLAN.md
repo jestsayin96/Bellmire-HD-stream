@@ -1,6 +1,67 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## *** TONIGHT'S ONLY JOB *** D94 - EVERY ITEM MUST LOOK LIKE ITSELF (Mr. E, 16 Nov 00:55)
+HUD, HUB and CONTENT lanes are SHUT DOWN for this. Only GAME BUILD, ART and the SUPERVISOR run.
+Mr. E, verbatim: "this is unacceptable, unless they are a set example: metal armor chest, boots,
+helm, and gauntlets. ring should not at all be looking the same at all. change the gemstones, the
+colour, make them different, unique. that goes for all accessories. all equipment aka, the weapons
+and all the armour pieces should not be looking the same, again unless they are a set. fix this
+asap. shut everyone else down, this is the focus tonight."
+
+### THE MEASURED FAULT - do not re-derive it
+gear.gd `dress_cosmetics()` renders a worn accessory from the SLOT ONLY, never from the item:
+  - every ring is the same TorusMesh (inner 0.07, outer 0.11)
+  - the colour comes from `ACC_COL`, a four-entry dict keyed ring/amulet/gloves/boots
+  - so all ~50 rings are one gold torus; all gloves, amulets and boots likewise
+254 accessories with distinct names, prices, flavour and icons render as FOUR shapes in four
+colours. Only hats, banners and titles vary per item today.
+The weapons and armour are worse: the game runs on the 12-step GENERIC ladder in gear.gd
+(bare hands/plain steel/fine steel/runed/dragontooth/scarforged, rags/leather/chainmail/plate/
+warded plate/scarwoven mail). The 86 named weapons and 33 named armour pieces in items.json are
+read by NO SCRIPT AT ALL. A hero cannot hold "Ironmonger's Blade" - only "fine steel".
+
+### THE RULE
+EVERY ITEM LOOKS LIKE ITSELF. A viewer who paid for a specific thing must be able to SEE that
+specific thing on their hero and tell it apart from the one next to it.
+THE ONE EXCEPTION MR. E NAMED: a SET may share a look - a metal armour set whose chest, boots,
+helm and gauntlets match is correct and good. Sets are deliberate and declared; sameness that
+falls out of lazy code is not.
+
+### DIVISION OF WORK
+**ART LANE - build the variety.** You already solved this exact problem for D73: the icon
+generator derives silhouette from slot/kind, ornateness and metal from COST QUARTILE, palette
+from the stored colour, and FOR THE 230 ACCESSORIES WITH NO COLOUR IT DERIVES THE GEM FROM THE
+STAT (ac steel, saves violet, hp red, speed green, hit amber, dmg orange). Reuse that derivation
+for the 3D piece so THE ICON ON THE HUB AND THE THING ON THE HERO MATCH. That coherence is worth
+more than either alone.
+  - Rings: band profile, setting, gem shape and gem colour all vary. Cheap rings are a plain
+    band; expensive rings are worked, with a real stone.
+  - Amulets, gloves, boots, cloaks: same treatment - shape family from the item's NAME first
+    (a Guard Helm is a helm, a Straw Hat is a wide brim), hash only as a fallback, exactly as
+    D73's hats did.
+  - WEAR RIDES COST, per the 15 Nov ruling: cheap reads handled and worn, expensive reads new and
+    well kept. Never one wear value for a whole slot.
+  - Weapons and armour: the 119 named pieces need looks of their own, grouped into SETS where the
+    data says they belong together.
+  - Budget: these are worn by many bodies at once, so keep them CHEAP - low poly, few materials,
+    merged by material like the lords. A ring is seen at arm's length on a moving body.
+
+**GAME BUILD - wire it.** `dress_cosmetics()` must take the ITEM, not just the slot. Then the
+harder half: the 119 named weapons and armour pieces are dead data, and making them real is the
+point of this item - a hero holds a NAMED piece, the forge and the shop deal in named pieces, and
+gear.gd's generic ladder becomes the tier BEHIND the name rather than the thing itself.
+  - Keep the numbers. The 12-step ladder's atk/hp/ac values are balanced and stay; a named piece
+    carries a tier and inherits that tier's numbers.
+  - Do not break saves: a hero carrying "fine steel" today must still be valid tomorrow.
+
+### DONE
+A single render, one row per slot, showing SIX DIFFERENT items of that slot side by side on real
+hero bodies at stream distance. If a viewer cannot tell them apart in that shot, it is not done.
+Then the same for weapons and armour. Mr. E's eye is final.
+================================================================================
+
+================================================================================
 ## RESOLVED - THE MISLABELLED COMMIT ON `laptop` (closed by the supervisor 2026-11-15 23:58)
 Commit b3fbd16 on `laptop` carried the game build worker's in-progress D88 code under a
 documentation message. Mr. E ruled: leave it. The worker then committed finished, gated D88 on
@@ -12,7 +73,9 @@ exact file.
 Updated 2026-11-15 23:58 CT. If you own a lane, your next item is named here. Search the file
 for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."
 
-  GAME BUILD   ->  D83   (the traps are stuck - MEASURE FIRST), then D91 stages 2-4.
+  GAME BUILD   ->  *** D94 *** EVERY ITEM MUST LOOK LIKE ITSELF. Mr. E's 00:55 order; it
+                   outranks everything. Finish D83 only if it is mid-flight, then D94.
+                   D91 stages 2-4 wait. HUD, HUB and CONTENT are shut down for this.
                    D88 is DONE and ticked. D83 and D91 stages 2-4 are the whole of Phase 1's
                    remainder - finish them before anything in Phase 2 or 3.
   HUD          ->  L73's LAST STEP ONLY, then L74. The shot language itself is shipped, merged
@@ -27,7 +90,7 @@ for its ID and work it. DO NOT take "the first unchecked item you find reading d
                    (D77), the errand (D78), carry weight (D80), selling and the guild vault
                    (D81), and the upgrade poll (D66). The C-55 rarity ladder is delivered - it
                    landed as the lane's cycle C-58, see the C-55 block.
-  ART          ->  more minibosses (standing permission). Shipped: barracks (Drillmaster),
+  ART          ->  *** D94 *** (every item must look like itself) - was: more minibosses (standing permission). Shipped: barracks (Drillmaster),
                    workshop (Scrapwright), prison (Gaoler), shrine (Snuffer). Themes with none
                    yet: crypt, keep, treasury, mess, and the biome themes (wood, grassland,
                    flooded).

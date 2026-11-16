@@ -2,6 +2,45 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D91b stages 2-4: three-cell halls, the dungeon in the shared Crowd, the party in file, 2026-11-16 ~05:55 CT (game build)
+TAKE THIS NEXT gave GAME BUILD "D91 stages 2-4" (the cloak shade step it named earlier is D94d, already merged).
+- STAGE 3 - THREE-CELL HALLS, GRID GROWN (floorgen.gd). _corridor carves the 3x3 block round every
+  centre-line cell (HALL_W 3): straight runs exactly three across, bends filled. Rooms keep a two-cell
+  margin so a hall between two rooms stays a hall. The grid GREW instead of paying with rooms: 27-33
+  cells a side (boss 31-35), from its own seed ("floorsize:N") so the plan's stream is untouched -
+  floors vary in size from one to the next. The plan now returns `halls` (every carved cell in no
+  room); _is_corridor asks it first, because the old "open on two opposite sides" test finds no
+  three-wide corridor (the middle lane is open on four) and furniture would have walked into halls.
+  info["halls"] goes home with the floor. D88's _gate_spot already took lines up to three wide.
+  tools/_d91_delve.gd D91_MODE=plan, 60 floors: 0 hall cells narrower than three, 290/290 rooms
+  placed (0 floors short a room), 39 different sizes. D91_PLAN OK.
+- STAGE 2 - BODIES BELOW GROUND (delve.gd, monster.gd, crowd.gd). Every delver and live monster goes
+  into the SAME Crowd the town uses (crowd.gd gains reset() only - town untouched, D91_CROWD_TEST OK).
+  _step takes the Crowd's shove + yield (capped at 1.5x the step); Monster gets body_r (= its measured
+  wall radius, clamp(h*0.2, 0.3, 1.8)) and move_dir. A settle pass parts any pair closer than the sum
+  of their body_r, the smaller body giving way, never into stone or an obstacle - and it runs LATE in
+  the frame (a child node at process_priority 1000), because settled inside Delve._process a monster's
+  own patrol step could still stack two before the frame was drawn (that was the 5 bad frames below).
+- STAGE 4 - IN FILE (delve.gd _go_file). Descending and fleeing, a delver in a hall walks behind the
+  one ahead of it (order = route length to the goal, re-worked twice a second), FILE_GAP 1.7 m back,
+  never past them; in a room, or more than 7 m behind, it goes for the goal as before. Walk/idle anim
+  follows whether it actually moved. Descend/flee give-up raised 45 s -> 90 s (the walk is longer).
+- DONE TEST, six-hero delves sampling every body pair every frame (D91_MODE=soak):
+  run 1 (settle inside _process) 1244 s, 20 floors, 179,935 frames, 7.1 M pair-samples: 5 overlap
+  frames (2 over 1 cm, worst 0.228 m), 0 in an obstacle, 30 unsticks, 0 forced, 33,713 frames in file.
+  run 2 (late settle) 619 s, 12 floors, 89,391 frames, 2.8 M pair-samples: 0 overlap frames, 0 in an
+  obstacle, 1 unstick, 0 forced, 17,787 frames in file. D91_SOAK OK. (Run 2 is ~10 min, not 20 - the
+  full 20-min re-soak on the late settle is still owed.)
+- SHOT renders/cycles/d91/d91_hall_0..3.png (floor 2, windowed 1600x900): the six walk a three-wide
+  hall in file, then open out to meet four creatures coming the other way; settle worst 0.000. Looked at.
+- STILL OPEN under D91: (a) the TOWN half of the done test - tools/_d91_crowd.gd still measures 4.3
+  overlapping pairs/sample and 439 body-in-footprint samples in town (scatter rocks/trees unregistered,
+  stage 5) - the town has no late settle; (b) the floor change now costs 3.3-4.2 s in headless (bigger
+  grids, more wall pieces) - a D23 optimisation item, measured not fixed; (c) no stuck baseline for
+  the dungeon from before this change to compare 1 vs 30 unsticks against.
+- Gates: parse 0 errors, _offfloor 0 of 1988, TWITCH_PARSE OK, _townwalk stuck_on_route 0, _delve_test
+  no SCRIPT ERROR, D91_CROWD_TEST OK. Not ticked - supervisor's call.
+
 ## D-cycle - D94b the item's own key reaches the GEOMETRY, plus four fit-report fixes, 2026-11-16 02:30 (game build)
 - Item: D94 REMAINDER (TAKE THIS NEXT, game build row). Not ticked - supervisor ticks.
 - THE DUPLICATES, game side (scripts/gear.gd). Measured first: in gear.gd's own derivation 30

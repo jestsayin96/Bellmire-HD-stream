@@ -6094,3 +6094,66 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
 - GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1752, MON_INPROP 0 of 208; _twitch_parse TWITCH_PARSE OK;
   _townwalk in_solid 5/15840 (0.032%) raid 0 PASS, stuck_on_route 0; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
 - NEXT: D91 stages 2-4.
+
+## C-61 (2026-11-16) - WORK_PLAN D94 remainder / TAKE-THIS-NEXT CONTENT row: rarity banded PER SLOT (items.json only)
+- TAKE THIS NEXT gave CONTENT the item C-61. C-55/C-58 were already done. Fault: one global cost scale (441+ = legendary) meant boots (cap 420) and gloves (cap 380) could never hold a legendary.
+- data/items.json: the `rarity` key on all 254 accessories is re-derived inside each slot: midrank cost percentile among that slot's own pieces (equal costs share a rung), cut at the C-58 population proportions - below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above legendary. 122 of 254 labels moved. No cost, stat, tier or price changed; no rung added, renamed or doubled; equipment rarity untouched. New top-level `_note_c61` records the rule (the C-58 note is left as written and is superseded for accessories).
+- PER-SLOT BAND COUNTS (common/uncommon/rare/very rare/legendary): ring 9/23/11/8/4 (legendary 500,500,510,520); amulet 9/20/12/7/3 (440,470,480); cloak 8/21/10/6/4 (480,480,480,500); boots 6/21/11/7/3 (390,400,420); gloves 8/24/8/8/3 (320,330,380). Every slot has at least one legendary.
+- ARTIFACT unchanged: zero accessories are artifact; checked no artifact equipment id appears in shop_stock, trader_cargo or caravan_manifests.
+- VALIDATION OK: all four data files parse; every pre-existing key and value is identical except accessory `rarity` (compared against HEAD, key order preserved); only addition is `_note_c61`.
+- CODE WIRING: any reader that bands accessories by the global 441+ cost threshold (hub, icon border colour, shop gate, D95 showcase legendary row) must read the stored `rarity` key instead - never a cost threshold. Boots and gloves can now be legendary at costs 390-420 / 320-380, so any shop level gate keyed to rarity should be rechecked against those costs; the D95 showcase no longer needs to borrow very-rare pieces. "epic" -> "very rare" in fishing.json and chatcmd.gd order array is still the code lane's.
+## B1 - L68: BellmireBro knows what the game has become (chat bot, 2026-11-16 ~05:45-06:10 CT)
+OWNER NOTE: L68 was "Owner: LAPTOP CODE" and the jestai laptop was retired on 15 Nov, so this item had an
+owner on paper and nobody to do it. This lane (worktree bellmire-bot, branch `chatbot`) is that owner now.
+Two files touched and no others: scripts/chatcmd.gd and data/commands.json.
+- L68.1 THE HUB EXISTS NOW AS FAR AS CHAT IS CONCERNED. !hub (also !site, !guildhall) answers with the live
+  URL and one line on what is there. The URL is NOT in the code: it is `hub_url` in data/commands.json, so
+  chat, !help and the hub's own Commands tab (generated from the same file by tools/_commands_doc.gd) cannot
+  disagree about it. ChatCmd.hub_url() reads it; an empty value degrades to "The page is not up yet."
+  - !hero now ends "| Full sheet: <url>" - a viewer who asks about their hero learns the rest is a click away.
+  - !help / !commands end "All of it: <url>".
+- L68.2 WHAT SHIPPED IS ANSWERABLE. Three new commands, each ending with the same hub pointer:
+  - !satchel (also !sell, !prices): the counter pays TWO FIFTHS of shop cost for anything owned and not worn.
+    That is snapshot_pub.gd SELL_BACK = 0.4 and leaderboard_panel.gd Satchel.SELL_BACK = 0.4 said in words -
+    no second opinion invented, so chat and the hub quote one number.
+  - !festival (also !feast): a festival gathers the town in the market square, a caravan is likelier while it
+    runs, the town growing a level calls one, and a paid festival is named for whoever paid (town.gd D63).
+  - !bestiary (also !beasts, !monsters): size, habits in a fight, where each beast is at home, and the eight
+    lords. Depth by depth - NO floor count stated anywhere.
+  - The character sheet is covered by !hero's pointer rather than a fourth command: the sheet IS the hub page.
+- L68.3 THE DRIFT TEST. IT ALREADY EXISTED and nobody had noticed: tools/_l14_test.gd reads ChatCmd's own
+  `match verb:` block out of scripts/chatcmd.gd with a RegEx and checks BOTH directions - a verb the code
+  answers with no entry in the data, and an entry naming a verb the code does not answer. So L68.3's
+  deliverable did not need writing, it needed PROVING, and the proof is that it bites:
+    clean                           -> missing [] / unanswered []
+    "hub" entry deleted, code kept  -> missing ["hub","site","guildhall"]
+    code arm deleted, entry kept    -> unanswered ["hub"]
+  Both failure directions reproduced. No new test file was written and tools/ was not touched: a new one would
+  have duplicated a working test in a directory this lane does not own.
+- Every PRE-EXISTING key in data/commands.json is byte-identical; the four new entries and four `order` slots
+  are purely additive. `order` and `commands` still name the same set. No command or alias collides with the
+  `foreign` block (fightoverlay's words and its v- prefix), checked exact-and-prefix as _l14_test does.
+- THE CONTRACT IS UNTOUCHED: twitch_reply(user_login, text) still emits plain, with no @name and no rate
+  limiting, and twitch_eventsub.gd still owns the queue, the prefix and the Send Chat Message call.
+- GATES (all on this worktree, 2026-11-16 06:00-06:06 CT): parse 0 GDScript SCRIPT ERROR / 0 GDScript Parse
+  Error; tools/_commands_doc.gd "COMMANDS_DOC wrote 25 commands" and docs/COMMANDS.md regenerated from the data;
+  tools/_l14_test.gd L14_TEST OK; tools/_twitch_parse.gd TWITCH_PARSE OK; data/commands.json re-validated with
+  python json.load after every edit. DRIFT PROOF, run for real and then reverted byte-identical (sha256 checked):
+  pulling the !hub ENTRY -> "FAIL every verb ChatCmd answers is in the data (58 verbs; missing [hub, site,
+  guildhall])", L14_TEST FAIL 1; pulling the !hub CODE ARM -> "FAIL every command in the data is answered
+  (unanswered [hub])", L14_TEST FAIL 1. Measured reply lengths, all well inside Twitch's 500: !hub 222,
+  !festival 224, !bestiary 185, !satchel 148, !hero 329, !help 294.
+- LOCK: docs/RUN_LOCK.txt's "RUNNING 05:41:59 (game build D91 ... 8-min soak)" was CLEARED AS STALE by this lane
+  at 05:58:31 - no Godot process alive across ~3 minutes of polling (05:55:53-05:58:02) and no game build commit
+  since it was taken (the only commits after it were art 05:48 and hud 05:53). The process was ground truth.
+  Taken and released by this lane for its own ~8 minutes.
+- NOTED, NOT MINE: a fresh import of this worktree prints pre-existing ext_resource Parse Errors for
+  assets/kit/materials/MI_*.tres pointing at assets/kit/textures/T_*_BaseColor.png that are not in the repo.
+  Nothing to do with chat; flagged for whoever owns assets/kit.
+- NEXT: L69 (the bot carries the chat - plain questions, not just commands), then L70 (!catchup), then L56.
+
+## C-62 (2026-11-16) - standing backlog item 5: miniboss feed lines (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT the fishing "epic" -> "very rare" conversion in data/fishing.json. NOT DONE: fishing.json is not one of the four files this lane owns, and the standing rule is edit only items, lore_lines, bosses, potions. Mr. E or the supervisor must either grant fishing.json to content explicitly or hand it to the game build, which already owes angler.gd/fishing.gd/economy.gd. Counts as found: "epic" appears 4 times in fishing.json (ladder array plus three catches).
+- Took backlog item 5 instead. New top-level `miniboss_feed` in data/lore_lines.json: all fourteen art-lane minibosses (drillmaster, scrapwright, gaoler, snuffer, sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker, bellman, boiler), each with arrive / act / broken / fall lines, 140 lines total, plain register, plus a `_note`. {name} marks a hero where used.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical, key order and CRLF preserved; only addition is `miniboss_feed`.
+- CODE WIRING: the game build reads miniboss_feed.by_key[<miniboss key>][arrive|act|broken|fall] and posts one at random to the feed on set-piece spawn, each mechanic firing, the weakness being broken, and death. Lines containing {name} need a hero substituted. Also still owed by code: "epic" -> "very rare" in fishing.json, angler.gd, fishing.gd, economy.gd and chatcmd.gd's order array.

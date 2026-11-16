@@ -1,0 +1,199 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+T5_ROLL start
+T5SHOT t5_smithy_before
+  ok   bands 1/2-7/8-12/13-19/20 -> ["fumble", "bad", "bad", "mixed", "mixed", "good", "good", "crit"]
+  ok   'build' -> build
+  ok   'festival' -> event
+  ok   a law named by title -> that law
+  ok   nothing typed -> fate picks (build)
+  ok   words read from lore_lines propositions + e3po.viewer_roll
+FEED CoffeeCat rolls a 20 to raise the smithy - a triumph. The smithy goes up 2 levels in a single day - rarer steel on the counter from now on.
+    feed: ["The Smithy is raised to level 3: it will now sell rare goods - paid for by CoffeeCat.", "CoffeeCat rolls a 20 to raise the smithy - a triumph. The smithy goes up 2 levels in a single day - rarer steel on the counter from now on.", "\'Now THAT is how it is done. Write it down. Write it twice.\'"]
+  ok   build 20: smithy 1 -> 3, ceiling 3
+  ok   Chronicle: 'CoffeeCat rolls a 20 to raise the smithy - a triumph.'
+  ok   the result carries the Commander's crit verdict
+T5SHOT t5_smithy_after_crit
+FEED Grimble rolls a 1 to raise the smithy - a fumble, and it backfires. A forge spark catches the scaffold. Half the timber burns, and the town pays 40 gold to put it out.
+  ok   build 1 BACKFIRES: smithy stays 3, wood 100->50, treasury 500->460
+  ok   Chronicle names the fumble
+FEED Pell rolls a 5 to raise the smithy - it goes badly. The scaffold goes up crooked and has to come down again. The smithy stays as it was, and a third of the timber is wasted.
+  ok   build 5 goes badly: wood 50->35, smithy unchanged
+FEED Marigold rolls a 15 to call a festival - it goes well. Bellmire throws a festival in their name.
+  ok   event 15: a festival starts, paid for by Marigold
+T5SHOT t5_square_festival
+FEED Tobble rolls a 4 to call a festival - it goes badly. Nobody comes. The food laid out for the feast spoils in the sun.
+  ok   event 4 goes badly: food 100->80
+FEED Wren rolls a 17 to push Debtors' Pardon - it goes well. Debtors' Pardon passes. The poor breathe again; loyalty climbs.
+  ok   law 17: renown 5->6, the law's good line
+FEED Wren rolls a 3 to push Debtors' Pardon - it goes badly. Debtors' Pardon passes, and it goes wrong. The lenders shut their purses, and coin stops moving.
+  ok   law 3: renown 6->5, the law's bad line
+  ok   what = 'Push Debtors' Pardon'
+FEED NoHeroYet rolls a 3 to raise the smithy - it goes badly. The scaffold goes up crooked and has to come down again. The smithy stays as it was, and a third of the timber is wasted.
+  ok   redemption rolls for a viewer with NO hero: { "n": 3, "by": "NoHeroYet", "what": "Raise the smithy", "result": "The scaffold goes up crooked and has to come down again. The smithy stays as it was, and a third of the timber is wasted. \'Not a win. Not a story. The next one will be either.\'", "tier": "bad", "cost": "750 points", "kind": "build", "at": "2026-11-16T03:15:41Z" }
+  ok   no 'enlist first' refusal for a roll
+FEED <img src=x onerror=alert(1)>Bad rolls a 10 to call a festival - a mixed result. The festival is called off, but the stalls sell what they brought - a little more food in the stores.
+  ok   payload v4 carries rolls (9)
+  ok   newest first, hostile name cleaned: img src=x onerror=alert(…
+  ok   every row: n 1-20, by/what/result/cost/at, whitelisted tier, result never cut
+[
+  {
+    "at": "2026-11-16T03:15:41Z",
+    "by": "img src=x onerror=alert(…",
+    "cost": "",
+    "n": 10,
+    "result": "The festival is called off, but the stalls sell what they brought - a little more food in the stores. 'Not your night. Nights end.'",
+    "tier": "mixed",
+    "what": "Call a festival"
+  },
+  {
+    "at": "2026-11-16T03:15:41Z",
+    "by": "NoHeroYet",
+    "cost": "750 points",
+    "n": 3,
+    "result": "The scaffold goes up crooked and has to come down again. The smithy stays as it was, and a third of the timber is wasted. 'Not a win. Not a story. The next one will be either.'",
+    "tier": "bad",
+    "what": "Raise the smithy"
+  },
+  {
+    "at": "2026-11-16T03:15:41Z",
+    "by": "Wren",
+    "cost": "",
+    "n": 3,
+    "result": "Debtors' Pardon passes, and it goes wrong. The lenders shut their purses, and coin stops moving. The Commander writes it down small enough to pretend it did not happen.",
+    "tier": "bad",
+    "what": "Push Debtors' Pardon"
+  }
+]
+  ok   failure outcomes demonstrated, not only successes (5)
+T5_ROLL OK 23/23
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

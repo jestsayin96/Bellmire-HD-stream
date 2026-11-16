@@ -552,7 +552,7 @@ func send(trip: Array) -> Townsfolk:
     add_child(v)
     var w: Node3D = null
     if cart:
-        w = town._spawn_raw(MKPROPS, "Prop_Wagon", v.position + Vector3(0, 0, 2.6), PI * 0.5, 0.8)
+        w = town._spawn_raw(MKPROPS, "Prop_Wagon", v.position - Vector3(0, 0, 2.6), PI * 0.5, 0.8)   # D90: behind them (a new body faces +z), never spawned ahead
         v.cart = w
     v._route = town.route(a, b)
     if v._route.is_empty():

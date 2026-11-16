@@ -194,6 +194,7 @@
     <button type="button" role="tab" id="tab-bestiary"  data-tab="bestiary"  aria-controls="bestiary"  aria-selected="false" tabindex="-1">Bestiary</button>
     <button type="button" role="tab" id="tab-shops"     data-tab="shops"     aria-controls="shops"     aria-selected="false" tabindex="-1">Shops</button>
     <button type="button" role="tab" id="tab-satchel"   data-tab="satchel"   aria-controls="satchel"   aria-selected="false" tabindex="-1">Satchel</button>
+    <button type="button" role="tab" id="tab-season"    data-tab="season"    aria-controls="season"    aria-selected="false" tabindex="-1">Season</button>
     <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
     <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
@@ -400,6 +401,14 @@
       </div>
       <p class="chatstatus" id="satStatus" role="status" aria-live="polite"></p>
       <div id="satBody" role="region" aria-label="Your satchel, vault and orders" tabindex="0"></div>
+    </section>
+
+    <!-- Season (H31): standings over the season from the snapshot (heroes + fallen). Read-only; every name through el(). -->
+    <section class="panel" id="season" role="tabpanel" aria-labelledby="tab-season" tabindex="0">
+      <h2 class="title">The Season</h2>
+      <p class="eyebrow">Who went deepest, earned most, died hardest and lived longest</p>
+      <div id="seasonBody" role="region" aria-label="Season standings" tabindex="0"></div>
+      <p class="note">Standings count the living and the fallen. A board with no data says so rather than guessing; the stream shows no leaderboard - this is where it lives.</p>
     </section>
 
     <!--

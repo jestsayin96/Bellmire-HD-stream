@@ -1408,3 +1408,17 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
   .sat-slot, .sat-num { text-align: left; }
   .sat-acts { grid-column: 1 / -1; justify-content: flex-start; }
 }
+
+/* ===== H31: the Season tab (reuses .shop-card / .shop-grid; the bar fill is a CSSOM number) ===== */
+.sea-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.sea-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.sea-row { display: grid; grid-template-columns: 2.4rem 1fr auto; gap: 2px 8px; align-items: center; padding: 5px 4px; position: relative; border-bottom: 1px solid rgba(128,128,128,.18); }
+.sea-row::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: calc(var(--fill, 0) * 100%); background: var(--accent, #3aa6a0); opacity: .7; }
+.sea-row.lead::after { background: var(--gold, #c9a54a); opacity: 1; }
+.sea-row.gone .sea-name { opacity: .8; }
+.sea-rank { font-size: .85rem; opacity: .8; }
+.sea-mid { display: flex; flex-direction: column; min-width: 0; }
+.sea-name { overflow-wrap: anywhere; font-size: .92rem; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.sea-sub { font-size: .75rem; opacity: .7; overflow-wrap: anywhere; }
+.sea-val { white-space: nowrap; text-align: right; }
+.sea-val .bunit { margin-left: 4px; font-size: .75rem; opacity: .75; }

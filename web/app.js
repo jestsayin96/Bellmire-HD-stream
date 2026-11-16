@@ -290,7 +290,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "season", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -342,6 +342,7 @@ function render(p) {
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
   try { renderShops(p); } catch (e) { /* the Shops tab must never break the rest of the page */ }
   try { renderSatchel(p); } catch (e) { /* the Satchel tab must never break the rest of the page */ }
+  try { renderSeason(p); } catch (e) { /* the Season tab must never break the rest of the page */ }
   try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
   try { applyHeroLink(p); } catch (e) { /* a bad link must never break the page */ }
 }
@@ -3603,6 +3604,116 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
   sec.addEventListener("focusout", (e) => { if (!sec.contains(e.relatedTarget)) leave(); });
 })();
 
+// ============================================================ SEASON (H31)
+// The Season tab: standings over the whole season, from the snapshot only - who went deepest, who
+// earned most, who died hardest, who kept a hero alive longest. Heroes + fallen are the data; nothing
+// is stored or invented. Fields are read DEFENSIVELY and the tab says plainly which board has no data:
+//   earned   : hero.earned | gold_earned | total_gold | lifetime_gold   (else current gold, labelled "held")
+//   lifespan : hero.days_alive | age_days | lived_days | age            (else day - born_day for the fallen,
+//              town.day - born_day for the living)
+//   hardest  : fallen only - deepest floor reached, then level, then kills; killed_by / day shown
+// Every name/killer/epitaph goes through el()/textContent; the bar width is a CSSOM number.
+const SEASON_TOP = 10;
+function seaPick(r, keys) { for (const k of keys) { const v = r && r[k]; if (v != null && v !== "" && Number.isFinite(+v)) return +v; } return null; }
+function seaName(r) { const n = r && r.name != null ? ctrlStrip(r.name).slice(0, 40) : ""; return n || "(no name)"; }
+function seaBoards(heroes, fallen, townDay) {
+  const live = heroes.filter((h) => h && typeof h === "object").map((r) => ({ r, dead: false }));
+  const gone = fallen.filter((f) => f && typeof f === "object").map((r) => ({ r, dead: true }));
+  const all = live.concat(gone);
+  const rank = (rows, tie) => {
+    rows.sort((a, b) => b.v - a.v || tie(b) - tie(a) || seaName(a.r).localeCompare(seaName(b.r), "en", { sensitivity: "base" }));
+    let place = 0, prev = null;
+    rows.forEach((e, i) => { if (e.v !== prev) { place = i + 1; prev = e.v; } e.place = place; });
+    return rows;
+  };
+  const deep = rank(all.map((e) => Object.assign({}, e, { v: n0(e.r.deepest) })).filter((e) => e.v > 0), (e) => n0(e.r.level));
+  let earnedReal = false;
+  const rich = rank(all.map((e) => {
+    const x = seaPick(e.r, ["earned", "gold_earned", "total_gold", "lifetime_gold"]);
+    if (x != null) earnedReal = true;
+    return Object.assign({}, e, { v: x != null ? x : n0(e.r.gold), held: x == null });
+  }).filter((e) => e.v > 0), (e) => n0(e.r.level));
+  const hard = rank(gone.map((e) => Object.assign({}, e, { v: n0(e.r.deepest) })).filter((e) => e.v > 0), (e) => n0(e.r.level) * 1000 + n0(e.r.kills));
+  let lifeData = false;
+  const lived = rank(all.map((e) => {
+    let d = seaPick(e.r, ["days_alive", "age_days", "lived_days", "age"]);
+    if (d == null) {
+      const born = seaPick(e.r, ["born_day", "joined_day", "enlisted_day"]);
+      const end = e.dead ? seaPick(e.r, ["day"]) : (Number.isFinite(+townDay) ? +townDay : null);
+      if (born != null && end != null) d = Math.max(0, end - born);
+    }
+    if (d != null) lifeData = true;
+    return Object.assign({}, e, { v: d == null ? 0 : d });
+  }).filter((e) => e.v > 0), (e) => n0(e.r.level));
+  return { deep, rich, hard, lived, earnedReal, lifeData, total: all.length };
+}
+function seaRow(e, max, unit, sub) {
+  const li = el("li", "sea-row" + (e.dead ? " gone" : "") + (e.place === 1 ? " lead" : ""));
+  li.style.setProperty("--fill", max > 0 ? Math.max(0, Math.min(1, e.v / max)) : 0);
+  li.append(el("span", "sea-rank", "#" + e.place));
+  const mid = el("span", "sea-mid");
+  const nm = el("span", "sea-name");
+  if (e.place <= 5) nm.append(coat(seaName(e.r), "sm"));
+  nm.append(document.createTextNode(seaName(e.r)));
+  if (e.dead) nm.append(el("span", "tag", "fallen"));
+  mid.append(nm);
+  if (sub) mid.append(el("span", "sea-sub", sub));
+  li.append(mid);
+  const val = el("span", "sea-val");
+  val.append(el("b", null, num(e.v)), el("span", "bunit", unit));
+  li.append(val);
+  return li;
+}
+function seaCard(title, ic, rows, unit, subFn, emptyMsg, note) {
+  const card = el("article", "shop-card sea-card");
+  const head = el("header", "shop-head");
+  head.append(icon(ic), el("h3", "shop-name", title));
+  if (rows.length) head.append(el("span", "shop-lvl", rows.length > SEASON_TOP ? "top " + SEASON_TOP + " of " + num(rows.length) : num(rows.length) + " ranked"));
+  card.append(head);
+  if (note) card.append(el("p", "shop-empty", note));
+  if (!rows.length) { card.append(el("p", "shop-empty", emptyMsg)); return card; }
+  const ol = el("ol", "sea-list");
+  const max = rows[0].v;
+  rows.slice(0, SEASON_TOP).forEach((e) => ol.append(seaRow(e, max, unit, subFn(e))));
+  card.append(ol);
+  return card;
+}
+function renderSeason(p) {
+  const box = $("seasonBody");
+  if (!box) return;
+  box.textContent = "";
+  const heroes = arr(p && p.heroes), fallen = arr(p && p.fallen);
+  const day = p && p.town ? seaPick(p.town, ["day"]) : null;
+  const b = seaBoards(heroes, fallen, day);
+  const sub = (e) => {
+    const r = e.r, bits = [];
+    if (r.class) bits.push(cap(ctrlStrip(r.class).slice(0, 16)));
+    if (r.level != null && Number.isFinite(+r.level)) bits.push("level " + num(r.level));
+    return bits.join(", ");
+  };
+  if (!b.total) {
+    box.append(el("p", "shop-empty", "No heroes have been published this season yet. Type !enlist in chat to raise one; the standings fill in as the town reports."));
+    return;
+  }
+  const grid = el("div", "shop-grid sea-grid");
+  grid.append(seaCard("Went deepest", "delve", b.deep, "floor", (e) => sub(e), "Nobody has been below the first floor yet."));
+  grid.append(seaCard("Earned most", "coin", b.rich, "gold",
+    (e) => (e.held ? "held now" : "earned") + (sub(e) ? "  ·  " + sub(e) : ""),
+    "Nobody has gold to their name yet.",
+    b.earnedReal ? "" : "The town publishes only gold in hand for now, so this ranks what heroes hold, not what they earned."));
+  grid.append(seaCard("Died hardest", "death", b.hard, "floor", (e) => {
+    const bits = [];
+    if (e.r.killed_by != null && String(e.r.killed_by).trim()) bits.push("to " + ctrlStrip(e.r.killed_by).slice(0, 40));
+    if (e.r.day != null && Number.isFinite(+e.r.day)) bits.push("day " + num(e.r.day));
+    const s = sub(e); if (s) bits.push(s);
+    return bits.join("  ·  ");
+  }, "Nobody has fallen yet - or the fallen have not reported a floor.", "Ranked by the deepest floor reached before the end."));
+  grid.append(seaCard("Lived longest", "town", b.lived, "days", (e) => (e.dead ? "fell" : "still living") + (sub(e) ? "  ·  " + sub(e) : ""),
+    "The town has not published how long a hero has lived yet.",
+    b.lifeData ? "" : "No hero carries an age or a birth day in the town's records yet; this fills in by itself when they do."));
+  box.append(grid);
+}
+
 (function () {   // H30 controls: the select / direction / filter live outside the re-rendered body so typing keeps focus
   const sel = $("satSort"), dir = $("satDir"), find = $("satFind");
   const again = () => { if (lastSatP) renderSatchel(lastSatP); };
@@ -3620,7 +3731,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -3944,6 +4055,23 @@ function withMock(p) {
     out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN;
     out.chronicle = MOCK === "journal" ? MOCK_JOURNAL : MOCK_JOURNAL.map((r) => ({ t: r.t, s: r.s, at: r.at }));
     if (MOCK === "journal3") out.v = "3";
+  }
+  if (MOCK === "season" || MOCK === "season0" || MOCK === "season3") {   // H31: full season / empty season / a v3 payload with no age fields. Hostile strings on purpose
+    const bad = "<img src=x onerror=alert(1)>";
+    if (MOCK === "season0") { out.heroes = []; out.fallen = []; }
+    else {
+      out.town = Object.assign({}, out.town, { day: 20 });
+      out.heroes = [
+        { name: "Brum the Cooper", class: "knight", level: 9, deepest: 31, gold: 540, earned: 4100, born_day: 3 },
+        { name: bad, class: "mage", level: 4, deepest: 12, gold: 90, earned: 700, days_alive: 11 },
+        { name: "Pip", class: "rogue", level: 2, deepest: 5, gold: 15, earned: 60, born_day: 18 },
+      ];
+      out.fallen = [
+        { name: "Grimhollow", class: "knight", level: 9, deepest: 31, kills: 140, killed_by: "a bone-knight", day: 12, born_day: 2, earned: 3000 },
+        { name: "<b>Ash</b>", class: "<i>mage</i>", level: 6, deepest: 22, kills: 40, killed_by: bad, day: 9, age_days: 4, earned: 900 },
+      ];
+      if (MOCK === "season3") { for (const r of out.heroes.concat(out.fallen)) { delete r.earned; delete r.born_day; delete r.days_alive; delete r.age_days; } out.v = "3"; }
+    }
   }
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;

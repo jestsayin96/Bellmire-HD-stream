@@ -848,3 +848,10 @@ Signed-in viewer only (twLogin from H6; hero matched by exact login; the H11 pin
 ASSUMED command names (not in the plan, confirm with D81): !withdraw (vault take-out), !stone. Edit SAT_VERBS / SAT_STONE only.
 Publisher contract read (v5+): hero.satchel[{name,qty,weight,sell,slot,rarity,worn}], hero.carry{weight,cap,band}|hero.encumbrance, hero.vault[]|{items,slots}, hero.where. Missing = "not published", never faked.
 Item icons (D73 PNGs) NOT used: they live outside web/ and a snapshot value cannot choose a src; glyphs from ICON_SET instead. Needs Mr. E's call (copy a curated set into web/ + whitelist).
+
+## H31 - the Season tab
+Fifteenth tab ("Season"), the hub home of the L66 leaderboard (the stream keeps no leaderboard, COORDINATION 13).
+Four cards, top ten each, living + fallen: Went deepest (`deepest`), Earned most, Died hardest (fallen only, by deepest
+floor), Lived longest. Honest gaps: the publisher sends only current `gold` today, so "Earned most" ranks gold held and
+says so; no age/born_day fields exist yet, so "Lived longest" shows an explanatory empty state. Both light up by
+themselves when the fields arrive (names in HUB_SECURITY.md). Checks: ?mock=season | season0 | season3.

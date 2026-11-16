@@ -207,7 +207,19 @@
     {"name": "The Rattling Host, Straw-Stuffed", "shape": "stuffed with straw where the flesh was - quick on its feet, and it burns like a rick", "hp": 140, "speed": 4.6, "attack": 23},
     {"name": "Nightwing, Weathervane-Struck", "shape": "it turns on the wind like a vane - never quite where you aimed", "hp": 100, "speed": 6.8, "attack": 22},
     {"name": "Nightwing, Ash-Choked", "shape": "coughing chimney ash - slow and half blind, it strikes at the sound of you", "hp": 150, "speed": 3.8, "attack": 24},
-    {"name": "Nightwing, Cage-Hung", "shape": "it drags a rusted bird cage and swings it like a flail - the swing hurts more than the bite", "hp": 130, "speed": 4.4, "attack": 25}
+    {"name": "Nightwing, Cage-Hung", "shape": "it drags a rusted bird cage and swings it like a flail - the swing hurts more than the bite", "hp": 130, "speed": 4.4, "attack": 25},
+    {"name": "The Hollow King, Ash-Crowned", "shape": "its crown is a ring of embers - strike the crown and the fire drops with it", "hp": 160, "speed": 2.6},
+    {"name": "The Hollow King, Wick-Burned", "shape": "it burns from the inside like a wick - whoever it grips catches light", "hp": 140, "speed": 3.4, "attack": 24},
+    {"name": "The Hollow King, Fireside", "shape": "it will not leave its hearth ring - stay out of the ring and it cannot reach you", "hp": 205, "speed": 2.0},
+    {"name": "The Grubmother, Granary-Fed", "shape": "fat on spilled grain - slow, and the brood is the size of rats", "hp": 260, "speed": 1.2},
+    {"name": "The Grubmother, Lean", "shape": "starved thin and quick - no brood, she bites for herself", "hp": 150, "speed": 3.2},
+    {"name": "The Grubmother, Cellar-Walled", "shape": "built into the wall - only the front can be hurt", "hp": 280, "speed": 1.0},
+    {"name": "The Rattling Host, Dice-Loaded", "shape": "they roll for who strikes - nobody knows who until it lands", "hp": 170, "speed": 3.0},
+    {"name": "The Rattling Host, Drowned", "shape": "river-wet and slow, trailing weed - the weed ties the feet", "hp": 210, "speed": 2.0},
+    {"name": "The Rattling Host, Bell-Ringers", "shape": "they ring as they come - every peal calls another skeleton", "hp": 150, "speed": 3.8},
+    {"name": "Nightwing, Soot-Winged", "shape": "leaves a black smear in the air - it is the smear you see, not the wing", "hp": 95, "speed": 7.2, "attack": 22},
+    {"name": "Nightwing, Eave-Roosting", "shape": "it hangs from the rafters and drops - one dive, then it must climb again", "hp": 120, "speed": 5.0, "attack": 25},
+    {"name": "Nightwing, Tallow-Chasing", "shape": "it follows the lantern and ignores the one who holds it", "hp": 105, "speed": 6.0, "attack": 22}
   ],
   "greater_uniques": [
     {"name": "The Gravewyrm, Half-Woken", "shape": "only half risen - slower and softer in the body, but its breath comes deep and ill-tempered", "hp": 230, "attack": 26},
@@ -370,6 +382,18 @@
     {"name": "The Pale Duchess, Stair-Descending", "shape": "she comes down the stair one slow step at a time - nothing hurries her, and nothing is spared", "hp": 260, "speed": 1.8, "attack": 32},
     {"name": "Mourncoil, Ice-Hulled", "shape": "wrapped in a shell of rime that has to be cracked before it can be hurt", "hp": 340, "speed": 1.8, "attack": 25},
     {"name": "Mourncoil, Sleet-Tongued", "shape": "it spits sleet in the face - the eyes stream, and the coil closes in", "hp": 250, "speed": 3.6, "attack": 26},
-    {"name": "Mourncoil, Pond-Dwelling", "shape": "it rises from under the ice and drags down whoever stands on the thin part", "hp": 310, "speed": 2.2, "attack": 27}
+    {"name": "Mourncoil, Pond-Dwelling", "shape": "it rises from under the ice and drags down whoever stands on the thin part", "hp": 310, "speed": 2.2, "attack": 27},
+    {"name": "The Gravewyrm, Plough-Scarred", "shape": "old furrows run down its back - each blow that lands opens one, and the next lands deeper", "hp": 360, "speed": 1.8, "attack": 27},
+    {"name": "The Gravewyrm, Lych-Gate", "shape": "it coils across the way in - nobody passes until the head is down", "hp": 390, "speed": 1.4, "attack": 26},
+    {"name": "The Gravewyrm, Tithe-Eater", "shape": "it takes coin before blood - the poorer the party, the angrier it gets", "hp": 300, "speed": 2.6, "attack": 29},
+    {"name": "The Ossuary Lord, Shelf-Keeper", "shape": "it rebuilds from the shelves - break the shelf, not the lord", "hp": 340, "speed": 1.6, "attack": 25},
+    {"name": "The Ossuary Lord, Sexton-Bound", "shape": "tied to a bell rope - it hits harder with every toll, until the rope is cut", "hp": 260, "speed": 2.8, "attack": 27},
+    {"name": "The Ossuary Lord, Hollow-Ribbed", "shape": "a cage of ribs with nothing inside - blows pass through unless they strike a rib", "hp": 230, "speed": 3.4, "attack": 24},
+    {"name": "The Pale Duchess, Sleeve-Hidden", "shape": "the sleeves hide her hands - she strikes from where you did not look", "hp": 210, "speed": 3.8, "attack": 30},
+    {"name": "The Pale Duchess, Slow-Waltz", "shape": "she walks one slow circle and will not stop - one step, one blow, always on the beat", "hp": 250, "speed": 1.8, "attack": 28},
+    {"name": "The Pale Duchess, Widow-Gowned", "shape": "black lace and a long train - the train sweeps the feet from under you", "hp": 190, "speed": 4.2, "attack": 31},
+    {"name": "Mourncoil, Meltwater-Slick", "shape": "the ice is going out from under it - it slides, and carries what it hits", "hp": 270, "speed": 4.4, "attack": 26},
+    {"name": "Mourncoil, Rime-Cracked", "shape": "so cold it cracks - a hard blow splits it into two slower coils", "hp": 320, "speed": 2.0, "attack": 25},
+    {"name": "Mourncoil, Lantern-Eyed", "shape": "two pale lights where its eyes were - it turns toward the nearest lamp", "hp": 240, "speed": 3.2, "attack": 28}
   ]
 }

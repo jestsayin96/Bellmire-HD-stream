@@ -6576,3 +6576,9 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
   byte-identical to b04e266's state. L56 is a measurement, not a bot change, so there is no command drift
   to re-check in either direction and the 26-command doc still matches the data.
 - NOTHING FOR THE GAME BUILD LANE in twitch_eventsub.gd this cycle, and nothing for Mr. E to decide.
+## C-68 (2026-11-16) - standing backlog item 4: bosses and potions again (bosses.json, potions.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-67 merged); told it to take the next-stalest standing-backlog item. That is bosses and potions: last touched in C-63, while C-64 (events), C-65 (epitaphs/barks), C-66 (Phase 2 words) and C-67 (miniboss feed) all came after. Fishing stays with the game build.
+- data/bosses.json: +12 lesser_uniques (3 each: Hollow King, Grubmother, Rattling Host, Nightwing) and +12 greater_uniques (3 each: Gravewyrm, Ossuary Lord, Pale Duchess, Mourncoil). Modified lords, not new lords; each keeps its lord's shape and sits inside that lord's existing hp/speed/attack range. Now 178 lesser, 172 greater.
+- data/potions.json: +16 brews (3 tier 1, 5 tier 2, 4 tier 3, 4 tier 4), trade-named, existing states only. Now 208 potions.
+- VALIDATION OK: both files parse; every pre-existing entry and key unchanged (text insertion, LF kept); no duplicate boss names; no key, name or alias collides with an existing potion; every gives/cures resolves in `states`.
+- CODE WIRING: none - same keys and shapes as existing entries.

@@ -1,0 +1,10 @@
+{
+ "ok": true,
+ "hero": {},
+ "pairs": {},
+ "errors": [],
+ "blank_check": {
+  "files": 2,
+  "failures": []
+ }
+}

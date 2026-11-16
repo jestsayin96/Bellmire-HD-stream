@@ -1349,3 +1349,26 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .rentry.crat .rtier { color: var(--parch-hi); background: var(--ink-soft); }
 .herolink-note { margin: 8px 0; padding: 8px 12px; border: 1px dashed var(--gold); border-radius: 8px; font-style: normal; color: var(--ink); }
 .linkcopy { margin-left: 6px; }
+
+/* H29: the Shops tab. Palette tokens only; a rarity is a left border, never a recolour of stat colours. */
+#shopsBody { max-height: max(320px, calc(100vh - 340px)); max-height: max(320px, calc(100dvh - 340px)); overflow-y: auto; overscroll-behavior: contain; }
+.shop-caveat { margin: 0 0 10px; font-style: normal; }
+.shop-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); margin-bottom: 10px; }
+.shop-card { border: 1px solid var(--line, rgba(128,128,128,.35)); border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; background: rgba(255,255,255,.03); }
+.shop-grid .shop-card { margin-bottom: 0; }
+.shop-head { display: flex; align-items: center; gap: 8px; }
+.shop-head .ic { width: 18px; height: 18px; flex: none; }
+.shop-name { margin: 0; font-size: 1rem; flex: 1; overflow-wrap: anywhere; }
+.shop-lvl { font-size: .8rem; opacity: .85; white-space: nowrap; }
+.shop-sells { margin: 4px 0 6px; font-size: .85rem; opacity: .9; }
+.shop-empty { margin: 6px 0 0; font-size: .85rem; font-style: italic; opacity: .75; }
+.shop-stock { list-style: none; margin: 6px 0 0; padding: 0; }
+.shop-good { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding: 3px 0 3px 8px; border-left: 3px solid transparent; font-size: .88rem; }
+.shop-good .gname { flex: 1 1 8rem; overflow-wrap: anywhere; }
+.shop-good .gqty, .shop-good .grar { font-size: .75rem; opacity: .75; }
+.shop-good .gcost { white-space: nowrap; }
+.shop-good .gcost .ic { width: 13px; height: 13px; vertical-align: -2px; color: var(--gold, #c9a54a); }
+.shop-good.passing { background: rgba(201,165,74,.08); }
+.shop-good.mine { border-left-color: var(--accent, #3aa6a0); }
+.rar-uncommon { border-left-color: #6aa84f; } .rar-rare { border-left-color: #4a86c8; }
+.rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }

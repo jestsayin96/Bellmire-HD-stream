@@ -290,7 +290,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "roll", "fallen"];
+const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -316,7 +316,7 @@ function renderNothing(failed) {
 // OUTSIDE this set is an honest "this page needs an update", never a guess. ACTION for
 // the desktop: publish the Satchel sell fields as v = "3" (or extend this set BEFORE
 // shipping a different number). See docs/HUB_SECURITY.md (H11).
-const KNOWN_V = new Set(["1", "2", "3", "4"]);   // v4 (H23): initiative, speed, gear by slot, status, per-hero last_seen + events
+const KNOWN_V = new Set(["1", "2", "3", "4", "5"]);   // v4 (H23): initiative, speed, gear by slot, status, per-hero last_seen + events
 function render(p) {
   if (p && p.v != null && !KNOWN_V.has(String(p.v))) {
     showProblem("Bellmire is speaking a newer dialect than this page understands (format " +
@@ -340,6 +340,7 @@ function render(p) {
   renderRolls(p.rolls);
   renderLore();
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
+  try { renderShops(p); } catch (e) { /* the Shops tab must never break the rest of the page */ }
   try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
   try { applyHeroLink(p); } catch (e) { /* a bad link must never break the page */ }
 }
@@ -2744,6 +2745,7 @@ async function spotlightMe() {
     const login = String((j.data && j.data[0] && j.data[0].login) || "").toLowerCase();
     twLogin = login || null;
     highlightMyHero(login);
+    try { if (lastShopP) renderShops(lastShopP); } catch (e) {}
     if (chatOpened) chatConnect();                 // reconnect the guild chat with their own voice
   } catch (e) {
     signinSay("Signed in, but couldn't read your Twitch name just now.", "bad");
@@ -3178,6 +3180,112 @@ function renderBestiary(p) {
 }
 let lastBeastPayload = null;
 
+// ---------------------------------------------------------------- H29 the Shops tab
+// Every shop and the blacksmith: level, what that level may sell, and - when the publisher
+// sends it - the shelf itself. NOTHING is hard-coded: names, levels, prices, cargo and orders
+// all come from the snapshot, every string through el()/textContent. Contract (payload v5, read
+// defensively so the tab lights up by itself the day the publisher sends it; v<5 shows the shops
+// and levels it already has and says plainly that the shelf is not published yet):
+//   p.shops[]  = {name, level, sells_to, stock?: [{name, cost, qty?, tier?, rarity?}]}   (D64 + v5)
+//   p.caravan  = {present, leaves_in?, cargo: [{name, cost, qty?, rarity?}]}               (v5; p.trader accepted)
+//   p.orders[] = {who, item, shop, status?, walker?}                                       (v5)
+// A snapshot value only ever chooses WHICH known glyph / rarity frame; it is never a URL, src,
+// href, class name or style. Rarity is matched to a page-owned whitelist before it picks a class.
+const SHOP_RARITY = new Set(["common", "uncommon", "rare", "epic", "legendary"]);
+function rarityClass(r) { const k = String(r == null ? "" : r).toLowerCase().trim(); return SHOP_RARITY.has(k) ? "rar-" + k : ""; }
+function shopIconFor(name) { return /smith|forge|anvil/i.test(String(name || "")) ? "anvil" : "stall"; }
+let lastShopP = null;
+function shopGood(g, passing) {
+  const row = el("li", "shop-good" + (passing ? " passing" : ""));
+  const rc = rarityClass(g && g.rarity);
+  if (rc) row.classList.add(rc);
+  const nm = g && g.name != null && String(g.name).trim() ? ctrlStrip(g.name).slice(0, 60) : "(unnamed)";
+  row.append(el("span", "gname", nm));
+  if (g && g.qty != null && Number.isFinite(+g.qty)) row.append(el("span", "gqty", "x" + num(g.qty)));
+  if (g && g.rarity && !rc) row.append(el("span", "grar", ctrlStrip(g.rarity).slice(0, 16)));
+  else if (rc) row.append(el("span", "grar", ctrlStrip(g.rarity).slice(0, 16)));
+  const price = el("span", "gcost");
+  price.append(icon("coin"), document.createTextNode(" " + (g && Number.isFinite(+g.cost) ? num(g.cost) : "-")));
+  row.append(price);
+  return row;
+}
+function renderShops(p) {
+  const box = $("shopsBody");
+  if (!box) return;
+  lastShopP = p;
+  box.textContent = "";
+  const shops = arr(p && p.shops).filter((s) => s && typeof s === "object");
+  const caravan = p && (p.caravan || p.trader);
+  const orders = arr(p && p.orders).filter((o) => o && typeof o === "object");
+  if (!shops.length && !caravan) {
+    box.append(el("p", "shop-empty", "Bellmire has not reported its shops yet. Once the town's records carry them, every shop and the blacksmith appear here with their level and shelf."));
+    return;
+  }
+  const grid = el("div", "shop-grid");
+  for (const s of shops) {
+    const card = el("article", "shop-card");
+    const head = el("header", "shop-head");
+    head.append(icon(shopIconFor(s.name)));
+    head.append(el("h3", "shop-name", s.name != null && String(s.name).trim() ? ctrlStrip(s.name).slice(0, 48) : "(unnamed shop)"));
+    head.append(el("span", "shop-lvl", "Lv " + (Number.isFinite(+s.level) ? num(s.level) : "?")));
+    card.append(head);
+    if (s.sells_to != null && String(s.sells_to).trim()) {
+      const st = el("p", "shop-sells", "Sells up to ");
+      const rc = rarityClass(s.sells_to);
+      st.append(el("b", rc, ctrlStrip(s.sells_to).slice(0, 20)));
+      card.append(st);
+    }
+    const stock = Array.isArray(s.stock) ? s.stock.filter((g) => g && typeof g === "object") : null;
+    if (stock && stock.length) {
+      const ul = el("ul", "shop-stock");
+      stock.slice().sort((a, b) => (+a.cost || 0) - (+b.cost || 0)).slice(0, 80).forEach((g) => ul.append(shopGood(g, false)));
+      card.append(ul);
+    } else if (stock) {
+      card.append(el("p", "shop-empty", "The shelf is bare."));
+    } else {
+      card.append(el("p", "shop-empty", "The shelf has not been published yet."));
+    }
+    grid.append(card);
+  }
+  box.append(grid);
+  // the trader: marked as passing through - the only place a higher tier shows at a low level
+  const tr = el("section", "shop-card shop-trader");
+  const th = el("header", "shop-head");
+  th.append(icon("coin"), el("h3", "shop-name", "The trader's caravan"));
+  const here = !!(caravan && caravan.present);
+  th.append(el("span", "shop-lvl", here ? "In town" : "Away"));
+  tr.append(th);
+  if (here) {
+    tr.append(el("p", "shop-sells", "Passing through" + (caravan.leaves_in != null && Number.isFinite(+caravan.leaves_in) ? ", leaves in " + num(caravan.leaves_in) + " min" : "") + ". What it carries is worth a look."));
+    const cargo = arr(caravan.cargo).filter((g) => g && typeof g === "object");
+    if (cargo.length) { const ul = el("ul", "shop-stock"); cargo.slice(0, 80).forEach((g) => ul.append(shopGood(g, true))); tr.append(ul); }
+    else tr.append(el("p", "shop-empty", "The cargo list has not been published yet."));
+  } else {
+    tr.append(el("p", "shop-empty", "No caravan is in town. When one arrives its cargo is listed here."));
+  }
+  box.append(tr);
+  // orders: public, drawn as text; the signed-in viewer's own are marked
+  const ord = el("section", "shop-card shop-orders");
+  const oh = el("header", "shop-head");
+  oh.append(icon("loot"), el("h3", "shop-name", "Orders waiting to be collected"));
+  oh.append(el("span", "shop-lvl", num(orders.length)));
+  ord.append(oh);
+  if (orders.length) {
+    const ul = el("ul", "shop-stock");
+    for (const o of orders.slice(0, 60)) {
+      const li = el("li", "shop-good");
+      const mine = !!(twLogin && String(o.who || "").toLowerCase() === twLogin);
+      if (mine) li.classList.add("mine");
+      li.append(el("span", "gname", ctrlStrip(o.item).slice(0, 60) || "(an order)"));
+      li.append(el("span", "gqty", (mine ? "yours - " : "") + (ctrlStrip(o.who).slice(0, 30) || "someone")));
+      li.append(el("span", "grar", (ctrlStrip(o.shop).slice(0, 40) || "a shop") + (o.walker ? " - " + ctrlStrip(o.walker).slice(0, 30) + " walking" : o.status ? " - " + ctrlStrip(o.status).slice(0, 20) : "")));
+      ul.append(li);
+    }
+    ord.append(ul);
+  } else ord.append(el("p", "shop-empty", "No orders are waiting."));
+  box.append(ord);
+}
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;
@@ -3220,7 +3328,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -3548,6 +3656,22 @@ function withMock(p) {
   if (MOCK === "roll") out.rolls = MOCK_ROLLS;
   if (MOCK === "bands") out.parties = MOCK_PARTIES;
   if (MOCK === "fallen") out.fallen = MOCK_FALLEN;
+  if (MOCK === "shops" || MOCK === "shops1") {   // H29: shelf states; every string below is hostile-ish on purpose
+    const bad = "<img src=x onerror=alert(1)>";
+    if (MOCK === "shops1") {
+      out.shops = ["The Provisioner", "The Chandler", "The Blacksmith"].map((n) => ({ name: n, level: 1, sells_to: "common", stock: [{ name: "Loaf", cost: 2 }, { name: "Jug of Ale", cost: 5 }] }));
+    } else {
+      out.shops = [
+        { name: "The Provisioner", level: 3, sells_to: "uncommon", stock: [{ name: "Loaf", cost: 2 }, { name: bad + " Ale", cost: 5, rarity: "common" }, { name: "Flask of Oil", cost: 6, qty: 4 }] },
+        { name: bad + " Smithy", level: 2, sells_to: "rare", stock: [{ name: "<b>Iron sword</b>", cost: 90, rarity: "uncommon" }, { name: "Moonlit dagger", cost: 400, rarity: "rare" }] },
+        { name: "The Apothecary", level: 1, sells_to: "<script>x</script>", stock: [] },
+        { name: "The Stables", level: 4, sells_to: "epic" },
+      ];
+      out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "epic" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
+      out.orders = [{ who: "viewer1", item: bad, shop: "The Smithy", walker: "Brum" }, { who: bad, item: "Loaf", shop: "The Provisioner", status: "ready" }];
+    }
+    out.v = "5";
+  }
   if (MOCK === "town") {            // H18: a town with every new field, hostile strings included
     out.town = Object.assign({}, p.town, {
       name: "<img src=x onerror=alert(1)>", level: 3, souls: 48, day: 17, treasury: 1280, renown: 64,

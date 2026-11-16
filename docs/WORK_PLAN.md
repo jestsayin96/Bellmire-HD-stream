@@ -1,6 +1,72 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## *** HARD DELIVERABLE, DUE 09:00 MON 16 NOV *** D95 - THE TEN-CHARACTER SHOWCASE
+Mr. E, 00:59, verbatim: "non negotiable i want 10 characters with different equipment and armor
+and accessories as a show case for me in 8 hours. i want to see front, side, back, top down
+profile views i want to make sure everything that is made for these characters actually fit.
+people are not going to waste money on slop."
+
+WHAT HE IS ACTUALLY CHECKING: whether the gear FITS THE BODY. Not whether the pieces are pretty
+in isolation - whether a helm sits on the head, a ring is on a finger and not through it, a cloak
+hangs off the shoulders, boots meet the ankle, a pauldron does not float. Four views exist so
+nothing can hide. A piece that looks right from the front and clips through the chest from the
+side is a FAILURE and must be listed as one, not quietly cropped out.
+
+### THE DELIVERABLE
+TEN characters. Each one:
+  - a DIFFERENT calling, and a different body where the roster offers one
+  - a DIFFERENT weapon, DIFFERENT armour, and at least THREE accessories nobody else has
+  - FOUR views, same framing and lighting for every character: FRONT, SIDE, BACK, TOP-DOWN
+  - full body, feet to crown, nothing cropped
+One contact sheet per character (four views in a row) plus one overview sheet of all ten.
+Put them in renders/art/d95/ and SHOW MR. E THE SHEETS.
+Spread them across the rarity ladder: two common, two uncommon, two rare, two very rare, two
+legendary - so he sees the whole range of what a viewer can earn, not ten variations of the same
+tier. At least ONE of the ten wears a declared SET (matching chest, boots, helm, gauntlets),
+because Mr. E named that as the legitimate exception and it must be visible alongside the rest.
+
+### SAY WHAT IS WRONG
+End with an explicit FIT REPORT: every clip, float, gap, wrong scale or bad anchor you can see,
+per character and per view. An honest list of twelve faults is worth more than a clean-looking
+sheet that hides three. He will spot them on stream if you do not spot them now.
+
+### MR. E HAS WIDENED THE ASSET PERMISSION (00:59)
+"look for free CC packs online you have acces to everything download stuff, use designs from
+others and tweak them to fit our needs, as long as its legal we are good. i give you this
+permission."
+SO: you may DOWNLOAD and MODIFY third-party packs. HIS MACHINE CAN REACH THEM - verified 00:58:
+itch.io, quaternius.com, kenney.nl, opengameart.org, poly.pizza and github.com all answer 200
+from the Blender (Windows) side. The Linux bridge CANNOT - its proxy blocks all but GitHub and
+package registries - so do downloads through the Blender bridge with urllib or requests.
+
+THE LEGAL LINE, AND IT IS NOT NEGOTIABLE - "as long as its legal" is the condition he set:
+  - CC0 / public domain: always fine. Prefer it.
+  - CC-BY: fine, BUT the attribution must be recorded in a LICENSE/CREDITS file next to the asset,
+    naming the author, the work and the licence. No attribution = not legal = do not ship it.
+  - **CC-BY-NC (NonCommercial) IS FORBIDDEN.** Bellmire takes bits and channel points; it is a
+    commercial stream. NC assets would make the whole game unshippable.
+  - **CC-BY-ND (NoDerivatives) IS FORBIDDEN** - the whole point here is tweaking them to fit.
+  - "Free to download" is NOT a licence. If a pack does not state its licence plainly, DO NOT USE
+    IT. There is enough CC0 out there that guessing is never necessary.
+  - Record every pack used in docs/art/ASSET_SOURCES.md: pack, author, URL, licence, date.
+The old blanket ban on Quaternius Bestiary / QAL stands until Mr. E lifts it by name.
+
+### DO NOT LET THIS BLOCK ON DOWNLOADS
+Procedural generation has already produced eight lords, 454 icons, twelve creature bodies and
+eight minibosses in a day. Downloaded packs are an ACCELERANT, not a dependency. If a pack is
+slow to find, awkward to licence or does not fit the rig, GENERATE the piece instead and move on.
+The deadline is 09:00 and the deliverable is ten characters, not a perfect sourcing exercise.
+
+### HOW THIS SITS WITH D94
+D95 is the PROOF of D94. D94 says every item must look like itself; D95 is Mr. E seeing whether
+that is true and whether it fits. Build the variety (D94), then show it on ten bodies (D95).
+If D94 is not finished by 09:00, STILL SHIP D95 with whatever exists - ten characters wearing the
+best available gear, with an honest fit report. A partial showcase he can judge beats a complete
+one he never sees.
+================================================================================
+
+================================================================================
 ## *** TONIGHT'S ONLY JOB *** D94 - EVERY ITEM MUST LOOK LIKE ITSELF (Mr. E, 16 Nov 00:55)
 HUD, HUB and CONTENT lanes are SHUT DOWN for this. Only GAME BUILD, ART and the SUPERVISOR run.
 Mr. E, verbatim: "this is unacceptable, unless they are a set example: metal armor chest, boots,
@@ -90,7 +156,7 @@ for its ID and work it. DO NOT take "the first unchecked item you find reading d
                    (D77), the errand (D78), carry weight (D80), selling and the guild vault
                    (D81), and the upgrade poll (D66). The C-55 rarity ladder is delivered - it
                    landed as the lane's cycle C-58, see the C-55 block.
-  ART          ->  *** D94 *** (every item must look like itself) - was: more minibosses (standing permission). Shipped: barracks (Drillmaster),
+  ART          ->  *** D95 *** TEN-CHARACTER SHOWCASE, DUE 09:00 - then D94 (every item must look like itself) - was: more minibosses (standing permission). Shipped: barracks (Drillmaster),
                    workshop (Scrapwright), prison (Gaoler), shrine (Snuffer). Themes with none
                    yet: crypt, keep, treasury, mess, and the biome themes (wood, grassland,
                    flooded).

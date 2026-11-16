@@ -85,7 +85,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         return ""
     msg = msg.strip_edges()
     if not msg.begins_with("!"):
-        return ""
+        # L69: no "!" at all - the bot still answers what chat plainly asks
+        return _ask_line(user_id, display, login, msg)
     var now := Time.get_ticks_msec()
     if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
         return ""
@@ -158,6 +159,10 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                         return ""
                     out = _test_spot(user_id, verb, arg, arg2)
         _:
+            # L69: "!how do i join" is a question with a ! on it - the ask table before silence
+            var topic := ask_topic(msg.substr(1))
+            if topic != "":
+                return _ask_line(user_id, display, login, msg.substr(1))
             # L14: a near miss of a real command gets a nudge, anything else is left alone (other bots)
             var guess := _closest(verb)
             if guess == "":
@@ -383,6 +388,16 @@ static func canonical(word: String) -> String:
     for k in cs:
         if (cs[k].get("aliases", []) as Array).has(word):
             return k
+    # L69: a plural reaches the command - "!heroes", "!delves", "!dyes"
+    for cut in [1, 2]:
+        if not word.ends_with("s") or word.length() - cut < 3:
+            continue
+        var one := word.substr(0, word.length() - cut)
+        if cs.has(one):
+            return one
+        for k in cs:
+            if (cs[k].get("aliases", []) as Array).has(one):
+                return k
     return word
 
 ## !help: the short list; !help <command>: that one in detail
@@ -404,6 +419,84 @@ static func help_line(arg := "") -> String:
         bits.append("!" + String(k))
     var tail := hub_url()
     return "Commands: %s  |  !help <command> for more.%s" % [" ".join(bits), "" if tail == "" else "  All of it: " + tail]
+
+## ---- L69: THE BOT CARRIES THE CHAT. A viewer who does not know the commands still
+## gets an answer: a line with no "!" is flattened to words and matched against the
+## phrases in data/commands.json "ask". Silence reads as a broken bot. The answers
+## themselves are DATA, so chat, the hub and this file cannot disagree - and nothing a
+## viewer typed is ever echoed back, only a fixed line or what the game itself produced.
+## A shared answer is said ONCE to the channel in gap_s seconds, however many ask it.
+static var _said := {}          # topic -> msec it was last said to the channel
+const ASK_FLAT := "abcdefghijklmnopqrstuvwxyz0123456789"
+
+static func ask() -> Dictionary:
+    return commands().get("ask", {})
+
+## a chat line cut down to words: lower case, punctuation gone, single spaces
+static func _flat(msg: String) -> String:
+    var out := ""
+    for c in msg.to_lower():
+        out += c if ASK_FLAT.contains(c) else " "
+    return " ".join(out.split(" ", false))
+
+## does this line match one of a topic's phrases? "a+b" wants both words present,
+## any other pattern is the phrase itself on a word boundary
+static func _hits(flat: String, phrases: Array) -> bool:
+    var words: Array = Array(flat.split(" ", false))
+    for p in phrases:
+        var pat := String(p)
+        if pat.contains("+"):
+            var all := true
+            for w in pat.split("+", false):
+                if not words.has(String(w)):
+                    all = false
+                    break
+            if all:
+                return true
+        elif (" " + flat).contains(" " + pat):
+            return true
+    return false
+
+## the topic a plain line asks about, or "" - the first one in "order" that matches
+static func ask_topic(msg: String) -> String:
+    var a := ask()
+    if a.is_empty() or msg.length() > int(a.get("max_len", 140)):
+        return ""
+    var flat := _flat(msg)
+    if flat == "":
+        return ""
+    var ts: Dictionary = a.get("topics", {})
+    for k in a.get("order", ts.keys()):
+        if ts.has(k) and _hits(flat, (ts[k] as Dictionary).get("phrases", [])):
+            return String(k)
+    return ""
+
+## answer a plain question, or stay quiet. A topic with `cmd` runs that command for
+## the asker (their own hero differs, so it is never held back); a topic with `reply`
+## is a shared line and is said to the channel once, not once for every asker.
+func _ask_line(user_id: String, display: String, login: String, msg: String) -> String:
+    var topic := ask_topic(msg)
+    if topic == "":
+        return ""
+    var t: Dictionary = (ask().get("topics", {}) as Dictionary).get(topic, {})
+    var cmd := String(t.get("cmd", ""))
+    if cmd != "":
+        return handle(user_id, display, "!" + cmd, login)
+    var out := String(t.get("reply", ""))
+    if out == "":
+        return ""
+    var now := Time.get_ticks_msec()
+    if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
+        return ""
+    if now - int(_said.get(topic, -999999999)) < int(float(ask().get("gap_s", 45.0)) * 1000.0):
+        return ""                              # already said to the channel; saying it again is noise
+    _said[topic] = now
+    _last[user_id] = now
+    last_cmd[user_id] = now
+    out += _hub_tail()
+    say.emit(out, _tone(out))
+    _ui_snd("help", out)
+    return _reply(user_id, display, login, out)
 
 ## the nearest command to a typo (edit distance 2 or less), or ""
 ## another app's command (data/commands.json "foreign"): one of theirs, one of their

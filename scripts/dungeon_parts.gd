@@ -259,8 +259,12 @@ static func fire_trap() -> Node3D:
             l.light_energy = 0.3))
     return n
 
-## PORTCULLIS: an iron grid in a stone frame that winds up and drops
-static func portcullis(w := 4.0, h := 4.0) -> Node3D:
+## PORTCULLIS: an iron grid in a stone frame. D88 (Mr. E: "trap"): it no longer winds up and
+## drops on a loop nobody can see - it HANGS RAISED AND STILL until a party crosses it. Delve
+## calls the "drop" meta when it springs and "raise" (seconds) when someone forces or winds it.
+## w is the clear span between the posts (the posts stand against the passage walls); winch is
+## the side (-1 / +1 along the passage, local z) a winding wheel stands on, 0 for none.
+static func portcullis(w := 4.0, h := 4.0, winch := 0) -> Node3D:
     var n := Node3D.new()
     n.name = "Portcullis"
     var stone := _m(Color(0.38, 0.36, 0.34), 0.0, 0.95)
@@ -286,12 +290,37 @@ static func portcullis(w := 4.0, h := 4.0) -> Node3D:
         grid.add_child(tip)
     for j in range(5):
         _box(grid, Vector3(w, 0.08, 0.12), Vector3(0, 0.4 + float(j) * (h - 0.6) / 4.0, 0), iron)
-    n.ready.connect(func() -> void:
-        var t := grid.create_tween().set_loops()
-        t.tween_interval(2.0)
-        t.tween_property(grid, "position:y", h - 0.4, 2.4).set_trans(Tween.TRANS_SINE)
-        t.tween_interval(1.5)
-        t.tween_property(grid, "position:y", 0.0, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN))
+    var up := h - 0.4
+    grid.position.y = up
+    var wheel: Node3D = null
+    if winch != 0:
+        # a winding wheel on the post, facing the side it is worked from
+        wheel = Node3D.new()
+        wheel.name = "winch"
+        wheel.position = Vector3(w * 0.5 - 0.1, 1.3, 0.75 * float(winch))
+        n.add_child(wheel)
+        var wood := _m(Color(0.36, 0.24, 0.14), 0.0, 0.9)
+        var hub := _cyl(wheel, 0.12, 0.5, Vector3.ZERO, iron)
+        hub.rotation.z = PI * 0.5
+        for k in range(4):
+            var spoke := _box(wheel, Vector3(0.08, 1.1, 0.08), Vector3.ZERO, wood)
+            spoke.rotation.x = float(k) * PI * 0.25
+    var tw := [null]
+    n.set_meta("drop", func() -> void:
+        if tw[0]:
+            (tw[0] as Tween).kill()
+        var t := grid.create_tween()
+        t.tween_property(grid, "position:y", 0.0, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+        tw[0] = t)
+    n.set_meta("fire", n.get_meta("drop"))      # the trap tests play every kind's "fire"
+    n.set_meta("raise", func(secs: float) -> void:
+        if tw[0]:
+            (tw[0] as Tween).kill()
+        var t := grid.create_tween()
+        t.tween_property(grid, "position:y", up, maxf(secs, 0.1)).set_trans(Tween.TRANS_SINE)
+        if wheel:
+            t.parallel().tween_property(wheel, "rotation:x", wheel.rotation.x + TAU * 3.0, maxf(secs, 0.1))
+        tw[0] = t)
     return n
 
 ## PRISON CELL: three barred sides and a barred door, a pallet, a bucket, chains

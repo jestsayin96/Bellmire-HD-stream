@@ -28,7 +28,8 @@ func _initialize() -> void:
 
 func _trap(kind: String) -> Dictionary:
 	var made := {"SpikeTrap": DungeonParts.spike_trap, "PressurePlate": DungeonParts.pressure_plate, "FireTrap": DungeonParts.fire_trap,
-		"DartTrap": DungeonParts.dart_trap, "BladeTrap": DungeonParts.blade_trap, "PitTrap": DungeonParts.pit_trap}
+		"DartTrap": DungeonParts.dart_trap, "BladeTrap": DungeonParts.blade_trap, "PitTrap": DungeonParts.pit_trap,
+		"Portcullis": DungeonParts.portcullis, "PoisonDart": DungeonParts.poison_dart, "SwarmTrap": DungeonParts.swarm_trap}
 	var n: Node3D = (made[kind] as Callable).call()
 	(_d.dun.info["root"] as Node3D).add_child(n)
 	n.global_position = (_d.party[0]["body"] as Node3D).global_position

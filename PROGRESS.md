@@ -6267,3 +6267,104 @@ spent polling.
   the worktree root (B2_ASK OK, then delete it and the .b2_* logs).
 - NEXT: those gates the moment the lock is free, then L56 (the delve-heavy soak, which needs the
   engine and the lock), nothing else - L68, L69 and L70 are all written and none is ticked.
+
+## C-64 (2026-11-16) - standing backlog item 1: event camp variants (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no item (C-63 ticked; fishing is the game build's). Took the stalest backlog item: event variants. Camp appears/while/cleared alts were last touched in C-47 and sat at 5 each, while disasters (C-56), epitaphs (C-57), Phase 2 words (C-60), miniboss feed (C-62) and bosses/potions (C-63) all came after.
+- data/lore_lines.json `events`: +2 appears_alt, +2 while_alt, +2 cleared_alt on all 20 bandit camps and all 19 monster camps (now 7 each), and +3 each on wandering_boss (now 29 each). 243 lines. Added note key `_note_variants_c64`.
+- Every new while_alt restates the SAME cost as that camp's canonical `while`, reworded and never widened. name, leader, of, appears, while, cleared and note untouched. No new camp, no new named leader, no floor count.
+- VALIDATION OK: file parses; every pre-existing key and list prefix byte-identical against HEAD (parsed-value compare, per camp); key sets per camp unchanged; no duplicate lines among camp alts; CRLF kept; nothing outside `events` changed.
+- CODE WIRING: none needed - same keys and shapes; the random pick over appears_alt/while_alt/cleared_alt widens automatically.
+## U27 - L73 CAPTURE DONE, L73_LONG OK (HUD, 2026-11-16 ~09:55 CT, file-only; engine lock held by game build)
+- The 12-min director-clock capture from the 08:58 claim finished: L73_LONG events=5 cuts_logged=103 fails=0, L73_LONG OK.
+  Each of raid t=100/520, death t=220/620, delve_start t=400 produced a first cut within 1.0-7.0 s and told=true (a viewer can tell from the camera alone).
+  quiet_samples=1044 quiet_median_dist=20.3. Pace seen at 0.6 (raid) / 1.0 / 1.4 (quiet) in director_decision_log.txt.
+- LOOKED AT: renders/cycles/20261116_l73long/l73_raid_100_a.png and l73_death_620_a.png. Raid frame: boss title card AND the NOW FIGHTING banner both show the same name at once (duplicate, boss_bar/other file - not mine to edit) and the boss card covers the DIRECTOR pane label; a Chronicle tooltip sits on the scroll. Death frame reads quiet and wide as intended.
+- Did NOT launch Godot: RUN_LOCK shows game build RUNNING 09:31 (finish ~10:00), no Godot process alive at 09:54 but under 45 min and inside its named window.
+- NEXT: L74 (feed/theme at 100/125/150% during a raid) on the next free engine slot. Mr. E decision: none.
+
+## S-cycle 2026-11-16 09:58 CT (supervisor) - three lanes merged, L73 TICKED, the :45 window ruled to the chat bot
+- MERGED to main: art (6f04d2a, 0c24620, 7e17df5 - Stoker chibi pass 3, the heat cap, the unconverted
+  Stoker's three fit views re-shot in the same pair run), content (6e053ff - C-64 event camp variants),
+  hud-ui (49cc0ef - U27, the L73 long director capture). PROGRESS.md conflicted between content's C-64 and
+  HUD's U27 at the same append point: BOTH SIDES KEPT, only the marker lines stripped, no cycle renumbered.
+- TICKED: L73 (the director's shot language). Its own DONE gate was the long capture and it came back
+  L73_LONG OK - events=5, cuts_logged=103, fails=0, first cut within 1.0-7.0 s on all five events with
+  told=true. Mr. E's eye stays final on whether the language reads; the measurement is what ticks.
+- RECORDED, NOT TICKED: C-64 (content has no WORK_PLAN item of its own; this is standing-backlog work,
+  logged beside C-63) and the Stoker's pass 3 (the register conversion is a standing permission, not a
+  numbered item - 2 of 14 now, both having taken three passes).
+- NOT TICKED AND WHY: D91 (the game build is MID-SLOT on D91d as I write and has not pushed); C-61 (the
+  content lane's data half is described as merged but the game build's code mirror is the last arm and
+  D94 waits on it); L69 and L70 (both written and merged, both owed engine gates only); L74 (not started).
+- LOCK: game build RUNNING 09:31:30, expected finish ~10:00. 28 minutes old, under 45, inside its own
+  named window - NOT CLEARED. But checked by process too: NO Godot alive at 09:59. Both facts are in the
+  plan so the next engine lane can act on the protocol (process is ground truth) without guessing.
+- PROTOCOL RULING, process not a new item: the chat bot has been starved of the engine FOUR CONSECUTIVE
+  SLOTS and everything it has left needs Godot - it has run out of engine-free work to be diligent with.
+  From now on a lane holding the lock at :38 starts no new battery and writes IDLE as soon as its current
+  battery ends; :45 to :58 belongs to the chat bot while it still owes engine gates. A running battery is
+  never chopped. Cost: one battery's delay. Gain: three written items can finally be gated.
+- LATER LIST OPENED (the freeze's own promise, finally given a place): the boss name on screen twice in a
+  raid, and the boss card covering the DIRECTOR pane label - both seen by the HUD lane in its own L73
+  still, both in boss_bar.gd which it does not own, neither invented as an item. Raised to Mr. E as NEEDS
+  MR. E 6, a yes/no.
+- SYNCED docs/WORK_PLAN.md from main to all six lane branches, md5-verified.
+## B4 - docs/COMMANDS.md regenerated for !catchup; the engine gates are still locked out (chat bot, 2026-11-16 09:45-10:05 CT)
+THE RULING LANDED AND IT IS DONE. The 08:58 TAKE THIS NEXT answered B3's question: docs/COMMANDS.md IS
+this lane's - generated output that travels with data/commands.json, not a tools/ file being reached
+into - and it is to be regenerated and committed in the same breath as the data. Done, in this cycle.
+- docs/COMMANDS.md now carries 26 commands; the only change is ONE added row, the `!catchup` row,
+  289 bytes, in the place `order` puts it. 5188 -> 5477 bytes. Nothing else in the file moved.
+- THE GENERATOR COULD NOT BE RUN (no lock, see below), so it was EMULATED IN PYTHON AND THE
+  EMULATION WAS PROVEN FIRST: tools/_commands_doc.gd's own composition - header, the two cooldowns
+  through Godot's str(), the six-column row, aliases as "!a, !b", args with "|" -> "/", cost
+  defaulting to "free", the " (no hero needed)" suffix, example defaulting to "!"+k, "\n".join with
+  the trailing empty element - was reproduced and run over the data with `catchup` REMOVED. It came
+  back BYTE-IDENTICAL to the committed doc, all 5188 bytes, first differing index None. Only then
+  was the full 26-command file written. LF only, 26 table rows, no command missing its "!" entry -
+  which is the assertion _l14_test makes on this file.
+- SO WHEN A LANE NEXT HOLDS THE LOCK, `--script tools/_commands_doc.gd` SHOULD BE A NO-OP that
+  prints "COMMANDS_DOC wrote 26 commands" and leaves the file unchanged. If it does change the file,
+  the real generator wins and the emulation was wrong - say so and keep the generator's bytes.
+- Engine-free gates re-run on the MERGED tree (origin/main merged into chatbot clean, cc237eb):
+  json.load clean, 26 commands / 26 order entries covering each other exactly; drift BOTH ways off
+  the source with _l14_test's own 8-space match-arm regex - 61 arm words, 0 undocumented, 0
+  unanswered; 22 aliases routing; 0 tabs in chatcmd.gd. The one drift the test would have caught was
+  the doc itself (`catchup` missing), and that is what this cycle closed.
+- NO code change this cycle. scripts/chatcmd.gd and data/commands.json are untouched since 2f8145e.
+
+THE LOCK, FIFTH SLOT RUNNING. Held by another lane for the whole of this slot as well, and it was
+checked BY PROCESS, not by the file, eighteen times across twenty minutes:
+- RUNNING 09:31:30 (game build D91d + C-55 fishing, named finish ~10:00) with Godot 4960/27328 up
+  from 09:31:59. Dead from 09:53:14 through 09:58:20; a ~20 s process at 09:58:30; dead again
+  09:59-10:01; ALIVE AGAIN on all three checks at 10:02.
+- So this lock is NOT stale and was NOT cleared. The claim is live - short batteries with gaps, which
+  is what the protocol asks for - and the right read of a Godot process that keeps coming back is
+  that the lane is still working, not that its named finish has passed. The clear line was composed
+  and then NOT written, because the last check before writing it came back alive. Verify before you
+  act cuts both ways.
+- STILL OWED, AND IT IS NOW SHORTER BY ONE: --headless --quit-after 300 (parse), tools/_l14_test.gd
+  (L14_TEST OK - should now pass, the doc no longer drifts), tools/_twitch_parse.gd (TWITCH_PARSE
+  OK), _b2_ask.gd at the worktree root (B2_ASK OK, then delete it and the .b2_* logs), and
+  tools/_commands_doc.gd as the no-op confirmation above.
+- NEXT: those gates the moment the lock is free, then L56. L68, L69 and L70 are all written and none
+  is ticked.
+
+## S-cycle addendum 2026-11-16 10:05 CT (supervisor) - the chat bot's B4 landed mid-run
+- The 09:45 chat bot slot pushed WHILE I was writing the plan (chatbot aa51b00, cycle B4). My first
+  TAKE THIS NEXT draft said nothing had reached its branch; that was wrong and is CORRECTED, not
+  left standing. Merged to main; PROGRESS conflicted again at the same append point and BOTH SIDES
+  WERE KEPT, markers only stripped.
+- B4 closed the docs/COMMANDS.md ruling in the same slot it was given: 26 commands, one added row for
+  !catchup, 289 bytes, nothing else in the file moved. The generator needs Godot and the lock was
+  held, so the lane EMULATED tools/_commands_doc.gd in python and PROVED the emulation first - ran it
+  over the data with `catchup` removed and got the committed doc back byte-identical at all 5188
+  bytes before writing the new file. Its own instruction to the next lane holding the lock stands:
+  the generator should be a no-op, and if it is not, the generator's bytes win.
+- L70 HALF DELIVERED recorded on the item itself, so the engine remainder is inherited and not
+  rebuilt. L69 is the same shape. Neither is ticked.
+- LOCK, CORRECTED BY THE BOT'S OWN POLLING AND NOW A RULE: I read no Godot alive at 09:59 and left
+  the 09:31 claim standing on its named window. The bot polled the process eighteen times across
+  twenty minutes - alive 09:31:59, dead 09:53-09:58, a ~20 s process at 09:58:30, dead 09:59-10:01,
+  ALIVE on all three checks at 10:02 - had the clear line composed and did NOT write it because the
+  last check came back alive. ONE DEAD POLL IS NOT A RELEASED LOCK. That is in the plan now.

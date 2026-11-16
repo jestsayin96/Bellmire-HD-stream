@@ -481,161 +481,173 @@ NEEDS MR. E rather than being quietly absorbed.
 
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 13:58 CT by the supervisor. If you own a lane, your next item is named here.
+Updated 2026-11-16 14:58 CT by the supervisor. If you own a lane, your next item is named here.
 Search the file for its ID and work it. DO NOT take "the first unchecked item you find reading
 down the file." THERE ARE SIX LANES: the CHAT BOT lane owns scripts/chatcmd.gd, data/commands.json
 AND docs/COMMANDS.md exclusively, on branch `chatbot`.
 
-LOCK STATE AS I WRITE, 13:58: no Godot process is alive (checked on the Windows side) and the
-ENGINE IS FREE. THIRD HOUR RUNNING THAT THE WINDOWS HELD - nobody starved, nobody hit a hard
-release. ONE REAL DEFECT THIS HOUR AND IT IS NOT AN OVERRUN: the chat bot's three RUN_LOCK lines
-(14:02 RUNNING, 14:08 RUNNING, 14:22 IDLE) ARE STAMPED IN THE FUTURE - its own commit landed
-13:55:59 CT and the wall clock here was 13:59. See THE FUTURE-STAMP DEFECT below. Everything else
-about that slot was correct.
+LOCK STATE AS I WRITE, 14:58: the HUD lane holds it, claimed 14:58:47-06:00 for the L40 delve
+capture with a named finish of 15:05, which is correct and inside its window. FOURTH HOUR RUNNING
+THAT THE WINDOWS HELD: nobody starved and nobody hit a hard release. Two small faults, both
+housekeeping, both named in the rows below: the chat bot named a finish of 14:58 on a :45 claim,
+which is a five-minute reach into the HUD's :52 window (it DECLARED it, which is the correct
+shape, but a claim that cannot finish by :52 is SPLIT, not declared), and one RUN_LOCK claim was
+written without a leading newline so 12:56's IDLE and 13:10's RUNNING share a physical line.
+THE FUTURE-STAMP DEFECT IS FIXED: every chat bot stamp this hour was real CT read off the machine.
 
-*** READ THIS BEFORE ANY TWITCH WORK: MR. E OPENED THE LIVE LOOP AT 13:44-13:49 CT AND IT IS
-RECORDED UNDER "Twitch phase 2" AS W-LIVE. Channel-point redemptions MAY now be tested for real.
-BITS ARE FREE ONLY ON THE JestSayin96 ACCOUNT AND ONLY IN jestsayin96's OWN CHAT.
-BELLMIREBRO PAYS FOR BITS - THE BOT MUST NEVER CHEER, ANYWHERE, EVER. Posting text as the bot is
-free; cheering is not; they are different things. NO SUBSCRIPTIONS AT ALL. Do not create, delete,
-rename or re-price a reward. Do not run a chatty test while he is live - check first. ***
+*** W-LIVE IS NO LONGER A PERMISSION WAITING TO BE USED - HALF OF IT IS PROVEN. The game build
+redeemed a real reward and a real bits Power-up on JestSayin96, in jestsayin96's own chat, with
+0 BITS SPENT and the state left as found. The full status, both halves, is under "Twitch phase 2"
+below. THE RULES HAVE NOT CHANGED: bits are free ONLY as JestSayin96 and ONLY in jestsayin96's own
+chat; BELLMIREBRO PAYS, SO THE BOT MUST NEVER CHEER, ANYWHERE, EVER; posting text as the bot is
+free and is a different thing from cheering; NO SUBSCRIPTIONS; do not create, delete, rename or
+re-price a reward; check whether he is live before a chatty test. ***
 
-  GAME BUILD   ->  D91 IS CLOSED ON MY RULING AND YOUR FIRST JOB IS TO LAND IT, NOT TO SOAK IT
-                   AGAIN. You did what the row asked: you moved the prop (market goods held 3.6 m
-                   off any house door step, the north alcove crate moved) and THE ALCOVE CAME BACK
-                   CLEAR - 0 events in the pocket that failed four runs running. The 20-minute soak
-                   then read 2 frames at 0.6 MILLIMETRES on the TAVERN door step (83.2,48.4), a new
-                   spot with no prop to move. MY RULING, SO NOBODY RE-DERIVES IT: 0.6 mm of
-                   penetration in 2 frames out of ~82,000 is below what the camera can show at any
-                   distance and below the settle's own float noise. The gate's INTENT is "no visible
-                   pile-up" and that intent is met; the 1 cm alcove, which was visible, is gone.
-                   D91 TICKS AS SOON AS THE CODE IS ON main, so: FAST-FORWARD origin/d91d-wip
-                   (995f975) ONTO `laptop` AND PUSH, no new soak, no sixth slot. Carry the 0.6 mm
-                   reading into the PROGRESS line verbatim - it is a kept number, not a swept one.
-                   SECOND, AND IT IS MR. E'S OWN AND BRAND NEW: W-LIVE, THE REAL REDEMPTION AND BITS
-                   PATH, IN YOUR FILE twitch_eventsub.gd. Until 13:44 today every power-up, the
-                   teleportation stone and the whole cheer path could only be faked. Now: redeem an
-                   EXISTING channel-point reward on his own account and watch the power-up actually
-                   fire end to end, and read the real EventSub payload instead of a synthetic one.
-                   THE BITS LINE IS HIS MONEY AND IT IS NOT A STYLE NOTE: a cheer may come ONLY from
-                   JestSayin96 and ONLY in jestsayin96's own chat, where they are free. BELLMIREBRO
-                   WOULD PAY - never cheer as the bot, never open a bits dialog as the bot, never
-                   cheer in any other channel. Spend the SMALLEST amount that proves the path and
-                   say in your cycle exactly how many and on which account. NO SUBSCRIPTIONS - if a
-                   sub event must be exercised it is a synthetic payload, never a purchase. Do not
-                   create, delete, rename or re-price any reward. CHECK WHETHER HE IS LIVE FIRST and
-                   if he is, test silently or wait. Leave the state as you found it and NAME anything
-                   left behind (a hero holding a power-up, an order outstanding) so it is not
-                   mistaken for a real viewer's.
-                   THIRD, NOT NOW: D41 - L40's clause (a), the party-frames panel docking inside a
-                   pane, in party_frames.gd. The HUD lane is still measuring it; its delve-scene
-                   number is your target and it has not landed yet, so do not aim blind.
+  GAME BUILD   ->  *** D91 IS TICKED AND YOU DID IT THE WAY I ASKED (laptop 80b46cf, on main). ***
+                   You landed the checkpoint, ran the gates, and SPENT NO SIXTH SLOT ON A SOAK -
+                   after four slots went on one centimetre, not re-deriving a closed ruling is the
+                   discipline this item needed. The 0.6 mm reading is kept verbatim in the row.
+                   *** AND W-LIVE'S GAME HALF IS TICKED - THE FAKING IS OVER (laptop abf1690). ***
+                   You checked the stream first, tested silently with no town loaded, and brought
+                   back the REAL payload: custom_power_up.{bits,id,prompt,title}, bits as a FLOAT.
+                   0 BITS SPENT, balance 45 before and 45 after, queues left at 0 unfulfilled,
+                   nothing created or re-priced. The reward Mr. E has RENAMED still matched on id -
+                   the edit-proof design is now proven against his live channel, not argued.
+                   NEXT, AND IT IS SMALL AND IT IS YOURS BY MY RULING: MAKE town._on_delve APPEND
+                   TO chat.delve_queue. The chat bot found that a point-redeemed errand ("Send my
+                   hero delving" / "Join the delve") reaches town._on_delve directly and writes to
+                   NOTHING, so the queue chat owns reads empty while the hero stands at the mouth.
+                   It unioned the two at the READ as a safe stopgap; the honest fix is at the
+                   SOURCE, in your file, so the two halves agree instead of being reconciled twice.
+                   town.gd 5468 already erases from that array when the party departs, so the write
+                   belongs beside it. Gate it and say whether the union then reads the same count.
+                   SECOND: D70 .1 THE FIRST-TIMER, .2 THEIR HERO'S MOMENTS, .3 THE ROOM, in
+                   twitch_eventsub.gd. These are yours, they are Phase 2, and until 13:44 today
+                   they could only be faked - now a real redemption from his own account will fire
+                   them end to end. A sub event, if .1 needs one, is a SYNTHETIC payload and never
+                   a purchase.
+                   THIRD, AND IT IS A DEBT CONTENT HAS NOW NAMED THREE CYCLES RUNNING: the
+                   miniboss_feed READER. data/lore_lines.json carries 291 feed lines across all
+                   fourteen minibosses and I verified myself that NO file in scripts/ mentions
+                   miniboss_feed - the pool is written, doubled, and read by nothing. Content
+                   cannot wire it and has correctly stopped writing more to compensate.
+                   NOT NOW: D41 (L40's clause (a), party frames inside a pane). The HUD lane's
+                   delve-scene capture is IN FLIGHT as I write - its number is your target and you
+                   would be aiming blind. Wait for it.
+                   CLOSED, SO STOP CARRYING IT: the "epic" -> "very rare" half is DONE. I grepped
+                   it - data/fishing.json has no "epic" left and economy.gd, chatcmd.gd and the
+                   ladder all read "very rare". C-55's artifact-never-stocked enforcement is the
+                   only part of that debt still open.
                    YOUR WINDOW IS :07-:40, no single claim over 25 minutes, hard release at :40, and
-                   the claim line names its expected finish IN REAL CENTRAL TIME.
-  ART          ->  *** 5 OF 14 IS IN AND THE SEXTON WAS THE SNUFFER'S LESSON APPLIED BY A LANE THAT
-                   RECOGNISED IT ITSELF (art 7315cfd). *** "A post office sorting rack with a wire
-                   man under it" is the most useful sentence in that file, because it names what a
-                   viewer would actually see. Nine thin cells became SIX and the lit count stayed
-                   FOUR - count is the mechanic, exactly the rule you wrote one conversion ago, and
-                   you applied it without being told. FOUR of your five passes were you catching
-                   yourself: the chest of drawers, the man hidden behind his own load, the quadruped
-                   you built by overcorrecting, and the saucer cowl. Front, side and back all looked
-                   at, ratio 1.00, corridor-safe at 2.4 m inside the 11.0 m span. TICKED.
-                   NEXT: REGISTER CONVERSION 6 OF 14. Nine left after this one. The Gaoler's
-                   faceplate reading as an angry cartoon mask is STILL your own worst carried fault
-                   and it is now travelled three conversions with you - if 6 of 14 is a head, fix it
-                   there. You take the lock only to prove fit, which is short, so it fits in any gap.
-                   Minibosses stay a PERMISSION for when this lane is dry, not a queue.
-                   STILL OPEN AND YOURS, NOT A NEW ITEM: the gloves' _G_FLARE0/_G_FLAREK re-tune the
-                   game build is waiting on - at the top of the range the bell mouth is 0.15 m radius
-                   and reads as a bucket at the wrist. The game's glove is now the SAME object as
-                   your proof row (D94e ported it bit for bit), so your re-shot row is the number
-                   that moves D94 off PARTLY TOO SMALL 5 of 15. Nothing ticks there until it does.
-  CHAT BOT     ->  *** D70.4 IS TICKED AND IT IS THE CLEANEST SAFETY FIX THIS PROJECT HAS HAD
-                   (chatbot ade76e5). *** ONE DOOR: every answer leaves through _reply, and _reply
-                   declaws, caps and un-commands. I checked it myself rather than taking the gate's
-                   word - both `say.emit` sites are preceded by safe_line and the single
-                   `twitch_reply.emit` is inside _reply, so there is no path out that skips the door.
-                   _is_bad covering C1, the zero-widths, the bidi overrides and BOM is more than the
-                   item asked for, and turning an injected newline into a SPACE rather than dropping
-                   it is the right choice - a dropped newline welds two words, a space cannot start a
-                   second line. Returning "" and saying NOTHING when a viewer's word does not survive
-                   is better than printing half a sentence. 334 checks, parse 0, TWITCH_PARSE OK,
-                   COMMANDS_DOC 26 unmodified, and _l56_soak.gd retired as the ruling said.
-                   D70 AS A WHOLE STAYS OPEN: .1 the first-timer, .2 their hero's moments and .3 the
-                   room are twitch_eventsub.gd's and are the game build's, not yours.
-                   NEXT, AND IT IS MR. E'S OWN, RAISED AT 13:44-13:49 TODAY: W-LIVE, THE CHAT HALF.
-                   Exercise an EXISTING channel-point reward on his own account and prove the
-                   errand/order flow end to end - the half of it that lands in YOUR file is the
-                   reply, the queue read and the command surface. Have bellmirebro POST TEXT in
-                   jestsayin96's chat as part of the test: POSTING IS FREE.
-                   ***  BELLMIREBRO MUST NEVER CHEER. NOT ONCE, NOT ONE BIT, NOT ANYWHERE. ***
-                   The bot is not a bits account and a cheer from it costs Mr. E real money. Bits are
-                   free ONLY as JestSayin96 and ONLY in jestsayin96's own chat, and the bits path is
-                   the GAME BUILD's half, not yours - if your test needs a cheer, it comes from
-                   JestSayin96 or it does not happen. NO SUBSCRIPTIONS. Do not create, delete,
-                   rename or re-price a reward. Do not post AS his personal account - the bot speaks
-                   as bellmirebro and his account is a viewer. CHECK WHETHER HE IS LIVE BEFORE YOU
-                   TYPE ANYTHING: if he is, test silently or wait - viewers must not watch the bot
-                   talk to itself. Clean up and NAME what you did: the account, the reward, what it
-                   triggered, and that the state was left as found.
-                   AND FIX YOUR CLOCK FIRST - IT IS ONE LINE OF HOUSEKEEPING AND IT COSTS EVERY
-                   OTHER LANE. Your three RUN_LOCK lines this slot read 14:02, 14:08 and 14:22 while
-                   the real time was 13:45-13:56 CT. A future-stamped IDLE is worse than a missing
-                   one: the next lane clears a lock ON AGE, and an age computed from a future stamp
-                   is negative, so a dead lock looks live and a live one looks immortal. Read the
-                   clock off the machine, write real CT with the offset, and name a finish you can
-                   keep. You crossed nothing and starved nobody - the stamps are the only fault.
-                   YOUR WINDOW IS :45 AND IT IS PROTECTED - short gates, a few minutes, a named
-                   finish.
-  CONTENT      ->  *** C-68 IS IN AND TICKED (content 6c7d5e4). *** FIFTH slot running that you named
-                   which item was stalest and WHY before taking it, and this time you had to reach
-                   past four newer cycles to find it: bosses and potions, last touched in C-63. +24
-                   lord variants (12 lesser, 12 greater, three per lord) and +16 brews, now 178/172
-                   and 208. MODIFIED LORDS, NOT NEW LORDS - each inside its own lord's hp/speed/
-                   attack range - which is the restraint that keeps this additive and keeps code out
-                   of it. Validation was a parsed-value compare again: every pre-existing entry and
-                   key unchanged, LF kept, no duplicate boss name, no key/name/alias collision, and
-                   every gives/cures resolving in `states`. No floor count anywhere.
-                   NEXT: the NEXT-STALEST item in your standing backlog, chosen the same way - name
-                   which one and why it is now the stalest - and stay inside your four files (items,
-                   lore_lines, bosses, potions). Bosses/potions is now the FRESHEST of the four, so
-                   it is not a candidate. You need no lock, so your slot is never blocked.
-                   NOT YOURS, DO NOT PICK THEM UP: C-55's artifact enforcement and fishing.json
-                   "epic" -> "very rare" are both the game build's code half. The miniboss feed pool
-                   you doubled in C-67 is STILL read by no code - that is named as the game build's
-                   debt; do not write more of it to compensate and do not wire it yourself.
-  HUD          ->  YOUR ITEM IS UNCHANGED AND IT IS STILL THE MEASUREMENT, NOT A FIX. Nothing landed
-                   on `hud-ui` this hour but a plan sync, and your :52 slot was still open when I
-                   wrote this at 13:58 - if the delve-scene capture is in flight, say so in
-                   PROGRESS.md with the running total and SPLIT it; that is the correct shape and I
-                   will read it as progress, not as a miss.
+                   the claim line names its expected finish IN REAL CENTRAL TIME. START THE CLAIM ON
+                   ITS OWN LINE - yours at 13:10 was appended to the 12:56 IDLE line.
+  ART          ->  *** 6 OF 14 IS IN AND YOU KILLED YOUR OWN OLDEST FAULT ON THE WAY THROUGH
+                   (art b0a7af2). *** The Gaoler's angry-cartoon faceplate had travelled three
+                   conversions with you. I said at 13:58 that if 6 of 14 was a head you should fix
+                   it there; it was, and you did, and that is the SECOND conversion running where
+                   you applied a standing lesson without being walked through it. Fit MEASURED in
+                   _fit_porter_register.json rather than eyeballed, the faults written up in
+                   docs/art/MINIBOSS_FIT.md rather than buried in a commit message, three hero views
+                   looked at, pair sheet against the 2.45 m Knight at scale 1.0. TICKED.
+                   NEXT: REGISTER CONVERSION 7 OF 14. Eight left after this one, and the SKIP
+                   PROPOSAL for the Scrapwright and the Bellman still stands - if you want those two
+                   skipped, that decision is mine and I will take it when you ask for it plainly.
+                   STILL OPEN AND YOURS, NOT A NEW ITEM: the gloves' _G_FLARE0/_G_FLAREK re-tune. At
+                   the top of the range the bell mouth is 0.15 m radius and reads as a BUCKET at the
+                   wrist. D94e ported your derivation into gear.gd bit for bit, so the game's glove
+                   IS your proof row - your re-shot row is the only number that can move the gloves
+                   off PARTLY TOO SMALL 5 of 15. You take the lock only to prove fit, which is
+                   short, so it fits in any gap.
+  CHAT BOT     ->  *** YOUR CLOCK IS FIXED AND YOU FOUND THE DEFECT THAT MATTERED (chatbot
+                   1844684). *** Every stamp this slot was real CT read off the machine - that is
+                   the housekeeping closed in one slot, and it cost every other lane while it was
+                   broken. And you did not just read your own array: you discovered that a
+                   POINT-REDEEMED ERRAND NEVER ENTERS delve_queue, so a read of it alone WOULD HAVE
+                   LIED ON STREAM about the exact flow Mr. E opened at 13:44. !muster now reads the
+                   REAL muster, unioned by user id, with a hero already below correctly NOT counted.
+                   Not guarding !delve against `away` because you could not read the whole lifecycle
+                   inside a :45 window - and NAMING it instead of guessing - was the right call; a
+                   wrong guard would lock viewers out of !delve on stream. I have handed the source
+                   fix (town._on_delve writing to the queue) to the game build.
+                   W-LIVE'S CHAT HALF IS HALF DELIVERED AND NOT TICKED, AND IT IS STILL YOUR NEXT.
+                   The code half is in and gated; the LIVE half never happened - no chat line, no
+                   redemption, 0 bits. You report the browser was signed in as his personal account,
+                   so you could not speak as bellmirebro from there. THAT IS NOT A BLOCKER AND IT IS
+                   NOT A QUESTION FOR MR. E: the ENGINE already holds the bot's chat connection, so
+                   the post comes from the engine, not from a browser pane. ONE bellmirebro line in
+                   jestsayin96's chat, with the stream checked FIRST, closes this item. POSTING IS
+                   FREE. *** YOU MUST NEVER CHEER - NOT ONE BIT, NOT ANYWHERE. *** The bits path is
+                   the game build's half and it is already proven. NO SUBSCRIPTIONS. Do not create,
+                   delete, rename or re-price a reward. Do not post as his personal account. Name
+                   the account, the reward and what it triggered, and that the state was left as
+                   found.
+                   AND TAKE THE ONE-WORD FIX - IT IS ASSIGNED, SO STOP WAITING FOR PERMISSION.
+                   S2_TEST FAIL (a), `_ui_snd("help", out)` in _ask_line: "help" is a verb, not a
+                   registered Sfx kind, so the literal scan flags it. It is in YOUR file, it is a
+                   defect and not a new item, and you were right to ask rather than touch it
+                   unassigned. FAIL (b), "new ashwight -> ''" having no registered creature voice,
+                   is NOT yours - I have recorded it as the game build's.
+                   ON THE ECHO GATE, MY RULING: YES, KEEP IT, AND HAND IT OVER. D704_ECHO is a
+                   standing safety gate, not a one-off measurement, and deleting it means the next
+                   person to touch _reply has nothing to prove the door still shuts. Put it in
+                   tools/ as tools/_d704_echo.gd on `chatbot` - I am granting you that one path for
+                   this file only, and I will merge it like any other commit.
+                   YOUR WINDOW IS :45 AND IT IS PROTECTED - and it ENDS AT :52. A claim you cannot
+                   finish by :52 is SPLIT with a checkpoint, not declared past the boundary. Yours
+                   named 14:58. Short gates, a few minutes, a finish you can keep.
+  CONTENT      ->  *** C-69 IS IN AND TICKED (content 34f89f2). *** SIXTH slot running that you
+                   named which item was stalest and WHY before taking it, and this time the answer
+                   reached back further than ever: the disasters themselves were last touched in
+                   C-56, two cycles older than anything else on your board. +130 lines across all
+                   thirteen disasters, `begin`/`pass`/`cost` UNTOUCHED - and leaving `cost` alone,
+                   because it is the one statement the desktop implements from, is the restraint
+                   that keeps your cycles additive and keeps code out of them. Parsed-value compare
+                   again, LF kept, no floor count.
+                   NEXT: the NEXT-STALEST item in your standing backlog, chosen and NAMED the same
+                   way, inside your four files (items, lore_lines, bosses, potions). Disasters are
+                   now the freshest of that group, so item 1 is not a candidate.
+                   TWO THINGS SO YOU STOP CARRYING THEM: "epic" -> "very rare" IS DONE - I grepped
+                   it myself, data/fishing.json has no "epic" and the code reads "very rare"
+                   everywhere. And the miniboss_feed reader is now explicitly the game build's
+                   FIRST-AFTER-NEXT item in its own row above; I verified nothing in scripts/ reads
+                   it. You were right to name it three cycles running and right not to write more
+                   of the pool to compensate. C-55's artifact-never-stocked enforcement stays the
+                   game build's too. You need no lock, so your slot is never blocked.
+  HUD          ->  YOUR CAPTURE IS IN FLIGHT AS I WRITE - you claimed 14:58:47 for the L40 delve
+                   capture with a named finish of 15:05, which is exactly the right shape, and I
+                   will read a split with a running total as progress rather than a miss.
                    FINISH THE MEASUREMENT OF L40, AND MEASURE ONLY. L40 cannot tick on a plain-town
-                   capture because the item's own DONE line needs party frames and the Chronicle in
-                   the SAME frame, and you said plainly that your 4/4 did not speak for them. Extend
-                   tools/_l40_test.gd so it runs with a delve in progress - party frames up, a boss
-                   card up, chat open, the Chronicle running - at 100/125/150 in the grid and at full
-                   screen, and REPORT the overlap in numbers and in a still. DO NOT TOUCH
-                   party_frames.gd: the fix is D41 and it is the game build's, and your number is
-                   what tells it where to aim. If the delve capture also comes back zero, SAY SO
-                   just as plainly - that closes clause (a) and shrinks D41 to nothing, which is a
-                   better result than any fix.
+                   capture - the item's own DONE line needs party frames and the Chronicle in the
+                   SAME frame, and you said plainly that your 4/4 did not speak for them. Party
+                   frames up, a boss card up, chat open, the Chronicle running, at 100/125/150 in
+                   the grid and at full screen, reported in NUMBERS and in a still. DO NOT TOUCH
+                   party_frames.gd - the fix is D41, it is the game build's, and your number is what
+                   tells it where to aim. THE GAME BUILD IS HOLDING D41 UNTIL YOUR NUMBER LANDS, on
+                   my instruction, so it does not aim blind: your capture is the gate on its third
+                   item, which is why this is measurement and not busywork. If the delve capture
+                   also comes back ZERO, SAY SO just as plainly - that closes clause (a) and shrinks
+                   D41 to nothing, which is a better result than any fix.
                    CLAUSE (b) IS CLOSED ON OUR SIDE AND IS NOT COMING BACK. You proved by grep there
                    is no in-game join alert at all, so it is an OBS overlay. OBS IS NEVER A
                    DEPENDENCY - Mr. E, 13:42: "Obs has nothing to do with visuals. I can move alert
                    boxes and everything around on obs. So make sure no one is waiting aroun for OBS."
                    YOUR WINDOW IS :52-:07, no single claim over 15 minutes, hard release at :07, and
                    a long capture SPLITS across firings with the running total in PROGRESS.md.
-  HUB          ->  THIRD SLOT WITH NOTHING SHIPPED AND THE ITEM IS UNCHANGED SINCE 11:58. I am not
-                   giving you a different job, because a different job will not fix this and the item
-                   is small: RE-VERIFY THE LIVE-DATA VERSION GATE BY ITSELF. KNOWN_V v4 must light
-                   the Shop and Satchel tabs with no hand-holding, on a real snapshot, and the
+  HUB          ->  FOURTH SLOT WITH NOTHING ON THE BRANCH AND THE ITEM IS UNCHANGED SINCE 11:58.
+                   I am not giving you a different job - a different job will not fix this, and the
+                   item is SMALL: RE-VERIFY THE LIVE-DATA VERSION GATE BY ITSELF. KNOWN_V v4 must
+                   light the Shop and Satchel tabs with no hand-holding, on a real snapshot, and the
                    stale-data notice must behave when the payload is older. Same invariants as every
                    tab: el()/textContent only, ICON_SET whitelist, CSP unchanged, hostile names as
-                   text. YOU NEED NO LOCK AND NOTHING CAN BLOCK YOUR SLOT, so if 12:37 and 13:37
-                   went to something other than the work, WRITE ONE LINE IN YOUR CYCLE SAYING WHAT.
-                   I would rather read "the slot went to X" than guess from an empty branch - three
-                   silent slots is the only thing on this board I cannot account for.
+                   text. The game build moved PAYLOAD_V to 4 at 11:18 yesterday precisely so you
+                   could do this, so the snapshot you need exists.
+                   YOU NEED NO LOCK AND NOTHING CAN BLOCK YOUR SLOT. So the ONE thing I want from
+                   your next firing, even if the work does not finish, is A SINGLE LINE IN
+                   PROGRESS.md SAYING WHERE THE SLOT WENT. Four silent slots is the only thing on
+                   this board I cannot account for, and I would rather read "the slot went to X" or
+                   "I could not reach the snapshot because Y" than keep guessing from an empty
+                   branch. If something in your prompt or your worktree is actually broken, say
+                   that - a broken lane I can fix, a silent one I cannot.
                    DO NOT publish to gh-pages - that is MR. E'S CALL ALONE.
 
 
@@ -1006,6 +1018,20 @@ it is NOT finished. The attach and the gear.gd entry are the GAME BUILD's. One q
 in NEEDS MR. E: at 0.921 long it reads as a short staff rather than a wand, and nobody rescales his
 own asset without him saying which he meant.
 
+THE REGISTER CONVERSION IS NOW 6 OF 14, AND THE LANE FINALLY KILLED ITS OWN OLDEST FAULT ON THE WAY
+THROUGH (supervisor, 2026-11-16 14:58 CT; art b0a7af2, merged to main). The PORTER is converted and
+the carried faceplate fault - the Gaoler's angry-cartoon mask, named at 3 of 14 and travelled with
+this lane through conversions 4, 5 and 6 - IS CLOSED IN THE PLACE IT BELONGED. I told this lane at
+13:58 that if 6 of 14 was a head it should fix it there; it was a head, and it did, and that is the
+second conversion running where the lane applied a standing lesson without being walked through it.
+Rebuilt on the Knight's measured proportions at the authored height, three hero views looked at
+front, side and back (renders/art/minibosses/porter_chibi/), the pair sheet
+renders/art/minibosses/_porter_register.png puts original beside chibi beside the 2.45 m KayKit
+Knight at scale 1.0, and the fit is MEASURED, not eyeballed - _fit_porter_register.json with the
+numbers, and the faults written up in docs/art/MINIBOSS_FIT.md rather than left in a commit message.
+tools/art/minibosses.py +191 lines. TICKED. EIGHT LEFT TO CONVERT, and the SKIP PROPOSAL for the
+Scrapwright and the Bellman still stands.
+
 THE REGISTER CONVERSION IS NOW 5 OF 14, AND THE FIFTH ONE WAS THE FOURTH ONE'S LESSON APPLIED
 WITHOUT BEING TOLD (supervisor, 2026-11-16 13:58 CT; art 7315cfd, merged to main and TICKED). The
 SEXTON. The most useful sentence in docs/art/MINIBOSS_FIT.md is the lane's own first read of its
@@ -1366,7 +1392,17 @@ intersects any other fence segment, which is the thing Mr. E can actually SEE; a
 placer's claimed `_objs` radius covers everything it built. Shoot the livestock paddock and its
 neighbours before and after, in renders/cycles/d92/.
 
-- [ ] D91. THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
+- [x] D91. THE DUNGEON HAS NO CROWD AVOIDANCE AT ALL (game build - Mr. E, Nov 15 16:47) **RC**
+      *** TICKED BY THE SUPERVISOR, 2026-11-16 14:58 CT. THE CODE IS ON main. *** The lane did
+      exactly what my 13:58 ruling asked and nothing more: it fast-forwarded the checkpoint onto
+      `laptop` (80b46cf, the merge of d91d-wip 995f975), ran parse + offfloor + twitch_parse +
+      townwalk + delve - all green - and SPENT NO SIXTH SLOT ON ANOTHER SOAK. Merged to main here.
+      THE KEPT NUMBER, VERBATIM AND NOT SWEPT: the final 20-minute town soak read D91_TOWN FAIL by
+      2 frames at 0.6 MILLIMETRES, two peasants on the tavern door step at (83.2,48.4). The 1 cm
+      alcove that failed four runs running is GONE (0 events in that pocket after the market crate
+      moved 3.6 m off the door step). The dungeon half passed its own 20-minute soak outright.
+      D91 is closed on the ruling, not on the gate, and the ruling is written above so nobody
+      re-derives it.
       THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
       so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
       D91 STAGES 2-4 HALF DELIVERED / STILL OPEN (supervisor, 2026-11-16 05:58 CT; laptop 47c1747,
@@ -3871,6 +3907,14 @@ Note: Quaternius "Bestiary" packs are NOT CC0 (QAL licence) - skip them.
       doubled (S1 + S2 both sounded them), !reroll / !respec paid silently, dragon roar +9.9 dB over the music,
       skeleton / spider voices -9.5, half the dungeon bed inaudible (-25), menu_select +4.6, potion_drink buried,
       a generic hit doubling every blow. Levels now -5.6 .. +1.9 dB of the music, bed -15 .. -18; SOUND_REVIEW OK 18/18.
+      NAMED FAULT, NOT A NEW ITEM, AND IT IS THE GAME BUILD'S (supervisor, 2026-11-16 14:58 CT):
+      the chat bot ran _s2_test while touching a line it asserts and reported S2_TEST FAIL 2, both
+      PRE-EXISTING and neither its own. (b) is "new ashwight -> ''" - that creature reaches the
+      voice queue with NO REGISTERED KIND, so it is silent where every other creature speaks.
+      Creature voice registration is code, not content, so it is the game build's; it belongs to
+      this item's coverage clause A ("every creature the game can make voices a registered kind")
+      and is recorded here rather than written up as a new ID. (a) was `_ui_snd("help", out)` in
+      chatcmd.gd and is assigned to the chat bot - its own file, one word.
 
 ## Twitch phase 2 (main chat, needs Mr. E's Client ID)
 
@@ -3923,6 +3967,54 @@ STILL FORBIDDEN - THE PERMISSION DOES NOT TOUCH ANY OF THESE:
 CLEAN UP AFTER A TEST, IN THE CYCLE, IN WORDS: the account used, what was redeemed or cheered,
 what it triggered, and that the state was left as found. A test that leaves a hero holding a
 power-up or an order outstanding MUST be named so it is never mistaken for a real viewer's.
+
+*** W-LIVE STATUS, 2026-11-16 14:58 CT (supervisor). THE GAME BUILD HALF IS PROVEN AND TICKED. THE
+CHAT HALF IS HALF DELIVERED AND STAYS OPEN. ***
+  [x] GAME BUILD HALF - DONE AND TICKED (laptop abf1690, merged to main). The faking is over. The
+      lane checked the stream FIRST (jestsayin96 OFFLINE on decapi, 14:09) and tested silently
+      anyway - chat DRY RUN, the bot posted nothing. tools/_wlive.gd opens Bellmire's own EventSub
+      socket with no town loaded, so no hero, roster or store could change anywhere, and logs every
+      notification's raw body BEFORE the game handles it.
+      ACCOUNT: JestSayin96, in jestsayin96's own chat. bellmirebro did nothing at all.
+      REDEMPTION: "Bellmire: Send my hero fishing" (150 channel points; broadcaster balance is
+      unlimited, so nothing was spent). It arrived as channel.channel_points_custom_reward_
+      redemption.add and MATCHED BY REWARD ID to key `fish` - and this is the part worth keeping:
+      MR. E HAS RENAMED THAT REWARD ON TWITCH AND THE ID MATCH CARRIED IT ANYWAY, which is exactly
+      what the edit-proof design was for and it has now been proven against his live channel rather
+      than argued. The action fired (SPOTLIGHT, 15 s) and _settle marked it FULFILLED - all six
+      Bellmire queues read 0 unfulfilled afterwards. STATE LEFT AS FOUND.
+      BITS: 0 SPENT. The Power-up "Bellmire: Town Heal" was redeemed on his own channel, where
+      Twitch itself said "No charge since this is your channel - viewers pay 25 Bits"; the balance
+      read 45 before AND 45 after. The REAL payload is now on record - channel.custom_power_up_
+      redemption.add with custom_power_up.{bits, id, prompt, title} - and the handler's ASSUMED
+      shape was right, with one real finding: bits arrive as a FLOAT and int() takes it. _do_bits_
+      tier returned early with no town loaded, so nothing was granted to anyone. No reward was
+      created, renamed, re-priced or deleted; rewards_resync was confirmed OFF in both twitch.cfg
+      files before the run. NOTHING LEFT BEHIND: no hero holding a power-up, no order outstanding.
+  [ ] CHAT BOT HALF - HALF DELIVERED / STILL OPEN (chatbot 1844684, merged to main; NOT TICKED).
+      THE CODE HALF IS IN AND IT FOUND A REAL DEFECT IN THE EXACT FLOW MR. E OPENED: a
+      POINT-REDEEMED ERRAND NEVER ENTERS chat's delve_queue. twitch_eventsub.gd's "delve" and
+      "join" rewards call town._on_delve(uid) directly, which walks the hero to the scar and sets
+      chat.away[uid] but appends to NOTHING; only !delve writes that array. So a hero sent down by
+      a redemption stands at the mouth while the queue chat owns reads empty - a read of my array
+      alone WOULD HAVE LIED ON STREAM about the flow he opened at 13:44. !muster (!party,
+      !mustered) therefore reads the REAL muster: the names chat put in, in order, unioned by user
+      id with anyone the town has on the road to the scar or waiting at the mouth; a hero already
+      below is NOT counted, because they are not mustering. Needs no hero, so a bystander may ask.
+      Parse 0 errors, L14_TEST OK, TWITCH_PARSE OK, WLIVE_CHAT OK (16 checks), COMMANDS_DOC 27.
+      WHY IT DOES NOT TICK: the half of this item that is LIVE was never exercised. No chat line
+      was posted, no reward was redeemed, 0 bits - the lane reports the browser was signed in as
+      Mr. E's personal account, so it could not speak as bellmirebro from there. THAT IS NOT A
+      BLOCKER AND IT IS NOT MR. E'S: the game already holds the bot's chat connection, so the post
+      comes from the engine, not from a browser pane. One bellmirebro line in jestsayin96's chat,
+      posted from the engine with the stream checked first, closes this. POSTING IS FREE. THE BOT
+      MUST NEVER CHEER - the bits path is the game build's half and it is already proven above.
+      ALSO NAMED, NOT CHANGED, AND CORRECTLY SO: the lane deliberately did not guard !delve against
+      `away`, because `away` is cleared in exactly one place in town.gd and it could not read the
+      whole lifecycle inside a :45 window. A wrong guard would lock viewers out of !delve on
+      stream. THE DOUBLE-COUNT AND THE QUEUE WRITE ARE THE GAME BUILD'S - town._on_delve should
+      append to chat.delve_queue so the two halves agree at the source instead of being unioned at
+      the read. That is named here as game build debt, NOT as a new item.
 - [x] W1a. SNAPSHOT PUBLISHER - DESKTOP. Mr. E chose GitHub Pages for the page and Supabase for the
       data (Nov 12, free tier, project already created and the table already exists). Every 60 s the
       game upserts ONE row into the Supabase table public.snapshot: id=1, payload = a jsonb blob with the
@@ -4505,6 +4597,24 @@ now gates by level. CONTENT WRITER: TAKE C4 NEXT.
       every pre-existing entry and key identical, LF kept, no duplicate boss name, no key, name or
       alias colliding with an existing potion, and every gives/cures resolving in `states`. No code
       wiring needed; no floor count anywhere.
+
+      C-69 (content 34f89f2, merged and TICKED by the supervisor 2026-11-16 14:58 CT) -
+      standing-backlog pick, SIXTH slot running that the lane named which item was stalest and WHY
+      before taking it. Standing-backlog item 1, disasters and events: the events themselves were
+      last touched in C-64 and THE DISASTERS IN C-56, while C-65 (epitaphs/barks), C-66 (Phase 2
+      words), C-67 (the miniboss feed) and C-68 (bosses/potions) all came after - the oldest thing
+      on its board by two cycles. data/lore_lines.json `disasters`: +4 `during`, +3 `begin_alt`,
+      +3 `pass_alt` on EACH of the thirteen disasters (volcano, fire, drought, famine, sickness,
+      hurricane, tornado, earthquake, meteor, scarstorm, flood, blight, coldsnap) = 130 new lines,
+      plain register, no line repeating any string already in the file. `begin`, `pass` and `cost`
+      UNTOUCHED - cost is the one statement the desktop implements from, and leaving it alone is
+      what keeps this additive. The existing picker widens by itself: 28 begin_alt / 28 pass_alt /
+      40 during per disaster, was 25 / 25 / 36. Validation was a parsed-value compare again: all
+      four data files parse, every pre-existing key and value identical, appends at the end of each
+      array only, LF kept, no floor count anywhere. One file, no code wiring, no new item.
+      THE DEBT IT NAMED AGAIN AND CANNOT PAY ITSELF, now carried a third cycle: the miniboss_feed
+      reader, "epic" -> "very rare" in fishing.json / angler.gd / fishing.gd / economy.gd and
+      chatcmd.gd's order array, and C-55's artifact-never-stocked enforcement. All game build's.
 
 - [x] C4. WHAT A CROSSING SELLS AND WHAT A CITY SELLS ARE NOT THE SAME THING - STOCK AND CARGO BY GROWTH TIER.
       Owner: CONTENT WRITER (data/items.json ONLY). The town grows through twelve stages from Crossing to City

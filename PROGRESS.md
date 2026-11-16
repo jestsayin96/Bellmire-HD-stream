@@ -6037,3 +6037,36 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
      not D94, but it shows in every lineup.
 - GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1695, MON_INPROP 0/135; _twitch_parse TWITCH_PARSE OK;
   _delve_test no SCRIPT ERROR; _townwalk see commit. The art lane's own D95 sheets (renders/art/d95) are separate.
+
+## D-cycle D94c - D94's last three fit faults: amulet chain, cloak colour, legendary pool (game build, 2026-11-16 ~03:08-03:30 CT)
+- Taken from the TAKE THIS NEXT block (GAME BUILD -> D94's last three fit faults, game build leads, art moves with
+  it). NOT ticked. Ring/glove stream size left with Mr. E as instructed. D95 not re-rendered (re-shot goes to d94c/).
+- FAULT 5, AMULET CHAIN BURIED - FIXED (gear.gd _build_amulet). The chain was two thin rods running straight up
+  under the chin, so the head's overhang hid them. It is now eight links a side draped wide across the upper chest
+  out to the collarbones (x +-0.235, following the chest's barrel back as it climbs), link size rides cost, with a
+  faint emission so it catches the light. Looked at: renders/cycles/d94c/d94_row_1_amulet_close.png - the V of
+  links reads from the front on helmed and bare bodies; the pendant still hangs at the breastbone.
+- FAULT 9, CLOAKS DIFFER BY SHAPE NOT COLOUR - FIXED ON THE BODY (gear.gd _acc_base). A cloak no longer takes one
+  of the eight dark leather TONES; it takes one of TWELVE period dyes, D94_CLOAK_DYES (madder red, woad blue,
+  woodland green, walnut black, grey wool, undyed cream, weld ochre, wine, river teal, russet, scar violet,
+  oilcloth olive). Picked from the NAME first via D94_CLOAK_WORDS (Red Harl -> madder, Sexton's Black -> black,
+  Woodward's Green -> green, Lockkeeper's Oilcloth -> olive, Commander/Constable/Watch -> woad...), else
+  (d94_hash(key) >> 8) % 12. Spread over the 49 cloaks: 3/7/7/3/2/4/5/3/5/4/2/4 - no dye holds more than 7.
+  cloth_i for a cloak is now the dye index, so acc_form's signature uses it; gloves and boots keep the TONES.
+  Looked at: d94_row_4_cloak.png / _close.png - teal, ochre, violet, grey side by side, plainly different capes.
+  ** ART LANE MUST MIRROR THIS ** so the hub icon and the hero stay one object: port D94_CLOAK_DYES,
+  D94_CLOAK_WORDS (first match in LIST ORDER, substring of (name + " " + key).lower()) and the hash fallback
+  into the icon/showcase derivation for slot == cloak, and use the dye index as cloth_i in the form signature.
+  The colours are linear (like TONES); Godot applies _lin().
+- FAULT 11, LEGENDARY ACCESSORY POOL 16 DEEP - NOT A BUILDER FIX, MEASURED AND HANDED BACK. The 16 are 8 rings,
+  6 cloaks, 2 amulets and ZERO boots and ZERO gloves. The cause is the C-58 banding: accessory rarity is cut by
+  ONE cost scale for every slot (441+ = legendary), but boots top out at 420 and gloves at 330, so those two slots
+  can never hold a legendary piece. The fix is data, not code - either band rarity per slot (by cost quantile
+  within the slot, as orn already does) or write dearer boots/gloves. items.json is the content writer's file
+  (lane shut down); this needs a supervisor ruling. No script reads the band in a way I could widen honestly.
+- TOOL: tools/_d95_fit.gd takes D95_OUT=<dir> so a re-shot never overwrites the D95 sheets.
+- TESTS: D95_MODE=slots D95_OUT=renders/cycles/d94c -> D95_FIT OK (14 shots, 0 attach failures).
+  _d94b_pairs.gd signatures: D94B accessories 254, 37 given a form > 0, 0 duplicates; weapons 86, 0 duplicates
+  (its renders need a window - run headless here only for the signature check).
+- GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1510, MON_INPROP 0 of 126; _twitch_parse TWITCH_PARSE OK;
+  _townwalk in_solid 0/20823 PASS; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).

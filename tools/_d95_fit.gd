@@ -20,6 +20,8 @@ const RARITY := ["common", "uncommon", "rare", "very rare", "legendary"]
 const SLOTS := ["ring", "amulet", "gloves", "boots", "cloak"]
 
 func _initialize() -> void:
+    if OS.get_environment("D95_OUT") != "":       # D94c: write a re-shot elsewhere, never over the D95 sheets
+        _out = "res://" + OS.get_environment("D95_OUT").trim_suffix("/") + "/"
     DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_out))
     _stage = Node3D.new()
     root.add_child(_stage)

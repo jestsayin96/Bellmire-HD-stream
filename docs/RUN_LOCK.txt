@@ -85,3 +85,5 @@ IDLE 2026-11-16T01:37:10-06:00 - D94a wiring shipped (items look like themselves
 RUNNING 2026-11-16T02:13:30-06:00 (game build D94 remainder - item key into geometry)
 RUNNING 2026-11-16T02:18:00-06:00 (game build D94 remainder - gate battery)
 IDLE 2026-11-16T02:22:46-06:00 - D94b item key into geometry (acc form, weapon deco, round boots, bought boots win, arcane mace, bow scale); D94B OK, gates green (game build)
+RUNNING 2026-11-16T03:10:23-06:00 (game build D94c amulet chain + cloak dyes)
+IDLE 2026-11-16T03:20:40-06:00 - D94c amulet chain draped + cloak dyes (12, name-first) shipped; legendary pool measured (0 boots/0 gloves can reach 441+), handed back; D95_FIT OK, 0 dup, gates green (game build)

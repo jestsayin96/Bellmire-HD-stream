@@ -899,6 +899,49 @@ const D94_NAME_HINTS := {
     "gloves": {"gauntlet": 0, "plate": 0, "mitt": 1, "mitten": 1, "wrap": 4,
                "fingerless": 4, "bracer": 3, "vambrace": 3, "stud": 2},
 }
+## D94c - CLOAKS DIFFER BY COLOUR, NOT ONLY BY SHAPE. The eight TONES above are all dark
+## leather/cloth, so 49 cloaks read as one brown-grey cape with a different collar. A cloak is the
+## largest single area of colour on a hero; it takes a DYE of its own instead. Twelve period dyes
+## (madder, woad, weld, woodland green, walnut black, undyed wool...), kept below full saturation so
+## they sit in the HD palette. THE SHARED RULE (tools/art must derive the same index so the hub icon
+## and the hero match):
+##   hay   = (name + " " + key).lower()
+##   dye_i = the FIRST entry of D94_CLOAK_WORDS (in list order) whose word is in hay,
+##           else (d94_hash(key) >> 8) % 12   (the same bits the TONES used)
+##   cloth = D94_CLOAK_DYES[dye_i] (linear, like TONES - _lin() for Godot), cloth_i = dye_i
+## Gloves and boots keep the eight TONES (they are leather).
+const D94_CLOAK_DYES := [
+    Color(0.42, 0.08, 0.07),   # 0 madder red
+    Color(0.08, 0.14, 0.36),   # 1 woad blue
+    Color(0.06, 0.20, 0.08),   # 2 woodland green
+    Color(0.04, 0.035, 0.035), # 3 walnut black
+    Color(0.30, 0.29, 0.27),   # 4 grey wool
+    Color(0.62, 0.56, 0.42),   # 5 undyed cream
+    Color(0.52, 0.30, 0.04),   # 6 weld ochre
+    Color(0.22, 0.06, 0.20),   # 7 wine / mulberry
+    Color(0.04, 0.20, 0.20),   # 8 river teal
+    Color(0.28, 0.10, 0.03),   # 9 russet
+    Color(0.12, 0.08, 0.30),   # 10 scar violet (dear dye)
+    Color(0.18, 0.17, 0.06),   # 11 oilcloth / peat olive
+]
+const D94_CLOAK_WORDS := [
+    ["scar", 10], ["red", 0], ["harl", 0], ["raid", 0], ["warhorn", 0], ["feast", 7], ["chronicl", 7],
+    ["backstair", 7], ["caravan", 9], ["hurdl", 9], ["bowyer", 9], ["mourn", 4], ["grey", 4],
+    ["fog", 4], ["ash", 4], ["sexton", 3], ["black", 3], ["ossuary", 3], ["grave", 3],
+    ["green", 2], ["wood", 2], ["hedge", 2], ["orchard", 2], ["osier", 2],
+    ["oilcloth", 11], ["peat", 11], ["turbary", 11], ["mire", 11], ["tanner", 9], ["butcher", 9],
+    ["winter", 5], ["salt", 5], ["pilgrim", 5], ["lime", 5],
+    ["lamp", 6], ["guild", 6], ["thatch", 6], ["crier", 6],
+    ["commander", 1], ["constable", 1], ["watch", 1], ["wall", 1],
+    ["ferry", 8], ["raft", 8], ["lighter", 8], ["lock", 8], ["crane", 8], ["wake", 8], ["deep", 8],
+]
+static func cloak_dye_i(key: String, name: String) -> int:
+    var hay := (name + " " + key).to_lower()
+    for e in D94_CLOAK_WORDS:
+        if hay.contains(String(e[0])):
+            return int(e[1])
+    return (d94_hash(key) >> 8) % D94_CLOAK_DYES.size()
+
 static var _acc_span := {}          # slot -> [lo, hi] cost over the accessories
 
 ## icongen.context()'s hash, bit for bit
@@ -976,9 +1019,14 @@ static func _acc_base(key: String) -> Dictionary:
             variant = int(hints[word])
             break
     var mi := mini(3, int(orn * 4.0))
+    var ti := (h >> 8) % D94_TONES.size()
+    var cloth: Color = D94_TONES[ti]
+    if slot == "cloak":                        # D94c: a cloak wears a dye, not a leather tone
+        ti = cloak_dye_i(key, String(it.get("name", "")))
+        cloth = D94_CLOAK_DYES[ti]
     return {"slot": slot, "variant": variant, "orn": orn, "stat": stat,
             "metal": _lin(D94_METALS[mi]), "metal_i": mi,
-            "cloth": _lin(D94_TONES[(h >> 8) % D94_TONES.size()]), "cloth_i": (h >> 8) % D94_TONES.size(),
+            "cloth": _lin(cloth), "cloth_i": ti,
             "gem": _lin(D94_STAT_GEM.get(stat, Color(0.70, 0.70, 0.74))),
             # WEAR RIDES COST: a cheap piece is dull and handled, an expensive one bright and kept
             "rough": lerpf(0.82, 0.28, orn), "sheen": lerpf(0.45, 0.95, orn)}
@@ -1114,7 +1162,7 @@ static func _build_ring(root: MeshInstance3D, c: Dictionary) -> void:
                 _part(root, _sph(0.016), gm, Vector3((RING_R + band * 2.0) * cos(a3 + PI * 0.5), 0.0, (RING_R + band * 2.0) * sin(a3 + PI * 0.5)))
 
 ## AMULET: a pendant on the breastbone, below the overhang of the head where the camera sees
-## it, hung from two short chain strands that run up under the chin.
+## it, hung from a linked chain draped wide across the upper chest to the collarbones (D94c).
 ## pendant: teardrop / disc / crescent / vial / locket.
 static func _build_amulet(root: MeshInstance3D, c: Dictionary) -> void:
     var v := int(c["variant"])
@@ -1122,9 +1170,20 @@ static func _build_amulet(root: MeshInstance3D, c: Dictionary) -> void:
     var mm := _m_metal(c)
     var gm := _m_gem(c)
     root.position = Vector3(0, 0.02, 0.42)            # model y ~0.99, just proud of the chest
-    for s in [-1.0, 1.0]:                              # the chain, up to the neck
-        var strand := _part(root, _cyl(0.008 + 0.004 * orn, 0.008 + 0.004 * orn, 0.24, 5), mm, Vector3(0.09 * s, 0.11, -0.03))
-        strand.rotation = Vector3(-0.25, 0, 0.62 * s)
+    # D94c: the chain was two thin rods running straight up under the chin, so the head's overhang
+    # buried them and only the pendant read. It is now a run of LINKS draped wide across the upper
+    # chest, out towards the collarbones where the head does not cover it, following the barrel of
+    # the chest back as it climbs (z falls with x) - a V a viewer reads as "worn on a chain".
+    var lr := 0.016 + 0.008 * orn
+    var lm := _m_metal(c)
+    lm.emission_enabled = true                         # a chain must catch the light on stream
+    lm.emission = (c["metal"] as Color) * 0.5
+    lm.emission_energy_multiplier = 0.35
+    for s in [-1.0, 1.0]:
+        for k in range(1, 9):
+            var t := k / 8.0
+            var p := Vector3(0.235 * s * pow(t, 0.85), 0.035 + 0.11 * t * t, 0.012 - 0.15 * t * t)
+            _part(root, _sph(lr, lr * 1.5), lm, p, Vector3(0, 0, -0.9 * s * t))
     root.mesh = null
     match v:
         0:

@@ -1,0 +1,536 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Rogue_Hooded - playing its idle
+FEED Maela Quarryman settles in Bellmire, looking for work.
+  t=105s frames=3000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=216
+FEED Tove Ashwood settles in Bellmire, looking for work.
+FEED Dunn Stonehand settles in Bellmire, looking for work.
+FEED Sable the Younger settles in Bellmire, looking for work.
+  t=236s frames=6000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=219
+MUSTER timed out: dists=[101, 53, 51, 36, 64, 129, 35, 52] vis=true stay=false route=67 inside=false
+FEED Dunn of the Ford settles in Bellmire, looking for work.
+  t=299s frames=9000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+  t=325s frames=12000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Bran Rivers settles in Bellmire, looking for work.
+  t=350s frames=15000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED The door stays kept, and the stair takes them.
+FEED They carry 18 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 giant rat, 1 hollowed puglin.
+FEED The dust lies flat except in one line, wall to wall.
+FEED The slime divides.
+FEED Edda the Younger searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Cleared, and the chalk on the lintel is fresh.
+FEED Edda the Younger finds a vial of Pitchwater.
+  t=378s frames=18000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Edda the Younger searches the chest - ...no loot... (Investigation 7 vs DC 10).
+FEED Sable Stonehand and 5 others take a breather, and press on deeper.
+FEED Osric Rivers settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed cave spider, 1 slime, 1 hollowed bog frog, 1 bog frog.
+  t=404s frames=21000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Sable Stonehand rolls a 20 - and the slime is gone.
+FEED The slime divides.
+FEED Edda the Younger searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED Cleared. Sweep the door and move on.
+FEED Flasks clinked, straps tight. The dark is ready, so are we.
+FEED They carry 6 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 1 giant rat, 1 cave bat.
+FEED The slabs were lifted from beneath - the chips all fell outward.
+FEED Garm Thatcher casts Frost at cave bat.
+FEED Wren Bramble's smite rebounds off a stone that was not there (1 vs DC 10).
+FEED Sable Stonehand and 5 others take a breather, and press on deeper.
+  t=433s frames=24000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Wren Bramble casts Bolt at giant rat.
+FEED Garm Thatcher casts Frost at giant rat.
+FEED Wren Bramble casts Bolt at bog frog.
+FEED Garm Thatcher casts Bolt at bog frog.
+FEED Garm Thatcher searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Floor 1 cleared - the guild will want its cut.
+FEED Garm Thatcher finds a vial of Bravecup.
+FEED Garm Thatcher, Wren Bramble take a breather, and press on deeper.
+FEED Petra Thatcher settles in Bellmire, looking for work.
+  t=461s frames=27000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED 4 bandits are riding on the west road!
+FEED Initiative: the raiders 16, the watch 18 - the watch is ready for them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed cave bat, 1 hollowed slime, 1 slime, 1 drowned slime.
+FEED Mother Silk is down here. Every thread in the dark is hers.
+FEED The threads across the doorway are new.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 cave bat, 2 bog frogs.
+FEED Wren Bramble pays for bolt and the scar keeps the receipt (6 vs DC 11).
+FEED Garm Thatcher casts Frost at bog frog.
+FEED Wren Bramble casts Smite at bog frog.
+FEED A building is burning!
+FEED Wren Bramble casts Smite at cave bat.
+FEED Garm Thatcher casts Bolt at cave bat.
+FEED Wren Bramble casts Bolt at skeleton minion.
+FEED Garm Thatcher casts Frost at skeleton minion.
+FEED The slime divides.
+FEED The townsfolk raise the ruin again.
+FEED Talen Coalfoot turns on the wounded slimeling to finish it.
+FEED Edda the Younger turns on the wounded slimeling to finish it.
+FEED Tove Coalfoot turns on the wounded slimeling to finish it.
+FEED Ysolde Rivers turns on the wounded slimeling to finish it.
+FEED Spiders drop from Mother Silk's threads.
+FEED A building is burning!
+FEED Mother Silk shifts, and the fight changes with it.
+FEED Ysolde Rivers rolls a 20 - Mother Silk reels.
+FEED Mother Silk is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Talen Coalfoot is badly hurt and breaks off, making for the way up.
+FEED Mother Silk falls to Sable Stonehand.
+FEED The attack is driven off. The gates hold.
+FEED Wren Bramble casts Bolt at bog frog.
+FEED Talen Coalfoot the duelist falls on floor 3 to the dark below. Level 1, 3 kills. !reroll to rise again.
+FEED Garm Thatcher casts Frost at bog frog.
+FEED Garm Thatcher searches (Investigation 22) and turns up 29 gold on floor 2.
+FEED Done here. Bind the wounds, count the flasks.
+FEED Garm Thatcher searches the chest - ...no loot... (Investigation 10 vs DC 11).
+FEED Hilda Fenwick settles in Bellmire, looking for work.
+FEED Edda Ashwood is badly hurt and breaks off, making for the way up.
+FEED Edda the Younger turns on the wounded drowned slimeling to finish it.
+FEED Tove Coalfoot turns on the wounded drowned slimeling to finish it.
+  t=503s frames=30000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Garm Thatcher, Wren Bramble take a breather, and press on deeper.
+FEED The townsfolk raise the ruin again.
+FEED Edda the Younger turns on the wounded hollowed slimeling to finish it.
+FEED Edda the Younger searches (Investigation 6) and turns up 26 gold on floor 3.
+FEED Floor 3 quiets. The next stair listens.
+FEED Edda the Younger searches the chest - Successfully found loot!! 45 gold (Investigation 21 vs DC 11).
+FEED Sable Stonehand and 5 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 3 giant rats, 1 drowned slime.
+FEED The oil is running low.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 5; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 drowned slimes, 1 drowned bone bowman, 1 drowned risen bones.
+FEED Talen Coalfoot, Kept by the Scar is down here. A duelist of the guild who fell below, and the scar did not let go.
+FEED A voice the guild knew calls a name the guild remembers.
+FEED The oil is running low.
+FEED Garm Thatcher steels themself for the lord.
+FEED Garm Thatcher drinks Bravecup.
+FEED The slime divides.
+FEED Sable Stonehand turns on the wounded slimeling to finish it.
+  t=539s frames=33000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Garm Thatcher speaks bolt. The scar spells it backwards (10 vs DC 11).
+FEED Wren Bramble casts Bolt at Talen Coalfoot, Kept by the Scar.
+FEED Garm Thatcher casts Frost at Talen Coalfoot, Kept by the Scar.
+FEED Talen Coalfoot, Kept by the Scar shifts, and the fight changes with it.
+FEED Wren Bramble casts Bolt at Talen Coalfoot, Kept by the Scar.
+FEED Wren Bramble says smite and the floor says something back (9 vs DC 11).
+FEED Garm Thatcher casts Bolt at Talen Coalfoot, Kept by the Scar.
+FEED Talen Coalfoot, Kept by the Scar is enraged.
+FEED Talen Coalfoot, Kept by the Scar is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Garm Thatcher casts Bolt at Talen Coalfoot, Kept by the Scar.
+FEED Wren Bramble casts Smite at Talen Coalfoot, Kept by the Scar.
+FEED Edda the Younger searches (Investigation 13) and turns up 45 gold on floor 4.
+FEED Floor 4 cleared - the guild will want its cut.
+FEED Wren Bramble casts Smite at Talen Coalfoot, Kept by the Scar.
+FEED Garm Thatcher casts Frost at Talen Coalfoot, Kept by the Scar.
+FEED Wren Bramble casts Bolt at Talen Coalfoot, Kept by the Scar.
+FEED Talen Coalfoot, Kept by the Scar falls to Garm Thatcher.
+FEED Garm Thatcher breaks off to mend Wren Bramble, who is nearly down.
+FEED Garm Thatcher casts Renew at Wren Bramble.
+FEED Wren Bramble breaks off to mend Wren Bramble, who is nearly down.
+FEED Edda the Younger searches the chest - ...no loot... (Investigation 10 vs DC 12).
+FEED Garm Thatcher casts Frost at drowned slime.
+FEED Edda the Younger searches the chest - Successfully found loot!! 53 gold (Investigation 21 vs DC 12).
+FEED Sable Stonehand and 5 others take a breather, and press on deeper.
+FEED Wren Bramble casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Garm Thatcher casts Frost at drowned slimeling.
+FEED Wren Bramble casts Smite at drowned slimeling.
+FEED Garm Thatcher casts Bolt at drowned slime.
+FEED Garm Thatcher casts Bolt at drowned slime.
+FEED Sable Fenwick settles in Bellmire, looking for work.
+  t=573s frames=36000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Wren Bramble casts Smite at drowned slime.
+FEED Garm Thatcher casts Bolt at drowned slime.
+FEED Wren Bramble casts Smite at drowned slimeling.
+FEED Garm Thatcher casts Frost at drowned slimeling.
+FEED Wren Bramble casts Smite at drowned bone bowman.
+FEED Garm Thatcher searches (Investigation 22) and turns up 43 gold on floor 3.
+FEED Floor 3 won. Count the flasks; one is always short.
+FEED Garm Thatcher finds a vial of Owl-eye Drops.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 bone bowmans, 1 cave spider, 1 hollowed cave spider, 1 hollowed bone sentinel.
+FEED The Hollow King, Unthroned rises. No throne left to defend, so it walks - quick for a king, and it never stops.
+FEED The guild has put down The Hollow King before. Not this one.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Garm Thatcher searches the chest - Successfully found loot!! 37 gold (Investigation 16 vs DC 11).
+FEED Garm Thatcher, Wren Bramble take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 cave bats, 1 slime, 1 bone bowman, 1 cave spider.
+FEED Garm Thatcher rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Wren Bramble's smite lands somewhere between a spell and a hiccup (6 vs DC 12).
+FEED Garm Thatcher's frost goes somewhere, and not where it was sent (11 vs DC 12).
+  t=611s frames=39000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Wren Bramble should be dead - and stands back up (14).
+FEED Wren Bramble the cleric falls on floor 4 to the dark below. Level 2, 9 kills. !reroll to rise again.
+FEED The Hollow King, Unthroned shifts, and the fight changes with it.
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King, Unthroned is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Tove Coalfoot rolls a 20 - The Hollow King, Unthroned reels.
+FEED Garm Thatcher drinks Owl-eye Drops.
+FEED Edda the Younger rolls a 20 - The Hollow King, Unthroned reels.
+FEED The Hollow King, Unthroned falls to Edda Ashwood.
+FEED The Hollow King, Unthroned is slain on floor 5!
+FEED A hoard that size does not come off an ordinary The Hollow King.
+FEED The hoard is split 5 ways - 55 gold each to Sable Stonehand, Edda Ashwood, Edda the Younger, Tove Coalfoot, Ysolde Rivers.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Garm Thatcher, Wren Bramble get out alive, and come home with what they carried.
+FEED Garm Thatcher comes home to Bellmire with 122 gold, 3 ore, 2 stone, 3 pieces of salvaged gear and 3 potions. 19 kills between them.
+FEED Garm Thatcher is fitted with Reed-Cloth Robe. (+10 hp) A natural 1 - the smith takes offence and charges a tenth over.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 4, the watch 16 - the watch is ready for them.
+FEED Sable Stonehand and 5 others take a breather, and press on deeper.
+FEED Garm Thatcher goes down and claws back up. (CON save 22)
+FEED Garm Thatcher is knocked senseless, but lives. The guild's grace - once.
+  t=646s frames=42000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Garm the Younger settles in Bellmire, looking for work.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 2; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 gorged skeleton warrior, 1 sporeblown pit viper, 1 emberbound pit viper, 1 risen bones, 2 gorged marrow hewers.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  t=670s frames=45000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Ysolde Rivers should be dead - and stands back up (20).
+FEED The attack is driven off. The gates hold.
+FEED Garm Thatcher comes round.
+FEED Sable Stonehand searches (Investigation 5) and turns up 52 gold on floor 6.
+FEED Last one down, and it took its time about it.
+  t=697s frames=48000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=221
+FEED Out of oil, the party feels its way back up from floor 6.
+FEED Sable Stonehand and 4 others come home to Bellmire with 531 gold, 12 ore, 9 stone, 4 pieces of salvaged gear and 4 potions. 44 kills between them.
+FEED Sable Stonehand is fitted with Padded Gambeson. (+10 hp) Haggled 17% off (19).
+FEED Edda Ashwood is fitted with Padded Gambeson. (+10 hp) Haggled 15% off (17).
+FEED Edda the Younger is fitted with Padded Gambeson. (+10 hp)
+FEED Tove Coalfoot is fitted with Tanner's Jerkin. (+10 hp)
+FEED Ysolde Rivers is fitted with Padded Gambeson. (+10 hp) Haggled 12% off (14).
+FEED Ysolde Bramble settles in Bellmire, looking for work.
+  t=727s frames=51000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=226
+  t=759s frames=54000 overlap_frames=0 (>1cm 0, worst 0.000) in_footprint=0 bodies<=227
+FEED Garm Thatcher and 5 others descend down, boots counted out on the stone.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 cave bat, 1 cave spider.
+FEED A funeral bell hangs mute, its clapper wrapped in cloth.
+FEED Garm Thatcher casts Frost at cave bat.
+FEED Garm Thatcher casts Bolt at slime.
+FEED The slime divides.
+FEED Tove Coalfoot turns on the wounded slimeling to finish it.
+FEED Ysolde Rivers turns on the wounded slimeling to finish it.
+FEED Edda Ashwood turns on the wounded slimeling to finish it.
+FEED Edda the Younger turns on the wounded slimeling to finish it.
+D91T_OV f=55373 peasant(leg0) + peasant(leg0) at (83.16835, 0.067328, 48.43626) over 0.00
+D91T_OV f=55375 peasant(leg0) + peasant(leg0) at (83.16145, 0.067413, 48.46977) over 0.00
+FEED Wren Fenwick settles in Bellmire, looking for work.
+FEED Garm Thatcher casts Bolt at cave spider.
+FEED Garm Thatcher searches (Investigation 18) and turns up 13 gold on floor 1.
+FEED The last one drops. Somebody laughs, then stops.
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+  t=794s frames=57000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 21, the watch 4 - the raiders strike first.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 hollowed bog frog, 1 giant rat, 1 cave spider.
+FEED Edda Ashwood rolls a 20 for initiative and is moving before anything else.
+FEED Garm Thatcher's bolt flickers, thinks better of it, and quits (9 vs DC 11).
+FEED Garm Thatcher casts Frost at hollowed bog frog.
+FEED Garm Thatcher casts Frost at bog frog.
+FEED Edda the Younger rolls a 20 - and the bog frog is gone.
+FEED Garm Thatcher searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Whatever was alive here has finished being so.
+  t=828s frames=60000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+FEED Edda the Younger finds a man in a cage still alive. He slips 42 gold to them on the way out, 6 ways to split it.
+  t=849s frames=63000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED Aldric Ashwood goes down and claws back up. (CON save 19)
+FEED Petra the Younger settles in Bellmire, looking for work.
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton minion.
+FEED A building is burning!
+FEED The townsfolk raise the ruin again.
+FEED The attack is driven off. The gates hold.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 drowned cave bat, 1 cave spider, 1 drowned cave spider.
+  t=875s frames=66000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+FEED Garm Thatcher casts Frost at cave spider.
+FEED Garm Thatcher steps on a grate - fire! DEX 4 vs DC 11, 8 damage.
+FEED Garm Thatcher searches (Investigation 18) and turns up 39 gold on floor 3.
+FEED Floor 3 cleared. Something underneath heard it happen.
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned puglins, 1 drowned slime, 2 hollowed giant rats.
+FEED Aldric Fenwick settles in Bellmire, looking for work.
+FEED Garm Thatcher sets frost loose and it forgets who sent it (11 vs DC 12).
+FEED Edda the Younger spots a spike trap (Perception 19 vs DC 12) and steps round it.
+  t=934s frames=69000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED The drowned slime divides.
+FEED Ysolde Rivers turns on the wounded drowned slimeling to finish it.
+FEED Sable Stonehand turns on the wounded drowned slimeling to finish it.
+FEED Garm Thatcher searches (Investigation 15) and turns up 47 gold on floor 4.
+FEED Swept clean, which down here means swept once.
+FEED Garm Thatcher finds a vial of Chapel Water.
+FEED 7 bandits are riding on the west road!
+FEED Initiative: the raiders 10, the watch 8 - the raiders strike first.
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED A building is burning!
+FEED The new frame slips. The townsfolk will try again. (10 vs DC 12)
+FEED Cort Ashwood is killed by a bandit.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton warrior, 1 drowned bone sentinel, 2 bone sentinels, 1 hollowed bone bowman.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+  t=968s frames=72000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Bran Quarryman settles in Bellmire, looking for work.
+FEED Garm Thatcher's frost goes out sideways into the stone (1 vs DC 12).
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Garm the Younger is killed by a bandit.
+FEED Edda Ashwood rolls a 20 - and the drowned bone sentinel is gone.
+FEED A building is burning!
+FEED The townsfolk raise the ruin again.
+FEED Bats pour out of the dark around Nightwing.
+  t=990s frames=75000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED The attack is driven off. The gates hold.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Sable Stonehand rolls a 20 - Nightwing reels.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Sable Stonehand.
+FEED Garm Thatcher rolls a 20 searching the floor!
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 6 ways - 44 gold each to Garm Thatcher, Sable Stonehand, Edda Ashwood, Edda the Younger, Tove Coalfoot, Ysolde Rivers.
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+FEED Garm Thatcher steps on a loose flagstone - green darts! DEX 3 vs DC 12, 5 damage.
+FEED Garm Thatcher is venomed - the poison works over the next few seconds.
+FEED The townsfolk raise the ruin again.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 4; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 gravecaller, 2 drowned marrow hewers, 2 duskforged marrow hewers, 1 bone bowman.
+FEED The oil is running low.
+FEED The townsfolk raise the ruin again.
+FEED Edda the Younger settles in Bellmire, looking for work.
+  t=1037s frames=78000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED Garm Thatcher says bolt and the floor says something back (12 vs DC 13).
+FEED Garm Thatcher searches (Investigation 21) and turns up 81 gold on floor 6.
+FEED Whatever lived here, doesn't.
+FEED Garm Thatcher finds a vial of The Gatekeeper's Nerve.
+FEED Garm Thatcher spots a spike trap (Perception 22 vs DC 13) and steps round it.
+FEED Garm Thatcher searches the chest - ...no loot... (Investigation 6 vs DC 13).
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 16, the watch 20 - the watch is ready for them.
+  t=1080s frames=81000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 5; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED Floor 7 - a workshop, remade as a workshop: 1 drowned fen lurker, 2 duskforged marrow hewers, 1 emberbound skeleton rogue, 1 gorged gravecaller, 1 sporeblown bone sentinel.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Ingrid Fenwick's charge crashes into skeleton rogue!
+FEED A gravecaller raises the dead on floor 7.
+FEED Ingrid Fenwick goes down and claws back up. (CON save 17)
+FEED Ingrid Fenwick is killed by skeleton minion.
+FEED Bran Bramble settles in Bellmire, looking for work.
+FEED Garm Thatcher's frost goes out sideways into the stone (9 vs DC 13).
+FEED The attack is driven off. The gates hold.
+  t=1105s frames=84000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=227
+FEED Garm Thatcher casts Bolt at duskforged marrow hewer.
+FEED Ysolde Rivers turns on the wounded duskforged marrow hewer to finish it.
+FEED Garm Thatcher breaks off to mend Edda the Younger, who is nearly down.
+FEED Garm Thatcher searches (Investigation 5) and turns up 46 gold on floor 7.
+FEED Floor 7 quiet enough to hear the lamps.
+FEED Garm Thatcher spots a swarm grate (Perception 16 vs DC 13) and steps round it.
+FEED Garm Thatcher searches the chest - Successfully found loot!! 76 gold (Investigation 14 vs DC 13).
+FEED Out of oil, the party feels its way back up from floor 7.
+FEED Garm Thatcher and 5 others come home to Bellmire with 583 gold, 16 ore, 12 stone, 5 pieces of salvaged gear and 6 potions. 40 kills between them.
+FEED Garm Thatcher takes up a Bellglass Staff. (+9 atk, 1d8) Folded twice; the smith signs it. Haggled 10% off (12).
+FEED Tove Coalfoot is fitted with Studded Brigandine. (+26 hp)
+  t=1151s frames=87000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=231
+FEED Garm Thatcher and 5 others descend down past the last honest light.
+FEED They carry 27 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 puglin, 1 slime.
+FEED The rows end in a row that was never filled.
+FEED Garm Thatcher rolls a 20 for initiative and is moving before anything else.
+FEED Sable Stonehand rolls a 20 for initiative and is moving before anything else.
+FEED Cort Ashwood settles in Bellmire, looking for work.
+FEED The slime divides.
+FEED Garm Thatcher turns on the wounded slimeling to finish it.
+FEED Sable Stonehand turns on the wounded slimeling to finish it.
+FEED Edda Ashwood turns on the wounded slimeling to finish it.
+FEED Edda the Younger turns on the wounded slimeling to finish it.
+FEED Tove Coalfoot turns on the wounded slimeling to finish it.
+FEED Ysolde Rivers turns on the wounded slimeling to finish it.
+FEED Ysolde Rivers rolls a 20 - and the slimeling is gone.
+FEED Garm Thatcher searches (Investigation 12) and turns up 11 gold on floor 1.
+FEED Floor 1: nothing left standing that was not standing before Bellmire.
+FEED Garm Thatcher and 5 others take a breather, and press on deeper.
+  t=1187s frames=90000 overlap_frames=2 (>1cm 0, worst 0.001) in_footprint=0 bodies<=231
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed skeleton minion, 2 bog frogs, 1 cave bat.
+D91 TOWN: 1200 s, 90987 frames, up to 231 bodies on the street
+  overlap frames 2 (>1 cm: 0), overlapping pair-samples 2, worst 0.001 m
+  body-frames inside a footprint 0 of 17350860 (apart: 76876 on a seat, 25649 on a door leg)
+  the late settle: 163283 runs, 0.919 ms a run, 1.65 ms a frame (336 set out of a footprint)
+  of which gathering + footprint sweep 0.312 ms a run; 2.05 passes a run
+  OVERLAPS BY WHO:
+         2  peasant + peasant
+  IN A FOOTPRINT BY WHO:
+  IN A FOOTPRINT BY WHAT:
+  ok   the soak ran (90987 frames)
+  ok   no frame with two bodies closer than the sum of their body_r by more than 1 cm (0)
+  FAIL no frame with any overlap at all (2, worst 0.0006 m)
+  ok   no body inside a registered footprint (0 body-frames)
+D91_TOWN FAIL (1 failed)

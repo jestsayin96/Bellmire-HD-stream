@@ -6648,3 +6648,52 @@ released when Godot closed. Only my own three files and PROGRESS.md are touched.
 - NOT TICKED BY ME. D70's other three parts (.1 the first-timer, .2 their hero's moments, .3 the
   room) are twitch_eventsub.gd's and untouched. NEXT: whatever TAKE THIS NEXT says; nothing in my
   row is open that I can see.
+
+## D-cycle D91f - THE ALCOVE IS GONE; THE GATE IS STILL NOT ZERO, AND I AM STOPPING AS TOLD (game build, 2026-11-16 13:08-13:35 CT)
+TAKE THIS NEXT (12:58) gave game build D91, fifth slot: take origin/d91d-wip (526309a), MOVE THE PROP instead of
+the settle, ONE 20-minute soak, and if it still reads non-zero STOP and say so.
+- LOCK: read by process (none alive) and file (IDLE 12:56:21, HUD). Claimed 13:10:07 (named finish 13:38),
+  refreshed 13:13:15 on relaunch, released IDLE 13:35:01 with no Godot alive. One claim, 25 min, inside :07-:40.
+- TOOK 526309a: merged origin/d91d-wip into the worktree (the D91e settle work came with it, unchanged).
+- WHAT THE POCKET ACTUALLY WAS (tools/_d91f_probe.gd, read-only): NOT a store yard. There is one store in the
+  town and it is at (58,9). The north door at (32.47,-69.38) belongs to a plain house standing ON THE MARKET'S
+  STALL RING (13.3 m from the well), and the FarmCrate_Apple 2.5 m off its step is a stall's GOODS, set by
+  _dress_square at sp + side*4.2 - with a Bench 1.7 m off the other hand. Door, bench, crate and the stall
+  cart's traders made the pocket. The D91d comment calling it "the north store's yard" was wrong.
+- THE FIX (scripts/town.gd, _dress_square, backup town.gd.bak_d91f): a stall's good may not stand within
+  MARKET_DOOR_CLEAR = 3.6 m of any house door step; it is moved along the line away from the door to exactly
+  3.6 m, or dropped if nothing clear (none were). The dice are drawn exactly as before (good, offset, yaw),
+  so every other good in the square keeps its place. ONE good moved (D91F_SQUARE goods moved: 1): the crate
+  went (34.91,-69.94) -> (35.97,-70.19). Nothing else in the town changed.
+- LOOKED AT: renders/cycles/d91f/door_high.png and door_eye.png - the step opens onto the street with the bench
+  on one hand and open ground on the other; the crate sits back by the stall.
+- THE ONE 20-MINUTE SOAK (renders/cycles/d91f/town_soak20.log): 1200 s, 90987 frames, up to 231 bodies.
+  NOTHING AT THE ALCOVE - zero overlap events anywhere near (33.4,-71.1) for the first time in five slots.
+  0 body-frames in a footprint of 17,350,860. >1 cm overlaps: 0 (ok). ANY overlap: 2 frames, worst 0.6 mm -
+  D91_TOWN FAIL (1 failed). Both frames are two peasants at (83.2,48.4), 0.5 m off the TAVERN's door step
+  (83.15,48.92); probe_8348.log shows no prop within 5 m but the tavern itself - open street, five townsfolk
+  standing on the step at boot. That is a door crowd, not a pocket, and moving a prop cannot fix it.
+- GATES (run in parallel with the soak): parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR 0 of
+  2044, INPROP 0, MON_INPROP 0 of 252; TWITCH_PARSE OK; TOWNWALK in_solid 0/17567 PASS, raid 0/3249, and
+  stuck_on_route 0 (Cort's bench did not show this run); _delve_test 0 SCRIPT ERROR, party fighting on floor 2.
+- NOT ON laptop: the gate is zero and 2 frames is not zero. Checkpointed on origin/d91d-wip. PER THE RULING I
+  AM NOT SPENDING A SIXTH SLOT. What the supervisor/Mr. E must decide: whether a 0.6 mm touch for 2 frames of
+  91k on an open tavern step meets D91 (every >1 cm criterion passed), or whether D91 needs the door-step
+  crowd spread (townsfolk.gd) as a new, separately-named item.
+
+## D-cycle D91g - D91 LANDED ON laptop ON THE SUPERVISOR'S RULING, NO NEW SOAK (game build, 2026-11-16 14:08-14:12 CT)
+TAKE THIS NEXT (13:58) gave game build: land D91 - bring origin/d91d-wip (995f975) onto `laptop` and push, no new soak,
+no sixth slot; carry the 0.6 mm reading verbatim.
+- LOCK: no Godot alive (tasklist), last line the chat bot's IDLE (future-stamped 14:22, as the supervisor noted). Claimed
+  RUNNING 14:09:09-06:00, expected finish 14:23.
+- A literal fast-forward was not possible: `laptop` had taken the 13:58 main merge after the checkpoint, so 995f975 came in
+  as a --no-ff merge. One conflict, PROGRESS.md (C-68/B8 vs D91f appended at the same place) - both sides kept, nothing cut.
+  Code brought in: scripts/crowd.gd, town.gd, townsfolk.gd, tools/_d91_town.gd, _d91_townshot.gd, _d91f_probe.gd, _d91f_shot.gd.
+- THE KEPT NUMBER, VERBATIM FROM D91f: 20-min soak D91_TOWN FAIL by 2 frames at 0.6 mm, two peasants on the TAVERN door step
+  (83.2,48.4) - a new spot, no prop. The north alcove reads CLEAR (0 events). Ruled below visible by the supervisor 13:58.
+- Gates on the MERGED tree (renders/cycles/d91g/): parse 0 errors; OFFFLOOR 0 of 2127; TWITCH_PARSE OK; TOWNWALK PASS
+  in_solid 0/19905, raid 0/2901, stuck 0; delve test 0 SCRIPT ERROR. No soak run, as told.
+- NOTE FOR W-LIVE: the plain --quit-after parse run boots the full town and it JOINS #jestsayin96 and opens EventSub
+  ("subscribed 7 of 7") on the real tokens - every lane's parse check does this. It posted nothing in 300 frames, but it is a
+  live connection, so do not run a parse check while Mr. E is live and expect it to be invisible.
+- NOT TICKED BY ME.

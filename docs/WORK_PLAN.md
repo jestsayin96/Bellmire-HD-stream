@@ -5521,6 +5521,15 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
      (c) CHANGE THE POSE, not the glove - hands even slightly off the hip would show gloves,
      bracers and rings at once, for every item in the slot forever, but it is an animation and
      director change, not an art one. The builders did not pick for you. D94 ticks on your word.
+     NEW MEASUREMENT, 07:58, AND IT POINTS AT (c): the art lane re-shot all eight proof rows with
+     the cost ladder finally reaching the top of each slot, so a LEGENDARY piece was in the test
+     for the first time. It rescued nothing - ring still 0.00 % of the hero's pixels, amulet 0.48,
+     boots 1.79. A 520 g ring is as invisible on a body as a 210 g one. So this is NOT a gloves
+     problem and not a price problem: every small slot is invisible at stream distance for the same
+     reason, and (c) - hands slightly off the hip - is the only one of the three that fixes the
+     whole class at once, for every item in those slots forever. (a) and (b) are still yours to
+     take; this is just the honest news that making small things dearer or bigger has now been
+     tried and measured twice.
   Your 04:56 answers closed three that were sitting here - the ring/glove call, the D94
   shutdown, and the legendary cap. Rings are accepted, the three lanes are back on, and the
   cap is now C-61 on the content lane. Nothing below is a repeat of those.

@@ -289,10 +289,21 @@ Search the file for its ID and work it. DO NOT take "the first unchecked item yo
 down the file." THERE ARE SIX LANES: the CHAT BOT lane owns scripts/chatcmd.gd and
 data/commands.json exclusively, on branch `chatbot`, and delivered L68 on its first slot.
 
-  GAME BUILD   ->  *** STILL D91, AND IT IS STILL THE WHOLE OF PHASE 1'S REMAINDER. *** Your D91b is
-                   merged and NOT ticked, and you produced nothing at the 06:07 slot - no commit, no
-                   RUN_LOCK line. If a run failed, say so in PROGRESS.md; a silent slot looks the
-                   same as a dead lane from here. What is owed is what you named yourself: (a) the
+*** THE RUN_LOCK ONLY WARNS PEOPLE IF IT IS COMMITTED AND PUSHED. *** Found 07:21 CT, and it is a
+real hazard, not a nit: the game build claimed the lock at 06:29, 06:44, 06:55 and 07:19, and every
+one of those lines sat UNCOMMITTED in its worktree. From origin - which is where the other three
+lock-sharing lanes read it - docs/RUN_LOCK.txt still said IDLE 05:58 while a 20-minute soak was in
+flight. Any of HUD, ART or CHAT BOT could have launched straight into it. So: whoever claims the
+lock COMMITS AND PUSHES THAT LINE IN THE SAME BREATH as claiming it, and whoever reads the lock
+treats a LIVE GODOT PROCESS as ground truth and the file as a claim that may be stale in either
+direction.
+
+  GAME BUILD   ->  *** STILL D91, AND YOU ARE ALREADY ON IT - KEEP GOING. *** CORRECTED AT 07:21 CT:
+                   I first read your 06:07 slot as silent, because from origin it was. It was not.
+                   You merged main at 06:08 and have been soaking since 06:29 (town soak relaunched
+                   twice, delve 20-min soak PASSED), Godot PID 22484 is live as I write this, and the
+                   lock is properly claimed. Nothing below is a complaint. D91b is merged and NOT
+                   ticked. What is owed is what you named yourself: (a) the
                    TOWN half - the wizard standing inside a bush is Mr. E's own screenshot and it is
                    half of what he reported; (b) the 20-MINUTE RE-SOAK, because the soak that passed
                    ran 619 s. Do NOT rebuild stages 1-4 and do not re-measure the halls.
@@ -351,9 +362,11 @@ data/commands.json exclusively, on branch `chatbot`, and delivered L68 on its fi
                    landed from you at 05:52 or 06:52. L72 is ticked. L73's shot language is in and
                    L73_TEST passes, so DO NOT REBUILD IT - what is owed is the single capture it was
                    specified with: a 30-minute run in which a viewer can tell FROM THE CAMERA ALONE
-                   when something important happened. You share the Godot RUN_LOCK with three other
-                   lanes - read docs/RUN_LOCK.txt and claim it before you launch; it has read IDLE
-                   since 05:58 and the game build has not claimed it since. Then L74 (the feed and
+                   when something important happened. *** DO NOT LAUNCH GODOT RIGHT NOW WITHOUT
+                   CHECKING: THE GAME BUILD IS LIVE. *** As of 07:21 CT it is running D91 town/delve
+                   soaks (Godot PID 22484). origin's docs/RUN_LOCK.txt read IDLE for the whole of it
+                   because the claims were written locally and not committed - see the note at the
+                   top of this block. CHECK FOR A LIVE GODOT PROCESS, not the file. Then L74 (the feed and
                    the theme under load, shots at all three scales during a raid).
   HUB          ->  STAND DOWN - second run in a row, and it is still not the shutdown. H29, H30 and
                    H31 are all shipped, merged and TICKED; the freeze forbids inventing more; nothing

@@ -6418,3 +6418,9 @@ checked BY PROCESS, not by the file, eighteen times across twenty minutes:
   commands, every pre-existing key byte-identical, file still ends 0a 7d 0a as before.
 - NOT TICKED BY ME. L69 and L70 now have every gate they were owed. L68 is already ticked. The
   supervisor ticks; this lane only reports. NEXT: L56, the delve-heavy soak - engine and lock.
+
+## C-66 (2026-11-16) - standing backlog item 3: the words Phase 2 needs, second pools (lore_lines.json only)
+TAKE THIS NEXT gave CONTENT: next-stalest backlog item, named by me. Item 3 (phase2_words) was last touched at C-60, older than item 1 (C-64), 2 (C-65), 4 (C-63), 5 (C-62). C-55 artifact enforcement is the game build's code half, not mine.
+Added top-level `phase2_words_alt` (179 lines): same shape and tokens as phase2_words (ascent, errand incl. collected by band patched/mended/prosperous, carry, sell, vault, stone, upgrade_poll). Artifact rule restated in the _note: no errand/sell line names an artifact as bought or sold. No floor totals; {floor} only as a floor stood on.
+CODE WIRING: draw from phase2_words[k] and phase2_words_alt[k] pooled, same as the other _alt keys. Dead until wired. Nothing else needed.
+VALIDATION OK: lore_lines.json parses, every pre-existing top-level key identical, file is an exact prefix of the old one, no duplicates vs originals, tokens all from the documented set.

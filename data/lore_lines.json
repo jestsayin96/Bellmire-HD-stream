@@ -9964,5 +9964,303 @@
         ]
       }
     }
+  },
+  "phase2_words_alt": {
+    "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",
+    "ascent": {
+      "turn_around": [
+        "Done. Up we go.",
+        "{name} looks at the flasks, then at the stairs.",
+        "No more doors. Turn round.",
+        "There is a way out and it is behind them.",
+        "The party turns for the stair on floor {floor}. Nobody is sorry.",
+        "Enough for one day. The rest will keep.",
+        "{name} says 'Home.' It is the only word needed.",
+        "They came down together. They go up together."
+      ],
+      "climbing": [
+        "Floor {floor} again. It looks smaller going up.",
+        "The steps they took down are the steps they take up.",
+        "Up past the room where it went wrong.",
+        "Same stones, heavier boots.",
+        "Floor {floor}. The dust has settled over their own prints.",
+        "They keep to the walls. The middle belongs to whatever is back.",
+        "Another flight. Nobody says how many.",
+        "The lamps burn low. Nobody mentions it."
+      ],
+      "repopulated": [
+        "Something small has taken the room. It watches the party pass.",
+        "Fresh droppings by the broken door.",
+        "The floor is not clear any more. It is only quiet.",
+        "Gnawers, in the wall. Not many. Not shy.",
+        "A little life, and none of it friendly.",
+        "The dead are still dead. The floor has found other tenants.",
+        "Scuttling, off to the left. The party does not stop.",
+        "The cleared floor has been let again."
+      ],
+      "stairs_up": [
+        "The stair is a dark mouth across the hall.",
+        "{name} finds the stair. It is further than it was.",
+        "Worn steps, going up. The party takes them.",
+        "The stair, and open floor to cross first.",
+        "One flight between them and the next.",
+        "Light, somewhere above. Or a lamp. Hard to tell."
+      ],
+      "spent": [
+        "The flasks are gone. The stairs are not.",
+        "Nothing left in the satchel but the haul.",
+        "They are climbing on what is left, and it is not much.",
+        "The pack is full and the flasks are empty. A bad pair.",
+        "They are counting steps now, not rooms.",
+        "The way down was paid for. The way up is owed."
+      ],
+      "out": [
+        "{name} climbs out of the scar and stands a while in the light.",
+        "Up and out. The gate shuts behind them.",
+        "The haul comes up on {name}'s back. The guild weighs it.",
+        "The gate. The daylight. The count of fingers.",
+        "Out of the scar. The smell of woodsmoke has never been so welcome."
+      ],
+      "chronicle_reached": [
+        "Got down to floor {floor}. Did not come up.",
+        "Made floor {floor}.",
+        "The last floor they saw was floor {floor}."
+      ],
+      "chronicle_came_back": [
+        "Came up from floor {floor} on their own legs.",
+        "Back from floor {floor}, flasks counted.",
+        "Climbed out. Floor {floor} was as deep as they went."
+      ],
+      "wipe": [
+        "Fell on the stairs, on floor {floor}. The haul is down there still.",
+        "Died on the way up. Nothing they carried saw daylight.",
+        "So close to the gate. The guild writes the floor and nothing else.",
+        "The haul is lost with them. Floor {floor} keeps it.",
+        "A wipe on the climb takes the lot. Down there, all of it.",
+        "They had the stair in sight. The guild records it so."
+      ]
+    },
+    "errand": {
+      "placed": [
+        "{name} puts gold down on {item}. The {building} will hold it.",
+        "An order for {item} is written at {building}. {name} must fetch it.",
+        "The {building} takes the coin and writes a slip. {item} is not in hand yet.",
+        "{name} has paid. {name} has not got it. That is the errand.",
+        "The slip says {item}. The {building} keeps the goods until {name} calls."
+      ],
+      "walking": [
+        "{name} goes to {building} for {item}, slip in a fist.",
+        "Across the square, to {building}. {name} knows the order is waiting.",
+        "{name} walks for {item}. Nobody carries it for them.",
+        "The road to {building} is short. It is still a road.",
+        "{name} goes to collect. The walk costs nothing and cannot be skipped."
+      ],
+      "collected": {
+        "patched": [
+          "{name} has {item} from {building}. Rough hands, rough counter, good enough.",
+          "{item}, wrapped in sacking. {name} unpicks the twine and grins.",
+          "The {building} hands it across a trestle. {name} counts out what was held.",
+          "{name} takes {item}. Patched where it was patched before, and whole.",
+          "A chipped cup of ale, a slip torn in half, and {item} is {name}'s."
+        ],
+        "mended": [
+          "{name} collects {item} at {building}. The ledger is ruled and the ink is dry.",
+          "{item} laid on a clean bench. {name} signs where the clerk points.",
+          "The {building} has a shelf for orders now. {item} is on it, tagged.",
+          "Straight stitching, straight edge. {name} takes {item} and goes.",
+          "Wrapped in good cloth, tied with a good knot. {item} is {name}'s."
+        ],
+        "prosperous": [
+          "{item} is laid on dyed cloth and shown. {name} signs, and the clerk bows a little.",
+          "The {building} wraps it in felt and ties it with a ribbon. {name} carries {item} out the front.",
+          "A lamp on the counter, a clean ledger, and {item} without a mark on it.",
+          "The clerk reads the price, the seal, and the maker. {name} walks out with {item}.",
+          "Fine oak box, brass clasp. {item} is {name}'s, and looks it."
+        ]
+      },
+      "refused_level": [
+        "Not stocked at this level. The {building} says so and keeps the gold.",
+        "The {building} cannot supply {item}. The shelves are too small for it.",
+        "{item} is above what this shop is. Nothing taken.",
+        "The clerk shakes their head. The shop is not that size yet."
+      ],
+      "level_changed": [
+        "The {building} is a level up since the order was made. {item} is as ordered.",
+        "The shelves have changed. The slip has not."
+      ],
+      "interrupted": [
+        "Something stopped {name} on the road. The slip is still good at {building}.",
+        "{name} did not get there. The order does not spoil.",
+        "The {building} holds the order. It does not forget it."
+      ],
+      "waits_below": [
+        "The order at {building} will keep. {name} has to come up first.",
+        "{item} sits behind the counter. {name} is down in the scar.",
+        "Gold held, goods held. Both wait for {name}'s boots on the stairs."
+      ],
+      "no_order": [
+        "{name} has gold and has asked for nothing. Same kit as yesterday.",
+        "The purse is full and the sword is old. {name} has not gone to the {building}.",
+        "Nobody hands a hero a better blade for being rich. {name} has to ask."
+      ],
+      "gold_held": [
+        "{n} gold is at {building}, under {name}'s slip.",
+        "{name} cannot spend that {n}. It is promised.",
+        "The purse is {n} light. The {building} has it."
+      ]
+    },
+    "carry": {
+      "encumbered": [
+        "{name} is carrying more than is wise.",
+        "The pack drags at {name}'s shoulders.",
+        "{name} slows. The weight is not going anywhere."
+      ],
+      "heavily_encumbered": [
+        "{name} staggers. A step is a decision.",
+        "{name} is carrying a second hero's worth. It shows.",
+        "Every breath costs, and {name} has not got a lot of them.",
+        "{name} cannot fight like this and knows it."
+      ],
+      "pickup": [
+        "{name} lifts {item} into the pack. The straps creak.",
+        "{item} goes in. {name} is heavier, and richer, by the same amount.",
+        "{name} takes {item}. It has to be carried."
+      ],
+      "over_capacity": [
+        "The pack will not take another thing.",
+        "They cannot lift it all up the stair.",
+        "Too much. Somebody has to choose."
+      ],
+      "left_behind": [
+        "{name} leaves {item} on floor {floor}. It was not worth the back.",
+        "{item} stays on floor {floor}. {name} does not argue with it.",
+        "Left on floor {floor}: {item}. It had to be somewhere.",
+        "{name} puts {item} down on floor {floor} and walks on."
+      ],
+      "dropped_stays": [
+        "{item} waits on floor {floor} for whoever wants it badly enough.",
+        "{item} is where {name} left it. Nobody has come for it."
+      ],
+      "come_back": [
+        "{name} turns round for {item}. The stairs are not kind to that.",
+        "The party goes back for what it dropped. The floor is not the same floor."
+      ],
+      "greed": [
+        "Take the gold. Leave the anvil.",
+        "Weight is a debt the stairs collect.",
+        "A heavy pack outlasts a heavy purse by about one floor."
+      ]
+    },
+    "sell": {
+      "placed": [
+        "{name} takes {item} to the {shop}. Selling is a walk like any other.",
+        "{name} lays {item} on the {shop}'s counter and waits to be told.",
+        "{name} offers {item} at the {shop}. The shop has the last word."
+      ],
+      "sold": [
+        "{shop} gives {n} for {item}. {name} takes it.",
+        "{item} goes over the counter for {n}. {name} does not look back at it.",
+        "Sold. {n} gold, and a lighter pack."
+      ],
+      "refused_level": [
+        "The {shop} cannot afford {item}. Not at this size.",
+        "Too good a piece for a shop this small. {name} walks it home.",
+        "The {shop} looks at {item}, then at its own till. No.",
+        "A bigger town could take it. This one cannot."
+      ],
+      "worn_below": [
+        "Still on {name}'s back, and {name} is still down there.",
+        "Not sold from under a hero. It waits until they are up."
+      ]
+    },
+    "vault": {
+      "deposit": [
+        "{item} goes into the vault at the {hall}. The clerk writes a number.",
+        "{name} hands {item} to the clerk at the {hall}. It is stored, and stops being a weight.",
+        "In the vault: {item}. Safe, and not on {name}'s back."
+      ],
+      "withdraw": [
+        "{name} signs for {item} at the {hall}. It comes up from the vault.",
+        "{item} returns to {name}'s pack. So does the weight."
+      ],
+      "full": [
+        "The vault has no shelf left. The {hall} says so.",
+        "Every slot has a name on it. The {hall} is full.",
+        "The {hall} cannot take more. It wants a bigger vault."
+      ],
+      "raised": [
+        "More shelves at the {hall}. {who} paid for them.",
+        "The vault is bigger. {who} is thanked in the ledger."
+      ],
+      "death_kept": [
+        "{name} fell. The vault does not fall with them.",
+        "What {name} stored is still stored. What they carried is gone.",
+        "The vault is untouched. The next hero opens it."
+      ],
+      "inventory": [
+        "Carrying {w}, pack {n} of {m}. The vault: {v}."
+      ]
+    },
+    "stone": {
+      "bought": [
+        "{name} bought a stone before going down. It sits in the pouch.",
+        "One stone for one hero. {name} carries it close.",
+        "{name} paid for a way out and hopes not to need it."
+      ],
+      "shatters": [
+        "The stone breaks where {name} stands. The floor is empty a heartbeat later.",
+        "{name} snaps the stone. The air closes like a fist. {name} is home.",
+        "The stone goes to dust under {name}'s hand. The square catches them."
+      ],
+      "one_hero": [
+        "One stone takes one hero. The others have to walk.",
+        "The stone takes {name}. It does not take company."
+      ],
+      "lords_floor": [
+        "A lord holds this floor. The stone will not break it.",
+        "{name} cracks the stone. Nothing. The lord is not dead.",
+        "No door out while the lord lives. The stone knows it.",
+        "The stone is a rock on this floor, until the lord goes."
+      ],
+      "panic": [
+        "It is one click, and it is now.",
+        "The stone is panic you paid for yesterday."
+      ]
+    },
+    "upgrade_poll": {
+      "opens": [
+        "The crier posts a notice. Bellmire may build one thing.",
+        "The town is asked what it wants raised next.",
+        "A poll opens. The choices are read twice."
+      ],
+      "rules": [
+        "Points and cheers both count. The tally is read aloud.",
+        "Bits add weight to a choice. The crier explains how much.",
+        "The window is posted, and so is the count."
+      ],
+      "closes": [
+        "The poll closes. {building} is raised by {n}.",
+        "{building} takes it. The masons are sent for.",
+        "{building} wins. The rest will wait their turn."
+      ],
+      "credit": [
+        "{who} put in the most.",
+        "{who} and the rest of the town paid for it.",
+        "The Chronicle writes {who} down."
+      ],
+      "plaque": [
+        "A small plate on the wall: raised by {who}.",
+        "Raised this season. {who} is named."
+      ],
+      "shows": [
+        "The {building} has new walls and a fuller shelf.",
+        "The scaffold is gone and the {building} stands a size larger.",
+        "The {building}'s door is wider and its stock is better."
+      ],
+      "ceiling": [
+        "A small shop sells small things. Raise it and it sells more.",
+        "What a shop can stock is its level. Someone has to pay for the level."
+      ]
+    }
   }
 }

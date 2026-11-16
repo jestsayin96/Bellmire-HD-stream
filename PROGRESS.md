@@ -6987,3 +6987,30 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
   have spoken there), and a hero-moment line is chatty. 0 bits, nothing redeemed, no reward touched, nothing posted.
 - Files: scripts/twitch_eventsub.gd, scripts/roster.gd (signal + 3 emits), scripts/twitch_chat.gd (first-msg tag +
   saw_viewer call - no other change), tools/_d70_test.gd. Backups *.bak_d70 (not committed).
+
+## B12 - THE UNION READ IS OUT, AND THE QUEUE DOES NOT CLEAR WHEN THEY GO DOWN (chat bot, 2026-11-16 17:46-17:58 CT)
+CHECKPOINT - WRITTEN AND NOT GATED. No lock was taken and no Godot was launched: the slot opened at 17:46 and the
+chat bot window ends at :52, which is not a battery. This is the split the supervisor ruled for, taken on purpose
+after this lane starved the HUD lane last hour. The gates are the first thing at 18:45.
+
+- THE DEFERRAL ENDED BY ITS OWN TERMS, AND IT WAS CHECKED, NOT ASSUMED. B11 deferred the ruled drop behind a trigger:
+  the run B11_SOURCE_QUEUEING prints YES is the run the union comes out. Read directly off origin/main rather than
+  off the ruling: scripts/town.gd 5427-5428 now carries `if not chat.delve_queue.has(uid): chat.delve_queue.append(uid)`
+  in _on_delve, ahead of the away write. Merged into `chatbot` (fcd2398). The premise is real, so the union is out.
+- WHAT CAME OUT: _muster no longer walks `away` adding names, and _mustering() is gone. delve_queue is the ONE source
+  of membership and the order chat put the names in.
+- WHAT DID NOT COME OUT, AND THIS IS THE FINDING: the town erases the queue when the DELVE ENDS (delve.ended ->
+  delve_queue.erase), NOT when the party goes below (5468 only sets away). So for the whole descent the names are
+  still in delve_queue. A plain one-list read would have stood heroes who are underground at the dungeon mouth and
+  counted them in the muster - a viewer-facing regression the ruling could not see from outside the file. `away` is
+  still read for ONE thing, _below(): leaving a hero already down OUT. That is an exclusion, not a second source of
+  membership - no name enters the muster from away - so the drift D41 closed stays closed.
+- THE GATE WAS TIGHTENED, NOT RELAXED. tools/_b11_muster.gd: B11_SOURCE_QUEUEING is now an assertion, not a printed
+  note (if D41 ever leaves this branch the muster goes blind to every errand and the gate must be the thing that
+  says so); a uid that exists only in `away` is planted and the count must not move (proves no second source); and
+  the below case now asserts BOTH that the queue still holds her and that she is neither named nor counted.
+- data/commands.json and docs/COMMANDS.md UNCHANGED - no command was added, removed or reworded, so the doc cannot
+  drift. commands.json re-parsed clean, 8 top-level keys, no key touched.
+- NO LIVE TWITCH TEST THIS CYCLE. 0 bits, nothing cheered, nothing redeemed, no reward created/renamed/re-priced/
+  deleted, nothing posted as any account, no channel setting touched.
+- Files: scripts/chatcmd.gd, tools/_b11_muster.gd, PROGRESS.md.

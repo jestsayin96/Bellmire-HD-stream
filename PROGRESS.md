@@ -5755,6 +5755,11 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - CODE WIRING: none new. Plain strings in arrays the pickers already read; confirm they use len() of the array rather than a fixed count (tells 40, descend 170, cleared 168, epitaphs 270, barks 83/84, misfire 70).
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Device_bash had no connected folders this run, so edits were made through the Blender bridge (Python on the Windows side), validated the same way. Not ticked in WORK_PLAN (supervisor ticks).
 
+## U30 - L64.4 handoff verified (HUD, 2026-11-15, spotlight.gd)
+- spotlight.gd `_amb_tick`: an idle (ambient or resting-on-redeemer) pane that is showing the body the director cut to yields at once to an ordinary ambient pick; `handoff_swaps` counts it. A paid moment still holds its hero (the director yields to it, as before).
+- NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
+- LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
+- L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.
 ## C-51 (2026-11-15) - WORK_PLAN C7: THE EQUIPMENT CATALOGUE (items.json only)
 - Added ONE new top-level key to data/items.json: `equipment` = {_note, weapons, armour, starting_kits}. Nothing else touched; every pre-existing key parses equal to HEAD and the file's prior text is a byte prefix of the new one (only the closing brace gained a comma).
 - WEAPONS 86 = 71 catalogue + 15 kit. By family: blade 17, axe 15, arcane 15, ranged 15, open (monk) 9, plus kit pieces (blade 5, axe 2, ranged 1, arcane 6, open 1). By tier: t0 15 (kits only), t1 14, t2 15, t3 18, t4 15, t5 9 (scarforged, found-only).
@@ -5771,11 +5776,6 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - Shape unchanged: every pool is still a flat list of plain strings. E3PO still cannot die; no line states a floor count; no new mechanics are stated.
 - VALIDATION OK: file parses; every pre-existing key (and every pre-existing list prefix) equal to HEAD; no new line duplicates any existing string in the file; ASCII only. Authoring done via the Blender bridge because device_bash had no connected folder this run. Godot not run.
 - CODE WIRING: none new. Existing e3po pool keys are already read or pending wiring; the new lines just lengthen the pools.
-## U30 - L64.4 handoff verified (HUD, 2026-11-15, spotlight.gd)
-- spotlight.gd `_amb_tick`: an idle (ambient or resting-on-redeemer) pane that is showing the body the director cut to yields at once to an ordinary ambient pick; `handoff_swaps` counts it. A paid moment still holds its hero (the director yields to it, as before).
-- NEW tools/_l644_handoff.gd, WINDOWED 1080p, run with `--script` (with `-s` the Town spawns its own eye + live Twitch and the test measures the wrong camera): 90 s director clock at 4x, 4 delving viewer heroes. Every frame compared each pane's subject to the director's: 5,000+ frames, 0 frames with a body in two panes, swaps 1-2; a FORCED collision (bits pane set onto the director's subject) is resolved. L644_HANDOFF OK.
-- LOOKED: renders/cycles/20261115_l644/panes_1080.png - director on Viewer1001 the Elf Knight, bits/subs/points on livestock/river/bridge, Chronicle scroll centred and uncovered.
-- L64 STAYS OPEN: the 30-minute unattended recording with its decision log (DONE line) has not been made.
 ## D-cycle D44c - the raid-flight knot at (74,-63.5) (game build, 2026-11-15 ~15:45 CT)
 - RC ITEM TAKEN: D52 is first in Phase RC but LAPTOP-CODE owned (no worker) - skipped per the BLOCKED note;
   next owned RC item is D44/D50 (wedging). Waited for the HUD's live lock (L64.4) to clear before launching.
@@ -5822,3 +5822,17 @@ Fresh desktop-HUD scheduled fire. Lock was IDLE (D57), no Godot alive. W2 had a 
 - VALIDATION OK: all four data files parse; every pre-existing key in cosmetics, accessories, dyes and every other top-level key equals HEAD; the original lines are untouched (pure insertion); every new entry matches its kind's field set; lore_lines, bosses, potions untouched. No floor count stated. ASCII only.
 - CODE WIRING: none new. Pets use existing model paths and scales. Confirm the shop lists read all of cosmetics/accessories by key (no fixed count) and dyes are read as name -> hex.
 - Worked in W3 (C:\hd adventure\Bellmire-content), branch `content`. Not ticked in WORK_PLAN (supervisor ticks).
+
+## U31 - L64 30-minute director run + tour lap fix (HUD, 2026-11-15, auto_director.gd)
+- NEW tools/_l64_long.gd, WINDOWED 1080p `--script`: 1800 s of DIRECTOR clock at time_scale 6, 4 viewer delvers, raids at 300 and 1250, a death (synthetic at 800: none happened naturally), a quiet stretch. Saves renders/cycles/20261115_l64long/ (director_decision_log.txt + raid/death/quiet shots).
+- RUN 1 found real faults: the quiet-baseline tour re-cut the same stop within 1-20 s (tour_1 at 851.5 then 868.8, tour_2 at 903.2 then 906.2, ...) because the fallback rotated by index while other candidates were held out. Four "hold" over-runs (70-75 s) were manual-input pauses (someone touched the machine during the run; the director resumes with why=start) - the audit now ignores gaps closed by "start".
+- FIX auto_director.gd: `_tour_pick` / `_tour_seen` - the tour is a lap, the stop shown LONGEST AGO is next, never the current one; used by both the fallback and the quiet-baseline candidate.
+- RUN 2 (same test): 183 cuts (follow 59, shoulder 75, push 41, hard_cut 2, establishing 6), 0 repeats, 0 holds past max, every cut has a why, 138,053 frames with 0 frames of any ambient pane on the director's body. L64_LONG OK.
+- LOOKED: l64_raid.png, l64_death.png - director pane + three ambient panes on four different subjects, Chronicle scroll centred and uncovered, wordmark Gloock, 21 px text.
+- Raid beat held ~every 2-12 s (pace 0.6) per the log; first run had natural raid at t=83.
+
+## U32 - L67 the feed survives a raid (HUD, 2026-11-15, feed_hud.gd)
+- QUEUE: L61 ticked; L64's 30-min run was U31; L66 NOT built - it asks for an on-stream leaderboard, which COORDINATION 13 / L58 / L63 forbid (Mr. E: hub only). Flagged for Mr. E. Took L67.
+- feed_hud.gd: town.feed stays plain strings; FeedHUD now classes each line on arrival (P3 death/boss/lord/raid, P2 town-level or a line tagged with a named hero via town.feed_tags, P1 ordinary, P0 routine pickup), MERGES repeats (digits ignored, 30 s window -> "line  x3"), admits at most 1 line per 0.8 s (1.25/s), holds each line 4/7/12/18 s by priority (a higher priority may displace a lower one after 3 s), caps the wait queue at 10 (overflow drops lowest priority, oldest first; routine lines stale after 40 s), and logs every ADMIT / MERGE / DROP in `feed_log` (`log_text()`), with `stats`.
+- tools/_l67_test.gd WINDOWED 1080p `--script`: raid forced + ~12 lines/s flood for 30 s. Result: 376 seen, 210 merged, 33 admitted, 133 dropped (all P0/P1 overflow), 0 protected drops, min admit gap 0.80 s (max rate 1.25/s). L67_TEST OK.
+- LOOKED: renders/cycles/20261115_l67/l67_flood.png (+ feed_log.txt) - Chronicle scroll centred, 21 px lines legible over the live panes, "x6" merges visible.

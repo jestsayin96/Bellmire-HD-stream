@@ -18,7 +18,18 @@ const SHOTS := {
     "follow": {"min": 8.0, "max": 18.0},           # tail a hero
     "shoulder": {"min": 6.0, "max": 16.0},         # over-the-shoulder on a fight, a lord, a raid
     "hard_cut": {"min": 4.0, "max": 7.0},          # a death: cut, hold, go
+    "breath": {"min": 4.0, "max": 7.0},            # L73: the quiet after a death or a beat that resolved
 }
+## L73 SHOT LANGUAGE (sits on _pace - no second knob): establish -> tighten -> hold -> breathe
+const ESTABLISH_K := 1.7        # a delve's first look opens this much wider than its follow distance ...
+const ESTABLISH_PITCH := -44.0  # ... and lower, then settles in (ease, T seconds)
+const ESTABLISH_T := 6.0
+const ESTABLISH_BONUS := 10.0   # a delve that has just set out is worth showing
+const TIGHTEN_MAX := 0.38       # a fight at death's door sits this fraction closer than a fresh one
+const DEATH_FROM := 16.0        # the death hold creeps in slowly from here ...
+const DEATH_TO := 12.0
+const BREATH_FROM := 14.0       # ... and the beat of quiet after it eases back out from the same spot
+const BREATH_TO := 30.0
 ## L64.3: no subject comes back inside this window (stories at or above STORY_PRI are exempt - a
 ## raid or a lord rising is never withheld from the viewer)
 const REPEAT_WINDOW := 90.0
@@ -64,6 +75,10 @@ var _fit_pitch := -55.0
 var _fit_clock := 0.0
 var _reveal_t := 0.0
 var _reveal_from := 0.0
+var _arc_t := 0.0               # L73: seconds into the current shot's ease
+var _cur_pos := Vector3.ZERO    # where the shot on screen is looking (a breath opens from here)
+var _cur_listed := true         # was the shot on screen still a candidate at the last full scoring pass
+var _delve_seen := {}           # delve id -> true once the director has shown it setting out
 var log_path := "user://director.log"
 var log_lines: Array = []       # the same lines, kept in memory for tests
 
@@ -166,6 +181,11 @@ func _process(delta: float) -> void:
         eye.yaw += 0.06 * real                  # idle shots drift slowly round
     if _cur.get("fit", false):
         _fit_tick(real)
+    if _cur.has("node") and is_instance_valid(_cur["node"]):
+        _cur_pos = (_cur["node"] as Node3D).global_position
+    elif _cur.has("pos"):
+        _cur_pos = _cur["pos"]
+    _arc_tick(real)
     if String(_cur.get("shot", "")) == "push":
         # L64.2: a slow push - it closes ~25% of its starting distance over its max hold
         eye.dist = maxf(eye.dist - float(_cur.get("dist", 34.0)) * 0.25 / _hold_max(_cur) * real, 6.0)
@@ -175,6 +195,11 @@ func _process(delta: float) -> void:
     _tick = 1.0
     _scan_deaths()
     var best := _best()
+    _cur_listed = false
+    for cc in _cands:
+        if String(cc["key"]) == String(_cur.get("key", "")):
+            _cur_listed = true
+            break
     if best.is_empty():
         # L34(a): no candidate scored this tick. The old code returned here, which left
         # the eye parked on whatever it was already following - and if THAT subject had
@@ -197,6 +222,7 @@ func _process(delta: float) -> void:
         why = "lane_owns"
     elif best["key"] == _cur["key"]:
         _cur["pri"] = best["pri"]               # same story, keep watching
+        _cur["hurt"] = best.get("hurt", 0.0)    # L73: a fight that is turning draws the camera in
         if _held >= _hold_max(_cur):
             cut = true
             why = "max_hold"
@@ -206,6 +232,8 @@ func _process(delta: float) -> void:
     elif String(best.get("shot", "")) == "hard_cut" and String(_cur.get("shot", "")) != "hard_cut":
         cut = true                              # L64.2: a death is a hard cut, at once
         why = "death"
+    elif String(_cur.get("shot", "")) in ["hard_cut", "breath"] and _held < _hold_min(_cur):
+        pass                                    # L73: hold on a death; let the quiet after it be quiet
     elif _beat_open(_cur) and _held < _hold_max(_cur):
         pass                                    # L64.3: never cut inside a beat that has not resolved
     elif float(best["pri"]) >= cur_pri + 20.0 and _held >= minf(2.0, _hold_min(_cur)):
@@ -226,6 +254,9 @@ func _process(delta: float) -> void:
                 alt = _fallback_shot(String(_cur.get("key", "")))
             if not alt.is_empty():          # L34: nothing else to show - re-cut, never return
                 best = alt
+        if _beat_ended() and float(best["pri"]) < STORY_PRI:
+            best = _breath_shot()               # L73: a beat of quiet after a death or a resolved fight/lord
+            why = "breath"
         _cut(best, why)
 
 ## ---- L64.2/.3 helpers
@@ -320,6 +351,8 @@ func _lane_owns(s: Dictionary) -> bool:
 
 func _cut(s: Dictionary, why: String = "") -> void:
     _log_cut(s, why)
+    if s.has("delve_id"):
+        _delve_seen[s["delve_id"]] = true
     _mem.append({"key": String(s["key"]), "shot": String(s.get("shot", "")), "t": _clock})
     var m2: Array = []
     for m in _mem:
@@ -343,6 +376,47 @@ func _cut(s: Dictionary, why: String = "") -> void:
     else:
         eye._select(null)
         eye._jump(s["pos"], float(s.get("dist", 34.0)))
+    _arc_t = 0.0
+    if s.has("from_d"):
+        eye.dist = float(s["from_d"])           # L73: the shot opens off its resting frame and eases into it
+    if s.has("from_pitch"):
+        eye.pitch = deg_to_rad(float(s["from_pitch"]))
+
+## L73: the shot's own ease - establish (wide and low, settling), the death creep, the breath's
+## pull-out - and the fight's tighten, which follows how hurt the party is
+func _arc_tick(real: float) -> void:
+    var arc := String(_cur.get("arc", ""))
+    if arc == "":
+        return
+    if arc == "tighten":
+        if _cur.has("from_pitch"):              # a delve's first look is a fight: it opens wide and low, then closes
+            _arc_t += real
+            var kp := clampf(_arc_t / ESTABLISH_T, 0.0, 1.0)
+            kp = kp * kp * (3.0 - 2.0 * kp)
+            eye.pitch = lerpf(deg_to_rad(float(_cur["from_pitch"])), deg_to_rad(float(_cur.get("pitch", -60.0))), kp)
+        var want := float(_cur.get("dist", 20.0)) * (1.0 - TIGHTEN_MAX * clampf(float(_cur.get("hurt", 0.0)), 0.0, 1.0))
+        eye.dist = lerpf(eye.dist, want, clampf(real * (0.5 if not _cur.has("from_d") else 0.35), 0.0, 1.0))
+        return
+    _arc_t += real
+    var k := clampf(_arc_t / maxf(float(_cur.get("T", 6.0)), 0.1), 0.0, 1.0)
+    k = k * k * (3.0 - 2.0 * k)
+    eye.dist = lerpf(float(_cur.get("from_d", _cur.get("dist", 22.0))), float(_cur.get("to", _cur.get("dist", 22.0))), k)
+    if _cur.has("from_pitch"):
+        eye.pitch = lerpf(deg_to_rad(float(_cur["from_pitch"])), deg_to_rad(float(_cur.get("pitch", -55.0))), k)
+
+## the shot on screen was a beat that has now resolved: a death held out, a fight or a lord that is over
+func _beat_ended() -> bool:
+    if _cur.is_empty():
+        return false
+    var pk := String(_cur.get("key", ""))
+    if String(_cur.get("shot", "")) == "hard_cut":
+        return true
+    return (pk.begins_with("lord_") or pk.begins_with("fight_")) and (not _shot_alive(_cur) or not _cur_listed)
+
+## the quiet after: ease back out from where the beat ended, then the director goes on
+func _breath_shot() -> Dictionary:
+    return {"key": "breath_%d" % int(_clock), "shot": "breath", "pri": 20.0, "pos": _cur_pos, "dist": BREATH_FROM, "pitch": -52.0,
+            "note": "breath", "arc": "ease", "from_d": BREATH_FROM, "to": BREATH_TO, "T": _hold_max({"shot": "breath"})}
 
 ## L72: the floor's lord while it is still climbing out of the ground (lord_fighting() is null until it is up)
 func _lord_rising(d: Delve) -> Monster:
@@ -577,6 +651,7 @@ func _best(avoid: String = "") -> Dictionary:
             continue
         var alive: Array = (d as Delve)._alive()
         if alive.is_empty():
+            _delve_seen.erase(d.get_instance_id())
             continue
         # L24: the fight seen through a delver no spotlight lane already holds
         var body: Node3D = alive[0]["body"]
@@ -589,6 +664,7 @@ func _best(avoid: String = "") -> Dictionary:
             hurt = maxf(hurt, 1.0 - float(m["hp"]) / maxf(float(m["max"]), 1.0))
         var st := String((d as Delve).state)
         if st == "home":
+            _delve_seen.erase(d.get_instance_id())
             continue
         var viewers := 0.0 if (d as Delve).npc_party else 10.0
         var lord: Monster = (d as Delve).lord_fighting()
@@ -600,11 +676,28 @@ func _best(avoid: String = "") -> Dictionary:
             c.append({"key": "lord_%d" % d.get_instance_id(), "pri": 100.0 + viewers * 0.1,
                       "node": lord, "dist": clampf(12.0 + lh * 2.2, 20.0, 42.0), "pitch": -55.0, "shot": "shoulder", "note": "lord", "fit": true})
         if st == "fight":
-            c.append({"key": "fight_%d" % d.get_instance_id(), "pri": 75.0 + viewers + hurt * 10.0,
-                      "node": body, "dist": 20.0, "pitch": -60.0, "shot": "shoulder", "note": "hurt %.2f" % hurt})
+            var fc := {"key": "fight_%d" % d.get_instance_id(), "pri": 75.0 + viewers + hurt * 10.0,
+                       "node": body, "dist": 20.0, "pitch": -60.0, "shot": "shoulder", "note": "hurt %.2f" % hurt,
+                       "arc": "tighten", "hurt": hurt, "delve_id": d.get_instance_id()}
+            if not _delve_seen.has(d.get_instance_id()):
+                # L73: ESTABLISH - a delve's first look (it opens on a fight) is wide and low, then closes in
+                fc["note"] = "delve start hurt %.2f" % hurt
+                fc["from_d"] = 20.0 * ESTABLISH_K
+                fc["from_pitch"] = ESTABLISH_PITCH
+            c.append(fc)
         else:
-            c.append({"key": "delve_%d" % d.get_instance_id(), "pri": 45.0 + viewers,
-                      "node": body, "dist": 22.0, "pitch": -62.0, "shot": "follow", "note": "walking"})
+            var fresh_out := not _delve_seen.has(d.get_instance_id())
+            var dc := {"key": "delve_%d" % d.get_instance_id(), "pri": 45.0 + viewers + (ESTABLISH_BONUS if fresh_out else 0.0),
+                       "node": body, "dist": 22.0, "pitch": -62.0, "shot": "follow", "note": "walking", "delve_id": d.get_instance_id()}
+            if fresh_out:
+                # L73: ESTABLISH - a delve setting out is shown wide and low first, then settles to its follow
+                dc["note"] = "delve start"
+                dc["arc"] = "ease"
+                dc["from_d"] = 22.0 * ESTABLISH_K
+                dc["to"] = 22.0
+                dc["from_pitch"] = ESTABLISH_PITCH
+                dc["T"] = ESTABLISH_T
+            c.append(dc)
     # 4. a catch coming in on the docks
     for a in town.get("anglers"):
         if is_instance_valid(a) and (a.state == Angler.S.REEL or a.state == Angler.S.SHOW or a.state == Angler.S.BITE):
@@ -633,7 +726,8 @@ func _best(avoid: String = "") -> Dictionary:
             break
     # 5b. L64.2: a delver just fell - hard cut to where it happened
     for e in _deaths:
-        c.append({"key": String(e["key"]), "shot": "hard_cut", "pri": 90.0, "pos": e["pos"], "dist": 16.0, "pitch": -50.0, "note": "death"})
+        c.append({"key": String(e["key"]), "shot": "hard_cut", "pri": 90.0, "pos": e["pos"], "dist": DEATH_FROM, "pitch": -50.0, "note": "death",
+                  "arc": "ease", "from_d": DEATH_FROM, "to": DEATH_TO, "T": _hold_min({"shot": "hard_cut"}) + 1.0})
     # 6. the town itself: a slow tour of its best views
     var tp := _tour_pick(String(_cur.get("key", "")) if _cur.get("tour", false) else "")
     if not tp.is_empty():
@@ -653,11 +747,12 @@ func _best(avoid: String = "") -> Dictionary:
         s = s.duplicate()
         var k := String(s["key"])
         var is_cur := String(_cur.get("key", "")) == k
-        if not is_cur and float(s["pri"]) < STORY_PRI and _recent(k):
+        var estab := String(s.get("note", "")).begins_with("delve start")      # L73: a delve setting out is never withheld
+        if not is_cur and not estab and float(s["pri"]) < STORY_PRI and _recent(k):
             s["note"] = String(s.get("note", "")) + " REPEAT-held-out"
             _cands.append(s)
             continue                            # no subject comes back inside the window
-        if not is_cur and String(s.get("shot", "")) == _last_shot and float(s["pri"]) < STORY_PRI:
+        if not is_cur and not estab and String(s.get("shot", "")) == _last_shot and float(s["pri"]) < STORY_PRI:
             s["pri"] = float(s["pri"]) - SAME_SHOT_PENALTY
             s["note"] = String(s.get("note", "")) + " same-shot-%.0f" % SAME_SHOT_PENALTY
         _cands.append(s)

@@ -341,6 +341,7 @@ function render(p) {
   renderLore();
   try { renderBestiary(p); } catch (e) { /* the Bestiary must never break the rest of the page */ }
   try { renderShops(p); } catch (e) { /* the Shops tab must never break the rest of the page */ }
+  try { renderSatchel(p); } catch (e) { /* the Satchel tab must never break the rest of the page */ }
   try { paintWelcome(); } catch (e) { /* the welcome must never break the rest of the page */ }
   try { applyHeroLink(p); } catch (e) { /* a bad link must never break the page */ }
 }
@@ -2746,6 +2747,7 @@ async function spotlightMe() {
     twLogin = login || null;
     highlightMyHero(login);
     try { if (lastShopP) renderShops(lastShopP); } catch (e) {}
+    try { if (lastSatP) renderSatchel(lastSatP); } catch (e) {}
     if (chatOpened) chatConnect();                 // reconnect the guild chat with their own voice
   } catch (e) {
     signinSay("Signed in, but couldn't read your Twitch name just now.", "bad");
@@ -3286,6 +3288,289 @@ function renderShops(p) {
   box.append(ord);
 }
 
+// ---------------------------------------------------------------- H30 the Satchel tab
+// A signed-in viewer's OWN things: what the hero carries (weight against capacity, shown as a
+// bar), the vault at the Adventurer Hall, the viewer's outstanding orders, and where the hero is
+// walking. Sort by slot / weight / value / VALUE-PER-POUND (the sort that teaches the game: the
+// party drops the lowest value-per-pound first, D80). Every action is a button that sends the
+// CHAT COMMAND over the IRC socket H6 already opened - no backend, no new scope, no CSP change.
+//
+// Who is the viewer: ONLY the Twitch login from H6's sign-in (twLogin). A hero is the viewer's
+// only if its name equals that login exactly. Signed out the tab shows nothing personal and the
+// page never guesses (the H11 "my hero" pin is a browser convenience and is deliberately NOT used).
+//
+// Contract, read defensively so the tab lights up by itself when the publisher sends it (v5+):
+//   hero.satchel[] = {name, qty?, weight? (per unit, lb), sell|value? (per unit), slot|kind?, rarity?, worn?}
+//   hero.carry     = {weight?, cap|capacity?, band?}   (or hero.encumbrance = ""/"encumbered"/"heavily encumbered")
+//   hero.vault     = [items] | {items: [...], slots?}
+//   hero.where | hero.doing   - where the hero is walking / what they are doing (free text)
+//   p.orders[]     - the same list H29 shows; the viewer's own are the rows whose `who` is their login
+// Missing weight / capacity / band are shown as "not published" - never faked. Capacity falls back
+// to 5e's STR x 15 lb ONLY when the hero's STR is published, and says it is derived.
+//
+// SECURITY: every snapshot string reaches the DOM through el()/textContent. A snapshot value never
+// becomes a URL, src, href, class name or style: slot/rarity only choose a known glyph / frame
+// class; the bar is a CSSOM number. The ONE place a snapshot string leaves the page is the chat
+// command a viewer presses a button for, and it is built by satCommand() from a fixed verb table
+// plus ONE argument with every control / line-separator character removed, so an item name can
+// never carry a second IRC line or a second command.
+const SAT_VERBS = { use: "!use", sell: "!sell", store: "!store", wear: "!wear", take: "!withdraw" };
+const SAT_STONE = "!stone";                    // the teleportation stone (1,000 channel points): fixed, takes no argument
+const SAT_NAME_MAX = 80;
+let lastSatP = null, satSort = "vpp", satDesc = true, satSlot = "all", satText = "", satLastAt = 0, satStoneArm = 0;
+function satArg(s) {
+  return String(s == null ? "" : s).replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g, " ").replace(/\s+/g, " ").trim().slice(0, SAT_NAME_MAX);
+}
+// The ONLY way a command string is made. verb must be a key of SAT_VERBS; returns "" otherwise.
+function satCommand(verb, name) {
+  if (verb === "stone") return SAT_STONE;
+  const v = Object.prototype.hasOwnProperty.call(SAT_VERBS, verb) ? SAT_VERBS[verb] : "";
+  const a = satArg(name);
+  return v && a ? v + " " + a : "";
+}
+function satSay(text, cls) {
+  const s = $("satStatus"); if (!s) return;
+  s.className = "chatstatus" + (cls ? " " + cls : "");
+  s.textContent = text;                         // page-authored text + the (already stripped) command
+}
+function satIsMock() { return !!(MOCK && /^satchel/.test(MOCK)); }
+function satViewer() {                          // the signed-in login, or "" - never a guess
+  if (MOCK === "satchelout") return "";
+  if (satIsMock()) return "mockviewer";
+  return twToken && twLogin ? twLogin : "";
+}
+function satSend(verb, name) {
+  const cmd = satCommand(verb, name);
+  if (!cmd) { satSay("That item has no name the game could be told.", "warn"); return false; }
+  if (satIsMock()) { satSay("Mock - would send: " + cmd, ""); return true; }
+  if (!(twToken && twLogin)) { satSay("Sign in with Twitch (under Heroes) first.", "warn"); return false; }
+  if (!chatWS || chatWS.readyState !== 1) {
+    if (!chatOpened) openGuildChat();           // opens the socket H6/H8 already use; nothing new is contacted
+    satSay("Connecting to the guild hall - press it again in a moment.", "warn");
+    return false;
+  }
+  const now = Date.now();
+  if (now - satLastAt < 1200) { satSay("Easy - one command a breath.", "warn"); return false; }
+  satLastAt = now;
+  chatWS.send("PRIVMSG #" + TWITCH_CHANNEL + " :" + cmd);
+  chatLine(twLogin, cmd, "me", "", twLogin);    // Twitch does not echo your own line back
+  satSay("Sent: " + cmd + " - your hero acts on it when they can; the Chronicle will say.", "ok");
+  return true;
+}
+function satN(v) { if (v == null || v === "") return null; const n = +v; return Number.isFinite(n) ? n : null; }
+function satLb(n) { return (Math.round(n * 10) / 10).toLocaleString("en"); }
+function satBandKey(s) {                        // -> "" | "encumbered" | "heavily encumbered" | null (unknown); constants only
+  if (s == null) return null;
+  const k = String(s).toLowerCase().replace(/[^a-z ]/g, "").trim();
+  if (k === "heavily encumbered" || k === "heavy") return "heavily encumbered";
+  if (k === "encumbered") return "encumbered";
+  if (k === "" || k === "none" || k === "light" || k === "unencumbered" || k === "normal") return "";
+  return null;
+}
+function satRow(it) {
+  if (typeof it === "string") it = { name: it };
+  if (!it || typeof it !== "object") return null;
+  const name = ctrlStrip(firstStr(it.name, it.item)).slice(0, SAT_NAME_MAX) || "(unnamed)";
+  const qty = Math.max(1, Math.floor(satN(it.qty) || 1));
+  const weight = satN(it.weight != null ? it.weight : it.wt != null ? it.wt : it.lb);
+  const value = satN(it.sell != null ? it.sell : it.value != null ? it.value : it.worth);
+  const slot = ctrlStrip(firstStr(it.slot, it.kind, it.type, it.cat)).toLowerCase().slice(0, 16) || "other";
+  let vpp = null;
+  if (value != null && weight != null) vpp = weight > 0 ? value / weight : (value > 0 ? Infinity : null);
+  return { name, qty, weight, value, slot, vpp, rarity: it.rarity, worn: !!(it.worn || it.equipped), raw: it };
+}
+function satRows(list) { const out = []; for (const it of arr(list)) { const r = satRow(it); if (r) out.push(r); } return out; }
+// capacity + band + carried, with an honest note about where each number came from
+function satCarry(h, rows) {
+  const c = h && typeof h.carry === "object" && h.carry ? h.carry : {};
+  const str = satN(h && h.stats && h.stats.str);
+  let weight = satN(c.weight != null ? c.weight : c.carried != null ? c.carried : h && h.carried), wnote = "";
+  if (weight == null) {
+    const known = rows.filter((r) => r.weight != null);
+    if (known.length) { weight = known.reduce((a, r) => a + r.weight * r.qty, 0); wnote = known.length < rows.length ? "from the items that publish a weight" : "summed from the items below"; }
+  }
+  let cap = satN(c.cap != null ? c.cap : c.capacity != null ? c.capacity : h && h.capacity), cnote = "";
+  if (cap == null && str != null) { cap = str * 15; cnote = "STR " + num(str) + " x 15 lb (5e), worked out here"; }
+  let band = satBandKey(c.band != null ? c.band : h && h.encumbrance), bnote = "";
+  if (band == null && weight != null && str != null) {
+    band = weight > str * 10 ? "heavily encumbered" : weight > str * 5 ? "encumbered" : "";
+    bnote = "worked out from STR";
+  }
+  return { weight, cap, band, wnote, cnote, bnote, str };
+}
+function satCmp(a, b) {
+  const key = (r) => satSort === "slot" ? r.slot : satSort === "weight" ? (r.weight == null ? null : r.weight * r.qty)
+    : satSort === "value" ? (r.value == null ? null : r.value * r.qty) : satSort === "name" ? r.name.toLowerCase() : r.vpp;
+  const x = key(a), y = key(b);
+  if (x == null && y == null) return a.name.localeCompare(b.name);
+  if (x == null) return 1;                       // unknowns last, whichever way it sorts
+  if (y == null) return -1;
+  if (x === y) return a.name.localeCompare(b.name);
+  const d = x < y ? -1 : 1;
+  return satDesc ? -d : d;
+}
+function satBtn(label, verb, name, title) {
+  const b = el("button", "sat-btn", label); b.type = "button";
+  b.title = title;
+  b.addEventListener("click", () => satSend(verb, name));
+  return b;
+}
+function satItemRow(r, where, dropFirst) {
+  const li = el("li", "sat-item");
+  const rc = rarityClass(r.rarity); if (rc) li.classList.add(rc);
+  if (r.worn) li.classList.add("worn");
+  li.append(icon(satchelIconId(r.slot)));
+  const nm = el("span", "sat-name", r.name);
+  if (r.qty > 1) nm.append(el("small", "sat-qty", " x" + num(r.qty)));
+  if (r.worn) nm.append(el("small", "sat-tag", " worn"));
+  if (dropFirst) nm.append(el("small", "sat-tag drop", " drop first"));
+  li.append(nm, el("span", "sat-slot", r.slot));
+  li.append(el("span", "sat-num", r.weight == null ? "- lb" : satLb(r.weight * r.qty) + " lb"));
+  const v = el("span", "sat-num"); v.append(icon("coin"), document.createTextNode(" " + (r.value == null ? "-" : num(r.value * r.qty)))); li.append(v);
+  li.append(el("span", "sat-num sat-vpp", r.vpp == null ? "- /lb" : r.vpp === Infinity ? "free" : (Math.round(r.vpp * 10) / 10).toLocaleString("en") + " /lb"));
+  const act = el("span", "sat-acts");
+  if (where === "vault") act.append(satBtn("Take out", "take", r.name, "Sends: " + satCommand("take", r.name)));
+  else {
+    act.append(satBtn("Use", "use", r.name, "Sends: " + satCommand("use", r.name)));
+    if (!r.worn) act.append(satBtn("Wear", "wear", r.name, "Sends: " + satCommand("wear", r.name)));
+    act.append(satBtn("Store", "store", r.name, "Sends: " + satCommand("store", r.name)));
+    act.append(satBtn("Sell", "sell", r.name, "Sends: " + satCommand("sell", r.name)));
+  }
+  li.append(act);
+  return li;
+}
+function satCard(title, glyph, count) {
+  const card = el("section", "shop-card sat-card");
+  const hd = el("header", "shop-head");
+  hd.append(icon(glyph), el("h3", "shop-name", title));
+  if (count != null) hd.append(el("span", "shop-lvl", count));
+  card.append(hd);
+  return card;
+}
+function satNote(box, text) { box.append(el("p", "shop-empty", text)); }
+function renderSatchel(p) {
+  const box = $("satBody"), ctl = $("satControls");
+  if (!box) return;
+  lastSatP = p;
+  box.textContent = "";
+  const viewer = satViewer();
+  if (ctl) ctl.classList.add("hide");
+  if (!viewer) {
+    const c = satCard("Sign in to see your satchel", "loot", null);
+    satNote(c, "This tab is only ever about YOUR hero, so it shows nothing until you sign in with Twitch. Nothing here is guessed from a name you typed.");
+    c.append(el("p", "shop-sells", "Once signed in you will see what you carry, how heavy it is against what you can bear, your vault at the Adventurer Hall, and your orders - and every button sends the chat command you could have typed yourself."));
+    const go = el("button", "sat-btn", "Sign in (under Heroes)"); go.type = "button";
+    go.addEventListener("click", () => setActiveTab("heroes"));
+    c.append(go);
+    box.append(c);
+    return;
+  }
+  const hero = arr(p && p.heroes).find((h) => h && String(h.name || "").toLowerCase() === viewer);
+  if (!hero) {
+    const c = satCard("No hero under your name yet", "loot", null);
+    satNote(c, "You are signed in as " + viewer + ", but no living hero carries that name. Type !enlist in chat to raise one; if your hero has fallen, what they carried is gone, but the vault is not.");
+    box.append(c);
+    return;
+  }
+  if (ctl) ctl.classList.remove("hide");
+  const rows = satRows(hero.satchel != null ? hero.satchel : hero.inventory != null ? hero.inventory : hero.items);
+  const cy = satCarry(hero, rows);
+  // ---- who, where, and the weight bar
+  const top = satCard(ctrlStrip(hero.name).slice(0, 40) + "'s satchel", "loot", num(rows.length) + (rows.length === 1 ? " item" : " items"));
+  const where = firstStr(hero.where, hero.walking_to, hero.doing);
+  if (where) top.append(el("p", "shop-sells", "Right now: " + ctrlStrip(where).slice(0, 120)));
+  if (cy.weight != null && cy.cap != null && cy.cap > 0) {
+    const ratio = Math.max(0.02, Math.min(1, cy.weight / cy.cap));
+    const grade = cy.band === "heavily encumbered" ? "low" : cy.band === "encumbered" ? "mid" : cy.band === "" ? "ok" : "flat";
+    const bar = el("div", "hpbar sat-bar " + grade);
+    bar.setAttribute("role", "img");
+    bar.setAttribute("aria-label", "Carrying " + satLb(cy.weight) + " of " + satLb(cy.cap) + " pounds");
+    const track = el("div", "hptrack");
+    const fill = el("span", "hpfill"); fill.style.setProperty("--hp", ratio);      // CSSOM number only
+    track.append(fill);
+    for (const t of [1 / 3, 2 / 3]) { const tk = el("i", "sat-tick"); tk.style.setProperty("--at", t); track.append(tk); }
+    bar.append(el("span", "hpk", "Carry"), track, el("span", "hpv", satLb(cy.weight) + " of " + satLb(cy.cap) + " lb"));
+    top.append(bar);
+    const bandName = cy.band === "heavily encumbered" ? "Heavily encumbered" : cy.band === "encumbered" ? "Encumbered" : cy.band === "" ? "Unencumbered" : "Band not published";
+    const bp = el("p", "sat-band " + (cy.band === "heavily encumbered" ? "b2" : cy.band === "encumbered" ? "b1" : "b0"));
+    bp.append(el("b", null, bandName));
+    bp.append(document.createTextNode(cy.band === "heavily encumbered" ? " - speed -20 ft, disadvantage on attacks and on STR, DEX and CON checks and saves."
+      : cy.band === "encumbered" ? " - speed -10 ft." : cy.band === "" ? " - no penalty." : "."));
+    top.append(bp);
+    const notes = [cy.wnote && "weight " + cy.wnote, cy.cnote && "capacity " + cy.cnote, cy.bnote && "band " + cy.bnote].filter(Boolean);
+    if (notes.length) top.append(el("p", "sat-src", notes.join("; ") + "."));
+    top.append(el("p", "sat-src", "Encumbered past a third of capacity, heavily past two thirds (the ticks on the bar). Stored items weigh nothing."));
+  } else {
+    satNote(top, "Carry weight is not published yet - the bar appears when the game reports weight and capacity (or your STR, from which capacity is worked out).");
+  }
+  box.append(top);
+  // ---- the list, filtered and sorted
+  const slots = []; for (const r of rows) if (slots.indexOf(r.slot) < 0) slots.push(r.slot);
+  slots.sort();
+  if (satSlot !== "all" && slots.indexOf(satSlot) < 0) satSlot = "all";
+  const chips = $("satChips");
+  if (chips) {
+    chips.textContent = "";
+    for (const s of ["all"].concat(slots)) {
+      const b = el("button", "chip" + (satSlot === s ? " on" : ""), s === "all" ? "All" : s); b.type = "button";
+      b.setAttribute("aria-pressed", satSlot === s ? "true" : "false");
+      b.addEventListener("click", () => { satSlot = s; if (lastSatP) renderSatchel(lastSatP); });
+      chips.append(b);
+    }
+  }
+  const q = satText.toLowerCase();
+  const shown = rows.filter((r) => (satSlot === "all" || r.slot === satSlot) && (!q || r.name.toLowerCase().indexOf(q) >= 0)).sort(satCmp);
+  // the "drop first" hint: the lowest value-per-pound carried item, only when the hero is over a band
+  let dropRow = null;
+  if (cy.band) for (const r of rows) if (!r.worn && r.vpp != null && r.vpp !== Infinity && r.weight > 0 && (!dropRow || r.vpp < dropRow.vpp)) dropRow = r;
+  const list = satCard("Carried", "loot", null);
+  list.classList.add("sat-list-card");
+  if (!rows.length) satNote(list, "Your satchel is empty. Buy something at a shop (it is an order - your hero walks to collect it) or bring something up from the delve.");
+  else if (!shown.length) satNote(list, "Nothing matches that filter.");
+  else {
+    const ul = el("ul", "sat-list");
+    shown.slice(0, 120).forEach((r) => ul.append(satItemRow(r, "satchel", r === dropRow)));
+    list.append(ul);
+    if (dropRow && shown.indexOf(dropRow) >= 0) list.append(el("p", "sat-src", "When a band is over capacity at the stairs, it drops the lowest value-per-pound first - that is the row marked \"drop first\"."));
+  }
+  box.append(list);
+  // ---- the vault
+  const vraw = hero.vault;
+  const vrows = satRows(Array.isArray(vraw) ? vraw : vraw && typeof vraw === "object" ? vraw.items : null);
+  const vslots = vraw && typeof vraw === "object" && !Array.isArray(vraw) ? satN(vraw.slots != null ? vraw.slots : vraw.cap) : null;
+  const vc = satCard("Your vault at the Adventurer Hall", "tower", vraw == null ? null : num(vrows.length) + (vslots != null ? " of " + num(vslots) : ""));
+  if (vraw == null) satNote(vc, "The vault is not published yet.");
+  else if (!vrows.length) satNote(vc, "Your vault is empty. Store something and your hero walks it to the Hall; stored items weigh nothing and survive a death.");
+  else { const ul = el("ul", "sat-list"); vrows.slice(0, 120).sort(satCmp).forEach((r) => ul.append(satItemRow(r, "vault", false))); vc.append(ul); }
+  box.append(vc);
+  // ---- orders
+  const mine = arr(p && p.orders).filter((o) => o && typeof o === "object" && String(o.who || "").toLowerCase() === viewer);
+  const oc = satCard("Your outstanding orders", "stall", num(mine.length));
+  if (!mine.length) satNote(oc, "No orders are waiting for you.");
+  else {
+    const ul = el("ul", "shop-stock");
+    for (const o of mine.slice(0, 40)) {
+      const li = el("li", "shop-good mine");
+      li.append(el("span", "gname", ctrlStrip(o.item).slice(0, 60) || "(an order)"));
+      li.append(el("span", "grar", (ctrlStrip(o.shop).slice(0, 40) || "a shop") + (o.walker ? " - " + ctrlStrip(o.walker).slice(0, 30) + " walking" : o.status ? " - " + ctrlStrip(o.status).slice(0, 20) : "")));
+      ul.append(li);
+    }
+    oc.append(ul);
+  }
+  box.append(oc);
+  // ---- the stone: a panic button, one deliberate double-press, never an argument
+  const sc = satCard("The teleportation stone", "flask", "1,000 points");
+  sc.append(el("p", "shop-sells", "Cashed in with channel points; this sends " + SAT_STONE + " to chat. Press twice to be sure - the second press must come within four seconds."));
+  const stone = el("button", "sat-btn stone", "Use the stone"); stone.type = "button";
+  stone.addEventListener("click", () => {
+    const now = Date.now();
+    if (now - satStoneArm < 4000) { satStoneArm = 0; stone.textContent = "Use the stone"; satSend("stone", ""); }
+    else { satStoneArm = now; stone.textContent = "Really? Press again"; setTimeout(() => { if (satStoneArm === now) { satStoneArm = 0; stone.textContent = "Use the stone"; } }, 4000); }
+  });
+  sc.append(stone);
+  box.append(sc);
+}
+
 // ---------------------------------------------------------------- wiring
 $("find").addEventListener("input", (e) => {
   heroFilter = e.target.value; heroShown = HERO_PAGE;
@@ -3318,8 +3603,15 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
   sec.addEventListener("focusout", (e) => { if (!sec.contains(e.relatedTarget)) leave(); });
 })();
 
+(function () {   // H30 controls: the select / direction / filter live outside the re-rendered body so typing keeps focus
+  const sel = $("satSort"), dir = $("satDir"), find = $("satFind");
+  const again = () => { if (lastSatP) renderSatchel(lastSatP); };
+  if (sel) sel.addEventListener("change", () => { satSort = ["vpp", "value", "weight", "slot", "name"].indexOf(sel.value) >= 0 ? sel.value : "vpp"; again(); });
+  if (dir) dir.addEventListener("click", () => { satDesc = !satDesc; dir.textContent = satDesc ? "Highest first" : "Lowest first"; again(); });
+  if (find) find.addEventListener("input", () => { satText = find.value.slice(0, 40); again(); });
+})();
 // ---------------------------------------------------------------- H13 tabs
-// No-scroll, tabbed layout: one section at a time. The viewer picks with a nav
+// Every nav// No-scroll, tabbed layout: one section at a time. The viewer picks with a nav
 // button and the chosen panel's `.active` class makes it visible (see style.css).
 //
 // Storage is per-browser and best-effort: the last-picked tab id is kept in
@@ -3328,7 +3620,7 @@ $("chronFind").addEventListener("input", (e) => { chronText = e.target.value; ch
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","chat","commands"];
+const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -3670,6 +3962,32 @@ function withMock(p) {
       out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "epic" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
       out.orders = [{ who: "viewer1", item: bad, shop: "The Smithy", walker: "Brum" }, { who: bad, item: "Loaf", shop: "The Provisioner", status: "ready" }];
     }
+    out.v = "5";
+  }
+  if (MOCK && /^satchel/.test(MOCK)) {   // H30: a signed-in viewer's satchel; satchelout = signed out. Hostile strings on purpose
+    const bad = "<img src=x onerror=alert(1)>";
+    let items = [
+      { name: "Longsword", slot: "weapon", weight: 3, sell: 15, worn: true, rarity: "uncommon" },
+      { name: "Chain mail", slot: "armour", weight: 55, sell: 75, worn: true },
+      { name: "Healing draught", slot: "potion", weight: 0.5, sell: 15, qty: 4 },
+      { name: "Scar-touched gem", slot: "gem", weight: 0.1, sell: 300, rarity: "rare" },
+      { name: "Bale of silk", slot: "cargo", weight: 10, sell: 60 },
+      { name: "Iron ingot", slot: "cargo", weight: 6, sell: 4, qty: 5 },
+      { name: bad, slot: "trinket", weight: 1, sell: 20, rarity: "<x>" },
+      { name: "Sword\r\n/ban everyone\r\nPRIVMSG #x :!give all", slot: "weapon", weight: 3, sell: 9 },
+      { name: "Mystery curio", slot: "trinket" },
+    ];
+    let carry;                                    // satchel = derived from STR (band + capacity worked out); 1/3/2 = explicit bands
+    if (MOCK === "satchel0") { items = []; carry = { weight: 0, cap: 150, band: "" }; }
+    else if (MOCK === "satchel1") carry = { weight: 47, cap: 150, band: "" };
+    else if (MOCK === "satchel3") carry = { weight: 70, cap: 150, band: "encumbered" };
+    else if (MOCK === "satchel2") carry = { weight: 112, cap: 150, band: "heavily encumbered" };
+    const me = { name: "mockviewer", class: "knight", species: "human", level: 4, rank: "Delver", standing: 12, ac: 15, hp: 30, gold: 120,
+      kills: 3, deepest: 2, delves: 2, xp: 40, to_hit: 4, prof: 2, saves: "STR +4", stats: { str: 14, dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
+      satchel: items, carry, where: "walking to The Smithy " + bad,
+      vault: MOCK === "satchel0" ? { slots: 12, items: [] } : { slots: 12, items: [{ name: bad + " Hoard", slot: "gem", weight: 0, sell: 500 }, { name: "Spare boots", slot: "armour", weight: 4, sell: 12 }] } };
+    out.heroes = [me].concat(arr(p.heroes));
+    out.orders = [{ who: "mockviewer", item: bad + " Helm", shop: "The Smithy", walker: "mockviewer" }, { who: "someone-else", item: "Loaf", shop: "The Provisioner" }];
     out.v = "5";
   }
   if (MOCK === "town") {            // H18: a town with every new field, hostile strings included

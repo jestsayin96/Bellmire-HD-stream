@@ -1372,3 +1372,39 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .shop-good.mine { border-left-color: var(--accent, #3aa6a0); }
 .rar-uncommon { border-left-color: #6aa84f; } .rar-rare { border-left-color: #4a86c8; }
 .rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }
+
+/* ===== H30: the Satchel tab (reuses .shop-card / .hpbar / .chip; the bar width is a CSSOM number) ===== */
+.sat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 10px; }
+.sat-lab { font-size: .85rem; display: inline-flex; align-items: center; gap: 6px; }
+.sat-lab select { font: inherit; padding: 4px 6px; }
+.sat-controls .find { flex: 1 1 10rem; min-width: 8rem; }
+.sat-controls .chips { flex-basis: 100%; margin: 0; }
+.sat-card { margin-bottom: 10px; }
+.sat-bar { margin: 8px 0 4px; }
+.sat-bar .hptrack { position: relative; }
+.sat-tick { position: absolute; top: 0; bottom: 0; left: calc(var(--at, .33) * 100%); width: 1px; background: rgba(42,28,16,.55); }
+.sat-band { margin: 2px 0 4px; font-size: .88rem; }
+.sat-band.b1 b { color: #8a5a0a; } .sat-band.b2 b { color: #8a2a1a; }
+.sat-src { margin: 3px 0 0; font-size: .75rem; opacity: .75; }
+.sat-list { list-style: none; margin: 6px 0 0; padding: 0; }
+.sat-item { display: grid; grid-template-columns: 18px minmax(6rem, 1fr) 4.5rem 4.5rem 4.5rem 5rem 15rem; align-items: center; gap: 4px 8px;
+  padding: 5px 0 5px 8px; border-left: 3px solid transparent; border-bottom: 1px solid rgba(128,128,128,.2); font-size: .85rem; }
+.sat-item .ic { width: 16px; height: 16px; }
+.sat-item.worn { background: rgba(58,166,160,.07); }
+.sat-name { overflow-wrap: anywhere; }
+.sat-qty, .sat-tag { font-size: .72rem; opacity: .8; }
+.sat-tag.drop { color: #8a2a1a; font-weight: 700; opacity: 1; }
+.sat-slot { font-size: .75rem; opacity: .75; text-transform: capitalize; }
+.sat-num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sat-num .ic { width: 12px; height: 12px; vertical-align: -2px; color: var(--gold, #c9a54a); }
+.sat-vpp { font-weight: 700; }
+.sat-acts { display: inline-flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.sat-btn { font: inherit; font-size: .75rem; padding: 3px 8px; border: 1px solid var(--edge-2, #8a7a55); border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
+.sat-btn:hover { border-color: var(--teal, #3aa6a0); }
+.sat-btn:focus-visible { outline: 2px solid var(--teal-ink, #1f6f6a); outline-offset: 2px; }
+.sat-btn.stone { margin-top: 6px; }
+@media (max-width: 640px) {
+  .sat-item { grid-template-columns: 18px 1fr auto; }
+  .sat-slot, .sat-num { text-align: left; }
+  .sat-acts { grid-column: 1 / -1; justify-content: flex-start; }
+}

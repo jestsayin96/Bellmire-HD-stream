@@ -193,6 +193,7 @@
     <button type="button" role="tab" id="tab-lore"      data-tab="lore"      aria-controls="lore"      aria-selected="false" tabindex="-1">Lore</button>
     <button type="button" role="tab" id="tab-bestiary"  data-tab="bestiary"  aria-controls="bestiary"  aria-selected="false" tabindex="-1">Bestiary</button>
     <button type="button" role="tab" id="tab-shops"     data-tab="shops"     aria-controls="shops"     aria-selected="false" tabindex="-1">Shops</button>
+    <button type="button" role="tab" id="tab-satchel"   data-tab="satchel"   aria-controls="satchel"   aria-selected="false" tabindex="-1">Satchel</button>
     <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
     <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
@@ -375,6 +376,30 @@
       <p class="eyebrow">What each shelf holds right now</p>
       <p class="note shop-caveat"><b>Buying places an order.</b> Your hero has to walk to that building to collect it - nothing arrives instantly, and that is not the page being broken.</p>
       <div id="shopsBody" role="region" aria-label="Shops and orders" tabindex="0"></div>
+    </section>
+
+    <!-- Satchel (H30): a signed-in viewer's OWN carried items, vault and orders. Signed out it shows nothing personal.
+         Every button sends the chat command over the socket H6/H8 already opened; no backend, no new scope. -->
+    <section class="panel" id="satchel" role="tabpanel" aria-labelledby="tab-satchel" tabindex="0">
+      <h2 class="title">Your Satchel</h2>
+      <p class="eyebrow">What you carry, what it weighs, and what to leave behind</p>
+      <p class="note shop-caveat"><b>The buttons type the chat command for you.</b> They do not act instantly: your hero does it when they can, and anything that moves goods is an errand - they walk it there.</p>
+      <div id="satControls" class="sat-controls hide">
+        <label class="sat-lab">Sort by
+          <select id="satSort" aria-label="Sort your items">
+            <option value="vpp">Value per pound</option>
+            <option value="value">Value</option>
+            <option value="weight">Weight</option>
+            <option value="slot">Slot</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+        <button type="button" class="chip" id="satDir" aria-label="Sort direction">Highest first</button>
+        <input class="find" id="satFind" type="search" placeholder="Filter your items&hellip;" autocomplete="off" aria-label="Filter your items by name">
+        <div class="chips" id="satChips" role="group" aria-label="Filter by slot"></div>
+      </div>
+      <p class="chatstatus" id="satStatus" role="status" aria-live="polite"></p>
+      <div id="satBody" role="region" aria-label="Your satchel, vault and orders" tabindex="0"></div>
     </section>
 
     <!--

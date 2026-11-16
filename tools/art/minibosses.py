@@ -1340,9 +1340,17 @@ def stoker_chibi():
     H = 2.40
     HIP = 0.50                                  # 21% of the body's height
     # LEGS - stubs. The boot is nearly as wide as the leg is long.
+    # PASS 3, FAULT 4 - THE VALUE BREAK, and it was the limbs, not the head.
+    # `limb()` defaults to the 'bone' slot, so every arm and leg came out
+    # PALER than the torso: a bone stick-figure wearing a brown box, with the
+    # lightest things on the creature at its ankles. A figure reads when the
+    # values stack - dark at the ground, mid through the mass, and the single
+    # pale thing is the FACE, which is the only part a player has to find.
+    # Limbs take the mid tone, boots and mitts the dark, the skull keeps the
+    # bone, and nothing below the collar competes with the head any more.
     for s in (-1, 1):
         limb(P, [(X + s * 0.185, 0.04, HIP), (X + s * 0.205, 0.00, 0.24),
-                 (X + s * 0.215, -0.04, 0.11)], 0.155, 0.145)
+                 (X + s * 0.215, -0.04, 0.11)], 0.155, 0.145, 'body')
         P.add(L.box(0.32, 0.44, 0.14), 'dark', loc=(X + s * 0.215, -0.13, 0.07))
     # THE TORSO - still a BOX, not a barrel: the grate has to be a flat lit
     # face and not a glowing belly. That was the original's own reasoning and
@@ -1369,23 +1377,50 @@ def stoker_chibi():
     # the heat cap: a BOWL, not a cone with a point on it - the Drillmaster's
     # kettle-helm lesson. Rounded crown, no apex, sitting low over the brow.
     P.add(L.sphere(0.49, 0.47, 0.30, 18, 12), 'dark', loc=(X - 0.06, -0.12, 1.70))
-    # eyes: head depth radius 0.48 at centre y -0.12, so the face is at -0.60.
-    # The ovals sit at -0.575 and stand proud of it, not floating in front.
+    # PASS 3: the bowl alone read as a BOWL CUT OF HAIR from the front - a dark
+    # dome resting on a pale skull with no edge between them. This is the
+    # register fault the other twelve would have inherited, so it is solved
+    # here before any of them are converted. Two parts, and the Drillmaster's
+    # mushroom is the thing to avoid: the brim is only 0.08 proud of the skull
+    # and sits 0.11 ABOVE the eyes, so it shades the brow without covering the
+    # face, and a bone band in the seam gives the cap an edge to end at.
+    P.add(aim(L.cone(0.575, 0.545, 0.055, 20), (X - 0.06, -0.14, 1.585),
+              (0.0, -0.13, 1.0)), 'dark')
+    P.add(aim(L.cone(0.505, 0.500, 0.050, 20), (X - 0.06, -0.12, 1.625),
+              (0.0, 0.0, 1.0)), 'bone')
+    # EYES, PASS 3. A single dark oval on a pale head is a HOLE, not an eye -
+    # it read as blank goggles, which is the Drillmaster's fault 2 arriving
+    # here in the opposite direction (his were pale discs, these were dark
+    # ones; either way there is no eye INSIDE the eye). The hero's face is the
+    # reference and it has three values: a dark socket, a pale eye in it, a
+    # dark pupil in that. Built in that order, each standing a little proud of
+    # the last, so the pale eye is separated from the pale skull by the socket
+    # rather than by a line. head depth radius 0.48 at centre y -0.12, face at
+    # -0.60: the stack runs -0.565 -> -0.615 and never floats in front of it.
     for s in (-1, 1):
-        P.add(L.sphere(0.062, 0.042, 0.095, 12, 8), 'dark',
-              loc=(X - 0.06 + s * 0.160, -0.575, 1.47))
-    # ARMS - short, thick, mitts. Right hand on the rake, left down by the flue.
-    # PASS 2, FAULT 2: the right mitt sat at x 0.50 against a torso whose
-    # edge is at 0.27 and the lit grate beside it ate the contrast, so the
-    # rake appeared to start in mid-air. The arm goes OUT and FORWARD until
-    # the hand is clear of the body by a third of a metre, and the haft now
-    # starts inside the mitt instead of beside it.
-    limb(P, [(X + 0.34, -0.12, 1.10), (X + 0.68, -0.26, 1.22)], 0.155, 0.130)
-    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'body', loc=(X + 0.72, -0.27, 1.24))
-    # PASS 2, FAULT 3: the left mitt was 0.06 below the end of its own arm and
-    # read as a detached ball beside the flue. It sits ON the joint now.
-    limb(P, [(X - 0.46, -0.10, 1.08), (X - 0.63, -0.15, 0.86)], 0.155, 0.130)
-    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'body', loc=(X - 0.64, -0.16, 0.85))
+        ex = X - 0.06 + s * 0.160
+        P.add(L.sphere(0.090, 0.046, 0.120, 12, 8), 'dark', loc=(ex, -0.565, 1.47))
+        P.add(L.sphere(0.058, 0.040, 0.082, 12, 8), 'bone', loc=(ex, -0.592, 1.47))
+        P.add(L.sphere(0.030, 0.026, 0.044, 10, 7), 'dark', loc=(ex + s * 0.006, -0.614, 1.46))
+    # ARMS - short, thick, mitts. Right hand on the rake, left at the hip.
+    # PASS 3, FAULT 8: both arms were TWO-POINT and left the shoulder level or
+    # rising, so each read as a ball on a stick held straight out - a T-pose
+    # scarecrow, which is the one shape a chibi figure must not make. Both are
+    # THREE-POINT now with a real elbow: the upper arm goes out and down, the
+    # forearm comes FORWARD and in. A chibi arm is short enough that the elbow
+    # is most of the read, so without it there is no arm, only a spoke.
+    limb(P, [(X + 0.36, -0.12, 1.10), (X + 0.54, -0.24, 0.94),
+             (X + 0.58, -0.38, 0.80)], 0.155, 0.125, 'body')
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'dark', loc=(X + 0.60, -0.40, 0.78))
+    # PASS 3, FAULT 9: the left mitt sat at x -0.64 and the flue stands at
+    # -0.74 with a 0.115 radius - the hand was INSIDE the flue's column in the
+    # front silhouette and the two merged into one dark lump. The forearm now
+    # comes forward and in to the hip, mitt at -0.44: clear of the flue's
+    # near edge, in FRONT of the torso in y, and reading against the body
+    # instead of against the chimney.
+    limb(P, [(X - 0.38, -0.12, 1.10), (X - 0.46, -0.22, 0.92),
+             (X - 0.36, -0.32, 0.74)], 0.155, 0.125, 'body')
+    P.add(L.sphere(0.175, 0.170, 0.160, 10, 7), 'dark', loc=(X - 0.34, -0.34, 0.70))
     # THE FLUE off the far shoulder - the tall vertical of the silhouette
     FX = X - 0.64
     limb(P, [(FX, 0.24, 1.08), (FX - 0.06, 0.26, 2.30)], 0.115, 0.095, 'dark')
@@ -1396,9 +1431,13 @@ def stoker_chibi():
     P.add(L.sphere(0.125, 0.125, 0.048, 12, 6), 'glow', loc=(FX - 0.07, 0.26, 2.37))
     limb(P, [(FX + 0.16, 0.18, 1.18), (FX + 0.02, 0.24, 1.10)], 0.054, 0.044, 'bone')
     # THE RAKE - 1.9 m of haft running down into the floor on his right
-    haft = [Vector((X + 0.70, -0.27, 1.24)), Vector((X + 1.08, -0.48, 0.88)),
-            Vector((X + 1.48, -0.66, 0.46)), Vector((X + 1.76, -0.78, 0.14))]
-    P.raw(L.tube(haft, [0.050, 0.044, 0.038, 0.036], 8), 'bone')
+    # the haft runs THROUGH the fist and a little past it: a man holding a rake
+    # grips it part-way up, and the butt above the hand is what says "held"
+    # rather than "attached at the wrist".
+    haft = [Vector((X + 0.48, -0.31, 1.15)), Vector((X + 0.60, -0.41, 0.78)),
+            Vector((X + 1.06, -0.56, 0.52)), Vector((X + 1.48, -0.70, 0.30)),
+            Vector((X + 1.78, -0.80, 0.14))]
+    P.raw(L.tube(haft, [0.038, 0.050, 0.046, 0.040, 0.036], 8), 'bone')
     P.add(L.box(0.54, 0.11, 0.075), 'dark', loc=(X + 1.78, -0.80, 0.13), rot=(0.0, -0.34, 0.0))
     for k in range(4):
         P.raw(aim(L.cone(0.032, 0.0, 0.21, 6), (X + 1.62 + k * 0.145, -0.80, 0.11),

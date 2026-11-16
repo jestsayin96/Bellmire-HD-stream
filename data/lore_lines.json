@@ -5485,21 +5485,27 @@
           "The west road has a toll again, and Red Harl set it. No caravan reaches the Ford unbled.",
           "There are new ropes on the Gallows Oak. Red Harl's lot hold the west road.",
           "A caravan came in short a driver and a wheel. Red Harl holds the west road.",
-          "Red Harl has hung a new rope on the Gallows Oak, and the west road pays for the length of it."
+          "Red Harl has hung a new rope on the Gallows Oak, and the west road pays for the length of it.",
+          "Red Harl has hung fresh rope on the Gallows Oak. The west road is his again.",
+          "A driver reached the Ford with one wheel and no cargo. Red Harl is on the west road."
         ],
         "while_alt": [
           "Caravans come in robbed or not at all; the market runs short and the prices climb.",
           "Every west-road caravan is bled. Stalls go empty and what is left costs more.",
           "Trade bleeds on the west road - short stock in the market, and a higher price on all of it.",
           "The caravans pay Red Harl first. The market pays for it in empty shelves and dear goods.",
-          "The west-road caravans are robbed; the market thins and prices climb."
+          "The west-road caravans are robbed; the market thins and prices climb.",
+          "The west road is shut to honest carts; the market runs thin and prices climb.",
+          "Caravans are stripped on the west road; the stalls empty and the prices rise."
         ],
         "cleared_alt": [
           "Red Harl hangs from his own oak. The west road carries caravans, not corpses.",
           "The Gallows Oak earns its name. The west road is open.",
           "Red Harl's lot are scattered off the west road. The next caravan comes in whole.",
           "The oak is used properly at last. Trade runs the west road again.",
-          "Red Harl swings from the oak he was so proud of. The west road runs."
+          "Red Harl swings from the oak he was so proud of. The west road runs.",
+          "Red Harl's rope is cut down and the Oak is only a tree. The west road opens.",
+          "The Gallows Oak is cleared. The caravans come in with their loads, and their drivers."
         ]
       },
       {
@@ -5513,21 +5519,27 @@
           "There is a rope across the fen path and Sedge the Toll holding the end of it.",
           "The fen path has a tollkeeper nobody appointed. Sedge is in the Mire Nest again.",
           "Traders come in light and say the same name: Sedge the Toll.",
-          "Sedge the Toll has put stakes in the fen path and a price on every one."
+          "Sedge the Toll has put stakes in the fen path and a price on every one.",
+          "Sedge the Toll is back on the fen path with her hand out.",
+          "The fen path has a gate on it now, and Sedge keeps the key."
         ],
         "while_alt": [
           "Every trader by the fen pays Sedge before he pays Bellmire; the town's cut shrinks.",
           "The fen trade is taxed twice. Sedge takes hers first and the town takes what is left.",
           "Sedge's toll comes off the top of every fen crossing; the town's share thins by the day.",
           "What the fen path earns, Sedge earns. The town's cut falls while the Nest stands.",
-          "The fen traders pay Sedge before they pay Bellmire; the town's cut thins."
+          "The fen traders pay Sedge before they pay Bellmire; the town's cut thins.",
+          "Fen traders pay Sedge first and Bellmire after; the town's cut shrinks.",
+          "Sedge takes her share at the fen path, and the town's cut shrinks to match."
         ],
         "cleared_alt": [
           "Sedge the Toll pays her own toll. The fen path is free.",
           "The Mire Nest is pulled apart. Nobody is charging for the fen now.",
           "Sedge's rope comes down off the fen path. So does Sedge.",
           "The fen path is honest again. The town's cut comes back whole.",
-          "Sedge the Toll is dragged out of the reeds. The fen path is free to walk."
+          "Sedge the Toll is dragged out of the reeds. The fen path is free to walk.",
+          "The Mire Nest is emptied. Sedge the Toll pays at last, and the fen path is free.",
+          "The fen gate is down and Sedge with it. Traders pay the town and no one else."
         ]
       },
       {
@@ -5541,21 +5553,27 @@
           "Cob Ashfoot is back in the burnt mill, and the sky over the fields is orange by midnight.",
           "A field went up in the dark and nobody lit it. Cob Ashfoot holds the mill.",
           "The burnt mill has lights in it. Cob Ashfoot's raiders are in residence.",
-          "There is smoke over the burnt mill again. Cob Ashfoot has found his flint."
+          "There is smoke over the burnt mill again. Cob Ashfoot has found his flint.",
+          "Cob Ashfoot is in the Burnt Mill again, and the sky to the east is orange.",
+          "A field is alight east of town. Cob Ashfoot's raiders are back in the mill."
         ],
         "while_alt": [
           "A field burns most nights; the harvest comes in short and the town sleeps badly.",
           "Another field a night. Harvest drops, and so does every face in the market.",
           "The fields burn by turns - less grain at the measure and less heart in the town.",
           "Cob takes a field a night. Harvest and morale both go with it.",
-          "A field goes up most nights; the harvest suffers, and so does the mood."
+          "A field goes up most nights; the harvest suffers, and so does the mood.",
+          "Another field goes up after dark; the harvest falls and the town does not rest.",
+          "A field burns most nights; the crop falls short and spirits fall with it."
         ],
         "cleared_alt": [
           "The burnt mill burns one last time. Cob Ashfoot runs and keeps running.",
           "Cob Ashfoot is out of the mill and out of the valley. The fields keep their fire to the hearth.",
           "The mill is ash and the fields are not. Cob Ashfoot is gone.",
           "No lights in the burnt mill tonight. The harvest comes in whole.",
-          "The mill is put out for good. Cob Ashfoot runs, and does not look back at the glow."
+          "The mill is put out for good. Cob Ashfoot runs, and does not look back at the glow.",
+          "The Burnt Mill is taken. Cob Ashfoot is last seen running through his own smoke.",
+          "The mill is cold and empty. No more fields burn."
         ]
       },
       {
@@ -5569,21 +5587,27 @@
           "Scarside Camp is up. The Weasel waits where the delvers surface.",
           "A delver came up rich and walked in poor. The Weasel holds the scar's edge.",
           "There are knives at the lip of the scar, and The Weasel counting behind them.",
-          "The Weasel has dug a crew in beside the scar and lies in wait for whoever climbs out."
+          "The Weasel has dug a crew in beside the scar and lies in wait for whoever climbs out.",
+          "The Weasel is camped at the scar's lip again, waiting for whoever climbs out.",
+          "Delvers who climbed out last night did not reach town. The Weasel is at the scar."
         ],
         "while_alt": [
           "Delvers are waylaid coming up; their gold and loot never reach Bellmire.",
           "Every climb out is taxed in blood. What the scar gives, Scarside Camp keeps.",
           "The Weasel takes it at the lip - the delve pays and the town sees none of it.",
           "Loot stops at the scar's edge. Nothing a delver earns gets as far as the gate.",
-          "Delvers coming home are waylaid; their gold and loot never reach Bellmire."
+          "Delvers coming home are waylaid; their gold and loot never reach Bellmire.",
+          "Climbing delvers are robbed at the scar's edge; their gold and loot never reach Bellmire.",
+          "The Weasel's crew take what delvers carry up, and Bellmire sees none of it."
         ],
         "cleared_alt": [
           "Scarside Camp is cleared. Delvers come up to friends now, not knives.",
           "The Weasel is pulled off the scar's edge. The climb out is safe.",
           "Nothing waits at the lip but daylight. Scarside Camp is finished.",
           "The Weasel runs out of patience and throat. Loot reaches the gate again.",
-          "The Weasel's burrow is dug out. The scar's edge is safe to walk."
+          "The Weasel's burrow is dug out. The scar's edge is safe to walk.",
+          "The Weasel is run off the scar's lip. Delvers climb out to the Watch.",
+          "Scarside Camp is cleared, and the loot comes home with the people carrying it."
         ]
       },
       {
@@ -5597,21 +5621,27 @@
           "The Drover's Rest has new keepers. Juno Blackhand took it with the beer still in the cask.",
           "No drover has come down the north road in days. Juno Blackhand is why.",
           "There is smoke from the Drover's Rest and nobody paying for a bed. Juno Blackhand is in.",
-          "The sign still says Drover's Rest. The door says Juno Blackhand."
+          "The sign still says Drover's Rest. The door says Juno Blackhand.",
+          "The sign still hangs at the Drover's Rest. Juno Blackhand is the one inside.",
+          "No drovers have come down the north road in days. Juno Blackhand has the inn."
         ],
         "while_alt": [
           "Livestock driven to market never arrive; the pens stand empty on market day.",
           "The herds go up the north road and stop there. Market day opens to bare pens.",
           "Juno takes the beasts before the town sees them - empty pens, and no meat at the measure.",
           "Nothing on four legs gets past the Rest. The market pens hold air.",
-          "Livestock bound for market never arrives; the pens stand empty on market day."
+          "Livestock bound for market never arrives; the pens stand empty on market day.",
+          "Herds are turned off at the Rest; the pens stand empty on market day.",
+          "Livestock bound for market never come down the north road; the pens are bare."
         ],
         "cleared_alt": [
           "The Drover's Rest changes hands again. Juno Blackhand does not leave with it.",
           "Juno Blackhand is taken out of the Rest. The herds come down the north road.",
           "The sign still hangs. The man who hung it does too.",
           "The Drover's Rest serves drovers. The pens fill by market day.",
-          "The Rest is retaken and the sign rehung. Juno Blackhand gets a room with bars on the window."
+          "The Rest is retaken and the sign rehung. Juno Blackhand gets a room with bars on the window.",
+          "Juno Blackhand is carried out of the Drover's Rest. The drovers take the rooms back.",
+          "The Rest has a landlord again, and the herds come down the north road."
         ]
       },
       {
@@ -5625,21 +5655,27 @@
           "The old quarry has men in it again, and they are not masons. Old Peck is there.",
           "The stone cart came in empty and expensive. Old Peck holds the quarry.",
           "Old Peck has moved into the quarry and set his own price on what the town already owns.",
-          "Old Peck has put a roof on the worked-out quarry and a price on the stone."
+          "Old Peck has put a roof on the worked-out quarry and a price on the stone.",
+          "Old Peck is back in the quarry, with a cart of stone to sell the town.",
+          "Stone is dear in town again. Old Peck has the worked-out quarry."
         ],
         "while_alt": [
           "Cut stone and lime go missing; building in town stalls for want of either.",
           "No stone, no lime - whatever Bellmire is raising stops where it stands.",
           "The quarry's take goes to Old Peck. The scaffolds stand idle.",
           "Stone and lime both vanish on the road. Every build in town waits.",
-          "Stone and lime stop arriving, and every wall in town stops going up."
+          "Stone and lime stop arriving, and every wall in town stops going up.",
+          "Cut stone and lime are sold back dear or not at all; building stalls.",
+          "Masons wait on stone Old Peck holds; every build in town slows."
         ],
         "cleared_alt": [
           "The Quarry Camp is emptied out. The stone comes down the road at an honest price.",
           "Old Peck is walked out of the quarry. The masons have their stone.",
           "The quarry belongs to the town again - and so does the stone in it.",
           "Old Peck sells nothing further. Building starts where it stopped.",
-          "The Quarry Camp is cleared. Old Peck is left with his own hammer and no buyers."
+          "The Quarry Camp is cleared. Old Peck is left with his own hammer and no buyers.",
+          "The quarry is emptied of Old Peck's lot. The stone comes at an honest price.",
+          "The Quarry Camp is cleared. The masons get their stone and their lime."
         ]
       },
       {
@@ -5653,21 +5689,27 @@
           "Three lamps dark on the road tonight. Wick Harrow is back at it.",
           "The road has gone black a mile at a time. Wick Harrow holds the dark end of it.",
           "Someone is harvesting the lamp oil and the travellers both. Wick Harrow.",
-          "The road lamps are going out one by one. Wick Harrow is working his way up the line."
+          "The road lamps are going out one by one. Wick Harrow is working his way up the line.",
+          "The road lamps are out again, one by one. Wick Harrow is at work.",
+          "The road went dark last night. Wick Harrow's crew were seen in it."
         ],
         "while_alt": [
           "Nobody travels after dusk; the night trade stops and the Ford shuts early.",
           "The road is dark and empty after sundown - no night trade, and the Ford closes its doors.",
           "Dusk ends the day's trade now. The Ford bolts up early and takes less.",
           "After dark the road belongs to Wick. The night trade is finished and the Ford shuts.",
-          "After dusk the road is shut to all comers; the night trade dies and the Ford closes early."
+          "After dusk the road is shut to all comers; the night trade dies and the Ford closes early.",
+          "No one risks the road after dusk; the night trade stops and the Ford shuts early.",
+          "The Ford shuts early and the night trade dies; nobody travels after dark."
         ],
         "cleared_alt": [
           "The lamps burn the whole length of the road again. Wick Harrow walks it in chains.",
           "Every lamp lit, end to end. Wick Harrow is carried past them.",
           "The dark is given back to the sky. The Ford keeps its late hours.",
           "Wick Harrow's crew are out of the dark and into the light of a cell.",
-          "Every lamp is lit by morning. Wick Harrow is walked in, in the light."
+          "Every lamp is lit by morning. Wick Harrow is walked in, in the light.",
+          "Every lamp on the road is lit. Wick Harrow is marched home in chains.",
+          "The Lampless Road is lit end to end, and Wick Harrow is taken."
         ]
       },
       {
@@ -5681,21 +5723,27 @@
           "There are palings on the old weir and Marek Two-Coin behind them.",
           "The barges came up paying twice. Marek Two-Coin holds the weir.",
           "Marek Two-Coin is back on the weir, collecting with both hands.",
-          "Marek Two-Coin has bricked up the weir and hung a toll-board on it."
+          "Marek Two-Coin has bricked up the weir and hung a toll-board on it.",
+          "Marek Two-Coin is on the weir again, collecting from the river.",
+          "Barges are stopped at the old weir. Marek Two-Coin wants his second coin."
         ],
         "while_alt": [
           "River trade pays twice; the Ford's takings fall while the weir stands.",
           "Every barge is charged at the weir first - the Ford takes less for the same traffic.",
           "Marek skims the river before Bellmire does. The Ford's books thin out.",
           "Two tolls on one river. The Ford's share drops while the Weir Camp holds.",
-          "Barges pay the weir and then pay the Ford; Bellmire's takings drop while the weir holds."
+          "Barges pay the weir and then pay the Ford; Bellmire's takings drop while the weir holds.",
+          "River trade pays Marek at the weir and then pays the Ford; the Ford's takings fall.",
+          "Every barge pays twice; the Ford's takings fall for as long as the weir stands."
         ],
         "cleared_alt": [
           "The Weir Camp is broken open. The river runs toll-free again.",
           "Marek Two-Coin is taken off the weir with neither coin. The barges pay once.",
           "The palings come off the weir. The Ford's takings come back.",
           "One toll on the river now, and it is the town's.",
-          "The weir is broken, and its toll-board floats off downriver."
+          "The weir is broken, and its toll-board floats off downriver.",
+          "The weir is broken open and Marek Two-Coin has lost both coins.",
+          "The Weir Camp falls. Barges pass once, and pay once."
         ]
       },
       {
@@ -5709,21 +5757,27 @@
           "There is a hole in the barrow and eyes in the hole. Grell the Patient is waiting.",
           "Grell the Patient is in the Ashen Barrow again, and he can wait longer than the town can.",
           "The market road has a watcher nobody hired. Grell is in the mound.",
-          "Grell the Patient has been seen at the barrow's mouth. He is very good at being still."
+          "Grell the Patient has been seen at the barrow's mouth. He is very good at being still.",
+          "Grell the Patient is back in the barrow, and has not hurried yet.",
+          "A cart was found empty on the market road. Grell is watching from the Barrow."
         ],
         "while_alt": [
           "Market-bound carts are picked off; stalls stand empty on market day.",
           "The carts do not arrive. Market day opens half-stalled.",
           "Grell takes them one cart at a time - and the market shows the gaps.",
           "Every cart for market is a cart for Grell. The stalls stand bare.",
-          "Market-bound carts are picked off from the mound; stalls stand empty on market day."
+          "Market-bound carts are picked off from the mound; stalls stand empty on market day.",
+          "Market carts are picked off from the barrow; stalls stand empty on market day.",
+          "Grell takes the carts bound for market, one at a time, and the stalls thin out."
         ],
         "cleared_alt": [
           "The barrow is emptied of the living. Grell the Patient stays behind in it.",
           "Grell ran out of patience first. The market road carries carts.",
           "The Ashen Barrow is sealed with its proper tenants. Market day fills up.",
           "Grell waits in the barrow permanently now. The stalls are stocked.",
-          "The barrow is cleared of everything that breathes. The market road is quiet and honest."
+          "The barrow is cleared of everything that breathes. The market road is quiet and honest.",
+          "The Barrow is cleared. Grell the Patient is not leaving it.",
+          "The Ashen Barrow is quiet. The market carts come through."
         ]
       },
       {
@@ -5737,21 +5791,27 @@
           "The bend has gone quiet. Ivett Crow's bows are in the Hollow Stand.",
           "A courier's horse came in without a courier. Ivett Crow holds the bend.",
           "There are arrows in the bend-post again. The Hollow Stand is manned.",
-          "Ivett Crow's archers are in the trees at the bend. Several carts have found this out."
+          "Ivett Crow's archers are in the trees at the bend. Several carts have found this out.",
+          "Ivett Crow's archers are in the wood at the bend again.",
+          "A courier came in with an arrow through his satchel. The Hollow Stand is held."
         ],
         "while_alt": [
           "Couriers and tax carts are lost at the bend; news and coin both arrive late or not at all.",
           "Nothing gets round the bend - the post stops and the tax carts with it.",
           "News ages on the road and the coin never finishes the journey.",
           "The bend eats couriers. Word and money both come late, or not.",
-          "Couriers and tax carts are lost at the bend; news and coin arrive late or not at all."
+          "Couriers and tax carts are lost at the bend; news and coin arrive late or not at all.",
+          "Couriers and tax carts vanish at the bend; news and coin come late or not at all.",
+          "The bend in the road takes riders and carts, and Bellmire hears and earns late."
         ],
         "cleared_alt": [
           "The Hollow Stand is cleared. The road bends past nothing worse than trees.",
           "Ivett Crow misses once, and once is enough. The post runs.",
           "The wood at the bend is emptied of bowmen. Coin and word arrive on time.",
           "Ivett Crow comes out of the Stand with her string cut. The road is open.",
-          "The wood at the bend is cleared. Ivett Crow's bow hangs in the Watch-house."
+          "The wood at the bend is cleared. Ivett Crow's bow hangs in the Watch-house.",
+          "The Hollow Stand is cleared. Ivett Crow's bows hang in the Watch house.",
+          "The road bends past trees and nothing else. The couriers ride."
         ]
       },
       {
@@ -5765,21 +5825,27 @@
           "The high fold has a shepherd who shears other men's sheep. Dunn Halfhand.",
           "No flock has come down off the hills this week. Dunn Halfhand holds the fold.",
           "Dunn Halfhand is in the Shepherd's Fold, counting a flock he never raised.",
-          "Dunn Halfhand has gone up to the high fold, and the flocks have stopped coming down."
+          "Dunn Halfhand has gone up to the high fold, and the flocks have stopped coming down.",
+          "Dunn Halfhand has the high fold again and everything grazing in it.",
+          "No flocks have come down off the hills. Dunn Halfhand is at the Fold."
         ],
         "while_alt": [
           "Wool and mutton stop coming down off the hills; the cloth trade and the tavern both feel it.",
           "No wool, no mutton. The weavers slow and the tavern's pot goes thin.",
           "The hills send nothing down. Cloth gets dear and the tavern serves less.",
           "Dunn keeps the flocks. The cloth trade and the kitchen both run short.",
-          "The hill flocks stay on the hill; wool and mutton dry up, and the weavers and the tavern notice."
+          "The hill flocks stay on the hill; wool and mutton dry up, and the weavers and the tavern notice.",
+          "Wool and mutton stay on the hill; the cloth trade and the tavern feel it.",
+          "The hill flocks go to Dunn instead of the market; cloth and the tavern go short."
         ],
         "cleared_alt": [
           "The Fold changes shepherd. Dunn Halfhand leaves with a quarter hand and no flock.",
           "Dunn Halfhand is driven off the high fold. The flocks come down.",
           "The fold holds sheep and no thieves. Wool and mutton come in again.",
           "Dunn counts to nine now. The hills send their flocks down.",
-          "The high fold is retaken. The flocks come down in a long, relieved line."
+          "The high fold is retaken. The flocks come down in a long, relieved line.",
+          "The Fold is retaken and Dunn Halfhand is sent down with nothing.",
+          "Shepherds return to the Fold. Dunn Halfhand does not."
         ]
       },
       {
@@ -5793,21 +5859,27 @@
           "There are white men on the road at dusk. Mad Tibb is in the kiln again.",
           "The lime cart was taken by something that looked dead and laughed. Mad Tibb.",
           "Mad Tibb has the lime kiln, and the chalk on his crew is not the worst thing on them.",
-          "White-faced figures are working the road at dusk. Mad Tibb has the kiln again."
+          "White-faced figures are working the road at dusk. Mad Tibb has the kiln again.",
+          "White figures were seen on the road at dusk. Mad Tibb is in the kiln again.",
+          "Mad Tibb has the lime kiln and has painted himself for the road."
         ],
         "while_alt": [
           "Lime and mortar never reach the masons; whatever Bellmire is building stops where it stands.",
           "No lime comes in. The mortar runs out and the walls stop at the course they are on.",
           "The masons have stone and nothing to set it with. Building halts.",
           "Mortar fails first, then the build. Nothing rises while Tibb holds the kiln.",
-          "No mortar reaches the masons, and every half-built wall in Bellmire stays half-built."
+          "No mortar reaches the masons, and every half-built wall in Bellmire stays half-built.",
+          "Lime and mortar are taken on the road; building stops where it stands.",
+          "No lime reaches the masons; whatever Bellmire is building waits."
         ],
         "cleared_alt": [
           "The kiln is cold and empty. Mad Tibb is walked back to town the colour of chalk.",
           "Mad Tibb comes out of the kiln for the last time. The lime carts run.",
           "The Lime Kiln is cleared. The masons set stone again.",
           "Tibb's crew are washed, chained and done. Mortar reaches the walls.",
-          "The kiln goes cold. Mad Tibb is led off, still laughing, still white."
+          "The kiln goes cold. Mad Tibb is led off, still laughing, still white.",
+          "The kiln is emptied and Mad Tibb is brought down the road, white to the elbows.",
+          "The Lime Kiln is cleared. The mortar comes through, and so does the building."
         ]
       },
       {
@@ -5821,21 +5893,27 @@
           "There is a hull across the narrows that did not sink by accident. Hask put it there.",
           "The narrows are blocked and the bank is watched. Hask is working the river.",
           "A barge crew went to clear a wreck and came back with nothing. Hask's wreck.",
-          "Another hull lies across the narrows, and Hask the Ferryman's Brother stands on the bank with a boathook."
+          "Another hull lies across the narrows, and Hask the Ferryman's Brother stands on the bank with a boathook.",
+          "A boat is down in the narrows, and Hask is waiting for someone to stop for it.",
+          "Hask has sunk a boat in the narrows again."
         ],
         "while_alt": [
           "The narrows are blocked; barges wait, and what they carry spoils in the hold.",
           "Nothing passes the narrows. The barges sit and the cargo turns.",
           "The river queues at the wreck - goods rot in the hold while they wait.",
           "Barges stack up at the narrows and their loads go bad where they lie.",
-          "Barges queue at the blocked narrows, and their cargo spoils while they wait."
+          "Barges queue at the blocked narrows, and their cargo spoils while they wait.",
+          "The narrows are blocked; barges wait and their cargo spoils.",
+          "Barges queue at the narrows; whatever they carry goes bad in the hold."
         ],
         "cleared_alt": [
           "The Sunken Boat burns to the waterline. Hask swims for the far bank and is met on it.",
           "The narrows are cleared of hull and of Hask. The barges move.",
           "The wreck is dragged out. The river runs and the holds keep their cargo.",
           "Hask takes to the water and does not come out of it. The narrows are open.",
-          "The narrows are cleared and the wreck is chopped for kindling. Hask is caught on the bank."
+          "The narrows are cleared and the wreck is chopped for kindling. Hask is caught on the bank.",
+          "The sunken boat is cleared and Hask is taken on the bank.",
+          "The narrows open. Hask is on the far bank, and so is the Watch."
         ]
       },
       {
@@ -5849,21 +5927,27 @@
           "There are paths cut in the blackbrier that no shepherd made. Iver Cutgrass.",
           "A packman came in with a cut strap and no pack. Iver holds the blackbrier.",
           "Blackbrier Hide is occupied again, and the thorns are on Iver's side.",
-          "Iver Cutgrass has grown a camp into the blackbrier. Nobody saw it planted."
+          "Iver Cutgrass has grown a camp into the blackbrier. Nobody saw it planted.",
+          "Iver Cutgrass is in the brier again, where no horse can reach him.",
+          "The south track has been quiet since Iver Cutgrass moved back in."
         ],
         "while_alt": [
           "Foot traffic on the south track is robbed; the smaller traders stop coming at all.",
           "Packmen are stripped on the south track. The small trade dries up.",
           "The south track is walked only by Iver's crew - the little traders stay home.",
           "Every pack on the south track is Iver's. The small sellers stop arriving.",
-          "Walkers on the south track are robbed, and the small traders quit the track."
+          "Walkers on the south track are robbed, and the small traders quit the track.",
+          "The south track is robbed on foot; the small traders stop coming.",
+          "Pedlars on the south track are stripped, and the smaller trade dies off."
         ],
         "cleared_alt": [
           "Blackbrier Hide is burned out. The south track carries packs again.",
           "Iver Cutgrass is pulled out of the thorns. The packmen come back.",
           "The blackbrier is cut to the root. The south track is safe on foot.",
           "Iver's paths are burned shut. The small traders fill the market again.",
-          "The brier is cut back to the root. Iver Cutgrass is found in the middle, scratched to ribbons."
+          "The brier is cut back to the root. Iver Cutgrass is found in the middle, scratched to ribbons.",
+          "The brier is burned back to bare ground. Iver Cutgrass has nowhere left to hide.",
+          "Blackbrier Hide is cleared. The pedlars use the south track again."
         ]
       },
       {
@@ -5877,21 +5961,27 @@
           "The charcoal stands are smoking for somebody else. Mother Soot is up there.",
           "No charcoal came down the wood road. Mother Soot holds the stands.",
           "Mother Soot is back in the burns, and the smoke is hers now.",
-          "Mother Soot has put her burners in the charcoal stands, and the smoke goes up black and unsold."
+          "Mother Soot has put her burners in the charcoal stands, and the smoke goes up black and unsold.",
+          "Mother Soot is above the wood with her burners, and the stands are hers.",
+          "Smoke is rising from the charcoal stands, and it is the wrong smoke. Mother Soot has them."
         ],
         "while_alt": [
           "Charcoal runs short; the forge works half days and smith prices climb.",
           "The forge banks its fire by noon - half a day's work, and the smith's price up.",
           "No charcoal, no heat. The forge shuts early and charges more for what it finishes.",
           "Charcoal comes in by the sack instead of the cart. Half days at the forge, dearer iron.",
-          "The charcoal stops, the forge keeps half days, and every smith charges more."
+          "The charcoal stops, the forge keeps half days, and every smith charges more.",
+          "Charcoal stops coming down; the forge works half days and smith prices climb.",
+          "The forge cannot get charcoal; it works half days and prices rise."
         ],
         "cleared_alt": [
           "The Charcoal Camp is taken. The forge burns a full day again.",
           "Mother Soot is put out. The charcoal carts come down the wood road.",
           "The stands are the town's again - full days at the forge and an honest price.",
           "Mother Soot's burners scatter. The forge keeps its fire till dark.",
-          "The stands are taken. Mother Soot is led out, sooty to the elbows."
+          "The stands are taken. Mother Soot is led out, sooty to the elbows.",
+          "The Charcoal Camp is taken, and Mother Soot's burners are sent down black.",
+          "The stands burn for the forge again. Mother Soot does not."
         ]
       },
       {
@@ -5905,21 +5995,27 @@
           "The rook field is full of more than crop. Carrow Dace is in it.",
           "A harvest cart was stopped at the field edge by men who came out of the wheat. Carrow Dace.",
           "There are paths trodden through the rook field that lead nowhere good. Carrow Dace holds it.",
-          "The rooks have left the field, and Carrow Dace's crew have taken their place."
+          "The rooks have left the field, and Carrow Dace's crew have taken their place.",
+          "Carrow Dace is in the rook field, and the crop is tall enough to hide a crew.",
+          "The rooks went up all at once. Carrow Dace is in the field."
         ],
         "while_alt": [
           "Harvest carts are stopped at the field edge; grain comes in short at the measure.",
           "The carts are bled at the field edge. The measure never fills.",
           "Grain goes into the rook field and not out of it. The measure reads short.",
           "Carrow takes his share off the cart. The granary counts the difference.",
-          "Carts are turned back at the field edge, and the grain comes up short at the measure."
+          "Carts are turned back at the field edge, and the grain comes up short at the measure.",
+          "Harvest carts are stopped at the field edge; the measure comes up short.",
+          "Grain is taken at the field and the measure runs short."
         ],
         "cleared_alt": [
           "The Rook Field is cut early and cleared. The measure fills honestly again.",
           "Carrow Dace is flushed out of the wheat. The harvest comes in whole.",
           "The rook field is stubble and no shelter. The measure reads true.",
           "Carrow's crew are cut down with the crop. Grain arrives full weight.",
-          "The Rook Field is cut open. Carrow Dace is found sitting very still in the stubble."
+          "The Rook Field is cut open. Carrow Dace is found sitting very still in the stubble.",
+          "The Rook Field is cut down, and Carrow Dace with it.",
+          "The field is cut early. The measure fills, and honestly."
         ]
       },
       {
@@ -5933,21 +6029,27 @@
           "The salt road has a price on it now. Tam Pell set it.",
           "Salt came in at twice the money. Tam Pell holds the narrows.",
           "Tam Pell is camped where the salt road pinches, and nothing passes cheap.",
-          "Tam Pell has staked out the narrow part of the salt road and is tallying every cart."
+          "Tam Pell has staked out the narrow part of the salt road and is tallying every cart.",
+          "Tam Pell is at the narrow part of the salt road again, with his hand out.",
+          "Salt has gone up in the market. Tam Pell is on the salt road."
         ],
         "while_alt": [
           "Salt and cured stores arrive dear; preserved food in town spoils faster for want of it.",
           "Salt costs double. What the town cures does not keep.",
           "Dear salt, thin curing - the stores turn before they are eaten.",
           "Tam's price is on every barrel of salt. The preserved food goes off early.",
-          "Salt arrives dear and late, so cured food in town goes off sooner."
+          "Salt arrives dear and late, so cured food in town goes off sooner.",
+          "Salt and cured stores come in dear; preserved food spoils faster for want of salt.",
+          "The salt trade pays Tam at the narrows, and what reaches town is short and dear."
         ],
         "cleared_alt": [
           "The Salt Road Camp is broken. Salt comes in at the old price.",
           "Tam Pell is taken off the narrows. The curing sheds are busy again.",
           "The salt road is free. The stores keep their weight and their season.",
           "Tam Pell charges nobody now. Salt is salt-priced.",
-          "Tam Pell's tally ends. The salt road is open, and salt is cheap again."
+          "Tam Pell's tally ends. The salt road is open, and salt is cheap again.",
+          "The Salt Road Camp is broken. Tam Pell pays his own toll, in the Watch house.",
+          "The salt road is open. The price falls back."
         ]
       },
       {
@@ -5961,21 +6063,27 @@
           "The beekeeper is in town with nothing but stings. Hollis Grin has his hut.",
           "Hollis Grin is in the hives, and he is not asking the bees.",
           "No wax, no honey, and a grinning man up at the hut. Hollis Grin.",
-          "Hollis Grin is in the beekeeper's hut. The beekeeper is in the ditch outside it."
+          "Hollis Grin is in the beekeeper's hut. The beekeeper is in the ditch outside it.",
+          "Hollis Grin is in the beekeeper's hut. The beekeeper is in the ditch.",
+          "The bees are humming over a different man's roof. Hollis Grin has the hut."
         ],
         "while_alt": [
           "Honey, wax and candle stock dry up; the apothecary brews slower without wax.",
           "No wax in town - candles run out and the apothecary's work slows.",
           "Honey and wax both stop. Candles get scarce and the brews take longer.",
           "The hives feed Hollis. Candle stock empties and the apothecary waits on wax.",
-          "No honey, no wax, no candles; the apothecary brews at half speed for want of wax."
+          "No honey, no wax, no candles; the apothecary brews at half speed for want of wax.",
+          "Honey, wax and candles dry up; the apothecary brews slower without wax.",
+          "No wax reaches town; the apothecary slows and the candle stalls empty."
         ],
         "cleared_alt": [
           "Hollis Grin is stung out of the hut. The beekeeper goes back to his bees.",
           "The hut is handed back. Wax, honey and candles come down again.",
           "Hollis Grin leaves swollen and empty-handed. The apothecary gets her wax.",
           "The bees keep their keeper. Candle stock fills the shelf.",
-          "The hut is cleared, the beekeeper fetched out and the bees counted. Hollis Grin has a swollen face."
+          "The hut is cleared, the beekeeper fetched out and the bees counted. Hollis Grin has a swollen face.",
+          "Hollis Grin is stung out of the hut and the beekeeper goes home to his bees.",
+          "The hut is the beekeeper's again, and the wax comes to market."
         ]
       },
       {
@@ -5989,21 +6097,27 @@
           "There is a ferry working upriver that nobody chartered. Nils Odd.",
           "Half the river traffic is turning off above the Ford. Nils Odd is why.",
           "Nils Odd has the dry ferry running again, and Bellmire is not on the route.",
-          "Nils Odd has built a landing upriver and runs a ferry nobody asked for."
+          "Nils Odd has built a landing upriver and runs a ferry nobody asked for.",
+          "Nils Odd is running his crossing upriver again, at his own rates.",
+          "A barge went by Bellmire without stopping. Nils Odd has the old landing."
         ],
         "while_alt": [
           "Half the river trade goes around Bellmire entirely; the Ford takes less each day.",
           "The trade crosses upriver now. The Ford's day is quieter and poorer.",
           "Nils takes the crossings Bellmire used to. The Ford's take falls daily.",
           "Half the river never reaches the Ford. The takings drop while the Dry Ferry runs.",
-          "Half the river traffic skips Bellmire altogether, and the Ford earns a little less every day."
+          "Half the river traffic skips Bellmire altogether, and the Ford earns a little less every day.",
+          "River trade goes round Bellmire to Nils Odd's landing; the Ford takes less each day.",
+          "Barges use the Dry Ferry instead of the Ford, and the Ford's takings dwindle."
         ],
         "cleared_alt": [
           "The Dry Ferry is sunk at its moorings. The river comes back to the Ford.",
           "Nils Odd's crossing is cut loose and let go downstream. The Ford is busy again.",
           "The upriver landing is broken up. Every crossing is Bellmire's.",
           "Nils Odd ferries nothing further. The river trade returns to the Ford.",
-          "The ferry sinks at its moorings. The barges remember the Ford."
+          "The ferry sinks at its moorings. The barges remember the Ford.",
+          "The Dry Ferry is sunk and Nils Odd with it. The river comes back to the Ford.",
+          "The old landing is cleared. Barges stop at Bellmire again."
         ]
       },
       {
@@ -6017,21 +6131,27 @@
           "The teams are coming in short an ox apiece. Bram Sallow holds the ox road.",
           "Bram Sallow is camped on the ox road, and his herd grows a head a day.",
           "A hauler walked in leading nothing. Bram Sallow has the ox road.",
-          "Bram Sallow stands on the ox road with a rope and a long memory for beasts."
+          "Bram Sallow stands on the ox road with a rope and a long memory for beasts.",
+          "Bram Sallow is on the ox road again, counting teams.",
+          "A team came in a beast short. Bram Sallow has the ox road."
         ],
         "while_alt": [
           "Hauling costs double; stone, timber and grain all arrive late and dear.",
           "Every load costs twice to move. Stone, timber and grain all come in late.",
           "Teams come in a beast short, so everything hauled is slower and dearer.",
           "The hauliers charge double to risk the ox road - and what they carry arrives late.",
-          "Every haul costs twice as much, and stone, timber and grain come in dear and late."
+          "Every haul costs twice as much, and stone, timber and grain come in dear and late.",
+          "Every team pays a beast at the camp; hauling costs double and stone, timber and grain come late and dear.",
+          "Teams lose an ox each on the ox road; hauling doubles in cost and the goods come late."
         ],
         "cleared_alt": [
           "The Ox Road Camp is cleared out. The teams come in whole.",
           "Bram Sallow's herd is given back. Hauling costs what it should.",
           "The ox road is safe for a team again. Stone, timber and grain arrive on time.",
           "Bram Sallow walks where he once rode. The teams pass whole and cheap.",
-          "The rope is cut. The ox road runs, and the teams come in whole."
+          "The rope is cut. The ox road runs, and the teams come in whole.",
+          "The Ox Road Camp is cleared and Bram Sallow's lot are marched out.",
+          "The teams come in whole again."
         ]
       }
     ],
@@ -6047,21 +6167,27 @@
           "The north field is standing up. The Bone Field is open.",
           "The dead are walking in from the north field, and there are more each night.",
           "The scar gave back its dead. They have chosen the north field.",
-          "The north field has begun to move. It is not the wind."
+          "The north field has begun to move. It is not the wind.",
+          "The dead are up in the north field again.",
+          "Something is walking the north field that was buried last year."
         ],
         "while_alt": [
           "The dead multiply nightly and gnaw at the outlying farms.",
           "More of them every night, and the outlying farms take the bites.",
           "The field breeds dead; the farms on the edge pay for it in the dark.",
           "Their number grows each night, and the far farms are chewed at.",
-          "The dead are more numerous every night, and the outlying farms are bitten for it."
+          "The dead are more numerous every night, and the outlying farms are bitten for it.",
+          "More dead rise each night and gnaw at the outlying farms.",
+          "The Bone Field fills nightly and the outlying farms are gnawed."
         ],
         "cleared_alt": [
           "The Bone Field is put down. The north field is only a field again.",
           "The last of them is laid flat. The north field grows crop, not corpses.",
           "The Bone Field is burned and turned. The farms sleep whole.",
           "Nothing stands in the north field but stubble.",
-          "The last of the dead is laid flat. The Bone Field grows rye again."
+          "The last of the dead is laid flat. The Bone Field grows rye again.",
+          "The Bone Field is laid down and quiet.",
+          "The north field is turned. It grows grain again."
         ]
       },
       {
@@ -6075,21 +6201,27 @@
           "The old quarry is full and moving. The Slime Warren is back.",
           "Something boiled up in the quarry floor overnight, and it is twice the size by morning.",
           "The quarry has gone soft underfoot. A warren is in it.",
-          "The old quarry is wobbling. Something in it has noticed the road."
+          "The old quarry is wobbling. Something in it has noticed the road.",
+          "The old quarry is moving. The slimes are back.",
+          "A wet shine is on the quarry wall. The Slime Warren is open."
         ],
         "while_alt": [
           "The quarry is lost, and the nest creeps toward the homes.",
           "No work in the quarry, and the nest edges nearer the houses each night.",
           "The quarry belongs to the nest, and the nest is coming downhill.",
           "The quarry is given up, and whatever is in it is heading for the doors.",
-          "The quarry is gone to the slimes, and the nest edges toward the houses."
+          "The quarry is gone to the slimes, and the nest edges toward the houses.",
+          "The quarry is lost to the slimes, and the nest spreads toward the houses.",
+          "The nest doubles nightly and creeps toward the houses; the quarry is shut."
         ],
         "cleared_alt": [
           "The Slime Warren is burned out. The quarry stops twitching.",
           "The quarry is scoured clean. Nothing in it moves on its own.",
           "The warren is boiled off. The quarry is stone again.",
           "The Slime Warren is finished. The quarry floor holds still.",
-          "The Warren is burned to a stain. The quarry stops quivering."
+          "The Warren is burned to a stain. The quarry stops quivering.",
+          "The Warren is burned out. The quarry is still.",
+          "The slimes are cleared from the old quarry."
         ]
       },
       {
@@ -6103,21 +6235,27 @@
           "The bell-tower is black with wings. The Roost is back.",
           "Something came up out of the scar and hung itself in the bell-tower.",
           "The bell will not ring for the things in it. Cave bats have the tower.",
-          "The bell-tower is full of wings. Every horse in town has gone wide-eyed."
+          "The bell-tower is full of wings. Every horse in town has gone wide-eyed.",
+          "The bell-tower is full of wings again.",
+          "The horses are screaming. The bats are back in the bell-tower."
         ],
         "while_alt": [
           "The wells need watching, and the beasts are restless while they hang there.",
           "Every well is guarded and skimmed; the horses will not settle while the tower hangs full.",
           "The wells are fouled faster than they are drawn, and no animal in town sleeps.",
           "Watchmen on the wells, and not a quiet beast in the stables.",
-          "The wells want a guard, and every beast in town is skittish while the roost stands."
+          "The wells want a guard, and every beast in town is skittish while the roost stands.",
+          "The wells need watching and the beasts are restless while the bats hang.",
+          "Bats foul the wells and the horses will not settle; watches are set on the water."
         ],
         "cleared_alt": [
           "The Roost is cleared. The bell-tower is quiet. Almost.",
           "The bell-tower is emptied out. The wells run clean and the horses stand easy.",
           "The wings are gone off the tower. The bell is rung to prove it.",
           "The Belltower Roost is cleared. The wells are drawn without a skimmer.",
-          "The tower is empty of wings and full of mess. Someone fetches a shovel."
+          "The tower is empty of wings and full of mess. Someone fetches a shovel.",
+          "The Roost is empty. The bell rings clean.",
+          "The bats are driven out of the bell-tower and the beasts settle."
         ]
       },
       {
@@ -6131,21 +6269,27 @@
           "Something is calling out of the sedge all night, and it is not a bird.",
           "The Sedge Mound is up, and the fen path is not worth walking.",
           "Bog frogs have piled into the sedge, and they are the wrong size for frogs.",
-          "The fen croaks all night, in a voice much larger than a frog's."
+          "The fen croaks all night, in a voice much larger than a frog's.",
+          "The fen is loud again. The frogs have mounded up in the sedge.",
+          "Something the size of a dog is croaking in the fen."
         ],
         "while_alt": [
           "The fen path is lost, and the fishers work the river or not at all.",
           "Nobody takes the fen path; the fishers crowd the river or stay ashore.",
           "The fen is given up. Fishing is river-only, and thinner for it.",
           "The path through the fen is closed. The catch comes off the river or nowhere.",
-          "The fen path is closed, and the fishers take the river or go without."
+          "The fen path is closed, and the fishers take the river or go without.",
+          "The fen path is gone to the frogs, and the fishers keep to the river or stay home.",
+          "No one crosses the fen; the fishers keep to the river, or stay home."
         ],
         "cleared_alt": [
           "The Sedge Mound is cleared. The fen is merely unpleasant again.",
           "The sedge is quiet. The fen path carries fishers.",
           "The mound is broken up. The fen is back to mud and midges.",
           "The Sedge Mound is finished. The fen path is walkable.",
-          "The Sedge Mound is stamped flat, and the fen goes back to being quietly damp."
+          "The Sedge Mound is stamped flat, and the fen goes back to being quietly damp.",
+          "The Sedge Mound is cleared and the fen is quiet.",
+          "The frogs are broken up. The fen path is walkable."
         ]
       },
       {
@@ -6159,21 +6303,27 @@
           "The south road's barn is wrapped to the rafters. Something took it in the night.",
           "There is silk across the south road, and a barn behind it that nobody will open.",
           "Cave spiders have the barn on the south road. It is white from the gate.",
-          "White threads line the south road, hung with last week's cargo."
+          "White threads line the south road, hung with last week's cargo.",
+          "The barn on the south road is white again. The spiders are back.",
+          "Silk hangs across the south road. The barn is taken."
         ],
         "while_alt": [
           "The south road is spun shut; nothing moves past the barn after dusk.",
           "The silk closes the south road at dusk - no cart, no rider, no pack.",
           "After dark the south road is webbed over, and nothing passes the barn.",
           "The barn seals the south road each night. Nothing gets by it.",
-          "The south road is webbed shut, and nothing passes the barn once the light goes."
+          "The south road is webbed shut, and nothing passes the barn once the light goes.",
+          "The south road is webbed shut; nothing passes the barn after dusk.",
+          "After dusk the south road is webbed over, and no traffic passes the barn."
         ],
         "cleared_alt": [
           "The Silk Barn burns. The south road is clear, and nothing is watching it.",
           "The barn is burned to the sill. The south road runs after dark.",
           "The silk is fired off the south road. The barn is only a ruin.",
           "The Silk Barn is cleared. Nothing hangs over the south road.",
-          "The barn is burned and the webs go up like a candle. The south road breathes."
+          "The barn is burned and the webs go up like a candle. The south road breathes.",
+          "The Silk Barn is burned out. The south road is open.",
+          "The webs are cut and the road is clear."
         ]
       },
       {
@@ -6187,21 +6337,27 @@
           "The root pits are moving. Scar rats are in them.",
           "Something the wrong size for a rat went into the root pits, and brought family.",
           "The Gnaw Pits are busy again, and the stores are showing it.",
-          "The root pits are chewed hollow, and the chewing is getting louder."
+          "The root pits are chewed hollow, and the chewing is getting louder.",
+          "The scar rats are back in the root pits.",
+          "Sacks were found chewed through this morning. The Gnaw Pits are open."
         ],
         "while_alt": [
           "Stores are gnawed through nightly; what the town keeps, it keeps losing.",
           "The stores lose a little every night. Nothing the town saves stays saved.",
           "Sacks are opened from below each night; the stores run down on their own.",
           "Whatever is put by is gnawed through by morning.",
-          "Every night the stores are chewed a little thinner, and the town cannot keep what it keeps."
+          "Every night the stores are chewed a little thinner, and the town cannot keep what it keeps.",
+          "Stores are chewed through every night; what the town keeps, it keeps losing.",
+          "Rats get into the stores each night and what the town holds shrinks."
         ],
         "cleared_alt": [
           "The Gnaw Pits are flooded out. The stores hold their weight overnight again.",
           "The root pits are drowned and dug over. The sacks stay shut.",
           "The Gnaw Pits are cleared. What the town stores, it keeps.",
           "The pits are emptied and limed. The stores stop shrinking.",
-          "The pits are drowned. Whatever swims out is clubbed, and the stores sleep safe."
+          "The pits are drowned. Whatever swims out is clubbed, and the stores sleep safe.",
+          "The pits are flooded out. The stores sleep whole.",
+          "The Gnaw Pits are cleared and the rats are gone."
         ]
       },
       {
@@ -6215,21 +6371,27 @@
           "The Drowned Pen has a tenant. It came up the ditch.",
           "There is something in the waterside pen that was not bought at market.",
           "The flooded ditch brought something up, and it likes the stock pen.",
-          "The stock pen by the water has gone quiet. Not empty - quiet."
+          "The stock pen by the water has gone quiet. Not empty - quiet.",
+          "A head of stock is gone from the pen by the water.",
+          "Something is back in the flooded ditch."
         ],
         "while_alt": [
           "Livestock go a head a night, and the herds will not drink near the water.",
           "A beast a night out of the pen, and nothing will take water at the ditch.",
           "The herds lose one a night and refuse the waterside entirely.",
           "Stock vanishes nightly from the pen; the rest will not drink there at all.",
-          "A head of stock vanishes every night, and the herds refuse the water's edge."
+          "A head of stock vanishes every night, and the herds refuse the water's edge.",
+          "A head of stock goes each night, and the herds will not drink near the water.",
+          "Stock vanish from the pen nightly, and the herds refuse the water."
         ],
         "cleared_alt": [
           "The Drowned Pen is cleared and the ditch dug out. The herds drink again.",
           "Whatever came up the ditch goes back down it in pieces. The pen is safe.",
           "The waterside pen is cleared. The stock drink where they always did.",
           "The Drowned Pen holds beasts and nothing else. The herds settle.",
-          "The pen is cleared and the ditch dug deep. The herds go to the water on their own."
+          "The pen is cleared and the ditch dug deep. The herds go to the water on their own.",
+          "The Drowned Pen is cleared and the ditch dug out. The herds drink.",
+          "The ditch is clean and the pen holds its stock."
         ]
       },
       {
@@ -6243,21 +6405,27 @@
           "The east coppice is lit and nobody lit it. The Candle Wood is back.",
           "There are lamps among the trees that move when you look away.",
           "Scar wisps are in the coppice, walking the cut paths in file.",
-          "Soft lights pace the coppice at dusk, in no hurry and in no direction."
+          "Soft lights pace the coppice at dusk, in no hurry and in no direction.",
+          "Lights are walking the paths of the coppice again.",
+          "The woodcutters came home before noon. The Candle Wood is lit."
         ],
         "while_alt": [
           "The woodcutters refuse the coppice; firewood and charcoal run short in town.",
           "No cutter goes east. Firewood thins and charcoal with it.",
           "The coppice is left standing - and the wood piles in town go down.",
           "The cutters will not work the lights. Fuel runs short on both counts.",
-          "The cutters will not enter the coppice, so firewood and charcoal grow scarce in town."
+          "The cutters will not enter the coppice, so firewood and charcoal grow scarce in town.",
+          "The cutters will not enter the coppice; firewood and charcoal run short.",
+          "No one cuts in the Candle Wood, and firewood and charcoal run out."
         ],
         "cleared_alt": [
           "The Candle Wood goes dark. The cutters go back in by daylight, then by dusk.",
           "The lights are put out. The coppice is cut again.",
           "The Candle Wood is cleared. Firewood and charcoal come down the east road.",
           "Nothing walks the coppice paths. The cutters work it to dusk.",
-          "The lights gutter, one by one. The coppice is only dark, which is ordinary."
+          "The lights gutter, one by one. The coppice is only dark, which is ordinary.",
+          "The lights go out in the Candle Wood. The cutters go back in.",
+          "The coppice is dark and plain, and the cutters work it."
         ]
       },
       {
@@ -6271,21 +6439,27 @@
           "The kiln is lit and nobody lit it. Something is living in the heat.",
           "There are coals in the kiln mouth that crawl. Fire beetles.",
           "The Kiln Nest is back - the kiln glows all night and fires nothing.",
-          "The kiln mouth glows at night with nothing lit inside it."
+          "The kiln mouth glows at night with nothing lit inside it.",
+          "The kiln mouth is glowing and nobody lit it.",
+          "Fire beetles are back in the brick kiln."
         ],
         "while_alt": [
           "The kiln cannot be fired; brick, tile and pottery all stop at once.",
           "No firing while they nest in it - brick, tile and pot all stop together.",
           "The kiln is theirs. Brickwork, roofing and crockery all halt.",
           "Nothing can be fired. Brick, tile and pottery dry out unfinished.",
-          "The kiln will not fire, so brick, tile and pottery all stop together."
+          "The kiln will not fire, so brick, tile and pottery all stop together.",
+          "The kiln cannot be fired; brick, tile and pottery all stop.",
+          "With the beetles in the kiln no firing is possible, and the clay work stops."
         ],
         "cleared_alt": [
           "The Kiln Nest is smoked out. The kiln fires clean, and the tiles come again.",
           "The beetles are driven out of the brickwork. The kiln takes a proper load.",
           "The Kiln Nest is cleared. Brick, tile and pot all move again.",
           "The kiln is swept and lit by hand. The tiles stack up.",
-          "The beetles are raked out. The kiln is lit, and nothing answers."
+          "The beetles are raked out. The kiln is lit, and nothing answers.",
+          "The beetles are smoked out. The kiln fires.",
+          "The Kiln Nest is cleared and the brickyard works."
         ]
       },
       {
@@ -6299,21 +6473,27 @@
           "Gibbet Hill is empty of ropes and full of walking. They are on the north road.",
           "The gibbets are swinging light tonight. Their tenants are on the road.",
           "The hanged have come down off the hill, and they remember the way to town.",
-          "The gibbets stand empty and the road is crowded."
+          "The gibbets stand empty and the road is crowded.",
+          "The hanged are up on Gibbet Hill again.",
+          "Something is walking the north road at dusk, and it knows the road."
         ],
         "while_alt": [
           "The north road belongs to the dead after dark; nothing travels it and the post stops.",
           "After dusk the north road is theirs. No traveller, no post.",
           "Nothing goes up the north road at night. The letters pile up unsent.",
           "The dead hold the north road from dusk. The post does not run.",
-          "After dark the north road is the dead's; no traveller, no post."
+          "After dark the north road is the dead's; no traveller, no post.",
+          "After dark the north road is the dead's; nothing travels it and the post stops.",
+          "After dusk the dead keep the north road, and the post is held at the gate."
         ],
         "cleared_alt": [
           "Gibbet Hill is put down and the ground turned. The road is only a road.",
           "The hanged are laid down for good. The north road carries the post.",
           "Gibbet Hill is cleared and limed. The road runs after dark.",
           "They go back under the hill. The north road is travelled again.",
-          "The hanged are put back down. Gibbet Hill is a hill with some rope on it."
+          "The hanged are put back down. Gibbet Hill is a hill with some rope on it.",
+          "Gibbet Hill is turned over and quiet. The road is only a road.",
+          "The hill is put down. The post runs again."
         ]
       },
       {
@@ -6327,21 +6507,27 @@
           "The granary roof is humming. Something built in it overnight.",
           "Scar wasps have hung a nest in the granary, and it is bigger than a man.",
           "Nobody will go into the granary. There is a nest in the rafters the size of a cart.",
-          "A drone from the granary roof, low and constant. It does not stop for supper."
+          "A drone from the granary roof, low and constant. It does not stop for supper.",
+          "There is a hum in the granary roof that nobody can place.",
+          "The wasps are back in the granary."
         ],
         "while_alt": [
           "The granary cannot be worked; stored grain spoils where it stands.",
           "The granary stands shut - the grain in it turns untouched.",
           "No hand goes into the granary. The stored grain goes off on the floor.",
           "The grain cannot be turned or drawn. It spoils where it lies.",
-          "No one can work the granary, and the stored grain spoils where it lies."
+          "No one can work the granary, and the stored grain spoils where it lies.",
+          "The granary cannot be worked, and the stored grain spoils where it lies.",
+          "No one can enter the granary, and the grain goes bad in it."
         ],
         "cleared_alt": [
           "The Granary Swarm is burned out. The grain is turned, and most of it is saved.",
           "The nest comes down in smoke. The granary is worked again.",
           "The Granary Swarm is cleared. The grain is turned before it goes.",
           "The rafters are empty. The granary opens and most of the grain is good.",
-          "The roof is burned off the swarm. Wasps fall like cinders, and the grain is hauled out."
+          "The roof is burned off the swarm. Wasps fall like cinders, and the grain is hauled out.",
+          "The nest is burned out. The grain is turned, most of it saved.",
+          "The Swarm is cleared and the granary is worked again."
         ]
       },
       {
@@ -6355,21 +6541,27 @@
           "The mason's yard has visitors that chew stone. Something came up for it.",
           "There are footprints in the mason's yard a hand deep. Cave trolls.",
           "Something is eating the mortar in the stone yard, and it brought a friend.",
-          "Heavy footfalls in the mason's yard, and the sound of a block being chewed."
+          "Heavy footfalls in the mason's yard, and the sound of a block being chewed.",
+          "Two big shapes are in the mason's yard.",
+          "The trolls are back in the stone yard, eating mortar."
         ],
         "while_alt": [
           "Cut stone and finished work are wrecked nightly; every build in town slows.",
           "Dressed stone is smashed each night; everything being built slows to a crawl.",
           "The yard's work is ruined by morning. Every build in town falls behind.",
           "Finished stone is broken nightly. Nothing in town rises on time.",
-          "Every night the mason's work is smashed, and every build in town slows down."
+          "Every night the mason's work is smashed, and every build in town slows down.",
+          "Cut stone and finished work are wrecked nightly; every build slows.",
+          "The masons cannot work; stone is broken each night and every build slows."
         ],
         "cleared_alt": [
           "The Stone Yard is retaken. The masons find their tools, and a troll's tooth in a block.",
           "The yard is cleared. The dressed stone survives the night.",
           "The Stone Yard is the masons' again. The builds pick up.",
           "Both of them are put down in the yard. The stone stays cut.",
-          "The trolls are driven out of the yard. Hammers ring over rubble."
+          "The trolls are driven out of the yard. Hammers ring over rubble.",
+          "The Stone Yard is retaken. The masons count their tools.",
+          "The trolls are driven out of the yard."
         ]
       },
       {
@@ -6383,21 +6575,27 @@
           "The thornwake has a den in it, and the den has grown.",
           "There are hounds in the thornwake that no one bred.",
           "The Thornwake is denned again, and the pack is bigger this time.",
-          "Tracks in the thornwake, with too many toes and a pack's spacing."
+          "Tracks in the thornwake, with too many toes and a pack's spacing.",
+          "Something is back in the thornwake, and it hunts in a pack.",
+          "A flock is gone. The hounds are in the thornwake."
         ],
         "while_alt": [
           "Flocks and herds are taken nightly; the pens empty and the drovers will not go out.",
           "A loss every night out of the pens, and no drover will walk the road.",
           "The flocks thin by the night. The pens stand half-empty and the drovers stay in.",
           "Herds and flocks are taken each night; nobody will drive them anywhere.",
-          "The pack takes stock every night; the pens empty and the drovers stay in."
+          "The pack takes stock every night; the pens empty and the drovers stay in.",
+          "Flocks and herds are taken each night; the pens empty and the drovers stay in.",
+          "The pens empty each night and the drovers stay in."
         ],
         "cleared_alt": [
           "The Thornwake is cleared. The flocks sleep out again.",
           "The den is dug out and burned. The drovers take the road.",
           "The Thornwake is emptied. The pens fill and stay full.",
           "The pack is put down in the thorns. The flocks are left alone.",
-          "The thornwake is cleared. The drovers go out in daylight, then at dusk."
+          "The thornwake is cleared. The drovers go out in daylight, then at dusk.",
+          "The Thornwake is cleared. The flocks may sleep out.",
+          "The hounds are put down. The drovers go out."
         ]
       },
       {
@@ -6411,21 +6609,27 @@
           "The hollow is crawling. Nobody will put a hand in the water.",
           "Something long and wet is in the reed hollow, and there are many of them.",
           "Bog leeches have filled the reed hollow, and they are arm-length.",
-          "The reeds are standing wrong. Something wet moves in them and does not rustle."
+          "The reeds are standing wrong. Something wet moves in them and does not rustle.",
+          "The reed hollow is crawling again.",
+          "A cutter came out of the Hollow with his boots black."
         ],
         "while_alt": [
           "Nobody will cut reed or draw water there; thatch and water both come from further off.",
           "No reed cut, no water drawn. Both are hauled from further out.",
           "The hollow is abandoned - thatch and water both come the long way.",
           "Reed and water both come from elsewhere now, and cost the walk.",
-          "No one cuts reed or draws water there, so thatch and water must come from further off."
+          "No one cuts reed or draws water there, so thatch and water must come from further off.",
+          "Nobody will cut reed or draw water there; thatch and water come from further off.",
+          "The Hollow is shunned, and the reed and the water must come from further off."
         ],
         "cleared_alt": [
           "The Reed Hollow is drained and burned. The reed cutters go back down.",
           "The hollow is cleared. Reed and water come from close to hand again.",
           "The Reed Hollow is emptied out. The thatchers work it again.",
           "The leeches are burned off. The hollow gives reed and water.",
-          "The hollow is drained and burned. The reeds grow back thin and ordinary."
+          "The hollow is drained and burned. The reeds grow back thin and ordinary.",
+          "The Reed Hollow is drained and burned. The cutters go back down.",
+          "The leeches are cleared and the reed is cut again."
         ]
       },
       {
@@ -6439,21 +6643,27 @@
           "Potter's Field is turning itself over. The nameless are up.",
           "Something is coming out of the paupers' ground, and it has no name to call.",
           "The graves in Potter's Field are open and empty.",
-          "The graves of nobody-in-particular have opened. The nobody-in-particulars are coming."
+          "The graves of nobody-in-particular have opened. The nobody-in-particulars are coming.",
+          "The graves in Potter's Field are open again.",
+          "Dirt is turned from the inside in the nameless plots."
         ],
         "while_alt": [
           "The dead wander in from the south each night; the gate shuts an hour earlier.",
           "They come up from the south after dark, so the south gate closes early.",
           "Each night brings them in off the paupers' ground; the gate loses an hour.",
           "The south gate shuts an hour sooner, and still they arrive.",
-          "The dead walk in from the south every night, so the gate now shuts an hour sooner."
+          "The dead walk in from the south every night, so the gate now shuts an hour sooner.",
+          "The dead wander in from the south nightly, and the gate shuts an hour early.",
+          "The south gate shuts an hour early while the dead walk in nightly."
         ],
         "cleared_alt": [
           "Potter's Field is put down and dug over. The south gate keeps its hours.",
           "The nameless are laid back down. The gate stays open its full hour.",
           "Potter's Field is cleared and turned. The south road is quiet after dark.",
           "They go back in the ground. The south gate keeps proper time.",
-          "The field is dug over and sown with salt. The south gate keeps its full hours."
+          "The field is dug over and sown with salt. The south gate keeps its full hours.",
+          "Potter's Field is dug over and quiet. The south gate keeps its hours.",
+          "The nameless graves are shut. The gate keeps its hours again."
         ]
       },
       {
@@ -6467,21 +6677,27 @@
           "There is a cloud over the rookery barn, and it is made of wings.",
           "The rookery barn has gone grey with moths out of the burying ground.",
           "Grave moths are in the rookery barn, and the air above it moves.",
-          "A grey cloud hangs over the rookery barn, and it is not weather."
+          "A grey cloud hangs over the rookery barn, and it is not weather.",
+          "The moths are visible from the wall again.",
+          "A cloud hangs over the rookery barn."
         ],
         "while_alt": [
           "Stored cloth, wool and grain sacks are eaten through; the market loses a stall a week.",
           "Cloth, wool and sacking all go to holes. A stall a week closes.",
           "Everything stored in cloth is eaten. The market thins by a stall a week.",
           "Wool, cloth and sacks are chewed open; traders give up a stall at a time.",
-          "Cloth, wool and grain sacks are eaten through, and the market loses a stall a week."
+          "Cloth, wool and grain sacks are eaten through, and the market loses a stall a week.",
+          "Stored cloth, wool and sacks are eaten through; the market loses a stall a week.",
+          "The moths eat what the market holds, and stalls close, one a week."
         ],
         "cleared_alt": [
           "The Rookery Barn is smoked out. What is stored stays stored.",
           "The moths are burned out of the barn. The stalls stay open.",
           "The Rookery Barn is cleared. Cloth and sacking keep their weave.",
           "The cloud is gone off the barn. Nothing stored is eaten.",
-          "The barn is smoked and swept. The moths come out as ash."
+          "The barn is smoked and swept. The moths come out as ash.",
+          "The barn is smoked out and what is stored stays stored.",
+          "The Rookery Barn is clear of moths."
         ]
       },
       {
@@ -6495,21 +6711,27 @@
           "The Split Stone is breathing out legs. They keep coming.",
           "There is a crack in the quarry floor with something coming out of it in file.",
           "Cave centipedes are climbing up through the Split Stone, and none of them is small.",
-          "The Split Stone is split a little wider every night, and something long keeps coming out of it."
+          "The Split Stone is split a little wider every night, and something long keeps coming out of it.",
+          "Something long is coming up through the Split Stone again.",
+          "The quarry crew came home early. The Split Stone is open."
         ],
         "while_alt": [
           "The quarry stands idle; building work in town stops where the stone runs out.",
           "No quarrying while they come up. Building stops when the last stone is laid.",
           "The quarry is abandoned - the builds run until the stone does, and then stop.",
           "Nothing is cut at the quarry. Every build halts at the end of the stock.",
-          "The quarry sits idle, and building in town stops when the stone runs out."
+          "The quarry sits idle, and building in town stops when the stone runs out.",
+          "The quarry stands idle; building in town stops where the stone runs out.",
+          "No stone is cut; the builders use up what they have and stop."
         ],
         "cleared_alt": [
           "The Split Stone is sealed and the nest burned. The quarry rings again.",
           "The crack is filled and fired. The quarry is cut again.",
           "The Split Stone is cleared. The stone comes up and the builds go on.",
           "The nest is burned to the floor. The quarry works.",
-          "The crack is sealed with burning pitch. The quarry rings again."
+          "The crack is sealed with burning pitch. The quarry rings again.",
+          "The Split Stone is sealed. The quarry rings.",
+          "The centipedes are burned out and the quarry opens."
         ]
       },
       {
@@ -6523,21 +6745,27 @@
           "The lower fields are turned over and nobody ploughed them. Mire boars.",
           "There are boars in the lower fields the size of ponies, and they are not leaving.",
           "The Hog Mire is up in the lower fields, and they have no fear left.",
-          "The boars in the mire have stopped running from people. They have started running at them."
+          "The boars in the mire have stopped running from people. They have started running at them.",
+          "The mire boars are in the lower fields again.",
+          "The ground is torn up in the low fields."
         ],
         "while_alt": [
           "The lower fields are rooted up; this season's crop is halved where they walk.",
           "Where they root, the crop is lost - half the lower harvest goes with them.",
           "The lower fields are ploughed by snout. Half that crop will not come in.",
           "They root the lower fields nightly; the season's yield there is cut in half.",
-          "The lower fields are rooted up; this season's crop is halved wherever they roam."
+          "The lower fields are rooted up; this season's crop is halved wherever they roam.",
+          "The lower fields are torn up; the season's crop is halved wherever they walk.",
+          "Boars root the lower fields and the crop is half what it should be."
         ],
         "cleared_alt": [
           "The Hog Mire is cleared, and the town eats well for a week.",
           "The boars are put down in the lower fields. What is left of the crop stands.",
           "The Hog Mire is finished. There is pork at every table and crop in the rest.",
           "The lower fields are the town's again, and dinner is settled.",
-          "The mire is cleared of tusks. Bellmire feasts and mends fences."
+          "The mire is cleared of tusks. Bellmire feasts and mends fences.",
+          "The Hog Mire is cleared, and the town eats pork.",
+          "The boars are driven off. The fields are sound again."
         ]
       },
       {
@@ -6551,21 +6779,27 @@
           "Something is assembling itself in the chalk pit out of what it finds there.",
           "The chalk pit is crawling, and the crawlers are not whole creatures.",
           "Bone crawlers have taken the chalk pit, and they are built out of the pit's leavings.",
-          "The chalk pit is rattling. It is full of things that should not be able to climb."
+          "The chalk pit is rattling. It is full of things that should not be able to climb.",
+          "Something white is crawling in the chalk pit.",
+          "The chalk pit is moving again."
         ],
         "while_alt": [
           "Lime and chalk stop coming up; mortar runs out and the masons down tools.",
           "No chalk, no lime, no mortar. The masons stop where they stand.",
           "The pit yields nothing. The mortar runs out and the trowels go down.",
           "Chalk and lime both stop. The masons have nothing to set with.",
-          "No chalk or lime comes up, the mortar runs out, and the masons put down their tools."
+          "No chalk or lime comes up, the mortar runs out, and the masons put down their tools.",
+          "Lime and chalk stop coming up; the mortar runs out and the masons down tools.",
+          "No chalk reaches the masons; the mortar runs out and work stops."
         ],
         "cleared_alt": [
           "The Chalk Pit is cleared to the floor. The masons take up tools again.",
           "The crawlers are broken up and burned. The chalk comes up.",
           "The Chalk Pit is emptied. Lime runs and the mortar is mixed.",
           "The pit is clean to the bottom. The masons work.",
-          "The pit is cleared and the bones are carted off. The masons can work again."
+          "The pit is cleared and the bones are carted off. The masons can work again.",
+          "The Chalk Pit is cleared to the floor.",
+          "The crawlers are put down and the pit gives chalk again."
         ]
       }
     ],
@@ -6601,7 +6835,10 @@
         "The lord that climbed out of the scar has grown to fit the town it hunts, and it is taking its time.",
         "A lord walks the open fields in daylight and does not hurry. The farm dogs go quiet.",
         "Something from below stands on the ridge and counts Bellmire's roofs.",
-        "The scar's lord is above ground, and has the look of a thing that was promised a town."
+        "The scar's lord is above ground, and has the look of a thing that was promised a town.",
+        "The Scarred Lord is walking the open country again, bigger than the last time.",
+        "A farmhand ran in from the fields to say a lord is out and walking.",
+        "The scar has let a lord out, and it has grown to the size of the town it hunts."
       ],
       "while_alt": [
         "A holding goes dark each night it roams, and the dark follows it home.",
@@ -6629,7 +6866,10 @@
         "It razes a holding at every dawn, and the shadows it leaves do not lift.",
         "The outlying farms fall one by one, a day apiece, each ruin left darker than the last.",
         "Every day it roams, one more steading is burned flat and haunted for it.",
-        "A farm a day is razed, and the dark follows the lord home and lingers on the wreck."
+        "A farm a day is razed, and the dark follows the lord home and lingers on the wreck.",
+        "It razes one outlying farm for every day it roams, and leaves the dark on the ruin.",
+        "Each day it walks, another outlying holding is razed and the dark stays on the ground.",
+        "One farm a day goes down while it roams, and the dark stays where it stood."
       ],
       "cleared_alt": [
         "The wandering lord goes down in the open field, in daylight, in front of everyone.",
@@ -6657,12 +6897,16 @@
         "It goes down at last, and Bellmire counts the farms it will have to rebuild.",
         "The lord's long walk ends in a ditch. The town cheers, then goes to look at the damage.",
         "The lord is brought down in the open. The delvers bring the head; the farmers bring the bill.",
-        "The country is its own again. The lord lies where it fell, and the crows are already deciding."
+        "The country is its own again. The lord lies where it fell, and the crows are already deciding.",
+        "The wandering lord is down in the open field, and Bellmire hauls the body home.",
+        "The Scarred Lord falls in the open country. The carts go out to fetch it.",
+        "The lord is dead in the field, and the dark lifts off the ruins."
       ]
     },
     "_note_variants_c24": "Widened C-cycle 24: wandering_boss appears_alt / while_alt / cleared_alt 6 -> 14 each. There is still only one wandering boss, so these three are the lines that repeat most. Every while_alt states the same implementable cost as the canonical while - one outlying holding razed per day it roams, and the dark it drags persists on the ruin. name, appears, while, cleared and note are UNCHANGED. Additive; dead until wired.",
     "_note_variants_c29": "Widened C-cycle 29: every bandit camp (20) and every monster camp (19) now carries appears_alt / while_alt / cleared_alt - 4 lines each, the same key shape wandering_boss already uses. Each camp previously had exactly ONE appears, while and cleared line, so the second time the same camp spawned on a stream it read word for word. Each while_alt states the SAME implementable cost as that camp's canonical `while` - reworded, never widened: no alt adds an effect the canonical line does not already state, so the desktop worker can implement the cost once per camp and pick any line to show. name, leader, of, appears, while and cleared are UNCHANGED on every camp. No new camp, no new named leader. Additive; dead until wired.",
-    "_note_variants_c47": "Widened C-cycle 47: wandering_boss appears_alt / while_alt / cleared_alt 20 -> 26 each, and every bandit camp (20) and monster camp (19) gains one more appears_alt, while_alt and cleared_alt (4 -> 5). Every new while_alt restates the SAME implementable cost as that camp's canonical while - reworded, never widened; the wandering boss's still razes one outlying holding per day and leaves the dark on the ruin. name, leader, of, appears, while, cleared and note are UNCHANGED. Additive; dead until wired."
+    "_note_variants_c47": "Widened C-cycle 47: wandering_boss appears_alt / while_alt / cleared_alt 20 -> 26 each, and every bandit camp (20) and monster camp (19) gains one more appears_alt, while_alt and cleared_alt (4 -> 5). Every new while_alt restates the SAME implementable cost as that camp's canonical while - reworded, never widened; the wandering boss's still razes one outlying holding per day and leaves the dark on the ruin. name, leader, of, appears, while, cleared and note are UNCHANGED. Additive; dead until wired.",
+    "_note_variants_c64": "C-64: +2 appears_alt, +2 while_alt, +2 cleared_alt on every bandit camp (20) and monster camp (19), and +3 each on wandering_boss (243 lines). Every new while_alt restates the SAME implementable cost as that camp's canonical while - reworded, never widened. name, leader, of, appears, while, cleared and note UNCHANGED. Additive; dead until wired."
   },
   "growth_tiers": {
     "_note": "Town growth stages (D31/D32) - the town levels far too fast, so this is a long, earned climb. For each: the stage name, the crier's line on reaching it, and what a viewer should SEE appear. Complements town_levels_for_the_desktop (coarser, 7 levels). Dead until wired.",

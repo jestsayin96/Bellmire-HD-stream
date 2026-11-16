@@ -110,7 +110,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         return _reply(user_id, display, login, "%s is %s." % [h["name"], away[user_id]])
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
-        "hero":     out = _needs(user_id, func(): return roster.describe(user_id))
+        "hero":     out = _needs(user_id, func(): return roster.describe(user_id) + _hub_tail())
         "inventory", "inv", "bag", "items":
                     out = _needs(user_id, func(): return inventory(user_id))
         "delve":    out = _delve(user_id)
@@ -142,6 +142,14 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         "patrons", "benefactors":
                     out = _patrons()
         "help":     out = help_line(arg)
+        "hub", "site", "guildhall":
+                    out = _hub()
+        "satchel", "sell", "prices":
+                    out = _satchel_line()
+        "festival", "feast":
+                    out = _festival_line()
+        "bestiary", "beasts", "monsters":
+                    out = _bestiary_line()
         "look":     out = _needs(user_id, func(): return _spot(user_id, "look", 0.0, ""))
         "testbits", "testsub", "testpoints":
                     # L17 test-only: the local chat box (Mr. E's keyboard) fakes a cheer / sub / redeem.
@@ -298,6 +306,36 @@ func _patrons() -> String:
         bits.append("%d. %s" % [i, row["name"]])
     return "Bellmire thanks:  " + "   ".join(bits)
 
+## ---- L68: what the game has become. The hub is the one place a viewer can read
+## the whole of it, so every one of these ends by pointing there. The URL lives in
+## data/commands.json ("hub_url") so chat, !help and the hub's Commands tab cannot
+## disagree about it.
+static func hub_url() -> String:
+    return String(commands().get("hub_url", ""))
+
+## a short pointer onto the end of an answer, or nothing if no URL is set
+static func _hub_tail() -> String:
+    var u := hub_url()
+    return "" if u == "" else "  |  Full sheet: " + u
+
+func _hub() -> String:
+    var u := hub_url()
+    if u == "":
+        return "The page is not up yet."
+    return "Bellmire's own page: %s - your hero's full sheet, the Chronicle of every day, the Satchel, crests, the Hall of the Fallen, the Bestiary and the Night Watch. Search it by name." % u
+
+## D57: the counter pays SELL_BACK (0.4) of shop cost, per item. Said in words here so
+## chat and the hub quote the same number; the rows themselves are the hub's.
+func _satchel_line() -> String:
+    return "The counter pays two fifths of shop cost for anything you own and are not wearing." + _hub_tail()
+
+## D63: a festival is an event with a reason. A paid one is named for whoever paid.
+func _festival_line() -> String:
+    return "A festival fills the market square - music, stalls, a crowd. A caravan is likelier while it runs. The town levels, or a viewer pays and it carries their name." + _hub_tail()
+
+func _bestiary_line() -> String:
+    return "What haunts the dark, depth by depth: each beast's size, its habits in a fight, and the eight lords that hold the deep." + _hub_tail()
+
 func _board(kind: String) -> String:
     var rows := roster.leaderboard(kind, 5)
     if rows.is_empty():
@@ -364,7 +402,8 @@ static func help_line(arg := "") -> String:
     var bits: Array = []
     for k in commands().get("order", cs.keys()):
         bits.append("!" + String(k))
-    return "Commands: %s  |  !help <command> for more." % " ".join(bits)
+    var tail := hub_url()
+    return "Commands: %s  |  !help <command> for more.%s" % [" ".join(bits), "" if tail == "" else "  All of it: " + tail]
 
 ## the nearest command to a typo (edit distance 2 or less), or ""
 ## another app's command (data/commands.json "foreign"): one of theirs, one of their

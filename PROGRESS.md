@@ -6812,3 +6812,9 @@ and PROGRESS.md are touched.
 - GATES (run 2, after both edits): parse 0 SCRIPT ERROR / Parse Error; OFFFLOOR 0 of 1931; TWITCH_PARSE OK; TOWNWALK in_solid 0/16673 PASS; _delve_test ran to T150s, 0 SCRIPT ERROR. No soak (not asked for).
 - NO LIVE TWITCH TEST THIS SLOT: nothing in D41 or the queue fix needs one (the errand path is gated by calling town._on_delve the way twitch_eventsub.gd does). 0 bits, nothing redeemed, nothing posted.
 - Files: scripts/boss_bar.gd, scripts/town.gd, tools/_d41_queue.gd, PROGRESS.md, renders/cycles/d41/*. Not ticking D41 - the supervisor does.
+
+## C-70 (2026-11-16) - standing backlog item 2: epitaphs, descend, cleared, barks (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-69 ticked); told it to name the next-stalest backlog item inside its four files. Item 1 was freshest (C-69). Item 2 was last touched in C-65, before the Phase 2 words (C-66), miniboss feed (C-67) and bosses/potions (C-68), so it was stalest, and these lines repeat most on stream. Took it.
+- data/lore_lines.json: descend +39 (now 299), cleared +38 (299), epitaphs +60 (477), barks +68 (enter 12, lord 12, trap 12, hurt 11, drink 9, misfire 12). 205 lines, plain register, none duplicates any string already in the file. Descend lines starting '%s %s' keep the hero + verb pair; 'Floor %d' keeps the floor stood on only, never a total. No dungeon floor count anywhere. New `_note_c70` records it.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, new lines appended at array ends only); the file's one stray CR (before phase2_words_alt) preserved byte for byte; LF kept.
+- CODE WIRING: none new. Existing pickers for descend / cleared / epitaphs / barks draw from the wider pools. Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.

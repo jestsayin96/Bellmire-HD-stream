@@ -6349,3 +6349,22 @@ checked BY PROCESS, not by the file, eighteen times across twenty minutes:
   tools/_commands_doc.gd as the no-op confirmation above.
 - NEXT: those gates the moment the lock is free, then L56. L68, L69 and L70 are all written and none
   is ticked.
+
+## S-cycle addendum 2026-11-16 10:05 CT (supervisor) - the chat bot's B4 landed mid-run
+- The 09:45 chat bot slot pushed WHILE I was writing the plan (chatbot aa51b00, cycle B4). My first
+  TAKE THIS NEXT draft said nothing had reached its branch; that was wrong and is CORRECTED, not
+  left standing. Merged to main; PROGRESS conflicted again at the same append point and BOTH SIDES
+  WERE KEPT, markers only stripped.
+- B4 closed the docs/COMMANDS.md ruling in the same slot it was given: 26 commands, one added row for
+  !catchup, 289 bytes, nothing else in the file moved. The generator needs Godot and the lock was
+  held, so the lane EMULATED tools/_commands_doc.gd in python and PROVED the emulation first - ran it
+  over the data with `catchup` removed and got the committed doc back byte-identical at all 5188
+  bytes before writing the new file. Its own instruction to the next lane holding the lock stands:
+  the generator should be a no-op, and if it is not, the generator's bytes win.
+- L70 HALF DELIVERED recorded on the item itself, so the engine remainder is inherited and not
+  rebuilt. L69 is the same shape. Neither is ticked.
+- LOCK, CORRECTED BY THE BOT'S OWN POLLING AND NOW A RULE: I read no Godot alive at 09:59 and left
+  the 09:31 claim standing on its named window. The bot polled the process eighteen times across
+  twenty minutes - alive 09:31:59, dead 09:53-09:58, a ~20 s process at 09:58:30, dead 09:59-10:01,
+  ALIVE on all three checks at 10:02 - had the clear line composed and did NOT write it because the
+  last check came back alive. ONE DEAD POLL IS NOT A RELEASED LOCK. That is in the plan now.

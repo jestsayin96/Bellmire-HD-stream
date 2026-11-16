@@ -6094,3 +6094,53 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
 - GATES: parse 0 errors; _offfloor OFFFLOOR 0 of 1752, MON_INPROP 0 of 208; _twitch_parse TWITCH_PARSE OK;
   _townwalk in_solid 5/15840 (0.032%) raid 0 PASS, stuck_on_route 0; _delve_test 0 SCRIPT ERROR (floor 2 at T150s).
 - NEXT: D91 stages 2-4.
+
+## B1 - L68: BellmireBro knows what the game has become (chat bot, 2026-11-16 ~05:45-06:10 CT)
+OWNER NOTE: L68 was "Owner: LAPTOP CODE" and the jestai laptop was retired on 15 Nov, so this item had an
+owner on paper and nobody to do it. This lane (worktree bellmire-bot, branch `chatbot`) is that owner now.
+Two files touched and no others: scripts/chatcmd.gd and data/commands.json.
+- L68.1 THE HUB EXISTS NOW AS FAR AS CHAT IS CONCERNED. !hub (also !site, !guildhall) answers with the live
+  URL and one line on what is there. The URL is NOT in the code: it is `hub_url` in data/commands.json, so
+  chat, !help and the hub's own Commands tab (generated from the same file by tools/_commands_doc.gd) cannot
+  disagree about it. ChatCmd.hub_url() reads it; an empty value degrades to "The page is not up yet."
+  - !hero now ends "| Full sheet: <url>" - a viewer who asks about their hero learns the rest is a click away.
+  - !help / !commands end "All of it: <url>".
+- L68.2 WHAT SHIPPED IS ANSWERABLE. Three new commands, each ending with the same hub pointer:
+  - !satchel (also !sell, !prices): the counter pays TWO FIFTHS of shop cost for anything owned and not worn.
+    That is snapshot_pub.gd SELL_BACK = 0.4 and leaderboard_panel.gd Satchel.SELL_BACK = 0.4 said in words -
+    no second opinion invented, so chat and the hub quote one number.
+  - !festival (also !feast): a festival gathers the town in the market square, a caravan is likelier while it
+    runs, the town growing a level calls one, and a paid festival is named for whoever paid (town.gd D63).
+  - !bestiary (also !beasts, !monsters): size, habits in a fight, where each beast is at home, and the eight
+    lords. Depth by depth - NO floor count stated anywhere.
+  - The character sheet is covered by !hero's pointer rather than a fourth command: the sheet IS the hub page.
+- L68.3 THE DRIFT TEST. IT ALREADY EXISTED and nobody had noticed: tools/_l14_test.gd reads ChatCmd's own
+  `match verb:` block out of scripts/chatcmd.gd with a RegEx and checks BOTH directions - a verb the code
+  answers with no entry in the data, and an entry naming a verb the code does not answer. So L68.3's
+  deliverable did not need writing, it needed PROVING, and the proof is that it bites:
+    clean                           -> missing [] / unanswered []
+    "hub" entry deleted, code kept  -> missing ["hub","site","guildhall"]
+    code arm deleted, entry kept    -> unanswered ["hub"]
+  Both failure directions reproduced. No new test file was written and tools/ was not touched: a new one would
+  have duplicated a working test in a directory this lane does not own.
+- Every PRE-EXISTING key in data/commands.json is byte-identical; the four new entries and four `order` slots
+  are purely additive. `order` and `commands` still name the same set. No command or alias collides with the
+  `foreign` block (fightoverlay's words and its v- prefix), checked exact-and-prefix as _l14_test does.
+- THE CONTRACT IS UNTOUCHED: twitch_reply(user_login, text) still emits plain, with no @name and no rate
+  limiting, and twitch_eventsub.gd still owns the queue, the prefix and the Send Chat Message call.
+- GATES (all on this worktree, 2026-11-16 06:00-06:06 CT): parse 0 GDScript SCRIPT ERROR / 0 GDScript Parse
+  Error; tools/_commands_doc.gd "COMMANDS_DOC wrote 25 commands" and docs/COMMANDS.md regenerated from the data;
+  tools/_l14_test.gd L14_TEST OK; tools/_twitch_parse.gd TWITCH_PARSE OK; data/commands.json re-validated with
+  python json.load after every edit. DRIFT PROOF, run for real and then reverted byte-identical (sha256 checked):
+  pulling the !hub ENTRY -> "FAIL every verb ChatCmd answers is in the data (58 verbs; missing [hub, site,
+  guildhall])", L14_TEST FAIL 1; pulling the !hub CODE ARM -> "FAIL every command in the data is answered
+  (unanswered [hub])", L14_TEST FAIL 1. Measured reply lengths, all well inside Twitch's 500: !hub 222,
+  !festival 224, !bestiary 185, !satchel 148, !hero 329, !help 294.
+- LOCK: docs/RUN_LOCK.txt's "RUNNING 05:41:59 (game build D91 ... 8-min soak)" was CLEARED AS STALE by this lane
+  at 05:58:31 - no Godot process alive across ~3 minutes of polling (05:55:53-05:58:02) and no game build commit
+  since it was taken (the only commits after it were art 05:48 and hud 05:53). The process was ground truth.
+  Taken and released by this lane for its own ~8 minutes.
+- NOTED, NOT MINE: a fresh import of this worktree prints pre-existing ext_resource Parse Errors for
+  assets/kit/materials/MI_*.tres pointing at assets/kit/textures/T_*_BaseColor.png that are not in the repo.
+  Nothing to do with chat; flagged for whoever owns assets/kit.
+- NEXT: L69 (the bot carries the chat - plain questions, not just commands), then L70 (!catchup), then L56.

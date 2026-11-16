@@ -1,0 +1,52 @@
+{
+ "ok": true,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "gaoler": {
+   "creature_h": 2.35,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 5.58,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
+  },
+  "gaoler_chibi": {
+   "creature_h": 2.35,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 5.58,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
+  }
+ },
+ "errors": [],
+ "blank_check": {
+  "files": 2,
+  "failures": []
+ }
+}

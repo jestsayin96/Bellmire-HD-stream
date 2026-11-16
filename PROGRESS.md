@@ -6374,3 +6374,47 @@ checked BY PROCESS, not by the file, eighteen times across twenty minutes:
 - data/lore_lines.json: +40 epitaphs (417), +20 descend (260; 8 keep the "%s %s" name+verb shape), +23 cleared (261; "Floor %d" only where existing lines use it), +46 barks (enter +8, lord +7, trap +8, hurt +8, drink +7, misfire +8). 129 lines. Plain, terse, no dungeon floor count anywhere, no mechanics implied. Duplicates of existing lines were skipped.
 - VALIDATION OK: all four owned files parse; every pre-existing key and value identical (existing lists are exact prefixes); descend 0 or 2 %s, cleared 0 or 1 %d, epitaphs no format specifiers.
 - CODE WIRING: none - same keys and shapes, loaders' random pick widens automatically. Still the code lane's: fishing.json "epic" -> "very rare", and enforcing no-artifact in shop/trader readers.
+## U36 - L74 the feed and the theme under raid load (HUD, 2026-11-16 ~10:57 CT, spotlight.gd + tools/_l74_test.gd)
+- TAKE THIS NEXT gave HUD: L74. Lock read by process (none alive) and file (IDLE 10:52); claimed 10:54 with expected finish 11:05, relaunched 10:55:53 (finish 11:03), released 10:57:05.
+- tools/_l74_test.gd WINDOWED 1080p: 36 raid lines (routine chatter mixed with crit/town lines) in 3 s into the LIVE feed at UI scale 100/125/150. L74_TEST OK at all three: no ellipsis, stack fits the vellum (box 220/225, 151/216, 187/208 px), dropped_protected=0 (routine chores dropped, raid/fall/granary lines kept; 112 seen, 63 dropped, 28 merged, min admit gap 0.80 s).
+- FOUND by looking at l74_after_150.png: the "CHANNEL POINTS . ambient" lane chip ran off the right edge of the screen. spotlight.gd (kind chip): its font now steps down until the whole chip fits the room beside the Chronicle box. l74_fix_150.png: fits, nothing overlaps. (spotlight.gd is HUD-owned.)
+- LOOKED: renders/cycles/l74/l74_after_100.png, l74_after_150.png (before), l74_fix_150.png (after). At 100% the first Chronicle line sits tight against the top of the vellum (readable, not clipped) - left alone.
+- NOT DONE: the test's synthetic "(32)" suffix defeats the feed's dedupe so two near-identical lines show with x2/x3; that is the test, not the feed. At 150% only 2 whole entries fit during a flood - by design (L71 fewer-whole-entries rule).
+- Mr. E decision: none.
+## B5 - L69 AND L70's ENGINE GATES ALL RAN AND ALL PASSED (chat bot, 2026-11-16 10:45-10:55 CT)
+- THE :45 WINDOW WAS REAL AND THE LANE USED IT. The lock read IDLE 10:34:15 (game build, D91d not on
+  laptop + C-55 shipped), no Godot process alive on either image name at 10:45:51, and the supervisor's
+  09:58 ruling gives :45-:58 to this lane while it still owes engine gates. Claimed at 10:46:32,
+  refreshed at 10:49:01 on relaunch. Five slots of starvation end here.
+- ALL FIVE GATES GREEN, first engine run this lane has had since 06:03:
+  parse `--headless --quit-after 300` rc=0, ZERO ERROR lines; L14_TEST OK (23 checks, 61 verbs, both
+  drift directions clean, "docs/COMMANDS.md carries every command from the data"); TWITCH_PARSE OK
+  (8/8, PASS 1-7b); B2_ASK OK; COMMANDS_DOC wrote 26 commands.
+- THE COMMANDS DOC: the real generator is a NO-OP over the 26-command data. It rewrote
+  docs/COMMANDS.md and git reports the file unmodified, so B4's python emulation was byte-correct and
+  the ruling it wrote for this slot needed no overriding. The generator and the emulation agree.
+- B2_ASK FAILED FIRST, AND THE FAULT WAS DATA, NOT THE HARNESS. Two of forty phrasings missed:
+  * "how is my hero doing" reached `missed` (catchup) instead of `myhero`. `missed` sits first in
+    `order` and carried the phrase `hero+doing`, which is too greedy - a viewer asking how their hero
+    is doing wants the sheet, not the Chronicle. `hero+doing` REMOVED from `missed`; `hero+been` and
+    `hero+up+to` still carry the away-and-back sense, which is what that topic is for.
+  * "wheres the site" was answered with SILENCE. `hub` had `where+site`, and the flattener leaves
+    "wheres" as its own word, so the possessive-less contraction never matched. Added `wheres+site`,
+    `wheres+website` and `wheres+page` alongside the existing literal "wheres the page".
+  Both are data/commands.json only - no code changed, no reply text changed, no command added or
+  removed. Re-ran: B2_ASK OK, and L14_TEST and COMMANDS_DOC still green over the edited data.
+- THE PARSE ERRORS WERE THIS WORKTREE'S IMPORT CACHE, NOT ANY LANE'S CODE. The first parse run threw
+  ERROR lines for res://assets/characters/kaykit_adv2/Knight_knight_texture.png - the png and its
+  .import are both on disk, but .godot/imported never got the .ctex when B1 first imported this
+  worktree on 16 Nov 05:59. One `--headless --import` (rc=0, 0 errors) built it, and the parse run is
+  clean. Nothing tracked was touched; the leftover generated .import/.uid files are asset metadata
+  belonging to other lanes' files and are deliberately LEFT UNTRACKED, not committed.
+  The remaining parse output is WARNING-only: "invalid UID" on the kit materials (MI_Plaster,
+  MI_RockTrim, MI_RoundTiles, MI_WoodTrim, MI_Cobble), pre-existing and not this lane's.
+- HARNESS RETIRED AS THE CONTRACT ASKED: _b2_ask.gd, _b2_ask.gd.uid, .b2_gates.log and this slot's
+  .b5_gates*.log are deleted now that B2_ASK has passed on the real engine. L69's proof lives in this
+  entry and in the gate output, not in an uncommitted file at the worktree root.
+- DRIFT CHECKED BOTH DIRECTIONS after the edit, by L14_TEST (the real check) and by json.load: 26
+  commands, every pre-existing key byte-identical, file still ends 0a 7d 0a as before.
+- NOT TICKED BY ME. L69 and L70 now have every gate they were owed. L68 is already ticked. The
+  supervisor ticks; this lane only reports. NEXT: L56, the delve-heavy soak - engine and lock.

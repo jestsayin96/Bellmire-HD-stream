@@ -945,7 +945,7 @@ func _crowd_fill() -> void:
 
 ## where a body of radius r may be set down: on a floor cell, r + the wall's 0.5 m clear of any
 ## wall, and out of every obstacle
-func _settle_ok(p: Vector3, r: float) -> bool:
+func _settle_ok(p: Vector3, r: float, _b: Node3D = null) -> bool:
 	var cells: Dictionary = dun.info["cells"]
 	var c := _cell_of(p)
 	if not cells.has(c):
@@ -965,74 +965,10 @@ func _settle_ok(p: Vector3, r: float) -> bool:
 			return false
 	return true
 
-const SETTLE_PASSES := 3
-const SETTLE_PAD := 0.02
+## D91c: the settle itself now lives in crowd.gd (Crowd.settle), shared with the town - one
+## copy. Up to 48 bodies it checks every pair, as the loop that lived here did.
 func _crowd_settle() -> void:
-	var bodies := _crowd_bodies()
-	var n := bodies.size()
-	if n < 2:
-		crowd_worst = 0.0
-		return
-	var worst := 0.0
-	for _pass in range(SETTLE_PASSES):
-		var moved := false
-		worst = 0.0
-		for i in range(n):
-			var a: Node3D = bodies[i]
-			var ra := Crowd.body_r(a)
-			for j in range(i + 1, n):
-				var b: Node3D = bodies[j]
-				var pa := a.global_position
-				var pb := b.global_position
-				if absf(pa.y - pb.y) > 3.0:
-					continue
-				var d := Vector3(pa.x - pb.x, 0.0, pa.z - pb.z)
-				var L := d.length()
-				var rb := Crowd.body_r(b)
-				var over := ra + rb + SETTLE_PAD - L
-				if over <= 0.0:
-					continue
-				worst = maxf(worst, over - SETTLE_PAD)
-				if L < 0.01:
-					var ang := float((a.get_instance_id() + b.get_instance_id()) % 628) * 0.01
-					d = Vector3(cos(ang), 0.0, sin(ang))
-					L = 1.0
-				var nrm := d / L
-				# the smaller body gives way: a lord is not shouldered aside by a halfling
-				var ka := rb / (ra + rb)
-				var kb := ra / (ra + rb)
-				var na := pa + nrm * over * ka
-				var nb := pb - nrm * over * kb
-				var oka := _settle_ok(na, ra)
-				var okb := _settle_ok(nb, rb)
-				if oka and okb:
-					a.global_position = na
-					b.global_position = nb
-				elif oka:
-					na = pa + nrm * over
-					if _settle_ok(na, ra):
-						a.global_position = na
-					else:
-						continue
-				elif okb:
-					nb = pb - nrm * over
-					if _settle_ok(nb, rb):
-						b.global_position = nb
-					else:
-						continue
-				else:
-					# pinned between stone on both sides: slide sideways along the wall
-					var side := Vector3(-nrm.z, 0.0, nrm.x) * over
-					if _settle_ok(pa + side, ra):
-						a.global_position = pa + side
-					elif _settle_ok(pb - side, rb):
-						b.global_position = pb - side
-					else:
-						continue
-				moved = true
-		if not moved:
-			break
-	crowd_worst = worst
+	crowd_worst = Crowd.settle(_crowd_bodies(), _settle_ok)
 
 func _step(n: Node3D, to: Vector3, spd: float, delta: float) -> bool:
 	var d := Vector3(to.x - n.global_position.x, 0, to.z - n.global_position.z)

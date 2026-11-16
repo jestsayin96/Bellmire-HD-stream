@@ -261,7 +261,7 @@ func _process(delta: float) -> void:
             if k >= 1.0:
                 var rar := String(_item.get("rarity", "common"))
                 _show_text("%s\n%s" % [rar.to_upper(), String(_item.get("name", "?"))], Fishing.colour(_item))
-                if rar == "rare" or rar == "epic" or rar == "legendary":
+                if rar == "rare" or rar == "very rare" or rar == "legendary":
                     _play("Cheer")
                 creel.append(_item)
                 caught.emit(_item, who)

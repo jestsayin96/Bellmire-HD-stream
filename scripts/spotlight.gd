@@ -869,6 +869,16 @@ func _now_watching(k: String) -> void:
 	var x := lo if left_col else maxf(lo, hi - lb.size.x)
 	# L62: the kind title sits above the now-watching line, aligned on the same outer edge
 	if kind_lb:
+		# L74: at 150% "CHANNEL POINTS . ambient" ran off the right edge of the screen. Step the title
+		# font down until the whole chip fits the room beside the Chronicle box.
+		var kfont := kind_lb.get_theme_font("font")
+		var kfs := UiTheme.px(30)
+		var kpad := float(UiTheme.px(28) + maxi(2, UiTheme.px(2)) * 2)
+		while kfs > UiTheme.px(16) and kfont.get_string_size(kind_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, kfs).x + kpad > room:
+			kfs -= 1
+		kind_lb.add_theme_font_size_override("font_size", kfs)
+		kind_w = kind_lb.get_combined_minimum_size().x
+		kind_h = kind_lb.get_combined_minimum_size().y
 		kind_lb.size = Vector2(minf(kind_w, room), kind_h)
 		var kx := lo if left_col else maxf(lo, hi - kind_lb.size.x)
 		kind_lb.position = Vector2(roundf(kx), roundf(top_y))

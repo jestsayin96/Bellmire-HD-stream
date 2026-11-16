@@ -27,7 +27,11 @@ func refresh() -> void:
         return
     var h := roster.get_hero(user_id)
     var look := roster.weapon_look(h)
-    Gear.equip(_mdl, _adv(roster.weapon_mesh(h)), "handslot.r", "weapon", float(look["scale"]), float(look["glow"]))
+    var held := Gear.equip(_mdl, _adv(roster.weapon_mesh(h)), "handslot.r", "weapon", float(look["scale"]), float(look["glow"]))
+    # D94: the named piece's own stuff (ember, cold-white, scar, dragontooth...) on top of the tier
+    Gear.tint_piece(held, look.get("piece", {}))
+    # D94b: and its own furniture (wrap, ribbons, stone, collars), so siblings sharing a mesh differ
+    Gear.deco_piece(held, look.get("piece", {}))
     Gear.equip(_mdl, _adv(roster.offhand_mesh(h)), roster.offhand_bone(h), "offhand")
     # the roster's own RANKS table (same guild roll as data/ranks.json)
     Gear.rank_trim(_mdl, Roster.RANKS.find(roster.rank_row(h)))

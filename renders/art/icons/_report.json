@@ -1,11 +1,11 @@
 {
  "ok": true,
- "n": 454,
+ "n": 459,
  "errors": [],
  "by_family": {
   "ring": 50,
   "amulet": 46,
-  "cloak": 44,
+  "cloak": 49,
   "boots": 43,
   "gloves": 47,
   "hat": 122,
@@ -4551,7 +4551,58 @@
    "stat": null,
    "colour": "356048",
    "faces": 90
+  },
+  "wall_cloak": {
+   "name": "Wall-walker's Cloak",
+   "fam": "cloak",
+   "cost": 320,
+   "variant": 1,
+   "metal": "bronze",
+   "stat": "ac",
+   "colour": null,
+   "faces": 475
+  },
+  "scarwatch_cloak": {
+   "name": "Scarwatch Cloak",
+   "fam": "cloak",
+   "cost": 360,
+   "variant": 2,
+   "metal": "silver",
+   "stat": "saves",
+   "colour": null,
+   "faces": 165
+  },
+  "feast_cloak": {
+   "name": "Feast-night Cloak",
+   "fam": "cloak",
+   "cost": 230,
+   "variant": 1,
+   "metal": "iron",
+   "stat": "hp",
+   "colour": null,
+   "faces": 475
+  },
+  "caravan_cloak": {
+   "name": "Caravan Cloak",
+   "fam": "cloak",
+   "cost": 280,
+   "variant": 3,
+   "metal": "iron",
+   "stat": "speed",
+   "colour": null,
+   "faces": 685
+  },
+  "commander_cloak": {
+   "name": "Commander's Cloak",
+   "fam": "cloak",
+   "cost": 440,
+   "variant": 2,
+   "metal": "gold",
+   "stat": "saves",
+   "colour": null,
+   "faces": 357
   }
  },
- "blank_failures": []
+ "blank_failures": [],
+ "rerun": "cloak re-rendered 2026-11-16 for D94c dye+shade"
 }

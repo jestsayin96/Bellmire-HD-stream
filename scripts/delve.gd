@@ -121,6 +121,7 @@ func _nav_reset() -> void:
 
 func _next_floor() -> void:
 	_nav_reset()
+	_back_to = ""                  # D83: whatever pulled them back into a fight was on the last floor
 	floor_no += 1
 	if dun:
 		dun.queue_free()
@@ -262,7 +263,7 @@ func _setpiece_ambush(sp: Dictionary, at: Vector3) -> void:
 		var off := Vector3(cos(float(i) * 2.1), 0.0, sin(float(i) * 2.1)) * 1.3 if i > 0 else Vector3.ZERO
 		m.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
 		dun.add_child(m)
-		(dun.monsters as Array).append(m)
+		_admit(m)
 		# scale to this floor the same way _next_floor does for ordinary spawns
 		m.max_hp = (14.0 + float(floor_no) * 6.0) * float(m.def.get("hp", 1.0))
 		m.hp = m.max_hp
@@ -376,7 +377,7 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	m.roam = 2.0
 	m.position = Vector3(pos.x, 0.0, pos.z)
 	dun.add_child(m)
-	(dun.monsters as Array).append(m)
+	_admit(m)
 	# scale to this floor exactly like _next_floor does for ordinary spawns, then
 	# the mini-boss multipliers on top
 	m.max_hp = (14.0 + float(floor_no) * 6.0) * float(def.get("hp", 1.0)) * MINIBOSS_HP_MULT
@@ -1125,6 +1126,15 @@ func _fight(delta: float) -> void:
 		_finish()
 		return
 	if foes.is_empty() and not (dun.lord and dun.lord._entering()):
+		# D83: a creature that came up mid-search or on the walk to the stairs has been dealt
+		# with - back to what it interrupted. The floor was already paid for and the breather
+		# already taken; neither happens twice.
+		if _back_to != "":
+			state = _back_to
+			_back_to = ""
+			_t = 0.0
+			_nav_reset()
+			return
 		# floor won: pay out, then SEARCH what is on the floor before deciding (L49)
 		_loot(alive)
 		if not _unsearched().is_empty():
@@ -1585,7 +1595,7 @@ func _spawn_on_floor(d: Dictionary, at: Vector3) -> Monster:
 	root.add_child(m)
 	m.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
 	m.hp = m.max_hp
-	dun.monsters.append(m)
+	_admit(m)
 	return m
 
 var _split_said := -1
@@ -2404,7 +2414,7 @@ func _traps_tick() -> void:
 			elif _flat((m["body"] as Node3D).global_position, tp) > TRAP_REACH:
 				continue
 			tr["done"] = true
-			_meet_trap(m, tr)
+			_meet_trap(m, tr, force_trap_spot if not gate else -1)
 			break
 
 func _meet_trap(m: Dictionary, tr: Dictionary, force_spot := -1) -> void:
@@ -2510,6 +2520,7 @@ const GATE_TRIES := 8             # after this many heaves the whole party gets 
 var _gt := 0.0                    # a clock that does not restart with a floor (the gate's waits)
 var gate_story: Array = []        # tests and the summary read it: what each gate did, in words
 var gate_held := {}               # body -> frame it last waited at a dropped gate (tests read it)
+static var force_trap_spot := -1  # D83 test hook: 0 = every ordinary trap is missed and springs
 static var force_gate_spot := -1  # test hook: 0 = every portcullis is missed and drops, 1 = spotted
 
 ## where p stands in the gate's own frame: x across the passage, y (its local z) along the way
@@ -2797,6 +2808,34 @@ func _gate_lift(tr: Dictionary, secs: float) -> void:
 		(node.get_meta("raise") as Callable).call(secs)
 	_gate_nav_changed()
 
+## ---------------------------------------------------------------- D83: admitting a creature
+## Mr. E (Nov 15 16:22): "the traps are stuck". MEASURED (tools/_d83_test.gd), not guessed: the
+## trap props all reset cleanly and leave nothing behind, and nav is not the fault (routes are a
+## lazy cache, built on first use). The fault was the creatures a trap or an ambush lets up while
+## the party is SEARCHING or WALKING TO THE STAIRS - which is where most traps are met. Nothing
+## fights them outside "fight", so they stayed in Monster PATROL, and PATROL set their height
+## from an unset ground_fn - flat 0.0 in world space, 400 m above a floor at DELVE_Y. They hung
+## in the void, walked to the x/z of a goal 400 m below them and stood there for good, and the
+## party walked off to the next floor without them. Every creature added to a floor after it is
+## built now comes through here: it stands on THIS floor, it is a foe the fight loop knows, and
+## if the party had stopped fighting, they turn and fight it, then go back to what they were doing.
+var _back_to := ""                  # the state a mid-floor creature pulled the party out of
+var rejoined := 0                   # the D83 test counts these
+
+func _floor_y(_x: float, _z: float) -> float:
+	return dun.global_position.y if dun != null and is_instance_valid(dun) else DELVE_Y
+
+func _admit(mon: Monster) -> void:
+	mon.ground_fn = Callable(self, "_floor_y")
+	if not (dun.monsters as Array).has(mon):
+		(dun.monsters as Array).append(mon)
+	if state in ["search", "descend"]:
+		rejoined += 1
+		_back_to = state if _back_to == "" else _back_to
+		state = "fight"
+		_t = 0.0
+		_nav_reset()
+
 ## L29c r5: a SwarmTrap springs up a short pack of theme-matched creatures
 ## RIGHT WHERE THE PARTY STANDS, like an AMBUSH set piece but wired from the
 ## trap pool. Reuses dun.monsters so the fight loop picks it up for free.
@@ -2818,7 +2857,7 @@ func _trap_swarm(tr: Dictionary) -> void:
 		var off := Vector3(cos(float(k) * 2.1), 0.0, sin(float(k) * 2.1)) * 1.2
 		mon.position = Vector3(at.x - dun.global_position.x + off.x, 0.0, at.z - dun.global_position.z + off.z)
 		dun.add_child(mon)
-		(dun.monsters as Array).append(mon)
+		_admit(mon)
 		mon.max_hp = (14.0 + float(floor_no) * 6.0) * float(d.get("hp", 1.0))
 		mon.hp = mon.max_hp
 		names.append(String(d.get("name", "something")))

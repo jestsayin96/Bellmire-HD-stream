@@ -458,7 +458,7 @@ func _sheet(r: Roster, h: Dictionary, id := "", delv: Dictionary = {}) -> Dictio
     if wsell > 0:
         wblock["sell"] = wsell
         sat["total"] = int(sat["total"]) + wsell
-    var ablock := {"name": String(Roster.ARMOUR[at]["name"]), "tier": arm}
+    var ablock := {"name": r.armour_name(h), "tier": arm}
     if asell > 0:
         ablock["sell"] = asell
         sat["total"] = int(sat["total"]) + asell
@@ -520,7 +520,7 @@ func _gear(r: Roster, h: Dictionary) -> Dictionary:
     if int(h.get("weapon", 0)) > 0:
         g["main_hand"] = clean_name(r.weapon_name(h))
     var at := clampi(int(h.get("armour", 0)), 0, Roster.ARMOUR.size() - 1)
-    g["body"] = clean_name(String(Roster.ARMOUR[at]["name"]))
+    g["body"] = clean_name(r.armour_name(h))
     var acc: Dictionary = h.get("acc", {})
     for slot in acc:
         if GEAR_SLOT.has(String(slot)):
@@ -622,7 +622,7 @@ func scan_heroes() -> void:
         if int(now["weapon"]) > int(was.get("weapon", 0)):
             _event(m, "gear", "Took up %s." % r.weapon_name(h), at)
         if int(now["armour"]) > int(was.get("armour", 0)):
-            var an := String(Roster.ARMOUR[clampi(int(now["armour"]), 0, Roster.ARMOUR.size() - 1)]["name"])
+            var an := r.armour_name(h)
             _event(m, "gear", "Now wears %s." % an, at)
         var had: Array = was.get("owned", [])
         for key in (now["owned"] as Array):

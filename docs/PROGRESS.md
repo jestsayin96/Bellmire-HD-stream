@@ -2,6 +2,58 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D91d the north-houses pocket + C-55 fishing rarity, 2026-11-16 ~10:35 CT (game build) - C-55 ON laptop; D91d on side branch d91d-wip, town soak still 1-2 frames short
+TAKE THIS NEXT gave GAME BUILD: D91 (town half + 20-min re-soak), then C-61's code mirror, then C-55's fishing arm.
+The lock was HUD's until 09:31 (its 08:58 claim named ~09:30; no Godot alive at 09:29 and 09:31). Engine
+work started 09:31; one battery 10:12-10:33; nothing started after :38 per the 09:58 ruling.
+- D91d, TRY 1 - DOOR EMERGE (townsfolk.gd x3, town.gd door_emerge): every exit set the body down ON the door
+  spot, so a row of houses emptying at once stacked folk on one point. Now the first free spot on rings round
+  the door (clear of footprints, same ground, nobody standing there). 20-min town soak (d91d/run1/
+  town_soak20.log): 92,646 frames, 1 overlap frame (0.7 cm), 0 >1 cm, 0 in a footprint - D91_TOWN FAIL by 1.
+  The fault was a WALKER (leg0) at (34.2,-69.8), not a door exit, so the door spot was not the whole story.
+- MAPPED THE POCKET (new tools/_d91d_pocket.gd, POCKET_AT=x,z: every footprint near a point, the props that
+  own them, an ASCII walkable map at FOOT_R). It is the front of the north STORE (house (32.5,-64.1), door
+  (32.47,-69.38)): a Bench at (30.9,-70.5), and the store yard's FarmCrate_Apple at (34.9,-69.9), set 0.1-0.4 m
+  off the wall at a slant - a WEDGE ONE BODY WIDE right by the door. renders/cycles/d91d/pocket.log (before).
+- D91d, TRY 2 - NO CREVICES (town.gd _close_crevices, run once after _build, before the nav bake): every loose
+  good (Barrel/Bucket/FarmCrate/Crate_/Bag/Pot_/Vase_/Chest_Wood/Anvil_Log/Whetstone - never seats, tables,
+  stalls, trees) probes out from its four sides on five lines each (incl. a step past each corner); where
+  another solid is under 0.8 m away on 2+ lines, the sliver is FILLED with a footprint of its own. Nothing
+  visible moves (first tries that SLID the crate moved it 4 cm and left the wedge). 93 fillers for 99 goods.
+  pocket6.log: the (34.0,-69.9) sliver is closed.
+  20-min soak (d91d/r2_town_soak20.log): 84,676 frames, 2 overlap frames (1 over 1 cm, worst 1.06 cm), 0 in a
+  footprint - D91_TOWN FAIL. BOTH faults are in the SAME place: (33.37,-70.22) and (33.32,-71.21), walkers in
+  the ~1 m alcove the store's front makes between the house, the bench and the crate. The sliver is gone; the
+  alcove is not, and Crowd.settle leaves a ~1 cm residual where both bodies have stone behind them.
+  NO PICTURE beyond the ASCII maps: the fillers are invisible by design and no prop moved. NOT LOOKED AT IN A
+  RENDER - say so rather than claim it.
+- WHY NOT ON laptop: D91's own test is zero frames and it is 2 (D91c: 2, try 1: 1 - all ~1 cm, all this one
+  alcove). Pushed as a CHECKPOINT to origin/d91d-wip (parent = the C-55 commit below); laptop's town.gd and
+  townsfolk.gd are back at HEAD so the worktree is clean. NEXT RUN: take d91d-wip, then fix the alcove at the
+  source - the store's bench sits 1 m from its own door (move the store-front bench or the yard crate so the
+  door opens onto open street), or make _settle_pair try the perpendicular for BOTH bodies when the pair
+  axis is stone both ways. Then one 20-min town soak. The 93 fillers are a broad nav change: townwalk with
+  them in_solid 0/16,705, stuck_on_route 7 - ALL ONE GUARD (Cort the Younger) on a bench at (-137.5,-15.1)
+  with NO filler within 9 m (pocket_w.log), so not caused by them, but D91c had 0 and it is recorded.
+- C-55 FISHING ARM, DATA + CODE TOGETHER (ON laptop): data/fishing.json ladder line 23 and the three catches
+  (111, 272, 283) say "very rare"; fishing.gd RARITY_COLOR key, angler.gd's cheer check, economy.gd RARITY[4]
+  all "very rare"; tools/_d64_test.gd updated to the new word. _fish_rolls (20k rolls x2): luck 0 = 13297/5275/
+  1026/325/77 common..legendary, "very rare" present, no "epic" anywhere; scar-touched bump walks the data
+  ladder. D64_TEST OK 17/17. No "epic" left in any game-build script or data file.
+  FOR THE HUB LANE (not mine): web/app.js SHOP_RARITY whitelist still has "epic" and no "very rare" (and
+  "rar-very rare" would not be one CSS class) - a very-rare shelf item or catch now gets no rarity frame.
+- C-61 CODE MIRROR - MEASURED, NOTHING TO SWITCH IN GAME-BUILD FILES: the global 441+ rule disagrees with the
+  stored key on 13 of 254 accessories (7 legendary below 441: 3 boots, 3 gloves, 1 amulet; 6 at 441+ not
+  legendary). NO game-build reader uses it: the satchel snapshot (town.gd) passes item["rarity"], the shop
+  gate (economy.gd) bands the WEAPON/ARMOUR tier ladder, not accessories, _d95_fit reads the stored key.
+  gear.gd's `orn` (metal step, sheen, gem glow) is a continuous cost-in-slot dial MIRRORED from
+  tools/art/icons.py, not a band: 2 of 17 legendaries (mender_wraps, armourer_gloves, gloves 320/330) sit one
+  metal step below the top. Changing it alone would break the icon = worn match D94 is built on - an ART +
+  GAME call together, not done unilaterally. The hub and the icon border colour are other lanes' files.
+- GATES (tree with D91d + C-55, renders/cycles/d91d/r2_*): parse 0 errors (parse5.log), _offfloor 0 of 2138
+  (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _townwalk in_solid 0 PASS (stuck 7, above), _delve_test no SCRIPT
+  ERROR, D91_CROWD_TEST OK, D64_TEST OK. run1 (door emerge only): same, townwalk stuck 0 giveup 1.
+
 ## D-cycle - D91c FINISH D91: the town half and the 20-minute re-soaks, 2026-11-16 ~08:55 CT (game build) - NOT PUSHED TO laptop, town soak 2 frames short
 TAKE THIS NEXT gave GAME BUILD "FINISH D91": (a) the TOWN half, (b) the 20-minute re-soak. Stages 1-4 not
 rebuilt, halls not re-measured. Not ticked - supervisor's call.

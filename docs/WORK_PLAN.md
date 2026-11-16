@@ -1,12 +1,25 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## RESOLVED - THE MISLABELLED COMMIT ON `laptop` (closed by the supervisor 2026-11-15 23:58)
+Commit b3fbd16 on `laptop` carried the game build worker's in-progress D88 code under a
+documentation message. Mr. E ruled: leave it. The worker then committed finished, gated D88 on
+top (0cd3acd) and both are now merged to main - nothing lost, no history rewritten. Closed.
+LESSON THAT STAYS: never `git commit -am` in a worktree another lane may be live in. Stage the
+exact file.
+================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-15 23:10 CT. If you own a lane, your next item is named here. Search the file
+Updated 2026-11-15 23:58 CT. If you own a lane, your next item is named here. Search the file
 for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."
 
-  GAME BUILD   ->  D88   (the portcullis), then D83 (the traps), then D91 stages 2-4
-  HUD          ->  L73   (the director's shot language), then L74
+  GAME BUILD   ->  D83   (the traps are stuck - MEASURE FIRST), then D91 stages 2-4.
+                   D88 is DONE and ticked. D83 and D91 stages 2-4 are the whole of Phase 1's
+                   remainder - finish them before anything in Phase 2 or 3.
+  HUD          ->  L73's LAST STEP ONLY, then L74. The shot language itself is shipped, merged
+                   and verified (L73_TEST ok, six stills) but L73's DONE gate is a 30-MINUTE
+                   CAPTURE in which a viewer can tell from the camera alone when something
+                   important happened. Do that one run - same shape as the L64 30-minute
+                   director run - and the item ticks. DO NOT rebuild the shot language.
   HUB          ->  STAND DOWN. H29, H30 and H31 are all shipped, merged and ticked, and the
                    freeze forbids inventing more. Nothing is queued for this lane - do not
                    reach into another lane's files.
@@ -20,23 +33,20 @@ for its ID and work it. DO NOT take "the first unchecked item you find reading d
                    flooded).
 
 WHY THIS BLOCK EXISTS - THE BUG WAS IN THE PLAN, NOT IN ANY WORKER.
-Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan is now in
-REVERSE CHRONOLOGICAL order: D93 (written last, 16:57) sits at line ~350, above D91 (~458),
-D90 (~552), D88 (~668) and D84 (~805). A worker taking "the first unchecked item in the file"
-therefore takes THE MOST RECENTLY WRITTEN ONE, which is the opposite of the phase order. That is
-how D93 (Phase 3) got built while D88 and D83 (Phase 1) sat untouched, and it is nobody's fault
-but the plan's. No worker misbehaved.
-D93a was NOT wasted - the town layout format, loader and validator are Phase 3's foundation and
-are good work. It was simply out of turn.
+Every ruling written on 15 Nov was PREPENDED to the top of this file, so the plan reads in
+REVERSE CHRONOLOGICAL order and "the first unchecked item in the file" is simply the most
+recently WRITTEN one, which is the opposite of the phase order. That is how D93 (Phase 3) got
+built while D88 and D83 (Phase 1) sat untouched. It is nobody's fault but the plan's. No worker
+misbehaved. D93a was not wasted either - the town layout format, loader and validator are
+Phase 3's foundation.
 
 PHASE ORDER IS UNCHANGED AND STILL BINDING: Phase 1 stop it looking broken -> Phase 2 make the
 loop real -> Phase 3 the authored town -> Phase 4 the art -> Phase 5 the Dais. The full
 breakdown is in the PHASE RC section further down. This block is just the pointer.
 
-PHASE 1 IS NOT FINISHED, BUT THE BACKLOG OF UNMERGED WORK IS GONE. All five lanes were merged
-to main on 2026-11-15 at 23:10 CT and L71, L72, D84, D90, D91a and T5 are now TICKED. STILL OPEN
-AND NEXT: D88, D83, and D91 stages 2-4 (three-cell corridors, monsters into the avoidance, party
-in file). Those three are the whole of Phase 1's remainder.
+PHASE 1 IS DOWN TO TWO ITEMS. All five lanes were merged to main again on 2026-11-15 at 23:58
+and D88 is TICKED. STILL OPEN AND NEXT: D83 (the traps) and D91 stages 2-4 (three-cell
+corridors, monsters into the avoidance, party in file). That is the whole of Phase 1's remainder.
 Nothing in this plan is DONE until the supervisor ticks its checkbox. A commit on a branch is
 not a tick.
 ================================================================================
@@ -74,6 +84,15 @@ DONE: a capture of each of the eight lords entering frame, at 1080p, none clippe
 the camera inside geometry. Mr. E's eye on whether the reveal lands.
 
 - [ ] L73. THE DIRECTOR'S SHOT LANGUAGE (HUD, auto_director.gd + spotlight.gd) - see the block below.
+      L73 HALF DELIVERED / STILL OPEN (supervisor, 2026-11-15 23:58; hud-ui 3e47674, merged to main).
+      The shot language itself is built and verified and is NOT to be rebuilt: it is laid on the existing
+      _pace hook, a delve opens wide and low and settles (34.0 -> 19.1), a fight closes in as the party is
+      hurt (24.6 -> 17.4), a death is held and crept into, and the quiet after eases back out. L73_TEST
+      passes and six stills are in renders/cycles/20261116_l73.
+      WHAT IS LEFT, AND IT IS THE ITEM'S OWN DONE GATE: the 30-MINUTE CAPTURE in which a viewer can tell
+      from the camera alone when something important happened. The lane ran a ~6-minute windowed test, not
+      the 30-minute run. One capture of the same shape as the L64 30-minute director run finishes this and
+      then it ticks. Mr. E's eye stays final on whether the language lands.
 ### L73 - THE DIRECTOR'S SHOT LANGUAGE (HUD, auto_director.gd + spotlight.gd)
 L64 proved the director cuts cleanly - 183 cuts, 0 repeats, 0 dual-pane frames over 138,053
 frames. Cutting correctly is not the same as telling a story. Give it a vocabulary: an
@@ -738,9 +757,20 @@ why plainly, because the two things get conflated.
     build - auth, transport, rate limiting, an audit log and a kill switch - and he should ask for
     it by name rather than have it appear quietly.
 
-- [ ] D88. THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
-      THE ITEM ITSELF IS THE BLOCK DIRECTLY BELOW THIS LINE - read it there. This pointer exists only
-      so a worker scanning for its first unchecked item lands on it (supervisor, 2026-11-16).
+- [x] D88. THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
+      RESULT (ticked 2026-11-15 23:58 CT by the supervisor; laptop 0cd3acd + b3fbd16, merged to main):
+      all three faults closed. FloorGen gained a BOX obstacle kind (obst_gap/obst_push) so a wall-shaped
+      prop is no longer approximated by a disc, and the prison cell was re-audited to a box at the same
+      time. The gate is placed ONLY on a 1-3 cell line that spans a passage with stone at both ends, and
+      if the floor offers no such line NO GATE IS PLACED. The set_loops tween is gone: it hangs raised and
+      still until a party crosses it, then it is a trap with a DC - spotted means wedged, missed means it
+      drops, DEX save, and the party is SPLIT and named by side in the feed, with winch / long way round /
+      stays behind / STR heave with strain as the four ways through. EVIDENCE: _d88_test.gd PROBE 150
+      floors, 150 gates, 1051 checks OK; FLOW 24/24 OK; SOAK 1274 game s with 0 gate-time watchdog lifts
+      and 0 wedged walkers; four stills + a sheet in renders/cycles/d88. Gates green (parse 0, OFFFLOOR 0,
+      TWITCH_PARSE, TOWNWALK, L11_TEST, delve_test clean). No wedged walkers means it did not re-open D44.
+      ALSO IN THIS MERGE (Mr. E 23:12, not an item): Sfx bus -6 -> -12. Effects sat 8 dB over the music;
+      they now sit 2 dB under it. Music, Beds and Ambience untouched - he said the music is fine.
 
 ### D88 - THE PORTCULLIS BLOCKS NOTHING (game build - Mr. E, Nov 15 16:28, CAUSE CONFIRMED)
 

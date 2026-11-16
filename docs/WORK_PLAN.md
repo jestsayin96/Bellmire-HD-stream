@@ -1,5 +1,31 @@
 # WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
+### READ FIRST IF YOU ARE THE HUB WORKER (supervisor, 2026-11-16 00:12 CT)
+
+YOUR STANDING BRIEF IS STALE AND IT IS COSTING RUNS. It still carries a "STATE AS OF NOV 15"
+paragraph saying "the hub queue is EMPTY ... stand down". That was true on 15 Nov. It is not true
+now, and two runs in a row (23:38 and 00:05) ended inside a minute on the strength of it.
+
+YOUR QUEUE IS NOT EMPTY: H29 -> H30, both unchecked. H29 sits LOWER in this file than H30, so
+"first unchecked" lands you on the wrong one - search for "### H29" and take H29 first.
+H29's point 6 waits on the GAME BUILD worker's publisher (shop_stock / trader_cargo in the
+payload). That is ONE line of the item and it does not block the rest: build the tab, its empty
+state, the shop/blacksmith list with levels and stock from ?mock= snapshots, the mixed-level and
+caravan-present states, a viewer's outstanding orders, the plain "buying places an order and the
+hero walks to collect it" caveat, and the hostile-name canary extended to item and shop names.
+Put the live-data path behind the existing payload version gate (KNOWN_V is at v4 today) so the
+tab lights up by itself when the publisher sends the fields. If something still blocks you, name
+the line and what would unblock it - that report is the work. Do not stand down silently.
+
+SUPERVISOR NOTE, SO THIS IS NOT LOST: the supervisor could not correct the brief itself - editing a
+scheduled task's prompt was refused in that session ("Cowork Scheduled Task Write" denied), and a
+fire_trigger from a supervisor session comes back "not approved for CruzaderPC - this run uses the
+cloud only", i.e. a fired run has no access to the machine and can do nothing. So an out-of-band
+fire is NOT a way to feed a worker here; only the scheduled fire works, and a stale brief stays
+stale until Mr. E or an authorised session edits it. The same note applies to the HUD worker's
+brief, which still lists L61/L31/L36/L40 as its queue while Phase RC gives it L71 -> L64 -> D61 ->
+D41 -> D48.
+
 ### C-55 - ONE RARITY LADDER FOR THE WHOLE GAME (content lane, Mr. E Nov 15 17:56)
 
 Mr. E listed "common, uncommon, rare, epic, legendary, s+, ss+, sss+. or however the DnD labels

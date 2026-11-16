@@ -132,6 +132,37 @@ seen. NOTHING IN D94 IS WAITING ON MR. E ANY MORE. D94 ticks when the gloves hal
       landed and are not in question either. DO NOT reopen this. DO NOT re-measure rings.
 
   [ ] STILL OPEN - GLOVES ONLY, AND IT IS A BUILDER'S JOB NOW (re-pointed 2026-11-16 05:58 CT)
+      *** HALF DELIVERED AND NOT TICKED - IT IS BETTER AND IT STILL FAILS, AND THE REST IS A
+      RULING, NOT A BUILD. *** (supervisor, 2026-11-16 07:28 CT; art eb518ce, merged to main.)
+      The ART lane built the derivation and reported it honestly. icons.glove_form() is now the
+      SINGLE source for a glove's silhouette, and the hub icon (icons.build_gloves) and the worn
+      piece (showcase.acc_gloves) make the same call - so the glove in the satchel is still the
+      glove on the hand, the condition that has held through every D94 fix. Five cuts from the
+      item's NAME first, hash only as a fallback; cuff depth, bell flare, knuckle plate and plate
+      count all ride COST; sig(key, name) jitters every dial so two gauntlets at one price are not
+      one gauntlet. THREE MEASUREMENTS THAT WERE MEASURING NOTHING are fixed, and the third one
+      matters beyond gloves: (i) the shell was 0.085 on a measured 0.15 fist, now bounded below
+      1.0x the fist by construction; (ii) both drivers cast a ray from a REST hand anchor at an
+      ALREADY POSED body 0.56 m away and fell silently back to a constant - radii now come from
+      bone spacing (fist r = handlen x 0.50, forearm r = handlen x 0.38); (iii) d94proof.spread()
+      walked the pool cheapest-first, so every glove in the row cost 200-240 of a range topping
+      420 and EVERY cost-driven dial sat on its floor. THAT BUG AFFECTED EVERY ROW IN EVERY D94
+      PROOF, and the other seven rows have not been re-shot - so every "two objects" number from
+      before 07:04 was measured with the cost dials pinned low.
+      RESULT: 36 renders front/side/back, blank check 0 failures, PARTLY TOO SMALL 6 of 15 (was
+      11 of 15), median 0.60/0.78/0.53% (was 0.33%). Ten faults listed in docs/art/D94_GLOVES.md.
+      WHY IT STOPS HERE, AND IT IS GEOMETRY, NOT CRAFT: a pass WAS reached at a 2.0-3.3x bell
+      mouth (TELLS APART, worst 6.47%) and it looked like two dinner plates on each hero's wrists,
+      so the lane backed it out rather than ship it. A hero is ~105 px at 1080p, a hand-sized
+      glove is ~10 px, and the hands hang flush against a wide tabard - so a glove can only clear
+      the bar by standing outside the hip silhouette, at which point it stops looking like a
+      glove. The three ways forward are a RULING and are in NEEDS MR. E. The lane did not quietly
+      take one, which was right.
+      MIRROR, ONLY IF HE PICKS (b) OR (c): the game build ports icons.glove_form bit for bit into
+      scripts/gear.gd's glove branch, sizes off BONE SPACING not a ray, and keeps the whole glove
+      on ONE bone - splitting the cuff onto lowerarm.<side> was tried here and pulls apart in the
+      idle pose. Worth a grep while in there: any other rest-anchor ray at a posed body is the
+      same silent no-op.
       Mr. E, same sentence: "gloves can be seen". The measurement agrees - gloves are PARTLY TOO
       SMALL, 11 of 15 pairs, so eleven pairs do not read as two objects on a body at stream size.
       This has stopped being a design call: he has ruled that gloves must be visible, so the
@@ -318,22 +349,23 @@ direction.
                    NOTED FOR LATER, NOT NOW: the fourteen minibosses need their bestiary.gd heights
                    (h = authored + 1.30 m, table in docs/art/MINIBOSS_FIT.md) and Mr. E's
                    wand_crystal.glb needs an attach - both after Phase 1, both yours.
-  ART          ->  *** D94 GLOVES - UNCHANGED, AND IT IS NOW THE OLDEST THING ON YOUR ROW. *** You
-                   spent 05:34 and 06:34 on minibosses and the FIT proof, which was useful (the
-                   fourteen are shorter than the party and built in the wrong register, and that is
-                   now written down) - but the gloves half is Mr. E's own 04:56 ruling and it has not
-                   been started. Verbatim: "i understand the rings but gloves can be seen so we dont
-                   have to make new rings." RINGS ARE CLOSED - do not build an oversize ring and do
-                   not re-measure rings. GLOVES ARE NOT: 11 of 15 pairs are too small to tell apart
-                   on a body. Give the glove derivation real silhouette - cuff depth, knuckle plate,
-                   gauntlet flare riding COST, name first and hash as a fallback - and keep the hub
-                   icon and the thing on the hand ONE object, the condition that has held through
-                   every D94 fix. FIT IS THE TEST: six different gloves on real hero bodies, front,
-                   side and back. The game build mirrors gear.gd after you - name that half, do not
-                   reach into it. ALSO: your worktree is DIRTY - twenty-four miniboss PNGs under
-                   renders/art/minibosses/ and five files under tools/art/ are modified and
-                   uncommitted. Commit them or revert them; do not leave a slot's work unpushed.
-                   THEN, and only then: the miniboss REGISTER conversion you proved was needed
+  ART          ->  *** RE-SHOOT THE SEVEN OTHER D94 PROOF ROWS. GLOVES ARE OUT OF YOUR HANDS. ***
+                   CORRECTED AT 07:28: your gloves work landed at 07:04 while I was mid-run and it
+                   is merged. It is HALF DELIVERED, not ticked, and that is not a mark against you -
+                   you got 11/15 down to 6/15, kept the icon and the worn piece one object, and then
+                   said plainly that the bar needs a ruling rather than shipping two dinner plates
+                   per hero. The three ways forward are with Mr. E now. DO NOT keep pushing gloves
+                   bigger while that sits with him.
+                   WHAT IS YOURS, AND IT IS YOUR OWN FINDING: d94proof.spread() walked the pool
+                   CHEAPEST-FIRST, so every row was shot with its cost-driven dials pinned on the
+                   floor. You fixed the walk and re-shot gloves. THE OTHER SEVEN ROWS WERE NEVER
+                   RE-SHOT, which means every "two objects" percentage D94 has quoted since the
+                   start - amulet 0.52, cloak 15.96, hat 17.54, weapon 3.05 - was measured on a
+                   crippled spread. Re-shoot the seven and report the real numbers. If a row got
+                   worse, say so; a measurement nobody trusts is worth less than a bad one.
+                   NOTE: your worktree was dirty with twenty-four miniboss PNGs and five tools/art
+                   files at 07:00 and the 07:04 commit swept them up, so that is closed.
+                   AFTER the re-shoot: the miniboss REGISTER conversion you proved was needed
                    (drillmaster_chibi is your own worked example, seven faults listed; the other
                    thirteen wait on the head/register three). The +1.30 m heights are NOT yours -
                    they are a bestiary.gd number.
@@ -5433,7 +5465,22 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
   executes nothing; CSP unchanged; all six local checks pass. KNOWN LIMIT recorded in web/NOTES.md: the link is
   per NAME because the snapshot carries no stable hero id - a renamed hero's old link lands on the note.
 ================================================================================
-## NEEDS MR. E (supervisor, updated 2026-11-16 05:58 CT). Four things, all short.
+## NEEDS MR. E (supervisor, updated 2026-11-16 07:28 CT). Five things, all short.
+  5. GLOVES - THE ONE NEW DECISION, AND IT IS THE LAST THING IN D94. You ruled at 04:56 that
+     gloves can be seen, so the art lane built the silhouette: 11 of 15 pairs too small is now 6
+     of 15, and the glove in the satchel is still the glove on the hand. It still does not clear
+     the bar, and the reason is geometry, not effort: a hero is about 105 px on a 1080p stream, a
+     hand-sized glove is about 10 px, and the hands hang flush against the tabard. A pass WAS
+     reached by flaring the cuff to 2.0-3.3x the forearm - and it looked like two dinner plates
+     strapped to each hero's wrists, so it was backed out rather than shipped to you. Pictures:
+     renders/art/d94g_front/_row_gloves.png, and the same row in _side and _back. Three ways,
+     one word each: (a) GLOVES ARE AN INVENTORY ITEM, like rings - read in the hub at 400 px
+     where all five cuts show, and no longer measured against the stream bar. This is the ruling
+     you already made once. (b) LOWER THE BAR for small slots - "partly too small" passes for
+     gloves and rings, "duplicate" still fails; what is already built satisfies that today.
+     (c) CHANGE THE POSE, not the glove - hands even slightly off the hip would show gloves,
+     bracers and rings at once, for every item in the slot forever, but it is an animation and
+     director change, not an art one. The builders did not pick for you. D94 ticks on your word.
   Your 04:56 answers closed three that were sitting here - the ring/glove call, the D94
   shutdown, and the legendary cap. Rings are accepted, the three lanes are back on, and the
   cap is now C-61 on the content lane. Nothing below is a repeat of those.

@@ -168,37 +168,157 @@ def build_boots(P, c):
                 P.add(L.sphere(0.05, 0.05, 0.05, 8, 6), 'gem', loc=(x, 0.01, z))
 
 
+class Dial(object):
+    """Twelve independent dials off one item key."""
+    __slots__ = ("h", "d")
+
+    def __init__(self, h):
+        self.h = h
+        self.d, x = [], h | 1
+        for _ in range(12):
+            x = (x * 1103515245 + 12345) & 0x7FFFFFFF
+            self.d.append(x)
+
+    def u(self, i, lo=0.0, hi=1.0):
+        """A float in [lo, hi) off dial i."""
+        return lo + (hi - lo) * (self.d[i % 12] / 2147483648.0)
+
+    def n(self, i, lo, hi):
+        """An integer in [lo, hi] off dial i."""
+        return lo + self.d[i % 12] % max(1, hi - lo + 1)
+
+    def one(self, i, seq):
+        return seq[self.d[i % 12] % len(seq)]
+
+    def bit(self, i, p=0.5):
+        return self.u(i) < p
+
+
+def sig(key, name=""):
+    """FNV-1a over the item's key AND name - the two things only this item has."""
+    hay = (str(key or "") + "|" + str(name or "")).lower()
+    h = 2166136261
+    for c in hay:
+        h = ((h ^ ord(c)) * 16777619) & 0xFFFFFFFF
+    return Dial(h)
+
+
+# ----------------------------------------------- D94: THE GLOVE'S SILHOUETTE
+# ONE SOURCE OF TRUTH, shared by the hub icon (build_gloves below) and the
+# thing on the hand (showcase.acc_gloves), so the glove a viewer buys in the
+# hub is the glove that turns up on the hero. That condition has held through
+# every D94 fix and it holds through this one.
+#
+# WHY THIS EXISTS, so nobody re-derives it. The D94 proof sheet measured the
+# gloves row at worst 0.00% / median 0.33% of the hero's own stream pixels:
+# PARTLY TOO SMALL, 11 of 15 pairs. They were NOT duplicates - strip 1 showed
+# six different objects. They were invisible, and the cause was a number:
+#   measured on the KayKit body - fist 0.15 across, hand bone to fingertip
+#   0.258, forearm (lowerarm -> wrist) 0.26, arm 0.30 thick
+#   the glove was - hand shell 0.085 across, cuff 0.095 long
+# A glove smaller than the hand inside it has no silhouette to tell apart.
+# Mr. E, 16 Nov 04:56, verbatim: "gloves can be seen". So the three things that
+# make a glove read from across a room all RIDE COST, which is the receipt a
+# viewer paid for:
+#   CUFF    how far up the forearm it reaches, as a fraction of the forearm
+#   FLARE   how wide the cuff lip opens, as a multiple of the arm's radius
+#   KNUCK   how far the back-of-hand plate stands off the fist
+# SHELL is never below 1.0: the glove is always bigger than the hand.
+# The CUT comes from the item's NAME first (NAME_HINTS) and from its hash only
+# as a fallback, exactly as every other D94 derivation does.
+GLOVE_CUTS = ("gauntlet", "mitt", "studded", "vambrace", "wrap")
+
+# CUFF is a fraction of the FOREARM (0.26 m measured). FLARE is a multiple of
+# the FOREARM RADIUS (0.055 m measured) and is what a viewer actually sees -
+# the lip stands clear of the arm whatever the body is doing with its hands.
+# SHELL is a multiple of the FIST RADIUS (0.075 m) and is never below 1.0.
+#            cut:  gauntlet  mitt  studded  vambrace  wrap
+_G_CUFF0   = (0.30, 0.13, 0.20, 0.42, 0.22)
+_G_CUFFK   = (0.26, 0.14, 0.20, 0.20, 0.18)
+_G_FLARE0  = (1.70, 1.25, 1.40, 1.55, 1.18)
+_G_FLAREK  = (0.95, 0.30, 0.55, 0.80, 0.26)
+_G_KNUCK0  = (0.34, 0.10, 0.21, 0.15, 0.06)
+_G_KNUCKK  = (0.52, 0.26, 0.44, 0.30, 0.22)
+_G_SHELL0  = (1.46, 1.62, 1.38, 1.32, 1.26)
+_G_PLATES  = ((3, 6), (0, 1), (2, 5), (1, 3), (0, 2))
+_G_METAL   = (True, False, True, True, False)
+_G_FINGERS = (4, 0, 4, 4, 4)
+
+
+def glove_form(variant, orn, D=None):
+    """The dials for one glove, normalised so the icon and the worn piece can
+    each scale them into their own space. orn is the item's cost quantile
+    inside its slot - the same 0..1 that drives metal, gem and wear."""
+    v = max(0, min(len(GLOVE_CUTS) - 1, int(variant)))
+    o = max(0.0, min(1.0, float(orn)))
+    # the item's own key moves proportion inside whatever the cut decided, so
+    # two gauntlets at the same price are not one gauntlet (D94b's rule).
+    j = (lambda i, lo, hi: D.u(i, lo, hi)) if D is not None else (lambda i, lo, hi: 1.0)
+    cuff = _G_CUFF0[v] + _G_CUFFK[v] * o
+    return dict(
+        cut=GLOVE_CUTS[v], variant=v,
+        cuff=max(0.10, min(0.94, cuff * j(0, 0.86, 1.14))),
+        flare=max(1.0, (_G_FLARE0[v] + _G_FLAREK[v] * o) * j(1, 0.93, 1.09)),
+        knuck=max(0.0, (_G_KNUCK0[v] + _G_KNUCKK[v] * o) * j(2, 0.86, 1.18)),
+        shell=max(1.02, _G_SHELL0[v] * j(3, 0.96, 1.10)),
+        plates=(_G_PLATES[v][0] + int(round((_G_PLATES[v][1] - _G_PLATES[v][0]) * o))),
+        metal=_G_METAL[v], fingers=_G_FINGERS[v],
+        lip=(_G_FLARE0[v] + _G_FLAREK[v] * o) > 1.85)
+
+
 # ---------------------------------------------------------------------- gloves
 def build_gloves(P, c):
-    v, orn = c['variant'], c['orn']
-    flen = (0.30, 0.10, 0.34, 0.30, 0.26)[v]
-    cuff = (0.24, 0.18, 0.22, 0.56, 0.26)[v]
-    mitt = (v == 1)
+    """The hub icon. Same dials as the worn piece; icon space is ~2.0 across,
+    the body is ~0.15 at the fist, so everything here is the worn number x 4.6.
+    The cuff is the big silhouette - it runs DOWN the icon off the wrist."""
+    F = glove_form(c['variant'], c['orn'], c.get('D'))
+    orn = c['orn']
+    K = 3.4                                   # icon units per metre of body
+    cuff = 0.26 * F['cuff'] * K               # forearm 0.26 m (measured)
+    hw = 0.074 * F['shell'] * K               # fist radius  = handlen x 0.50
+    flare = 0.056 * F['flare'] * K            # forearm rad. = handlen x 0.38
+    flen = (0.0, 0.30, 0.34, 0.30, 0.22)[F['variant']]
     for s in (-1, 1):
-        x = 0.32 * s
-        P.add(L.box(0.34, 0.16, 0.40), 'cloth', loc=(x, 0, -0.06))
-        if mitt:    # one pocket for four fingers
-            P.raw(aim(L.cone(0.17, 0.13, 0.26, 12), (x, 0, 0.12), (0, -0.05, 1)), 'cloth')
+        x = 0.36 * s
+        # the cuff first and deepest: a tall cone running down off the wrist
+        P.raw(aim(L.cone(flare, hw * 0.92, cuff, 14), (x, 0, -0.18 - cuff),
+                  (0, 0, 1)), 'metal' if F['metal'] else 'dark')
+        if F['lip']:                          # a hard flared lip at the mouth
+            P.raw(L.tube(ring_pts(flare * 1.02, 20, -0.18 - cuff), 0.055, 8),
+                  'metal' if F['metal'] else 'dark')
+        # the hand shell, always wider than the hand under it
+        P.add(L.box(hw * 2.0, 0.17, 0.42), 'cloth', loc=(x, 0, -0.04))
+        if F['fingers'] == 0:                 # a mitt: one pocket for four
+            P.raw(aim(L.cone(hw * 0.95, hw * 0.62, 0.30, 12), (x, 0, 0.14),
+                      (0, -0.05, 1)), 'cloth')
         else:
             for k in range(4):
-                fx = x + (-0.12 + 0.08 * k) * s
-                P.raw(L.tube([(fx, 0, 0.14), (fx, -0.01, 0.14 + flen)], [0.045, 0.036], 7), 'cloth')
-            if v == 4:   # fingerless: the tips are cut away, so cap them short
+                fx = x + (-0.13 + 0.087 * k) * s
+                P.raw(L.tube([(fx, 0, 0.16), (fx, -0.01, 0.16 + flen)],
+                             [0.048, 0.038], 7), 'cloth')
+            if F['variant'] == 4:             # fingerless: tips cut away
                 for k in range(4):
-                    fx = x + (-0.12 + 0.08 * k) * s
-                    P.add(L.sphere(0.045, 0.045, 0.02, 8, 6), 'dark', loc=(fx, -0.01, 0.14 + flen))
-        P.raw(L.tube([(x + 0.19 * s, 0, 0.02), (x + 0.30 * s, -0.02, 0.18)], [0.05, 0.04], 7), 'cloth')
-        P.raw(aim(L.cone(0.21, 0.19, cuff, 12), (x, 0, -0.26 - cuff * 0.5), (0, 0, 1)), 'dark')
-        if v == 0:   # plated gauntlet
-            for k in range(3):
-                P.add(L.box(0.33, 0.07, 0.09), 'metal', loc=(x, -0.09, 0.02 + 0.10 * k))
-            P.add(L.sphere(0.07, 0.05, 0.07, 10, 7), 'gem', loc=(x, -0.11, -0.16))
+                    fx = x + (-0.13 + 0.087 * k) * s
+                    P.add(L.sphere(0.048, 0.048, 0.022, 8, 6), 'dark',
+                          loc=(fx, -0.01, 0.16 + flen))
+        P.raw(L.tube([(x + hw * 0.95 * s, 0, 0.02), (x + hw * 1.5 * s, -0.02, 0.20)],
+                     [0.055, 0.042], 7), 'cloth')
+        # THE KNUCKLE PLATE - the dial that stands off the back of the hand
+        kn = 0.15 * F['knuck'] * K
+        if kn > 0.04:
+            for k in range(max(1, F['plates'])):
+                z = 0.10 - 0.11 * k
+                P.add(L.box(hw * 1.9, 0.07 + kn * 0.30, 0.085),
+                      'metal' if F['metal'] else 'dark', loc=(x, -0.10 - kn, z))
+            if F['metal']:
+                P.add(L.sphere(0.075, 0.05, 0.075, 10, 7), 'gem',
+                      loc=(x, -0.12 - kn, -0.18))
         elif orn > 0.45:
             P.add(L.sphere(0.06, 0.045, 0.06, 10, 7), 'gem', loc=(x, -0.10, -0.08))
-        if v == 2:   # studs down the fingers
+        if F['variant'] == 2:                 # studs down the fingers
             for k in range(4):
-                P.add(L.sphere(0.028, 0.028, 0.028, 6, 5), 'metal',
-                      loc=(x + (-0.12 + 0.08 * k) * s, -0.045, 0.30))
+                P.add(L.sphere(0.030, 0.030, 0.030, 6, 5), 'metal',
+                      loc=(x + (-0.13 + 0.087 * k) * s, -0.050, 0.32))
 
 
 # ------------------------------------------------------------------------- hat

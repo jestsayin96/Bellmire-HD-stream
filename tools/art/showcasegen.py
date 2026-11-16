@@ -476,11 +476,8 @@ def main():
             fL = anchors["foot.l"]
             fw = max(ray_out(body_trees, Vector((fL.x, fL.y, 0.075)), (1, 0, 0)) or 0.055,
                      ray_out(body_trees, Vector((fL.x, fL.y, 0.075)), (-1, 0, 0)) or 0.055)
-            hL = anchors["hand.l"]
-            hr = max(ray_out(body_trees, hL, (0, 0, 1)) or 0.045,
-                     ray_out(body_trees, hL, (0, -1, 0)) or 0.045)
+
             boot_k = max(0.80, min(1.9, (fw + 0.016) / 0.058))
-            glove_k = max(0.80, min(1.9, (hr + 0.012) / 0.044))
 
             # the head, measured: centre and radius of the body's own skull
             headobjs = [ob for ob in meshes if "_Head" in ob.name or "Hair" in ob.name]
@@ -511,9 +508,6 @@ def main():
                     if q.name.startswith("Acc_Boot"):
                         f = anchors["foot." + q.name[-1].lower()]
                         scale_part(q, (f.x, f.y, 0.0), boot_k, boot_k, 1.0)
-                    elif q.name.startswith("Acc_Glove"):
-                        h = anchors["hand." + q.name[-1].lower()]
-                        scale_part(q, h, glove_k, glove_k, glove_k)
                     parts.append(q)
             if helm:
                 for q in SC.acc_helm(helm[1]["name"], helm[0], helm[1]["cost"], helm[2],

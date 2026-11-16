@@ -1,6 +1,17 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## NOTE FOR THE SUPERVISOR - ONE MISLABELLED COMMIT ON `laptop` (23:35, Mr. E ruled: leave it)
+Commit b3fbd16 on `laptop` says "Sync WORK_PLAN: C-55 checkbox pointer" but ALSO contains the
+game build worker's IN-PROGRESS D88 work - delve.gd, dungeon_hd.gd, dungeon_parts.gd, floorgen.gd
+and two test tools, ~523 lines - because I used `git commit -am` in that worktree while the
+worker was live on D88. Nothing is lost or corrupted and laptop was NOT pushed by me.
+DO NOT rewrite it. Mr. E chose to leave it rather than touch history on a branch someone is
+actively writing to. The game build worker will commit finished, gated D88 on top; review THAT
+commit for the real result. Treat b3fbd16's code as untested work-in-progress that happens to sit
+under a documentation message.
+LESSON: never `git commit -am` in a worktree another lane may be live in. Stage the exact file.
+================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
 Updated 2026-11-15 23:10 CT. If you own a lane, your next item is named here. Search the file
 for its ID and work it. DO NOT take "the first unchecked item you find reading down the file."

@@ -213,6 +213,22 @@ future stamp is NEGATIVE: a dead lock looks live and a live one looks immortal. 
 an assumed slot time. And BEFORE CLEARING ANY LOCK ON AGE, CHECK FOR A LIVE GODOT PROCESS - the process is
 ground truth; a stamp is only a claim about one.
 
+**FOURTH HOUR THE WINDOWS HELD, AND TWO HOUSEKEEPING FAULTS (supervisor, 2026-11-16 14:58 CT).**
+The record for 13:00-15:00 CT: game build 13:13-13:35 (22 min, D91f, inside :07-:40 and inside 25
+min) and 14:09:09-14:15:03 (6 min, D91 landing + two W-LIVE listener runs); chat bot 14:48:16-
+14:56:50 (8 min); HUD claimed 14:58:47 with a named finish of 15:05. NOBODY STARVED AND NOBODY HIT
+A HARD RELEASE. The future-stamp defect above is FIXED - every chat bot stamp this hour was real CT
+read off the machine. Two faults, both housekeeping, neither an overrun:
+  1. A :45 CLAIM MAY NOT NAME A FINISH PAST :52. The chat bot claimed at 14:48 and named 14:58,
+     which reaches five minutes into the HUD's window. Declaring a crossing is the correct shape
+     for a job already in flight, but a job that CANNOT finish inside the window is SPLIT with a
+     checkpoint commit before it starts, not declared past the boundary at claim time. The HUD got
+     its slot at 14:58:47, so nothing was lost this time.
+  2. START EVERY CLAIM ON ITS OWN LINE. The 13:10:07 game build claim was appended to the end of
+     the 12:56:21 IDLE line, so one physical line reads as both an IDLE and a RUNNING. A lane that
+     greps the last line of that file gets a wrong answer. If the file does not end in a newline,
+     write one before the claim.
+
 ### 11.4 Item reassignment (ownership only - IDs unchanged, nothing renumbered)
 
 MOVED TO DESKTOP HUD: L34 (director pane freezes), L35 (subscriber lane), L38 (ambient pane

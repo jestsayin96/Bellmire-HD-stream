@@ -118,9 +118,13 @@ def sheets(repo, resx, resy):
         p = os.path.join(root, key, "three_quarter.png")
         cells.append((key, G.box2(G.read_png(p)) if os.path.isfile(p) else None))
 
+    # the grid follows the set size: 2x2 for four, 4x2 for eight. A fixed 2x2
+    # silently dropped everything past the fourth when the second set landed.
     ch, cw = resy // 2, resx // 2
     lab = 54
-    cols, rows = 2, 2
+    n = len(cells)
+    cols = 2 if n <= 4 else 4
+    rows = (n + cols - 1) // cols
     sheet = np.zeros((rows * (ch + lab), cols * cw, 4), dtype=np.float32)
     sheet[..., 0:3] = np.array((0.055, 0.060, 0.075))
     sheet[..., 3] = 1.0

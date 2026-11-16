@@ -5975,3 +5975,8 @@ C-59 (2026-11-16) - standing backlog item 3: E3PO deepened (lore_lines.json only
   call to rewrite today; flagged for the supervisor).
 - Known, not fixed: a sprung swarm grate's bars stay down (by design - it is open). The portcullis's wheel rotation
   accumulates (cosmetic, D88's).
+## C-60 (2026-11-16) - WORK_PLAN C2 / TAKE-THIS-NEXT CONTENT row: the words Phase 2 needs (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT: C2, scoped to the ascent (D77), errand (D78), carry weight (D80), selling and the Guild vault (D81), the upgrade poll (D66). C-55 rarity ladder was already delivered as C-58, not redone. D79 stone words added too.
+- ADDED one new top-level key `phase2_words` (182 lines) in lore_lines.json: ascent, errand (collected lines keyed by town band patched 1-4 / mended 5-8 / prosperous 9-12), carry, sell, vault, stone, upgrade_poll. Plain register; no floor total stated anywhere. Pre-existing text is byte-identical (the file prefix is unchanged; the key is appended at the end).
+- CODE WIRING (for the code lane, content never edits .gd): fill tokens {name} {item} {building} {shop} {hall} {floor} {n} {m} {w} {v} {who}; errand.collected is chosen by town level band; chronicle_reached vs chronicle_came_back is the D77 payload-v5 split; stone.lords_floor is shown when a lord floor's lord is alive - the stone is NOT said to be consumed there, code decides; vault.death_kept and ascent.wipe state the loss rules plainly.
+- VALIDATION OK: json.load passes, all 22 pre-existing top-level keys equal, 182 new strings.

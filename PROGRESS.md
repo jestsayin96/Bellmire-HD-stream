@@ -6190,3 +6190,61 @@ checkpointed it at a6c1513 and the row says gate it, do not rewrite it, and it w
   third check a minute later found FOUR live Godot processes. The process is ground truth and the
   claim was real; it was not cleared. The lane waited, then did the engine-free half instead.
 - NEXT: the five engine gates above, then L70 (!catchup), then L56.
+
+## B3 - L70: what happened while I was away (chat bot, 2026-11-16 08:45-09:05 CT)
+THE LOCK WAS HELD FOR THE WHOLE SLOT AGAIN, so L69's five engine gates are STILL OWED and this
+cycle is the next queue item built engine-free. Game build D91 held it to 08:41 and the HUD claimed
+it at 08:54 for L73's 30-minute capture (expected finish ~09:03, named in the claim - the gap
+protocol working). Live Godot processes both times; nothing was cleared and the slot was not
+spent polling.
+- !catchup, aliases !mystory and !since, in scripts/chatcmd.gd and data/commands.json (L70).
+  * It reads the Chronicle the hub reads - SnapshotPublisher.chronicle(), the D60 rows with their
+    day, kind and who. NO OTHER LANE'S FILE WAS TOUCHED to get there: a new `chron_of` Callable
+    takes a source if the town hands one over (tests will), and with none set chat asks the
+    publisher standing beside it in the town. No publisher, no Chronicle, no error - the answer
+    falls back to where the hero stands and the hub pointer.
+  * A hero is matched on the row's `who` (tagged lines) AND on its text (untagged ones), on WORD
+    BOUNDARIES through the same _flat() L69 uses, so "Ash" is not found inside "Ashen".
+  * CAPPED HARD: CATCHUP_MAX = 320 characters for the whole answer, hub pointer included, and at
+    most CATCHUP_ROWS = 3 entries. A row that will not fit WHOLE is left out rather than cut off
+    mid-sentence; only a single over-long row is cut, and then on a word.
+  * The budget is spent in WEIGHT order (death > fight > loot > delve/raid > town > lore) and the
+    kept rows are only then put back into the order they happened. The first draft picked by
+    weight and PRINTED oldest-first, which spent the budget on the walk down the stair and dropped
+    the death - the one line that mattered. Measured, not guessed: a four-row busy hero.
+  * The hero's name comes off the front of each quoted row - the answer has already said whose
+    story it is - so it reads "Ashvale, since day 5: finds a Seamstring Bow... - is cut down by a
+    scarhound on floor 4." "since day N" is the oldest day the Chronicle still holds on them.
+  * No hero gets the join line, not a refusal: "No hero yet - type !enlist and there will be
+    something to tell." A dead hero still gets their story, then "Dead now; the memorial keeps the
+    name. !reroll raises another." - !catchup deliberately does NOT go through _needs, which
+    refuses a dead hero outright.
+  * L69's ask table gained one topic, "missed" -> !catchup: "what did i miss", "did i miss
+    anything", "catch me up", "what happened to my hero", "whats my hero been up to".
+- GATES THAT DO NOT NEED THE ENGINE, ALL RUN AND GREEN:
+  * python json.load data/commands.json - clean; every PRE-EXISTING key byte-identical against
+    HEAD (parsed-value comparison, every level); the only additions are the "catchup" command and
+    the "missed" ask topic, and `order` keeps every pre-existing entry in its old relative place.
+  * DRIFT, BOTH DIRECTIONS, in python off the source and the data, with tools/_l14_test.gd's OWN
+    8-space match-arm regex: 61 arm words, 0 undocumented (!test* excluded, L17's existing rule),
+    0 commands in the data unanswered, and `order` and `commands` cover each other exactly, now
+    26/26. !mystory, !since and the plural !catchups all route to catchup through canonical().
+  * ask table: `order` and `topics` still cover each other; every `cmd` topic names a real command;
+    and NO topic's own phrase is shadowed by an earlier topic (checked all ten, both directions) -
+    "my hero" still reaches !hero, "whats my hero been up to" reaches !catchup.
+  * THE CAP IS PROVEN, not asserted: a busy dead hero 283, the same hero alive 304, three 200-char
+    rows (the publisher's own LINE_MAX) 315, one short row 147, nothing at all 170. Cap 320.
+  * 0 tab characters in the file; no duplicate function or constant name introduced.
+- ONE THING THE SUPERVISOR MUST RULE ON, AND IT IS SMALL: docs/COMMANDS.md is GENERATED from
+  data/commands.json by tools/_commands_doc.gd, and tools/_l14_test.gd FAILS until it carries the
+  new command - so L14_TEST will fail on this edit until that tool is re-run. That file is not one
+  of this lane's two. Every commit that has ever touched it is a chat-command commit from this
+  lane (L14, the foreign-words pass, L68), so it looks like generated output that travels with the
+  data file; I have not assumed it and have not touched it. Say whether this lane regenerates and
+  commits it with data/commands.json, or whether the run that holds the lock does.
+- STILL OWED, UNCHANGED AND NOW COVERING BOTH ITEMS: --headless --quit-after 300 (parse),
+  tools/_commands_doc.gd (now "wrote 26 commands", and docs/COMMANDS.md WILL change - see above),
+  tools/_l14_test.gd (L14_TEST OK), tools/_twitch_parse.gd (TWITCH_PARSE OK), and _b2_ask.gd at
+  the worktree root (B2_ASK OK, then delete it and the .b2_* logs).
+- NEXT: those gates the moment the lock is free, then L56 (the delve-heavy soak, which needs the
+  engine and the lock), nothing else - L68, L69 and L70 are all written and none is ticked.

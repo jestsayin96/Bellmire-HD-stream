@@ -52,6 +52,13 @@ static func since_cmd(uid: String) -> float:
         return INF
     return float(Time.get_ticks_msec() - int(last_cmd[uid])) / 1000.0
 
+## the ladder word for a stored rarity. C-55 retired "epic" in favour of "very rare";
+## data/fishing.json still carries the old word on three catches and is not this lane's file,
+## so the retired word keeps its old step here instead of falling off the ladder (find() -> -1,
+## which would have ranked an epic catch below junk and printed a word nothing else uses).
+static func _band(r: String) -> String:
+    return "very rare" if r == "epic" else r
+
 ## what a hero has on them: steel, armour, potions, oil, gold, and the fish
 func inventory(user_id: String) -> String:
     var h := roster.get_hero(user_id)
@@ -66,11 +73,15 @@ func inventory(user_id: String) -> String:
         var cs: Array = catches_of.call(String(h["name"]))
         if not cs.is_empty():
             var best: Dictionary = cs[0]
-            var order := ["junk", "common", "uncommon", "rare", "epic", "legendary"]
+            # C-55 retired "epic" from the ladder - items.json bands the step as "very rare".
+            # data/fishing.json is the GAME BUILD's and still says "epic" in its ladder and on
+            # three catches, so _band() ranks and PRINTS the retired word as the step it was,
+            # and chat never says a word the rest of the game has stopped using.
+            var order := ["junk", "common", "uncommon", "rare", "very rare", "legendary"]
             for x in cs:
-                if order.find(String(x.get("rarity", ""))) > order.find(String(best.get("rarity", ""))):
+                if order.find(_band(String(x.get("rarity", "")))) > order.find(_band(String(best.get("rarity", "")))):
                     best = x
-            line += "  |  %d catch%s, best: %s (%s)" % [cs.size(), "" if cs.size() == 1 else "es", best.get("name"), best.get("rarity")]
+            line += "  |  %d catch%s, best: %s (%s)" % [cs.size(), "" if cs.size() == 1 else "es", best.get("name"), _band(String(best.get("rarity", "")))]
     return line
 var _last := {}                # user_id -> msec of last accepted command
 var _seen_names := {}

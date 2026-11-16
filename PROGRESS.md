@@ -6144,3 +6144,49 @@ Two files touched and no others: scripts/chatcmd.gd and data/commands.json.
   assets/kit/materials/MI_*.tres pointing at assets/kit/textures/T_*_BaseColor.png that are not in the repo.
   Nothing to do with chat; flagged for whoever owns assets/kit.
 - NEXT: L69 (the bot carries the chat - plain questions, not just commands), then L70 (!catchup), then L56.
+
+## B2 - L69's gates owed, and the retired "epic" out of the catch ladder (chat bot, 2026-11-16 07:45-08:35 CT)
+THE ENGINE HALF OF THIS CYCLE DID NOT RUN. The Godot lock was held by the game build for the whole
+slot, so per the CHAT BOT row in TAKE THIS NEXT ("if the lock is held, say so in your cycle and gate
+the parts that do not need the engine rather than burning the slot polling") this cycle is the
+engine-free half plus the one word that was owed. L69 ITSELF WAS NOT REWRITTEN - the supervisor
+checkpointed it at a6c1513 and the row says gate it, do not rewrite it, and it was not touched.
+
+- scripts/chatcmd.gd ONLY this cycle. data/commands.json unchanged since the checkpoint.
+- THE RETIRED LADDER WORD IS OUT OF CHAT. `order` in inventory() said
+  ["junk","common","uncommon","rare","epic","legendary"]; C-55 retired "epic" and items.json bands
+  that step "very rare" (58 pieces). The array now reads "very rare", and a new static `_band(r)`
+  maps the old word onto that step for BOTH the ranking and the PRINTED line, so:
+  (a) nothing regresses while data/fishing.json still says "epic" in its ladder and on three
+      catches - that file is the GAME BUILD's and its data arm is theirs, not this lane's;
+  (b) chat stops saying a word the rest of the game has stopped using;
+  (c) the failure mode is closed either way: a rarity that is not on the ladder makes
+      Array.find() return -1, which ranked an "epic" catch BELOW junk and would have ranked any
+      future band the same way. The bug was a misranked "best catch", not only a stale word.
+  When the game build lands fishing.json, `_band` can go; until then it is what keeps the two
+  halves agreeing. Nothing else in the file was touched.
+- GATES THAT DO NOT NEED THE ENGINE, ALL RUN AND GREEN:
+  * python json.load data/commands.json - clean; every PRE-EXISTING top-level key byte-identical
+    against HEAD (compared parsed values, not text); the only key L69 added is "ask".
+  * DRIFT, BOTH DIRECTIONS, read out of the source and the data in python: all 25 commands in the
+    data are answered by a match arm (0 unanswered), and every match arm is in the data (0 missing)
+    once !test* is excluded, which is L17's rule in tools/_l14_test.gd, not a new exemption. The two
+    other names my first pass flagged, "gold" and "kills", are _board() arguments and heading keys,
+    not match arms - a crude-parser artifact, checked by hand and recorded here so the next run does
+    not chase them.
+  * ask-table integrity: `order` and `topics` cover each other exactly (0 either side); every `cmd`
+    topic names a real command or alias; every topic has a reply or a cmd; longest shared answer
+    with the hub pointer is 229 characters, well inside Twitch's 500.
+  * no tab characters introduced (0 in the file); the file stays 4-space, so the 8-space match-arm
+    regex tools/_l14_test.gd reads the source with is unaffected.
+- STILL OWED, AND IT IS THE NEXT RUN'S FIRST JOB: the five ENGINE gates on L69 + this edit -
+  --headless --quit-after 300 (parse), tools/_commands_doc.gd (expect "COMMANDS_DOC wrote 25
+  commands" and docs/COMMANDS.md UNCHANGED), tools/_l14_test.gd (L14_TEST OK - L68's drift test),
+  tools/_twitch_parse.gd (TWITCH_PARSE OK), and the temporary harness _b2_ask.gd still sitting at
+  the worktree root (expect B2_ASK OK; DELETE it and the .b2_* logs before its commit).
+- LOCK, NOT CLEARED, AND ONE NEAR MISS WORTH THE RECORD: docs/RUN_LOCK.txt carried RUNNING 07:43,
+  07:59 and 08:23 (game build D91 finish) across this slot. At 07:50 the 07:43 claim looked stale -
+  NO Godot process across two checks 45 s apart - and the age rule alone would have cleared it. A
+  third check a minute later found FOUR live Godot processes. The process is ground truth and the
+  claim was real; it was not cleared. The lane waited, then did the engine-free half instead.
+- NEXT: the five engine gates above, then L70 (!catchup), then L56.

@@ -442,7 +442,8 @@ def main():
             for q in SC.armour(arec["name"], arec["cut"], tier, S, anchors):
                 parts.append(q)
             use_model = GM.pick(wrec["family"], wrec["name"], tier, rec["weapon"])
-            wp = SC.weapon(wrec["name"], wrec["family"], tier, rec["weapon"])
+            wp = SC.weapon(wrec["name"], wrec["family"], tier, rec["weapon"],
+                           key=rec["weapon"])
             # authored about its grip at the origin: carry it to the hand slot,
             # and out from the hip so the hand is not inside the blade
             hs = anchors["handslot.r"]
@@ -538,7 +539,7 @@ def main():
                 if mmx is not None and (mmx.z - mmn.z) > anchors["upperarm.l"].z:
                     GM.ground(mobjs)        # a staff stands on the floor
                 GM.tint(mobjs, tint_rgb, "w_" + key, 0.42 + 0.34 * wear)
-                orn = GM.ornament(mobjs, tier, mats, "w_" + key)
+                orn = GM.ornament(mobjs, tier, mats, "w_" + key, key=rec["weapon"])
                 models += mobjs + orn
                 model_groups.append(("Model_Weapon", wrec["name"], "weapon", mobjs,
                                      (hs_posed, 0.17)))
@@ -551,7 +552,7 @@ def main():
                     if o.name.startswith("Weapon_"):
                         bpy.data.objects.remove(o, do_unlink=True)
             if rec.get("shield"):
-                sp = GM.shield_for(tier)
+                sp = GM.shield_for(tier, key=rec.get("shield") or key)
                 sobjs = GM.load(repo, sp[0], sp[1], key + "_sh")
                 if sobjs:
                     hl = hand_delta(arm, "handslot.l") @ anchors["handslot.l"]
@@ -561,7 +562,8 @@ def main():
                     GM.place(sobjs, hl + Vector((0.135, -0.105, 0.075)),
                              anchors["upperarm.l"].z * 0.55, lean=0.16)
                     GM.tint(sobjs, tint_rgb, "s_" + key, 0.42 + 0.34 * wear)
-                    models += sobjs + GM.ornament(sobjs, tier, mats, "s_" + key)
+                    models += sobjs + GM.ornament(sobjs, tier, mats, "s_" + key,
+                                                  key=str(rec.get("shield") or key))
                     model_groups.append(("Model_Shield", "shield (" + sp[1] + ")",
                                          "offhand", sobjs, (hl, 0.19)))
                     model_notes.append(dict(slot="offhand", item="shield (" + sp[1] + ")",

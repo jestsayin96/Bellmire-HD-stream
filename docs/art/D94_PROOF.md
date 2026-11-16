@@ -39,21 +39,29 @@ not a bug).
 
 ## THE VERDICTS
 
-| row | verdict | worst pair | median |
-|---|---|---|---|
-| ring | **TOO SMALL ON STREAM** | 0.00% | 0.00% |
-| amulet | **DUPLICATES 1/15** | 0.00% | 0.55% |
-| cloak | **DUPLICATES 1/15** | 0.00% | 26.72% |
-| boots | TELLS APART | 1.68% | 4.09% |
-| gloves | **DUPLICATES 1/15** | 0.00% | 0.25% |
-| hat | **DUPLICATES 1/15** | 0.00% | 33.97% |
-| weapon | **DUPLICATES 1/15** | 0.00% | 5.66% |
-| armour | TELLS APART | 19.65% | 35.17% |
+Two runs, the same test, the same metric. The first one failed five times and
+that is what it was built to do; the second is after the fix below.
 
-### 1. FIVE PAIRS OF NAMED ITEMS ARE ONE OBJECT
+| row | 15 Nov - first run | worst | 16 Nov - after the fix | worst | median |
+|---|---|---|---|---|---|
+| ring | TOO SMALL ON STREAM | 0.00% | TOO SMALL ON STREAM | 0.00% | 0.00% |
+| amulet | **DUPLICATES 1/15** | 0.00% | TELLS APART | 0.52% | 0.97% |
+| cloak | **DUPLICATES 1/15** | 0.00% | TELLS APART | 15.96% | 29.59% |
+| boots | TELLS APART | 1.68% | TELLS APART | 1.72% | 4.47% |
+| gloves | **DUPLICATES 1/15** | 0.00% | PARTLY TOO SMALL 11/15 | 0.00% | 0.33% |
+| hat | **DUPLICATES 1/15** | 0.00% | TELLS APART | 17.54% | 36.07% |
+| weapon | **DUPLICATES 1/15** | 0.00% | TELLS APART | 3.05% | 7.65% |
+| armour | TELLS APART | 19.65% | TELLS APART | 19.65% | 35.17% |
 
-These are not "similar". The renders are identical, and each pair is two names,
-two prices and two flavour lines that a viewer would pay separately for:
+**NO ROW REPORTS DUPLICATE.** All 120 pairs across the eight rows are two
+objects. What is left is the OTHER failure, and it is not a build bug: a ring
+and most pairs of gloves are too small to be seen on a body at stream distance,
+which is section 2 below and is Mr. E's call, not the builder's.
+
+### 1. FIVE PAIRS OF NAMED ITEMS WERE ONE OBJECT - FIXED 16 Nov
+
+These were not "similar". The renders were identical, and each pair is two
+names, two prices and two flavour lines that a viewer would pay separately for:
 
 - **Gatehouse Whistle = Brewster's Charm** (amulet)
 - **Hurdler's Cloak = Osier-cutter's Cloak**
@@ -61,15 +69,67 @@ two prices and two flavour lines that a viewer would pay separately for:
 - **Straw Hat = Miller's Cap**
 - **Scarbow = Seamstring** (weapon - *both tier 5 ranged*)
 
-The cause is the same in all five: the derivation is `name-variant x cost
+The cause was the same in all five: the derivation was `name-variant x cost
 quartile`, and two items that land on the same variant and the same quartile
-land on the same object. The weapon case is the worst of them, because
-`showcase.weapon()` keys off **family + tier only** - so EVERY tier-5 bow is
-the same bow, and the duplicate is only visible here because the row happened
-to draw two. The fix belongs in the builder, not in this sheet: the item's own
-key has to reach the geometry, not just the material.
+land on the same object. Two Mitts are both "mitt". Two tier-5 bows are both a
+tier-5 bow - `showcase.weapon()` keyed off **family + tier only**, so EVERY
+tier-5 bow was the same bow and the duplicate was visible here only because
+the row happened to draw two of them.
 
-### 2. RING, AMULET AND GLOVES CANNOT BE SEEN AT STREAM DISTANCE AT ALL
+**THE FIX: THE ITEM'S OWN KEY NOW REACHES THE GEOMETRY.** `showcase.sig(key,
+name)` hashes the two things only this item has and returns twelve dials. The
+variant still decides the KIND - that is the part a viewer can name, and it
+must not move - but inside a kind the key sets PROPORTION and COUNT: band
+width and how many wires in a ring, brim width against crown height on a hat,
+hem length and how far the cloth sweeps on a cloak, cuff length on a glove,
+limb curve and span on a bow, guard and pommel and blade taper on a sword.
+
+Proportion and count, specifically, and not size: strip 1 frames the item to
+its OWN measured bounds, so a uniformly bigger ring is the same picture. Only
+a ratio survives that framing, which is why the dials move ratios.
+
+Two more things the pictures forced out of the same code:
+
+- **Four of the eight kinds of hat had no geometry of their own.** Variants 0
+  (wide brim), 1 (cap), 2 (cone) and 7 (veil) all fell through to the war-helm
+  branch, which is the whole reason a straw hat and a miller's cap were one
+  object - and why a straw hat was made of steel. They are soft hats now, a
+  brim and a crown, and those two numbers are the difference between them.
+- **A hood left no face.** The Pieman's Hood was a closed sphere the size of
+  the skull and it swallowed the man, which is the fault the helm builder
+  already had a comment warning about. It is a crown and a cowl now, open at
+  the front.
+
+### 1b. TWO FAMILIES WERE WEARING THE WRONG BODY
+
+The fit report named these and they are the same bug, so they went with it:
+
+- **"Parish Iron Mace" rendered as a staff.** Its family in the data is
+  `arcane`; its name says mace. The name now overrides the family, and there is
+  a blunt builder behind it - a short haft with the mass at the top, in one of
+  four heads.
+- **Hand wraps and knuckles rendered as 1.3 m quarterstaves** standing below
+  the feet (family `open`, which fell through to the staff). Cold-White Wraps
+  was one of the fit report's worst faults for exactly this reason. They are a
+  wrapped fist now: cloth round the knuckles, and a bar across them if the
+  name says knuckles.
+
+### 1c. THE TOP OF THE LADDER NOW LOOKS LIKE THE TOP OF THE LADDER
+
+The first run's section 3: both tier-5 bows came back plain brown wood,
+visually below the tier-3 Emberline Sword, because wear rode the tier for
+blades and axes and never reached the ranged family. Per the 15 Nov ruling
+that condition is the receipt, and the two legendary bows were reading
+second-hand. The ranged limb is wood to tier 2 and METAL from tier 3; the
+string lights at tier 5 and a seam runs up both limbs. A viewer who spent
+months of points gets something that reads new.
+
+### 2. RING AND GLOVES CANNOT BE SEEN AT STREAM DISTANCE AT ALL
+
+*(Amulet left this list on the second run: at 0.52% worst and 0.97% median it
+is now above the bar, but barely, and the honest reading is "visible, not
+legible". Ring and gloves did not move, and nothing in a builder will move
+them.)*
 
 Look at strip 1 of `_row_ring.png`: six genuinely different rings - a signet, a
 plain band, a braided band with a blue stone, gold with amber, gold with
@@ -97,7 +157,7 @@ ways out, and they are not exclusive:
 Cloak, hat, weapon and armour all read fine, so this is specifically the three
 small slots.
 
-### 3. THE TOP OF THE LADDER DOES NOT LOOK LIKE THE TOP OF THE LADDER
+### 3. THE TOP OF THE LADDER DID NOT LOOK LIKE THE TOP OF THE LADDER - FIXED, see 1c
 
 In `_row_weapon.png` the Scarbow and the Seamstring are **tier 5** - the pieces
 a viewer spends months of points on - and they come back as plain brown wood,
@@ -151,7 +211,8 @@ bad render:
 
 ## Verification
 
-`renders/art/d94/_report.json`. Blank check **96 files, 0 failures** - every
+`renders/art/d94/_report.json`, second run 16 Nov. `ok: true`, 0 errors. Blank
+check **96 files, 0 failures** - every
 PNG re-opened and its opaque pixel count asserted, because a wrong clip range
 renders an empty transparent frame and reports success. Engine `BLENDER_EEVEE`
 (there is no `BLENDER_EEVEE_NEXT` on 5.2). 48 heroes, 20,184 faces of generated
@@ -160,10 +221,11 @@ committing; the four passes above are what viewing them bought.
 
 ## For the GAME BUILD lane
 
-Nothing here is wired. The art lane never runs Godot. What this sheet gives the
-wiring half of D94 is a list of five builder collisions to fix before
-`dress_cosmetics()` starts taking the ITEM, and the knowledge that **three of
-the six accessory slots are invisible on the body**, so wiring them per-item
+Nothing here is wired. The art lane never runs Godot. The five builder
+collisions are FIXED on the art side - `dress_cosmetics()` can take the ITEM
+and get six different objects back - and what is left for the wiring half is
+to key `gear.gd` the same way, and the knowledge that **two of the six
+accessory slots are invisible on the body**, so wiring them per-item
 buys a viewer nothing on its own - the icon path is where that receipt is paid
 today.
 

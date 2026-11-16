@@ -222,6 +222,9 @@ var rng := RandomNumberGenerator.new()
 
 signal changed(user_id: String)
 signal announced(line: String, colour: Color)
+## D70.2: a moment that belongs to ONE viewer - their hero died, was promoted, learned something.
+## kind: "fell" | "rank" | "learned". text is GAME-generated only (no hero name, no viewer string).
+signal hero_moment(user_id: String, kind: String, text: String)
 
 func _init() -> void:
     rng.randomize()
@@ -639,11 +642,13 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
         for key in unlocked_at(h, int(h["level"])):
             announced.emit("%s learns %s - %s." % [h["name"], ability_word(key), ability_blurb(key)],
                 Color(0.70, 0.92, 1.0))
+            hero_moment.emit(user_id, "learned", "your hero reached level %d and learned %s." % [int(h["level"]), ability_word(key)])
     # A promotion is a story beat, so it is said out loud like a level-up.
     var rank_now := rank_of(h)
     if rank_now != rank_was:
         announced.emit("%s is raised to %s of the Bellmire Guild."
             % [h["name"], rank_now], Color(0.98, 0.90, 0.52))
+        hero_moment.emit(user_id, "rank", "your hero was raised to %s of the Bellmire Guild." % rank_now)
         _e3po("rank_up")       # D37: the Commander of the Guards notes the promotion
     changed.emit(user_id)
 
@@ -756,6 +761,8 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
         fallen.resize(200)
     changed.emit(user_id)
     _e3po("viewer_down")       # D37: a viewer's hero fell - E3PO notes it
+    # D70.2: tell the OWNER, by login, in one line. killed_by is a monster/raider name the game made.
+    hero_moment.emit(user_id, "fell", ("your hero fell defending Bellmire, cut down by %s at level %d. !reroll to rise again." % [killed_by, int(h["level"])]) if floor_no <= 0 else ("your hero fell on floor %d to %s at level %d. !reroll to rise again." % [floor_no, killed_by, int(h["level"])]))
     # A hero cut down in the town by a raider was being announced as "falls on
     # floor 0", because this line assumed every death happens underground.
     # Raids account for 3-5 deaths per ten days, so that nonsense was on screen

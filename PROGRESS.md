@@ -6879,3 +6879,39 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
 - ONE THING FOR THE RECORD AGAINST MYSELF: I spent :45 to :48 reading the plan, the ruling and the
   code before claiming, so the engine work started three minutes into a seven-minute window. The
   battery still ended inside it, but next slot the lock claim comes first and the reading second.
+
+## D70 .1/.2/.3 - the bot knows who it is talking to: first-timer welcome, a hero's own moments told to its owner, nothing said late (game build, 2026-11-16 16:08-16:25 CT)
+- TAKE THIS NEXT gave the game build D70 .1/.2/.3 (Phase 2). .4 was already ticked (chatbot ade76e5).
+- .1 THE FIRST-TIMER. TwitchChat.parse now reads Twitch's own `first-msg` IRC tag (the flag Twitch sets on a
+  viewer's first message EVER in the channel), and accept() hands EVERY line - command or not - to
+  TwitchEventSub.saw_viewer(uid, login, first) before its "!" filter. A flagged viewer is welcomed ONCE, by
+  Twitch login: "@login welcome to Bellmire! Type !enlist and a hero of your own walks into this town - !help
+  shows the rest." Persisted per uid in user://d70_viewers.json (marked BEFORE the hero check, so it is never
+  re-tried - never chase). Not said to a first-timer who already has a hero, nor to the bot or Mr. E. Logins are
+  reduced to [a-z0-9_] before use. --script harnesses use user://d70_viewers_test.json, never the real file.
+- .2 THEIR HERO'S MOMENTS. roster.gd gains `signal hero_moment(uid, kind, text)`, emitted on a level-up that
+  UNLOCKS an ability ("learned"), a guild promotion ("rank") and a death ("fell") - not on every level, not on
+  kills. The text is game-made and NEVER carries the hero name (viewer-settable): "your hero fell on floor 4 to
+  a bog wight at level 7. !reroll to rise again." TwitchEventSub.on_hero_moment sends it to the owner's Twitch
+  login (learned from chat, kept per uid). Deaths always go; other moments are spaced 45 s per viewer, so a
+  burst of levels is ONE line. No login known -> nothing said, logged with the reason.
+- .3 THE ROOM. Per Mr. E's 14:38 ruling the game being up is the signal. Chat queue entries now carry their
+  enqueue time; a line older than CHAT_STALE (90 s) is dropped and logged, never sent late. Nothing about news is
+  persisted - the viewers file holds uids, logins and times only (checked by the test).
+- NEW GATE tools/_d70_test.gd: real TwitchChat parser + accept(), real Roster, real TwitchEventSub queue, dry-run
+  chat. D70_TEST OK 16 checks, 0 failed. Transcript (dry run):
+    @newcomer_a welcome to Bellmire! Type !enlist and a hero of your own walks into this town - !help shows the rest.
+    (second flagged line, a plain line, and a simulated restart: nothing)   (first-timer with a hero: not welcomed)
+    @regular_b your hero reached level 2 and learned Cleave.   (two more learns and a rank in the same burst: spaced out)
+    @regular_b your hero fell on floor 4 to a bog wight at level 257. !reroll to rise again.
+    hero named "/ban Mr.E\nPWNED": never reaches chat.   line queued 95 s ago: "chat skipped (stale 95s)".
+- GATES: parse 0 errors; TWITCH_PARSE OK; OFFFLOOR 0 of 2142; TOWNWALK PASS 0/17800; _delve_test 0 SCRIPT ERROR;
+  T3_TEST OK; D41Q_TEST OK. T1_TEST FAILS ONE CHECK - PRE-EXISTING AND NOT MINE: its FakeRoster has no add_brew, which
+  _do_bits_tier (untouched this cycle) calls on an anonymous cheer. Recorded, not fixed here.
+- KNOWN IMPERFECT: in a burst the FIRST moment wins the 45 s slot, so "learned Cleave" can beat a promotion in the
+  same award. Rare loot and "felled a lord" are not wired as moments yet - D70.2 names them, there is no single
+  roster hook for either; they are the remainder of .2.
+- NO LIVE TWITCH TEST THIS CYCLE: a first-msg flag cannot be produced on demand from JestSayin96 or bellmirebro (both
+  have spoken there), and a hero-moment line is chatty. 0 bits, nothing redeemed, no reward touched, nothing posted.
+- Files: scripts/twitch_eventsub.gd, scripts/roster.gd (signal + 3 emits), scripts/twitch_chat.gd (first-msg tag +
+  saw_viewer call - no other change), tools/_d70_test.gd. Backups *.bak_d70 (not committed).

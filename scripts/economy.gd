@@ -618,7 +618,8 @@ func _maybe_disaster() -> void:
 ##   - shop_grown is what the town's growth grants the building (today's curve, unchanged, so
 ##     nothing regresses); shop_raised is what viewers paid for (D66 calls raise_shop). The
 ##     level is the sum, clamped to what a smith can make at all.
-const RARITY := ["none", "common", "uncommon", "rare", "epic", "legendary"]
+## C-55: the ladder word is "very rare", matching data/items.json - "epic" is retired everywhere
+const RARITY := ["none", "common", "uncommon", "rare", "very rare", "legendary"]
 const SHOP_MAX_LEVEL := 4
 const SHOP_NAMES := {"smithy": "the smithy"}
 var shop_grown := {"smithy": 1}

@@ -2,6 +2,125 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - D91d the north-houses pocket + C-55 fishing rarity, 2026-11-16 ~10:35 CT (game build) - C-55 ON laptop; D91d on side branch d91d-wip, town soak still 1-2 frames short
+TAKE THIS NEXT gave GAME BUILD: D91 (town half + 20-min re-soak), then C-61's code mirror, then C-55's fishing arm.
+The lock was HUD's until 09:31 (its 08:58 claim named ~09:30; no Godot alive at 09:29 and 09:31). Engine
+work started 09:31; one battery 10:12-10:33; nothing started after :38 per the 09:58 ruling.
+- D91d, TRY 1 - DOOR EMERGE (townsfolk.gd x3, town.gd door_emerge): every exit set the body down ON the door
+  spot, so a row of houses emptying at once stacked folk on one point. Now the first free spot on rings round
+  the door (clear of footprints, same ground, nobody standing there). 20-min town soak (d91d/run1/
+  town_soak20.log): 92,646 frames, 1 overlap frame (0.7 cm), 0 >1 cm, 0 in a footprint - D91_TOWN FAIL by 1.
+  The fault was a WALKER (leg0) at (34.2,-69.8), not a door exit, so the door spot was not the whole story.
+- MAPPED THE POCKET (new tools/_d91d_pocket.gd, POCKET_AT=x,z: every footprint near a point, the props that
+  own them, an ASCII walkable map at FOOT_R). It is the front of the north STORE (house (32.5,-64.1), door
+  (32.47,-69.38)): a Bench at (30.9,-70.5), and the store yard's FarmCrate_Apple at (34.9,-69.9), set 0.1-0.4 m
+  off the wall at a slant - a WEDGE ONE BODY WIDE right by the door. renders/cycles/d91d/pocket.log (before).
+- D91d, TRY 2 - NO CREVICES (town.gd _close_crevices, run once after _build, before the nav bake): every loose
+  good (Barrel/Bucket/FarmCrate/Crate_/Bag/Pot_/Vase_/Chest_Wood/Anvil_Log/Whetstone - never seats, tables,
+  stalls, trees) probes out from its four sides on five lines each (incl. a step past each corner); where
+  another solid is under 0.8 m away on 2+ lines, the sliver is FILLED with a footprint of its own. Nothing
+  visible moves (first tries that SLID the crate moved it 4 cm and left the wedge). 93 fillers for 99 goods.
+  pocket6.log: the (34.0,-69.9) sliver is closed.
+  20-min soak (d91d/r2_town_soak20.log): 84,676 frames, 2 overlap frames (1 over 1 cm, worst 1.06 cm), 0 in a
+  footprint - D91_TOWN FAIL. BOTH faults are in the SAME place: (33.37,-70.22) and (33.32,-71.21), walkers in
+  the ~1 m alcove the store's front makes between the house, the bench and the crate. The sliver is gone; the
+  alcove is not, and Crowd.settle leaves a ~1 cm residual where both bodies have stone behind them.
+  NO PICTURE beyond the ASCII maps: the fillers are invisible by design and no prop moved. NOT LOOKED AT IN A
+  RENDER - say so rather than claim it.
+- WHY NOT ON laptop: D91's own test is zero frames and it is 2 (D91c: 2, try 1: 1 - all ~1 cm, all this one
+  alcove). Pushed as a CHECKPOINT to origin/d91d-wip (parent = the C-55 commit below); laptop's town.gd and
+  townsfolk.gd are back at HEAD so the worktree is clean. NEXT RUN: take d91d-wip, then fix the alcove at the
+  source - the store's bench sits 1 m from its own door (move the store-front bench or the yard crate so the
+  door opens onto open street), or make _settle_pair try the perpendicular for BOTH bodies when the pair
+  axis is stone both ways. Then one 20-min town soak. The 93 fillers are a broad nav change: townwalk with
+  them in_solid 0/16,705, stuck_on_route 7 - ALL ONE GUARD (Cort the Younger) on a bench at (-137.5,-15.1)
+  with NO filler within 9 m (pocket_w.log), so not caused by them, but D91c had 0 and it is recorded.
+- C-55 FISHING ARM, DATA + CODE TOGETHER (ON laptop): data/fishing.json ladder line 23 and the three catches
+  (111, 272, 283) say "very rare"; fishing.gd RARITY_COLOR key, angler.gd's cheer check, economy.gd RARITY[4]
+  all "very rare"; tools/_d64_test.gd updated to the new word. _fish_rolls (20k rolls x2): luck 0 = 13297/5275/
+  1026/325/77 common..legendary, "very rare" present, no "epic" anywhere; scar-touched bump walks the data
+  ladder. D64_TEST OK 17/17. No "epic" left in any game-build script or data file.
+  FOR THE HUB LANE (not mine): web/app.js SHOP_RARITY whitelist still has "epic" and no "very rare" (and
+  "rar-very rare" would not be one CSS class) - a very-rare shelf item or catch now gets no rarity frame.
+- C-61 CODE MIRROR - MEASURED, NOTHING TO SWITCH IN GAME-BUILD FILES: the global 441+ rule disagrees with the
+  stored key on 13 of 254 accessories (7 legendary below 441: 3 boots, 3 gloves, 1 amulet; 6 at 441+ not
+  legendary). NO game-build reader uses it: the satchel snapshot (town.gd) passes item["rarity"], the shop
+  gate (economy.gd) bands the WEAPON/ARMOUR tier ladder, not accessories, _d95_fit reads the stored key.
+  gear.gd's `orn` (metal step, sheen, gem glow) is a continuous cost-in-slot dial MIRRORED from
+  tools/art/icons.py, not a band: 2 of 17 legendaries (mender_wraps, armourer_gloves, gloves 320/330) sit one
+  metal step below the top. Changing it alone would break the icon = worn match D94 is built on - an ART +
+  GAME call together, not done unilaterally. The hub and the icon border colour are other lanes' files.
+- GATES (tree with D91d + C-55, renders/cycles/d91d/r2_*): parse 0 errors (parse5.log), _offfloor 0 of 2138
+  (INPROP 0, MON_INPROP 0), TWITCH_PARSE OK, _townwalk in_solid 0 PASS (stuck 7, above), _delve_test no SCRIPT
+  ERROR, D91_CROWD_TEST OK, D64_TEST OK. run1 (door emerge only): same, townwalk stuck 0 giveup 1.
+
+## D-cycle - D91c FINISH D91: the town half and the 20-minute re-soaks, 2026-11-16 ~08:55 CT (game build) - NOT PUSHED TO laptop, town soak 2 frames short
+TAKE THIS NEXT gave GAME BUILD "FINISH D91": (a) the TOWN half, (b) the 20-minute re-soak. Stages 1-4 not
+rebuilt, halls not re-measured. Not ticked - supervisor's call.
+- MEASURED FIRST (new tools/_d91_town.gd: EVERY body pair EVERY frame, every body against town.solid_at,
+  every fault attributed by who/doing what/inside what). 120 s of town on D91b's code: overlap in 13,751
+  of 14,770 frames (54,393 pair-samples, worst 1.06 m), 15,937 body-frames inside a footprint.
+  WHO: two horses in one paddock and the horses+llama were 33k of the 54k - crowd_push only shoves a body
+  that is WALKING, so beasts grazing side by side, folk stood chatting, a horse turned out on top of
+  another NEVER moved and stood inside each other for good. 14,770 of the footprint frames were ONE man:
+  the tavern keeper, posted INSIDE the large table (keeper at yard + f*2.2, table at f*1.4).
+  Bushes were already registered (D91a); the bush itself was not the leak - nobody stood in one.
+- THE FIX, ONE COPY. The dungeon's settle (delve.gd _crowd_settle) moved into crowd.gd as Crowd.settle(
+  bodies, ok, pinned) - delve now calls it (exact pair loop up to 48 bodies, 2 m buckets past that) and the
+  town calls the SAME function. town.gd gains a _TownSettler child run after every walker's physics step
+  (process_physics_priority 1000) AND at the end of the drawn frame (process_priority 1000 - a raid moves
+  defenders and runners in _process). ok() = never into a solid footprint, never down a bank (ground vs
+  ground, so guards on the keep steps still settle - the first try compared body height and froze them),
+  a beast stays on its own pen/field (animal.gd on_ground_ok). Only a body SAT on a seat is pinned.
+  _settle_out: anyone standing still inside a footprint (not on a door/seat leg) is set back out of it -
+  the hard ring for footprints a walker gets from keep_walkable on every step but a stander never did.
+  Keepers are set down clear of their own yard props (_post_clear). Crowd.settle also slides a body with
+  stone at its back instead of giving up (the dungeon's one bad frame, below), 4 passes (10 for a street
+  crowd, stopping at the first pass that finds nobody truly inside anybody).
+- 20-MINUTE DUNGEON RE-SOAK (owed by D91b): on D91b's loop as merged, 1243 s / 10 delves / 21 floors /
+  179,756 frames: ONE frame at 1.9 cm - D91_SOAK FAIL, so the 619 s pass was not the whole story. With the
+  shared settle (slide instead of give up, 4 passes): 1350 s, 7 delves, 20 floors, 195,229 frames,
+  7.37 M pair-samples, 0 overlap frames, 0 in an obstacle, 28 unsticks, 0 forced, 28,969 frames in file.
+  D91_SOAK OK. renders/cycles/d91c/soak20.log (fail) and soak20b.log (pass).
+- 20-MINUTE TOWN SOAKS (tools/_d91_town.gd, every pair every frame). Before: 13,751 of 14,770 frames
+  overlapping in 120 s. Run by run, each fix answering the last run's attribution:
+    20b (killed at 766 s): 102 frames - posted guards/chief on the keep steps never settled (the bank
+        check compared body height to terrain; a guard on a step is 0.9 m up) -> ground vs ground.
+    20c (killed at 569 s): 17 frames - a chief and a fleeing priest during a raid (_process movers)
+        -> the end-of-frame settle.
+    20d 1200 s, 23,748 frames: 3 overlap frames (32 pair-samples, worst 0.205 m, festival start) and
+        4 footprint frames (a cat) -> more passes for a street crowd, _post_clear fallback.
+    20e 1200 s, 32,450 frames: D91_TOWN OK - 0 overlap frames, 0 footprint body-frames in 6.2 M - BUT the
+        settle cost 14 ms a frame (see cost below).
+    20f (FINAL CODE) 1200 s, 82,148 frames, 16.4 M body-checks: 0 footprint body-frames; 2 overlap frames
+        (2 pair-samples, ONE over 1 cm, worst 0.026 m), both two peasants at (33.0..33.3, -70.7..-71.2) -
+        the north-houses pocket where townwalk's old BAD list also sat. D91_TOWN FAIL by those 2 frames.
+    TRIED AND BACKED OUT: a "crevice" fallback (longer and opposite slides when every short step hits a
+        wall) - 20g still had 1 frame (festival start: ten folk out of the north houses onto ONE door
+        spot), a dungeon re-soak with it showed a 1.24 m frame, and townwalk went stuck_on_route 3, then
+        5 (24 passes). Removed; crowd.gd is back to exactly the code 20f, soak20b and the f_ gates ran.
+- SHOTS renders/cycles/d91c/ (windowed 1600x900, LOOKED AT): a/b the paddock - settle OFF two horses
+  1.06 m inside each other, settle ON 0.80 m apart, same camera; c the tavern yard crowd, keeper not in a
+  footprint; d a healer in a blue wizard's hat 1.66 m from a flowering bush, standing BESIDE it - Mr. E's
+  shot, the other way round; e a lumberjack walking past a bush 2.15 m off.
+- WHAT IT COSTS (D23): the first working settle cost 4.4 ms a run, 14 ms a frame - it was nudging folk
+  held at arm's length round the 2 cm pad up to ten times a frame (6.3 passes a run). A street crowd now
+  stops at the first pass with nobody truly inside anybody, and the pair test is a cheap distance check
+  before the full one: 0.81 ms a run, 1.19 ms a frame, 1.03 passes a run (town_perf3.log, 240 s, 31,698
+  frames, 0 overlaps). Under the expensive version townwalk's watchdog fired 17-18 times; on the final
+  code it fires 3 (D91b's run: 2) - the extra fires were the frame time, not wedging.
+- Gates on the FINAL code (renders/cycles/d91c/f_*.log): parse 0 errors, _offfloor 0 of 2067 (INPROP 0,
+  MON_INPROP 0), TWITCH_PARSE OK, _townwalk stuck_on_route 0, in_solid 0/13,482 (D91b: 3/18,584), giveup 0,
+  _delve_test no SCRIPT ERROR, D91_CROWD_TEST OK (D91_EQ 0 mismatches - the town's push is untouched).
+- NOT PUSHED. The item's own test is zero frames and the town is 2 frames short in 82k, so by the
+  run rules this is NOT on laptop. It is pushed to a SIDE BRANCH, origin/d91c-wip (commit built from the
+  working tree without touching laptop), and the same changes sit uncommitted in the laptop worktree.
+  NEXT RUN: the north-houses pocket at (33, -71) - houses whose footprints overlap leave a gap a body
+  can be in but two cannot, and the folk all leave by one door spot there. Fix the SOURCE (spread the
+  door-out spot / the plot spacing) rather than a cleverer settle; then one 20-minute town soak.
+- STILL OPEN: the floor change costs 3.3-3.9 s headless (D23 item, unchanged); the dungeon has no
+  pre-D91 stuck baseline (unsticks 28 here, 30/1/73 in other runs - it wanders with the floors).
+
 ## D-cycle - D91b stages 2-4: three-cell halls, the dungeon in the shared Crowd, the party in file, 2026-11-16 ~05:55 CT (game build)
 TAKE THIS NEXT gave GAME BUILD "D91 stages 2-4" (the cloak shade step it named earlier is D94d, already merged).
 - STAGE 3 - THREE-CELL HALLS, GRID GROWN (floorgen.gd). _corridor carves the 3x3 block round every

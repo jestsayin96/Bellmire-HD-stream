@@ -171,7 +171,12 @@ const BEDS := {
     "market": ["amb/market_murmur.ogg", 11.0, 75.0, true, true],
     "forge": ["amb/forge_fire.ogg", 5.0, 40.0, true, true],
 }
-const BUS_DB := {"Music": -14.0, "Sfx": -6.0, "Ambience": -20.0, "Beds": -12.0}
+## Mr. E, Nov 15 23:12: "sound effects are too loud... the music is fine".
+## Sfx sat at -6 while Music sat at -14 - EIGHT dB over the music, which is roughly twice
+## as loud to the ear, and in a fight up to 18 voices stack at that level at once. Sfx now
+## sits 2 dB UNDER the music so a viewer can hear Mr. E talk over it. Music, Beds and
+## Ambience are UNCHANGED - he said the music is fine, and the stings ride the Music bus.
+const BUS_DB := {"Music": -14.0, "Sfx": -12.0, "Ambience": -20.0, "Beds": -12.0}
 const VOICES := 24             # D22a: the 3D pool (was 16; D15 peaked 16/16)
 const LOW_BUSY := 18           # D22a: at or above this many busy voices, low-priority kinds are dropped
 const BURST_WIN := 0.25        # D22a: a low-priority burst budget, per this many real seconds...

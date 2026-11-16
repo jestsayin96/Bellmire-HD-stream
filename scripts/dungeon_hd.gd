@@ -382,7 +382,7 @@ func _on_floor(at: Vector3) -> bool:
 
 func _clear_of_props(at: Vector3, r: float) -> bool:
     for o in info.get("obstacles", []):
-        if Vector2(at.x - (o[0] as Vector3).x, at.z - (o[0] as Vector3).z).length() < r + float(o[1]):
+        if FloorGen.obst_gap(o, at.x, at.z) < r:
             return false
     return true
 
@@ -390,6 +390,61 @@ func _clear_of_props(at: Vector3, r: float) -> bool:
 func _place_solid(node: Node3D, c: Vector2i, r: float, yaw := 0.0) -> void:
     _place(node, c, yaw)
     (info["obstacles"] as Array).append([_cell_pos(c), r])
+
+## D88: a wall-shaped piece is a BOX obstacle (FloorGen.obst_gap), not a disc - a disc big
+## enough to cover a box's corners also blocks the floor beside it, and a disc that fits the
+## sides leaves the corners walkable. hx / hz are the half-extents in the piece's own frame.
+func _place_box(node: Node3D, c: Vector2i, hx: float, hz: float, yaw := 0.0) -> void:
+    _place(node, c, yaw)
+    (info["obstacles"] as Array).append([_cell_pos(c), Vector2(hx, hz).length(), hx, hz, yaw])
+
+## D88: where a portcullis may stand. It is a WALL ACROSS A PASSAGE, so the spot is a line of
+## floor cells across a corridor or a doorway with stone at BOTH ends, at most three cells wide
+## (D91's corridors are three), with floor on both sides of every cell of it - the gate meets two
+## walls and divides one side from the other. A free-standing gate in the middle of a room blocks
+## nothing even with a perfect obstacle, so if the floor has no such line it gets NO portcullis.
+## Lines on the way through (keep_clear) are preferred: it is a trap, and a trap nobody crosses
+## may as well not exist (L46). Returns {} or {"cells", "d" (the way through), "at", "span"}.
+func _gate_spot(used: Dictionary) -> Dictionary:
+    var cells: Dictionary = info["cells"]
+    var route: Dictionary = info.get("keep_clear", {})
+    var G: float = info["grid"]
+    var on_route: Array = []
+    var off_route: Array = []
+    for c0 in cells:
+        var c: Vector2i = c0
+        for d: Vector2i in [Vector2i(1, 0), Vector2i(0, 1)]:
+            var p := Vector2i(d.y, d.x)
+            if cells.has(c - p):
+                continue                      # each line is counted once, from its first cell
+            var line: Array = [c]
+            while cells.has((line[-1] as Vector2i) + p) and line.size() <= 3:
+                line.append((line[-1] as Vector2i) + p)
+            if line.size() > 3:
+                continue                      # a room, not a passage
+            var ok := true
+            var at := Vector3.ZERO
+            var hit := false
+            for lc: Vector2i in line:
+                if not cells.has(lc + d) or not cells.has(lc - d) or used.has(lc):
+                    ok = false
+                    break
+                if not _clear_of_props(_cell_pos(lc), 1.5):
+                    ok = false
+                    break
+                at += _cell_pos(lc)
+                hit = hit or route.has(lc)
+            if not ok:
+                continue
+            at /= float(line.size())
+            if at.distance_to(info["entry"]) < G * 2.5 or at.distance_to(info["exit"]) < G * 2.5:
+                continue                      # never on the stairs
+            var spot := {"cells": line, "d": d, "at": at, "span": float(line.size()) * G - 1.0}
+            (on_route if hit else off_route).append(spot)
+    var pool := on_route if not on_route.is_empty() else off_route
+    if pool.is_empty():
+        return {}
+    return pool[_rng.randi() % pool.size()]
 
 func _place(node: Node3D, c: Vector2i, yaw := 0.0) -> void:
     node.position = _cell_pos(c) + Vector3(0, 0.05, 0)
@@ -432,6 +487,36 @@ func _dress() -> void:
     # creatures up through the grate), and both hit the TRAPS dict + the _spring
     # branches in delve.gd. Weighted by inclusion count - the old six each appear
     # once, poison/swarm once each too, so every kind lands at even weight.
+    # D88: the portcullis first, so it gets its pick of the passages before the traps take them.
+    # It is a TRAP (Mr. E, Nov 15 16:41), hung raised and still; Delve drops it on a crossing.
+    # Its obstacle is registered only when it is DOWN (a wall-to-wall box) - raised, its posts
+    # stand against the passage walls and nothing blocks the way.
+    if theme in ["crypt", "shrine", "treasury"]:
+        var gs := _gate_spot(used)
+        if not gs.is_empty():
+            var span: float = gs["span"]
+            var winch := 0 if _rng.randf() < 0.5 else (1 if _rng.randi() % 2 == 0 else -1)
+            var pn := DungeonParts.portcullis(span, 4.0, winch)
+            var dv: Vector2i = gs["d"]
+            # the grid is built across its local x and the way through is its local z
+            var yaw := PI * 0.5 if dv.x != 0 else 0.0
+            pn.position = (gs["at"] as Vector3) + Vector3(0, 0.05, 0)
+            pn.rotation.y = yaw
+            (info["root"] as Node3D).add_child(pn)
+            for lc: Vector2i in gs["cells"]:
+                for dx in range(-1, 2):
+                    for dy in range(-1, 2):
+                        used[lc + Vector2i(dx, dy)] = true
+            # half-width reaches 0.5 m into each wall (kit walls stand 0.5 m into the end cells)
+            var gate := {"node": pn, "kind": "Portcullis", "cells": gs["cells"], "d": dv, "at": gs["at"],
+                "yaw": yaw, "span": span, "winch": winch, "state": "up",
+                "box": [gs["at"], span * 0.5 + 0.6, span * 0.5 + 0.5, 0.45, yaw]}
+            if not info.has("gates"):
+                info["gates"] = []
+            (info["gates"] as Array).append(gate)
+            if not info.has("traps"):
+                info["traps"] = []
+            (info["traps"] as Array).append(gate)
     var traps := [DungeonParts.spike_trap, DungeonParts.pressure_plate, DungeonParts.fire_trap,
                   DungeonParts.dart_trap, DungeonParts.blade_trap, DungeonParts.pit_trap,
                   DungeonParts.poison_dart, DungeonParts.swarm_trap]
@@ -468,11 +553,8 @@ func _dress() -> void:
             for i in range(3):
                 var c: Vector2i = take.call()
                 if c.x > -999:
-                    _place_solid(DungeonParts.cell(3.0, 3.0, 2.8, i == 0), c, 1.9, float(_rng.randi() % 4) * PI * 0.5)
-        "crypt", "shrine", "treasury":
-            var c: Vector2i = take.call()
-            if c.x > -999:
-                _place_solid(DungeonParts.portcullis(), c, 1.2)
+                    # D88 audit: a 3.0 x 3.0 box, not a 1.9 disc (its corners stood outside the disc)
+                    _place_box(DungeonParts.cell(3.0, 3.0, 2.8, i == 0), c, 1.55, 1.55, float(_rng.randi() % 4) * PI * 0.5)
     for spec in THEME_PROPS.get(theme, []):
         var c: Vector2i = take.call()
         if c.x <= -999:

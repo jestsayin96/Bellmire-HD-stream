@@ -1780,3 +1780,45 @@ static func _in_obstacle(p: Vector3, obs: Array) -> bool:
         if Vector2(p.x - (o[0] as Vector3).x, p.z - (o[0] as Vector3).z).length() < float(o[1]) + 0.6:
             return true
     return false
+
+## ---------------------------------------------------------------- D88: obstacle shapes
+## An obstacle is [floor-local centre, radius] - a DISC, right for a table, a pillar, a statue -
+## or, for anything wall-shaped, [centre, bounding radius, half-width, half-depth, yaw] - a BOX
+## (a dropped portcullis, a prison cell). Every consumer asks obst_gap instead of reading o[1]
+## as a radius, so a wall is never approximated by a disc again: a 5.6 m gate was registered as
+## a 2.4 m disc and the party walked round it through the bars. (o[1] stays the bounding radius,
+## so anything still reading it as a disc errs on the side of blocking, never of a crack.)
+static func obst_gap(o: Array, x: float, z: float) -> float:
+    var c: Vector3 = o[0]
+    var dx := x - c.x
+    var dz := z - c.z
+    if o.size() < 5:
+        return Vector2(dx, dz).length() - float(o[1])
+    var cy := cos(float(o[4]))
+    var sy := sin(float(o[4]))
+    var qx := absf(dx * cy - dz * sy) - float(o[2])
+    var qz := absf(dx * sy + dz * cy) - float(o[3])
+    if qx <= 0.0 and qz <= 0.0:
+        return maxf(qx, qz)
+    return Vector2(maxf(qx, 0.0), maxf(qz, 0.0)).length()
+
+## D88: (x, z) moved `pad` clear of obstacle o, out through the face that (px, pz) - where the
+## body stood a moment ago - was on. A box only ever pushes a body back the way it came, so a
+## gate can never shove someone THROUGH itself to the far side.
+static func obst_push(o: Array, x: float, z: float, pad: float, px: float, pz: float) -> Vector2:
+    var c: Vector3 = o[0]
+    if o.size() < 5:
+        var d := Vector2(x - c.x, z - c.z)
+        var dir := d.normalized() if d.length() > 0.01 else Vector2(1, 0)
+        return Vector2(c.x, c.z) + dir * (float(o[1]) + pad)
+    var cy := cos(float(o[4]))
+    var sy := sin(float(o[4]))
+    var lx := (x - c.x) * cy - (z - c.z) * sy
+    var lz := (x - c.x) * sy + (z - c.z) * cy
+    var plx := (px - c.x) * cy - (pz - c.z) * sy
+    var plz := (px - c.x) * sy + (pz - c.z) * cy
+    if absf(plz) - float(o[3]) >= absf(plx) - float(o[2]):
+        lz = (float(o[3]) + pad) * (1.0 if plz >= 0.0 else -1.0)
+    else:
+        lx = (float(o[2]) + pad) * (1.0 if plx >= 0.0 else -1.0)
+    return Vector2(c.x + lx * cy + lz * sy, c.z - lx * sy + lz * cy)

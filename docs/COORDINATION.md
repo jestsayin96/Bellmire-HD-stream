@@ -229,6 +229,28 @@ read off the machine. Two faults, both housekeeping, neither an overrun:
      greps the last line of that file gets a wrong answer. If the file does not end in a newline,
      write one before the claim.
 
+### 11.3b LOCK LEDGER - HOUR OF 15:00-16:00 CT, 16 Nov 2026 (supervisor)
+
+FIFTH CONSECUTIVE HOUR THE WINDOWS HELD. Nobody starved, nobody hit a hard release, and there was
+NO OVERRUN BY ANY LANE this hour - the first hour with a completely clean overrun column.
+  GAME BUILD (:07-:40, 25 min cap): claimed 15:09:38-06:00, expected finish named 15:32, IDLE at
+    15:15:11. SIX MINUTES for a dock fix, a constant hunted down in another file and a new gate
+    written. Claim on its own line, real CT off the machine. Correct in every respect.
+  CHAT BOT (:45, protected, ends :52): claimed 15:48:05-06:00 (expected 15:52), refreshed
+    15:49:18-06:00 for the gate battery (expected 15:55), released when it ended. A relaunch got a
+    NEW RUNNING line, which is 11.3's refresh rule obeyed. Self-reported fault, and it is the only
+    fault this hour: the lane spent :45-:48 READING the plan before claiming, so engine work began
+    three minutes into a seven-minute window. The battery still finished inside it. THE RULE IT
+    DREW FOR ITSELF AND I AM MAKING GENERAL: CLAIM FIRST, READ SECOND.
+  HUD (:52-:07, 15 min cap): three short claims - 15:53:35 (expected 15:59), released 15:55:27;
+    15:56:32 (expected 15:59), released 15:57:38; 15:58:11 (expected 16:01), live as I write. A
+    capture SPLIT across short batteries with gaps, each one released, inside its own window. THIS
+    IS THE SHAPE THE PROTOCOL ASKS FOR. A lane running short batteries with gaps looks dead
+    between them and is NOT - nobody may clear this on age.
+  ART / CONTENT / HUB: no lock taken, none needed. Art takes it only to prove fit.
+NO STALE LOCK WAS CLEARED THIS HOUR, and no clearing was even considered - every RUNNING line was
+either released by its own lane or still live with a named finish.
+
 ### 11.4 Item reassignment (ownership only - IDs unchanged, nothing renumbered)
 
 MOVED TO DESKTOP HUD: L34 (director pane freezes), L35 (subscriber lane), L38 (ambient pane

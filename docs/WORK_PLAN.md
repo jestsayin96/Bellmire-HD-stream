@@ -1,4 +1,64 @@
-# WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
+#
+### THE HUD LANE ROW WAS WRONG - CORRECTED (20:58). D41, D48 AND D61 ARE NOT THE HUD'S.
+I wrote "HUD: L71 -> L64 -> D61 -> D41 -> D48" at 17:10. That was an error and it stranded the
+HUD worker: L71 and L64 are both shipped, and D41, D48 and D61 live in party_frames.gd,
+rts_camera.gd, delve.gd, monster.gd and boss_bar.gd - NONE of which the HUD worker owns. It owns
+exactly seven files: hud_dock.gd, spotlight.gd, auto_director.gd, dice.gd, feed_hud.gd,
+leaderboard_panel.gd, ui_theme.gd. D41/D48/D61 stay with GAME BUILD where they already were.
+The HUD worker was right to stand down rather than reach into files it does not own. Its real
+queue is below, all three inside its own seven files.
+
+- [ ] L72. THE CAMERA PULLS BACK FOR A GREATER LORD (HUD, auto_director.gd) - see the block below.
+### L72 - THE CAMERA PULLS BACK FOR A GREATER LORD (HUD, auto_director.gd) - FIRST
+Mr. E already approved this at 17:42 ("yes it should pull back"); it just never got an ID. The
+art lane shipped eight lord meshes and two of them are enormous - Mourncoil 10 m, Gravewyrm 9 m -
+at canon heights that stay. The camera adapts, not the monster.
+  1. A shot that frames by the SUBJECT'S HEIGHT, not a fixed distance, so a 10 m lord is framed
+     whole, including the floor it stands on. Height comes from the mesh bounds - never a table
+     of names, or the next lord breaks it.
+  2. THE PULL-BACK IS A MOVE, NOT A CUT. Ease out as the lord rises. That reveal is worth more
+     than any amount of stat text, and it is the single best use of the new meshes.
+  3. Clamp to the room. Never punch the camera through a wall, and do not fight D91's three-cell
+     corridors.
+  4. The Grubmother is room-locked and 8.3 m WIDE at 4.5 m tall - frame by the larger dimension,
+     not by height alone, or she will not fit the shot.
+DONE: a capture of each of the eight lords entering frame, at 1080p, none clipped and none with
+the camera inside geometry. Mr. E's eye on whether the reveal lands.
+
+- [ ] L73. THE DIRECTOR'S SHOT LANGUAGE (HUD, auto_director.gd + spotlight.gd) - see the block below.
+### L73 - THE DIRECTOR'S SHOT LANGUAGE (HUD, auto_director.gd + spotlight.gd)
+L64 proved the director cuts cleanly - 183 cuts, 0 repeats, 0 dual-pane frames over 138,053
+frames. Cutting correctly is not the same as telling a story. Give it a vocabulary: an
+establishing shot when a delve starts, a tighter one as a fight turns, a hold on a death, a beat
+of quiet after. The pacing hook `_pace` already exists (0.6 in a raid, 1.4 when quiet) - build on
+it rather than adding a second knob.
+DONE: a 30-minute capture where a viewer can tell, from the camera alone, when something
+important happened. Mr. E's eye is final.
+
+- [ ] L74. THE FEED AND THE THEME UNDER LOAD (HUD, feed_hud.gd + ui_theme.gd) - see the block below.
+### L74 - THE FEED AND THE THEME UNDER LOAD (HUD, feed_hud.gd + ui_theme.gd)
+L71 fixed truncation. The next question is readability when the town is busy and lines arrive
+faster than they can be read: pacing, what gets dropped, and whether every panel reads as one
+designed interface at 100/125/150% scale.
+DONE: shots at all three scales during a raid, with nothing overlapping and nothing unreadable.
+
+### L66 IS MOVED TO THE HUB AS H31 - IT WAS CORRECTLY BLOCKED
+The HUD worker flagged that L66 (an on-stream season leaderboard) conflicts with COORDINATION 13:
+six on-stream things only, and the Guild Roll was REMOVED from the stream in L58 for exactly this
+reason. It was right to stop rather than quietly break a rule.
+RESOLVED: the stream has six slots and a leaderboard competes with the game for them; the hub has
+unlimited room and is where a viewer goes to look things up. So L66 does not get an exception -
+it moves. L66 is CLOSED as an on-stream item. The HUD exposes the standings data and nothing
+more; the board itself becomes H31 on the hub.
+
+- [ ] H31. THE SEASON LEADERBOARD, ON THE HUB (hub lane, after H29) - see the block below.
+### H31 - THE SEASON LEADERBOARD, ON THE HUB (hub lane, after H29)
+Standings over a season, from the snapshot: who went deepest, who earned most, who died hardest,
+who kept a hero alive longest. The hub can afford the space and the detail the stream cannot.
+Same security invariants as every other tab - el()/textContent only, ICON_SET whitelist, CSP
+unchanged, hostile names rendered as text.
+DONE: renders from a snapshot with a full season, an empty season, and a hostile name.
+ WORK PLAN 2 — Bellmire HD grows (Nov 11 2026 onward)
 
 ### READ FIRST IF YOU ARE THE HUB WORKER (supervisor, 2026-11-16 00:12 CT)
 
@@ -1847,7 +1907,7 @@ valley and for anything the dungeon places, but it is not a big item any more).
 All six lanes run in parallel. Do not take another lane's item; if your row is empty, say so and
 stand down rather than reaching into someone else's files.
   GAME BUILD:  D91 -> D84 -> D90 -> D88 -> D83 -> T5 -> (D77+D78+D80 as one) -> D79 -> D81
-  HUD:         L71 -> L64 -> D61 -> D41 -> D48
+  HUD:         L72 -> L73 -> L74   (CORRECTED 20:58 - see below)
   HUB:         H29 -> H30
   CONTENT:     the words Phase 2 needs (T5's outcomes exist already - check before writing any),
                then D81's feed lines, then C7

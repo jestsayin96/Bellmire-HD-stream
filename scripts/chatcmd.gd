@@ -38,6 +38,11 @@ var delve_queue: Array = []
 var away := {}
 ## the town hands chat the fishing log: name -> [{name, rarity, value}]
 var catches_of: Callable
+## L70: the Chronicle, newest first, rows of {t, s, at, day, kind?, who?} - the snapshot
+## publisher's chronicle() (snapshot_pub.gd, D60 gave the rows their day, kind and who).
+## Set this to hand chat another source (the tests do); left unset, chat asks the publisher
+## standing beside it in the town, and says plainly that there is nothing yet if neither is there.
+var chron_of: Callable
 ## L17: the spotlight hands chat its put(uid, lane, seconds, reason) -> line (set by Spotlight.setup)
 var spot: Callable
 ## T1: the eventsub hands chat its _do_bits_tier(uid, bits) so !testbits fires town-wide effects
@@ -51,6 +56,13 @@ static func since_cmd(uid: String) -> float:
     if not last_cmd.has(uid):
         return INF
     return float(Time.get_ticks_msec() - int(last_cmd[uid])) / 1000.0
+
+## the ladder word for a stored rarity. C-55 retired "epic" in favour of "very rare";
+## data/fishing.json still carries the old word on three catches and is not this lane's file,
+## so the retired word keeps its old step here instead of falling off the ladder (find() -> -1,
+## which would have ranked an epic catch below junk and printed a word nothing else uses).
+static func _band(r: String) -> String:
+    return "very rare" if r == "epic" else r
 
 ## what a hero has on them: steel, armour, potions, oil, gold, and the fish
 func inventory(user_id: String) -> String:
@@ -66,11 +78,15 @@ func inventory(user_id: String) -> String:
         var cs: Array = catches_of.call(String(h["name"]))
         if not cs.is_empty():
             var best: Dictionary = cs[0]
-            var order := ["junk", "common", "uncommon", "rare", "epic", "legendary"]
+            # C-55 retired "epic" from the ladder - items.json bands the step as "very rare".
+            # data/fishing.json is the GAME BUILD's and still says "epic" in its ladder and on
+            # three catches, so _band() ranks and PRINTS the retired word as the step it was,
+            # and chat never says a word the rest of the game has stopped using.
+            var order := ["junk", "common", "uncommon", "rare", "very rare", "legendary"]
             for x in cs:
-                if order.find(String(x.get("rarity", ""))) > order.find(String(best.get("rarity", ""))):
+                if order.find(_band(String(x.get("rarity", "")))) > order.find(_band(String(best.get("rarity", "")))):
                     best = x
-            line += "  |  %d catch%s, best: %s (%s)" % [cs.size(), "" if cs.size() == 1 else "es", best.get("name"), best.get("rarity")]
+            line += "  |  %d catch%s, best: %s (%s)" % [cs.size(), "" if cs.size() == 1 else "es", best.get("name"), _band(String(best.get("rarity", "")))]
     return line
 var _last := {}                # user_id -> msec of last accepted command
 var _seen_names := {}
@@ -85,7 +101,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         return ""
     msg = msg.strip_edges()
     if not msg.begins_with("!"):
-        return ""
+        # L69: no "!" at all - the bot still answers what chat plainly asks
+        return _ask_line(user_id, display, login, msg)
     var now := Time.get_ticks_msec()
     if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
         return ""
@@ -150,6 +167,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _festival_line()
         "bestiary", "beasts", "monsters":
                     out = _bestiary_line()
+        "catchup", "mystory", "since":
+                    out = _catchup(user_id)
         "look":     out = _needs(user_id, func(): return _spot(user_id, "look", 0.0, ""))
         "testbits", "testsub", "testpoints":
                     # L17 test-only: the local chat box (Mr. E's keyboard) fakes a cheer / sub / redeem.
@@ -158,6 +177,10 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                         return ""
                     out = _test_spot(user_id, verb, arg, arg2)
         _:
+            # L69: "!how do i join" is a question with a ! on it - the ask table before silence
+            var topic := ask_topic(msg.substr(1))
+            if topic != "":
+                return _ask_line(user_id, display, login, msg.substr(1))
             # L14: a near miss of a real command gets a nudge, anything else is left alone (other bots)
             var guess := _closest(verb)
             if guess == "":
@@ -366,6 +389,143 @@ func _tone(line: String) -> Color:
         return C_OK
     return C_INFO
 
+## ---- L70: WHAT HAPPENED WHILE I WAS AWAY. One line, two at the outside: what the hero
+## did, how it went, where they stand now, and the hub for the rest of it. A SUMMARY, NOT A
+## SAGA - CATCHUP_MAX is a hard cap on the whole answer, the pointer included, and a row that
+## will not fit whole is left out rather than cut off in the middle of a sentence.
+const CATCHUP_MAX := 320        # characters, the hub pointer included (Twitch's own cap is 500)
+const CATCHUP_ROWS := 3         # Chronicle entries quoted at the very most
+## which of a hero's lines is worth the one line chat gets: a death over a fight, a fight over
+## loot, loot over the walk down. The town's own weather is last - it happened to everyone.
+const CATCHUP_WEIGHT := {"death": 5, "fight": 4, "loot": 3, "delve": 2, "raid": 2, "town": 1, "lore": 0}
+
+## the Chronicle rows, newest first, or [] - `chron_of` if the town set one, else the
+## publisher beside us. Never an error: a bot with no Chronicle still answers.
+func _chron_rows() -> Array:
+    if chron_of.is_valid():
+        var given: Variant = chron_of.call()
+        if given is Array:
+            return given as Array
+        return []
+    var p := get_parent()
+    if p == null:
+        return []
+    var pub := p.get_node_or_null("SnapshotPublisher")
+    if pub == null or not pub.has_method("chronicle"):
+        return []
+    var rows: Variant = pub.call("chronicle")
+    if rows is Array:
+        return rows as Array
+    return []
+
+## is this hero named on this Chronicle row? D60 puts tagged heroes in `who`; an untagged
+## line still carries the name in its own text, so both are read. Word boundaries only -
+## "Ash" must not be found inside "Ashen".
+static func _row_names(row: Dictionary, name: String) -> bool:
+    for w in (row.get("who", []) as Array):
+        if _flat(String(w)) == _flat(name):
+            return true
+    return _has_word(_flat(String(row.get("s", ""))), _flat(name))
+
+static func _has_word(flat: String, word: String) -> bool:
+    if word == "":
+        return false
+    return (" " + flat + " ").contains(" " + word + " ")
+
+static func _weight(row: Variant) -> int:
+    return int(CATCHUP_WEIGHT.get(String((row as Dictionary).get("kind", "")), 1))
+
+## cut to n characters on a word, never mid-word and never trailing a comma or a dash
+static func _cut(s: String, n: int) -> String:
+    if n <= 0:
+        return ""
+    if s.length() <= n:
+        return s
+    var head := s.substr(0, n)
+    var sp := head.rfind(" ")
+    if sp > int(n / 2):
+        head = head.substr(0, sp)
+    return head.strip_edges().trim_suffix(",").trim_suffix("-").strip_edges()
+
+## the deeds half: the heaviest CATCHUP_ROWS of this hero's lines, back in the order they
+## happened, inside `budget` characters. Nothing on them yet is worth saying plainly.
+static func _catchup_deeds(name: String, mine: Array, budget: int) -> String:
+    if mine.is_empty():
+        return "The Chronicle has nothing on %s yet - !delve and it will." % name
+    var idx: Array = []
+    for i in range(mine.size()):
+        idx.append(i)
+    idx.sort_custom(func(a, b): return _weight(mine[a]) > _weight(mine[b]))
+    # The budget is spent in WEIGHT order, so a death is never the line that got cut for a
+    # walk down the stair; the kept rows are only then put back in the order they happened.
+    var head := "%s: " % name
+    # the oldest line the Chronicle still holds on them - how far back "since" reaches
+    var day := int((mine[mine.size() - 1] as Dictionary).get("day", 0))
+    if day >= 1:
+        head = "%s, since day %d: " % [name, day]
+    var keep: Array = []
+    var used := head.length()
+    for i in idx:
+        if keep.size() >= CATCHUP_ROWS:
+            break
+        var s := _catchup_text(mine[int(i)] as Dictionary, name)
+        if s == "":
+            continue
+        if used + s.length() + 5 > budget and not keep.is_empty():
+            continue
+        keep.append(i)
+        used += mini(s.length(), budget) + 5
+    if keep.is_empty():
+        return ""
+    keep.sort()
+    keep.reverse()                      # the rows come newest first, so this is oldest first
+    var bits: Array = []
+    var left := budget - head.length()
+    for i in keep:
+        var s := _catchup_text(mine[int(i)] as Dictionary, name)
+        if s.length() + 5 > left:
+            s = _cut(s, maxi(40, left - 5))
+        if s == "":
+            continue
+        bits.append(s)
+        left -= s.length() + 5
+    if bits.is_empty():
+        return ""
+    return head + "  -  ".join(bits)
+
+## a row as chat reads it: the Chronicle's own words, with the hero's name off the front
+## where the line opens with it - the answer has already said whose story this is.
+static func _catchup_text(row: Dictionary, name: String) -> String:
+    var s := String(row.get("s", "")).strip_edges()
+    if name != "" and s.to_lower().begins_with(name.to_lower() + " "):
+        s = s.substr(name.length() + 1).strip_edges()
+    return s
+
+## where the hero stands now, in one clause
+func _catchup_now(user_id: String, h: Dictionary) -> String:
+    if not roster.is_alive(user_id):
+        return "Dead now; the memorial keeps the name. !reroll raises another."
+    var deepest := int(h.get("deepest", 0))
+    var where := "deepest floor %d" % deepest if deepest > 0 else "not been down yet"
+    return "Stands level %d, %d gold, %s." % [int(h.get("level", 1)), int(h.get("gold", 0)), where]
+
+## !catchup / !mystory / !since
+func _catchup(user_id: String) -> String:
+    var h := roster.get_hero(user_id)
+    if h.is_empty():
+        return "No hero yet - type !enlist and there will be something to tell."
+    var name := String(h["name"])
+    var mine: Array = []
+    for row in _chron_rows():
+        if row is Dictionary and _row_names(row as Dictionary, name):
+            mine.append(row)
+    var tail := _hub_tail()
+    var now_bit := _catchup_now(user_id, h)
+    var body := CATCHUP_MAX - tail.length()
+    var deeds := _catchup_deeds(name, mine, body - now_bit.length() - 5)
+    var out := deeds + ("  |  " if deeds != "" else "") + now_bit
+    return _cut(out, body) + tail
+
 ## ---- L14: the command list, from data/commands.json (the one source)
 static var _cmds: Dictionary = {}
 static func commands() -> Dictionary:
@@ -383,6 +543,16 @@ static func canonical(word: String) -> String:
     for k in cs:
         if (cs[k].get("aliases", []) as Array).has(word):
             return k
+    # L69: a plural reaches the command - "!heroes", "!delves", "!dyes"
+    for cut in [1, 2]:
+        if not word.ends_with("s") or word.length() - cut < 3:
+            continue
+        var one := word.substr(0, word.length() - cut)
+        if cs.has(one):
+            return one
+        for k in cs:
+            if (cs[k].get("aliases", []) as Array).has(one):
+                return k
     return word
 
 ## !help: the short list; !help <command>: that one in detail
@@ -404,6 +574,84 @@ static func help_line(arg := "") -> String:
         bits.append("!" + String(k))
     var tail := hub_url()
     return "Commands: %s  |  !help <command> for more.%s" % [" ".join(bits), "" if tail == "" else "  All of it: " + tail]
+
+## ---- L69: THE BOT CARRIES THE CHAT. A viewer who does not know the commands still
+## gets an answer: a line with no "!" is flattened to words and matched against the
+## phrases in data/commands.json "ask". Silence reads as a broken bot. The answers
+## themselves are DATA, so chat, the hub and this file cannot disagree - and nothing a
+## viewer typed is ever echoed back, only a fixed line or what the game itself produced.
+## A shared answer is said ONCE to the channel in gap_s seconds, however many ask it.
+static var _said := {}          # topic -> msec it was last said to the channel
+const ASK_FLAT := "abcdefghijklmnopqrstuvwxyz0123456789"
+
+static func ask() -> Dictionary:
+    return commands().get("ask", {})
+
+## a chat line cut down to words: lower case, punctuation gone, single spaces
+static func _flat(msg: String) -> String:
+    var out := ""
+    for c in msg.to_lower():
+        out += c if ASK_FLAT.contains(c) else " "
+    return " ".join(out.split(" ", false))
+
+## does this line match one of a topic's phrases? "a+b" wants both words present,
+## any other pattern is the phrase itself on a word boundary
+static func _hits(flat: String, phrases: Array) -> bool:
+    var words: Array = Array(flat.split(" ", false))
+    for p in phrases:
+        var pat := String(p)
+        if pat.contains("+"):
+            var all := true
+            for w in pat.split("+", false):
+                if not words.has(String(w)):
+                    all = false
+                    break
+            if all:
+                return true
+        elif (" " + flat).contains(" " + pat):
+            return true
+    return false
+
+## the topic a plain line asks about, or "" - the first one in "order" that matches
+static func ask_topic(msg: String) -> String:
+    var a := ask()
+    if a.is_empty() or msg.length() > int(a.get("max_len", 140)):
+        return ""
+    var flat := _flat(msg)
+    if flat == "":
+        return ""
+    var ts: Dictionary = a.get("topics", {})
+    for k in a.get("order", ts.keys()):
+        if ts.has(k) and _hits(flat, (ts[k] as Dictionary).get("phrases", [])):
+            return String(k)
+    return ""
+
+## answer a plain question, or stay quiet. A topic with `cmd` runs that command for
+## the asker (their own hero differs, so it is never held back); a topic with `reply`
+## is a shared line and is said to the channel once, not once for every asker.
+func _ask_line(user_id: String, display: String, login: String, msg: String) -> String:
+    var topic := ask_topic(msg)
+    if topic == "":
+        return ""
+    var t: Dictionary = (ask().get("topics", {}) as Dictionary).get(topic, {})
+    var cmd := String(t.get("cmd", ""))
+    if cmd != "":
+        return handle(user_id, display, "!" + cmd, login)
+    var out := String(t.get("reply", ""))
+    if out == "":
+        return ""
+    var now := Time.get_ticks_msec()
+    if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
+        return ""
+    if now - int(_said.get(topic, -999999999)) < int(float(ask().get("gap_s", 45.0)) * 1000.0):
+        return ""                              # already said to the channel; saying it again is noise
+    _said[topic] = now
+    _last[user_id] = now
+    last_cmd[user_id] = now
+    out += _hub_tail()
+    say.emit(out, _tone(out))
+    _ui_snd("help", out)
+    return _reply(user_id, display, login, out)
 
 ## the nearest command to a typo (edit distance 2 or less), or ""
 ## another app's command (data/commands.json "foreign"): one of theirs, one of their

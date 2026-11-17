@@ -1,0 +1,100 @@
+{
+ "ok": false,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "reeve": {
+   "creature_h": 1.95,
+   "hero_h": 2.45,
+   "ratio": 0.8,
+   "pair_w": 4.83,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 56261,
+      "vis": 0,
+      "delta": 0,
+      "seen": 0.0
+     },
+     "hero": {
+      "alone": 43672,
+      "vis": 43672,
+      "delta": 102237,
+      "seen": 1.0
+     },
+     "proves": false
+    },
+    "side": {
+     "creature": {
+      "alone": 40656,
+      "vis": 0,
+      "delta": 0,
+      "seen": 0.0
+     },
+     "hero": {
+      "alone": 37758,
+      "vis": 37758,
+      "delta": 80414,
+      "seen": 1.0
+     },
+     "proves": false
+    },
+    "back": {
+     "creature": {
+      "alone": 56044,
+      "vis": 0,
+      "delta": 0,
+      "seen": 0.0
+     },
+     "hero": {
+      "alone": 44027,
+      "vis": 44027,
+      "delta": 102460,
+      "seen": 1.0
+     },
+     "proves": false
+    }
+   },
+   "proving_views": 0
+  }
+ },
+ "errors": [],
+ "blind_views": [
+  "reeve: only 0 of 3 views show BOTH subjects (seen>=0.15 AND vis>=700 px each) - front creature seen 0.000 vis 0 / hero seen 1.000 vis 43672; side creature seen 0.000 vis 0 / hero seen 1.000 vis 37758; back creature seen 0.000 vis 0 / hero seen 1.000 vis 44027"
+ ],
+ "seen_min": 0.15,
+ "vis_min": 700,
+ "min_proving": 2,
+ "measured": [
+  "reeve"
+ ],
+ "asked": [
+  "reeve"
+ ],
+ "blank_check": {
+  "files": 3,
+  "failures": []
+ },
+ "verdict": "RED"
+}

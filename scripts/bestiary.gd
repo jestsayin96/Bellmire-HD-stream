@@ -781,7 +781,8 @@ const VOICES := [
     ["viper", "snake_hiss"], ["adder", "snake_hiss"], ["snake", "snake_hiss"],
     ["frog", "frog_ribbit"], ["wasp", "insect_buzz"], ["rat", "cat_hiss"],
 ]
-const FAMILY_VOICE := {"undead": "skeleton_rattle", "ooze": "slime_squish", "fiend": "demon_growl", "wyrm": "dragon_roar", "beast": "wolf_growl"}
+const FAMILY_VOICE := {"undead": "skeleton_rattle", "ooze": "slime_squish", "fiend": "demon_growl", "wyrm": "dragon_roar", "beast": "wolf_growl",
+    "the fallen": "wraith_whisper"}   # D100: S2 found the ash wight voiceless - the fallen whisper
 
 static func voice_of(d: Dictionary) -> String:
     # the lost delver is one of us, not a creature - a man's grunt

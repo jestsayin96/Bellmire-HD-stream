@@ -1941,3 +1941,40 @@ waits on that tick, so this hour took only what the ruling allows at any time: g
       unknown-keyed `order` now prints COMMANDS_DOC FAIL and leaves docs/COMMANDS.md untouched; the
       OK count is the rows actually written. Run: COMMANDS_DOC OK wrote 27 commands, docs/COMMANDS.md
       byte-identical (git diff empty).
+
+## D-cycle - S11 the game build audits its own gates for earnability, 2026-11-17T05:16:24-06:00 (game build)
+- WHAT THE 04:58 ROW GAVE ME: queue empty, Systems 2/3/4 frozen until D99 ticks, so "defects in your
+  own shipped work - a red or un-earned gate, a FAIL token that survives a capped run, a floor missing
+  under a check count". Did that pass on every gate I own. NOT CLEAN - four of the five commit gates in
+  my own prompt could read green over nothing, and one fit gate is flaky. All fixed, nothing new built.
+- tools/_offfloor.gd: printed counts with NO verdict and NO floor, so "OFFFLOOR 0 of 0" read green,
+  and the end line dereferenced _d.dun unguarded. Now: the same OFFFLOOR line (kept for anyone
+  grepping it) plus OFFFLOOR_VERDICT OK / FAIL / NO VERDICT, a 500-sample floor (measured runs sample
+  1125-2135), and exit 0/1/2 that match the verdict. PROVED BY A DELIBERATE BREAK: a copy with the
+  floor at 999999 printed `OFFFLOOR_VERDICT NO VERDICT: 2022 samples is under the floor of 999999
+  (home)`, rc 2. The copy was deleted.
+- tools/_delve_test.gd: printed NO VERDICT LINE AT ALL - "runs with no SCRIPT ERROR" was passing on
+  silence. Now prints DELVE_TEST OK (frames, floor reached, end state, home or capped) or DELVE_TEST
+  NO VERDICT if the delve never reached floor 1 / ran under 600 frames, rc 0/2. It is still a smoke
+  run and says so: engine error lines are read off the log. (First draft of the line contained the
+  words "SCRIPT ERROR" and my own log grep counted itself - reworded.)
+- tools/_townwalk.gd: maxf(samples, 1) made a 0/0 run read 0.000% PASS. PASS now also needs >= 5000
+  town and >= 1000 raid samples (measured 16051-18958 and 3676-6312), with a FLOOR UNMET line naming it.
+- Check-count floors added at the measured counts: S10_FIT 50, D96_FIT 70, D97_LORDS 139, MBFEED_TEST
+  80, D98_TEST 106 (D99_TEST already had 200). THE S10 FLOOR EARNED ITSELF THE SAME HOUR: I launched
+  the windowed fit gates headless by mistake, S10 skipped its save_png check and printed
+  `S10_FIT FAIL 1 of 49: check floor: 49 checks is under 50` - before the floor that run would have
+  printed OK 49. Rerun windowed: S10_FIT OK 50.
+- FLAKY GATE FOUND AND FIXED: tools/_d97_lords.gd read the Pale Duchess at 5.28 m vs 5.52 m on one
+  run (FAIL 1 of 158) and 5.52 m OK on the next. The gate multiplied by the LIVE _body.scale.y, and a
+  hit during the capture wait squashes a body to 0.86 y for 0.3 s (L26a flinch) - 5.28/5.52 = 0.957 is
+  a mid-tween squash, not a wrong model. _d97_lords and _d96_fit now measure at the REST scale
+  (_base_scale). The lord's real size never changed.
+- Battery: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2131 samples (home);
+  TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/18957 raid_in_solid=0/5818 PASS; DELVE_TEST OK ran
+  9001 frames, floor reached 2 (capped), 0 error lines; S10_FIT OK 50; D96_FIT OK 70; MBFEED_TEST OK
+  80; D98_TEST OK 106; D99_TEST OK (1160 checks). After the rest-scale fix, rerun windowed: parse 0
+  errors, D96_FIT OK 70 checks, D97_LORDS OK 158 checks, 16 risings (pale_duchess 5.52 m = 5.52 m).
+- NOT DONE AND NOT CLAIMED: no frame caps added to _d96/_d97 (they advance per lord on a fixed
+  8-frame wait, so they cannot hang on a missing body - checked, not assumed). _l56_test soak not rerun.
+- No live Twitch test this cycle. Not ticked - the team lead ticks. Systems 2/3/4 NOT started.

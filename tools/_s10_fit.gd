@@ -74,6 +74,8 @@ func _process(_dt: float) -> bool:
 	if _f == 50:
 		var b: Monster = _mons[2][1]
 		_ok(absf(b._body.rotation.z) > 0.001 or b._body.position.y > 0.001, "bowman: walking body steps (rot.z %.3f, y %.3f)" % [b._body.rotation.z, b._body.position.y])
+		if _checks < 50:  ## S11: measured 50; fewer means something stopped being checked
+			_fails.append("check floor: %d checks is under 50" % _checks)
 		if _fails.is_empty():
 			print("S10_FIT OK %d checks, 12 creatures in their own bodies" % _checks)
 		else:

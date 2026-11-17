@@ -1508,3 +1508,39 @@ at it. Faults, honestly:
     above it.
 None of these five faults changes a ratio or a span, which is what D96 reads.
 They are the next pass's work and nobody is queued on them.
+
+---
+
+## snarer_chibi.glb - ANSWERED, 2026-11-17 05:50 CT, by measurement
+
+The question owed for four hours was "is `assets/monsters/minibosses/snarer_chibi.glb`
+wanted at all, since it has no `.glb.import` sibling". **YES, it is wanted, and
+nothing about it is special - it is one of six in the same state and the art
+lane cannot fix any of them, because the art lane never runs Godot.**
+
+Counted off the tree this run, not remembered:
+
+- `origin/art` holds **25 .glb and 0 .glb.import** under
+  `assets/monsters/minibosses/`. The art lane commits bodies; `.import`
+  siblings are written by a Godot import run and committed by the game build.
+- `origin/main` holds **five chibi with an `.import` sibling** - boiler, cook,
+  sluicekeeper, sower, tallyman - and **six without**: gaoler, porter, sexton,
+  snarer, snuffer, stoker. Five of those six were committed by art between
+  03:09 and 04:42 CT today, i.e. after the game build's last Godot run. The
+  missing sibling is a TIMING artefact, not a defect in the body.
+- `scripts/delve.gd:377` `miniboss_model()` tries `<key>_chibi.glb` FIRST and
+  falls back to the base body when `ResourceLoader.exists()` says no. So the
+  failure mode is already correct: until a Godot run writes the `.import`, the
+  base Snarer loads and nobody is blocked - which is exactly what the plan says
+  is happening.
+
+**ONE REAL WIRING ITEM FALLS OUT OF IT, and it is the game build's, not mine.**
+`delve.gd`'s `MB_FIT` has no `snarer_chibi` key, so `miniboss_ratio()` falls
+back to the base `"snarer": 0.94`. Art's MEASURED number for the chibi body is
+**1.00** (`renders/art/minibosses/_fit_snarer_register.json`, `pairs.snarer_chibi.ratio`),
+so the chibi currently stands 6% short of its measurement once its `.import`
+exists. `snuffer_chibi` is also absent from `MB_FIT` but its measured ratio is
+1.06, identical to the base key it falls back to, so that one needs nothing.
+
+THE CHANGE, for `scripts/delve.gd` `MB_FIT` (the art lane does not make it):
+add `"snarer_chibi": 1.00`, and add `"jointer": 0.92` for the new body.

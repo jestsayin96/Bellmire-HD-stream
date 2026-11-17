@@ -10,6 +10,7 @@ var _inprop := 0
 var _mon_inprop := 0
 var _mon_n := 0
 var _n := 0
+const SAMPLE_FLOOR := 500
 func _initialize() -> void:
     _r = Roster.new()
     root.add_child(_r)
@@ -54,6 +55,19 @@ func _process(_dt: float) -> bool:
                 _off += 1
                 print("OFF monster ", (mo as Monster).def.get("name"), " state=", _d.state)
     if _d.state == "home" or _f > 60 * 200:
-        print("OFFFLOOR ", _off, " of ", _n, " samples; INPROP ", _inprop, "; MON_INPROP ", _mon_inprop, " of ", _mon_n, "; floor reached ", _d.floor_no, " frames ", _f, " obstacles ", _d.dun.info.get("obstacles", []).size())
+        var nob: int = _d.dun.info.get("obstacles", []).size() if _d.dun else -1
+        print("OFFFLOOR ", _off, " of ", _n, " samples; INPROP ", _inprop, "; MON_INPROP ", _mon_inprop, " of ", _mon_n, "; floor reached ", _d.floor_no, " frames ", _f, " obstacles ", nob)
+        ## S11: the line above carried no verdict and no floor, so "OFFFLOOR 0 of 0" read green.
+        ## Measured runs sample 1125-2135; under SAMPLE_FLOOR the run checked nothing worth trusting.
+        var why := "home" if _d.state == "home" else "capped at %d frames" % _f
+        if _n < SAMPLE_FLOOR:
+            print("OFFFLOOR_VERDICT NO VERDICT: %d samples is under the floor of %d (%s)" % [_n, SAMPLE_FLOOR, why])
+            quit(2)
+        elif _off > 0:
+            print("OFFFLOOR_VERDICT FAIL %d of %d samples off the floor (%s)" % [_off, _n, why])
+            quit(1)
+        else:
+            print("OFFFLOOR_VERDICT OK 0 of %d samples off the floor (%s)" % [_n, why])
+            quit(0)
         return true
     return false

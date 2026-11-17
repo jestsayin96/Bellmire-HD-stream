@@ -229,7 +229,11 @@ func _process(_d: float) -> bool:
         var pct := 100.0 * float(_in_solid) / maxf(float(_samples), 1.0)
         var rpct := 100.0 * float(_r_in) / maxf(float(_r_samples), 1.0)
         print("TOWNWALK in_solid=%d/%d (%.3f%%) raid_in_solid=%d/%d (%.3f%%) %s" % [_in_solid, _samples, pct, _r_in, _r_samples, rpct,
-              "PASS" if pct < 0.2 and rpct < 0.2 else "FAIL"])
+              "PASS" if pct < 0.2 and rpct < 0.2 and _samples >= 5000 and _r_samples >= 1000 else "FAIL"])
+        ## S11: maxf(samples, 1) made 0/0 read 0.000% PASS. Measured runs: 16051-18958 town and
+        ## 3676-6312 raid samples, so a run under 5000 / 1000 checked too little to pass.
+        if _samples < 5000 or _r_samples < 1000:
+            print("TOWNWALK FLOOR UNMET town %d < 5000 or raid %d < 1000 samples" % [_samples, _r_samples])
         print("BAD ", _bad)
         print("STUCK_EX ", _stuck_ex)
         return true

@@ -41,6 +41,30 @@ func _build() -> void:
 		if String(a[k].get("rarity", "")) == "artifact":
 			_s._piece(String(a[k]["name"]), "+6 AC · +20 HP", UiTheme.GOOD, "artifact"); break
 	_s._piece("Hand-me-down boots (no stored rarity)", "for the look", UiTheme.INK_SOFT, "")
+## U56: the LAYOUT gate U55 lacked. Every row is [pip, name, value]: the value must sit whole inside the
+## row, the name must end clear of it by the separation, and a name that does not fit must carry an
+## ellipsis (text_overrun_behavior) rather than a bare cut. U55 passed a row that read "(no stored r".
+func _check_rows(sc: float) -> void:
+	for h in _s._list.get_children():
+		if not (h is HBoxContainer) or h.get_child_count() < 3:
+			continue
+		var a: Label = h.get_child(1)
+		var b: Label = h.get_child(2)
+		var ra: Rect2 = a.get_global_rect()
+		var rb: Rect2 = b.get_global_rect()
+		var rh: Rect2 = h.get_global_rect()
+		var sep: float = float(h.get_theme_constant("separation"))
+		var full: float = a.get_theme_font("font").get_string_size(a.text, HORIZONTAL_ALIGNMENT_LEFT, -1, a.get_theme_font_size("font_size")).x
+		if ra.end.x + sep - 0.5 > rb.position.x:
+			_bad += 1; print("FAIL row collides @", sc, ": ", a.text)
+		if rb.end.x > rh.end.x + 0.5:
+			_bad += 1; print("FAIL value leaves row @", sc, ": ", b.text)
+		if b.size.x + 0.5 < b.get_minimum_size().x:
+			_bad += 1; print("FAIL value squeezed @", sc, ": ", b.text)
+		if full > a.size.x + 0.5 and a.text_overrun_behavior != TextServer.OVERRUN_TRIM_ELLIPSIS:
+			_bad += 1; print("FAIL bare cut, no ellipsis @", sc, ": ", a.text)
+		print("ROW @%.2f name %.0f/%.0f px %s | %s" % [sc, full, a.size.x, "ELLIPSIS" if full > a.size.x + 0.5 else "fits", a.text.left(28)])
+
 func _process(_d: float) -> bool:
 	_f += 1
 	if _f == 30:
@@ -50,6 +74,15 @@ func _process(_d: float) -> bool:
 			var p: Control = UiTheme.rarity_pip(r)
 			var sb := p.get_theme_stylebox("panel") as StyleBoxFlat
 			if p == null or sb.bg_color != UiTheme.RARITY_HUE[r]: _bad += 1; print("FAIL pip != art hue: ", r)
+		var py := FileAccess.get_file_as_string("res://tools/art/icons.py")
+		var m := RegEx.create_from_string("RARITY_HUE_PARCHMENT\\[\"uncommon\"\\]\\s*=\\s*\\(([0-9.]+),\\s*([0-9.]+),\\s*([0-9.]+)\\)").search(py)
+		if m == null:
+			_bad += 1; print("FAIL could not read RARITY_HUE_PARCHMENT from icons.py")
+		else:
+			var want := Color(float(m.get_string(1)), float(m.get_string(2)), float(m.get_string(3)))
+			var got: Color = UiTheme.RARITY_HUE["uncommon"]
+			if not got.is_equal_approx(want): _bad += 1; print("FAIL uncommon != art pewter ", got, want)
+			else: print("uncommon == art pewter ", got)
 		for r in UiTheme.RARITY_INK:
 			var c := _cr(UiTheme.RARITY_INK[r], Color(0.93, 0.86, 0.69))
 			print("INK %s contrast %.2f" % [r, c])
@@ -63,10 +96,11 @@ func _process(_d: float) -> bool:
 	if _f % 40 == 20:
 		var img := root.get_viewport().get_texture().get_image()
 		img.save_png(_out + "u55_%d.png" % int(sc * 100))
+		_check_rows(sc)
 		print("shot ", sc)
 		_step += 1
 		_s = null
 		if _step >= 3:
-			print("U55_HUE ", "OK" if _bad == 0 else "FAIL %d" % _bad)
+			print("U56_HUE ", "OK" if _bad == 0 else "FAIL %d" % _bad)
 			quit(0 if _bad == 0 else 1)
 	return false

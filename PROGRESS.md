@@ -7329,3 +7329,31 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
   this cycle. Content should keep NOT padding act/broken.
 - NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created/renamed/re-priced/deleted,
   nothing posted as any account, no channel setting touched.
+
+## D96 - THE MINIBOSSES STAND UP IN THEIR OWN BODIES (game build, 2026-11-16 21:07-21:40 CT)
+- TAKE THIS NEXT / Mr. E's 20:40 ruling gave game build D96 (first of the D96-D99 wiring queue). No new feature built.
+- WHAT CHANGED (scripts/delve.gd only, `_setpiece_miniboss` + a small reader above it): when a miniboss chamber
+  carries its art key, the elite's def now takes `path` = assets/monsters/minibosses/<key>_chibi.glb if art's
+  register conversion is on disk, else <key>.glb. `h` = 2.45 x ART'S MEASURED RATIO (const MB_FIT, copied from
+  renders/art/minibosses/_fit_*_register.json and _fit_report.json - NOT re-derived; 2.45 is art's posed knight).
+  Static meshes, so `anims` is emptied and the theme creature's KayKit hand/off props, tint, glow and particles are
+  cleared - the first capture showed the drillmaster painted orange by the theme tint, which is what caught that.
+  A key with no model on disk is pushed to Delve.miniboss_no_model so it is NAMED, not silently reskinned.
+  The arrive line still fires at spawn - now with the body present - and the fall line at the kill, unchanged.
+- THE TEST IS A PICTURE: tools/_d96_fit.gd (new, windowed 1920x1080, quits itself) runs the REAL delve set-piece
+  tick on a real DungeonHD floor of each of the 14 themes, stands a knight hero beside the miniboss, saves
+  renders/cycles/d96/<key>.png, then kills it. 14 of 14 load and stand on the floor; NONE REFUSED. Models used:
+  drillmaster, scrapwright, gaoler, snuffer, sexton, porter, snarer, stoker, bellman (plain); tallyman, cook,
+  sluicekeeper, sower, boiler (_chibi). Heights in engine: each is exactly 2.45 x art's ratio (2.00-2.70 m).
+  Sower and boiler take their CHIBI ratio (0.98, 1.00), not the plain one.
+- A RULER I THREW OUT, SAID PLAINLY: the first run gated the miniboss against the LIVE hero's bounds and failed 6
+  of 14. The live hero's AABB includes the held weapon, shield and idle pose and wandered 1.98-2.70 m across the
+  fourteen runs - that ruler was lying, not the minibosses. The gate now holds the miniboss to art's number on
+  art's hero; the live-hero bounds are printed beside it, info only.
+- WHAT I SAW LOOKING AT THE PICTURES (drillmaster, tallyman, boiler, snuffer viewed): all stand on the floor,
+  read as distinct silhouettes at stream distance, at or just under knight height as art intended. FAULTS: the
+  hero's big name tag sits over the pair in my shots (capture framing, not the game); on the confection floor the
+  boiler shot has a theme prop (cauldron/spill) overlapping the hero - I have not proven whether that is floor decor
+  or part of boiler_chibi.glb and say so. Not yet built (and not promised by D96): each miniboss's ONE IDEA as
+  delve behaviour (summon / re-plate / hook-drag / snuff the lamps) - that is what act/broken lines are for.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered or redeemed, no reward touched, nothing posted, no setting changed.

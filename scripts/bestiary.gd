@@ -143,7 +143,29 @@ static func def_of(k: String) -> Dictionary:
         d["ways"] = (WAYS.get(k, {}) as Dictionary).duplicate()
         d["homes"] = HOMES.get(k, [])
         return d
-    return (NEW_TYPES[k] as Dictionary).duplicate(true)
+    return Bestiary.own_body(k, (NEW_TYPES[k] as Dictionary).duplicate(true))
+
+## SYSTEM 10: the twelve creatures that shared a mesh with a cousin stand up in THEIR OWN BODY
+## (assets/monsters/creatures/, art lane D76; fit proven in docs/art/SYSTEM10_CREATURE_FIT.md -
+## every body is authored at its bestiary h, scale factor 1.000, so nothing is resized here).
+## The bodies are STATIC (no armature): the clip names do not apply, the body carries its own
+## weapon and shield, and art painted it so the creature's own tint is dropped (a non-plain
+## strain still tints it - make() decides). Monster gives an unrigged body a procedural gait,
+## lunge and fall so it never slides as a statue. A missing file keeps the shared animated mesh.
+const CREATURE_DIR := "res://assets/monsters/creatures/"
+static func own_body(k: String, d: Dictionary) -> Dictionary:
+    var p := CREATURE_DIR + k + ".glb"
+    if not ResourceLoader.exists(p):
+        return d
+    d["shared_path"] = String(d.get("path", ""))
+    d["path"] = p
+    d["anims"] = {}
+    d["hand"] = ""
+    d["off"] = ""
+    d.erase("tint")
+    d.erase("glow")
+    d["own_body"] = true
+    return d
 
 static func all_keys() -> Array:
     var out: Array = TYPES.keys()

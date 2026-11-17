@@ -333,10 +333,15 @@ func _play(key: String) -> void:
 func busy() -> bool:
     return _t < _hold_until
 
+var _step_h := -1.0
+var _walking := false               # SYSTEM 10: Delve is walking it this frame (an unrigged body steps)
 func _play_now(key: String) -> void:
     if _ap == null:
+        _walking = key in ["walk", "run"]
         if key == "hit":
             _flinch()
+        elif key in ["attack", "attack2", "cast"] and _t >= _hold_until:
+            _lunge()
         return
     var an: Dictionary = def.get("anims", {})
     # L26a: a second swing where the body has one (bat, wyrm), now and then
@@ -407,6 +412,24 @@ func _flinch() -> void:
     _flinch_tw.tween_property(_body, "rotation:x", 0.0, 0.22).set_trans(Tween.TRANS_BACK)
     _flinch_tw.parallel().tween_property(_body, "scale", _base_scale, 0.22).set_trans(Tween.TRANS_BACK)
 
+## SYSTEM 10: an unrigged body's swing - it rears back and drives forward at its mark, then home
+var lunges := 0
+func _lunge() -> void:
+    if _body == null or not is_inside_tree():
+        return
+    lunges += 1
+    _hold_until = _t + 0.45
+    _swing_len = 0.5
+    var z0 := _body.position.z
+    var reach := clampf(_height() * 0.18, 0.12, 0.6)
+    var tw := create_tween()
+    tw.tween_property(_body, "position:z", z0 - reach * 0.4, 0.12).set_ease(Tween.EASE_OUT)
+    tw.parallel().tween_property(_body, "rotation:x", -0.12, 0.12)
+    tw.tween_property(_body, "position:z", z0 + reach, 0.10).set_ease(Tween.EASE_IN)
+    tw.parallel().tween_property(_body, "rotation:x", 0.18, 0.10)
+    tw.tween_property(_body, "position:z", z0, 0.22).set_trans(Tween.TRANS_BACK)
+    tw.parallel().tween_property(_body, "rotation:x", 0.0, 0.22)
+
 func _entering() -> bool:
     return _body.position.y < -0.05
 
@@ -430,8 +453,19 @@ func _process(delta: float) -> void:
     var bob := 0.0
     if lift > 0.0:
         bob = sin(_t * 2.2) * 0.25
+    # SYSTEM 10: an unrigged body (the art lane's static creatures, minibosses, lords) steps
+    # instead of gliding - a small hop and a side-to-side rock while it walks, still at rest
+    var step := 0.0
+    if _ap == null and state == S.PATROL or _ap == null and _walking:
+        var ph := _t * clampf(float(def.get("spd", 3.0)) * 2.2, 5.0, 14.0)
+        if _step_h < 0.0:
+            _step_h = clampf(_height() * 0.04, 0.02, 0.12)    # measured once, not every frame
+        step = absf(sin(ph)) * _step_h
+        _body.rotation.z = sin(ph) * 0.07
+    elif _ap == null:
+        _body.rotation.z = lerpf(_body.rotation.z, 0.0, clampf(delta * 8.0, 0.0, 1.0))
     if not _entering():
-        _body.position.y = lift + bob
+        _body.position.y = lift + bob + step
 
     var crown := get_node_or_null("crown")
     if crown:
@@ -818,6 +852,10 @@ func _tick_flash(delta: float) -> void:
 func die() -> void:
     state = S.DEAD
     _play("die")
+    if _ap == null and _body:
+        # SYSTEM 10: no death clip - the unrigged body keels over onto its side before it sinks
+        var tf := create_tween()
+        tf.tween_property(_body, "rotation:z", 1.45 * (1.0 if _rng.randf() < 0.5 else -1.0), 0.6).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
     Monster.voice(self, true)             # S2: its last sound
     if _aura:
         _aura.visible = false

@@ -41,3 +41,15 @@ Downloaded 2026-11-16 by the supervisor lane for D94 / D95.
 ACCEPTANCE TEST rule it is not finished. At 0.921 long against a hero whose head sits at y
 1.05-1.22, this reads closer to a short staff than a wand — Mr. E should say which he wants
 before anyone scales it. The game build lane owns the attach (handslot.r) and the gear.gd entry.
+
+## 2026-11-17 - `assets/gear/` geometry now rides inside a miniboss glb
+
+`assets/monsters/minibosses/quartermaster.glb` (the sixteenth miniboss) embeds
+decimated geometry from `assets/gear/spear_A.gltf` and `assets/gear/shield_A.gltf`
+- the **KayKit Dungeon Pack 1.0, Kay Lousberg, CC0 1.0** already listed in the
+table above. CC0 permits incorporation and redistribution inside our own work
+with no attribution required; the row above is kept anyway. **No pack file is
+re-exported as a standalone asset** and nothing is redistributed AS an asset,
+which is the only line the Quaternius licence draws either. The decimate is a
+Blender modifier applied at import time inside `tools/art/minibosses.py`; the
+files in `assets/gear/` are untouched.

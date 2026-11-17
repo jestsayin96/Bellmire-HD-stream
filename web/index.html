@@ -60,6 +60,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip-link" href="#stageScroll">Skip to the stage</a>
 
 <!-- Icon sprite: hand-drawn line glyphs, no external asset and no <img> request.
      Each <symbol> is page-authored and static; app.js references one with
@@ -208,7 +209,7 @@
   </nav>
 
       </div>
-      <div class="stage-scroll" id="stageScroll">
+      <div class="stage-scroll" id="stageScroll" tabindex="-1">
   <!-- H22: the first minute. A page-owned welcome for a newcomer: what Bellmire is, one live line built
        in app.js from the snapshot already on the page (el()/textContent only), and three doors that
        just switch to the tab that already does that job. Static copy only - no snapshot data in this

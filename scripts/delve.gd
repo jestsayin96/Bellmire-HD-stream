@@ -1614,7 +1614,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			dmg *= _ward(tgt) * _ability_mult(ability, tgt)
 			_ability_hit(ability, m, tgt, dmg, foes)
 			var was_dead := tgt.state == Monster.S.DEAD
-			tgt.hurt(dmg, roll == 20)
+			tgt.hurt(dmg, roll == 20, "resist" if _ward(tgt) < 1.0 else "")      # D61.1
 			# a natural 20 reaches the Chronicle when it kills, or lands on a lord
 			if roll == 20 and not was_dead:
 				if tgt.state == Monster.S.DEAD:
@@ -1627,6 +1627,8 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 				roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 				if tgt.def.get("boss", false):
 					_say("%s falls to %s." % [tgt.def.get("name"), h["name"]])
+		elif is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
+			tgt.show_result("miss")      # D61.1: a miss says so
 	# the creatures answer
 	for f in foes:
 		var mon: Monster = f
@@ -2316,6 +2318,8 @@ func _cast_at(m: Dictionary, tgt: Monster, roll: int, ac: int, ability) -> void:
 			tgt.hp = minf(tgt.max_hp, tgt.hp + roster.attack(h) * (1.0 if scar_dbl else 0.5))
 		return
 	if not (roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() >= ac)):
+		if is_instance_valid(tgt) and tgt.state != Monster.S.DEAD:
+			tgt.show_result("miss")      # D61.1: a spell that misses says so
 		return
 	var dmg := _hero_damage(h, roll == 20)
 	dmg *= _ability_mult(ability, tgt)
@@ -2335,7 +2339,8 @@ func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: boo
 			var p := first.global_position
 			for f in _foes():
 				if _flat((f as Node3D).global_position, p) <= FIRE_R:
-					_strike(m, f, dmg * 0.8 * (0.5 if _mon_saves(f, m, 0) else 1.0), crit)
+					var sv := _mon_saves(f, m, 0)
+					_strike(m, f, dmg * 0.8 * (0.5 if sv else 1.0), crit, "save" if sv else "")      # D61.1
 		"chain":
 			var k := 1.0
 			for r in hit:
@@ -2353,7 +2358,7 @@ func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: boo
 			if first == null:
 				return
 			var dead := String(first.def.get("family", "")) in ["undead", "the fallen"]
-			_strike(m, first, dmg * (SMITE_DEAD if dead else 1.0), crit)
+			_strike(m, first, dmg * (SMITE_DEAD if dead else 1.0), crit, "vuln" if dead and SMITE_DEAD > 1.0 else "")      # D61.1: the dead take extra
 		_:
 			if first == null:
 				return
@@ -2362,10 +2367,11 @@ func _spell_lands(kind: String, m: Dictionary, hit: Array, dmg: float, crit: boo
 		_ability_hit(ability, m, first, dmg, _foes())
 
 ## one blow from a delver to a creature, with the kill's bookkeeping
-func _strike(m: Dictionary, tgt: Monster, dmg: float, crit: bool) -> void:
+func _strike(m: Dictionary, tgt: Monster, dmg: float, crit: bool, kind := "") -> void:
 	if tgt == null or not is_instance_valid(tgt) or tgt.state == Monster.S.DEAD or tgt._entering():
 		return
-	tgt.hurt(dmg * _ward(tgt), crit)
+	var w := _ward(tgt)
+	tgt.hurt(dmg * w, crit, kind if kind != "" else ("resist" if w < 1.0 else ""))   # D61.1: a warded lord reads "resist"
 	if tgt.state == Monster.S.DEAD:
 		_kills += 1
 		_on_kill(tgt, m)

@@ -880,3 +880,7 @@ signal used nowhere else. Welcome panel placement and chat are still to do (pass
   opens it full-screen). It remains opt-in - the viewer still presses "Open the guild chat" - because
   auto-connecting to Twitch on page load would change the privacy behaviour H8 was built around. That is
   Mr. E's call (see the run summary). The "Guild chat" tab is gone; the column replaces it.
+- H32 pass 4: Shops stock is a card grid (picture, name, rarity pill, price; rarity as a frame) with a hover/focus
+  preview overlay; Bestiary cards lift on hover/focus; Lore chapters are browse cards. Pictures are derived
+  160 px WebP thumbnails (1.94 MB for 463) chosen by a generated name whitelist - see docs/HUB_SECURITY.md.
+- H32 pass 5 (polish): thin dark scrollbars on the three scroll regions (the narrow top strip showed a white native bar); a fade on the right edge of the section bar and the active tab scrolled into view, so a clipped tab reads as "more this way"; a skip link to the stage; keyboard shortcuts while not typing - "[" folds the rail, "]" folds/opens the chat, "g" focuses the rail (the listbox keeps Up/Down/Home/End/Enter). Layout and keys only: no data, no CSP change, no new storage key. Live dot stayed red (--live): it does not fight the gold because it is 8 px and used only for the dot and the LIVE badge.

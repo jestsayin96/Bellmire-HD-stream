@@ -687,3 +687,34 @@ code). **Still strictly opt-in**: nothing contacts `wss://irc-ws.chat.twitch.tv`
 line still renders through `el()` / textContent (`?mock=chat` hostile line renders as literal text, no
 dialog). The `chat` tab and its `<section>` were removed (the column replaces them). New stored state: one
 whitelisted localStorage value, `bellmire.chatcol.v1` = `min` | `full` (the collapse choice). No CSP change.
+
+### H32 pass 4 - item pictures: the whitelist rule extended from a glyph id to a file path
+
+Supervisor sign-off (2026-11-16 20:05 CT, docs/WORK_PLAN.md) with four conditions, all met:
+
+- **The rule.** A snapshot item NAME never becomes a URL. `itemIconFile(name)` control-strips, collapses
+  whitespace and lower-cases the name, looks it up in `ITEM_ICONS` (a `Map`), and builds the path from the
+  Map's page-constant value (`"icons/items/" + "ring/architect_ring" + ".webp"`). A miss returns `""` and the
+  card falls through to the whitelisted SVG glyph `loot` - never a guessed path, never a broken `<img>`.
+  No `onerror` handler anywhere (the page is el()-only; onerror is markup). `alt` is set as text. The one
+  `<img>` is created with `document.createElement`, `width`/`height` attributes, `loading="lazy"`.
+- **CSP unchanged.** `img-src 'self' data:` already serves a same-origin file. No host added.
+- **1. Derived thumbnails, one size.** 160 px WebP (q85) = 2x the largest displayed box (80 px, the hover
+  preview; the grid box is 64 px). **Measured: 463 files, 2,038,188 bytes (1.94 MB) of images; the directory
+  with the manifest is 2.12 MB. Budget 6 MB.** The originals (22,302,016 bytes) are untouched.
+- **2. One command.** `python3 web/tools/make_item_icons.py [--commit <art-sha>]` reads `assets/icons/items/`
+  and `data/items.json` (read-only), writes `web/icons/items/`, exits non-zero if over 6 MB.
+- **3. Generated whitelist.** The same script writes `web/icons/items/_manifest.json` (source commit
+  `7c9b90f93a19089e0c39cca310ed35c703caad12`, thumb size, byte total, file list, name map, conflicts) and
+  rewrites the block between the `ITEM_ICONS:BEGIN/END` markers in `app.js` from it. 462 names, one name clash
+  ("Scarglass Ring": `ring/scar_ring` kept, `ring/scarglass_ring` dropped, recorded in the manifest).
+  Re-run it when the art lane regenerates; nothing is hand-typed.
+- **4. Fixed boxes.** Every picture sits in a fixed 64 px (80 px in the preview) square, so a lazy image cannot
+  reflow the grid; the stage scrolls internally.
+- Preview = an overlay inside the card; Bestiary and Lore became browse cards (no new data). Rarity is a
+  frame (border), never a fill.
+- Note: shop stock goods (pies, brooms) are not in `data/items.json` equipment, so they honestly show the glyph;
+  only items that have art (rings, hats, boots, cloaks, gloves, amulets, banners) show a picture.
+
+## H32 pass 5 (polish) - no security surface change
+Added a skip link (constant href "#stageScroll"), three key shortcuts ("[", "]", "g") that only toggle page-owned layout state or focus the rail, a scrollIntoView on the active tab (an id from the TABS constant) and CSS. No snapshot value reaches a selector, URL, src, href or style; no new innerHTML; no new storage key; CSP meta unchanged.

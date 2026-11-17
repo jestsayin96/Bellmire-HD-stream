@@ -7282,6 +7282,53 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
   nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
 
+## D61.1 - THE NUMBERS IN THE WORLD: a result says what KIND it was, pools, and is capped (game build, 2026-11-16 20:07-20:40 CT)
+- ITEM: TAKE THIS NEXT (19:58) gave GAME BUILD "THE L31 REMAINDER" - damage numbers and status-effect icons. That
+  remainder is written up in full as D61 (Phase AG); this cycle builds D61 POINT 1 ONLY. .2 (condition icons on
+  party frames and over monsters), .3 (boss bar thresholds/attention/mechanic) and the D61 acceptance capture of a
+  whole boss fight are NOT done and NOT claimed. D61 and L31 stay unticked.
+- WHAT WAS THERE: Monster._number() showed the amount, with "N!" in gold for a crit. A MISS SHOWED NOTHING, a
+  save, a ward and smite-on-the-dead were invisible, and a flurry stacked a wall of digits.
+- BUILT (monster.gd): `show_result(kind, amount)` with six looks from one table, parchment figures on an ink
+  outline, teal for the defender's wins: hit "14", crit "CRIT 23!" (104 px, gold, a scale pop, lives 1.3 s),
+  miss "miss", save "save 7", resist "resist 7", vuln "7 x2!". ORDINARY HITS POOL inside 0.35 s into one climbing
+  figure; crits never pool. LIVE_CAP 3 numbers per creature, oldest dropped. Numbers alive at once step sideways
+  ALONG THE CAMERA'S RIGHT and down, so a beat of three does not print on itself. hurt() takes an optional `kind`;
+  the old `_number()` stays as a shim because raids.gd calls it (behaviour there unchanged except the new look).
+- WIRED (delve.gd): a melee swing that misses -> "miss"; a spell that misses its to-hit -> "miss"; a fireball
+  splash a creature SAVES against -> "save N" (halved, as before); smite on undead/the fallen -> "N x2!"; any blow
+  through a lord's `ward` (<1.0) -> "resist N". No damage arithmetic changed - only what is shown.
+- THE TEST, tools/_d61_test.gd (frame-counting, self-quitting, run WITHOUT --quit): real town, four heroes, floor 5.
+  ORGANIC (30 s of real fight, the scripted burst SUBTRACTED out): hit 16, miss 10, crit 0 in the last run (earlier
+  runs 14/12/1 and 15/3/1) - so a miss now says so in an unscripted fight. SCRIPTED on the live lord: 5+5 inside
+  POOL_S reads "10" with one label; a crit does not pool and reads "CRIT 23!"; save/resist/vuln/miss read
+  "save 7"/"resist 7"/"7 x2!"/"miss"; live labels never exceed 3. D61_TEST OK 7 checks.
+- LOOKED AT: renders/cycles/d61a/burst_1080.png (1920x1080). CRIT 31! reads big and gold at stream distance; "miss"
+  sits clear to the right. Two earlier captures caught real faults BY LOOKING and each was fixed: (1) the numbers
+  were invisible in the resting 2x2 grid (see below); (2) three results in one beat printed on top of each other -
+  the first fix offset along world X, which on this camera is partly depth and did not separate them, so the offset
+  now follows the camera's right vector. KNOWN IMPERFECT, SAID PLAINLY: in the 20:24 capture "save 9" still tucks
+  partly under the wide CRIT label; the lane offset was widened 1.5 -> 2.3 m and the FINAL capture (20:25, the
+  Grubmother) reads all three - "save 9" left, "CRIT 31!" centre, "miss" right - with the save's last digit just
+  touching the crit's C. Legible, not yet roomy. Final-run organic tally: miss 13, hit 11, crit 1, SAVE 1 - a
+  fireball save now shows in a natural fight too.
+  Organic resist/vuln were 0 in every run (no warded lord drawn, smite never landed on the dead in the window) -
+  those two are proven by the scripted burst only, not yet seen in a natural fight.
+- A FINDING FOR THE SUPERVISOR, NOT MINE TO CHANGE: in the RESTING 2x2 GRID (always up, L32a) the director quarter
+  culls HudDock.L_FLOAT (spotlight.gd _masks, HUD-owned, L21 "never in a pane under half the screen"). So on the
+  stream's normal layout NO damage number - old or new - is drawn anywhere. They appear only when the grid is
+  folded (Satchel, L51) or a lane is half the screen. The capture folds the grid the L51 way to see them. Whether
+  D61's numbers should be allowed into the director quarter (perhaps crits and misses only) is a HUD ruling.
+- C-73 / C-74 ANSWERED IN WRITING, so content is not left guessing: the 40 shape-first uniques ARE read
+  (bestiary.gd:613), but only as the lord's NOTE text (bestiary.gd:667) - NONE of the 40 mechanics is enacted
+  today, and I am not claiming any. Buildable from pieces that already exist, in this order, when they reach the
+  queue: Well-Chained (a leash on home/roam), Chaperoned (attendants via the summon path), Barn-Wide (an extra
+  body_r in the Crowd). Needing new systems and NOT promised: Latch-Fired, Vestry-Kept, Loft-Slung,
+  Kettle-Drummed, Gable-Cling, Charter-Sworn, Parish-Ledgered, Hearth-Fooled. C-74's act/broken pools stay dead
+  (no reader calls them); "epic"->"very rare" in the order array and artifact-never-stocked are owed and NOT done
+  this cycle. Content should keep NOT padding act/broken.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created/renamed/re-priced/deleted,
+  nothing posted as any account, no channel setting touched.
 ## C-75 (2026-11-16 20:40 CT) - stalest file named, working shown; NO DATA ADDED, FOUR READERS ARE DEAD (content)
 - TAKE THIS NEXT gave CONTENT no WORK_PLAN item and the standing row: name the stalest file again and show the working, judged by what a viewer would notice twice. C-55 and C-73 are ticked and C-74 is in. Clock read off the machine: 20:22 CT, 16 Nov. The C-74 header above now carries that CT stamp instead of the UTC date; header line only.
 - THE WORKING. I grepped scripts/ for every key in lore_lines.json that carries an `_alt` pool and for who reads it. Only `disasters.*.begin_alt` and `pass_alt` are read (economy.gd:531-572, `_dis_phrase`). These are written and read by NOTHING:
@@ -7301,3 +7348,39 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
   The cheapest honest win is item 1: an identical lord intro on every delve is the first thing a returning viewer will notice, and the fix is a pick from a list that is already written and already in the file.
 - NEXT FOR CONTENT: I will stay off these four files' dead pools until a reader lands. If the supervisor wants live-pool growth instead, the thinnest live one is `miniboss_feed` at 8-9 and 8 per key, but that was widened last cycle and I would not touch it again.
 - VALIDATION OK: nothing in the four data files was edited; all four still parse. No floor count, no artifact stocked, no .gd or other file touched.
+
+## U44 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's 19:58 TAKE THIS NEXT row for HUD: "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No new HUD item; freeze in force, nothing invented. party_frames.gd and boss_bar.gd untouched (game build's L31 remainder).
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 20:52 CT - last line IDLE 20:49:26 (chat bot B15, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.
+## B15 - STOOD DOWN AS ORDERED, AND RE-PROVED THE SIX GATES ON THE NEW MAIN (chat bot, 2026-11-16 20:45-20:52 CT)
+- THE ITEM WAS A STAND-DOWN AND IT IS DELIVERED. The 19:58 TAKE THIS NEXT row reads "STAND DOWN AND
+  WRITE THE LINE", and the 20:45 plan (main b9bd5cd, Mr. E's 20:40 ruling) does not change it: D96-D99
+  are the GAME BUILD's wiring queue, art and content keep producing, and the CHAT BOT row is unchanged.
+  NOTHING INVENTED. No WORK_PLAN item ticked, none written. D67/D69/D70 live in twitch_eventsub.gd and
+  belong to the game build; tools/ is not mine.
+- WHY A BATTERY RAN ANYWAY, AND IT IS NOT NEW WORK. THE BASE MOVED UNDER ME. 39847b3 fast-forwarded to
+  main b9bd5cd: 33 files, including scripts/economy.gd, scripts/town.gd and scripts/snapshot_pub.gd.
+  A parse gate covers the whole project, so a green verdict from 19:50 says nothing about this tree.
+  Re-running the SAME six gates on the new base is a re-measurement, not an invention.
+- SIX OF SIX GREEN ON b9bd5cd. parse rc=0 with 0 SCRIPT ERROR and 0 Parse Error; L14_TEST OK;
+  TWITCH_PARSE OK; D704_ECHO OK (356 checks); COMMANDS_DOC wrote 27 commands and left docs/COMMANDS.md
+  BYTE-IDENTICAL (md5 fc67173cfaa05ab7b522ef7305531f23 before and after - the generator stays a proven
+  no-op); B11_MUSTER OK bad=0.
+- THE NEW RULE WAS OBEYED. tools/_b11_muster.gd ran WITHOUT `--quit` and printed its verdict. The four
+  gates that finish before frame 1 kept `--quit`. No gate in this battery returned rc=0 with no verdict.
+- NO DEFECT FOUND IN MY THREE FILES, AND I LOOKED BEFORE SAYING SO. data/commands.json parses; order is
+  the same SET as commands (27 either side); drift checked BOTH directions - no entry without a code
+  path, no code path without an entry - and the real verdict is L14_TEST OK. chatcmd.gd opens
+  data/commands.json and nothing else.
+- THE DEAD-DATA AUDIT TOUCHES NOTHING OF MINE, SAID PLAINLY SO NOBODY WAITS ON ME. The seven unread
+  lore_lines.json keys, bosses.json lesser/uniques, items.json stock_by_tier/price_ladders and
+  classes.json healing are all read (or not) by game-build scripts. chatcmd.gd reads none of them and
+  never did, so D96-D99 are queued on nobody in this lane.
+- LOCK: read IDLE 2026-11-16T20:30:26-06:00 (game build), tasklist showed NO Godot process alive,
+  machine clock read directly at 20:47:26 CT. Claimed 20:47:26 with a named finish of 20:52, one
+  battery, nothing queued after it; released inside the window. The HUD lane's :52-:07 is untouched.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced
+  or deleted, nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

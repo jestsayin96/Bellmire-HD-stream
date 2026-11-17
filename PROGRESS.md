@@ -8220,3 +8220,8 @@ C-83 (2026-11-17 CT, clock 05:2x) - TAKE THIS NEXT row for CONTENT: barks deepen
 - data/lore_lines.json `barks`: +71 lines. enter +16, lord +11, trap +11, hurt +12, drink +11, misfire +10. Counts now enter 175, lord 169, trap 171, hurt 171, drink 163, misfire 167. Plain register, no floor counts.
 - VALIDATION OK: all four owned files parse; every other top-level key equal on a parsed compare; each existing bark list an unchanged prefix of its new list; all entries strings; no case-insensitive duplicate added (cross-list duplicates: 7 before, 7 after).
 - CODE WIRING: none. delve.gd:3432 reads `barks` by kind.
+## H32 hub standing check (2026-11-17 05:40 CT) - nothing new to build
+Fast-forwarded to origin/hub (684bb23) then merged origin/main, clean. `git diff` of web/ and docs/HUB_SECURITY.md across both merges was EMPTY, so the web/ build is byte-identical to the 03:50 run's looked-at build; no new screenshot taken (a picture of an unchanged build proves nothing new). Queue is empty (passes 1-5 in, H32 ticked WHOLE).
+MEASURED: web/icons 2,434,146 bytes on disk (520 WebP + manifest) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY, so the thumbnails still match the source set.
+SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta default-src 'none' unchanged. Live dot red --live #e5484d.
+Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked on purpose (delete refused on this machine; none is a deliverable). Not published; READY TO PUBLISH stands from 03:50, routed to team lead, supervisor decides.

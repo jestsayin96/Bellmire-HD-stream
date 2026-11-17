@@ -8554,3 +8554,10 @@ NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 r
   1.06 too, so nothing reads wrong today. Named so the next audit does not rediscover it.
 - Left untouched in the worktree: renders/cycles/d96/*.png and renders/cycles/h29p6/payload.json
   (gate outputs rewritten by the batteries; not staged).
+
+## C-86 (2026-11-17 CT, clock ~08:2x) - TAKE THIS NEXT row for CONTENT: quartermaster and loader feed lines, barks deepened a seventh time (lore_lines.json only)
+- TAKE THIS NEXT (07:58 CT block) gave CONTENT: keep going in `barks`; arrive and fall lines for the quartermaster and the loader are legitimate and not owed. C-55 and the earlier cycles are done and were not redone.
+- data/lore_lines.json `miniboss_feed.by_key`: +2 keys, `quartermaster` and `loader`, arrive 8 and fall 8 each (32 lines). act and broken omitted on purpose: they belong to mechanics not built (the loader's encumbrance is refused under the wiring-only ruling) and miniboss_lines() returns [] for a missing phase. `_note_c86` added.
+- data/lore_lines.json `barks`: +56 lines (case-insensitive duplicates dropped). enter 208, lord 201, trap 203, hurt 198, drink 194, misfire 198. Plain register, no floor counts.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; existing by_key rows unchanged; all bark entries strings. Raw diff deletions are trailing-comma lines only.
+- CODE WIRING: none for barks. For the new feed keys the reader (delve.gd miniboss_lines) already takes any key; the code lane should fire _miniboss_say("quartermaster"/"loader", "arrive"/"fall") when it adds them to the spawn table alongside MB_FIT (loader 1.08 still owed there). No new .gd touched.

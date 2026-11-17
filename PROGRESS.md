@@ -6576,3 +6576,9 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
 - LOCK: RUN_LOCK read at 21:53 CT - last line IDLE 21:49:16 (chat bot B16, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
 - NEEDED FROM MR. E: nothing.
+
+## U46 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's TAKE THIS NEXT HUD row (WORK_PLAN ~line 811-830): "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." L73/L74 ticked, L31 remainder is the game build's, freeze in force. Nothing invented.
+- DEFECT CHECK: no defect in the seven HUD files known since U40; nothing rendered this slot, none looked for. L21 quarter-pane float-text cull is Mr. E's ruling and was left alone. party_frames.gd and boss_bar.gd untouched.
+- LOCK: RUN_LOCK read at 22:53 CT - last line IDLE 22:50:52 (chat bot B17, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

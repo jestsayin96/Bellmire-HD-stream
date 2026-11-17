@@ -1068,7 +1068,34 @@ content's `_note_c92`.
                    superseded, and I will carry the answer.
                    THE TANNER OBSERVATION STILL STANDS UNANSWERED AND STILL IS NOT AN ITEM.
 
-  HUB          ->  *** I AM CUTTING YOUR ROW TO ONE CHECK, AND TAKING THE REST MYSELF. *** Five
+  HUB          ->  *** UPDATED 15:47 CT: MR. E HAS RULED ON U55 OPTION (a) AND IT IS NOW YOUR
+                   FIRST ITEM, AHEAD OF THE CHECK BELOW. *** His words, verbatim: "yes i think
+                   so". DRAW YOUR RARITY HUE FROM ART'S TABLE. The full ruling is in the block
+                   headed MR. E'S RULING, 17 NOV 15:47 CT below - read it before you touch
+                   style.css, because it already answers the two things you would otherwise have
+                   to ask: take the CANONICAL rung (uncommon is WHITE, not the HUD's parchment
+                   pewter - your surface is ink, not parchment), and yes, legendary leaving
+                   var(--gold) for tangerine is correct and is not a palette breach, because a
+                   rarity frame is DATA and not chrome.
+                   I MEASURED YOUR CURRENT TABLE MYSELF so you are not working off my memory:
+                   style.css:1373-1375 and :1706-1708. Five rungs differ and uncommon is GREEN
+                   (#6aa84f) where art's ladder is WHITE - that is not a shade apart, it is a
+                   different colour, and it is the rung most viewers earn first. Use art's FLOAT
+                   triples from tools/art/icons.py and derive your own hex. junk, starting and
+                   common stay BARE - no hue, no cost-quartile fallback. Keep .rar-epic on
+                   very-rare. Rarity stays a frame, never a fill.
+                   LOOK AT IT AFTERWARDS - a screenshot of the Shops tab and a gear card at each
+                   rung, your own eyes, not the absence of a console error. web/ changing means
+                   your standing check will show a real diff for the first time in six hours;
+                   that is expected, say so, and DO NOT PUBLISH.
+
+                   *** AND YOUR 15:37 RUN ALREADY ANSWERED THE CHECK I SET YOU. *** ac3671f says
+                   state URLs and page scroll - that is the first entry in five hours that
+                   touches the live page and I will verify it at the next merge. The hostile-name
+                   test stays owed if that run did not cover it.
+
+                   THE ROW BELOW IS KEPT AS WRITTEN AT 14:58 and still stands underneath. *** I
+                   AM CUTTING YOUR ROW TO ONE CHECK, AND TAKING THE REST MYSELF. *** Five
                    hours of rows have asked you for the live page and five entries have not
                    mentioned it. Asking a sixth time in the same words would be my fault, not
                    yours. Your standing check is clean for a sixth hour and I verified every
@@ -1124,12 +1151,17 @@ content's `_note_c92`.
 
 ================================================================================
 *** FOR THE SUPERVISOR - THREE, ONE OF THEM A SECOND ASKING. ***
-  1. *** STILL YOURS AND STILL UNANSWERED FOR A SECOND HOUR: U55 option (a). *** Should the HUB
-     draw its rarity hue from art's RARITY_HUE table, as the HUD now does? Carried from the
-     hub's 13:40 entry and routed up at 13:58; the hub lane still records it as awaiting a pick.
-     It is a design call, not a defect, and nothing is blocked on it. MY RECOMMENDATION IS
-     UNCHANGED: yes - the HUD took art's table at U56 rather than forking one, and a third table
-     is how the pewter rung drifts. If the answer is no, saying so also closes it.
+  1. *** CLOSED AT 15:47 CT - MR. E ANSWERED IT HIMSELF, AND THE ANSWER IS YES. *** U55 option
+     (a) is settled: the hub draws its rarity hue from art's RARITY_HUE table. His verbatim
+     words were "yes i think so". NOTHING IS OWED TO YOU ON THIS ANY MORE - it is recorded in
+     full in the ruling block below, it is the hub's first item, and I have already measured the
+     drift (five rungs, uncommon green vs white) and ruled on the two judgements it raised so
+     the lane does not spend an hour asking. The original escalation text is kept below as the
+     record of what was asked.
+     AS ASKED AT 13:58 AND 14:58: *** Should the HUB draw its rarity hue from art's RARITY_HUE
+     table, as the HUD now does? *** Carried from the hub's 13:40 entry; routed up twice. A
+     design call, not a defect, nothing blocked. MY RECOMMENDATION WAS: yes - the HUD took art's
+     table at U56 rather than forking one, and a third table is how the pewter rung drifts.
   2. THE HUB'S LIVE-PAGE ROW IS NOT DONE FOR A FIFTH HOUR. I am not escalating the lane and I am
      not re-issuing the row again: I have cut it to the single safety check (hostile name) and
      moved the other six onto myself. REPORTING, NOT ASKING. If you want it handled differently,
@@ -1140,6 +1172,59 @@ content's `_note_c92`.
      Nothing is owed to Mr. E on it.
 
 *** NEEDS MR. E: nothing. ***
+
+================================================================================
+*** MR. E'S RULING, 17 NOV 15:47 CT. U55 OPTION (a) IS ANSWERED AND CLOSED. ***
+*** HIS OWN WORDS, VERBATIM: "yes i think so" - in answer to "Should the hub draw rarity hue
+*** from art's RARITY_HUE table (the same one the HUD uses)?" ***
+THE HUB DRAWS ITS RARITY HUE FROM ART'S TABLE. The question has been open since the hub's 13:40
+entry and was routed up twice. It is now settled and it is NOT to be re-raised.
+
+*** AND ART ALREADY WROTE THIS RULING DOWN BEFORE IT WAS ASKED FOR. *** tools/art/icons.py:656,
+in art's own words: "THIS TABLE IS THE SOURCE OF TRUTH AND IT IS MIRRORED, NOT COPIED: the HUD
+(game build) and the hub both have to draw the same ladder, and the moment three lanes keep three
+tables the icon and the frame disagree." Mr. E's answer and art's intent are the same answer.
+
+*** I MEASURED THE DRIFT BEFORE WRITING THE ROW, SO NOBODY HAS TO ARGUE ABOUT WHETHER IT WAS
+*** REAL. IT IS REAL, IT IS FIVE RUNGS WIDE, AND ONE OF THEM IS A DIFFERENT COLOUR ENTIRELY. ***
+web/style.css carries a THIRD table at :1373-1375 (.rar-*) and again at :1706-1708 (.gcard.rar-*):
+  RUNG         HUB TODAY                 ART'S LADDER (canonical, sRGB 0..1)
+  uncommon     #6aa84f  GREEN            (1.00, 1.00, 1.00)  WHITE   <- not a shade apart, a
+                                                                        DIFFERENT COLOUR
+  rare         #4a86c8                   (0.30, 0.55, 1.00)  blue
+  very rare    #9b6bc8                   (0.70, 0.35, 1.00)  purple
+  legendary    var(--gold) #c9a54a       (1.00, 0.55, 0.12)  tangerine
+  artifact     #d9643a                   (1.00, 0.13, 0.10)  bright red
+  junk / starting / common: NO HUE AT ALL. Deliberately bare. The hub must not colour them, and
+  there is NO cost-quartile fallback - art is explicit that the hue is "a CLAIM about what a
+  viewer is holding", so an item with no stored rarity gets no frame.
+
+*** THE ONE JUDGEMENT THE LANE WOULD OTHERWISE HAVE HAD TO ASK ABOUT, ANSWERED HERE SO IT DOES
+*** NOT COST ANOTHER HOUR: TAKE THE CANONICAL TABLE, NOT THE HUD'S PARCHMENT VARIANT. ***
+There are two `uncommon` values in art's file on purpose. RARITY_HUE["uncommon"] is pure WHITE;
+RARITY_HUE_PARCHMENT["uncommon"] is cool pewter (0.62, 0.66, 0.72). Art's own note says why: white
+carries an icon rendered AGAINST THE DARK, and the pewter exists only because a HUD panel is
+PARCHMENT and white on parchment "is not a hue at all, it is paper". THE HUB'S SURFACE IS DEEP INK,
+not parchment - the same case the canonical table was written for. So the hub takes WHITE for
+uncommon and the other four exactly as they stand. The HUD keeps pewter. That is not two tables;
+it is one table and one named surface exception, which is what art built.
+
+USE ART'S FLOAT TRIPLES AS THE SOURCE AND DERIVE YOUR OWN HEX - do not copy a hex out of this
+block or out of ui_theme.gd. The values are sRGB 0..1 (icons.py says so explicitly, because
+lordgen forces Non-Color), and the HUD and the hub rounding one float differently is not a drift
+worth a discussion. Keep the `.rar-epic` alias pointing at very-rare - that is content's
+"epic" -> "very rare" rename and it is still load-bearing.
+
+*** AND THE PALETTE QUESTION THIS RAISES, RULED ON HERE RATHER THAN LEFT FOR THE LANE: ***
+Moving legendary off var(--gold) to tangerine, and artifact to bright red, puts two rarity colours
+outside the hub palette (deep ink/charcoal, parchment, one teal accent, restrained gold). THAT IS
+CORRECT AND IT IS NOT A PALETTE BREACH. The palette governs CHROME - the page's own furniture. A
+rarity frame is DATA: it is the game telling a viewer what they are holding, and it has to match
+the icon inside the frame and the HUD on stream. If the frame and the icon disagree, the palette
+has been kept and the page has lied. Do not harmonise art's hues toward the gold.
+Rarity stays a FRAME (border + ring), never a fill - H32's own rule at style.css:1693, unchanged.
+================================================================================
+
 
 ================================================================================
 *** ADDENDUM 15:15 CT, SAME HOUR, BY THE TEAM LEAD. I SAID THE SIX LIVE-PAGE CHECKS WERE MINE
@@ -1204,6 +1289,19 @@ click, and the PLAN is what the lanes actually read, so nothing is blocked.
      answer, and only if it LANDS is it worth composing the full replacement.
      THIS DOES NOT RELAX THE STANDING ORDER - still attempt it every run, still never report it
      as a law of the machine, because the 11:38 write landed the moment there was a live turn.
+  H. *** CORRECTION TO G, AND TO A BELIEF IN THE :58 PROMPT ITSELF, MEASURED AT 15:48 CT IN A
+     LIVE TURN. A LIVE TURN IS NOT ENOUGH. *** The prompt says the 11:38 write "landed the moment
+     there WAS a live turn". I tested that directly: Mr. E answered the U55 question at 15:47, so
+     there WAS a live turn, and I probed with the most harmless call available - update_trigger
+     with `enabled: true` on a trigger that is already enabled, a no-op in effect. STILL REFUSED,
+     [Cowork Scheduled Task Write].
+     SO THE REAL CONDITION IS NARROWER THAN THE PROMPT STATES. What landed at 11:38 was not a
+     live turn by itself - it was Mr. E explicitly saying "Just rety now", i.e. the turn ASKING
+     for the write is what carries the approval. A live turn about something else does not.
+     WHAT THAT MEANS FOR THE NEXT SEAT, PRACTICALLY: do not hold a correction back waiting for a
+     live turn, and do not compose the full replacement text on the strength of one. Put the
+     correction in THIS FILE, which is what the lanes actually read, and attempt the write with
+     the one-field probe. The only thing that changes the answer is Mr. E asking for it.
 ================================================================================
 
 

@@ -1142,6 +1142,39 @@ content's `_note_c92`.
 *** NEEDS MR. E: nothing. ***
 
 ================================================================================
+*** ADDENDUM 15:15 CT, SAME HOUR, BY THE TEAM LEAD. I SAID THE SIX LIVE-PAGE CHECKS WERE MINE
+*** AND I DID FOUR OF THEM IN THE SAME RUN RATHER THAN BOOKING THEM FOR NEXT HOUR. ***
+Route as recorded: Claude_Browser__navigate then __computer screenshot - the screenshot timed out
+on the FIRST call every single time and succeeded on the second, four times out of four. That is
+not intermittent, it is the shape of the tool; call it twice and stop worrying about it.
+WHAT I SAW WITH MY OWN EYES ON THE PUBLISHED COPY:
+  - ?state=fail BEHAVES. Red-dotted banner, "Couldn't reach the town's record... The page will try
+    again in a minute." The roster rail, the tab row, the Chronicle panel and the guild chat
+    column all still draw. No crash, no collapsed layout.
+  - ?state=stale BEHAVES, AND BETTER THAN I EXPECTED. It draws the whole hall from the last known
+    state - stage 2, souls 56, day 4, treasury 845 g, raids turned back 24, growth 168/175, eleven
+    named heroes on the roll - and LABELS it: "Last word from the town 2 days ago (Sun, Nov 15,
+    03:08 PM). The game is probably not running right now, so this may be out of date." Showing
+    the old state plainly marked is the right answer; hiding it would have been the wrong one.
+  - ?mock=chronicle BEHAVES, and it proved itself by CHANGING something: the latest-word line went
+    from "Harl Quarryman swears he once delved the scar" to "Grimhollow the Knight fell on floor 7,
+    run through by a bone-knight". A mock that renders identically to no mock proves nothing; this
+    one did not.
+  - ?mock=crowd BEHAVES AND IS THE REAL STRESS CASE. The roll goes to 211 heroes, the Heroes tab
+    reads 211, the left rail scrolls, and NOTHING overflows into the Chronicle column.
+  - NO 404 ACROSS FOUR PAGE LOADS: style.css, app.js and fonts/gloock-latin-400.woff2 all 200 on
+    every one. THIS IS NOT THE FULL 404 SWEEP and I will not call it one - no item-icon request
+    appeared in the capture, because I did not browse the item tabs.
+WHAT I DID NOT GET, SAID PLAINLY: ?open=1 IS NOT CONFIRMED. With ?mock=crowd&open=1 the guild chat
+column still showed its "Open the guild chat" button rather than an opened chat. That may be a
+viewport thing - the pane is 800x600 and the real stream frame is not - or it may be the parameter
+not firing. I am NOT recording it as a pass and I am NOT recording it as a defect. It and page
+scroll at the real stream resolution stay on MY list, not the hub's.
+THE HUB'S ROW IS UNCHANGED AND IS STILL THE ONE SAFETY CHECK: the hostile-name test.
+================================================================================
+
+
+================================================================================
 *** PROMPT CORRECTIONS OWED TO THE :58 TEAM-LEAD PROMPT - 14:58 CT. READ THIS, NEXT SEAT. ***
 THE 13:58 LIST BELOW STILL STANDS except where this hour's numbers supersede it. I attempt the
 write every run; if it is refused it is the SESSION'S permission mode, not something Mr. E can

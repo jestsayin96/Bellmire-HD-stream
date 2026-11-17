@@ -1353,7 +1353,23 @@
       "Check your straps.",
       "Tally the rope.",
       "Mind the first step. It's loose.",
-      "Hum if you must. Softly."
+      "Hum if you must. Softly.",
+      "Boots dry now. Not for long.",
+      "Bread eaten? Then we go.",
+      "Leave the grudges up top.",
+      "Count heads at the stair.",
+      "Who has the chalk?",
+      "Shoulders loose. Breathe.",
+      "Hand on the rail. Rail's cold.",
+      "Door's heavy. Lean on it.",
+      "Nobody takes the lead alone.",
+      "The lamp oil's good today.",
+      "Tighten the buckle. Then the other.",
+      "Walk in step. Quiet step.",
+      "Last one in latches it.",
+      "Mind the drip on the left.",
+      "Mud on the third stair. Slick.",
+      "Tie off the pack. It rattles."
     ],
     "lord": [
       "Hold together!",
@@ -1513,7 +1529,18 @@
       "Eyes up. Feet steady.",
       "Keep the lamp lit.",
       "Watch the floor under it.",
-      "One word at a time. Listen for mine."
+      "One word at a time. Listen for mine.",
+      "Spread out. Not too far.",
+      "Don't give it your back.",
+      "It's slow. It hits hard.",
+      "Count its swings.",
+      "Let the shield take it.",
+      "Wait. Wait. Now.",
+      "Mend the one who's hurt first.",
+      "Stay off its left side.",
+      "It's only one thing. We're five.",
+      "Rest your arm between blows.",
+      "Short cuts. Step back."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1675,7 +1702,18 @@
       "Don't whistle. Echo's wrong.",
       "Spare me the heroics. Go round.",
       "Fresh mortar. Who's been here?",
-      "Gap in the dust. Step over."
+      "Gap in the dust. Step over.",
+      "Dust's thin on that stone.",
+      "Wire. Low. Left.",
+      "Hinge squeaks. Someone oiled it.",
+      "Tile sits a hair high.",
+      "Draught from the wall. Why?",
+      "Scratch marks round the lock.",
+      "Slow hand. Slower.",
+      "I'll go first. Mind my rope.",
+      "That's a pit. Smells of it.",
+      "A nail head, shining. New.",
+      "Mark it. Step wide."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -1836,7 +1874,19 @@
       "Wrap it. Don't fuss.",
       "Teeth are fine. The rest, less so.",
       "Stay close. I'm unsteady.",
-      "Mind my side. It's tender."
+      "Mind my side. It's tender.",
+      "That one will scar.",
+      "Lean on me a moment.",
+      "Wrap it tight. Tighter.",
+      "I'll sit this one out.",
+      "Still got both hands.",
+      "Cold, now. Is that bad?",
+      "Keep the lamp on me.",
+      "It stings. Means it's clean.",
+      "Pass the rag. The dry one.",
+      "Tell me when it's over.",
+      "I'm up. Give me a second.",
+      "Hold the wound shut. There."
     ],
     "drink": [
       "Bottoms up.",
@@ -1990,7 +2040,18 @@
       "The cork was honest.",
       "Wipe the neck. Pass it on.",
       "Last drop. Make it count.",
-      "Thanks to whoever mixed that."
+      "Thanks to whoever mixed that.",
+      "Salt and herbs. Fine.",
+      "Thank the brewer, not me.",
+      "Stings, then settles.",
+      "Smells worse than it is.",
+      "One swallow. That's all.",
+      "Right. Back at it.",
+      "Mind the dregs. Gritty.",
+      "Cork back in. Keep it.",
+      "The ache's easing.",
+      "Cold from the cellar. Welcome.",
+      "Mother brewed worse."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2149,7 +2210,17 @@
       "It heard me. It didn't answer.",
       "Wrong day to be clever.",
       "The chalk smudged. My fault.",
-      "I'll say it slower."
+      "I'll say it slower.",
+      "Wrong word. Same breath.",
+      "The chalk's gone dull.",
+      "Fizzled out. Hold on.",
+      "My tongue tripped.",
+      "It didn't take. Try again.",
+      "The scar's quiet. Too quiet.",
+      "That's no good. Sorry.",
+      "Words came, power didn't.",
+      "Too tired for it.",
+      "A spark. Then nothing at all."
     ]
   },
   "misfire": [

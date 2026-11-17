@@ -8139,3 +8139,10 @@ FIXES (tools/ only, hud-ui lane's own files): _l71_test.gd and _l74_test.gd - fr
 PROOF: parse 0 errors. L71_TEST OK audited=21; L74_TEST OK audited=9 (my first L74 floor of 15 was wrong - the pacer admits ~3 labels per scale - and the gate itself said NO VERDICT, which is the floor working; set to 6). BREAKS: tag break_nohud -> "NO VERDICT - FeedHUD never found in 1800 frames" exit 2 (both gates); tag break_empty -> "NO VERDICT - only 0 labels audited" exit 2 (both gates). Neither prints OK.
 NOT DONE: fault 2 (_l72_test no token) and fault 3 (_l73_test cap prints FAIL) - need a lord-shot break and a long run; next engine slot. Looked at renders/cycles/l74/l74_u49b_125.png: Chronicle at 125%, no ellipsis, stack inside the vellum.
 NEEDED FROM MR. E: nothing. L31 status-icon remainder still waits on the D99 tick.
+
+## U50 (2026-11-17 05:56 CT) - HUD: _l72_test can no longer print a clean finish on nothing (U49 fault 2), proved by deliberate break
+TAKE THIS NEXT gave HUD: no new HUD row (a463b7d plan sync only); took U49's NOT-DONE remainder. Lock RUNNING 05:55, IDLE 05:56 (~2 min, under the 15 cap, inside :52-:07).
+FIX (tools/_l72_test.gd, my lane's own file): old ending printed "DONE fails=0" and exit 0 even when no lord shot was measured. Now: audited counter of gated shots that really measured a lord; floor = one per lord run; overall frame cap 40000; verdict OK (rc 0) / FAIL (rc 1) / NO VERDICT (rc 2). New user args: lords=N (run first N lords), break_noaudit (frame report returns nothing).
+PROOF (windowed 1920x1080, lords=1): parse 0 errors; normal -> "L72_TEST OK fails=0 audited=2" rc 0, hollow_king inside=28/28 at all five shots, cam_in_solid=false; break_noaudit -> "NO VERDICT - only 0 gated shots audited, need 1" rc 2.
+NOT DONE: fault 3 (_l73_test cap prints FAIL) needs a long run - next engine slot, one chunk. Full 8-lord _l72 run not repeated this hour (1 lord proves the verdict path).
+NEEDED FROM MR. E: nothing.

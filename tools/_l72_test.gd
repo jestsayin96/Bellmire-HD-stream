@@ -10,11 +10,20 @@ var _i := 0
 var _t0 := 0
 var _shots := 0
 var _fails := 0
+var _audited := 0        # gated shots (t>=3) that actually measured a lord
+var _nlords := 8
+var _break := ""
+const MAX_FRAMES := 40000
 var _wait_f := 0
 const LORDS := ["hollow_king", "grubmother", "rattling_host", "nightwing", "gravewyrm", "ossuary_lord", "pale_duchess", "mourncoil"]
 const OUT := "res://renders/cycles/20261116_l72"
 
 func _initialize() -> void:
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("lords="):
+			_nlords = clampi(int(a.substr(6)), 1, LORDS.size())
+		if a.begins_with("break_"):
+			_break = a
 	_t = (load("res://Town.tscn") as PackedScene).instantiate()
 	root.add_child(_t)
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
@@ -51,6 +60,8 @@ func _start_lord() -> void:
 func _frame_report(tag: String) -> Dictionary:
 	var dr: AutoDirector = _eye.director
 	var lord = dr._cur.get("node")
+	if _break == "break_noaudit":
+		return {"ok": false}
 	if lord == null or not is_instance_valid(lord):
 		return {"ok": false}
 	var pts := dr.subject_points(lord)
@@ -73,6 +84,10 @@ func _save(tag: String) -> void:
 
 func _process(_dt: float) -> bool:
 	_f += 1
+	if _f > MAX_FRAMES:
+		print("L72_TEST NO VERDICT - frame cap %d hit at lord %d, audited=%d" % [MAX_FRAMES, _i, _audited])
+		quit(2)
+		return true
 	match _stage:
 		"boot":
 			if _f == 20:
@@ -106,6 +121,8 @@ func _process(_dt: float) -> bool:
 			if _shots < plan.size() and el >= float(plan[_shots]):
 				var rep := _frame_report("t=%.1fs" % el)
 				_save("t%d" % _shots)
+				if rep.get("ok", false) and _shots >= 3:
+					_audited += 1
 				if rep.get("ok", false) and (int(rep["inside"]) < int(rep["n"]) or bool(rep["solid"])) and _shots >= 3:
 					_fails += 1
 				_shots += 1
@@ -118,8 +135,16 @@ func _process(_dt: float) -> bool:
 
 func _next() -> void:
 	_i += 1
-	if _i >= LORDS.size():
-		print("L72_TEST DONE fails=%d" % _fails)
-		quit(0)
+	if _i >= _nlords:
+		var floor_n := _nlords          # at least one measured gated shot per lord
+		if _fails > 0:
+			print("L72_TEST FAIL fails=%d audited=%d" % [_fails, _audited])
+			quit(1)
+		elif _audited < floor_n:
+			print("L72_TEST NO VERDICT - only %d gated shots audited, need %d" % [_audited, floor_n])
+			quit(2)
+		else:
+			print("L72_TEST OK fails=0 audited=%d" % _audited)
+			quit(0)
 		return
 	_start_lord()

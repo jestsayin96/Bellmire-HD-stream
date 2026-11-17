@@ -8635,3 +8635,23 @@ NOT CHASED: the unread-pipe hang. The row said leave it; the condition is known 
 NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
+
+## D-cycle - S15 the eighteenth miniboss (hurdleman) gets its MB_FIT key and its .import sibling, 2026-11-17T09:19:00-06:00 (game build)
+- STAMP CORRECTED: first written as 09:21, a FUTURE STAMP - the machine read 09:19:35. Mine, named.
+- Row (08:58 TAKE THIS NEXT): add "hurdleman": 1.04 to scripts/delve.gd MB_FIT, copied from ART'S
+  renders/art/minibosses/_fit_report.json pairs.hurdleman.ratio = 1.04 (verdict GREEN, blank_check 54 files / 0
+  failures) - NOT re-derived. One line, delve.gd:375. Looked at art's hurdleman/hero_front.png: pair height reads right.
+- Import run committed assets/monsters/minibosses/hurdleman.glb.import. Minibosses now 29 .glb / 29 .import.
+- NOT BUILT: the hurdleman's party-split idea, nor the loader's encumbrance. New mechanics; wiring-only ruling.
+  No miniboss def exists in data/ for either, so neither spawns - no engine render of it, and none claimed.
+- Lock: opening claim 09:08:30 declared :35 against the 07:58 row's :33 - MINE, named in the lock file. It was a
+  stand-down claim written before the 08:58 block reached laptop; the S15 claim at 09:09:35 declared :33.
+- MY OWN FAULT, CAUGHT AND FIXED IN THE SLOT: first D96_FIT run used --headless, got a null viewport image
+  (SCRIPT ERROR save_png on null, _d96_fit.gd:176, rc=1, no verdict = RED). Killed my own Godot, relaunched
+  windowed as S14 did - D96_FIT OK. The tool is not at fault; the gate renders, so it needs a window.
+- Verdicts: import rc0 0 errors; parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2102;
+  TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/16175 raid_in_solid=0/7075 PASS; DELVE_TEST OK 9001 frames
+  floor reached 2; D96_FIT OK 70 checks, 14 minibosses; S15_CHECK OK (hurdleman 1.04 vs art 1.04; glb 29
+  import 29; 0 MB_FIT values disagree with art's report).
+- FINDING CARRIED, NOT ACTED ON: art pair "snuffer_chibi" (1.06) still has no MB_FIT key; "snuffer" is 1.06 so
+  nothing reads wrong. Godot stdout went to files (build/_s15/*.log), never a pipe.

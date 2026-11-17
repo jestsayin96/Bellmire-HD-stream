@@ -8115,3 +8115,11 @@ engine window to prove it. **It is held, not forgotten: B22's first act, one lou
 No Godot launched, no lock taken, no logs written, nothing deleted. No Twitch of any kind: 0 bits,
 nothing cheered or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as
 any account, no channel setting touched. No secrets written anywhere.
+## H32 hub standing check (2026-11-17 03:50 CT) - passes 4 and 5 already IN; nothing left in the queue
+Merged origin/main (713d657) into hub, clean. Prompt said "next is pass 4" - that is stale: pass 4 (61c9269) and pass 5 (ec61995) are already committed and H32 was ticked WHOLE at fbf17f0.
+- THUMBNAILS CURRENT: manifest source_commit 2473836; `git log 2473836..HEAD -- assets/icons/items` is EMPTY, so the 520 WebP set still matches the icons. MEASURED: 520 files, 2,341,956 bytes (2.34 MB) vs the 6 MB cap (22.3 MB source refused). No re-derive needed.
+- SECURITY BY GREP: node --check app.js OK. innerHTML only at app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function. img.src only at :3750 (whitelist path); link.href :2710 is Twitch's device-flow URL, host-gated to https://(www.)twitch.tv/. CSP meta unchanged (default-src 'none', img-src 'self' data:).
+- STATE/MOCK RUN (headless Chromium, 1400x850, supabase answered with [] so mocks engage): ?state=empty/fail/stale, ?mock=chronicle/crowd/lore/bands/roll/fallen/chat, ?open=1 - 0 page errors, 0 dialogs, 0 <img onerror> elements, NO PAGE SCROLL on any. Hostile <img src=x onerror=alert(1)> present as literal text in chronicle/crowd/lore/bands/roll/fallen. (open=1 and chat carry no hostile name in view without a click/opt-in - covered by earlier runs.)
+- LOOKED AT: ?mock=crowd screenshot - three columns (rail with 200 heroes + Lv number, stage, opt-in chat column), section pills demoted to a top bar, welcome panel above the stage. Rail count shown is level; rail/stage/chat scroll independently.
+- HOUSEKEEPING ANSWER: _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt, _l40d_*.log, _sup_gate*.log are LEFT UNTRACKED ON PURPOSE (about 4.8 MB of scratch; delete refused on this machine; none is a deliverable). Named here so they are not loose.
+- Live dot colour: red --live #e5484d (style.css:1527), not the teal fallback. READY TO PUBLISH - routed to team lead, supervisor decides.

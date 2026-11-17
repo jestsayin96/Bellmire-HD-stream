@@ -8537,3 +8537,9 @@ Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left un
 ## U52 (2026-11-17T07:53:37-06:00) - HUD stand-down, file-only (no lock taken, no Godot launched)
 TAKE THIS NEXT (06:58 block) gave HUD: gate work or the stand-down; L73/L74 already ticked, all four U48 gate faults closed (U49-U51), L31 remainder waits on the D99 tick (origin/main a2b6f04 shows D99 still not ticked). Lock: last line IDLE 07:51:10 (chat bot), no Godot alive. None launched, lock untouched, none of my seven files edited. I did not invent an item or touch another lane's file.
 NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 remainder to its owners.
+
+## U53 - HUD stand-down, file-only (no lock taken, no Godot launched), 2026-11-17T09:53:58-06:00
+TAKE THIS NEXT (08:58 block) gave HUD: WRITE THE STAND-DOWN (08:52 slot was missed; a dry hour still gets one entry).
+Checked: L73/L74 ticked; U49-U51 closed the four U48 gate faults; the supervisor's 09:25 report ticks D99, so the L31 remainder is released - but its open half (damage numbers, status-effect icons) lives in delve.gd / monster.gd / party_frames.gd / boss_bar.gd, none of which are mine, and the plan re-routed it to the GAME BUILD on 16 Nov 18:02. L66 stays closed (H31). None of my seven files edited; no gate of mine reads red.
+Lock: last line "IDLE 2026-11-17T09:19:35-06:00 - game build S15: MB_FIT hurdleman 1.04 (art's, not re-derived) + hurdleman.glb.import (29/29). parse 0 errors, OFFFLOOR OK 0/2102, TWITCH_PARSE OK 8, TOWNWALK PASS, DEL"; Godot not running (tasklist empty). Lock untouched.
+NEEDED FROM MR. E: nothing. For the supervisor: if you want status-effect icons on stream, name the file owner who exposes the status state; HUD can draw it from a feed it is handed.

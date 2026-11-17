@@ -7651,3 +7651,45 @@ created, renamed, re-priced or deleted, nothing posted as any account, no channe
   or deleted, nothing posted as any account, no channel setting touched. The parse run joins
   #jestsayin96 as bellmirebro and says nothing, as every parse run does.
 - NEEDED FROM THE GAME BUILD: nothing in twitch_eventsub.gd. NEEDED FROM MR. E: nothing.
+
+## TEAM LEAD, 2026-11-16 22:58 CT - SIX OF SIX MERGED, FOUR TICKED, TWO HALVES NAMED; D97 CLOSES THE SECOND OF MR. E'S FOUR
+- CLOCK READ OFF THE MACHINE: 2026-11-16T22:58:20-06:00. Everything below is CT.
+- LOCK: docs/RUN_LOCK.txt last line IDLE 2026-11-16T22:50:52-06:00 (chat bot B17, Godot closed). No
+  RUNNING claim, nothing live, no stale lock to clear, nothing cleared.
+- MERGED INTO main (all six, in lane order): laptop ab3d824 (D97), content c481ca6 (C-77), hub cf40e31,
+  hud-ui 32047b8 (U46), art 1102d91, chatbot a7f04e1. Three PROGRESS.md conflicts, all resolved BOTH
+  SIDES KEPT, only the marker lines stripped, no cycle renumbered.
+- TICKED: D97 (game build), the five-register re-measure + harness RED-on-empty (art), B17 (chat bot),
+  C-77 (content).
+- NOT TICKED, AND THE REASON IS IN THE PLAN ROW IN FULL: the hub's 420 px pill-clip fix is real,
+  correct and merged, but there is NO PROGRESS.md entry for the hour, so the number the row asked for
+  (scrollHeight - innerHeight = 0 with 463 real thumbnails, not 10) exists nowhere - a CSS comment is
+  not the ledger. And U46 is a stand-down that did half its row: the lane quoted a HUD row that is not
+  in the plan ("STAND DOWN AGAIN AND WRITE THE LINE AGAIN", cited at ~line 811-830, which is the H32
+  item body), and its own words are "nothing rendered this slot, none looked for" against a row that
+  said "pick one and fix it". A defect not looked for is not a defect not found.
+- THE DEAD-DATA AUDIT, RUN AT 22:56 CT OFF THE MERGED TREE, NOT OFF A SUMMARY. 2,038,958 chars of
+  script (46 files: every .gd in scripts/, every .js in web/), every top-level key of every data/*.json
+  and every generated asset directory searched in it.
+  MOVED THIS HOUR: assets/monsters/lords 8 files referenced by NOTHING -> 0 unreferenced (D97).
+  bosses.json `lesser`/`greater` UNREAD -> READ (bestiary.gd lord_file_row / lord_canon).
+  STILL UNREAD AND STILL OWED: lore_lines.json 7 of 24 pools (D98, content's half in hand);
+  items.json `stock_by_tier` + `price_ladders` (D99); classes.json `healing` (D99).
+  NEW, SMALL, NAMED NOT SWEPT: assets/monsters/creatures/ holds 12 bodies and the PATH appears nowhere
+  in scripts/ - the game build named this itself inside D97 and did not fold it into the tick.
+  assets/monsters/minibosses/snarer_chibi.glb is committed with no `.glb.import` sibling (every other
+  body in that directory has one), so Godot cannot load it until an import run happens - art's to
+  answer, and the game build is not blocked either way because it loads the base `snarer.glb`.
+  CORRECTED, AND IT WAS MY ERROR: bosses.json `uniques`, `rule` and `boss_floors` are NOT dead data -
+  they are PROSE STRINGS describing the lists and the rule. They are out of the unread-data total from
+  now on and reported separately. Written up as COORDINATION 18.
+- PLAN HYGIENE: COORDINATION.md had TWO entries numbered 17 (stale scratch 21:10, prompt ownership
+  21:20). Neither heading is renamed - both may already be cited - and a note above them says to cite
+  them as "17 (stale scratch)" and "17 (prompt ownership)". Numbering continues at 18.
+- LOCK DISCIPLINE THIS HOUR: game build held :07-:18 (11 min, inside its 25), chat bot :49-:50 (1 min,
+  inside its protected window), HUD took no lock, art and hub took none. NO OVERRUN BY ANY LANE, NO
+  STALE LOCK CLEARED, NO STARVED LANE, NO FUTURE STAMP. ELEVEN CONSECUTIVE CLEAN HOURS.
+- NO PROMPT CHANGED THIS HOUR by this seat: the seven scheduled-task prompts are byte-unchanged.
+- NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward
+  created, renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

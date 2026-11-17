@@ -37,5 +37,31 @@
   "at_h": 3.2,
   "span_at_h": 4.48,
   "corridor_safe_at_h": true
+ },
+ "sower": {
+  "key": "sower",
+  "authored_h": 2.25,
+  "x": 3.43,
+  "y": 1.52,
+  "footprint_span": 3.43,
+  "meshes": 4,
+  "faces": 1029,
+  "corridor_safe": true,
+  "at_h": 3.0,
+  "span_at_h": 4.57,
+  "corridor_safe_at_h": true
+ },
+ "sower_chibi": {
+  "key": "sower_chibi",
+  "authored_h": 2.4,
+  "x": 3.29,
+  "y": 3.2,
+  "footprint_span": 3.29,
+  "meshes": 4,
+  "faces": 1994,
+  "corridor_safe": true,
+  "at_h": 3.0,
+  "span_at_h": 4.12,
+  "corridor_safe_at_h": true
  }
 }

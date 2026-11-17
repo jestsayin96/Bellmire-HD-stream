@@ -8471,3 +8471,8 @@ NEEDED FROM MR. E: nothing.
 - WIRING, NOT MINE: scripts/delve.gd MB_FIT needs "loader": 1.08 (measured, do not re-derive), the
   body is STATIC so no anims entry, and it has no .glb.import sibling - one import run covers it and
   quartermaster.glb. No .gd touched outside tools/art/.
+## H32 hub standing check (2026-11-17 07:40 CT) - nothing new to build
+ff to origin/hub (9b0995e), merged origin/main clean. `git diff origin/main -- web docs/HUB_SECURITY.md` EMPTY: web/ byte-identical to the looked-at build; no new screenshot (a picture of an unchanged build proves nothing new). Passes 1-5 in, queue empty.
+MEASURED: 520 thumbnails, web/icons/items 2,430,050 bytes on disk (manifest total 2,341,956) vs 6 MB cap; manifest source commit 2473836; `git log 2473836..HEAD -- assets/icons/items` EMPTY, so no re-derive owed.
+SECURITY BY GREP: node --check OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP default-src 'none' present. Live dot red --live #e5484d.
+Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left untracked and named here; delete refused on this machine. Not published.

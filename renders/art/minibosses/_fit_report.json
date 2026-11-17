@@ -250,6 +250,19 @@
     "hero_side.png",
     "hero_back.png"
    ]
+  },
+  "loader": {
+   "creature_h": 2.65,
+   "hero_h": 2.45,
+   "ratio": 1.08,
+   "pair_w": 4.26,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
   }
  },
  "errors": [],
@@ -269,7 +282,8 @@
   "bellman",
   "boiler",
   "jointer",
-  "quartermaster"
+  "quartermaster",
+  "loader"
  ],
  "asked": [
   "drillmaster",
@@ -287,10 +301,11 @@
   "bellman",
   "boiler",
   "jointer",
-  "quartermaster"
+  "quartermaster",
+  "loader"
  ],
  "blank_check": {
-  "files": 16,
+  "files": 51,
   "failures": []
  },
  "verdict": "GREEN"

@@ -6591,3 +6591,32 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
   committed .glb on any branch, and _fit_snuffer_register.json is ok:true with pairs:{} - it measured
   nothing. Detail and what D96 must do instead is in the doc.
 - No .gd touched outside tools/art/. Nothing in the game wired by this lane.
+
+
+## ART - 17 Nov 2026 07:55 CT - THE LOADER, a seventeenth miniboss (mess hall)
+- TOOK THE ART ROW OF THE 06:58 "TAKE THIS NEXT" AS WRITTEN: dry lane, and the one licence the
+  freeze grants is to INVENT A MINIBOSS. Gloves are ticked and were not touched; icons.py untouched.
+- CHECKED FIRST, MEASURED NOT REMEMBERED: dungeon_hd.gd:737-743 - miniboss weight 35 barracks/
+  workshop (both already two bodies), 15 prison + every unlisted theme, 10 shrine/crypt. Ten themes
+  tie at 15 with one body each; floorgen.gd THEMES broke the tie - the mess hall's own clusters are
+  feast/feast/kegs/shelf_stock, the one 15-weight floor already full of stores.
+- THE IDEA, AND IT IS A CLASS NOTHING IN THE SET USES: IT WEIGHS YOU DOWN. It loads a hero and they
+  fight slower until they drop it. Tallyman takes gear OFF and leaves; Quartermaster arms the
+  monsters; this gives the HEROES a penalty. Sixteen bodies and not one touches what a hero carries.
+- PACKS BEFORE GEOMETRY, AND WHERE THE RULE STOPPED PAYING: the handed-over crate, the keg and the
+  sack are real KayKit Dungeon Pack (CC0) meshes out of _packs/ at 300/160/140 faces. Pass 1 built
+  all six stacked crates the same way at 90 faces and THE DECIMATE ATE THE LIDS - every one rendered
+  as an open crumpled tray. Stack is now closed banded boxes. pack_used recorded in the report.
+- GREEN: 4 meshes, 1,208 faces, span 2.39 m CORRIDOR-SAFE (11.0 m clear), h 2.65, wear 0.75 (the one
+  unused value), ratio 1.08 vs the posed Knight, pair_w 4.26, fits_frame true, errors [].
+- FIT PROOF ON A BODY, FRONT/SIDE/BACK, AND I LOOKED: five passes, one change each, every one driven
+  by the picture. Pass 4's rope and lamp sat inside the column's own footprint and COULD NOT BE SEEN
+  IN ANY VIEW; pass 5 seats the load on the body after the side view showed open air between them.
+  Eight faults listed in docs/art/MINIBOSSES.md - worst: the body barely reads as a body at 90
+  degrees, the rope reads as a stick, the floor keg reads as a basket.
+- HARNESS FAULT FOUND AND FIXED THE SAME RUN: minibossfit.py's blank check only ever opened
+  hero_front.png, so two of every three fit renders entered the register unchecked - a GREEN over
+  pictures it never opened. Now opens all three and fails on a missing one: 1 -> 51 files, 0 failures.
+- WIRING, NOT MINE: scripts/delve.gd MB_FIT needs "loader": 1.08 (measured, do not re-derive), the
+  body is STATIC so no anims entry, and it has no .glb.import sibling - one import run covers it and
+  quartermaster.glb. No .gd touched outside tools/art/.

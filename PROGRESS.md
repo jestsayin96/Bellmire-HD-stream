@@ -8029,3 +8029,9 @@ touched. No secrets written anywhere.
   `_commands_doc.gd` guards.
 - Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Still unchanged.
 - Mr. E: nothing in this lane.
+
+## C-81 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT: barks deepened again (lore_lines.json only)
+- TAKE THIS NEXT (02:58 CT block) gave CONTENT: keep going on the `barks` pools, the most-heard lines, read at delve.gd:3432. The four dead pools and the 29 refused trick-only shape lines were left alone as the row says.
+- data/lore_lines.json `barks`: +58 lines. enter +9, lord +10, trap +10, hurt +10, drink +9, misfire +10 (one candidate per enter and drink dropped as a case-insensitive duplicate). Counts now enter 147, lord 147, trap 148, hurt 147, drink 141, misfire 146. Plain register, no floor counts, nothing theatrical.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings. One stray lone CR in the old file (between a closing brace and a comma, whitespace only) was normalised by re-serialising; parsed content is identical.
+- CODE WIRING: none. The existing `barks` reader picks the new lines up.

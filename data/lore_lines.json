@@ -1332,7 +1332,16 @@
       "Somebody count us in.",
       "Chalk ready. Lamp ready.",
       "We are expected home by dark.",
-      "Door's shut behind. Eyes forward."
+      "Door's shut behind. Eyes forward.",
+      "Rope checked twice.",
+      "Count heads at the bottom.",
+      "Bring the lamp, not the nerves.",
+      "Down, look, back up.",
+      "Keep the pace even.",
+      "Stair's dry. Good start.",
+      "Hands where I can see them.",
+      "Hats on. Low ceilings.",
+      "Cold air. Door's open somewhere."
     ],
     "lord": [
       "Hold together!",
@@ -1471,7 +1480,17 @@
       "Watch its shoulder. It moves first.",
       "It's slow. Do not be.",
       "Spread out. Do not bunch.",
-      "Hit it and step back."
+      "Hit it and step back.",
+      "It's looking at the lamp. Move the lamp.",
+      "Take the legs first.",
+      "Do not stand in its line.",
+      "Rotate. Do not tire.",
+      "Eyes on its hands.",
+      "It breathes in. Step wide.",
+      "Nobody turns their back.",
+      "Short strikes. Keep your feet.",
+      "Call it when it moves.",
+      "Steady. Steady. Now."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1611,7 +1630,17 @@
       "Something clicked. Nobody move.",
       "Fresh oil on a rusted hinge.",
       "Pass me the chalk. Mark that tile.",
-      "Draught from the wrong side."
+      "Draught from the wrong side.",
+      "Tile's too clean.",
+      "Scratches on the floor. Follow them.",
+      "Draught at the knee. Wire.",
+      "Hold the lamp lower.",
+      "That seam shouldn't be there.",
+      "Tap it with the pole first.",
+      "Dust is disturbed. Not by us.",
+      "Smells of fresh grease.",
+      "Don't lean on the wall.",
+      "Doorframe's warm. Odd."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -1750,7 +1779,17 @@
       "Cut's shallow. Pride's deep.",
       "I'll live. Ask me later.",
       "Cover my left.",
-      "Hold on, I'm breathing."
+      "Hold on, I'm breathing.",
+      "Bind it tight. I'll walk.",
+      "That went deeper than it looked.",
+      "Ribs. Don't ask me to laugh.",
+      "Give me the clean cloth.",
+      "I'll sit one round. One.",
+      "Knee's complaining. Ignore it.",
+      "Count my flasks. I'm short.",
+      "Hand's shaking. It'll stop.",
+      "Not bleeding much. Mostly.",
+      "Behind you. I'm still here."
     ],
     "drink": [
       "Bottoms up.",
@@ -1884,7 +1923,16 @@
       "Cork back in. Eyes up.",
       "One down. Mind the rest.",
       "Honest brew. Honest burn.",
-      "Good. Now I can stand."
+      "Good. Now I can stand.",
+      "Cork's tight. Good sign.",
+      "Sweet, then sour.",
+      "That one earned its coin.",
+      "Settles the stomach. Mostly.",
+      "Warmth is back in my fingers.",
+      "Smells like the apothecary's shelf.",
+      "Slow sip. Don't waste it.",
+      "Thank the brewer.",
+      "Down the hatch. Up on my feet."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2022,7 +2070,17 @@
       "A spark. Just the one.",
       "Gone. Like a coin in a ford.",
       "Ask me again in a moment.",
-      "I lost my place."
+      "I lost my place.",
+      "The words stuck.",
+      "Not the day for it.",
+      "Lost the last word.",
+      "The scar hummed. Nothing else.",
+      "Weak. Try again.",
+      "My hands were wrong.",
+      "It fizzled. Say nothing.",
+      "Breath ran out mid-word.",
+      "The spell turned over and slept.",
+      "Nothing. Wipe the chalk and go again."
     ]
   },
   "misfire": [
@@ -10609,7 +10667,7 @@
         ]
       }
     }
-  },
+  },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",
     "ascent": {

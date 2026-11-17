@@ -1,0 +1,109 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Wax on the lintel, fresh. Someone has been praying, or bargaining.
+FEED They carry 56 flasks of oil between them.
+L56: soak begins - 4 delves, start_floor=3, 8 floors each
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 slime, 1 puglin, 1 drowned cave bat.
+FEED A row of boots at the door, paired and empty.
+FEED Corvin casts smite and the scar spends it elsewhere (9 vs DC 11).
+FEED Corvin casts Bolt at drowned cave bat.
+FEED Brel casts Bolt at drowned cave bat.
+FEED Corvin casts Smite at puglin.
+FEED Brel casts Bolt at cave bat.
+FEED The slime divides.
+FEED Corvin casts Smite at slimeling.
+FEED Brel pays for chain in the wrong coin (10 vs DC 11).
+FEED Brel searches (Investigation 16) and turns up 37 gold on floor 3.
+FEED Floor 3 falls silent.
+L56 [run 1] CAP HIT at floor 3 of 10 (state=search)
+L56 [run 1] ended state=search floors_visited=1 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+FEED The landing is clean. That is the worst part.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 risen bones, 1 puglin, 1 hollowed puglin, 1 hollowed slime.
+FEED A row of boots at the door, paired and empty.
+FEED Corvin works smite and the room takes the benefit (6 vs DC 11).
+FEED Brel casts Bolt at hollowed puglin.
+FEED Brel tries bolt and the ground gives it back wrong (8 vs DC 11).
+FEED Corvin casts Smite at hollowed slime.
+FEED The hollowed slime divides.
+FEED Brel casts Chain Bolt at hollowed slimeling.
+FEED Brel turns on the wounded hollowed slimeling to finish it.
+FEED Corvin turns on the wounded hollowed slimeling to finish it.
+FEED Corvin casts Smite at puglin.
+FEED Brel casts Fire at puglin.
+FEED Brel searches (Investigation 21) and turns up 42 gold on floor 3.
+FEED Floor 3 cleared, and no one is cheering. Not yet.
+FEED Brel searches the chest - Successfully found loot!! 43 gold (Investigation 19 vs DC 11).
+FEED Aen and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned slime, 2 puglins, 1 slime, 1 risen bones.
+L56 [run 2] CAP HIT at floor 4 of 10 (state=fight)
+L56 [run 2] ended state=fight floors_visited=3 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+FEED Aen and 3 others descend into the deep, where every spell is a gamble.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 drowned slime, 1 cave bat, 1 cave spider.
+FEED The sarcophagus lid sits a thumb's width ajar, and the gap is warm.
+FEED Corvin casts Smite at cave bat.
+FEED Corvin casts Bolt at slime.
+FEED Corvin's bolt answers to the ground instead (8 vs DC 11).
+FEED Corvin casts Bolt at slime.
+FEED The slime divides.
+FEED Corvin casts Smite at slimeling.
+FEED Brel's bolt lands somewhere nobody aimed (1 vs DC 11).
+FEED Brel casts Bolt at cave spider.
+FEED Brel is cut off and falls back to the others.
+FEED Corvin casts Smite at drowned slime.
+FEED Brel is cut off and falls back to the others.
+FEED Doria turns on the wounded drowned slimeling to finish it.
+FEED Brel searches (Investigation 12) and turns up 33 gold on floor 3.
+FEED Swept, chalked, and nobody short a limb.
+FEED Brel searches the chest - ...no loot... (Investigation 10 vs DC 11).
+FEED Aen and 3 others take a breather, and press on deeper.
+L56 [run 3] CAP HIT at floor 3 of 10 (state=descend)
+L56 [run 3] ended state=descend floors_visited=4 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+FEED The chalk is renewed at the gate. It never lasts.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned skeleton minion, 1 cave bat, 1 drowned risen bones, 1 giant rat.
+FEED Somebody has been leaving fresh flowers. Nothing down here grows flowers.
+FEED Corvin casts Smite at drowned risen bones.
+FEED Brel's bolt answers to the ground instead (8 vs DC 11).
+FEED Brel casts Bolt at drowned risen bones.
+FEED Corvin's bolt goes wide, and the wall is unamused (8 vs DC 11).
+FEED Corvin casts Smite at drowned risen bones.
+FEED Corvin casts Bolt at giant rat.
+FEED Brel casts Fire at giant rat.
+FEED Aen rolls a 20 - and the giant rat is gone.
+FEED Corvin steps on a grate - fire! DEX 1 vs DC 11, 14 damage.
+FEED Corvin casts Smite at cave bat.
+FEED Brel searches (Investigation 20) and turns up 41 gold on floor 3.
+FEED Floor 3 clear - the guild's tenth just got heavier.
+FEED Brel steps on a plate - darts! DEX 4 vs DC 11, 9 damage.
+FEED Brel searches the chest - Successfully found loot!! 31 gold (Investigation 19 vs DC 11).
+FEED Aen and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned puglins, 1 hollowed bone bowman, 2 hollowed cave bats.
+L56 [run 4] CAP HIT at floor 4 of 10 (state=fight)
+L56 [run 4] ended state=fight floors_visited=6 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 2, "saved": 0, "damage": 23.0 }
+
+L56 SOAK SUMMARY
+  trap_log aggregate across 4 delves: { "spotted": 0, "disarmed": 0, "sprung": 2, "saved": 0, "damage": 23.0 }
+  lords seen: 0 kinds, 0 killed
+  ok   L46: traps actually SPRING in play (2 sprung across the soak)
+  ok   L46: trap damage LANDS - a hero loses hp to a trap (23.0 total)
+  FAIL L45: lords actually RISE on boss floors in play (0 kinds seen)
+  Bestiary.lord_hp_mult: floor 5 = 1.00, floor 10 = 1.28
+  ok   L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (1.28 vs 1.00)
+
+CHECKS 4 FAILS 1
+  - L45: lords actually RISE on boss floors in play (0 kinds seen)
+L56 CAP HIT - NO VERDICT (4 of 4 runs capped [run, floor]: [[1, 3], [2, 4], [3, 3], [4, 4]]; 1 check(s) unmet and unearnable)

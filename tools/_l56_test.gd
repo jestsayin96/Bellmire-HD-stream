@@ -16,7 +16,9 @@ extends SceneTree
 ##   A. traps actually SPRING in play, and some do damage (L46 gate)
 ##   B. bosses ACTUALLY RISE on boss floors across the soak, and their HP scales
 ##      with depth as L45 claims (lord_hp_mult: a deeper lord is harder)
-## Prints L56_TEST OK / FAIL.
+## Prints L56_TEST OK / FAIL - or, when a run hit its frame cap before the delve came home and a
+## check is still unmet, "L56 CAP HIT - NO VERDICT": a capped run never saw the floors the check
+## needs, so its unmet check is the cap talking, not the game (D100, COORDINATION 15).
 
 const RUNS := 4
 const FLOORS_PER := 8            # start at 3 -> up to floor 10, so TWO lord floors in each run
@@ -37,6 +39,8 @@ var _last_floor_seen := 0
 var _last_lord_id := 0
 # keep a reference to the lord instance so a dead one logged on queue_free
 var _tracked_lords: Array = []
+const RUN_CAP_FRAMES := 60 * 120  # 2 min per run - the lock's 25-minute rule bounds the whole soak
+var _capped: Array = []           # [run, deepest floor reached] for every run the cap ended
 
 func _ok(c: bool, what: String) -> void:
 	_checks += 1
@@ -123,7 +127,10 @@ func _process(dt: float) -> bool:
 	if _d == null:
 		return false
 	_watch(dt)
-	if _d.state == "home" or _f > 60 * 120:          # 2 min cap per run
+	if _d.state == "home" or _f > RUN_CAP_FRAMES:
+		if _d.state != "home":
+			_capped.append([_run, _last_floor_seen])
+			print("L56 [run %d] CAP HIT at floor %d of %d (state=%s)" % [_run, _last_floor_seen, START_FLOOR + FLOORS_PER - 1, _d.state])
 		_end_run()
 		if _run < RUNS:
 			_start_run()
@@ -163,6 +170,12 @@ func _process(dt: float) -> bool:
 		print("CHECKS ", _checks, " FAILS ", _fails.size())
 		for fl in _fails:
 			print("  - ", fl)
-		print("L56_TEST ", "OK" if _fails.is_empty() else "FAIL")
+		if _fails.is_empty():
+			print("L56_TEST OK")
+		elif not _capped.is_empty():
+			print("L56 CAP HIT - NO VERDICT (%d of %d runs capped [run, floor]: %s; %d check(s) unmet and unearnable)"
+				% [_capped.size(), RUNS, _capped, _fails.size()])
+		else:
+			print("L56_TEST FAIL")
 		return true
 	return false

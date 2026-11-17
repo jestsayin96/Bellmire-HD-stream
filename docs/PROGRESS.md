@@ -1893,3 +1893,14 @@ waits on that tick, so this hour took only what the ruling allows at any time: g
   Slime). Swapping them in the miniboss way (anims = {}) would freeze twelve common enemies mid-pose.
   The wiring needs a decision: static swap, or keep the rig and attach art's extra parts.
 - No live Twitch test. No bits, no redemptions.
+- D100 part 2, from the 02:58 TAKE THIS NEXT (row 1 for game build): tools/_l56_test.gd's cap now
+  speaks. A run the 2-minute cap ends prints "L56 [run n] CAP HIT at floor f of 10"; if any check is
+  unmet and any run capped, the last line is "L56 CAP HIT - NO VERDICT (...)" - red without a verdict,
+  never FAIL. FAIL is kept for an unmet check with no capped run. Cap kept at 2 min (25-min lock rule).
+  ONE RUN, renders/cycles/d100/l56.log: all 4 runs capped at floors 3/4/3/4 of 10. L46 is EARNED this
+  time - 2 traps sprung, 23.0 damage. L45 "lords rise" unmet (0 seen) -> "L56 CAP HIT - NO VERDICT
+  (4 of 4 runs capped ...; 1 check(s) unmet and unearnable)". 0 SCRIPT ERROR.
+  FINDING for whoever owns L45 next: two headless minutes reach floor 4 from START_FLOOR 3, so a lord
+  is only earnable by starting ON a lord floor, not by a longer cap. Also `floors_visited` in the
+  per-run line is cumulative across runs (cosmetic, left as is).
+- System 10 (row 2) NOT STARTED this hour - out of window. See the static-vs-animated finding above.

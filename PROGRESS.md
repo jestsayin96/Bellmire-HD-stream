@@ -8931,3 +8931,13 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or anyone, no reward, no channel setting touched.
 Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
 
+
+## U56 (HUD, 17 Nov 12:55 CT) - the pewter uncommon rung + the Satchel row that read "(no stored r"
+Item: the 11:58 TAKE THIS NEXT HUD row (two small things, both answered).
+- (1) ui_theme.gd RARITY_HUE["uncommon"] is now (0.62, 0.66, 0.72), art's RARITY_HUE_PARCHMENT (tools/art/icons.py:691). RARITY_INK untouched (uncommon stays ink text; the pewter pip carries the rung). The harness now READS icons.py and compares, so the pewter cannot drift from art again.
+- (2) leaderboard_panel.gd Satchel._piece: the name label now trims with an ellipsis and carries a tooltip with the full name; the value label keeps its width (SHRINK_END). Row now reads "Hand-me-down boots (no store..." then "for the look", with a clear gap, at 100/125/150.
+- WHY THE GATE PASSED A BROKEN ROW: U55_HUE measured colour only. tools/_u55_hue.gd now has _check_rows: name must end a separation clear of the value, value whole inside the row and not squeezed, and any name wider than its box must carry OVERRUN_TRIM_ELLIPSIS. Printed per row: fits / ELLIPSIS.
+- RESULT: U56_HUE OK. Parse 0 errors. LOOKED AT renders/cycles/u55/u55_125.png: grey-pewter pip on Ironmonger's Blade is visible on parchment, boots row ellipsised and clear of the value.
+- HONESTY: my first run at 12:54 reported "parse 0 errors" in the IDLE line and that was WRONG - 9 SCRIPT ERRORs at gear.gd:99 (not my file): merged main's new GLBs were not imported in my worktree. Reimported, reran, 0 errors, and the lock carries a corrected RUNNING/IDLE pair.
+- Lock: RUNNING 12:54:19 -> IDLE 12:55:13 (wrongly worded), RUNNING 12:55:27 -> IDLE 12:56:29. Released well before :07.
+- Not ticked by me. Seven files only touched: ui_theme.gd, leaderboard_panel.gd (+ my own tools/_u55_hue.gd harness).

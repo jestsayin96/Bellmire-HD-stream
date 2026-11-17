@@ -7852,3 +7852,12 @@ have launched if a schedule had been live. `_b18_battery.log` deleted.
   dead-data audit should grep a committed ref (`git grep <key> origin/main`), never the working tree.
 - NEXT: D99 (stock_by_tier, price_ladders, classes.json `healing`, act/broken calls, "epic" -> "very rare",
   artifact-never-stocked). NEEDED FROM MR. E: whether to delete town_levels_for_the_desktop outright (optional).
+
+
+## C-79 (2026-11-17 01:23 CT, clock read off the machine as UTC-6) - finish the three short lord rows (content)
+- TAKE THIS NEXT gave CONTENT two things: (1) sort the 29 refused shape lines - already done in C-78, not redone; (2) the three lord rows C-78 left short. Merged origin/main first.
+- DONE, data/bosses.json only: lesser Grubmother gains attack 10; lesser Nightwing gains attack 19; greater Pale Duchess gains hp 200 and speed 5.7. All eight lord rows now carry hp, speed, attack and shape. Every number equals the BOSS_DEFS entry in bestiary.gd (grubmother 230/1.8/10, nightwing 110/6.6/19, pale_duchess 200/5.7/27), so no lord's strength moves; the file now owns the number.
+- VALIDATION OK: items.json, lore_lines.json, bosses.json, potions.json all parse. In bosses.json every pre-existing key and value is unchanged, same top-level keys and row order; the only change is three rows gaining the missing keys. Loaded the file and listed hp/speed/attack for all eight rows.
+- NOT TICKED BY ME. No floor count stated, no artifact stocked, no .gd or other file touched.
+- CODE WIRING: none - lord_canon already reads hp/attack/speed by these names and prefers the file over BOSS_DEFS.
+- OPEN QUESTION still for the game lane: does `grudge: true` on the Pale Duchess already equal a first-struck fixation (Parish-Ledgered, bin C in C-78)?

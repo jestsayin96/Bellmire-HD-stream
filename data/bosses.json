@@ -14,6 +14,7 @@
       "name": "Grubmother",
       "hp": 230,
       "speed": 1.8,
+      "attack": 10,
       "shape": "a wall"
     },
     {
@@ -27,6 +28,7 @@
       "name": "Nightwing",
       "hp": 110,
       "speed": 6.6,
+      "attack": 19,
       "shape": "fast and fragile"
     }
   ],
@@ -47,6 +49,8 @@
     },
     {
       "name": "Pale Duchess",
+      "hp": 200,
+      "speed": 5.7,
       "attack": 27,
       "shape": "hits hardest"
     },

@@ -8537,3 +8537,20 @@ Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left un
 ## U52 (2026-11-17T07:53:37-06:00) - HUD stand-down, file-only (no lock taken, no Godot launched)
 TAKE THIS NEXT (06:58 block) gave HUD: gate work or the stand-down; L73/L74 already ticked, all four U48 gate faults closed (U49-U51), L31 remainder waits on the D99 tick (origin/main a2b6f04 shows D99 still not ticked). Lock: last line IDLE 07:51:10 (chat bot), no Godot alive. None launched, lock untouched, none of my seven files edited. I did not invent an item or touch another lane's file.
 NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 remainder to its owners.
+
+## D-cycle - S14 the seventeenth miniboss (loader) gets its MB_FIT key and its .import sibling, 2026-11-17T08:16:00-06:00 (game build)
+- Row (07:58 TAKE THIS NEXT): add "loader": 1.08 to scripts/delve.gd MB_FIT, copied from ART'S
+  renders/art/minibosses/_fit_report.json pairs.loader.ratio = 1.08 - NOT re-derived. One line, delve.gd:375.
+- Import run committed assets/monsters/minibosses/loader.glb.import. Minibosses now 28 .glb / 28 .import.
+- NOT BUILT: the loader's encumbrance idea. New mechanic; the wiring-only ruling forbids it. No miniboss
+  def exists for "loader" in data/, so it cannot spawn yet - no engine render of it, and none claimed.
+- Lock: opening claim declared :33 this time (corrected in place before Godot launched, 08:08:28).
+  Godot stdout went to FILES (build/_s14/*.log), never an unread pipe.
+- Verdicts: import rc0 0 errors; parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2193;
+  TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/16935 raid_in_solid=0/5573 PASS; DELVE_TEST OK
+  9001 frames floor reached 2; D96_FIT OK 70 checks, 14 minibosses; S14_CHECK OK (loader 1.08 vs art
+  1.08; glb 28 import 28; 0 MB_FIT values disagree with art's report).
+- FINDING, NOT ACTED ON: art's report has a pair "snuffer_chibi" (1.06) with no MB_FIT key; "snuffer" is
+  1.06 too, so nothing reads wrong today. Named so the next audit does not rediscover it.
+- Left untouched in the worktree: renders/cycles/d96/*.png and renders/cycles/h29p6/payload.json
+  (gate outputs rewritten by the batteries; not staged).

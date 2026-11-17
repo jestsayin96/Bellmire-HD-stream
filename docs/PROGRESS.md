@@ -2223,7 +2223,7 @@ and Phase 2 NOT touched.
   note) - both sides kept, 0 markers left. Lock: claimed 14:08:33 declaring 14:35. No live Twitch test.
   Not ticked - the team lead ticks.
 
-## D-cycle - S21 System 2 engine half: the staff settled by measurement - MINE STANDS, ART'S LIES ACROSS, AND THE STAFF GOES THROUGH THE FLOOR. CHECKPOINT, NOT A FIX. 2026-11-17T15:28:00-06:00 (game build)
+## D-cycle - S21 System 2 engine half: the staff settled by measurement - MINE STANDS, ART'S LIES ACROSS, AND THE STAFF GOES THROUGH THE FLOOR. CHECKPOINT, NOT A FIX. 2026-11-17T15:26:00-06:00 (game build) [heading first written 15:28:00, a FUTURE stamp - the machine read 15:27:37 at commit; corrected]
 TAKE THIS NEXT (13:58, still the newest block) gave: FINISH SYSTEM 2'S ENGINE HALF. Crossbow, greataxe and shield
 landed at S20 (14:21, ada04de). Left on the row: the staff comparison (mine vs art's, one picture) and my fit note (2),
 "the tier-2/3 staves may graze the floor in a lower pose". Systems 3/4 and Phase 2 NOT touched.

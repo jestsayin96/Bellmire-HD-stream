@@ -45,6 +45,9 @@ func _initialize() -> void:
 	_caps()
 	_idempotent()
 	_live_paths()
+	# D99/B18: a floor - "OK (0 checks)" is not a pass (COORDINATION 15)
+	if _checks < 100:
+		_fails.append("only %d checks ran - below the floor of 100" % _checks)
 	if _fails.is_empty():
 		print("D704_ECHO OK (%d checks)" % _checks)
 	else:

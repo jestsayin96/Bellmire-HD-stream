@@ -4,7 +4,12 @@ extends SceneTree
 ##   <godot> --headless --path . --script res://tools/_commands_doc.gd
 func _initialize() -> void:
 	var c: Dictionary = ChatCmd.commands()
-	var cs: Dictionary = c["commands"]
+	var cs: Dictionary = c.get("commands", {})
+	# D99/B18: an empty or missing data file must not truncate the doc and read green
+	if cs.is_empty():
+		print("COMMANDS_DOC FAIL: data/commands.json gave 0 commands - docs/COMMANDS.md left untouched")
+		quit(1)
+		return
 	var out := PackedStringArray()
 	out.append("# Bellmire chat commands")
 	out.append("")
@@ -20,7 +25,11 @@ func _initialize() -> void:
 		out.append("| `!%s` | %s | %s | %s | %s%s | `%s` |" % [k, al, String(d.get("args", "")).replace("|", "/"), d.get("cost", "free"), d["what"], "" if bool(d.get("needs_hero", true)) else " (no hero needed)", d.get("example", "!" + k)])
 	out.append("")
 	var f := FileAccess.open("res://docs/COMMANDS.md", FileAccess.WRITE)
+	if f == null:
+		print("COMMANDS_DOC FAIL: docs/COMMANDS.md would not open for writing (%s)" % error_string(FileAccess.get_open_error()))
+		quit(1)
+		return
 	f.store_string("\n".join(out))
 	f.close()
-	print("COMMANDS_DOC wrote %d commands" % cs.size())
+	print("COMMANDS_DOC OK wrote %d commands" % cs.size())
 	quit()

@@ -1838,3 +1838,38 @@ commits ahead of main and both are this seat's plan syncs; no lane pushed after 
 - THE LIFT IS THIS SEAT'S AND I AM HOLDING IT: his reason has not expired (the packs are not here),
   two queue rows are about to be superseded by his own equipment redesign, and it is midnight. Recorded
   as a choice, with reasons, so it can be argued with rather than discovered.
+
+## D-cycle - D99 the ladders go live, 2026-11-17T02:22:25-06:00 (game build)
+TAKE THIS NEXT gave GAME BUILD D99. Not ticked - for the team lead.
+- items.json stock_by_tier READ: Economy.stock_first_tier/stock_open (cumulative, per the file's
+  _note). snapshot_pub _shelf_add takes the key and a good is not on a shelf before the tier
+  stock_by_tier first lists it at; caravan cargo (_caravan_block) drops cargo_adds keys the town has
+  not grown into. Keys stock_by_tier does not name keep the older own-tier/opens_tier rule.
+- items.json price_ladders READ: Economy.ladder_faults() checks every ladder for missing keys and
+  for cost or tier going down (shop_stock + trader_cargo + trade_stock own_goods). 0 faults today.
+  It is a checker, as the _note asks ("checked by script"); it changes no price.
+- classes.json healing READ: Economy.healing_rules(). mend_interval_s (3) now sets the mender beat
+  in delve.gd (was 2.4 - the file wins, a small balance change, named); the quaff threshold is
+  read out of the quaff sentence (34%, same as the old constant, now one source); the voice rule's
+  quoted phrase is used when a mender heals themself: "X binds their own wounds." not "X casts
+  Heal at X." The 45% potion amount stays with potions.json (the brew's own heal), not duplicated.
+- ARTIFACT NEVER STOCKED, ENFORCED: Economy.never_stocked() - rarity "artifact" or found:true is
+  refused by every shelf and every wagon. Today the file stocks 0, so this is a guard, proven on a
+  synthetic artifact at tier 12.
+- "epic" -> "very rare": ALREADY CLOSED, measured - no live data/ or scripts/ file carries "epic"
+  as a rung (Economy.RARITY, fishing.json and angler.gd say "very rare"; web/app.js keeps "epic"
+  only as a legacy alias). The chatcmd.gd comment saying fishing.json still says "epic" is stale -
+  chat bot lane's file, not touched.
+- act/broken: NOT WIRED, AND SAID SO. delve.gd has no miniboss signature mechanic and no weakness to
+  break - only the generic half-hp rally (R4). Firing "The gong again. The garrison falls in." on a
+  rally that summons nobody would be D96's fault in reverse (a line describing nothing on screen).
+  act/broken are blocked on the fourteen mechanics, which are behaviour, not wiring.
+- B18's three one-liners: tools/_d704_echo.gd has a floor of 100 checks; tools/_commands_doc.gd
+  FAILs on 0 commands or a failed open and prints an OK token (COMMANDS.md byte-identical);
+  twitch_chat.gd's cooldown comes off commands.json twitch_cooldown_s (3.0 s; const is the fallback).
+- VERDICTS (renders/cycles/d99/): parse 0 SCRIPT ERROR / 0 Parse Error; D99_TEST OK (1160 checks);
+  OFFFLOOR 0 of 2112; TWITCH_PARSE OK; TOWNWALK in_solid=0/16051 PASS; _delve_test 0 SCRIPT ERROR,
+  floor 2 reached; after the twitch_chat edit: parse 0/0, TWITCH_PARSE OK, D704_ECHO OK (356 checks),
+  COMMANDS_DOC OK wrote 27 commands.
+- NOT LOOKED AT AS A PICTURE: this is shelf/cargo data the hub draws; no render was taken this hour.
+- No live Twitch test. No bits, no redemptions.

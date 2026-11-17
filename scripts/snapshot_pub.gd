@@ -420,12 +420,12 @@ func _shelves(e: Economy) -> Array:
                 var g: Variant = ss.get(String(key))
                 if g is Dictionary:
                     var last := int((ret.get(String(key), {}) as Dictionary).get("last_tier", 12))
-                    _shelf_add(goods, g, opens, tier, last)
+                    _shelf_add(goods, g, opens, tier, last, String(key))
             var own: Dictionary = t.get("own_goods", {})
             for key in own:
                 var g2: Variant = own[key]
                 if g2 is Dictionary:
-                    _shelf_add(goods, g2, opens, tier, int((g2 as Dictionary).get("last_tier", 12)))
+                    _shelf_add(goods, g2, opens, tier, int((g2 as Dictionary).get("last_tier", 12)), String(key))
         # the newest goods first (what the town just grew into), then the cap
         goods.sort_custom(func(a, b): return int(a["_t"]) > int(b["_t"]) or (int(a["_t"]) == int(b["_t"]) and int(a["cost"]) < int(b["cost"])))
         goods = goods.slice(0, SHELF_MAX)
@@ -443,8 +443,12 @@ func _shelves(e: Economy) -> Array:
             "sells_to": e.shop_sells_to("smithy"), "stock": _smith_gear(e)})
     return out
 
-static func _shelf_add(goods: Array, g: Dictionary, opens: int, tier: int, last: int) -> void:
-    var first := maxi(int(g.get("tier", 1)), opens)
+## D99: stock_by_tier gates it too - a key the content writer listed at a later growth tier is
+## not on the shelf yet, whatever its own tier says ("a crossing must not sell glass").
+static func _shelf_add(goods: Array, g: Dictionary, opens: int, tier: int, last: int, key := "") -> void:
+    if Economy.never_stocked(g):
+        return
+    var first := maxi(maxi(int(g.get("tier", 1)), opens), Economy.stock_first_tier(key))
     if first > tier or tier > last:
         return
     goods.append({"name": clean_name(String(g.get("name", "?"))), "cost": maxi(0, int(g.get("cost", 0))), "_t": first})
@@ -480,12 +484,15 @@ func _caravan_block() -> Dictionary:
             out["leaves_in"] = maxi(1, ceili(float(c.get("t", 0.0)) / 60.0))
         var it := Economy.items_data()
         var tc: Dictionary = it.get("trader_cargo", {})
+        var ctier := clampi(int(town.economy.town_level), 1, 12) if town and town.get("economy") else 12
         for m in ((it.get("caravan_manifests", {}) as Dictionary).get("caravans", []) as Array):
             if m is Dictionary and String(m.get("id", "")) == String(c.get("manifest", "")) and String(c.get("manifest", "")) != "":
                 out["name"] = clean_name(String(m.get("name", "")))
                 for line in (m.get("cargo", []) as Array):
-                    var g: Variant = tc.get(String((line as Dictionary).get("good", "")))
-                    if g is Dictionary:
+                    var gk := String((line as Dictionary).get("good", ""))
+                    var g: Variant = tc.get(gk)
+                    # D99: stock_by_tier cargo_adds - a wagon does not carry what the town has not grown into
+                    if g is Dictionary and Economy.stock_open(gk, ctier, "cargo_adds") and not Economy.never_stocked(g):
                         out["cargo"].append({"name": clean_name(String(g.get("name", "?"))),
                             "cost": maxi(0, int(g.get("cost", 0))), "qty": maxi(1, int(line.get("qty", 1)))})
                 break

@@ -6,7 +6,8 @@ extends Node
 
 const URL := "wss://irc-ws.chat.twitch.tv:443"
 const CFG := "user://twitch.cfg"
-const COOLDOWN_MS := 3000
+const COOLDOWN_MS := 3000          # fallback only - D99: data/commands.json twitch_cooldown_s wins
+var _cooldown_ms: int = int(round(float(ChatCmd.commands().get("twitch_cooldown_s", COOLDOWN_MS / 1000.0)) * 1000.0))
 const PER_FRAME := 4
 
 var town: Node                      # anything with chat_line(uid, display, text)
@@ -119,7 +120,7 @@ func accept(m: Dictionary) -> bool:
         return false
     var uid: String = String(m["uid"]) if String(m["uid"]) != "" else "tw_" + login
     var now := Time.get_ticks_msec()
-    if _last.has(uid) and now - int(_last[uid]) < COOLDOWN_MS:
+    if _last.has(uid) and now - int(_last[uid]) < _cooldown_ms:
         return false
     _last[uid] = now
     var disp: String = String(m["display"]) if String(m["display"]) != "" else login

@@ -1557,7 +1557,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 					low = o
 			m["swing"] = float(m["swing"]) - delta * _pace(m)
 			if low != null and float(m["swing"]) <= 0.0:
-				m["swing"] = 2.4
+				m["swing"] = float(Economy.healing_rules()["mend_interval_s"])   # D99: classes.json healing.mend_interval_s
 				# L47: choosing WHO to mend is a decision - say so when it is a close call
 				if float(low["hp"]) < float(low["max"]) * 0.35:
 					_decide(m, "mend", "%s breaks off to mend %s, who is nearly down." % [h["name"], low["h"]["name"]])
@@ -2305,7 +2305,11 @@ func _spell_said(m: Dictionary, wanted: String, actual: String, at_whom := "") -
 		return                      # cast freely, just do not narrate every single one
 	m["spell_say_t"] = _t
 	var who := String(m["h"]["name"])
-	if at_whom != "":
+	if at_whom != "" and at_whom == who and String(Economy.healing_rules().get("self_mend", "")) != "":
+		# D99: classes.json healing.voice - a mender on themself reads as the content writer's
+		# phrase ("binds their own wounds"), never "X casts Heal at X"
+		_say("%s %s." % [who, String(Economy.healing_rules()["self_mend"])])
+	elif at_whom != "":
 		_say("%s casts %s at %s." % [who, word, at_whom])
 	else:
 		_say("%s casts %s." % [who, word])
@@ -3222,7 +3226,7 @@ func _quaff(m: Dictionary) -> bool:
 		return false
 	var h: Dictionary = m["h"]
 	var want := ""
-	if float(m["hp"]) < float(m["max"]) * 0.34:
+	if float(m["hp"]) < float(m["max"]) * float(Economy.healing_rules()["quaff_below"]):   # D99: classes.json healing.quaff
 		for k in HEAL_ORDER:
 			if roster.brew_count(h, k) > 0:
 				want = k
@@ -3247,7 +3251,7 @@ func _quaff(m: Dictionary) -> bool:
 	# like the rest now. drink() already announces a heal, so only the quieter cases speak here.
 	var h2: Dictionary = m["h"]
 	var why := "brew"
-	if float(m["hp"]) < float(m["max"]) * 0.34:
+	if float(m["hp"]) < float(m["max"]) * float(Economy.healing_rules()["quaff_below"]):   # D99: classes.json healing.quaff
 		why = "brew_hurt"
 		decided[why] = int(decided.get(why, 0)) + 1
 		decisions += 1

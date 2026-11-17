@@ -641,6 +641,113 @@ static func items_data() -> Dictionary:
                 _items_cache = d
     return _items_cache
 
+## D99: items.json stock_by_tier - the content writer's growth gating, CUMULATIVE: a town at
+## tier N carries every shop_adds (or cargo_adds) key from tiers 1..N and nothing is removed.
+## Returns the first tier a key is listed at, or 0 when stock_by_tier does not name the key at
+## all (then the older rule - the good's own tier / opens_tier - still governs it alone).
+static var _sbt: Dictionary = {}
+static func stock_first_tier(key: String, kind := "shop_adds") -> int:
+    if not _sbt.has(kind):
+        var m: Dictionary = {}
+        for row in ((items_data().get("stock_by_tier", {}) as Dictionary).get("tiers", []) as Array):
+            if row is Dictionary:
+                var t := int((row as Dictionary).get("tier", 0))
+                for k in ((row as Dictionary).get(kind, []) as Array):
+                    if not m.has(String(k)):
+                        m[String(k)] = t
+        _sbt[kind] = m
+    return int((_sbt[kind] as Dictionary).get(key, 0))
+
+## D99: true when stock_by_tier lets this key be on sale at this growth tier.
+static func stock_open(key: String, tier: int, kind := "shop_adds") -> bool:
+    var first := stock_first_tier(key, kind)
+    return first == 0 or first <= tier
+
+## D99: ARTIFACT is found-only (items.json _note_c58 / _note_c61): "no shop at any level and no
+## trader may ever stock one". Every shelf and every wagon asks this before it lists a good.
+static func never_stocked(g: Dictionary) -> bool:
+    return String(g.get("rarity", "")).to_lower() == "artifact" or bool(g.get("found", false))
+
+## D99: items.json price_ladders, checked as its _note says: down each ladder cost and tier are
+## both non-decreasing, so a grander good is never cheaper. A key is looked up in shop_stock,
+## trader_cargo and every trade_stock own_goods. Returns one line per fault (a missing key is a
+## fault too - a ladder naming nothing is not a check). Empty = the ladders hold.
+static func ladder_faults() -> Array:
+    var it := items_data()
+    var pool: Dictionary = {}
+    for src in ["shop_stock", "trader_cargo"]:
+        var d: Variant = it.get(src, {})
+        if d is Dictionary:
+            for k in (d as Dictionary):
+                if (d as Dictionary)[k] is Dictionary:
+                    pool[String(k)] = (d as Dictionary)[k]
+    var trades: Variant = (it.get("trade_stock", {}) as Dictionary).get("trades", {})
+    if trades is Dictionary:
+        for tk in (trades as Dictionary):
+            var own: Variant = ((trades as Dictionary)[tk] as Dictionary).get("own_goods", {})
+            if own is Dictionary:
+                for k in (own as Dictionary):
+                    if (own as Dictionary)[k] is Dictionary and not pool.has(String(k)):
+                        pool[String(k)] = (own as Dictionary)[k]
+    var out: Array = []
+    var ladders: Variant = (it.get("price_ladders", {}) as Dictionary).get("ladders", {})
+    if not (ladders is Dictionary) or (ladders as Dictionary).is_empty():
+        out.append("price_ladders: no ladders in items.json")
+        return out
+    for ln in (ladders as Dictionary):
+        var pc := -1
+        var pt := -1
+        var pk := ""
+        for key in ((ladders as Dictionary)[ln] as Array):
+            var g: Variant = pool.get(String(key))
+            if not (g is Dictionary):
+                out.append("%s: %s is in no stock table" % [ln, key])
+                continue
+            var c := int((g as Dictionary).get("cost", 0))
+            var t := int((g as Dictionary).get("tier", 1))
+            if c < pc:
+                out.append("%s: %s costs %d, under %s at %d" % [ln, key, c, pk, pc])
+            if t < pt:
+                out.append("%s: %s is tier %d, under %s at %d" % [ln, key, t, pk, pt])
+            pc = c
+            pt = t
+            pk = String(key)
+    return out
+
+## D99: classes.json `healing` - the mend beat and the quaff rule. mend_interval_s is a number;
+## quaff is the content writer's sentence ("A hero below 34% hp drinks a potion for 45% of max.")
+## and its first percentage IS the threshold, read out of it rather than kept twice.
+static var _heal_rules: Dictionary = {}
+static var _heal_loaded := false
+static func healing_rules() -> Dictionary:
+    if not _heal_loaded:
+        _heal_loaded = true
+        var out := {"mend_interval_s": 2.4, "quaff_below": 0.34, "from_file": false}
+        var f := FileAccess.open("res://data/classes.json", FileAccess.READ)
+        if f:
+            var d: Variant = JSON.parse_string(f.get_as_text())
+            var hr: Variant = (d as Dictionary).get("healing") if d is Dictionary else null
+            if hr is Dictionary:
+                out["from_file"] = true
+                if (hr as Dictionary).has("mend_interval_s"):
+                    out["mend_interval_s"] = maxf(0.5, float((hr as Dictionary)["mend_interval_s"]))
+                var re := RegEx.new()
+                re.compile("below (\\d+)%")
+                var mt := re.search(String((hr as Dictionary).get("quaff", "")))
+                if mt:
+                    out["quaff_below"] = clampf(float(mt.get_string(1)) / 100.0, 0.05, 0.95)
+                out["voice"] = String((hr as Dictionary).get("voice", ""))
+                # the voice rule's first quoted phrase is the self-mend wording
+                var rq := RegEx.new()
+                rq.compile("'([^']+)'")
+                var mq := rq.search(String(out["voice"]))
+                if mq:
+                    out["self_mend"] = mq.get_string(1)
+        if not bool(out["from_file"]):
+            push_error("D99: classes.json healing not read - mend/quaff fall back to the old constants")
+        _heal_rules = out
+    return _heal_rules
+
 static func rarity_of(tier: int) -> String:
     return String(RARITY[clampi(tier, 0, RARITY.size() - 1)])
 

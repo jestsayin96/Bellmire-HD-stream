@@ -6992,3 +6992,117 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
   have spoken there), and a hero-moment line is chatty. 0 bits, nothing redeemed, no reward touched, nothing posted.
 - Files: scripts/twitch_eventsub.gd, scripts/roster.gd (signal + 3 emits), scripts/twitch_chat.gd (first-msg tag +
   saw_viewer call - no other change), tools/_d70_test.gd. Backups *.bak_d70 (not committed).
+## D-MBF - the miniboss_feed READER: the fourteen minibosses' feed lines are finally read (game build, 2026-11-16 17:08-17:30 CT)
+- TAKE THIS NEXT gave the game build the miniboss_feed reader FIRST (then D70.2's remainder, publisher fields, S2 (b), T1/C-71).
+- THE GAP: data/lore_lines.json miniboss_feed.by_key carries 291 lines for all fourteen art-lane minibosses and no script read them -
+  and the miniboss set piece could not have used them anyway: dungeon_hd rolls `Bestiary.pick(floor, theme)`, an ordinary creature
+  with no miniboss key.
+- dungeon_hd.gd: `THEME_MINIBOSS` - one key per theme, all fourteen (FloorGen.all_themes(), the MINIBOSSES.md table: barracks/drillmaster,
+  workshop/scrapwright, prison/gaoler, shrine/snuffer, crypt/sexton, keep/porter, treasury/tallyman, mess/cook, flooded/sluicekeeper,
+  grassland/sower, wood/snarer, firepit/stoker, fogbound/bellman, confection/boiler). The miniboss set piece now carries `mb_key`.
+- delve.gd: `static func miniboss_lines(key, phase)` reads by_key[key][phase]; `_miniboss_say` picks one, fills {name} with an alive
+  delver (drops {name} lines when nobody is alive). On spawn: an ARRIVE line, then the hold line, and the elite takes the miniboss's
+  NAME ("The Stoker holds this chamber alone ...") so the writer's fall lines ("The Stoker is down.") match what the Chronicle called
+  it. On the kill: a FALL line, then the purse line without its own "is down" (no double obituary). Counted in setpieces_fired as
+  miniboss_feed_arrive / miniboss_feed_fall. No key (or no lines) -> exactly the old behaviour.
+- NOT WIRED, SAID PLAINLY: ACT and BROKEN. Those are each miniboss's signature mechanic firing and being broken (summon, re-plate,
+  hook-drag, snuff the lamps), and none of those mechanics exists yet - firing "The gong again. The garrison falls in." with no
+  garrison would be a lie in the feed. They are readable through the same reader, so a mechanic needs one `_say(_miniboss_say(k, "act"))`.
+  The rally (half hp) is NOT the mechanic and was deliberately not borrowed for "act". The body is still the bestiary creature's -
+  the miniboss .glb wiring (BOSS_DEFS `model`) is a separate item.
+- NEW GATE tools/_mbfeed_test.gd: MBFEED_TEST OK 80 checks - 14 themes -> 14 distinct keys, 14 x 4 phases readable, a real floor's
+  miniboss set piece carries its theme's key, a real spawn + kill through Delve writes an arrive line and a fall line FROM THE POOL to
+  the feed, counted once each, purse still pays, no unfilled {name}. Transcript (floor 6, firepit):
+    The heat comes before the man. | The Stoker holds this chamber alone - a mini-boss stands between you and the way deeper. |
+    The Stoker is down. The furnace is cold. | The chamber keeps a purse of 113 gold - 113 a share, 1 ways.
+- ALSO (TAKE THIS NEXT fifth, C-71's recheck - the one-grep answer): nothing in my files CAPS the title or dye list, but roster.gd
+  `dye()` answered an unknown colour with ALL dye names - 281 names, ~2800 chars, cut by CHAT_MAX_LEN at 480 mid-word. Now:
+  "The dyer has 281 colours - try brick, ferrybell, gaoleriron, northwood, ninthdusk, ledgerink." (93 chars, DYE_LIST OK,
+  tools/_dye_list_check.gd). Titles: no list-dump reply found in my files; chatcmd.gd is the chat bot's and was not touched.
+- L29C_TEST: 33 checks, ONE FAIL, "C: at least one set piece of any kind fired during the soak (0)" - the 10801-frame soak only
+  reached floor 2 and met no set piece at all (fired={}), so it never entered the miniboss path this cycle touched; its B.miniboss
+  section passes in full and now prints the arrive/fall lines. Not a commit gate; recorded, not fixed here.
+- GATES: see the commit line. LOOKED: the feed transcript above is the on-screen text verbatim (the feed shows these strings); no
+  separate render this cycle - no visual changed.
+- NO LIVE TWITCH TEST: nothing here is Twitch-facing except the dye reply, a reply string. 0 bits, nothing redeemed, nothing posted,
+  no reward touched.
+- Files: scripts/delve.gd, scripts/dungeon_hd.gd, scripts/roster.gd, tools/_mbfeed_test.gd, tools/_dye_list_check.gd.
+  Backups *.bak_mbfeed (not committed).
+
+
+## U41 - STOOD DOWN ON L31 (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: the supervisor's 17:02 TAKE THIS NEXT row names L31 (damage numbers, status icons, "Now fighting" banner legible at 1080p).
+- WHY NOTHING WAS BUILT: the plan's own analysis (WORK_PLAN, "L31 being unchecked does NOT mean the HUD worker has work") records that the NOW FIGHTING banner shipped in U26, and that everything left in L31 - damage numbers, status icons - lives in delve.gd, monster.gd, party_frames.gd and boss_bar.gd. None of those is among my seven files, and the 17:02 row itself says do not touch party_frames.gd or boss_bar.gd. Building it would mean editing files I do not own.
+- NEEDED FROM THE SUPERVISOR: either re-route the L31 remainder to its owner (game build) as a new item, or name a HUD item inside hud_dock/spotlight/auto_director/dice/feed_hud/leaderboard_panel/ui_theme. L73 and L74 are ticked, so my queue is empty otherwise.
+- LOCK: RUN_LOCK read at 17:52 CT, last line a chat bot NOTE, no Godot alive (tasklist). I took no lock and launched no Godot this slot. Released nothing because nothing was held.
+- LOOKED: nothing rendered this slot; no code changed.
+
+## ART - the two skip measurements and REGISTER CONVERSION 9 OF 14, the Sluicekeeper (2026-11-16)
+- THE SKIP RULING'S CONDITION IS MET. The Scrapwright and the Bellman went through the existing
+  fit harness ONCE, at the fixed frame, beside a chibi Knight: scrapwright ratio 0.82, pair
+  4.62 m, footprint 2.76 m; bellman ratio 1.10, pair 4.58 m, footprint 2.72 m; both fit the
+  frame, both CORRIDOR-SAFE, blank check 2 files 0 failures. Recorded in docs/art/
+  MINIBOSS_FIT.md marked SKIPPED, MEASURED. The converted eight sit at ratio 0.84-1.06, so the
+  two skips are 0.02 and 0.04 outside that band's ends - a difference that is bestiary.gd's `h`
+  and not geometry. Nothing argues for converting either. Sheet: renders/art/minibosses/
+  _skipmeasure.png. The one thing the numbers do not cover is written down beside them: both
+  carry members that are wire by the converted twelve's standard, which is member thickness and
+  not proportion, and is not what this register exists to fix.
+- REGISTER CONVERSION 9 OF 14 - sluicekeeper_chibi. Eight passes, one change and one render
+  each, each looked at. Ratio 1.02, pair 5.36 m, fits the frame, blank check 0 failures,
+  footprint 3.50 m CORRIDOR-SAFE, 4 meshes / 2623 faces, static, BLENDER_EEVEE.
+- THREE RULES CAME OUT OF IT AND THEY ARE METHOD, NOT THIS CREATURE:
+  (a) A WEAK PAIR IN THE PALETTE IS NOT A REASON TO USE ONE VALUE FOR EVERYTHING. Measuring
+      bone at 14% off body, I built the machine entirely in body/dark and the handwheel - the
+      whole silhouette - vanished into its own frame. Find the pair that IS strong (bone/dark,
+      0.342 vs 0.060) and build on it.
+  (b) A FIGURE OPERATING A MACHINE MUST STAND IN THE MACHINE'S OWN PLANE. Off to one side, the
+      near rim was 0.85 m across the wheel, both arms had to span it and they merged into one
+      plank. This is the Cook's diagonal rule's other half.
+  (c) AT THIS ELEVATION A RAISED SURFACE HIDES WHAT STANDS IN IT ONLY IF IT REACHES
+      (height - object top) / 0.105 METRES TOWARD THE CAMERA. A 0.30 m waterline needs 1.62 m
+      of water between lens and boot; widening to that broke the fixed frame, so the waterline
+      came down to 0.15 m instead.
+- A STRAIGHT BUG FOUND AND NAMED: the rim-point scan searched a near pi, which is the quadrant
+  pointing AWAY from the man, so four passes of arm work were finding the nearest point of the
+  wrong half of the wheel.
+- THE CARRIED LEG FAULT IS TAKEN (shins `body`, boot `dark`, so the leg breaks in value at the
+  ankle) - and it cannot be seen on this creature, because the waterline covers the legs. The
+  fix is in the file; the next conversion shows it.
+- Twelve faults named in MINIBOSS_FIT.md, the first being that the lower arm merges into the
+  torso so "two hands turning" reads as one hand in two views out of three.
+- NEW TOOL: tools/art/_footprint.py - the corridor span as a measurement, so a SKIP can be
+  measured the same way a conversion is.
+- THE REGISTER IS NOW 9 CONVERTED + 2 MEASURED-AND-SKIPPED. THREE REMAIN: the BOILER, the SOWER
+  and the SNARER.
+- WIRING FOR THE GAME BUILD LANE (no .gd touched): scripts/bestiary.gd - if sluicekeeper_chibi
+  is adopted, model = assets/monsters/minibosses/sluicekeeper_chibi.glb, no `anims` entry
+  (static), h = 3.20.
+- STILL OPEN AND STILL MINE, NOT TAKEN THIS RUN: the gloves _G_FLARE0/_G_FLAREK re-tune.
+
+## B12 - THE UNION READ IS OUT, AND THE QUEUE DOES NOT CLEAR WHEN THEY GO DOWN (chat bot, 2026-11-16 17:46-17:58 CT)
+CHECKPOINT - WRITTEN AND NOT GATED. No lock was taken and no Godot was launched: the slot opened at 17:46 and the
+chat bot window ends at :52, which is not a battery. This is the split the supervisor ruled for, taken on purpose
+after this lane starved the HUD lane last hour. The gates are the first thing at 18:45.
+
+- THE DEFERRAL ENDED BY ITS OWN TERMS, AND IT WAS CHECKED, NOT ASSUMED. B11 deferred the ruled drop behind a trigger:
+  the run B11_SOURCE_QUEUEING prints YES is the run the union comes out. Read directly off origin/main rather than
+  off the ruling: scripts/town.gd 5427-5428 now carries `if not chat.delve_queue.has(uid): chat.delve_queue.append(uid)`
+  in _on_delve, ahead of the away write. Merged into `chatbot` (fcd2398). The premise is real, so the union is out.
+- WHAT CAME OUT: _muster no longer walks `away` adding names, and _mustering() is gone. delve_queue is the ONE source
+  of membership and the order chat put the names in.
+- WHAT DID NOT COME OUT, AND THIS IS THE FINDING: the town erases the queue when the DELVE ENDS (delve.ended ->
+  delve_queue.erase), NOT when the party goes below (5468 only sets away). So for the whole descent the names are
+  still in delve_queue. A plain one-list read would have stood heroes who are underground at the dungeon mouth and
+  counted them in the muster - a viewer-facing regression the ruling could not see from outside the file. `away` is
+  still read for ONE thing, _below(): leaving a hero already down OUT. That is an exclusion, not a second source of
+  membership - no name enters the muster from away - so the drift D41 closed stays closed.
+- THE GATE WAS TIGHTENED, NOT RELAXED. tools/_b11_muster.gd: B11_SOURCE_QUEUEING is now an assertion, not a printed
+  note (if D41 ever leaves this branch the muster goes blind to every errand and the gate must be the thing that
+  says so); a uid that exists only in `away` is planted and the count must not move (proves no second source); and
+  the below case now asserts BOTH that the queue still holds her and that she is neither named nor counted.
+- data/commands.json and docs/COMMANDS.md UNCHANGED - no command was added, removed or reworded, so the doc cannot
+  drift. commands.json re-parsed clean, 8 top-level keys, no key touched.
+- NO LIVE TWITCH TEST THIS CYCLE. 0 bits, nothing cheered, nothing redeemed, no reward created/renamed/re-priced/
+  deleted, nothing posted as any account, no channel setting touched.
+- Files: scripts/chatcmd.gd, tools/_b11_muster.gd, PROGRESS.md.

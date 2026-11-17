@@ -1210,7 +1210,11 @@ func dye(user_id: String, colour: String) -> String:
     var c := colour.to_lower().strip_edges()
     var dyes: Dictionary = items().get("dyes", {})
     if not dyes.has(c):
-        return "The dyer has: %s." % ", ".join(dyes.keys())
+        # C-71 put 281 dyes in the book - the whole list ran ~2800 chars and chat cut it
+        # at 480 mid-word. Name a handful and the count instead.
+        var names: Array = dyes.keys()
+        names.shuffle()
+        return "The dyer has %d colours - try %s." % [dyes.size(), ", ".join(names.slice(0, 6))]
     var price := haggle(h, cost_for(h, int(items().get("dye_cost", 25))))
     if not spend(h, price):
         return "%s needs %d gold for the dyer - you have %d." % [h["name"], price, int(h["gold"])]

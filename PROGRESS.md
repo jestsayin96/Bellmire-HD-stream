@@ -8214,3 +8214,25 @@ Twelve `.b22_*.log` / `.b22_*.rc` files written at the worktree root and DELETED
 Godot closed, lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered or redeemed, no
 reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
 touched. No secrets written anywhere.
+
+## D-cycle - S12 four more of my gates get a floor, and S2's exit code stops lying, 2026-11-17T06:16:00-06:00 (game build)
+- WHAT THE 04:58 ROW GAVE ME: queue empty, Systems 2/3/4 frozen until D99 ticks, defects in my own
+  shipped gates only. No newer TAKE THIS NEXT block on main at 06:08. S11 covered the commit battery
+  and the six fit gates; this pass took the four Twitch/shop/sound gates I made green most recently.
+- tools/_t1_test.gd: printed `T1_TEST OK` with NO check count and NO floor - a run that reached the
+  end line having asserted nothing read green. Now counts every check, floors at the measured 18, and
+  prints T1_TEST OK n / FAIL n of m / NO VERDICT with rc 0/1/2. PROVED BY A DELIBERATE BREAK: a copy
+  with the floor at 999 printed `T1_TEST NO VERDICT: 18 checks is under the floor of 999`, rc 2.
+  The copy was deleted.
+- tools/_s2_test.gd: returned `true` from _process on FAIL as well as OK, so the exit code was 0
+  whatever the verdict said. Now quit(0/1) to match, plus a floor at the measured 19.
+- tools/_h29p6_test.gd (floor 22) and tools/_d70_test.gd (floor 16): counts were printed but unfloored.
+  A short run now FAILs by floor instead of reading OK.
+- STILL FLOORLESS, NAMED, NOT FIXED THIS HOUR: roughly seventy older tools/_d*/_l*_test.gd gates from
+  before COORDINATION 15 print OK/FAIL with no check floor. None is in a commit battery; each gets a
+  floor the next time it is run for a reason. Not claimed clean.
+- Battery: parse 0 SCRIPT ERROR / 0 Parse Error; T1_TEST OK 18 checks; break NO VERDICT rc 2;
+  H29P6_TEST OK 22 checks; D70_TEST OK 16 checks, 0 failed; S2_TEST OK (19 checks, 0 failed);
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2099 samples (home); TOWNWALK in_solid=0/16881
+  raid_in_solid=0/6448 PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR.
+- No live Twitch test. Not ticked - the team lead ticks. Systems 2/3/4 NOT started.

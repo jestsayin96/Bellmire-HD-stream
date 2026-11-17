@@ -15,6 +15,8 @@ class FakeTown extends Node:
 
 var _fails := 0
 var _checks := 0
+## S12: measured 16 checks. Fewer is a FAIL by floor, never OK.
+const MIN_CHECKS := 16
 var logs: Array = []
 
 func _check(name: String, ok: bool) -> void:
@@ -129,5 +131,8 @@ func _initialize() -> void:
     for l in logs:
         if String(l).find("D70") >= 0 or String(l).find("chat not sent (dry_run_chat)") >= 0:
             print("  ", l)
+    if _checks < MIN_CHECKS:
+        print("FAIL check floor: %d checks is under %d" % [_checks, MIN_CHECKS])
+        _fails += 1
     print("D70_TEST %s %d checks, %d failed" % ["OK" if _fails == 0 else "FAIL", _checks, _fails])
     quit(0 if _fails == 0 else 1)

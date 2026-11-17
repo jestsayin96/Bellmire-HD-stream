@@ -678,3 +678,12 @@ is unchanged; what this adds:
 - **Colour.** One new functional colour: `--live` (a red LIVE dot and badge), used for nothing else.
 - No `innerHTML` was added anywhere in this item; the only `innerHTML` in the file is still the
   page-owned `renderNothing` template.
+
+### H32 pass 3 - the guild chat column
+
+The H8 native chat moved from tab fourteen into a persistent right column (same element ids, same
+code). **Still strictly opt-in**: nothing contacts `wss://irc-ws.chat.twitch.tv` until the viewer presses
+"Open the guild chat"; reading is anonymous; sending still needs the viewer's own sign-in. Every incoming
+line still renders through `el()` / textContent (`?mock=chat` hostile line renders as literal text, no
+dialog). The `chat` tab and its `<section>` were removed (the column replaces them). New stored state: one
+whitelisted localStorage value, `bellmire.chatcol.v1` = `min` | `full` (the collapse choice). No CSP change.

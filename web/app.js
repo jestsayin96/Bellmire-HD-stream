@@ -4026,7 +4026,48 @@ function renderStage() {
   });
 })();
 
-const TABS = ["watch","boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","chat","commands"];
+// ---- H32 pass 3: the guild chat column. The chat that used to be tab fourteen now sits beside the
+// stage, always present (the H8 native chat, unchanged and still OPT-IN: nothing contacts Twitch until
+// the viewer presses "Open the guild chat"). Collapsible to a thin strip on a wide screen; on a narrow
+// one the column is hidden and a top-bar button opens it full-screen. Layout only: no snapshot value
+// is involved; the only stored state is one whitelisted localStorage value (bellmire.chatcol.v1).
+const CHATCOL_KEY = "bellmire.chatcol.v1";
+const NARROW = window.matchMedia ? window.matchMedia("(max-width: 900px)") : { matches: false };
+function chatColGetMode() { try { return localStorage.getItem(CHATCOL_KEY) === "min" ? "min" : "full"; } catch (e) { return "full"; } }
+function chatColSet(mode, keep) {
+  const app = $("app"); if (!app) return;
+  app.setAttribute("data-chat", mode === "min" ? "min" : "full");
+  const b = $("chatToggle");
+  if (b) {
+    b.setAttribute("aria-expanded", mode === "min" ? "false" : "true");
+    b.setAttribute("aria-label", mode === "min" ? "Expand the chat column" : "Collapse the chat column");
+    b.title = mode === "min" ? "Show the chat" : "Collapse the chat";
+  }
+  if (keep !== false) { try { localStorage.setItem(CHATCOL_KEY, mode === "min" ? "min" : "full"); } catch (e) {} }
+}
+function chatNarrowOpen(on) {
+  const app = $("app"); if (!app) return;
+  app.setAttribute("data-chatopen", on ? "1" : "0");
+  const nb = $("chatNarrowBtn"); if (nb) nb.setAttribute("aria-expanded", on ? "true" : "false");
+  const tg = $("chatToggle");
+  if (tg && NARROW.matches) { tg.setAttribute("aria-label", on ? "Close the chat" : "Collapse the chat column"); tg.setAttribute("aria-expanded", on ? "true" : "false"); }
+}
+(function wireChatCol() {
+  const tog = $("chatToggle"), nb = $("chatNarrowBtn");
+  chatColSet(chatColGetMode(), false);
+  chatNarrowOpen(false);
+  if (tog) tog.addEventListener("click", () => {
+    if (NARROW.matches) { chatNarrowOpen(false); if (nb) nb.focus(); return; }
+    chatColSet((($("app") && $("app").getAttribute("data-chat")) === "min") ? "full" : "min");
+  });
+  if (nb) nb.addEventListener("click", () => { chatNarrowOpen(true); const f = $("chatLoad") && !$("chatLoad").classList.contains("hide") ? $("chatLoad") : $("chatInput"); if (f && f.focus) { try { f.focus(); } catch (e) {} } });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && NARROW.matches && $("app") && $("app").getAttribute("data-chatopen") === "1") { chatNarrowOpen(false); if (nb) nb.focus(); }
+  });
+  if (NARROW.addEventListener) NARROW.addEventListener("change", () => chatNarrowOpen(false));
+})();
+
+const TABS = ["watch","boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {

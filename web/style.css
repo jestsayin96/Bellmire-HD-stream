@@ -1568,7 +1568,6 @@ html.overlay .rail, html.overlay .chatcol, html.watch .rail, html.watch .chatcol
 .rail-empty { margin: 0; padding: 12px 16px; font-size: .86rem; line-height: 1.45; color: var(--parch-dim); opacity: .8; }
 
 /* collapsed: sigils only, the way Twitch's rail collapses to avatars. The names stay in the accessibility tree. */
-html:not(.overlay):not(.watch) .app[data-rail="min"] .shell { grid-template-columns: 64px minmax(0, 1fr) 330px; }
 .app[data-rail="min"] .rail-title, .app[data-rail="min"] .rail-count, .app[data-rail="min"] .rail-h { display: none; }
 .app[data-rail="min"] .rail-head { justify-content: center; padding: 9px 0 7px; }
 .app[data-rail="min"] .rail-toggle svg { transform: rotate(180deg); }
@@ -1641,3 +1640,49 @@ html:not(.overlay):not(.watch) .app[data-rail="min"] .shell { grid-template-colu
 }
 html.overlay .stagewatch, html.watch .stagewatch { display: none !important; }
 .sw-tag { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+
+/* ===========================================================================
+   H32 pass 3 - THE GUILD CHAT COLUMN (right). Chat is no longer tab fourteen: it sits beside the
+   stage, always there, collapsible. Column widths are variables so the rail and the chat collapse
+   independently.
+   =========================================================================== */
+.app { --rail-w: 250px; --chat-w: 340px; }
+@media (max-width: 1180px) { .app { --rail-w: 210px; --chat-w: 290px; } }
+.app[data-rail="min"] { --rail-w: 64px; }
+.app[data-chat="min"] { --chat-w: 48px; }
+html:not(.overlay):not(.watch) .shell { grid-template-columns: var(--rail-w) minmax(0, 1fr) var(--chat-w); }
+
+.chatcol { display: flex; flex-direction: column; overflow: hidden; }
+.chat-head { flex: none; display: flex; align-items: baseline; gap: 8px; padding: 9px 10px 7px 14px; border-bottom: 1px solid rgba(198,146,47,.14); }
+.chat-title { margin: 0; font: 700 .76rem var(--ui); letter-spacing: .09em; text-transform: uppercase; color: var(--parch-dim); }
+.chat-sub { flex: 1; min-width: 0; font-size: .74rem; color: var(--parch-dim); opacity: .65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-toggle { flex: none; align-self: center; display: grid; place-items: center; width: 30px; height: 30px; cursor: pointer;
+  color: var(--parch-dim); background: transparent; border: 1px solid transparent; border-radius: 7px; }
+.chat-toggle:hover, .chat-toggle:focus-visible { color: var(--parch-hi); border-color: var(--teal); outline: none; }
+.chatbox { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 10px; padding: 10px 12px 12px; }
+.chatbox .chatload { align-self: stretch; text-align: center; }
+.chatpanel { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.chatpanel.hide { display: none; }
+.chatpanel .chatlist { flex: 1 1 auto; height: auto; min-height: 0; overscroll-behavior: contain; padding: 8px 10px; }
+.chatpanel .chatrow { flex: none; }
+.chatpanel .chatstatus { flex: none; }
+.chatbox .chatsend { padding: 9px 12px; }
+html:not(.overlay):not(.watch) .app[data-chat="min"] .chatcol .chat-title,
+html:not(.overlay):not(.watch) .app[data-chat="min"] .chatcol .chat-sub,
+html:not(.overlay):not(.watch) .app[data-chat="min"] .chatcol .chatbox { display: none; }
+html:not(.overlay):not(.watch) .app[data-chat="min"] .chatcol .chat-head { justify-content: center; padding: 9px 0 7px; border-bottom: 0; }
+html:not(.overlay):not(.watch) .app[data-chat="min"] .chat-toggle svg { transform: rotate(180deg); }
+.chatbtn-narrow { display: none; }
+
+@media (max-width: 900px) {
+  html:not(.overlay):not(.watch) .topbar { grid-template-columns: auto minmax(0, 1fr) auto; }
+  html:not(.overlay):not(.watch) .topbar .watchbar { display: flex; }
+  html:not(.overlay):not(.watch) .topbar .watchbar .watchbtn:not(.chatbtn-narrow) { display: none; }
+  html:not(.overlay):not(.watch) .topbar .chatbtn-narrow { display: inline-block; }
+  html:not(.overlay):not(.watch) .chatcol { display: none; }
+  html:not(.overlay):not(.watch) .app[data-chatopen="1"] .chatcol {
+    display: flex; position: fixed; z-index: 60; inset: 0; background: var(--night); border-left: 0; }
+  .chat-toggle svg { transform: rotate(90deg); }
+}
+/* once the chat is open, the explanatory note steps aside so the feed gets the height */
+.chatbox:has(.chatpanel:not(.hide)) .chatnote { display: none; }

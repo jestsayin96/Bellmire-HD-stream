@@ -876,3 +876,7 @@ level, dimmed. Live first, idle below, the fallen not on the rail (they have the
 collapses to sigils only. Picking an entry opens the new "Live" stage: a dark player banner, an info row
 (title / who / tags / Follow) and the full sheet beneath. The LIVE dot is red (`--live`), a functional
 signal used nowhere else. Welcome panel placement and chat are still to do (passes 3 and 5).
+- H32 pass 3: Guild chat is now a persistent right column (collapsible; on a narrow screen a top-bar button
+  opens it full-screen). It remains opt-in - the viewer still presses "Open the guild chat" - because
+  auto-connecting to Twitch on page load would change the privacy behaviour H8 was built around. That is
+  Mr. E's call (see the run summary). The "Guild chat" tab is gone; the column replaces it.

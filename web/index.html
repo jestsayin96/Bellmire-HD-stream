@@ -155,6 +155,7 @@
        and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
   <div class="watchbar" id="watchbar">
     <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
+    <button type="button" class="watchbtn chatbtn-narrow" id="chatNarrowBtn" aria-controls="chatcol" aria-expanded="false">Guild chat</button>
     <button type="button" class="watchbtn hide" id="welcomeBtn">What is Bellmire?</button>
     <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
   </div>
@@ -203,7 +204,6 @@
     <button type="button" role="tab" id="tab-shops"     data-tab="shops"     aria-controls="shops"     aria-selected="false" tabindex="-1">Shops</button>
     <button type="button" role="tab" id="tab-satchel"   data-tab="satchel"   aria-controls="satchel"   aria-selected="false" tabindex="-1">Satchel</button>
     <button type="button" role="tab" id="tab-season"    data-tab="season"    aria-controls="season"    aria-selected="false" tabindex="-1">Season</button>
-    <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
     <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
 
@@ -445,17 +445,26 @@
       <p class="note">Standings count the living and the fallen. A board with no data says so rather than guessing; the stream shows no leaderboard - this is where it lives.</p>
     </section>
 
-    <!--
-      Guild chat (H8): the channel's live Twitch chat, drawn by THIS page over
-      Twitch's own chat protocol - no iframe. The old embed died for every viewer
-      whose browser blocks third-party cookies (Brave, Safari, strict Chrome).
-      Still OPT-IN: nothing contacts Twitch until the viewer opens it. Reading is
-      anonymous; talking uses the viewer's own sign-in (under Heroes). Every
-      incoming line is attacker-controlled text and renders through el() only -
-      plain text, no emote images, no markup, ever. See docs/HUB_SECURITY.md (H8).
-    -->
-    <section class="plain" id="chat" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
-      <h2 class="title light">Guild chat <small>the channel's live chat</small></h2>
+  </main>
+
+  <footer>
+    The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
+    <br>Bellmire HD &middot; JestSayin
+  </footer>
+      </div>
+    </div>
+
+    <!-- H32 pass 3: guild chat lives HERE, beside whatever is on the stage, not in a tab. It is the same
+         H8 native chat as before (same ids, same opt-in: nothing contacts Twitch until the viewer opens it,
+         reading is anonymous, talking uses the viewer's own sign-in). Collapsible. -->
+    <aside class="chatcol" id="chatcol" aria-label="Guild chat">
+      <div class="chat-head">
+        <h2 class="chat-title">Guild chat</h2>
+        <span class="chat-sub">the channel&rsquo;s live chat</span>
+        <button type="button" class="chat-toggle" id="chatToggle" aria-expanded="true" aria-controls="chatBox" aria-label="Collapse the chat column" title="Collapse the chat">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
       <div class="chatbox" id="chatBox">
         <button type="button" class="chatload" id="chatLoad">Open the guild chat</button>
         <p class="chatnote" id="chatNote">Live Twitch chat, drawn by this page itself - it works in every browser, no Twitch frame, no cookies. Nothing contacts Twitch until you open it. Reading needs nothing; sign in under Heroes to talk.</p>
@@ -469,18 +478,6 @@
           </div>
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
-    <br>Bellmire HD &middot; JestSayin
-  </footer>
-      </div>
-    </div>
-
-    <aside class="chatcol" id="chatcol" aria-label="Guild chat column">
-      <p class="rail-ph">Guild chat</p>
     </aside>
   </div>
 </div>

@@ -85,3 +85,26 @@ beside them: `dagger_{common,uncommon,rare}.glb` in `assets/gear/dungeon/`, copi
 `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from `*.gltf.glb`). Wired as gear.gd KINDS dagger
 tiers 1-3. The pack's staves were copied, rendered, judged wrong in the hand and REMOVED the same hour -
 they are not in the repo.
+## KayKit Dungeon Pack 1.0 - the tiered weapon ladder (S2, art's half of System 2)
+- Pack: KayKit : Dungeon Pack (1.0)
+- Author: Kay Lousberg (www.kaylousberg.com)
+- URL: https://kaylousberg.itch.io/kaykit-dungeon
+- Licence: CC0 1.0 (Creative Commons Zero) - read off the pack's own License.txt on
+  17 Nov 2026, not off a search snippet: "free to use in personal, educational and
+  commercial projects", crediting optional. The pack's licence file is copied into
+  the repo beside the models at assets/gear/dungeon/LICENSE_KayKit_Dungeon_CC0.txt.
+- Date added: 2026-11-17 (sword / axe / hammer were added at S16-S17; the remaining
+  fifteen on 2026-11-17 by the art lane)
+- What was taken: EIGHT families at three tiers each - 24 models, geometry only,
+  unmodified: sword, axe, axeDouble, hammer, dagger, staff, crossbow, shield, each
+  in common / uncommon / rare. Nothing was re-exported or re-materialled; the files
+  are the pack's own .glb renamed from `<fam>_<tier>.gltf.glb` to `<fam>_<tier>.glb`.
+- Where: assets/gear/dungeon/
+
+> TEAM LEAD NOTE, 2026-11-17 12:58 CT, on merging the two rows above. BOTH ARE KEPT AND BOTH
+> WERE TRUE WHEN WRITTEN. They disagree on one fact and this merge is what settles it: the game
+> build removed its own staff copies at S18 after judging them in the hand, and the art lane
+> committed the full fifteen in the same hour. AFTER THIS MERGE staff_*, crossbow_*, axeDouble_*
+> and shield_* ARE in assets/gear/dungeon/ - art's copies - and nothing in scripts/ reads them
+> yet. That is queued work with art's carry numbers attached (docs/art/SYSTEM2_WEAPONS.md), not
+> a stray asset. One licence covers all 24; no new row is owed.

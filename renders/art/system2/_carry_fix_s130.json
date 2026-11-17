@@ -1,0 +1,39 @@
+{
+ "blanks": [],
+ "frame_clips": [],
+ "families": {
+  "staff": {
+   "axis_to_up": "z",
+   "scale": 1.3,
+   "local_euler_deg": [
+    -85.13,
+    -90.06,
+    85.26
+   ],
+   "local_quat": [
+    0.70708,
+    0.00071,
+    -0.70714,
+    0.0
+   ],
+   "common": {
+    "clip_after": 34,
+    "checked": 302,
+    "tip_z": 1.257,
+    "low_z": 0.079
+   },
+   "uncommon": {
+    "clip_after": 40,
+    "checked": 318,
+    "tip_z": 1.513,
+    "low_z": 0.054
+   },
+   "rare": {
+    "clip_after": 148,
+    "checked": 827,
+    "tip_z": 1.568,
+    "low_z": 0.057
+   }
+  }
+ }
+}

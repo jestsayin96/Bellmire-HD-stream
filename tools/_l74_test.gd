@@ -12,6 +12,7 @@ var _tag := "after"
 var _step := 0
 var _fed := 0
 var _bad := 0
+var _audited := 0   # labels actually inspected: a gate that audited nothing must not say OK
 var _shot := false
 const RAID := [
 	"Warband of raiders sighted at the east gate - the Scar is on the march!",
@@ -41,8 +42,12 @@ func _process(_d: float) -> bool:
 		_t.add_child(_eye)
 		_eye.setup(_t)
 		for c in _t.get_children():
-			if c is FeedHUD:
+			if c is FeedHUD and _tag != "break_nohud":   # break_nohud: prove a missing HUD gives NO VERDICT
 				_hud = c
+	if _f > 1800 and _hud == null:
+		print("L74_TEST NO VERDICT - FeedHUD never found in 1800 frames"); quit(2); return true
+	if _f > 40000:
+		print("L74_TEST NO VERDICT - frame cap hit at step ", _step); quit(2); return true
 	if _f < 60 or _hud == null:
 		return false
 	if _t0 < 0.0:
@@ -72,12 +77,16 @@ func _process(_d: float) -> bool:
 		if _step >= UiTheme.STEPS.size():
 			var f := FileAccess.open(_out + "l74_feed_log_%s.txt" % _tag, FileAccess.WRITE)
 			f.store_string(_hud.log_text())
-			print("L74_TEST ", "OK" if _bad == 0 else "FAIL")
+			if _audited < 6:
+				print("L74_TEST NO VERDICT - only ", _audited, " labels audited (floor 6: ~3 labels per scale is what the pacer admits)"); quit(2); return true
+			print("L74_TEST ", "OK" if _bad == 0 else "FAIL", " audited=", _audited)
+			if _bad > 0: quit(1)
 			return true
 	return false
 func _audit(pct: int) -> void:
-	for lb in _hud._box.get_children():
+	for lb in ([] if _tag == "break_empty" else _hud._box.get_children()):   # break_empty: prove an empty box is not OK
 		var l := lb as Label
+		_audited += 1
 		if "..." in l.text or "…" in l.text:
 			print("FAIL ellipsis @", pct, " ", l.text); _bad += 1
 		print("  [", pct, "] ", l.get_line_count(), "L: ", l.text)

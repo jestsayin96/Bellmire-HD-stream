@@ -124,3 +124,31 @@ with a measured held rotation (gear.gd held_rot) and x1.9 scale.
 > S20 (shield_* via a runtime format string at roster.gd:886, which a literal filename search
 > cannot see - see this hour's dead-data audit). The licence row and the merge note stand
 > unchanged; only the "nothing reads them" clause is superseded.
+
+### 17 Nov 2026 - THE TAPSTER (miniboss 21): `assets/props/` enters the log
+`assets/monsters/minibosses/tapster.glb` embeds decimated geometry from three
+models in **`assets/props/`** - `Barrel.gltf`, `SmallBottle.gltf` and
+`Mug.gltf`. That directory (309 files) was **already committed to this repo and
+was NOT in this file**, which is a gap in the log and is closed here rather
+than worked around.
+
+| Pack | Author | Licence | Licence text on disk | Contents used |
+|---|---|---|---|---|
+| Fantasy Props MegaKit (FREE version) | Quaternius | **CC0 1.0 Universal** | `assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt` | `Barrel` (cask, slot 0 only), `SmallBottle` (the hung flasks), `Mug` (the jack) |
+
+**THE LICENCE WAS READ OFF THE FILE ON DISK, NOT OFF A SEARCH SNIPPET** - the
+standing rule, and the exact habit that produced the wrong Quaternius ban on
+16 Nov. `assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt` states CC0 1.0
+Universal Public Domain Dedication, models by @Quaternius, and notes only that
+PRO/SOURCE versions carry more models. CC0 permits incorporation and
+redistribution inside our own work with no attribution required; the row is
+kept anyway because every pack used gets recorded. **Nothing is redistributed
+AS an asset.** The decimate is a Blender modifier applied at import time inside
+`tools/art/minibosses.py`; the files in `assets/props/` are untouched.
+
+ONE THING WORTH CARRYING TO ANY LANE THAT LOADS FROM THIS PACK: `Barrel.gltf`
+is one object with TWO material slots at the same radius to within 1 mm - slot
+0 `MI_Trim_Furniture` (the cask) and slot 1 `MI_Trim_Metal` (its hoops). Import
+both and they Z-FIGHT; the barrel renders as torn shards with holes in it and
+every opacity check still reads green. Take one slot. Other models in this pack
+may be built the same way.

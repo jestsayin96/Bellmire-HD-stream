@@ -909,22 +909,22 @@
    "pack_used": false,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 1418,
+   "faces": 1790,
    "size": [
-    3.1,
-    2.95,
+    3.07,
+    3.03,
     2.55
    ],
-   "footprint_span": 3.1,
+   "footprint_span": 3.07,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.4912739337895013,
-    "ortho": 4.544711589813232,
+    "radius": 2.507059715159325,
+    "ortho": 4.6735520362854,
     "clip": [
-     9.0894775390625,
-     23.606523513793945
+     9.263636589050293,
+     23.665769577026367
     ]
    },
    "views": [

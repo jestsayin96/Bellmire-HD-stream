@@ -1,0 +1,165 @@
+PASS1_RENDER rc=0
+ent\config.ocio
+13:38:35 | INFO: Data are loaded, start creating Blender stuff
+13:38:35 | INFO: Blender create Mesh node Cube.125
+13:38:35 | INFO: Blender create Mesh node Cube.126
+13:38:35 | INFO: Blender create Mesh node PrototypePete_body.020
+13:38:35 | INFO: Blender create Mesh node PrototypePete_head.001
+13:38:35 | INFO: Blender create Mesh node Cube.128
+13:38:35 | INFO: Blender create Mesh node Cube.127
+13:38:35 | INFO: Blender create Mesh node Cube.003
+13:38:35 | INFO: Blender create Mesh node Cylinder.280
+13:38:35 | INFO: Blender create Mesh node Cylinder.005
+13:38:35 | INFO: Blender create Mesh node Cylinder.010
+13:38:35 | INFO: Blender create Mesh node Cylinder.022
+13:38:35 | INFO: Blender create Mesh node Cube.11839
+13:38:35 | INFO: Blender create Mesh node Cube.12993
+13:38:35 | INFO: Blender create Mesh node Cube.124
+13:38:35 | INFO: Blender create Mesh node Plane.004
+13:38:35 | INFO: glTF import finished in 0.49s
+00:03.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton\hero_front.png'
+00:03.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton\hero_side.png'
+00:03.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton\hero_back.png'
+13:38:37 | INFO: Data are loaded, start creating Blender stuff
+13:38:37 | INFO: Blender create Mesh node Cube.125
+13:38:37 | INFO: Blender create Mesh node Cube.126
+13:38:37 | INFO: Blender create Mesh node PrototypePete_body.020
+13:38:37 | INFO: Blender create Mesh node PrototypePete_head.001
+13:38:37 | INFO: Blender create Mesh node Cube.128
+13:38:37 | INFO: Blender create Mesh node Cube.127
+13:38:37 | INFO: Blender create Mesh node Cube.003
+13:38:37 | INFO: Blender create Mesh node Cylinder.280
+13:38:37 | INFO: Blender create Mesh node Cylinder.005
+13:38:37 | INFO: Blender create Mesh node Cylinder.010
+13:38:37 | INFO: Blender create Mesh node Cylinder.022
+13:38:37 | INFO: Blender create Mesh node Cube.11839
+13:38:37 | INFO: Blender create Mesh node Cube.12993
+13:38:37 | INFO: Blender create Mesh node Cube.124
+13:38:37 | INFO: Blender create Mesh node Plane.004
+13:38:37 | INFO: glTF import finished in 0.51s
+00:04.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_front.png'
+00:04.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_side.png'
+00:04.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+PASS1_SHEET rc=0
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+
+DONE
+PASS2_RENDER rc=0
+dy.020
+13:40:42 | INFO: Blender create Mesh node PrototypePete_head.001
+13:40:42 | INFO: Blender create Mesh node Cube.128
+13:40:42 | INFO: Blender create Mesh node Cube.127
+13:40:42 | INFO: Blender create Mesh node Cube.003
+13:40:42 | INFO: Blender create Mesh node Cylinder.280
+13:40:42 | INFO: Blender create Mesh node Cylinder.005
+13:40:42 | INFO: Blender create Mesh node Cylinder.010
+13:40:42 | INFO: Blender create Mesh node Cylinder.022
+13:40:42 | INFO: Blender create Mesh node Cube.11839
+13:40:42 | INFO: Blender create Mesh node Cube.12993
+13:40:42 | INFO: Blender create Mesh node Cube.124
+13:40:42 | INFO: Blender create Mesh node Plane.004
+13:40:43 | INFO: glTF import finished in 0.50s
+00:04.015  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_front.png'
+00:04.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_side.png'
+00:04.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+PASS2_SHEET rc=0
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+DONE2
+PASS3_RENDER rc=0
+nder create Mesh node Cylinder.005
+13:43:08 | INFO: Blender create Mesh node Cylinder.010
+13:43:08 | INFO: Blender create Mesh node Cylinder.022
+13:43:08 | INFO: Blender create Mesh node Cube.11839
+13:43:08 | INFO: Blender create Mesh node Cube.12993
+13:43:08 | INFO: Blender create Mesh node Cube.124
+13:43:08 | INFO: Blender create Mesh node Plane.004
+13:43:09 | INFO: glTF import finished in 0.51s
+00:04.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_front.png'
+00:04.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_side.png'
+00:04.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+PASS3_SHEET rc=0
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+DONE3
+PASS4_RENDER rc=0
+nder create Mesh node Cylinder.005
+13:45:15 | INFO: Blender create Mesh node Cylinder.010
+13:45:15 | INFO: Blender create Mesh node Cylinder.022
+13:45:15 | INFO: Blender create Mesh node Cube.11839
+13:45:15 | INFO: Blender create Mesh node Cube.12993
+13:45:15 | INFO: Blender create Mesh node Cube.124
+13:45:15 | INFO: Blender create Mesh node Plane.004
+13:45:15 | INFO: glTF import finished in 0.52s
+00:04.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_front.png'
+00:04.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_side.png'
+00:04.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+PASS4_SHEET rc=0
+00:00.032  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+DONE4
+PASS5_RENDER rc=0
+nder create Mesh node Cylinder.005
+13:47:06 | INFO: Blender create Mesh node Cylinder.010
+13:47:06 | INFO: Blender create Mesh node Cylinder.022
+13:47:06 | INFO: Blender create Mesh node Cube.11839
+13:47:06 | INFO: Blender create Mesh node Cube.12993
+13:47:06 | INFO: Blender create Mesh node Cube.124
+13:47:06 | INFO: Blender create Mesh node Plane.004
+13:47:06 | INFO: glTF import finished in 0.51s
+00:03.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_front.png'
+00:04.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_side.png'
+00:04.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+PASS5_SHEET rc=0
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+DONE5

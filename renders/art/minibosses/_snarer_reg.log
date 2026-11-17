@@ -1,0 +1,67 @@
+
+===== C:\hd adventure\bellmire-art\tools\art\minibossgen.py
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+21:05:25 | INFO: Starting glTF 2.0 export
+21:05:25 | INFO: Extracting primitive: snarer_chibi_body
+21:05:25 | INFO: Primitives created: 1
+21:05:25 | INFO: Extracting primitive: snarer_chibi_bone
+21:05:25 | INFO: Primitives created: 1
+21:05:25 | INFO: Extracting primitive: snarer_chibi_dark
+21:05:25 | INFO: Primitives created: 1
+21:05:25 | INFO: Extracting primitive: snarer_chibi_glow
+21:05:25 | INFO: Primitives created: 1
+21:05:25 | INFO: Finished glTF 2.0 export in 0.035146236419677734 s
+00:02.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer_chibi\front.png'
+00:02.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer_chibi\three_quarter.png'
+00:02.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer_chibi\side.png'
+
+MINIBOSSGEN_REPORT {"ok": true, "n": 20, "errors": [], "blank": [], "spans": {"snarer": [3.25, "CORRIDOR-SAFE", 4, 1529], "drillmaster": [1.39, "CORRIDOR-SAFE", 4, 1366], "scrapwright": [2.76, "CORRIDOR-SAFE", 4, 975], "gaoler": [3.72, "CORRIDOR-SAFE", 4, 1816], "snuffer": [1.51, "CORRIDOR-SAFE", 4, 1107], "sexton": [2.14, "CORRIDOR-SAFE", 4, 1292], "porter": [3.52, "CORRIDOR-SAFE", 4, 1094], "tallyman": [1.89, "CORRIDOR-SAFE", 4, 1722], "cook": [2.39, "CORRIDOR-SAFE", 4, 1324], "sluicekeeper": [2.66, "CORRIDOR-SAFE", 4, 1166], "sower": [3.43, "CORRIDOR-SAFE", 4, 1029], "stoker": [3.0, "CORRIDOR-SAFE", 4, 864], "bellman": [2.72, "CORRIDOR-SAFE", 4, 842], "boiler": [3.65, "CORRIDOR-SAFE", 4, 1426], "tallyman_chibi": [1.72, "CORRIDOR-SAFE", 4, 1558], "cook_chibi": [2.1, "CORRIDOR-SAFE", 4, 2539], "sluicekeeper_chibi": [3.5, "CORRIDOR-SAFE", 4, 2623], "sower_chibi": [3.29, "CORRIDOR-SAFE", 4, 1994], "boiler_chibi": [3.65, "CORRIDOR-SAFE", 4, 1940], "snarer_chibi": [3.73, "CORRIDOR-SAFE", 4, 2523]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+===== C:\hd adventure\bellmire-art\tools\art\minibossfit.py
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+21:05:28 | INFO: Data are loaded, start creating Blender stuff
+21:05:28 | INFO: Blender create Mesh node Cube.125
+21:05:28 | INFO: Blender create Mesh node Cube.126
+21:05:28 | INFO: Blender create Mesh node PrototypePete_body.020
+21:05:28 | INFO: Blender create Mesh node PrototypePete_head.001
+21:05:28 | INFO: Blender create Mesh node Cube.128
+21:05:28 | INFO: Blender create Mesh node Cube.127
+21:05:28 | INFO: Blender create Mesh node Cube.003
+21:05:28 | INFO: Blender create Mesh node Cylinder.280
+21:05:28 | INFO: Blender create Mesh node Cylinder.005
+21:05:28 | INFO: Blender create Mesh node Cylinder.010
+21:05:28 | INFO: Blender create Mesh node Cylinder.022
+21:05:28 | INFO: Blender create Mesh node Cube.11839
+21:05:28 | INFO: Blender create Mesh node Cube.12993
+21:05:28 | INFO: Blender create Mesh node Cube.124
+21:05:28 | INFO: Blender create Mesh node Plane.004
+21:05:29 | INFO: glTF import finished in 0.49s
+00:02.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer_chibi\hero_front.png'
+00:03.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer_chibi\hero_side.png'
+00:03.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 1, "failures": []}, "ratios": {"snarer_chibi": [1.0, 4.51, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+===== C:\hd adventure\bellmire-art\tools\art\minibossfit.py
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"snarer_chibi": [1.0, 4.51, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+ALLDONE

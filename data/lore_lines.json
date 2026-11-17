@@ -1402,7 +1402,17 @@
       "Rope tied off. Check the knot.",
       "Dust is thin by the door. Someone's been through.",
       "Keep the torch out of the draught.",
-      "Say the plan once. Then no talking."
+      "Say the plan once. Then no talking.",
+      "Boots on the stair. Not ours.",
+      "Smell of wet ash. Go slow.",
+      "Door was shut from this side.",
+      "Nobody talks above a whisper.",
+      "Lamp low. Eyes up.",
+      "Floor's dry here. That's not good.",
+      "Straw on the flags. Somebody slept.",
+      "Count heads at the door.",
+      "Cold air from the left. Keep right.",
+      "Tally the flasks before we go in."
     ],
     "lord": [
       "Hold together!",
@@ -1605,7 +1615,15 @@
       "Watch the arm. The arm, not the head.",
       "Count the swings. Then go in.",
       "Stand. That's all it asks of us.",
-      "Keep the line. Keep the line."
+      "Keep the line. Keep the line.",
+      "It's slow to turn. Use that.",
+      "One at a time on its left.",
+      "Hold. Wait for it to swing.",
+      "Nobody breaks the line.",
+      "It tires. We tire slower.",
+      "Keep the healer behind the post.",
+      "Hit the leg. Then the leg again.",
+      "Don't shout. Just stand."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1810,7 +1828,15 @@
       "Latch is too clean. Leave it.",
       "Pebbles on the step. Don't kick them.",
       "Flagstone's loose. Pass it on.",
-      "Wire at the ankle. Down low."
+      "Wire at the ankle. Down low.",
+      "Dust is stirred here. Stop.",
+      "Hinge has been oiled. Why?",
+      "Third stair is shallow. Skip it.",
+      "Draught from the floor. A vent.",
+      "Bone dust on the step. Back up.",
+      "Ceiling is lower here. Mind your head.",
+      "Plate clicks. Don't lean.",
+      "Twine across the door. Cut it from the side."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2010,7 +2036,14 @@
       "Teeth. Mind the teeth.",
       "Hold the lamp. My hand is shaking.",
       "Blood in my boot. Keep going.",
-      "Just a knock. I'll walk it off."
+      "Just a knock. I'll walk it off.",
+      "That one landed.",
+      "Bind it later. Walk now.",
+      "Ribs. Don't ask.",
+      "Pass the cloth.",
+      "It'll scab. Keep moving.",
+      "Not my sword arm. Good enough.",
+      "Wipe it off. Go."
     ],
     "drink": [
       "Bottoms up.",
@@ -2206,7 +2239,14 @@
       "Cork's tight. Hand it here.",
       "That'll do for the next door.",
       "Hold it. I'm not done.",
-      "Better. Keep walking."
+      "Better. Keep walking.",
+      "Bitter. Down it goes.",
+      "Another swallow and we move.",
+      "Smells of the herb shop. Drinking it anyway.",
+      "Tastes like pennies.",
+      "Cork back in. Save the rest.",
+      "One mouthful. No more.",
+      "Burns, then it steadies."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2406,7 +2446,14 @@
       "It wouldn't hold. Try again.",
       "Said it right. It didn't listen.",
       "Not enough breath for it.",
-      "Fizzled. Nothing more to say."
+      "Fizzled. Nothing more to say.",
+      "Lost the words halfway.",
+      "Cold hands. Cold spell.",
+      "Nothing came. Say it again.",
+      "Too quick. Too loose.",
+      "A spark. Then nothing.",
+      "Wrong breath. Wrong word.",
+      "It sat there. Did not go."
     ]
   },
   "misfire": [
@@ -11035,9 +11082,32 @@
           "Put it all down at last.",
           "The Loader is down. It was a heavy day."
         ]
+      },
+      "hurdleman": {
+        "arrive": [
+          "A hurdle goes up across the room.",
+          "Split grey hurdles. Stood out in the rain a long time.",
+          "A panel drops between you and the rest.",
+          "He pens the room like a meadow.",
+          "Stakes driven, and the line already cut.",
+          "A fence where there was no fence.",
+          "The Hurdleman has walked in. Somebody is on the wrong side.",
+          "Wattle and rope, and a man behind it."
+        ],
+        "fall": [
+          "The Hurdleman is down. The hurdles lie flat.",
+          "A hurdle just went down between you.",
+          "The Hurdleman is down. The line is one line again.",
+          "Stakes pulled. The pen is open.",
+          "The Hurdleman is down. Step over the wattle.",
+          "Rope slack, and the gap closed.",
+          "The Hurdleman is down. Nobody is penned.",
+          "Rotten wattle, split through."
+        ]
       }
     },
-    "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader."
+    "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
+    "_note_c87": "C-87: hurdleman (eighteenth miniboss, art lane) gets arrive and fall lines, eight each. act and broken omitted on purpose, same reason as C-86: the party-splitting panel is a mechanic not built. Key is the art lane's own: hurdleman."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",
@@ -11337,5 +11407,6 @@
       ]
     }
   },
-  "_note_c70": "C-70: backlog item 2 - descend, cleared, epitaphs and barks widened, additive. Placeholders as the existing lines: descend lines starting '%s %s' take hero and verb, 'Floor %d' takes the floor stood on only, never a total."
+  "_note_c70": "C-70: backlog item 2 - descend, cleared, epitaphs and barks widened, additive. Placeholders as the existing lines: descend lines starting '%s %s' take hero and verb, 'Floor %d' takes the floor stood on only, never a total.",
+  "_note_c87": "C-87: barks deepened an eighth time (enter, lord, trap, hurt, drink, misfire). Plain register, no floor counts. Additive only."
 }

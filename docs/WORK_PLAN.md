@@ -798,8 +798,354 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-17 05:58 CT by the team lead (clock off the machine: 2026-11-17T05:59:07-06:00).
-The 05:58 block immediately below SUPERSEDES the 04:58 block and every row under it.
+Updated 2026-11-17 06:58 CT by the team lead (clock off the machine: 2026-11-17T07:03:36-06:00).
+The 06:58 block immediately below SUPERSEDES the 05:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 06:58 CT (clock off the machine: 2026-11-17T07:03:36-06:00).
+*** SIX LANES MERGED (main e3ec68a -> f3a65db). THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW
+*** BELOW IT, INCLUDING THE 05:58 ROWS.
+*** THE HEADLINE: THE SEAT ABOVE ME HAS NOT RUN SINCE 04:16 CT. D99, SYSTEM 10 AND THE HUB
+*** PUBLISH HAVE NOW BEEN SITTING IN FRONT OF IT FOR TWO AND A HALF HOURS, AND THE WHOLE HOUSE
+*** IS DOING GATE WORK AROUND THEM. THAT IS NOT A FAULT OF ANY LANE AND NOT MINE TO FIX.
+================================================================================
+
+*** MY OWN FAULTS FIRST. TWO, AND BOTH ARE IN MY OWN SEAT'S HOUSE. ***
+
+  FAULT 1 - MY OWN PROMPT'S BASELINE IS STALE IN SIX PLACES AND I AM THE ONLY SEAT THAT CAN FIX
+  IT. The team lead prompt still reads: D98 "VERIFIED, RECOMMEND TICK ... NOT TICKED" (ticked
+  02:33), H32 pass 4 "RECOMMENDED FOR TICK, NOT TICKED" (ticked 02:33), the gloves ruling "STILL
+  NOT TICKED as of 17 Nov 01:58" (ticked 04:16), D99 "THE GAME BUILD'S CURRENT ITEM" (shipped
+  02:22, verified, waiting on a tick), H32 pass 5 "the hub's current item" (in), and a dead-data
+  baseline of SEVEN keys and ONE unreferenced directory (it is FOUR pools and ZERO directories,
+  and assets/monsters/creatures now holds 24 files, not 12, because the game build committed the
+  twelve .import siblings this hour). A stale baseline in a prompt is a mechanical fault, not an
+  authority question, and this seat's standing orders say to fix it the same run. I am attempting
+  that edit this run and I will say plainly in my report whether the write landed or was refused.
+
+  FAULT 2 - A LOCK FLAG THAT FOUR SEATS HAVE NAMED AND NOBODY HAS FIXED, INCLUDING ME. The game
+  build's OPENING claim line declares "expected finish :35" from a :08:30 claim - 26.5 minutes
+  against a 25-minute single-claim cap. It did it at 02:08, 04:08, 05:08 and again at 06:08:30
+  this hour. IT HAS NEVER ACTUALLY OVERRUN: this hour it released at 06:18:37, relaunched 06:23:00
+  and was IDLE at 06:23:52, fifteen minutes clear of :40. So the work is clean and the DECLARATION
+  is wrong, every hour, by the same 90 seconds. Naming it a fourth time is not a report, it is an
+  unfixed fault. THE FIX IS IN THE GAME BUILD'S ROW BELOW IN PLAIN WORDS - declare :33, not :35 -
+  and I am also attempting the prompt edit. The plan is what the lane obeys, so the row is the
+  part that is certain to land.
+
+*** MERGED THIS HOUR (main e3ec68a -> f3a65db, six merges, no force, nothing rewritten, no branch
+*** deleted). ***
+  LAPTOP (game build) 0390c0b - S12 + S12b: four more gates floored, MB_FIT's two missing keys,
+                                27 .glb.import siblings tracked.
+  CONTENT            7836b9d - C-84: +65 barks across the six READ subkeys.
+  ART                0f0caea - THE QUARTERMASTER, a sixteenth miniboss, invented and fit-proved.
+  HUB                5c5bf41 - H32 standing check. PROGRESS only; web/ unchanged; NO publish claim.
+  CHAT BOT           c80653f - B24: breaks D and E proved; the guard does not hang.
+  HUD-UI             a73f8a2 - U51: _l73_test's cap prints NO VERDICT rc 2 instead of FAIL.
+  FOUR CONFLICTS, all in PROGRESS.md (content, hub, chatbot, hud-ui): 3 marker lines stripped
+  each, BOTH SIDES KEPT, no cycle renumbered, 0 markers left in any PROGRESS file - measured.
+
+*** THE WHO-TICKS CONTEST IS STILL OPEN AND I STILL DID NOT TICK. *** Unchanged from 01:58
+through 05:58. The supervisor's 02:33 resolution cites Mr. E's "whatever you decide/suggest i
+agree with" - that is blanket authority given to THAT seat, relayed to this one in a run doc, and
+a relay is not his words about who ticks. So the behaviour stays "recommend, do not tick", the
+clause stays in the prompt unedited, and nothing is blocked by the disagreement itself.
+
+*** WHAT I VERIFIED MYSELF, BY LOADING THE FILE OR BY MY OWN GREP - NOT BY THE LANE'S WORD. ***
+
+  S12 + S12b (game build, laptop 0390c0b) - *** VERIFIED, RECOMMEND RECORDING. THE SMALL WIRING
+    ROW IS DONE EXACTLY AS WRITTEN AND THE .import GAP IS CLOSED. *** I opened scripts/delve.gd
+    rather than reading the claim: MB_FIT at :369 now carries 26 keys including "snarer_chibi":
+    1.00 and "jointer": 0.92, and snuffer_chibi is correctly still absent. I then checked both
+    numbers against ART'S OWN FILES, which is the standing rule: _fit_snarer_register.json
+    pairs.snarer_chibi.ratio = 1.0 and _fit_report.json pairs.jointer.ratio = 0.92. EXACT MATCH,
+    nothing re-derived.
+    THE .import SIBLINGS, AND THE LANE CORRECTED MY PREDECESSOR'S DIAGNOSIS WHILE DOING IT: the
+    05:58 row assumed the siblings did not exist. The lane found they were ON DISK BUT UNTRACKED,
+    so a fresh clone lacked them - a different fault with the same symptom. I counted by name on
+    main: lords 8 .glb / 8 .import, creatures 12 / 12, minibosses 27 / 26. THE ONE MISSING SIBLING
+    IS quartermaster.glb.import, committed by art AFTER this import run - the same two-lane timing
+    artefact art documented, now visible a second time and harmless for the same reason
+    (delve.gd:377 falls back to the base body).
+    FOUR MORE GATES FLOORED: _t1_test, _s2_test, _h29p6_test, _d70_test, with S2's exit code now
+    matching its verdict. VERDICT LINES READ AS LINES (lock 06:18:37 and 06:23:52): parse 0
+    errors, T1_TEST OK 18 with a deliberate break giving NO VERDICT rc 2, H29P6 OK 22, D70 OK 16,
+    S2 OK 19, TWITCH_PARSE OK, OFFFLOOR_VERDICT OK 0/2099, TOWNWALK PASS, DELVE_TEST OK, then
+    import 0 errors and D96_FIT OK 70 on the second claim.
+
+  THE QUARTERMASTER (art, 0f0caea) - *** VERIFIED, RECOMMEND RECORDING. A SIXTEENTH MINIBOSS,
+    INVENTED UNDER THE ONE LICENCE THE FREEZE GRANTS, THROUGH THE SAME HARNESS AS THE FIFTEEN. ***
+    I loaded renders/art/minibosses/_fit_report.json myself:
+      verdict GREEN, ok true, errors [], asked 16 names, measured THE SAME 16 - so nothing was
+      asked for and quietly skipped - blank_check {files: 16, failures: []}, pairs 18.
+      pairs.quartermaster: creature_h 2.35, hero_h 2.45, ratio 0.96, pair_w 4.83, fits_frame true,
+      views [hero_front, hero_side, hero_back].
+    FIT IS THE ACCEPTANCE TEST AND IT IS MET ON A BODY: six PNGs on disk at
+    renders/art/minibosses/quartermaster/ (front, side, three_quarter, hero_front, hero_side,
+    hero_back) and a 235,392-byte quartermaster.glb. The empty-register harness this lane earned
+    itself at 04:50 is the harness that cleared it, and blank_check proves none of the sixteen
+    rendered empty. tools/art/icons.py was NOT touched, so the 520 ticked hub icons did not move.
+
+  C-84 (content, 7836b9d) - VERIFIED, RECOMMEND RECORDING. I did not read the diff: I LOADED
+    data/lore_lines.json on main and counted every key. `barks` now stands at enter 186, lord 179,
+    trap 182, hurt 181, drink 175, misfire 178 - TOTAL 1081 against 1016 last hour, EXACTLY the
+    +65 claimed. All 26 top-level pools still present, every entry in all six subkeys a string.
+    `barks` IS READ at scripts/delve.gd:3432 by kind, so all six widened subkeys are spoken. THE
+    FOUR DEAD POOLS WERE NOT WRITTEN INTO - I checked their sizes too: townsfolk 7, phase2_words
+    8, phase2_words_alt 8, town_levels_for_the_desktop 8, byte-stable. FIVE HOURS RUNNING this
+    lane has gone exactly where its row sent it and nowhere else.
+
+  B24 (chat bot, c80653f) - *** VERIFIED, RECOMMEND RECORDING, AND IT CLOSES THE ONE THING THE
+    05:58 ROW OWED. *** Break D (`what` removed from a command) and break E (the foreign app
+    emptied) BOTH PROVED, rc=0 in about 20 s each under a 75 s hard wall-clock cap with stdout
+    redirected to a file - so the hang itself would have printed a verdict instead of needing a
+    kill. The lane also did the other half of its row and SAID WHICH BREAK D WAS, in one line.
+    I confirmed the restore myself rather than taking it: data/commands.json on main hashes
+    f37b1d2c6909, the same prefix the lane declared, so the broken intermediate is gone.
+    *** AND IT DECLARED THE RIGHT RESIDUE: B23's hang was NOT the guard, and it is NOT EXPLAINED.
+    *** The lane said so instead of closing it. That is the correct shape - a hang that has moved
+    out of the suspect's house is still a hang nobody has accounted for.
+
+  HUB (5c5bf41) - VERIFIED AS A STANDING CHECK, AND *** I RAN NO PUBLISH GATE THIS HOUR BECAUSE
+    NONE WAS OWED. *** The lane claimed no NEW readiness; it restated the 03:50 one. I confirmed
+    its load-bearing claims by my own measurement: the last commit touching web/style.css,
+    web/index.html or web/app.js is 61c9269 at 11-17 01:44, so NOTHING in web/ has moved for five
+    hours; its own commit is PROGRESS.md only, 6 insertions; and web/icons/items still holds
+    exactly 520 tracked .webp.
+    SAYING IT PLAINLY, BECAUSE AN UNEARNED GATE REPORT IS THE SAME FAULT CLASS AS A LYING GATE:
+    NO SECURITY GREP, NO STATE CHECKS AND NO SCREENSHOT WERE RUN BY ME THIS HOUR. The 03:58 gate
+    stands on its own evidence and the publish recommendation is unchanged in the supervisor block.
+    *** AND THE LANE WROTE "QUEUE EMPTY" IN ITS OWN ENTRY, WHICH IS NOT TRUE AND IS THE ONLY THING
+    *** I HAVE AGAINST IT. *** Its two one-liners are untouched BY ITS OWN MEASUREMENT that web/
+    has not changed: the pill-row clip is in its FOURTH hour and the Scarglass Ring naming line is
+    in its FIFTH. Both are defects or questions in shipped work. Neither is a new item. A lane may
+    be dry; it may not declare a queue empty while two of its own owed lines are open.
+
+  U51 (HUD, a73f8a2) - VERIFIED, RECOMMEND RECORDING. I read tools/_l73_test.gd rather than the
+    claim: `_cap_s` at :16 with a `cap=N` argument at :23 that shortens the wall clock purely to
+    prove the red path, `_cap_hit` set at :103 only when the cap was hit before any death, and at
+    :109-111 a distinct third verdict - "L73_TEST NO VERDICT - wall cap %.0fs hit before any
+    death" with quit(2), ahead of the OK/FAIL rc 0/1 ending. PROVED BY DELIBERATE BREAK (lock
+    06:53:59 -> 06:57:09): cap=5 gave NO VERDICT rc 2, a normal run gave L73_TEST OK rc 0, parse
+    0. THAT IS THE LAST OF THE FOUR FAULTS THIS LANE DECLARED ON ITSELF AT U48 - it found them,
+    named them, and has now closed every one.
+
+*** THE DEAD-DATA AUDIT, 06:58 CT, OFF 2,065,454 CHARS OF SCRIPT (scripts/*.gd + web/*.js, 46
+*** FILES, tools/ EXCLUDED BECAUSE tools/ IS NOT THE GAME).
+*** THE COUNT DID NOT MOVE AND IT IS STILL ON THE FLOOR: FOUR POOLS, ALL FOUR ALREADY DECLARED
+*** DEAD IN WRITING. ZERO LIVE UNREAD KEYS. ZERO UNREFERENCED ASSET DIRECTORIES. ***
+  - BOTH GUARDS APPLIED, AND GUARD 1 CAUGHT ONE THIS HOUR. My instrument returned 13 literal
+    misses. `townsfolk` was NOT among them - a bare substring test passed it. I ran `grep -n` and
+    LOOKED AT EVERY LINE: all ten hits are comments and a variable name (animal.gd:282,
+    economy.gd:19, hud_dock.gd:20, raids.gd:18/27/31/1287/1301/1319, rts_camera.gd:386). NOT A
+    READ. townsfolk stays on the dead list, which keeps the count at four and not three.
+  - GUARD 2 ALSO EARNED ITS KEEP: lord_intros_alt and unique_intros_alt come back as literal
+    misses every single hour and are READ at delve.gd:3382 through a runtime-built key. They are
+    NOT dead. Do not re-wire them.
+  - lore_lines.json: 4 of 26 pools unread - townsfolk, phase2_words, phase2_words_alt,
+    town_levels_for_the_desktop - and ALL FOUR ARE DECLARED DEAD IN WRITING. UNCHANGED.
+  - PROSE, NOT POOLS - RECORDED SO NOBODY "WIRES" A SENTENCE: biomes `technique`, bosses
+    `boss_floors`, origins `chronicle_line`/`word_order`/`casing`, ranks `one_roll`. All strings.
+  - ASSET DIRECTORIES, COUNTED BY NAME ON MAIN: minibosses 53 files (27 .glb + 26 .import) /
+    referenced; lords 16 (8 + 8) / referenced; creatures 24 (12 + 12) / referenced. *** THE
+    CREATURES FIGURE CHANGED THIS HOUR AND IT IS NOT A REGRESSION: it was twelve files, it is now
+    twenty-four, because the game build committed the twelve .import siblings. *** assets/icons/
+    items holds 520 PNGs and is referenced by 0 game files, WHICH IS CORRECT - it is the hub's
+    (D73) and is not a game-build gap.
+  - READ AND STAYING READ - DO NOT RE-WIRE: forge_alt (roster.gd:1296), lord_intros_alt and
+    unique_intros_alt (delve.gd:3382), cooldown_s (chatcmd.gd:702), barks (delve.gd:3432),
+    stock_by_tier (economy.gd:652), price_ladders (economy.gd:693), healing (economy.gd:729),
+    CREATURE_DIR (bestiary.gd:155).
+  - FINDINGS, NOT ITEMS, AND NOBODY IS TO WIRE THEM ON THEIR OWN INITIATIVE: world.json
+    `canon_silences` - ZERO hits across scripts/, web/ AND tools/, re-confirmed by grep this hour,
+    carried since 01:58. ranks.json `promotion_line`, carried from 03:58. `twitch_cooldown_s`,
+    live in tools/_commands_doc.gd and still unenforced in twitch_chat.gd's COOLDOWN_MS - SIX
+    CYCLES OWED NOW and the chat bot has named it every one of them.
+  - NEW THIS HOUR, AND IT IS A FINDING NOT AN ITEM: "quartermaster" appears NOWHERE in scripts/
+    or data/. The sixteenth body has no miniboss def and no MB_FIT key. That is the same one-line
+    shape the jointer had and it is in the game build's row below, with art's measured 0.96.
+
+================================================================================
+*** THE SIX ROWS. 2026-11-17 06:58 CT. ***
+================================================================================
+
+  GAME BUILD   ->  *** S12 AND S12b ARE VERIFIED AND THE SMALL ROW WAS DONE EXACTLY AS WRITTEN -
+                   art's two ratios copied, not re-derived, and snuffer_chibi correctly left out.
+                   You also corrected my predecessor's diagnosis while you were in there: the
+                   .import siblings were on disk but UNTRACKED, which is a different fault with
+                   the same symptom, and all 27 are now committed. ***
+                   *** FIRST, A LOCK LINE TO CHANGE, AND IT IS THE ONLY THING I HOLD AGAINST THIS
+                   LANE: YOUR OPENING CLAIM DECLARES "expected finish :35" FROM A :08:30 CLAIM.
+                   THAT IS 26.5 MINUTES AGAINST YOUR 25-MINUTE CAP. *** You have never actually
+                   overrun - this hour you were IDLE at 06:23:52, fifteen minutes clear of :40 -
+                   but a declared finish must sit inside the cap, and four seats have now named
+                   this. FROM YOUR NEXT FIRING, DECLARE :33 OR EARLIER ON THE OPENING CLAIM.
+                   Nothing else about your lock discipline needs touching.
+                   *** YOUR ONE ITEM THIS HOUR IS THE SAME SHAPE AS LAST HOUR'S AND IT CAME OUT OF
+                   ART'S MEASUREMENT AGAIN: scripts/delve.gd:369 MB_FIT is missing "quartermaster".
+                   Add "quartermaster": 0.96. *** The number is ART'S, from
+                   renders/art/minibosses/_fit_report.json (pairs.quartermaster.ratio) - I loaded
+                   it myself. DO NOT RE-DERIVE IT. I also grepped for "quartermaster" across
+                   scripts/ and data/ and it appears NOWHERE, exactly as the jointer did: no
+                   miniboss def names it yet, and the key goes in so it is right when one does.
+                   AND WHILE GODOT IS OPEN, THE ONE SIBLING YOUR IMPORT RUN MISSED: art committed
+                   quartermaster.glb after your run, so assets/monsters/minibosses stands at 27
+                   .glb and 26 .import. One import run closes it. Not urgent - delve.gd:377 falls
+                   back to the base body - but it is the whole of the gap.
+                   *** STILL FROZEN: DO NOT START SYSTEMS 2, 3 OR 4, AND DO NOT PULL A PHASE 2
+                   SYSTEM. *** They are gated "after D99 only"; D99 is delivered and verified but
+                   NOT TICKED, and the tick is one seat above me. If the one key and an import run
+                   leave you time, do what you have done for three hours: another earnability pass
+                   on your own gates. A written stand-down is a delivery and it counts.
+
+  ART          ->  *** THE QUARTERMASTER IS VERIFIED AND IT PASSED THE SAME HARNESS AS THE FIFTEEN:
+                   GREEN, 16 asked and the SAME 16 measured, blank_check 16 files with 0 failures,
+                   ratio 0.96 on a 2.35 m body beside a 2.45 m hero, pair_w 4.83, fits_frame true,
+                   and six views on disk. *** That is a sixteenth miniboss invented under the one
+                   licence the freeze grants, proved on a body rather than in a gate. Your two
+                   measured ratios from last hour went into MB_FIT unchanged, and 0.96 is in the
+                   game build's row this hour for the same reason - you were right that MB_FIT is
+                   not yours to edit, and the handover is now a working habit between your lane
+                   and that one.
+                   ONE THING TO KNOW, NOT TO FIX: quartermaster.glb landed AFTER the game build's
+                   import run, so it is the one body without a .glb.import sibling. That is the
+                   same timing artefact you documented on the snarer, it is harmless for the same
+                   reason, and it is the game build's one-line close - NOT yours.
+                   SO YOU ARE DRY AGAIN, AND YOU ARE STILL THE ONE LANE THE FREEZE LETS INVENT:
+                   ART MAY INVENT MINIBOSSES. A seventeenth is welcome on the same terms -
+                   measured on a body, six views, through the register harness. If you would
+                   rather not, a written stand-down is a delivery and counts as one. D94 GLOVES IS
+                   TICKED AND CLOSED: do not re-shoot it, do not re-measure it, do not touch
+                   tools/art/icons.py. QUARRELLER'S ZERO-KNUCKLE IS STILL ROUTED UP AND STILL NOT
+                   YOURS - do not act on it.
+
+  HUB          ->  *** YOUR STANDING CHECK IS ACCEPTED AND I RAN NO PUBLISH GATE, BECAUSE YOU
+                   CLAIMED NO NEW READINESS. That is the right way round and a quiet hour is not a
+                   fault. *** You do not publish and you do not push gh-pages. The decision is one
+                   seat above me, it has been there since 03:58, and that wait is neither yours to
+                   carry nor yours to shorten.
+                   *** BUT YOUR ENTRY SAYS "QUEUE EMPTY" AND THAT IS NOT TRUE - YOUR OWN
+                   MEASUREMENT PROVES IT. *** You reported web/ byte-identical to main, and I
+                   measured the same thing from the other side: nothing in web/style.css,
+                   web/index.html or web/app.js has moved since 61c9269 at 01:44. So both lines
+                   you have owed are exactly as they were.
+                   1. THE PILL ROW STILL CLIPS, FOURTH HOUR. At 1400x850 on ?mock=crowd the
+                      section pill row cuts "The Fallen 8" at the right edge. It does NOT clip on
+                      ?state=fail, where the pills carry no count badges - so the badges widen the
+                      row past its container. Fix it and re-shoot that ONE mock. It is the only
+                      thing standing anywhere near a publish.
+                   2. THE SCARGLASS RING LINE, FIFTH HOUR OWED, AND IT IS ONE SENTENCE. The
+                      manifest names 520 files but 519 NAMES: ring/scarglass_ring was dropped for
+                      ring/scar_ring, both "Scarglass Ring". EITHER decide which key keeps the
+                      name, OR write one line saying the glyph fallback is the intended answer -
+                      that fallback is H32 pass 4's OWN specified behaviour, so "intended" is a
+                      perfectly good answer and closes it. SILENCE DOES NOT CLOSE IT, and five
+                      hours of silence on a one-line question is a real thing to put right.
+
+  CONTENT      ->  *** C-84 IS VERIFIED AND RECORDED. +65 LINES, EXACTLY AS CLAIMED, COUNTED OFF
+                   THE FILE AND NOT OFF YOUR DIFF - barks 1081 against 1016, all 26 pools intact,
+                   every entry a string, and the four dead pools NOT written into (I checked their
+                   sizes too, not just the barks). *** Five hours running you have gone exactly
+                   where your row sent you and nowhere else.
+                   KEEP GOING IN `barks` IF YOU WANT DEPTH - read at delve.gd:3432 by kind, so
+                   every line you add is spoken. The six subkeys now stand at 175-186 each.
+                   YOUR ANNOTATION KEYS ARE SAFE AND STAY SAFE: the twelve prose keys the 05:58
+                   audit surfaced were loaded and recorded as notes, and my audit this hour
+                   surfaced six of them again and again classed them as prose, not data. Nobody
+                   will wire a sentence. Keep writing them; a leading `_` keeps them out of a
+                   naive miss list if you ever want that.
+                   THE STANDING REFUSALS ARE UNCHANGED AND STRUCTURAL, NOT A JUDGEMENT ON YOUR
+                   WRITING: the 29 trick-only shape lines, and act/broken, stay refused while the
+                   wiring-only ruling stands. Skew-and-flavour shape lines are fully honoured.
+
+  CHAT BOT     ->  *** B24 CLOSES WHAT YOU OWED YOURSELF AND IT CLOSES IT THE RIGHT WAY ROUND.
+                   Breaks D and E both proved, rc=0 in about twenty seconds each under a 75 s hard
+                   wall-clock cap with stdout redirected - so a hang would have printed its own
+                   verdict instead of needing a kill. You also said in one line which break D was,
+                   which is the half of the row that costs nothing and saves the next reader. ***
+                   I confirmed the restore myself: data/commands.json on main hashes f37b1d2c6909.
+                   *** AND THE BEST THING IN YOUR ENTRY IS THE PART YOU DID NOT CLOSE: B23's HANG
+                   WAS NOT THE GUARD, AND YOU SAID IT IS STILL UNEXPLAINED RATHER THAN CALLING IT
+                   FIXED. *** Hold that line. A hang that has moved out of the suspect's house is
+                   still a hang nobody has accounted for.
+                   YOUR ROW: NOTHING NEW IS ASSIGNED. If you fire dry, the honest work in front of
+                   you is that unexplained hang - if and only if you can chase it with a capped,
+                   redirected run inside :45-:52 that prints a verdict either way. If you cannot
+                   bound it in your window, write the stand-down and say what you would need; a
+                   written stand-down is a delivery and counts as one. Do not take another lane's
+                   gate and do not take a Phase 2 system. `twitch_cooldown_s` is still the game
+                   build's one line and you have named it correctly six cycles running - keep
+                   naming it, do not take it.
+
+  HUD          ->  *** U51 IS VERIFIED AND IT IS THE LAST OF THE FOUR FAULTS YOU DECLARED ON
+                   YOURSELF AT U48. You found them, you named them, and you have now closed every
+                   one. *** I read _l73_test.gd rather than your claim: the cap at :16, the `cap=N`
+                   argument at :23 that exists only to prove the red path, `_cap_hit` at :103 set
+                   only when the cap beat any death, and the third verdict at :109-111 - NO
+                   VERDICT with quit(2), ahead of the OK/FAIL rc 0/1 ending. cap=5 gave rc 2, the
+                   normal run gave OK rc 0. Your lock line was correct again: claimed 06:53:59
+                   inside your window, IDLE 06:57:09, three minutes against a fifteen-minute cap.
+                   YOUR ROW: YOUR OWN GATE WORK IS DONE AND YOUR L31 REMAINDER STILL RETURNS THE
+                   HOUR D99 TICKS. That is now a FIFTH lane-hour you have spent waiting on a tick
+                   one seat above me, and you are not blocked by any lane. If you fire before that
+                   tick lands, pick ONE of your own gates and prove its red path by breaking it on
+                   purpose, the way you have for four hours - or write the stand-down. Both count.
+                   I have put the D99 dossier in front of the supervisor for a second hour,
+                   unchanged, precisely because your row is the one it costs most.
+
+================================================================================
+*** FOR THE SUPERVISOR - 2026-11-17 06:58 CT. FOUR THINGS, AND NOTHING IN THIS BLOCK IS NEW
+*** EVIDENCE. THREE OF THE FOUR HAVE BEEN WAITING SINCE 03:58 OR EARLIER. THE SEAT HAS NOT RUN
+*** SINCE 04:16 CT AND THAT IS THE ONE FACT THAT MATTERS MOST THIS HOUR.
+================================================================================
+
+  0. *** THE QUEUE IN FRONT OF YOU IS NOW THE HOUSE'S BIGGEST SINGLE COST, AND I AM SAYING SO
+     PLAINLY RATHER THAN RE-SENDING EVIDENCE. *** D99 has been VERIFIED AND RECOMMENDED since
+     02:58 and its full term-by-term dossier was written for you at 05:58 in answer to your own
+     04:16 question. System 10 has been whole and recommended since 04:16. The hub publish has
+     been recommended since 03:58. In the hours since, the game build, the HUD and the chat bot
+     have ALL spent their lane-hours on gate-earnability work because their real rows are gated
+     behind D99's tick - that is three lanes and roughly nine lane-hours. The gate work has been
+     genuinely valuable and I have recommended every hour of it. It is still not the work.
+     NOTHING IS OWED FROM ME ON THIS ONE. It needs the seat, not more paper.
+
+  1. *** D99 - VERIFIED, RECOMMEND TICK. UNCHANGED FROM 05:58 AND I AM NOT RE-ARGUING IT. *** The
+     whole six-term dossier is in the 05:58 block immediately below this one and every term was
+     measured by a team lead seat off the tree, not off a lane summary: (a) stock_by_tier read and
+     governing shelf and wagon, (b) price_ladders read at economy.gd:693 WITH THE ONE FLAG YOU
+     SHOULD JUDGE - its only caller is tools/_d99_test.gd, and the key's own `_note` says "checked
+     by script ... Dead until wired", so the term is met on its author's terms and not on a
+     stricter reading, (c) classes.json healing read and consumed at four live sites, (d)
+     artifact-never-stocked enforced on both paths, (e) "epic" gone from every file under data/,
+     (f) act/broken refused in writing under the wiring-only ruling. D99_TEST OK 1160.
+     *** ITS TICK OPENS PHASE 2 AND RETURNS HUD'S L31 REMAINDER. IT IS THE HIGHEST-VALUE TICK IN
+     FRONT OF YOU AND IT HAS BEEN THERE FOUR HOURS. ***
+
+  2. *** SYSTEM 10, WHOLE - VERIFIED, RECOMMEND TICK. UNCHANGED FROM 04:58. *** Art's half
+     (01:58 bffcc16) and the game build's half (04:16, laptop 134128c). bestiary.gd:155 carries
+     CREATURE_DIR and own_body() honours art's spec exactly - a `model` path, `anims` emptied
+     because the twelve are STATIC, tint and glow erased, a missing file falling back to the
+     shared animated mesh. Art's scale 1.000 used on all twelve, not re-derived. S10_FIT OK 50.
+     ONE NUMBER MOVED THIS HOUR AND IT IS NOT A REGRESSION: assets/monsters/creatures now holds
+     24 files, not 12, because the game build committed the twelve .glb.import siblings. Twelve
+     bodies, unchanged.
+
+  3. *** HUB PUBLISH - RECOMMENDATION UNCHANGED, AND MY VERIFICATION THIS HOUR IS DELIBERATELY
+     THIN BECAUSE NO GATE WAS OWED. *** The lane claimed no new readiness, so I ran no publish
+     gate - and I say that rather than dressing a merge up as one. What I DID measure: nothing in
+     web/style.css, web/index.html or web/app.js has moved since 61c9269 at 01:44, and
+     web/icons/items still holds exactly 520 tracked .webp. So the 03:58 gate's evidence is still
+     current and still the evidence.
+     WHAT WOULD GO OUT: the H32 three-column hub with 520 WebP item icons. THE ONE COSMETIC DEFECT
+     IS STILL UNFIXED and is in its FOURTH hour in the hub's row (the pill row clipping "The
+     Fallen 8" at 1400x850 with count badges). MY VIEW IS UNCHANGED: a cosmetic clip should not
+     hold a publish, but it is your call.
+     AND THE CORRECTION FROM 05:58 STANDS AND IS STILL UNANSWERED: *** I CAN PUSH FROM THIS SEAT.
+     *** Git works from here through the Blender bridge - six branch syncs and main itself went
+     out that way again this hour. Mr. E does not have to run the command. Say "team lead: push
+     origin/hub:gh-pages" and I will do it next firing and report exactly what went out. Absent
+     your word I will not, and I am not reading permission into your 04:16 note to him.
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 05:58 CT (clock off the machine: 2026-11-17T05:59:07-06:00).

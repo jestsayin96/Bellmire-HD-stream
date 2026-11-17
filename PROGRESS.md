@@ -8944,3 +8944,14 @@ Item: the 11:58 TAKE THIS NEXT HUD row (two small things, both answered).
 
 ## U57 - hardening my own gate: the harness now fails a BLANK FRAME (2026-11-17 13:55 CT)
 Plan block 12:58 gave HUD no item and said "your own choice, out of what you shipped". Two of my instruments passed a frame a human would fail (blank grey frame at U55, collided row at U56). The row case was fixed at U56; this closes the other: tools/_u55_hue.gd gains _check_frame(), sampling a 48x27 grid of the saved PNG and failing if fewer than 8 distinct colours or under 5% of samples differ from the dominant one. Real frames: 17/23/14 distinct, 8.1/12.5/16.2% non-dominant. RED PATH PROVED: threshold forced to 99% -> three FAIL lines, U56_HUE FAIL 3; restored to 5%, parse 0 errors, U56_HUE OK. Looked at u55_125.png: pips and ink as at U56. No owned .gd file changed. Not covered: a Hand-me-down boots row still ellipsizes (intended, gated at U56). Note: a chat-bot IDLE stamp at 13:56:40 was written while the machine clock read 13:53 - a future stamp, flagged for the supervisor.
+
+
+## U58 (HUD, 2026-11-17 ~14:55 CT) - the whole theme's text colours, measured against their own surface
+Item: my own choice (13:58 row gave HUD no item; the candidate named was what U55 still takes on trust).
+tools/_u58_contrast.gd walks 14 text-on-surface pairs in UiTheme at >=4.5:1, parchment flattened over BLACK and
+plate over WHITE (worst case). First run: 4 FAIL - VIEWER 3.72, TEAL_ON_PARCH 3.57, GOLD_ON_PARCH 4.26, GOOD 4.45.
+On SOLID parchment VIEWER (4.33) and TEAL_ON_PARCH (4.15) were real fails, not just stress-case artefacts.
+Fixed in ui_theme.gd by scaling down only: VIEWER .47/.30/.02, TEAL_ON_PARCH .05/.38/.38, GOLD_ON_PARCH .47/.30/.02,
+GOOD .10/.39/.16. Re-run: U58_CONTRAST OK 14 pairs; U56_HUE OK windowed; parse 0 errors. Looked at u55_100.png.
+STILL ON TRUST: the pair list is hand-written - a new colour added to UiTheme is not checked until someone lists it;
+and alpha panels over a real world frame are not sampled, only the two extremes.

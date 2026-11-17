@@ -14,6 +14,8 @@ var _d: Delve
 var _f := 0
 var _fails: Array = []
 var _checks := 0
+## S12: measured 19 checks. Fewer is a FAIL by floor; the exit code now matches the verdict.
+const MIN_CHECKS := 19
 var _lord_v := ""
 const FILES := ["res://scripts/monster.gd", "res://scripts/bestiary.gd", "res://scripts/delve.gd", "res://scripts/chatcmd.gd", "res://scripts/roster.gd"]
 const IDS := ["2901", "2902", "2903", "2904"]
@@ -124,7 +126,10 @@ func _process(_dt: float) -> bool:
 	if _f > 20 and (_f == 2400 or (_d and _f > 400 and _d.lord_fighting() == null and _d.dun and _d.dun.lord and not is_instance_valid(_d.dun.lord))):
 		Engine.time_scale = 1.0
 		_live_checks()
+		if _checks < MIN_CHECKS:
+			_fails.append("check floor: %d checks is under %d" % [_checks, MIN_CHECKS])
 		print("S2_TEST %s (%d checks, %d failed)" % ["OK" if _fails.is_empty() else "FAIL", _checks, _fails.size()])
+		quit(0 if _fails.is_empty() else 1)
 		return true
 	return false
 

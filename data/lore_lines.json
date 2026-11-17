@@ -1369,7 +1369,18 @@
       "Last one in latches it.",
       "Mind the drip on the left.",
       "Mud on the third stair. Slick.",
-      "Tie off the pack. It rattles."
+      "Tie off the pack. It rattles.",
+      "Boots dry? Won't be for long.",
+      "Hang the lamp where I can see it.",
+      "Cold in here. Good. Stays fresh.",
+      "Check the rope. Then check it again.",
+      "Stay in the file. No wandering.",
+      "Breathe out. Go in.",
+      "Somebody wiped the dust. Recently.",
+      "Count heads at the first landing.",
+      "Slow down. The stair is uneven.",
+      "Chalk on the wall. Not ours.",
+      "Quiet now. Sound carries down."
     ],
     "lord": [
       "Hold together!",
@@ -1540,7 +1551,17 @@
       "Stay off its left side.",
       "It's only one thing. We're five.",
       "Rest your arm between blows.",
-      "Short cuts. Step back."
+      "Short cuts. Step back.",
+      "Keep your feet under you.",
+      "Don't look at the eyes. Look at the hands.",
+      "It's slow on the turn. Use that.",
+      "Shields up. Wait for the swing.",
+      "Don't chase it. Let it come.",
+      "Pull back and breathe.",
+      "One more good hit.",
+      "It's tiring. So are we. Last longer.",
+      "Cover the healer.",
+      "Nobody goes alone. Nobody."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1713,7 +1734,18 @@
       "I'll go first. Mind my rope.",
       "That's a pit. Smells of it.",
       "A nail head, shining. New.",
-      "Mark it. Step wide."
+      "Mark it. Step wide.",
+      "The tile sits low. Don't.",
+      "Dust's been brushed away there.",
+      "Feel the draught? Vent in the wall.",
+      "Slow. Test it with the pole.",
+      "Half a bolt in the post. Somebody missed.",
+      "Hear that click? Stand still.",
+      "Pitch smell. Be careful.",
+      "Stone's too clean. Walk round.",
+      "Hold the lamp lower. Look at the seams.",
+      "Two stones don't match. Mind them.",
+      "Spent a dart. Found it in my boot."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -1886,7 +1918,17 @@
       "Pass the rag. The dry one.",
       "Tell me when it's over.",
       "I'm up. Give me a second.",
-      "Hold the wound shut. There."
+      "Hold the wound shut. There.",
+      "Leg's gone stiff. I'll manage.",
+      "Bind it. Keep moving.",
+      "Just a scratch. A deep one.",
+      "Don't fuss. Get the lamp.",
+      "Cold hands on it, please.",
+      "Breathe. In. Out. Fine.",
+      "Spit and thread. It'll hold.",
+      "Left arm's no good. Right will do.",
+      "Sit me against the wall a moment.",
+      "Count to ten, then we go."
     ],
     "drink": [
       "Bottoms up.",
@@ -2051,7 +2093,19 @@
       "Cork back in. Keep it.",
       "The ache's easing.",
       "Cold from the cellar. Welcome.",
-      "Mother brewed worse."
+      "Mother brewed worse.",
+      "Thin. But warm.",
+      "One swallow. Save the rest.",
+      "Bitter. That's how you know.",
+      "Good brewer, that one.",
+      "Wipe the lip. Pass it back.",
+      "Smells like the apothecary's back room.",
+      "Steadier already.",
+      "Down in one. Go.",
+      "Tastes of herbs and rust.",
+      "That's a night's sleep in a flask.",
+      "Warm in the belly. Warm in the hands.",
+      "Cheers to whoever paid for it."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2220,7 +2274,18 @@
       "That's no good. Sorry.",
       "Words came, power didn't.",
       "Too tired for it.",
-      "A spark. Then nothing at all."
+      "A spark. Then nothing at all.",
+      "The words slipped.",
+      "Lost the thread of it.",
+      "Scar's itching. Nothing came.",
+      "Too fast. Slower next time.",
+      "Wrong breath. Try again.",
+      "The spell went somewhere. Not here.",
+      "Nothing. Not a spark.",
+      "My hand shook. That's all.",
+      "Again. Properly.",
+      "It's tired of me tonight.",
+      "I felt it start. Then it stopped."
     ]
   },
   "misfire": [

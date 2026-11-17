@@ -8215,6 +8215,27 @@ Godot closed, lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered
 reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
 touched. No secrets written anywhere.
 
+## D-cycle - S12 four more of my gates get a floor, and S2's exit code stops lying, 2026-11-17T06:16:00-06:00 (game build)
+- WHAT THE 04:58 ROW GAVE ME: queue empty, Systems 2/3/4 frozen until D99 ticks, defects in my own
+  shipped gates only. No newer TAKE THIS NEXT block on main at 06:08. S11 covered the commit battery
+  and the six fit gates; this pass took the four Twitch/shop/sound gates I made green most recently.
+- tools/_t1_test.gd: printed `T1_TEST OK` with NO check count and NO floor - a run that reached the
+  end line having asserted nothing read green. Now counts every check, floors at the measured 18, and
+  prints T1_TEST OK n / FAIL n of m / NO VERDICT with rc 0/1/2. PROVED BY A DELIBERATE BREAK: a copy
+  with the floor at 999 printed `T1_TEST NO VERDICT: 18 checks is under the floor of 999`, rc 2.
+  The copy was deleted.
+- tools/_s2_test.gd: returned `true` from _process on FAIL as well as OK, so the exit code was 0
+  whatever the verdict said. Now quit(0/1) to match, plus a floor at the measured 19.
+- tools/_h29p6_test.gd (floor 22) and tools/_d70_test.gd (floor 16): counts were printed but unfloored.
+  A short run now FAILs by floor instead of reading OK.
+- STILL FLOORLESS, NAMED, NOT FIXED THIS HOUR: roughly seventy older tools/_d*/_l*_test.gd gates from
+  before COORDINATION 15 print OK/FAIL with no check floor. None is in a commit battery; each gets a
+  floor the next time it is run for a reason. Not claimed clean.
+- Battery: parse 0 SCRIPT ERROR / 0 Parse Error; T1_TEST OK 18 checks; break NO VERDICT rc 2;
+  H29P6_TEST OK 22 checks; D70_TEST OK 16 checks, 0 failed; S2_TEST OK (19 checks, 0 failed);
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2099 samples (home); TOWNWALK in_solid=0/16881
+  raid_in_solid=0/6448 PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR.
+- No live Twitch test. Not ticked - the team lead ticks. Systems 2/3/4 NOT started.
 C-83 (2026-11-17 CT, clock 05:2x) - TAKE THIS NEXT row for CONTENT: barks deepened a fourth time (lore_lines.json only)
 - TAKE THIS NEXT (04:58 CT block) gave CONTENT: keep going in `barks` for depth; four dead pools and the 29 trick-only shape lines left alone. C-55 already done.
 - data/lore_lines.json `barks`: +71 lines. enter +16, lord +11, trap +11, hurt +12, drink +11, misfire +10. Counts now enter 175, lord 169, trap 171, hurt 171, drink 163, misfire 167. Plain register, no floor counts.
@@ -8305,9 +8326,93 @@ run. Godot killed (PID 11948), lock released IDLE. No Twitch of any kind: 0 bits
 or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as any account, no
 channel setting touched. The parse run joined #jestsayin96 as the game always does on boot and
 said nothing. No secrets written anywhere.
+- S12b, THE 05:58 ROW (landed on main mid-cycle, merged at 06:22): scripts/delve.gd MB_FIT gains
+  "snarer_chibi": 1.00 and "jointer": 0.92 - art's numbers copied from _fit_snarer_register.json
+  (pairs.snarer_chibi.ratio 1.0) and _fit_report.json (pairs.jointer.ratio 0.92), not re-derived.
+  snuffer_chibi left out as ordered. --headless --import wrote jointer.glb.import; the row's other
+  claim was half right - the .import siblings for 5 miniboss chibis, 12 creatures and 8 lords WERE
+  on disk but UNTRACKED in git, so a fresh clone lacked them. All 27 now committed.
+  Verdicts: import 0 errors, parse 0 SCRIPT ERROR / 0 Parse Error, D96_FIT OK 70 checks, 14
+  minibosses in their own bodies - snarer now stands in snarer_chibi.glb at 1.00/1.00 of the hero.
+  Jointer has no miniboss def that names it yet; the key is in place for when one does.
+- S12 CLOCK CORRECTION, MY FAULT: the two RUNNING relaunch lines I wrote this hour (06:16:00 and
+  06:23:00) and this cycle's header time were TYPED, not read off the machine. Machine stamps read the
+  same hour: first commit 06:18:37, IDLE 06:23:52. The 06:23:00 RUNNING line was therefore a future
+  stamp by about three minutes. The work behind both is unaffected; the lock was IDLE at 06:23:52.
+
+## C-84 (2026-11-17 CT, clock ~06:0x) - TAKE THIS NEXT row for CONTENT: barks deepened a fifth time (lore_lines.json only)
+- TAKE THIS NEXT (05:58 CT block) gave CONTENT: keep going in `barks` for depth (read at delve.gd:3432 by kind). Dead pools, the 29 trick-only shape lines and act/broken left alone.
+- data/lore_lines.json `barks`: +65 lines. enter +11, lord +10, trap +11, hurt +10, drink +12, misfire +11. Counts now enter 186, lord 179, trap 182, hurt 181, drink 175, misfire 178. Plain register, no floor counts. Case-insensitive duplicates dropped.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings.
+- CODE WIRING: none. The existing `barks` reader picks the new lines up.
 
 ## H32 hub standing check (2026-11-17 06:38 CT) - nothing new to build
 Fast-forwarded to origin/hub (54d5935), merged origin/main clean (d95391d). `git diff` of web/ and docs/HUB_SECURITY.md vs origin/main is EMPTY and across the ff was EMPTY: web/ is byte-identical to the looked-at build; no new screenshot (a picture of an unchanged build proves nothing new). Queue empty, passes 1-5 in.
 MEASURED: web/icons 2,434,146 bytes (unchanged from 05:40) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY.
 SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252, :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP default-src 'none' present. Live dot red --live #e5484d.
 Scratch (_h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose; delete refused on this machine. Not published.
+
+## B-cycle B24 - BREAK D DID NOT HANG, AND SAYING WHICH BREAK D WAS (chat bot, 2026-11-17 06:46-06:53 CT)
+
+The 05:58 TAKE THIS NEXT CHAT BOT row as written: re-run break D with a cap so the hang itself
+prints a verdict, and say plainly which break D was. Nothing else taken. Clock off the machine
+(2026-11-17T06:46:23-06:00), no Godot process alive, lock IDLE since the game build's 06:23:52
+line. Claimed 06:47:55, ONE battery of five short runs, nothing queued after it. `chatbot`
+fast-forwarded 3af8575 -> e3ec68a onto main (no conflicts).
+
+### WHICH BREAK D WAS - PLAINLY, SO NOBODY HAS TO INFER IT AGAIN
+**BREAK D = `what` removed from ONE command in data/commands.json.** The read it guards is
+`help_line():766`, where `c["what"]` sits as the DEFAULT of a `.get("short", ...)`, so GDScript
+evaluates it even when `short` is present: one command with no `what` breaks `!help <command>`.
+This run used `enlist` (first command in the file carrying a `what`).
+**BREAK E = a foreign app emptied of both `prefixes` and `exact`** (`fightoverlay`), guarding
+`foreign():863`, where an app naming nothing is a dead entry and that app's commands get answered.
+
+### THE MEASUREMENT: THE GUARD DOES NOT HANG, AND B23'S HANG WAS NOT THE GUARD
+Method, which is the part that changed: stdout redirected to a file per run and a HARD WALL-CLOCK
+CAP around the process, so a hang is killed BY THE HARNESS and the harness prints
+`B24 VERDICT: NO VERDICT - <tag> HUNG, killed at the <n>s wall-clock cap`. A kill can no longer
+take the evidence with it.
+  **BREAK D  PROVED** - rc=0, 20.6 s against a 75 s cap, not hung:
+      `COMMANDS_DATA NO WHAT: 1 command(s) carry no `what` - !help <command> breaks on them:
+      ["enlist"]` on push_error AND on printerr.
+  **BREAK E  PROVED** - rc=0, 20.4 s against a 75 s cap, not hung:
+      `COMMANDS_DATA FOREIGN APP EMPTY: 1 app(s) in `foreign` name nothing, so their commands are
+      answered: ["fightoverlay"]` on push_error AND on printerr.
+So all FIVE B23 guards are now proved on their break, not three. **The hang at 05:51 was NOT in
+the guard**: the same break, on the same data, exits cleanly in 20.6 s. What differed was the
+harness, not the code - B23 ran the break with no redirect and no cap under a closing window, and
+had nothing to read when it killed the process. The honest reading is that B23's hang is
+UNEXPLAINED and UNREPRODUCED, not that it is explained. It is not claimed as fixed; it is claimed
+as not-the-guard, which is all this run measured. No change was needed in any of my three files.
+
+### HEALTHY CONFIRM ON THE NEW MAIN e3ec68a
+  parse (300 frames)  rc=0, 21.0 s, **0 SCRIPT ERROR, 0 Parse Error, 0 COMMANDS_DATA lines** -
+                      no line is the healthy reading
+  L14_TEST            OK (22 checks)   rc=0
+  COMMANDS_DOC        OK wrote 27 commands, `docs/COMMANDS.md` byte-identical (`1fb9a166c3bf`,
+                      5771 bytes) - the no-op holds
+  `data/commands.json` restored from the in-run backup and re-hashed: `f37b1d2c6909`, 14753 bytes,
+  **byte-identical to B20/B21/B22/B23**. `git status` on my three files: clean, nothing changed.
+
+### OWED
+- THIS LANE: nothing. The row's one item is delivered and the queue is empty.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Unchanged, seven cycles on.
+- `tools/` owner: nothing. B23 flagged that `_l14_test.gd` might need a NO VERDICT cap if D turned
+  out to be a genuine hang. It did not, so that request is WITHDRAWN rather than left hanging.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+`.b24_run.log`, `.b24_commands.bak` and the five `.b24_*.out` captures written at the worktree root
+and ALL DELETED in the same run. Godot exited on its own every time - nothing killed, no process
+left alive. Lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered or redeemed, no
+reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
+touched. The parse runs joined #jestsayin96 as the game always does on boot and said nothing.
+No secrets written anywhere.
+
+## U51 (2026-11-17 06:58 CT) - HUD: _l73_test cap hit prints NO VERDICT, not FAIL (U48 fault 3), proved by deliberate break
+TAKE THIS NEXT gave HUD: the fault-3 remainder (_l73_test cap prints FAIL), one chunk inside :52-:07. Lock RUNNING 06:54, IDLE ~06:58 (~4 min, under the 15 cap).
+FIX (tools/_l73_test.gd, my lane's file): wall cap is now a variable (user arg cap=N); if the cap is hit and no death happened it prints "L73_TEST NO VERDICT - wall cap Ns hit before any death" and exits 2. A real death that then fails keeps FAIL (rc 1). Added the missing final token L73_TEST OK/FAIL and exit codes 0/1.
+PROOF (windowed 1920x1080): parse 0 errors. Normal run -> hold>=3s true, breath true, "L73_TEST OK" rc 0. Break cap=5 (before the death at ~11s) -> "NO VERDICT" rc 2. cap=15 (death happened at 10.9s) -> FAIL rc 1, correctly a verdict, not a cap artefact.
+NOT DONE: L31 status-icon remainder still waits on the D99 tick.
+NEEDED FROM MR. E: nothing.

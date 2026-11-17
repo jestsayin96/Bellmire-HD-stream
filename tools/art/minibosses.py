@@ -33,11 +33,28 @@ instrument, so the Drillmaster's gong is the brightest object in this file; the
 Scrapwright's plate is freshly torn and still bright on an ancient core; the
 Gaoler's iron is greased and old; the Snuffer has been down there longest.
 
-Raw vertex maths only (no bpy.ops, no bmesh.ops) - see lordlib. Original
-geometry: nothing here reads a third-party asset. Quaternius Bestiary / QAL is
-forbidden on this project, which is why these are generated and not bought.
+Raw vertex maths only (no bpy.ops, no bmesh.ops) - see lordlib - for the first
+fifteen: every one of those is original generated geometry.
+
+TWO LINES OF THIS DOCSTRING WERE STALE AND ARE CORRECTED HERE, 17 Nov 2026:
+  1. "nothing here reads a third-party asset" is no longer true, on purpose.
+     The Quartermaster (16) loads real spear and shield geometry out of
+     `assets/gear/` - the CC0 KayKit dungeon bits this repo already carries and
+     that gearmodels.py already uses for D95's named weapons, logged in
+     docs/art/ASSET_SOURCES.md. The standing rule is to USE WHAT IS ON DISK
+     before generating a new mesh, and a quartermaster handing out the same
+     spears the heroes carry is the case where that rule pays twice. It falls
+     back to procedural geometry if the file will not load, and the report says
+     which it used.
+  2. "Quaternius Bestiary / QAL is forbidden" - THAT BAN WAS STRUCK by Mr. E on
+     16 Nov 22:45 CT, who produced the actual licence: worldwide, royalty-free,
+     perpetual, commercial use permitted, no attribution required, the only
+     restriction being resale of the assets AS assets. Nothing in this file
+     uses it either way; the line is removed so no future run refuses work on
+     the strength of it.
 """
 import math
+import os
 
 from mathutils import Vector
 
@@ -4188,3 +4205,280 @@ def jointer():
 
 
 BUILDERS.update({"jointer": jointer})
+
+
+# =====================================================================
+# 16 THE QUARTERMASTER - the SECOND BARRACKS set piece, 17 Nov 2026.
+#
+# MEASURED, NOT REMEMBERED, before a vertex was written: floorgen.gd THEMES
+# carries fourteen themes; the miniboss roll in dungeon_hd.gd is weight 35 on
+# BARRACKS and WORKSHOP and 10-15 everywhere else. Workshop got its second body
+# last hour (the Jointer). BARRACKS STILL HAS EXACTLY ONE - the Drillmaster -
+# so the floor type most likely to show a viewer a set piece is still the floor
+# type that shows them the same one every time. This closes that.
+#
+#   QUARTERMASTER  it ARMS THE ROOM - it does not fight you and it does not
+#                  call anyone in. It hands out what is already here: every
+#                  ordinary creature on the floor takes a spear or a shield
+#                  off its sheaf and fights better until the sheaf is empty.
+#                  Empty the sheaf or kill the issuer; leave it alone and the
+#                  trash in the room stops being trash.
+#
+# NOT A SIXTEENTH COAT OF AN IDEA ALREADY BUILT. Checked against all fifteen:
+# the Drillmaster SUMMONS bodies that were not there; the Tallyman TAKES YOUR
+# gear and leaves; the Scrapwright armours ITSELF; the Cook heals the room.
+# This one UPGRADES WHAT IS ALREADY STANDING and arms nothing of its own.
+#
+# THE IDEA IS VISIBLE BEFORE THE FIGHT STARTS (the Scrapwright lesson): the
+# sheaf is a wide splayed FAN OF STRAIGHT SHAFTS over a low body, and one arm
+# is already out with a spear offered on the diagonal. You can see it is
+# handing something over from the doorway.
+#
+# SILHOUETTE COLLISIONS CHECKED AND AVOIDED, the same two the third set had to
+# clear plus two more:
+#   - a big disc reads as the Drillmaster's gong    -> no disc at all.
+#   - a long horizontal reads as the Porter's bar   -> the offered spear is a
+#     DIAGONAL across the body, never level.
+#   - the Snarer owns the only CURVES in the file   -> every shaft here is dead
+#     straight, and dense: a sheaf against his three thin bent saplings.
+#   - the Tallyman owns a spreader bar with things hung off it -> nothing hangs;
+#     the sheaf is ROOTED in a back quiver and splays UP.
+#
+# WEAR 0.50 - the one unused value left in the set (used: .15 .20 .25 .30 .35
+# .40 .45 .55 .60 .65 .70 .80 .85 .90 .95). Right for a barracks store in daily
+# use: the issued steel is kept bright, the canvas and timber are not.
+# =====================================================================
+
+CANON.update({
+    "quartermaster": ("The Quartermaster", 2.35, (0.64, 0.58, 0.46), (0.92, 0.84, 0.46),
+                      "barracks",
+                      "IT ARMS THE ROOM - everything else in here takes a weapon off its sheaf",
+                      0.50, "Something is handing out arms."),
+})
+ORDER = ORDER + ["quartermaster"]
+
+
+_PACK_CACHE = {}
+
+
+def _gear_mesh(stem):
+    """REAL GEOMETRY OFF A PACK ALREADY IN THE REPO, not another procedural
+    cone. `assets/gear/` is the CC0 KayKit dungeon-bits set that gearmodels.py
+    already uses for D95's named weapons and that ASSET_SOURCES.md already
+    logs - so the spears this thing hands out are the same spears the heroes
+    carry, which is the point of a quartermaster.
+
+    Returns (verts, faces) normalised to UNIT LENGTH about the grip, shaft
+    along +Z, or None when the file or the importer refuses. A missing pack
+    must never take a body out of the sheet - the caller falls back to
+    procedural geometry and says so in the report.
+    """
+    if stem in _PACK_CACHE:
+        return _PACK_CACHE[stem]
+    out = None
+    try:
+        import bpy  # only available inside Blender; the caller handles None
+        root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            os.pardir, os.pardir))
+        path = os.path.join(root, "assets", "gear", stem + ".gltf")
+        if os.path.isfile(path):
+            before = set(bpy.data.objects)
+            bpy.ops.import_scene.gltf(filepath=path)
+            new = [o for o in bpy.data.objects if o not in before]
+            # PASS 1 CAME BACK AT 12,470 FACES against a set that runs 842-2623,
+            # because eight pack spears and three pack shields carry their own
+            # tessellation. A collapse decimate on the IMPORT keeps the real
+            # silhouette and pays the set's budget. The modifier is applied by
+            # the evaluated depsgraph below, not baked into the pack file.
+            for ob in [o for o in new if o.type == 'MESH']:
+                if len(ob.data.polygons) > 120:
+                    m = ob.modifiers.new("dec", 'DECIMATE')
+                    m.decimate_type = 'COLLAPSE'
+                    m.ratio = max(0.18, 120.0 / len(ob.data.polygons))
+            verts, faces = [], []
+            dg = bpy.context.evaluated_depsgraph_get()
+            for ob in [o for o in new if o.type == 'MESH']:
+                obe = ob.evaluated_get(dg)
+                me = obe.to_mesh()
+                mw = obe.matrix_world
+                off = len(verts)
+                verts.extend([mw @ v.co for v in me.vertices])
+                for p in me.polygons:
+                    faces.append(tuple(i + off for i in p.vertices))
+                obe.to_mesh_clear()
+            for ob in new:
+                try:
+                    bpy.data.objects.remove(ob, do_unlink=True)
+                except Exception:
+                    pass
+            if verts and faces:
+                zs = [v.z for v in verts]
+                span = max(zs) - min(zs)
+                if span > 1e-6:
+                    k = 1.0 / span
+                    out = ([Vector((v.x * k, v.y * k, v.z * k)) for v in verts], faces)
+    except Exception:
+        out = None
+    _PACK_CACHE[stem] = out
+    return out
+
+
+def _lay(P, vf, slot, butt, direction, length):
+    """Carry a unit-length pack part to `butt`, pointed down `direction`, at
+    `length` metres. Z-up in, arbitrary axis out."""
+    from mathutils import Matrix
+    d = Vector(direction)
+    if d.length < 1e-6:
+        d = Vector((0.0, 0.0, 1.0))
+    d.normalize()
+    rot = Vector((0.0, 0.0, 1.0)).rotation_difference(d).to_matrix().to_4x4()
+    M = Matrix.Translation(Vector(butt)) @ rot @ Matrix.Diagonal(
+        Vector((length, length, length)).to_4d())
+    v, f = vf
+    P.raw(([M @ Vector(x) for x in v], f), slot)
+
+
+def _spear_proc(length):
+    """The fallback shaft, used only if the pack will not load. Said out loud
+    in the report rather than silently substituted."""
+    v, f = L.cone(0.018, 0.014, 0.80, 7)
+    verts = [Vector(x) for x in v]
+    faces = list(f)
+    hv, hf = L.cone(0.055, 0.0, 0.20, 7)
+    off = len(verts)
+    verts.extend([Vector((p[0], p[1], p[2] + 0.80)) for p in hv])
+    faces.extend([tuple(i + off for i in ff) for ff in hf])
+    zs = [v.z for v in verts]
+    k = 1.0 / max(1e-6, (max(zs) - min(zs)))
+    return ([Vector((p.x * k, p.y * k, p.z * k)) for p in verts], faces), False
+
+
+# --------------------- 16 THE QUARTERMASTER: a sheaf, and one arm already out
+def quartermaster():
+    """IT ARMS THE ROOM. A walking issue-rack: a low braced body under a wide
+    splayed SHEAF of spears, with one long arm already out on the diagonal
+    offering one of them butt-first. Nothing it carries is for itself.
+
+    Silhouette intent - WIDE SHEAF ABOVE, LOW BRACED BODY BELOW, ONE ARM OUT:
+      - the sheaf is the whole upper outline and it is DENSE AND STRAIGHT:
+        six real spear shafts rooted in one back quiver, splaying up and back
+        so the fan is in the outline and not in the colour;
+      - the body is DELIBERATELY SHORT AND WIDE under it - a trestle, not a
+        man. Shoulders at 1.42 on a 2.35 m thing, so two thirds of the height
+        above the shoulder is cargo;
+      - ONE ARM OUT, a straight diagonal across and forward with a seventh
+        spear offered BUTT FIRST. Never level: level is the Porter's bar;
+      - no head. A low issue-slate where a head would be, with the lit tally
+        brand beside it - a hero body has a head and this does not;
+      - three shields stacked leaning on the near leg, on the ground, so the
+        store reads as a store even with the sheaf behind it.
+
+    Front is -Y here, same as the other fifteen."""
+    P = Parts("quartermaster")
+    X = 0.0
+    SPEAR = _gear_mesh("spear_A")
+    SHIELD = _gear_mesh("shield_A")
+    used_pack = SPEAR is not None
+    if SPEAR is None:
+        SPEAR, _ = _spear_proc(1.0)
+
+    # ---- the base. Wide, braced, planted: this thing stands still and issues.
+    _legs(P, X, hip=0.86, stance=0.27, r0=0.120, r1=0.095, boot=(0.30, 0.46, 0.12))
+    # a cross-brace between the legs - furniture again, and it says so
+    P.add(L.box(0.62, 0.17, 0.09), 'dark', loc=(X, 0.02, 0.42))
+
+    # ---- the body: short, wide, square. A counter with legs.
+    limb(P, [(X, 0.04, 0.80), (X, 0.00, 1.10), (X, -0.04, 1.42)], 0.255, 0.230, 'body')
+    P.add(L.box(0.74, 0.40, 0.50), 'body', loc=(X, -0.02, 1.18))
+    # two iron straps - a thing that carries load is a banded thing
+    for z in (1.00, 1.34):
+        P.add(L.box(0.80, 0.46, 0.055), 'dark', loc=(X, -0.02, z))
+    # the issue slate where a head would be, canted toward the doorway
+    # PASS 2: pass 1's slate plus two wide-set eyes read as a LETTERBOX FACE -
+    # a robot head, i.e. exactly the hero-body read the brief forbids. It is now
+    # a wide shuttered HATCH with a brim over it and the light down in the slot,
+    # eyes close-set and low: a counter window, not a face.
+    P.add(L.box(0.62, 0.11, 0.26), 'dark', loc=(X, -0.20, 1.52), rot=(0.22, 0.0, 0.0))
+    P.add(L.box(0.70, 0.30, 0.09), 'dark', loc=(X, -0.14, 1.66), rot=(0.14, 0.0, 0.0))
+    eyes(P, (X, 0.0, 1.47), 0.050, 0.026, -0.26)
+    # PASS 2: the tally brand was a lollipop floating free beside the head. It
+    # now grows OUT OF THE QUIVER at the back and leans, so it is rooted in
+    # something and reads as a brand stuck in the stores.
+    limb(P, [(X - 0.30, 0.40, 1.22), (X - 0.40, 0.26, 1.74)], 0.026, 0.019, 'bone')
+    P.add(L.sphere(0.055, 0.055, 0.066, 10, 7), 'glow', loc=(X - 0.41, 0.24, 1.78))
+
+    # ---- THE SHEAF. Six real spears rooted in one back quiver, splaying up
+    # and back. The quiver is a solid block so the roots are not six holes.
+    P.add(L.box(0.56, 0.30, 0.34), 'dark', loc=(X, 0.30, 1.30), rot=(-0.20, 0.0, 0.0))
+    #    (x of the butt, how far out the tip goes, how far back, length)
+    # PASS 2: rooted at z 1.00 instead of 1.16 and 0.12 further back, with the
+    # shafts 0.18-0.22 longer. Pass 1's heads were most of each spear and the
+    # fan read as a FEATHER CROWN springing from the head rather than as spears
+    # standing in a quiver. The tips land at the same heights, so the body does
+    # not lose scale to the normalisation.
+    for bx, out_x, back_y, ln in ((-0.20, -1.06, 0.92, 1.90),
+                                  (-0.12, -0.62, 1.00, 2.06),
+                                  (-0.05, -0.22, 0.86, 1.82),
+                                  (0.05, 0.26, 1.02, 2.00),
+                                  (0.12, 0.70, 0.88, 1.88),
+                                  (0.20, 1.12, 0.78, 1.74)):
+        butt = (X + bx, 0.46, 1.00)
+        _lay(P, SPEAR, 'bone', butt, (out_x, back_y - 0.34, 2.05), ln)
+
+    # ---- THE OFFERED SPEAR and the arm that holds it. The mechanic, and the
+    # one long diagonal in the file that is neither level nor curved.
+    # PASS 2: PASS 1 PUT THE OFFERED SPEAR BEHIND THE LEGS. On the three-quarter
+    # it read as a shaft leaning against the back of the near thigh, which is
+    # the opposite of offering it - the one thing the whole body is for. The arm
+    # now reaches FORWARD AND OUT and the hand closes ON the shaft at its
+    # midpoint, measured: butt (0.30,-1.05,0.30) down (1.00,-0.25,1.15), unit
+    # (0.647,-0.162,0.744), so the midpoint of a 2.00 m shaft is
+    # (0.947,-1.212,1.044) and that is exactly where the hand is put.
+    # PASS 3, AND IT IS A VIEW FAULT, NOT A SHAPE FAULT. Pass 2's offering arm
+    # was on +X, which is the FAR side of the three_quarter camera - so the one
+    # thing this body is for was hidden behind its own torso in the cell that
+    # goes on the contact sheet. Arm and spear mirrored to -X (the near side),
+    # and the ground store swapped to +X to keep them apart.
+    limb(P, [(X - 0.30, -0.10, 1.34), (X - 0.62, -0.60, 1.20),
+             (X - 0.95, -1.15, 1.05)], 0.090, 0.068, 'body')
+    _lay(P, SPEAR, 'bone', (X - 0.30, -1.05, 0.30), (-1.00, -0.25, 1.15), 2.00)
+    # A HAND, NOT A BALL. The Porter's planks end in flat caps and read
+    # unfinished at the tips; pass 1 repeated that with a plain sphere. A fist
+    # with a thumb block over the shaft reads as GRIP at pane distance.
+    for hx, hy, hz, th in ((X - 0.95, -1.21, 1.04, -0.10), (X + 0.62, -0.36, 0.70, 0.09)):
+        P.add(L.sphere(0.090, 0.086, 0.082, 10, 7), 'dark', loc=(hx, hy, hz))
+        P.add(L.box(0.055, 0.14, 0.055), 'dark', loc=(hx + th, hy + 0.02, hz + 0.05))
+    # the issue mark: a short lit band at the grip of the one being handed over
+    limb(P, [(X - 0.86, -1.18, 0.96), (X - 1.02, -1.24, 1.14)], 0.028, 0.028, 'glow')
+
+    # ---- the other arm, down and in, resting on the stacked shields
+    limb(P, [(X + 0.30, -0.08, 1.32), (X + 0.52, -0.22, 1.00),
+             (X + 0.60, -0.34, 0.74)], 0.088, 0.066, 'body')
+
+    # ---- THE STORE ON THE GROUND. Three shields leaning on the near leg, so
+    # the thing reads as a store from the front where the sheaf foreshortens.
+    # PASS 2: 0.78 m made each shield TALLER THAN THE TORSO and the stack read
+    # as a dropped kite lying across the floor, the loudest wrong thing in the
+    # sheet. 0.52 m is a shield a man carries, and they now STAND against the
+    # near leg leaning only slightly, so the stack reads as stores propped up.
+    for i, (sx, sy) in enumerate(((0.72, -0.34), (0.82, -0.24), (0.92, -0.14))):
+        if SHIELD is not None:
+            _lay(P, SHIELD, 'bone', (X + sx, sy, 0.02), (0.20, -0.06, 1.0), 0.60)
+        else:
+            P.add(L.box(0.40, 0.09, 0.56), 'bone', loc=(X + sx, sy, 0.28),
+                  rot=(0.0, -0.20, 0.0))
+    # PASS 2: the two spare shafts ran THROUGH the shield stack and out the far
+    # side. They now lie on open floor forward of it, clear of every other part.
+    # PASS 3: pass 2 moved these only 0.28 m and they STILL ran through the
+    # shield faces and out the far side. Measured this time: the shields stand
+    # at y -0.34 .. -0.14, so the shafts go to y -1.24 .. -1.10, a clear 0.76 m
+    # of floor in front of the nearest shield face and nothing between.
+    for k in range(2):
+        _lay(P, SPEAR, 'dark', (X + 1.62, -1.24 + k * 0.14, 0.05 + k * 0.045),
+             (-1.0, 0.10, 0.04), 1.44)
+
+    P.used_pack = used_pack
+    return P
+
+
+BUILDERS.update({"quartermaster": quartermaster})

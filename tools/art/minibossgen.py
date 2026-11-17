@@ -66,6 +66,10 @@ def build_miniboss(key):
         'glow': L.mat_glow(key + "_glow", tuple(min(1.0, c / max(aura)) for c in aura), 3.2),
     }
     P = M.BUILDERS[key]()
+    # 17 Nov: the Quartermaster loads real pack geometry out of assets/gear and
+    # falls back to procedural if it cannot. A silent fallback would be the same
+    # fault class as a lying gate, so the builder's own flag is RECORDED.
+    pack_used = getattr(P, "used_pack", None)
     # merge by material before making objects: built part-by-part these run to
     # 60-200 objects, i.e. that many draw calls for one set piece. Merged, each
     # is at most four meshes - the same bar the lords and the creatures hold to.
@@ -94,7 +98,8 @@ def build_miniboss(key):
         ob.location = (ob.location.x, ob.location.y, ob.location.z - mn.z)
     bpy.context.view_layer.update()
     return objs, dict(title=title, height=height, tint=tint, aura=aura,
-                      theme=theme, idea=idea, wear=wear, line=line)
+                      theme=theme, idea=idea, wear=wear, line=line,
+                      pack_used=pack_used)
 
 
 def sheets(repo, resx, resy):
@@ -216,6 +221,7 @@ def main():
                 report["minibosses"][key] = dict(
                     title=info["title"], theme=info["theme"], idea=info["idea"],
                     wear=info["wear"], feed_line=info["line"],
+                    pack_used=info.get("pack_used"),
                     parts=len(objs), engine=eng,
                     faces=sum(len(o.data.polygons) for o in objs),
                     size=[round(w, 2), round(d, 2), round(h, 2)],

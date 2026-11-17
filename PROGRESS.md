@@ -1,3 +1,105 @@
+## ART 2026-11-17 16:54 CT - THE TAPSTER, a twenty-first miniboss. IT DRINKS WHAT YOU BROUGHT - and three faults the ported occlusion test could not see
+
+The 15:58 row: the occlusion port is ticked, the instruments have had three
+hardening passes in three hours and a fourth would be reaching - TAKE THE
+TWENTY-FIRST. Done, on the usual terms, plus the two one-sentence answers.
+
+THE TWENTY-FIRST IS **THE TAPSTER**. It stands over a tun with the tap open and
+every brew raised in this room goes down that tun instead of down the hero who
+raised it. Kill it dry or spend nothing. THE FIGHT IS A SIEGE OF YOUR OWN
+SUPPLY: it does not kill the party, it BREAKS THE LINE - delve.gd:1287
+`if frac < FLEE_AT and not _has_heal_brew(h)` means a hero with nothing left to
+drink turns and walks out of the floor.
+
+WHAT I CHECKED FOR FIRST, MEASURED AND NOT REMEMBERED
+  - the twenty existing ideas PARSED OUT OF CANON this run (34 entries, 20
+    distinct bodies, 14 themes). None of the twenty touches the SATCHEL.
+  - the resource grepped out of scripts/ before a vertex was written:
+    roster.gd:1108/:1113/:1125 and delve.gd:3273 - the actual swallow - plus
+    the flee gate at delve.gd:1287. No new system invented to hang it on.
+  - checked against the COOK (heals the enemy pack - this denies YOUR healing),
+    the TALLYMAN (lifts worn gear and withdraws - this takes a consumable and
+    never leaves its tun) and the SNUFFER, which was the near miss: "flask"
+    means LAMP OIL in half the code, so a creature drinking the oil would be
+    IT TAKES THE LIGHT with a barrel in front of it. It takes BREWS.
+  - the height ladder (1.95-2.75 at 0.05, FULL) and the wear ladder (0.05-1.00
+    at 0.05, FULL). 2.80 extends the top; wear 0.22 sits deliberately between
+    two rungs, with the trade as the reason.
+  - assets/props/ BEFORE generating a mesh: 309 files, CC0 Fantasy Props
+    MegaKit, already committed and NOT in ASSET_SOURCES.md. Barrel, SmallBottle
+    and Mug used; the pack is logged now and the gap in the log is closed.
+
+FIVE PASSES, EACH ONE THING, EACH JUDGED BY LOOKING
+  2. pack models were being eaten by the decimate (face counts read off the
+     .gltf accessors: Barrel 824, SmallBottle 130, Mug 268, all capped at 110).
+  3. PASS 2 WAS ONLY HALF RIGHT AND I RECORDED IT THAT WAY. The cask was still
+     torn shards. Probed the file: Barrel is ONE object with TWO material slots
+     at radius 0.348 and 0.349 - ONE MILLIMETRE - and the shards were
+     Z-FIGHTING. No decimate ratio was ever going to change that.
+  4. THE TAP WAS POINTING AT THE LENS and foreshortened to four pixels, so the
+     only organ the mechanic has was invisible and the hand read as a palm laid
+     on a barrel. That is the Tanner's pass-3 and the Reeve's pass-3 finding,
+     quoted in this creature's own docstring and then violated in the one place
+     it mattered. It now runs out of the flank, across the front camera.
+  5. The apron was a sandwich board wider than his own torso, erasing chest,
+     shoulder line and neck. Narrower than he is now, bibbed and bowed.
+
+THE FIT PROOF - LOOKED AT
+  hero_front / hero_side / hero_back beside a posed KayKit Knight at scale 1.0.
+  RATIO 1.14 (2.80 / 2.45 measured), pair width 4.90 inside the 5.60 frame.
+  The side view SEPARATES THEM FIRST TIME - the Reeve's pass-1 fault answered
+  before it happened: the man stands 0.36 m forward of the tun's near face,
+  because azimuth 90 looks along X and X separation does nothing there.
+
+NINE FAULTS NAMED, NONE SWEPT - full list in docs/art/MINIBOSSES.md. The top
+one for the next seat: THE MAN IS A WIRE BESIDE THE KNIGHT, the same fault the
+Reeve named at its own pass 5 and I did not reach here.
+
+THE INSTRUMENT, AND THE PART THAT MATTERS
+  minibossgen ok true, 0 blanks, 4 meshes, 2,479 faces, span 3.04 CORRIDOR-SAFE,
+  pack_used true. minibossfit verdict GREEN, asked ["tapster"] measured
+  ["tapster"], hero 2.45 posed true, unproved_cells [], PROVING 3 OF 3 with
+  seen 1.0 for both subjects in every view.
+  *** THE PORTED OCCLUSION TEST EARNED ITS KEEP AND STILL DID NOT CATCH PASSES
+  2, 3 OR 4. *** It would have caught a man standing behind his own tun, which
+  is what it was built for. It cannot see a barrel rendering as torn shards, a
+  bottle rendering as a slab, or a tap foreshortened to four pixels - every one
+  of those frames is full of opaque pixels inside its border with both subjects
+  plainly visible and seen 1.0. Three faults, three passes, found only by
+  looking. I am not hardening it again; I am recording what it is blind to.
+
+THE TWO ONE-SENTENCE ANSWERS THE 15:58 ROW ASKED FOR
+  1. snuffer_chibi.glb IS WANTED AND IT IS ALREADY LIVE - delve.gd:379 walks
+     [key + "_chibi", key] and returns the first that exists, so the committed
+     file is ALREADY the body the game loads for the snuffer; what is missing
+     is not a decision but ONE MB_FIT ROW, because eleven chibis carry a ratio
+     and snuffer_chibi does not, so miniboss_ratio falls through to the base.
+     I RE-MEASURED IT RATHER THAN HAND OVER A CAVEAT: "snuffer_chibi": 1.06,
+     verdict GREEN, 3 of 3 proving views, in _fit_snufferchibi_register.json -
+     it now carries an occlusion measurement and is out of unproved_cells.
+  2. THE TANNER OBSERVATION IS CORRECT AND I AGREE WITH IT. I looked at
+     renders/art/minibosses/tanner/hero_front.png again: the head is a pale
+     dome with a DARK BAND ACROSS ITS EQUATOR and two lit eyes under it, which
+     is a visor, and the trade is carried entirely by the two tenter frames
+     standing to its right - the body at the bench says nothing about tanning
+     and the bench hides most of it. The Tanner predates the cap rule the Reeve
+     and the Tapster are both built to (band ABOVE the equator, nothing crosses
+     the face). Fixing it is a band move plus hides ON the body, not a rebuild.
+     It is still not an item and I have not taken it as one.
+
+WHAT THE GAME BUILD LANE MUST DO - I TOUCHED NO .gd
+  1. scripts/delve.gd MB_FIT: add "tapster": 1.14 - MEASURED, out of
+     renders/art/minibosses/_fit_tapster_register.json pairs.tapster.ratio.
+     Do not re-derive it.
+  2. scripts/delve.gd MB_FIT: add "snuffer_chibi": 1.06 - MEASURED, out of
+     _fit_snufferchibi_register.json. Closes the only chibi on disk with no row.
+  3. assets/monsters/minibosses/tapster.glb is STATIC, no armature: a `model`
+     path and NO `anims` entry, like the other twenty. No .glb.import sibling
+     (this lane never runs Godot); delve.gd:377 falls back safely until an
+     import run writes one. reeve.glb from 14:46 is in the same position.
+  4. The idea is a SUPPLY behaviour, not a damage number: shipped as a re-skin
+     with extra hit points it is wasted.
+
 ## ART 2026-11-17 10:46 CT - THE HURDLEMAN'S TWO SELF-NAMED REGRESSIONS, CLOSED - AND A HARNESS THAT WAS GREEN OVER A FAULT IT COULD NOT SEE
 
 The team lead's 09:58 row: settle the two faults I named as MADE WORSE before a

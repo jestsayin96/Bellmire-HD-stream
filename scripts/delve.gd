@@ -1623,7 +1623,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 					_big(m, "rolls a 20 - %s reels." % String(tgt.def.get("name", "it")))
 			if not was_dead and tgt.state == Monster.S.DEAD:
 				_kills += 1
-				_on_kill(tgt)
+				_on_kill(tgt, m)
 				roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 				if tgt.def.get("boss", false):
 					_say("%s falls to %s." % [tgt.def.get("name"), h["name"]])
@@ -1765,7 +1765,10 @@ func _spawn_on_floor(d: Dictionary, at: Vector3) -> Monster:
 	return m
 
 var _split_said := -1
-func _on_kill(tgt: Monster) -> void:
+func _on_kill(tgt: Monster, by: Dictionary = {}) -> void:
+	# D70.2: the delver whose blow felled a LORD is told so, by login (roster.felled_lord)
+	if not by.is_empty() and dun != null and dun.lord == tgt and roster.has_method("felled_lord"):
+		roster.felled_lord(String(by["uid"]), String(tgt.def.get("name", "a lord")), floor_no)
 	var ways: Dictionary = tgt.def.get("ways", {})
 	if ways.has("splits"):
 		var n := int(ways["splits"])
@@ -2113,6 +2116,8 @@ func _finish() -> void:
 		# left (Roster.kit_up_after_delve). It is said aloud so the viewer sees what their gold
 		# bought - an upgrade nobody can see is the same bug over again.
 		for uid in out:
+			if roster.has_method("came_home"):
+				roster.came_home(String(uid))      # D70.2: a rare find is told on the way HOME
 			var line := roster.kit_up_after_delve(String(uid))
 			if line != "":
 				_say(line)
@@ -2190,7 +2195,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 				best.hurt(dmg * 0.35)
 				if not was_dead and best.state == Monster.S.DEAD:
 					_kills += 1
-					_on_kill(best)
+					_on_kill(best, m)
 					roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 		"luck":     # L48: halfling luck - now and then the blow lands twice
 			if is_instance_valid(tgt) and tgt.state != Monster.S.DEAD and _rng.randf() < 0.12:
@@ -2199,7 +2204,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 				_float_text(m, "lucky!", Color(0.95, 0.85, 0.40), 56, 2.6)
 				if not was2 and tgt.state == Monster.S.DEAD:
 					_kills += 1
-					_on_kill(tgt)
+					_on_kill(tgt, m)
 					roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 		"hex":
 			if float(tgt.get_meta("hex_t", -1.0)) <= _t:
@@ -2213,7 +2218,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 					o.hurt(dmg * 0.5)
 					if not was and o.state == Monster.S.DEAD:
 						_kills += 1
-						_on_kill(o)
+						_on_kill(o, m)
 						roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 
 ## ---- D2 spells below (the desktop's Spells, used the way raids.gd uses them).
@@ -2363,7 +2368,7 @@ func _strike(m: Dictionary, tgt: Monster, dmg: float, crit: bool) -> void:
 	tgt.hurt(dmg * _ward(tgt), crit)
 	if tgt.state == Monster.S.DEAD:
 		_kills += 1
-		_on_kill(tgt)
+		_on_kill(tgt, m)
 		roster.award(String(m["uid"]), 3 + floor_no, 6 + floor_no * 2, 1, floor_no)
 		if tgt.def.get("boss", false):
 			_say("%s falls to %s." % [tgt.def.get("name"), m["h"]["name"]])

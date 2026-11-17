@@ -223,8 +223,15 @@ var rng := RandomNumberGenerator.new()
 signal changed(user_id: String)
 signal announced(line: String, colour: Color)
 ## D70.2: a moment that belongs to ONE viewer - their hero died, was promoted, learned something.
-## kind: "fell" | "rank" | "learned". text is GAME-generated only (no hero name, no viewer string).
+## kind: "fell" | "rank" | "learned" | "lord" | "rare". text is GAME-generated only (no hero name,
+## no viewer string).
 signal hero_moment(user_id: String, kind: String, text: String)
+## D70.2 remainder: RARE is a find from the top of the ladder - a runed/dragontooth/scarforged
+## weapon or plate/warded/scarwoven armour (tier >= RARE_TIER). It is told when the hero COMES HOME
+## with it (Delve._finish -> came_home), not when it is prised loose - a hero who dies below did not
+## come home with anything. Held per uid in memory only; never persisted, never told late.
+const RARE_TIER := 3
+var _rare_finds := {}               # uid -> {"what": game-made item name, "floor": int}
 
 func _init() -> void:
     rng.randomize()
@@ -652,6 +659,28 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
         _e3po("rank_up")       # D37: the Commander of the Guards notes the promotion
     changed.emit(user_id)
 
+## D70.2: the hero is home from below. If they carried something rare up, tell the owner ONCE.
+func came_home(user_id: String) -> bool:
+    if not _rare_finds.has(user_id):
+        return false
+    var f: Dictionary = _rare_finds[user_id]
+    _rare_finds.erase(user_id)
+    var h := get_hero(user_id)
+    if h.is_empty() or not bool(h.get("alive", false)):
+        return false
+    var what := String(f["what"])
+    hero_moment.emit(user_id, "rare", "your hero came home from floor %d carrying %s %s." % [int(f["floor"]), _an(what), what])
+    return true
+
+## D70.2: this hero struck the blow that felled a lord. lord_name is the lord def's name (game data,
+## never viewer-set). Only the hero whose blow it was is told - the share and the Chronicle card
+## already go to the whole party.
+func felled_lord(user_id: String, lord_name: String, floor_no: int) -> void:
+    var h := get_hero(user_id)
+    if h.is_empty():
+        return
+    hero_moment.emit(user_id, "lord", "your hero struck the blow that felled %s on floor %d." % [lord_name, floor_no])
+
 func _xp_needed(level: int) -> int:
     return 40 + level * 30
 
@@ -750,6 +779,7 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
     if h.is_empty() or not bool(h["alive"]):
         return ""
     h["alive"] = false
+    _rare_finds.erase(user_id)      # D70.2: the dead do not come home with anything
     Sfx.sting()
     fallen.push_front({
         "name": h["name"], "class": h["class"], "level": int(h["level"]),
@@ -944,6 +974,8 @@ func find_gear(user_id: String, floor_no: int, roll: float, lord := false) -> St
     _stamp(h)
     changed.emit(user_id)
     var what := weapon_name(h) if not arm else armour_name(h)
+    if nxt >= RARE_TIER:
+        _rare_finds[user_id] = {"what": what, "floor": floor_no}   # D70.2: told on the way home
     return "%s prises %s %s from the dead on floor %d." % [h["name"], _an(what), what, floor_no] if not arm \
         else "%s strips a set of %s off the dead on floor %d." % [h["name"], what, floor_no]
 

@@ -967,4 +967,118 @@ entry** (it is static), and set `h` to **3.20**.
 
 ### THE REGISTER AFTER THIS RUN
 **9 converted + 2 measured-and-skipped, and THREE REMAIN, named so the count stops being
-re-derived: the BOILER, the SOWER and the SNARER.**
+re-derived: the BOILER, the SOWER and the SNARER.** *(As of that run. The SOWER was converted
+the run after - see conversion 10 of 14 at the end of this file.)*
+
+---
+
+## REGISTER CONVERSION 10 OF 14 - THE SOWER (`sower_chibi`)
+
+Sheet: `renders/art/minibosses/sower_register.png` (original | chibi, a real posed 2.45 m
+KayKit Knight beside each), plus `renders/art/minibosses/sower_chibi/hero_front|side|back.png`
+and the standalone `front|side|three_quarter.png`. **Ratio 0.98 · pair span 5.16 m against a
+5.60 m frame · fits the fixed frame · blank check 2 files, 0 failures · BLENDER_EEVEE ·
+`sower_chibi.glb` 4 meshes, 1994 faces, static, no armature · CORRIDOR-SAFE, footprint span
+3.29 m (3.97 m at the recommended `h` of 2.90).**
+
+### WHAT THE ORIGINAL ACTUALLY READS AS
+A seven-head pipe-cleaner man in a wide cone hat, carrying a crate, with three pale sticks
+behind him. Beside a chibi Knight he is from another game. THE IDEA DOES NOT CHANGE: hopper on
+the chest, one arm thrown wide with seed in the air, thorn already standing up out of the floor.
+
+### THE VALUE PLAN, MEASURED FIRST - AND THIS IS THE WEAKEST PAIR IN THE FILE
+At tint (0.72, 0.68, 0.44) and wear 0.40 the generator's `body` lands at luminance **0.498**
+and its `bone` at **0.549**: a **10% separation**, against the Sluicekeeper's 14% and the
+Cook's 19%, and the weakest in the fourteen. So bone-against-body carries NOTHING here. The
+pairs that are strong are `dark` (0.092) against either, and `glow` against all three. Hence:
+the man is `body`; every break on him is `dark`; the hat is `bone` and only ever reads against
+the black above his shoulders, with a `dark` band at the join doing the work where hat and head
+touch; the stems are `dark`; and **the seed is the only `glow` on the creature - in the
+hopper's mouth, in the air out of his hand, and again as the thorn standing out of the floor.
+One lit material told three times IS the mechanic: what he throws is what comes up.**
+
+### THE NEW IDEA IN THIS CONVERSION
+**The cast and the thorn are on opposite sides of him**, so the creature carries its own BEFORE
+AND AFTER in one silhouette - seed leaving his hand on one side, thorn already up on the other.
+A viewer who sees it once knows what the fight is going to do to the floor.
+
+### THE CARRIED LEG FAULT - AND THIS IS THE CREATURE IT SHOWS ON
+The Sexton's fault 9, the Porter's 12, the Tallyman's 10 and the Cook's 6 - "the legs read as
+two dark blocks" - was fixed in the Sluicekeeper's file and INVISIBLE there, because pass 8's
+waterline covered his legs to the ankle. **Nothing covers these legs.** Shins are `body`, only
+the boot is `dark`, and the break at the ankle is visible in front, side and back alike. The
+fix is now proven, not just committed.
+
+### FIVE PASSES, ONE CHANGE AND ONE RENDER EACH
+1. **The register itself**: chibi mass and count off the measured Knight - 0.150 m shins on a
+   0.50 m hip, a barrel torso over a pelvis that bridges it, a 0.30 m skull, mitts. **And the
+   hat is NOT a cone.** "The second wide cone in the file after the Snuffer's" was the
+   original's third named fault, and a cone is a cone from every azimuth, so posture cannot
+   separate two of them. This is a **flat brim with a low crown**: at 6 degrees of elevation a
+   flat disc is a LINE, so the Snuffer reads as a triangle on a stalk and the Sower as a
+   horizontal bar on a head. Nothing round sits on something round - the crown is narrower than
+   the skull (0.255 against 0.300) and set into it, with the dark band at the join.
+2. **THE SIDE VIEW HAD NO MECHANIC IN IT, AND IT IS THE COOK'S FAULT AGAIN: AN X-ONLY
+   DIRECTION IS DEPTH, NOT SEPARATION.** Pass 1 threw the arm and the seed along -X and set
+   the thorns out along ±X, so at azimuth 90 the camera looked straight down the line of the
+   cast: the arm foreshortened into a lump on his chest, the four seeds stacked into two dots
+   at his hip, and every thorn went edge-on - three bare poles with a ball on top, which is a
+   candle, not a thorn. Every direction on this creature that was X-only is now **diagonal in
+   plan**: the cast runs along -U at 37 degrees, the seed falls along it, the thorns stand out
+   across it.
+3. **THE THORNS WERE STILL FLECKS, AND ALTERNATING THEM ALONG ONE AXIS IS THE SAME MISTAKE ONE
+   STEP SMALLER.** Pass 2 moved them off X onto V, which made them visible from the side
+   INSTEAD of from the front, not from both - two directions is still a plane. **THE RULE,
+   GENERAL: a feature repeated along a member goes ON A HELIX, not alternated on an axis** -
+   then every azimuth sees some of it broadside by construction and none sees all of it
+   edge-on. Four thorns a stem at 0.30 m, each 80 degrees around from the last.
+4. **A DARK PROP ON A BLACK FIELD HAS NO SILHOUETTE, AND THE HOPPER IS THE PROP THAT NAMES
+   THIS CREATURE.** `dark` is 0.092 and the cell background is 0.045: against his body the box
+   was the boldest thing on him, and the moment it cleared his body - which is every view but
+   the front - it was gone. One prop visible from one azimuth out of three is the front-only
+   fault the Cook's lit mouth closed for the pot. **THE RULE: a dark mass needs a PALE EDGE
+   where it stands against the room, not a different fill.** The hopper keeps its dark body and
+   gains a `bone` rim round its mouth - which is also what a seed hopper has.
+5. **THE THORN WAS GROWING THROUGH HIM.** Pass 3's bolder thorns reach 0.30 m instead of 0.21,
+   and the nearest stem stood 0.95 m out on a man whose shoulder and casting arm already reach
+   0.56, so from the front two thorns crossed his arm. All three shoots step 0.25 m further out
+   along the line he walks - the same distance each, so the fan keeps its shape and only the
+   gap changes.
+
+### ELEVEN FAULTS I CAN STILL SEE
+1.  **The hopper's bone rim and its lit mouth fuse into one pale shape** from three-quarter.
+    Two pale things 0.04 m apart at cell size is one pale thing; the rim fixed the silhouette
+    and cost the mouth its separate read.
+2.  **The hopper still reads as a crate held across the belly**, not slung. The strap is `dark`
+    on a `dark` box and does nothing; from the front the near hand that steadies it is behind
+    the box entirely, so nothing explains how it hangs.
+3.  **The cast arm foreshortens to a stub in the side view.** Pass 2 saved the SEED from that
+    view, not the arm: the arm still runs mostly along the line the side camera looks down, and
+    what tells the story at azimuth 90 is the four lit spheres, not the throw.
+4.  **The back is a stack of spheres** - torso, pelvis, two shoulders and a head, with one dark
+    belt across them. The Sluicekeeper's fault 2, unpaid again.
+5.  **The belt reads as a flat plank through him**, protruding past the pelvis on both sides at
+    three-quarter. It is the file's standard 0.80 x 0.66 belt box on a 0.69 m pelvis.
+6.  **The thorns read as pale blades or leaves, not thorn.** They are broad cones (0.075 base
+    on 0.30 of length) and lit, so they read closer to a palm frond than to something that
+    would stop you walking.
+7.  **The third shoot hides behind the first** from the front and from the back; only two of
+    the three read in those views. The fan is 21/41/73 degrees in plan, which is spread enough
+    for the side and not for the other two.
+8.  **The two near shoots read as one bush** in the three-quarter view, which is the contact
+    sheet's own view.
+9.  **At wear 0.40 nothing on him looks worn.** The hat is clean straw and the hopper is a
+    clean box; the number says "a farm tool used hard and kept" and the model does not say it.
+10. **His mitt does not read as an open casting hand** - it is a ball on the end of a tube, so
+    the cast is told entirely by the seed leaving it.
+11. **1994 faces**, third heaviest in the file behind the Sluicekeeper's 2623 and the Cook's
+    2539. The four thorns a stem bought that.
+
+### WIRING THE GAME BUILD LANE MUST DO (I touched no `.gd`)
+`scripts/bestiary.gd` - if `sower_chibi` is adopted in place of `sower`, point the Sower's
+`model` at `assets/monsters/minibosses/sower_chibi.glb`, **no `anims` entry** (static, no
+armature), and set `h` to **2.90**. Footprint at that `h` is 3.97 m against an 11.0 m
+three-cell corridor: **CORRIDOR-SAFE, not room-locked.**
+
+### THE REGISTER AFTER THIS RUN
+**10 converted + 2 measured-and-skipped, and TWO REMAIN: the BOILER and the SNARER.**

@@ -9074,3 +9074,68 @@ Fixed in ui_theme.gd by scaling down only: VIEWER .47/.30/.02, TEAL_ON_PARCH .05
 GOOD .10/.39/.16. Re-run: U58_CONTRAST OK 14 pairs; U56_HUE OK windowed; parse 0 errors. Looked at u55_100.png.
 STILL ON TRUST: the pair list is hand-written - a new colour added to UiTheme is not checked until someone lists it;
 and alpha panels over a real world frame are not sampled, only the two extremes.
+## B-cycle B32 - THE CAUSE OF THE FUTURE STAMP, NAMED - AND THE GATES RE-PROVED ON A TREE THAT MOVED AGAIN (chat bot, 2026-11-17 14:46-14:48 CT)
+
+- THE ROW ASKED FOR ONE THING ABOVE THE STAND-DOWN: THE CAUSE OF B31'S FUTURE STAMP. Here it is,
+  and I am separating what I can PROVE from what I am INFERRING, because the lane's whole credit
+  this week comes from not blurring those.
+  PROVEN, off the file itself: my IDLE line reads 13:56:40 and sits ABOVE the HUD's RUNNING line
+  reading 13:53:45. Appends are ordered, so my line was on disk before 13:53:45 was. The stamp was
+  therefore at least ~3 minutes AHEAD of the clock at the moment it was written. It was not a
+  clock read.
+  INFERRED, and I say so plainly because B31's seat is gone and there is no transcript to recover:
+  13:48:30 (my own RUNNING claim) plus the battery's elapsed run lands exactly on 13:56:40. The
+  stamp looks DERIVED BY ARITHMETIC off the claim and the elapsed time, not read off the machine.
+  That matches the second fault in the same line: "expected finish 14:08" was also arithmetic -
+  claim plus a 20-minute budget - and 14:08 is inside the game build's :07. One habit, two faults.
+  THE METHOD, not the slip: a seat that composes a timestamp is computing where it THINKS the
+  clock is. A seat that reads one is reporting where it IS. B31 computed. The 16 Nov 17:05 fault
+  recorded against this lane was the same shape, which is why it recurred.
+  THE FIX, and it is already in today's two lock lines: the clock read and the file append happen
+  in the SAME call, with nothing between them.
+    RUNNING: powershell (Get-Date) -> 14:46:54 -06:00, written in that same call.
+    IDLE:    powershell (Get-Date) -> 14:48:54 -06:00, written in that same call.
+  I also cross-read the Linux side (TZ=America/Chicago date -> 14:46:47-06:00) against Windows
+  (14:46:54-06:00): seven seconds apart, Linux BEHIND. So a cross-bridge read cannot manufacture a
+  future stamp in this direction either - only arithmetic can. And my declared finish, 14:58, is
+  inside my own :45 window and ends before the game build's :07.
+
+- THE STAND-DOWN, COMPUTED NOT ASSUMED. Main moved from 3648fe5 to 32dffd7 - 32 commits into this
+  worktree (System 2 side/offhand renders, S19/S20 weapon wiring, tools/_s19_hand.gd, plan syncs).
+    git log  3648fe5..HEAD -- scripts/chatcmd.gd data/commands.json docs/COMMANDS.md   NO COMMITS
+    git diff 3648fe5..HEAD -- the same three                                           EMPTY
+  Fifth hour running with nothing on the command surface. Nothing in Systems 2, 3 or 4 touches a
+  command, an alias, a cooldown, an `ask` phrasing or a `foreign` prefix.
+
+- DRIFT CHECKED BOTH DIRECTIONS BEFORE THE ENGINE RAN, as the lane always owes:
+    order 27, commands 27, order\commands EMPTY, commands\order EMPTY
+    every one of the 27 keys appears as a literal in scripts/chatcmd.gd
+    docs/COMMANDS.md carries all 27 and names all 24 aliases; nothing in the doc is unaccounted for
+    no alias collides with a command key
+  json.load clean, every pre-existing key byte-identical - nothing was edited this cycle.
+
+- GATE BATTERY ON THE NEW TREE, ALL GREEN, ONE RUN (14:46-14:48, explicit --import first):
+    --headless --path W6 --import                 completed
+    parse --quit-after 300                        rc=0, 0 SCRIPT ERROR, 0 Parse Error
+    tools/_l14_test.gd                            L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                        TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                        COMMANDS_DOC OK wrote 27 commands
+  COMMANDS_DOC was again a TRUE no-op: git status --untracked-files=no over the whole worktree
+  came back EMPTY after the generator ran. The generator rewrote docs/COMMANDS.md byte-identical.
+  THE PARSE'S ONLY NOISE IS THE SAME PRE-EXISTING ONE B31 NAMED, and I am naming it again so no
+  seat "discovers" it: invalid-UID WARNINGS on MI_Plaster / MI_RockTrim / MI_RoundTiles /
+  MI_WoodTrim .tres out of town.gd:820. Warnings, not errors; town.gd is the game build's file.
+  I ran --import first precisely because the HUD lane proved at 12:55 that skipping it makes a
+  worktree print parse errors that are not real.
+
+- LOCK: claimed 14:46:54-06:00, released 14:48:54-06:00, two minutes, inside the :45 window and
+  finished before :07. Checked by PROCESS first - tasklist showed no Godot alive - and the file
+  agreed (IDLE since the game build's 14:21:17). No second Godot ran beside another lane's.
+
+- NOTHING WAS COMMITTED TO MY THREE FILES, because nothing needed changing. The cycle is the
+  measurement and the named cause.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward created, deleted or re-priced, no channel setting touched.
+The parse run JOINs #jestsayin96 as bellmirebro - the standing B18 gate - and it is silent.
+NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.

@@ -77,7 +77,24 @@ def build_groups():
         groups[name] = [ob]
         objs.append(ob)
     # the head splits again by SLOT - the weave is 'dark', the eyes are 'glow'
+    # - and EVERYTHING THAT IS NOT THE EYES is kept as its own group, because
+    # the occlusion test needs an occluder that does not contain the thing it
+    # is occluding. The first version of that test used the whole "head" span,
+    # which holds the eyes, so the glow was always hidden by itself and the
+    # answer was 0 no matter where the eyes were. A metric that cannot come out
+    # any other way is not a measurement.
     i0, i1 = spans["head"]
+    gv, gf = [], []
+    for verts, faces, slot in P.items[i0:i1]:
+        if slot == "glow":
+            continue
+        off = len(gv)
+        gv.extend(verts)
+        gf.extend([tuple(i + off for i in f) for f in faces])
+    if gf:
+        ob = L.make("%s_head_noglow" % KEY, gv, gf, mat)
+        groups["head_noglow"] = [ob]
+        objs.append(ob)
     for want in ("dark", "glow"):
         gv, gf = [], []
         for verts, faces, slot in P.items[i0:i1]:
@@ -153,6 +170,24 @@ def mask_of(objs, groups, keep, outpath):
     for o in objs:
         o.hide_render = False
     return (a[..., 3] > 0.3)
+
+
+def rgb_of(objs, groups, keep, outpath):
+    """Render ONLY the named groups and return the full RGBA array, not a
+    mask - the eye test needs colour, because the question it asks is what the
+    picture GAINS when the eyes are switched on."""
+    want = set()
+    for k in keep:
+        for o in groups.get(k, []):
+            want.add(o.name)
+    for o in objs:
+        o.hide_render = o.name not in want
+    bpy.context.scene.render.filepath = outpath
+    bpy.ops.render.render(write_still=True)
+    a = G.read_png(outpath)
+    for o in objs:
+        o.hide_render = False
+    return a
 
 
 def components(mask):
@@ -345,6 +380,54 @@ def main():
         rep["ok"] = False
         rep["errors"].append("head_weave_band_score: nothing to measure - RED")
     gl = shot("front_head_glow", ["head_glow"], 0.0, 12.0, floor=40)
+
+    # *** PASS 11. THE INSTRUMENT COULD NOT SEE THE FAULT IT WAS BUILT FOR, AND
+    # *** THE PICTURE IS WHAT CAUGHT IT. ***
+    # mask_of renders the named group ALONE - every other object hidden - which
+    # is exactly right for asking how big a thing is and exactly wrong for
+    # asking whether it can be SEEN. The eyes sit at y -0.11 inside a solid bone
+    # skull whose surface is at -0.154, so on the real render there is no face
+    # at all: the shipped table's "156 px" is the size of two spheres that are
+    # INSIDE the head. A number that survives its own object being buried is the
+    # same class of fault as the register that read ok:true over pairs:{}.
+    # So: render everything EXCEPT the glow, and count the glow that SURVIVES it.
+    # *** AND MY FIRST ANSWER TO THAT WAS WRONG IN THE SAME FAMILY, WHICH IS
+    # *** WORTH WRITING DOWN RATHER THAN QUIETLY REPLACING. *** I rendered the
+    # body without the eyes and counted the glow pixels that fell outside its
+    # ALPHA. That asks "does the glow stick out past the whole silhouette",
+    # and it answers 0 for every face ever drawn, because a face sits INSIDE
+    # the head's outline. An alpha mask carries no depth. The number was 0 at
+    # fwd 0.110 and still 0 at 0.168 after I had moved the eyes 58 mm clear of
+    # the skull - a metric that cannot come out any other way, again.
+    # THE HONEST QUESTION IS WHAT THE EYES CHANGE IN THE PICTURE: render the
+    # creature with them and without them through one camera and count the
+    # pixels that MOVED. That is depth-correct for free, because the renderer
+    # does the depth, and it is the viewer's own test.
+    not_glow = [k for k in groups if k not in ("head_glow", "head")]
+    rgb_off = rgb_of(objs, groups, not_glow,
+                     os.path.join(out, "%s_front_noeyes.png" % args.tag))
+    rgb_on = rgb_of(objs, groups, not_glow + ["head_glow"],
+                    os.path.join(out, "%s_front_witheyes.png" % args.tag))
+    d = np.abs(rgb_on[..., :3] - rgb_off[..., :3]).max(axis=2)
+    a = np.maximum(rgb_on[..., 3], rgb_off[..., 3])
+    vis = (d > 0.08) & (a > 0.3)
+    rep["metrics"]["head_glow_visible_px"] = int(vis.sum())
+    rep["metrics"]["head_glow_visible_share"] = round(
+        float(vis.sum()) / max(1, int(gl.sum())), 4)
+    # AND IT GOES RED ON A FEATURE THAT CANNOT BE SEEN. The eyes exist to be
+    # looked at; zero surviving pixels is not a small number, it is no face.
+    if int(vis.sum()) == 0:
+        rep["ok"] = False
+        rep["errors"].append("head_glow_visible_px: 0 - the eyes are rendered "
+                             "but NOTHING of them survives the body in front of "
+                             "them. A glow that cannot be seen is not a face.")
+    # AND THE RAW COUNT IS FRAMING-DEPENDENT, WHICH I PROVED BY ACCIDENT THIS
+    # RUN: shrinking the spare panels moved head_glow_px 156 -> 178 without any
+    # dial on the head being touched, because the camera's ortho scale is
+    # derived from the whole body's bounds. The share of the head's own weave is
+    # the scale-free form of the same question, so both are reported.
+    rep["metrics"]["head_glow_share_of_weave"] = round(
+        float(gl.sum()) / max(1, int(rep["metrics"].get("head_weave_px") or 1)), 5)
     gys, gxs = np.nonzero(gl)
     if gys.size:
         rep["metrics"]["head_glow_px"] = int(gys.size)

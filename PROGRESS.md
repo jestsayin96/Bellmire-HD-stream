@@ -1,3 +1,56 @@
+## ART 2026-11-17 10:46 CT - THE HURDLEMAN'S TWO SELF-NAMED REGRESSIONS, CLOSED - AND A HARNESS THAT WAS GREEN OVER A FAULT IT COULD NOT SEE
+
+The team lead's 09:58 row: settle the two faults I named as MADE WORSE before a
+nineteenth, with the same before/after method, or write down that I accept them.
+BOTH ARE FIXED AND MEASURED. No nineteenth and no System 2 this hour - the second
+regression turned out never to have been measured at all, and that ate the hour.
+I would spend it the same way again.
+
+  back view, man hidden by his own spares   0.4209 -> 0.3691  (0.3944 started it)
+  the three panels buried behind each other 0.769  -> 0.640   max
+  panel axis splay                          10.07  -> 9.44 deg
+  EYES THAT SURVIVE THE BODY IN FRONT       0      -> 329 px
+  visor band score (must not come back)     0.1379 -> 0.1333
+
+THE ONE THAT MATTERS: I shipped "the head now has no face at all" AND
+"head_glow_px 156" in the same table at 09:48. Both were true, which should have
+been the tell. The probe renders a group ALONE, so it measured two eye spheres
+sitting INSIDE a solid skull - 0.110 forward against a surface at 0.152. The
+honest number for what I shipped is 0, not 156.
+AND MY FIRST FIX TO THE INSTRUMENT WAS WRONG THE SAME WAY: counting glow that
+falls outside the body's ALPHA answers 0 for every face ever drawn, because a
+face is inside the head's outline. It still read 0 after the eyes were 58 mm
+clear of the skull. An alpha mask carries no depth.
+WHAT WORKS: render the creature with the eyes and without them through one
+camera and count the pixels that MOVED - the renderer does the depth, and it is
+the viewer's own question. The probe now also goes RED on a face that cannot be
+seen, and re-run against the shipped geometry it DOES go red.
+ALSO PROVED BY ACCIDENT: shrinking the spare panels moved head_glow_px 156 -> 178
+with no dial on the head touched, because the camera's ortho scale comes off the
+whole body's bounds. Raw counts are not comparable across a silhouette change;
+the scale-free share is now reported beside them.
+
+LEVERS, ONE AT A TIME, EACH MEASURED ALONE: (1) spare panels to 0.78 size - the
+fan was 1.10 m across on shoulders of 0.52, measured, which is why he vanished
+behind it; (2) lateral step 0.12 -> 0.15 to buy back the overlap step 1 cost;
+(3) eyes out to the weave line, below the equator and close together so the
+visor read stays dead.
+
+I LOOKED AT THE PAIR RENDERS, FRONT, SIDE, BACK AND THREE-QUARTER. The number
+was KINDER THAN THE PICTURE: from behind, what I shipped has no creature in the
+frame at all. Eight faults remain and are listed by name in docs/art/MINIBOSSES.md
+- the biggest is that everything is still ONE TONE at wear 1.00, and at pair
+scale that is what stands between this creature and reading as a creature.
+
+REGISTER, SAME METHOD: GREEN, asked 18 / measured 18, blank and border check 54
+files 0 failures, errors []. hurdleman ratio 1.04 UNCHANGED, pair_w 4.93 -> 4.84,
+span 3.07 -> 2.98 m CORRIDOR-SAFE, 1,790 faces, fits_frame true.
+
+GAME BUILD, UNCHANGED AND STILL OWED: scripts/delve.gd MB_FIT needs
+"hurdleman": 1.04 - ART'S MEASURED NUMBER, do not re-derive. hurdleman.glb has
+no .glb.import sibling and the art lane never runs Godot; one import run covers
+it with loader.glb and quartermaster.glb. I touched no .gd.
+
 
 
 ## Cycle 33 - the delve (2026-11-08)

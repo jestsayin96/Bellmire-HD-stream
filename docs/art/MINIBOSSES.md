@@ -836,6 +836,104 @@ WHAT WAS ACTUALLY CHANGED, one lever at a time:
    spares sit in one narrow grey-green band. Unchanged, and still the thing I
    would change next.
 
+### PASS 11, 2026-11-17 10:46 CT: THE TWO I NAMED AS MADE WORSE ARE CLOSED -
+### AND THE SECOND ONE WAS NEVER MEASURED AT ALL
+The team lead's 09:58 row said: settle the two faults you named as made worse
+before a nineteenth, either by fixing them with the same before/after method or
+by writing down that you accept them and why. I fixed both. The hour went on
+the second one, because finding it meant finding that MY OWN INSTRUMENT COULD
+NOT SEE IT, twice.
+
+| the regression I named | metric | shipped (113a278) | now |
+|---|---|---|---|
+| "from the back the man is still mostly behind his own gear - 0.3944 before, **0.4209** now" | share of the man's own pixels behind the spares, back view | **0.4209** | **0.3691** - and better than the 0.3944 that started it |
+| " " | the three panels buried behind each other | 0.531 / **0.769** / 0.540 | 0.579 / **0.640** / 0.580 |
+| " " | spread between the panels' own screen axes | 10.07 deg | **9.44 deg** |
+| "the head now has no face at all - 156 px of glow, invisible at pair scale" | glow pixels that SURVIVE the body in front of them, front view | **0** | **329** |
+| " " | the visor band it must not bring back | 0.1379 | **0.1333** |
+
+**I LOOKED AT THE PAIR RENDER BEFORE I TOUCHED A DIAL, AND THE NUMBER WAS
+KINDER THAN THE PICTURE.** From behind, what I shipped has no creature in the
+frame at all - a woven head and two shoulder knobs over a wall of fence. 0.4209
+does not say that; the picture does. That is the whole reason the rule is look
+at it.
+
+WHAT WAS CHANGED, ONE LEVER AT A TIME, EACH MEASURED ON ITS OWN:
+1. **The spare panels shrank**, 0.86 x 1.22 m to 0.78 of that. Measured, not
+   guessed: the fan was 1.10 m across on SHOULDERS THAT MEASURE 0.52. He was
+   carrying a bundle twice his own width, which is why he vanished behind it
+   and why the front view read as a man penned between two fences. Spares are
+   carried, so they are smaller than the one already standing. 0.4209 -> 0.3310.
+2. **The lateral step went 0.12 -> 0.15**, on its own and measured on its own,
+   because step 1 cost overlap (0.769 -> 0.844, three panels showing as two).
+   The 0.20 m step the PICTURE vetoed at pass 7 was vetoed at 0.86 m panels; at
+   0.67 m there is width back to spend. Overlap 0.844 -> 0.640, and the man
+   hidden goes back up 0.3310 -> 0.3691. I took that trade deliberately: it
+   still beats what I shipped on BOTH numbers.
+3. **The eyes came out to the weave line** - 0.110 forward to 0.168, radius
+   0.021 to 0.027, still below the equator and still close together so the
+   visor read stays dead (0.1379 -> 0.1333).
+
+### THE INSTRUMENT WAS GREEN OVER A FAULT IT COULD NOT SEE, AND THEN MY FIX TO IT WAS WRONG THE SAME WAY
+This is the part worth keeping, and it is the second time this harness has been
+green over nothing.
+- **What I shipped said `head_glow_px: 156` beside the sentence "the head now
+  has no face at all".** Both were true at once, and that should have been the
+  tell. `mask_of` renders a group ALONE with everything else hidden - right for
+  asking how big a thing is, useless for asking whether it can be SEEN. The
+  eyes sat at y 0.110 inside a skull whose surface at that height is 0.152.
+  **The honest number for what I shipped is not 156. It is 0.** Not dim. None.
+- **Then my first fix to the instrument was wrong in the same family.** I
+  rendered the body without the eyes and counted glow pixels falling outside
+  its ALPHA. That asks whether the glow sticks out past the whole silhouette,
+  and it answers 0 for every face ever drawn, because a face sits INSIDE the
+  head's outline. It still read 0 after I had moved the eyes 58 mm clear of the
+  skull - a metric that could not come out any other way. An alpha mask carries
+  no depth.
+- **The test that works asks the viewer's own question**: render the creature
+  with the eyes and without them through one camera and count the pixels that
+  MOVED. The renderer does the depth. 329 px, and the share exceeds 1.0 of the
+  glow's own area because an emissive sphere also lights the weave around it -
+  which is part of what is seen, so it counts.
+- **And it now goes RED on a face that cannot be seen.** Re-run against the
+  shipped geometry it reports RED with `head_glow_visible_px: 0`. The harness
+  that passed my own blindness now fails it.
+- **One more thing the run proved by accident**: shrinking the spare panels
+  moved `head_glow_px` 156 -> 178 with no dial on the head touched, because the
+  camera's ortho scale comes off the whole body's bounds. Raw pixel counts are
+  not comparable across a pass that changes the silhouette. The share of the
+  head's own weave is the scale-free form and is now reported beside it.
+
+### WHAT IS STILL WRONG AFTER PASS 11 - I LOOKED, AND THIS IS THE HONEST LIST
+1. **From behind he is still largely his own gear.** Better, and still not a
+   creature from that angle: most of what now covers him is the STANDING
+   HURDLE, not the spares, and that is the one thing pass 4 forbids moving.
+2. **In the three-quarter he is still a man among fences** - 0.3775 against
+   0.3781, i.e. unchanged. Accepted, not fixed.
+3. **Below his chest the hurdle hides as much as ever** (0.5295 / 0.5309).
+   Unchanged and accepted for the same reason.
+4. **The eyes read as two pale dots at close framing** - at the creature's own
+   three-quarter distance they are nearer to spectacles than to eyes. At PAIR
+   scale, which is where the game sees him, they read as a face. I would rather
+   have a face that is slightly odd up close than no face at all, but it is not
+   the last word on the head.
+5. **The strap still does not read** - dark withy on dark withy. Unchanged.
+6. **The maul is still invisible from behind** and its haft still lost in front.
+   Unchanged, and still fault 6 of the original eight.
+7. **The coil still reads as a tyre and the stakes as flat planks.** Unchanged.
+8. **Everything is still one tone.** At wear 1.00 the body, the hurdle and the
+   spares sit in one narrow grey-green band, and at pair scale that is the
+   single biggest thing standing between this creature and reading as a
+   creature. Unchanged, and still the thing I would change next.
+
+### THE NUMBERS AFTER PASS 11, SAME METHOD AS BEFORE
+4 meshes, **1,790 faces** (unchanged - both levers are scale and placement),
+span **2.98 m CORRIDOR-SAFE** against the 11.0 m three-cell clear span (3.07
+before), **ratio 1.04 UNCHANGED** - so the game build's `MB_FIT` one-liner is
+still the right number and must not be re-derived - pair_w **4.84** (4.93
+before), fits_frame true. Register verdict **GREEN**, asked 18 / measured 18,
+blank and border check **54 files, 0 failures**, errors [].
+
 ### THE NUMBERS AFTER, SAME METHOD AS BEFORE
 4 meshes, **1,790 faces** (1,418 before - the meridional weave and the strap),
 span **3.07 m CORRIDOR-SAFE** against the 11.0 m three-cell clear span,

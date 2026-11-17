@@ -1184,3 +1184,155 @@ only instrument that caught it was looking at the picture.
    `haul`/gold, not damage. Shipped as a reskin with extra hit points it is
    wasted: the box is a promise that a cleared floor can still pay you nothing.
 5. Feed line, if one is wanted: *"It is here for the lord's share."*
+
+================================================================================
+## 21 - THE TAPSTER. IT DRINKS WHAT YOU BROUGHT.
+*17 Nov 2026, art lane. Five passes. Theme `firepit`, height 2.80 m, wear 0.22.*
+
+**THE IDEA.** It does not hit hard, it does not call anybody and it never
+touches a hero's back. It stands over a tun with the tap open, and every brew
+raised in this room goes down that tun instead of down the hero who raised it.
+The counter is to spend NOTHING and kill it dry. Leave it standing and the
+satchel empties - and `delve.gd`'s own flee rule does the rest. **The fight is
+a siege of your own supply: this one does not kill the party, it breaks the
+line.**
+
+### WHAT I CHECKED FOR FIRST - MEASURED, NOT REMEMBERED
+- **The twenty were parsed out of `CANON` this run**, not recalled: summon,
+  self-armour, drag a hero out, douse the lamps, will-not-stay-down, bar the
+  door, steal worn gear, heal its own pack, raise the water, plant the ground,
+  pre-set the room, scale with the fire, ring from elsewhere, set the floor,
+  come apart in two, arm the room, weigh you down, cut the room in two,
+  adaptive resistance, take the haul. Every one is about the FIGHT, the ROOM or
+  the TAKE. **None is about the SATCHEL.**
+- **The resource is real and wired three deep**, grepped out of `scripts/`:
+  `roster.gd:1108` `brew_count`, `:1113` `add_brew`, `:1125` `brews_line`;
+  `delve.gd:3273` `roster.add_brew(h, key, -1)` is the actual swallow; and
+  `delve.gd:1287` `if frac < FLEE_AT and not _has_heal_brew(h)` means a hero
+  with nothing left to drink **turns and walks out of the floor**. No new
+  system is invented to hang this creature on.
+- **It is not the Cook.** The Cook heals EVERYTHING ELSE IN THE ROOM - a buff
+  on the pack, countered by spilling the pot. The Tapster heals nothing of its
+  own; it denies YOUR healing. One adds hit points to the enemy, the other
+  subtracts the only thing you brought.
+- **It is not the Tallyman.** That one lifts WORN GEAR off a body and
+  WITHDRAWS. This one takes a CONSUMABLE at the moment of use and never leaves
+  its tun. A pickpocket, a toll and a landlord are three different creatures.
+- **It is not the Snuffer, and that was the near miss.** Bellmire's word
+  "flask" means LAMP OIL in half the code (`delve.gd:28, :80, :159`,
+  `roster.gd:564`), so a creature that drank the OIL would be IT TAKES THE
+  LIGHT with a barrel in front of it. It takes BREWS - a separate dictionary
+  with a separate reader. The oil is left alone.
+- **Theme `firepit`**, one body behind it (the Stoker). `mess` is where a
+  tapster would stand in life and was **rejected on purpose**: the Cook is
+  already in `mess`, and a healing-denier in the one room that holds the
+  healing-giver is how a new body gets read as a re-skin of an old one.
+- **Height 2.80 extends a FULL ladder.** All twenty parsed: 1.95-2.75 in steps
+  of 0.05, no gap. **Wear 0.22 sits BETWEEN two rungs** because the 0.05 wear
+  ladder is also full, 0.05-1.00, all twenty occupied. 0.22 is between the
+  Tallyman's 0.20 and the Boiler's 0.25 and the reason is the trade: a tapster
+  scours his tun - sour wood is a ruined cellar - but nothing replaces the
+  hoops. Pale clean staves, old iron. The receipt reads KEPT, NOT NEW.
+- **Nothing new was modelled that was already on disk.** `assets/props/` (309
+  files, CC0 Fantasy Props MegaKit) supplies the cask, the hung flasks and the
+  jack. Logged in ASSET_SOURCES.md, which did not list that pack before today.
+
+### THE FIVE PASSES - EACH ONE THING, EACH JUDGED BY LOOKING
+1. Built. The read was there: hooped tun, rail of flasks, man with a jack.
+2. **The pack models were being eaten by the decimate.** Face counts read off
+   the `.gltf` accessors, not guessed: Barrel 824 tris, SmallBottle 130, Mug
+   268, all capped at 110. Loaded whole, the flasks stopped being grey slabs
+   and the jack got its handle. Paid for by taking the four hoops from 20-gon
+   to 14-gon - same radius, same 0.044 thickness, nothing visible changed.
+3. **PASS 2 WAS ONLY HALF RIGHT AND THE CASK SAID SO WHILE THE REPORT STAYED
+   GREEN.** The staves were still torn shards. Probing the file instead of
+   guessing twice: `Barrel` is ONE object with TWO material slots - 0 the
+   wooden cask at radius 0.348, 1 the pack's own hoops at radius 0.349. **One
+   millimetre. It was Z-FIGHTING**, which no decimate ratio was ever going to
+   change. Slot 1 dropped; this body draws its own heavier hoops anyway.
+4. **The tap came out of the face and was therefore not in the picture.** It
+   pointed -Y, straight at the front camera, and a 0.26 m spout foreshortened
+   to four pixels lost against the staves - so the right hand read as a palm
+   laid flat on a barrel and **the only organ the mechanic has was invisible**.
+   That is the Tanner's pass-3 and the Reeve's pass-3 finding, quoted in this
+   creature's own docstring and then violated in the one place it mattered.
+   The tap now runs out of the **-X flank, across the front camera**, at full
+   length, with a vertical handle no camera can foreshorten.
+5. **The apron stopped being a sandwich board.** A flat 0.47 m plate, wider
+   than his own torso and 0.03 m proud of it, erased chest, shoulder line and
+   neck, and both arms appeared to spring from the board's corners. It is now
+   narrower than he is (0.33 against 0.45), bibbed to a strap at the top, and
+   bowed round him. The body shows down both sides.
+
+### THE FIT PROOF - LOOKED AT, NOT ASSERTED
+`renders/art/minibosses/tapster/hero_front.png`, `hero_side.png`,
+`hero_back.png`: the Tapster beside a real posed KayKit Knight at scale 1.0,
+one fixed frame, one ground line.
+- **ratio 1.14** (creature 2.80 m / hero measured 2.45 m posed), pair width
+  4.90 m inside the 5.60 m frame.
+- **The side view separates them, first time.** This is the Reeve's pass-1
+  fault answered before it happened rather than after: the man stands a clear
+  0.36 m FORWARD of the tun's near face, because azimuth 90 looks along X and
+  X separation does nothing there.
+- Front and back both read as **a man in a cellar apron at an open tap on a
+  hooped tun, with other people's flasks hung above it**.
+
+### THE FAULTS I CAN SEE. NINE, NONE SWEPT.
+1. **The man is a WIRE beside the knight.** Same fault the Reeve named at its
+   pass 5 and I did not get to it here: KayKit bodies are chibi and chunky
+   (2.45 m tall, 1.32 m across) and this torso, neck and limbs are
+   adult-proportioned and read thin at pair distance. **This is the top row for
+   the next seat on this body.**
+2. **The head is small** for the same reason - KayKit heads are enormous.
+3. **The right hand does not visibly grip the tap handle.** Its three finger
+   cones point -Y, at the lens, and foreshorten to a blob; the arm reads as a
+   bent stump ending in air. Pass 4 fixed the tap and left the hand behind.
+4. **The side view loses the tap entirely** - the cask is between it and the
+   camera. ROOM-LOCKED BY CONSTRUCTION in the same sense: a tap faces one way,
+   and it faces the way the front view reads. Named, not hidden.
+5. **The side view collapses the rail and all five flasks into one post and
+   one blob.** The top of the creature - the row of pendants that is its whole
+   silhouette claim - does not survive a 90-degree turn. A plan-angled rail
+   would fix it and is not in this pass.
+6. **The rail post reads as a pump handle** from the side, which is the wrong
+   trade entirely.
+7. **The glow does almost nothing against the render's white background.** The
+   falling stream and the puddle read; the one half-full flask on the rail does
+   not read as lit at all. It may well read on a dark floor - **I have not
+   proved that, so it is a fault and not a note.**
+8. **The hung flasks read as small tins or canisters**, not glass, at pair
+   scale. They carry "a row of vessels" and not much more.
+9. **The apron's neck straps end at the shoulder blades attached to nothing**
+   in the back view, and the man leans slightly forward over his toes.
+
+### THE INSTRUMENT, AND WHAT IT STILL CANNOT SEE
+`minibossgen`: ok true, errors `[]`, blank+border check 0 failures, **4 meshes**
+(the bar is four), **2,479 faces**, footprint span 3.04 m, **CORRIDOR-SAFE**
+against the 11.0 m three-cell clear span, `pack_used: true`.
+`minibossfit --only tapster`: verdict **GREEN**, asked `["tapster"]`, measured
+`["tapster"]` - not an empty register - hero 2.45 m `posed: true`, blank check
+3 files 0 failures, `unproved_cells: []`, **proving_views 3 of 3** with
+`seen: 1.0` for both subjects in all three views.
+**THE PORTED OCCLUSION TEST EARNED ITS KEEP AND STILL DID NOT CATCH PASSES 2-4.**
+It would have caught a man standing behind his own tun, and that is exactly
+what it was built for. It could not see a barrel rendering as torn shards, a
+bottle rendering as a slab, or a tap foreshortened to four pixels - every one
+of those frames is full of opaque pixels inside its border with both subjects
+plainly visible. **Three faults, three passes, found only by looking.**
+
+### WHAT THE GAME BUILD LANE MUST DO - I DO NOT DO IT, AND I TOUCHED NO .gd
+1. `assets/monsters/minibosses/tapster.glb` - **static, no armature**: a
+   `model` path and **NO `anims` entry**, same as the other twenty. As with all
+   of them there is no `.glb.import` sibling (this lane never runs Godot); an
+   import run writes it and `delve.gd:377` falls back safely until then.
+2. `scripts/delve.gd` `MB_FIT`: add `"tapster": 1.14` - **MEASURED**, from
+   `renders/art/minibosses/_fit_tapster_register.json` `pairs.tapster.ratio`.
+   **Do not re-derive it.** Same one-line shape as `"tanner": 1.12`,
+   `"loader": 1.08`, `"reeve": 0.80`.
+3. The `firepit` set piece can now pick between the Stoker and the Tapster.
+4. **The idea is a BEHAVIOUR and this one is a SUPPLY behaviour** - it wants
+   `roster.add_brew(h, key, -1)` to land in the creature instead of in the
+   hero, not a damage number. Shipped as a re-skin with extra hit points it is
+   wasted: the whole promise is a party that cannot heal through it and whose
+   own flee rule then takes the floor away from them.
+5. Feed line, if one is wanted: *"Something in here is drinking."*

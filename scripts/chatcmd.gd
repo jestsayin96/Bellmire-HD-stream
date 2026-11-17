@@ -837,6 +837,58 @@ static func commands() -> Dictionary:
             if not ghost_k.is_empty():
                 push_error("COMMANDS_DATA FORGE GHOST: `forge`.what names %d kind(s) Gear.KINDS does not accept, so the doc invites a refusal: %s" % [ghost_k.size(), ghost_k])
                 printerr("COMMANDS_DATA FORGE GHOST - %d published kind(s) the smith refuses: %s" % [ghost_k.size(), ghost_k])
+        # B34: THE FORGE KIND LIST WAS THE FIRST RECITED FIELD ANYONE CHECKED, NOT THE ONLY ONE.
+        # The row this hour asked how many other `what` strings make a claim a viewer can check
+        # against code, and how many of those already have a guard. I walked all 27 - the count,
+        # the authority for each and the reason the unguarded ones stay unguarded are written out
+        # in PROGRESS.md B34. THREE more have an authority that is an ENUMERATION or a single
+        # NUMBER I can compare exactly, so they are guarded here in the forge's shape:
+        #   `enlist`.what recites Roster.CLASSES (15 callings) and Roster.SPECIES (6 peoples) -
+        #   the two longest hand-written lists in this file. A calling added to roster.gd tomorrow
+        #   is EXACTLY how `greataxe` (S20) and `sceptre` (D94b) reached the smithy unpublished.
+        #   `muster`.what publishes "takes six from chat", and QUEUE_MAX above is what actually
+        #   turns the seventh viewer away. Change either and nothing else in the house notices.
+        # ALL THREE READ CORRECT TODAY - 15/15, 6/6, six vs 6 - and that is the point: they agree
+        # by coincidence, not by construction, and this is what makes them stay agreed. Not fatal,
+        # the shape every guard above uses: a battery greps COMMANDS_DATA; no line is healthy.
+        var ew: String = String(((cmd_d.get("enlist", {}) as Dictionary)).get("what", ""))
+        for pair in [["Callings: ", Roster.CLASSES.keys(), "CALLING", "the valley refuses"],
+                     ["Peoples: ", Roster.SPECIES.keys(), "PEOPLE", "no such people"]]:
+            var e_anchor: String = String(pair[0])
+            var e_real: Array = pair[1] as Array
+            var e_tag: String = String(pair[2])
+            var e_parts: PackedStringArray = ew.split(e_anchor, false)
+            if e_parts.size() < 2:
+                push_error("COMMANDS_DATA ENLIST ANCHOR: `enlist`.what no longer carries \"%s\" - the published %s list can no longer be checked against the code that accepts it" % [e_anchor, e_tag.to_lower()])
+                printerr("COMMANDS_DATA ENLIST ANCHOR - `enlist`.what lost its \"%s\" anchor; that list is now unchecked" % e_anchor)
+                continue
+            var e_said: Array = []
+            for w in e_parts[1].split(".", false)[0].split(",", false):
+                var t := String(w).strip_edges()
+                if t != "":
+                    e_said.append(t)
+            var e_unsaid: Array = e_real.filter(func(k): return not e_said.has(String(k)))
+            var e_ghost: Array = e_said.filter(func(k): return not e_real.has(k))
+            if not e_unsaid.is_empty():
+                push_error("COMMANDS_DATA ENLIST %s DRIFT: %d %s(s) !enlist accepts are absent from `enlist`.what, so docs/COMMANDS.md does not tell a viewer they can type them: %s" % [e_tag, e_unsaid.size(), e_tag.to_lower(), e_unsaid])
+                printerr("COMMANDS_DATA ENLIST %s DRIFT - %d accepted %s(s) unpublished: %s" % [e_tag, e_unsaid.size(), e_tag.to_lower(), e_unsaid])
+            if not e_ghost.is_empty():
+                push_error("COMMANDS_DATA ENLIST %s GHOST: `enlist`.what names %d %s(s) that do not exist, so the doc invites a refusal (%s): %s" % [e_tag, e_ghost.size(), e_tag.to_lower(), String(pair[3]), e_ghost])
+                printerr("COMMANDS_DATA ENLIST %s GHOST - %d published %s(s) nothing accepts: %s" % [e_tag, e_ghost.size(), e_tag.to_lower(), e_ghost])
+        var mw: String = String(((cmd_d.get("muster", {}) as Dictionary)).get("what", ""))
+        var m_words: Dictionary = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+                                   "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
+        var m_said: int = -1
+        for w in m_words:
+            if mw.contains("takes %s from chat" % w):
+                m_said = int(m_words[w])
+                break
+        if m_said < 0:
+            push_error("COMMANDS_DATA MUSTER ANCHOR: `muster`.what no longer says \"takes <number> from chat\" - the published size of the chat queue can no longer be checked against QUEUE_MAX (%d)" % QUEUE_MAX)
+            printerr("COMMANDS_DATA MUSTER ANCHOR - `muster`.what lost its \"takes <number> from chat\" phrase; the queue size is now unchecked")
+        elif m_said != QUEUE_MAX:
+            push_error("COMMANDS_DATA MUSTER COUNT: `muster`.what publishes a chat queue of %d and QUEUE_MAX turns the viewer away at %d - docs/COMMANDS.md promises a place the muster does not have" % [m_said, QUEUE_MAX])
+            printerr("COMMANDS_DATA MUSTER COUNT - published %d, enforced %d" % [m_said, QUEUE_MAX])
         _cmds = parsed
     return _cmds
 

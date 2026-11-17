@@ -2314,3 +2314,140 @@ landed at S20 (14:21, ada04de). Left on the row: the staff comparison (mine vs a
   (15:52:10 against a 15:48:50 clock), noticed it in the same call that wrote it, and rewrote the line with
   the clock read inside the writing call. That is the B32 fault and it did not leave the file.
 - No live Twitch test. Nothing owed by the GAME BUILD lane. Not ticked - the supervisor ticks.
+
+## D-cycle - S22 System 2 engine half: the shield settled by one frame - KIT AND PACK BOTH READ EDGE-ON, SO S20's NO-ROTATION CALL STANDS; MB_FIT reeve 0.80. 2026-11-17T16:15:50-06:00 (game build)
+TAKE THIS NEXT (lead's 14:58 row, still the GAME BUILD row after the 15:47 merge) gave: the shield picture FIRST (a
+tier-1/2 pack shield beside a class shield_square/round bearer, same camera, same pose), the staff comparison (done at
+S21), and MB_FIT "reeve": 0.80. Systems 3/4 and Phase 2 NOT touched.
+- NEW tools/_s22_shield.gd (windowed). Five bearers on the REAL path (Roster.offhand_mesh/offhand_bone -> Gear.equip at
+  Gear.offhand_scale), all Idle, one camera: knight armour 0 (kit shield_square), knight 1 (pack shield_common), knight
+  2 (pack shield_uncommon), cleric 0 (kit shield_round), cleric 2 (pack shield_uncommon). The FACE is MEASURED, not taken
+  from S20's comment: the thinnest axis of each held shield's own local bounds is its face normal, carried to the world.
+- THE ANSWER: ALL FIVE IDENTICAL. Thin axis Z on every mesh (kit square 0.88x1.19x0.30, kit round 0.88x0.88x0.33, pack
+  common 0.69x0.69x0.13, pack uncommon 0.76x0.84x0.20); world normal (-0.96, 0.01, 0.26) on every one, |n.z| 0.26 =
+  EDGE-ON to the front camera, kit and pack alike. COMPARE: kit mean 0.26 over 2, pack mean 0.26 over 3 -> SAME READ.
+  s22_front_all.png and s22_front_3q.png show it: every shield, kit or pack, stands at the left hip with its face
+  turned out to the hero's left. That is how KayKit's own carry holds the kit shields, so it is the game's look and NOT
+  a System 2 fault; rotating only the pack ones would make the party inconsistent. S20's no-rotation call is RIGHT, and
+  this entry is the written close the lead asked for. (Whether the WHOLE game should turn its shields face-forward is a
+  separate design call across every shield, not System 2's - not raised as work, only named.)
+- MB_FIT: "reeve": 0.80 added to scripts/delve.gd, copied from art's renders/art/minibosses/_fit_report.json
+  (reeve.ratio 0.8, creature_h 1.95 / hero_h 2.45). NOTE: nothing SPAWNS the reeve yet - lore_lines.json has no "reeve"
+  miniboss lines and no theme maps to it, so miniboss_model("reeve") is not reached; the ratio is ready for the day it is.
+- Battery (verdict lines, 16:09-16:15 on this tree): parse 0 SCRIPT ERROR / 0 Parse Error; S22_SHIELD OK (5 shields, 5
+  faces, 8 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2010 samples off the floor (home);
+  TOWNWALK in_solid=0/19044 (0.000%) raid_in_solid=0/4968 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2
+  (capped), 0 SCRIPT ERROR. Pictures: renders/cycles/s22/ (front_all, side_all, front_3q, close_0..4).
+- Merge note: origin/main into laptop conflicted in docs/WORK_PLAN.md (4 hunks, all lead text); took main's 15:47 side,
+  which already carries the older laptop rows inside it. No row of the lead's was dropped.
+- Lock: claimed 16:08:30, first declared 16:36 (over the 25-min cap again) and corrected in the lock line to 16:33 at
+  16:10, before any Godot ran. No live Twitch test. Not ticked - the team lead ticks.
+- S22b, 2026-11-17T16:19:49-06:00 - THE STAFF SWEEP the lead's 15:58 ruling asked for (method: a shorter staff; the number measured). NEW
+  tools/_s22_staffsweep.gd (cloned from _s21_staff.gd): seven rows of three mages on the real roster path, the SHIPPED
+  rotation, multipliers 1.9 / 1.7 / 1.5 / 1.3 / 1.1 / 0.9 / 0.7; lowest point of every mesh under the held node INCLUDING
+  the D94 butt ribbons, through all seven poses INCLUDING Cheer. Worst per row (staff length at tier 2 in brackets):
+  x1.90 -1.074 (3.06 m) | x1.70 -0.905 (2.74) | x1.50 -0.735 (2.42) | x1.30 -0.566 (2.09) | x1.10 -0.397 (1.77) |
+  x0.90 +0.081 (1.12) | x0.70 +0.182 (0.87). Every row's worst pose is IDLE, not Cheer (the shipped rotation without the
+  S21 grip shift does not invert into the floor). LARGEST CLEARING MULTIPLIER: x0.90 (the true edge lies between 1.1 and
+  0.9; the step from -0.397 to +0.081 is not linear, so the edge is not interpolated here).
+  WHAT x0.90 LOOKS LIKE (renders/cycles/s22/sweep/sweep_front_m090.png, LOOKED AT): a rod from the fist to the boot top,
+  the head at the belt. IT READS AS A WAND, NOT A STAFF. So by the lead's own clause: NO MULTIPLIER CLEARS WITHOUT MAKING
+  THE STAFF A WAND, and the answer moves back to pose-aware (or a grip nearer the butt with a per-pose fix for Cheer, as
+  S21 measured). Numbers given, not a chosen fix; gear.gd UNCHANGED. Harness cosmetic: the Label3D "xN" text divides by
+  the look scale and prints 0.47 for x0.90 - the ROW lines carry the real multiplier.
+  S22_STAFFSWEEP OK (21 staves, 7 poses, 0 failures); parse 0 SCRIPT ERROR / 0 Parse Error (16:17 re-run). No script
+  changed since the 16:09-16:15 battery, so those verdicts stand for this tree. Relaunch declared on its own lock line.
+
+## B-cycle - B34 I WALKED ALL 27 `what` STRINGS AND COUNTED THE CHECKABLE CLAIMS; THREE MORE ARE GUARDED, 2026-11-17T17:06:00-06:00 (chat bot)
+THE ROW: "walk the other 26 commands' `what` strings and ask of each: does this sentence make a
+CLAIM a viewer can check against code - a number, a list, a cost, a cooldown, a limit? Report the
+COUNT of checkable claims and how many already have a guard." The count is below and the walk is
+behind it. It is NOT zero, and the forge was NOT the last one.
+
+### THE COUNT, AND IT IS THE WHOLE ANSWER TO THE ROW
+  27 commands walked. 14 carry at least one checkable claim; 13 carry none.
+  19 CHECKABLE CLAIMS in total.
+  GUARDED BEFORE THIS HOUR: 1  (`forge`.what kinds -> Gear.KINDS, B33)
+  GUARDED AFTER THIS HOUR:  4  (+ enlist callings, enlist peoples, muster count)
+  STILL UNGUARDED:         15  - every one named below with its authority and the reason.
+Two more sentences (`hero`, `inventory`) list the fields their own reply prints. They are prose
+summaries of a reply, not claims against an enumeration, and I have EXCLUDED them from the 19
+rather than padding the count with them. Saying so is part of the measurement.
+
+### THE THREE I GUARDED (scripts/chatcmd.gd, in commands(), the forge's shape)
+Picked on one rule: the authority is an ENUMERATION or a single NUMBER I can compare exactly, with
+no judgement in the middle. All three READ CORRECT TODAY. That is the point - they agree by
+coincidence, not construction, which is exactly how `greataxe` and `sceptre` got into the smithy
+unpublished.
+  1. `enlist`.what "Callings: ..." vs Roster.CLASSES - 15 said, 15 accepted, in order.
+  2. `enlist`.what "Peoples: ..."  vs Roster.SPECIES - 6 said, 6 accepted, in order.
+     These are the TWO LONGEST hand-written lists in data/commands.json - 21 names between them,
+     longer than the forge list that had drifted twice.
+  3. `muster`.what "takes six from chat" vs ChatCmd.QUEUE_MAX (6) - the constant that actually
+     turns the seventh viewer away, in MY OWN FILE, promised to viewers by a word nothing read.
+Each carries DRIFT (accepted but unpublished), GHOST (published but refused) and an ANCHOR that
+fires if the sentence is reworded so the list or the number can no longer be found - the third one
+being the part that stops the guard going quietly blind.
+
+### RED PATH PROVED, FIVE OF SEVEN PATHS, AND THE DATA RESTORED BYTE-IDENTICAL
+I injected faults into data/commands.json and ran tools/_l14_test.gd on each. Verbatim:
+  COMMANDS_DATA ENLIST CALLING DRIFT: 1 calling(s) ... absent from `enlist`.what: ["bard"]
+  COMMANDS_DATA ENLIST PEOPLE GHOST: `enlist`.what names 1 people(s) that do not exist ... ["gnome"]
+  COMMANDS_DATA MUSTER COUNT: `muster`.what publishes a chat queue of 7 and QUEUE_MAX turns the
+    viewer away at 6
+  COMMANDS_DATA ENLIST ANCHOR: `enlist`.what no longer carries "Callings: "
+  COMMANDS_DATA MUSTER ANCHOR: `muster`.what no longer says "takes <number> from chat"
+CALLING GHOST and PEOPLE DRIFT are the SAME two code paths as the two proved above, reached with
+the other list - I am saying that rather than claiming seven proofs for five runs.
+data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before the first injection and after the
+last restore, and `cmp` against the saved copy reports identical. The data file and
+docs/COMMANDS.md ARE UNCHANGED THIS CYCLE; the only edited file is scripts/chatcmd.gd.
+
+### THE 15 I DID NOT GUARD, EACH WITH ITS AUTHORITY AND WHY NOT. NO SILENCES.
+IN REACH, AND THE OBVIOUS NEXT THREE (authority is a clean enumeration, I ran out of window):
+  - `armoury`.what tier list "leather, chainmail, plate, warded plate" -> the armour table in
+    gear.gd (lines 32-35). Same shape as the forge guard, one table over.
+  - `armoury`.what "It shows: boots, pauldrons, a helm" -> gear.gd:257-258 says exactly that in a
+    comment; the code behind it is what would have to be enumerated.
+  - `bestiary`.what "the eight lords that hold the deep" -> bosses.json `lesser` (4) + `greater`
+    (4) = 8. I COUNTED IT: it is right today. A fifth greater lord makes the sentence wrong in
+    silence, and the content lane adds to that file most hours.
+  - `satchel`.what "two fifths of its shop cost" -> SELL_BACK 0.4, declared TWICE, in
+    leaderboard_panel.gd:65 and snapshot_pub.gd:40. chatcmd.gd:472 already carries a comment
+    saying chat and the hub must quote the same number, and NOTHING checks that they do.
+MINE, UNGUARDED, SMALL:
+  - `brew`.what "No name buys Draughts of Mending" -> the default key "mending" in _brew.
+  - `wear`.what "!wear off ring takes one off" -> the verb in my own dispatch.
+  - `catchup`.what "One line, kept short on purpose" -> a claim about the shape of its own reply.
+ANOTHER LANE'S SURFACE - I report, I do not reach in:
+  - `oil`.what "one flask lights a floor for two delvers" -> the oil burn in delve.gd, which is a
+    RATE across a floor, not a constant I can read off.
+  - `look`.what "a 10-second pane" and "(teal)" -> the channel-points lane and the HUD's colour.
+  - `hub`.what's section list -> web/, the hub lane's.
+  - `wear`.what accessory families (rings, amulets, cloaks, boots, gloves) and cosmetic families
+    (hats, banners, a pet, a title) -> the key suffixes and prefixes in items.json, the content
+    writer's file. Guardable by suffix, but the naming convention is theirs to break, not mine.
+  - `reroll`.what "a worse throw keeps the old ones" -> a RULE in _reroll, not a list or a number.
+  - `help`.what "!help <command> for one in detail" -> already effectively covered by the NO WHAT
+    and ORDER guards, which is why I am not counting it as a new surface.
+AMBIGUOUS AUTHORITY - A QUESTION, NOT AN ITEM, AND I AM NOT INVENTING ONE (freeze holds):
+  - `brew`.what names 12 brews. data/potions.json carries 232 and buy_brew accepts ANY of them.
+  - `dye`.what names 10 colours. items.json `dyes` carries 265.
+    Both shortlists READ as the list. Whether the other 220 and 255 are meant to be found rather
+    than published is a CONTENT call, not a drift I can assert, and a guard that demanded all 232
+    be recited in a chat line would be wrong. NAMING IT AND LEAVING IT.
+
+### GATES (run on the EXACT bytes being committed - md5 above, taken before and after the red runs)
+    --headless --path W6 --quit-after 300           parse, 0 errors, rc=0
+    tools/_l14_test.gd                              L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                          TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                          COMMANDS_DOC OK wrote 27 commands
+  ZERO COMMANDS_DATA lines across the whole green battery, which is the healthy reading - the six
+  older guards and the three new ones are all silent on this tree.
+  COMMANDS_DOC is a no-op by construction this cycle, not by inspection: data/commands.json is
+  byte-identical to HEAD, so the generator cannot produce a different docs/COMMANDS.md.
+  Merged origin/main first: a clean FAST-FORWARD, 44 commits, no conflict (chatbot -> 207f563).
+
+### FOR THE GAME BUILD LANE: nothing. No twitch_eventsub.gd signature touched, nothing owed.
+### FOR MR. E: nothing to decide. No live Twitch test this cycle - no account used, no bits, no
+### redemption, no channel-point reward created, deleted or re-priced, and bellmirebro posted nothing.

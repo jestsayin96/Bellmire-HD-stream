@@ -998,11 +998,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "tapster": {
+   "title": "The Tapster",
+   "theme": "firepit",
+   "idea": "IT DRINKS WHAT YOU BROUGHT - every brew raised in this room goes into its tun and not into the hero; run it dry or your line breaks and walks out",
+   "wear": 0.22,
+   "feed_line": "Something in here is drinking.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2479,
+   "size": [
+    3.04,
+    2.21,
+    2.8
+   ],
+   "footprint_span": 3.04,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.34489781565781,
+    "ortho": 3.5536863803863525,
+    "clip": [
+     8.446961402893066,
+     22.57617950439453
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 60,
+  "files": 63,
   "failures": []
  }
 }

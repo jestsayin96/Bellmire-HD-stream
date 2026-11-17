@@ -5734,3 +5734,440 @@ def reeve():
 
 
 BUILDERS.update({"reeve": reeve})
+
+
+# ------------------- 21 THE TAPSTER: a tun stood on end, a rail of other
+# people's flasks, and a man with his jack out.
+#
+# MEASURED, NOT RECALLED - the whole of this entry's justification was parsed
+# out of CANON and grepped out of scripts/ this run, 17 Nov 2026 16:4x CT:
+#   - TWENTY IDEAS EXIST AND NOT ONE OF THEM TOUCHES WHAT THE PARTY DRINKS.
+#     Parsed, not remembered: summon, self-armour, drag a hero out, douse the
+#     lamps, will-not-stay-down, bar the door, steal worn gear, heal its own
+#     pack, raise the water, plant the ground, pre-set the room, scale with the
+#     fire, ring from elsewhere, set the floor, come apart in two, arm the
+#     room, weigh you down, cut the room in two, adaptive resistance, take the
+#     haul. Every one is about the FIGHT, the ROOM or the TAKE. None is about
+#     the SATCHEL.
+#   - THE RESOURCE IS REAL AND IT IS WIRED THREE DEEP, which is the Reeve's
+#     standard and the reason that one worked: roster.gd:1108 brew_count,
+#     :1113 add_brew, :1125 brews_line; delve.gd:3273 `roster.add_brew(h, key,
+#     -1)` is the actual swallow; and - the part that makes this a FIGHT change
+#     rather than a tax - delve.gd:1287 `if frac < FLEE_AT and not
+#     _has_heal_brew(h)` means a hero with nothing left to drink TURNS AND
+#     RUNS. So a creature that empties the satchel does not out-damage you, it
+#     BREAKS YOUR LINE. Nothing else in the twenty makes the party withdraw.
+#   - IT IS NOT THE COOK AND IT IS NOT THE TALLYMAN, and those are the two it
+#     had to be checked against. The COOK heals EVERYTHING ELSE IN THE ROOM -
+#     its pot is a buff on the pack, and the counter is to spill the pot. The
+#     Tapster never heals anything of its own: it DENIES YOUR OWN HEALING, and
+#     the counter is to spend nothing until it is down. One adds hit points to
+#     the enemy, the other subtracts the only thing you brought. The TALLYMAN
+#     lifts WORN GEAR off a hero and WITHDRAWS with it - theft off a body, and
+#     it leaves. The Tapster takes a CONSUMABLE at the moment of use and never
+#     leaves its tun. A pickpocket, a toll and a landlord are three different
+#     creatures.
+#   - IT IS NOT THE SNUFFER EITHER, and that is the near miss worth writing
+#     down. Bellmire's word "flask" means LAMP OIL in half the code
+#     (delve.gd:28, :80, :159, roster.gd:564) and a creature that drank the OIL
+#     would be the Snuffer's own mechanic - IT TAKES THE LIGHT - with a barrel
+#     in front of it. So this one takes BREWS, which are a separate dictionary
+#     with a separate reader, and the oil is left alone.
+#   - THEME `firepit`, measured off dungeon_hd.gd's miniboss weights: the roll
+#     is 35 on barracks and workshop, 10 on shrine and crypt, 15 on everything
+#     unlisted - and `firepit` is unlisted with exactly ONE body behind it (the
+#     Stoker), the same single-body case the Loader, the Tanner and the Reeve
+#     were built for. `mess` is where a tapster would stand in life, and it was
+#     REJECTED ON PURPOSE: the Cook is already in `mess`, and putting a
+#     healing-denier in the one room that already holds a healing-giver is how
+#     a new body gets read as a re-skin of an old one. The pit is where ale is
+#     mulled; that is close enough to true and it keeps clear water.
+#   - HEIGHT 2.80 EXTENDS THE TOP OF A FULL LADDER. All twenty parsed: 1.95 to
+#     2.75 in steps of 0.05 is FULL with no gap (the Reeve took 1.95 to extend
+#     the bottom, the Tanner 2.75 to extend the top). 2.80 is honest rather
+#     than a repeat, and it is the right number because THE TUN IS THE
+#     CREATURE and it stands on end - this is the first thing in the set whose
+#     mass is a tall upright cylinder.
+#   - WEAR 0.22, AND THE 0.05 LADDER IS NOW FULL SO THIS ONE SITS BETWEEN TWO
+#     RUNGS ON PURPOSE. Parsed: 0.05 to 1.00 in 0.05 steps, all twenty
+#     occupied. 0.22 falls between the Tallyman's 0.20 and the Boiler's 0.25
+#     and the reason is the trade: a tapster SCOURS HIS TUN because sour wood
+#     is a ruined cellar, but nothing ever replaces the hoops, so the staves
+#     are pale and clean and the iron on them is old. Mr. E's rule 2 -
+#     condition is the receipt - and this receipt reads KEPT, NOT NEW.
+#   - IT USES WHAT IS ALREADY ON DISK (rule 3). assets/props/ is the CC0
+#     Quaternius Fantasy Props MegaKit, 309 files, licence beside it at
+#     assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt - Barrel for the tun,
+#     SmallBottle for the hung flasks and Mug for the jack. It was NOT in
+#     docs/art/ASSET_SOURCES.md before this run; it is now. Falls back to
+#     procedural geometry and SAYS SO in the report.
+CANON.update({
+    "tapster": ("The Tapster", 2.80, (0.72, 0.64, 0.46), (0.52, 1.00, 0.72),
+                "firepit",
+                "IT DRINKS WHAT YOU BROUGHT - every brew raised in this room goes into its "
+                "tun and not into the hero; run it dry or your line breaks and walks out",
+                0.22, "Something in here is drinking."),
+})
+ORDER = ORDER + ["tapster"]
+
+
+def _prop_mesh(stem, max_faces=110, keep_slots=None):
+    """Real pack geometry out of assets/props - the CC0 Fantasy Props MegaKit
+    this repo already carries - normalised into the UNIT CUBE (0..1 on every
+    axis, min corner at the origin) so the caller places it in metres.
+
+    Same shape and the same honesty as _dungeon_mesh: returns None when the
+    file or the importer refuses, the caller falls back to procedural geometry,
+    and the report records which it got. A silent substitution is the same
+    fault class as a lying gate.
+    """
+    ck = ("prop", stem, max_faces)
+    if ck in _PACK_CACHE:
+        return _PACK_CACHE[ck]
+    out = None
+    try:
+        import bpy
+        root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            os.pardir, os.pardir))
+        path = os.path.join(root, "assets", "props", stem + ".gltf")
+        if os.path.isfile(path):
+            before = set(bpy.data.objects)
+            bpy.ops.import_scene.gltf(filepath=path)
+            new = [o for o in bpy.data.objects if o not in before]
+            for ob in [o for o in new if o.type == 'MESH']:
+                if len(ob.data.polygons) > max_faces:
+                    m = ob.modifiers.new("dec", 'DECIMATE')
+                    m.decimate_type = 'COLLAPSE'
+                    m.ratio = max(0.10, float(max_faces) / len(ob.data.polygons))
+            verts, faces = [], []
+            dg = bpy.context.evaluated_depsgraph_get()
+            for ob in [o for o in new if o.type == 'MESH']:
+                obe = ob.evaluated_get(dg)
+                me = obe.to_mesh()
+                mw = obe.matrix_world
+                off = len(verts)
+                verts.extend([mw @ v.co for v in me.vertices])
+                for p in me.polygons:
+                    # *** keep_slots: TAKE ONE MATERIAL OUT OF A PACK MODEL. ***
+                    # Added 17 Nov for the Tapster and for a measured reason,
+                    # not a preference - see the cask note in tapster().
+                    if keep_slots is not None and p.material_index not in keep_slots:
+                        continue
+                    faces.append(tuple(i + off for i in p.vertices))
+                obe.to_mesh_clear()
+            for ob in new:
+                try:
+                    bpy.data.objects.remove(ob, do_unlink=True)
+                except Exception:
+                    pass
+            if verts and faces:
+                # bounds come from the vertices the KEPT faces actually use -
+                # dropping a slot and then normalising against every vertex in
+                # the file would place the part by geometry that is not there.
+                used = sorted({i for f in faces for i in f})
+                remap = {i: k for k, i in enumerate(used)}
+                verts = [verts[i] for i in used]
+                faces = [tuple(remap[i] for i in f) for f in faces]
+                mn = [min(v[i] for v in verts) for i in range(3)]
+                mx = [max(v[i] for v in verts) for i in range(3)]
+                ex = [max(1e-6, mx[i] - mn[i]) for i in range(3)]
+                out = ([Vector(((v[0] - mn[0]) / ex[0], (v[1] - mn[1]) / ex[1],
+                                (v[2] - mn[2]) / ex[2])) for v in verts], faces)
+    except Exception:
+        out = None
+    _PACK_CACHE[ck] = out
+    return out
+
+
+def _unit_cyl(seg=14):
+    """The fallback for a barrel: a plain cylinder carried into the unit cube."""
+    v, f = L.cone(0.5, 0.5, 1.0, seg)
+    return ([Vector((p[0] + 0.5, p[1] + 0.5, p[2] + 0.5)) for p in v], f)
+
+
+def _place_unit(P, vf, slot, cx, cy, cz, sx, sy, sz, yaw=0.0, flip=False):
+    """Place a unit-cube part centred on (cx, cy) with its BASE at cz, sized
+    sx/sy/sz metres, spun yaw about its own centre. `flip` turns it upside
+    down, which is how a flask hangs mouth-downward off a rail."""
+    v, f = vf
+    ca, sa = math.cos(yaw), math.sin(yaw)
+    out = []
+    for p in v:
+        x = (p.x - 0.5) * sx
+        y = (p.y - 0.5) * sy
+        z = (1.0 - p.z) if flip else p.z
+        out.append(Vector((cx + x * ca - y * sa, cy + x * sa + y * ca, cz + z * sz)))
+    P.raw((out, f), slot)
+
+
+def tapster():
+    """IT DRINKS WHAT YOU BROUGHT. It does not hit hard, it does not call
+    anybody and it does not take a thing off your back: it stands over a tun
+    with its tap open, and every brew a hero raises in this room goes down that
+    tun instead of down the hero. The counter is to spend NOTHING and kill it
+    dry. Leave it standing and the satchel empties, and delve.gd's own flee
+    rule does the rest - a hero under the flee line with no heal brew turns and
+    walks out of the floor. THE FIGHT IS A SIEGE OF YOUR OWN SUPPLY, which is a
+    pressure no other body in this set applies: this one does not kill the
+    party, it BREAKS THE LINE.
+
+    Silhouette intent - A TALL UPRIGHT TUN, A RAIL OF HANGING FLASKS ACROSS
+    THE TOP, AND A MAN WITH HIS JACK HELD OUT:
+      - the TUN is the mass and it is VERTICAL AND ROUND - the first tall
+        upright cylinder in the set. Checked against the two bodies that also
+        carry a vessel: the COOK's is a fat black ball slung LOW on chains at
+        hip height and the BOILER's is a small SHALLOW dish held HIGH on a
+        trunnion with a pour running sideways off it. A hooped cask stood on
+        its end, as tall as the man and twice his width, is neither;
+      - the RAIL tops the whole creature, so the silhouette ends in A ROW OF
+        HANGING VESSELS rather than a head. The Reeve ends in a square mouth,
+        the Drillmaster in a disc, the Stoker in a flue - nothing in the set
+        ends in a row of pendants. These are OTHER PEOPLE'S FLASKS, hung
+        mouth-down and empty, and they are the only part of the mechanic a
+        still picture can carry: the thing has done this before;
+      - the MAN stands a clear 0.36 m FORWARD of the tun's near face. This is
+        the Reeve's pass-2 fault applied FIRST TIME and not discovered again:
+        side-on, azimuth 90 looks along X, so X separation does nothing and the
+        bigger mass eats the smaller one whole. Front and back separate him in
+        X, the side view separates him in Y;
+      - BOTH ARMS RUN ACROSS THE PICTURE - the Tanner's pass-3 and the Reeve's
+        pass-3 finding, applied first time. His right hand is ON THE TAP, so
+        the two masses touch and the man and the tun are obviously one creature
+        and not a man standing near furniture. His left holds the jack out,
+        palm tipped up to the room: GIVE IT HERE;
+      - the DRIP under the tap, the puddle at its foot and the one flask on the
+        rail still half full are the only lit things on the body, and they are
+        thin SOURCES against dark - the Reeve's pass-4 lesson, where a solid
+        glow the size of the opening came back as a lump of dough.
+
+    Front is -Y, the same as the twenty before it.
+    """
+    P = Parts("tapster")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX, MY = -0.66, -0.80
+    TX, TY = 0.52, 0.06
+    TUN_R, TUN_H = 0.50, 1.46
+
+    # *** PASS 2 AND PASS 3, AND PASS 2 WAS ONLY HALF RIGHT - RECORDED THAT WAY
+    # *** ON PURPOSE. ***
+    # PASS 2 asked what these three models actually cost, read off the .gltf
+    # accessors rather than guessed: Barrel 824 tris in two primitives
+    # (392 + 432), SmallBottle 130, Mug 268. A 110-face cap was putting a 0.26
+    # collapse ratio through all three. Loading them whole FIXED THE BOTTLE AND
+    # THE MUG - pass 1's flasks were grey slabs and its jack had no handle, and
+    # both are the real objects now.
+    # IT DID NOT FIX THE CASK, AND THE PICTURE SAID SO WHILE THE REPORT STAYED
+    # GREEN. The staves still came back as TORN SHARDS WITH HOLES BETWEEN THEM.
+    # PASS 3 PROBED THE FILE INSTEAD OF GUESSING TWICE: Barrel is ONE object
+    # with TWO material slots - 0 MI_Trim_Furniture, the wooden cask, z 0.003
+    # to 0.901 at radius 0.348; 1 MI_Trim_Metal, the pack's own hoops, z 0.150
+    # to 0.733 at radius 0.349. ONE MILLIMETRE OF CLEARANCE. The shards were
+    # Z-FIGHTING between two coincident surfaces, which no decimate ratio was
+    # ever going to change.
+    # So slot 1 is dropped and the cask is taken alone. This body draws its own
+    # four hoops below at 0.044 m - heavier than the pack's and standing clear
+    # of the staves - so nothing is lost by it.
+    # NEITHER CHECK IN THIS LANE CAN SEE EITHER FAULT: a shredded barrel is
+    # still opaque inside its border, and so is a slab that should be a bottle.
+    # Both were found by LOOKING, which is the only instrument that had them.
+    barrel = _prop_mesh("Barrel", max_faces=440, keep_slots={0})
+    bottle = _prop_mesh("SmallBottle", max_faces=140)
+    mug = _prop_mesh("Mug", max_faces=280)
+    P.used_pack = bool(barrel)
+    P.pack_parts = {"Barrel": bool(barrel), "SmallBottle": bool(bottle), "Mug": bool(mug)}
+
+    # ---- THE TUN, STOOD ON END.
+    _i_tun = len(P.items)
+    _place_unit(P, barrel or _unit_cyl(), 'body', TX, TY, 0.0,
+                TUN_R * 2.0, TUN_R * 2.0, TUN_H)
+    # FOUR HEAVY HOOPS. The Loader's lesson, twice confirmed: a band thinner
+    # than this is one pixel on the pair shot, and a decimated pack barrel has
+    # lost its own. These are what make a cylinder read as a CASK.
+    # PASS 2 PAYS FOR THE WHOLE CASK HERE AND NOWHERE ELSE: four 20-gon hoops
+    # at ring=7 cost ~1120 faces, more than the cask itself. At 14 and 5 they
+    # cost ~560 and NOTHING ABOUT THEM CHANGES ON SCREEN - same radius, same
+    # 0.044 thickness, a coarser circle on a body that is flat-shaded anyway.
+    # Measured separately from the cask fix in the same pass, as the standing
+    # rule requires when two changes share one render.
+    for t in (0.10, 0.36, 0.64, 0.92):
+        _ring(P, (TX, TY, TUN_H * t), TUN_R * 1.015, axis='z', slot='dark',
+              rad=0.044, n=14)
+    # the head of the cask, and a bung off-centre in it
+    P.add(L.cone(TUN_R * 0.96, TUN_R * 0.92, 0.06, 18), 'body', loc=(TX, TY, TUN_H + 0.03))
+    P.add(L.cone(0.082, 0.072, 0.075, 10), 'dark', loc=(TX - 0.17, TY + 0.13, TUN_H + 0.09))
+    _span("tun", _i_tun)
+
+    # ---- THE TAP, AND PASS 4 IS ONE CHANGE: IT COMES OUT OF THE FLANK, NOT
+    # ---- OUT OF THE FACE.
+    # Passes 1-3 put the spout on the cask's NEAR face pointing -Y, straight at
+    # the front camera, and it FORESHORTENED TO NOTHING: a 0.26 m spout was
+    # four pixels of end-on cone lost against the staves behind it, and the
+    # right hand read as a palm laid flat on a barrel. That is the Tanner's
+    # pass-3 finding and the Reeve's pass-3 finding - a part aimed at the lens
+    # is not in the picture - quoted in this very docstring and then violated
+    # in the one place it mattered most. THE TAP IS THE ONLY ORGAN THE MECHANIC
+    # HAS. A viewer who cannot see an open tap is looking at a man standing
+    # near a barrel.
+    # It now runs out of the -X flank, ACROSS the front camera and toward the
+    # man, at full length: spout, handle standing up off it, a thin stream and
+    # a puddle on the floor under it. The side camera loses it behind the cask
+    # and that is named in the fault list rather than hidden - a tap can only
+    # face one way, and it faces the way the front view reads.
+    _i_tap = len(P.items)
+    TAPZ = 0.52
+    TAPX = TX - TUN_R + 0.02
+    # the spout, horizontal, pointing -X out of the staves
+    P.add(L.cone(0.060, 0.044, 0.30, 10), 'dark', loc=(TAPX - 0.15, TY, TAPZ),
+          rot=(0.0, math.pi / 2.0, 0.0))
+    # the boss where it enters the cask, so it reads as DRIVEN IN, not stuck on
+    P.add(L.cone(0.092, 0.078, 0.07, 10), 'dark', loc=(TAPX + 0.02, TY, TAPZ),
+          rot=(0.0, math.pi / 2.0, 0.0))
+    # THE HANDLE, standing straight up off the spout - the one part that says
+    # OPEN. It is vertical, so no camera can lose it to foreshortening.
+    P.add(L.box(0.048, 0.048, 0.21), 'dark', loc=(TAPX - 0.19, TY, TAPZ + 0.13))
+    P.add(L.box(0.15, 0.050, 0.050), 'dark', loc=(TAPX - 0.19, TY, TAPZ + 0.235))
+    # THE RUN. A thin source against dark, never a solid - the Reeve's pass-4
+    # lesson, where a glow the width of the opening came back as a lump of
+    # dough. Four beads down and a puddle at the foot.
+    for k, (dz, r) in enumerate(((-0.06, 0.028), (-0.18, 0.025),
+                                 (-0.30, 0.022), (-0.41, 0.019))):
+        P.add(L.sphere(r, r, r * 1.55, 7, 5), 'glow',
+              loc=(TAPX - 0.30, TY, TAPZ + dz))
+    P.add(L.cone(0.24, 0.19, 0.018, 12), 'glow', loc=(TAPX - 0.30, TY, 0.013))
+    _span("tap", _i_tap)
+
+    # ---- THE RAIL AND THE HUNG FLASKS. The top of the creature.
+    _i_rail = len(P.items)
+    RAILZ = TUN_H + 0.74
+    for s in (-1, 1):
+        limb(P, [(TX + s * (TUN_R - 0.07), TY + 0.16, TUN_H - 0.04),
+                 (TX + s * (TUN_R + 0.02), TY + 0.10, RAILZ)], 0.062, 0.048, 'dark')
+    rail = [(TX - TUN_R - 0.10, TY + 0.10, RAILZ), (TX + TUN_R + 0.10, TY + 0.10, RAILZ)]
+    limb(P, rail, 0.040, 0.040, 'dark', ring=7)
+    # five flasks, mouth-down, empty - EXCEPT ONE, which is still going down.
+    for i, (fx, hang, sz, lit) in enumerate((
+            (-0.46, 0.17, 0.30, False), (-0.21, 0.23, 0.26, False),
+            (0.02, 0.15, 0.33, True), (0.26, 0.21, 0.27, False),
+            (0.49, 0.16, 0.30, False))):
+        hx = TX + fx
+        # the cord it hangs by, so it reads HUNG and not floating
+        limb(P, [(hx, TY + 0.10, RAILZ - 0.02), (hx, TY + 0.07, RAILZ - hang)],
+             0.013, 0.011, 'dark', ring=5)
+        _place_unit(P, bottle or _unit_cyl(10), 'bone', hx, TY + 0.07,
+                    RAILZ - hang - sz, 0.145, 0.145, sz, flip=True)
+        if lit:
+            P.add(L.sphere(0.052, 0.052, 0.036, 9, 6), 'glow',
+                  loc=(hx, TY + 0.07, RAILZ - hang - sz * 0.30))
+    _span("rail", _i_rail)
+
+    # ---- THE MAN. Short, aproned, and reading as a LANDLORD, not a fighter.
+    _i_man = len(P.items)
+    # mass at honest thickness from the start: the Reeve's pass-5 lesson is
+    # that a KayKit adventurer is chibi and chunky (2.45 m, 1.32 m across) and
+    # a thin shin beside it is a wire, not a leg.
+    _legs(P, MX, y=MY, hip=0.74, stance=0.19, r0=0.120, r1=0.096,
+          boot=(0.28, 0.41, 0.12))
+    limb(P, [(MX, MY + 0.08, 0.68), (MX, MY + 0.00, 0.95), (MX, MY - 0.05, 1.18)],
+         0.225, 0.178, 'body')
+    # *** PASS 5, ONE THING: THE APRON STOPS BEING A SANDWICH BOARD. ***
+    # Passes 1-4 hung a flat 0.47 m plate from chest to shin, square at the top
+    # and 0.03 m proud of the body. At pane distance the man read as A FIGURE
+    # CARRYING A SIGN: the plate was wider than his own torso, so no chest, no
+    # shoulder line and no neck survived it, and both arms appeared to spring
+    # from the board's corners rather than from a body. It is now NARROWER THAN
+    # HIM (0.33 against a 0.45 torso), so the body shows down both sides, it is
+    # BIBBED - cut back at the top to a strap width, which is what an apron
+    # does and a board does not - and it is BOWED round him rather than flat,
+    # using the same curved sweep the twelve creatures use. Nothing else moves
+    # in this pass.
+    apron = []
+    for i in range(5):
+        v = i / 4.0
+        z = 1.14 - 0.74 * v
+        # bib at the top, full skirt below: half-width grows fast off the strap
+        hw = 0.075 + 0.090 * min(1.0, v / 0.34) + 0.075 * v
+        yb = MY - 0.205 - 0.030 * v
+        row = []
+        for u in (-1.0, -0.5, 0.0, 0.5, 1.0):
+            # bowed: the middle stands proud, the edges wrap back onto the body
+            row.append(Vector((MX + u * hw, yb + 0.055 * (u * u), z)))
+        apron.append(row)
+    P.raw(surf(apron, 0.026), 'bone')
+    # the neck strap, over the shoulders, so the bib is obviously tied on
+    for s_ in (-1, 1):
+        limb(P, [(MX + s_ * 0.075, MY - 0.205, 1.14),
+                 (MX + s_ * 0.150, MY - 0.090, 1.235),
+                 (MX + s_ * 0.150, MY + 0.060, 1.175)], 0.017, 0.015, 'dark', ring=5)
+    # the apron string, across the back of the coat
+    limb(P, [(MX - 0.24, MY + 0.10, 1.03), (MX + 0.24, MY + 0.10, 1.03)],
+         0.018, 0.018, 'dark', ring=5)
+    for sh in ((MX - 0.240, MY - 0.04, 1.185), (MX + 0.240, MY - 0.04, 1.185)):
+        P.add(L.sphere(0.100, 0.094, 0.086, 9, 6), 'dark', loc=sh)
+    _span("man", _i_man)
+
+    _i_head = len(P.items)
+    HD = (MX, MY - 0.07, 1.360)
+    limb(P, [(MX, MY - 0.04, 1.20), HD], 0.088, 0.074, 'body')
+    P.add(L.sphere(0.174, 0.178, 0.168, 12, 8), 'bone', loc=HD)
+    # THE SCALP BAND SITS ABOVE THE EQUATOR. Three bodies in this set came
+    # back reading as A VISORED FACE because a dark horizontal band crossed
+    # the middle of the head. Nothing crosses the face here.
+    P.add(L.cone(0.168, 0.182, 0.070, 12), 'dark',
+          loc=(HD[0], HD[1] + 0.008, HD[2] + 0.126))
+    # eyes BREAK the bone surface (0.158 forward at this radius) - the pass-11
+    # finding: a light inside its own skull measures bright and renders black.
+    eyes(P, (HD[0], HD[1], HD[2] - 0.012), 0.055, 0.031, -0.190)
+    _span("head", _i_head)
+
+    # ---- BOTH ARMS ACROSS THE PICTURE.
+    _i_arms = len(P.items)
+    SR = (MX + 0.240, MY - 0.05, 1.185)
+    SL = (MX - 0.240, MY - 0.05, 1.185)
+    # RIGHT HAND ON THE TAP HANDLE. The two masses touch, so the man and the
+    # tun are obviously one creature - and pass 4 moves the grip off the cask's
+    # belly and onto the thing the mechanic runs through.
+    HR = (TAPX - 0.19, TY - 0.06, TAPZ + 0.21)
+    limb(P, [SR, (MX + 0.46, MY + 0.16, 0.96), HR], 0.098, 0.072, 'body')
+    P.add(L.sphere(0.104, 0.096, 0.064, 9, 6), 'bone', loc=HR)
+    for fx in (-0.056, 0.0, 0.056):
+        P.add(L.cone(0.021, 0.017, 0.082, 6), 'bone',
+              loc=(HR[0] + fx, HR[1] - 0.080, HR[2] - 0.014),
+              rot=(math.pi / 2.0, 0.0, 0.0))
+    # LEFT HAND HOLDS THE JACK OUT, palm tipped up to the room. The Reeve's
+    # pass-3 lesson: a flat hand whose broad face points at the ceiling is a
+    # BLADE to a camera looking along -Y, so the palm is tipped 1.18 rad and it
+    # has fingers, which is what makes a small pale shape read as a hand.
+    HL = (MX - 0.54, MY - 0.19, 1.000)
+    limb(P, [SL, (MX - 0.46, MY - 0.13, 1.070), HL], 0.098, 0.072, 'body')
+    P.add(L.box(0.176, 0.058, 0.196), 'bone', loc=HL, rot=(-1.18, 0.0, 0.0))
+    for fx in (-0.052, 0.0, 0.052):
+        P.add(L.cone(0.020, 0.016, 0.078, 6), 'bone',
+              loc=(HL[0] + fx, HL[1] - 0.028, HL[2] + 0.112), rot=(-0.30, 0.0, 0.0))
+    P.add(L.cone(0.022, 0.018, 0.074, 6), 'bone',
+          loc=(HL[0] + 0.082, HL[1] - 0.026, HL[2] + 0.028), rot=(0.0, 1.30, 0.0))
+    # THE JACK in that hand - a real pack mug, and a lit measure in it.
+    _place_unit(P, mug or _unit_cyl(10), 'bone', HL[0] - 0.02, HL[1] - 0.09,
+                HL[2] + 0.12, 0.185, 0.185, 0.215)
+    P.add(L.cone(0.070, 0.066, 0.020, 10), 'glow',
+          loc=(HL[0] - 0.02, HL[1] - 0.09, HL[2] + 0.300))
+    _span("arms", _i_arms)
+
+    # ---- THE SLATE on a nail at the tun's flank: what you owe. One ornament,
+    # and it is the lawful-looking part, the way the Reeve's seal was.
+    _i_slate = len(P.items)
+    P.add(L.box(0.26, 0.030, 0.33), 'dark', loc=(TX + TUN_R - 0.06, TY - 0.44, 0.96),
+          rot=(0.0, 0.0, -0.46))
+    for i in range(4):
+        P.add(L.box(0.017, 0.012, 0.115), 'bone',
+              loc=(TX + TUN_R - 0.12 + i * 0.038, TY - 0.458, 0.97),
+              rot=(0.0, 0.10 * (i - 1.5), -0.46))
+    _span("slate", _i_slate)
+
+    return P
+
+
+BUILDERS.update({"tapster": tapster})

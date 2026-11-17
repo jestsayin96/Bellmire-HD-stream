@@ -1,10 +1,61 @@
 {
  "ok": true,
- "hero": {},
- "pairs": {},
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "snuffer": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 3.37,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
+  },
+  "snuffer_chibi": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 4.21,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
+  }
+ },
  "errors": [],
+ "measured": [
+  "snuffer",
+  "snuffer_chibi"
+ ],
+ "asked": [
+  "snuffer",
+  "snuffer_chibi"
+ ],
  "blank_check": {
   "files": 2,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

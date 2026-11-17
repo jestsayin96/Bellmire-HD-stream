@@ -1415,3 +1415,96 @@ models whose chibi conversions were measured instead.
 Ratios I stand behind, unchanged: every value in the registers was taken off an
 evaluated depsgraph against the same 2.45 m posed Knight, with the blank check
 green and `errors: []` on all eleven files.
+
+================================================================================
+## BOTH REGISTER FAULTS ABOVE ARE NOW CLOSED (17 Nov, ~04:40 CT)
+The team lead made this the ART lane's next item because D96 - a TICKED item in
+another lane - is standing on these five numbers. Fixed in the order that makes
+the instrument trustworthy FIRST, because an instrument that lies is worth less
+than no instrument.
+
+### 1. THE HARNESS NOW REPORTS RED ON AN EMPTY MEASUREMENT
+`tools/art/minibossfit.py`. `ok` used to mean "nothing raised an exception". It
+now means **"every key asked for has a ratio on record"**. Three new RED
+conditions, checked whether or not the measurement loop ran:
+  - `hero` empty - every ratio is a ratio TO the hero, so no hero is no ratio;
+  - `pairs` empty - the register measured NOTHING;
+  - any key in `--only` with no entry in `pairs`.
+The report also carries `verdict` (`GREEN`/`RED`), `asked` and `measured`, and
+the printed line leads with the verdict - COORDINATION 15: a gate that prints
+no verdict line is red.
+
+**HOW THE EMPTY SNUFFER REGISTER WAS BORN, since the cause matters more than
+the file:** a `--sheet` run. That flag skips the measurement loop entirely and
+the sheet half still succeeds, so the file was written with `ok: true` over an
+empty `pairs`. Nothing checked that the keys being sheeted had ever been
+measured.
+
+**PROVED, NOT ASSERTED.** `renders/art/minibosses/_fit_d96red_probe.json` is a
+deliberate re-run of that exact path - same flags, same two keys, `--sheet` -
+committed as the receipt. It reports `verdict: RED`, `ok: false` and names all
+three faults. Before this pass the same command produced `ok: true`.
+
+### 2. THE FIVE ENTRIES D96 LEANS ON, RE-MEASURED
+| register | key | creature h | ratio | pair span | verdict |
+|---|---|---|---|---|---|
+| snuffer | `snuffer` | 2.60 | **1.06** | 3.37 | GREEN |
+| snuffer | `snuffer_chibi` | 2.60 | **1.06** | 4.21 | GREEN |
+| gaoler | `gaoler_chibi` | 2.35 | 0.96 | 5.58 | GREEN |
+| porter | `porter_chibi` | 2.30 | 0.94 | 5.52 | GREEN |
+| sexton | `sexton_chibi` | 2.45 | 1.00 | 3.93 | GREEN |
+| stoker | `stoker_chibi` | 2.40 | 0.98 | 4.74 | GREEN |
+Same hero every time: KayKit `Knight.glb`, `Idle` action with its slot, frame
+3, scale 1.0, measured 2.45 m. Blank check 2 files per register, 0 failures,
+`errors: []` on all five.
+
+**THE FOUR CHIBI RATIOS CAME BACK IDENTICAL TO THE OLD ONES TO THE DIGIT.** So
+the numbers D96 applied were never wrong - the fault was only that the mesh
+they were keyed to did not exist. That is worth saying plainly rather than
+letting a re-measurement imply the old values were bad.
+
+**THE SNUFFER IS THE ONE NUMBER THAT MOVES: 1.06, NOT 1.00.** It stands 2.60 m
+against a 2.45 m hero - a head taller, not level. D96 carried it at 1.00 by its
+own honest admission; that is now a measured 1.06.
+
+### 3. I TOOK THE "COMMIT THE CHIBIS" BRANCH, AND WHY
+The ruling allowed either committing the chibis or re-measuring against the
+base body on the floor. I committed them, because the chibi IS the register
+conversion - it is the body in the game's own register, and degrading D96 to
+the pre-conversion base bodies would throw away five conversions to fix a
+missing export. Exported through the same `minibossgen` path that measured
+them, so the mesh on the floor and the mesh in the register are one build:
+`gaoler_chibi.glb` (3 meshes, 2292 faces, span 3.72), `porter_chibi.glb`
+(4 / 1590 / 3.66), `sexton_chibi.glb` (4 / 1530 / 2.07), `stoker_chibi.glb`
+(4 / 1808 / 2.88), `snuffer_chibi.glb` (4 / 1258 / 2.35). All five
+CORRIDOR-SAFE against the 11.0 m three-cell clear span; all at or under the
+four-mesh bar. `_report.json` carries every span and face count.
+
+**WHY THEY WERE MISSING AT ALL:** these five are the EARLY conversions. The
+`.glb` export in `minibossgen` was only being driven per-run from the Tallyman
+(16 Nov 21:51) onward; the five converted before that were rendered and
+measured but never exported. Nothing was wrong with the meshes.
+
+### 4. THE PAIR SHEET, AND WHAT I CAN SEE WRONG IN IT
+`renders/art/minibosses/_d96fix_pairs.png` - five chibis, front/side/back, each
+beside the posed 2.45 m hero at one ortho scale and one ground line. I looked
+at it. Faults, honestly:
+  - **SNUFFER** reads as a parasol, not a snuffer. It is near rotationally
+    symmetric, so the SIDE view is the same picture as the front and the view
+    earns nothing. The lit wicks are at the outboard arm tips only; the central
+    column is bare from the front.
+  - **GAOLER** the chain coil lies flat on the ground and from the SIDE it
+    passes behind/through the lower body - the coil ring and the near leg
+    occupy the same place. Arms read near-black against a brown body from the
+    front: a lighting fault, not geometry.
+  - **PORTER** the arm planks END IN FLAT SQUARE CAPS - no hands, and it reads
+    unfinished at the tips. From the SIDE the leaf and the body collapse into
+    one confused slab and the planks point at the camera and vanish.
+  - **SEXTON** the grid goes edge-on in the SIDE view and the creature nearly
+    disappears; the spade on the ground sits forward of the feet rather than
+    against them; the lit niches blow out to near-white.
+  - **STOKER** the rake handle crosses the forearm at the grip and reads as
+    passing THROUGH it; the rake head sits on the ground line rather than just
+    above it.
+None of these five faults changes a ratio or a span, which is what D96 reads.
+They are the next pass's work and nobody is queued on them.

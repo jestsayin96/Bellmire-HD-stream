@@ -45,8 +45,17 @@
   }
  },
  "errors": [],
+ "measured": [
+  "sexton",
+  "sexton_chibi"
+ ],
+ "asked": [
+  "sexton",
+  "sexton_chibi"
+ ],
  "blank_check": {
   "files": 2,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

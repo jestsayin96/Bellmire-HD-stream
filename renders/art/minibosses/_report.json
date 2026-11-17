@@ -641,6 +641,166 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "gaoler_chibi": {
+   "title": "The Gaoler (chibi)",
+   "theme": "prison",
+   "idea": "IT DRAGS - rebuilt in the game's own proportions",
+   "wear": 0.8,
+   "feed_line": "A chain is paying out in the dark.",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2292,
+   "size": [
+    3.72,
+    2.59,
+    2.35
+   ],
+   "footprint_span": 3.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.552034125859247,
+    "ortho": 3.990356922149658,
+    "clip": [
+     9.216445922851562,
+     24.346511840820312
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "porter_chibi": {
+   "title": "The Porter (chibi)",
+   "theme": "keep",
+   "idea": "IT BARS THE WAY - rebuilt in the game's own register",
+   "wear": 0.45,
+   "feed_line": "A bar has dropped behind you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1590,
+   "size": [
+    3.66,
+    2.64,
+    2.3
+   ],
+   "footprint_span": 3.66,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.533557969933739,
+    "ortho": 4.0670576095581055,
+    "clip": [
+     9.066532135009766,
+     23.957735061645508
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "sexton_chibi": {
+   "title": "The Sexton (chibi)",
+   "theme": "crypt",
+   "idea": "IT WILL NOT STAY DOWN - rebuilt in the game's own register",
+   "wear": 0.85,
+   "feed_line": "A spade is working somewhere in the dark.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1530,
+   "size": [
+    2.07,
+    1.37,
+    2.45
+   ],
+   "footprint_span": 2.07,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7444858956836924,
+    "ortho": 3.0659327507019043,
+    "clip": [
+     7.278245449066162,
+     18.573881149291992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "stoker_chibi": {
+   "title": "The Stoker (chibi)",
+   "theme": "firepit",
+   "idea": "IT IS ONLY AS BIG AS THE FIRE - rebuilt in the game's own proportions",
+   "wear": 0.7,
+   "feed_line": "The pit has been fed.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1808,
+   "size": [
+    2.88,
+    1.78,
+    2.4
+   ],
+   "footprint_span": 2.88,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.075176542309413,
+    "ortho": 3.195638418197632,
+    "clip": [
+     8.079339027404785,
+     20.92378044128418
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "snuffer_chibi": {
+   "title": "The Snuffer (chibi)",
+   "theme": "shrine",
+   "idea": "IT TAKES THE LIGHT - rebuilt in the game's own register",
+   "wear": 0.9,
+   "feed_line": "The nearest lamp has gone out.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1258,
+   "size": [
+    2.35,
+    2.35,
+    2.6
+   ],
+   "footprint_span": 2.35,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.1075715444057455,
+    "ortho": 3.612839937210083,
+    "clip": [
+     8.236498832702637,
+     20.808326721191406
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],

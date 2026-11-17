@@ -9139,3 +9139,13 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or by anyone, no reward created, deleted or re-priced, no channel setting touched.
 The parse run JOINs #jestsayin96 as bellmirebro - the standing B18 gate - and it is silent.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+
+## C-93 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (14:58 block): four named greataxes at tiers 1 and 3 (items.json only)
+Counted first, through gear.gd D94_KIND_WORDS in order with the family gate: named greataxe by tier was 0 / 1 / 0 / 1 at tiers 1 / 2 / 3 / 4 (Bearded Greataxe t2, Ash-Maul Greataxe t4). The pack mesh axeDouble serves tiers 1-3, so tiers 1 and 3 were reached only through the unnamed forge path.
+Added to equipment.weapons: w_axe_woodyard_greataxe, w_axe_charcoal_greataxe (tier 1, uncommon, plain); w_axe_lamp_etched_greataxe, w_axe_bellyard_greataxe (tier 3, very rare, runed, paid-for condition). Every name carries the word greataxe so each resolves to kind greataxe. No artifact, no caravan-only. New top-level key: `_note_c93` only (a note, like c92).
+VALIDATION OK: items.json parses; only `equipment` and `_note_c93` differ from main; all 97 prior weapon entries identical; the four new entries have the exact key order of existing pieces. Code wiring: none.
+## hub standing check 15:38 CT, 17 Nov (no code change)
+- H32 already ticked whole (fbf17f0). Merged origin/main; web/ and docs/HUB_SECURITY.md byte-identical to the last check. Icons: assets/icons/items has no diff since manifest source commit 2473836, so the 520-thumb set (2,341,956 bytes, 2.23 MiB, under 6 MB) is current.
+- node --check web/app.js OK. Security greps: no outerHTML/insertAdjacentHTML/document.write/eval/new Function; innerHTML only the two page-owned sites (app.js 252, 298); one CSP meta.
+- Headless 1440x900 over file:// (no network, so every state renders as the fetch-failed state; ?mock=crowd could not show live data this way): ?mock=crowd ?state=empty ?state=fail ?state=stale ?mock=chronicle ?open=1 all scrollHeight 900 = viewport (no page scroll, 900/900), rail listbox present, 0 page errors. Looked at the crowd shot: rail/stage/chat three columns correct, honest failed-fetch banner. Not a real-set look; the real-set look is f3e447c / 61c9269.
+- Live dot: red (functional). Not publishing. Loose files (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) left untracked: this machine cannot delete.

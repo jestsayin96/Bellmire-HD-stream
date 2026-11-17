@@ -28,7 +28,7 @@
                   "what": "Walk to a dock and fish: junk to rare catches.",
                   "example": "!fish"},
     "forge":     {"aliases": [], "args": "[kind | list]", "short": "Next weapon tier at the smithy, in a kind of your calling (!forge list).", "cost": "60 / 160 / 420 / 1100 gold by tier (rework at the top: a quarter)", "needs_hero": true,
-                  "what": "Buy the next weapon tier at the smithy, in your calling's kinds: sword, greatsword, dagger, spear / axe, mace / staff, wand / crossbow, bow / quarterstaff, wraps. !forge list shows yours and the next price. The best tiers need Bellmire to grow; scarforged steel is only found below.",
+                  "what": "Buy the next weapon tier at the smithy, in your calling's kinds: sword, greatsword, dagger, spear / axe, mace, greataxe / staff, sceptre, wand / crossbow, bow / quarterstaff, wraps. !forge list shows yours and the next price. The best tiers need Bellmire to grow; scarforged steel is only found below.",
                   "example": "!forge spear"},
     "armoury":   {"aliases": ["armory"], "args": "", "short": "Next armour tier: leather, chainmail, plate, warded plate.", "cost": "50 / 150 / 400 / 1000 gold by tier", "needs_hero": true,
                   "what": "Buy the next armour tier: leather, chainmail, plate, warded plate. It shows: boots, pauldrons, a helm. Scarwoven mail is only found below.",

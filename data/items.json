@@ -2984,6 +2984,30 @@
         ],
         "flavour": "Square-bladed. Forgot what it was for and became a weapon."
       },
+      "w_axe_woodyard_greataxe": {
+        "name": "Woodyard Greataxe",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Two blades, one haft, no pretence. Bought off the yard by the cord."
+      },
+      "w_axe_charcoal_greataxe": {
+        "name": "Charcoal-Burner's Greataxe",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Black to the haft from the burner's hands. Splits a log in one and a door in two."
+      },
       "w_axe_millstone_axe": {
         "name": "Millstone Axe",
         "family": "axe",
@@ -3064,6 +3088,30 @@
           "caravan"
         ],
         "flavour": "A bandit's boast, forged to be carried openly. The bandit lost it on the road."
+      },
+      "w_axe_lamp_etched_greataxe": {
+        "name": "Lamp-Etched Greataxe",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Etched along both bits by the lampwright. Clean work, paid for in full."
+      },
+      "w_axe_bellyard_greataxe": {
+        "name": "Bell-Yard Greataxe",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Both heads poured in one pour at the bell-yard. The note is flat and nobody argues."
       },
       "w_axe_dragontooth_axe": {
         "name": "Dragontooth Axe",
@@ -6842,5 +6890,6 @@
   "_note_c71": "C-71 (TAKE THIS NEXT, CONTENT row: next-stalest backlog item inside the four files; items.json had no real additions since C-54, only relabels in C-58 and C-61): 48 new title cosmetics (kind title, same four keys as existing titles) and 35 new dyes (plain 6-hex, none repeating an existing hex). Titles cover the Phase 2 words (ascent, errand, Guild Vault, carry weight, the teleportation stone) and a prosperous top band (cost 300-480) for a level 9-12 Bellmire, so a viewer who saves long gets a title that reads as the town's wealth, not make-do. Additive only. No equipment, accessory, rarity, stock or price changed. No artifact is stocked anywhere.",
   "_note_c91": "C-91 (TAKE THIS NEXT 12:58, CONTENT row; game build S18 finding): nine NAMED blade-family daggers at tiers 1-3, three per tier, in equipment.weapons. Every tier 1-3 blade was a sword word, so the dagger meshes wired at S18 (gear.gd KINDS dagger, dagger_common/uncommon/rare) were reached only by the unnamed !forge path. gear.gd D94_KIND_WORDS reads a piece's kind from its NAME ('shortknife', 'knife', 'dagger' -> dagger), so each new name carries one of those words and no earlier-listed word. Same shape as every other piece: name, family, tier, tier_name, rarity (tier read straight across: 1 uncommon, 2 rare, 3 very rare), routes, flavour. No costs here. None is tier 4 or 5 and none is an artifact. Condition tracks tier: tier 1 is a working tool, tier 3 is paid-for and new-made. Tier 4+ daggers are not added because the dagger kit reuses ADV dagger.gltf there."
 ,
-  "_note_c92": "C-92 (TAKE THIS NEXT 13:58, CONTENT row): count of NAMED tier 1-3 staff and crossbow pieces, read the way gear.gd piece_kind reads them (D94_KIND_WORDS, first word that is also a kind of the family). Before: staff 1/2/2 and crossbow 3/3/4 at tiers 1/2/3. Crossbow is not thin, no change. Staff tier 1 was one piece (Hedge-Witch's Staff, which reaches staff only because 'hedge' would read as sword and arcane has no sword kind), so two named tier 1 staves are added: Shepherd's Staff, Lamplighter's Staff. Neither name carries mace, wand, rod or stick, so both resolve to staff. Rarity uncommon. No artifact, no caravan. Same piece shape as the rest."
+  "_note_c92": "C-92 (TAKE THIS NEXT 13:58, CONTENT row): count of NAMED tier 1-3 staff and crossbow pieces, read the way gear.gd piece_kind reads them (D94_KIND_WORDS, first word that is also a kind of the family). Before: staff 1/2/2 and crossbow 3/3/4 at tiers 1/2/3. Crossbow is not thin, no change. Staff tier 1 was one piece (Hedge-Witch's Staff, which reaches staff only because 'hedge' would read as sword and arcane has no sword kind), so two named tier 1 staves are added: Shepherd's Staff, Lamplighter's Staff. Neither name carries mace, wand, rod or stick, so both resolve to staff. Rarity uncommon. No artifact, no caravan. Same piece shape as the rest.",
+  "_note_c93": "C-93 (TAKE THIS NEXT 14:58, CONTENT row): count of NAMED greataxe pieces by tier, read the way gear.gd piece_kind reads them (D94_KIND_WORDS in order, first word that is also a kind of the family; axe family has kind greataxe from S20, and the word greataxe sits ahead of maul). Before: tier 1 = 0, tier 2 = 1 (Bearded Greataxe), tier 3 = 0, tier 4 = 1 (Ash-Maul Greataxe). The pack mesh axeDouble covers tiers 1-3, so tiers 1 and 3 reached it only through the unnamed forge path. Added two named pieces at each: Woodyard Greataxe, Charcoal-Burner's Greataxe (tier 1, uncommon); Lamp-Etched Greataxe, Bell-Yard Greataxe (tier 3, very rare). Every name carries the word greataxe so each resolves to kind greataxe. Tier 3 routes are shop/forged and forged/looted, never caravan-only, never artifact. Same piece shape as the rest. Tier 2 now 1 and tier 4 1 are untouched."
 }

@@ -805,6 +805,38 @@ static func commands() -> Dictionary:
             if not (typeof(cv) == TYPE_FLOAT or typeof(cv) == TYPE_INT) or float(cv) <= 0.0:
                 push_error("COMMANDS_DATA COOLDOWN UNUSABLE: data/commands.json `%s` is not a positive number (%s) - the read falls back and the published wait lies" % [ck, str(cv)])
                 printerr("COMMANDS_DATA COOLDOWN UNUSABLE - `%s` is not a positive number (%s)" % [ck, str(cv)])
+        # B33: THE FORGE KIND LIST WAS RECITED, NOT ENUMERATED. `forge`.what names the kinds a
+        # viewer may ask the smith for, and NOTHING compared that sentence to Gear.KINDS, which is
+        # what roster.gd actually accepts (it refuses on `Gear.KINDS.has(kind)` and lists
+        # `Gear.kinds_of(fam)`). So a kind added in the GAME BUILD's file made docs/COMMANDS.md
+        # wrong in silence, and the doc generator could not notice: it copies this string through.
+        # It had already happened twice - `sceptre` (D94b, arcane) and `greataxe` (S20, axe) were
+        # both ACCEPTED COMMANDS the doc did not mention. The list is still written by hand, on
+        # purpose - it carries the family grouping and the slashes a viewer reads - but an UNLISTED
+        # kind is now a FAIL rather than a silence, in both directions. Not fatal: the commands
+        # answer either way, and killing the bot over a doc line would be the bigger fault.
+        # A battery greps COMMANDS_DATA; no line is the healthy reading.
+        var fw: String = String(((cmd_d.get("forge", {}) as Dictionary)).get("what", ""))
+        var kparts: PackedStringArray = fw.split("kinds: ", false)
+        if kparts.size() < 2:
+            push_error("COMMANDS_DATA FORGE ANCHOR: `forge`.what no longer carries \"kinds: \" - the published kind list can no longer be checked against Gear.KINDS")
+            printerr("COMMANDS_DATA FORGE ANCHOR - `forge`.what lost its \"kinds: \" anchor; the kind list is now unchecked")
+        else:
+            var said: Array = []
+            for grp in kparts[1].split(".", false)[0].split("/", false):
+                for w in grp.split(",", false):
+                    var t := w.strip_edges()
+                    if t != "":
+                        said.append(t)
+            var real: Array = Gear.KINDS.keys()
+            var unsaid: Array = real.filter(func(k): return not said.has(k))
+            var ghost_k: Array = said.filter(func(k): return not real.has(k))
+            if not unsaid.is_empty():
+                push_error("COMMANDS_DATA FORGE DRIFT: %d forge kind(s) Gear.KINDS accepts are absent from `forge`.what, so docs/COMMANDS.md does not tell a viewer they can type them: %s" % [unsaid.size(), unsaid])
+                printerr("COMMANDS_DATA FORGE DRIFT - %d accepted kind(s) unpublished: %s" % [unsaid.size(), unsaid])
+            if not ghost_k.is_empty():
+                push_error("COMMANDS_DATA FORGE GHOST: `forge`.what names %d kind(s) Gear.KINDS does not accept, so the doc invites a refusal: %s" % [ghost_k.size(), ghost_k])
+                printerr("COMMANDS_DATA FORGE GHOST - %d published kind(s) the smith refuses: %s" % [ghost_k.size(), ghost_k])
         _cmds = parsed
     return _cmds
 

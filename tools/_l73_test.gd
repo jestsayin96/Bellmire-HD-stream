@@ -13,9 +13,14 @@ var _est := {}
 var _tight := {}
 var _death_t := -1.0
 var _shots := {}
+var _cap_s := 330.0     # wall-clock cap; user arg cap=N shortens it to prove the NO VERDICT path
+var _cap_hit := false
 const OUT := "res://renders/cycles/20261116_l73"
 
 func _initialize() -> void:
+	for a in OS.get_cmdline_user_args():
+		if String(a).begins_with("cap="):
+			_cap_s = float(String(a).substr(4))
 	_t = (load("res://Town.tscn") as PackedScene).instantiate()
 	root.add_child(_t)
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
@@ -94,12 +99,17 @@ func _process(_dt: float) -> bool:
 			_save("breath")
 		if int(el * 2.0) != int((el - _dt) * 2.0) and int(el) % 2 == 0:
 			pass
-		if el > 330.0 or (_death_t > 0.0 and el - _death_t > 30.0):
+		if el > _cap_s or (_death_t > 0.0 and el - _death_t > 30.0):
+			_cap_hit = el > _cap_s and _death_t < 0.0
 			_finish()
 	return false
 
 func _finish() -> void:
 	var dr: AutoDirector = _eye.director
+	if _cap_hit:
+		print("L73_TEST NO VERDICT - wall cap %.0fs hit before any death (est=%s tight=%s)" % [_cap_s, _est.has("d6"), _tight.has("d1")])
+		quit(2)
+		return
 	for l in dr.log_lines:
 		print("L73_LOG ", String(l).left(170))
 	print("L73_TEST establish ", _est)
@@ -129,4 +139,5 @@ func _finish() -> void:
 	if not ok_breath:
 		_fails += 1
 	print("L73_TEST DONE fails=%d" % _fails)
-	quit(0)
+	print("L73_TEST %s" % ("OK" if _fails == 0 else "FAIL"))
+	quit(0 if _fails == 0 else 1)

@@ -36,6 +36,7 @@ const CHAT_MAX_LEN := 480
 const SEEN_MAX := 300
 const CHAT_STALE := 90.0            # D70.3: s a queued line may wait before it is too old to say
 const VIEWERS_FILE := "user://d70_viewers.json"   # D70: who was welcomed, uid -> Twitch login
+const ALWAYS_TOLD := ["fell", "lord", "rare"]   # D70.2: rare by nature, never spaced out by a burst of learns
 const MOMENT_GAP := 45.0            # D70.2: s between two non-death moments for one viewer
 
 ## words fightoverlay acts on - no Bellmire reward title may contain one
@@ -1258,7 +1259,7 @@ static func _declaw(s: String, cap := 200) -> String:
         out += " " if (c < 32 or (c >= 127 and c < 160) or c == 0x2028 or c == 0x2029 or (c >= 0x200B and c <= 0x200F) or (c >= 0x202A and c <= 0x202E) or c == 0xFEFF) else ch
     return out.strip_edges().left(cap)
 
-## roster.hero_moment -> one line to the hero's owner. Deaths always go; other moments are spaced
+## roster.hero_moment -> one line to the hero's owner. Deaths, lords and rare finds always go; others are spaced
 ## MOMENT_GAP per viewer so a three-level delve is one line, not three. Returns true if queued.
 func on_hero_moment(uid: String, kind: String, text: String) -> bool:
     var lg := String(logins.get(uid, ""))
@@ -1266,7 +1267,7 @@ func on_hero_moment(uid: String, kind: String, text: String) -> bool:
         _say_log("TWITCH_EVENTSUB D70 moment for %s not told (no Twitch login known): %s" % [uid, kind])
         return false
     var now := Time.get_unix_time_from_system()
-    if kind != "fell":
+    if not kind in ALWAYS_TOLD:
         if _moment_t.has(uid) and now - float(_moment_t[uid]) < MOMENT_GAP:
             _say_log("TWITCH_EVENTSUB D70 moment for %s spaced out (%s)" % [lg, kind])
             return false

@@ -7106,3 +7106,34 @@ after this lane starved the HUD lane last hour. The gates are the first thing at
 - NO LIVE TWITCH TEST THIS CYCLE. 0 bits, nothing cheered, nothing redeemed, no reward created/renamed/re-priced/
   deleted, nothing posted as any account, no channel setting touched.
 - Files: scripts/chatcmd.gd, tools/_b11_muster.gd, PROGRESS.md.
+
+## D70.2 REMAINDER - "came home with something rare" and "felled a lord" are moments now (game build, 2026-11-16 18:07-18:30 CT)
+- TAKE THIS NEXT gave the game build D70.2's remainder FIRST (then publisher fields, L31's open half, S2 (b), T1/C-72).
+- RARE. roster.gd: `RARE_TIER := 3` - a find of tier 3+ (runed / dragontooth / scarforged weapon; plate / warded / scarwoven
+  armour) is held per uid in memory (`_rare_finds`, never persisted). It is told when the hero COMES HOME, not when it is
+  prised loose: Delve._finish calls `roster.came_home(uid)` for every survivor, which emits hero_moment(uid, "rare",
+  "your hero came home from floor 8 carrying a runed greatsword.") ONCE. kill() erases a pending find - a hero who died
+  below did not come home with anything. An ordinary (tier 1-2) find is not a moment.
+- LORD. delve.gd: `_on_kill(tgt, by := {})` - all five kill sites (melee, cleave, luck, thorns, _strike for spells) now pass
+  the delver whose blow it was. When tgt IS dun.lord, `roster.felled_lord(uid, lord_name, floor)` emits hero_moment(uid,
+  "lord", "your hero struck the blow that felled the Ninth Abbot on floor 12.") to THAT owner only - the share and the
+  Chronicle card already go to the whole party. A lord dying with no delver's blow tells nobody. Both delve calls are
+  has_method-guarded so harness FakeRosters are unaffected.
+- twitch_eventsub.gd: `ALWAYS_TOLD := ["fell", "lord", "rare"]` - these skip the 45 s MOMENT_GAP (rare by nature), which also
+  closes the known-imperfect from D70: a burst of learns can no longer swallow a lord kill. Ordinary moments right after
+  are still spaced.
+- .4 HOLDS: the lord name is the lord def's (game data), the item name is Roster.weapon_name/armour_name (game data); no hero
+  name in either line. The test plants "/me PWNED\nx" as a hero name and proves it never reaches chat.
+- NEW GATE tools/_d702_test.gd: real Roster, real TwitchEventSub queue (dry run), real Delve._on_kill and Delve._finish.
+  D702_TEST OK 14 checks. Transcript (dry run):
+    @viewer_7001: your hero came home from floor 8 carrying a runed greatsword.
+    @viewer_7003: your hero fell on floor 9 to a bog wight at level 1. !reroll to rise again.   (its rare find: never told)
+    @viewer_7004: your hero struck the blow that felled the Ninth Abbot on floor 12.            (inside the 45 s gap: still told)
+    D70 moment for viewer_7004 spaced out (learned)
+    @viewer_7001: your hero came home from floor 12 carrying a dragontooth dagger.               (via Delve._finish)
+- GATES: parse 0 errors; D702_TEST OK 14; D70_TEST OK 16 (unchanged); TWITCH_PARSE OK; OFFFLOOR 0 of 2068; TOWNWALK PASS 0/18958;
+  _delve_test 0 SCRIPT ERROR. Logs in renders/cycles/d702/.
+- LOOKED: the transcript above is the chat text verbatim; no visual changed, so no render.
+- NO LIVE TWITCH TEST: a hero moment is a chatty line to a real login and needs a real delve to a lord; dry-run proves the
+  path. 0 bits, nothing redeemed, nothing posted, no reward touched, no channel setting touched.
+- Files: scripts/roster.gd, scripts/delve.gd, scripts/twitch_eventsub.gd, tools/_d702_test.gd. Backups *.bak_d702 (not committed).

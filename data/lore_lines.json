@@ -1380,7 +1380,18 @@
       "Count heads at the first landing.",
       "Slow down. The stair is uneven.",
       "Chalk on the wall. Not ours.",
-      "Quiet now. Sound carries down."
+      "Quiet now. Sound carries down.",
+      "Lamp up. Door's open.",
+      "Smell that? Old water.",
+      "Hand on the rail going down.",
+      "Steps are worn in the middle.",
+      "Somebody's been here and left.",
+      "Keep the torch off the rope.",
+      "Spread out. Not too far.",
+      "Count the stairs. Count them back.",
+      "Draught on my neck. Behind us?",
+      "Wet stone. Watch your heels.",
+      "One at a time through the gap."
     ],
     "lord": [
       "Hold together!",
@@ -1561,7 +1572,18 @@
       "One more good hit.",
       "It's tiring. So are we. Last longer.",
       "Cover the healer.",
-      "Nobody goes alone. Nobody."
+      "Nobody goes alone. Nobody.",
+      "Hold your ground. It tires first.",
+      "Watch the shoulders. They tell you.",
+      "Short blows. Don't overreach.",
+      "It won't stop. We'll have to.",
+      "Back to the wall, healer.",
+      "Count its swings. Then count ours.",
+      "Don't flinch. It likes that.",
+      "Feet apart. Take the weight.",
+      "Let it spend itself on the shield.",
+      "Tank holds. The rest of us work.",
+      "Stay close. Stay quiet. Strike."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1745,7 +1767,18 @@
       "Stone's too clean. Walk round.",
       "Hold the lamp lower. Look at the seams.",
       "Two stones don't match. Mind them.",
-      "Spent a dart. Found it in my boot."
+      "Spent a dart. Found it in my boot.",
+      "Rope's been cut clean. Careful.",
+      "Floor rings hollow here.",
+      "Hair-thin wire. Ankle height.",
+      "That lever isn't for us.",
+      "Old bones by the door. Why?",
+      "Plate's warm. Somebody just stepped.",
+      "Stand back. I'll throw a stone.",
+      "Crack in the ceiling. Dust falling.",
+      "Scrape marks. Something swings.",
+      "Don't touch the handle.",
+      "Sand on the step. Hiding something."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -1928,7 +1961,17 @@
       "Spit and thread. It'll hold.",
       "Left arm's no good. Right will do.",
       "Sit me against the wall a moment.",
-      "Count to ten, then we go."
+      "Count to ten, then we go.",
+      "Rib's gone. I'll walk it off.",
+      "Stitch it later. Move now.",
+      "Pour the water. Not the wine.",
+      "I felt that one in my teeth.",
+      "Shoulder's out. Put it back.",
+      "Blood's warm. That's a good sign.",
+      "I'll sit. Just for a breath.",
+      "Mind my arm. The bad one.",
+      "It's nothing. Keep the line.",
+      "Ears ringing. Say it again."
     ],
     "drink": [
       "Bottoms up.",
@@ -2105,7 +2148,18 @@
       "Tastes of herbs and rust.",
       "That's a night's sleep in a flask.",
       "Warm in the belly. Warm in the hands.",
-      "Cheers to whoever paid for it."
+      "Cheers to whoever paid for it.",
+      "Sweet, for once.",
+      "Goes down like a warm blanket.",
+      "Not much left. Make it count.",
+      "Tastes like pine and pennies.",
+      "Warmth in the toes now.",
+      "Plain stuff. Does the job.",
+      "Good. Pass it round.",
+      "That'll hold till morning.",
+      "Bottle's cold. The drink isn't.",
+      "Smells worse than it tastes.",
+      "Aye. That's the one."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2285,7 +2339,18 @@
       "My hand shook. That's all.",
       "Again. Properly.",
       "It's tired of me tonight.",
-      "I felt it start. Then it stopped."
+      "I felt it start. Then it stopped.",
+      "The words wouldn't come.",
+      "Couldn't hold the shape of it.",
+      "Pulled too hard. It broke.",
+      "Only smoke. No more.",
+      "Hands wrong. Do it again.",
+      "Lost my place in the verse.",
+      "It took, then it let go.",
+      "Not tonight. Not that one.",
+      "Breath ran out. So did the spell.",
+      "A flicker. Then a cold hand.",
+      "Cast it wrong. Plainly wrong."
     ]
   },
   "misfire": [

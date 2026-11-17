@@ -643,6 +643,99 @@ hub's unrecorded look, art's icon origin fix, content's pass over the 29 refusal
 gate audit, and the HUD's defect hunt. The queue keeps, and it keeps in his order.
 ================================================================================
 
+## *** THE STAND-DOWN HELD THROUGH THE 23:00 HOUR. TEAM LEAD, 2026-11-16 23:59 CT. ***
+Clock read off the machine: 2026-11-16T23:59:17-06:00. NOTHING WAS MERGED AND NOTHING WAS TICKED
+THIS HOUR, AND THAT IS THE CORRECT OUTCOME, NOT AN IDLE SEAT. Every lane's work through 22:58 was
+already merged and ticked; all six lane branches sit exactly TWO commits ahead of main and BOTH are
+this seat's own plan syncs. No lane pushed a byte after the order.
+
+WHAT I CHECKED, MEASURED NOT REMEMBERED:
+  1. THE SWITCHES. Five lane schedules are still OFF (game build, content, art, chat bot, HUD).
+     THE HUB SCHEDULE IS STILL ON AND I COULD NOT TURN IT OFF EITHER - the same permission gate
+     refused this seat at 23:59 that refused the 23:07 seat. THE REFUSAL IS REPRODUCIBLE AND IS NOT
+     A ONE-OFF. Do not spend another slot trying; the gate is above this seat. The hub's halt is
+     held BY THE PLAN, which is why point 3 above names the hub by name.
+  2. THE HUB FIRED AT 23:37 AND STOOD DOWN EXACTLY AS POINT 3 ASKED. It took no lock, launched
+     nothing, changed nothing in web/, and pushed nothing. A schedule is not a worker and this lane
+     proved it. THAT WRITE-UP WAS ITS DELIVERY AND IT IS COUNTED AS ONE.
+  3. THE LOCK. Last line is IDLE 22:50:52-06:00 (chat bot B17). No claim after the order, by anyone.
+     NINE CONSECUTIVE CLEAN HOURS: no overrun, no stale lock cleared, no starved lane, no future stamp.
+  4. THE PLAN IS BYTE-IDENTICAL ON ALL SEVEN REFS - docs/WORK_PLAN.md blob 37dce07 on main, laptop,
+     content, hub, hud-ui, art and chatbot. Verified by blob hash, not assumed.
+     PROGRESS.md differs on art and hud-ui (blob 4988420 vs main's 12bf74c). THAT IS NOT A SYNC
+     FAULT - the sync carries WORK_PLAN and COORDINATION only, and those two lanes simply have not
+     merged main since. Recorded so nobody "fixes" it during a halt.
+
+*** THE RESTART IS BLOCKED ON A FILE DROP THAT HAS NOT HAPPENED, AND NOBODY HAD ASKED FOR IT. ***
+THIS IS THE ONE FINDING OF THE HOUR AND IT IS MEASURED. The 23:21 asset audit catalogued 40 CC0/QAL
+packs at 1.3 GB and built the whole restart on them - Ultimate Stylized Nature (394 MB), Medieval
+Village MegaKit (153 MB), Fantasy Props MegaKit (143 MB), Ultimate Monsters, Ultimate Animated
+Animals, Quaternius Bestiary, KayKit Forest, the Kenney kits. I looked on the disk.
+  C:\hd adventure\_packs\ HOLDS SEVEN PACKS, 419 MB. The newest arrived 22:20 CT - AN HOUR BEFORE
+  THAT AUDIT WAS WRITTEN. They are the same seven the art prompt has always named: KayKit Dungeon,
+  KayKit character animations, Quaternius Ultimate RPG Items, Quaternius Medieval Weapons,
+  Quaternius RPG Characters, medieval_pack, 19_fantasy_weapons. NONE of the big QAL packs is there,
+  and nothing anywhere under the connected folder changed after 23:00 CT.
+THE AUDIT'S OWN FIRST JOB SAID SO AND IT WAS READ PAST: "ALL PACKS -> cruzader _packs/ - Mr. E will
+drop them." THEY HAVE NOT BEEN DROPPED. Its "WHAT WE HAVE NOW" lists are what he DOWNLOADED, not
+what is on this machine, and the two are not the same thing. ONLY C:\hd adventure IS CONNECTED, so a
+pack sitting in his Downloads is invisible to every lane - no lane can reach it, measure it or fit it.
+WHAT THAT COSTS, SO THE SIZE OF IT IS PLAIN: of the restart's nine jobs, the three creature/town/prop
+jobs and art's fit-test have NO INPUT ON DISK. Art's rarity-hue-ladder pass over the 454 icons and
+the KayKit tiered-weapon showcase DO - those two run on the seven packs already present.
+NO LANE IS TO GO LOOKING FOR THESE FILES OUTSIDE THE CONNECTED FOLDER and no lane is to call
+device_request_folder_access for them. It is one line to Mr. E and it is in NEEDS MR. E.
+
+*** I HOLD THE LIFT AND I AM NOT USING IT TONIGHT. SAYING SO PLAINLY BECAUSE IT IS MINE TO SAY. ***
+His words give this seat the release - "no more runs until supervisor says so" - so this is a choice,
+not a blocker, and it is recorded as a choice so it can be argued with. THREE REASONS TO HOLD:
+  1. HIS REASON HAS NOT EXPIRED. "we are about to make a lot of changes" - about to. The packs the
+     changes are built on are not on the machine yet (above). Restarting into a redesign whose inputs
+     have not landed is how the backlog got built in the first place.
+  2. TWO QUEUE ROWS ARE ABOUT TO BE INVALIDATED BY HIS OWN REDESIGN. Art's row is the icon origin
+     fix; the 22:08 rarity hue ladder re-renders every one of those icons anyway. The equipment
+     redesign - same item at every rarity, hue carrying the progression instead of 48 boot names -
+     changes what the named-weapon wiring even means. Spending art's night on the superseded version
+     is waste I would have to report next hour.
+  3. IT IS MIDNIGHT. A lane that goes wrong at 01:00 runs unwatched until morning. The halt costs
+     idle hours; a wrong restart costs work that has to be thrown away, and he has already paid that
+     bill once today.
+WHAT IS NOT A REASON: that lifting it would be awkward. If he says go, it goes - the switches are a
+minute's work and TAKE THIS NEXT below is already current as of 22:58.
+
+*** THE DEAD-DATA AUDIT, 23:59 CT, OFF 2,039,003 CHARS OF SCRIPT (scripts/*.gd + web/*.js). ***
+THE GAME-BUILD-OWNED UNREAD COUNT DID NOT MOVE THIS HOUR AND COULD NOT HAVE - the lane is halted.
+It stands at TEN KEYS AND ONE DIRECTORY, every one of them already inside D98 or D99:
+  - lore_lines.json: 7 of 26 pools unread - lord_intros_alt, unique_intros_alt, forge_alt, townsfolk,
+    phase2_words, phase2_words_alt, town_levels_for_the_desktop. That is D98, unchanged.
+  - items.json stock_by_tier, price_ladders + classes.json healing. That is D99, unchanged.
+  - assets/monsters/creatures/ - 12 bodies, 24 files, STILL referenced by nothing. Named honestly by
+    the D97 lane rather than folded into its tick, and it stays named here.
+CLOSED AND STAYING CLOSED: assets/monsters/minibosses (D96) and assets/monsters/lords (D97) both now
+carry real path references. bosses.json `lesser` is read; `uniques`, `rule` and `boss_floors` are
+PROSE STRINGS and are reported as prose, not as dead pools - the standing rule earned at D97, applied.
+assets/icons/items (926 files) is unreferenced in scripts/ and that is CORRECT: it is the hub's, D73,
+and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys reported separately.
+
+  THREE KEYS NOBODY HAS EVER BEEN TOLD ABOUT, FOUND BY WIDENING THE SWEEP TO EVERY data/*.json.
+  THEY ARE A FINDING, NOT AN ITEM. The freeze holds: I am not writing an item and no lane is to pull
+  these. Verified by direct grep at 0 hits in scripts/ and web/, not by the heuristic alone:
+    - world.json `canon_silences` (list, 1 entry) - 0 hits anywhere, including tools/.
+    - commands.json `cooldown_s` (1.5) and `twitch_cooldown_s` (3.0) - 0 hits in shipped code, 1 in
+      tools/. commands.json IS THE CHAT BOT LANE'S FILE, so these are its call, not the game build's.
+  Whether any of the three is worth wiring is for the lane that owns the file to judge when the halt
+  lifts, and folding them into D99 is THAT LANE'S CHOICE - I am not widening one of Mr. E's four items
+  by writing them into it. world.json `district_rules` tripped my heuristic and is READ (1 grep hit);
+  recording the false positive so the next sweep does not re-raise it.
+
+  ONE HOUSEKEEPING NOTE FOR THE HUB WHEN THE HALT LIFTS, NOT NOW: its worktree carries SEVEN UNTRACKED
+  FILES - _h32_shot_a..f.png and web_look.tar, plus _plan_tmp.txt. Those look like the H32 shots behind
+  the "unrecorded look" that is the reason its 420 px clip fix is merged but unticked. Work left loose
+  in a worktree is work that dies there (ruling, 08:58). Commit them to `hub` or discard them - but
+  AFTER the halt. I did not touch another lane's worktree during a stand-down.
+
+================================================================================
+
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
 Updated 2026-11-16 22:58 CT by the team lead (clock read off the machine: 2026-11-16T22:58:20-06:00).
 If you own a lane, your next item is named here. Search the file for its ID and work it. DO NOT take

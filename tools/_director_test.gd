@@ -26,6 +26,6 @@ func _process(_d: float) -> bool:
         print("SHOT dir_%d cur=%s" % [_shots, _eye.director._cur.get("key", "-")])
         _shots += 1
     if _f >= 4200:
-        print("DIRECTOR_TEST done")
+        print("DIRECTOR_SHOTS done (cameras, not a gate - no verdict)")
         return true
     return false

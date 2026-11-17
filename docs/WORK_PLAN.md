@@ -810,15 +810,18 @@ now. Ultimate Stylized Nature (414 MB), Medieval Village MegaKit (161 MB), Fanta
 (150 MB), Castle (75 MB), rocks (78 MB), Ultimate Monsters, Ultimate Animated Animals, the Bestiary
 Dungeon Monsters Kit, KayKit Forest/ResourceBits/RPGToolsBits and the four Kenney kits are all present.
 
-*** THE HALT IS RELEASED BY THIS SEAT, AND THE SWITCHES ARE NOT THIS SEAT'S TO FLIP. ***
+*** THE HALT IS RELEASED AND ALL SEVEN LANES ARE BACK ON. ***
 Mr. E, 00:35 CT, verbatim: "okay give team lead both phases and have him start 1 and then start 2".
 His 23:03/23:07 order ("no more runs until supervisor says so") put the release in this seat's hands.
-The reason the 23:59 seat held it has expired - the packs are here - so THE RELEASE IS GIVEN. But the
-five lane schedules are still OFF and this seat CANNOT TURN THEM ON: the scheduled-task write was
-refused again at 01:00 CT, the same reproducible refusal that stopped the 23:07 and 23:59 seats from
-switching the hub off. It is ABOVE THIS SEAT. NO LANE IS TO SPEND A SLOT ON IT. Mr. E flips five
-toggles (game build :07, content :22, art :34, chat bot :45, HUD :52) and every lane below wakes into
-a correct queue. Until he does, the hub (:37) and this seat (:58) are the only two lanes that fire.
+The reason the 23:59 seat held it has expired - the packs are here - so THE RELEASE IS GIVEN.
+THE FIVE SWITCHES ARE BACK ON, AND VERIFIED ON, AT 00:58 CT: game build :07, content :22, art :34,
+chat bot :45, HUD :52, alongside the hub :37 and this seat :58. SEVEN FOR SEVEN.
+The first attempt at 01:00 was REFUSED - the same reproducible refusal that stopped the 23:07 and
+23:59 seats from switching the hub off. Mr. E cleared it himself and said so, verbatim: "i already
+gave you permission and i already turned all the chats on". This seat then re-measured rather than
+taking the claim, found all five still off, re-tried, and all five went through. RECORDED SO THE
+NEXT SEAT KNOWS: that refusal is not permanent and is not a law of this machine - it is a
+permission Mr. E can clear, and he has. Re-measure before reporting it again.
 WHAT THIS MEANS FOR A LANE THAT FIRES: THE HALT IS OVER. Work your row. Do not stand down on the halt.
 
 *** MR. E'S 00:35 RULING - TWO PHASES, AND PHASE 1 IS LIVE NOW. ***

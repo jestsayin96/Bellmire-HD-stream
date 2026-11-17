@@ -172,18 +172,19 @@ const TEAL_ON_PARCH := Color(0.06, 0.45, 0.45)
 const TEAL_ON_DARK := Color(0.30, 0.78, 0.76)
 const GOLD_ON_PARCH := Color(0.50, 0.32, 0.02)
 const GOLD_ON_DARK := Color(0.78, 0.62, 0.30)
+## ---- U56: uncommon takes art's RARITY_HUE_PARCHMENT pewter (the interface variant; every other rung is canonical).
 ## ---- U55 (System 2, HUD half): the rarity hue ladder. SOURCE OF TRUTH is art's icons.RARITY_HUE
 ## (tools/art/icons.py:659) - never re-chosen here. EIGHT rungs, FIVE carry a hue; junk / starting /
 ## common are BARE on purpose and a piece with no stored rarity gets none (no cost-quartile guess).
 const RARITY_HUE := {
-	"uncommon": Color(1.00, 1.00, 1.00),    # white   - carries an icon halo, NOT a hue on parchment
+	"uncommon": Color(0.62, 0.66, 0.72),    # cool pewter - art's RARITY_HUE_PARCHMENT (icons.py:691); pure white is paper on parchment
 	"rare": Color(0.30, 0.55, 1.00),        # blue
 	"very rare": Color(0.70, 0.35, 1.00),   # purple
 	"legendary": Color(1.00, 0.55, 0.12),   # tangerine
 	"artifact": Color(1.00, 0.13, 0.10),    # bright red
 }
 ## the same four hued rungs darkened until a NAME reads on parchment (>= 4.5:1); uncommon stays ink
-## and is carried by the pip alone, because pure white cannot be text on a cream panel
+## and is carried by the pewter pip alone (pewter is too light to be text on cream)
 const RARITY_INK := {
 	"rare": Color(0.10, 0.28, 0.66),
 	"very rare": Color(0.46, 0.14, 0.70),

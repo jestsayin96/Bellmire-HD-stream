@@ -91,8 +91,15 @@ filename searched for in it:
       BROKEN, which the supervisor recorded as correct. A written refusal closes it; silence leaves
       content writing into a file nobody reads.
 
-- [ ] D98. *** CONTENT'S HALF IS IN AS OF 22:58 CT (content c481ca6, C-77 ticked). THE ITEM IS STILL
-      OPEN AND IT IS THE GAME BUILD'S NEXT. *** Content wrote down, for all seven pools, what each was
+- [x] D98. *** TICKED BY THE SUPERVISOR 2026-11-17 02:33 CT. CHECKBOX FLIPPED BY THE TEAM LEAD AT
+      08:58 CT - IT READ "[ ]" FOR SIX HOURS AFTER THE TICK AND THAT WAS A STALE CHECKBOX IN THE
+      CANONICAL FILE, NOT A SECOND TICK. The terms were met at TWO pools read (forge_alt at
+      roster.gd:1296; lord_intros_alt and unique_intros_alt at delve.gd:3382 via a key built at
+      runtime) plus FOUR declared dead in writing (townsfolk DEAD-UNTIL-D36, phase2_words,
+      phase2_words_alt, town_levels_for_the_desktop), with content told at C-75. DO NOT RE-OPEN IT
+      AND DO NOT RE-WIRE ANY OF THE THREE _alt POOLS.
+      THE ORIGINAL ENTRY IS KEPT BELOW AS WRITTEN. CONTENT'S HALF WAS IN AT 22:58 CT (content
+      c481ca6, C-77 ticked). *** Content wrote down, for all seven pools, what each was
       written FOR, what would have to read it, and which it would declare dead itself - 2,035,542 chars
       re-grepped, pool sizes counted off the file, NO DATA ADDED. Read that entry before starting: it
       turns D98 from a guess into an hour's work, and it carries ONE FACT THAT CHANGES THE JOB. The live
@@ -798,8 +805,226 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-17 07:58 CT by the team lead (clock off the machine: 2026-11-17T08:01:02-06:00).
-The 07:58 block immediately below SUPERSEDES the 06:58 block and every row under it.
+Updated 2026-11-17 08:58 CT by the team lead (clock off the machine: 2026-11-17T09:06:12-06:00).
+The 08:58 block immediately below SUPERSEDES the 07:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 08:58 CT (clock off the machine: 2026-11-17T09:06:12-06:00).
+*** SIX LANES MERGED (main 87bb47a -> 19d2753). THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW
+*** BELOW IT, INCLUDING THE 07:58 ROWS.
+*** THE HEADLINE IS THE AUDIT, AND IT IS THE BEST NUMBER THIS HOUSE HAS HAD: MR. E'S 20:40
+*** BACKLOG IS DRAINED ON THE MEASUREMENT. ZERO UNREFERENCED ASSET DIRECTORIES, ZERO UNREAD
+*** LIVE DATA KEYS, AND THE ONLY UNREAD POOLS LEFT ARE THE FOUR ALREADY DECLARED DEAD IN
+*** WRITING. I WIDENED THE AUDIT TO EVERY data/*.json TOP-LEVEL KEY FOR THE FIRST TIME AND IT
+*** FOUND NO NEW DEAD POOL - NINE EXTRA KEYS, ALL PROSE, ALL CHECKED BY LOADING THE FILE.
+*** THE SEAT ABOVE ME HAS NOT RUN SINCE 04:16 CT - FOUR HOURS AND FIFTY MINUTES. D99, SYSTEM 10
+*** AND THE HUB PUBLISH ARE ALL STILL IN FRONT OF IT, AND PHASE 2 CANNOT START UNTIL D99 TICKS.
+================================================================================
+
+*** MY OWN FAULTS AND CORRECTIONS FIRST. ***
+
+  CORRECTION 1 - I AM BREAKING THE CLEAN-HOUR STREAK MYSELF, AND IT IS A SEAT FAULT, NOT A LANE
+  FAULT. My prompt carries "TWELVE consecutive clean hours as of 01:58" and the streak counts NO
+  FUTURE STAMP IN A LOCK LINE. There WAS one at 07:49:30 - the chat bot's own claim line, machine
+  read 07:47:30, and the lane named it in the lock file itself rather than hiding it. So the
+  twelve cannot be extended through that hour by any honest arithmetic. THE COUNT RESTARTS: 08:58
+  is the FIRST clean hour since 07:49. The lane that produced the stamp is the lane that declared
+  it; the fault being carried forward as a clean streak was mine.
+
+  CORRECTION 2 - A STALE CHECKBOX IN MY OWN HOUSE. D98's checkbox at this file's line 94 still
+  read "[ ]" while the record four hundred lines below says the SUPERVISOR TICKED IT AT 02:33 CT.
+  I have flipped the checkbox and written the supervisor's tick and time into it. THAT IS
+  RECORDING A TICK THAT ALREADY HAPPENED, NOT TAKING ONE - the who-ticks contest is untouched and
+  D99 stays "[ ]" because it genuinely is not ticked.
+
+  CORRECTION 3 - MY PROMPT'S BASELINE IS STILL STALE AFTER THREE SEATS TRIED. This firing read a
+  prompt that still says D98 "NOT TICKED" (ticked 02:33), H32 pass 4 "RECOMMENDED FOR TICK, NOT
+  TICKED" (ticked 02:33), the gloves ruling "STILL NOT TICKED as of 01:58" (ticked 04:16), D99
+  "THE GAME BUILD'S CURRENT ITEM" (shipped 02:22, verified, waiting on a tick), System 10's
+  game-build half "untouched" (landed 04:16, laptop 134128c), and a dead-data baseline of SEVEN
+  keys and ONE directory when it is FOUR declared-dead pools and ZERO directories. I attempt the
+  write again this run and will say plainly whether it landed or was refused. THE PLAN IS WHAT
+  THE LANES ACTUALLY OBEY, so these rows land either way.
+
+*** THE DEAD-DATA AUDIT, 08:58 CT - MEASURED, NOT REMEMBERED. ***
+2,065,629 chars of script, 46 files (scripts/*.gd + web/*.js ONLY - tools/ is test code and was
+not counted). Every top-level key of EVERY file in data/ checked, not the subset earlier baselines
+carried, and every hit confirmed by `grep -n` with the line read.
+  - UNREAD POOLS: FOUR, and all four are the ones already DECLARED DEAD IN WRITING - townsfolk
+    (DEAD-UNTIL-D36; its only literal hits are a comment and a variable name, so it is dead),
+    phase2_words, phase2_words_alt, town_levels_for_the_desktop. D98's remainder, closed.
+  - D99 IS WIRED AND I PROVED IT BY LINE, not by the lane's word: items.json `stock_by_tier` at
+    economy.gd:652 and :661, `price_ladders` at economy.gd:693, classes.json `healing` at
+    delve.gd:1561, :2310 and :3230 (Economy.healing_rules()). All three were 0 hits at 01:58.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, down from one. assets/monsters/creatures (24 files =
+    12 .glb + 12 .import) is READ at bestiary.gd:155, CREATURE_DIR. System 10 is whole in the
+    tree; only its TICK is missing.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), lord_intros_alt and
+    unique_intros_alt (delve.gd:3382, key built at runtime), cooldown_s (chatcmd.gd:702).
+  - NINE EXTRA KEYS FOUND BY THE WIDENED SWEEP, ALL PROSE OR SPEC, NONE A POOL - checked by
+    loading the file, and each one's prefix and suffix searched for a runtime-built key first:
+    biomes `technique`; origins `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`
+    (a template of a line the code ALREADY emits hard-coded at roster.gd:656) and `one_roll`;
+    strains `_gating`; world `canon_silences`; bosses `boss_floors` (already recorded as prose).
+    THESE ARE FINDINGS, NOT ITEMS. No lane is to wire them and content is not to be told to stop
+    writing them - they are notes to humans and they are doing their job.
+  - `twitch_cooldown_s` still appears only under tools/ - live but unenforced in twitch_chat.gd's
+    COOLDOWN_MS. Unchanged finding, still not an item.
+
+*** MERGED THIS HOUR (main 87bb47a -> 19d2753, six merges, no force, nothing rewritten, no branch
+*** deleted). FOUR CONFLICTS, ALL PROGRESS.md (content, hub, art, chat bot): 3 marker lines
+*** stripped each, BOTH SIDES KEPT, no cycle renumbered, 0 markers left - measured by grep. ***
+  LAPTOP (game build) a5c531f - S14: MB_FIT loader 1.08 + loader.glb.import.
+  CONTENT            69751ca - C-86: quartermaster and loader feed lines + 56 barks.
+  ART                3392807 - THE HURDLEMAN, an eighteenth miniboss. The first that splits a party.
+  HUB                3cb8864 - H32 standing check. web/ unchanged; NO publish claim made.
+  CHAT BOT           b4b6a7f - B26: stand-down, six gates re-proved on the new main.
+  HUD-UI             dc295f9 - nothing this hour. See its row below.
+
+*** THE WHO-TICKS CONTEST IS STILL OPEN AND I STILL DID NOT TICK. *** Unchanged since 01:58.
+Behaviour stays "verify and recommend"; the clause in my prompt stays unedited; nothing is blocked
+by the disagreement itself - only by the seat above not having run.
+
+*** WHAT I VERIFIED MYSELF, BY LOADING THE FILE OR BY MY OWN GREP. ***
+
+  S14 (game build, laptop a5c531f) - *** VERIFIED, RECOMMEND RECORDING. *** I opened
+    scripts/delve.gd: MB_FIT at :375 carries "loader": 1.08, and I checked it against ART'S OWN
+    FILE - renders/art/minibosses/_fit_report.json pairs.loader.ratio = 1.08. EXACT MATCH, nothing
+    re-derived. loader.glb.import committed. Verdict lines read as lines: import rc0, parse 0
+    errors, OFFFLOOR OK 0/2193, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK, D96_FIT OK 70,
+    S14_CHECK OK. THE LOCK DECLARATION IS NOW FIXED ON THE OPENING LINE - 08:08:28 declared :33,
+    inside the 25-minute cap, the first hour this lane got it right on the first line. IDLE at
+    08:16:30, eight minutes, no correction needed and no future stamp.
+    THE SIBLING GAP IS OPEN AGAIN AND AGAIN IT IS NOT A REGRESSION - I counted by name on main:
+    29 .glb, 28 .import. hurdleman.glb landed after the import run. One import run closes it.
+
+  THE HURDLEMAN (art, 3392807) - *** VERIFIED, RECOMMEND RECORDING. *** I loaded
+    renders/art/minibosses/_fit_report.json: verdict GREEN, ok true, errors [], asked 18 names,
+    blank_check {files: 54, failures: []} - 18 x 3, the harness art fixed itself last hour now
+    opening every view. pairs.hurdleman: creature_h 2.55, hero_h 2.45, ratio 1.04, pair_w 4.96,
+    fits_frame true. Six PNGs on disk by name, not asserted.
+    THE HARNESS WENT RED ON ITS OWN AUTHOR TWICE (4.89 m then 5.64 m against a 5.60 frame) and the
+    lane took the correction rather than widening the frame. EIGHT FAULTS NAMED IN WRITING in
+    docs/art/MINIBOSSES.md, worst first. The idea - it plants a hurdle and the party becomes two
+    fights - was checked against the seventeen existing CANON ideas before it was built.
+    FOR THE GAME BUILD, NOT FOR ART: MB_FIT "hurdleman": 1.04 is NOT in delve.gd (I grepped, zero
+    hits) and there is no .glb.import sibling. That is this hour's one-line row below.
+
+  C-86 (content, 69751ca) - *** VERIFIED BY LOADING THE JSON, WHICH IS WHAT THIS SEAT GOT WRONG
+    ONCE AND WILL NOT GET WRONG AGAIN. *** miniboss_feed.by_key now has 16 rows; `quartermaster`
+    and `loader` each carry arrive 8 and fall 8, exactly as claimed. barks: enter 208, lord 201,
+    trap 203, hurt 198, drink 194, misfire 198 - the claimed counts, counted. `_note_c86` is
+    inside miniboss_feed, not at top level; the entry reads as if it were top-level. Trivial, named
+    so nobody hunts it. act and broken omitted ON PURPOSE for mechanics not built - correct.
+
+  B26 (chat bot, b4b6a7f) - *** VERIFIED AS FAR AS A NON-GODOT SEAT CAN, AND THE HASHES ARE THE
+    PART I CAN PROVE. *** data/commands.json f37b1d2c6909 (14753 bytes) and docs/COMMANDS.md
+    1fb9a166c3bf (5771 bytes) - byte-identical to what the lane claimed and to main. Six verdict
+    LINES reported, not six return codes, and B11_MUSTER was run WITHOUT --quit. The stand-down
+    itself is the delivery and it carried a battery because main had moved 21 commits. Correct
+    behaviour on every count.
+
+  H32 STANDING CHECK (hub, 3cb8864) - *** VERIFIED, AND NO PUBLISH GATE WAS OWED OR RUN. *** The
+    lane did NOT claim READY TO PUBLISH this hour, so I ran no publish verification and I am not
+    dressing a merge up as one. PROGRESS.md only; web/ untouched. I confirmed 520 entries in
+    web/icons/items/_manifest.json and 2,430,050 bytes on disk against the 6 MB ceiling. The
+    publish recommendation made at 03:58 STILL STANDS AND IS STILL UNANSWERED above this seat.
+
+  HUD - *** NOTHING SHIPPED AND NO STAND-DOWN WRITTEN. The 08:52 slot produced no lock line, no
+    commit and no PROGRESS entry; its last delivery is U52 at 07:53. This is the FIRST missed slot
+    I can find for this lane and I am recording it as a miss, not an incident. A WRITTEN
+    STAND-DOWN IS THE DELIVERY when the item set is dry - silence is not. Its row below says so.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** THE HURDLEMAN'S ONE LINE, THEN THE IMPORT RUN, THEN STOP. *** Add
+                   "hurdleman": 1.04 to scripts/delve.gd MB_FIT at :375 - the number is ART'S, out
+                   of renders/art/minibosses/_fit_report.json pairs.hurdleman.ratio. DO NOT
+                   RE-DERIVE IT. Then one import run to give hurdleman.glb its .glb.import sibling
+                   (29 .glb / 28 .import today; the run closes it). Then your normal battery and
+                   STOP.
+                   *** DO NOT START A PHASE 2 SYSTEM AND DO NOT START A NEW FEATURE. *** D99 is
+                   SHIPPED AND VERIFIED but NOT TICKED, and Phase 2 begins the hour it ticks, not
+                   the hour it is verified. The hurdleman's idea - it splits the party in two - is
+                   a NEW MECHANIC and the wiring-only ruling forbids building it. The loader's
+                   encumbrance is refused on the same ground and stays refused.
+                   If the lane finishes early: a gate reading red is fixable at any time, and that
+                   is the only other thing you may touch.
+
+  CONTENT      ->  *** KEEP PRODUCING - YOU ARE NOT THROTTLED AND YOU ARE NOT WAITING ON ANYONE. ***
+                   The hurdleman is on disk and measured, so arrive and fall lines for `hurdleman`
+                   in miniboss_feed.by_key are legitimate and owed by nobody else - write them the
+                   way you wrote the quartermaster's and the loader's, 8 and 8, and OMIT act and
+                   broken for the same reason you omitted them there. Then keep going in `barks`.
+                   DO NOT write into townsfolk, phase2_words, phase2_words_alt or
+                   town_levels_for_the_desktop - all four are declared dead in writing. The nine
+                   prose keys the audit named above are NOT dead and are not yours to remove.
+
+  ART          ->  *** FIX THE THREE WORST OF YOUR OWN EIGHT NAMED FAULTS ON THE HURDLEMAN BEFORE
+                   YOU BUILD A NINETEENTH. *** You named them worst-first yourself in
+                   docs/art/MINIBOSSES.md: from the back the spares read as a jumble of sticks with
+                   the body behind them; the three-quarter view is a hurdle with a man behind it;
+                   the withy head still reads as a visor at pair scale. Fixing a defect in what you
+                   shipped is NOT a new item and the freeze does not touch it. Re-run the register
+                   harness and state the new numbers with the SAME method - ratio, pair_w,
+                   blank_check files and failures - so the change is measured and not asserted.
+                   A nineteenth is welcome on the same terms AFTER those three, if the hour holds.
+                   AND ONE CORRECTION THAT IS MINE TO MAKE: your PROGRESS entry is headed
+                   "2026-11-17 09:10 CT" and the machine read 08:59 when I fetched your commit. It
+                   is a FUTURE STAMP - the same class as the two the lock file caught this morning.
+                   READ THE CLOCK OFF THE MACHINE WITH `TZ=America/Chicago date` AND USE WHAT IT
+                   SAYS. History stays as written; this is a correction for your next entry.
+
+  HUB          ->  *** STANDING CHECK ONLY. HOLD. DO NOT PUBLISH AND DO NOT PUSH gh-pages. *** H32
+                   is ticked whole and your queue is empty. The publish recommendation has been
+                   sitting above this seat since 03:58 CT and it is NOT yours, NOT mine and NOT
+                   Mr. E's to take. If web/ is byte-identical to the looked-at build, say so and
+                   take no screenshot - a picture of an unchanged build proves nothing. If you find
+                   a real defect in what you shipped, fix that; otherwise the written check IS the
+                   delivery. The one honest gap stands open and is still one line: the manifest
+                   reports 520 files but 519 NAMED, ring/scarglass_ring dropped for ring/scar_ring.
+
+  CHAT BOT     ->  *** STAND DOWN. NOTHING NEW IS ASSIGNED. *** You re-proved six of six on the new
+                   main sixty-six seconds after claiming, and the house rule you earned at B25 -
+                   never launch Godot with stdout on a pipe nobody reads - is now in this plan for
+                   every lane. Do not chase the hang further: the CONDITION is proved and the
+                   MECHANISM is deliberately unclaimed, which is the right place to leave it. Do
+                   not take another lane's gate and do not take a Phase 2 system. Re-prove only if
+                   main moves materially again; otherwise write the stand-down and stop.
+
+  HUD          ->  *** WRITE THE STAND-DOWN. IT IS THE DELIVERY AND IT WAS MISSING AT 08:52. ***
+                   Your 07:53 U52 was exactly right in form - file-only, no lock taken, no Godot
+                   launched, nothing invented - and then 08:52 produced nothing at all. A dry hour
+                   still gets one PROGRESS entry naming what you checked and why there was nothing
+                   to do. The L31 remainder (status-effect icons) still returns to you the hour
+                   D99 TICKS, not the hour it was verified, and that tick is above this seat. If a
+                   gate of yours reads red, that is fixable at any time and is the one other thing
+                   you may take.
+
+================================================================================
+*** FOR THE SUPERVISOR - FIVE THINGS ARE STACKED ON YOUR SEAT AND THE OLDEST IS FIVE HOURS OLD. ***
+Your last run was 04:16 CT. It is now 09:06 CT. Nothing below is blocked by the who-ticks contest;
+all of it is blocked by the seat not having run. I have verified every one of these myself.
+  1. *** D99 - RECOMMEND TICK. *** Shipped 02:22 CT, verified then and RE-VERIFIED BY ME THIS HOUR
+     BY LINE: stock_by_tier at economy.gd:652/:661, price_ladders at economy.gd:693, classes.json
+     healing at delve.gd:1561/:2310/:3230. All three read 0 hits at 01:58 and read live now.
+     THIS IS THE ONE THAT MATTERS MOST: PHASE 2 (Systems 5-80) BEGINS THE HOUR D99 TICKS. Until it
+     does, the game build has nothing in front of it but one-line miniboss keys, and I am holding
+     five lanes off Phase 2 on a tick that is five hours overdue.
+  2. *** SYSTEM 10 - RECOMMEND TICK, WHOLE. *** Art's half 01:58 (art bffcc16), the game build's
+     half 04:16 (laptop 134128c). I confirmed the wiring myself: bestiary.gd:155 CREATURE_DIR
+     reads assets/monsters/creatures, and the directory is no longer unreferenced in the audit.
+  3. *** THE HUB PUBLISH - RECOMMENDED SINCE 03:58, STILL UNANSWERED. *** The lane made no new
+     publish claim this hour, so I ran no new gate. My recommendation is unchanged and I note the
+     redesign is no longer a reason to hold: H32 is ticked whole and the hub's queue is empty.
+  4. *** THE WHO-TICKS CONTEST - ROUTED UP AT 01:58, STILL OPEN AFTER SEVEN HOURS. *** Only Mr.
+     E's own words settle it. I continue to verify and recommend and I have not ticked.
+  5. *** S14, THE HURDLEMAN, C-86 AND B26 - VERIFIED, RECOMMEND RECORDING. *** Evidence above.
+
+================================================================================
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 07:58 CT (clock off the machine: 2026-11-17T08:01:02-06:00).

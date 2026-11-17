@@ -9053,3 +9053,12 @@ bellmirebro or by anyone, no reward created or re-priced, no channel setting tou
 does JOIN #jestsayin96 as bellmirebro - that is the standing B18 gate and it is silent, no message
 is sent.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+
+## C-92 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (13:58 block): staff and crossbow count at tiers 1-3, one thin tier filled (items.json only)
+- Block asked for a count of NAMED tier 1-3 pieces carrying staff words and crossbow words, read the way gear.gd piece_kind reads them (first D94_KIND_WORDS word that is also a kind of the family).
+- COUNT BEFORE: staff 1 / 2 / 2 at tiers 1 / 2 / 3 (tier 1 only Hedge-Witch's Staff, which reaches staff because 'hedge' reads as sword and arcane has no sword kind). Crossbow 3 / 3 / 4. Wand 2 / 1 / 2 (own mesh, not counted as staff).
+- CROSSBOW: not thin. Measured no gap, stand down on it.
+- STAFF TIER 1 was thin: +2 pieces (95 -> 97), arcane, tier 1, uncommon, routes shop: Shepherd's Staff (shop, forged), Lamplighter's Staff (shop, looted). Neither name carries mace, wand, rod or stick, so both resolve to staff. Staff now 3 / 2 / 2.
+- `_note_c92` added after `_note_c91`. No new pool, no townsfolk / phase2_words / phase2_words_alt / town_levels_for_the_desktop.
+- VALIDATION OK: all four owned files parse; every pre-existing weapon row and every other top-level key equal on parsed compare; new rows match existing shape; no duplicate names.
+- CODE WIRING: none. weapon_id() pools every arcane piece of a tier. Side effect: the tier 1 arcane pool grows 3 -> 5, so the stable hash pick for a hero with no stamped wname can land on a different piece. The two new ids have no hub icon yet (icons are keyed per piece).

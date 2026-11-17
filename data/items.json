@@ -3156,6 +3156,30 @@
         ],
         "flavour": "The wrapping is candle-wax. The wizardry is a rumour."
       },
+      "w_arcane_shepherd_staff": {
+        "name": "Shepherd's Staff",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Longer than a man, crooked at the top. Has moved more sheep than spells."
+      },
+      "w_arcane_lamplighter_staff": {
+        "name": "Lamplighter's Staff",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Hook at one end for the lamp, a stub of tallow at the other. Walks the east lane every dusk."
+      },
       "w_arcane_ashen_staff": {
         "name": "Ashen Staff",
         "family": "arcane",
@@ -6817,4 +6841,6 @@
   "_note_c61": "C-61 (WORK_PLAN D94 remainder): accessory rarity is now banded PER SLOT, superseding the single global 441+ cut in _note_c58 for accessories. Within each slot (ring, amulet, cloak, boots, gloves) a piece takes its midrank cost percentile among that slot's own pieces (equal costs share a rung) and the same cuts as the C-58 population: below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above that legendary. Every slot therefore has a legendary band. No cost, stat, price or tier changed; no rung was added, renamed or doubled. Equipment rarity is unchanged. ARTIFACT is still found-only: no shop at any level and no trader may ever stock one, and no accessory is an artifact. Readers must use the stored rarity key, never a global cost threshold.",
   "_note_c71": "C-71 (TAKE THIS NEXT, CONTENT row: next-stalest backlog item inside the four files; items.json had no real additions since C-54, only relabels in C-58 and C-61): 48 new title cosmetics (kind title, same four keys as existing titles) and 35 new dyes (plain 6-hex, none repeating an existing hex). Titles cover the Phase 2 words (ascent, errand, Guild Vault, carry weight, the teleportation stone) and a prosperous top band (cost 300-480) for a level 9-12 Bellmire, so a viewer who saves long gets a title that reads as the town's wealth, not make-do. Additive only. No equipment, accessory, rarity, stock or price changed. No artifact is stocked anywhere.",
   "_note_c91": "C-91 (TAKE THIS NEXT 12:58, CONTENT row; game build S18 finding): nine NAMED blade-family daggers at tiers 1-3, three per tier, in equipment.weapons. Every tier 1-3 blade was a sword word, so the dagger meshes wired at S18 (gear.gd KINDS dagger, dagger_common/uncommon/rare) were reached only by the unnamed !forge path. gear.gd D94_KIND_WORDS reads a piece's kind from its NAME ('shortknife', 'knife', 'dagger' -> dagger), so each new name carries one of those words and no earlier-listed word. Same shape as every other piece: name, family, tier, tier_name, rarity (tier read straight across: 1 uncommon, 2 rare, 3 very rare), routes, flavour. No costs here. None is tier 4 or 5 and none is an artifact. Condition tracks tier: tier 1 is a working tool, tier 3 is paid-for and new-made. Tier 4+ daggers are not added because the dagger kit reuses ADV dagger.gltf there."
+,
+  "_note_c92": "C-92 (TAKE THIS NEXT 13:58, CONTENT row): count of NAMED tier 1-3 staff and crossbow pieces, read the way gear.gd piece_kind reads them (D94_KIND_WORDS, first word that is also a kind of the family). Before: staff 1/2/2 and crossbow 3/3/4 at tiers 1/2/3. Crossbow is not thin, no change. Staff tier 1 was one piece (Hedge-Witch's Staff, which reaches staff only because 'hedge' would read as sword and arcane has no sword kind), so two named tier 1 staves are added: Shepherd's Staff, Lamplighter's Staff. Neither name carries mace, wand, rod or stick, so both resolve to staff. Rarity uncommon. No artifact, no caravan. Same piece shape as the rest."
 }

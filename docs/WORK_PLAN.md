@@ -580,6 +580,27 @@ RAN THIS HOUR ON ANY LANE: 0 bits, nothing redeemed, nothing posted, no reward t
                    ONLY and you moved the layout and left the privacy behaviour H8 was built around
                    alone. Correct call, correctly reported. I am NOT putting it to Mr. E: the item
                    settled it.
+                   ON YOUR REPORT THAT MR. E HAS OK'D OPT-IN CHAT AND THE WELCOME PANEL ABOVE THE
+                   STAGE: recorded as YOUR report, and I have no independent record of him saying
+                   it. NOTHING TURNS ON IT EITHER WAY - opt-in already followed from "layout only",
+                   and the Welcome panel's placement was never constrained - so both stand and
+                   neither needs re-asking. I am not writing it up as a ruling of his. IF A LANE
+                   EVER REPORTS A DECISION FROM MR. E THAT WOULD CHANGE WHAT IS ALLOWED, quote him
+                   verbatim with the time, the way the W-LIVE and H32 permissions are quoted.
+                   *** YOUR ICON QUESTION IS ANSWERED: YES, WITH FOUR CONDITIONS, AND THEY ARE
+                   WRITTEN OUT UNDER PASS 4 IN THE H32 BLOCK. *** The whitelist mechanism is
+                   approved exactly as you proposed it - a snapshot name is LOOKED UP and yields a
+                   CONSTANT path, an unknown name falls back to the ICON_SET glyph, and img-src
+                   'self' already covers it so the CSP does not move. You were right that this is
+                   the same rule one step further, and right to ask before taking the step.
+                   WHAT I WILL NOT SIGN OFF IS A VERBATIM COPY. I measured the source: 463 PNGs,
+                   22,302,016 bytes, mean 48 KB. That is 23 MB into the repo forever, 23 MB onto
+                   gh-pages, and a grid of 48 KB images on a viewer's phone - and another 23 MB of
+                   blobs every time art regenerates. So: a DERIVED THUMBNAIL set at ONE size, under
+                   6 MB with the measured total reported; the conversion a script in web/tools/
+                   that never edits anything under assets/; a _manifest.json carrying the source
+                   commit, with THE WHITELIST GENERATED FROM IT, never hand-typed; and lazy-loading
+                   with a fixed aspect box so H13 cannot reflow. Full conditions under PASS 4.
                    NEXT: H32 PASS FOUR - BROWSE AS A CARD GRID WITH HOVER PREVIEWS for Bestiary,
                    Shops and Lore, using D73's 454 item icons. Cards with pictures, not rows of
                    text. AND THE TIMING IS WITH YOU FOR ONCE: H29 point 6 landed THIS HOUR, so the
@@ -776,6 +797,46 @@ THE PASS LEDGER (the supervisor ticks each pass as it lands; H32 itself stays op
   - [ ] PASS 4 - BROWSE AS A CARD GRID WITH HOVER PREVIEWS (Bestiary, Shops, Lore) off D73's 454
         icons. H29 point 6 landed 2026-11-16 19:19 CT, so the Shops grid now has real shelves, a
         real caravan and real open orders - it will NOT read "not published yet".
+
+        *** SUPERVISOR SIGN-OFF ON THE ICONS, ASKED FOR BY THE HUB LANE AND GRANTED WITH FOUR
+        CONDITIONS (2026-11-16 20:05 CT). ***
+        THE MECHANISM IS APPROVED AS ASKED. A snapshot item name NEVER becomes a URL. The name is
+        looked up in a built-in whitelist and the match yields a CONSTANT path; an unknown name
+        falls through to the existing ICON_SET SVG glyph (app.js:60's "other" default), never to a
+        guessed path and never to a broken <img>. That is the SAME rule the hub already runs on SVG
+        glyphs - "the snapshot only chooses WHICH KNOWN icon" - extended from a glyph id to a file
+        path, and it does not weaken it. CSP needs no change: `img-src 'self' data:` already serves
+        a same-origin file. DO NOT widen img-src, do not add a remote host, and do not reach for an
+        inline onerror handler - the page is el()-only and an onerror attribute is markup.
+        SVG-ONLY IS NOT THE ALTERNATIVE AND I AM NOT OFFERING IT. Mr. E's item says "BROWSE AS A
+        CARD GRID WITH HOVER PREVIEWS ... using D73's 454 item icons. Cards with pictures, not rows
+        of text." Pictures are the item. Refusing the <img> would be refusing his request.
+
+        BUT A RAW COPY IS REFUSED, AND THIS IS THE PART THAT NEEDED A SUPERVISOR. I measured
+        assets/icons/items/: 463 PNGs, 22,302,016 bytes, mean 48 KB, max 64 KB, across seven kinds
+        (amulet 46, banner 102, boots 43, cloak 49, gloves 51, hat 122, ring 50). Copying those
+        verbatim into web/ puts 23 MB into the repo that git keeps forever, ships 23 MB to gh-pages,
+        and hands a viewer on a phone a grid of 48 KB images. Every regeneration by the art lane
+        adds another 23 MB of blobs that never come back. So:
+          1. WHAT GOES INTO web/icons/items/ IS A DERIVED THUMBNAIL SET, NOT THE ORIGINALS. One
+             size only - 2x the largest box the grid or the hover preview actually displays, and
+             nothing larger. Not two sets, not full-res "in case". BUDGET: the whole directory
+             comes in UNDER 6 MB and you REPORT THE MEASURED BYTE TOTAL in your entry. If it will
+             not fit, say so with the number rather than going over.
+          2. THE CONVERSION IS A SCRIPT IN web/tools/ (yours), reading assets/icons/items/ and
+             writing web/icons/items/. Regeneration must be one command. You do NOT edit, move or
+             rewrite anything under assets/ - those are the ART lane's output and they stay the
+             original.
+          3. A MANIFEST, web/icons/items/_manifest.json, recording the SOURCE COMMIT of the art
+             assets and the file list. THE WHITELIST IN app.js IS GENERATED FROM THAT MANIFEST BY
+             THE SAME SCRIPT - never hand-typed. A hand-typed list of 463 names drifts silently and
+             a drifted whitelist is a broken grid, not a caught error.
+          4. LAZY-LOAD (`loading="lazy"`) and a FIXED ASPECT BOX per card, so H13's no-scroll
+             layout cannot reflow as images arrive and the grid scrolls internally like the rail.
+        `alt` text from a snapshot name is FINE and expected - set it with setAttribute/textContent.
+        alt is not a URL and it is not markup.
+        RECORD ALL OF THIS IN docs/HUB_SECURITY.md as the extension of the whitelist rule. That file
+        is yours; I am not writing in it.
   - [ ] PASS 5 - POLISH.
 SECURITY ACROSS PASSES 1-3, VERIFIED BY THE SUPERVISOR AND NOT TAKEN ON THE LANE'S WORD: no
 innerHTML added (the only two sites in app.js are page-owned strings that predate H32), no

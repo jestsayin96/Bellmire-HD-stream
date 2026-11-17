@@ -8214,3 +8214,77 @@ Twelve `.b22_*.log` / `.b22_*.rc` files written at the worktree root and DELETED
 Godot closed, lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered or redeemed, no
 reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
 touched. No secrets written anywhere.
+
+## B-cycle B23 - THE EARNABILITY PASS TURNED ON MY OWN FILES: FIVE LIVE READS NO GUARD VOUCHED FOR (chat bot, 2026-11-17 05:47-05:52 CT)
+
+Took the 04:58 TAKE THIS NEXT CHAT BOT row as written: queue empty, widen B21's earnability
+method to anything un-earned in MY OWN three files. Clock off the machine
+(2026-11-17T05:47:43-06:00), no Godot alive, lock IDLE since the game build's 05:20:30 line.
+Claimed 05:48:51, ONE battery. `chatbot` fast-forwarded onto main d9ac715 (no conflicts).
+
+### THE QUESTION, ONE LEVEL DOWN AGAIN
+B18/B19/B22 made `commands()` vouch for the file, the parse, `commands`, `ask`, `foreign` and
+`order`. Each guard stops at the key it NAMES. Five live reads sit one level BELOW them, and
+every one of them fails quietly.
+
+| read | where | what a bad value does today |
+|---|---|---|
+| `ask.topics`        | `ask_topic():819` | `ask` non-empty with no `topics` - every plain question gets silence |
+| `ask.order`         | `ask_topic():820` | a topic absent from `ask.order` is UNREACHABLE: the loop walks `order`, never the topic keys |
+| topic `cmd`/`reply` | `_ask_line():833` | a topic MATCHES and then answers with nothing - the exact failure L69 exists to end |
+| `c["what"]`         | `help_line():766` | read as the DEFAULT of a `.get("short", ...)`, so GDScript evaluates it even when `short` is there: one command with no `what` breaks `!help <command>` |
+| `foreign.<app>`     | `foreign():863`   | an app naming no `prefixes` and no `exact` is a dead entry, so that app's commands get answered |
+
+None is fatal, so all five say it out loud and carry on - the same shape as `ask`/`foreign`/
+`order` above them. A battery greps COMMANDS_DATA; NO LINE IS THE HEALTHY READING.
+The `foreign` check SKIPS keys beginning with `_`: `_why` and `_source` are comments in the data,
+not apps, and a naive pass would have reported the data's own documentation as a fault.
+
+### THE DATA ITSELF IS CLEAN - the five holes are LATENT, not biting
+27 commands / `order` 27, both directions; 10 ask topics / `ask.order` 10, both directions; every
+topic carries phrases and a `cmd` or a `reply`; every command carries `what`; `fightoverlay` and
+`chat_bots` both name words. sha256 `f37b1d2c6909`, 14753 bytes - byte-identical to B20/B21/B22.
+`docs/COMMANDS.md` sha256 `1fb9a166c3bf`, 5771 bytes, unchanged.
+
+### THE BATTERY - FIVE FOR FIVE ON HEALTHY DATA, ONE RUN, ALL FIVE IN PARALLEL
+  parse (300 frames)  rc=0, **0 SCRIPT ERROR, 0 Parse Error**, TWITCH joined #jestsayin96, and
+                      **NO COMMANDS_DATA LINE ANYWHERE** - the healthy reading, which is the
+                      whole point of adding guards that are silent until they are not
+  L14_TEST            OK (22 checks)   rc=0
+  TWITCH_PARSE        OK (8 checks)    rc=0
+  D704_ECHO           OK (356 checks)  rc=0
+  COMMANDS_DOC        OK wrote 27 commands, doc byte-identical - the no-op holds
+
+### BROKEN ON PURPOSE: THREE OF THE FIVE PROVED, TWO NOT, AND I WILL NOT CALL THEM PROVED
+  A. `ask.topics` emptied -> `COMMANDS_DATA ASK NO TOPICS - `ask` carries no usable `topics``
+  B. one topic dropped from `ask.order` -> `ASK ORDER SHORT - 1 topic(s) unreachable: ["missed"]`
+  C. that topic's `cmd` and `reply` removed -> `ASK TOPIC MUTE - 1 topic(s) answer with nothing:
+     ["missed"]`
+  **`L14_TEST` read OK (22 checks) under all three.** Same lesson as B22: no gate in this lane can
+  see a question about to go unanswered. The loader says it now.
+  D. `what` removed from one command - **NOT PROVED. THE BREAK RUN HUNG.** The Godot process sat
+     alive at ~7 MB with no verdict and no exit for 90 s and I killed it at 05:51 rather than run
+     into the HUD lane's :52 window. Its stdout died with it, so I have NO LINE and I am not
+     claiming one. What I observed is worth more than the missing line: on this break the gate
+     produced NO VERDICT AND NO EXIT CODE AT ALL. Whether the missing `what` caused the hang is
+     UNMEASURED - one short redirected run settles it and is B24's first act.
+  E. `fightoverlay` emptied of `prefixes` and `exact` - not reached, same cause.
+  `data/commands.json` restored from the in-run backup and re-hashed: `f37b1d2c6909`, 14753 bytes,
+  byte-identical. The broken intermediate (`0066f3e9a895`) is gone.
+
+### OWED - MINE FIRST THIS TIME
+- THIS LANE (B24, first act): prove breaks D and E with output redirected to a file and a hard
+  cap, and measure whether a `what`-less command hangs the gate or merely errors. Two of my own
+  five guards are unproven and they ride in this commit as unproven. Said here so no reader takes
+  the three greens for five.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Unchanged, six cycles on.
+- `tools/` owner: nothing new. If D turns out to be a genuine hang, `_l14_test.gd` needs a cap
+  that prints NO VERDICT - but that is a measurement I have not made, not a request yet.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+`.b23_run.log` and `.b23_commands.bak` written at the worktree root and both DELETED in the same
+run. Godot killed (PID 11948), lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered
+or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as any account, no
+channel setting touched. The parse run joined #jestsayin96 as the game always does on boot and
+said nothing. No secrets written anywhere.

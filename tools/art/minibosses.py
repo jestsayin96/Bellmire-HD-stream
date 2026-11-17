@@ -3989,3 +3989,202 @@ def snarer_chibi():
 
 
 BUILDERS.update({"snarer_chibi": snarer_chibi})
+
+
+# =====================================================================
+# FIFTEENTH, 17 Nov 2026 - THE JOINTER. Invented outright under Mr. E's
+# standing permission of 15 Nov 17:43, and taken this hour because the team
+# lead's 04:58 row says the art lane is dry and is the one lane the freeze
+# lets invent.
+#
+# WHY A SECOND WORKSHOP MINIBOSS AND NOT A FIFTEENTH THEME. Measured off
+# dungeon_hd.gd:737-743 this run, not remembered: the set-piece roll gives
+# "miniboss" weight 15 on a normal floor, 10 on shrine and crypt, and 35 ON
+# BARRACKS AND WORKSHOP. Those two themes fire the slot more than twice as
+# often as any other and each has exactly ONE creature - so the floor type
+# most likely to show a viewer a miniboss is the floor type that shows them
+# the same one every time. Fourteen themes already have a body (floorgen.gd
+# THEMES, counted this run: 14 keys, 14 minibosses). The gap is not a missing
+# theme, it is a missing SECOND on the heaviest theme.
+#
+#   JOINTER  it COMES APART AND BOTH HALVES KEEP WORKING - one pin holds two
+#            half-bodies together. Drive the pin out, or break it down, and
+#            there are two of it, each with its own leg, its own lamp and its
+#            own tool. Neither half is a weaker copy; each is half the thing.
+#
+# NOT A NORMAL MONSTER WITH MORE HIT POINTS, and the idea is visible BEFORE
+# the fight starts (the Scrapwright lesson): the gap down the middle is real
+# air you can see through, the pin stands proud a third of a metre either
+# side, and the two halves already have two lamps at two different heights.
+# A hero body cannot read like that - it has one head and its legs meet.
+#
+# WEAR 0.35: a workshop thing in daily use. The pin and the clamp screw are
+# bright worked steel - a joiner keeps the one part that has to slide - on
+# timber gone dark with grease. Unused value in the set (0.15 .. 0.95).
+# =====================================================================
+
+CANON.update({
+    "jointer": ("The Jointer", 2.25, (0.60, 0.44, 0.28), (1.00, 0.92, 0.72),
+                "workshop",
+                "IT COMES APART AND BOTH HALVES KEEP WORKING - drive the pin or break it and there are two",
+                0.35, "It is pinned together."),
+})
+ORDER = ORDER + ["jointer"]
+
+
+# --------------------------- 15 THE JOINTER: two half-bodies and one pin
+def jointer():
+    """IT COMES APART. Two sawn half-bodies lashed and pinned on one iron
+    draw-pin. Each half carries one leg, one lamp and one tool, so when the
+    pin goes the room has two of it and neither is a cripple.
+
+    Silhouette intent - SPLIT COLUMN, PIN THROUGH IT, TWO FEET WIDE APART:
+      - real air down the middle, opening into a V as it rises (the halves
+        lean away from each other), so the gap is in the outline and not just
+        in the colour;
+      - one long bright pin across the chest standing 0.30 m proud each side,
+        the single clearest horizontal in the file;
+      - ONE leg per half on its own trestle block, braced outward - a hero's
+        legs meet under one torso and these do not;
+      - THREE arms, not two: a mallet hanging low off the near half, a saw
+        raised on the far half, and a SPARE arm hung on the far hip. An odd
+        arm count is the cheapest way to stop a thing reading as a man;
+      - two lamps at two different heights and no head between them.
+
+    Front is -Y here, same as the other fourteen."""
+    P = Parts("jointer")
+    GLOW_SEAM_Z = (0.96, 1.82)
+
+    # ---- the two halves. A is the near/left half (mallet), B the far/right
+    # (clamp). They lean apart so the seam opens upward.
+    # PASS 3: xc is the TOP of the half, held apart from xt (the leg), so the
+    # halves lean away from each other and the seam opens into a V as it
+    # rises. Pass 2's seam was open but almost parallel, and a parallel slot
+    # reads as a shadow line; a V reads as two things coming apart.
+    for s, (xl, xt, hip, top, rr, xc) in ((-1, (0.24, 0.34, 0.90, 1.92, 0.205, 0.46)),
+                                          (+1, (0.21, 0.29, 0.90, 1.74, 0.190, 0.40))):
+        X0, X1, XC = s * xl, s * xt, s * xc
+        # ONE heavy post leg per half, on a trestle block
+        limb(P, [(X1, 0.00, hip), (X1 + s * 0.06, -0.02, 0.46),
+                 (X1 + s * 0.10, -0.05, 0.11)], 0.130, 0.108, 'body')
+        P.add(L.box(0.40, 0.56, 0.16), 'dark', loc=(X1 + s * 0.10, -0.10, 0.08))
+        # the outward brace - this is furniture, and it says so
+        limb(P, [(X1 + s * 0.04, 0.01, 0.80), (X1 + s * 0.30, 0.02, 0.18)],
+             0.058, 0.046, 'dark')
+        P.add(L.box(0.20, 0.26, 0.09), 'dark', loc=(X1 + s * 0.32, 0.02, 0.05))
+        # sawn torso: a tube for mass with a squared plank face over it, so it
+        # reads as cut timber and not as a limb
+        limb(P, [(X0, 0.00, hip - 0.04), (X0 + s * 0.05, -0.02, (hip + top) * 0.5),
+                 (XC, -0.04, top - 0.06)], rr, rr * 0.84, 'body')
+        P.add(L.box(rr * 1.50, rr * 1.12, top - hip - 0.14), 'body',
+              loc=((X0 + XC) * 0.5, -0.03, (hip + top) * 0.5),
+              rot=(0.0, -s * 0.10, 0.0))
+        # two iron straps round the half - a joined thing is a banded thing
+        for z in (hip + 0.18, top - 0.30):
+            t = (z - hip) / max(0.01, top - hip)
+            P.add(L.box(rr * 1.62, rr * 1.24, 0.055), 'dark',
+                  loc=(X0 + (XC - X0) * t, -0.03, z))
+        # cap block and THE LAMP. No head, no neck: a lamp set in the cap.
+        P.add(L.box(rr * 1.66, rr * 1.46, 0.14), 'dark', loc=(XC, -0.04, top))
+        eyes(P, (XC, 0.0, top - 0.02), rr * 0.36, 0.034, -0.16)
+        # hip socket the spare arm hangs on, both sides for symmetry of wear
+        P.add(L.sphere(0.085, 0.080, 0.070, 10, 7), 'dark', loc=(X0 + s * 0.08, 0.13, 1.00))
+
+    # ---- THE PIN. The mechanic, and the one long horizontal in the file.
+    # It passes through both halves and stands 0.30 m proud at each end.
+    limb(P, [(-0.95, -0.02, 1.40), (0.0, -0.03, 1.42), (0.95, -0.02, 1.44)],
+         0.052, 0.052, 'bone')
+    for s in (-1, 1):
+        P.raw(aim(L.cone(0.105, 0.105, 0.065, 12), (s * 0.95, -0.02, 1.40 + s * 0.02),
+                  (s * 1.0, 0.0, 0.02)), 'bone')
+        # the mortise plate where the pin enters the timber
+        P.add(L.box(0.085, 0.27, 0.27), 'dark', loc=(s * 0.14, -0.03, 1.42))
+    # the cotter through the far end - it is held, and it can be driven out
+    P.raw(aim(L.cone(0.030, 0.026, 0.26, 9), (0.78, -0.02, 1.44), (0.0, 0.16, 1.0)), 'bone')
+
+    # ---- THE SEAM. Real air between the halves, with a thin lit line in it
+    # so the join reads at pane distance without filling the gap in.
+    limb(P, [(0.0, 0.10, GLOW_SEAM_Z[0]), (-0.01, 0.07, 1.26),
+             (-0.015, 0.05, 1.38)], 0.017, 0.012, 'glow')
+    limb(P, [(-0.015, 0.05, 1.47), (-0.02, 0.06, GLOW_SEAM_Z[1] - 0.14)],
+         0.013, 0.009, 'glow')
+    # PASS 2, AND THE PICTURE IS WHY. Pass 1 lashed the two halves with two
+    # rope turns that ran straight across the seam, and on the render they
+    # read as flat SHELVES that closed the gap - the Scrapwright fault, the
+    # idea invisible before the fight. Each half now carries its own turn,
+    # wrapped round itself and stopping short of the seam, so the air down the
+    # middle stays air. Measured: tools/art/_j_gap.py open_frac.
+    for s in (-1, 1):
+        for z, r in ((1.18, 0.30), (1.66, 0.33)):
+            P.raw(L.tube([Vector((s * 0.12, -0.16, z)),
+                          Vector((s * (0.12 + r), -0.10, z + 0.02)),
+                          Vector((s * (0.12 + r * 0.9), 0.10, z - 0.01)),
+                          Vector((s * 0.14, 0.14, z - 0.02))],
+                         [0.030, 0.034, 0.032, 0.028], 7), 'bone')
+
+    # ---- ARM 1: the mallet, hanging low off the near half. A long diagonal.
+    limb(P, [(-0.46, -0.06, 1.72), (-0.70, -0.18, 1.40), (-0.73, -0.26, 1.08)],
+         0.078, 0.056, 'body')
+    limb(P, [(-0.73, -0.26, 1.06), (-0.80, -0.30, 0.54)], 0.036, 0.030, 'bone')
+    P.raw(aim(L.cone(0.145, 0.145, 0.32, 12), (-0.82, -0.30, 0.44), (0.10, 0.10, 1.0)), 'dark')
+    P.raw(aim(L.cone(0.152, 0.148, 0.045, 12), (-0.82, -0.30, 0.44), (0.10, 0.10, 1.0)), 'bone')
+
+    # ---- ARM 2: PASS 4, AND THE CLAMP IS GONE BECAUSE I LOOKED AT IT. On the
+    # pass-1 render the clamp read as a bracket and its jaws read as a second
+    # pin cap - two of the three objects on the right-hand side were pretending
+    # to be the pin. A SAW is the plainest joiner's tool there is, it is a long
+    # clear plate nothing else in the file has, and it says the same sentence:
+    # the far half still works.
+    limb(P, [(0.44, -0.05, 1.56), (0.70, -0.18, 1.66), (0.82, -0.26, 1.74)],
+         0.072, 0.052, 'body')
+    P.add(L.box(0.13, 0.17, 0.26), 'dark', loc=(0.86, -0.28, 1.80), rot=(0.0, 0.34, 0.0))
+    # PASS 5: the blade is pulled in off the frame edge, and THE TEETH ARE ON
+    # IT. At pass 4 they were a row of free cones standing clear of the blade -
+    # from the front they read as fins beside a plate, not as a saw. They are
+    # now bedded along the blade's own lower edge with their bases inside it.
+    BL_ = (0.97, -0.28, 1.92)
+    TILT = 0.40
+    P.add(L.box(0.030, 0.19, 0.86), 'bone', loc=BL_, rot=(0.0, TILT, 0.0))
+    P.add(L.box(0.036, 0.055, 0.88), 'dark', loc=(BL_[0] - 0.055, BL_[1] + 0.085, BL_[2]),
+          rot=(0.0, TILT, 0.0))
+    ux, uz = math.sin(TILT), math.cos(TILT)        # along the blade
+    ex, ez = math.cos(TILT), -math.sin(TILT)       # out of its toothed edge
+    for k in range(10):
+        t = (k / 9.0) - 0.5
+        bx = BL_[0] + ux * 0.86 * t + ex * 0.055
+        bz = BL_[2] + uz * 0.86 * t + ez * 0.055
+        P.raw(aim(L.cone(0.034, 0.0, 0.072, 5), (bx, BL_[1], bz), (ex, -0.10, ez)), 'bone')
+
+    # ---- ARM 3: THE SPARE, pinned at the near half's hip. Three arms is the
+    # cheapest way to stop a silhouette reading as a man, and a joiner with a
+    # spare arm on a hook is exactly what this creature IS.
+    # PASS 4: it hung behind the near half at pass 1 and was a dark smear on a
+    # dark leg - a third arm nobody could count. It now hangs OUTBOARD of the
+    # far half's hip, under the saw, against clear background.
+    # PASS 5: at pass 4 it hung with clear air between it and the body and read
+    # as a dropped club. The peg is now modelled - a bone stub driven out of
+    # the far half's hip - and the arm hangs ON it, touching, so the eye can
+    # follow hip -> peg -> arm.
+    PEG = (0.40, 0.04, 1.16)
+    P.raw(L.tube([Vector(PEG), Vector((0.62, 0.06, 1.14))], 0.035, 8), 'bone')
+    P.add(L.sphere(0.062, 0.058, 0.052, 10, 7), 'dark', loc=(0.62, 0.06, 1.14))
+    limb(P, [(0.62, 0.06, 1.13), (0.67, 0.08, 0.92), (0.71, 0.10, 0.70)],
+         0.064, 0.047, 'body')
+    P.add(L.sphere(0.075, 0.068, 0.062, 10, 7), 'dark', loc=(0.72, 0.10, 0.66))
+
+    # ---- PASS 6, AND THE SILHOUETTE SHEET IS WHY. The sheet - which IS the
+    # acceptance test - frames every creature at the three_quarter view, 38
+    # degrees (lordgen.VIEWS). This creature's one idea lives in a plane that
+    # at 38 degrees is foreshortened to two-thirds and one half starts hiding
+    # the other, so the busiest cell on the sheet was also the one where the
+    # seam read least. The whole body is yawed 20 degrees so the split plane
+    # turns INTO the sheet's view; the front view loses a little of the gap
+    # and keeps most of it, which is the trade I would make again.
+    YAW = math.radians(20.0)
+    ca, sa = math.cos(YAW), math.sin(YAW)
+    P.items = [([Vector((v.x * ca - v.y * sa, v.x * sa + v.y * ca, v.z)) for v in verts],
+                faces, slot) for verts, faces, slot in P.items]
+    return P
+
+
+BUILDERS.update({"jointer": jointer})

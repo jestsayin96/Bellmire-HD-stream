@@ -8236,3 +8236,102 @@ touched. No secrets written anywhere.
   TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2099 samples (home); TOWNWALK in_solid=0/16881
   raid_in_solid=0/6448 PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR.
 - No live Twitch test. Not ticked - the team lead ticks. Systems 2/3/4 NOT started.
+C-83 (2026-11-17 CT, clock 05:2x) - TAKE THIS NEXT row for CONTENT: barks deepened a fourth time (lore_lines.json only)
+- TAKE THIS NEXT (04:58 CT block) gave CONTENT: keep going in `barks` for depth; four dead pools and the 29 trick-only shape lines left alone. C-55 already done.
+- data/lore_lines.json `barks`: +71 lines. enter +16, lord +11, trap +11, hurt +12, drink +11, misfire +10. Counts now enter 175, lord 169, trap 171, hurt 171, drink 163, misfire 167. Plain register, no floor counts.
+- VALIDATION OK: all four owned files parse; every other top-level key equal on a parsed compare; each existing bark list an unchanged prefix of its new list; all entries strings; no case-insensitive duplicate added (cross-list duplicates: 7 before, 7 after).
+- CODE WIRING: none. delve.gd:3432 reads `barks` by kind.
+## H32 hub standing check (2026-11-17 05:40 CT) - nothing new to build
+Fast-forwarded to origin/hub (684bb23) then merged origin/main, clean. `git diff` of web/ and docs/HUB_SECURITY.md across both merges was EMPTY, so the web/ build is byte-identical to the 03:50 run's looked-at build; no new screenshot taken (a picture of an unchanged build proves nothing new). Queue is empty (passes 1-5 in, H32 ticked WHOLE).
+MEASURED: web/icons 2,434,146 bytes on disk (520 WebP + manifest) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY, so the thumbnails still match the source set.
+SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta default-src 'none' unchanged. Live dot red --live #e5484d.
+Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked on purpose (delete refused on this machine; none is a deliverable). Not published; READY TO PUBLISH stands from 03:50, routed to team lead, supervisor decides.
+
+## U50 (2026-11-17 05:56 CT) - HUD: _l72_test can no longer print a clean finish on nothing (U49 fault 2), proved by deliberate break
+TAKE THIS NEXT gave HUD: no new HUD row (a463b7d plan sync only); took U49's NOT-DONE remainder. Lock RUNNING 05:55, IDLE 05:56 (~2 min, under the 15 cap, inside :52-:07).
+FIX (tools/_l72_test.gd, my lane's own file): old ending printed "DONE fails=0" and exit 0 even when no lord shot was measured. Now: audited counter of gated shots that really measured a lord; floor = one per lord run; overall frame cap 40000; verdict OK (rc 0) / FAIL (rc 1) / NO VERDICT (rc 2). New user args: lords=N (run first N lords), break_noaudit (frame report returns nothing).
+PROOF (windowed 1920x1080, lords=1): parse 0 errors; normal -> "L72_TEST OK fails=0 audited=2" rc 0, hollow_king inside=28/28 at all five shots, cam_in_solid=false; break_noaudit -> "NO VERDICT - only 0 gated shots audited, need 1" rc 2.
+NOT DONE: fault 3 (_l73_test cap prints FAIL) needs a long run - next engine slot, one chunk. Full 8-lord _l72 run not repeated this hour (1 lord proves the verdict path).
+NEEDED FROM MR. E: nothing.
+## B-cycle B23 - THE EARNABILITY PASS TURNED ON MY OWN FILES: FIVE LIVE READS NO GUARD VOUCHED FOR (chat bot, 2026-11-17 05:47-05:52 CT)
+
+Took the 04:58 TAKE THIS NEXT CHAT BOT row as written: queue empty, widen B21's earnability
+method to anything un-earned in MY OWN three files. Clock off the machine
+(2026-11-17T05:47:43-06:00), no Godot alive, lock IDLE since the game build's 05:20:30 line.
+Claimed 05:48:51, ONE battery. `chatbot` fast-forwarded onto main d9ac715 (no conflicts).
+
+### THE QUESTION, ONE LEVEL DOWN AGAIN
+B18/B19/B22 made `commands()` vouch for the file, the parse, `commands`, `ask`, `foreign` and
+`order`. Each guard stops at the key it NAMES. Five live reads sit one level BELOW them, and
+every one of them fails quietly.
+
+| read | where | what a bad value does today |
+|---|---|---|
+| `ask.topics`        | `ask_topic():819` | `ask` non-empty with no `topics` - every plain question gets silence |
+| `ask.order`         | `ask_topic():820` | a topic absent from `ask.order` is UNREACHABLE: the loop walks `order`, never the topic keys |
+| topic `cmd`/`reply` | `_ask_line():833` | a topic MATCHES and then answers with nothing - the exact failure L69 exists to end |
+| `c["what"]`         | `help_line():766` | read as the DEFAULT of a `.get("short", ...)`, so GDScript evaluates it even when `short` is there: one command with no `what` breaks `!help <command>` |
+| `foreign.<app>`     | `foreign():863`   | an app naming no `prefixes` and no `exact` is a dead entry, so that app's commands get answered |
+
+None is fatal, so all five say it out loud and carry on - the same shape as `ask`/`foreign`/
+`order` above them. A battery greps COMMANDS_DATA; NO LINE IS THE HEALTHY READING.
+The `foreign` check SKIPS keys beginning with `_`: `_why` and `_source` are comments in the data,
+not apps, and a naive pass would have reported the data's own documentation as a fault.
+
+### THE DATA ITSELF IS CLEAN - the five holes are LATENT, not biting
+27 commands / `order` 27, both directions; 10 ask topics / `ask.order` 10, both directions; every
+topic carries phrases and a `cmd` or a `reply`; every command carries `what`; `fightoverlay` and
+`chat_bots` both name words. sha256 `f37b1d2c6909`, 14753 bytes - byte-identical to B20/B21/B22.
+`docs/COMMANDS.md` sha256 `1fb9a166c3bf`, 5771 bytes, unchanged.
+
+### THE BATTERY - FIVE FOR FIVE ON HEALTHY DATA, ONE RUN, ALL FIVE IN PARALLEL
+  parse (300 frames)  rc=0, **0 SCRIPT ERROR, 0 Parse Error**, TWITCH joined #jestsayin96, and
+                      **NO COMMANDS_DATA LINE ANYWHERE** - the healthy reading, which is the
+                      whole point of adding guards that are silent until they are not
+  L14_TEST            OK (22 checks)   rc=0
+  TWITCH_PARSE        OK (8 checks)    rc=0
+  D704_ECHO           OK (356 checks)  rc=0
+  COMMANDS_DOC        OK wrote 27 commands, doc byte-identical - the no-op holds
+
+### BROKEN ON PURPOSE: THREE OF THE FIVE PROVED, TWO NOT, AND I WILL NOT CALL THEM PROVED
+  A. `ask.topics` emptied -> `COMMANDS_DATA ASK NO TOPICS - `ask` carries no usable `topics``
+  B. one topic dropped from `ask.order` -> `ASK ORDER SHORT - 1 topic(s) unreachable: ["missed"]`
+  C. that topic's `cmd` and `reply` removed -> `ASK TOPIC MUTE - 1 topic(s) answer with nothing:
+     ["missed"]`
+  **`L14_TEST` read OK (22 checks) under all three.** Same lesson as B22: no gate in this lane can
+  see a question about to go unanswered. The loader says it now.
+  D. `what` removed from one command - **NOT PROVED. THE BREAK RUN HUNG.** The Godot process sat
+     alive at ~7 MB with no verdict and no exit for 90 s and I killed it at 05:51 rather than run
+     into the HUD lane's :52 window. Its stdout died with it, so I have NO LINE and I am not
+     claiming one. What I observed is worth more than the missing line: on this break the gate
+     produced NO VERDICT AND NO EXIT CODE AT ALL. Whether the missing `what` caused the hang is
+     UNMEASURED - one short redirected run settles it and is B24's first act.
+  E. `fightoverlay` emptied of `prefixes` and `exact` - not reached, same cause.
+  `data/commands.json` restored from the in-run backup and re-hashed: `f37b1d2c6909`, 14753 bytes,
+  byte-identical. The broken intermediate (`0066f3e9a895`) is gone.
+
+### OWED - MINE FIRST THIS TIME
+- THIS LANE (B24, first act): prove breaks D and E with output redirected to a file and a hard
+  cap, and measure whether a `what`-less command hangs the gate or merely errors. Two of my own
+  five guards are unproven and they ride in this commit as unproven. Said here so no reader takes
+  the three greens for five.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Unchanged, six cycles on.
+- `tools/` owner: nothing new. If D turns out to be a genuine hang, `_l14_test.gd` needs a cap
+  that prints NO VERDICT - but that is a measurement I have not made, not a request yet.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+`.b23_run.log` and `.b23_commands.bak` written at the worktree root and both DELETED in the same
+run. Godot killed (PID 11948), lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered
+or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as any account, no
+channel setting touched. The parse run joined #jestsayin96 as the game always does on boot and
+said nothing. No secrets written anywhere.
+- S12b, THE 05:58 ROW (landed on main mid-cycle, merged at 06:22): scripts/delve.gd MB_FIT gains
+  "snarer_chibi": 1.00 and "jointer": 0.92 - art's numbers copied from _fit_snarer_register.json
+  (pairs.snarer_chibi.ratio 1.0) and _fit_report.json (pairs.jointer.ratio 0.92), not re-derived.
+  snuffer_chibi left out as ordered. --headless --import wrote jointer.glb.import; the row's other
+  claim was half right - the .import siblings for 5 miniboss chibis, 12 creatures and 8 lords WERE
+  on disk but UNTRACKED in git, so a fresh clone lacked them. All 27 now committed.
+  Verdicts: import 0 errors, parse 0 SCRIPT ERROR / 0 Parse Error, D96_FIT OK 70 checks, 14
+  minibosses in their own bodies - snarer now stands in snarer_chibi.glb at 1.00/1.00 of the hero.
+  Jointer has no miniboss def that names it yet; the key is in place for when one does.

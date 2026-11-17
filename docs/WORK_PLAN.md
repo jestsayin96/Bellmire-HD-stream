@@ -825,6 +825,8 @@ THE RULE THIS EARNS, AND IT IS COORDINATION 15's SHAPE A THIRD TIME - A COMMAND 
 VALUE IS RED, NOT EMPTY:
   1. NEVER build a refspec from a variable without asserting it first. A sync must check the SHA is
      40 hex characters and ABORT that branch otherwise. An empty left-hand side is a delete.
+     THIS IS NOW WRITTEN INTO THE TEAM LEAD PROMPT ITSELF (01:32 CT) along with the corrected
+     recipe, and the warning is in the game build and art prompts too, because every lane pushes.
   2. GIT_INDEX_FILE goes in a real temp directory, never inside a worktree's .git.
   3. Check the rc of read-tree and update-index. rc=128 on either means stop, not continue.
   4. MERGE EVERY LANE INTO MAIN BEFORE YOU SYNC. That is what made this recoverable, and it should
@@ -895,10 +897,16 @@ They are queue items and they are PHASED. A lane does not pull a Phase 2 system 
 *** allowed; the only restriction is reselling the assets AS assets, which we never do.
 ALL QUATERNIUS PACKS ARE AVAILABLE. Verify each new pack's licence PAGE on first use, as with any
 source - a search snippet is not a licence, and reading one was how the wrong ban got made.
-THE ART PROMPT AND THE GAME BUILD PROMPT STILL CARRY THE OLD BAN and this seat cannot edit a prompt
-either - the same refusal. SO THE RULING LIVES HERE, IN THE PLAN, WHICH IS WHERE A RULING COUNTS:
-if your prompt tells you Quaternius Bestiary or QAL is forbidden, THE PLAN OVERRIDES IT. System 10
-needs that pack and Ultimate Monsters. Do not refuse the item on a licence that has been verified.
+*** AS OF 01:36 CT THE PROMPTS THEMSELVES ARE FIXED. NO PROMPT CARRIES THE BAN ANY MORE. ***
+The art prompt and the game build prompt both carried it, and the claim that this seat "cannot edit
+a prompt" was WRONG - that refusal was a permission Mr. E cleared, and three seats reported it as a
+law of the machine without re-measuring. Mr. E, 17 Nov 01:30 CT, verbatim: "youre supposed to fix
+it, thats you as the team lead if you see something thats messed up fix it. thats a reason you
+exist". So it was fixed at the source instead of being routed around: the team lead prompt at
+01:32, the game build prompt at 01:34, the art prompt at 01:36, each re-signed by CruzaderPC and
+each read back and verified. System 10 needs the Bestiary pack and Ultimate Monsters and NO LANE
+WILL NOW REFUSE IT. If any prompt still tells you Quaternius Bestiary or QAL is forbidden, that
+prompt is stale and the plan overrides it - but none should.
 CC-BY-NC, CC-BY-ND and CC-BY-SA remain FORBIDDEN. That has not changed.
 
 *** THE DEAD-DATA AUDIT, 01:18 CT, OFF 2,041,853 CHARS OF SCRIPT (scripts/*.gd + web/*.js). ***

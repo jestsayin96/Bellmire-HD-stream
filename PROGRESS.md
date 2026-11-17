@@ -8635,3 +8635,6 @@ NOT CHASED: the unread-pipe hang. The row said leave it; the condition is known 
 NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
+
+## H32 hub standing check (2026-11-17 09:45 CT) - nothing new to build
+Fast-forwarded to origin/hub (5926fd8), merged origin/main clean (ead0b8a); `git diff` of web/ and docs/HUB_SECURITY.md across both was EMPTY, so web/ is byte-identical to the looked-at 02:00 build. Passes 1-5 in, H32 ticked WHOLE; queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned status line and failed-fetch box); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta, img-src 'self' data:, unchanged. MEASURED: web/icons 2,434,146 bytes on disk vs 6 MB cap. No new screenshot (unchanged build). Live dot red --live #e5484d. Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose: delete refused on this machine, ~7 MB binary not worth keeping in git.

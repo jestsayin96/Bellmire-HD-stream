@@ -58,6 +58,44 @@ FRAME_H = FRAME_W * CELL_Y / float(CELL_X)
 GROUND_UP = 0.25
 GAP = 0.45                      # clear air between hero and creature footprint
 
+# *** THE OCCLUSION TEST, ADDED 17 NOV 2026, 15:40 CT - PORTED FROM weaponfit. ***
+# THE DEFECT THIS CLOSES, FOUND BY LOOKING AND NOT BY ANY NUMBER HERE: the
+# Reeve's pass 1 side view had a body standing entirely behind another body.
+# Both checks in this file passed it, and they could not have done otherwise -
+# a FULLY OCCLUDED FRAME IS STILL FULL OF OPAQUE PIXELS INSIDE THE BORDER,
+# which is exactly and only what a blank check and a border check measure.
+# An instrument that cannot see a thing cannot report it; it reports green.
+#
+# The answer is the one fault 4 found on the weapon register nine hours ago:
+# ask the VIEWER'S question and let the renderer do the depth.
+#   A = the hero alone, through this exact camera
+#   B = the cell itself, hero + creature
+#   C = the creature alone - its full silhouette, the denominator
+# creature vis  = pixels that MOVED between A and B, counted only INSIDE C's
+#                 own silhouette (bounded on purpose: the raw diff also catches
+#                 cast shadow, and a fraction that can exceed 1.0 is a fraction
+#                 of nothing I can name)
+# creature seen = vis / alone - the share of the creature a viewer can see
+# AND THE SAME QUESTION BACK THE OTHER WAY, because this frame has two subjects
+# and either can hide the other. The hero-hidden case is not hypothetical: the
+# docstring of place() records that exact fault being fixed BY CONSTRUCTION on
+# an earlier pass, with nothing measuring whether it stays fixed. It does now.
+#   hero vis/seen = moved between C and B, inside A's silhouette.
+# A RATIO IS BLIND TO SIZE - 80% of a sliver is a sliver - so a view must clear
+# VIS_MIN pixels as well. A view that clears neither PROVES NOTHING, and a cell
+# needs MIN_PROVING views that do, or the cell FAILS. alone == 0 is RED.
+SEEN_MIN = 0.15
+VIS_MIN = 700                   # ~26x26 px on a 760x520 cell (0.18% of it).
+                                # weaponfit's 900 scaled by this cell's area.
+MIN_PROVING = 2
+DIFF_EPS = 0.02
+# Set by --prove-red ONLY. It renders the cell with the creature taken out of
+# it while still measuring the creature, which is the fault itself in its
+# purest form: a frame with no creature in it that is still full of opaque
+# pixels inside the border. The blank check and the border check pass it. This
+# test must not. See the proof recorded in docs/art/ at 15:51 CT.
+PROVE_RED = False
+
 
 def import_hero(repo):
     """The real body, at scale 1.0 - the size a hero actually IS in game.
@@ -126,8 +164,22 @@ def place(roots, dx, dy=0.0):
     bpy.context.view_layer.update()
 
 
-def shoot(objs, pts, outdir, views, aura):
-    """Fixed scale, fixed ground line. Only the horizontal centre moves."""
+def _shot(path, hide=()):
+    """One render with `hide` taken out of it, restored afterwards."""
+    for o in hide:
+        o.hide_render = True
+    bpy.context.scene.render.filepath = path
+    bpy.ops.render.render(write_still=True)
+    for o in hide:
+        o.hide_render = False
+    return G.read_png(path)
+
+
+def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=None):
+    """Fixed scale, fixed ground line. Only the horizontal centre moves.
+
+    Also answers, per view, whether each of the two subjects can actually be
+    SEEN - see the OCCLUSION TEST note at the top of this file."""
     scene = bpy.context.scene
     eng = G.set_engine(scene)
     scene.render.resolution_x, scene.render.resolution_y = CELL_X, CELL_Y
@@ -156,6 +208,9 @@ def shoot(objs, pts, outdir, views, aura):
     scene.camera = cam
 
     written = []
+    vis = {}
+    creature = list(creature)
+    hero_meshes = list(hero_meshes)
     for vname, az in views:
         a, e = math.radians(az), math.radians(6.0)
         dirv = Vector((math.sin(a) * math.cos(e), -math.cos(a) * math.cos(e),
@@ -174,10 +229,26 @@ def shoot(objs, pts, outdir, views, aura):
         cam_d.clip_start = max(0.01, min(depth) - radius * 0.5)
         cam_d.clip_end = max(depth) + radius * 2.0 + 8.0
         path = os.path.join(outdir, "hero_%s.png" % vname)
-        scene.render.filepath = path
-        bpy.ops.render.render(write_still=True)
+        B = _shot(path, hide=creature if PROVE_RED else ())
         written.append(path)
-    return written, eng
+        if creature and hero_meshes and tmpdir:
+            A = _shot(os.path.join(tmpdir, "_heroalone_%s.png" % vname), hide=creature)
+            C = _shot(os.path.join(tmpdir, "_crealone_%s.png" % vname), hide=hero_meshes)
+            cell = {}
+            for who, X, Y in (("creature", A, C), ("hero", C, A)):
+                # X is the frame WITHOUT this subject; Y is this subject ALONE.
+                changed = np.abs(B - X).max(axis=2) > DIFF_EPS
+                mask = Y[:, :, 3] > DIFF_EPS
+                alone = int(mask.sum())
+                covered = int((changed & mask).sum())
+                cell[who] = dict(alone=alone, vis=covered,
+                                 delta=int(changed.sum()),
+                                 seen=round(covered / float(alone), 4) if alone else 0.0)
+            cell["proves"] = bool(
+                cell["creature"]["seen"] >= SEEN_MIN and cell["creature"]["vis"] >= VIS_MIN
+                and cell["hero"]["seen"] >= SEEN_MIN and cell["hero"]["vis"] >= VIS_MIN)
+            vis[vname] = cell
+    return written, eng, vis
 
 
 def sheet(repo, keys, hero, name="_hero_scale", cols=3):
@@ -253,13 +324,20 @@ def main():
     ap.add_argument("--name", default="_hero_scale")
     ap.add_argument("--cols", type=int, default=3)
     ap.add_argument("--frame", type=float, default=0.0)
+    # THE RED PATH. Stands the hero ON the creature instead of beside it, so
+    # each hides the other. A gate that has never been seen to fail is not
+    # known to be able to. This flag must never be used for a shipped register.
+    ap.add_argument("--prove-red", action="store_true")
     args = ap.parse_args(argv)
+    if args.prove_red:
+        globals()["PROVE_RED"] = True
     if args.frame > 0.1:
         globals()["FRAME_W"] = args.frame
         globals()["FRAME_H"] = args.frame * CELL_Y / float(CELL_X)
     out = os.path.join(args.repo, "renders", "art", "minibosses",
                        "_fit_report.json" if args.name == "_hero_scale" else "_fit_%s.json" % args.name.strip("_"))
-    rep = {"ok": True, "hero": {}, "pairs": {}, "errors": []}
+    rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
+           "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING}
     if os.path.isfile(out):
         try:
             with open(out) as f:
@@ -286,14 +364,44 @@ def main():
                 amn, amx, pts = G.world_bounds(allo)
                 outdir = os.path.join(args.repo, "renders", "art", "minibosses", key)
                 os.makedirs(outdir, exist_ok=True)
-                written, eng = shoot(allo, pts, outdir,
-                                     (("front", 0.0), ("side", 90.0), ("back", 180.0)), info["aura"])
+                tmpdir = os.path.join(args.repo, "renders", "art", "minibosses", "_vis_tmp")
+                os.makedirs(tmpdir, exist_ok=True)
+                written, eng, vis = shoot(allo, pts, outdir,
+                                          (("front", 0.0), ("side", 90.0), ("back", 180.0)),
+                                          info["aura"], creature=objs, hero_meshes=hmesh,
+                                          tmpdir=tmpdir)
                 rep["pairs"][key] = dict(
                     creature_h=round(mx.z - mn.z, 3), hero_h=hero["h"],
                     ratio=round((mx.z - mn.z) / max(0.01, hero["h"]), 2),
                     pair_w=round(amx.x - amn.x, 2),
                     fits_frame=bool((amx.x - amn.x) <= FRAME_W and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
-                    engine=eng, views=[os.path.basename(p) for p in written])
+                    engine=eng, views=[os.path.basename(p) for p in written],
+                    visibility=vis,
+                    proving_views=sum(1 for c in vis.values() if c["proves"]))
+                if vis:
+                    pv = rep["pairs"][key]["proving_views"]
+                    for vname, c in vis.items():
+                        for who in ("creature", "hero"):
+                            if c[who]["alone"] == 0:
+                                rep["errors"].append(
+                                    "%s/%s: the %s renders EMPTY alone - its seen "
+                                    "fraction would be computed over nothing"
+                                    % (key, vname, who))
+                                rep["ok"] = False
+                    if pv < MIN_PROVING:
+                        rep["blind_views"].append(
+                            "%s: only %d of %d views show BOTH subjects "
+                            "(seen>=%.2f AND vis>=%d px each) - %s"
+                            % (key, pv, len(vis), SEEN_MIN, VIS_MIN,
+                               "; ".join("%s creature seen %.3f vis %d / hero seen %.3f vis %d"
+                                         % (v, c["creature"]["seen"], c["creature"]["vis"],
+                                            c["hero"]["seen"], c["hero"]["vis"])
+                                         for v, c in vis.items())))
+                        rep["ok"] = False
+                else:
+                    rep["errors"].append("%s: no visibility measured for any view - "
+                                         "an unmeasured cell is RED, not green" % key)
+                    rep["ok"] = False
                 if not rep["pairs"][key]["fits_frame"]:
                     rep["errors"].append("%s: pair does not fit the fixed frame" % key)
                     rep["ok"] = False
@@ -309,6 +417,26 @@ def main():
     # nothing here checked that the keys being sheeted had ever been measured.
     # ok used to mean "nothing raised" - it now means "every key asked for has
     # a ratio on record". A register that measures nothing reports RED.
+    # A CELL MEASURED BEFORE THIS TEST EXISTED IS NOT EVIDENCE FOR IT. An old
+    # entry carries a ratio and no `visibility`, and reading the file alone
+    # would make the whole set look proved by a run that only touched one key.
+    unproved = [k for k in keys
+                if k in rep["pairs"] and "visibility" not in rep["pairs"][k]]
+    if unproved:
+        rep["ok"] = False
+        rep["errors"].append("no occlusion measurement on record for: %s - "
+                             "these cells predate the visibility test and are "
+                             "not proved by it" % ",".join(unproved))
+    # AND THE SAME QUESTION ABOUT THE CELLS NOBODY ASKED FOR THIS RUN. The
+    # file accumulates: the first full run after this test shipped found
+    # snuffer_chibi and tallyman_chibi sitting in `pairs` with a ratio and no
+    # visibility, because neither is in M.ORDER any more, so neither is ever
+    # asked for and neither was going to be caught by the loop above. A reader
+    # loading this file would have seen ok:true over two cells the occlusion
+    # test has never looked at. They are NAMED here rather than silently
+    # carried, and a GREEN verdict does not extend to them.
+    rep["unproved_cells"] = sorted(k for k, v in rep["pairs"].items()
+                                   if "visibility" not in v)
     measured = [k for k in keys if k in rep["pairs"]]
     missing = [k for k in keys if k not in rep["pairs"]]
     rep["measured"] = measured
@@ -345,6 +473,9 @@ def main():
     print("MINIBOSSFIT_REPORT " + json.dumps({
         "verdict": "GREEN" if rep["ok"] else "RED",
         "ok": rep["ok"], "hero": rep["hero"], "errors": rep["errors"][:4],
+        "blind_views": rep["blind_views"][:6],
+        "proving": {k: v.get("proving_views") for k, v in rep["pairs"].items()},
+        "unproved_cells": rep.get("unproved_cells", []),
         "blank": rep.get("blank_check", {}),
         "ratios": {k: (v["ratio"], v["pair_w"], v["fits_frame"])
                    for k, v in rep["pairs"].items()}}))

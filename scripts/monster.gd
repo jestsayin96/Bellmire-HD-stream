@@ -682,7 +682,7 @@ static func phase_for(frac: float) -> int:
         return 2
     return 1
 
-func hurt(amount: float, crit := false) -> void:
+func hurt(amount: float, crit := false, kind := "") -> void:
     if state == S.DEAD:
         return
     hp -= amount
@@ -693,7 +693,7 @@ func hurt(amount: float, crit := false) -> void:
             phase = now
             _enter_phase()
     Sfx.at("hit", global_position, HIT_DB + (3.0 if crit else 0.0))     # S3: under the weapon's own clash / impact
-    _number(amount, crit)
+    show_result("crit" if crit else (kind if kind != "" else "hit"), amount)
     _flash()
     if hp <= 0.0:
         die()
@@ -702,25 +702,82 @@ func hurt(amount: float, crit := false) -> void:
         if _ap:
             _ap.queue(String((def.get("anims", {}) as Dictionary).get("idle", "")))
 
+## ---- D61.1: THE NUMBERS IN THE WORLD. A result rises off the creature and says WHAT KIND it
+## was, not only how much: an ordinary hit, a critical (bigger, gold, "CRIT"), a miss that says
+## so rather than showing nothing, a save made (halved), a hit resisted and a hit that landed for
+## extra. Ordinary hits POOL: a second hit inside POOL_S adds onto the number still rising rather
+## than stacking a new one, so a monk's flurry reads as one climbing figure, and no creature ever
+## carries more than LIVE_CAP numbers at once (the oldest is dropped). Crits never pool - a crit
+## must always be its own moment. Theme is the parchment + ink + teal of the HUD: parchment
+## figures on an ink outline, teal for the defender's wins (miss / save / resist).
+const POOL_S := 0.35
+const LIVE_CAP := 3
+const RESULT_LOOK := {
+    "hit":    {"col": Color(0.96, 0.91, 0.80), "size": 64, "fmt": "%d"},
+    "crit":   {"col": Color(1.00, 0.80, 0.22), "size": 104, "fmt": "CRIT %d!"},
+    "miss":   {"col": Color(0.55, 0.84, 0.82), "size": 56, "fmt": "miss"},
+    "save":   {"col": Color(0.40, 0.82, 0.78), "size": 58, "fmt": "save %d"},
+    "resist": {"col": Color(0.62, 0.74, 0.76), "size": 56, "fmt": "resist %d"},
+    "vuln":   {"col": Color(1.00, 0.48, 0.28), "size": 80, "fmt": "%d x2!"},
+}
+var _live_nums: Array = []          # [{lb, kind, amt, t}] newest last
+var results_shown := {}             # kind -> count, read by tools/_d61_test.gd
+var results_pooled := 0
+static var results_total := {}      # kind -> count across every creature (survives a corpse being freed)
+
+## raids.gd still calls the old name; it is the same result now
 func _number(amount: float, crit: bool) -> void:
+    show_result("crit" if crit else "hit", amount)
+
+func show_result(kind: String, amount := 0.0) -> void:
+    if not RESULT_LOOK.has(kind):
+        kind = "hit"
+    results_shown[kind] = int(results_shown.get(kind, 0)) + 1
+    results_total[kind] = int(results_total.get(kind, 0)) + 1
+    var now := Time.get_ticks_msec() / 1000.0
+    _live_nums = _live_nums.filter(func(e): return is_instance_valid(e["lb"]))
+    if kind == "hit" and not _live_nums.is_empty():
+        var last: Dictionary = _live_nums[-1]
+        if String(last["kind"]) == "hit" and now - float(last["t"]) <= POOL_S:
+            last["amt"] = float(last["amt"]) + amount
+            last["t"] = now
+            (last["lb"] as Label3D).text = "%d" % int(round(float(last["amt"])))
+            results_pooled += 1
+            return
+    while _live_nums.size() >= LIVE_CAP:
+        var old: Dictionary = _live_nums.pop_front()
+        if is_instance_valid(old["lb"]):
+            (old["lb"] as Label3D).queue_free()
+    var look: Dictionary = RESULT_LOOK[kind]
+    var fmt := String(look["fmt"])
     var lb := Label3D.new()
-    lb.text = ("%d!" if crit else "%d") % int(round(amount))
-    lb.font_size = 96 if crit else 64
+    lb.text = fmt % int(round(amount)) if fmt.contains("%d") else fmt
+    lb.font_size = int(look["size"])
     lb.pixel_size = 0.006 if Spotlight.mode != "off" else 0.01    # L21: smaller in a close side-by-side pane
     lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
     lb.no_depth_test = true
-    lb.outline_size = 20
-    lb.outline_modulate = Color(0, 0, 0, 0.9)
-    lb.modulate = Color(1.0, 0.85, 0.2) if crit else Color(1.0, 0.95, 0.9)
+    lb.outline_size = 26 if kind == "crit" else 20
+    lb.outline_modulate = Color(0.06, 0.05, 0.04, 0.95)      # ink
+    lb.modulate = look["col"]
     lb.top_level = true
     add_child(lb)
-    var p := global_position + Vector3(randf_range(-0.4, 0.4), _height() * 0.8 + 0.3, randf_range(-0.4, 0.4))
+    # numbers alive at once step sideways and down so two in one beat never print on top of each other
+    var lane := _live_nums.size()
+    var side := (-1.0 if lane % 2 == 1 else 1.0) * (2.3 if lane > 0 else 0.0)
+    var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
+    var right := cam.global_basis.x if cam else Vector3.RIGHT      # sideways ON SCREEN, not along the floor
+    var p := global_position + right * (side + randf_range(-0.15, 0.15)) + Vector3(0, _height() * 0.8 + 0.3 - 0.5 * lane, 0)
     lb.global_position = p
+    var life := 1.3 if kind == "crit" else 0.9
+    if kind == "crit":
+        lb.scale = Vector3.ONE * 1.6
+        lb.create_tween().tween_property(lb, "scale", Vector3.ONE, 0.22).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
     var tw := lb.create_tween()
     tw.set_parallel(true)
-    tw.tween_property(lb, "global_position", p + Vector3(0, 1.4, 0), 0.9).set_ease(Tween.EASE_OUT)
-    tw.tween_property(lb, "modulate:a", 0.0, 0.9).set_delay(0.3)
+    tw.tween_property(lb, "global_position", p + Vector3(0, 1.4, 0), life).set_ease(Tween.EASE_OUT)
+    tw.tween_property(lb, "modulate:a", 0.0, life).set_delay(life * 0.35)
     tw.chain().tween_callback(lb.queue_free)
+    _live_nums.append({"lb": lb, "kind": kind, "amt": amount, "t": now})
 
 func _flash() -> void:
     if _flash_mats.is_empty():

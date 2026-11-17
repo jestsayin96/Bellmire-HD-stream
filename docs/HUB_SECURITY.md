@@ -715,3 +715,6 @@ Supervisor sign-off (2026-11-16 20:05 CT, docs/WORK_PLAN.md) with four condition
   frame (border), never a fill.
 - Note: shop stock goods (pies, brooms) are not in `data/items.json` equipment, so they honestly show the glyph;
   only items that have art (rings, hats, boots, cloaks, gloves, amulets, banners) show a picture.
+
+## H32 pass 5 (polish) - no security surface change
+Added a skip link (constant href "#stageScroll"), three key shortcuts ("[", "]", "g") that only toggle page-owned layout state or focus the rail, a scrollIntoView on the active tab (an id from the TABS constant) and CSS. No snapshot value reaches a selector, URL, src, href or style; no new innerHTML; no new storage key; CSP meta unchanged.

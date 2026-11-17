@@ -4612,6 +4612,9 @@ function setActiveTab(id) {
     if (panel) { if (on) panel.classList.add("active"); else panel.classList.remove("active"); }
   }
   storeTab(id);
+  // H32 pass 5: keep the chosen tab inside the (horizontally scrolling) section bar
+  const cur = $("tab-" + id);
+  if (cur && cur.scrollIntoView) { try { cur.scrollIntoView({ block: "nearest", inline: "nearest" }); } catch (e) {} }
 }
 (function wireTabs() {
   const navEl = $("tabs");
@@ -5331,5 +5334,27 @@ function finderOpen(r) {
     const t = ev.target, tag = t && t.tagName ? t.tagName : "";
     if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
     ev.preventDefault(); inp.focus();
+  });
+})();
+
+// ---------------------------------------------------------------- H32 pass 5: keyboard
+// Twitch-style shortcuts, only while the viewer is not typing: "[" folds the rail, "]" folds the
+// chat column, "g" jumps to the rail (then Up/Down/Enter as usual). Page-local, no data.
+(function wireShortcuts() {
+  document.addEventListener("keydown", (ev) => {
+    if (ev.ctrlKey || ev.metaKey || ev.altKey || ev.defaultPrevented) return;
+    if (ev.key !== "[" && ev.key !== "]" && ev.key !== "g") return;
+    const t = ev.target, tag = t && t.tagName ? t.tagName : "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    const app = $("app"); if (!app) return;
+    if (ev.key === "[") { if (NARROW.matches) return; railSetMode(railGetMode() === "min" ? "full" : "min"); ev.preventDefault(); }
+    else if (ev.key === "]") {
+      if (NARROW.matches) { chatNarrowOpen(app.getAttribute("data-chatopen") !== "1"); }
+      else chatColSet(app.getAttribute("data-chat") === "min" ? "full" : "min");
+      ev.preventDefault();
+    } else {
+      const r = $("railList"), f = r && (r.querySelector('[tabindex="0"]') || r.querySelector('[role="option"]'));
+      if (f) { try { f.focus(); } catch (e) {} ev.preventDefault(); }
+    }
   });
 })();

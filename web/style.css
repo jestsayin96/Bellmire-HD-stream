@@ -1745,3 +1745,25 @@ html:not(.overlay):not(.watch) .app[data-chat="min"] .chat-toggle svg { transfor
 .lorecard:hover, .lorecard:focus-visible { border-color: var(--teal-ink); box-shadow: 0 5px 14px rgba(0,0,0,.25); }
 .beast-facts { grid-template-columns: 1fr; gap: 0; }
 .beast-facts dt { font-size: .72rem; letter-spacing: .03em; text-transform: uppercase; margin-top: 3px; }
+
+/* ===========================================================================
+   H32 pass 5 - POLISH. Dark thin scrollbars on the three scroll regions (the narrow top strip
+   showed a white native bar), a fade on the right edge of the section bar so a clipped tab reads
+   as "more this way", a skip link, and a quiet focus ring on the stage.
+   =========================================================================== */
+.rail, .rail-list, .chatcol, .chatlist, .stage-scroll, #bestiaryBody {
+  scrollbar-width: thin; scrollbar-color: rgba(233,214,168,.28) transparent;
+}
+.rail::-webkit-scrollbar, .rail-list::-webkit-scrollbar, .chatcol::-webkit-scrollbar, .stage-scroll::-webkit-scrollbar { width: 8px; height: 6px; }
+.rail::-webkit-scrollbar-thumb, .rail-list::-webkit-scrollbar-thumb, .chatcol::-webkit-scrollbar-thumb, .stage-scroll::-webkit-scrollbar-thumb { background: rgba(233,214,168,.26); border-radius: 6px; }
+.rail::-webkit-scrollbar-track, .rail-list::-webkit-scrollbar-track, .chatcol::-webkit-scrollbar-track, .stage-scroll::-webkit-scrollbar-track { background: transparent; }
+html:not(.overlay):not(.watch) .stage-top nav {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent);
+          mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent);
+  scroll-padding: 0 36px;
+}
+.skip-link { position: absolute; left: 8px; top: -60px; z-index: 50; padding: 8px 14px; border-radius: 8px;
+  background: var(--teal-br); color: #0a1413; font-weight: 700; text-decoration: none; }
+.skip-link:focus { top: 8px; }
+html:not(.overlay):not(.watch) .stage-scroll:focus-visible { outline: none; }
+html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: none; }

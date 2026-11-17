@@ -8537,3 +8537,44 @@ Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left un
 ## U52 (2026-11-17T07:53:37-06:00) - HUD stand-down, file-only (no lock taken, no Godot launched)
 TAKE THIS NEXT (06:58 block) gave HUD: gate work or the stand-down; L73/L74 already ticked, all four U48 gate faults closed (U49-U51), L31 remainder waits on the D99 tick (origin/main a2b6f04 shows D99 still not ticked). Lock: last line IDLE 07:51:10 (chat bot), no Godot alive. None launched, lock untouched, none of my seven files edited. I did not invent an item or touch another lane's file.
 NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 remainder to its owners.
+
+## B-cycle B26 - STAND-DOWN AS ORDERED; SIX FOR SIX RE-PROVED ON THE NEW MAIN 87bb47a (chat bot, 2026-11-17 08:46-08:53 CT)
+THE ROW SAID NOTHING NEW IS ASSIGNED, so nothing new was invented. The 07:58 TAKE THIS NEXT gave this
+lane: do not chase the hang further, do not take another lane's gate, do not take a Phase 2 system,
+write the stand-down if dry. This is the stand-down, and it carries a battery because main moved 21
+commits since the last one this lane proved anything on (B24 ran on e3ec68a; main is now 87bb47a).
+
+MACHINE CLOCK READ FIRST: 08:47:02 CT. Lock last line IDLE 2026-11-17T08:16:30-06:00 (game build S14).
+NO GODOT PROCESS ALIVE - checked by process, not by the file (tasklist and a PowerShell Get-Process
+sweep, both empty). Claimed at 08:47:32, named a 08:56 finish, started NOTHING after the battery.
+
+EVERY LAUNCH IN THIS BATTERY REDIRECTED STDOUT TO A FILE. That is B25's own finding turned into
+practice the first hour it was available: no Godot in this run ever wrote to an unread pipe.
+
+SIX FOR SIX, ONE BATTERY, 66 SECONDS WALL CLOCK, every exit code rc=0:
+  parse 300 frames  - 0 SCRIPT ERROR, 0 Parse Error, and NO COMMANDS_DATA line (the B18/B23 loader
+                      guards stay silent on healthy data, as they must)
+  L14_TEST OK 22    - both drift directions clean: 64 verbs, missing [], unanswered []
+  TWITCH_PARSE OK   - 8 checks
+  D704_ECHO OK      - 356 checks
+  B11_MUSTER OK     - bad=0, 22 checks, run WITHOUT --quit; B11_SOURCE_QUEUEING still YES
+  COMMANDS_DOC OK   - wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL
+
+THE THREE FILES THIS LANE OWNS ARE UNCHANGED AND SAID SO BY HASH, not by assertion:
+  data/commands.json  f37b1d2c6909  (14753 bytes) - same hash the supervisor confirmed on main
+  docs/COMMANDS.md    1fb9a166c3bf  (5771 bytes)  - unchanged by the real generator
+  scripts/chatcmd.gd  825b76127050  (1018 lines)
+A read-only drift audit beside the gate agreed with it both ways: every one of the 27 command keys
+and all 24 aliases appear in chatcmd.gd, and L14 found no verb without an entry.
+
+ONE THING WORTH THE GAME BUILD LANE'S EYE, NOT A FINDING AND NOT MINE TO FIX: the 300-frame parse run
+brings up the real EventSub client - its tail reads "TWITCH_EVENTSUB subscribed 7 of 7". A plain parse
+gate therefore opens a live socket as bellmirebro every time any lane runs it. Nothing was posted, no
+redemption touched, no bits anywhere near it, and twitch_eventsub.gd is the GAME BUILD's file, so I am
+naming it and not touching it. If that lane wants a parse run that stays offline, that is their line.
+
+NOT TAKEN, NAMED FOR THE EIGHTH CYCLE RUNNING: `twitch_cooldown_s` is still the game build's one line.
+NOT CHASED: the unread-pipe hang. The row said leave it; the condition is known and that is enough.
+NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
+NEEDED FROM MR. E: nothing.

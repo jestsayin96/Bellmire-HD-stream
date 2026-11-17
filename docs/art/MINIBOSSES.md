@@ -1048,3 +1048,139 @@ Looked at on `hero_front.png`, `hero_side.png`, `hero_back.png` and
    wasted: the rack is a promise that every answer you spend is an answer you
    do not get back.
 5. Feed line, if one is wanted: *"It is pegging up a fresh hide."*
+
+================================================================================
+## 20. THE REEVE - *IT TAKES THE HAUL*
+`reeve` - keep - h **1.95** - wear **0.05** - 4 meshes, 1,420 faces -
+span **2.96 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **0.80** beside the posed 2.45 m KayKit Knight, pair_w 4.83,
+fits_frame true. Procedural, no pack geometry (`pack_used` false).
+Five passes, 17 Nov 2026.
+
+### WHY THIS ONE - MEASURED, NOT REMEMBERED
+- **NINETEEN IDEAS EXIST AND NOT ONE OF THEM TOUCHES WHAT THE FLOOR PAYS.**
+  Parsed out of `minibosses.py` CANON this run rather than recalled: summon,
+  self-armour, drag a hero out, douse the lamps, will-not-stay-down, bar the
+  door, steal worn gear, heal the pack, raise the water, plant the ground,
+  pre-set the room, scale with the fire, ring from elsewhere, set the floor,
+  come apart in two, arm the room, weigh you down, cut the room in two,
+  adaptive resistance. Every one is about the FIGHT. None is about the TAKE.
+- **AND THE TAKE IS A REAL RESOURCE IN THE CODE, not something I invented for
+  the creature.** `delve.gd:34` carries `haul = {ore, stone, gear, potion}`
+  and `_loot()` at `:2014` adds gold at `:2038` and ore/stone at `:2066-7`.
+  A creature standing between the party and that dictionary needs no new
+  system behind it.
+- **IT IS NOT THE TALLYMAN, AND THAT IS THE ONE IT HAD TO BE CHECKED
+  AGAINST.** The Tallyman lifts gear OFF A HERO, wears it and WITHDRAWS -
+  theft from a body, and it leaves. The Reeve never touches a hero and never
+  leaves: it is chained to its own box by construction, and what it takes is
+  the floor's take, which nobody is carrying yet. One is a pickpocket, the
+  other is a toll. The pressure differs too: the Tallyman makes you CHASE, the
+  Reeve makes you HURRY. It is a shot clock on your wages.
+- **THEME `keep`,** off `dungeon_hd.gd:737-743`: the miniboss roll is 35 on
+  barracks and workshop, 10 on shrine and crypt, 15 on prison and every
+  unlisted theme. `keep` is unlisted, so it rolls at **15 with exactly ONE
+  body behind it** (the Porter) - the same single-body case the Loader and the
+  Tanner were built for. `floorgen.gd:183` makes the room argue for it without
+  a word of lore: the inner keep is the only theme with blue banners, `feast`
+  and `shelf_stock` clusters and decorated pillars. The lord's own hall is
+  where a share is rendered.
+- **HEIGHT 1.95 EXTENDS THE BOTTOM OF A FULL LADDER.** All nineteen checked by
+  parsing CANON: 2.00-2.75 in 0.05s is full (the Tanner took 2.75 to extend
+  the top). 1.95 is honest rather than a repeat, and it is the right number -
+  **THE BOX IS THE CREATURE** and the man beside it is small on purpose. At
+  0.80x a hero this is the smallest body in the set.
+- **WEAR 0.05 EXTENDS THE BOTTOM TOO, for a different reason than the Tanner's
+  0.10** - the only other value down there. The Tanner is fresh because of a
+  PROCESS: it re-covers itself hourly. The Reeve is fresh because NOTHING IT
+  OWNS IS EVER USED - a strongbox that is only filled, never opened and never
+  fought with has no scars on it. Mr. E's rule 2: condition is the receipt,
+  and this receipt reads UNTOUCHED.
+
+### FIVE PASSES, ONE NAMED FAULT EACH, AND THE BIG ONE A NUMBER COULD NOT SEE
+1. **PASS 1 built it and the SIDE VIEW HAD NO CREATURE IN IT.** Man at x
+   -0.64, box at +0.48, and the side camera looks along X - so at azimuth 90
+   the box stood in front of the man and the frame was chest, spike, nothing
+   else. **The blank check cannot see this**: that frame is full of opaque
+   pixels, they are just all box. Same fault class as the Tanner's pass 5 and
+   as `minibossfit`'s own hero offset, which separates the pair in BOTH axes
+   for exactly this reason.
+2. **PASS 2, one change: the man moved 0.72 m FORWARD of the box** (a clear
+   0.37 m in front of its near face), so front/back separate him in X and the
+   side view separates him in Y. He is in all three views now.
+3. **PASS 3, one part - and it is the part the mechanic rests on.** The hands
+   were flat plates whose broad face pointed at the CEILING, so the front
+   camera only ever saw their 0.05 m edge: the taking hand read as **A BLADE**
+   and in profile the two lined up into ONE LONG PLANK from his chest to the
+   far side of the box. A creature built around an open palm read as a man
+   with a cleaver. The palm is now tipped up to face the room (1.18 rad, not
+   0.34) with fingers and a thumb; the lid hand lost its plate for a knuckled
+   lump, because that plate was the other half of the plank.
+4. **PASS 4, one part: the lit throat.** Pass 3's glow was a solid cone 0.49 m
+   across filling the mouth edge to edge, and it came back as **A LUMP OF
+   DOUGH** - the creature read as a hopper full of batter, which is the
+   Boiler's trade and not this one. Light reads as light when it is a thin
+   SOURCE against a dark interior, never when it is a solid the size of the
+   opening. Now: a lit ring just inside the rim and a small plug far down the
+   throat. The camera gets a dark square hole with its edge alight.
+5. **PASS 5, one thing: the man's MASS.** On the hero pair shot the box held
+   up - bands, lock and feet all read - and the man came back **a stick
+   figure** beside a KayKit adventurer measured here at 2.45 m tall and 1.32 m
+   across. A 0.086 m shin next to that is a wire. Nothing moved and nothing
+   was added: the same skeleton at honest thickness, so the improvement is
+   mass and not a new part.
+
+### THE FIT PROOF - I LOOKED, AND HERE IS EVERY FAULT I CAN SEE
+On `hero_front.png`, `hero_side.png`, `hero_back.png` (the posed 2.45 m Knight
+at one ground line and one ortho scale) and on `three_quarter.png`:
+1. **The coat is a FRONT-ONLY panel.** From behind the man is a plain pale
+   torso tube with no garment on it - the thing that makes him read as an
+   officer rather than a small hero exists in two views out of four.
+2. **In profile both arms collapse into one horizontal bar** - the two hands
+   sit at nearly the same height, so the side view shows a single beam across
+   him. Better than pass 3's plank, still one line where there are two arms.
+3. **The legs merge into one column in profile** (the stance is in X only).
+4. **The lit throat does not read as LIGHT at pair distance** - it reads as a
+   pale liner inside a dark opening. The opening reads; the fire in it does
+   not. If this matters it is an emission-strength pass, not a geometry one.
+5. **In silhouette the hopper's mouth fills in solid** - the far wall of the
+   funnel closes the hole, so the opening survives only as the funnel's
+   outline. The one shape the creature is named for is the one the silhouette
+   test cannot show.
+6. **The chain reads as a floating hook from the front**: its ring is on the
+   far (+X) face and hidden behind the box, so at the front camera a bent iron
+   line and a spike stand beside the chest attached to nothing visible.
+7. **The spill lumps and the belt seal are 2-4 px dots at pair scale** and
+   only work in the creature's own three views - the Loader's known fault
+   repeated, and I did not fix it here either.
+8. **The fingers read as a small fork or comb** at pair scale, front and back.
+9. The man's head is a bare pale sphere under the cap; it reads as a face with
+   two eyes. The brief prefers no face, and three bodies in this set have the
+   same note. It does NOT read as a visor - the cap band stays above the
+   equator, which was the specific fault being avoided.
+
+### THE INSTRUMENT, AND WHAT IT STILL CANNOT SEE
+`minibossgen` 60 files blank+border checked, 0 failures, errors []; 4 meshes
+(the bar is four), 1,420 faces. `minibossfit` verdict **GREEN**, asked
+`["reeve"]`, measured `["reeve"]` - not an empty register - hero measured at
+2.45 m posed true, blank check 3 files 0 failures.
+**NEITHER OF THEM COULD HAVE CAUGHT PASS 1'S FAULT**, and that is worth
+writing down rather than filing a green verdict quietly: a view in which one
+of the two masses completely occludes the other is a full frame of opaque
+pixels inside the border, which is exactly what both harnesses measure. The
+only instrument that caught it was looking at the picture.
+
+### WHAT THE GAME BUILD LANE MUST DO - I DO NOT DO IT, AND I TOUCHED NO .gd
+1. `assets/monsters/minibosses/reeve.glb` - **static, no armature**: a `model`
+   path and **NO `anims` entry**, same as the other nineteen. As with all of
+   them there is no `.glb.import` sibling (this lane never runs Godot); an
+   import run writes it and `delve.gd:377` falls back safely until then.
+2. `scripts/delve.gd` `MB_FIT`: add `"reeve": 0.80` - **MEASURED**, from
+   `renders/art/minibosses/_fit_report.json` `pairs.reeve.ratio`. Do not
+   re-derive it. Same one-line shape as `"tanner": 1.12` and `"loader": 1.08`.
+3. The `keep` set piece can now pick between the Porter and the Reeve, which
+   is the whole reason this one was built for that theme.
+4. **The idea is a BEHAVIOUR, and this one is an ECONOMY behaviour** - it wants
+   `haul`/gold, not damage. Shipped as a reskin with extra hit points it is
+   wasted: the box is a promise that a cleared floor can still pay you nothing.
+5. Feed line, if one is wanted: *"It is here for the lord's share."*

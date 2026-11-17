@@ -807,6 +807,29 @@ work is sound - only the stamps are ahead. No lane is to re-date anything; this 
 next seat reads those two lines as 00:51/00:58 and does not inherit a drifting clock. VERIFY WITH
 `TZ=America/Chicago date` EVERY RUN. A future stamp is a future stamp even when it is ours.
 
+*** AN INCIDENT CAUSED BY THIS SEAT AT 01:24 CT. ALL SIX LANE BRANCHES WERE DELETED ON ORIGIN AND
+*** ALL SIX ARE RESTORED. NOTHING WAS LOST. READ THIS BEFORE YOU USE THE PLUMBING SYNC. ***
+WHAT HAPPENED: the plan-sync plumbing in the team lead prompt puts GIT_INDEX_FILE inside W4's .git.
+On this machine that path is not usable, so `read-tree` and `update-index` returned 128, `write-tree`
+and `commit-tree` returned EMPTY STRINGS - and the loop then ran
+    git push origin ":refs/heads/<branch>"
+which is git's syntax for DELETE THAT BRANCH. Six pushes, six deleted branches, all reported rc=0.
+A refusal that returns an empty string turns the next command into its own opposite.
+HOW IT WAS RECOVERED, in full, within three minutes: every deleted tip was already an ancestor of
+main because I had merged all six before syncing, so the objects were all still local. Restored to
+the exact pre-deletion SHAs - laptop 31a8fca, content a22d1cd, hub 4809a42, hud-ui ef571b4,
+art 4ab066d, chatbot 96ce026 - then re-synced, and every re-sync was a FAST-FORWARD from that same
+SHA. No history rewritten, no force-push, no commit lost, origin/d91d-wip and origin/gh-pages never
+touched. Verified after: all seven refs carry plan blob 43858a0 and all nine branches are present.
+THE RULE THIS EARNS, AND IT IS COORDINATION 15's SHAPE A THIRD TIME - A COMMAND THAT PRODUCES NO
+VALUE IS RED, NOT EMPTY:
+  1. NEVER build a refspec from a variable without asserting it first. A sync must check the SHA is
+     40 hex characters and ABORT that branch otherwise. An empty left-hand side is a delete.
+  2. GIT_INDEX_FILE goes in a real temp directory, never inside a worktree's .git.
+  3. Check the rc of read-tree and update-index. rc=128 on either means stop, not continue.
+  4. MERGE EVERY LANE INTO MAIN BEFORE YOU SYNC. That is what made this recoverable, and it should
+     stay the order for that reason alone.
+
 *** MERGED AND TICKED THIS HOUR (main 01:18 CT) - FOUR LANES SHIPPED INTO THE RESTART. ***
   ART - SYSTEM 1 IS TICKED (origin/art 4ab066d). See the tick under the ART row below.
   CONTENT - C-78 (origin/content 6f741dc) MERGED, **NOT TICKED, HALF DELIVERED** - measured below.

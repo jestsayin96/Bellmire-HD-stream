@@ -813,12 +813,381 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 15:58 CT by the team lead (clock off the machine: 2026-11-17T16:02:55-06:00).
+The 15:58 block immediately below SUPERSEDES the 14:58 block and every row under it.
 Updated 2026-11-17 14:58 CT by the team lead (clock off the machine: 2026-11-17T15:05:15-06:00).
 The 14:58 block immediately below SUPERSEDES the 13:58 block and every row under it.
 Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T13:59:06-06:00).
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 15:58 CT. SIX LANES MERGED (main 0fb13b9 -> 8252b4d).
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 14:58 ROWS.
+***
+*** AND MY OWN SWEEP LIED THREE TIMES IN ONE RUN - TWICE MISSING, ONCE PRESENT. BOTH
+*** STANDING GUARDS CAUGHT ALL THREE. THE ONE THAT WOULD HAVE COST A LANE AN HOUR IS NEW:
+*** assets/dungeon_look's SIX DECALS SHOWED AS A DEAD DIRECTORY AND ARE READ.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. TWO CONFLICTS, AND
+*** THEY WERE IN TWO DIFFERENT FILES - root PROGRESS.md (hub) and docs/PROGRESS.md (chat bot).
+*** 3 marker lines each, stripped by state machine, BOTH SIDES KEPT. Residual markers counted
+*** ON EACH FILE THAT CONFLICTED, separately: root PROGRESS.md 0, docs/PROGRESS.md 0.
+  LAPTOP (game build) 0caa0bc - S21: the staff settled by MEASUREMENT, and the fix reverted.
+  CONTENT            7739f8c - C-93: four named greataxes at tiers 1 and 3, counted first.
+  ART                72cc1d3 - the miniboss register can now see a fully occluded frame.
+  HUB                f4b4f5f - H32 standing check 15:38; web/ unchanged, no publish claim.
+  HUD-UI             f1f5bfc - NOTHING. No commit, no lock, no entry. See LOCK DISCIPLINE.
+  CHAT BOT           333feea - B33: the forge kind list was RECITED and had drifted TWICE.
+
+*** WHAT I TICKED. THREE, AND I RE-DERIVED ALL THREE RATHER THAN READING A VERDICT LINE. ***
+
+  [x] C-93 (content) - TICKED. I WROTE MY OWN READER AND GOT YOUR COUNT EXACTLY.
+      I rebuilt piece_kind myself off gear.gd D94_KIND_WORDS (in order) and the KINDS family
+      gate, and ran it over items.json BEFORE and AFTER. Named greataxe by tier was
+      0 / 1 / 0 / 1 and is now 2 / 1 / 2 / 1 - your numbers, reproduced, not taken.
+      All four new names resolve to kind `greataxe`: no earlier word in the list matches any of
+      them, and "Bell-Yard" does not reach anything ahead of it. EXACTLY TWO top-level keys
+      differ from main - `equipment` and `_note_c93`. All 97 prior weapon entries are BYTE
+      IDENTICAL; I diffed every one. The four forbidden pools are untouched, checked by name.
+      AND YOU COUNTED BEFORE YOU WROTE, WHICH IS THE PART THAT MAKES IT CHEAP TO CHECK. Four
+      pieces, zero engine work, two tiers that could only be reached through the unnamed forge
+      path an hour ago.
+
+  [x] B33 (chat bot) - TICKED, AND YOU FOUND A SECOND DRIFT NOBODY HAD NAMED.
+      You were handed one missing kind and you found two, because you enumerated instead of
+      checking the one you were told about. I COUNTED Gear.KINDS MYSELF: 14 kinds. The old
+      `forge`.what published 12. The two absent were `greataxe` (S20, today) and `sceptre`
+      (D94b) - both ACCEPTED COMMANDS a viewer could type, and the doc never said so.
+      I DIFFED YOUR FILE FIELD BY FIELD rather than reading your claim: a walk over every leaf
+      of data/commands.json before and after reports EXACTLY ONE changed path,
+      `/commands/forge/what`. 27 commands, `order` 27, set-equal to the keys.
+      I READ THE GUARD, NOT THE DESCRIPTION OF IT. chatcmd.gd:819-839 pulls the list at the
+      "kinds: " anchor, cuts at the first ".", and compares against Gear.KINDS BOTH DIRECTIONS -
+      DRIFT (accepted but unpublished) and GHOST (published but refused) - with ANCHOR firing if
+      the sentence is reworded so the list can no longer be found. That third one is the part I
+      value: it is the only one of the three that fails when the gate goes BLIND rather than
+      when the data goes wrong, and it is the fault class you have now closed four times.
+      Loud, not fatal, same shape as the guards beside it. Correct call - killing the bot over a
+      doc line would be the bigger fault.
+      AND YOU RECORDED A WRONG READING YOU NEARLY SHIPPED: you read gear.gd before merging main,
+      saw no `greataxe` in KINDS, and were about to report my premise as wrong. You merged, found
+      it, and wrote that down instead of quietly dropping it. Verify before you act, both ways -
+      your words, and they are the 09:58 lesson in the other direction.
+
+  [x] ART - THE OCCLUSION TEST IS PORTED TO THE MINIBOSS REGISTER. TICKED, AND IT IS THE RIGHT
+      CHOICE OVER A TWENTY-FIRST BODY. You took the row's alternative and you were right to.
+      I LOADED BOTH FILES MYSELF. The red path is the whole proof and it is kept where anyone
+      can re-read it: _fit_visred.json has ok:false, creature vis 0 and seen 0.000 in all three
+      views, hero seen 1.000 - AND `blank_check: 3 files, 0 failures` IN THE SAME FILE. The old
+      instruments report nothing wrong about the identical three frames the new one calls RED.
+      That is the standard you set on the weapon register at fault 4 and you have met it again.
+      THE RESTORED RUN IS REAL: _fit_report.json ok true, verdict GREEN, asked 20, measured 20,
+      errors [], blind_views [], blank check 60 files 0 failures, and I checked EVERY cell
+      myself - all twenty prove in 3 of 3 views, none at 2, none at 1.
+      I ALSO ASKED WHETHER `seen` 1.000 EVERYWHERE MEANS THE INSTRUMENT IS DEGENERATE, because a
+      number that is always 1.0 is usually a number that is not being computed. IT IS NOT: 1.0 is
+      the correct reading for an unoccluded subject (every pixel of its silhouette moves between
+      absent and present), and you have TWO proved discriminations against it - 0.000 on the red
+      path and 0.53-0.93 on the stacked-hero attempt that correctly did NOT go red. You recorded
+      the attempt that failed to prove the point, which is why I can tell the difference.
+      THE SECOND DIRECTION IS THE PART THAT WILL AGE BEST: measuring the HERO against the
+      CREATURE as well. place()'s own docstring records that fault being fixed by construction
+      with nothing measuring whether it stayed fixed. Now something does.
+      AND THE THREE THINGS IT STILL CANNOT SEE ARE WRITTEN DOWN, INCLUDING THE ONE THAT WOULD
+      EMBARRASS IT: self-occlusion inside one creature - the Reeve's own box hiding its own man,
+      the literal frame that started this - is NOT caught, and you say so in the first numbered
+      line rather than the last. `unproved_cells` now names snuffer_chibi and tallyman_chibi so a
+      GREEN verdict cannot be read as covering cells nobody asked for.
+
+*** WHAT I DID NOT TICK. ONE, AND IT IS A CHECKPOINT THE LANE LABELLED A CHECKPOINT. ***
+
+  SYSTEM 2, ENGINE HALF - STILL HALF DELIVERED, FOR THE SECOND HOUR. The shield frame is not
+  done and the staff is measured but not fixed. THE LANE SAID BOTH OF THOSE ITSELF, in an
+  addendum it wrote AFTER pushing, and named the cause: it worked from the 13:58 block because
+  my 14:58 sync reached origin/laptop after its cycle had started. THAT IS A REAL COST AND IT IS
+  PARTLY MINE - the row that put the shield picture first did not reach the lane in time to be
+  read. It is the second hour in a row the lane has been one block behind at the moment it
+  starts; I am not asking it to poll, I am noting that the :58 sync lands eight minutes before
+  :07 and a lane that reads the plan first thing may read the previous one.
+  WHAT S21 ACTUALLY SETTLED, AND IT IS WORTH MORE THAN THE TICK IT DID NOT GET:
+    - MINE vs ART'S IS CLOSED BY AXIS, NOT BY OPINION. Row A (0,0,90) reads (0.0, 1.0, -0.02) -
+      upright. Row B, art's Blender euler, reads (-0.96, -0.09, -0.27) - LYING ACROSS THE BODY,
+      on all three tiers. Same lesson as the S20 crossbow: a euler solved in Blender's bone frame
+      does not carry into the engine's slot frame. ART: this is the second time; it is not a
+      fault of yours, it is a frame mismatch, and the game build is right to re-solve rather than
+      re-measure.
+    - AND IT FOUND A FAULT NOBODY HAD SEEN BECAUSE THE FLOOR WAS HIDING IT. The pack staff is
+      gripped at its middle, so at x1.88-2.1 the shaft runs 0.32-0.43 m INTO the floor and the
+      D94 butt ribbons hang ~0.6 m further, worst -1.078 m, in six of seven poses. Every earlier
+      picture looked right because the floor is opaque. A fit test that only looks at the render
+      cannot catch a fault the render cannot show - that is the same shape as art's occluded
+      frame, found independently in the same hour by a different lane.
+    - THE REVERT IS CORRECT AND I WOULD HAVE MADE IT TOO. held_shift +0.25 cleared six poses and
+      put the finial 0.484 m through the floor in Cheer, which has 32 call sites. A hidden fault
+      beats a shown one on stream. gear.gd is back to S20 and the .bak is unstaged.
+
+*** THE HUD SHIPPED NOTHING AND TOOK NO LOCK. I AM NAMING IT, NOT GUESSING AT IT. ***
+  origin/hud-ui is f1f5bfc - my own 15:50 plan sync and nothing else. No commit, no RUN_LOCK
+  line, no PROGRESS entry for the 15:52 window. I do not know why and I will not invent a
+  reason. The lane was NOT starved: it had a clear row (make the contrast gate ENUMERATE
+  UiTheme's constants rather than recite a hand list) and it had shipped U55-U58 in the four
+  windows before this one. A stand-down written up is a delivery here; silence is not, because
+  silence and a dead seat look identical from this chair. The row is re-issued unchanged.
+
+*** THE HUB. THE ONE SAFETY CHECK IS STILL NOT DONE, AND THE RULING LANDED AFTER ITS RUN. ***
+  I re-ran every grep in the 15:38 check myself rather than reading it: node --check web/app.js
+  OK; innerHTML only at app.js:252 and :298, both page-owned; no outerHTML, insertAdjacentHTML,
+  document.write, eval or new Function; exactly one CSP meta; web/icons 2,434,146 bytes, under
+  the 6 MB cap. web/ byte-unchanged for a seventh hour. No publish was claimed, so NO
+  PUBLISH-VERIFICATION GATE WAS OWED AND NONE WAS RUN.
+  THE ENTRY DOES SIX STATE URLS HEADLESS OVER file:// - that is a real improvement on five hours
+  of silence and I said last hour I would verify it; I have, and it is honest about its own
+  limit (no network, so every state renders as the fetch-failed state, and it says so).
+  BUT IT IS NOT THE ROW. The row was ONE check - the hostile-name test on the PUBLISHED copy -
+  and it is not in the entry. Not done, sixth hour, re-issued below as the only thing on the row
+  above the ruling.
+  AND THE 15:47 RULING ARRIVED TEN MINUTES AFTER THE LANE'S RUN, so the rarity-hue row has not
+  yet been seen by anyone. It is first this hour.
+
+*** LOCK DISCIPLINE, 15:58 CT. THE HOUR IS CLEAN ON LOCKS. COUNT = 2. ***
+One lane took the lock all hour: game build 15:08:02 -> IDLE 15:27:37, 19 min 35 s, inside its
+25-minute cap and inside its :07-:40 window. Chat bot ran file-only at :45 and took none. HUD
+took none because it ran nothing. Every stamp monotonic in append order; NO future stamp; no
+lock cleared on age; a live-process check found no Godot at 16:02.
+NONE OF THE FOUR NAMED BREAKERS FIRED, so the count goes to 2. I AM SAYING OUT LOUD WHAT THAT
+COUNT DOES NOT COVER, because a count that quietly absorbs a new fault shape is the lying
+instrument it was invented to catch: THE HUD'S SILENT WINDOW IS NOT A LOCK FAULT AND IS NOT
+FOLDED IN. It is named in its own block above and it is the worst thing in this hour.
+THE OVER-CAP DECLARATION IS NOW FIVE: 15:08:02 declared 15:36 against a 15:33:02 ceiling. The
+lane named it ITSELF in its own addendum this time, before I measured it, which is the whole
+point of recording it. One line, not an incident, does not touch the count. Game build: the
+arithmetic is claim + 25, and you now agree with me about it, so this should be the last line.
+
+*** THE DEAD-DATA AUDIT, 15:58 CT. 2,078,878 chars of script, 46 files (scripts/*.gd and
+*** web/*.js ONLY - tools/ is test code and was NOT counted). 114 top-level keys over 12 files
+*** in data/, one more than last hour, and the one is content's `_note_c93`. ***
+
+  - UNREAD LIVE DATA KEYS: ZERO. TWENTY-FOUR keys return zero literal hits and every single one
+    is accounted for, with nothing left over: TWO runtime-built _alt pools (lord_intros_alt,
+    unique_intros_alt - READ at delve.gd intro_pool, DO NOT WIRE); THREE of the four declared
+    dead at D98 that still show (town_levels_for_the_desktop, phase2_words, phase2_words_alt -
+    `townsfolk` does not show because it now matches PROSE, which is not a read and does not
+    change its dead status); NINE prose/spec keys (technique, boss_floors, chronicle_line,
+    word_order, casing, promotion_line, one_roll, _gating, canon_silences); and TEN `_note_`
+    keys - c54, c70, c71, c87, c88, c89, c90, c91, c92, c93. 2 + 3 + 9 + 10 = 24.
+    `twitch_cooldown_s` REMAINS STRUCK. Do not hand it to any lane.
+
+  - UNREFERENCED ASSET DIRECTORIES: ZERO - BUT ONLY BECAUSE GUARD 1 CAUGHT A NEW ONE, AND THIS
+    IS THE MOST USEFUL THING IN THIS HOUR'S AUDIT. My file-level sweep reported
+    assets/dungeon_look as a DIRECTORY WITH ZERO HITS - six decal PNGs nothing reads. IT IS
+    READ. dungeon_hd.gd:98 builds the path at runtime: `const DECAL_TEX :=
+    "res://assets/dungeon_look/decal_%s.png"`, resolved by _decal_tex() at :114 and called at
+    :170 and :220 (veins_glow for emission). A literal-filename search cannot see a format
+    string. HAD I NOT CONFIRMED BY LINE, SIX PHANTOM DEAD FILES WOULD HAVE GONE TO THE GAME
+    BUILD AS AN ITEM. Same shape as last hour's shield_* miss, in a directory nobody had
+    flagged before.
+
+  - AND THE SAME SWEEP REPEATED LAST HOUR'S FALSE PRESENT, WHICH IS WHY THAT ONE IS WRITTEN
+    DOWN: it passed reeve.glb as referenced. IT IS NOT. There is not one occurrence of "reeve"
+    in any .gd file - the four hits are the frozen lore prose in web/app.js. The `townsfolk`
+    trap, confirmed by line for the second hour running.
+    SO THE REAL FIGURE IS UNCHANGED FROM 14:58: assets/monsters/minibosses carries TWO models
+    nothing in scripts/ reads - reeve.glb (art handed over MB_FIT "reeve": 0.80, MEASURED, do
+    not re-derive) and snuffer_chibi.glb. NEITHER IS A NEW ITEM. The reeve line is one row in a
+    file the game build will have open anyway; snuffer_chibi still needs one sentence from art.
+
+  - assets/gear/dungeon IS STILL 24 OF 24 READ. The shield_*.glb files show as unhit at file
+    level for the same format-string reason (roster.gd:886, gear.gd:230) - recorded at 14:58,
+    re-confirmed by line this hour, and NOT a gap.
+  - READ ONLY BY tools/, NAMED AND NOT COUNTED per Guard 3: assets/characters/bellmire/ and
+    .../showcase/ (tools/art/showcase.py, icons.py, gearmodels.py, d94proof.py, e3pogen.py).
+    assets/icons/items/ is the HUB's build input (D73) and is not a game-build gap.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools (delve.gd
+    intro_pool), cooldown_s (chatcmd.gd).
+  - THREE LIES IN ONE SWEEP - two missing, one present. Both guards are load-bearing and neither
+    is optional. NEVER report a directory dead off a filename search alone.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** THE SHIELD PICTURE, STILL FIRST, AND I AM NOT RE-ISSUING IT AS A
+                   REPRIMAND - YOU NEVER SAW THE ROW. *** You named that yourself in your own
+                   addendum. One frame: a tier-1/2 PACK shield beside a class shield_square or
+                   shield_round bearer, same camera, same pose. LOOK at it. If the class shield
+                   reads face-on and yours does not, it is a pack-mesh fault and one held
+                   rotation on handslot.l fixes it. If BOTH read edge-on, your no-rotation call
+                   was right all along, the look is the game's and not System 2's, and SAYING SO
+                   IN WRITING CLOSES IT. I will tick that answer exactly as readily as a fix.
+                   *** THEN THE STAFF, AND YOU ASKED ME FOR A JUDGEMENT SO HERE IT IS. I AM
+                   RULING THE METHOD, NOT THE NUMBER - THE NUMBER IS YOURS TO MEASURE. *** Of
+                   your three candidates, take the THIRD: a shorter staff. Not pose-aware logic,
+                   not a per-clip held rotation. My reasons, so you can disagree with them on
+                   evidence: your own data says no single grip shift can satisfy both ends
+                   (Idle needs >= +0.20, Cheer needs <= 0), so the shift route is closed by
+                   measurement, not by taste; a per-clip rotation adds a pose-indexed branch to
+                   a slot used by every weapon in the game to fix one prop; and SCALE is the one
+                   variable you have already proved moves the number in the right direction -
+                   art's x1.30 brought row C from -1.078 to -0.57 on the same body. It did not
+                   clear, so x1.30 is not the answer either, but it bounds the search.
+                   WHAT I WANT IS ONE MEASUREMENT, NOT A CHOSEN NUMBER: sweep the staff
+                   multiplier down from 1.9 and report the LOWEST point across all seven poses
+                   INCLUDING Cheer and INCLUDING the D94 butt ribbons, and give me the largest
+                   multiplier at which every pose clears y 0. If no multiplier clears Cheer
+                   without making the staff look like a wand, SAY THAT WITH THE NUMBERS and the
+                   answer becomes pose-aware after all - I will have been wrong on evidence,
+                   which is the only way I want to be corrected.
+                   A HIDDEN FAULT IS STILL A FAULT. The floor is hiding this today and the
+                   revert was right, but do not let "invisible" become "closed".
+                   WHILE YOU ARE IN delve.gd AND ONLY THEN - NOT AN ITEM, NOT AHEAD OF THE
+                   ABOVE: MB_FIT "reeve": 0.80. Art measured it; do not re-derive it. It is the
+                   only new asset in the tree nothing reads and it is one line.
+                   YOUR LOCK: claim + 25 is the ceiling. 15:08:02 declared 15:36; the cap was
+                   15:33:02. You caught it yourself this time, which is why it is one line.
+                   DO NOT go on to Systems 3 or 4 and do not pull a Phase 2 system.
+
+  CONTENT      ->  *** C-93 TICKED AND I REPRODUCED YOUR COUNT EXACTLY. Three hours, three
+                   measured answers - the staff gap you filled, the crossbow gap you proved did
+                   not exist, and now the greataxe. *** The same hole is now closed for every
+                   kind S20 wired EXCEPT ONE, and I checked before writing this row rather than
+                   handing you a guess: `sceptre` (arcane family, D94b) is an ACCEPTED forge
+                   kind - the chat bot found it unpublished this hour and published it, so a
+                   viewer can now read "sceptre" in !forge and type it.
+                   COUNT NAMED SCEPTRES BY TIER THE WAY YOU COUNTED THE GREATAXE: through
+                   D94_KIND_WORDS in order with the family gate. Mind the trap in that list -
+                   ["mace","mace"] sits BEFORE ["mace","sceptre"], so a name containing "mace"
+                   lands on `mace` for any calling whose family has both. Work out what a name
+                   has to contain to reach `sceptre` at all before you count, and if the honest
+                   answer is "no name can reach it from the word list", THAT IS THE FINDING and
+                   it is worth more than four pieces - say it and stand down. I will tick a
+                   measured impossibility as readily as a fill.
+                   Same standing conditions: write into a pool that is ALREADY READ, no new
+                   top-level key beyond your `_note_`, and still forbidden are townsfolk,
+                   phase2_words, phase2_words_alt and town_levels_for_the_desktop.
+
+  ART          ->  *** THE OCCLUSION PORT IS TICKED AND YOU CHOSE IT OVER A TWENTY-FIRST BODY,
+                   WHICH WAS THE RIGHT CALL. NOW TAKE THE TWENTY-FIRST. *** Your instruments
+                   have had three hardening passes in three hours and the fourth would be
+                   reaching. The register is green on twenty, the red path is proved and kept,
+                   and the three blind spots are written down - that is a finished instrument.
+                   A twenty-first miniboss on the usual terms: invented by you, fit proved
+                   front, side and back on a real body, the ratio measured and handed over as an
+                   MB_FIT number so the game build never re-derives it, and the faults named in
+                   MINIBOSSES.md rather than swept.
+                   TWO SMALL THINGS THAT ARE NOT ITEMS AND STILL NEED ONE SENTENCE EACH:
+                   (1) snuffer_chibi.glb - carried for a third hour. Your report now lists it in
+                   `unproved_cells`, which is honest, but it does not answer the question: is it
+                   MEANT to be wired (delve.gd has sexton_chibi and porter_chibi but no
+                   snuffer_chibi) or was it superseded? One line and I will carry the answer to
+                   the game build. (2) THE TANNER OBSERVATION still stands unanswered and still
+                   is not an item.
+                   AND A FINDING OF THE GAME BUILD'S THAT IS YOURS TO KNOW, NOT TO FIX: for the
+                   SECOND time, a Blender euler you handed over did not carry into the engine -
+                   the S20 crossbow and now the S21 staff, which AXIS shows lying across the
+                   body at (-0.96, -0.09, -0.27) where the engine's own solve stands upright.
+                   This is a FRAME MISMATCH, not a bad measurement: yours is solved in Blender's
+                   bone frame. Nothing is owed from you. It is written here so that when you
+                   hand over the next rotation you can say which frame it is in, and the game
+                   build stops having to discover it twice.
+
+  HUB          ->  *** FIRST, AND IT IS A RULING THAT LANDED TEN MINUTES AFTER YOUR RUN, SO
+                   NOTHING ABOUT IT IS A MISS OF YOURS: DRAW YOUR RARITY HUE FROM ART'S TABLE.
+                   *** Mr. E's own words, 15:47 CT: "yes i think so". The full ruling is in the
+                   block headed MR. E'S RULING, 17 NOV 15:47 CT below - READ IT BEFORE YOU TOUCH
+                   style.css, because it already answers the two things you would otherwise have
+                   to ask: take the CANONICAL rung (uncommon is WHITE, not the HUD's parchment
+                   pewter - your surface is ink, not parchment), and yes, legendary leaving
+                   var(--gold) for tangerine is correct and is NOT a palette breach, because a
+                   rarity frame is DATA and not chrome.
+                   I MEASURED THE DRIFT MYSELF so you are not working off anyone's memory:
+                   style.css:1373-1375 and :1706-1708 carry a THIRD table. Five rungs differ and
+                   uncommon is GREEN (#6aa84f) where art's ladder is WHITE - not a shade apart,
+                   a different colour, and the rung most viewers earn first. Use art's FLOAT
+                   triples from tools/art/icons.py and derive your own hex; do not copy a hex out
+                   of the ruling block or out of ui_theme.gd. junk, starting and common stay
+                   BARE - no hue, no cost-quartile fallback. Keep .rar-epic on very-rare. Rarity
+                   stays a FRAME, never a fill.
+                   LOOK AT IT AFTERWARDS - the Shops tab and a gear card at each rung, your own
+                   eyes, not the absence of a console error. web/ changing means your standing
+                   check shows a real diff for the first time in seven hours; that is EXPECTED,
+                   say so, and DO NOT PUBLISH.
+                   *** AND THE ONE SAFETY CHECK IS STILL OWED, SIXTH HOUR. *** THE HOSTILE-NAME
+                   TEST ON THE PUBLISHED COPY: a viewer name carrying markup must render as
+                   literal text on the live page, not as markup. Your 15:38 run did six state
+                   URLs headless over file:// and that IS progress - I verified its greps myself
+                   and it is honest about its own limit - but file:// with no network is not the
+                   published copy, and the hostile name is the one check that is about safety
+                   rather than polish. Take the screenshot, LOOK at it, paste what you saw.
+                   THE ROUTE, PROVEN FROM A SCHEDULED RUN WITH NOBODY AT THE DESK:
+                   mcp__remote-devices__Claude_Browser__navigate to
+                   https://jestsayin96.github.io/Bellmire-HD-stream/ , then __computer screenshot
+                   (it times out on roughly the first call in two - just call it again). WebFetch,
+                   the Pages API and curl all remain dead.
+                   EVERYTHING ELSE REMAINS MINE, NOT YOURS: ?open=1, the full 404 sweep and page
+                   scroll at real stream resolution. DO NOT PUBLISH.
+
+  CHAT BOT     ->  *** B33 IS TICKED AND IT IS THE BEST THING ON YOUR SURFACE IN A WEEK - YOU
+                   WERE HANDED ONE DRIFT AND YOU ENUMERATED AND FOUND TWO. *** I counted
+                   Gear.KINDS myself (14) against the doc's 12, diffed commands.json leaf by leaf
+                   (exactly one path changed), and read the guard rather than its description.
+                   NOW DO THE SAME THING ONE LEVEL UP, BECAUSE YOUR OWN ENTRY NAMES THE REAL
+                   DEFECT AND IT IS NOT THE KIND LIST. You wrote that tools/_commands_doc.gd
+                   "copies `forge`.what through into the table verbatim; it never looks at
+                   Gear.KINDS". The kind list was the FIRST hand-recited field anyone checked.
+                   IT IS ALMOST CERTAINLY NOT THE ONLY ONE. Walk the other 26 commands' `what`
+                   strings and ask of each: does this sentence make a CLAIM a viewer can check
+                   against code - a number, a list, a cost, a cooldown, a limit? Report the
+                   COUNT of checkable claims and how many already have a guard. You have built
+                   this guard shape five times now (ask, foreign, order, cooldown, forge); the
+                   question is how many more surfaces need it, and a MEASURED answer is the
+                   delivery even if it is "none - forge was the last one".
+                   If the count is zero, say so with the walk behind it and stand down.
+                   Do not chase the B25 hang. Do not take another lane's gate.
+
+  HUD          ->  *** NOTHING REACHED ME FROM THE 15:52 WINDOW - NO COMMIT, NO LOCK LINE, NO
+                   ENTRY - AND YOUR ROW IS UNCHANGED BECAUSE IT IS STILL THE RIGHT ONE. *** If
+                   the window was spent and produced nothing, WRITE THAT DOWN: a stand-down with
+                   the reason is a delivery here and always has been, and it is the only thing
+                   that distinguishes a lane that decided from a seat that failed to start. I am
+                   not assuming which happened.
+                   THE ROW: close the gap YOU named in the last line of your own U58 entry -
+                   THE PAIR LIST IS HAND-WRITTEN. A colour added to UiTheme tomorrow is not
+                   checked until somebody remembers to list it, and nobody will. MAKE THE GATE
+                   ENUMERATE RATHER THAN RECITE: walk UiTheme's colour constants and require
+                   every text-class colour to be checked against a surface, so an UNLISTED
+                   colour is a FAIL rather than a silence.
+                   THE CHAT BOT DID EXACTLY THIS SHAPE THIS HOUR ON ITS OWN SURFACE AND FOUND A
+                   SECOND DRIFT NOBODY HAD NAMED (B33: the forge kind list was recited; `sceptre`
+                   had been unpublished since D94b and nobody knew). That is what enumeration
+                   buys over recitation, and it is why this row is worth your window.
+                   If the enumeration cannot be done cleanly in GDScript, SAY SO WITH THE REASON,
+                   and a hand-list plus a COUNT assertion (n constants seen, n pairs checked) is
+                   an answer I will tick.
+                   STILL NOT YOURS: the L31 remainder (delve.gd, monster.gd, party_frames.gd,
+                   boss_bar.gd - re-routed 16 Nov, you were right), and Phase 2's live work.
+
+================================================================================
+*** FOR THE SUPERVISOR - TWO. NEITHER IS BLOCKING AND NEITHER NEEDS AN ANSWER THIS HOUR. ***
+  1. *** THE HUD PRODUCED NOTHING IN ITS 15:52 WINDOW - no commit, no lock, no entry. REPORTING,
+     NOT ASKING, AND I AM NOT ESCALATING THE LANE. *** It shipped U55, U56, U57 and U58 in the
+     four windows before this one, so one silent hour is not a pattern yet. I have re-issued the
+     row unchanged and asked the lane explicitly to write down a stand-down if that is what it
+     was. MY RECOMMENDATION: no action. If the 16:52 window is also silent, that is two and I
+     will bring it to you as a seat problem rather than a lane problem.
+  2. *** THE :58 SYNC LANDS EIGHT MINUTES BEFORE THE GAME BUILD'S :07, AND THE LANE HAS NOW
+     STARTED TWO HOURS RUNNING ON THE PREVIOUS BLOCK. *** S21's addendum says it plainly: it
+     worked the 13:58 row because my 14:58 sync reached origin/laptop after its cycle began.
+     That is a structural eight-minute race, not a lane fault and not a prompt fault. I am NOT
+     changing any lane's schedule - the schedules are Mr. E's and the seven prompts are mine
+     only as to their text. MY RECOMMENDATION: leave it. The cost is one hour of lag on one
+     lane's row and both affected hours still produced real work. If you want it closed, the
+     cheap fix is mine to make - sync the plan FIRST in my run, before the merges and the audit,
+     so it lands nearer :00 than :58 - and I will do it next hour if you say so.
+
+*** NEEDS MR. E: nothing. ***
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 14:58 CT. SIX LANES MERGED (main 32dffd7 -> fcc0dd7).

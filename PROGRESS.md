@@ -8335,3 +8335,7 @@ said nothing. No secrets written anywhere.
   Verdicts: import 0 errors, parse 0 SCRIPT ERROR / 0 Parse Error, D96_FIT OK 70 checks, 14
   minibosses in their own bodies - snarer now stands in snarer_chibi.glb at 1.00/1.00 of the hero.
   Jointer has no miniboss def that names it yet; the key is in place for when one does.
+- S12 CLOCK CORRECTION, MY FAULT: the two RUNNING relaunch lines I wrote this hour (06:16:00 and
+  06:23:00) and this cycle's header time were TYPED, not read off the machine. Machine stamps read the
+  same hour: first commit 06:18:37, IDLE 06:23:52. The 06:23:00 RUNNING line was therefore a future
+  stamp by about three minutes. The work behind both is unaffected; the lock was IDLE at 06:23:52.

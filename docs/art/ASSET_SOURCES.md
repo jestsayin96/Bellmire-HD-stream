@@ -63,3 +63,12 @@ so no attribution is required and none is owed; recorded here because every
 pack used gets recorded. Nothing is redistributed as an asset. The generator
 falls back to procedural boxes if the pack is absent and the report records
 `pack_used` either way.
+
+### 17 Nov 2026 - S16, System 2 first half: dungeon-pack swords in the hand (game build)
+Three models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, already in the table
+above - `sword_common`, `sword_uncommon`, `sword_rare` - COPIED UNCHANGED into
+`assets/gear/dungeon/` as `.glb` (renamed from `*.gltf.glb`) with the pack's own `License.txt` beside
+them as `LICENSE_KayKit_Dungeon_CC0.txt`. Licence read off that file on first use by the game build,
+10:10 CT: "License: (Creative Commons Zero, CC0) ... free to use in personal, educational and
+commercial projects", crediting optional. Wired as gear.gd `KINDS["sword"]` tiers 1-3. Nothing
+redistributed as an asset.

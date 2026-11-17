@@ -157,8 +157,12 @@ static func weapon_path(family: String, tier: int) -> String:
 ## assets/gear (modelled bigger: x0.62 in a KayKit hand) and the KayKit
 ## skeleton pack's own grave-steel for the found-only tier.
 const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
+## S16 (System 2, first half): the KayKit DUNGEON pack's tiered weapons (CC0, LICENSE in the dir).
+## KINDS below IS the family+tier -> model map (family, then per-tier kit). One family is wired end to
+## end so far: blade/sword tiers 1-3 take the pack's common/uncommon/rare sword.
+const DUN := "res://assets/gear/dungeon/"
 const KINDS := {
-    "sword":      {"family": "blade", "noun": "sword", "kit": [ADV + "sword_1handed.gltf", KIT + "sword_A.gltf", KIT + "sword_B.gltf", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
+    "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
     "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", SKA + "Skeleton_Blade.gltf"]},
     "dagger":     {"family": "blade", "noun": "dagger", "kit": [ADV + "dagger.gltf", ADV + "dagger.gltf", KIT + "knife.gltf", ADV + "dagger.gltf", ADV + "dagger.gltf"]},
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
@@ -194,6 +198,8 @@ static func kind_path(kind: String, tier: int) -> String:
 static func hand_scale(path: String) -> float:
     if path.ends_with("bow_A_withString.gltf"):
         return 0.92
+    if path.begins_with(DUN):   # S16: dungeon-pack blades are ~1.3-1.9 long; 0.8 puts the common at an arming sword
+        return 0.8
     return 0.62 if path.begins_with(KIT) else 1.0
 
 ## ---------------------------------------------------------------- L3 armour, worn

@@ -1978,3 +1978,45 @@ waits on that tick, so this hour took only what the ruling allows at any time: g
 - NOT DONE AND NOT CLAIMED: no frame caps added to _d96/_d97 (they advance per lord on a fixed
   8-frame wait, so they cannot hang on a missing body - checked, not assumed). _l56_test soak not rerun.
 - No live Twitch test this cycle. Not ticked - the team lead ticks. Systems 2/3/4 NOT started.
+
+## D-cycle - S16 System 2, first half: the dungeon-pack swords in a knight's hand, 2026-11-17T10:15:14-06:00 (game build)
+TAKE THIS NEXT (09:58) gave System 2, first half only: family+tier -> model map, ONE family end to
+end, rendered in a hero's hand at 1080p. Done for blade/sword. Systems 3/4 and Phase 2 NOT touched.
+- A CORRECTION TO THE ROW'S MEASUREMENT, said plainly: "MODEL_BY and weapon_model are ZERO hits, a
+  named weapon reaches the player with no model" is a NAME search, and it is wrong the same way the
+  forge_alt bare-count was. The map already exists and is live: gear.gd `KINDS` (family -> kind ->
+  per-tier kit) + `weapon_piece_look()` (named piece -> kind -> mesh, sibling offsets, tint, glow),
+  called from roster.gd:912 `weapon_look`. All 86 named weapons already resolve to a mesh. What was
+  genuinely new is the PACK: the dungeon pack's tiered weapons were on the machine and in no kit.
+- WIRED: assets/gear/dungeon/sword_{common,uncommon,rare}.glb, copied unchanged from
+  _packs/kaykit_dungeon_pack_CC0 (CC0 - licence read off its License.txt, copied beside them, row in
+  docs/art/ASSET_SOURCES.md). gear.gd `DUN` const; KINDS["sword"] tiers 1-3 now take the pack's
+  common/uncommon/rare (tiers 4-5 keep sword_C/sword_E); hand_scale 0.8 for DUN pieces (measured
+  off the .glb accessors: blades 1.28/1.51/1.90 long, origin at the grip). No new dead table - an
+  earlier draft added a MODEL_BY const with empty rows and I took it out before the battery: KINDS
+  IS the map and a second unread copy would be dead data.
+- tools/_s16_sword.gd (new, windowed): three knights, blade tiers 1-3, each holding a NAMED sword
+  through the real path (weapon_mesh / weapon_look -> Gear.equip -> tint/deco). Checks the mesh is
+  the dungeon sword for that tier, and that the hand lies inside the blade's bounds +6 cm. THAT
+  SECOND CHECK IS WEAK AND I AM SAYING SO: equip() puts the model origin at the hand, so it only
+  proves the pack's origin is in the grip (a pommel- or tip-origin pack would fail it). The pictures
+  are the fit test. Shots: renders/cycles/s16/ s16_front, s16_side, s16_t1/t2/t3_close (1920x1080).
+- WHAT THE PICTURES SHOW (looked at, all five): front and side - each grip is in the fist, the guard
+  sits at the knuckles, nothing through the forearm or floating; Ford Cutlass (t1) 1.02 m,
+  Bellwright's Falchion (t2) 1.31 m, Emberline Sword (t3) 1.68 m, so the tier reads in length.
+  FAULTS, named: (1) Bellwright's Falchion's _stuff tint washes the WHOLE mesh tan - it reads as a
+  wooden practice sword, blade included. Pre-existing tint_piece behaviour, newly visible on this
+  mesh; not fixed this hour. (2) Emberline's tint is orange over the blade too - reads as "ember",
+  arguably right, flagged so it is judged not assumed. (3) The close shots (re-framed on the live
+  hand after the first run framed a breastplate) still show the guard, not the fist - the fist is
+  behind it from that angle. Front/side carry the fit; a better close angle is owed.
+- Battery (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2022
+  samples off the floor (home); TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/18445 (0.000%)
+  raid_in_solid=0/6408 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped);
+  S16_SWORD OK (5 shots, 0 failures) - twice, second run after the close-shot re-frame.
+- MY FAULT: my second lock line was first written 10:20:30 when the machine read 10:11:39 - a future
+  stamp, because I guessed the clock instead of reading it. Corrected in place at 10:12 with the
+  correction named on the line.
+- NEXT (System 2, second half): the other families - dagger/axe(+axeDouble)/hammer->mace/staff/
+  crossbow from the same pack, and decide whether tint_piece should spare the blade. No live Twitch
+  test. Not ticked - the team lead ticks.

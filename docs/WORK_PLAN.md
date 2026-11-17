@@ -1,6 +1,89 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## *** MR. E'S RULING, 16 NOV 20:40 CT - THE GAME BUILD WIRES THE BACKLOG BEFORE IT BUILDS
+## ANYTHING NEW. D96-D99 ARE THE QUEUE AND THEY COME BEFORE EVERY OTHER GAME-BUILD ITEM. ***
+
+HE ASKED WHY SO MUCH FINISHED WORK IS NOT IN THE GAME. The answer was mine to give and it was not
+flattering: five lanes produce, ONE lane owns every engine script and gets about 33 minutes an hour,
+and every hour the supervisor handed that one lane a NEW feature - D70, then H29 point 6, then D61.1
+- so already-finished work never got wired. The producers kept producing and the one consumer kept
+being pointed somewhere else. That is a queueing fault by the SUPERVISOR, not a shortfall by any
+worker. No lane is to read this as blame.
+
+WHAT HE RULED, after being shown the measured numbers:
+  1. GAME BUILD: WIRING ONLY UNTIL THE BACKLOG IS DRAINED. No new features. D96-D99 below.
+  2. ART AND CONTENT: KEEP PRODUCING. Nothing they have made is wasted; it is queued work. Art
+     finishes the register (the Snarer is the last), content keeps auditing. They are NOT throttled.
+
+THE MEASUREMENT, taken by the supervisor at 20:35 CT off the actual tree, not off a summary - every
+.gd in scripts/ and every .js in web/ concatenated (2,002,217 chars) and each data key and asset
+filename searched for in it:
+  - assets/monsters/minibosses/ holds 19 files. NOTHING IN scripts/ REFERENCES THAT PATH.
+  - bosses.json keys `lesser`, `uniques`, `rule`, `boss_floors`: NOT READ. Only bestiary.gd opens
+    the file at all.
+  - lore_lines.json: 17 of 26 keys read, SEVEN NOT READ - lord_intros_alt, unique_intros_alt,
+    forge_alt, townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop.
+  - items.json: `stock_by_tier` and `price_ladders` NOT READ (H29.6 wired shop_stock/trader_cargo).
+  - classes.json: `healing` NOT READ.
+  - assets/icons/items/ 463 PNGs: not referenced in scripts/, which is CORRECT - they are the hub's
+    (D73) and H32 pass 4 is wiring them now. NOT a game-build item.
+
+### THE WIRING QUEUE. IN THIS ORDER. EACH ONE TICKS ON ITS OWN.
+
+- [ ] D96. THE MINIBOSSES STAND UP IN THE GAME. The worst of them and the reason it is first.
+      Nineteen miniboss models exist and the delve already TALKS about minibosses - delve.gd fires
+      the arrive line at spawn and the fall line at death, and content has written 8-9 arrive and 8
+      fall lines for all fourteen. So the Chronicle describes a creature that has no body on screen.
+      A viewer is told something arrived and sees nothing arrive.
+      DONE: a miniboss spawns on a floor WITH ITS OWN MODEL, the arrive line fires with the body
+      present, it fights, it dies, the fall line fires. FIT IS THE ACCEPTANCE TEST, as it is for
+      anything worn or placed: rendered on the floor at 1080p, not asserted in a gate. Art has
+      already measured every one of these against the posed hero (ratio and pair span per creature
+      in renders/art/minibosses/_fit_*_register.json) - USE THOSE NUMBERS, do not re-derive scale.
+      If a model will not load or will not fit, NAME IT and move to the next; a list of three that
+      refused is worth more than a silent fallback to a generic body.
+
+- [ ] D97. THE BOSS UNIQUES ARE ACTUALLY FOUGHT. bosses.json carries 198 lesser and 192 greater
+      uniques, including C-73's 40 shape-first lord uniques whose shape lines name real mechanics
+      (fire on a latch, break the drummer, strikes inside a ring, re-strikes the first hero hit,
+      cannot be gone round). Nothing spawns any of them.
+      DONE: a lord rises with one of ITS uniques, the stats come from the file rather than a table
+      in code, and the Chronicle names it. THE SHAPE MECHANICS ARE A SEPARATE, SMALLER PROMISE: say
+      IN WRITING which you can honour and which you cannot, the same refusal you made on ACT and
+      BROKEN, which the supervisor recorded as correct. A written refusal closes it; silence leaves
+      content writing into a file nobody reads.
+
+- [ ] D98. THE SEVEN DEAD LORE POOLS ARE READ OR DECLARED DEAD IN WRITING. lord_intros_alt,
+      unique_intros_alt, forge_alt, townsfolk, phase2_words, phase2_words_alt and
+      town_levels_for_the_desktop. Content reported this itself at C-75 before anyone asked it to.
+      DONE: each pool is either READ by the thing it was written for, or DECLARED DEAD with the
+      reason - and if it is dead, CONTENT IS TOLD, so it stops writing into a pool that will never
+      be spoken. Either outcome closes the item. Half of these are probably genuinely dead and
+      saying so is the delivery.
+
+- [ ] D99. THE LADDERS GO LIVE AND THE SMALL OWED WIRING CLOSES. items.json `stock_by_tier` and
+      `price_ladders` (H29.6 wired shop_stock and trader_cargo; these two remain), classes.json
+      `healing`, plus the three things content has been owed for several cycles: the act/broken
+      calls from each mechanic, "epic" -> "very rare" in the order array, and artifact-never-stocked
+      enforcement. These are small. They are in one item so they stop being carried.
+
+### THE RULE THAT GOES WITH IT
+NO NEW GAME-BUILD FEATURE UNTIL D96-D99 ARE TICKED. The L31 remainder (damage numbers landed as
+D61.1; status-effect icons remain), S2_TEST FAIL (b) and T1_TEST's FakeRoster add_brew are PAUSED,
+NOT CANCELLED - they come back the hour D99 ticks. If a wiring item turns out to be blocked on
+something outside scripts/, say so with the evidence and take the NEXT wiring item, not a feature.
+A gate reading red is still allowed to be fixed at any time: a lying instrument is never "new work".
+
+### AND A NEW STANDING DUTY ON THE SUPERVISOR, NOT ON ANY WORKER
+EVERY HOUR, BEFORE WRITING "TAKE THIS NEXT", THE SUPERVISOR RUNS THE DEAD-DATA AUDIT: concatenate
+every .gd in scripts/ and every .js in web/, then check each top-level key of every file in data/
+and each generated asset directory for a reference. Report the unread count in the hour's summary.
+This hour's numbers above are the baseline. The reason this duty exists is that the gap took a full
+day to notice and was noticed by the workers, not by me.
+================================================================================
+
+================================================================================
 ## *** HARD DELIVERABLE, DUE 09:00 MON 16 NOV *** D95 - THE TEN-CHARACTER SHOWCASE
 
 ### [x] D95 - DELIVERED, MERGED AND TICKED BY THE SUPERVISOR, 2026-11-16 02:05 CT
@@ -535,19 +618,32 @@ RAN THIS HOUR ON ANY LANE: 0 bits, nothing redeemed, nothing posted, no reward t
                    cleaned IN THE PAYLOAD, and the blob measured (8139 bytes) rather than assumed.
                    You tested the negative cases. That is the difference between a feature and a
                    feature that can be trusted on stream.
-                   NEXT: THE L31 REMAINDER - yours by ownership, not by invention. The HUD half
-                   shipped (banner at U26, Chronicle legibility at U40); DAMAGE NUMBERS and
-                   STATUS-EFFECT ICONS live in delve.gd, monster.gd, party_frames.gd and
-                   boss_bar.gd, all four yours. Parchment/ink/teal, 1080p acceptance capture.
-                   THEN, IN THIS ORDER, AND THE FIRST OF THEM IS CHEAP: answer content's C-73 and
-                   C-74 - say which of the 40 shape-first lord mechanics you can honour and which
-                   you cannot (the same refusal you made on ACT and BROKEN, which I recorded as
-                   correct), and say the same about C-74's owed wiring: act/broken calls from each
-                   mechanic, "epic" -> "very rare" in the order array, artifact-never-stocked.
-                   A written refusal closes an item; silence leaves content guessing.
-                   THEN: S2_TEST FAIL (b), "new ashwight -> ''" - no registered creature voice.
-                   THEN: T1_TEST's FakeRoster has no add_brew, which _do_bits_tier calls on an
-                   anonymous cheer - PRE-EXISTING, but a gate reading red must be made to read true.
+                   *** YOUR QUEUE CHANGED AT 20:40 CT ON MR. E'S OWN RULING AND IT IS NOW WIRING
+                   ONLY. READ THE D96-D99 BLOCK AT THE VERY TOP OF THIS FILE. *** He asked why so
+                   much finished work is not in the game. I measured it and he is right: 19 miniboss
+                   models that NOTHING in scripts/ loads, 390 boss uniques read by nothing but the
+                   bestiary, seven dead lore pools, stock_by_tier and price_ladders still dark.
+                   THAT IS MY FAULT, NOT YOURS - I handed you a new feature every hour while the
+                   backlog of other lanes' finished work sat there. You built what I asked for and
+                   you built it well. The queue is what was wrong.
+                   NEXT: D96 - THE MINIBOSSES STAND UP IN THE GAME. Nineteen models exist, the
+                   delve already fires their arrive and fall lines, and content has written 8-9
+                   arrive and 8 fall lines for all fourteen - so the Chronicle describes a creature
+                   with NO BODY ON SCREEN. A viewer is told something arrived and sees nothing.
+                   Spawn it with its own model, let the arrive line fire with the body present, let
+                   it fight and die and the fall line fire. FIT IS THE ACCEPTANCE TEST - rendered on
+                   the floor at 1080p, not asserted in a gate. Art has ALREADY measured every one
+                   against the posed hero (ratio and pair span per creature in
+                   renders/art/minibosses/_fit_*_register.json): use those numbers, do not re-derive
+                   scale. A model that will not load or will not fit gets NAMED and you move on.
+                   THEN D97 (the boss uniques actually fought, plus the written refusal on C-73's
+                   shape mechanics), THEN D98 (the seven dead lore pools read or declared dead in
+                   writing, and content TOLD either way), THEN D99 (the ladders and the small owed
+                   wiring in one item so it stops being carried).
+                   PAUSED, NOT CANCELLED, AND THEY COME BACK THE HOUR D99 TICKS: the L31 remainder's
+                   status-effect icons (damage numbers landed as D61.1 and I will tick that at :58),
+                   S2_TEST FAIL (b), and T1_TEST's FakeRoster add_brew. A GATE READING RED IS STILL
+                   FIXABLE AT ANY TIME - a lying instrument is never "new work".
                    YOUR WINDOW IS :07-:40, no single claim over 25 minutes, hard release at :40, and
                    the claim line names its expected finish IN REAL CENTRAL TIME, ON ITS OWN LINE.
                    FIVE HOURS RUNNING YOU HAVE DONE ALL THREE RIGHT.
@@ -650,11 +746,19 @@ RAN THIS HOUR ON ANY LANE: 0 bits, nothing redeemed, nothing posted, no reward t
                    "## C-74 (2026-11-17)". The commit landed 19:25 CT on 16 Nov. That is the UTC
                    date on a CT ledger - the same class of fault as the future stamps. READ THE
                    CLOCK OFF THE MACHINE AND WRITE CT.
+                   *** MR. E RULED AT 20:40 CT THAT YOU KEEP PRODUCING - YOU ARE NOT THROTTLED,
+                   AND NOTHING YOU HAVE WRITTEN IS WASTED. *** He was shown that seven of your lore
+                   pools and all 390 boss uniques are read by nothing, and his answer was to point
+                   the GAME BUILD at wiring them, not to slow you down. D96-D99 at the top of this
+                   file are that queue, and D98 is your seven pools specifically - each one will be
+                   read or DECLARED DEAD IN WRITING, and if it is dead you will be told, so you stop
+                   writing into a pool that will never be spoken. You reported that yourself at C-75
+                   before anyone asked you to, which is why it is now an item.
                    NEXT: NAME THE STALEST FILE AGAIN AND SHOW THE WORKING - same standing item,
                    and judge it the way you just did, by what a viewer would notice twice, not by
-                   commit date. Your own entry says act and broken stay dead until the game build
-                   wires them; I have put that question to the game build IN WRITING this hour, so
-                   you will get an answer rather than silence.
+                   commit date. ONE ADDITION, GIVEN WHAT THE AUDIT FOUND: prefer a file whose pools
+                   are actually READ. Widening a pool nothing speaks is the one kind of padding you
+                   have never done, and the audit now tells you which those are.
                    You need no lock, so your slot is never blocked.
   CHAT BOT     ->  *** B14 IS TICKED AND MY EDIT WAS RIGHT - YOU PROVED IT INSTEAD OF TAKING IT
                    (chatbot 39847b3, on main). *** B11_MUSTER OK bad=0 over thirty checks on my

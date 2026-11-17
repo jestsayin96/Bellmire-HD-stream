@@ -669,6 +669,28 @@ RARITY_HUE = {
 RARITY_HUE_NAMES = {"uncommon": "white", "rare": "blue", "very rare": "purple",
                     "legendary": "tangerine", "artifact": "bright red"}
 
+# ---------------------------------------------------------------------------
+# THE PARCHMENT RUNG. Asked by the HUD lane through the team lead, 17 Nov 10:58,
+# and answered here rather than in their file so that the count of tables stays
+# at ONE. RARITY_HUE above is CONFIRMED CANONICAL exactly as it stands - eight
+# rungs, three of them deliberately bare, no cost-quartile fallback.
+#
+# THE QUESTION: `uncommon` is pure white, which carries an icon's halo because
+# an icon is rendered against the dark. A HUD panel is PARCHMENT - warm, light -
+# and pure white on parchment is not a hue at all, it is paper. The rung would
+# silently go missing on exactly the tier most viewers first earn.
+#
+# THE ANSWER, AND IT IS THE HUD THAT CHANGES AND NOT THE LADDER: the interface
+# takes a parchment-safe variant of that ONE rung and leaves the other four
+# alone. Dropping white and letting the panel do the work is the wrong trade -
+# it makes the first rung a viewer earns the only invisible one. The variant is
+# a COOL PEWTER: darker than parchment so it reads as a mark rather than as the
+# page, and cool so it reads as the same family as the blue above it without
+# colliding with it. Every other rung is already darker or more saturated than
+# parchment and needs nothing.
+RARITY_HUE_PARCHMENT = dict(RARITY_HUE)
+RARITY_HUE_PARCHMENT["uncommon"] = (0.62, 0.66, 0.72)   # cool pewter, not paper
+
 
 def rarity_hue(rarity):
     """The hue for one item, or None for no hue.

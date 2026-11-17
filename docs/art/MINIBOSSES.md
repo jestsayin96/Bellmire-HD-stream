@@ -941,3 +941,110 @@ span **3.07 m CORRIDOR-SAFE** against the 11.0 m three-cell clear span,
 the right number and does not need re-deriving - pair_w **4.93** (4.96 before),
 fits_frame true. Register verdict **GREEN**, asked 18 / measured 18, blank and
 border check **54 files, 0 failures**, errors [].
+
+================================================================================
+## 19. THE TANNER - *IT WILL NOT TAKE THE SAME BLOW TWICE*
+`tanner` - flooded - h 2.75 - wear **0.10** - 4 meshes, 1,284 faces -
+span **2.50 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **1.12** beside the posed 2.45 m Knight, pair_w 4.36, fits_frame true.
+Procedural, no pack geometry (`pack_used` null). Five passes, 17 Nov 2026.
+
+### WHY THIS ONE, MEASURED - NOT REMEMBERED
+- **EIGHTEEN IDEAS EXIST AND NOT ONE CLOSES A DOOR ON A WEAPON.** Parsed out of
+  `minibosses.py` CANON, not recalled: summon, self-armour, drag a hero out,
+  douse the lamps, will-not-stay-down, bar the door, steal gear, heal the pack,
+  raise the water, plant the ground, pre-set the room, scale with the fire,
+  ring from elsewhere, set the floor, come apart in two, arm the room, weigh
+  you down, cut the room in two. **Adaptive resistance is a mechanic class the
+  set does not have.**
+- **IT IS NOT THE SCRAPWRIGHT, AND THAT IS THE ONE IT HAD TO BE CHECKED
+  AGAINST.** The Scrapwright replaces plates you knocked off and the fight is
+  unchanged - hit it again, harder. The Tanner never heals a point. It takes
+  one of your ANSWERS away and leaves the rest, so the party that brought one
+  weapon is in trouble and the party that brought three is not. A decision,
+  not a damage sponge.
+- **THEME `flooded`,** off `dungeon_hd.gd:737-743`: the miniboss roll is 35 on
+  barracks/workshop, 10 on shrine/crypt, 15 on prison and every unlisted theme.
+  `flooded` is unlisted, so it rolls at **15 with exactly ONE body behind it**
+  (the Sluicekeeper) - every miniboss a flooded floor has ever shown is the
+  same creature. Same argument the Loader used for the mess hall. A tan-pit is
+  standing water nobody wants to be near; the room explains the trade.
+- **WEAR 0.10 EXTENDS THE BOTTOM OF A FULL LADDER.** All eighteen checked:
+  0.15 to 1.00 in steps of 0.05 is full (the Hurdleman took 1.00 to extend the
+  top). 0.10 is honest rather than a repeat because **freshness is this
+  creature's mechanic** - it is the one thing down there never allowed to get
+  old, wearing skins it dressed this hour. Mr. E's rule 2: condition is the
+  receipt, and this receipt reads *newly covered*.
+- **HEIGHT 2.75** likewise extends a full ladder (2.00-2.70 in 0.05s, all
+  taken). It is the FRAME that is 2.75, not the man: stooped over a beam he
+  reads shorter than the Bellman he is taller than.
+
+### THE FIVE PASSES, AND WHAT THE PICTURE SAID THAT NO NUMBER DID
+Every pass was GREEN on the register harness. The harness was never wrong - it
+measures scale, blanks, frame and corridor, and none of those was ever the
+fault. **Everything below was found by looking.**
+1. **PASS 1 FAILED OUTRIGHT.** Three tapered panels hung UNDER the rails with
+   rigid triangular leg-flaps came back as **three paper sacks on a gibbet** -
+   a post-and-lintel frame with bags swinging off it. Gothic flourish is the
+   one register Bellmire does not have, and it was not even the trade: a tenter
+   STRETCHES a skin, it does not hang one.
+2. **PASS 2** stretched the skins across the bays, cut the crown rail so the
+   uprights top out as two bare poles, left one bay empty for daylight, and
+   shrank the beam. The gallows read died. The man then read as **seated at a
+   bench hugging a plank**, because a beam at 0.74 crosses a standing man at
+   the hip.
+3. **PASS 3** took the beam to working height (0.96), lengthened the stoop so
+   the shoulders sit ahead of the hips, halved the hide bow (two matched
+   bolsters had read as pillows), and rebuilt the arms. **The arm fault had the
+   wrong cause for two passes**: the grips were always 0.46 m below the
+   shoulders, but the forearms ran TOWARD THE CAMERA and a limb pointing at the
+   lens is foreshortened to nothing, so the front view only ever showed the
+   upper arms splaying out of a dark shoulder knob. Height was never the
+   problem; the plane was.
+4. **PASS 4, one change.** The beam's left end was buried behind the apron, so
+   its trestle leg stood out alone as **a pale post with daylight round it
+   holding up nothing**. The LOG was in the wrong place, not the leg - shifted
+   0.30 m right and shortened. Span 2.92 -> 2.65.
+5. **PASS 5, one number.** At yaw 31 the rack is 31 degrees off square to the
+   front camera and 59 to the side one, and the side shot squeezed both skins
+   into strips - the rack, which IS the read, nearly vanished in one of the
+   three views the register demands. **45 degrees is the only yaw that treats
+   front and side the same.** Span 2.65 -> 2.50.
+
+### WHAT IS STILL WRONG, AND I AM NOT HIDING IT
+Looked at on `hero_front.png`, `hero_side.png`, `hero_back.png` and
+`three_quarter.png` after pass 5:
+1. **SIDE VIEW: the rack's two uprights cross the man and he is largely behind
+   them.** The man and the rack are separated in X, so the 90-degree camera
+   stacks them. Pass 5 traded a thin rack for an occluded man and I think that
+   was the right trade - the rack is the read - but it is a real fault and the
+   next pass on this body should move the rack BACK in Y rather than turn it.
+2. **FRONT VIEW: the upper arms still splay** and read as half-raised. Three
+   passes improved it and none killed it; the forearms foreshorten by nature at
+   this pose.
+3. **The fleshing knife only reads in the three-quarter.** Front and side it is
+   under the arms and behind the beam.
+4. **The beam's left end is a bare cone cap** - a pale disc pointing at the
+   viewer in three-quarter, reading as a pipe end rather than a sawn log.
+5. **The hides' bottom corners scallop upward** (the ragged-edge sine), which
+   at pair scale reads slightly like the mouth of a bag rather than a trimmed
+   skin.
+6. **The spare skin over his left shoulder does not read at all** at pair scale
+   - it merges into the shoulder mass.
+7. In three-quarter the head and the beam's near end nearly touch.
+
+### WHAT THE GAME BUILD LANE MUST DO - I DO NOT DO IT
+1. `assets/monsters/minibosses/tanner.glb` - **static, no armature**: a `model`
+   path and **no `anims` entry**. As with every other body here there is **no
+   `.glb.import` sibling** (this lane never runs Godot); an import run writes
+   it and `delve.gd:377` already falls back safely until then.
+2. `scripts/delve.gd` `MB_FIT`: add `"tanner": 1.12` - **MEASURED**, from
+   `renders/art/minibosses/_fit_report.json` `pairs.tanner.ratio`. Do not
+   re-derive it. Same one-line shape as `"hurdleman": 1.04` and
+   `"loader": 1.08`.
+3. The `flooded` set piece can now pick between the Sluicekeeper and the
+   Tanner, which is the whole reason this one was built for that theme.
+4. **The idea is a BEHAVIOUR.** Shipped as a reskin with extra hit points it is
+   wasted: the rack is a promise that every answer you spend is an answer you
+   do not get back.
+5. Feed line, if one is wanted: *"It is pegging up a fresh hide."*

@@ -161,3 +161,80 @@ None of a-d is art's to do and none of it is blocking art.
   - tools/art/weaponfit.py, _s2_cal.py, _s2_carry.py, _s2_sheet.py, _s2_probe.py
   - renders/art/system2/ - 24 cells x 3 views, eight contact sheets, the fixed
     sheets, _fit_register.json and _carry_fix.json
+
+=============================================================================
+# FAULT 4, CLOSED - 17 Nov 13:45 CT. "THE SIDE VIEW PROVES NOTHING."
+
+This is the fourth of the four faults named at 12:50, and it was a fault in the
+INSTRUMENT, not in any model. Closing it changed no mesh and no carry number.
+
+## THE PROOF WAS ALREADY IN THE 12:50 REGISTER AND NOBODY COMPUTED IT
+That register read GREEN, 24 cells, 0 blanks, 0 frame clips - and its
+`opaque.side` was **81339 for twenty-one of the twenty-four cells, identical to
+the pixel**. Twenty-one different weapons cannot add the same number of pixels
+to a frame unless they add none. Only crossbow_uncommon (81392) and
+crossbow_rare (81413) differed at all, by 53 and 74 px, because the crossbow is
+wide enough to poke past the far hip. No picture was needed to find this; equal
+numbers across different weapons ARE the finding.
+
+## CAUSE: THE CAMERA WAS ON THE WRONG SIDE
+`handslot.r` sits at world x -0.49. The side view was az **+90**, which stands
+the camera on the hero's OFFHAND side with the whole body between the lens and
+the weapon. It is now az **-90**, the carry side. One number.
+
+## THE INSTRUMENT THAT CAN SEE IT - THREE RENDERS THROUGH ONE CAMERA
+`opaque` counts the whole cell, and the body is ~81k of its pixels, so a weapon
+contributing ZERO is invisible to it. The test now asks the viewer's question
+and lets the renderer do the depth:
+    A = body alone (rendered once per view, cached)   B = body + weapon
+    C = weapon alone  ->  alone = its full silhouette
+    vis  = pixels that changed between A and B AND lie inside C's silhouette
+    seen = vis / alone, bounded 0..1
+A view must clear **seen >= 0.15 AND vis >= 900 px**; a cell needs two such
+views or it goes RED. `alone == 0` is RED, not green.
+
+## BEFORE AND AFTER, MEASURED THE SAME WAY (--control shoots the old camera too)
+    mean seen   front 0.735   side(NEW, carry) 0.829   back 0.662   side(OLD) 0.002
+    OLD side scored EXACTLY 0.000 on 22 of 24 cells. NEW side clears 0.15 on all 24
+    and is now the STRONGEST of the three columns, not the weakest.
+
+## TWO THINGS THE PICTURE TAUGHT THE NUMBER, IN ORDER
+1. The first run returned `seen` 1.20-1.26 for the three crossbows. A fraction
+   over 1.0 is a fraction of nothing: the raw diff was also counting the
+   weapon's CAST SHADOW on the body. `seen` is now bounded to the weapon's own
+   silhouette; the raw diff is kept beside it as `delta`, and delta - vis is the
+   shadow (82-597 px per cell), which is worth seeing rather than dropping.
+2. `seen` is a RATIO and a ratio cannot see SIZE. The sheet showed the staff and
+   the dagger as a smudge at the hip while seen read 0.70-0.80 - both true, since
+   a weapon photographed end-on has a small silhouette and 80% of a small thing
+   is small. dagger_common's side view is 389 visible pixels on a 760x760 cell.
+   Hence the second floor, VIS_MIN = 900 px (about 30x30).
+   Same family as the pass-11 fault, caught the same way: by looking at the
+   picture the number described.
+
+## THE VERDICT IS NOW **FAIL**, ON ONE CELL, AND THAT IS THE INSTRUMENT WORKING
+    BLIND crossbow_common: only 1 of 3 views show the weapon -
+      front seen 0.395 vis 726 | side seen 0.664 vis 2039 | back seen 0.097 vis 175
+This is **fault 2, already named and already handed over**: the crossbow is
+authored flat with no blade axis and sits 40-50% inside the body, so from the
+front it is a smudge behind the belt and from the back the cape covers it
+entirely. I looked at `_sheet_crossbow.png` and that is exactly what it shows.
+NO MESH CHANGED AND NO NUMBER MOVED - the 12:58 tick of art's half stands on the
+models and the carry numbers, which are unaltered. The red is a cell that was
+never proven and used to be reported as proven.
+**IT CLEARS WHEN THE GAME BUILD APPLIES THE HANDED-OVER CROSSBOW ROTATION
+(0, 0, 90.06) in equip().** Nothing in art's lane can clear it, and baking the
+rotation into the mesh to make a register go green is exactly the thing this
+lane refused to do at 12:50 and still refuses.
+
+## WEAKEST COLUMN, NAMED NOT HIDDEN
+`back` is the weakest view on every family (mean 0.662) because the cape covers
+anything carried low; shield_common/uncommon back are 0.279/0.306 and
+crossbow_common back is 0.097. They are not RED because two other views prove
+each cell, which is what MIN_PROVING is for.
+
+## FILES
+  tools/art/weaponfit.py      - the instrument (VIEWS, SEEN_MIN, VIS_MIN, --control)
+  tools/art/_s2_sidefix.py    - the before/after sheet, six weapons, two cameras
+  renders/art/system2/_sheet_sidefix.png - top row OLD camera (six identical
+    knights, no weapon in any of them), bottom row NEW camera (a weapon in each)

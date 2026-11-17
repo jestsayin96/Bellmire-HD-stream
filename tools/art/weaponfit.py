@@ -1,6 +1,6 @@
 """weaponfit - ART'S HALF OF SYSTEM 2: the 24 KayKit dungeon weapons, in a hand.
 
-  blender -b -noaudio -P tools/art/weaponfit.py -- --repo <repo> [--fams ...]
+  blender -b -noaudio -P tools/art/weaponfit.py -- --repo <repo> [--fams ...] [--control]
 
 System 2 is "named weapons wired live". The GAME BUILD wires gear.gd; the art
 half is the models themselves and the only thing that makes them shippable:
@@ -17,6 +17,7 @@ WHAT IS MEASURED, PER MODEL:
              sphere - the grip is inside the fist BY DESIGN and is not a fault
   ground     vertices below z=0 (the weapon dragging through the floor)
   frame      vertices outside the fixed camera frame (a crop is a fault)
+  vis        *** CAN THE VIEWER SEE THE WEAPON IN THIS VIEW AT ALL *** - see below
 
 AND THE INSTRUMENT GOES RED ON EMPTY. A clip count taken over zero vertices,
 or a cell whose model failed to import, is a FAIL and not a silent green - the
@@ -34,6 +35,61 @@ four candidate axis corrections in _s2_cal.py and against the game build's own
 s17 close-up, where the axe hangs from the fist with the haft along the hand.
 Identity is the correction; the other three lay the haft through the legs or
 out the back.
+
+=============================================================================
+*** FAULT 4, FOUND BY THIS LANE AT 12:50 AND FIXED HERE. THE SIDE CELL PROVED
+*** NOTHING, AND THE PROOF OF THAT WAS ALREADY SITTING IN THE REGISTER.
+=============================================================================
+The 12:50 register read GREEN over 24 cells with 0 blanks and 0 frame clips,
+and its `opaque.side` was 81339 FOR TWENTY-ONE OF THE TWENTY-FOUR CELLS -
+identical to the pixel. Three cameras, and one of them was photographing the
+body and nothing else. Only crossbow_uncommon (81392) and crossbow_rare (81413)
+differed at all, by 53 and 74 pixels, because the crossbow is wide enough to
+poke out past the far hip. Nobody had to look at a picture to know: equal
+numbers across different weapons ARE the finding.
+
+TWO SEPARATE THINGS WERE WRONG, AND THEY ARE FIXED AND MEASURED SEPARATELY.
+
+1. THE CAMERA WAS ON THE WRONG SIDE. handslot.r sits at world x -0.49. The old
+   side view was az +90, which stands the camera at +x - the hero's OFFHAND
+   side - so the whole body is between the lens and the weapon. The side view
+   is now az -90, the CARRY side. This is a one-number change and it is the
+   root cause; the visibility instrument below is what proves it rather than
+   my say-so.
+
+2. THE HARNESS COULD NOT HAVE CAUGHT IT. `opaque` counts every pixel in the
+   cell, and the body is ~81k of them, so a weapon contributing ZERO can only
+   be seen by comparing cells to each other, which nothing did. A blank check
+   cannot see a hidden weapon for the same reason a border check could not see
+   a clipped glow: it is not the question being asked.
+   THE TEST THAT WORKS ASKS THE VIEWER'S QUESTION. Through ONE fixed camera:
+     A = the body alone          (rendered once per view and cached)
+     B = the body with the weapon
+     C = the weapon alone        (the denominator: its full silhouette)
+   delta = every pixel that MOVED between A and B - which includes the
+           weapon's CAST SHADOW on the body, so it can exceed the weapon's area
+   alone = opaque pixels in C    - what it could add if nothing covered it
+   vis   = moved pixels INSIDE C's silhouette - the weapon itself, seen
+   seen  = vis / alone           - the fraction of the weapon a viewer can see,
+           bounded 0..1 by construction
+   The renderer does the depth; no occlusion maths of mine is involved, which
+   is the point - at pass 11 my own geometry test answered 156 for a face that
+   was not there.
+   AND A SECOND FLOOR, WHICH THE PICTURE DEMANDED AFTER THE FIRST RUN OF THIS
+   INSTRUMENT: seen is a RATIO and a ratio cannot see SIZE. The sheet showed
+   the staff and the dagger as a smudge at the hip while seen read 0.70-0.80 -
+   both true, because a weapon photographed end-on has a small silhouette and
+   80% of a small thing is a small thing. So a view must ALSO put VIS_MIN real
+   pixels on screen. That is the same mistake as pass 11 wearing a new coat,
+   caught the same way: by looking at the picture the number described.
+   A VIEW WITH seen < SEEN_MIN OR vis < VIS_MIN PROVES NOTHING AND IS NOT EVIDENCE. A cell needs
+   at least MIN_PROVING of them or the cell FAILS. alone == 0 is RED, not green:
+   that is the empty case, and an empty denominator is how this lane has been
+   fooled before.
+
+--control also shoots the old az +90 camera as `side_offhand`, scored by the
+same instrument, so the fix is reported as a before-and-after NUMBER instead of
+a claim. It is off by default; one run with it on is the record.
 """
 import os
 import sys
@@ -58,8 +114,21 @@ CELL_X, CELL_Y = 760, 760   # square: pass 2 cropped three swords and two dagger
 FRAME_H = 3.80               # metres of world height in the cell, fixed for all 24.
                              # 3.30 still cropped sword_rare (1.50 m of blade held out); this does not.
 GROUND_UP = 0.18
-VIEWS = [("front", 0.0), ("side", 90.0), ("back", 180.0)]
+# az -90 is the CARRY side (handslot.r is at world x -0.49). See fault 4 above.
+VIEWS = [("front", 0.0), ("side", -90.0), ("back", 180.0)]
+CONTROL_VIEW = ("side_offhand", 90.0)
 ELEV = 6.0
+SEEN_MIN = 0.15              # below this the view shows a sliver and proves nothing
+VIS_MIN = 900                # ...AND A RATIO IS BLIND TO SIZE. Found by looking: the
+                             # picture showed staff and dagger as smudges at the hip
+                             # while `seen` read 0.70-0.80, because 80% of a weapon
+                             # photographed end-on is still 20 pixels across.
+                             # dagger_common's side view is 389 visible pixels on a
+                             # 760x760 cell - 0.07% of it. 900 px is about 30x30 and is
+                             # the floor at which a shape, not a smudge, is on screen.
+                             # A view must clear BOTH or it is not evidence.
+MIN_PROVING = 2              # a cell needs two views that actually show the weapon
+DIFF_EPS = 0.02
 
 
 def world_verts(objs):
@@ -94,7 +163,12 @@ def load_model(repo, fam, tier):
     return new, p
 
 
-def shoot(objs, pts, path, az, cz):
+def make_cam(az, cz, pts):
+    """One camera, built from the FULL point set so that A, B and C share it.
+
+    If the camera moved between the body-only and the body+weapon render, the
+    pixel diff would be measuring the camera and not the weapon.
+    """
     scene = bpy.context.scene
     cam_d = bpy.data.cameras.new("cam")
     cam_d.type = 'ORTHO'
@@ -112,14 +186,20 @@ def shoot(objs, pts, path, az, cz):
     cam_d.ortho_scale = FRAME_H
     cam_d.clip_start = max(0.01, min(depth) - 1.0)
     cam_d.clip_end = max(depth) + 4.0
-    scene.render.filepath = path
-    bpy.ops.render.render(write_still=True)
+    return cam
+
+
+def frame_outside(cam, pts):
     mwi = cam.matrix_world.inverted()
     half_v = FRAME_H / 2.0
     half_h = FRAME_H * (CELL_X / float(CELL_Y)) / 2.0
-    outside = sum(1 for p in pts if abs((mwi @ p).y) > half_v or abs((mwi @ p).x) > half_h)
-    bpy.data.objects.remove(cam, do_unlink=True)
-    return outside
+    return sum(1 for p in pts if abs((mwi @ p).y) > half_v or abs((mwi @ p).x) > half_h)
+
+
+def render_to(path):
+    bpy.context.scene.render.filepath = path
+    bpy.ops.render.render(write_still=True)
+    return read_png(path)
 
 
 def read_png(path):
@@ -130,15 +210,25 @@ def read_png(path):
     return a
 
 
+def show(objs, on):
+    for o in objs:
+        o.hide_render = not on
+
+
 def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
     ap.add_argument("--fams", default=",".join(FAMS))
+    ap.add_argument("--control", action="store_true",
+                    help="also shoot the old offhand-side camera, scored the same way")
     a = ap.parse_args(argv)
     fams = [f for f in a.fams.split(",") if f]
+    views = list(VIEWS) + ([CONTROL_VIEW] if a.control else [])
     outdir = os.path.join(a.repo, "renders", "art", "system2")
+    tmpdir = os.path.join(outdir, "_vis_tmp")
     os.makedirs(outdir, exist_ok=True)
+    os.makedirs(tmpdir, exist_ok=True)
 
     for o in list(bpy.data.objects):
         bpy.data.objects.remove(o, do_unlink=True)
@@ -182,7 +272,9 @@ def main():
     bmn, bmx, bpts = G.world_bounds(body)
     cz = (FRAME_H / 2.0) - GROUND_UP
 
-    reg, errors, blanks, clipped_frames = {}, [], [], []
+    reg, errors, blanks, clipped_frames, blind = {}, [], [], [], []
+    body_only = {}
+
     for fam in fams:
         for tier in TIERS:
             key = "%s_%s" % (fam, tier)
@@ -217,21 +309,77 @@ def main():
                        tip_z=round(max(zs), 3), hero_h=round(hinfo["h"], 3),
                        clip=n_clip, ground=n_ground, hand_scale=HAND_SCALE)
             allpts = bpts + wv
-            outs = {}
-            for vname, az in VIEWS:
+            outs, proving = {}, 0
+            for vname, az in views:
+                cam = make_cam(az, cz, allpts)
+                outs[vname] = frame_outside(cam, allpts)
+
+                # A - the body alone, through this exact camera. Identical for
+                # every cell in a view, so it is rendered once and cached.
+                if vname not in body_only:
+                    show(meshes, False)
+                    body_only[vname] = render_to(os.path.join(tmpdir, "_body_%s.png" % vname))
+                    show(meshes, True)
+                A = body_only[vname]
+
+                # B - the cell itself: body + weapon.
                 png = os.path.join(outdir, "%s_%s.png" % (key, vname))
-                outs[vname] = shoot(list(body) + meshes, allpts, png, az, cz)
-                arr = read_png(png)
-                op = int((arr[:, :, 3] > 0.02).sum())
+                B = render_to(png)
+
+                # C - the weapon alone: what it COULD contribute if unoccluded.
+                show(body, False)
+                C = render_to(os.path.join(tmpdir, "_w_%s_%s.png" % (key, vname)))
+                show(body, True)
+
+                op = int((B[:, :, 3] > DIFF_EPS).sum())
                 if op == 0:
                     blanks.append(os.path.basename(png))
-                b = max(float(arr[0, :, 3].max()), float(arr[-1, :, 3].max()),
-                        float(arr[:, 0, 3].max()), float(arr[:, -1, 3].max()))
-                if b > 0.02:
+                b = max(float(B[0, :, 3].max()), float(B[-1, :, 3].max()),
+                        float(B[:, 0, 3].max()), float(B[:, -1, 3].max()))
+                if b > DIFF_EPS:
                     clipped_frames.append(os.path.basename(png))
+
+                changed = np.abs(B - A).max(axis=2) > DIFF_EPS
+                mask = C[:, :, 3] > DIFF_EPS
+                delta = int(changed.sum())
+                alone = int(mask.sum())
+                # BOUNDED TO THE WEAPON'S OWN SILHOUETTE ON PURPOSE. The raw
+                # diff `delta` also catches pixels the weapon changed ON THE
+                # BODY - its cast shadow - and the first run of this instrument
+                # returned seen 1.20-1.26 for the three crossbows because of it.
+                # A fraction that can exceed 1.0 is a fraction of nothing I can
+                # name, so `seen` counts only pixels the weapon itself covers
+                # AND changed. `delta` is kept beside it rather than dropped:
+                # the gap between them is the shadow, and it is worth seeing.
+                covered = int((changed & mask).sum())
+                if alone == 0:
+                    errors.append("%s/%s: the weapon renders EMPTY alone - the seen "
+                                  "fraction would be computed over nothing" % (key, vname))
+                    seen = 0.0
+                else:
+                    seen = covered / float(alone)
+                if seen >= SEEN_MIN and covered >= VIS_MIN:
+                    proving += 1
                 rec.setdefault("opaque", {})[vname] = op
                 rec.setdefault("border", {})[vname] = round(b, 4)
+                rec.setdefault("vis", {})[vname] = covered
+                rec.setdefault("delta", {})[vname] = delta
+                rec.setdefault("alone", {})[vname] = alone
+                rec.setdefault("seen", {})[vname] = round(seen, 4)
+                bpy.data.objects.remove(cam, do_unlink=True)
             rec["outside"] = outs
+            # the control camera is a measurement OF THE OLD VIEW, not evidence
+            # for the cell - it must not be able to rescue a cell by existing.
+            if (a.control and rec["seen"].get(CONTROL_VIEW[0], 0.0) >= SEEN_MIN
+                    and rec["vis"].get(CONTROL_VIEW[0], 0) >= VIS_MIN):
+                proving -= 1
+            rec["proving_views"] = proving
+            if proving < MIN_PROVING:
+                blind.append("%s: only %d of %d views show the weapon "
+                             "(seen>=%.2f AND vis>=%d px) - %s"
+                             % (key, proving, len(VIEWS), SEEN_MIN, VIS_MIN,
+                                ", ".join("%s seen %.3f vis %d" % (v, rec["seen"][v], rec["vis"][v])
+                                          for v, _ in VIEWS)))
             reg[key] = rec
             for o in objs:
                 bpy.data.objects.remove(o, do_unlink=True)
@@ -241,17 +389,22 @@ def main():
         errors.append("register has %d of %d cells" % (len(reg), want))
     if not reg:
         errors.append("EMPTY REGISTER - nothing was measured, this is a FAIL not a pass")
-    ok = (not errors) and (not blanks) and (not clipped_frames)
+    ok = (not errors) and (not blanks) and (not clipped_frames) and (not blind)
     out = dict(verdict="GREEN" if ok else "FAIL", ok=ok, hero=hinfo,
                handslot=[round(v, 4) for v in slot], cells=len(reg),
-               blanks=blanks, frame_clips=clipped_frames, errors=errors, models=reg)
+               views=[v for v, _ in views], seen_min=SEEN_MIN, vis_min=VIS_MIN,
+               min_proving=MIN_PROVING,
+               blanks=blanks, frame_clips=clipped_frames, blind_views=blind,
+               errors=errors, models=reg)
     rp = os.path.join(outdir, "_fit_register.json")
     with open(rp, "w") as f:
         json.dump(out, f, indent=1)
-    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d errors=%d"
-          % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(errors)))
+    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d errors=%d"
+          % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(blind), len(errors)))
     for e in errors:
         print("  ERROR", e)
+    for e in blind:
+        print("  BLIND", e)
     print("WEAPONFIT_DONE", rp)
 
 

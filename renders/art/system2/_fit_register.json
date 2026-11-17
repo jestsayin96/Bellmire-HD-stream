@@ -1,6 +1,6 @@
 {
- "verdict": "GREEN",
- "ok": true,
+ "verdict": "FAIL",
+ "ok": false,
  "hero": {
   "h": 2.45,
   "w": 1.32,
@@ -23,8 +23,20 @@
   0.6406
  ],
  "cells": 24,
+ "views": [
+  "front",
+  "side",
+  "back",
+  "side_offhand"
+ ],
+ "seen_min": 0.15,
+ "vis_min": 900,
+ "min_proving": 2,
  "blanks": [],
  "frame_clips": [],
+ "blind_views": [
+  "crossbow_common: only 1 of 3 views show the weapon (seen>=0.15 AND vis>=900 px) - front seen 0.395 vis 726, side seen 0.664 vis 2039, back seen 0.097 vis 175"
+ ],
  "errors": [],
  "models": {
   "sword_common": {
@@ -41,19 +53,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 99237,
-    "side": 81339,
-    "back": 100001
+    "side": 81265,
+    "back": 100001,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 5448,
+    "side": 1623,
+    "back": 5157,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 5666,
+    "side": 1713,
+    "back": 5406,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 6494,
+    "side": 1823,
+    "back": 6472,
+    "side_offhand": 1826
+   },
+   "seen": {
+    "front": 0.8389,
+    "side": 0.8903,
+    "back": 0.7968,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "sword_uncommon": {
    "model": "assets/gear/dungeon/sword_uncommon.glb",
@@ -69,19 +109,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 100513,
-    "side": 81339,
-    "back": 101306
+    "side": 81265,
+    "back": 101306,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 6838,
+    "side": 1968,
+    "back": 6519,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 7124,
+    "side": 2016,
+    "back": 6776,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 8112,
+    "side": 2316,
+    "back": 8124,
+    "side_offhand": 2315
+   },
+   "seen": {
+    "front": 0.8429,
+    "side": 0.8497,
+    "back": 0.8024,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "sword_rare": {
    "model": "assets/gear/dungeon/sword_rare.glb",
@@ -97,19 +165,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 103712,
-    "side": 81339,
-    "back": 104497
+    "side": 81265,
+    "back": 104497,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 10293,
+    "side": 3121,
+    "back": 9761,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 10730,
+    "side": 3258,
+    "back": 10172,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 11401,
+    "side": 3374,
+    "back": 11401,
+    "side_offhand": 3379
+   },
+   "seen": {
+    "front": 0.9028,
+    "side": 0.925,
+    "back": 0.8562,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "axe_common": {
    "model": "assets/gear/dungeon/axe_common.glb",
@@ -125,19 +221,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 96850,
-    "side": 81339,
-    "back": 97614
+    "side": 81265,
+    "back": 97614,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 2936,
+    "side": 1226,
+    "back": 2682,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 3121,
+    "side": 1273,
+    "back": 2859,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 3601,
+    "side": 1512,
+    "back": 3603,
+    "side_offhand": 1523
+   },
+   "seen": {
+    "front": 0.8153,
+    "side": 0.8108,
+    "back": 0.7444,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "axe_uncommon": {
    "model": "assets/gear/dungeon/axe_uncommon.glb",
@@ -153,19 +277,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 98350,
-    "side": 81339,
-    "back": 99102
+    "side": 81265,
+    "back": 99102,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 4410,
+    "side": 1488,
+    "back": 4171,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 4613,
+    "side": 1539,
+    "back": 4383,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 5160,
+    "side": 1878,
+    "back": 5150,
+    "side_offhand": 1917
+   },
+   "seen": {
+    "front": 0.8547,
+    "side": 0.7923,
+    "back": 0.8099,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "axe_rare": {
    "model": "assets/gear/dungeon/axe_rare.glb",
@@ -181,19 +333,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 98643,
-    "side": 81339,
-    "back": 99390
+    "side": 81265,
+    "back": 99390,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 4780,
+    "side": 2044,
+    "back": 4456,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 4979,
+    "side": 2051,
+    "back": 4663,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 5570,
+    "side": 2260,
+    "back": 5561,
+    "side_offhand": 2248
+   },
+   "seen": {
+    "front": 0.8582,
+    "side": 0.9044,
+    "back": 0.8013,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "hammer_common": {
    "model": "assets/gear/dungeon/hammer_common.glb",
@@ -209,19 +389,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 99060,
-    "side": 81339,
-    "back": 99670
+    "side": 81278,
+    "back": 99670,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 5163,
+    "side": 4155,
+    "back": 4769,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 5383,
+    "side": 4158,
+    "back": 5003,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 5863,
+    "side": 4659,
+    "back": 5714,
+    "side_offhand": 4654
+   },
+   "seen": {
+    "front": 0.8806,
+    "side": 0.8918,
+    "back": 0.8346,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "hammer_uncommon": {
    "model": "assets/gear/dungeon/hammer_uncommon.glb",
@@ -237,19 +445,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 102004,
-    "side": 81339,
-    "back": 102743
+    "side": 81651,
+    "back": 102743,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 8095,
+    "side": 7952,
+    "back": 7830,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 8620,
+    "side": 7986,
+    "back": 8316,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 8861,
+    "side": 8486,
+    "back": 8842,
+    "side_offhand": 8519
+   },
+   "seen": {
+    "front": 0.9136,
+    "side": 0.9371,
+    "back": 0.8855,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "hammer_rare": {
    "model": "assets/gear/dungeon/hammer_rare.glb",
@@ -265,19 +501,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 103597,
-    "side": 81339,
-    "back": 104363
+    "side": 81731,
+    "back": 104363,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 9777,
+    "side": 8806,
+    "back": 9442,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 10374,
+    "side": 8861,
+    "back": 9884,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 10460,
+    "side": 8937,
+    "back": 10465,
+    "side_offhand": 8922
+   },
+   "seen": {
+    "front": 0.9347,
+    "side": 0.9853,
+    "back": 0.9022,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "dagger_common": {
    "model": "assets/gear/dungeon/dagger_common.glb",
@@ -293,19 +557,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 95749,
-    "side": 81339,
-    "back": 96521
+    "side": 81265,
+    "back": 96521,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 1645,
+    "side": 389,
+    "back": 1614,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 1750,
+    "side": 435,
+    "back": 1706,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 2367,
+    "side": 558,
+    "back": 2392,
+    "side_offhand": 569
+   },
+   "seen": {
+    "front": 0.695,
+    "side": 0.6971,
+    "back": 0.6747,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 2
   },
   "dagger_uncommon": {
    "model": "assets/gear/dungeon/dagger_uncommon.glb",
@@ -321,19 +613,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 96137,
-    "side": 81339,
-    "back": 96920
+    "side": 81265,
+    "back": 96920,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 2224,
+    "side": 708,
+    "back": 2043,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 2399,
+    "side": 776,
+    "back": 2219,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 3109,
+    "side": 1084,
+    "back": 3114,
+    "side_offhand": 1070
+   },
+   "seen": {
+    "front": 0.7153,
+    "side": 0.6531,
+    "back": 0.6561,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 2
   },
   "dagger_rare": {
    "model": "assets/gear/dungeon/dagger_rare.glb",
@@ -349,19 +669,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 96938,
-    "side": 81339,
-    "back": 97733
+    "side": 81265,
+    "back": 97733,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 3099,
+    "side": 922,
+    "back": 2865,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 3334,
+    "side": 1023,
+    "back": 3072,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 3947,
+    "side": 1160,
+    "back": 3966,
+    "side_offhand": 1163
+   },
+   "seen": {
+    "front": 0.7852,
+    "side": 0.7948,
+    "back": 0.7224,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "staff_common": {
    "model": "assets/gear/dungeon/staff_common.glb",
@@ -377,19 +725,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 95443,
-    "side": 81339,
-    "back": 96191
+    "side": 81265,
+    "back": 96191,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 1471,
+    "side": 870,
+    "back": 1289,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 1553,
+    "side": 912,
+    "back": 1376,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 2564,
+    "side": 1020,
+    "back": 2565,
+    "side_offhand": 1026
+   },
+   "seen": {
+    "front": 0.5737,
+    "side": 0.8529,
+    "back": 0.5025,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 2
   },
   "staff_uncommon": {
    "model": "assets/gear/dungeon/staff_uncommon.glb",
@@ -405,19 +781,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 96700,
-    "side": 81339,
-    "back": 97439
+    "side": 81265,
+    "back": 97439,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 2773,
+    "side": 1345,
+    "back": 2547,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 2888,
+    "side": 1364,
+    "back": 2678,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 4080,
+    "side": 1549,
+    "back": 4027,
+    "side_offhand": 1512
+   },
+   "seen": {
+    "front": 0.6797,
+    "side": 0.8683,
+    "back": 0.6325,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "staff_rare": {
    "model": "assets/gear/dungeon/staff_rare.glb",
@@ -433,19 +837,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 96281,
-    "side": 81339,
-    "back": 97036
+    "side": 81265,
+    "back": 97036,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 2308,
+    "side": 1088,
+    "back": 2105,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 2459,
+    "side": 1115,
+    "back": 2260,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 3337,
+    "side": 1355,
+    "back": 3327,
+    "side_offhand": 1346
+   },
+   "seen": {
+    "front": 0.6916,
+    "side": 0.803,
+    "back": 0.6327,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "crossbow_common": {
    "model": "assets/gear/dungeon/crossbow_common.glb",
@@ -461,19 +893,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 94212,
-    "side": 81339,
-    "back": 94969
+    "side": 81505,
+    "back": 94969,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 726,
+    "side": 2039,
+    "back": 175,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 1059,
+    "side": 3674,
+    "back": 175,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 1838,
+    "side": 3071,
+    "back": 1809,
+    "side_offhand": 3073
+   },
+   "seen": {
+    "front": 0.395,
+    "side": 0.664,
+    "back": 0.0967,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 1
   },
   "crossbow_uncommon": {
    "model": "assets/gear/dungeon/crossbow_uncommon.glb",
@@ -489,19 +949,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 94463,
-    "side": 81392,
-    "back": 95128
+    "side": 81517,
+    "back": 95128,
+    "side_offhand": 81392
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 1400,
+    "side": 3147,
+    "back": 1102,
+    "side_offhand": 95
+   },
+   "delta": {
+    "front": 1828,
+    "side": 5093,
+    "back": 1387,
+    "side_offhand": 110
+   },
+   "alone": {
+    "front": 2985,
+    "side": 4053,
+    "back": 3006,
+    "side_offhand": 4054
+   },
+   "seen": {
+    "front": 0.469,
+    "side": 0.7765,
+    "back": 0.3666,
+    "side_offhand": 0.0234
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "crossbow_rare": {
    "model": "assets/gear/dungeon/crossbow_rare.glb",
@@ -517,19 +1005,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 94424,
-    "side": 81413,
-    "back": 95096
+    "side": 81562,
+    "back": 95096,
+    "side_offhand": 81413
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 1209,
+    "side": 3752,
+    "back": 1832,
+    "side_offhand": 146
+   },
+   "delta": {
+    "front": 1637,
+    "side": 5717,
+    "back": 2446,
+    "side_offhand": 176
+   },
+   "alone": {
+    "front": 2767,
+    "side": 4676,
+    "back": 2728,
+    "side_offhand": 4670
+   },
+   "seen": {
+    "front": 0.4369,
+    "side": 0.8024,
+    "back": 0.6716,
+    "side_offhand": 0.0313
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "axeDouble_common": {
    "model": "assets/gear/dungeon/axeDouble_common.glb",
@@ -545,19 +1061,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 98118,
-    "side": 81339,
-    "back": 98889
+    "side": 81265,
+    "back": 98889,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 4197,
+    "side": 1616,
+    "back": 3955,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 4429,
+    "side": 1650,
+    "back": 4173,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 4853,
+    "side": 1906,
+    "back": 4858,
+    "side_offhand": 1904
+   },
+   "seen": {
+    "front": 0.8648,
+    "side": 0.8478,
+    "back": 0.8141,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "axeDouble_uncommon": {
    "model": "assets/gear/dungeon/axeDouble_uncommon.glb",
@@ -573,19 +1117,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 101109,
-    "side": 81339,
-    "back": 101835
+    "side": 81265,
+    "back": 101835,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 7170,
+    "side": 2370,
+    "back": 6903,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 7454,
+    "side": 2406,
+    "back": 7217,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 7899,
+    "side": 2802,
+    "back": 7863,
+    "side_offhand": 2805
+   },
+   "seen": {
+    "front": 0.9077,
+    "side": 0.8458,
+    "back": 0.8779,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "axeDouble_rare": {
    "model": "assets/gear/dungeon/axeDouble_rare.glb",
@@ -601,19 +1173,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 101208,
-    "side": 81339,
-    "back": 101929
+    "side": 81265,
+    "back": 101929,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 7333,
+    "side": 2692,
+    "back": 7000,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 7613,
+    "side": 2693,
+    "back": 7316,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 8111,
+    "side": 2926,
+    "back": 8079,
+    "side_offhand": 2931
+   },
+   "seen": {
+    "front": 0.9041,
+    "side": 0.92,
+    "back": 0.8664,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "shield_common": {
    "model": "assets/gear/dungeon/shield_common.glb",
@@ -629,19 +1229,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 96642,
-    "side": 81339,
-    "back": 97406
+    "side": 81267,
+    "back": 97406,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 4825,
+    "side": 2140,
+    "back": 2685,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 4916,
+    "side": 2207,
+    "back": 2778,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 9633,
+    "side": 2780,
+    "back": 9631,
+    "side_offhand": 2779
+   },
+   "seen": {
+    "front": 0.5009,
+    "side": 0.7698,
+    "back": 0.2788,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "shield_uncommon": {
    "model": "assets/gear/dungeon/shield_uncommon.glb",
@@ -657,19 +1285,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 97060,
-    "side": 81339,
-    "back": 97797
+    "side": 81385,
+    "back": 97797,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 6447,
+    "side": 3167,
+    "back": 3093,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 6562,
+    "side": 3180,
+    "back": 3202,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 10107,
+    "side": 3825,
+    "back": 10116,
+    "side_offhand": 3829
+   },
+   "seen": {
+    "front": 0.6379,
+    "side": 0.828,
+    "back": 0.3058,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   },
   "shield_rare": {
    "model": "assets/gear/dungeon/shield_rare.glb",
@@ -685,19 +1341,47 @@
    "hand_scale": 0.8,
    "opaque": {
     "front": 97400,
-    "side": 81339,
-    "back": 98099
+    "side": 81454,
+    "back": 98099,
+    "side_offhand": 81339
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
+   },
+   "vis": {
+    "front": 6152,
+    "side": 3880,
+    "back": 4099,
+    "side_offhand": 0
+   },
+   "delta": {
+    "front": 6375,
+    "side": 3938,
+    "back": 4257,
+    "side_offhand": 0
+   },
+   "alone": {
+    "front": 11185,
+    "side": 4988,
+    "back": 11191,
+    "side_offhand": 4991
+   },
+   "seen": {
+    "front": 0.55,
+    "side": 0.7779,
+    "back": 0.3663,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
-   }
+    "back": 0,
+    "side_offhand": 0
+   },
+   "proving_views": 3
   }
  }
 }

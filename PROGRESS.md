@@ -9053,3 +9053,6 @@ bellmirebro or by anyone, no reward created or re-priced, no channel setting tou
 does JOIN #jestsayin96 as bellmirebro - that is the standing B18 gate and it is silent, no message
 is sent.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+
+## H32 hub standing check (2026-11-17 14:45 CT) - nothing new to build
+Fast-forwarded to origin/hub (4d9c058) and merged origin/main (32dffd7) clean; `git diff` of web/ and docs/HUB_SECURITY.md across both merges was EMPTY, so web/ is byte-identical to the looked-at build. Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP), 520 thumbnails, vs 6 MB cap. No new screenshot (web/ unchanged). Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked on purpose, named here: delete refused on this machine. Not published by me.

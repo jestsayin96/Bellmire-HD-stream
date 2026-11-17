@@ -2300,3 +2300,18 @@ S21), and MB_FIT "reeve": 0.80. Systems 3/4 and Phase 2 NOT touched.
   which already carries the older laptop rows inside it. No row of the lead's was dropped.
 - Lock: claimed 16:08:30, first declared 16:36 (over the 25-min cap again) and corrected in the lock line to 16:33 at
   16:10, before any Godot ran. No live Twitch test. Not ticked - the team lead ticks.
+- S22b, 2026-11-17T16:19:49-06:00 - THE STAFF SWEEP the lead's 15:58 ruling asked for (method: a shorter staff; the number measured). NEW
+  tools/_s22_staffsweep.gd (cloned from _s21_staff.gd): seven rows of three mages on the real roster path, the SHIPPED
+  rotation, multipliers 1.9 / 1.7 / 1.5 / 1.3 / 1.1 / 0.9 / 0.7; lowest point of every mesh under the held node INCLUDING
+  the D94 butt ribbons, through all seven poses INCLUDING Cheer. Worst per row (staff length at tier 2 in brackets):
+  x1.90 -1.074 (3.06 m) | x1.70 -0.905 (2.74) | x1.50 -0.735 (2.42) | x1.30 -0.566 (2.09) | x1.10 -0.397 (1.77) |
+  x0.90 +0.081 (1.12) | x0.70 +0.182 (0.87). Every row's worst pose is IDLE, not Cheer (the shipped rotation without the
+  S21 grip shift does not invert into the floor). LARGEST CLEARING MULTIPLIER: x0.90 (the true edge lies between 1.1 and
+  0.9; the step from -0.397 to +0.081 is not linear, so the edge is not interpolated here).
+  WHAT x0.90 LOOKS LIKE (renders/cycles/s22/sweep/sweep_front_m090.png, LOOKED AT): a rod from the fist to the boot top,
+  the head at the belt. IT READS AS A WAND, NOT A STAFF. So by the lead's own clause: NO MULTIPLIER CLEARS WITHOUT MAKING
+  THE STAFF A WAND, and the answer moves back to pose-aware (or a grip nearer the butt with a per-pose fix for Cheer, as
+  S21 measured). Numbers given, not a chosen fix; gear.gd UNCHANGED. Harness cosmetic: the Label3D "xN" text divides by
+  the look scale and prints 0.47 for x0.90 - the ROW lines carry the real multiplier.
+  S22_STAFFSWEEP OK (21 staves, 7 poses, 0 failures); parse 0 SCRIPT ERROR / 0 Parse Error (16:17 re-run). No script
+  changed since the 16:09-16:15 battery, so those verdicts stand for this tree. Relaunch declared on its own lock line.

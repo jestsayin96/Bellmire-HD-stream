@@ -6620,3 +6620,32 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - WIRING, NOT MINE: scripts/delve.gd MB_FIT needs "loader": 1.08 (measured, do not re-derive), the
   body is STATIC so no anims entry, and it has no .glb.import sibling - one import run covers it and
   quartermaster.glb. No .gd touched outside tools/art/.
+
+
+## ART - THE HURDLEMAN, an eighteenth miniboss (2026-11-17 09:10 CT)
+Took the plan's 07:58 ART row off `origin/main`, not off the prompt: "an eighteenth is welcome on
+the same terms - measured on a body, six views, through the register harness".
+- **IT CUTS THE ROOM IN TWO.** It plants a hurdle through the middle of your line and the party
+  becomes two fights. Measured first: SEVENTEEN existing ideas parsed out of `minibosses.py` CANON
+  and NOT ONE divides the party. It is not the Porter - being shut in is not being cut in half.
+- Theme **grassland**, chosen off the game's own files (`floorgen.gd` THEMES+BIOMES = 14 themes,
+  `dungeon_hd.gd:737-743` weights): barracks/workshop/mess carry 2 bodies each, every other theme 1.
+- **wear 1.00 extends the ladder** - .15-.95 was full at seventeen creatures, every step checked.
+  Height 2.55 was the free gap.
+- 4 meshes, 1,418 faces, span **3.10 m CORRIDOR-SAFE** (11.0 m clear), **ratio 1.04** vs the posed
+  2.45 m Knight, pair_w 4.96, fits_frame true. Verdict **GREEN**, asked 18 / measured 18,
+  blank+border **54 files, 0 failures**, errors []. Procedural, no pack geometry.
+- SIX PASSES, ONE CHANGE EACH, EVERY ONE OFF A PICTURE. The harness went **RED on its own author**
+  at pass 1 (4.89 m footprint, widest of the eighteen, pair 6.75 against a 5.60 frame) and again at
+  pass 2 (5.64 - a 40 mm miss is a miss) and corrected me on WHERE the width was. Then: the spare
+  panels read as one solid grey billboard, so they were rebuilt as open lattices; the side view had
+  no creature in it at all, so the hurdle moved a metre forward and now stands between the camera
+  and the body, which is the mechanic drawn; the beetle head read as a barrel on the floor, so it
+  became a squared block in front of the panel; and from behind it read TWO-HEADED, so the shoulder
+  spheres came down and went dark.
+- **EIGHT FAULTS NAMED IN WRITING** in `docs/art/MINIBOSSES.md`, worst first: from the back the
+  spares read as a jumble of sticks and the body is behind them; the three-quarter view is a hurdle
+  with a man behind it; the withy head still reads as a visor at pair scale.
+- GAME BUILD, NOT MINE: `scripts/delve.gd` MB_FIT `"hurdleman": 1.04` (measured, in
+  `renders/art/minibosses/_fit_report.json`), static model with no `anims`, and no `.glb.import`
+  sibling - one import run covers hurdleman, loader and quartermaster.

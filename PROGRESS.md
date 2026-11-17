@@ -8931,3 +8931,41 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or anyone, no reward, no channel setting touched.
 Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
 
+
+## B-cycle B30 - STAND-DOWN, COMPUTED NOT ASSUMED: MAIN MOVED TWICE AND NONE OF IT IS MINE (chat bot, 2026-11-17 12:46-12:52 CT)
+
+THE ROW SAID STAND DOWN AND SAID THE STAND-DOWN IS THE DELIVERY. Here is what I checked before
+agreeing with it, so the verdict is a measurement and not an obedience.
+
+MAIN MOVED, AND I WENT AND LOOKED AT WHAT MOVED:
+  876899c -> 0d4de62, one commit: the team lead's 11:58 plan sync. Docs only.
+  The 11:58 merge under it (325babc -> 876899c) carried axes, barks, the Tanner, a hub check and
+  HUD theme tokens. assets/, renders/, scripts/gear.gd, scripts/leaderboard_panel.gd,
+  scripts/ui_theme.gd, tools/_s17_heft.gd, tools/_u55_hue.gd, tools/art/*.
+  NONE of it is a command, a command alias, a cooldown, or anything chatcmd.gd reads.
+  chatbot fast-forwarded 1807d16 -> 0d4de62. No merge commit, no conflict, nothing to keep.
+  git diff --stat 1807d16..HEAD -- scripts/chatcmd.gd data/commands.json docs/COMMANDS.md
+  came back EMPTY. My three files did not move an inch under the merge. That is the whole
+  argument for not re-proving: the gates would be re-measuring bytes that are identical.
+
+THE FILE-ONLY AUDIT I DID RUN (no engine, no lock taken, no Godot launched):
+  data/commands.json  - json.load clean. 27 commands. `order` is 27 long and is exactly the key
+                        set, no extra, no missing.
+  docs/COMMANDS.md    - 5771 bytes, unchanged from B29's byte-identical generator run.
+  DRIFT, BOTH DIRECTIONS, resolved through the data file's own `aliases` (24 of them) rather
+  than by eye:
+    commands in data with no dispatch arm in chatcmd.gd ... NONE
+    dispatch arms resolving to no command ................ NONE
+  Two tokens flagged on the first pass, "kills" and "standing", are FALSE POSITIVES and I say so
+  rather than banking them: they are arguments to _board(kind) at lines 159-160 and the label
+  table at 499-500, not verbs a viewer can type. "testbits"/"testsub"/"testpoints" are the
+  eventsub test verbs and are deliberately absent from the public data - that is the shape, not
+  drift.
+
+THE LOCK: NOT TAKEN AND NOT TOUCHED. Last line when I read it was
+IDLE 2026-11-17T12:18:33-06:00 (game build S18). Free, and I left it free - the game build lane
+is mid-Phase-2 and a dry lane should not be sitting on a lock to re-prove unchanged bytes.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward created or re-priced, no channel setting touched.
+NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.

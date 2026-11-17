@@ -2222,3 +2222,45 @@ and Phase 2 NOT touched.
 - Merge: origin/main had ONE conflict, docs/art/ASSET_SOURCES.md (my S19 row vs art's pack row + the lead's
   note) - both sides kept, 0 markers left. Lock: claimed 14:08:33 declaring 14:35. No live Twitch test.
   Not ticked - the team lead ticks.
+
+## D-cycle - S21 System 2 engine half: the staff settled by measurement - MINE STANDS, ART'S LIES ACROSS, AND THE STAFF GOES THROUGH THE FLOOR. CHECKPOINT, NOT A FIX. 2026-11-17T15:28:00-06:00 (game build)
+TAKE THIS NEXT (13:58, still the newest block) gave: FINISH SYSTEM 2'S ENGINE HALF. Crossbow, greataxe and shield
+landed at S20 (14:21, ada04de). Left on the row: the staff comparison (mine vs art's, one picture) and my fit note (2),
+"the tier-2/3 staves may graze the floor in a lower pose". Systems 3/4 and Phase 2 NOT touched.
+- NEW tools/_s21_staff.gd (windowed). Nine mages on the REAL roster path (Roster.weapon_mesh/weapon_look -> Gear.equip
+  -> Gear.deco_piece): row A = what ships, (0,0,90) x1.9; row B = art's Blender euler (-85.13,-90.06,85.26) x1.30 as
+  handed over; row C = my rotation at art's x1.30. AXIS read in Idle; the LOWEST POINT of every mesh under the held
+  node (each mesh's AABB corners in world space) sampled every frame through seven poses the game plays: Idle,
+  Walking_A, Hit_A, Spellcast_Shoot, Use_Item, Cheer, 1H_Melee_Attack_Chop. Gate: 9 held, row A upright, row A never
+  below y 0. Pictures: renders/cycles/s21/ (s21_front_all, s21_side_A/B/C, s21_front_A/B/C, s21_pose_A_<pose>).
+- (1) MINE vs ART'S - SETTLED, KEEP MINE. AXIS (idle) row A (0.0, 1.0, -0.02) all three tiers = upright. Row B
+  (-0.96, -0.09, -0.27) all three = LYING ACROSS THE BODY - s21_front_all shows B's staves horizontal at the belt like
+  a spear. Same lesson as the S20 crossbow: art's euler is solved in Blender's bone frame and does not carry over.
+- (2) THE FLOOR - CONFIRMED, AND WORSE THAN THE NOTE SAID. A mage's hand is 0.531 m off the floor in Idle (HAND line).
+  The pack staff is gripped at its middle (local y -0.45 .. +0.67), so at x1.88-2.1 the SHAFT goes 0.32-0.43 m INTO
+  THE FLOOR (MESH lines: staff_uncommon low -0.323 / -0.425, staff_rare -0.391), and the D94 butt ribbons hang ~0.6 m
+  further down (-0.93 .. -1.08). Row A worst -1.078 m (Idle); below the floor in six of seven poses. THE OPAQUE FLOOR
+  HIDES ALL OF IT - s19/s20 and s21_side_A looked right, the butt "at the boot". Art's x1.30 also goes under on this
+  body (row C -0.57 incl. ribbons); art measured on a 2.45 m hero, the mage is smaller.
+- TRIED, LOOKED AT, AND REVERTED - which is why this is a checkpoint: Gear.held_shift = +0.25 (slide the grip down the
+  shaft; the model's own children move so deco_piece measures the moved bounds and the wrap stays in the fist) plus
+  pack-staff ribbons hung under the finial (lo-0.14 span -> hi-0.20 span). Result: shaft clear in Idle 0.10-0.15 m,
+  row A Idle 0.097 / Walk 0.096 / Hit 0.214 / Spell 0.205 / Use 0.151 / Chop 0.055 - BUT Cheer -0.484. s21_pose_A_Cheer
+  shows why: Cheer raises and INVERTS the fist, the staff hangs head-down and the finial goes into the floor. Before
+  the shift Cheer was -0.03 (just under). No single shift satisfies both (Idle needs >= +0.20, Cheer needs <= 0).
+  The pre-shift faults are INVISIBLE (under an opaque floor); the post-shift Cheer fault is VISIBLE and Cheer has 32
+  call sites. A hidden fault is better on stream than a shown one, so gear.gd is back to S20 (gear.gd.bak_s21 kept,
+  not staged). The answer is pose-aware (flip or drop the staff for Cheer, or a per-clip held rotation) or a shorter
+  staff - that is a judgement for the lead, not a number I can pick this hour.
+- Battery (verdict lines, on the shifted code 15:22-15:28, BEFORE the revert - the committed tree is S20's engine code
+  plus this harness): parse 0 SCRIPT ERROR / 0 Parse Error; S21_STAFF FAIL (9 staves, 7 poses, 1 failures) - the
+  failure is row A Cheer -0.484, named above; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2034 samples off the
+  floor (home); TOWNWALK in_solid=0/18255 (0.000%) raid_in_solid=0/6170 (0.000%) PASS; DELVE_TEST OK ran 9001 frames,
+  floor reached 2 (capped), 0 SCRIPT ERROR in the whole battery log; S20_HEFT OK (11 shots, 0 failures); S19_HEFT OK
+  (8 shots, 0 failures). Lock: claimed 15:08:02 declaring 15:36; released below.
+- The harness went red on ITS OWN SETUP four times before it measured anything, and each is recorded so nobody repeats
+  it: weapon=t does not give staff_<t> (D94's named piece takes its own sibling: Shepherd's Staff t1 holds
+  staff_uncommon - by design, not a fault); a rolled hero can hold Skeleton_Staff/staff_B; AXIS must be read in Idle
+  not after the last pose; and a raw-vertex read was suspected and replaced, but the low number was REAL - it was the
+  ribbons. The picture-vs-number disagreement was the floor hiding the shaft, not the instrument.
+- No live Twitch test. Not ticked - the team lead ticks.

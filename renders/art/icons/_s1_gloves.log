@@ -1,0 +1,4 @@
+ICONGEN_REPORT {"ok": true, "n": 51, "by_family": {"gloves": 51}, "blanks": [], "errors": []}
+RC 0
+C:\hd adventure\bellmire-art\tools\art\icongen.py:118: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True

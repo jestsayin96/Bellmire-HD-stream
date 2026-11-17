@@ -86,7 +86,61 @@ def context(r):
     return dict(variant=IC.variant_for(r["fam"], r["key"], r["name"], h),
                 orn=orn, metal=metal, cloth=cloth, gem=gem,
                 D=IC.sig(r["key"], r["name"]),
-                metal_name=IC.METAL_NAMES[q])
+                metal_name=IC.METAL_NAMES[q],
+                # 22:08 ruling: the hue comes off the STORED rarity only. No
+                # fallback - see icons.rarity_hue for why a guess is worse.
+                hue=IC.rarity_hue(r.get("rarity")),
+                hue_name=IC.RARITY_HUE_NAMES.get(
+                    str(r.get("rarity") or "").strip().lower(), "none"))
+
+
+def _blur(a, rad, passes=3):
+    """Separable box blur, `passes` of them - three box passes are a Gaussian
+    to the eye and cost nothing. numpy only: Blender has no PIL and there is no
+    system python on this machine."""
+    k = max(1, int(rad))
+    out = a
+    for _ in range(passes):
+        pad = np.pad(out, ((k, k), (k, k)), mode='constant')
+        c = np.cumsum(np.cumsum(pad, axis=0), axis=1)
+        c = np.pad(c, ((1, 0), (1, 0)), mode='constant')
+        h, w = a.shape
+        y0, x0 = np.arange(h), np.arange(w)
+        Y0, X0 = np.meshgrid(y0, x0, indexing='ij')
+        y1, x1 = Y0 + 2 * k + 1, X0 + 2 * k + 1
+        out = (c[y1, x1] - c[Y0, x1] - c[y1, X0] + c[Y0, X0]) / float((2 * k + 1) ** 2)
+    return out
+
+
+def apply_hue(path, hue, res):
+    """THE RARITY HUE, PAINTED AROUND THE ICON'S OWN SILHOUETTE.
+
+    Grown from the item's alpha, so the glow is the shape of the thing rather
+    than a disc behind it - a ring-shaped halo on a ring, a boot-shaped halo on
+    a boot. It is laid UNDER the item, so no hue ever sits on top of the metal
+    a viewer is trying to read.
+
+    ONE STRENGTH FOR EVERY RUNG. Only the hue changes (icons.RARITY_HUE), so
+    rarity is read by COLOUR at a glance and never by comparing brightness.
+    Returns the fraction of the frame the halo covers - a number, so "the hue
+    is there" is checkable and not asserted."""
+    a = read_png(path)
+    item_a = np.clip(a[..., 3], 0.0, 1.0)
+    if hue is None:
+        return 0.0
+    g = _blur(item_a, max(2, int(res * 0.030)), 3)
+    g = np.clip(g * 3.1, 0.0, 1.0) ** 0.85
+    halo_a = np.clip(g * 0.92, 0.0, 1.0) * (1.0 - item_a)
+    col = np.array(hue, dtype=np.float32)
+    out = np.empty_like(a)
+    src = a[..., 0:3] * item_a[..., None]
+    out[..., 0:3] = src + col[None, None, :] * halo_a[..., None]
+    out[..., 3] = np.clip(item_a + halo_a, 0.0, 1.0)
+    # un-premultiply so the PNG stays straight-alpha like every other icon
+    den = np.maximum(out[..., 3:4], 1e-4)
+    out[..., 0:3] = np.clip(out[..., 0:3] / den, 0.0, 1.0)
+    write_png(path, out)
+    return round(float((halo_a > 0.02).sum()) / float(res * res) * 100.0, 2)
 
 
 def make_icon(r, ctx, outdir, res):
@@ -150,7 +204,13 @@ def make_icon(r, ctx, outdir, res):
     wide = max(abs((p - center).dot(right)) for p in pts) * 2.0
     tall = max(abs((p - center).dot(up)) for p in pts) * 2.0
     depth = [(p - cam.location).dot(fwd) for p in pts]
-    cam_d.ortho_scale = max(wide, tall) * 1.14
+    # 1.14 left 7% of margin a side. The rarity halo is grown from the alpha
+    # and reaches about 9% of the frame, so on a wide item the glow was CUT BY
+    # THE FRAME EDGE - visible on the legendary and artifact cells of the first
+    # ladder shot. The margin is widened for EVERY icon, hued or not, because
+    # widening only the hued ones would render the same item at two sizes and
+    # the ladder's whole claim is that nothing changes but the hue.
+    cam_d.ortho_scale = max(wide, tall) * 1.30
     cam_d.clip_start = max(0.01, min(depth) - radius * 0.5)
     cam_d.clip_end = max(depth) + radius * 2.0 + 5.0
     path = os.path.join(outdir, "%s.png" % r["key"])
@@ -166,9 +226,66 @@ def main():
     ap.add_argument("--res", type=int, default=256)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--fam", default="")
+    ap.add_argument("--ladder", default="",
+                    help="one item key: render it at every rung of the rarity "
+                         "ladder side by side - Mr. E's own acceptance test")
     args = ap.parse_args(argv)
 
     recs = records(args.repo)
+
+    # --------------------------------------------- MR. E'S OWN ACCEPTANCE TEST
+    # "Same boot icon, six versions side by side. No hue = common. White =
+    # uncommon. Blue = rare. Purple = very rare. Tangerine = legendary. Bright
+    # red = artifact. Instant read at any distance." One item, one framing, one
+    # light; ONLY the rarity field changes between cells. The metal band moves
+    # with it too, because that is what a viewer actually sees - the ladder is
+    # not a lab isolate, it is the receipt.
+    if args.ladder:
+        base = next((r for r in recs if r["key"] == args.ladder), None)
+        if base is None:
+            print("ICONGEN_LADDER " + json.dumps({"ok": False,
+                  "error": "no such item key: %s" % args.ladder}))
+            return
+        rungs = ["junk", "common", "uncommon", "rare", "very rare",
+                 "legendary", "artifact"]
+        tmp = os.path.join(args.repo, "renders", "art", "icons", "_ladder_cells")
+        os.makedirs(tmp, exist_ok=True)
+        cells, info = [], []
+        for rung in rungs:
+            purge()
+            r = dict(base)
+            r["rarity"] = rung
+            r["key"] = "%s__%s" % (base["key"], rung.replace(" ", "_"))
+            ctx = context(r)
+            path, _ = make_icon(r, ctx, tmp, args.res)
+            px = apply_hue(path, ctx["hue"], args.res)
+            a = read_png(path)
+            cells.append(a)
+            info.append(dict(rarity=rung, hue=ctx["hue_name"], halo_pct=px,
+                             metal=ctx["metal_name"],
+                             opaque=int((a[..., 3] > 0.02).sum())))
+        purge()
+        cell, lab = args.res, 40
+        sh = np.zeros((cell + lab + 30, cell * len(cells), 4), dtype=np.float32)
+        sh[..., 0:3] = np.array((0.07, 0.075, 0.09))
+        sh[..., 3] = 1.0
+        draw_text(sh, "%s - ONE ITEM, ONE FRAMING, ONE LIGHT. ONLY THE RARITY FIELD CHANGES."
+                  % base["name"].upper(), 8, 8, 2, (1.00, 0.86, 0.52))
+        for i, a in enumerate(cells):
+            cx = i * cell
+            al = a[..., 3:4]
+            dst = sh[30:30 + cell, cx:cx + cell, 0:3]
+            sh[30:30 + cell, cx:cx + cell, 0:3] = a[..., 0:3] * al + dst * (1.0 - al)
+            draw_text(sh, info[i]["rarity"].upper(), cx + 6, 30 + cell + 6, 2,
+                      (0.88, 0.82, 0.68))
+            draw_text(sh, "HUE %s" % info[i]["hue"].upper(), cx + 6, 30 + cell + 24, 1,
+                      (0.52, 0.58, 0.66))
+        write_png(os.path.join(args.repo, "renders", "art", "icons",
+                               "_rarity_ladder.png"), sh)
+        print("ICONGEN_LADDER " + json.dumps({"ok": True, "item": base["name"],
+                                              "rungs": info}))
+        return
+
     if args.fam:
         recs = [r for r in recs if r["fam"] == args.fam]
     if args.limit:
@@ -182,7 +299,8 @@ def main():
         recs = keep
 
     root = os.path.join(args.repo, "assets", "icons", "items")
-    report = {"ok": True, "n": 0, "errors": [], "by_family": {}, "index": {}}
+    report = {"ok": True, "n": 0, "errors": [], "by_family": {}, "by_hue": {},
+              "index": {}}
     for r in recs:
         outdir = os.path.join(root, r["fam"])
         os.makedirs(outdir, exist_ok=True)
@@ -190,11 +308,21 @@ def main():
         try:
             ctx = context(r)
             path, faces = make_icon(r, ctx, outdir, args.res)
+            hue_px = apply_hue(path, ctx["hue"], args.res)
             report["n"] += 1
             report["by_family"][r["fam"]] = report["by_family"].get(r["fam"], 0) + 1
             report["index"][r["key"]] = dict(name=r["name"], fam=r["fam"], cost=r["cost"],
                                              variant=ctx["variant"], metal=ctx["metal_name"],
-                                             stat=r["stat"], colour=r["colour"], faces=faces)
+                                             stat=r["stat"], colour=r["colour"], faces=faces,
+                                             rarity=r.get("rarity"), hue=ctx["hue_name"],
+                                             hue_px=hue_px)
+            report["by_hue"][ctx["hue_name"]] = report["by_hue"].get(ctx["hue_name"], 0) + 1
+            if ctx["hue"] is not None and hue_px < 0.5:
+                report["ok"] = False
+                report["errors"].append(
+                    "%s: rarity %s asks for a %s hue and the halo covers %.2f%% of the "
+                    "frame - that is no hue at all" % (r["key"], r.get("rarity"),
+                                                       ctx["hue_name"], hue_px))
         except Exception:
             import traceback
             report["ok"] = False
@@ -226,6 +354,15 @@ def main():
             n = int((a[..., 3] > 0.02).sum())
             if n < 40:
                 blanks.append([r["key"], "blank: %d opaque px" % n])
+            # THE HALO MUST NOT BE CUT BY THE FRAME. The first ladder shot had
+            # the legendary and artifact glow clipped at the bottom edge and
+            # NOTHING IN THIS FILE COULD SEE IT - the blank check only ever
+            # asked whether there were pixels, never whether they ran off the
+            # edge. An instrument that cannot see the fault IS the fault.
+            edge = float(max(a[0, :, 3].max(), a[-1, :, 3].max(),
+                             a[:, 0, 3].max(), a[:, -1, 3].max()))
+            if edge > 0.02:
+                blanks.append([r["key"], "clipped by the frame: border alpha %.2f" % edge])
             a = box2(a)
             cx, cy = (i % cols) * cell, (i // cols) * (cell + lab) + 26
             al = a[..., 3:4]
@@ -238,9 +375,11 @@ def main():
         report["ok"] = False
     with open(os.path.join(sheets_dir, "_report.json"), "w") as f:
         json.dump(report, f, indent=1)
-    print("ICONGEN_REPORT " + json.dumps({"ok": report["ok"], "n": report["n"],
-                                          "by_family": report["by_family"],
-                                          "blanks": blanks[:6], "errors": report["errors"][:2]}))
+    print("ICONGEN_REPORT " + json.dumps({
+        "verdict": "GREEN" if report["ok"] else "RED",
+        "ok": report["ok"], "n": report["n"],
+        "by_family": report["by_family"], "by_hue": report["by_hue"],
+        "blanks": blanks[:6], "errors": report["errors"][:2]}))
 
 
 if __name__ == "__main__":

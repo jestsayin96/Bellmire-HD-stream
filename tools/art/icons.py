@@ -25,14 +25,23 @@ TAU = math.pi * 2.0
 VARIANTS = 5
 
 
-def ring_pts(r, n=26, z=0.0, axis='z'):
+def ring_pts(r, n=26, z=0.0, axis='z', cx=0.0):
+    """A ring of radius r. `cx` IS NOT DECORATION - it is the centre on the
+    ring's first axis, and it defaults to 0.0 only so every existing caller
+    that genuinely wants a ring on the origin is untouched.
+    THE FAULT IT EXISTS TO FIX (named 17 Nov, deferred one pass deliberately):
+    build_gloves draws a PAIR of hands at x = +-0.36 and wrapped the cuff lip
+    and every lame with this function at its default centre. Both hands' rings
+    were therefore drawn as ONE ring through the middle of the frame, which is
+    why the left and right glove read as fused in the icon. A ring that wraps
+    something must be centred on the thing it wraps."""
     out = []
     for k in range(n + 1):
         a = TAU * k / n
         if axis == 'z':
-            out.append(Vector((r * math.cos(a), r * math.sin(a), z)))
+            out.append(Vector((cx + r * math.cos(a), r * math.sin(a), z)))
         else:
-            out.append(Vector((r * math.cos(a), z, r * math.sin(a))))
+            out.append(Vector((cx + r * math.cos(a), z, r * math.sin(a))))
     return out
 
 
@@ -387,13 +396,13 @@ def build_gloves(P, c):
             P.raw(aim(L.scone(flare, hw * 0.92, cuff, 14, isk, 0.0),
                       (x, 0, top - cuff), (0, 0, 1)), mat)
         if F['lip']:                          # a hard flared lip at the mouth
-            P.raw(L.tube(ring_pts(flare * 1.02, 20, top - cuff), 0.055, 8), mat)
+            P.raw(L.tube(ring_pts(flare * 1.02, 20, top - cuff, cx=x), 0.055, 8), mat)
         # LAMES - the segmentation, the dial that tells two same-price gloves
         # of one cut apart
         for k in range(F['lames']):
             f = (k + 0.7) / (F['lames'] + 0.4)
             rr = hw * 0.96 + (flare - hw * 0.96) * f
-            P.raw(L.tube(ring_pts(rr * 1.025, 18, top - cuff * f), 0.026, 7), mat)
+            P.raw(L.tube(ring_pts(rr * 1.025, 18, top - cuff * f, cx=x), 0.026, 7), mat)
         if F['cop']:                          # the elbow end of a long reach
             P.raw(aim(L.scone(flare * 1.16, flare, cuff * 0.16, 14, isk, isk),
                       (x, 0, top - cuff * 1.14), (0, 0, 1)), mat)
@@ -631,6 +640,45 @@ METAL_NAMES = ["iron", "bronze", "silver", "gold"]
 RARITY_LADDER = ("starting", "common", "uncommon", "rare", "very rare", "legendary")
 _RARITY_Q = {"starting": 0, "common": 0, "uncommon": 1,
              "rare": 2, "very rare": 3, "legendary": 3}
+
+
+# ---------------------------------------------- MR. E'S RULING, 16 Nov 22:08
+# THE RARITY HUE LADDER. "The icon is the receipt." A viewer cannot read the
+# detail on a chibi hero's gear at stream distance; what they CAN see is the
+# icon, so the HUE AROUND THE ICON IS THE RARITY. You do not read it, you see
+# it. One strength for every rung - only the HUE changes - because a ladder
+# told in brightness is a ladder you have to compare to read.
+#
+# THE VALUES ARE sRGB 0..1, not linear: lordgen's read_png/write_png both force
+# Non-Color, so the arrays this table feeds hold sRGB bytes as values and a
+# linear triple would come out washed.
+#
+# THIS TABLE IS THE SOURCE OF TRUTH AND IT IS MIRRORED, NOT COPIED: the HUD
+# (game build) and the hub both have to draw the same ladder, and the moment
+# three lanes keep three tables the icon and the frame disagree.
+RARITY_HUE = {
+    "junk":      None,                  # fishing trash - it has not earned one
+    "starting":  None,
+    "common":    None,                  # the baseline is bare on purpose
+    "uncommon":  (1.00, 1.00, 1.00),    # white
+    "rare":      (0.30, 0.55, 1.00),    # blue
+    "very rare": (0.70, 0.35, 1.00),    # purple
+    "legendary": (1.00, 0.55, 0.12),    # tangerine
+    "artifact":  (1.00, 0.13, 0.10),    # bright red
+}
+RARITY_HUE_NAMES = {"uncommon": "white", "rare": "blue", "very rare": "purple",
+                    "legendary": "tangerine", "artifact": "bright red"}
+
+
+def rarity_hue(rarity):
+    """The hue for one item, or None for no hue.
+
+    THE STORED RARITY DECIDES IT AND NOTHING ELSE. There is deliberately NO
+    cost-quartile fallback here, unlike rarity_q: the metal band is a look, but
+    the hue is a CLAIM about what a viewer is holding. An item with no rarity
+    field (every cosmetic in items.json carries none) gets NO HUE rather than
+    a guessed one, because a guessed hue is a lie on the receipt."""
+    return RARITY_HUE.get(str(rarity or "").strip().lower())
 
 
 def rarity_q(rarity, orn=0.0):

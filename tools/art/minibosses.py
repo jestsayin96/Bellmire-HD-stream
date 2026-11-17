@@ -4764,3 +4764,216 @@ def loader():
 
 
 BUILDERS.update({"loader": loader})
+
+
+# =========================================================== 18 THE HURDLEMAN
+# Chosen by MEASURING the set, not by remembering it (17 Nov 08:40 CT):
+#   - SEVENTEEN ideas exist. Parsed out of CANON above, not recalled: summon,
+#     self-armour, drag-a-hero, douse the lamps, will-not-stay-down, bar the
+#     door, steal gear, heal the pack, raise the water, plant the ground,
+#     pre-set the room, scale with the fire, ring from elsewhere, set the
+#     floor, come apart in two, arm the room, weigh you down.
+#     NOT ONE OF THEM DIVIDES THE PARTY. That is this one.
+#   - THEME COVERAGE, counted off the game's own files (floorgen.gd THEMES +
+#     BIOMES = 14 themes; dungeon_hd.gd:737-743 for the weights): barracks 2,
+#     workshop 2, mess 2, every other theme 1. Grassland sits at weight 15 with
+#     one body (the Sower) and its clusters are overgrowth/stores/collapse -
+#     a sunken meadow is the one room where a hurdle explains itself without a
+#     word of lore, because a hurdle is what you pen a meadow with.
+#   - WEAR: the .15-.95 ladder is FULL - seventeen creatures, seventeen steps
+#     of 0.05, I checked every one. This body takes 1.00 and extends the top of
+#     the ladder rather than repeating a step. It is honest for the thing it
+#     is: split grey hurdles that have stood out in a wet meadow for years.
+#   - Height 2.55 was free (2.00-2.70 in use, 2.55 the gap).
+CANON.update({
+    "hurdleman": ("The Hurdleman", 2.55, (0.58, 0.60, 0.50), (0.72, 0.90, 0.68),
+                  "grassland",
+                  "IT CUTS THE ROOM IN TWO - it plants a hurdle through your line and you "
+                  "fight it two and two",
+                  1.00, "A hurdle just went down between you."),
+})
+ORDER = ORDER + ["hurdleman"]
+
+
+def _hurdle(P, ox, oy, yaw, w=1.46, h=1.78, tilt=0.0, bars=7):
+    """ONE HURDLE, STANDING, PLANTED. Built in its own local frame (x across,
+    z up) and carried out to (ox, oy) through a yaw, because the whole point of
+    this part is that it is NOT square to the camera in any view.
+
+    THIS IS THE ONLY OPEN LATTICE IN THE SET. Every other miniboss is solid
+    mass - a disc, a mound, a column, a sheaf. A thing you can see the room
+    through is a silhouette nobody else has, and it is also exactly what the
+    mechanic looks like: a line across the floor that a hero cannot cross.
+    """
+    c, s = math.cos(yaw), math.sin(yaw)
+
+    def place(vf, lx, lz, slot, lroll=0.0):
+        P.add(vf, slot, loc=(ox + lx * c, oy + lx * s, lz), rot=(0.0, tilt + lroll, yaw))
+
+    half = w / 2.0
+    for sgn in (-1, 1):                                   # the two driven posts
+        place(L.box(0.105, 0.115, h), sgn * half, h / 2.0, 'bone')
+        place(L.box(0.26, 0.26, 0.055), sgn * half, 0.028, 'dark')   # turf heaped at the foot
+    inner = half - 0.17
+    for i in range(bars):                                 # the vertical bars
+        lx = -inner + 2.0 * inner * i / float(bars - 1)
+        place(L.box(0.052, 0.062, h * 0.88), lx, h * 0.47, 'bone')
+    for t in (0.17, 0.55, 0.93):                          # three rails, through-woven
+        place(L.box(w + 0.13, 0.072, 0.082), 0.0, h * t, 'body')
+    for sgn in (-1, 1):                                   # withy lashings at the corners
+        for t in (0.17, 0.93):
+            P.add(L.sphere(0.052, 0.052, 0.046, 8, 6), 'dark',
+                  loc=(ox + sgn * half * c, oy + sgn * half * s + 0.06, h * t))
+
+
+def _spare_panel(P, cx, cy, cz, yaw, pitch, w=0.86, h=1.22, bars=5):
+    """A SPARE HURDLE RIDING ON THE BACK, and it is an OPEN LATTICE like the one
+    already standing - which is the whole correction of pass 4.
+
+    Pass 3 carried the spares as thin SOLID slabs with three slats laid on the
+    face. On the render they came back as one grey billboard behind the body:
+    the biggest mass in the silhouette, reading as a door or a shield - the
+    exact OPPOSITE of what a hurdle is, which is a thing you can see through.
+    It also ate the man's outline, because a solid field behind a grey body
+    leaves the body nothing to read against. Built open, the fan says `more
+    fences` at a glance and the body reads through the gaps.
+    """
+    cw, sw = math.cos(yaw), math.sin(yaw)
+    sp = math.sin(pitch)
+
+    def place(vf, u, v, slot):
+        P.add(vf, slot, loc=(cx + u * cw + v * sp * sw,
+                             cy + u * sw - v * sp * cw,
+                             cz + v * math.cos(pitch)), rot=(pitch, 0.0, yaw))
+
+    half = w / 2.0
+    for sgn in (-1, 1):
+        place(L.box(0.075, 0.062, h), sgn * half, 0.0, 'bone')
+    inner = half - 0.12
+    for i in range(bars):
+        place(L.box(0.044, 0.050, h * 0.86), -inner + 2.0 * inner * i / float(bars - 1),
+              0.0, 'bone')
+    for t in (-0.34, 0.34):
+        place(L.box(w + 0.09, 0.056, 0.066), 0.0, t * h, 'body')
+
+
+def hurdleman():
+    """IT CUTS THE ROOM IN TWO. It does not bar the door - the Porter does that,
+    and being shut in is not the same fight as being cut in half. This one puts
+    a hurdle THROUGH the middle of your line: the front rank and whoever was
+    behind them are now two fights, and the healer is on the wrong side of it
+    until somebody breaks a panel down.
+
+    Silhouette intent - A MAN, A FAN OF FLAT PANELS ON HIS BACK, AND ONE
+    HURDLE ALREADY UP:
+      - the HURDLE is the read and it stands apart from him on his right,
+        yawed 34 degrees so it is never edge-on and never square in any of the
+        three views. It is an OPEN GRID - the only one in eighteen creatures;
+      - the SPARES ride flat and fanned across his back - WIDE AND THIN, which
+        is the opposite outline to the Loader's square column of cubes, and
+        deliberately so, because they are the nearest two in this set;
+      - he is LEAN AND LONG-ARMED, not a barrel, and he is swinging a beetle
+        down and to the right on a long clean diagonal into the hurdle's foot.
+        The diagonal says the hurdle is going in NOW;
+      - no helm and no visor: a head woven out of withies, the same stuff as
+        the hurdles, with the eyes deep inside the weave.
+
+    Front is -Y, the same as the seventeen before it."""
+    P = Parts("hurdleman")
+    MX = -0.46                                   # the man stands left of centre
+
+    # ---- planted, and leaning into the swing rather than standing to attention
+    _legs(P, MX, hip=0.84, stance=0.25, r0=0.098, r1=0.080, boot=(0.27, 0.44, 0.11))
+    P.add(L.box(0.52, 0.16, 0.08), 'dark', loc=(MX, 0.03, 0.40))
+
+    # ---- LEAN torso, carried over to the right and forward into the work
+    limb(P, [(MX, 0.08, 0.78), (MX + 0.10, -0.02, 1.14), (MX + 0.24, -0.12, 1.48)],
+         0.205, 0.165, 'body')
+    P.add(L.box(0.30, 0.34, 0.10), 'dark', loc=(MX + 0.08, 0.00, 1.06))      # belt
+    SL = (MX - 0.02, -0.12, 1.48)
+    SR = (MX + 0.50, -0.12, 1.46)
+    # PASS 6, FROM THE BACK VIEW AND NOWHERE ELSE. The shoulders were pale
+    # 'body' spheres at 0.145, and from behind the left one sat just below and
+    # beside the withy head at almost the same tone - so the creature read
+    # TWO-HEADED. Smaller, and in the dark slot: a shoulder, not a skull.
+    for sh in (SL, SR):
+        P.add(L.sphere(0.112, 0.105, 0.098, 10, 7), 'dark', loc=sh)
+
+    # ---- THE WITHY HEAD. No face, no brim. The Loader's hooded brim came back
+    # reading as a visor and I named it; this is the other answer - the head is
+    # made of the same woven rod as the hurdles, so the creature and its work
+    # are one material.
+    HD = (MX + 0.30, -0.16, 1.76)
+    limb(P, [(MX + 0.26, -0.13, 1.52), HD], 0.070, 0.058, 'bone')
+    P.add(L.sphere(0.175, 0.170, 0.160, 12, 8), 'bone', loc=HD)
+    for k, ax in enumerate(('y', 'x', 'z')):
+        _ring(P, (HD[0], HD[1], HD[2] + (k - 1) * 0.035), 0.172 - k * 0.012,
+              axis=ax, slot='dark', rad=0.018, n=12)
+    eyes(P, (HD[0], HD[1], HD[2] - 0.01), 0.055, 0.027, -0.13)
+
+    # ---- THE BEETLE, two-handed, on a long diagonal down to the hurdle's foot.
+    # It is the one clean straight line on the creature and it points AT the
+    # mechanic, which is how the Drillmaster's mallet was made to work.
+    # PASS 5, AND IT IS ONE FAULT IN TWO VIEWS. The head was a 10-sided CONE,
+    # i.e. a cylinder, and at y -0.82 it sat inside the standing hurdle's own
+    # plane. In both renders it read as a BARREL LYING ON THE FLOOR beside the
+    # fence, with the haft lost behind the lattice - a loose prop, not a tool
+    # in two hands. A beetle head is a squared BLOCK, and it has to be in front
+    # of the hurdle where the haft can be seen reaching it.
+    HAFT = [(MX + 0.44, -0.26, 1.38), (MX + 0.80, -0.56, 0.88), (MX + 1.00, -1.04, 0.46)]
+    limb(P, HAFT, 0.046, 0.040, 'bone')
+    BD = (0.29, -0.76, -0.58)
+    P.raw(aim(L.box(0.21, 0.21, 0.40), (MX + 1.06, -1.20, 0.34), BD), 'dark')
+    for b in (-0.12, 0.12):                                  # two iron bands on the head
+        P.raw(aim(L.box(0.235, 0.235, 0.040),
+                  (MX + 1.06 + b * BD[0], -1.20 + b * BD[1], 0.34 + b * BD[2]),
+                  BD), 'bone')
+    limb(P, [SL, (MX + 0.16, -0.30, 1.32), (MX + 0.52, -0.28, 1.30)], 0.082, 0.058, 'body')
+    limb(P, [SR, (MX + 0.68, -0.42, 1.18), (MX + 0.82, -0.58, 0.90)], 0.082, 0.058, 'body')
+
+    # ---- THE HURDLE ALREADY UP. Off to his right and forward, yawed 34
+    # degrees and a little out of plumb, as a panel driven in by hand is.
+    # PASS 2, AND THE HARNESS IS WHY - it went RED on its own author. Pass 1
+    # measured 4.89 m of footprint, the widest of the eighteen by 1.2 m
+    # (the Gaoler's chain coil is 3.72), and the hero+creature pair blew the
+    # fixed 5.60 m fit frame at 6.75. The composition was spread, not the
+    # idea: the hurdle stood off at arm's length, the spare fan reached a
+    # half-metre past the body's left, and the stakes lay further out again.
+    # Everything comes in; nothing is removed.
+    # PASS 3: 3.78 m and pair 5.64 against a 5.60 frame - a 40 mm miss is
+    # still a miss, and the left edge turned out to be the SPARE FAN, not
+    # the stakes I had trimmed. Measured, not guessed, and the fan came in
+    # with it. 1.10 m of clear floor still separates the man from his
+    # hurdle, which is the whole read.
+    # PASS 4 PART B, AND THE SIDE VIEW IS WHY. At pass 3 the hurdle stood at
+    # y -0.10, the same depth as the body, so from 90 degrees it ECLIPSED THE
+    # MAN ENTIRELY - lattice, a withy head over the top, and no creature. A
+    # 34 degree yaw does not help there: 34 off the front camera is 56 off
+    # the side one, i.e. nearly face-on to it. So the hurdle goes FORWARD, a
+    # metre clear of the body, and the yaw opens to 41 degrees. It now stands
+    # BETWEEN the camera and the creature in the side view, which is not a
+    # compromise - it is the mechanic drawn: the fence is between you and it.
+    _hurdle(P, ox=0.46, oy=-0.92, yaw=0.72, w=1.18, h=1.78, tilt=0.05)
+
+    # ---- THE SPARES ON HIS BACK: three flat panels, fanned. WIDE AND THIN is
+    # the whole instruction - the Loader is a square column and these must not
+    # be mistaken for it from across a room.
+    for yw, dx, dy, dz in ((-0.34, -0.16, 0.30, 1.04),
+                           (-0.08, -0.24, 0.40, 1.10),
+                           (0.20, -0.32, 0.48, 1.00)):
+        _spare_panel(P, MX + dx, dy, dz, yw, 0.26)
+
+    # ---- AND THERE IS MORE WHERE THAT CAME FROM, which is the Scrapwright's
+    # trick and the right one: the floor says the fight is not over after one
+    # panel. A bundle of sharpened stakes and a coil of withy binding.
+    for i, (sx, sy) in enumerate(((-1.00, -0.44), (-0.92, -0.56), (-0.96, -0.30))):
+        limb(P, [(sx, sy, 0.07 + i * 0.045), (sx + 0.62, sy + 0.16, 0.07 + i * 0.045)],
+             0.040, 0.026, 'bone')
+    _ring(P, (0.30, -0.66, 0.045), 0.21, axis='z', slot='dark', rad=0.038, n=14)
+    _ring(P, (0.30, -0.66, 0.105), 0.17, axis='z', slot='dark', rad=0.034, n=14)
+
+    P.used_pack = False
+    return P
+
+
+BUILDERS.update({"hurdleman": hurdleman})

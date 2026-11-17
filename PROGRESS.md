@@ -8225,3 +8225,10 @@ Fast-forwarded to origin/hub (684bb23) then merged origin/main, clean. `git diff
 MEASURED: web/icons 2,434,146 bytes on disk (520 WebP + manifest) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY, so the thumbnails still match the source set.
 SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta default-src 'none' unchanged. Live dot red --live #e5484d.
 Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked on purpose (delete refused on this machine; none is a deliverable). Not published; READY TO PUBLISH stands from 03:50, routed to team lead, supervisor decides.
+
+## U50 (2026-11-17 05:56 CT) - HUD: _l72_test can no longer print a clean finish on nothing (U49 fault 2), proved by deliberate break
+TAKE THIS NEXT gave HUD: no new HUD row (a463b7d plan sync only); took U49's NOT-DONE remainder. Lock RUNNING 05:55, IDLE 05:56 (~2 min, under the 15 cap, inside :52-:07).
+FIX (tools/_l72_test.gd, my lane's own file): old ending printed "DONE fails=0" and exit 0 even when no lord shot was measured. Now: audited counter of gated shots that really measured a lord; floor = one per lord run; overall frame cap 40000; verdict OK (rc 0) / FAIL (rc 1) / NO VERDICT (rc 2). New user args: lords=N (run first N lords), break_noaudit (frame report returns nothing).
+PROOF (windowed 1920x1080, lords=1): parse 0 errors; normal -> "L72_TEST OK fails=0 audited=2" rc 0, hollow_king inside=28/28 at all five shots, cam_in_solid=false; break_noaudit -> "NO VERDICT - only 0 gated shots audited, need 1" rc 2.
+NOT DONE: fault 3 (_l73_test cap prints FAIL) needs a long run - next engine slot, one chunk. Full 8-lord _l72 run not repeated this hour (1 lord proves the verdict path).
+NEEDED FROM MR. E: nothing.

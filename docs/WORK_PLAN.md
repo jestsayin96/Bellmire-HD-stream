@@ -813,6 +813,306 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 11:58 CT by the team lead (clock off the machine: 2026-11-17T11:58:46-06:00).
+The 11:58 block immediately below SUPERSEDES the 10:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 11:58 CT. SIX LANES MERGED (main 325babc -> 876899c).
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 10:58 ROWS.
+***
+*** AND THIS IS THE FIRST HOUR THE TEAM LEAD TICKS. I HAVE TICKED FOUR THINGS BELOW AND
+*** REFUSED TO TICK THREE, AND THE REFUSALS ARE THE MORE USEFUL HALF.
+================================================================================
+
+*** MERGED: main 325babc -> 876899c, six merges, no force, nothing rewritten, no branch deleted.
+*** THREE CONFLICTS, all root PROGRESS.md (hub, hud-ui, chatbot). 3 marker lines stripped each by
+*** state machine, BOTH SIDES KEPT, and the residual count was taken ON THE FILE THAT CONFLICTED
+*** (root PROGRESS.md, not docs/PROGRESS.md): 0 markers left after each of the three.
+  LAPTOP (game build) e8653e3 - S17: dungeon-pack axes and hammers as axe/mace t1-3 + the edge fix.
+  CONTENT            b093215 - C-89: barks deepened a tenth time (+47).
+  ART                a9afaa2 - the TANNER, nineteenth miniboss, + the parchment answer the HUD needed.
+  HUB                6f4264e - H32 standing check 11:45; web/ unchanged, no publish claim.
+  HUD-UI             ab340fb - U55: the rarity hue ladder in ui_theme.gd + dormant Satchel rows.
+  CHAT BOT           1807d16 - B29: the sixth COMMANDS_DATA guard; six for six.
+
+*** WHAT I TICKED. FOUR. ***
+
+  [x] C-89 (content) - TICKED. COUNTED, NOT TAKEN. barks enter 236 / lord 224 / trap 227 /
+      hurt 221 / drink 215 / misfire 221 = 1,344, against 228/217/219/213/207/213 = 1,297 last
+      hour. Delta +8 +7 +8 +8 +8 +8 = +47. The claim was "+47". It is 47. Tenth cycle, tenth
+      honest count. `_note_c89` is correct practice and the audit carries it.
+
+  [x] B29 (chat bot) - TICKED. The sixth COMMANDS_DATA guard is real and I read it rather than
+      taking the verdict: chatcmd.gd:799 loops BOTH published cooldowns, `cooldown_s` and
+      `twitch_cooldown_s`, and fires on both red paths - key MISSING (:801) and key present but
+      not a positive number (:806). That is the right shape: it is the gap between the PUBLISHED
+      wait in docs/COMMANDS.md and the ENFORCED one that can lie, and both keys can now only lie
+      loudly. Six of six green on main 325babc, its three files unchanged by hash, nothing queued
+      after the battery.
+
+  [x] THE TANNER, nineteenth miniboss (art) - TICKED, AND I LOOKED AT ALL THREE VIEWS MYSELF
+      RATHER THAN READING THE VERDICT. Register: verdict GREEN, ok true, errors [], 21 pairs (up
+      from 20 - the nineteenth is in it), blank_check 3 files / 0 failures. Tanner creature_h 2.75,
+      hero_h 2.45, ratio 1.12, pair_w 4.36, fits_frame true.
+      FIT IS THE ACCEPTANCE TEST AND IT PASSES ON ALL THREE: front, side and back each show a
+      complete body, feet on the ground, no clipping, cape and plate consistent view to view, and
+      the beam-and-rack prop reading the same way from every angle. The ratio is art's own number
+      and the game build does not need to re-derive it.
+      ONE OBSERVATION, NOT A DEFECT AND NOT AN ITEM: the body reads as a KNIGHT. The trade reads
+      only from the prop beside it - take the rack away and nothing says tanner. I am not calling
+      that wrong and I am not writing you an item for it; the freeze means a redesign nobody asked
+      for is not work. Judge it yourself and say either way.
+
+  [x] THE RARITY-HUE LADDER CONFIRMATION (art) - TICKED. I ASKED THIS AT 10:58 AND IT IS ANSWERED
+      IN FULL, IN WRITING, IN THE ONE PLACE THAT KEEPS THE COUNT OF TABLES AT ONE. Read off
+      tools/art/icons.py myself: :659 RARITY_HUE confirmed CANONICAL exactly as handed over - eight
+      rungs, junk/starting/common deliberately bare, no cost-quartile fallback. And the parchment
+      question is answered at :691 rather than deferred: RARITY_HUE_PARCHMENT, which is the base
+      table with ONE rung changed - uncommon -> (0.62, 0.66, 0.72), a cool pewter. The reasoning is
+      written down beside it and it is the right call: dropping white would make the first rung a
+      viewer earns the only invisible one, so the INTERFACE takes a variant and the LADDER does not
+      move. That is a lane answering a cross-lane question without forking a table.
+
+*** WHAT I DID NOT TICK. THREE, AND WHY. ***
+
+  SYSTEM 2 - NOT TICKED. BOTH HALVES ARE PART-LANDED AND NEITHER IS WHOLE.
+    The engine half: swords at S16, axes and maces at S17 - and the lane's own words are "second
+    half PART 1". Dagger, staff and crossbow are still unwired. The HUD half is below.
+    WHAT I VERIFIED OF S17, BY LOADING THE FILE AND BY LOOKING: gear.gd:172 KINDS["axe"] takes
+    axe_common/uncommon/rare.glb and :173 KINDS["mace"] takes hammer_common/uncommon/rare.glb,
+    both off the DUN pack already licensed at S16, so no new licence row is owed. EDGE_MATS is real
+    at gear.gd:1748 and tint_piece at :1750 skips a material whose resource_name is in it (:1769) -
+    that is the lane's own decision, taken on a defect it shipped, and the freeze does not touch it.
+    I LOOKED AT s17_axe_t2_close.png AND IT IS THE EVIDENCE: a bearded axe head in grey STEEL,
+    unwashed by the leather tint, haft in the fist, guard at the knuckles, scaled to the body. The
+    edge fix is proved by that picture and not by the verdict line.
+    *** WHAT I FOUND IN THE WIDE SHOT THAT THE LANE DID NOT NAME, AND IT IS THE SAME QUESTION AS
+    LAST HOUR'S: *** in s17_front.png the middle figure is labelled "Bearded Greataxe" and shows no
+    axe at all from that angle, and the leftmost figure's mace renders as a FLOATING TRANSLUCENT
+    ORANGE object beside the hip rather than a weapon in a hand. I cannot tell from this shot
+    whether the greataxe is hidden behind the body or absent, and whether the orange is an intended
+    ember material or a wrong one. THAT IS PRECISELY WHAT A FIT SHOT EXISTS TO SETTLE. It is in the
+    row below. I am not calling either a defect from one frame.
+
+  U55 / THE HUD HALF OF SYSTEM 2 - NOT TICKED, AND THE GAP IS A SEQUENCING ACCIDENT, NOT A FAULT
+    OF THE HUD LANE. SAY THAT FIRST BECAUSE IT IS THE PART THAT MATTERS.
+    ui_theme.gd:178 mirrors art's RARITY_HUE correctly - four hued rungs plus uncommon, common
+    bare, no quartile guess - and RARITY_INK at :187 is the lane's own parchment contrast work,
+    which is right and is why its harness caught legendary at 3.83:1 and darkened it. I looked at
+    u55_125.png: blue, purple, tangerine and red all read cleanly on parchment and the bare rows
+    stay ink. That is good work.
+    *** BUT ui_theme.gd TAKES uncommon = PURE WHITE (1.00, 1.00, 1.00), AND ART HAS NOW ANSWERED
+    THAT THE INTERFACE TAKES THE PEWTER VARIANT. *** THE HUD COULD NOT HAVE KNOWN. Art's answer
+    was committed at 11:56:16 on origin/art; the HUD's U55 was built and rendered between 11:54 and
+    11:57 on hud-ui. The answer reaches hud-ui only through THIS merge. Nobody was slow and nobody
+    guessed - the HUD did exactly what it was told, which was "build the other four rungs, do not
+    guess uncommon", and it is the fifth rung that moved underneath it.
+    *** AND ONE THING THE HARNESS DID NOT CATCH, FOUND BY LOOKING AT THE LANE'S OWN SHOT: *** in
+    u55_125.png the last row reads "Hand-me-down boots (no stored r" and collides with the value
+    column, which then reads "for the look". The name overruns and the two columns overlap. The
+    verdict line says U55_HUE OK. The picture says the row is broken. Same class as the blade
+    finding last hour: the number was kinder than the picture.
+
+  THE HUB'S ROW - NOT TICKED, THIRD HOUR. The standing check was clean and I re-ran it: web/ is
+    byte-identical across main and hub. AND I CAN NOW GO ONE BETTER THAN THE LANE DID, BY
+    COMPUTING RATHER THAN ASSUMING: origin/gh-pages^{tree} is 6dd253d, and origin/hub:web is
+    6dd253d, and HEAD:web on main is 6dd253d. ALL THREE ARE THE SAME TREE. So the publish landed
+    the right bytes and the subtree method did what it claimed.
+    THAT STILL DOES NOT ANSWER THE QUESTION. A tree can be right and the served page still wrong -
+    a Pages build can fail, a path can 404, a CSP can bite only in a browser. NOBODY HAS LOOKED AT
+    THE LIVE PAGE. The row stands.
+    I RAN NO PUBLISH VERIFICATION GATE THIS HOUR BEYOND THE TREE COMPARISON, because the lane made
+    no "ready to publish" claim and an unearned gate report is the same fault class as a lying one.
+
+*** LOCK DISCIPLINE, 11:58 CT. ***
+No lane overran its cap, no lock was cleared on age, no lane was starved, and no future stamp was
+written. Game build 11:08:08 -> IDLE 11:25:52 (about 18 minutes across two named relaunches, both
+on their own lines with their own expected finishes - which is the correct shape). Chat bot
+11:46:50 -> IDLE 11:51:07. HUD 11:54:32 -> IDLE 11:57:18, FOUR relaunches, every one on its own
+line with its own expected finish and its own stated reason, two of them because the lane looked at
+its own frame and found it blank or hero-less and said so. That is the protocol working, not
+thrashing.
+ONE DECLARATION OVER THE CAP, NAMED AS A FLAG AND NOT AN INCIDENT, per the rule to check the
+declaration and not just the outcome: the game build's 11:08:08 claim declared 11:35, which is
+26m52s against a 25-minute cap. Its actual hold was 18 minutes, inside the :40 hard release. That
+is the FOURTH consecutive hour it has declared over by under two minutes - 09:08, 10:08, 11:08 and
+this one - and four in a row is a pattern in the row below rather than four separate flags.
+THE CLEAN-HOUR COUNT: the 10:58 seat reset it to zero for the future stamp inside that hour. THIS
+HOUR IS CLEAN, so the count is ONE. I am not writing "third" and I am not inheriting a streak.
+
+*** THE DEAD-DATA AUDIT, 11:58 CT - MEASURED ON THE MERGED TREE, AND IT CORRECTS THE BASELINE. ***
+2,071,202 chars of script, 46 files (scripts/*.gd + web/*.js ONLY - tools/ is test code and was NOT
+counted). 110 top-level keys over 12 files in data/.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO. Unchanged. The backlog stays drained. The S17 dungeon
+    axes and hammers are referenced the hour they landed (gear.gd:172-173).
+  - UNREAD LIVE DATA KEYS: ZERO. Unchanged.
+  *** AND THE BASELINE'S OWN NUMBER WAS WRONG, WHICH IS MINE TO FIX AND NOT A FINDING AGAINST
+  *** ANY LANE. *** Successive baselines have said "19 keys return zero literal hits". The honest
+  raw figure off this tree is FORTY-SIX. The extra twenty-seven are not new dead data - they are
+  keys the curated list quietly dropped: `_source` in all twelve data files, `_format`,
+  `_measured`, `_looks`, `measured`, `draw`, `causality`, `budget`, `district_rules`, bosses `rule`
+  and `uniques`, ranks `rule` (all three named as PROSE STRINGS in the D97 tick itself), and the
+  content notes `_note_c58` and `_note_c61` which are the same class as `_note_c54`/`_note_c71` and
+  were never listed. The curated figure was counting a subset and reporting it as the whole.
+  ALL FORTY-SIX ARE ACCOUNTED FOR IN FIVE CATEGORIES AND NONE IS AN ITEM:
+      * FILE METADATA, never items: `_source` x12, `_format`, `_measured`, `_looks`, `measured`.
+      * RUNTIME-BUILT, READ, DO NOT WIRE: lord_intros_alt and unique_intros_alt (delve.gd
+        intro_pool builds the key). Guard 2.
+      * FOUR DECLARED DEAD IN WRITING (D98, closed, do not re-open): townsfolk, phase2_words,
+        phase2_words_alt, town_levels_for_the_desktop. NOTE: my crude suffix guard flags
+        phase2_words_alt as an _alt candidate. IT IS NOT ONE - it is declared dead and D98 says so.
+        That is the guard being coarse, not a new finding.
+      * PROSE / SPEC KEYS, not items: biomes `technique`; bosses `boss_floors`, `rule`, `uniques`,
+        `draw`; origins `chronicle_line`, `word_order`, `casing`, `causality`, `budget`; ranks
+        `promotion_line`, `one_roll`, `rule`; strains `_gating`; world `canon_silences`,
+        `district_rules`.
+      * SIX CONTENT CYCLE NOTES: items `_note_c54`, `_note_c58`, `_note_c61`, `_note_c71`;
+        lore_lines `_note_c70`, `_note_c87`, `_note_c88`, `_note_c89`. (That is eight entries over
+        two files; NEW THIS HOUR is `_note_c89`.) No lane wires these. Content keeps writing them.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools (delve.gd
+    intro_pool), cooldown_s (chatcmd.gd:818, read by cooldown(), enforced at :929 - the old
+    baseline said :800, line drift only).
+  - `twitch_cooldown_s` REMAINS STRUCK. It is read and enforced and it is not a finding.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** SYSTEM 2 SECOND HALF, PART 2 - DAGGER, STAFF, CROSSBOW. AND SETTLE TWO
+                   THINGS IN MY WIDE SHOT BEFORE YOU DO, BECAUSE I CANNOT SETTLE THEM FROM ONE
+                   FRAME AND YOU CAN. *** Same CC0 dungeon pack, same three tiers, into KINDS the
+                   way the sword and the axe went in. The licence row is written; you need no new one.
+                   FIRST, TWO QUESTIONS OFF s17_front.png, AND BOTH ARE FIVE MINUTES. (1) The
+                   middle figure is labelled "Bearded Greataxe" and shows NO axe from the front.
+                   Hidden behind the body, or absent? If it is absent, NAME IT - that is worth more
+                   than a reframe that hides it. (2) The leftmost figure's mace renders as a
+                   FLOATING TRANSLUCENT ORANGE shape beside the hip rather than a weapon in a hand.
+                   If that is the Emberhaft's intended ember material, say so and I will stop
+                   raising it; if it is a wrong material or a bad anchor, it is a defect in what you
+                   shipped and fixing it is yours at any time.
+                   YOUR EDGE FIX IS PROVED AND I SAID SO ABOVE - I looked at the t2 close and the
+                   steel is steel. That decision was yours to make, you made it, you wrote down why.
+                   ONE PROCESS NOTE, NOT A REPRIMAND: you have now declared a finish over the
+                   25-minute cap four hours running - 09:08, 10:08, 11:08, and 11:08 again today -
+                   each by under two minutes, and every actual hold has been well inside it. Your
+                   holds are fine. It is the DECLARATION that keeps crossing. Declare :33 instead
+                   of :35 and the flag stops appearing in my report every hour.
+                   DO NOT go on to Systems 3 or 4 and do not pull a Phase 2 system.
+
+  CONTENT      ->  *** UNCHANGED AND UNTHROTTLED. TENTH CYCLE, TENTH HONEST COUNT, +47 CLAIMED AND
+                   +47 MEASURED. TICKED. *** I have nothing to correct and I will not invent a
+                   reason to change your row. The System 2 weapon-flavour opening still stands and
+                   is still yours if you want it - and it is now wider than last hour, because axes
+                   and maces reach a hand too, not only swords. Same condition as before: write it
+                   into a pool that is ALREADY READ, or name in your entry which reader would have
+                   to be built. Do not open a new top-level key that nothing reads.
+                   Your `_note_` keys are correct practice. I have just corrected the audit baseline
+                   that had been under-reporting them - `_note_c58` and `_note_c61` were yours and
+                   had been quietly missing from the count for days. Nothing changes for you.
+                   Still forbidden: townsfolk, phase2_words, phase2_words_alt,
+                   town_levels_for_the_desktop. The prose keys stay and are not yours to remove.
+
+  ART          ->  *** THE TANNER IS TICKED AND SO IS THE LADDER CONFIRMATION - AND THE WAY YOU
+                   ANSWERED THE PARCHMENT QUESTION IS THE BEST THING ON THE BOARD THIS HOUR. ***
+                   You were asked a cross-lane question that another lane was blocked on, and the
+                   easy answers were both bad: let them fork a table, or move the canonical ladder
+                   to suit one panel. You did neither. You kept RARITY_HUE canonical, wrote the
+                   variant beside it as RARITY_HUE_PARCHMENT with one rung changed, and wrote down
+                   WHY in the file rather than in a summary - so the count of tables stays at one
+                   and the next seat can read the reasoning without finding you. That is the
+                   standard for a cross-lane answer.
+                   NEXT, AND IT IS YOUR CHOICE BETWEEN TWO THINGS ALREADY ON THE BOARD - say which
+                   and why: ART'S HALF OF SYSTEM 2 (the 24 KayKit weapon models at three tiers),
+                   which is one of Mr. E's own and is the better of the two if you want my read,
+                   because the game build is wiring the pack right now and your half is what it
+                   draws from; OR the TWENTIETH MINIBOSS on the usual terms - checked against the
+                   nineteen first so it is not a re-skin, register re-run, ratio / pair_w /
+                   blank_check and failures stated.
+                   ONE THING TO JUDGE, NOT AN ITEM: the Tanner's body reads as a knight and the
+                   trade reads only from the prop. Your call entirely - I am not writing you a
+                   redesign nobody asked for.
+
+  HUB          ->  *** SAME ROW, THIRD HOUR - AND I HAVE NOW DONE THE HALF OF IT THAT CAN BE DONE
+                   BY COMPUTING, SO THE ONLY THING LEFT IS THE HALF THAT NEEDS EYES. *** I compared
+                   the trees myself: origin/gh-pages^{tree}, origin/hub:web and main's HEAD:web are
+                   ALL 6dd253d. The publish put the right bytes in the right place and the subtree
+                   method is vindicated. Your standing checks have been clean every hour and I have
+                   verified them every hour.
+                   WHAT IS STILL NOT DONE IS THE ONLY THING THAT WAS EVER ASKED: OPEN THE LIVE PAGE
+                   IN A BROWSER AND LOOK AT IT. Not the local build. The served one. Identical trees
+                   do not prove a Pages build succeeded, that no path 404s, or that the CSP does not
+                   bite in a real browser - those fail AFTER the bytes are correct, which is exactly
+                   why the tree comparison cannot close this.
+                   Icons present and not 404ing, no page scroll, the hostile-name test still
+                   rendering as literal text, and the state checks (?state=empty ?state=fail
+                   ?state=stale ?mock=chronicle ?mock=crowd ?open=1) behaving on the PUBLISHED copy.
+                   TAKE A SCREENSHOT AND LOOK AT IT. Clean -> one entry and this closes for good.
+                   Broken -> it is a real defect in what you shipped and fixing it is yours.
+                   DO NOT PUBLISH AGAIN YOURSELF. Publishing was never the hub lane's.
+                   The scarglass_ring naming gap is still one line and still not a break.
+
+  CHAT BOT     ->  *** B29 IS TICKED. STAND DOWN AGAIN, AND THE STAND-DOWN IS THE DELIVERY. ***
+                   You closed your own second residual rather than letting it sit, and you closed it
+                   the right way: the sixth guard covers BOTH published cooldowns on BOTH red paths,
+                   and you proved each red path and restored the file byte-identical. I read
+                   chatcmd.gd:799-807 myself rather than taking the verdict. That is a real defect
+                   closed in your own shipped surface, which is exactly what a dry lane is for.
+                   NOTHING IN SYSTEMS 2, 3 OR 4 TOUCHES THE COMMAND SURFACE, so Phase 2 still gives
+                   you no item. Re-prove only if main moves materially - and it did move this hour
+                   (325babc -> 876899c), though none of it is yours: axes, barks, a miniboss, a hub
+                   check and HUD theme tokens. Do not chase the B25 hang. Do not take another lane's
+                   gate. If you judge there is nothing worth doing, write that down and it is a
+                   delivery.
+
+  HUD          ->  *** ART ANSWERED, THE ANSWER IS NOW ON YOUR BRANCH, AND IT MOVES ONE RUNG. ALSO
+                   I FOUND A BROKEN ROW IN YOUR OWN SHOT THAT YOUR HARNESS CALLED OK. *** Two
+                   things, both small, and NEITHER is a fault of yours - read the first paragraph
+                   before you read the second.
+                   (1) THE PEWTER RUNG. Art answered the parchment question at tools/art/icons.py:691:
+                   the INTERFACE takes a variant, `RARITY_HUE_PARCHMENT`, which is the canonical
+                   table with ONE rung changed - uncommon -> (0.62, 0.66, 0.72), a cool pewter -
+                   because pure white on a parchment panel is paper, not a hue, and that would make
+                   the first rung a viewer earns the only invisible one. Your ui_theme.gd:179 has
+                   uncommon at pure white. YOU COULD NOT HAVE KNOWN: art committed the answer at
+                   11:56:16 on origin/art while you were rendering, and it reaches hud-ui only
+                   through this hour's merge. You did exactly what the row told you - build the four,
+                   do not guess the fifth - and the fifth moved underneath you. Take the pewter now.
+                   Keep RARITY_INK as yours: it is the contrast work, it is not art's table, and
+                   your harness catching legendary at 3.83:1 and darkening it is the right instinct.
+                   (2) A DEFECT IN THE SHOT, FOUND BY LOOKING. In u55_125.png the last row reads
+                   "Hand-me-down boots (no stored r" and runs straight into the value column, which
+                   reads "for the look". The name overruns and the two columns collide. U55_HUE
+                   printed OK. The picture says that row is broken. Fixing a defect you shipped is
+                   never a new item and the freeze does not touch it - but ALSO ask what the harness
+                   would have to check to have caught it, because a gate that passes a collided row
+                   is measuring the colour and not the layout, and we have retired instruments for
+                   less.
+                   Re-render at 100/125/150 when both are in, and look at the frames yourself - you
+                   already caught two blank ones this hour, which is why I trust you to catch this.
+
+================================================================================
+*** FOR THE SUPERVISOR - TWO THINGS. ***
+  1. *** THE HUB'S LIVE PAGE IS NOW THREE HOURS UNANSWERED AND IT IS THE LAST THREAD ON YOUR
+     PUBLISH. *** New evidence this hour, computed not assumed: origin/gh-pages^{tree} ==
+     origin/hub:web == main HEAD:web == 6dd253d. The bytes you approved are the bytes that are
+     served, and the subtree method held. What remains is that no human or lane has OPENED the page.
+     MY RECOMMENDATION: leave it with the hub lane one more hour - the row is now written in plain
+     words and the lane has been clean every hour - and if it comes back unanswered again at 12:58
+     I will say so rather than quietly re-issuing it a fourth time. No action needed from you unless
+     you want it escalated sooner.
+  2. *** FIRST HOUR OF TICKING, AND HERE IS WHAT I DID WITH IT SO YOU CAN REVIEW THE JUDGEMENT AND
+     NOT JUST THE OUTCOME. *** Ticked four: C-89 (+47 counted by me), B29 (guard read line by line),
+     the Tanner (three views looked at, register loaded), and the ladder confirmation. Refused three:
+     System 2 (both halves part-landed), U55 (one rung stale through no fault of the lane, plus a
+     collided row its gate passed), and the hub row (not done). Your 11:40 confirmation that the
+     HUD's rarity work is the HUD half of System 2 is what let me judge U55 as half of an existing
+     item rather than as an invention - thank you for closing that one; it is settled and I am not
+     re-raising it.
+  NOT FOR YOU, RECORDED SO IT IS NOT LOST: my own scheduled-task prompt carries a stale dead-data
+  baseline (the 19-vs-46 undercount corrected above). That is a mechanical fault in my own house
+  and I am fixing it this run, not routing it.
+
+================================================================================
 Updated 2026-11-17 10:58 CT by the team lead (clock off the machine: 2026-11-17T11:04:23-06:00).
 The 10:58 block immediately below SUPERSEDES the 09:58 block and every row under it.
 

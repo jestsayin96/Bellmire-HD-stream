@@ -100,8 +100,13 @@
   </defs>
 </svg>
 
-<div class="wrap">
+<div class="wrap app" id="app">
 
+  <!-- H32 pass 1: the Twitch-shaped shell. Three independent scroll regions under one fixed
+       top bar: a LEFT RAIL (live heroes and bands - filled in pass 2), the STAGE in the middle
+       (everything the page had before, unchanged), and a RIGHT COLUMN for guild chat (pass 3).
+       The PAGE itself does not scroll (H13). Layout only: no new data, no new fetch, no CSP change. -->
+  <div class="topbar" id="topbar">
   <header class="hero">
     <div class="crest">
       <!-- The Bellmire mark: the keep above the valley, the teal scar below it,
@@ -132,34 +137,6 @@
     </ul>
   </header>
 
-  <ul class="town" id="town" aria-label="The town"></ul>
-  <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
-
-  <!-- H25 Night watch: a page-owned toggle. It carries no snapshot data; app.js flips one class on <html>
-       and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
-  <div class="watchbar" id="watchbar">
-    <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
-    <button type="button" class="watchbtn hide" id="welcomeBtn">What is Bellmire?</button>
-    <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
-  </div>
-
-  <!-- H22: the first minute. A page-owned welcome for a newcomer: what Bellmire is, one live line built
-       in app.js from the snapshot already on the page (el()/textContent only), and three doors that
-       just switch to the tab that already does that job. Static copy only - no snapshot data in this
-       markup. Dismissed for good per browser (localStorage, whitelist-checked); ?welcome=1 forces it
-       open for a local check. It is an ordinary block in the flow: never a gate, never an overlay. -->
-  <section class="welcome hide" id="welcome" aria-labelledby="welcomeTitle">
-    <h2 id="welcomeTitle">Welcome to Bellmire</h2>
-    <p>Bellmire is a real town, and it is being run right now, live on stream. Its heroes are the people watching: they take a name, march down the scar, win loot, and sometimes die, and the town writes every bit of it down. This page is the town&rsquo;s ledger, read fresh every minute. Look at anything here; to act, you speak in Twitch chat.</p>
-    <div class="wl-live" id="welcomeLive" role="status" aria-live="polite"></div>
-    <ul class="doors">
-      <li><button type="button" class="door" data-door="commands"><span class="door-k">Get a hero</span><span class="door-d">The chat commands that give you a name and a place in the town.</span></button></li>
-      <li><button type="button" class="door" data-door="chronicle"><span class="door-k">Watch what is happening</span><span class="door-d">The Chronicle: raids, deaths, finds and delves as they happen.</span></button></li>
-      <li><button type="button" class="door" data-door="dice"><span class="door-k">Learn the rules</span><span class="door-d">The Guild Hall die and the town&rsquo;s rolls: how fate is settled here.</span></button></li>
-    </ul>
-    <button type="button" class="welcome-dismiss" id="welcomeDismiss">Got it &ndash; don&rsquo;t show this again</button>
-  </section>
-
   <!-- H24: the finder. One field over everything the page already holds in memory (heroes,
        the fallen, bands, lords, remembered Chronicle lines). Page-local: no fetch, no write
        path. Results are built in app.js with el() only. -->
@@ -173,6 +150,26 @@
       <ul class="finder-list" id="finderList" role="listbox" aria-label="Places to go"></ul>
     </div>
   </div>
+
+  <!-- H25 Night watch: a page-owned toggle. It carries no snapshot data; app.js flips one class on <html>
+       and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
+  <div class="watchbar" id="watchbar">
+    <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
+    <button type="button" class="watchbtn hide" id="welcomeBtn">What is Bellmire?</button>
+    <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
+  </div>
+
+  </div>
+
+  <div class="shell" id="shell">
+    <aside class="rail" id="rail" aria-label="Live in Bellmire">
+      <p class="rail-ph">Live in Bellmire</p>
+    </aside>
+
+    <div class="stagecol" id="stagecol">
+      <div class="stage-top">
+  <ul class="town" id="town" aria-label="The town"></ul>
+  <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
 
   <!-- H13: no-scroll, tabbed layout. A viewer picks one section at a time with a
        tab button here; app.js shows the matching tabpanel below and remembers the
@@ -198,6 +195,25 @@
     <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
     <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
+
+      </div>
+      <div class="stage-scroll" id="stageScroll">
+  <!-- H22: the first minute. A page-owned welcome for a newcomer: what Bellmire is, one live line built
+       in app.js from the snapshot already on the page (el()/textContent only), and three doors that
+       just switch to the tab that already does that job. Static copy only - no snapshot data in this
+       markup. Dismissed for good per browser (localStorage, whitelist-checked); ?welcome=1 forces it
+       open for a local check. It is an ordinary block in the flow: never a gate, never an overlay. -->
+  <section class="welcome hide" id="welcome" aria-labelledby="welcomeTitle">
+    <h2 id="welcomeTitle">Welcome to Bellmire</h2>
+    <p>Bellmire is a real town, and it is being run right now, live on stream. Its heroes are the people watching: they take a name, march down the scar, win loot, and sometimes die, and the town writes every bit of it down. This page is the town&rsquo;s ledger, read fresh every minute. Look at anything here; to act, you speak in Twitch chat.</p>
+    <div class="wl-live" id="welcomeLive" role="status" aria-live="polite"></div>
+    <ul class="doors">
+      <li><button type="button" class="door" data-door="commands"><span class="door-k">Get a hero</span><span class="door-d">The chat commands that give you a name and a place in the town.</span></button></li>
+      <li><button type="button" class="door" data-door="chronicle"><span class="door-k">Watch what is happening</span><span class="door-d">The Chronicle: raids, deaths, finds and delves as they happen.</span></button></li>
+      <li><button type="button" class="door" data-door="dice"><span class="door-k">Learn the rules</span><span class="door-d">The Guild Hall die and the town&rsquo;s rolls: how fate is settled here.</span></button></li>
+    </ul>
+    <button type="button" class="welcome-dismiss" id="welcomeDismiss">Got it &ndash; don&rsquo;t show this again</button>
+  </section>
 
   <main id="main">
     <section class="panel big-msg hide" id="nothing"></section>
@@ -442,6 +458,13 @@
     The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
     <br>Bellmire HD &middot; JestSayin
   </footer>
+      </div>
+    </div>
+
+    <aside class="chatcol" id="chatcol" aria-label="Guild chat column">
+      <p class="rail-ph">Guild chat</p>
+    </aside>
+  </div>
 </div>
 
 <script src="app.js" defer></script>

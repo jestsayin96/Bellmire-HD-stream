@@ -1423,3 +1423,97 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .sea-sub { font-size: .75rem; opacity: .7; overflow-wrap: anywhere; }
 .sea-val { white-space: nowrap; text-align: right; }
 .sea-val .bunit { margin-left: 4px; font-size: .75rem; opacity: .75; }
+
+/* ===========================================================================
+   H32 pass 1 - THE TWITCH-SHAPED SHELL (Mr. E, 16 Nov: "make the hub feel like you are
+   navigating on twitch"). We borrow Twitch's NAVIGATION GRAMMAR, not its colours and never its
+   brand: a fixed top bar, a persistent LEFT RAIL of live things, the STAGE in the middle, and a
+   persistent RIGHT COLUMN for chat. The palette ruling is untouched (ink/charcoal ground,
+   parchment, one teal accent, restrained gold).
+   H13's no-scroll ruling holds: the PAGE never scrolls; the rail, the stage and the chat column
+   each scroll INSIDE themselves (three independent overflow regions). Layout only - no new data,
+   no new fetch, no CSP change. Night watch and the OBS overlay keep their own flow layouts
+   (everything shell-specific is scoped to html:not(.overlay):not(.watch)).
+   =========================================================================== */
+html:not(.overlay):not(.watch), html:not(.overlay):not(.watch) body { height: 100%; overflow: hidden; }
+html:not(.overlay):not(.watch) .app {
+  max-width: none; margin: 0; padding: 0;
+  height: 100vh; height: 100dvh;
+  display: flex; flex-direction: column; min-height: 0;
+}
+
+/* ---- top bar: brand | finder | night watch --------------------------------------------- */
+html:not(.overlay):not(.watch) .topbar {
+  position: relative; z-index: 30; flex: none;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px 22px;
+  padding: 7px 16px 9px;
+  background: linear-gradient(180deg, #1a120b, var(--night));
+  border-bottom: 1px solid rgba(198,146,47,.2);
+}
+html:not(.overlay):not(.watch) .topbar::after {   /* the harlequin band, kept as a thin strip under the bar */
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; pointer-events: none;
+  background: repeating-linear-gradient(90deg, var(--teal-ink) 0 28px, var(--gold-dk) 28px 56px);
+}
+html:not(.overlay):not(.watch) .topbar header.hero {
+  display: flex; align-items: center; gap: 10px; padding: 0; margin: 0;
+  background: none; border: 0; box-shadow: none; border-radius: 0; overflow: visible;
+}
+html:not(.overlay):not(.watch) .topbar header.hero .emblem { width: 34px; }
+html:not(.overlay):not(.watch) .topbar header.hero .wordmark { font-size: 1.55rem; }
+html:not(.overlay):not(.watch) .topbar header.hero .sub { margin: 1px 0 0; font-size: .78rem; }
+html:not(.overlay):not(.watch) .topbar header.hero .band { display: none; }
+html:not(.overlay):not(.watch) .topbar .finder { margin: 0; max-width: 560px; justify-self: center; width: 100%; }
+html:not(.overlay):not(.watch) .topbar .finder-label { display: none; }
+html:not(.overlay):not(.watch) .topbar .finder-input { border-radius: 999px; padding: 8px 16px; background: #0e0a06; }
+html:not(.overlay):not(.watch) .topbar .finder-panel { min-width: min(520px, 92vw); }
+html:not(.overlay):not(.watch) .topbar .watchbar { margin: 0; gap: 8px; flex-wrap: nowrap; }
+html:not(.overlay):not(.watch) .topbar .watchbtn { min-height: 36px; padding: 5px 14px; font-size: .86rem; white-space: nowrap; }
+html:not(.overlay):not(.watch) .topbar .watchhint { display: none; }
+
+/* ---- the three columns ------------------------------------------------------------------ */
+html:not(.overlay):not(.watch) .shell {
+  flex: 1 1 auto; min-height: 0;
+  display: grid; grid-template-columns: 250px minmax(0, 1fr) 330px;
+}
+.rail, .chatcol {
+  min-height: 0; min-width: 0; overflow-y: auto; overscroll-behavior: contain;
+  background: rgba(0,0,0,.22);
+}
+.rail { border-right: 1px solid rgba(198,146,47,.14); }
+.chatcol { border-left: 1px solid rgba(198,146,47,.14); }
+.rail-ph { margin: 0; padding: 12px 14px; font-size: .78rem; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--parch-dim); opacity: .75; }
+
+html:not(.overlay):not(.watch) .stagecol { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+html:not(.overlay):not(.watch) .stage-top { flex: none; padding: 10px 20px 0; }
+html:not(.overlay):not(.watch) .stage-top .town { margin: 0 0 8px; }
+html:not(.overlay):not(.watch) .stage-top .status { margin: 0 0 8px; }
+html:not(.overlay):not(.watch) .stage-top nav {
+  position: static; margin: 0 -20px; padding: 7px 20px; border-radius: 0; border: 0;
+  border-top: 1px solid rgba(198,146,47,.14); border-bottom: 1px solid rgba(198,146,47,.14);
+  backdrop-filter: none; background: rgba(0,0,0,.18);
+}
+html:not(.overlay):not(.watch) .stage-scroll {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: 16px 20px 28px; scroll-padding-top: 8px;
+}
+html:not(.overlay):not(.watch) .stage-scroll > footer { margin-top: 12px; }
+
+/* ---- narrower screens ------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  html:not(.overlay):not(.watch) .shell { grid-template-columns: 210px minmax(0, 1fr) 280px; }
+}
+@media (max-width: 900px) {
+  /* one column: the rail becomes a strip across the top, chat folds below the stage */
+  html:not(.overlay):not(.watch) .topbar { grid-template-columns: auto minmax(0, 1fr); padding: 6px 12px 8px; }
+  html:not(.overlay):not(.watch) .topbar .watchbar { display: none; }
+  html:not(.overlay):not(.watch) .topbar header.hero .sub { display: none; }
+  html:not(.overlay):not(.watch) .shell { display: flex; flex-direction: column; }
+  html:not(.overlay):not(.watch) .rail { flex: none; max-height: 78px; border-right: 0; border-bottom: 1px solid rgba(198,146,47,.14); overflow-x: auto; overflow-y: hidden; }
+  html:not(.overlay):not(.watch) .chatcol { display: none; }
+  html:not(.overlay):not(.watch) .stage-top { padding: 8px 12px 0; }
+  html:not(.overlay):not(.watch) .stage-top nav { margin: 0 -12px; padding: 7px 12px; }
+  html:not(.overlay):not(.watch) .stage-scroll { padding: 12px 12px 24px; }
+}
+/* the OBS overlay and Night watch keep their own flow layouts: no rail, no chat column there */
+html.overlay .rail, html.overlay .chatcol, html.watch .rail, html.watch .chatcol { display: none !important; }

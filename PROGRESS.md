@@ -8363,3 +8363,62 @@ left alive. Lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered o
 reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
 touched. The parse runs joined #jestsayin96 as the game always does on boot and said nothing.
 No secrets written anywhere.
+
+## B-cycle B25 - THE HANG IS THE HARNESS, AND IT HANGS ON HEALTHY DATA TOO (chat bot, 2026-11-17 07:47-07:51 CT)
+The row assigned nothing new and named the honest work: chase B23's unexplained hang with a
+capped, redirected run that prints a verdict either way. It is chased. It is REPRODUCED, and it
+is EXPLAINED one step further than "not the guard".
+
+### WHAT B24 LEFT AND WHAT THIS RUN CHANGED
+B24 proved break D (`what` removed from `enlist`) exits rc=0 in 20.6 s with stdout REDIRECTED TO
+A FILE under a 75 s cap. That cleared the guard. It did not account for the hang, because the one
+thing B24 changed was the thing it never changed back: the REDIRECT. B23 ran the same break with
+stdout on a PIPE NOBODY READ. So the single uncontrolled variable was the harness, not the data,
+and this run flipped it back deliberately.
+
+### THE MEASUREMENT - TWO RUNS, BOTH CAPPED, BOTH KILLED BY MY OWN CLOCK
+  RUN 1  break D applied, stdout on an UNREAD PIPE, 60 s hard cap
+         **HUNG. killed at 60.0 s, rc none, 73 bytes ever emitted** - the Godot banner line and
+         nothing after it. The same symptom B23 saw: alive, silent, no verdict, no exit code.
+  RUN 2  THE CONTROL. data/commands.json RESTORED HEALTHY (f37b1d2c6909), same unread pipe,
+         same 60 s cap.
+         **HUNG IDENTICALLY. killed at 60.0 s, rc none, 73 bytes.**
+THE CONTROL IS THE RESULT. Healthy data hangs exactly as the break does, so break D never had
+anything to do with it and neither did any of the five B23 guards. What hangs this Godot build is
+STDOUT ON A PIPE THAT IS NOT DRAINED; the same binary, same project, same data, with stdout
+redirected to a FILE, exits rc=0 in about 20 s.
+
+### WHAT IS PROVED AND WHAT IS STILL NOT
+PROVED: the condition. Unread pipe -> no progress, no exit, banner only, every time, data-
+independent. File redirect -> clean run. That is the variable isolated by a control.
+NOT PROVED: the mechanism. 73 bytes is far short of any ordinary pipe buffer, so "the buffer
+filled" is a guess and I am not writing it down as a finding. Something stalls this build at
+start-up when stdout is a pipe rather than a file or a console. Naming it would take a run I did
+not have the window for, and it costs nothing to leave unexplained now that the condition is
+known.
+STANDING ADVICE TO EVERY LANE, which is the whole use of this: NEVER LAUNCH GODOT WITH stdout ON
+AN UNREAD PIPE. Redirect to a file and read the file. A lane that pipes will see a hang that is
+not in its code, and will spend its slot looking for it in the wrong house - which is exactly what
+B23 and B24 cost this lane.
+
+### NO FILE OF MINE CHANGED
+`scripts/chatcmd.gd` 825b76127050, `data/commands.json` f37b1d2c6909 (14753 bytes, byte-identical
+to B20-B24; the break was applied from an in-run backup and restored from it), `docs/COMMANDS.md`
+1fb9a166c3bf (5771 bytes). No gate was re-run this slot and none is claimed; the six-for-six
+battery stands as B24 left it on main e3ec68a.
+
+### OWED
+- THIS LANE: nothing. The row's one named item is delivered.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Unchanged, eight cycles on.
+- `tools/` owner: nothing. No gate needs a cap for this - the cap belongs in the LAUNCHER.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+`.b25_run.log`, `.b25_control.log` and `.b25_commands.bak` written at the worktree root and ALL
+DELETED in the same run. Both Godot processes were ended by my own 60 s cap, both confirmed gone
+by tasklist, none left alive. Lock claimed 07:49:30 and released IDLE 07:51:10 - and my claim line
+carried a FUTURE STAMP (machine read 07:47:30 when I wrote 07:49:30); it is named in the lock file
+and here rather than left for the next reader to catch. No Twitch of any kind: 0 bits, nothing
+cheered or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as any
+account, no channel setting touched. Neither run reached the frame where the game joins chat - 73
+bytes is the banner alone. No secrets written anywhere.

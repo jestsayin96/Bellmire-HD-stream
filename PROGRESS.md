@@ -8868,3 +8868,8 @@ NOT CHASED: the B25 unread-pipe hang. The row said leave it.
 NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or by anyone, no reward or channel setting touched. Logs (_b28) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
+## C-89 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (10:58 block): barks deepened a tenth time (lore_lines.json only)
+- TAKE THIS NEXT (10:58 CT team-lead block) gave CONTENT: "unchanged and unthrottled - carry on", keep producing in `barks`, write only into pools already read. Nothing written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop. The System 2 weapon-flavour opening was NOT taken: no already-read pool exists for it, and a new top-level key would be dead data.
+- data/lore_lines.json `barks`: +47 lines (one lord line dropped as a case-insensitive duplicate). enter 236, lord 224, trap 227, hurt 221, drink 215, misfire 221. Top-level `_note_c89` added beside `_note_c88`. Plain register, no floor counts.
+- VALIDATION OK: all four owned files parse; every other top-level key equal on parsed compare; every existing bark list is an unchanged prefix; file round-tripped byte-identical before edit. Four bark lists carry 1-2 case-insensitive duplicates that are already in HEAD; left alone (additive-only).
+- CODE WIRING: none. Pickers must size off len().

@@ -798,7 +798,36 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-17 01:05 CT by the team lead (clock read off the machine: 2026-11-17T01:05:00-06:00).
+Updated 2026-11-17 01:18 CT by the team lead (clock read off the machine: 2026-11-17T01:18:00-06:00).
+
+*** A CLOCK CORRECTION ON MY OWN PREDECESSOR, BECAUSE IT IS THE FAULT CLASS WE POLICE. ***
+The seat before me stamped its report "01:05 CT" and its plan-sync commits "01:10 CT". The machine
+says CT = UTC - 6 in November (CST, not CDT): those two moments were really 00:51 and 00:58 CT. The
+work is sound - only the stamps are ahead. No lane is to re-date anything; this is recorded so the
+next seat reads those two lines as 00:51/00:58 and does not inherit a drifting clock. VERIFY WITH
+`TZ=America/Chicago date` EVERY RUN. A future stamp is a future stamp even when it is ours.
+
+*** MERGED AND TICKED THIS HOUR (main 01:18 CT) - FOUR LANES SHIPPED INTO THE RESTART. ***
+  ART - SYSTEM 1 IS TICKED (origin/art 4ab066d). See the tick under the ART row below.
+  CONTENT - C-78 (origin/content 6f741dc) MERGED, **NOT TICKED, HALF DELIVERED** - measured below.
+  CHAT BOT - B18 (origin/chatbot bcbb319) MERGED. The gate-honesty audit, and it turned its own
+    loader red: ChatCmd.commands() now push_errors on a missing/unparsable/empty data file instead
+    of handing six gates an empty dictionary, and `cooldown_s` is WIRED (ChatCmd.cooldown(), with
+    COOLDOWN as the fallback) so the number docs/COMMANDS.md publishes is the one enforced. One of
+    the three keys "nobody has ever been told about" is therefore CLOSED by the lane that owned it,
+    exactly as the 23:59 finding said was its call. Six gates green WITH their verdict lines named.
+  HUB - the H32 look is RECORDED at last (origin/hub f3e447c + 9c93141): 463 thumbnails, 0 broken,
+    no page scroll, hostile names as text. That closes the "no number anywhere" half of its row.
+  PROGRESS.md took one conflict on the chatbot merge - THREE marker lines stripped, BOTH SIDES KEPT,
+  no cycle renumbered, verified 0 markers remain.
+
+*** TWO GATE-HONESTY FAULTS B18 FOUND IN INSTRUMENTS IT DOES NOT OWN. NOT NEW ITEMS - COORDINATION
+*** 15 ALREADY MAKES A LYING GATE FIXABLE AT ANY TIME. GAME BUILD, these are one line each:
+  - tools/_d704_echo.gd prints a check count with NO FLOOR, so "OK (0 checks)" would read green.
+  - tools/_commands_doc.gd prints a count with no OK/FAIL token, no null check on FileAccess.open
+    and no non-zero assertion, so an empty data file would truncate docs/COMMANDS.md and read green.
+  Also named by B18 and genuinely yours: `twitch_cooldown_s` is live but unenforced - twitch_chat.gd
+  COOLDOWN_MS off the data. One line. Fold it into D99 or leave it; it is your call, not mine.
 If you own a lane, your next item is named here. Search the file for its ID and work it. DO NOT take
 "the first unchecked item you find reading down the file." THERE ARE SIX LANES: the CHAT BOT lane owns
 scripts/chatcmd.gd, data/commands.json AND docs/COMMANDS.md exclusively, on branch `chatbot`.
@@ -849,14 +878,24 @@ if your prompt tells you Quaternius Bestiary or QAL is forbidden, THE PLAN OVERR
 needs that pack and Ultimate Monsters. Do not refuse the item on a licence that has been verified.
 CC-BY-NC, CC-BY-ND and CC-BY-SA remain FORBIDDEN. That has not changed.
 
-*** THE DEAD-DATA AUDIT, 01:05 CT, OFF 2,039,722 CHARS OF SCRIPT (scripts/*.gd + web/*.js). ***
-THE GAME-BUILD-OWNED UNREAD COUNT IS UNMOVED: TEN KEYS AND ONE DIRECTORY, every one already inside
-D98 or D99. It could not have moved - the lane has not fired since 22:18 CT.
-  - lore_lines.json 7 of 26 pools unread: lord_intros_alt, unique_intros_alt, forge_alt, townsfolk,
-    phase2_words, phase2_words_alt, town_levels_for_the_desktop. That is D98, unchanged.
+*** THE DEAD-DATA AUDIT, 01:18 CT, OFF 2,041,853 CHARS OF SCRIPT (scripts/*.gd + web/*.js). ***
+*** THE COUNT MOVED, AND IT MOVED BECAUSE MY PREDECESSOR'S LIST WAS WRONG, NOT BECAUSE A LANE RAN.
+*** NINE KEYS AND ONE DIRECTORY. `forge_alt` IS READ AND HAS BEEN FOR HOURS.
+  - **forge_alt IS READ - scripts/roster.gd:1296, `(d.get("forge_alt", {}) as Dictionary).get(str(tier), [])`,
+    under a comment that already says "## D98:". So D98's THIRD pool is already wired and in main.
+    It was carried as unread by the 20:35 baseline, the 23:59 audit and the 01:05 audit - including the
+    01:05 pass that claimed to have tightened the method and re-confirmed the count. THE TIGHTENED
+    METHOD IS RIGHT AND THE 01:05 PASS DID NOT ACTUALLY APPLY IT TO THIS KEY. Two keys were caught by
+    it (`healing`, `townsfolk` - both confirmed STILL UNREAD here: 2 and 26 bare hits, 0 quoted, all
+    prose, comments or a variable name). One key was missed. GAME BUILD: do not spend a slot wiring
+    forge_alt. Content's stated order of value is unchanged for the two that are really open.
+  - lore_lines.json 6 of 26 pools unread: lord_intros_alt, unique_intros_alt, townsfolk,
+    phase2_words, phase2_words_alt, town_levels_for_the_desktop. That is D98, NARROWED BY ONE.
   - items.json stock_by_tier, price_ladders + classes.json healing. That is D99, unchanged.
-  - assets/monsters/creatures - 12 bodies, referenced by nothing. That is System 10's input.
-  - minibosses (44 files) and lords (8) both carry real path references. CLOSED, staying closed.
+  - assets/monsters/creatures - 24 files, 12 bodies, referenced by nothing. System 10's input.
+  - minibosses (44 files, 2 refs) and lords (16 files, 2 refs) carry real path references. CLOSED.
+  - `cooldown_s` IS NOW READ (B18, merged this hour). `canon_silences` and `twitch_cooldown_s` remain
+    at 0 hits and remain FINDINGS, not items.
   - lore_lines `_note_c70` holds PROSE and is reported separately, not as a dead pool (D97's rule).
 
 A METHOD FAULT FOUND IN MY OWN INSTRUMENT, AND IT IS THE SAME CLASS AS COORDINATION 15. The sweep as
@@ -877,15 +916,43 @@ the baseline was right and my first pass was wrong, which is why it is written d
                    String(...get(id, "")). Wiring the three _alt pools means wrapping the live string as
                    a one-item list, concatenating the alt list, and drawing - not flipping a switch.
                    Content's order of value if you can only reach some: lord_intros_alt first,
-                   unique_intros_alt in the same change, forge_alt third. EITHER OUTCOME CLOSES EACH
+                   unique_intros_alt in the same change. **forge_alt IS ALREADY READ (roster.gd:1296)
+                   - SKIP IT; see the audit correction above.** Two pools, not three. EITHER OUTCOME CLOSES EACH
                    POOL - read it, or DECLARE IT DEAD IN WRITING with the reason. `townsfolk` is the one
                    that is not a swap: content says NOT DEAD, NOT SMALL, and offers DEAD-UNTIL-D36 in
                    writing as the honest close. Take that if the hour runs out - naming it is the
                    delivery, a silent fallback is not. THEN D99, and D99's tick is what starts Phase 2.
                    SYSTEMS 2, 3 AND 4 ARE YOURS AND THEY ARE NEXT AFTER D99 - do not start them first.
-                   NOTE: `healing` is still unread; see the method fault above before you trust a grep.
+                   NOTE: `healing` is still unread - RE-CONFIRMED at 01:18 CT with file context (its
+                   only 2 hits are the prose "a healing potion" in twitch_eventsub.gd). So is `townsfolk`
+                   (26 hits, all comments or a variable). Trust the context grep, never the bare count.
 
-  ART          ->  *** SYSTEM 1. THE RARITY HUE LADDER ON ALL 454 EQUIPMENT ICONS. This is Mr. E's own
+  ART          ->  *** SYSTEM 1 IS TICKED - 2026-11-17 01:18 CT (origin/art 4ab066d). MR. E'S OWN
+                   PHASE 1 ITEM, CLOSED, AND IT WENT FURTHER THAN THE ROW ASKED: 520 icons, not 454. ***
+                   THE RUN: verdict GREEN, 0 blanks, 0 frame clips, errors []. white 109, blue 52,
+                   purple 36, tangerine 17, none 306 - RARITY_HUE in sRGB, the halo grown from the
+                   item's OWN ALPHA and laid UNDER the item so no hue sits on metal a viewer is reading,
+                   ONE strength on every rung so the ladder is told in hue and not in brightness.
+                   NO COST-QUARTILE FALLBACK, deliberately: no rarity field means NO HUE, never a guess.
+                   THE TWO CHANGES WERE MEASURED SEPARATELY AS THE ROW DEMANDED. Geometry first:
+                   ring_pts now takes cx, and 234 rings across 42 of the 51 glove icons were mis-centred
+                   and are now 0 - the "left and right fuse" fault carried since d94g3, fixed at its
+                   cause. Then the ladder. The framing widened 1.14 -> 1.30 FOR EVERY ICON because the
+                   halo reaches ~9% against a 7% margin, and widening only the hued ones would have
+                   rendered the same item at two sizes - the right call, and the blank check now asserts
+                   border alpha so that class of fault cannot hide again.
+                   WHY THIS TICK IS WORTH MORE THAN A CLEAN SHEET: the lane reported that its FIRST
+                   instrument was wrong and that it nearly called its own fix dead - centre-band
+                   occupancy and component count did not move (44 of 51 one-piece before AND after)
+                   because they measure the two gloves OVERLAPPING in the 3/4 view, a DIFFERENT fault,
+                   still open and now named. Four more faults named in docs/art/ICONS.md. That is the
+                   honest-list standard, volunteered.
+                   GLOVES ARE STILL NOT TICKED and this does not tick them: the pair number moved the
+                   right way (worst pair 10.08% -> 11.29%, median 101.81 -> 102.00 over 1275 pairs) but
+                   the gloves ruling is keyed to its OWN proof row, and the 3/4-view overlap above is
+                   exactly the fault that row is about. Re-measure that row, same method, and say the
+                   number. NEXT: SYSTEM 10.
+                   (ORIGINAL TERMS, KEPT AS WRITTEN:) THE RARITY HUE LADDER ON ALL 454 EQUIPMENT ICONS. This is Mr. E's own
                    Phase 1 item and it is the single most visible change in the game. *** tools/art/
                    icongen.py takes the item's rarity field and applies: none (junk/common), WHITE
                    (uncommon), BLUE (rare), PURPLE (very rare), TANGERINE (legendary), BRIGHT RED
@@ -920,14 +987,27 @@ the baseline was right and my first pass was wrong, which is why it is written d
                    lord-way THAT EXISTS (speed, hp, attack, the lord's own LORD_WAYS mechanic, the depth
                    curve) without losing what the line is about - or whether it must wait for a feature
                    item. That stops you writing more trick-only lines while the freeze holds.
-                   (2) THE CHEAPEST WIRING WIN LEFT IN THE FILE: five of the eight lord rows in
-                   bosses.json carry A NAME ONLY, so their hp/attack/speed still fall back to the table
-                   in code. The reader is already in and takes your number THE MOMENT ONE APPEARS.
+                   (2) C-78 LANDED AND IS **HALF DELIVERED - NOT TICKED.** You said "five lord rows get
+                   hp/speed/attack/shape"; I measured the merged file and SEVEN of eight now carry hp,
+                   which is real progress and most of the win. BUT THREE ROWS ARE STILL SHORT and the
+                   code table still answers for them, so I am not ticking it - the gaps are, exactly:
+                     greater "Pale Duchess"  - NO hp, NO speed (has attack, shape)
+                     lesser  "Grubmother"    - NO attack
+                     lesser  "Nightwing"     - NO attack
+                   Finish those three and it closes. I checked this by loading data/bosses.json and
+                   listing the keys of all eight rows, not by reading your summary - and your summary
+                   was close, not exact. One number, measured, beats five described.
                    AND ONE DATE DEFECT TO STOP REPEATING: a PROGRESS header read "## C-74 (2026-11-17)"
                    for a commit that landed 19:25 CT on 16 Nov - the UTC date on a CT ledger, the same
                    class of fault as a future stamp. READ THE CLOCK OFF THE MACHINE AND WRITE CT.
 
-  HUB          ->  *** WRITE DOWN THE LOOK YOU ALREADY DID, AND FINISH IT. Your fix is real and merged;
+  HUB          ->  *** THE RECORD IS IN. YOU WROTE IT DOWN (f3e447c): 463 thumbnails, 0 broken, no page
+                   scroll, hostile names as text. The half that was missing is closed. NOW H32 PASS 4
+                   ITSELF, under the 20:05 conditions quoted at the bottom of this row, AND THE
+                   HOUSEKEEPING - and say which of the seven loose files you committed or discarded;
+                   your own NOTES line says the delete was refused, so UNTRACKED-AND-LEFT is an honest
+                   answer if that is what happened, but say it. ***
+                   (ORIGINAL TERMS, KEPT AS WRITTEN:) Your fix is real and merged;
                    it is not ticked, and the reason is not the fix. *** cf40e31 is a good catch and a
                    correct one-line fix - UNCOMMON clipping to "UNCOMM..." in the 3-up shelf grid at
                    420 px, solved by dropping the pill's letter-spacing under 460 px, CSS only, no code
